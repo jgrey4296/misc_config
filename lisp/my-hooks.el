@@ -56,19 +56,6 @@
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 
-;(add-hook 'after-init-hook 'global-flycheck-mode)
-
-;; (add-hook 'php-mode-hook 'flycheck-mode)
-;; (add-hook 'sh-mode-hook 'flycheck-mode)
-;; (add-hook 'json-mode-hook 'flycheck-mode)
-;; (add-hook 'nxml-mode-hook 'flycheck-mode)
-;; (add-hook 'python-mode-hook 'flycheck-mode)
-;; (add-hook 'emacs-lisp-mode-hook 'flycheck-mode)
-;; (add-hook 'lisp-interaction-mode-hook 'flycheck-mode)
-
-
-;addL javascript, racket, perl, prolog, csharp, haskell hooks
-
 
 (dolist (hook '(css-mode-hook
                 html-mode-hook

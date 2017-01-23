@@ -163,9 +163,16 @@ Uses `current-date-time-format' for the formatting the date/time."
           (setq sorted (sort hashPairs (lambda (a b) (string-lessp (car a) (car b)))))
           ;;print them all out
           (mapc (lambda (x)
-                  (princ (car x))
-                  (princ (string-join `(,(make-string (- 20 (length (car x))) ?\ ) ": ")))
-                  (princ (cadr x)) (princ "\n")) sorted)
+                  (princ (string-join `(,(car x)
+                                        ,(make-string (- 20 (length (car x))) ?\ )
+                                         ": "
+                                         ,(number-to-string (cadr x))
+                                         ,(make-string (- 5 (length (number-to-string (cadr x)))) ?\ )
+                                         " : "
+                                         ,(make-string (cadr x) ?=)
+                                         "\n"
+                                         ))))
+                  sorted)
           )
         )
       )

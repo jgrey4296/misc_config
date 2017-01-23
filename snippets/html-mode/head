@@ -3,6 +3,7 @@
 # key: head
 # --
 <head>
-    $0
+    ${1:Title}
 </head>
+$0
 

@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: test_context
+# key: test
+# --
+import os
+import sys
+sys.path.insert(0,os.path.abspath('..'))
+import $1
+$0

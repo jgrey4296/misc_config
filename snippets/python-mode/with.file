@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: with.file
+# key: with.file
+# --
+with open("$1","$2") as f:
+     data = f.read()
+$0

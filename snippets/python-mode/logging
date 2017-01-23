@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: logging
+# key: logging
+# --
+# Setup root_logger:
+import logging as root_logger
+LOGLEVEL = root_logger.DEBUG
+logFileName = "$1.log"
+root_logger.basicConfig(filename=logFileName, level=LOGLEVEL, filemode='w')
+
+console = root_logger.StreamHandler()
+console.setLevel(root_logger.INFO)
+root_logger.getLogger('').addHandler(console)
+logging = root_logger.getLogger(__name__)
+$0

@@ -66,7 +66,7 @@
                 )))
 
 
-;; (add-hook hook 'rainbow-mode))
+
 
 ;ibuffer grouping:
 (setq ibuffer-saved-filter-groups

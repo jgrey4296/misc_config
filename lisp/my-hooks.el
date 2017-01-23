@@ -12,11 +12,24 @@
 ;;Add Hooks to enable spell checking for text and latex
 ;;Requires flyspell and ispell to be installed
 (dolist (hook '(text-mode-hook))
-  (add-hook hook (lambda () (flyspell-mode 1))))
+  (add-hook hook (lambda () (flyspell-mode 1)))
+  (add-hook hook (lambda () (writegood-mode 1)))
+  )
 
 (dolist (hook '(latex-mode-hook))
-  (add-hook hook (lambda () (flyspell-mode 1))))
+  (add-hook hook (lambda () (flyspell-mode 1)))
+  (add-hook hook (lambda () (writegood-mode 1)))
+  )
 
+(dolist (hook '(org-mode-hook))
+  (add-hook hook (lambda () (flyspell-mode 1)))
+  (add-hook hook (lambda () (writegood-mode 1)))
+  )
+
+(dolist (hook '(markdown-mode))
+  (add-hook hook (lambda () (flyspell-mode 1)))
+  (add-hook hook (lambda () (writegood-mode 1)))
+  )
 
 (dolist (hook '(occur-mode-hook))
   (add-hook hook(lambda() (linum-mode 0))))

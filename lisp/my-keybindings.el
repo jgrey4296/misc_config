@@ -9,10 +9,11 @@
     (define-key map (kbd "C-c r") 'my-select-region-by-line-number)
     (define-key map (kbd "C-c k") 'browse-kill-ring)
     (define-key map (kbd "C-c i") 'indent-to-column)
+    (define-key map (kbd "C-c b") 'browse-url-at-point)
     ;;Additional utilities:
     (define-key map (kbd "C-c u d") 'insert-author-date-time)
     (define-key map (kbd "C-c u f") 'flycheck-go)
-    (define-key map (kbd "C-c u K") (lambda () (interactive) (find-file "~/github/jg_emacs/files/lisp/my-keybindings.el")))
+    (define-key map (kbd "C-c u K") (lambda () (interactive) (find-file "~/github/jg_emacs_files/lisp/my-keybindings.el")))
     ;;Window movement
     (define-key map (kbd "C-x C-j") 'windmove-left)
     (define-key map (kbd "C-x C-l") 'windmove-right)

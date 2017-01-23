@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: require
+# key: require
+# --
+<script src="$1" data-main="$2"></script>

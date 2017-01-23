@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: testcase
+# key: testcase
+# --
+def test_$(self):
+    $2
+    self.assertTrue(True)
+    
+$0

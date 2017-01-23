@@ -25,6 +25,7 @@
     (define-key map (kbd "C-c e b") (lambda () (interactive) (message "Eval'd Buffer") 'eval-buffer))
     (define-key map (kbd "C-c e l") 'my-eval-line)
     (define-key map (kbd "C-c <") 'my-eval-line)
+    (define-key map (kbd "C-c e e") 'eval-expression)
     ;;org
     (define-key map (kbd "C-c o T") 'org-todo-list)
     (define-key map (kbd "C-c o t") 'tag-occurances)

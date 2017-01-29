@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: pyqtree
+# key: pyqtree
+# --
+import pyqtree
+
+bounds = [0,0,1,1]
+qtree = pyqtree.Index(bbox=bounds)
+#qtree.insert(item=item, bbox=item.bbox)
+#matches = qtree.intersect(bbox)

@@ -1,3 +1,6 @@
+;;As a reminder:
+;; find . -name "some_pattern" -print0 | xargs -0 -J % mv % target
+
 ;;using http://stackoverflow.com/questions/683425/globally-override-key-binding-in-emacs#683575
 ;;key bindings:
 

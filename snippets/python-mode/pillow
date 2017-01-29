@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: pillow
+# key: pillow
+# --
+import PIL
+from PIL import Image

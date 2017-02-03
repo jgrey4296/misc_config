@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: pyplot.bar
+# key: pyplot.bar
+# --
+import matplotlib.pyplot as plt
+
+dict_to_show = {}
+plt.bar(range(len(dict_to_show)),dict_to_show.values(), align='center')
+plt.xticks(range(len(dict_to_show)), dict_to_show.keys())

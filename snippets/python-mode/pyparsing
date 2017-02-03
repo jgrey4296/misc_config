@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: pyparsing
+# key: pyparsing
+
+# --
+from pyparsing import Word, alphas

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: pickle
+# key: pickle
+# --
+import pickle
+#with.file
+#pickle.reads/dumps using 'rb'

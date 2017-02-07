@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: sqlite
+# key: sqlite.basic
+# --
+import sqlite3 as sql
+
+
+with sql.connect('$1') as con:
+     cur = con.cursor()
+     cur.execute('SELECT SQLITE_VERSION()')
+     data = cur.fetchone()
+     print("Sql version: {}".format(data))

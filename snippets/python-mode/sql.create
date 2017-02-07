@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: sql.create
+# key: sql.create
+# --
+CREATE TABLE $1($2)

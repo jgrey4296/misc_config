@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: record
+# key: record
+# --
+data Test = Test { theInt :: Int, theString :: String }
+chng x y = x { theInt = y }

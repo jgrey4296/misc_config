@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: precedence
+# key: precedence
+# --
+(+) :: a -> a -> a
+-- infixl 5 +
+-- infixr 5 +

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: regex
+# key: regex
+# --
+--"my test" =~ "test" :: Bool
+--"my test" =~ "t.*" :: String
+

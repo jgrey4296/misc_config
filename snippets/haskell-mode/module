@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: module
+# key: module
+# --
+module name
+(
+    exportedValues
+    , ExportedType(...)
+
+) where
+$0

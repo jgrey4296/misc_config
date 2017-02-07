@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: listComprehension
+# key: listComprehension
+# --
+--let toPairs xs ys = [(x,y) | x <- xs, y <- ys]
+--let withGuards xs ys = [(x,y) | (x,y) <- zip xs ys, x+y < 60, x+y > 20]

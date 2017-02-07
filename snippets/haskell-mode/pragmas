@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: pragmas
+# key: pragmas
+# --
+{-# LANGUAGE TypeSynonymInstances, OverlappingInstances, FlexibleInstances, GeneralizedNewtypeDeriving #-}

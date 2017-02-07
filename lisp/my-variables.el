@@ -16,7 +16,8 @@
                              yas-completing-prompt))
 
 
-(setq yas-snippet-dirs '("~/.emacs.setup/snippets/"))
+(setq yas-snippet-dirs '("~/.emacs.setup/snippets/"
+                         "/Users/jgrey/github/otherLibs/yasnippet-snippets"))
 
 
 

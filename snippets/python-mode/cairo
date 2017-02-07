@@ -2,7 +2,8 @@
 # name: cairo
 # key: cairo
 # --
-import cairocffi as cairo
+#import cairocffi as cairo #For py 3.6
+import cairo               #for py 3.5
 
 N = $1
 X = pow(2,N)

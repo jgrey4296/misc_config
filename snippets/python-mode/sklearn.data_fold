@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: sklearn.data_fold
+# key: sklearn.data_fold
+# --
+#K fold Cross Validation, manually
+# NOTE: USE sklearn.kfold snippet instead
+NUM_FOLDS = 3
+data    = np.array([[]])
+targets = np.array([])
+data_folds    = np.array_split(data,NUM_FOLDS)
+targets_folds = np.array_split(targets,NUM_FOLDS)
+scores = list()
+#essentially round robin the folds for training and testing:
+for k in range(NUM_FOLDS):
+    #split into train and test set
+    X_train = list(data_folds)
+    X_test = X_train.pop(k)
+    X_train = np.concatenate(X_train)
+    #and for the targets
+    y_train = list(targets_folds)
+    y_test = y_train.pop(k)
+    y_train = np.concatenate(y_train)
+    #train and score for this iteration
+    scores.append(estimator.fit(X_train,y_train).score(X_test, y_test))
+    

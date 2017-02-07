@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: sklearn.logistic
+# key: sklearn.logistic
+# --
+#For Logistic Regression:
+from sklearn import linear_model
+
+#C_PARAM controls regularization.
+#'penalty="12"' provides shrinkage
+#'penalty="11"' provides sparsity
+C_PARAM = 1e5
+data = None
+targets = None
+
+logistic = linear_model.LogisticRegression(C=C_PARAM)
+logistic.fit(data,targets)

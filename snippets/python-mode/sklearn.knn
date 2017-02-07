@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: sklearn.knn
+# key: sklearn.knn
+# --
+#K-Nearest Neighbours classifier
+from sklearn.neighbors import KNeighborsClassifier
+knn = KNeighboursClassifier()
+
+knn.train(data,targets)
+knn.predict(data)

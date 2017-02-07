@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: sklearn
+# key: sklearn
+# --
+import sklearn
+from sklearn import svm

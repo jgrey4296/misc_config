@@ -38,6 +38,8 @@
     (define-key map (kbd "C-c o f") 'list-agenda-files)
     (define-key map (kbd "C-c o s") 'org-store-link)
     (define-key map (kbd "C-c o L") 'org-insert-link)
+    ;;Summary
+    ;;(define-key map (kbd "C-c C-j") 'imenu)
     map)
   "jg-keys-minor-mode keymap")
 

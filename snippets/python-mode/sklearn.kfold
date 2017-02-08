@@ -2,7 +2,7 @@
 # name: sklearn.kfold
 # key: sklearn.kfold
 # --
-from sklearn.model_selection import KFold
+from sklearn.model_selection import KFold, cross_val_score
 N = 3
 data = np.array([[]])
 targets = np.array([])
@@ -12,3 +12,6 @@ for train_index, test_index in kf.split(data):
     train_data, test_data       = data[train_index], data[test_index]
     train_targets, test_targets = targets[train_index], targets[test_index]
     #Feed split data into estimator here:
+
+#n_jobs for threading
+#scores = cross_val_score(estimator,data,targets, cv=kf, n_jobs=-1)

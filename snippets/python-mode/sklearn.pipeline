@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: sklearn.pipeline
+# key: sklearn.pipeline
+# --
+from sklearn import linear_model, decomposition
+from sklearn.pipeline import Pipeline
+from sklearn.model_selection import GridSearchCV
+
+#the pipeline:
+logistic = linear_model.LogisticRegression()
+pca = decomposition.PCA()
+pipe = Pipeline(steps=[('pca',pca),('logistic',logistic)])
+
+#Parameters for search, and data:
+n_components = [20,40,64]
+Cs = np.logspace(-4,4,3)
+data = np.array([[]])
+targets = np.array([])
+
+#Run the pipeline with grid search:
+estimator = GridSearchCV(pipe, dict(pca__n_components=n_components,
+                                    logistic__C=Cs))
+estimator.fit(data,targets)
+
+#estimator.best_estimator_
+#estimator.best_estimator_.named_steps['stepname']...

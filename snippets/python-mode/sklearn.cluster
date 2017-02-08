@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: sklearn.cluster
+# key: sklearn.cluster
+# --
+from sklearn import cluster
+
+NUM_CLUSTERS = 3
+k_means = cluster.KMeans(n_clusters=NUM_CLUSTERS)
+#kmeans.fit(data)
+#kmeans.labels_
+#kmeans.cluster_centers_    .squeeze()

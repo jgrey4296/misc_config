@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: sklearn.ica
+# key: sklearn.ica
+# --
+from sklearn import decomposition
+
+data = np.array([[]])
+
+ica = decomposition.FastICA()
+estimated_sources = ica.fit_transform(data)
+#A_ = ica.mixing_.T
+#ica.mean_

@@ -5,5 +5,7 @@
 import matplotlib.pyplot as plt
 
 dict_to_show = {}
-plt.bar(range(len(dict_to_show)),dict_to_show.values(), align='center')
-plt.xticks(range(len(dict_to_show)), dict_to_show.keys())
+barPositions = np.arange(len(dict_to_show))
+axes.bar(barPositions,dict_to_show.values(),align='center')
+axes.set_xticks(barPositions)
+axes.set_xticklabels(dict_to_show.keys())

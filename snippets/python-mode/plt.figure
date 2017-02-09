@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: plt.figure
+# key: plt.figure
+# --
+fig, axes = plt.subplots(2)
+#fig.suptitle(TITLE) / fig.set_title
+#axes[0].plot(data,label=ALABEL)
+#axes[0].legend()
+#fig.saveFig(FILENAME)

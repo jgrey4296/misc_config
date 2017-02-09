@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: pyplot.errorbar
+# key: plt.errorbar
+# --
+fig,ax = plt.subplots(1)
+ax.errorbar(x, y, yerr=AMNT, xerr=AMNT2, fmt=FORMAT)

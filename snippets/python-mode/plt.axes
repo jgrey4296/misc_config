@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: pyplot.axes
+# key: plt.axes
+# --
+ax = plt.axes()
+#ax.clear()
+#ax.axhspan(min,max)
+#ax.axvspan(min,max)
+#ax.set_ {x,y}{bound,lim,ticks,ticklabels,margin,scale}
+#ax.set( var=val )

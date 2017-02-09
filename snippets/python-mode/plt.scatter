@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: pyplot.scatter
+# key: plt.scatter
+# --
+x = np.array([])
+y = np.array([])
+colors = np.array([])
+sizes = np.array([])
+
+plt.scatter(x,y,c=colors, s=sizes, alpha=0.3, cmap='viridis')
+#plt.colorbar() - show the colour scale

@@ -10,10 +10,10 @@
 
 
 ;dropdown list use for yas
-(require 'dropdown-list)
-(setq yas-prompt-functions '(yas-dropdown-prompt
-                             yas-ido-prompt
-                             yas-completing-prompt))
+;;(require 'dropdown-list)
+;;(setq yas-prompt-functions '(yas-dropdown-prompt
+;;                             yas-ido-prompt
+;;                             yas-completing-prompt))
 
 
 (setq yas-snippet-dirs '("~/.emacs.setup/snippets/"

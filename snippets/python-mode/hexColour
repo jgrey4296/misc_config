@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: hexColour
+# key: hexcolour
+# --
+def arrToHexColour(arr):
+    """ Convert a triple of 0.0-1.0 values to hex """
+    to255 = [int(255*x) for x in arr]
+    toStrings = [format(x,'02x') for x in to255]
+    return "#{}".format("".join(toStrings))
+
+

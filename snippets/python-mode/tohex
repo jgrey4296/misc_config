@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: tohex
+# key: tohex
+# --
+format($1,'02x')$0

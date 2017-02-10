@@ -5,7 +5,14 @@
 from sklearn import cluster
 
 NUM_CLUSTERS = 3
-k_means = cluster.KMeans(n_clusters=NUM_CLUSTERS)
-#kmeans.fit(data)
-#kmeans.labels_
-#kmeans.cluster_centers_    .squeeze()
+estimator = cluster.KMeans(n_clusters=NUM_CLUSTERS)
+#estimator = cluster.AgglomerativeClustering(n_custers=NUM_CLUSTERS,
+                                             linkage='ward')
+#estimator = cluster.SpectralClustering(n_clusters=NUM_CLUSTERS,
+                                        affinity="precomputed",
+                                        n_init=200)
+#estimator = cluster.affinity_propagation...
+
+#estimator.fit(data)
+#estimator.labels_
+#estimator.cluster_centers_    .squeeze()

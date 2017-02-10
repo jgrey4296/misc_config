@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: graphviz
+# key: graphviz
+# --
+import graphviz
+#Check graphviz.ENGINES
+G = graphviz.Digraph(engine='fdp')
+G.node(NAME,LABEL)
+G.edge(TAIL,HEAD)
+G.render(FILENAME,view=True)

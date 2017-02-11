@@ -1,0 +1,1 @@
+includePaths: [~/.emacs.setup/lisp-lib/scel/sc, ~/github/.super_collider_classes, /Applications/SuperCollider/SuperCollider.app/Contents/Resources/SCClassLibrary]

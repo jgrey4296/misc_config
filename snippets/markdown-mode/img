@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: img
+# key: img
+# --
+![$1]({{site.github.url}}/assets/$2)
+$0

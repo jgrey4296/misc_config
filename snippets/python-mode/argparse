@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: argparse
+# key: argparse
+# --
+import argparse
+
+#see https://docs.python.org/3/howto/argparse.html
+parse = argparse.ArgumentParse("$1")
+parse.add_argument('--aBool', action="store_true")
+

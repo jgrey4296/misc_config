@@ -110,10 +110,9 @@ Note the weekly scope of the command's precision.")
   "insert the current date and time into current buffer.
 Uses `current-date-time-format' for the formatting the date/time."
        (interactive)
-       (insert "==========\n")
-;       (insert (let () (comment-start)))
+       ;;(insert "==========\n")
+       ;;(insert (let () (comment-start)))
        (insert (format-time-string current-date-time-format (current-time)))
-       (insert "\n")
        )
 
 (defun insert-current-time ()

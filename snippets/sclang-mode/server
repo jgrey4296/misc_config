@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: server
+# key: server
+# --
+//server commands
+s.boot;
+s.reboot;
+s.quit;
+s.freeAll;
+s.status;

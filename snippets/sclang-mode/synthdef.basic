@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: synthdef.basic
+# key: synthdef.basic
+# --
+//Synthdef:
+a = SynthDef.new("Blah", { arg pitch = 440, pitch2 = 442; var outArray;
+	outArray = [SinOsc.ar(pitch,0,0.2), SinOsc.ar(pitch2,0,0.2)];
+	Out.ar(0,outArray);
+}).add
+b = Synth.new("Blah",["pitch",440, "pitch2", 450]);
+b.set("pitch2",800)
+b.free

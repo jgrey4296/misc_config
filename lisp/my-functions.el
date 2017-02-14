@@ -157,13 +157,14 @@ Uses `current-date-time-format' for the formatting the date/time."
             )
           )
         ;;now turn them into pairs
-        (let ((hashPairs nil) (sorted '()))
+        (let ((hashPairs nil) (sorted '()) (maxTagLength 0))
           (maphash (lambda (k v) (push `(,k ,v) hashPairs)) tag-set)
           (setq sorted (sort hashPairs (lambda (a b) (string-lessp (car a) (car b)))))
+          (setq maxTagLength (apply `max (mapcar (lambda (x) (length (car x))) sorted)))
           ;;print them all out
           (mapc (lambda (x)
                   (princ (string-join `(,(car x)
-                                        ,(make-string (- 20 (length (car x))) ?\ )
+                                        ,(make-string (- (+ 10 maxTagLength) (length (car x))) ?\ )
                                          ": "
                                          ,(number-to-string (cadr x))
                                          ,(make-string (- 5 (length (number-to-string (cadr x)))) ?\ )

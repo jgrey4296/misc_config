@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: core.template
-# key: core
+# key: core.template
 # --
 """
     $1

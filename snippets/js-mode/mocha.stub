@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: mocha and chai
+# key: mocha.stub
+# --
+//To be used with mocha --require babel-polyfill --compilers js:babel-register
+//Import * as aModule from '../src/aModule';
+import * as chai from 'chai';
+
+let should = chai.should();
+
+describe ("$1", function() {
+
+         describe("$2", function() {
+
+         it("$3", function() {
+                  should.exist(5);
+         });
+
+});

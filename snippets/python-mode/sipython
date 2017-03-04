@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: sipython
+# key: sipython
+# --
+IPython.embed(simple_prompt=True)

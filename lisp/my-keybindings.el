@@ -23,22 +23,43 @@
     (define-key map (kbd "C-x C-l") 'windmove-right)
     (define-key map (kbd "C-x C-i") 'windmove-up)
     (define-key map (kbd "C-x C-k") 'windmove-down)
+    (define-key map (kbd "C-x r v") 'view-register)
+    (define-key map (kbd "C-x r l") 'list-registers)
+    ;;(define-key-map (kbd "C-x r w") 'window-configuration-to-register)
+    ;;(define-key-map (kbd "C-x r x") 'copy-to-register)
+    ;;(define-key-map (kbd "C-x r j") 'jump-to-register)
+    ;;(define-key-map (kbd "C-x r f") 'frameset-to-register)
+    
     ;;git
     (define-key map (kbd "C-x g") 'magit-status)
     ;;lisp
-    (define-key map (kbd "C-c e b") (lambda () (interactive) (message "Eval'd Buffer") 'eval-buffer))
+    (define-key map (kbd "C-c e b") 'eval-buffer)
+    (define-key map (kbd "C-c e e") 'eval-expression)
     (define-key map (kbd "C-c e l") 'my-eval-line)
     (define-key map (kbd "C-c <") 'my-eval-line)
-    (define-key map (kbd "C-c e e") 'eval-expression)
+    (define-key map (kbd "C-c e r") 'eval-region)
     ;;org
     (define-key map (kbd "C-c o T") 'org-todo-list)
     (define-key map (kbd "C-c o t") 'tag-occurances)
     (define-key map (kbd "C-c o v") 'org-tags-view)
-    (define-key map (kbd "C-c o a") 'org-agenda-file-to-front)
-    (define-key map (kbd "C-c o l") 'org-agenda-list)
-    (define-key map (kbd "C-c o f") 'list-agenda-files)
+    (define-key map (kbd "C-c o a a") 'org-agenda-file-to-front)
+    (define-key map (kbd "C-c o a l") 'org-agenda-list)
+    (define-key map (kbd "C-c o a w") 'org-agenda-week-view)
+    (define-key map (kbd "C-c o a m") 'org-agenda-month-view)
+    (define-key map (kbd "C-c o a f") 'list-agenda-files)
+    (define-key map (kbd "C-c o c") 'org-goto-calendar)
+    (define-key map (kbd "C-c o d") 'org-date-from-calendar)
+    (define-key map (kbd "C-c o D") 'org-time-stamp)
+    ;;"C-c C-d" :: org-deadline
+    ;;"C-c . "  :: org-timestamp
+    ;;"C-c ! "  :: org inactive timestamp
+    ;;"C-c C-s  :: org-schedule
+    
     (define-key map (kbd "C-c o s") 'org-store-link)
     (define-key map (kbd "C-c o L") 'org-insert-link)
+    ;;Scroll lock:
+    (define-key map (kbd "C-c s l") 'scroll-lock-mode)
+    
     ;;Summary
     ;;(define-key map (kbd "C-c C-j") 'imenu)
     map)

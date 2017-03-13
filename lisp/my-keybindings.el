@@ -59,6 +59,11 @@
     (define-key map (kbd "C-c o L") 'org-insert-link)
     ;;Scroll lock:
     (define-key map (kbd "C-c s l") 'scroll-lock-mode)
+
+    ;;Useful:
+    ;;"C-h l" :: Show last keystrokes
+    ;;"C-x C-h" :: Describe prefix bindings
+
     
     ;;Summary
     ;;(define-key map (kbd "C-c C-j") 'imenu)
@@ -78,6 +83,7 @@
         (define-key map (kbd "C-c ;") 'yas-expand)
         (define-key map (kbd "C-c >") 'yas-insert-snippet)
         (define-key map (kbd "C-c y n") 'yas-new-snippet)
+        (define-key map (kbd "C-c y d") 'yas-describe-tables)
         map
         )
       )

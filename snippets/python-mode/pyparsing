@@ -12,3 +12,8 @@ from pyparsing import pyparsing_common as ppc
 \#PARSER.setParseAction(lambda toks: toks))
 \#PARSER.setResultsName('')
 \#PARSER.parseString('')
+
+s = pp.Suppress
+op = pp.Optional
+opLn = s(op(pp.LineEnd()))
+

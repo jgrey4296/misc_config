@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: introspection
+# key: introspection
+# --
+#dirs(a) : returns list
+#getattr(obj,name)(val)

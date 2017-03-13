@@ -6,14 +6,17 @@
 //Import * as aModule from '../src/aModule';
 import * as chai from 'chai';
 
-let should = chai.should();
+let should = chai.should(),
+    expect = chai.expect;
 
 describe ("$1", function() {
 
-         describe("$2", function() {
+    describe("$2", function() {
+        
+        it("$3", function() {
+            should.exist(5);
+        });
 
-         it("$3", function() {
-                  should.exist(5);
-         });
-
+    });
+    
 });

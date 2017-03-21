@@ -1,0 +1,33 @@
+# -*- mode: snippet -*-
+# name: preactcomponent
+# key: preactcomponent
+# --
+import { h, Component } from 'preact';
+import React from 'React'; //aliased, for proptypes
+import style from './style';
+
+export default class $1 extends Component {
+    //snippet::proptypes
+
+    constructor(props){
+        super(props);
+        //modify with this.setState
+        this.state = {
+            $2
+        };
+
+        //if necessary, bind methods
+        //this.aFunc = this.aFunc.bind(this)
+    }
+
+    //Don't forget to destructure:
+    render(props, state){
+        return (
+                <div>
+
+            </div>
+        );
+    }
+
+
+}

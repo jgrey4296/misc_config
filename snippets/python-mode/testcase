@@ -2,7 +2,7 @@
 # name: testcase
 # key: testcase
 # --
-def test_$(self):
+def test_$1(self):
     $2
     self.assertTrue(True)
     

@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: pylibMakefile
+# key: pylibMakefile
+# --
+INSTALL_DIR=$(shell echo $(JG_PYLIBS))
+LIB_NAME=$1
+DEPS=$2
+
+install : clean
+	cp -r ./${LIB_NAME} ${INSTALL_DIR}/${LIB_NAME}
+
+uninstall :
+	rm -r ${INSTALL_DIR}/${LIB_NAME}
+
+clean :
+	find . -name "__pycache__" | xargs rm -r
+	find . -name "*.pyc" | xars rm
+
+dependencies:
+    pip install ${DEPS}

@@ -15,13 +15,13 @@ class $1(unittest.TestCase):
           return 1
 
       #use testcase snippets
+      $3
 
 if __name__ == "__main__":
-      LOGLEVEL = logging.debug
-      logFileName = ".log"
-      logging.basicConfic(filename=logFileName, level=LOGLEVEL, filemode='w')
+      LOGLEVEL = logging.DEBUG
+      logFileName = "$2.log"
+      logging.basicConfig(filename=logFileName, level=LOGLEVEL, filemode='w')
       console = logging.StreamHandler()
       console.setLevel(logging.INFO)
       logging.getLogger('').addHandler(console)
-      logging.basicConfig(level=logging.DEBUG)
       unittest.main()

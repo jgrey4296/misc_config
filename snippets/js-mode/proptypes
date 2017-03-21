@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: proptypes
+# key: proptypes
+# --
+//import React from 'React'
+//class.. extends Component {
+//Preact.PropTypes.... [array,bool, func, number, objec,t string, symbol, node, element,
+// instanceof, oneOf([]), oneOfType([]), arrayOf(), shape({}), any, isRequired, 
+propTyes = {
+         callback : Preact.PropTypes.func,
+         anInt : Preact.PropTypes.number,
+}
+
+defaultProps = {
+         callback : () => 5,
+         anInt : 5
+}

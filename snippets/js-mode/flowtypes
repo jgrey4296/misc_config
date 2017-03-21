@@ -1,0 +1,66 @@
+# -*- mode: snippet -*-
+# name: flowtypes
+# key: flowtypes
+# --
+//Primitives: boolean, number, string, null, void
+//void is equivalent to undefined
+
+//any can be used to avoid typechecking.
+//mixed allows for dynamic type tests
+
+//Arrays: number[] and Array<string>
+//Tuples:
+let tuple : [string, number, boolean] = ["foo", 0, true];
+
+//For indexing into an undefined number:
+declare var unknownNumber : number;
+(tuple[unknownNumber] : void)
+(tuple[unkownNumber] : string|number|boolean)
+
+//Object specification
+let x : { foo: number, bar: string, awef: boolean} = { foo: 5, bar: 'balwe', awef: false };
+//Optional and default parameters:
+let test = (x : number = 5, b? : number) : number => { return x + (b || 2); };
+
+//Functions:
+let makeFunc = () : Function => {
+    return () => { return 5; };
+};
+//and
+let makeFunc2 = () : (() => string) => {
+    return () => { return "blah"; };
+};
+
+//Classes work as expected.
+//Interfaces:
+interface Fooable {
+          foo(): string;
+}
+
+class MyTest{
+      foo() { return "blah"; }
+}
+//Then force the typecheck:
+(new MyTest : fooable);
+
+//Class type versus class instance:
+let x : Class<MyTest> = MyTest,
+    y : MyTest = new MyTest();
+
+//Type aliases:
+type MyObj = {
+     foo : string, bar: number
+}
+//Generics through aliases:
+class MyGenClass<T> {
+      x : T
+}
+
+type MyGeneric<T> = { foo : T };
+
+//Rest parameters are annotated with an array type:
+function test(...blah : number[]) { return blah; }
+
+//importing and exporting:
+import type Foo from './foo'
+export type Foo = string;

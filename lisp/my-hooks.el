@@ -75,23 +75,35 @@
                          (name . "^\\*shell\\*$")
                          (name . "^\\*scratch\\*$")
                          (name . "^\\*Messages\\*$")))
-               ("Lisp" (name . ".\.el$"))
+               ("Lisp" (name . ".\\.el$"))
+               ("Web" (or
+                       (mode . html-mode)
+                       (mode . css-mode)
+                       (mode . less-css-mode)                             
+                       (name . ".\\.html$")
+                       (name . ".\\.css$")
+                       (name . ".\\.less$")                       
+                       ))
                ("Javascript" (or
                               (mode . js-mode)
-                              (name . ".\.js$")))
-               ("Python" (name . ".\.py$"))
-               ("Chuck" (name . ".\.ck$"))
-               ("Supercollider" (name . ".\.sc$"))
-               ("Csound" (name . ".\.csd$"))
-               ("Haskell" (name . ".\.hs$"))
-               ("Headers" (name . ".\.h$"))
+                              (mode . jsx-mode)
+                              (mode . js2-mode)
+                              (name . ".\\.js$")
+                              (name . ".\\.jsx$")
+                              (name . ".\\.ejs$")))
+               ("Json" (or
+                        (mode . json-mode)
+                        (name . ".\\.json$")))                             
+               ("Python" (name . ".\\.py$"))
+               ("Haskell" (name . ".\\.hs$"))
+               ("Chuck" (name . ".\\.ck$"))
+               ("Supercollider" (name . ".\\.sc$"))
+               ("Csound" (name . ".\\.csd$"))
+               ("Headers" (name . ".\\.h$"))
+               ("C" (name . ".\\.c$"))
                ("C++" (mode . c++-mode))
-               ("C" (name . ".\.c$"))
-               ("C#" (name . ".\cs"))
+               ("C#" (name . ".\cs$"))
                ("Perl" (mode . perl-mode))
-               ("Web" (or
-                       (name . ".\.html$")
-                       (name . ".\.css$")))
                ("Notes" (mode . org-mode))
                ("Dired" (mode . dired-mode))))))
                
@@ -99,4 +111,24 @@
   (add-hook hook
             (lambda() (ibuffer-auto-mode 1)
               (ibuffer-switch-to-saved-filter-groups "home")
-              )))
+               )))
+
+;; Use human readable Size column instead of original one
+(define-ibuffer-column size-h
+  (:name "Size" :inline t)
+  (cond
+   ((> (buffer-size) 1000000) (format "%7.1fM" (/ (buffer-size) 1000000.0)))
+   ((> (buffer-size) 100000) (format "%7.0fk" (/ (buffer-size) 1000.0)))
+   ((> (buffer-size) 1000) (format "%7.1fk" (/ (buffer-size) 1000.0)))
+   (t (format "%8db" (buffer-size)))))
+
+;; Modify the default ibuffer-formats
+  (setq ibuffer-formats
+	'((mark modified read-only " "
+		(name 18 18 :left :elide)
+		" "
+		(size-h 9 -1 :right)
+		" "
+		(mode 16 16 :left :elide)
+		" "
+		filename-and-process)))

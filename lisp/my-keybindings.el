@@ -46,24 +46,28 @@
     (define-key map (kbd "C-c o a l") 'org-agenda-list)
     (define-key map (kbd "C-c o a w") 'org-agenda-week-view)
     (define-key map (kbd "C-c o a m") 'org-agenda-month-view)
+    ;;Reminder: M-x customize-variable org-agenda-files
     (define-key map (kbd "C-c o a f") 'list-agenda-files)
-    (define-key map (kbd "C-c o c") 'org-goto-calendar)
+    (define-key map (kbd "C-c o a c") 'org-goto-calendar)
     (define-key map (kbd "C-c o d") 'org-date-from-calendar)
     (define-key map (kbd "C-c o D") 'org-time-stamp)
+    (define-key map (kbd "C-c o s c") 'org-edit-src-code)
     ;;"C-c C-d" :: org-deadline
     ;;"C-c . "  :: org-timestamp
     ;;"C-c ! "  :: org inactive timestamp
     ;;"C-c C-s  :: org-schedule
     
-    (define-key map (kbd "C-c o s") 'org-store-link)
-    (define-key map (kbd "C-c o L") 'org-insert-link)
+    (define-key map (kbd "C-c o l s") 'org-store-link)
+    (define-key map (kbd "C-c o l i") 'org-insert-link)
     ;;Scroll lock:
     (define-key map (kbd "C-c s l") 'scroll-lock-mode)
-
+    
     ;;Useful:
     ;;"C-h l" :: Show last keystrokes
     ;;"C-x C-h" :: Describe prefix bindings
 
+    ;;simple proof that multi key sequences of keybindings DO work
+    (define-key map (kbd "C-c p a b c") 'insert-author-date-time)
     
     ;;Summary
     ;;(define-key map (kbd "C-c C-j") 'imenu)

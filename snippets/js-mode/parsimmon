@@ -9,5 +9,6 @@ import * as P from 'parsimmon';
 let OWS = (parser) => { return P.optWhitespace.then(parser).skip(P.optWhitespace) },
     //non-optional whitespace sequence
     PWS = (parser) => { return parser.skip(P.whitespace) },
-    WPW = (parser) => { return P.whitespace.then(parser).skip(P.whitespace); };
-
+    WPW = (parser) => { return P.whitespace.then(parser).skip(P.whitespace); },
+    //Syntax optional:
+    OPT = (p1,p2) => { return (p1.then(p2)).or(p2); };

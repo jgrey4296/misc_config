@@ -3,7 +3,7 @@
 # key: preactcomponent
 # --
 import { h, Component } from 'preact';
-import React from 'React'; //aliased, for proptypes
+import React from 'react'; //aliased, for proptypes
 import style from './style';
 
 export default class $1 extends Component {

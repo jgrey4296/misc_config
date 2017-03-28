@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: sdescribe
+# key: sdes
+# --
+describe("$1",function(){
+
+});
+$0

@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: jekyllpost
+# key: jekyllpost
+# --
+---
+layout: post
+title : "$1"
+date: $2
+tags: 
+---

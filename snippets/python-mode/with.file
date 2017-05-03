@@ -2,7 +2,7 @@
 # name: with.file
 # key: with.file
 # --
-from os.path import join,isfile,exists,isdir, splittext
+from os.path import join, isfile, exists, isdir, splitext
 from os import listdir
 
 #r/w/rb/wb

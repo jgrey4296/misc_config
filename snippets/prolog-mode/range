@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: range
+# key: range
+# --
+arange(1..5).

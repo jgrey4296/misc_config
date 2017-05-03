@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: foreach
+# key: foreach
+# --
+foreach [ $1 ] of $2 [ [x] -> print x ]$0

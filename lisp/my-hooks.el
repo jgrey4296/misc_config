@@ -26,7 +26,7 @@
   (add-hook hook (lambda () (writegood-mode 1)))
   ;;Add some file types to org-file-apps
   (add-hook hook (lambda () (add-to-list 'org-file-apps
-					 '("\\.JP[E]?G\\|GIF\\|PNG" . "open %s")
+					 '("\\.JP[E]?G\\|GIF\\|PNG\\|PDF" . "open %s")
 					 'APPEND)))
   )
 

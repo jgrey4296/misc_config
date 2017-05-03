@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: Doc String shortcut
+# key: ds
+# --
+"""
+$0
+"""

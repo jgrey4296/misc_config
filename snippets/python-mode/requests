@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: requests
+# key: requests
+# --
+import requests
+
+params = {'a': 2}
+headers = { 'user-agent': 'my-app/0.0.1' }
+
+r= requests.get('http://google.com', params=params, headers={})

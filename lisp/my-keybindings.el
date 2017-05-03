@@ -12,9 +12,16 @@
     (define-key map (kbd "C-c ]") 'insert-rparen)
     (define-key map (kbd "C-c r") 'my-select-region-by-line-number)
     (define-key map (kbd "C-c k") 'browse-kill-ring)
-    (define-key map (kbd "C-c i") 'indent-to-column)
+    (define-key map (kbd "C-c i c") 'indent-to-column)
+    (define-key map (kbd "C-c i r") 'indent-region)
     (define-key map (kbd "C-c b") 'browse-url-at-point)
     ;;Additional utilities:
+    (define-key map (kbd "C-c h l") 'hl-line-mode)
+    (define-key map (kbd "C-c v l") 'vline-mode)
+    (define-key map (kbd "C-c c f") 'crosshairs-flash)
+    (define-key map (kbd "C-c c m") 'crosshairs-mode)
+    (define-key map (kbd "C-c f c i") 'fci-mode)
+    (define-key map (kbd "C-c f c s") 'set-fill-column)
     (define-key map (kbd "C-c u d") 'insert-author-date-time)
     (define-key map (kbd "C-c u f") 'flycheck-go)
     (define-key map (kbd "C-c u K") (lambda () (interactive) (find-file "~/github/jg_emacs_files/lisp/my-keybindings.el")))
@@ -23,6 +30,7 @@
     (define-key map (kbd "C-x C-l") 'windmove-right)
     (define-key map (kbd "C-x C-i") 'windmove-up)
     (define-key map (kbd "C-x C-k") 'windmove-down)
+    ;;Registers:
     (define-key map (kbd "C-x r v") 'view-register)
     (define-key map (kbd "C-x r l") 'list-registers)
     ;;(define-key-map (kbd "C-x r w") 'window-configuration-to-register)
@@ -59,15 +67,18 @@
     
     (define-key map (kbd "C-c o l s") 'org-store-link)
     (define-key map (kbd "C-c o l i") 'org-insert-link)
+    (define-key map (kbd "C-c o l d") 'org-toggle-link-display)
     ;;Scroll lock:
     (define-key map (kbd "C-c s l") 'scroll-lock-mode)
     
     ;;Useful:
     ;;"C-h l" :: Show last keystrokes
     ;;"C-x C-h" :: Describe prefix bindings
-
+    ;; toggle-truncate-lines   to turn off line wrapping
+    
     ;;simple proof that multi key sequences of keybindings DO work
     (define-key map (kbd "C-c p a b c") 'insert-author-date-time)
+
     
     ;;Summary
     ;;(define-key map (kbd "C-c C-j") 'imenu)

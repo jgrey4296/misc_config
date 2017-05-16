@@ -1,1 +1,8 @@
-includePaths: [~/.emacs.setup/lisp-lib/scel/sc, ~/github/.super_collider_classes, /Applications/SuperCollider/SuperCollider.app/Contents/Resources/SCClassLibrary]
+includePaths:
+  - ~/.emacs.setup/lisp-lib/scel/sc
+  - ~/github/.super_collider_classes
+  - /Applications/SuperCollider/SuperCollider.app/Contents/Resources/SCClassLibrary
+  - /Users/jgrey/Library/Application Support/SuperCollider/downloaded-quarks/Vowel
+  - /Users/jgrey/Library/Application Support/SuperCollider/downloaded-quarks/Dirt-Samples
+  - /Users/jgrey/Library/Application Support/SuperCollider/downloaded-quarks/SuperDirt
+

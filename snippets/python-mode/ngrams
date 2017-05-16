@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: ngrams
+# key: ngrams
+# --
+from nltk import ngrams
+sentence = "This is a sentence to test ngrammizing on"
+n = 6
+sixgrams = ngrams(sentence.split(), n)

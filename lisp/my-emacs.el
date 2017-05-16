@@ -4,6 +4,12 @@
 ;(setq debug-on-error 1)
 
 ;; Load paths
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+(package-initialize)
+
+(setq load-path (cons "~/.emacs.setup/lisp-lib/" load-path))
+(require 'tidal)
+(setq tidal-interpreter "/usr/local/bin/ghci")
 
 (let ((default-directory (expand-file-name "~/.emacs.setup/")))
   (normal-top-level-add-subdirs-to-load-path))

@@ -1,0 +1,3 @@
+* Emacs Reminders and notes
+  To force recompilation:
+  C-u 0 M-x byte-recompile-directory

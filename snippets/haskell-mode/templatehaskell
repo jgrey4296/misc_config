@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: templatehaskell
+# key: templatehaskell
+# --
+{-# LANGUAGE TemplateHaskell #-}

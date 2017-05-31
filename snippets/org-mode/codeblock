@@ -2,6 +2,7 @@
 # name: codeblock
 # key: codeblock
 # --
+-- :results output/value
 #+begin_src $1
 $2
 #+end_src

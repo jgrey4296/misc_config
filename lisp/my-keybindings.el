@@ -10,6 +10,8 @@
     ;;Main utility
     (define-key map (kbd "C-c [") 'insert-lparen)
     (define-key map (kbd "C-c ]") 'insert-rparen)
+    (define-key map (kbd "C-c c r") 'comment-region)
+    (define-key map (kbd "C-c u c r") 'uncomment-region)
     (define-key map (kbd "C-c r") 'my-select-region-by-line-number)
     (define-key map (kbd "C-c k") 'browse-kill-ring)
     (define-key map (kbd "C-c i c") 'indent-to-column)
@@ -37,6 +39,7 @@
     ;;(define-key-map (kbd "C-x r x") 'copy-to-register)
     ;;(define-key-map (kbd "C-x r j") 'jump-to-register)
     ;;(define-key-map (kbd "C-x r f") 'frameset-to-register)
+    ;;(define-key map (kbd "C-c r i") 'insert-register)
     
     ;;git
     (define-key map (kbd "C-x g") 'magit-status)

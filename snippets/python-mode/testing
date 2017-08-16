@@ -4,24 +4,28 @@
 # --
 import unittest
 import logging
+from test_context import $1
 $0
 
-class $1(unittest.TestCase):
-      
+class $2(unittest.TestCase):
+
       def setUp(self):
-          return 1
+            return 1
 
       def tearDown(self):
-          return 1
+            return 1
 
+      #----------
       #use testcase snippets
       $3
 
 if __name__ == "__main__":
-      LOGLEVEL = logging.DEBUG
-      logFileName = "$2.log"
+      #use python $filename to use this logging setup
+      LOGLEVEL = logging.INFO
+      logFileName = "log.$2"
       logging.basicConfig(filename=logFileName, level=LOGLEVEL, filemode='w')
       console = logging.StreamHandler()
-      console.setLevel(logging.INFO)
-      logging.getLogger('').addHandler(console)
+      console.setLevel(logging.WARN)
+      logging.getLogger().addHandler(console)
       unittest.main()
+      #reminder: user logging.getLogger().setLevel(logging.NOTSET) for log control

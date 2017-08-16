@@ -5,7 +5,7 @@
 # Setup root_logger:
 import logging as root_logger
 LOGLEVEL = root_logger.DEBUG
-LOG_FILE_NAME = "$1.log"
+LOG_FILE_NAME = "log.$1"
 root_logger.basicConfig(filename=LOG_FILE_NAME, level=LOGLEVEL, filemode='w')
 
 console = root_logger.StreamHandler()

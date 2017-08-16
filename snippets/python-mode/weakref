@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: weakref
+# key: weakref
+# --
+import weakref
+#see https://docs.python.org/3/library/weakref.html#module-weakref
+#Object:
+o = Object()
+r = weakref.ref(o)
+o2 = r()
+o is o2
+
+#

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: logsetlevel
+# key: logsetlevel
+# --
+logging.getLogger().setLevel(logging.$1)
+$0
+logging.getLovver().setLevel(logging.$2)

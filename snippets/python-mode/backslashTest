@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: backslashTest
+# key: backslashTest
+# --
+
+Testing:
+#
+\#
+\\#
+/#
+//#
+##

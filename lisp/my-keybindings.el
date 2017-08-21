@@ -44,6 +44,7 @@
     ;;git
     (define-key map (kbd "C-x g") 'magit-status)
     ;;lisp
+    ;;remember: use (message x) not (print x)
     (define-key map (kbd "C-c e b") 'eval-buffer)
     (define-key map (kbd "C-c e e") 'eval-expression)
     (define-key map (kbd "C-c e l") 'my-eval-line)
@@ -136,3 +137,9 @@
 
 ;; ;flycheck
 ;; (global-set-key (kbd "C-c f") 'flycheck-go)
+
+
+;; Elisp notes:
+;; use def* to get clisp functionality, such as &key's
+;; use message, instead of print, in scratch
+;; use (message (format "%S" (macroexpand x)))

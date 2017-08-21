@@ -143,19 +143,26 @@
 (defconst trie-font-lock-keywords
   (list
    ;;facts
-   '("\\([.!]\\w+\\)+" (0 (trie-depth-face 9) t))
+   '("\\(\\.[$.!a-zA-Z0-9_\"]+\\((.*)\\)?\\)+"
+     (0 (trie-depth-face 9) t)
+     (2 (trie-depth-face 6) t t))
    ;;Rule name
-   '("\\([.!]\\w+\\)+:$" (0 (trie-depth-face 0) t))
+   '("\\(\\..+\\)+:$" (0 (trie-depth-face 0) t))
    ;;Rule end
    `("end$" (0 (trie-depth-face 0)))
    ;;Query
-   '("\\([.!][$a-zA-Z_]+\\)+\\?" (0 font-lock-variable-name-face t))
+   '("\\?$"
+     (0 (trie-depth-face 1) t))
    ;;Transform
    '("\\((\\$[a-zA-Z0-9_]+ [+*/-] [a-zA-Z0-9_.]+\\( ?-> ?\\$[a-zA-Z0-9_]+\\)?)\\)" . (0 font-lock-constant-face t))
    ;;Actions
-   '("\\([a-zA-Z+@-]+(\\([.!\" 0-9]\\|\\w+\\)+)\\)" (0 (trie-depth-face 6) t))
+   '("\\([a-zA-Z+@-]+(\\(\\([,.!\" 0-9]\\|\\w+\\)+\\))\\)"
+     (1 (trie-depth-face 6) t)
+     (2 (trie-depth-face 9) t))
    ;;Variables
-   '("\\$[a-zA-Z0-9_]" (0 (trie-depth-face 5) t))
+   '("\\$[a-zA-Z0-9_]+" (0 (trie-depth-face 5) t))
+   ;;Exclusion op
+   '("!" (0 "trie-rulename" t))
    )
   "Minimal highlighting expressions for trie mode")
 
@@ -178,12 +185,12 @@
       (indent-line-to 0)
       ;;else:
       (let ((not-indented t) cur-indent)
-        (if (looking-at "^[ \t]*END_") ;;if line contains an END_
+        (if (looking-at "^[ \t]*end$") ;;if line contains an END_
             (progn
               (save-excursion ;;save where we are
                 (forward-line -1) ;;go back a line
                 ;;then deindent:
-                (setq cur-indent (- (current-indentation) (default-tab-width)))
+                (setq cur-indent (- (current-indentation) tab-width))
                 ;;guard:
                 (if (< cur-indent 0)
                     (setq cur-indent 0))))
@@ -191,14 +198,14 @@
             (save-excursion
               (while not-indented
                 (forward-line -1)
-                (if (looking-at "^[ \t]*END_")
+                (if (looking-at "^[ \t]*end$")
                     (progn
                       (setq cur-indent (current-indentation))
                       (setq not-indented nil))
                     ;;otherwise
-                    (if (looking-at "^[ \t]*ENTER")
+                    (if (looking-at "^.+:")
                         (progn
-                          (setq cur-indent (+ (current-indentation) default-tab-width))
+                          (setq cur-indent (+ (current-indentation) tab-width))
                           (setq not-indented nil))
                         (if (bobp)
                             (setq not-indented nil)))))))

@@ -3,13 +3,23 @@
 (defvar trie-mode-hook nil)
 
 ;;--------------------
-;;Utilities
+;; Mode Variables
 ;;--------------------
+
 (defvar trie-defined-depth-count 10)
 (defvar trie-outermost-depth-face-count 3)
 (defvar trie-depth-face-name "trie-depth-")
 (defvar trie-depth-color-list '("color-26" "color-47" "color-99" "color-124"
                                 "color-129" "color 142" "color-164"))
+
+;;--------------------
+;;Utilities
+;;--------------------
+
+(defun findFace (name)
+  (seq-find (lambda (x) (string= (face-name x) name)) (face-list)))
+
+
 
 (defun flatten (lst)
   (letrec ((internal (lambda (x)
@@ -125,40 +135,27 @@
 ;;Specify as a list of (matcher . facename )
 ;;Potential keywords: operators +-*/!.()""$~ < > != == -> @
 ;;--------------------
-(defmacro stringToSymbol (name)
-  `(intern-soft ,name))
-
-(defun findFace (name)
-  (seq-find (lambda (x) (string= (face-name x) name)) (face-list)))
-
-(defmacro quoteVal (name)
-  `(quote ,name))
-
-(defmacro getQuotedFace (name)
-  `(let ((v (stringToSymbol ,name)))
-     (eval (macroexpand `(quoteVal ,v)))))
-  
 
 
 (defconst trie-font-lock-keywords
   (list
    ;;facts
-   '("\\(\\.[$.!a-zA-Z0-9_\"]+\\((.*)\\)?\\)+"
+   '("\\(\\.[$.!a-zA-Z0-9_\]+\\((.*)\\)?\\)+\\(\\?$\\)?"
      (0 (trie-depth-face 9) t)
-     (2 (trie-depth-face 6) t t))
+     (2 (trie-depth-face 6) t t)
+     (3 (trie-depth-face 1) t t))
    ;;Rule name
    '("\\(\\..+\\)+:$" (0 (trie-depth-face 0) t))
    ;;Rule end
    `("end$" (0 (trie-depth-face 0)))
-   ;;Query
-   '("\\?$"
-     (0 (trie-depth-face 1) t))
    ;;Transform
-   '("\\((\\$[a-zA-Z0-9_]+ [+*/-] [a-zA-Z0-9_.]+\\( ?-> ?\\$[a-zA-Z0-9_]+\\)?)\\)" . (0 font-lock-constant-face t))
+   '("\\(( ?\\$[a-zA-Z0-9_]+ [+*/-] [$a-zA-Z0-9_.]+\\( ?-> ?\\$[a-zA-Z0-9_]+\\)? *)\\)"
+     (0 font-lock-constant-face t))
    ;;Actions
-   '("\\([a-zA-Z+@-]+(\\(\\([,.!\" 0-9]\\|\\w+\\)+\\))\\)"
+   '("\\([a-zA-Z+@-]+( ?\\)\\(\\(.\\)+\\)\\( ?)\\)"
      (1 (trie-depth-face 6) t)
-     (2 (trie-depth-face 9) t))
+     (2 (trie-depth-face 9) )
+     (4 (trie-depth-face 6) t))
    ;;Variables
    '("\\$[a-zA-Z0-9_]+" (0 (trie-depth-face 5) t))
    ;;Exclusion op
@@ -175,7 +172,6 @@
 ;; reset indent if prior line is empty
 ;; 
 ;;--------------------
-;; TODO: indent after : only
 (defun trie-indent-line()
   "Indent current-line as trie code"
   (interactive)
@@ -226,7 +222,10 @@
     (modify-syntax-entry ?! "." st)
     (modify-syntax-entry ?$ "_" st)
     (modify-syntax-entry ?_ "w" st) ;;underscores are valid parts of words
-    (modify-syntax-entry ?\n "> b" st)
+    (modify-syntax-entry ?/ "< 12" st)
+    (modify-syntax-entry ?\n ">" st)
+    (modify-syntax-entry ?\" "\"\"" st)
+
     st)
   "Syntax table for the trie-mode")
 
@@ -242,10 +241,13 @@
   "Major mode for editing tries"
   (interactive)
   (kill-all-local-variables)
-  (set-syntax-table trie-mode-syntax-table)
   (use-local-map trie-mode-map)
   (set (make-local-variable 'font-lock-defaults) '(trie-font-lock-keywords))
   (set (make-local-variable 'indent-line-function) 'trie-indent-line)
+  (set (make-local-variable 'comment-style) '(plain))
+  (set (make-local-variable 'comment-start) "//")
+  (set (make-local-variable 'comment-use-syntax) t)
+  (set-syntax-table trie-mode-syntax-table)
   (setq major-mode 'trie-mode)
   (setq mode-name "TRIE")
   (run-hooks 'trie-mode-hook))

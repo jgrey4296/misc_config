@@ -17,7 +17,7 @@
 (require 'pony-mode)
 (require 'netlogo-mode)
 (require 'sclang)
-;;(require 'trie-mode)
+(require 'trie-mode)
 ;no longer needed with outline and occur:
 ;(autoload "folding.el") ;'nomessage 'noerror)
 

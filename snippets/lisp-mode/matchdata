@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: matchdata
+# key: matchdata
+# --
+(defun MyMatch (reg)
+       (when (re-search-forward reg nil t)
+             (match-data)))

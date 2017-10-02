@@ -127,6 +127,7 @@
   (let ((map (make-keymap)))
     (define-key map "\C-j" 'newline-and-indent)
     ;;any potential functions? add particular structures?
+    ;;TODO: M-RET to prev-line
     map)
   "Keymap for Trie mode major mode")
 
@@ -149,7 +150,7 @@
    ;;Rule end
    `("end$" (0 (trie-depth-face 0)))
    ;;Transform
-   '("\\(( ?\\$[a-zA-Z0-9_]+ [+*/-] [$a-zA-Z0-9_.]+\\( ?-> ?\\$[a-zA-Z0-9_]+\\)? *)\\)"
+   '("\\(\\$[a-zA-Z0-9_]+ [+*/-] [$a-zA-Z0-9_.]+\\( ?-> ?\\$[a-zA-Z0-9_]+\\)?\\)"
      (0 font-lock-constant-face t))
    ;;Actions
    '("\\([a-zA-Z+@-]+( ?\\)\\(\\(.\\)+\\)\\( ?)\\)"

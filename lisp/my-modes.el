@@ -18,6 +18,8 @@
 (require 'netlogo-mode)
 (require 'sclang)
 (require 'trie-mode)
+
+(autoload 'drools-mode "drools-mode")
 ;no longer needed with outline and occur:
 ;(autoload "folding.el") ;'nomessage 'noerror)
 

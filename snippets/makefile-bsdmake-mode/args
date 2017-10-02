@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: args
+# key: args
+# --
+#Default arg to build, call with make draw=X
+ifndef ${draw}
+	draw := "circles"
+endif
+
+
+all :
+	python ./main.py ${draw}
+
+clean :
+	rm imgs/*.png
+

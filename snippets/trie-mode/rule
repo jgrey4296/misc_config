@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: rule
+# key: rule
+# --
+//Rule:
+$1:
+    //Conditions: .a.b(> 20)?
+    $2
+    //Transforms: $x + 20 -> $y
+    $3
+    //Actions: +(.a.b.$y)
+    $4
+end
+
+$0

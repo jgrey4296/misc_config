@@ -5,20 +5,22 @@
 """
     $1
 """
+##############################
+# IMPORTS
+####################
 # Setup root_logger:
 import logging as root_logger
+$3
+
+#Log Setup
 LOGLEVEL = root_logger.DEBUG
-LOG_FILE_NAME = "$2.log"
+LOG_FILE_NAME = "log.$2"
 root_logger.basicConfig(filename=LOG_FILE_NAME, level=LOGLEVEL, filemode='w')
 
 console = root_logger.StreamHandler()
 console.setLevel(root_logger.INFO)
 root_logger.getLogger('').addHandler(console)
 logging = root_logger.getLogger(__name__)
-##############################
-# IMPORTS
-####################
-$3
 ##############################
 # CONSTANTS
 ####################

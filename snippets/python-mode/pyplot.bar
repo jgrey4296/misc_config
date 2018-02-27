@@ -2,10 +2,20 @@
 # name: pyplot.bar
 # key: pyplot.bar
 # --
-import matplotlib.pyplot as plt
 
-dict_to_show = {}
-barPositions = np.arange(len(dict_to_show))
-axes.bar(barPositions,dict_to_show.values(),align='center')
-axes.set_xticks(barPositions)
-axes.set_xticklabels(dict_to_show.keys())
+def barplot(data, ylabel, xlabel, title):
+    assert(isinstance(data, dict))
+    data_l = list(data.items())
+    data_l.sort(key=lambda x: x[1])
+    pos = np.arange(len(data_l))
+    
+    figure, axes = plt.subplot()
+    axes.bar(pos, [x[1] for x in data_l], align='center')
+    axes.set_xticks(pos)
+    axes.set_xticklabels([x[0] for x in data_l])
+    axes.set_ylabel(ylabel)
+    axes.set_xlabel(xlabel)
+    axes.set_title(title)
+
+    return (figure, axes)
+

@@ -4,6 +4,7 @@
 # --
 import graphviz
 #Check graphviz.ENGINES
+#['neato'|'dot'|'twopi'|'circo'|'fdp'|'nop']
 G = graphviz.Digraph(engine='fdp')
 G.node(NAME,LABEL)
 G.edge(TAIL,HEAD)

@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: context
+# key: context
+# --
+def __enter__(self):
+    #return self
+    return
+
+
+def __exit__(self, type, value, traceback):
+    return

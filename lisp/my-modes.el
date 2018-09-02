@@ -13,11 +13,11 @@
 (eval-after-load 'flycheck '(global-flycheck-mode 1))
 
 (require 'chuck-mode)
-(require 'python-django)
-(require 'pony-mode)
+;;(require 'python-django)
+;;(require 'pony-mode)
 (require 'netlogo-mode)
 (require 'sclang)
-(require 'trie-mode)
+;;(require 'trie-mode)
 ;no longer needed with outline and occur:
 ;(autoload "folding.el") ;'nomessage 'noerror)
 

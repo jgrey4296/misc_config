@@ -1,3 +1,6 @@
 * Emacs Reminders and notes
   To force recompilation:
   C-u 0 M-x byte-recompile-directory
+
+** Icy
+[[https://emacs.stackexchange.com/questions/30317/][Font decrease error fix]]

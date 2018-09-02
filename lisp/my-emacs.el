@@ -4,11 +4,11 @@
 ;(setq debug-on-error 1)
 
 ;; Load paths
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+;;(add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/"))
 (package-initialize)
 
 (setq load-path (cons "~/.emacs.setup/lisp-lib/" load-path))
-(require 'tidal)
+;;(require 'tidal)
 (setq tidal-interpreter "/usr/local/bin/ghci")
 
 (let ((default-directory (expand-file-name "~/.emacs.setup/")))
@@ -16,6 +16,7 @@
 
 (add-to-list 'load-path (expand-file-name "~/.emacs.setup/lisp"))
 (add-to-list 'load-path (expand-file-name "~/.emacs.setup/lisp-lib"))
+;; PAY ATTENTION TO THE USER NAME
 (add-to-list 'load-path "/Users/jgrey/github/otherlibs/python-django.el")
 (add-to-list 'load-path "/Users/jgrey/github/otherlibs/pony-mode/src")
 

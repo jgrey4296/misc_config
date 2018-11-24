@@ -8,13 +8,8 @@
 (package-initialize)
 
 (setq load-path (cons "~/.emacs.setup/lisp-lib/" load-path))
-<<<<<<< HEAD
-
-
-=======
 ;;(require 'tidal)
 (setq tidal-interpreter "/usr/local/bin/ghci")
->>>>>>> 84169cfec733237f76b51950bfeaa340dc2bd8ad
 
 (let ((default-directory (expand-file-name "~/.emacs.setup/")))
   (normal-top-level-add-subdirs-to-load-path))

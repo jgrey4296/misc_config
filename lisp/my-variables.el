@@ -36,21 +36,12 @@
 	       'APPEND))
 
 ;file association:
-<<<<<<< HEAD
 (setq auto-mode-alist (cons '(".*\.pde" . java-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '(".*\.pl" .  prolog-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '(".*\.py" .  python-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '(".*\.emacs" . lisp-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '(".*\.js" . js-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '(".*\.md" . markdown-mode) auto-mode-alist))
-=======
-;; (setq auto-mode-alist (cons '(".*\.pde" . java-mode) auto-mode-alist))
-;; (setq auto-mode-alist (cons '(".*\.lp" .  prolog-mode) auto-mode-alist))
-;; (setq auto-mode-alist (cons '(".*\.py" .  python-mode) auto-mode-alist))
-;; (setq auto-mode-alist (cons '(".*\.emacs" . lisp-mode) auto-mode-alist))
-;; (setq auto-mode-alist (cons '(".*\.js" . js-mode) auto-mode-alist))
-;; (setq auto-mode-alist (cons '(".*\.md" . markdown-mode) auto-mode-alist))
->>>>>>> 84169cfec733237f76b51950bfeaa340dc2bd8ad
 
 ;;(defvar scratchBufferFile (expand-file-name "./scratch.txt"))
 ;;(setq initial-scratch-message (file-string scratchBufferFile))

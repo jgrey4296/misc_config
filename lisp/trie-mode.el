@@ -1,5 +1,6 @@
 ; based On https://www.emacswiki.org/emacs/ModeTutorial
 ;;For allowing code to run when the mode is run:
+(require 'dash)
 (defvar trie-mode-hook nil)
 
 ;;--------------------

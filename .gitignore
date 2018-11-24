@@ -2,3 +2,7 @@
 lisp-lib/
 *.yas-compiled-snippets.el
 *.el~
+backups/
+elpa/
+auto-save-list/
+ac-comphist.dat

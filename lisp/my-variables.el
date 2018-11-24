@@ -8,6 +8,11 @@
 
 (setq-default major-mode `org-mode)
 
+;;Variables for sclang
+(setq sclang-library-configuration-file "~/.emacs.setup/setup_files/sclang.yaml")
+(setq sclang-udp-port 57120)
+
+
 
 ;dropdown list use for yas
 ;;(require 'dropdown-list)
@@ -17,6 +22,7 @@
 
 
 (setq yas-snippet-dirs '("~/.emacs.setup/snippets/"
+                         "/Users/johngrey/github/otherLibs/yasnippet-snippets/snippets"
                          "/Users/jgrey/github/otherLibs/yasnippet-snippets"))
 
 
@@ -30,12 +36,21 @@
 	       'APPEND))
 
 ;file association:
+<<<<<<< HEAD
 (setq auto-mode-alist (cons '(".*\.pde" . java-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '(".*\.pl" .  prolog-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '(".*\.py" .  python-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '(".*\.emacs" . lisp-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '(".*\.js" . js-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '(".*\.md" . markdown-mode) auto-mode-alist))
+=======
+;; (setq auto-mode-alist (cons '(".*\.pde" . java-mode) auto-mode-alist))
+;; (setq auto-mode-alist (cons '(".*\.lp" .  prolog-mode) auto-mode-alist))
+;; (setq auto-mode-alist (cons '(".*\.py" .  python-mode) auto-mode-alist))
+;; (setq auto-mode-alist (cons '(".*\.emacs" . lisp-mode) auto-mode-alist))
+;; (setq auto-mode-alist (cons '(".*\.js" . js-mode) auto-mode-alist))
+;; (setq auto-mode-alist (cons '(".*\.md" . markdown-mode) auto-mode-alist))
+>>>>>>> 84169cfec733237f76b51950bfeaa340dc2bd8ad
 
 ;;(defvar scratchBufferFile (expand-file-name "./scratch.txt"))
 ;;(setq initial-scratch-message (file-string scratchBufferFile))

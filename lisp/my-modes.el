@@ -23,10 +23,11 @@
 (eval-after-load 'flycheck '(global-flycheck-mode 1))
 
 (require 'chuck-mode)
-(require 'python-django)
-(require 'pony-mode)
+;;(require 'python-django)
+;;(require 'pony-mode)
 (require 'netlogo-mode)
 (require 'sclang)
+<<<<<<< HEAD
 (require 'trie-mode)
 (require 'tidal)
 
@@ -40,13 +41,33 @@
 (require 'erlang-start)
 
 
+=======
+>>>>>>> 84169cfec733237f76b51950bfeaa340dc2bd8ad
 
 (autoload 'drools-mode "drools-mode")
+;;(require 'trie-mode)
 ;no longer needed with outline and occur:
 ;(autoload "folding.el") ;'nomessage 'noerror)
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 84169cfec733237f76b51950bfeaa340dc2bd8ad
 ;(autoload 'csharp-mode "csharp-mode" "Major mode for editing C# code." t)
 ;(setq auto-mode-alist
 ;      (append '(("\\.cs$" . csharp-mode)) auto-mode-alist))
 
+<<<<<<< HEAD
+=======
+(global-auto-revert-mode 1)  ;auto revert buffers when changed on disk
+(show-paren-mode t)          ;visualize()
+;(iswitchb-mode t)            ;use advanced tab switching
+(blink-cursor-mode -1)       ;no cursor blinking
+(tool-bar-mode -1)           ;disable the awful toolbar
+(menu-bar-mode -1)           ;no menu, you can toggle it with C-c m
+;(scroll-bar-mode -1)         ;disable the sroll bar
+
+
+
+;org mode stuff:
+>>>>>>> 84169cfec733237f76b51950bfeaa340dc2bd8ad

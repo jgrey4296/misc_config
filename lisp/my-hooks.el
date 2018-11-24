@@ -1,4 +1,3 @@
-
 ;;context highlighting
 (add-hook 'js2-mode-hook #'context-coloring-mode)
 
@@ -68,9 +67,6 @@
                 org-mode-hook
                 text-mode-hook
                 )))
-
-
-
 
 ;ibuffer grouping:
 (setq ibuffer-saved-filter-groups

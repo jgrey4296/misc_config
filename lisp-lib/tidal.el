@@ -54,8 +54,6 @@
   "*The version of tidal interpreter as a string.")
 
 (defvar tidal-interpreter-arguments
-  (list "-ghci-script"  "~/github/languageLearning/tidal/.ghci"
-        )
   "*Arguments to the haskell interpreter (default=none).")
 
 (defvar tidal-literate-p
@@ -79,6 +77,7 @@
 (defun tidal-start-haskell ()
   "Start haskell."
   (interactive)
+  (print (format "Starting Tidal with args: %S" tidal-interpreter-arguments))
   (if (comint-check-proc tidal-buffer)
       (error "A tidal process is already running")
     (apply
@@ -88,14 +87,14 @@
      nil
      tidal-interpreter-arguments)
     (tidal-see-output))
-  (tidal-send-string ":set prompt \"\"")
+  (tidal-send-string ":set prompt \"tidal> \"")
+  ;;Use an invisible prompt when sending text to tidal interpreter
   (if (string< tidal-interpreter-version "8.2.0")
       (tidal-send-string ":set prompt2 \"\"")
     (tidal-send-string ":set prompt-cont \"\""))
-;;   (tidal-send-string "import Sound.Tidal.Context
 
+  ;;   (tidal-send-string "import Sound.Tidal.Context
 ;; tidal <- startTidal superdirtTarget defaultConfig
-
 ;; let p = streamReplace tidal
 ;;     hush = streamHush tidal
 ;;     list = streamList tidal
@@ -139,7 +138,6 @@
 ;;     d15 = p \"15\"
 ;;     d16 = p \"16\"
 ;;   ")
-  (tidal-send-string ":set prompt \"tidal> \"")
 )
 
 (defun tidal-see-output ()
@@ -193,7 +191,6 @@
   (tidal-send-string "let retrig = (now `rotR`)")
   (tidal-send-string "let fadeOut n = spread' (_degradeBy) (retrig $ slow n $ envL)")
   (tidal-send-string "let fadeIn n = spread' (_degradeBy) (retrig $ slow n $ (1-) <$> envL)")
-
   )
 
 (defun tidal-run-line ()
@@ -213,12 +210,11 @@
 (defun tidal-eval-multiple-lines ()
   "Eval the current region in the interpreter as a single line."
   ;(tidal-get-now)
-  (mark-paragraph)
   (let* ((s (buffer-substring-no-properties (region-beginning)
                                             (region-end)))
          (s* (if tidal-literate-p
                  (tidal-unlit s)
-               s)))
+                 s)))
     (tidal-send-string ":{")
     (tidal-send-string s*)
     (tidal-send-string ":}")
@@ -382,14 +378,14 @@
   (tidal-transform-and-store
    "/tmp/tidal.hs"
    (buffer-substring-no-properties (region-beginning) (region-end)))
-  (tidal-send-string ":load \"/tmp/tidal.hs\"")
+  (tidal-send-string ":add \"/tmp/tidal.hs\"")
   (tidal-send-string "main"))
 
 (defun tidal-load-buffer ()
   "Load the current buffer."
   (interactive)
   (save-buffer)
-  (tidal-send-string (format ":load \"%s\"" buffer-file-name)))
+  (tidal-send-string (format ":add \"%s\"" buffer-file-name)))
 
 (defun tidal-run-main ()
   "Run current main."
@@ -414,7 +410,7 @@
   (define-key map [?\C-c ?\C-c] 'tidal-run-line)
   (define-key map [?\C-c ?\C-e] 'tidal-run-multiple-lines)
   (define-key map (kbd "<C-return>") 'tidal-run-multiple-lines)
-  (define-key map [?\C-c ?\C-r] 'tidal-run-region)
+  (define-key map [?\C-c ?\C-r] 'tidal-run-multiple-lines)
   (define-key map [?\C-c ?\C-l] 'tidal-load-buffer)
   (define-key map [?\C-c ?\C-i] 'tidal-interrupt-haskell)
   (define-key map [?\C-c ?\C-m] 'tidal-run-main)
@@ -445,7 +441,7 @@
   (local-set-key [?\C-c ?\C-c] 'tidal-run-line)
   (local-set-key [?\C-c ?\C-e] 'tidal-run-multiple-lines)
   (local-set-key (kbd "<C-return>") 'tidal-run-multiple-lines)
-  (local-set-key [?\C-c ?\C-r] 'tidal-run-region)
+  (local-set-key [?\C-c ?\C-r] 'tidal-run-multiple-lines)
   (local-set-key [?\C-c ?\C-l] 'tidal-load-buffer)
   (local-set-key [?\C-c ?\C-i] 'tidal-interrupt-haskell)
   (local-set-key [?\C-c ?\C-m] 'tidal-run-main)

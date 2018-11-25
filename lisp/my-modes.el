@@ -32,6 +32,9 @@
 
 ;;set the tidal interpreter
 (setq tidal-interpreter "/usr/local/bin/ghci")
+(setq tidal-interpreter-arguments
+      (list "-ghci-script" (expand-file-name "~/github/languageLearning/tidal/.ghci")))
+            
 
 ;;setting up erlang
 ;; (also has a load path set in root el file)

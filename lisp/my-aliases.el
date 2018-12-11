@@ -4,5 +4,4 @@
 (defalias 'ded 'toggle-window-dedicated)
 (defalias 'lorem 'Lorem-ipsum-insert-paragraphs)
 (defalias 'cr 'comment-region)
-
 (defalias 'scr 'scratch)

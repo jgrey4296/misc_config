@@ -5,11 +5,10 @@
 
 ;; Load paths
 ;;(add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/"))
-(package-initialize)
 
-(setq load-path (cons "~/.emacs.setup/lisp-lib/" load-path))
-;;(require 'tidal)
-(setq tidal-interpreter "/usr/local/bin/ghci")
+(package-initialize)
+;;TODO: backup list of installed packages
+
 
 (let ((default-directory (expand-file-name "~/.emacs.setup/")))
   (normal-top-level-add-subdirs-to-load-path))
@@ -17,11 +16,12 @@
 (add-to-list 'load-path (expand-file-name "~/.emacs.setup/lisp"))
 (add-to-list 'load-path (expand-file-name "~/.emacs.setup/lisp-lib"))
 ;; PAY ATTENTION TO THE USER NAME
-(add-to-list 'load-path "/Users/jgrey/github/otherlibs/python-django.el")
-(add-to-list 'load-path "/Users/jgrey/github/otherlibs/pony-mode/src")
-
+(add-to-list 'load-path (expand-file-name "~/github/otherlibs/python-django.el"))
+(add-to-list 'load-path (expand-file-name "~/github/otherlibs/pony-mode/src"))
 ;;load path for erlang tools
 (add-to-list 'load-path "/usr/local/opt/erlang/lib/erlang/lib/tools-3.0.1/emacs")
+
+(require 'dired-x)
 
 (load "my-functions")
 (load "my-aliases")

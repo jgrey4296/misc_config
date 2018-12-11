@@ -2,8 +2,7 @@
 # name: codeblock
 # key: codeblock
 # --
-$2-- :results output/value
-#+begin_src $1
-$3
+#+begin_src $1 ${2:results output/value}
+	$3
 #+end_src
 $0

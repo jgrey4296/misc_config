@@ -26,7 +26,7 @@
     (define-key map (kbd "C-c f c s") 'set-fill-column)
     (define-key map (kbd "C-c u d") 'insert-author-date-time)
     (define-key map (kbd "C-c u f") 'flycheck-go)
-    (define-key map (kbd "C-c u K") (lambda () (interactive) (find-file "~/github/jg_emacs_files/lisp/my-keybindings.el")))
+    (define-key map (kbd "C-c u K") (lambda () (interactive) (find-file (expand-file-name "~/github/jg_emacs_files/lisp/my-keybindings.el"))))
     ;;Window movement
     (define-key map (kbd "C-x C-j") 'windmove-left)
     (define-key map (kbd "C-x C-l") 'windmove-right)

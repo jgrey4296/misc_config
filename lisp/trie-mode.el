@@ -84,9 +84,9 @@
       (let ((newFaceName (car pair))
             (newFaceColor (cdr pair)))
         (progn
-          (print (concat "Creating Face: " newFaceName))
-          (print (format "%S" (macroexpand `(trie-generate-face ,(intern newFaceName)
-                                                                newFaceColor))))
+          ;; (message "Creating Face: %s" newFaceName)
+          ;; (message (format "%S" (macroexpand `(trie-generate-face ,(intern newFaceName)
+          ;;                                                       newFaceColor))))
           (eval (macroexpand `(trie-generate-face ,(intern newFaceName) newFaceColor))))))))
 
 (trie-face-creation)

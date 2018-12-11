@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: choice
+# key: choice
+# --
+np.random.choice($1, size=None, replace=True, p=None)$0

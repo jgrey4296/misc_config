@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: sort
+# key: sort
+# --
+.sort(axis=-1, kind='quicksort', order=None)

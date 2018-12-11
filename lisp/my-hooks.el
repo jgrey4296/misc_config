@@ -6,7 +6,7 @@
 
 ;; eval-expression:
 (add-hook 'eval-expression-minibuffer-setup-hook #'context-coloring-mode) ; 24.4+
-;;(add-hook 'minibuffer-setup-hook #'context-coloring-mode)                 ; 24.3
+;;(add-hook 'minibuffer-setup-hook #'context-coloring-mode) ; 24.3
 
 ;;Add Hooks to enable spell checking for text and latex
 ;;Requires flyspell and ispell to be installed
@@ -46,19 +46,19 @@
           (lambda(output)
             (replace-regexp-in-string "\\[[0-9]+[GKJ]" "" output)))
 
+(add-hook 'dired-mode-hook (lambda () (dired-omit-mode t)))
 
 ;; (add-hook 'outline-mode-hook
 ;;           (lambda ()
 ;;             (require 'outline-cycle)))
 
-(add-hook 'outline-minor-mode-hook
-          (lambda ()
-            (require 'outline-magic)))
+;; (add-hook 'outline-minor-mode-hook
+;;           (lambda ()
+;;             (require 'outline-magic)))
 
 
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-
 
 (dolist (hook '(css-mode-hook
                 html-mode-hook
@@ -114,7 +114,9 @@
                )))
 
 ;; Use human readable Size column instead of original one
-;; (define-ibuffer-column size-h
+(setq size-h (make-symbol "size-h"))
+
+;; (define-ibuffer-column size-huff
 ;;   (:name "Size" :inline t)
 ;;   (cond
 ;;    ((> (buffer-size) 1000000) (format "%7.1fM" (/ (buffer-size) 1000000.0)))

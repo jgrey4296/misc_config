@@ -1,8 +1,9 @@
 ;; tidal packages.el
 ;; loads second
 
-(defconst jg_layer-packages
+(defconst tidal-packages
   '(
+    (tidal-mode :location local)
     ;; package from EPA
     ;; eg: some-package
     ;; (some-package :location elpa)
@@ -16,3 +17,11 @@
 ;; (def <layer>/pre-init-<package>)
 ;; (def <layer>/init-<package>)
 ;; (def <layer>/post-init-<package>)
+
+(def tidal/init-tidal-mode
+     (use-package tidal-mode
+       :defer t
+       :mode "\\.tidal\\$"
+
+       )
+     )

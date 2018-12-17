@@ -1,0 +1,22 @@
+includePaths:
+    - /Users/jgrey/.emacs.setup/lisp-lib/scel/sc
+    - /Users/jgrey/github/.super_collider_classes
+    - /Applications/SuperCollider/SuperCollider.app/Contents/Resources/SCClassLibrary
+    - /Users/jgrey/Library/Application Support/SuperCollider/downloaded-quarks/Vowel
+    - /Users/jgrey/Library/Application Support/SuperCollider/downloaded-quarks/Dirt-Samples
+    - /Users/jgrey/Library/Application Support/SuperCollider/downloaded-quarks/SuperDirt
+    - /Users/jgrey/Library/Application Support/SuperCollider/downloaded-quarks/MathLib
+    - /Users/jgrey/Library/Application Support/SuperCollider/downloaded-quarks/redUniverse
+    - /Users/jgrey/Library/Application Support/SuperCollider/downloaded-quarks/XML
+    - /Users/jgrey/Library/Application Support/SuperCollider/downloaded-quarks/wslib
+    - /Users/jgrey/Library/Application Support/SuperCollider/downloaded-quarks/Chordtris
+    - /Users/jgrey/Library/Application Support/SuperCollider/downloaded-quarks/UnitTesting
+    - /Users/jgrey/Library/Application Support/SuperCollider/downloaded-quarks/Modality-toolkit
+    - /Users/jgrey/Library/Application Support/SuperCollider/downloaded-quarks/Cluster
+    - /Users/jgrey/Library/Application Support/SuperCollider/downloaded-quarks/GD_ToolboxWindow
+    - /Users/jgrey/Library/Application Support/SuperCollider/downloaded-quarks/EventArray
+    - /Users/jgrey/Library/Application Support/SuperCollider/downloaded-quarks/GamelanPatterns
+    - /Users/jgrey/Library/Application Support/SuperCollider/downloaded-quarks/GamelanSynthesis
+excludePaths:
+    []
+postInlineWarnings: false

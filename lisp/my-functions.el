@@ -14,18 +14,12 @@
                   (get-char-property (point) 'face))))
     (if face (customize-face face) (message "No face at %d" pos))))
 
-;;Easily switch to scratch:
-(defun scratch()
-  (interactive)
-  (switch-to-buffer "*scratch*")
-  )
 
 (defun flycheck-go()
   (interactive)
   (flycheck-mode 1)
   (flycheck-list-errors)
   )
-
 
 (defun my-select-region-by-line-number (start end)
   (interactive "nStart Line: \nnEnd Line:")
@@ -37,27 +31,6 @@
   (activate-mark)
   )
 
-(defun my-eval-line ()
-  (interactive)
-  (beginning-of-line)
-  (let ((m (point-marker)))
-    (end-of-line)  
-    (eval-region (region-beginning) (region-end))
-    )
-  )
-
-
-;Set a window to be dedicated
-(defun toggle-window-dedicated()
-  (interactive)
- (message 
-  (if (let (window (get-buffer-window (current-buffer)))
-	(set-window-dedicated-p window 
-				(not (window-dedicated-p window))))
-    "Window '%s' is dedicated"
-    "Window '%s' is normal")
-  
-  (current-buffer)))
 
 ;Set the Frame width
 (defun jgsfw (arg)

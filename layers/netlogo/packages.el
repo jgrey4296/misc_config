@@ -21,7 +21,7 @@
 (def netlogo/init-netlogo
      (use-package netlogo-mode
        :defer t
-       :mode "\\.nlogo\\'"
+       :mode "\\.nlogo\\$"
        :commands (netlogo-mode)
        :init ()
        :config ()

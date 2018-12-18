@@ -20,7 +20,6 @@
 
 (defun tidal/init-tidal-mode ()
      (use-package tidal-mode
-       :defer t
        :commands (tidal-mode)
        ;; Pre-loading setup:
        ;; :init ()
@@ -31,3 +30,5 @@
      )
 
 (defun tidal/post-init-mode ()
+
+  )

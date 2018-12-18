@@ -5,6 +5,7 @@
 ;;   (defun spacemacs/<package>-enable () )
 ;;   (defun spacemacs/<package>-disable () ))
 
+
 (when (configuration-layer/package-usedp 'org)
   ;;call occur for all tags in the file:
   (defun jg_layer/tag-occurances ()

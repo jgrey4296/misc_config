@@ -3,7 +3,7 @@
 
 (defconst chuck-packages
   '(
-    (chuck :local local)
+    (chuck-mode :location local)
     ;; package from EPA
     ;; eg: some-package
     ;; (some-package :location elpa)
@@ -20,7 +20,8 @@
 
 
 
-(defun chuck/init-chuck
- (use-package   
+(defun chuck/init-chuck-mode ()
+ (use-package chuck-mode
    :commands (chuck-mode)
-   ) 
+   )
+)

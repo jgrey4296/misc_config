@@ -18,10 +18,16 @@
 ;; (def <layer>/init-<package>)
 ;; (def <layer>/post-init-<package>)
 
-(def tidal/init-tidal-mode
+(defun tidal/init-tidal-mode ()
      (use-package tidal-mode
        :defer t
-       :mode "\\.tidal\\$"
+       :commands (tidal-mode)
+       ;; Pre-loading setup:
+       ;; :init ()
+       ;; Post-loading setup:
+       ;; :config ()
 
        )
      )
+
+(defun tidal/post-init-mode ()

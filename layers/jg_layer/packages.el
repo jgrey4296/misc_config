@@ -15,6 +15,7 @@
     crosshairs
     abbrev
     evil
+    smartparens
     )
   )
 
@@ -88,4 +89,10 @@
     "y A"  'add-mode-abbrev
     "y k"  'kill-all-abbrevs
     )
+  )
+
+(defun jg/layer/post-smartparens ()
+  (setq-default smartparens-global-mode 0
+
+                )
   )

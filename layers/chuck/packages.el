@@ -17,3 +17,10 @@
 ;; (def <layer>/pre-init-<package>)
 ;; (def <layer>/init-<package>)
 ;; (def <layer>/post-init-<package>)
+
+
+
+(defun chuck/init-chuck
+ (use-package   
+   :commands (chuck-mode)
+   ) 

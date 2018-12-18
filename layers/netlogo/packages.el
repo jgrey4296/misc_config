@@ -14,15 +14,11 @@
 
   )
 
-;; (def <layer>/pre-init-<package>)
-;; (def <layer>/init-<package>)
-;; (def <layer>/post-init-<package>)
+;; (defun <layer>/pre-init-<package>)
+;; (defun <layer>/init-<package>)
+;; (defun <layer>/post-init-<package>)
 
-(def netlogo/init-netlogo
-     (use-package netlogo-mode
-       :defer t
-       :mode "\\.nlogo\\$"
-       :commands (netlogo-mode)
-       :init ()
-       :config ()
-     )
+(defun netlogo/init-netlogo ()
+  (use-package netlogo-mode
+    :commands (netlogo-mode)
+    ))

@@ -1,5 +1,5 @@
 includePaths:
-    - /Users/jgrey/.emacs.setup/lisp-lib/scel/sc
+    - /Users/jgrey/.spacemacs.d/layers/sclang/local/scel/sc/
     - /Users/jgrey/github/.super_collider_classes
     - /Applications/SuperCollider/SuperCollider.app/Contents/Resources/SCClassLibrary
     - /Users/jgrey/Library/Application Support/SuperCollider/downloaded-quarks/Vowel

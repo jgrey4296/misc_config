@@ -13,6 +13,6 @@
 
   )
 
-;; (def <layer>/pre-init-<package>)
-;; (def <layer>/init-<package>)
-;; (def <layer>/post-init-<package>)
+;; (defun <layer>/pre-init-<package>)
+;; (defun <layer>/init-<package>)
+;; (defun <layer>/post-init-<package>)

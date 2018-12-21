@@ -24,4 +24,7 @@
 (set-keyboard-coding-system 'utf-8)
 (set-language-environment "UTF-8")
 (prefer-coding-system 'utf-8)
-
+(spacemacs/set-leader-keys
+  "t o" 'dired-omit-mode
+  "s o" 'occur
+  )

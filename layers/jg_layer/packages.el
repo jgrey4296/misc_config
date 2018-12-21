@@ -12,14 +12,15 @@
     helm
     org
     yasnippet
-    crosshairs
+    ;; crosshairs
     abbrev
     evil
-    smartparens
+    (smartparens :excluded t)
     ibuffer
-    neotree
+    ;; neotree
     fci
     rainbow-mode
+    dired
     )
   )
 
@@ -45,9 +46,10 @@
 
 (defun jg_layer/post-init-helm ()
   ;;add in keybinding to kill line in completion window
-  (define-key helm-map (kbd "C-K") 'kill-line)
+  (with-eval-after-load 'helm
+    (define-key helm-map (kbd "C-K") 'kill-line)
+    )
   )
-
 
 (defun jg_layer/post-init-org ()
   ;;ORG SETUP
@@ -105,6 +107,8 @@
     "y n"    'yas-new-snippet
     "y d"    'yas-describe-tables
     )
+  (global-set-key (kbd "C-c ;") 'expand-abbrev)
+  (global-set-key (kbd "C-c >") 'yas-new-snippet)
   )
 
 (defun jg_layer/post-init-abbrev ()
@@ -120,39 +124,32 @@
     "y A"  'add-mode-abbrev
     "y k"  'kill-all-abbrevs
     )
-  (global-set-key (kbd "TAB") 'expand-abbrev)
   )
 
-(defun jg_layer/post-smartparens ()
-  (setq-default smartparens-global-mode 0
-                )
+
+(defun jg_layer/post-init-ibuffer ()
   )
 
-(defun jg_layer/post-ibuffer ()
-  )
-
-(defun jg_layer/post-erlang ()
+(defun jg_layer/post-init-erlang ()
   ;; (also has a load path set in root el file)
   erlang-root-dir "/usr/local/opt/erlang"
   exec-path (cons "/usr/local/opt/erlang/bin" exec-path)
 
   )
 
-(defun jg_layer/post-python ()
+(defun jg_layer/post-init-python ()
   (setq-default python-indent-offset 4
                 python-indent-guess-indent-offset nil )
   )
 
-(defun jg_layer/post-fci ()
+(defun jg_layer/post-init-fci ()
   (add-hook 'change-major-mode-after-body-hook 'fci-mode)
   )
 
 (defun jg_layer/init-rainbow-mode ()
   (use-package rainbow-mode
     :commands (rainbow-mode)
+    :init (spacemacs/set-leader-keys
+            "t C r" 'rainbow-mode)
     )
-  )
-
-(defun jg_layer/post-init-rainbow-mode ()
-  (rainbow-mode t)
   )

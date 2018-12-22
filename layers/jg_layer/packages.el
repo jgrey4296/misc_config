@@ -30,18 +30,32 @@
 
 (defun jg_layer/post-init-evil ()
   (setq-default evil-escape-delay 0.3 )
-  ;; assign colours to hl-line based on state
-  (add-hook 'evil-normal-state-entry-hook       (lambda () (set-face-background hl-line-face "#000000")))
-  (add-hook 'evil-insert-state-entry-hook       (lambda () (set-face-background hl-line-face "#005f00")))
-  (add-hook 'evil-visual-state-entry-hook       (lambda () (set-face-background hl-line-face "#005fff")))
-  (add-hook 'evil-motion-state-entry-hook       (lambda () (set-face-background hl-line-face "#5f0000")))
-  (add-hook 'evil-emacs-state-entry-hook        (lambda () (set-face-background hl-line-face "#5f00ff")))
-  (add-hook 'evil-replace-state-entry-hook      (lambda () (set-face-background hl-line-face "#8700ff")))
-  (add-hook 'evil-hybrid-state-entry-hook       (lambda () (set-face-background hl-line-face "#0087ff")))
-  (add-hook 'evil-evilified-state-entry-hook    (lambda () (set-face-background hl-line-face "#5f5f00")))
-  (add-hook 'evil-lisp-state-entry-hook         (lambda () (set-face-background hl-line-face "#875fff")))
-  (add-hook 'evil-iedit-state-entry-hook        (lambda () (set-face-background hl-line-face "#8700af")))
-  (add-hook 'evil-iedit-insert-state-entry-hook (lambda () (set-face-background hl-line-face "#8700af")))
+  (global-set-key (kbd "<backtab>") 'evil-normal-state)
+
+  (defface evil-normal-state '((t :background  "#000000")) "The Evil Normal State Hl-line")
+  (defface evil-insert-state '((t :background  "#005f00")) "The Evil Insert State Hl-line")
+  (defface evil-visual-state '((t :background  "#005fff")) "The Evil Visual State Hl-line")
+  (defface evil-motion-state '((t :background  "#5f0000")) "The Evil Motion State Hl-line")
+  (defface evil-emacs-state '((t :background  "#5f00ff"))  "The Evil Emacs State Hl-line")
+  (defface evil-replace-state '((t :background  "#8700ff")) "The Evil Replace State Hl-line")
+  (defface evil-hybrid-state '((t :background  "#0087ff")) "The Evil Hybrid State Hl-line")
+  (defface evil-evilified-state '((t :background  "#5f5f00")) "The Evil Evilified State Hl-line")
+  (defface evil-lisp-state '((t :background  "#875fff")) "The Evil Lisp State Hl-line")
+  (defface evil-iedit-state '((t :background  "#8700af")) "The Evil iedit State Hl-line")
+  (defface evil-iedit-insert-state '((t :background  "#8700af")) "The Iedit Insert state Hl-line")
+
+  (add-hook 'evil-normal-state-entry-hook   (lambda () (interactive) (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'evil-normal-state))))
+  (add-hook 'evil-insert-state-entry-hook   (lambda () (interactive) (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'evil-insert-state))))
+  (add-hook 'evil-visual-state-entry-hook   (lambda () (interactive) (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'evil-visual-state))))
+  (add-hook 'evil-motion-state-entry-hook   (lambda () (interactive) (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'evil-motion-state))))
+  (add-hook 'evil-emacs-state-entry-hook    (lambda () (interactive) (if (overlayp global-hl-line-overlay)     (overlay-put global-hl-line-overlay 'face 'evil-emacs-state))))
+  (add-hook 'evil-replace-state-entry-hook  (lambda () (interactive) (if (overlayp global-hl-line-overlay)     (overlay-put global-hl-line-overlay 'face 'evil-replace-state))))
+  (add-hook 'evil-hybrid-state-entry-hook   (lambda () (interactive) (if (overlayp global-hl-line-overlay)     (overlay-put global-hl-line-overlay 'face 'evil-hybrid-state))))
+  (add-hook 'evil-evilified-state-entry-hook (lambda () (interactive) (if (overlayp global-hl-line-overlay)    (overlay-put global-hl-line-overlay 'face 'evil-evilified-state))))
+  (add-hook 'evil-lisp-state-entry-hook      (lambda () (interactive) (if (overlayp global-hl-line-overlay)    (overlay-put global-hl-line-overlay 'face 'evil-lisp-state))))
+  (add-hook 'evil-iedit-state-entry-hook     (lambda () (interactive) (if (overlayp global-hl-line-overlay)    (overlay-put global-hl-line-overlay 'face 'evil-iedit-state))))
+  (add-hook 'evil-iedit-insert-state-entry-hook (lambda () (interactive) (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'evil-iedit-insert-state))))
+
   )
 
 (defun jg_layer/post-init-helm ()
@@ -149,7 +163,14 @@
 (defun jg_layer/init-rainbow-mode ()
   (use-package rainbow-mode
     :commands (rainbow-mode)
-    :init (spacemacs/set-leader-keys
-            "t C r" 'rainbow-mode)
+    :config (progn
+              (spacemacs/set-leader-keys "t C r" 'rainbow-mode)
+              (add-hook 'prog-mode-hook 'rainbow-more))
     )
+  )
+
+(defun jg_layer/init-dired-mode ()
+  (use-package dired-mode
+    :commands (dired-mode)
+    :config (add-hook 'dired-mode-hook 'dired-omit-mode))
   )

@@ -1,9 +1,6 @@
 ;; jg_emacs config.el
 ;; loaded fourth
 
-(defun silence ()
-  (interactive))
-
 (xterm-mouse-mode 0)
 (setq-default 
               ;; AUTO SAVES
@@ -28,3 +25,4 @@
   "t o" 'dired-omit-mode
   "s o" 'occur
   )
+

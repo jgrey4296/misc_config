@@ -70,3 +70,10 @@
     (progn
       (assert (listp lst))
       (funcall internal lst))))
+
+
+(defun jg_layer/clear-buffer ()
+    " from https://stackoverflow.com/questions/24565068/ "
+  (interactive)
+  (let ((inhibit-read-only t)) (erase-buffer))
+    )

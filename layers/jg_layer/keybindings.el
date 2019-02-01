@@ -19,5 +19,6 @@
   "r i" 'insert-register
   ;; Expression:
   "x e" 'eval-expression
+  ;; Clearing
+  "b c" 'jg_layer/clear-buffer
   )
-

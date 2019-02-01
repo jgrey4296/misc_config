@@ -327,7 +327,6 @@ you should place your code here."
                 helm-display-buffer-height 30
                 xterm-mouse-mode 0
                 evil-escape-key-sequence "hg"
-                evil-escape-unordered-key-sequence `true
                 version-control-global-margin 0
                 )
   (spacemacs/declare-prefix "x j" "Justify")

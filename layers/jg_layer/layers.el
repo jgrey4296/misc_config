@@ -14,13 +14,14 @@
                                       syntax-checking
                                       version-control
                                       ibuffer
+                                      gtags
+                                      shell
+                                      dired
 
                                       ;;LANGUAGES
                                       sclang
                                       tidal
                                       chuck
-                                      ;;prolog
-                                      ;;smalltalk
                                       erlang
                                       haskell
                                       javascript
@@ -41,4 +42,6 @@
                                       html
                                       shaders
                                       octave
-                                      ))
+                                      ;;prolog
+                                      ;;smalltalk
+))

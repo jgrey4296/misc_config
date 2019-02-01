@@ -3,7 +3,7 @@
 
 (defconst tidal-packages
   '(
-    (tidal-mode :location local)
+    (tidal :location local)
     ;; package from EPA
     ;; eg: some-package
     ;; (some-package :location elpa)
@@ -18,9 +18,9 @@
 ;; (def <layer>/init-<package>)
 ;; (def <layer>/post-init-<package>)
 
-(defun tidal/init-tidal-mode ()
-     (use-package tidal-mode
-       :commands (tidal-mode)
+(defun tidal/init-tidal ()
+     (use-package tidal
+       :commands (tidal-mode tidal-start-haskell)
        ;; Pre-loading setup:
        ;; :init ()
        ;; Post-loading setup:
@@ -29,6 +29,6 @@
        )
      )
 
-(defun tidal/post-init-mode ()
+(defun tidal/post-init-tidal ()
 
   )

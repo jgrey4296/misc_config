@@ -67,6 +67,9 @@
   (evil-ex-define-cmd "to" 'jg_layer/tag-occurances)
   (evil-ex-define-cmd "mw" 'spacemacs/window-manipulation-transient-state/body)
   (evil-ex-define-cmd "mb" 'spacemacs/buffer-transient-state/body)
+  (evil-ex-define-cmd "os" 'org-store-link)
+  (evil-ex-define-cmd "oi" 'org-insert-last-stored-link)
+  (evil-ex-define-cmd "oo" 'org-open-at-point)
 
   ;; TODO: registers
   ;; TODO: yasnippet

@@ -328,10 +328,11 @@ you should place your code here."
                 xterm-mouse-mode 0
                 evil-escape-key-sequence "hg"
                 version-control-global-margin 0
+                ac-use-quick-help t
                 )
   (spacemacs/declare-prefix "x j" "Justify")
-
-
+  (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
+  (global-auto-complete-mode 1)
   )
 ;;------------------------------------------------------------------------------
 ;;------------------------------------------------------------------------------

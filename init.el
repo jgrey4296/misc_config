@@ -331,7 +331,7 @@ you should place your code here."
                 ac-use-quick-help t
                 )
   (spacemacs/declare-prefix "x j" "Justify")
-  (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
+  (define-key ac-mode-map (kbd "M-TAB") 'jg_layer/ac-trigger)
   (global-auto-complete-mode 1)
   )
 ;;------------------------------------------------------------------------------

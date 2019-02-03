@@ -5,6 +5,12 @@
 ;;   (defun spacemacs/<package>-enable () )
 ;;   (defun spacemacs/<package>-disable () ))
 
+(when (configuration-layer/package-usedp 'auto-complete)
+  (defun jg_layer/ac-trigger ()
+    (interactive)
+    (auto-complete)
+    )
+  )
 
 (when (configuration-layer/package-usedp 'org)
   ;;call occur for all tags in the file:

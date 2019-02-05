@@ -12,9 +12,45 @@
     )
   )
 
+
 (when (configuration-layer/package-usedp 'org)
-  ;;call occur for all tags in the file:
+  (defun jg_layer/open_link_in_buffer ()
+    (interactive)
+    (org-open-at-point 'in-emacs)
+    )
+
+
+  (defun jg_layer/list-agenda-files ()
+    """ Creates a temporary, Org-mode buffer with links to agenda files """
+    (interactive)
+    (with-output-to-temp-buffer "*Agenda Files*"
+      (set-buffer "*Agenda Files*")
+      (insert "Agenda Files: ")
+      (insert "\n")
+      (mapc (lambda (x)
+              (let ((file_name (last (split-string x "/" t ".org"))))
+              (insert (format "[[%s][%s]]\n" x file_name))
+              )) org-agenda-files)
+      (org-mode)
+      )
+    )
+
+  (defun jg_layer/tag-occurences-in-open-buffers()
+    """ retrieve all tags in all open buffers, print to a temporary buffer """
+    ;; TODO enable use on subset of buffers, or list of links
+    ;; get all open buffers
+
+    ;; create a map of [tag -> (buffers)]
+
+    ;; print into a new temp buffer
+    ;; ;; sideways bar chart of [tag_link_to_tag_files_list -> count ]
+    ;; ;; A Heading with links to the files
+    (print "Not Implemented Yet")
+    ;; buffer-list -> filter -> use
+    )
+
   (defun jg_layer/tag-occurances ()
+    """ call occur for all tags in the file """
     (interactive)
     ;;save eventually to a new buffer
     (with-output-to-temp-buffer "*tags*"

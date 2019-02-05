@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: svm
 # key: sklearn.svm
+# group: machine learning
 # --
 import sklearn
 import numpy as np

@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: sql.error
 # key: sql.error
+# group: sql
 # --
 try:
     $1

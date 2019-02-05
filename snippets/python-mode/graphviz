@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: graphviz
 # key: graphviz
+# group: visualisation
 # --
 import graphviz
 #Check graphviz.ENGINES

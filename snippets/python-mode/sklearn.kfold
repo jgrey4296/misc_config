@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: sklearn.kfold
 # key: sklearn.kfold
+# group: machine learning
 # --
 from sklearn.model_selection import KFold, cross_val_score
 N = 3

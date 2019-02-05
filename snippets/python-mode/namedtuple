@@ -1,5 +1,6 @@
 # -*- mode: snippet -*-
 # name: namedtuple
 # key: namedtuple
+# group: data structures
 # --
 from collections import namedtuple

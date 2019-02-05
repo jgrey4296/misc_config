@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: sql.execute
 # key: sql.execute
+# group: sql
 # --
 cur.execute("$1")
 #cur.executemany("statement",list)

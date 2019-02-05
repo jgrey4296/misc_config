@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: cairo
 # key: cairo
+# group: cairo
 # --
 #import cairocffi as cairo #For py 3.6
 import cairo               #for py 3.5

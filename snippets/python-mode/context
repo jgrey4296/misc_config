@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: context
 # key: context
+# group: contextual
 # --
 def __enter__(self):
     #return self

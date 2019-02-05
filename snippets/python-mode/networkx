@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: networkx
 # key: networkx
+# group: data structures
 # --
 import networkx as nx
 

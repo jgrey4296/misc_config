@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: matplotlib
 # key: matplotlib
+# group: visualisation
 # --
 import matplotlib
 import matplotlib.pyplot as plt

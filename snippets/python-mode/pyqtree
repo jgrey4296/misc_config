@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: pyqtree
 # key: pyqtree
+# group: data structures
 # --
 import pyqtree
 

@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: sklearn.ica
 # key: sklearn.ica
+# group: machine learning
 # --
 from sklearn import decomposition
 

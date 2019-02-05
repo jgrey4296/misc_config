@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: sklearn.logistic
 # key: sklearn.logistic
+# group: machine learning
 # --
 #For Logistic Regression:
 from sklearn import linear_model

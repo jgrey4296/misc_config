@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: loglib
 # key: loglib
+# group: debugging
 # --
 import logging as root_logger
 logging = root_logger.getLogger(__name__)

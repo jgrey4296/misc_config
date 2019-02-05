@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: makegif
 # key: makegif
+# group: visualisation
 # --
 
 #---------- Logging

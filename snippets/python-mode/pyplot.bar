@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: pyplot.bar
 # key: pyplot.bar
+# group: visualisation
 # --
 
 def barplot(data, ylabel, xlabel, title):
@@ -8,7 +9,7 @@ def barplot(data, ylabel, xlabel, title):
     data_l = list(data.items())
     data_l.sort(key=lambda x: x[1])
     pos = np.arange(len(data_l))
-    
+
     figure, axes = plt.subplot()
     axes.bar(pos, [x[1] for x in data_l], align='center')
     axes.set_xticks(pos)
@@ -18,4 +19,3 @@ def barplot(data, ylabel, xlabel, title):
     axes.set_title(title)
 
     return (figure, axes)
-

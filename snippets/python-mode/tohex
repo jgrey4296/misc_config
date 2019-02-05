@@ -1,5 +1,6 @@
 # -*- mode: snippet -*-
 # name: tohex
 # key: tohex
+# group: math
 # --
 format($1,'02x')$0

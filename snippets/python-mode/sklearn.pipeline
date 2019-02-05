@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: sklearn.pipeline
 # key: sklearn.pipeline
+# group: machine learning
 # --
 from sklearn import linear_model, decomposition
 from sklearn.pipeline import Pipeline

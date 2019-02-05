@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: sklearn
 # key: sklearn
+# group: machine learning
 # --
 import sklearn
 from sklearn import svm

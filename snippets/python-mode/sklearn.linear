@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: sklearn.linear_model
 # key: sklearn.linear
+# group: machine learning
 # --
 #Linear Regression
 from sklearn import linear_model

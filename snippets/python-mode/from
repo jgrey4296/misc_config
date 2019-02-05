@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: from
 # key: from
+# group: imports
 # --
 from $1 import $2
 $0

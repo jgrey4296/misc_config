@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: argparse
 # key: argparse
+# group: arguments 
 # --
 import argparse
 

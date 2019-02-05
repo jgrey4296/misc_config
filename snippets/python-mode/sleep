@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: sleep
 # key: sleep
+# group: time
 # --
 import time
 

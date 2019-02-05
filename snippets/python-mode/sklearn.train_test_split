@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: sklearn.train_test_split
 # key: sklearn.train_test_split
+# group: machine learning
 # --
 import numpy as np
 #Proportion to use:

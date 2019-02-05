@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: polynomial_1
 # key: polynomial_1
+# group: math
 # --
 #An example shaping function
 def shape(x): return (4/9 * pow(x,6)) - (17/9 * pow(x,4)) + (22/9 * pow(x,2))

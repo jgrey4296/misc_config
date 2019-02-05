@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: regexp
 # key: regexp
+# group: parsing
 # --
 import re
 

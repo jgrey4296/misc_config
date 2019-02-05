@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: ngrams
 # key: ngrams
+# group: nltk
 # --
 from nltk import ngrams
 sentence = "This is a sentence to test ngrammizing on"

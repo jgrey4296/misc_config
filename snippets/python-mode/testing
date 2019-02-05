@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: testing
 # key: testing
+# group: testing
 # --
 import unittest
 import logging

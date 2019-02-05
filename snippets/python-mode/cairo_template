@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: cairo_template
 # key: cairo_template
+# group: cairo
 # --
 import sys
 import time

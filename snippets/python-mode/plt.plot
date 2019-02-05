@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: pyplot.plot
 # key: plt.plot
+# group: visualisation
 # --
 
 #see plt.format snippet

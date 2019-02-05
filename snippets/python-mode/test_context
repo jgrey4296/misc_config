@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: test_context
 # key: test
+# group: testing
 # --
 import os
 import sys

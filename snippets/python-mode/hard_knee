@@ -1,8 +1,8 @@
 # -*- mode: snippet -*-
 # name: hard_knee
 # key: hard_knee
-# --
-
+# group: math
+#  --
 #A Simple hard knee transfer function
 # Input: np.array(), 1d,
 # Threshold

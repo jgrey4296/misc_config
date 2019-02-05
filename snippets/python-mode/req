@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: req
 # key: req
+# group: I/O
 # --
 head = {$1} 
 param = {$2} #http://httpbin.org/get?key2=value2&key1=value1

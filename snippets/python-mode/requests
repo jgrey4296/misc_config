@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: requests
 # key: requests
+# group: I/O
 # --
 import requests
 

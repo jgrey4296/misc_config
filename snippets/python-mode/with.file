@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: with.file
 # key: with.file
+# group: I/O
 # --
 from os.path import join, isfile, exists, isdir, splitext, expanduser
 from os import listdir

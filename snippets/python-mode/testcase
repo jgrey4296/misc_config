@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: testcase
 # key: testcase
+# group: testing
 # --
 def test_$1(self):
     $2

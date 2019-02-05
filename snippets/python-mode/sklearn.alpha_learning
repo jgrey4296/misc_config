@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: sklearn.alpha_learning
 # key: sklearn.alpha_learning
+# group: machine learning
 # --
 #Showing how to get the best alpha for a model:
 estimator = None

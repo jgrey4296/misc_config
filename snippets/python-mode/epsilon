@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: epsilon
 # key: epsilon
+# group: math
 # --
 import sys
 sys.float_info.epsilon

@@ -1,5 +1,6 @@
 # -*- mode: snippet -*-
 # name: pyplot.styles
 # key: pyplot.styles
+# group: visualisation
 # --
 plt.style.use('seaborn-whitegrid')

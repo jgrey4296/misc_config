@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: midi
 # key: midi
+# group: misc
 # --
 from midiutil import MIDIFile
 # https://midiutil.readthedocs.io/en/latest/

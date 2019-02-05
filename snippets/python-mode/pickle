@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: pickle
 # key: pickle
+# group: I/O
 # --
 import pickle
 #with.file

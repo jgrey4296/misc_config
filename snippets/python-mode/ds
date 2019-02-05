@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: Doc String shortcut
 # key: ds
+# group: comments
 # --
 """
 $0

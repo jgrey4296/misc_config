@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: sklearn.agglomeration
 # key: sklearn.agglomeration
+# group: machine learning
 # --
 from sklearn import cluster
 from sklearn.feature_extraction.image import grid_to_graph

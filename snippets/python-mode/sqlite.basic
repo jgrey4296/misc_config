@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: sqlite
 # key: sqlite.basic
+# group: sql
 # --
 import sqlite3 as sql
 

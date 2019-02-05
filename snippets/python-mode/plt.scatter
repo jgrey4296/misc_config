@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: pyplot.scatter
 # key: plt.scatter
+# group: visualisation
 # --
 x = np.array([])
 y = np.array([])

@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: sklearn.error
 # key: sklearn.error
+# group: machine learning
 # --
 import numpy as np
 #Mean Square Error Measurement:

@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: sklearn.knn
 # key: sklearn.knn
+# group: machine learning
 # --
 #K-Nearest Neighbours classifier
 from sklearn.neighbors import KNeighborsClassifier

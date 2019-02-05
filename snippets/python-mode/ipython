@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: ipython
 # key: ipython
+# group: debugging
 # --
 import IPython
 #https://ipython.readthedocs.io/en/stable/config/options/terminal.html

@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: testing.testsuite
 # key: testing.testsuite
+# group: testing
 # --
 import unittest
 import logging

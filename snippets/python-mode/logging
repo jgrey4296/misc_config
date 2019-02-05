@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: logging
 # key: logging
+# group: debugging
 # --
 # Setup root_logger:
 import logging as root_logger

@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: pillow
 # key: pillow
+# group: I/O
 # --
 import PIL
 from PIL import Image

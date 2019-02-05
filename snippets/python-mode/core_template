@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: core.template
 # key: core.template
+# group: file-starters
 # --
 """
     $1

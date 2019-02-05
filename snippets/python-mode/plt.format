@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: pyplot.format
 # key: plt.format
+# group: visualisation
 # --
 """
     Specify only a marker for scatter plots.

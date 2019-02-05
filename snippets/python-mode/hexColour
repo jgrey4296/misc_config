@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: hexColour
 # key: hexcolour
+# group: math
 # --
 def arrToHexColour(arr):
     """ Convert a triple of 0.0-1.0 values to hex """

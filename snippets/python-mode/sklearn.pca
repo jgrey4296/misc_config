@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: sklearn.pca
 # key: sklearn.pca
+# group: machine learning
 # --
 from sklearn import decomposition
 

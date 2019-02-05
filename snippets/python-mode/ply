@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: ply
 # key: ply
+# group: parsing
 # --
 import ply.lex as lex
 import ply.yacc as yacc

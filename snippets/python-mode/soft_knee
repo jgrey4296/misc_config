@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: soft_knee
 # key: soft_knee
+# group: math
 # --
 
 # A Simple soft_knee compression curve
@@ -17,8 +18,7 @@ def soft_knee(i,t,r,k):
     k_div_amnt = 2 * k
     k_mod = (k_f * intermediate_pow) / k_div_amnt
     k_red = inKnee + k_mod
-    
+
     over_red = t + ((over - t)) / r
 
     return np.concatenate((under,k_red,over_red))
-

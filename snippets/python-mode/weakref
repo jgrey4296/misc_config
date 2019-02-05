@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: weakref
 # key: weakref
+# group: data structures
 # --
 import weakref
 #see https://docs.python.org/3/library/weakref.html#module-weakref

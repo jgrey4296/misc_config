@@ -8,6 +8,7 @@
 
 (global-set-key (kbd "C-c [") 'jg_layer/insert-lparen)
 (global-set-key (kbd "C-c ]") 'jg_layer/insert-rparen)
+(spacemacs/declare-prefix "x i" "Indent")
 (spacemacs/set-leader-keys
   ;; Registers:
   "r v" 'view-register
@@ -21,4 +22,10 @@
   "x e" 'eval-expression
   ;; Clearing
   "b c" 'jg_layer/clear-buffer
-  )
+  ;; Indenting
+  "x i c" 'indent-to-column
+  ;; toggles
+  "t o" 'dired-omit-mode
+  ;; searching
+  "s o" 'occur
+)

@@ -16,7 +16,9 @@
                                       ibuffer
                                       gtags
                                       shell
-                                      dired
+                                      twitter
+                                      cscope
+                                      gtags
 
                                       ;;LANGUAGES
                                       sclang

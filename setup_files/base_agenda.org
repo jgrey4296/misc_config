@@ -1,0 +1,247 @@
+* Base Agenda
+  :LOGBOOK:
+  CLOCK: [2019-02-05 Tue 11:52]--[2019-02-05 Tue 12:17] =>  0:25
+  CLOCK: [2019-02-05 Tue 11:19]--[2019-02-05 Tue 11:44] =>  0:25
+  CLOCK: [2019-02-05 Tue 10:40]--[2019-02-05 Tue 11:05] =>  0:25
+  CLOCK: [2019-02-05 Tue 10:07]--[2019-02-05 Tue 10:32] =>  0:25
+  CLOCK: [2019-02-05 Tue 09:30]--[2019-02-05 Tue 09:55] =>  0:25
+  CLOCK: [2019-02-04 Mon 15:17]--[2019-02-04 Mon 15:42] =>  0:25
+  CLOCK: [2019-02-04 Mon 14:09]--[2019-02-04 Mon 14:34] =>  0:25
+  :END:
+  The one hard coded to be initialised
+
+
+
+** [[~/github/writing/paper_notes/index.org::*Summary%20Index][Summary Index]]
+
+** Coding
+
+*** [[~/github/languageLearning][~/github/languageLearning]] :javascript:python:multiple_languages:lisp:supercollider:tidal:learning:notes:prolog:misc:
+
+*** Javascript / Web
+
+**** [[~/github/BehaviourTree][~/github/BehaviourTree]]     :abl:behaviour_tree:incomplete:old:code:
+     
+
+**** [[~/github/abl_Antlr_JS][~/github/abl_Antlr_JS]]       :abl:incomplete:old:javascript:parsing:
+
+
+**** [[~/github/battleSystem][~/github/battleSystem]] :turn_based:incomplete:old:pokemon:javascript:
+
+
+**** [[~/github/canvasExperiments][~/github/canvasExperiments]] :web:graphical:image:old:javascript:code:
+
+
+**** [[~/github/creditSystem][~/github/creditSystem]]       :credit:old:javascript:code:incomplete:
+
+
+**** [[~/github/exclusionLogic][~/github/exclusionLogic]]    :obsolete:incomplete:javascript:parsing:
+
+**** [[~/github/hexagonAITest][~/github/hexagonAITest]] :front_end:incomplete:javascript:old:parsing:web:
+
+
+**** [[~/github/jg_shell][~/github/jg_shell]]        :shell:semi:active:javascript:library:web:
+
+
+**** [[~/github/jsRete][~/github/jsRete]]     :rete:production_system:web:javascript:library:
+
+
+**** [[~/github/languageRules][~/github/languageRules]]     :obsolete:incomplete:grammar:javascript:
+
+
+**** [[~/github/mordor-alike][~/github/mordor-alike]] :nemesis:mordor:javascript:obsolete:incomplete:grammar:
+
+
+**** [[~/github/newspaper_gen][~/github/newspaper_gen]] :javascript:generative:front_end:newspaper:web:procedural:
+
+
+**** [[~/github/phaserGame][~/github/phaserGame]] :phaser:inactive:web:javascript:game:obsolete:old:
+
+
+**** [[~/github/preactShell][~/github/preactShell]]            :web:active:front_end:shell:preact:
+
+*** Python
+
+**** [[~/github/documentUnitTester][~/github/documentUnitTester]] :writing:support:tool:test_driven_development:python:
+
+
+**** [[~/github/heuristicRBTreeWeighting][~/github/heuristicRBTreeWeighting]]  :obsolete:incomplete:old:python:
+
+
+**** [[~/github/iELPy][~/github/iELPy]]                 :obsolete:incomplete:python:parsing:
+
+
+**** [[~/github/islandGen][~/github/islandGen]]                        :incomplete:python:image:
+
+
+**** [[~/github/bookmark_organiser][~/github/bookmark_organiser]] :data_analysis:python:tool:web:bookmarks:
+
+
+**** [[~/github/cairoCity][~/github/cairoCity]] :cairo:graphical:image:generative:front_end:layers:city:python:
+
+
+**** [[~/github/cairoSplines][~/github/cairoSplines]]        :cairo:graphical:active:layers:python:
+
+
+**** [[~/github/cairo_utils][~/github/cairo_utils]] :graphical:active:dcel:voronoi:cairo:library:tool:
+
+
+**** [[~/github/nytimes_scraper][~/github/nytimes_scraper]] :data_analysis:grammar:scraper:dataset:nytimes:
+
+
+**** [[~/github/pollyTest][~/github/pollyTest]] :proof_of_concept:web:python:test_driven_development:AWS:
+
+
+**** [[~/github/pyAStar][~/github/pyAStar]]            :library:pathfinding:maze:astar:python:
+
+
+**** [[~/github/pythonRuleEngine][~/github/pythonRuleEngine]] :python:important:todo:meta:simulation:institutions:exclusion_logic:library:parsing:production_system:rules:
+
+*** Prolog
+
+*** Unity
+
+*** Supercollider / Tidal
+    
+*** Haskell
+    
+*** To Clean
+    
+
+**** [[~/github/dotaScraper][~/github/dotaScraper]]                                 :obsolete:old:
+
+
+**** [[~/github/emacsModeExample][~/github/emacsModeExample]]                 :obsolete:old:incomplete:
+
+
+**** [[~/github/happiton][~/github/happiton]]                  :obsolete:incomplete:javascript:
+
+
+**** [[~/github/cairoSine][~/github/cairoSine]]  :cairo:obsolete:incomplete:old:graphical:image:
+
+
+** Annotations / Examples
+
+** Datasets
+   To add: don't startve, and other games
+   SFAM, Quests, Changelogs?, speech acts , NYT, Social Physics Datasets
+
+*** [[~/github/jg-SpaceBase-DF9][~/github/jg-SpaceBase-DF9]]  :simulation:lua:to_analyse:codebase:game:
+
+    
+** Writing
+
+*** TODO Dissertation
+**** Prior Work and Context
+     Sociology/ Anthropology / Ethnology
+     Economics
+     Critical Theory
+     AI and MAS
+     Computational Media
+
+     Identification of Hole in Literature:
+
+**** Methodology
+     Phenomenology and Grounded Theory
+     Inhabited Institutions
+     Computational Media and code studies
+
+     Resulting Methodology:
+
+**** Existing in the World
+     Fiction
+     Non-Fiction
+     Theory
+     Computational
+
+     Result: Dataset
+
+**** Pre-formal Theory
+     Analysis of existing forms and examples
+     Source Code Analysis
+     Grounded Theory Coding
+
+     Result:
+
+**** Formal Calculus
+     Delegation Logic, Monads, Exclusion logic,
+     Temporal Calculus etc
+
+     Result:
+
+**** Computational Implementation
+     consideration of Cif, Versu, Rete, Neural Networks, haskell, monad transformers
+     Tidal and ChuCk, Meta/Reflective towers, MOISE
+
+     result: python layered DSL Production System, temporal, reflective, typed? modular
+
+**** Authoring / UX Considerations
+     WebShell, prior authoring programs, programming, netlogo,
+     user interfaces, live coding
+     emacs, spacemacs
+
+**** Resulting Experiences
+     city map, newspaper, soundscape, vault, street, bot?
+
+     Result: 
+
+**** Rebuttal of Criticisms
+     Games criticisms
+     Theory criticisms
+     Engineering criticisms
+     
+**** Reflection
+
+**** Title
+
+
+**** Introduction
+**** Abstract
+
+*** [[~/github/jgrey4296.github.io][~/github/jgrey4296.github.io]] :important:todo:target:blog:web:writing:
+
+
+*** [[~/github/jsons][~/github/jsons]]                                        :json:writing:
+
+
+*** [[~/github/writing][~/github/writing]]                                   :writing:generic:
+
+
+
+** Misc
+*** [[~/github/jg_emacs_files][~/github/jg_emacs_files]]                           :lisp:setup:emacs:
+
+*** [[~/github/jg_shell_files][~/github/jg_shell_files]]                                 :bash:setup:
+
+*** [[~/github/metasteam][~/github/metasteam]] :inactive:games:library:games:UI:web:javascript:python:data_analysis:multiple_languages:
+
+** TODO Twittering mode image upload extension
+   add this as a set of custom functions, post-extending the twitter layer
+
+*** extend twittering-edit-mode-map to insert a media id
+    need to specify a file to upload. how?
+
+*** write function for inserting media id into buffer
+    store media ids as local variables to the tweet buffer
+    
+**** write verify function
+     check size of image/gif/video
+     check format
+
+**** extend twittering-call-api-with-account-in-api1.1
+
+**** extend twittering-http-post
+     making sure to change the host to the upload target
+     then method to init then append then finalize
+     loading the specified file into a temporary buffer,
+     then encoding as base64, getting size, chunking
+     and sending.
+     
+     sentinel passed will be a continuation to send next chunk
+     or repeat current, or finalize if no more chunks.
+     (this will need the base64 encoded temp buffer accessible
+     or stored in a variable. which?
+
+*** have twittering-edit-post-status detect media ids
+    retrieve the buffer local variable of media ids
+    add to options passed to twittering-call-api

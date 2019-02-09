@@ -1,0 +1,151 @@
+* Main Archive
+
+** DONE [#C] [[~/github/preactShell][WebShell Preact FrontEnd]]                                           :javascript:webshell:web:active:front_end:shell:preact:
+   CLOSED: [2019-02-07 Thu 17:08]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2019-02-07 Thu 18:17
+   :ARCHIVE_FILE: ~/.spacemacs.d/setup_files/base_agenda.org
+   :ARCHIVE_OLPATH: Base Agenda/Programming/Javascript / Web
+   :ARCHIVE_CATEGORY: base_agenda
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#C] [[~/github/jg_shell][WebShell Backend]]                                                   :library:web:javascript:active:shell:semi:webshell:
+   CLOSED: [2019-02-07 Thu 17:08]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2019-02-07 Thu 18:17
+   :ARCHIVE_FILE: ~/.spacemacs.d/setup_files/base_agenda.org
+   :ARCHIVE_OLPATH: Base Agenda/Programming/Javascript / Web
+   :ARCHIVE_CATEGORY: base_agenda
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [#C] [[~/github/jsRete][WebShell Rete Library]]                                              :library:web:javascript:production_system:rete:webshell:
+   CLOSED: [2019-02-07 Thu 17:08]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2019-02-07 Thu 18:17
+   :ARCHIVE_FILE: ~/.spacemacs.d/setup_files/base_agenda.org
+   :ARCHIVE_OLPATH: Base Agenda/Programming/Javascript / Web
+   :ARCHIVE_CATEGORY: base_agenda
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [[~/github/languageRules][Language Rules Idea]]                                                     :obsolete:incomplete:grammar:javascript:
+   CLOSED: [2019-02-07 Thu 17:09]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2019-02-07 Thu 18:17
+   :ARCHIVE_FILE: ~/.spacemacs.d/setup_files/base_agenda.org
+   :ARCHIVE_OLPATH: Base Agenda/Programming/Javascript / Web
+   :ARCHIVE_CATEGORY: base_agenda
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [[~/github/phaserGame][Phaser Game Base]]                                                        :phaser:inactive:web:javascript:game:obsolete:old:
+   CLOSED: [2019-02-07 Thu 17:09]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2019-02-07 Thu 18:17
+   :ARCHIVE_FILE: ~/.spacemacs.d/setup_files/base_agenda.org
+   :ARCHIVE_OLPATH: Base Agenda/Programming/Javascript / Web
+   :ARCHIVE_CATEGORY: base_agenda
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [[~/github/BehaviourTree][Behaviour Tree]]                                                          :abl:behaviour_tree:incomplete:old:code:
+   CLOSED: [2019-02-07 Thu 17:08]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2019-02-07 Thu 18:17
+   :ARCHIVE_FILE: ~/.spacemacs.d/setup_files/base_agenda.org
+   :ARCHIVE_OLPATH: Base Agenda/Programming/Javascript / Web
+   :ARCHIVE_CATEGORY: base_agenda
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [[~/github/abl_Antlr_JS][ANTLR ABL Parser]]                                                        :abl:incomplete:old:javascript:parsing:
+   CLOSED: [2019-02-07 Thu 17:08]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2019-02-07 Thu 18:17
+   :ARCHIVE_FILE: ~/.spacemacs.d/setup_files/base_agenda.org
+   :ARCHIVE_OLPATH: Base Agenda/Programming/Javascript / Web
+   :ARCHIVE_CATEGORY: base_agenda
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [[~/github/battleSystem][Battlesystem Idea]]                                                       :turn_based:incomplete:old:pokemon:javascript:
+   CLOSED: [2019-02-07 Thu 17:08]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2019-02-07 Thu 18:17
+   :ARCHIVE_FILE: ~/.spacemacs.d/setup_files/base_agenda.org
+   :ARCHIVE_OLPATH: Base Agenda/Programming/Javascript / Web
+   :ARCHIVE_CATEGORY: base_agenda
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [[~/github/canvasExperiments][Canvas Experiments]]                                                      :web:graphical:image:old:javascript:code:
+   CLOSED: [2019-02-07 Thu 17:08]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2019-02-07 Thu 18:17
+   :ARCHIVE_FILE: ~/.spacemacs.d/setup_files/base_agenda.org
+   :ARCHIVE_OLPATH: Base Agenda/Programming/Javascript / Web
+   :ARCHIVE_CATEGORY: base_agenda
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [[~/github/creditSystem][Credit System Prototype]]                                                 :credit:old:javascript:code:incomplete:
+   CLOSED: [2019-02-07 Thu 17:08]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2019-02-07 Thu 18:17
+   :ARCHIVE_FILE: ~/.spacemacs.d/setup_files/base_agenda.org
+   :ARCHIVE_OLPATH: Base Agenda/Programming/Javascript / Web
+   :ARCHIVE_CATEGORY: base_agenda
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [[~/github/exclusionLogic][Early Exclusion Logic]]                                                   :obsolete:incomplete:javascript:parsing:
+   CLOSED: [2019-02-07 Thu 17:09]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2019-02-07 Thu 18:17
+   :ARCHIVE_FILE: ~/.spacemacs.d/setup_files/base_agenda.org
+   :ARCHIVE_OLPATH: Base Agenda/Programming/Javascript / Web
+   :ARCHIVE_CATEGORY: base_agenda
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [[~/github/iELPy][old iELPy]]                                                               :obsolete:incomplete:python:parsing:
+   CLOSED: [2019-02-07 Thu 17:20]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2019-02-07 Thu 18:17
+   :ARCHIVE_FILE: ~/.spacemacs.d/setup_files/base_agenda.org
+   :ARCHIVE_OLPATH: Base Agenda/Python
+   :ARCHIVE_CATEGORY: base_agenda
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [[~/github/bookmark_organiser][Web bookmark organiser]]                                                  :data_analysis:python:tool:web:bookmarks:
+   CLOSED: [2019-02-07 Thu 17:22]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2019-02-07 Thu 18:17
+   :ARCHIVE_FILE: ~/.spacemacs.d/setup_files/base_agenda.org
+   :ARCHIVE_OLPATH: Base Agenda/Python
+   :ARCHIVE_CATEGORY: base_agenda
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [[~/github/pollyTest][pollyTest]]                                                               :proof_of_concept:web:python:test_driven_development:AWS:
+   CLOSED: [2019-02-07 Thu 17:24]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2019-02-07 Thu 18:17
+   :ARCHIVE_FILE: ~/.spacemacs.d/setup_files/base_agenda.org
+   :ARCHIVE_OLPATH: Base Agenda/Python
+   :ARCHIVE_CATEGORY: base_agenda
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE [[~/github/metasteam][Metasteam]]                                                               :inactive:games:library:UI:web:javascript:python:data_analysis:multiple_languages:
+   CLOSED: [2019-02-07 Thu 17:30]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2019-02-07 Thu 18:17
+   :ARCHIVE_FILE: ~/.spacemacs.d/setup_files/base_agenda.org
+   :ARCHIVE_OLPATH: Base Agenda/Misc
+   :ARCHIVE_CATEGORY: base_agenda
+   :ARCHIVE_TODO: DONE
+   :END:

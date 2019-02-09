@@ -5,6 +5,206 @@
 ;;   (defun spacemacs/<package>-enable () )
 ;;   (defun spacemacs/<package>-disable () ))
 
+
+;;----------------------------------------
+(defun jg_layer/twitter-extend ()
+  (when (configuration-layer/package-usedp 'twittering)
+    (defun jg_layer/twitter-http-chunk-cleanup-sentinel (p s c h)
+      ;; cleanup / refire a chunk sending
+      ;; if a failure occurs:
+      ;; resend the chunk
+      (let ((status (assq 'status h))
+            (finalize (eq 0 (length (assq 'chunks c))))
+            (command (if  finalize "FINALIZE" "APPEND"))
+            (media_id_string (assq 'media_id_string h))
+            (chunks (assq 'chunks c))
+            (chunk (car chunks))
+            (http-parameters '(("command" . ,command)
+                               ("media_id" . ,media_id_string)
+                               ,(if (not finalize) `("media_data" . ,(car chunk)))
+                               ,(if (not finalize) `("segment_index" . ,(cadr chunk)))
+                               ))
+            (additional-info `((account-info ,(assq 'account-info c))
+                               (host ,(assq 'host c))
+                               (format-str ,(assq 'format-str c))
+                               (chunks ,chunks)))
+            )
+	(print (format "Cleanup sentinel: %s  %s" status finalize))
+	(cond
+	 ;; Retry chunk
+	 ((and (> status 300) (not finalize)) (twittering-http-post (assq 'account-info c)
+								    (assq 'host c)
+								    (assq 'method c)
+								    http-parameters
+								    (assq 'format-str c)
+								    additional-info
+								    jg_layer/twitter-http-chunk-sentinel-recursive
+								    jg_layer/twitter-http-chunk-cleanup-sentinel
+								    ))
+	 ;; Finalize attempted, retry status. check processing info for state "in_progress"
+	 ((and finalize (> status 300)) (twittering-http-post (assq 'account-info c)
+                                                              (assq 'host c)
+                                                              (assq 'method c)
+                                                              (cons '("command" . "STATUS") (cdr http-parameters))
+                                                              (assq 'format-str c)
+                                                              additional-info
+                                                              nil
+                                                              jg_layer/twitter-http-chunk-cleanup-sentinel
+                                                              ))
+	 ;; finalize success if success, if no processing_info, or state is "succeeded"
+	 ((and finalize (< status 300)) (print "Add media ID to tweet"))
+	 )
+	)
+      )
+
+    (defun jg_layer/twitter-http-chunk-sentinel-recursive (p s c h)
+      ;; the recursive portion of the chunking upload
+      ;; when no more chunks remain:
+      ;; send a finalize message, repeating a status query until success
+      ;; then insert the media ID to the tweet buffer
+      (assert (and (> (assq 'status h) 200) (< 300 (assq 'status h))))
+      (let ((finalize (eq 1 (length (assq 'chunks c))))
+            (command (if  finalize "FINALIZE" "APPEND"))
+            (media_id_string (assq 'media_id_string h))
+            (chunks (if (not finalize) (cdr (assq 'chunks c)) '()))
+            (chunk (if (not finalize) (car chunks) nil))
+            (http-parameters '(("command" . ,command)
+                               ("media_id" . ,media_id_string)
+                               ,(if (not finalize) `("media_data" . ,(car chunk)))
+                               ,(if (not finalize) `("segment_index" . ,(cadr chunk)))
+                               ))
+            (additional-info `((account-info ,(assq 'account-info c))
+                               (host ,(assq 'host c))
+                               (format-str ,(assq 'format-str c))
+                               (chunks ,chunks)))
+            )
+	(print (format "Recursive Sentinel: %s" command))
+	(twittering-http-post (assq 'account-info c)
+                              (assq 'host c)
+                              (assq 'method c)
+                              http-parameters
+                              (assq 'format-str c)
+                              additional-info
+                              (if (not finalize) jg_layer/twitter-http-chunk-sentinel-recursive nil)
+                              jg_layer/twitter-http-chunk-cleanup-sentinel
+                              )
+	)
+     )
+
+    (defun jg_layer/twitter-http-chunk-sentinel (p s c h)
+      ;; Get the additional-info needed from connection-info
+      ;; ie: get chunks and
+      (let ((command "APPEND")
+            (media_id_string (assq 'media_id_string h))
+            (chunk (car (assq 'chunks c)))
+            (chunk_index (car chunk))
+            (chunk_data (cadr chunk))
+            (http-parameters '(("command" . ,command)
+                               ("media_id" . ,media_id_string)
+                               ("media_data" . ,chunk_data)
+                               ("segment_index" . ,chunk_index)
+                               ))
+            (additional-info `((account-info ,(assq 'account-info c))
+                               (host ,(assq 'host c))
+                               (format-str ,(assq 'format-str c))
+                               (chunks ,(assq 'chunks c))))
+            )
+	(print "Initial Sentinel")
+	(twittering-http-post (assq 'account-info c)
+                              (assq 'host c)
+                              (assq 'method c)
+                              http-parameters
+                              (assq 'format-str c)
+                              additional-info
+                              jg_layer/twitter-http-chunk-sentinel-recursive
+                              )
+	)
+      )
+
+    (defun jg_layer/twitter-open-and-encode-picture (candidate)
+      """ read in the file, encode it, and give to uploading
+		returns a tuple of (list((index . chunk)) file_size)
+ """
+      (assert (file-exists-p candidate))
+      ;; TODO add size and file type checks
+
+      (print "Opening and Encoding Picture")
+      (with-temp-buffer
+	(insert-file-contents candidate)
+	(let* ((encoded (base64-encode-string (buffer-string)))
+               ;;size
+               (fsize (f-size candidate))
+               ;; chunks - reduce over encoded grabbing size X substrings
+               (chunks '())
+               (startPos 0)
+               (endOfString (length encoded))
+               (chunkSize 1000)
+               (lastChunkIndex 0)
+               )
+          (while (< (+ startPos chunkSize) endOfString)
+            ;;get next chunk
+            (let ((endOfChunk (+ startPos chunkSize)))
+              (setq 'chunks (cons `(,lastChunkIndex . ,(substring-no-properties encoded startPos endOfChunk)) chunks)
+                    'lastChunkIndex (+ 1 lastChunkIndex)
+                    'startPos endOfChunk
+                    )
+              )
+            )
+          (set 'chunks (cons `(,lastChunkIndex . ,(substring-no-properties encoded startPos endOfString)) chunks))
+          `(,chunks ,fsize))))
+
+
+    (defun jg_layer/twitter-upload-image (candidate)
+      """ init, chunk and finalize an image upload, return media id """
+      (let* ((data (jg_layer/twitter-open-and-encode-picture candidate))
+             (data_chunks (car data))
+             (data_size (cadr data))
+             (account-info-alist (twittering-get-main-account-info))
+             (host "upload.twitter.com/1.1/media")
+
+             (method "upload")
+             (format-str "json")
+             (media-type "jpg")
+             (http-parameters `(("command" . "INIT")
+				("total_bytes" . (number-to-string data_size))
+				("media_type" . "image/png") ;; TODO do this programmatically
+				))
+             (additional-info `((account-info ,account-info-alist)
+				(host ,host)
+				(format-str ,format-str)
+				(chunks data_chunks))
+                              )
+             )
+	(print "Starting Upload")
+	;; start the upload
+	(twittering-http-post account-info-alist
+                              host
+                              method
+                              http-parameters
+                              format-str
+                              additional-info
+                              jg_layer/twitter-http-init-sentinel
+                              )
+	)
+      )
+
+    ;; implement the action properly
+    (setq-default jg_layer/twitter-image-helm-source
+                  (helm-make-source "Find Image" 'helm-source-ffiles
+				    :action '(("action" . jg_layer/twitter-upload-image))))
+
+    (defun jg_layer/twitter-add-picture ()
+      (interactive)
+      (helm :sources jg_layer/twitter-image-helm-source
+            :input "./"))
+
+    (let ((km twittering-edit-mode-map))
+      (define-key km (kbd "C-c C-o") 'jg_layer/twitter-add-picture)
+      )
+
+    )
+)
+;;----------------------------------------
 (when (configuration-layer/package-usedp 'auto-complete)
   (defun jg_layer/ac-trigger ()
     (interactive)

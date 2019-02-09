@@ -212,13 +212,13 @@
     )
   )
 
-
+;;----------------------------------------
 (when (configuration-layer/package-usedp 'org)
   (defun jg_layer/open_link_in_buffer ()
+    """ a util function to force links to be open in emacs  """
     (interactive)
     (org-open-at-point 'in-emacs)
     )
-
 
   (defun jg_layer/list-agenda-files ()
     """ Creates a temporary, Org-mode buffer with links to agenda files """

@@ -27,5 +27,5 @@
   ;; toggles
   "t o" 'dired-omit-mode
   ;; searching
-  "s o" 'occur
+  "s o" 'helm-occur
 )

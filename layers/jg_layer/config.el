@@ -1,7 +1,6 @@
 ;; jg_emacs config.el
 ;; loaded fourth
 
-(xterm-mouse-mode 0)
 (setq-default
  ;; AUTO SAVES
  auto-save-file-name-transforms (quote ((".*" "~/.emacs.d/autosaves/`" t)))

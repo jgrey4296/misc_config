@@ -14,14 +14,15 @@
     yasnippet
     abbrev
     evil
-    (smartparens :excluded t)
     ibuffer
     fci
     rainbow-mode
     (shell :lcoation builtin)
     (git-gutter :excluded t)
     (git-gutter+ :excluded t)
-    )
+    (xterm-mouse-mode :excluded t)
+    (smartparens :excluded t)
+)
   )
 
 ;; (defun <layer>/pre-init-<package>)
@@ -65,8 +66,9 @@
   ;; definition of said commands, adapted from evil-maps
 
   (evil-ex-define-cmd "cl" 'spacemacs/comment-or-uncomment-lines)
-  (evil-ex-define-cmd "t[ag]" 'org-set-tags-command)
+  (evil-ex-define-cmd "t[ag]" 'jg_layer/org-tagging-helm-start)
   (evil-ex-define-cmd "to" 'jg_layer/tag-occurances)
+  (evil-ex-define-cmd "toa" 'jg_layer/tag-occurences-in-open-buffers)
   (evil-ex-define-cmd "mw" 'spacemacs/window-manipulation-transient-state/body)
   (evil-ex-define-cmd "mb" 'spacemacs/buffer-transient-state/body)
   (evil-ex-define-cmd "os" 'org-store-link)
@@ -183,11 +185,13 @@
   ;;ORG SETUP
   (setq-default
    org-agenda-files `(,(expand-file-name "~/.spacemacs.d/setup_files/base_agenda.org"))
+   org-archive-location (string-join `(,(expand-file-name "~/.spacemacs.d/setup_files/archive.org")
+                                       "* Main Archive") "::")
    org-fast-tag-selection-single-key nil
    org-from-is-user-regexp "\\<John Grey\\>"
    org-group-tags nil
    org-use-fast-tag-selection t
-   org-tags-column -80
+   org-tags-column 80
    )
 
   ;; add in keybinding to call tag-occurances
@@ -201,6 +205,7 @@
     "o T"     'org-todo-list
     ;; TAGS
     "o t o"   'jg_layer/tag-occurances
+    "o t a o" 'jg_layer/tag-occurences-in-open-buffers
     "o t v"   'org-tags-view
     "o t s"   'org-set-tags
     ;; AGENDA

@@ -1,5 +1,18 @@
 * Base Agenda
   :LOGBOOK:
+  CLOCK: [2019-02-08 Fri 20:33]--[2019-02-08 Fri 20:58] =>  0:25
+  CLOCK: [2019-02-08 Fri 19:55]--[2019-02-08 Fri 20:20] =>  0:25
+  CLOCK: [2019-02-08 Fri 19:21]--[2019-02-08 Fri 19:46] =>  0:25 
+  CLOCK: [2019-02-07 Thu 18:34]--[2019-02-07 Thu 18:59] =>  0:25
+  CLOCK: [2019-02-07 Thu 16:41]--[2019-02-07 Thu 17:06] =>  0:25
+  CLOCK: [2019-02-07 Thu 10:56]--[2019-02-07 Thu 11:21] =>  0:25
+  CLOCK: [2019-02-06 Wed 09:57]--[2019-02-06 Wed 10:22] =>  0:25
+  CLOCK: [2019-02-06 Wed 09:26]--[2019-02-06 Wed 09:51] =>  0:25
+  CLOCK: [2019-02-06 Wed 08:58]--[2019-02-06 Wed 09:23] =>  0:25
+  CLOCK: [2019-02-05 Tue 20:30]--[2019-02-05 Tue 20:55] =>  0:25
+  CLOCK: [2019-02-05 Tue 19:39]--[2019-02-05 Tue 20:04] =>  0:25
+  CLOCK: [2019-02-05 Tue 18:53]--[2019-02-05 Tue 19:18] =>  0:25
+  CLOCK: [2019-02-05 Tue 18:19]--[2019-02-05 Tue 18:44] =>  0:25
   CLOCK: [2019-02-05 Tue 11:52]--[2019-02-05 Tue 12:17] =>  0:25
   CLOCK: [2019-02-05 Tue 11:19]--[2019-02-05 Tue 11:44] =>  0:25
   CLOCK: [2019-02-05 Tue 10:40]--[2019-02-05 Tue 11:05] =>  0:25
@@ -8,130 +21,89 @@
   CLOCK: [2019-02-04 Mon 15:17]--[2019-02-04 Mon 15:42] =>  0:25
   CLOCK: [2019-02-04 Mon 14:09]--[2019-02-04 Mon 14:34] =>  0:25
   :END:
-  The one hard coded to be initialised
+**  [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Text.html#Text][emacs lisp text manipulation]]
+** TODO [#A] Reply to Aaron
+** TODO [[~/github/writing/paper_notes/index.org::*Summary%20Index][Summary Index]]
+** [[~/github/languageLearning][Misc Language Repo]]                                                           :javascript:python:multiple_languages:lisp:supercollider:tidal:learning:notes:prolog:misc:
 
 
-
-** [[~/github/writing/paper_notes/index.org::*Summary%20Index][Summary Index]]
-
-** Coding
-
-*** [[~/github/languageLearning][~/github/languageLearning]] :javascript:python:multiple_languages:lisp:supercollider:tidal:learning:notes:prolog:misc:
-
+** -----------------------------------------------------------------------------
+** Programming
+*** TODO [[~/.spacemacs.d/layers/trie][Trie-layer]]
 *** Javascript / Web
-
-**** [[~/github/BehaviourTree][~/github/BehaviourTree]]     :abl:behaviour_tree:incomplete:old:code:
-     
-
-**** [[~/github/abl_Antlr_JS][~/github/abl_Antlr_JS]]       :abl:incomplete:old:javascript:parsing:
-
-
-**** [[~/github/battleSystem][~/github/battleSystem]] :turn_based:incomplete:old:pokemon:javascript:
-
-
-**** [[~/github/canvasExperiments][~/github/canvasExperiments]] :web:graphical:image:old:javascript:code:
-
-
-**** [[~/github/creditSystem][~/github/creditSystem]]       :credit:old:javascript:code:incomplete:
-
-
-**** [[~/github/exclusionLogic][~/github/exclusionLogic]]    :obsolete:incomplete:javascript:parsing:
-
-**** [[~/github/hexagonAITest][~/github/hexagonAITest]] :front_end:incomplete:javascript:old:parsing:web:
-
-
-**** [[~/github/jg_shell][~/github/jg_shell]]        :shell:semi:active:javascript:library:web:
-
-
-**** [[~/github/jsRete][~/github/jsRete]]     :rete:production_system:web:javascript:library:
-
-
-**** [[~/github/languageRules][~/github/languageRules]]     :obsolete:incomplete:grammar:javascript:
-
-
-**** [[~/github/mordor-alike][~/github/mordor-alike]] :nemesis:mordor:javascript:obsolete:incomplete:grammar:
-
-
-**** [[~/github/newspaper_gen][~/github/newspaper_gen]] :javascript:generative:front_end:newspaper:web:procedural:
-
-
-**** [[~/github/phaserGame][~/github/phaserGame]] :phaser:inactive:web:javascript:game:obsolete:old:
-
-
-**** [[~/github/preactShell][~/github/preactShell]]            :web:active:front_end:shell:preact:
-
+**** [[~/github/mordor-alike][Mordor Like Idea]]                                :nemesis:mordor:javascript:obsolete:incomplete:grammar:
+**** TODO [[~/github/newspaper_gen][Newspaper Generator]]                       :javascript:generative:front_end:newspaper:web:procedural:
+**** [[~/github/hexagonAITest][Hexagon Board / AI Test]]                        :front_end:incomplete:javascript:old:parsing:web:
 *** Python
-
-**** [[~/github/documentUnitTester][~/github/documentUnitTester]] :writing:support:tool:test_driven_development:python:
-
-
-**** [[~/github/heuristicRBTreeWeighting][~/github/heuristicRBTreeWeighting]]  :obsolete:incomplete:old:python:
-
-
-**** [[~/github/iELPy][~/github/iELPy]]                 :obsolete:incomplete:python:parsing:
-
-
-**** [[~/github/islandGen][~/github/islandGen]]                        :incomplete:python:image:
-
-
-**** [[~/github/bookmark_organiser][~/github/bookmark_organiser]] :data_analysis:python:tool:web:bookmarks:
-
-
-**** [[~/github/cairoCity][~/github/cairoCity]] :cairo:graphical:image:generative:front_end:layers:city:python:
-
-
-**** [[~/github/cairoSplines][~/github/cairoSplines]]        :cairo:graphical:active:layers:python:
-
-
-**** [[~/github/cairo_utils][~/github/cairo_utils]] :graphical:active:dcel:voronoi:cairo:library:tool:
-
-
-**** [[~/github/nytimes_scraper][~/github/nytimes_scraper]] :data_analysis:grammar:scraper:dataset:nytimes:
-
-
-**** [[~/github/pollyTest][~/github/pollyTest]] :proof_of_concept:web:python:test_driven_development:AWS:
-
-
-**** [[~/github/pyAStar][~/github/pyAStar]]            :library:pathfinding:maze:astar:python:
-
-
-**** [[~/github/pythonRuleEngine][~/github/pythonRuleEngine]] :python:important:todo:meta:simulation:institutions:exclusion_logic:library:parsing:production_system:rules:
-
-*** Prolog
-
-*** Unity
-
-*** Supercollider / Tidal
-    
-*** Haskell
-    
+***** TODO [#A] [[~/github/documentUnitTester][Document Unit Tester]]                                            :writing:support:tool:test_driven_development:python:
+****** setup a generator for org files
+***** [[~/github/heuristicRBTreeWeighting][Heuristic Tree Weighting]]                                                  :obsolete:incomplete:old:python:
+***** [[~/github/islandGen][Voronoi Island Gen]]                                                        :incomplete:python:image:
+      integrate into pipeline
+***** TODO [#A] [[~/github/cairoCity][Cairo City Generator]]                                            :cairo:graphical:image:generative:front_end:layers:city:python:
+****** TODO [#A] integrate with cairo_pipeline
+****** TODO [#B] line -> street and space algorithm
+***** TODO [[~/github/cairo_pipeline][Cairo Pipeline Architecture]]                                          :cairo:graphical:active:layers:python:
+***** [[~/github/cairo_utils][Cairo Utilities]]                                                           :graphical:active:dcel:voronoi:cairo:library:tool:
+***** [[~/github/nytimes_scraper][NYT Scraper]]                                                               :data_analysis:grammar:scraper:dataset:nytimes:
+***** TODO [#C] [[~/github/pyAStar][Python Astar Implementation]]                                     :library:pathfinding:maze:astar:python:
+****** integrate into pythonRuleEngine?
+       needs to be able to control vault movement as well
+***** TODO [#A] [[~/github/pythonRuleEngine][Python Rule Language and Engine]]                                 :python:important:todo:meta:simulation:institutions:exclusion_logic:library:parsing:production_system:rules:
+****** Recap current language capabilities
+****** integrate layer architecture
+****** implement type checking?
+****** implement time?
+****** TODO [#A] implement meta?
+       up and down shifts, possibly links with layers? look at reflective papers again
+****** implement other form of rule change?
+*** TODO Prolog                                                                 :todo:programming:institutions:ASP:tutorial:
+**** continue with prolog tutorial
+**** return to ASP
+**** look at Bath Institutional ASP
+*** TODO Unity                                                                  :needs_assets:game:vault:programming:unity:
+**** proof of concept imports in vault
+*** TODO Supercollider / Tidal                                                  :needs_assets:sound:supercollider:tidal:
+**** proof of concept soundscape controllable from python
+**** look at acropolis API to get samples/assets
+**** Action languages
+     C+ as well
+**** TODO [#A] soundscape assets
+***** TODO [#A] [[https://bbcarchdev.github.io/inside-acropolis/#consumers][Acropolis API]]
+      [[http://bbcsfx.acropolis.org.uk/index][BBC Sound FX Library]]
+      [[bbcsfx.acropolis.org.uk/][BBC sound effects frontend]]
+*** TODO Haskell                                                                :monads:theory:programming:haskell:
+**** look at implementation of monad transformers
 *** To Clean
-    
-
-**** [[~/github/dotaScraper][~/github/dotaScraper]]                                 :obsolete:old:
-
-
-**** [[~/github/emacsModeExample][~/github/emacsModeExample]]                 :obsolete:old:incomplete:
-
-
-**** [[~/github/happiton][~/github/happiton]]                  :obsolete:incomplete:javascript:
-
-
-**** [[~/github/cairoSine][~/github/cairoSine]]  :cairo:obsolete:incomplete:old:graphical:image:
-
-
-** Annotations / Examples
-
-** Datasets
+**** [[~/github/dotaScraper][~/github/dotaScraper]]                                                       :obsolete:old:
+**** [[~/github/emacsModeExample][~/github/emacsModeExample]]                                                  :obsolete:old:incomplete:
+**** [[~/github/happiton][~/github/happiton]]                                                          :obsolete:incomplete:javascript:
+**** [[~/github/cairoSine][~/github/cairoSine]]                                                         :cairo:obsolete:incomplete:old:graphical:image:
+** TODO [#B] Datasets
    To add: don't startve, and other games
    SFAM, Quests, Changelogs?, speech acts , NYT, Social Physics Datasets
-
-*** [[~/github/jg-SpaceBase-DF9][~/github/jg-SpaceBase-DF9]]  :simulation:lua:to_analyse:codebase:game:
-
-    
+*** [[~/github/jg-SpaceBase-DF9][~/github/jg-SpaceBase-DF9]]                                                   :simulation:lua:to_analyse:codebase:game:
+*** TODO [[~/Mega/Datasets][~/Mega/Datasets]]
+**** go through, find whats useful
+*** TODO [#A] NYT
+**** try using title trie grammars
+**** [[~/Mega/Images/glitch-assets][~/Mega/Images/glitch-assets]]
+     possibly use these in vault?
+**** [[~/Mega/bookmarks][~/Mega/bookmarks]]
+     treat these as codings?
+**** [[http://realitycommons.media.mit.edu/realitymining.html][Reality Mining]]
+*** TODO [#B] Versu dataset
+**** parse the code?
+** TODO [#A] Annotations / Examples
+*** TODO [#A] Snatch delegation
+    to lead to delegation in iEl
+*** TODO collate lists of sources
+    to prepare for annotation, 
+    to give components of expressive generators
+** TODO [#C] [[~/Mega/savedTwitter][Saved Twitter Threads]]
+** -----------------------------------------------------------------------------
 ** Writing
-
-*** TODO Dissertation
+*** TODO [#B] Dissertation
 **** Prior Work and Context
      Sociology/ Anthropology / Ethnology
      Economics
@@ -191,57 +163,193 @@
      Engineering criticisms
      
 **** Reflection
-
 **** Title
-
-
 **** Introduction
 **** Abstract
-
-*** [[~/github/jgrey4296.github.io][~/github/jgrey4296.github.io]] :important:todo:target:blog:web:writing:
-
-
-*** [[~/github/jsons][~/github/jsons]]                                        :json:writing:
-
-
-*** [[~/github/writing][~/github/writing]]                                   :writing:generic:
-
-
-
+*** [[~/github/jgrey4296.github.io][jgrey4296.github.io]]                                                         :important:todo:target:blog:web:writing:
+*** [[~/github/jsons][jsons representations]]                                                       :json:writing:
+*** [[~/github/writing][misc writing]]                                                                :writing:generic:
+** TODO [#C] Mendeley organisation
+*** [[/Volumes/DOCUMENTS/mendeley][Mendeley]]
+** -----------------------------------------------------------------------------
 ** Misc
-*** [[~/github/jg_emacs_files][~/github/jg_emacs_files]]                           :lisp:setup:emacs:
+*** [[~/github/jg_emacs_files][Emacs files]]                                    :lisp:setup:emacs:
+*** [[~/github/jg_shell_files][Bash Scripts]]                                   :bash:setup:
+*** Emacs / Spacemacs
+**** TODO [#A] Twittering mode image upload extension
+     add this as a set of custom functions, post-extending the twitter layer
+***** DONE extend twittering-edit-mode-map to insert a media id
+      CLOSED: [2019-02-07 Thu 13:00]
+      need to specify a file to upload. how? helm
+***** write function for inserting media id into buffer
+       store media ids as local variables to the tweet buffer
+******* TODO write verify function
+        check size of image/gif/video
+        check format
+        [[file:~/.spacemacs.d/layers/jg_layer/funcs.el::(defun%20jg_layer/twitter-open-and-encode-picture%20(candidate)][<no description>]]
 
-*** [[~/github/jg_shell_files][~/github/jg_shell_files]]                                 :bash:setup:
-
-*** [[~/github/metasteam][~/github/metasteam]] :inactive:games:library:games:UI:web:javascript:python:data_analysis:multiple_languages:
-
-** TODO Twittering mode image upload extension
-   add this as a set of custom functions, post-extending the twitter layer
-
-*** extend twittering-edit-mode-map to insert a media id
-    need to specify a file to upload. how?
-
-*** write function for inserting media id into buffer
-    store media ids as local variables to the tweet buffer
-    
-**** write verify function
-     check size of image/gif/video
-     check format
-
-**** extend twittering-call-api-with-account-in-api1.1
-
-**** extend twittering-http-post
-     making sure to change the host to the upload target
-     then method to init then append then finalize
-     loading the specified file into a temporary buffer,
-     then encoding as base64, getting size, chunking
-     and sending.
+******* extend twittering-call-api-with-account-in-api1.1                       :obsolete:
+******* extend twittering-http-post                                             :obsolete:
+        making sure to change the host to the upload target
+        then method to init then append then finalize
+        loading the specified file into a temporary buffer,
+        then encoding as base64, getting size, chunking
+        and sending.
      
-     sentinel passed will be a continuation to send next chunk
-     or repeat current, or finalize if no more chunks.
-     (this will need the base64 encoded temp buffer accessible
-     or stored in a variable. which?
+        sentinel passed will be a continuation to send next chunk
+        or repeat current, or finalize if no more chunks.
+        (this will need the base64 encoded temp buffer accessible
+        or stored in a variable. which?
+***** have twittering-edit-post-status detect media ids
+      retrieve the buffer local variable of media ids
+      add to options passed to twittering-call-api
+***** [[https://developer.twitter.com/en/docs/media/upload-media/api-reference/post-media-upload-init][Twitter api]]
+**** TODO Org SubTree Transient State navigation
+**** TODO [#C] Org Table Transient state
+**** TODO [#C] org-agenda keymap modifications
+     swap priority mods into < and >
+**** TODO Write a Helm view for tagging in Org
+** TODO Run Summarize Directory Script on datasets/papers/other
+** TODO Prototype some Mechanical Turk Tasks
 
-*** have twittering-edit-post-status detect media ids
-    retrieve the buffer local variable of media ids
-    add to options passed to twittering-call-api
+
+
+
+* TODO To Sort                                                                  :to_sort:
+** Examples Typology                                                            :carriers:typology:examples:
+*** Type
+
+**** Fiction
+
+***** Games
+***** Shows
+
+***** Films
+***** Novels
+
+**** Real
+***** Contemporary
+
+***** Historical
+
+*** Carriers
+
+**** Artifacts
+
+***** Specs
+***** Convention
+***** Symbolics
+
+**** Activities
+
+***** Division of Labour
+
+****** Delegation
+
+****** Social Action
+
+***** Meta
+
+***** Competence
+      Assignment?
+
+***** Training
+
+***** Roles
+
+***** Action Patterns
+
+****** Ritual
+      
+****** Cycles
+
+******* Time
+
+****** Communicative
+
+****** Physical
+
+****** Monitoring
+
+****** Sanctioning
+
+******* Sanctions
+
+****** Disrupting
+
+***** Failure
+
+***** Structure
+
+**** Relational Systems
+
+***** Governance
+      Power
+
+***** Structure
+
+***** Regime
+
+**** Symbolic Systems
+
+***** Norms
+
+****** Types
+
+***** Laws
+
+****** Types
+
+**** Space?
+
+** Cyclical Myth                                                                :myth:
+   "Being able to really change the rules of the word is a form of heroic journey"
+** Kant-sellars                                                                 :multiple_languages:
+   If you can say what the world is like?
+** Reigns Notes                                                                 :reigns:game:examples:
+** Papers Please Notes                                                          :game:examples:papers_please:
+** FSM Language?                                                                :finite_state_machines:
+** Robertsons Taxonomy of Embodied Actions                                      :taxonomy:embodiment:actions:
+** Reaktor Notes                                                                :taxonomy:examples:unity:reaktor:
+** Grossi Notes                                                                 :context:grossi:institutions:calculus:exclusion_logic:
+** Consquence Calculus                                                          :consequence:calculus:exclusion_logic:
+** Modularity Typology                                                          :taxonomy:modular:
+** DS9 Episodes                                                                 :tv_shows:ds9:examples:
+*** S3:E1
+    Sisko uses Grand Negus staff on Quark
+    Dax on Sisko: Making decisions is not enough, needs to implement them
+
+
+
+*** S2:E24
+    Emmissary and Vedek / Sisko and Winn
+    Sisko understands Bajoran Politics, and Federation Non-interference
+*** Profit Motive
+    Change of Zek to different values 
+    Revised Rules of Acquisition
+    Rom-Quark at the end expressing approval of Rom embezzelling.
+**** Get all the rules of acquisition?
+*** E15: Bar Association
+    Unions
+    
+*** E6 : Accession
+    Emmissary Politics
+
+
+*** S4:E17
+    Structure of a tribunal, bell ringing. Worf. Klingons.
+
+** Society Division                                                             :technology:structure:society:
+*** Infrastructure - tech?
+*** Structure - field model?
+*** SuperStructure - ideology / governance
+** Bioshocks rapture as an example of an ideal                                  :examples:bioshock:game:
+** Ashaninka?                                                                   :unknown:
+** Commitments                                                                  :castelfranchi:commitments:
+   Importance of commitments and institutional schemas to allow interference, social action, and goal adoption. (Castelfranchi)
+   Is social action : Agent -> Other 
+   while Norms : Other -> Agent ?
+   
+
+
+** blah                                                                         :writing:a:supercollider:tidal:lisp:LOGBOOK:

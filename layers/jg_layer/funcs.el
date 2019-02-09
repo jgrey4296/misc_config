@@ -229,80 +229,169 @@
       (insert "\n")
       (mapc (lambda (x)
               (let ((file_name (last (split-string x "/" t ".org"))))
-              (insert (format "[[%s][%s]]\n" x file_name))
-              )) org-agenda-files)
+		(insert (format "[[%s][%s]]\n" x file_name))
+		)) org-agenda-files)
       (org-mode)
+      )
+    )
+
+  (defun jg_layer/make-bar-chart (data)
+    (mapc (lambda (x)
+            (princ (string-join `(,(car x)
+                                  ,(make-string (- (+ 10 maxTagLength) (length (car x))) ?\ )
+                                  ": "
+                                  ,(number-to-string (cadr x))
+                                  ,(make-string (- 5 (length (number-to-string (cadr x)))) ?\ )
+                                  " : "
+                                  ,(make-string (cadr x) ?=)
+                                  "\n"
+                                  ))))
+          data))
+
+
+
+  (defun jg_layer/org-get-buffer-tags ()
+    """ TODO change this to use org-get-tags """
+    (save-excursion ;;store where you are in the current
+      (goto-char (point-min))
+      ;;where to store tags:
+      (let ((tag-set (make-hash-table :test 'equal)))
+        ;;match all
+        (while (not (eq nil (re-search-forward ":\\([[:graph:]]+\\):\\(\.\.\.\\)?\$" nil t)))
+          ;;split tags into list
+          (let ((tags (split-string (match-string-no-properties 0) ":" t ":")))
+            ;;increment counts
+            (mapc (lambda (x) (puthash x (+ 1 (gethash x tag-set 0)) tag-set)) tags)
+            )
+          )
+        tag-set
+        )
       )
     )
 
   (defun jg_layer/tag-occurences-in-open-buffers()
     """ retrieve all tags in all open buffers, print to a temporary buffer """
-    ;; TODO enable use on subset of buffers, or list of links
-    ;; get all open buffers
-
-    ;; create a map of [tag -> (buffers)]
-
-    ;; print into a new temp buffer
-    ;; ;; sideways bar chart of [tag_link_to_tag_files_list -> count ]
-    ;; ;; A Heading with links to the files
-    (print "Not Implemented Yet")
-    ;; buffer-list -> filter -> use
-    )
-
-  (defun jg_layer/tag-occurances ()
-    """ call occur for all tags in the file """
     (interactive)
-    ;;save eventually to a new buffer
-    (with-output-to-temp-buffer "*tags*"
-      (save-excursion ;;store where you are in the current
-        (goto-char (point-min))
-        ;;where to store tags:
-        (let ((tag-set (make-hash-table :test 'equal)))
-          ;;match all
-          (while (not (eq nil (re-search-forward ":\\([[:graph:]]+\\):\\(\.\.\.\\)?\$" nil t)))
-            ;;split tags into list
-            (let ((tags (split-string (match-string-no-properties 0) ":" t ":")))
-              ;;increment counts
-              (mapc (lambda (x) (puthash x (+ 1 (gethash x tag-set 0)) tag-set)) tags)
-              )
-            )
-          ;;now turn them into pairs
-          (let ((hashPairs nil) (sorted '()) (maxTagLength 0))
-            (maphash (lambda (k v) (push `(,k ,v) hashPairs)) tag-set)
-            (setq sorted (sort hashPairs (lambda (a b) (string-lessp (car a) (car b)))))
-            (setq maxTagLength (apply `max (mapcar (lambda (x) (length (car x))) sorted)))
-            ;;print them all out
-            (mapc (lambda (x)
-                    (princ (string-join `(,(car x)
-                                          ,(make-string (- (+ 10 maxTagLength) (length (car x))) ?\ )
-                                          ": "
-                                          ,(number-to-string (cadr x))
-                                          ,(make-string (- 5 (length (number-to-string (cadr x)))) ?\ )
-                                          " : "
-                                          ,(make-string (cadr x) ?=)
-                                          "\n"
-                                          ))))
-                  sorted)
-            )
-          )
+    (let* ((allbuffers (buffer-list))
+           (alltags (make-hash-table :test 'equal))
+           (hashPairs nil)
+           (sorted '())
+           (maxTagLength 0))
+      (map 'list (lambda (bufname)
+                   (with-current-buffer bufname
+                     (let ((buftags (jg_layer/org-get-buffer-tags)))
+                       (maphash (lambda (k v)
+                                  (puthash k (+ v (gethash k alltags 0)) alltags))
+                                buftags)
+                       ))) allbuffers)
+
+      (maphash (lambda (k v) (push `(,k ,v) hashPairs)) alltags)
+      ;; (setq sorted (sort hashPairs (lambda (a b) (string-lessp (car a) (car b)))))
+      (setq sorted (sort hashPairs (lambda (a b) (> (cadr a) (cadr b)))))
+      (setq maxTagLength (apply `max (mapcar (lambda (x) (length (car x))) sorted)))
+      (with-output-to-temp-buffer "*tags - all*"
+        (jg_layer/make-bar-chart sorted)
         )
       )
     )
+
+  (defun jg_layer/tag-occurances ()
+    """ Count all occurrences of all tags and bar chart them """
+    (interactive)
+    ;;save eventually to a new buffer
+      (let ((tag-set (jg_layer/org-get-buffer-tags))
+            (hashPairs nil)
+            (sorted '())
+            (maxTagLength 0))
+        (maphash (lambda (k v) (push `(,k ,v) hashPairs)) tag-set)
+        ;; (setq sorted (sort hashPairs (lambda (a b) (string-lessp (car a) (car b)))))
+        (setq sorted (sort hashPairs (lambda (a b) (> (cadr a) (cadr b)))))
+        (setq maxTagLength (apply `max (mapcar (lambda (x) (length (car x))) sorted)))
+        ;;print them all out
+        (with-output-to-temp-buffer "*tags*"
+          (jg_layer/make-bar-chart sorted)
+          )
+        )
+      )
+
   )
 
+(defun jg_layer/org-setup-tagging ()
+  """ Setup Helm Tagging, but to be called in init.d
+		so both org and helm are set up """
+        (require 'helm)
+        (defun jg_layer/org-set-tags (x)
+          """ Toggle Selected Tags """
+          (let* ((candidates (helm-marked-candidates))
+                 (current-tags (org-get-tags nil t)))
+            (print candidates)
+            (print current-tags)
+            (map 'list (lambda (candidate)
+                         (print candidate)
+                         (if (not (-contains? current-tags candidate))
+                             (push candidate current-tags)
+                           (setq current-tags (remove candidate current-tags))
+                           )) candidates)
+            (org-set-tags current-tags)
+            ))
 
+        (defun jg_layer/sort-candidates (a b)
+          """ Sort candidates by colour then lexicographically """
+          (let ((aprop (get-text-property 0 'font-lock-face a))
+                (bprop (get-text-property 0 'font-lock-face b)))
+            (cond
+             ((and aprop bprop (string-lessp a b)) t)
+             ((and aprop (not bprop)) t)
+             ((and (not aprop) (not bprop) (string-lessp a b)))
+             )))
+
+        (defun jg_layer/org-tagging-properties-add (candidates-map)
+          """ Given Candidates, colour them if they are assigned, then sort them  """
+          (let* ((candidates (hash-table-keys candidates-map))
+                 (current-tags (org-get-tags nil t))
+                 (propertied-tags (map 'list (lambda (candidate)
+                                               (if (-contains? current-tags candidate)
+                                                   (put-text-property 0 (length candidate) 'font-lock-face 'rainbow-delimiters-depth-1-face candidate))
+                                               candidate) candidates))
+                 )
+            (sort propertied-tags 'jg_layer/sort-candidates)
+            )
+          )
+
+        ;; The Two Sources For Tagging Helm
+        (setq jg_layer/org-tagging-helm `((name . "Helm Tagging")
+                                          (action . jg_layer/org-set-tags)
+                                          )
+              jg_layer/org-tagging-fallback-source (helm-build-dummy-source ""
+                                                     :action '((helm-pattern . jg_layer/org-set-tags)))
+              )
+
+        (defun jg_layer/org-tagging-helm-start ()
+          """ Opens the Tagging Helm """
+          (interactive)
+          (let* ((candidates (jg_layer/org-tagging-properties-add (jg_layer/org-get-buffer-tags)))
+                 (main-source (cons `(candidates . ,candidates) jg_layer/org-tagging-helm)))
+            (helm :sources '(main-source jg_layer/org-tagging-fallback-source)
+                  :input "")
+            )
+          )
+        )
+
+;;----------------------------------------
 (defun jg_layer/insert-lparen ()
+  """ utility to insert a (  """
   (interactive)
   (insert "(")
   )
 
 (defun jg_layer/insert-rparen ()
+  """ utility to insert a ) """
   (interactive)
   (insert ")")
   )
 
-
 (defun jg_layer/flatten (lst)
+  """ Utility to flatten a list """
   (letrec ((internal (lambda (x)
                        (cond
                         ((null x) nil)

@@ -28,4 +28,8 @@
   "t o" 'dired-omit-mode
   ;; searching
   "s o" 'helm-occur
+  ;; mode select
+  "m"   'helm-switch-major-mode
+  ;; mark buffer
+  "x m" 'mark-whole-buffer
 )

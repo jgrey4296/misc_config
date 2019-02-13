@@ -10,7 +10,8 @@
  ;;personal iSpell dictionary
  ispell-personal-dictionary (expand-file-name "~/.spacemacs.d/setup_files/.ispell_english")
  dired-omit-files "^\\.?#\\|^\\.$\\|^\\.DS_Store$\\|^\\.git$\\|^__pycache__$"
-
+ dired-omit-verbose nil
+ dired-listing-switches "-lha"
  ;;use spaces instead of tabs
  tab-width 4
  indent-tabs-mode nil
@@ -23,5 +24,4 @@
 
 (eval-after-load 'dired-mode
   (add-hook 'dired-mode-hook 'dired-omit-mode)
-  ;;(setq dired-listing-switches "-alh")
-)
+  )

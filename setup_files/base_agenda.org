@@ -2,7 +2,7 @@
   :LOGBOOK:
   CLOCK: [2019-02-08 Fri 20:33]--[2019-02-08 Fri 20:58] =>  0:25
   CLOCK: [2019-02-08 Fri 19:55]--[2019-02-08 Fri 20:20] =>  0:25
-  CLOCK: [2019-02-08 Fri 19:21]--[2019-02-08 Fri 19:46] =>  0:25 
+  CLOCK: [2019-02-08 Fri 19:21]--[2019-02-08 Fri 19:46] =>  0:25
   CLOCK: [2019-02-07 Thu 18:34]--[2019-02-07 Thu 18:59] =>  0:25
   CLOCK: [2019-02-07 Thu 16:41]--[2019-02-07 Thu 17:06] =>  0:25
   CLOCK: [2019-02-07 Thu 10:56]--[2019-02-07 Thu 11:21] =>  0:25
@@ -30,10 +30,12 @@
 ** -----------------------------------------------------------------------------
 ** Programming
 *** TODO [[~/.spacemacs.d/layers/trie][Trie-layer]]
+
 *** Javascript / Web
 **** [[~/github/mordor-alike][Mordor Like Idea]]                                :nemesis:mordor:javascript:obsolete:incomplete:grammar:
 **** TODO [[~/github/newspaper_gen][Newspaper Generator]]                       :javascript:generative:front_end:newspaper:web:procedural:
 **** [[~/github/hexagonAITest][Hexagon Board / AI Test]]                        :front_end:incomplete:javascript:old:parsing:web:
+
 *** Python
 ***** TODO [#A] [[~/github/documentUnitTester][Document Unit Tester]]                                            :writing:support:tool:test_driven_development:python:
 ****** setup a generator for org files
@@ -41,8 +43,10 @@
 ***** [[~/github/islandGen][Voronoi Island Gen]]                                                        :incomplete:python:image:
       integrate into pipeline
 ***** TODO [#A] [[~/github/cairoCity][Cairo City Generator]]                                            :cairo:graphical:image:generative:front_end:layers:city:python:
-****** TODO [#A] integrate with cairo_pipeline
+****** DONE [#A] integrate with cairo_pipeline
+       CLOSED: [2019-02-10 Sun 13:16]
 ****** TODO [#B] line -> street and space algorithm
+****** TODO Return to [[file:~/github/cairoCity/citygen/City.py::class%20City:][<Cairo City>]]
 ***** TODO [[~/github/cairo_pipeline][Cairo Pipeline Architecture]]                                          :cairo:graphical:active:layers:python:
 ***** [[~/github/cairo_utils][Cairo Utilities]]                                                           :graphical:active:dcel:voronoi:cairo:library:tool:
 ***** [[~/github/nytimes_scraper][NYT Scraper]]                                                               :data_analysis:grammar:scraper:dataset:nytimes:
@@ -57,6 +61,7 @@
 ****** TODO [#A] implement meta?
        up and down shifts, possibly links with layers? look at reflective papers again
 ****** implement other form of rule change?
+
 *** TODO Prolog                                                                 :todo:programming:institutions:ASP:tutorial:
 **** continue with prolog tutorial
 **** return to ASP
@@ -79,6 +84,8 @@
 **** [[~/github/emacsModeExample][~/github/emacsModeExample]]                                                  :obsolete:old:incomplete:
 **** [[~/github/happiton][~/github/happiton]]                                                          :obsolete:incomplete:javascript:
 **** [[~/github/cairoSine][~/github/cairoSine]]                                                         :cairo:obsolete:incomplete:old:graphical:image:
+
+
 ** TODO [#B] Datasets
    To add: don't startve, and other games
    SFAM, Quests, Changelogs?, speech acts , NYT, Social Physics Datasets
@@ -94,81 +101,23 @@
 **** [[http://realitycommons.media.mit.edu/realitymining.html][Reality Mining]]
 *** TODO [#B] Versu dataset
 **** parse the code?
+
 ** TODO [#A] Annotations / Examples
 *** TODO [#A] Snatch delegation
     to lead to delegation in iEl
 *** TODO collate lists of sources
-    to prepare for annotation, 
+    to prepare for annotation,
     to give components of expressive generators
+
 ** TODO [#C] [[~/Mega/savedTwitter][Saved Twitter Threads]]
 ** -----------------------------------------------------------------------------
 ** Writing
-*** TODO [#B] Dissertation
-**** Prior Work and Context
-     Sociology/ Anthropology / Ethnology
-     Economics
-     Critical Theory
-     AI and MAS
-     Computational Media
 
-     Identification of Hole in Literature:
-
-**** Methodology
-     Phenomenology and Grounded Theory
-     Inhabited Institutions
-     Computational Media and code studies
-
-     Resulting Methodology:
-
-**** Existing in the World
-     Fiction
-     Non-Fiction
-     Theory
-     Computational
-
-     Result: Dataset
-
-**** Pre-formal Theory
-     Analysis of existing forms and examples
-     Source Code Analysis
-     Grounded Theory Coding
-
-     Result:
-
-**** Formal Calculus
-     Delegation Logic, Monads, Exclusion logic,
-     Temporal Calculus etc
-
-     Result:
-
-**** Computational Implementation
-     consideration of Cif, Versu, Rete, Neural Networks, haskell, monad transformers
-     Tidal and ChuCk, Meta/Reflective towers, MOISE
-
-     result: python layered DSL Production System, temporal, reflective, typed? modular
-
-**** Authoring / UX Considerations
-     WebShell, prior authoring programs, programming, netlogo,
-     user interfaces, live coding
-     emacs, spacemacs
-
-**** Resulting Experiences
-     city map, newspaper, soundscape, vault, street, bot?
-
-     Result: 
-
-**** Rebuttal of Criticisms
-     Games criticisms
-     Theory criticisms
-     Engineering criticisms
-     
-**** Reflection
-**** Title
-**** Introduction
-**** Abstract
-*** [[~/github/jgrey4296.github.io][jgrey4296.github.io]]                                                         :important:todo:target:blog:web:writing:
+** TODO [[file:~/github/writing/orgfiles/dissertation.org::*Dissertation][Dissertation]]                                                            :dissertation:writing:important:
+** [[~/github/jgrey4296.github.io][jgrey4296.github.io]]                                                          :writing:important:todo:target:blog:web:
 *** [[~/github/jsons][jsons representations]]                                                       :json:writing:
 *** [[~/github/writing][misc writing]]                                                                :writing:generic:
+
 ** TODO [#C] Mendeley organisation
 *** [[/Volumes/DOCUMENTS/mendeley][Mendeley]]
 ** -----------------------------------------------------------------------------
@@ -182,7 +131,7 @@
       CLOSED: [2019-02-07 Thu 13:00]
       need to specify a file to upload. how? helm
 ***** write function for inserting media id into buffer
-       store media ids as local variables to the tweet buffer
+      store media ids as local variables to the tweet buffer
 ******* TODO write verify function
         check size of image/gif/video
         check format
@@ -195,7 +144,7 @@
         loading the specified file into a temporary buffer,
         then encoding as base64, getting size, chunking
         and sending.
-     
+
         sentinel passed will be a continuation to send next chunk
         or repeat current, or finalize if no more chunks.
         (this will need the base64 encoded temp buffer accessible
@@ -209,147 +158,83 @@
 **** TODO [#C] org-agenda keymap modifications
      swap priority mods into < and >
 **** TODO Write a Helm view for tagging in Org
+**** TODO XML / Bookmarks load
+
 ** TODO Run Summarize Directory Script on datasets/papers/other
+   [[file:~/github/jg_shell_files/summariseDirectory.py::"""][<summariseDirectory.py>]]
+
+
 ** TODO Prototype some Mechanical Turk Tasks
 
 
+* Progressed
+** iELPY
+*** Parser
+*** Runtime
 
+** Newspaper Gen
+*** DONE Tracery
+    <2017-03-24 Fri>
+    Add tracery in for straight away text gen
+    ** Shell
+*** Preact UI
+    <2017-03-27 Mon>
+*** Shell Runtime
+**** DONE Test searching
+     <2017-03-23 Thu>
+**** Rule Mode
+     <2017-03-25 Sat>
+**** FSM Mode
+     <2017-03-25 Sat>
+*** Rete
+**** Write actual logic tests
+     <2017-03-26 Sun>
+** Behaviour Tree.js
+*** Exclusion Logic
+    <2017-03-26 Sun>
+    Union of EL.js and iELPy language, to use in both
+** Writing
+*** DONE Jekyll TAGS
+    <2017-03-23 Thu>
+*** Unit Testing
+**** First document: An Overview
+     <2017-03-27 Mon>
+** Prototypes
+   <2017-03-28 Tue>
+*** Hex Board -> Preact
+*** Battle System
+*** Credit System
+*** Mordor - alike
+*** Prisoners dilemma
+*** NetLogo
+*** Unity
+**** Animation
+** Data Analysis
+   <2017-03-28 Tue>
+*** Game Scraping
 
-* TODO To Sort                                                                  :to_sort:
-** Examples Typology                                                            :carriers:typology:examples:
-*** Type
-
-**** Fiction
-
-***** Games
-***** Shows
-
-***** Films
-***** Novels
-
-**** Real
-***** Contemporary
-
-***** Historical
-
-*** Carriers
-
-**** Artifacts
-
-***** Specs
-***** Convention
-***** Symbolics
-
-**** Activities
-
-***** Division of Labour
-
-****** Delegation
-
-****** Social Action
-
-***** Meta
-
-***** Competence
-      Assignment?
-
-***** Training
-
-***** Roles
-
-***** Action Patterns
-
-****** Ritual
-      
-****** Cycles
-
-******* Time
-
-****** Communicative
-
-****** Physical
-
-****** Monitoring
-
-****** Sanctioning
-
-******* Sanctions
-
-****** Disrupting
-
-***** Failure
-
-***** Structure
-
-**** Relational Systems
-
-***** Governance
-      Power
-
-***** Structure
-
-***** Regime
-
-**** Symbolic Systems
-
-***** Norms
-
-****** Types
-
-***** Laws
-
-****** Types
-
-**** Space?
-
-** Cyclical Myth                                                                :myth:
-   "Being able to really change the rules of the word is a form of heroic journey"
-** Kant-sellars                                                                 :multiple_languages:
-   If you can say what the world is like?
-** Reigns Notes                                                                 :reigns:game:examples:
-** Papers Please Notes                                                          :game:examples:papers_please:
-** FSM Language?                                                                :finite_state_machines:
-** Robertsons Taxonomy of Embodied Actions                                      :taxonomy:embodiment:actions:
-** Reaktor Notes                                                                :taxonomy:examples:unity:reaktor:
-** Grossi Notes                                                                 :context:grossi:institutions:calculus:exclusion_logic:
-** Consquence Calculus                                                          :consequence:calculus:exclusion_logic:
-** Modularity Typology                                                          :taxonomy:modular:
-** DS9 Episodes                                                                 :tv_shows:ds9:examples:
-*** S3:E1
-    Sisko uses Grand Negus staff on Quark
-    Dax on Sisko: Making decisions is not enough, needs to implement them
+*** Web Scraping
+**** Dota
+**** WoW
+** Reading
+*** Books
+    <2017-03-29 Wed>
+**** Scott
+     <2017-03-26 Sun>
+**** Bicchieri
+**** Graeber
+**** North
+**** Ostrom
+*** Dagstuhl
+*** Dissertations
+*** Papers
+** DONE Haskell
+   <2017-03-24 Fri>
+   Write a simple parser using parsec
+*** Haskell: add a python version of iEL
+    <2017-03-30 Thu>
+** DONE Python Red-Black Weighting
+   <2017-03-28 Tue>
 
 
 
-*** S2:E24
-    Emmissary and Vedek / Sisko and Winn
-    Sisko understands Bajoran Politics, and Federation Non-interference
-*** Profit Motive
-    Change of Zek to different values 
-    Revised Rules of Acquisition
-    Rom-Quark at the end expressing approval of Rom embezzelling.
-**** Get all the rules of acquisition?
-*** E15: Bar Association
-    Unions
-    
-*** E6 : Accession
-    Emmissary Politics
-
-
-*** S4:E17
-    Structure of a tribunal, bell ringing. Worf. Klingons.
-
-** Society Division                                                             :technology:structure:society:
-*** Infrastructure - tech?
-*** Structure - field model?
-*** SuperStructure - ideology / governance
-** Bioshocks rapture as an example of an ideal                                  :examples:bioshock:game:
-** Ashaninka?                                                                   :unknown:
-** Commitments                                                                  :castelfranchi:commitments:
-   Importance of commitments and institutional schemas to allow interference, social action, and goal adoption. (Castelfranchi)
-   Is social action : Agent -> Other 
-   while Norms : Other -> Agent ?
-   
-
-
-** blah                                                                         :writing:a:supercollider:tidal:lisp:LOGBOOK:

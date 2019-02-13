@@ -36,6 +36,7 @@ values."
    '(
      go
      ruby
+     (syntax-checking :variables syntax-checking-enable-tooltips nil)
      ;;------------------------------------------------------------
      ;;MY LAYER:
      jg_layer
@@ -326,15 +327,17 @@ you should place your code here."
   (setq-default helm-autoresize-max-height 30
                 helm-autoresize-min-height 30
                 helm-display-buffer-height 30
-                xterm-mouse-mode 0
+                xterm-mouse-mode nil
                 evil-escape-key-sequence "hg"
                 version-control-global-margin 0
                 ac-use-quick-help t
+                scroll-margin 10
                 )
   (spacemacs/declare-prefix "x j" "Justify")
   (global-auto-complete-mode 1)
   (define-key ac-mode-map (kbd "M-TAB") 'jg_layer/ac-trigger)
 
+  (require 'jg_layer/org-setup-tagging "~/.spacemacs.d/layers/jg_layer/org-tagging.el")
   (jg_layer/twitter-extend)
   (jg_layer/org-setup-tagging)
   )

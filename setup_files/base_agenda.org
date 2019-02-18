@@ -22,7 +22,8 @@
   CLOCK: [2019-02-04 Mon 14:09]--[2019-02-04 Mon 14:34] =>  0:25
   :END:
 **  [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Text.html#Text][emacs lisp text manipulation]]
-** TODO [#A] Reply to Aaron
+** DONE [#A] Reply to Aaron
+   CLOSED: [2019-02-18 Mon 02:11]
 ** TODO [[~/github/writing/paper_notes/index.org::*Summary%20Index][Summary Index]]
 ** [[~/github/languageLearning][Misc Language Repo]]                                                           :javascript:python:multiple_languages:lisp:supercollider:tidal:learning:notes:prolog:misc:
 
@@ -160,6 +161,10 @@
 **** TODO Write a Helm view for tagging in Org
 **** TODO XML / Bookmarks load
 
+**** TODO tag and colourize words minor mode to run anywhere
+     be able to tag and colourize things dynamically, based on what you need at
+     any given moment
+     then be able to tag into groups?
 ** TODO Run Summarize Directory Script on datasets/papers/other
    [[file:~/github/jg_shell_files/summariseDirectory.py::"""][<summariseDirectory.py>]]
 

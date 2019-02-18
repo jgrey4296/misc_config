@@ -17,7 +17,6 @@
     ibuffer
     fci
     rainbow-mode
-    twittering-mode
     flycheck
     shell
     (git-gutter :excluded t)
@@ -25,7 +24,7 @@
     (xterm-mouse-mode :excluded t)
     (gpm-mouse-mode :excluded t)
     (smartparens :excluded t)
-)
+    )
   )
 
 ;; (defun <layer>/pre-init-<package>)
@@ -77,7 +76,6 @@
   (evil-ex-define-cmd "os" 'org-store-link)
   (evil-ex-define-cmd "oi" 'org-insert-last-stored-link)
   (evil-ex-define-cmd "oo" 'org-open-at-point)
-
   ;; TODO: registers
   ;; TODO: yasnippet
 
@@ -185,56 +183,56 @@
   )
 
 (defun jg_layer/post-init-org ()
-;;ORG SETUP
-(setq-default
- org-agenda-files `(,(expand-file-name "~/.spacemacs.d/setup_files/base_agenda.org"))
- org-archive-location (string-join `(,(expand-file-name "~/.spacemacs.d/setup_files/archive.org")
-                                     "* Main Archive") "::")
- org-fast-tag-selection-single-key nil
- org-from-is-user-regexp "\\<John Grey\\>"
- org-group-tags nil
- org-use-fast-tag-selection t
- org-tags-column 80
- )
+  ;;ORG SETUP
+  (setq-default
+   org-agenda-files `(,(expand-file-name "~/.spacemacs.d/setup_files/base_agenda.org"))
+   org-archive-location (string-join `(,(expand-file-name "~/.spacemacs.d/setup_files/archive.org")
+                                       "* Main Archive") "::")
+   org-fast-tag-selection-single-key nil
+   org-from-is-user-regexp "\\<John Grey\\>"
+   org-group-tags nil
+   org-use-fast-tag-selection t
+   org-tags-column 80
+   )
 
-;; add in keybinding to call tag-occurances
-(spacemacs/declare-prefix "o" "Org")
-(spacemacs/declare-prefix "o t" "Tags")
-(spacemacs/declare-prefix "o a" "Agenda")
-(spacemacs/declare-prefix "o c" "Calendar")
-(spacemacs/declare-prefix "o s" "Source")
-(spacemacs/declare-prefix "o l" "Links")
-(spacemacs/set-leader-keys
-  "o T"     'org-todo-list
-  ;; TAGS
-  "o t o"   'jg_layer/tag-occurances
-  "o t a o" 'jg_layer/tag-occurences-in-open-buffers
-  "o t v"   'org-tags-view
-  "o t s"   'org-set-tags
-  ;; AGENDA
-  "o a a"   'org-agenda-file-to-front
-  "o a r"   'org-remove-file
-  "o a l"   'org-agenda-list
-  "o a w"   'org-agenda-week-view
-  "o a m"   'org-agenda-month-view
-  "o a f"   'jg_layer/list-agenda-files
-  "o a d"   'org-deadline
-  "o a s"   'org-schedule
-  ;; CALENDAR
-  "o c c"   'org-goto-calendar
-  "o c d"   'org-date-from-calendar
-  "o c t"   'org-time-stamp
-  "o c i"   'org-inactive-timestamp
-  ;; SRC CODE
-  "o s c"   'org-edit-src-code
-  ;; LINKS
-  "o l s"   'org-store-link
-  "o l i"   'org-insert-link
-  "o l d"   'org-toggle-link-display
-  "o l o"   'jg_layer/open_link_in_buffer
+  ;; add in keybinding to call tag-occurances
+  (spacemacs/declare-prefix "o" "Org")
+  (spacemacs/declare-prefix "o t" "Tags")
+  (spacemacs/declare-prefix "o a" "Agenda")
+  (spacemacs/declare-prefix "o c" "Calendar")
+  (spacemacs/declare-prefix "o s" "Source")
+  (spacemacs/declare-prefix "o l" "Links")
+  (spacemacs/set-leader-keys
+    "o T"     'org-todo-list
+    ;; TAGS
+    "o t o"   'jg_layer/tag-occurances
+    "o t a o" 'jg_layer/tag-occurences-in-open-buffers
+    "o t v"   'org-tags-view
+    "o t s"   'org-set-tags
+    ;; AGENDA
+    "o a a"   'org-agenda-file-to-front
+    "o a r"   'org-remove-file
+    "o a l"   'org-agenda-list
+    "o a w"   'org-agenda-week-view
+    "o a m"   'org-agenda-month-view
+    "o a f"   'jg_layer/list-agenda-files
+    "o a d"   'org-deadline
+    "o a s"   'org-schedule
+    ;; CALENDAR
+    "o c c"   'org-goto-calendar
+    "o c d"   'org-date-from-calendar
+    "o c t"   'org-time-stamp
+    "o c i"   'org-inactive-timestamp
+    ;; SRC CODE
+    "o s c"   'org-edit-src-code
+    ;; LINKS
+    "o l s"   'org-store-link
+    "o l i"   'org-insert-link
+    "o l d"   'org-toggle-link-display
+    "o l o"   'jg_layer/open_link_in_buffer
+    )
+
   )
-
-)
 
 (defun jg_layer/post-init-yasnippet ()
   ;;yasnippet
@@ -310,11 +308,8 @@
                 )
   (remove-hook 'term-mode-hook 'spacemacs/disable-hl-line-mode)
   (remove-hook 'comint-mode-hook 'spacemacs/disable-hl-line-mode)
-)
-
-(defun jg_layer/post-init-twittering-mode ()
-  (require 'jg_layer/twitter-extend "~/.spacemacs.d/layers/jg_layer/twitter_extension.el")
   )
+
 
 
 (defun jg_layer/post-init-flycheck ()

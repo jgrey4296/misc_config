@@ -95,7 +95,7 @@
     (define-key map (kbd "C-x C-l") 'windmove-right)
     (define-key map (kbd "C-x C-i") 'windmove-up)
     (define-key map (kbd "C-x C-k") 'windmove-down)
-    
+
     ;;Summary
     ;;(define-key map (kbd "C-c C-j") 'imenu)
     ;;Useful:

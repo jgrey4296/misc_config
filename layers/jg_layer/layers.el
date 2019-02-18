@@ -16,7 +16,7 @@
                                       ibuffer
                                       gtags
                                       shell
-                                      twitter
+                                      jg_twitter
                                       cscope
                                       gtags
 

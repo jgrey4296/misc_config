@@ -327,7 +327,6 @@ you should place your code here."
   (setq-default helm-autoresize-max-height 30
                 helm-autoresize-min-height 30
                 helm-display-buffer-height 30
-                xterm-mouse-mode nil
                 evil-escape-key-sequence "hg"
                 version-control-global-margin 0
                 ac-use-quick-help t
@@ -338,9 +337,11 @@ you should place your code here."
   (define-key ac-mode-map (kbd "M-TAB") 'jg_layer/ac-trigger)
 
   (require 'jg_layer/org-setup-tagging "~/.spacemacs.d/layers/jg_layer/org-tagging.el")
-  (jg_layer/twitter-extend)
   (jg_layer/org-setup-tagging)
-  )
+
+  (evil-define-key nil evil-motion-state-map [down-mouse-1] (lambda () (interactive)))
+  (evil-define-key nil evil-motion-state-map [mouse-1] (lambda () (interactive)))
+    )
 ;;------------------------------------------------------------------------------
 ;;------------------------------------------------------------------------------
 ;; Do not write anything past this comment. This is where Emacs will

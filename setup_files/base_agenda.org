@@ -27,7 +27,6 @@
 ** TODO [[~/github/writing/paper_notes/index.org::*Summary%20Index][Summary Index]]
 ** [[~/github/languageLearning][Misc Language Repo]]                                                           :javascript:python:multiple_languages:lisp:supercollider:tidal:learning:notes:prolog:misc:
 
-
 ** -----------------------------------------------------------------------------
 ** Programming
 *** TODO [[~/.spacemacs.d/layers/trie][Trie-layer]]
@@ -103,6 +102,7 @@
 *** TODO [#B] Versu dataset
 **** parse the code?
 
+*** TODO horus heresy dataset
 ** TODO [#A] Annotations / Examples
 *** TODO [#A] Snatch delegation
     to lead to delegation in iEl

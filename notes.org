@@ -4,3 +4,13 @@
 
 ** Icy
 [[https://emacs.stackexchange.com/questions/30317/][Font decrease error fix]]
+
+** Spacemacs fringe fix:
+   #+begin_src lisp results output/value
+   ;; in layers/+distributions/spacemacs-base/keybindings.el
+   (spacemacs|add-toggle fringe
+   :status (not (equal (if (fboundp 'fringe-mode) finge-mode 0) 0))
+   #+end_src
+
+
+

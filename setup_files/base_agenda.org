@@ -1,5 +1,21 @@
 * Base Agenda
   :LOGBOOK:
+  CLOCK: [2019-02-23 Sat 22:15]--[2019-02-23 Sat 22:40] =>  0:25
+  CLOCK: [2019-02-23 Sat 21:44]--[2019-02-23 Sat 22:09] =>  0:25
+  CLOCK: [2019-02-23 Sat 21:14]--[2019-02-23 Sat 21:39] =>  0:25
+  CLOCK: [2019-02-22 Fri 21:47]--[2019-02-22 Fri 22:13] =>  0:26
+  CLOCK: [2019-02-22 Fri 18:42]--[2019-02-22 Fri 19:07] =>  0:25
+  CLOCK: [2019-02-22 Fri 17:46]--[2019-02-22 Fri 18:12] =>  0:26
+  CLOCK: [2019-02-22 Fri 16:35]--[2019-02-22 Fri 17:00] =>  0:25
+  CLOCK: [2019-02-22 Fri 15:54]--[2019-02-22 Fri 16:20] =>  0:26
+  CLOCK: [2019-02-22 Fri 15:22]--[2019-02-22 Fri 15:47] =>  0:25
+  CLOCK: [2019-02-22 Fri 14:52]--[2019-02-22 Fri 15:17] =>  0:25
+  CLOCK: [2019-02-22 Fri 01:07]--[2019-02-22 Fri 01:32] =>  0:25
+  CLOCK: [2019-02-21 Thu 22:55]--[2019-02-21 Thu 23:20] =>  0:25
+  CLOCK: [2019-02-21 Thu 21:25]--[2019-02-21 Thu 21:50] =>  0:25
+  CLOCK: [2019-02-21 Thu 20:53]--[2019-02-21 Thu 21:18] =>  0:25
+  CLOCK: [2019-02-21 Thu 20:12]--[2019-02-21 Thu 20:37] =>  0:25
+  CLOCK: [2019-02-21 Thu 19:35]--[2019-02-21 Thu 20:00] =>  0:25
   CLOCK: [2019-02-08 Fri 20:33]--[2019-02-08 Fri 20:58] =>  0:25
   CLOCK: [2019-02-08 Fri 19:55]--[2019-02-08 Fri 20:20] =>  0:25
   CLOCK: [2019-02-08 Fri 19:21]--[2019-02-08 Fri 19:46] =>  0:25
@@ -165,6 +181,10 @@
      be able to tag and colourize things dynamically, based on what you need at
      any given moment
      then be able to tag into groups?
+**** TODO buffer groups / registers
+     be able to add a buffer / marked buffers to a register,
+     then search in them, or step through them
+     persistent?
 ** TODO Run Summarize Directory Script on datasets/papers/other
    [[file:~/github/jg_shell_files/summariseDirectory.py::"""][<summariseDirectory.py>]]
 

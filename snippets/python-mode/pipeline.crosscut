@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: pipeline.crosscut
+# key: pipeline.crosscut
+# --
+def $1_crosscut(d, args, state):
+    """ Crosscut :  $1
+
+    """
+    $0
+    return (value, state, data)

@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: pipeline.layer
+# key: pipeline.layer
+# --
+def $1_layer(d, opts, data):
+    """ Layer : $1
+
+    """
+    $0
+    return data

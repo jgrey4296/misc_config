@@ -1,5 +1,3 @@
-;; trie layers.el 
-;; Loads first 
+;; trie layers.el
+;; Loads first
 ;;(configuration-layer/declare-layer )
-
-

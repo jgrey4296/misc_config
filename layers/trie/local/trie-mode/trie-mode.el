@@ -11,7 +11,7 @@
 (defvar trie-outermost-depth-face-count 3)
 (defvar trie-depth-face-name "trie-depth-")
 (defvar trie-depth-color-list '("color-26" "color-47" "color-99" "color-124"
-                                "color-129" "color 142" "color-164"))
+                                "color-129" "color-142" "color-164"))
 
 ;;--------------------
 ;;Utilities
@@ -19,8 +19,6 @@
 
 (defun findFace (name)
   (seq-find (lambda (x) (string= (face-name x) name)) (face-list)))
-
-
 
 (defun flatten (lst)
   (letrec ((internal (lambda (x)
@@ -105,7 +103,7 @@
 ;; use them as symbols 'blah in font-lock-keywords
 ;;--------------------
 (defface trie-rulename
-    '((t 
+    '((t
        :foreground "red"
        :background "black"
        :underline t))
@@ -137,8 +135,6 @@
 ;;Specify as a list of (matcher . facename )
 ;;Potential keywords: operators +-*/!.()""$~ < > != == -> @
 ;;--------------------
-
-
 (defconst trie-font-lock-keywords
   (list
    ;;facts
@@ -172,7 +168,7 @@
 ;; Potential indent points:
 ;; newline ending with an EXOP, comma,
 ;; reset indent if prior line is empty
-;; 
+;;
 ;;--------------------
 (defun trie-indent-line()
   "Indent current-line as trie code"
@@ -256,6 +252,5 @@
 
 
 ;;todo later: set no longer needed variables to nil
-
 
 (provide 'trie-mode)

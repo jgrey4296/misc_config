@@ -1,5 +1,12 @@
 * Base Agenda
   :LOGBOOK:
+  CLOCK: [2019-02-28 Thu 20:39]--[2019-02-28 Thu 21:04] =>  0:25
+  CLOCK: [2019-02-28 Thu 20:13]--[2019-02-28 Thu 20:38] =>  0:25
+  CLOCK: [2019-02-28 Thu 19:38]--[2019-02-28 Thu 20:03] =>  0:25
+  CLOCK: [2019-02-28 Thu 18:40]--[2019-02-28 Thu 19:05] =>  0:25
+  CLOCK: [2019-02-25 Mon 21:02]--[2019-02-25 Mon 21:27] =>  0:25
+  CLOCK: [2019-02-24 Sun 20:29]--[2019-02-24 Sun 20:54] =>  0:25
+  CLOCK: [2019-02-24 Sun 19:50]--[2019-02-24 Sun 20:15] =>  0:25
   CLOCK: [2019-02-23 Sat 22:15]--[2019-02-23 Sat 22:40] =>  0:25
   CLOCK: [2019-02-23 Sat 21:44]--[2019-02-23 Sat 22:09] =>  0:25
   CLOCK: [2019-02-23 Sat 21:14]--[2019-02-23 Sat 21:39] =>  0:25
@@ -37,21 +44,43 @@
   CLOCK: [2019-02-04 Mon 15:17]--[2019-02-04 Mon 15:42] =>  0:25
   CLOCK: [2019-02-04 Mon 14:09]--[2019-02-04 Mon 14:34] =>  0:25
   :END:
-**  [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Text.html#Text][emacs lisp text manipulation]]
-** DONE [#A] Reply to Aaron
-   CLOSED: [2019-02-18 Mon 02:11]
+** [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Text.html#Text][emacs lisp text manipulation]]
 ** TODO [[~/github/writing/paper_notes/index.org::*Summary%20Index][Summary Index]]
 ** [[~/github/languageLearning][Misc Language Repo]]                                                           :javascript:python:multiple_languages:lisp:supercollider:tidal:learning:notes:prolog:misc:
-
+** [[file:~/github/writing/orgfiles/machine_learning.org::*Machine%20Learning%20Notes][Machine Learning Notes]]
+** [[file:~/github/writing/orgfiles/nlp.org::*Natural%20Language%20Processing:][Natural Language Processing:]]
+** TODO Get Castelfranchi: Behavioral Implicit Communication
 ** -----------------------------------------------------------------------------
 ** Programming
 *** TODO [[~/.spacemacs.d/layers/trie][Trie-layer]]
-
+**** Layer Implementation
+***** Expand-Region implementation
+***** keybindings
+***** transient states
+**** Meta Rules
+**** Mode Implementation
+***** activity mode
+***** connection to runtime
+***** font locking
+***** helm trie exploration
+***** interaction flow mode
+***** keywords
+***** Parsec expansion?
+***** pipeline vis
+***** Rational Time visualisation
+***** snippets
+****** rule
+****** interaction flow
+****** activity pyramid
+***** tagging
+***** trie layer flattned representation
+***** Window layouts
+***** working directory loading
+**** Rational Time
 *** Javascript / Web
 **** [[~/github/mordor-alike][Mordor Like Idea]]                                :nemesis:mordor:javascript:obsolete:incomplete:grammar:
 **** TODO [[~/github/newspaper_gen][Newspaper Generator]]                       :javascript:generative:front_end:newspaper:web:procedural:
 **** [[~/github/hexagonAITest][Hexagon Board / AI Test]]                        :front_end:incomplete:javascript:old:parsing:web:
-
 *** Python
 ***** TODO [#A] [[~/github/documentUnitTester][Document Unit Tester]]                                            :writing:support:tool:test_driven_development:python:
 ****** setup a generator for org files
@@ -63,7 +92,7 @@
        CLOSED: [2019-02-10 Sun 13:16]
 ****** TODO [#B] line -> street and space algorithm
 ****** TODO Return to [[file:~/github/cairoCity/citygen/City.py::class%20City:][<Cairo City>]]
-***** TODO [[~/github/cairo_pipeline][Cairo Pipeline Architecture]]                                          :cairo:graphical:active:layers:python:
+***** [[~/github/cairo_pipeline][Cairo Pipeline Architecture]]                                               :cairo:graphical:active:layers:python:
 ***** [[~/github/cairo_utils][Cairo Utilities]]                                                           :graphical:active:dcel:voronoi:cairo:library:tool:
 ***** [[~/github/nytimes_scraper][NYT Scraper]]                                                               :data_analysis:grammar:scraper:dataset:nytimes:
 ***** TODO [#C] [[~/github/pyAStar][Python Astar Implementation]]                                     :library:pathfinding:maze:astar:python:
@@ -72,12 +101,11 @@
 ***** TODO [#A] [[~/github/pythonRuleEngine][Python Rule Language and Engine]]                                 :python:important:todo:meta:simulation:institutions:exclusion_logic:library:parsing:production_system:rules:
 ****** Recap current language capabilities
 ****** integrate layer architecture
-****** implement type checking?
+****** TODO implement type checking?
 ****** implement time?
 ****** TODO [#A] implement meta?
        up and down shifts, possibly links with layers? look at reflective papers again
 ****** implement other form of rule change?
-
 *** TODO Prolog                                                                 :todo:programming:institutions:ASP:tutorial:
 **** continue with prolog tutorial
 **** return to ASP
@@ -96,12 +124,15 @@
 *** TODO Haskell                                                                :monads:theory:programming:haskell:
 **** look at implementation of monad transformers
 *** To Clean
-**** [[~/github/dotaScraper][~/github/dotaScraper]]                                                       :obsolete:old:
-**** [[~/github/emacsModeExample][~/github/emacsModeExample]]                                                  :obsolete:old:incomplete:
 **** [[~/github/happiton][~/github/happiton]]                                                          :obsolete:incomplete:javascript:
-**** [[~/github/cairoSine][~/github/cairoSine]]                                                         :cairo:obsolete:incomplete:old:graphical:image:
-
-
+*** Prototypes
+**** Hex Board -> Preact
+**** Battle System
+**** Credit System
+**** Mordor - alike
+**** Prisoners dilemma
+**** NetLogo
+**** Unity
 ** TODO [#B] Datasets
    To add: don't startve, and other games
    SFAM, Quests, Changelogs?, speech acts , NYT, Social Physics Datasets
@@ -117,7 +148,6 @@
 **** [[http://realitycommons.media.mit.edu/realitymining.html][Reality Mining]]
 *** TODO [#B] Versu dataset
 **** parse the code?
-
 *** TODO horus heresy dataset
 ** TODO [#A] Annotations / Examples
 *** TODO [#A] Snatch delegation
@@ -125,58 +155,28 @@
 *** TODO collate lists of sources
     to prepare for annotation,
     to give components of expressive generators
-
-** TODO [#C] [[~/Mega/savedTwitter][Saved Twitter Threads]]
 ** -----------------------------------------------------------------------------
 ** Writing
-
-** TODO [[file:~/github/writing/orgfiles/dissertation.org::*Dissertation][Dissertation]]                                                            :dissertation:writing:important:
-** [[~/github/jgrey4296.github.io][jgrey4296.github.io]]                                                          :writing:important:todo:target:blog:web:
-*** [[~/github/jsons][jsons representations]]                                                       :json:writing:
-*** [[~/github/writing][misc writing]]                                                                :writing:generic:
-
-** TODO [#C] Mendeley organisation
-*** [[/Volumes/DOCUMENTS/mendeley][Mendeley]]
+*** TODO [[file:~/github/writing/orgfiles/dissertation.org::*Dissertation][Dissertation]]                                                           :dissertation:writing:important:
+*** [[~/github/jgrey4296.github.io][jgrey4296.github.io]]                                                         :writing:important:todo:target:blog:web:
+**** [[~/github/jsons][jsons representations]]                                                      :json:writing:
+**** [[~/github/writing][misc writing]]                                                               :writing:generic:
+*** TODO [#C] Mendeley organisation
+**** [[/Volumes/DOCUMENTS/mendeley][Mendeley]]
+*** TODO [[file:~/github/writing/orgfiles/taxonomies.org::*Taxonomies][Taxonomies]]
+**** DONE TAG them
+     CLOSED: [2019-03-08 Fri 11:13]
+** TODO [#C] [[~/Mega/savedTwitter][Saved Twitter Threads]]
 ** -----------------------------------------------------------------------------
 ** Misc
 *** [[~/github/jg_emacs_files][Emacs files]]                                    :lisp:setup:emacs:
 *** [[~/github/jg_shell_files][Bash Scripts]]                                   :bash:setup:
 *** Emacs / Spacemacs
-**** TODO [#A] Twittering mode image upload extension
-     add this as a set of custom functions, post-extending the twitter layer
-***** DONE extend twittering-edit-mode-map to insert a media id
-      CLOSED: [2019-02-07 Thu 13:00]
-      need to specify a file to upload. how? helm
-***** write function for inserting media id into buffer
-      store media ids as local variables to the tweet buffer
-******* TODO write verify function
-        check size of image/gif/video
-        check format
-        [[file:~/.spacemacs.d/layers/jg_layer/funcs.el::(defun%20jg_layer/twitter-open-and-encode-picture%20(candidate)][<no description>]]
-
-******* extend twittering-call-api-with-account-in-api1.1                       :obsolete:
-******* extend twittering-http-post                                             :obsolete:
-        making sure to change the host to the upload target
-        then method to init then append then finalize
-        loading the specified file into a temporary buffer,
-        then encoding as base64, getting size, chunking
-        and sending.
-
-        sentinel passed will be a continuation to send next chunk
-        or repeat current, or finalize if no more chunks.
-        (this will need the base64 encoded temp buffer accessible
-        or stored in a variable. which?
-***** have twittering-edit-post-status detect media ids
-      retrieve the buffer local variable of media ids
-      add to options passed to twittering-call-api
-***** [[https://developer.twitter.com/en/docs/media/upload-media/api-reference/post-media-upload-init][Twitter api]]
 **** TODO Org SubTree Transient State navigation
 **** TODO [#C] Org Table Transient state
 **** TODO [#C] org-agenda keymap modifications
      swap priority mods into < and >
-**** TODO Write a Helm view for tagging in Org
 **** TODO XML / Bookmarks load
-
 **** TODO tag and colourize words minor mode to run anywhere
      be able to tag and colourize things dynamically, based on what you need at
      any given moment
@@ -187,79 +187,6 @@
      persistent?
 ** TODO Run Summarize Directory Script on datasets/papers/other
    [[file:~/github/jg_shell_files/summariseDirectory.py::"""][<summariseDirectory.py>]]
-
-
 ** TODO Prototype some Mechanical Turk Tasks
-
-
-* Progressed
-** iELPY
-*** Parser
-*** Runtime
-
-** Newspaper Gen
-*** DONE Tracery
-    <2017-03-24 Fri>
-    Add tracery in for straight away text gen
-    ** Shell
-*** Preact UI
-    <2017-03-27 Mon>
-*** Shell Runtime
-**** DONE Test searching
-     <2017-03-23 Thu>
-**** Rule Mode
-     <2017-03-25 Sat>
-**** FSM Mode
-     <2017-03-25 Sat>
-*** Rete
-**** Write actual logic tests
-     <2017-03-26 Sun>
-** Behaviour Tree.js
-*** Exclusion Logic
-    <2017-03-26 Sun>
-    Union of EL.js and iELPy language, to use in both
-** Writing
-*** DONE Jekyll TAGS
-    <2017-03-23 Thu>
-*** Unit Testing
-**** First document: An Overview
-     <2017-03-27 Mon>
-** Prototypes
-   <2017-03-28 Tue>
-*** Hex Board -> Preact
-*** Battle System
-*** Credit System
-*** Mordor - alike
-*** Prisoners dilemma
-*** NetLogo
-*** Unity
-**** Animation
-** Data Analysis
-   <2017-03-28 Tue>
-*** Game Scraping
-
-*** Web Scraping
-**** Dota
-**** WoW
-** Reading
-*** Books
-    <2017-03-29 Wed>
-**** Scott
-     <2017-03-26 Sun>
-**** Bicchieri
-**** Graeber
-**** North
-**** Ostrom
-*** Dagstuhl
-*** Dissertations
-*** Papers
-** DONE Haskell
-   <2017-03-24 Fri>
-   Write a simple parser using parsec
-*** Haskell: add a python version of iEL
-    <2017-03-30 Thu>
-** DONE Python Red-Black Weighting
-   <2017-03-28 Tue>
-
-
-
+** TODO [[http://bloom-lang.net/features/][bloom]]
+** Structural phenomenology?

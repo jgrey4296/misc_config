@@ -3,6 +3,19 @@
 ;;(configuration-layer/declare-layer )
 
 (configuration-layer/declare-layers '(
+                                      ;;customized spacemacs layers
+                                      spacemacs-base
+                                      spacemacs-completion
+                                      spacemacs-layouts
+                                      spacemacs-editing
+                                      spacemacs-editing-visual
+                                      spacemacs-evil
+                                      spacemacs-language
+                                      spacemacs-misc
+                                      spacemacs-ui
+                                      spacemacs-ui-visual
+                                      spacemacs-org
+
                                       ;;UTILITY
                                       helm
                                       auto-completion
@@ -19,6 +32,9 @@
                                       jg_twitter
                                       cscope
                                       gtags
+                                      trie
+                                      osx
+                                      semantic
 
                                       ;;LANGUAGES
                                       sclang

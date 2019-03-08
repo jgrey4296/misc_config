@@ -19,11 +19,40 @@
     rainbow-mode
     flycheck
     shell
+    python
     (git-gutter :excluded t)
     (git-gutter+ :excluded t)
-    (xterm-mouse-mode :excluded t)
-    (gpm-mouse-mode :excluded t)
     (smartparens :excluded t)
+    (erc :excluded t)
+    (jabber :excluded t)
+    (rcirc :excluded t)
+    (slack :excluded t)
+    (default-ivy-config :excluded t)
+    (ido :excluded t)
+    (ido-vertical-mode :excluded t)
+    (eyebrowse :excluded t)
+    (ivy :excluded t)
+    (persp-mode :excluded t)
+    (swiper :excluded t)
+    (ace-link :excluded t)
+    (desktop :excluded t)
+    (doc-view :excluded t)
+    (flx-ido :excluded t)
+    (open-junk-file :excluded t)
+    (paradox :excluded t)
+    (fancy-battery :excluded t)
+    (golden-ratio :excluded t)
+    (zoom-frm :excluded t)
+    (company :excluded t)
+    (projectile :excluded t)
+    (smex :excluded t)
+    (2048-game :excluded t)
+    (tetris :excluded t)
+    (sudoku :excluded t)
+    (helm-games :excluded t)
+    (typit :excluded t)
+    (selectric-mode :excluded t)
+    (xkcd :excluded t)
     )
   )
 
@@ -195,15 +224,16 @@
    org-tags-column 80
    )
 
+  (defun jg_layer/org-mod-keymap ()
+    (define-key org-mode-map (kbd "C-c [") nil)
+    (define-key org-mode-map (kbd "C-c ]") nil))
+
+
+  (add-hook 'org-mode-hook 'jg_layer/org-mod-keymap)
+
   ;; add in keybinding to call tag-occurances
-  (spacemacs/declare-prefix "o" "Org")
-  (spacemacs/declare-prefix "o t" "Tags")
-  (spacemacs/declare-prefix "o a" "Agenda")
-  (spacemacs/declare-prefix "o c" "Calendar")
-  (spacemacs/declare-prefix "o s" "Source")
-  (spacemacs/declare-prefix "o l" "Links")
   (spacemacs/set-leader-keys
-    "o T"     'org-todo-list
+    "o d"     'org-todo-list
     ;; TAGS
     "o t o"   'jg_layer/tag-occurances
     "o t a o" 'jg_layer/tag-occurences-in-open-buffers
@@ -231,6 +261,12 @@
     "o l d"   'org-toggle-link-display
     "o l o"   'jg_layer/open_link_in_buffer
     )
+  (spacemacs/declare-prefix "o" "Org")
+  (spacemacs/declare-prefix "o t" "Tags" "Tags")
+  (spacemacs/declare-prefix "o a" "Agenda")
+  (spacemacs/declare-prefix "o c" "Calendar")
+  (spacemacs/declare-prefix "o s" "Source")
+  (spacemacs/declare-prefix "o l" "Links")
 
   )
 
@@ -289,7 +325,7 @@
   (use-package rainbow-mode
     :commands (rainbow-mode)
     :config (progn
-              (spacemacs/set-leader-keys "t C r" 'rainbow-mode)
+              ;; (spacemacs/set-leader-keys "t C r" 'rainbow-mode)
               (add-hook 'prog-mode-hook 'rainbow-mode))
     )
   )
@@ -328,3 +364,6 @@
                (seq-map (lambda (e) (flycheck-fix-error-filename e files cwd))
                         errors))))
   )
+
+(defun jg_layer/post-init-python ()
+  (add-hook 'python-mode-hook #'(lambda () (modify-syntax-entry ?_ "w"))))

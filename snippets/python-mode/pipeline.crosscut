@@ -7,4 +7,4 @@ def $1_crosscut(d, args, state):
 
     """
     $0
-    return (value, state, data)
+    return (value, state)

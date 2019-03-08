@@ -2,9 +2,9 @@
 # name: pipeline.layer
 # key: pipeline.layer
 # --
-def $1_layer(d, opts, data):
+def $1_layer(d, opts):
     """ Layer : $1
 
     """
     $0
-    return data
+    return None

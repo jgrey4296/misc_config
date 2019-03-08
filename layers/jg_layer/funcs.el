@@ -119,6 +119,7 @@
                                      (jg_layer/make-bar-chart sorted maxTagLength)))
       )
     )
+
   )
 
 ;;--------------------------------------------------
@@ -157,12 +158,16 @@
 ;;----------------------------------------
 
 (defun jg_layer/example_transient_func_setup ()
+  """ Create an example transient state """
+
   (defun jg_layer/example_transient_func ()
+    """ The simple function to call from within the transient state """
     (interactive)
     (print "blah")
     )
 
   (spacemacs|define-transient-state example_transient
+    """ Define the transient state itself """
     :title "an example transient state"
     :doc (concat "
 [_q_]^^ Quit         [_h_]^^ Example Func
@@ -174,6 +179,7 @@
     ("h" jg_layer/example_transient_func :exit t)
     )
 
+  ;; Then register its activation
   (spacemacs/set-leader-keys "." 'spacemacs/example_transient-transient-state/body)
   )
 
@@ -186,6 +192,7 @@
 
   (defun jg_layer/example_helm-call ()
     (interactive)
-    (helm :sources jg_layer/example_helm-image-helm-source
+    (helm :sources jg_layer/example_helm-source
           :input "./"))
   )
+

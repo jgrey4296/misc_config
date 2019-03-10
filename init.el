@@ -339,6 +339,9 @@ you should place your code here."
   (require 'jg_layer/org-setup-tagging "~/.spacemacs.d/layers/jg_layer/org-tagging.el")
   (jg_layer/org-setup-tagging)
 
+  (require 'jg_layer/setup-char-inserting "~/.spacemacs.d/layers/jg_layer/char_inserting.el")
+  (jg_layer/setup-char-inserting)
+
   (defun evil-mouse-drag-region () (interactive))
   (defun mouse-set-point () (interactive))
   (defun evil-mouse-drag-track () (interactive))

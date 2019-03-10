@@ -32,6 +32,4 @@
   "m"   'helm-switch-major-mode
   ;; mark buffer
   "x m" 'mark-whole-buffer
-  ;; insert char
-  "x C" 'insert-char
 )

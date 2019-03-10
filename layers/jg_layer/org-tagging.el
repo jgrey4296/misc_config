@@ -9,7 +9,7 @@
   (defun jg_layer/org-set-tags (x)
     """ Toggle Selected Tags """
     (let* ((visual-candidates (helm-marked-candidates))
-           (actual-candidates (mapcar (lambda (x) (cadr (assoc x jg_layer/org-tagging-candidates))) visual-candidates))
+           (actual-candidates (mapcar (lambda (x) (cadr (assoc x jg_layer/org-tagging-candidates-names))) visual-candidates))
            (current-tags (org-get-tags nil t)))
       (mapc (lambda (candidate)
               (if (not (-contains? current-tags candidate))
@@ -24,15 +24,15 @@
       (if (not (-contains? current-tags x))
           (push x current-tags))
       (org-set-tags current-tags)
-    ))
+      ))
 
   (defun jg_layer/sort-candidates (ap bp)
     """ Sort candidates by colour then lexicographically """
     (let* ((a (car ap))
-	      (b (car bp))
-	      (aprop (get-text-property 0 'font-lock-face a))
-          (bprop (get-text-property 0 'font-lock-face b))
-          (lookup (lambda (x) (gethash (cadr x) jg_layer/org-tagging-candidate-counts))))
+           (b (car bp))
+           (aprop (get-text-property 0 'font-lock-face a))
+           (bprop (get-text-property 0 'font-lock-face b))
+           (lookup (lambda (x) (gethash (cadr x) jg_layer/org-tagging-candidate-counts))))
       (cond
        ((and aprop bprop (> (funcall lookup ap) (funcall lookup bp))) t)
        ((and aprop (not bprop)) t)
@@ -60,14 +60,14 @@
                                                  `(,candString ,(cdr candidate)))) display-pairs))
                  )
             (setq jg_layer/org-tagging-candidate-counts cand-counts)
-            (setq jg_layer/org-tagging-candidates (sort propertied-tags 'jg_layer/sort-candidates))
+            (setq jg_layer/org-tagging-candidates-names (sort propertied-tags 'jg_layer/sort-candidates))
             )
         '()
         ))
-      )
+    )
 
   ;; The Two Sources For Tagging Helm
-  (setq jg_layer/org-tagging-candidates '()
+  (setq jg_layer/org-tagging-candidates-names '()
         jg_layer/org-tagging-candidate-counts '()
         jg_layer/org-tagging-helm `((name . "Helm Tagging")
                                     (action . jg_layer/org-set-tags)

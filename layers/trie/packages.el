@@ -23,4 +23,5 @@
   (use-package trie-mode))
 
 (defun trie/init-parsec ()
-  (use-package parsec))
+  (use-package parsec
+    :defer t))

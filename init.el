@@ -34,6 +34,7 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     csv
      go
      ruby
      (syntax-checking :variables syntax-checking-enable-tooltips nil)
@@ -331,6 +332,7 @@ you should place your code here."
                 version-control-global-margin 0
                 ac-use-quick-help t
                 scroll-margin 10
+                ac-auto-start 1
                 )
   (spacemacs/declare-prefix "x j" "Justify")
   (global-auto-complete-mode 1)
@@ -368,14 +370,14 @@ you should place your code here."
  '(git-gutter+-window-width 4)
  '(global-evil-search-highlight-persist t)
  '(global-evil-surround-mode t)
- '(helm-always-two-windows t)
+ '(helm-always-two-windows t t)
  '(helm-autoresize-mode t)
  '(helm-bookmark-show-location t t)
  '(helm-descbinds-mode t)
  '(helm-descbinds-window-style (quote split) t)
- '(helm-display-function (quote spacemacs//display-helm-window))
- '(helm-display-header-line nil)
- '(helm-echo-input-in-header-line t)
+ '(helm-display-function (quote spacemacs//display-helm-window) t)
+ '(helm-display-header-line nil t)
+ '(helm-echo-input-in-header-line t t)
  '(helm-flx-for-helm-find-files nil)
  '(helm-flx-mode t)
  '(helm-fuzzy-matching-highlight-fn (quote helm-flx-fuzzy-highlight-match))
@@ -384,11 +386,12 @@ you should place your code here."
  '(helm-locate-fuzzy-match 0)
  '(helm-mode t)
  '(helm-split-window-inside-p t)
+ '(hl-paren-delay 0.2 t)
  '(mode-line-in-non-selected-windows t)
- '(org-agenda-files nil)
+ '(org-agenda-files nil t)
  '(package-selected-packages
    (quote
-    (graphviz-dot-mode stickyfunc-enhance srefactor reveal-in-osx-finder pbcopy osx-trash osx-dictionary launchctl disable-mouse parsec transient lv go-guru go-eldoc company-go go-mode helm-cscope xcscope twittering-mode bundler rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake minitest chruby inf-ruby helm-gtags ggtags nlinum rainbow-mode racket-mode org-ref pdf-tools key-chord livid-mode json-mode js2-refactor hy-mode helm-bibtex fsharp-mode company-web company-tern company-ghc company-dcd ivy company-anaconda cargo biblio yapfify yaml-mode web-mode web-beautify toml-mode tagedit slim-mode skewer-mode scss-mode sass-mode faceup racer pyvenv pytest pyenv-mode py-isort pug-mode pip-requirements tablist omnisharp lua-mode simple-httpd live-py-mode json-snatcher json-reformat multiple-cursors js2-mode js-doc intero ibuffer-projectile dash-functional hlint-refactor hindent helm-pydoc helm-hoogle helm-css-scss parsebib haskell-snippets haml-mode glsl-mode ghc geiser company-quickhelp flycheck-rust flycheck-haskell flycheck-dmd-dub emmet-mode disaster d-mode cython-mode csharp-mode web-completion-data tern company-ghci haskell-mode company-cabal company-c-headers company-auctex anaconda-mode coffee-mode cmm-mode cmake-mode clang-format rust-mode biblio-core auctex-latexmk auctex pythonic erlang xterm-color unfill smeargle shell-pop orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download mwim multi-term magit-gitflow htmlize helm-gitignore helm-company helm-c-yasnippet gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter fuzzy flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck evil-magit magit magit-popup git-commit ghub treepy graphql with-editor eshell-z eshell-prompt-extras esh-help diff-hl company-statistics company auto-yasnippet yasnippet auto-dictionary ac-ispell auto-complete mmm-mode markdown-toc markdown-mode gh-md ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async)))
+    (dired-quick-sort elfeed filesets+ academic-phrases ht helm-filesets fsm free-keys evil-string-inflection string-inflection buffer-utils buffer-sets buffer-manage choice-program csv-mode graphviz-dot-mode stickyfunc-enhance srefactor reveal-in-osx-finder pbcopy osx-trash osx-dictionary launchctl disable-mouse parsec transient lv go-guru go-eldoc company-go go-mode helm-cscope xcscope twittering-mode bundler rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake minitest chruby inf-ruby helm-gtags ggtags nlinum rainbow-mode racket-mode org-ref pdf-tools key-chord livid-mode json-mode js2-refactor hy-mode helm-bibtex fsharp-mode company-web company-tern company-ghc company-dcd ivy company-anaconda cargo biblio yapfify yaml-mode web-mode web-beautify toml-mode tagedit slim-mode skewer-mode scss-mode sass-mode faceup racer pyvenv pytest pyenv-mode py-isort pug-mode pip-requirements tablist omnisharp lua-mode simple-httpd live-py-mode json-snatcher json-reformat multiple-cursors js2-mode js-doc intero ibuffer-projectile dash-functional hlint-refactor hindent helm-pydoc helm-hoogle helm-css-scss parsebib haskell-snippets haml-mode glsl-mode ghc geiser company-quickhelp flycheck-rust flycheck-haskell flycheck-dmd-dub emmet-mode disaster d-mode cython-mode csharp-mode web-completion-data tern company-ghci haskell-mode company-cabal company-c-headers company-auctex anaconda-mode coffee-mode cmm-mode cmake-mode clang-format rust-mode biblio-core auctex-latexmk auctex pythonic erlang xterm-color unfill smeargle shell-pop orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download mwim multi-term magit-gitflow htmlize helm-gitignore helm-company helm-c-yasnippet gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter fuzzy flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck evil-magit magit magit-popup git-commit ghub treepy graphql with-editor eshell-z eshell-prompt-extras esh-help diff-hl company-statistics company auto-yasnippet yasnippet auto-dictionary ac-ispell auto-complete mmm-mode markdown-toc markdown-mode gh-md ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async)))
  '(paradox-github-token t)
  '(spaceline-helm-mode t))
 (custom-set-faces

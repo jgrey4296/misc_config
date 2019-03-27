@@ -60,9 +60,10 @@
         ;;match all
         (while (not (eq nil (re-search-forward ":\\([[:graph:]]+\\):\\(\.\.\.\\)?\$" nil t)))
           ;;split tags into list
-          (let ((tags (split-string (match-string-no-properties 0) ":" t ":")))
+          (let* ((tags (split-string (match-string-no-properties 0) ":" t ":"))
+                 (filtered (seq-filter (lambda (x) (not (or (string-equal x "PROPERTIES") (string-equal x "END")))) tags)))
             ;;increment counts
-            (mapc (lambda (x) (puthash x (+ 1 (gethash x tag-set 0)) tag-set)) tags)
+            (mapc (lambda (x) (puthash x (+ 1 (gethash x tag-set 0)) tag-set)) filtered)
             )
           )
         tag-set

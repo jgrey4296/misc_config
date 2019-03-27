@@ -1,5 +1,18 @@
+#+BIBLIOGRAPHY: ~/github/writing/mendeley_library plain
 * Base Agenda
   :LOGBOOK:
+  CLOCK: [2019-03-20 Wed 18:13]--[2019-03-20 Wed 18:38] =>  0:25
+  CLOCK: [2019-03-20 Wed 17:42]--[2019-03-20 Wed 18:07] =>  0:25
+  CLOCK: [2019-03-20 Wed 17:12]--[2019-03-20 Wed 17:37] =>  0:25
+  CLOCK: [2019-03-20 Wed 16:42]--[2019-03-20 Wed 17:07] =>  0:25
+  CLOCK: [2019-03-11 Mon 08:21]--[2019-03-11 Mon 08:46] =>  0:25
+  CLOCK: [2019-03-11 Mon 07:43]--[2019-03-11 Mon 08:08] =>  0:25
+  CLOCK: [2019-03-10 Sun 19:05]--[2019-03-10 Sun 19:30] =>  0:25
+  CLOCK: [2019-03-10 Sun 18:35]--[2019-03-10 Sun 19:00] =>  0:25
+  CLOCK: [2019-03-10 Sun 18:05]--[2019-03-10 Sun 18:30] =>  0:25
+  CLOCK: [2019-03-10 Sun 12:19]--[2019-03-10 Sun 12:44] =>  0:25
+  CLOCK: [2019-03-10 Sun 11:32]--[2019-03-10 Sun 11:57] =>  0:25
+  CLOCK: [2019-03-10 Sun 10:54]--[2019-03-10 Sun 11:19] =>  0:25
   CLOCK: [2019-02-28 Thu 20:39]--[2019-02-28 Thu 21:04] =>  0:25
   CLOCK: [2019-02-28 Thu 20:13]--[2019-02-28 Thu 20:38] =>  0:25
   CLOCK: [2019-02-28 Thu 19:38]--[2019-02-28 Thu 20:03] =>  0:25
@@ -44,7 +57,7 @@
   CLOCK: [2019-02-04 Mon 15:17]--[2019-02-04 Mon 15:42] =>  0:25
   CLOCK: [2019-02-04 Mon 14:09]--[2019-02-04 Mon 14:34] =>  0:25
   :END:
-** [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Text.html#Text][emacs lisp text manipulation]]
+  [[https://robertheaton.com/2018/12/17/wavefunction-collapse-algorithm/][Wave function collapse]]
 ** TODO [[~/github/writing/paper_notes/index.org::*Summary%20Index][Summary Index]]
 ** [[~/github/languageLearning][Misc Language Repo]]                                                           :javascript:python:multiple_languages:lisp:supercollider:tidal:learning:notes:prolog:misc:
 ** [[file:~/github/writing/orgfiles/machine_learning.org::*Machine%20Learning%20Notes][Machine Learning Notes]]
@@ -77,33 +90,34 @@
 ***** Window layouts
 ***** working directory loading
 **** Rational Time
+***** TODO iterator for pattern
 *** Javascript / Web
 **** [[~/github/mordor-alike][Mordor Like Idea]]                                :nemesis:mordor:javascript:obsolete:incomplete:grammar:
 **** TODO [[~/github/newspaper_gen][Newspaper Generator]]                       :javascript:generative:front_end:newspaper:web:procedural:
 **** [[~/github/hexagonAITest][Hexagon Board / AI Test]]                        :front_end:incomplete:javascript:old:parsing:web:
 *** Python
-***** TODO [#A] [[~/github/documentUnitTester][Document Unit Tester]]                                            :writing:support:tool:test_driven_development:python:
+***** TODO [[~/github/documentUnitTester][Document Unit Tester]]                                                 :writing:support:tool:test_driven_development:python:
 ****** setup a generator for org files
 ***** [[~/github/heuristicRBTreeWeighting][Heuristic Tree Weighting]]                                                  :obsolete:incomplete:old:python:
 ***** [[~/github/islandGen][Voronoi Island Gen]]                                                        :incomplete:python:image:
       integrate into pipeline
-***** TODO [#A] [[~/github/cairoCity][Cairo City Generator]]                                            :cairo:graphical:image:generative:front_end:layers:city:python:
+***** TODO [[~/github/cairoCity][Cairo City Generator]]                                                 :cairo:graphical:image:generative:front_end:layers:city:python:
 ****** DONE [#A] integrate with cairo_pipeline
        CLOSED: [2019-02-10 Sun 13:16]
-****** TODO [#B] line -> street and space algorithm
+****** TODO line -> street and space algorithm
 ****** TODO Return to [[file:~/github/cairoCity/citygen/City.py::class%20City:][<Cairo City>]]
 ***** [[~/github/cairo_pipeline][Cairo Pipeline Architecture]]                                               :cairo:graphical:active:layers:python:
 ***** [[~/github/cairo_utils][Cairo Utilities]]                                                           :graphical:active:dcel:voronoi:cairo:library:tool:
 ***** [[~/github/nytimes_scraper][NYT Scraper]]                                                               :data_analysis:grammar:scraper:dataset:nytimes:
-***** TODO [#C] [[~/github/pyAStar][Python Astar Implementation]]                                     :library:pathfinding:maze:astar:python:
+***** TODO [[~/github/pyAStar][Python Astar Implementation]]                                          :library:pathfinding:maze:astar:python:
 ****** integrate into pythonRuleEngine?
        needs to be able to control vault movement as well
-***** TODO [#A] [[~/github/pythonRuleEngine][Python Rule Language and Engine]]                                 :python:important:todo:meta:simulation:institutions:exclusion_logic:library:parsing:production_system:rules:
+***** TODO [[~/github/pythonRuleEngine][Python Rule Language and Engine]]                                      :python:important:todo:meta:simulation:institutions:exclusion_logic:library:parsing:production_system:rules:
 ****** Recap current language capabilities
 ****** integrate layer architecture
 ****** TODO implement type checking?
 ****** implement time?
-****** TODO [#A] implement meta?
+****** TODO implement meta?
        up and down shifts, possibly links with layers? look at reflective papers again
 ****** implement other form of rule change?
 *** TODO Prolog                                                                 :todo:programming:institutions:ASP:tutorial:
@@ -117,8 +131,8 @@
 **** look at acropolis API to get samples/assets
 **** Action languages
      C+ as well
-**** TODO [#A] soundscape assets
-***** TODO [#A] [[https://bbcarchdev.github.io/inside-acropolis/#consumers][Acropolis API]]
+**** TODO soundscape assets
+***** TODO [[https://bbcarchdev.github.io/inside-acropolis/#consumers][Acropolis API]]
       [[http://bbcsfx.acropolis.org.uk/index][BBC Sound FX Library]]
       [[bbcsfx.acropolis.org.uk/][BBC sound effects frontend]]
 *** TODO Haskell                                                                :monads:theory:programming:haskell:
@@ -133,23 +147,123 @@
 **** Prisoners dilemma
 **** NetLogo
 **** Unity
-** TODO [#B] Datasets
-   To add: don't startve, and other games
-   SFAM, Quests, Changelogs?, speech acts , NYT, Social Physics Datasets
-*** [[~/github/jg-SpaceBase-DF9][~/github/jg-SpaceBase-DF9]]                                                   :simulation:lua:to_analyse:codebase:game:
-*** TODO [[~/Mega/Datasets][~/Mega/Datasets]]
-**** go through, find whats useful
-*** TODO [#A] NYT
-**** try using title trie grammars
-**** [[~/Mega/Images/glitch-assets][~/Mega/Images/glitch-assets]]
-     possibly use these in vault?
-**** [[~/Mega/bookmarks][~/Mega/bookmarks]]
-     treat these as codings?
-**** [[http://realitycommons.media.mit.edu/realitymining.html][Reality Mining]]
-*** TODO [#B] Versu dataset
-**** parse the code?
-*** TODO horus heresy dataset
-** TODO [#A] Annotations / Examples
+** TODO Datasets
+*** [[~/Mega/bookmarks][~/Mega/bookmarks]]
+    treat these as codings?
+*** TODO Bookmark and saved twitter parsing
+**** Bookmarks
+     [[https://msdn.microsoft.com/en-us/library/aa753582(v=vs.85).aspx][bookmark format]]
+***** DONE Parse into emacs readable format
+      CLOSED: [2019-03-14 Thu 19:46]
+***** Create a helm navigation layer
+*** Audio
+    [[file:~/Mega/Datasets/BBCSoundEffects.csv][file:~/Mega/Datasets/BBCSoundEffects.csv]]
+*** Code
+**** Monroe Domain Plans
+**** [[file:~/Mega/Code%20Backups/shop2random.lisp][Shop2 Plan generator]]
+**** [[file:~/Mega/Code%20Backups/Evolution_of_Norms][Evolution of Norms]]
+**** [[file:~/Mega/Code%20Backups/Social_Norms_(Emperor's_Dilemma)][Social Norms / Emperor's Dilemma]]
+**** Chuck Examples
+**** [[file:~/Mega/Code%20Backups/ccalc-2.0r2.tar.gz][CCalc]]
+**** [[file:~/Mega/Code%20Backups/BPS1024.zip][Building Problem Solvers]]
+**** [[file:~/Mega/Code%20Backups/Immerse%20Code%20Backup-20170930T102013Z-002.zip][Immerse]]
+*** Games
+**** [[file:~/Mega/Datasets/twine][Twine]]
+     [[https://github.com/ehenestroza/twine-graph/blob/master/twine_graph/twine_graph.py][Twine Graph on Github]]
+     [[https://github.com/McJones/twinespacer/blob/master/twinespacer.py][Twine Spacer on Github]]
+     [[https://github.com/cauli/TwineJson/blob/master/js/app/converter.js][TwinJson Converter on Github]]
+     [[https://github.com/daterre/Cradle#importing-a-story][Cradle Converter on Github]]
+**** CiF
+***** Rules
+      [[file:~/Mega/Datasets/cifJsons][file:~/Mega/Datasets/cifJsons]]
+***** Level Traces
+      [[file:~/Mega/Datasets/LevelTraceStorage18May2012.zip][file:~/Mega/Datasets/LevelTraceStorage18May2012.zip]]
+***** Prom Week Speech Acts
+      [[file:~/Mega/Datasets/prom_week_dialogue_annotated_for_speech_acts.tsv][file:~/Mega/Datasets/prom_week_dialogue_annotated_for_speech_acts.tsv]]
+**** Versu
+     [[file:~/Mega/Code%20Backups/cotillion.zip][Cotillion Zip]]
+
+***** Rules
+**** WoW Quests
+     [[file:~/Mega/Datasets/allQuests.tsv][file:~/Mega/Datasets/allQuests.tsv]]
+**** DOTA Changelog
+**** [[file:~/Mega/Datasets/DevMaterials][Postmortem Dev Materials]]
+**** [[file:~/Mega/Datasets/gameData/BoI][Binding of Isaac]]
+**** [[file:~/Mega/Datasets/gameData/CK2][Crusader Kings]]
+**** [[file:~/Mega/Datasets/gameData/EUIV][Europa Universalis]]
+**** [[file:~/Mega/Datasets/gameData/democracy3][Democracy 3]]
+**** [[file:~/Mega/Datasets/gameData/d3_africa][Democracy 3 Africa]]
+**** [[file:~/Mega/Datasets/gameData/distant%20worlds][Distant Worlds]]
+**** [[file:~/Mega/Datasets/gameData/dontstarve][Don't Starve]]
+**** [[file:~/Mega/Datasets/gameData/dungeon%20of%20the%20endless][Dungeon of the Endless]]
+**** [[file:~/Mega/Datasets/gameData/dwarf_fortress][Dwarf Fortress]]
+**** [[file:~/Mega/Datasets/gameData/invisibleInc][Invisible Inc]]
+**** [[file:~/Mega/Datasets/gameData/king_dragon_pass][King of Dragon Pass]]
+**** [[file:~/Mega/Datasets/gameData/offworld_trading][Offworld Trading]]
+**** [[file:~/Mega/Datasets/gameData/prison_architect][Prison Architect]]
+     [[file:~/Mega/Datasets/gameData/prisons][file:~/Mega/Datasets/gameData/prisons]]
+**** [[file:~/Mega/Datasets/gameData/red%20shirt][Red Shirt]]
+**** [[file:~/Mega/Datasets/gameData/rimworld][RimWorld]]
+**** [[file:~/Mega/Datasets/gameData/stellaris][Stellaris]]
+**** [[file:~/Mega/Datasets/gameData/sunlessSea][Sunless Sea]]
+**** [[file:~/Mega/Datasets/gameData/the%20guild2][The Guild 2]]
+**** [[file:~/Mega/Datasets/gameData/unrest][Unrest]]
+**** [[file:~/Mega/Datasets/gameData/witcher3][Witcher 3]]
+**** [[file:~/Mega/Code%20Backups/jg-SpaceBase-DF9][SpaceBase DF-9]]
+**** [[file:~/Mega/Code%20Backups/SimHealth_DOS_EN.zip][SimHealth]]
+**** [[file:~/Mega/Code%20Backups/Yoda_Stories.zip][Yoda Stories]]
+**** [[file:~/Mega/Documents/Kingdom_RPG.zip][Kingdom]]
+**** [[file:~/Mega/Documents/Microscope_RPG.zip][Microscope]]
+*** Text
+****** [#A] NYT
+******* try using title trie grammars
+****** [[file:~/Mega/Datasets/Peake,%20Mervyn][Gormenghast]]
+****** [[file:~/Mega/Datasets/Discworld][Discworld]]
+****** [[file:~/Mega/Datasets/40k%20txts][40k]]
+****** Supreme Court
+******* [[file:~/Mega/Datasets/supreme_court_dialogs_corpus_v1.01(1).zip][Dialogue]]
+******* Cases
+        [[file:~/Mega/Datasets/SCDB_2014_01_caseCentered_Vote.csv.zip][file:~/Mega/Datasets/SCDB_2014_01_caseCentered_Vote.csv.zip]]
+        [[file:~/Mega/Datasets/SCDB_2014_01_justiceCentered_Vote.csv.zip][file:~/Mega/Datasets/SCDB_2014_01_justiceCentered_Vote.csv.zip]]
+        [[file:~/Mega/Datasets/SCDB_2015_01_justiceCentered_LegalProvision.csv.zip][file:~/Mega/Datasets/SCDB_2015_01_justiceCentered_LegalProvision.csv.zip]]
+        [[file:~/Mega/Datasets/SCDB_2018_02_caseCentered_Citation.csv.zip][file:~/Mega/Datasets/SCDB_2018_02_caseCentered_Citation.csv.zip]]
+        [[file:~/Mega/Datasets/SCDB_2018_02_caseCentered_Docket.csv.zip][file:~/Mega/Datasets/SCDB_2018_02_caseCentered_Docket.csv.zip]]
+        [[file:~/Mega/Datasets/SCDB_Legacy_04_caseCentered_Citation.csv.zip][file:~/Mega/Datasets/SCDB_Legacy_04_caseCentered_Citation.csv.zip]]
+
+****** [[file:~/Mega/Datasets/StandOnZanzibar.txt][Stand On Zanzibar]]
+****** [[file:~/Mega/Datasets/Stanford_politeness_corpus.zip][Politeness Corpus]]
+****** [[file:~/Mega/Datasets/kjv_apocrypha_utf8_FINAL.xml][King James Bible]]
+****** [[file:~/Mega/Datasets/me2-text-dialogue.txt][Mass Effect 2 Dialogue]]
+****** [[file:~/Mega/Datasets/pizza_request_dataset.tar.gz][Pizza Request]]
+****** [[file:~/Mega/Datasets/transcripts.tar.gz][White House Transcripts]]
+****** [[file:~/Mega/Datasets/roberts_rules.txt][Roberts Rules of Order]]
+****** [[file:~/Mega/Datasets/swb1_dialogact_annot(4).tar.gz][Switchboard Corpus]]
+       [[file:~/Mega/Datasets/swda.zip][file:~/Mega/Datasets/swda.zip]]
+******* swda.py
+****** [[file:~/Mega/Datasets/quotes.tar.gz][White House Speech Quotes]]
+       [[file:~/Mega/Datasets/quotes_json.tar.gz][file:~/Mega/Datasets/quotes_json.tar.gz]]
+****** [[file:~/Mega/Datasets/uscode.zip][US Code]]
+****** [[file:~/Mega/Datasets/verb-pair-orders.gz][Verb Pairs]]
+
+*** Images
+***** [[~/Mega/Images/glitch-assets][~/Mega/Images/glitch-assets]]
+      possibly use these in vault?
+***** Scenes from a Multiverse
+      [[file:~/Mega/Datasets/SFAM%20html][file:~/Mega/Datasets/SFAM html]]
+      [[file:~/Mega/Datasets/SFAM%20images][file:~/Mega/Datasets/SFAM images]]
+***** [[file:~/Mega/Datasets/Scarfolk][Scarfolk]]
+***** misc images
+***** online assets
+***** portraits
+*** Measurements
+**** [[file:~/Mega/Datasets/RealityMining.zip][Reality Mining]]
+**** [[file:~/Mega/Datasets/Friends&Family.zip][Friends and Family]]
+**** [[file:~/Mega/Datasets/2014%20SQF.zip][SQF]]
+**** [[file:~/Mega/Datasets/HDC-full.zip][HDC]]
+**** [[file:~/Mega/Datasets/SocialEvolution.zip][Social Evolution]]
+**** [[file:~/Mega/Datasets/diplomacy_data_1.0.zip][Diplomacy]]
+**** [[file:~/Mega/Datasets/linuxCorpus-1.0.zip][Linux Dataset]]
+** TODO Annotations / Examples
 *** TODO [#A] Snatch delegation
     to lead to delegation in iEl
 *** TODO collate lists of sources
@@ -161,20 +275,27 @@
 *** [[~/github/jgrey4296.github.io][jgrey4296.github.io]]                                                         :writing:important:todo:target:blog:web:
 **** [[~/github/jsons][jsons representations]]                                                      :json:writing:
 **** [[~/github/writing][misc writing]]                                                               :writing:generic:
-*** TODO [#C] Mendeley organisation
-**** [[/Volumes/DOCUMENTS/mendeley][Mendeley]]
+*** TODO [[file:~/Mega/Mendeley][Mendeley]]
 *** TODO [[file:~/github/writing/orgfiles/taxonomies.org::*Taxonomies][Taxonomies]]
 **** DONE TAG them
      CLOSED: [2019-03-08 Fri 11:13]
-** TODO [#C] [[~/Mega/savedTwitter][Saved Twitter Threads]]
+** TODO [[~/Mega/savedTwitter][Saved Twitter Threads]]
 ** -----------------------------------------------------------------------------
 ** Misc
 *** [[~/github/jg_emacs_files][Emacs files]]                                    :lisp:setup:emacs:
 *** [[~/github/jg_shell_files][Bash Scripts]]                                   :bash:setup:
 *** Emacs / Spacemacs
+    [[https://www.gnu.org/software/emacs/manual/html_mono/eieio.html][EIEIO]]
+    [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Text.html#Text][emacs lisp text manipulation]]
+    [[https://www.gnu.org/software/emacs/manual/html_mono/cl.html][CL]]
+    [[https://www.gnu.org/software/emacs/manual/html_mono/ede.html][EDE]]
+    [[https://www.gnu.org/software/emacs/manual/html_mono/semantic.html][Semantic]]
+    [[https://github.com/skeeto/elfeed][Elfeed]]
 **** TODO Org SubTree Transient State navigation
-**** TODO [#C] Org Table Transient state
-**** TODO [#C] org-agenda keymap modifications
+     Add a transient state for moving, promoting, demoting etc subtrees
+**** TODO Org Table Transient state
+     Transient state to create, add (column/row), and navigate tables
+**** TODO org-agenda keymap modifications
      swap priority mods into < and >
 **** TODO XML / Bookmarks load
 **** TODO tag and colourize words minor mode to run anywhere
@@ -185,8 +306,49 @@
      be able to add a buffer / marked buffers to a register,
      then search in them, or step through them
      persistent?
+**** TODO Buffer Register Sets
+***** Add files/buffers to register
+****** Regex / File Type
+****** Mode
+****** Directory
+****** Directory DFS
+***** View Register
+***** Open Single and Multiple files from register
+***** Apply action to all files in register
+***** Search only in files in register
+***** Make Register persistent
+***** Set Operations on Registers
+
+**** TODO Make an indirect-buffer shortcut for org mode to work with multiple subtrees
+**** [[https://orgmode.org/worg/org-tutorials/org-column-view-tutorial.html][column view]]
+
 ** TODO Run Summarize Directory Script on datasets/papers/other
    [[file:~/github/jg_shell_files/summariseDirectory.py::"""][<summariseDirectory.py>]]
 ** TODO Prototype some Mechanical Turk Tasks
 ** TODO [[http://bloom-lang.net/features/][bloom]]
+*** CALM: Consistency as Logical Monotonicity
+
+*** "Gray's Twelfth Challenge"
+    DWIM : Do What I Mean
+    Spec Language that:
+    1) Is Easy to express designs
+    2) Is Compilable
+    3) Can describe all applications
+
+    System should 'reason' about application:
+    Ask about exception cases
+    Ask about incomplete specification
+    Not be onerous
+
+*** Borges "A New Refutation of Time"
+    "The Denial of time involves two negations: The negation of the succession
+    of the terms of a series, negation of the synchronism of the terms in two
+    different series"
+
+*** Disorderly programming and datastructures
+
 ** Structural phenomenology?
+** [[https://www.rockpapershotgun.com/2019/03/21/french-revolutionary-judge-sim-we-the-revolution-is-out-now/][We. The Revolution]]
+** [[https://www.rockpapershotgun.com/2019/03/23/make-friends-and-steal-their-mail-in-willowbrooke-post/][Willbrooke post]]
+** [[http://ifaamas.org/Proceedings/aamas2018/forms/contents.htm][AAMAS Proceedings]]
+** [[http://defeasible.org/][Defeasible Logic]]

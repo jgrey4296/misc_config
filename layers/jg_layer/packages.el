@@ -20,6 +20,17 @@
     flycheck
     shell
     python
+    academic-phrases
+    dired-quick-sort
+    ;; buffer-manage
+    ;; (buffer-sets :location (recipe :fetcher git :url "https://git.flintfam.org/swf-projects/buffer-sets.git"))
+    buffer-utils
+    ;; (filesets+ :location (recipe :fetcher github :repo "emacsmirror/filesets-plus"))
+    ;; helm-filesets
+    evil-string-inflection
+    free-keys
+    fsm
+
     (git-gutter :excluded t)
     (git-gutter+ :excluded t)
     (smartparens :excluded t)
@@ -260,6 +271,7 @@
     "o l i"   'org-insert-link
     "o l d"   'org-toggle-link-display
     "o l o"   'jg_layer/open_link_in_buffer
+    "o l r"   'org-reftex-citation
     )
   (spacemacs/declare-prefix "o" "Org")
   (spacemacs/declare-prefix "o t" "Tags" "Tags")
@@ -268,6 +280,13 @@
   (spacemacs/declare-prefix "o s" "Source")
   (spacemacs/declare-prefix "o l" "Links")
 
+
+  ;;TODO add function to insert a bibliography
+  ;;plus keybind it
+  ;; #+BIBLIOGRAPHY: ~/github/writing/mendeley_library plain
+  ;;keybind
+  (spacemacs/set-leader-keys-for-major-mode 'org-mode
+    "i c" 'org-reftex-citation)
   )
 
 (defun jg_layer/post-init-yasnippet ()
@@ -282,6 +301,11 @@
     "y n"    'yas-new-snippet
     "y d"    'yas-describe-tables
     )
+
+  (spacemacs/set-leader-keys-for-major-mode 'edit-abbrevs-mode
+                                      "y s" 'abbrev-edit-save-buffer
+   )
+
   (global-set-key (kbd "C-c ;") 'expand-abbrev)
   (global-set-key (kbd "C-c >") 'yas-new-snippet)
   )
@@ -367,3 +391,57 @@
 
 (defun jg_layer/post-init-python ()
   (add-hook 'python-mode-hook #'(lambda () (modify-syntax-entry ?_ "w"))))
+
+
+(defun jg_layer/init-academic-phrases ()
+  (use-package academic-phrases
+    :config
+    (spacemacs/declare-prefix "o i" "Insert Academic")
+    (spacemacs/set-leader-keys "o i p" 'academic-phrases
+      "o i s" 'academic-phrases-by-section))
+
+  )
+
+;; (defun jg_layer/init-buffer-manage ()
+;;   (use-package buffer-manage)
+;;   )
+
+;; (defun jg_layer/init-buffer-sets ()
+;;   (use-package buffer-sets)
+;;   )
+
+(defun jg_layer/init-buffer-utils ()
+  (use-package buffer-utils
+    :defer t)
+  )
+
+;; (defun jg_layer/init-helm-filesets ()
+;;   (use-package helm-filesets)
+;;   )
+
+(defun jg_layer/init-evil-string-inflection ()
+  (use-package evil-string-inflection
+    :config (define-key evil-normal-state-map "g'" 'evil-operator-string-inflection))
+  )
+
+(defun jg_layer/init-free-keys ()
+  (use-package free-keys
+    :config (spacemacs/set-leader-keys "a f k" 'free-keys
+              "a f p" 'free-keys-set-prefix))
+)
+
+(defun jg_layer/init-fsm ()
+  (use-package fsm
+    :defer t)
+  )
+
+;; (defun jg_layer/init-filesets+ ()
+;;   (use-package filesets+
+;;     :init (filesets-init))
+;;   )
+
+(defun jg_layer/init-dired-quick-sort ()
+  (use-package dired-quick-sort
+    :init (dired-quick-sort-setup)
+    )
+  )

@@ -30,10 +30,11 @@
     evil-string-inflection
     free-keys
     fsm
-
+    highlight-parentheses
     (git-gutter :excluded t)
     (git-gutter+ :excluded t)
     (smartparens :excluded t)
+    (show-paren-mode :excluded t)
     (erc :excluded t)
     (jabber :excluded t)
     (rcirc :excluded t)
@@ -446,3 +447,23 @@
     :init (dired-quick-sort-setup)
     )
   )
+
+
+(defun jg_layer/post-init-highlight-parentheses ()
+      (setq hl-paren-colors '("color-16" "color-16" "color-16" "color-16")
+            hl-paren-background-colors '("Springgreen3" "color-26" "color-91" "IndianRed3"))
+      )
+
+
+;; (use-package highlight-parentheses
+;;   :init
+;;   (progn
+;;     (when (member dotspacemacs-highlight-delimiters '(all current))
+;;       (add-hook 'prog-mode-hook #'highlight-parentheses-mode))
+;;     (setq hl-paren-delay 0.2)
+;;     (spacemacs/set-leader-keys "tCp" 'highlight-parentheses-mode)
+;;     (setq hl-paren-colors '("color-16" "color-16" "color-16" "color-16")
+;;           hl-paren-background-colors '("Springgreen3" "color-26" "color-91" "IndianRed3")))
+;;   :config
+;;   (spacemacs|hide-lighter highlight-parentheses-mode)
+;;   (set-face-attribute 'hl-paren-face nil :weight 'ultra-bold)))

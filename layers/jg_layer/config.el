@@ -16,11 +16,7 @@
  tab-width 4
  indent-tabs-mode nil
 
- ;;hl-parens
- hl-paren-colors '("Black" "Black" "Black" "Black")
- hl-paren-background-colors '("Springgreen3" "color-26" "color-91" "IndianRed3")
-
- )
+)
 ;; force utf-8
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)

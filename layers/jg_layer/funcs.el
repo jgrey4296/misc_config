@@ -22,6 +22,12 @@
     (org-open-at-point 'in-emacs)
     )
 
+  (defun jg_layer/open_link_externally ()
+    """ Open a link, forcing it to be external to emacs """
+    (interactive)
+    (let ((current-prefix-arg '(16)))
+      (call-interactively 'org-open-at-point)))
+
   (defun jg_layer/list-agenda-files ()
     """ Creates a temporary, Org-mode buffer with links to agenda files """
     (interactive)

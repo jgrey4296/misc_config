@@ -271,6 +271,7 @@
     "o l i"   'org-insert-link
     "o l d"   'org-toggle-link-display
     "o l o"   'jg_layer/open_link_in_buffer
+    "o l O"   'jg_layer/open_link_externally
     "o l r"   'org-reftex-citation
     )
   (spacemacs/declare-prefix "o" "Org")

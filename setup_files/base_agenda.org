@@ -57,12 +57,11 @@
   CLOCK: [2019-02-04 Mon 15:17]--[2019-02-04 Mon 15:42] =>  0:25
   CLOCK: [2019-02-04 Mon 14:09]--[2019-02-04 Mon 14:34] =>  0:25
   :END:
-  [[https://robertheaton.com/2018/12/17/wavefunction-collapse-algorithm/][Wave function collapse]]
-** TODO [[~/github/writing/paper_notes/index.org::*Summary%20Index][Summary Index]]
+** TODO [[~/github/writing/paper_notes/index.org::*Summary%20Index][Paper Summaries Index]]
+** [[~/github/writing/orgfiles][Orgfiles]]
 ** [[~/github/languageLearning][Misc Language Repo]]                                                           :javascript:python:multiple_languages:lisp:supercollider:tidal:learning:notes:prolog:misc:
 ** [[file:~/github/writing/orgfiles/machine_learning.org::*Machine%20Learning%20Notes][Machine Learning Notes]]
 ** [[file:~/github/writing/orgfiles/nlp.org::*Natural%20Language%20Processing:][Natural Language Processing:]]
-** TODO Get Castelfranchi: Behavioral Implicit Communication
 ** -----------------------------------------------------------------------------
 ** Programming
 *** TODO [[~/.spacemacs.d/layers/trie][Trie-layer]]
@@ -105,7 +104,33 @@
 ****** DONE [#A] integrate with cairo_pipeline
        CLOSED: [2019-02-10 Sun 13:16]
 ****** TODO line -> street and space algorithm
+****** Alt: Moving Square filling
 ****** TODO Return to [[file:~/github/cairoCity/citygen/City.py::class%20City:][<Cairo City>]]
+****** City operators
+******* road
+******* building
+******* selection
+******* flow
+******* destroy
+******* deadend
+******* crossing
+******* clone
+******* bisect
+******* bezier river
+******* align
+******* heightmap
+******* intersection
+******* length
+******* merge
+******* move
+******* plant
+******* point
+******* rotate
+******* space
+******* wall
+******* water fill
+******* width
+******* zone completion
 ***** [[~/github/cairo_pipeline][Cairo Pipeline Architecture]]                                               :cairo:graphical:active:layers:python:
 ***** [[~/github/cairo_utils][Cairo Utilities]]                                                           :graphical:active:dcel:voronoi:cairo:library:tool:
 ***** [[~/github/nytimes_scraper][NYT Scraper]]                                                               :data_analysis:grammar:scraper:dataset:nytimes:
@@ -352,3 +377,5 @@
 ** [[https://www.rockpapershotgun.com/2019/03/23/make-friends-and-steal-their-mail-in-willowbrooke-post/][Willbrooke post]]
 ** [[http://ifaamas.org/Proceedings/aamas2018/forms/contents.htm][AAMAS Proceedings]]
 ** [[http://defeasible.org/][Defeasible Logic]]
+** [[https://robertheaton.com/2018/12/17/wavefunction-collapse-algorithm/][Wave function collapse]]
+** TODO Get Castelfranchi: Behavioral Implicit Communication

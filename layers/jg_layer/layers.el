@@ -37,29 +37,32 @@
                                       semantic
 
                                       ;;LANGUAGES
-                                      sclang
-                                      tidal
-                                      chuck
-                                      erlang
+                                      (csv :defer)
+                                      (go :defer)
+                                      (ruby :defer)
+                                      (sclang :defer)
+                                      (tidal :defer)
+                                      (chuck :defer)
+                                      (erlang :defer)
                                       haskell
-                                      javascript
-                                      csharp
-                                      fsharp
-                                      lua
+                                      (javascript :defer)
+                                      (csharp :defer)
+                                      (fsharp :defer)
+                                      (lua :defer)
                                       python
                                       emacs-lisp
-                                      racket
-                                      yaml
-                                      rust
-                                      scheme
-                                      graphviz
-                                      d
-                                      c-c++
-                                      bibtex
-                                      latex
-                                      html
-                                      shaders
-                                      octave
+                                      (racket :defer)
+                                      (yaml :defer)
+                                      (rust :defer)
+                                      (scheme :defer)
+                                      (graphviz :defer)
+                                      (d :defer)
+                                      (c-c++ :defer)
+                                      (bibtex :defer)
+                                      (latex :defer)
+                                      (html :defer)
+                                      (shaders :defer)
+                                      (octave :defer)
                                       ;;prolog
                                       ;;smalltalk
 ))

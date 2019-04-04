@@ -110,8 +110,8 @@
 
   (evil-ex-define-cmd "cl" 'spacemacs/comment-or-uncomment-lines)
   (evil-ex-define-cmd "t[ag]" 'jg_layer/org-tagging-helm-start)
-  (evil-ex-define-cmd "to" 'jg_layer/tag-occurances)
-  (evil-ex-define-cmd "toa" 'jg_layer/tag-occurences-in-open-buffers)
+  (evil-ex-define-cmd "to" 'jg_layer/tag-occurrences)
+  (evil-ex-define-cmd "toa" 'jg_layer/tag-occurrences-in-open-buffers)
   (evil-ex-define-cmd "mw" 'spacemacs/window-manipulation-transient-state/body)
   (evil-ex-define-cmd "mb" 'spacemacs/buffer-transient-state/body)
   (evil-ex-define-cmd "os" 'org-store-link)
@@ -340,7 +340,9 @@
 
 (defun jg_layer/post-init-python ()
   (setq-default python-indent-offset 4
-                python-indent-guess-indent-offset nil )
+                python-indent-guess-indent-offset nil
+                python-shell-interpreter "python"
+                )
   )
 
 (defun jg_layer/post-init-fci ()

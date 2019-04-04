@@ -43,18 +43,28 @@
       )
     )
 
-  (defun jg_layer/make-bar-chart (data maxTagLength)
+  (defun jg_layer/make-bar-chart (data maxTagLength maxTagAmnt)
     ;; TODO Scale within 80 columns
-    (mapcar (lambda (x)
-              (string-join `(,(car x)
-                             ,(make-string (- (+ 10 maxTagLength) (length (car x))) ?\ )
-                             ": "
-                             ,(number-to-string (cdr x))
-                             ,(make-string (- 5 (length (number-to-string (cdr x)))) ?\ )
-                             " : "
-                             ,(make-string (cdr x) ?=)
-                             ;; "\n"
-                             ))) data))
+    (let* ((maxTagStrLen (length (number-to-string maxTagAmnt)))
+           (max-column (- fill-column (+ 3 maxTagLength maxTagStrLen 3 3)))
+           (bar-div (/ (float max-column) maxTagAmnt)))
+      (mapcar (lambda (x)
+                (let* ((tag (car x))
+                       (tag-len (length tag))
+                       (amount (cdr x))
+                       (amount-str (number-to-string amount))
+                       (sep-offset (- (+ 3 maxTagLength) tag-len))
+                       (amount-offset (- maxTagStrLen (length amount-str)))
+                       (bar-len (ceiling (* bar-div amount))))
+                  (string-join `(,tag
+                                 ,(make-string sep-offset ?\ )
+                                 " : "
+                                 ,amount-str
+                                 ,(make-string amount-offset ?\ )
+                                 " : "
+                                 ,(make-string bar-len ?=)
+                                 ;; "\n"
+                                 )))) data)))
 
 
 
@@ -77,14 +87,15 @@
       )
     )
 
-  (defun jg_layer/tag-occurences-in-open-buffers()
+  (defun jg_layer/tag-occurrences-in-open-buffers()
     """ retrieve all tags in all open buffers, print to a temporary buffer """
     (interactive)
     (let* ((allbuffers (buffer-list))
            (alltags (make-hash-table :test 'equal))
            (hashPairs nil)
            (sorted '())
-           (maxTagLength 0))
+           (maxTagLength 0)
+           (maxTagAmnt 0))
       (map 'list (lambda (bufname)
                    ;; TODO quit on not an org file
                    (with-current-buffer bufname
@@ -96,39 +107,37 @@
       (setq hashPairs (-zip (hash-table-keys alltags) (hash-table-values alltags)))
       (if hashPairs (progn
                      (setq sorted (sort hashPairs (lambda (a b) (> (cdr a) (cdr b)))))
-                     (setq maxTagLength (apply `max (mapcar (lambda (x) (length (car x))) sorted)))))
+                     (setq maxTagLength (apply `max (mapcar (lambda (x) (length (car x))) sorted)))
+                     (setq maxTagAmnt (apply `max (mapcar (lambda (x) (cdr x)) sorted)))
+                     ))
       (with-temp-buffer-window "*Tags*"
                                nil
                                nil
                                (mapc (lambda (x) (princ (format "%s\n" x)))
-                                     (jg_layer/make-bar-chart sorted maxTagLength))
+                                     (jg_layer/make-bar-chart sorted maxTagLength maxTagAmnt))
                                )
       )
     )
 
-  (defun jg_layer/tag-occurances ()
+  (defun jg_layer/tag-occurrences ()
     """ Count all occurrences of all tags and bar chart them """
     (interactive)
     ;;save eventually to a new buffer
-    (let ((tag-set (jg_layer/org-count-buffer-tags))
-          (hashPairs nil)
-          (sorted '())
-          (maxTagLength 0))
-      (setq hashPairs (-zip (hash-table-keys tag-set) (hash-table-values tag-set)))
-      (if hashPairs (progn
-                      (setq sorted (sort hashPairs (lambda (a b) (> (cdr a) (cdr b)))))
-                      (setq maxTagLength (apply `max (mapcar (lambda (x) (length (car x))) sorted)))))
+    (let* ((tag-set (jg_layer/org-count-buffer-tags))
+           (hashPairs (-zip (hash-table-keys tag-set) (hash-table-values tag-set)))
+           (sorted (sort hashPairs (lambda (a b) (> (cdr a) (cdr b)))))
+           (maxTagLength (apply `max (mapcar (lambda (x) (length (car x))) sorted)))
+           (maxTagAmnt (apply `max (mapcar (lambda (x) (cdr x)) sorted)))
+          )
       ;;print them all out
       (with-temp-buffer-window "*Tags*"
                                nil
                                nil
                                (mapc (lambda (x) (princ (format "%s\n" x)))
-                                     (jg_layer/make-bar-chart sorted maxTagLength)))
-      )
-    )
+                                     (jg_layer/make-bar-chart sorted maxTagLength maxTagAmnt)))
+      ))
 
-  )
-
+)
 ;;--------------------------------------------------
 (defun jg_layer/insert-lparen ()
   """ utility to insert a (  """

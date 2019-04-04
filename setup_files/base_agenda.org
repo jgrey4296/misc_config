@@ -1,5 +1,5 @@
-#+BIBLIOGRAPHY: ~/github/writing/mendeley_library plain
 * Base Agenda
+  #+BIBLIOGRAPHY: ~/github/writing/mendeley_library plain
   :LOGBOOK:
   CLOCK: [2019-03-20 Wed 18:13]--[2019-03-20 Wed 18:38] =>  0:25
   CLOCK: [2019-03-20 Wed 17:42]--[2019-03-20 Wed 18:07] =>  0:25
@@ -91,9 +91,9 @@
 **** Rational Time
 ***** TODO iterator for pattern
 *** Javascript / Web
-**** [[~/github/mordor-alike][Mordor Like Idea]]                                :nemesis:mordor:javascript:obsolete:incomplete:grammar:
-**** TODO [[~/github/newspaper_gen][Newspaper Generator]]                       :javascript:generative:front_end:newspaper:web:procedural:
-**** [[~/github/hexagonAITest][Hexagon Board / AI Test]]                        :front_end:incomplete:javascript:old:parsing:web:
+**** [[~/github/mordor-alike][Mordor Like Idea]]                                                           :nemesis:mordor:javascript:obsolete:incomplete:grammar:
+**** TODO [[~/github/newspaper_gen][Newspaper Generator]]                                                   :javascript:generative:front_end:newspaper:web:procedural:
+**** [[~/github/hexagonAITest][Hexagon Board / AI Test]]                                                    :front_end:incomplete:javascript:old:parsing:web:
 *** Python
 ***** TODO [[~/github/documentUnitTester][Document Unit Tester]]                                                 :writing:support:tool:test_driven_development:python:
 ****** setup a generator for org files
@@ -183,6 +183,9 @@
 ***** Create a helm navigation layer
 *** Audio
     [[file:~/Mega/Datasets/BBCSoundEffects.csv][file:~/Mega/Datasets/BBCSoundEffects.csv]]
+**** extract categories, description, cdname
+**** group by time
+**** helm access
 *** Code
 **** Monroe Domain Plans
 **** [[file:~/Mega/Code%20Backups/shop2random.lisp][Shop2 Plan generator]]
@@ -288,6 +291,7 @@
 **** [[file:~/Mega/Datasets/SocialEvolution.zip][Social Evolution]]
 **** [[file:~/Mega/Datasets/diplomacy_data_1.0.zip][Diplomacy]]
 **** [[file:~/Mega/Datasets/linuxCorpus-1.0.zip][Linux Dataset]]
+*** [[https://docs.google.com/spreadsheets/d/1JcwsKMJtd_wYe4oeTtuyM8fm1eqFQw9A9VGDjnCKFiM/edit#gid=69023141][Legislative Rules dataset]]
 ** TODO Annotations / Examples
 *** TODO [#A] Snatch delegation
     to lead to delegation in iEl
@@ -316,6 +320,7 @@
     [[https://www.gnu.org/software/emacs/manual/html_mono/ede.html][EDE]]
     [[https://www.gnu.org/software/emacs/manual/html_mono/semantic.html][Semantic]]
     [[https://github.com/skeeto/elfeed][Elfeed]]
+    [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Debugger.html#Debugger][Debugging]]
 **** TODO Org SubTree Transient State navigation
      Add a transient state for moving, promoting, demoting etc subtrees
 **** TODO Org Table Transient state
@@ -379,3 +384,7 @@
 ** [[http://defeasible.org/][Defeasible Logic]]
 ** [[https://robertheaton.com/2018/12/17/wavefunction-collapse-algorithm/][Wave function collapse]]
 ** TODO Get Castelfranchi: Behavioral Implicit Communication
+** [[https://bibtexparser.readthedocs.io/en/master/tutorial.html][bibtex parser]]
+** [[https://scholar.google.com/citations?user=iR-SIW8AAAAJ&hl=en&oi=sra][Jodie Sabater-Mir]]
+** [[http://www.lsi.upc.edu/~jvazquez/publications.php][J. Vázquez Salceda]]
+** [[file:~/github/writing/orgfiles/printouts.org::*Printouts][Printouts]]

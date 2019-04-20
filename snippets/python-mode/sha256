@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: sha256
+# key: sha256
+# --
+from hashlib import sha256
+from os.path import expanduser, abspath
+
+def file_to_hash(filename):
+    with open(abspath(expanduser(filename)), 'br') as f:
+        return sha256(f.read()).hexdigest()

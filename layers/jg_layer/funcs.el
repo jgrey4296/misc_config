@@ -22,6 +22,19 @@
     (org-open-at-point 'in-emacs)
     )
 
+  (defun jg_layer/change_link_name (name)
+    """ Change the name of a link """
+    (interactive "s")
+    (let ((re org-bracket-link-regexp))
+      (save-excursion
+        (beginning-of-line)
+        (search-forward-regexp re (line-end-position))
+        (replace-match name nil nil nil 3)
+         )
+        )
+    )
+
+
   (defun jg_layer/open_link_externally ()
     """ Open a link, forcing it to be external to emacs """
     (interactive)
@@ -138,6 +151,8 @@
       ))
 
 )
+
+
 ;;--------------------------------------------------
 (defun jg_layer/insert-lparen ()
   """ utility to insert a (  """
@@ -211,4 +226,3 @@
     (helm :sources jg_layer/example_helm-source
           :input "./"))
   )
-

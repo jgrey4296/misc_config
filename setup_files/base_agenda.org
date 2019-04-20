@@ -1,5 +1,5 @@
 * Base Agenda
-  #+BIBLIOGRAPHY: ~/github/writing/mendeley_library plain
+  #+BIBLIOGRAPHY: ~/github/writing/other_files/main_bibliography plain
   :LOGBOOK:
   CLOCK: [2019-03-20 Wed 18:13]--[2019-03-20 Wed 18:38] =>  0:25
   CLOCK: [2019-03-20 Wed 17:42]--[2019-03-20 Wed 18:07] =>  0:25
@@ -57,39 +57,60 @@
   CLOCK: [2019-02-04 Mon 15:17]--[2019-02-04 Mon 15:42] =>  0:25
   CLOCK: [2019-02-04 Mon 14:09]--[2019-02-04 Mon 14:34] =>  0:25
   :END:
-** TODO [[~/github/writing/paper_notes/index.org::*Summary%20Index][Paper Summaries Index]]
-** [[~/github/writing/orgfiles][Orgfiles]]
-** [[~/github/languageLearning][Misc Language Repo]]                                                           :javascript:python:multiple_languages:lisp:supercollider:tidal:learning:notes:prolog:misc:
+** TODO [[~/github/writing/paper_notes/index.org::*Summary%20Index][Paper Summaries Index]]                                                   :papers:
+** [[~/github/writing/orgfiles][Orgfiles]]                                                                     :directory:main_collection:
+** [[~/github/languageLearning][Misc Language Repo]]                            :directory:javascript:python:multiple_languages:lisp:supercollider:tidal:learning:notes:prolog:misc:
 ** [[file:~/github/writing/orgfiles/machine_learning.org::*Machine%20Learning%20Notes][Machine Learning Notes]]
 ** [[file:~/github/writing/orgfiles/nlp.org::*Natural%20Language%20Processing:][Natural Language Processing:]]
 ** -----------------------------------------------------------------------------
 ** Programming
 *** TODO [[~/.spacemacs.d/layers/trie][Trie-layer]]
-**** Layer Implementation
+**** Design
+***** Vignettes
+**** Layouts
+***** Pipeline
+***** Flattened Trie Location
+***** Rule
+***** Time Cycle
+***** Carriers
+****** Activity
+****** Tool
+****** Values
+****** Role 
+****** Sanctions 
+**** Keybindings
+***** Insertion
+***** Deletion
+**** Transient States
+***** Component Adding
+****** Institution
+****** Activity
+****** Meta Rules
+***** Component Navigation
+**** Layer elements
+***** Configuration
+**** Mode Elements
+***** font locking?
+      Possibly do manually?
+***** Keywords
+**** Functions
+***** Helms
+****** Factbase Helm
+****** Tagging Helm
+****** Rule Helm
+****** Curve Selection
 ***** Expand-Region implementation
-***** keybindings
-***** transient states
-**** Meta Rules
-**** Mode Implementation
-***** activity mode
 ***** connection to runtime
-***** font locking
-***** helm trie exploration
-***** interaction flow mode
-***** keywords
-***** Parsec expansion?
-***** pipeline vis
-***** Rational Time visualisation
-***** snippets
-****** rule
-****** interaction flow
-****** activity pyramid
-***** tagging
-***** trie layer flattned representation
-***** Window layouts
+***** Parsec implementation
 ***** working directory loading
-**** Rational Time
-***** TODO iterator for pattern
+***** Use checking
+***** Type Checking
+***** Source / Sink Checking
+**** Snippets
+***** Rule
+***** Activity Pyramid
+***** Layer
+***** Cycle
 *** Javascript / Web
 **** [[~/github/mordor-alike][Mordor Like Idea]]                                                           :nemesis:mordor:javascript:obsolete:incomplete:grammar:
 **** TODO [[~/github/newspaper_gen][Newspaper Generator]]                                                   :javascript:generative:front_end:newspaper:web:procedural:
@@ -163,7 +184,7 @@
 *** TODO Haskell                                                                :monads:theory:programming:haskell:
 **** look at implementation of monad transformers
 *** To Clean
-**** [[~/github/happiton][~/github/happiton]]                                                          :obsolete:incomplete:javascript:
+**** [[~/github/happiton][Happiton]]                                            :python:directory:hofstadter:
 *** Prototypes
 **** Hex Board -> Preact
 **** Battle System
@@ -173,7 +194,7 @@
 **** NetLogo
 **** Unity
 ** TODO Datasets
-*** [[~/Mega/bookmarks][~/Mega/bookmarks]]
+*** [[~/Mega/bookmarks][Bookmarks]]                                                                   :web:html:bookmarks:directory:
     treat these as codings?
 *** TODO Bookmark and saved twitter parsing
 **** Bookmarks
@@ -181,20 +202,20 @@
 ***** DONE Parse into emacs readable format
       CLOSED: [2019-03-14 Thu 19:46]
 ***** Create a helm navigation layer
-*** Audio
-    [[file:~/Mega/Datasets/BBCSoundEffects.csv][file:~/Mega/Datasets/BBCSoundEffects.csv]]
+*** Audio                                                                       :to_implement:web:
+    [[file:~/Mega/Datasets/BBCSoundEffects.csv][BBCSoundEffects.csv]]
 **** extract categories, description, cdname
 **** group by time
 **** helm access
 *** Code
 **** Monroe Domain Plans
 **** [[file:~/Mega/Code%20Backups/shop2random.lisp][Shop2 Plan generator]]
-**** [[file:~/Mega/Code%20Backups/Evolution_of_Norms][Evolution of Norms]]
-**** [[file:~/Mega/Code%20Backups/Social_Norms_(Emperor's_Dilemma)][Social Norms / Emperor's Dilemma]]
-**** Chuck Examples
-**** [[file:~/Mega/Code%20Backups/ccalc-2.0r2.tar.gz][CCalc]]
-**** [[file:~/Mega/Code%20Backups/BPS1024.zip][Building Problem Solvers]]
-**** [[file:~/Mega/Code%20Backups/Immerse%20Code%20Backup-20170930T102013Z-002.zip][Immerse]]
+**** [[file:~/Mega/Code%20Backups/Evolution_of_Norms][Evolution of Norms]]                                                         :norms:netlogo:
+**** [[file:~/Mega/Code%20Backups/Social_Norms_(Emperor's_Dilemma)][Social Norms / Emperor's Dilemma]]                                           :norms:netlogo:
+**** Chuck Examples                                                             :nytimes:chuck:
+**** [[file:~/Mega/Code%20Backups/ccalc-2.0r2.tar.gz][CCalc]]                                                                      :prolog:
+**** [[file:~/Mega/Code%20Backups/BPS1024.zip][Building Problem Solvers]]                                                   :lisp:
+**** [[file:~/Mega/Code%20Backups/Immerse%20Code%20Backup-20170930T102013Z-002.zip][Immerse]]                                                                    :csharp:
 *** Games
 **** [[file:~/Mega/Datasets/twine][Twine]]
      [[https://github.com/ehenestroza/twine-graph/blob/master/twine_graph/twine_graph.py][Twine Graph on Github]]
@@ -274,15 +295,15 @@
 ****** [[file:~/Mega/Datasets/verb-pair-orders.gz][Verb Pairs]]
 
 *** Images
-***** [[~/Mega/Images/glitch-assets][~/Mega/Images/glitch-assets]]
-      possibly use these in vault?
-***** Scenes from a Multiverse
-      [[file:~/Mega/Datasets/SFAM%20html][file:~/Mega/Datasets/SFAM html]]
-      [[file:~/Mega/Datasets/SFAM%20images][file:~/Mega/Datasets/SFAM images]]
-***** [[file:~/Mega/Datasets/Scarfolk][Scarfolk]]
-***** misc images
-***** online assets
-***** portraits
+**** [[file:~/github/writing/orgfiles/image_summary.org::*Misc%20Research%20Images][Misc Research Images]]
+**** [[~/Mega/Images/glitch-assets][glitch-assets]]
+     possibly use these in vault?
+**** Scenes from a Multiverse                                                   :to_parse:
+     [[file:~/Mega/Datasets/SFAM%20html][SFAM html]]
+     [[file:~/Mega/Datasets/SFAM%20images][SFAM images]]
+**** [[file:~/Mega/Datasets/Scarfolk][Scarfolk]]                                                                   :to_parse:
+**** online assets
+**** portraits
 *** Measurements
 **** [[file:~/Mega/Datasets/RealityMining.zip][Reality Mining]]
 **** [[file:~/Mega/Datasets/Friends&Family.zip][Friends and Family]]
@@ -291,9 +312,9 @@
 **** [[file:~/Mega/Datasets/SocialEvolution.zip][Social Evolution]]
 **** [[file:~/Mega/Datasets/diplomacy_data_1.0.zip][Diplomacy]]
 **** [[file:~/Mega/Datasets/linuxCorpus-1.0.zip][Linux Dataset]]
-*** [[https://docs.google.com/spreadsheets/d/1JcwsKMJtd_wYe4oeTtuyM8fm1eqFQw9A9VGDjnCKFiM/edit#gid=69023141][Legislative Rules dataset]]
+*** [[https://docs.google.com/spreadsheets/d/1JcwsKMJtd_wYe4oeTtuyM8fm1eqFQw9A9VGDjnCKFiM/edit#gid=69023141][Legislative Rules dataset]]                                                   :rules:
 ** TODO Annotations / Examples
-*** TODO [#A] Snatch delegation
+*** TODO [#A] Snatch delegation                                                 :delegation:film:
     to lead to delegation in iEl
 *** TODO collate lists of sources
     to prepare for annotation,
@@ -304,14 +325,12 @@
 *** [[~/github/jgrey4296.github.io][jgrey4296.github.io]]                                                         :writing:important:todo:target:blog:web:
 **** [[~/github/jsons][jsons representations]]                                                      :json:writing:
 **** [[~/github/writing][misc writing]]                                                               :writing:generic:
-*** TODO [[file:~/Mega/Mendeley][Mendeley]]
 *** TODO [[file:~/github/writing/orgfiles/taxonomies.org::*Taxonomies][Taxonomies]]
 **** DONE TAG them
      CLOSED: [2019-03-08 Fri 11:13]
-** TODO [[~/Mega/savedTwitter][Saved Twitter Threads]]
 ** -----------------------------------------------------------------------------
-** Misc
-*** [[~/github/jg_emacs_files][Emacs files]]                                    :lisp:setup:emacs:
+** Emacs Setup
+*** [[~/github/jg_emacs_files][Emacs files]]                                    :directory:lisp:setup:emacs:
 *** [[~/github/jg_shell_files][Bash Scripts]]                                   :bash:setup:
 *** Emacs / Spacemacs
     [[https://www.gnu.org/software/emacs/manual/html_mono/eieio.html][EIEIO]]
@@ -321,6 +340,10 @@
     [[https://www.gnu.org/software/emacs/manual/html_mono/semantic.html][Semantic]]
     [[https://github.com/skeeto/elfeed][Elfeed]]
     [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Debugger.html#Debugger][Debugging]]
+**** Font-Locking
+     Reminder: font-lock will override manually set text
+     properties, so wrap any calls with a let of
+     inhibit-modification-hooks t to override
 **** TODO Org SubTree Transient State navigation
      Add a transient state for moving, promoting, demoting etc subtrees
 **** TODO Org Table Transient state
@@ -352,39 +375,54 @@
 **** TODO Make an indirect-buffer shortcut for org mode to work with multiple subtrees
 **** [[https://orgmode.org/worg/org-tutorials/org-column-view-tutorial.html][column view]]
 
-** TODO Run Summarize Directory Script on datasets/papers/other
-   [[file:~/github/jg_shell_files/summariseDirectory.py::"""][<summariseDirectory.py>]]
-** TODO Prototype some Mechanical Turk Tasks
-** TODO [[http://bloom-lang.net/features/][bloom]]
-*** CALM: Consistency as Logical Monotonicity
+**** TODO filter char inserting list
+** Misc
+*** TODO Prototype some Mechanical Turk Tasks                                   :survey:online:price:amazon:
+*** TODO [[http://bloom-lang.net/features/][bloom]]                                                                  :programming:language:
+**** CALM: Consistency as Logical Monotonicity
 
-*** "Gray's Twelfth Challenge"
-    DWIM : Do What I Mean
-    Spec Language that:
-    1) Is Easy to express designs
-    2) Is Compilable
-    3) Can describe all applications
+**** "Gray's Twelfth Challenge"
+     DWIM : Do What I Mean
+     Spec Language that:
+     1) Is Easy to express designs
+     2) Is Compilable
+     3) Can describe all applications
 
-    System should 'reason' about application:
-    Ask about exception cases
-    Ask about incomplete specification
-    Not be onerous
+     System should 'reason' about application:
+     Ask about exception cases
+     Ask about incomplete specification
+     Not be onerous
 
-*** Borges "A New Refutation of Time"
-    "The Denial of time involves two negations: The negation of the succession
-    of the terms of a series, negation of the synchronism of the terms in two
-    different series"
+**** Borges "A New Refutation of Time"
+     "The Denial of time involves two negations: The negation of the succession
+     of the terms of a series, negation of the synchronism of the terms in two
+     different series"
 
-*** Disorderly programming and datastructures
+**** Disorderly programming and datastructures
 
-** Structural phenomenology?
-** [[https://www.rockpapershotgun.com/2019/03/21/french-revolutionary-judge-sim-we-the-revolution-is-out-now/][We. The Revolution]]
-** [[https://www.rockpapershotgun.com/2019/03/23/make-friends-and-steal-their-mail-in-willowbrooke-post/][Willbrooke post]]
-** [[http://ifaamas.org/Proceedings/aamas2018/forms/contents.htm][AAMAS Proceedings]]
-** [[http://defeasible.org/][Defeasible Logic]]
-** [[https://robertheaton.com/2018/12/17/wavefunction-collapse-algorithm/][Wave function collapse]]
-** TODO Get Castelfranchi: Behavioral Implicit Communication
-** [[https://bibtexparser.readthedocs.io/en/master/tutorial.html][bibtex parser]]
-** [[https://scholar.google.com/citations?user=iR-SIW8AAAAJ&hl=en&oi=sra][Jodie Sabater-Mir]]
-** [[http://www.lsi.upc.edu/~jvazquez/publications.php][J. Vázquez Salceda]]
-** [[file:~/github/writing/orgfiles/printouts.org::*Printouts][Printouts]]
+*** TODO Structural phenomenology?                                              :look_into:
+*** TODO Get Castelfranchi: Behavioral Implicit Communication                   :look_into:
+*** [[https://www.rockpapershotgun.com/2019/03/21/french-revolutionary-judge-sim-we-the-revolution-is-out-now/][We. The Revolution]]                                                          :judge:court:look_into:game:rps:
+*** [[https://www.rockpapershotgun.com/2019/03/23/make-friends-and-steal-their-mail-in-willowbrooke-post/][Willbrooke post]]                                                             :look_into:papers_please:rps:game:
+*** [[http://ifaamas.org/Proceedings/aamas2018/forms/contents.htm][AAMAS Proceedings]]                                                           :papers:MAS:look_into:conference:
+*** [[http://defeasible.org/][Defeasible Logic]]                                                            :logic:
+*** [[https://bibtexparser.readthedocs.io/en/master/tutorial.html][bibtex parser]]                                                               :python:bibtex:
+*** [[https://scholar.google.com/citations?user=iR-SIW8AAAAJ&hl=en&oi=sra][Jodie Sabater-Mir]]                                                           :reputation:look_into:research:
+*** [[http://www.lsi.upc.edu/~jvazquez/publications.php][J. Vázquez Salceda]]                                                          :look_into:research:papers:
+*** [[file:~/github/otherLibs/Bidirectional][Bidirectional Type Checking Haskell]]                                        :directory:haskell:type_inference:
+*** [[file:~/github/otherLibs/code-for-blog/2018/type-inference][Python Type Inference]]                                                       :directory:hindley_milner:type_inference:python:
+*** [[file:~/github/otherLibs/code-for-blog/2018/markov-simple][Python Markov chain]]                                                         :directory:markov:python:
+*** [[file:~/github/otherLibs/code-for-blog/2018/unif][Python Unification]]                                                          :directory:python:unification:
+*** [[file:~/github/otherLibs/CommonLispCode/micro-talespin.lisp][Micro-Talespin]]                                                              :directory:architecture:narrative:talespin:lisp:
+*** [[file:~/github/otherLibs/BPS][Building Problem Solvers]]                                                    :directory:rules:lisp:
+*** [[file:~/github/otherLibs/Nomyx][Nomyx]]                                                                       :directory:meta:hofstadter:rules:haskell:
+*** [[file:~/github/otherLibs/wavefunction-collapse][Wave function collapse python]]                                               :directory:algorithm:wave_function_collapse:python:
+*** [[https://robertheaton.com/2018/12/17/wavefunction-collapse-algorithm/][Wave function collapse]]                                                      :wave_function_collapse:tutorial:to_implement:algorithm:
+*** [[file:~/github/otherLibs/cathoristic-logic][Cathoristic Logic]]                                                           :directory:haskell:logic:praxis:exclusion_logic:
+*** TODO Vignettes
+*** TODO [[https://explorabl.es/all/][Explorables]]
+*** TODO [[http://worrydream.com/][Bret Victor]]
+*** TODO [[https://ncase.me/remember/][Spaced Repetition]]
+*** [[http://www.parliamentbook.com/spaces][Parliament Book]]
+*** [[https://www.soundsurvey.org.uk/index.php/history/street_cries/brit1/626/3387][Sound Survey]]
+*** [[https://www.filfre.net/2019/03/darklands/][Darklands]]

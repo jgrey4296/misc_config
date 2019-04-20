@@ -271,3 +271,32 @@
    :ARCHIVE_TODO: DONE
    :END:
    <2017-03-23 Thu>
+
+** TODO [[~/Mega/savedTwitter][Saved Twitter Threads]]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2019-04-07 Sun 13:01
+   :ARCHIVE_FILE: ~/.spacemacs.d/setup_files/base_agenda.org
+   :ARCHIVE_OLPATH: Base Agenda
+   :ARCHIVE_CATEGORY: base_agenda
+   :ARCHIVE_TODO: TODO
+   :END:
+
+** DONE [[file:~/Mega/Mendeley][Mendeley]]
+   CLOSED: [2019-04-07 Sun 13:02]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2019-04-07 Sun 13:02
+   :ARCHIVE_FILE: ~/.spacemacs.d/setup_files/base_agenda.org
+   :ARCHIVE_OLPATH: Base Agenda/Writing
+   :ARCHIVE_CATEGORY: base_agenda
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** TODO Run Summarize Directory Script on datasets/papers/other
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2019-04-07 Sun 13:56
+   :ARCHIVE_FILE: ~/.spacemacs.d/setup_files/base_agenda.org
+   :ARCHIVE_OLPATH: Base Agenda
+   :ARCHIVE_CATEGORY: base_agenda
+   :ARCHIVE_TODO: TODO
+   :END:
+   [[file:~/github/jg_shell_files/summariseDirectory.py::"""][<summariseDirectory.py>]]

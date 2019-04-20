@@ -22,6 +22,7 @@
     python
     academic-phrases
     dired-quick-sort
+    org-ref
     ;; buffer-manage
     ;; (buffer-sets :location (recipe :fetcher git :url "https://git.flintfam.org/swf-projects/buffer-sets.git"))
     buffer-utils
@@ -274,6 +275,7 @@
     "o l o"   'jg_layer/open_link_in_buffer
     "o l O"   'jg_layer/open_link_externally
     "o l r"   'org-reftex-citation
+    "o l n"   'jg_layer/change_link_name
     )
   (spacemacs/declare-prefix "o" "Org")
   (spacemacs/declare-prefix "o t" "Tags" "Tags")
@@ -288,7 +290,9 @@
   ;; #+BIBLIOGRAPHY: ~/github/writing/mendeley_library plain
   ;;keybind
   (spacemacs/set-leader-keys-for-major-mode 'org-mode
-    "i c" 'org-reftex-citation)
+    "i c" 'org-reftex-citation
+    "`"   'jg_layer/change_link_name
+    )
   )
 
 (defun jg_layer/post-init-yasnippet ()
@@ -305,8 +309,8 @@
     )
 
   (spacemacs/set-leader-keys-for-major-mode 'edit-abbrevs-mode
-                                      "y s" 'abbrev-edit-save-buffer
-   )
+    "y s" 'abbrev-edit-save-buffer
+    )
 
   (global-set-key (kbd "C-c ;") 'expand-abbrev)
   (global-set-key (kbd "C-c >") 'yas-new-snippet)
@@ -341,7 +345,6 @@
 (defun jg_layer/post-init-python ()
   (setq-default python-indent-offset 4
                 python-indent-guess-indent-offset nil
-                python-shell-interpreter "python"
                 )
   )
 
@@ -432,7 +435,7 @@
   (use-package free-keys
     :config (spacemacs/set-leader-keys "a f k" 'free-keys
               "a f p" 'free-keys-set-prefix))
-)
+  )
 
 (defun jg_layer/init-fsm ()
   (use-package fsm
@@ -452,20 +455,40 @@
 
 
 (defun jg_layer/post-init-highlight-parentheses ()
-      (setq hl-paren-colors '("color-16" "color-16" "color-16" "color-16")
-            hl-paren-background-colors '("Springgreen3" "color-26" "color-91" "IndianRed3"))
-      )
+  (setq hl-paren-colors '("color-16" "color-16" "color-16" "color-16")
+        hl-paren-background-colors '("Springgreen3" "color-26" "color-91" "IndianRed3"))
+  )
 
 
-;; (use-package highlight-parentheses
-;;   :init
-;;   (progn
-;;     (when (member dotspacemacs-highlight-delimiters '(all current))
-;;       (add-hook 'prog-mode-hook #'highlight-parentheses-mode))
-;;     (setq hl-paren-delay 0.2)
-;;     (spacemacs/set-leader-keys "tCp" 'highlight-parentheses-mode)
-;;     (setq hl-paren-colors '("color-16" "color-16" "color-16" "color-16")
-;;           hl-paren-background-colors '("Springgreen3" "color-26" "color-91" "IndianRed3")))
-;;   :config
-;;   (spacemacs|hide-lighter highlight-parentheses-mode)
-;;   (set-face-attribute 'hl-paren-face nil :weight 'ultra-bold)))
+(defun jg_layer/post-init-org-ref ()
+  (with-eval-after-load 'org-ref
+    (defun org-ref-open-bibtex-pdf ()
+      "Open pdf for a bibtex entry, if it exists.
+assumes point is in
+the entry of interest in the bibfile.  but does not check that."
+      (interactive)
+      (save-excursion
+        (bibtex-beginning-of-entry)
+        (let* ((bibtex-expand-strings t)
+               (entry (bibtex-parse-entry t))
+               (key (reftex-get-bib-field "file" entry))
+               (pdf (string-join `("/" ,(car (split-string key ":" 't))))))
+          (message pdf)
+          (if (file-exists-p pdf)
+              (org-open-link-from-string (format "[[file:%s]]" pdf))
+            (ding)))))
+    ))
+
+
+  ;; (use-package highlight-parentheses
+  ;;   :init
+  ;;   (progn
+  ;;     (when (member dotspacemacs-highlight-delimiters '(all current))
+  ;;       (add-hook 'prog-mode-hook #'highlight-parentheses-mode))
+  ;;     (setq hl-paren-delay 0.2)
+  ;;     (spacemacs/set-leader-keys "tCp" 'highlight-parentheses-mode)
+  ;;     (setq hl-paren-colors '("color-16" "color-16" "color-16" "color-16")
+  ;;           hl-paren-background-colors '("Springgreen3" "color-26" "color-91" "IndianRed3")))
+  ;;   :config
+  ;;   (spacemacs|hide-lighter highlight-parentheses-mode)
+  ;;   (set-face-attribute 'hl-paren-face nil :weight 'ultra-bold)))

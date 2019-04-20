@@ -1,0 +1,72 @@
+# -*- mode: snippet -*-
+# name: paper_description
+# key: paper_description
+# --
+*  $1
+** Tags
+** Citation:
+** YEAR :
+** AUTHORS
+
+** ABSTRACT
+
+** Summary
+*** Research Questions
+
+*** Hypothesis tested
+
+*** Methods
+
+*** Results
+
+*** Authors key findings
+
+*** Contributions [Faster/Cheaper/Better]
+
+** What kind of text is it?
+
+** What genre is the text?
+
+** What is the critical context?
+
+** What is the intended audience?
+
+** What is your purpose in reading?
+
+** What are you meant to get out of the text?
+*** Are you supposed to get the gist, or details?
+
+*** Are you meant to close read the language of the text?
+
+*** Are you meant to apply or relate the text to something else?
+
+*** Are you supposed to engage with (agree, disagree, tweak, nuance) the text?
+
+** What it says / What it does
+   For each chapter/section/subsection/paragraph
+*** What it Says: Stated or implied topic
+
+*** What it Does: Function within the reading
+    Evidence for claim, summarize opposing view, data, analogy etc.
+
+** Double Entry
+*** Represent the text in your own words. Restate the argument.
+
+*** Respond to the text.
+    Analyse, relate, question, believe, doubt, refute, go beyond.
+
+** Believe / Doubt
+   Read with opposing views.
+*** Believing - Read generously
+
+*** Doubting  - Read critically
+
+** Reverse Outline
+   Organise text hierarchically by function
+
+** Freewrite argumentative response
+*** Before I read this text, the author assumed I knew and believed X
+
+*** After I Read this text, the author wanted me to think and believe that Y
+
+*** The Author was (not) successful in changing my views. How so, and why.

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: bib
+# key: bib
+# --
+#+BIBLIOGRAPHY: ~/github/writing/main_library plain

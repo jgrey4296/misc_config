@@ -330,6 +330,7 @@ you should place your code here."
                 ac-use-quick-help t
                 scroll-margin 10
                 ac-auto-start 1
+                truncate-lines 't
                 )
   (spacemacs/declare-prefix "x j" "Justify")
   (global-auto-complete-mode 1)

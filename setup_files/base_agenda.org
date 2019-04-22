@@ -295,12 +295,10 @@
 ****** [[file:~/Mega/Datasets/verb-pair-orders.gz][Verb Pairs]]
 
 *** Images
-**** [[file:~/github/writing/orgfiles/image_summary.org::*Misc%20Research%20Images][Misc Research Images]]
-**** [[~/Mega/Images/glitch-assets][glitch-assets]]
+**** [[file:~/github/writing/orgfiles/image_summary.org::*%5B%5Bfile:~/Mega/Images/misc_research_images/%5D%5BImage%20Directory%5D%5D][Image Summaries]]
+**** [[file:~/github/writing/orgfiles/glitch_assets_summary.org::*%5B%5B~/Mega/Images/glitch-assets%5D%5BGlitch%20Assets%5D%5D%20Summary][Glitch Assets Summary]]
      possibly use these in vault?
-**** Scenes from a Multiverse                                                   :to_parse:
-     [[file:~/Mega/Datasets/SFAM%20html][SFAM html]]
-     [[file:~/Mega/Datasets/SFAM%20images][SFAM images]]
+**** [[file:~/Mega/Datasets/SFAM][SFAM]]
 **** [[file:~/Mega/Datasets/Scarfolk][Scarfolk]]                                                                   :to_parse:
 **** online assets
 **** portraits
@@ -426,3 +424,4 @@
 *** [[http://www.parliamentbook.com/spaces][Parliament Book]]
 *** [[https://www.soundsurvey.org.uk/index.php/history/street_cries/brit1/626/3387][Sound Survey]]
 *** [[https://www.filfre.net/2019/03/darklands/][Darklands]]
+*** TODO use helm-org-in-buffer-headings

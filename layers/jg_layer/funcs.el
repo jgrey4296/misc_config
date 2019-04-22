@@ -16,11 +16,31 @@
 
 ;;----------------------------------------
 (when (configuration-layer/package-usedp 'org)
+
   (defun jg_layer/open_link_in_buffer ()
     """ a util function to force links to be open in emacs  """
     (interactive)
     (org-open-at-point 'in-emacs)
     )
+
+  (defun jg_layer/open_link_externally ()
+    """ Open a link, forcing it to be external to emacs """
+    (interactive)
+    (let ((current-prefix-arg '(16)))
+      (call-interactively 'org-open-at-point)))
+
+  (defun jg_layer/quicklook-link ()
+    (let* ((context (org-element-lineage
+	                   (org-element-context)
+	                   '(clock comment comment-block footnote-definition
+		                         footnote-reference headline inline-src-block inlinetask
+		                         keyword link node-property planning src-block timestamp)
+	                   t))
+           (type (org-element-property :type context))
+	         (path (org-element-property :path context)))
+      (if (equal type "file")
+          (call-process "qlmanage" nil 0 nil "-x" path)
+        (message "Link not a file"))))
 
   (defun jg_layer/change_link_name (name)
     """ Change the name of a link """
@@ -33,13 +53,6 @@
          )
         )
     )
-
-
-  (defun jg_layer/open_link_externally ()
-    """ Open a link, forcing it to be external to emacs """
-    (interactive)
-    (let ((current-prefix-arg '(16)))
-      (call-interactively 'org-open-at-point)))
 
   (defun jg_layer/list-agenda-files ()
     """ Creates a temporary, Org-mode buffer with links to agenda files """

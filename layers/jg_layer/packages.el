@@ -32,6 +32,11 @@
     free-keys
     fsm
     highlight-parentheses
+    ggtags
+    (helm-gtags :toggle (configuration-layer/package-usedp 'helm))
+    xcscope
+    (helm-cscope :toggle (configuration-layer/package-usedp 'helm))
+
     (git-gutter :excluded t)
     (git-gutter+ :excluded t)
     (smartparens :excluded t)
@@ -247,6 +252,7 @@
   ;; add in keybinding to call tag-occurances
   (spacemacs/set-leader-keys
     "o d"     'org-todo-list
+    "o g"     'helm-org-in-buffer-headings
     ;; TAGS
     "o t o"   'jg_layer/tag-occurances
     "o t a o" 'jg_layer/tag-occurences-in-open-buffers

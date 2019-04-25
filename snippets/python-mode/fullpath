@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: fullpath
+# key: fullpath
+# --
+abspath(expanduser($1))

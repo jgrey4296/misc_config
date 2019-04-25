@@ -312,6 +312,7 @@
     "y i"    'yas-insert-snippet
     "y n"    'yas-new-snippet
     "y d"    'yas-describe-tables
+    "y v"    'yas-visit-snippet-file
     )
 
   (spacemacs/set-leader-keys-for-major-mode 'edit-abbrevs-mode

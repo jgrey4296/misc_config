@@ -70,19 +70,25 @@
     )
 
   (defun jg_layer/make-bar-chart (data maxTagLength maxTagAmnt)
-    ;; TODO Scale within 80 columns
     (let* ((maxTagStrLen (length (number-to-string maxTagAmnt)))
-           (max-column (- fill-column (+ 3 maxTagLength maxTagStrLen 3 3)))
+           (maxTagLength-bounded (min 40 maxTagLength))
+           (max-column (- fill-column (+ 3 maxTagLength-bounded maxTagStrLen 3 3)))
            (bar-div (/ (float max-column) maxTagAmnt)))
       (mapcar (lambda (x)
                 (let* ((tag (car x))
                        (tag-len (length tag))
+                       (tag-cut-len (min tag-len (- maxTagLength-bounded 3)))
+                       (tag-truncated-p (> tag-len (- maxTagLength-bounded 3)))
+                       (tag-substr (string-join `(,(substring tag nil tag-cut-len)
+                                                  ,(if tag-truncated-p "..."))))
+                       (tag-final-len (length tag-substr))
                        (amount (cdr x))
                        (amount-str (number-to-string amount))
-                       (sep-offset (- (+ 3 maxTagLength) tag-len))
+                       (sep-offset (- (+ 3 maxTagLength-bounded) tag-final-len))
                        (amount-offset (- maxTagStrLen (length amount-str)))
-                       (bar-len (ceiling (* bar-div amount))))
-                  (string-join `(,tag
+                       (bar-len (ceiling (* bar-div amount)))
+                       )
+                  (string-join `(,tag-substr
                                  ,(make-string sep-offset ?\ )
                                  " : "
                                  ,amount-str
@@ -91,8 +97,6 @@
                                  ,(make-string bar-len ?=)
                                  ;; "\n"
                                  )))) data)))
-
-
 
   (defun jg_layer/org-count-buffer-tags ()
     (save-excursion ;;store where you are in the current
@@ -103,7 +107,10 @@
         (while (not (eq nil (re-search-forward ":\\([[:graph:]]+\\):\\(\.\.\.\\)?\$" nil t)))
           ;;split tags into list
           (let* ((tags (split-string (match-string-no-properties 0) ":" t ":"))
-                 (filtered (seq-filter (lambda (x) (not (or (string-equal x "PROPERTIES") (string-equal x "END")))) tags)))
+                 (filtered (seq-filter (lambda (x) (not (or (string-equal x "PROPERTIES")
+                                                            (string-equal x "END")
+                                                            (string-equal x "DATE")
+                                                            ))) tags)))
             ;;increment counts
             (mapc (lambda (x) (puthash x (+ 1 (gethash x tag-set 0)) tag-set)) filtered)
             )
@@ -154,16 +161,40 @@
            (sorted (sort hashPairs (lambda (a b) (> (cdr a) (cdr b)))))
            (maxTagLength (apply `max (mapcar (lambda (x) (length (car x))) sorted)))
            (maxTagAmnt (apply `max (mapcar (lambda (x) (cdr x)) sorted)))
-          )
+           (curr-buffer (buffer-name))
+           )
       ;;print them all out
+
       (with-temp-buffer-window "*Tags*"
                                nil
                                nil
+                               ;; Todo: Expand this func to group and add org headings
                                (mapc (lambda (x) (princ (format "%s\n" x)))
-                                     (jg_layer/make-bar-chart sorted maxTagLength maxTagAmnt)))
-      ))
+                                     (jg_layer/make-bar-chart sorted maxTagLength maxTagAmnt))
+                               )
 
-)
+      (with-current-buffer "*Tags*"
+        (org-mode)
+        (let ((inhibit-read-only 't)
+              (last_num "-1")
+              (get_num_re ": \\([[:digit:]]+\\) +:"))
+          ;;Loop over all lines
+          (goto-char (point-min))
+          (insert "* Tag Summary for: " curr-buffer "\n")
+          (while (< (point) (point-max))
+            (re-search-forward get_num_re nil 1)
+            (if (string-equal last_num (match-string 1))
+                (progn (beginning-of-line)
+                       (insert "   ")
+                       (forward-line))
+              (progn (setq last_num (match-string 1))
+                     (beginning-of-line)
+                     (insert "** ")
+                     (forward-line)))
+            )))
+      )
+    )
+  )
 
 
 ;;--------------------------------------------------

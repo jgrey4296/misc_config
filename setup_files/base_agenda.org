@@ -58,7 +58,7 @@
   CLOCK: [2019-02-04 Mon 14:09]--[2019-02-04 Mon 14:34] =>  0:25
   :END:
 ** TODO [[~/github/writing/paper_notes/index.org::*Summary%20Index][Paper Summaries Index]]                                                   :papers:
-** [[~/github/writing/orgfiles][Orgfiles]]                                                                     :directory:main_collection:
+** [[~/github/writing/orgfiles][Org Files]]                                     :directory:main_collection:
 ** [[~/github/languageLearning][Misc Language Repo]]                            :directory:javascript:python:multiple_languages:lisp:supercollider:tidal:learning:notes:prolog:misc:
 ** [[file:~/github/writing/orgfiles/machine_learning.org::*Machine%20Learning%20Notes][Machine Learning Notes]]
 ** [[file:~/github/writing/orgfiles/nlp.org::*Natural%20Language%20Processing:][Natural Language Processing:]]
@@ -431,4 +431,4 @@
 *** [[http://www.parliamentbook.com/spaces][Parliament Book]]
 *** [[https://www.soundsurvey.org.uk/index.php/history/street_cries/brit1/626/3387][Sound Survey]]
 *** [[https://www.filfre.net/2019/03/darklands/][Darklands]]
-** [[http://www.roguebasin.com/index.php?title%3DMain_Page][Roguelike wiki]]
+*** [[http://www.roguebasin.com/index.php?title%3DMain_Page][Roguelike wiki]]

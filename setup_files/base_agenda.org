@@ -195,7 +195,7 @@
 **** Unity
 ** TODO Datasets
 *** [[~/Mega/bookmarks][Bookmarks]]                                                                   :web:html:bookmarks:directory:
-    treat these as codings?
+     treat these as codings?
 *** TODO Bookmark and saved twitter parsing
 **** Bookmarks
      [[https://msdn.microsoft.com/en-us/library/aa753582(v=vs.85).aspx][bookmark format]]
@@ -204,6 +204,7 @@
 ***** Create a helm navigation layer
 *** Audio                                                                       :to_implement:web:
     [[file:~/Mega/Datasets/BBCSoundEffects.csv][BBCSoundEffects.csv]]
+
 **** extract categories, description, cdname
 **** group by time
 **** helm access
@@ -296,9 +297,9 @@
 
 *** Images
 **** [[file:~/github/writing/orgfiles/image_summary.org::*%5B%5Bfile:~/Mega/Images/misc_research_images/%5D%5BImage%20Directory%5D%5D][Image Summaries]]
-**** [[file:~/github/writing/orgfiles/glitch_assets_summary.org::*%5B%5B~/Mega/Images/glitch-assets%5D%5BGlitch%20Assets%5D%5D%20Summary][Glitch Assets Summary]]
+**** TODO [[file:~/github/writing/orgfiles/glitch_assets_summary.org::*%5B%5B~/Mega/Images/glitch-assets%5D%5BGlitch%20Assets%5D%5D%20Summary][Glitch Assets Summary]]
      possibly use these in vault?
-**** [[file:~/Mega/Datasets/SFAM][SFAM]]
+**** [[file:~/Mega/Datasets/SFAM/sfam_summary.org::*SFAM%20Summary][SFAM Summary]]                                                               :tagged:parsed:
 **** [[file:~/Mega/Datasets/Scarfolk][Scarfolk]]                                                                   :to_parse:
 **** online assets
 **** portraits
@@ -327,10 +328,10 @@
 **** DONE TAG them
      CLOSED: [2019-03-08 Fri 11:13]
 ** -----------------------------------------------------------------------------
-** Emacs Setup
+** Emacs 
 *** [[~/github/jg_emacs_files][Emacs files]]                                    :directory:lisp:setup:emacs:
 *** [[~/github/jg_shell_files][Bash Scripts]]                                   :bash:setup:
-*** Emacs / Spacemacs
+*** Reference
     [[https://www.gnu.org/software/emacs/manual/html_mono/eieio.html][EIEIO]]
     [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Text.html#Text][emacs lisp text manipulation]]
     [[https://www.gnu.org/software/emacs/manual/html_mono/cl.html][CL]]
@@ -338,6 +339,12 @@
     [[https://www.gnu.org/software/emacs/manual/html_mono/semantic.html][Semantic]]
     [[https://github.com/skeeto/elfeed][Elfeed]]
     [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Debugger.html#Debugger][Debugging]]
+    [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Changing-Properties.html#Changing-Properties][Changing Text Properties]]
+    [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Change-Hooks.html#Change-Hooks][Change Hooks]]
+    [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Buffer-Modification.html#Buffer-Modification][Buffer Modification]]
+    [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Special-Properties.html#Special-Properties][Properties]]
+    [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Overlays.html][Overlays]]
+*** Expansions
 **** Font-Locking
      Reminder: font-lock will override manually set text
      properties, so wrap any calls with a let of
@@ -424,4 +431,4 @@
 *** [[http://www.parliamentbook.com/spaces][Parliament Book]]
 *** [[https://www.soundsurvey.org.uk/index.php/history/street_cries/brit1/626/3387][Sound Survey]]
 *** [[https://www.filfre.net/2019/03/darklands/][Darklands]]
-*** TODO use helm-org-in-buffer-headings
+** [[http://www.roguebasin.com/index.php?title%3DMain_Page][Roguelike wiki]]

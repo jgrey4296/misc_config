@@ -3,7 +3,8 @@
 # key: with.file
 # group: I/O
 # --
-from os.path import join, isfile, exists, isdir, splitext, expanduser
+from os.path import join, isfile, exists, abspath
+from os.path import split, isdir, splitext, expanduser
 from os import listdir
 
 #r/w/rb/wb

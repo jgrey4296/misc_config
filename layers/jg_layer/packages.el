@@ -32,10 +32,11 @@
     free-keys
     fsm
     highlight-parentheses
-    ggtags
-    (helm-gtags :toggle (configuration-layer/package-usedp 'helm))
-    xcscope
-    (helm-cscope :toggle (configuration-layer/package-usedp 'helm))
+    origami
+    ;; ggtags
+    ;; (helm-gtags :toggle (configuration-layer/package-usedp 'helm))
+    ;; xcscope
+    ;; (helm-cscope :toggle (configuration-layer/package-usedp 'helm))
 
     (git-gutter :excluded t)
     (git-gutter+ :excluded t)
@@ -499,3 +500,11 @@ the entry of interest in the bibfile.  but does not check that."
   ;;   :config
   ;;   (spacemacs|hide-lighter highlight-parentheses-mode)
   ;;   (set-face-attribute 'hl-paren-face nil :weight 'ultra-bold)))
+
+(defun jg_layer/post-init-origami ()
+
+  (require 'jg_layer/origami-python-parser "~/.spacemacs.d/layers/jg_layer/local/origami-parser.el")
+
+  (delq (assoc 'python-mode origami-parser-alist) origami-parser-alist)
+  (add-to-list 'origami-parser-alist '(python-mode . jg_layer/origami-python-parser))
+  )

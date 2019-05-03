@@ -1,6 +1,9 @@
 * Base Agenda
   #+BIBLIOGRAPHY: ~/github/writing/other_files/main_bibliography plain
   :LOGBOOK:
+  CLOCK: [2019-05-01 Wed 16:10]
+  CLOCK: [2019-05-01 Wed 15:39]--[2019-05-01 Wed 16:05] =>  0:26
+  CLOCK: [2019-05-01 Wed 15:08]--[2019-05-01 Wed 15:33] =>  0:25
   CLOCK: [2019-03-20 Wed 18:13]--[2019-03-20 Wed 18:38] =>  0:25
   CLOCK: [2019-03-20 Wed 17:42]--[2019-03-20 Wed 18:07] =>  0:25
   CLOCK: [2019-03-20 Wed 17:12]--[2019-03-20 Wed 17:37] =>  0:25
@@ -344,6 +347,16 @@
     [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Buffer-Modification.html#Buffer-Modification][Buffer Modification]]
     [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Special-Properties.html#Special-Properties][Properties]]
     [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Overlays.html][Overlays]]
+**** Mode definitions
+     #+begin_src elisp results output/value
+       (define-derived-mode child fundamental-mode "A Mode"
+       ;; Stuff
+
+         )
+     #+end_src
+
+
+
 *** Expansions
 **** Font-Locking
      Reminder: font-lock will override manually set text
@@ -432,3 +445,21 @@
 *** [[https://www.soundsurvey.org.uk/index.php/history/street_cries/brit1/626/3387][Sound Survey]]
 *** [[https://www.filfre.net/2019/03/darklands/][Darklands]]
 *** [[http://www.roguebasin.com/index.php?title%3DMain_Page][Roguelike wiki]]
+*** TODO [[https://en.wikipedia.org/wiki/List_of_human_positions][Wiki Body Positions]]
+*** TODO outline-toc package
+*** [[https://en.wikipedia.org/wiki/Kanban][Kanban]]
+*** TODO [[https://stackoverflow.com/questions/1249497/command-to-center-screen-horizontally-around-cursor-on-emacs][Stackoverflow center column]]
+
+    #+begin_src elisp results output/value
+      (defun my-horizontal-recenter ()
+        "make the point horizontally centered in the window"
+        (interactive)
+        (let ((mid (/ (window-width) 2))
+              (line-len (save-excursion (end-of-line) (current-column)))
+              (cur (current-column)))
+          (if (< mid cur)
+              (set-window-hscroll (selected-window)
+                                  (- cur mid)))))
+    #+end_src
+
+

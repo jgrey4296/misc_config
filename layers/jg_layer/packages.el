@@ -14,7 +14,7 @@
     yasnippet
     abbrev
     evil
-    ibuffer
+    ;; ibuffer
     fci
     rainbow-mode
     flycheck
@@ -33,6 +33,7 @@
     fsm
     highlight-parentheses
     origami
+    vlf
     ;; ggtags
     ;; (helm-gtags :toggle (configuration-layer/package-usedp 'helm))
     ;; xcscope
@@ -339,10 +340,6 @@
     )
   )
 
-
-(defun jg_layer/post-init-ibuffer ()
-  )
-
 (defun jg_layer/post-init-erlang ()
   ;; (also has a load path set in root el file)
   erlang-root-dir "/usr/local/opt/erlang"
@@ -417,22 +414,10 @@
 
   )
 
-;; (defun jg_layer/init-buffer-manage ()
-;;   (use-package buffer-manage)
-;;   )
-
-;; (defun jg_layer/init-buffer-sets ()
-;;   (use-package buffer-sets)
-;;   )
-
 (defun jg_layer/init-buffer-utils ()
   (use-package buffer-utils
     :defer t)
   )
-
-;; (defun jg_layer/init-helm-filesets ()
-;;   (use-package helm-filesets)
-;;   )
 
 (defun jg_layer/init-evil-string-inflection ()
   (use-package evil-string-inflection
@@ -501,10 +486,26 @@ the entry of interest in the bibfile.  but does not check that."
   ;;   (spacemacs|hide-lighter highlight-parentheses-mode)
   ;;   (set-face-attribute 'hl-paren-face nil :weight 'ultra-bold)))
 
+(defun jg_layer/init-origami ()
+  (use-package origami))
+
+
+
 (defun jg_layer/post-init-origami ()
 
   (require 'jg_layer/origami-python-parser "~/.spacemacs.d/layers/jg_layer/local/origami-parser.el")
 
   (delq (assoc 'python-mode origami-parser-alist) origami-parser-alist)
   (add-to-list 'origami-parser-alist '(python-mode . jg_layer/origami-python-parser))
+  )
+
+
+(defun jg_layer/init-vlf ()
+  (use-package vlf-setup
+    :config (progn
+              (define-key evil-normal-state-map (kbd "] A") 'vlf-next-batch-from-point)
+              (define-key evil-normal-state-map (kbd "] a") 'vlf-next-batch)
+              (define-key evil-normal-state-map (kbd "[ a") 'vlf-prev-batch)
+              (spacemacs/set-leader-keys "a b" 'vlf-set-batch-size))
+    )
   )

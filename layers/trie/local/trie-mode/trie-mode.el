@@ -61,7 +61,7 @@
 
 (defmacro* trie-generate-face (name color)
   `(defface ,name
-       (list (list t :foreground ,color :background "black"))
+       (list (list t :foreground ,color)) ;; :background "black"))
      "A Generated Face"
      :group 'trie-mode))
 
@@ -235,7 +235,7 @@
 ;; --------------------
 ;;Entry Function
 ;;--------------------
-(defun trie-mode ()
+(define-derived-mode trie-mode fundamental-mode ()
   "Major mode for editing tries"
   (interactive)
   (kill-all-local-variables)

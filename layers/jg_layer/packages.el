@@ -226,11 +226,32 @@
 
 (defun jg_layer/post-init-helm ()
   ;;add in keybinding to kill line in completion window
+  (defun jg_layer/helm-open-random-action (candidate)
+    (let* ((pattern (car (last (f-split candidate))))
+           (pattern-r (wildcard-to-regexp pattern))
+           (files (helm-get-candidates (helm-get-current-source))))
+      (if (string-match-p "\*\." pattern)
+          ;;has a file wildcard
+          (let* ((all_matching (seq-filter
+                                (lambda (x) (string-match-p pattern-r x))
+                                files))
+                 (selected (seq-random-elt all_matching)))
+            (find-file selected))
+        ;;doesn't
+        (let* ((all_files (f-files candidate))
+               (selected (seq-random-elt all_files)))
+          (find-file selected))
+        )
+      ))
+
   (with-eval-after-load 'helm
     (helm-autoresize-mode 0)
-    (define-key helm-map (kbd "C-K") 'kill-line)
+    (define-key helm-map (kbd "C-k") 'kill-line)
+    (setq helm-find-files-actions (cons (car helm-find-files-actions) 
+                                        (cons '("Open Random" . jg_layer/helm-open-random-action) 
+                                              (cdr helm-find-files-actions))))
     )
-  )
+)
 
 (defun jg_layer/post-init-org ()
   ;;ORG SETUP

@@ -29,6 +29,7 @@
     ;; (filesets+ :location (recipe :fetcher github :repo "emacsmirror/filesets-plus"))
     ;; helm-filesets
     evil-string-inflection
+    evil-quickscope
     free-keys
     fsm
     highlight-parentheses
@@ -507,5 +508,12 @@ the entry of interest in the bibfile.  but does not check that."
               (define-key evil-normal-state-map (kbd "] a") 'vlf-next-batch)
               (define-key evil-normal-state-map (kbd "[ a") 'vlf-prev-batch)
               (spacemacs/set-leader-keys "a b" 'vlf-set-batch-size))
+    )
+  )
+
+(defun jg_layer/init-evil-quickscope ()
+  (use-package evil-quickscope
+    :config
+    (global-evil-quickscope-always-mode 1)
     )
   )

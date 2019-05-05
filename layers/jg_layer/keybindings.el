@@ -31,7 +31,7 @@
   ;; searching
   "s o" 'helm-occur
   ;; mode select
-  "m"   'helm-switch-major-mode
+   "m"   'helm-switch-major-mode
   ;; mark buffer
   "x m" 'mark-whole-buffer
   ;; Access to old school emacs help:

@@ -225,31 +225,42 @@
   )
 
 (defun jg_layer/post-init-helm ()
-  ;;add in keybinding to kill line in completion window
   (defun jg_layer/helm-open-random-action (candidate)
+    (interactive)
     (let* ((pattern (car (last (f-split candidate))))
            (pattern-r (wildcard-to-regexp pattern))
-           (files (helm-get-candidates (helm-get-current-source))))
-      (if (string-match-p "\*\." pattern)
-          ;;has a file wildcard
-          (let* ((all_matching (seq-filter
-                                (lambda (x) (string-match-p pattern-r x))
-                                files))
-                 (selected (seq-random-elt all_matching)))
-            (find-file selected))
-        ;;doesn't
-        (let* ((all_files (f-files candidate))
-               (selected (seq-random-elt all_files)))
-          (find-file selected))
-        )
+           (files (helm-get-candidates (helm-get-current-source)))
+           (all_matches (if (string-match-p "\*\." pattern)
+                            (seq-filter
+                             (lambda (x) (string-match-p pattern-r x))
+                             files)
+                          (f-files candidate)))
+            (selected (seq-random-elt all_matches)))
+      (find-file selected)
+      ))
+
+  (defun jg_layer/helm-open-random-external-action (candidate)
+    (interactive)
+    (let* ((pattern (car (last (f-split candidate))))
+           (pattern-r (wildcard-to-regexp pattern))
+           (files (helm-get-candidates (helm-get-current-source)))
+           (all_matches (if (string-match-p "\*\." pattern)
+                            (seq-filter
+                             (lambda (x) (string-match-p pattern-r x))
+                             files)
+                          (f-files candidate)))
+           (selected (seq-random-elt all_matches)))
+      (spacemacs//open-in-external-app selected)
       ))
 
   (with-eval-after-load 'helm
     (helm-autoresize-mode 0)
+    ;;add in keybinding to kill line in completion window
     (define-key helm-map (kbd "C-k") 'kill-line)
-    (setq helm-find-files-actions (cons (car helm-find-files-actions) 
-                                        (cons '("Open Random" . jg_layer/helm-open-random-action) 
-                                              (cdr helm-find-files-actions))))
+    (setq helm-find-files-actions (cons (car helm-find-files-actions)
+                                        (cons '("Open Random" . jg_layer/helm-open-random-action)
+                                              (cons '("Open Random External" . jg_layer/helm-open-random-external-action)
+                                                    (cdr helm-find-files-actions)))))
     )
 )
 

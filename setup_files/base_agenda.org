@@ -355,13 +355,25 @@
          )
      #+end_src
 
-
-
-*** Expansions
 **** Font-Locking
      Reminder: font-lock will override manually set text
      properties, so wrap any calls with a let of
      inhibit-modification-hooks t to override
+
+**** [[https://stackoverflow.com/questions/1249497/command-to-center-screen-horizontally-around-cursor-on-emacs][Stackoverflow center column]]
+     #+begin_src elisp results output/value
+       (defun my-horizontal-recenter ()
+         "make the point horizontally centered in the window"
+         (interactive)
+         (let ((mid (/ (window-width) 2))
+               (line-len (save-excursion (end-of-line) (current-column)))
+               (cur (current-column)))
+           (if (< mid cur)
+               (set-window-hscroll (selected-window)
+                                   (- cur mid)))))
+     #+end_src
+
+*** Expansions
 **** TODO Org SubTree Transient State navigation
      Add a transient state for moving, promoting, demoting etc subtrees
 **** TODO Org Table Transient state
@@ -392,8 +404,8 @@
 
 **** TODO Make an indirect-buffer shortcut for org mode to work with multiple subtrees
 **** [[https://orgmode.org/worg/org-tutorials/org-column-view-tutorial.html][column view]]
-
 **** TODO filter char inserting list
+**** TODO Have a recursive choice helm find files action
 ** Misc
 *** TODO Prototype some Mechanical Turk Tasks                                   :survey:online:price:amazon:
 *** TODO [[http://bloom-lang.net/features/][bloom]]                                                                  :programming:language:
@@ -448,18 +460,3 @@
 *** TODO [[https://en.wikipedia.org/wiki/List_of_human_positions][Wiki Body Positions]]
 *** TODO outline-toc package
 *** [[https://en.wikipedia.org/wiki/Kanban][Kanban]]
-*** TODO [[https://stackoverflow.com/questions/1249497/command-to-center-screen-horizontally-around-cursor-on-emacs][Stackoverflow center column]]
-
-    #+begin_src elisp results output/value
-      (defun my-horizontal-recenter ()
-        "make the point horizontally centered in the window"
-        (interactive)
-        (let ((mid (/ (window-width) 2))
-              (line-len (save-excursion (end-of-line) (current-column)))
-              (cur (current-column)))
-          (if (< mid cur)
-              (set-window-hscroll (selected-window)
-                                  (- cur mid)))))
-    #+end_src
-
-

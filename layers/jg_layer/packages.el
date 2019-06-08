@@ -23,6 +23,7 @@
     academic-phrases
     dired-quick-sort
     org-ref
+    org-pomodoro
     ;; buffer-manage
     ;; (buffer-sets :location (recipe :fetcher git :url "https://git.flintfam.org/swf-projects/buffer-sets.git"))
     buffer-utils
@@ -35,6 +36,8 @@
     highlight-parentheses
     origami
     vlf
+    plantuml-mode
+    flycheck-plantuml
     ;; ggtags
     ;; (helm-gtags :toggle (configuration-layer/package-usedp 'helm))
     ;; xcscope
@@ -226,20 +229,34 @@
 
 (defun jg_layer/post-init-helm ()
   (defun jg_layer/helm-open-random-action (candidate)
+    " Visit a random file, optionally specifying the filetype wildcard "
     (interactive)
     (let* ((pattern (car (last (f-split candidate))))
            (pattern-r (wildcard-to-regexp pattern))
            (files (helm-get-candidates (helm-get-current-source)))
            (all_matches (if (string-match-p "\*\." pattern)
-                            (seq-filter
-                             (lambda (x) (string-match-p pattern-r x))
-                             files)
+                            (seq-filter (lambda (x) (string-match-p pattern-r x)) files)
                           (f-files candidate)))
             (selected (seq-random-elt all_matches)))
       (find-file selected)
       ))
 
   (defun jg_layer/helm-open-random-external-action (candidate)
+    " Open a random file in an external program, optionally specifying wildcard "
+    (interactive)
+    (let* ((pattern (car (last (f-split candidate))))
+           (pattern-r (wildcard-to-regexp pattern))
+           (files (helm-get-candidates (helm-get-current-source)))
+           (all_matches (if (string-match-p "\*\." pattern)
+                            (seq-filter (lambda (x) (string-match-p pattern-r x)) files)
+                          (f-files candidate)))
+           (selected (seq-random-elt all_matches)))
+      (spacemacs//open-in-external-app selected)
+      ))
+
+  (defun jg_layer/helm-open-random-exploration-action (candidate)
+    " Randomly choose a directory until an openably file is found (wildcard optional)"
+    ;; TODO
     (interactive)
     (let* ((pattern (car (last (f-split candidate))))
            (pattern-r (wildcard-to-regexp pattern))
@@ -548,4 +565,75 @@ the entry of interest in the bibfile.  but does not check that."
     :config
     (global-evil-quickscope-always-mode 1)
     )
+  )
+
+(defun jg_layer/init-plantuml-mode ()
+  (use-package plantuml-mode
+    :defer t
+  )
+)
+
+(defun jg_layer/init-flycheck-plantuml ()
+  (use-package flycheck-plantuml
+    :defer t
+    :config
+    (flycheck-plantuml-setup)
+  )
+)
+
+
+(defun jg_layer/post-init-org-pomodoro ()
+  ;; set pomodoro log variable
+  (defcustom jg_layer/pomodoro-log-file "~/.spacemacs.d/setup_files/pomodoro_log.org"
+    "The Location of the Pomodoro Log File")
+  (defcustom jg_layer/pomodoro-buffer-name "*Pomodoro Log*"
+    "The name of the Pomodoro Log Buffer to record what I did in")
+  (defcustom jg_layer/pomodoro-log-message ";; What did the last Pomodoro session accomplish? C-c to finish\n"
+    "The message to add to the log buffer to spur comments")
+
+
+  ;; add a startup hook for pomodoro to tweet the end time
+  (defun jg_layer/pomodoro-start-hook ()
+    ;; tweet out start and end points
+    ;; use org-pomodoro-end-time
+    (jg_twitter/twitter-tweet-text
+     (format "Emacs Pomodoro Timer Session to end: %s"
+             (format-time-string "%H:%M (%d, %b, %Y)" org-pomodoro-end-time)))
+    )
+
+  (add-hook 'org-pomodoro-started-hook 'jg_layer/pomodoro-start-hook)
+  ;; add a finished hook to ask for a recap of what was done,
+  ;; and store it in a pomodoro log file
+  (defun jg_layer/pomodoro-end-hook ()
+    ;; create the temp buffer
+    (progn
+      (evil-window-new (get-buffer-window (current-buffer))
+                       jg_layer/pomodoro-buffer-name)
+      (set (make-local-variable 'backup-inhibited) t)
+      (auto-save-mode -1)
+      (evil-window-set-height 10)
+      (evil-initialize-local-keymaps)
+      (evil-local-set-key 'normal (kbd "C-c C-c")
+                          'jg_layer/pomodoro-finish)
+      (insert jg_layer/pomodoro-log-message)
+      (insert "Pomodoro Session: ")
+      (redraw-display)
+      )
+    )
+
+  (defun jg_layer/pomodoro-finish ()
+    ;; get the text
+    (interactive)
+    (let* ((text (buffer-substring (length jg_layer/pomodoro-log-message) (point-max)))
+           (time (format-time-string "(%Y/%b/%d) %H:%M" (current-time)))
+           (formatted (format "** %s\n    %s\n" time (string-trim text)))
+           )
+      ;; tweet it
+      (jg_twitter/twitter-tweet-text text nil '(jg_twitter/tweet_sentinel))
+      ;;add it to the pomodoro log file
+      (append-to-file formatted nil (expand-file-name jg_layer/pomodoro-log-file))
+      )
+    )
+
+  (add-hook 'org-pomodoro-finished-hook 'jg_layer/pomodoro-end-hook)
   )

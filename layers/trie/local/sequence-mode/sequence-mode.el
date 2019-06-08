@@ -12,11 +12,10 @@
 (defconst sequence/left-tab "SequenceMLeft")
 (defconst sequence/right-tab "SequenceMRight")
 
-
-(setq sequence/overlays '())
-(setq sequence/free-overlays '())
-(setq sequence/overlay-max 20)
-(setq sequence/inspector-overlay nil)
+(defvar sequence/overlays '())
+(defvar sequence/free-overlays '())
+(defvar sequence/overlay-max 20)
+(defvar sequence/inspector-overlay nil)
 ;;--------------------
 ;; Overlays
 ;;--------------------
@@ -379,35 +378,6 @@ https://stackoverflow.com/questions/1249497 "
   (org-table-goto-line row)
   (org-table-goto-column col))
 
-
-;;----------------------------------------------------------------------
-;; Transient State
-;;----------------------------------------------------------------------
-(spacemacs|define-transient-state sequence_transient
-  :title "Transient Editing State for Sequences"
-  :doc (concat "
- | General           ^^| Change                    ^^| Motion             ^^| Remove              ^^| Sort                         ^^|
- |-------------------^^+---------------------------^^+--------------------^^+---------------------^^+------------------------------^^|
- | [_q_] Quit          | [_i_] Insert Rule           |                    ^^| [_d_] Delete Value    | [_s_] Sort Table Alpha         |
- | [_n_] New Table     |                           ^^|                    ^^| [_D_] Delete Column   |                              ^^|
- | [_v_] Table Inspect | [_r_] Rename Column         | [_c_] Centre Column  | [_m_] Merge Column    |                              ^^|
- | [_b_] Set Right Tab | [_t_] Insert Terminal       |                    ^^|                     ^^|                              ^^|
-")
-  :bindings
-  ("q" nil :exit t)
-  ("n" sequence/new-table ) ;; org create table, insert
-  ("v" sequence/inspect-table) ;; create a left temp buffer that shows selected column's values (plus highlights active ones)
-  ("b" nil ) ;; create a right temp buffer that shows selected column's values (plus highlights active ones)
-  ("i" sequence/insert-rule) ;; specify LHS and RHS, insert into factbase, insert into appropriate columns
-  ("r" nil ) ;; Rename the column from default
-  ("t" sequence/insert-terminal) ;; Insert an Input terminal
-  ("c" sequence/centre-column) ;; Centre the current column
-  ("d" nil ) ;; Delete the value at point from the table
-  ("D" nil ) ;; Delete the column from the table
-  ("m" nil ) ;; Merge the left connections and the right connections
-  ("s" nil ) ;; sort all columns alphabetically
-  )
-
 ;;----------------------------------------
 (defun sequence/new-table ()
   " Create a new table, after having moved to empty space "
@@ -678,6 +648,7 @@ https://stackoverflow.com/questions/1249497 "
   "Major Mode for creating a sequence of rules "
   (interactive)
   (kill-all-local-variables)
+  ;; Set the Org Table minor mode
   (orgtbl-mode)
   ;; set table coordinates to show
   (use-local-map sequence-mode-map)
@@ -689,7 +660,7 @@ https://stackoverflow.com/questions/1249497 "
   ;; (set-syntax-table sequence-mode-syntax-table)
   (setq major-mode 'sequence-mode)
   (setq mode-name "SEQUENCE")
-  ;;(run-hooks 'sequence-mode-hook)
+  ;;(run-mode-hooks 'sequence-mode-hook)
   )
 
 ;; TODO: add to hs-special-modes-alist

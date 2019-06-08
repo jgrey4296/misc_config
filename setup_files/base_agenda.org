@@ -1,10 +1,15 @@
 * Base Agenda
   #+BIBLIOGRAPHY: ~/github/writing/other_files/main_bibliography plain
   :LOGBOOK:
-  CLOCK: [2019-05-01 Wed 16:10]
+  CLOCK: [2019-06-07 Fri 20:19]--[2019-06-07 Fri 20:44] =>  0:25
+  CLOCK: [2019-06-07 Fri 19:39]--[2019-06-07 Fri 20:04] =>  0:25
+  CLOCK: [2019-06-07 Fri 18:45]--[2019-06-07 Fri 19:10] =>  0:25
+  CLOCK: [2019-06-07 Fri 18:00]--[2019-06-07 Fri 18:25] =>  0:25
+  CLOCK: [2019-06-07 Fri 17:28]--[2019-06-07 Fri 17:53] =>  0:25
+  CLOCK: [2019-06-07 Fri 16:17]--[2019-06-07 Fri 16:42] =>  0:25
   CLOCK: [2019-05-01 Wed 15:39]--[2019-05-01 Wed 16:05] =>  0:26
-  CLOCK: [2019-05-01 Wed 15:08]--[2019-05-01 Wed 15:33] =>  0:25
   CLOCK: [2019-03-20 Wed 18:13]--[2019-03-20 Wed 18:38] =>  0:25
+  CLOCK: [2019-05-01 Wed 15:08]--[2019-05-01 Wed 15:33] =>  0:25
   CLOCK: [2019-03-20 Wed 17:42]--[2019-03-20 Wed 18:07] =>  0:25
   CLOCK: [2019-03-20 Wed 17:12]--[2019-03-20 Wed 17:37] =>  0:25
   CLOCK: [2019-03-20 Wed 16:42]--[2019-03-20 Wed 17:07] =>  0:25
@@ -70,6 +75,7 @@
 *** TODO [[~/.spacemacs.d/layers/trie][Trie-layer]]
 **** Design
 ***** Vignettes
+***** Architecture
 **** Layouts
 ***** Pipeline
 ***** Flattened Trie Location
@@ -204,7 +210,17 @@
      [[https://msdn.microsoft.com/en-us/library/aa753582(v=vs.85).aspx][bookmark format]]
 ***** DONE Parse into emacs readable format
       CLOSED: [2019-03-14 Thu 19:46]
-***** Create a helm navigation layer
+***** DONE Create a helm navigation layer
+      CLOSED: [2019-05-25 Sat 00:24]
+**** Saved thread Parsing
+***** Cleanup of org files
+      remove duplicate tweets / threads
+      add links to other people
+      remove empty headings
+      fill buffers
+      get all tweets, check there isn't an embedded gif or video.
+      download gifs and videos as necessary
+
 *** Audio                                                                       :to_implement:web:
     [[file:~/Mega/Datasets/BBCSoundEffects.csv][BBCSoundEffects.csv]]
 
@@ -374,6 +390,108 @@
                                    (- cur mid)))))
      #+end_src
 
+**** [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Major-Mode-Conventions.html#Major-Mode-Conventions][Major Mode conventions]]
+***** Define a major mode command whose name ends in ‘-mode’.                   :naming:
+***** Write a documentation string                                              :documentation:
+***** Start by calling ‘kill-all-local-variables’.                              :procedure:
+***** Set the variable ‘major-mode’ to the major mode command symbol.           :naming:
+***** Set the variable ‘mode-name’ to the “pretty” name of the mode.            :naming:
+***** The major mode command should be idempotent.                              :procedure:
+***** All variables and functions should start with the major mode name         :naming:
+***** The mode should set ‘indent-line-function’                                :procedure:
+***** The major mode should usually have its own keymap                         :procedure:
+      The major mode command should call ‘use-local-map’ to install this local
+      map. 
+
+      This keymap should be stored permanently in a global variable named
+      ‘MODENAME-mode-map’. Normally the library that defines the mode sets this
+      variable. 
+
+***** Major modes should not alter matters of user preference                   :procedure:
+      Such as whether Auto-Fill mode is enabled. Leave this to
+      each user to decide. However, a major mode should customize other
+      variables so that Auto-Fill mode will work usefully _if_ the user decides
+      to use it.
+***** The mode may have its own syntax table or may share one with other        :procedure:naming:
+      related modes. If it has its own syntax table, it should store this in a
+      variable named ‘MODENAME-mode-syntax-table’.
+***** If the mode handles a language that has a syntax for comments, it         :procedure:
+      should set the variables that define the comment syntax.
+***** The mode may have its own abbrev table or may share one with other        :naming:procedure:
+      related modes. If it has its own abbrev table, it should store this in a
+      variable named ‘MODENAME-mode-abbrev-table’. If the major mode command
+      defines any abbrevs itself, it should pass ‘t’ for the SYSTEM-FLAG
+      argument to ‘define-abbrev’. 
+***** The mode should specify how to do highlighting for Font Lock mode,        :display:procedure:naming:
+      by setting up a buffer-local value for the variable ‘font-lock-defaults’
+***** Each face that the mode defines should, if possible, inherit from         :display:
+      an existing Emacs face.
+***** The mode can specify how to complete various keywords by adding one       :naming:
+      or more buffer-local entries to the special hook
+      ‘completion-at-point-functions’.
+***** To make a buffer-local binding for an Emacs customization variable,       :procedure:
+      use ‘make-local-variable’ in the major mode command, not
+      ‘make-variable-buffer-local’. The latter function would make the variable
+      local to every buffer in which it is subsequently set, which would affect
+      buffers that do not use this mode. It is undesirable for a mode to have
+      such global effects.
+
+      With rare exceptions, the only reasonable way to use
+      ‘make-variable-buffer-local’ in a Lisp package is for a variable which is
+      used only within that package. Using it on a variable used by other
+      packages would interfere with them.
+***** Each major mode should have a normal “mode hook” named                    :procedure:naming:
+      ‘MODENAME-mode-hook’. The very last thing the major mode command should do
+      is to call ‘run-mode-hooks’. This runs the normal hook
+      ‘change-major-mode-after-body-hook’, the mode hook, the function
+      ‘hack-local-variables’ (when the buffer is visiting a file), and then the
+      normal hook ‘after-change-major-mode-hook’.
+***** The major mode command may start by calling some other major mode         :procedure:
+      command (called the “parent mode”) and then alter some of its settings. A
+      mode that does this is called a “derived mode”. The recommended way to
+      define one is to use the ‘define-derived-mode’ macro, but this is not
+      required. Such a mode should call the parent mode command inside a
+      ‘delay-mode-hooks’ form. (Using ‘define-derived-mode’ does this
+      automatically.) 
+***** If something special should be done if the user switches a buffer         :procedure:
+      from this mode to any other major mode, this mode can set up a
+      buffer-local value for ‘change-major-mode-hook’
+***** If this mode is appropriate only for specially-prepared text              :procedure:
+      produced by the mode itself (rather than by the user typing at the
+      keyboard or by an external file), then the major mode command symbol
+      should have a property named ‘mode-class’ with value ‘special’, put on as
+      follows:
+
+      (put 'funny-mode 'mode-class 'special)
+
+      This tells Emacs that new buffers created while the current buffer is in
+      Funny mode should not be put in Funny mode, even though the default value
+      of ‘major-mode’ is ‘nil’. By default, the value of ‘nil’ for ‘major-mode’
+      means to use the current buffer’s major mode when creating new buffers
+      (*note Auto Major Mode::), but with such ‘special’ modes, Fundamental mode
+      is used instead. Modes such as Dired, Rmail, and Buffer List use this
+      feature.
+
+      The function ‘view-buffer’ does not enable View mode in buffers whose
+      mode-class is special, because such modes usually provide their own
+      View-like bindings.
+
+      The ‘define-derived-mode’ macro automatically marks the derived mode as
+      special if the parent mode is special. Special mode is a convenient parent
+      for such modes to inherit from; *Note Basic Major Modes::.
+***** If you want to make the new mode the default for files with certain       :procedure:
+      recognizable names, add an element to ‘auto-mode-alist’ to select the mode
+      for those file names. If you define the mode command to autoload, you
+      should add this element in the same file that calls ‘autoload’. If you use
+      an autoload cookie for the mode command, you can also use an autoload
+      cookie for the form that adds the element. If you do not autoload the mode
+      command, it is sufficient to add the element in the file that contains the
+      mode definition.
+***** The top-level forms in the file defining the mode should be written       :procedure:
+      so that they may be evaluated more than once without adverse consequences.
+      For instance, use ‘defvar’ or ‘defcustom’ to set mode-related variables,
+      so that they are not reinitialized if they already have a value.
+
 *** Expansions
 **** TODO buffer groups / registers
      be able to add a buffer / marked buffers to a register,
@@ -394,6 +512,7 @@
 
 **** TODO filter char inserting list
 **** TODO Have a recursive choice helm find files action
+**** TODO Make Pomodoro take descriptions of what I did in a session
 **** TODO Make an indirect-buffer shortcut for org mode to work with multiple subtrees
 **** TODO Org SubTree Transient State navigation
      Add a transient state for moving, promoting, demoting etc subtrees
@@ -408,6 +527,8 @@
 **** TODO XML / Bookmarks load
 
      CLOSED: [2019-05-05 Sun 06:08]
+**** TODO Pomodoro Log and Tweet
+
 ** Misc
 *** TODO Prototype some Mechanical Turk Tasks                                   :survey:online:price:amazon:
 *** TODO [[http://bloom-lang.net/features/][bloom]]                                                                  :programming:language:
@@ -462,3 +583,4 @@
 *** TODO [[https://en.wikipedia.org/wiki/List_of_human_positions][Wiki Body Positions]]
 *** TODO outline-toc package
 *** [[https://en.wikipedia.org/wiki/Kanban][Kanban]]
+*** [[http://plantuml.com/sequence-diagram][PlantUML]]

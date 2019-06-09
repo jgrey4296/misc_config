@@ -1,6 +1,10 @@
 * Base Agenda
   #+BIBLIOGRAPHY: ~/github/writing/other_files/main_bibliography plain
   :LOGBOOK:
+  CLOCK: [2019-06-08 Sat 18:18]--[2019-06-08 Sat 18:43] =>  0:25
+  CLOCK: [2019-06-08 Sat 17:41]--[2019-06-08 Sat 18:06] =>  0:25
+  CLOCK: [2019-06-08 Sat 17:10]--[2019-06-08 Sat 17:35] =>  0:25
+  CLOCK: [2019-06-08 Sat 16:38]--[2019-06-08 Sat 17:03] =>  0:25
   CLOCK: [2019-06-07 Fri 20:19]--[2019-06-07 Fri 20:44] =>  0:25
   CLOCK: [2019-06-07 Fri 19:39]--[2019-06-07 Fri 20:04] =>  0:25
   CLOCK: [2019-06-07 Fri 18:45]--[2019-06-07 Fri 19:10] =>  0:25
@@ -512,7 +516,8 @@
 
 **** TODO filter char inserting list
 **** TODO Have a recursive choice helm find files action
-**** TODO Make Pomodoro take descriptions of what I did in a session
+**** DONE Make Pomodoro take descriptions of what I did in a session
+     CLOSED: [2019-06-08 Sat 19:07]
 **** TODO Make an indirect-buffer shortcut for org mode to work with multiple subtrees
 **** TODO Org SubTree Transient State navigation
      Add a transient state for moving, promoting, demoting etc subtrees
@@ -525,9 +530,7 @@
      any given moment
      then be able to tag into groups?
 **** TODO XML / Bookmarks load
-
-     CLOSED: [2019-05-05 Sun 06:08]
-**** TODO Pomodoro Log and Tweet
+**** TODO custom hide overlays
 
 ** Misc
 *** TODO Prototype some Mechanical Turk Tasks                                   :survey:online:price:amazon:

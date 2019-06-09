@@ -1,1 +1,17 @@
 * Pomodoro Log
+** (2019/Jun/08) 17:04
+    Pomodoro Session: refreshed scraped twitter use list, started on list creation
+** (2019/Jun/08) 17:36
+    Pomodoro Session: checked the twitter api and got the specific commands needed
+** (2019/Jun/08) 18:07
+    Pomodoro Session: tested list creation and member adding in the command line
+** (2019/Jun/08) 18:44
+    Pomodoro Session: fleshed out the list_uploading script, adding comments
+** (2019/Jun/08) 19:30
+    Pomodoro Session: Finished adding logging, reworking datastructures to avoid wasted work
+** (2019/Jun/08) 20:04
+    Pomodoro Session: started on load_org function
+** (2019/Jun/08) 21:05
+    Pomodoro Session: switched to cursoring, wrote the org loading
+** (2019/Jun/08) 21:36
+    Pomodoro Session: checking org parsing and list retrieval

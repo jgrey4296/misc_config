@@ -321,3 +321,14 @@
    :ARCHIVE_CATEGORY: base_agenda
    :ARCHIVE_TODO: DONE
    :END:
+
+** DONE Pomodoro Log and Tweet
+   CLOSED: [2019-06-08 Sat 15:53]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2019-06-08 Sat 15:53
+   :ARCHIVE_FILE: ~/.spacemacs.d/setup_files/base_agenda.org
+   :ARCHIVE_OLPATH: Base Agenda/Emacs/Expansions
+   :ARCHIVE_CATEGORY: base_agenda
+   :ARCHIVE_TODO: DONE
+   :END:
+

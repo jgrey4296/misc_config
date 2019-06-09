@@ -432,8 +432,6 @@
   (remove-hook 'comint-mode-hook 'spacemacs/disable-hl-line-mode)
   )
 
-
-
 (defun jg_layer/post-init-flycheck ()
   (setq flycheck-display-errors-function nil
         flycheck-help-echo-function nil
@@ -453,7 +451,6 @@
 
 (defun jg_layer/post-init-python ()
   (add-hook 'python-mode-hook #'(lambda () (modify-syntax-entry ?_ "w"))))
-
 
 (defun jg_layer/init-academic-phrases ()
   (use-package academic-phrases
@@ -496,12 +493,10 @@
     )
   )
 
-
 (defun jg_layer/post-init-highlight-parentheses ()
   (setq hl-paren-colors '("color-16" "color-16" "color-16" "color-16")
         hl-paren-background-colors '("Springgreen3" "color-26" "color-91" "IndianRed3"))
   )
-
 
 (defun jg_layer/post-init-org-ref ()
   (with-eval-after-load 'org-ref
@@ -522,7 +517,6 @@ the entry of interest in the bibfile.  but does not check that."
             (ding)))))
     ))
 
-
   ;; (use-package highlight-parentheses
   ;;   :init
   ;;   (progn
@@ -539,8 +533,6 @@ the entry of interest in the bibfile.  but does not check that."
 (defun jg_layer/init-origami ()
   (use-package origami))
 
-
-
 (defun jg_layer/post-init-origami ()
 
   (require 'jg_layer/origami-python-parser "~/.spacemacs.d/layers/jg_layer/local/origami-parser.el")
@@ -548,7 +540,6 @@ the entry of interest in the bibfile.  but does not check that."
   (delq (assoc 'python-mode origami-parser-alist) origami-parser-alist)
   (add-to-list 'origami-parser-alist '(python-mode . jg_layer/origami-python-parser))
   )
-
 
 (defun jg_layer/init-vlf ()
   (use-package vlf-setup
@@ -580,7 +571,6 @@ the entry of interest in the bibfile.  but does not check that."
     (flycheck-plantuml-setup)
   )
 )
-
 
 (defun jg_layer/post-init-org-pomodoro ()
   ;; set pomodoro log variable

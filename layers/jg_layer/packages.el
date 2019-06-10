@@ -401,13 +401,64 @@
   (setq-default python-indent-offset 4
                 python-indent-guess-indent-offset nil
                 )
+
+  (defun jg_layer/toggle-all-defs ()
+    (interactive)
+    ;; goto start of file
+    (let* ((open-or-close 'evil-close-fold)
+           (current (point))
+           )
+      (save-excursion
+        (goto-char (point-min))
+          (python-nav-forward-defun)
+          (while (not (equal current (point)))
+            (setq current (point))
+            (if (jg_layer/line-starts-with? "def ")
+                (funcall open-or-close))
+            (python-nav-forward-defun)
+            )
+        )
+      )
+    )
+
+  (defun jg_layer/close-class-defs ()
+    (interactive )
+    (save-excursion
+      (let* ((current (point)))
+        (python-nav-backward-defun)
+        (while (and (not (jg_layer/line-starts-with? "class "))
+                    (not (equal current (point))))
+          (evil-close-fold)
+          (setq current (point))
+          (python-nav-backward-defun)
+          )
+        )
+      )
+    (save-excursion
+      (let* ((current (point)))
+        (python-nav-forward-defun)
+        (while (and (not (jg_layer/line-starts-with? "class "))
+                    (not (equal current (point))))
+          (evil-close-fold)
+          (setq current (point))
+          (python-nav-forward-defun)
+          )
+        )
+      )
+    )
+
+  (add-hook 'python-mode-hook (lambda ()
+                                (evil-define-key 'normal python-mode-map
+                                  (kbd "z d") 'jg_layer/toggle-all-defs
+                                  (kbd "z C") 'jg_layer/close-class-defs
+                                  )))
   )
 
-(defun jg_layer/post-init-fci ()
+  (defun jg_layer/post-init-fci ()
   (add-hook 'change-major-mode-after-body-hook 'fci-mode)
   )
 
-(defun jg_layer/init-rainbow-mode ()
+  (defun jg_layer/init-rainbow-mode ()
   (use-package rainbow-mode
     :commands (rainbow-mode)
     :config (progn
@@ -416,13 +467,13 @@
     )
   )
 
-(defun jg_layer/init-nlinum ()
+  (defun jg_layer/init-nlinum ()
   (use-package nlium
     :commands (nlinum-mode)
     )
   )
 
-(defun jg_layer/post-init-shell ()
+  (defun jg_layer/post-init-shell ()
   ;; shell default can be: shell, eshell, term, ansi-term
   (setq-default shell-default-shell 'shell
                 shell-protect-eshell-prompt 0
@@ -432,7 +483,7 @@
   (remove-hook 'comint-mode-hook 'spacemacs/disable-hl-line-mode)
   )
 
-(defun jg_layer/post-init-flycheck ()
+  (defun jg_layer/post-init-flycheck ()
   (setq flycheck-display-errors-function nil
         flycheck-help-echo-function nil
         flycheck-process-error-functions nil
@@ -449,10 +500,10 @@
                         errors))))
   )
 
-(defun jg_layer/post-init-python ()
+  (defun jg_layer/post-init-python ()
   (add-hook 'python-mode-hook #'(lambda () (modify-syntax-entry ?_ "w"))))
 
-(defun jg_layer/init-academic-phrases ()
+  (defun jg_layer/init-academic-phrases ()
   (use-package academic-phrases
     :config
     (spacemacs/declare-prefix "o i" "Insert Academic")
@@ -461,14 +512,14 @@
 
   )
 
-(defun jg_layer/init-buffer-utils ()
+  (defun jg_layer/init-buffer-utils ()
   (use-package buffer-utils
     :defer t)
   )
 
-(defun jg_layer/init-evil-string-inflection ()
-  (use-package evil-string-inflection
-    :config (define-key evil-normal-state-map "g'" 'evil-operator-string-inflection))
+  (defun jg_layer/init-evil-string-inflection ()
+    (use-package evil-string-inflection
+      :config (define-key evil-normal-state-map "g'" 'evil-operator-string-inflection))
   )
 
 (defun jg_layer/init-free-keys ()

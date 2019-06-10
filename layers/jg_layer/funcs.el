@@ -236,6 +236,11 @@
     )
   )
 
+(defun jg_layer/line-starts-with? (text)
+  (s-starts-with? text (s-trim-left (buffer-substring-no-properties
+                                     (line-beginning-position)
+                                     (line-end-position))))
+  )
 ;;----------------------------------------
 
 (defun jg_layer/example_transient_func_setup ()

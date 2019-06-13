@@ -9,10 +9,11 @@
     ;; (some-package :location local)
     ;; (some-package :location (recipe :fetcher github :repo "some/repo"))
     ;; (some-package :excluded t)
-    org
+    ;; org
     (trie-mode :location local)
     (parsec :location elpa :step pre)
     (sequence-mode :location local)
+    (explore-mode :location local)
     )
   )
 
@@ -27,7 +28,6 @@
 (defun trie/init-parsec ()
   (use-package parsec
     :defer t))
-
 
 (defun trie/init-sequence-mode ()
   (use-package sequence-mode
@@ -65,6 +65,30 @@
       ("D" nil ) ;; Delete the column from the table
       ("m" nil ) ;; Merge the left connections and the right connections
       ("s" nil ) ;; sort all columns alphabetically
+      )
+    )
+  )
+
+(defun trie/init-explore-mode ()
+  (use-package explore-mode
+    :config
+    (spacemacs/declare-prefix "," "Explore Mode Prefix")
+    (evil-define-key '(normal visual) explore-mode-map
+      ;;Add motions here
+      (kbd "<RET>") 'explore/expand-entry
+      )
+    (spacemacs/set-leader-keys-for-major-mode 'explore-mode
+      "."   'spacemacs/explore_transient-transient-state/body
+      )
+    (spacemacs|define-transient-state explore_transient
+      :title "Transient Editing State for Exploring Trees"
+      :doc (concat "
+   | General           ^^|
+   |-------------------^^+
+   | [_q_] Quit          |
+  ")
+      :bindings
+      ("q" nil :exit t)
       )
     )
   )

@@ -658,8 +658,8 @@ https://stackoverflow.com/questions/1249497 "
   ;; (set (make-local-variable 'comment-start) "//")
   ;; (set (make-local-variable 'comment-use-syntax) t)
   ;; (set-syntax-table sequence-mode-syntax-table)
-  (setq major-mode 'sequence-mode)
-  (setq mode-name "SEQUENCE")
+  (setq major-mode 'sequence-mode
+        mode-name "SEQUENCE")
   ;;(run-mode-hooks 'sequence-mode-hook)
   )
 

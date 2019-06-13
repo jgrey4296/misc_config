@@ -15,3 +15,57 @@
     Pomodoro Session: switched to cursoring, wrote the org loading
 ** (2019/Jun/08) 21:36
     Pomodoro Session: checking org parsing and list retrieval
+** (2019/Jun/09) 17:11
+    Pomodoro Session: added printing abilities to the type trie
+** (2019/Jun/09) 17:41
+    Pomodoro Session: refreshing on type inference
+** (2019/Jun/10) 18:17
+    Pomodoro Session: figured out validation base case and recursive case, now implementing
+** (2019/Jun/10) 18:58
+    Pomodoro Session: implemented the validation method, now updating structural changes to other classes before testing
+** (2019/Jun/10) 19:42
+    Pomodoro Session: testing validate method
+** (2019/Jun/10) 20:24
+    Pomodoro Session: further testing of the validate method, fixing problems that show up. now refactoring trie creation
+** (2019/Jun/10) 21:36
+    Pomodoro Session: added logging for debugging validation method
+** (2019/Jun/10) 22:18
+    Pomodoro Session: refining the type checking
+** (2019/Jun/11) 16:47
+    Pomodoro Session: implemented variable merging
+** (2019/Jun/11) 17:18
+    Pomodoro Session: variable merging works, now adding more tests, plus simplifying the type checking call
+** (2019/Jun/11) 18:01
+    Pomodoro Session: added more tests for type checking
+** (2019/Jun/11) 21:13
+    Pomodoro Session: got distracted looking at programming language conference proceedings
+** (2019/Jun/11) 21:38
+    Pomodoro Session: back to testing, also now considering base types for the type system
+** (2019/Jun/12) 18:34
+    Pomodoro Session: started prototyping an emacs mode for exploring trees
+** (2019/Jun/12) 19:05
+    ;; Pomodoro Session: making a tree generator for the emacs mode
+** (2019/Jun/12) 19:36
+    Pomodoro Session: tree gen code
+** (2019/Jun/12) 20:14
+    Pomodoro Session: writing a word sampler
+** (2019/Jun/12) 21:07
+    Pomodoro Session: tree generating fine, now adding it to the mode, to write to the buffer
+** (2019/Jun/12) 21:59
+    Pomodoro Session: working on printing the tree to the buffer
+** (2019/Jun/13) 16:59
+    Pomodoro Session: added dfs for the tree
+** (2019/Jun/13) 17:25
+    Pomodoro Session: working on drawing the tree
+** (2019/Jun/13) 18:06
+    Pomodoro Session: drawing the tree in emacs
+** (2019/Jun/13) 18:36
+    Pomodoro Session: the drawing of tree is starting to take shape
+** (2019/Jun/13) 19:26
+    Pomodoro Session: making progress on the tree
+** (2019/Jun/13) 20:07
+    Pomodoro Session: retrieving values from the drawn tree
+** (2019/Jun/13) 20:40
+    Pomodoro Session: getting interactivity working
+** (2019/Jun/13) 22:36
+    Pomodoro Session: drawing correctly, added overlays

@@ -332,3 +332,22 @@
    :ARCHIVE_TODO: DONE
    :END:
 
+** DONE Make Pomodoro take descriptions of what I did in a session
+   CLOSED: [2019-06-08 Sat 19:07]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2019-06-09 Sun 16:46
+   :ARCHIVE_FILE: ~/.spacemacs.d/setup_files/base_agenda.org
+   :ARCHIVE_OLPATH: Base Agenda/Emacs/Expansions
+   :ARCHIVE_CATEGORY: base_agenda
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE Make an indirect-buffer shortcut for org mode to work with multiple subtrees
+   CLOSED: [2019-06-09 Sun 16:46]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2019-06-09 Sun 16:46
+   :ARCHIVE_FILE: ~/.spacemacs.d/setup_files/base_agenda.org
+   :ARCHIVE_OLPATH: Base Agenda/Emacs/Expansions
+   :ARCHIVE_CATEGORY: base_agenda
+   :ARCHIVE_TODO: DONE
+   :END:

@@ -237,7 +237,7 @@
            (all_matches (if (string-match-p "\*\." pattern)
                             (seq-filter (lambda (x) (string-match-p pattern-r x)) files)
                           (f-files candidate)))
-            (selected (seq-random-elt all_matches)))
+           (selected (seq-random-elt all_matches)))
       (find-file selected)
       ))
 
@@ -279,7 +279,7 @@
                                               (cons '("Open Random External" . jg_layer/helm-open-random-external-action)
                                                     (cdr helm-find-files-actions)))))
     )
-)
+  )
 
 (defun jg_layer/post-init-org ()
   ;;ORG SETUP
@@ -398,10 +398,10 @@
   )
 
 (defun jg_layer/post-init-python ()
+  (print "Post init python")
   (setq-default python-indent-offset 4
                 python-indent-guess-indent-offset nil
                 )
-
   (defun jg_layer/toggle-all-defs ()
     (interactive)
     ;; goto start of file
@@ -410,13 +410,13 @@
            )
       (save-excursion
         (goto-char (point-min))
+        (python-nav-forward-defun)
+        (while (not (equal current (point)))
+          (setq current (point))
+          (if (jg_layer/line-starts-with? "def ")
+              (funcall open-or-close))
           (python-nav-forward-defun)
-          (while (not (equal current (point)))
-            (setq current (point))
-            (if (jg_layer/line-starts-with? "def ")
-                (funcall open-or-close))
-            (python-nav-forward-defun)
-            )
+          )
         )
       )
     )
@@ -447,18 +447,22 @@
       )
     )
 
-  (add-hook 'python-mode-hook (lambda ()
-                                (evil-define-key 'normal python-mode-map
-                                  (kbd "z d") 'jg_layer/toggle-all-defs
-                                  (kbd "z C") 'jg_layer/close-class-defs
-                                  )))
+  (defun jg_layer/setup-python-mode ()
+    (evil-define-key 'normal python-mode-map
+      (kbd "z d") 'jg_layer/toggle-all-defs
+      (kbd "z C") 'jg_layer/close-class-defs
+      ))
+
+
+  (add-hook 'python-mode-hook 'jg_layer/setup-python-mode)
+  (add-hook 'python-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
   )
 
-  (defun jg_layer/post-init-fci ()
+(defun jg_layer/post-init-fci ()
   (add-hook 'change-major-mode-after-body-hook 'fci-mode)
   )
 
-  (defun jg_layer/init-rainbow-mode ()
+(defun jg_layer/init-rainbow-mode ()
   (use-package rainbow-mode
     :commands (rainbow-mode)
     :config (progn
@@ -467,13 +471,13 @@
     )
   )
 
-  (defun jg_layer/init-nlinum ()
+(defun jg_layer/init-nlinum ()
   (use-package nlium
     :commands (nlinum-mode)
     )
   )
 
-  (defun jg_layer/post-init-shell ()
+(defun jg_layer/post-init-shell ()
   ;; shell default can be: shell, eshell, term, ansi-term
   (setq-default shell-default-shell 'shell
                 shell-protect-eshell-prompt 0
@@ -483,7 +487,7 @@
   (remove-hook 'comint-mode-hook 'spacemacs/disable-hl-line-mode)
   )
 
-  (defun jg_layer/post-init-flycheck ()
+(defun jg_layer/post-init-flycheck ()
   (setq flycheck-display-errors-function nil
         flycheck-help-echo-function nil
         flycheck-process-error-functions nil
@@ -500,10 +504,7 @@
                         errors))))
   )
 
-  (defun jg_layer/post-init-python ()
-  (add-hook 'python-mode-hook #'(lambda () (modify-syntax-entry ?_ "w"))))
-
-  (defun jg_layer/init-academic-phrases ()
+(defun jg_layer/init-academic-phrases ()
   (use-package academic-phrases
     :config
     (spacemacs/declare-prefix "o i" "Insert Academic")
@@ -512,14 +513,14 @@
 
   )
 
-  (defun jg_layer/init-buffer-utils ()
+(defun jg_layer/init-buffer-utils ()
   (use-package buffer-utils
     :defer t)
   )
 
-  (defun jg_layer/init-evil-string-inflection ()
-    (use-package evil-string-inflection
-      :config (define-key evil-normal-state-map "g'" 'evil-operator-string-inflection))
+(defun jg_layer/init-evil-string-inflection ()
+  (use-package evil-string-inflection
+    :config (define-key evil-normal-state-map "g'" 'evil-operator-string-inflection))
   )
 
 (defun jg_layer/init-free-keys ()
@@ -568,18 +569,18 @@ the entry of interest in the bibfile.  but does not check that."
             (ding)))))
     ))
 
-  ;; (use-package highlight-parentheses
-  ;;   :init
-  ;;   (progn
-  ;;     (when (member dotspacemacs-highlight-delimiters '(all current))
-  ;;       (add-hook 'prog-mode-hook #'highlight-parentheses-mode))
-  ;;     (setq hl-paren-delay 0.2)
-  ;;     (spacemacs/set-leader-keys "tCp" 'highlight-parentheses-mode)
-  ;;     (setq hl-paren-colors '("color-16" "color-16" "color-16" "color-16")
-  ;;           hl-paren-background-colors '("Springgreen3" "color-26" "color-91" "IndianRed3")))
-  ;;   :config
-  ;;   (spacemacs|hide-lighter highlight-parentheses-mode)
-  ;;   (set-face-attribute 'hl-paren-face nil :weight 'ultra-bold)))
+;; (use-package highlight-parentheses
+;;   :init
+;;   (progn
+;;     (when (member dotspacemacs-highlight-delimiters '(all current))
+;;       (add-hook 'prog-mode-hook #'highlight-parentheses-mode))
+;;     (setq hl-paren-delay 0.2)
+;;     (spacemacs/set-leader-keys "tCp" 'highlight-parentheses-mode)
+;;     (setq hl-paren-colors '("color-16" "color-16" "color-16" "color-16")
+;;           hl-paren-background-colors '("Springgreen3" "color-26" "color-91" "IndianRed3")))
+;;   :config
+;;   (spacemacs|hide-lighter highlight-parentheses-mode)
+;;   (set-face-attribute 'hl-paren-face nil :weight 'ultra-bold)))
 
 (defun jg_layer/init-origami ()
   (use-package origami))
@@ -612,16 +613,16 @@ the entry of interest in the bibfile.  but does not check that."
 (defun jg_layer/init-plantuml-mode ()
   (use-package plantuml-mode
     :defer t
+    )
   )
-)
 
 (defun jg_layer/init-flycheck-plantuml ()
   (use-package flycheck-plantuml
     :defer t
     :config
     (flycheck-plantuml-setup)
+    )
   )
-)
 
 (defun jg_layer/post-init-org-pomodoro ()
   ;; set pomodoro log variable
@@ -677,4 +678,5 @@ the entry of interest in the bibfile.  but does not check that."
     )
 
   (add-hook 'org-pomodoro-finished-hook 'jg_layer/pomodoro-end-hook)
+  (print "done pomodoro")
   )

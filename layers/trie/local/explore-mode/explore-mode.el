@@ -4,7 +4,7 @@
 (defvar-local explore/overlays (make-hash-table))
 (defvar-local explore/overlay-max 20)
 (defvar-local explore/inspector-overlay nil)
-(defvar-local explore/tree-root (make-explore/node :name "__root"))
+(defvar-local explore/tree-root nil)
 (defvar-local explore/indents '())
 (defvar-local explore/current-path '())
 (defvar-local explore/start-pos (make-marker))
@@ -199,7 +199,6 @@ calculate the bounds that column falls within """
           (explore/draw-children substr (+ 1 layer)))
         )
     )
-  ;;TODO: Draw the full path above the divider line
   (goto-char (marker-position explore/start-pos))
   (move-to-column (cadr explore/indents))
   (explore/draw-path)
@@ -235,11 +234,17 @@ calculate the bounds that column falls within """
 
 (defun explore/initial-setup (tree)
   """ An initial setup for a tree """
+  (if (not tree)
+      (progn (setq explore/tree-root (make-explore/node :name "__root"))
+             (explore/generate-tree explore/tree-root 5 5))
+    (setq explore/tree-root tree)
+      )
   (setq explore/indents '()
         explore/current-path '()
         explore/max-lines 0
         explore/overlays (make-hash-table)
         )
+
   (goto-char (point-min))
   (insert "\n\n\n\n")
   (insert "Test Tree:") ;; / tree name
@@ -277,8 +282,6 @@ calculate the bounds that column falls within """
   (use-local-map explore-mode-map)
   (setq major-mode 'explore-mode
         mode-name "EXPLORE")
-  (make-variable-buffer-local 'explore/tree-root)
-  (explore/generate-tree explore/tree-root 5 5)
 )
 
 (provide 'explore-mode)

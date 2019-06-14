@@ -222,7 +222,7 @@ https://stackoverflow.com/questions/1249497 "
     ))
 
 
-(defun sequence/outputless()
+(defun sequence/outputless ()
   (let* ((value-map (sequence/get-table-prop :sequence/value-hashmap)))
     (-non-nil (mapcar (lambda (x) (if (sequence/get x :outputs) (sequence/get x :name))) (hash-table-values value-map)))))
 

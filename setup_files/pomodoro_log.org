@@ -69,3 +69,11 @@
     Pomodoro Session: getting interactivity working
 ** (2019/Jun/13) 22:36
     Pomodoro Session: drawing correctly, added overlays
+** (2019/Jun/14) 19:47
+    Pomodoro Session: adding more interaction and tidying up explore mode
+** (2019/Jun/14) 20:21
+    Pomodoro Session: got the path drawing, using markers, and with face property
+** (2019/Jun/14) 20:56
+    Pomodoro Session: adding insertion functionality
+** (2019/Jun/14) 21:37
+    Pomodoro Session: working on interaction

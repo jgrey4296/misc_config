@@ -1,6 +1,10 @@
 * Base Agenda
   #+BIBLIOGRAPHY: ~/github/writing/other_files/main_bibliography plain
   :LOGBOOK:
+  CLOCK: [2019-06-14 Fri 21:11]--[2019-06-14 Fri 21:36] =>  0:25
+  CLOCK: [2019-06-14 Fri 20:31]--[2019-06-14 Fri 20:56] =>  0:25
+  CLOCK: [2019-06-14 Fri 19:56]--[2019-06-14 Fri 20:21] =>  0:25
+  CLOCK: [2019-06-14 Fri 19:22]--[2019-06-14 Fri 19:47] =>  0:25
   CLOCK: [2019-06-13 Thu 22:11]--[2019-06-13 Thu 22:36] =>  0:25
   CLOCK: [2019-06-13 Thu 20:14]--[2019-06-13 Thu 20:39] =>  0:25
   CLOCK: [2019-06-13 Thu 19:39]--[2019-06-13 Thu 20:04] =>  0:25

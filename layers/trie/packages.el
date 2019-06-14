@@ -76,6 +76,11 @@
     (evil-define-key '(normal visual) explore-mode-map
       ;;Add motions here
       (kbd "<RET>") 'explore/expand-entry
+      ;; h,l : Move column
+
+      )
+    (evil-define-key '(insert) explore-mode-map
+      (kbd "<RET>") 'explore/insert-entry
       )
     (spacemacs/set-leader-keys-for-major-mode 'explore-mode
       "."   'spacemacs/explore_transient-transient-state/body

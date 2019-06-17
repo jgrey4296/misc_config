@@ -31,13 +31,13 @@
 
   (defun jg_layer/quicklook-link ()
     (let* ((context (org-element-lineage
-	                   (org-element-context)
-	                   '(clock comment comment-block footnote-definition
-		                         footnote-reference headline inline-src-block inlinetask
-		                         keyword link node-property planning src-block timestamp)
-	                   t))
+                     (org-element-context)
+                     '(clock comment comment-block footnote-definition
+                             footnote-reference headline inline-src-block inlinetask
+                             keyword link node-property planning src-block timestamp)
+                     t))
            (type (org-element-property :type context))
-	         (path (org-element-property :path context)))
+           (path (org-element-property :path context)))
       (if (equal type "file")
           (call-process "qlmanage" nil 0 nil "-x" path)
         (message "Link not a file"))))
@@ -50,8 +50,8 @@
         (beginning-of-line)
         (search-forward-regexp re (line-end-position))
         (replace-match name nil nil nil 3)
-         )
         )
+      )
     )
 
   (defun jg_layer/list-agenda-files ()
@@ -139,10 +139,10 @@
                        ))) allbuffers)
       (setq hashPairs (-zip (hash-table-keys alltags) (hash-table-values alltags)))
       (if hashPairs (progn
-                     (setq sorted (sort hashPairs (lambda (a b) (> (cdr a) (cdr b)))))
-                     (setq maxTagLength (apply `max (mapcar (lambda (x) (length (car x))) sorted)))
-                     (setq maxTagAmnt (apply `max (mapcar (lambda (x) (cdr x)) sorted)))
-                     ))
+                      (setq sorted (sort hashPairs (lambda (a b) (> (cdr a) (cdr b)))))
+                      (setq maxTagLength (apply `max (mapcar (lambda (x) (length (car x))) sorted)))
+                      (setq maxTagAmnt (apply `max (mapcar (lambda (x) (cdr x)) sorted)))
+                      ))
       (with-temp-buffer-window "*Tags*"
                                nil
                                nil
@@ -241,6 +241,81 @@
                                      (line-beginning-position)
                                      (line-end-position))))
   )
+
+(defun jg_layer/helm-open-random-action (candidate)
+  """ Helm Action that opens files randomly, by prompting for a file extension
+   searching as necessary, and keeping a log of files opened before """
+  (let* ((candidates (helm-marked-candidates))
+         (file_ext (read-string "File Extension: "))
+         (log_file (f-join (if (f-dir? (car candidates)) (car candidates) (f-dirname (car candidates))) ".emacs_rand_log"))
+         )
+    (if (-all-p 'f-file-p candidates)
+        ;; if given files, open randomly
+        (find-file (seq-random-elt candidates))
+      ;; if given directories, search them
+      (let ((all_files (-flatten (seq-map (lambda (x) (directory-files-recursively x file_ext)) candidates)))
+            (already_used_files (if (f-exists? log_file) (with-temp-buffer
+                                                           (insert-file-contents log_file)
+                                                           (let ((uf (make-hash-table :test 'equal)))
+                                                             (seq-each (lambda (x) (puthash x 't uf)) (split-string (buffer-string) "\n"))
+                                                             uf))
+                                  (make-hash-table :test 'equal)))
+            (stay_looping 't)
+            )
+        (while (and stay_looping (> (length all_files) (length (hash-table-keys already_used_files))))
+          (let ((the_choice (seq-random-elt all_files)))
+            (if (not (gethash the_choice already_used_files))
+                (progn
+                  (write-region the_choice nil log_file 'append)
+                  (write-region "\n" nil log_file 'append)
+                  (setq stay_looping nil)
+                  (find-file the_choice)
+                  )
+              )
+            )
+          )
+        )
+      )
+    )
+  )
+
+(defun jg_layer/bibtex-load-random ()
+  """ Run in a bibtex file, opens a random entry externally,
+      and logs it has been opened in a separate file """
+      (interactive)
+      (widen)
+      (let* ((location (f-dirname (buffer-file-name)))
+             (log_file (f-join location ".emacs_rand_log"))
+             (log_hash (if (f-exists? log_file) (with-temp-buffer
+                                                  (insert-file-contents log_file)
+                                                  (let ((uf (make-hash-table :test 'equal)))
+                                                    (seq-each (lambda (x) (puthash x 't uf)) (split-string (buffer-string) "\n"))
+                                                    uf))
+                         (make-hash-table :test 'equal)))
+             )
+        ;; go to random line
+        (goto-char (random (point-max)))
+        (org-ref-bibtex-next-entry)
+        (let ((entry (bibtex-parse-entry)))
+          (while entry
+            (if (gethash (alist-get "=key=" entry nil nil 'equal) log_hash)
+                (progn (goto-char (random (point-max)))
+                       (org-reg-bibtex-next-entry)
+                       (setq entry (bibtex-parse-entry)))
+              (progn
+                (write-region (alist-get "=key=" entry nil nil 'equal)
+                              nil log_file 'append)
+                (write-region "\n" nil log_file 'append)
+                (bibtex-narrow-to-entry)
+                (goto-char (point-min))
+                (org-open-link-from-string (message "[[%s]]" (bibtex-text-in-field "file")))
+                (setq entry nil)
+                )
+              )
+            )
+          )
+        )
+      )
 ;;----------------------------------------
 
 (defun jg_layer/example_transient_func_setup ()

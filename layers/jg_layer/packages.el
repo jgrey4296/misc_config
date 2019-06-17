@@ -1,4 +1,4 @@
-;; jg_layer packages.el
+ ;; jg_layer packages.el
 ;; loads second
 
 (defconst jg_layer-packages
@@ -10,7 +10,6 @@
     ;; (some-package :location (recipe :fetcher github :repo "some/repo"))
     ;;(some-package :excluded t)
     helm
-    org
     yasnippet
     abbrev
     evil
@@ -22,8 +21,10 @@
     python
     academic-phrases
     dired-quick-sort
+    org
     org-ref
     org-pomodoro
+    (org-drill :location built-in)
     ;; buffer-manage
     ;; (buffer-sets :location (recipe :fetcher git :url "https://git.flintfam.org/swf-projects/buffer-sets.git"))
     buffer-utils
@@ -228,19 +229,6 @@
   )
 
 (defun jg_layer/post-init-helm ()
-  (defun jg_layer/helm-open-random-action (candidate)
-    " Visit a random file, optionally specifying the filetype wildcard "
-    (interactive)
-    (let* ((pattern (car (last (f-split candidate))))
-           (pattern-r (wildcard-to-regexp pattern))
-           (files (helm-get-candidates (helm-get-current-source)))
-           (all_matches (if (string-match-p "\*\." pattern)
-                            (seq-filter (lambda (x) (string-match-p pattern-r x)) files)
-                          (f-files candidate)))
-           (selected (seq-random-elt all_matches)))
-      (find-file selected)
-      ))
-
   (defun jg_layer/helm-open-random-external-action (candidate)
     " Open a random file in an external program, optionally specifying wildcard "
     (interactive)
@@ -274,6 +262,7 @@
     (helm-autoresize-mode 0)
     ;;add in keybinding to kill line in completion window
     (define-key helm-map (kbd "C-k") 'kill-line)
+    (define-key helm-map (kbd "<backtab>") 'helm-select-action)
     (setq helm-find-files-actions (cons (car helm-find-files-actions)
                                         (cons '("Open Random" . jg_layer/helm-open-random-action)
                                               (cons '("Open Random External" . jg_layer/helm-open-random-external-action)
@@ -680,3 +669,6 @@ the entry of interest in the bibfile.  but does not check that."
   (add-hook 'org-pomodoro-finished-hook 'jg_layer/pomodoro-end-hook)
   (print "done pomodoro")
   )
+
+(defun jg_layer/init-org-drill ()
+  (use-package org-drill))

@@ -1,6 +1,7 @@
 * Base Agenda
   #+BIBLIOGRAPHY: ~/github/writing/other_files/main_bibliography plain
   :LOGBOOK:
+  CLOCK: [2019-06-17 Mon 07:33]--[2019-06-17 Mon 07:58] =>  0:25
   CLOCK: [2019-06-14 Fri 21:11]--[2019-06-14 Fri 21:36] =>  0:25
   CLOCK: [2019-06-14 Fri 20:31]--[2019-06-14 Fri 20:56] =>  0:25
   CLOCK: [2019-06-14 Fri 19:56]--[2019-06-14 Fri 20:21] =>  0:25
@@ -101,11 +102,11 @@
   CLOCK: [2019-02-04 Mon 15:17]--[2019-02-04 Mon 15:42] =>  0:25
   CLOCK: [2019-02-04 Mon 14:09]--[2019-02-04 Mon 14:34] =>  0:25
   :END:
-** TODO [[~/github/writing/paper_notes/index.org::*Summary%20Index][Paper Summaries Index]]                                                   :papers:
+** TODO [[~/github/writing/paper_notes/index.org::*Summary_Index][Paper Summaries Index]]                                                   :papers:
 ** [[~/github/writing/orgfiles][Org Files]]                                     :directory:main_collection:
 ** [[~/github/languageLearning][Misc Language Repo]]                            :directory:javascript:python:multiple_languages:lisp:supercollider:tidal:learning:notes:prolog:misc:
-** [[file:~/github/writing/orgfiles/machine_learning.org::*Machine%20Learning%20Notes][Machine Learning Notes]]
-** [[file:~/github/writing/orgfiles/nlp.org::*Natural%20Language%20Processing:][Natural Language Processing:]]
+** [[file:~/github/writing/orgfiles/machine_learning.org::*Machine Learning Notes][Machine Learning Notes]]
+** [[file:~/github/writing/orgfiles/nlp.org::*Natural Language Processing:][Natural Language Processing:]]
 ** [[~/.spacemacs.d/setup_files/pomodoro_log.org][Pomodoro Log]]
 ** -----------------------------------------------------------------------------
 ** Programming
@@ -167,12 +168,12 @@
 ***** [[~/github/heuristicRBTreeWeighting][Heuristic Tree Weighting]]                                                  :obsolete:incomplete:old:python:
 ***** [[~/github/islandGen][Voronoi Island Gen]]                                                        :incomplete:python:image:
       integrate into pipeline
-***** TODO [[~/github/cairoCity][Cairo City Generator]]                                                 :cairo:graphical:image:generative:front_end:layers:city:python:
+***** [[~/github/cairoCity][Cairo City Generator]]                              :cairo:graphical:image:generative:front_end:layers:city:python:
 ****** DONE [#A] integrate with cairo_pipeline
        CLOSED: [2019-02-10 Sun 13:16]
 ****** TODO line -> street and space algorithm
 ****** Alt: Moving Square filling
-****** TODO Return to [[file:~/github/cairoCity/citygen/City.py::class%20City:][<Cairo City>]]
+****** TODO Return to [[file:~/github/cairoCity/citygen/City.py::class_City:][<Cairo City>]]
 ****** City operators
 ******* road
 ******* building
@@ -226,7 +227,7 @@
 **** TODO soundscape assets
 ***** TODO [[https://bbcarchdev.github.io/inside-acropolis/#consumers][Acropolis API]]
       [[http://bbcsfx.acropolis.org.uk/index][BBC Sound FX Library]]
-      [[bbcsfx.acropolis.org.uk/][BBC sound effects frontend]]
+      [[http://bbcsfx.acropolis.org.uk/][BBC sound effects frontend]]
 *** TODO Haskell                                                                :monads:theory:programming:haskell:
 **** look at implementation of monad transformers
 *** To Clean
@@ -240,7 +241,7 @@
 **** NetLogo
 **** Unity
 ** TODO Datasets
-*** [[~/Mega/bookmarks][Bookmarks]]                                                                   :web:html:bookmarks:directory:
+*** [[file:/Users/jgrey/github/writing/other_files/main_bookmarks.html][Bookmarks]]                                                                   :web:html:bookmarks:directory:
      treat these as codings?
 *** TODO Bookmark and saved twitter parsing
 **** Bookmarks
@@ -266,13 +267,13 @@
 **** helm access
 *** Code
 **** Monroe Domain Plans
-**** [[file:~/Mega/Code%20Backups/shop2random.lisp][Shop2 Plan generator]]
-**** [[file:~/Mega/Code%20Backups/Evolution_of_Norms][Evolution of Norms]]                                                         :norms:netlogo:
-**** [[file:~/Mega/Code%20Backups/Social_Norms_(Emperor's_Dilemma)][Social Norms / Emperor's Dilemma]]                                           :norms:netlogo:
+**** [[file:/Users/jgrey/Mega/code_backups/shop2random.lisp][Shop2 Plan generator]]
+**** [[file:~/Mega/code_backups/netlogo/Evolution_of_Norms][Evolution of Norms]] :norms:netlogo:
+**** [[file:~/Mega/code_backups/netlogo/Social_Norms_(Emperor's_Dilemma)][Social Norms / Emperor's Dilemma]] :norms:netlogo:
 **** Chuck Examples                                                             :nytimes:chuck:
-**** [[file:~/Mega/Code%20Backups/ccalc-2.0r2.tar.gz][CCalc]]                                                                      :prolog:
-**** [[file:~/Mega/Code%20Backups/BPS1024.zip][Building Problem Solvers]]                                                   :lisp:
-**** [[file:~/Mega/Code%20Backups/Immerse%20Code%20Backup-20170930T102013Z-002.zip][Immerse]]                                                                    :csharp:
+**** [[file:~/Mega/code_backups/logic/ccalc-2.0r2.tar.gz][CCalc]]               :prolog:
+**** [[file:~/Mega/code_backups/logic/BPS1024.zip][Building Problem Solvers]]   :lisp:
+**** [[file:~/Mega/code_backups/Immerse Code Backup-20170930T102013Z-002.zip][Immerse]]                                                                    :csharp:
 *** Games
 **** [[file:~/Mega/Datasets/twine][Twine]]
      [[https://github.com/ehenestroza/twine-graph/blob/master/twine_graph/twine_graph.py][Twine Graph on Github]]
@@ -281,92 +282,92 @@
      [[https://github.com/daterre/Cradle#importing-a-story][Cradle Converter on Github]]
 **** CiF
 ***** Rules
-      [[file:~/Mega/Datasets/cifJsons][file:~/Mega/Datasets/cifJsons]]
+      [[file:/Users/jgrey/Mega/Datasets/gameData/CiFStates][CiF States]]
 ***** Level Traces
-      [[file:~/Mega/Datasets/LevelTraceStorage18May2012.zip][file:~/Mega/Datasets/LevelTraceStorage18May2012.zip]]
+      [[file:/Users/jgrey/Mega/Datasets/gameData/CifLevelTrace][Level Trace Storage]]
 ***** Prom Week Speech Acts
-      [[file:~/Mega/Datasets/prom_week_dialogue_annotated_for_speech_acts.tsv][file:~/Mega/Datasets/prom_week_dialogue_annotated_for_speech_acts.tsv]]
+      [[file:/Users/jgrey/Mega/Datasets/compressed/speech_acts/prom_week_dialogue_annotated_for_speech_acts.tsv][prom week dialogue annotated for speech acts]]
 **** Versu
-     [[file:~/Mega/Code%20Backups/cotillion.zip][Cotillion Zip]]
+     [[file:~/Mega/code_backups/cotillion.zip][Cotillion Zip]]
 
 ***** Rules
 **** WoW Quests
-     [[file:~/Mega/Datasets/allQuests.tsv][file:~/Mega/Datasets/allQuests.tsv]]
+     [[file:~/Mega/Datasets/gameData/allQuests.tsv][file:~/Mega/Datasets/allQuests.tsv]]
 **** DOTA Changelog
-**** [[file:~/Mega/Datasets/DevMaterials][Postmortem Dev Materials]]
+**** [[file:~/Mega/Datasets/gameData/DevMaterials][Postmortem Dev Materials]]
 **** [[file:~/Mega/Datasets/gameData/BoI][Binding of Isaac]]
 **** [[file:~/Mega/Datasets/gameData/CK2][Crusader Kings]]
 **** [[file:~/Mega/Datasets/gameData/EUIV][Europa Universalis]]
 **** [[file:~/Mega/Datasets/gameData/democracy3][Democracy 3]]
 **** [[file:~/Mega/Datasets/gameData/d3_africa][Democracy 3 Africa]]
-**** [[file:~/Mega/Datasets/gameData/distant%20worlds][Distant Worlds]]
+**** [[file:~/Mega/Datasets/gameData/distant_worlds][Distant Worlds]]
 **** [[file:~/Mega/Datasets/gameData/dontstarve][Don't Starve]]
-**** [[file:~/Mega/Datasets/gameData/dungeon%20of%20the%20endless][Dungeon of the Endless]]
+**** [[file:~/Mega/Datasets/gameData/dungeon_of_the_endless][Dungeon of the Endless]]
 **** [[file:~/Mega/Datasets/gameData/dwarf_fortress][Dwarf Fortress]]
 **** [[file:~/Mega/Datasets/gameData/invisibleInc][Invisible Inc]]
 **** [[file:~/Mega/Datasets/gameData/king_dragon_pass][King of Dragon Pass]]
 **** [[file:~/Mega/Datasets/gameData/offworld_trading][Offworld Trading]]
 **** [[file:~/Mega/Datasets/gameData/prison_architect][Prison Architect]]
      [[file:~/Mega/Datasets/gameData/prisons][file:~/Mega/Datasets/gameData/prisons]]
-**** [[file:~/Mega/Datasets/gameData/red%20shirt][Red Shirt]]
+**** [[file:~/Mega/Datasets/gameData/red_shirt][Red Shirt]]
 **** [[file:~/Mega/Datasets/gameData/rimworld][RimWorld]]
 **** [[file:~/Mega/Datasets/gameData/stellaris][Stellaris]]
 **** [[file:~/Mega/Datasets/gameData/sunlessSea][Sunless Sea]]
-**** [[file:~/Mega/Datasets/gameData/the%20guild2][The Guild 2]]
+**** [[file:~/Mega/Datasets/gameData/the_guild2][The Guild 2]]
 **** [[file:~/Mega/Datasets/gameData/unrest][Unrest]]
 **** [[file:~/Mega/Datasets/gameData/witcher3][Witcher 3]]
-**** [[file:~/Mega/Code%20Backups/jg-SpaceBase-DF9][SpaceBase DF-9]]
-**** [[file:~/Mega/Code%20Backups/SimHealth_DOS_EN.zip][SimHealth]]
-**** [[file:~/Mega/Code%20Backups/Yoda_Stories.zip][Yoda Stories]]
+**** [[file:~/Mega/code_backups/jg-SpaceBase-DF9][SpaceBase DF-9]]
+**** [[file:~/Mega/code_backups/games/SimHealth_DOS_EN.zip][SimHealth]]
+**** [[file:~/Mega/code_backups/games/Yoda_Stories.zip][Yoda Stories]]
 **** [[file:~/Mega/Documents/Kingdom_RPG.zip][Kingdom]]
 **** [[file:~/Mega/Documents/Microscope_RPG.zip][Microscope]]
 *** Text
 ****** [#A] NYT
 ******* try using title trie grammars
-****** [[file:~/Mega/Datasets/Peake,%20Mervyn][Gormenghast]]
-****** [[file:~/Mega/Datasets/Discworld][Discworld]]
-****** [[file:~/Mega/Datasets/40k%20txts][40k]]
+****** [[file:~/Mega/Datasets/texts/Peake,_Mervyn][Gormenghast]]
+****** [[file:~/Mega/Datasets/texts/Discworld][Discworld]]
+****** [[file:~/Mega/Datasets/texts/40k_txts][40k]]
 ****** Supreme Court
-******* [[file:~/Mega/Datasets/supreme_court_dialogs_corpus_v1.01(1).zip][Dialogue]]
+******* [[file:~/Mega/Datasets/compressed/scotus/supreme_court_dialogs_corpus_v1.01(1).zip][Dialogue]]
 ******* Cases
-        [[file:~/Mega/Datasets/SCDB_2014_01_caseCentered_Vote.csv.zip][file:~/Mega/Datasets/SCDB_2014_01_caseCentered_Vote.csv.zip]]
-        [[file:~/Mega/Datasets/SCDB_2014_01_justiceCentered_Vote.csv.zip][file:~/Mega/Datasets/SCDB_2014_01_justiceCentered_Vote.csv.zip]]
-        [[file:~/Mega/Datasets/SCDB_2015_01_justiceCentered_LegalProvision.csv.zip][file:~/Mega/Datasets/SCDB_2015_01_justiceCentered_LegalProvision.csv.zip]]
-        [[file:~/Mega/Datasets/SCDB_2018_02_caseCentered_Citation.csv.zip][file:~/Mega/Datasets/SCDB_2018_02_caseCentered_Citation.csv.zip]]
-        [[file:~/Mega/Datasets/SCDB_2018_02_caseCentered_Docket.csv.zip][file:~/Mega/Datasets/SCDB_2018_02_caseCentered_Docket.csv.zip]]
-        [[file:~/Mega/Datasets/SCDB_Legacy_04_caseCentered_Citation.csv.zip][file:~/Mega/Datasets/SCDB_Legacy_04_caseCentered_Citation.csv.zip]]
+        [[file:~/Mega/Datasets/compressed/scotus/SCDB_2014_01_caseCentered_Vote.csv.zip][file:~/Mega/Datasets/SCDB_2014_01_caseCentered_Vote.csv.zip]]
+        [[file:~/Mega/Datasets/compressed/scotus/SCDB_2014_01_justiceCentered_Vote.csv.zip][file:~/Mega/Datasets/SCDB_2014_01_justiceCentered_Vote.csv.zip]]
+        [[file:~/Mega/Datasets/compressed/scotus/SCDB_2015_01_justiceCentered_LegalProvision.csv.zip][file:~/Mega/Datasets/SCDB_2015_01_justiceCentered_LegalProvision.csv.zip]]
+        [[file:~/Mega/Datasets/compressed/scotus/SCDB_2018_02_caseCentered_Citation.csv.zip][file:~/Mega/Datasets/SCDB_2018_02_caseCentered_Citation.csv.zip]]
+        [[file:~/Mega/Datasets/compressed/scotus/SCDB_2018_02_caseCentered_Docket.csv.zip][file:~/Mega/Datasets/SCDB_2018_02_caseCentered_Docket.csv.zip]]
+        [[file:~/Mega/Datasets/compressed/scotus/SCDB_Legacy_04_caseCentered_Citation.csv.zip][file:~/Mega/Datasets/SCDB_Legacy_04_caseCentered_Citation.csv.zip]]
 
-****** [[file:~/Mega/Datasets/StandOnZanzibar.txt][Stand On Zanzibar]]
-****** [[file:~/Mega/Datasets/Stanford_politeness_corpus.zip][Politeness Corpus]]
+****** [[file:~/Mega/Datasets/texts/StandOnZanzibar.txt][Stand On Zanzibar]]
+****** [[file:~/Mega/Datasets/compressed/Stanford_politeness_corpus.zip][Politeness Corpus]]
 ****** [[file:~/Mega/Datasets/kjv_apocrypha_utf8_FINAL.xml][King James Bible]]
-****** [[file:~/Mega/Datasets/me2-text-dialogue.txt][Mass Effect 2 Dialogue]]
-****** [[file:~/Mega/Datasets/pizza_request_dataset.tar.gz][Pizza Request]]
-****** [[file:~/Mega/Datasets/transcripts.tar.gz][White House Transcripts]]
+****** [[file:~/Mega/Datasets/texts/me2-text-dialogue.txt][Mass Effect 2 Dialogue]]
+****** [[file:~/Mega/Datasets/compressed/pizza_request_dataset.tar.gz][Pizza Request]]
+****** [[file:~/Mega/Datasets/compressed/transcripts.tar.gz][White House Transcripts]]
 ****** [[file:~/Mega/Datasets/roberts_rules.txt][Roberts Rules of Order]]
-****** [[file:~/Mega/Datasets/swb1_dialogact_annot(4).tar.gz][Switchboard Corpus]]
-       [[file:~/Mega/Datasets/swda.zip][file:~/Mega/Datasets/swda.zip]]
+****** [[file:~/Mega/Datasets/compressed/speech_acts/swb1_dialogact_annot(4).tar.gz][Switchboard Corpus]]
+       [[file:~/Mega/Datasets/compressed/speech_acts/swda.zip][file:~/Mega/Datasets/swda.zip]]
 ******* swda.py
-****** [[file:~/Mega/Datasets/quotes.tar.gz][White House Speech Quotes]]
-       [[file:~/Mega/Datasets/quotes_json.tar.gz][file:~/Mega/Datasets/quotes_json.tar.gz]]
-****** [[file:~/Mega/Datasets/uscode.zip][US Code]]
-****** [[file:~/Mega/Datasets/verb-pair-orders.gz][Verb Pairs]]
+****** [[file:~/Mega/Datasets/compressed/quotes.tar.gz][White House Speech Quotes]]
+       [[file:~/Mega/Datasets/compressed/quotes_json.tar.gz][file:~/Mega/Datasets/quotes_json.tar.gz]]
+****** [[file:~/Mega/Datasets/compressed/uscode.zip][US Code]]
+****** [[file:~/Mega/Datasets/compressed/verb-pair-orders.gz][Verb Pairs]]
 
 *** Images
-**** [[file:~/github/writing/orgfiles/image_summary.org::*%5B%5Bfile:~/Mega/Images/misc_research_images/%5D%5BImage%20Directory%5D%5D][Image Summaries]]
-**** TODO [[file:~/github/writing/orgfiles/glitch_assets_summary.org::*%5B%5B~/Mega/Images/glitch-assets%5D%5BGlitch%20Assets%5D%5D%20Summary][Glitch Assets Summary]]
+**** [[file:~/github/writing/orgfiles/image_summary.org][Image Summaries]]
+**** TODO [[file:~/github/writing/orgfiles/glitch_assets_summary.org][Glitch Assets Summary]]
      possibly use these in vault?
-**** [[file:~/Mega/Datasets/SFAM/sfam_summary.org::*SFAM%20Summary][SFAM Summary]]                                                               :tagged:parsed:
+**** [[file:~/Mega/Datasets/SFAM/sfam_summary.org][SFAM Summary]]                                                               :tagged:parsed:
 **** [[file:~/Mega/Datasets/Scarfolk][Scarfolk]]                                                                   :to_parse:
 **** online assets
 **** portraits
 *** Measurements
-**** [[file:~/Mega/Datasets/RealityMining.zip][Reality Mining]]
-**** [[file:~/Mega/Datasets/Friends&Family.zip][Friends and Family]]
-**** [[file:~/Mega/Datasets/2014%20SQF.zip][SQF]]
-**** [[file:~/Mega/Datasets/HDC-full.zip][HDC]]
-**** [[file:~/Mega/Datasets/SocialEvolution.zip][Social Evolution]]
-**** [[file:~/Mega/Datasets/diplomacy_data_1.0.zip][Diplomacy]]
-**** [[file:~/Mega/Datasets/linuxCorpus-1.0.zip][Linux Dataset]]
+**** [[file:~/Mega/Datasets/compressed/social_physics/RealityMining.zip][Reality Mining]]
+**** [[file:~/Mega/Datasets/compressed/social_physics/Friends&Family.zip][Friends and Family]]
+**** [[file:~/Mega/Datasets/compressed/social_physics/2014_SQF.zip][SQF]]
+**** [[file:~/Mega/Datasets/compressed/social_physics/HDC-full.zip][HDC]]
+**** [[file:~/Mega/Datasets/compressed/social_physics/SocialEvolution.zip][Social Evolution]]
+**** [[file:~/Mega/Datasets/compressed/diplomacy_data_1.0.zip][Diplomacy]]
+**** [[file:~/Mega/Datasets/compressed/plans/linuxCorpus-1.0.zip][Linux Dataset]]
 *** [[https://docs.google.com/spreadsheets/d/1JcwsKMJtd_wYe4oeTtuyM8fm1eqFQw9A9VGDjnCKFiM/edit#gid=69023141][Legislative Rules dataset]]                                                   :rules:
 ** TODO Annotations / Examples
 *** TODO [#A] Snatch delegation                                                 :delegation:film:
@@ -603,12 +604,14 @@
 *** [[file:~/github/otherLibs/CommonLispCode/micro-talespin.lisp][Micro-Talespin]]                                                              :directory:architecture:narrative:talespin:lisp:
 *** [[file:~/github/otherLibs/BPS][Building Problem Solvers]]                                                    :directory:rules:lisp:
 *** [[file:~/github/otherLibs/Nomyx][Nomyx]]                                                                       :directory:meta:hofstadter:rules:haskell:
+**** [[http://nomyx.net/][Nomyx Game Site]]
 *** [[file:~/github/otherLibs/wavefunction-collapse][Wave function collapse python]]                                               :directory:algorithm:wave_function_collapse:python:
 *** [[https://robertheaton.com/2018/12/17/wavefunction-collapse-algorithm/][Wave function collapse]]                                                      :wave_function_collapse:tutorial:to_implement:algorithm:
 *** [[file:~/github/otherLibs/cathoristic-logic][Cathoristic Logic]]                                                           :directory:haskell:logic:praxis:exclusion_logic:
 *** TODO Vignettes
 *** TODO [[https://explorabl.es/all/][Explorables]]
 *** TODO [[http://worrydream.com/][Bret Victor]]
+**** [[http://worrydream.com/ABriefRantOnTheFutureOfInteractionDesign/][A Brief Rant on the Future of Interaction Design]]                           :design:capability:tools:hands:
 *** TODO [[https://ncase.me/remember/][Spaced Repetition]]
 *** [[http://www.parliamentbook.com/spaces][Parliament Book]]
 *** [[https://www.soundsurvey.org.uk/index.php/history/street_cries/brit1/626/3387][Sound Survey]]
@@ -618,3 +621,4 @@
 *** TODO outline-toc package
 *** [[https://en.wikipedia.org/wiki/Kanban][Kanban]]
 *** [[http://plantuml.com/sequence-diagram][PlantUML]]
+    

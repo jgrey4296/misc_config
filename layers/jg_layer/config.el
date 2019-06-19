@@ -15,7 +15,8 @@
  ;;use spaces instead of tabs
  tab-width 4
  indent-tabs-mode nil
-
+ ;;bookmark location
+ jg-bookmark-location "~/github/writing/other_files/main_bookmarks.html"
 )
 ;; force utf-8
 (set-terminal-coding-system 'utf-8)

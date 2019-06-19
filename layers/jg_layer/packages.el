@@ -540,6 +540,8 @@
   )
 
 (defun jg_layer/post-init-org-ref ()
+  (spacemacs/set-leader-keys "a r" 'jg_layer/bibtex-load-random)
+
   (with-eval-after-load 'org-ref
     (defun org-ref-open-bibtex-pdf ()
       "Open pdf for a bibtex entry, if it exists.
@@ -556,6 +558,7 @@ the entry of interest in the bibfile.  but does not check that."
           (if (file-exists-p pdf)
               (org-open-link-from-string (format "[[file:%s]]" pdf))
             (ding)))))
+
     ))
 
 ;; (use-package highlight-parentheses

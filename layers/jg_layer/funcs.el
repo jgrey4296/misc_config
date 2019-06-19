@@ -247,7 +247,7 @@
    searching as necessary, and keeping a log of files opened before """
   (let* ((candidates (helm-marked-candidates))
          (file_ext (read-string "File Extension: "))
-         (log_file (f-join (if (f-dir? (car candidates)) (car candidates) (f-dirname (car candidates))) ".emacs_rand_log"))
+         (log_file (f-join (if (f-dir? (car candidates)) (car candidates) (f-dirname (car candidates))) ".emacs_rand_file_log"))
          )
     (if (-all-p 'f-file-p candidates)
         ;; if given files, open randomly
@@ -282,40 +282,83 @@
 (defun jg_layer/bibtex-load-random ()
   """ Run in a bibtex file, opens a random entry externally,
       and logs it has been opened in a separate file """
-      (interactive)
-      (widen)
-      (let* ((location (f-dirname (buffer-file-name)))
-             (log_file (f-join location ".emacs_rand_log"))
-             (log_hash (if (f-exists? log_file) (with-temp-buffer
-                                                  (insert-file-contents log_file)
-                                                  (let ((uf (make-hash-table :test 'equal)))
-                                                    (seq-each (lambda (x) (puthash x 't uf)) (split-string (buffer-string) "\n"))
-                                                    uf))
-                         (make-hash-table :test 'equal)))
-             )
-        ;; go to random line
-        (goto-char (random (point-max)))
-        (org-ref-bibtex-next-entry)
-        (let ((entry (bibtex-parse-entry)))
-          (while entry
-            (if (gethash (alist-get "=key=" entry nil nil 'equal) log_hash)
-                (progn (goto-char (random (point-max)))
-                       (org-reg-bibtex-next-entry)
-                       (setq entry (bibtex-parse-entry)))
-              (progn
-                (write-region (alist-get "=key=" entry nil nil 'equal)
-                              nil log_file 'append)
-                (write-region "\n" nil log_file 'append)
-                (bibtex-narrow-to-entry)
-                (goto-char (point-min))
-                (org-open-link-from-string (message "[[%s]]" (bibtex-text-in-field "file")))
-                (setq entry nil)
-                )
-              )
+  (interactive)
+  (widen)
+  (let* ((location (f-dirname (buffer-file-name)))
+         (log_file (f-join location ".emacs_rand_bib_log"))
+         (log_hash (if (f-exists? log_file) (with-temp-buffer
+                                              (insert-file-contents log_file)
+                                              (let ((uf (make-hash-table :test 'equal)))
+                                                (seq-each (lambda (x) (puthash x 't uf)) (split-string (buffer-string) "\n"))
+                                                uf))
+                     (make-hash-table :test 'equal)))
+         )
+    ;; go to random line
+    (goto-char (random (point-max)))
+    (org-ref-bibtex-next-entry)
+    (let ((entry (bibtex-parse-entry)))
+      (while entry
+        (if (gethash (alist-get "=key=" entry nil nil 'equal) log_hash)
+            (progn (goto-char (random (point-max)))
+                   (org-reg-bibtex-next-entry)
+                   (setq entry (bibtex-parse-entry)))
+          (progn
+            (write-region (alist-get "=key=" entry nil nil 'equal)
+                          nil log_file 'append)
+            (write-region "\n" nil log_file 'append)
+            (bibtex-narrow-to-entry)
+            (goto-char (point-min))
+            (org-open-link-from-string (message "[[%s]]" (bibtex-text-in-field "file")))
+            (setq entry nil)
             )
           )
         )
       )
+    )
+  )
+
+(defun jg_layer/bookmark-load-random ()
+  """ Open a random bookmark, log it, and provide a
+      temp buffer to edit tags in """
+  (interactive)
+  (widen)
+  (let* ((location (f-dirname (buffer-file-name)))
+         (log_file (f-join location ".emacs_rand_bookmark_log"))
+         (log_hash (if (f-exists? log_file) (with-temp-buffer
+                                              (insert-file-contents log_file)
+                                              (let ((uf (make-hash-table :test 'equal)))
+                                                (seq-each (lambda (x) (puthash x 't uf)) (split-string (buffer-string) "\n"))
+                                                uf))
+                     (make-hash-table :test 'equal)))
+         )
+    ;; go to random line
+    ;;(alist-get 'HREF (cadr data)) = href/tags
+    ;;caddr data = name
+    (goto-char (random (point-max)))
+    (goto-char (line-beginning-position))
+    (forward-char 4)
+    (let ((entry (xml-parse-tag)))
+      (while entry
+        (if (gethash (alist-get 'HREF (cadr entry) nil nil 'equal) log_hash)
+            (progn (goto-char (random (point-max)))
+                   (goto-char (line-beginning-position))
+                   (forward-char 4)
+                   (setq entry (xml-parse-tag)))
+          (progn
+            (write-region (alist-get 'HREF (cadr entry) nil nil 'equal)
+                          nil log_file 'append)
+            (write-region "\n" nil log_file 'append)
+            (narrow-to-region (line-beginning-position) (line-end-position))
+            (goto-char (point-min))
+            (org-open-link-from-string (message "[[%s]]" (alist-get 'HREF (cadr entry))))
+            (setq entry nil)
+            )
+          )
+        )
+      )
+    )
+  )
+
 ;;----------------------------------------
 
 (defun jg_layer/example_transient_func_setup ()

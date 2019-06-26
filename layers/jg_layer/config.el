@@ -9,7 +9,7 @@
  icicle-Completions-text-scale-decrease 0
  ;;personal iSpell dictionary
  ispell-personal-dictionary (expand-file-name "~/.spacemacs.d/setup_files/.ispell_english")
- dired-omit-files "^\\.?#\\|^\\.$\\|^\\.DS_Store$\\|^\\.git$\\|^__pycache__$"
+ dired-omit-files "^\\.?#\\|^\\.$\\|^\\.DS_Store$\\|^\\.git$\\|^__pycache__$\\|^flycheck__.+\\.py"
  dired-omit-verbose nil
  dired-listing-switches "-lha"
  ;;use spaces instead of tabs

@@ -17,6 +17,17 @@
 ;;----------------------------------------
 (when (configuration-layer/package-usedp 'org)
 
+  (defun jg_layer/insert-heading-trio ()
+    (interactive)
+    (org-insert-subheading 1)
+    (insert "1: ")
+    (org-insert-heading 3 nil nil)
+    (insert "2: ")
+    (org-insert-heading 1 nil nil)
+    (insert "3: ")
+    )
+
+
   (defun jg_layer/open_link_in_buffer ()
     """ a util function to force links to be open in emacs  """
     (interactive)

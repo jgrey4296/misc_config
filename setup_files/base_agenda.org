@@ -1,5 +1,86 @@
 * Base Agenda
+  #+BIBLIOGRAPHY: ~/github/writing/other_files/main_bibliography plain
   :LOGBOOK:
+  CLOCK: [2019-06-17 Mon 07:33]--[2019-06-17 Mon 07:58] =>  0:25
+  CLOCK: [2019-06-14 Fri 21:11]--[2019-06-14 Fri 21:36] =>  0:25
+  CLOCK: [2019-06-14 Fri 20:31]--[2019-06-14 Fri 20:56] =>  0:25
+  CLOCK: [2019-06-14 Fri 19:56]--[2019-06-14 Fri 20:21] =>  0:25
+  CLOCK: [2019-06-14 Fri 19:22]--[2019-06-14 Fri 19:47] =>  0:25
+  CLOCK: [2019-06-13 Thu 22:11]--[2019-06-13 Thu 22:36] =>  0:25
+  CLOCK: [2019-06-13 Thu 20:14]--[2019-06-13 Thu 20:39] =>  0:25
+  CLOCK: [2019-06-13 Thu 19:39]--[2019-06-13 Thu 20:04] =>  0:25
+  CLOCK: [2019-06-13 Thu 19:01]--[2019-06-13 Thu 19:26] =>  0:25
+  CLOCK: [2019-06-13 Thu 18:10]--[2019-06-13 Thu 18:35] =>  0:25
+  CLOCK: [2019-06-13 Thu 17:39]--[2019-06-13 Thu 18:04] =>  0:25
+  CLOCK: [2019-06-13 Thu 16:59]--[2019-06-13 Thu 17:24] =>  0:25
+  CLOCK: [2019-06-13 Thu 16:22]--[2019-06-13 Thu 16:47] =>  0:25
+  CLOCK: [2019-06-12 Wed 21:34]--[2019-06-12 Wed 21:59] =>  0:25
+  CLOCK: [2019-06-12 Wed 21:14]--[2019-06-12 Wed 21:33] =>  0:19
+  CLOCK: [2019-06-12 Wed 20:42]--[2019-06-12 Wed 21:07] =>  0:25
+  CLOCK: [2019-06-12 Wed 19:48]--[2019-06-12 Wed 20:13] =>  0:25
+  CLOCK: [2019-06-12 Wed 19:11]--[2019-06-12 Wed 19:36] =>  0:25
+  CLOCK: [2019-06-12 Wed 18:39]--[2019-06-12 Wed 19:04] =>  0:25
+  CLOCK: [2019-06-12 Wed 18:08]--[2019-06-12 Wed 18:33] =>  0:25
+  CLOCK: [2019-06-11 Tue 21:13]--[2019-06-11 Tue 21:38] =>  0:25
+  CLOCK: [2019-06-11 Tue 20:00]--[2019-06-11 Tue 20:25] =>  0:25
+  CLOCK: [2019-06-11 Tue 17:36]--[2019-06-11 Tue 18:01] =>  0:25
+  CLOCK: [2019-06-11 Tue 16:52]--[2019-06-11 Tue 17:17] =>  0:25
+  CLOCK: [2019-06-11 Tue 16:22]--[2019-06-11 Tue 16:47] =>  0:25
+  CLOCK: [2019-06-10 Mon 21:52]--[2019-06-10 Mon 22:17] =>  0:25
+  CLOCK: [2019-06-10 Mon 21:10]--[2019-06-10 Mon 21:35] =>  0:25
+  CLOCK: [2019-06-10 Mon 19:58]--[2019-06-10 Mon 20:23] =>  0:25
+  CLOCK: [2019-06-10 Mon 19:17]--[2019-06-10 Mon 19:42] =>  0:25
+  CLOCK: [2019-06-10 Mon 18:32]--[2019-06-10 Mon 18:57] =>  0:25
+  CLOCK: [2019-06-10 Mon 17:51]--[2019-06-10 Mon 18:16] =>  0:25
+  CLOCK: [2019-06-09 Sun 17:16]--[2019-06-09 Sun 17:41] =>  0:25
+  CLOCK: [2019-06-09 Sun 16:45]--[2019-06-09 Sun 17:10] =>  0:25
+  CLOCK: [2019-06-08 Sat 18:18]--[2019-06-08 Sat 18:43] =>  0:25
+  CLOCK: [2019-06-08 Sat 17:41]--[2019-06-08 Sat 18:06] =>  0:25
+  CLOCK: [2019-06-08 Sat 17:10]--[2019-06-08 Sat 17:35] =>  0:25
+  CLOCK: [2019-06-08 Sat 16:38]--[2019-06-08 Sat 17:03] =>  0:25
+  CLOCK: [2019-06-07 Fri 20:19]--[2019-06-07 Fri 20:44] =>  0:25
+  CLOCK: [2019-06-07 Fri 19:39]--[2019-06-07 Fri 20:04] =>  0:25
+  CLOCK: [2019-06-07 Fri 18:45]--[2019-06-07 Fri 19:10] =>  0:25
+  CLOCK: [2019-06-07 Fri 18:00]--[2019-06-07 Fri 18:25] =>  0:25
+  CLOCK: [2019-06-07 Fri 17:28]--[2019-06-07 Fri 17:53] =>  0:25
+  CLOCK: [2019-06-07 Fri 16:17]--[2019-06-07 Fri 16:42] =>  0:25
+  CLOCK: [2019-05-01 Wed 15:39]--[2019-05-01 Wed 16:05] =>  0:26
+  CLOCK: [2019-03-20 Wed 18:13]--[2019-03-20 Wed 18:38] =>  0:25
+  CLOCK: [2019-05-01 Wed 15:08]--[2019-05-01 Wed 15:33] =>  0:25
+  CLOCK: [2019-03-20 Wed 17:42]--[2019-03-20 Wed 18:07] =>  0:25
+  CLOCK: [2019-03-20 Wed 17:12]--[2019-03-20 Wed 17:37] =>  0:25
+  CLOCK: [2019-03-20 Wed 16:42]--[2019-03-20 Wed 17:07] =>  0:25
+  CLOCK: [2019-03-11 Mon 08:21]--[2019-03-11 Mon 08:46] =>  0:25
+  CLOCK: [2019-03-11 Mon 07:43]--[2019-03-11 Mon 08:08] =>  0:25
+  CLOCK: [2019-03-10 Sun 19:05]--[2019-03-10 Sun 19:30] =>  0:25
+  CLOCK: [2019-03-10 Sun 18:35]--[2019-03-10 Sun 19:00] =>  0:25
+  CLOCK: [2019-03-10 Sun 18:05]--[2019-03-10 Sun 18:30] =>  0:25
+  CLOCK: [2019-03-10 Sun 12:19]--[2019-03-10 Sun 12:44] =>  0:25
+  CLOCK: [2019-03-10 Sun 11:32]--[2019-03-10 Sun 11:57] =>  0:25
+  CLOCK: [2019-03-10 Sun 10:54]--[2019-03-10 Sun 11:19] =>  0:25
+  CLOCK: [2019-02-28 Thu 20:39]--[2019-02-28 Thu 21:04] =>  0:25
+  CLOCK: [2019-02-28 Thu 20:13]--[2019-02-28 Thu 20:38] =>  0:25
+  CLOCK: [2019-02-28 Thu 19:38]--[2019-02-28 Thu 20:03] =>  0:25
+  CLOCK: [2019-02-28 Thu 18:40]--[2019-02-28 Thu 19:05] =>  0:25
+  CLOCK: [2019-02-25 Mon 21:02]--[2019-02-25 Mon 21:27] =>  0:25
+  CLOCK: [2019-02-24 Sun 20:29]--[2019-02-24 Sun 20:54] =>  0:25
+  CLOCK: [2019-02-24 Sun 19:50]--[2019-02-24 Sun 20:15] =>  0:25
+  CLOCK: [2019-02-23 Sat 22:15]--[2019-02-23 Sat 22:40] =>  0:25
+  CLOCK: [2019-02-23 Sat 21:44]--[2019-02-23 Sat 22:09] =>  0:25
+  CLOCK: [2019-02-23 Sat 21:14]--[2019-02-23 Sat 21:39] =>  0:25
+  CLOCK: [2019-02-22 Fri 21:47]--[2019-02-22 Fri 22:13] =>  0:26
+  CLOCK: [2019-02-22 Fri 18:42]--[2019-02-22 Fri 19:07] =>  0:25
+  CLOCK: [2019-02-22 Fri 17:46]--[2019-02-22 Fri 18:12] =>  0:26
+  CLOCK: [2019-02-22 Fri 16:35]--[2019-02-22 Fri 17:00] =>  0:25
+  CLOCK: [2019-02-22 Fri 15:54]--[2019-02-22 Fri 16:20] =>  0:26
+  CLOCK: [2019-02-22 Fri 15:22]--[2019-02-22 Fri 15:47] =>  0:25
+  CLOCK: [2019-02-22 Fri 14:52]--[2019-02-22 Fri 15:17] =>  0:25
+  CLOCK: [2019-02-22 Fri 01:07]--[2019-02-22 Fri 01:32] =>  0:25
+  CLOCK: [2019-02-21 Thu 22:55]--[2019-02-21 Thu 23:20] =>  0:25
+  CLOCK: [2019-02-21 Thu 21:25]--[2019-02-21 Thu 21:50] =>  0:25
+  CLOCK: [2019-02-21 Thu 20:53]--[2019-02-21 Thu 21:18] =>  0:25
+  CLOCK: [2019-02-21 Thu 20:12]--[2019-02-21 Thu 20:37] =>  0:25
+  CLOCK: [2019-02-21 Thu 19:35]--[2019-02-21 Thu 20:00] =>  0:25
   CLOCK: [2019-02-08 Fri 20:33]--[2019-02-08 Fri 20:58] =>  0:25
   CLOCK: [2019-02-08 Fri 19:55]--[2019-02-08 Fri 20:20] =>  0:25
   CLOCK: [2019-02-08 Fri 19:21]--[2019-02-08 Fri 19:46] =>  0:25
@@ -21,47 +102,117 @@
   CLOCK: [2019-02-04 Mon 15:17]--[2019-02-04 Mon 15:42] =>  0:25
   CLOCK: [2019-02-04 Mon 14:09]--[2019-02-04 Mon 14:34] =>  0:25
   :END:
-**  [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Text.html#Text][emacs lisp text manipulation]]
-** DONE [#A] Reply to Aaron
-   CLOSED: [2019-02-18 Mon 02:11]
-** TODO [[~/github/writing/paper_notes/index.org::*Summary%20Index][Summary Index]]
-** [[~/github/languageLearning][Misc Language Repo]]                                                           :javascript:python:multiple_languages:lisp:supercollider:tidal:learning:notes:prolog:misc:
-
+** TODO [[~/github/writing/paper_notes/index.org::*Summary_Index][Paper Summaries Index]]                                                   :papers:
+** [[~/github/writing/orgfiles][Org Files]]                                     :directory:main_collection:
+** [[~/github/languageLearning][Misc Language Repo]]                            :directory:javascript:python:multiple_languages:lisp:supercollider:tidal:learning:notes:prolog:misc:
+** [[file:~/github/writing/orgfiles/machine_learning.org::*Machine Learning Notes][Machine Learning Notes]]
+** [[file:~/github/writing/orgfiles/nlp.org::*Natural Language Processing:][Natural Language Processing:]]
+** [[~/.spacemacs.d/setup_files/pomodoro_log.org][Pomodoro Log]]
 ** -----------------------------------------------------------------------------
 ** Programming
 *** TODO [[~/.spacemacs.d/layers/trie][Trie-layer]]
-
+**** Design
+***** Vignettes
+***** Architecture
+**** Layouts
+***** Pipeline
+***** Flattened Trie Location
+***** Rule
+***** Time Cycle
+***** Carriers
+****** Activity
+****** Tool
+****** Values
+****** Role 
+****** Sanctions 
+**** Keybindings
+***** Insertion
+***** Deletion
+**** Transient States
+***** Component Adding
+****** Institution
+****** Activity
+****** Meta Rules
+***** Component Navigation
+**** Layer elements
+***** Configuration
+**** Mode Elements
+***** font locking?
+      Possibly do manually?
+***** Keywords
+**** Functions
+***** Helms
+****** Factbase Helm
+****** Tagging Helm
+****** Rule Helm
+****** Curve Selection
+***** Expand-Region implementation
+***** connection to runtime
+***** Parsec implementation
+***** working directory loading
+***** Use checking
+***** Type Checking
+***** Source / Sink Checking
+**** Snippets
+***** Rule
+***** Activity Pyramid
+***** Layer
+***** Cycle
 *** Javascript / Web
-**** [[~/github/mordor-alike][Mordor Like Idea]]                                :nemesis:mordor:javascript:obsolete:incomplete:grammar:
-**** TODO [[~/github/newspaper_gen][Newspaper Generator]]                       :javascript:generative:front_end:newspaper:web:procedural:
-**** [[~/github/hexagonAITest][Hexagon Board / AI Test]]                        :front_end:incomplete:javascript:old:parsing:web:
-
+**** [[~/github/mordor-alike][Mordor Like Idea]]                                                           :nemesis:mordor:javascript:obsolete:incomplete:grammar:
+**** TODO [[~/github/newspaper_gen][Newspaper Generator]]                                                   :javascript:generative:front_end:newspaper:web:procedural:
+**** [[~/github/hexagonAITest][Hexagon Board / AI Test]]                                                    :front_end:incomplete:javascript:old:parsing:web:
 *** Python
-***** TODO [#A] [[~/github/documentUnitTester][Document Unit Tester]]                                            :writing:support:tool:test_driven_development:python:
+***** TODO [[~/github/documentUnitTester][Document Unit Tester]]                                                 :writing:support:tool:test_driven_development:python:
 ****** setup a generator for org files
 ***** [[~/github/heuristicRBTreeWeighting][Heuristic Tree Weighting]]                                                  :obsolete:incomplete:old:python:
 ***** [[~/github/islandGen][Voronoi Island Gen]]                                                        :incomplete:python:image:
       integrate into pipeline
-***** TODO [#A] [[~/github/cairoCity][Cairo City Generator]]                                            :cairo:graphical:image:generative:front_end:layers:city:python:
+***** [[~/github/cairoCity][Cairo City Generator]]                              :cairo:graphical:image:generative:front_end:layers:city:python:
 ****** DONE [#A] integrate with cairo_pipeline
        CLOSED: [2019-02-10 Sun 13:16]
-****** TODO [#B] line -> street and space algorithm
-****** TODO Return to [[file:~/github/cairoCity/citygen/City.py::class%20City:][<Cairo City>]]
-***** TODO [[~/github/cairo_pipeline][Cairo Pipeline Architecture]]                                          :cairo:graphical:active:layers:python:
+****** TODO line -> street and space algorithm
+****** Alt: Moving Square filling
+****** TODO Return to [[file:~/github/cairoCity/citygen/City.py::class_City:][<Cairo City>]]
+****** City operators
+******* road
+******* building
+******* selection
+******* flow
+******* destroy
+******* deadend
+******* crossing
+******* clone
+******* bisect
+******* bezier river
+******* align
+******* heightmap
+******* intersection
+******* length
+******* merge
+******* move
+******* plant
+******* point
+******* rotate
+******* space
+******* wall
+******* water fill
+******* width
+******* zone completion
+***** [[~/github/cairo_pipeline][Cairo Pipeline Architecture]]                                               :cairo:graphical:active:layers:python:
 ***** [[~/github/cairo_utils][Cairo Utilities]]                                                           :graphical:active:dcel:voronoi:cairo:library:tool:
 ***** [[~/github/nytimes_scraper][NYT Scraper]]                                                               :data_analysis:grammar:scraper:dataset:nytimes:
-***** TODO [#C] [[~/github/pyAStar][Python Astar Implementation]]                                     :library:pathfinding:maze:astar:python:
+***** TODO [[~/github/pyAStar][Python Astar Implementation]]                                          :library:pathfinding:maze:astar:python:
 ****** integrate into pythonRuleEngine?
        needs to be able to control vault movement as well
-***** TODO [#A] [[~/github/pythonRuleEngine][Python Rule Language and Engine]]                                 :python:important:todo:meta:simulation:institutions:exclusion_logic:library:parsing:production_system:rules:
+***** TODO [[~/github/pythonRuleEngine][Python Rule Language and Engine]]                                      :python:important:todo:meta:simulation:institutions:exclusion_logic:library:parsing:production_system:rules:
 ****** Recap current language capabilities
 ****** integrate layer architecture
-****** implement type checking?
+****** TODO implement type checking?
 ****** implement time?
-****** TODO [#A] implement meta?
+****** TODO implement meta?
        up and down shifts, possibly links with layers? look at reflective papers again
 ****** implement other form of rule change?
-
 *** TODO Prolog                                                                 :todo:programming:institutions:ASP:tutorial:
 **** continue with prolog tutorial
 **** return to ASP
@@ -73,173 +224,401 @@
 **** look at acropolis API to get samples/assets
 **** Action languages
      C+ as well
-**** TODO [#A] soundscape assets
-***** TODO [#A] [[https://bbcarchdev.github.io/inside-acropolis/#consumers][Acropolis API]]
+**** TODO soundscape assets
+***** TODO [[https://bbcarchdev.github.io/inside-acropolis/#consumers][Acropolis API]]
       [[http://bbcsfx.acropolis.org.uk/index][BBC Sound FX Library]]
-      [[bbcsfx.acropolis.org.uk/][BBC sound effects frontend]]
+      [[http://bbcsfx.acropolis.org.uk/][BBC sound effects frontend]]
 *** TODO Haskell                                                                :monads:theory:programming:haskell:
 **** look at implementation of monad transformers
 *** To Clean
-**** [[~/github/dotaScraper][~/github/dotaScraper]]                                                       :obsolete:old:
-**** [[~/github/emacsModeExample][~/github/emacsModeExample]]                                                  :obsolete:old:incomplete:
-**** [[~/github/happiton][~/github/happiton]]                                                          :obsolete:incomplete:javascript:
-**** [[~/github/cairoSine][~/github/cairoSine]]                                                         :cairo:obsolete:incomplete:old:graphical:image:
-
-
-** TODO [#B] Datasets
-   To add: don't startve, and other games
-   SFAM, Quests, Changelogs?, speech acts , NYT, Social Physics Datasets
-*** [[~/github/jg-SpaceBase-DF9][~/github/jg-SpaceBase-DF9]]                                                   :simulation:lua:to_analyse:codebase:game:
-*** TODO [[~/Mega/Datasets][~/Mega/Datasets]]
-**** go through, find whats useful
-*** TODO [#A] NYT
-**** try using title trie grammars
-**** [[~/Mega/Images/glitch-assets][~/Mega/Images/glitch-assets]]
-     possibly use these in vault?
-**** [[~/Mega/bookmarks][~/Mega/bookmarks]]
+**** [[~/github/happiton][Happiton]]                                            :python:directory:hofstadter:
+*** Prototypes
+**** Hex Board -> Preact
+**** Battle System
+**** Credit System
+**** Mordor - alike
+**** Prisoners dilemma
+**** NetLogo
+**** Unity
+** TODO Datasets
+*** [[file:/Users/jgrey/github/writing/other_files/main_bookmarks.html][Bookmarks]]                                                                   :web:html:bookmarks:directory:
      treat these as codings?
-**** [[http://realitycommons.media.mit.edu/realitymining.html][Reality Mining]]
-*** TODO [#B] Versu dataset
-**** parse the code?
+*** TODO Bookmark and saved twitter parsing
+**** Bookmarks
+     [[https://msdn.microsoft.com/en-us/library/aa753582(v=vs.85).aspx][bookmark format]]
+***** DONE Parse into emacs readable format
+      CLOSED: [2019-03-14 Thu 19:46]
+***** DONE Create a helm navigation layer
+      CLOSED: [2019-05-25 Sat 00:24]
+**** Saved thread Parsing
+***** Cleanup of org files
+      remove duplicate tweets / threads
+      add links to other people
+      remove empty headings
+      fill buffers
+      get all tweets, check there isn't an embedded gif or video.
+      download gifs and videos as necessary
 
-*** TODO horus heresy dataset
-** TODO [#A] Annotations / Examples
-*** TODO [#A] Snatch delegation
+*** Audio                                                                       :to_implement:web:
+    [[file:~/Mega/Datasets/BBCSoundEffects.csv][BBCSoundEffects.csv]]
+
+**** extract categories, description, cdname
+**** group by time
+**** helm access
+*** Code
+**** Monroe Domain Plans
+**** [[file:/Users/jgrey/Mega/code_backups/shop2random.lisp][Shop2 Plan generator]]
+**** [[file:~/Mega/code_backups/netlogo/Evolution_of_Norms][Evolution of Norms]] :norms:netlogo:
+**** [[file:~/Mega/code_backups/netlogo/Social_Norms_(Emperor's_Dilemma)][Social Norms / Emperor's Dilemma]] :norms:netlogo:
+**** Chuck Examples                                                             :nytimes:chuck:
+**** [[file:~/Mega/code_backups/logic/ccalc-2.0r2.tar.gz][CCalc]]               :prolog:
+**** [[file:~/Mega/code_backups/logic/BPS1024.zip][Building Problem Solvers]]   :lisp:
+**** [[file:~/Mega/code_backups/Immerse Code Backup-20170930T102013Z-002.zip][Immerse]]                                                                    :csharp:
+*** Games
+**** [[file:~/Mega/Datasets/twine][Twine]]
+     [[https://github.com/ehenestroza/twine-graph/blob/master/twine_graph/twine_graph.py][Twine Graph on Github]]
+     [[https://github.com/McJones/twinespacer/blob/master/twinespacer.py][Twine Spacer on Github]]
+     [[https://github.com/cauli/TwineJson/blob/master/js/app/converter.js][TwinJson Converter on Github]]
+     [[https://github.com/daterre/Cradle#importing-a-story][Cradle Converter on Github]]
+**** CiF
+***** Rules
+      [[file:/Users/jgrey/Mega/Datasets/gameData/CiFStates][CiF States]]
+***** Level Traces
+      [[file:/Users/jgrey/Mega/Datasets/gameData/CifLevelTrace][Level Trace Storage]]
+***** Prom Week Speech Acts
+      [[file:/Users/jgrey/Mega/Datasets/compressed/speech_acts/prom_week_dialogue_annotated_for_speech_acts.tsv][prom week dialogue annotated for speech acts]]
+**** Versu
+     [[file:~/Mega/code_backups/cotillion.zip][Cotillion Zip]]
+
+***** Rules
+**** WoW Quests
+     [[file:~/Mega/Datasets/gameData/allQuests.tsv][file:~/Mega/Datasets/allQuests.tsv]]
+**** DOTA Changelog
+**** [[file:~/Mega/Datasets/gameData/DevMaterials][Postmortem Dev Materials]]
+**** [[file:~/Mega/Datasets/gameData/BoI][Binding of Isaac]]
+**** [[file:~/Mega/Datasets/gameData/CK2][Crusader Kings]]
+**** [[file:~/Mega/Datasets/gameData/EUIV][Europa Universalis]]
+**** [[file:~/Mega/Datasets/gameData/democracy3][Democracy 3]]
+**** [[file:~/Mega/Datasets/gameData/d3_africa][Democracy 3 Africa]]
+**** [[file:~/Mega/Datasets/gameData/distant_worlds][Distant Worlds]]
+**** [[file:~/Mega/Datasets/gameData/dontstarve][Don't Starve]]
+**** [[file:~/Mega/Datasets/gameData/dungeon_of_the_endless][Dungeon of the Endless]]
+**** [[file:~/Mega/Datasets/gameData/dwarf_fortress][Dwarf Fortress]]
+**** [[file:~/Mega/Datasets/gameData/invisibleInc][Invisible Inc]]
+**** [[file:~/Mega/Datasets/gameData/king_dragon_pass][King of Dragon Pass]]
+**** [[file:~/Mega/Datasets/gameData/offworld_trading][Offworld Trading]]
+**** [[file:~/Mega/Datasets/gameData/prison_architect][Prison Architect]]
+     [[file:~/Mega/Datasets/gameData/prisons][file:~/Mega/Datasets/gameData/prisons]]
+**** [[file:~/Mega/Datasets/gameData/red_shirt][Red Shirt]]
+**** [[file:~/Mega/Datasets/gameData/rimworld][RimWorld]]
+**** [[file:~/Mega/Datasets/gameData/stellaris][Stellaris]]
+**** [[file:~/Mega/Datasets/gameData/sunlessSea][Sunless Sea]]
+**** [[file:~/Mega/Datasets/gameData/the_guild2][The Guild 2]]
+**** [[file:~/Mega/Datasets/gameData/unrest][Unrest]]
+**** [[file:~/Mega/Datasets/gameData/witcher3][Witcher 3]]
+**** [[file:~/Mega/code_backups/jg-SpaceBase-DF9][SpaceBase DF-9]]
+**** [[file:~/Mega/code_backups/games/SimHealth_DOS_EN.zip][SimHealth]]
+**** [[file:~/Mega/code_backups/games/Yoda_Stories.zip][Yoda Stories]]
+**** [[file:~/Mega/Documents/Kingdom_RPG.zip][Kingdom]]
+**** [[file:~/Mega/Documents/Microscope_RPG.zip][Microscope]]
+*** Text
+****** [#A] NYT
+******* try using title trie grammars
+****** [[file:~/Mega/Datasets/texts/Peake,_Mervyn][Gormenghast]]
+****** [[file:~/Mega/Datasets/texts/Discworld][Discworld]]
+****** [[file:~/Mega/Datasets/texts/40k_txts][40k]]
+****** Supreme Court
+******* [[file:~/Mega/Datasets/compressed/scotus/supreme_court_dialogs_corpus_v1.01(1).zip][Dialogue]]
+******* Cases
+        [[file:~/Mega/Datasets/compressed/scotus/SCDB_2014_01_caseCentered_Vote.csv.zip][file:~/Mega/Datasets/SCDB_2014_01_caseCentered_Vote.csv.zip]]
+        [[file:~/Mega/Datasets/compressed/scotus/SCDB_2014_01_justiceCentered_Vote.csv.zip][file:~/Mega/Datasets/SCDB_2014_01_justiceCentered_Vote.csv.zip]]
+        [[file:~/Mega/Datasets/compressed/scotus/SCDB_2015_01_justiceCentered_LegalProvision.csv.zip][file:~/Mega/Datasets/SCDB_2015_01_justiceCentered_LegalProvision.csv.zip]]
+        [[file:~/Mega/Datasets/compressed/scotus/SCDB_2018_02_caseCentered_Citation.csv.zip][file:~/Mega/Datasets/SCDB_2018_02_caseCentered_Citation.csv.zip]]
+        [[file:~/Mega/Datasets/compressed/scotus/SCDB_2018_02_caseCentered_Docket.csv.zip][file:~/Mega/Datasets/SCDB_2018_02_caseCentered_Docket.csv.zip]]
+        [[file:~/Mega/Datasets/compressed/scotus/SCDB_Legacy_04_caseCentered_Citation.csv.zip][file:~/Mega/Datasets/SCDB_Legacy_04_caseCentered_Citation.csv.zip]]
+
+****** [[file:~/Mega/Datasets/texts/StandOnZanzibar.txt][Stand On Zanzibar]]
+****** [[file:~/Mega/Datasets/compressed/Stanford_politeness_corpus.zip][Politeness Corpus]]
+****** [[file:~/Mega/Datasets/kjv_apocrypha_utf8_FINAL.xml][King James Bible]]
+****** [[file:~/Mega/Datasets/texts/me2-text-dialogue.txt][Mass Effect 2 Dialogue]]
+****** [[file:~/Mega/Datasets/compressed/pizza_request_dataset.tar.gz][Pizza Request]]
+****** [[file:~/Mega/Datasets/compressed/transcripts.tar.gz][White House Transcripts]]
+****** [[file:~/Mega/Datasets/roberts_rules.txt][Roberts Rules of Order]]
+****** [[file:~/Mega/Datasets/compressed/speech_acts/swb1_dialogact_annot(4).tar.gz][Switchboard Corpus]]
+       [[file:~/Mega/Datasets/compressed/speech_acts/swda.zip][file:~/Mega/Datasets/swda.zip]]
+******* swda.py
+****** [[file:~/Mega/Datasets/compressed/quotes.tar.gz][White House Speech Quotes]]
+       [[file:~/Mega/Datasets/compressed/quotes_json.tar.gz][file:~/Mega/Datasets/quotes_json.tar.gz]]
+****** [[file:~/Mega/Datasets/compressed/uscode.zip][US Code]]
+****** [[file:~/Mega/Datasets/compressed/verb-pair-orders.gz][Verb Pairs]]
+
+*** Images
+**** [[file:~/github/writing/orgfiles/image_summary.org][Image Summaries]]
+**** TODO [[file:~/github/writing/orgfiles/glitch_assets_summary.org][Glitch Assets Summary]]
+     possibly use these in vault?
+**** [[file:~/Mega/Datasets/SFAM/sfam_summary.org][SFAM Summary]]                                                               :tagged:parsed:
+**** [[file:~/Mega/Datasets/Scarfolk][Scarfolk]]                                                                   :to_parse:
+**** online assets
+**** portraits
+*** Measurements
+**** [[file:~/Mega/Datasets/compressed/social_physics/RealityMining.zip][Reality Mining]]
+**** [[file:~/Mega/Datasets/compressed/social_physics/Friends&Family.zip][Friends and Family]]
+**** [[file:~/Mega/Datasets/compressed/social_physics/2014_SQF.zip][SQF]]
+**** [[file:~/Mega/Datasets/compressed/social_physics/HDC-full.zip][HDC]]
+**** [[file:~/Mega/Datasets/compressed/social_physics/SocialEvolution.zip][Social Evolution]]
+**** [[file:~/Mega/Datasets/compressed/diplomacy_data_1.0.zip][Diplomacy]]
+**** [[file:~/Mega/Datasets/compressed/plans/linuxCorpus-1.0.zip][Linux Dataset]]
+*** [[https://docs.google.com/spreadsheets/d/1JcwsKMJtd_wYe4oeTtuyM8fm1eqFQw9A9VGDjnCKFiM/edit#gid=69023141][Legislative Rules dataset]]                                                   :rules:
+** TODO Annotations / Examples
+*** TODO [#A] Snatch delegation                                                 :delegation:film:
     to lead to delegation in iEl
 *** TODO collate lists of sources
     to prepare for annotation,
     to give components of expressive generators
-
-** TODO [#C] [[~/Mega/savedTwitter][Saved Twitter Threads]]
 ** -----------------------------------------------------------------------------
 ** Writing
-
-** TODO [[file:~/github/writing/orgfiles/dissertation.org::*Dissertation][Dissertation]]                                                            :dissertation:writing:important:
-** [[~/github/jgrey4296.github.io][jgrey4296.github.io]]                                                          :writing:important:todo:target:blog:web:
-*** [[~/github/jsons][jsons representations]]                                                       :json:writing:
-*** [[~/github/writing][misc writing]]                                                                :writing:generic:
-
-** TODO [#C] Mendeley organisation
-*** [[/Volumes/DOCUMENTS/mendeley][Mendeley]]
+*** TODO [[file:~/github/writing/orgfiles/dissertation.org::*Dissertation][Dissertation]]                                                           :dissertation:writing:important:
+*** [[~/github/jgrey4296.github.io][jgrey4296.github.io]]                                                         :writing:important:todo:target:blog:web:
+**** [[~/github/jsons][jsons representations]]                                                      :json:writing:
+**** [[~/github/writing][misc writing]]                                                               :writing:generic:
+*** TODO [[file:~/github/writing/orgfiles/taxonomies.org::*Taxonomies][Taxonomies]]
+**** DONE TAG them
+     CLOSED: [2019-03-08 Fri 11:13]
 ** -----------------------------------------------------------------------------
-** Misc
-*** [[~/github/jg_emacs_files][Emacs files]]                                    :lisp:setup:emacs:
+** Emacs 
+*** [[~/github/jg_emacs_files][Emacs files]]                                    :directory:lisp:setup:emacs:
 *** [[~/github/jg_shell_files][Bash Scripts]]                                   :bash:setup:
-*** Emacs / Spacemacs
-**** TODO [#A] Twittering mode image upload extension
-     add this as a set of custom functions, post-extending the twitter layer
-***** DONE extend twittering-edit-mode-map to insert a media id
-      CLOSED: [2019-02-07 Thu 13:00]
-      need to specify a file to upload. how? helm
-***** write function for inserting media id into buffer
-      store media ids as local variables to the tweet buffer
-******* TODO write verify function
-        check size of image/gif/video
-        check format
-        [[file:~/.spacemacs.d/layers/jg_layer/funcs.el::(defun%20jg_layer/twitter-open-and-encode-picture%20(candidate)][<no description>]]
+*** Reference
+**** [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Buffer-Modification.html#Buffer-Modification][Buffer Modification]]
+**** [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Change-Hooks.html#Change-Hooks][Change Hooks]]
+**** [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Changing-Properties.html#Changing-Properties][Changing Text Properties]]
+**** [[https://www.gnu.org/software/emacs/manual/html_mono/cl.html][CL]]
+**** [[https://orgmode.org/worg/org-tutorials/org-column-view-tutorial.html][column view]]
+**** [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Debugger.html#Debugger][Debugging]]
+**** [[https://www.gnu.org/software/emacs/manual/html_mono/ede.html][EDE]]
+**** [[https://www.gnu.org/software/emacs/manual/html_mono/eieio.html][EIEIO]]
+**** [[https://github.com/skeeto/elfeed][Elfeed]]
+**** [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Text.html#Text][emacs lisp text manipulation]]
+**** Font-Locking
+     Reminder: font-lock will override manually set text
+     properties, so wrap any calls with a let of
+     inhibit-modification-hooks t to override
 
-******* extend twittering-call-api-with-account-in-api1.1                       :obsolete:
-******* extend twittering-http-post                                             :obsolete:
-        making sure to change the host to the upload target
-        then method to init then append then finalize
-        loading the specified file into a temporary buffer,
-        then encoding as base64, getting size, chunking
-        and sending.
+**** Mode definitions
+     #+begin_src elisp results output/value
+       (define-derived-mode child fundamental-mode "A Mode"
+       ;; Stuff
 
-        sentinel passed will be a continuation to send next chunk
-        or repeat current, or finalize if no more chunks.
-        (this will need the base64 encoded temp buffer accessible
-        or stored in a variable. which?
-***** have twittering-edit-post-status detect media ids
-      retrieve the buffer local variable of media ids
-      add to options passed to twittering-call-api
-***** [[https://developer.twitter.com/en/docs/media/upload-media/api-reference/post-media-upload-init][Twitter api]]
+         )
+     #+end_src
+
+**** [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Overlays.html][Overlays]]
+**** [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Special-Properties.html#Special-Properties][Properties]]
+**** [[https://www.gnu.org/software/emacs/manual/html_mono/semantic.html][Semantic]]
+**** [[https://stackoverflow.com/questions/1249497/command-to-center-screen-horizontally-around-cursor-on-emacs][Stackoverflow center column]]
+     #+begin_src elisp results output/value
+       (defun my-horizontal-recenter ()
+         "make the point horizontally centered in the window"
+         (interactive)
+         (let ((mid (/ (window-width) 2))
+               (line-len (save-excursion (end-of-line) (current-column)))
+               (cur (current-column)))
+           (if (< mid cur)
+               (set-window-hscroll (selected-window)
+                                   (- cur mid)))))
+     #+end_src
+
+**** [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Major-Mode-Conventions.html#Major-Mode-Conventions][Major Mode conventions]]
+***** Define a major mode command whose name ends in ‘-mode’.                   :naming:
+***** Write a documentation string                                              :documentation:
+***** Start by calling ‘kill-all-local-variables’.                              :procedure:
+***** Set the variable ‘major-mode’ to the major mode command symbol.           :naming:
+***** Set the variable ‘mode-name’ to the “pretty” name of the mode.            :naming:
+***** The major mode command should be idempotent.                              :procedure:
+***** All variables and functions should start with the major mode name         :naming:
+***** The mode should set ‘indent-line-function’                                :procedure:
+***** The major mode should usually have its own keymap                         :procedure:
+      The major mode command should call ‘use-local-map’ to install this local
+      map. 
+
+      This keymap should be stored permanently in a global variable named
+      ‘MODENAME-mode-map’. Normally the library that defines the mode sets this
+      variable. 
+
+***** Major modes should not alter matters of user preference                   :procedure:
+      Such as whether Auto-Fill mode is enabled. Leave this to
+      each user to decide. However, a major mode should customize other
+      variables so that Auto-Fill mode will work usefully _if_ the user decides
+      to use it.
+***** The mode may have its own syntax table or may share one with other        :procedure:naming:
+      related modes. If it has its own syntax table, it should store this in a
+      variable named ‘MODENAME-mode-syntax-table’.
+***** If the mode handles a language that has a syntax for comments, it         :procedure:
+      should set the variables that define the comment syntax.
+***** The mode may have its own abbrev table or may share one with other        :naming:procedure:
+      related modes. If it has its own abbrev table, it should store this in a
+      variable named ‘MODENAME-mode-abbrev-table’. If the major mode command
+      defines any abbrevs itself, it should pass ‘t’ for the SYSTEM-FLAG
+      argument to ‘define-abbrev’. 
+***** The mode should specify how to do highlighting for Font Lock mode,        :display:procedure:naming:
+      by setting up a buffer-local value for the variable ‘font-lock-defaults’
+***** Each face that the mode defines should, if possible, inherit from         :display:
+      an existing Emacs face.
+***** The mode can specify how to complete various keywords by adding one       :naming:
+      or more buffer-local entries to the special hook
+      ‘completion-at-point-functions’.
+***** To make a buffer-local binding for an Emacs customization variable,       :procedure:
+      use ‘make-local-variable’ in the major mode command, not
+      ‘make-variable-buffer-local’. The latter function would make the variable
+      local to every buffer in which it is subsequently set, which would affect
+      buffers that do not use this mode. It is undesirable for a mode to have
+      such global effects.
+
+      With rare exceptions, the only reasonable way to use
+      ‘make-variable-buffer-local’ in a Lisp package is for a variable which is
+      used only within that package. Using it on a variable used by other
+      packages would interfere with them.
+***** Each major mode should have a normal “mode hook” named                    :procedure:naming:
+      ‘MODENAME-mode-hook’. The very last thing the major mode command should do
+      is to call ‘run-mode-hooks’. This runs the normal hook
+      ‘change-major-mode-after-body-hook’, the mode hook, the function
+      ‘hack-local-variables’ (when the buffer is visiting a file), and then the
+      normal hook ‘after-change-major-mode-hook’.
+***** The major mode command may start by calling some other major mode         :procedure:
+      command (called the “parent mode”) and then alter some of its settings. A
+      mode that does this is called a “derived mode”. The recommended way to
+      define one is to use the ‘define-derived-mode’ macro, but this is not
+      required. Such a mode should call the parent mode command inside a
+      ‘delay-mode-hooks’ form. (Using ‘define-derived-mode’ does this
+      automatically.) 
+***** If something special should be done if the user switches a buffer         :procedure:
+      from this mode to any other major mode, this mode can set up a
+      buffer-local value for ‘change-major-mode-hook’
+***** If this mode is appropriate only for specially-prepared text              :procedure:
+      produced by the mode itself (rather than by the user typing at the
+      keyboard or by an external file), then the major mode command symbol
+      should have a property named ‘mode-class’ with value ‘special’, put on as
+      follows:
+
+      (put 'funny-mode 'mode-class 'special)
+
+      This tells Emacs that new buffers created while the current buffer is in
+      Funny mode should not be put in Funny mode, even though the default value
+      of ‘major-mode’ is ‘nil’. By default, the value of ‘nil’ for ‘major-mode’
+      means to use the current buffer’s major mode when creating new buffers
+      (*note Auto Major Mode::), but with such ‘special’ modes, Fundamental mode
+      is used instead. Modes such as Dired, Rmail, and Buffer List use this
+      feature.
+
+      The function ‘view-buffer’ does not enable View mode in buffers whose
+      mode-class is special, because such modes usually provide their own
+      View-like bindings.
+
+      The ‘define-derived-mode’ macro automatically marks the derived mode as
+      special if the parent mode is special. Special mode is a convenient parent
+      for such modes to inherit from; *Note Basic Major Modes::.
+***** If you want to make the new mode the default for files with certain       :procedure:
+      recognizable names, add an element to ‘auto-mode-alist’ to select the mode
+      for those file names. If you define the mode command to autoload, you
+      should add this element in the same file that calls ‘autoload’. If you use
+      an autoload cookie for the mode command, you can also use an autoload
+      cookie for the form that adds the element. If you do not autoload the mode
+      command, it is sufficient to add the element in the file that contains the
+      mode definition.
+***** The top-level forms in the file defining the mode should be written       :procedure:
+      so that they may be evaluated more than once without adverse consequences.
+      For instance, use ‘defvar’ or ‘defcustom’ to set mode-related variables,
+      so that they are not reinitialized if they already have a value.
+
+**** [[https://orgmode.org/worg/org-contrib/org-drill.html][Org-Drill]]                                                                  :spaced_repetition:memory:
+*** Expansions
+**** TODO buffer groups / registers
+     be able to add a buffer / marked buffers to a register,
+     then search in them, or step through them
+     persistent?
+**** TODO Buffer Register Sets
+***** Add files/buffers to register
+****** Regex / File Type
+****** Mode
+****** Directory
+****** Directory DFS
+***** View Register
+***** Open Single and Multiple files from register
+***** Apply action to all files in register
+***** Search only in files in register
+***** Make Register persistent
+***** Set Operations on Registers
+
+**** TODO filter char inserting list
+**** TODO Have a recursive choice helm find files action
 **** TODO Org SubTree Transient State navigation
-**** TODO [#C] Org Table Transient state
-**** TODO [#C] org-agenda keymap modifications
+     Add a transient state for moving, promoting, demoting etc subtrees
+**** TODO Org Table Transient state
+     Transient state to create, add (column/row), and navigate tables
+**** TODO org-agenda keymap modifications
      swap priority mods into < and >
-**** TODO Write a Helm view for tagging in Org
-**** TODO XML / Bookmarks load
-
 **** TODO tag and colourize words minor mode to run anywhere
      be able to tag and colourize things dynamically, based on what you need at
      any given moment
      then be able to tag into groups?
-** TODO Run Summarize Directory Script on datasets/papers/other
-   [[file:~/github/jg_shell_files/summariseDirectory.py::"""][<summariseDirectory.py>]]
+**** TODO XML / Bookmarks load
+**** TODO custom hide overlays
 
+** Misc
+*** TODO Prototype some Mechanical Turk Tasks                                   :survey:online:price:amazon:
+*** TODO [[http://bloom-lang.net/features/][bloom]]                                                                  :programming:language:
+**** CALM: Consistency as Logical Monotonicity
 
-** TODO Prototype some Mechanical Turk Tasks
+**** "Gray's Twelfth Challenge"
+     DWIM : Do What I Mean
+     Spec Language that:
+     1) Is Easy to express designs
+     2) Is Compilable
+     3) Can describe all applications
 
+     System should 'reason' about application:
+     Ask about exception cases
+     Ask about incomplete specification
+     Not be onerous
 
-* Progressed
-** iELPY
-*** Parser
-*** Runtime
+**** Borges "A New Refutation of Time"
+     "The Denial of time involves two negations: The negation of the succession
+     of the terms of a series, negation of the synchronism of the terms in two
+     different series"
 
-** Newspaper Gen
-*** DONE Tracery
-    <2017-03-24 Fri>
-    Add tracery in for straight away text gen
-    ** Shell
-*** Preact UI
-    <2017-03-27 Mon>
-*** Shell Runtime
-**** DONE Test searching
-     <2017-03-23 Thu>
-**** Rule Mode
-     <2017-03-25 Sat>
-**** FSM Mode
-     <2017-03-25 Sat>
-*** Rete
-**** Write actual logic tests
-     <2017-03-26 Sun>
-** Behaviour Tree.js
-*** Exclusion Logic
-    <2017-03-26 Sun>
-    Union of EL.js and iELPy language, to use in both
-** Writing
-*** DONE Jekyll TAGS
-    <2017-03-23 Thu>
-*** Unit Testing
-**** First document: An Overview
-     <2017-03-27 Mon>
-** Prototypes
-   <2017-03-28 Tue>
-*** Hex Board -> Preact
-*** Battle System
-*** Credit System
-*** Mordor - alike
-*** Prisoners dilemma
-*** NetLogo
-*** Unity
-**** Animation
-** Data Analysis
-   <2017-03-28 Tue>
-*** Game Scraping
+**** Disorderly programming and datastructures
 
-*** Web Scraping
-**** Dota
-**** WoW
-** Reading
-*** Books
-    <2017-03-29 Wed>
-**** Scott
-     <2017-03-26 Sun>
-**** Bicchieri
-**** Graeber
-**** North
-**** Ostrom
-*** Dagstuhl
-*** Dissertations
-*** Papers
-** DONE Haskell
-   <2017-03-24 Fri>
-   Write a simple parser using parsec
-*** Haskell: add a python version of iEL
-    <2017-03-30 Thu>
-** DONE Python Red-Black Weighting
-   <2017-03-28 Tue>
-
-
-
+*** TODO Structural phenomenology?                                              :look_into:
+*** TODO Get Castelfranchi: Behavioral Implicit Communication                   :look_into:
+*** [[https://www.rockpapershotgun.com/2019/03/21/french-revolutionary-judge-sim-we-the-revolution-is-out-now/][We. The Revolution]]                                                          :judge:court:look_into:game:rps:
+*** [[https://www.rockpapershotgun.com/2019/03/23/make-friends-and-steal-their-mail-in-willowbrooke-post/][Willbrooke post]]                                                             :look_into:papers_please:rps:game:
+*** [[http://ifaamas.org/Proceedings/aamas2018/forms/contents.htm][AAMAS Proceedings]]                                                           :papers:MAS:look_into:conference:
+*** [[http://defeasible.org/][Defeasible Logic]]                                                            :logic:
+*** [[https://bibtexparser.readthedocs.io/en/master/tutorial.html][bibtex parser]]                                                               :python:bibtex:
+*** [[https://scholar.google.com/citations?user=iR-SIW8AAAAJ&hl=en&oi=sra][Jodie Sabater-Mir]]                                                           :reputation:look_into:research:
+*** [[http://www.lsi.upc.edu/~jvazquez/publications.php][J. Vázquez Salceda]]                                                          :look_into:research:papers:
+*** [[file:~/github/otherLibs/Bidirectional][Bidirectional Type Checking Haskell]]                                        :directory:haskell:type_inference:
+*** [[file:~/github/otherLibs/code-for-blog/2018/type-inference][Python Type Inference]]                                                       :directory:hindley_milner:type_inference:python:
+*** [[file:~/github/otherLibs/code-for-blog/2018/markov-simple][Python Markov chain]]                                                         :directory:markov:python:
+*** [[file:~/github/otherLibs/code-for-blog/2018/unif][Python Unification]]                                                          :directory:python:unification:
+*** [[file:~/github/otherLibs/CommonLispCode/micro-talespin.lisp][Micro-Talespin]]                                                              :directory:architecture:narrative:talespin:lisp:
+*** [[file:~/github/otherLibs/BPS][Building Problem Solvers]]                                                    :directory:rules:lisp:
+*** [[file:~/github/otherLibs/Nomyx][Nomyx]]                                                                       :directory:meta:hofstadter:rules:haskell:
+**** [[http://nomyx.net/][Nomyx Game Site]]
+*** [[file:~/github/otherLibs/wavefunction-collapse][Wave function collapse python]]                                               :directory:algorithm:wave_function_collapse:python:
+*** [[https://robertheaton.com/2018/12/17/wavefunction-collapse-algorithm/][Wave function collapse]]                                                      :wave_function_collapse:tutorial:to_implement:algorithm:
+*** [[file:~/github/otherLibs/cathoristic-logic][Cathoristic Logic]]                                                           :directory:haskell:logic:praxis:exclusion_logic:
+*** TODO Vignettes
+*** TODO [[https://explorabl.es/all/][Explorables]]
+*** TODO [[http://worrydream.com/][Bret Victor]]
+**** [[http://worrydream.com/ABriefRantOnTheFutureOfInteractionDesign/][A Brief Rant on the Future of Interaction Design]]                           :design:capability:tools:hands:
+*** TODO [[https://ncase.me/remember/][Spaced Repetition]]
+*** [[http://www.parliamentbook.com/spaces][Parliament Book]]
+*** [[https://www.soundsurvey.org.uk/index.php/history/street_cries/brit1/626/3387][Sound Survey]]
+*** [[https://www.filfre.net/2019/03/darklands/][Darklands]]
+*** [[http://www.roguebasin.com/index.php?title%3DMain_Page][Roguelike wiki]]
+*** TODO [[https://en.wikipedia.org/wiki/List_of_human_positions][Wiki Body Positions]]
+*** TODO outline-toc package
+*** [[https://en.wikipedia.org/wiki/Kanban][Kanban]]
+*** [[http://plantuml.com/sequence-diagram][PlantUML]]
+    

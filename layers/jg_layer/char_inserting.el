@@ -1,0 +1,52 @@
+(provide 'jg_layer/setup-char-inserting)
+(require 'helm)
+
+(defun jg_layer/setup-char-inserting ()
+  ;; (get-char-code-property (char-after (point-min)) 'name)
+  ;; (charset-chars 'unicode-bmp 1)
+  ;; (charset-dimension 'unicode-bmp)
+  ;; ((lambda (x) (get-char-code-property (decode-char 'unicode-bmp (string-to-number (format "%d" x))) 'name)) #xFFD5 )
+
+  (defun jg_layer/get_char_single (x)
+    (let* ((value x)
+           (char (decode-char 'unicode-bmp value))
+           (name (get-char-code-property char 'name)))
+      `(,name ,char))) ;;,(format "%c" char))))
+
+  (defun jg_layer/char-inserting-get-candidates ()
+    (let* ((candidates '())
+           (i 0)
+           (j 0)
+           (max_tables (charset-chars 'unicode-bmp))
+           (max_rows (charset-chars 'unicode-bmp 2)))
+      (while (> max_tables i)
+        (setq j 0)
+        (while (> max_rows j)
+          (let ((pair (jg_layer/get_char_single (+ (* 256 i) j))))
+            (if (car pair)
+                (push `(,(format "%c :: %s" (cadr pair) (car pair)) ,(cadr pair)) candidates))
+            (setq j (+ j 1))))
+        (setq i (+ i 1)))
+      candidates ))
+
+
+
+  (setq jg_layer/char-inserting-candidates-pairs (jg_layer/char-inserting-get-candidates)
+        jg_layer/char-inserting-helm `((name . "Helm Insert Char")
+                                       (action . (lambda (cand)
+                                                   (mapcar (lambda (x) (insert-char (car x))) (helm-marked-candidates))))
+                                       )
+        )
+
+  (defun jg_layer/char-inserting-helm-start ()
+    """ Opens the Tagging Helm """
+    (interactive)
+    (let* ((candidates jg_layer/char-inserting-candidates-pairs)
+           (main-source (cons `(candidates . ,candidates) jg_layer/char-inserting-helm)))
+      (helm :sources '(main-source)
+            :input "")
+      )
+    )
+
+  (spacemacs/set-leader-keys "x C" 'jg_layer/char-inserting-helm-start)
+  )

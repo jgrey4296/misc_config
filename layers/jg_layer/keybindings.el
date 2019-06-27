@@ -22,6 +22,8 @@
   "x e" 'eval-expression
   ;; Clearing
   "b c" 'jg_layer/clear-buffer
+  ;;Indirect buffer
+  "b i" 'clone-indirect-buffer-other-window
   ;; Indenting
   "x i c" 'indent-to-column
   ;; toggles
@@ -29,7 +31,13 @@
   ;; searching
   "s o" 'helm-occur
   ;; mode select
-  "m"   'helm-switch-major-mode
+   "m"   'helm-switch-major-mode
   ;; mark buffer
   "x m" 'mark-whole-buffer
+  ;; Access to old school emacs help:
+  "h h" 'help
+  ;; ac trigger
+  "a a" 'jg_layer/ac-trigger
+  ;; goto org agenda file
+  "b a" 'jg_layer/goto-org-agenda-file
 )

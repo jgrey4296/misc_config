@@ -1,4 +1,4 @@
-;; jg_layer packages.el
+ ;; jg_layer packages.el
 ;; loads second
 
 (defconst jg_layer-packages
@@ -10,20 +10,74 @@
     ;; (some-package :location (recipe :fetcher github :repo "some/repo"))
     ;;(some-package :excluded t)
     helm
-    org
     yasnippet
     abbrev
     evil
-    ibuffer
+    ;; ibuffer
     fci
     rainbow-mode
     flycheck
     shell
+    python
+    academic-phrases
+    dired-quick-sort
+    org
+    org-ref
+    org-pomodoro
+    (org-drill :location built-in)
+    ;; buffer-manage
+    ;; (buffer-sets :location (recipe :fetcher git :url "https://git.flintfam.org/swf-projects/buffer-sets.git"))
+    buffer-utils
+    ;; (filesets+ :location (recipe :fetcher github :repo "emacsmirror/filesets-plus"))
+    ;; helm-filesets
+    evil-string-inflection
+    evil-quickscope
+    free-keys
+    fsm
+    highlight-parentheses
+    origami
+    vlf
+    plantuml-mode
+    flycheck-plantuml
+    ;; ggtags
+    ;; (helm-gtags :toggle (configuration-layer/package-usedp 'helm))
+    ;; xcscope
+    ;; (helm-cscope :toggle (configuration-layer/package-usedp 'helm))
+
     (git-gutter :excluded t)
     (git-gutter+ :excluded t)
-    (xterm-mouse-mode :excluded t)
-    (gpm-mouse-mode :excluded t)
     (smartparens :excluded t)
+    (show-paren-mode :excluded t)
+    (erc :excluded t)
+    (jabber :excluded t)
+    (rcirc :excluded t)
+    (slack :excluded t)
+    (default-ivy-config :excluded t)
+    (ido :excluded t)
+    (ido-vertical-mode :excluded t)
+    (eyebrowse :excluded t)
+    (ivy :excluded t)
+    (persp-mode :excluded t)
+    (swiper :excluded t)
+    (ace-link :excluded t)
+    (desktop :excluded t)
+    (doc-view :excluded t)
+    (flx-ido :excluded t)
+    (open-junk-file :excluded t)
+    (paradox :excluded t)
+    (fancy-battery :excluded t)
+    (golden-ratio :excluded t)
+    (zoom-frm :excluded t)
+    (company :excluded t)
+    (projectile :excluded t)
+    (smex :excluded t)
+    (2048-game :excluded t)
+    (tetris :excluded t)
+    (sudoku :excluded t)
+    (helm-games :excluded t)
+    (typit :excluded t)
+    (selectric-mode :excluded t)
+    (xkcd :excluded t)
     )
   )
 
@@ -69,8 +123,8 @@
 
   (evil-ex-define-cmd "cl" 'spacemacs/comment-or-uncomment-lines)
   (evil-ex-define-cmd "t[ag]" 'jg_layer/org-tagging-helm-start)
-  (evil-ex-define-cmd "to" 'jg_layer/tag-occurances)
-  (evil-ex-define-cmd "toa" 'jg_layer/tag-occurences-in-open-buffers)
+  (evil-ex-define-cmd "to" 'jg_layer/tag-occurrences)
+  (evil-ex-define-cmd "toa" 'jg_layer/tag-occurrences-in-open-buffers)
   (evil-ex-define-cmd "mw" 'spacemacs/window-manipulation-transient-state/body)
   (evil-ex-define-cmd "mb" 'spacemacs/buffer-transient-state/body)
   (evil-ex-define-cmd "os" 'org-store-link)
@@ -175,10 +229,44 @@
   )
 
 (defun jg_layer/post-init-helm ()
-  ;;add in keybinding to kill line in completion window
+  (defun jg_layer/helm-open-random-external-action (candidate)
+    " Open a random file in an external program, optionally specifying wildcard "
+    (interactive)
+    (let* ((pattern (car (last (f-split candidate))))
+           (pattern-r (wildcard-to-regexp pattern))
+           (files (helm-get-candidates (helm-get-current-source)))
+           (all_matches (if (string-match-p "\*\." pattern)
+                            (seq-filter (lambda (x) (string-match-p pattern-r x)) files)
+                          (f-files candidate)))
+           (selected (seq-random-elt all_matches)))
+      (spacemacs//open-in-external-app selected)
+      ))
+
+  (defun jg_layer/helm-open-random-exploration-action (candidate)
+    " Randomly choose a directory until an openably file is found (wildcard optional)"
+    ;; TODO
+    (interactive)
+    (let* ((pattern (car (last (f-split candidate))))
+           (pattern-r (wildcard-to-regexp pattern))
+           (files (helm-get-candidates (helm-get-current-source)))
+           (all_matches (if (string-match-p "\*\." pattern)
+                            (seq-filter
+                             (lambda (x) (string-match-p pattern-r x))
+                             files)
+                          (f-files candidate)))
+           (selected (seq-random-elt all_matches)))
+      (spacemacs//open-in-external-app selected)
+      ))
+
   (with-eval-after-load 'helm
     (helm-autoresize-mode 0)
-    (define-key helm-map (kbd "C-K") 'kill-line)
+    ;;add in keybinding to kill line in completion window
+    (define-key helm-map (kbd "C-k") 'kill-line)
+    (define-key helm-map (kbd "<backtab>") 'helm-select-action)
+    (setq helm-find-files-actions (cons (car helm-find-files-actions)
+                                        (cons '("Open Random" . jg_layer/helm-open-random-action)
+                                              (cons '("Open Random External" . jg_layer/helm-open-random-external-action)
+                                                    (cdr helm-find-files-actions)))))
     )
   )
 
@@ -195,15 +283,17 @@
    org-tags-column 80
    )
 
+  (defun jg_layer/org-mod-keymap ()
+    (define-key org-mode-map (kbd "C-c [") nil)
+    (define-key org-mode-map (kbd "C-c ]") nil))
+
+
+  (add-hook 'org-mode-hook 'jg_layer/org-mod-keymap)
+
   ;; add in keybinding to call tag-occurances
-  (spacemacs/declare-prefix "o" "Org")
-  (spacemacs/declare-prefix "o t" "Tags")
-  (spacemacs/declare-prefix "o a" "Agenda")
-  (spacemacs/declare-prefix "o c" "Calendar")
-  (spacemacs/declare-prefix "o s" "Source")
-  (spacemacs/declare-prefix "o l" "Links")
   (spacemacs/set-leader-keys
-    "o T"     'org-todo-list
+    "o d"     'org-todo-list
+    "o g"     'helm-org-in-buffer-headings
     ;; TAGS
     "o t o"   'jg_layer/tag-occurances
     "o t a o" 'jg_layer/tag-occurences-in-open-buffers
@@ -230,8 +320,26 @@
     "o l i"   'org-insert-link
     "o l d"   'org-toggle-link-display
     "o l o"   'jg_layer/open_link_in_buffer
+    "o l O"   'jg_layer/open_link_externally
+    "o l r"   'org-reftex-citation
+    "o l n"   'jg_layer/change_link_name
     )
+  (spacemacs/declare-prefix "o" "Org")
+  (spacemacs/declare-prefix "o t" "Tags" "Tags")
+  (spacemacs/declare-prefix "o a" "Agenda")
+  (spacemacs/declare-prefix "o c" "Calendar")
+  (spacemacs/declare-prefix "o s" "Source")
+  (spacemacs/declare-prefix "o l" "Links")
 
+
+  ;;TODO add function to insert a bibliography
+  ;;plus keybind it
+  ;; #+BIBLIOGRAPHY: ~/github/writing/mendeley_library plain
+  ;;keybind
+  (spacemacs/set-leader-keys-for-major-mode 'org-mode
+    "i c" 'org-reftex-citation
+    "`"   'jg_layer/change_link_name
+    )
   )
 
 (defun jg_layer/post-init-yasnippet ()
@@ -245,7 +353,13 @@
     "y i"    'yas-insert-snippet
     "y n"    'yas-new-snippet
     "y d"    'yas-describe-tables
+    "y v"    'yas-visit-snippet-file
     )
+
+  (spacemacs/set-leader-keys-for-major-mode 'edit-abbrevs-mode
+    "y s" 'abbrev-edit-save-buffer
+    )
+
   (global-set-key (kbd "C-c ;") 'expand-abbrev)
   (global-set-key (kbd "C-c >") 'yas-new-snippet)
   )
@@ -265,10 +379,6 @@
     )
   )
 
-
-(defun jg_layer/post-init-ibuffer ()
-  )
-
 (defun jg_layer/post-init-erlang ()
   ;; (also has a load path set in root el file)
   erlang-root-dir "/usr/local/opt/erlang"
@@ -277,8 +387,64 @@
   )
 
 (defun jg_layer/post-init-python ()
+  (print "Post init python")
   (setq-default python-indent-offset 4
-                python-indent-guess-indent-offset nil )
+                python-indent-guess-indent-offset nil
+                )
+  (defun jg_layer/toggle-all-defs ()
+    (interactive)
+    ;; goto start of file
+    (let* ((open-or-close 'evil-close-fold)
+           (current (point))
+           )
+      (save-excursion
+        (goto-char (point-min))
+        (python-nav-forward-defun)
+        (while (not (equal current (point)))
+          (setq current (point))
+          (if (jg_layer/line-starts-with? "def ")
+              (funcall open-or-close))
+          (python-nav-forward-defun)
+          )
+        )
+      )
+    )
+
+  (defun jg_layer/close-class-defs ()
+    (interactive )
+    (save-excursion
+      (let* ((current (point)))
+        (python-nav-backward-defun)
+        (while (and (not (jg_layer/line-starts-with? "class "))
+                    (not (equal current (point))))
+          (evil-close-fold)
+          (setq current (point))
+          (python-nav-backward-defun)
+          )
+        )
+      )
+    (save-excursion
+      (let* ((current (point)))
+        (python-nav-forward-defun)
+        (while (and (not (jg_layer/line-starts-with? "class "))
+                    (not (equal current (point))))
+          (evil-close-fold)
+          (setq current (point))
+          (python-nav-forward-defun)
+          )
+        )
+      )
+    )
+
+  (defun jg_layer/setup-python-mode ()
+    (evil-define-key 'normal python-mode-map
+      (kbd "z d") 'jg_layer/toggle-all-defs
+      (kbd "z C") 'jg_layer/close-class-defs
+      ))
+
+
+  (add-hook 'python-mode-hook 'jg_layer/setup-python-mode)
+  (add-hook 'python-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
   )
 
 (defun jg_layer/post-init-fci ()
@@ -289,7 +455,7 @@
   (use-package rainbow-mode
     :commands (rainbow-mode)
     :config (progn
-              (spacemacs/set-leader-keys "t C r" 'rainbow-mode)
+              ;; (spacemacs/set-leader-keys "t C r" 'rainbow-mode)
               (add-hook 'prog-mode-hook 'rainbow-mode))
     )
   )
@@ -310,8 +476,6 @@
   (remove-hook 'comint-mode-hook 'spacemacs/disable-hl-line-mode)
   )
 
-
-
 (defun jg_layer/post-init-flycheck ()
   (setq flycheck-display-errors-function nil
         flycheck-help-echo-function nil
@@ -328,3 +492,186 @@
                (seq-map (lambda (e) (flycheck-fix-error-filename e files cwd))
                         errors))))
   )
+
+(defun jg_layer/init-academic-phrases ()
+  (use-package academic-phrases
+    :config
+    (spacemacs/declare-prefix "o i" "Insert Academic")
+    (spacemacs/set-leader-keys "o i p" 'academic-phrases
+      "o i s" 'academic-phrases-by-section))
+
+  )
+
+(defun jg_layer/init-buffer-utils ()
+  (use-package buffer-utils
+    :defer t)
+  )
+
+(defun jg_layer/init-evil-string-inflection ()
+  (use-package evil-string-inflection
+    :config (define-key evil-normal-state-map "g'" 'evil-operator-string-inflection))
+  )
+
+(defun jg_layer/init-free-keys ()
+  (use-package free-keys
+    :config (spacemacs/set-leader-keys "a f k" 'free-keys
+              "a f p" 'free-keys-set-prefix))
+  )
+
+(defun jg_layer/init-fsm ()
+  (use-package fsm
+    :defer t)
+  )
+
+;; (defun jg_layer/init-filesets+ ()
+;;   (use-package filesets+
+;;     :init (filesets-init))
+;;   )
+
+(defun jg_layer/init-dired-quick-sort ()
+  (use-package dired-quick-sort
+    :init (dired-quick-sort-setup)
+    )
+  )
+
+(defun jg_layer/post-init-highlight-parentheses ()
+  (setq hl-paren-colors '("color-16" "color-16" "color-16" "color-16")
+        hl-paren-background-colors '("Springgreen3" "color-26" "color-91" "IndianRed3"))
+  )
+
+(defun jg_layer/post-init-org-ref ()
+  (spacemacs/set-leader-keys "a r" 'jg_layer/bibtex-load-random)
+
+  (with-eval-after-load 'org-ref
+    (defun org-ref-open-bibtex-pdf ()
+      "Open pdf for a bibtex entry, if it exists.
+assumes point is in
+the entry of interest in the bibfile.  but does not check that."
+      (interactive)
+      (save-excursion
+        (bibtex-beginning-of-entry)
+        (let* ((bibtex-expand-strings t)
+               (entry (bibtex-parse-entry t))
+               (key (reftex-get-bib-field "file" entry))
+               (pdf (string-join `("/" ,(car (split-string key ":" 't))))))
+          (message pdf)
+          (if (file-exists-p pdf)
+              (org-open-link-from-string (format "[[file:%s]]" pdf))
+            (ding)))))
+
+    ))
+
+;; (use-package highlight-parentheses
+;;   :init
+;;   (progn
+;;     (when (member dotspacemacs-highlight-delimiters '(all current))
+;;       (add-hook 'prog-mode-hook #'highlight-parentheses-mode))
+;;     (setq hl-paren-delay 0.2)
+;;     (spacemacs/set-leader-keys "tCp" 'highlight-parentheses-mode)
+;;     (setq hl-paren-colors '("color-16" "color-16" "color-16" "color-16")
+;;           hl-paren-background-colors '("Springgreen3" "color-26" "color-91" "IndianRed3")))
+;;   :config
+;;   (spacemacs|hide-lighter highlight-parentheses-mode)
+;;   (set-face-attribute 'hl-paren-face nil :weight 'ultra-bold)))
+
+(defun jg_layer/init-origami ()
+  (use-package origami))
+
+(defun jg_layer/post-init-origami ()
+
+  (require 'jg_layer/origami-python-parser "~/.spacemacs.d/layers/jg_layer/local/origami-parser.el")
+
+  (delq (assoc 'python-mode origami-parser-alist) origami-parser-alist)
+  (add-to-list 'origami-parser-alist '(python-mode . jg_layer/origami-python-parser))
+  )
+
+(defun jg_layer/init-vlf ()
+  (use-package vlf-setup
+    :config (progn
+              (define-key evil-normal-state-map (kbd "] A") 'vlf-next-batch-from-point)
+              (define-key evil-normal-state-map (kbd "] a") 'vlf-next-batch)
+              (define-key evil-normal-state-map (kbd "[ a") 'vlf-prev-batch)
+              (spacemacs/set-leader-keys "a b" 'vlf-set-batch-size))
+    )
+  )
+
+(defun jg_layer/init-evil-quickscope ()
+  (use-package evil-quickscope
+    :config
+    (global-evil-quickscope-always-mode 1)
+    )
+  )
+
+(defun jg_layer/init-plantuml-mode ()
+  (use-package plantuml-mode
+    :defer t
+    )
+  )
+
+(defun jg_layer/init-flycheck-plantuml ()
+  (use-package flycheck-plantuml
+    :defer t
+    :config
+    (flycheck-plantuml-setup)
+    )
+  )
+
+(defun jg_layer/post-init-org-pomodoro ()
+  ;; set pomodoro log variable
+  (defcustom jg_layer/pomodoro-log-file "~/.spacemacs.d/setup_files/pomodoro_log.org"
+    "The Location of the Pomodoro Log File")
+  (defcustom jg_layer/pomodoro-buffer-name "*Pomodoro Log*"
+    "The name of the Pomodoro Log Buffer to record what I did in")
+  (defcustom jg_layer/pomodoro-log-message ";; What did the last Pomodoro session accomplish? C-c to finish\n"
+    "The message to add to the log buffer to spur comments")
+
+
+  ;; add a startup hook for pomodoro to tweet the end time
+  (defun jg_layer/pomodoro-start-hook ()
+    ;; tweet out start and end points
+    ;; use org-pomodoro-end-time
+    (jg_twitter/twitter-tweet-text
+     (format "Emacs Pomodoro Timer Session to end: %s"
+             (format-time-string "%H:%M (%d, %b, %Y)" org-pomodoro-end-time)))
+    )
+
+  (add-hook 'org-pomodoro-started-hook 'jg_layer/pomodoro-start-hook)
+  ;; add a finished hook to ask for a recap of what was done,
+  ;; and store it in a pomodoro log file
+  (defun jg_layer/pomodoro-end-hook ()
+    ;; create the temp buffer
+    (progn
+      (evil-window-new (get-buffer-window (current-buffer))
+                       jg_layer/pomodoro-buffer-name)
+      (set (make-local-variable 'backup-inhibited) t)
+      (auto-save-mode -1)
+      (evil-window-set-height 10)
+      (evil-initialize-local-keymaps)
+      (evil-local-set-key 'normal (kbd "C-c C-c")
+                          'jg_layer/pomodoro-finish)
+      (insert jg_layer/pomodoro-log-message)
+      (insert "Pomodoro Session: ")
+      (redraw-display)
+      )
+    )
+
+  (defun jg_layer/pomodoro-finish ()
+    ;; get the text
+    (interactive)
+    (let* ((text (buffer-substring (length jg_layer/pomodoro-log-message) (point-max)))
+           (time (format-time-string "(%Y/%b/%d) %H:%M" (current-time)))
+           (formatted (format "** %s\n    %s\n" time (string-trim text)))
+           )
+      ;; tweet it
+      (jg_twitter/twitter-tweet-text text nil '(jg_twitter/tweet_sentinel))
+      ;;add it to the pomodoro log file
+      (append-to-file formatted nil (expand-file-name jg_layer/pomodoro-log-file))
+      )
+    )
+
+  (add-hook 'org-pomodoro-finished-hook 'jg_layer/pomodoro-end-hook)
+  (print "done pomodoro")
+  )
+
+(defun jg_layer/init-org-drill ()
+  (use-package org-drill))

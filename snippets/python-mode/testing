@@ -10,23 +10,23 @@ $0
 
 class $2(unittest.TestCase):
 
-      def setUp(self):
-            return 1
+    def setUp(self):
+        return 1
 
-      def tearDown(self):
-            return 1
+    def tearDown(self):
+        return 1
 
-      #----------
-      #use testcase snippets
-      $3
+    #----------
+    #use testcase snippets
+    $3
 
 if __name__ == "__main__":
-      #use python $filename to use this logging setup
-      LOGLEVEL = logging.INFO
-      logFileName = "log.$2"
-      logging.basicConfig(filename=logFileName, level=LOGLEVEL, filemode='w')
-      console = logging.StreamHandler()
-      console.setLevel(logging.WARN)
-      logging.getLogger().addHandler(console)
-      unittest.main()
-      #reminder: user logging.getLogger().setLevel(logging.NOTSET) for log control
+    #use python $filename to use this logging setup
+    LOGLEVEL = logging.INFO
+    logFileName = "log.$2"
+    logging.basicConfig(filename=logFileName, level=LOGLEVEL, filemode='w')
+    console = logging.StreamHandler()
+    console.setLevel(logging.WARN)
+    logging.getLogger().addHandler(console)
+    unittest.main()
+    #reminder: user logging.getLogger().setLevel(logging.NOTSET) for log control

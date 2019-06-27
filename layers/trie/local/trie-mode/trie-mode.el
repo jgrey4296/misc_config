@@ -1,103 +1,23 @@
 ; based On https://www.emacswiki.org/emacs/ModeTutorial
 ;;For allowing code to run when the mode is run:
 (require 'dash)
-(defvar trie-mode-hook nil)
 
 ;;--------------------
 ;; Mode Variables
 ;;--------------------
 
-(defvar trie-defined-depth-count 10)
-(defvar trie-outermost-depth-face-count 3)
-(defvar trie-depth-face-name "trie-depth-")
-(defvar trie-depth-color-list '("color-26" "color-47" "color-99" "color-124"
-                                "color-129" "color 142" "color-164"))
-
+(defcustom trie-mode-hook nil "Basic Hook For Trie Mode")
 ;;--------------------
 ;;Utilities
 ;;--------------------
 
-(defun findFace (name)
-  (seq-find (lambda (x) (string= (face-name x) name)) (face-list)))
-
-
-
-(defun flatten (lst)
-  (letrec ((internal (lambda (x)
-                   (cond
-                     ((null x) nil)
-                     ((atom x) (list x))
-                     (t
-                      (append (funcall internal (car x)) (funcall internal (cdr x))))))))
-    (progn
-      (assert (listp lst))
-      (funcall internal lst))))
-
-(defun make-list-as-big-as-n (lst n)
-  (progn
-    (assert (listp lst))
-    (assert (numberp n))
-    (letrec ((lenlst (length lst)))
-      (if (>= lenlst n)
-          lst
-          (letrec ((repN (+ 1 (/ n lenlst)))
-                   (newLst (flatten (-repeat repN lst))))
-            (assert (>= (length newLst) n))
-            newLst)))))
-
-;;adapted from rainbow-blocks.el
-;;returns a string of a face name
-(defun trie-depth-face (depth)
-  (let ((name (concat trie-depth-face-name
-                      (number-to-string
-                       (or
-                        (and (<= depth trie-defined-depth-count)
-                             depth)
-                        ;;otherwise cycle
-                        (+ 1 trie-outermost-depth-face-count
-                           (mod (- depth trie-defined-depth-count 1)
-                                (- trie-defined-depth-count
-                                   trie-outermost-depth-face-count))))))))
-    name))
-
-
-(defmacro* trie-generate-face (name color)
-  `(defface ,name
-       (list (list t :foreground ,color :background "black"))
-     "A Generated Face"
-     :group 'trie-mode))
-
-;;Create depth faces:
-(defun trie-face-creation ()
-  (letrec (
-           ;;create the range
-           (range (number-sequence 0 (- trie-defined-depth-count 1)))
-           ;;create the names
-           (names (map 'sequence 'trie-depth-face range))
-           ;;Setup the color list at correct list length
-           (colorList (make-list-as-big-as-n trie-depth-color-list
-                                             trie-defined-depth-count))
-           ;;pair with a foreground color
-           (paired (-zip-pair names colorList)))
-    ;;now create the faces
-    (dolist (pair paired)
-      (let ((newFaceName (car pair))
-            (newFaceColor (cdr pair)))
-        (progn
-          ;; (message "Creating Face: %s" newFaceName)
-          ;; (message (format "%S" (macroexpand `(trie-generate-face ,(intern newFaceName)
-          ;;                                                       newFaceColor))))
-          (eval (macroexpand `(trie-generate-face ,(intern newFaceName) newFaceColor))))))))
-
-(trie-face-creation)
-
 ;;--------------------
 ;;definitions
 ;;--------------------
-(setq trie-keywords '("assert" "retract"))
+(defconst trie-keywords '("assert" "retract"))
 
 ;;generate regexp for keywords
-(setq trie-keywords-regexp (regexp-opt trie-keywords 'words))
+(defconst trie-keywords-regexp (regexp-opt trie-keywords 'words))
 
 
 ;;--------------------
@@ -105,7 +25,7 @@
 ;; use them as symbols 'blah in font-lock-keywords
 ;;--------------------
 (defface trie-rulename
-    '((t 
+    '((t
        :foreground "red"
        :background "black"
        :underline t))
@@ -137,8 +57,6 @@
 ;;Specify as a list of (matcher . facename )
 ;;Potential keywords: operators +-*/!.()""$~ < > != == -> @
 ;;--------------------
-
-
 (defconst trie-font-lock-keywords
   (list
    ;;facts
@@ -165,14 +83,12 @@
    )
   "Minimal highlighting expressions for trie mode")
 
-
-
 ;;--------------------
 ;;Indentation
 ;; Potential indent points:
 ;; newline ending with an EXOP, comma,
 ;; reset indent if prior line is empty
-;; 
+;;
 ;;--------------------
 (defun trie-indent-line()
   "Indent current-line as trie code"
@@ -239,8 +155,8 @@
 ;; --------------------
 ;;Entry Function
 ;;--------------------
-(defun trie-mode ()
-  "Major mode for editing tries"
+(define-derived-mode trie-mode fundamental-mode "Trie Mode"
+  "Major Mode for creating rules using tries"
   (interactive)
   (kill-all-local-variables)
   (use-local-map trie-mode-map)
@@ -252,10 +168,9 @@
   (set-syntax-table trie-mode-syntax-table)
   (setq major-mode 'trie-mode)
   (setq mode-name "TRIE")
-  (run-hooks 'trie-mode-hook))
-
+  (run-mode-hooks)
+)
 
 ;;todo later: set no longer needed variables to nil
-
 
 (provide 'trie-mode)

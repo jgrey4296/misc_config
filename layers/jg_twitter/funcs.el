@@ -21,10 +21,11 @@
   (defun jg_twitter/twitter-tweet ()
     """ Actually tweet """
     (interactive)
-    (let* ((text (buffer-string))
-           (cmd (format "status=%s" text))
-           (locals (buffer-local-variables))
-           )
+    (jg_twitter/twitter-tweet-text (buffer-string) (buffer-local-variables) '(jg_twitter/tweet_sentinel))
+    )
+
+  (defun jg_twitter/twitter-tweet-text (text &optional locals sentinels)
+    (let ((cmd (format "status=%s" text)))
       (if (assq 'media_id locals)
           (setq cmd (format "%s&media_ids=%s" cmd (cdr (assq 'media_id locals)))))
 
@@ -32,10 +33,14 @@
                      "twurl" "-d" (format "%s" cmd) "-X" "POST" "-H"
                      jg_twitter/twurl_default_host
                      jg_twitter/twurl_tweet)
-      (set-process-sentinel (get-process jg_twitter/twurl_proc_name)
-                            'jg_twitter/tweet_sentinel)
-      )
-    )
+      (if sentinels
+          (-map (lambda (sent)
+                  (set-process-sentinel
+                   (get-process jg_twitter/twurl_proc_name)
+                   sent))
+                sentinels)
+        )
+    ))
 
   (defun jg_twitter/twitter-add-picture ()
     """ start the process of uploading twitter media_id

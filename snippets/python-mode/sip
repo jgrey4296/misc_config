@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: sip
+# key: sip
+# --
+IPython.embed(simple_prompt=True)

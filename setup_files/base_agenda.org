@@ -102,6 +102,7 @@
   CLOCK: [2019-02-04 Mon 15:17]--[2019-02-04 Mon 15:42] =>  0:25
   CLOCK: [2019-02-04 Mon 14:09]--[2019-02-04 Mon 14:34] =>  0:25
   :END:
+** [[~/github/writing/other_files/main_bibliography.bib][Bibliography]]
 ** TODO [[~/github/writing/paper_notes/index.org::*Summary_Index][Paper Summaries Index]]                                                   :papers:
 ** [[~/github/writing/orgfiles][Org Files]]                                     :directory:main_collection:
 ** [[~/github/languageLearning][Misc Language Repo]]                            :directory:javascript:python:multiple_languages:lisp:supercollider:tidal:learning:notes:prolog:misc:
@@ -621,4 +622,4 @@
 *** TODO outline-toc package
 *** [[https://en.wikipedia.org/wiki/Kanban][Kanban]]
 *** [[http://plantuml.com/sequence-diagram][PlantUML]]
-    
+*** [[https://multiagentcontest.org/publications/][Multi Agent Contest]]

@@ -77,3 +77,5 @@
     Pomodoro Session: adding insertion functionality
 ** (2019/Jun/14) 21:37
     Pomodoro Session: working on interaction
+** (2019/Jun/17) 07:59
+    Pomodoro Session: adapting random file opener helm action to run on bibtex files

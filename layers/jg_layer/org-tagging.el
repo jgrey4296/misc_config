@@ -43,7 +43,6 @@
             (org-forward-heading-same-level 1)
             )))))
 
-
   (defun jg_layer/sort-candidates (ap bp)
     """ Sort candidates by colour then lexicographically """
     (let* ((a (car ap))

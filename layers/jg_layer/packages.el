@@ -21,6 +21,8 @@
     python
     academic-phrases
     dired-quick-sort
+    dired
+    shell-pop
     org
     org-ref
     org-pomodoro
@@ -271,6 +273,7 @@
   )
 
 (defun jg_layer/post-init-org ()
+  (require 'jg_layer/clean-org "~/.spacemacs.d/layers/jg_layer/clean_org.el")
   ;;ORG SETUP
   (setq-default
    org-agenda-files `(,(expand-file-name "~/.spacemacs.d/setup_files/base_agenda.org"))
@@ -323,6 +326,9 @@
     "o l O"   'jg_layer/open_link_externally
     "o l r"   'org-reftex-citation
     "o l n"   'jg_layer/change_link_name
+    ;; Formatting
+    "o f"     'jg_layer/clean-org
+    "o i t"   'jg_layer/insert-heading-trio
     )
   (spacemacs/declare-prefix "o" "Org")
   (spacemacs/declare-prefix "o t" "Tags" "Tags")
@@ -330,7 +336,7 @@
   (spacemacs/declare-prefix "o c" "Calendar")
   (spacemacs/declare-prefix "o s" "Source")
   (spacemacs/declare-prefix "o l" "Links")
-
+  (spacemacs/declare-prefix "o i" "Insert")
 
   ;;TODO add function to insert a bibliography
   ;;plus keybind it
@@ -347,7 +353,7 @@
   (setq-default yas-snippet-dirs `( ,(expand-file-name "~/.spacemacs.d/snippets/")
                                     ,(expand-file-name "~/github/otherLibs/yasnippet-snippets/snippets")
                                     ,(expand-file-name "~/github/otherLibs/yasnippet-snippets")))
-  (spacemacs/declare-prefix "y" "Snippets/Abbrevs")
+  (spacemacs/declare-prefix "y" "Snippets/Abbevs")
   (spacemacs/set-leader-keys
     "y y"    'yas-expand
     "y i"    'yas-insert-snippet
@@ -390,7 +396,10 @@
   (print "Post init python")
   (setq-default python-indent-offset 4
                 python-indent-guess-indent-offset nil
+                python-shell-interpreter-args "-i"
+                python-shell-interpreter "python"
                 )
+
   (defun jg_layer/toggle-all-defs ()
     (interactive)
     ;; goto start of file
@@ -441,7 +450,6 @@
       (kbd "z d") 'jg_layer/toggle-all-defs
       (kbd "z C") 'jg_layer/close-class-defs
       ))
-
 
   (add-hook 'python-mode-hook 'jg_layer/setup-python-mode)
   (add-hook 'python-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
@@ -496,7 +504,6 @@
 (defun jg_layer/init-academic-phrases ()
   (use-package academic-phrases
     :config
-    (spacemacs/declare-prefix "o i" "Insert Academic")
     (spacemacs/set-leader-keys "o i p" 'academic-phrases
       "o i s" 'academic-phrases-by-section))
 
@@ -580,7 +587,6 @@ the entry of interest in the bibfile.  but does not check that."
 (defun jg_layer/post-init-origami ()
 
   (require 'jg_layer/origami-python-parser "~/.spacemacs.d/layers/jg_layer/local/origami-parser.el")
-
   (delq (assoc 'python-mode origami-parser-alist) origami-parser-alist)
   (add-to-list 'origami-parser-alist '(python-mode . jg_layer/origami-python-parser))
   )
@@ -675,3 +681,13 @@ the entry of interest in the bibfile.  but does not check that."
 
 (defun jg_layer/init-org-drill ()
   (use-package org-drill))
+
+(defun jg_layer/post-init-dired ()
+  (spacemacs/set-leader-keys
+    "ad" nil)
+  )
+
+(defun jg_layer/post-init-shell-pop ()
+  (spacemacs/set-leader-keys
+    "as" nil)
+  )

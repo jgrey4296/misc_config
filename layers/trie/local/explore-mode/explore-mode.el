@@ -119,6 +119,7 @@ calculate the bounds that column falls within """
           (message "Drawing Children for: %s" (string-join (reverse (cons key explore/current-path)) "\\"))
           (message "Children: %s" (string-join (hash-table-keys children) ", "))
           (explore/draw-children-safe node layer))
+      ;;todo: else clause that clears lines anyway
       )
     )
     (push key explore/current-path)

@@ -623,3 +623,4 @@
 *** [[https://en.wikipedia.org/wiki/Kanban][Kanban]]
 *** [[http://plantuml.com/sequence-diagram][PlantUML]]
 *** [[https://multiagentcontest.org/publications/][Multi Agent Contest]]
+*** [[http://www.abdoumaliqsimone.com/publications.html][AbouMaliq Simone]]

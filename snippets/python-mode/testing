@@ -3,6 +3,7 @@
 # key: testing
 # group: testing
 # --
+from os.path import splitext, split
 import unittest
 import logging
 from test_context import $1
@@ -21,9 +22,10 @@ class $2(unittest.TestCase):
     $3
 
 if __name__ == "__main__":
-    #use python $filename to use this logging setup
+    #run python $filename to use this logging setup
+    #using python -m unittest $filename won't
     LOGLEVEL = logging.INFO
-    logFileName = "log.$2"
+    logFileName = "log.{}".format(splitext(split(__file__)[1])[0])
     logging.basicConfig(filename=logFileName, level=LOGLEVEL, filemode='w')
     console = logging.StreamHandler()
     console.setLevel(logging.WARN)

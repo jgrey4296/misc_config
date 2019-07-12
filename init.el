@@ -389,6 +389,73 @@ you should place your code here."
  '(helm-mode t)
  '(helm-split-window-inside-p t)
  '(hl-paren-delay 0.2)
+ '(ibuffer-saved-filter-groups
+   (quote
+    (("DiredG+EmacsSpecial"
+      ("Emacs Special"
+       (name . "*")
+       (not used-mode . helm-major-mode))
+      ("DiredG"
+       (used-mode . dired-mode)
+       (not used-mode . helm-major-mode)))
+     ("Home"
+      ("helm-major-mode"
+       (mode . helm-major-mode))
+      ("magit-diff-mode"
+       (mode . magit-diff-mode))
+      ("inferior-python-mode"
+       (mode . inferior-python-mode))
+      ("emacs-lisp-mode"
+       (mode . emacs-lisp-mode))
+      ("org-mode"
+       (mode . org-mode))
+      ("spacemacs-buffer-mode"
+       (mode . spacemacs-buffer-mode))
+      ("python-mode"
+       (mode . python-mode))
+      ("dired-mode"
+       (mode . dired-mode))
+      ("shell-mode"
+       (mode . shell-mode))))))
+ '(ibuffer-saved-filters
+   (quote
+    (("python"
+      (used-mode . python-mode))
+     ("dired"
+      (used-mode . dired-mode))
+     ("programming"
+      (or
+       (derived-mode . prog-mode)
+       (mode . ess-mode)
+       (mode . compilation-mode)))
+     ("text document"
+      (and
+       (derived-mode . text-mode)
+       (not
+        (starred-name))))
+     ("TeX"
+      (or
+       (derived-mode . tex-mode)
+       (mode . latex-mode)
+       (mode . context-mode)
+       (mode . ams-tex-mode)
+       (mode . bibtex-mode)))
+     ("web"
+      (or
+       (derived-mode . sgml-mode)
+       (derived-mode . css-mode)
+       (mode . javascript-mode)
+       (mode . js2-mode)
+       (mode . scss-mode)
+       (derived-mode . haml-mode)
+       (mode . sass-mode)))
+     ("gnus"
+      (or
+       (mode . message-mode)
+       (mode . mail-mode)
+       (mode . gnus-group-mode)
+       (mode . gnus-summary-mode)
+       (mode . gnus-article-mode))))))
  '(mode-line-in-non-selected-windows t)
  '(org-agenda-files (quote ("~/.spacemacs.d/setup_files/base_agenda.org")))
  '(package-selected-packages

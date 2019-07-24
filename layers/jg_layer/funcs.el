@@ -410,3 +410,25 @@
     (helm :sources jg_layer/example_helm-source
           :input "./"))
   )
+
+(when (configuration-layer/package-usedp 'dired)
+
+  (defun jg_layer/dired-auto-move ()
+  """ Function to move up a directory, to the next line, and into that """
+  (interactive)
+  (dired-up-directory)
+  (evil-next-line)
+  (dired-find-file)
+  (spacemacs/open-file-or-directory-in-external-app nil)
+  (let* ((current-dir (dired-current-directory))
+        (lst (dired-split "/" current-dir))
+        (search-str (apply 'f-join (-take-last 3 lst))))
+    (evil-window-right 1)
+    (goto-char (point-min))
+    (message "Searching for %s" search-str)
+    (search-forward search-str)
+    (evil-scroll-line-to-center (line-number-at-pos (point)))
+    (search-forward "tags ={")
+    )
+  )
+)

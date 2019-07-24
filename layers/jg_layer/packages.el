@@ -684,7 +684,10 @@ the entry of interest in the bibfile.  but does not check that."
 
 (defun jg_layer/post-init-dired ()
   (spacemacs/set-leader-keys
-    "ad" nil)
+    "ad" nil
+    )
+  (evil-define-key 'normal dired-mode-map (kbd "M-n") 'jg_layer/dired-auto-move)
+
   )
 
 (defun jg_layer/post-init-shell-pop ()

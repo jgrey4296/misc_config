@@ -79,3 +79,9 @@
     Pomodoro Session: working on interaction
 ** (2019/Jun/17) 07:59
     Pomodoro Session: adapting random file opener helm action to run on bibtex files
+** (2019/Jul/29) 07:19
+    Pomodoro Session: cleaning up bibtex cleaning in prep to split
+** (2019/Jul/29) 07:50
+    Pomodoro Session: bibtex cleaner works better, now adding splitting options
+** (2019/Jul/29) 08:19
+    cleaning up bibtex file before splitting

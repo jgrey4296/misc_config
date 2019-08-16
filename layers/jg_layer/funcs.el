@@ -240,6 +240,13 @@
   (let ((inhibit-read-only t)) (erase-buffer))
   )
 
+(defun jg_layer/caseless_sort_buffer ()
+  (interactive)
+  (let ((sort-fold-case 't))
+    (sort-lines nil (point-min) (point-max))
+    )
+  )
+
 (defun jg_layer/goto-org-agenda-file ()
   (interactive)
   (let ((agenda (car org-agenda-files)))
@@ -428,7 +435,7 @@
     (message "Searching for %s" search-str)
     (search-forward search-str)
     (evil-scroll-line-to-center (line-number-at-pos (point)))
-    (search-forward "tags ={")
+    (search-forward "tags = {")
     )
   )
 )

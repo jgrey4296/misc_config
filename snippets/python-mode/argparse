@@ -1,12 +1,13 @@
 # -*- mode: snippet -*-
 # name: argparse
 # key: argparse
-# group: arguments 
+# group: arguments
 # --
 import argparse
 
 #see https://docs.python.org/3/howto/argparse.html
-parser = argparse.ArgumentParser("$1")
+parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter,
+                                 epilog = "\n".join(["$1"]))
 parser.add_argument('--aBool', action="store_true")
 
 args = parser.parse_args()

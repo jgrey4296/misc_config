@@ -351,3 +351,15 @@
    :ARCHIVE_CATEGORY: base_agenda
    :ARCHIVE_TODO: DONE
    :END:
+
+** DONE collate lists of sources
+   CLOSED: [2019-08-16 Fri 02:59]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2019-08-16 Fri 02:59
+   :ARCHIVE_FILE: ~/.spacemacs.d/setup_files/base_agenda.org
+   :ARCHIVE_OLPATH: Base Agenda/Annotations / Examples
+   :ARCHIVE_CATEGORY: base_agenda
+   :ARCHIVE_TODO: DONE
+   :END:
+   to prepare for annotation,
+   to give components of expressive generators

@@ -1,6 +1,9 @@
 * Base Agenda
   #+BIBLIOGRAPHY: ~/github/writing/other_files/main_bibliography plain
   :LOGBOOK:
+  CLOCK: [2019-07-29 Mon 07:54]--[2019-07-29 Mon 08:19] =>  0:25
+  CLOCK: [2019-07-29 Mon 07:24]--[2019-07-29 Mon 07:49] =>  0:25
+  CLOCK: [2019-07-29 Mon 06:54]--[2019-07-29 Mon 07:19] =>  0:25
   CLOCK: [2019-06-17 Mon 07:33]--[2019-06-17 Mon 07:58] =>  0:25
   CLOCK: [2019-06-14 Fri 21:11]--[2019-06-14 Fri 21:36] =>  0:25
   CLOCK: [2019-06-14 Fri 20:31]--[2019-06-14 Fri 20:56] =>  0:25
@@ -102,9 +105,7 @@
   CLOCK: [2019-02-04 Mon 15:17]--[2019-02-04 Mon 15:42] =>  0:25
   CLOCK: [2019-02-04 Mon 14:09]--[2019-02-04 Mon 14:34] =>  0:25
   :END:
-** [[~/github/writing/other_files/main_bibliography.bib][Bibliography]]
-** TODO [[~/github/writing/paper_notes/index.org::*Summary_Index][Paper Summaries Index]]                                                   :papers:
-** [[~/github/writing/orgfiles][Org Files]]                                     :directory:main_collection:
+** [[~/github/writing/other_files/years/][Bibliography]]
 ** [[~/github/languageLearning][Misc Language Repo]]                            :directory:javascript:python:multiple_languages:lisp:supercollider:tidal:learning:notes:prolog:misc:
 ** [[file:~/github/writing/orgfiles/machine_learning.org::*Machine Learning Notes][Machine Learning Notes]]
 ** [[file:~/github/writing/orgfiles/nlp.org::*Natural Language Processing:][Natural Language Processing:]]
@@ -214,13 +215,13 @@
 ****** TODO implement meta?
        up and down shifts, possibly links with layers? look at reflective papers again
 ****** implement other form of rule change?
-*** TODO Prolog                                                                 :todo:programming:institutions:ASP:tutorial:
+*** Prolog                                                                      :todo:programming:institutions:ASP:tutorial:
 **** continue with prolog tutorial
 **** return to ASP
 **** look at Bath Institutional ASP
-*** TODO Unity                                                                  :needs_assets:game:vault:programming:unity:
+*** Unity                                                                       :needs_assets:game:vault:programming:unity:
 **** proof of concept imports in vault
-*** TODO Supercollider / Tidal                                                  :needs_assets:sound:supercollider:tidal:
+*** Supercollider / Tidal                                                       :needs_assets:sound:supercollider:tidal:
 **** proof of concept soundscape controllable from python
 **** look at acropolis API to get samples/assets
 **** Action languages
@@ -229,7 +230,7 @@
 ***** TODO [[https://bbcarchdev.github.io/inside-acropolis/#consumers][Acropolis API]]
       [[http://bbcsfx.acropolis.org.uk/index][BBC Sound FX Library]]
       [[http://bbcsfx.acropolis.org.uk/][BBC sound effects frontend]]
-*** TODO Haskell                                                                :monads:theory:programming:haskell:
+*** Haskell                                                                     :monads:theory:programming:haskell:
 **** look at implementation of monad transformers
 *** To Clean
 **** [[~/github/happiton][Happiton]]                                            :python:directory:hofstadter:
@@ -241,7 +242,16 @@
 **** Prisoners dilemma
 **** NetLogo
 **** Unity
-** TODO Datasets
+*** Algorithms
+**** [[file:~/github/otherLibs/code-for-blog/2018/type-inference][Python Type Inference]]                                                      :directory:hindley_milner:type_inference:python:
+**** [[file:~/github/otherLibs/code-for-blog/2018/markov-simple][Python Markov chain]]                                                        :directory:markov:python:
+**** [[file:~/github/otherLibs/code-for-blog/2018/unif][Python Unification]]                                                         :directory:python:unification:
+**** [[file:~/github/otherLibs/CommonLispCode/micro-talespin.lisp][Micro-Talespin]]                                                             :directory:architecture:narrative:talespin:lisp:
+**** [[file:~/github/otherLibs/BPS][Building Problem Solvers]]                                                   :directory:rules:lisp:
+**** [[file:~/github/otherLibs/wavefunction-collapse][Wave function collapse python]]                                              :directory:algorithm:wave_function_collapse:python:
+**** [[https://robertheaton.com/2018/12/17/wavefunction-collapse-algorithm/][Wave function collapse]]                                                     :wave_function_collapse:tutorial:to_implement:algorithm:
+**** [[file:~/github/otherLibs/cathoristic-logic][Cathoristic Logic]]                                                          :directory:haskell:logic:praxis:exclusion_logic:
+** Datasets
 *** [[file:/Users/jgrey/github/writing/other_files/main_bookmarks.html][Bookmarks]]                                                                   :web:html:bookmarks:directory:
      treat these as codings?
 *** TODO Bookmark and saved twitter parsing
@@ -370,22 +380,9 @@
 **** [[file:~/Mega/Datasets/compressed/diplomacy_data_1.0.zip][Diplomacy]]
 **** [[file:~/Mega/Datasets/compressed/plans/linuxCorpus-1.0.zip][Linux Dataset]]
 *** [[https://docs.google.com/spreadsheets/d/1JcwsKMJtd_wYe4oeTtuyM8fm1eqFQw9A9VGDjnCKFiM/edit#gid=69023141][Legislative Rules dataset]]                                                   :rules:
-** TODO Annotations / Examples
+** Annotations / Examples
 *** TODO [#A] Snatch delegation                                                 :delegation:film:
     to lead to delegation in iEl
-*** TODO collate lists of sources
-    to prepare for annotation,
-    to give components of expressive generators
-** -----------------------------------------------------------------------------
-** Writing
-*** TODO [[file:~/github/writing/orgfiles/dissertation.org::*Dissertation][Dissertation]]                                                           :dissertation:writing:important:
-*** [[~/github/jgrey4296.github.io][jgrey4296.github.io]]                                                         :writing:important:todo:target:blog:web:
-**** [[~/github/jsons][jsons representations]]                                                      :json:writing:
-**** [[~/github/writing][misc writing]]                                                               :writing:generic:
-*** TODO [[file:~/github/writing/orgfiles/taxonomies.org::*Taxonomies][Taxonomies]]
-**** DONE TAG them
-     CLOSED: [2019-03-08 Fri 11:13]
-** -----------------------------------------------------------------------------
 ** Emacs 
 *** [[~/github/jg_emacs_files][Emacs files]]                                    :directory:lisp:setup:emacs:
 *** [[~/github/jg_shell_files][Bash Scripts]]                                   :bash:setup:
@@ -532,6 +529,7 @@
       so that they are not reinitialized if they already have a value.
 
 **** [[https://orgmode.org/worg/org-contrib/org-drill.html][Org-Drill]]                                                                  :spaced_repetition:memory:
+**** [[https://bibtexparser.readthedocs.io/en/master/tutorial.html][bibtex parser]]                                                              :python:bibtex:
 *** Expansions
 **** TODO buffer groups / registers
      be able to add a buffer / marked buffers to a register,
@@ -565,63 +563,38 @@
 **** TODO XML / Bookmarks load
 **** TODO custom hide overlays
 
+**** TODO outline-toc package
+** -----------------------------------------------------------------------------
+** Writing
+*** [[file:~/github/writing/orgfiles/dissertation.org::*Dissertation][Dissertation]]                                                                :dissertation:writing:important:
+*** [[~/github/jgrey4296.github.io][jgrey4296.github.io]]                                                         :writing:important:todo:target:blog:web:
+**** [[~/github/jsons][jsons representations]]                                                      :json:writing:
+**** [[~/github/writing][misc writing]]                                                               :writing:generic:
+*** [[file:~/github/writing/orgfiles/taxonomies.org::*Taxonomies][Taxonomies]]
+*** [[file:~/github/writing/orgfiles/DSLs.org::*DSLs][DSL Review]]
+*** [[~/github/writing/paper_notes/index.org::*Summary_Index][Paper Summaries Index]]                                                       :papers:
+*** [[~/github/writing/orgfiles][Org Files]]                                                                   :directory:main_collection:
+** -----------------------------------------------------------------------------
+** People
+*** [[http://www.abdoumaliqsimone.com/publications.html][AbouMaliq Simone]]
+*** [[http://worrydream.com/][Bret Victor]]
+**** [[http://worrydream.com/ABriefRantOnTheFutureOfInteractionDesign/][A Brief Rant on the Future of Interaction Design]]                           :design:capability:tools:hands:
+**** TODO [[https://explorabl.es/all/][Explorables]]
+*** [[http://www.lsi.upc.edu/~jvazquez/publications.php][J. Vázquez Salceda]]                                                          :look_into:research:papers:
+*** [[https://scholar.google.com/citations?user=iR-SIW8AAAAJ&hl=en&oi=sra][Jodie Sabater-Mir]]                                                           :reputation:look_into:research:
+** -----------------------------------------------------------------------------
 ** Misc
 *** TODO Prototype some Mechanical Turk Tasks                                   :survey:online:price:amazon:
-*** TODO [[http://bloom-lang.net/features/][bloom]]                                                                  :programming:language:
-**** CALM: Consistency as Logical Monotonicity
-
-**** "Gray's Twelfth Challenge"
-     DWIM : Do What I Mean
-     Spec Language that:
-     1) Is Easy to express designs
-     2) Is Compilable
-     3) Can describe all applications
-
-     System should 'reason' about application:
-     Ask about exception cases
-     Ask about incomplete specification
-     Not be onerous
-
-**** Borges "A New Refutation of Time"
-     "The Denial of time involves two negations: The negation of the succession
-     of the terms of a series, negation of the synchronism of the terms in two
-     different series"
-
-**** Disorderly programming and datastructures
-
 *** TODO Structural phenomenology?                                              :look_into:
 *** TODO Get Castelfranchi: Behavioral Implicit Communication                   :look_into:
-*** [[https://www.rockpapershotgun.com/2019/03/21/french-revolutionary-judge-sim-we-the-revolution-is-out-now/][We. The Revolution]]                                                          :judge:court:look_into:game:rps:
-*** [[https://www.rockpapershotgun.com/2019/03/23/make-friends-and-steal-their-mail-in-willowbrooke-post/][Willbrooke post]]                                                             :look_into:papers_please:rps:game:
+*** TODO Vignettes
+*** TODO [[https://ncase.me/remember/][Spaced Repetition]]
+*** TODO [[/Users/jgrey/Mega/Images/misc_research_images/alien_behave.png][Alien Behaviour Tree]]
 *** [[http://ifaamas.org/Proceedings/aamas2018/forms/contents.htm][AAMAS Proceedings]]                                                           :papers:MAS:look_into:conference:
 *** [[http://defeasible.org/][Defeasible Logic]]                                                            :logic:
-*** [[https://bibtexparser.readthedocs.io/en/master/tutorial.html][bibtex parser]]                                                               :python:bibtex:
-*** [[https://scholar.google.com/citations?user=iR-SIW8AAAAJ&hl=en&oi=sra][Jodie Sabater-Mir]]                                                           :reputation:look_into:research:
-*** [[http://www.lsi.upc.edu/~jvazquez/publications.php][J. Vázquez Salceda]]                                                          :look_into:research:papers:
 *** [[file:~/github/otherLibs/Bidirectional][Bidirectional Type Checking Haskell]]                                        :directory:haskell:type_inference:
-*** [[file:~/github/otherLibs/code-for-blog/2018/type-inference][Python Type Inference]]                                                       :directory:hindley_milner:type_inference:python:
-*** [[file:~/github/otherLibs/code-for-blog/2018/markov-simple][Python Markov chain]]                                                         :directory:markov:python:
-*** [[file:~/github/otherLibs/code-for-blog/2018/unif][Python Unification]]                                                          :directory:python:unification:
-*** [[file:~/github/otherLibs/CommonLispCode/micro-talespin.lisp][Micro-Talespin]]                                                              :directory:architecture:narrative:talespin:lisp:
-*** [[file:~/github/otherLibs/BPS][Building Problem Solvers]]                                                    :directory:rules:lisp:
-*** [[file:~/github/otherLibs/Nomyx][Nomyx]]                                                                       :directory:meta:hofstadter:rules:haskell:
-**** [[http://nomyx.net/][Nomyx Game Site]]
-*** [[file:~/github/otherLibs/wavefunction-collapse][Wave function collapse python]]                                               :directory:algorithm:wave_function_collapse:python:
-*** [[https://robertheaton.com/2018/12/17/wavefunction-collapse-algorithm/][Wave function collapse]]                                                      :wave_function_collapse:tutorial:to_implement:algorithm:
-*** [[file:~/github/otherLibs/cathoristic-logic][Cathoristic Logic]]                                                           :directory:haskell:logic:praxis:exclusion_logic:
-*** TODO Vignettes
-*** TODO [[https://explorabl.es/all/][Explorables]]
-*** TODO [[http://worrydream.com/][Bret Victor]]
-**** [[http://worrydream.com/ABriefRantOnTheFutureOfInteractionDesign/][A Brief Rant on the Future of Interaction Design]]                           :design:capability:tools:hands:
-*** TODO [[https://ncase.me/remember/][Spaced Repetition]]
 *** [[http://www.parliamentbook.com/spaces][Parliament Book]]
 *** [[https://www.soundsurvey.org.uk/index.php/history/street_cries/brit1/626/3387][Sound Survey]]
-*** [[https://www.filfre.net/2019/03/darklands/][Darklands]]
-*** [[http://www.roguebasin.com/index.php?title%3DMain_Page][Roguelike wiki]]
-*** TODO [[https://en.wikipedia.org/wiki/List_of_human_positions][Wiki Body Positions]]
-*** TODO outline-toc package
 *** [[https://en.wikipedia.org/wiki/Kanban][Kanban]]
 *** [[http://plantuml.com/sequence-diagram][PlantUML]]
 *** [[https://multiagentcontest.org/publications/][Multi Agent Contest]]
-*** [[http://www.abdoumaliqsimone.com/publications.html][AbouMaliq Simone]]
-    

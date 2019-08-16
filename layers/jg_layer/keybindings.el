@@ -37,7 +37,7 @@
   ;; Access to old school emacs help:
   "h h" 'help
   ;; ac trigger
-  "a a" 'jg_layer/ac-trigger
+  ;;"a a" 'jg_layer/ac-trigger
   ;; goto org agenda file
   "b a" 'jg_layer/goto-org-agenda-file
 )

@@ -24,6 +24,3 @@
 (set-language-environment "UTF-8")
 (prefer-coding-system 'utf-8)
 
-(eval-after-load 'dired-mode
-  (add-hook 'dired-mode-hook 'dired-omit-mode)
-  )

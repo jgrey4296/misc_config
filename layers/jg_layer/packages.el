@@ -124,7 +124,6 @@
   ;; definition of said commands, adapted from evil-maps
 
   (evil-ex-define-cmd "cl" 'spacemacs/comment-or-uncomment-lines)
-  (evil-ex-define-cmd "t[ag]" 'jg_layer/org-tagging-helm-start)
   (evil-ex-define-cmd "to" 'jg_layer/tag-occurrences)
   (evil-ex-define-cmd "toa" 'jg_layer/tag-occurrences-in-open-buffers)
   (evil-ex-define-cmd "mw" 'spacemacs/window-manipulation-transient-state/body)
@@ -296,12 +295,6 @@
   ;; add in keybinding to call tag-occurances
   (spacemacs/set-leader-keys
     "o d"     'org-todo-list
-    "o g"     'helm-org-in-buffer-headings
-    ;; TAGS
-    "o t o"   'jg_layer/tag-occurances
-    "o t a o" 'jg_layer/tag-occurences-in-open-buffers
-    "o t v"   'org-tags-view
-    "o t s"   'org-set-tags
     ;; AGENDA
     "o a a"   'org-agenda-file-to-front
     "o a r"   'org-remove-file
@@ -331,7 +324,6 @@
     "o i t"   'jg_layer/insert-heading-trio
     )
   (spacemacs/declare-prefix "o" "Org")
-  (spacemacs/declare-prefix "o t" "Tags" "Tags")
   (spacemacs/declare-prefix "o a" "Agenda")
   (spacemacs/declare-prefix "o c" "Calendar")
   (spacemacs/declare-prefix "o s" "Source")
@@ -623,6 +615,7 @@ the entry of interest in the bibfile.  but does not check that."
   )
 
 (defun jg_layer/post-init-org-pomodoro ()
+  (print "Setting up pomodoro")
   ;; set pomodoro log variable
   (defcustom jg_layer/pomodoro-log-file "~/.spacemacs.d/setup_files/pomodoro_log.org"
     "The Location of the Pomodoro Log File")
@@ -687,10 +680,11 @@ the entry of interest in the bibfile.  but does not check that."
     "ad" nil
     )
   (evil-define-key 'normal dired-mode-map (kbd "M-n") 'jg_layer/dired-auto-move)
-
+  (add-hook 'dired-mode-hook 'dired-omit-mode)
   )
 
 (defun jg_layer/post-init-shell-pop ()
   (spacemacs/set-leader-keys
     "as" nil)
   )
+

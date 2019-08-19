@@ -6,7 +6,8 @@
   )
 
 (defun jg_twitter/init-tramp ()
-  (use-package tramp)
+  (use-package tramp
+    :defer t)
   )
 
 (defun jg_twitter/post-init-evil ()

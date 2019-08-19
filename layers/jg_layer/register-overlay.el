@@ -6,18 +6,13 @@
   ;; make buffer-local overlays
 
   )
-
-
-
 (defun jg_layer/register-overlay-add ()
 
 
   )
-
 (defun jg_layr/register-overlay-clear ()
 
   )
-
 (defun jg_layer/register-overlay-toggle ()
 
 

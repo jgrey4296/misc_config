@@ -46,9 +46,11 @@
     """ start the process of uploading twitter media_id
         to the local-variables of the current buffer """
     (interactive)
-    (helm :sources jg_twitter/twitter-image-helm-source
-          :input "~/Desktop/"))
-
+    (if (not (boundp 'jg_twitter/twitter-image-helm-source))
+        (message "Use Helm First")
+      (helm :sources jg_twitter/twitter-image-helm-source
+            :input "~/Desktop/"))
+  )
 
   (defun jg_twitter/twitter-upload-image (candidate)
     """ Initialise the upload """
@@ -113,3 +115,4 @@
     (redraw-display)
     )
   )
+

@@ -107,8 +107,6 @@
   :END:
 ** [[~/github/writing/other_files/years/][Bibliography]]
 ** [[~/github/languageLearning][Misc Language Repo]]                            :directory:javascript:python:multiple_languages:lisp:supercollider:tidal:learning:notes:prolog:misc:
-** [[file:~/github/writing/orgfiles/machine_learning.org::*Machine Learning Notes][Machine Learning Notes]]
-** [[file:~/github/writing/orgfiles/nlp.org::*Natural Language Processing:][Natural Language Processing:]]
 ** [[~/.spacemacs.d/setup_files/pomodoro_log.org][Pomodoro Log]]
 ** -----------------------------------------------------------------------------
 ** Programming
@@ -251,6 +249,8 @@
 **** [[file:~/github/otherLibs/wavefunction-collapse][Wave function collapse python]]                                              :directory:algorithm:wave_function_collapse:python:
 **** [[https://robertheaton.com/2018/12/17/wavefunction-collapse-algorithm/][Wave function collapse]]                                                     :wave_function_collapse:tutorial:to_implement:algorithm:
 **** [[file:~/github/otherLibs/cathoristic-logic][Cathoristic Logic]]                                                          :directory:haskell:logic:praxis:exclusion_logic:
+**** [[file:~/github/writing/orgfiles/machine_learning.org::*Machine Learning Notes][Machine Learning Notes]]
+**** [[file:~/github/writing/orgfiles/nlp.org::*Natural Language Processing:][Natural Language Processing:]]
 ** Datasets
 *** [[file:/Users/jgrey/github/writing/other_files/main_bookmarks.html][Bookmarks]]                                                                   :web:html:bookmarks:directory:
      treat these as codings?
@@ -387,6 +387,7 @@
 *** [[~/github/jg_emacs_files][Emacs files]]                                    :directory:lisp:setup:emacs:
 *** [[~/github/jg_shell_files][Bash Scripts]]                                   :bash:setup:
 *** Reference
+**** [[https://bibtexparser.readthedocs.io/en/master/tutorial.html][bibtex parser]]                                                              :python:bibtex:
 **** [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Buffer-Modification.html#Buffer-Modification][Buffer Modification]]
 **** [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Change-Hooks.html#Change-Hooks][Change Hooks]]
 **** [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Changing-Properties.html#Changing-Properties][Changing Text Properties]]
@@ -401,30 +402,6 @@
      Reminder: font-lock will override manually set text
      properties, so wrap any calls with a let of
      inhibit-modification-hooks t to override
-
-**** Mode definitions
-     #+begin_src elisp results output/value
-       (define-derived-mode child fundamental-mode "A Mode"
-       ;; Stuff
-
-         )
-     #+end_src
-
-**** [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Overlays.html][Overlays]]
-**** [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Special-Properties.html#Special-Properties][Properties]]
-**** [[https://www.gnu.org/software/emacs/manual/html_mono/semantic.html][Semantic]]
-**** [[https://stackoverflow.com/questions/1249497/command-to-center-screen-horizontally-around-cursor-on-emacs][Stackoverflow center column]]
-     #+begin_src elisp results output/value
-       (defun my-horizontal-recenter ()
-         "make the point horizontally centered in the window"
-         (interactive)
-         (let ((mid (/ (window-width) 2))
-               (line-len (save-excursion (end-of-line) (current-column)))
-               (cur (current-column)))
-           (if (< mid cur)
-               (set-window-hscroll (selected-window)
-                                   (- cur mid)))))
-     #+end_src
 
 **** [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Major-Mode-Conventions.html#Major-Mode-Conventions][Major Mode conventions]]
 ***** Define a major mode command whose name ends in ‘-mode’.                   :naming:
@@ -528,8 +505,31 @@
       For instance, use ‘defvar’ or ‘defcustom’ to set mode-related variables,
       so that they are not reinitialized if they already have a value.
 
+**** Mode definitions
+     #+begin_src elisp results output/value
+       (define-derived-mode child fundamental-mode "A Mode"
+       ;; Stuff
+
+         )
+     #+end_src
+
 **** [[https://orgmode.org/worg/org-contrib/org-drill.html][Org-Drill]]                                                                  :spaced_repetition:memory:
-**** [[https://bibtexparser.readthedocs.io/en/master/tutorial.html][bibtex parser]]                                                              :python:bibtex:
+**** [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Overlays.html][Overlays]]
+**** [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Special-Properties.html#Special-Properties][Properties]]
+**** [[https://www.gnu.org/software/emacs/manual/html_mono/semantic.html][Semantic]]
+**** [[https://stackoverflow.com/questions/1249497/command-to-center-screen-horizontally-around-cursor-on-emacs][Stackoverflow center column]]
+     #+begin_src elisp results output/value
+       (defun my-horizontal-recenter ()
+         "make the point horizontally centered in the window"
+         (interactive)
+         (let ((mid (/ (window-width) 2))
+               (line-len (save-excursion (end-of-line) (current-column)))
+               (cur (current-column)))
+           (if (< mid cur)
+               (set-window-hscroll (selected-window)
+                                   (- cur mid)))))
+     #+end_src
+
 *** Expansions
 **** TODO buffer groups / registers
      be able to add a buffer / marked buffers to a register,
@@ -548,6 +548,8 @@
 ***** Make Register persistent
 ***** Set Operations on Registers
 
+**** TODO custom hide overlays
+
 **** TODO filter char inserting list
 **** TODO Have a recursive choice helm find files action
 **** TODO Org SubTree Transient State navigation
@@ -556,24 +558,22 @@
      Transient state to create, add (column/row), and navigate tables
 **** TODO org-agenda keymap modifications
      swap priority mods into < and >
+**** TODO outline-toc package
 **** TODO tag and colourize words minor mode to run anywhere
      be able to tag and colourize things dynamically, based on what you need at
      any given moment
      then be able to tag into groups?
 **** TODO XML / Bookmarks load
-**** TODO custom hide overlays
-
-**** TODO outline-toc package
 ** -----------------------------------------------------------------------------
 ** Writing
 *** [[file:~/github/writing/orgfiles/dissertation.org::*Dissertation][Dissertation]]                                                                :dissertation:writing:important:
+*** [[file:~/github/writing/orgfiles/DSLs.org::*DSLs][DSL Review]]
 *** [[~/github/jgrey4296.github.io][jgrey4296.github.io]]                                                         :writing:important:todo:target:blog:web:
 **** [[~/github/jsons][jsons representations]]                                                      :json:writing:
 **** [[~/github/writing][misc writing]]                                                               :writing:generic:
-*** [[file:~/github/writing/orgfiles/taxonomies.org::*Taxonomies][Taxonomies]]
-*** [[file:~/github/writing/orgfiles/DSLs.org::*DSLs][DSL Review]]
-*** [[~/github/writing/paper_notes/index.org::*Summary_Index][Paper Summaries Index]]                                                       :papers:
 *** [[~/github/writing/orgfiles][Org Files]]                                                                   :directory:main_collection:
+*** [[file:~/github/writing/paper_notes/index.org::*Summary%20Index][Summary Index]]                                                               :papers:
+*** [[file:~/github/writing/orgfiles/taxonomies.org::*Taxonomies][Taxonomies]]
 ** -----------------------------------------------------------------------------
 ** People
 *** [[http://www.abdoumaliqsimone.com/publications.html][AbouMaliq Simone]]

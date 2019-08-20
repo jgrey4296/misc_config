@@ -20,8 +20,8 @@
 
   (spacemacs/set-leader-keys
     ;; TAGS
-    "o t o"   'org-tagging/tag-occurances
-    "o t a o" 'org-tagging/tag-occurences-in-open-buffers
+    "o t o"   'org-tagging/tag-occurrences
+    "o t a o" 'org-tagging/tag-occurrences-in-open-buffers
     "o t v"   'org-tags-view
     "o t s"   'org-set-tags
     )

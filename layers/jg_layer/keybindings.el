@@ -40,4 +40,6 @@
   ;;"a a" 'jg_layer/ac-trigger
   ;; goto org agenda file
   "b a" 'jg_layer/goto-org-agenda-file
+  ;; Char Insertion
+  "x C" 'insert-char
 )

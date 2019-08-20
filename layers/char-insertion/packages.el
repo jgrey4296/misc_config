@@ -10,7 +10,8 @@
   ;; (charset-dimension 'unicode-bmp)
   ;; ((lambda (x) (get-char-code-property (decode-char 'unicode-bmp (string-to-number (format "%d" x))) 'name)) #xFFD5 )
 
-  (spacemacs/set-leader-keys "x C" 'jg_layer/char-inserting-helm-start)
+  (spacemacs/set-leader-keys "x C" 'insert-char)
+    ;;'jg_layer/char-inserting-helm-start)
   )
 
 

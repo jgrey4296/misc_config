@@ -35,7 +35,6 @@
                                       trie
                                       osx
                                       semantic
-				                              char-insertion
 				                              helm-org
 				                              org-tagging
 

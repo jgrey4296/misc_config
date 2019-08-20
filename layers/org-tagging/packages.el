@@ -30,4 +30,6 @@
 
 (defun org-tagging/post-init-evil ()
   (evil-ex-define-cmd "t[ag]" 'org-tagging/org-tagging-helm-start)
+  (evil-ex-define-cmd "to" 'org-tagging/tag-occurrences)
+  (evil-ex-define-cmd "toa" 'org-tagging/tag-occurrences-in-open-buffers)
   )

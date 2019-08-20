@@ -20,6 +20,7 @@
                (org-set-tags current-tags)
                (org-forward-heading-same-level 1)
                )))))
+
 (defun org-tagging/org-set-new-tag (x)
   (save-excursion
     (goto-char (car org-tagging/org-tagging-region))
@@ -33,6 +34,7 @@
           (org-set-tags current-tags)
           (org-forward-heading-same-level 1)
           )))))
+
 (defun org-tagging/sort-candidates (ap bp)
   """ Sort candidates by colour then lexicographically """
   (let* ((a (car ap))
@@ -45,6 +47,7 @@
      ((and aprop (not bprop)) t)
      ((and (not aprop) (not bprop) (> (funcall lookup ap) (funcall lookup bp))))
      )))
+
 (defun org-tagging/org-tagging-candidates ()
   """ Given Candidates, colour them if they are assigned, then sort them  """
   (let* ((cand-counts (org-tagging/org-count-buffer-tags)))
@@ -72,6 +75,7 @@
       '()
       ))
   )
+
 (defun org-tagging/make-bar-chart (data maxTagLength maxTagAmnt)
     (let* ((maxTagStrLen (length (number-to-string maxTagAmnt)))
            (maxTagLength-bounded (min 40 maxTagLength))
@@ -100,6 +104,7 @@
                                  ,(make-string bar-len ?=)
                                  ;; "\n"
                                  )))) data)))
+
 (defun org-tagging/org-count-buffer-tags ()
     (save-excursion ;;store where you are in the current
       (goto-char (point-min))
@@ -121,6 +126,7 @@
         )
       )
     )
+
 (defun org-tagging/tag-occurrences-in-open-buffers()
     """ retrieve all tags in all open buffers, print to a temporary buffer """
     (interactive)
@@ -152,6 +158,7 @@
                                )
       )
     )
+
 (defun org-tagging/tag-occurrences ()
     """ Count all occurrences of all tags and bar chart them """
     (interactive)

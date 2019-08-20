@@ -124,8 +124,6 @@
   ;; definition of said commands, adapted from evil-maps
 
   (evil-ex-define-cmd "cl" 'spacemacs/comment-or-uncomment-lines)
-  (evil-ex-define-cmd "to" 'jg_layer/tag-occurrences)
-  (evil-ex-define-cmd "toa" 'jg_layer/tag-occurrences-in-open-buffers)
   (evil-ex-define-cmd "mw" 'spacemacs/window-manipulation-transient-state/body)
   (evil-ex-define-cmd "mb" 'spacemacs/buffer-transient-state/body)
   (evil-ex-define-cmd "os" 'org-store-link)

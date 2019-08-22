@@ -77,112 +77,112 @@
   )
 
 (defun org-tagging/make-bar-chart (data maxTagLength maxTagAmnt)
-    (let* ((maxTagStrLen (length (number-to-string maxTagAmnt)))
-           (maxTagLength-bounded (min 40 maxTagLength))
-           (max-column (- fill-column (+ 3 maxTagLength-bounded maxTagStrLen 3 3)))
-           (bar-div (/ (float max-column) maxTagAmnt)))
-      (mapcar (lambda (x)
-                (let* ((tag (car x))
-                       (tag-len (length tag))
-                       (tag-cut-len (min tag-len (- maxTagLength-bounded 3)))
-                       (tag-truncated-p (> tag-len (- maxTagLength-bounded 3)))
-                       (tag-substr (string-join `(,(substring tag nil tag-cut-len)
-                                                  ,(if tag-truncated-p "..."))))
-                       (tag-final-len (length tag-substr))
-                       (amount (cdr x))
-                       (amount-str (number-to-string amount))
-                       (sep-offset (- (+ 3 maxTagLength-bounded) tag-final-len))
-                       (amount-offset (- maxTagStrLen (length amount-str)))
-                       (bar-len (ceiling (* bar-div amount)))
-                       )
-                  (string-join `(,tag-substr
-                                 ,(make-string sep-offset ?\ )
-                                 " : "
-                                 ,amount-str
-                                 ,(make-string amount-offset ?\ )
-                                 " : "
-                                 ,(make-string bar-len ?=)
-                                 ;; "\n"
-                                 )))) data)))
+  (let* ((maxTagStrLen (length (number-to-string maxTagAmnt)))
+         (maxTagLength-bounded (min 40 maxTagLength))
+         (max-column (- fill-column (+ 3 maxTagLength-bounded maxTagStrLen 3 3)))
+         (bar-div (/ (float max-column) maxTagAmnt)))
+    (mapcar (lambda (x)
+              (let* ((tag (car x))
+                     (tag-len (length tag))
+                     (tag-cut-len (min tag-len (- maxTagLength-bounded 3)))
+                     (tag-truncated-p (> tag-len (- maxTagLength-bounded 3)))
+                     (tag-substr (string-join `(,(substring tag nil tag-cut-len)
+                                                ,(if tag-truncated-p "..."))))
+                     (tag-final-len (length tag-substr))
+                     (amount (cdr x))
+                     (amount-str (number-to-string amount))
+                     (sep-offset (- (+ 3 maxTagLength-bounded) tag-final-len))
+                     (amount-offset (- maxTagStrLen (length amount-str)))
+                     (bar-len (ceiling (* bar-div amount)))
+                     )
+                (string-join `(,tag-substr
+                               ,(make-string sep-offset ?\ )
+                               " : "
+                               ,amount-str
+                               ,(make-string amount-offset ?\ )
+                               " : "
+                               ,(make-string bar-len ?=)
+                               ;; "\n"
+                               )))) data)))
 
 (defun org-tagging/org-count-buffer-tags ()
-    (save-excursion ;;store where you are in the current
-      (goto-char (point-min))
-      ;;where to store tags:
-      (let ((tag-set (make-hash-table :test 'equal)))
-        ;;match all
-        (while (not (eq nil (re-search-forward ":\\([[:graph:]]+\\):\\(\.\.\.\\)?\$" nil t)))
-          ;;split tags into list
-          (let* ((tags (split-string (match-string-no-properties 0) ":" t ":"))
-                 (filtered (seq-filter (lambda (x) (not (or (string-equal x "PROPERTIES")
-                                                            (string-equal x "END")
-                                                            (string-equal x "DATE")
-                                                            ))) tags)))
-            ;;increment counts
-            (mapc (lambda (x) (puthash x (+ 1 (gethash x tag-set 0)) tag-set)) filtered)
-            )
+  (save-excursion ;;store where you are in the current
+    (goto-char (point-min))
+    ;;where to store tags:
+    (let ((tag-set (make-hash-table :test 'equal)))
+      ;;match all
+      (while (not (eq nil (re-search-forward ":\\([[:graph:]]+\\):\\(\.\.\.\\)?\$" nil t)))
+        ;;split tags into list
+        (let* ((tags (split-string (match-string-no-properties 0) ":" t ":"))
+               (filtered (seq-filter (lambda (x) (not (or (string-equal x "PROPERTIES")
+                                                          (string-equal x "END")
+                                                          (string-equal x "DATE")
+                                                          ))) tags)))
+          ;;increment counts
+          (mapc (lambda (x) (puthash x (+ 1 (gethash x tag-set 0)) tag-set)) filtered)
           )
-        tag-set
         )
+      tag-set
       )
     )
+  )
 
 (defun org-tagging/tag-occurrences-in-open-buffers()
-    """ retrieve all tags in all open buffers, print to a temporary buffer """
-    (interactive)
-    (let* ((allbuffers (buffer-list))
-           (alltags (make-hash-table :test 'equal))
-           (hashPairs nil)
-           (sorted '())
-           (maxTagLength 0)
-           (maxTagAmnt 0))
-      (map 'list (lambda (bufname)
-                   ;; TODO quit on not an org file
-                   (with-current-buffer bufname
-                     (let ((buftags (org-tagging/org-count-buffer-tags)))
-                       (maphash (lambda (k v)
-                                  (puthash k (+ v (gethash k alltags 0)) alltags))
-                                buftags)
-                       ))) allbuffers)
-      (setq hashPairs (-zip (hash-table-keys alltags) (hash-table-values alltags)))
-      (if hashPairs (progn
-                      (setq sorted (sort hashPairs (lambda (a b) (> (cdr a) (cdr b)))))
-                      (setq maxTagLength (apply `max (mapcar (lambda (x) (length (car x))) sorted)))
-                      (setq maxTagAmnt (apply `max (mapcar (lambda (x) (cdr x)) sorted)))
-                      ))
-      (with-temp-buffer-window "*Tags*"
-                               nil
-                               nil
-                               (mapc (lambda (x) (princ (format "%s\n" x)))
-                                     (org-tagging/make-bar-chart sorted maxTagLength maxTagAmnt))
-                               )
-      (org-tagging/org-format-temp-buffer "*Tags*" "All Files")
-      )
+  """ retrieve all tags in all open buffers, print to a temporary buffer """
+  (interactive)
+  (let* ((allbuffers (buffer-list))
+         (alltags (make-hash-table :test 'equal))
+         (hashPairs nil)
+         (sorted '())
+         (maxTagLength 0)
+         (maxTagAmnt 0))
+    (map 'list (lambda (bufname)
+                 ;; TODO quit on not an org file
+                 (with-current-buffer bufname
+                   (let ((buftags (org-tagging/org-count-buffer-tags)))
+                     (maphash (lambda (k v)
+                                (puthash k (+ v (gethash k alltags 0)) alltags))
+                              buftags)
+                     ))) allbuffers)
+    (setq hashPairs (-zip (hash-table-keys alltags) (hash-table-values alltags)))
+    (if hashPairs (progn
+                    (setq sorted (sort hashPairs (lambda (a b) (> (cdr a) (cdr b)))))
+                    (setq maxTagLength (apply `max (mapcar (lambda (x) (length (car x))) sorted)))
+                    (setq maxTagAmnt (apply `max (mapcar (lambda (x) (cdr x)) sorted)))
+                    ))
+    (with-temp-buffer-window "*Tags*"
+                             nil
+                             nil
+                             (mapc (lambda (x) (princ (format "%s\n" x)))
+                                   (org-tagging/make-bar-chart sorted maxTagLength maxTagAmnt))
+                             )
+    (org-tagging/org-format-temp-buffer "*Tags*" "All Files")
     )
+  )
 
 (defun org-tagging/tag-occurrences ()
-    """ Count all occurrences of all tags and bar chart them """
-    (interactive)
-    ;;save eventually to a new buffer
-    (let* ((tag-set (org-tagging/org-count-buffer-tags))
-           (hashPairs (-zip (hash-table-keys tag-set) (hash-table-values tag-set)))
-           (sorted (sort hashPairs (lambda (a b) (> (cdr a) (cdr b)))))
-           (maxTagLength (apply `max (mapcar (lambda (x) (length (car x))) sorted)))
-           (maxTagAmnt (apply `max (mapcar (lambda (x) (cdr x)) sorted)))
-           (curr-buffer (buffer-name))
-           )
-      ;;print them all out
+  """ Count all occurrences of all tags and bar chart them """
+  (interactive)
+  ;;save eventually to a new buffer
+  (let* ((tag-set (org-tagging/org-count-buffer-tags))
+         (hashPairs (-zip (hash-table-keys tag-set) (hash-table-values tag-set)))
+         (sorted (sort hashPairs (lambda (a b) (> (cdr a) (cdr b)))))
+         (maxTagLength (apply `max (mapcar (lambda (x) (length (car x))) sorted)))
+         (maxTagAmnt (apply `max (mapcar (lambda (x) (cdr x)) sorted)))
+         (curr-buffer (buffer-name))
+         )
+    ;;print them all out
 
-      (with-temp-buffer-window "*Tags*"
-                               nil
-                               nil
-                               ;; Todo: Expand this func to group and add org headings
-                               (mapc (lambda (x) (princ (format "%s\n" x)))
-                                     (org-tagging/make-bar-chart sorted maxTagLength maxTagAmnt))
-                               )
-      (org-tagging/org-format-temp-buffer "*Tags*" curr-buffer)
+    (with-temp-buffer-window "*Tags*"
+                             nil
+                             nil
+                             ;; Todo: Expand this func to group and add org headings
+                             (mapc (lambda (x) (princ (format "%s\n" x)))
+                                   (org-tagging/make-bar-chart sorted maxTagLength maxTagAmnt))
+                             )
+    (org-tagging/org-format-temp-buffer "*Tags*" curr-buffer)
     )
-)
+  )
 
 (defun org-tagging/org-format-temp-buffer (name source_name)
   (with-current-buffer name
@@ -204,5 +204,45 @@
                  (insert "** ")
                  (forward-line)))
         )))
+  )
+
+(defun org-tagging/org-split-temp-buffer-create (args)
+  "Given a pair, create a temp buffer based on the cdr,
+and insert the car "
+  ;; (message "Creating Temp buffer for: %s" args)
+  (with-temp-buffer-window (make-temp-name (cdr args)) nil nil
+                           (org-mode)
+                           (princ (car args))))
+
+
+(defun org-tagging/org-split-on-headings ()
+  " Split an org file into multiple smaller buffers non-destructively "
+  (interactive)
+  (let ((contents (buffer-substring (point-min) (point-max)))
+        (target-depth (read-number "What Depth Subtrees to Copy? "))
+        (orig-name (file-name-sans-extension (buffer-name)))
+        (map-fn (lambda ()
+                  (let* ((components (org-heading-components))
+                         (depth (car components)))
+                    ;;Only copy correct depths
+                    (if (eq depth target-depth)
+                        (progn
+                          ;; (message (format "Current : %s %s" count (nth 4 components)))
+                          (org-copy-subtree 1)
+                          (current-kill 0 t)
+                          )
+                      )
+                    )
+                  ))
+        results
+        )
+    (with-temp-buffer
+      (org-mode)
+      (insert contents)
+      (goto-char (point-min))
+      (setq results (-non-nil (org-map-entries map-fn)))
+      (-each (-zip-fill orig-name results '()) 'org-tagging/org-split-temp-buffer-create)
+      )
+    )
   )
 

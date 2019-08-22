@@ -592,7 +592,19 @@ the entry of interest in the bibfile.  but does not check that."
   )
 
 (defun jg_layer/init-evil-quickscope ()
+
+  (defun jg_layer/toggle-quickscope-always ()
+    (interactive)
+    (evil-quickscope-always-mode (if (eq nil evil-quickscope-always-mode)
+                                     1
+                                   0))
+    )
+
+
   (use-package evil-quickscope
+    :init
+    (spacemacs/set-leader-keys
+      "t q" 'jg_layer/toggle-quickscope-always)
     :config
     (global-evil-quickscope-always-mode 1)
     )
@@ -685,4 +697,3 @@ the entry of interest in the bibfile.  but does not check that."
   (spacemacs/set-leader-keys
     "as" nil)
   )
-

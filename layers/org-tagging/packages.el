@@ -24,8 +24,10 @@
     "o t a o" 'org-tagging/tag-occurrences-in-open-buffers
     "o t v"   'org-tags-view
     "o t s"   'org-set-tags
+    "o h s"   'org-tagging/org-split-on-headings
     )
   (spacemacs/declare-prefix "o t" "Tags" "Tags")
+  (spacemacs/declare-prefix "o h" "Headings" "Headings")
   )
 
 (defun org-tagging/post-init-evil ()

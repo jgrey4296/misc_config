@@ -1,6 +1,12 @@
 * Base Agenda
   #+BIBLIOGRAPHY: ~/github/writing/other_files/main_bibliography plain
   :LOGBOOK:
+  CLOCK: [2019-08-23 Fri 19:48]--[2019-08-23 Fri 20:13] =>  0:25
+  CLOCK: [2019-08-23 Fri 19:03]--[2019-08-23 Fri 19:28] =>  0:25
+  CLOCK: [2019-08-23 Fri 18:17]--[2019-08-23 Fri 18:42] =>  0:25
+  CLOCK: [2019-08-23 Fri 16:47]--[2019-08-23 Fri 17:12] =>  0:25
+  CLOCK: [2019-08-23 Fri 13:21]--[2019-08-23 Fri 13:46] =>  0:25
+  CLOCK: [2019-08-23 Fri 12:49]--[2019-08-23 Fri 13:15] =>  0:26
   CLOCK: [2019-07-29 Mon 07:54]--[2019-07-29 Mon 08:19] =>  0:25
   CLOCK: [2019-07-29 Mon 07:24]--[2019-07-29 Mon 07:49] =>  0:25
   CLOCK: [2019-07-29 Mon 06:54]--[2019-07-29 Mon 07:19] =>  0:25
@@ -114,6 +120,7 @@
 **** Design
 ***** Vignettes
 ***** Architecture
+      
 **** Layouts
 ***** Pipeline
 ***** Flattened Trie Location
@@ -567,13 +574,15 @@
 ** -----------------------------------------------------------------------------
 ** Writing
 *** [[file:~/github/writing/orgfiles/dissertation.org::*Dissertation][Dissertation]]                                                                :dissertation:writing:important:
-*** [[file:~/github/writing/orgfiles/DSLs.org::*DSLs][DSL Review]]
+*** [[file:~/github/writing/orgfiles/DSLs.org::*DSLs][DSL/Framework/System/Tool Review]]
+*** [[file:~/github/writing/orgfiles/steamGames.org::*Games%20list%20and%20notes][Games list and notes]]
 *** [[~/github/jgrey4296.github.io][jgrey4296.github.io]]                                                         :writing:important:todo:target:blog:web:
 **** [[~/github/jsons][jsons representations]]                                                      :json:writing:
 **** [[~/github/writing][misc writing]]                                                               :writing:generic:
 *** [[~/github/writing/orgfiles][Org Files]]                                                                   :directory:main_collection:
 *** [[file:~/github/writing/paper_notes/index.org::*Summary%20Index][Summary Index]]                                                               :papers:
 *** [[file:~/github/writing/orgfiles/taxonomies.org::*Taxonomies][Taxonomies]]
+*** [[file:~/github/writing/orgfiles/probability.org::*Probability][Probability]]
 ** -----------------------------------------------------------------------------
 ** People
 *** [[http://www.abdoumaliqsimone.com/publications.html][AbouMaliq Simone]]
@@ -598,3 +607,4 @@
 *** [[https://en.wikipedia.org/wiki/Kanban][Kanban]]
 *** [[http://plantuml.com/sequence-diagram][PlantUML]]
 *** [[https://multiagentcontest.org/publications/][Multi Agent Contest]]
+*** [[http://slatestarcodex.com/2014/04/28/the-control-group-is-out-of-control/][The Control Group is Out of Control]]                                         :science:methods:

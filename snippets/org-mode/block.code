@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: block.code
+# key: block.code
+# group: src
+# --
+#+begin_src $1 :results value
+	$3
+#+end_src
+$0

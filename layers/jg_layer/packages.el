@@ -288,7 +288,10 @@
 
   (defun jg_layer/org-mod-keymap ()
     (define-key org-mode-map (kbd "C-c [") nil)
-    (define-key org-mode-map (kbd "C-c ]") nil))
+    (define-key org-mode-map (kbd "C-c ]") nil)
+    (define-key org-mode-map (kbd "z i") 'org-indent-mode)
+    )
+
 
 
   (add-hook 'org-mode-hook 'jg_layer/org-mod-keymap)

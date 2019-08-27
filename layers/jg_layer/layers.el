@@ -37,7 +37,8 @@
                                       semantic
 				                              helm-org
 				                              org-tagging
-
+                                      tag-unify
+                                      char-insertion
 
                                       ;;LANGUAGES
                                       (csv :defer)

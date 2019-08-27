@@ -5,7 +5,6 @@
 ;;--------------------
 ;; Mode Variables
 ;;--------------------
-
 (defcustom trie-mode-hook nil "Basic Hook For Trie Mode")
 ;;--------------------
 ;;Utilities
@@ -31,7 +30,6 @@
        :underline t))
   "Face for Rule names"
   :group 'trie-mode)
-
 (defface trie-ruleend
     '((t
        :foreground "red"

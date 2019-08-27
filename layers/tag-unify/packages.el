@@ -1,6 +1,5 @@
 (defconst tag-unify-packages '(
                                helm
-                               evil
                                helm-bibtex
                                dash
                                f
@@ -10,14 +9,9 @@
 (defun tag-unify/init-f ()
   (use-package f :defer t)
   )
-
-
 (defun tag-unify/init-dash ()
   (use-package dash :defer t)
   )
-
-
-
 (defun tag-unify/post-init-helm ()
   ;; rebuild tag database
 
@@ -25,13 +19,18 @@
 
 
   )
-
-(defun tag-unify/post-init-helm-bibtex ()
+(defun tag-unify/pre-init-helm-bibtex ()
+  ;; load the bibliography directory on startup
   (setq bibtex-completion-bibliography (tag-unify/build-bibtex-list))
+  (spacemacs|use-package-add-hook helm
+    :post-config
+    (setq helm-grep-actions (append helm-grep-actions '(("Open Url" . tag-unify/open-url-action))))
+    )
+  ;; Keybind my bib helm
   (spacemacs/set-leader-keys
     "a b" 'tag-unify/helm-bibtex)
 
-
+  ;; Define the bib helm
   (defvar tag-unify/helm-source-bibtex
     '((name . "BibTeX entries")
       (header-name . "Test")
@@ -50,7 +49,6 @@
                  ("Show entry"          . helm-bibtex-show-entry)
                  )))
     "Simplified source for searching bibtex files")
-
   (defun tag-unify/helm-bibtex (&optional arg local-bib input)
     " Custom implementation of helm-bibtex"
     (interactive "P")
@@ -65,12 +63,6 @@
                                   tag-unify/helm-bibtex-candidates)
                          tag-unify/helm-bibtex-candidates
                          ))
-           (key (bibtex-completion-key-at-point))
-           (preselect (and key
-                           (cl-position-if (lambda (cand)
-                                             (member (cons "=key=" key)
-                                                     (cdr cand)))
-                                           candidates)))
            )
       (helm :sources `(,tag-unify/helm-source-bibtex)
             :full-frame helm-bibtex-full-frame

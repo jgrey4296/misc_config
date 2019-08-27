@@ -30,12 +30,28 @@
 
 
   )
-
-(defun tag-unify/open-url (x)
-
-
+(defun tag-unify/open-url-action (x)
+  """ An action added to helm-grep for loading urls found
+  in bookmarks "
+  (interactive)
+  (let* ((marked (helm-marked-candidates))
+         (no-props (mapcar (lambda (x) (substring-no-properties x 0 (length x))) marked))
+         link-start-point
+         )
+    (with-temp-buffer
+      (mapcar (lambda (x) (insert (format "%s\n" x))) no-props)
+      (goto-char (point-min))
+      (while (not (equal (point) (point-max)))
+        (search-forward "href=\"")
+        (jg_layer/open_link_externally)
+        ;; (setq link-start-point (point))
+        ;; (search-forward "\" TAGS")
+        ;; (backward-char (length "\" TAGS"))
+        (forward-line)
+        )
+      )
+    )
   )
-
 (defun tag-unity/goto-entry (x)
 
 

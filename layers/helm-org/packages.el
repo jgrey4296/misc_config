@@ -9,8 +9,8 @@
     :defer t
     :init
     (progn
-      (spacemacs/set-leader-keys
-        "o g"     'helm-org-in-buffer-headings
+      (evil-define-key 'normal org-mode-map
+        (kbd "g h")     'helm-org-in-buffer-headings
 	      )
       )
     :config

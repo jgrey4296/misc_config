@@ -1,6 +1,8 @@
 * Base Agenda
   #+BIBLIOGRAPHY: ~/github/writing/other_files/main_bibliography plain
   :LOGBOOK:
+  CLOCK: [2019-08-24 Sat 18:04]--[2019-08-24 Sat 18:29] =>  0:25
+  CLOCK: [2019-08-24 Sat 17:33]--[2019-08-24 Sat 17:58] =>  0:25
   CLOCK: [2019-08-23 Fri 19:48]--[2019-08-23 Fri 20:13] =>  0:25
   CLOCK: [2019-08-23 Fri 19:03]--[2019-08-23 Fri 19:28] =>  0:25
   CLOCK: [2019-08-23 Fri 18:17]--[2019-08-23 Fri 18:42] =>  0:25
@@ -120,7 +122,7 @@
 **** Design
 ***** Vignettes
 ***** Architecture
-      
+
 **** Layouts
 ***** Pipeline
 ***** Flattened Trie Location
@@ -130,8 +132,8 @@
 ****** Activity
 ****** Tool
 ****** Values
-****** Role 
-****** Sanctions 
+****** Role
+****** Sanctions
 **** Keybindings
 ***** Insertion
 ***** Deletion
@@ -209,7 +211,7 @@
 ***** [[~/github/cairo_pipeline][Cairo Pipeline Architecture]]                                               :cairo:graphical:active:layers:python:
 ***** [[~/github/cairo_utils][Cairo Utilities]]                                                           :graphical:active:dcel:voronoi:cairo:library:tool:
 ***** [[~/github/nytimes_scraper][NYT Scraper]]                                                               :data_analysis:grammar:scraper:dataset:nytimes:
-***** TODO [[~/github/pyAStar][Python Astar Implementation]]                                          :library:pathfinding:maze:astar:python:
+***** TODO [[~/github/pyAStar][Python Astar Implementation]]                                          :a_star:library:pathfinding:maze:python:
 ****** integrate into pythonRuleEngine?
        needs to be able to control vault movement as well
 ***** TODO [[~/github/pythonRuleEngine][Python Rule Language and Engine]]                                      :python:important:todo:meta:simulation:institutions:exclusion_logic:library:parsing:production_system:rules:
@@ -260,7 +262,7 @@
 **** [[file:~/github/writing/orgfiles/nlp.org::*Natural Language Processing:][Natural Language Processing:]]
 ** Datasets
 *** [[file:/Users/jgrey/github/writing/other_files/main_bookmarks.html][Bookmarks]]                                                                   :web:html:bookmarks:directory:
-     treat these as codings?
+    treat these as codings?
 *** TODO Bookmark and saved twitter parsing
 **** Bookmarks
      [[https://msdn.microsoft.com/en-us/library/aa753582(v=vs.85).aspx][bookmark format]]
@@ -390,7 +392,7 @@
 ** Annotations / Examples
 *** TODO [#A] Snatch delegation                                                 :delegation:film:
     to lead to delegation in iEl
-** Emacs 
+** Emacs
 *** [[~/github/jg_emacs_files][Emacs files]]                                    :directory:lisp:setup:emacs:
 *** [[~/github/jg_shell_files][Bash Scripts]]                                   :bash:setup:
 *** Reference
@@ -421,11 +423,11 @@
 ***** The mode should set ‘indent-line-function’                                :procedure:
 ***** The major mode should usually have its own keymap                         :procedure:
       The major mode command should call ‘use-local-map’ to install this local
-      map. 
+      map.
 
       This keymap should be stored permanently in a global variable named
       ‘MODENAME-mode-map’. Normally the library that defines the mode sets this
-      variable. 
+      variable.
 
 ***** Major modes should not alter matters of user preference                   :procedure:
       Such as whether Auto-Fill mode is enabled. Leave this to
@@ -441,7 +443,7 @@
       related modes. If it has its own abbrev table, it should store this in a
       variable named ‘MODENAME-mode-abbrev-table’. If the major mode command
       defines any abbrevs itself, it should pass ‘t’ for the SYSTEM-FLAG
-      argument to ‘define-abbrev’. 
+      argument to ‘define-abbrev’.
 ***** The mode should specify how to do highlighting for Font Lock mode,        :display:procedure:naming:
       by setting up a buffer-local value for the variable ‘font-lock-defaults’
 ***** Each face that the mode defines should, if possible, inherit from         :display:
@@ -472,7 +474,7 @@
       define one is to use the ‘define-derived-mode’ macro, but this is not
       required. Such a mode should call the parent mode command inside a
       ‘delay-mode-hooks’ form. (Using ‘define-derived-mode’ does this
-      automatically.) 
+      automatically.)
 ***** If something special should be done if the user switches a buffer         :procedure:
       from this mode to any other major mode, this mode can set up a
       buffer-local value for ‘change-major-mode-hook’
@@ -607,4 +609,5 @@
 *** [[https://en.wikipedia.org/wiki/Kanban][Kanban]]
 *** [[http://plantuml.com/sequence-diagram][PlantUML]]
 *** [[https://multiagentcontest.org/publications/][Multi Agent Contest]]
-*** [[http://slatestarcodex.com/2014/04/28/the-control-group-is-out-of-control/][The Control Group is Out of Control]]                                         :science:methods:
+*** [[http://slatestarcodex.com/2014/04/28/the-control-group-is-out-of-control/][The Control Group is out of control]]                                         :science:methods:
+*** [[http://www.sosmath.com/algebra/fraction/frac3/frac3.html][SoS Math]]                                                                    :useful:math:

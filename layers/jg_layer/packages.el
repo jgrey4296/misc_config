@@ -227,7 +227,7 @@
   (evil-ex-define-cmd "res[ize]" 'evil-ex-resize)
   )
 
-(defun jg_layer/post-init-helm ()
+(defun jg_layer/pre-init-helm ()
   (defun jg_layer/helm-open-random-external-action (candidate)
     " Open a random file in an external program, optionally specifying wildcard "
     (interactive)
@@ -257,7 +257,8 @@
       (spacemacs//open-in-external-app selected)
       ))
 
-  (with-eval-after-load 'helm
+  (spacemacs|use-package-add-hook helm
+    :post-config
     (helm-autoresize-mode 0)
     ;;add in keybinding to kill line in completion window
     (define-key helm-map (kbd "C-k") 'kill-line)

@@ -1,4 +1,4 @@
- ;; jg_layer packages.el
+;; jg_layer packages.el
 ;; loads second
 
 (defconst jg_layer-packages
@@ -283,6 +283,8 @@
    org-tags-column 80
    )
 
+  (push 'org-indent-mode minor-mode-list)
+
   (defun jg_layer/org-mod-keymap ()
     (define-key org-mode-map (kbd "C-c [") nil)
     (define-key org-mode-map (kbd "C-c ]") nil))
@@ -290,52 +292,63 @@
 
   (add-hook 'org-mode-hook 'jg_layer/org-mod-keymap)
 
+  (spacemacs/set-leader-keys "a o a" nil)
+  (spacemacs/set-leader-keys "a o l" nil)
+  (spacemacs/set-leader-keys "a o /" nil)
+  (spacemacs/set-leader-keys "a o e" nil)
+  (spacemacs/set-leader-keys "a o m" nil)
+  (spacemacs/set-leader-keys "a o o" nil)
+  (spacemacs/set-leader-keys "a o s" nil)
+  (spacemacs/set-leader-keys "a o t" nil)
+  (spacemacs/set-leader-keys "a o c" nil)
+  (spacemacs/set-leader-keys "a o #" nil)
+
   ;; add in keybinding to call tag-occurances
+  (spacemacs/declare-prefix "a o a" "Agenda")
+  (spacemacs/declare-prefix "a o i" "Insert")
+  (spacemacs/declare-prefix "a o l" "Links")
   (spacemacs/set-leader-keys
-    "o d"     'org-todo-list
     ;; AGENDA
-    "o a a"   'org-agenda-file-to-front
-    "o a r"   'org-remove-file
-    "o a l"   'org-agenda-list
-    "o a w"   'org-agenda-week-view
-    "o a m"   'org-agenda-month-view
-    "o a f"   'jg_layer/list-agenda-files
-    "o a d"   'org-deadline
-    "o a s"   'org-schedule
-    ;; CALENDAR
-    "o c c"   'org-goto-calendar
-    "o c d"   'org-date-from-calendar
-    "o c t"   'org-time-stamp
-    "o c i"   'org-inactive-timestamp
-    ;; SRC CODE
-    "o s c"   'org-edit-src-code
+    "a o a a"   'org-agenda
+    "a o a /"   'org-occur-in-agenda-files
+    "a o a f"   'org-agenda-file-to-front
+    "a o a r"   'org-remove-file
+    "a o a l"   'org-agenda-list
+    "a o a F"   'jg_layer/list-agenda-files
+    "a o a t"   'org-tags-view
+    ;; Agenda -> Calendar
+    "a o a c"   'org-goto-calendar
+    "a o i t"   'org-time-stamp
     ;; LINKS
-    "o l s"   'org-store-link
-    "o l i"   'org-insert-link
-    "o l d"   'org-toggle-link-display
-    "o l o"   'jg_layer/open_link_in_buffer
-    "o l O"   'jg_layer/open_link_externally
-    "o l r"   'org-reftex-citation
-    "o l n"   'jg_layer/change_link_name
-    ;; Formatting
-    "o f"     'jg_layer/clean-org
-    "o i t"   'jg_layer/insert-heading-trio
+    "a o l s"   'org-store-link
+    "a o l i"   'org-insert-link
     )
-  (spacemacs/declare-prefix "o" "Org")
-  (spacemacs/declare-prefix "o a" "Agenda")
-  (spacemacs/declare-prefix "o c" "Calendar")
-  (spacemacs/declare-prefix "o s" "Source")
-  (spacemacs/declare-prefix "o l" "Links")
-  (spacemacs/declare-prefix "o i" "Insert")
+
+  (spacemacs/set-leader-keys-for-major-mode 'org-agenda-mode
+    "v w"   'org-agenda-week-view
+    "v  m"   'org-agenda-month-view
+    )
+  (spacemacs/set-leader-keys-for-major-mode 'org-mode "." nil)
+  (spacemacs/set-leader-keys-for-major-mode 'org-mode
+    ;; SRC CODE
+    ". e"   'org-edit-src-code
+    ". E"   'org-babel-execute-src-block
+    ;; Links
+    ". d"   'org-toggle-link-display
+    ". o"   'jg_layer/open_link_in_buffer
+    ". O"   'jg_layer/open_link_externally
+    ". n"   'jg_layer/change_link_name
+    ;; Formatting
+    ". c"     'jg_layer/clean-org
+    "i t"   'jg_layer/insert-heading-trio
+    ;; Citation
+    "i c" 'org-reftex-citation
+    )
 
   ;;TODO add function to insert a bibliography
   ;;plus keybind it
   ;; #+BIBLIOGRAPHY: ~/github/writing/mendeley_library plain
   ;;keybind
-  (spacemacs/set-leader-keys-for-major-mode 'org-mode
-    "i c" 'org-reftex-citation
-    "`"   'jg_layer/change_link_name
-    )
   )
 
 (defun jg_layer/post-init-yasnippet ()
@@ -494,9 +507,10 @@
 (defun jg_layer/init-academic-phrases ()
   (use-package academic-phrases
     :config
-    (spacemacs/set-leader-keys "o i p" 'academic-phrases
-      "o i s" 'academic-phrases-by-section))
-
+    (spacemacs/set-leader-keys-for-major-mode 'org-mode
+      "i A p" 'academic-phrases
+      "i A s" 'academic-phrases-by-section)
+    )
   )
 
 (defun jg_layer/init-buffer-utils ()
@@ -539,8 +553,7 @@
 (defun jg_layer/post-init-org-ref ()
   (spacemacs/set-leader-keys "a r" 'jg_layer/bibtex-load-random)
 
-  (with-eval-after-load 'org-ref
-    (defun org-ref-open-bibtex-pdf ()
+    (defun jg_layer/org-ref-open-bibtex-pdf ()
       "Open pdf for a bibtex entry, if it exists.
 assumes point is in
 the entry of interest in the bibfile.  but does not check that."
@@ -556,7 +569,10 @@ the entry of interest in the bibfile.  but does not check that."
               (org-open-link-from-string (format "[[file:%s]]" pdf))
             (ding)))))
 
-    ))
+  (with-eval-after-load 'org-ref
+    (setq org-ref-open-bibtex-pdf 'jg_layer/org-ref-open-bibtex-pdf)
+    )
+)
 
 ;; (use-package highlight-parentheses
 ;;   :init
@@ -587,7 +603,8 @@ the entry of interest in the bibfile.  but does not check that."
               (define-key evil-normal-state-map (kbd "] A") 'vlf-next-batch-from-point)
               (define-key evil-normal-state-map (kbd "] a") 'vlf-next-batch)
               (define-key evil-normal-state-map (kbd "[ a") 'vlf-prev-batch)
-              (spacemacs/set-leader-keys "a b" 'vlf-set-batch-size))
+              (spacemacs/declare-prefix "a v" "VLF")
+              (spacemacs/set-leader-keys "a v b" 'vlf-set-batch-size))
     )
   )
 
@@ -697,3 +714,4 @@ the entry of interest in the bibfile.  but does not check that."
   (spacemacs/set-leader-keys
     "as" nil)
   )
+

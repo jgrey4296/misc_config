@@ -32,7 +32,7 @@
   (use-package tag-clean-minor-mode
     :defer t
     :commands (tag-clean-minor-mode)
-    :init (progn
+    :config (progn
             (push 'tag-clean-minor-mode minor-mode-list)
             (spacemacs|define-transient-state tag-clean
               :title "Tag Cleaning Transient State"

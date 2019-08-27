@@ -128,6 +128,26 @@
     )
   )
 
+(defun jg_layer/goto-messages ()
+  (interactive)
+  (switch-to-buffer "*Messages*")
+  )
+
+(defun jg_layer/goto-home ()
+  (interactive)
+  (find-file "~")
+  )
+
+(defun jg_layer/goto-desktop ()
+  (interactive)
+  (find-file "~/Desktop")
+  )
+
+(defun jg_layer/goto-github ()
+  (interactive)
+  (find-file "~/github")
+  )
+
 (defun jg_layer/line-starts-with? (text)
   (s-starts-with? text (s-trim-left (buffer-substring-no-properties
                                      (line-beginning-position)

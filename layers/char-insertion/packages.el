@@ -1,0 +1,1 @@
+(defconst char-insertion-packages '())

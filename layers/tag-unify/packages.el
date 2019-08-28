@@ -12,29 +12,55 @@
 (defun tag-unify/init-dash ()
   (use-package dash :defer t)
   )
-(defun tag-unify/post-init-helm ()
-  ;; rebuild tag database
-
-  ;; turn to candidates
-
-
-  )
-(defun tag-unify/pre-init-helm-bibtex ()
-  ;; load the bibliography directory on startup
-  (setq bibtex-completion-bibliography (tag-unify/build-bibtex-list))
+(defun tag-unify/pre-init-helm ()
   (spacemacs|use-package-add-hook helm
     :post-config
     (setq helm-grep-actions (append helm-grep-actions '(("Open Url" . tag-unify/open-url-action))))
+    ;; Build a Custom grep for bookmarks
+    (setq tag-unify/bookmark-helm-source
+          (helm-make-source "Bookmark Helm" 'helm-grep-class
+            :action (helm-make-actions "Open Url" 'tag-unify/open-url-action
+                                       "Insert"   'tag-unify/insert-candidates
+                                       "Insert Link" 'tag-unify/insert-links
+                                       "Tweet Link"  'tag-unify/tweet-link-action
+                                       )
+            :filter-one-by-one 'tag-unify/grep-filter-one-by-one
+            :nomark nil
+            :backend helm-grep-default-command
+            :pcre nil
+            )
+          )
     )
-  ;; Keybind my bib helm
+
   (spacemacs/set-leader-keys
-    "a b" 'tag-unify/helm-bibtex)
+    "a B" 'tag-unify/helm-bookmarks)
+
+  (defun tag-unify/helm-bookmarks ()
+    (interactive)
+    (helm-set-local-variable
+     'helm-grep-include-files (format "--include=%s" tag-unify/loc-bookmarks)
+     'helm-grep-last-targets `(,tag-unify/loc-bookmarks)
+     'default-directory "~/github/writing/resources/"
+     )
+    (helm :sources tag-unify/bookmark-helm-source
+          :full-frame t
+          :buffer "*helm bookmarks*"
+          :truncate-lines t
+          )
+    )
+  )
+
+(defun tag-unify/pre-init-helm-bibtex ()
+  ;; load the bibliography directory on startup
+  (setq bibtex-completion-bibliography (tag-unify/build-bibtex-list))
+  ;; Keybind my bib helm
+  (spacemacs/set-leader-keys "a b" 'tag-unify/helm-bibtex)
 
   ;; Define the bib helm
   (defvar tag-unify/helm-source-bibtex
     '((name . "BibTeX entries")
       (header-name . "Test")
-                   ;; (lambda (name) (format "%s%s: " name (if helm-bibtex-local-bib " (local)" ""))))
+      ;; (lambda (name) (format "%s%s: " name (if helm-bibtex-local-bib " (local)" ""))))
       (candidates . helm-bibtex-candidates)
       (match helm-mm-exact-match helm-mm-match helm-fuzzy-match)
       (fuzzy-match)
@@ -71,4 +97,5 @@
             :bibtex-local-bib local-bib
             :bibtex-candidates candidates
             )))
+
   )

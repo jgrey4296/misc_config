@@ -64,6 +64,7 @@
                   (kbd "C-x 8sn") "ₙ"
                   (kbd "C-x 8sj") "ⱼ"
                   (kbd "C-x 8si") "ᵢ"
+                  (kbd "C-x 8sk") "ₖ"
                   (kbd "C-x 8sm") "ₘ"
                   (kbd "C-x 8s+") "₊"
                   (kbd "C-x 8s-") "₋"

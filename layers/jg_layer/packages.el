@@ -271,7 +271,6 @@
   )
 
 (defun jg_layer/post-init-org ()
-  (require 'jg_layer/clean-org "~/.spacemacs.d/layers/jg_layer/clean_org.el")
   ;;ORG SETUP
   (setq-default
    org-agenda-files `(,(expand-file-name "~/.spacemacs.d/setup_files/base_agenda.org"))
@@ -286,14 +285,21 @@
 
   (push 'org-indent-mode minor-mode-list)
 
+
   (defun jg_layer/org-mod-keymap ()
     (define-key org-mode-map (kbd "C-c [") nil)
     (define-key org-mode-map (kbd "C-c ]") nil)
-    (evil-define-key 'normal org-mode-map (kbd "z i") 'org-indent-mode)
-    (evil-define-key 'normal org-mode-map (kbd "t")   'org-todo)
+    (evil-define-key 'normal org-mode-map (kbd "gl") nil)
+    (evil-define-key 'normal org-mode-map (kbd "gL") nil)
+    (evil-define-key* 'normal org-mode-map
+                      (kbd "z i") 'org-indent-mode
+                      (kbd "t")   'org-todo
+                      (kbd "g j") 'org-forward-heading-same-level
+                      (kbd "g k") 'org-backward-heading-same-level
+                      (kbd "g l") 'jg_layer/open_link_in_buffer
+                      (kbd "g L") 'jg_layer/open_link_externally
+                      )
     )
-
-
 
   (add-hook 'org-mode-hook 'jg_layer/org-mod-keymap)
 
@@ -719,4 +725,3 @@ the entry of interest in the bibfile.  but does not check that."
   (spacemacs/set-leader-keys
     "as" nil)
   )
-

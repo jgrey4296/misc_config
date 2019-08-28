@@ -10,8 +10,3 @@
                jg_twitter/tweet_buff_name "*tweet*"
 )
 
-(with-eval-after-load 'helm
-  (setq-default jg_twitter/twitter-image-helm-source
-                (helm-make-source "Find Image" 'helm-source-ffiles
-                  :action '(("action" . jg_twitter/twitter-upload-image))))
-)

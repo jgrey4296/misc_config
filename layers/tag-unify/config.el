@@ -1,4 +1,4 @@
-(setq-default tag-unify/loc-bookmarks "~/github/writing/resources"
+(setq-default tag-unify/loc-bookmarks "/Users/jgrey/github/writing/resources/main_bookmarks.html"
               tag-unify/loc-bibtex "~/github/writing/resources/years"
               tag-unify/loc-master-tag-list ""
               bibtex-completion-bibliography nil

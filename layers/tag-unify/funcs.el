@@ -103,8 +103,8 @@
            (norm_tags (s-append (s-repeat (- 50 (string-width chopped_tags)) " ") chopped_tags))
            )
       (cons (concat (propertize norm_ln 'face 'helm-grep-lineno)
-                    ": " norm_tags
-                    (propertize (concat ": " url) 'face 'term-color-blue))
+                    (propertize (concat ": " norm_tags) 'face 'rainbow-delimiters-depth-3-face)
+                    (propertize (concat ": " url) 'face 'rainbow-delimiters-depth-1-face))
             (or url line))
       )
     )

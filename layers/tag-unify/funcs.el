@@ -10,24 +10,7 @@
   ;; regenerate the master list of tags
   ;; from bookmarks
 
-
-
   ;; and from bibtex
-
-
-
-
-
-  )
-(defun tag-unify/get-bibtex-entries (x)
-  ;;given a candidate tag name,
-  ;;find all bibtex entries that match
-  )
-(defun tag-unify/load-bookmark-entry (x)
-  ;;given a candidate tag name,
-  ;;find all bookmark entries that match
-
-
 
   )
 (defun tag-unify/open-url-action (x)
@@ -58,12 +41,10 @@
   (let ((candidates (helm-marked-candidates)))
     (with-helm-current-buffer
       (insert (mapconcat (lambda (x) (substring x 0 -2)) candidates "\n")))))
-
 (defun tag-unify/insert-links (x)
   (let ((candidates (helm-marked-candidates)))
     (with-helm-current-buffer
       (insert (mapconcat (lambda (x) (format "[[%s][%s]]" (substring x 0 -2) (substring x 0 -2))) candidates "\n")))))
-
 (defun tag-unify/tweet-link-action (candidate)
   (evil-window-new (get-buffer-window helm-current-buffer)
                    "*Link Tweeting*")
@@ -77,13 +58,11 @@
   (insert candidate)
   (redraw-display)
   )
-
 (defun tag-unify/tweet-link-finish ()
   (interactive)
   (let* ((text (buffer-substring-no-properties (point-min) (point-max))))
     (jg_twitter/twitter-tweet-text text nil '(jg_twitter/tweet_sentinel))
     ))
-
 (defun tag-unify/grep-filter-one-by-one (candidate)
   (if (consp candidate)
       ;; Already computed do nothing (default as input).
@@ -108,4 +87,52 @@
             (or url line))
       )
     )
+  )
+(defun tag-unify/clean-org ()
+  (interactive)
+  ;; indent region
+  (evil-indent (point-min) (point-max))
+  (whitespace-cleanup)
+  ;; fill
+  (evil-fill (point-min) (point-max))
+
+  ;;Reset to beginning
+  (goto-char (point-min))
+
+  ;;Find all pic.twitter's and ensure on new line
+  (while (search-forward "pic.twitter" nil t)
+    (let ((sub (buffer-substring (line-beginning-position) (point))))
+      (if (not (string-match "^[[:space:]]+pic.twitter" sub))
+          (progn
+            (backward-char (+ 1 (length "pic.twitter")))
+            (insert "\n\n"))
+        )
+      (forward-line)
+      )
+    )
+  (evil-indent (point-min) (point-max))
+  (whitespace-cleanup)
+
+
+  ;; (search-forward-regexp "\\*+ Links" nil 1 nil)
+  ;; (while (< (point) (point-max))
+  ;;   ;; get current level,
+  ;;   ;; get links in the current level
+
+  ;;   (search-forward-regexp "\\*+ Links" nil 1 nil)
+  ;;   )
+
+  ;; for all links:
+
+
+
+  ;; ensure on a newline
+
+  ;; for all tweets
+  ;; go line by line, separate out sentences
+
+  ;;for all hashtags put on newline
+
+  ;;apply whitelisted tags if found
+
   )

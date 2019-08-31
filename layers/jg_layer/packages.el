@@ -1,4 +1,4 @@
- ;; jg_layer packages.el
+;; jg_layer packages.el
 ;; loads second
 
 (defconst jg_layer-packages
@@ -21,6 +21,8 @@
     python
     academic-phrases
     dired-quick-sort
+    dired
+    shell-pop
     org
     org-ref
     org-pomodoro
@@ -122,9 +124,6 @@
   ;; definition of said commands, adapted from evil-maps
 
   (evil-ex-define-cmd "cl" 'spacemacs/comment-or-uncomment-lines)
-  (evil-ex-define-cmd "t[ag]" 'jg_layer/org-tagging-helm-start)
-  (evil-ex-define-cmd "to" 'jg_layer/tag-occurrences)
-  (evil-ex-define-cmd "toa" 'jg_layer/tag-occurrences-in-open-buffers)
   (evil-ex-define-cmd "mw" 'spacemacs/window-manipulation-transient-state/body)
   (evil-ex-define-cmd "mb" 'spacemacs/buffer-transient-state/body)
   (evil-ex-define-cmd "os" 'org-store-link)
@@ -228,7 +227,7 @@
   (evil-ex-define-cmd "res[ize]" 'evil-ex-resize)
   )
 
-(defun jg_layer/post-init-helm ()
+(defun jg_layer/pre-init-helm ()
   (defun jg_layer/helm-open-random-external-action (candidate)
     " Open a random file in an external program, optionally specifying wildcard "
     (interactive)
@@ -258,7 +257,8 @@
       (spacemacs//open-in-external-app selected)
       ))
 
-  (with-eval-after-load 'helm
+  (spacemacs|use-package-add-hook helm
+    :post-config
     (helm-autoresize-mode 0)
     ;;add in keybinding to kill line in completion window
     (define-key helm-map (kbd "C-k") 'kill-line)
@@ -283,63 +283,82 @@
    org-tags-column 80
    )
 
+  (push 'org-indent-mode minor-mode-list)
+
+
   (defun jg_layer/org-mod-keymap ()
     (define-key org-mode-map (kbd "C-c [") nil)
-    (define-key org-mode-map (kbd "C-c ]") nil))
-
+    (define-key org-mode-map (kbd "C-c ]") nil)
+    (evil-define-key 'normal org-mode-map (kbd "gl") nil)
+    (evil-define-key 'normal org-mode-map (kbd "gL") nil)
+    (evil-define-key* 'normal org-mode-map
+                      (kbd "z i") 'org-indent-mode
+                      (kbd "t")   'org-todo
+                      (kbd "g j") 'org-forward-heading-same-level
+                      (kbd "g k") 'org-backward-heading-same-level
+                      (kbd "g l") 'jg_layer/open_link_in_buffer
+                      (kbd "g L") 'jg_layer/open_link_externally
+                      )
+    )
 
   (add-hook 'org-mode-hook 'jg_layer/org-mod-keymap)
 
-  ;; add in keybinding to call tag-occurances
-  (spacemacs/set-leader-keys
-    "o d"     'org-todo-list
-    "o g"     'helm-org-in-buffer-headings
-    ;; TAGS
-    "o t o"   'jg_layer/tag-occurances
-    "o t a o" 'jg_layer/tag-occurences-in-open-buffers
-    "o t v"   'org-tags-view
-    "o t s"   'org-set-tags
-    ;; AGENDA
-    "o a a"   'org-agenda-file-to-front
-    "o a r"   'org-remove-file
-    "o a l"   'org-agenda-list
-    "o a w"   'org-agenda-week-view
-    "o a m"   'org-agenda-month-view
-    "o a f"   'jg_layer/list-agenda-files
-    "o a d"   'org-deadline
-    "o a s"   'org-schedule
-    ;; CALENDAR
-    "o c c"   'org-goto-calendar
-    "o c d"   'org-date-from-calendar
-    "o c t"   'org-time-stamp
-    "o c i"   'org-inactive-timestamp
-    ;; SRC CODE
-    "o s c"   'org-edit-src-code
-    ;; LINKS
-    "o l s"   'org-store-link
-    "o l i"   'org-insert-link
-    "o l d"   'org-toggle-link-display
-    "o l o"   'jg_layer/open_link_in_buffer
-    "o l O"   'jg_layer/open_link_externally
-    "o l r"   'org-reftex-citation
-    "o l n"   'jg_layer/change_link_name
-    )
-  (spacemacs/declare-prefix "o" "Org")
-  (spacemacs/declare-prefix "o t" "Tags" "Tags")
-  (spacemacs/declare-prefix "o a" "Agenda")
-  (spacemacs/declare-prefix "o c" "Calendar")
-  (spacemacs/declare-prefix "o s" "Source")
-  (spacemacs/declare-prefix "o l" "Links")
+  (spacemacs/set-leader-keys "a o a" nil)
+  (spacemacs/set-leader-keys "a o l" nil)
+  (spacemacs/set-leader-keys "a o /" nil)
+  (spacemacs/set-leader-keys "a o e" nil)
+  (spacemacs/set-leader-keys "a o m" nil)
+  (spacemacs/set-leader-keys "a o o" nil)
+  (spacemacs/set-leader-keys "a o s" nil)
+  (spacemacs/set-leader-keys "a o t" nil)
+  (spacemacs/set-leader-keys "a o c" nil)
+  (spacemacs/set-leader-keys "a o #" nil)
 
+  ;; add in keybinding to call tag-occurances
+  (spacemacs/declare-prefix "a o a" "Agenda")
+  (spacemacs/declare-prefix "a o i" "Insert")
+  (spacemacs/declare-prefix "a o l" "Links")
+  (spacemacs/set-leader-keys
+    ;; AGENDA
+    "a o a a"   'org-agenda
+    "a o a /"   'org-occur-in-agenda-files
+    "a o a f"   'org-agenda-file-to-front
+    "a o a r"   'org-remove-file
+    "a o a l"   'org-agenda-list
+    "a o a F"   'jg_layer/list-agenda-files
+    "a o a t"   'org-tags-view
+    ;; Agenda -> Calendar
+    "a o a c"   'org-goto-calendar
+    "a o i t"   'org-time-stamp
+    ;; LINKS
+    "a o l s"   'org-store-link
+    "a o l i"   'org-insert-link
+    )
+
+  (spacemacs/set-leader-keys-for-major-mode 'org-agenda-mode
+    "v w"   'org-agenda-week-view
+    "v  m"   'org-agenda-month-view
+    )
+  (spacemacs/set-leader-keys-for-major-mode 'org-mode "." nil)
+  (spacemacs/set-leader-keys-for-major-mode 'org-mode
+    ;; SRC CODE
+    ". e"   'org-edit-src-code
+    ". E"   'org-babel-execute-src-block
+    ;; Links
+    ". d"   'org-toggle-link-display
+    ". o"   'jg_layer/open_link_in_buffer
+    ". O"   'jg_layer/open_link_externally
+    ". n"   'jg_layer/change_link_name
+    ;;Formatting
+    "i t"   'jg_layer/insert-heading-trio
+    ;; Citation
+    "i c" 'org-reftex-citation
+    )
 
   ;;TODO add function to insert a bibliography
   ;;plus keybind it
   ;; #+BIBLIOGRAPHY: ~/github/writing/mendeley_library plain
   ;;keybind
-  (spacemacs/set-leader-keys-for-major-mode 'org-mode
-    "i c" 'org-reftex-citation
-    "`"   'jg_layer/change_link_name
-    )
   )
 
 (defun jg_layer/post-init-yasnippet ()
@@ -347,7 +366,7 @@
   (setq-default yas-snippet-dirs `( ,(expand-file-name "~/.spacemacs.d/snippets/")
                                     ,(expand-file-name "~/github/otherLibs/yasnippet-snippets/snippets")
                                     ,(expand-file-name "~/github/otherLibs/yasnippet-snippets")))
-  (spacemacs/declare-prefix "y" "Snippets/Abbrevs")
+  (spacemacs/declare-prefix "y" "Snippets/Abbevs")
   (spacemacs/set-leader-keys
     "y y"    'yas-expand
     "y i"    'yas-insert-snippet
@@ -390,7 +409,10 @@
   (print "Post init python")
   (setq-default python-indent-offset 4
                 python-indent-guess-indent-offset nil
+                python-shell-interpreter-args "-i"
+                python-shell-interpreter "python"
                 )
+
   (defun jg_layer/toggle-all-defs ()
     (interactive)
     ;; goto start of file
@@ -441,7 +463,6 @@
       (kbd "z d") 'jg_layer/toggle-all-defs
       (kbd "z C") 'jg_layer/close-class-defs
       ))
-
 
   (add-hook 'python-mode-hook 'jg_layer/setup-python-mode)
   (add-hook 'python-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
@@ -496,10 +517,10 @@
 (defun jg_layer/init-academic-phrases ()
   (use-package academic-phrases
     :config
-    (spacemacs/declare-prefix "o i" "Insert Academic")
-    (spacemacs/set-leader-keys "o i p" 'academic-phrases
-      "o i s" 'academic-phrases-by-section))
-
+    (spacemacs/set-leader-keys-for-major-mode 'org-mode
+      "i A p" 'academic-phrases
+      "i A s" 'academic-phrases-by-section)
+    )
   )
 
 (defun jg_layer/init-buffer-utils ()
@@ -542,8 +563,7 @@
 (defun jg_layer/post-init-org-ref ()
   (spacemacs/set-leader-keys "a r" 'jg_layer/bibtex-load-random)
 
-  (with-eval-after-load 'org-ref
-    (defun org-ref-open-bibtex-pdf ()
+    (defun jg_layer/org-ref-open-bibtex-pdf ()
       "Open pdf for a bibtex entry, if it exists.
 assumes point is in
 the entry of interest in the bibfile.  but does not check that."
@@ -559,7 +579,10 @@ the entry of interest in the bibfile.  but does not check that."
               (org-open-link-from-string (format "[[file:%s]]" pdf))
             (ding)))))
 
-    ))
+  (with-eval-after-load 'org-ref
+    (setq org-ref-open-bibtex-pdf 'jg_layer/org-ref-open-bibtex-pdf)
+    )
+)
 
 ;; (use-package highlight-parentheses
 ;;   :init
@@ -580,7 +603,6 @@ the entry of interest in the bibfile.  but does not check that."
 (defun jg_layer/post-init-origami ()
 
   (require 'jg_layer/origami-python-parser "~/.spacemacs.d/layers/jg_layer/local/origami-parser.el")
-
   (delq (assoc 'python-mode origami-parser-alist) origami-parser-alist)
   (add-to-list 'origami-parser-alist '(python-mode . jg_layer/origami-python-parser))
   )
@@ -591,12 +613,25 @@ the entry of interest in the bibfile.  but does not check that."
               (define-key evil-normal-state-map (kbd "] A") 'vlf-next-batch-from-point)
               (define-key evil-normal-state-map (kbd "] a") 'vlf-next-batch)
               (define-key evil-normal-state-map (kbd "[ a") 'vlf-prev-batch)
-              (spacemacs/set-leader-keys "a b" 'vlf-set-batch-size))
+              (spacemacs/declare-prefix "a v" "VLF")
+              (spacemacs/set-leader-keys "a v b" 'vlf-set-batch-size))
     )
   )
 
 (defun jg_layer/init-evil-quickscope ()
+
+  (defun jg_layer/toggle-quickscope-always ()
+    (interactive)
+    (evil-quickscope-always-mode (if (eq nil evil-quickscope-always-mode)
+                                     1
+                                   0))
+    )
+
+
   (use-package evil-quickscope
+    :init
+    (spacemacs/set-leader-keys
+      "t q" 'jg_layer/toggle-quickscope-always)
     :config
     (global-evil-quickscope-always-mode 1)
     )
@@ -617,6 +652,7 @@ the entry of interest in the bibfile.  but does not check that."
   )
 
 (defun jg_layer/post-init-org-pomodoro ()
+  (print "Setting up pomodoro")
   ;; set pomodoro log variable
   (defcustom jg_layer/pomodoro-log-file "~/.spacemacs.d/setup_files/pomodoro_log.org"
     "The Location of the Pomodoro Log File")
@@ -675,3 +711,16 @@ the entry of interest in the bibfile.  but does not check that."
 
 (defun jg_layer/init-org-drill ()
   (use-package org-drill))
+
+(defun jg_layer/post-init-dired ()
+  (spacemacs/set-leader-keys
+    "ad" nil
+    )
+  (evil-define-key 'normal dired-mode-map (kbd "M-n") 'jg_layer/dired-auto-move)
+  (add-hook 'dired-mode-hook 'dired-omit-mode)
+  )
+
+(defun jg_layer/post-init-shell-pop ()
+  (spacemacs/set-leader-keys
+    "as" nil)
+  )

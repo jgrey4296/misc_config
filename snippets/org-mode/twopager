@@ -1,0 +1,70 @@
+# -*- mode: snippet -*-
+# name: twopager
+# key: twopager
+# --
+*  [[http://www.raulpacheco.org/2018/08/the-dissertation-two-pager-a-strategy-to-sustain-a-big-picture-view-of-a-doctoral-thesis/][Dissertation Two Pager]]
+
+** Boundaries of the System Under Study
+   :Description:
+   What System are you studying and where does it start and stop?
+   What are you analyzing and what are you NOT, and why.
+   :END:
+
+** The Problem, Issue, Puzzle
+   :Description:
+   What problem are you seeking to examine/explain/explore and why?
+   Why is it a problem?
+   Is it an issue that needs to be addressed through social interventions?
+   Is it an issue that requires strategic action?
+   Why is the problem worth studying?
+   :END:
+
+** Analytical and Scalar Architecture
+   :Description:
+   What scale are you working at?
+   Are you studying phenomena at the neighbourhood, community, local gov, individual, system scales?
+   Are you analyzing cross-scalar dynamics?
+   :END:
+
+** Unit of Analysis
+   :Description:
+   What exactly are you studying?
+   Is it a city, country, region?
+   Community? Individuals within a community?
+   Is it a case or a series of cases?
+   Which actors/phenomena are you focusing on?
+   :END:
+
+** Data Collection and Data Analysis Methods and Methodologies
+   :Description:
+   There is a very clear difference between data COLLECTION (and types of data)
+   and data ANALYSIS (and methods of analysis)
+   :END:
+
+** Contribution (Theoretical or Empirical) to the Literature
+   :Description:
+   Should be able to state within a 90 second pitch.
+   :END:
+
+** Position of the PhD Dissertation within contemporary and classical debates
+   :Description:
+   Demonstrate how you contribute (by extending X author's scholarship, by offering a new dataset,
+   by creating a different method to analyse a phenomena, exploring a new idea using innovative methods...)
+   :END:
+
+** Methodological Tools
+   :Description:
+   Which methods are used in the dissertation, and which are not, but which could
+   have if they had the time, data etc.
+   :END:
+
+** Limitations of the Research, potential future research
+   :Description:
+   How the thesis positions the student within the global theoretical debates,
+   and/or how it contributes empirically to our better understanding of phenomena
+   we would not have been able to analyse better were it not for the student's 
+   dissertation.
+   :END:
+
+** Title:
+

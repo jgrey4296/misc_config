@@ -34,11 +34,11 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     (syntax-checking :variables syntax-checking-enable-tooltips nil)
      ;;------------------------------------------------------------
      ;;MY LAYER:
      jg_layer
      ;;-----------------------------------------------------------
+     (syntax-checking :variables syntax-checking-enable-tooltips nil)
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom)
@@ -311,7 +311,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (make-directory (expand-file-name "~/.emacs.d/backups/") t)
   )
 
-
 ;;------------------------------------------------------------------------------
 ;;     USER CONFIG
 ;;------------------------------------------------------------------------------
@@ -333,16 +332,65 @@ you should place your code here."
                 truncate-lines 't
                 dired-omit-mode 't
                 )
+  (spacemacs/set-leader-keys
+    "a p" nil
+    "a P" nil
+    "a l" nil)
+
+  (spacemacs/declare-prefix "a p" "Processes")
   (spacemacs/declare-prefix "x j" "Justify")
   (global-auto-complete-mode 1)
   (define-key ac-mode-map (kbd "M-TAB") 'jg_layer/ac-trigger)
-
-  (require 'jg_layer/org-setup-tagging "~/.spacemacs.d/layers/jg_layer/org-tagging.el")
-  (jg_layer/org-setup-tagging)
-
-  (require 'jg_layer/setup-char-inserting "~/.spacemacs.d/layers/jg_layer/char_inserting.el")
-  (jg_layer/setup-char-inserting)
-
+  (evil-define-key* 'normal global-map
+                    (kbd "g l") 'jg_layer/open_link_in_buffer
+                    (kbd "g L") 'jg_layer/open_link_externally
+                    )
+  (spacemacs/set-leader-keys
+    ;; Processes
+    "a p l" 'launchctl
+    "a p p" 'list-processes
+    "a p P" 'proced
+    ;; Registers:
+    "r v" 'view-register
+    "r l" 'list-registers
+    "r w" 'window-configuration-to-register
+    "r x" 'copy-to-register
+    "r j" 'jump-to-register
+    "r f" 'frameset-to-register
+    "r i" 'insert-register
+    ;; Expression:
+    "x e" 'eval-expression
+    ;; Clearing
+    "b c" 'jg_layer/clear-buffer
+    ;;Indirect buffer
+    "b i" 'clone-indirect-buffer-other-window
+    ;; Indenting
+    "x i c" 'indent-to-column
+    ;; toggles
+    "t o" 'dired-omit-mode
+    ;; searching
+    "s o" 'helm-occur
+    ;; mode select
+    "a m m"   'helm-switch-major-mode
+    "a m e"   'helm-enable-minor-mode
+    "a m d"   'helm-disable-minor-mode
+    ;; mark buffer
+    "x m" 'mark-whole-buffer
+    ;; Access to old school emacs help:
+    "h h" 'help
+    ;; ac trigger
+    ;;"a a" 'jg_layer/ac-trigger
+    ;; goto org agenda file
+    "b a" 'jg_layer/goto-org-agenda-file
+    "b m" 'jg_layer/goto-messages
+    "b D" 'kill-other-buffers
+    "b ~" 'jg_layer/goto-home
+    "b `" 'jg_layer/goto-desktop
+    "b g" 'jg_layer/goto-github
+    ;; Char Insertion
+    "x C" 'insert-char
+    )
+  ;; Force the mouse to be disabled
   (defun evil-mouse-drag-region () (interactive))
   (defun mouse-set-point () (interactive))
   (defun evil-mouse-drag-track () (interactive))
@@ -389,17 +437,82 @@ you should place your code here."
  '(helm-mode t)
  '(helm-split-window-inside-p t)
  '(hl-paren-delay 0.2)
+ '(ibuffer-saved-filter-groups
+   (quote
+    (("DiredG+EmacsSpecial"
+      ("Emacs Special"
+       (name . "*")
+       (not used-mode . helm-major-mode))
+      ("DiredG"
+       (used-mode . dired-mode)
+       (not used-mode . helm-major-mode)))
+     ("Home"
+      ("helm-major-mode"
+       (mode . helm-major-mode))
+      ("magit-diff-mode"
+       (mode . magit-diff-mode))
+      ("inferior-python-mode"
+       (mode . inferior-python-mode))
+      ("emacs-lisp-mode"
+       (mode . emacs-lisp-mode))
+      ("org-mode"
+       (mode . org-mode))
+      ("spacemacs-buffer-mode"
+       (mode . spacemacs-buffer-mode))
+      ("python-mode"
+       (mode . python-mode))
+      ("dired-mode"
+       (mode . dired-mode))
+      ("shell-mode"
+       (mode . shell-mode))))))
+ '(ibuffer-saved-filters
+   (quote
+    (("python"
+      (used-mode . python-mode))
+     ("dired"
+      (used-mode . dired-mode))
+     ("programming"
+      (or
+       (derived-mode . prog-mode)
+       (mode . ess-mode)
+       (mode . compilation-mode)))
+     ("text document"
+      (and
+       (derived-mode . text-mode)
+       (not
+        (starred-name))))
+     ("TeX"
+      (or
+       (derived-mode . tex-mode)
+       (mode . latex-mode)
+       (mode . context-mode)
+       (mode . ams-tex-mode)
+       (mode . bibtex-mode)))
+     ("web"
+      (or
+       (derived-mode . sgml-mode)
+       (derived-mode . css-mode)
+       (mode . javascript-mode)
+       (mode . js2-mode)
+       (mode . scss-mode)
+       (derived-mode . haml-mode)
+       (mode . sass-mode)))
+     ("gnus"
+      (or
+       (mode . message-mode)
+       (mode . mail-mode)
+       (mode . gnus-group-mode)
+       (mode . gnus-summary-mode)
+       (mode . gnus-article-mode))))))
  '(mode-line-in-non-selected-windows t)
- '(org-agenda-files (quote ("~/.spacemacs.d/setup_files/base_agenda.org")))
+ '(org-agenda-files
+   (quote
+    ("/Users/jgrey/.spacemacs.d/setup_files/base_agenda.org")))
  '(package-selected-packages
    (quote
-<<<<<<< HEAD
-    (graphviz-dot-mode transient lv go-guru go-eldoc company-go go-mode helm-cscope xcscope twittering-mode bundler rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake minitest chruby inf-ruby helm-gtags ggtags nlinum rainbow-mode racket-mode org-ref pdf-tools key-chord livid-mode json-mode js2-refactor hy-mode helm-bibtex fsharp-mode company-web company-tern company-ghc company-dcd ivy company-anaconda cargo biblio yapfify yaml-mode web-mode web-beautify toml-mode tagedit slim-mode skewer-mode scss-mode sass-mode faceup racer pyvenv pytest pyenv-mode py-isort pug-mode pip-requirements tablist omnisharp lua-mode simple-httpd live-py-mode json-snatcher json-reformat multiple-cursors js2-mode js-doc intero ibuffer-projectile dash-functional hlint-refactor hindent helm-pydoc helm-hoogle helm-css-scss parsebib haskell-snippets haml-mode glsl-mode ghc geiser company-quickhelp flycheck-rust flycheck-haskell flycheck-dmd-dub emmet-mode disaster d-mode cython-mode csharp-mode web-completion-data tern company-ghci haskell-mode company-cabal company-c-headers company-auctex anaconda-mode coffee-mode cmm-mode cmake-mode clang-format rust-mode biblio-core auctex-latexmk auctex pythonic erlang xterm-color unfill smeargle shell-pop orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download mwim multi-term magit-gitflow htmlize helm-gitignore helm-company helm-c-yasnippet gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter fuzzy flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck evil-magit magit magit-popup git-commit ghub treepy graphql with-editor eshell-z eshell-prompt-extras esh-help diff-hl company-statistics company auto-yasnippet yasnippet auto-dictionary ac-ispell auto-complete mmm-mode markdown-toc markdown-mode gh-md ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async)))
-=======
     (flycheck-plantuml plantuml-mode evil-quickscope vlf origami gscholar-bibtex dired-quick-sort elfeed filesets+ academic-phrases ht helm-filesets fsm free-keys evil-string-inflection string-inflection buffer-utils buffer-sets buffer-manage choice-program csv-mode graphviz-dot-mode stickyfunc-enhance srefactor reveal-in-osx-finder pbcopy osx-trash osx-dictionary launchctl disable-mouse parsec transient lv go-guru go-eldoc company-go go-mode helm-cscope xcscope twittering-mode bundler rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake minitest chruby inf-ruby helm-gtags ggtags nlinum rainbow-mode racket-mode org-ref pdf-tools key-chord livid-mode json-mode js2-refactor hy-mode helm-bibtex fsharp-mode company-web company-tern company-ghc company-dcd ivy company-anaconda cargo biblio yapfify yaml-mode web-mode web-beautify toml-mode tagedit slim-mode skewer-mode scss-mode sass-mode faceup racer pyvenv pytest pyenv-mode py-isort pug-mode pip-requirements tablist omnisharp lua-mode simple-httpd live-py-mode json-snatcher json-reformat multiple-cursors js2-mode js-doc intero ibuffer-projectile dash-functional hlint-refactor hindent helm-pydoc helm-hoogle helm-css-scss parsebib haskell-snippets haml-mode glsl-mode ghc geiser company-quickhelp flycheck-rust flycheck-haskell flycheck-dmd-dub emmet-mode disaster d-mode cython-mode csharp-mode web-completion-data tern company-ghci haskell-mode company-cabal company-c-headers company-auctex anaconda-mode coffee-mode cmm-mode cmake-mode clang-format rust-mode biblio-core auctex-latexmk auctex pythonic erlang xterm-color unfill smeargle shell-pop orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download mwim multi-term magit-gitflow htmlize helm-gitignore helm-company helm-c-yasnippet gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter fuzzy flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck evil-magit magit magit-popup git-commit ghub treepy graphql with-editor eshell-z eshell-prompt-extras esh-help diff-hl company-statistics company auto-yasnippet yasnippet auto-dictionary ac-ispell auto-complete mmm-mode markdown-toc markdown-mode gh-md ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async)))
->>>>>>> 743e3d6997562b61e4fdbc7c25c5f10e71e145ff
  '(paradox-github-token t)
- '(python-indent-guess-indent-offset nil)
+ '(python-indent-guess-indent-offset nil t)
  '(python-indent-guess-indent-offset-verbose nil)
  '(spaceline-helm-mode t))
 (custom-set-faces
@@ -409,6 +522,7 @@ you should place your code here."
  ;; If there is more than one, they won't work right.
  '(ac-completion-face ((t (:background "#444444" :foreground "color-84"))))
  '(ahs-face ((t (:background "color-63"))))
+ '(bold ((t (:weight bold))))
  '(helm-source-header ((t (:inherit bold :background "#0000d7" :foreground "white"))))
  '(highlight ((t (:background "#005faf" :foreground "#b2b2b2"))))
  '(linum ((t (:background "#1c1c1c" :foreground "color-117"))))

@@ -77,3 +77,25 @@
     Pomodoro Session: adding insertion functionality
 ** (2019/Jun/14) 21:37
     Pomodoro Session: working on interaction
+** (2019/Jun/17) 07:59
+    Pomodoro Session: adapting random file opener helm action to run on bibtex files
+** (2019/Jul/29) 07:19
+    Pomodoro Session: cleaning up bibtex cleaning in prep to split
+** (2019/Jul/29) 07:50
+    Pomodoro Session: bibtex cleaner works better, now adding splitting options
+** (2019/Jul/29) 08:19
+    cleaning up bibtex file before splitting
+** (2019/Aug/23) 13:15
+    Pomodoro Session: started on some notes about probability, and fiddled with org-ref
+** (2019/Aug/23) 13:46
+    Pomodoro Session: got a better handle on org mode source blocks
+** (2019/Aug/23) 17:13
+    Pomodoro Session: probability
+** (2019/Aug/23) 19:28
+    Pomodoro Session: moved onto poisson and normal distributions
+** (2019/Aug/23) 20:14
+    Pomodoro Session: got to standard normal curve
+** (2019/Aug/24) 17:59
+    Pomodoro Session: tagging cleaning using new minor mode
+** (2019/Aug/24) 18:29
+    Pomodoro Session: continued tagging

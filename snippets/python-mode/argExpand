@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: argExpand
+# key: argExpand
+# --
+args.$1 = abspath(expanduser(args.$1))

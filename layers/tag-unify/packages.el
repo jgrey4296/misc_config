@@ -3,6 +3,7 @@
                                helm-bibtex
                                dash
                                f
+                               org
                                )
   )
 
@@ -49,7 +50,6 @@
           )
     )
   )
-
 (defun tag-unify/pre-init-helm-bibtex ()
   ;; load the bibliography directory on startup
   (setq bibtex-completion-bibliography (tag-unify/build-bibtex-list))
@@ -81,7 +81,8 @@
     (require 'helm-bibtex)
     (when arg
       (bibtex-completion-clear-cache))
-    (let* ((candidates (if (or arg (null tag-unify/helm-bibtex-candidates))
+    (let* ((bibtex-completion-additional-search-fields '("tags" "year"))
+           (candidates (if (or arg (null tag-unify/helm-bibtex-candidates))
                            (progn (message "Generating Candidates")
                                   (bibtex-completion-init)
                                   (setq tag-unify/helm-bibtex-candidates
@@ -98,4 +99,12 @@
             :bibtex-candidates candidates
             )))
 
+  )
+(defun tag-unify/post-init-org ()
+  (spacemacs/set-leader-keys-for-major-mode 'org-mode
+    ". c" 'tag-unify/clean-org
+    )
+  (evil-define-key 'normal 'evil-org-mode-map
+    (kbd "g >") 'org-next-link
+    )
   )

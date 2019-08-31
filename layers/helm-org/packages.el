@@ -20,5 +20,8 @@
   (add-hook 'org-mode-hook (lambda ()
                              (evil-define-key 'normal org-mode-map
                                (kbd "g h")     'helm-org-in-buffer-headings
-	                             )))
+	                             )
+                             (evil-define-key 'normal evil-org-mode-map
+                               (kbd "g h")     'helm-org-in-buffer-headings
+                             ))
   )

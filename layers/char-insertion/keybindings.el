@@ -89,7 +89,7 @@
                   (kbd "C-x 8lN") "∄"
                   (kbd "C-x 8le") "∈"
                   (kbd "C-x 8ln") (lambda () (interactive) (insert "¬"))
-                  (kbd "C-x 8ld") (lambda () (iteractive) (insert "∨"))
+                  (kbd "C-x 8ld") (lambda () (interactive) (insert "∨"))
                   (kbd "C-x 8lc") (lambda () (interactive) (insert "∧"))
                   (kbd "C-x 8l<") "⧼"
                   (kbd "C-x 8l>") "⧽"

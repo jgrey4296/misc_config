@@ -101,10 +101,13 @@
 
   )
 (defun tag-unify/post-init-org ()
-  (spacemacs/set-leader-keys-for-major-mode 'org-mode
-    ". c" 'tag-unify/clean-org
+  (defun tag-unify/org-mod-map ()
+    (spacemacs/set-leader-keys-for-major-mode 'org-mode
+      ". c" 'tag-unify/clean-org
+      )
+    (evil-define-key 'normal 'evil-org-mode-map
+      (kbd "g >") 'org-next-link
+      )
     )
-  (evil-define-key 'normal 'evil-org-mode-map
-    (kbd "g >") 'org-next-link
-    )
+  (add-hook 'org-mode-hook 'tag-unify/org-mod-map)
   )

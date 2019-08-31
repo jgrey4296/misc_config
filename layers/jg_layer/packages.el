@@ -349,8 +349,7 @@
     ". o"   'jg_layer/open_link_in_buffer
     ". O"   'jg_layer/open_link_externally
     ". n"   'jg_layer/change_link_name
-    ;; Formatting
-    ". c"     'jg_layer/clean-org
+    ;;Formatting
     "i t"   'jg_layer/insert-heading-trio
     ;; Citation
     "i c" 'org-reftex-citation

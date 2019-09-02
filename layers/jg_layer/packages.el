@@ -597,8 +597,8 @@ the entry of interest in the bibfile.  but does not check that."
 ;;   (spacemacs|hide-lighter highlight-parentheses-mode)
 ;;   (set-face-attribute 'hl-paren-face nil :weight 'ultra-bold)))
 
-(defun jg_layer/init-origami ()
-  (use-package origami))
+;; (defun jg_layer/init-origami ()
+;;   (use-package origami))
 
 (defun jg_layer/post-init-origami ()
 

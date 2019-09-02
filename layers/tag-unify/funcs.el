@@ -16,13 +16,12 @@
 (defun tag-unify/open-url-action (x)
   """ An action added to helm-grep for loading urls found
   in bookmarks "
-  (interactive)
   (let* ((marked (helm-marked-candidates))
          (no-props (mapcar (lambda (x) (substring-no-properties x 0 (length x))) marked))
          link-start-point
          )
     (with-temp-buffer
-      (mapcar (lambda (x) (insert (format "%s\n" x))) no-props)
+      (mapc (lambda (x) (insert (format "%s\n" x))) no-props)
       (goto-char (point-min))
       (while (not (equal (point) (point-max)))
         ;; (search-forward "href=\"")
@@ -88,18 +87,41 @@
       )
     )
   )
+(defun tag-unify/map-entries-clean-whitespace ()
+  "Called with org-map-entries. reduces whitespace prior
+to point to a single new line"
+  (set-marker tag-unify/org-clean-marker (line-end-position))
+  (if (not (eq (point) (point-min)))
+      (progn
+        (while (eq 0 (string-match "^[[:space:]]*$"
+                                   (buffer-substring
+                                    (line-beginning-position 0)
+                                    (line-end-position 0))))
+          (join-line))
+        (if (not (string-equal "*" (buffer-substring
+                                    (line-beginning-position 0)
+                                    (+ 1 (line-beginning-position 0)))))
+            (insert "\n"))
+        (setq org-map-continue-from tag-unify/org-clean-marker)
+        )
+    )
+  )
 (defun tag-unify/clean-org ()
   (interactive)
+  (message "Starting Org Clean")
+
+  (message "Hiding Properties")
+  (org-cycle-hide-drawers 'all)
   ;; indent region
-  (evil-indent (point-min) (point-max))
+  (spacemacs/indent-region-or-buffer)
   (whitespace-cleanup)
   ;; fill
-  (evil-fill (point-min) (point-max))
+  (fill-region (point-min) (point-max))
 
   ;;Reset to beginning
   (goto-char (point-min))
-
   ;;Find all pic.twitter's and ensure on new line
+  (message "Finding pic.twitter's")
   (while (search-forward "pic.twitter" nil t)
     (let ((sub (buffer-substring (line-beginning-position) (point))))
       (if (not (string-match "^[[:space:]]+pic.twitter" sub))
@@ -110,29 +132,54 @@
       (forward-line)
       )
     )
-  (evil-indent (point-min) (point-max))
+  ;; Clean Whitespace
+  (message "Cleaning Whitespace")
+  (setq tag-unify/org-clean-marker (make-marker))
+  (org-map-entries 'tag-unify/map-entries-clean-whitespace t nil)
+  (set-marker tag-unify/org-clean-marker nil)
+
+  (goto-char (point-min))
+  (while (null (org-next-link))
+    (let ((prev-line (buffer-substring (line-beginning-position 0)
+                                       (line-end-position 0))))
+      ;; (debug)
+      (set-marker tag-unify/org-clean-marker (point))
+      (cond  ((eq 0 (string-match "^[[:space:]]+:PERMALINK:" prev-line))
+              (join-line))
+             ((eq 0 (string-match "^[[:space:]]+:PROPERTIES:" prev-line))
+              nil)
+             ((not (eq 0 (string-match "^[[:space:]]*$" (buffer-substring
+                                                         (line-beginning-position)
+                                                         tag-unify/org-clean-marker))))
+              (insert "\n")
+              (let ((lnk (assq :link (org-context))))
+                (if lnk
+                    (goto-char (nth 2 lnk))
+                  (forward-char 5)))
+              )
+             (t
+              (while (eq 0 (string-match "^[[:space:]]*$" (buffer-substring
+                                                           (line-beginning-position 0)
+                                                           (line-end-position 0))))
+                (join-line)
+                )
+              (let ((lnk (assq :link (org-context))))
+                (if lnk
+                    (goto-char (nth 2 lnk))
+                  (forward-char 5)))
+              )
+             )
+      )
+    )
+  (message "Indenting")
+  (spacemacs/indent-region-or-buffer)
   (whitespace-cleanup)
+  (setq tag-unify/org-clean-marker nil)
 
-
-  ;; (search-forward-regexp "\\*+ Links" nil 1 nil)
-  ;; (while (< (point) (point-max))
-  ;;   ;; get current level,
-  ;;   ;; get links in the current level
-
-  ;;   (search-forward-regexp "\\*+ Links" nil 1 nil)
-  ;;   )
-
-  ;; for all links:
-
-
-
-  ;; ensure on a newline
-
-  ;; for all tweets
-  ;; go line by line, separate out sentences
-
-  ;;for all hashtags put on newline
-
-  ;;apply whitelisted tags if found
-
+  (goto-char (point-min))
+  (while (re-search-forward "]\\[\n[[:space:]]+" nil t)
+    (replace-match "][")
+    )
+  (org-cycle-hide-drawers 'all)
+  (message "Org Clean Finished")
   )

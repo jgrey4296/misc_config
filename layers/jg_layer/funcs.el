@@ -174,14 +174,17 @@
             (already_used_files (if (f-exists? log_file) (with-temp-buffer
                                                            (insert-file-contents log_file)
                                                            (let ((uf (make-hash-table :test 'equal)))
-                                                             (seq-each (lambda (x) (puthash x 't uf)) (split-string (buffer-string) "\n"))
+                                                             (seq-each (lambda (x) (puthash (downcase x) 't uf)) (split-string (buffer-string) "\n"))
                                                              uf))
-                                  (make-hash-table :test 'string-equal)))
+                                  (progn (message "Making new hash table")
+                                         (make-hash-table :test 'equal))))
             (stay_looping 't)
             )
         (while (and stay_looping (> (length all_files) (length (hash-table-keys already_used_files))))
           (let ((the_choice (seq-random-elt all_files)))
-            (if (not (gethash the_choice already_used_files))
+            (message "Checking for: %s" the_choice)
+            (message "Result: %s" (gethash (downcase the_choice) already_used_files))
+            (if (not (gethash (downcase the_choice) already_used_files))
                 (progn
                   (write-region the_choice nil log_file 'append)
                   (write-region "\n" nil log_file 'append)
@@ -208,14 +211,14 @@
                                               (let ((uf (make-hash-table :test 'equal)))
                                                 (seq-each (lambda (x) (puthash x 't uf)) (split-string (buffer-string) "\n"))
                                                 uf))
-                     (make-hash-table :test 'string-equal)))
+                     (make-hash-table :test 'equal)))
          )
     ;; go to random line
     (goto-char (random (point-max)))
     (org-ref-bibtex-next-entry)
     (let ((entry (bibtex-parse-entry)))
       (while entry
-        (if (gethash (alist-get "=key=" entry nil nil 'string-equal) log_hash)
+        (if (gethash (alist-get "=key=" entry nil nil 'equal) log_hash)
             (progn (goto-char (random (point-max)))
                    (org-reg-bibtex-next-entry)
                    (setq entry (bibtex-parse-entry)))
@@ -243,10 +246,10 @@
          (log_file (f-join location ".emacs_rand_bookmark_log"))
          (log_hash (if (f-exists? log_file) (with-temp-buffer
                                               (insert-file-contents log_file)
-                                              (let ((uf (make-hash-table :test 'string-equal)))
+                                              (let ((uf (make-hash-table :test 'equal)))
                                                 (seq-each (lambda (x) (puthash x 't uf)) (split-string (buffer-string) "\n"))
                                                 uf))
-                     (make-hash-table :test 'string-equal)))
+                     (make-hash-table :test 'equal)))
          )
     ;; go to random line
     ;;(alist-get 'HREF (cadr data)) = href/tags
@@ -256,13 +259,13 @@
     (forward-char 4)
     (let ((entry (xml-parse-tag)))
       (while entry
-        (if (gethash (alist-get 'HREF (cadr entry) nil nil 'string-equal) log_hash)
+        (if (gethash (alist-get 'HREF (cadr entry) nil nil 'equal) log_hash)
             (progn (goto-char (random (point-max)))
                    (goto-char (line-beginning-position))
                    (forward-char 4)
                    (setq entry (xml-parse-tag)))
           (progn
-            (write-region (alist-get 'HREF (cadr entry) nil nil 'string-equal)
+            (write-region (alist-get 'HREF (cadr entry) nil nil 'equal)
                           nil log_file 'append)
             (write-region "\n" nil log_file 'append)
             (narrow-to-region (line-beginning-position) (line-end-position))

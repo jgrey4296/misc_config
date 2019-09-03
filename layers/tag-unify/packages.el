@@ -4,6 +4,7 @@
                                dash
                                f
                                org
+                               dired
                                )
   )
 
@@ -104,6 +105,7 @@
   (defun tag-unify/org-mod-map ()
     (spacemacs/set-leader-keys-for-major-mode 'org-mode
       ". c" 'tag-unify/clean-org
+      ". w" 'tag-unify/wrap-numbers
       )
     (evil-define-key 'normal 'evil-org-mode-map
       (kbd "g >") 'org-next-link
@@ -111,3 +113,11 @@
     )
   (add-hook 'org-mode-hook 'tag-unify/org-mod-map)
   )
+
+(defun tag-unify/post-init-dired ()
+  (spacemacs/set-leader-keys-for-major-mode 'dired-mode
+    "c" 'tag-unify/clean-marked-files
+    "!" 'tag-unify/chop-long-files-from-dired
+    "B" 'tag-unify/unify-pdf-locations
+    )
+)

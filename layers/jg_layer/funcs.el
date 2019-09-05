@@ -138,6 +138,11 @@
   (find-file "~")
   )
 
+(defun jg_layer/goto-resources ()
+  (interactive)
+  (find-file "~/github/writing/resources")
+  )
+
 (defun jg_layer/goto-desktop ()
   (interactive)
   (find-file "~/Desktop")

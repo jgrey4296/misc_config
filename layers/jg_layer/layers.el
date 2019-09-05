@@ -68,5 +68,6 @@
                                       (shaders :defer)
                                       (octave :defer)
                                       ;;prolog
+                                      clingo
                                       ;;smalltalk
 ))

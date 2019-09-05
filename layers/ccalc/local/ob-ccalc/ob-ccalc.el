@@ -54,7 +54,7 @@
 (require 'prolog)
 
 
-(add-to-list 'org-babel-tangle-lang-exts '("prolog" . "pl"))
+(add-to-list 'org-babel-tangle-lang-exts '("ccalc" . "pl"))
 
 (defvar org-babel-ccalc-location "~/github/otherlibs/ccalc/ccalc.pl")
 (defvar org-babel-ccalc-command  "swipl6"
@@ -71,7 +71,8 @@
 This function is called by `org-babel-execute-src-block.'"
   (message "executing Ccalc source code block")
   (let* ((result-params (cdr (assq :result-params params)))
-         (session (cdr (assq :session params)))
+         (session (format "*CCalc: %s*" (cdr (assq :session params))))
+         (treat-as-file (assq :as-file params))
          (goal (org-babel-ccalc--parse-goal
                 (cdr (assq :goal params))))
          (vars (org-babel-variable-assignments:ccalc params))
@@ -80,7 +81,7 @@ This function is called by `org-babel-execute-src-block.'"
                       (org-babel-ccalc-evaluate-external-process
                        goal full-body)
                     (org-babel-ccalc-evaluate-session
-                     session goal full-body))))
+                     session goal full-body treat-as-file))))
     (unless (string= "" results)
       (org-babel-reassemble-table
        (org-babel-result-cond result-params
@@ -93,16 +94,21 @@ This function is called by `org-babel-execute-src-block.'"
        (org-babel-pick-name (cdr (assq :rowname-names params))
                             (cdr (assq :rownames params)))))))
 
-(defun org-babel-ccalc-evaluate-session (session goal body)
+(defun org-babel-ccalc-evaluate-session (session goal body as-file)
   "In SESSION, evaluate GOAL given the BODY of the Ccalc block.
 
 Create SESSION if it does not already exist."
   (let* ((session (org-babel-ccalc-initiate-session session))
-         (body (split-string (org-babel-trim body) "\n")))
+         (split-body (split-string (org-babel-trim body) "\n")))
+    (if as-file
+        (let* ((tmp-file (org-babel-temp-file "ccalc-" ".pl")))
+          (message "Treating as file")
+          (with-temp-file tmp-file (insert (org-babel-chomp body)))
+          (setq split-body `(,(format "loadf '%s'." tmp-file)))
+          ))
     (with-temp-buffer
-      (apply #'insert (org-babel-ccalc--session-load-clauses session body))
-      (if (save-excursion
-            (search-backward "ERROR: " nil t))
+      (apply #'insert (org-babel-ccalc--session-load-clauses session split-body))
+      (if (save-excursion (search-backward "ERROR: " nil t))
           (progn
             (save-excursion
               (while (search-backward "|: " nil t)
@@ -126,6 +132,7 @@ Create SESSION if it does not already exist."
           ;;(kill-whole-line)
           (org-babel-eval-error-notify -1 (buffer-string))
           (org-babel-trim (buffer-string)))))))
+
 (defun org-babel-ccalc-initiate-session (&optional session)
   "Return SESSION with a current inferior-process-buffer.
 Initialize SESSION if it has not already been initialized."
@@ -139,8 +146,7 @@ Initialize SESSION if it has not already been initialized."
                  "ccalc"
                  (current-buffer)
                  org-babel-ccalc-command
-                 nil
-                 `("-f" ,org-babel-ccalc-location))
+                 nil)
           (add-hook 'comint-output-filter-functions
                     #'org-babel-ccalc--answer-correction nil t)
           (add-hook 'comint-output-filter-functions
@@ -152,13 +158,16 @@ Initialize SESSION if it has not already been initialized."
                    (not (save-excursion
                           (re-search-forward comint-prompt-regexp nil t))))
             (accept-process-output
-             (get-buffer-process session)))))
-      session)))
+             (get-buffer-process session)))
+          )
+        (org-babel-ccalc--session-load-clauses session `(,(format "['%s']." org-babel-ccalc-location)))
+        )
+      session)
+    ))
 
 (defun org-babel-ccalc--session-load-clauses (session clauses)
   (with-current-buffer session
     (setq comint-prompt-regexp "^|: *"))
-  ;; (org-babel-comint-input-command session "consult(user).\n")
   (org-babel-comint-with-output (session "\n")
     (setq comint-prompt-regexp (prolog-prompt-regexp))
     (dolist (line clauses)
@@ -167,7 +176,6 @@ Initialize SESSION if it has not already been initialized."
       (accept-process-output
        (get-buffer-process session)))
     (comint-send-input)))
-    ;; (comint-send-eof)))
 
 (defun org-babel-ccalc-evaluate-external-process (goal body)
   "Evaluate the GOAL given the BODY in an external Ccalc process.

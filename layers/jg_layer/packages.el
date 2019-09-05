@@ -41,6 +41,7 @@
     vlf
     plantuml-mode
     flycheck-plantuml
+    ob-prolog
     ;; ggtags
     ;; (helm-gtags :toggle (configuration-layer/package-usedp 'helm))
     ;; xcscope
@@ -723,4 +724,12 @@ the entry of interest in the bibfile.  but does not check that."
 (defun jg_layer/post-init-shell-pop ()
   (spacemacs/set-leader-keys
     "as" nil)
+  )
+
+(defun jg_layer/init-ob-prolog ()
+  (use-package ob-prolog
+    :init
+    (org-babel-do-load-languages
+     'org-babel-load-languages '((prolog . t)))
+    )
   )

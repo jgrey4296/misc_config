@@ -99,3 +99,11 @@
     Pomodoro Session: tagging cleaning using new minor mode
 ** (2019/Aug/24) 18:29
     Pomodoro Session: continued tagging
+** (2019/Sep/02) 16:40
+    Pomodoro Session: going through saved twitter threads
+** (2019/Sep/02) 17:21
+    Pomodoro Session: continued with saved twitter threads
+** (2019/Sep/05) 15:59
+    Pomodoro Session: implemented a custom org-babel-eval for clingo
+** (2019/Sep/05) 16:45
+    Pomodoro Session: refining ob-clingo with header args

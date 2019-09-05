@@ -52,69 +52,12 @@
 (require 'ob-eval)
 (require 'prolog)
 
-
 (add-to-list 'org-babel-tangle-lang-exts '("prolog" . "pl"))
-
 (defvar org-babel-clingo-command  "clingo"
   "Name of the clingo executable command.")
-
 (defconst org-babel-header-args:clingo
   '((:goal . :any))
   "Clingo-specific header arguments.")
-
-(defun org-babel-clingo--elisp-to-pl (value)
-  "Convert the Emacs Lisp VALUE to equivalent Clingo."
-  (cond ((stringp value)
-         (format "'%s'"
-                 (replace-regexp-in-string
-                  "'" "\\'" value)))
-        ((listp value)
-         (format "[%s]"
-                 (mapconcat #'org-babel-clingo--elisp-to-pl
-                            value
-                            ", ")))
-        (t (prin1-to-string value))))
-
-(defun org-babel-clingo--variable-assignment (pair)
-  "Return a string of a recorda/2 assertion of (cdr PAIR) under (car PAIR).
-
-The Emacs Lisp value of the car of PAIR is used as the Key argument to
-recorda/2 without modification.  The cdr of PAIR is converted to
-equivalent Clingo before being provided as the Term argument to
-recorda/2."
-  (format ":- recorda('%s', %s)."
-          (car pair)
-          (org-babel-clingo--elisp-to-pl (cdr pair))))
-
-(defun org-babel-variable-assignments:clingo (params)
-  "Return the babel variable assignments in PARAMS.
-
-PARAMS is a quasi-alist of header args, which may contain
-multiple entries for the key `:var'.  This function returns a
-list of the cdr of all the `:var' entries."
-  (let (vars)
-    (dolist (param params vars)
-      (when (eq :var (car param))
-        (let ((var (org-babel-clingo--variable-assignment (cdr param))))
-          (setq vars (cons var vars)))))))
-
-(defun org-babel-clingo--parse-goal (goal)
-  "Evaluate the inline Emacs Lisp in GOAL.
-
-Example:
-      append(=(+ 2 3), =(quote a), B)
-   => append(5, a, B)"
-  (when goal
-    (with-temp-buffer
-      (insert goal)
-      (while (search-backward "=" nil t)
-        (delete-char 1 t)
-        (let ((value (eval
-                      (read
-                       (thing-at-point 'sexp)))))
-          (kill-sexp)
-          (insert (format "%S" value))))
-      (buffer-string))))
 
 (defun org-babel-execute:clingo (body params)
   "Execute the Clingo in BODY according to the block's header PARAMS.
@@ -144,56 +87,10 @@ This function is called by `org-babel-execute-src-block.'"
        (org-babel-pick-name (cdr (assq :rowname-names params))
                             (cdr (assq :rownames params)))))))
 
-(defun org-babel-prep-session:clingo (session params)
-  (let ((var-lines (org-babel-variable-assignments:clingo params)))
-    (org-babel-clingo--session-load-clauses session var-lines)
-    session))
-
-(defun org-babel-load-session:clingo (session body params)
-  "Load the BODY into the SESSION given the PARAMS."
-  (let* ((params (org-babel-process-params params))
-         (goal (org-babel-clingo--parse-goal (cdr (assq :goal params))))
-         (session (org-babel-clingo-initiate-session session)))
-    (org-babel-prep-session:clingo session params)
-    (org-babel-clingo-evaluate-session session goal body)
-    (with-current-buffer session
-      (goto-char (point-max)))
-    session))
-
-(defun org-babel-clingo-evaluate-external-process (goal body params)
-  "Evaluate the GOAL given the BODY in an external Clingo process.
-
-If no GOAL is given, the GOAL is replaced with HALT.  This results in
-running just the body through the Clingo process."
-  (let* ((tmp-file (org-babel-temp-file "clingo-"))
-         (clingo-params (org-babel-clingo-format-args params))
-         (command (format "%s %s %s"
-                          org-babel-clingo-command
-                          clingo-params
-                          tmp-file)))
-    (message "All Params: %s" params)
-    (with-temp-file tmp-file
-      (insert (org-babel-chomp body)))
-    (message "Going to execute: %s" command)
-    (org-babel-clingo-eval command "")))
-
-(defun org-babel-clingo--session-load-clauses (session clauses)
-  (with-current-buffer session
-    (setq comint-prompt-regexp "^|: *"))
-  (org-babel-comint-input-command session "consult(user).\n")
-  (org-babel-comint-with-output (session "\n")
-    (setq comint-prompt-regexp (clingo-prompt-regexp))
-    (dolist (line clauses)
-      (insert line)
-      (comint-send-input nil t)
-      (accept-process-output
-       (get-buffer-process session)))
-    (comint-send-eof)))
-
 (defun org-babel-clingo-evaluate-session (session goal body)
   "In SESSION, evaluate GOAL given the BODY of the Clingo block.
-
 Create SESSION if it does not already exist."
+  (error "Clingo session not yet implemented")
   (let* ((session (org-babel-clingo-initiate-session session))
          (body (split-string (org-babel-trim body) "\n")))
     (with-temp-buffer
@@ -223,17 +120,6 @@ Create SESSION if it does not already exist."
           ;;(kill-whole-line)
           (org-babel-eval-error-notify -1 (buffer-string))
           (org-babel-trim (buffer-string)))))))
-
-(defun org-babel-clingo--answer-correction (string)
-  "If STRING is Clingo's \"Correct to:\" prompt, send a refusal."
-  (when (string-match-p "Correct to: \".*\"\\?" string)
-    (comint-send-input nil t)))
-
-(defun org-babel-clingo--exit-debug (string)
-  "If STRING indicates an exception, continue Clingo execution in no debug mode."
-  (when (string-match-p "\\(.\\|\n\\)*Exception.* \\? $" string)
-    (comint-send-input nil t)))
-
 (defun org-babel-clingo-initiate-session (&optional session)
   "Return SESSION with a current inferior-process-buffer.
 
@@ -263,7 +149,35 @@ Initialize SESSION if it has not already been initialized."
             (accept-process-output
              (get-buffer-process session)))))
       session)))
+(defun org-babel-clingo--session-load-clauses (session clauses)
+  (with-current-buffer session
+    (setq comint-prompt-regexp "^|: *"))
+  (org-babel-comint-input-command session "consult(user).\n")
+  (org-babel-comint-with-output (session "\n")
+    (setq comint-prompt-regexp (clingo-prompt-regexp))
+    (dolist (line clauses)
+      (insert line)
+      (comint-send-input nil t)
+      (accept-process-output
+       (get-buffer-process session)))
+    (comint-send-eof)))
 
+(defun org-babel-clingo-evaluate-external-process (goal body params)
+  "Evaluate the GOAL given the BODY in an external Clingo process.
+
+If no GOAL is given, the GOAL is replaced with HALT.  This results in
+running just the body through the Clingo process."
+  (let* ((tmp-file (org-babel-temp-file "clingo-"))
+         (clingo-params (org-babel-clingo-format-args params))
+         (command (format "%s %s %s"
+                          org-babel-clingo-command
+                          clingo-params
+                          tmp-file)))
+    (message "All Params: %s" params)
+    (with-temp-file tmp-file
+      (insert (org-babel-chomp body)))
+    (message "Going to execute: %s" command)
+    (org-babel-clingo-eval command "")))
 (defun org-babel-clingo-eval (cmd body)
   "Run CMD on BODY.
 If CMD succeeds then return its results, otherwise display
@@ -298,6 +212,14 @@ see: https://www.mat.unical.it/aspcomp2013/files/aspoutput.txt
 
             ((format "FALLBACK: %s\n\n%s" exit-code (buffer-string)))))))
 
+(defun org-babel-clingo--answer-correction (string)
+  "If STRING is Clingo's \"Correct to:\" prompt, send a refusal."
+  (when (string-match-p "Correct to: \".*\"\\?" string)
+    (comint-send-input nil t)))
+(defun org-babel-clingo--exit-debug (string)
+  "If STRING indicates an exception, continue Clingo execution in no debug mode."
+  (when (string-match-p "\\(.\\|\n\\)*Exception.* \\? $" string)
+    (comint-send-input nil t)))
 (defun org-babel-clingo-format-args (params)
   (mapconcat (lambda (x)
                (let ((sym (symbol-name (car x)))
@@ -314,7 +236,57 @@ see: https://www.mat.unical.it/aspcomp2013/files/aspoutput.txt
                )
              params "")
   )
+(defun org-babel-clingo--elisp-to-pl (value)
+  "Convert the Emacs Lisp VALUE to equivalent Clingo."
+  (cond ((stringp value)
+         (format "'%s'"
+                 (replace-regexp-in-string
+                  "'" "\\'" value)))
+        ((listp value)
+         (format "[%s]"
+                 (mapconcat #'org-babel-clingo--elisp-to-pl
+                            value
+                            ", ")))
+        (t (prin1-to-string value))))
+(defun org-babel-clingo--variable-assignment (pair)
+  "Return a string of a recorda/2 assertion of (cdr PAIR) under (car PAIR).
+
+The Emacs Lisp value of the car of PAIR is used as the Key argument to
+recorda/2 without modification.  The cdr of PAIR is converted to
+equivalent Clingo before being provided as the Term argument to
+recorda/2."
+  (format ":- recorda('%s', %s)."
+          (car pair)
+          (org-babel-clingo--elisp-to-pl (cdr pair))))
+(defun org-babel-variable-assignments:clingo (params)
+  "Return the babel variable assignments in PARAMS.
+
+PARAMS is a quasi-alist of header args, which may contain
+multiple entries for the key `:var'.  This function returns a
+list of the cdr of all the `:var' entries."
+  (let (vars)
+    (dolist (param params vars)
+      (when (eq :var (car param))
+        (let ((var (org-babel-clingo--variable-assignment (cdr param))))
+          (setq vars (cons var vars)))))))
+(defun org-babel-clingo--parse-goal (goal)
+  "Evaluate the inline Emacs Lisp in GOAL.
+
+Example:
+      append(=(+ 2 3), =(quote a), B)
+   => append(5, a, B)"
+  (when goal
+    (with-temp-buffer
+      (insert goal)
+      (while (search-backward "=" nil t)
+        (delete-char 1 t)
+        (let ((value (eval
+                      (read
+                       (thing-at-point 'sexp)))))
+          (kill-sexp)
+          (insert (format "%S" value))))
+      (buffer-string))))
 
 
-  (provide 'ob-clingo)
+(provide 'ob-clingo)
 ;;; ob-clingo.el ends here

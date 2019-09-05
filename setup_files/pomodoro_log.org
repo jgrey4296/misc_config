@@ -107,3 +107,13 @@
     Pomodoro Session: implemented a custom org-babel-eval for clingo
 ** (2019/Sep/05) 16:45
     Pomodoro Session: refining ob-clingo with header args
+** (2019/Sep/05) 18:21
+    Pomodoro Session: bringing the causal calculator up to working standard in org
+** (2019/Sep/05) 19:16
+    Pomodoro Session: debugging ob-clingo
+** (2019/Sep/05) 20:23
+    Pomodoro Session: GOT CLINGO WORKING IN ORG
+** (2019/Sep/05) 21:03
+    Pomodoro Session: refining ccalc
+** (2019/Sep/05) 21:33
+    Pomodoro Session: continued to debug ccalc

@@ -132,7 +132,6 @@ Create SESSION if it does not already exist."
           ;;(kill-whole-line)
           (org-babel-eval-error-notify -1 (buffer-string))
           (org-babel-trim (buffer-string)))))))
-
 (defun org-babel-ccalc-initiate-session (&optional session)
   "Return SESSION with a current inferior-process-buffer.
 Initialize SESSION if it has not already been initialized."
@@ -164,7 +163,6 @@ Initialize SESSION if it has not already been initialized."
         )
       session)
     ))
-
 (defun org-babel-ccalc--session-load-clauses (session clauses)
   (with-current-buffer session
     (setq comint-prompt-regexp "^|: *"))
@@ -182,16 +180,8 @@ Initialize SESSION if it has not already been initialized."
 
 If no GOAL is given, the GOAL is replaced with HALT.  This results in
 running just the body through the Ccalc process."
-  (message "RUNNING EXTERNAL PROCESS")
-  (let* ((tmp-file (org-babel-temp-file "ccalc-"))
-         (command (format "%s --quiet -l %s -g \"%s\" -t 'halt'"
-                          org-babel-ccalc-command
-                          tmp-file
-                          (replace-regexp-in-string
-                           "\"" "\\\"" (or goal "halt")))))
-    (with-temp-file tmp-file
-      (insert (org-babel-chomp body)))
-    (or (org-babel-eval command "") "")))
+  (error "CCalc needs to be run as a session"))
+
 
 (defun org-babel-ccalc--answer-correction (string)
   "If STRING is Ccalc's \"Correct to:\" prompt, send a refusal."

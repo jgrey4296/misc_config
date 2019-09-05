@@ -3,7 +3,8 @@
 # key: block.code
 # group: src
 # --
-#+begin_src $1 :results value
+#+NAME: $1
+#+begin_src $2 :results value
 	$3
 #+end_src
 $0

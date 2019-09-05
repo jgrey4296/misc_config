@@ -69,5 +69,6 @@
                                       (octave :defer)
                                       ;;prolog
                                       clingo
+                                      ccalc
                                       ;;smalltalk
 ))

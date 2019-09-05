@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: citedrawer
+# key: citedrawer
+# --
+:citations:
+$0
+:END:

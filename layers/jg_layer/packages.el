@@ -42,7 +42,7 @@
     plantuml-mode
     flycheck-plantuml
     ob-prolog
-    (ob-ccalc :location local)
+
     ;; ggtags
     ;; (helm-gtags :toggle (configuration-layer/package-usedp 'helm))
     ;; xcscope
@@ -732,14 +732,6 @@ the entry of interest in the bibfile.  but does not check that."
     :init
     (org-babel-do-load-languages
      'org-babel-load-languages '((prolog . t)))
-    )
-  )
-
-(defun jg_layer/init-ob-ccalc ()
-  (use-package ob-ccalc
-    :init
-    (org-babel-do-load-languages
-     'org-babel-load-languages '((ccalc . t)))
     )
   )
 

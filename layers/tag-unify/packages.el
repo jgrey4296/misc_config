@@ -106,6 +106,7 @@
     (spacemacs/set-leader-keys-for-major-mode 'org-mode
       ". c" 'tag-unify/clean-org
       ". w" 'tag-unify/wrap-numbers
+      ". L" 'tag-unify/wrap-non-link-urls
       )
     (evil-define-key 'normal 'evil-org-mode-map
       (kbd "g >") 'org-next-link

@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: block.clingo
+# key: block.clingo
+# --
+#+NAME: $1
+#+begin_src clingo :results value
+$4
+#+end_src
+$0

@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: clingo-args
+# key: clingo-args
+# --
+
+#+NAME: for testing ob-clingo
+#+HEADER: :clingo-args -n 4
+#+HEADER: :clingo-verbose=0
+#+HEADER: :clingo-time-limit=10
+#+HEADER: :clingo-quiet=0
+#+HEADER: :clingo-seed=5
+#+HEADER: :clingo-rand-freq=0.8
+#+HEADER: :clingo-rand-prob=5,5
+#+HEADER: :clingo-shuffle=3
+#+HEADER: :c-W all

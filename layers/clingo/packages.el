@@ -1,6 +1,5 @@
 (defconst clingo-packages
   '(
-    prolog
     (ob-clingo :location local)
     )
   )

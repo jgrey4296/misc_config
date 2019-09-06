@@ -1,18 +1,19 @@
 * Base Agenda
-    :LOGBOOK:
-    CLOCK: [2019-09-05 Thu 21:38]
-    CLOCK: [2019-09-05 Thu 21:08]--[2019-09-05 Thu 21:33] =>  0:25
-    CLOCK: [2019-09-05 Thu 20:38]--[2019-09-05 Thu 21:03] =>  0:25
-    CLOCK: [2019-09-05 Thu 19:58]--[2019-09-05 Thu 20:23] =>  0:25
-    CLOCK: [2019-09-05 Thu 18:51]--[2019-09-05 Thu 19:16] =>  0:25
-    CLOCK: [2019-09-05 Thu 17:55]--[2019-09-05 Thu 18:20] =>  0:25
-    CLOCK: [2019-09-05 Thu 16:19]--[2019-09-05 Thu 16:44] =>  0:25
-    CLOCK: [2019-09-05 Thu 15:34]--[2019-09-05 Thu 15:59] =>  0:25
-    CLOCK: [2019-09-02 Mon 16:55]--[2019-09-02 Mon 17:20] =>  0:25
-    CLOCK: [2019-09-02 Mon 16:15]--[2019-09-02 Mon 16:40] =>  0:25
-    CLOCK: [2019-08-24 Sat 18:04]--[2019-08-24 Sat 18:29] =>  0:25
-    CLOCK: [2019-08-24 Sat 17:33]--[2019-08-24 Sat 17:58] =>  0:25
-    CLOCK: [2019-08-23 Fri 19:48]--[2019-08-23 Fri 20:13] =>  0:25
+  :#STARTUP: overview
+  :LOGBOOK:
+  CLOCK: [2019-09-05 Thu 22:27]--[2019-09-05 Thu 22:52] =>  0:25
+  CLOCK: [2019-09-05 Thu 21:08]--[2019-09-05 Thu 21:33] =>  0:25
+  CLOCK: [2019-09-05 Thu 20:38]--[2019-09-05 Thu 21:03] =>  0:25
+  CLOCK: [2019-09-05 Thu 19:58]--[2019-09-05 Thu 20:23] =>  0:25
+  CLOCK: [2019-09-05 Thu 18:51]--[2019-09-05 Thu 19:16] =>  0:25
+  CLOCK: [2019-09-05 Thu 17:55]--[2019-09-05 Thu 18:20] =>  0:25
+  CLOCK: [2019-09-05 Thu 16:19]--[2019-09-05 Thu 16:44] =>  0:25
+  CLOCK: [2019-09-05 Thu 15:34]--[2019-09-05 Thu 15:59] =>  0:25
+  CLOCK: [2019-09-02 Mon 16:55]--[2019-09-02 Mon 17:20] =>  0:25
+  CLOCK: [2019-09-02 Mon 16:15]--[2019-09-02 Mon 16:40] =>  0:25
+  CLOCK: [2019-08-24 Sat 18:04]--[2019-08-24 Sat 18:29] =>  0:25
+  CLOCK: [2019-08-24 Sat 17:33]--[2019-08-24 Sat 17:58] =>  0:25
+  CLOCK: [2019-08-23 Fri 19:48]--[2019-08-23 Fri 20:13] =>  0:25
   CLOCK: [2019-08-23 Fri 19:03]--[2019-08-23 Fri 19:28] =>  0:25
   CLOCK: [2019-08-23 Fri 18:17]--[2019-08-23 Fri 18:42] =>  0:25
   CLOCK: [2019-08-23 Fri 16:47]--[2019-08-23 Fri 17:12] =>  0:25
@@ -599,35 +600,35 @@
       is the same as ‘overview’.
 
       ‘overview’
-           Top-level headlines only.
+      Top-level headlines only.
 
       ‘content’
-           All headlines.
+      All headlines.
 
       ‘showall’
-           No folding on any entry.
+      No folding on any entry.
 
       ‘showeverything’
-           Show even drawer contents.
+      Show even drawer contents.
 
       Dynamic virtual indentation is controlled by the variable
       ‘org-startup-indented’(1).
 
       ‘indent’
-           Start with ‘org-indent-mode’ turned on.
+      Start with ‘org-indent-mode’ turned on.
 
       ‘noindent’
-           Start with ‘org-indent-mode’ turned off.
+      Start with ‘org-indent-mode’ turned off.
 
       Aligns tables consistently upon visiting a file.  The corresponding
       variable is ‘org-startup-align-all-tables’ with ‘nil’ as default
       value.
 
       ‘align’
-           Align all tables.
+      Align all tables.
 
       ‘noalign’
-           Do not align tables on startup.
+      Do not align tables on startup.
 
       Shrink table columns with a width cookie.  The corresponding
       variable is ‘org-startup-shrink-all-tables’ with ‘nil’ as default
@@ -638,65 +639,65 @@
       with a default value ‘nil’ to avoid delays when visiting a file.
 
       ‘inlineimages’
-           Show inline images.
+      Show inline images.
 
       ‘noinlineimages’
-           Do not show inline images on startup.
+      Do not show inline images on startup.
 
       Logging the closing and reopening of TODO items and clock intervals
       can be configured using these options (see variables
       ‘org-log-done’, ‘org-log-note-clock-out’, and ‘org-log-repeat’).
 
       ‘logdone’
-           Record a timestamp when an item is marked DONE.
+      Record a timestamp when an item is marked DONE.
 
       ‘lognotedone’
-           Record timestamp and a note when DONE.
+      Record timestamp and a note when DONE.
 
       ‘nologdone’
-           Do not record when items are marked DONE.
+      Do not record when items are marked DONE.
 
       ‘logrepeat’
-           Record a time when reinstating a repeating item.
+      Record a time when reinstating a repeating item.
 
       ‘lognoterepeat’
-           Record a note when reinstating a repeating item.
+      Record a note when reinstating a repeating item.
 
       ‘nologrepeat’
-           Do not record when reinstating repeating item.
+      Do not record when reinstating repeating item.
 
       ‘lognoteclock-out’
-           Record a note when clocking out.
+      Record a note when clocking out.
 
       ‘nolognoteclock-out’
-           Do not record a note when clocking out.
+      Do not record a note when clocking out.
 
       ‘logreschedule’
-           Record a timestamp when scheduling time changes.
+      Record a timestamp when scheduling time changes.
 
       ‘lognotereschedule’
-           Record a note when scheduling time changes.
+      Record a note when scheduling time changes.
 
       ‘nologreschedule’
-           Do not record when a scheduling date changes.
+      Do not record when a scheduling date changes.
 
       ‘logredeadline’
-           Record a timestamp when deadline changes.
+      Record a timestamp when deadline changes.
 
       ‘lognoteredeadline’
-           Record a note when deadline changes.
+      Record a note when deadline changes.
 
       ‘nologredeadline’
-           Do not record when a deadline date changes.
+      Do not record when a deadline date changes.
 
       ‘logrefile’
-           Record a timestamp when refiling.
+      Record a timestamp when refiling.
 
       ‘lognoterefile’
-           Record a note when refiling.
+      Record a note when refiling.
 
       ‘nologrefile’
-           Do not record when refiling.
+      Do not record when refiling.
 
       Here are the options for hiding leading stars in outline headings,
       and for indenting outlines.  The corresponding variables are
@@ -704,84 +705,84 @@
       default setting ‘nil’ (meaning ‘showstars’ and ‘oddeven’).
 
       ‘hidestars’
-           Make all but one of the stars starting a headline invisible.
+      Make all but one of the stars starting a headline invisible.
 
       ‘showstars’
-           Show all stars starting a headline.
+      Show all stars starting a headline.
 
       ‘indent’
-           Virtual indentation according to outline level.
+      Virtual indentation according to outline level.
 
       ‘noindent’
-           No virtual indentation according to outline level.
+      No virtual indentation according to outline level.
 
       ‘odd’
-           Allow only odd outline levels (1, 3, ...).
+      Allow only odd outline levels (1, 3, ...).
 
       ‘oddeven’
-           Allow all outline levels.
+      Allow all outline levels.
 
       To turn on custom format overlays over timestamps (variables
       ‘org-put-time-stamp-overlays’ and
       ‘org-time-stamp-overlay-formats’), use:
 
       ‘customtime’
-           Overlay custom time format.
+      Overlay custom time format.
 
       The following options influence the table spreadsheet (variable
       ‘constants-unit-system’).
 
       ‘constcgs’
-           ‘constants.el’ should use the c-g-s unit system.
+      ‘constants.el’ should use the c-g-s unit system.
 
       ‘constSI’
-           ‘constants.el’ should use the SI unit system.
+      ‘constants.el’ should use the SI unit system.
 
       To influence footnote settings, use the following keywords.  The
       corresponding variables are ‘org-footnote-define-inline’,
       ‘org-footnote-auto-label’, and ‘org-footnote-auto-adjust’.
 
       ‘fninline’
-           Define footnotes inline.
+      Define footnotes inline.
 
       ‘fnnoinline’
-           Define footnotes in separate section.
+      Define footnotes in separate section.
 
       ‘fnlocal’
-           Define footnotes near first reference, but not inline.
+      Define footnotes near first reference, but not inline.
 
       ‘fnprompt’
-           Prompt for footnote labels.
+      Prompt for footnote labels.
 
       ‘fnauto’
-           Create ‘[fn:1]’-like labels automatically (default).
+      Create ‘[fn:1]’-like labels automatically (default).
 
       ‘fnconfirm’
-           Offer automatic label for editing or confirmation.
+      Offer automatic label for editing or confirmation.
 
       ‘fnadjust’
-           Automatically renumber and sort footnotes.
+      Automatically renumber and sort footnotes.
 
       ‘nofnadjust’
-           Do not renumber and sort automatically.
+      Do not renumber and sort automatically.
 
       To hide blocks on startup, use these keywords.  The corresponding
       variable is ‘org-hide-block-startup’.
 
       ‘hideblocks’
-           Hide all begin/end blocks on startup.
+      Hide all begin/end blocks on startup.
 
       ‘nohideblocks’
-           Do not hide blocks on startup.
+      Do not hide blocks on startup.
 
       The display of entities as UTF-8 characters is governed by the
       variable ‘org-pretty-entities’ and the keywords
 
       ‘entitiespretty’
-           Show entities as UTF-8 characters where possible.
+      Show entities as UTF-8 characters where possible.
 
       ‘entitiesplain’
-           Leave entities plain.
+      Leave entities plain.
 ***** ‘#+TAGS: TAG1(c1) TAG2(c2)’
       These lines (several such lines are allowed) specify the valid tags
       in this file, and (potentially) the corresponding _fast tag selection_
@@ -868,5 +869,4 @@
 *** [[https://multiagentcontest.org/publications/][Multi Agent Contest]]
 *** [[http://slatestarcodex.com/2014/04/28/the-control-group-is-out-of-control/][The Control Group is out of control]]                                         :science:methods:
 *** [[http://www.sosmath.com/algebra/fraction/frac3/frac3.html][SoS Math]]                                                                    :useful:math:
-** 
-
+**

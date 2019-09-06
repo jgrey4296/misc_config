@@ -79,7 +79,7 @@
       )
     )
 
- )
+  )
 
 
 ;;--------------------------------------------------
@@ -201,6 +201,26 @@
           )
         )
       )
+    )
+  )
+
+(defun jg_layer/helm-describe-random-action (candidate)
+  "Helm action to describt how many of a directory's files have been randomly opened,
+versus not"
+  (let* ((candidates (helm-marked-candidates))
+         (file_ext (read-string "File Extension: "))
+         (log_file (f-join (if (f-dir? (car candidates)) (car candidates) (f-dirname (car candidates))) ".emacs_rand_file_log"))
+         (used-files (if (f-exists? log_file) (with-temp-buffer
+                                                (insert-file-contents log_file)
+                                                (let ((uf (make-hash-table :test 'equal)))
+                                                  (seq-each (lambda (x) (puthash (downcase x) 't uf)) (split-string (buffer-string) "\n"))
+                                                  uf))
+                       (make-hash-table :test 'equal)))
+         (all-files (-flatten (seq-map (lambda (x) (directory-files-recursively x file_ext)) candidates)))
+         (count 0)
+         )
+    (mapc (lambda (x) (if (not (gethash (downcase x) used-files)) (incf count))) all-files)
+    (message "Files not opened randomly: %s" count)
     )
   )
 
@@ -328,21 +348,21 @@
 (when (configuration-layer/package-usedp 'dired)
 
   (defun jg_layer/dired-auto-move ()
-  """ Function to move up a directory, to the next line, and into that """
-  (interactive)
-  (dired-up-directory)
-  (evil-next-line)
-  (dired-find-file)
-  (spacemacs/open-file-or-directory-in-external-app nil)
-  (let* ((current-dir (dired-current-directory))
-        (lst (dired-split "/" current-dir))
-        (search-str (apply 'f-join (-take-last 3 lst))))
-    (evil-window-right 1)
-    (goto-char (point-min))
-    (message "Searching for %s" search-str)
-    (search-forward search-str)
-    (evil-scroll-line-to-center (line-number-at-pos (point)))
-    (search-forward "tags = {")
+    """ Function to move up a directory, to the next line, and into that """
+    (interactive)
+    (dired-up-directory)
+    (evil-next-line)
+    (dired-find-file)
+    (spacemacs/open-file-or-directory-in-external-app nil)
+    (let* ((current-dir (dired-current-directory))
+           (lst (dired-split "/" current-dir))
+           (search-str (apply 'f-join (-take-last 3 lst))))
+      (evil-window-right 1)
+      (goto-char (point-min))
+      (message "Searching for %s" search-str)
+      (search-forward search-str)
+      (evil-scroll-line-to-center (line-number-at-pos (point)))
+      (search-forward "tags = {")
+      )
     )
   )
-)

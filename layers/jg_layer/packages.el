@@ -265,10 +265,13 @@
     ;;add in keybinding to kill line in completion window
     (define-key helm-map (kbd "C-k") 'kill-line)
     (define-key helm-map (kbd "<backtab>") 'helm-select-action)
-    (setq helm-find-files-actions (cons (car helm-find-files-actions)
-                                        (cons '("Open Random" . jg_layer/helm-open-random-action)
-                                              (cons '("Open Random External" . jg_layer/helm-open-random-external-action)
-                                                    (cdr helm-find-files-actions)))))
+    (setq helm-find-files-actions
+          (append `(,(car helm-find-files-actions))
+                  '(("Open Random" . jg_layer/helm-open-random-action))
+                  '(("Describe Random" . jg_layer/helm-describe-random-action))
+                  '(("Open Random External" . jg_layer/helm-open-random-external-action))
+                  (cdr helm-find-files-actions))
+          )
     )
   )
 
@@ -734,4 +737,3 @@ the entry of interest in the bibfile.  but does not check that."
      'org-babel-load-languages '((prolog . t)))
     )
   )
-

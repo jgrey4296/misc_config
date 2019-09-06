@@ -1,6 +1,4 @@
 (defconst ccalc-packages '(
-                           org
-                           ob
                            (ob-ccalc :location local)
                            ))
 

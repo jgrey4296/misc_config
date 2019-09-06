@@ -419,7 +419,7 @@ you should place your code here."
  '(global-evil-surround-mode t)
  '(helm-always-two-windows t)
  '(helm-autoresize-mode t)
- '(helm-bookmark-show-location t t)
+ '(helm-bookmark-show-location t)
  '(helm-descbinds-mode t)
  '(helm-descbinds-window-style (quote split))
  '(helm-display-function (quote spacemacs//display-helm-window))
@@ -439,19 +439,27 @@ you should place your code here."
     (("Home"
       ("helm-major-mode"
        (mode . helm-major-mode))
+      ("log4e-mode"
+       (mode . log4e-mode))
       ("prolog-mode"
        (mode . prolog-mode))
       ("emacs-lisp-mode"
        (mode . emacs-lisp-mode))
       ("spacemacs-buffer-mode"
        (mode . spacemacs-buffer-mode))
+      ("org-mode"
+       (mode . org-mode))
+      ("text-mode"
+       (mode . text-mode))
       ("dired-mode"
        (mode . dired-mode))
-      ("org-mode"
-       (mode . org-mode))))))
+      ("debugger-mode"
+       (mode . debugger-mode))))))
  '(ibuffer-saved-filters
    (quote
-    (("anti-helm"
+    (("org"
+      (used-mode . org-mode))
+     ("anti-helm"
       (not used-mode . helm-major-mode))
      ("python"
       (used-mode . python-mode))

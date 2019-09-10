@@ -39,13 +39,12 @@
 				                              org-tagging
                                       tag-unify
                                       char-insertion
+                                      music
 
                                       ;;LANGUAGES
                                       (csv :defer)
                                       (go :defer)
                                       (ruby :defer)
-                                      (sclang :defer)
-                                      (tidal :defer)
                                       (chuck :defer)
                                       (erlang :defer)
                                       haskell

@@ -426,13 +426,13 @@
 **** [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Major-Mode-Conventions.html#Major-Mode-Conventions][Major Mode conventions]]
 ***** Define a major mode command whose name ends in ‘-mode’.                   :naming:
 ***** Write a documentation string                                              :documentation:
-***** Start by calling ‘kill-all-local-variables’.                              :procedure:
+***** Start by calling ‘kill-all-local-variables’.
 ***** Set the variable ‘major-mode’ to the major mode command symbol.           :naming:
 ***** Set the variable ‘mode-name’ to the “pretty” name of the mode.            :naming:
-***** The major mode command should be idempotent.                              :procedure:
+***** The major mode command should be idempotent.
 ***** All variables and functions should start with the major mode name         :naming:
-***** The mode should set ‘indent-line-function’                                :procedure:
-***** The major mode should usually have its own keymap                         :procedure:
+***** The mode should set ‘indent-line-function’
+***** The major mode should usually have its own keymap
       The major mode command should call ‘use-local-map’ to install this local
       map.
 
@@ -440,29 +440,29 @@
       ‘MODENAME-mode-map’. Normally the library that defines the mode sets this
       variable.
 
-***** Major modes should not alter matters of user preference                   :procedure:
+***** Major modes should not alter matters of user preference
       Such as whether Auto-Fill mode is enabled. Leave this to
       each user to decide. However, a major mode should customize other
       variables so that Auto-Fill mode will work usefully _if_ the user decides
       to use it.
-***** The mode may have its own syntax table or may share one with other        :procedure:naming:
+***** The mode may have its own syntax table or may share one with other
       related modes. If it has its own syntax table, it should store this in a
       variable named ‘MODENAME-mode-syntax-table’.
-***** If the mode handles a language that has a syntax for comments, it         :procedure:
+***** If the mode handles a language that has a syntax for comments, it
       should set the variables that define the comment syntax.
-***** The mode may have its own abbrev table or may share one with other        :naming:procedure:
+***** The mode may have its own abbrev table or may share one with other
       related modes. If it has its own abbrev table, it should store this in a
       variable named ‘MODENAME-mode-abbrev-table’. If the major mode command
       defines any abbrevs itself, it should pass ‘t’ for the SYSTEM-FLAG
       argument to ‘define-abbrev’.
-***** The mode should specify how to do highlighting for Font Lock mode,        :display:procedure:naming:
+***** The mode should specify how to do highlighting for Font Lock mode,
       by setting up a buffer-local value for the variable ‘font-lock-defaults’
 ***** Each face that the mode defines should, if possible, inherit from         :display:
       an existing Emacs face.
 ***** The mode can specify how to complete various keywords by adding one       :naming:
       or more buffer-local entries to the special hook
       ‘completion-at-point-functions’.
-***** To make a buffer-local binding for an Emacs customization variable,       :procedure:
+***** To make a buffer-local binding for an Emacs customization variable,
       use ‘make-local-variable’ in the major mode command, not
       ‘make-variable-buffer-local’. The latter function would make the variable
       local to every buffer in which it is subsequently set, which would affect
@@ -473,23 +473,23 @@
       ‘make-variable-buffer-local’ in a Lisp package is for a variable which is
       used only within that package. Using it on a variable used by other
       packages would interfere with them.
-***** Each major mode should have a normal “mode hook” named                    :procedure:naming:
+***** Each major mode should have a normal “mode hook” named
       ‘MODENAME-mode-hook’. The very last thing the major mode command should do
       is to call ‘run-mode-hooks’. This runs the normal hook
       ‘change-major-mode-after-body-hook’, the mode hook, the function
       ‘hack-local-variables’ (when the buffer is visiting a file), and then the
       normal hook ‘after-change-major-mode-hook’.
-***** The major mode command may start by calling some other major mode         :procedure:
+***** The major mode command may start by calling some other major mode
       command (called the “parent mode”) and then alter some of its settings. A
       mode that does this is called a “derived mode”. The recommended way to
       define one is to use the ‘define-derived-mode’ macro, but this is not
       required. Such a mode should call the parent mode command inside a
       ‘delay-mode-hooks’ form. (Using ‘define-derived-mode’ does this
       automatically.)
-***** If something special should be done if the user switches a buffer         :procedure:
+***** If something special should be done if the user switches a buffer
       from this mode to any other major mode, this mode can set up a
       buffer-local value for ‘change-major-mode-hook’
-***** If this mode is appropriate only for specially-prepared text              :procedure:
+***** If this mode is appropriate only for specially-prepared text
       produced by the mode itself (rather than by the user typing at the
       keyboard or by an external file), then the major mode command symbol
       should have a property named ‘mode-class’ with value ‘special’, put on as
@@ -512,7 +512,7 @@
       The ‘define-derived-mode’ macro automatically marks the derived mode as
       special if the parent mode is special. Special mode is a convenient parent
       for such modes to inherit from; *Note Basic Major Modes::.
-***** If you want to make the new mode the default for files with certain       :procedure:
+***** If you want to make the new mode the default for files with certain
       recognizable names, add an element to ‘auto-mode-alist’ to select the mode
       for those file names. If you define the mode command to autoload, you
       should add this element in the same file that calls ‘autoload’. If you use
@@ -520,7 +520,7 @@
       cookie for the form that adds the element. If you do not autoload the mode
       command, it is sufficient to add the element in the file that contains the
       mode definition.
-***** The top-level forms in the file defining the mode should be written       :procedure:
+***** The top-level forms in the file defining the mode should be written
       so that they may be evaluated more than once without adverse consequences.
       For instance, use ‘defvar’ or ‘defcustom’ to set mode-related variables,
       so that they are not reinitialized if they already have a value.

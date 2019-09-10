@@ -218,9 +218,13 @@ versus not"
                        (make-hash-table :test 'equal)))
          (all-files (-flatten (seq-map (lambda (x) (directory-files-recursively x file_ext)) candidates)))
          (count 0)
+         (unopened '())
          )
-    (mapc (lambda (x) (if (not (gethash (downcase x) used-files)) (incf count))) all-files)
+    (mapc (lambda (x) (if (not (gethash (downcase x) used-files)) (progn (incf count) (push x unopened)))) all-files)
     (message "Files not opened randomly: %s" count)
+    (with-current-buffer (messages-buffer)
+      (message "%s" (mapconcat 'identity unopened "\n"))
+      )
     )
   )
 
@@ -348,7 +352,7 @@ versus not"
 (when (configuration-layer/package-usedp 'dired)
 
   (defun jg_layer/dired-auto-move ()
-    """ Function to move up a directory, to the next line, and into that """
+    " Function to move up a directory, to the next line, and into that "
     (interactive)
     (dired-up-directory)
     (evil-next-line)

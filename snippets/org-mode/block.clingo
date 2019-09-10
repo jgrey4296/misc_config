@@ -3,7 +3,7 @@
 # key: block.clingo
 # --
 #+NAME: $1
-#+begin_src clingo :results value
+#+begin_src clingo :results output
 $4
 #+end_src
 $0

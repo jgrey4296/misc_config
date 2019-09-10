@@ -9,7 +9,7 @@
     :init
     (org-babel-do-load-languages
      'org-babel-load-languages '((clingo . t)))
-    (push '("clingo" . prolog-mode) org-src-lang-modes)
+    (push '("clingo" . prolog) org-src-lang-modes)
     )
 
   )

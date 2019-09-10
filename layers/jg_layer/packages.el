@@ -568,26 +568,26 @@
 (defun jg_layer/post-init-org-ref ()
   (spacemacs/set-leader-keys "a r" 'jg_layer/bibtex-load-random)
 
-    (defun jg_layer/org-ref-open-bibtex-pdf ()
-      "Open pdf for a bibtex entry, if it exists.
+  (defun jg_layer/org-ref-open-bibtex-pdf ()
+    "Open pdf for a bibtex entry, if it exists.
 assumes point is in
 the entry of interest in the bibfile.  but does not check that."
-      (interactive)
-      (save-excursion
-        (bibtex-beginning-of-entry)
-        (let* ((bibtex-expand-strings t)
-               (entry (bibtex-parse-entry t))
-               (key (reftex-get-bib-field "file" entry))
-               (pdf (string-join `("/" ,(car (split-string key ":" 't))))))
-          (message pdf)
-          (if (file-exists-p pdf)
-              (org-open-link-from-string (format "[[file:%s]]" pdf))
-            (ding)))))
+    (interactive)
+    (save-excursion
+      (bibtex-beginning-of-entry)
+      (let* ((bibtex-expand-strings t)
+             (entry (bibtex-parse-entry t))
+             (key (reftex-get-bib-field "file" entry))
+             (pdf (string-join `("/" ,(car (split-string key ":" 't))))))
+        (message pdf)
+        (if (file-exists-p pdf)
+            (org-open-link-from-string (format "[[file:%s]]" pdf))
+          (ding)))))
 
   (with-eval-after-load 'org-ref
     (setq org-ref-open-bibtex-pdf 'jg_layer/org-ref-open-bibtex-pdf)
     )
-)
+  )
 
 ;; (use-package highlight-parentheses
 ;;   :init
@@ -717,12 +717,18 @@ the entry of interest in the bibfile.  but does not check that."
 (defun jg_layer/init-org-drill ()
   (use-package org-drill))
 
-(defun jg_layer/post-init-dired ()
+(defun jg_layer/pre-init-dired ()
   (spacemacs/set-leader-keys
     "ad" nil
     )
-  (evil-define-key 'normal dired-mode-map (kbd "M-n") 'jg_layer/dired-auto-move)
-  (add-hook 'dired-mode-hook 'dired-omit-mode)
+  (spacemacs|use-package-add-hook dired
+    :post-config
+    (evil-define-key* 'normal dired-mode-map
+                      (kbd "M-n") 'jg_layer/dired-auto-move
+                      (kbd "C-h") 'dired-up-directory
+                      )
+    (add-hook 'dired-mode-hook 'dired-omit-mode)
+    )
   )
 
 (defun jg_layer/post-init-shell-pop ()

@@ -29,17 +29,21 @@
                                       ibuffer
                                       gtags
                                       shell
-                                      jg_twitter
                                       cscope
                                       gtags
-                                      trie
                                       osx
                                       semantic
-				                              helm-org
-				                              org-tagging
+                                      ;;Personal
+                                      jg_misc
+                                      jg_exclusions
+				                              jg_org
                                       tag-unify
                                       char-insertion
                                       music
+                                      logic
+                                      jg_twitter
+                                      trie
+
 
                                       ;;LANGUAGES
                                       (csv :defer)
@@ -67,7 +71,5 @@
                                       (shaders :defer)
                                       (octave :defer)
                                       ;;prolog
-                                      clingo
-                                      ccalc
                                       ;;smalltalk
 ))

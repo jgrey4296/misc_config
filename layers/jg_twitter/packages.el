@@ -15,7 +15,6 @@
     )
   )
 
-
 (defun jg_twitter/init-tramp ()
   (use-package tramp
     :defer t)

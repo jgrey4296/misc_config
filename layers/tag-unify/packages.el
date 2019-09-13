@@ -5,6 +5,8 @@
                                f
                                org
                                dired
+                               evil
+                               (tag-clean-minor-mode :location local)
                                )
   )
 
@@ -113,8 +115,19 @@
       )
     )
   (add-hook 'org-mode-hook 'tag-unify/org-mod-map)
-  )
 
+  (evil-define-operator tag-unify/tag-unify-helm-start (beg end)
+    """ Opens the Tagging Helm """
+    (interactive "<R>")
+    (setq tag-unify/tag-unify-region `(,beg . ,(line-number-at-pos end)))
+    (let* ((candidates (tag-unify/tag-unify-candidates))
+           (main-source (cons `(candidates . ,(mapcar 'car candidates)) tag-unify/tag-unify-helm))
+           )
+      (helm :sources '(main-source tag-unify/tag-unify-fallback-source)
+            :input "")
+      ))
+
+  )
 (defun tag-unify/post-init-dired ()
   (spacemacs/set-leader-keys-for-major-mode 'dired-mode
     "c" 'tag-unify/clean-marked-files
@@ -122,3 +135,39 @@
     "B" 'tag-unify/unify-pdf-locations
     )
 )
+(defun tag-unify/post-init-evil ()
+  (evil-ex-define-cmd "t[ag]" 'tag-unify/tag-unify-helm-start)
+  (evil-ex-define-cmd "to" 'tag-unify/tag-occurrences)
+  (evil-ex-define-cmd "toa" 'tag-unify/tag-occurrences-in-open-buffers)
+  (evil-ex-define-cmd "tv"  'org-tags-view)
+  (evil-ex-define-cmd "ts"  'org-set-tags)
+  )
+(defun tag-unify/init-tag-clean-minor-mode ()
+  (use-package tag-clean-minor-mode
+    :defer t
+    :commands (tag-clean-minor-mode)
+    :config (progn
+            (push 'tag-clean-minor-mode minor-mode-list)
+            (spacemacs|define-transient-state tag-clean
+              :title "Tag Cleaning Transient State"
+              :doc (concat "
+    | Commands   ^^|
+    |------------^^|------------^^|
+    | [_q_] Quit   | [_!_] Split  |
+    | [_f_] Filter | [_p_] Prev   |
+    | [_s_] Sub    | [_l_] Leave  |
+")
+              :bindings
+              ("q" nil :exit t)
+              ("f" tag-clean/mark-to-filter)
+              ("s" tag-clean/mark-to-sub)
+              ("p" tag-clean/previous)
+              ("l" tag-clean/leave)
+              ("!" tag-unify/org-split-on-headings :exit t)
+              )
+            (spacemacs/set-leader-keys-for-minor-mode 'tag-clean-minor-mode
+              "." 'spacemacs/tag-clean-transient-state/body
+              )
+            )
+    )
+  )

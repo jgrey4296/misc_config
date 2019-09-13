@@ -1,6 +1,6 @@
 (defconst jg_org-packages
   '(
-    helm_org
+    helm-org
     org
     academic-phrases
     org-ref

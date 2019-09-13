@@ -29,7 +29,7 @@
     )
   )
 
-(defun chuck/init-chuck-mode ()
+(defun music/init-chuck-mode ()
   (use-package chuck-mode
     :commands (chuck-mode)
     )

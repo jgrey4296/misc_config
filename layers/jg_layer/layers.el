@@ -49,7 +49,6 @@
                                       (csv :defer)
                                       (go :defer)
                                       (ruby :defer)
-                                      (chuck :defer)
                                       (erlang :defer)
                                       haskell
                                       (javascript :defer)

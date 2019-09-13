@@ -177,7 +177,13 @@
 
 (defun jg_layer/post-init-yasnippet ()
   ;;yasnippet
-   (spacemacs/declare-prefix "y" "Snippets/Abbevs")
+  ;;Yas locations
+  (setq yas-snippet-dirs `( ,(expand-file-name "~/.spacemacs.d/snippets/")
+                            ,(expand-file-name "~/github/otherLibs/yasnippet-snippets/snippets")
+                            ,(expand-file-name "~/github/otherLibs/yasnippet-snippets")
+                            )
+        )
+  (spacemacs/declare-prefix "y" "Snippets/Abbevs")
   (spacemacs/set-leader-keys
     "y y"    'yas-expand
     "y i"    'yas-insert-snippet

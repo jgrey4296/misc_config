@@ -1,4 +1,4 @@
-(defconst ccalc-packages
+(defconst logic-packages
   '(
     ob-prolog
     (ob-ccalc :location local)

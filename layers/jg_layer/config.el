@@ -16,11 +16,7 @@
               indent-tabs-mode nil
               ;;bookmark location
               jg-bookmark-location "~/github/writing/other_files/main_bookmarks.html"
-              ;;Yas locations
-              yas-snippet-dirs `( ,(expand-file-name "~/.spacemacs.d/snippets/")
-                                  ,(expand-file-name "~/github/otherLibs/yasnippet-snippets/snippets")
-                                  ,(expand-file-name "~/github/otherLibs/yasnippet-snippets"))
-              ;;Flycheck
+               ;;Flycheck
               flycheck-display-errors-function nil
               flycheck-help-echo-function nil
               flycheck-process-error-functions nil

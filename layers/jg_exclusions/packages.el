@@ -1,4 +1,4 @@
-(defconst jg_layer
+(defconst jg_exclusions-packages
   '(
     (git-gutter :excluded t)
     (git-gutter+ :excluded t)

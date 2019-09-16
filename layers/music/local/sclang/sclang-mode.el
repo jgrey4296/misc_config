@@ -668,11 +668,9 @@ Returns the column to indent to."
   :group 'sclang-mode
   :type 'hook)
 
-(defun sclang-mode ()
-  "Major mode for editing SuperCollider language code.
-\\{sclang-mode-map}
-"
-  (interactive)
+(define-derived-mode sclang-mode fundamental-mode
+  "SCLang Mode"
+  "Major mode for interacting with an inferior SCLang Process. "
   (kill-all-local-variables)
   (set-syntax-table sclang-mode-syntax-table)
   (use-local-map sclang-mode-map)

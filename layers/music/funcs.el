@@ -8,12 +8,13 @@
     "Startup SCLANG, init appropriate elements,
 then start up tidal"
     (interactive)
-    (let ((tidal-buff (get-buffer-create "Tidal Workspace"))
-          (sclang-buff (get-buffer-create "SCLang Workspace")))
-
+    (let ((tidal-buff (get-buffer-create music-tidal-workspace))
+          (sclang-buff (get-buffer-create music-sclang-workspace)))
+      (global-music-mode)
       (with-current-buffer sclang-buff
         (sclang-mode)
         (sclang-start)
+        (jg_layer/clear-buffer)
         (insert-file-contents sclang-boot-file)
         )
 

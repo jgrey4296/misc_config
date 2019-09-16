@@ -22,14 +22,7 @@
       ". R" 'music-minor/sclang-recompile
       ". w" 'music/setup-windows
       )
-    (add-hook 'music-minor-mode-hook (lambda ()
-                                       (spacemacs/set-leader-keys
-                                         "a . h" 'music-minor/hush
-                                         "a . q" 'music-minor/quit
-                                         "a . w" 'music/setup-windows
-                                         )
-                                       )
-              )
+    (add-hook 'music-minor-mode-hook 'music/setup-minor-mode-keys)
     )
   )
 

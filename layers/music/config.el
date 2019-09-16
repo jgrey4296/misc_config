@@ -14,10 +14,13 @@
               sclang-program "sclang"
               sclang-rtf-editor-program "emacs"
               sclang-show-workspace-on-startup nil
-              show-paren-mode t
               sclang-library-configuration-file (expand-file-name "~/.spacemacs.d/layers/music/sclang.yaml")
               sclang-udp-port 57120
               sclang-eval-line-forward nil
               sclang-runtime-directory (expand-file-name "~/.sclang/")
               sclang-boot-file (expand-file-name "~/.spacemacs.d/layers/music/startup.scd")
+
+              music-tidal-workspace "Tidal Workspace"
+              music-sclang-workspace "SCLang Workspace"
+
               )

@@ -457,7 +457,13 @@ you should place your code here."
        (mode . debugger-mode))))))
  '(ibuffer-saved-filters
    (quote
-    (("org"
+    (("music"
+      (or
+       (name . "*\\(tidal\\|SCLang\\)")
+       (used-mode . sclang-mode)
+       (used-mode . tidal-mode)
+       (file-extension . "scd\\|hs\\|tidal")))
+     ("org"
       (used-mode . org-mode))
      ("anti-helm"
       (not used-mode . helm-major-mode))

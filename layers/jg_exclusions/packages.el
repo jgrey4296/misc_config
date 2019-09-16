@@ -1,5 +1,6 @@
 (defconst jg_exclusions-packages
   '(
+    (pyenv :excluded t)
     (git-gutter :excluded t)
     (git-gutter+ :excluded t)
     (smartparens :excluded t)

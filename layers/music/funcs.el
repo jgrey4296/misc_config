@@ -40,4 +40,19 @@ then start up tidal"
     (select-window (get-buffer-window music-tidal-workspace))
     )
 
+  (defun music/setup-minor-mode-keys ()
+    (spacemacs/set-leader-keys
+      "a . h" 'music-minor/hush
+      "a . q" 'music-minor/quit
+      "a . w" 'music/setup-windows
+      )
+    )
+
+  (defun music/clear-minor-mode-keys ()
+    (spacemacs/set-leader-keys
+      "a . h" nil
+      "a . q" nil
+      "a . w" nil
+      )
+    )
 )

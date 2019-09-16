@@ -30,14 +30,14 @@
   (use-package sclang
     :commands (sclang-mode )
     :config
-    (evil-define-key nil 'sclang-mode-map
+    (evil-define-key nil sclang-mode-map
       (kbd "C-c [") nil)
-    (evil-define-key '(insert normal) 'sclang-mode-map
+    (evil-define-key '(insert normal) sclang-mode-map
       (kbd "C-c [") nil)
-    (evil-define-key '(normal insert) 'sclang-mode-map
+    (evil-define-key '(normal insert) sclang-mode-map
       (kbd "C-c [") 'jg_layer/insert-lparen
       (kbd "C-c C-c") 'music-minor/music-eval-line)
-    (evil-define-key '(visual) 'tidal-mode-map
+    (evil-define-key '(visual) sclang-mode-map
       (kbd "C-c C-c") 'music-minor/music-eval-selection)
     )
   )
@@ -46,13 +46,13 @@
   (use-package tidal
     :commands (tidal-mode tidal-start-haskell)
     :config
-    (evil-define-key nil 'tidal-mode-map
+    (evil-define-key nil tidal-mode-map
       (kbd "C-c C-c") nil)
-    (evil-define-key '(normal insert visual) 'tidal-mode-map
+    (evil-define-key '(normal insert visual) tidal-mode-map
       (kbd "C-c C-c") nil)
-    (evil-define-key '(normal insert) 'tidal-mode-map
+    (evil-define-key '(normal insert) tidal-mode-map
       (kbd "C-c C-c") 'music-minor/music-eval-line)
-    (evil-define-key '(visual) 'tidal-mode-map
+    (evil-define-key '(visual) tidal-mode-map
       (kbd "C-c C-c") 'music-minor/music-eval-selection)
     )
   )

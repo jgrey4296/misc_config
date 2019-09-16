@@ -349,7 +349,7 @@
   (sclang-help-mode-limit-point-to-code (sclang-end-of-defun arg)))
 
 (defun sclang-help-mode-fontify-region (start end loudly)
-  (flet ((fontify-code
+  (cl-flet ((fontify-code
 	  (start end loudly)
 	  (funcall 'font-lock-default-fontify-region start end loudly))
 	 (fontify-non-code

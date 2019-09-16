@@ -50,11 +50,9 @@
       (progn (message "Shutting down SCLang")
              (kill-buffer "*SCLang:PostBuffer*")))
   (global-music-mode 0)
-  (spacemacs/set-leader-keys
-    "a . h" nil
-    "a . q" nil
-    "a . w" nil
-    )
+
+  (if (functionp 'music/clear-minor-mode-keys)
+      (music/clear-minor-mode-keys))
   )
 
 (define-minor-mode music-minor-mode

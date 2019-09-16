@@ -90,7 +90,7 @@
 (defun jg_misc/init-evil-string-inflection ()
   (use-package evil-string-inflection
     :config
-    (define-key evil-normal-state-map 
+    (define-key evil-normal-state-map
       "g '" 'evil-operator-string-inflection
       )
     )

@@ -185,10 +185,10 @@ versus not"
          (unopened '())
          )
     (mapc (lambda (x) (if (not (gethash (downcase x) used-files)) (progn (incf count) (push x unopened)))) all-files)
-    (message "Files not opened randomly: %s" count)
     (with-current-buffer (messages-buffer)
       (message "%s" (mapconcat 'identity unopened "\n"))
       )
+    (message "Files not opened randomly: %s" count)
     )
   )
 
@@ -306,3 +306,54 @@ versus not"
   )
 
 ;;----------------------------------------
+  (defun jg_layer/toggle-all-defs ()
+    (interactive)
+    ;; goto start of file
+    (let* ((open-or-close 'evil-close-fold)
+           (current (point))
+           )
+      (save-excursion
+        (goto-char (point-min))
+        (python-nav-forward-defun)
+        (while (not (equal current (point)))
+          (setq current (point))
+          (if (jg_layer/line-starts-with? "def ")
+              (funcall open-or-close))
+          (python-nav-forward-defun)
+          )
+        )
+      )
+    )
+
+  (defun jg_layer/close-class-defs ()
+    (interactive )
+    (save-excursion
+      (let* ((current (point)))
+        (python-nav-backward-defun)
+        (while (and (not (jg_layer/line-starts-with? "class "))
+                    (not (equal current (point))))
+          (evil-close-fold)
+          (setq current (point))
+          (python-nav-backward-defun)
+          )
+        )
+      )
+    (save-excursion
+      (let* ((current (point)))
+        (python-nav-forward-defun)
+        (while (and (not (jg_layer/line-starts-with? "class "))
+                    (not (equal current (point))))
+          (evil-close-fold)
+          (setq current (point))
+          (python-nav-forward-defun)
+          )
+        )
+      )
+    )
+
+  (defun jg_layer/setup-python-mode ()
+    (evil-define-key 'normal python-mode-map
+      (kbd "z d") 'jg_layer/toggle-all-defs
+      (kbd "z C") 'jg_layer/close-class-defs
+      ))
+

@@ -216,63 +216,11 @@
   )
 
 (defun jg_layer/post-init-python ()
-  (print "Post init python")
   (setq-default python-indent-offset 4
                 python-indent-guess-indent-offset nil
                 python-shell-interpreter-args "-i"
                 python-shell-interpreter "python"
                 )
-
-  (defun jg_layer/toggle-all-defs ()
-    (interactive)
-    ;; goto start of file
-    (let* ((open-or-close 'evil-close-fold)
-           (current (point))
-           )
-      (save-excursion
-        (goto-char (point-min))
-        (python-nav-forward-defun)
-        (while (not (equal current (point)))
-          (setq current (point))
-          (if (jg_layer/line-starts-with? "def ")
-              (funcall open-or-close))
-          (python-nav-forward-defun)
-          )
-        )
-      )
-    )
-
-  (defun jg_layer/close-class-defs ()
-    (interactive )
-    (save-excursion
-      (let* ((current (point)))
-        (python-nav-backward-defun)
-        (while (and (not (jg_layer/line-starts-with? "class "))
-                    (not (equal current (point))))
-          (evil-close-fold)
-          (setq current (point))
-          (python-nav-backward-defun)
-          )
-        )
-      )
-    (save-excursion
-      (let* ((current (point)))
-        (python-nav-forward-defun)
-        (while (and (not (jg_layer/line-starts-with? "class "))
-                    (not (equal current (point))))
-          (evil-close-fold)
-          (setq current (point))
-          (python-nav-forward-defun)
-          )
-        )
-      )
-    )
-
-  (defun jg_layer/setup-python-mode ()
-    (evil-define-key 'normal python-mode-map
-      (kbd "z d") 'jg_layer/toggle-all-defs
-      (kbd "z C") 'jg_layer/close-class-defs
-      ))
 
   (add-hook 'python-mode-hook 'jg_layer/setup-python-mode)
   (add-hook 'python-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))

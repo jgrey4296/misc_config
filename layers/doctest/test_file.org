@@ -1,0 +1,35 @@
+* Top Level Document                                                            :blah:
+  :__doctest__:
+  Group 1:
+  Document should have section "first".
+  "first" should have section "introduction".
+  "first.introduction" should be longer than 5 paragraphs.
+  "introduction" should be shorter than 10 paragraphs.
+  "introduction" should precede "background".
+  "background" should have 3 subsections.
+
+  Group 2:
+  "background" should cite:Bach,Chronicle1865,James1902,Hohfeld1913.
+  "background" should mention "the importance of a history of debt".
+  A Section should have tag "blah".
+  "methods" should have a codeblock.
+  "methods" should have a codeblock in python.
+  :END:
+
+** 1: First
+*** introduction
+    :__doctest__:
+
+    :END:
+
+    aihweg
+    aowiegh
+** 2: Second
+*** blah
+**** bloo
+     awegage
+** 3: Third
+**** awefgh
+     awegh haoweg
+     awoiegh
+     awoeghaw

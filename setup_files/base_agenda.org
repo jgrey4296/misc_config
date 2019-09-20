@@ -125,7 +125,7 @@
   :END:
 ** [[~/github/writing/other_files/years/][Bibliography]]
 ** [[file:~/Mega/savedThreads][Twitter Threads]]
-** [[~/github/languageLearning][Misc Language Repo]]                            :directory:javascript:python:multiple_languages:lisp:supercollider:tidal:learning:notes:prolog:misc:
+** [[~/github/languageLearning][Misc Language Repo]]                                                           :multiple_languages:learning:
 ** [[~/.spacemacs.d/setup_files/pomodoro_log.org][Pomodoro Log]]
 ** -----------------------------------------------------------------------------
 ** Programming

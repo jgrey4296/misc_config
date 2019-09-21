@@ -4,8 +4,9 @@
 ;; and use a macro to expand them, allowing the two to be defined together
 ;; simplifying the addition of new tests
 ;;
+(require 'parsec)
 (defstruct doctest/test-extracts start end heading link text)
-(defstruct doctest/test-group name tests link bound)
+(defstruct doctest/test-group name tests link bound start)
 (defstruct doctest/test type locator value)
 ;; Current test types:
 '(:section-check :length-check :order-check :citation-check :string-check :codeblock-check :tag-check)
@@ -43,9 +44,11 @@
                        (parsec-many1 (doctest/parse-group)))))
         (link (doctest/test-extracts-link data))
         (bound (doctest/test-extracts-end data))
+        (start (doctest/test-extracts-start data))
         )
     (mapc (lambda (x) (setf (doctest/test-group-link x) link
-                            (doctest/test-group-bound x) bound)) testgroups)
+                            (doctest/test-group-bound x) bound
+                            (doctest/test-group-start x) start)) testgroups)
     testgroups
     )
   )
@@ -55,6 +58,11 @@
 (defun doctest/parse-word ()
   (doctest/parse-space)
   (parsec-return (parsec-re "[[:word:]]+")
+    (doctest/parse-space))
+  )
+(defun doctest/parse-sword (word)
+  (doctest/parse-space)
+  (parsec-return (parsec-string word)
     (doctest/parse-space))
   )
 (defun doctest/parse-quote-string ()
@@ -85,31 +93,39 @@
   )
 
 (defun doctest/parse-test-section-check ()
-  (let ((test-type :section-check)
-        container subsection)
+  (let ((test-type :section-check) container subsection)
     (setq container (parsec-or (parsec-string "Document") (doctester/parse-quote-string)))
     (parsec-string "should have section")
     (setq subsection (doctest/parse-quote-string))
-    (make-doctest/test :type test-type :locator container :value subsection)
+    (make-doctest/test :type test-type :locator (downcase container) :value (downcase subsection))
     )
   )
 (defun doctest/parse-test-length ()
-
+  (let ((test-type :length-check) container dir length counter)
+    (setq container (parsec-or (parsec-string "Document") (doctester/parse-quote-string)))
+    (parsec-string " should be ")
+    (setq dir (parsec-or (doctest/parse-sword "larger") (doctest/parse-sword "smaller")))
+    (doctest/parse-sword "than")
+    (setq length (string-to-number (parsec-re "[[:digit:]]+"))
+          counter (parsec-or (parsec-str "words") (parsec-str "paragraphs") (parsec-str "sections"))
+          )
+    (make-doctest/test :type test-type :locator container :value `(,dir ,length ,counter))
+    )
   )
 (defun doctest/parse-test-order ()
-
+  ;; locator should precede heading
   )
 (defun doctest/parse-test-citation ()
-
+  ;; locator should cite citelist
   )
 (defun doctest/parse-test-string ()
-
+  ;; locator should mention string
   )
 (defun doctest/parse-test-codeblock ()
-
+  ;; locator should have a codeblock
   )
 (defun doctest/parse-test-tag ()
-
+  ;; locator should have tag x
   )
 
 ;; Test Execution
@@ -117,7 +133,7 @@
   (mapcar 'doctest/run-test-group testgroups)
   )
 (defun doctest/run-test-group (testgroup)
-  ;;TODO: goto header?
+  (goto-char (doctest/test-group-start testgroup))
   (let ((name (doctest/test-group-name testgroup))
         (bound (doctest/test-group-bound testgroup))
         (results (mapcar (lambda (x) '("test-name" . ,(doctest/run-test x bound))) (doctest/test-group-tests testgroup)))
@@ -125,29 +141,33 @@
     (make-doctest/test-results name results (doctest/test-group-link testgroup)))
   )
 (defun doctest/run-test (test bound)
-  (let ((type (doctest/test-type test)))
-    (save-excursion
-      (cond
-       ((eq type :section-check )    )
-       ((eq type :length-check )     )
-       ((eq type :order-check )      )
-       ((eq type :citation-check )   )
-       ((eq type :string-check )     )
-       ((eq type :codeblock-check )  )
-       ((eq type :tag-check)         )
-       (t (error "Unrecognized test type"))
-       )
+  (save-excursion
+    (condition-case e
+        (let ((type (doctest/test-type test)))
+          (cond
+           ((eq type :section-check )   (doctest/run-test-section-check test bound))
+           ((eq type :length-check )    (doctest/run-test-length test bound))
+           ((eq type :order-check )     (doctest/run-test-order test bound))
+           ((eq type :citation-check )  (doctest/run-test-citation test bound))
+           ((eq type :string-check )    (doctest/run-test-string test bound))
+           ((eq type :codeblock-check ) (doctest/run-test-codeblock test bound))
+           ((eq type :tag-check)        (doctest/run-test-tag test bound))
+           (t (error "Unrecognized test type"))
+           )
+          )
+      (search-failed nil)
       )
     )
   )
 
 (defun doctest/run-test-section-check (test bound)
-  (let ((test-type :section-check)
-        container subsection)
-    (setq container (runc-or (parsec-string "Document") (doctester/parse-quote-string)))
-    (runc-string "should have section")
-    (setq subsection (doctest/run-quote-string))
-    (make-doctest/test :type test-type :locator container :value subsection)
+  ;;go to the locator
+  (re-search-forward (format "^\*+ %s$" (doctest/test-locator test)) bound)
+  ;; get subheadings
+  (let ((subheadings (org-map-entries
+                      (lambda () (downcase (substring-no-properties (org-get-heading)))) nil 'tree)))
+    ;; is the section value in the subheadings?
+    (-contains? subheadings (doctest/test-value))
     )
   )
 (defun doctest/run-test-length (test bound)
@@ -168,7 +188,6 @@
 (defun doctest/run-test-tag (test bound)
 
   )
-
 
 ;; Test Reporting
 (defun doctest/print-results (results)

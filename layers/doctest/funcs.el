@@ -11,6 +11,30 @@
 '(:section-check :length-check :order-check :citation-check :mention-check :codeblock-check :tag-check)
 (defstruct doctest/test-results name results link)
 
+(defvar doctest/heading-regexp "^*+ %s$"
+  "Regexp to format when searching for a location")
+
+(defvar doctest/src-block-regexp "^ +#\\+begin_src"
+  "Regexp to find src blocks")
+
+(defun doctest/test-to-string (test)
+  (let ((tt (doctest/test-type test))
+        (loc (doctest/test-locator test))
+        (val (doctest/test-value test))
+        )
+    (cond
+     ((eq tt :section-check ) (format "%s should have section %s." loc val))
+     ((eq tt :length-check ) (format "%s should be %s than %s %s." loc (car val) (cadr val) (caddr val)))
+     ((eq tt :order-check ) (format "%s should precede %s." loc val))
+     ((eq tt :citation-check ) (format "%s should cite:%s." loc (if (listp val) (mapconcat 'identity val ",") val)))
+     ((eq tt :mention-check ) (format "%s should mention \"%s\"." loc val))
+     ((eq tt :codeblock-check ) (format "%s should have a codeblock%s." loc (if val (format "in %s" val) "")))
+     ((eq tt :tag-check)   (format "%s should have tag \"%s\"." loc val))
+     (t (error "unrecognized test type"))
+     )
+    )
+  )
+
 ;; Test retrieval
 (defun doctest/find-tests ()
   ;; iterate through current org file,

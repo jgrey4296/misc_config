@@ -276,59 +276,111 @@
     )
   )
 
-(defun doctest/run-test-section-check (test bound)
+(defun doctest/run-test-section (test bound)
   ;;go to the locator
-  (re-search-forward (format "^\*+ %s$" (doctest/test-locator test)) bound)
+  (doctest/forward-past-tests (doctest/test-locator test) bound)
   ;; get subheadings
   (let ((subheadings (org-map-entries
                       (lambda () (downcase (substring-no-properties (org-get-heading)))) nil 'tree)))
     ;; is the section value in the subheadings?
-    (-contains? subheadings (doctest/test-value))
+    (-contains? subheadings (doctest/test-value test))
     )
   )
 (defun doctest/run-test-length (test bound)
-
+  (doctest/forward-past-tests (doctest/test-locator test) bound)
+  (let* ((vals (doctest/test-value test))
+         (dir (car vals))
+         (length (cadr vals))
+         (counter (caddr vals))
+         (test (if (eq :larger dir) '> '<))
+         )
+    (cond
+     ((eq counter :words) (funcall test (count-words (point)
+                                                     (plist-get (cadr (org-element-at-point)) :contents-end))
+                                   length))
+     ;; ((eq counter :paras) (funcall test (count-paragraphs (point)
+     ;;                                                      (plist-get (cadr (org-element-at-point)) :contents-end))
+     ;;                               length)
+     ((eq counter :sects)  (funcall test (- (reduce '+ (org-map-entries (lambda () 1) nil 'tree)) 1) length))
+     (t (error "Unrecognized test-length counter"))
+     )
+    )
   )
 (defun doctest/run-test-order (test bound)
-
+  (let* ((tree (org-map-entries (lambda () (substring-no-properties (org-get-heading))) nil 'tree))
+         (locator (-elem-index (doctest/test-locator test) tree))
+         (section (-elem-index (doctest/test-value test) tree))
+         )
+    (if (and locator section)
+        (< locator section)
+      nil)
+    )
   )
 (defun doctest/run-test-citation (test bound)
-
+  (doctest/forward-past-tests (doctest/test-locator test) bound)
+  (let ((citations (doctest/test-value test)) curr-line)
+    (while citations
+      (re-search-forward "cite:" bound)
+      (setq curr-line (buffer-substring-no-properties (line-beginning-position) (line-end-position)))
+      (setq citations (remove-if (lambda (x) (s-contains? x curr-line)) citations))
+      )
+    )
   )
-(defun doctest/run-test-string (test bound)
-
+(defun doctest/run-test-mention (test bound)
+  (message "running mention test")
+  (doctest/forward-past-tests (doctest/test-locator test) bound)
+  (search-forward (doctest/test-value test) bound)
   )
 (defun doctest/run-test-codeblock (test bound)
-
+  (message "running codeblock test")
+  (doctest/forward-past-tests (doctest/test-locator test) bound)
+  (re-search-forward (format "%s %s" doctest/src-block-regexp
+                             (if (doctest/test-value test) (doctest/test-value test) "")) bound)
   )
 (defun doctest/run-test-tag (test bound)
-
+  (message "running test tag")
+  (doctest/forward-to (doctest/test-locator test) bound)
+  (let ((tags (plist-get (cadr (org-element-at-point)) :tags)))
+    (-contains? tags (doctest/test-value test))
+    )
   )
 
 ;; Test Reporting
 (defun doctest/print-results (results)
+  (message "Printing Results")
   (with-temp-buffer-window "*Test Results*"
                            nil
                            nil
-                           (insert "* Test Results\n")
+                           (princ "* Test Results\n")
                            (mapc 'doctest/print-test-results results)
                            (org-mode)
                            )
+  (with-current-buffer "*Test Results*"
+    (org-mode)
+    (goto-char (point-min))
+    (org-cycle)
+    )
   )
-(defun doctest/print-test-results(testgroup)
-  (insert "** " (doctest/test-results-name testgroup) "\n")
-  (insert "    " (doctest/test-results-link testgroup) "\n")
-  (mapc (lambda (x) (insert "    " (if (cdr x) "✓" "X") " : " (car x) "\n")) (doctest/test-results-results testgroup))
+(defun doctest/print-test-results (testgroup)
+  (message "Printing a results group")
+  (let ((successes (reduce '+ (mapcar (lambda (x) (if (cdr x) 1 0)) (doctest/test-results-results testgroup))))
+        (total (length (doctest/test-results-results testgroup))))
+    (assert (doctest/test-results-p testgroup))
+    (princ (format "** %s: (%s / %s) \n" (doctest/test-results-name testgroup) successes total))
+    (princ (format "    %s\n" (doctest/test-results-link testgroup)))
+    (mapc (lambda (x) (princ (s-concat "    " (if (cdr x) "✓" "X") " : " (car x) "\n"))) (doctest/test-results-results testgroup))
+    )
   )
 
 ;; Main Access
 (defun doctest/test-org-file ()
   (interactive)
+  (message "Testing org file")
   ;; check file is in org mode
-  (assert (eq major-mode 'org-mode'))
+  (assert (eq major-mode 'org-mode))
   ;; get tests
   (let* ((test-texts (seq-filter 'identity (doctest/find-tests)))
-         (parsed-tests (seq-filter 'identity (mapcar 'doctest/parse-tests test-texts)))
+         (parsed-tests (seq-filter 'identity (-flatten (mapcar 'doctest/parse-tests test-texts))))
          (test-results (doctest/run-tests parsed-tests))
          )
     ;; print test results

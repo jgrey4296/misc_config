@@ -43,7 +43,7 @@
                                       logic
                                       jg_twitter
                                       trie
-
+                                      doctest
 
                                       ;;LANGUAGES
                                       (csv :defer)

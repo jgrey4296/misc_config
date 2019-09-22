@@ -4,7 +4,6 @@
 ;; and use a macro to expand them, allowing the two to be defined together
 ;; simplifying the addition of new tests
 ;;
-(require 'parsec)
 (defstruct doctest/test-extracts start end heading link text)
 (defstruct doctest/test-group name tests link bound start)
 (defstruct doctest/test type locator value)

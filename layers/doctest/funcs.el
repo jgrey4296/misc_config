@@ -37,15 +37,15 @@
 
 ;; Test retrieval
 (defun doctest/find-tests ()
-  ;; iterate through current org file,
-  ;; extract any __doctest__ drawers contents
+  "Iterate through current org file, extracting any __doctest__ drawers contents."
+  (message "Finding tests")
   (save-excursion
     (goto-char (point-min))
     (org-map-entries 'doctest/extract-tests-from-entry)
     )
   )
 (defun doctest/extract-tests-from-entry ()
-  (let ((start (point)) end tests heading element link)
+  (let ((start (point)) end text heading element link)
     (setq heading (substring-no-properties (org-get-heading t t t t))
           link (org-store-link nil)
           end (plist-get :contents-end (cadr (org-element-at-point))))

@@ -407,6 +407,7 @@
 *** [[~/github/jg_emacs_files][Emacs files]]                                    :directory:lisp:setup:emacs:
 *** [[~/github/jg_shell_files][Bash Scripts]]                                   :bash:setup:
 *** Reference
+**** [[https://github.com/cute-jumper/parsec.el][Parsec]]
 **** [[https://bibtexparser.readthedocs.io/en/master/tutorial.html][bibtex parser]]                                                              :python:bibtex:
 **** [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Buffer-Modification.html#Buffer-Modification][Buffer Modification]]
 **** [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Change-Hooks.html#Change-Hooks][Change Hooks]]
@@ -869,4 +870,3 @@
 *** [[https://multiagentcontest.org/publications/][Multi Agent Contest]]
 *** [[http://slatestarcodex.com/2014/04/28/the-control-group-is-out-of-control/][The Control Group is out of control]]                                         :science:methods:
 *** [[http://www.sosmath.com/algebra/fraction/frac3/frac3.html][SoS Math]]                                                                    :useful:math:
-**

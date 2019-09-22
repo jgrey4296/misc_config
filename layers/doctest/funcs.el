@@ -8,7 +8,7 @@
 (defstruct doctest/test-group name tests link bound start)
 (defstruct doctest/test type locator value)
 ;; Current test types:
-'(:section-check :length-check :order-check :citation-check :string-check :codeblock-check :tag-check)
+'(:section-check :length-check :order-check :citation-check :mention-check :codeblock-check :tag-check)
 (defstruct doctest/test-results name results link)
 
 ;; Test retrieval

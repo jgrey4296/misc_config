@@ -38,7 +38,6 @@
 ;; Test retrieval
 (defun doctest/find-tests ()
   "Iterate through current org file, extracting any __doctest__ drawers contents."
-  (message "Finding tests")
   (save-excursion
     (goto-char (point-min))
     (org-map-entries 'doctest/extract-tests-from-entry)
@@ -66,7 +65,6 @@
   ;; split text into tests by full stops, defined groups,
   ;; and their originating heading
   (assert (doctest/test-extracts-p data))
-  (message "Parsing Tests")
   (if (not (string-empty-p (string-trim (doctest/test-extracts-text data))))
       (let ((testgroups (parsec-with-input (doctest/test-extracts-text data)
                           (parsec-many-till (doctest/parse-group) (parsec-eof))))
@@ -104,7 +102,6 @@
 
 (defun doctest/parse-group ()
   ;;TODO: make groupname optional
-  (message "Parsing group")
   (doctest/parse-space)
   (let ((groupname (mapconcat 'identity (parsec-many-till (doctest/parse-word) (parsec-re ":")) " "))
         (tests (parsec-many-till (doctest/parse-test)  (parsec-or (parsec-re "\n\n") (parsec-eof))))
@@ -113,7 +110,6 @@
     )
   )
 (defun doctest/parse-test ()
-  (message "Parsing test")
   (parsec-re "\n")
   (doctest/parse-space)
   (let ((locator (parsec-or (doctest/parse-quote-string)
@@ -153,7 +149,6 @@
   )
 
 (defun doctest/parse-section-check()
-  (message "Parsing section check")
   (let ((test-type :section-check) subsection)
     (doctest/parse-sword "section")
     (setq subsection (doctest/parse-quote-string))
@@ -162,7 +157,6 @@
     )
   )
 (defun doctest/parse-length-check ()
-  (message "Parsing length check")
   (let ((test-type :length-check) dir length counter)
     (setq dir (parsec-or (doctest/parse-sword "larger" :larger) (doctest/parse-sword "smaller" :smaller)))
     (doctest/parse-sword "than")
@@ -175,7 +169,6 @@
   )
 (defun doctest/parse-order-check ()
   ;; locator should precede heading
-  (message "Parsing order check")
   (let ((test-type :order-check) second)
     (setq second (doctest/parse-quote-string))
     (parsec-ch ?.)
@@ -184,7 +177,6 @@
   )
 (defun doctest/parse-citation-check ()
   ;; locator should cite citelist
-  (message "Parsing citation Check")
   (let ((test-type :citation-check) citations)
     (parsec-ch ?:)
     (setq citations (parsec-sepby (parsec-re "[[:alnum:]]+") (parsec-ch ?,)))
@@ -194,7 +186,6 @@
   )
 (defun doctest/parse-mention-check ()
   ;; locator should mention string
-  (message "Parsing mention check")
   (let ((test-type :mention-check) mention)
     (setq mention (doctest/parse-quote-string))
     (parsec-ch ?.)
@@ -203,7 +194,6 @@
   )
 (defun doctest/parse-codeblock-check ()
   ;; locator should have a codeblock
-  (message "Parsing codeblock check")
   (let ((test-type :codeblock-check) language)
     (doctest/parse-sword "codeblock")
     (setq language (parsec-optional (parsec-and (doctest/parse-sword "in") (doctest/parse-quote-string))))
@@ -213,7 +203,6 @@
   )
 (defun doctest/parse-tag-check ()
   ;; locator should have tag x
-  (message "Parsing tag check")
   (let ((test-type :tag-check) mention)
     (doctest/parse-sword "tag")
     (setq mention (doctest/parse-quote-string))
@@ -241,12 +230,10 @@
   )
 
 (defun doctest/run-tests (testgroups)
-  (message "Running Tests")
   (mapcar 'doctest/run-test-group testgroups)
   )
 (defun doctest/run-test-group (testgroup)
   (assert (doctest/test-group-p testgroup) t)
-  (message "Running test group")
   (goto-char (doctest/test-group-start testgroup))
   (let* ((name (doctest/test-group-name testgroup))
          (bound (doctest/test-group-bound testgroup))
@@ -256,7 +243,6 @@
   )
 (defun doctest/run-test (test bound)
   (assert (doctest/test-p test))
-  (message "Running test")
   (save-excursion
     (condition-case e
         (let ((type (doctest/test-type test)))
@@ -327,18 +313,15 @@
     )
   )
 (defun doctest/run-test-mention (test bound)
-  (message "running mention test")
   (doctest/forward-past-tests (doctest/test-locator test) bound)
   (search-forward (doctest/test-value test) bound)
   )
 (defun doctest/run-test-codeblock (test bound)
-  (message "running codeblock test")
   (doctest/forward-past-tests (doctest/test-locator test) bound)
   (re-search-forward (format "%s %s" doctest/src-block-regexp
                              (if (doctest/test-value test) (doctest/test-value test) "")) bound)
   )
 (defun doctest/run-test-tag (test bound)
-  (message "running test tag")
   (doctest/forward-to (doctest/test-locator test) bound)
   (let ((tags (plist-get (cadr (org-element-at-point)) :tags)))
     (-contains? tags (doctest/test-value test))
@@ -347,7 +330,6 @@
 
 ;; Test Reporting
 (defun doctest/print-results (results)
-  (message "Printing Results")
   (with-temp-buffer-window "*Test Results*"
                            nil
                            nil
@@ -362,7 +344,6 @@
     )
   )
 (defun doctest/print-test-results (testgroup)
-  (message "Printing a results group")
   (let ((successes (reduce '+ (mapcar (lambda (x) (if (cdr x) 1 0)) (doctest/test-results-results testgroup))))
         (total (length (doctest/test-results-results testgroup))))
     (assert (doctest/test-results-p testgroup))
@@ -375,7 +356,6 @@
 ;; Main Access
 (defun doctest/test-org-file ()
   (interactive)
-  (message "Testing org file")
   ;; check file is in org mode
   (assert (eq major-mode 'org-mode))
   ;; get tests

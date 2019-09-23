@@ -1,0 +1,7 @@
+* JG Twitter
+  A Straightforward package to use twurl to tweet
+  
+  Defines evil-ex commands "tweet" and "image".
+  "Tweet" opens a window to write a tweet in, and
+  when called again tweets it.
+  "Image" will attach an image to a tweet when called in a tweet window.

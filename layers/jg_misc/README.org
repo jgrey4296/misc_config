@@ -1,0 +1,2 @@
+* JG Misc Layer
+  Small customizations that clutter up elsewhere.

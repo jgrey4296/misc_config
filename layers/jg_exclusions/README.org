@@ -1,0 +1,2 @@
+* JG Exclusion Spacemacs Layer
+  a Single place to exclude layers and packages I don't want.

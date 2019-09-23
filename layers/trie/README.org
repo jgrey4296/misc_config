@@ -1,0 +1,2 @@
+* Trie Layer
+  A Prototype IDE layer to write trie based production rules for an AI System.

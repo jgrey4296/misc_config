@@ -30,7 +30,7 @@
           (setq cmd (format "%s&media_ids=%s" cmd (cdr (assq 'media_id locals)))))
 
       (start-process jg_twitter/twurl_proc_name jg_twitter/twurl_buff_name
-                     "twurl" "-d" (format "%s" cmd) "-X" "POST" "-H"
+                     jg_twitter/twurl_command_name  "-d" (format "%s" cmd) "-X" "POST" "-H"
                      jg_twitter/twurl_default_host
                      jg_twitter/twurl_tweet)
       (if sentinels

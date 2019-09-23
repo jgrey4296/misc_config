@@ -69,20 +69,19 @@
                   (kbd "C-x 8s+") "₊"
                   (kbd "C-x 8s-") "₋"
 
-                  ;;Subscript
-
                   ;; Math - Sets
-                  (kbd "C-x 8ms") "⊂"
-                  (kbd "C-x 8mS") "⊃"
-                  (kbd "C-x 8me") "⊆"
-                  (kbd "C-x 8mE") "⊇"
-                  (kbd "C-x 8mn") "∅"
-                  (kbd "C-x 8mi") "∩"
-                  (kbd "C-x 8mu") "∪"
+                  (kbd "C-x 8Ms") "⊂"
+                  (kbd "C-x 8MS") "⊃"
+                  (kbd "C-x 8Me") "⊆"
+                  (kbd "C-x 8ME") "⊇"
+                  (kbd "C-x 8Mn") "∅"
+                  (kbd "C-x 8Mi") "∩"
+                  (kbd "C-x 8Mu") "∪"
 
-                  ;; Math Misc
-                  (kbd "C-x 8mq") "√"
-                  (kbd "C-x 8m8") (lambda () (interactive) (insert "∞"))
+                  ;; Math MisC
+                  (kbd "C-x 8Mq") "√"
+                  (kbd "C-x 8M8") (lambda () (interactive) (insert "∞"))
+
                   ;; Logic
                   (kbd "C-x 8la") "∀"
                   (kbd "C-x 8lE") "∃"
@@ -103,4 +102,3 @@
                   (kbd "C-x 8l[") "□"
                   (kbd "C-x 8l]") "◇"
                   )
-

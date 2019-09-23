@@ -1,4 +1,8 @@
 * Base Agenda
+  :__doctest__:
+  Document should have section "programming".
+  Document should have section "emacs".
+  :END:
   :#STARTUP: overview
   :LOGBOOK:
   CLOCK: [2019-09-05 Thu 22:27]--[2019-09-05 Thu 22:52] =>  0:25
@@ -123,6 +127,7 @@
   CLOCK: [2019-02-04 Mon 15:17]--[2019-02-04 Mon 15:42] =>  0:25
   CLOCK: [2019-02-04 Mon 14:09]--[2019-02-04 Mon 14:34] =>  0:25
   :END:
+** TODO [[file:~/github/cairo_pipeline/institution.org::*Institution%20Pipeline%20Concept][Institution Pipeline Concept]]
 ** [[~/github/writing/other_files/years/][Bibliography]]
 ** [[file:~/Mega/savedThreads][Twitter Threads]]
 ** [[~/github/languageLearning][Misc Language Repo]]                                                           :multiple_languages:learning:
@@ -130,10 +135,73 @@
 ** -----------------------------------------------------------------------------
 ** Programming
 *** TODO [[~/.spacemacs.d/layers/trie][Trie-layer]]
+    [[file:~/github/cairo_pipeline/institution.org::*Institution%20Pipeline%20Concept][Institution Pipeline Concept]]
+**** Components
+***** Emacs Components
+****** Pipelang Mode
+       For Writing Institutions.
+       Can trigger [[file:base_agenda.org::*Rule%20Writing%20Mode%20(RWM)][EM]] and [[file:base_agenda.org::*Explore%20Mode%20(EM)][Explore Mode (EM)]]
+       Based on Org Mode, embeds elements in src blocks using ob-DSLs.
+       Has tests and auto-verification.
+       Compiles to a specification to load into [[file:base_agenda.org::*Python%20Pipeline%20Trie%20Architecture%20(PPTA)][PPTA]].
+       Can provide statistics on tags, rules etc.
+       Provides helms for selecting typologies (Curves, enums, languages)
+       Connects with [[file:base_agenda.org::*Python%20Pipeline%20Trie%20Architecture%20(PPTA)][PPTA]] to run (Unit/Situation/Sandbox) tests. ([[file:~/github/writing/orgfiles/threeIdeas.org::*Observational%20Modalities][Observational Modalities]])
+       Look at [[file:~/github/writing/orgfiles/threeIdeas.org::*Authoring%20Modalities][Authoring Modalities]] especially *Guard*
+****** Rule Writing Mode (RWM)
+       For writing rules.
+       Keeps track of All/Institution rule groups.
+       Triggers [[file:base_agenda.org::*Trie%20Mode%20(TM)][TM]] when writing sentences
+       Triggers [[file:base_agenda.org::*Sequence%20Mode%20(SM)][SM]] for rule relations and patterns
+******* Trie Mode (TM)
+        For writing trie sentences.
+        should provide helms for global/local completion. (capable of handling variables)
+******* Sequence Mode (SM)
+        To Help write sequences of related rule facts, and patterns.
+        Also defines sources and sinks.
+        | [a b] c | d, e | etc
+****** Input/Output Mode
+       Link Sequence mode, but focusing on a single node
+       at a time. For Rules, layers, languages(+artifacts) and institutions.
+****** Explore Mode (EM)
+       To Explore the Trie graphically
+       Add DFS count of leaves at each depth
+******* Tag Worker (TW)
+        For working with groups of items sharing a tag.
+        As everything will be described as Tries, should be able to show shared
+        elements.
+****** Activity Editor
+       to connect tools/artifacts and tasks?
+       Assign different [[file:~/github/cairo_pipeline/institution.org::*Action%20Notations][Action Notations]] and indeterminacy
+
+******* IGU Transforms definiitons                                              :META:
+        Specify how to transform actions / activities
+        for IGU [[file:~/github/cairo_pipeline/institution.org::*Governance%20Specifics][Division Of Labour]], [[file:~/github/cairo_pipeline/institution.org::*Delegational%20/%20Division%20of%20Labour][Delegational / Division of Labour]]
+        *These Transforms are Key*. They 
+
+***** Secondary
+****** Logic Layer (Prolog, Clingo, CCalc... InstAL?)
+       For calculating / verifying elements
+****** Music Layer (SCLang, Tidal)
+       For producing performances
+****** jg_twitter
+       For producing performances
+****** org_unit
+       For Testing specifications
+***** Non-Emacs Components 
+****** Python Pipeline Trie Architecture (PPTA)
+       Where the specified institutions run.
+****** Supercollider Sampler instrument with auto-wget
+       For Soundscapes
+****** Cairo Images
+******* City Plan
+****** Street
+****** Unity-Vault
+****** Organisation games (Shadow of Mordor-a-like)
+****** Newspaper
 **** Design
 ***** Vignettes
 ***** Architecture
-
 **** Layouts
 ***** Pipeline
 ***** Flattened Trie Location
@@ -183,8 +251,6 @@
 **** TODO [[~/github/newspaper_gen][Newspaper Generator]]                                                   :javascript:generative:front_end:newspaper:web:procedural:
 **** [[~/github/hexagonAITest][Hexagon Board / AI Test]]                                                    :front_end:incomplete:javascript:old:parsing:web:
 *** Python
-***** TODO [[~/github/documentUnitTester][Document Unit Tester]]                                                 :writing:support:tool:test_driven_development:python:
-****** setup a generator for org files
 ***** [[~/github/heuristicRBTreeWeighting][Heuristic Tree Weighting]]                                                  :obsolete:incomplete:old:python:
 ***** [[~/github/islandGen][Voronoi Island Gen]]                                                        :incomplete:python:image:
       integrate into pipeline
@@ -234,8 +300,6 @@
        up and down shifts, possibly links with layers? look at reflective papers again
 ****** implement other form of rule change?
 *** Prolog                                                                      :todo:programming:institutions:ASP:tutorial:
-**** continue with prolog tutorial
-**** return to ASP
 **** look at Bath Institutional ASP
 *** Unity                                                                       :needs_assets:game:vault:programming:unity:
 **** proof of concept imports in vault
@@ -274,7 +338,8 @@
 ** Datasets
 *** [[file:/Users/jgrey/github/writing/other_files/main_bookmarks.html][Bookmarks]]                                                                   :web:html:bookmarks:directory:
     treat these as codings?
-*** TODO Bookmark and saved twitter parsing
+*** DONE Bookmark and saved twitter parsing
+    CLOSED: [2019-09-23 Mon 18:25]
 **** Bookmarks
      [[https://msdn.microsoft.com/en-us/library/aa753582(v=vs.85).aspx][bookmark format]]
 ***** DONE Parse into emacs readable format
@@ -299,11 +364,11 @@
 *** Code
 **** Monroe Domain Plans
 **** [[file:/Users/jgrey/Mega/code_backups/shop2random.lisp][Shop2 Plan generator]]
-**** [[file:~/Mega/code_backups/netlogo/Evolution_of_Norms][Evolution of Norms]] :norms:netlogo:
-**** [[file:~/Mega/code_backups/netlogo/Social_Norms_(Emperor's_Dilemma)][Social Norms / Emperor's Dilemma]] :norms:netlogo:
+**** [[file:~/Mega/code_backups/netlogo/Evolution_of_Norms][Evolution of Norms]]                                                         :norms:netlogo:
+**** [[file:~/Mega/code_backups/netlogo/Social_Norms_(Emperor's_Dilemma)][Social Norms / Emperor's Dilemma]]                                           :norms:netlogo:
 **** Chuck Examples                                                             :nytimes:chuck:
-**** [[file:~/Mega/code_backups/logic/ccalc-2.0r2.tar.gz][CCalc]]               :prolog:
-**** [[file:~/Mega/code_backups/logic/BPS1024.zip][Building Problem Solvers]]   :lisp:
+**** [[file:~/Mega/code_backups/logic/ccalc-2.0r2.tar.gz][CCalc]]                                                                      :prolog:
+**** [[file:~/Mega/code_backups/logic/BPS1024.zip][Building Problem Solvers]]                                                   :lisp:
 **** [[file:~/Mega/code_backups/Immerse Code Backup-20170930T102013Z-002.zip][Immerse]]                                                                    :csharp:
 *** Games
 **** [[file:~/Mega/Datasets/twine][Twine]]
@@ -792,7 +857,6 @@
       These lines set the TODO keywords and their interpretation in the
       current file.  The corresponding variable is ‘org-todo-keywords’.
 
-
 *** Expansions
 **** TODO buffer groups / registers
      be able to add a buffer / marked buffers to a register,
@@ -808,13 +872,10 @@
 ***** Open Single and Multiple files from register
 ***** Apply action to all files in register
 ***** Search only in files in register
-***** Make Register persistent
+***** Make Register persistent (register -> bookmark)
 ***** Set Operations on Registers
 
 **** TODO custom hide overlays
-
-**** TODO filter char inserting list
-**** TODO Have a recursive choice helm find files action
 **** TODO Org SubTree Transient State navigation
      Add a transient state for moving, promoting, demoting etc subtrees
 **** TODO Org Table Transient state
@@ -826,9 +887,7 @@
      be able to tag and colourize things dynamically, based on what you need at
      any given moment
      then be able to tag into groups?
-**** TODO XML / Bookmarks load
 **** TODO Tweet action for helm-bibtex and bookmark-helm
-
 ** -----------------------------------------------------------------------------
 ** Writing
 *** [[file:~/github/writing/orgfiles/dissertation.org::*Dissertation%20bits%20and%20pieces][Dissertation bits and pieces]]

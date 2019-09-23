@@ -100,17 +100,24 @@
              " ")
   )
 
+(defun doctest/parse-group-name ()
+  (if (parsec-peek-p (parsec-re "[^:]+:\n"))
+      (mapconcat 'identity
+                 (parsec-many-till (doctest/parse-word) (parsec-re ":"))
+                 " ")
+    "Anon Group")
+  )
+
 (defun doctest/parse-group ()
-  ;;TODO: make groupname optional
   (doctest/parse-space)
-  (let ((groupname (mapconcat 'identity (parsec-many-till (doctest/parse-word) (parsec-re ":")) " "))
-        (tests (parsec-many-till (doctest/parse-test)  (parsec-or (parsec-re "\n\n") (parsec-eof))))
+  (let* ((groupname (doctest/parse-group-name))
+         (tests (parsec-many-till (doctest/parse-test) (parsec-or (parsec-eof) (parsec-re "\n\n"))))
         )
     (make-doctest/test-group :name groupname :tests tests)
     )
   )
 (defun doctest/parse-test ()
-  (parsec-re "\n")
+  (parsec-re "\n?")
   (doctest/parse-space)
   (let ((locator (parsec-or (doctest/parse-quote-string)
                             (doctest/parse-sword "Document" :document)

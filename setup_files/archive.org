@@ -363,3 +363,66 @@
    :END:
    to prepare for annotation,
    to give components of expressive generators
+
+** DONE [[~/github/documentUnitTester][Document Unit Tester]]                   :writing:support:tool:test_driven_development:python:
+   CLOSED: [2019-09-23 Mon 18:23]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2019-09-23 Mon 18:23
+   :ARCHIVE_FILE: ~/.spacemacs.d/setup_files/base_agenda.org
+   :ARCHIVE_OLPATH: Base Agenda/Programming/Python
+   :ARCHIVE_CATEGORY: base_agenda
+   :ARCHIVE_TODO: DONE
+   :END:
+*** setup a generator for org files
+
+** DONE continue with prolog tutorial
+   CLOSED: [2019-09-23 Mon 18:24]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2019-09-23 Mon 18:24
+   :ARCHIVE_FILE: ~/.spacemacs.d/setup_files/base_agenda.org
+   :ARCHIVE_OLPATH: Base Agenda/Programming/Prolog
+   :ARCHIVE_CATEGORY: base_agenda
+   :ARCHIVE_TODO: DONE
+   :ARCHIVE_ITAGS: todo programming institutions ASP tutorial
+   :END:
+
+** DONE return to ASP
+   CLOSED: [2019-09-23 Mon 18:24]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2019-09-23 Mon 18:24
+   :ARCHIVE_FILE: ~/.spacemacs.d/setup_files/base_agenda.org
+   :ARCHIVE_OLPATH: Base Agenda/Programming/Prolog
+   :ARCHIVE_CATEGORY: base_agenda
+   :ARCHIVE_TODO: DONE
+   :ARCHIVE_ITAGS: todo programming institutions ASP tutorial
+   :END:
+
+** DONE filter char inserting list
+   CLOSED: [2019-09-23 Mon 18:28]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2019-09-23 Mon 18:28
+   :ARCHIVE_FILE: ~/.spacemacs.d/setup_files/base_agenda.org
+   :ARCHIVE_OLPATH: Base Agenda/Emacs/Expansions
+   :ARCHIVE_CATEGORY: base_agenda
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE Have a recursive choice helm find files action
+   CLOSED: [2019-09-23 Mon 18:29]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2019-09-23 Mon 18:29
+   :ARCHIVE_FILE: ~/.spacemacs.d/setup_files/base_agenda.org
+   :ARCHIVE_OLPATH: Base Agenda/Emacs/Expansions
+   :ARCHIVE_CATEGORY: base_agenda
+   :ARCHIVE_TODO: DONE
+   :END:
+
+** DONE XML / Bookmarks load
+   CLOSED: [2019-09-23 Mon 18:29]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2019-09-23 Mon 18:29
+   :ARCHIVE_FILE: ~/.spacemacs.d/setup_files/base_agenda.org
+   :ARCHIVE_OLPATH: Base Agenda/Emacs/Expansions
+   :ARCHIVE_CATEGORY: base_agenda
+   :ARCHIVE_TODO: DONE
+   :END:

@@ -272,11 +272,13 @@
 
   (spacemacs|use-package-add-hook dired
     :post-config
+    (evil-define-key 'normal dired-mode-map
+      (kbd "C-h") nil)
     (evil-define-key* 'normal dired-mode-map
                       (kbd "M-n") 'jg_layer/dired-auto-move
                       (kbd "C-h") 'dired-up-directory
                       )
-    (add-hook 'dired-mode-hook 'dired-omit-mode)
+    (add-hook 'dired-mode-hook (lambda () (dired-omit-mode)))
     )
   )
 

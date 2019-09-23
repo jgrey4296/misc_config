@@ -1,7 +1,7 @@
-* Doctest Spacemacs Layer
+* Org_Unit Spacemacs Layer
   Adds a keybinding (", . T") to trigger unit testing of an Org file.
   
-  Uses drawers named "__doctest__" to provide grouped unit tests of the following grammar:
+  Uses drawers named "__org_unit__" to provide grouped unit tests of the following grammar:
 
   *Ownership*:
   { Document | A Section | "SECTION_NAME" } should have {section | tag } "NAME".

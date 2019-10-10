@@ -1,0 +1,14 @@
+* Overlay Control
+  a minor mode layer to apply overlays and text props in a useful way.
+
+
+
+** Design Notes
+   Simplified Overlay control 
+
+*** Persistent highlighting by regexp.
+*** highlight current word everywhere
+*** add/clear/view highlights by register
+*** add post-modify hook to update highlighting
+*** have hide and colour options
+*** face selection

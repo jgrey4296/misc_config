@@ -6,6 +6,7 @@
     org-ref
     org-pomodoro
     (org-drill :location built-in)
+    outline-toc
     )
   )
 
@@ -143,3 +144,7 @@
 (defun jg_org/init-org-drill ()
   (use-package org-drill)
 )
+
+(defun jg_org/init-outline-toc ()
+  (use-package outline-toc)
+  )

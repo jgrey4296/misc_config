@@ -44,6 +44,7 @@
                                       jg_twitter
                                       trie
                                       org_unit
+                                      overlay_control
 
                                       ;;LANGUAGES
                                       (csv :defer)

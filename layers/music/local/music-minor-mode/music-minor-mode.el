@@ -60,13 +60,13 @@
   :lighter "Music"
   )
 
-(defun music-on ()
+(defun music-minor/music-on ()
   (unless (minibufferp)
     (if (or (eq major-mode 'tidal-mode ) (eq major-mode 'sclang-mode))
         (music-minor-mode 1))
     )
   )
 
-(define-globalized-minor-mode global-music-mode music-minor-mode music-on)
+(define-globalized-minor-mode global-music-mode music-minor-mode music-minor/music-on)
 
 (provide 'music-minor-mode)

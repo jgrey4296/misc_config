@@ -140,7 +140,7 @@
 ***** Emacs Components
 ****** Pipelang Mode
        For Writing Institutions.
-       Can trigger [[file:base_agenda.org::*Rule%20Writing%20Mode%20(RWM)][EM]] and [[file:base_agenda.org::*Explore%20Mode%20(EM)][Explore Mode (EM)]]
+       Can trigger [[file:base_agenda.org::*Rule%20Writing%20Mode%20(RWM)][RWM]] and [[file:base_agenda.org::*Explore%20Mode%20(EM)][EM]]
        Based on Org Mode, embeds elements in src blocks using ob-DSLs.
        Has tests and auto-verification.
        Compiles to a specification to load into [[file:base_agenda.org::*Python%20Pipeline%20Trie%20Architecture%20(PPTA)][PPTA]].
@@ -179,6 +179,7 @@
         for IGU [[file:~/github/cairo_pipeline/institution.org::*Governance%20Specifics][Division Of Labour]], [[file:~/github/cairo_pipeline/institution.org::*Delegational%20/%20Division%20of%20Labour][Delegational / Division of Labour]]
         *These Transforms are Key*. They 
 
+****** Timing Comparison
 ***** Secondary
 ****** Logic Layer (Prolog, Clingo, CCalc... InstAL?)
        For calculating / verifying elements
@@ -246,6 +247,8 @@
 ***** Activity Pyramid
 ***** Layer
 ***** Cycle
+**** Questions Options Criteria
+
 *** Javascript / Web
 **** [[~/github/mordor-alike][Mordor Like Idea]]                                                           :nemesis:mordor:javascript:obsolete:incomplete:grammar:
 **** TODO [[~/github/newspaper_gen][Newspaper Generator]]                                                   :javascript:generative:front_end:newspaper:web:procedural:
@@ -858,11 +861,11 @@
       current file.  The corresponding variable is ‘org-todo-keywords’.
 
 *** Expansions
-**** TODO buffer groups / registers
+**** buffer groups / registers
      be able to add a buffer / marked buffers to a register,
      then search in them, or step through them
      persistent?
-**** TODO Buffer Register Sets
+**** Buffer Register Sets
 ***** Add files/buffers to register
 ****** Regex / File Type
 ****** Mode
@@ -875,19 +878,24 @@
 ***** Make Register persistent (register -> bookmark)
 ***** Set Operations on Registers
 
-**** TODO custom hide overlays
-**** TODO Org SubTree Transient State navigation
+**** custom hide overlays
+**** Org SubTree Transient State navigation
      Add a transient state for moving, promoting, demoting etc subtrees
-**** TODO Org Table Transient state
+**** Org Table Transient state
      Transient state to create, add (column/row), and navigate tables
-**** TODO org-agenda keymap modifications
+**** org-agenda keymap modifications
      swap priority mods into < and >
-**** TODO outline-toc package
-**** TODO tag and colourize words minor mode to run anywhere
+**** outline-toc package
+**** tag and colourize words minor mode to run anywhere
      be able to tag and colourize things dynamically, based on what you need at
      any given moment
      then be able to tag into groups?
-**** TODO Tweet action for helm-bibtex and bookmark-helm
+     
+     run search for regexp / current work, either apply overlay or
+     modify text properties
+     keep track so as to clear as necessary.
+
+**** Tweet action for helm-bibtex and bookmark-helm
 ** -----------------------------------------------------------------------------
 ** Writing
 *** [[file:~/github/writing/orgfiles/dissertation.org::*Dissertation%20bits%20and%20pieces][Dissertation bits and pieces]]
@@ -929,3 +937,10 @@
 *** [[https://multiagentcontest.org/publications/][Multi Agent Contest]]
 *** [[http://slatestarcodex.com/2014/04/28/the-control-group-is-out-of-control/][The Control Group is out of control]]                                         :science:methods:
 *** [[http://www.sosmath.com/algebra/fraction/frac3/frac3.html][SoS Math]]                                                                    :useful:math:
+** Tasks
+*** TODO emacs editor
+*** TODO Spec compile to architecture
+*** TODO Source code analysis
+    ABL, Don't Starve etc
+*** TODO unit institution
+*** TODO performative outputs

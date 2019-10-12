@@ -235,33 +235,33 @@ versus not"
   )
 
 (defun jg_layer/helm-open-random-external-action (candidate)
-    " Open a random file in an external program, optionally specifying wildcard "
-    (interactive)
-    (let* ((pattern (car (last (f-split candidate))))
-           (pattern-r (wildcard-to-regexp pattern))
-           (files (helm-get-candidates (helm-get-current-source)))
-           (all_matches (if (string-match-p "\*\." pattern)
-                            (seq-filter (lambda (x) (string-match-p pattern-r x)) files)
-                          (f-files candidate)))
-           (selected (seq-random-elt all_matches)))
-      (spacemacs//open-in-external-app selected)
-      ))
+  " Open a random file in an external program, optionally specifying wildcard "
+  (interactive)
+  (let* ((pattern (car (last (f-split candidate))))
+         (pattern-r (wildcard-to-regexp pattern))
+         (files (helm-get-candidates (helm-get-current-source)))
+         (all_matches (if (string-match-p "\*\." pattern)
+                          (seq-filter (lambda (x) (string-match-p pattern-r x)) files)
+                        (f-files candidate)))
+         (selected (seq-random-elt all_matches)))
+    (spacemacs//open-in-external-app selected)
+    ))
 
 (defun jg_layer/helm-open-random-exploration-action (candidate)
-    " Randomly choose a directory until an openably file is found (wildcard optional)"
-    ;; TODO
-    (interactive)
-    (let* ((pattern (car (last (f-split candidate))))
-           (pattern-r (wildcard-to-regexp pattern))
-           (files (helm-get-candidates (helm-get-current-source)))
-           (all_matches (if (string-match-p "\*\." pattern)
-                            (seq-filter
-                             (lambda (x) (string-match-p pattern-r x))
-                             files)
-                          (f-files candidate)))
-           (selected (seq-random-elt all_matches)))
-      (spacemacs//open-in-external-app selected)
-      ))
+  " Randomly choose a directory until an openably file is found (wildcard optional)"
+  ;; TODO
+  (interactive)
+  (let* ((pattern (car (last (f-split candidate))))
+         (pattern-r (wildcard-to-regexp pattern))
+         (files (helm-get-candidates (helm-get-current-source)))
+         (all_matches (if (string-match-p "\*\." pattern)
+                          (seq-filter
+                           (lambda (x) (string-match-p pattern-r x))
+                           files)
+                        (f-files candidate)))
+         (selected (seq-random-elt all_matches)))
+    (spacemacs//open-in-external-app selected)
+    ))
 
 ;;----------------------------------------
 
@@ -306,54 +306,85 @@ versus not"
   )
 
 ;;----------------------------------------
-  (defun jg_layer/toggle-all-defs ()
-    (interactive)
-    ;; goto start of file
-    (let* ((open-or-close 'evil-close-fold)
-           (current (point))
-           )
-      (save-excursion
-        (goto-char (point-min))
+(defun jg_layer/toggle-all-defs ()
+  (interactive)
+  ;; goto start of file
+  (let* ((open-or-close 'evil-close-fold)
+         (current (point))
+         )
+    (save-excursion
+      (goto-char (point-min))
+      (python-nav-forward-defun)
+      (while (not (equal current (point)))
+        (setq current (point))
+        (if (jg_layer/line-starts-with? "def ")
+            (funcall open-or-close))
         (python-nav-forward-defun)
-        (while (not (equal current (point)))
-          (setq current (point))
-          (if (jg_layer/line-starts-with? "def ")
-              (funcall open-or-close))
-          (python-nav-forward-defun)
-          )
         )
       )
     )
+  )
 
-  (defun jg_layer/close-class-defs ()
-    (interactive )
-    (save-excursion
-      (let* ((current (point)))
+(defun jg_layer/close-class-defs ()
+  (interactive )
+  (save-excursion
+    (let* ((current (point)))
+      (python-nav-backward-defun)
+      (while (and (not (jg_layer/line-starts-with? "class "))
+                  (not (equal current (point))))
+        (evil-close-fold)
+        (setq current (point))
         (python-nav-backward-defun)
-        (while (and (not (jg_layer/line-starts-with? "class "))
-                    (not (equal current (point))))
-          (evil-close-fold)
-          (setq current (point))
-          (python-nav-backward-defun)
-          )
-        )
-      )
-    (save-excursion
-      (let* ((current (point)))
-        (python-nav-forward-defun)
-        (while (and (not (jg_layer/line-starts-with? "class "))
-                    (not (equal current (point))))
-          (evil-close-fold)
-          (setq current (point))
-          (python-nav-forward-defun)
-          )
         )
       )
     )
+  (save-excursion
+    (let* ((current (point)))
+      (python-nav-forward-defun)
+      (while (and (not (jg_layer/line-starts-with? "class "))
+                  (not (equal current (point))))
+        (evil-close-fold)
+        (setq current (point))
+        (python-nav-forward-defun)
+        )
+      )
+    )
+  )
 
-  (defun jg_layer/setup-python-mode ()
-    (evil-define-key 'normal python-mode-map
-      (kbd "z d") 'jg_layer/toggle-all-defs
-      (kbd "z C") 'jg_layer/close-class-defs
-      ))
+(defun jg_layer/setup-python-mode ()
+  (evil-define-key 'normal python-mode-map
+    (kbd "z d") 'jg_layer/toggle-all-defs
+    (kbd "z C") 'jg_layer/close-class-defs
+    ))
+
+(require 'subr-x)
+
+(defun what-face (pos)
+  ;; from: http://stackoverflow.com/questions/1242352/get-font-face-under-cursor-in-emacs#1242366
+  (interactive "d")
+  (let ((face (or (get-char-property (point) 'read-face-name)
+                  (get-char-property (point) 'face))))
+    (if face (message "Face: %s" face) (message "No face at %d" pos))))
+
+(defun face-under-cursor-customize (pos)
+  (interactive "d")
+  (let ((face (or (get-char-property (point) 'read-face-name)
+                  (get-char-property (point) 'face))))
+    (if face (customize-face face) (message "No face at %d" pos))))
+
+(defadvice message (before who-said-that activate)
+  "Find out who said that thing and say so"
+  ;;from emacswiki.org/emacs/DebugMessages:
+  (let ((trace nil) (n 1) (frame nil))
+    (while (setq frame (backtrace-frame n))
+      (setq n (1+ n)
+            trace (cons (cadr frame) trace)) )
+    (ad-set-arg 0 (concat "<<%S>>:\n" (ad-get-arg 9)))
+    (ad-set-args 1 (cons trace (ad-get-args 1))) ))
+
+;;deactivate the above:
+(ad-disable-advice 'message 'before 'who-said-that)
+(ad-update 'message)
+
+
 

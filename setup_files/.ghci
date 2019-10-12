@@ -1,0 +1,47 @@
+:set prompt "λ> "
+:set +t
+:set -XFlexibleContexts
+:set -XGeneralizedNewtypeDeriving
+:set -XScopedTypeVariables
+-- :set -XOverloadedStrings
+-- :set -XOverloadedLists
+:set -XFlexibleInstances
+-- :set -XMultiParamTypeClasses
+-- :set -FunctionalDependencies
+-- :set -XNoMonomorphismRestriction
+-- :set -XGADTs
+-- :set -XBangPatterns
+-- :set -XDeriveGeneric
+
+-- DO NOT ENABLE: DatatypeContexts, OverlappingInstances, IncoherentInstances,
+-- ImpredicativeTypes, AllowAmbigiousTypes
+
+-- Example Macro Definition:
+-- :def a \_ -> return $ "putStrLn \"Blah\""
+
+-- Example Multiline Macro:
+-- :{
+-- :def b \_ -> return $ unlines [ "putStrLn \"awef\"",
+--                               "putStrLn \"bloo\"" ]
+-- :}
+
+
+:{
+
+:def redir \varcmd ->
+  case break Data.Char.isSpace varcmd of 
+    { (var,_:cmd) -> return $ unlines 
+                     [":set -fno-print-bind-result" 
+                     ,"tmp <- System.Directory.getTemporaryDirectory"
+                     ,"(f,h) <- System.IO.openTempFile tmp \"ghci\""
+                     ,"sto <- GHC.IO.Handle.hDuplicate System.IO.stdout"
+                     ,"GHC.IO.Handle.hDuplicateTo h System.IO.stdout"
+                     ,"System.IO.hClose h"
+                     ,cmd
+                     ,"GHC.IO.Handle.hDuplicateTo sto System.IO.stdout"
+                     ,"let readFileNow f = readFile f >>= \\t->length t `seq` return t"
+                     ,var++" <- readFileNow f"
+                     ,"System.Directory.removeFile f"]
+    ; _ -> return "putStrLn \"usage: :redir <var> <cmd>\"" }
+  
+:}

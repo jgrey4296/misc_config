@@ -1,0 +1,9 @@
+[user]
+	name = John Grey
+	email = johngrey4296@gmail.com
+[push]
+	default = matching
+[credential]
+	helper = osxkeychain
+[core]
+	excludesfile = ~/.shell_files/.gitignore_global

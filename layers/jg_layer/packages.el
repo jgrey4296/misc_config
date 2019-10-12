@@ -203,7 +203,7 @@
 (defun jg_layer/post-init-abbrev ()
   ;;abbrev-file complaint quieting
   (setq-default
-   abbrev-file-name (expand-file-name "~/.spacemacs.d/layers/jg_layer/abbrevs_defs")
+   abbrev-file-name (expand-file-name "~/.spacemacs.d/setup_files/abbrevs_defs")
    )
   (spacemacs/set-leader-keys
     "y e"  'edit-abbrevs

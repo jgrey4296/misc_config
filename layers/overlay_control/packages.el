@@ -9,6 +9,9 @@
 (defun overlay_control/init-overlay-ctrl-minor-mode ()
   (use-package overlay-ctrl-minor-mode
     :commands (overlay-ctrl-minor-mode global-overlay-ctrl-mode)
+    :init
+    (spacemacs/set-leader-keys
+      "t O" 'global-overlay-ctrl-mode)
     :config
     (spacemacs|define-transient-state overlay-apply
       :title "Overlay Application"

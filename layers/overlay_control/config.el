@@ -9,3 +9,4 @@
 (defcustom overlay_control/hide-text "..." "The Text to substitute hidden entries with")
 
 (defvar overlay_control/current-overlay-type (cdr (car overlay_control/helm-candidates)))
+

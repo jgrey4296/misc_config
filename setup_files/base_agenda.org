@@ -291,7 +291,7 @@
 ***** [[~/github/cairo_pipeline][Cairo Pipeline Architecture]]                                               :cairo:graphical:active:layers:python:
 ***** [[~/github/cairo_utils][Cairo Utilities]]                                                           :graphical:active:dcel:voronoi:cairo:library:tool:
 ***** [[~/github/nytimes_scraper][NYT Scraper]]                                                               :data_analysis:grammar:scraper:dataset:nytimes:
-***** TODO [[~/github/pyAStar][Python Astar Implementation]]                                          :a_star:library:pathfinding:maze:python:
+***** TODO [[~/github/languageLearning/python/pyAStar][Python Astar Implementation]] :a_star:library:pathfinding:maze:python:
 ****** integrate into pythonRuleEngine?
        needs to be able to control vault movement as well
 ***** TODO [[~/github/pythonRuleEngine][Python Rule Language and Engine]]                                      :python:important:todo:meta:simulation:institutions:exclusion_logic:library:parsing:production_system:rules:
@@ -302,6 +302,25 @@
 ****** TODO implement meta?
        up and down shifts, possibly links with layers? look at reflective papers again
 ****** implement other form of rule change?
+****** potential data structures
+       activities                    *
+       protocols                     *
+       fsm                           *
+       layer                         *
+       indeterminacy                 *
+       curves                        *
+       delegation?
+
+       sanctions
+       errors / failure / recovery
+       interleaving
+       speech acts
+       rule conflicts
+       ADICO
+       koster social mechanics
+       carriers
+       physical constraint / action
+
 *** Prolog                                                                      :todo:programming:institutions:ASP:tutorial:
 **** look at Bath Institutional ASP
 *** Unity                                                                       :needs_assets:game:vault:programming:unity:

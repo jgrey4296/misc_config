@@ -473,7 +473,7 @@ you should place your code here."
     (("git"
       (derived-mode . magit-mode)
       (saved . "anti-helm"))
-    (("bibtex"
+    ("bibtex"
       (used-mode . bibtex-mode))
      ("music"
       (or

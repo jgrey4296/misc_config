@@ -134,7 +134,7 @@
     "!" 'tag-unify/chop-long-files-from-dired
     "B" 'tag-unify/unify-pdf-locations
     )
-)
+  )
 (defun tag-unify/post-init-evil ()
   (evil-ex-define-cmd "t[ag]" 'tag-unify/tag-unify-helm-start)
   (evil-ex-define-cmd "to" 'tag-unify/tag-occurrences)
@@ -147,27 +147,27 @@
     :defer t
     :commands (tag-clean-minor-mode)
     :config (progn
-            (push 'tag-clean-minor-mode minor-mode-list)
-            (spacemacs|define-transient-state tag-clean
-              :title "Tag Cleaning Transient State"
-              :doc (concat "
+              (push 'tag-clean-minor-mode minor-mode-list)
+              (spacemacs|define-transient-state tag-clean
+                :title "Tag Cleaning Transient State"
+                :doc (concat "
     | Commands   ^^|
     |------------^^|------------^^|
     | [_q_] Quit   | [_!_] Split  |
     | [_f_] Filter | [_p_] Prev   |
     | [_s_] Sub    | [_l_] Leave  |
 ")
-              :bindings
-              ("q" nil :exit t)
-              ("f" tag-clean/mark-to-filter)
-              ("s" tag-clean/mark-to-sub)
-              ("p" tag-clean/previous)
-              ("l" tag-clean/leave)
-              ("!" tag-unify/org-split-on-headings :exit t)
+                :bindings
+                ("q" nil :exit t)
+                ("f" tag-clean/mark-to-filter)
+                ("s" tag-clean/mark-to-sub)
+                ("p" tag-clean/previous)
+                ("l" tag-clean/leave)
+                ("!" tag-unify/org-split-on-headings :exit t)
+                )
+              (spacemacs/set-leader-keys-for-minor-mode 'tag-clean-minor-mode
+                "." 'spacemacs/tag-clean-transient-state/body
+                )
               )
-            (spacemacs/set-leader-keys-for-minor-mode 'tag-clean-minor-mode
-              "." 'spacemacs/tag-clean-transient-state/body
-              )
-            )
     )
   )

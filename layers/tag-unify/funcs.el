@@ -30,7 +30,7 @@
         ;; (backward-char (length "\" TAGS"))
         (message "Opening: %s" (buffer-substring (line-beginning-position) (line-end-position)))
         (goto-char (line-beginning-position))
-        (jg_layer/open_link_externally)
+        (jg_org/open_link_externally)
         (forward-line)
         )
       )

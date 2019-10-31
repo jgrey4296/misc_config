@@ -473,6 +473,8 @@ you should place your code here."
     (("git"
       (derived-mode . magit-mode)
       (saved . "anti-helm"))
+    (("bibtex"
+      (used-mode . bibtex-mode))
      ("music"
       (or
        (name . "*\\(tidal\\|SCLang\\)")

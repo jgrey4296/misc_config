@@ -22,3 +22,12 @@
                                                     (filtered-candidate-transformer (lambda (_c _s) (list helm-pattern)))
                                                     )
               )
+
+(add-hook 'bibtex-mode-hook
+          (lambda ()
+            (let ((misc (assoc "Misc" bibtex-BibTeX-entry-alist))
+                  (copied (assoc-delete-all "Misc" (copy-alist bibtex-BibTeX-entry-alist)))
+                  (custom '("Misc" "Miscellaneous" nil nil (("author") ("title" "Title of the work (BibTeX converts it to lowercase)") ("howpublished" "The way in which the work was published") ("month") ("year") ("note") ("file") ("keywords")))))
+              (setq bibtex-BibTeX-entry-alist (cons custom copied))
+              )
+            ))

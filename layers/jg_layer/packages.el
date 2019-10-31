@@ -220,6 +220,7 @@
                 python-indent-guess-indent-offset nil
                 python-shell-interpreter-args "-i"
                 python-shell-interpreter "python"
+                python-shell-virtualenv-root "~/anaconda"
                 )
 
   (add-hook 'python-mode-hook 'jg_layer/setup-python-mode)

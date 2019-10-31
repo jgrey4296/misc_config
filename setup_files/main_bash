@@ -6,5 +6,5 @@ if [[ $OSTYPE =~ "darwin" ]]; then
    source ~/.shell_files/languageSpecific.bash
    source ~/.shell_files/aliases.bash
    set_non_standard_python_paths
-   source activate defaultenv
+   source activate base
 fi

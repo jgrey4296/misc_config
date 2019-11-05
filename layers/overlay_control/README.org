@@ -2,7 +2,6 @@
   a minor mode layer to apply overlays and text props in a useful way.
 
 
-
 ** Design Notes
    Simplified Overlay control 
 

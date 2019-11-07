@@ -1,5 +1,13 @@
 (when (configuration-layer/layer-usedp 'jg_twitter)
 
+  (defun jg_twitter/open_user ()
+    (interactive)
+    ;;get word at point
+    ;;see if preceded by @
+    ;;if so, open a link as twitter.com/word
+
+    )
+
   (defun jg_twitter/tweet ()
     """ Creates a window to write a tweet in,
         if already in that window, tweet it

@@ -23,5 +23,6 @@
 (defun jg_twitter/post-init-evil ()
   (evil-ex-define-cmd "tweet" 'jg_twitter/tweet)
   (evil-ex-define-cmd "image" 'jg_twitter/twitter-add-picture)
-  )
+  (spacemacs/set-leader-keys "a t" 'jg_twitter/open_user)
 
+  )

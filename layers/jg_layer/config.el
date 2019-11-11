@@ -20,6 +20,8 @@
               flycheck-display-errors-function nil
               flycheck-help-echo-function nil
               flycheck-process-error-functions nil
+              ;;evil cursor control:
+              evil-move-beyond-eol t
 )
 ;; force utf-8
 (set-terminal-coding-system 'utf-8)

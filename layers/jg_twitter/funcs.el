@@ -3,9 +3,7 @@
   (defun jg_twitter/open_user ()
     (interactive)
     ;;get word at point
-    ;;see if preceded by @
-    ;;if so, open a link as twitter.com/word
-
+     (org-open-link-from-string (format "[[https://www.twitter.com/%s]]" (current-word)))
     )
 
   (defun jg_twitter/tweet ()
@@ -123,4 +121,3 @@
     (redraw-display)
     )
   )
-

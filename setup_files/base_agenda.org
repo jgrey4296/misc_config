@@ -135,7 +135,7 @@
 ** -----------------------------------------------------------------------------
 ** Programming
 *** TODO [[~/.spacemacs.d/layers/trie][Trie-layer]]
-    [[file:~/github/cairo_pipeline/institution.org::*Institution%20Pipeline%20Concept][Institution Pipeline Concept]]
+    [[file:~/github/writing/orgfiles/institution_pipeline.org::*Institution%20Pipeline%20Concept][Institution Pipeline Concept]]
 **** Components
 ***** Emacs Components
 ****** Pipelang Mode
@@ -177,7 +177,7 @@
 ******* IGU Transforms definiitons                                              :META:
         Specify how to transform actions / activities
         for IGU [[file:~/github/cairo_pipeline/institution.org::*Governance%20Specifics][Division Of Labour]], [[file:~/github/cairo_pipeline/institution.org::*Delegational%20/%20Division%20of%20Labour][Delegational / Division of Labour]]
-        *These Transforms are Key*. They 
+        *These Transforms are Key*. They
 
 ****** Timing Comparison
 ***** Secondary
@@ -189,7 +189,7 @@
        For producing performances
 ****** org_unit
        For Testing specifications
-***** Non-Emacs Components 
+***** Non-Emacs Components
 ****** Python Pipeline Trie Architecture (PPTA)
        Where the specified institutions run.
 ****** Supercollider Sampler instrument with auto-wget
@@ -909,7 +909,7 @@
      be able to tag and colourize things dynamically, based on what you need at
      any given moment
      then be able to tag into groups?
-     
+
      run search for regexp / current work, either apply overlay or
      modify text properties
      keep track so as to clear as necessary.

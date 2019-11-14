@@ -14,6 +14,7 @@
     (parsec :location elpa :step pre)
     (sequence-mode :location local)
     (explore-mode :location local)
+    origami
     )
   )
 
@@ -96,4 +97,10 @@
       ("q" nil :exit t)
       )
     )
+  )
+
+(defun trie/post-init-origami ()
+  ;; (require 'trie/origami-parser "~/.spacemacs.d/layers/trie/local/origami-parser.el")
+  ;; (add-to-list 'origami-parse-alist '(trie-mode . trie/origami-parser))
+
   )

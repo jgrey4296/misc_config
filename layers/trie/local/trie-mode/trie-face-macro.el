@@ -1,11 +1,12 @@
 ;; Macros for generating faces programmatically for trie mode
 (require 'dash)
 
-(defcustom trie-defined-depth-count 10)
-(defcustom trie-outermost-depth-face-count 3)
-(defcustom trie-depth-face-name "trie-depth-")
+(defcustom trie-defined-depth-count 10 "Number of Trie Faces to Generate")
+(defcustom trie-outermost-depth-face-count 3 "Generated Trie Faces depth")
+(defcustom trie-depth-face-name "trie-depth-" "Generated Trie Face Name Base")
 (defcustom trie-depth-color-list '("color-26" "color-47" "color-99" "color-124"
-                                   "color-129" "color-142" "color-164"))
+                                   "color-129" "color-142" "color-164")
+  "Default Generate Trie Face Colours")
 
 
 (defun flatten (lst)
@@ -30,7 +31,6 @@
                  (newLst (flatten (-repeat repN lst))))
           (assert (>= (length newLst) n))
           newLst)))))
-
 
 (defun findFace (name)
   (seq-find (lambda (x) (string= (face-name x) name)) (face-list)))
@@ -78,5 +78,6 @@
           ;;                                                       newFaceColor))))
           (eval (macroexpand `(trie-generate-face ,(intern newFaceName) newFaceColor))))))))
 
-;;(trie-face-creation)
+(trie-face-creation)
 
+(provide 'trie-face-macro)

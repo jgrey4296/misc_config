@@ -388,3 +388,21 @@ versus not"
 
 
 
+(defun jg_layer/setup-ibuffer ()
+  (interactive)
+  (ibuffer-add-saved-filters "anti-helm")
+
+)
+
+
+(defun jg_layer/switch-major-mode ()
+  (interactive)
+  (let ((major-modes jg_layer/major-modes))
+    (helm
+     :sources '((name . "Major modes")
+                (candidates . major-modes)
+                (action . (lambda (mode) (funcall (intern mode))))
+                (persistent-action . (lambda (mode) (describe-function (intern mode)))))))
+
+  )
+

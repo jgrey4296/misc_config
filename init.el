@@ -370,7 +370,7 @@ you should place your code here."
     ;; searching
     "s o" 'helm-occur
     ;; mode select
-    "a m m"   'helm-switch-major-mode
+    "a m m"   'jg_layer/switch-major-mode
     "a m e"   'helm-enable-minor-mode
     "a m d"   'helm-disable-minor-mode
     ;; Access to old school emacs help:

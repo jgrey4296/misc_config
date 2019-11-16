@@ -19,7 +19,7 @@
          (exit-actions (FSM/State-exit current))
          (edge-actions (FSM/Edge-actions edge))
          (entry-actions (FSM/State-entry target))
-         (state-actions (FSM/State-action target))
+         (state-actions (FSM/State-actions target))
          )
     ;; move
     (setf (FSM/Context-id ctx) (FSM/State-id target))

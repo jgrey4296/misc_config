@@ -62,7 +62,7 @@
   ;; Define the bib helm
   (defvar tag-unify/helm-source-bibtex
     '((name . "BibTeX entries")
-      (header-name . "Test")
+      (header-name . "BibTeX entries")
       ;; (lambda (name) (format "%s%s: " name (if helm-bibtex-local-bib " (local)" ""))))
       (candidates . helm-bibtex-candidates)
       (match helm-mm-exact-match helm-mm-match helm-fuzzy-match)
@@ -115,6 +115,15 @@
       )
     )
   (add-hook 'org-mode-hook 'tag-unify/org-mod-map)
+
+  (with-temp-buffer
+    (insert-file tag-unify/global-tags-location)
+    (goto-char (point-min))
+    (while (< (point) (point-max))
+      ((lambda (x) (puthash (car x) (string-to-number (cadr x)) tag-unify/global-tags)) (split-string (buffer-substring (line-beginning-position) (line-end-position)) ":" nil " "))
+      (forward-line)
+      )
+    )
 
   (evil-define-operator tag-unify/tag-unify-helm-start (beg end)
     """ Opens the Tagging Helm """

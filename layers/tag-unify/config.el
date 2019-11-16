@@ -10,15 +10,17 @@
               bibtex-completion-pdf-open-function (lambda (x) (org-open-link-from-string (format "[[file:%s]]" x)))
               tag-unify/helm-bibtex-candidates nil
 
+              tag-unify/global-tags-location "~/github/writing/resources/collate.tags"
+              tag-unify/global-tags (make-hash-table)
               tag-unify/tag-unify-candidates-names '()
               tag-unify/tag-unify-candidate-counts '()
               ;; Start Position -> End Line number because of changes in positions from tag add/retract
               tag-unify/tag-unify-region '()
               tag-unify/tag-unify-helm `((name . "Helm Tagging")
-                                         (action . (("set" . tag-unify/org-set-tags)))
+                                         (action . (("set" . tag-unify/set-tags)))
                                          )
               tag-unify/tag-unify-fallback-source `((name . "")
-                                                    (action . (("Create" . tag-unify/org-set-new-tag)))
+                                                    (action . (("Create" . tag-unify/set-new-tag)))
                                                     (filtered-candidate-transformer (lambda (_c _s) (list helm-pattern)))
                                                     )
               )

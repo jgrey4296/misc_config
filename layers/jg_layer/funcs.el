@@ -14,6 +14,22 @@
     )
   )
 (when (configuration-layer/package-usedp 'dired)
+  (defun jg_layer/dired-create-index-of-orgs ()
+    " Function to create an org file that indexs all org files in cwd
+and its subtree, from dired"
+    (interactive)
+    (let* ((cwd (dired-current-directory))
+           (org-files (directory-files-recursively cwd "\.org")))
+      (with-output-to-temp-buffer "*CWD Index*"
+        (set-buffer "*CWD Index*")
+        (insert (format "* Index of: %s\n" cwd))
+        (mapc (lambda (x) (insert (format "** [[%s][%s]]\n" x (f-base x)))) org-files)
+        (org-mode)
+        (goto-char (point-min))
+        (org-sort-entries nil ?a)
+        )
+      )
+    )
 
   (defun jg_layer/dired-auto-move ()
     " Function to move up a directory, to the next line, and into that "
@@ -183,7 +199,7 @@ versus not"
                   (persistent-action . (lambda (mode) (describe-function (intern mode)))))))
 
     )
-)
+  )
 (when (configuration-layer/package-usedp 'ibuffer)
   (defun jg_layer/setup-ibuffer ()
     (interactive)
@@ -209,11 +225,6 @@ versus not"
         )
       )
     )
-  (defun jg_layer/setup-python-mode ()
-    (evil-define-key 'normal python-mode-map
-      (kbd "z d") 'jg_layer/toggle-all-defs
-      (kbd "z C") 'jg_layer/close-class-defs
-      ))
   (defun jg_layer/close-class-defs ()
     (interactive )
     (save-excursion
@@ -239,8 +250,12 @@ versus not"
         )
       )
     )
-
-)
+  (defun jg_layer/setup-python-mode ()
+    (evil-define-key 'normal python-mode-map
+      (kbd "z d") 'jg_layer/toggle-all-defs
+      (kbd "z C") 'jg_layer/close-class-defs
+      ))
+  )
 ;;--------------------------------------------------
 (defun jg_layer/insert-lparen ()
   """ utility to insert a (  """
@@ -298,13 +313,13 @@ versus not"
       )
     )
   )
-(defun what-face (pos)
+(defun jg_layer/what-face (pos)
   ;; from: http://stackoverflow.com/questions/1242352/
   (interactive "d")
   (let ((face (or (get-char-property (point) 'read-face-name)
                   (get-char-property (point) 'face))))
     (if face (message "Face: %s" face) (message "No face at %d" pos))))
-(defun face-under-cursor-customize (pos)
+(defun jg_layer/face-under-cursor-customize (pos)
   (interactive "d")
   (let ((face (or (get-char-property (point) 'read-face-name)
                   (get-char-property (point) 'face))))

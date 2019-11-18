@@ -134,193 +134,42 @@
 ** [[~/.spacemacs.d/setup_files/pomodoro_log.org][Pomodoro Log]]
 ** -----------------------------------------------------------------------------
 ** Programming
-*** TODO [[~/.spacemacs.d/layers/trie][Trie-layer]]
-    [[file:~/github/writing/orgfiles/institution_pipeline.org::*Institution%20Pipeline%20Concept][Institution Pipeline Concept]]
-**** Components
-***** Emacs Components
-****** Pipelang Mode
-       For Writing Institutions.
-       Can trigger [[file:base_agenda.org::*Rule%20Writing%20Mode%20(RWM)][RWM]] and [[file:base_agenda.org::*Explore%20Mode%20(EM)][EM]]
-       Based on Org Mode, embeds elements in src blocks using ob-DSLs.
-       Has tests and auto-verification.
-       Compiles to a specification to load into [[file:base_agenda.org::*Python%20Pipeline%20Trie%20Architecture%20(PPTA)][PPTA]].
-       Can provide statistics on tags, rules etc.
-       Provides helms for selecting typologies (Curves, enums, languages)
-       Connects with [[file:base_agenda.org::*Python%20Pipeline%20Trie%20Architecture%20(PPTA)][PPTA]] to run (Unit/Situation/Sandbox) tests. ([[file:~/github/writing/orgfiles/threeIdeas.org::*Observational%20Modalities][Observational Modalities]])
-       Look at [[file:~/github/writing/orgfiles/threeIdeas.org::*Authoring%20Modalities][Authoring Modalities]] especially *Guard*
-****** Rule Writing Mode (RWM)
-       For writing rules.
-       Keeps track of All/Institution rule groups.
-       Triggers [[file:base_agenda.org::*Trie%20Mode%20(TM)][TM]] when writing sentences
-       Triggers [[file:base_agenda.org::*Sequence%20Mode%20(SM)][SM]] for rule relations and patterns
-******* Trie Mode (TM)
-        For writing trie sentences.
-        should provide helms for global/local completion. (capable of handling variables)
-******* Sequence Mode (SM)
-        To Help write sequences of related rule facts, and patterns.
-        Also defines sources and sinks.
-        | [a b] c | d, e | etc
-****** Input/Output Mode
-       Link Sequence mode, but focusing on a single node
-       at a time. For Rules, layers, languages(+artifacts) and institutions.
-****** Explore Mode (EM)
-       To Explore the Trie graphically
-       Add DFS count of leaves at each depth
-******* Tag Worker (TW)
-        For working with groups of items sharing a tag.
-        As everything will be described as Tries, should be able to show shared
-        elements.
-****** Activity Editor
-       to connect tools/artifacts and tasks?
-       Assign different [[file:~/github/cairo_pipeline/institution.org::*Action%20Notations][Action Notations]] and indeterminacy
+*** [[file:~/github/writing/orgfiles/trie_layer.org::*%5B%5B~/.spacemacs.d/layers/trie%5D%5BTrie-layer%5D%5D][Trie-layer]]
+*** Python
+**** TODO [[~/github/pythonRuleEngine][Python Rule Language and Engine]]                                       :python:important:todo:meta:simulation:institutions:exclusion_logic:library:parsing:production_system:rules:
+***** Recap current language capabilities
+***** integrate layer architecture
+***** TODO implement type checking?
+***** implement time?
+***** TODO implement meta?
+      up and down shifts, possibly links with layers? look at reflective papers again
+***** implement other form of rule change?
+***** potential data structures
+      activities                    *
+      protocols                     *
+      fsm                           *
+      layer                         *
+      indeterminacy                 *
+      curves                        *
+      delegation?
 
-******* IGU Transforms definiitons                                              :META:
-        Specify how to transform actions / activities
-        for IGU [[file:~/github/cairo_pipeline/institution.org::*Governance%20Specifics][Division Of Labour]], [[file:~/github/cairo_pipeline/institution.org::*Delegational%20/%20Division%20of%20Labour][Delegational / Division of Labour]]
-        *These Transforms are Key*. They
+      sanctions
+      errors / failure / recovery
+      interleaving
+      speech acts
+      rule conflicts
+      ADICO
+      koster social mechanics
+      carriers
+      physical constraint / action
 
-****** Timing Comparison
-***** Secondary
-****** Logic Layer (Prolog, Clingo, CCalc... InstAL?)
-       For calculating / verifying elements
-****** Music Layer (SCLang, Tidal)
-       For producing performances
-****** jg_twitter
-       For producing performances
-****** org_unit
-       For Testing specifications
-***** Non-Emacs Components
-****** Python Pipeline Trie Architecture (PPTA)
-       Where the specified institutions run.
-****** Supercollider Sampler instrument with auto-wget
-       For Soundscapes
-****** Cairo Images
-******* City Plan
-****** Street
-****** Unity-Vault
-****** Organisation games (Shadow of Mordor-a-like)
-****** Newspaper
-**** Design
-***** Vignettes
-***** Architecture
-**** Layouts
-***** Pipeline
-***** Flattened Trie Location
-***** Rule
-***** Time Cycle
-***** Carriers
-****** Activity
-****** Tool
-****** Values
-****** Role
-****** Sanctions
-**** Keybindings
-***** Insertion
-***** Deletion
-**** Transient States
-***** Component Adding
-****** Institution
-****** Activity
-****** Meta Rules
-***** Component Navigation
-**** Layer elements
-***** Configuration
-**** Mode Elements
-***** font locking?
-      Possibly do manually?
-***** Keywords
-**** Functions
-***** Helms
-****** Factbase Helm
-****** Tagging Helm
-****** Rule Helm
-****** Curve Selection
-***** Expand-Region implementation
-***** connection to runtime
-***** Parsec implementation
-***** working directory loading
-***** Use checking
-***** Type Checking
-***** Source / Sink Checking
-**** Snippets
-***** Rule
-***** Activity Pyramid
-***** Layer
-***** Cycle
-**** Questions Options Criteria
-
+**** [[file:~/github/writing/orgfiles/cairo_pipe.org::*Cairo%20Pipeline][Cairo Pipeline]]
+**** [[~/github/heuristicRBTreeWeighting][Heuristic Tree Weighting]]                                                   :obsolete:incomplete:old:python:
+**** [[~/github/nytimes_scraper][NYT Scraper]]                                                                :data_analysis:grammar:scraper:dataset:nytimes:
 *** Javascript / Web
 **** [[~/github/mordor-alike][Mordor Like Idea]]                                                           :nemesis:mordor:javascript:obsolete:incomplete:grammar:
 **** TODO [[~/github/newspaper_gen][Newspaper Generator]]                                                   :javascript:generative:front_end:newspaper:web:procedural:
 **** [[~/github/hexagonAITest][Hexagon Board / AI Test]]                                                    :front_end:incomplete:javascript:old:parsing:web:
-*** Python
-***** [[~/github/heuristicRBTreeWeighting][Heuristic Tree Weighting]]                                                  :obsolete:incomplete:old:python:
-***** [[~/github/islandGen][Voronoi Island Gen]]                                                        :incomplete:python:image:
-      integrate into pipeline
-***** [[~/github/cairoCity][Cairo City Generator]]                              :cairo:graphical:image:generative:front_end:layers:city:python:
-****** DONE [#A] integrate with cairo_pipeline
-       CLOSED: [2019-02-10 Sun 13:16]
-****** TODO line -> street and space algorithm
-****** Alt: Moving Square filling
-****** TODO Return to [[file:~/github/cairoCity/citygen/City.py::class_City:][<Cairo City>]]
-****** City operators
-******* road
-******* building
-******* selection
-******* flow
-******* destroy
-******* deadend
-******* crossing
-******* clone
-******* bisect
-******* bezier river
-******* align
-******* heightmap
-******* intersection
-******* length
-******* merge
-******* move
-******* plant
-******* point
-******* rotate
-******* space
-******* wall
-******* water fill
-******* width
-******* zone completion
-***** [[~/github/cairo_pipeline][Cairo Pipeline Architecture]]                                               :cairo:graphical:active:layers:python:
-***** [[~/github/cairo_utils][Cairo Utilities]]                                                           :graphical:active:dcel:voronoi:cairo:library:tool:
-***** [[~/github/nytimes_scraper][NYT Scraper]]                                                               :data_analysis:grammar:scraper:dataset:nytimes:
-***** TODO [[~/github/languageLearning/python/pyAStar][Python Astar Implementation]] :a_star:library:pathfinding:maze:python:
-****** integrate into pythonRuleEngine?
-       needs to be able to control vault movement as well
-***** TODO [[~/github/pythonRuleEngine][Python Rule Language and Engine]]                                      :python:important:todo:meta:simulation:institutions:exclusion_logic:library:parsing:production_system:rules:
-****** Recap current language capabilities
-****** integrate layer architecture
-****** TODO implement type checking?
-****** implement time?
-****** TODO implement meta?
-       up and down shifts, possibly links with layers? look at reflective papers again
-****** implement other form of rule change?
-****** potential data structures
-       activities                    *
-       protocols                     *
-       fsm                           *
-       layer                         *
-       indeterminacy                 *
-       curves                        *
-       delegation?
-
-       sanctions
-       errors / failure / recovery
-       interleaving
-       speech acts
-       rule conflicts
-       ADICO
-       koster social mechanics
-       carriers
-       physical constraint / action
-
 *** Prolog                                                                      :todo:programming:institutions:ASP:tutorial:
 **** look at Bath Institutional ASP
 *** Unity                                                                       :needs_assets:game:vault:programming:unity:
@@ -955,7 +804,7 @@
 *** [[http://plantuml.com/sequence-diagram][PlantUML]]
 *** [[https://multiagentcontest.org/publications/][Multi Agent Contest]]
 *** [[http://slatestarcodex.com/2014/04/28/the-control-group-is-out-of-control/][The Control Group is out of control]]                                         :science:methods:
-*** [[http://www.sosmath.com/algebra/fraction/frac3/frac3.html][SoS Math]]                                                                    :useful:math:
+*** [[http://www.sosmath.com/algebra/fraction/frac3/frac3.html][SoS Math]]                                                                    :math:useful:
 ** Tasks
 *** TODO emacs editor
 *** TODO Spec compile to architecture
@@ -964,3 +813,6 @@
 *** TODO unit institution
 *** TODO performative outputs
 *** TODO make bookmarks helm output to a list sorted by year, grouped by author...
+** ASP and rules
+   see cite:Eiter2009 for *stratified programs*.
+   Specifies evaluation order for predicates in a logic program.

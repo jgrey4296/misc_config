@@ -766,6 +766,7 @@
 **** Tweet action for helm-bibtex and bookmark-helm
 ** -----------------------------------------------------------------------------
 ** Writing
+*** [[file:~/github/writing/orgfiles/design_writing.org::*Design%20writing][Design writing]]
 *** [[file:~/github/writing/orgfiles/dissertation.org::*Dissertation%20bits%20and%20pieces][Dissertation bits and pieces]]
 *** [[file:~/github/writing/orgfiles/DSLs.org::*DSLs][DSL/Framework/System/Tool Review]]
 *** [[file:~/github/writing/orgfiles/steamGames.org::*Games%20list%20and%20notes][Games list and notes]]
@@ -773,9 +774,11 @@
 **** [[~/github/jsons][jsons representations]]                                                      :json:writing:
 **** [[~/github/writing][misc writing]]                                                               :writing:generic:
 *** [[file:~/github/writing/orgfiles/methods.org::*Methods%20notes][Methods notes]]
+*** [[file:~/github/writing/orgfiles/misc_writing.org::*Misc%20writing][Misc writing]]
 *** [[~/github/writing/orgfiles][Org Files]]                                                                   :directory:main_collection:
 *** [[file:~/github/writing/orgfiles/probability.org::*Probability][Probability]]
 *** [[file:~/github/writing/orgfiles/research_questions.org::*Research%20Questions%20and%20Contributions%20Compilation][Research Questions and Contributions Compilation]]
+*** [[file:~/github/writing/orgfiles/research_questions.org::*Research%20Questions%20and%20related][Research Questions and related]]
 *** [[file:~/github/writing/paper_notes/index.org::*Summary%20Index][Summary Index]]                                                               :papers:
 *** [[file:~/github/writing/orgfiles/taxonomies.org::*Taxonomies][Taxonomies]]
 

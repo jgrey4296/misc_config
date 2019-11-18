@@ -219,7 +219,7 @@
   (setq-default python-indent-offset 4
                 python-indent-guess-indent-offset nil
                 python-shell-interpreter-args "-i"
-                python-shell-interpreter "ipython"
+                python-shell-interpreter "python"
                 python-shell-completion-native-enable t
                 python-shell-virtualenv-root "~/anaconda"
                 )

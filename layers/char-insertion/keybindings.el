@@ -101,4 +101,5 @@
                   (kbd "C-x 8lT") "∴"
                   (kbd "C-x 8l[") "□"
                   (kbd "C-x 8l]") "◇"
+                  (kbd "C-x 8lo") "⚬"
                   )

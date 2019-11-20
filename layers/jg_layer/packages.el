@@ -284,6 +284,12 @@
     )
   )
 
+(defun jg_layer/post-init-dired ()
+  (spacemacs/set-leader-keys-for-major-mode 'dired-mode
+    "s" 'jg_layer/dired-create-summary-of-orgs
+    )
+  )
+
 (defun jg_layer/post-init-shell-pop ()
   (spacemacs/set-leader-keys
     "as" nil)

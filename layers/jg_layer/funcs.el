@@ -14,7 +14,7 @@
     )
   )
 (when (configuration-layer/package-usedp 'dired)
-  (defun jg_layer/dired-create-index-of-orgs ()
+  (defun jg_layer/dired-create-summary-of-orgs ()
     " Function to create an org file that indexs all org files in cwd
 and its subtree, from dired"
     (interactive)

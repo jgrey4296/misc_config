@@ -1,5 +1,6 @@
 (defconst jg_exclusions-packages
   '(
+    (ruby-test-mode :excluded t)
     (pyenv :excluded t)
     (git-gutter :excluded t)
     (git-gutter+ :excluded t)

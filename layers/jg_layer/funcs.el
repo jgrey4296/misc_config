@@ -356,6 +356,15 @@ versus not"
   (interactive)
   (find-file "~/mega")
   )
+(defun jg_layer/open-link ()
+  (interactive)
+  (cond ((eq evil-state 'visual)
+         (let ((str (buffer-substring-no-properties evil-visual-beginning evil-visual-end)))
+           (org-open-link-from-string (format "[[%s]]" (string-trim str)))
+           ))
+         (t (org-open-at-point))
+         )
+  )
 ;;----------------------------------------
 ;; Debugging
 (defadvice message (before who-said-that activate)

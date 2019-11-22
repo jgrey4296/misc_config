@@ -59,7 +59,7 @@
   (evil-ex-define-cmd "mb" 'spacemacs/buffer-transient-state/body)
   (evil-ex-define-cmd "os" 'org-store-link)
   (evil-ex-define-cmd "oi" 'org-insert-last-stored-link)
-  (evil-ex-define-cmd "oo" 'org-open-at-point)
+  (evil-ex-define-cmd "oo" 'jg_layer/open-link)
   ;; TODO: registers
   ;; TODO: yasnippet
 

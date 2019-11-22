@@ -54,8 +54,10 @@
   (with-temp-buffer
     (insert-file-contents name t)
     (goto-char (point-min))
-    (while (re-search-forward "file ?= ?{\\(.+mega\\)/" nil t)
+    (while (re-search-forward "file[[:digit:]]* ?= *{\\(.+mega\\)/\\(mendeley\\)?" nil t)
       (replace-match "~/Mega" nil nil nil 1)
+      (if (eq 6 (length (match-data)))
+          (replace-match "pdflibrary" t nil nil 2))
       )
     (write-file name)
     )

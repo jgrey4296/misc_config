@@ -114,10 +114,6 @@
     "i c" 'org-reftex-citation
     )
 
-  ;;TODO add function to insert a bibliography
-  ;;plus keybind it
-  ;; #+BIBLIOGRAPHY: ~/github/writing/mendeley_library plain
-  ;;keybind
   )
 (defun jg_org/init-academic-phrases ()
   (use-package academic-phrases
@@ -127,13 +123,15 @@
       "i A s" 'academic-phrases-by-section)
     )
   )
-(defun jg_org/post-init-org-ref ()
+(defun jg_org/pre-init-org-ref ()
   (spacemacs/set-leader-keys "a r" 'jg_org/bibtex-load-random)
-  (spacemacs|use-package-add-hook org-ref
-      :post-config
-    (setq org-ref-open-bibtex-pdf 'jg_org/org-ref-open-bibtex-pdf)
+  (add-hook 'bibtex-mode-hook (lambda ()
+                                (spacemacs/set-leader-keys-for-major-mode 'bibtex-mode
+                                  "p" 'jg_org/org-ref-open-bibtex-pdf
+                                  )
+                                )
+            )
     )
-  )
 (defun jg_org/post-init-org-pomodoro ()
   ;; add a startup hook for pomodoro to tweet the end time
   (add-hook 'org-pomodoro-started-hook 'jg_org/pomodoro-start-hook)
@@ -144,7 +142,6 @@
 (defun jg_org/init-org-drill ()
   (use-package org-drill)
 )
-
 (defun jg_org/init-outline-toc ()
   (use-package outline-toc)
   )

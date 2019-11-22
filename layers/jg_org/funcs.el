@@ -106,7 +106,7 @@ the entry of interest in the bibfile.  but does not check that."
       (let* ((bibtex-expand-strings t)
              (entry (bibtex-parse-entry t))
              (key (reftex-get-bib-field "file" entry))
-             (pdf (string-join `("/" ,(car (split-string key ":" 't))))))
+             (pdf (string-join `(,(car (split-string key ":" 't))))))
         (message pdf)
         (if (file-exists-p pdf)
             (org-open-link-from-string (format "[[file:%s]]" pdf))

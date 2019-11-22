@@ -142,6 +142,7 @@
     "c" 'tag-unify/clean-marked-files
     "!" 'tag-unify/chop-long-files-from-dired
     "B" 'tag-unify/unify-pdf-locations
+    "t" 'tag-unify/mark-untagged-orgs
     )
   )
 (defun tag-unify/post-init-evil ()

@@ -254,6 +254,54 @@ to point to a single new line"
       )
     )
   )
+(defun tag-unify/check-for-duplicates ()
+  ;;To be run with org-map-entries
+  (let* ((entry-details (cadr (org-element-at-point)))
+         (permalink (plist-get entry-details :PERMALINK))
+         (begin (plist-get entry-details :begin))
+         (end (plist-get entry-details :end))
+         (level (plist-get entry-details :level))
+         )
+    (if (and permalink begin end level (string-match "\\[\\[.+?\\]\\[\\(.+?\\)\\]\\]" permalink))
+        `(,(match-string 1 permalink) ,begin ,end ,level)
+      nil)
+    )
+  )
+(defun tag-unify/remove-duplicates ()
+  (interactive)
+  (let ((permalinks (make-hash-table :test 'equal))
+        ;;Get all entries' (permalink start-bound end-bound level)
+        (all-entries (seq-filter 'identity (org-map-entries 'tag-unify/check-for-duplicates)))
+        (to-remove '())
+        (archive-buffer (get-buffer-create "*Org-Cleanup-Tweets*"))
+        )
+    ;;create deletion buffer if necessary
+    (cl-loop for tweet in all-entries
+             do (if (not (gethash (nth 0 tweet) permalinks))
+                    (let ((m (make-marker)))
+                      (move-marker m (nth 1 tweet))
+                      (puthash (nth 0 tweet) m  permalinks))
+                  (push tweet to-remove)
+                  )
+             )
+    (message "To Remove: %s" (length to-remove))
+    (cl-loop for tweet in to-remove
+             do (progn
+                  (message "Getting: %s" tweet)
+                  ;; copy tweet into deletion buffer
+                  (princ (buffer-substring-no-properties (nth 1 tweet)
+                                                         (- (nth 2 tweet) 1))
+                         archive-buffer)
+                  ;; replace it in the original with a replaced link to the remaining
+                  (delete-region (nth 1 tweet) (- (nth 2 tweet) 1))
+                  (goto-char (nth 1 tweet))
+                  (insert (format "%s Duplicate of %s\n\n"
+                                  (make-string (nth 3 tweet) ?*)
+                                  (nth 0 tweet)))
+                  )
+             )
+    )
+  )
 
 ;; helm
 (defun tag-unify/open-url-action (x)
@@ -356,6 +404,12 @@ to point to a single new line"
                (org-set-tags current-tags)
                (org-forward-heading-same-level 1)
                )))))
+(defun tag-unify/find-file (x)
+  (let ((files (if (helm-marked-candidates) (helm-marked-candidates) (list x))))
+    (mapc 'find-file files)
+    )
+  )
+
 ;; tags
 (defun tag-unify/org-count-buffer-tags ()
   (save-excursion ;;store where you are in the current
@@ -620,8 +674,50 @@ and insert the car "
     (goto-char (point-min))
     (org-mode)
     (let* ((mapped (org-map-entries (lambda () `(,(car (org-heading-components)) ,(org-get-tags)))))
-          (filtered (seq-filter (lambda (x) (and (eq 2 (car x)) (null (cadr x)))) mapped)))
+           (filtered (seq-filter (lambda (x) (and (eq 2 (car x)) (null (cadr x)))) mapped)))
       (seq-empty-p filtered)
       )
     )
   )
+
+
+;; Indexing
+(defun tag-unify/index-people ()
+  (interactive)
+  ;; Get all org files
+  (let ((all-orgs (directory-files-recursively (dired-current-directory) "\.org"))
+        (index-hash (make-hash-table :test 'equal))
+        (inserted-for-file (make-hash-table :test 'equal))
+        (curr-d (dired-current-directory))
+        )
+    (message "Found %s org files" (length all-orgs))
+    ;; For each org collect people in file
+    (cl-loop for filename in all-orgs
+             do (with-temp-buffer
+                  (clrhash inserted-for-file)
+                  (insert-file filename)
+                  (goto-char (point-min))
+                  (while (re-search-forward "\*+ \\(@[_[:word:]]+\\)" nil t)
+                    (let ((str (match-string 1)))
+                      (if (null (gethash str inserted-for-file))
+                          (progn (puthash str t inserted-for-file)
+                                 (if (null (gethash str index-hash))
+                                     (puthash str '() index-hash))
+                                 ;; (message "Pushing %s : %s" str filename)
+                                 (push filename (gethash str index-hash))))))))
+    ;; create index
+    (message "Accumulated %s accounts" (length (hash-table-keys index-hash)))
+    (with-temp-buffer
+      (maphash (lambda (k v)
+                 (insert (format "%s "k))
+                 (mapc (lambda (x)
+                         (insert (format ":%s" x))) v)
+                 (insert "\n")
+                 ) index-hash)
+      (write-file tag-unify/twitter-account-index t)
+      )
+    )
+  (message "Finished writing file")
+  )
+
+

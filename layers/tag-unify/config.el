@@ -1,5 +1,7 @@
 (setq-default tag-unify/loc-bookmarks "~/github/writing/resources/main_bookmarks.html"
               tag-unify/loc-bibtex "~/github/writing/resources/years"
+              tag-unify/twitter-account-index "~/.spacemacs.d/setup_files/tw_acct.index"
+              tag-unify/twitter-helm-candidates nil
               tag-unify/preferred-linecount-for-org 1500
               tag-unify/loc-master-tag-list ""
               tag-unfiy/org-clean-marker nil

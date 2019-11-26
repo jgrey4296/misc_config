@@ -33,13 +33,66 @@
             :backend helm-grep-default-command
             :pcre nil
             )
+          tag-unify/twitter-helm-source
+          (helm-make-source "Twitter Helm" 'helm-source
+            :action (helm-make-actions "File Select Helm" 'tag-unify/file-select-helm)
+            )
+          tag-unify/file-select-source
+          (helm-make-source "Twitter File Select Helm" 'helm-source
+            :action (helm-make-actions "Find File" 'tag-unify/find-file)
+            )
           )
     )
 
   (spacemacs/set-leader-keys
-    "a B" 'tag-unify/helm-bookmarks)
+    "a B" 'tag-unify/helm-bookmarks
+    "a T" 'tag-unify/helm-twitter
+    )
 
+  (defun tag-unify/file-select-helm (candidates)
+    " Given a list of Files, provide a helm to open them "
+    (interactive)
+    ;; (message "File Select Helm Candidates: %s" (helm-marked-candidates))
+    ;;process candidates?
+    (let*((all-candidates (if (helm-marked-candidates) (-flatten (helm-marked-candidates)) candidates))
+          (source (cons `(candidates . ,all-candidates) tag-unify/file-select-source)))
+      (helm :sources source
+            :full-frame t
+            :buffer "*helm file select*"
+            )
+      )
+    )
+  (defun tag-unify/helm-twitter ()
+    "Run a Helm for searching twitter users"
+    (interactive)
+    ;;if twitter info not loaded, load
+    (if (null tag-unify/twitter-helm-candidates)
+        (with-temp-buffer
+          (setq tag-unify/twitter-helm-candidates '())
+          (insert-file tag-unify/twitter-account-index)
+          (goto-char (point-min))
+          (let (curr)
+            (while (< (point) (point-max))
+              (setq curr (split-string (buffer-substring (point) (line-end-position)) ":"))
+              (push `(,(car curr) . ,(cdr curr)) tag-unify/twitter-helm-candidates)
+              (forward-line)
+              )
+            )
+          )
+      )
+    ;;add candidates to source
+    (let ((source (cons `(candidates . tag-unify/twitter-helm-candidates) tag-unify/twitter-helm-source)))
+      ;;call helm
+      (helm :sources source
+            :full-frame t
+            :buffer "*helm twitter*"
+            :truncate-lines t
+            :candidates tag-unify/twitter-helm-candidates
+            )
+      )
+    )
   (defun tag-unify/helm-bookmarks ()
+    " Run a Helm for search and opening html bookmarks "
     (interactive)
     (helm-set-local-variable
      'helm-grep-include-files (format "--include=%s" tag-unify/loc-bookmarks)
@@ -52,6 +105,7 @@
           :truncate-lines t
           )
     )
+
   )
 (defun tag-unify/pre-init-helm-bibtex ()
   ;; load the bibliography directory on startup
@@ -109,6 +163,7 @@
       ". c" 'tag-unify/clean-org
       ". w" 'tag-unify/wrap-numbers
       ". L" 'tag-unify/wrap-non-link-urls
+      ". D" 'tag-unify/remove-duplicates
       )
     (evil-define-key 'normal 'evil-org-mode-map
       (kbd "g >") 'org-next-link
@@ -161,12 +216,12 @@
               (spacemacs|define-transient-state tag-clean
                 :title "Tag Cleaning Transient State"
                 :doc (concat "
-    | Commands   ^^|
-    |------------^^|------------^^|
-    | [_q_] Quit   | [_!_] Split  |
-    | [_f_] Filter | [_p_] Prev   |
-    | [_s_] Sub    | [_l_] Leave  |
-")
+                | Commands   ^^|
+                |------------^^|------------^^|
+                | [_q_] Quit   | [_!_] Split  |
+                | [_f_] Filter | [_p_] Prev   |
+                | [_s_] Sub    | [_l_] Leave  |
+                ")
                 :bindings
                 ("q" nil :exit t)
                 ("f" tag-clean/mark-to-filter)

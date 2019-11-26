@@ -127,8 +127,7 @@
   CLOCK: [2019-02-04 Mon 15:17]--[2019-02-04 Mon 15:42] =>  0:25
   CLOCK: [2019-02-04 Mon 14:09]--[2019-02-04 Mon 14:34] =>  0:25
   :END:
-** TODO [[file:~/github/cairo_pipeline/institution.org::*Institution%20Pipeline%20Concept][Institution Pipeline Concept]]
-** [[~/github/writing/other_files/years/][Bibliography]]
+** [[file:~/github/writing/resources/years][Bibliography]]
 ** [[file:~/Mega/savedThreads][Twitter Threads]]
 ** [[~/github/languageLearning][Misc Language Repo]]                                                           :multiple_languages:learning:
 ** [[~/.spacemacs.d/setup_files/pomodoro_log.org][Pomodoro Log]]
@@ -153,6 +152,9 @@
       curves                        *
       delegation?
 
+      do-operator
+      backprob weight adjust
+      inline set
       sanctions
       errors / failure / recovery
       interleaving
@@ -341,7 +343,6 @@
     to lead to delegation in iEl
 ** Emacs
 *** [[~/github/jg_emacs_files][Emacs files]]                                    :directory:lisp:setup:emacs:
-*** [[~/github/jg_shell_files][Bash Scripts]]                                   :bash:setup:
 *** Reference
 **** [[https://github.com/cute-jumper/parsec.el][Parsec]]
 **** [[https://bibtexparser.readthedocs.io/en/master/tutorial.html][bibtex parser]]                                                              :python:bibtex:
@@ -778,10 +779,9 @@
 *** [[~/github/writing/orgfiles][Org Files]]                                                                   :directory:main_collection:
 *** [[file:~/github/writing/orgfiles/probability.org::*Probability][Probability]]
 *** [[file:~/github/writing/orgfiles/research_questions.org::*Research%20Questions%20and%20Contributions%20Compilation][Research Questions and Contributions Compilation]]
-*** [[file:~/github/writing/orgfiles/research_questions.org::*Research%20Questions%20and%20related][Research Questions and related]]
 *** [[file:~/github/writing/paper_notes/index.org::*Summary%20Index][Summary Index]]                                                               :papers:
 *** [[file:~/github/writing/orgfiles/taxonomies.org::*Taxonomies][Taxonomies]]
-
+*** [[file:~/github/writing/orgfiles/examples_index.org::*Institutional%20Source%20Material][Institutional Source Material]]
 ** -----------------------------------------------------------------------------
 ** People
 *** [[http://www.abdoumaliqsimone.com/publications.html][AbouMaliq Simone]]
@@ -808,6 +808,13 @@
 *** [[https://multiagentcontest.org/publications/][Multi Agent Contest]]
 *** [[http://slatestarcodex.com/2014/04/28/the-control-group-is-out-of-control/][The Control Group is out of control]]                                         :science:methods:
 *** [[http://www.sosmath.com/algebra/fraction/frac3/frac3.html][SoS Math]]                                                                    :math:useful:
+*** [[http://www.vox.com/2014/10/27/7062921/immigration-1900-race-racism-quotas-eugenics-map-settled-united-states][Eugenics map]]
+*** [[http://rosettacode.org/wiki/Rosetta_Code][Rosetta Code]]
+*** [[http://overapi.com/][Over API]]
+*** [[http://www.1001freefonts.com/][Free Fonts]]
+*** [[http://heterogenoustasks.wordpress.com/2014/09/22/a-bestiary-of-player-agency/][Beastiary of Player Agency]]
+*** [[http://www.nexusmods.com/skyrim/mods/modmanager/][Nexus Mods]]
+*** [[http://www.rockpapershotgun.com/2014/10/22/skyrim-survival-mods/#more-243615][Skyrim Mods]]
 ** Tasks
 *** TODO emacs editor
 *** TODO Spec compile to architecture
@@ -819,3 +826,9 @@
 ** ASP and rules
    see cite:Eiter2009 for *stratified programs*.
    Specifies evaluation order for predicates in a logic program.
+** [[https://docs.oracle.com/javase/7/docs/api/][Java API]]
+** Against Machine learning
+   reconfigure traditional comp sci metrics
+   to consider climate change.
+   Performance is good, but so is not designing something
+   to take up entire percentage points of world energy.

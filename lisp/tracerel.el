@@ -7,7 +7,6 @@
 (cl-defmacro push-grammar ()
   '(push (make-hash-table) grammar-stack)
   )
-
 (cl-defmacro pop-grammar ()
   '(pop grammar-stack)
   )
@@ -28,7 +27,6 @@
     the-string
     )
   )
-
 (cl-defun tracerel-get-pending (str)
   ;;given a string, return the match data for all the next expansions
   "#\\([[:alpha:]]+\\)#"
@@ -36,7 +34,7 @@
   (let ((results '())
         (last-match 0)
         )
-    (while (string-match "#\\([[:alpha:]]+\\)#" str last-match)
+    (while (string-match "#\\([_[:alpha:]]+\\)#" str last-match)
       (push `(,(match-beginning 0) ,(- (match-end 0) 1) ,(match-string 1 str)) results)
       (setq last-match (match-end 0))
       )
@@ -59,7 +57,6 @@
     (nth (random (length found-rule)) found-rule)
     )
   )
-
 (defun tracerel-all-keys (grammar-stack)
   ;; (message "Getting all Keys")
   (let ((totality (make-hash-table :test 'equal))
@@ -72,7 +69,6 @@
     totality
     )
   )
-
 (cl-defun tracerel-expand (grammar-stack rule &optional (curr-depth 0) (halt-depth nil))
   ;;Given a ctx::hashtable, grammar::hashtable and rule::string,
   ;;expand everything in it until
@@ -90,7 +86,6 @@
     curr
     )
   )
-
 (cl-defun tracerel-run (grammar-stack &key (startpoint "start") (times 1) (dist nil) (haltdepth nil))
   ;; grammar as a hashtable
   ;; find startpoint
@@ -101,7 +96,6 @@
                                        haltdepth
                                        )) (make-list-as-big-as-n '(t) times))
   )
-
 (cl-defmacro tracerel-grammar (&rest grammar)
   ;;Macro to transform tracery DSL into a hashtable
   (let* ((hash-grammar (make-hash-table))
@@ -120,13 +114,13 @@
 
 ;; Example
 
-(let ((a (tracerel-grammar
-          start "#beginning# #middle# #end#"
-          beginning "There once was a boy named #name#." "On a dark and #weather# night"
-          middle "There was a horrible murder." "The cruel #name# decided to eat some #food#."
-          end "No one ever heard of them again"
-          name "bob" "bill" "jill"
-          weather "stormy" "snowy" "rainy" "cloudy" "misty"
-)))
-  (message "%s" (tracerel-run (list a)))
-  )
+;; (let ((a (tracerel-grammar
+;;           start "#beginning# #middle# #end#"
+;;           beginning "There once was a boy named #name#." "On a dark and #weather# night"
+;;           middle "There was a horrible murder." "The cruel #name# decided to eat some #food#."
+;;           end "No one ever heard of them again"
+;;           name "bob" "bill" "jill"
+;;           weather "stormy" "snowy" "rainy" "cloudy" "misty"
+;; )))
+;;   (message "%s" (tracerel-run (list a)))
+;;   )

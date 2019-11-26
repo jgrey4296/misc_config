@@ -5,6 +5,7 @@
   '(
     helm
     yasnippet
+    yasnippet-snippets
     abbrev
     evil
     ibuffer
@@ -175,14 +176,14 @@
     )
   )
 
+(defun jg_layer/pre-init-yasnippet ()
+  (setq yas-snippet-dirs `(,(expand-file-name "~/.spacemacs.d/snippets/")))
+  ;; ,(expand-file-name "~/github/otherLibs/yasnippet-snippets/snippets")
+  ;; ,(expand-file-name "~/github/otherLibs/yasnippet-snippets")
+
+  )
+
 (defun jg_layer/post-init-yasnippet ()
-  ;;yasnippet
-  ;;Yas locations
-  (setq yas-snippet-dirs `( ,(expand-file-name "~/.spacemacs.d/snippets/")
-                            ,(expand-file-name "~/github/otherLibs/yasnippet-snippets/snippets")
-                            ,(expand-file-name "~/github/otherLibs/yasnippet-snippets")
-                            )
-        )
   (spacemacs/declare-prefix "y" "Snippets/Abbevs")
   (spacemacs/set-leader-keys
     "y y"    'yas-expand
@@ -199,6 +200,13 @@
   (global-set-key (kbd "C-c ;") 'expand-abbrev)
   (global-set-key (kbd "C-c >") 'yas-new-snippet)
   )
+
+(defun jg_layer/init-yasnippet-snippets ()
+  (use-package yasnippet-snippets
+    :init
+    (yasnippet-snippets-initialize)
+  )
+)
 
 (defun jg_layer/post-init-abbrev ()
   ;;abbrev-file complaint quieting
@@ -303,4 +311,3 @@
 
   (add-hook 'ibuffer-hook 'jg_layer/setup-ibuffer)
   )
-

@@ -5,7 +5,6 @@
   "Set the default overlay to be used"
   (setq overlay_control/current-overlay-type candidate)
   )
-
 (defun overlay_control/set-hide-text (str)
   (interactive "s Hide Text: ")
   (setq overlay_control/hide-text str)
@@ -18,7 +17,6 @@
     (overlay_control/apply-to-region)
     )
   )
-
 (defun overlay_control/apply-to-region ()
   (interactive)
   (message "Starting application to region")
@@ -43,7 +41,6 @@
     )
   (message "Finishing application to region")
   )
-
 (defun overlay_control/overlay-word ()
   (interactive)
   (let* ((bounds `(,(point-min) ,(point-max)))
@@ -59,22 +56,20 @@
                                                       :bounds bounds))
          )
     (push struct overlay_control/overlays)
-    (goto-char (car bounds))
     (save-excursion
+      (goto-char (car bounds))
       (while (re-search-forward regexp (cadr bounds) t)
         (add-text-properties (match-beginning 0) (point) properties)
         )
       )
     )
   )
-
 (defun overlay_control/clear-on-buffer ()
   (interactive)
   (setq overlay_control/overlays '())
   (remove-text-properties (point-min) (point-max)
                           '(font-lock-ignore t overlay-control t display t invisible t))
   )
-
 (defun overlay_control/re-run-overlays ()
   (interactive)
   (save-excursion
@@ -106,7 +101,6 @@
   (setq overlay_control/overlays (-concat overlay_control/overlays (registerv-data (get-register r))))
   (overlay_control/re-run-overlays)
   )
-
 (defun overlay_control/add-to-register (r)
   (interactive "c")
   (let* ((register-struct (get-register r))
@@ -120,12 +114,10 @@
                                     :insert-func nil))
     )
   )
-
 (defun overlay_control/clear-register (r)
   (interactive "c")
   (set-register r nil)
   )
-
 (defun overlay_control/register-print-fn (data)
   (princ "A Set of Overlays")
   (mapc (lambda (x)

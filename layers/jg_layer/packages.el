@@ -61,6 +61,7 @@
   (evil-ex-define-cmd "os" 'org-store-link)
   (evil-ex-define-cmd "oi" 'org-insert-last-stored-link)
   (evil-ex-define-cmd "oo" 'jg_layer/open-link)
+  (evil-ex-define-cmd "OO" 'jg_layer/open-link-externally)
   ;; TODO: registers
   ;; TODO: yasnippet
 

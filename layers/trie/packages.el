@@ -23,12 +23,86 @@
 ;; (defun <layer>/post-init-<package>)
 ;; Use: (use-package 'name :commands :config ...
 (defun trie/init-trie-mode ()
-  (use-package trie-mode)
+  ;; Defines all sub-trie modes: trie, trie-visual, sequence etc
+  (use-package trie-mode
+    :commands 'trie/start-trie-ide
+    :init
+    (spacemacs/set-leader-keys
+      "a s" 'trie/toggle-trie-ide)
+    :config
+    ;;Setup Each Mode:
+    ;;Trie
+    (spacemacs/set-leader-keys-for-major-mode 'trie-mode
+      "f r" 'trie/find-or-create-rule
+      "f t" 'trie/find-or-create-type
+      "f c" 'trie/find-or-create-crosscut
+      "f s" 'trie/find-or-create-sequence
+      "d r" 'trie/delete-rule
+      "d t" 'trie/delete-type
+      "d c" 'trie/delete-crosscut
+      "d s" 'trie/delete-sequence
+      "l r" 'trie/list-rules
+      "l t" 'trie/list-types
+      "l c" 'trie/list-crosscuts
+      "l s" 'trie/list-sequences
+      "?"   'trie/help-hydra
+      )
+    (evil-define-key 'normal trie-mode-map
+      (kbd "#") 'trie/insert-tag
+      (kbd "C") 'trie/insert-condition
+      (kbd "A") 'trie/insert-action
+      (kbd "T") 'trie/insert-transform
+      )
+
+    ;;Trie passive
+    (spacemacs/set-leader-keys-for-major-mode 'trie-passive-mode
+      "f r" 'trie/find-or-create-rule
+      "f t" 'trie/find-or-create-type
+      "f c" 'trie/find-or-create-crosscut
+      "f s" 'trie/find-or-create-sequence
+      "f n" 'trie/find-from-snippet
+      "d r" 'trie/delete-rule
+      "d t" 'trie/delete-type
+      "d c" 'trie/delete-crosscut
+      "d s" 'trie/delete-sequence
+      "l r" 'trie/list-rules
+      "l t" 'trie/list-types
+      "l c" 'trie/list-crosscuts
+      "l s" 'trie/list-sequences
+      "?"   'trie/help-hydra
+      )
+    (evil-define-key 'normal trie-passive-mode-map
+      (kbd "<") 'trie/decrement-visual-layer
+      (kbd ">") 'trie/increment-visual-layer
+      (kbd "RET") 'trie/insert-into-working-rule
+      )
+
+    ;;Trie Log
+    (spacemacs/set-leader-keys-for-major-mode 'trie-log-mode
+      "f r" 'trie/find-or-create-rule
+      "f t" 'trie/find-or-create-type
+      "f c" 'trie/find-or-create-crosscut
+      "f s" 'trie/find-or-create-sequence
+      "d r" 'trie/delete-rule
+      "d t" 'trie/delete-type
+      "d c" 'trie/delete-crosscut
+      "d s" 'trie/delete-sequence
+      "l r" 'trie/list-rules
+      "l t" 'trie/list-types
+      "l c" 'trie/list-crosscuts
+      "l s" 'trie/list-sequences
+      "?"   'trie/help-hydra
+      )
+    )
+
+  (add-hook 'trie-mode-hook 'org-bullets-mode)
   )
 
 (defun trie/init-parsec ()
   (use-package parsec
     :defer t))
+
+
 
 (defun trie/init-sequence-mode ()
   (use-package sequence-mode
@@ -97,10 +171,4 @@
       ("q" nil :exit t)
       )
     )
-  )
-
-(defun trie/post-init-origami ()
-  ;; (require 'trie/origami-parser "~/.spacemacs.d/layers/trie/local/origami-parser.el")
-  ;; (add-to-list 'origami-parse-alist '(trie-mode . trie/origami-parser))
-
   )

@@ -5,6 +5,7 @@
     (git-gutter :excluded t)
     (git-gutter+ :excluded t)
     (smartparens :excluded t)
+    (smartparens-mode :excluded t)
     (show-paren-mode :excluded t)
     (erc :excluded t)
     (jabber :excluded t)

@@ -1,4 +1,4 @@
-                                        ; based On https://www.emacswiki.org/emacs/ModeTutorial
+;;based On https://www.emacswiki.org/emacs/ModeTutorial
 ;;For allowing code to run when the mode is run:
 (require 'dash)
 (require 'trie-face-macro)
@@ -34,9 +34,17 @@
   '((t
      :foreground "red"
      :background "black"
+     :underline t
      ))
   "Face for the end of rules"
   :group 'trie-mode)
+(defface trie-closure
+  '((t
+     :background "red"
+     ))
+  "Face for Enclosed sections"
+  :group 'trie-mode)
+
 
 ;;--------------------
 ;;Key bindings.
@@ -57,26 +65,24 @@
 ;;--------------------
 (defconst trie-font-lock-keywords
   (list
-   ;;facts
-   ;; '("\\([$.!a-zA-Z0-9_\]+\\((.*)\\)?\\)+\\(\\?$\\)?"
-   ;;   (0 (trie-depth-face 9) t)
-   ;;   (2 (trie-depth-face 6) t t)
-   ;;   (3 (trie-depth-face 1) t t))
-   ;;Exclusion op
-   ;; '("!" (0 (trie-depth-face 4) t))
    ;;Rule name
-   `("\\(.+\\)+:$" (0 "trie-rulename" t))
-   ;; ;;Rule end
-   ;; '("end$" (0 (trie-depth-face 0)))
-   ;;Transform and Query
+   `("^\\([[:word:].!]+\\):$" (0 "trie-rulename"))
+   ;;punctuation
+   `("\\." (0 ,(trie-depth-face 1)))
+   `("!" (0 ,(trie-depth-face 2)))
+   `("::" (0 ,(trie-depth-face 3) t))
    `("->\\|\\?" (0 ,(trie-depth-face 4) t))
-   ;;Actions
-   ;; '("\\([a-zA-Z+@-]+( ?\\)\\(\\(.\\)+\\)\\( ?)\\)"
-   ;;   (1 (trie-depth-face 6) t)
-   ;;   (2 (trie-depth-face 9) )
-   ;;   (4 (trie-depth-face 6) t))
    ;;Variables and tags
-   `("[\\$#][a-zA-Z0-9_]+" (0 ,(trie-depth-face 2)))
+   `("#[[:word:]]+" (0 ,(trie-depth-face 5)))
+   `("\\$[[:word:]]+" (0 ,(trie-depth-face 6)))
+   ;;functions
+   `("\\([-<>=%^*@+&~][[:word:]]*\\)" (1 ,(trie-depth-face 7)))
+   ;;Words
+   `("[[:word:]]" (0 ,(trie-depth-face 8)))
+   ;;Closures
+   `("[][()]" (0 ,(trie-depth-face 9)))
+   `("[([]\.+[])]" (0 "trie-closure" t))
+
    )
   "Minimal highlighting expressions for trie mode")
 
@@ -90,7 +96,6 @@
 (defun trie-indent-line()
   "Indent current-line as trie code"
   (interactive)
-  (message "Indenting")
   (beginning-of-line)
   (if (bobp) ;;if at beginning of buffer
       ;;then:
@@ -115,7 +120,7 @@
                   (setq cur-indent (current-indentation))
                   (setq not-indented nil))
               ;;otherwise
-              (if (looking-at "^.+:")
+              (if (looking-at "^.+:$")
                   (progn
                     (setq cur-indent (+ (current-indentation) tab-width))
                     (setq not-indented nil))
@@ -137,11 +142,14 @@
     (modify-syntax-entry ?. "." st)
     (modify-syntax-entry ?! "." st)
     (modify-syntax-entry ?$ "_" st)
-    (modify-syntax-entry ?_ "w" st) ;;underscores are valid parts of words
-    (modify-syntax-entry ?/ "< 12" st)
+    ;;underscores are valid parts of words:
+    (modify-syntax-entry ?_ "w" st)
+    (modify-syntax-entry ?/ "<12" st)
     (modify-syntax-entry ?\n ">" st)
     (modify-syntax-entry ?\" "\"\"" st)
-
+    (modify-syntax-entry ?\( "()" st)
+    (modify-syntax-entry ?\[ "(]" st)
+    (modify-syntax-entry ?: ".:2" st)
     st)
   "Syntax table for the trie-mode")
 
@@ -149,6 +157,11 @@
 ;;Autoloading
 ;;--------------------
 (add-to-list 'auto-mode-alist '("\\.trie\\'" . trie-mode))
+
+
+(defun trie-syntactic-face-function (parse-state)
+  'font-lock-comment-face
+  )
 
 ;; --------------------
 ;;Entry Function
@@ -159,10 +172,11 @@
   (kill-all-local-variables)
   (use-local-map trie-mode-map)
   (let ((base-locks (reverse trie-font-lock-keywords))
-        (keywords (list trie-keywords-regexp 0 "trie-rulename" t)))
+        (keywords (list trie-keywords-regexp 0 "trie-ruleend" t)))
     (push keywords base-locks)
-    (set (make-local-variable 'font-lock-defaults) (list (reverse base-locks)))
+    (set (make-local-variable 'font-lock-defaults) (list (reverse base-locks) nil))
     )
+  (set (make-local-variable 'font-lock-syntactic-face-function) 'trie-syntactic-face-function)
   (set (make-local-variable 'indent-line-function) 'trie-indent-line)
   (set (make-local-variable 'comment-style) '(plain))
   (set (make-local-variable 'comment-start) "//")

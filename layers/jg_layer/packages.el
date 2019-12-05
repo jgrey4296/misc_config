@@ -16,6 +16,7 @@
     evil-quickscope
     origami
     vlf
+    vimish-fold
     )
   )
 
@@ -311,4 +312,8 @@
     )
 
   (add-hook 'ibuffer-hook 'jg_layer/setup-ibuffer)
+  )
+
+(defun jg_layer/init-vimish-fold ()
+  (use-package vimish-fold)
   )

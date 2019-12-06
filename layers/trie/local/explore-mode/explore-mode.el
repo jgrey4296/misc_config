@@ -12,12 +12,11 @@
 
 (defun explore/make-overlay (beg end layer)
   """ Create or reuse an overlay to use for a particular layer in the tree """
-  (let ((overlay (if (gethash layer (explore/tree-data-overlays explore/current-data))
-                     (gethash layer (explore/tree-data-overlays explore/current-data))
-                   (puthash layer (make-overlay 1 2) (explore/tree-data-overlays explore/current-data))))
+  (let ((overlay (or (gethash layer (explore/tree-data-overlays explore/current-data))
+                     (puthash layer (make-overlay 1 2) (explore/tree-data-overlays explore/current-data))))
         (color "green"))
     (overlay-put overlay 'face `((foreground-color . ,color)))
-    (move-overlay overlay beg (- end 2))
+    (move-overlay overlay beg (- end 3))
     )
   )
 

@@ -140,6 +140,10 @@
 
   )
 
+(defun trie/no-op ()
+  (interactive)
+  )
+
 ;; (defun trie/toggle-all-defs ()
 ;;   (interactive)
 ;;   ;; goto start of file

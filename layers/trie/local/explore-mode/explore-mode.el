@@ -1,7 +1,16 @@
 (require 'dash)
 (require 'tree-gen)
 
-(defstruct explore/tree-data name root (indents '()) (curr-path '()) (max-lines 0) (start-pos (make-marker)) (path-pos (make-marker)) (overlays (make-hash-table)))
+(defgroup explore-mode '() "Trie Exploration Mode Customizations")
+
+(defstruct explore/tree-data name
+           root
+           (indents '())
+           (curr-path '())
+           (max-lines 0)
+           (start-pos (make-marker))
+           (path-pos (make-marker))
+           (overlays (make-hash-table)))
 
 (defvar-local explore/current-markers (list (make-marker) (make-marker)))
 (defvar-local explore/current-layer 0)
@@ -119,26 +128,17 @@ calculate the bounds that column falls within """
 ;; Drawing
 
 (defun explore/draw-children ()
-  """ Given a key and the layer it inhabits, draw the children of the node, safely
-(ie: do nothing if there are no children, but do update the path) """
   (let* ((rev-path (reverse (explore/tree-data-curr-path explore/current-data)))
          (node (explore/tree-get (explore/tree-data-root explore/current-data) rev-path))
-         (children (explore/node-children node))
-         (num_children (length (hash-table-values children)))
          (layer (+ 1 (length rev-path)))
          )
     (progn
-      ;; (message "Drawing Children for: %s" (string-join rev-path "\\"))
-      ;; (message "Children: %s" (string-join (hash-table-keys children) ", "))
       ;;Draw
       (explore/draw-children-safe node layer))
-    ;;todo: else clause that clears lines anyway
     )
   )
 
 (defun explore/draw-children-safe (node layer)
-  """ Given a node and a layer, draw the children of the node, without checking
-    if there are children to draw """
   (let* ((children (explore/node-children node))
          (num_children (length (hash-table-values children)))
          (maxlen (if (hash-table-empty-p children) 20
@@ -147,6 +147,7 @@ calculate the bounds that column falls within """
          (indent_lower (car (explore/tree-data-indents explore/current-data)))
          (indent_upper (+ indent_lower maxlen))
          )
+    (if (hash-table-empty-p children) (message "HASH empty"))
     ;;move to the indent head position
     (goto-char (marker-position (explore/tree-data-start-pos explore/current-data)))
     (seq-each (lambda (x)
@@ -186,6 +187,8 @@ calculate the bounds that column falls within """
                 (insert (cdr pair)))
               (-zip-pair (reverse (explore/tree-data-indents explore/current-data))
                          (reverse (explore/tree-data-curr-path explore/current-data))))
+    (add-text-properties (marker-position (explore/tree-data-path-pos explore/current-data)) (line-end-position)
+                         '(font-lock-ignore t))
     (add-face-text-property (marker-position (explore/tree-data-path-pos explore/current-data)) (line-end-position)
                             '(:foreground "red"))
     )
@@ -195,6 +198,7 @@ calculate the bounds that column falls within """
 ;; Interaction
 
 (defun explore/update-tree-data()
+  (interactive)
   ;;Use correct tree data:
   (save-excursion
     (outline-previous-heading)
@@ -347,16 +351,36 @@ calculate the bounds that column falls within """
     map)
   "Basic Keymap for Explore Mode"
   )
-;;(add-to-list 'auto-mode-alist '("\\.seq\\'" . sequence-mode))
+(add-to-list 'auto-mode-alist '("\\.seq\\'" . sequence-mode))
+
+(defconst explore-font-lock-keywords
+  (list
+   `("^\\(**\\) \\([[:alnum:]]+\\)"
+     (0 "font-lock-keyword-face")
+     (1 "font-lock-constant-face"))
+   )
+  "Highlighting of Explore entry titles"
+  )
+
+(defvar explore-mode-syntax-table
+  (let ((st (make-syntax-table)))
+    (modify-syntax-entry ?: "." st)
+    (modify-syntax-entry ?- "." st)
+    st)
+  "Syntax table for Explore-mode"
+  )
 
 (define-derived-mode explore-mode fundamental-mode "Explore Mode"
   "Major Mode for exploring Trees"
   (interactive)
   (kill-all-local-variables)
   (use-local-map explore-mode-map)
+  (set (make-local-variable 'font-lock-defaults) (list explore-font-lock-keywords nil))
+  (set-syntax-table explore-mode-syntax-table)
   (setq major-mode 'explore-mode
         mode-name "EXPLORE")
   (outline-minor-mode)
+  (run-mode-hooks)
   )
 
 (provide 'explore-mode)

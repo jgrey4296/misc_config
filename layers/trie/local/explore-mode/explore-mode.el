@@ -284,15 +284,13 @@ calculate the bounds that column falls within """
     (newline)
     ;;draw the root node
     (move-to-column indent-amount t)
-    (insert "Root: ")
+    (insert (propertize "Root: " :layer 0))
     (push (current-column) (explore/tree-data-indents explore/current-data))
     (set-marker (explore/tree-data-start-pos explore/current-data) (point))
     ;;Draw all children, indented, with " : " after
-    (save-excursion
-      (explore/draw-children '() 2))
-
+    (explore/draw-children)
     (goto-char (point-max))
-    (insert "\n\n")
+    (newline 2)
     )
   )
 

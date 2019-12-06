@@ -194,69 +194,112 @@ calculate the bounds that column falls within """
 ;;--------------------------------------------------
 ;; Interaction
 
+(defun explore/update-tree-data()
+  ;;Use correct tree data:
+  (save-excursion
+    (outline-previous-heading)
+    (setq explore/current-data (get-text-property (point) :tree-data))
+    )
+  ;;Calculate and update:
+  (let* ((current-indent (current-column))
+
+         (layer (explore/col-to-layer current-indent))
+
+         (short-path (explore/reduce-list-length (explore/tree-data-curr-path explore/current-data) (- layer 1)))
+
+         (parent (explore/tree-get (explore/tree-data-root explore/current-data) (reverse short-path)))
+         (pchildren (explore/node-children parent))
+         (pmaxlen (if (hash-table-empty-p pchildren) 20
+                    (apply 'max (mapcar (lambda (x) (length x)) (hash-table-keys pchildren)))))
+
+         (bounds (explore/cols-to-bounds (explore/tree-data-indents explore/current-data) current-indent (+ pmaxlen 3)))
+         (positions (explore/cols-to-pos bounds))
+
+         (substr (if (< 0 layer) (string-trim (buffer-substring (cadr positions) (- (car positions) 3))) nil))
+
+         (new-path (if (< 0 layer) (cons substr short-path) '()))
+
+         ;;node inspection
+         (node (explore/tree-get (explore/tree-data-root explore/current-data) (reverse new-path)))
+         (children (explore/node-children node))
+         (num_children (length (hash-table-values children)))
+         (max-children (max (explore/tree-data-max-lines explore/current-data) num_children))
+         (indent_upper (car bounds))
+         )
+    ;;update tree data
+    (setf (explore/tree-data-curr-path explore/current-data) new-path
+          (explore/tree-data-max-lines explore/current-data) max-children)
+    (explore/pop-list-to-length (explore/tree-data-indents explore/current-data) layer)
+    (push indent_upper (explore/tree-data-indents explore/current-data))
+    ;; (explore/print-state)
+    (set-marker (car explore/current-markers) (cadr positions))
+    (set-marker (cadr explore/current-markers) (car positions))
+    (setq explore/current-layer layer)
+    )
+  )
+
 (defun explore/expand-entry ()
   """ Expand the node the user selects """
   (interactive)
+  (explore/update-tree-data)
   (save-excursion
-    (outline-previous-heading)
-    (setq explore/current-data (get-text-property (point) :tree-data))
+    (explore/draw-children)
+    (explore/draw-path)
+    ;;todo: make overlay
     )
-  (if (> (current-column) (car (last (explore/tree-data-indents explore/current-data))))
-      (let* ((curr-data explore/current-data)
-             (bounds (explore/col-to-bounds (explore/tree-data-indents curr-data) (current-column)))
-             (positions (explore/cols-to-pos bounds))
-             (substr (string-trim (buffer-substring (cadr positions) (- (car positions) 3))))
-             (layer (get-text-property (point) :layer))
-             )
-        (explore/pop-list-to-length (explore/tree-data-curr-path curr-data) (- layer 2))
-        (message "Expanding Entry: (%s %s) (Layer: %s) %s"
-                 (car bounds) (cadr bounds) layer (string-join (cons substr (explore/tree-data-curr-path curr-data)) ":")
-                 )
-        (message "Max Lines So Far: %s" (explore/tree-data-max-lines curr-data))
-        ;; retrieve or create an overlay
-        (explore/make-overlay (cadr positions) (car positions) layer)
-        (save-excursion
-          (explore/draw-children substr (+ 1 layer)))
-        )
+  (if (> explore/current-layer 0)
+      (explore/make-overlay (marker-position (car explore/current-markers))
+                            (marker-position (cadr explore/current-markers))
+                            explore/current-layer)
+    (explore/clear-overlays)
     )
-  (goto-char (marker-position (explore/tree-data-start-pos explore/current-data)))
-  (move-to-column (cadr (explore/tree-data-indents explore/current-data)))
-  (explore/draw-path)
+  ;; (goto-char start-pos)
+  ;; (move-to-column (if (eq layer 0) (car indents) (cadr indents)))
   )
 
 (defun explore/insert-entry ()
-  """ Insert a new node into the tree """
+  """ insert a new node into the tree """
   (interactive)
-  ;; Get the inserted text
-  ;;add it in the path's node
-  (message "Inserting a value")
-  (save-excursion
-    (outline-previous-heading)
-    (setq explore/current-data (get-text-property (point) :tree-data))
-    )
+  (explore/update-tree-data)
+
   (let* ((curr-data explore/current-data)
-         (layer (explore/col-to-layer (current-column)))
-         (parent-path (-non-nil (explore/reduce-list-length (explore/tree-data-curr-path curr-data) layer)))
+         (parent-path (explore/tree-data-curr-path curr-data))
          (node (explore/tree-get (explore/tree-data-root curr-data) (reverse parent-path)))
-         (bounds (explore/cols-to-pos (explore/col-to-bounds (explore/tree-data-indents curr-data) (current-column))))
+         (bounds (explore/cols-to-pos (explore/cols-to-bounds (explore/tree-data-indents curr-data) (current-column))))
          (substr (string-trim (buffer-substring-no-properties (cadr bounds) (- (car bounds) 2))))
          )
-    (if (not (eq layer (length parent-path)))
+    (if (not (eq explore/current-layer (length parent-path)))
         (message "Path / Layer Mismatch")
       (progn
-        (message "PathLen : %s" (length parent-path))
-        (message "Path : %s" (string-join parent-path "\\"))
-        (message "Bounds: %s - %s" (car bounds) (cadr bounds))
-        (message "New Node: %s" substr)
+        ;; (message "PathLen : %s" (length parent-path))
+        ;; (message "Path : %s" (string-join parent-path "\\"))
+        ;; (message "Bounds: %s - %s" (car bounds) (cadr bounds))
+        ;; (message "New Node: %s" substr)
         (explore/node-add-child node substr)
+        (explore/expand-entry)
         )
       )
     )
   )
 
+(defun explore/decrease-layer ()
+  (interactive)
+  ;;current position -> layer -*> new layer -> update tree-data -> redraw
+  (explore/update-tree-data)
+  ;;move
+
+  (explore/update-tree-data)
+  )
+
+(defun explore/increase-layer ()
+  (interactive)
+  (explore/update-tree-data)
+  ;;move
+
+  (explore/update-tree-data)
+  )
 ;;--------------------------------------------------
 ;; Setup
-
 
 (defun explore/initial-setup (&optional tree)
   """ An initial setup for a tree """

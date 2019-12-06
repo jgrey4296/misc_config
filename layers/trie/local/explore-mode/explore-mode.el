@@ -3,6 +3,8 @@
 
 (defstruct explore/tree-data name root (indents '()) (curr-path '()) (max-lines 0) (start-pos (make-marker)) (path-pos (make-marker)) (overlays (make-hash-table)))
 
+(defvar-local explore/current-markers (list (make-marker) (make-marker)))
+(defvar-local explore/current-layer 0)
 (defvar-local explore/overlay-max 20)
 (defvar-local explore/current-data nil)
 ;;--------------------------------------------------

@@ -230,18 +230,31 @@ calculate the bounds that column falls within """
          (max-children (max (explore/tree-data-max-lines explore/current-data) num_children))
          (indent_upper (car bounds))
          )
-    ;;update tree data
-    (setf (explore/tree-data-curr-path explore/current-data) new-path
-          (explore/tree-data-max-lines explore/current-data) max-children)
-    (explore/pop-list-to-length (explore/tree-data-indents explore/current-data) layer)
-    (push indent_upper (explore/tree-data-indents explore/current-data))
-    ;; (explore/print-state)
-    (set-marker (car explore/current-markers) (cadr positions))
-    (set-marker (cadr explore/current-markers) (car positions))
-    (setq explore/current-layer layer)
+
+    (if (or (not (string-empty-p substr)) (eq 0 layer))
+        (progn
+          ;;update tree data
+          (setf (explore/tree-data-curr-path explore/current-data) new-path
+                (explore/tree-data-max-lines explore/current-data) max-children)
+          (explore/pop-list-to-length (explore/tree-data-indents explore/current-data) layer)
+          (push indent_upper (explore/tree-data-indents explore/current-data))
+          ;; (explore/print-state)
+          (set-marker (car explore/current-markers) (cadr positions))
+          (set-marker (cadr explore/current-markers) (car positions))
+          (setq explore/current-layer layer)
+          )
+      (progn
+        (set-marker (car explore/current-markers) (point-min))
+        (set-marker (cadr explore/current-markers) (point-min))
+        (setq explore/current-layer 0)
+        )
+      )
+    (message "\n-----\nDATA:\nPath: %s\nIndents: %s\nLayer: %s\n"
+             (explore/tree-data-curr-path explore/current-data)
+             (explore/tree-data-indents explore/current-data)
+             explore/current-layer)
     )
   )
-
 (defun explore/expand-entry ()
   """ Expand the node the user selects """
   (interactive)
@@ -257,50 +270,109 @@ calculate the bounds that column falls within """
                             explore/current-layer)
     (explore/clear-overlays)
     )
-  ;; (goto-char start-pos)
-  ;; (move-to-column (if (eq layer 0) (car indents) (cadr indents)))
   )
 
 (defun explore/insert-entry ()
-  """ insert a new node into the tree """
+  """ insert a new node into the tree from insert state"""
   (interactive)
   (explore/update-tree-data)
-
   (let* ((curr-data explore/current-data)
          (parent-path (explore/tree-data-curr-path curr-data))
          (node (explore/tree-get (explore/tree-data-root curr-data) (reverse parent-path)))
          (bounds (explore/cols-to-pos (explore/cols-to-bounds (explore/tree-data-indents curr-data) (current-column))))
-         (substr (string-trim (buffer-substring-no-properties (cadr bounds) (- (car bounds) 2))))
+         (substr (string-trim (buffer-substring-no-properties (cadr bounds) (point))))
          )
     (if (not (eq explore/current-layer (length parent-path)))
         (message "Path / Layer Mismatch")
       (progn
-        ;; (message "PathLen : %s" (length parent-path))
-        ;; (message "Path : %s" (string-join parent-path "\\"))
-        ;; (message "Bounds: %s - %s" (car bounds) (cadr bounds))
-        ;; (message "New Node: %s" substr)
         (explore/node-add-child node substr)
-        (explore/expand-entry)
+        (save-excursion
+          (move-to-column (- (current-column) (length substr) 3))
+          (explore/expand-entry)
+          )
         )
       )
     )
   )
-
-(defun explore/decrease-layer ()
+(defun explore/insert-at-leaf ()
+  " Insert from minibuffer "
   (interactive)
-  ;;current position -> layer -*> new layer -> update tree-data -> redraw
-  (explore/update-tree-data)
-  ;;move
-
-  (explore/update-tree-data)
+  (save-excursion
+    (outline-previous-heading)
+    (setq explore/current-data (get-text-property (point) :tree-data))
+    )
+  (let* ((value (read-string "Value: "))
+         (parent-path (explore/tree-data-curr-path explore/current-data))
+         (node (explore/tree-get (explore/tree-data-root explore/current-data) (reverse parent-path)))
+         )
+    (explore/node-add-child node value)
+    )
+  (explore/expand-entry)
   )
 
-(defun explore/increase-layer ()
+(defun explore/delete-entry ()
   (interactive)
   (explore/update-tree-data)
-  ;;move
+  ;; get the substring
+  (let ((to-delete (car (explore/tree-data-curr-path explore/current-data)))
+        (path (cdr (explore/tree-data-curr-path explore/current-data))))
+    (explore/tree-remove (explore/tree-data-root explore/current-data)
+                         (reverse path) to-delete)
+    (save-excursion
+      (explore/layer-decrease)
+      (explore/expand-entry)
+      )
+    )
+  )
 
-  (explore/update-tree-data)
+(defun explore/layer-decrease ()
+  (interactive)
+  (save-excursion
+    (outline-previous-heading)
+    (setq explore/current-data (get-text-property (point) :tree-data))
+    )
+  (let ((indents (seq-copy (explore/tree-data-indents explore/current-data)))
+        (curr-point (current-column))
+        last
+        )
+    (while (and indents (<= curr-point (car indents)))
+      (setq last (pop indents))
+      )
+    (if (car indents)
+        (progn
+          (move-to-column (car indents))
+          (while (and (not (looking-at "[[:alnum:]-]"))
+                      (> (point) start-pos))
+            (forward-line -1)
+            (move-to-column (car indents))
+            )
+          )
+      (move-to-column 0))
+    )
+  )
+(defun explore/layer-increase ()
+  (interactive)
+    (save-excursion
+    (outline-previous-heading)
+    (setq explore/current-data (get-text-property (point) :tree-data))
+    )
+  (let ((indents (reverse (explore/tree-data-indents explore/current-data)))
+        (curr-point (current-column))
+        (start-pos (marker-position (explore/tree-data-start-pos explore/current-data)))
+        last
+        )
+    (while (and indents (>= curr-point (car indents)))
+      (setq last (pop indents))
+      )
+    (move-to-column (or (car indents) last))
+    (progn
+      (while (and (not (looking-at "[[:alnum:]-]"))
+                  (> (point) start-pos))
+        (forward-line -1)
+        (move-to-column (or (car indents) last))
+        )
+      )
+    )
   )
 ;;--------------------------------------------------
 ;; Setup

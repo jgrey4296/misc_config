@@ -34,7 +34,7 @@
 (defmacro explore/pop-list-to-length (lst n)
   """ Pop values off a list IN PLACE until it is a given length,
 then return its new head """
-  `(progn (while (> (length ,lst) ,n)
+  `(progn (while (and ,lst (> (length ,lst) ,n))
             (pop ,lst)
             )
           (car ,lst))
@@ -44,80 +44,96 @@ then return its new head """
   """ Pop values off a DUPLICATED list until it is a given length,
 then return the modified list """
   `(let* ((the_list (seq-copy ,lst)))
-     (while (> (length the_list) ,n)
+     (while (and the_list (> (length the_list) ,n))
        (pop the_list)
        )
      the_list)
   )
 
-(defun explore/col-to-bounds (seq col)
+(defun explore/cols-to-bounds (seq col &optional maxlen)
   """ Given a sequence of indents and a column value,
 calculate the bounds that column falls within """
+  (if (not maxlen) (setq maxlen 20))
   (let* ((indents (copy-seq seq))
          (upper 0)
          (lower 0)
          )
-    (if (> col (car indents))
+    (if (>= col (car indents))
         (setq lower (car indents)
-              upper (+ lower 20))
+              upper (+ lower maxlen))
       (while (and indents (< col (car indents)))
         (setq upper (pop indents)
-              lower (car indents))
+              lower (or (car indents) 0))
         )
       )
-    (message "Upper: %s Lower: %s" upper lower)
-    `(,(+ upper (if (equal lower upper) 1 0)) ,lower)
+    ;; (message "Upper: %s Lower: %s" upper lower)
+    (list upper lower)
     )
   )
 
 (defun explore/cols-to-pos (bounds)
-  """ Convert a pair of bounding columns to actual buffer positions """
+  """ Convert at least a pair of bounding columns to actual buffer positions """
   (let* ((lower (cadr bounds))
          (upper (car bounds))
          )
-    `(,(explore/col-to-pos upper) ,(explore/col-to-pos lower))
+    (list (explore/col-to-pos upper) (explore/col-to-pos lower))
     )
   )
 
 (defun explore/col-to-pos (col)
   """ Convert a column value to an actual buffer position """
   (save-excursion
-    (move-to-column col 't)
+    (move-to-column col t)
     (point))
   )
 
 (defun explore/col-to-layer (col)
   """ Convert a column value to the corresponding layer of the tree """
-  (let* ((indents (cddr (reverse (copy-seq (explore/tree-data-indents explore/current-data)))))
+  (let* ((indents (reverse (copy-seq (explore/tree-data-indents explore/current-data))))
          (cal-layer 0)
          )
-    (while (and indents (> col (car indents)))
+    (while (and indents (>= col (car indents)))
       (pop indents)
       (incf cal-layer)
       )
-    (message "Col to Layer: %s -> %s" col cal-layer)
+    ;; (message "Col to Layer: %s -> %s" col cal-layer)
     cal-layer
+    )
+  )
+
+(defun explore/print-state ()
+  (let* ((data (save-excursion
+                 (outline-previous-heading)
+                 (get-text-property (point) :tree-data)))
+         (indents (explore/tree-data-indents data))
+         (path (explore/tree-data-curr-path data))
+         (maxlines (explore/tree-data-max-lines data))
+         (start-pos (marker-position (explore/tree-data-start-pos data)))
+         (path-pos (marker-position (explore/tree-data-path-pos data)))
+         )
+    (message "\nState:\nIndents: %s\nPath: %s\nMax Lines: %s\nStart Pos: %s\nPath Pos: %s\n\n"
+             indents path maxlines start-pos path-pos)
     )
   )
 ;;--------------------------------------------------
 ;; Drawing
 
-(defun explore/draw-children (key layer)
+(defun explore/draw-children ()
   """ Given a key and the layer it inhabits, draw the children of the node, safely
 (ie: do nothing if there are no children, but do update the path) """
-  (let* ((node (explore/tree-get (explore/tree-data-root explore/current-data) (reverse (cons key (explore/tree-data-curr-path explore/current-data)))))
+  (let* ((rev-path (reverse (explore/tree-data-curr-path explore/current-data)))
+         (node (explore/tree-get (explore/tree-data-root explore/current-data) rev-path))
          (children (explore/node-children node))
          (num_children (length (hash-table-values children)))
+         (layer (+ 1 (length rev-path)))
          )
-    (if (> num_children 0)
-        (progn
-          (message "Drawing Children for: %s" (string-join (reverse (cons key (explore/tree-data-curr-path explore/current-data))) "\\"))
-          (message "Children: %s" (string-join (hash-table-keys children) ", "))
-          (explore/draw-children-safe node layer))
-      ;;todo: else clause that clears lines anyway
-      )
+    (progn
+      ;; (message "Drawing Children for: %s" (string-join rev-path "\\"))
+      ;; (message "Children: %s" (string-join (hash-table-keys children) ", "))
+      ;;Draw
+      (explore/draw-children-safe node layer))
+    ;;todo: else clause that clears lines anyway
     )
-  (push key (explore/tree-data-curr-path explore/current-data))
   )
 
 (defun explore/draw-children-safe (node layer)

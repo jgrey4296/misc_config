@@ -1,7 +1,8 @@
 (require 'dash)
 (provide 'tree-gen)
 
-(defstruct explore/node name value (children (make-hash-table :test 'equal)))
+(defstruct explore/node name value
+           (children (make-hash-table :test 'equal)))
 
 (defun explore/dfs-tree (n pred)
   """ Apply Pred to each node, and return the nodes that pass """
@@ -30,15 +31,12 @@
   """ Add a new node of childname to node n """
   (puthash childname (make-explore/node :name childname)
            (explore/node-children n)))
-
 (defun explore/node-has-child (n childname)
   """ Check if a node has a child by the name of childname """
   (-contains? (hash-table-keys (explore/node-children n)) childname))
-
 (defun explore/node-get-child (n childname)
   """ Get the child of a node """
   (gethash childname (explore/node-children n)))
-
 (defun explore/tree-add (rootnode path val)
   """ Add a node with a value as a leaf of path from rootnode, creating
 intermediate nodes if necessary """
@@ -53,7 +51,6 @@ intermediate nodes if necessary """
       )
     )
   )
-
 (defun explore/tree-children (rootnode path)
   """ Get the children of a node, using a path from the root """
   (let* ((curr-node rootnode)
@@ -70,7 +67,6 @@ intermediate nodes if necessary """
       '())
   )
 )
-
 (defun explore/tree-get (rootnode path)
   """ Get a node using a path from the rootnode """
   (let* ((curr-node rootnode)
@@ -87,7 +83,15 @@ intermediate nodes if necessary """
       nil)
     )
   )
-
+(defun explore/tree-remove (rootnode path child)
+  " Remove the leaf of a path from the tree "
+  (message "Removing %s from %s " child path)
+  (let ((node (explore/tree-get rootnode path)))
+    (if (explore/node-has-child node child)
+        (remhash child (explore/node-children node))
+        )
+    )
+  )
 (defun explore/generate-tree (node n-children layers)
   """ Create a tree of n-children and layers, using random dictionary words as nodes """
   (if (> layers 0)

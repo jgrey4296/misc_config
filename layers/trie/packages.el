@@ -14,7 +14,7 @@
     (parsec :location elpa :step pre)
     (sequence-mode :location local)
     (explore-mode :location local)
-    origami
+    (font-lock+ :location (recipe :fetcher git :url "https://github.com/emacsmirror/font-lock-plus"))
     )
   )
 
@@ -148,11 +148,22 @@
   (use-package explore-mode
     :config
     (spacemacs/declare-prefix "," "Explore Mode Prefix")
+    (spacemacs/set-leader-keys-for-major-mode 'explore-mode
+      "i n" 'explore/initial-setup
+      "i N" #'(lambda () (interactive) (explore/initial-setup t))
+      )
     (evil-define-key '(normal visual) explore-mode-map
       ;;Add motions here
       (kbd "<RET>") 'explore/expand-entry
+      ;; "\t" 'trie/no-op
+      "\t" 'explore/update-tree-data
       ;; h,l : Move column
-
+      (kbd "h") 'explore/layer-decrease
+      (kbd "l") 'explore/layer-increase
+      ;;Insertion
+      (kbd "I") 'explore/insert-at-leaf
+      ;;Deletion
+      (kbd "D") 'explore/delete-entry
       )
     (evil-define-key '(insert) explore-mode-map
       (kbd "<RET>") 'explore/insert-entry
@@ -171,4 +182,8 @@
       ("q" nil :exit t)
       )
     )
+  )
+
+(defun trie/post-init-font-lock+ ()
+  (use-package font-lock+)
   )

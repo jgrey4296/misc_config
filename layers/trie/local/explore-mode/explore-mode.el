@@ -13,12 +13,12 @@
            (overlays (make-hash-table)))
 
 (defvar-local explore/current-markers (list (make-marker) (make-marker)))
+(defvar-local explore/next-heading (make-marker))
 (defvar-local explore/current-layer 0)
 (defvar-local explore/overlay-max 20)
 (defvar-local explore/current-data nil)
 ;;--------------------------------------------------
 ;; Overlays
-
 (defun explore/make-overlay (beg end layer)
   """ Create or reuse an overlay to use for a particular layer in the tree """
   (let ((overlay (or (gethash layer (explore/tree-data-overlays explore/current-data))
@@ -28,7 +28,6 @@
     (move-overlay overlay beg (- end 3))
     )
   )
-
 (defun explore/clear-overlays ()
   """ Clear all overlays """
   (loop for x in (hash-table-values (explore/tree-data-overlays explore/current-data)) do
@@ -36,7 +35,6 @@
         )
   (clrhash (explore/tree-data-overlays explore/current-data))
   )
-
 ;;--------------------------------------------------
 ;; Utils
 
@@ -48,7 +46,6 @@ then return its new head """
             )
           (car ,lst))
   )
-
 (defmacro explore/reduce-list-length (lst n)
   """ Pop values off a DUPLICATED list until it is a given length,
 then return the modified list """
@@ -79,7 +76,6 @@ calculate the bounds that column falls within """
     (list upper lower)
     )
   )
-
 (defun explore/cols-to-pos (bounds)
   """ Convert at least a pair of bounding columns to actual buffer positions """
   (let* ((lower (cadr bounds))
@@ -88,14 +84,12 @@ calculate the bounds that column falls within """
     (list (explore/col-to-pos upper) (explore/col-to-pos lower))
     )
   )
-
 (defun explore/col-to-pos (col)
   """ Convert a column value to an actual buffer position """
   (save-excursion
     (move-to-column col t)
     (point))
   )
-
 (defun explore/col-to-layer (col)
   """ Convert a column value to the corresponding layer of the tree """
   (let* ((indents (reverse (copy-seq (explore/tree-data-indents explore/current-data))))
@@ -126,18 +120,13 @@ calculate the bounds that column falls within """
   )
 ;;--------------------------------------------------
 ;; Drawing
-
 (defun explore/draw-children ()
   (let* ((rev-path (reverse (explore/tree-data-curr-path explore/current-data)))
          (node (explore/tree-get (explore/tree-data-root explore/current-data) rev-path))
          (layer (+ 1 (length rev-path)))
          )
-    (progn
-      ;;Draw
-      (explore/draw-children-safe node layer))
-    )
+     (explore/draw-children-safe node layer))
   )
-
 (defun explore/draw-children-safe (node layer)
   (let* ((children (explore/node-children node))
          (num_children (length (hash-table-values children)))
@@ -150,6 +139,7 @@ calculate the bounds that column falls within """
     (if (hash-table-empty-p children) (message "HASH empty"))
     ;;move to the indent head position
     (goto-char (marker-position (explore/tree-data-start-pos explore/current-data)))
+    (set-marker explore/next-heading (save-excursion (outline-next-visible-heading 1) (point)))
     (seq-each (lambda (x)
                 (move-to-column indent_lower t)
                 (delete-region (point) (line-end-position))
@@ -161,22 +151,24 @@ calculate the bounds that column falls within """
                 (move-to-column (+ indent_lower maxlen) t)
                 (insert " : ")
                 ;; Move forward a line if there is one already, otherwise add one
-                (if (> (forward-line 1) 0) (newline))
+                (forward-line 1)
+                (if (<= (marker-position explore/next-heading) (point))
+                    (progn (forward-line -1) (goto-char (line-end-position)) (newline)))
                 ) (sort (hash-table-keys children) (lambda (x y) (string-lessp (downcase x) (downcase y)))))
     ;; Clear any remaining lines
     (if (> (explore/tree-data-max-lines explore/current-data) num_children)
-        (seq-each (lambda (x)
-                    (move-to-column indent_lower t)
-                    (delete-region (point) (line-end-position))
-                    (forward-line 1)
-                    )
-                  (make-list (- (explore/tree-data-max-lines explore/current-data) num_children) nil)
-                  )
+        (let ((clear-lines (make-list (- (explore/tree-data-max-lines explore/current-data) num_children) nil)))
+          (message "Clearing %s lines" (length clear-lines))
+          (while (< (point) (marker-position explore/next-heading))
+            (move-to-column indent_lower t)
+            (delete-region (point) (line-end-position))
+            (forward-line 1)
+            )
+          )
       )
     )
   nil
   )
-
 (defun explore/draw-path ()
   """ Draw the path through the tree currently being used """
   (save-excursion
@@ -333,6 +325,7 @@ calculate the bounds that column falls within """
     )
   (let ((indents (seq-copy (explore/tree-data-indents explore/current-data)))
         (curr-point (current-column))
+        (start-pos (explore/tree-data-start-pos explore/current-data))
         last
         )
     (while (and indents (<= curr-point (car indents)))
@@ -352,7 +345,7 @@ calculate the bounds that column falls within """
   )
 (defun explore/layer-increase ()
   (interactive)
-    (save-excursion
+  (save-excursion
     (outline-previous-heading)
     (setq explore/current-data (get-text-property (point) :tree-data))
     )
@@ -451,6 +444,7 @@ calculate the bounds that column falls within """
   (set-syntax-table explore-mode-syntax-table)
   (setq major-mode 'explore-mode
         mode-name "EXPLORE")
+  (set-marker explore/next-heading (point-max))
   (outline-minor-mode)
   (run-mode-hooks)
   )

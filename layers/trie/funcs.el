@@ -50,6 +50,7 @@
           (setq inst-buffer (create-file-buffer (f-join location (format "%s.org" inst-name))))
           (with-current-buffer inst-buffer
             ;; insert default institution contents
+            (trie-mode)
             (org-mode)
             (yas-expand-snippet (yas-lookup-snippet "pipeline" 'trie-mode))
             )

@@ -12,6 +12,7 @@
     flycheck
     python
     dired
+    dired-x
     shell-pop
     evil-quickscope
     origami
@@ -262,8 +263,7 @@
               (define-key evil-normal-state-map (kbd "] A") 'vlf-next-batch-from-point)
               (define-key evil-normal-state-map (kbd "] a") 'vlf-next-batch)
               (define-key evil-normal-state-map (kbd "[ a") 'vlf-prev-batch)
-              (spacemacs/declare-prefix "a v" "VLF")
-              (spacemacs/set-leader-keys "a v b" 'vlf-set-batch-size))
+              (spacemacs/set-leader-keys "a U v " 'vlf-set-batch-size))
     )
   )
 
@@ -279,7 +279,7 @@
 
 (defun jg_layer/pre-init-dired ()
   (spacemacs/set-leader-keys
-    "ad" nil
+    "a d" nil
     )
 
   (spacemacs|use-package-add-hook dired
@@ -290,8 +290,11 @@
                       (kbd "M-n") 'jg_layer/dired-auto-move
                       (kbd "C-h") 'dired-up-directory
                       )
-    (add-hook 'dired-mode-hook (lambda () (dired-omit-mode)))
     )
+  )
+
+(defun jg_layer/post-init-dired-x ()
+  (add-hook 'dired-mode-hook 'dired-omit-mode)
   )
 
 (defun jg_layer/post-init-dired ()

@@ -1,13 +1,15 @@
 ;;based On https://www.emacswiki.org/emacs/ModeTutorial
 ;;For allowing code to run when the mode is run:
 (require 'dash)
-(require 'trie-face-macro)
+(require 'trie-face)
 
 (defgroup trie-mode '() "Trie Mode Customizations")
 ;;--------------------
 ;; Mode Variables
 ;;--------------------
-(defcustom trie-mode-hook nil "Basic Hook For Trie Mode")
+(defcustom trie-mode-hook nil "Basic Hook For Trie Mode" :type '(hook))
+(defcustom trie-mode-indent-end-regexp "^[ \t]*end$" "Regexp for trie mode indenting based on block endings" :type '(regexp))
+(defcustom trie-mode-indent-begin-regexp "^.+:$" "Regexp for trie mode block start" :type '(regexp))
 ;;--------------------
 ;;Utilities
 ;;--------------------
@@ -44,7 +46,6 @@
      ))
   "Face for Enclosed sections"
   :group 'trie-mode)
-
 
 ;;--------------------
 ;;Key bindings.
@@ -102,7 +103,7 @@
       (indent-line-to 0)
     ;;else:
     (let ((not-indented t) cur-indent)
-      (if (looking-at "^[ \t]*end$") ;;if line contains an END_
+      (if (looking-at trie-mode-indent-end-regexp) ;;if line contains an END_
           (progn
             (save-excursion ;;save where we are
               (forward-line -1) ;;go back a line
@@ -115,12 +116,12 @@
         (save-excursion
           (while not-indented
             (forward-line -1)
-            (if (looking-at "^[ \t]*end$")
+            (if (looking-at trie-mode-indent-end-regexp)
                 (progn
                   (setq cur-indent (current-indentation))
                   (setq not-indented nil))
               ;;otherwise
-              (if (looking-at "^.+:$")
+              (if (looking-at trie-mode-indent-begin-regexp)
                   (progn
                     (setq cur-indent (+ (current-indentation) tab-width))
                     (setq not-indented nil))

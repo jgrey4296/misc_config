@@ -69,21 +69,20 @@
    ;;Rule name
    `("^\\([[:word:].!]+\\):$" (0 "trie-rulename"))
    ;;punctuation
-   `("\\." (0 ,(trie-depth-face 1)))
-   `("!" (0 ,(trie-depth-face 2)))
-   `("::" (0 ,(trie-depth-face 3) t))
-   `("->\\|\\?" (0 ,(trie-depth-face 4) t))
+   `("\\." (0 ,(trie-face/trie-depth-face 1)))
+   `("!" (0 ,(trie-face/trie-depth-face 2)))
+   `("::" (0 ,(trie-face/trie-depth-face 3) t))
+   `("->\\|\\?" (0 ,(trie-face/trie-depth-face 4) t))
    ;;Variables and tags
-   `("#[[:word:]]+" (0 ,(trie-depth-face 5)))
-   `("\\$[[:word:]]+" (0 ,(trie-depth-face 6)))
+   `("#[[:word:]]+" (0 ,(trie-face/trie-depth-face 5)))
+   `("\\$[[:word:]]+" (0 ,(trie-face/trie-depth-face 6)))
    ;;functions
-   `("\\([-<>=%^*@+&~][[:word:]]*\\)" (1 ,(trie-depth-face 7)))
+   `("\\([-<>=%^*@+&~][[:word:]]*\\)" (1 ,(trie-face/trie-depth-face 7)))
    ;;Words
-   `("[[:word:]]" (0 ,(trie-depth-face 8)))
+   `("[[:word:]]" (0 ,(trie-face/trie-depth-face 8)))
    ;;Closures
-   `("[][()]" (0 ,(trie-depth-face 9)))
+   `("[][()]" (0 ,(trie-face/trie-depth-face 9)))
    `("[([]\.+[])]" (0 "trie-closure" t))
-
    )
   "Minimal highlighting expressions for trie mode")
 

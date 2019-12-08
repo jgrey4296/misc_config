@@ -12,8 +12,8 @@
     ;; org
     (trie-mode :location local)
     (parsec :location elpa :step pre)
-    (sequence-mode :location local)
-    (explore-mode :location local)
+    (trie-sequence-mode :location local)
+    (trie-explore-mode :location local)
     (font-lock+ :location (recipe :fetcher git :url "https://github.com/emacsmirror/font-lock-plus"))
     )
   )
@@ -22,13 +22,21 @@
 ;; (defun <layer>/init-<package>)
 ;; (defun <layer>/post-init-<package>)
 ;; Use: (use-package 'name :commands :config ...
+(defun trie/post-init-font-lock+ ()
+  (use-package font-lock+)
+  )
+(defun trie/init-parsec ()
+  (use-package parsec
+    :defer t))
+
 (defun trie/init-trie-mode ()
   ;; Defines all sub-trie modes: trie, trie-visual, sequence etc
   (use-package trie-mode
-    :commands 'trie/start-trie-ide
+    :commands (trie-mode trie-log-mode trie-passive-mode)
     :init
+    (spacemacs/declare-prefix "a s" "Start Editor")
     (spacemacs/set-leader-keys
-      "a s" 'trie/toggle-trie-ide)
+      "a s t" 'trie/toggle-trie-ide)
     :config
     ;;Setup Each Mode:
     ;;Trie
@@ -97,28 +105,21 @@
 
   (add-hook 'trie-mode-hook 'org-bullets-mode)
   )
-
-(defun trie/init-parsec ()
-  (use-package parsec
-    :defer t))
-
-
-
-(defun trie/init-sequence-mode ()
-  (use-package sequence-mode
+(defun trie/init-trie-sequence-mode ()
+  (use-package trie-sequence-mode
     :config
-    (spacemacs/declare-prefix "," "Sequence Mode Prefix")
-    (evil-define-key '(normal visual) sequence-mode-map
-      "l" 'sequence/user-inc-column
-      "h" 'sequence/user-dec-column
-      "k" 'sequence/user-dec-line
-      "j" 'sequence/user-inc-line
+    (spacemacs/declare-prefix "," "Trie-Sequence Mode Prefix")
+    (evil-define-key '(normal visual) trie-sequence-mode-map
+      "l" 'trie-sequence/user-inc-column
+      "h" 'trie-sequence/user-dec-column
+      "k" 'trie-sequence/user-dec-line
+      "j" 'trie-sequence/user-inc-line
       )
-    (spacemacs/set-leader-keys-for-major-mode 'sequence-mode
-      "."   'spacemacs/sequence_transient-transient-state/body
+    (spacemacs/set-leader-keys-for-major-mode 'trie-sequence-mode
+      "."   'spacemacs/trie-sequence_transient-transient-state/body
       )
-    (spacemacs|define-transient-state sequence_transient
-      :title "Transient Editing State for Sequences"
+    (spacemacs|define-transient-state trie-sequence_transient
+      :title "Transient Editing State for Trie-Sequences"
       :doc (concat "
    | General           ^^| Change                    ^^| Motion             ^^| Remove              ^^| Sort                         ^^|
    |-------------------^^+---------------------------^^+--------------------^^+---------------------^^+------------------------------^^|
@@ -129,49 +130,48 @@
   ")
       :bindings
       ("q" nil :exit t)
-      ("n" sequence/new-table ) ;; org create table, insert
-      ("v" sequence/inspect-table) ;; create a left temp buffer that shows selected column's values (plus highlights active ones)
+      ("n" trie-sequence/new-table ) ;; org create table, insert
+      ("v" trie-sequence/inspect-table) ;; create a left temp buffer that shows selected column's values (plus highlights active ones)
       ("b" nil ) ;; create a right temp buffer that shows selected column's values (plus highlights active ones)
-      ("i" sequence/insert-rule) ;; specify LHS and RHS, insert into factbase, insert into appropriate columns
-      ("r" nil ) ;; Rename the column from default
-      ("t" sequence/insert-terminal) ;; Insert an Input terminal
-      ("c" sequence/centre-column) ;; Centre the current column
-      ("d" nil ) ;; Delete the value at point from the table
-      ("D" nil ) ;; Delete the column from the table
+      ("i" trie-sequence/insert-rule) ;; specify LHS and RHS, insert into factbase, insert into appropriate columns
+      ("r" trie-sequence/rename-column) ;; Rename the column from default
+      ("t" trie-sequence/insert-terminal) ;; Insert an Input terminal
+      ("c" trie-sequence/centre-column) ;; Centre the current column
+      ("d" trie-sequence/delete-value) ;; Delete the value at point from the table
+      ("D" trie-sequence/delete-column) ;; Delete the column from the table
       ("m" nil ) ;; Merge the left connections and the right connections
-      ("s" nil ) ;; sort all columns alphabetically
+      ("s" trie-sequence/sort-table) ;; sort all columns alphabetically
       )
     )
   )
-
-(defun trie/init-explore-mode ()
-  (use-package explore-mode
+(defun trie/init-trie-explore-mode ()
+  (use-package trie-explore-mode
     :config
-    (spacemacs/declare-prefix "," "Explore Mode Prefix")
-    (spacemacs/set-leader-keys-for-major-mode 'explore-mode
-      "i n" 'explore/initial-setup
-      "i N" #'(lambda () (interactive) (explore/initial-setup t))
+    (spacemacs/declare-prefix "," "Trie-Explore Mode Prefix")
+    (spacemacs/set-leader-keys-for-major-mode 'trie-explore-mode
+      "i n" 'trie-explore/initial-setup
+      "i N" #'(lambda () (interactive) (trie-explore/initial-setup t))
       )
-    (evil-define-key '(normal visual) explore-mode-map
+    (evil-define-key '(normal visual) trie-explore-mode-map
       ;;Add motions here
-      (kbd "<RET>") 'explore/expand-entry
+      (kbd "<RET>") 'trie-explore/expand-entry
       ;; "\t" 'trie/no-op
-      "\t" 'explore/update-tree-data
+      "\t" 'trie-explore/update-tree-data
       ;; h,l : Move column
-      (kbd "h") 'explore/layer-decrease
-      (kbd "l") 'explore/layer-increase
+      (kbd "h") 'trie-explore/layer-decrease
+      (kbd "l") 'trie-explore/layer-increase
       ;;Insertion
-      (kbd "I") 'explore/insert-at-leaf
+      (kbd "I") 'trie-explore/insert-at-leaf
       ;;Deletion
-      (kbd "D") 'explore/delete-entry
+      (kbd "D") 'trie-explore/delete-entry
       )
-    (evil-define-key '(insert) explore-mode-map
-      (kbd "<RET>") 'explore/insert-entry
+    (evil-define-key '(insert) trie-explore-mode-map
+      (kbd "<RET>") 'trie-explore/insert-entry
       )
-    (spacemacs/set-leader-keys-for-major-mode 'explore-mode
-      "."   'spacemacs/explore_transient-transient-state/body
+    (spacemacs/set-leader-keys-for-major-mode 'trie-explore-mode
+      "."   'spacemacs/trie-explore_transient-transient-state/body
       )
-    (spacemacs|define-transient-state explore_transient
+    (spacemacs|define-transient-state trie-explore_transient
       :title "Transient Editing State for Exploring Trees"
       :doc (concat "
    | General           ^^|
@@ -184,6 +184,3 @@
     )
   )
 
-(defun trie/post-init-font-lock+ ()
-  (use-package font-lock+)
-  )

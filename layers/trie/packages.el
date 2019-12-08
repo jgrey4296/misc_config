@@ -10,10 +10,12 @@
     ;; (some-package :location (recipe :fetcher github :repo "some/repo"))
     ;; (some-package :excluded t)
     ;; org
+    (trie-face :location local)
+    (trie-tree :location local)
     (trie-mode :location local)
-    (parsec :location elpa :step pre)
     (trie-sequence-mode :location local)
     (trie-explore-mode :location local)
+    (parsec :location elpa :step pre)
     (font-lock+ :location (recipe :fetcher git :url "https://github.com/emacsmirror/font-lock-plus"))
     )
   )
@@ -28,6 +30,15 @@
 (defun trie/init-parsec ()
   (use-package parsec
     :defer t))
+
+(defun trie/init-trie-tree ()
+  (use-package trie-tree
+    :defer t)
+  )
+(defun trie/init-trie-fae ()
+  (use-package trie-face
+    :defer t)
+  )
 
 (defun trie/init-trie-mode ()
   ;; Defines all sub-trie modes: trie, trie-visual, sequence etc

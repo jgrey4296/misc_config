@@ -19,7 +19,8 @@
     highlight-parentheses
     plantuml-mode
     flycheck-plantuml
-
+    undo-tree
+    dired
     ;; ggtags
     ;; (helm-gtags :toggle (configuration-layer/package-usedp 'helm))
     ;; xcscope
@@ -99,9 +100,10 @@
 (defun jg_misc/init-free-keys ()
   (use-package free-keys
     :config
+    (spacemacs/declare-prefix "a U" "Utilities")
     (spacemacs/set-leader-keys
-      "a f k" 'free-keys
-      "a f p" 'free-keys-set-prefix
+      "a U f k" 'free-keys
+      "a U f p" 'free-keys-set-prefix
       )
     )
   )
@@ -134,4 +136,16 @@
     :config
     (flycheck-plantuml-setup)
     )
+  )
+
+(defun jg_misc/post-init-undo-tree ()
+  (spacemacs/set-leader-keys
+    "a U u" 'undo-tree-visualize
+    )
+
+  )
+
+(defun jg_misc/post-init-dired ()
+  (spacemacs/set-leader-keys
+    "a d" nil)
   )

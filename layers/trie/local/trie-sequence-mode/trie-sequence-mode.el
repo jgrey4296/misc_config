@@ -9,17 +9,21 @@
 ;;--------------------
 ;; Mode Variables
 ;;--------------------
+
+(defgroup trie-sequence '() "Customization group for trie-sequence")
+
 (defconst trie-sequence/left-tab "Trie-SequenceMLeft")
 (defconst trie-sequence/right-tab "Trie-SequenceMRight")
-(defconst trie-sequence/info-tab "*Seq Info*")
+(defcustom trie-sequence/info-tab "*Seq Info*" "Name of Sequence info buffer" :type '(string))
 
-(defvar trie-sequence/current-colour "green")
-(defvar trie-sequence/input-colour "blue")
-(defvar trie-sequence/output-colour "orange")
+(defcustom trie-sequence/current-colour "green" "Overlay colour for current selection" :type '(color))
+(defcustom trie-sequence/input-colour "blue" "Overlay colour for input selection" :type '(color))
+(defcustom trie-sequence/output-colour "orange" "Overlay colour for output selection" :type '(color))
+(defcustom trie-sequence/rule-divider "->" "String signifying rule rhs"  :type '(string))
+(defcustom trie-sequence/overlay-max 20 "Maximum number of overlays for trie-sequence" :type '(integer))
 
 (defvar trie-sequence/overlays '())
 (defvar trie-sequence/free-overlays '())
-(defvar trie-sequence/overlay-max 20)
 (defvar trie-sequence/inspector-overlay nil)
 ;;--------------------
 ;; Overlays
@@ -524,7 +528,7 @@ https://stackoverflow.com/questions/1249497 "
         (rhs '()))
     (while parts
       (let ((curr (pop parts)))
-        (cond ((equal curr "->") (setq on_lhs nil))
+        (cond ((equal curr trie-sequence/rule-divider) (setq on_lhs nil))
               (on_lhs (push curr lhs))
               ('t (push curr rhs)))))
 

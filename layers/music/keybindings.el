@@ -2,4 +2,4 @@
 ;; loaded fifth
 
 
-(spacemacs/set-leader-keys "a M" 'music/start-system)
+(spacemacs/set-leader-keys "a s M" 'music/start-system)

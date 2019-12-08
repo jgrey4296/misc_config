@@ -124,7 +124,7 @@
     )
   )
 (defun jg_org/pre-init-org-ref ()
-  (spacemacs/set-leader-keys "a r" 'jg_org/bibtex-load-random)
+  (spacemacs/set-leader-keys "a U r" 'jg_org/bibtex-load-random)
   (add-hook 'bibtex-mode-hook (lambda ()
                                 (spacemacs/set-leader-keys-for-major-mode 'bibtex-mode
                                   "p" 'jg_org/org-ref-open-bibtex-pdf

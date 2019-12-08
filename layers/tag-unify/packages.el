@@ -43,10 +43,10 @@
             )
           )
     )
-
+  (spacemacs/declare-prefix "a h" "Helms")
   (spacemacs/set-leader-keys
-    "a B" 'tag-unify/helm-bookmarks
-    "a T" 'tag-unify/helm-twitter
+    "a h B" 'tag-unify/helm-bookmarks
+    "a h T" 'tag-unify/helm-twitter
     )
 
   (defun tag-unify/file-select-helm (candidates)
@@ -111,7 +111,7 @@
   ;; load the bibliography directory on startup
   (setq bibtex-completion-bibliography (tag-unify/build-bibtex-list))
   ;; Keybind my bib helm
-  (spacemacs/set-leader-keys "a b" 'tag-unify/helm-bibtex)
+  (spacemacs/set-leader-keys "a h b" 'tag-unify/helm-bibtex)
 
   ;; Define the bib helm
   (defvar tag-unify/helm-source-bibtex

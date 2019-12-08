@@ -2,7 +2,6 @@
 
 (defun kahn/is-terminal-p (terms str)
   (-contains? terms str))
-
 (defun kahn/pop ()
   (goto-char (point-min))
   (let ((str (string-trim (buffer-substring-no-properties
@@ -11,13 +10,10 @@
     (delete-region (point-min) (line-end-position))
     (join-line 1)
     str))
-
 (defun kahn/push (x)
   (goto-char (point-max))
   (insert (format "%s\n" x))
   )
-
-
 (defun kahnsort (nodes initial terminals)
   " Run a Topological sort on the input NODES graph,
 starting with the INITIAL list.

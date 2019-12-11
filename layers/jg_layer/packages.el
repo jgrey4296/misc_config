@@ -280,6 +280,12 @@
 (defun jg_layer/pre-init-dired ()
   (spacemacs/set-leader-keys
     "a d" nil
+    "K"   nil
+    )
+
+  (evil-define-key 'normal dired-mode-map
+    (kbd "<DEL>") 'dired-kill-subdir
+    (kbd "i")     'jg_layer/dired-insert-subdir-maybe-recursive
     )
 
   (spacemacs|use-package-add-hook dired
@@ -300,6 +306,7 @@
 (defun jg_layer/post-init-dired ()
   (spacemacs/set-leader-keys-for-major-mode 'dired-mode
     "s" 'jg_layer/dired-create-summary-of-orgs
+    "i" 'jg_layer/dired-marked-info
     )
   )
 

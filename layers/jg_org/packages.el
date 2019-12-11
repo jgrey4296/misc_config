@@ -5,7 +5,7 @@
     academic-phrases
     org-ref
     org-pomodoro
-    (org-drill :location built-in)
+    org-drill
     outline-toc
     )
   )

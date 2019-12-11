@@ -49,6 +49,19 @@ and its subtree, from dired"
       (search-forward "tags = {")
       )
     )
+
+  (defun jg_layer/dired-marked-info ()
+    (interactive)
+    (message "%s files are marked" (length (dired-get-marked-files)))
+    )
+
+  (defun jg_layer/dired-insert-subdir-maybe-recursive (dirname &optional switches)
+    (interactive
+     (list (dired-get-filename)
+           (if current-prefix-arg jg_layer/dired-recursive-switches)))
+    (let ((current-prefix-arg nil))
+      (dired-maybe-insert-subdir dirname switches))
+    )
   )
 (when (configuration-layer/package-usedp 'evil-quickscope)
   (defun jg_layer/toggle-quickscope-always ()

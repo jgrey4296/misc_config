@@ -514,19 +514,79 @@ to point to a single new line"
           (org-set-tags current-tags)
           (org-forward-heading-same-level 1)
           )))))
+
+(defun tag-unify/auto-tag-marked-files ()
+  " Process marked files, adding tags to threads if
+already used tag keywords are in the thread"
+  (interactive)
+  (assert (not (hash-table-empty-p tag-unify/global-tags)))
+  (let ((marked-files (dired-get-marked-files)))
+    (loop for x in marked-files do
+          (tag-unify/auto-tag-file x)
+          )
+    )
+  )
+
+(defun tag-unify/auto-tag-this-file ()
+  (interactive)
+  (goto-char (point-min))
+  (org-map-tree 'tag-unify/auto-tag-thread)
+  )
+
+(defun tag-unify/auto-tag-file (x)
+  "Given a file, load it and process each thread"
+  (with-temp-buffer
+    (insert-file-contents x)
+    (org-mode)
+    (goto-char (point-min))
+    (org-map-tree 'tag-unify/auto-tag-thread)
+    )
+  )
+
+(defun tag-unify/auto-tag-thread ()
+  "Called on each heading of a file, only run
+for headings of depth 2
+Use all words in thread as queries to master tag list,
+add matches to thread tags
+"
+  (message "Auto Tagging thread: %s" (org-get-heading))
+  (let ((depth (car (org-heading-components)))
+        (to-tag-list (make-hash-table :test 'equal))
+        (curr-tags (org-get-tags))
+        words)
+    (if (eq depth 2)
+        (progn
+          (setq words (s-split-words (substring-no-properties (org-get-entry))))
+          (loop for x in words do
+                (if (gethash x tag-unify/global-tags)
+                    (puthash x 1 to-tag-list)
+                  )
+                )
+          (if to-tag-list
+              (org-set-tags (union (hash-table-keys to-tag-list) curr-tags :test 'equal))
+            )
+          )
+      )
+    )
+  )
+
 ;; utility
 (defun tag-unify/process-candidates (x)
   (cons (s-replace-regexp ",? +" " " (car x))
         (cdr x))
   )
 (defun tag-unify/rebuild-tag-database ()
-  ;; TODO
-  ;; regenerate the master list of tags
-  ;; from bookmarks
-
-  ;; and from bibtex
-
-  ;; and org
+  "Rebuild the tag database from global-tags-location "
+  (interactive)
+  (clrhash tag-unify/global-tags)
+  (with-temp-buffer
+    (insert-file tag-unify/global-tags-location)
+    (goto-char (point-min))
+    (while (< (point) (point-max))
+      ((lambda (x) (puthash (car x) (string-to-number (cadr x)) tag-unify/global-tags)) (split-string (buffer-substring (line-beginning-position) (line-end-position)) ":" nil " "))
+      (forward-line)
+      )
+    )
   )
 (defun tag-unify/strip_spaces (str)
   (s-replace " " "_" (string-trim str))
@@ -719,5 +779,3 @@ and insert the car "
     )
   (message "Finished writing file")
   )
-
-

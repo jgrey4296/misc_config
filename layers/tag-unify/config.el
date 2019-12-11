@@ -1,6 +1,7 @@
 (setq-default tag-unify/loc-bookmarks "~/github/writing/resources/main_bookmarks.html"
               tag-unify/loc-bibtex "~/github/writing/resources/years"
               tag-unify/twitter-account-index "~/.spacemacs.d/setup_files/tw_acct.index"
+
               tag-unify/twitter-helm-candidates nil
               tag-unify/preferred-linecount-for-org 1500
               tag-unify/loc-master-tag-list ""
@@ -10,10 +11,13 @@
               bibtex-completion-additional-search-fields '("tags" "year")
               bibtex-completion-pdf-field "file"
               bibtex-completion-pdf-open-function (lambda (x) (org-open-link-from-string (format "[[file:%s]]" x)))
+
               tag-unify/helm-bibtex-candidates nil
 
+              tag-unify/all-author-list '()
+
               tag-unify/global-tags-location "~/github/writing/resources/collate.tags"
-              tag-unify/global-tags (make-hash-table)
+              tag-unify/global-tags (make-hash-table :test 'equal)
               tag-unify/tag-unify-candidates-names '()
               tag-unify/tag-unify-candidate-counts '()
               ;; Start Position -> End Line number because of changes in positions from tag add/retract

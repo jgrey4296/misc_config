@@ -87,6 +87,7 @@
             :full-frame t
             :buffer "*helm twitter*"
             :truncate-lines t
+            ;;TODO: is this necessary?
             :candidates tag-unify/twitter-helm-candidates
             )
       )
@@ -171,14 +172,7 @@
     )
   (add-hook 'org-mode-hook 'tag-unify/org-mod-map)
 
-  (with-temp-buffer
-    (insert-file tag-unify/global-tags-location)
-    (goto-char (point-min))
-    (while (< (point) (point-max))
-      ((lambda (x) (puthash (car x) (string-to-number (cadr x)) tag-unify/global-tags)) (split-string (buffer-substring (line-beginning-position) (line-end-position)) ":" nil " "))
-      (forward-line)
-      )
-    )
+  (tag-unify/rebuild-tag-database)
 
   (evil-define-operator tag-unify/tag-unify-helm-start (beg end)
     """ Opens the Tagging Helm """

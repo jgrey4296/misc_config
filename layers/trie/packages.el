@@ -3,13 +3,6 @@
 
 (defconst trie-packages
   '(
-    ;; package from EPA
-    ;; eg: some-package
-    ;; (some-package :location elpa)
-    ;; (some-package :location local)
-    ;; (some-package :location (recipe :fetcher github :repo "some/repo"))
-    ;; (some-package :excluded t)
-    ;; org
     (trie-face :location local)
     (trie-tree :location local)
     (trie-mode :location local)
@@ -17,32 +10,30 @@
     (trie-explore-mode :location local)
     (parsec :location elpa :step pre)
     (font-lock+ :location (recipe :fetcher git :url "https://github.com/emacsmirror/font-lock-plus"))
+    helm
     )
   )
 
-;; (defun <layer>/pre-init-<package>)
-;; (defun <layer>/init-<package>)
-;; (defun <layer>/post-init-<package>)
 ;; Use: (use-package 'name :commands :config ...
 (defun trie/post-init-font-lock+ ()
   (use-package font-lock+)
   )
 (defun trie/init-parsec ()
   (use-package parsec
-    :defer t))
-
-(defun trie/init-trie-tree ()
-  (use-package trie-tree
     :defer t)
   )
-(defun trie/init-trie-fae ()
-  (use-package trie-face
-    :defer t)
+
+(defun trie/init-trie-tree ()
+  (use-package trie-tree)
+  )
+(defun trie/init-trie-face ()
+  (use-package trie-face)
   )
 
 (defun trie/init-trie-mode ()
   ;; Defines all sub-trie modes: trie, trie-visual, sequence etc
   (use-package trie-mode
+    :after (trie-face)
     :commands (trie-mode trie-log-mode trie-passive-mode)
     :init
     (spacemacs/declare-prefix "a s" "Start Editor")
@@ -98,7 +89,7 @@
 
     ;;Trie Log
     (spacemacs/set-leader-keys-for-major-mode 'trie-log-mode
-      "f r" 'trie/find-or-create-rule
+      "f r" 'trie/rule-helm
       "f t" 'trie/find-or-create-type
       "f c" 'trie/find-or-create-crosscut
       "f s" 'trie/find-or-create-sequence
@@ -118,6 +109,7 @@
   )
 (defun trie/init-trie-sequence-mode ()
   (use-package trie-sequence-mode
+    :commands (trie-sequence-mode)
     :config
     (spacemacs/declare-prefix "," "Trie-Sequence Mode Prefix")
     (evil-define-key '(normal visual) trie-sequence-mode-map
@@ -157,6 +149,8 @@
   )
 (defun trie/init-trie-explore-mode ()
   (use-package trie-explore-mode
+    :after (trie-tree)
+    :commands (trie-explore-mode)
     :config
     (spacemacs/declare-prefix "," "Trie-Explore Mode Prefix")
     (spacemacs/set-leader-keys-for-major-mode 'trie-explore-mode
@@ -195,3 +189,29 @@
     )
   )
 
+(defun trie/pre-init-helm ()
+  ;;TODO: add helms for types, crosscuts, patterns, tests, tags,
+  ;;strategies, performatives, channels
+  (spacemacs|use-package-add-hook helm
+    :post-config
+    (setq trie/rule-helm-source
+          (helm-make-source "Rule Helm" 'helm-source-sync
+            :action (helm-make-actions "Open Rule" 'trie/find-rule)
+            :candidates 'trie/get-rule-helm-candidates
+            )
+          trie/rule-helm-dummy-source
+          (helm-make-source "Rule Dummy Helm" 'helm-source-dummy
+            :action (helm-make-actions "Create Rule" 'trie/create-rule)
+            )
+          )
+    )
+
+  (defun trie/rule-helm ()
+    "Helm for inserting and creating rules into trie/rule authoring mode"
+    (interactive)
+    (helm :sources '(trie/rule-helm-source trie/rule-helm-dummy-source)
+          :full-frame t
+          :buffer "*Rule Helm*"
+          )
+  )
+)

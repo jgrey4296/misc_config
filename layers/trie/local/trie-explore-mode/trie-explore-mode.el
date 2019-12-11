@@ -128,7 +128,7 @@ calculate the bounds that column falls within """
          (node (trie-tree/tree-get (trie-explore/tree-data-root trie-explore/current-data) rev-path))
          (layer (+ 1 (length rev-path)))
          )
-     (trie-explore/draw-children-safe node layer))
+    (trie-explore/draw-children-safe node layer))
   )
 (defun trie-explore/draw-children-safe (node layer)
   (let* ((children (trie-tree/node-children node))
@@ -261,8 +261,8 @@ calculate the bounds that column falls within """
     )
   (if (> trie-explore/current-layer 0)
       (trie-explore/make-overlay (marker-position (car trie-explore/current-markers))
-                            (marker-position (cadr trie-explore/current-markers))
-                            trie-explore/current-layer)
+                                 (marker-position (cadr trie-explore/current-markers))
+                                 trie-explore/current-layer)
     (trie-explore/clear-overlays)
     )
   )
@@ -302,6 +302,7 @@ calculate the bounds that column falls within """
          )
     (trie-tree/node-add-child node value)
     )
+  ;;todo: move to the parent node before re-display
   (trie-explore/expand-entry)
   )
 
@@ -312,7 +313,7 @@ calculate the bounds that column falls within """
   (let ((to-delete (car (trie-explore/tree-data-curr-path trie-explore/current-data)))
         (path (cdr (trie-explore/tree-data-curr-path trie-explore/current-data))))
     (trie-tree/tree-remove (trie-explore/tree-data-root trie-explore/current-data)
-                         (reverse path) to-delete)
+                           (reverse path) to-delete)
     (save-excursion
       (trie-explore/layer-decrease)
       (trie-explore/expand-entry)
@@ -367,6 +368,10 @@ calculate the bounds that column falls within """
         (forward-line -1)
         (move-to-column (or (car indents) last))
         )
+      (if (looking-at "-")
+          (progn (forward-line)
+                 (move-to-column (or (car indents) last)))
+        )
       )
     )
   )
@@ -375,6 +380,7 @@ calculate the bounds that column falls within """
 
 (defun trie-explore/initial-setup (&optional tree)
   """ An initial setup for a tree """
+  (interactive)
   (cond
    ((not tree) (progn (setq tree (make-trie-tree/node :name "__root"))
                       (trie-tree/generate-tree tree 5 5)))

@@ -65,7 +65,7 @@
     (if wind
         (with-current-buffer trie-sequence/info-tab
           (goto-char (point-min))
-          (search-forward-regexp (format "^*** %s" value))
+          (search-forward-regexp (format "^*** %s" value) nil t)
           (if (not (overlayp trie-sequence/inspector-overlay))
               (progn (setq trie-sequence/inspector-overlay (make-overlay 1 2))
                      (overlay-put trie-sequence/inspector-overlay 'face '((foreground-color . "green")))))
@@ -124,12 +124,13 @@
   (interactive "P")
   (if (org-at-table-p)
       ;;Yes
-      (let ((curr-table-column (org-table-current-column))
+      (let* ((curr-table-column (org-table-current-column))
             (max-column org-table-current-ncol)
             (curr-col (current-column))
             (new-col (+ curr-table-column (if count (prefix-numeric-value count) 1)))
             )
-        (org-table-goto-column (if (< new-col max-column) new-col curr-table-column))
+        (org-table-goto-column (if (<= new-col max-column) new-col curr-table-column))
+        (setq curr-col (current-column))
         ;;if cell is empty, go up until it isnt
         (while (and (org-at-table-p) (not (looking-at "[[:alnum:]-]")))
           (forward-line -1)
@@ -152,7 +153,7 @@
   (interactive "P")
   (if (org-at-table-p)
       ;;Yes
-      (let ((curr-table-column (org-table-current-column))
+      (let* ((curr-table-column (org-table-current-column))
             curr-col
             (new-col (- curr-table-column (if count (prefix-numeric-value count) 1)))
             )
@@ -564,7 +565,7 @@ https://stackoverflow.com/questions/1249497 "
     )
   )
 
-(defun trie-sequence/delete-value ()
+(defun trie-sequence/delete-value (&optional deleting-column)
   " Delete a field from the graph and table "
   (interactive)
   (let* ((curr-line (org-table-current-line))
@@ -578,6 +579,9 @@ https://stackoverflow.com/questions/1249497 "
     ;; update table
     (org-table-put curr-line curr-col "" t)
     (trie-sequence/goto-position curr-line curr-col)
+    (if (and (not deleting-column) (get-buffer-window trie-sequence/info-tab))
+        (trie-sequence/redraw-inspector)
+        )
     )
   )
 (defun trie-sequence/delete-column ()
@@ -587,11 +591,12 @@ https://stackoverflow.com/questions/1249497 "
     (org-table-goto-line 2)
     (org-table-goto-column curr-column)
     (while (org-at-table-p)
-      (trie-sequence/delete-value)
+      (trie-sequence/delete-value t)
       (forward-line)
       (org-table-goto-column curr-column))
     (forward-line -1)
     (trie-sequence/goto-position 2 curr-column)
+    (trie-sequence/redraw-inspector)
     )
   )
 

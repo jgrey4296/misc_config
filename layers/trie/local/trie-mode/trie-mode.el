@@ -185,6 +185,7 @@
   (setq major-mode 'trie-mode)
   (setq mode-name "TRIE")
   (run-mode-hooks)
+  (outline-minor-mode)
   )
 
 ;;todo later: set no longer needed variables to nil

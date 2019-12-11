@@ -111,8 +111,6 @@ intermediate nodes if necessary """
   """ Get the child of a node """
   (gethash childname (trie-tree/node-children n)))
 
-
-
 (provide 'trie-tree)
 ;;Example:
 ;; (setq root (make-trie-tree/node :name "__root"))

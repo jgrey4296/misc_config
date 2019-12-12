@@ -172,7 +172,9 @@
   (set-marker tag-unify/org-clean-marker nil)
 
   (goto-char (point-min))
-  (while (null (org-next-link))
+  ;; DO NOT USE ORG-NEXT-LINK
+  ;; it ignores links in property drawers
+  (while (re-search-forward org-link-any-re nil t)
     (let ((prev-line (buffer-substring (line-beginning-position 0)
                                        (line-end-position 0))))
       ;; (debug)
@@ -579,13 +581,16 @@ add matches to thread tags
   "Rebuild the tag database from global-tags-location "
   (interactive)
   (clrhash tag-unify/global-tags)
-  (with-temp-buffer
-    (insert-file tag-unify/global-tags-location)
-    (goto-char (point-min))
-    (while (< (point) (point-max))
-      ((lambda (x) (puthash (car x) (string-to-number (cadr x)) tag-unify/global-tags)) (split-string (buffer-substring (line-beginning-position) (line-end-position)) ":" nil " "))
-      (forward-line)
-      )
+  (if (f-exists? tag-unify/global-tags-location)
+      (with-temp-buffer
+        (insert-file tag-unify/global-tags-location)
+        (goto-char (point-min))
+        (while (< (point) (point-max))
+          ((lambda (x) (puthash (car x) (string-to-number (cadr x)) tag-unify/global-tags)) (split-string (buffer-substring (line-beginning-position) (line-end-position)) ":" nil " "))
+          (forward-line)
+          )
+        )
+    (message "ERROR: GLOBAL-TAGS-LOCATION IS EMPTY")
     )
   )
 (defun tag-unify/strip_spaces (str)

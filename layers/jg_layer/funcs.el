@@ -391,6 +391,14 @@ versus not"
           )
     )
   )
+(defun jg_layer/modify-line-end-display-table ()
+  (interactive)
+  " from https://stackoverflow.com/questions/8370778/ "
+  ;; Modify the display table for whitespace, so lines which
+  ;; truncate are not signaled with a $
+  (set-display-table-slot standard-display-table 0 ?\ )
+  )
+
 ;;----------------------------------------
 ;; Debugging
 (defadvice message (before who-said-that activate)

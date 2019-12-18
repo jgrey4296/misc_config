@@ -1,5 +1,5 @@
 ;; adapted from https://masteringemacs.org/article/comint-writing-command-interpreter
-(setq my-comint-path "~/.spacemacs.d/layers/subprocess/myprog.py")
+(setq my-comint-path "~/.spacemacs.d/lisp/myprog.py")
 (setq my-comint-buffer-name "My-Comint")
 (setq my-comint-args '())
 (setq my-comint-mode-map

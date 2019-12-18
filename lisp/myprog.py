@@ -1,4 +1,3 @@
-#!/Users/johngrey/anaconda3/bin/python3
 from time import sleep
 import sys
 print("Testing")

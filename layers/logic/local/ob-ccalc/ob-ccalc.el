@@ -179,7 +179,17 @@ Initialize SESSION if it has not already been initialized."
   "Evaluate the GOAL given the BODY in an external Ccalc process.
 
 If no GOAL is given, the GOAL is replaced with HALT.  This results in
-running just the body through the Ccalc process."
+running just the body through the Ccalc process.
+
+Should look like: swipl -g main FILE
+
+main :- load_files('ccalc.pl'),
+        loadf('test.pl'),
+        format('\nRUNNING QUERY\n'),
+        query(1),
+        format('\nTest FINISHED\n'),
+        halt.
+"
   (error "CCalc needs to be run as a session"))
 
 

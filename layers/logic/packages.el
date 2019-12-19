@@ -29,6 +29,7 @@
     :init
     (org-babel-do-load-languages
      'org-babel-load-languages '((prolog . t)))
+    (setq org-babel-prolog-command "swipl7")
     )
   )
 

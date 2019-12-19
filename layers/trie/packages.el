@@ -43,6 +43,7 @@
     :config
     ;;Setup Each Mode:
     ;;Trie
+    (message "Config trie mode")
     (spacemacs/set-leader-keys-for-major-mode 'trie-mode
       "f r" 'trie/find-or-create-rule
       "f t" 'trie/find-or-create-type
@@ -56,7 +57,7 @@
       "l t" 'trie/list-types
       "l c" 'trie/list-crosscuts
       "l s" 'trie/list-sequences
-      "?"   'trie/help-hydra
+      "?"   'spacemacs/trie-help-hydra-transient-state/body
       )
     (evil-define-key 'normal trie-mode-map
       (kbd "#") 'trie/insert-tag
@@ -80,7 +81,7 @@
       "l t" 'trie/list-types
       "l c" 'trie/list-crosscuts
       "l s" 'trie/list-sequences
-      "?"   'trie/help-hydra
+      "?"   'spacemacs/trie-help-hydra-transient-state/body
       )
     (evil-define-key 'normal trie-passive-mode-map
       (kbd "<") 'trie/decrement-visual-layer
@@ -102,7 +103,7 @@
       "l t" 'trie/list-types
       "l c" 'trie/list-crosscuts
       "l s" 'trie/list-sequences
-      "?"   'trie/help-hydra
+      "?"   'spacemacs/trie-help-hydra-transient-state/body
       )
     )
 
@@ -200,6 +201,7 @@
             :action (helm-make-actions "Open Rule" 'trie/find-rule)
             :candidates 'trie/get-rule-helm-candidates
             )
+          ;;--------------------
           trie/rule-helm-dummy-source
           (helm-make-source "Rule Dummy Helm" 'helm-source-dummy
             :action (helm-make-actions "Create Rule" 'trie/create-rule)

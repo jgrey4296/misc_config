@@ -7,3 +7,5 @@ auto-save-list/
 ac-comphist.dat
 .DS_Store
 tw_acct.index
+tw_tag.index
+log.*

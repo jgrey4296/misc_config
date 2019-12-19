@@ -1,10 +1,16 @@
 ;; trie funcs.el
 ;; loaded third.
 
+;;Utilities
 (defun trie/trie-ide-running-p ()
   " Tests whether the ide is running or not "
   trie/trie-ide-is-running
   )
+(defun trie/no-op ()
+  (interactive)
+  )
+
+;;Startup and Cleanup
 (defun trie/toggle-trie-ide ()
   (interactive)
   (if (trie/trie-ide-running-p)
@@ -16,10 +22,10 @@
   (interactive)
   ;; Get the directory to work with
   (let ((location (read-file-name "Institution Location:"))
-        (windows (trie/setup-trie-mode-windows))
+        (windows (trie/build-ide-window-layout))
         inst-name
-        inst-buffer
         )
+
 
     ;;if a dir chosen, get a name for the
     ;;inst, create a stub, create a data dir
@@ -38,37 +44,11 @@
               )
         ))
 
-    ;;TODO: If doesn't exist, make the data location subdirectories
-    (if (not (f-exists? trie/ide-data-loc))
-        (progn (mkdir trie/ide-data-loc)
-               (mapc (lambda (x) (mkdir (f-join trie/ide-data-loc x)))
-                     (list "rules" "types" "crosscuts" "patterns" "tests"))
-               )
-      )
+    (setq trie/ide-pipeline-spec-buffer (format "%s.org" inst-name))
+    (trie/maybe-build-data-loc)
+    (trie/init-ide-buffers-contents location inst-name)
 
-    ;;create inst stub
-    (if (not (f-exists? (f-join location (format "%s.org" inst-name))))
-        (progn
-          (setq inst-buffer (create-file-buffer (f-join location (format "%s.org" inst-name))))
-          (with-current-buffer inst-buffer
-            ;; insert default institution contents
-            (trie-mode)
-            (org-mode)
-            (yas-expand-snippet (yas-lookup-snippet "pipeline" 'trie-mode))
-            (write-file (f-join location (format "%s.org" inst-name)))
-            )
-          )
-      (setq inst-buffer (find-file (f-join location (format "%s.org" inst-name))))
-      )
-
-    (trie/load-directory-and-pipeline inst-buffer trie/ide-data-loc)
-
-    (window--display-buffer (generate-new-buffer trie/inputs-buffer-name)  (plist-get windows :prior)'window)
-    (window--display-buffer (generate-new-buffer trie/outputs-buffer-name)  (plist-get windows :post) 'window)
-    (window--display-buffer (generate-new-buffer "rule")  (plist-get windows :rule) 'window)
-    (window--display-buffer inst-buffer (plist-get windows :miscL) 'window)
-    (window--display-buffer (generate-new-buffer trie/logging-buffer-name)  (plist-get windows :miscR) 'window)
-    (window--display-buffer (generate-new-buffer trie/working-group-buffer-name)  (plist-get windows :miscC) 'window)
+    (trie/load-directory-and-pipeline trie/ide-data-loc)
     ;;Save the window configuration
     (setq trie/window-confguration (current-window-configuration))
     ;;start python server
@@ -87,13 +67,71 @@
   (trie/dump-to-files)
   (setq trie/trie-ide-running nil)
   )
+
+;;Directory and buffer initialisation
+(defun trie/maybe-build-data-loc ( )
+  ;;TODO: If doesn't exist, make the data location subdirectories
+  (if (not (f-exists? trie/ide-data-loc))
+      (progn (mkdir trie/ide-data-loc)
+             (mapc (lambda (x) (mkdir (f-join trie/ide-data-loc x)))
+                   trie/data-loc-subdirs)
+             )
+    )
+  )
+(defun trie/init-ide-buffers-contents (location inst-name)
+  ;;create inst stub
+  (if (not (f-exists? (f-join location trie/ide-pipeline-spec-buffer)))
+      (progn
+        (with-current-buffer (get-buffer-create trie/ide-pipeline-spec-buffer)
+          ;; insert default institution contents
+          (trie-mode)
+          (org-mode)
+          (yas-expand-snippet (yas-lookup-snippet "pipeline" 'trie-mode))
+          (write-file (f-join location trie/ide-pipeline-spec-buffer))
+          )
+        )
+    )
+
+
+  (window--display-buffer (find-file (f-join location trie/ide-pipeline-spec-buffer)) (plist-get windows :miscL) 'window)
+  (window--display-buffer (generate-new-buffer "rule_stub")  (plist-get windows :rule) 'window)
+  (window--display-buffer (get-buffer-create trie/inputs-buffer-name)  (plist-get windows :prior)'window)
+  (window--display-buffer (get-buffer-create trie/outputs-buffer-name)  (plist-get windows :post) 'window)
+  (window--display-buffer (get-buffer-create trie/logging-buffer-name)  (plist-get windows :miscR) 'window)
+  (window--display-buffer (get-buffer-create trie/working-group-buffer-name)  (plist-get windows :miscC) 'window)
+
+  (trie/build-working-group-buffer)
+  (with-current-buffer "rule_stub"
+    (trie-mode)
+    (yas-expand-snippet (yas-lookup-snippet "rule" 'trie-mode) (point-min))
+    )
+
+  (with-current-buffer trie/inputs-buffer-name
+    (insert "AVAILABLE INPUTS:\n\n\n")
+    )
+  (with-current-buffer trie/outputs-buffer-name
+    (insert "AVAILABLE OUTPUTS:\n\n\n")
+    )
+  (with-current-buffer trie/logging-buffer-name
+    (insert "LOGGING:\n\n\n")
+    )
+  )
+(defun trie/build-working-group-buffer ()
+  (with-current-buffer trie/working-group-buffer-name
+    (org-mode)
+    (insert "* Working Group\n")
+    (mapc (lambda (x) (insert "** " x ":\n")) trie/working-group-buffer-headings)
+    )
+  )
+
+;;Window setup
 (defun trie/reset-windows ()
   (interactive)
   (if (and (trie/trie-ide-running-p) (window-configuration-p trie/window-configuration))
       (set-window-configuration trie/window-configuration)
     )
   )
-(cl-defun trie/setup-trie-mode-windows ()
+(cl-defun trie/build-ide-window-layout ()
   """ Setup rule editing windows """
   ;; (terminals - ) priors - rule - posts (terminals)
   ;;                       defeaters
@@ -123,7 +161,9 @@
   ;; For Terminals:
   (display-buffer-in-side-window buffer `((side . ,(if left 'left 'right))))
   )
-(defun trie/load-directory-and-pipeline (inst-buffer loc)
+
+;;Loading and saving files
+(defun trie/load-directory-and-pipeline (loc)
   " Given a location, load into ide "
   (let ((files (f-files loc nil t)))
     (loop for file in files do
@@ -147,12 +187,93 @@
 
 
   )
+
+(defun trie/load-rule (x)
+  (message "loading %s" x)
+  (with-temp-buffer
+    (insert-file-contents x)
+    (goto-char (point-min))
+    (org-mode)
+    ;;parse and store information
+    ;;(org-map-tree trie/parse-rule)
+    )
+  )
+(defun trie/load-type (x)
+  (message "loading %s" x)
+  (with-temp-buffer
+    (insert-file-contents x)
+    (goto-char (point-min))
+    (org-mode)
+    ;;parse and store information
+    )
+  )
+(defun trie/load-crosscut (x)
+  (message "loading %s" x)
+  (with-temp-buffer
+    (insert-file-contents x)
+    (goto-char (point-min))
+    (org-mode)
+    ;;parse and store information
+    )
+  )
+(defun trie/load-pattern (x)
+  (message "loading %s" x)
+  (with-temp-buffer
+    (insert-file-contents x)
+    (goto-char (point-min))
+    (org-mode)
+    ;;parse and store information
+    )
+  )
+(defun trie/load-test (x)
+  (message "loading %s" x)
+  (with-temp-buffer
+    (insert-file-contents x)
+    (goto-char (point-min))
+    (org-mode)
+    ;;parse and store information
+    )
+  )
+
+(defun trie/parse-rule (x)
+  ;;Get the heading
+  ;;get name
+  ;;Get tags
+  ;;Get conditions
+  ;;Get actions
+  )
+(defun trie/parse-type (x)
+  ;;Get name
+  ;;Get structure
+  ;;Get variables?
+  ;;Get Tags
+  )
+(defun trie/parse-crosscut (x)
+  ;;Get Name
+  ;;get type
+  ;;call subparser
+  )
+(defun trie/parse-pattern (x)
+  ;;Get Name
+  ;;Get Variables
+  ;;Get tags
+
+  )
+(defun trie/parse-test (x)
+  ;;Get name
+  ;;Get states
+  ;;Get Tags
+  )
+
+;;Python subprocess
 (defun trie/run-python-server ()
   "Start a subprocess of python, loading the rule engine
-ready to set the pipeline and rulesets, and to test" 
+ready to set the pipeline and rulesets, and to test"
 
 
   )
+
+;;Testing
 (defun trie/trigger-tests ()
   " Trigger a Bank of tests "
   (interactive)
@@ -164,10 +285,8 @@ ready to set the pipeline and rulesets, and to test"
 
 
   )
-(defun trie/no-op ()
-  (interactive)
-  )
 
+;;Folding:
 ;; (defun trie/toggle-all-defs ()
 ;;   (interactive)
 ;;   ;; goto start of file

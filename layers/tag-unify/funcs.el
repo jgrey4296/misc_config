@@ -402,7 +402,7 @@ to point to a single new line"
                )))))
 (defun tag-unify/find-file (x)
   (let ((files (if (helm-marked-candidates) (helm-marked-candidates) (list x))))
-    (mapc 'find-file files)
+    (mapc 'find-file (mapcar 'string-trim files))
     )
   )
 

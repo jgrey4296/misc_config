@@ -34,7 +34,7 @@
   )
 (defun trie/find-or-create-type ()
   (interactive)
-)
+  )
 (defun trie/find-or-create-crosscut ()
   (interactive)
   )
@@ -83,6 +83,28 @@
   )
 (defun trie/show-analysis-results ())
 (defun trie/show-side-buffer ())
+(defun trie/write-io-info-buffer (data target)
+  "Insert new data into IO buffers"
+  (with-current-buffer (cond ((eq :input target)
+                              trie/inputs-buffer-name)
+                             ((eq :output target)
+                              trie/outputs-buffer-name)
+                             (t nil))
+    ;;Clear
+    (jg_layer/clear-buffer)
+    ;;Insert header + layer
+    (insert (format "* Available %s:\n" (cond ((eq :input target)
+                                              "Inputs")
+                                             ((eq :output target)
+                                              "Outputs"))))
+
+    ;;Insert data strings
+    (loop for x in (plist-get data :list) do
+          (insert (format "  %s\n" x)) ;;Maybe propertize
+          )
+    )
+  )
+
 ;;UPDATE
 (defun trie/update-buffer-contents ()
   (interactive)
@@ -107,5 +129,3 @@
 (defun trie/write-rules-to-files ())
 ;;Analysis
 (defun trie/analyse-data ())
-
-

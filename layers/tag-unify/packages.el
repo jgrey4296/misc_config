@@ -7,6 +7,7 @@
                                dired
                                evil
                                (tag-clean-minor-mode :location local)
+                               (tag-mode :location local)
                                )
   )
 
@@ -229,4 +230,11 @@
                 )
               )
     )
+  )
+
+(defun tag-unify/init-tag-mode ()
+  (use-package tag-mode
+    :commands (tag-mode)
+    )
+
   )

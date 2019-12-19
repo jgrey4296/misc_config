@@ -522,13 +522,11 @@ already used tag keywords are in the thread"
           )
     )
   )
-
 (defun tag-unify/auto-tag-this-file ()
   (interactive)
   (goto-char (point-min))
   (org-map-tree 'tag-unify/auto-tag-thread)
   )
-
 (defun tag-unify/auto-tag-file (x)
   "Given a file, load it and process each thread"
   (with-temp-buffer
@@ -538,7 +536,6 @@ already used tag keywords are in the thread"
     (org-map-tree 'tag-unify/auto-tag-thread)
     )
   )
-
 (defun tag-unify/auto-tag-thread ()
   "Called on each heading of a file, only run
 for headings of depth 2
@@ -726,7 +723,6 @@ and insert the car "
    nil
    )
   )
-
 (defun tag-unify/org-tagged-p  (filename)
   (with-temp-buffer
     (insert-file-contents filename)
@@ -774,6 +770,53 @@ and insert the car "
                  (insert "\n")
                  ) index-hash)
       (write-file tag-unify/twitter-account-index t)
+      )
+    )
+  (message "Finished writing file")
+  )
+(defun tag-unify/index-tags()
+  (interactive)
+  ;; Get all org files
+  (let ((all-orgs (directory-files-recursively (dired-current-directory) "\.org"))
+        (index-hash (make-hash-table :test 'equal))
+        (inserted-for-file (make-hash-table :test 'equal))
+        (curr-d (dired-current-directory))
+        )
+    (message "Found %s org files" (length all-orgs))
+    ;; For each org collect tags in file
+    (cl-loop for filename in all-orgs
+             do (with-temp-buffer
+                  (org-mode)
+                  (clrhash inserted-for-file)
+                  (insert-file filename)
+                  (goto-char (point-min))
+                  ;;Get tags:
+                  (while (re-search-forward "^\\*\\* " nil t)
+                    (let ((tags (org-get-tags)))
+                      (mapc (lambda (x)
+                              (if (null (gethash x inserted-for-file))
+                                  (progn (puthash x t inserted-for-file)
+                                         (if (null (gethash x index-hash))
+                                             (puthash x '() index-hash))
+                                         (push filename (gethash x index-hash))
+                                         )
+                                )
+                              )
+                            tags)
+                      )
+                    )
+                  )
+             )
+    ;; create index
+    (message "Accumulated %s tags" (length (hash-table-keys index-hash)))
+    (with-temp-buffer
+      (maphash (lambda (k v)
+                 (insert (format "%s "k))
+                 (mapc (lambda (x)
+                         (insert (format ":%s" x))) v)
+                 (insert "\n")
+                 ) index-hash)
+      (write-file tag-unify/twitter-tag-index t)
       )
     )
   (message "Finished writing file")

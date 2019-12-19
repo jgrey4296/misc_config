@@ -34,11 +34,11 @@
   (defun jg_org/change_link_name (name)
     """ Change the name of a link """
     (interactive "s")
-    (let ((re org-bracket-link-regexp))
+    (let ((re org-link-bracket-re))
       (save-excursion
         (beginning-of-line)
         (search-forward-regexp re (line-end-position))
-        (replace-match name nil nil nil 3)
+        (replace-match name nil nil nil 2)
         )
       )
     )

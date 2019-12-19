@@ -8,6 +8,7 @@
     (trie-mode :location local)
     (trie-sequence-mode :location local)
     (trie-explore-mode :location local)
+    (trie-minor-mode :location local)
     (parsec :location elpa :step pre)
     (font-lock+ :location (recipe :fetcher git :url "https://github.com/emacsmirror/font-lock-plus"))
     helm
@@ -213,5 +214,31 @@
           :full-frame t
           :buffer "*Rule Helm*"
           )
+    )
   )
-)
+
+(defun trie/init-trie-minor-mode ()
+  (message "Activating trie minor mode")
+  (use-package trie-minor-mode
+    :commands (trie-minor-mode)
+    :config
+    (spacemacs/set-leader-keys-for-minor-mode 'trie-minor-mode
+      "f r" 'trie/rule-helm
+      "f t" 'trie/find-or-create-type
+      "f c" 'trie/find-or-create-crosscut
+      "f s" 'trie/find-or-create-sequence
+      "d r" 'trie/delete-rule
+      "d t" 'trie/delete-type
+      "d c" 'trie/delete-crosscut
+      "d s" 'trie/delete-sequence
+      "l r" 'trie/list-rules
+      "l t" 'trie/list-types
+      "l c" 'trie/list-crosscuts
+      "l s" 'trie/list-sequences
+      "?"   'spacemacs/trie-help-hydra-transient-state/body
+      )
+    (evil-define-minor-mode-key 'normal 'trie-minor-mode
+      (kbd "b") 'trie-minor/test-fun
+      )
+    )
+  )

@@ -156,7 +156,7 @@
 ;;--------------------
 ;;Autoloading
 ;;--------------------
-(add-to-list 'auto-mode-alist '("\\.trie\\'" . trie-mode))
+(add-to-list 'auto-mode-alist '("\\.rule\\'" . trie-mode))
 
 
 (defun trie-syntactic-face-function (parse-state)

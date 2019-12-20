@@ -761,6 +761,14 @@ and either copy, or move, the the referenced file to a new location"
     )
   )
 
+(defun tag-unify/find-random-marked-file ()
+  (interactive)
+  (let ((marked (dired-get-marked-files)))
+    (find-file (nth (random (length marked))
+                    marked))
+
+    )
+  )
 
 ;; Indexing
 (defun tag-unify/index-people ()

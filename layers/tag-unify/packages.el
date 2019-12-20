@@ -193,6 +193,7 @@
     "!" 'tag-unify/chop-long-files-from-dired
     "B" 'tag-unify/unify-pdf-locations
     "t" 'tag-unify/mark-untagged-orgs
+    "r" 'tag-unify/find-random-marked-file
     )
   )
 (defun tag-unify/post-init-evil ()

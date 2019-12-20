@@ -735,6 +735,32 @@ and insert the car "
     )
   )
 
+(defun tag-unify/move-links ()
+  " Go through all links in a file,
+and either copy, or move, the the referenced file to a new location"
+  (interactive)
+  (let ((target (read-directory-name "Move To: "
+                                     "/Volumes/Overflow/missing_images/"))
+        (action (if current-prefix-arg 'copy-file 'rename-file))
+        link
+        )
+    (if (not (file-exists-p target))
+        (progn (message "Making: %s" target)
+               (mkdir target))
+      )
+    (message "Process Type: %s" action)
+    (goto-char (point-min))
+    (while (eq t (org-next-link))
+      (setq link (plist-get (plist-get (org-element-context) 'link) :path))
+      (message "Processing: %s" link)
+      (if (not (f-exists? (f-join target (-last-item (f-split link)))))
+          (funcall action link target)
+        (message "Already Exists"))
+
+      )
+    )
+  )
+
 
 ;; Indexing
 (defun tag-unify/index-people ()

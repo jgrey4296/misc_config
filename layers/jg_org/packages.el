@@ -48,8 +48,8 @@
                       (kbd "g k") 'org-backward-heading-same-level
                       (kbd "g l") 'jg_org/open_link_in_buffer
                       (kbd "g L") 'jg_org/open_link_externally
-                      (kbd "] k") 'org-next-link
-                      (kbd "[ k") 'org-previous-link
+                      (kbd "] p") 'org-next-link
+                      (kbd "[ p") 'org-previous-link
                       )
     )
   (defun jg_org/helm-org-hook ()

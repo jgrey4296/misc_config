@@ -393,7 +393,7 @@ to point to a single new line"
     (save-excursion
       (goto-char (car tag-unify/tag-unify-region))
       (setq prior-point (- (point) 1))
-      (while (and (/= prior-point (point)) (< (line-number-at-pos (point)) end-line))
+      (while (and (/= prior-point (point)) (<= (line-number-at-pos (point)) end-line))
         (progn (setq current-tags (org-get-tags nil t)
                      prior-point (point))
                (mapc add-func actual-candidates)
@@ -407,69 +407,124 @@ to point to a single new line"
   )
 
 ;; tags
-(defun tag-unify/org-count-buffer-tags ()
-  (save-excursion ;;store where you are in the current
-    (goto-char (point-min))
-    ;;where to store tags:
-    (let ((tag-set (make-hash-table :test 'equal)))
-      ;;match all
-      (while (not (eq nil (re-search-forward ":\\([[:graph:]]+\\):\\(\.\.\.\\)?\$" nil t)))
-        ;;split tags into list
-        (let* ((tags (split-string (match-string-no-properties 0) ":" t ":"))
-               (filtered (seq-filter (lambda (x) (not (or (string-equal x "PROPERTIES")
-                                                          (string-equal x "END")
-                                                          (string-equal x "DATE")
-                                                          ))) tags)))
-          ;;increment counts
-          (mapc (lambda (x) (puthash x (+ 1 (gethash x tag-set 0)) tag-set)) filtered)
-          )
+(defun tag-unify/get-buffer-tags (&optional name depth)
+  (let ((tag-set (make-hash-table :test 'equal))
+        (tagdepth-p (if (and depth (> depth 0)) (lambda (x) (eq depth x)) 'identity))
         )
-      tag-set
+    ;; (message "Get buffer tags: %s %s" name tagdepth-p)
+    (with-current-buffer (if name name (current-buffer))
+      (save-excursion ;;store where you are in the current
+        (goto-char (point-min))
+        ;;where to store tags:
+        ;;split tags into list
+        (mapc (lambda (x) (incf (gethash x tag-set 0)))
+              ;;TODO: fix tag depth filtering
+              (-flatten
+               (org-map-entries (lambda () (if (funcall tagdepth-p (car (org-heading-components)))
+                                               (org-get-tags nil t) '())))))
+        tag-set
+        )
+      )
+    )
+  )
+(defun tag-unify/get-file-tags (filename &optional depth)
+  (let ((tagcounts (make-hash-table :test 'equal))
+        (tagdepth-p (if (and depth (> depth 0)) (lambda (x) (eq depth x)) 'identity))
+        raw-tags
+        )
+    (message "Get file tags: %s %s" filename depth)
+    (with-temp-buffer
+      (insert-file filename)
+      (org-mode)
+      (goto-char (point-min))
+      (setq raw-tags (org-map-entries (lambda () (if (funcall tagdepth-p (car (org-heading-components))) (org-get-tags nil t) '()))))
+      )
+    (mapc (lambda (x) (incf (gethash x tagcounts 0))) (-flatten raw-tags))
+    tagcounts
+    )
+  )
+
+(defun tag-unify/tag-occurrences ()
+  " Create a Bar Chart of Tags in the current buffer "
+  (interactive)
+  (let* ((depth-arg evil-ex-argument)
+         (depth (if depth-arg (string-to-number depth-arg) nil))
+         (alltags (make-hash-table :test 'equal))
+         )
+    (if (eq 'org-mode major-mode)
+        (progn
+          (message "Getting Tags for all buffers to depth: %s" depth)
+          (maphash (lambda (k v) (incf (gethash k alltags 0) v)) (tag-unify/get-buffer-tags nil depth))
+          (if (not (hash-table-empty-p alltags))
+              (tag-unify/chart-tag-counts alltags (buffer-name))
+            (message "No Tags in buffer")))
+      (message "Not in an org buffer")
       )
     )
   )
 (defun tag-unify/tag-occurrences-in-open-buffers()
   """ retrieve all tags in all open buffers, print to a temporary buffer """
-  (interactive)
+  (interactive "p")
   (let* ((allbuffers (buffer-list))
          (alltags (make-hash-table :test 'equal))
-         (hashPairs nil)
-         (sorted '())
-         (maxTagLength 0)
-         (maxTagAmnt 0))
-    (gap 'list (lambda (bufname)
-                 ;; TODO quit on not an org file
-                 (with-current-buffer bufname
-                   (let ((buftags (tag-unify/org-count-buffer-tags)))
-                     (maphash (lambda (k v)
-                                (puthash k (+ v (gethash k alltags 0)) alltags))
-                              buftags)
-                     ))) allbuffers)
-    (setq hashPairs (-zip (hash-table-keys alltags) (hash-table-values alltags)))
-    (if hashPairs (progn
-                    (setq sorted (sort hashPairs (lambda (a b) (> (cdr a) (cdr b)))))
-                    (setq maxTagLength (apply `max (mapcar (lambda (x) (length (car x))) sorted)))
-                    (setq maxTagAmnt (apply `max (mapcar (lambda (x) (cdr x)) sorted)))
-                    ))
-    (with-temp-buffer-window "*Tags*"
-                             nil
-                             nil
-                             (mapc (lambda (x) (princ (format "%s\n" x)))
-                                   (tag-unify/make-bar-chart sorted maxTagLength maxTagAmnt))
-                             )
-    (tag-unify/org-format-temp-buffer "*Tags*" "All Files")
+         (depth (if depth-arg (string-to-number depth-arg) nil))
+         )
+    (message "Getting Tags for all buffers to depth: %s" depth)
+    (loop for x in allbuffers do
+          (if (with-current-buffer x (eq 'org-mode major-mode))
+              (maphash (lambda (k v) (if (not (gethash k alltags)) (puthash k 0 alltags))
+                         (incf (gethash k alltags) v)) (tag-unify/get-buffer-tags x depth))
+            )
+          )
+    (if (not (hash-table-empty-p alltags))
+        (tag-unify/chart-tag-counts alltags "Active Files")
+      (message "No Tags in buffers"))
     )
   )
-(defun tag-unify/tag-occurrences ()
-  """ Count all occurrences of all tags and bar chart them """
+(defun tag-unify/describe-marked-tags ()
   (interactive)
-  ;;save eventually to a new buffer
-  (let* ((tag-set (tag-unify/org-count-buffer-tags))
-         (hashPairs (-zip (hash-table-keys tag-set) (hash-table-values tag-set)))
+  (let ((marked (dired-get-marked-files))
+        (targetdepth current-prefix-arg)
+        (alltags (make-hash-table :test 'equal))
+        )
+    (message "Describing marked file tags to depth: %s" targetdepth)
+    (loop for x in marked do
+          (maphash (lambda (k v) (incf (gethash k alltags 0) v)) (tag-unify/get-file-tags x targetdepth))
+          )
+    (if (not (hash-table-empty-p alltags))
+        (tag-unify/chart-tag-counts alltags "Dired Marked Files")
+      (message "No Tags in Files")
+      )
+    )
+  )
+
+(defun tag-unify/mark-untagged-orgs ()
+  (interactive)
+  (dired-map-over-marks
+   (progn (if (or (not (f-ext? (dired-get-filename) "org"))
+                  (tag-unify/org-tagged-p (dired-get-filename)))
+              (dired-unmark 1)))
+   nil
+   )
+  )
+(defun tag-unify/org-tagged-p  (filename)
+  (with-temp-buffer
+    (insert-file-contents filename)
+    (goto-char (point-min))
+    (org-mode)
+    (let* ((mapped (org-map-entries (lambda () `(,(car (org-heading-components)) ,(org-get-tags nil t)))))
+           (filtered (seq-filter (lambda (x) (and (eq 2 (car x)) (null (cadr x)))) mapped)))
+      (seq-empty-p filtered)
+      )
+    )
+  )
+
+(defun tag-unify/chart-tag-counts (counthash name)
+  ;; (message "Charting: %s %s" counthash name)
+  (let* ((hashPairs (-zip (hash-table-keys counthash) (hash-table-values counthash)))
          (sorted (sort hashPairs (lambda (a b) (> (cdr a) (cdr b)))))
-         (maxTagLength (apply `max (mapcar (lambda (x) (length (car x))) sorted)))
-         (maxTagAmnt (apply `max (mapcar (lambda (x) (cdr x)) sorted)))
-         (curr-buffer (buffer-name))
+         (maxTagLength (apply 'max (mapcar (lambda (x) (length (car x))) sorted)))
+         (maxTagAmnt (apply 'max (mapcar (lambda (x) (cdr x)) sorted)))
          )
     ;;print them all out
 
@@ -480,9 +535,10 @@ to point to a single new line"
                              (mapc (lambda (x) (princ (format "%s\n" x)))
                                    (tag-unify/make-bar-chart sorted maxTagLength maxTagAmnt))
                              )
-    (tag-unify/org-format-temp-buffer "*Tags*" curr-buffer)
+    (tag-unify/org-format-temp-buffer "*Tags*" name)
     )
   )
+
 (defun tag-unify/set-tags (x)
   (if (eq major-mode 'bibtex-mode)
       (tag-unify/bibtex-set-tags x)
@@ -545,7 +601,7 @@ add matches to thread tags
   (message "Auto Tagging thread: %s" (org-get-heading))
   (let ((depth (car (org-heading-components)))
         (to-tag-list (make-hash-table :test 'equal))
-        (curr-tags (org-get-tags))
+        (curr-tags (org-get-tags nil t))
         words)
     (if (eq depth 2)
         (progn
@@ -601,7 +657,7 @@ add matches to thread tags
      )))
 (defun tag-unify/tag-unify-candidates ()
   """ Given Candidates, colour them if they are assigned, then sort them  """
-  (let* ((buffer-cand-tags (tag-unify/org-count-buffer-tags))
+  (let* ((buffer-cand-tags (tag-unify/get-buffer-tags))
          (global-tags tag-unify/global-tags))
     (if (not (hash-table-empty-p global-tags))
         (let* ((cand-keys (hash-table-keys global-tags))
@@ -632,29 +688,32 @@ add matches to thread tags
          (maxTagLength-bounded (min 40 maxTagLength))
          (max-column (- fill-column (+ 3 maxTagLength-bounded maxTagStrLen 3 3)))
          (bar-div (/ (float max-column) maxTagAmnt)))
-    (mapcar (lambda (x)
-              (let* ((tag (car x))
-                     (tag-len (length tag))
-                     (tag-cut-len (min tag-len (- maxTagLength-bounded 3)))
-                     (tag-truncated-p (> tag-len (- maxTagLength-bounded 3)))
-                     (tag-substr (string-join `(,(substring tag nil tag-cut-len)
-                                                ,(if tag-truncated-p "..."))))
-                     (tag-final-len (length tag-substr))
-                     (amount (cdr x))
-                     (amount-str (number-to-string amount))
-                     (sep-offset (- (+ 3 maxTagLength-bounded) tag-final-len))
-                     (amount-offset (- maxTagStrLen (length amount-str)))
-                     (bar-len (ceiling (* bar-div amount)))
-                     )
-                (string-join `(,tag-substr
-                               ,(make-string sep-offset ?\ )
-                               " : "
-                               ,amount-str
-                               ,(make-string amount-offset ?\ )
-                               " : "
-                               ,(make-string bar-len ?=)
-                               ;; "\n"
-                               )))) data)))
+    (mapcar 'tag-unify/bar-chart-line data)))
+
+(defun tag-unify/bar-chart-line (x)
+  (let* ((tag (car x))
+         (tag-len (length tag))
+         (tag-cut-len (- maxTagLength-bounded 3))
+         (tag-truncated-p (> tag-len maxTagLength-bounded))
+         (tag-substr (if tag-truncated-p (string-join `(,(substring tag nil tag-cut-len) "..."))
+                       tag))
+         (tag-final-len (length tag-substr))
+         (amount (cdr x))
+         (amount-str (number-to-string amount))
+         (sep-offset (- (+ 3 maxTagLength-bounded) tag-final-len))
+         (amount-offset (- maxTagStrLen (length amount-str)))
+         (bar-len (ceiling (* bar-div amount)))
+         )
+    (string-join `(,tag-substr
+                   ,(make-string sep-offset ?\ )
+                   " : "
+                   ,amount-str
+                   ,(make-string amount-offset ?\ )
+                   " : "
+                   ,(make-string bar-len ?=)
+                   ;; "\n"
+                   )))
+  )
 (defun tag-unify/org-format-temp-buffer (name source_name)
   (with-current-buffer name
     (org-mode)
@@ -714,27 +773,6 @@ and insert the car "
     )
   )
 
-(defun tag-unify/mark-untagged-orgs ()
-  (interactive)
-  (dired-map-over-marks
-   (progn (if (or (not (f-ext? (dired-get-filename) "org"))
-                  (tag-unify/org-tagged-p (dired-get-filename)))
-              (dired-unmark 1)))
-   nil
-   )
-  )
-(defun tag-unify/org-tagged-p  (filename)
-  (with-temp-buffer
-    (insert-file-contents filename)
-    (goto-char (point-min))
-    (org-mode)
-    (let* ((mapped (org-map-entries (lambda () `(,(car (org-heading-components)) ,(org-get-tags)))))
-           (filtered (seq-filter (lambda (x) (and (eq 2 (car x)) (null (cadr x)))) mapped)))
-      (seq-empty-p filtered)
-      )
-    )
-  )
-
 (defun tag-unify/move-links ()
   " Go through all links in a file,
 and either copy, or move, the the referenced file to a new location"
@@ -766,9 +804,11 @@ and either copy, or move, the the referenced file to a new location"
   (let ((marked (dired-get-marked-files)))
     (find-file (nth (random (length marked))
                     marked))
-
     )
   )
+
+
+
 
 ;; Indexing
 (defun tag-unify/index-people ()
@@ -826,7 +866,7 @@ and either copy, or move, the the referenced file to a new location"
                   (goto-char (point-min))
                   ;;Get tags:
                   (while (re-search-forward "^\\*\\* " nil t)
-                    (let ((tags (org-get-tags)))
+                    (let ((tags (org-get-tags nil t)))
                       (mapc (lambda (x)
                               (if (null (gethash x inserted-for-file))
                                   (progn (puthash x t inserted-for-file)

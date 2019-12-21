@@ -194,15 +194,19 @@
     "B" 'tag-unify/unify-pdf-locations
     "t" 'tag-unify/mark-untagged-orgs
     "r" 'tag-unify/find-random-marked-file
+    "d" 'tag-unify/describe-marked-tags
     )
   )
 (defun tag-unify/post-init-evil ()
+
+
   (evil-ex-define-cmd "t[ag]" 'tag-unify/tag-unify-helm-start)
   (evil-ex-define-cmd "to" 'tag-unify/tag-occurrences)
   (evil-ex-define-cmd "toa" 'tag-unify/tag-occurrences-in-open-buffers)
   (evil-ex-define-cmd "tv"  'org-tags-view)
   (evil-ex-define-cmd "ts"  'org-set-tags)
   )
+
 (defun tag-unify/init-tag-clean-minor-mode ()
   (use-package tag-clean-minor-mode
     :defer t

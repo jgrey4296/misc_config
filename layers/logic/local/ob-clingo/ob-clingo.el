@@ -73,8 +73,7 @@ This function is called by `org-babel-execute-src-block.'"
          (results (if (string= "none" session)
                       (org-babel-clingo-evaluate-external-process
                        goal full-body params)
-                    (org-babel-clingo-evaluate-session
-                     session goal full-body))))
+                    (message "Clingo doesn't work as a session"))))
     (unless (string= "" results)
       (org-babel-reassemble-table
        (org-babel-result-cond result-params
@@ -86,81 +85,6 @@ This function is called by `org-babel-execute-src-block.'"
                             (cdr (assq :colnames params)))
        (org-babel-pick-name (cdr (assq :rowname-names params))
                             (cdr (assq :rownames params)))))))
-
-(defun org-babel-clingo-evaluate-session (session goal body)
-  "In SESSION, evaluate GOAL given the BODY of the Clingo block.
-Create SESSION if it does not already exist."
-  (error "Clingo session not yet implemented")
-  (let* ((session (org-babel-clingo-initiate-session session))
-         (body (split-string (org-babel-trim body) "\n")))
-    (with-temp-buffer
-      (apply #'insert (org-babel-clingo--session-load-clauses session body))
-      (if (save-excursion
-            (search-backward "ERROR: " nil t))
-          (progn
-            (save-excursion
-              (while (search-backward "|: " nil t)
-                (replace-match "" nil t)))
-            (search-backward "true." nil t)
-            (kill-whole-line)
-            (org-babel-eval-error-notify -1 (buffer-string))
-            (buffer-string))
-        (when goal
-          (kill-region (point-min) (point-max))
-          (apply #'insert
-                 (org-babel-comint-with-output (session "")
-                   (insert (concat goal ", !."))
-                   (comint-send-input nil t))))
-        (if (not (save-excursion
-                   (search-backward "ERROR: " nil t)))
-            (let ((delete-trailing-lines t))
-              (delete-trailing-whitespace (point-min))
-              (org-babel-trim (buffer-string)))
-          ;;(search-backward "?-" nil t)
-          ;;(kill-whole-line)
-          (org-babel-eval-error-notify -1 (buffer-string))
-          (org-babel-trim (buffer-string)))))))
-(defun org-babel-clingo-initiate-session (&optional session)
-  "Return SESSION with a current inferior-process-buffer.
-
-Initialize SESSION if it has not already been initialized."
-  (unless  (equal "none" session)
-    (let ((session (get-buffer-create (or session "*clingo*"))))
-      (unless (comint-check-proc session)
-        (with-current-buffer session
-          (kill-region (point-min) (point-max))
-          (prolog-inferior-mode)
-          (apply #'make-comint-in-buffer
-                 "clingo"
-                 (current-buffer)
-                 org-babel-clingo-command
-                 nil
-                 (cons "-q" (clingo-program-switches)))
-          (add-hook 'comint-output-filter-functions
-                    #'org-babel-clingo--answer-correction nil t)
-          (add-hook 'comint-output-filter-functions
-                    #'org-babel-clingo--exit-debug nil t)
-          (add-hook 'comint-preoutput-filter-functions
-                    #'ansi-color-apply nil t)
-          (while (progn
-                   (goto-char comint-last-input-end)
-                   (not (save-excursion
-                          (re-search-forward comint-prompt-regexp nil t))))
-            (accept-process-output
-             (get-buffer-process session)))))
-      session)))
-(defun org-babel-clingo--session-load-clauses (session clauses)
-  (with-current-buffer session
-    (setq comint-prompt-regexp "^|: *"))
-  (org-babel-comint-input-command session "consult(user).\n")
-  (org-babel-comint-with-output (session "\n")
-    (setq comint-prompt-regexp (clingo-prompt-regexp))
-    (dolist (line clauses)
-      (insert line)
-      (comint-send-input nil t)
-      (accept-process-output
-       (get-buffer-process session)))
-    (comint-send-eof)))
 
 (defun org-babel-clingo-evaluate-external-process (goal body params)
   "Evaluate the GOAL given the BODY in an external Clingo process.
@@ -186,7 +110,7 @@ STDERR with `org-babel-eval-error-notify'.
 NOTE: CLINGO DOESN'T USE NORMAL EXIT CODES
 see: https://www.mat.unical.it/aspcomp2013/files/aspoutput.txt
 "
-  (let ((err-buff (get-buffer-create " *Org-Babel Error*")) exit-code)
+  (let ((err-buff (get-buffer-create "*Org-Babel Error*")) exit-code)
     (with-current-buffer err-buff (erase-buffer))
     (with-temp-buffer
       (insert body)
@@ -221,6 +145,7 @@ see: https://www.mat.unical.it/aspcomp2013/files/aspoutput.txt
   (when (string-match-p "\\(.\\|\n\\)*Exception.* \\? $" string)
     (comint-send-input nil t)))
 (defun org-babel-clingo-format-args (params)
+  " Adapt the parameters passed in into clingo CLI arguments "
   (mapconcat (lambda (x)
                (let ((sym (symbol-name (car x)))
                      (val (or (cdr x) ""))

@@ -63,7 +63,7 @@
   '((:goal . :any))
   "Ccalc-specific header arguments.")
 (defvar org-babel-default-header-args:ccalc
-  `((:goal . nil)))
+  `((:goal . nil) (:query . 1)))
 
 (defun org-babel-execute:ccalc (body params)
   "Execute the Ccalc in BODY according to the block's header PARAMS.
@@ -71,7 +71,7 @@
 This function is called by `org-babel-execute-src-block.'"
   (message "executing Ccalc source code block")
   (let* ((result-params (cdr (assq :result-params params)))
-         (session (format "*CCalc: %s*" (cdr (assq :session params))))
+         (session (cdr (assq :session params)))
          (treat-as-file (assq :as-file params))
          (goal (org-babel-ccalc--parse-goal
                 (cdr (assq :goal params))))
@@ -98,6 +98,7 @@ This function is called by `org-babel-execute-src-block.'"
   "In SESSION, evaluate GOAL given the BODY of the Ccalc block.
 
 Create SESSION if it does not already exist."
+  (message "Evaluating ccalc session")
   (let* ((session (org-babel-ccalc-initiate-session session))
          (split-body (split-string (org-babel-trim body) "\n")))
     (if as-file
@@ -136,6 +137,7 @@ Create SESSION if it does not already exist."
   "Return SESSION with a current inferior-process-buffer.
 Initialize SESSION if it has not already been initialized."
   (unless  (equal "none" session)
+    (message "Initialising ccalc session")
     (let ((session (get-buffer-create (or session "*ccalc*"))))
       (unless (comint-check-proc session)
         (with-current-buffer session
@@ -190,8 +192,69 @@ main :- load_files('ccalc.pl'),
         format('\nTest FINISHED\n'),
         halt.
 "
-  (error "CCalc needs to be run as a session"))
+  (message "External process ccalc")
+  (let* ((ccalc-tmp-file (org-babel-temp-file "ccalc-" ".pl"))
+         (prolog-tmp-file (org-babel-temp-file "prolog-" ".pl"))
+         (ccalc-params (org-babel-ccalc-format-args params))
+         (command (format "%s -f %s -g main %s"
+                          org-babel-ccalc-command
+                          (expand-file-name org-babel-ccalc-location)
+                          prolog-tmp-file))
+         )
+    ;; (message "All Params: %s" params)
+    ;; (message "Body: %s" body)
+    ;; (message "CCalc File: %s\n Prolog File: %s" ccalc-tmp-file prolog-tmp-file)
+    (with-temp-file ccalc-tmp-file
+      ;;Insert the ccalc code into a temp file
+      (insert (org-babel-chomp body))
+      )
+    (with-temp-file prolog-tmp-file
+      ;;Construct the prolog file that loads ccalc
+      (insert "main :- loadf('" ccalc-tmp-file "'),\n")
+      (insert "        query(")
+      (insert (number-to-string (cdr (assoc :query params))))
+      (insert "),\n")
+      (insert "        halt.")
+      ;; (message "Prolog Body:\n %s" (buffer-string))
+      )
+    ;; (message "Going to execute:\n%s" command)
+    (org-babel-ccalc-eval command body)
+    )
+  )
+(defun org-babel-ccalc-eval (cmd body)
+  "Run CMD on BODY.
+If CMD succeeds then return its results, otherwise display
+STDERR with `org-babel-eval-error-notify'.
 
+"
+  (let ((err-buff (get-buffer-create "*Org-Babel Error Output*"))
+        exit-code)
+    (with-current-buffer err-buff (erase-buffer))
+    (with-temp-buffer
+      (insert body)
+      (setq exit-code
+            (org-babel--shell-command-on-region (point-min)
+                                                (point-max)
+                                                cmd err-buff))
+    ;; exit code handling:
+    (message "CCALC EXIT CODE: %s" exit-code)
+    (cond ((not (numberp exit-code))
+           (with-current-buffer err-buff
+             (org-babel-eval-error-notify exit-code (buffer-string)))
+           nil)
+
+          ((< 0 (logand exit-code 64))
+           (org-babel-eval-error-notify exit-code (buffer-string))
+           "Syntax Error")
+
+          ((< 0 (logand exit-code 2))
+           (buffer-string))
+
+          ((< 0 (logand exit-code 1))
+           ;; (org-babel-eval-error-notify exit-codee (buffer-string))
+           (format "Error:\n%s" (buffer-string)))
+
+          ((format "FALLBACK: %s\n\n%s" exit-code (buffer-string)))))))
 
 (defun org-babel-ccalc--answer-correction (string)
   "If STRING is Ccalc's \"Correct to:\" prompt, send a refusal."
@@ -254,6 +317,23 @@ Example:
           (insert (format "%S" value))))
       (buffer-string))))
 
+(defun org-babel-ccalc-format-args (params)
+  " Adapt the parameters passed in into clingo CLI arguments "
+  (mapconcat (lambda (x)
+               (let ((sym (symbol-name (car x)))
+                     (val (or (cdr x) ""))
+                     )
+                 (cond ((equal ":ccalc-args" sym)
+                        (cdr x))
+                       ((s-prefix? ":c-" sym)
+                        (format "%s %s " (s-replace ":c-" "-" sym) val))
+                       ((s-prefix? ":ccalc-" sym)
+                        (format "%s %s " (s-replace ":clingo-" "--" sym) val))
+                       (""))
+                 )
+               )
+             params "")
+  )
 
 (provide 'ob-ccalc)
 ;;; ob-ccalc.el ends here

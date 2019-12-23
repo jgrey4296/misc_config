@@ -48,3 +48,6 @@ export PS1='(\j): \D{%D} \A \u:  '
 #for gtags:
 export GTAGSCONF=~/.shell_files/gtags.conf
 export GTAGSLABEL=pygments
+
+#Shell Location update
+export SHELL="$(which bash)"

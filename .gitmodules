@@ -25,3 +25,6 @@
 [submodule "layers/jg-trie-layer"]
 	path = layers/jg-trie-layer
 	url = https://github.com/jgrey4296/jg-trie-layer.git
+[submodule "layers/org-unit-test-layer"]
+	path = layers/org-unit-test-layer
+	url = https://github.com/jgrey4296/org-unit-test-layer.git

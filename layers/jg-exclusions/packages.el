@@ -1,4 +1,4 @@
-(defconst jg_exclusions-packages
+(defconst jg-exclusions-packages
   '(
     (ruby-test-mode :excluded t)
     (pyenv :excluded t)

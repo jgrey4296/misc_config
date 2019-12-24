@@ -36,7 +36,7 @@ values."
    '(
      ;;------------------------------------------------------------
      ;;MY LAYER:
-     jg_layer
+     jg-spacemacs-main-layer
      ;;-----------------------------------------------------------
      (syntax-checking :variables syntax-checking-enable-tooltips nil)
      (shell :variables
@@ -339,17 +339,17 @@ you should place your code here."
   (spacemacs/declare-prefix "a p" "Processes")
   (spacemacs/declare-prefix "x j" "Justify")
   (global-auto-complete-mode 1)
-  (define-key ac-mode-map (kbd "M-TAB") 'jg_layer/ac-trigger)
+  (define-key ac-mode-map (kbd "M-TAB") 'jg-spacemacs-main-layer/ac-trigger)
   (evil-define-key* 'normal global-map
-                    (kbd "g l") 'jg_layer/open_link_in_buffer
-                    (kbd "g L") 'jg_layer/open_link_externally
+                    (kbd "g l") 'jg-spacemacs-main-layer/open_link_in_buffer
+                    (kbd "g L") 'jg-spacemacs-main-layer/open_link_externally
                     )
   (spacemacs/set-leader-keys
     ;; Processes
     "a p P" 'proced
     "a p l" 'launchctl
     "a p p" 'list-processes
-    ;;"a a" 'jg_layer/ac-trigger
+    ;;"a a" 'jg-spacemacs-main-layer/ac-trigger
     ;; Registers:
     "r f" 'frameset-to-register
     "r i" 'insert-register
@@ -369,22 +369,22 @@ you should place your code here."
     ;; searching
     "s o" 'helm-occur
     ;; mode select
-    "a m m"   'jg_layer/switch-major-mode
+    "a m m"   'jg-spacemacs-main-layer/switch-major-mode
     "a m e"   'helm-enable-minor-mode
     "a m d"   'helm-disable-minor-mode
     ;; Access to old school emacs help:
     "h h" 'help
     ;; Buffer
     "b D" 'kill-other-buffers
-    "b `" 'jg_layer/goto-desktop
-    "b a" 'jg_layer/goto-org-agenda-file
-    "b c" 'jg_layer/clear-buffer
-    "b g" 'jg_layer/goto-github
+    "b `" 'jg-spacemacs-main-layer/goto-desktop
+    "b a" 'jg-spacemacs-main-layer/goto-org-agenda-file
+    "b c" 'jg-spacemacs-main-layer/clear-buffer
+    "b g" 'jg-spacemacs-main-layer/goto-github
     "b i" 'clone-indirect-buffer-other-window
-    "b m" 'jg_layer/goto-messages
-    "b M" 'jg_layer/goto-mega
-    "b ~" 'jg_layer/goto-home
-    "b r" 'jg_layer/goto-resources
+    "b m" 'jg-spacemacs-main-layer/goto-messages
+    "b M" 'jg-spacemacs-main-layer/goto-mega
+    "b ~" 'jg-spacemacs-main-layer/goto-home
+    "b r" 'jg-spacemacs-main-layer/goto-resources
     )
   ;; Force the mouse to be disabled
   (defun evil-mouse-drag-region () (interactive))

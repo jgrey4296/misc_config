@@ -4,3 +4,6 @@
 [submodule "layers/jg-spacemacs-main-layer"]
 	path = layers/jg-spacemacs-main-layer
 	url = https://github.com/jgrey4296/jg-spacemacs-main-layer.git
+[submodule "layers/jg-spacemacs-misc-layer"]
+	path = layers/jg-spacemacs-misc-layer
+	url = https://github.com/jgrey4296/jg-spacemacs-misc-layer.git

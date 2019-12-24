@@ -1,2 +1,0 @@
-* JG Layer
-  A General layer for personal spacemacs customization.

@@ -1,0 +1,3 @@
+[submodule "layers/spacemacs-char-utility"]
+	path = layers/spacemacs-char-utility
+	url = https://github.com/jgrey4296/spacemacs-char-utility.git

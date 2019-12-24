@@ -22,3 +22,6 @@
 [submodule "layers/jg-tag-unify-layer"]
 	path = layers/jg-tag-unify-layer
 	url = https://github.com/jgrey4296/jg-tag-unify-layer.git
+[submodule "layers/jg-trie-layer"]
+	path = layers/jg-trie-layer
+	url = https://github.com/jgrey4296/jg-trie-layer.git

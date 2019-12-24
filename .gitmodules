@@ -16,3 +16,6 @@
 [submodule "layers/jg-logic-layer"]
 	path = layers/jg-logic-layer
 	url = https://github.com/jgrey4296/jg-logic-layer.git
+[submodule "layers/jg-music-layer"]
+	path = layers/jg-music-layer
+	url = https://github.com/jgrey4296/jg-music-layer.git

@@ -1,9 +1,11 @@
 ;; bibtex
 (defun tag-unify/build-bibtex-list ()
+  "Build a list of all bibtex files to use for bibtex-helm "
   (mapcar (lambda (x) (f-join tag-unify/loc-bibtex x))
           (-filter (lambda (x) (s-equals? (f-ext x) "bib"))
                    (directory-files tag-unify/loc-bibtex))))
 (defun tag-unify/bibtex-set-tags (x)
+  " Set tags in bibtex entries "
   (let* ((visual-candidates (helm-marked-candidates))
          (actual-candidates (mapcar (lambda (x) (cadr (assoc x tag-unify/tag-unify-candidates-names))) visual-candidates))
          (prior-point 1)
@@ -32,6 +34,7 @@
     )
   )
 (defun tag-unify/bibtex-set-new-tag (x)
+  "A Fallback function to set tags of bibtex entries "
   (save-excursion
     (goto-char (car tag-unify/tag-unify-region))
     (let ((prior-point (- (point) 1))
@@ -50,6 +53,8 @@
           ))))
   )
 (defun tag-unify/unify-pdf-locations-in-file (name)
+  "Change all pdf locations in bibtex file to relative,
+ensuring they work across machines "
   (message "Unifying Locations in %s" name)
   (with-temp-buffer
     (insert-file-contents name t)
@@ -63,6 +68,7 @@
     )
   )
 (defun tag-unify/unify-pdf-locations ()
+  "Dired function to unify file locations to relative"
   (interactive)
   (let ((files (dired-get-marked-files)))
     (seq-each 'tag-unify/unify-pdf-locations-in-file files)
@@ -70,7 +76,10 @@
   )
 
 ;; file name processing
-(defun tag-unify/chop-long-file (name)
+(defun tag-unify/chop-long-file (name &optional preferred-length)
+  "Take long org files and split them into multiple files
+If preferred-length is not specified, use tag-unify/preferred-linecount-for-org
+"
   (message "----------")
   (message "Chopping: %s" name)
   (with-temp-buffer
@@ -99,7 +108,7 @@
         (append-to-file last-position (line-beginning-position) (funcall fn-fn))
         (setq linecount (+ linecount (funcall ln-fn (point) last-position))
               last-position (point))
-        (if (> linecount tag-unify/preferred-linecount-for-org)
+        (if (> linecount (or preferred-length tag-unify/preferred-linecount-for-org))
             (setq linecount 0
                   count (+ 1 count))
           )
@@ -110,6 +119,7 @@
     )
   )
 (defun tag-unify/chop-long-files-from-dired ()
+  "Dired action to chop each marked file"
   (interactive)
   (let ((files (dired-get-marked-files)))
     (seq-each 'tag-unify/chop-long-file files)
@@ -117,7 +127,8 @@
   )
 
 ;; org cleaning
-(defun tag-unify/marked-file-fn (name)
+(defun tag-unify/dired-clean-orgs (name)
+  "A Wrapper around clean org to back up the original file "
   (message "----------")
   (message "Cleaning: %s" name)
   (with-temp-buffer
@@ -130,12 +141,14 @@
   (message "Finished Cleaning")
   )
 (defun tag-unify/clean-marked-files ()
+  "A Dired buffer function to clean org files "
   (interactive)
   (let ((files (dired-get-marked-files)))
-    (seq-each 'tag-unify/marked-file-fn files)
+    (seq-each 'tag-unify/dired-clean-orgs)
     )
   )
 (defun tag-unify/clean-org ()
+  "The Main Clean-org routine"
   (interactive)
   (message "Starting Org Clean")
 
@@ -214,7 +227,7 @@
   (goto-char (point-min ))
   )
 (defun tag-unify/map-entries-clean-whitespace ()
-  "Called with org-map-entries. reduces whitespace prior
+  "Called from org-map-entries. reduces whitespace prior
 to point to a single new line"
   (set-marker tag-unify/org-clean-marker (line-end-position))
   (if (not (eq (point) (point-min)))
@@ -233,6 +246,7 @@ to point to a single new line"
     )
   )
 (defun tag-unify/wrap-numbers (a b)
+  "Find numbers and wrap them in parentheses to avoid org treating them as lists"
   (interactive "r")
   (message "%s %s" a b )
   (goto-char a)
@@ -241,6 +255,7 @@ to point to a single new line"
     )
   )
 (defun tag-unify/wrap-non-link-urls ()
+  "Find urls that are not wrapped into org link format, and wrap them"
   (interactive)
   (let ((start (if (eq evil-state 'visual) evil-visual-beginning (point-min)))
         (last (if (eq evil-state 'visual) evil-visual-end  nil)))
@@ -250,8 +265,8 @@ to point to a single new line"
       )
     )
   )
-(defun tag-unify/check-for-duplicates ()
-  ;;To be run with org-map-entries
+(defun tag-unify/build-permalink-regions()
+  " To be run with org-map-entries, extracts permalinks and regions ready to remove duplicates"
   (let* ((entry-details (cadr (org-element-at-point)))
          (permalink (plist-get entry-details :PERMALINK))
          (begin (plist-get entry-details :begin))
@@ -264,14 +279,16 @@ to point to a single new line"
     )
   )
 (defun tag-unify/remove-duplicates ()
+  "Find duplicate tweets in an org file and remove them"
   (interactive)
   (let ((permalinks (make-hash-table :test 'equal))
         ;;Get all entries' (permalink start-bound end-bound level)
-        (all-entries (seq-filter 'identity (org-map-entries 'tag-unify/check-for-duplicates)))
+        (all-entries (seq-filter 'identity (org-map-entries 'tag-unify/build-permalink-regions)))
         (to-remove '())
         (archive-buffer (get-buffer-create "*Org-Cleanup-Tweets*"))
         )
-    ;;create deletion buffer if necessary
+    ;;Process all-entries, storing the first instance of a tweet in the hashmap,
+    ;;all subsequent instances in the to-remove list
     (cl-loop for tweet in all-entries
              do (if (not (gethash (nth 0 tweet) permalinks))
                     (let ((m (make-marker)))
@@ -281,6 +298,7 @@ to point to a single new line"
                   )
              )
     (message "To Remove: %s" (length to-remove))
+    ;;Now remove those duplicates
     (cl-loop for tweet in to-remove
              do (progn
                   (message "Getting: %s" tweet)
@@ -301,8 +319,7 @@ to point to a single new line"
 
 ;; helm
 (defun tag-unify/open-url-action (x)
-  """ An action added to helm-grep for loading urls found
-  in bookmarks "
+  " An action added to helm-grep for loading urls found in bookmarks "
   (let* ((marked (helm-marked-candidates))
          (no-props (mapcar (lambda (x) (substring-no-properties x 0 (length x))) marked))
          link-start-point
@@ -324,14 +341,19 @@ to point to a single new line"
     )
   )
 (defun tag-unify/insert-candidates (x)
+  "A Helm action to insert selected candidates into the current buffer "
   (let ((candidates (helm-marked-candidates)))
     (with-helm-current-buffer
+      ;;Substring -2 to chop off separating marks
       (insert (mapconcat (lambda (x) (substring x 0 -2)) candidates "\n")))))
 (defun tag-unify/insert-links (x)
+  "Helm action to insert selected candidates formatted as org links"
   (let ((candidates (helm-marked-candidates)))
     (with-helm-current-buffer
+      ;;substring -2 to chop off separating marks
       (insert (mapconcat (lambda (x) (format "[[%s][%s]]" (substring x 0 -2) (substring x 0 -2))) candidates "\n")))))
 (defun tag-unify/tweet-link-action (candidate)
+  "Helm action to open a tweet buffer with the link inserted"
   (evil-window-new (get-buffer-window helm-current-buffer)
                    "*Link Tweeting*")
   (set (make-local-variable 'backup-inhibited) t)
@@ -345,11 +367,13 @@ to point to a single new line"
   (redraw-display)
   )
 (defun tag-unify/tweet-link-finish ()
+  "Action to finish and tweet a link"
   (interactive)
   (let* ((text (buffer-substring-no-properties (point-min) (point-max))))
     (jg_twitter/twitter-tweet-text text nil '(jg_twitter/tweet_sentinel))
     ))
 (defun tag-unify/grep-filter-one-by-one (candidate)
+  "A Grep modification for bookmark helm to extract a bookmark's url and tags"
   (if (consp candidate)
       ;; Already computed do nothing (default as input).
       candidate
@@ -375,7 +399,8 @@ to point to a single new line"
     )
   )
 (defun tag-unify/org-set-tags (x)
-  """ Toggle Selected Tags """
+  """ Improved action to add and remove tags Toggle Selected Tags
+Can operate on regions of headings """
   (let* ((visual-candidates (helm-marked-candidates))
          (actual-candidates (mapcar (lambda (x) (cadr (assoc x tag-unify/tag-unify-candidates-names))) visual-candidates))
          (prior-point 1)
@@ -401,6 +426,7 @@ to point to a single new line"
                (org-forward-heading-same-level 1)
                )))))
 (defun tag-unify/find-file (x)
+  "A simple helm action to open selected files"
   (let ((files (if (helm-marked-candidates) (helm-marked-candidates) (list x))))
     (mapc 'find-file (mapcar 'string-trim files))
     )
@@ -408,6 +434,10 @@ to point to a single new line"
 
 ;; tags
 (defun tag-unify/get-buffer-tags (&optional name depth)
+  "Process a buffer and get all tags from a specified depth of heading
+if no depth is specified, get all tags of all headings
+returns a hash-table of the tags, and their instance counts.
+"
   (let ((tag-set (make-hash-table :test 'equal))
         (tagdepth-p (if (and depth (> depth 0)) (lambda (x) (eq depth x)) 'identity))
         )
@@ -428,6 +458,9 @@ to point to a single new line"
     )
   )
 (defun tag-unify/get-file-tags (filename &optional depth)
+  "Get tags from a specified file, at an org specified depth.
+If depth is not specified, default to get all tags from all headings
+Return a hash-table of tags with their instance counts"
   (let ((tagcounts (make-hash-table :test 'equal))
         (tagdepth-p (if (and depth (> depth 0)) (lambda (x) (eq depth x)) 'identity))
         raw-tags
@@ -463,7 +496,7 @@ to point to a single new line"
     )
   )
 (defun tag-unify/tag-occurrences-in-open-buffers()
-  """ retrieve all tags in all open buffers, print to a temporary buffer """
+  """ Retrieve all tags in all open buffers, print to a temporary buffer """
   (interactive "p")
   (let* ((allbuffers (buffer-list))
          (alltags (make-hash-table :test 'equal))
@@ -482,6 +515,7 @@ to point to a single new line"
     )
   )
 (defun tag-unify/describe-marked-tags ()
+  "Dired action to describe tags in marked files"
   (interactive)
   (let ((marked (dired-get-marked-files))
         (targetdepth (or current-prefix-arg 2))
@@ -499,6 +533,7 @@ to point to a single new line"
   )
 
 (defun tag-unify/mark-untagged-orgs ()
+  "Dired action to mark org files which are not tagged at heading depth 2"
   (interactive)
   (dired-map-over-marks
    (progn (if (or (not (f-ext? (dired-get-filename) "org"))
@@ -508,6 +543,7 @@ to point to a single new line"
    )
   )
 (defun tag-unify/org-tagged-p  (filename)
+  "Test an org file. Returns true if the file has tags for all depth 2 headings"
   (with-temp-buffer
     (insert-file-contents filename)
     (goto-char (point-min))
@@ -520,6 +556,7 @@ to point to a single new line"
   )
 
 (defun tag-unify/chart-tag-counts (counthash name)
+  "Given a hashtable of counts, create a buffer with a bar chart of the counts"
   ;; (message "Charting: %s %s" counthash name)
   (let* ((hashPairs (-zip (hash-table-keys counthash) (hash-table-values counthash)))
          (sorted (sort hashPairs (lambda (a b) (> (cdr a) (cdr b)))))
@@ -540,16 +577,19 @@ to point to a single new line"
   )
 
 (defun tag-unify/set-tags (x)
+  "Utility action to set tags. Works in org *and* bibtex files"
   (if (eq major-mode 'bibtex-mode)
       (tag-unify/bibtex-set-tags x)
     (tag-unify/org-set-tags x))
   )
 (defun tag-unify/set-new-tag (x)
+  "Utility action to add a new tag. Works for org *and* bibtex"
   (if (eq major-mode 'bibtex-mode)
       (tag-unify/bibtex-set-new-tag x)
     (tag-unify/org-set-new-tag x))
   )
 (defun tag-unify/org-set-new-tag (x)
+  "Utility to set a new tag for an org heading"
   (save-excursion
     (goto-char (car tag-unify/tag-unify-region))
     (let ((prior-point (- (point) 1))
@@ -621,6 +661,7 @@ add matches to thread tags
 
 ;; utility
 (defun tag-unify/process-candidates (x)
+  "Utility to tidy bibtex-completion-candidates for helm-bibtex"
   (cons (s-replace-regexp ",? +" " " (car x))
         (cdr x))
   )
@@ -641,10 +682,12 @@ add matches to thread tags
     )
   )
 (defun tag-unify/strip_spaces (str)
+  "Utility to replace spaces with underscores in a string.
+Used to guard inputs in tag strings"
   (s-replace " " "_" (string-trim str))
   )
 (defun tag-unify/sort-candidates (ap bp)
-  """ Sort candidates by colour then lexicographically """
+  " Sort routine to sort by colour then lexicographically "
   (let* ((a (car ap))
          (b (car bp))
          (aprop (get-text-property 0 'font-lock-face a))
@@ -656,7 +699,7 @@ add matches to thread tags
      ((and (not aprop) (not bprop) (> (funcall lookup ap) (funcall lookup bp))))
      )))
 (defun tag-unify/tag-unify-candidates ()
-  """ Given Candidates, colour them if they are assigned, then sort them  """
+  " Given Candidates, colour them if they are assigned, then sort them  "
   (let* ((buffer-cand-tags (tag-unify/get-buffer-tags))
          (global-tags tag-unify/global-tags))
     (if (not (hash-table-empty-p global-tags))
@@ -684,6 +727,7 @@ add matches to thread tags
       ))
   )
 (defun tag-unify/make-bar-chart (data maxTagLength maxTagAmnt)
+  " Make a bar chart from passed in hashtable and descriptive information "
   (let* ((maxTagStrLen (length (number-to-string maxTagAmnt)))
          (maxTagLength-bounded (min 40 maxTagLength))
          (max-column (- fill-column (+ 3 maxTagLength-bounded maxTagStrLen 3 3)))
@@ -691,6 +735,7 @@ add matches to thread tags
     (mapcar 'tag-unify/bar-chart-line data)))
 
 (defun tag-unify/bar-chart-line (x)
+  "Construct a single line of a bar chart"
   (let* ((tag (car x))
          (tag-len (length tag))
          (tag-cut-len (- maxTagLength-bounded 3))
@@ -716,6 +761,9 @@ add matches to thread tags
   )
 
 (defun tag-unify/org-format-temp-buffer (name source_name)
+  " Format bar chart buffer as an org buffer.
+Adds a header, separates similar counted lines into sub headings,
+and sorts groups alphabetically"
   (with-current-buffer name
     (org-mode)
     (let ((inhibit-read-only 't)
@@ -798,15 +846,18 @@ and insert the car "
 
 (defun tag-unify/move-links ()
   " Go through all links in a file,
-and either copy, or move, the the referenced file to a new location"
+and either copy, or move, the the referenced file to a new location
+Prefix-arg to move the file otherwise copy it
+"
   (interactive)
+  ;;Specify target, or use default
   (let ((target (read-directory-name "Move To: "
                                      "/Volumes/Overflow/missing_images/"))
-        (action (if current-prefix-arg 'copy-file 'rename-file))
+        (action (if current-prefix-arg 'rename-file 'copy-file))
         link
         )
     (if (not (file-exists-p target))
-        (progn (message "Making: %s" target)
+        (progn (message "Making target directory: %s" target)
                (mkdir target))
       )
     (message "Process Type: %s" action)
@@ -817,12 +868,12 @@ and either copy, or move, the the referenced file to a new location"
       (if (not (f-exists? (f-join target (-last-item (f-split link)))))
           (funcall action link target)
         (message "Already Exists"))
-
       )
     )
   )
 
 (defun tag-unify/find-random-marked-file ()
+  "Dired action to open a random file from the marked selection"
   (interactive)
   (let ((marked (dired-get-marked-files)))
     (find-file (nth (random (length marked))
@@ -830,11 +881,9 @@ and either copy, or move, the the referenced file to a new location"
     )
   )
 
-
-
-
 ;; Indexing
 (defun tag-unify/index-people ()
+  " Run rountine to index all twitter users in the current directory "
   (interactive)
   ;; Get all org files
   (let ((all-orgs (directory-files-recursively (dired-current-directory) "\.org"))
@@ -872,6 +921,7 @@ and either copy, or move, the the referenced file to a new location"
   (message "Finished writing file")
   )
 (defun tag-unify/index-tags()
+  " Run routine to index all tags in org files "
   (interactive)
   ;; Get all org files
   (let ((all-orgs (directory-files-recursively (dired-current-directory) "\.org"))

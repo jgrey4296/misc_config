@@ -1,3 +1,0 @@
-*  Pipelang layer
-  A prototype layer for creating pipelines of cairo operations
-  in an org file using org-babel.

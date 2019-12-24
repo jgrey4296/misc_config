@@ -19,3 +19,6 @@
 [submodule "layers/jg-music-layer"]
 	path = layers/jg-music-layer
 	url = https://github.com/jgrey4296/jg-music-layer.git
+[submodule "layers/jg-tag-unify-layer"]
+	path = layers/jg-tag-unify-layer
+	url = https://github.com/jgrey4296/jg-tag-unify-layer.git

@@ -13,3 +13,6 @@
 [submodule "layers/jg-spacemacs-twitter"]
 	path = layers/jg-spacemacs-twitter
 	url = https://github.com/jgrey4296/jg-spacemacs-twitter.git
+[submodule "layers/jg-logic-layer"]
+	path = layers/jg-logic-layer
+	url = https://github.com/jgrey4296/jg-logic-layer.git

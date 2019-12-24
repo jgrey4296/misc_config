@@ -14,6 +14,7 @@
 ;;Utilities
 ;;--------------------
 (defun tag-mode/align-tags ()
+  " Function to assist in aligning tags by semicolon "
   (interactive)
   (goto-char (point-min))
   (let* ((ws-regexp "\\(\\s-*\\)")
@@ -24,6 +25,7 @@
                   group 1 t))
   )
 (defun tag-mode/split-alphabetically ()
+  " Utility to hlp split tags alphabetically "
   (interactive)
   ;;sort alphabetically
   (sort-lines nil (point-min) (point-max))
@@ -43,6 +45,7 @@
     )
   )
 (defun tag-mode/split-into-subfiles ()
+  " Utility to split large tag files into groups "
   (interactive)
   ;;split-alphabetically
   (tag-mode/split-alphabetically)
@@ -55,6 +58,7 @@
   (org-map-entries 'tag-mode/heading-map-f)
   )
 (defun tag-mode/heading-map-f ()
+  "Utility to map over headings of a file "
   (if (eq 2 (plist-get (cadr (org-element-context)) :level))
       ;;take the entry, put into new file
       (let* ((content (org-get-entry))
@@ -73,6 +77,7 @@
     )
   )
 (defun tag-mode/reverse-format ()
+  "Utility to create a new file, switching tag:count to count:tag"
   (interactive)
   (with-output-to-temp-buffer "reversed_tags"
     (goto-char (point-min))
@@ -157,7 +162,5 @@
   (run-mode-hooks)
   (outline-minor-mode)
   )
-
-;;todo later: set no longer needed variables to nil
 
 (provide 'tag-mode)

@@ -206,7 +206,6 @@
   (evil-ex-define-cmd "tv"  'org-tags-view)
   (evil-ex-define-cmd "ts"  'org-set-tags)
   )
-
 (defun tag-unify/init-tag-clean-minor-mode ()
   (use-package tag-clean-minor-mode
     :defer t
@@ -236,7 +235,6 @@
               )
     )
   )
-
 (defun tag-unify/init-tag-mode ()
   (use-package tag-mode
     :commands (tag-mode)

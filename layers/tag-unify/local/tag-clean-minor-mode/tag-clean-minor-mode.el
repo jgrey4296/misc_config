@@ -1,9 +1,11 @@
 (defun tag-clean/strip_spaces (str)
+  "Replace spaces with underscores"
   (s-replace " " "_" (string-trim str))
   )
 
 
 (defun tag-clean/mark-to-filter ()
+  "Utility to quickly add tag"
   (interactive)
   (search-forward ":")
   (evil-delete-line (point) (line-end-position))
@@ -13,6 +15,7 @@
   )
 
 (defun tag-clean/mark-to-sub ()
+  "Utility to quckly substitute a tag"
   (interactive)
   (search-forward ":")
   (evil-delete-line (point) (line-end-position))
@@ -23,6 +26,7 @@
   )
 
 (defun tag-clean/leave ()
+  "Utility to quickly add a leave annotation"
   (interactive)
   (search-forward ":")
   (evil-delete-line (point) (line-end-position))

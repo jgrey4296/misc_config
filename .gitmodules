@@ -1,3 +1,6 @@
 [submodule "layers/spacemacs-char-utility"]
 	path = layers/spacemacs-char-utility
 	url = https://github.com/jgrey4296/spacemacs-char-utility.git
+[submodule "layers/jg-spacemacs-main-layer"]
+	path = layers/jg-spacemacs-main-layer
+	url = https://github.com/jgrey4296/jg-spacemacs-main-layer.git

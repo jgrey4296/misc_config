@@ -787,14 +787,34 @@
 *** [[file:~/github/writing/orgfiles/examples_index.org::*Institutional%20Source%20Material][Institutional Source Material]]
 ** -----------------------------------------------------------------------------
 ** People
+*** [[https://scholar.google.com/citations?user=rWPcKqkAAAAJ&hl=en&oi=sra][Talcot Parsons]]
 *** [[http://www.abdoumaliqsimone.com/publications.html][AbouMaliq Simone]]
 *** [[http://worrydream.com/][Bret Victor]]
 **** [[http://worrydream.com/ABriefRantOnTheFutureOfInteractionDesign/][A Brief Rant on the Future of Interaction Design]]                           :design:capability:tools:hands:
 **** TODO [[https://explorabl.es/all/][Explorables]]
 *** [[http://www.lsi.upc.edu/~jvazquez/publications.php][J. Vázquez Salceda]]                                                          :look_into:research:papers:
 *** [[https://scholar.google.com/citations?user=iR-SIW8AAAAJ&hl=en&oi=sra][Jodie Sabater-Mir]]                                                           :reputation:look_into:research:
+*** [[http://userpage.fu-berlin.de/~ram/pub/pub_jf47ht81Ht/doc_kay_oop_en][Alan Kay OOP]]                                                                :programming_languages:
+*** [[https://scholar.google.com/citations?hl=en&user=FncBQzIAAAAJ&view_op=list_works&sortby=pubdate][Cristiano Castelfranchi]]                                                     :programming_languages:MAS:
+*** [[http://donellameadows.org/][Donna Meadows]]                                                               :MAS:systems_thinking:
 ** -----------------------------------------------------------------------------
 ** Misc
+*** [[http://donellameadows.org/archives/leverage-points-places-to-intervene-in-a-system/][Leverage Points]] - Donna Meadows                                             :systems_thinking:
+
+    (in increasing order of effectiveness)
+
+    (12) *Constants*, parameters, numbers (such as subsidies, taxes, standards).
+    (11) The *sizes* of buffers and other stabilizing *stocks*, relative to their flows.
+    (10) The *structure* of material stocks and *flows* (such as transport networks, population age structures).
+    (9)  The lengths of *delays*, relative to the rate of system change.
+    (8)  The *strength of negative feedback loops*, relative to the impacts they are trying to correct against.
+    (7)  The gain around driving *positive feedback loops*.
+    (6)  The structure of *information* flows (who does and does not have access to information).
+    (5)  The *rules* of the system (such as incentives, punishments, constraints).
+    (4)  The *power* to add, change, evolve, or self-organize system structure.
+    (3)  The *goals* of the system.
+    (2)  The mindset or *paradigm* out of which the system — its goals, structure, rules, delays, parameters — arises.
+    (1)  The power to *transcend paradigms*.
 *** TODO Prototype some Mechanical Turk Tasks                                   :survey:online:price:amazon:
 *** TODO Structural phenomenology?                                              :look_into:
 *** TODO Get Castelfranchi: Behavioral Implicit Communication                   :look_into:
@@ -803,7 +823,7 @@
 *** TODO [[/Users/jgrey/Mega/Images/misc_research_images/alien_behave.png][Alien Behaviour Tree]]
 *** [[http://ifaamas.org/Proceedings/aamas2018/forms/contents.htm][AAMAS Proceedings]]                                                           :papers:MAS:look_into:conference:
 *** [[http://defeasible.org/][Defeasible Logic]]                                                            :logic:
-*** [[file:~/github/otherLibs/Bidirectional][Bidirectional Type Checking Haskell]]                                        :directory:haskell:type_inference:
+*** [[file:~/github/otherLibs/Bidirectional][Bidirectional Type Checking Haskell]]                                         :directory:haskell:type_inference:
 *** [[http://www.parliamentbook.com/spaces][Parliament Book]]
 *** [[https://www.soundsurvey.org.uk/index.php/history/street_cries/brit1/626/3387][Sound Survey]]
 *** [[https://en.wikipedia.org/wiki/Kanban][Kanban]]
@@ -818,6 +838,16 @@
 *** [[http://heterogenoustasks.wordpress.com/2014/09/22/a-bestiary-of-player-agency/][Beastiary of Player Agency]]
 *** [[http://www.nexusmods.com/skyrim/mods/modmanager/][Nexus Mods]]
 *** [[http://www.rockpapershotgun.com/2014/10/22/skyrim-survival-mods/#more-243615][Skyrim Mods]]
+*** [[https://docs.oracle.com/javase/7/docs/api/][Java API]]
+*** ASP and rules
+    see cite:Eiter2009 for *stratified programs*.
+    Specifies evaluation order for predicates in a logic program.
+*** [[http://erlang.org/doc/design_principles/users_guide.html][Erlang Design Principles]]                                                    :agent:supervisor:supervision_network:behaviour:
+*** Against Machine learning
+    reconfigure traditional comp sci metrics
+    to consider climate change.
+    Performance is good, but so is not designing something
+    to take up entire percentage points of world energy.
 ** Tasks
 *** TODO emacs editor
 *** TODO Spec compile to architecture
@@ -826,13 +856,3 @@
 *** TODO unit institution
 *** TODO performative outputs
 *** TODO make bookmarks helm output to a list sorted by year, grouped by author...
-** ASP and rules
-   see cite:Eiter2009 for *stratified programs*.
-   Specifies evaluation order for predicates in a logic program.
-** [[https://docs.oracle.com/javase/7/docs/api/][Java API]]
-** Against Machine learning
-   reconfigure traditional comp sci metrics
-   to consider climate change.
-   Performance is good, but so is not designing something
-   to take up entire percentage points of world energy.
-** TODO [[http://erlang.org/doc/design_principles/users_guide.html][Erlang Design Principles]]                                                :agent:supervisor:supervision_network:behaviour:

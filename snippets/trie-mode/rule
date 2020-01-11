@@ -2,14 +2,13 @@
 # name: rule
 # key: rule
 # --
-//Rule:
-$1:
-    //Conditions: .a.b(> 20)?
-    $2
-    //Transforms: $x + 20 -> $y
-    $3
-    //Actions: +(.a.b.$y)
-    $4
-end
+* `(if (boundp 'trie-snippet-rule-name) trie-snippet-rule-name "a.rule")`:
+  //#Tags
+  $0
+  //conditions?
 
-$0
+  //Transforms ->
+
+  //Actions + @ %
+
+end

@@ -23,4 +23,3 @@ for k in range(NUM_FOLDS):
     y_train = np.concatenate(y_train)
     #train and score for this iteration
     scores.append(estimator.fit(X_train,y_train).score(X_test, y_test))
-    

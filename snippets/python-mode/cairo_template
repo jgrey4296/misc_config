@@ -13,6 +13,7 @@ import cairo_utils as utils
 from cairo_utils.dcel.constants import VertE, EdgeE, FaceE
 import argparse
 from noise import pnoise2, snoise2
+from os.path import splitext, split
 import IPython
 
 #Constants:
@@ -28,8 +29,8 @@ FONT_SIZE = 0.03
 SCALE = False
 
 def tick(dc, i):
-    """ Where the main drawing routine goes """ 
-    
+    """ Where the main drawing routine goes """
+
     return dc
 
 if __name__ == "__main__":
@@ -42,7 +43,7 @@ if __name__ == "__main__":
     parser.add_argument('-t', '--timesteps', type=int, default=TIME)
     parser.add_argument('--ipython', action="store_true")
     args = parser.parse_args()
-    
+
     #format the name of the image to be saved thusly:
     saveString = "{}{}_{}-{}_{}-{}".format(imgPath,
                                            imgName,
@@ -54,8 +55,8 @@ if __name__ == "__main__":
 
     #setup logging:
     LOGLEVEL = logging.DEBUG
-    logFileName = "log.CityGen"
-    logging.basicConfig(filename=logFileName,level=LOGLEVEL,filemode='w')
+    LOG_FILE_NAME = "log.{}".format(splitext(split(__file__)[1])[0])
+    logging.basicConfig(filename=LOG_FILE_NAME,level=LOGLEVEL,filemode='w')
 
     console = logging.StreamHandler()
     console.setLevel(logging.INFO)
@@ -71,13 +72,13 @@ if __name__ == "__main__":
         surface, ctx, size, N = utils.drawing.setup_cairo(N=args.numpoints, scale=SCALE, background=[0,0,0,1])
         ctx.set_source_rgba(0, 0, 0, 1)
         utils.drawing.drawRect(ctx, 0, 0, size, size)
-        
+
     if not args.static:
         logging.info("Generating")
         for x in range(args.timesteps):
             logging.info("Step: {}".format(x))
             theDCEL = tick(theDCEL, x)
-            
+
             if args.drawsteps:
                 logging.info("Drawing Step: {}".format(x))
                 if args.ipython:
@@ -89,16 +90,14 @@ if __name__ == "__main__":
     if not args.loaddcel:
         logging.info("Saving DCEL")
         theDCEL.savefile(dcel_filename)
-        
-    #draw it 
+
+    #draw it
     if not args.dontdraw:
         final_name = "{}_FINAL".format(saveString)
         logging.info("Drawing to: {}".format(final_name))
         utils.dcel.drawing.drawDCEL(ctx, theDCEL, faces=True, edges=True, background_colour=[0,1,0,1])
         utils.drawing.write_to_png(surface, final_name)
-    
+
 
     if args.ipython:
         IPython.embed(simple_prompt=True)
-
-    

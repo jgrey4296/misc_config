@@ -3,7 +3,7 @@
 # key: req
 # group: I/O
 # --
-head = {$1} 
+head = {$1}
 param = {$2} #http://httpbin.org/get?key2=value2&key1=value1
 data = {$3}
 r = requests.get($4, headers=head, params=param, data=data)

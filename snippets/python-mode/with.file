@@ -9,5 +9,5 @@ from os import listdir
 
 #r/w/rb/wb
 with open("$1","$2") as f:
-     data = f.read()
+    data = f.read()
 $0

@@ -19,8 +19,7 @@
          (get-buffer-create (or buffer (format "*%s*" my-comint-buffer-name)))
        (current-buffer)))
     (unless buffer
-      (apply 'make-comint-in-buffer my-comint-buffer-name buffer
-             prog my-comint-args)
+      (apply 'make-comint-in-buffer my-comint-buffer-name buffer prog my-comint-args)
       (my-comint-mode))))
 (defun my-comint--initialize ()
   "Helper function to initialize My-Comint"

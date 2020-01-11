@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: lexical_binding
+# key: lexical_binding
+# --
+;; -*- mode: Lisp; lexical-binding: t; -*-

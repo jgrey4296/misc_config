@@ -177,6 +177,7 @@
 **** [[~/github/hexagonAITest][Hexagon Board / AI Test]]                                                    :front_end:incomplete:javascript:old:parsing:web:
 *** Prolog                                                                      :todo:programming:institutions:ASP:tutorial:
 **** look at Bath Institutional ASP
+**** [[file:~/github/otherLibs/instal-stable][InSTaL]]
 *** Unity                                                                       :needs_assets:game:vault:programming:unity:
 **** proof of concept imports in vault
 *** Supercollider / Tidal                                                       :needs_assets:sound:supercollider:tidal:
@@ -200,7 +201,18 @@
 **** Prisoners dilemma
 **** NetLogo
 **** Unity
+*** Libraries
+**** [[file:~/github/otherLibs/Soar][Soar]]
+**** [[file:~/github/otherLibs/cartago][Cartago]]
+**** [[file:~/github/otherLibs/cmudict][CMU Pronounciation Dictionary]]
+**** [[file:~/github/otherLibs/cockatiel][Cockatiel Test Library]]
+**** [[~/github/otherLibs/coq][COQ]]
+**** [[file:~/github/otherLibs/jacamo][Jacamo]]
+**** [[file:~/github/otherLibs/moise][MOISE]]
+**** [[file:~/github/otherLibs/npl][NPL]]
+**** [[file:~/github/otherLibs/phonetic-similarity-vectors][Phonetic Similarity Vectors]]
 *** Algorithms
+**** [[file:~/github/otherLibs/BPS][Building Problem Solvers]]
 **** [[file:~/github/otherLibs/code-for-blog/2018/type-inference][Python Type Inference]]                                                      :directory:hindley_milner:type_inference:python:
 **** [[file:~/github/otherLibs/code-for-blog/2018/markov-simple][Python Markov chain]]                                                        :directory:markov:python:
 **** [[file:~/github/otherLibs/code-for-blog/2018/unif][Python Unification]]                                                         :directory:python:unification:
@@ -799,22 +811,6 @@
 *** [[http://donellameadows.org/][Donna Meadows]]                                                               :MAS:systems_thinking:
 ** -----------------------------------------------------------------------------
 ** Misc
-*** [[http://donellameadows.org/archives/leverage-points-places-to-intervene-in-a-system/][Leverage Points]] - Donna Meadows                                             :systems_thinking:
-
-    (in increasing order of effectiveness)
-
-    (12) *Constants*, parameters, numbers (such as subsidies, taxes, standards).
-    (11) The *sizes* of buffers and other stabilizing *stocks*, relative to their flows.
-    (10) The *structure* of material stocks and *flows* (such as transport networks, population age structures).
-    (9)  The lengths of *delays*, relative to the rate of system change.
-    (8)  The *strength of negative feedback loops*, relative to the impacts they are trying to correct against.
-    (7)  The gain around driving *positive feedback loops*.
-    (6)  The structure of *information* flows (who does and does not have access to information).
-    (5)  The *rules* of the system (such as incentives, punishments, constraints).
-    (4)  The *power* to add, change, evolve, or self-organize system structure.
-    (3)  The *goals* of the system.
-    (2)  The mindset or *paradigm* out of which the system — its goals, structure, rules, delays, parameters — arises.
-    (1)  The power to *transcend paradigms*.
 *** TODO Prototype some Mechanical Turk Tasks                                   :survey:online:price:amazon:
 *** TODO Structural phenomenology?                                              :look_into:
 *** TODO Get Castelfranchi: Behavioral Implicit Communication                   :look_into:
@@ -836,13 +832,13 @@
 *** [[http://overapi.com/][Over API]]
 *** [[http://www.1001freefonts.com/][Free Fonts]]
 *** [[http://heterogenoustasks.wordpress.com/2014/09/22/a-bestiary-of-player-agency/][Beastiary of Player Agency]]
+    [[https://heterogenoustasks.wordpress.com/2015/06/04/naming-and-npcsity/][NPC Naming]]
 *** [[http://www.nexusmods.com/skyrim/mods/modmanager/][Nexus Mods]]
 *** [[http://www.rockpapershotgun.com/2014/10/22/skyrim-survival-mods/#more-243615][Skyrim Mods]]
 *** [[https://docs.oracle.com/javase/7/docs/api/][Java API]]
 *** ASP and rules
     see cite:Eiter2009 for *stratified programs*.
     Specifies evaluation order for predicates in a logic program.
-*** [[http://erlang.org/doc/design_principles/users_guide.html][Erlang Design Principles]]                                                    :agent:supervisor:supervision_network:behaviour:
 *** Against Machine learning
     reconfigure traditional comp sci metrics
     to consider climate change.

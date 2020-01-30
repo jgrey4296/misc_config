@@ -783,7 +783,7 @@
 ** -----------------------------------------------------------------------------
 ** Writing
 *** [[file:~/github/writing/orgfiles/design_writing.org::*Design%20writing][Design writing]]
-*** [[file:~/github/writing/orgfiles/dissertation.org::*Dissertation%20bits%20and%20pieces][Dissertation bits and pieces]]
+*** [[file:~/github/writing/orgfiles/dissertation.org::*Dissertation bits and pieces][Dissertation bits and pieces]]
 *** [[file:~/github/writing/orgfiles/DSLs.org::*DSLs][DSL/Framework/System/Tool Review]]
 *** [[file:~/github/writing/orgfiles/steamGames.org::*Games%20list%20and%20notes][Games list and notes]]
 *** [[~/github/jgrey4296.github.io][jgrey4296.github.io]]                                                         :writing:important:todo:target:blog:web:
@@ -839,6 +839,7 @@
 *** ASP and rules
     see cite:Eiter2009 for *stratified programs*.
     Specifies evaluation order for predicates in a logic program.
+*** [[https://edi.opml.co.uk/research-cat/institutional-diagnostic-tool/][Institutional Diagnostic Tool]]
 *** Against Machine learning
     reconfigure traditional comp sci metrics
     to consider climate change.

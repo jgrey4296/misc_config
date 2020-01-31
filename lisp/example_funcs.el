@@ -8,7 +8,6 @@
     )
 
   (spacemacs|define-transient-state example_transient
-    """ Define the transient state itself """
     :title "an example transient state"
     :doc (concat "
 [_q_]^^ Quit         [_h_]^^ Example Func

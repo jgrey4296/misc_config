@@ -22,7 +22,6 @@ function set_non_standard_python_paths(){
     #source activate root --not used because it slows default startup
 }
 
-
 #Caffe Stuff:
 #export DYLD_FALLBACK_LIBRARY_PATH=/usr/local/cuda/lib:$HOME/.pyenv/versions/anaconda-2.2.0/lib:/usr/local/lib/:/usr/lib
 

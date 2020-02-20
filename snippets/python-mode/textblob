@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: textblob
+# key: textblob
+# --
+# https://textblob.readthedocs.io/en/dev/quickstart.html
+from textblob import TextBlob

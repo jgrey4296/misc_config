@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: relative_path
+# key: relative_path
+# --
+def path(self, filename):
+    """ Navigate from the file,
+    not the cwd """
+    return abspath(join(split(__file__)[0],
+                        '..',
+                        filename))
+

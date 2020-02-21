@@ -136,9 +136,9 @@
 ** [[~/.spacemacs.d/setup_files/pomodoro_log.org][Pomodoro Log]]
 ** -----------------------------------------------------------------------------
 ** Programming
-*** [[file:~/github/writing/orgfiles/trie_layer.org::*%5B%5B~/.spacemacs.d/layers/trie%5D%5BTrie-layer%5D%5D][Trie-layer]]
+*** [[file:~/github/writing/orgfiles/trie_layer.org][Trie-layer]]
 *** Python
-**** TODO [[~/github/pythonRuleEngine][Python Rule Language and Engine]]                                       :python:important:todo:meta:simulation:institutions:exclusion_logic:library:parsing:production_system:rules:
+**** TODO [[/Users/jgrey/github/py_rule][Python Rule Language and Engine]]                                       :python:important:todo:meta:simulation:institutions:exclusion_logic:library:parsing:production_system:rules:
 ***** Recap current language capabilities
 ***** integrate layer architecture
 ***** TODO implement type checking?
@@ -169,12 +169,11 @@
       physical constraint / action
 
 **** [[file:~/github/writing/orgfiles/cairo_pipe.org::*Cairo%20Pipeline][Cairo Pipeline]]
-**** [[~/github/heuristicRBTreeWeighting][Heuristic Tree Weighting]]                                                   :obsolete:incomplete:old:python:
-**** [[~/github/nytimes_scraper][NYT Scraper]]                                                                :data_analysis:grammar:scraper:dataset:nytimes:
+**** [[/Users/jgrey/github/languageLearning/python/misc_tests/heuristicRBTreeWeighting][Heuristic Tree Weighting]] :obsolete:incomplete:old:python:
 *** Javascript / Web
-**** [[~/github/mordor-alike][Mordor Like Idea]]                                                           :nemesis:mordor:javascript:obsolete:incomplete:grammar:
-**** TODO [[~/github/newspaper_gen][Newspaper Generator]]                                                   :javascript:generative:front_end:newspaper:web:procedural:
-**** [[~/github/hexagonAITest][Hexagon Board / AI Test]]                                                    :front_end:incomplete:javascript:old:parsing:web:
+**** [[/Users/jgrey/github/languageLearning/graphical/javascript/mordor-alike][Mordor Like Idea]] :nemesis:mordor:javascript:obsolete:incomplete:grammar:
+**** TODO [[/Users/jgrey/github/js_newspaper][Newspaper Generator]]             :javascript:generative:front_end:newspaper:web:procedural:
+**** [[/Users/jgrey/github/js_hexagon_ai][Hexagon Board / AI Test]]             :front_end:incomplete:javascript:old:parsing:web:
 *** Prolog                                                                      :todo:programming:institutions:ASP:tutorial:
 **** look at Bath Institutional ASP
 **** [[file:~/github/otherLibs/instal-stable][InSTaL]]
@@ -192,7 +191,7 @@
 *** Haskell                                                                     :monads:theory:programming:haskell:
 **** look at implementation of monad transformers
 *** To Clean
-**** [[~/github/happiton][Happiton]]                                            :python:directory:hofstadter:
+**** [[/Users/jgrey/github/languageLearning/graphical/javascript/happiton][Happiton]] :python:directory:hofstadter:
 *** Prototypes
 **** Hex Board -> Preact
 **** Battle System
@@ -214,7 +213,7 @@
 *** Algorithms
 **** [[file:~/github/otherLibs/BPS][Building Problem Solvers]]
 **** [[file:~/github/otherLibs/code-for-blog/2018/type-inference][Python Type Inference]]                                                      :directory:hindley_milner:type_inference:python:
-**** [[file:~/github/otherLibs/code-for-blog/2018/markov-simple][Python Markov chain]]                                                        :directory:markov:python:
+**** [[file:~/github/otherLibs/code-for-blog/2018/markov-simple][Python Markov chain]] :directory:markov:python:
 **** [[file:~/github/otherLibs/code-for-blog/2018/unif][Python Unification]]                                                         :directory:python:unification:
 **** [[file:~/github/otherLibs/CommonLispCode/micro-talespin.lisp][Micro-Talespin]]                                                             :directory:architecture:narrative:talespin:lisp:
 **** [[file:~/github/otherLibs/BPS][Building Problem Solvers]]                                                   :directory:rules:lisp:
@@ -222,7 +221,6 @@
 **** [[https://robertheaton.com/2018/12/17/wavefunction-collapse-algorithm/][Wave function collapse]]                                                     :wave_function_collapse:tutorial:to_implement:algorithm:
 **** [[file:~/github/otherLibs/cathoristic-logic][Cathoristic Logic]]                                                          :directory:haskell:logic:praxis:exclusion_logic:
 **** [[file:~/github/writing/orgfiles/machine_learning.org::*Machine Learning Notes][Machine Learning Notes]]
-**** [[file:~/github/writing/orgfiles/nlp.org::*Natural Language Processing:][Natural Language Processing:]]
 ** Datasets
 *** [[file:/Users/jgrey/github/writing/other_files/main_bookmarks.html][Bookmarks]]                                                                   :web:html:bookmarks:directory:
     treat these as codings?
@@ -275,42 +273,14 @@
      [[file:~/Mega/code_backups/cotillion.zip][Cotillion Zip]]
 
 ***** Rules
-**** WoW Quests
-     [[file:~/Mega/Datasets/gameData/allQuests.tsv][file:~/Mega/Datasets/allQuests.tsv]]
-**** DOTA Changelog
 **** [[file:~/Mega/Datasets/gameData/DevMaterials][Postmortem Dev Materials]]
-**** [[file:~/Mega/Datasets/gameData/BoI][Binding of Isaac]]
-**** [[file:~/Mega/Datasets/gameData/CK2][Crusader Kings]]
-**** [[file:~/Mega/Datasets/gameData/EUIV][Europa Universalis]]
-**** [[file:~/Mega/Datasets/gameData/democracy3][Democracy 3]]
-**** [[file:~/Mega/Datasets/gameData/d3_africa][Democracy 3 Africa]]
-**** [[file:~/Mega/Datasets/gameData/distant_worlds][Distant Worlds]]
-**** [[file:~/Mega/Datasets/gameData/dontstarve][Don't Starve]]
-**** [[file:~/Mega/Datasets/gameData/dungeon_of_the_endless][Dungeon of the Endless]]
-**** [[file:~/Mega/Datasets/gameData/dwarf_fortress][Dwarf Fortress]]
-**** [[file:~/Mega/Datasets/gameData/invisibleInc][Invisible Inc]]
-**** [[file:~/Mega/Datasets/gameData/king_dragon_pass][King of Dragon Pass]]
-**** [[file:~/Mega/Datasets/gameData/offworld_trading][Offworld Trading]]
-**** [[file:~/Mega/Datasets/gameData/prison_architect][Prison Architect]]
-     [[file:~/Mega/Datasets/gameData/prisons][file:~/Mega/Datasets/gameData/prisons]]
-**** [[file:~/Mega/Datasets/gameData/red_shirt][Red Shirt]]
-**** [[file:~/Mega/Datasets/gameData/rimworld][RimWorld]]
-**** [[file:~/Mega/Datasets/gameData/stellaris][Stellaris]]
-**** [[file:~/Mega/Datasets/gameData/sunlessSea][Sunless Sea]]
-**** [[file:~/Mega/Datasets/gameData/the_guild2][The Guild 2]]
-**** [[file:~/Mega/Datasets/gameData/unrest][Unrest]]
-**** [[file:~/Mega/Datasets/gameData/witcher3][Witcher 3]]
-**** [[file:~/Mega/code_backups/jg-SpaceBase-DF9][SpaceBase DF-9]]
-**** [[file:~/Mega/code_backups/games/SimHealth_DOS_EN.zip][SimHealth]]
-**** [[file:~/Mega/code_backups/games/Yoda_Stories.zip][Yoda Stories]]
+**** [[file:~/Mega/Datasets/code_backups/games/SimHealth_DOS_EN.zip][SimHealth]]
+**** [[file:~/Mega/Datasets/code_backups/games/Yoda_Stories.zip][Yoda Stories]]
 **** [[file:~/Mega/Documents/Kingdom_RPG.zip][Kingdom]]
 **** [[file:~/Mega/Documents/Microscope_RPG.zip][Microscope]]
 *** Text
 ****** [#A] NYT
 ******* try using title trie grammars
-****** [[file:~/Mega/Datasets/texts/Peake,_Mervyn][Gormenghast]]
-****** [[file:~/Mega/Datasets/texts/Discworld][Discworld]]
-****** [[file:~/Mega/Datasets/texts/40k_txts][40k]]
 ****** Supreme Court
 ******* [[file:~/Mega/Datasets/compressed/scotus/supreme_court_dialogs_corpus_v1.01(1).zip][Dialogue]]
 ******* Cases

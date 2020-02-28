@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: files.dfs
+# key: files.dfs
+# --
+
+from os.path import join, splitext
+from os import listdir
+
+def get_data_files(initial, ext):
+    logging.info("Getting Data Files")
+    if not isinstance(ext, list):
+        ext = [ext]
+    if not isinstance(initial, list):
+        initial = [initial]
+    files = []
+    queue = initial[:]
+    while bool(queue):
+        current = queue.pop(0)
+        if isfile(current) and splitext(current)[1] in ext:
+            files.append(current)
+        elif isdir(current):
+            sub = [join(current,x) for x in listdir(current)]
+            queue += sub
+
+    logging.info("Found {} {} files".format(len(files), ext))
+    return files

@@ -28,7 +28,6 @@
     (golden-ratio :excluded t)
     (zoom-frm :excluded t)
     (company :excluded t)
-    (projectile :excluded t)
     (smex :excluded t)
     (2048-game :excluded t)
     (tetris :excluded t)

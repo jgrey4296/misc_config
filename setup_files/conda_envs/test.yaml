@@ -1,0 +1,7 @@
+name: test
+channels:
+  - defaults
+dependencies:
+  - python=2.7
+prefix: /opt/anaconda3/envs/test
+

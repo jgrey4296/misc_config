@@ -1,0 +1,7 @@
+name: youtube
+channels:
+  - defaults
+dependencies:
+  - google-api-python-client
+prefix: /opt/anaconda3/envs/youtube
+

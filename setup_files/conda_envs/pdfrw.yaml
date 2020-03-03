@@ -1,0 +1,7 @@
+name: pdfrw
+channels:
+  - defaults
+dependencies:
+  - pdfrw
+prefix: /opt/anaconda3/envs/pdfrw
+

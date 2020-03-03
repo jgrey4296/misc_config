@@ -1,0 +1,10 @@
+name: pymc
+channels:
+  - defaults
+dependencies:
+  - python=3.6
+  - pymc3
+  - mkl-service
+  - ipython
+prefix: /opt/anaconda3/envs/pymc
+

@@ -3,7 +3,6 @@ export PATH=/sbin:/usr/sbin:/bin:/usr/bin
 export PATH=/usr/local/bin:$PATH
 export PATH=/Applications/SuperCollider:$PATH
 export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
-export PATH=/Volumes/Documents/Dropbox/Programming/Perl:$PATH
 export PATH=/Applications/Racket\ v6.1.1/bin:$PATH
 export PATH=/usr/local/go/bin:$PATH
 

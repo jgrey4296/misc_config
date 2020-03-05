@@ -13,10 +13,8 @@ export JG_PYLIBS=~/github/.installed_pylibs
 
 function set_non_standard_python_paths(){
     echo "Setting Non-Standard Python Paths"
-    #Useful for GI/PYGObject/GTK+3
-    export PYTHONPATH=/usr/local/lib/python3.7/site-packages
-    export PYTHONPATH=~/github/otherLibs:$PYTHONPATH #personally installed libs
-    export PYTHONPATH=~/github/:$PYTHONPATH #personally written libs
+    export PYTHONPATH=~/github/otherLibs # personally installed libs
+    export PYTHONPATH=~/github/:$PYTHONPATH # personally written libs
     export PYTHONPATH=$JG_PYLIBS:$PYTHONPATH
     export PYTHONPATH=./:$PYTHONPATH
     #source activate root --not used because it slows default startup

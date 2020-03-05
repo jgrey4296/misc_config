@@ -303,8 +303,6 @@ executes.
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
   (add-to-list 'load-path (expand-file-name "~/.spacemacs.d/lisp"))
-  (add-to-list 'load-path (expand-file-name "~/github/otherlibs/python-django.el"))
-  (add-to-list 'load-path (expand-file-name "~/github/otherlibs/pony-mode/src"))
   (add-to-list 'load-path "/usr/local/opt/erlang/lib/erlang/lib/tools-3.0.1/emacs")
   (make-directory (expand-file-name "~/.emacs.d/autosaves/") t)
   (make-directory (expand-file-name "~/.emacs.d/backups/") t)

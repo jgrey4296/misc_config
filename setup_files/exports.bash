@@ -35,8 +35,6 @@ export PATH=$JACAMO_HOME/scripts:$PATH
 export PATH=/usr/local/lib/ruby/gems/2.6.0/bin:$PATH
 export PATH=/usr/local/opt/ruby/bin:$PATH
 
-#for anaconda:
-export PATH=~/anaconda3/bin:$PATH
 
 #setting up the prompt:
 export PS1='(\j): \D{%D} \A \u:  '

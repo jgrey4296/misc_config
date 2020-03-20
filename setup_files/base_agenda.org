@@ -169,11 +169,11 @@
       physical constraint / action
 
 **** [[file:~/github/writing/orgfiles/cairo_pipe.org::*Cairo%20Pipeline][Cairo Pipeline]]
-**** [[/Users/jgrey/github/languageLearning/python/misc_tests/heuristicRBTreeWeighting][Heuristic Tree Weighting]] :obsolete:incomplete:old:python:
+**** [[/Users/jgrey/github/languageLearning/python/misc_tests/heuristicRBTreeWeighting][Heuristic Tree Weighting]]                                                   :python:obsolete:incomplete:old:
 *** Javascript / Web
-**** [[/Users/jgrey/github/languageLearning/graphical/javascript/mordor-alike][Mordor Like Idea]] :nemesis:mordor:javascript:obsolete:incomplete:grammar:
-**** TODO [[/Users/jgrey/github/js_newspaper][Newspaper Generator]]             :javascript:generative:front_end:newspaper:web:procedural:
-**** [[/Users/jgrey/github/js_hexagon_ai][Hexagon Board / AI Test]]             :front_end:incomplete:javascript:old:parsing:web:
+**** [[/Users/jgrey/github/languageLearning/graphical/javascript/mordor-alike][Mordor Like Idea]]                                                           :nemesis:mordor:javascript:obsolete:incomplete:grammar:
+**** TODO [[/Users/jgrey/github/js_newspaper][Newspaper Generator]]                                                   :javascript:generative:front_end:newspaper:web:procedural:
+**** [[/Users/jgrey/github/js_hexagon_ai][Hexagon Board / AI Test]]                                                    :front_end:incomplete:javascript:old:parsing:web:
 *** Prolog                                                                      :todo:programming:institutions:ASP:tutorial:
 **** look at Bath Institutional ASP
 **** [[file:~/github/otherLibs/instal-stable][InSTaL]]
@@ -191,7 +191,7 @@
 *** Haskell                                                                     :monads:theory:programming:haskell:
 **** look at implementation of monad transformers
 *** To Clean
-**** [[/Users/jgrey/github/languageLearning/graphical/javascript/happiton][Happiton]] :python:directory:hofstadter:
+**** [[/Users/jgrey/github/languageLearning/graphical/javascript/happiton][Happiton]]                                                                   :python:directory:hofstadter:
 *** Prototypes
 **** Hex Board -> Preact
 **** Battle System
@@ -213,7 +213,7 @@
 *** Algorithms
 **** [[file:~/github/otherLibs/BPS][Building Problem Solvers]]
 **** [[file:~/github/otherLibs/code-for-blog/2018/type-inference][Python Type Inference]]                                                      :directory:hindley_milner:type_inference:python:
-**** [[file:~/github/otherLibs/code-for-blog/2018/markov-simple][Python Markov chain]] :directory:markov:python:
+**** [[file:~/github/otherLibs/code-for-blog/2018/markov-simple][Python Markov chain]]                                                        :directory:markov:python:
 **** [[file:~/github/otherLibs/code-for-blog/2018/unif][Python Unification]]                                                         :directory:python:unification:
 **** [[file:~/github/otherLibs/CommonLispCode/micro-talespin.lisp][Micro-Talespin]]                                                             :directory:architecture:narrative:talespin:lisp:
 **** [[file:~/github/otherLibs/BPS][Building Problem Solvers]]                                                   :directory:rules:lisp:

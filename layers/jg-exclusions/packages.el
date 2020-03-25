@@ -1,5 +1,7 @@
 (defconst jg-exclusions-packages
   '(
+    (helm-cscope :excluded t)
+    (xcscope :excluded t)
     (ruby-test-mode :excluded t)
     (pyenv :excluded t)
     (git-gutter :excluded t)

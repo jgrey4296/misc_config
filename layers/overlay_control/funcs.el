@@ -1,5 +1,5 @@
 ;; General Functions
-(defstruct overlay_control/overlay-struct regexp face bounds)
+(cl-defstruct overlay_control/overlay-struct regexp face bounds)
 
 (defun overlay_control/set-overlay (candidate)
   "Set the default overlay to be used"

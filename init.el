@@ -490,7 +490,7 @@ you should place your code here."
     "b a" 'jg-spacemacs-main-layer/goto-org-agenda-file
     "b c" 'jg-spacemacs-main-layer/clear-buffer
     "b g" 'jg-spacemacs-main-layer/goto-github
-    "b i" 'clone-indirect-buffer-other-window
+    "b i" 'clone-indirect-buffer-other-window-without-purpose
     "b m" 'jg-spacemacs-main-layer/goto-messages
     "b M" 'jg-spacemacs-main-layer/goto-mega
     "b ~" 'jg-spacemacs-main-layer/goto-home

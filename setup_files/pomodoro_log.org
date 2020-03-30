@@ -123,3 +123,5 @@
     Pomodoro Session: reading up on worldbuilding
 ** (2019/Nov/27) 16:28
     Pomodoro Session: distraction
+** (2020/Mar/28) 19:28
+    Pomodoro Session: got all non-skipped tests working. Type definition is working again

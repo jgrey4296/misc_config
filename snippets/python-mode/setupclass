@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: setUpClass
+# key: setUpClass
+# --
+@classmethod
+def setUpClass(cls):
+    return

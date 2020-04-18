@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: importlib
+# key: importlib
+# --
+import importlib
+
+mod = importlib.import_module('module')

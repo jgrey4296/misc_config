@@ -9,3 +9,6 @@ ac-comphist.dat
 tw_acct.index
 tw_tag.index
 log.*
+GPATH
+GRTAGS
+GTAGS

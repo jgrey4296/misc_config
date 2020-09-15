@@ -15,8 +15,6 @@
     (slack :excluded t)
     (ido :excluded t)
     (ido-vertical-mode :excluded t)
-    (eyebrowse :excluded t)
-    (persp-mode :excluded t)
     (ace-link :excluded t)
     (desktop :excluded t)
     (doc-view :excluded t)

@@ -125,3 +125,21 @@
     Pomodoro Session: distraction
 ** (2020/Mar/28) 19:28
     Pomodoro Session: got all non-skipped tests working. Type definition is working again
+** (2020/May/11) 15:42
+    Pomodoro Session: tracing through pprinting in py_rule
+** (2020/May/11) 16:24
+    Pomodoro Session: continuing to refactor printing
+** (2020/May/11) 17:16
+    debugging trie operations
+** (2020/May/12) 18:27
+    Pomodoro Session: traced through variable set generation
+** (2020/May/12) 18:54
+    Pomodoro Session: refactoring params in production operators
+** (2020/May/12) 19:57
+    Pomodoro Session: continuing to work on var_set generation
+** (2020/May/14) 19:00
+    Pomodoro Session: tracing down type checking issues
+** (2020/May/14) 19:49
+    Pomodoro Session: brought all tests up to passing
+** (2020/May/15) 20:26
+    Pomodoro Session: looked into printing code

@@ -213,8 +213,7 @@
 **** [[file:~/github/otherLibs/npl][NPL]]
 **** [[file:~/github/otherLibs/phonetic-similarity-vectors][Phonetic Similarity Vectors]]
 *** Algorithms
-**** [[file:~/github/otherLibs/BPS][Building Problem Solvers]]
-**** [[file:~/github/otherLibs/code-for-blog/2018/type-inference][Python Type Inference]]                                                      :directory:hindley_milner:type_inference:python:
+**** [[file:~/github/otherLibs/code-for-blog/2018/type-inference][Python Type Inference]] :directory:hindley_milner:type_inference:python:
 **** [[file:~/github/otherLibs/code-for-blog/2018/markov-simple][Python Markov chain]]                                                        :directory:markov:python:
 **** [[file:~/github/otherLibs/code-for-blog/2018/unif][Python Unification]]                                                         :directory:python:unification:
 **** [[file:~/github/otherLibs/CommonLispCode/micro-talespin.lisp][Micro-Talespin]]                                                             :directory:architecture:narrative:talespin:lisp:
@@ -717,10 +716,6 @@
       current file.  The corresponding variable is ‘org-todo-keywords’.
 
 *** Expansions
-**** buffer groups / registers
-     be able to add a buffer / marked buffers to a register,
-     then search in them, or step through them
-     persistent?
 **** Buffer Register Sets
 ***** Add files/buffers to register
 ****** Regex / File Type
@@ -781,6 +776,10 @@
 *** [[http://userpage.fu-berlin.de/~ram/pub/pub_jf47ht81Ht/doc_kay_oop_en][Alan Kay OOP]]                                                                :programming_languages:
 *** [[https://scholar.google.com/citations?hl=en&user=FncBQzIAAAAJ&view_op=list_works&sortby=pubdate][Cristiano Castelfranchi]]                                                     :programming_languages:MAS:
 *** [[http://donellameadows.org/][Donna Meadows]]                                                               :MAS:systems_thinking:
+*** [[https://marhicks.com/syllabi.html#womenincomputing][Mar Hicks]]                                                                   :quote:
+    "My classes are not only about "what happened" in the past, but how we know
+    what we think we know. I often tell my students that history is the process
+    of deciding which stories to tell and which stories to hide."
 ** -----------------------------------------------------------------------------
 ** Misc
 *** TODO Prototype some Mechanical Turk Tasks                                   :survey:online:price:amazon:
@@ -797,6 +796,7 @@
 *** [[https://en.wikipedia.org/wiki/Kanban][Kanban]]
 *** [[http://plantuml.com/sequence-diagram][PlantUML]]
 *** [[https://multiagentcontest.org/publications/][Multi Agent Contest]]
+    https://github.com/agentcontest/massim_2020
 *** [[http://slatestarcodex.com/2014/04/28/the-control-group-is-out-of-control/][The Control Group is out of control]]                                         :science:methods:
 *** [[http://www.sosmath.com/algebra/fraction/frac3/frac3.html][SoS Math]]                                                                    :math:useful:
 *** [[http://www.vox.com/2014/10/27/7062921/immigration-1900-race-racism-quotas-eugenics-map-settled-united-states][Eugenics map]]
@@ -818,6 +818,7 @@
     Performance is good, but so is not designing something
     to take up entire percentage points of world energy.
 ** Tasks
+*** TODO [[https://quality-diversity.github.io/papers][Quality-Diversity]]
 *** TODO emacs editor
 *** TODO Spec compile to architecture
 *** TODO Source code analysis

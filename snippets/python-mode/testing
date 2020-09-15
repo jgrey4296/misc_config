@@ -4,10 +4,14 @@
 # group: testing
 # --
 #https://docs.python.org/3/library/unittest.html
+# https://docs.python.org/3/library/unittest.mock.html
+
 from os.path import splitext, split
+
 import unittest
+import unittest.mock as mock
+
 import logging
-from test_context import $1
 $0
 
 class $2(unittest.TestCase):
@@ -23,7 +27,11 @@ class $2(unittest.TestCase):
         return 1
 
     #----------
-    #use testcase snippets
+    # use testcase snippet
+    # mock.Mock / MagicMock
+    # create_autospec
+    # @patch(' ') / with patch.object(...)
+
     $3
 
 if __name__ == "__main__":

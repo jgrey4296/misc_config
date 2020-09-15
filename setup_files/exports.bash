@@ -13,6 +13,9 @@ export PATH=~/.npm-global/bin:$PATH
 export PATH=/Applications/SuperCollider/SuperCollider.app/Contents/Resources:$PATH
 export PATH=/Applications/SuperCollider/SuperCollider.app/Contents/MacOS:$PATH
 
+#sqlite
+export PATH=/usr/local/opt/sqlite/bin:$PATH
+
 #for latex (mactex, when installed):
 # export PATH=/usr/local/texlive/2017/bin/x86_64-darwin:$PATH
 
@@ -38,3 +41,4 @@ export GTAGSLABEL=pygments
 
 #Shell Location update
 export SHELL="$(which bash)"
+

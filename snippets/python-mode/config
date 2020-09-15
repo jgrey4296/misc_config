@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: config
+# key: config
+# --
+import configparser
+
+config = configparser.ConfigParser()
+with open($1, 'r') as f:
+     config.read_file(f)
+$0

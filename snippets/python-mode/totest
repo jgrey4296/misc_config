@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: totest
+# key: totest
+# --
+@unittest.skip("TODO")
+def test_$1(self):
+    pass
+
+$0

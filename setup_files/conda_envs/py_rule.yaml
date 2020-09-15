@@ -1,9 +1,0 @@
-name: py_rule
-channels:
-  - defaults
-dependencies:
-  - python=3.7.5
-  - pyparsing
-  - pygments
-prefix: /opt/anaconda3/envs/py_rule
-

@@ -13,6 +13,8 @@ export JG_PYLIBS=~/github/.installed_pylibs
 
 function set_non_standard_python_paths(){
     echo "Setting Non-Standard Python Paths"
+    # Actually using python -m pip ... is better than the next line
+    # export PYTHONPATH=/usr/local/lib/python3.7/site-packages # where pip3 installs
     export PYTHONPATH=~/github/otherLibs # personally installed libs
     export PYTHONPATH=~/github/:$PYTHONPATH # personally written libs
     export PYTHONPATH=$JG_PYLIBS:$PYTHONPATH

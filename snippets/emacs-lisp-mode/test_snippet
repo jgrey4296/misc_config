@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: test snippet
+# uuid:
+# key: testsnip
+# condition: t
+# --
+(message "Test")

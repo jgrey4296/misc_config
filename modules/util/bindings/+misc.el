@@ -386,9 +386,15 @@ Continues comments if executed from a commented line. Consults
                 which-key-replacement-alist)
     (cl-pushnew `((,(format "\\`\\(?:<\\(?:\\(?:f1\\|help\\)>\\)\\|C-h\\|%s h\\) b\\'" prefix-re))
                   nil . "bindings")
+                which-key-replacement-alist)
+    (cl-pushnew `((,(format "\\`\\(?:C-w\\|%s w\\) m\\'" prefix-re))
+                  nil . "maximize")
                 which-key-replacement-alist))
 
-  (setq! which-key-sort-order 'which-key-key-order-alpha))
+  (setq! which-key-sort-order 'which-key-key-order-alpha)
+)
+;;; Which-Key
+
 ;;; Minibuffer
 (when (featurep! :editor evil +everywhere)
   ;; NOTE SPC u replaces C-u as the universal argument.
@@ -425,12 +431,6 @@ Continues comments if executed from a commented line. Consults
     "C-j" #'next-line-or-history-element
     "C-k" #'previous-line-or-history-element) )
 
-;;; Which-Key
-(after! which-key
-  (let ((prefix-re (regexp-opt (list doom-leader-key doom-leader-alt-key))))
-    (cl-pushnew `((,(format "\\`\\(?:C-w\\|%s w\\) m\\'" prefix-re))
-                  nil . "maximize")
-                which-key-replacement-alist)))
 
 ;;; Help bindings
 (map! (:after help :map help-mode-map

@@ -139,7 +139,8 @@
        :desc "Evil ex path"                  "p"   (cmd! (evil-ex "R!echo "))
        :desc "From clipboard"                "y"   #'+default/yank-pop
        :desc "From evil register"            "r"   #'evil-ex-registers
-       :desc "Snippet"                       "s"   #'yas-insert-snippet
+       (:when (featurep! :editor snippet)
+       :desc "Snippet"                       "s"   #'yas-insert-snippet)
        :desc "Unicode"                       "u"   #'unicode-chars-list-chars
 )
 
@@ -280,6 +281,7 @@
        )
 
       ;;; <leader> y --- snippets
+      (:when (featurep! :editor snippets)
       (:prefix-map ("y" . "snippets")
        :desc "Expand Snippet"        "y" #'yas-expand
        :desc "New snippet"           "n" #'yas-new-snippet
@@ -288,6 +290,7 @@
        :desc "Reload snippets"       "r" #'yas-reload-all
        :desc "Create Temp Template"  "c" #'aya-create
        :desc "Use Temp Template"     "e" #'aya-expand)
+      )
 
       ;;; <leader> t --- toggle
       (:prefix-map ("t" . "toggle")

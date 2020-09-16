@@ -1,7 +1,7 @@
-(setq-default shell-default-shell 'shell
-              shell-protect-eshell-prompt 0
-              shell-enable-smart-eshell t
-              )
+ (setq-default shell-default-shell 'shell
+               shell-protect-eshell-prompt 0
+               shell-enable-smart-eshell t
+               )
 
 (after! erlang
   ;; (also has a load path set in root el file)
@@ -9,30 +9,45 @@
         exec-path (cons "/usr/local/opt/erlang/bin" exec-path)
         )
   )
-(after! rainbow-mode
-  ;; (spacemacs/set-leader-keys "t C r" 'rainbow-mode)
+(use-package! rainbow-mode
+  :defer
+  :init
+  (map! :leader
+        :prefix ("t C" . "Colours")
+        "r" 'rainbow-mode)
   (add-hook 'prog-mode-hook 'rainbow-mode)
 )
-(after! evil-string-inflection
-  (define-key evil-normal-state-map
-    "g '" 'evil-operator-string-inflection
-    )
+(use-package! evil-string-inflection
+  :defer
+  :commands evil-operator-string-inflection
+  :init
+  (map! :n "g '" 'evil-operator-string-inflection)
   )
-(after! free-keys
+(use-package! free-keys
+  :defer
+  :commands (free-keys free-keys-set-prefix)
+  :init
   (map! :leader
-        :prefix ("a U" . "Utilities")
-        "f k" 'free-keys
-        "f p" 'free-keys-set-prefix
+        (:prefix ("a U" . "Utilities")
+         (:prefix ("f" . "free-keys")
+          "k" 'free-keys
+          "p" 'free-keys-set-prefix
+          )
+         )
         )
   )
-(after! dired-quick-sort
-    (dired-quick-sort-setup)
-    )
-(after! highlight-parentheses
+(use-package! dired-quick-sort
+  :init
+  (dired-quick-sort-setup)
+  )
+(use-package! highlight-parentheses
+  :init
   (setq hl-paren-colors '("color-16" "color-16" "color-16" "color-16")
         hl-paren-background-colors '("Springgreen3" "color-26" "color-91" "IndianRed3"))
   )
-(after! undo-tree
+(use-package! undo-tree
+  :init
+  (global-undo-tree-mode)
   (map! :leader
         "b u" 'undo-tree-visualize
     )

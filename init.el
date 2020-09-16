@@ -17,8 +17,8 @@
 (doom!
        ; Personal Modules:
        :util
-       spacemacs-char-utility
-       (base_bindings +bindings +mybinds)
+       char-insert
+       (bindings +bindings +mybinds)
 
        :main
        (personal +active)

@@ -1,0 +1,3 @@
+* tag-unify Layer
+  A Utility layer to improve tag usage in org mode. 
+  Adds helm selection, tag counting, bibtex management.

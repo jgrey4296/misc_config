@@ -1,0 +1,16 @@
+* Org_Unit Spacemacs Layer
+  Adds a keybinding (", . T") to trigger unit testing of an Org file.
+  
+  Uses drawers named "__org_unit__" to provide grouped unit tests of the following grammar:
+
+  *Ownership*:
+  { Document | A Section | "SECTION_NAME" } should have {section | tag } "NAME".
+  { Document | A Section | "SECTION_NAME" } should have codeblock {in "LANG"}?.
+
+  *Existential*:
+  { Document | A Section | "SECTION_NAME" } should be {larger | smaller} than X {words | sections | paragraphs}.
+
+  *Misc*
+  { Document | A Section | "SECTION_NAME" } should precede "SECTION".
+  { Document | A Section | "SECTION_NAME" } should cite:CITELIST.
+  { Document | A Section | "SECTION_NAME" } should mention "TEXT".

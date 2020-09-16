@@ -1,0 +1,2 @@
+* char insertion doom module
+  Adds useful greek(g), math(M), subscript(s), and logic(l) keybindings to C-x8

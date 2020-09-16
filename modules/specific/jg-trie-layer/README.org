@@ -1,0 +1,58 @@
+* Trie Layer
+  A Prototype IDE layer to write trie based production rules for an AI System.
+** Todos:
+*** Funcs
+  TODO redisplay io window
+  TODO load directory and setup pipeline
+  TODO Filter to parse and handle python responses
+  TODO Sentinel to handle python state changes
+  TODO Trigger a Bank of tests
+  TODO python server load
+  TODO python server query
+  TODO python server inspect
+  TODO python server test
+  TODO python server quit
+  TODO python server replace
+  TODO Python server report
+*** Inst-mode
+  TODO Specify a working directory
+  TODO set up windows
+*** Trie explore mode
+  TODO: possibly limit size of x
+  TODO: make overlay
+  TODO: move to the parent node before re-display
+  TODO: M-RET to prev-line
+*** Trie Management
+  TODO find rules
+  TODO create rule
+  TODO delete rule
+  TODO delete type
+  TODO delete crosscut
+  TODO delete sequence
+  TODO decrement priors layer
+  TODO increment priors layer
+  TODO decrement post layer
+  TODO increment post layer
+  TODO show analysis results
+  TODO show side buffer
+  TODO update buffer contents
+  TODO sort conditions and actions
+  TODO el string helm
+  TODO insert tag
+  TODO insert transform
+  TODO insert action
+  TODO insert from side buffer
+  TODO remove component
+  TODO cleanup
+  TODO write rules to files
+  TODO analyse data
+*** Trie Mode
+  TODO: M-RET to prev-line
+  TODO later: set no longer needed variables to nil
+*** Trie Sequence
+  TODO: overlay unconnected cells
+  TODO: remove from inputs and outputs
+  TODO: M-RET to prev-line
+  TODO: add to hs-special-modes-alist
+  TODO: mod after-change-functions
+  TODO: add helms for types, crosscuts, patterns, tests, tags,

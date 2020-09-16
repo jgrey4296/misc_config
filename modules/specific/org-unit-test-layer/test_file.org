@@ -1,0 +1,40 @@
+* Top Level Document                                                            :blah:
+  :__doctest__:
+  Group 1:
+  Document should have section "first".
+  "first" should have section "introduction".
+  "introduction" should be larger than 5 words.
+  "introduction" should be smaller than 10 sections.
+  "introduction" should precede "background".
+  "background" should be larger than 3 sections.
+
+  :END:
+
+  should have (section/tag/codeblock)
+  should be (longer/shorter)
+  should (precede/cite/mention)
+
+
+
+** 1: First
+*** introduction
+    :__doctest__:
+    Group 2:
+    "background" should cite:Bach,Chronicle1865,James1902,Hohfeld1913.
+    "background" should mention "the importance of a history of debt".
+    A Section should have tag "blah".
+    "methods" should have codeblock.
+    "methods" should have codeblock in "python".
+    :END:
+
+    aihweg
+    aowiegh
+** 2: Second
+*** blah
+**** bloo
+     awegage
+** 3: Third
+**** awefgh
+     awegh haoweg
+     awoiegh
+     awoeghaw

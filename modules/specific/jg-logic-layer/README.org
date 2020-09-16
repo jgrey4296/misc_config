@@ -1,0 +1,5 @@
+* Logic Layer
+  Sets up org-babel local packages for 
+  ccalc,
+  clingo,
+  prolog

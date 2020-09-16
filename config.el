@@ -10,7 +10,8 @@
       user-mail-address "johngrey4296@gmail.com")
 
 (setq overflow-newline-into-fringe t
-     evil-move-cursor-back nil
+      evil-move-cursor-back nil
+      +doom-quit-messages nil
       )
 
 ;; There are two ways to load a theme. Both assume the theme is installed and

@@ -6,6 +6,9 @@ export PATH=/Applications/SuperCollider:$PATH
 export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
 export PATH=/usr/local/go/bin:$PATH
 
+# Doom
+export PATH=~/.emacs.d/bin/:$PATH
+
 #Node:
 export PATH=~/.npm-global/bin:$PATH
 

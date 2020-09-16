@@ -51,8 +51,6 @@
          :gn "S-s-RET"      #'+default/newline-above
          :gn [S-s-return]   #'+default/newline-above)))
 
-;;; Misc Bindings
-
 (when (featurep! +bindings)
   (load! "+misc-bindings")
 )

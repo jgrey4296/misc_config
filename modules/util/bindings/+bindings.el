@@ -49,7 +49,6 @@
 ;;; Buffer
 (map! :leader
       :prefix ("b" . "Buffer")
-      :desc "Kill Buffer" "d" #'(lambda () (interactive) (kill-buffer (current-buffer)))
       :desc "Pop up scratch buffer" "x"   #'doom/open-scratch-buffer
       )
 

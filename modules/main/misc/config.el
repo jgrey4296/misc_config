@@ -45,9 +45,8 @@
   (setq hl-paren-colors '("color-16" "color-16" "color-16" "color-16")
         hl-paren-background-colors '("Springgreen3" "color-26" "color-91" "IndianRed3"))
   )
-(use-package! undo-tree
-  :init
-  (global-undo-tree-mode)
+(after! undo-tree
+  (global-undo-tree-mode 1)
   (map! :leader
         "b u" 'undo-tree-visualize
     )

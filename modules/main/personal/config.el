@@ -145,10 +145,6 @@
     ;; TODO
     ;; (spacemacs/set-leader-keys "a U v " 'vlf-set-batch-size))
     )
-  (after! evil-quickscope
-    ;; TODO (spacemacs/set-leader-keys "t q" 'jg-spacemacs-main-layer/toggle-quickscope-always)
-    (global-evil-quickscope-always-mode 1)
-    )
   (after! dired
     (add-transient-hook! dired-mode
       (evil-define-key* 'normal dired-mode-map
@@ -176,37 +172,6 @@
   (after! ibuffer
     (add-transient-hook! 'ibuffer-hook 'jg-spacemacs-main-layer/setup-ibuffer)
     )
-  (after! vimish-fold
-    (vimish-fold-global-mode)
-    (evil-define-key '(normal visual) global-map
-      (kbd "z v a") 'vimish-fold-toggle
-      (kbd "z v A") 'vimish-fold-toggle-all
-      (kbd "z v f") 'vimish-fold
-      (kbd "z v d") 'vimish-fold-delete
-      (kbd "z v D") 'vimish-fold-delete-all
-      (kbd "z v j") 'vimish-fold-next-fold
-      (kbd "z v k") 'vimish-fold-previous-fold
-      (kbd "z v m") 'vimish-fold-refold-all
-      (kbd "z v r") 'vimish-fold-unfold-all
-      )
-    )
-  (after! hi-lock
-    (message "Setting up Hi lock")
-    (global-hi-lock-mode)
-
-    (evil-define-key '(normal visual) hi-lock-map
-      (kbd "z ' i") 'hi-lock-write-interactive-patterns
-      (kbd "z ' u") 'unhighlight-regexp
-      (kbd "z ' .") 'highlight-symbol-at-point
-      (kbd "z ' r") 'highlight-regexp
-      (kbd "z ' p") 'highlight-phrase
-      (kbd "z ' l") 'highlight-lines-matching-regexp
-      (kbd "z ' f") 'hi-lock-find-patterns
-      )
-
-    (which-key-add-prefix-title (kbd "z '") "Hi-lock")
-    (setq hi-lock-auto-select-face t)
-    )
   (after! neotree
     (push "^__pycache__$" neo-hidden-regexp-list)
     (push "^G\\(PATH\\|R?TAGS\\)$" neo-hidden-regexp-list)
@@ -219,9 +184,6 @@
         "v" 'pyvenv-activate
         )
       )
-    )
-  (after! dired-quick-sort
-    (setq dired-quick-sort-group-directories-last ?y)
     )
   (after! helm-gtags
     ;; Adapated from helm-gtags spacemacs layer
@@ -246,8 +208,4 @@
           "gU" 'helm-gtags-update-tags
           )
     )
-  (after! evil-iedit-state
-    ;; Used until reference to function is updated in iedit-done
-    (defalias 'iedit-cleanup 'iedit-lib-cleanup)
-    )
-)
+  )

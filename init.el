@@ -18,7 +18,7 @@
        ; Personal Modules:
        :util
        char-insert
-       (bindings +bindings +mybinds)
+       (bindings +bindings)
 
        :main
        (personal +active)
@@ -29,7 +29,7 @@
        company             ; the ultimate code completion backend
        (helm +fuzzy)       ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
-       ;;ivy               ; a search engine for love and life
+       ivy               ; a search engine for love and life
 
        :ui
        ;;deft              ; notational velocity for Emacs
@@ -66,7 +66,7 @@
        ;;multiple-cursors  ; editing in many places at once
        ;;objed             ; text object editing for the innocent
        ;;parinfer          ; turn lisp into python, sort of
-       rotate-text       ; cycle region at point between text candidates
+       ;; rotate-text       ; cycle region at point between text candidates
        snippets          ; my elves. They type so I don't have to
        ;;word-wrap         ; soft wrapping with language-aware indent
 

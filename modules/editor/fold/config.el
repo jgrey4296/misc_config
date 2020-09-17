@@ -80,15 +80,16 @@
         vimish-fold-indication-mode 'right-fringe)
   :config
   (vimish-fold-global-mode +1)
-  (map! :prefix "z v"
-      :n "a" 'vimish-fold-toggle
-      :n "A" 'vimish-fold-toggle-all
-      :n "f" 'vimish-fold
-      :n "d" 'vimish-fold-delete
-      :n "D" 'vimish-fold-delete-all
-      :n "j" 'vimish-fold-next-fold
-      :n "k" 'vimish-fold-previous-fold
-      :n "m" 'vimish-fold-refold-all
-      :n "r" 'vimish-fold-unfold-all
-      )
+  (map! :map evil-normal-state-map
+        :prefix "z v"
+        "a" 'vimish-fold-toggle
+        "A" 'vimish-fold-toggle-all
+        "f" 'vimish-fold
+        "d" 'vimish-fold-delete
+        "D" 'vimish-fold-delete-all
+        "j" 'vimish-fold-next-fold
+        "k" 'vimish-fold-previous-fold
+        "m" 'vimish-fold-refold-all
+        "r" 'vimish-fold-unfold-all
+        )
 )

@@ -3,54 +3,103 @@
 
 (message "Configuring Personal Preferences")
 (setq-default
-              auto-save-file-name-transforms (quote ((".*" "~/.emacs.d/autosaves/`" t)))
-              backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/")))
-              dired-listing-switches "-lha"
-              dired-omit-files "^\\.?#\\|^\\.$\\|^\\.DS_Store$\\|^\\.git$\\|^__pycache__$\\|^flycheck__.+\\.py\\|^\\.mypy_cache$"
-              dired-omit-verbose nil
-              display-buffer-alist (quote (("*shell*" display-buffer-same-window (nil))))
-              display-line-numbers t
-              display-line-numbers-width 4
-              evil-move-beyond-eol t
               flycheck-display-errors-function nil
               flycheck-help-echo-function nil
               flycheck-process-error-functions nil
               helm-truncate-lines t
               icicle-Completions-text-scale-decrease 0
               indent-tabs-mode nil
-              ispell-personal-dictionary (expand-file-name "~/.doom.d/setup_files/.ispell_english")
               jg-bookmark-location "~/github/writing/other_files/main_bookmarks.html"
               jg-spacemacs-main-layer/dired-recursive-switches "-aBhlR --group-directories-first"
-              jg-spacemacs-main-layer/major-modes '(ada-mode ams-tex-mode antlr-mode array-mode asm-mode autoconf-mode awk-mode bat-mode biblio-selection-mode bibtex-mode bibtex-style-mode bookmark-bmenu-mode bookmark-edit-annotation-mode bovine-grammar-mode Buffer-menu-mode c++-mode c-mode calendar-mode change-log-mode cmake-mode cmm-mode coffee-mode comint-mode common-lisp-mode completion-list-mode completion-mode context-en-mode context-mode context-nl-mode cperl-mode csharp-mode css-mode csv-mode Custom-mode cvs-status-mode cython-mode d-mode data-debug-mode dcl-mode debugger-mode decipher-mode diary-fancy-display-mode diary-mode diff-mode dns-mode doc-view-mode doctex-mode docTeX-mode dotspacemacs-mode dsssl-mode ebrowse-member-mode ebrowse-tree-mode edebug-Continue-fast-mode edebug-continue-mode edebug-eval-mode edebug-Go-nonstop-mode edebug-next-mode edebug-set-initial-mode edebug-step-mode edebug-step-through-mode edebug-Trace-fast-mode edebug-trace-mode edit-abbrevs-mode edmacro-mode eieio-custom-mode electric-describe-mode elisp-byte-code-mode emacs-lisp-mode epa-info-mode epa-key-list-mode epa-key-mode erlang-mode eshell-mode evil-command-window-mode evil-list-view-mode eww-mode trie-explore-mode f90-mode flycheck-error-list-mode flycheck-error-message-mode flymake-diagnostics-buffer-mode flyspell-prog-mode fortran-mode free-keys-mode fsharp-mode fundamental-mode gdb-script-mode gfm-mode gfm-view-mode ggtags-global-mode ggtags-view-search-history-mode ggtags-view-tag-history-mode ghc-core-mode ghci-script-mode glsl-mode gnuplot-mode gnus-group-enter-server-mode gnus-group-mode gnus-score-mode go-dot-mod-mode go-mode graphviz-dot-mode grep-mode haml-mode haskell-c2hs-mode haskell-cabal-mode haskell-mode help-mode html-erb-mode html-mode hy-mode ibuffer-mode icon-mode idl-mode idlwave-mode image-mode indent-according-to-mode indented-text-mode inf-ruby-mode inferior-hy-mode Info-edit-mode isearch-describe-mode java-mode javascript-mode js-jsx-mode js-mode js2-jsx-mode js2-mode json-mode latex-mode latex/auto-fill-mode ld-script-mode less-css-mode lisp-interaction-mode lisp-mode literate-haskell-mode log-edit-mode log-view-mode log4e-mode lua-mode m2-mode m4-mode magit-mode mail-mode makefile-automake-mode makefile-bsdmake-mode makefile-gmake-mode makefile-imake-mode makefile-makepp-mode makefile-mode Man-mode markdown-mode markdown-view-mode mercury-mode message-mode messages-buffer-mode metafont-mode metapost-mode mh-folder-mode mhtml-mode minibuffer-inactive-mode mixal-mode nroff-mode nxml-mode nxml-web-mode objc-mode occur-edit-mode occur-mode octave-mode opascal-mode org-mode outline-mode package-menu-mode paragraph-indent-text-mode pascal-mode pdf-virtual-edit-mode pdf-virtual-view-mode perl-mode picture-mode pike-mode pip-requirements-mode plain-tex-mode plantuml-mode plstore-mode pr-txt-mode process-menu-mode profiler-report-mode prog-mode prolog-inferior-mode prolog-mode ps-mode pug-mode python-mode quickurl-list-mode racket-mode reb-enter-subexp-mode reb-lisp-mode reb-mode reb-quit-subexp-mode recentf-dialog-mode reftex-index-phrases-mode reftex-reset-mode reftex-select-bib-mode reftex-select-label-mode rmail-mode rst-mode ruby-mode rust-mode rxt-help-mode sass-mode scheme-mode scss-mode select-tags-table-mode trie-sequence-mode ses-mode sgml-mode sgml-name-8bit-mode sh-mode shell-mode sieve-mode simula-mode slim-mode slitex-mode snippet-mode snmp-mode snmpv2-mode spacemacs-buffer-mode special-mode speedbar-mode sql-mode srecode-template-mode srefactor-ui-menu-mode tablist-mode tabulated-list-mode tags-table-mode tar-mode tcl-mode term-char-mode term-line-mode term-mode TeX-latex-mode tex-mode TeX-plain-tex-mode TeX-tex-mode TeX-texinfo-mode texinfo-mode text-mode todo-archive-mode todo-filtered-items-mode todo-mode toml-mode trie-mode trie-passive-mode trie-log-mode tsv-mode url-cookie-mode use-package-statistics-mode vera-mode verilog-mode vhdl-mode viper-mode wdired-change-to-wdired-mode web-mode which-key-show-major-mode wisent-grammar-mode woman-mode xref--xref-buffer-mode yaml-mode)
-              line-move-ignore-invisible t
-              pyvenv-default-virtual-env-name "~/anaconda3/envs/"
-              tab-width 4
-              which-key-idle-secondary-delay 0.05
-              which-key-sort-order 'which-key-key-order-alpha
+              jg-spacemacs-main-layer/major-modes '(ada-mode
+                                                    ams-tex-mode antlr-mode
+                                                    array-mode asm-mode autoconf-mode awk-mode
+                                                    bat-mode biblio-selection-mode bibtex-mode
+                                                    bibtex-style-mode bookmark-bmenu-mode bookmark-edit-annotation-mode
+                                                    bovine-grammar-mode Buffer-menu-mode c++-mode c-mode calendar-mode
+                                                    change-log-mode cmake-mode cmm-mode coffee-mode comint-mode
+                                                    common-lisp-mode completion-list-mode completion-mode context-en-mode
+                                                    context-mode context-nl-mode cperl-mode csharp-mode css-mode csv-mode
+                                                    Custom-mode cvs-status-mode cython-mode d-mode data-debug-mode dcl-mode
+                                                    debugger-mode decipher-mode diary-fancy-display-mode diary-mode diff-mode
+                                                    dns-mode doc-view-mode doctex-mode docTeX-mode dotspacemacs-mode dsssl-mode ebrowse-member-mode
+                                                    ebrowse-tree-mode edebug-Continue-fast-mode edebug-continue-mode edebug-eval-mode
+                                                    edebug-Go-nonstop-mode edebug-next-mode edebug-set-initial-mode edebug-step-mode
+                                                    edebug-step-through-mode edebug-Trace-fast-mode edebug-trace-mode
+                                                    edit-abbrevs-mode edmacro-mode eieio-custom-mode electric-describe-mode
+                                                    elisp-byte-code-mode emacs-lisp-mode epa-info-mode epa-key-list-mode epa-key-mode erlang-mode
+                                                    eshell-mode evil-command-window-mode evil-list-view-mode eww-mode
+                                                    trie-explore-mode f90-mode flycheck-error-list-mode flycheck-error-message-mode
+                                                    flymake-diagnostics-buffer-mode flyspell-prog-mode fortran-mode
+                                                    free-keys-mode fsharp-mode fundamental-mode gdb-script-mode gfm-mode gfm-view-mode
+                                                    ggtags-global-mode ggtags-view-search-history-mode ggtags-view-tag-history-mode ghc-core-mode
+                                                    ghci-script-mode glsl-mode gnuplot-mode gnus-group-enter-server-mode
+                                                    gnus-group-mode gnus-score-mode go-dot-mod-mode go-mode graphviz-dot-mode grep-mode
+                                                    haml-mode haskell-c2hs-mode haskell-cabal-mode haskell-mode help-mode
+                                                    html-erb-mode html-mode hy-mode ibuffer-mode icon-mode
+                                                    idl-mode idlwave-mode image-mode indent-according-to-mode indented-text-mode
+                                                    inf-ruby-mode inferior-hy-mode Info-edit-mode isearch-describe-mode java-mode
+                                                    javascript-mode js-jsx-mode js-mode js2-jsx-mode js2-mode json-mode latex-mode
+                                                    latex/auto-fill-mode ld-script-mode less-css-mode
+                                                    lisp-interaction-mode lisp-mode literate-haskell-mode log-edit-mode log-view-mode
+                                                    log4e-mode lua-mode m2-mode m4-mode magit-mode
+                                                    mail-mode makefile-automake-mode makefile-bsdmake-mode makefile-gmake-mode
+                                                    makefile-imake-mode makefile-makepp-mode makefile-mode Man-mode markdown-mode markdown-view-mode
+                                                    mercury-mode message-mode messages-buffer-mode metafont-mode metapost-mode mh-folder-mode
+                                                    mhtml-mode minibuffer-inactive-mode mixal-mode nroff-mode nxml-mode nxml-web-mode
+                                                    objc-mode occur-edit-mode occur-mode octave-mode opascal-mode org-mode outline-mode
+                                                    package-menu-mode paragraph-indent-text-mode pascal-mode pdf-virtual-edit-mode pdf-virtual-view-mode
+                                                    perl-mode picture-mode pike-mode pip-requirements-mode plain-tex-mode plantuml-mode
+                                                    plstore-mode pr-txt-mode process-menu-mode profiler-report-mode prog-mode
+                                                    prolog-inferior-mode prolog-mode ps-mode pug-mode python-mode quickurl-list-mode
+                                                    racket-mode reb-enter-subexp-mode reb-lisp-mode reb-mode reb-quit-subexp-mode
+                                                    recentf-dialog-mode reftex-index-phrases-mode reftex-reset-mode reftex-select-bib-mode
+                                                    reftex-select-label-mode rmail-mode rst-mode ruby-mode rust-mode rxt-help-mode sass-mode
+                                                    scheme-mode scss-mode select-tags-table-mode trie-sequence-mode ses-mode sgml-mode
+                                                    sgml-name-8bit-mode sh-mode shell-mode sieve-mode simula-mode slim-mode slitex-mode
+                                                    snippet-mode snmp-mode snmpv2-mode spacemacs-buffer-mode special-mode speedbar-mode
+                                                    sql-mode srecode-template-mode srefactor-ui-menu-mode tablist-mode tabulated-list-mode
+                                                    tags-table-mode tar-mode tcl-mode term-char-mode term-line-mode term-mode TeX-latex-mode
+                                                    tex-mode TeX-plain-tex-mode TeX-tex-mode TeX-texinfo-mode texinfo-mode text-mode
+                                                    todo-archive-mode todo-filtered-items-mode todo-mode toml-mode trie-mode trie-passive-mode
+                                                    trie-log-mode tsv-mode url-cookie-mode
+                                                    use-package-statistics-mode vera-mode verilog-mode vhdl-mode viper-mode wdired-change-to-wdired-mode web-mode
+                                                    which-key-show-major-mode wisent-grammar-mode woman-mode xref--xref-buffer-mode yaml-mode)
+
               )
-;; force utf-8
-(set-terminal-coding-system 'utf-8)
-(set-keyboard-coding-system 'utf-8)
-(set-language-environment "UTF-8")
-(prefer-coding-system 'utf-8)
 
-(when (featurep! +active)
-  (after! hl-line
-    (global-hl-line-mode)
-    )
-  (after! yasnippet
-    ;; If an error occurs, change yas-installed-snippets-dir is not in yas-snippet-dirs
-    ;; as it is obsolete
-    (setq yas-snippet-dirs `(,(expand-file-name "~/.doom.d/snippets/")))
-    ;; ,(expand-file-name "~/github/otherLibs/yasnippet-snippets/snippets")
-    ;; ,(expand-file-name "~/github/otherLibs/yasnippet-snippets")
-    )
+(load! "+bindings")
+(load! "+funcs")
+(load! "+python-origami")
+(load! "+evil-ex-setup")
 
-  (load! "+funcs")
-  (load! "+bindings")
-  (load! "+python-origami")
+(after! (evil evil-snipe)
+  (push 'dired-mode evil-snipe-disabled-modes)
 
-  (when (and (featurep! evil) (featurep! hl-line))
+  )
+(use-package! hl-line
+  :init
+  (global-hl-line-mode)
+  )
+(after! yasnippet
+  ;; If an error occurs, change yas-installed-snippets-dir is not in yas-snippet-dirs
+  ;; as it is obsolete
+  (setq yas-snippet-dirs `(,(expand-file-name "~/.doom.d/snippets/")))
+  ;; ,(expand-file-name "~/github/otherLibs/yasnippet-snippets/snippets")
+  ;; ,(expand-file-name "~/github/otherLibs/yasnippet-snippets")
+  )
+(after! evil-quickscope
+  ;; TODO (spacemacs/set-leader-keys "t q" 'jg-spacemacs-main-layer/toggle-quickscope-always)
+  (global-evil-quickscope-always-mode 1)
+  )
+(use-package! hi-lock
+  :init
+  (global-hi-lock-mode)
+  :config
+  (setq hi-lock-auto-select-face t)
+  )
+(after! (evil hl-line)
+  (message "Adjusting up hl-line")
   ;; Set up faces for hl-line colour sync to status
   (defface evil-normal-state '((t :background  "#000000")) "The Evil Normal State Hl-line")
   (defface evil-insert-state '((t :background  "#005f00")) "The Evil Insert State Hl-line")
@@ -65,25 +114,28 @@
   (defface evil-iedit-insert-state '((t :background  "#8700af")) "The Iedit Insert state Hl-line")
 
   ;; hooks for evil state entry hooks to change hl-line colour
-  (add-hook 'evil-normal-state-entry-hook   (lambda () (interactive) (if (overlayp global-hl-line-overlay)     (overlay-put global-hl-line-overlay 'face 'evil-normal-state))))
-  (add-hook 'evil-insert-state-entry-hook   (lambda () (interactive) (if (overlayp global-hl-line-overlay)     (overlay-put global-hl-line-overlay 'face 'evil-insert-state))))
-  (add-hook 'evil-visual-state-entry-hook   (lambda () (interactive) (if (overlayp global-hl-line-overlay)     (overlay-put global-hl-line-overlay 'face 'evil-visual-state))))
-  (add-hook 'evil-motion-state-entry-hook   (lambda () (interactive) (if (overlayp global-hl-line-overlay)     (overlay-put global-hl-line-overlay 'face 'evil-motion-state))))
-  (add-hook 'evil-emacs-state-entry-hook    (lambda () (interactive) (if (overlayp global-hl-line-overlay)     (overlay-put global-hl-line-overlay 'face 'evil-emacs-state))))
-  (add-hook 'evil-replace-state-entry-hook  (lambda () (interactive) (if (overlayp global-hl-line-overlay)     (overlay-put global-hl-line-overlay 'face 'evil-replace-state))))
-  (add-hook 'evil-hybrid-state-entry-hook   (lambda () (interactive) (if (overlayp global-hl-line-overlay)     (overlay-put global-hl-line-overlay 'face 'evil-hybrid-state))))
-  (add-hook 'evil-evilified-state-entry-hook (lambda () (interactive) (if (overlayp global-hl-line-overlay)    (overlay-put global-hl-line-overlay 'face 'evil-evilified-state))))
-  (add-hook 'evil-lisp-state-entry-hook      (lambda () (interactive) (if (overlayp global-hl-line-overlay)    (overlay-put global-hl-line-overlay 'face 'evil-lisp-state))))
-  (add-hook 'evil-iedit-state-entry-hook     (lambda () (interactive) (if (overlayp global-hl-line-overlay)    (overlay-put global-hl-line-overlay 'face 'evil-iedit-state))))
-  (add-hook 'evil-iedit-insert-state-entry-hook (lambda () (interactive) (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'evil-iedit-insert-state))))
+ (add-hook 'evil-normal-state-entry-hook       (lambda () (interactive) (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'evil-normal-state))))
+ (add-hook 'evil-insert-state-entry-hook       (lambda () (interactive) (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'evil-insert-state))))
+ (add-hook 'evil-visual-state-entry-hook       (lambda () (interactive) (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'evil-visual-state))))
+ (add-hook 'evil-motion-state-entry-hook       (lambda () (interactive) (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'evil-motion-state))))
+ (add-hook 'evil-emacs-state-entry-hook        (lambda () (interactive) (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'evil-emacs-state))))
+ (add-hook 'evil-replace-state-entry-hook      (lambda () (interactive) (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'evil-replace-state))))
+ (add-hook 'evil-hybrid-state-entry-hook       (lambda () (interactive) (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'evil-hybrid-state))))
+ (add-hook 'evil-evilified-state-entry-hook    (lambda () (interactive) (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'evil-evilified-state))))
+ (add-hook 'evil-lisp-state-entry-hook         (lambda () (interactive) (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'evil-lisp-state))))
+ (add-hook 'evil-iedit-state-entry-hook        (lambda () (interactive) (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'evil-iedit-state))))
+ (add-hook 'evil-iedit-insert-state-entry-hook (lambda () (interactive) (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'evil-iedit-insert-state))))
   )
-)
+(after! (dired dired-quick-sort)
+  (setq dired-quick-sort-group-directories-last ?y)
+  )
+(after! ibuffer
+  (add-transient-hook! 'ibuffer-hook 'jg-spacemacs-main-layer/setup-ibuffer)
+  )
 
-
+;; separator
 (when (featurep! +inactive)
 
-
-  (after! evil (load! "+evil-setup"))
   (after! helm
     (helm-autoresize-mode 0)
     ;;add in keybinding to kill line in completion window
@@ -145,33 +197,7 @@
     ;; TODO
     ;; (spacemacs/set-leader-keys "a U v " 'vlf-set-batch-size))
     )
-  (after! dired
-    (add-transient-hook! dired-mode
-      (evil-define-key* 'normal dired-mode-map
-        (kbd "<DEL>") 'dired-kill-subdir
-        (kbd "i")     'jg-spacemacs-main-layer/dired-insert-subdir-maybe-recursive
-        (kbd "ad") nil
-        (kbd "K")   nil
-        (kbd "C-h") nil
-        (kbd "M-n") 'jg-spacemacs-main-layer/dired-auto-move
-        (kbd "C-h") 'dired-up-directory
-        )
-      ;; TODO
-      ;; (spacemacs/declare-prefix-for-mode 'dired-mode "m d" "Describe")
-      ;; (spacemacs/declare-prefix-for-mode 'dired-mode "m K" "Destructive Edits")
-      ;; (spacemacs/declare-prefix-for-mode 'dired-mode "m m" "Mark")
-      ;; (spacemacs/declare-prefix-for-mode 'dired-mode "m f" "Find")
-      ;; (spacemacs/declare-prefix-for-mode 'dired-mode "m g" "Gtags")
-      ;; (spacemacs/set-leader-keys-for-major-mode 'dired-mode
-      ;;   "d s" 'jg-spacemacs-main-layer/dired-create-summary-of-orgs
-      ;;   "d m" 'jg-spacemacs-main-layer/dired-marked-info
-      ;;   "d d" 'jg-spacemacs-main-layer/dired-diff
-      ;;   )
-      )
-    )
-  (after! ibuffer
-    (add-transient-hook! 'ibuffer-hook 'jg-spacemacs-main-layer/setup-ibuffer)
-    )
+
   (after! neotree
     (push "^__pycache__$" neo-hidden-regexp-list)
     (push "^G\\(PATH\\|R?TAGS\\)$" neo-hidden-regexp-list)

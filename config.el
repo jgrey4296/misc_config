@@ -9,12 +9,29 @@
 (setq user-full-name "John Grey"
       user-mail-address "johngrey4296@gmail.com")
 
-(setq overflow-newline-into-fringe t
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-language-environment "UTF-8")
+(prefer-coding-system 'utf-8)
+
+(setq +doom-quit-messages nil
+      auto-save-file-name-transforms (quote ((".*" "~/.emacs.d/autosaves/`" t)))
+      backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/")))
+      dired-omit-files "^\\.?#\\|^\\.$\\|^\\.DS_Store$\\|^\\.git$\\|^__pycache__$\\|^flycheck__.+\\.py\\|^\\.mypy_cache$"
+      dired-omit-verbose nil
+      display-buffer-alist '(("*shell*" display-buffer-same-window (nil)) (undo-tree-visualizer-buffer-name display-buffer-at-bottom (nil)))
+      display-line-numbers-width 4
       evil-move-cursor-back nil
-      +doom-quit-messages nil
       evil-snipe-override-mode nil
       evil-snipe-repeat-scope nil
+      ispell-personal-dictionary (expand-file-name "~/.doom.d/setup_files/.ispell_english")
+      line-move-ignore-invisible t
+      overflow-newline-into-fringe t
+      pyvenv-default-virtual-env-name "~/anaconda3/envs/"
       tab-always-indent t
+      tab-width 4
+      which-key-idle-secondary-delay 0.05
+      which-key-sort-order 'which-key-key-order-alpha
 )
 
 

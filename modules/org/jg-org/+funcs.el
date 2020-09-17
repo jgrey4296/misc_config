@@ -1,5 +1,4 @@
-(when (featurep! org)
-
+(after! org
   (defun jg-spacemacs-org/insert-heading-trio ()
     (interactive)
     (org-insert-subheading 1)
@@ -69,7 +68,7 @@
     )
   )
 
-(when (featurep! org-ref)
+(after! org-ref
   (defun jg-spacemacs-org/bibtex-load-random ()
     """ Run in a bibtex file, opens a random entry externally,
       and logs it has been opened in a separate file """
@@ -124,7 +123,7 @@ the entry of interest in the bibfile.  but does not check that."
           (ding)))))
   )
 
-(when (featurep! org-pomodoro)
+(after! org-pomodoro
   (defun jg-spacemacs-org/pomodoro-start-hook ()
     ;; tweet out start and end points
     ;; use org-pomodoro-end-time

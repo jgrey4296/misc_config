@@ -26,7 +26,6 @@
    org-group-tags nil
    org-use-fast-tag-selection t
    org-tags-column 80
-   org-directory "~/github/writing"
    )
 
   (push 'org-indent-mode minor-mode-list)
@@ -60,24 +59,9 @@
   (add-hook 'org-mode-hook 'jg-spacemacs-org/org-mod-keymap)
   (add-hook 'org-mode-hook 'jg-spacemacs-org/helm-org-hook)
 
-  (spacemacs/set-leader-keys "a o a" nil)
-  (spacemacs/set-leader-keys "a o l" nil)
-  (spacemacs/set-leader-keys "a o /" nil)
-  (spacemacs/set-leader-keys "a o e" nil)
-  (spacemacs/set-leader-keys "a o m" nil)
-  (spacemacs/set-leader-keys "a o o" nil)
-  (spacemacs/set-leader-keys "a o s" nil)
-  (spacemacs/set-leader-keys "a o t" nil)
-  (spacemacs/set-leader-keys "a o c" nil)
-  (spacemacs/set-leader-keys "a o #" nil)
-
   ;; add in keybinding to call tag-occurances
-  (spacemacs/declare-prefix "a o a" "Agenda")
-  (spacemacs/declare-prefix "a o i" "Insert")
-  (spacemacs/declare-prefix "a o l" "Links")
-  (spacemacs/set-leader-keys
+  (map! :prefix
    ;; AGENDA
-   "a o a a"   'org-agenda
    "a o a /"   'org-occur-in-agenda-files
    "a o a f"   'org-agenda-file-to-front
    "a o a r"   'org-remove-file
@@ -115,16 +99,19 @@
   )
 (use-package! academic-phrases
   :config
-  (spacemacs/set-leader-keys-for-major-mode 'org-mode
-                                            "i A p" 'academic-phrases
-                                            "i A s" 'academic-phrases-by-section)
+  (map! :mode org
+        :localleader
+        :prefix ("iA" . "Academic Phrases")
+        "p" 'academic-phrases
+        "s" 'academic-phrases-by-section)
   )
 (after! org-ref
-  (spacemacs/set-leader-keys "a U r" 'jg-spacemacs-org/bibtex-load-random)
+  (map! "a U r" 'jg-spacemacs-org/bibtex-load-random)
   (add-hook 'bibtex-mode-hook (lambda ()
-                                (spacemacs/set-leader-keys-for-major-mode 'bibtex-mode
-                                                                          "p" 'jg-spacemacs-org/org-ref-open-bibtex-pdf
-                                                                          )
+                                (map! :mode bibtex-mode
+                                      :localleader
+                                      "p" 'jg-spacemacs-org/org-ref-open-bibtex-pdf
+                                      )
                                 )
             )
   )

@@ -36,10 +36,6 @@
          )
         )
   )
-(use-package! dired-quick-sort
-  :init
-  (dired-quick-sort-setup)
-  )
 (use-package! highlight-parentheses
   :init
   (setq hl-paren-colors '("color-16" "color-16" "color-16" "color-16")

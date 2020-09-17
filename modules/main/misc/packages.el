@@ -1,5 +1,4 @@
 ;; (package! fci)
-(package! dired-quick-sort)
 (package! evil-string-inflection)
 (package! flycheck-plantuml)
 (package! free-keys)

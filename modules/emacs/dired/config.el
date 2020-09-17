@@ -158,13 +158,42 @@ we have to clean it up ourselves."
   :config
   (setq dired-create-destination-dirs 'ask
         dired-vc-rename-file t))
-
+(use-package! dired-quick-sort
+  :init
+  (dired-quick-sort-setup)
+  )
 ;;;###package dired-git-info
 (map! :after dired
       :map (dired-mode-map ranger-mode-map)
       :ng ")" #'dired-git-info-mode
       :n "o" #'dired-find-file-other-window
-      :n "S" #'hydra-dired-quick-sort/body)
+      :n "S" #'hydra-dired-quick-sort/body
+      (:when (featurep! :main personal)
+      :n "i" #'jg-spacemacs-main-layer/dired-insert-subdir-maybe-recursive
+      :n "DEL" #'dired-kill-subdir
+      (:localleader
+       (:prefix ("d" . "Describe")
+
+        )
+       (:prefix ("K" . "Destructive")
+
+        )
+       (:prefix ("m" . "Mark")
+
+        )
+       (:prefix ("f" . "Find")
+
+        )
+       (:prefix ("g" . "gtags")
+
+        )
+       "d s" 'jg-spacemacs-main-layer/dired-create-summary-of-orgs
+       "d m" 'jg-spacemacs-main-layer/dired-marked-info
+       "d d" 'jg-spacemacs-main-layer/dired-diff
+       )
+      )
+)
+
 (setq dgi-commit-message-format "%h %cs %s"
       dgi-auto-hide-details-p nil)
 (after! wdired

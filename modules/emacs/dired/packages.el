@@ -10,3 +10,4 @@
 (when (featurep! +icons)
   (package! all-the-icons-dired :pin "fc2dfa1e9eb8bf1c402a675e7089638d702a27a5"))
 (package! fd-dired :pin "5622041068d5fa2f299dbc8aa91fece0ba260086")
+(package! dired-quick-sort)

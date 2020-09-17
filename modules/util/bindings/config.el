@@ -52,8 +52,6 @@
          :gn [S-s-return]   #'+default/newline-above)))
 
 (when (featurep! +bindings)
-  (load! "+misc-bindings")
+  (load! "+leader-bindings")
+  (load! "+leaderless-bindings")
 )
-
-(when (featurep! +mybinds)
-    (load! "+bindings"))

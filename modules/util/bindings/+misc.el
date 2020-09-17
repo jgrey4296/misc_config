@@ -9,9 +9,6 @@
       :prefix doom-leader-key     "u"#'universal-argument-more
       :prefix doom-leader-alt-key "u"#'universal-argument-more)
 
-(add-transient-hook! 'dired-mode-hook
-  (evil-define-key 'normal dired-mode-map (kbd "o") #'dired-find-file-other-window)
-  )
 
 (defvar +default-want-RET-continue-comments t
   "If non-nil, RET will continue commented lines.")

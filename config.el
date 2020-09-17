@@ -14,6 +14,7 @@
       +doom-quit-messages nil
       evil-snipe-override-mode nil
       evil-snipe-repeat-scope nil
+      tab-always-indent t
 )
 
 

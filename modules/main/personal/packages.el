@@ -4,6 +4,7 @@
 (package! evil-iedit-state)
 (package! evil-quickscope)
 (package! evil-vimish-fold)
+(package! evil-snipe)
 (package! exec-path-from-shell)
 (package! f)
 (package! flycheck)

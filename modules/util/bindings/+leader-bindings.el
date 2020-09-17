@@ -261,6 +261,7 @@
 ;;; <leader> p --- project
 (map! :leader
       :prefix ("p" . "project")
+      :desc "Root Shell"                   "'" #'projectile-run-shell
       :desc "Add new project"              "a" #'projectile-add-known-project
       :desc "Browse other project"         ">" #'doom/browse-in-other-project
       :desc "Browse project"               "b" #'+default/browse-project

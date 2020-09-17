@@ -19,7 +19,6 @@
 (package! s)
 (package! shell-pop)
 (package! swiper)
-(package! vimish-fold)
 (package! vlf)
 (package! which-key)
 (package! yasnippet)

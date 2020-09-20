@@ -1,12 +1,12 @@
 #PERSONAL ALIASES:
 #------------------------------------------------------------
+alias emacs="TERM=xterm-24bits emacs"
 
 #ssh
 alias mini="ssh jg@192.168.1.5"
 alias ubun="ssh john@192.168.1.11"
 alias wind="ssh john@192.168.1.2"
 
-alias master="emacs ~/github/writing/master.org"
 
 alias pServer="python -m http.server 8888 &"
 alias qpServer="(python -m http.server 8888 > /dev/null 2>&1) & && (echo 'Running Quiet Server')"

@@ -4,7 +4,9 @@
 ;; To install a package with Doom you must declare them here and run 'doom sync'
 ;; on the command line, then restart Emacs for the changes to take effect -- or
 ;; use 'M-x doom/reload'.
-
+;; (package! jg-python-origami
+;;   :type 'local
+;;   :recipe '(:local-repo "packages/jg-python-origami"))
 
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)

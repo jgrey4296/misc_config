@@ -29,7 +29,7 @@
       :desc "Jump to bookmark"      "RET"  #'bookmark-jump
 
       (:when (featurep! :ui popup)
-        :desc "Toggle last popup"     "~"    #'+popup/toggle)
+       :desc "Toggle last popup"     "~"    #'+popup/toggle)
 
       (:prefix ("l" . "<localleader>")) ; bound locally
       (:prefix ("!" . "checkers"))      ; bound by flycheck
@@ -40,16 +40,11 @@
 (map! :leader
       :prefix-map ("c" . "code")
       :desc "Compile"                               "c"   #'compile
-      :desc "Delete trailing newlines"              "W"   #'doom/delete-trailing-newlines
-      :desc "Delete trailing whitespace"            "w"   #'delete-trailing-whitespace
       :desc "Evaluate & replace region"             "E"   #'+eval:replace-region
       :desc "Evaluate buffer/region"                "e"   #'+eval/buffer-or-region
       :desc "Find implementations"                  "i"   #'+lookup/implementations
       :desc "Find type definition"                  "t"   #'+lookup/type-definition
       :desc "Format buffer/region"                  "f"   #'+format/region-or-buffer
-      :desc "Jump to definition"                    "d"   #'+lookup/definition
-      :desc "Jump to documentation"                 "k"   #'+lookup/documentation
-      :desc "Jump to references"                    "D"   #'+lookup/references
       :desc "List errors"                           "x"   #'flymake-show-diagnostics-buffer
       :desc "Recompile"                             "C"   #'recompile
       :desc "Send to repl"                          "s"   #'+eval/send-region-to-repl
@@ -75,7 +70,7 @@
 (map! :leader
       :prefix-map ("b" . "buffer")
       :desc "Bury buffer"                 "z"   #'bury-buffer
-      :desc "Delete bookmark"             "M"   #'bookmark-delete
+
       :desc "Kill all buffers"            "K"   #'doom/kill-all-buffers
       :desc "Kill buffer"                 "d"   #'kill-current-buffer
       :desc "Kill other buffers"          "O"   #'doom/kill-other-buffers
@@ -83,33 +78,30 @@
       :desc "Next buffer"                 "]"   #'next-buffer
       :desc "Pop up scratch buffer"       "x"   #'doom/open-scratch-buffer
       :desc "Previous buffer"             "["   #'previous-buffer
-      :desc "Read-only mode"              "r" #'read-only-mode
+      :desc "Read-only mode"              "r"   #'read-only-mode
       :desc "Revert buffer"               "R"   #'revert-buffer
       :desc "Save all buffers"            "S"   #'evil-write-all
       :desc "Save buffer"                 "s"   #'basic-save-buffer
-      :desc "Set bookmark"                "m"   #'bookmark-set
       :desc "Switch to last buffer"       "l"   #'evil-switch-to-windows-last-buffer
       :desc "Pop up scratch buffer"       "x"   #'doom/open-scratch-buffer
       :desc "Switch to scratch buffer"    "X"   #'doom/switch-to-scratch-buffer
       :desc "Toggle narrowing"            "-"   #'doom/toggle-narrow-buffer
       :desc "ibuffer"                     "i"   #'ibuffer
 
-      (:when (featurep! :main personal)
-      "`" 'jg-spacemacs-main-layer/goto-desktop
-      "a" 'jg-spacemacs-main-layer/goto-org-agenda-file
-      "c" 'jg-spacemacs-main-layer/clear-buffer
-      "g" 'jg-spacemacs-main-layer/goto-github
-      "i" 'clone-indirect-buffer-other-window-without-purpose
-      "m" 'jg-spacemacs-main-layer/goto-messages
-      "M" 'jg-spacemacs-main-layer/goto-mega
-      "~" 'jg-spacemacs-main-layer/goto-home
-      "r" 'jg-spacemacs-main-layer/goto-resources
-      )
-     
+       "`" #'+jg-bindings-goto-desktop
+       "a" #'+jg-bindings-goto-org-agenda-file
+       "c" #'+jg-bindings-clear-buffer
+       "g" #'+jg-bindings-goto-github
+       "i" #'clone-indirect-buffer-other-window-without-purpose
+       "m" #'+jg-bindings-goto-messages
+       "M" #'+jg-bindings-goto-mega
+       "~" #'+jg-bindings-goto-home
+       "r" #'+jg-bindings-goto-resources
+
       (:when (featurep! :ui workspaces)
        :desc "Switch workspace buffer" "b" #'persp-switch-to-buffer
        :desc "Switch buffer"           "B" #'switch-to-buffer)
-      (:unless (featurep! :ui workspaces)
+      (:when (not (featurep! :ui workspaces))
        :desc "Switch buffer"           "b" #'switch-to-buffer)
       )
 ;;; <leader> f --- file
@@ -140,6 +132,7 @@
 ;;; <leader> s --- search
 (map! :leader
       :prefix-map ("s" . "search")
+      :desc "Search Clear" "c" #'evil-ex-nohighlight
       :desc "Dictionary"                   "t" #'+lookup/dictionary-definition
       :desc "Jump list"                    "j" #'evil-show-jumps
       :desc "Jump to bookmark"             "b" #'bookmark-jump
@@ -170,6 +163,10 @@
       :desc "Evil ex path"                  "p"   (cmd! (evil-ex "R!echo "))
       :desc "From clipboard"                "y"   #'+default/yank-pop
       :desc "From evil register"            "r"   #'evil-ex-registers
+      ;; TODO lorem ipsum
+      ;; TODO password-generator
+      ;; TODO uuid
+      ;; reserve "d" for inserting debug statement by mode
       (:when (featurep! :editor snippets)
        :desc "Snippet"                       "s"   #'yas-insert-snippet)
       :desc "Unicode"                       "u"   #'unicode-chars-list-chars
@@ -326,6 +323,7 @@
 ;;; <leader> t --- toggle
 (map! :leader
       :prefix-map ("t" . "toggle")
+      :desc "Debug on Error" "d" #'toggle-debug-on-error
       :desc "Big mode"                     "b" #'doom-big-font-mode
       :desc "Flymake"                      "f" #'flymake-mode
       :desc "Frame fullscreen"             "F" #'toggle-frame-fullscreen
@@ -401,29 +399,51 @@
         :desc "Pull request"              "p"   #'forge-create-pullreq))
       )
 ;;; <leader> w --- workspaces/windows
+(when (featurep! :ui workspaces)
+  (defun jg-counsel-workspace ()
+    "Forward to `' or `workspace-set' if workspace doesn't exist."
+    (interactive)
+    (require 'bookmark)
+    (ivy-read "Create or jump to workspace: "
+              (+workspace-list-names)
+              :history 'workspace-history
+              :action (lambda (x)
+                        (message "Got: %s" x)
+                        (cond ((string-equal x (+workspace-current-name))
+                               (message "Eq")
+                               (+workspace-save x))
+                              (t
+                               (+workspace-switch x t))))
+              :caller 'counsel-workspace)
+    )
+  )
 (map! :leader
-      :prefix-map ("w" . "workspaces/windows")
       (:when (featurep! :ui workspaces)
-       :desc "Create workspace"             "c" #'+workspace/new
-       :desc "Delete session"               "x"   #'+workspace/kill-session
-       :desc "Delete workspace"             "k"   #'+workspace/delete
+       :prefix-map ("W" . "Workspaces")
+       :desc "Workspace Counsel" "RET" #'jg-counsel-workspace
+       ;; Lowercase - workspace, Uppercase - session
        :desc "Display tab bar"              "TAB" #'+workspace/display
-       :desc "Load workspace from file"     "l"   #'+workspace/load
-       :desc "New workspace"                "n"   #'+workspace/new
        :desc "Next workspace"               "]"   #'+workspace/switch-right
        :desc "Previous workspace"           "["   #'+workspace/switch-left
-       :desc "Rename workspace"             "r"   #'+workspace/rename
-       :desc "Save workspace"               "S"   #'+workspace/save
-       :desc "Switch to last workspace"     "0"   #'+workspace/switch-to-final
        :desc "Switch to last workspace"     "`"   #'+workspace/other
        :desc "Switch workspace"             "."   #'+workspace/switch-to
-       :desc "Autosave session"              "a" #'doom/quicksave-session
-       :desc "Load last autosaved session"   "L" #'doom/quickload-session
-       :desc "Load session"                  "l" #'doom/load-session
+       :desc "Switch to last workspace"     "0"   #'+workspace/switch-to-final
+
+       :desc "Create workspace"             "c"   #'+workspace/new
+       :desc "Delete workspace"             "k"   #'+workspace/delete
+       :desc "Load workspace from file"     "l"   #'+workspace/load
+       :desc "New workspace"                "n"   #'+workspace/new
+       :desc "Rename workspace"             "r"   #'+workspace/rename
+       :desc "Save workspace"               "s"   #'+workspace/save
+       :desc "Delete session"               "x"   #'+workspace/kill-session
+
+       :desc "Autosave session"              "A" #'doom/quicksave-session
+       :desc "Load session"                  "L" #'doom/load-session
        :desc "Redo window config"            "U" #'winner-redo
-       :desc "Save session"                  "s" #'doom/save-session
+       :desc "Save session"                  "S" #'doom/save-session
        :desc "Undo window config"            "u" #'winner-undo
        )
+      :prefix-map ("w" . "Windows")
       :desc "Delete Window" "d" #'delete-window
       :desc "Split To Right" "/" #'split-window-right
       :desc "Split Below" "-" #'split-window-below
@@ -431,6 +451,9 @@
       "l" #'evil-window-right
       "h" #'evil-window-left
       "j" #'evil-window-down
+      "m" #'doom/window-enlargen
+      "M" #'doom/window-maximize-buffer
+      "b" #'balance-windows
       )
 ;;; <leader> R --- remote
 (map! :leader
@@ -456,6 +479,7 @@
 (map! :leader
       :prefix ("t" . "Toggle")
       :desc "Whitespace" "w"#'whitespace-mode
+      :desc "Line Truncate" "l" #'toggle-truncate-lines
       ;; centre point/line
       ;; highlight long lines
       ;; auto-completion
@@ -469,12 +493,19 @@
 ;;; <leader> j -- Jumping
 (map! :leader
       :prefix ("j" . "Jump")
-      :desc "Jump to Line"                          "l"   #'evil-avy-goto-line
-      :desc "Jump to definition"                    "d"  #'+lookup/definition
-      :desc "Jump to references"                    "D"  #'+lookup/references
-      :desc "Find implementations"                  "i"  #'+lookup/implementations
-      :desc "Jump to documentation"                 "k"  #'+lookup/documentation
-      :desc "Find type definition"                  "t"  #'+lookup/type-definition
+      :desc "Jump to Line"                          "l" #'evil-avy-goto-line
+      :desc "Jump to definition"                    "d" #'+lookup/definition
+      :desc "Jump to references"                    "D" #'+lookup/references
+      :desc "Find implementations"                  "i" #'+lookup/implementations
+      :desc "Jump to documentation"                 "k" #'+lookup/documentation
+      :desc "Find type definition"                  "t" #'+lookup/type-definition
+      (:prefix ("b" . "Bookmark")
+       :desc "Set bookmark"                "m"           #'bookmark-set
+       :desc "Delete bookmark"             "M"           #'bookmark-delete
+       :desc "Rename bookmark"             "r"  #'bookmark-rename
+       :desc "Save Bookmarks"              "s" #'bookmark-save
+       :desc "Load Bookmarks"              "l" #'bookmark-load
+       )
       (:when (featurep! :completion ivy)
        :desc "Jump to symbol in current workspace" "j"  #'lsp-ivy-workspace-symbol
        :desc "Jump to symbol in any workspace"     "J"  #'lsp-ivy-global-workspace-symbol)
@@ -488,17 +519,22 @@
 (map! :leader
       :prefix ("x" . "Text")
       :desc "Mark" "m" #'mark-whole-buffer
-      "f" 'flush-lines
-      "K" 'keep-lines
+
+      "r" #'regexp-builder
       ;; align
       (:prefix ("a" . "Align")
-        :desc "Regexp"    "r" #'align-regexp
+       :desc "Regexp"    "r" #'align-regexp
        )
       ;; Lines
       (:prefix ("l" . "Lines")
        ;;:desc "Remove Duplicates"    "u" #'
        ;;:desc "Mark"                 "m" #'
        ;; untabify
+       "f" #'flush-lines
+       "K" #'keep-lines
+       :desc "Delete trailing newlines"              "W"   #'doom/delete-trailing-newlines
+       :desc "Delete trailing whitespace"             "w"   #'delete-trailing-whitespace
+       :desc "Whitespace Cleanup"   "c" #'whitespace-cleanup
        )
       ;; justify
       ;; upcase, downcase
@@ -506,8 +542,8 @@
       ;; string inflection and surround
       (:prefix ("s" . "Surround")
 
+       )
       )
-)
 ;;; REGISTERS
 (map! :leader
       :prefix ("r" . "Registers")
@@ -516,5 +552,33 @@
       :desc "Windows to Register"  "w" #'window-configuration-to-register
       :desc "Jump to Register"     "j" #'jump-to-register
       :desc "List Registers"       "l" #'list-registers
-
+      :desc "Killed Text"          "y" #'counsel-yank-pop 
+      )
+;;; <leader> M -- Macros
+(map! :leader
+      :prefix ("M" . "Macros")
+      (:prefix ("c" . "Counter")
+       :desc "Increment counter" "a" #'kmacro-add-counter
+       :desc "Insert counter" "c" #'kmacro-insert-counter
+       :desc "Set counter..." "C" #'kmacro-set-counter
+       :desc "Set display format..." "f" #'kmacro-set-format)
+      (:prefix ("e" . "Edit")
+       :desc "Assign key binding..." "b" #'kmacro-bind-to-key
+       :desc "Edit last macro" "e" #'kmacro-edit-macro-repeat
+       :desc "Create macro from lossage..." "l" #'kmacro-edit-lossage
+       :desc "Name last macro..." "n" #'kmacro-name-last-macro
+       :desc "Write macro to register..." "r" #'kmacro-to-register
+       :desc "Step by step edit..." "s" #'kmacro-step-edit-macro
+       :desc "Start macro/Insert counter" "k" #'kmacro-start-macro-or-insert-counter
+       :desc "Stop or Run" "K" #'kmacro-end-or-call-macro
+       )
+      (:prefix ("r" . "Ring")
+       :desc "Display ring head" "L" #'kmacro-view-ring-2nd
+       :desc "Delete ring head" "d" #'kmacro-delete-ring-head
+       :desc "Run 2nd macro in ring" "l" #'kmacro-call-ring-2nd-repeat
+       :desc "Next in ring" "n" #'kmacro-cycle-ring-next
+       :desc "Previous in ring" "p" #'kmacro-cycle-ring-previous
+       :desc "Swap first two" "s" #'kmacro-swap-ring
+       :desc "View last macro" "v" #'kmacro-view-macro-repeat
+       )
       )

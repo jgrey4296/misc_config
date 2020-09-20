@@ -1,7 +1,7 @@
 ;;; config/default/config.el -*- lexical-binding: t; -*-
 
 (load! "+misc")
-
+(load! "+funcs")
 ;;; C-S doom conventions
 (when (featurep! +bindings)
   ;; A Doom convention where C-s on popups and interactive searches will invoke

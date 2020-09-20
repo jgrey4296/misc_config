@@ -1,5 +1,5 @@
 ;;; ../../../Volumes/documents/github/emacs_files/packages/jg-themes/template-theme2.el -*- lexical-binding: t; -*-
-
+;;; see: https://www.gnu.org/software/emacs/manual/html_node/elisp/Face-Attributes.html#Face-Attributes
 ;;; Variables
 
 ;;; Theme definition

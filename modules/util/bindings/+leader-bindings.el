@@ -13,7 +13,9 @@
 
       ;; C-u is used by evil
       :desc "Universal argument"    "u"   #'universal-argument
+
       :desc "help"                  "h"    help-map
+
       :desc "Split Window"          "/"    #'split-window-right
       ;; TODO pop shell
 

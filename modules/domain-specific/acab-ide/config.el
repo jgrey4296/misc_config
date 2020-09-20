@@ -52,17 +52,16 @@
  )
 
 ;; TODO
-;; (spacemacs|define-transient-state trie-help-hydra
-;;   :title "Transient State for Help in Rule IDE"
-;;   :doc (concat "
+;; (defhydra trie-help-hydra (:color pink)
+;;   "
 ;;    | General           ^^|
 ;;    |-------------------^^+
 ;;    | [_q_] Quit          |
 ;;    |                   ^^|
 ;;    |                   ^^|
 ;;    |                   ^^|
-;;   ")
-;;   :bindings
+;;   "
+;;
 ;;   ("q" nil :exit t)
 ;;   )
 
@@ -97,17 +96,15 @@
       "."   'hydra-trie-sequence/body
       )
     ;; TODO Make hydra
-    ;; (spacemacs|define-transient-state trie-sequence_transient
-  ;;     :title "Transient Editing State for Trie-Sequences"
-  ;;     :doc (concat "
+    ;; (defhydra trie-sequence_transient
+  ;;     "
   ;;  | General           ^^| Change                    ^^| Motion             ^^| Remove              ^^| Sort                         ^^|
   ;;  |-------------------^^+---------------------------^^+--------------------^^+---------------------^^+------------------------------^^|
   ;;  | [_q_] Quit          | [_i_] Insert Rule           |                    ^^| [_d_] Delete Value    | [_s_] Sort Table Alpha         |
   ;;  | [_n_] New Table     |                           ^^|                    ^^| [_D_] Delete Column   |                              ^^|
   ;;  | [_v_] Table Inspect | [_r_] Rename Column         | [_c_] Centre Column  | [_m_] Merge Column    |                              ^^|
   ;;  | [_b_] Set Right Tab | [_t_] Insert Terminal       |                    ^^|                     ^^|                              ^^|
-  ;; ")
-  ;;     :bindings
+  ;; "
   ;;     ("q" nil :exit t)
   ;;     ("n" trie-sequence/new-table ) ;; org create table, insert
   ;;     ("v" trie-sequence/inspect-table) ;; create a left temp buffer that shows selected column's values (plus highlights active ones)
@@ -152,17 +149,16 @@
     (evil-define-key '(insert) trie-explore-mode-map
       (kbd "<RET>") 'trie-explore/insert-entry
       )
-    (spacemacs/set-leader-keys-for-major-mode 'trie-explore-mode
-      "."   'spacemacs/trie-explore_transient-transient-state/body
+    (map! :mode 'trie-explore-mode
+          :localleader
+          "."   'trie-explore_transient/body
       )
-    (spacemacs|define-transient-state trie-explore_transient
-      :title "Transient Editing State for Exploring Trees"
-      :doc (concat "
+    (defhydra trie-explore_transient
+      "
    | General           ^^|
    |-------------------^^+
    | [_q_] Quit          |
-  ")
-      :bindings
+  "
       ("q" nil :exit t)
       )
     )
@@ -170,87 +166,85 @@
 (after! helm
   ;;TODO: add helms for types, crosscuts, patterns, tests, tags,
   ;;strategies, performatives, channels
-  (spacemacs|use-package-add-hook helm
-    :post-config
-    (setq jg-trie-layer/rule-helm-source
-          (helm-make-source "Rule Helm" 'helm-source-sync
-            :action (helm-make-actions "Open Rule" 'trie/find-rule)
-            :candidates 'trie/get-rule-helm-candidates
-            )
+  (setq jg-trie-layer/rule-helm-source
+        (helm-make-source "Rule Helm" 'helm-source-sync
+          :action (helm-make-actions "Open Rule" 'trie/find-rule)
+          :candidates 'trie/get-rule-helm-candidates
+          )
+        ;;--------------------
+        jg-trie-layer/rule-helm-dummy-source
+        (helm-make-source "Rule Dummy Helm" 'helm-source-dummy
+          :action (helm-make-actions "Create Rule" 'trie/create-rule)
+          )
+        )
+    ;----
+  (setq jg-trie-layer/type-helm-source
+        (helm-make-source "Type Helm" 'helm-source-sync
+          :action (helm-make-actions "Open Type" 'trie/find-type)
+          :candidates 'trie/get-type-helm-candidates
+          )
           ;;--------------------
-          jg-trie-layer/rule-helm-dummy-source
-          (helm-make-source "Rule Dummy Helm" 'helm-source-dummy
-            :action (helm-make-actions "Create Rule" 'trie/create-rule)
-            )
+        jg-trie-layer/type-helm-dummy-source
+        (helm-make-source "Type Dummy Helm" 'helm-source-dummy
+          :action (helm-make-actions "Create Type" 'trie/create-type)
+          )
+        )
+    ;----
+  (setq jg-trie-layer/crosscut-helm-source
+        (helm-make-source "Crosscut Helm" 'helm-source-sync
+          :action (helm-make-actions "Open Crosscut" 'trie/find-crosscut)
+          :candidates 'trie/get-crosscut-helm-candidates
+          )
+        )
+    ;----
+  (setq jg-trie-layer/pattern-helm-source
+        (helm-make-source "Pattern Helm" 'helm-source-sync
+          :action (helm-make-actions "Open Pattern" 'trie/find-pattern)
+          :candidates 'trie/get-pattern-helm-candidates
+          )
+        ;;--------------------
+        jg-trie-layer/pattern-helm-dummy-source
+        (helm-make-source "Pattern Dummy Helm" 'helm-source-dummy
+          :action (helm-make-actions "Create Pattern" 'trie/create-pattern)
+          )
+        )
+    ;----
+  (setq jg-trie-layer/test-helm-source
+        (helm-make-source "Test Helm" 'helm-source-sync
+          :action (helm-make-actions "Open Test" 'trie/find-test)
+          :candidates 'trie/get-test-helm-candidates
+          )
+        ;;--------------------
+        jg-trie-layer/test-helm-dummy-source
+        (helm-make-source "Test Dummy Helm" 'helm-source-dummy
+          :action (helm-make-actions "Create Test" 'trie/create-test)
+          )
           )
     ;----
-    (setq jg-trie-layer/type-helm-source
-          (helm-make-source "Type Helm" 'helm-source-sync
-            :action (helm-make-actions "Open Type" 'trie/find-type)
-            :candidates 'trie/get-type-helm-candidates
-            )
-          ;;--------------------
-          jg-trie-layer/type-helm-dummy-source
-          (helm-make-source "Type Dummy Helm" 'helm-source-dummy
-            :action (helm-make-actions "Create Type" 'trie/create-type)
-            )
+  (setq jg-trie-layer/tag-helm-source
+        (helm-make-source "Tag Helm" 'helm-source-sync
+          :action (helm-make-actions "Open Tag" 'trie/toggle-tag)
+          :candidates 'trie/get-tag-helm-candidates
+          )
+        ;;--------------------
+        jg-trie-layer/tag-helm-dummy-source
+        (helm-make-source "Tag Dummy Helm" 'helm-source-dummy
+          :action (helm-make-actions "Create Tag" 'trie/create-tag)
+          )
           )
     ;----
-    (setq jg-trie-layer/crosscut-helm-source
-          (helm-make-source "Crosscut Helm" 'helm-source-sync
-            :action (helm-make-actions "Open Crosscut" 'trie/find-crosscut)
-            :candidates 'trie/get-crosscut-helm-candidates
-            )
-           )
-    ;----
-    (setq jg-trie-layer/pattern-helm-source
-          (helm-make-source "Pattern Helm" 'helm-source-sync
-            :action (helm-make-actions "Open Pattern" 'trie/find-pattern)
-            :candidates 'trie/get-pattern-helm-candidates
-            )
-          ;;--------------------
-          jg-trie-layer/pattern-helm-dummy-source
-          (helm-make-source "Pattern Dummy Helm" 'helm-source-dummy
-            :action (helm-make-actions "Create Pattern" 'trie/create-pattern)
-            )
+  (setq jg-trie-layer/channel-helm-source
+        (helm-make-source "Channel Helm" 'helm-source-sync
+          :action (helm-make-actions "Open Channel" 'trie/find-channel)
+          :candidates 'trie/get-channel-helm-candidates
           )
-    ;----
-    (setq jg-trie-layer/test-helm-source
-          (helm-make-source "Test Helm" 'helm-source-sync
-            :action (helm-make-actions "Open Test" 'trie/find-test)
-            :candidates 'trie/get-test-helm-candidates
-            )
-          ;;--------------------
-          jg-trie-layer/test-helm-dummy-source
-          (helm-make-source "Test Dummy Helm" 'helm-source-dummy
-            :action (helm-make-actions "Create Test" 'trie/create-test)
-            )
+        ;;--------------------
+        jg-trie-layer/channel-helm-dummy-source
+        (helm-make-source "Channel Dummy Helm" 'helm-source-dummy
+          :action (helm-make-actions "Create Channel" 'trie/create-channel)
           )
-    ;----
-    (setq jg-trie-layer/tag-helm-source
-          (helm-make-source "Tag Helm" 'helm-source-sync
-            :action (helm-make-actions "Open Tag" 'trie/toggle-tag)
-            :candidates 'trie/get-tag-helm-candidates
-            )
-          ;;--------------------
-          jg-trie-layer/tag-helm-dummy-source
-          (helm-make-source "Tag Dummy Helm" 'helm-source-dummy
-            :action (helm-make-actions "Create Tag" 'trie/create-tag)
-            )
           )
-    ;----
-    (setq jg-trie-layer/channel-helm-source
-          (helm-make-source "Channel Helm" 'helm-source-sync
-            :action (helm-make-actions "Open Channel" 'trie/find-channel)
-            :candidates 'trie/get-channel-helm-candidates
-            )
-          ;;--------------------
-          jg-trie-layer/channel-helm-dummy-source
-          (helm-make-source "Channel Dummy Helm" 'helm-source-dummy
-            :action (helm-make-actions "Create Channel" 'trie/create-channel)
-            )
-          )
-    )
+  )
 
   (defun jg-trie-layer/rule-helm ()
     "Helm for inserting and creating rules into jg-trie-layer/rule authoring mode"
@@ -334,7 +328,7 @@
       "l t" 'jg-trie-layer/list-types
       "l c" 'jg-trie-layer/list-crosscuts
       "l s" 'jg-trie-layer/list-sequences
-      "?"   'spacemacs/trie-help-hydra-transient-state/body
+      "?"   'trie-help-hydra/body
 
       "e"   'jg-trie-layer/explore-trie
 

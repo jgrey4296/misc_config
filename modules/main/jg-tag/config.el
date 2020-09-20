@@ -48,16 +48,14 @@
 (after! tag-clean-minor-mode ()
   (push 'tag-clean-minor-mode minor-mode-list)
   ;; TODO
-  ;; (doom|define-transient-state tag-clean
-  ;;                                   :title "Tag Cleaning Transient State"
-  ;;               :doc (concat "
+  ;; (defhydra tag-clean
+  ;;               "
   ;;               | Commands   ^^|
   ;;               |------------^^|------------^^|
   ;;               | [_q_] Quit   | [_!_] Split  |
   ;;               | [_f_] Filter | [_p_] Prev   |
   ;;               | [_s_] Sub    | [_l_] Leave  |
-  ;;               ")
-  ;;               :bindings
+  ;;               "
   ;;               ("q" nil :exit t)
   ;;               ("f" tag-clean/mark-to-filter)
   ;;               ("s" tag-clean/mark-to-sub)
@@ -65,8 +63,8 @@
   ;;               ("l" tag-clean/leave)
   ;;               ("!" jg-tag-org-split-on-headings :exit t)
   ;;               )
-  ;;             (doom/set-leader-keys-for-minor-mode 'tag-clean-minor-mode
-  ;;               "." 'doom/tag-clean-transient-state/body
+  ;;             (:map! :map 'tag-clean-minor-mode-map
+  ;;               "." 'tag-clean/body
   ;;               )
   ;;            )
     )

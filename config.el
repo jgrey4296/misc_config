@@ -35,6 +35,7 @@
       which-key-sort-order 'which-key-key-order-alpha
       custom-theme-load-path (cons "~/.doom.d/packages/jg-themes" custom-theme-load-path)
       whitespace-style '(face tabs spaces trailing lines space-before-tab newline indentation empty space-after-tab space-mark tab-mark newline-mark)
+      highlight-indent-guides-suppress-auto-error t
 )
 
 

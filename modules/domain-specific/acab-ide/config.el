@@ -85,39 +85,41 @@
   (use-package trie-sequence-mode
     :commands (trie-sequence-mode)
     :config
-    (spacemacs/declare-prefix "," "Trie-Sequence Mode Prefix")
+    (map! :mode trie-sequence-mode
+          :prefix ("," . "Trie-Sequence Mode Prefix"))
     (evil-define-key '(normal visual) trie-sequence-mode-map
       "l" 'trie-sequence/user-inc-column
       "h" 'trie-sequence/user-dec-column
       "k" 'trie-sequence/user-dec-line
       "j" 'trie-sequence/user-inc-line
       )
-    (spacemacs/set-leader-keys-for-major-mode 'trie-sequence-mode
-      "."   'spacemacs/trie-sequence_transient-transient-state/body
+    (map :mode trie-sequence-mode
+      "."   'hydra-trie-sequence/body
       )
-    (spacemacs|define-transient-state trie-sequence_transient
-      :title "Transient Editing State for Trie-Sequences"
-      :doc (concat "
-   | General           ^^| Change                    ^^| Motion             ^^| Remove              ^^| Sort                         ^^|
-   |-------------------^^+---------------------------^^+--------------------^^+---------------------^^+------------------------------^^|
-   | [_q_] Quit          | [_i_] Insert Rule           |                    ^^| [_d_] Delete Value    | [_s_] Sort Table Alpha         |
-   | [_n_] New Table     |                           ^^|                    ^^| [_D_] Delete Column   |                              ^^|
-   | [_v_] Table Inspect | [_r_] Rename Column         | [_c_] Centre Column  | [_m_] Merge Column    |                              ^^|
-   | [_b_] Set Right Tab | [_t_] Insert Terminal       |                    ^^|                     ^^|                              ^^|
-  ")
-      :bindings
-      ("q" nil :exit t)
-      ("n" trie-sequence/new-table ) ;; org create table, insert
-      ("v" trie-sequence/inspect-table) ;; create a left temp buffer that shows selected column's values (plus highlights active ones)
-      ("b" nil ) ;; create a right temp buffer that shows selected column's values (plus highlights active ones)
-      ("i" trie-sequence/insert-rule) ;; specify LHS and RHS, insert into factbase, insert into appropriate columns
-      ("r" trie-sequence/rename-column) ;; Rename the column from default
-      ("t" trie-sequence/insert-terminal) ;; Insert an Input terminal
-      ("c" trie-sequence/centre-column) ;; Centre the current column
-      ("d" trie-sequence/delete-value) ;; Delete the value at point from the table
-      ("D" trie-sequence/delete-column) ;; Delete the column from the table
-      ("m" nil ) ;; Merge the left connections and the right connections
-      ("s" trie-sequence/sort-table) ;; sort all columns alphabetically
+    ;; TODO Make hydra
+    ;; (spacemacs|define-transient-state trie-sequence_transient
+  ;;     :title "Transient Editing State for Trie-Sequences"
+  ;;     :doc (concat "
+  ;;  | General           ^^| Change                    ^^| Motion             ^^| Remove              ^^| Sort                         ^^|
+  ;;  |-------------------^^+---------------------------^^+--------------------^^+---------------------^^+------------------------------^^|
+  ;;  | [_q_] Quit          | [_i_] Insert Rule           |                    ^^| [_d_] Delete Value    | [_s_] Sort Table Alpha         |
+  ;;  | [_n_] New Table     |                           ^^|                    ^^| [_D_] Delete Column   |                              ^^|
+  ;;  | [_v_] Table Inspect | [_r_] Rename Column         | [_c_] Centre Column  | [_m_] Merge Column    |                              ^^|
+  ;;  | [_b_] Set Right Tab | [_t_] Insert Terminal       |                    ^^|                     ^^|                              ^^|
+  ;; ")
+  ;;     :bindings
+  ;;     ("q" nil :exit t)
+  ;;     ("n" trie-sequence/new-table ) ;; org create table, insert
+  ;;     ("v" trie-sequence/inspect-table) ;; create a left temp buffer that shows selected column's values (plus highlights active ones)
+  ;;     ("b" nil ) ;; create a right temp buffer that shows selected column's values (plus highlights active ones)
+  ;;     ("i" trie-sequence/insert-rule) ;; specify LHS and RHS, insert into factbase, insert into appropriate columns
+  ;;     ("r" trie-sequence/rename-column) ;; Rename the column from default
+  ;;     ("t" trie-sequence/insert-terminal) ;; Insert an Input terminal
+  ;;     ("c" trie-sequence/centre-column) ;; Centre the current column
+  ;;     ("d" trie-sequence/delete-value) ;; Delete the value at point from the table
+  ;;     ("D" trie-sequence/delete-column) ;; Delete the column from the table
+  ;;     ("m" nil ) ;; Merge the left connections and the right connections
+  ;;     ("s" trie-sequence/sort-table) ;; sort all columns alphabetically
       )
     )
   )
@@ -126,11 +128,11 @@
     :after (trie-tree)
     :commands (trie-explore-mode trie-explore/explore-current-buffer)
     :init
-    (spacemacs/set-leader-keys
+    (map! :leader
       "a s e" 'trie-explore/explore-current-buffer)
     :config
-    (spacemacs/declare-prefix "," "Trie-Explore Mode Prefix")
-    (spacemacs/set-leader-keys-for-major-mode 'trie-explore-mode
+    (map! :prefix ("," . "Trie-Explore Mode Prefix"))
+    (map :mode trie-explore-mode
       "i n" 'trie-explore/initial-setup
       "i N" #'(lambda () (interactive) (trie-explore/initial-setup t))
       )

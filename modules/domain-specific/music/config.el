@@ -6,11 +6,11 @@
               sclang-program "sclang"
               sclang-rtf-editor-program "emacs"
               sclang-show-workspace-on-startup nil
-              sclang-library-configuration-file (expand-file-name "~/.spacemacs.d/layers/jg-music-layer/sclang.yaml")
+              sclang-library-configuration-file (expand-file-name "~/.doom.d/modules/jg-music-layer/sclang.yaml")
               sclang-udp-port 57120
               sclang-eval-line-forward nil
               sclang-runtime-directory (expand-file-name "~/.sclang/")
-              sclang-boot-file (expand-file-name "~/.spacemacs.d/layers/jg-music-layer/startup.scd")
+              sclang-boot-file (expand-file-name "~/.doom.d/modules/jg-music-layer/startup.scd")
 
               jg-music-layer-tidal-workspace "Tidal Workspace"
               jg-music-layer-sclang-workspace "SCLang Workspace"
@@ -20,13 +20,13 @@
   :commands (jg-music-layer-minor-mode jg-music-layer-on global-jg-music-layer-mode)
   :config
   (message "Configuring Jg-Music-Layer Minor")
-  (spacemacs/set-leader-keys-for-minor-mode 'jg-music-layer-minor-mode
-                                            ". h" 'jg-music-layer-minor/hush
-                                            ". e" 'jg-music-layer-minor/jg-music-layer-eval-selection
-                                            ". r" 'jg-music-layer-minor/sclang-restart
-                                            ". R" 'jg-music-layer-minor/sclang-recompile
-                                            ". w" 'jg-music-layer/setup-windows
-                                            )
+  (map! :mode jg-music-layer-minor-mode
+        ". h" 'jg-music-layer-minor/hush
+        ". e" 'jg-music-layer-minor/jg-music-layer-eval-selection
+        ". r" 'jg-music-layer-minor/sclang-restart
+        ". R" 'jg-music-layer-minor/sclang-recompile
+        ". w" 'jg-music-layer/setup-windows
+        )
   (add-hook 'jg-music-layer-minor-mode-hook 'jg-music-layer/setup-minor-mode-keys)
   )
 (use-package! sclang

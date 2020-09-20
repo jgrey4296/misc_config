@@ -25,7 +25,7 @@
           coq-compile-before-require t
           coq-accept-proof-using-suggestion 'never
           )
-    (push 'coq-mode jg-spacemacs-main-layer/major-modes)
+    (push 'coq-mode +jg-personal-major-modes)
     (evil-define-key 'normal proof-mode-map
       (kbd "RET") 'proof-goto-point
       (kbd "DEL") 'proof-undo-last-successful-command

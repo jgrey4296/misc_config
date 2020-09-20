@@ -1,3 +1,3 @@
-(packages! helm)
-(packages! (overlay-ctrl-minor-mode :location local))
-(packages! (font-lock+ :location (recipe :fetcher git :url "https://github.com/emacsmirror/font-lock-plus")))
+(package! helm)
+(package! overlay-ctrl-minor-mode :recipe (:local-repo "~/.doom.d/packages/overlay-ctrl-minor-mode"))
+(package! font-lock+ (:recipe (:host github :repo "emacsmirror/font-lock-plus")))

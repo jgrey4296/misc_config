@@ -14,13 +14,14 @@
 (set-language-environment "UTF-8")
 (prefer-coding-system 'utf-8)
 
-(setq +doom-quit-messages nil
+(setq! +doom-quit-messages nil
       auto-save-file-name-transforms (quote ((".*" "~/.emacs.d/autosaves/`" t)))
       backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/")))
       dired-omit-files "^\\.?#\\|^\\.$\\|^\\.DS_Store$\\|^\\.git$\\|^__pycache__$\\|^flycheck__.+\\.py\\|^\\.mypy_cache$"
       dired-omit-verbose nil
       display-buffer-alist '(("*shell*" display-buffer-same-window (nil)) (undo-tree-visualizer-buffer-name display-buffer-at-bottom (nil)))
       display-line-numbers-width 4
+      evil-move-beyond-eol t
       evil-move-cursor-back nil
       evil-snipe-override-mode nil
       evil-snipe-repeat-scope nil
@@ -32,12 +33,9 @@
       tab-width 4
       which-key-idle-secondary-delay 0.05
       which-key-sort-order 'which-key-key-order-alpha
+      custom-theme-load-path (cons "~/.doom.d/packages/jg-themes" custom-theme-load-path)
+      whitespace-style '(face tabs spaces trailing lines space-before-tab newline indentation empty space-after-tab space-mark tab-mark newline-mark)
 )
-
-
-
-
-
 
 
 ;; There are two ways to load a theme. Both assume the theme is installed and

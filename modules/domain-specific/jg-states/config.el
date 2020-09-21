@@ -1,10 +1,25 @@
-(defconst jg_states-packages
-  '(
-    evil
-    )
-  )
+(after! (evil bind-map)
 
-(defun jg_states/post-init-evil ()
+;;; NOTE: See evil-core.el for full design of evil keybindings
+  ;; Excerpt:
+  ;; * Keymap Hierarchy:
+  ;; ** Overriding keymaps/overlay keymaps
+  ;; ** Emulation mode keymaps
+  ;;     Evil keymaps
+  ;; *** Intercept keymaps
+  ;; *** Local state keymap
+  ;; *** Minor-mode keymaps
+  ;; *** Auxiliary keymaps
+  ;; *** Overriding keymaps
+  ;; *** Global state keymap
+  ;; *** Keymaps for other states
+  ;;
+  ;; ** Minor mode keymaps
+  ;; ** Local keymap (`local-set-key')
+  ;; ** Global keymap (`global-set-key')
+
+
+;;; Code
   (evil-define-state test
     "Test State."
     :tag "<T>"
@@ -14,10 +29,12 @@
     ;; :entry-hook blah
     ;; :suppress-keymap t
     )
+
   ;; Global
   (global-set-key (kbd "q") (lambda () (interactive) (message "Global q")))
-  ;; Global state
+  ;; evil Global state
   (evil-global-set-key 'test (kbd "q") (lambda () (interactive) (message "global state q")))
+
   ;; Global state leader key binding:
   (let ((map (make-sparse-keymap)))
     ;; Define keybindings:
@@ -27,7 +44,7 @@
     ;; Add those keybindings behind the leader key in the state:
     (bind-map map
       ;; :override-minor-modes t
-      :evil-keys (dotspacemacs-leader-key)
+      :evil-keys ("SPC")
       :evil-states (test)
       )
     )
@@ -46,6 +63,7 @@
 
   ;; minor mode state
   ;; evil-define-minor-mode-key
+
   ;; local state
   (evil-local-set-key 'test (kbd "q") (lambda () (interactive) (message "local state q")))
 
@@ -67,10 +85,5 @@
   ;; (evil-local-set-key 'test (kbd "SPC" (lambda () (interactive) (message "aewf")))
 
   ;; LOOK AT BIND-MAP-DEFAULTS
-
-  ;; Define the default face spacemacs expects for a state:
-  (defface spacemacs-test-face
-    '((:background . "red"))
-    "Face for Test State")
 
   )

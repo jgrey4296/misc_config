@@ -22,11 +22,9 @@
 (defcustom jg-trie-layer/process-python-command
   "python3"
   "Name of the Python program to use")
-
 (defcustom jg-trie-layer/process-python-args
   ""
   "Arguments to python to run IDE server")
-
 
 ;;Defaults
 (setq-default
@@ -52,36 +50,35 @@
  )
 
 ;; TODO
-;; (defhydra trie-help-hydra (:color pink)
-;;   "
-;;    | General           ^^|
-;;    |-------------------^^+
-;;    | [_q_] Quit          |
-;;    |                   ^^|
-;;    |                   ^^|
-;;    |                   ^^|
-;;   "
-;;
-;;   ("q" nil :exit t)
-;;   )
+(defhydra trie-help-hydra (:color pink)
+  "
+   | General           ^^|
+   |-------------------^^+
+   | [_q_] Quit          |
+   |                   ^^|
+   |                   ^^|
+   |                   ^^|
+  "
 
-(after! acab-ide
-  ;; Defines all sub-trie modes: trie, trie-visual, sequence etc
-    ;; TODO (spacemacs/declare-prefix "a s" "Start Editor")
-    ;; TODO (spacemacs/set-leader-keys
-      ;; "a s t" 'jg-trie-layer/toggle-trie-ide)
-    (evil-define-key 'normal trie-mode-map
-      (kbd "#") 'trie/insert-tag
-      (kbd "C") 'trie/insert-condition
-      (kbd "A") 'trie/insert-action
-      (kbd "T") 'trie/insert-transform
-      )
-
-  ;; TODO upgrade to org-superstar?
-  (add-hook 'trie-mode-hook 'org-bullets-mode)
+  ("q" nil :exit t)
   )
-(after! trie-sequence-mode
-  (use-package trie-sequence-mode
+
+;; Defines all sub-trie modes: trie, trie-visual, sequence etc
+;; TODO (spacemacs/declare-prefix "a s" "Start Editor")
+;; TODO (spacemacs/set-leader-keys
+;; "a s t" 'jg-trie-layer/toggle-trie-ide)
+(evil-define-key 'normal trie-mode-map
+  (kbd "#") 'trie/insert-tag
+  (kbd "C") 'trie/insert-condition
+  (kbd "A") 'trie/insert-action
+  (kbd "T") 'trie/insert-transform
+  )
+
+;; TODO upgrade to org-superstar?
+(add-hook 'trie-mode-hook 'org-bullets-mode)
+
+(use-package! trie-sequence-mode
+    :defer
     :commands (trie-sequence-mode)
     :config
     (map! :mode trie-sequence-mode
@@ -92,77 +89,104 @@
       "k" 'trie-sequence/user-dec-line
       "j" 'trie-sequence/user-inc-line
       )
-    (map :mode trie-sequence-mode
+    (map! :mode trie-sequence-mode
       "."   'hydra-trie-sequence/body
       )
     ;; TODO Make hydra
-    ;; (defhydra trie-sequence_transient
-  ;;     "
-  ;;  | General           ^^| Change                    ^^| Motion             ^^| Remove              ^^| Sort                         ^^|
-  ;;  |-------------------^^+---------------------------^^+--------------------^^+---------------------^^+------------------------------^^|
-  ;;  | [_q_] Quit          | [_i_] Insert Rule           |                    ^^| [_d_] Delete Value    | [_s_] Sort Table Alpha         |
-  ;;  | [_n_] New Table     |                           ^^|                    ^^| [_D_] Delete Column   |                              ^^|
-  ;;  | [_v_] Table Inspect | [_r_] Rename Column         | [_c_] Centre Column  | [_m_] Merge Column    |                              ^^|
-  ;;  | [_b_] Set Right Tab | [_t_] Insert Terminal       |                    ^^|                     ^^|                              ^^|
-  ;; "
-  ;;     ("q" nil :exit t)
-  ;;     ("n" trie-sequence/new-table ) ;; org create table, insert
-  ;;     ("v" trie-sequence/inspect-table) ;; create a left temp buffer that shows selected column's values (plus highlights active ones)
-  ;;     ("b" nil ) ;; create a right temp buffer that shows selected column's values (plus highlights active ones)
-  ;;     ("i" trie-sequence/insert-rule) ;; specify LHS and RHS, insert into factbase, insert into appropriate columns
-  ;;     ("r" trie-sequence/rename-column) ;; Rename the column from default
-  ;;     ("t" trie-sequence/insert-terminal) ;; Insert an Input terminal
-  ;;     ("c" trie-sequence/centre-column) ;; Centre the current column
-  ;;     ("d" trie-sequence/delete-value) ;; Delete the value at point from the table
-  ;;     ("D" trie-sequence/delete-column) ;; Delete the column from the table
-  ;;     ("m" nil ) ;; Merge the left connections and the right connections
-  ;;     ("s" trie-sequence/sort-table) ;; sort all columns alphabetically
-      )
-    )
-  )
-(after! trie-explore-mode
-  (use-package trie-explore-mode
-    :after (trie-tree)
-    :commands (trie-explore-mode trie-explore/explore-current-buffer)
-    :init
-    (map! :leader
-      "a s e" 'trie-explore/explore-current-buffer)
-    :config
-    (map! :prefix ("," . "Trie-Explore Mode Prefix"))
-    (map :mode trie-explore-mode
-      "i n" 'trie-explore/initial-setup
-      "i N" #'(lambda () (interactive) (trie-explore/initial-setup t))
-      )
-    (evil-define-key '(normal visual) trie-explore-mode-map
-      ;;Add motions here
-      (kbd "<RET>") 'trie-explore/expand-entry
-      ;; "\t" 'jg-trie-layer/no-op
-      "\t" 'trie-explore/update-tree-data
-      ;; h,l : Move column
-      (kbd "h") 'trie-explore/layer-decrease
-      (kbd "l") 'trie-explore/layer-increase
-      ;;Insertion
-      (kbd "I") 'trie-explore/insert-at-leaf
-      ;;Deletion
-      (kbd "D") 'trie-explore/delete-entry
-      )
-    (evil-define-key '(insert) trie-explore-mode-map
-      (kbd "<RET>") 'trie-explore/insert-entry
-      )
-    (map! :mode 'trie-explore-mode
-          :localleader
-          "."   'trie-explore_transient/body
-      )
-    (defhydra trie-explore_transient
+    (defhydra trie-sequence_transient
       "
+   | General           ^^| Change                    ^^| Motion             ^^| Remove              ^^| Sort                         ^^|
+   |-------------------^^+---------------------------^^+--------------------^^+---------------------^^+------------------------------^^|
+   | [_q_] Quit          | [_i_] Insert Rule           |                    ^^| [_d_] Delete Value    | [_s_] Sort Table Alpha         |
+   | [_n_] New Table     |                           ^^|                    ^^| [_D_] Delete Column   |                              ^^|
+   | [_v_] Table Inspect | [_r_] Rename Column         | [_c_] Centre Column  | [_m_] Merge Column    |                              ^^|
+   | [_b_] Set Right Tab | [_t_] Insert Terminal       |                    ^^|                     ^^|                              ^^|
+  "
+      ("q" nil :exit t)
+      ("n" trie-sequence/new-table ) ;; org create table, insert
+      ("v" trie-sequence/inspect-table) ;; create a left temp buffer that shows selected column's values (plus highlights active ones)
+      ("b" nil ) ;; create a right temp buffer that shows selected column's values (plus highlights active ones)
+      ("i" trie-sequence/insert-rule) ;; specify LHS and RHS, insert into factbase, insert into appropriate columns
+      ("r" trie-sequence/rename-column) ;; Rename the column from default
+      ("t" trie-sequence/insert-terminal) ;; Insert an Input terminal
+      ("c" trie-sequence/centre-column) ;; Centre the current column
+      ("d" trie-sequence/delete-value) ;; Delete the value at point from the table
+      ("D" trie-sequence/delete-column) ;; Delete the column from the table
+      ("m" nil ) ;; Merge the left connections and the right connections
+      ("s" trie-sequence/sort-table) ;; sort all columns alphabetically
+      )
+)
+(use-package trie-explore-mode
+  :after (trie-tree)
+  :commands (trie-explore-mode trie-explore/explore-current-buffer)
+  :init
+  (map! :leader
+        "a s e" 'trie-explore/explore-current-buffer)
+  :config
+  (map! :prefix ("," . "Trie-Explore Mode Prefix"))
+  (map! :mode trie-explore-mode
+       "i n" 'trie-explore/initial-setup
+       "i N" #'(lambda () (interactive) (trie-explore/initial-setup t))
+      )
+  (evil-define-key '(normal visual) trie-explore-mode-map
+    ;;Add motions here
+    (kbd "<RET>") 'trie-explore/expand-entry
+    ;; "\t" 'jg-trie-layer/no-op
+    "\t" 'trie-explore/update-tree-data
+    ;; h,l : Move column
+    (kbd "h") 'trie-explore/layer-decrease
+    (kbd "l") 'trie-explore/layer-increase
+    ;;Insertion
+    (kbd "I") 'trie-explore/insert-at-leaf
+    ;;Deletion
+    (kbd "D") 'trie-explore/delete-entry
+    )
+  (evil-define-key '(insert) trie-explore-mode-map
+    (kbd "<RET>") 'trie-explore/insert-entry
+    )
+  (map! :mode 'trie-explore-mode
+        :localleader
+        "."   'trie-explore_transient/body
+        )
+  (defhydra trie-explore_transient
+    "
    | General           ^^|
    |-------------------^^+
    | [_q_] Quit          |
   "
-      ("q" nil :exit t)
-      )
+    ("q" nil :exit t)
     )
   )
+(use-package! trie-minor-mode
+  :defer
+  :commands (trie-minor-mode)
+  :config
+  (map! :map 'trie-minor-mode-map
+        "f r" 'jg-trie-layer/rule-helm
+        "f t" 'jg-trie-layer/type-helm
+        "f T" 'jg-trie-layer/test-helm
+        "f c" 'jg-trie-layer/crosscut-helm
+        "f s" 'jg-trie-layer/pattern-helm
+        "d r" 'jg-trie-layer/delete-rule
+        "d t" 'jg-trie-layer/delete-type
+        "d c" 'jg-trie-layer/delete-crosscut
+        "d s" 'jg-trie-layer/delete-sequence
+        "l r" 'jg-trie-layer/list-rules
+        "l t" 'jg-trie-layer/list-types
+        "l c" 'jg-trie-layer/list-crosscuts
+        "l s" 'jg-trie-layer/list-sequences
+        "?"   'trie-help-hydra/body
+
+        "e"   'jg-trie-layer/explore-trie
+        )
+    (evil-define-minor-mode-key 'normal 'trie-minor-mode
+      (kbd "[ [") 'jg-trie-layer/decrement-priors-layer
+      (kbd "] [") 'jg-trie-layer/increment-priors-layer
+      (kbd "[ ]") 'jg-trie-layer/decrement-posts-layer
+      (kbd "] ]") 'jg-trie-layer/increment-posts-layer
+      )
+    )
+
 (after! helm
   ;;TODO: add helms for types, crosscuts, patterns, tests, tags,
   ;;strategies, performatives, channels
@@ -244,7 +268,6 @@
           :action (helm-make-actions "Create Channel" 'trie/create-channel)
           )
           )
-  )
 
   (defun jg-trie-layer/rule-helm ()
     "Helm for inserting and creating rules into jg-trie-layer/rule authoring mode"
@@ -307,39 +330,5 @@
           :full-frame t
           :buffer "*Channel Helm*"
           )
-    )
-  )
-(after! trie-minor-mode
-  (message "Activating trie minor mode")
-  (use-package trie-minor-mode
-    :commands (trie-minor-mode)
-    :config
-    (spacemacs/set-leader-keys-for-minor-mode 'trie-minor-mode
-      "f r" 'jg-trie-layer/rule-helm
-      "f t" 'jg-trie-layer/type-helm
-      "f T" 'jg-trie-layer/test-helm
-      "f c" 'jg-trie-layer/crosscut-helm
-      "f s" 'jg-trie-layer/pattern-helm
-      "d r" 'jg-trie-layer/delete-rule
-      "d t" 'jg-trie-layer/delete-type
-      "d c" 'jg-trie-layer/delete-crosscut
-      "d s" 'jg-trie-layer/delete-sequence
-      "l r" 'jg-trie-layer/list-rules
-      "l t" 'jg-trie-layer/list-types
-      "l c" 'jg-trie-layer/list-crosscuts
-      "l s" 'jg-trie-layer/list-sequences
-      "?"   'trie-help-hydra/body
-
-      "e"   'jg-trie-layer/explore-trie
-
-      )
-    (evil-define-minor-mode-key 'normal 'trie-minor-mode
-      (kbd "[ [") 'jg-trie-layer/decrement-priors-layer
-      (kbd "] [") 'jg-trie-layer/increment-priors-layer
-      (kbd "[ ]") 'jg-trie-layer/decrement-posts-layer
-      (kbd "] ]") 'jg-trie-layer/increment-posts-layer
-
-      )
-
     )
   )

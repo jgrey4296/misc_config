@@ -1,5 +1,9 @@
 ;;; tools/dired/config.el -*- lexical-binding: t; -*-
 
+(load! "+bindings")
+(setq dgi-commit-message-format "%h %cs %s"
+      dgi-auto-hide-details-p nil)
+
 (use-package! dired
   :commands dired-jump
   :init
@@ -45,11 +49,7 @@ only variant that supports --group-directories-first."
   ;; Don't complain about this command being disabled when we use it
   (put 'dired-find-alternate-file 'disabled nil)
 
-  (map! :map dired-mode-map
-        ;; Kill all dired buffers on q
-        :ng "q" #'+dired/quit-all
-        ;; To be consistent with ivy/helm+wgrep integration
-        "C-c C-e" #'wdired-change-to-wdired-mode))
+)
 (use-package! dired-rsync
   :general (dired-mode-map "C-c C-r" #'dired-rsync))
 (use-package! diredfl
@@ -144,9 +144,7 @@ we have to clean it up ourselves."
             ("\\.\\(?:mp3\\|flac\\)\\'" ,cmd)
             ("\\.html?\\'" ,cmd)
             ("\\.md\\'" ,cmd))))
-  (map! :map dired-mode-map
-        :localleader
-        "h" #'dired-omit-mode))
+)
 (use-package! fd-dired
   :when doom-projectile-fd-binary
   :defer t
@@ -162,40 +160,7 @@ we have to clean it up ourselves."
   :init
   (dired-quick-sort-setup)
   )
-;;;###package dired-git-info
-(map! :after dired
-      :map (dired-mode-map ranger-mode-map)
-      :ng ")" #'dired-git-info-mode
-      :n "o" #'dired-find-file-other-window
-      :n "S" #'hydra-dired-quick-sort/body
-      (:when (featurep! :main personal)
-      :n "i" #'+jg-personal-dired-insert-subdir-maybe-recursive
-      :n "DEL" #'dired-kill-subdir
-      (:localleader
-       (:prefix ("d" . "Describe")
-       "s" '+jg-personal-dired-create-summary-of-orgs
-       "m" '+jg-personal-dired-marked-info
-       "d" '+jg-personal-dired-diff
-        )
-       (:prefix ("K" . "Destructive")
 
-        )
-       (:prefix ("m" . "Mark")
-
-        )
-       (:prefix ("f" . "Find")
-
-        )
-       (:prefix ("g" . "gtags")
-
-        )
-
-       )
-      )
-)
-
-(setq dgi-commit-message-format "%h %cs %s"
-      dgi-auto-hide-details-p nil)
 (after! wdired
   ;; Temporarily disable `dired-git-info-mode' when entering wdired, due to
   ;; reported incompatibilities.

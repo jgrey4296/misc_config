@@ -62,3 +62,14 @@
   (interactive)
   (let ((inhibit-read-only t)) (erase-buffer))
   )
+
+(defun +jg-personal-insert-lparen ()
+  """ utility to insert a (  """
+  (interactive)
+  (insert "(")
+  )
+(defun +jg-personal-insert-rparen ()
+  """ utility to insert a ) """
+  (interactive)
+  (insert ")")
+  )

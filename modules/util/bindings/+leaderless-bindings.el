@@ -1,14 +1,5 @@
 ;;; util/base_bindings/+bindings.el -*- lexical-binding: t; -*-
-(defun +jg-personal-insert-lparen ()
-  """ utility to insert a (  """
-  (interactive)
-  (insert "(")
-  )
-(defun +jg-personal-insert-rparen ()
-  """ utility to insert a ) """
-  (interactive)
-  (insert ")")
-  )
+
 (global-set-key (kbd "C-c [") '+jg-personal-insert-lparen)
 (global-set-key (kbd "C-c ]") '+jg-personal-insert-rparen)
 

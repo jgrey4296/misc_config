@@ -10,7 +10,6 @@
 
 (package! 2048-game         :disable t)
 (package! ace-link          :disable t)
-(package! company           :disable t)
 (package! desktop           :disable t)
 (package! doc-view          :disable t)
 (package! erc               :disable t)

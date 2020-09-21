@@ -13,14 +13,38 @@
 
 
 (use-package! hl-line
+  :defer t
   :init
   (global-hl-line-mode)
   )
 (use-package! hi-lock
+  :defer t
   :init
   (global-hi-lock-mode)
   :config
   (setq hi-lock-auto-select-face t)
+  )
+(use-package! auto-highlight-symbol
+  :defer t
+  )
+(use-package! centered-cursor-mode
+  :defer t
+  :commands centered-cursor-mode
+  )
+(use-package! evil-visual-mark-mode
+  :defer t
+  )
+(use-package! semantic
+  :defer t
+  :config (add-to-list 'semantic-default-submodes
+                       'global-semantic-idle-summary-mode))
+(use-package! evil-iedit-state
+  :defer t
+  :commands (evil-iedit-state evil-iedit-state/iedit-mode)
+  :init
+  (setq iedit-current-symbol-default t
+        iedit-only-at-symbol-boundaries t
+        iedit-toggle-key-default nil)
   )
 
 (after! (evil evil-snipe)
@@ -83,23 +107,12 @@
                 python-shell--interpreter-args nil
                 )
   (modify-syntax-entry ?_ "w" python-mode-syntax-table)
-  (map! :mode python-mode
-        :leader
-        :prefix "i"
-        "d" '+jg-personal-python-toggle-breakpoint
-        )
-  (map! :map 'python-mode-map
-        :n "z d" '+jg-personal-toggle-all-defs
-        :n "z C" '+jg-personal-close-class-defs
-        )
+
 )
 (after! neotree
   (push "^__pycache__$" neo-hidden-regexp-list)
   (push "^G\\(PATH\\|R?TAGS\\)$" neo-hidden-regexp-list)
   (push "^__init__.py$" neo-hidden-regexp-list)
-  (map! :leader
-        :n "f t" 'neotree-toggle
-        )
   )
 (after! helm-gtags
   ;; Adapated from helm-gtags spacemacs layer
@@ -107,23 +120,6 @@
   ;;   (when (boundp jumpl)
   ;;     (add-to-list jumpl 'spacemacs/helm-gtags-maybe-dwim 'append)))
 
-  (map! :mode 'python-mode
-        :prefix "j"
-        "C" 'helm-gtags-create-tags
-        "d" 'helm-gtags-find-tag
-        "D" 'helm-gtags-find-tag-other-window
-        "G" 'helm-gtags-dwim-other-window
-        "i" 'helm-gtags-tags-in-this-function
-        "l" 'helm-gtags-parse-file
-        "n" 'helm-gtags-next-history
-        "p" 'helm-gtags-previous-history
-        "r" 'helm-gtags-find-rtag
-        "R" 'helm-gtags-resume
-        "s" 'helm-gtags-select
-        "S" 'helm-gtags-show-stack
-        "y" 'helm-gtags-find-symbol
-        "U" 'helm-gtags-update-tags
-        )
   )
 (after! (dired pysenv)
     """ Remove the annoying python-shell-setup advice """
@@ -137,15 +133,6 @@
 (after! (origami python-origami)
   (delq (assoc 'python-mode origami-parser-alist) origami-parser-alist)
   (add-to-list 'origami-parser-alist '(python-mode . +jg-origami-python-parser))
-  )
-(after! vlf
-    (map! :mode vlf-mode
-         :n "] A" 'vlf-next-batch-from-point
-         :n "] a" 'vlf-next-batch
-         :n "[ a" 'vlf-prev-batch
-    ;; TODO
-    ;; (spacemacs/set-leader-keys "a U v " 'vlf-set-batch-size))
-    )
   )
 (after! (featurep! :completion helm)
     (setq! helm-find-files-actions

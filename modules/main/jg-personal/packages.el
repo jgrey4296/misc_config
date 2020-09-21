@@ -21,3 +21,10 @@
 (package! yasnippet)
 (package! yasnippet-snippets)
 (package! jg-python-origami :recipe '(:local-repo "~/.doom.d/packages/jg-python-origami"))
+
+(package! auto-highlight-symbol)
+(package! centered-cursor-mode)
+(package! evil-visual-mark-mode)
+
+(package! evil-iedit-state)
+(package! semantic)

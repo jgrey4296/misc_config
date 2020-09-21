@@ -10,7 +10,7 @@
         )
   )
 (use-package! rainbow-mode
-  :defer
+  :defer t
   :init
   (map! :leader
         :prefix ("t C" . "Colours")
@@ -18,13 +18,13 @@
   (add-hook 'prog-mode-hook 'rainbow-mode)
 )
 (use-package! evil-string-inflection
-  :defer
+  :defer t
   :commands evil-operator-string-inflection
   :init
   (map! :n "g '" 'evil-operator-string-inflection)
   )
 (use-package! free-keys
-  :defer
+  :defer t
   :commands (free-keys free-keys-set-prefix)
   :init
   (map! :leader
@@ -37,6 +37,7 @@
         )
   )
 (use-package! highlight-parentheses
+  :defer t
   :init
   (setq hl-paren-colors '("color-16" "color-16" "color-16" "color-16")
         hl-paren-background-colors '("Springgreen3" "color-26" "color-91" "IndianRed3"))

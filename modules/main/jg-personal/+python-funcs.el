@@ -1,8 +1,6 @@
 ;;; main/jg-personal/+python-funcs.el -*- lexical-binding: t; -*-
 
-
-(after! python
-  (defun +jg-personal-toggle-all-defs ()
+(defun +jg-personal-toggle-all-defs ()
     (interactive)
     ;; goto start of file
     (let* ((open-or-close 'evil-close-fold)
@@ -20,7 +18,7 @@
         )
       )
     )
-  (defun +jg-personal-close-class-defs ()
+(defun +jg-personal-close-class-defs ()
     (interactive )
     (save-excursion
       (let* ((current (point)))
@@ -45,7 +43,7 @@
         )
       )
     )
-  (defun +jg-personal-python-toggle-breakpoint ()
+(defun +jg-personal-python-toggle-breakpoint ()
     "Modified version of spacemacs original
 Add a break point, highlight it.
 Customize python using PYTHONBREAKPOINT env variable
@@ -61,4 +59,3 @@ Customize python using PYTHONBREAKPOINT env variable
           (insert "\n")
           (python-indent-line)))))
 
-  )

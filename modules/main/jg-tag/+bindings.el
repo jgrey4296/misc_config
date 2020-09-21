@@ -26,11 +26,11 @@
       :mode dired-mode
       :localleader
       (:prefix ("K" . "Destructive")
-       :n "K c" #'jg-tag-clean-marked-files
-       :n "K C" #'jg-tag-chop-long-files-from-dired
-       :n "K B" #'jg-tag-unify-pdf-locations
-       :n "K Z" #'jg-tag-quick-compress-orgs
-       :n "K J" #'jg-tag-reformat-jsons
+       :n "c" #'jg-tag-clean-marked-files
+       :n "C" #'jg-tag-chop-long-files-from-dired
+       :n "B" #'jg-tag-unify-pdf-locations
+       :n "Z" #'jg-tag-quick-compress-orgs
+       :n "J" #'jg-tag-reformat-jsons
        )
       :n "m u" #'jg-tag-mark-untagged-orgs
 

@@ -6,7 +6,7 @@
       :ng ")" #'dired-git-info-mode
       :n "o" #'dired-find-file-other-window
       :n "S" #'hydra-dired-quick-sort/body
-      (:when (featurep! :main personal)
+      (:when (featurep! :main jg-personal)
       :n "i" #'+jg-personal-dired-insert-subdir-maybe-recursive
       :n "DEL" #'dired-kill-subdir
       (:localleader

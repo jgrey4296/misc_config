@@ -357,7 +357,7 @@ naming the directory based on the first line of text and insert the car "
                 (re-search-forward (format "^%c" current)))
       (goto-char (line-beginning-position))
       (insert (format "** %c\n" current))
-      (incf current)
+      (cl-incf current)
       )
     )
   )
@@ -399,19 +399,6 @@ Sort, align, split, save "
     )
   )
   )
-
-
-(map! :mode org-mode
-      :leader
-      (:prefix "ao"
-       :n "c" #'jg-tag-clean-org
-       :n "w" #'jg-tag-wrap-numbers
-       :n "L" #'jg-tag-wrap-non-link-urls
-       :n "D" #'jg-tag-remove-duplicates
-       :n "x s" #'jg-tag-next-similar-string
-       )
-      )
-)
 
 (after! (evil org)
   (jg-tag-rebuild-tag-database)

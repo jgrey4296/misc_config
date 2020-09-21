@@ -46,9 +46,9 @@
   """ Improved action to add and remove tags Toggle Selected Tags
 Can operate on regions of headings """
   (let* ((visual-candidates (helm-marked-candidates))
-         (actual-candidates (mapcar (lambda (x) (cadr (assoc x jg-tag-unify-layer-candidates-names))) visual-candidates))
+         (actual-candidates (mapcar (lambda (x) (cadr (assoc x jg-tag-candidates-names))) visual-candidates))
          (prior-point 1)
-         (end-pos jg-tag-unify-layer-marker)
+         (end-pos jg-tag-marker)
          (current-tags '())
          (add-func (lambda (candidate)
                      (if (not (-contains? current-tags candidate))
@@ -268,83 +268,9 @@ Can operate on regions of headings """
             )
       )
     )
-
-(after! helm
-  (setq helm-grep-actions (append helm-grep-actions '(("Open Url" . jg-tag-open-url-action))))
-  ;; Build a Custom grep for bookmarks
-  (setq jg-tag-bookmark-helm-source
-        (helm-make-source "Bookmark Helm" 'helm-grep-class
-          :action (helm-make-actions "Open Url" 'jg-tag-open-url-action
-                                     "Insert"   'jg-tag-insert-candidates
-                                     "Insert Link" 'jg-tag-insert-links
-                                     "Tweet Link"  'jg-tag-tweet-link-action
-                                     )
-          :filter-one-by-one 'jg-tag-grep-filter-one-by-one
-          :nomark nil
-          :backend helm-grep-default-command
-          :pcre nil
-          )
-        jg-tag-twitter-helm-source
-        (helm-make-source "Twitter Helm" 'helm-source
-          :action (helm-make-actions "File Select Helm" 'jg-tag-file-select-helm)
-          )
-        jg-tag-unify-lauyer/twitter-heading-helm-source
-        (helm-make-source "Twitter Heading Helm" 'helm-source
-          :action (helm-make-actions "File Select Helm" 'jg-tag-file-select-helm)
-          )
-        jg-tag-file-select-source
-        (helm-make-source "Twitter File Select Helm" 'helm-source
-          :action (helm-make-actions "Find File" 'jg-tag-find-file)
-          )
-
-        jg-tag-helm
-        (helm-make-source "Helm Tagging" 'helm-source
-          :action (helm-make-actions "Set" 'jg-tag-set-tags))
-
-        jg-tag-fallback-source
-        (helm-make-source "Helm Fallback Source" 'helm-source
-          :action (helm-make-actions "Create" 'jg-tag-set-new-tag)
-          :filtered-candidate-transformer (lambda (_c _s) (list helm-pattern)))
-          )
-
-  (map! :leader
-        (:prefix ("ah" . "Helms")
-         "f" 'jg-tag-helm-bookmarks
-         "t" 'jg-tag-helm-twitter
-         "h" 'jg-tag-helm-heading-twitter
-         "u" 'jg-tag-helm-unified
-         )
-        )
-
-
-)
-(after! helm-bibtex
-  ;; Keybind my bib helm
-  (map! "a h b" #'jg-tag-helm-bibtex)
-
-  ;; Define the bib helm
-  (defvar jg-tag-helm-source-bibtex
-    '((name . "BibTeX entries")
-      (header-name . "BibTeX entries")
-      ;; (lambda (name) (format "%s%s: " name (if helm-bibtex-local-bib " (local)" ""))))
-      (candidates . helm-bibtex-candidates)
-      (match helm-mm-exact-match helm-mm-match helm-fuzzy-match)
-      (fuzzy-match)
-      (redisplay . identity)
-      (multimatch)
-      (group . helm)
-      (filtered-candidate-transformer helm-bibtex-candidates-formatter helm-flx-fuzzy-matching-sort helm-fuzzy-highlight-matches)
-      (action . (("Insert citation"     . helm-bibtex-insert-citation)
-                 ("Open PDF"            . helm-bibtex-open-pdf)
-                 ("Insert BibTeX key"   . helm-bibtex-insert-key)
-                 ("Insert BibTeX entry" . helm-bibtex-insert-bibtex)
-                 ("Show entry"          . helm-bibtex-show-entry)
-                 )))
-    "Simplified source for searching bibtex files")
-  (defun jg-tag-helm-bibtex (&optional arg local-bib input)
+(defun jg-tag-helm-bibtex (&optional arg local-bib input)
     " Custom implementation of helm-bibtex"
     (interactive "P")
-    (require 'helm-bibtex)
     (when arg
       (bibtex-completion-clear-cache))
     (let* ((bibtex-completion-additional-search-fields '("tags" "year"))
@@ -364,8 +290,69 @@ Can operate on regions of headings """
             :bibtex-local-bib local-bib
             :bibtex-candidates candidates
             )))
-  )
 
+(after! helm-files
+  (setq helm-grep-actions (append helm-grep-actions '(("Open Url" . jg-tag-open-url-action))))
+  ;; Build a Custom grep for bookmarks
+  (setq jg-tag-bookmark-helm-source
+        (helm-make-source "Bookmark Helm" 'helm-grep-class
+          :action (helm-make-actions "Open Url" 'jg-tag-open-url-action
+                                     "Insert"   'jg-tag-insert-candidates
+                                     "Insert Link" 'jg-tag-insert-links
+                                     "Tweet Link"  'jg-tag-tweet-link-action
+                                     )
+          :filter-one-by-one 'jg-tag-grep-filter-one-by-one
+          :nomark nil
+          :backend "grep --color=always -a -d skip %e -n%cH -e %p %f"
+          :pcre nil
+           ))
+)
+(after! helm
+
+  (setq jg-tag-twitter-helm-source
+        (helm-make-source "Twitter Helm" 'helm-source
+          :action (helm-make-actions "File Select Helm" 'jg-tag-file-select-helm)
+          )
+        jg-tag-twitter-heading-helm-source
+        (helm-make-source "Twitter Heading Helm" 'helm-source
+          :action (helm-make-actions "File Select Helm" 'jg-tag-file-select-helm)
+          )
+        jg-tag-file-select-source
+        (helm-make-source "Twitter File Select Helm" 'helm-source
+          :action (helm-make-actions "Find File" 'jg-tag-find-file)
+          )
+
+        jg-tag-helm
+        (helm-make-source "Helm Tagging" 'helm-source
+          :action (helm-make-actions "Set" 'jg-tag-set-tags))
+
+        jg-tag-fallback-source
+        (helm-make-source "Helm Fallback Source" 'helm-source
+          :action (helm-make-actions "Create" 'jg-tag-set-new-tag)
+          :filtered-candidate-transformer (lambda (_c _s) (list helm-pattern)))
+          )
+)
+(after! helm-bibtex
+  ;; Define the bib helm
+  (defvar jg-tag-helm-source-bibtex
+    '((name . "BibTeX entries")
+      (header-name . "BibTeX entries")
+      ;; (lambda (name) (format "%s%s: " name (if helm-bibtex-local-bib " (local)" ""))))
+      (candidates . helm-bibtex-candidates)
+      (match helm-mm-exact-match helm-mm-match helm-fuzzy-match)
+      (fuzzy-match)
+      (redisplay . identity)
+      (multimatch)
+      (group . helm)
+      (filtered-candidate-transformer helm-bibtex-candidates-formatter helm-flx-fuzzy-matching-sort helm-fuzzy-highlight-matches)
+      (action . (("Insert citation"     . helm-bibtex-insert-citation)
+                 ("Open PDF"            . helm-bibtex-open-pdf)
+                 ("Insert BibTeX key"   . helm-bibtex-insert-key)
+                 ("Insert BibTeX entry" . helm-bibtex-insert-bibtex)
+                 ("Show entry"          . helm-bibtex-show-entry)
+                 )))
+    "Simplified source for searching bibtex files")
+  )
 (after! (f helm-bibtex)
   (jg-tag-build-bibtex-list)
 )

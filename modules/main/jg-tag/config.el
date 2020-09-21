@@ -35,36 +35,35 @@
                                             ("file" "The path of the file")
                                             ("translator" "The Translators of the work")
                                             )
-
               )
 
+(load! "+bindings")
+(load! "+bibtex")
+(load! "+dired")
+(load! "+file")
+(load! "+helm")
+(load! "+index")
+(load! "+json")
+(load! "+org")
+(load! "+tags")
+(load! "+util")
+
+(use-package tag-clean-minor-mode
+  :defer t)
+(use-package tag-mode
+  :defer t)
+(use-package helm-bibtex
+  :defer t
+  :commands (bibtex-completion-init)
+)
+
 (after! (helm evil)
-  (evil-ex-define-cmd "t[ag]" 'jg-tag-helm-start)
-  (evil-ex-define-cmd "to" 'jg-tag-occurrences)
-  (evil-ex-define-cmd "toa" 'jg-tag-occurrences-in-open-buffers)
-  (evil-ex-define-cmd "tv"  'org-tags-view)
-  (evil-ex-define-cmd "ts"  'org-set-tags)
+  (evil-ex-define-cmd "t[ag]" #'jg-tag-helm-start)
+  (evil-ex-define-cmd "to" #'jg-tag-occurrences)
+  (evil-ex-define-cmd "toa" #'jg-tag-occurrences-in-open-buffers)
+  (evil-ex-define-cmd "tv"  #'org-tags-view)
+  (evil-ex-define-cmd "ts"  #'org-set-tags)
   )
 (after! tag-clean-minor-mode ()
   (push 'tag-clean-minor-mode minor-mode-list)
-  ;; TODO
-  ;; (defhydra tag-clean
-  ;;               "
-  ;;               | Commands   ^^|
-  ;;               |------------^^|------------^^|
-  ;;               | [_q_] Quit   | [_!_] Split  |
-  ;;               | [_f_] Filter | [_p_] Prev   |
-  ;;               | [_s_] Sub    | [_l_] Leave  |
-  ;;               "
-  ;;               ("q" nil :exit t)
-  ;;               ("f" tag-clean/mark-to-filter)
-  ;;               ("s" tag-clean/mark-to-sub)
-  ;;               ("p" tag-clean/previous)
-  ;;               ("l" tag-clean/leave)
-  ;;               ("!" jg-tag-org-split-on-headings :exit t)
-  ;;               )
-  ;;             (:map! :map 'tag-clean-minor-mode-map
-  ;;               "." 'tag-clean/body
-  ;;               )
-  ;;            )
-    )
+  )

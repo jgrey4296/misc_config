@@ -24,7 +24,7 @@
  jg-misc
  jg-org
  jg-org-unit-test
- jg-tag-unify
+ jg-tag
 
  ;; :domain-specific
 

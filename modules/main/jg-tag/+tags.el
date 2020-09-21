@@ -14,7 +14,7 @@ returns a hash-table of the tags, and their instance counts.
         (goto-char (point-min))
         ;;where to store tags:
         ;;split tags into list
-        (mapc (lambda (x) (incf (gethash x tag-set 0)))
+        (mapc (lambda (x) (cl-incf (gethash x tag-set 0)))
               ;;TODO: fix tag depth filtering
               (-flatten
                (org-map-entries (lambda () (if (funcall tagdepth-p (car (org-heading-components)))
@@ -39,7 +39,7 @@ Return a hash-table of tags with their instance counts"
       (goto-char (point-min))
       (setq raw-tags (org-map-entries (lambda () (if (funcall tagdepth-p (car (org-heading-components))) (org-get-tags nil t) '()))))
       )
-    (mapc (lambda (x) (incf (gethash x tagcounts 0))) (-flatten raw-tags))
+    (mapc (lambda (x) (cl-incf (gethash x tagcounts 0))) (-flatten raw-tags))
     tagcounts
     )
   )
@@ -73,7 +73,7 @@ Return a hash-table of tags with their instance counts"
     (loop for x in allbuffers do
           (if (with-current-buffer x (eq 'org-mode major-mode))
               (maphash (lambda (k v) (if (not (gethash k alltags)) (puthash k 0 alltags))
-                         (incf (gethash k alltags) v)) (jg-tag-get-buffer-tags x depth))
+                         (cl-incf (gethash k alltags) v)) (jg-tag-get-buffer-tags x depth))
             )
           )
     (if (not (hash-table-empty-p alltags))
@@ -111,7 +111,7 @@ Return a hash-table of tags with their instance counts"
   "Utility to set a new tag for an org heading"
   (save-excursion
     (let ((prior-point (- (point) 1))
-          (end-pos jg-tag-unify-layer-marker)
+          (end-pos jg-tag-marker)
           (stripped_tag (jg-tag-strip_spaces x))
           )
       (while (and (/= prior-point (point)) (< (point) end-pos))
@@ -190,7 +190,7 @@ Return a hash-table of tags with their instance counts"
          (count-hash (make-hash-table :test 'equal))
          )
     ;; (message "Getting Tags for all buffers to depth: %s" depth)
-    (mapcar (lambda (x) (incf (gethash (car x) count-hash 0) (string-to-number (cadr x)))) pairs)
+    (mapcar (lambda (x) (cl-incf (gethash (car x) count-hash 0) (string-to-number (cadr x)))) pairs)
     (if (not (hash-table-empty-p count-hash))
         (jg-tag-chart-tag-counts count-hash (buffer-name))
       (message "No Tags in buffer")))

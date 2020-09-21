@@ -6,9 +6,9 @@
 (defun jg-tag-bibtex-set-tags (x)
   " Set tags in bibtex entries "
   (let* ((visual-candidates (helm-marked-candidates))
-         (actual-candidates (mapcar (lambda (x) (cadr (assoc x jg-tag-unify-layer-candidates-names))) visual-candidates))
+         (actual-candidates (mapcar (lambda (x) (cadr (assoc x jg-tag-candidates-names))) visual-candidates))
          (prior-point 1)
-         (end-pos jg-tag-unify-layer-marker)
+         (end-pos jg-tag-marker)
          (current-tags '())
          (add-func (lambda (candidate)
                      (if (not (-contains? current-tags candidate))
@@ -35,7 +35,7 @@
   "A Fallback function to set tags of bibtex entries "
   (save-excursion
     (let ((prior-point (- (point) 1))
-          (end-pos jg-tag-unify-layer-marker)
+          (end-pos jg-tag-marker)
           (stripped_tag (jg-tag-strip_spaces x))
           )
       (while (and (/= prior-point (point)) (< (point) end-pos))

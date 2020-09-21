@@ -9,7 +9,7 @@
         )
     ;; (message "Describing marked file tags to depth: %s" targetdepth)
     (loop for x in marked do
-          (maphash (lambda (k v) (incf (gethash k alltags 0) v)) (jg-tag-get-file-tags x targetdepth))
+          (maphash (lambda (k v) (cl-incf (gethash k alltags 0) v)) (jg-tag-get-file-tags x targetdepth))
           )
     (if (not (hash-table-empty-p alltags))
         (jg-tag-chart-tag-counts alltags "Dired Marked Files")
@@ -35,7 +35,7 @@
         )
     (dired-map-over-marks
      (if (f-dir? (dired-get-filename))
-         (incf counts (length
+         (cl-incf counts (length
                        (seq-filter untagged-p (directory-files-recursively (dired-get-filename) "\.org"))
                        )
                )
@@ -100,27 +100,3 @@
   )
 
 
-(after! dired
-  ;; TODO (doom/declare-prefix-for-mode 'dired-mode "m i" "Index")
-
-  (map! :mode dired-mode
-        :localleader
-        (:prefix ("K" . "Destructive")
-        :n "K c" 'jg-tag-clean-marked-files
-        :n "K C" 'jg-tag-chop-long-files-from-dired
-        :n "K B" 'jg-tag-unify-pdf-locations
-        :n "K Z" 'jg-tag-quick-compress-orgs
-        :n "K J" 'jg-tag-reformat-jsons
-        )
-        :n "m u" 'jg-tag-mark-untagged-orgs
-
-        :n "d u" 'jg-tag-dired-directory-count-untagged
-        :n "d t" 'jg-tag-describe-marked-tags
-
-        :n "f r" 'jg-tag-find-random-marked-file
-        :n "f s" 'jg-tag-display-selection
-
-        :n "i p" 'jg-tag-index-people
-        :n "i t" 'jg-tag-index-tags
-    )
-  )

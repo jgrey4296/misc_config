@@ -19,8 +19,7 @@
   :config
   (defhydra hydra-buffer-menu (:color pink
                                :hint nil)
-    :title "Overlay Application"
-    :doc (concat "
+    "
     | Overlay Commands                 ^^|
     |----------------------------------^^|--------------------------
     | [_q_] Quit                         | [_r_] Overlay Region
@@ -29,8 +28,7 @@
     | [_c_] Clear Register               | [_C_] Clear Overlays
     |----------------------------------^^---------------------------
     | [_d_] Set Overlay Type             | [_D_] Set Hide Text
- ")
-    :bindings
+ "
     ("q" overlay_control/re-run-overlays :exit t)
     ("a" overlay_control/add-to-register)
     ("b" overlay_control/apply-overlay-register)
@@ -60,4 +58,3 @@
           )
     )
   )
-)

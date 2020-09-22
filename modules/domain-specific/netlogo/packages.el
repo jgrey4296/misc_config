@@ -1,1 +1,1 @@
-(package! (netlogo-mode :location local))
+(package! netlogo-mode :repo (:local-repo "~/.doom.d/packages/netlogo-mode"))

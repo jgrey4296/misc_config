@@ -230,18 +230,18 @@
 ;;      and remap to their own newline-and-indent commands, and tackling all
 ;;      those cases was judged to be more work than dealing with the edge cases
 ;;      on a case by case basis.
-(defadvice! +default--newline-indent-and-continue-comments-a (&rest _)
-  "A replacement for `newline-and-indent'.
+;; (defadvice! +default--newline-indent-and-continue-comments-a (&rest _)
+;;   "A replacement for `newline-and-indent'.
 
-Continues comments if executed from a commented line. Consults
-`doom-point-in-comment-functions' to determine if in a comment."
-  :before-until #'newline-and-indent
-  (interactive "*")
-  (when (and +default-want-RET-continue-comments
-             (doom-point-in-comment-p)
-             (fboundp comment-line-break-function))
-    (funcall comment-line-break-function nil)
-    t))
+;; Continues comments if executed from a commented line. Consults
+;; `doom-point-in-comment-functions' to determine if in a comment."
+;;   :before-until #'newline-and-indent
+;;   (interactive "*")
+;;   (when (and +default-want-RET-continue-comments
+;;              (doom-point-in-comment-p)
+;;              (fboundp comment-line-break-function))
+;;     (funcall comment-line-break-function nil)
+;;     t))
 
 ;; This section is dedicated to "fixing" certain keys so that they behave
 ;; sensibly (and consistently with similar contexts).

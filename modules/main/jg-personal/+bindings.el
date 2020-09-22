@@ -43,11 +43,6 @@
       :n "z d" '+jg-personal-toggle-all-defs
       :n "z C" '+jg-personal-close-class-defs
       )
-(map! :after (dired python-mode)
-      :map dired-mode-map
-      :localleader
-      :n "v" 'pyvenv-activate
-      )
 (map! :after (evil hi-lock)
       :map evil-normal-state-map
       :prefix "z '"

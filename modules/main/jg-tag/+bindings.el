@@ -21,28 +21,6 @@
       :map 'tag-clean-minor-mode-map
       "." #'tag-clean/body
       )
-
-(map! :after dired
-      :mode dired-mode
-      :localleader
-      (:prefix ("K" . "Destructive")
-       :n "c" #'jg-tag-clean-marked-files
-       :n "C" #'jg-tag-chop-long-files-from-dired
-       :n "B" #'jg-tag-unify-pdf-locations
-       :n "Z" #'jg-tag-quick-compress-orgs
-       :n "J" #'jg-tag-reformat-jsons
-       )
-      :n "m u" #'jg-tag-mark-untagged-orgs
-
-      :n "d u" #'jg-tag-dired-directory-count-untagged
-      :n "d t" #'jg-tag-describe-marked-tags
-
-      :n "f r" #'jg-tag-find-random-marked-file
-      :n "f s" #'jg-tag-display-selection
-
-      :n "i p" #'jg-tag-index-people
-      :n "i t" #'jg-tag-index-tags
-      )
 (map! :after helm
       :leader
       (:prefix ("ah" . "Helms")

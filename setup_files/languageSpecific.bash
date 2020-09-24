@@ -15,10 +15,11 @@ function set_non_standard_python_paths(){
     echo "Setting Non-Standard Python Paths"
     # Actually using python -m pip ... is better than the next line
     # export PYTHONPATH=/usr/local/lib/python3.7/site-packages # where pip3 installs
-    export PYTHONPATH=~/github/otherLibs # personally installed libs
-    export PYTHONPATH=~/github/:$PYTHONPATH # personally written libs
-    export PYTHONPATH=$JG_PYLIBS:$PYTHONPATH
-    export PYTHONPATH=./:$PYTHONPATH
+    PYTHONPATH=~/github/otherLibs # personally installed libs
+    PYTHONPATH=~/github/:$PYTHONPATH # personally written libs
+    PYTHONPATH=$JG_PYLIBS:$PYTHONPATH
+    PYTHONPATH=./:$PYTHONPATH
+    export PYTHONPATH
     #source activate root --not used because it slows default startup
 }
 
@@ -38,15 +39,16 @@ npm set prefix ~/.npm-global
 export TEXINPUTS=/Volumes/DOCUMENTS/Dropbox/Scripts/tex/:$TEXINPUTS
 
 #PERL
-export PERL5LIB=~/programming/perl/modules
-export PERL5LIB=~/Desktop/cotillion/packages/prompter/prompter:$PERL5LIB
-export PERL5LIB=~/Desktop/cotillion/packages/prompter/prompter/mod_aspects:$PERL5LIB
-export PERL5LIB=~/Desktop/cotillion/packages/prompter/prompter/mod_drama:$PERL5LIB
-export PERL5LIB=~/Desktop/cotillion/packages/prompter/prompter/mod_control:$PERL5LIB
-export PERL5LIB=~/Desktop/cotillion/packages/prompter/prompter/mod_services:$PERL5LIB
+PERL5LIB=~/programming/perl/modules
+PERL5LIB=~/Desktop/cotillion/packages/prompter/prompter:$PERL5LIB
+PERL5LIB=~/Desktop/cotillion/packages/prompter/prompter/mod_aspects:$PERL5LIB
+PERL5LIB=~/Desktop/cotillion/packages/prompter/prompter/mod_drama:$PERL5LIB
+PERL5LIB=~/Desktop/cotillion/packages/prompter/prompter/mod_control:$PERL5LIB
+PERL5LIB=~/Desktop/cotillion/packages/prompter/prompter/mod_services:$PERL5LIB
+export PERL5LIB
 
 #Prompter:
-alias prompter="perl /Users/jgrey/Desktop/cotillion/packages/prompter/prompter/prompter.pl"
+alias prompter="perl ~/Desktop/cotillion/packages/prompter/prompter/prompter.pl"
 
 
 #NLTK:
@@ -59,7 +61,7 @@ export EDITOR=emacs
 alias twine="open ~/dropbox/Programs/Twine\ 2.0/index.html"
 
 #JACAMO
-export JACAMO_HOME=/Users/jgrey/github/otherLibs/jacamo/build
+export JACAMO_HOME=~/github/otherLibs/jacamo/build
 export JDK_HOME="$(/usr/libexec/java_home)"
 export JAVA_HOME="$(/usr/libexec/java_home)"
 

@@ -11,8 +11,10 @@ if [[ $OSTYPE =~ "darwin" ]]; then
    if test -a ".venv";
    then
        ENV=$(tail -n 1 .venv)
+       echo "Conda: ${ENV}"
        conda activate $ENV
    else
-       conda activate base
+    echo "Conda: ${OSTYPE}"
+	conda activate base
    fi
 fi

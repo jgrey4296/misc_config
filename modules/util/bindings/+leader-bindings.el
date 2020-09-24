@@ -38,36 +38,6 @@
 
       :desc "help"                  "h"    help-map
       )
-;;; <leader> c --- code
-(map! :leader
-      :prefix-map ("c" . "code")
-      :desc "Compile"                               "c"   #'compile
-      :desc "Evaluate & replace region"             "E"   #'+eval:replace-region
-      :desc "Evaluate buffer/region"                "e"   #'+eval/buffer-or-region
-      :desc "Find implementations"                  "i"   #'+lookup/implementations
-      :desc "Find type definition"                  "t"   #'+lookup/type-definition
-      :desc "Format buffer/region"                  "f"   #'+format/region-or-buffer
-      :desc "List errors"                           "x"   #'flymake-show-diagnostics-buffer
-      :desc "Recompile"                             "C"   #'recompile
-      :desc "Send to repl"                          "s"   #'+eval/send-region-to-repl
-      (:when (featurep! :checkers syntax)
-       :desc "List errors"                         "x"   #'flycheck-list-errors)
-      (:when (and (featurep! :tools lsp) (not (featurep! :tools lsp +eglot)))
-       :desc "LSP Code actions"                      "a"   #'lsp-execute-code-action
-       :desc "LSP Organize imports"                  "o"   #'lsp-organize-imports
-       :desc "LSP Rename"                            "r"   #'lsp-rename
-       :desc "LSP"                                   "l"   #'+default/lsp-command-map
-       (:when (featurep! :completion ivy)
-        :desc "Jump to symbol in current workspace" "j"   #'lsp-ivy-workspace-symbol
-        :desc "Jump to symbol in any workspace"     "J"   #'lsp-ivy-global-workspace-symbol)
-       (:when (featurep! :completion helm)
-        :desc "Jump to symbol in current workspace" "j"   #'helm-lsp-workspace-symbol
-        :desc "Jump to symbol in any workspace"     "J"   #'helm-lsp-global-workspace-symbol))
-      (:when (featurep! :tools lsp +eglot)
-       :desc "LSP Execute code action"             "a" #'eglot-code-actions
-       :desc "LSP Rename"                          "r" #'eglot-rename
-       :desc "LSP Find declaration"                "j" #'eglot-find-declaration)
-      )
 ;;; <leader> b --- buffer
 (map! :leader
       :prefix-map ("b" . "buffer")
@@ -106,6 +76,36 @@
       (:when (not (featurep! :ui workspaces))
        :desc "Switch buffer"           "b" #'switch-to-buffer)
       )
+;;; <leader> c --- code
+(map! :leader
+      :prefix-map ("c" . "code")
+      :desc "Compile"                               "c"   #'compile
+      :desc "Evaluate & replace region"             "E"   #'+eval:replace-region
+      :desc "Evaluate buffer/region"                "e"   #'+eval/buffer-or-region
+      :desc "Find implementations"                  "i"   #'+lookup/implementations
+      :desc "Find type definition"                  "t"   #'+lookup/type-definition
+      :desc "Format buffer/region"                  "f"   #'+format/region-or-buffer
+      :desc "List errors"                           "x"   #'flymake-show-diagnostics-buffer
+      :desc "Recompile"                             "C"   #'recompile
+      :desc "Send to repl"                          "s"   #'+eval/send-region-to-repl
+      (:when (featurep! :checkers syntax)
+       :desc "List errors"                         "x"   #'flycheck-list-errors)
+      (:when (and (featurep! :tools lsp) (not (featurep! :tools lsp +eglot)))
+       :desc "LSP Code actions"                      "a"   #'lsp-execute-code-action
+       :desc "LSP Organize imports"                  "o"   #'lsp-organize-imports
+       :desc "LSP Rename"                            "r"   #'lsp-rename
+       :desc "LSP"                                   "l"   #'+default/lsp-command-map
+       (:when (featurep! :completion ivy)
+        :desc "Jump to symbol in current workspace" "j"   #'lsp-ivy-workspace-symbol
+        :desc "Jump to symbol in any workspace"     "J"   #'lsp-ivy-global-workspace-symbol)
+       (:when (featurep! :completion helm)
+        :desc "Jump to symbol in current workspace" "j"   #'helm-lsp-workspace-symbol
+        :desc "Jump to symbol in any workspace"     "J"   #'helm-lsp-global-workspace-symbol))
+      (:when (featurep! :tools lsp +eglot)
+       :desc "LSP Execute code action"             "a" #'eglot-code-actions
+       :desc "LSP Rename"                          "r" #'eglot-rename
+       :desc "LSP Find declaration"                "j" #'eglot-find-declaration)
+      )
 ;;; <leader> f --- file
 (map! :leader
       :prefix-map ("f" . "file")
@@ -131,31 +131,54 @@
       :desc "Switch to scratch buffer"    "X"   #'doom/switch-to-scratch-buffer
       :desc "Yank filename"               "n"   #'+default/yank-buffer-filename
       )
-;;; <leader> s --- search
+;;; <leader> g --- git
 (map! :leader
-      :prefix-map ("s" . "search")
-      :desc "Search Clear" "c" #'evil-ex-nohighlight
-      :desc "Dictionary"                   "t" #'+lookup/dictionary-definition
-      :desc "Jump list"                    "j" #'evil-show-jumps
-      :desc "Jump to bookmark"             "b" #'bookmark-jump
-      :desc "Jump to link"                 "L" #'ffap-menu
-      :desc "Jump to mark"                 "m" #'evil-show-marks
-      :desc "Jump to symbol"               "i" #'imenu
-      :desc "Jump to visible link"         "l" #'link-hint-open-link
-      :desc "Locate file"                  "f" #'+lookup/file
-      :desc "Locate file"                  "f" #'locate
-      :desc "Look up in all docsets"       "K" #'+lookup/in-all-docsets
-      :desc "Look up in local docsets"     "k" #'+lookup/in-docsets
-      :desc "Look up online (w/ prompt)"   "O" #'+lookup/online-select
-      :desc "Look up online"               "o" #'+lookup/online
-      :desc "Search buffer"                "s" #'swiper
-      :desc "Search buffer"                "S" #'+default/search-buffer
-      :desc "Search current directory"     "d" #'+default/search-cwd
-      :desc "Search other directory"       "D" #'+default/search-other-cwd
-      :desc "Search project"               "p" #'+default/search-project
-      :desc "Search other project"         "P" #'+default/search-other-project
-      :desc "Search project for symbol"    "." #'+default/search-project-for-symbol-at-point
-      :desc "Thesaurus"                    "T" #'+lookup/synonyms
+      :prefix-map ("g" . "git")
+      :desc "Git revert file"             "R"   #'vc-revert
+      (:when (featurep! :ui vc-gutter)
+       :desc "Git revert hunk"            "r"   #'git-gutter:revert-hunk
+       :desc "Git stage hunk"             "s"   #'git-gutter:stage-hunk
+       :desc "Git time machine"           "t"   #'git-timemachine-toggle
+       :desc "Jump to next hunk"          "n"   #'git-gutter:next-hunk
+       :desc "Jump to previous hunk"      "p"   #'git-gutter:previous-hunk)
+      (:when (featurep! :tools magit)
+       :desc "Magit dispatch"             "/"   #'magit-dispatch
+       :desc "Forge dispatch"             "'"   #'forge-dispatch
+       :desc "Magit status"               "s"   #'magit-status
+       :desc "Magit status here"          "S"   #'magit-status-here
+       :desc "Magit blame"                "B"   #'magit-blame-addition
+       :desc "Magit fetch"                "F"   #'magit-fetch
+       :desc "Magit buffer log"           "L"   #'magit-log
+       (:prefix ("f" . "find")
+        :desc "Find file"                 "f"   #'magit-find-file
+        :desc "Find gitconfig file"       "g"   #'magit-find-git-config-file
+        :desc "Find commit"               "c"   #'magit-show-commit
+        :desc "Find issue"                "i"   #'forge-visit-issue
+        :desc "Find pull request"         "p"   #'forge-visit-pullreq)
+       (:prefix ("o" . "open in browser")
+        :desc "Browse file or region"     "."   #'browse-at-remote
+        :desc "Browse homepage"           "h"   #'+vc/browse-at-remote-homepage
+        :desc "Browse remote"             "r"   #'forge-browse-remote
+        :desc "Browse commit"             "c"   #'forge-browse-commit
+        :desc "Browse an issue"           "i"   #'forge-browse-issue
+        :desc "Browse a pull request"     "p"   #'forge-browse-pullreq
+        :desc "Browse issues"             "I"   #'forge-browse-issues
+        :desc "Browse pull requests"      "P"   #'forge-browse-pullreqs)
+       (:prefix ("l" . "list")
+        (:when (featurep! :tools gist)
+         :desc "List gists"               "g"   #'gist-list)
+        :desc "List repositories"         "r"   #'magit-list-repositories
+        :desc "List submodules"           "s"   #'magit-list-submodules
+        :desc "List issues"               "i"   #'forge-list-issues
+        :desc "List pull requests"        "p"   #'forge-list-pullreqs
+        :desc "List notifications"        "n"   #'forge-list-notifications)
+       (:prefix ("c" . "create")
+        :desc "Initialize repo"           "r"   #'magit-init
+        :desc "Clone repo"                "R"   #'magit-clone
+        :desc "Commit"                    "c"   #'magit-commit-create
+        :desc "Fixup"                     "f"   #'magit-commit-fixup
+        :desc "Issue"                     "i"   #'forge-create-issue
+        :desc "Pull request"              "p"   #'forge-create-pullreq))
       )
 ;;; <leader> i --- insert
 (map! :leader
@@ -172,6 +195,59 @@
       (:when (featurep! :editor snippets)
        :desc "Snippet"                       "s"   #'yas-insert-snippet)
       :desc "Unicode"                       "u"   #'unicode-chars-list-chars
+      )
+;;; <leader> j -- Jumping
+(map! :leader
+      :prefix ("j" . "Jump")
+      :desc "Jump to Line"                          "l" #'evil-avy-goto-line
+      :desc "Jump to definition"                    "d" #'+lookup/definition
+      :desc "Jump to references"                    "D" #'+lookup/references
+      :desc "Find implementations"                  "i" #'+lookup/implementations
+      :desc "Jump to documentation"                 "k" #'+lookup/documentation
+      :desc "Find type definition"                  "t" #'+lookup/type-definition
+      (:prefix ("b" . "Bookmark")
+       :desc "Set bookmark"                "m"           #'bookmark-set
+       :desc "Delete bookmark"             "M"           #'bookmark-delete
+       :desc "Rename bookmark"             "r"  #'bookmark-rename
+       :desc "Save Bookmarks"              "s" #'bookmark-save
+       :desc "Load Bookmarks"              "l" #'bookmark-load
+       )
+      (:when (featurep! :completion ivy)
+       :desc "Jump to symbol in current workspace" "j"  #'lsp-ivy-workspace-symbol
+       :desc "Jump to symbol in any workspace"     "J"  #'lsp-ivy-global-workspace-symbol)
+      (:when (featurep! :completion helm)
+       :desc "Jump to symbol in current workspace" "j"  #'helm-lsp-workspace-symbol
+       :desc "Jump to symbol in any workspace"     "J"  #'helm-lsp-global-workspace-symbol)
+      )
+;;; <leader> m -- Local Mode
+(map! (:prefix ("m" . "Local Mode")))
+;;; <leader> M -- Macros
+(map! :leader
+      :prefix ("M" . "Macros")
+      (:prefix ("c" . "Counter")
+       :desc "Increment counter" "a" #'kmacro-add-counter
+       :desc "Insert counter" "c" #'kmacro-insert-counter
+       :desc "Set counter..." "C" #'kmacro-set-counter
+       :desc "Set display format..." "f" #'kmacro-set-format)
+      (:prefix ("e" . "Edit")
+       :desc "Assign key binding..." "b" #'kmacro-bind-to-key
+       :desc "Edit last macro" "e" #'kmacro-edit-macro-repeat
+       :desc "Create macro from lossage..." "l" #'kmacro-edit-lossage
+       :desc "Name last macro..." "n" #'kmacro-name-last-macro
+       :desc "Write macro to register..." "r" #'kmacro-to-register
+       :desc "Step by step edit..." "s" #'kmacro-step-edit-macro
+       :desc "Start macro/Insert counter" "k" #'kmacro-start-macro-or-insert-counter
+       :desc "Stop or Run" "K" #'kmacro-end-or-call-macro
+       )
+      (:prefix ("r" . "Ring")
+       :desc "Display ring head" "L" #'kmacro-view-ring-2nd
+       :desc "Delete ring head" "d" #'kmacro-delete-ring-head
+       :desc "Run 2nd macro in ring" "l" #'kmacro-call-ring-2nd-repeat
+       :desc "Next in ring" "n" #'kmacro-cycle-ring-next
+       :desc "Previous in ring" "p" #'kmacro-cycle-ring-previous
+       :desc "Swap first two" "s" #'kmacro-swap-ring
+       :desc "View last macro" "v" #'kmacro-view-macro-repeat
+       )
       )
 ;;; <leader> n --- notes
 (map! :leader
@@ -310,17 +386,61 @@
       :desc "Restore session from file"    "L" #'doom/load-session
       :desc "Save session to file"         "S" #'doom/save-session
       )
-;;; <leader> y --- snippets
+;;; <leader> r -- REGISTERS
 (map! :leader
-      (:when (featurep! :editor snippets)
-       :prefix-map ("y" . "snippets")
-       :desc "Expand Snippet"        "y" #'yas-expand
-       :desc "New snippet"           "n" #'yas-new-snippet
-       :desc "Insert snippet"        "i" #'yas-insert-snippet
-       :desc "Find global snippet"   "/" #'yas-visit-snippet-file
-       :desc "Reload snippets"       "r" #'yas-reload-all
-       :desc "Create Temp Template"  "c" #'aya-create
-       :desc "Use Temp Template"     "e" #'aya-expand)
+      :prefix ("r" . "Registers")
+      :desc "Insert Register"      "i" #'insert-register
+      :desc "Save to Register"     "x" #'copy-to-register
+      :desc "Windows to Register"  "w" #'window-configuration-to-register
+      :desc "Jump to Register"     "j" #'jump-to-register
+      :desc "List Registers"       "l" #'list-registers
+      :desc "Killed Text"          "y" #'counsel-yank-pop
+      )
+;;; <leader> R --- remote
+(map! :leader
+      (:when (featurep! :tools upload)
+       :prefix-map ("R" . "remote")
+       :desc "Browse relative"            "B" #'ssh-deploy-browse-remote-handler
+       :desc "Browse remote files"        "." #'ssh-deploy-browse-remote-handler
+       :desc "Browse remote"              "b" #'ssh-deploy-browse-remote-base-handler
+       :desc "Delete local & remote"      "D" #'ssh-deploy-delete-handler
+       :desc "Detect remote changes"      ">" #'ssh-deploy-remote-changes-handler
+       :desc "Diff local & remote"        "x" #'ssh-deploy-diff-handler
+       :desc "Download remote"            "d" #'ssh-deploy-download-handler
+       :desc "Eshell base terminal"       "e" #'ssh-deploy-remote-terminal-eshell-base-handler
+       :desc "Eshell relative terminal"   "E" #'ssh-deploy-remote-terminal-eshell-handler
+       :desc "Move/rename local & remote" "m" #'ssh-deploy-rename-handler
+       :desc "Open this file on remote"   "o" #'ssh-deploy-open-remote-file-handler
+       :desc "Run deploy script"          "s" #'ssh-deploy-run-deploy-script-handler
+       :desc "Upload local (force)"       "U" #'ssh-deploy-upload-handler-forced
+       :desc "Upload local"               "u" #'ssh-deploy-upload-handler
+       )
+      )
+;;; <leader> s --- search
+(map! :leader
+      :prefix-map ("s" . "search")
+      :desc "Search Clear" "c" #'evil-ex-nohighlight
+      :desc "Dictionary"                   "t" #'+lookup/dictionary-definition
+      :desc "Jump list"                    "j" #'evil-show-jumps
+      :desc "Jump to bookmark"             "b" #'bookmark-jump
+      :desc "Jump to link"                 "L" #'ffap-menu
+      :desc "Jump to mark"                 "m" #'evil-show-marks
+      :desc "Jump to symbol"               "i" #'imenu
+      :desc "Jump to visible link"         "l" #'link-hint-open-link
+      :desc "Locate file"                  "f" #'+lookup/file
+      :desc "Locate file"                  "f" #'locate
+      :desc "Look up in all docsets"       "K" #'+lookup/in-all-docsets
+      :desc "Look up in local docsets"     "k" #'+lookup/in-docsets
+      :desc "Look up online (w/ prompt)"   "O" #'+lookup/online-select
+      :desc "Look up online"               "o" #'+lookup/online
+      :desc "Search buffer"                "s" #'swiper
+      :desc "Search buffer"                "S" #'+default/search-buffer
+      :desc "Search current directory"     "d" #'+default/search-cwd
+      :desc "Search other directory"       "D" #'+default/search-other-cwd
+      :desc "Search project"               "p" #'+default/search-project
+      :desc "Search other project"         "P" #'+default/search-other-project
+      :desc "Search project for symbol"    "." #'+default/search-project-for-symbol-at-point
+      :desc "Thesaurus"                    "T" #'+lookup/synonyms
       )
 ;;; <leader> t --- toggle
 (map! :leader
@@ -350,55 +470,17 @@
       :desc "Soft line wrapping"           "w" #'visual-line-mode
       (:when (featurep! :editor word-wrap)
        :desc "Soft line wrapping"         "w" #'+word-wrap-mode)
-      )
-;;; <leader> g --- git
-(map! :leader
-      :prefix-map ("g" . "git")
-      :desc "Git revert file"             "R"   #'vc-revert
-      (:when (featurep! :ui vc-gutter)
-       :desc "Git revert hunk"            "r"   #'git-gutter:revert-hunk
-       :desc "Git stage hunk"             "s"   #'git-gutter:stage-hunk
-       :desc "Git time machine"           "t"   #'git-timemachine-toggle
-       :desc "Jump to next hunk"          "n"   #'git-gutter:next-hunk
-       :desc "Jump to previous hunk"      "p"   #'git-gutter:previous-hunk)
-      (:when (featurep! :tools magit)
-       :desc "Magit dispatch"             "/"   #'magit-dispatch
-       :desc "Forge dispatch"             "'"   #'forge-dispatch
-       :desc "Magit status"               "s"   #'magit-status
-       :desc "Magit status here"          "S"   #'magit-status-here
-       :desc "Magit blame"                "B"   #'magit-blame-addition
-       :desc "Magit fetch"                "F"   #'magit-fetch
-       :desc "Magit buffer log"           "L"   #'magit-log
-       (:prefix ("f" . "find")
-        :desc "Find file"                 "f"   #'magit-find-file
-        :desc "Find gitconfig file"       "g"   #'magit-find-git-config-file
-        :desc "Find commit"               "c"   #'magit-show-commit
-        :desc "Find issue"                "i"   #'forge-visit-issue
-        :desc "Find pull request"         "p"   #'forge-visit-pullreq)
-       (:prefix ("o" . "open in browser")
-        :desc "Browse file or region"     "."   #'browse-at-remote
-        :desc "Browse homepage"           "h"   #'+vc/browse-at-remote-homepage
-        :desc "Browse remote"             "r"   #'forge-browse-remote
-        :desc "Browse commit"             "c"   #'forge-browse-commit
-        :desc "Browse an issue"           "i"   #'forge-browse-issue
-        :desc "Browse a pull request"     "p"   #'forge-browse-pullreq
-        :desc "Browse issues"             "I"   #'forge-browse-issues
-        :desc "Browse pull requests"      "P"   #'forge-browse-pullreqs)
-       (:prefix ("l" . "list")
-        (:when (featurep! :tools gist)
-         :desc "List gists"               "g"   #'gist-list)
-        :desc "List repositories"         "r"   #'magit-list-repositories
-        :desc "List submodules"           "s"   #'magit-list-submodules
-        :desc "List issues"               "i"   #'forge-list-issues
-        :desc "List pull requests"        "p"   #'forge-list-pullreqs
-        :desc "List notifications"        "n"   #'forge-list-notifications)
-       (:prefix ("c" . "create")
-        :desc "Initialize repo"           "r"   #'magit-init
-        :desc "Clone repo"                "R"   #'magit-clone
-        :desc "Commit"                    "c"   #'magit-commit-create
-        :desc "Fixup"                     "f"   #'magit-commit-fixup
-        :desc "Issue"                     "i"   #'forge-create-issue
-        :desc "Pull request"              "p"   #'forge-create-pullreq))
+      :desc "Whitespace" "w"#'whitespace-mode
+      :desc "Line Truncate" "l" #'toggle-truncate-lines
+      ;; centre point/line
+      ;; highlight long lines
+      ;; auto-completion
+      ;; camel-case-motion
+      ;;
+      ;; fill-column indicator
+      ;; indent-guide
+      ;; truncate lines
+      ;; line numbers
       )
 ;;; <leader> w --- workspaces/windows
 (when (featurep! :ui workspaces)
@@ -457,66 +539,6 @@
       "M" #'doom/window-maximize-buffer
       "b" #'balance-windows
       )
-;;; <leader> R --- remote
-(map! :leader
-      (:when (featurep! :tools upload)
-       :prefix-map ("R" . "remote")
-       :desc "Browse relative"            "B" #'ssh-deploy-browse-remote-handler
-       :desc "Browse remote files"        "." #'ssh-deploy-browse-remote-handler
-       :desc "Browse remote"              "b" #'ssh-deploy-browse-remote-base-handler
-       :desc "Delete local & remote"      "D" #'ssh-deploy-delete-handler
-       :desc "Detect remote changes"      ">" #'ssh-deploy-remote-changes-handler
-       :desc "Diff local & remote"        "x" #'ssh-deploy-diff-handler
-       :desc "Download remote"            "d" #'ssh-deploy-download-handler
-       :desc "Eshell base terminal"       "e" #'ssh-deploy-remote-terminal-eshell-base-handler
-       :desc "Eshell relative terminal"   "E" #'ssh-deploy-remote-terminal-eshell-handler
-       :desc "Move/rename local & remote" "m" #'ssh-deploy-rename-handler
-       :desc "Open this file on remote"   "o" #'ssh-deploy-open-remote-file-handler
-       :desc "Run deploy script"          "s" #'ssh-deploy-run-deploy-script-handler
-       :desc "Upload local (force)"       "U" #'ssh-deploy-upload-handler-forced
-       :desc "Upload local"               "u" #'ssh-deploy-upload-handler
-       )
-      )
-;;; <leader> t -- toggles
-(map! :leader
-      :prefix ("t" . "Toggle")
-      :desc "Whitespace" "w"#'whitespace-mode
-      :desc "Line Truncate" "l" #'toggle-truncate-lines
-      ;; centre point/line
-      ;; highlight long lines
-      ;; auto-completion
-      ;; camel-case-motion
-      ;;
-      ;; fill-column indicator
-      ;; indent-guide
-      ;; truncate lines
-      ;; line numbers
-      )
-;;; <leader> j -- Jumping
-(map! :leader
-      :prefix ("j" . "Jump")
-      :desc "Jump to Line"                          "l" #'evil-avy-goto-line
-      :desc "Jump to definition"                    "d" #'+lookup/definition
-      :desc "Jump to references"                    "D" #'+lookup/references
-      :desc "Find implementations"                  "i" #'+lookup/implementations
-      :desc "Jump to documentation"                 "k" #'+lookup/documentation
-      :desc "Find type definition"                  "t" #'+lookup/type-definition
-      (:prefix ("b" . "Bookmark")
-       :desc "Set bookmark"                "m"           #'bookmark-set
-       :desc "Delete bookmark"             "M"           #'bookmark-delete
-       :desc "Rename bookmark"             "r"  #'bookmark-rename
-       :desc "Save Bookmarks"              "s" #'bookmark-save
-       :desc "Load Bookmarks"              "l" #'bookmark-load
-       )
-      (:when (featurep! :completion ivy)
-       :desc "Jump to symbol in current workspace" "j"  #'lsp-ivy-workspace-symbol
-       :desc "Jump to symbol in any workspace"     "J"  #'lsp-ivy-global-workspace-symbol)
-      (:when (featurep! :completion helm)
-       :desc "Jump to symbol in current workspace" "j"  #'helm-lsp-workspace-symbol
-       :desc "Jump to symbol in any workspace"     "J"  #'helm-lsp-global-workspace-symbol)
-      )
-;;; <leader> m -- Local Mode
-(map! (:prefix ("m" . "Local Mode")))
 ;;; <leader> x -- Text
 (map! :leader
       :prefix ("x" . "Text")
@@ -537,6 +559,7 @@
        :desc "Delete trailing newlines"              "W"   #'doom/delete-trailing-newlines
        :desc "Delete trailing whitespace"             "w"   #'delete-trailing-whitespace
        :desc "Whitespace Cleanup"   "c" #'whitespace-cleanup
+       :desc "Indent" "i" #'indent-region
        )
       ;; justify
       ;; upcase, downcase
@@ -546,41 +569,15 @@
 
        )
       )
-;;; REGISTERS
+;;; <leader> y --- snippets
 (map! :leader
-      :prefix ("r" . "Registers")
-      :desc "Insert Register"      "i" #'insert-register
-      :desc "Save to Register"     "x" #'copy-to-register
-      :desc "Windows to Register"  "w" #'window-configuration-to-register
-      :desc "Jump to Register"     "j" #'jump-to-register
-      :desc "List Registers"       "l" #'list-registers
-      :desc "Killed Text"          "y" #'counsel-yank-pop 
-      )
-;;; <leader> M -- Macros
-(map! :leader
-      :prefix ("M" . "Macros")
-      (:prefix ("c" . "Counter")
-       :desc "Increment counter" "a" #'kmacro-add-counter
-       :desc "Insert counter" "c" #'kmacro-insert-counter
-       :desc "Set counter..." "C" #'kmacro-set-counter
-       :desc "Set display format..." "f" #'kmacro-set-format)
-      (:prefix ("e" . "Edit")
-       :desc "Assign key binding..." "b" #'kmacro-bind-to-key
-       :desc "Edit last macro" "e" #'kmacro-edit-macro-repeat
-       :desc "Create macro from lossage..." "l" #'kmacro-edit-lossage
-       :desc "Name last macro..." "n" #'kmacro-name-last-macro
-       :desc "Write macro to register..." "r" #'kmacro-to-register
-       :desc "Step by step edit..." "s" #'kmacro-step-edit-macro
-       :desc "Start macro/Insert counter" "k" #'kmacro-start-macro-or-insert-counter
-       :desc "Stop or Run" "K" #'kmacro-end-or-call-macro
-       )
-      (:prefix ("r" . "Ring")
-       :desc "Display ring head" "L" #'kmacro-view-ring-2nd
-       :desc "Delete ring head" "d" #'kmacro-delete-ring-head
-       :desc "Run 2nd macro in ring" "l" #'kmacro-call-ring-2nd-repeat
-       :desc "Next in ring" "n" #'kmacro-cycle-ring-next
-       :desc "Previous in ring" "p" #'kmacro-cycle-ring-previous
-       :desc "Swap first two" "s" #'kmacro-swap-ring
-       :desc "View last macro" "v" #'kmacro-view-macro-repeat
-       )
+      (:when (featurep! :editor snippets)
+       :prefix-map ("y" . "snippets")
+       :desc "Expand Snippet"        "y" #'yas-expand
+       :desc "New snippet"           "n" #'yas-new-snippet
+       :desc "Insert snippet"        "i" #'yas-insert-snippet
+       :desc "Find global snippet"   "/" #'yas-visit-snippet-file
+       :desc "Reload snippets"       "r" #'yas-reload-all
+       :desc "Create Temp Template"  "c" #'aya-create
+       :desc "Use Temp Template"     "e" #'aya-expand)
       )

@@ -1,3 +1,5 @@
+;; NOTE needs to be recompiled for changes to take effect to bindings
+
 ;;----------------------------------------
 (defun +jg-personal-ac-trigger ()
   (interactive)
@@ -76,3 +78,30 @@
         )
   )
 ;;----------------------------------------
+(defun +jg-personal-extend-python-map ()
+  (map!
+   :map python-mode-map
+   :n "z d" '+jg-personal-toggle-all-defs
+   :n "z C" '+jg-personal-close-class-defs
+   :leader
+   (:prefix "i"
+    :n "d" #'+jg-personal-python-toggle-breakpoint
+    )
+   (:prefix "j"
+    :n "C" 'helm-gtags-create-tags
+    :n "d" 'helm-gtags-find-tag
+    :n "D" 'helm-gtags-find-tag-other-window
+    :n "G" 'helm-gtags-dwim-other-window
+    :n "i" 'helm-gtags-tags-in-this-function
+    :n "l" 'helm-gtags-parse-file
+    :n "n" 'helm-gtags-next-history
+    :n "p" 'helm-gtags-previous-history
+    :n "r" 'helm-gtags-find-rtag
+    :n "R" 'helm-gtags-resume
+    :n "s" 'helm-gtags-select
+    :n "S" 'helm-gtags-show-stack
+    :n "y" 'helm-gtags-find-symbol
+    :n "U" 'helm-gtags-update-tags
+    )
+   )
+)

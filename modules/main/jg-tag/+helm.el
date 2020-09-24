@@ -283,6 +283,9 @@ Can operate on regions of headings """
                          jg-tag-helm-bibtex-candidates
                          ))
            )
+      (helm-set-local-variable
+       'helm-candidate-number-limit 5000
+       )
       (helm :sources `(,jg-tag-helm-source-bibtex)
             :full-frame helm-bibtex-full-frame
             :buffer "*helm bibtex*"
@@ -290,6 +293,50 @@ Can operate on regions of headings """
             :bibtex-local-bib local-bib
             :bibtex-candidates candidates
             )))
+
+(defun jg-helm-bibtex-candidates-formatter (candidates _)
+  "Format CANDIDATES for display in helm."
+  (cl-loop
+   with width = (with-helm-window (helm-bibtex-window-width))
+   for entry in candidates
+   for entry = (cdr entry)
+   for entry-key = (bibtex-completion-get-value "=key=" entry)
+   collect (cons (jg-bibtex-completion-format-entry entry width) entry-key)))
+(defun jg-bibtex-completion-format-entry (entry width)
+  "Formats a BibTeX ENTRY for display in results list.
+WIDTH is the width of the results list.  The display format is
+governed by the variable `bibtex-completion-display-formats'."
+  (let* ((format
+          (or (assoc-string (bibtex-completion-get-value "=type=" entry)
+                            bibtex-completion-display-formats-internal
+                            'case-fold)
+              (assoc t bibtex-completion-display-formats-internal)))
+         (format-string (cadr format)))
+    (s-format
+     format-string
+     (lambda (field)
+       (let* ((field (split-string field ":"))
+              (field-name (car field))
+              (field-width (cadr field))
+              (field-value (bibtex-completion-get-value field-name entry)))
+         (when (and (string= field-name "author")
+                    (not field-value))
+           (setq field-value (bibtex-completion-get-value "editor" entry)))
+         (when (and (string= field-name "year")
+                    (not field-value))
+           (setq field-value (car (split-string (bibtex-completion-get-value "date" entry "") "-"))))
+         (setq field-value (bibtex-completion-clean-string (or field-value " ")))
+         (when (member field-name '("author" "editor"))
+           (setq field-value (bibtex-completion-shorten-authors field-value)))
+         (if (not field-width)
+             field-value
+           (setq field-width (string-to-number field-width))
+           (truncate-string-to-width
+            field-value
+            (if (> field-width 0)
+                field-width
+              (- width (cddr format)))
+            0 ?\s)))))))
 
 (after! helm-files
   (setq helm-grep-actions (append helm-grep-actions '(("Open Url" . jg-tag-open-url-action))))
@@ -334,25 +381,42 @@ Can operate on regions of headings """
 )
 (after! helm-bibtex
   ;; Define the bib helm
-  (defvar jg-tag-helm-source-bibtex
-    '((name . "BibTeX entries")
-      (header-name . "BibTeX entries")
-      ;; (lambda (name) (format "%s%s: " name (if helm-bibtex-local-bib " (local)" ""))))
-      (candidates . helm-bibtex-candidates)
-      (match helm-mm-exact-match helm-mm-match helm-fuzzy-match)
-      (fuzzy-match)
-      (redisplay . identity)
-      (multimatch)
-      (group . helm)
-      (filtered-candidate-transformer helm-bibtex-candidates-formatter helm-flx-fuzzy-matching-sort helm-fuzzy-highlight-matches)
-      (action . (("Insert citation"     . helm-bibtex-insert-citation)
-                 ("Open PDF"            . helm-bibtex-open-pdf)
-                 ("Insert BibTeX key"   . helm-bibtex-insert-key)
-                 ("Insert BibTeX entry" . helm-bibtex-insert-bibtex)
-                 ("Show entry"          . helm-bibtex-show-entry)
-                 )))
-    "Simplified source for searching bibtex files")
-  )
+  (defun jg-bibtex-sort-by-year (c1 c2)
+    (let* ((c1year (alist-get "year" c1 nil nil 'string-equal))
+          (c2year (alist-get "year" c2 nil nil 'string-equal)))
+      (if (not c1year)
+          (progn (message "MISSING YEAR: %s" c1)
+                 (setq c1year "0")))
+      (if (not c2year)
+          (progn (message "MISSING YEAR: %s" c2)
+                 (setq c2year "0")))
+      (> (string-to-number c1year) (string-to-number c2year))
+      )
+    )
+
+  (defun jg-year-sort-transformer (candidates source)
+    (setq jg-test-cands candidates)
+    (-sort 'jg-bibtex-sort-by-year candidates)
+    )
+
+  (setq jg-tag-helm-source-bibtex
+        (helm-build-sync-source "Bibtex Helm"
+          :action (helm-make-actions  "Insert citation"      'helm-bibtex-insert-citation
+                                      "Open PDF"             'helm-bibtex-open-pdf
+                                      "Insert BibTeX key"    'helm-bibtex-insert-key
+                                      "Insert BibTeX entry"  'helm-bibtex-insert-bibtex
+                                      "Show entry"           'helm-bibtex-show-entry
+                                      )
+          :candidates 'helm-bibtex-candidates
+          :filtered-candidate-transformer  '(jg-year-sort-transformer
+                                             helm-bibtex-candidates-formatter
+                                             helm-fuzzy-highlight-matches)
+          :multimatch
+          :fuzzy-match
+          )
+        )
+)
+
 (after! (f helm-bibtex)
   (jg-tag-build-bibtex-list)
 )

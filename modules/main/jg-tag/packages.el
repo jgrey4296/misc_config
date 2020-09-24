@@ -1,4 +1,5 @@
 (package! helm)
+(package! org-ref)
 (package! helm-bibtex)
 (package! dash)
 (package! org)

@@ -42,7 +42,7 @@
         "." nil
         :localleader
         ;; SRC CODE
-         ". e"   'org-edit-src-code
+        ". e"   'org-edit-src-code
         ". E"   'org-babel-execute-src-block
         ;; Links
         ". d"   'org-toggle-link-display
@@ -51,10 +51,5 @@
         ". n"   '+jg-org-change_link_name
         ;;Formatting
         "i t"   '+jg-org-insert-heading-trio
-        ;; Citation
-        "i c" 'org-reftex-citation
+
         )
-(map! :after bibtex-mode
-      :mode bibtex-mode
-      :localleader
-      "p" #'+jg-org-ref-open-bibtex-pdf)

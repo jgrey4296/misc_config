@@ -100,26 +100,23 @@
                 python-shell-interpreter-args "-i"
                 python-shell-interpreter "python"
                 python-shell-completion-native-enable t
-                python-shell-virtualenv-root "~/anaconda3/envs"
+                python-shell-virtualenv-root "~/anaconda3"
                 python-shell--interpreter nil
                 python-shell--interpreter-args nil
                 )
   (modify-syntax-entry ?_ "w" python-mode-syntax-table)
-
+  (add-hook 'python-mode-hook #'outline-minor-mode)
+  (+jg-personal-extend-python-map)
 )
 (after! neotree
   (push "^__pycache__$" neo-hidden-regexp-list)
   (push "^G\\(PATH\\|R?TAGS\\)$" neo-hidden-regexp-list)
   (push "^__init__.py$" neo-hidden-regexp-list)
   )
-(after! helm-gtags
-  ;; Adapated from helm-gtags spacemacs layer
-  ;; (let ((jumpl (intern (format "spacemacs-jump-handlers-%S" 'python-mode))))
-  ;;   (when (boundp jumpl)
-  ;;     (add-to-list jumpl 'spacemacs/helm-gtags-maybe-dwim 'append)))
+(use-package! helm-gtags
+  :defer t)
 
-  )
-(after! (dired pysenv)
+(after! (dired pyvenv-mode)
     """ Remove the annoying python-shell-setup advice """
     (add-transient-hook! 'dired-mode
       (map! :map dired-mode-map

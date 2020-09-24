@@ -7,7 +7,6 @@
 
 (load! "+org-funcs")
 (load! "+org-pomodoro-funcs")
-(load! "+org-ref-funcs")
 (load! "+bindings")
 
 (use-package! academic-phrases
@@ -34,15 +33,6 @@
   (push 'org-indent-mode minor-mode-list)
   (setq jg-org-map (make-sparse-keymap))
   
-  )
-(after! org-ref
-  (add-hook 'bibtex-mode-hook #'(lambda ()
-                                (map! :mode bibtex-mode
-                                      :localleader
-                                      "p" #'+jg-org-ref-open-bibtex-pdf
-                                      )
-                                )
-            )
   )
 (after! org-pomodoro
   ;; add a startup hook for pomodoro to tweet the end time

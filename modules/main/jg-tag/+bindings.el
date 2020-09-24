@@ -45,3 +45,16 @@
 (map! :leader
       "x l s" #'jg-tag-split-on-char-n
 )
+
+(map! :after bibtex
+      :mode bibtex-mode
+      :localleader
+      "." #'org-ref-bibtex-hydra/body
+      ;; Citation
+      ;; TODO : put this in org-mode bindings? : "i " 'org-reftex-citation
+      (:prefix ("o". "Open")
+       "p" #'+jg-org-ref-open-bibtex-pdf
+       ;; TODO add open bibtex dir...
+       )
+
+)

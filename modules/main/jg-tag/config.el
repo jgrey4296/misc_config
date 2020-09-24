@@ -47,15 +47,29 @@
 (load! "+org")
 (load! "+tags")
 (load! "+util")
+(load! "+org-ref-funcs")
 
-(use-package tag-clean-minor-mode
+(use-package! tag-clean-minor-mode
   :defer t)
-(use-package tag-mode
+(use-package! tag-mode
   :defer t)
-(use-package helm-bibtex
+(use-package! helm-bibtex
   :defer t
   :commands (bibtex-completion-init)
 )
+(use-package! org-ref
+  :defer t
+  :commands (org-ref-bibtex-hydra/body)
+  :init
+  (add-hook 'bibtex-mode-hook #'(lambda ()
+                                (map! :mode bibtex-mode
+                                      :localleader
+                                      "p" #'+jg-org-ref-open-bibtex-pdf
+                                      )
+                                )
+            )
+  )
+
 
 (after! (helm evil)
   (evil-ex-define-cmd "t[ag]" #'jg-tag-helm-start)

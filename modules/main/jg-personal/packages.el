@@ -4,7 +4,6 @@
 (package! evil-iedit-state)
 (package! evil-quickscope)
 (package! evil-snipe)
-(package! evil-vimish-fold)
 (package! exec-path-from-shell)
 (package! f)
 (package! flycheck)
@@ -21,6 +20,7 @@
 (package! yasnippet)
 (package! yasnippet-snippets)
 (package! jg-python-origami :recipe '(:local-repo "~/.doom.d/packages/jg-python-origami"))
+(package! python)
 
 (package! auto-highlight-symbol)
 (package! centered-cursor-mode)

@@ -5,6 +5,5 @@
 (package! org-drill)
 (package! org-pomodoro)
 (package! org-projectile)
-(package! org-ref)
 (package! org-superstar)
 (package! outline-toc)

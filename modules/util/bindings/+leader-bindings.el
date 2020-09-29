@@ -38,11 +38,24 @@
 
       :desc "help"                  "h"    help-map
       )
+;;; <leader> a -- misc
+(map! :leader
+     (:prefix "a"
+     (:prefix ("g" . "Goto")
+     :desc "Desktop" "`" #'+jg-bindings-goto-desktop
+     :desc "Agenda" "a" #'+jg-bindings-goto-org-agenda-file
+     :desc "Github" "g" #'+jg-bindings-goto-github
+     :desc "Messages" "m" #'+jg-bindings-goto-messages
+     :desc "Mega" "M" #'+jg-bindings-goto-mega
+     :desc "Home" "~" #'+jg-bindings-goto-home
+     :desc "Resources" "r" #'+jg-bindings-goto-resources))
+)
 ;;; <leader> b --- buffer
 (map! :leader
       :prefix-map ("b" . "buffer")
       :desc "Bury buffer"                 "z"   #'bury-buffer
 
+      :desc "Clear Buffer" "c" #'+jg-bindings-clear-buffer
       :desc "Kill all buffers"            "K"   #'doom/kill-all-buffers
       :desc "Kill buffer"                 "d"   #'kill-current-buffer
       :desc "Kill other buffers"          "O"   #'doom/kill-other-buffers
@@ -60,15 +73,8 @@
       :desc "Toggle narrowing"            "-"   #'doom/toggle-narrow-buffer
       :desc "ibuffer"                     "i"   #'ibuffer
 
-       "`" #'+jg-bindings-goto-desktop
-       "a" #'+jg-bindings-goto-org-agenda-file
-       "c" #'+jg-bindings-clear-buffer
-       "g" #'+jg-bindings-goto-github
-       "i" #'clone-indirect-buffer-other-window-without-purpose
-       "m" #'+jg-bindings-goto-messages
-       "M" #'+jg-bindings-goto-mega
-       "~" #'+jg-bindings-goto-home
-       "r" #'+jg-bindings-goto-resources
+
+       "i" #'clone-indirect-buffer-other-window
 
       (:when (featurep! :ui workspaces)
        :desc "Switch workspace buffer" "b" #'persp-switch-to-buffer
@@ -447,11 +453,13 @@
       :prefix-map ("t" . "toggle")
       :desc "Debug on Error" "d" #'toggle-debug-on-error
       :desc "Big mode"                     "b" #'doom-big-font-mode
+      :desc "Centered Cursor"              "c" #'centered-cursor-mode
       :desc "Flymake"                      "f" #'flymake-mode
       :desc "Frame fullscreen"             "F" #'toggle-frame-fullscreen
       :desc "Indent style"                 "I" #'doom/toggle-indent-style
       :desc "Line numbers"                 "l" #'doom/toggle-line-numbers
       :desc "Word-wrap mode"               "W" #'+word-wrap-mode
+      :desc "Neotree"                      "t" #'neotree-toggle
       (:when (featurep! :checkers syntax)
        :desc "Flycheck"                   "f" #'flycheck-mode)
       (:when (featurep! :ui indent-guides)
@@ -466,12 +474,14 @@
        :desc "Spell checker"              "s" #'flyspell-mode)
       (:when (featurep! :lang org +pomodoro)
        :desc "Pomodoro timer"             "t" #'org-pomodoro)
+      :desc "Evil-visual-mark"            "v" #'evil-visual-mark-mode
       :desc "Evil goggles"                 "g" #'evil-goggles-mode
       :desc "Soft line wrapping"           "w" #'visual-line-mode
       (:when (featurep! :editor word-wrap)
        :desc "Soft line wrapping"         "w" #'+word-wrap-mode)
       :desc "Whitespace" "w"#'whitespace-mode
       :desc "Line Truncate" "l" #'toggle-truncate-lines
+      :desc "Auto-Highlight" "h" #'auto-highlight-symbol-mode
       ;; centre point/line
       ;; highlight long lines
       ;; auto-completion
@@ -543,7 +553,7 @@
 (map! :leader
       :prefix ("x" . "Text")
       :desc "Mark" "m" #'mark-whole-buffer
-
+      :desc "Iedit" "e" #'evil-iedit-state/iedit-mode
       "r" #'regexp-builder
       ;; align
       (:prefix ("a" . "Align")

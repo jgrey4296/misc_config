@@ -38,18 +38,37 @@
       )
     )
   )
-(defun +jg-org-org-ref-open-bibtex-pdf ()
+(defun +jg-org-ref-open-bibtex-pdf ()
   "Open pdf for a bibtex entry, if it exists.
 assumes point is in
 the entry of interest in the bibfile.  but does not check that."
   (interactive)
   (save-excursion
-    (bibtex-beginning-of-entry)
-    (let* ((bibtex-expand-strings t)
-           (entry (bibtex-parse-entry t))
-           (key (reftex-get-bib-field "file" entry))
-           (pdf (string-join `(,(car (split-string key ":" 't))))))
-      (message pdf)
-      (if (file-exists-p pdf)
-          (org-open-link-from-string (format "[[file:%s]]" pdf))
-        (ding)))))
+    (let* ((file (bibtex-autokey-get-field "file"))
+           (optfile (bibtex-autokey-get-field "OPTfile")))
+      (message "%s : %s" file (file-exists-p file))
+      (if (and (not (string-equal "" file)) (file-exists-p file))
+          (org-link-open-from-string (format "[[file:%s]]" file))
+        (progn (message optfile)
+               (org-link-open-from-string (format "[[file:%s]]" optfile)))))))
+
+
+
+(defun +jg-org-ref-search-scholar (pre)
+  (interactive "p")
+  (message "P: %s" pre)
+  (save-excursion
+    (let* ((bibtex-parse-strings t)
+           (fields '("author" "title" "year"))
+           (retrieved (-reject '(lambda (x) (string-equal "" x)) (mapcar 'bibtex-autokey-get-field fields)))
+           (search-string (string-join retrieved "+"))
+           (fallback (if (or (> pre 1)
+                             (string-equal "" search-string))
+                         (replace-regexp-in-string " " "+" (read-string "Search for: "))
+                       nil))
+           )
+      (message "Scholar Search: %s : %s" search-string fallback)
+      (browse-url (format jg-scholar-search-string (if fallback fallback search-string)))
+      )
+    )
+  )

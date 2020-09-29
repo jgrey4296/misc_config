@@ -1,19 +1,5 @@
 ;;; editor/fold/config.el -*- lexical-binding: t; -*-
 
-(when (featurep! :editor evil)
-  ;; Add vimish-fold, outline-mode & hideshow support to folding commands
-  (define-key! 'global
-    [remap evil-toggle-fold]   #'+fold/toggle
-    [remap evil-close-fold]    #'+fold/close
-    [remap evil-open-fold]     #'+fold/open
-    [remap evil-open-fold-rec] #'+fold/open
-    [remap evil-close-folds]   #'+fold/close-all
-    [remap evil-open-folds]    #'+fold/open-all)
-  (evil-define-key* 'motion 'global
-    "zj" #'+fold/next
-    "zk" #'+fold/previous))
-
-
 ;;
 ;; Packages
 
@@ -80,16 +66,6 @@
         vimish-fold-indication-mode 'right-fringe)
   :config
   (vimish-fold-global-mode +1)
-  (map! :map evil-normal-state-map
-        :prefix "z v"
-        "a" 'vimish-fold-toggle
-        "A" 'vimish-fold-toggle-all
-        "f" 'vimish-fold
-        "d" 'vimish-fold-delete
-        "D" 'vimish-fold-delete-all
-        "j" 'vimish-fold-next-fold
-        "k" 'vimish-fold-previous-fold
-        "m" 'vimish-fold-refold-all
-        "r" 'vimish-fold-unfold-all
-        )
-)
+  )
+
+(load! "+bindings")

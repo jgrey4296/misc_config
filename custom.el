@@ -4,7 +4,10 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ibuffer-saved-filter-groups
-   '(("my-default"
+   '(("Dired"
+      ("Dired"
+       (used-mode . dired-mode)))
+     ("my-default"
       ("star"
        (saved . "star"))
       ("org"
@@ -22,12 +25,18 @@
       ("programming"
        (saved . "programming")))
      ("default"
-      ("org"
-       (saved . "org"))
-      ("dired"
-       (saved . "dired"))
-      ("git"
-       (saved . "git")))
+      ("Dired"
+       (saved . "Dired"))
+      ("Starred"
+       (starred-name))
+      ("Project: emacs_files"
+       (projectile-root "emacs_files" . "/Volumes/documents/github/emacs_files/"))
+      ("Project: doom-emacs"
+       (projectile-root "doom-emacs" . "/Volumes/documents/github/otherLibs/doom-emacs/"))
+      ("Project: writing"
+       (projectile-root "writing" . "/Volumes/documents/github/writing/"))
+      ("Project: Dropbox"
+       (projectile-root "Dropbox" . "/Users/johngrey/Dropbox/")))
      ("dired"
       ("dired"
        (saved . "dired")))
@@ -54,7 +63,11 @@
       ("debugger-mode"
        (mode . debugger-mode)))))
  '(ibuffer-saved-filters
-   '(("star"
+   '(("default"
+      (saved . "anti-helm-and-magit"))
+     ("Dired"
+      (used-mode . dired-mode))
+     ("star"
       (name . "^*"))
      ("anti-helm-and-magit"
       (saved . "anti-magit")
@@ -121,4 +134,5 @@
  ;; If there is more than one, they won't work right.
  '(font-lock-comment-face ((t (:foreground "mediumorchid1" :slant italic))))
  '(vimish-fold-fringe ((t (:foreground "indianred"))))
- '(vimish-fold-overlay ((t (:background "dodgerblue" :foreground "black" :weight light)))))
+ '(vimish-fold-overlay ((t (:background "dodgerblue" :foreground "black" :weight light))))
+ '(whitespace-tab ((t (:background "firebrick" :foreground "#505050")))))

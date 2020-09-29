@@ -14,7 +14,7 @@
 (set-language-environment "UTF-8")
 (prefer-coding-system 'utf-8)
 
-(setq! +doom-quit-messages nil
+(setq +doom-quit-messages nil
       auto-save-file-name-transforms (quote ((".*" "~/.emacs.d/autosaves/`" t)))
       backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/")))
       dired-omit-files "^\\.?#\\|^\\.$\\|^\\.DS_Store$\\|^\\.git$\\|^__pycache__$\\|^flycheck__.+\\.py\\|^\\.mypy_cache$"
@@ -34,12 +34,20 @@
       which-key-idle-secondary-delay 0.05
       which-key-sort-order 'which-key-key-order-alpha
       custom-theme-load-path (cons "~/.doom.d/packages/jg-themes" custom-theme-load-path)
-      whitespace-style '(face tabs spaces trailing lines space-before-tab newline indentation empty space-after-tab space-mark tab-mark newline-mark)
       highlight-indent-guides-suppress-auto-error t
-)
+      outline-blank-line nil
+      line-move-ignore-invisible t
+      )
 
+(progn
+  (defun doom-highlight-non-default-indentation-h () )
+  (setq whitespace-style '(face tabs spaces trailing lines space-before-tab newline indentation empty space-after-tab space-mark tab-mark newline-mark))
+  )
+
+;; TODO: figure this out:
+;; (push '("Scholar" "https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q=%s") +lookup-provider-url-alist)
 (global-evil-vimish-fold-mode)
-
+;; (global-whitespace-mode)
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the

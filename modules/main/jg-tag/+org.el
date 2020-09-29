@@ -6,21 +6,21 @@
   (let ((prog (lambda ()
                 (let ((elem (cadr (org-element-at-point))))
                   (fill-region-as-paragraph
-                   (getf elem :begin) (getf elem :end)))))
+                   (cl-getf elem :begin) (cl-getf elem :end)))))
         curr-elem
         return-to
         )
     (while (not (eq (point) (point-min)))
       (setq curr-elem (org-element-at-point)
-            return-to (getf (cadr curr-elem) :begin))
+            return-to (cl-getf (cadr curr-elem) :begin))
       (cond ((eq (car curr-elem) 'property-drawer)
-             (goto-char (- (getf (cadr curr-elem) :begin) 1))
+             (goto-char (- (cl-getf (cadr curr-elem) :begin) 1))
              )
             ((eq (car curr-elem) 'headline)
-             (goto-char (- (getf (cadr curr-elem) :begin) 1))
+             (goto-char (- (cl-getf (cadr curr-elem) :begin) 1))
              )
             (t
-             (goto-char (getf (cadr curr-elem) :begin))
+             (goto-char (cl-getf (cadr curr-elem) :begin))
              (funcall prog)
              (insert "\n")
              )
@@ -69,7 +69,7 @@ Optionally remove duplicates of links
   ;;wrap lines that are too long
   (goto-char (point-min))
   (jg-tag-wrap-non-link-urls)
-  (spacemacs/indent-region-or-buffer)
+  (indent-region (point-min) (point-max))
   (jg-tag-fill-paragraph-step-back)
   (whitespace-cleanup)
   (org-show-all)
@@ -131,7 +131,7 @@ Optionally remove duplicates of links
 
   (jg-tag-org-clean-property-blocks)
   (message "Indenting")
-  (spacemacs/indent-region-or-buffer)
+  (indent-region (point-min) (point-max))
   (whitespace-cleanup)
   (setq jg-tag-org-clean-marker nil)
 
@@ -166,6 +166,7 @@ Optionally remove duplicates of links
   (message "Org Clean Finished")
   )
 (defun jg-tag-map-entries-clean-whitespace ()
+
   "Called from org-map-entries. reduces whitespace prior
 to point to a single new line"
   (set-marker jg-tag-org-clean-marker (line-end-position))

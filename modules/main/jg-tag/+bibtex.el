@@ -1,5 +1,74 @@
 ;; bibtex
 
+(defhydra jg-org-ref-bibtex-hydra (:color blue)
+  "
+_p_: Open pdf     _y_: Copy key               _n_: New entry            _w_: WOS
+_b_: Open url     _f_: Copy formatted entry   _o_: Copy entry           _c_: WOS citing
+_r_: Refile entry _k_: Add keywords           _d_: delete entry         _a_: WOS related
+_e_: Email entry  _K_: Edit keywords          _L_: clean entry          _P_: Pubmed
+_U_: Update entry _N_: New entry              _R_: Crossref             _g_: Google Scholar
+_s_: Sort entry   _a_: Remove nonascii        _h_: helm-bibtex          _q_: quit
+_u_: Update field _F_: file funcs             _A_: Assoc pdf with entry
+_N_: Open notes                               _T_: Title case
+                                              _S_: Sentence case
+"
+  ("p" #'org-ref-open-bibtex-pdf)
+  ("P" #'org-ref-bibtex-pubmed)
+  ("w" #'org-ref-bibtex-wos)
+  ("c" #'org-ref-bibtex-wos-citing)
+  ("a" #'org-ref-bibtex-wos-related)
+  ("R" #'org-ref-bibtex-crossref)
+  ("g" #'org-ref-bibtex-google-scholar)
+  ("n" #'org-ref-bibtex-new-entry/body)
+  ("N" #'org-ref-open-bibtex-notes)
+  ("o" (lambda ()
+	 (interactive)
+	 (bibtex-copy-entry-as-kill)
+	 (message "Use %s to paste the entry"
+		  (substitute-command-keys (format "\\[bibtex-yank]")))))
+  ("d" #'bibtex-kill-entry)
+  ("L" #'org-ref-clean-bibtex-entry)
+  ("y" (save-excursion
+	 (bibtex-beginning-of-entry)
+	 (when (looking-at bibtex-entry-maybe-empty-head)
+	   (kill-new (bibtex-key-in-head)))))
+  ("f" (progn
+	 (bibtex-beginning-of-entry)
+	 (kill-new
+	  (org-ref-format-entry
+	   (cdr (assoc "=key=" (bibtex-parse-entry t)))))))
+  ("k" #'helm-tag-bibtex-entry)
+  ("K" (lambda ()
+         (interactive)
+         (org-ref-set-bibtex-keywords
+          (read-string "Keywords: "
+                       (bibtex-autokey-get-field "keywords"))
+          t)))
+  ("b" #'org-ref-open-in-browser)
+  ("r" (lambda ()
+	 (interactive)
+         (bibtex-beginning-of-entry)
+         (bibtex-kill-entry)
+         (find-file (completing-read
+                     "Bibtex file: "
+                     (f-entries "." (lambda (f) (f-ext? f "bib")))))
+         (goto-char (point-max))
+         (bibtex-yank)
+         (save-buffer)
+         (kill-buffer)))
+  ("e" #'org-ref-email-bibtex-entry)
+  ("U" (doi-utils-update-bibtex-entry-from-doi (org-ref-bibtex-entry-doi)))
+  ("u" #'doi-utils-update-field)
+  ("F" #'org-ref-bibtex-file/body)
+  ("h" #'helm-bibtex)
+  ("A" #'org-ref-bibtex-assoc-pdf-with-entry)
+  ("a" #'org-ref-replace-nonascii)
+  ("s" #'org-ref-sort-bibtex-entry)
+  ("T" #'org-ref-title-case-article)
+  ("S" #'org-ref-sentence-case-article)
+  ("q" nil))
+
+
 (defun jg-tag-build-bibtex-list ()
   "Build a list of all bibtex files to use for bibtex-helm "
   (setq bibtex-completion-bibliography (directory-files jg-tag-loc-bibtex 't "\.bib$")))

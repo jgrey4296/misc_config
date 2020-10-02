@@ -59,7 +59,7 @@ the entry of interest in the bibfile.  but does not check that."
   (message "P: %s" pre)
   (save-excursion
     (let* ((bibtex-parse-strings t)
-           (fields '("author" "title" "year"))
+           (fields '("author" "title" "year" "ALTauthor" "ALTeditor" "OPTisbn" "isbn"))
            (retrieved (-reject '(lambda (x) (string-equal "" x)) (mapcar 'bibtex-autokey-get-field fields)))
            (search-string (string-join retrieved "+"))
            (fallback (if (or (> pre 1)

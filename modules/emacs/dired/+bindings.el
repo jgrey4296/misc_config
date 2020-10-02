@@ -51,3 +51,8 @@
          )
         )
       )
+
+(map! :leader
+      :prefix "t"
+      :desc "Toggle Dired-Omit-Mode" "o" #'dired-omit-mode
+      )

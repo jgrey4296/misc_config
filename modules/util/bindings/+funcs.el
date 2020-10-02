@@ -74,7 +74,18 @@
   (insert ")")
   )
 
-
+;;;###autoload
+(defun jg-toggle-narrow-buffer (arg)
+  "Narrow the buffer to BEG END. If narrowed, widen it.
+If region isn't active, narrow away anything above point
+"
+  (interactive "P")
+  (cond ((eq evil-state 'normal)
+         (narrow-to-region (line-beginning-position) (point-max)))
+        ((eq evil-state 'visual)
+         (narrow-to-region evil-visual-beginning evil-visual-end))
+        )
+  )
 ;; From spacemacs-defaults
 ;; from @bmag
 (defun spacemacs/window-layout-toggle ()

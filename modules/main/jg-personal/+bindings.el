@@ -1,13 +1,4 @@
 
-(map! :leader
-      (:prefix "t"
-      :n "h" #'global-auto-highlight-symbol-mode
-      :n "c" #'centered-cursor-mode
-      :n "v" #'evil-visual-mark-mode)
-      (:prefix "x"
-      :n "e" #'evil-iedit-state/iedit-mode)
-      :n "f t" 'neotree-toggle
-      )
 (map! :mode vlf-mode
       :n "] A" 'vlf-next-batch-from-point
       :n "] a" 'vlf-next-batch

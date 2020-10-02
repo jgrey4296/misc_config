@@ -19,4 +19,8 @@
       "\\" ibuffer--filter-map
       )
 
+(map! :prefix "z"
+      :nv "n" 'jg-toggle-narrow-buffer
+      )
+
 (map! :n "gb" #'avy-pop-mark)

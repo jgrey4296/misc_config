@@ -70,7 +70,7 @@
       :desc "Switch to last buffer"       "l"   #'evil-switch-to-windows-last-buffer
       :desc "Pop up scratch buffer"       "x"   #'doom/open-scratch-buffer
       :desc "Switch to scratch buffer"    "X"   #'doom/switch-to-scratch-buffer
-      :desc "Toggle narrowing"            "-"   #'doom/toggle-narrow-buffer
+      :desc "Toggle narrowing"            "-"   #'jg-toggle-narrow-buffer
       :desc "ibuffer"                     "i"   #'ibuffer
 
 

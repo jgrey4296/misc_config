@@ -13,6 +13,7 @@
 
       ;; C-u is used by evil
       :desc "Universal argument"    "u"   #'universal-argument
+      :desc "Open Url"              "U"   #'jg-browse-url
 
       :desc "help"                  "h"    help-map
 
@@ -211,6 +212,7 @@
       :desc "Find implementations"                  "i" #'+lookup/implementations
       :desc "Jump to documentation"                 "k" #'+lookup/documentation
       :desc "Find type definition"                  "t" #'+lookup/type-definition
+      :desc "Browse URL"                            "u" #'jg-browse-url
       (:prefix ("b" . "Bookmark")
        :desc "Set bookmark"                "m"           #'bookmark-set
        :desc "Delete bookmark"             "M"           #'bookmark-delete
@@ -451,46 +453,59 @@
 ;;; <leader> t --- toggle
 (map! :leader
       :prefix-map ("t" . "toggle")
-      :desc "Debug on Error" "d" #'toggle-debug-on-error
-      :desc "Big mode"                     "b" #'doom-big-font-mode
-      :desc "Centered Cursor"              "c" #'centered-cursor-mode
-      :desc "Flymake"                      "f" #'flymake-mode
-      :desc "Frame fullscreen"             "F" #'toggle-frame-fullscreen
-      :desc "Indent style"                 "I" #'doom/toggle-indent-style
-      :desc "Line numbers"                 "l" #'doom/toggle-line-numbers
-      :desc "Word-wrap mode"               "W" #'+word-wrap-mode
-      :desc "Neotree"                      "t" #'neotree-toggle
-      (:when (featurep! :checkers syntax)
-       :desc "Flycheck"                   "f" #'flycheck-mode)
-      (:when (featurep! :ui indent-guides)
-       :desc "Indent guides"              "i" #'highlight-indent-guides-mode)
-      (:when (featurep! :ui minimap)
-       :desc "Minimap mode"               "m" #'minimap-mode)
-      (:when (featurep! :lang org +present)
-       :desc "org-tree-slide mode"        "p" #'org-tree-slide-mode)
-      (:when (and (featurep! :checkers spell) (not (featurep! :checkers spell +flyspell)))
-       :desc "Spell checker"              "s" #'spell-fu-mode)
-      (:when (featurep! :checkers spell +flyspell)
-       :desc "Spell checker"              "s" #'flyspell-mode)
-      (:when (featurep! :lang org +pomodoro)
-       :desc "Pomodoro timer"             "t" #'org-pomodoro)
-      :desc "Evil-visual-mark"            "v" #'evil-visual-mark-mode
-      :desc "Evil goggles"                 "g" #'evil-goggles-mode
-      :desc "Soft line wrapping"           "w" #'visual-line-mode
-      (:when (featurep! :editor word-wrap)
-       :desc "Soft line wrapping"         "w" #'+word-wrap-mode)
-      :desc "Whitespace" "w"#'whitespace-mode
-      :desc "Line Truncate" "l" #'toggle-truncate-lines
-      :desc "Auto-Highlight" "h" #'auto-highlight-symbol-mode
-      ;; centre point/line
-      ;; highlight long lines
-      ;; auto-completion
-      ;; camel-case-motion
-      ;;
+       "d" nil
+       "v" nil
+       "n" nil
+       (:prefix ("d" . "Debug")
+        :desc "Debug on Error" "e" #'toggle-debug-on-error
+        :desc "Debug on Var" "v" #'debug-on-variable-change
+        :desc "Cancel Debug on Var" "V" #'cancel-debug-on-variable-change
+        :desc "Debug on Function" "f" #'debug-on-entry
+        :desc "Cancel Debug on Function" "F" #'cancel-debug-on-entry
+        :desc "Flymake"                      "f" #'flymake-mode
+        (:when (featurep! :checkers syntax)
+         "f" nil
+         :desc "Flycheck"                   "f" #'flycheck-mode)
+        (:when (and (featurep! :checkers spell) (not (featurep! :checkers spell +flyspell)))
+         :desc "Spell checker"              "s" #'spell-fu-mode)
+        (:when (featurep! :checkers spell +flyspell)
+         :desc "Spell checker"              "s" #'flyspell-mode))
+
+       (:prefix ("v" . "Visual")
+        :desc "Big mode"                     "b" #'doom-big-font-mode
+        :desc "Frame fullscreen"             "F" #'toggle-frame-fullscreen
+        :desc "Line numbers"                 "n" #'doom/toggle-line-numbers
+        :desc "Evil goggles"                 "g" #'evil-goggles-mode
+        :desc "Soft line wrapping"           "w" #'visual-line-mode
+        (:when (featurep! :editor word-wrap)
+         :desc "Soft line wrapping"         "w" #'+word-wrap-mode)
+        :desc "Word-wrap mode"               "W" #'+word-wrap-mode
+        :desc "Whitespace"                  "w"#'whitespace-mode
+        :desc "Line Truncate"               "l" #'toggle-truncate-lines
+        )
+
+       (:prefix  ("n" . "Navigation")
+        :desc "Neotree"                      "t" #'neotree-toggle
+        (:when (featurep! :ui minimap)
+         :desc "Minimap mode"               "m" #'minimap-mode)
+        (:when (featurep! :lang org +present)
+         :desc "org-tree-slide mode"        "p" #'org-tree-slide-mode)
+
+        :desc "Centered Cursor"              "c" #'centered-cursor-mode
+        (:when (featurep! :ui indent-guides)
+         :desc "Indent guides"              "i" #'highlight-indent-guides-mode)
+        :desc "Indent style"                 "I" #'doom/toggle-indent-style
+        :desc "Evil-visual-mark"            "v" #'evil-visual-mark-mode
+        :desc "Auto-Highlight"              "h" #'auto-highlight-symbol-mode
+        )
+       (:when (featurep! :lang org +pomodoro)
+        :desc "Pomodoro timer"             "t" #'org-pomodoro)
+
+       ;; centre point/line
+       ;; highlight long lines
+       ;; auto-completion
+       ;; camel-case-motion
       ;; fill-column indicator
-      ;; indent-guide
-      ;; truncate lines
-      ;; line numbers
       )
 ;;; <leader> w --- workspaces/windows
 (when (featurep! :ui workspaces)

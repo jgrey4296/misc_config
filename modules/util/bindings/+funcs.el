@@ -74,6 +74,23 @@
   (insert ")")
   )
 
+(defun jg-browse-url (arg)
+  (interactive "p" )
+  (let ((url (cond ((eq arg 4)
+                    (substring-no-properties (car kill-ring)))
+                   ((eq evil-state 'visual)
+                    (buffer-substring-no-properties evil-visual-beginning
+                                                    evil-visual-end))
+                   ("https://scholar.google.com")
+                   )
+             ))
+    (if (string-prefix-p "~" url)
+        (shell-command (format "open %s" url))
+      (browse-url url)
+      )
+    )
+  )
+
 ;;;###autoload
 (defun jg-toggle-narrow-buffer (arg)
   "Narrow the buffer to BEG END. If narrowed, widen it.

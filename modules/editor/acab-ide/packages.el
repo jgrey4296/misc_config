@@ -7,3 +7,4 @@
 (package! parsec)
 (package! (font-lock+ :location (recipe :fetcher git :url "https://github.com/emacsmirror/font-lock-plus")))
 (package! helm)
+(package! cl-lib)

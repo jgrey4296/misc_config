@@ -40,3 +40,4 @@
 ;; Import managements
 (package! pyimport :pin "a6f63cf7ed93f0c0f7c207e6595813966f8852b9")
 (package! py-isort :pin "e67306f459c47c53a65604e4eea88a3914596560")
+(package! cl-lib)

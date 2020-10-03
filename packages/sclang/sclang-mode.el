@@ -16,7 +16,7 @@
 ;; USA
 
 (eval-when-compile
-  (require 'cl)
+  (require 'cl-lib)
   (load "cl-seq" nil t)
   (require 'font-lock)
   (require 'sclang-util))

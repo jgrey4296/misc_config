@@ -16,7 +16,7 @@
 ;; USA
 
 (eval-when-compile
-  (require 'cl)
+  (require 'cl-lib)
   (require 'font-lock))
 
 ;; (require 'w3m) ;; not needed during compilation

@@ -108,3 +108,4 @@
     :pin "75b849e9561c4a6022babf6eaf0e037310ded7c1"))
 (when (featurep! :lang rst)
   (package! ox-rst :pin "99fa790da55b57a3f2e9aa187493ba434a64250e"))
+(package! cl-lib)

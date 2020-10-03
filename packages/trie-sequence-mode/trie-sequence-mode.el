@@ -1,5 +1,5 @@
 ;; A Custom mode adapting org-table
-
+(require 'cl-lib)
 (require 'dash)
 (require 'org-table)
 (require 'kahnsort)

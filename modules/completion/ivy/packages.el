@@ -5,7 +5,7 @@
 (package! ivy)
 (package! ivy-hydra)
 (package! counsel)
-
+(package! cl-lib)
 (package! amx :pin "ccfc92c600df681df5e8b5fecec328c462ceb71e")
 (package! counsel-projectile :pin "77392cbbc42e98fc137b43f1db1b111ba6e2dd75")
 (package! ivy-rich :pin "10970130b41c6ef9570893cdab8dfbe720e2b1a9")

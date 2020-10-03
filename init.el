@@ -27,7 +27,16 @@
  jg-tag
 
  ;; :domain-specific
+ ;; logic
+ ;; music
+ ;; netlogo
+ ;; twitter
 
+ :editor
+ ;; acab-ide
+ ;; jg-states
+ ;; overlay_control
+ window-control
 
                                         ; Generic Modules
  :completion
@@ -64,7 +73,7 @@
  :editor
  (evil +everywhere); come to the dark side, we have cookies
  file-templates    ; auto-snippets for empty files
- fold              ; (nigh) universal code folding
+ fold
  ;;(format +onsave)  ; automated prettiness
  ;;god               ; run Emacs commands without modifier keys
  ;;lispy             ; vim for lisp, for people who don't like vim

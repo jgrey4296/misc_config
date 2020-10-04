@@ -114,14 +114,16 @@
 
 (defun window-ring-redisplay ()
   (interactive)
-  (let* ((centre (or (ring-ref window-ring window-ring-focus) window-ring-nil-buffer-name))
-         (leftmost (if (or window-ring-can-loop (< window-ring-focus (- (ring-length window-ring) 1)))
-                            (ring-next window-ring centre)
-                   window-ring-nil-buffer-name))
-         (rightmost (if (or window-ring-can-loop (> window-ring-focus 0))
-                        (ring-previous window-ring centre)
-                      window-ring-nil-buffer-name)
-                    )
+  (let* ((at-start (eq 0 window-ring-focus))
+         (at-end (eq window-ring-focus (- (ring-length window-ring) 1)))
+         (len-one (eq 1 (ring-length window-ring)))
+         (centre (or (ring-ref window-ring window-ring-focus) window-ring-nil-buffer-name))
+         (leftmost (if (or len-one (and at-end (not window-ring-can-loop)))
+                       window-ring-nil-buffer-name
+                     (ring-next window-ring centre)))
+         (rightmost (if (or len-one (and at-start (not window-ring-can-loop)))
+                        window-ring-nil-buffer-name
+                      (ring-previous window-ring centre)))
          )
     ;;Assign to the column windows
     ;; If cant loop, pad leftmost and rightmost with empy buffers
@@ -160,6 +162,7 @@
     )
   (balance-windows)
   (window-ring-add-to-head (buffer-name (current-buffer)))
+  (window-ring-redisplay)
   )
 
 (defun window-ring-print-order ()

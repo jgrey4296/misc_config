@@ -5,10 +5,12 @@
       "x" nil
       "X" 'kill-current-buffer
       "a" 'evil-toggle-fold
-      "A" 'evil-open-folds
+      "A" 'evil-open-fold-rec
       "S" 'evil-open-fold-rec
       "c" 'evil-close-fold
       "C" 'evil-close-folds
+      "o" 'evil-open-folds
+      "O" nil
       (:prefix ("v" . "Vimish-fold")
       "a" 'vimish-fold-toggle
       "A" 'vimish-fold-toggle-all

@@ -3,7 +3,7 @@
 (defun +jg-personal-toggle-all-defs ()
     (interactive)
     ;; goto start of file
-    (let* ((open-or-close 'outline-hide-subtree)
+    (let* ((open-or-close 'evil-close-fold) ;;outline-hide-subtree)
            )
       (save-excursion
         (goto-char (point-min))

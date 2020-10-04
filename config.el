@@ -46,7 +46,6 @@
 
 ;; TODO: figure this out:
 ;; (push '("Scholar" "https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q=%s") +lookup-provider-url-alist)
-(global-evil-vimish-fold-mode)
 (smartparens-global-mode 0)
 (window-ring-minor-mode)
 ;; (global-whitespace-mode)

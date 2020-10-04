@@ -65,11 +65,13 @@
   (setq vimish-fold-dir (concat doom-cache-dir "vimish-fold/")
         vimish-fold-indication-mode 'right-fringe
         evil-vimish-fold-mode-map nil)
-  :config
-  (vimish-fold-global-mode +1)
+  (global-evil-vimish-fold-mode)
   )
+
 (use-package! origami
   :init
   (global-origami-mode)
   )
+
 (load! "+bindings")
+(load! "+vars")

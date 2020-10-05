@@ -462,10 +462,9 @@
         :desc "Cancel Debug on Var" "V" #'cancel-debug-on-variable-change
         :desc "Debug on Function" "f" #'debug-on-entry
         :desc "Cancel Debug on Function" "F" #'cancel-debug-on-entry
-        :desc "Flymake"                      "f" #'flymake-mode
+        :desc "Flymake"                      "c" #'flymake-mode
         (:when (featurep! :checkers syntax)
-         "f" nil
-         :desc "Flycheck"                   "f" #'flycheck-mode)
+         :desc "Flycheck"                   "C" #'flycheck-mode)
         (:when (and (featurep! :checkers spell) (not (featurep! :checkers spell +flyspell)))
          :desc "Spell checker"              "s" #'spell-fu-mode)
         (:when (featurep! :checkers spell +flyspell)
@@ -500,7 +499,7 @@
         )
        (:when (featurep! :lang org +pomodoro)
         :desc "Pomodoro timer"             "t" #'org-pomodoro)
-
+        :desc "SmartParens"  "s" #'smartparens-global-mode
        ;; centre point/line
        ;; highlight long lines
        ;; auto-completion

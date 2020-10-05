@@ -2,7 +2,6 @@
 
 (defvar +python-ipython-command '("ipython" "-i" "--simple-prompt" "--no-color-info")
   "Command to initialize the ipython REPL for `+python/open-ipython-repl'.")
-
 (defvar +python-jupyter-command '("jupyter" "console" "--simple-prompt")
   "Command to initialize the jupyter REPL for `+python/open-jupyter-repl'.")
 
@@ -87,8 +86,6 @@
     (advice-add #'pythonic-deactivate :after #'+modeline-clear-env-in-all-windows-h))
 
   (setq-hook! 'python-mode-hook tab-width python-indent-offset))
-
-
 (use-package! anaconda-mode
   :defer t
   :init
@@ -134,8 +131,6 @@
         "a" #'anaconda-mode-find-assignments
         "f" #'anaconda-mode-find-file
         "u" #'anaconda-mode-find-references))
-
-
 (use-package! pyimport
   :defer t
   :init
@@ -146,8 +141,6 @@
           :desc "Insert missing imports" "i" #'pyimport-insert-missing
           :desc "Remove unused imports"  "r" #'pyimport-remove-unused
           :desc "Optimize imports"       "o" #'+python/optimize-imports)))
-
-
 (use-package! py-isort
   :defer t
   :init
@@ -157,7 +150,6 @@
         (:prefix ("i" . "imports")
           :desc "Sort imports"      "s" #'py-isort-buffer
           :desc "Sort region"       "r" #'py-isort-region)))
-
 (use-package! nose
   :commands nose-mode
   :preface (defvar nose-mode-map (make-sparse-keymap))
@@ -178,8 +170,6 @@
         "A" #'nosetests-pdb-all
         "O" #'nosetests-pdb-one
         "V" #'nosetests-pdb-module))
-
-
 (use-package! python-pytest
   :defer t
   :init
@@ -193,7 +183,6 @@
         "T" #'python-pytest-function
         "r" #'python-pytest-repeat
         "p" #'python-pytest-popup))
-
 
 ;;
 ;;; Environment management
@@ -222,8 +211,6 @@
         :desc "run"         "r" #'pipenv-run
         :desc "shell"       "s" #'pipenv-shell
         :desc "uninstall"   "u" #'pipenv-uninstall))
-
-
 (use-package! pyvenv
   :after python
   :init
@@ -235,9 +222,6 @@
   (add-to-list 'global-mode-string
                '(pyvenv-virtual-env-name (" venv:" pyvenv-virtual-env-name " "))
                'append))
-
-
-
 (use-package! pyenv-mode
   :when (featurep! +pyenv)
   :after python
@@ -247,8 +231,6 @@
     (add-to-list 'exec-path (expand-file-name "shims" (or (getenv "PYENV_ROOT") "~/.pyenv"))))
   (add-hook 'python-mode-local-vars-hook #'+python-pyenv-mode-set-auto-h)
   (add-hook 'doom-switch-buffer-hook #'+python-pyenv-mode-set-auto-h))
-
-
 (use-package! conda
   :when (featurep! +conda)
   :after python
@@ -282,13 +264,9 @@
   (add-to-list 'global-mode-string
                '(conda-env-current-name (" conda:" conda-env-current-name " "))
                'append))
-
-
 (use-package! poetry
   :when (featurep! +poetry)
   :after python)
-
-
 (use-package! cython-mode
   :when (featurep! +cython)
   :mode "\\.p\\(yx\\|x[di]\\)\\'"
@@ -298,15 +276,12 @@
         :localleader
         :prefix "c"
         :desc "Cython compile buffer"    "c" #'cython-compile))
-
-
 (use-package! flycheck-cython
   :when (featurep! +cython)
   :when (featurep! :checkers syntax)
   :after cython-mode)
 
 
-;;
 ;;; LSP
 
 (eval-when! (and (featurep! +lsp)
@@ -322,3 +297,35 @@
   (use-package! lsp-pyright
     :when (featurep! +pyright)
     :after lsp-mode))
+
+(after! python
+  (setq-default python-indent-offset 4
+                python-indent-guess-indent-offset nil
+                python-shell-interpreter-args "-i"
+                python-shell-interpreter "python"
+                python-shell-completion-native-enable t
+                python-shell-virtualenv-root "~/anaconda3"
+                python-shell--interpreter nil
+                python-shell--interpreter-args nil
+                )
+  (modify-syntax-entry ?_ "w" python-mode-syntax-table)
+  (add-hook 'python-mode-hook #'outline-minor-mode)
+  (load! "+bindngs")
+)
+
+(after! (dired pyvenv-mode)
+    """ Remove the annoying python-shell-setup advice """
+    (add-transient-hook! 'dired-mode
+      (map! :map dired-mode-map
+        :localleader
+        :n "v" 'pyvenv-activate
+        )
+      )
+    )
+;; (after! (origami python-origami)
+ ;;  (delq (assoc 'python-mode origami-parser-alist) origami-parser-alist)
+ ;;  (add-to-list 'origami-parser-alist '(python-mode . +jg-origami-python-parser))
+ ;;  )
+
+
+(load! "+funcs")

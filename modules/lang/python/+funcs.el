@@ -1,4 +1,4 @@
-;;; main/jg-personal/+python-funcs.el -*- lexical-binding: t; -*-
+;;; lang/python/+funcs.el -*- lexical-binding: t; -*-
 
 (defun +jg-personal-toggle-all-defs ()
     (interactive)
@@ -57,4 +57,3 @@ Customize python using PYTHONBREAKPOINT env variable
           (insert trace)
           (insert "\n")
           (python-indent-line)))))
-

@@ -1,6 +1,12 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; lang/python/packages.el
 
+(package! dash)
+(package! s)
+(package! pyenv-mode)
+(package! jg-python-origami :recipe '(:local-repo "~/.doom.d/packages/jg-python-origami"))
+(package! python)
+
 ;; Major modes
 (package! pip-requirements :pin "216cd1690f80cc965d4ae47b8753fc185f778ff6")
 (when (featurep! +cython)

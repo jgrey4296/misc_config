@@ -7,7 +7,6 @@
 (load! "+evil-ex-setup")
 (load! "+helm-funcs")
 (load! "+ibuffer-funcs")
-(load! "+python-funcs")
 (load! "+dired-funcs")
 
 
@@ -100,20 +99,6 @@
 (after! ibuffer
   (add-transient-hook! 'ibuffer-hook '+jg-personal-setup-ibuffer)
   )
-(after! python
-  (setq-default python-indent-offset 4
-                python-indent-guess-indent-offset nil
-                python-shell-interpreter-args "-i"
-                python-shell-interpreter "python"
-                python-shell-completion-native-enable t
-                python-shell-virtualenv-root "~/anaconda3"
-                python-shell--interpreter nil
-                python-shell--interpreter-args nil
-                )
-  (modify-syntax-entry ?_ "w" python-mode-syntax-table)
-  (add-hook 'python-mode-hook #'outline-minor-mode)
-  (+jg-personal-extend-python-map)
-)
 (after! neotree
   (push "^__pycache__$" neo-hidden-regexp-list)
   (push "^G\\(PATH\\|R?TAGS\\)$" neo-hidden-regexp-list)
@@ -122,19 +107,7 @@
 (use-package! helm-gtags
   :defer t)
 
-(after! (dired pyvenv-mode)
-    """ Remove the annoying python-shell-setup advice """
-    (add-transient-hook! 'dired-mode
-      (map! :map dired-mode-map
-        :localleader
-        :n "v" 'pyvenv-activate
-        )
-      )
-    )
-(after! (origami python-origami)
-  (delq (assoc 'python-mode origami-parser-alist) origami-parser-alist)
-  (add-to-list 'origami-parser-alist '(python-mode . +jg-origami-python-parser))
-  )
+
 (after! (featurep! :completion helm)
     (setq! helm-find-files-actions
           (append `(,(car helm-find-files-actions))

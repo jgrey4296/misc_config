@@ -24,7 +24,7 @@
 
 ;;         :n :desc "Toggle Ring Loop" "q" #'(lambda () (interactive) (setq window-ring-can-loop (not window-ring-can-loop)))
 
-;;         :n "{" #'window-ring-shrink-sides
+;;         :n :desc "Shrink Side Wndows" "{" #'window-ring-shrink-sides
 ;;         )
 ;;       )
 

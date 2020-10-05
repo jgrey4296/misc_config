@@ -562,6 +562,9 @@
       "m" #'doom/window-enlargen
       "M" #'doom/window-maximize-buffer
       "b" #'balance-windows
+
+      "{" #'shrink-window-horizontally
+      "}" #'shrink-window
       )
 ;;; <leader> x -- Text
 (map! :leader

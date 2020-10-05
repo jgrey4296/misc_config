@@ -310,7 +310,7 @@
                 )
   (modify-syntax-entry ?_ "w" python-mode-syntax-table)
   (add-hook 'python-mode-hook #'outline-minor-mode)
-  (load! "+bindngs")
+  (load! "+bindings")
 )
 
 (after! (dired pyvenv-mode)

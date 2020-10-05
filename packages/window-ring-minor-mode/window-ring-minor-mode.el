@@ -134,8 +134,13 @@
               (-zip-lists (list leftmost centre rightmost)
                           window-ring-windows)))
       ))
-(defun window-ring-setup-columns (arg &optional soft)
+
+(defun window-ring-setup-columns-command (arg)
   (interactive "p")
+  (window-ring-setup-columns arg)
+  )
+
+(defun window-ring-setup-columns (arg &optional soft)
   ;; (arg == 1 -> one row) (else -> two rows, only use top)
   ;; Clear
   (delete-other-windows)
@@ -154,7 +159,8 @@
     (setq rightmost (split-window-right))
 
     ;; init ring
-    (if (or soft (not window-ring))
+
+    (if (not (and soft window-ring))
         (progn
           (setq window-ring (make-ring window-ring-size))
           (window-ring-add-to-head (buffer-name (current-buffer)))))
@@ -183,6 +189,17 @@
       )
     )
   )
+
+(defun window-ring-shrink-sides (amt)
+  (interactive "NShrink By: ")
+  (with-selected-window (car (last window-ring-windows))
+    (shrink-window-horizontally amt)
+      )
+  (with-selected-window (first window-ring-windows)
+    (shrink-window-horizontally amt)
+    )
+  )
+
 
 (define-minor-mode window-ring-minor-mode
   "A Minor Mode for easy control of a 3-ple view of a ring of buffers"

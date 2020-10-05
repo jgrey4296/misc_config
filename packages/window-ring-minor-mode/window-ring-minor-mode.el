@@ -132,12 +132,9 @@
              (not (member nil (mapcar 'window-live-p window-ring-windows))))
         (mapc #'(lambda (xy) (set-window-buffer (cadr xy) (car xy)))
               (-zip-lists (list leftmost centre rightmost)
-                          window-ring-windows))
-      (setq window-ring-windows '()
-            window-ring nil
-            window-ring-focus 0)
-      )))
-(defun window-ring-setup-columns (arg)
+                          window-ring-windows)))
+      ))
+(defun window-ring-setup-columns (arg &optional soft)
   (interactive "p")
   ;; (arg == 1 -> one row) (else -> two rows, only use top)
   ;; Clear
@@ -157,11 +154,14 @@
     (setq rightmost (split-window-right))
 
     ;; init ring
-    (setq window-ring (make-ring window-ring-size)
-          window-ring-windows (list leftmost centre rightmost))
+    (if (or soft (not window-ring))
+        (progn
+          (setq window-ring (make-ring window-ring-size))
+          (window-ring-add-to-head (buffer-name (current-buffer)))))
+
+    (setq window-ring-windows (list leftmost centre rightmost))
     )
   (balance-windows)
-  (window-ring-add-to-head (buffer-name (current-buffer)))
   (window-ring-redisplay)
   )
 

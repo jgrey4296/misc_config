@@ -4,4 +4,5 @@
   :commands (window-ring-setup-columns window-ring-minor-mode)
   )
 
+(load! "+funcs")
 (load! "+bindings")

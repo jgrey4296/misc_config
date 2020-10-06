@@ -4,9 +4,9 @@
   :commands company-complete-common company-manual-begin company-grab-line
   :hook (doom-first-input . global-company-mode)
   :init
-  (setq company-idle-delay 0.25
-        company-minimum-prefix-length 2
-        company-tooltip-limit 14
+  (setq company-idle-delay 0.5
+        company-minimum-prefix-length 5
+        company-tooltip-limit 10
         company-tooltip-align-annotations t
         company-require-match 'never
         company-global-modes '(not erc-mode message-mode help-mode gud-mode)
@@ -60,11 +60,12 @@
   :config
   (add-to-list 'company-frontends 'company-tng-frontend)
   (define-key! company-active-map
-    "RET"       nil
-    [return]    nil
+    "RET"       #'company-complete-selection
+    [return]    #'company-complete-selection 
     "TAB"       #'company-select-next
     [tab]       #'company-select-next
-    [backtab]   #'company-select-previous))
+    [backtab]   #'company-select-previous
+    [SPC]       nil))
 
 ;;
 ;; Packages

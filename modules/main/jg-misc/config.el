@@ -13,7 +13,7 @@
   :defer t
   :init
   (map! :leader
-        :prefix ("t C" . "Colours")
+        :prefix "t v"
         "r" 'rainbow-mode)
   (add-hook 'prog-mode-hook 'rainbow-mode)
 )

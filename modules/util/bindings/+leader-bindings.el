@@ -456,6 +456,7 @@
        "d" nil
        "v" nil
        "n" nil
+       "C" #'global-company-mode
        (:prefix ("d" . "Debug")
         :desc "Debug on Error" "e" #'toggle-debug-on-error
         :desc "Debug on Var" "v" #'debug-on-variable-change

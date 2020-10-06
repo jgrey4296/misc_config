@@ -117,7 +117,7 @@
   (let* ((at-start (eq 0 window-ring-focus))
          (at-end (eq window-ring-focus (- (ring-length window-ring) 1)))
          (len-one (eq 1 (ring-length window-ring)))
-         (centre (or (ring-ref window-ring window-ring-focus) window-ring-nil-buffer-name))
+         (centre (ring-ref window-ring window-ring-focus))
          (leftmost (if (or len-one (and at-end (not window-ring-can-loop)))
                        window-ring-nil-buffer-name
                      (ring-next window-ring centre)))

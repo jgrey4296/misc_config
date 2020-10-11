@@ -24,3 +24,10 @@
       )
 
 (map! :n "gb" #'avy-pop-mark)
+
+(map! :after flycheck
+      :map flycheck-error-list-mode-map
+      :n "\\" #'tabulated-list-sort
+      )
+
+(add-hook 'tabulated-list-mode-hook 'turn-off-evil-snipe-mode)

@@ -10,7 +10,7 @@
 )
 (use-package! org-ref
   :defer t
-  :commands (org-ref-bibtex-hydra/body)
+  :commands (org-ref-bibtex-hydra/body org-ref-bibtex-new-entry/body)
   :init
 
   )

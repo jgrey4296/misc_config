@@ -15,6 +15,7 @@
 (defun window-ring-add-current-buffer ()
   (interactive)
   (window-ring-add-to-head (buffer-name (current-buffer)))
+  (window-ring-redisplay)
   )
 (defun window-ring-add-to-head (&optional buffer)
   (interactive)
@@ -35,10 +36,11 @@
             )
       ;; Set buffer-local background
       (with-current-buffer buff-name
+        (message "REMAPPING: %s : %s" window-ring-background-index (nth window-ring-background-index window-ring-background-color-options))
         (face-remap-set-base 'default :background (nth window-ring-background-index window-ring-background-color-options))
         )
       (cl-incf window-ring-background-index)
-      (if (>= window-ring-background-index (length window-ring-background-color-options))
+      (if (<= (length window-ring-background-color-options) window-ring-background-index)
           (setq window-ring-background-index 0))
 
       )
@@ -51,8 +53,12 @@
 
 (defun window-ring-clear-ring ()
   (interactive)
-  (setq window-ring (make-ring window-ring-size))
-  (window-ring-add-to-head (buffer-name (current-buffer))))
+  (setq window-ring (make-ring window-ring-size)
+        window-ring-background-index 0
+        )
+  (window-ring-add-to-head (buffer-name (current-buffer)))
+  (window-ring-redisplay)
+)
 (defun window-ring-pop-buffer (arg)
   (interactive "p")
   (if (eq arg 4)
@@ -68,6 +74,7 @@
     ;; else pop the most recent
     (ring-remove window-ring 0)
     )
+  (window-ring-redisplay)
   )
 
 (defun window-ring-remove-buffer (&optional buff-name)
@@ -76,7 +83,10 @@
          (mem (if window-ring (ring-member window-ring buff) nil)))
     (if mem
         (progn (message "Removing: %s" mem)
-               (ring-remove window-ring mem)))))
+               (ring-remove window-ring mem))))
+  (if (not buff-name)
+      (window-ring-redisplay))
+)
 
 
 (defun window-ring-move-perspective (arg)
@@ -125,7 +135,7 @@
                         window-ring-nil-buffer-name
                       (ring-previous window-ring centre)))
          )
-    ;;Assign to the column windows
+    ;; Assign to the column windows
     ;; If cant loop, pad leftmost and rightmost with empy buffers
     (message "Trio: %s -> %s -> %s" leftmost centre rightmost)
     (if (and (eq (length window-ring-windows) 3)
@@ -133,6 +143,7 @@
         (mapc #'(lambda (xy) (set-window-buffer (cadr xy) (car xy)))
               (-zip-lists (list leftmost centre rightmost)
                           window-ring-windows)))
+    (select-window (nth 1 window-ring-windows))
       ))
 
 (defun window-ring-setup-columns-command (arg)
@@ -214,7 +225,7 @@
                 window-ring nil
                 window-ring-nil-buffer-name "*Window-Ring Buffer*"
                 window-ring-background-index 0
-                window-ring-background-color-options '("gray11" "gray13" "gray15" "gray17" "gray19" "gray21" "gray23" "gray25")
+                window-ring-background-color-options '("gray19" "lemonchiffon4")
               )
   (get-buffer-create window-ring-nil-buffer-name)
   (add-hook 'kill-buffer-hook #'window-ring-remove-buffer)

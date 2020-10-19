@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: super
+# uuid:
+# key: super
+# condition: t
+# --
+super(Parent, self).__init__(value, **kwargs)

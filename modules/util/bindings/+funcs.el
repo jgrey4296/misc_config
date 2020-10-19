@@ -91,6 +91,16 @@
     )
   )
 
+(defun +jg-ibuffer-filter-setup ()
+  (interactive)
+  (ibuffer-clear-filter-groups)
+  (ibuffer-filter-disable)
+
+  ;; Use +jg-ibuffer-defaults
+  (ibuffer-projectile-set-filter-groups)
+  (ibuffer-add-saved-filters "default")
+  )
+
 ;;;###autoload
 (defun jg-toggle-narrow-buffer (arg)
   "Narrow the buffer to BEG END. If narrowed, widen it.

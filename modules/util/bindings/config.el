@@ -61,3 +61,7 @@
         :localleader
         :n "h" #'counsel-shell-history)
   )
+
+(after! ibuffer
+  (add-hook 'ibuffer-mode-hook #'+jg-ibuffer-filter-setup)
+  )

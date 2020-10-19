@@ -27,7 +27,10 @@
 
 (map! :after flycheck
       :map flycheck-error-list-mode-map
-      :n "\\" #'tabulated-list-sort
+      "," nil
+      :n "," #'tabulated-list-sort
+      :n "{" #'tabulated-list-narrow-current-column
+      :n "}" #'tabulated-list-widen-current-column
       )
 
 (add-hook 'tabulated-list-mode-hook 'turn-off-evil-snipe-mode)

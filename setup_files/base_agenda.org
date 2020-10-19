@@ -140,7 +140,7 @@
 ** Programming
 *** [[file:~/github/writing/orgfiles/trie_layer.org][Trie-layer]]
 *** Python
-**** TODO [[/Users/jgrey/github/py_rule][Python Rule Language and Engine]]                                       :python:important:todo:meta:simulation:institutions:exclusion_logic:library:parsing:production_system:rules:
+**** TODO [[/github/py_rule][Python Rule Language and Engine]]                                       :python:important:todo:meta:simulation:institutions:exclusion_logic:library:parsing:production_system:rules:
 ***** Recap current language capabilities
 ***** integrate layer architecture
 ***** TODO implement type checking?
@@ -171,11 +171,11 @@
       physical constraint / action
 
 **** [[file:~/github/writing/orgfiles/cairo_pipe.org::*Cairo%20Pipeline][Cairo Pipeline]]
-**** [[/Users/jgrey/github/languageLearning/python/misc_tests/heuristicRBTreeWeighting][Heuristic Tree Weighting]]                                                   :python:obsolete:incomplete:old:
+**** [[/github/languageLearning/python/misc_tests/heuristicRBTreeWeighting][Heuristic Tree Weighting]]                                                   :python:obsolete:incomplete:old:
 *** Javascript / Web
-**** [[/Users/jgrey/github/languageLearning/graphical/javascript/mordor-alike][Mordor Like Idea]]                                                           :nemesis:mordor:javascript:obsolete:incomplete:grammar:
-**** TODO [[/Users/jgrey/github/js_newspaper][Newspaper Generator]]                                                   :javascript:generative:front_end:newspaper:web:procedural:
-**** [[/Users/jgrey/github/js_hexagon_ai][Hexagon Board / AI Test]]                                                    :front_end:incomplete:javascript:old:parsing:web:
+**** [[/github/languageLearning/graphical/javascript/mordor-alike][Mordor Like Idea]]                                                           :nemesis:mordor:javascript:obsolete:incomplete:grammar:
+**** TODO [[/github/js_newspaper][Newspaper Generator]]                                                   :javascript:generative:front_end:newspaper:web:procedural:
+**** [[/github/js_hexagon_ai][Hexagon Board / AI Test]]                                                    :front_end:incomplete:javascript:old:parsing:web:
 *** Prolog                                                                      :todo:programming:institutions:ASP:tutorial:
 **** look at Bath Institutional ASP
 **** [[file:~/github/otherLibs/instal-stable][InSTaL]]
@@ -193,7 +193,7 @@
 *** Haskell                                                                     :monads:theory:programming:haskell:
 **** look at implementation of monad transformers
 *** To Clean
-**** [[/Users/jgrey/github/languageLearning/graphical/javascript/happiton][Happiton]]                                                                   :python:directory:hofstadter:
+**** [[/github/languageLearning/graphical/javascript/happiton][Happiton]]                                                                   :python:directory:hofstadter:
 *** Prototypes
 **** Hex Board -> Preact
 **** Battle System
@@ -223,7 +223,7 @@
 **** [[file:~/github/otherLibs/cathoristic-logic][Cathoristic Logic]]                                                          :directory:haskell:logic:praxis:exclusion_logic:
 **** [[file:~/github/writing/orgfiles/machine_learning.org::*Machine Learning Notes][Machine Learning Notes]]
 ** Datasets
-*** [[file:/Users/jgrey/github/writing/other_files/main_bookmarks.html][Bookmarks]]                                                                   :web:html:bookmarks:directory:
+*** [[file:/github/writing/other_files/main_bookmarks.html][Bookmarks]]                                                                   :web:html:bookmarks:directory:
     treat these as codings?
 *** DONE Bookmark and saved twitter parsing
     CLOSED: [2019-09-23 Mon 18:25]
@@ -250,7 +250,7 @@
 **** helm access
 *** Code
 **** Monroe Domain Plans
-**** [[file:/Users/jgrey/Mega/code_backups/shop2random.lisp][Shop2 Plan generator]]
+**** [[file:/Mega/code_backups/shop2random.lisp][Shop2 Plan generator]]
 **** [[file:~/Mega/code_backups/netlogo/Evolution_of_Norms][Evolution of Norms]]                                                         :norms:netlogo:
 **** [[file:~/Mega/code_backups/netlogo/Social_Norms_(Emperor's_Dilemma)][Social Norms / Emperor's Dilemma]]                                           :norms:netlogo:
 **** Chuck Examples                                                             :nytimes:chuck:
@@ -265,11 +265,11 @@
      [[https://github.com/daterre/Cradle#importing-a-story][Cradle Converter on Github]]
 **** CiF
 ***** Rules
-      [[file:/Users/jgrey/Mega/Datasets/gameData/CiFStates][CiF States]]
+      [[file:/Mega/Datasets/gameData/CiFStates][CiF States]]
 ***** Level Traces
-      [[file:/Users/jgrey/Mega/Datasets/gameData/CifLevelTrace][Level Trace Storage]]
+      [[file:/Mega/Datasets/gameData/CifLevelTrace][Level Trace Storage]]
 ***** Prom Week Speech Acts
-      [[file:/Users/jgrey/Mega/Datasets/compressed/speech_acts/prom_week_dialogue_annotated_for_speech_acts.tsv][prom week dialogue annotated for speech acts]]
+      [[file:/Mega/Datasets/compressed/speech_acts/prom_week_dialogue_annotated_for_speech_acts.tsv][prom week dialogue annotated for speech acts]]
 **** Versu
      [[file:~/Mega/code_backups/cotillion.zip][Cotillion Zip]]
 
@@ -787,7 +787,7 @@
 *** TODO Get Castelfranchi: Behavioral Implicit Communication                   :look_into:
 *** TODO Vignettes
 *** TODO [[https://ncase.me/remember/][Spaced Repetition]]
-*** TODO [[/Users/jgrey/Mega/Images/misc_research_images/alien_behave.png][Alien Behaviour Tree]]
+*** TODO [[/Mega/Images/misc_research_images/alien_behave.png][Alien Behaviour Tree]]
 *** [[http://ifaamas.org/Proceedings/aamas2018/forms/contents.htm][AAMAS Proceedings]]                                                           :papers:MAS:look_into:conference:
 *** [[http://defeasible.org/][Defeasible Logic]]                                                            :logic:
 *** [[file:~/github/otherLibs/Bidirectional][Bidirectional Type Checking Haskell]]                                         :directory:haskell:type_inference:
@@ -826,3 +826,4 @@
 *** TODO unit institution
 *** TODO performative outputs
 *** TODO make bookmarks helm output to a list sorted by year, grouped by author...
+*** Where to go for what was said about whom and when.

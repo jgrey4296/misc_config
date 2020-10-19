@@ -7,7 +7,6 @@
 
 (load! "+org-funcs")
 (load! "+org-pomodoro-funcs")
-(load! "+bindings")
 
 (use-package! academic-phrases
   :defer t
@@ -31,8 +30,9 @@
    )
 
   (push 'org-indent-mode minor-mode-list)
-  (setq jg-org-map (make-sparse-keymap))
-  
+  (push '("Scholar" . "https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q=%s") org-link-abbrev-alist)
+
+  (load! "+bindings")
   )
 (after! org-pomodoro
   ;; add a startup hook for pomodoro to tweet the end time
@@ -46,6 +46,10 @@
   (setq org-projectile-capture-template "** TODO [[%F::%(with-current-buffer (org-capture-get :original-buffer) (number-to-string (line-number-at-pos)))][%?]]\n\t%t\n\t
 %(with-current-buffer (org-capture-get :original-buffer) (buffer-substring (line-beginning-position) (line-end-position)))\n")
   )
+
+
+
+
 (after! org-superstar
   (setq org-hide-leading-stars t)
   )

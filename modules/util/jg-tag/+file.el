@@ -51,7 +51,7 @@ If preferred-length is not specified, use jg-tag-preferred-linecount-for-org
   )
 (defun jg-tag-move-links ()
   " Go through all links in a file,
-and either copy, or move, the the referenced file to a new location
+and either copy, or move, the referenced file to a new location
 Prefix-arg to move the file otherwise copy it
 "
   (interactive)

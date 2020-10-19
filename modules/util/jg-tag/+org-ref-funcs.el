@@ -52,8 +52,6 @@ the entry of interest in the bibfile.  but does not check that."
         (progn (message optfile)
                (org-link-open-from-string (format "[[file:%s]]" optfile)))))))
 
-
-
 (defun +jg-org-ref-search-scholar (pre)
   (interactive "p")
   (message "P: %s" pre)

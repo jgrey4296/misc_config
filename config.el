@@ -37,6 +37,7 @@
       highlight-indent-guides-suppress-auto-error t
       outline-blank-line nil
       line-move-ignore-invisible t
+      ibuffer-old-time 2
       )
 
 (progn

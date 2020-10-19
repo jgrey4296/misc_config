@@ -9,8 +9,6 @@
 ;;
 
 
-
-
 ;; Add-to-list most-recent/oldest
 (defun window-ring-add-current-buffer ()
   (interactive)
@@ -79,13 +77,15 @@
 
 (defun window-ring-remove-buffer (&optional buff-name)
   (interactive)
-  (let* ((buff (if buff-name buff-name (buffer-name (current-buffer))))
-         (mem (if window-ring (ring-member window-ring buff) nil)))
-    (if mem
-        (progn (message "Removing: %s" mem)
-               (ring-remove window-ring mem))))
-  (if (not buff-name)
-      (window-ring-redisplay))
+  (if window-ring-minor-mode
+      (let* ((buff (if buff-name buff-name (buffer-name (current-buffer))))
+             (mem (if window-ring (ring-member window-ring buff) nil)))
+        (if mem
+            (progn (message "Removing: %s" mem)
+                   (ring-remove window-ring mem)))
+        (if (not buff-name)
+            (window-ring-redisplay)))
+    )
 )
 
 
@@ -148,6 +148,7 @@
 
 (defun window-ring-setup-columns-command (arg)
   (interactive "p")
+  (window-ring-minor-mode 1)
   (window-ring-setup-columns arg)
   )
 

@@ -2,8 +2,8 @@
 
 (global-set-key (kbd "C-c [") '+jg-personal-insert-lparen)
 (global-set-key (kbd "C-c ]") '+jg-personal-insert-rparen)
-
 (map! :g "C-x h" help-map)
+
 
 (map! :after (featurep! :editor evil)
  :m "TAB" nil
@@ -12,7 +12,10 @@
 
 (map! :after evil
       :map evil-motion-state-map
-      "\\" nil)
+      "\\" nil
+      "] RET" #'jg-narrowing-move-focus-forward
+      "[ RET" #'jg-narrowing-move-focus-backward
+)
 
 (map! :after ibuffer
       :mode ibuffer-mode

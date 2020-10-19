@@ -156,3 +156,16 @@ Dedicated (locked) windows are left untouched."
 Dedicated (locked) windows are left untouched."
   (interactive "p")
   (spacemacs/rotate-windows-forward (* -1 count)))
+
+(defun jg-narrowing-move-focus-backward (arg)
+  (interactive "p")
+  (jg-narrowing-move-focus-forward(- arg))
+  )
+(defun jg-narrowing-move-focus-forward (arg)
+  (interactive "p")
+  (widen)
+  (evil-forward-section-begin arg)
+  (let ((bounds (+evil:defun-txtobj)))
+    (narrow-to-region (car bounds) (cadr bounds))
+    )
+  )

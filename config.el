@@ -15,7 +15,7 @@
 (prefer-coding-system 'utf-8)
 
 (setq +doom-quit-messages nil
-      auto-save-file-name-transforms (quote ((".*" "~/.emacs.d/autosaves/`" t)))
+      ;; auto-save-file-name-transforms (quote ((".*" "~/.emacs.d/autosaves/`" t)))
       backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/")))
       dired-omit-files "^\\.?#\\|^\\.$\\|^\\.DS_Store$\\|^\\.git$\\|^__pycache__$\\|^flycheck__.+\\.py\\|^\\.mypy_cache$"
       dired-omit-verbose nil
@@ -48,7 +48,7 @@
 ;; TODO: figure this out:
 ;; (push '("Scholar" "https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q=%s") +lookup-provider-url-alist)
 (smartparens-global-mode 0)
-(window-ring-minor-mode)
+;;(window-ring-minor-mode)
 ;; (global-whitespace-mode)
 
 ;; There are two ways to load a theme. Both assume the theme is installed and

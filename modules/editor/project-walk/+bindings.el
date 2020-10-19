@@ -1,13 +1,12 @@
 ;;; editor/project-walk/+bindings.el -*- lexical-binding: t; -*-
 
-;; (map! :after project-walk
-;;       :leader
-;;       (:prefix "p"
-;;        "W" :desc "Project Walk" #'project-walk-minor-mode
-;;        "n" :desc "Walk to next" #'project-walk-next
-;;        )
-;;       )
-
-(doom--define-leader-key :infix "p"
-                         "W" :desc "Project Walk" #'project-walk-minor-mode
-                         "n" :desc "Walk to next" #'project-walk-next)
+(map! :leader
+      :prefix "p"
+       :desc "Project Walk" "W" #'project-walk-minor-mode
+       :desc "Walk to next" "n" #'project-walk-next
+       (:prefix ("w" . "Project Walk..")
+        :desc "Project Remaining Num" "r" #'project-walk-num
+        :desc "Project Remaining" "R" #'project-walk-remaining
+        :desc "Project Filter" "f" #'project-walk-filter
+        )
+      )

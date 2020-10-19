@@ -18,13 +18,9 @@
  :util
  char-insert
  (bindings +bindings)
-
- :main
- (jg-personal +active)
- jg-misc
- jg-org
- jg-org-unit-test
  jg-tag
+ jg-misc
+ jg-org-unit-test
 
  ;; :domain-specific
  ;; logic
@@ -37,7 +33,11 @@
  ;; jg-states
  ;; overlay_control
  window-control
+ (jg-personal +active)
+ project-walk
 
+ :lang
+ jg-org
                                         ; Generic Modules
  :completion
  company             ; the ultimate code completion backend

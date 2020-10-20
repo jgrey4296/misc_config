@@ -24,19 +24,27 @@
           (t t)
           )
     )
+
+(defun project-walk-keep-p (filename)
+  (if (s-contains? project-walk-filter-name (f-filename filename))
+      filename
+    nil)
   )
 
 
 (defun project-walk-filter (arg)
   (interactive "p")
-  (cond ((eq arg 0) (message "Reminder: 1: Normal, 2: Filter Name, 3: Filter Ext, 4: Filter Dir"))
+  (cond ((eq arg 0) (message "Reminder: 1: Normal, 2: Filter Name, 3: Filter Ext, 4: Filter Dir, 5: Keep"))
         ((eq arg 2) (setq project-walk-filter-name (read-string "Filename Part to Filter: ")))
         ((eq arg 3) (setq project-walk-ext (read-string "File ext to Ignore: ")))
         ((eq arg 4) (setq project-walk-filter-dir (read-string "Dir Part to Filter: ")))
+        ((eq arg 5) (setq project-walk-filter-name (read-string "Keep name: ")))
         )
-  (if (not (eq 0 arg))
-      (setq project-walk-list (-filter 'project-walk-filter-p project-walk-list)))
-)
+  (cond ((eq arg 5) (setq project-walk-list (-keep 'project-walk-keep-p project-walk-list)))
+        ((> arg 0)  (setq project-walk-list (-filter 'project-walk-filter-p project-walk-list)))
+        (t nil)
+        )
+  )
 
 (defun project-walk-next ()
   (interactive)

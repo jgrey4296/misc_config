@@ -67,6 +67,8 @@
       (name . "->"))
      ("default"
       (not or
+           (used-mode . magit-process-mode)
+           (used-mode . magit-diff-mode)
            (used-mode . flycheck-error-list-mode)
            (used-mode . helm-major-mode)
            (used-mode . helpful-mode)

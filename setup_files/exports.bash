@@ -4,8 +4,7 @@ PATH=/usr/local/sbin:$PATH
 PATH=/usr/local/bin:$PATH
 PATH=/Applications/SuperCollider:$PATH
 PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
-PATH=/usr/local/go/bin:$PATH
-
+PATH=/usr/local/opt/make/libexec/gnubin:$PATH
 # Doom
 PATH=~/.emacs.d/bin/:$PATH
 

@@ -6,7 +6,7 @@
       :ng ")" #'dired-git-info-mode
       :n "o" #'dired-find-file-other-window
       :n "S" #'hydra-dired-quick-sort/body
-      (:when (featurep! :main jg-personal)
+      (:when (featurep! :editor jg-personal)
         :n "i" #'+jg-personal-dired-insert-subdir-maybe-recursive
         :n "DEL" #'dired-kill-subdir
        (:localleader
@@ -17,7 +17,7 @@
          )
         )
        )
-      (:when (featurep! :main jg-tag)
+      (:when (featurep! :util jg-tag)
        :localleader
        (:prefix "d"
           :desc "Count Untagged Orgs" "u" #'jg-tag-dired-directory-count-untagged

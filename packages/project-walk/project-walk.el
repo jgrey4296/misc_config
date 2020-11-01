@@ -4,7 +4,20 @@
 
 (defun project-walk-init ()
   (interactive)
-  (setq project-walk-list (projectile-project-files (projectile-project-root)))
+  (let* ((current (projectile-project-root))
+         (files (-map #'(lambda (x) (f-join current x))
+                      (projectile-project-files current))))
+    (setq project-walk-list files)
+    )
+  )
+
+(defun project-walk-directory-init ()
+  (interactive)
+  (let* ((current (helm-current-directory))
+         (files (-map #'(lambda (x) (f-join current x))
+                      (projectile-project-files current))))
+    (setq project-walk-list files)
+    )
   )
 
 (defun project-walk-filter-p (filename)

@@ -8,6 +8,13 @@
 ;; Be able to move to the most-recent, oldest, or along the list
 ;;
 
+;; To expand to vertical:
+;; Add to ring means add a ring to the ring, and add buffer there
+
+;; Ring_prime [ Sub-Ring1[a b ] Sub-Ring2[c d ] Sub-Ring3[e f ]]
+
+;; Control: Add to new sub-ring, or add to top of current sub-ring
+;; Display: 3 columns, middle column divided in 3
 
 ;; Add-to-list most-recent/oldest
 (defun window-ring-add-current-buffer ()
@@ -77,14 +84,14 @@
 
 (defun window-ring-remove-buffer (&optional buff-name)
   (interactive)
-  (if window-ring-minor-mode
+  (if (and window-ring-minor-mode window-ring)
       (let* ((buff (if buff-name buff-name (buffer-name (current-buffer))))
              (mem (if window-ring (ring-member window-ring buff) nil)))
         (if mem
             (progn (message "Removing: %s" mem)
-                   (ring-remove window-ring mem)))
-        (if (not buff-name)
-            (window-ring-redisplay)))
+                   (ring-remove window-ring mem)
+                   (if (not buff-name)
+                       (window-ring-redisplay)))))
     )
 )
 

@@ -98,6 +98,7 @@
   )
 (after! ibuffer
   (add-transient-hook! 'ibuffer-hook '+jg-personal-setup-ibuffer)
+  (push 'ibuffer-mode evil-snipe-disabled-modes)
   )
 (after! neotree
   (push "^__pycache__$" neo-hidden-regexp-list)

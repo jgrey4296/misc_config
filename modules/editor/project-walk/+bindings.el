@@ -8,5 +8,12 @@
         :desc "Project Remaining Num" "r" #'project-walk-num
         :desc "Project Remaining" "R" #'project-walk-remaining
         :desc "Project Filter" "f" #'project-walk-filter
+        :desc "Directory Walk" "d" #'project-walk-directory-init
         )
+      )
+
+(map! :leader
+      :prefix "s"
+      :desc "Replace in Project" "r" #'projectile-replace
+      :desc "Replace Regexp in Project" "R" #'projectile-replace-regexp
       )

@@ -56,11 +56,9 @@
   (load! "+leaderless-bindings")
 )
 
-(eval-after-load 'shell
-  (map! :map shell-mode-map
-        :localleader
-        :n "h" #'counsel-shell-history)
-  )
+(map! :map shell-mode-map
+      :localleader
+      :n "h" #'counsel-shell-history)
 
 (after! ibuffer
   (add-hook 'ibuffer-mode-hook #'+jg-ibuffer-filter-setup)

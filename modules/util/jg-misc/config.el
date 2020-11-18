@@ -51,3 +51,4 @@
   )
 
 (load! "+funcs")
+(load! "+bindings")

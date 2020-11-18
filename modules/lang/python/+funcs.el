@@ -53,11 +53,13 @@ Customize python using PYTHONBREAKPOINT env variable
   (setq-local outline-regexp
               (python-rx (or (: line-start (>= 2 eol))
                              (: line-start ?#)
+                             (: line-start upper)
                              (: (* space) block-start)
                              (: (* space) ?@)
                              ))
               )
   )
+
 
 (defun +python-use-correct-flycheck-executables-h ()
       "Use the correct Python executables for Flycheck."
@@ -90,3 +92,7 @@ Customize python using PYTHONBREAKPOINT env variable
                (not (delq (current-buffer)
                           (doom-buffers-in-mode 'python-mode (buffer-list)))))
       (anaconda-mode-stop)))
+
+(defun +python-auto-kill-hook-fn ()
+    (add-hook 'kill-buffer-hook #'+python-auto-kill-anaconda-processes-h
+              nil 'local))

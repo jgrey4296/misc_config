@@ -86,9 +86,7 @@
   (set-popup-rule! "^\\*anaconda-mode" :select nil)
 
   (add-hook 'anaconda-mode-hook #'anaconda-eldoc-mode)
-  (add-hook! 'python-mode-hook
-    (add-hook 'kill-buffer-hook #'+python-auto-kill-anaconda-processes-h
-              nil 'local))
+  (add-hook! 'python-mode-hook #'+python-auto-kill-hook-fn)
 
   (when (featurep 'evil)
     (add-hook 'anaconda-mode-hook #'evil-normalize-keymaps))
@@ -156,6 +154,15 @@
         "T" #'python-pytest-function
         "r" #'python-pytest-repeat
         "p" #'python-pytest-popup))
+
+(use-package! blacken
+
+  )
+
+(use-package! python-black
+  :after python
+  (add-hook! 'python-mode-hook #'python-black-on-save-mode)
+  )
 
 ;;
 ;;; Environment management

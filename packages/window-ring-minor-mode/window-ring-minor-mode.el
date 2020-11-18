@@ -83,6 +83,7 @@
   )
 
 (defun window-ring-remove-buffer (&optional buff-name)
+  " Remove the current buffer from the ring "
   (interactive)
   (if (and window-ring-minor-mode window-ring)
       (let* ((buff (if buff-name buff-name (buffer-name (current-buffer))))
@@ -95,6 +96,22 @@
     )
 )
 
+(defun window-ring-replace-buffer(&optional buff-name)
+  " Replace the current central window's buffer with the current buffer "
+  (interactive)
+ (if (and window-ring-minor-mode window-ring)
+      (let* ((buff (if buff-name buff-name (buffer-name (current-buffer))))
+             (mem (if window-ring (ring-member window-ring buff) nil))
+             (centre (ring-ref window-ring window-ring-focus))
+             (ring-list (ring-elements window-ring)))
+        (if (not mem)
+            (progn
+              (setf (nth (position centre ring-list :test 's-equals?) ring-list) buff)
+              (setq window-ring (ring-convert-sequence-to-ring ring-list)))
+          )
+        )
+   )
+ )
 
 (defun window-ring-move-perspective (arg)
   (interactive "p")

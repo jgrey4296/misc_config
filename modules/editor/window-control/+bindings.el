@@ -19,7 +19,8 @@
 
         :n :desc "Window Ring soft Reset" "s" #'+window-ring-block-reset
         :n :desc "Window Ring Hard Reset" "S" #'window-ring-setup-columns-command
-        :n :desc "Remove Current Buffer""r" #'window-ring-remove-buffer
+        :n :desc "Remove Current Buffer" "R" #'window-ring-remove-buffer
+        :n :desc "Replace with Buffer" "r" #'window-ring-replace-buffer
 
         :n :desc "Toggle Ring Loop" "q" #'(lambda () (interactive) (setq window-ring-can-loop (not window-ring-can-loop)))
 

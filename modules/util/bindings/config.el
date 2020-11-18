@@ -56,9 +56,13 @@
   (load! "+leaderless-bindings")
 )
 
-(map! :map shell-mode-map
-      :localleader
-      :n "h" #'counsel-shell-history)
+
+;; (general-define-key :states
+;;                     '(normal visual motion emacs insert)
+;;                     :major-modes t :prefix doom-localleader-key :non-normal-prefix doom-localleader-alt-key :states 'normal :keymaps
+;;                     '(shell-mode-map)
+;;                     "h" #'counsel-shell-history)
+
 
 (after! ibuffer
   (add-hook 'ibuffer-mode-hook #'+jg-ibuffer-filter-setup)

@@ -114,7 +114,8 @@
        :desc "LSP Execute code action"             "a" #'eglot-code-actions
        :desc "LSP Rename"                          "r" #'eglot-rename
        :desc "LSP Find declaration"                "j" #'eglot-find-declaration)
-      )
+      :desc "Macro Expand"                         "m" #'pp-macroexpand-last-sexp
+)
 ;;; <leader> f --- file
 (map! :leader
       :prefix-map ("f" . "file")

@@ -148,6 +148,12 @@
 
 (defun window-ring-redisplay ()
   (interactive)
+  (if (eq (length window-ring-windows)
+          (length (-remove 'not (mapcar 'window-valid-p window-ring-windows))))
+      (window-ring-redisplay-unguarded)
+      ))
+
+(defun window-ring-redisplay-unguarded ()
   (let* ((at-start (eq 0 window-ring-focus))
          (at-end (eq window-ring-focus (- (ring-length window-ring) 1)))
          (len-one (eq 1 (ring-length window-ring)))
@@ -172,13 +178,15 @@
 
 (defun window-ring-setup-columns-command (arg)
   (interactive "p")
-  (window-ring-minor-mode 1)
   (window-ring-setup-columns arg)
   )
 
 (defun window-ring-setup-columns (arg &optional soft)
   ;; (arg == 1 -> one row) (else -> two rows, only use top)
   ;; Clear
+  (if (not window-ring-minor-mode)
+      (window-ring-minor-mode 1))
+
   (delete-other-windows)
   (let ((leftmost (selected-window))
         centre rightmost)
@@ -199,7 +207,9 @@
     (if (not (and soft window-ring))
         (progn
           (setq window-ring (make-ring window-ring-size))
-          (window-ring-add-to-head (buffer-name (current-buffer)))))
+          (window-ring-add-to-head (buffer-name (current-buffer))))
+      (message "Soft window-ring reset")
+      )
 
     (setq window-ring-windows (list leftmost centre rightmost))
     )

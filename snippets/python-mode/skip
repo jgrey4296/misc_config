@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: skip
+# uuid: skip
+# key: skip
+# condition: t
+# --
+@unittest.skip("$0")

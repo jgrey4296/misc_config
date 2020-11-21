@@ -87,7 +87,7 @@ Can operate on regions of headings """
   (let ((candidates (helm-marked-candidates)))
     (with-helm-current-buffer
       ;;substring -2 to chop off separating marks
-      (insert (mapconcat (lambda (x) (format "[[%s][%s]]" (substring x 0 -2) (substring x 0 -2))) candidates "\n")))))
+      (insert (mapconcat (lambda (x) (format "[[%s][%s]]    : %s" (plist-get x :url) (plist-get x :url) (plist-get x :tags))) candidates "\n")))))
 (defun jg-tag-grep-filter-one-by-one (candidate)
         "A Grep modification for bookmark helm to extract a bookmark's url and tags"
         (if (consp candidate)
@@ -101,9 +101,9 @@ Can operate on regions of headings """
            ;; The Actual Line:
            (str    (nth 2 split))
            (sub    (substring str (or (s-index-of "HREF=" str) 0)))
-           (tag_index (s-index-of "TAGS=" sub))
-           (url (substring sub (string-width "HREF=\"") tag_index))
-           (tags (substring sub (+ (string-width "HREF=\"") (or tag_index 0)) (s-index-of ">" sub)))
+           (tag_index (s-index-of "TAGS=\"" sub))
+           (url (substring sub (string-width "HREF=\"") (- tag_index 2)))
+           (tags (substring sub (+ (string-width "HREF=\"") (or tag_index 0)) (s-index-of "\">" sub)))
            (chopped_tags (substring tags 0 (min 50 (string-width tags))))
            (norm_tags (s-append (s-repeat (- 50 (string-width chopped_tags)) " ") chopped_tags))
            )

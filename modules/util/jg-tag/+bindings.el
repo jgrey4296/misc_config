@@ -93,3 +93,6 @@
                     "p" #'+jg-org-ref-open-bibtex-pdf
                     "s" #'+jg-org-ref-search-scholar
 )
+
+(map! :map helm-map
+      "M-SPC" #'helm-next-page)

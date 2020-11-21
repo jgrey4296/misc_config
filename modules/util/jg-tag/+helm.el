@@ -3,7 +3,7 @@
 (defun jg-tag-open-url-action (x)
   " An action added to helm-grep for loading urls found in bookmarks "
   (let* ((marked (helm-marked-candidates))
-         (no-props (mapcar (lambda (x) (substring-no-properties x 0 (length x))) marked))
+         (no-props (mapcar (lambda (x) (plist-get x :url)) marked))
          link-start-point
          )
     (with-temp-buffer
@@ -33,7 +33,7 @@
   (evil-local-set-key 'normal
                       (kbd "C-c C-C") 'jg-tag-tweet-link-finish)
   (insert "\n")
-  (insert candidate)
+  (insert (plist-get candidate :url))
   (redraw-display)
   )
 (defun jg-tag-tweet-link-finish ()
@@ -74,6 +74,14 @@ Can operate on regions of headings """
     (with-helm-current-buffer
       ;;Substring -2 to chop off separating marks
       (insert (mapconcat (lambda (x) (substring x 0 -2)) candidates "\n")))))
+(defun jg-tag-insert-bookmarks (x)
+ (let ((candidates (helm-marked-candidates)))
+    (with-helm-current-buffer
+      ;;Substring -2 to chop off separating marks
+      (insert (mapconcat (lambda (x) (concat (plist-get x :url)
+                                             " : \n"
+                                             (plist-get x :tags)))
+                         candidates "\n\n")))))
 (defun jg-tag-insert-links (x)
   "Helm action to insert selected candidates formatted as org links"
   (let ((candidates (helm-marked-candidates)))
@@ -81,8 +89,8 @@ Can operate on regions of headings """
       ;;substring -2 to chop off separating marks
       (insert (mapconcat (lambda (x) (format "[[%s][%s]]" (substring x 0 -2) (substring x 0 -2))) candidates "\n")))))
 (defun jg-tag-grep-filter-one-by-one (candidate)
-  "A Grep modification for bookmark helm to extract a bookmark's url and tags"
-  (if (consp candidate)
+        "A Grep modification for bookmark helm to extract a bookmark's url and tags"
+        (if (consp candidate)
       ;; Already computed do nothing (default as input).
       candidate
     (let* ((line   (helm--ansi-color-apply candidate))
@@ -99,10 +107,13 @@ Can operate on regions of headings """
            (chopped_tags (substring tags 0 (min 50 (string-width tags))))
            (norm_tags (s-append (s-repeat (- 50 (string-width chopped_tags)) " ") chopped_tags))
            )
-      (cons (concat (propertize norm_ln 'face 'helm-grep-lineno)
-                    (propertize (concat ": " norm_tags) 'face 'rainbow-delimiters-depth-3-face)
-                    (propertize (concat ": " url) 'face 'rainbow-delimiters-depth-1-face))
-            (or url line))
+      `(,(concat (propertize norm_ln 'face 'helm-grep-lineno)
+                 (propertize (concat ": " norm_tags) 'face 'rainbow-delimiters-depth-3-face)
+                 (propertize (concat ": " url) 'face 'rainbow-delimiters-depth-1-face))
+        :url ,url
+        :tags ,tags
+        :line ,line
+        )
       )
     )
   )
@@ -344,7 +355,7 @@ governed by the variable `bibtex-completion-display-formats'."
   (setq jg-tag-bookmark-helm-source
         (helm-make-source "Bookmark Helm" 'helm-grep-class
           :action (helm-make-actions "Open Url" 'jg-tag-open-url-action
-                                     "Insert"   'jg-tag-insert-candidates
+                                     "Insert"   'jg-tag-insert-bookmarks
                                      "Insert Link" 'jg-tag-insert-links
                                      "Tweet Link"  'jg-tag-tweet-link-action
                                      )

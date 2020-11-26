@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name:  basic_imports
+# uuid:
+# key: basic_imports
+# condition: t
+# --
+from copy import deepcopy
+from dataclasses import dataclass, field, InitVar, replace
+from fractions import Fraction
+from re import Pattern
+from uuid import uuid1, UUID
+from weakref import ref
+import logging as root_logger

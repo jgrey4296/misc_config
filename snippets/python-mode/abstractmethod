@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: abstractmethod
+# uuid:
+# key: abstract
+# condition: t
+# --
+@abc.abstractmethod

@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: metaclass
+# uuid:
+# key: metaclass
+# condition: t
+# --
+import abc
+
+class $1(metaclass=abc.ABCMetaClass):
+      """ $0 """

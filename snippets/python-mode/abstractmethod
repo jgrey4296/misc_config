@@ -1,7 +1,10 @@
 # -*- mode: snippet -*-
-# name: abstractmethod
-# uuid:
+# name: abstract
 # key: abstract
 # condition: t
 # --
-@abc.abstractmethod
+@abc.abstractmethod $1
+def $2(self$3) -> $4:
+    pass
+
+$0

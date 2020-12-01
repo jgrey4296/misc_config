@@ -1,6 +1,5 @@
 # -*- mode: snippet -*-
 # name: interface
-# uuid:
 # key: interface
 # condition: t
 # --
@@ -8,6 +7,7 @@
 # from https://realpython.com/python-interface/
 import abc
 
+$0
 class FormalParserInterface(metaclass=abc.ABCMeta):
     @classmethod
     def __subclasshook__(cls, subclass):

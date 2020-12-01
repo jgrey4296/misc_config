@@ -59,6 +59,7 @@
   ;; If an error occurs, change yas-installed-snippets-dir is not in yas-snippet-dirs
   ;; as it is obsolete
   (setq yas-snippet-dirs `(,(expand-file-name "~/.doom.d/snippets/")))
+  (setq yas--default-user-snippets-dir yas-snippet-dirs)
   ;; ,(expand-file-name "~/github/otherLibs/yasnippet-snippets/snippets")
   ;; ,(expand-file-name "~/github/otherLibs/yasnippet-snippets")
   )

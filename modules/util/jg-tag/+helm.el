@@ -128,6 +128,62 @@ Can operate on regions of headings """
   (cons (s-replace-regexp ",? +" " " (car x))
         (cdr x))
   )
+(defun jg-tag-show-bibtex-entry (keys)
+  "Show the first entry in KEYS in the relevant BibTeX file.
+modified from the original bibtex-completion-show-entry
+"
+  (let* ((bib-loc jg-tag-loc-bibtex)
+         (entry (bibtex-completion-get-entry keys))
+         (year (bibtex-completion-get-value "year" entry))
+         (year-file (f-join bib-loc (format "%s.bib" year)))
+         (todo-file (f-join bib-loc "todo.bib"))
+         )
+    (catch 'break
+      (dolist (bib-file `(,year-file ,todo-file))
+        (find-file bib-file)
+        (if (buffer-narrowed-p)
+            (widen))
+        (goto-char (point-min))
+        ;; find the key
+        (bibtex-find-entry keys)
+        (let ((bounds (+evil:defun-txtobj)))
+          (narrow-to-region (car bounds) (cadr bounds))
+          (throw 'break t)
+          )))))
+
+
+(defun jg-tag-edit-bibtex-notes (keys)
+  "Show the first entry in KEYS in the relevant BibTeX file.
+modified from the original bibtex-completion-show-entry
+"
+  (let* ((bib-loc jg-tag-loc-bibtex)
+         (entry (bibtex-completion-get-entry keys))
+         (year (bibtex-completion-get-value "year" entry))
+         (year-file (f-join bib-loc (format "%s.bib" year)))
+         (todo-file (f-join bib-loc "todo.bib"))
+         )
+    (catch 'break
+      (dolist (bib-file `(,year-file ,todo-file))
+        (find-file bib-file)
+        (if (buffer-narrowed-p)
+            (widen))
+        ;; find the key
+        (bibtex-find-entry keys)
+        (let ((bounds (bibtex-search-forward-field "notes" t)))
+        ;; create notes if not existing
+          (if (not bounds)
+              (progn
+                (bibtex-end-of-entry)
+                (evil-open-above 0)
+                (insert " notes = {")
+                (setq bounds `(nil ,(point) ,(+ (point) 2) ,(+ (point) 2)))
+                (insert " }")
+                ))
+          (narrow-to-region (nth 1 bounds) (nth 2 bounds)))
+          (org-mode)
+          (throw 'break t)
+      ))))
+
 
 (defun jg-tag-file-select-helm (candidates)
     " Given a list of Files, provide a helm to open them "
@@ -416,7 +472,8 @@ governed by the variable `bibtex-completion-display-formats'."
                                       "Open PDF"             'helm-bibtex-open-pdf
                                       "Insert BibTeX key"    'helm-bibtex-insert-key
                                       "Insert BibTeX entry"  'helm-bibtex-insert-bibtex
-                                      "Show entry"           'helm-bibtex-show-entry
+                                      "Show entry"           'jg-tag-show-bibtex-entry
+                                      "Edit Notes"           'jg-tag-edit-bibtex-notes
                                       )
           :candidates 'helm-bibtex-candidates
           :filtered-candidate-transformer  '(jg-year-sort-transformer

@@ -63,6 +63,7 @@
        ;;Formatting
        :prefix "i"
        :n "t"   '+jg-org-insert-heading-trio
+       :n "h"   'org-insert-subheading
        )
       )
 

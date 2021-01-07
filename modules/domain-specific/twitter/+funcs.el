@@ -51,9 +51,12 @@
         to the local-variables of the current buffer """
   (interactive)
   (if (not (boundp '+jg-twitter-twitter-image-helm-source))
-      (message "Use Helm First")
+        (setq +jg-twitter-twitter-image-helm-source
+              (helm-make-source "Find Image" 'helm-source-ffiles
+                :action (helm-make-actions "action" '+jg-twitter-twitter-upload-image))
+              ))
     (helm :sources +jg-twitter-twitter-image-helm-source
-          :input "~/Desktop/"))
+          :input "~/Desktop/")
   )
 
 (defun +jg-twitter-twitter-upload-image (candidate)

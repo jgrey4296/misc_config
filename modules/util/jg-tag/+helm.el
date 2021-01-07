@@ -151,6 +151,13 @@ modified from the original bibtex-completion-show-entry
           (throw 'break t)
           )))))
 
+(defun jg-tag-insert-twitter-link (candidate)
+  (let ((candidates (mapcar 'car (helm-marked-candidates))))
+    (with-helm-current-buffer
+      (loop for entry in candidates
+            do (let ((name (substring entry 1)))
+                 (insert (format "[[https://twitter.com/%s][%s]]\n" name entry)))))))
+
 
 (defun jg-tag-edit-bibtex-notes (keys)
   "Show the first entry in KEYS in the relevant BibTeX file.
@@ -190,7 +197,9 @@ modified from the original bibtex-completion-show-entry
     (interactive)
     ;; (message "File Select Helm Candidates: %s" (helm-marked-candidates))
     ;;process candidates?
-    (let*((all-candidates (if (helm-marked-candidates) (-flatten (helm-marked-candidates)) candidates))
+    (let*(;;(candidate-names (mapcar 'car (helm-marked-candidates)))
+          (candidate-values (mapcar 'cdr (helm-marked-candidates)))
+          (all-candidates (-flatten candidate-values))
           (source (cons `(candidates . ,all-candidates) jg-tag-file-select-source)))
       (helm :sources source
             :full-frame t
@@ -210,7 +219,7 @@ modified from the original bibtex-completion-show-entry
           (let (curr)
             (while (< (point) (point-max))
               (setq curr (split-string (buffer-substring (point) (line-end-position)) ":"))
-              (push `(,(car curr) . ,(cdr curr)) jg-tag-twitter-helm-candidates)
+              (push `(,(car curr) . ,curr) jg-tag-twitter-helm-candidates)
               (forward-line)
               )
             )
@@ -425,7 +434,8 @@ governed by the variable `bibtex-completion-display-formats'."
 
   (setq jg-tag-twitter-helm-source
         (helm-make-source "Twitter Helm" 'helm-source
-          :action (helm-make-actions "File Select Helm" 'jg-tag-file-select-helm)
+          :action (helm-make-actions "File Select Helm" 'jg-tag-file-select-helm
+                                     "Insert User Link" 'jg-tag-insert-twitter-link)
           )
         jg-tag-twitter-heading-helm-source
         (helm-make-source "Twitter Heading Helm" 'helm-source

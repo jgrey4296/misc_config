@@ -22,11 +22,11 @@
  jg-misc
  jg-org-unit-test
 
- ;; :domain-specific
+ :domain-specific
  ;; logic
  ;; music
  ;; netlogo
- ;; twitter
+ twitter
 
  :editor
  ;; acab-ide

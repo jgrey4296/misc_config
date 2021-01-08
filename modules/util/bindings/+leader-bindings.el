@@ -591,6 +591,7 @@
        :desc "Delete trailing whitespace"             "w"   #'delete-trailing-whitespace
        :desc "Whitespace Cleanup"   "c" #'whitespace-cleanup
        :desc "Indent" "i" #'indent-region
+       :desc "Random" "r" #'+jg-bindings-goto-random-line
        )
       ;; justify
       ;; upcase, downcase

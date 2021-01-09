@@ -72,6 +72,10 @@ _N_: Open notes                               _T_: Title case
 (defun jg-tag-build-bibtex-list ()
   "Build a list of all bibtex files to use for bibtex-helm "
   (setq bibtex-completion-bibliography (directory-files jg-tag-loc-bibtex 't "\.bib$")))
+(defun jg-tag-split-tags (x)
+  (split-string x "," t "+")
+  )
+
 (defun jg-tag-bibtex-set-tags (x)
   " Set tags in bibtex entries "
   (let* ((visual-candidates (helm-marked-candidates))
@@ -92,7 +96,7 @@ _N_: Open notes                               _T_: Title case
     (save-excursion
       (setq prior-point (- (point) 1))
       (while (and (/= prior-point (point)) (< (point) end-pos))
-        (progn (setq current-tags (split-string (bibtex-autokey-get-field "tags") "," t " +")
+        (progn (setq current-tags (jg-tag-split-tags (bibtex-autokey-get-field "tags"))
                      prior-point (point))
                (mapc add-func actual-candidates)
                (bibtex-set-field "tags" (string-join current-tags ","))
@@ -106,17 +110,18 @@ _N_: Open notes                               _T_: Title case
   (save-excursion
     (let ((prior-point (- (point) 1))
           (end-pos jg-tag-marker)
-          (stripped_tag (jg-tag-strip_spaces x))
+          (stripped_tags (jg-tag-split-tags (jg-tag-strip_spaces x)))
           )
       (while (and (/= prior-point (point)) (< (point) end-pos))
         (setq prior-point (point))
-        (let* ((current-tags (split-string (bibtex-autokey-get-field "tags") "," t " +")))
-          (if (not (-contains? current-tags stripped_tag))
-              (progn
-                (push stripped_tag current-tags)
-                (puthash stripped_tag 1 jg-tag-global-tags)))
-          (bibtex-set-field "tags" (string-join current-tags ","))
-          (org-ref-bibtex-next-entry)
+        (let* ((current-tags (jg-tag-split-tags (bibtex-autokey-get-field "tags")))
+               (filtered-tags (-filter (lambda (x) (not (-contains? current-tags x))) stripped_tags))
+               (total-tags (-concat current-tags filtered-tags))
+               )
+          (bibtex-set-field "tags" (string-join total-tags ","))
+          (mapc (lambda (x) (puthash x 1 jg-tag-global-tags)) filtered-tags)
+          ;;(org-ref-bibtex-next-entry)
+          (evil-forward-section-begin)
           ))))
   )
 (defun jg-tag-unify-pdf-locations-in-file (name)

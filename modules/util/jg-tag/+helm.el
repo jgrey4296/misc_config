@@ -42,32 +42,6 @@
   (let* ((text (buffer-substring-no-properties (point-min) (point-max))))
     (+jg-twitter-twitter-tweet-text text nil '(+jg-twitter-tweet_sentinel))
     ))
-(defun jg-tag-org-set-tags (x)
-  """ Improved action to add and remove tags Toggle Selected Tags
-Can operate on regions of headings """
-  (let* ((visual-candidates (helm-marked-candidates))
-         (actual-candidates (mapcar (lambda (x) (cadr (assoc x jg-tag-candidates-names))) visual-candidates))
-         (prior-point 1)
-         (end-pos jg-tag-marker)
-         (current-tags '())
-         (add-func (lambda (candidate)
-                     (if (not (-contains? current-tags candidate))
-                         (progn
-                           (push candidate current-tags)
-                           (puthash candidate 1 jg-tag-global-tags))
-                       (progn
-                         (setq current-tags (remove candidate current-tags))
-                         (puthash candidate (- (gethash candidate jg-tag-global-tags) 1) jg-tag-global-tags))
-                       ))))
-    (save-excursion
-      (setq prior-point (- (point) 1))
-      (while (and (/= prior-point (point)) (< (point) end-pos))
-        (progn (setq current-tags (org-get-tags nil t)
-                     prior-point (point))
-               (mapc add-func actual-candidates)
-               (org-set-tags current-tags)
-               (org-forward-heading-same-level 1)
-               )))))
 (defun jg-tag-insert-candidates (x)
   "A Helm action to insert selected candidates into the current buffer "
   (let ((candidates (helm-marked-candidates)))
@@ -157,7 +131,6 @@ modified from the original bibtex-completion-show-entry
       (loop for entry in candidates
             do (let ((name (substring entry 1)))
                  (insert (format "[[https://twitter.com/%s][%s]]\n" name entry)))))))
-
 
 (defun jg-tag-edit-bibtex-notes (keys)
   "Show the first entry in KEYS in the relevant BibTeX file.
@@ -370,6 +343,17 @@ modified from the original bibtex-completion-show-entry
             :bibtex-candidates candidates
             )))
 
+(defun jg-tag-helm-tagger (&optional beg end)
+    """ Opens the Tagging Helm """
+    (set-marker jg-tag-marker (if (eq evil-state 'visual)  evil-visual-end (line-end-position)))
+    (let* ((candidates (jg-tag-candidates))
+           (main-source (cons `(candidates . ,(mapcar 'car candidates)) jg-tag-helm))
+           )
+      (helm :sources '(main-source jg-tag-fallback-source)
+            :input "")
+      )
+    )
+
 (defun jg-helm-bibtex-candidates-formatter (candidates _)
   "Format CANDIDATES for display in helm."
   (cl-loop
@@ -455,6 +439,7 @@ governed by the variable `bibtex-completion-display-formats'."
           :action (helm-make-actions "Create" 'jg-tag-set-new-tag)
           :filtered-candidate-transformer (lambda (_c _s) (list helm-pattern)))
           )
+
 )
 (after! helm-bibtex
   ;; Define the bib helm

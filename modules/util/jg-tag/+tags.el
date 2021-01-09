@@ -107,6 +107,33 @@ Return a hash-table of tags with their instance counts"
       (jg-tag-bibtex-set-new-tag x)
     (jg-tag-org-set-new-tag x))
   )
+
+(defun jg-tag-org-set-tags (x)
+  """ Improved action to add and remove tags Toggle Selected Tags
+Can operate on regions of headings """
+  (let* ((visual-candidates (helm-marked-candidates))
+         (actual-candidates (mapcar (lambda (x) (cadr (assoc x jg-tag-candidates-names))) visual-candidates))
+         (prior-point 1)
+         (end-pos jg-tag-marker)
+         (current-tags '())
+         (add-func (lambda (candidate)
+                     (if (not (-contains? current-tags candidate))
+                         (progn
+                           (push candidate current-tags)
+                           (puthash candidate 1 jg-tag-global-tags))
+                       (progn
+                         (setq current-tags (remove candidate current-tags))
+                         (puthash candidate (- (gethash candidate jg-tag-global-tags) 1) jg-tag-global-tags))
+                       ))))
+    (save-excursion
+      (setq prior-point (- (point) 1))
+      (while (and (/= prior-point (point)) (< (point) end-pos))
+        (progn (setq current-tags (org-get-tags nil t)
+                     prior-point (point))
+               (mapc add-func actual-candidates)
+               (org-set-tags current-tags)
+               (org-forward-heading-same-level 1)
+               )))))
 (defun jg-tag-org-set-new-tag (x)
   "Utility to set a new tag for an org heading"
   (save-excursion
@@ -124,7 +151,6 @@ Return a hash-table of tags with their instance counts"
           (org-set-tags current-tags)
           (org-forward-heading-same-level 1)
           )))))
-
 (defun jg-tag-chart-tag-counts (counthash name)
   "Given a hashtable of counts, create a buffer with a bar chart of the counts"
   ;; (message "Charting: %s %s" counthash name)

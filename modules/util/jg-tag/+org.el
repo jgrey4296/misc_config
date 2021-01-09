@@ -401,17 +401,11 @@ Sort, align, split, save "
   )
   )
 
-(after! (evil org)
+(after! (evil org helm)
   (jg-tag-rebuild-tag-database)
 
-  (evil-define-operator jg-tag-helm-start (beg end)
-    """ Opens the Tagging Helm """
+  (evil-define-operator jg-tag-helm-start (beg end rest)
     (interactive "<R>")
-    (set-marker jg-tag-marker (if (eq evil-state 'visual)  evil-visual-end (line-end-position)))
-    (let* ((candidates (jg-tag-candidates))
-           (main-source (cons `(candidates . ,(mapcar 'car candidates)) jg-tag-helm))
-           )
-      (helm :sources '(main-source jg-tag-fallback-source)
-            :input "")
-      ))
+    (jg-tag-helm-tagger beg end)
+    )
   )

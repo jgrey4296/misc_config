@@ -5,6 +5,6 @@
 (package! trie-explore-mode :recipe (:local-repo "~/.doom.d/packages/trie-explore-mode")
 (package! trie-minor-mode :recipe (:local-repo "~/.doom.d/packages/trie-minor-mode")
 (package! parsec)
-(package! (font-lock+ :location (recipe :fetcher git :url "https://github.com/emacsmirror/font-lock-plus")))
+(package! font-lock+ :recipe (:host github :repo "emacsmirror/font-lock-plus"))
 (package! helm)
 (package! cl-lib)

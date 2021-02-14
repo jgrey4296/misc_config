@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: basic_reference
+# uuid:
+# key: basic_reference
+# condition: t
+# --
+https://guides.github.com/features/mastering-markdown/
+https://docs.github.com/en/github/writing-on-github/basic-writing-and-formatting-syntax
+
+# Headings
+    [LinkText](Url)
+    __ Bold is Two Underscore Wrap__
+    _Italic is One Underscore_
+    > A Quote
+    `Some Code`
+    ```
+        A Code Block
+    ```
+
+    * Unordered List
+    * Unordered
+      - Nested
+
+
+$0

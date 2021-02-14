@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: base
+# uuid:
+# key: base
+# condition: t
+# --
+-module($1).
+-export([]).
+-compile(export_all).
+
+$0

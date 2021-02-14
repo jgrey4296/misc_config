@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: trio-heading
+# uuid:
+# key: 3head
+# condition: t
+# --
+$0
+## $1
+## $2
+## $3

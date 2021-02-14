@@ -24,9 +24,9 @@
       (package! lsp-python-ms :pin "a884a9a4eb1a3acd3d70c776aec5e968bbdc1731"))))
 
 ;; Programming environment
-(package! anaconda-mode :pin "73266a48fa964d44268c3f3478597e553b9843f1")
+(package! anaconda-mode)
 (when (featurep! :completion company)
-  (package! company-anaconda :pin "da1566db41a68809ef7f91ebf2de28118067c89b"))
+  (package! company-anaconda))
 
 ;; Environment management
 (package! pipenv :pin "b730bb509e8b60af9f5ab1f1e6c3458d1d95d789")

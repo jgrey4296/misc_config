@@ -398,6 +398,27 @@ governed by the variable `bibtex-completion-display-formats'."
               (- width (cddr format)))
             0 ?\s)))))))
 
+(defun jg-tag-insert-simple-bibtex (x)
+  (let* ((entry (bibtex-completion-get-entry x))
+         (name (cdr (assoc "title" entry 's-equals?)))
+         )
+    (insert name)
+    )
+  )
+
+(defun jg-tag-insert-simple-bibtex-wrapped ()
+  (interactive)
+  (save-excursion
+    (let ((curr-word (current-word)))
+      (evil-end-of-line)
+      (insert " ")
+      (jg-tag-insert-simple-bibtex curr-word)
+      )
+    )
+  )
+
+
+
 (after! helm-files
   (setq helm-grep-actions (append helm-grep-actions '(("Open Url" . jg-tag-open-url-action))))
   ;; Build a Custom grep for bookmarks
@@ -467,6 +488,7 @@ governed by the variable `bibtex-completion-display-formats'."
                                       "Open PDF"             'helm-bibtex-open-pdf
                                       "Insert BibTeX key"    'helm-bibtex-insert-key
                                       "Insert BibTeX entry"  'helm-bibtex-insert-bibtex
+                                      "Insert Bibtex simple" 'jg-tag-insert-simple-bibtex
                                       "Show entry"           'jg-tag-show-bibtex-entry
                                       "Edit Notes"           'jg-tag-edit-bibtex-notes
                                       )

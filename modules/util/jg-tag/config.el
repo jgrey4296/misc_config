@@ -22,6 +22,7 @@
   (evil-ex-define-cmd "toa" #'jg-tag-occurrences-in-open-buffers)
   (evil-ex-define-cmd "tv"  #'org-tags-view)
   (evil-ex-define-cmd "ts"  #'org-set-tags)
+  (evil-ex-define-cmd "ci[te]" #'jg-tag-insert-simple-bibtex-wrapped)
   )
 (after! tag-clean-minor-mode ()
   (push 'tag-clean-minor-mode minor-mode-list)

@@ -40,6 +40,7 @@
       (:prefix "g"
        :n "j" #'org-forward-heading-same-level
        :n "k" #'org-backward-heading-same-level)
+
       (:prefix "]"
        :n "p" #'org-next-link)
       (:prefix "["
@@ -64,6 +65,7 @@
        :prefix "i"
        :n "t"   '+jg-org-insert-heading-trio
        :n "h"   'org-insert-subheading
+       :n "d" #'org-insert-drawer
        )
       )
 

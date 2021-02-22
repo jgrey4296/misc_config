@@ -2,6 +2,7 @@
 
 (global-set-key (kbd "C-c [") '+jg-personal-insert-lparen)
 (global-set-key (kbd "C-c ]") '+jg-personal-insert-rparen)
+(global-set-key (kbd "C-c u") 'universal-argument)
 (map! :g "C-x h" help-map)
 
 

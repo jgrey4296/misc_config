@@ -26,21 +26,26 @@
 
   (set-ligatures! 'python-mode
     ;; Functional
-    :def "def"
+    :def    "def"
     :lambda "lambda"
     ;; Types
-    :null "None"
-    :true "True" :false "False"
-    :int "int" :str "str"
-    :float "float"
-    :bool "bool"
-    :tuple "tuple"
+    :null   "None"
+    :true   "True"
+    :false  "False"
+    :int    "int"
+    :str    "str"
+    :float  "float"
+    :bool   "bool"
+    :tuple  "tuple"
     ;; Flow
-    :not "not"
-    :in "in" :not-in "not in"
-    :and "and" :or "or"
-    :for "for"
-    :return "return" :yield "yield")
+    :not    "not"
+    :in     "in"
+    :not-in "not in"
+    :and    "and"
+    :or     "or"
+    :for    "for"
+    :return "return"
+    :yield  "yield")
 
   ;; Stop the spam!
   (setq python-indent-guess-indent-offset-verbose nil)
@@ -90,35 +95,15 @@
 
   (when (featurep 'evil)
     (add-hook 'anaconda-mode-hook #'evil-normalize-keymaps))
-  (map! :localleader
-        :map anaconda-mode-map
-        :prefix "g"
-        "d" #'anaconda-mode-find-definitions
-        "h" #'anaconda-mode-show-doc
-        "a" #'anaconda-mode-find-assignments
-        "f" #'anaconda-mode-find-file
-        "u" #'anaconda-mode-find-references))
+  )
 
 (use-package! pyimport
   :defer t
-  :init
-  (map! :after python
-        :map python-mode-map
-        :localleader
-        (:prefix ("i" . "imports")
-          :desc "Insert missing imports" "i" #'pyimport-insert-missing
-          :desc "Remove unused imports"  "r" #'pyimport-remove-unused
-          :desc "Optimize imports"       "o" #'+python/optimize-imports)))
+  )
 
 (use-package! py-isort
   :defer t
-  :init
-  (map! :after python
-        :map python-mode-map
-        :localleader
-        (:prefix ("i" . "imports")
-          :desc "Sort imports"      "s" #'py-isort-buffer
-          :desc "Sort region"       "r" #'py-isort-region)))
+  )
 
 (use-package! nose
   :commands nose-mode
@@ -129,34 +114,14 @@
   (set-yas-minor-mode! 'nose-mode)
   (when (featurep 'evil)
     (add-hook 'nose-mode-hook #'evil-normalize-keymaps))
-
-  (map! :localleader
-        :map nose-mode-map
-        :prefix "t"
-        "r" #'nosetests-again
-        "a" #'nosetests-all
-        "s" #'nosetests-one
-        "v" #'nosetests-module
-        "A" #'nosetests-pdb-all
-        "O" #'nosetests-pdb-one
-        "V" #'nosetests-pdb-module))
+  )
 
 (use-package! python-pytest
   :defer t
-  :init
-  (map! :after python
-        :localleader
-        :map python-mode-map
-        :prefix ("t" . "test")
-        "f" #'python-pytest-file-dwim
-        "F" #'python-pytest-file
-        "t" #'python-pytest-function-dwim
-        "T" #'python-pytest-function
-        "r" #'python-pytest-repeat
-        "p" #'python-pytest-popup))
+  )
 
 (use-package! blacken
-
+  :defer t
   )
 
 (use-package! python-black
@@ -180,17 +145,7 @@
                    (format "PIPENV_MAX_DEPTH=9999 %s run %%c %%o %%s %%a" bin)
                  "%c %o %s %a")))
       (:description . "Run Python script")))
-  (map! :map python-mode-map
-        :localleader
-        :prefix "e"
-        :desc "activate"    "a" #'pipenv-activate
-        :desc "deactivate"  "d" #'pipenv-deactivate
-        :desc "install"     "i" #'pipenv-install
-        :desc "lock"        "l" #'pipenv-lock
-        :desc "open module" "o" #'pipenv-open
-        :desc "run"         "r" #'pipenv-run
-        :desc "shell"       "s" #'pipenv-shell
-        :desc "uninstall"   "u" #'pipenv-uninstall))
+  )
 
 (use-package! pyvenv
   :after python
@@ -257,10 +212,7 @@
   :mode "\\.p\\(yx\\|x[di]\\)\\'"
   :config
   (setq cython-default-compile-format "cython -a %s")
-  (map! :map cython-mode-map
-        :localleader
-        :prefix "c"
-        :desc "Cython compile buffer"    "c" #'cython-compile))
+  )
 
 (use-package! flycheck-cython
   :when (featurep! +cython)

@@ -78,6 +78,7 @@ Customize python using PYTHONBREAKPOINT env variable
         ;; directly will work.
         (setq-local flycheck-python-pylint-executable "pylint")
         (setq-local flycheck-python-flake8-executable "flake8")))
+
 (defun +python-init-anaconda-mode-maybe-h ()
       "Enable `anaconda-mode' if `lsp-mode' is absent and
 `python-shell-interpreter' is present."
@@ -85,7 +86,7 @@ Customize python using PYTHONBREAKPOINT env variable
                   (bound-and-true-p eglot--managed-mode)
                   (bound-and-true-p lsp--buffer-deferred)
                   (not (executable-find python-shell-interpreter)))
-        (anaconda-mode +1)))
+        (anaconda-mode)))
 (defun +python-auto-kill-anaconda-processes-h ()
     "Kill anaconda processes if this buffer is the last python buffer."
     (when (and (eq major-mode 'python-mode)

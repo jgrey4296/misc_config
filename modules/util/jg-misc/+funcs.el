@@ -24,3 +24,11 @@
       )
     )
   )
+
+(defun +jg-misc-undo-tree ()
+  (interactive)
+  (if (not undo-tree-mode)
+      (undo-tree-mode))
+   (undo-tree-visualize)
+
+  )

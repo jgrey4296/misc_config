@@ -52,7 +52,7 @@
        :n "." nil
        :n "i" nil
        ;; SRC CODE
-       (:prefix "."
+       (:prefix ("." . "JG Custom")
         :n "e"   'org-edit-src-code
         :n "E"   'org-babel-execute-src-block
         ;; Links
@@ -62,7 +62,7 @@
         :n "n"   '+jg-org-change_link_name
         )
        ;;Formatting
-       :prefix "i"
+       :prefix ("i" . "Insert")
        :n "t"   '+jg-org-insert-heading-trio
        :n "h"   'org-insert-subheading
        :n "d" #'org-insert-drawer

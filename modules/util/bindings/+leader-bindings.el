@@ -43,14 +43,14 @@
 ;;; <leader> a -- misc
 (map! :leader
      (:prefix "a"
-      :n :desc "Minibuffer history" "m" #'counsel-minibuffer-history
+      :desc "Minibuffer history" :n "m" #'counsel-minibuffer-history
       (:prefix ("g" . "Goto")
-       :desc "Desktop" "`" #'+jg-bindings-goto-desktop
-       :desc "Agenda" "a" #'+jg-bindings-goto-org-agenda-file
-       :desc "Github" "g" #'+jg-bindings-goto-github
-       :desc "Messages" "m" #'+jg-bindings-goto-messages
-       :desc "Mega" "M" #'+jg-bindings-goto-mega
-       :desc "Home" "~" #'+jg-bindings-goto-home
+       :desc "Desktop" "`"   #'+jg-bindings-goto-desktop
+       :desc "Agenda" "a"    #'+jg-bindings-goto-org-agenda-file
+       :desc "Github" "g"    #'+jg-bindings-goto-github
+       :desc "Messages" "m"  #'+jg-bindings-goto-messages
+       :desc "Mega" "M"      #'+jg-bindings-goto-mega
+       :desc "Home" "~"      #'+jg-bindings-goto-home
        :desc "Resources" "r" #'+jg-bindings-goto-resources))
 )
 ;;; <leader> b --- buffer

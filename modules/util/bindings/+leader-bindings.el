@@ -511,24 +511,6 @@
       ;; fill-column indicator
       )
 ;;; <leader> w --- workspaces/windows
-(when (featurep! :ui workspaces)
-  (defun jg-counsel-workspace ()
-    "Forward to `' or `workspace-set' if workspace doesn't exist."
-    (interactive)
-    (require 'bookmark)
-    (ivy-read "Create or jump to workspace: "
-              (+workspace-list-names)
-              :history 'workspace-history
-              :action (lambda (x)
-                        (message "Got: %s" x)
-                        (cond ((string-equal x (+workspace-current-name))
-                               (message "Eq")
-                               (+workspace-save x))
-                              (t
-                               (+workspace-switch x t))))
-              :caller 'counsel-workspace)
-    )
-  )
 (map! :leader
       (:when (featurep! :ui workspaces)
        :prefix-map ("W" . "Workspaces")

@@ -236,28 +236,28 @@
 (map! :leader
       :prefix ("M" . "Macros")
       (:prefix ("c" . "Counter")
-       :desc "Increment counter" "a" #'kmacro-add-counter
-       :desc "Insert counter" "c" #'kmacro-insert-counter
-       :desc "Set counter..." "C" #'kmacro-set-counter
-       :desc "Set display format..." "f" #'kmacro-set-format)
+       :desc "Increment counter" "a"            #'kmacro-add-counter
+       :desc "Insert counter" "c"               #'kmacro-insert-counter
+       :desc "Set counter..." "C"               #'kmacro-set-counter
+       :desc "Set display format..." "f"        #'kmacro-set-format)
       (:prefix ("e" . "Edit")
-       :desc "Assign key binding..." "b" #'kmacro-bind-to-key
-       :desc "Edit last macro" "e" #'kmacro-edit-macro-repeat
+       :desc "Assign key binding..." "b"        #'kmacro-bind-to-key
+       :desc "Edit last macro" "e"              #'kmacro-edit-macro-repeat
        :desc "Create macro from lossage..." "l" #'kmacro-edit-lossage
-       :desc "Name last macro..." "n" #'kmacro-name-last-macro
-       :desc "Write macro to register..." "r" #'kmacro-to-register
-       :desc "Step by step edit..." "s" #'kmacro-step-edit-macro
-       :desc "Start macro/Insert counter" "k" #'kmacro-start-macro-or-insert-counter
-       :desc "Stop or Run" "K" #'kmacro-end-or-call-macro
+       :desc "Name last macro..." "n"           #'kmacro-name-last-macro
+       :desc "Write macro to register..." "r"   #'kmacro-to-register
+       :desc "Step by step edit..." "s"         #'kmacro-step-edit-macro
+       :desc "Start macro/Insert counter" "k"   #'kmacro-start-macro-or-insert-counter
+       :desc "Stop or Run" "K"                  #'kmacro-end-or-call-macro
        )
       (:prefix ("r" . "Ring")
-       :desc "Display ring head" "L" #'kmacro-view-ring-2nd
-       :desc "Delete ring head" "d" #'kmacro-delete-ring-head
-       :desc "Run 2nd macro in ring" "l" #'kmacro-call-ring-2nd-repeat
-       :desc "Next in ring" "n" #'kmacro-cycle-ring-next
-       :desc "Previous in ring" "p" #'kmacro-cycle-ring-previous
-       :desc "Swap first two" "s" #'kmacro-swap-ring
-       :desc "View last macro" "v" #'kmacro-view-macro-repeat
+       :desc "Display ring head" "L"            #'kmacro-view-ring-2nd
+       :desc "Delete ring head" "d"             #'kmacro-delete-ring-head
+       :desc "Run 2nd macro in ring" "l"        #'kmacro-call-ring-2nd-repeat
+       :desc "Next in ring" "n"                 #'kmacro-cycle-ring-next
+       :desc "Previous in ring" "p"             #'kmacro-cycle-ring-previous
+       :desc "Swap first two" "s"               #'kmacro-swap-ring
+       :desc "View last macro" "v"              #'kmacro-view-macro-repeat
        )
       )
 ;;; <leader> n --- notes
@@ -311,12 +311,12 @@
 (map! :leader
       "o" nil ; we need to unbind it first as Org claims this prefix
       :prefix-map ("o" . "open")
-      :desc "Default browser"    "b"  #'browse-url-of-file
-      :desc "Debugger"           "d"  #'+debugger/start
-      :desc "Dired"              "-"  #'dired-jump
-      :desc "Org agenda"       "A"  #'org-agenda
-      :desc "REPL (same window)" "R"  #'+eval/open-repl-same-window
-      :desc "REPL"               "r"  #'+eval/open-repl-other-window
+      :desc "Default browser"    "b"             #'browse-url-of-file
+      :desc "Debugger"           "d"             #'+debugger/start
+      :desc "Dired"              "-"             #'dired-jump
+      :desc "Org agenda"         "A"             #'org-agenda
+      :desc "REPL (same window)" "R"             #'+eval/open-repl-same-window
+      :desc "REPL"               "r"             #'+eval/open-repl-other-window
 
       (:when (featurep! :ui neotree)
        :desc "Project sidebar"               "p" #'+neotree/open
@@ -331,53 +331,53 @@
        :desc "Toggle terminal popup"         "t" #'+term/toggle
        :desc "Open terminal here"            "T" #'+term/here)
       (:when (featurep! :os macos)
-       :desc "Reveal in Finder"           "f" #'+macos/reveal-in-finder
-       :desc "Reveal project in Finder"   "F" #'+macos/reveal-project-in-finder
-       :desc "Send to Transmit"           "u" #'+macos/send-to-transmit
-       :desc "Send project to Transmit"   "U" #'+macos/send-project-to-transmit
-       :desc "Send to Launchbar"          "l" #'+macos/send-to-launchbar
-       :desc "Send project to Launchbar"  "L" #'+macos/send-project-to-launchbar
-       :desc "Open in iTerm"              "i" #'+macos/open-in-iterm)
+       :desc "Reveal in Finder"           "f"    #'+macos/reveal-in-finder
+       :desc "Reveal project in Finder"   "F"    #'+macos/reveal-project-in-finder
+       :desc "Send to Transmit"           "u"    #'+macos/send-to-transmit
+       :desc "Send project to Transmit"   "U"    #'+macos/send-project-to-transmit
+       :desc "Send to Launchbar"          "l"    #'+macos/send-to-launchbar
+       :desc "Send project to Launchbar"  "L"    #'+macos/send-project-to-launchbar
+       :desc "Open in iTerm"              "i"    #'+macos/open-in-iterm)
       (:prefix ("a" . "org agenda")
-       :desc "Agenda"         "a"  #'org-agenda
-       :desc "Todo list"      "t"  #'org-todo-list
-       :desc "Tags search"    "m"  #'org-tags-view
-       :desc "View search"    "v"  #'org-search-view)
+       :desc "Agenda"         "a"                #'org-agenda
+       :desc "Todo list"      "t"                #'org-todo-list
+       :desc "Tags search"    "m"                #'org-tags-view
+       :desc "View search"    "v"                #'org-search-view)
       )
 ;;; <leader> p --- project
 (map! :leader
       :prefix ("p" . "project")
-      :desc "Root Shell"                   "'" #'projectile-run-shell
-      :desc "Add new project"              "a" #'projectile-add-known-project
-      :desc "Browse other project"         ">" #'doom/browse-in-other-project
-      :desc "Browse project"               "b" #'+default/browse-project
-      :desc "Compile in project"           "c" #'projectile-compile-project
-      :desc "Configure project"            "g" #'projectile-configure-project
-      :desc "Discover projects in folder"  "d" #'+default/discover-projects
-      :desc "Edit project .dir-locals"     "e" #'projectile-edit-dir-locals
-      :desc "Find file in project"         "f" #'projectile-find-file
-      :desc "Find other file"              "o" #'projectile-find-other-file
-      :desc "Find recent project files"    "r" #'projectile-recentf
-      :desc "Invalidate project cache"     "I" #'projectile-invalidate-cache
-      :desc "Kill project buffers"         "K" #'projectile-kill-buffers
-      :desc "List project todos"          "t" #'magit-todos-list
-      :desc "Open project scratch buffer" "x" #'doom/open-project-scratch-buffer
-      :desc "Remove known project"         "D" #'projectile-remove-known-project
-      :desc "Repeat last command"          "C" #'projectile-repeat-last-command
-      :desc "Run cmd in project root"      "!" #'projectile-run-shell-command-in-root
-      :desc "Run project"                  "R" #'projectile-run-project
-      :desc "Save project files"           "S" #'projectile-save-project-buffers
+      :desc "Root Shell"                   "'"  #'projectile-run-shell
+      :desc "Add new project"              "a"  #'projectile-add-known-project
+      :desc "Browse other project"         ">"  #'doom/browse-in-other-project
+      :desc "Browse project"               "b"  #'+default/browse-project
+      :desc "Compile in project"           "c"  #'projectile-compile-project
+      :desc "Configure project"            "g"  #'projectile-configure-project
+      :desc "Discover projects in folder"  "d"  #'+default/discover-projects
+      :desc "Edit project .dir-locals"     "e"  #'projectile-edit-dir-locals
+      :desc "Find file in project"         "f"  #'projectile-find-file
+      :desc "Find other file"              "o"  #'projectile-find-other-file
+      :desc "Find recent project files"    "r"  #'projectile-recentf
+      :desc "Invalidate project cache"     "I"  #'projectile-invalidate-cache
+      :desc "Kill project buffers"         "K"  #'projectile-kill-buffers
+      :desc "List project todos"          "t"   #'magit-todos-list
+      :desc "Open project scratch buffer" "x"   #'doom/open-project-scratch-buffer
+      :desc "Remove known project"         "D"  #'projectile-remove-known-project
+      :desc "Repeat last command"          "C"  #'projectile-repeat-last-command
+      :desc "Run cmd in project root"      "!"  #'projectile-run-shell-command-in-root
+      :desc "Run project"                  "R"  #'projectile-run-project
+      :desc "Save project files"           "S"  #'projectile-save-project-buffers
       :desc "Search project for symbol"     "." #'+default/search-project-for-symbol-at-point
       :desc "Search project"                "s" #'+default/search-project
-      :desc "Switch project"               "p" #'projectile-switch-project
-      :desc "Switch to project buffer"     "b" #'projectile-switch-to-buffer
-      :desc "Switch to scratch buffer"     "X" #'doom/switch-to-project-scratch-buffer
-      :desc "Test project"                 "T" #'projectile-test-project
+      :desc "Switch project"               "p"  #'projectile-switch-project
+      :desc "Switch to project buffer"     "b"  #'projectile-switch-to-buffer
+      :desc "Switch to scratch buffer"     "X"  #'doom/switch-to-project-scratch-buffer
+      :desc "Test project"                 "T"  #'projectile-test-project
 
       (:when (and (featurep! :tools taskrunner)
                   (or (featurep! :completion ivy)
                       (featurep! :completion helm)))
-       :desc "List project tasks"         "z" #'+taskrunner/project-tasks)
+       :desc "List project tasks"         "z"   #'+taskrunner/project-tasks)
       ;; later expanded by projectile
       (:prefix ("4" . "in other window"))
       (:prefix ("5" . "in other frame"))
@@ -430,7 +430,7 @@
 ;;; <leader> s --- search
 (map! :leader
       :prefix-map ("s" . "search")
-      :desc "Search Clear" "c" #'evil-ex-nohighlight
+      :desc "Search Clear" "c"                 #'evil-ex-nohighlight
       :desc "Dictionary"                   "t" #'+lookup/dictionary-definition
       :desc "Jump list"                    "j" #'evil-show-jumps
       :desc "Jump to bookmark"             "b" #'bookmark-jump
@@ -459,20 +459,20 @@
        "d" nil
        "v" nil
        "n" nil
-       "C" #'global-company-mode
+       "C"                                       #'global-company-mode
        (:prefix ("d" . "Debug")
-        :desc "Debug on Error" "e" #'toggle-debug-on-error
-        :desc "Debug on Var" "v" #'debug-on-variable-change
-        :desc "Cancel Debug on Var" "V" #'cancel-debug-on-variable-change
-        :desc "Debug on Function" "f" #'debug-on-entry
-        :desc "Cancel Debug on Function" "F" #'cancel-debug-on-entry
+        :desc "Debug on Error" "e"               #'toggle-debug-on-error
+        :desc "Debug on Var" "v"                 #'debug-on-variable-change
+        :desc "Cancel Debug on Var" "V"          #'cancel-debug-on-variable-change
+        :desc "Debug on Function" "f"            #'debug-on-entry
+        :desc "Cancel Debug on Function" "F"     #'cancel-debug-on-entry
         :desc "Flymake"                      "c" #'flymake-mode
         (:when (featurep! :checkers syntax)
-         :desc "Flycheck"                   "C" #'flycheck-mode)
+         :desc "Flycheck"                   "C"  #'flycheck-mode)
         (:when (and (featurep! :checkers spell) (not (featurep! :checkers spell +flyspell)))
-         :desc "Spell checker"              "s" #'spell-fu-mode)
+         :desc "Spell checker"              "s"  #'spell-fu-mode)
         (:when (featurep! :checkers spell +flyspell)
-         :desc "Spell checker"              "s" #'flyspell-mode))
+         :desc "Spell checker"              "s"  #'flyspell-mode))
 
        (:prefix ("v" . "Visual")
         :desc "Big mode"                     "b" #'doom-big-font-mode
@@ -481,29 +481,29 @@
         :desc "Evil goggles"                 "g" #'evil-goggles-mode
         :desc "Soft line wrapping"           "w" #'visual-line-mode
         (:when (featurep! :editor word-wrap)
-         :desc "Soft line wrapping"         "w" #'+word-wrap-mode)
+         :desc "Soft line wrapping"         "w"  #'+word-wrap-mode)
         :desc "Word-wrap mode"               "W" #'+word-wrap-mode
-        :desc "Whitespace"                  "w"#'whitespace-mode
-        :desc "Line Truncate"               "l" #'toggle-truncate-lines
+        :desc "Whitespace"                  "w"  #'whitespace-mode
+        :desc "Line Truncate"               "l"  #'toggle-truncate-lines
         )
 
        (:prefix  ("n" . "Navigation")
         :desc "Neotree"                      "t" #'neotree-toggle
         (:when (featurep! :ui minimap)
-         :desc "Minimap mode"               "m" #'minimap-mode)
+         :desc "Minimap mode"               "m"  #'minimap-mode)
         (:when (featurep! :lang org +present)
-         :desc "org-tree-slide mode"        "p" #'org-tree-slide-mode)
+         :desc "org-tree-slide mode"        "p"  #'org-tree-slide-mode)
 
         :desc "Centered Cursor"              "c" #'centered-cursor-mode
         (:when (featurep! :ui indent-guides)
-         :desc "Indent guides"              "i" #'highlight-indent-guides-mode)
+         :desc "Indent guides"              "i"  #'highlight-indent-guides-mode)
         :desc "Indent style"                 "I" #'doom/toggle-indent-style
-        :desc "Evil-visual-mark"            "v" #'evil-visual-mark-mode
-        :desc "Auto-Highlight"              "h" #'auto-highlight-symbol-mode
+        :desc "Evil-visual-mark"            "v"  #'evil-visual-mark-mode
+        :desc "Auto-Highlight"              "h"  #'auto-highlight-symbol-mode
         )
        (:when (featurep! :lang org +pomodoro)
-        :desc "Pomodoro timer"             "t" #'org-pomodoro)
-        :desc "SmartParens"  "s" #'smartparens-global-mode
+        :desc "Pomodoro timer"             "t"   #'org-pomodoro)
+        :desc "SmartParens"  "s"                 #'smartparens-global-mode
        ;; centre point/line
        ;; highlight long lines
        ;; auto-completion
@@ -514,7 +514,7 @@
 (map! :leader
       (:when (featurep! :ui workspaces)
        :prefix-map ("W" . "Workspaces")
-       :desc "Workspace Counsel" "RET" #'jg-counsel-workspace
+       :desc "Workspace Counsel" "RET"            #'jg-counsel-workspace
        ;; Lowercase - workspace, Uppercase - session
        :desc "Display tab bar"              "TAB" #'+workspace/display
        :desc "Next workspace"               "]"   #'+workspace/switch-right
@@ -531,49 +531,49 @@
        :desc "Save workspace"               "s"   #'+workspace/save
        :desc "Delete session"               "x"   #'+workspace/kill-session
 
-       :desc "Autosave session"              "A" #'doom/quicksave-session
-       :desc "Load session"                  "L" #'doom/load-session
-       :desc "Redo window config"            "U" #'winner-redo
-       :desc "Save session"                  "S" #'doom/save-session
-       :desc "Undo window config"            "u" #'winner-undo
+       :desc "Autosave session"              "A"  #'doom/quicksave-session
+       :desc "Load session"                  "L"  #'doom/load-session
+       :desc "Redo window config"            "U"  #'winner-redo
+       :desc "Save session"                  "S"  #'doom/save-session
+       :desc "Undo window config"            "u"  #'winner-undo
        )
       :prefix-map ("w" . "Windows")
-      :desc "Delete Window" "d" #'delete-window
-      :desc "Split To Right" "/" #'split-window-right
-      :desc "Split Below" "-" #'split-window-below
-      "k" #'evil-window-up
-      "l" #'evil-window-right
-      "h" #'evil-window-left
-      "j" #'evil-window-down
-      "m" #'doom/window-enlargen
-      "M" #'doom/window-maximize-buffer
-      "b" #'balance-windows
+      :desc "Delete Window" "d"                   #'delete-window
+      :desc "Split To Right" "/"                  #'split-window-right
+      :desc "Split Below" "-"                     #'split-window-below
+      "k"                                         #'evil-window-up
+      "l"                                         #'evil-window-right
+      "h"                                         #'evil-window-left
+      "j"                                         #'evil-window-down
+      "m"                                         #'doom/window-enlargen
+      "M"                                         #'doom/window-maximize-buffer
+      "b"                                         #'balance-windows
 
-      "{" #'shrink-window-horizontally
-      "}" #'shrink-window
+      "{"                                         #'shrink-window-horizontally
+      "}"                                         #'shrink-window
       )
 ;;; <leader> x -- Text
 (map! :leader
       :prefix ("x" . "Text")
-      :desc "Mark" "m" #'mark-whole-buffer
-      :desc "Iedit" "e" #'evil-iedit-state/iedit-mode
-      "r" #'regexp-builder
+      :desc "Mark" "m"                                    #'mark-whole-buffer
+      :desc "Iedit" "e"                                   #'evil-iedit-state/iedit-mode
+      "r"                                                 #'regexp-builder
       ;; align
       (:prefix ("a" . "Align")
-       :desc "Regexp"    "r" #'align-regexp
+       :desc "Regexp"    "r"                              #'align-regexp
        )
       ;; Lines
       (:prefix ("l" . "Lines")
-       ;;:desc "Remove Duplicates"    "u" #'
-       ;;:desc "Mark"                 "m" #'
+       ;;:desc "Remove Duplicates"    "u"                 #'
+       ;;:desc "Mark"                 "m"                 #'
        ;; untabify
-       "f" #'flush-lines
-       "K" #'keep-lines
-       :desc "Delete trailing newlines"              "W"   #'doom/delete-trailing-newlines
-       :desc "Delete trailing whitespace"             "w"   #'delete-trailing-whitespace
-       :desc "Whitespace Cleanup"   "c" #'whitespace-cleanup
-       :desc "Indent" "i" #'indent-region
-       :desc "Random" "r" #'+jg-bindings-goto-random-line
+       "f"                                                #'flush-lines
+       "K"                                                #'keep-lines
+       :desc "Delete trailing newlines"              "W"  #'doom/delete-trailing-newlines
+       :desc "Delete trailing whitespace"             "w" #'delete-trailing-whitespace
+       :desc "Whitespace Cleanup"   "c"                   #'whitespace-cleanup
+       :desc "Indent" "i"                                 #'indent-region
+       :desc "Random" "r"                                 #'+jg-bindings-goto-random-line
        )
       ;; justify
       ;; upcase, downcase

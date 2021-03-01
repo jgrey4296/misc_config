@@ -42,7 +42,7 @@
       )
 ;;; <leader> a -- misc
 (map! :leader
-     (:prefix "a"
+     (:prefix ("a" . "JG Misc")
       :desc "Minibuffer history" :n "m" #'counsel-minibuffer-history
       (:prefix ("g" . "Goto")
        :desc "Desktop" "`"   #'+jg-bindings-goto-desktop

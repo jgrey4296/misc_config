@@ -3,6 +3,7 @@
 (load! "+vars")
 (load! "+hooks")
 (load! "+bindings")
+(load! "+bindings_2")
 ;;
 ;;; Packages
 (use-package! toc-org ; auto-table of contents

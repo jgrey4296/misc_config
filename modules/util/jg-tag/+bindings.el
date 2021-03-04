@@ -30,7 +30,8 @@
        )
       )
 
-(map! :mode org
+(map! :after org
+      :map org-mode-map
       :localleader
       (:prefix "."
        :desc "Clean Tags"          "c" #'jg-tag-clean-org

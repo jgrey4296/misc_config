@@ -32,35 +32,37 @@
 ;;; Personal
 (map! :after org
       :map org-mode-map
+      (:leader
+       :prefix "t"
+       "l"   'org-toggle-link-display)
       (:prefix "g"
         "j" #'org-forward-heading-same-level
-        "k" #'org-backward-heading-same-level)
-
+        "k" #'org-backward-heading-same-level
+        "h" nil
+        "h" #'helm-org-in-buffer-headings)
       (:prefix "]"
         "p" #'org-next-link)
       (:prefix "["
         "p" #'org-previous-link)
-      (:prefix "g"
-         "h" #'helm-org-in-buffer-headings)
-      "." nil
       (:localleader
         "." nil
-        "i" nil
        ;; SRC CODE
        (:prefix ("." . "JG Custom")
-         "e"   'org-edit-src-code
-         "E"   'org-babel-execute-src-block
+        :desc "Edit Codeblock " "e"   'org-edit-src-code
+         :desc "Exec Codeblock" "E"   'org-babel-execute-src-block
         ;; Links
-         "d"   'org-toggle-link-display
-         "o"   '+jg-org-open_link_in_buffer
-         "O"   '+jg-org-open_link_externally
+        (:prefix ("l" . "Links")
+         ;; "o"   '+jg-org-open_link_in_buffer
+         ;; "O"   '+jg-org-open_link_externally
          "n"   '+jg-org-change_link_name
+         )
         )
+       "i" nil
        ;;Formatting
-       :prefix ("i" . "Insert")
+       (:prefix ("i" . "Insert")
         "t"   '+jg-org-insert-heading-trio
         "h"   'org-insert-subheading
         "d" #'org-insert-drawer
         )
+       )
       )
-

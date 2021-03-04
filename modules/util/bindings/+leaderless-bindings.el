@@ -1,8 +1,8 @@
 ;;; util/base_bindings/+bindings.el -*- lexical-binding: t; -*-
 
-(global-set-key (kbd "C-c [") '+jg-personal-insert-lparen)
-(global-set-key (kbd "C-c ]") '+jg-personal-insert-rparen)
-(global-set-key (kbd "C-c u") 'universal-argument)
+(global-set-key (kbd "C-c [") #'+jg-personal-insert-lparen)
+(global-set-key (kbd "C-c ]") #'+jg-personal-insert-rparen)
+(global-set-key (kbd "C-c u") #'universal-argument)
 (map! :g "C-x h" help-map)
 
 
@@ -12,19 +12,21 @@
  )
 
 (map! :after evil
-      :map evil-motion-state-map
+      (:map evil-motion-state-map
       "\\" nil
       "] RET" #'jg-narrowing-move-focus-forward
-      "[ RET" #'jg-narrowing-move-focus-backward
-)
+      "[ RET" #'jg-narrowing-move-focus-backward)
+      (:map evil-normal-state-map
+      "z n" nil
+      "z c" #'jg-toggle-narrow-buffer)
+      )
 
 ;; (map! :after evil
 ;;       :map shell-mode-map
 ;;       (:localleader
 ;;        "h" #'counsel-shell-history))
 
-(define-localleader-key! :keymaps
-  '(shell-mode-map)
+(define-localleader-key! :keymaps '(shell-mode-map)
   "h" #'counsel-shell-history)
 
 ;; (after! evil
@@ -42,15 +44,14 @@
       "\\" ibuffer--filter-map
       )
 
-(map! :prefix "z"
-      :nv "n" 'jg-toggle-narrow-buffer
-      )
-
-(map! :n "gb" #'avy-pop-mark)
+(map! :after evil
+      :map evil-normal-state-map
+      :prefix "g"
+      "b" #'avy-pop-mark)
 
 (map! :after flycheck
       :map flycheck-error-list-mode-map
-      "," nil
+      :n "," nil
       :n "," #'tabulated-list-sort
       :n "{" #'tabulated-list-narrow-current-column
       :n "}" #'tabulated-list-widen-current-column

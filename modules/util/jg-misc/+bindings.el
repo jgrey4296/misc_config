@@ -2,5 +2,5 @@
 
 (map! :leader
       :prefix "x"
-      :desc "Uniqify" :n "l u" #'+jg-misc-uniquify
+      :desc "Uniqify" "l u" #'+jg-misc-uniquify
       )

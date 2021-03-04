@@ -1,9 +1,9 @@
 
 (map! :mode vlf-mode
-      :n "] A" 'vlf-next-batch-from-point
-      :n "] a" 'vlf-next-batch
-      :n "[ a" 'vlf-prev-batch
-      :n "SPC a U v " 'vlf-set-batch-size
+      "] A" 'vlf-next-batch-from-point
+      "] a" 'vlf-next-batch
+      "[ a" 'vlf-prev-batch
+      "SPC a U v " 'vlf-set-batch-size
       )
 (map! :after (evil hi-lock)
       :map evil-normal-state-map

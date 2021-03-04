@@ -3,7 +3,7 @@
 ;;;###package dired-git-info
 (map! :after dired
       :map (dired-mode-map ranger-mode-map)
-      :ng ")"                               #'dired-git-info-mode
+      :g ")"                                #'dired-git-info-mode
       :n "o"                                #'dired-find-file-other-window
       :n "S"                                #'hydra-dired-quick-sort/body
       (:when (featurep! :editor jg-personal)

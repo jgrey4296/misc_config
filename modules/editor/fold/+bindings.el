@@ -26,30 +26,30 @@
       "r" 'vimish-fold-unfold-all
       )
 
-      (:prefix ("1" . "Outline")
-       "a" 'outline-toggle-children
-       "A" 'outline-show-subtree
-       "r" 'outline-show-all
-       "f" 'outline-hide-subtree
-       "m" #'(lambda () (interactive) (outline-hide-region-body (point-min) (point-max)))
-       "o" 'outline-hide-other
-       )
+      ;; (:prefix ("1" . "Outline")
+      ;;  "a" 'outline-toggle-children
+      ;;  "A" 'outline-show-subtree
+      ;;  "r" 'outline-show-all
+      ;;  "f" 'outline-hide-subtree
+      ;;  "m" #'(lambda () (interactive) (outline-hide-region-body (point-min) (point-max)))
+      ;;  "o" 'outline-hide-other
+      ;;  )
 
-      (:prefix ("2" . "Hide-show")
-       "a" 'hs-toggle-hiding
-       "A" 'hs-show-all
-       "m" 'hs-hide-all
-       "f" 'hs-hide-block-at-point
-       )
+      ;; (:prefix ("2" . "Hide-show")
+      ;;  "a" 'hs-toggle-hiding
+      ;;  "A" 'hs-show-all
+      ;;  "m" 'hs-hide-all
+      ;;  "f" 'hs-hide-block-at-point
+      ;;  )
 
-      (:prefix ("3" . "Origami")
-       "a" 'origami-toggle-node
-       "A" 'origami-open-all-nodes
-       "c" 'origami-close-node
-       "C" 'origami-close-all-nodes
-       "s" 'origami-open-node-recursively
-       "S" 'origami-close-node-recursively
-       )
+      ;; (:prefix ("3" . "Origami")
+      ;;  "a" 'origami-toggle-node
+      ;;  "A" 'origami-open-all-nodes
+      ;;  "c" 'origami-close-node
+      ;;  "C" 'origami-close-all-nodes
+      ;;  "s" 'origami-open-node-recursively
+      ;;  "S" 'origami-close-node-recursively
+      ;;  )
 
 )
 

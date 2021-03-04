@@ -28,44 +28,39 @@
       "C-c [" nil
       "C-c ]" nil
       )
-;; (map! :after org
-;;       :map org-agenda-mode-map
-;; 	:prefix "v"
-;;         "w"   #'org-agenda-week-view
-;;         "m"   #'org-agenda-month-view
-;;         )
 
 ;;; Personal
-(map! :map org-mode-map
+(map! :after org
+      :map org-mode-map
       (:prefix "g"
-       :n "j" #'org-forward-heading-same-level
-       :n "k" #'org-backward-heading-same-level)
+        "j" #'org-forward-heading-same-level
+        "k" #'org-backward-heading-same-level)
 
       (:prefix "]"
-       :n "p" #'org-next-link)
+        "p" #'org-next-link)
       (:prefix "["
-       :n "[ p" #'org-previous-link)
+        "p" #'org-previous-link)
       (:prefix "g"
-       :n  "h" #'helm-org-in-buffer-headings)
+         "h" #'helm-org-in-buffer-headings)
       "." nil
       (:localleader
-       :n "." nil
-       :n "i" nil
+        "." nil
+        "i" nil
        ;; SRC CODE
        (:prefix ("." . "JG Custom")
-        :n "e"   'org-edit-src-code
-        :n "E"   'org-babel-execute-src-block
+         "e"   'org-edit-src-code
+         "E"   'org-babel-execute-src-block
         ;; Links
-        :n "d"   'org-toggle-link-display
-        :n "o"   '+jg-org-open_link_in_buffer
-        :n "O"   '+jg-org-open_link_externally
-        :n "n"   '+jg-org-change_link_name
+         "d"   'org-toggle-link-display
+         "o"   '+jg-org-open_link_in_buffer
+         "O"   '+jg-org-open_link_externally
+         "n"   '+jg-org-change_link_name
         )
        ;;Formatting
        :prefix ("i" . "Insert")
-       :n "t"   '+jg-org-insert-heading-trio
-       :n "h"   'org-insert-subheading
-       :n "d" #'org-insert-drawer
-       )
+        "t"   '+jg-org-insert-heading-trio
+        "h"   'org-insert-subheading
+        "d" #'org-insert-drawer
+        )
       )
 

@@ -827,3 +827,5 @@
 *** TODO performative outputs
 *** TODO make bookmarks helm output to a list sorted by year, grouped by author...
 *** Where to go for what was said about whom and when.
+
+reminder: sankey diagram

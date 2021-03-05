@@ -4,6 +4,6 @@
 [push]
 	default = matching
 [credential]
-	helper = osxkeychain
+	helper = cache
 [core]
 	excludesfile = ~/.shell_files/.gitignore_global

@@ -7,6 +7,7 @@
 (package! plantuml-mode)
 (package! rainbow-mode)
 (package! undo-tree)
+(package! helpful :pin nil)
 
 (package! 2048-game         :disable t)
 (package! ace-link          :disable t)

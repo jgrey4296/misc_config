@@ -36,5 +36,4 @@
 
   ;; Remove text/html since it's not human readable
   (delq! :text/html jupyter-org-mime-types)
-
-  (require 'tramp))
+  )

@@ -64,3 +64,18 @@
       )
 
 (add-hook 'tabulated-list-mode-hook 'turn-off-evil-snipe-mode)
+
+(define-key evil-motion-state-map [down-mouse-1] #'ignore)
+(define-key evil-motion-state-map [mouse-1] #'ignore)
+(define-key evil-motion-state-map [drag-mouse-1] #'ignore)
+
+(define-key evil-motion-state-map [down-mouse-2] #'ignore)
+(define-key evil-motion-state-map [mouse-2] #'ignore)
+(define-key evil-motion-state-map [drag-mouse-2] #'ignore)
+
+(define-key evil-motion-state-map [down-mouse-3] #'ignore)
+(define-key evil-motion-state-map [mouse-3] #'ignore)
+(define-key evil-motion-state-map [drag-mouse-3] #'ignore)
+
+(define-key evil-motion-state-map [mouse-4] #'ignore)
+(define-key evil-motion-state-map [mouse-5] #'ignore)

@@ -4,7 +4,7 @@
       :map org-mode-map
       :localleader
       :prefix "."
-      :desc "Run Org Test" "T" 'jg-org-test-test-org-file
+      :desc "Run Org Test" "T" #'jg-org-test-test-org-file
 )
 
 (load! "+funcs")

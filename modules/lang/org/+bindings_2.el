@@ -1,5 +1,4 @@
 ;; lang/org/+bindings_2.el -*- lexical-binding: t; -*-
-
 ;; Misc
 (map! :after org
       :map org-mode-map
@@ -215,9 +214,9 @@
       )
 ;;; <T>
 (map! :after org
-:map org-mode-map
-        :localleader
-        :prefix ("t" . "Toggle")
+      :map org-mode-map
+      :localleader
+      :prefix ("t" . "Toggle")
         "a" #'org-toggle-archive-tag
         "i" #'org-toggle-item
         "h" #'org-toggle-heading

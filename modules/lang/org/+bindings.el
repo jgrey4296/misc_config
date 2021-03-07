@@ -26,7 +26,8 @@
       "m"   #'org-agenda-month-view
       )
 
-(map! :map evil-org-mode-map
+(map! :after evil-org
+      :map evil-org-mode-map
       :ni [C-return]   #'+org/insert-item-below
       :ni [C-S-return] #'+org/insert-item-above
       ;; navigate table cells (from insert-mode)

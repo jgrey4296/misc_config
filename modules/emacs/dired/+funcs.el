@@ -1,5 +1,7 @@
 ;;; emacs/dired/+funcs.el -*- lexical-binding: t; -*-
 
+(defvar rename-regexp-query nil)
+
 (defun +jg-GLOBAL-dired-do-rename-regexp (regexp newname arg whole-name)
   "Customised dired-do-rename-regexp from dired-aux to use GLOBAL regexp flag
 

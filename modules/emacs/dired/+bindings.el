@@ -3,7 +3,7 @@
 ;;;###package dired-git-info
 (map! :after dired
       :map (dired-mode-map ranger-mode-map)
-      :g ")"                                #'dired-git-info-mode
+      :m ")"                                #'dired-git-info-mode
       :n "o"                                #'dired-find-file-other-window
       :n "S"                                #'hydra-dired-quick-sort/body
       (:when (featurep! :editor jg-personal)
@@ -17,35 +17,8 @@
          )
         )
        )
-      (:when (featurep! :util jg-tag)
-       :localleader
-       (:prefix "d"
-          :desc "Count Untagged Orgs" "u"   #'jg-tag-dired-directory-count-untagged
-          :desc "Describe Marked Tags" "t"  #'jg-tag-describe-marked-tags
-         )
-       (:prefix ("K" . "Destructive")
-        :desc "Clean Marked" "c"          #'jg-tag-clean-marked-files
-        :desc "Chop File Names" "C"       #'jg-tag-chop-long-files-from-dired
-        :desc "Unify Pdf Locations" "U"   #'jg-tag-unify-pdf-locations
-        :desc "Quick Compress" "Z"        #'jg-tag-quick-compress-orgs
-        :desc "Reformat Json" "J"         #'jg-tag-reformat-jsons
-        )
-       (:prefix ("m" . "Mark")
-        :desc "Mark Untagged Orgs" "u"    #'jg-tag-mark-untagged-orgs
-        )
-       (:prefix ("f" . "Find")
-        :desc "Find Random Marked" "r"    #'jg-tag-find-random-marked-file
-        :desc "Display Tag Selection" "s" #'jg-tag-display-selection
-        )
-       (:prefix ("g" . "gtags")
-        )
-       (:prefix ("i" . "Index")
-        :desc "Index People" "p"          #'jg-tag-index-people
-        :desc "Index Tags" "t"            #'jg-tag-index-tags
-        )
-       (:when (featurep! :lang python)
-        "v" 'pyvenv-activate
-        )
+      (:when (featurep! :lang python)
+       "v" 'pyvenv-activate
        )
       )
 

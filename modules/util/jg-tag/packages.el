@@ -8,3 +8,4 @@
 (package! tag-mode :recipe '(:local-repo "~/.doom.d/packages/tag-mode"))
 (package! hydra)
 (package! cl-lib)
+(package! ivy)

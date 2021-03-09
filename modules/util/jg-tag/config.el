@@ -29,6 +29,8 @@
   )
 
 (after! org (load! "+org-spec-bindings"))
+(after! evil (load! "+bindings"))
+(after! ivy (load! "+ivy_actions"))
 
 (load! "+vars")
 (load! "+bibtex")
@@ -41,4 +43,3 @@
 (load! "+tags")
 (load! "+util")
 (load! "+org-ref-funcs")
-(load! "+bindings")

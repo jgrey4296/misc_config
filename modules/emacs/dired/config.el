@@ -1,6 +1,7 @@
 ;;; tools/dired/config.el -*- lexical-binding: t; -*-
 
 (load! "+bindings")
+(load! "+funcs")
 (setq dgi-commit-message-format "%h %cs %s"
       dgi-auto-hide-details-p nil)
 

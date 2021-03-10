@@ -30,6 +30,18 @@
          (type (org-element-property :type context))
          (path (org-element-property :path context)))
     (and (equal type "file") (not (file-exists-p path)))))
+(defun +jg-org-link-hint-external (uri)
+  """ Open a link, forcing it to be external to emacs """
+  (let* ((ext (f-ext uri))
+         (open-externally (if ext
+                              (-contains? +jg-external-file-link-types (downcase ext))
+                            nil))
+         (current-prefix-arg (if open-externally '(16) nil))
+         )
+    (condition-case nil
+        (call-interactively 'org-open-at-point)
+      (error (org-open-link-from-string uri))))
+  )
 
 (defun +jg-org-quicklook-link ()
   (let* ((context (org-element-lineage

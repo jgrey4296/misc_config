@@ -8,10 +8,24 @@
 (load! "+org-funcs")
 (load! "+org-pomodoro-funcs")
 (load! "+bindings")
+(load! "+vars")
 
 (use-package! academic-phrases
   :defer t
 )
+
+(use-package! link-hint
+  :config
+  ;; override default org link to open externally sometimes
+  (link-hint-define-type 'org-link
+    :next #'link-hint--next-org-link
+    :at-point-p #'link-hint--org-link-at-point-p
+    :vars '(org-mode org-agenda-mode org-link-minor-mode)
+    :open #'+jg-org-link-hint-external
+    :open-multiple t
+    :copy #'kill-new)
+  (push 'org-link link-hint-types)
+  )
 (after! helm-org
     ;; TODO add a keybind for helm-org-rifle
     (add-to-list 'helm-completing-read-handlers-alist '(org-capture . helm-org-completing-read-tags))

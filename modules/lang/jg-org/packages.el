@@ -7,3 +7,4 @@
 (package! org-projectile)
 (package! org-superstar)
 (package! outline-toc)
+(package! link-hint)

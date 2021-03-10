@@ -21,6 +21,9 @@
          :desc "Marked Info" "m"            #'+jg-personal-dired-marked-info
          :desc "Dired Diff" "d"             #'+jg-personal-dired-diff
          )
+        (:prefix ("K" . "Destructive")
+         :desc "Fix Org Links" :n "L" #'+jg-dired-fix-org-links
+         )
         )
        )
       (:when (featurep! :lang python)

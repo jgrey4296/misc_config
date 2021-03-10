@@ -50,3 +50,21 @@ Type SPC or `y' to %s one match, DEL or `n' to skip to next,
 	 rename-regexp-query)
     (dired-create-files
      file-creator operation fn-list regexp-name-constructor marker-char)))
+
+(defun +jg-dired-fix-org-links ()
+  (interactive)
+  (let* ((files (dired-get-marked-files))
+         (orgs (-filter #'(lambda (x) (string-equal "org" (f-ext x))) files))
+         )
+    (loop for file in orgs do
+          (with-temp-buffer
+            (insert-file file)
+            (while (re-search-forward "\\[\\[/users/johngrey/desktop/twitter/orgs/" nil t)
+              (replace-match "[[file:./")
+              )
+            (write-file file)
+            )
+          )
+    )
+  )
+

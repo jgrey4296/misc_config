@@ -6,6 +6,12 @@
       :m ")"                                #'dired-git-info-mode
       :n "o"                                #'dired-find-file-other-window
       :n "S"                                #'hydra-dired-quick-sort/body
+      (:prefix "]"
+       :desc "Next Marked" :n "m" #'dired-next-marked-file
+       )
+      (:prefix "["
+       :desc "Prev Marked" :n "m" #'dired-prev-marked-file
+       )
       (:when (featurep! :editor jg-personal)
         :n "i"                              #'+jg-personal-dired-insert-subdir-maybe-recursive
         :n "DEL"                            #'dired-kill-subdir

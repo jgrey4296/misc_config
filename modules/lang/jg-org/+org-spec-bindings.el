@@ -18,6 +18,10 @@
        :n "p" #'org-next-link)
       (:prefix "["
        :n "p" #'org-previous-link)
+      (:localleader
+       :prefix ("f". "Format")
+       :n "d" #'+jg-org-fix-properties-drawer
+       )
       )
 
 

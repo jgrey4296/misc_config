@@ -41,7 +41,7 @@
       "q" #'org-set-tags-command
       "T" #'org-todo-list
       )
-;;; <A>
+;;; <A> Attachments
 (map! :after org
       :map org-mode-map
       :localleader
@@ -65,7 +65,7 @@
        "P" #'org-download-yank)
       )
 
-;;; <B>
+;;; <B> Tables
 (map! :after org
       :map org-mode-map
       :localleader
@@ -92,7 +92,7 @@
       (:when (featurep! +gnuplot)
        "p" #'org-plot/gnuplot)
       )
-;;; <C>
+;;; <C> Clock
 (map! :after org
       :map org-mode-map
       :localleader
@@ -113,7 +113,7 @@
       "=" #'org-clock-timestamps-up
       "-" #'org-clock-timestamps-down
       )
-;;; <D>
+;;; <D> Dates
 (map! :after org
       :map org-mode-map
       :localleader
@@ -123,7 +123,14 @@
       "t" #'org-time-stamp
       "T" #'org-time-stamp-inactive
       )
-;;; <G>
+;;; <F> Formatting
+(map! :after org
+      :map org-mode-map
+      :localleader
+      :prefix ("f" . "Format")
+
+      )
+;;; <G> Goto
 (map! :after org
       :map org-mode-map
       :localleader
@@ -142,7 +149,7 @@
       "v" #'+org/goto-visible
       "x" #'org-capture-goto-last-stored
       )
-;;; <I>
+;;; <I> Insert
 (map! :after org
       :map org-mode-map
       :localleader
@@ -152,7 +159,7 @@
       "l" #'org-insert-link
       "S" #'org-insert-last-stored-link
       )
-;;; <L>
+;;; <L> Links
 (map! :after org
       :map org-mode-map
       :localleader
@@ -165,7 +172,7 @@
       "s" #'org-store-link
       "S" #'org-insert-last-stored-link
       )
-;;; <P>
+;;; <P> Publish
 (map! :after org
       :map org-mode-map
       :localleader
@@ -176,7 +183,7 @@
       "P" #'org-publish-current-project
       "s" #'org-publish-sitemap
       )
-;;; <R>
+;;; <R> Refile
 (map! :after org
       :map org-mode-map
       :localleader
@@ -190,7 +197,7 @@
       "v" #'+org/refile-to-visible
       "r" #'org-refile ; to all `org-refile-targets'
       )
-;;; <S>
+;;; <S> Subtree
 (map! :after org
       :map org-mode-map
       :localleader
@@ -212,7 +219,7 @@
        "p" #'org-priority
        "u" #'org-priority-up)
       )
-;;; <T>
+;;; <T> Toggle
 (map! :after org
       :map org-mode-map
       :localleader

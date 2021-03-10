@@ -20,7 +20,7 @@
        :desc "Prev Link" :n "p" #'org-previous-link)
       (:localleader
        :prefix ("f". "Format")
-       :desc "Fix Drawers" :n "d" #'+jg-org-fix-properties-drawer
+       :desc "Fix Drawers" :n "d" #'+jg-org-fix-properties-drawers
        )
       )
 

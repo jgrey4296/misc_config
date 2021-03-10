@@ -70,6 +70,7 @@
   )
 
 (defun +jg-org-fix-properties-drawers ()
+  (interactive)
   (goto-char (point-min))
   ;; Find properties drawer
   (while (re-search-forward "^\s*:PROPERTIES:$" nil t)

@@ -9,18 +9,18 @@
 (map! :map org-mode-map
       (:leader
        :prefix "t"
-       "l"   'org-toggle-link-display)
+       :desc "Toggle Links" "l"   'org-toggle-link-display)
       (:prefix "g"
-       :n "j" #'org-forward-heading-same-level
-       :n "k" #'org-backward-heading-same-level
-       :n "h" #'helm-org-in-buffer-headings)
+       :desc "Forward Heading" :n "j" #'org-forward-heading-same-level
+       :desc "Back Heading" :n "k" #'org-backward-heading-same-level
+       :desc "Headings Helm" :n "h" #'helm-org-in-buffer-headings)
       (:prefix "]"
-       :n "p" #'org-next-link)
+       :desc "Next Link" :n "p" #'org-next-link)
       (:prefix "["
-       :n "p" #'org-previous-link)
+       :desc "Prev Link" :n "p" #'org-previous-link)
       (:localleader
        :prefix ("f". "Format")
-       :n "d" #'+jg-org-fix-properties-drawer
+       :desc "Fix Drawers" :n "d" #'+jg-org-fix-properties-drawer
        )
       )
 

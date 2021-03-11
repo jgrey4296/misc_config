@@ -7,7 +7,7 @@
 
 (load! "+org-funcs")
 (load! "+org-pomodoro-funcs")
-(load! "+bindings")
+
 (load! "+vars")
 
 (use-package! academic-phrases
@@ -47,7 +47,7 @@
   (push 'org-indent-mode minor-mode-list)
   (push '("Scholar" . "https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q=%s") org-link-abbrev-alist)
 
-  (load! "+org-spec-bindings")
+
   )
 (after! org-pomodoro
   ;; add a startup hook for pomodoro to tweet the end time
@@ -63,4 +63,9 @@
   )
 (after! org-superstar
   (setq org-hide-leading-stars t)
+  )
+
+(after! evil
+  (load! "+bindings")
+  (load! "+org-spec-bindings")
   )

@@ -21,23 +21,10 @@
       "z c" #'jg-toggle-narrow-buffer)
       )
 
-;; (map! :after evil
-;;       :map shell-mode-map
-;;       (:localleader
-;;        "h" #'counsel-shell-history))
-
-(define-localleader-key! :keymaps '(shell-mode-map)
-  "h" #'counsel-shell-history)
-
-;; (after! evil
-;;   (general-define-key :states '(normal visual motion emacs insert)
-;;                     :major-modes t
-;;                     :prefix doom-localleader-key
-;;                     :non-normal-prefix doom-localleader-alt-key
-;;                     :keymaps '(shell-mode-map)
-;;                     "h" #'counsel-shell-history))
-
-
+(map! :after evil
+      :map shell-mode-map
+      :localleader
+      "h" #'counsel-shell-history)
 
 (map! :after ibuffer
       :mode ibuffer-mode

@@ -5,4 +5,6 @@
   )
 
 (load! "+funcs")
-(load! "+bindings")
+(after! evil
+  (load! "+bindings")
+  )

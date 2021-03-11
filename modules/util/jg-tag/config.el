@@ -28,8 +28,11 @@
   (push 'tag-clean-minor-mode minor-mode-list)
   )
 
-(after! org (load! "+org-spec-bindings"))
-(after! evil (load! "+bindings"))
+(after! evil
+  (load! "+org-spec-bindings")
+  (load! "+bindings")
+  )
+
 (after! ivy (load! "+ivy_actions"))
 
 (load! "+vars")

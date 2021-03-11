@@ -52,8 +52,10 @@
          :gn [S-s-return]   #'+default/newline-above)))
 
 (when (featurep! +bindings)
-  (load! "+leader-bindings")
-  (load! "+leaderless-bindings")
+  (after! evil
+    (load! "+leader-bindings")
+    (load! "+leaderless-bindings")
+    )
 )
 
 

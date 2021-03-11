@@ -4,4 +4,6 @@
   :commands (project-walk-minor-mode project-walk-next)
 )
 
-(load! "+bindings")
+(after! evil
+  (load! "+bindings")
+)

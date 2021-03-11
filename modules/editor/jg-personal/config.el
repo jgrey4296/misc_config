@@ -2,7 +2,9 @@
 ;; loaded fourth
 
 (load! "+variables")
-(load! "+bindings")
+(after! evil
+  (load! "+bindings")
+)
 (load! "+funcs")
 (load! "+evil-ex-setup")
 (load! "+helm-funcs")

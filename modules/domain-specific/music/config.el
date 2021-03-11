@@ -57,3 +57,7 @@
 (use-package! chuck-mode
   :commands (chuck-mode)
   )
+
+(after! evil
+  (load! "+bindings")
+  )

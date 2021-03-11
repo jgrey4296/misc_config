@@ -73,5 +73,7 @@
   (global-origami-mode)
   )
 
-(load! "+bindings")
+(after! evil
+  (load! "+bindings")
+  )
 (load! "+vars")

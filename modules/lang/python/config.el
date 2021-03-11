@@ -1,8 +1,10 @@
 ;;; lang/python/config.el -*- lexical-binding: t; -*-
 
 (load! "+funcs")
-(load! "+bindings")
 (load! "+vars")
+(after! evil
+  (load! "+bindings")
+  )
 
 
 ;;

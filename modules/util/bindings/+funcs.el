@@ -197,3 +197,13 @@ Dedicated (locked) windows are left untouched."
               :caller 'counsel-workspace)
     )
   )
+
+(defun +jg-toggle-line-numbers ()
+  (interactive)
+  (setq display-line-numbers (if (not (eq display-line-numbers t)) t nil))
+  )
+
+(defun +jg-toggle-line-numbers-visual ()
+  (interactive)
+  (setq display-line-numbers (if (not (eq display-line-numbers 'visual)) 'visual nil))
+  )

@@ -477,7 +477,8 @@
        (:prefix ("v" . "Visual")
         :desc "Big mode"                     "b" #'doom-big-font-mode
         :desc "Frame fullscreen"             "F" #'toggle-frame-fullscreen
-        :desc "Line numbers"                 "n" #'doom/toggle-line-numbers
+        :desc "Line numbers"                 "n" #'+jg-toggle-line-numbers
+        :desc "Line numbers Visual"          "N" #'+jg-toggle-line-numbers-visual
         :desc "Evil goggles"                 "g" #'evil-goggles-mode
         :desc "Soft line wrapping"           "w" #'visual-line-mode
         (:when (featurep! :editor word-wrap)
@@ -498,13 +499,12 @@
         (:when (featurep! :ui indent-guides)
          :desc "Indent guides"              "i"  #'highlight-indent-guides-mode)
         :desc "Indent style"                 "I" #'doom/toggle-indent-style
-        :desc "Evil-visual-mark"            "v"  #'evil-visual-mark-mode
-        :desc "Auto-Highlight"              "h"  #'auto-highlight-symbol-mode
+        :desc "Evil-visual-mark"             "v"  #'evil-visual-mark-mode
+        :desc "Auto-Highlight"               "h"  #'auto-highlight-symbol-mode
         )
        (:when (featurep! :lang org +pomodoro)
         :desc "Pomodoro timer"             "t"   #'org-pomodoro)
         :desc "SmartParens"  "s"                 #'smartparens-global-mode
-       ;; centre point/line
        ;; highlight long lines
        ;; auto-completion
        ;; camel-case-motion

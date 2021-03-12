@@ -6,7 +6,7 @@
 (map! :g "C-x h" help-map)
 
 
-(map! :after (featurep! :editor evil)
+(map! :after evil
  :m "TAB" nil
  :m "TAB" #'indent-for-tab-command
  )

@@ -4,9 +4,9 @@
 (load! "+variables")
 (after! evil
   (load! "+bindings")
+  (load! "+evil-ex-setup")
 )
 (load! "+funcs")
-(load! "+evil-ex-setup")
 (load! "+helm-funcs")
 (load! "+ibuffer-funcs")
 (load! "+dired-funcs")
@@ -55,7 +55,6 @@
 
 (after! (evil evil-snipe)
   (push 'dired-mode evil-snipe-disabled-modes)
-
   )
 (after! yasnippet
   ;; If an error occurs, change yas-installed-snippets-dir is not in yas-snippet-dirs

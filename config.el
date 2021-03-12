@@ -17,8 +17,6 @@
 (setq +doom-quit-messages nil
       ;; auto-save-file-name-transforms (quote ((".*" "~/.emacs.d/autosaves/`" t)))
       backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/")))
-      dired-omit-files "^\\.?#\\|^\\.$\\|^\\.DS_Store$\\|^\\.git$\\|^__pycache__$\\|^flycheck__.+\\.py\\|^\\.mypy_cache$"
-      dired-omit-verbose nil
       display-buffer-alist '(("*shell*" display-buffer-same-window (nil)) (undo-tree-visualizer-buffer-name display-buffer-at-bottom (nil)))
       display-line-numbers-width 4
       evil-move-beyond-eol t

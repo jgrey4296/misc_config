@@ -27,10 +27,22 @@
 
 (setq dired-omit-verbose nil
       dired-omit-files
-      (concat dired-omit-files
-              "\\|^.DS_Store\\'"
-              "\\|^.project\\(?:ile\\)?\\'"
-              "\\|^.\\(svn\\|git\\)\\'"
-              "\\|^.ccls-cache\\'"
-              "\\|\\(?:\\.js\\)?\\.meta\\'"
-              "\\|\\.\\(?:elc\\|o\\|pyo\\|swp\\|class\\)\\'"))
+      (string-join '("^GPATH$"
+                     "^GRTAGS$"
+                     "^GTAGS$"
+                     "^\.$"
+                     "^\.\.$"
+                     "^\.gitignore"
+                     "^\.pylintrc"
+                     "^\.venv"
+                     "^__init__.py"
+                     "^.DS_Store$"
+                     "^__pycache__$"
+                     "^flycheck__.+\\.py"
+                     "^\\.mypy_cache$"
+                     "^.project\\(?:ile\\)?\\'"
+                     "^.\\(svn\\|git\\)\\'"
+                     "^.ccls-cache\\'"
+                     "\\(?:\\.js\\)?\\.meta\\'"
+                     "\\.\\(?:elc\\|o\\|pyo\\|swp\\|class\\)\\'")
+                   "\\|"))

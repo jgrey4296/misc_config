@@ -3,30 +3,15 @@
 (after! evil
   (load! "+bindings")
   )
+(after! dired
+  (load! "+vars")
+  )
 (load! "+funcs")
-(setq dgi-commit-message-format "%h %cs %s"
-      dgi-auto-hide-details-p nil)
 
 (use-package! dired
   :commands dired-jump
-  :init
-  (setq dired-auto-revert-buffer t  ; don't prompt to revert; just do it
-        dired-dwim-target t  ; suggest a target for moving/copying intelligently
-        dired-hide-details-hide-symlink-targets nil
-        ;; Always copy/delete recursively
-        dired-recursive-copies  'always
-        dired-recursive-deletes 'top
-        ;; Where to store image caches
-        image-dired-dir (concat doom-cache-dir "image-dired/")
-        image-dired-db-file (concat image-dired-dir "db.el")
-        image-dired-gallery-dir (concat image-dired-dir "gallery/")
-        image-dired-temp-image-file (concat image-dired-dir "temp-image")
-        image-dired-temp-rotate-image-file (concat image-dired-dir "temp-rotate-image")
-        ;; Screens are larger nowadays, we can afford slightly larger thumbnails
-        image-dired-thumb-size 150)
   :config
-  (set-popup-rule! "^\\*image-dired"
-    :slot 20 :size 0.8 :select t :quit nil :ttl 0)
+  (set-popup-rule! "^\\*image-dired" :slot 20 :size 0.8 :select t :quit nil :ttl 0)
   (set-evil-initial-state! 'image-dired-display-image-mode 'emacs)
 
   (let ((args (list "-ahl" "-v" "--group-directories-first")))
@@ -121,18 +106,6 @@ we have to clean it up ourselves."
   :unless (featurep! +ranger)
   :hook (dired-mode . dired-omit-mode)
   :config
-  (setq dired-omit-verbose nil
-        dired-omit-files
-        (concat dired-omit-files
-                "\\|^.DS_Store\\'"
-                "\\|^.project\\(?:ile\\)?\\'"
-                "\\|^.\\(svn\\|git\\)\\'"
-                "\\|^.ccls-cache\\'"
-                "\\|\\(?:\\.js\\)?\\.meta\\'"
-                "\\|\\.\\(?:elc\\|o\\|pyo\\|swp\\|class\\)\\'"))
-  ;; Disable the prompt about whether I want to kill the Dired buffer for a
-  ;; deleted directory. Of course I do!
-  (setq dired-clean-confirm-killing-deleted-buffers nil)
   ;; Let OS decide how to open certain files
   (when-let (cmd (cond (IS-MAC "open")
                        (IS-LINUX "xdg-open")
@@ -157,8 +130,7 @@ we have to clean it up ourselves."
 (use-package! dired-aux
   :defer t
   :config
-  (setq dired-create-destination-dirs 'ask
-        dired-vc-rename-file t))
+)
 (use-package! dired-quick-sort
   :init
   (dired-quick-sort-setup)

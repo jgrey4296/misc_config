@@ -59,8 +59,8 @@ Type SPC or `y' to %s one match, DEL or `n' to skip to next,
     (loop for file in orgs do
           (with-temp-buffer
             (insert-file file)
-            (while (re-search-forward "\\[\\[/users/johngrey/desktop/twitter/orgs/" nil t)
-              (replace-match "[[file:./")
+            (while (re-search-forward "\\[\\[.+\\(/.+?_files\\)" nil t)
+              (replace-match "[[file:.\\1")
               )
             (write-file file)
             )

@@ -168,7 +168,7 @@ modified from the original bibtex-completion-show-entry
 (defun jg-tag-file-select-helm (candidates)
     " Given a list of Files, provide a helm to open them "
     (interactive)
-    ;; (message "File Select Helm Candidates: %s" (helm-marked-candidates))
+    ;;(message "File Select Helm Candidates: %s" (helm-marked-candidates))
     ;;process candidates?
     (let*(;;(candidate-names (mapcar 'car (helm-marked-candidates)))
           (candidate-values (mapcar 'cdr (helm-marked-candidates)))
@@ -191,7 +191,7 @@ modified from the original bibtex-completion-show-entry
           (goto-char (point-min))
           (let (curr)
             (while (< (point) (point-max))
-              (setq curr (split-string (buffer-substring (point) (line-end-position)) ":"))
+              (setq curr (split-string (buffer-substring (point) (line-end-position)) ":" t "\s+"))
               (push `(,(car curr) . ,curr) jg-tag-twitter-helm-candidates)
               (forward-line)
               )
@@ -205,8 +205,6 @@ modified from the original bibtex-completion-show-entry
             :full-frame t
             :buffer "*helm twitter*"
             :truncate-lines t
-            ;;TODO: is this necessary?
-            :candidates jg-tag-twitter-helm-candidates
             )
       )
     )
@@ -221,22 +219,20 @@ modified from the original bibtex-completion-show-entry
           (goto-char (point-min))
           (let (curr)
             (while (< (point) (point-max))
-              (setq curr (split-string (buffer-substring (point) (line-end-position)) ":"))
-              (push `(,(car curr) . ,(cdr curr)) jg-tag-twitter-heading-helm-candidates)
+              (setq curr (split-string (buffer-substring (point) (line-end-position)) ":" t "\s+"))
+              (push `(,(car curr) . ,curr) jg-tag-twitter-heading-helm-candidates)
               (forward-line)
               )
             )
           )
       )
     ;;add candidates to source
-    (let ((source (cons `(candidates . jg-tag-twitter-heading-helm-candidates) jg-tag-twitter-helm-source)))
+    (let ((source (cons `(candidates . jg-tag-twitter-heading-helm-candidates) jg-tag-twitter-heading-helm-source)))
       ;;call helm
       (helm :sources source
             :full-frame t
             :buffer "*helm twitter heading*"
             :truncate-lines t
-            ;;TODO: is this necessary?
-            :candidates jg-tag-twitter-heading-helm-candidates
             )
       )
     )

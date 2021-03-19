@@ -1,5 +1,4 @@
 ;; helm actions
-
 (defun jg-tag-open-url-action (x)
   " An action added to helm-grep for loading urls found in bookmarks "
   (let* ((marked (helm-marked-candidates))
@@ -124,14 +123,12 @@ modified from the original bibtex-completion-show-entry
           (narrow-to-region (car bounds) (cadr bounds))
           (throw 'break t)
           )))))
-
 (defun jg-tag-insert-twitter-link (candidate)
   (let ((candidates (mapcar 'car (helm-marked-candidates))))
     (with-helm-current-buffer
       (loop for entry in candidates
             do (let ((name (substring entry 1)))
                  (insert (format "[[https://twitter.com/%s][%s]]\n" name entry)))))))
-
 (defun jg-tag-edit-bibtex-notes (keys)
   "Show the first entry in KEYS in the relevant BibTeX file.
 modified from the original bibtex-completion-show-entry
@@ -163,8 +160,25 @@ modified from the original bibtex-completion-show-entry
           (org-mode)
           (throw 'break t)
       ))))
+(defun jg-tag-insert-simple-bibtex (x)
+  (let* ((entry (bibtex-completion-get-entry x))
+         (name (cdr (assoc "title" entry 's-equals?)))
+         )
+    (insert name)
+    )
+  )
+(defun jg-tag-insert-simple-bibtex-wrapped ()
+  (interactive)
+  (save-excursion
+    (let ((curr-word (current-word)))
+      (evil-end-of-line)
+      (insert " ")
+      (jg-tag-insert-simple-bibtex curr-word)
+      )
+    )
+  )
 
-
+;; Dual Helm / Helm-Action:
 (defun jg-tag-file-select-helm (candidates)
     " Given a list of Files, provide a helm to open them "
     (interactive)
@@ -180,6 +194,8 @@ modified from the original bibtex-completion-show-entry
             )
       )
     )
+
+;; Helm Activators:
 (defun jg-tag-helm-twitter ()
     "Run a Helm for searching twitter users"
     (interactive)
@@ -338,7 +354,6 @@ modified from the original bibtex-completion-show-entry
             :bibtex-local-bib local-bib
             :bibtex-candidates candidates
             )))
-
 (defun jg-tag-helm-tagger (&optional beg end)
     """ Opens the Tagging Helm """
     (set-marker jg-tag-marker (if (eq evil-state 'visual)  evil-visual-end (line-end-position)))
@@ -350,6 +365,7 @@ modified from the original bibtex-completion-show-entry
       )
     )
 
+;; Utilities
 (defun jg-helm-bibtex-candidates-formatter (candidates _)
   "Format CANDIDATES for display in helm."
   (cl-loop
@@ -394,27 +410,8 @@ governed by the variable `bibtex-completion-display-formats'."
               (- width (cddr format)))
             0 ?\s)))))))
 
-(defun jg-tag-insert-simple-bibtex (x)
-  (let* ((entry (bibtex-completion-get-entry x))
-         (name (cdr (assoc "title" entry 's-equals?)))
-         )
-    (insert name)
-    )
-  )
 
-(defun jg-tag-insert-simple-bibtex-wrapped ()
-  (interactive)
-  (save-excursion
-    (let ((curr-word (current-word)))
-      (evil-end-of-line)
-      (insert " ")
-      (jg-tag-insert-simple-bibtex curr-word)
-      )
-    )
-  )
-
-
-
+;; Setup
 (after! helm-files
   (setq helm-grep-actions (append helm-grep-actions '(("Open Url" . jg-tag-open-url-action))))
   ;; Build a Custom grep for bookmarks

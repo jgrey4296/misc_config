@@ -2,6 +2,11 @@
 
 ;;
 ;; Packages
+(after! evil
+  (load! "+bindings")
+  )
+(load! "+vars")
+
 
 (use-package! hideshow ; built-in
   :commands (hs-toggle-hiding
@@ -73,7 +78,3 @@
   (global-origami-mode)
   )
 
-(after! evil
-  (load! "+bindings")
-  )
-(load! "+vars")

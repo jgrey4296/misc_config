@@ -17,7 +17,7 @@
 (package! which-key)
 (package! yasnippet)
 (package! yasnippet-snippets)
-
+(package! doom-snippets)
 (package! auto-highlight-symbol)
 (package! centered-cursor-mode)
 (package! evil-visual-mark-mode)

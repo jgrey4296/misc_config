@@ -56,14 +56,10 @@
 (after! (evil evil-snipe)
   (push 'dired-mode evil-snipe-disabled-modes)
   )
-(after! yasnippet
-  ;; If an error occurs, change yas-installed-snippets-dir is not in yas-snippet-dirs
-  ;; as it is obsolete
-  (setq yas-snippet-dirs `(,(expand-file-name "~/.doom.d/snippets/")))
+(after! (yasnippet doom-snippets yasnippet-snippets)
+  (setq yas-snippet-dirs '(+snippets-dir doom-snippets-dir +file-templates-dir yasnippet-snippets-dir))
   (setq yas--default-user-snippets-dir yas-snippet-dirs)
-  ;; ,(expand-file-name "~/github/otherLibs/yasnippet-snippets/snippets")
-  ;; ,(expand-file-name "~/github/otherLibs/yasnippet-snippets")
-  )
+ )
 (after! evil-quickscope
   ;; TODO (spacemacs/set-leader-keys "t q" '+jg-personal-toggle-quickscope-always)
   (global-evil-quickscope-always-mode 1)

@@ -1,3 +1,8 @@
+(load! "+funcs")
+(after! evil
+  (load! "+bindings")
+  )
+
  (setq-default shell-default-shell 'shell
                shell-protect-eshell-prompt 0
                shell-enable-smart-eshell t
@@ -44,9 +49,7 @@
   )
 (use-package! undo-tree
   :init
-  (map! :leader
-        "b u" '+jg-misc-undo-tree
-    )
+
   :config
   (setq undo-tree-visualizer-diff t
         undo-tree-auto-save-history t
@@ -88,7 +91,4 @@
 
   )
 
-(load! "+funcs")
-(after! evil
-  (load! "+bindings")
-  )
+

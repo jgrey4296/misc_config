@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: routledge handbook
+# key: routbook
+# condition: t
+# --
+The Routledge Companion to $0

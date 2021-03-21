@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: Cambridge Handbook
+# uuid:
+# key: camhand
+# condition: t
+# --
+The Cambridge Handbook of $0

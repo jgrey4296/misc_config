@@ -1,6 +1,5 @@
 # -*- mode: snippet -*-
 # name: pylint.checkers
-# uuid:
 # key: pylint.checkers
 # condition: t
 # --

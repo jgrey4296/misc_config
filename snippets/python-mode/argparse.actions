@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: argparse.actions
+# key: argparse.actions
+# condition: t
+# --
+'store'
+'store_const', const=42
+'store_true' 'store_false'
+'append'
+'append_const', const=42
+'count', default=0

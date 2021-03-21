@@ -817,6 +817,8 @@
     to consider climate change.
     Performance is good, but so is not designing something
     to take up entire percentage points of world energy.
+*** Andy Weir: The Egg
+short story about reincarnation of a world of one person?
 ** Tasks
 *** TODO [[https://quality-diversity.github.io/papers][Quality-Diversity]]
 *** TODO emacs editor

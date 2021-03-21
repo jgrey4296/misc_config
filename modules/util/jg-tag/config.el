@@ -13,7 +13,8 @@
   :commands (org-ref-bibtex-hydra/body org-ref-bibtex-new-entry/body)
   :init
   (custom-set-variables '(org-ref-insert-cite-key "C-c i"))
-  (add-hook 'bibtex-mode-hook yas-minor-mode)
+  (add-hook 'bibtex-mode-hook #'yas-minor-mode)
+  (add-hook 'bibtex-mode-hook #'reftex-mode)
   )
 
 

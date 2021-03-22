@@ -39,12 +39,20 @@
       )
 ;; Bibtex bindings
 (map! :map bibtex-mode-map
+      "C-c C-c" #'org-ref-clean-bibtex-entry
       :localleader
-      :desc "Bibtex Hydra" "." #'jg-org-ref-bibtex-hydra/body
-      :desc "New Entry" "n" #'org-ref-bibtex-new-entry/body
+      :desc "Bibtex Hydra"   "." #'jg-org-ref-bibtex-hydra/body
+      :desc "New Entry"      "n" #'org-ref-bibtex-new-entry/body
+      :desc "Scholar Search" "g" #'jg-org-ref-bibtex-google-scholar
+      :desc "Change Entry Type" "t" #'jg-org-ref-edit-entry-type
+      :desc "Copy Entry"      "e" #'jg-org-ref-copy-entry
+      :desc "Copy Key"        "k" #'jg-org-ref-copy-key
       ;; Citation
-      ;; TODO : put this in org-mode bindings? : "i " 'org-reftex-citation
       :desc "Open Pdf" "p" #'+jg-org-ref-open-bibtex-pdf
+      :desc "Open Pdf Folder" "P" #'jg-org-ref-open-folder
+      :desc "Open url" "u" #'jg-org-ref-open-url
+      :desc "Open doi" "d" #'jg-org-ref-open-doi
+      ;; TODO : put this in org-mode bindings? : "i " 'org-reftex-citation
       ;; TODO add open bibtex dir...
       )
 

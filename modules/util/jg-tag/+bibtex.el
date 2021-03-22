@@ -156,6 +156,67 @@ ensuring they work across machines "
     )
   )
 
+(defun jg-org-ref-bibtex-google-scholar ()
+  "Open the bibtex entry at point in google-scholar by its doi."
+  (interactive)
+  (let* ((search-texts (mapcar #'bibtex-autokey-get-field jg-scholar-search-fields))
+         (exact-texts (mapcar #'bibtex-autokey-get-field jg-scholar-search-fields-exact))
+         (exact-string (s-join " " (mapcar #'(lambda (x) (format "\"%s\"" x))
+                                           (-filter #'(lambda (x) (not (string-empty-p x))) exact-texts))))
+         (all-terms (s-concat exact-string (s-join " " search-texts)))
+         (search-string (format jg-scholar-search-string all-terms))
+         )
+    (browse-url search-string)
+    )
+  )
+
+(defun jg-org-ref-edit-entry-type (newtype)
+  (interactive "s")
+  (save-excursion
+    (bibtex-beginning-of-entry)
+    (when (search-forward-regexp "@\\(.+?\\){" (line-end-position))
+      (replace-match newtype t nil nil 1)
+      )
+    )
+  )
+
+(defun jg-org-ref-copy-entry ()
+  (interactive)
+  (save-excursion
+    (let (start end)
+      (bibtex-beginning-of-entry)
+      (setq start (point))
+      (bibtex-end-of-entry)
+      (setq end (point))
+      (copy-region-as-kill start end)
+      )
+    )
+  )
+
+(defun jg-org-ref-copy-key ()
+  (interactive)
+  (kill-new (bibtex-completion-get-key-bibtex))
+  )
+
+(defun jg-org-ref-open-folder ()
+  (interactive)
+  (when (bibtex-text-in-field "file")
+    (shell-command (format "open %s" (f-parent (bibtex-text-in-field "file"))))
+    )
+  )
+
+(defun jg-org-ref-open-url ()
+  (interactive)
+  (when (bibtex-text-in-field "url")
+    (browse-url (bibtex-text-in-field "url")))
+  )
+
+(defun jg-org-ref-open-url ()
+  (interactive)
+  (when (bibtex-text-in-field "doi")
+    (browse-url (format "https://doi.org/%s" (bibtex-text-in-field "doi")))
+    )
+  )
 
 ;; Clean bibtex hooks:
 ;; adapted from org-ref/org-ref-core.el: orcb-key-comma

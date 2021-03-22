@@ -17,6 +17,8 @@
               jg-tag-bibtex-clean-new-hooks '(jg-tag-dont-break-lines-hook jg-orcb-clean-doi)
 
               jg-scholar-search-string "https://scholar.google.com/scholar?hl=en&q=%s"
+              jg-scholar-search-fields-exact '("title")
+              jg-scholar-search-fields '("author" "editor" "ALTauthor" "Alteditor" "year" "doi" "isbn")
 
               bibtex-completion-bibliography nil
               bibtex-completion-additional-search-fields '("tags" "year")

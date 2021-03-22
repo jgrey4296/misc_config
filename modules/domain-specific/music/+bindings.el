@@ -3,4 +3,6 @@
 
 
 (map! :leader
-      "a s M" 'jg-music-layer/start-system)
+      :prefix ("a s" . "Systems")
+      :desc "Start Music System" "M" 'jg-music-layer/start-system
+      )

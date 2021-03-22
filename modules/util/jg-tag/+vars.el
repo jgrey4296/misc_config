@@ -1,7 +1,7 @@
 ;;; main/jg-tag/+vars.el -*- lexical-binding: t; -*-
 
 (setq-default jg-tag-loc-bookmarks "~/github/writing/resources/main_bookmarks.html"
-              jg-tag-loc-bibtex "~/github/writing/resources/years"
+              jg-tag-loc-bibtex "~/github/writing/resources/bibliography"
               jg-tag-twitter-account-index "~/.doom.d/setup_files/tw_acct.index"
               jg-tag-twitter-tag-index "~/.doom.d/setup_files/tw_tag.index"
               jg-tag-global-tags-location "~/github/writing/resources/collate.tags"

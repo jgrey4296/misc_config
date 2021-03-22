@@ -14,7 +14,7 @@
               jg-tag-remove-field-newlines-regexp "file\\|url\\|title"
               ;;Bibtex clean hook mod:
               jg-tag-filter-bibtex-clean-hooks '(orcb-clean-doi org-ref-bibtex-format-url-if-doi orcb-check-journal)
-              jg-tag-bibtex-clean-new-hooks '(jg-tag-dont-break-lines-hook jg-orcb-clean-doi)
+              jg-tag-bibtex-clean-new-hooks '(jg-tag-dont-break-lines-hook jg-orcb-clean-doi jg-bibtex-align)
 
               jg-scholar-search-string "https://scholar.google.com/scholar?hl=en&q=%s"
               jg-scholar-search-fields-exact '("title")

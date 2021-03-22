@@ -61,20 +61,22 @@
         :desc "Sort Buffer"       "s" #'bibtex-sort-buffer
         :desc "Validate"          "V" #'bibtex-validate
         )
-       (:prefix ("j" . "Jump")
-        :desc "Jump to Pdf"          "p" #'+jg-org-ref-open-bibtex-pdf
-        :desc "Jump to Pdf Folder"   "P" #'jg-org-ref-open-folder
-        :desc "Jump to url"          "u" #'jg-org-ref-open-url
-        :desc "Jump to doi"          "d" #'jg-org-ref-open-doi
-        :desc "Jump to Crossref"     "c" #'jg-org-goto-crossref-entry
-        ;; search in crossref
-        )
        :desc "Refile"               "r" #'jg-org-ref-refile-by-year
        (:prefix ("s" . "Search")
         :desc "Scholar Search"    "g" #'jg-org-ref-bibtex-google-scholar
         )
        )
-      ;; TODO : put this in org-mode bindings? : "i " 'org-reftex-citation
+       (:leader
+        (:prefix ("j" . "Jump")
+         :desc "Jump to Pdf"          "p" #'+jg-org-ref-open-bibtex-pdf
+         :desc "Jump to Pdf Folder"   "P" #'jg-org-ref-open-folder
+         :desc "Jump to url"          "u" #'jg-org-ref-open-url
+         :desc "Jump to doi"          "d" #'jg-org-ref-open-doi
+         :desc "Jump to Crossref"     "c" #'jg-org-goto-crossref-entry
+         ;; search in crossref
+         )
+        )
+
       )
 
 ;; Dired bindings

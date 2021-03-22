@@ -38,22 +38,43 @@
       "s"   #'jg-tag-next-similar-string
       )
 ;; Bibtex bindings
+
 (map! :map bibtex-mode-map
       "C-c C-c" #'org-ref-clean-bibtex-entry
-      :localleader
-      :desc "Bibtex Hydra"   "." #'jg-org-ref-bibtex-hydra/body
-      :desc "New Entry"      "n" #'org-ref-bibtex-new-entry/body
-      :desc "Scholar Search" "g" #'jg-org-ref-bibtex-google-scholar
-      :desc "Change Entry Type" "t" #'jg-org-ref-edit-entry-type
-      :desc "Copy Entry"      "e" #'jg-org-ref-copy-entry
-      :desc "Copy Key"        "k" #'jg-org-ref-copy-key
-      ;; Citation
-      :desc "Open Pdf" "p" #'+jg-org-ref-open-bibtex-pdf
-      :desc "Open Pdf Folder" "P" #'jg-org-ref-open-folder
-      :desc "Open url" "u" #'jg-org-ref-open-url
-      :desc "Open doi" "d" #'jg-org-ref-open-doi
+      "\\"      #'jg-org-edit-field
+       ;; visual mode select entry
+      :desc "Select Entry"  :v "i e" #'jg-org-visual-select-entry
+      (:localleader
+       :desc "Bibtex Hydra"      "." #'jg-org-ref-bibtex-hydra/body
+
+       :desc "Build Bibliography" "B" #'org-ref-build-full-bibliography
+       :desc "New Entry"         "n" #'org-ref-bibtex-new-entry/body
+       (:prefix ("c" . "Copy")
+        :desc "Copy Entry"        "e" #'jg-org-ref-copy-entry
+        :desc "Copy Key"          "k" #'jg-org-ref-copy-key
+        )
+       :desc "Count Entries"     "C" #'bibtex-count-entries
+       (:prefix ("e" . "Edit")
+        :desc "Change Entry Type" "t" #'jg-org-ref-edit-entry-type
+        :desc "Update Entry"      "U" #'bibtex-entry-update
+        :desc "Update Field"      "f" #'jg-org-edit-field
+        :desc "Sort Buffer"       "s" #'bibtex-sort-buffer
+        :desc "Validate"          "V" #'bibtex-validate
+        )
+       (:prefix ("j" . "Jump")
+        :desc "Jump to Pdf"          "p" #'+jg-org-ref-open-bibtex-pdf
+        :desc "Jump to Pdf Folder"   "P" #'jg-org-ref-open-folder
+        :desc "Jump to url"          "u" #'jg-org-ref-open-url
+        :desc "Jump to doi"          "d" #'jg-org-ref-open-doi
+        :desc "Jump to Crossref"     "c" #'jg-org-goto-crossref-entry
+        ;; search in crossref
+        )
+       :desc "Refile"               "r" #'jg-org-ref-refile-by-year
+       (:prefix ("s" . "Search")
+        :desc "Scholar Search"    "g" #'jg-org-ref-bibtex-google-scholar
+        )
+       )
       ;; TODO : put this in org-mode bindings? : "i " 'org-reftex-citation
-      ;; TODO add open bibtex dir...
       )
 
 ;; Dired bindings

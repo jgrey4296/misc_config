@@ -2,70 +2,17 @@
 
 (defhydra jg-org-ref-bibtex-hydra (:color blue)
   "
-_p_: Open pdf     _y_: Copy key               _n_: New entry            _w_: WOS
-_b_: Open url     _f_: Copy formatted entry   _o_: Copy entry           _c_: WOS citing
-_r_: Refile entry _k_: Add keywords           _d_: delete entry         _a_: WOS related
-_e_: Email entry  _K_: Edit keywords          _L_: clean entry          _P_: Pubmed
-_U_: Update entry _N_: New entry              _R_: Crossref             _g_: Google Scholar
-_s_: Sort entry   _a_: Remove nonascii        _h_: helm-bibtex          _q_: quit
-_u_: Update field _F_: file funcs             _A_: Assoc pdf with entry
-_N_: Open notes                               _T_: Title case
-                                              _S_: Sentence case
+_w_: WOS
+_c_: WOS citing
+_a_: WOS related
+_R_: Crossref
+_U_: Update from doi
 "
-  ("p" #'org-ref-open-bibtex-pdf)
-  ("P" #'org-ref-bibtex-pubmed)
   ("w" #'org-ref-bibtex-wos)
   ("c" #'org-ref-bibtex-wos-citing)
   ("a" #'org-ref-bibtex-wos-related)
   ("R" #'org-ref-bibtex-crossref)
-  ("g" #'org-ref-bibtex-google-scholar)
-  ("n" #'org-ref-bibtex-new-entry/body)
-  ("N" #'org-ref-open-bibtex-notes)
-  ("o" (lambda ()
-	 (interactive)
-	 (bibtex-copy-entry-as-kill)
-	 (message "Use %s to paste the entry"
-		  (substitute-command-keys (format "\\[bibtex-yank]")))))
-  ("d" #'bibtex-kill-entry)
-  ("L" #'org-ref-clean-bibtex-entry)
-  ("y" (save-excursion
-	 (bibtex-beginning-of-entry)
-	 (when (looking-at bibtex-entry-maybe-empty-head)
-	   (kill-new (bibtex-key-in-head)))))
-  ("f" (progn
-	 (bibtex-beginning-of-entry)
-	 (kill-new
-	  (org-ref-format-entry
-	   (cdr (assoc "=key=" (bibtex-parse-entry t)))))))
-  ("k" #'helm-tag-bibtex-entry)
-  ("K" (lambda ()
-         (interactive)
-         (org-ref-set-bibtex-keywords
-          (read-string "Keywords: "
-                       (bibtex-autokey-get-field "keywords"))
-          t)))
-  ("b" #'org-ref-open-in-browser)
-  ("r" (lambda ()
-	 (interactive)
-         (bibtex-beginning-of-entry)
-         (bibtex-kill-entry)
-         (find-file (completing-read
-                     "Bibtex file: "
-                     (f-entries "." (lambda (f) (f-ext? f "bib")))))
-         (goto-char (point-max))
-         (bibtex-yank)
-         (save-buffer)
-         (kill-buffer)))
-  ("e" #'org-ref-email-bibtex-entry)
   ("U" (doi-utils-update-bibtex-entry-from-doi (org-ref-bibtex-entry-doi)))
-  ("u" #'doi-utils-update-field)
-  ("F" #'org-ref-bibtex-file/body)
-  ("h" #'helm-bibtex)
-  ("A" #'org-ref-bibtex-assoc-pdf-with-entry)
-  ("a" #'org-ref-replace-nonascii)
-  ("s" #'org-ref-sort-bibtex-entry)
-  ("T" #'org-ref-title-case-article)
-  ("S" #'org-ref-sentence-case-article)
   ("q" nil))
 
 
@@ -75,7 +22,6 @@ _N_: Open notes                               _T_: Title case
 (defun jg-tag-split-tags (x)
   (split-string x "," t "+")
   )
-
 (defun jg-tag-bibtex-set-tags (x)
   " Set tags in bibtex entries "
   (let* ((visual-candidates (helm-marked-candidates))
@@ -155,7 +101,6 @@ ensuring they work across machines "
     (seq-each 'jg-tag-unify-pdf-locations-in-file files)
     )
   )
-
 (defun jg-org-ref-bibtex-google-scholar ()
   "Open the bibtex entry at point in google-scholar by its doi."
   (interactive)
@@ -169,7 +114,6 @@ ensuring they work across machines "
     (browse-url search-string)
     )
   )
-
 (defun jg-org-ref-edit-entry-type (newtype)
   (interactive "s")
   (save-excursion
@@ -179,7 +123,6 @@ ensuring they work across machines "
       )
     )
   )
-
 (defun jg-org-ref-copy-entry ()
   (interactive)
   (save-excursion
@@ -192,31 +135,75 @@ ensuring they work across machines "
       )
     )
   )
-
 (defun jg-org-ref-copy-key ()
   (interactive)
   (kill-new (bibtex-completion-get-key-bibtex))
   )
-
 (defun jg-org-ref-open-folder ()
   (interactive)
   (when (bibtex-text-in-field "file")
     (shell-command (format "open %s" (f-parent (bibtex-text-in-field "file"))))
     )
   )
-
 (defun jg-org-ref-open-url ()
   (interactive)
   (when (bibtex-text-in-field "url")
     (browse-url (bibtex-text-in-field "url")))
   )
-
-(defun jg-org-ref-open-url ()
+(defun jg-org-ref-open-doi()
   (interactive)
   (when (bibtex-text-in-field "doi")
     (browse-url (format "https://doi.org/%s" (bibtex-text-in-field "doi")))
     )
   )
+(defun jg-org-ref-refile-by-year ()
+  (interactive)
+  (bibtex-beginning-of-entry)
+  (let* ((year (bibtex-text-in-field))
+         (year-file (format "%s.bib"))
+         (bib-path jg-tag-loc-bookmarks))
+    (when (and year (not (string-not-empty-p year)))
+      (bibtex-kill-entry)
+      (with-temp-buffer
+        (if (f-exists? (f-join bib-path year-file))
+            (insert-file (f-join bib-path year-file))
+          (insert-file (completing-read "Bibtex file: "
+                                        (f-entries bib-path
+                                                   (lambda (f) (f-ext? f "bib"))))))
+        (goto-char (point-max))
+        (insert "\n")
+        (bibtex-yank)
+        (save-buffer)
+        (write-file (f-join bib-path year-file))
+      )
+      )
+    )
+  )
+(defun jg-org-visual-select-entry ()
+  (interactive)
+  (evil-visual-make-region (bibtex-beginning-of-entry)
+                           (bibtex-end-of-entry))
+)
+(defun jg-org-goto-crossref-entry ()
+  (interactive)
+  (when (bibtex-text-in-field "crossref")
+    (bibtex-find-crossref (bibtex-text-in-field "crossref"))
+    )
+  )
+(defun jg-org-edit-field ()
+  (interactive)
+  (save-excursion
+    (bibtex-beginning-of-entry)
+    (let* ((fields (mapcar #'car (bibtex-parse-entry)))
+           (chosen (completing-read "Field: " fields))
+           (curr-value (bibtex-autokey-get-field chosen))
+           (new-value (read-string "New Value: "))
+           )
+      (bibtex-set-field chosen new-value)
+      )
+    )
+  )
+
 
 ;; Clean bibtex hooks:
 ;; adapted from org-ref/org-ref-core.el: orcb-key-comma
@@ -234,7 +221,6 @@ ensuring they work across machines "
     (mapc #'(lambda (x) (bibtex-set-field (car x) (cdr x))) (-zip paths path-cleaned))
     )
   )
-
 (defun jg-orcb-clean-doi ()
   "Remove http://dx.doi.org/ in the doi field."
   (let ((doi (bibtex-autokey-get-field "doi")))

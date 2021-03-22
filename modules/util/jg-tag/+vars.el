@@ -20,6 +20,8 @@
               jg-scholar-search-fields-exact '("title")
               jg-scholar-search-fields '("author" "editor" "ALTauthor" "Alteditor" "year" "doi" "isbn")
 
+              jg-edit-field-buffer-name "++Bibtex: %s++"
+
               bibtex-completion-bibliography nil
               bibtex-completion-additional-search-fields '("tags" "year")
               bibtex-completion-pdf-field "file"

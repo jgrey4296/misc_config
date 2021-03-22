@@ -38,9 +38,12 @@
   (add-hook 'bibtex-mode-hook #'yas-minor-mode)
   (add-hook 'bibtex-mode-hook #'reftex-mode)
   :config
-  (let ((rev-hooks (reverse org-ref-clean-bibtex-entry-hook)))
-    (push #'jg-tag-dont-break-lines-hook rev-hooks)
-    (setq org-ref-clean-bibtex-entry-hook (reverse rev-hooks))
+  (let* ((the-hooks org-ref-clean-bibtex-entry-hook)
+        (filtered (-filter #'(lambda (x) (not (-contains? jg-tag-filter-bibtex-clean-hooks x))) the-hooks))
+        )
+
+    (setq org-ref-clean-bibtex-entry-hook (remove-duplicates
+                                           (-concat filtered jg-tag-bibtex-clean-new-hooks)))
     )
   )
 

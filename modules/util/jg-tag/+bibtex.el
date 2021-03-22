@@ -173,3 +173,14 @@ ensuring they work across machines "
     (mapc #'(lambda (x) (bibtex-set-field (car x) (cdr x))) (-zip paths path-cleaned))
     )
   )
+
+(defun jg-orcb-clean-doi ()
+  "Remove http://dx.doi.org/ in the doi field."
+  (let ((doi (bibtex-autokey-get-field "doi")))
+    (when (ffap-url-p  doi)
+      (bibtex-beginning-of-entry)
+      (goto-char (car (cdr (bibtex-search-forward-field "doi" t))))
+      (bibtex-kill-field)
+      (bibtex-make-field "doi")
+      (backward-char)
+      (insert (replace-regexp-in-string "^http.*?\.org/" "" doi)))))

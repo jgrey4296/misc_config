@@ -12,6 +12,9 @@
               jg-tag-loc-master-tag-list ""
               jg-tag-org-clean-marker nil
               jg-tag-remove-field-newlines-regexp "file\\|url\\|title"
+              ;;Bibtex clean hook mod:
+              jg-tag-filter-bibtex-clean-hooks '(orcb-clean-doi org-ref-bibtex-format-url-if-doi orcb-check-journal)
+              jg-tag-bibtex-clean-new-hooks '(jg-tag-dont-break-lines-hook jg-orcb-clean-doi)
 
               jg-scholar-search-string "https://scholar.google.com/scholar?hl=en&q=%s"
 

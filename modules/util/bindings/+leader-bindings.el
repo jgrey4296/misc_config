@@ -51,7 +51,9 @@
        :desc "Messages" "m"  #'+jg-bindings-goto-messages
        :desc "Mega" "M"      #'+jg-bindings-goto-mega
        :desc "Home" "~"      #'+jg-bindings-goto-home
-       :desc "Resources" "r" #'+jg-bindings-goto-resources))
+       :desc "Resources" "r" #'+jg-bindings-goto-resources
+       :desc "Twitter" "t"   #'jg-browse-twitter)
+      )
 )
 ;;; <leader> b --- buffer
 (map! :leader
@@ -438,6 +440,7 @@
       :desc "Jump to mark"                 "m" #'evil-show-marks
       :desc "Jump to symbol"               "i" #'imenu
       :desc "Jump to visible link"         "l" #'link-hint-open-link
+      :desc "Google"                       "g" #'jg-browse-url
       :desc "Locate file"                  "f" #'+lookup/file
       :desc "Locate file"                  "f" #'locate
       :desc "Look up in all docsets"       "K" #'+lookup/in-all-docsets

@@ -2,6 +2,7 @@
 
 (load! "+misc")
 (load! "+funcs")
+(load! "+vars")
 ;;; C-S doom conventions
 (when (featurep! +bindings)
   ;; A Doom convention where C-s on popups and interactive searches will invoke

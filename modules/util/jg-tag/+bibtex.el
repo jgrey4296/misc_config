@@ -156,3 +156,20 @@ ensuring they work across machines "
     )
   )
 
+
+;; Clean bibtex hooks:
+;; adapted from org-ref/org-ref-core.el: orcb-key-comma
+;; For org-ref-clean-bibtex-entry-hook
+(defun jg-tag-dont-break-lines-hook()
+  "Fix File paths and URLs to not have linebreaks"
+  (bibtex-beginning-of-entry)
+  (beginning-of-line)
+  (let* ((keys (mapcar #'car (bibtex-parse-entry)))
+         (paths (-filter #'(lambda (x) (string-match jg-tag-remove-field-newlines-regexp x)) keys))
+         (path-texts (mapcar #'bibtex-text-in-field paths))
+         (path-cleaned (mapcar #'(lambda (x) (replace-regexp-in-string "\n +" " " x)) path-texts))
+         )
+    ;; Then update:
+    (mapc #'(lambda (x) (bibtex-set-field (car x) (cdr x))) (-zip paths path-cleaned))
+    )
+  )

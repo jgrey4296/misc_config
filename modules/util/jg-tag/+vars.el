@@ -11,6 +11,7 @@
               jg-tag-preferred-linecount-for-org 1500
               jg-tag-loc-master-tag-list ""
               jg-tag-org-clean-marker nil
+              jg-tag-remove-field-newlines-regexp "file\\|url\\|title"
 
               jg-scholar-search-string "https://scholar.google.com/scholar?hl=en&q=%s"
 

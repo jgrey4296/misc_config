@@ -261,6 +261,6 @@ ensuring they work across machines "
     (align-regexp start end "\\(\s+?\\)=" 1 1 nil)
     (bibtex-end-of-entry)
     (setq end (line-end-position 0))
-    (align-regexp start end "\\(.+?=\\)\\(\s+?\\)[{0-9]" 2 1 nil)
+    (align-regexp start end "\\(.+?=\\)\\(\s+?\\)[{0-9\"]" 2 1 nil)
     )
 )

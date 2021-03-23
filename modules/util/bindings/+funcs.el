@@ -206,9 +206,10 @@ Dedicated (locked) windows are left untouched."
            (browse-url url))
           ((s-prefix? "www." url)
            (browse-url (format "https://%s" url)))
-          ((string-match ".com\\|.uk" url)
+          ((string-match "\\.com\\|\\.uk" url)
            (browse-url (format "https://%s" url)))
           (t
+           (message "Browsing for: %s" (format jg-google-url url))
            (browse-url (format jg-google-url url)))
           )
     )

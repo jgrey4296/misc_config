@@ -1,12 +1,9 @@
+
 (load! "+funcs")
+(load! "+vars")
 (after! evil
   (load! "+bindings")
   )
-
- (setq-default shell-default-shell 'shell
-               shell-protect-eshell-prompt 0
-               shell-enable-smart-eshell t
-               )
 
 (after! erlang
   ;; (also has a load path set in root el file)
@@ -29,26 +26,9 @@
   )
 (use-package! highlight-parentheses
   :defer t
-  :init
-  (setq hl-paren-colors '("color-16" "color-16" "color-16" "color-16")
-        hl-paren-background-colors '("Springgreen3" "color-26" "color-91" "IndianRed3"))
   )
 (use-package! undo-tree
-  :init
-
   :config
-  (setq undo-tree-visualizer-diff t
-        undo-tree-auto-save-history t
-        undo-tree-enable-undo-in-region t
-        ;; Increase undo-limits by a factor of ten to avoid emacs prematurely
-        ;; truncating the undo history and corrupting the tree. See
-        ;; https://github.com/syl20bnr/spacemacs/issues/12110
-        undo-limit 800000
-        undo-strong-limit 12000000
-        undo-outer-limit 120000000
-        undo-tree-history-directory-alist
-        `(("." . ,(concat doom-cache-dir "undo-tree-hist/"))))
-
   ;; Compress undo-tree history files with zstd, if available. File size isn't
   ;; the (only) concern here: the file IO barrier is slow for Emacs to cross;
   ;; reading a tiny file and piping it in-memory through zstd is *slightly*

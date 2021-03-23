@@ -17,29 +17,15 @@
 (use-package! rainbow-mode
   :defer t
   :init
-  (map! :leader
-        :prefix "t v"
-        "r" 'rainbow-mode)
   (add-hook 'prog-mode-hook 'rainbow-mode)
 )
 (use-package! evil-string-inflection
   :defer t
   :commands evil-operator-string-inflection
-  :init
-  (map! :n "g '" 'evil-operator-string-inflection)
   )
 (use-package! free-keys
   :defer t
   :commands (free-keys free-keys-set-prefix)
-  :init
-  (map! :leader
-        (:prefix ("a U" . "Utilities")
-         (:prefix ("f" . "free-keys")
-          "k" 'free-keys
-          "p" 'free-keys-set-prefix
-          )
-         )
-        )
   )
 (use-package! highlight-parentheses
   :defer t

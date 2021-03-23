@@ -469,9 +469,9 @@
         :desc "Cancel Debug on Var" "V"          #'cancel-debug-on-variable-change
         :desc "Debug on Function" "f"            #'debug-on-entry
         :desc "Cancel Debug on Function" "F"     #'cancel-debug-on-entry
-        :desc "Flymake"                      "c" #'flymake-mode
+        :desc "Flymake"                      "C" #'flymake-mode
         (:when (featurep! :checkers syntax)
-         :desc "Flycheck"                   "C"  #'flycheck-mode)
+         :desc "Flycheck"                   "c"  #'flycheck-mode)
         (:when (and (featurep! :checkers spell) (not (featurep! :checkers spell +flyspell)))
          :desc "Spell checker"              "s"  #'spell-fu-mode)
         (:when (featurep! :checkers spell +flyspell)

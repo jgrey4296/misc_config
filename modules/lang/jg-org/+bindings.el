@@ -20,5 +20,4 @@
        "t"    #'org-time-stamp)
       (:prefix "j"
        "c"    #'org-goto-calendar)
-      "a U r" #'+jg-org-bibtex-load-random)
-
+      )

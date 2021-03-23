@@ -115,11 +115,11 @@ ensuring they work across machines "
     )
   )
 (defun jg-org-ref-edit-entry-type (newtype)
-  (interactive "s")
+  (interactive "sNew Entry Type: ")
   (save-excursion
     (bibtex-beginning-of-entry)
     (when (search-forward-regexp "@\\(.+?\\){" (line-end-position))
-      (replace-match newtype t nil nil 1)
+      (replace-match (string-trim newtype) t nil nil 1)
       )
     )
   )
@@ -213,6 +213,12 @@ ensuring they work across machines "
     )
   )
 
+(defun jg-org-ref-clean-bibtex-entry ()
+  (interactive)
+  (let ((fill-column jg-tag-bibtex-fill-column))
+    (org-ref-clean-bibtex-entry)
+    )
+  )
 
 ;; Clean bibtex hooks:
 ;; adapted from org-ref/org-ref-core.el: orcb-key-comma

@@ -40,7 +40,7 @@
 ;; Bibtex bindings
 
 (map! :map bibtex-mode-map
-      "C-c C-c" #'org-ref-clean-bibtex-entry
+      "C-c C-c" #'jg-org-ref-clean-bibtex-entry
       "\\"      #'jg-org-edit-field
        ;; visual mode select entry
       :desc "Select Entry"  :v "i e" #'jg-org-visual-select-entry

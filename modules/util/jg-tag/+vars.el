@@ -15,12 +15,12 @@
               ;;Bibtex clean hook mod:
               jg-tag-filter-bibtex-clean-hooks '(orcb-clean-doi org-ref-bibtex-format-url-if-doi orcb-check-journal)
               jg-tag-bibtex-clean-new-hooks '(jg-tag-dont-break-lines-hook jg-orcb-clean-doi jg-bibtex-align)
+              jg-tag-bibtex-fill-column 50000
 
               jg-scholar-search-string "https://scholar.google.com/scholar?hl=en&q=%s"
               jg-scholar-search-fields-exact '("title")
               jg-scholar-search-fields '("author" "editor" "ALTauthor" "Alteditor" "year" "doi" "isbn")
 
-              jg-edit-field-buffer-name "++Bibtex: %s++"
 
               bibtex-completion-bibliography nil
               bibtex-completion-additional-search-fields '("tags" "year")

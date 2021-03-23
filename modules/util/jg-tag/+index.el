@@ -1,12 +1,12 @@
 ;; Indexing
 
 (defun jg-tag-rebuild-tag-database ()
-  "Rebuild the tag database from global-tags-location "
+  "Rebuild the tag database from jg-tag-loc-global-tags"
   (interactive)
   (clrhash jg-tag-global-tags)
-  (if (f-exists? jg-tag-global-tags-location)
+  (if (f-exists? jg-tag-loc-global-tags)
       (with-temp-buffer
-        (insert-file jg-tag-global-tags-location)
+        (insert-file jg-tag-loc-global-tags)
         (goto-char (point-min))
         (while (< (point) (point-max))
           ((lambda (x) (puthash (car x) (string-to-number (cadr x)) jg-tag-global-tags)) (split-string (buffer-substring (line-beginning-position) (line-end-position)) ":" nil " +"))
@@ -49,7 +49,7 @@
                          (insert (format ":%s" x))) v)
                  (insert "\n")
                  ) index-hash)
-      (write-file jg-tag-twitter-account-index t)
+      (write-file jg-tag-loc-twitter-account-index t)
       )
     )
   (message "Finished writing file")
@@ -97,7 +97,7 @@
                          (insert (format ":%s" x))) v)
                  (insert "\n")
                  ) index-hash)
-      (write-file jg-tag-twitter-tag-index t)
+      (write-file jg-tag-loc-twitter-tag-index t)
       )
     )
   (message "Finished writing file")

@@ -67,7 +67,6 @@ the nth char changes"
       )
     )
   )
-
 (defun jg-tag-next-similar-string ()
   " Go through lines, finding the next adjacent string pair
 uses org-babel-edit-distance "

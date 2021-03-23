@@ -3,25 +3,27 @@
   )
 
 (after! evil
-  (load! "+org-spec-bindings")
   (load! "+bindings")
   )
 
 (after! ivy (load! "+ivy_actions"))
 
-(load! "+vars")
 (load! "+bibtex")
 (load! "+dired")
 (load! "+file")
 (load! "+helm")
+(load! "+hooks")
 (load! "+index")
 (load! "+json")
 (load! "+org")
 (load! "+tags")
 (load! "+util")
-(load! "+org-ref-funcs")
+(load! "+vars")
 
-
+(use-package! bibtex
+  :init
+  (add-hook 'bibtex-mode-hook #'org-ref-version)
+  )
 (use-package! tag-clean-minor-mode
   :defer t)
 (use-package! tag-mode
@@ -31,28 +33,14 @@
   :commands (bibtex-completion-init)
 )
 (use-package! org-ref
-  :defer t
-  :commands (org-ref-bibtex-hydra/body org-ref-bibtex-new-entry/body)
+  :after-call org-ref-version
   :init
   (custom-set-variables '(org-ref-insert-cite-key "C-c i"))
   (add-hook 'bibtex-mode-hook #'yas-minor-mode)
   (add-hook 'bibtex-mode-hook #'reftex-mode)
   :config
-  (let* ((the-hooks org-ref-clean-bibtex-entry-hook)
-        (filtered (-filter #'(lambda (x) (not (-contains? jg-tag-filter-bibtex-clean-hooks x))) the-hooks))
-        )
-
-    (setq org-ref-clean-bibtex-entry-hook (remove-duplicates
-                                           (-concat filtered jg-tag-bibtex-clean-new-hooks)))
-    )
-  )
-
-
-(after! (helm evil)
-  (evil-ex-define-cmd "t[ag]"  #'jg-tag-helm-start)
-  (evil-ex-define-cmd "to"     #'jg-tag-occurrences)
-  (evil-ex-define-cmd "toa"    #'jg-tag-occurrences-in-open-buffers)
-  (evil-ex-define-cmd "tv"     #'org-tags-view)
-  (evil-ex-define-cmd "ts"     #'org-set-tags)
-  (evil-ex-define-cmd "ci[te]" #'jg-tag-insert-simple-bibtex-wrapped)
+  (loop for a-hook in jg-bibtex-clean-remove-hooks
+        do (remove-hook 'org-ref-clean-bibtex-entry-hook a-hook))
+  (loop for a-hook in jg-bibtex-clean-add-hooks
+        do (add-hook 'org-ref-clean-bibtex-entry-hook a-hook 100))
   )

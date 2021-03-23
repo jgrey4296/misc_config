@@ -9,3 +9,4 @@
 (package! hydra)
 (package! cl-lib)
 (package! ivy)
+(package! bibtex :built-in 'prefer)

@@ -203,7 +203,7 @@ modified from the original bibtex-completion-show-entry
     (if (null jg-tag-twitter-helm-candidates)
         (with-temp-buffer
           (setq jg-tag-twitter-helm-candidates '())
-          (insert-file jg-tag-twitter-account-index)
+          (insert-file jg-tag-loc-twitter-account-index)
           (goto-char (point-min))
           (let (curr)
             (while (< (point) (point-max))
@@ -231,7 +231,7 @@ modified from the original bibtex-completion-show-entry
     (if (null jg-tag-twitter-heading-helm-candidates)
         (with-temp-buffer
           (setq jg-tag-twitter-heading-helm-candidates '())
-          (insert-file jg-tag-twitter-tag-index)
+          (insert-file jg-tag-loc-twitter-tag-index)
           (goto-char (point-min))
           (let (curr)
             (while (< (point) (point-max))
@@ -275,7 +275,7 @@ modified from the original bibtex-completion-show-entry
     (if (null jg-tag-twitter-heading-helm-candidates)
         (with-temp-buffer
           (setq jg-tag-twitter-heading-helm-candidates '())
-          (insert-file jg-tag-twitter-tag-index)
+          (insert-file jg-tag-loc-twitter-tag-index)
           (goto-char (point-min))
           (let (curr)
             (while (< (point) (point-max))
@@ -290,7 +290,7 @@ modified from the original bibtex-completion-show-entry
     (if (null jg-tag-twitter-helm-candidates)
         (with-temp-buffer
           (setq jg-tag-twitter-helm-candidates '())
-          (insert-file jg-tag-twitter-account-index)
+          (insert-file jg-tag-loc-twitter-account-index)
           (goto-char (point-min))
           (let (curr)
             (while (< (point) (point-max))

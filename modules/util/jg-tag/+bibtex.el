@@ -101,6 +101,7 @@ ensuring they work across machines "
     (seq-each 'jg-tag-unify-pdf-locations-in-file files)
     )
   )
+
 (defun jg-org-ref-bibtex-google-scholar ()
   "Open the bibtex entry at point in google-scholar by its doi."
   (interactive)
@@ -143,6 +144,19 @@ ensuring they work across machines "
   (interactive)
   (kill-new (bibtex-completion-get-key-bibtex))
   )
+(defun jg-org-ref-open-bibtex-pdf ()
+  "Open pdf for a bibtex entry, if it exists.
+assumes point is in
+the entry of interest in the bibfile.  but does not check that."
+  (interactive)
+  (save-excursion
+    (let* ((file (bibtex-autokey-get-field "file"))
+           (optfile (bibtex-autokey-get-field "OPTfile")))
+      (message "%s : %s" file (file-exists-p file))
+      (if (and (not (string-equal "" file)) (file-exists-p file))
+          (org-link-open-from-string (format "[[file:%s]]" file))
+        (progn (message optfile)
+               (org-link-open-from-string (format "[[file:%s]]" optfile)))))))
 (defun jg-org-ref-open-folder ()
   (interactive)
   (let* ((file (bibtex-autokey-get-field "file"))
@@ -204,6 +218,7 @@ ensuring they work across machines "
     )
   )
 (defun jg-org-edit-field ()
+  ;; TODO add completion's for fields in completion loc
   (interactive)
   (save-excursion
     (bibtex-beginning-of-entry)
@@ -219,48 +234,50 @@ ensuring they work across machines "
     )
   )
 
+(defun jg-org-bibtex-load-random ()
+  """ Run in a bibtex file, opens a random entry externally,
+      and logs it has been opened in a separate file """
+  (interactive)
+  (widen)
+  (let* ((location (f-dirname (buffer-file-name)))
+         (log_file (f-join location ".emacs_rand_bib_log"))
+         (log_hash (if (f-exists? log_file) (with-temp-buffer
+                                              (insert-file-contents log_file)
+                                              (let ((uf (make-hash-table :test 'equal)))
+                                                (seq-each (lambda (x) (puthash x 't uf)) (split-string (buffer-string) "\n"))
+                                                uf))
+                     (make-hash-table :test 'equal)))
+         )
+    ;; go to random line
+    (goto-char (random (point-max)))
+    (org-ref-bibtex-next-entry)
+    (let ((entry (bibtex-parse-entry)))
+      (while entry
+        (if (gethash (alist-get "=key=" entry nil nil 'equal) log_hash)
+            (progn (goto-char (random (point-max)))
+                   (org-reg-bibtex-next-entry)
+                   (setq entry (bibtex-parse-entry)))
+          (progn
+            (write-region (alist-get "=key=" entry nil nil 'equal)
+                          nil log_file 'append)
+            (write-region "\n" nil log_file 'append)
+            (bibtex-narrow-to-entry)
+            (goto-char (point-min))
+            (org-open-link-from-string (message "[[%s]]" (bibtex-text-in-field "file")))
+            (setq entry nil)
+            )
+          )
+        )
+      )
+    )
+  )
 (defun jg-org-ref-clean-bibtex-entry ()
+  """ Calls org-ref-clean-bibtex-entry,
+  but with a wrapping to override fill-column
+  """
   (interactive)
   (let ((fill-column jg-tag-bibtex-fill-column))
     (org-ref-clean-bibtex-entry)
     )
   )
 
-;; Clean bibtex hooks:
-;; adapted from org-ref/org-ref-core.el: orcb-key-comma
-;; For org-ref-clean-bibtex-entry-hook
-(defun jg-tag-dont-break-lines-hook()
-  "Fix File paths and URLs to not have linebreaks"
-  (bibtex-beginning-of-entry)
-  (beginning-of-line)
-  (let* ((keys (mapcar #'car (bibtex-parse-entry)))
-         (paths (-filter #'(lambda (x) (string-match jg-tag-remove-field-newlines-regexp x)) keys))
-         (path-texts (mapcar #'bibtex-text-in-field paths))
-         (path-cleaned (mapcar #'(lambda (x) (replace-regexp-in-string "\n +" " " x)) path-texts))
-         )
-    ;; Then update:
-    (mapc #'(lambda (x) (bibtex-set-field (car x) (cdr x))) (-zip paths path-cleaned))
-    )
-  )
-(defun jg-orcb-clean-doi ()
-  "Remove http://dx.doi.org/ in the doi field."
-  (let ((doi (bibtex-autokey-get-field "doi")))
-    (when (ffap-url-p  doi)
-      (bibtex-beginning-of-entry)
-      (goto-char (car (cdr (bibtex-search-forward-field "doi" t))))
-      (bibtex-kill-field)
-      (bibtex-make-field "doi")
-      (backward-char)
-      (insert (replace-regexp-in-string "^http.*?\.org/" "" doi)))))
-(defun jg-bibtex-align ()
-  (let (start end)
-    (bibtex-beginning-of-entry)
-    (setq start (line-beginning-position 2))
-    (bibtex-end-of-entry)
-    (setq end (line-end-position 0))
-    (align-regexp start end "\\(\s+?\\)=" 1 1 nil)
-    (bibtex-end-of-entry)
-    (setq end (line-end-position 0))
-    (align-regexp start end "\\(.+?=\\)\\(\s+?\\)[{0-9\"]" 2 1 nil)
-    )
-)

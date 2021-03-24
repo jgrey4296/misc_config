@@ -218,3 +218,16 @@ Dedicated (locked) windows are left untouched."
   (interactive)
   (browse-url jg-twitter-url)
   )
+
+(defun jg-narrow-around-point ()
+  (interactive)
+  (cond ((buffer-narrowed-p)
+         (widen))
+        (t
+         (let ((num (read-number "Lines Around Point to Select: ")))
+           (narrow-to-region (line-beginning-position (- num))
+                             (line-end-position num))
+           )
+         )
+        )
+  )

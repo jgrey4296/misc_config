@@ -18,7 +18,9 @@
       "[ RET" #'jg-narrowing-move-focus-backward)
       (:map evil-normal-state-map
       "z n" nil
-      "z c" #'jg-toggle-narrow-buffer)
+      "z c" #'jg-toggle-narrow-buffer
+      "z RET" #'jg-narrow-around-point
+      )
       (:map evil-normal-state-map
        :prefix "g"
        "b" #'avy-pop-mark

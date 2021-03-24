@@ -221,13 +221,18 @@ Dedicated (locked) windows are left untouched."
 
 (defun jg-narrow-around-point ()
   (interactive)
-  (cond ((buffer-narrowed-p)
-         (widen))
-        (t
+  (cond (current-prefix-arg
+         (narrow-to-region (line-beginning-position)
+                           (point-max)))
+        ((eq evil-state 'visual)
+         (narrow-to-region evil-visual-beginning evil-visual-end))
+        ((not (buffer-narrowed-p))
          (let ((num (read-number "Lines Around Point to Select: ")))
            (narrow-to-region (line-beginning-position (- num))
                              (line-end-position num))
            )
          )
+        (t
+         (widen))
         )
   )

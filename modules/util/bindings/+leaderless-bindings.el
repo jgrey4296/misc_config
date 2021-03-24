@@ -18,13 +18,11 @@
       "[ RET" #'jg-narrowing-move-focus-backward)
       (:map evil-normal-state-map
       "z n" nil
-      "z c" #'jg-toggle-narrow-buffer
       "z RET" #'jg-narrow-around-point
-      )
-      (:map evil-normal-state-map
-       :prefix "g"
-       "b" #'avy-pop-mark
-       ">" #'evil-goto-column)
+      "g b" #'avy-pop-mark
+      "g >" #'evil-goto-column)
+      (:map evil-visual-state-map
+       "z RET" #'jg-narrow-around-point)
 )
 ;; Shell
 (map! :after evil

@@ -462,7 +462,9 @@
        "d" nil
        "v" nil
        "n" nil
-       "C"                                       #'global-company-mode
+       "C"                        #'global-company-mode
+       :desc "Input Language" "i" #'toggle-input-method
+       :desc "SmartParens"    "s" #'smartparens-global-mode
        (:prefix ("d" . "Debug")
         :desc "Debug on Error" "e"               #'toggle-debug-on-error
         :desc "Debug on Var" "v"                 #'debug-on-variable-change
@@ -476,7 +478,6 @@
          :desc "Spell checker"              "s"  #'spell-fu-mode)
         (:when (featurep! :checkers spell +flyspell)
          :desc "Spell checker"              "s"  #'flyspell-mode))
-
        (:prefix ("v" . "Visual")
         :desc "Big mode"                     "b" #'doom-big-font-mode
         :desc "Frame fullscreen"             "F" #'toggle-frame-fullscreen
@@ -490,7 +491,6 @@
         :desc "Whitespace"                  "w"  #'whitespace-mode
         :desc "Line Truncate"               "l"  #'toggle-truncate-lines
         )
-
        (:prefix  ("n" . "Navigation")
         :desc "Neotree"                      "t" #'neotree-toggle
         (:when (featurep! :ui minimap)
@@ -507,7 +507,6 @@
         )
        (:when (featurep! :lang org +pomodoro)
         :desc "Pomodoro timer"             "t"   #'org-pomodoro)
-        :desc "SmartParens"  "s"                 #'smartparens-global-mode
        ;; highlight long lines
        ;; auto-completion
        ;; camel-case-motion
@@ -560,7 +559,7 @@
       :prefix ("x" . "Text")
       :desc "Mark" "m"                                    #'mark-whole-buffer
       :desc "Iedit" "e"                                   #'evil-iedit-state/iedit-mode
-      "r"                                                 #'regexp-builder
+      :desc "Regexp Builder" "r"                          #'regexp-builder
       ;; align
       (:prefix ("a" . "Align")
        :desc "Regexp"    "r"                              #'align-regexp
@@ -570,13 +569,13 @@
        ;;:desc "Remove Duplicates"    "u"                 #'
        ;;:desc "Mark"                 "m"                 #'
        ;; untabify
-       "f"                                                #'flush-lines
-       "K"                                                #'keep-lines
-       :desc "Delete trailing newlines"              "W"  #'doom/delete-trailing-newlines
-       :desc "Delete trailing whitespace"             "w" #'delete-trailing-whitespace
-       :desc "Whitespace Cleanup"   "c"                   #'whitespace-cleanup
-       :desc "Indent" "i"                                 #'indent-region
-       :desc "Random" "r"                                 #'+jg-bindings-goto-random-line
+       "f"                                    #'flush-lines
+       "K"                                    #'keep-lines
+       :desc "Delete trailing newlines"   "W" #'doom/delete-trailing-newlines
+       :desc "Delete trailing whitespace" "w" #'delete-trailing-whitespace
+       :desc "Whitespace Cleanup"         "c" #'whitespace-cleanup
+       :desc "Indent"                     "i" #'indent-region
+       :desc "Random"                     "r" #'+jg-bindings-goto-random-line
        )
       ;; justify
       ;; upcase, downcase

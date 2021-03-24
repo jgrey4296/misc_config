@@ -132,15 +132,15 @@
   CLOCK: [2019-02-04 Mon 15:17]--[2019-02-04 Mon 15:42] =>  0:25
   CLOCK: [2019-02-04 Mon 14:09]--[2019-02-04 Mon 14:34] =>  0:25
   :END:
-** [[file:~/github/writing/resources/years][Bibliography]]
-** [[file:~/Mega/savedThreads][Twitter Threads]]
+** [[file:~/github/writing/resources/bibliography][Bibliography]]
+** [[file:~/Mega/twitterthreads][Twitter Threads]]
 ** [[~/github/languageLearning][Misc Language Repo]]                                                           :multiple_languages:learning:
 ** [[~/.spacemacs.d/setup_files/pomodoro_log.org][Pomodoro Log]]
 ** -----------------------------------------------------------------------------
 ** Programming
 *** [[file:~/github/writing/orgfiles/trie_layer.org][Trie-layer]]
 *** Python
-**** TODO [[/github/py_rule][Python Rule Language and Engine]]                                       :python:important:todo:meta:simulation:institutions:exclusion_logic:library:parsing:production_system:rules:
+**** TODO [[~/github/acab][Python Rule Language and Engine]]                 :python:important:todo:meta:simulation:institutions:exclusion_logic:library:parsing:production_system:rules:
 ***** Recap current language capabilities
 ***** integrate layer architecture
 ***** TODO implement type checking?

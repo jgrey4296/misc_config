@@ -52,6 +52,8 @@
     (remove-overlays nil nil iedit-invisible-overlay-name t)
   )
 )
+(use-package! helm-gtags
+  :defer t)
 
 (after! (evil evil-snipe)
   (push 'dired-mode evil-snipe-disabled-modes)
@@ -103,8 +105,6 @@
   (push "^G\\(PATH\\|R?TAGS\\)$" neo-hidden-regexp-list)
   (push "^__init__.py$" neo-hidden-regexp-list)
   )
-(use-package! helm-gtags
-  :defer t)
 
 
 (after! (featurep! :completion helm)

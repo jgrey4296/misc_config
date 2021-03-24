@@ -3,6 +3,13 @@
 (load! "+misc")
 (load! "+funcs")
 (load! "+vars")
+(when (featurep! +bindings)
+  (after! evil
+    (load! "+leader-bindings")
+    (load! "+leaderless-bindings")
+    )
+)
+
 ;;; C-S doom conventions
 (when (featurep! +bindings)
   ;; A Doom convention where C-s on popups and interactive searches will invoke
@@ -52,12 +59,6 @@
          :gn "S-s-RET"      #'+default/newline-above
          :gn [S-s-return]   #'+default/newline-above)))
 
-(when (featurep! +bindings)
-  (after! evil
-    (load! "+leader-bindings")
-    (load! "+leaderless-bindings")
-    )
-)
 
 
 ;; (general-define-key :states

@@ -7,8 +7,10 @@
 
 (load! "+org-funcs")
 (load! "+org-pomodoro-funcs")
-
 (load! "+vars")
+(after! evil
+  (load! "+bindings")
+  )
 
 (use-package! academic-phrases
   :defer t
@@ -63,9 +65,4 @@
   )
 (after! org-superstar
   (setq org-hide-leading-stars t)
-  )
-
-(after! evil
-  (load! "+bindings")
-  (load! "+org-spec-bindings")
   )

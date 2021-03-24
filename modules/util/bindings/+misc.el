@@ -4,11 +4,7 @@
   (delete-selection-mode -1))
 (add-hook 'evil-insert-state-entry-hook 'delete-selection-mode)
 (add-hook 'evil-insert-state-exit-hook  '+default-disable-delete-selection-mode-h)
-
-(map! :map universal-argument-map
-      :prefix doom-leader-key     "u"#'universal-argument-more
-      :prefix doom-leader-alt-key "u"#'universal-argument-more)
-
+(add-hook 'tabulated-list-mode-hook 'turn-off-evil-snipe-mode)
 
 (defvar +default-want-RET-continue-comments t
   "If non-nil, RET will continue commented lines.")

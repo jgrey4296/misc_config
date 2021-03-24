@@ -72,6 +72,10 @@
 
       )
 
+;; Reftex binding override
+(map! :map reftex-mode-map
+      "C-c [" nil)
+
 ;; Dired bindings
 (map! :after dired
       :map (dired-mode-map ranger-mode-map)

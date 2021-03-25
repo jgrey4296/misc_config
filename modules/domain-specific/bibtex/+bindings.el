@@ -24,7 +24,7 @@
         :desc "Validate"          "V"    #'bibtex-validate
         )
        :desc "Refile"             "r"    #'+jg-bibtex-refile-by-year
-       :desc "Scholar Search"    "s"     #'+jg-bibtex-google-scholar
+       :desc "Scholar Search"     "s"    #'+jg-bibtex-google-scholar
        )
       (:leader
        (:prefix ("j" . "Jump")

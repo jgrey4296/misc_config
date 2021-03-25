@@ -1,6 +1,11 @@
 ;;; lang/jg-org/+tags.el -*- lexical-binding: t; -*-
+(defun +jg-org-setup-tags-hook ()
+  (+jg-tag-add-mode-handler 'org
+                            '+jg-org-set-tags
+                            '+jg-org-set-new-tag)
+  )
 
-(defun +jg-tag-org-set-tags (x)
+(defun +jg-org-set-tags (x)
   """ Improved action to add and remove tags Toggle Selected Tags
 Can operate on regions of headings """
   (let* ((visual-candidates (helm-marked-candidates))
@@ -26,7 +31,7 @@ Can operate on regions of headings """
                (org-set-tags current-tags)
                (org-forward-heading-same-level 1)
                )))))
-(defun +jg-tag-org-set-new-tag (x)
+(defun +jg-org-set-new-tag (x)
   "Utility to set a new tag for an org heading"
   (save-excursion
     (let ((prior-point (- (point) 1))

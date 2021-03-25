@@ -14,6 +14,7 @@
 (use-package! bibtex
   :init
   (add-hook 'bibtex-mode-hook #'org-ref-version)
+  (add-hook 'bibtex-mode-hook #'+jg-bibtex-tag-setup-hook)
   )
 (use-package! helm-bibtex
   :defer t
@@ -23,21 +24,13 @@
   :after-call org-ref-version
   :init
   (custom-set-variables '(org-ref-insert-cite-key "C-c i"))
-  (add-hook 'bibtex-mode-hook #'yas-minor-mode)
-  (add-hook 'bibtex-mode-hook #'reftex-mode)
+  (add-hook! 'bibtex-mode-hook
+             #'yas-minor-mode #'reftex-mode #'+jg-tag-mode-handler)
   :config
-  (loop for a-hook in jg-bibtex-clean-remove-hooks
-        do (remove-hook 'org-ref-clean-bibtex-entry-hook a-hook))
-  (loop for a-hook in jg-bibtex-clean-add-hooks
-        do (add-hook 'org-ref-clean-bibtex-entry-hook a-hook 100))
+  (remove-hook! 'org-ref-clean-bibtex-entry-hook jg-bibtex-clean-remove-hooks)
+  (add-hook! 'org-ref-clean-bibtex-entry-hook :append jg-bibtex-clean-add-hooks)
   )
 (after! (f helm-bibtex)
   (jg-tag-build-bibtex-list)
 )
 
-(when (featurep! :emacs jg-tag)
-  (+jg-tag-add-mode-handler 'bibtex-mode
-                            '+jg-bibtex-set-tags
-                            '+jg-bibtex-set-new-tag
-                            )
-  )

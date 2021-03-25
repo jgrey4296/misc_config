@@ -22,9 +22,6 @@
   (push 'org-link link-hint-types)
   )
 
-
-(when (featurep! :emacs jg-tag)
-  (+jg-tag-add-mode-handler 'org
-                            '+jg-tag-org-set-tags
-                            '+jg-tag-org-set-new-tag)
+(after! org
+  (add-hook! 'org-mode-hook #'jg-org-setup-tags-hook)
   )

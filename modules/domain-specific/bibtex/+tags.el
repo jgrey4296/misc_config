@@ -1,5 +1,12 @@
 ;;; domain-specific/bibtex/+tags.el -*- lexical-binding: t; -*-
 
+(defun +jg-bibtex-tag-setup-hook ()
+  (+jg-tag-add-mode-handler 'bibtex-mode
+                            '+jg-bibtex-set-tags
+                            '+jg-bibtex-set-new-tag
+                            )
+
+  )
 (defun +jg-bibtex-split-tags (x)
   (split-string x "," t "+")
   )
@@ -60,3 +67,4 @@
           (evil-forward-section-begin)
           ))))
   )
+

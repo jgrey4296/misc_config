@@ -15,21 +15,18 @@
 ;;      directory (for easy access to its source code).
 
 (doom!              ; Personal Modules:
- :util
- char-insert
- (bindings +bindings)
- jg-tag
+ :util  ;; ----- ====== -----
  jg-misc
  text
 
- :domain-specific
+ :domain-specific  ;; ----- ====== -----
  logic
  music
  netlogo
  twitter
  bibtex
 
- :editor
+ :editor  ;; ----- ====== -----
  ;;acab-ide
  ;;jg-states
  overlay_control
@@ -37,20 +34,24 @@
  (jg-personal +active)
  project-walk
 
- :lang
+ :lang  ;; ----- ====== -----
  jg-org
  jg-org-unit-test
  jg-lisp
 
+ :emacs  ;; ----- ====== -----
+ char-insert
+ (bindings +bindings)
+ jg-tag
 
  ; Generic Modules
- :completion
+ :completion  ;; ----- ====== -----
  company            ; the ultimate code completion backend
  (helm +fuzzy)      ; the *other* search engine for love and life
                     ;;ido
  ivy                ; a search engine for love and life
 
- :ui
+ :ui  ;; ----- ====== -----
  ;;deft             ; notational velocity for Emacs
  doom               ; what makes DOOM look the way it does
  doom-dashboard     ; a nifty splash screen for Emacs
@@ -75,7 +76,7 @@
  workspaces         ; tab emulation, persistence & separate workspaces
                     ;;zen               ; distraction-free coding or writing
 
- :editor
+ :editor  ;; ----- ====== -----
  (evil +everywhere) ; come to the dark side, we have cookies
  file-templates     ; auto-snippets for empty files
  fold
@@ -89,25 +90,25 @@
  snippets           ; my elves. They type so I don't have to
  word-wrap          ; soft wrapping with language-aware indent
 
- :emacs
+ :emacs  ;; ----- ====== -----
  dired              ; making dired pretty [functional]
  electric           ; smarter, keyword-based electric-indent
  ibuffer            ; interactive buffer management
  ;;undo               ; persistent, smarter undo for your inevitable mistakes
  vc                 ; version-control and Emacs, sitting in a tree
 
- :term
+ :term  ;; ----- ====== -----
                     ;;eshell            ; the elisp shell that works everywhere
  shell              ; simple shell REPL for Emacs
  term               ; basic terminal emulator for Emacs
                     ;;vterm             ; the best terminal emulation in Emacs
 
- :checkers
+ :checkers  ;; ----- ====== -----
  syntax             ; tasing you for every semicolon you forget
                     ;;spell             ; tasing you for misspelling mispelling
                     ;;grammar           ; tasing grammar mistake every you make
 
- :tools
+ :tools  ;; ----- ====== -----
                     ;;ansible
                     ;;debugger          ; FIXME stepping through code, to help you add bugs
                     ;;direnv
@@ -129,11 +130,11 @@
                     ;;tmux              ; an API for interacting with tmux
                     ;;upload            ; map local to remote projects via ssh/ftp
 
- :os
+ :os  ;; ----- ====== -----
  (:if IS-MAC macos) ; improve compatibility with macOS
  tty                ; improve the terminal Emacs experience
 
- :lang
+ :lang  ;; ----- ====== -----
                     ;;agda              ; types of types of types of types...
                     ;;cc                ; C/C++/Obj-C madness
                     ;;clojure           ; java with a lisp
@@ -192,12 +193,12 @@
                     ;;web               ; the tubes
  yaml               ; JSON, but readable
 
- :email
+ :email  ;; ----- ====== -----
                     ;;(mu4e +gmail)
                     ;;notmuch
                     ;;(wanderlust +gmail)
 
- :app
+ :app  ;; ----- ====== -----
                     ;;calendar
                     ;;irc               ; how neckbeards socialize
                     ;;(rss +org)        ; emacs as an RSS reader

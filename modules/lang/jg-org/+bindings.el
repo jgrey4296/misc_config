@@ -1,25 +1,17 @@
 ;;; main/jg-org/+bindings.el -*- lexical-binding: t; -*-
 
 
-;;; Academic phrases
 (map! :leader
-      (:prefix ("xA" . "Academic Phrases")
-       "p"    #'academic-phrases
-       "s"    #'academic-phrases-by-section)
+       "i t"    #'org-time-stamp
+       "j c"    #'org-goto-calendar
       ;; AGENDA
-      (:prefix ("ao" . "Org")
-       (:prefix ("a" . "Agenda")
+      (:prefix ("a o a" . "Agenda")
         "/"   #'org-occur-in-agenda-files
         "f"   #'org-agenda-file-to-front
         "r"   #'org-remove-file
         "l"   #'org-agenda-list
         "F"   #'+jg-org-list-agenda-files
         "t"   #'org-tags-view)
-       )
-      (:prefix "i"
-       "t"    #'org-time-stamp)
-      (:prefix "j"
-       "c"    #'org-goto-calendar)
       )
 ;;; Paren Control
 (map! :map org-mode-map
@@ -28,41 +20,51 @@
       )
 ;;; Personal
 (map! :map org-mode-map
-      (:leader
-       :prefix "t"
-       :desc "Toggle Links" "l"   'org-toggle-link-display)
+      :leader
+      :desc "Toggle Links" "t l"   'org-toggle-link-display)
+(map! :map org-mode-map
+      :desc "Next Link"       :n "] p" #'org-next-link
+      :desc "Prev Link"       :n "[ p" #'org-previous-link
       (:prefix "g"
        :desc "Forward Heading" :n "j" #'org-forward-heading-same-level
-       :desc "Back Heading" :n "k" #'org-backward-heading-same-level
-       :desc "Headings Helm" :n "h" #'helm-org-in-buffer-headings)
-      (:prefix "]"
-       :desc "Next Link" :n "p" #'org-next-link)
-      (:prefix "["
-       :desc "Prev Link" :n "p" #'org-previous-link)
-      (:localleader
-       :prefix ("f". "Format")
-       :desc "Fix Drawers" :n "d" #'+jg-org-fix-properties-drawers
-       )
+       :desc "Back Heading"    :n "k" #'org-backward-heading-same-level
+       :desc "Headings Helm"   :n "h" #'helm-org-in-buffer-headings)
       )
-;; Misc
 (map! :map org-mode-map
       :localleader
-      ;; SRC CODE
-      (:prefix "."
-       :desc "Edit Codeblock " "e"   #'org-edit-src-code
-       :desc "Exec Codeblock"  "E"   #'org-babel-execute-src-block
-       ;; Links
-       (:prefix ("l" . "Links")
-        ;; "o"   #'+jg-org-open_link_in_buffer
-        ;; "O"   #'+jg-org-open_link_externally
-        "n"      #'+jg-org-change_link_name
-        )
-       )
       "i" nil
-      ;;Formatting
-      (:prefix ("i" . "Insert")
-       "t"   #'+jg-org-insert-heading-trio
-       "h"   #'org-insert-subheading
-       "d"   #'org-insert-drawer
+      (:prefix ("f". "Format")
+       :desc "Fix Drawers"     :n "d"  #'+jg-org-fix-properties-drawers
+       :desc "Clean Org"          "c"  #'+jg-org-clean-org
+       :desc "Wrap Numbers"        "w" #'+jg-org-wrap-numbers
+       :desc "Wrap non-link urls"  "L" #'+jg-org-wrap-non-link-urls
+       :desc "Remove Duplicates"   "D" #'+jg-org-remove-duplicates)
+      ;; TODO refine this Codeblocks
+      (:prefix "."
+       :desc "Edit Codeblock " "e"     #'org-edit-src-code
+       :desc "Exec Codeblock"  "E"     #'org-babel-execute-src-block)
+      ;; Links
+      (:prefix ("l" . "Links")
+       ;; "o"   #'+jg-org-open_link_in_buffer
+       ;; "O"   #'+jg-org-open_link_externally
+       "n"      #'+jg-org-change_link_name
        )
+      ;; Insertion
+      (:prefix ("i" . "Insert")
+       :desc "Insert Heading Trio" "t" #'+jg-org-insert-heading-trio
+       :desc "Insert Subheading" "h"   #'org-insert-subheading
+       :desc "Insert Drawer" "d"       #'org-insert-drawer)
+      )
+
+(map! :after dired
+      :map (dired-mode-map ranger-mode-map)
+      :localleader
+      (:prefix ("K" . "Destructive")
+       :desc "Clean Marked" "c"          #'+jg-org-clean-marked-files
+       :desc "Chop File Names" "C"       #'+jg-org-chop-long-files-from-dired
+       :desc "Unify Pdf Locations" "U"   #'+jg-org-unify-pdf-locations
+       :desc "Quick Compress" "Z"        #'+jg-org-quick-compress-orgs
+       :desc "Reformat Json" "J"         #'+jg-org-reformat-jsons
+       )
+
       )

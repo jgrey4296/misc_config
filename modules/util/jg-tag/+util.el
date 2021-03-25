@@ -1,11 +1,6 @@
 ;; utility
 
-(defun jg-tag-strip_spaces (str)
-  "Utility to replace spaces with underscores in a string.
-Used to guard inputs in tag strings"
-  (s-replace " " "_" (string-trim str))
-  )
-(defun jg-tag-sort-candidates (ap bp)
+(defun +jg-tag-sort-candidates (ap bp)
   " Sort routine to sort by colour then lexicographically "
   (let* ((a (car ap))
          (b (car bp))
@@ -17,7 +12,7 @@ Used to guard inputs in tag strings"
      ((and aprop (not bprop)) t)
      ((and (not aprop) (not bprop) (> (funcall lookup ap) (funcall lookup bp))))
      )))
-(defun jg-tag-candidates ()
+(defun +jg-tag-candidates ()
   " Given Candidates, colour them if they are assigned, then sort them  "
   (let* ((buffer-cand-tags (jg-tag-get-buffer-tags))
          (global-tags jg-tag-global-tags))
@@ -45,45 +40,23 @@ Used to guard inputs in tag strings"
       '()
       ))
   )
-(defun jg-tag-split-on-char-n (beg end n)
-  "Loop through buffer, inserting newlines between lines where
-the nth char changes"
-  (interactive "r\nnSplit on char number: ")
-  (save-excursion
-    (goto-char beg)
-    (let ((last-char (downcase (char-after (+ (point) n))))
-          curr-char)
-      (while (< (point) end)
-        (setq curr-char (downcase (char-after (+ (point) n))))
-        (if (not (eq last-char curr-char))
-            (progn
-              (setq last-char curr-char)
-              (goto-char (line-beginning-position))
-              (insert "\n")
-              )
-          )
-        (forward-line)
-        )
-      )
-    )
-  )
-(defun jg-tag-next-similar-string ()
-  " Go through lines, finding the next adjacent string pair
-uses org-babel-edit-distance "
-  (interactive)
-  (let* ((bound (or current-prefix-arg jg-tag-last-similarity-arg))
-         (curr-sim (+ bound 1))
-         (s2 (downcase (string-trim (car (s-split ":" (buffer-substring (line-beginning-position) (line-end-position)))))))
-         s1
+(defun +jg-tag-chart-tag-counts (counthash name)
+  "Given a hashtable of counts, create a buffer with a bar chart of the counts"
+  ;; (message "Charting: %s %s" counthash name)
+  (let* ((hashPairs (-zip (hash-table-keys counthash) (hash-table-values counthash)))
+         (sorted (sort hashPairs (lambda (a b) (> (cdr a) (cdr b)))))
+         (maxTagLength (apply 'max (mapcar (lambda (x) (length (car x))) sorted)))
+         (maxTagAmnt (apply 'max (mapcar (lambda (x) (cdr x)) sorted)))
          )
-    (while (and (< (point) (point-max))
-                (> curr-sim bound))
-      (forward-line)
-      (setq jg-tag-last-similarity-arg bound)
-      (setq s1 s2)
-      (setq s2 (downcase (string-trim (car (s-split ":" (buffer-substring (line-beginning-position) (line-end-position)))))))
-      (setq curr-sim (org-babel-edit-distance s1 s2))
-      )
+    ;;print them all out
+
+    (with-temp-buffer-window "*Tags*"
+                             nil
+                             nil
+                             ;; Todo: Expand this func to group and add org headings
+                             (mapc (lambda (x) (princ (format "%s\n" x)))
+                                   (jg-tag-make-bar-chart sorted maxTagLength maxTagAmnt))
+                             )
+    (jg-tag-org-format-temp-buffer "*Tags*" name)
     )
-  (message "Using distance %s" jg-tag-last-similarity-arg)
   )

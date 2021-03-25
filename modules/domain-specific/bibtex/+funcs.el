@@ -1,121 +1,48 @@
 ;; bibtex
 
-(defhydra jg-org-ref-bibtex-hydra (:color blue)
-  "
-_w_: WOS
-_c_: WOS citing
-_a_: WOS related
-_R_: Crossref
-_U_: Update from doi
-"
-  ("w" #'org-ref-bibtex-wos)
-  ("c" #'org-ref-bibtex-wos-citing)
-  ("a" #'org-ref-bibtex-wos-related)
-  ("R" #'org-ref-bibtex-crossref)
-  ("U" (doi-utils-update-bibtex-entry-from-doi (org-ref-bibtex-entry-doi)))
-  ("q" nil))
-
-
-(defun jg-tag-build-bibtex-list ()
+(defun +jg-bibtex-build-bibtex-list ()
   "Build a list of all bibtex files to use for bibtex-helm "
-  (setq bibtex-completion-bibliography (directory-files jg-tag-loc-bibtex 't "\.bib$")))
-(defun jg-tag-split-tags (x)
-  (split-string x "," t "+")
-  )
-(defun jg-tag-bibtex-set-tags (x)
-  " Set tags in bibtex entries "
-  (let* ((visual-candidates (helm-marked-candidates))
-         (actual-candidates (mapcar (lambda (x) (cadr (assoc x jg-tag-candidates-names))) visual-candidates))
-         (prior-point 1)
-         (end-pos jg-tag-marker)
-         (current-tags '())
-         (tag-regexp "\\(OPT\\)?tags")
-         (has-real-tags-field nil)
-         (add-func (lambda (candidate)
-                     (if (not (-contains? current-tags candidate))
-                         (progn
-                           (push candidate current-tags)
-                           (puthash candidate 1 jg-tag-global-tags))
-                       (progn
-                         (setq current-tags (remove candidate current-tags))
-                         (puthash candidate (- (gethash candidate jg-tag-global-tags) 1) jg-tag-global-tags))
-                       )))
-         )
-    (save-excursion
-      (setq prior-point (- (point) 1))
-      (while (and (/= prior-point (point)) (< (point) end-pos))
-        (progn
-          (setq current-tags (jg-tag-split-tags (bibtex-autokey-get-field tag-regexp))
-                prior-point (point)
-                has-real-tags-field (not (string-empty-p (bibtex-autokey-get-field "tags")))
-                )
-          (mapc add-func actual-candidates)
-          (bibtex-set-field (if has-real-tags-field "tags" "OPTtags")
-                            (string-join current-tags ","))
-          ;;(org-ref-bibtex-next-entry)
-          (evil-forward-section-begin)
-          )))
-    )
-)
-(defun jg-tag-bibtex-set-new-tag (x)
-  "A Fallback function to set tags of bibtex entries "
-  (save-excursion
-    (let ((prior-point (- (point) 1))
-          (end-pos jg-tag-marker)
-          (stripped_tags (jg-tag-split-tags (jg-tag-strip_spaces x)))
-          (tag-regexp "\\(OPT\\)?tags")
-          )
-      (while (and (/= prior-point (point)) (< (point) end-pos))
-        (setq prior-point (point))
-        (let* ((current-tags (jg-tag-split-tags (bibtex-autokey-get-field tag-regexp)))
-               (filtered-tags (-filter (lambda (x) (not (-contains? current-tags x))) stripped_tags))
-               (total-tags (-concat current-tags filtered-tags))
-               (has-real-tags-field (not (string-empty-p (bibtex-autokey-get-field "tags"))))
-               )
-          (bibtex-set-field (if has-real-tags-field "tags" "OPTtags")
-                            (string-join total-tags ","))
-          (mapc (lambda (x) (puthash x 1 jg-tag-global-tags)) filtered-tags)
-          ;;(org-ref-bibtex-next-entry)
-          (evil-forward-section-begin)
-          ))))
-  )
-(defun jg-tag-unify-pdf-locations-in-file (name)
+  (setq bibtex-completion-bibliography (directory-files jg-bibtex-loc-bibtex 't "\.bib$")))
+
+(defun +jg-bibtex-unify-pdf-locations-in-file (name)
   "Change all pdf locations in bibtex file to relative,
 ensuring they work across machines "
   (message "Unifying Locations in %s" name)
   (with-temp-buffer
     (insert-file-contents name t)
     (goto-char (point-min))
-    (while (re-search-forward "file[[:digit:]]* ?= *{\\(.+mega\\)/\\(.+pdflibrary\\)?" nil t)
-      (replace-match "~/Mega" nil nil nil 1)
+    (while (re-search-forward jg-bibtex-pdf-loc-regexp nil t)
+      (replace-match jg-bibtex-pdf-replace-match-string nil nil nil 1)
       (if (eq 6 (length (match-data)))
-          (replace-match "pdflibrary" t nil nil 2))
+          (replace-match  t nil nil 2))
       )
     (write-file name)
     )
   )
-(defun jg-tag-unify-pdf-locations ()
+(defun +jg-bibtex-unify-pdf-locations ()
   "Unify bibtex pdf paths of marked files"
   (interactive)
   (let ((files (dired-get-marked-files)))
-    (seq-each 'jg-tag-unify-pdf-locations-in-file files)
+    (seq-each '+jg-bibtex-unify-pdf-locations-in-file files)
     )
   )
 
-(defun jg-org-ref-bibtex-google-scholar ()
+(defun +jg-bibtex-google-scholar ()
   "Open the bibtex entry at point in google-scholar by its doi."
   (interactive)
-  (let* ((search-texts (mapcar #'bibtex-autokey-get-field jg-scholar-search-fields))
-         (exact-texts (mapcar #'bibtex-autokey-get-field jg-scholar-search-fields-exact))
+  (let* ((search-texts (mapcar #'bibtex-autokey-get-field jg-bibtex-scholar-search-fields))
+         (exact-texts (mapcar #'bibtex-autokey-get-field jg-bibtex-scholar-search-fields-exact))
          (exact-string (s-join " " (mapcar #'(lambda (x) (format "\"%s\"" x))
                                            (-filter #'(lambda (x) (not (string-empty-p x))) exact-texts))))
          (all-terms (s-concat exact-string " " (s-join " " search-texts)))
-         (search-string (format jg-scholar-search-string all-terms))
+         (search-string (format jg-bibtex-scholar-search-string all-terms))
          )
     (browse-url search-string)
     )
   )
-(defun jg-org-ref-edit-entry-type ()
+(defun +jg-bibtex-edit-entry-type ()
+  " Edit the @type of a bibtex entry, using
+bibtex-BibTeX-entry-alist for completion options "
   (interactive)
   (let* ((type-options (mapcar 'car bibtex-BibTeX-entry-alist))
          (selection (completing-read "New Bibtex Type: " type-options))
@@ -128,7 +55,8 @@ ensuring they work across machines "
       )
     )
   )
-(defun jg-org-ref-copy-entry ()
+(defun +jg-bibtex-copy-entry ()
+  " Copy the entire entry under point "
   (interactive)
   (save-excursion
     (let (start end)
@@ -140,11 +68,12 @@ ensuring they work across machines "
       )
     )
   )
-(defun jg-org-ref-copy-key ()
+(defun +jg-bibtex-copy-key ()
+  " Copy the cite key of the entry under point "
   (interactive)
   (kill-new (bibtex-completion-get-key-bibtex))
   )
-(defun jg-org-ref-open-bibtex-pdf ()
+(defun +jg-bibtex-open-pdf ()
   "Open pdf for a bibtex entry, if it exists.
 assumes point is in
 the entry of interest in the bibfile.  but does not check that."
@@ -157,7 +86,8 @@ the entry of interest in the bibfile.  but does not check that."
           (org-link-open-from-string (format "[[file:%s]]" file))
         (progn (message optfile)
                (org-link-open-from-string (format "[[file:%s]]" optfile)))))))
-(defun jg-org-ref-find-folder ()
+(defun +jg-bibtex-find-folder ()
+  " Find the fold in which the entry's associated file exists "
   (interactive)
   (let* ((file (bibtex-autokey-get-field "file"))
          (optfile (bibtex-autokey-get-field "OPTfile"))
@@ -171,7 +101,8 @@ the entry of interest in the bibfile.  but does not check that."
       )
     )
   )
-(defun jg-org-ref-open-folder ()
+(defun +jg-bibtex-open-folder ()
+  " Open the associated file's folder in finder "
   (interactive)
   (let* ((file (bibtex-autokey-get-field "file"))
          (optfile (bibtex-autokey-get-field "OPTfile"))
@@ -185,23 +116,26 @@ the entry of interest in the bibfile.  but does not check that."
       )
     )
   )
-(defun jg-org-ref-open-url ()
+(defun +jg-bibtex-open-url ()
+  " Open the current entry's url in browser "
   (interactive)
   (when (bibtex-text-in-field "url")
     (browse-url (bibtex-text-in-field "url")))
   )
-(defun jg-org-ref-open-doi()
+(defun +jg-bibtex-open-doi ()
+  " Follow the doi link of the current entry in a browser "
   (interactive)
   (when (bibtex-text-in-field "doi")
     (browse-url (format "https://doi.org/%s" (bibtex-text-in-field "doi")))
     )
   )
-(defun jg-org-ref-refile-by-year ()
+(defun +jg-bibtex-refile-by-year ()
+  " Kill the current entry and insert it in the appropriate year's bibtex file "
   (interactive)
   (bibtex-beginning-of-entry)
   (let* ((year (bibtex-text-in-field "year"))
          (year-file (format "%s.bib" year))
-         (bib-path jg-tag-loc-bibtex)
+         (bib-path +jg-bibtex-loc-bibtex)
          (response (if year (read-string (format "Refile to %s? " year-file))))
          (target (if (and year (or (s-equals? "y" response) (string-empty-p response)))
                      (f-join bib-path year-file)
@@ -220,18 +154,22 @@ the entry of interest in the bibfile.  but does not check that."
       )
     )
   )
-(defun jg-org-visual-select-entry ()
+(defun +jg-bibtex-visual-select-entry ()
+  " Evil visual select the current entry "
   (interactive)
   (evil-visual-make-region (bibtex-beginning-of-entry)
                            (bibtex-end-of-entry))
 )
-(defun jg-org-goto-crossref-entry ()
+(defun +jg-bibtex-goto-crossref-entry ()
+  " Follow the crossref field in the entry "
   (interactive)
   (when (bibtex-text-in-field "crossref")
     (bibtex-find-crossref (bibtex-text-in-field "crossref"))
     )
   )
-(defun jg-org-edit-field ()
+(defun +jg-bibtex-edit-field ()
+  " Edit a specified field in the current entry,
+using org-bibtex-fields for completion options "
   ;; TODO add completion's for fields in completion loc
   (interactive)
   (save-excursion
@@ -248,13 +186,16 @@ the entry of interest in the bibfile.  but does not check that."
     )
   )
 
-(defun jg-org-bibtex-load-random ()
-  """ Run in a bibtex file, opens a random entry externally,
-      and logs it has been opened in a separate file """
+(defun +jg-bibtex-load-random ()
+  " Run in a bibtex file, opens a random entry externally,
+      and logs it has been opened in a separate file.
+
+Log into jg-bibtex-rand-log.
+ "
   (interactive)
   (widen)
   (let* ((location (f-dirname (buffer-file-name)))
-         (log_file (f-join location ".emacs_rand_bib_log"))
+         (log_file (f-join location jg-bibtex-rand-log))
          (log_hash (if (f-exists? log_file) (with-temp-buffer
                                               (insert-file-contents log_file)
                                               (let ((uf (make-hash-table :test 'equal)))
@@ -277,7 +218,7 @@ the entry of interest in the bibfile.  but does not check that."
             (write-region "\n" nil log_file 'append)
             (bibtex-narrow-to-entry)
             (goto-char (point-min))
-            (org-open-link-from-string (message "[[%s]]" (bibtex-text-in-field "file")))
+            (+jg-bibtex-open-pdf)
             (setq entry nil)
             )
           )
@@ -285,12 +226,12 @@ the entry of interest in the bibfile.  but does not check that."
       )
     )
   )
-(defun jg-org-ref-clean-bibtex-entry ()
+(defun +jg-bibtex-clean-entry ()
   """ Calls org-ref-clean-bibtex-entry,
   but with a wrapping to override fill-column
   """
   (interactive)
-  (let ((fill-column jg-tag-bibtex-fill-column))
+  (let ((fill-column jg-bibtex-fill-column))
     (org-ref-clean-bibtex-entry)
     )
   )

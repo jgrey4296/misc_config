@@ -41,3 +41,12 @@
       :prefix "%"
       :desc "Global Match Rename" :n "R" #'+jg-GLOBAL-dired-do-rename-regexp
       )
+
+;; Dired bindings
+(map! :after dired
+      :map (dired-mode-map ranger-mode-map)
+      :localleader
+      (:prefix ("f" . "Find")
+       :desc "Find Random Marked" "r"    #'jg-tag-find-random-marked-file
+       )
+      )

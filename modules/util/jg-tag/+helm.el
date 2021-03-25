@@ -1,5 +1,5 @@
 ;; helm actions
-(defun jg-tag-open-url-action (x)
+(defun +jg-tag-open-url-action (x)
   " An action added to helm-grep for loading urls found in bookmarks "
   (let* ((marked (helm-marked-candidates))
          (no-props (mapcar (lambda (x) (plist-get x :url)) marked))
@@ -21,7 +21,7 @@
       )
     )
   )
-(defun jg-tag-tweet-link-action (candidate)
+(defun +jg-tag-tweet-link-action (candidate)
   "Helm action to open a tweet buffer with the link inserted"
   (evil-window-new (get-buffer-window helm-current-buffer)
                    "*Link Tweeting*")
@@ -30,24 +30,24 @@
   (evil-window-set-height 10)
   (evil-initialize-local-keymaps)
   (evil-local-set-key 'normal
-                      (kbd "C-c C-C") 'jg-tag-tweet-link-finish)
+                      (kbd "C-c C-C") '+jg-tag-tweet-link-finish)
   (insert "\n")
   (insert (plist-get candidate :url))
   (redraw-display)
   )
-(defun jg-tag-tweet-link-finish ()
+(defun +jg-tag-tweet-link-finish ()
   "Action to finish and tweet a link"
   (interactive)
   (let* ((text (buffer-substring-no-properties (point-min) (point-max))))
     (+jg-twitter-twitter-tweet-text text nil '(+jg-twitter-tweet_sentinel))
     ))
-(defun jg-tag-insert-candidates (x)
+(defun +jg-tag-insert-candidates (x)
   "A Helm action to insert selected candidates into the current buffer "
   (let ((candidates (helm-marked-candidates)))
     (with-helm-current-buffer
       ;;Substring -2 to chop off separating marks
       (insert (mapconcat (lambda (x) (substring x 0 -2)) candidates "\n")))))
-(defun jg-tag-insert-bookmarks (x)
+(defun +jg-tag-insert-bookmarks (x)
  (let ((candidates (helm-marked-candidates)))
     (with-helm-current-buffer
       ;;Substring -2 to chop off separating marks
@@ -55,13 +55,13 @@
                                              " : \n"
                                              (plist-get x :tags)))
                          candidates "\n\n")))))
-(defun jg-tag-insert-links (x)
+(defun +jg-tag-insert-links (x)
   "Helm action to insert selected candidates formatted as org links"
   (let ((candidates (helm-marked-candidates)))
     (with-helm-current-buffer
       ;;substring -2 to chop off separating marks
       (insert (mapconcat (lambda (x) (format "[[%s][%s]]    : %s" (plist-get x :url) (plist-get x :url) (plist-get x :tags))) candidates "\n")))))
-(defun jg-tag-grep-filter-one-by-one (candidate)
+(defun +jg-tag-grep-filter-one-by-one (candidate)
         "A Grep modification for bookmark helm to extract a bookmark's url and tags"
         (if (consp candidate)
       ;; Already computed do nothing (default as input).
@@ -90,96 +90,22 @@
       )
     )
   )
-(defun jg-tag-find-file (x)
+(defun +jg-tag-find-file (x)
   "A simple helm action to open selected files"
   (let ((files (if (helm-marked-candidates) (helm-marked-candidates) (list x))))
     (mapc 'find-file (mapcar 'string-trim files))
     )
   )
-(defun jg-tag-process-candidates (x)
-  "Utility to tidy bibtex-completion-candidates for helm-bibtex"
-  (cons (s-replace-regexp ",? +" " " (car x))
-        (cdr x))
-  )
-(defun jg-tag-show-bibtex-entry (keys)
-  "Show the first entry in KEYS in the relevant BibTeX file.
-modified from the original bibtex-completion-show-entry
-"
-  (let* ((bib-loc jg-tag-loc-bibtex)
-         (entry (bibtex-completion-get-entry keys))
-         (year (bibtex-completion-get-value "year" entry))
-         (year-file (f-join bib-loc (format "%s.bib" year)))
-         (todo-file (f-join bib-loc "todo.bib"))
-         )
-    (catch 'break
-      (dolist (bib-file `(,year-file ,todo-file))
-        (find-file bib-file)
-        (if (buffer-narrowed-p)
-            (widen))
-        (goto-char (point-min))
-        ;; find the key
-        (bibtex-find-entry keys)
-        (let ((bounds (+evil:defun-txtobj)))
-          (narrow-to-region (car bounds) (cadr bounds))
-          (throw 'break t)
-          )))))
-(defun jg-tag-insert-twitter-link (candidate)
+
+(defun +jg-tag-insert-twitter-link (candidate)
   (let ((candidates (mapcar 'car (helm-marked-candidates))))
     (with-helm-current-buffer
       (loop for entry in candidates
             do (let ((name (substring entry 1)))
                  (insert (format "[[https://twitter.com/%s][%s]]\n" name entry)))))))
-(defun jg-tag-edit-bibtex-notes (keys)
-  "Show the first entry in KEYS in the relevant BibTeX file.
-modified from the original bibtex-completion-show-entry
-"
-  (let* ((bib-loc jg-tag-loc-bibtex)
-         (entry (bibtex-completion-get-entry keys))
-         (year (bibtex-completion-get-value "year" entry))
-         (year-file (f-join bib-loc (format "%s.bib" year)))
-         (todo-file (f-join bib-loc "todo.bib"))
-         )
-    (catch 'break
-      (dolist (bib-file `(,year-file ,todo-file))
-        (find-file bib-file)
-        (if (buffer-narrowed-p)
-            (widen))
-        ;; find the key
-        (bibtex-find-entry keys)
-        (let ((bounds (bibtex-search-forward-field "notes" t)))
-        ;; create notes if not existing
-          (if (not bounds)
-              (progn
-                (bibtex-end-of-entry)
-                (evil-open-above 0)
-                (insert " notes = {")
-                (setq bounds `(nil ,(point) ,(+ (point) 2) ,(+ (point) 2)))
-                (insert " }")
-                ))
-          (narrow-to-region (nth 1 bounds) (nth 2 bounds)))
-          (org-mode)
-          (throw 'break t)
-      ))))
-(defun jg-tag-insert-simple-bibtex (x)
-  (let* ((entry (bibtex-completion-get-entry x))
-         (name (cdr (assoc "title" entry 's-equals?)))
-         )
-    (insert name)
-    )
-  )
-(defun jg-tag-insert-simple-bibtex-wrapped ()
-  (interactive)
-  (save-excursion
-    (let ((curr-word (current-word)))
-      (evil-end-of-line)
-      (insert " ")
-      (jg-tag-insert-simple-bibtex curr-word)
-      )
-    )
-  )
 
 ;; Dual Helm / Helm-Action:
-(defun jg-tag-file-select-helm (candidates)
+(defun +jg-tag-file-select-helm (candidates)
     " Given a list of Files, provide a helm to open them "
     (interactive)
     ;;(message "File Select Helm Candidates: %s" (helm-marked-candidates))
@@ -196,7 +122,7 @@ modified from the original bibtex-completion-show-entry
     )
 
 ;; Helm Activators:
-(defun jg-tag-helm-twitter ()
+(defun +jg-tag-helm-twitter ()
     "Run a Helm for searching twitter users"
     (interactive)
     ;;if twitter info not loaded, load
@@ -224,7 +150,7 @@ modified from the original bibtex-completion-show-entry
             )
       )
     )
-(defun jg-tag-helm-heading-twitter ()
+(defun +jg-tag-helm-heading-twitter ()
     "Run a Helm for searching twitter users"
     (interactive)
     ;;if twitter info not loaded, load
@@ -252,7 +178,7 @@ modified from the original bibtex-completion-show-entry
             )
       )
     )
-(defun jg-tag-helm-bookmarks ()
+(defun +jg-tag-helm-bookmarks ()
     " Run a Helm for search and opening html bookmarks "
     (interactive)
     (helm-set-local-variable
@@ -266,7 +192,7 @@ modified from the original bibtex-completion-show-entry
           :truncate-lines t
           )
     )
-(defun jg-tag-helm-unified (arg)
+(defun +jg-tag-helm-unified (arg)
     (interactive "P")
     ;;Clear Cache if necessary
     (when arg
@@ -314,7 +240,7 @@ modified from the original bibtex-completion-show-entry
                                   (progn (message "Generating Candidates")
                                          (bibtex-completion-init)
                                          (setq jg-tag-helm-bibtex-candidates
-                                               (mapcar 'jg-tag-process-candidates (bibtex-completion-candidates)))
+                                               (mapcar '+jg-tag-process-candidates (bibtex-completion-candidates)))
                                          jg-tag-helm-bibtex-candidates)
                                 jg-tag-helm-bibtex-candidates
                                 ))
@@ -329,32 +255,8 @@ modified from the original bibtex-completion-show-entry
             )
       )
     )
-(defun jg-tag-helm-bibtex (&optional arg local-bib input)
-    " Custom implementation of helm-bibtex"
-    (interactive "P")
-    (when arg
-      (bibtex-completion-clear-cache))
-    (let* ((bibtex-completion-additional-search-fields '("tags" "year"))
-           (candidates (if (or arg (null jg-tag-helm-bibtex-candidates))
-                           (progn (message "Generating Candidates")
-                                  (bibtex-completion-init)
-                                  (setq jg-tag-helm-bibtex-candidates
-                                        (mapcar 'jg-tag-process-candidates (bibtex-completion-candidates)))
-                                  jg-tag-helm-bibtex-candidates)
-                         jg-tag-helm-bibtex-candidates
-                         ))
-           )
-      (helm-set-local-variable
-       'helm-candidate-number-limit 5000
-       )
-      (helm :sources `(,jg-tag-helm-source-bibtex)
-            :full-frame helm-bibtex-full-frame
-            :buffer "*helm bibtex*"
-            :input input
-            :bibtex-local-bib local-bib
-            :bibtex-candidates candidates
-            )))
-(defun jg-tag-helm-tagger (&optional beg end)
+
+(defun +jg-tag-helm-tagger (&optional beg end)
     """ Opens the Tagging Helm """
     (set-marker jg-tag-marker (if (eq evil-state 'visual)  evil-visual-end (line-end-position)))
     (let* ((candidates (jg-tag-candidates))
@@ -365,50 +267,6 @@ modified from the original bibtex-completion-show-entry
       )
     )
 
-;; Utilities
-(defun jg-helm-bibtex-candidates-formatter (candidates _)
-  "Format CANDIDATES for display in helm."
-  (cl-loop
-   with width = (with-helm-window (helm-bibtex-window-width))
-   for entry in candidates
-   for entry = (cdr entry)
-   for entry-key = (bibtex-completion-get-value "=key=" entry)
-   collect (cons (jg-bibtex-completion-format-entry entry width) entry-key)))
-(defun jg-bibtex-completion-format-entry (entry width)
-  "Formats a BibTeX ENTRY for display in results list.
-WIDTH is the width of the results list.  The display format is
-governed by the variable `bibtex-completion-display-formats'."
-  (let* ((format
-          (or (assoc-string (bibtex-completion-get-value "=type=" entry)
-                            bibtex-completion-display-formats-internal
-                            'case-fold)
-              (assoc t bibtex-completion-display-formats-internal)))
-         (format-string (cadr format)))
-    (s-format
-     format-string
-     (lambda (field)
-       (let* ((field (split-string field ":"))
-              (field-name (car field))
-              (field-width (cadr field))
-              (field-value (bibtex-completion-get-value field-name entry)))
-         (when (and (string= field-name "author")
-                    (not field-value))
-           (setq field-value (bibtex-completion-get-value "editor" entry)))
-         (when (and (string= field-name "year")
-                    (not field-value))
-           (setq field-value (car (split-string (bibtex-completion-get-value "date" entry "") "-"))))
-         (setq field-value (bibtex-completion-clean-string (or field-value " ")))
-         (when (member field-name '("author" "editor"))
-           (setq field-value (bibtex-completion-shorten-authors field-value)))
-         (if (not field-width)
-             field-value
-           (setq field-width (string-to-number field-width))
-           (truncate-string-to-width
-            field-value
-            (if (> field-width 0)
-                field-width
-              (- width (cddr format)))
-            0 ?\s)))))))
 
 
 ;; Setup
@@ -417,12 +275,12 @@ governed by the variable `bibtex-completion-display-formats'."
   ;; Build a Custom grep for bookmarks
   (setq jg-tag-bookmark-helm-source
         (helm-make-source "Bookmark Helm" 'helm-grep-class
-          :action (helm-make-actions "Open Url" 'jg-tag-open-url-action
-                                     "Insert"   'jg-tag-insert-bookmarks
-                                     "Insert Link" 'jg-tag-insert-links
-                                     "Tweet Link"  'jg-tag-tweet-link-action
+          :action (helm-make-actions "Open Url" '+jg-tag-open-url-action
+                                     "Insert"   '+jg-tag-insert-bookmarks
+                                     "Insert Link" '+jg-tag-insert-links
+                                     "Tweet Link"  '+jg-tag-tweet-link-action
                                      )
-          :filter-one-by-one 'jg-tag-grep-filter-one-by-one
+          :filter-one-by-one '+jg-tag-grep-filter-one-by-one
           :nomark nil
           :backend "grep --color=always -a -d skip %e -n%cH -e %p %f"
           :pcre nil
@@ -432,69 +290,26 @@ governed by the variable `bibtex-completion-display-formats'."
 
   (setq jg-tag-twitter-helm-source
         (helm-make-source "Twitter Helm" 'helm-source
-          :action (helm-make-actions "File Select Helm" 'jg-tag-file-select-helm
-                                     "Insert User Link" 'jg-tag-insert-twitter-link)
+          :action (helm-make-actions "File Select Helm" '+jg-tag-file-select-helm
+                                     "Insert User Link" '+jg-tag-insert-twitter-link)
           )
         jg-tag-twitter-heading-helm-source
         (helm-make-source "Twitter Heading Helm" 'helm-source
-          :action (helm-make-actions "File Select Helm" 'jg-tag-file-select-helm)
+          :action (helm-make-actions "File Select Helm" '+jg-tag-file-select-helm)
           )
         jg-tag-file-select-source
         (helm-make-source "Twitter File Select Helm" 'helm-source
-          :action (helm-make-actions "Find File" 'jg-tag-find-file)
+          :action (helm-make-actions "Find File" '+jg-tag-find-file)
           )
 
         jg-tag-helm
         (helm-make-source "Helm Tagging" 'helm-source
-          :action (helm-make-actions "Set" 'jg-tag-set-tags))
+          :action (helm-make-actions "Set" '+jg-tag-set-tags))
 
         jg-tag-fallback-source
         (helm-make-source "Helm Fallback Source" 'helm-source
-          :action (helm-make-actions "Create" 'jg-tag-set-new-tag)
+          :action (helm-make-actions "Create" '+jg-tag-set-new-tag)
           :filtered-candidate-transformer (lambda (_c _s) (list helm-pattern)))
           )
 
-)
-(after! helm-bibtex
-  ;; Define the bib helm
-  (defun jg-bibtex-sort-by-year (c1 c2)
-    (let* ((c1year (alist-get "year" c1 nil nil 'string-equal))
-          (c2year (alist-get "year" c2 nil nil 'string-equal)))
-      (if (not c1year)
-          (progn (message "MISSING YEAR: %s" c1)
-                 (setq c1year "0")))
-      (if (not c2year)
-          (progn (message "MISSING YEAR: %s" c2)
-                 (setq c2year "0")))
-      (> (string-to-number c1year) (string-to-number c2year))
-      )
-    )
-
-  (defun jg-year-sort-transformer (candidates source)
-    (setq jg-test-cands candidates)
-    (-sort 'jg-bibtex-sort-by-year candidates)
-    )
-
-  (setq jg-tag-helm-source-bibtex
-        (helm-build-sync-source "Bibtex Helm"
-          :action (helm-make-actions  "Insert citation"      'helm-bibtex-insert-citation
-                                      "Open PDF"             'helm-bibtex-open-pdf
-                                      "Insert BibTeX key"    'helm-bibtex-insert-key
-                                      "Insert BibTeX entry"  'helm-bibtex-insert-bibtex
-                                      "Insert Bibtex simple" 'jg-tag-insert-simple-bibtex
-                                      "Show entry"           'jg-tag-show-bibtex-entry
-                                      "Edit Notes"           'jg-tag-edit-bibtex-notes
-                                      )
-          :candidates 'helm-bibtex-candidates
-          :filtered-candidate-transformer  '(jg-year-sort-transformer
-                                             helm-bibtex-candidates-formatter
-                                             helm-fuzzy-highlight-matches)
-          :multimatch
-          :fuzzy-match
-          )
-        )
-)
-
-(after! (f helm-bibtex)
-  (jg-tag-build-bibtex-list)
 )

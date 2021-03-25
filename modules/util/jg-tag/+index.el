@@ -1,6 +1,6 @@
 ;; Indexing
 
-(defun jg-tag-rebuild-tag-database ()
+(defun +jg-tag-rebuild-tag-database ()
   "Rebuild the tag database from jg-tag-loc-global-tags"
   (interactive)
   (clrhash jg-tag-global-tags)
@@ -16,7 +16,7 @@
     (message "ERROR: GLOBAL-TAGS-LOCATION IS EMPTY")
     )
   )
-(defun jg-tag-index-people ()
+(defun +jg-tag-index-people ()
   "Index all twitter users in the current directory "
   (interactive)
   ;; Get all org files
@@ -54,7 +54,7 @@
     )
   (message "Finished writing file")
   )
-(defun jg-tag-index-tags()
+(defun +jg-tag-index-tags()
   " Run routine to index all tags in org files "
   (interactive)
   ;; Get all org files

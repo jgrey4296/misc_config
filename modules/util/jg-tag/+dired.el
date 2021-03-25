@@ -1,6 +1,6 @@
 ;; dired actions
 
-(defun jg-tag-describe-marked-tags ()
+(defun +jg-tag-describe-marked-tags ()
   "Describe tags in marked files"
   (interactive)
   (let ((marked (dired-get-marked-files))
@@ -17,7 +17,7 @@
       )
     )
   )
-(defun jg-tag-mark-untagged-orgs ()
+(defun +jg-tag-mark-untagged-orgs ()
   "Mark org files which are not tagged at heading depth 2"
   (interactive)
   (dired-map-over-marks
@@ -27,7 +27,7 @@
    nil
    )
   )
-(defun jg-tag-dired-directory-count-untagged ()
+(defun +jg-tag-dired-directory-count-untagged ()
   "Count marked org files that are untagged"
   (interactive)
   (let ((counts 0)
@@ -45,58 +45,3 @@
     (message "%s Org files untagged" counts)
     )
   )
-(defun jg-tag-find-random-marked-file ()
-  "Open random file from marked"
-  (interactive)
-  (let ((marked (dired-get-marked-files)))
-    (find-file (nth (random (length marked))
-                    marked))
-    )
-  )
-(defun jg-tag-quick-compress-orgs ()
-  "Find all orgs in cwd down, compress together"
-  (interactive)
-  (let* ((curr default-directory)
-         (files (directory-files-recursively curr "\\.org"))
-         (target_dir "compressed_orgs")
-         )
-    ;;Make the top level
-    (if (not (f-exists? (f-join curr target_dir)))
-        (mkdir (f-join curr target_dir)))
-    ;;Copy files over
-    (mapc (lambda (x)
-            (let ((target (f-join curr target_dir (-last-item (f-split (f-parent x))))))
-              (if (not (f-exists? target)) (mkdir target))
-              (copy-file x (format "%s/" target))
-              )
-            ) files)
-    (dired-compress-file (f-join curr target_dir))
-    (delete-directory (f-join curr target_dir) t t)
-    )
-  )
-(defun jg-tag-open-selection (pair)
-  "Open only a selection of a large file "
-  (let ((file (car pair))
-        (selection-size (cdr pair))
-        selection)
-    (with-temp-buffer
-      (insert-file file)
-      (goto-char (random (- (point-max) selection-size)))
-      (setq selection (buffer-substring (point) (+ (point) selection-size)))
-      )
-    (with-temp-buffer-window (format "*%s - selection*" (-last-item (f-split file)))
-                             nil nil
-                             (princ selection)
-                             )
-    )
-  )
-(defun jg-tag-display-selection (n)
-  "Open only a selection of large files "
-  (interactive "nNum Chars: ")
-  (let ((files (dired-get-marked-files)))
-    (seq-each 'jg-tag-open-selection
-              (-zip-fill n files '()))
-    )
-  )
-
-

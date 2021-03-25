@@ -1,4 +1,3 @@
-(package! academic-phrases)
 (package! evil-org)
 (package! helm-org)
 (package! org)

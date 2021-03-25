@@ -68,3 +68,12 @@ Type SPC or `y' to %s one match, DEL or `n' to skip to next,
     )
   )
 
+(defun +jg-tag-find-random-marked-file ()
+  "Open random file from marked"
+  (interactive)
+  (let ((marked (dired-get-marked-files)))
+    (find-file (nth (random (length marked))
+                    marked))
+    )
+  )
+

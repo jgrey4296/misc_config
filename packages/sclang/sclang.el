@@ -47,7 +47,7 @@
   (customize-group 'sclang))
 
 (eval-and-compile
-  (require 'cl))
+  (require 'cl-lib))
 
 (eval-and-compile
   (let ((load-path

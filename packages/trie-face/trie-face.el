@@ -1,6 +1,6 @@
 ;; Macros for generating faces programmatically for trie mode
 (require 'dash)
-(require 'cl)
+(require 'cl-lib)
 
 (defgroup trie-face-generator '() "Variables of the macro based face generation")
 (defcustom trie-defined-depth-count 10 "Number of Trie Faces to Generate" :type '(integer))

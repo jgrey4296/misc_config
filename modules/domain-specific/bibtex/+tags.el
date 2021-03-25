@@ -43,7 +43,7 @@
   (save-excursion
     (let ((prior-point (- (point) 1))
           (end-pos +jg-bibtex-marker)
-          (stripped_tags (+jg-bibtex-split-tags (jg-tag-strip_spaces x)))
+          (stripped_tags (+jg-bibtex-split-tags (+jg-text-strip-spaces x)))
           (tag-regexp "\\(OPT\\)?tags")
           )
       (while (and (/= prior-point (point)) (< (point) end-pos))

@@ -48,3 +48,7 @@
       (:prefix ("a b" . "Bibtex")
        :desc "Load Random Bibtex entry"  "r" #'+jg-bibtex-load-random)
       )
+
+(after! (helm evil)
+  (evil-ex-define-cmd "ci[te]" #'+jg-bibtex-insert-wrapped)
+  )

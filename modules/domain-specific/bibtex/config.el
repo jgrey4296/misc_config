@@ -5,6 +5,7 @@
 (load! "+hooks")
 (load! "+vars")
 (load! "+helm")
+(load! "+tags")
 (after! evil
   (load! "+bindings")
   )
@@ -33,3 +34,10 @@
 (after! (f helm-bibtex)
   (jg-tag-build-bibtex-list)
 )
+
+(when (featurep! :emacs jg-tag)
+  (+jg-tag-add-mode-handler 'bibtex-mode
+                            '+jg-bibtex-set-tags
+                            '+jg-bibtex-set-new-tag
+                            )
+  )

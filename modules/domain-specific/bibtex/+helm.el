@@ -80,7 +80,9 @@ modified from the original bibtex-completion-show-entry
    for entry in candidates
    for entry = (cdr entry)
    for entry-key = (bibtex-completion-get-value "=key=" entry)
-   collect (cons +jg-bibtex-completion-format-entry entry width) entry-key))
+   collect (cons (+jg-bibtex-completion-format-entry entry width) entry-key))
+)
+
 (defun +jg-bibtex-completion-format-entry (entry width)
   "Formats a BibTeX ENTRY for display in results list.
 WIDTH is the width of the results list.  The display format is

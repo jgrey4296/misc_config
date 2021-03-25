@@ -9,7 +9,6 @@
   (load! "+bindings")
   )
 
-
 (use-package! link-hint
   :config
   ;; override default org link to open externally sometimes
@@ -21,4 +20,11 @@
     :open-multiple t
     :copy #'kill-new)
   (push 'org-link link-hint-types)
+  )
+
+
+(when (featurep! :emacs jg-tag)
+  (+jg-tag-add-mode-handler 'org
+                            '+jg-tag-org-set-tags
+                            '+jg-tag-org-set-new-tag)
   )

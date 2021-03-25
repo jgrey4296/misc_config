@@ -63,7 +63,7 @@
       (goto-char (point-min))
       (setq results (-non-nil (org-map-entries map-fn)))
       )
-    (-each (-zip-fill target-dir results '()) 'jg-tag-org-split-temp-buffer-create)
+    (-each (-zip-fill target-dir results '()) '+jg-text-org-split-temp-buffer-create)
     )
   )
 (defun +jg-org-split-alphabetically ()

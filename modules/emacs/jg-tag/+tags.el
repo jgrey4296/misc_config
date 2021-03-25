@@ -1,4 +1,10 @@
 ;; tags
+(defun +jg-tag-add-mode-handler (mode func-set func-new)
+  " Register a mode symbol with a function/symbol to
+call when the evil-ex command 't[ag]' is called,
+or +jg-tag-set-tags +jg-tag-set-new-tag"
+  (puthash mode `(,func-set . ,func-new) jg-tag-alt-mapping)
+  )
 
 (defun +jg-tag-get-buffer-tags (&optional name depth)
   "Process a buffer and get all tags from a specified depth of heading
@@ -54,9 +60,9 @@ Return a hash-table of tags with their instance counts"
     (if (eq 'org-mode major-mode)
         (progn
           ;; (message "Getting Tags for all buffers to depth: %s" depth)
-          (maphash (lambda (k v) (incf (gethash k alltags 0) v)) (jg-tag-get-buffer-tags nil depth))
+          (maphash (lambda (k v) (incf (gethash k alltags 0) v)) (+jg-tag-get-buffer-tags nil depth))
           (if (not (hash-table-empty-p alltags))
-              (jg-tag-chart-tag-counts alltags (buffer-name))
+              (+jg-tag-chart-tag-counts alltags (buffer-name))
             (message "No Tags in buffer")))
       (message "Not in an org buffer")
       )
@@ -73,11 +79,11 @@ Return a hash-table of tags with their instance counts"
     (loop for x in allbuffers do
           (if (with-current-buffer x (eq 'org-mode major-mode))
               (maphash (lambda (k v) (if (not (gethash k alltags)) (puthash k 0 alltags))
-                         (cl-incf (gethash k alltags) v)) (jg-tag-get-buffer-tags x depth))
+                         (cl-incf (gethash k alltags) v)) (+jg-tag-get-buffer-tags x depth))
             )
           )
     (if (not (hash-table-empty-p alltags))
-        (jg-tag-chart-tag-counts alltags "Active Files")
+        (+jg-tag-chart-tag-counts alltags "Active Files")
       (message "No Tags in buffers"))
     )
   )
@@ -98,60 +104,17 @@ Return a hash-table of tags with their instance counts"
 ;; TODO set-tags-and-repeat
 (defun +jg-tag-set-tags (x)
   "Utility action to set tags. Works in org *and* bibtex files"
-  (if (eq major-mode 'bibtex-mode)
-      (+jg-bibtex-set-tags x)
-    (+jg-tag-org-set-tags x))
+  (if (gethash major-mode jg-tag-alt-mapping)
+      (funcall (car (gethash major-mode jg-tag-alt-mapping)) x)
+    (message "No Tag Handler found for Mode: %s" major-mode)
   )
 (defun +jg-tag-set-new-tag (x)
   "Utility action to add a new tag. Works for org *and* bibtex"
-  (if (eq major-mode 'bibtex-mode)
-      (+jg-bibtex-set-new-tag x)
-    (+jg-tag-org-set-new-tag x))
+  (if (gethash major-mode jg-tag-alt-mapping)
+      (funcall (cdr (gethash major-mode jg-tag-alt-mapping)) x)
+    (message "No Tag Handler found for Mode: %s" major-mode)
   )
 
-(defun +jg-tag-org-set-tags (x)
-  """ Improved action to add and remove tags Toggle Selected Tags
-Can operate on regions of headings """
-  (let* ((visual-candidates (helm-marked-candidates))
-         (actual-candidates (mapcar (lambda (x) (cadr (assoc x jg-tag-candidates-names))) visual-candidates))
-         (prior-point 1)
-         (end-pos jg-tag-marker)
-         (current-tags '())
-         (add-func (lambda (candidate)
-                     (if (not (-contains? current-tags candidate))
-                         (progn
-                           (push candidate current-tags)
-                           (puthash candidate 1 jg-tag-global-tags))
-                       (progn
-                         (setq current-tags (remove candidate current-tags))
-                         (puthash candidate (- (gethash candidate jg-tag-global-tags) 1) jg-tag-global-tags))
-                       ))))
-    (save-excursion
-      (setq prior-point (- (point) 1))
-      (while (and (/= prior-point (point)) (< (point) end-pos))
-        (progn (setq current-tags (org-get-tags nil t)
-                     prior-point (point))
-               (mapc add-func actual-candidates)
-               (org-set-tags current-tags)
-               (org-forward-heading-same-level 1)
-               )))))
-(defun +jg-tag-org-set-new-tag (x)
-  "Utility to set a new tag for an org heading"
-  (save-excursion
-    (let ((prior-point (- (point) 1))
-          (end-pos jg-tag-marker)
-          (stripped_tag (jg-tag-strip_spaces x))
-          )
-      (while (and (/= prior-point (point)) (< (point) end-pos))
-        (setq prior-point (point))
-        (let* ((current-tags (org-get-tags nil t)))
-          (if (not (-contains? current-tags stripped_tag))
-              (progn
-                (push stripped_tag current-tags)
-                (puthash stripped_tag 1 jg-tag-global-tags)))
-          (org-set-tags current-tags)
-          (org-forward-heading-same-level 1)
-          )))))
 
 (defun +jg-tag-select-random-tags (n)
   (interactive "nHow many tags? ")
@@ -165,5 +128,3 @@ Can operate on regions of headings """
                              )
     )
   )
-
-

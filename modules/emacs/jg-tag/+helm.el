@@ -184,7 +184,7 @@
     (helm-set-local-variable
      'helm-grep-include-files (format "--include=%s" jg-tag-loc-bookmarks)
      'helm-grep-last-targets `(,jg-tag-loc-bookmarks)
-     'default-directory "~/github/writing/resources/"
+     'default-directory jg-tag-loc-default-helm-directory
      )
     (helm :sources jg-tag-bookmark-helm-source
           :full-frame t
@@ -192,11 +192,8 @@
           :truncate-lines t
           )
     )
-(defun +jg-tag-helm-unified (arg)
-    (interactive "P")
-    ;;Clear Cache if necessary
-    (when arg
-      (bibtex-completion-clear-cache))
+(defun +jg-tag-helm-unified ()
+    (interactive)
     ;;Load headings if necessary
     (if (null jg-tag-twitter-heading-helm-candidates)
         (with-temp-buffer
@@ -231,31 +228,19 @@
     (helm-set-local-variable
      'helm-grep-include-files (format "--include=%s" jg-tag-loc-bookmarks)
      'helm-grep-last-targets `(,jg-tag-loc-bookmarks)
-     'default-directory "~/github/writing/resources/"
+     'default-directory jg-tag-loc-default-helm-directory
      )
-
     ;;add candidates to source
-    (let* ((bibtex-completion-additional-search-fields '("tags" "year"))
-           (candidates-bibtex (if (or arg (null jg-tag-helm-bibtex-candidates))
-                                  (progn (message "Generating Candidates")
-                                         (bibtex-completion-init)
-                                         (setq jg-tag-helm-bibtex-candidates
-                                               (mapcar '+jg-tag-process-candidates (bibtex-completion-candidates)))
-                                         jg-tag-helm-bibtex-candidates)
-                                jg-tag-helm-bibtex-candidates
-                                ))
-           (source-tw (cons `(candidates . jg-tag-twitter-helm-candidates) jg-tag-twitter-helm-source))
-           (source-heading (cons `(candidates . jg-tag-twitter-heading-helm-candidates) jg-tag-twitter-helm-source)))
+    (let* ((source-tw (cons `(candidates . jg-tag-twitter-helm-candidates) jg-tag-twitter-helm-source))
+           (source-heading (cons `(candidates . jg-tag-twitter-heading-helm-candidates) jg-tag-twitter-heading-helm-source)))
       ;;call helm
-      (helm :sources '(source-heading jg-tag-helm-source-bibtex jg-tag-bookmark-helm-source )
+      (helm :sources '(source-heading jg-tag-bookmark-helm-source)
             :full-frame t
             :buffer "*Helm unified*"
             :truncate-lines t
-            :bibtex-candidates candidates-bibtex
             )
       )
     )
-
 (defun +jg-tag-helm-tagger (&optional beg end)
     """ Opens the Tagging Helm """
     (set-marker jg-tag-marker (if (eq evil-state 'visual)  evil-visual-end (line-end-position)))
@@ -287,25 +272,26 @@
            ))
 )
 (after! helm
-
   (setq jg-tag-twitter-helm-source
         (helm-make-source "Twitter Helm" 'helm-source
           :action (helm-make-actions "File Select Helm" '+jg-tag-file-select-helm
                                      "Insert User Link" '+jg-tag-insert-twitter-link)
           )
+        ;; ==========
         jg-tag-twitter-heading-helm-source
         (helm-make-source "Twitter Heading Helm" 'helm-source
           :action (helm-make-actions "File Select Helm" '+jg-tag-file-select-helm)
           )
+        ;; ==========
         jg-tag-file-select-source
         (helm-make-source "Twitter File Select Helm" 'helm-source
           :action (helm-make-actions "Find File" '+jg-tag-find-file)
           )
-
+        ;; ==========
         jg-tag-helm
         (helm-make-source "Helm Tagging" 'helm-source
           :action (helm-make-actions "Set" '+jg-tag-set-tags))
-
+        ;; ==========
         jg-tag-fallback-source
         (helm-make-source "Helm Fallback Source" 'helm-source
           :action (helm-make-actions "Create" '+jg-tag-set-new-tag)

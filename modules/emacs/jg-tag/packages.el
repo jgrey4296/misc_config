@@ -1,6 +1,4 @@
 (package! helm)
-(package! org-ref)
-(package! helm-bibtex)
 (package! dash)
 (package! org)
 (package! evil)
@@ -9,4 +7,3 @@
 (package! hydra)
 (package! cl-lib)
 (package! ivy)
-(package! bibtex :built-in 'prefer)

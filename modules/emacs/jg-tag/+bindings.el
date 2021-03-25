@@ -2,11 +2,10 @@
 ;; Helm bindings
 (map! :leader
       :prefix ("a h" . "Helms")
-      :desc "Bookmark Helm"             "f" #'+jg-tag-helm-bookmarks
+      :desc "Firefox Helm"              "f" #'+jg-tag-helm-bookmarks
       :desc "Tag Helm"                  "t" #'+jg-tag-helm-twitter
       :desc "Twitter Helm"              "h" #'+jg-tag-helm-heading-twitter
       :desc "Unified Helm"              "u" #'+jg-tag-helm-unified
-
       )
 (map! :map helm-map
       "M-SPC" #'helm-next-page)
@@ -29,6 +28,10 @@
        :desc "Index People" "p"          #'+jg-tag-index-people
        :desc "Index Tags" "t"            #'+jg-tag-index-tags
        )
+      (:prefix ("t" . "remove Tag")
+       :desc "Ivy Store Tag" #'+jg-tag-ivy-tag-set
+       :desc "Ivy Clear Tag" #'+jg-tag-ivy-tag-clear
+       )
       )
 
 ;; Evil ex commands
@@ -38,7 +41,7 @@
   (evil-ex-define-cmd "toa"    #'+jg-tag-occurrences-in-open-buffers)
   (evil-ex-define-cmd "tv"     #'org-tags-view)
   (evil-ex-define-cmd "ts"     #'org-set-tags)
-  (evil-ex-define-cmd "ci[te]" #'+jg-tag-insert-simple-bibtex-wrapped)
+
   )
 ;; Tag Cleaning hydra
 (after! hydra

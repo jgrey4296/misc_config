@@ -2,5 +2,5 @@
 
 (defun debug-package-load (name)
   (require 'loadhist)
-  (message "Package %s used in: %s" name (file-dependents (feature-file (intern name))
+  (message "Package %s used in: %s" name (file-dependents (feature-file (intern name))))
   )

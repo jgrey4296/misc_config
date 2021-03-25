@@ -3,10 +3,6 @@
 ;;
 ;;; `org-load' hooks
 
-(defun +org-init-org-directory-h ()
-  (unless org-directory
-    (setq org-directory "~/org"))
-  (setq org-id-locations-file (expand-file-name ".orgids" org-directory)))
 (defun +org-init-agenda-h ()
   (unless org-agenda-files
     (setq org-agenda-files (list org-directory)))
@@ -129,6 +125,29 @@ This forces it to read the background before rendering."
     :quote "#+begin_quote"
     :quote_end "#+END_QUOTE"
     :quote_end "#+end_quote"))
+(defun +org-init-attachments-h ()
+  "Sets up org's attachment system."
+  (setq org-attach-store-link-p t     ; store link after attaching files
+        org-attach-use-inheritance t) ; inherit properties from parent nodes
+
+  ;; Autoload all these commands that org-attach doesn't autoload itself
+  (use-package! org-attach
+    :commands (org-attach-new
+               org-attach-open
+               org-attach-open-in-emacs
+               org-attach-reveal-in-emacs
+               org-attach-url
+               org-attach-set-directory
+               org-attach-sync)
+    :config
+    (unless org-attach-id-dir
+      ;; Centralized attachments directory by default
+      (setq org-attach-id-dir (expand-file-name ".attach/" org-directory)))
+    (after! projectile
+      (add-to-list 'projectile-globally-ignored-directories org-attach-id-dir)))
+
+  ;; Add inline image previews for attachment links
+  (org-link-set-parameters "attachment" :image-data-fun #'+org-inline-image-data-fn))
 (defun +org-init-babel-h ()
   (setq org-src-preserve-indentation t  ; use native major-mode indentation
         org-src-tab-acts-natively t     ; we do this ourselves
@@ -315,29 +334,6 @@ relative to `org-directory', unless it is an absolute path."
 
   (when (featurep! :ui doom-dashboard)
     (add-hook '+doom-dashboard-inhibit-functions #'+org-capture-frame-p)))
-(defun +org-init-attachments-h ()
-  "Sets up org's attachment system."
-  (setq org-attach-store-link-p t     ; store link after attaching files
-        org-attach-use-inheritance t) ; inherit properties from parent nodes
-
-  ;; Autoload all these commands that org-attach doesn't autoload itself
-  (use-package! org-attach
-    :commands (org-attach-new
-               org-attach-open
-               org-attach-open-in-emacs
-               org-attach-reveal-in-emacs
-               org-attach-url
-               org-attach-set-directory
-               org-attach-sync)
-    :config
-    (unless org-attach-id-dir
-      ;; Centralized attachments directory by default
-      (setq org-attach-id-dir (expand-file-name ".attach/" org-directory)))
-    (after! projectile
-      (add-to-list 'projectile-globally-ignored-directories org-attach-id-dir)))
-
-  ;; Add inline image previews for attachment links
-  (org-link-set-parameters "attachment" :image-data-fun #'+org-inline-image-data-fn))
 (defun +org-init-custom-links-h ()
   ;; Highlight broken file links
   (org-link-set-parameters
@@ -560,6 +556,10 @@ between the two."
             #'+org-delete-backward-char-and-realign-table-maybe-h)
 
 )
+(defun +org-init-org-directory-h ()
+  (unless org-directory
+    (setq org-directory "~/org"))
+  (setq org-id-locations-file (expand-file-name ".orgids" org-directory)))
 (defun +org-init-popup-rules-h ()
   (set-popup-rules!
     '(("^\\*Org Links" :slot -1 :vslot -1 :size 2 :ttl 0)
@@ -570,6 +570,10 @@ between the two."
       ("^\\*Org Src"        :size 0.4  :quit nil :select t :autosave t :modeline t :ttl nil)
       ("^\\*Org-Babel")
       ("^CAPTURE-.*\\.org$" :size 0.25 :quit nil :select t :autosave t))))
+(defun +org-init-protocol-h ()
+  ;; TODO org-board or better link grabbing support
+  ;; TODO org-capture + org-protocol instead of bin/org-capture
+  )
 (defun +org-init-protocol-lazy-loader-h ()
   "Brings lazy-loaded support for org-protocol, so external programs (like
 browsers) can invoke specialized behavior from Emacs. Normally you'd simply
@@ -601,10 +605,6 @@ compelling reason, so..."
   ;; Disable built-in, clumsy advice
   (after! org-protocol
     (ad-disable-advice 'server-visit-files 'before 'org-protocol-detect-protocol-server)))
-(defun +org-init-protocol-h ()
-  ;; TODO org-board or better link grabbing support
-  ;; TODO org-capture + org-protocol instead of bin/org-capture
-  )
 (defun +org-init-smartparens-h ()
   ;; Disable the slow defaults
   (provide 'smartparens-org))

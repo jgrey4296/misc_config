@@ -30,7 +30,7 @@ the nth char changes"
   " Go through lines, finding the next adjacent string pair
 uses org-babel-edit-distance "
   (interactive)
-  (let* ((bound (or current-prefix-arg jg-tag-last-similarity-arg))
+  (let* ((bound (or current-prefix-arg jg-text-last-similarity-arg))
          (curr-sim (+ bound 1))
          (s2 (downcase (string-trim (car (s-split ":" (buffer-substring (line-beginning-position) (line-end-position)))))))
          s1
@@ -38,13 +38,13 @@ uses org-babel-edit-distance "
     (while (and (< (point) (point-max))
                 (> curr-sim bound))
       (forward-line)
-      (setq jg-tag-last-similarity-arg bound)
+      (setq jg-text-last-similarity-arg bound)
       (setq s1 s2)
       (setq s2 (downcase (string-trim (car (s-split ":" (buffer-substring (line-beginning-position) (line-end-position)))))))
       (setq curr-sim (org-babel-edit-distance s1 s2))
       )
     )
-  (message "Using distance %s" jg-tag-last-similarity-arg)
+  (message "Using distance %s" jg-text-last-similarity-arg)
   )
 (defun +jg-get-line ()
   (buffer-substring-no-properties (line-beginning-position)

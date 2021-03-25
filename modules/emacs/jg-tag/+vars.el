@@ -3,7 +3,6 @@
 (setq-default jg-tag-candidate-counts '()
               jg-tag-candidates-names '()
               jg-tag-global-tags (make-hash-table :test 'equal)
-              jg-tag-last-similarity-arg 1
 
               jg-tag-loc-bookmarks             "~/github/writing/resources/main_bookmarks.html"
               jg-tag-loc-global-tags           "~/github/writing/resources/collate.tags"

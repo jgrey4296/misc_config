@@ -1,9 +1,6 @@
 ;;; util/jg-misc/+bindings.el -*- lexical-binding: t; -*-
 
- (map! :n "g '" 'evil-operator-string-inflection
-       :leader
-       (:prefix "x"
-        :desc "Uniqify" "l u" #'+jg-misc-uniquify)
+ (map! :leader
        (:prefix "b"
         :desc "Undo-Tree" "u" #'+jg-misc-undo-tree)
        (:prefix "t"

@@ -20,13 +20,14 @@
  (bindings +bindings)
  jg-tag
  jg-misc
- jg-org-unit-test
+ text
 
  :domain-specific
  logic
-  music
-  netlogo
+ music
+ netlogo
  twitter
+ bibtex
 
  :editor
  ;;acab-ide
@@ -38,7 +39,11 @@
 
  :lang
  jg-org
-                    ; Generic Modules
+ jg-org-unit-test
+ jg-lisp
+
+
+ ; Generic Modules
  :completion
  company            ; the ultimate code completion backend
  (helm +fuzzy)      ; the *other* search engine for love and life

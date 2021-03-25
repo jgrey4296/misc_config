@@ -1,5 +1,5 @@
 ;;; util/text/+funcs.el -*- lexical-binding: t; -*-
-(defun +jg-text-strip_spaces (str)
+(defun +jg-text-strip-spaces (str)
   "Utility to replace spaces with underscores in a string.
 Used to guard inputs in tag strings"
   (s-replace " " "_" (string-trim str))

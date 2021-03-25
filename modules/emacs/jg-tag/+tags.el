@@ -108,12 +108,14 @@ Return a hash-table of tags with their instance counts"
       (funcall (car (gethash major-mode jg-tag-alt-mapping)) x)
     (message "No Tag Handler found for Mode: %s" major-mode)
   )
+)
 (defun +jg-tag-set-new-tag (x)
   "Utility action to add a new tag. Works for org *and* bibtex"
   (if (gethash major-mode jg-tag-alt-mapping)
       (funcall (cdr (gethash major-mode jg-tag-alt-mapping)) x)
     (message "No Tag Handler found for Mode: %s" major-mode)
   )
+)
 
 
 (defun +jg-tag-select-random-tags (n)

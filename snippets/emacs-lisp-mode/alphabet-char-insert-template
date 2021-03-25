@@ -1,0 +1,33 @@
+# -*- mode: snippet -*-
+# name:  alphabet-char-insert-template
+# key: alpha-insert-template
+# condition: t
+# --
+(map! :map $1
+      :prefix ($2 . $3)
+      :i "a"  (insert ?\" (char-from-name "LATIN SMALL LETTER A WITH CEDILLA") ?\")
+      :i "b"  (insert ?\" (char-from-name "LATIN SMALL LETTER B WITH CEDILLA") ?\")
+      :i "c"  (insert ?\" (char-from-name "LATIN SMALL LETTER C WITH CEDILLA") ?\")
+      :i "d"  (insert ?\" (char-from-name "LATIN SMALL LETTER D WITH CEDILLA") ?\")
+      :i "e"  (insert ?\" (char-from-name "LATIN SMALL LETTER E WITH CEDILLA") ?\")
+      :i "f"  (insert ?\" (char-from-name "LATIN SMALL LETTER F WITH CEDILLA") ?\")
+      :i "g"  (insert ?\" (char-from-name "LATIN SMALL LETTER G WITH CEDILLA") ?\")
+      :i "h"  (insert ?\" (char-from-name "LATIN SMALL LETTER H WITH CEDILLA") ?\")
+      :i "i"  (insert ?\" (char-from-name "LATIN SMALL LETTER I WITH CEDILLA") ?\")
+      :i "j"  (insert ?\" (char-from-name "LATIN SMALL LETTER J WITH CEDILLA") ?\")
+      :i "k"  (insert ?\" (char-from-name "LATIN SMALL LETTER K WITH CEDILLA") ?\")
+      :i "l"  (insert ?\" (char-from-name "LATIN SMALL LETTER L WITH CEDILLA") ?\")
+      :i "m"  (insert ?\" (char-from-name "LATIN SMALL LETTER M WITH CEDILLA") ?\")
+      :i "n"  (insert ?\" (char-from-name "LATIN SMALL LETTER N WITH CEDILLA") ?\")
+      :i "o"  (insert ?\" (char-from-name "LATIN SMALL LETTER O WITH CEDILLA") ?\")
+      :i "p"  (insert ?\" (char-from-name "LATIN SMALL LETTER P WITH CEDILLA") ?\")
+      :i "q"  (insert ?\" (char-from-name "LATIN SMALL LETTER Q WITH CEDILLA") ?\")
+      :i "r"  (insert ?\" (char-from-name "LATIN SMALL LETTER R WITH CEDILLA") ?\")
+      :i "s"  (insert ?\" (char-from-name "LATIN SMALL LETTER S WITH CEDILLA") ?\")
+      :i "t"  (insert ?\" (char-from-name "LATIN SMALL LETTER T WITH CEDILLA") ?\")
+      :i "u"  (insert ?\" (char-from-name "LATIN SMALL LETTER U WITH CEDILLA") ?\")
+      :i "v"  (insert ?\" (char-from-name "LATIN SMALL LETTER V WITH CEDILLA") ?\")
+      :i "w"  (insert ?\" (char-from-name "LATIN SMALL LETTER W WITH CEDILLA") ?\")
+      :i "x"  (insert ?\" (char-from-name "LATIN SMALL LETTER X WITH CEDILLA") ?\")
+      :i "y"  (insert ?\" (char-from-name "LATIN SMALL LETTER Y WITH CEDILLA") ?\")
+      :i "z"  (insert ?\" (char-from-name "LATIN SMALL LETTER Z WITH CEDILLA") ?\")

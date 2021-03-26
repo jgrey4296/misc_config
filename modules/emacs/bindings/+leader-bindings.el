@@ -57,29 +57,26 @@
 )
 ;;; <leader> b --- buffer
 (map! :leader
-      :prefix-map ("b" . "buffer")
+      :prefix ("b" . "buffer")
       :desc "Bury buffer"                 "z"   #'bury-buffer
 
-      :desc "Clear Buffer" "c" #'+jg-bindings-clear-buffer
-      :desc "Kill all buffers"            "K"   #'doom/kill-all-buffers
-      :desc "Kill buffer"                 "d"   #'kill-current-buffer
-      :desc "Kill other buffers"          "O"   #'doom/kill-other-buffers
-      :desc "New empty buffer"            "N"   #'evil-buffer-new
-      :desc "Next buffer"                 "]"   #'next-buffer
-      :desc "Pop up scratch buffer"       "x"   #'doom/open-scratch-buffer
-      :desc "Previous buffer"             "["   #'previous-buffer
-      :desc "Read-only mode"              "r"   #'read-only-mode
-      :desc "Revert buffer"               "R"   #'revert-buffer
-      :desc "Save all buffers"            "S"   #'evil-write-all
-      :desc "Save buffer"                 "s"   #'basic-save-buffer
-      :desc "Switch to last buffer"       "l"   #'evil-switch-to-windows-last-buffer
-      :desc "Pop up scratch buffer"       "x"   #'doom/open-scratch-buffer
-      :desc "Switch to scratch buffer"    "X"   #'doom/switch-to-scratch-buffer
-      :desc "Toggle narrowing"            "-"   #'jg-toggle-narrow-buffer
-      :desc "ibuffer"                     "i"   #'ibuffer
-
-
-       "i" #'clone-indirect-buffer-other-window
+      :desc "Clear Buffer"                "c" #'+jg-bindings-clear-buffer
+      :desc "Kill all buffers"            "K" #'doom/kill-all-buffers
+      :desc "Kill buffer"                 "d" #'kill-current-buffer
+      :desc "Kill other buffers"          "O" #'doom/kill-other-buffers
+      :desc "New empty buffer"            "N" #'evil-buffer-new
+      :desc "Next buffer"                 "]" #'next-buffer
+      :desc "Pop up scratch buffer"       "x" #'doom/open-scratch-buffer
+      :desc "Previous buffer"             "[" #'previous-buffer
+      :desc "Read-only mode"              "r" #'read-only-mode
+      :desc "Revert buffer"               "R" #'revert-buffer
+      :desc "Save all buffers"            "S" #'evil-write-all
+      :desc "Save buffer"                 "s" #'basic-save-buffer
+      :desc "Switch to last buffer"       "l" #'evil-switch-to-windows-last-buffer
+      :desc "Pop up scratch buffer"       "x" #'doom/open-scratch-buffer
+      :desc "Switch to scratch buffer"    "X" #'doom/switch-to-scratch-buffer
+      :desc "Toggle narrowing"            "-" #'jg-toggle-narrow-buffer
+      :desc "Clone Indirect"              "i" #'clone-indirect-buffer-other-window
 
       (:when (featurep! :ui workspaces)
        :desc "Switch workspace buffer" "b" #'persp-switch-to-buffer
@@ -89,7 +86,7 @@
       )
 ;;; <leader> c --- code
 (map! :leader
-      :prefix-map ("c" . "code")
+      :prefix ("c" . "code")
       :desc "Compile"                               "c"   #'compile
       :desc "Evaluate & replace region"             "E"   #'+eval:replace-region
       :desc "Evaluate buffer/region"                "e"   #'+eval/buffer-or-region
@@ -120,7 +117,7 @@
 )
 ;;; <leader> f --- file
 (map! :leader
-      :prefix-map ("f" . "file")
+      :prefix ("f" . "file")
       (:when (featurep! :tools editorconfig)
        :desc "Open project editorconfig"  "c"   #'editorconfig-find-current-editorconfig)
       :desc "Browse emacs.d"              "E"   #'+default/browse-emacsd
@@ -145,7 +142,7 @@
       )
 ;;; <leader> g --- git
 (map! :leader
-      :prefix-map ("g" . "git")
+      :prefix ("g" . "git")
       :desc "Git revert file"             "R"   #'vc-revert
       (:when (featurep! :ui vc-gutter)
        :desc "Git revert hunk"            "r"   #'git-gutter:revert-hunk
@@ -194,7 +191,7 @@
       )
 ;;; <leader> i --- insert
 (map! :leader
-      :prefix-map ("i" . "insert")
+      :prefix ("i" . "insert")
       :desc "Current file name"             "f"   #'+default/insert-file-path
       :desc "Current file path"             "F"   (cmd!! #'+default/insert-file-path t)
       :desc "Evil ex path"                  "p"   (cmd! (evil-ex "R!echo "))
@@ -264,7 +261,7 @@
       )
 ;;; <leader> n --- notes
 (map! :leader
-      :prefix-map ("n" . "notes")
+      :prefix ("n" . "notes")
       :desc "Active org-clock"               "o" #'org-clock-goto
       :desc "Browse notes"                   "F" #'+default/browse-notes
       :desc "Cancel current org-clock"       "C" #'org-clock-cancel
@@ -312,7 +309,7 @@
 ;;; <leader> o --- open
 (map! :leader
       "o" nil ; we need to unbind it first as Org claims this prefix
-      :prefix-map ("o" . "open")
+      :prefix ("o" . "open")
       :desc "Default browser"    "b"             #'browse-url-of-file
       :desc "Debugger"           "d"             #'+debugger/start
       :desc "Dired"              "-"             #'dired-jump
@@ -386,7 +383,7 @@
       )
 ;;; <leader> q --- quit/restart
 (map! :leader
-      :prefix-map ("q" . "quit/restart")
+      :prefix ("q" . "quit/restart")
       :desc "Clear current frame"          "F" #'doom/kill-all-buffers
       :desc "Delete frame"                 "f" #'delete-frame
       :desc "Kill Emacs (and daemon)"      "K" #'save-buffers-kill-emacs
@@ -412,7 +409,7 @@
 ;;; <leader> R --- remote
 (map! :leader
       (:when (featurep! :tools upload)
-       :prefix-map ("R" . "remote")
+       :prefix ("R" . "remote")
        :desc "Browse relative"            "B" #'ssh-deploy-browse-remote-handler
        :desc "Browse remote files"        "." #'ssh-deploy-browse-remote-handler
        :desc "Browse remote"              "b" #'ssh-deploy-browse-remote-base-handler
@@ -431,7 +428,7 @@
       )
 ;;; <leader> s --- search
 (map! :leader
-      :prefix-map ("s" . "search")
+      :prefix ("s" . "search")
       :desc "Search Clear" "c"                 #'evil-ex-nohighlight
       :desc "Dictionary"                   "t" #'+lookup/dictionary-definition
       :desc "Jump list"                    "j" #'evil-show-jumps
@@ -458,7 +455,7 @@
       )
 ;;; <leader> t --- toggle
 (map! :leader
-      :prefix-map ("t" . "toggle")
+      :prefix ("t" . "toggle")
        "d" nil
        "v" nil
        "n" nil
@@ -515,7 +512,7 @@
 ;;; <leader> w --- workspaces/windows
 (map! :leader
       (:when (featurep! :ui workspaces)
-       :prefix-map ("W" . "Workspaces")
+       :prefix ("W" . "Workspaces")
        :desc "Workspace Counsel" "RET"            #'jg-counsel-workspace
        ;; Lowercase - workspace, Uppercase - session
        :desc "Display tab bar"              "TAB" #'+workspace/display
@@ -539,7 +536,7 @@
        :desc "Save session"                  "S"  #'doom/save-session
        :desc "Undo window config"            "u"  #'winner-undo
        )
-      :prefix-map ("w" . "Windows")
+      :prefix ("w" . "Windows")
       :desc "Delete Window" "d"                   #'delete-window
       :desc "Split To Right" "/"                  #'split-window-right
       :desc "Split Below" "-"                     #'split-window-below
@@ -588,7 +585,7 @@
 ;;; <leader> y --- snippets
 (map! :leader
       (:when (featurep! :editor snippets)
-       :prefix-map ("y" . "snippets")
+       :prefix ("y" . "snippets")
        :desc "Expand Snippet"        "y" #'yas-expand
        :desc "New snippet"           "n" #'yas-new-snippet
        :desc "Insert snippet"        "i" #'yas-insert-snippet

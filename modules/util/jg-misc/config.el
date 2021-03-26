@@ -21,7 +21,6 @@
   :commands evil-operator-string-inflection
   )
 (use-package! free-keys
-  :defer t
   :commands (free-keys free-keys-set-prefix)
   )
 (use-package! highlight-parentheses

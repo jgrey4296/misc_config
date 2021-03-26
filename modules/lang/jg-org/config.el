@@ -5,6 +5,8 @@
 (load! "+clean-funcs")
 (load! "+dired")
 (load! "+vars")
+(load! "+tags")
+(load! "+text-utils")
 (after! evil
   (load! "+bindings")
   )
@@ -23,5 +25,5 @@
   )
 
 (after! org
-  (add-hook! 'org-mode-hook #'jg-org-setup-tags-hook)
+  (add-hook! 'org-mode-hook #'+jg-org-setup-tags-hook)
   )

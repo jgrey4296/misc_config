@@ -4,9 +4,9 @@
        (:prefix "b"
         :desc "Undo-Tree" "u" #'+jg-misc-undo-tree)
        (:prefix "t"
-        "v r" 'rainbow-mode)
+        "v r" #'rainbow-mode)
        (:prefix "h"
-         "DEL" 'free-keys
+         "DEL" #'free-keys
         )
        )
 

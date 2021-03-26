@@ -6,6 +6,7 @@
 (load! "+vars")
 (load! "+helm")
 (load! "+tags")
+(load! "+hydra")
 (after! evil
   (load! "+bindings")
   )
@@ -13,8 +14,7 @@
 
 (use-package! bibtex
   :init
-  (add-hook 'bibtex-mode-hook #'org-ref-version)
-  (add-hook 'bibtex-mode-hook #'+jg-bibtex-tag-setup-hook)
+  (add-hook! 'bibtex-mode-hook #'+jg-bibtex-tag-setup-hook #'yas-minor-mode #'org-ref-version)
   )
 (use-package! helm-bibtex
   :defer t
@@ -24,13 +24,13 @@
   :after-call org-ref-version
   :init
   (custom-set-variables '(org-ref-insert-cite-key "C-c i"))
-  (add-hook! 'bibtex-mode-hook
-             #'yas-minor-mode #'reftex-mode #'+jg-tag-mode-handler)
+  (add-hook 'bibtex-mode-hook #'reftex-mode)
   :config
   (remove-hook! 'org-ref-clean-bibtex-entry-hook jg-bibtex-clean-remove-hooks)
-  (add-hook! 'org-ref-clean-bibtex-entry-hook :append jg-bibtex-clean-add-hooks)
+  (add-hook!    'org-ref-clean-bibtex-entry-hook :append jg-bibtex-clean-add-hooks)
   )
+
 (after! (f helm-bibtex)
-  (jg-tag-build-bibtex-list)
+  (+jg-bibtex-build-list)
 )
 

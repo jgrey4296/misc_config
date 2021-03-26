@@ -1,6 +1,6 @@
 ;; bibtex
 
-(defun +jg-bibtex-build-bibtex-list ()
+(defun +jg-bibtex-build-list ()
   "Build a list of all bibtex files to use for bibtex-helm "
   (setq bibtex-completion-bibliography (directory-files jg-bibtex-loc-bibtex 't "\.bib$")))
 

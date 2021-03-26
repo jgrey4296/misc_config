@@ -135,7 +135,7 @@ the entry of interest in the bibfile.  but does not check that."
   (bibtex-beginning-of-entry)
   (let* ((year (bibtex-text-in-field "year"))
          (year-file (format "%s.bib" year))
-         (bib-path +jg-bibtex-loc-bibtex)
+         (bib-path jg-bibtex-loc-bibtex)
          (response (if year (read-string (format "Refile to %s? " year-file))))
          (target (if (and year (or (s-equals? "y" response) (string-empty-p response)))
                      (f-join bib-path year-file)

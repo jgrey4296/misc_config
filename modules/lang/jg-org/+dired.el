@@ -1,12 +1,6 @@
 ;;; lang/jg-org/+dired.el -*- lexical-binding: t; -*-
 
-(defun +jg-org-dired-clean-marked-files ()
-  "Clean marked Org files"
-  (interactive)
-  (let ((files (dired-get-marked-files)))
-    (seq-each '+jg-org-clean-with-backup files)
-    )
-  )
+
 (defun +jg-org-quick-compress-orgs ()
   "Find all orgs in cwd down, compress together"
   (interactive)
@@ -54,6 +48,22 @@
             (insert-file-contents file t)
             (org-mode)
             (+jg-org-remove-duplicates)
+            (write-file file)
+            )
+    )
+  )
+)
+(defun +jg-org-dired-clean-marked-files ()
+  "Clean marked Org files"
+  (interactive)
+  (let ((files (dired-get-marked-files)))
+    (loop for file in files
+          do
+          (message "Cleaning in %s" file)
+          (with-temp-buffer
+            (insert-file-contents file t)
+            (org-mode)
+            (+jg-org-clean)
             (write-file file)
             )
     )

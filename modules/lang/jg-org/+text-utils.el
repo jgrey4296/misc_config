@@ -36,6 +36,7 @@
     (org-mode)
     )
   )
+
 (defun +jg-org-split-on-headings ()
   " Split an org file into multiple smaller buffers non-destructively "
   (interactive)
@@ -117,6 +118,7 @@ Sort, align, split, save "
       )
     )
   )
+
 (defun +jg-org-remove-duplicates ()
   "Find duplicate tweets in an org file and remove them"
   (interactive)
@@ -174,30 +176,5 @@ Sort, align, split, save "
                (org-set-property "CUSTOM_ID" permalink-id)
                `(,permalink-id ,begin ,level))
       nil)
-    )
-  )
-(defun +jg-org-fix-properties-drawers ()
-  " Force properties drawer formatting of single lines "
-  ;; TODO merge with +jg-org-clean-property-blocks
-  (interactive)
-  (goto-char (point-min))
-  ;; Find properties drawer
-  (while (re-search-forward "^\s*:PROPERTIES:$" nil t)
-    ;; for each :TERM:, ensure it is on its own line
-    (let* ((context (org-element-context))
-           (drawer-end (plist-get (cadr context) :contents-end))
-           (drawer-type (car context))
-           )
-      (assert (or (equal 'property-drawer drawer-type) (equal 'drawer drawer-type)))
-      (while (re-search-forward "\\(:[[:upper:]_]+:\\)" drawer-end t)
-        (save-excursion
-          (goto-char (match-beginning 0))
-          (if (not (equal (point) (line-beginning-position)))
-              (insert "\n"))
-          )
-        (if (looking-at-p "$")
-            (join-line -1))
-        )
-      )
     )
   )

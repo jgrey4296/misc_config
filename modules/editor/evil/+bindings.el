@@ -1,7 +1,5 @@
 ;;; editor/evil/+bindings.el -*- lexical-binding: t; -*-
 
-(map! :n "o" nil)
-
 (map! :v  "@"     #'+evil:apply-macro
       :m  [C-i]   #'evil-jump-forward
       ;; ported from vim-unimpaired

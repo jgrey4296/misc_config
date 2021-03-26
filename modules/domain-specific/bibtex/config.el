@@ -27,7 +27,9 @@
   (add-hook 'bibtex-mode-hook #'reftex-mode)
   :config
   (remove-hook! 'org-ref-clean-bibtex-entry-hook jg-bibtex-clean-remove-hooks)
-  (add-hook!    'org-ref-clean-bibtex-entry-hook :append jg-bibtex-clean-add-hooks)
+  (loop for hook in jg-bibtex-clean-add-hooks
+        do (add-hook 'org-ref-clean-bibtex-entry-hook hook 100)
+        )
   )
 
 (after! (f helm-bibtex)

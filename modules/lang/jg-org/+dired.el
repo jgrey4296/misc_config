@@ -4,7 +4,7 @@
   "Clean marked Org files"
   (interactive)
   (let ((files (dired-get-marked-files)))
-    (seq-each '+jg-org-dired-clean-with-backup files)
+    (seq-each '+jg-org-clean-with-backup files)
     )
   )
 (defun +jg-org-quick-compress-orgs ()
@@ -43,3 +43,19 @@
     (seq-each '+jg-org-chop-long-file files)
     )
   )
+
+(defun +jg-org-dired-remove-duplicates ()
+  (interactive)
+  (let ((files (dired-get-marked-files)))
+    (loop for file in files
+          do
+          (message "Removing Duplicates in %s" file)
+          (with-temp-buffer
+            (insert-file-contents file t)
+            (org-mode)
+            (+jg-org-remove-duplicates)
+            (write-file file)
+            )
+    )
+  )
+)

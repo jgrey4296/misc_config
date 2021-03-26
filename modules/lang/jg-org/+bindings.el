@@ -65,6 +65,7 @@
        :desc "Unify Pdf Locations" "U"   #'+jg-org-unify-pdf-locations
        :desc "Quick Compress" "Z"        #'+jg-org-quick-compress-orgs
        :desc "Reformat Json" "J"         #'+jg-org-reformat-jsons
+       :desc "Remove Duplicates" "D"     #'+jg-org-dired-remove-duplicates
        )
 
       )

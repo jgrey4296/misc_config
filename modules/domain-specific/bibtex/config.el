@@ -26,7 +26,8 @@
   (custom-set-variables '(org-ref-insert-cite-key "C-c i"))
   (add-hook 'bibtex-mode-hook #'reftex-mode)
   :config
-  (remove-hook! 'org-ref-clean-bibtex-entry-hook jg-bibtex-clean-remove-hooks)
+  (loop for hook in jg-bibtex-clean-remove-hooks
+        do (remove-hook 'org-ref-clean-bibtex-entry-hook hook))
   (loop for hook in jg-bibtex-clean-add-hooks
         do (add-hook 'org-ref-clean-bibtex-entry-hook hook 100)
         )

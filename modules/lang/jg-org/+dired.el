@@ -38,6 +38,7 @@
     )
   )
 (defun +jg-org-dired-fix-org-links ()
+  " fix links to local files "
   (interactive)
   (let* ((files (dired-get-marked-files))
          (orgs (-filter #'(lambda (x) (string-equal "org" (f-ext x))) files))
@@ -55,6 +56,8 @@
   )
 
 (defun +jg-org-dired-remove-duplicate-tweets ()
+  " Find duplicate tweets by permalink, replace with org link
+to the first version found "
   (interactive)
   (let ((files (dired-get-marked-files)))
     (loop for file in files
@@ -88,14 +91,13 @@
 
 
 (defun +jg-org-dired-clean-remove-surplus-headings ()
-  ;; TODO Force only 1 top level heading
+  " Remove additional single star headings in an org file "
   (interactive)
   (let ((files (dired-get-marked-files)))
     (loop for file in files
           do
-          (message "Removing Duplicates in %s" file)
           (with-temp-buffer
-            (insert-file-contents file t)
+            (insert-file-contents file)
             (+jg-org-remove-surplus-headings)
             (write-file file)
             )
@@ -104,6 +106,8 @@
   )
 
 (defun +jg-org-remove-surplus-headings ()
+  " Go through a buffer, removing additional single star headings,
+and the property block directly below "
   (goto-char (point-min))
   (forward-line)
   (let ((kill-whole-line t))
@@ -117,4 +121,29 @@
         )
       )
     )
+  (sleep-for 0.2)
+  )
+
+(defun +jg-org-dired-clean-sort-headings ()
+  " Call org-sort-entries on each dired marked file's content "
+  (interactive)
+  (let ((files (dired-get-marked-files)))
+    (loop for file in files
+          do
+          (with-temp-buffer
+            (insert-file-contents file)
+            (+jg-org-sort-headings)
+            (write-file file)
+            )
+          )
+    )
+  )
+
+(defun +jg-org-sort-headings ()
+  " Call org-sort-entries on a buffer "
+  (goto-char (point-min))
+  (org-mode)
+  (org-show-all)
+  (org-sort-entries nil ?a)
+  (sleep-for 0.2)
   )

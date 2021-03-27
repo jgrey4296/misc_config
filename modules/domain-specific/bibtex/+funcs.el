@@ -14,7 +14,7 @@ ensuring they work across machines "
     (while (re-search-forward jg-bibtex-pdf-loc-regexp nil t)
       (replace-match jg-bibtex-pdf-replace-match-string nil nil nil 1)
       (if (eq 6 (length (match-data)))
-          (replace-match  t nil nil 2))
+          (replace-match jg-bibtex-pdf-replace-library-string t nil nil 2))
       )
     (write-file name)
     )

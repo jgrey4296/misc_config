@@ -6,3 +6,11 @@
   :defer t
   :commands evil-operator-string-inflection
   )
+
+(load! "+vars")
+(load! "+funcs")
+(load! "+barchart")
+
+(after! evil
+  (load! "+bindings")
+  )

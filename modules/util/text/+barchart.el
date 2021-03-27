@@ -6,9 +6,15 @@
   (let* ((maxTagStrLen (length (number-to-string maxTagAmnt)))
          (maxTagLength-bounded (min 40 maxTagLength))
          (max-column (- fill-column (+ 3 maxTagLength-bounded maxTagStrLen 3 3)))
-         (bar-div (/ (float max-column) maxTagAmnt)))
-    (mapcar '+jg-text-bar-chart-line data)))
-(defun +jg-text-bar-chart-line (x)
+         (bar-div (/ (float max-column) maxTagAmnt))
+         (partial-chart-line-fn (-partial #'+jg-text-bar-chart-line
+                                          maxTagStrLen
+                                          maxTagLength-bounded
+                                          bar-div))
+         )
+    (mapcar partial-chart-line-fn data)))
+
+(defun +jg-text-bar-chart-line (maxTagStrLen maxTagLength-bounded bar-div x)
   "Construct a single line of a bar chart"
   (let* ((tag (car x))
          (tag-len (length tag))

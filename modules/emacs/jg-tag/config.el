@@ -21,7 +21,7 @@
 (after! (evil org helm)
   (+jg-tag-rebuild-tag-database)
 
-  (evil-define-operator jg-tag-helm-start (beg end rest)
+  (evil-define-operator +jg-tag-helm-start (beg end rest)
     (interactive "<R>")
     (+jg-tag-helm-tagger beg end)
     )

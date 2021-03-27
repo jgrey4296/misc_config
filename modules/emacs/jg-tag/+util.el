@@ -14,7 +14,7 @@
      )))
 (defun +jg-tag-candidates ()
   " Given Candidates, colour them if they are assigned, then sort them  "
-  (let* ((buffer-cand-tags (jg-tag-get-buffer-tags))
+  (let* ((buffer-cand-tags (+jg-tag-get-buffer-tags))
          (global-tags jg-tag-global-tags))
     (if (not (hash-table-empty-p global-tags))
         (let* ((cand-keys (hash-table-keys global-tags))
@@ -22,7 +22,7 @@
                (cand-pairs (-zip cand-keys cand-vals))
                (maxTagLength (apply 'max (mapcar 'length cand-keys)))
                (maxTagAmount (apply 'max cand-vals))
-               (bar-keys (jg-tag-make-bar-chart cand-pairs maxTagLength maxTagAmount))
+               (bar-keys (+jg-text-make-bar-chart cand-pairs maxTagLength maxTagAmount))
                (display-pairs (-zip bar-keys cand-keys))
                (current-tags (org-get-tags nil t))
                (propertied-tags (cl-map 'list (lambda (candidate)
@@ -35,7 +35,7 @@
                                                `(,candString ,(cdr candidate)))) display-pairs))
                )
           (setq jg-tag-candidate-counts global-tags)
-          (setq jg-tag-candidates-names (sort propertied-tags 'jg-tag-sort-candidates))
+          (setq jg-tag-candidates-names (sort propertied-tags '+jg-tag-sort-candidates))
           )
       '()
       ))
@@ -55,8 +55,8 @@
                              nil
                              ;; Todo: Expand this func to group and add org headings
                              (mapc (lambda (x) (princ (format "%s\n" x)))
-                                   (jg-tag-make-bar-chart sorted maxTagLength maxTagAmnt))
+                                   (+jg-text-make-bar-chart sorted maxTagLength maxTagAmnt))
                              )
-    (jg-tag-org-format-temp-buffer "*Tags*" name)
+    (+jg-tag-org-format-temp-buffer "*Tags*" name)
     )
   )

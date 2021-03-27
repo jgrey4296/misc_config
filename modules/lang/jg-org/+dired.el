@@ -54,7 +54,7 @@
     )
   )
 
-(defun +jg-org-dired-remove-duplicates ()
+(defun +jg-org-dired-remove-duplicate-tweets ()
   (interactive)
   (let ((files (dired-get-marked-files)))
     (loop for file in files
@@ -63,7 +63,7 @@
           (with-temp-buffer
             (insert-file-contents file t)
             (org-mode)
-            (+jg-org-remove-duplicates)
+            (+jg-org-remove-duplicate-tweet-entries)
             (write-file file)
             )
     )
@@ -85,3 +85,36 @@
     )
   )
 )
+
+
+(defun +jg-org-dired-clean-remove-surplus-headings ()
+  ;; TODO Force only 1 top level heading
+  (interactive)
+  (let ((files (dired-get-marked-files)))
+    (loop for file in files
+          do
+          (message "Removing Duplicates in %s" file)
+          (with-temp-buffer
+            (insert-file-contents file t)
+            (+jg-org-remove-surplus-headings)
+            (write-file file)
+            )
+          )
+    )
+  )
+
+(defun +jg-org-remove-surplus-headings ()
+  (goto-char (point-min))
+  (forward-line)
+  (let ((kill-whole-line t))
+    (while (re-search-forward "^\* " nil t)
+      ;; Delete the heading
+      (beginning-of-line)
+      (kill-line)
+      ;; if theres a property block, delete it
+      (while (looking-at-p "^[[:space:]]*:.+?:")
+        (kill-line)
+        )
+      )
+    )
+  )

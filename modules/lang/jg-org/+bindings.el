@@ -60,11 +60,11 @@
       :map (dired-mode-map ranger-mode-map)
       :localleader
       (:prefix ("K" . "Destructive")
-       :desc "Clean Marked" "c"          #'+jg-org-clean-marked-files
-       :desc "Chop File Names" "C"       #'+jg-org-chop-long-files-from-dired
-       :desc "Quick Compress" "Z"        #'+jg-org-quick-compress-orgs
-       :desc "Fix Org Links"  "L"        #'+jg-org-dired-fix-org-links
-       :desc "Remove Duplicates" "D"     #'+jg-org-dired-remove-duplicates
+       :desc "Clean Marked" "c"              #'+jg-org-clean-marked-files
+       :desc "Chop File Names" "C"           #'+jg-org-chop-long-files-from-dired
+       :desc "Quick Compress" "Z"            #'+jg-org-quick-compress-orgs
+       :desc "Fix Org Links"  "L"            #'+jg-org-dired-fix-org-links
+       :desc "Remove Duplicates Tweets" "D"  #'+jg-org-dired-remove-duplicate-tweets
+       :desc "Remove Surplus Headings"   "H" #'+jg-org-dired-clean-remove-surplus-headings
        )
-
       )

@@ -127,10 +127,6 @@
     )
   )
 
-(defun +jg-org-clean-remove-surplus-headings ()
-  ;; TODO Force only 1 top level heading
-
-  )
 
 ;; Map Entries
 (defun +jg-org-map-entries-clean-whitespace ()

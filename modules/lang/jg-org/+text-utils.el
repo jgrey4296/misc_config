@@ -119,7 +119,7 @@ Sort, align, split, save "
     )
   )
 
-(defun +jg-org-remove-duplicates ()
+(defun +jg-org-remove-duplicate-tweet-entries ()
   "Find duplicate tweets in an org file and remove them"
   (interactive)
   (let ((permalinks (make-hash-table :test 'equal))

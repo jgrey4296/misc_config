@@ -51,22 +51,6 @@ Type SPC or `y' to %s one match, DEL or `n' to skip to next,
     (dired-create-files
      file-creator operation fn-list regexp-name-constructor marker-char)))
 
-(defun +jg-dired-fix-org-links ()
-  (interactive)
-  (let* ((files (dired-get-marked-files))
-         (orgs (-filter #'(lambda (x) (string-equal "org" (f-ext x))) files))
-         )
-    (loop for file in orgs do
-          (with-temp-buffer
-            (insert-file file)
-            (while (re-search-forward "\\[\\[.+\\(/.+?_files\\)" nil t)
-              (replace-match "[[file:.\\1")
-              )
-            (write-file file)
-            )
-          )
-    )
-  )
 
 (defun +jg-tag-find-random-marked-file ()
   "Open random file from marked"

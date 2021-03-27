@@ -44,6 +44,13 @@
        :desc "Load Random Bibtex entry"  "r" #'+jg-bibtex-load-random)
       )
 
+(map! :after dired
+      :map dired-mode-map
+      :localleader
+      :prefix "K"
+      :desc "Unify Pdf Locations" "U"   #'+jg-bibtex-dired-unify-pdf-locations
+      )
+
 (after! (helm evil)
   (evil-ex-define-cmd "ci[te]" #'+jg-bibtex-insert-wrapped)
   )

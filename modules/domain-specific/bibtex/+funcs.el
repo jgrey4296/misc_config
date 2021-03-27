@@ -19,7 +19,7 @@ ensuring they work across machines "
     (write-file name)
     )
   )
-(defun +jg-bibtex-unify-pdf-locations ()
+(defun +jg-bibtex-dired-unify-pdf-locations ()
   "Unify bibtex pdf paths of marked files"
   (interactive)
   (let ((files (dired-get-marked-files)))

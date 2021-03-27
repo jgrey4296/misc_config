@@ -1,6 +1,6 @@
 ;;json
 
-(defun jg-tag-reformat-json-file (file)
+(defun +jg-dired-reformat-json-file (file)
   (assert (f-ext? file "json"))
   (with-temp-buffer
     (insert-file file)
@@ -9,7 +9,7 @@
                                                   (f-base file))))
     )
   )
-(defun jg-tag-reformat-jsons ()
+(defun +jg-dired-reformat-jsons ()
   "Beautify marked json files"
   (interactive)
   (let ((files (dired-get-marked-files)))

@@ -15,20 +15,22 @@
       (:when (featurep! :editor jg-personal)
         :n "i"                              #'+jg-personal-dired-insert-subdir-maybe-recursive
         :n "DEL"                            #'dired-kill-subdir
-       (:localleader
-        (:prefix ("d" . "Describe")
-         :desc "Summarise Orgs" "s"         #'+jg-personal-dired-create-summary-of-orgs
-         :desc "Marked Info" "m"            #'+jg-personal-dired-marked-info
-         :desc "Dired Diff" "d"             #'+jg-personal-dired-diff
-         )
-        (:prefix ("K" . "Destructive")
-         :desc "Fix Org Links" :n "L" #'+jg-dired-fix-org-links
-         )
         )
-       )
       (:when (featurep! :lang python)
        "v" 'pyvenv-activate
        )
+      )
+
+(map! :map dired-mode-map
+       :localleader
+       (:prefix ("d" . "Describe")
+        :desc "Summarise Orgs" "s"         #'+jg-personal-dired-create-summary-of-orgs
+        :desc "Marked Info" "m"            #'+jg-personal-dired-marked-info
+        :desc "Dired Diff" "d"             #'+jg-personal-dired-diff
+        )
+       (:prefix ("K" . "Destructive")
+        :desc "Reformat jsons"   "J" #'+jg-dired-reformat-jsons
+        )
       )
 
 (map! :leader

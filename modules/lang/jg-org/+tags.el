@@ -1,6 +1,6 @@
 ;;; lang/jg-org/+tags.el -*- lexical-binding: t; -*-
 (defun +jg-org-setup-tags-hook ()
-  (+jg-tag-add-mode-handler 'org
+  (+jg-tag-add-mode-handler 'org-mode
                             '+jg-org-set-tags
                             '+jg-org-set-new-tag)
   )

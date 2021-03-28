@@ -16,44 +16,42 @@
 
 ;; Evil States
 (map! :map evil-normal-state-map
-      :prefix "z'"
-      (:prefix ("'" . "Highlight")
-      "' . "        #'highlight-symbol-at-point
-      "' f "        #'hi-lock-find-patterns
-      "' i "        #'hi-lock-write-interactive-patterns
-      "' l "        #'highlight-lines-matching-regexp
-      "' p "        #'highlight-phrase
-      "' r "        #'highlight-regexp
-      "' u "        #'unhighlight-regexp)
-
+      :prefix "z"
       "= "          #'ispell-word
-      "A "          #'evil-open-fold-rec
-      "C "          nil
-      "D "          #'evil-close-folds
-      "N "          nil ;; #'doom/widen-indirectly-narrowed-buffer
-      "O "          nil
-      "RET "        #'jg-narrow-around-point
-      "X "          nil ;; #'kill-current-buffer
-      "a "          #'evil-toggle-fold
-      "c "          nil
-      "d "          #'evil-close-fold
-      "m "          nil
-      "n "          nil ;; #'+evil:narrow-buffer
-      "o "          #'evil-open-fold
-      "r "          #'evil-open-folds
-      "s "          nil ;;#'evil-open-folds
+      "A"          #'evil-open-fold-rec
+      "C"          nil
+      "D"          #'evil-close-folds
+      "N"          nil ;; #'doom/widen-indirectly-narrowed-buffer
+      "O"          nil
+      "RET"        #'jg-narrow-around-point
+      "X"          nil ;; #'kill-current-buffer
+      "a"          #'evil-toggle-fold
+      "c"          nil
+      "d"          #'evil-close-fold
+      "m"          nil
+      "n"          nil ;; #'+evil:narrow-buffer
+      "o"          #'evil-open-fold
+      "r"          #'evil-open-folds
+      "s"          nil ;;#'evil-open-folds
+      (:prefix ("'" . "Highlight")
+      "' ."        #'highlight-symbol-at-point
+      "' f"        #'hi-lock-find-patterns
+      "' i"        #'hi-lock-write-interactive-patterns
+      "' l"        #'highlight-lines-matching-regexp
+      "' p"        #'highlight-phrase
+      "' r"        #'highlight-regexp
+      "' u"        #'unhighlight-regexp)
       (:prefix ("v" . "Vimish Fold")
-      "v A "        #'vimish-fold-toggle-all
-      "v D "        #'vimish-fold-delete-all
-      "v a "        #'vimish-fold-toggle
-      "v d "        #'vimish-fold-delete
-      "v f "        #'vimish-fold
-      "v j "        #'vimish-fold-next-fold
-      "v k "        #'vimish-fold-previous-fold
-      "v m "        #'vimish-fold-refold-all
-      "v r "        #'vimish-fold-unfold-all
-      "x "          nil)
-
+      "v A"        #'vimish-fold-toggle-all
+      "v D"        #'vimish-fold-delete-all
+      "v a"        #'vimish-fold-toggle
+      "v d"        #'vimish-fold-delete
+      "v f"        #'vimish-fold
+      "v j"        #'vimish-fold-next-fold
+      "v k"        #'vimish-fold-previous-fold
+      "v m"        #'vimish-fold-refold-all
+      "v r"        #'vimish-fold-unfold-all
+      "x"          nil)
 )
 (map! :map evil-normal-state-map
       :prefix "g"

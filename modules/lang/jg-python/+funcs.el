@@ -1,31 +1,33 @@
 ;;; lang/jg-python/+funcs.el -*- lexical-binding: t; -*-
-(defun +jg-personal-toggle-all-defs ()
+(defun +jg-python-close-all-defs ()
     (interactive)
-    ;; goto start of file
-    (let* ((open-or-close 'evil-close-fold) ;;outline-hide-subtree)
+    (let* ((close #'outline-hide-subtree)
            )
       (save-excursion
         (goto-char (point-min))
         (while (python-nav-forward-defun)
-          (python-nav-beginning-of-defun)
-          (if (not (looking-at-p "class"))
-              (funcall open-or-close))
-          (end-of-line)
+          (funcall close)
           )
         )
       )
     )
-(defun +jg-personal-close-class-defs ()
+(defun +jg-python-close-class-defs ()
     (interactive )
     (save-excursion
-      (goto-char (point-max))
-      (while (python-nav-backward-defun)
-        (if (looking-at-p "\s*def")
-            (evil-close-fold))
+      (re-search-backward "^class ")
+      (outline-show-subtree)
+      (forward-line)
+      (while (and (not (looking-at-p "^class "))
+                  (python-nav-forward-defun))
+        (beginning-of-line)
+        (if (not (looking-at-p "^class "))
+            (outline-hide-subtree)
+          )
+        (end-of-line)
         )
       )
     )
-(defun +jg-personal-python-toggle-breakpoint ()
+(defun +jg-python-toggle-breakpoint ()
     "Modified version of spacemacs original
 Add a break point, highlight it.
 Customize python using PYTHONBREAKPOINT env variable
@@ -60,7 +62,7 @@ Customize python using PYTHONBREAKPOINT env variable
 
 
 ;; Hooks
-(defun +jg-personal-python-outline-regexp-override-hook ()
+(defun +jg-python-outline-regexp-override-hook ()
   (setq-local outline-regexp
               (python-rx (or (: line-start (>= 2 eol))
                              (: line-start ?#)

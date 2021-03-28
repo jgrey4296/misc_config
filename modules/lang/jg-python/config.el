@@ -15,9 +15,9 @@
       )
     )
 
-(after! python-mode
+(after! python
   (add-hook! 'python-mode-hook #'outline-minor-mode)
-  (add-hook! 'python-mode-hook #'+jg-personal-python-outline-regexp-override-hook)
+  (add-hook! 'python-mode-hook #'+jg-python-outline-regexp-override-hook)
   (add-hook! 'python-mode-hook #'+python-use-correct-flycheck-executables-h)
   (setq-hook! 'python-mode-hook tab-width python-indent-offset)
 
@@ -44,7 +44,18 @@
     :return "return"
     :yield  "yield")
 
+  (setq evil-fold-list (cons '((python-mode)
+                               :close     +jg-python-close-class-defs
+                               :close-all +jg-python-close-all-defs
+                               :open     outline-toggle-children
+                               :open-all outline-show-all
+                               :open-rec outline-show-subtree
+                               :toggle outline-toggle-children
+                               )
+                             evil-fold-list))
+
   )
+
 ;; (after! (origami python-origami)
  ;;  (delq (assoc 'python-mode origami-parser-alist) origami-parser-alist)
  ;;  (add-to-list 'origami-parser-alist '(python-mode . +jg-origami-python-parser))

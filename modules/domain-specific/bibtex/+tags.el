@@ -12,10 +12,9 @@
   )
 (defun +jg-bibtex-set-tags (x)
   " Set tags in bibtex entries "
-  (let* ((visual-candidates (helm-marked-candidates))
-         (actual-candidates (mapcar (lambda (x) (cadr (assoc x jg-bibtex-candidates-names))) visual-candidates))
+  (let* ((actual-candidates (mapcar 'car (helm-marked-candidates)))
          (prior-point 1)
-         (end-pos +jg-bibtex-marker)
+         (end-pos jg-tag-marker)
          (current-tags '())
          (tag-regexp "\\(OPT\\)?tags")
          (has-real-tags-field nil)
@@ -23,10 +22,10 @@
                      (if (not (-contains? current-tags candidate))
                          (progn
                            (push candidate current-tags)
-                           (puthash candidate 1 +jg-bibtex-global-tags))
+                           (puthash candidate 1 jg-tag-global-tags))
                        (progn
                          (setq current-tags (remove candidate current-tags))
-                         (puthash candidate (- (gethash candidate +jg-bibtex-global-tags) 1) jg-tag-global-tags))
+                         (puthash candidate (- (gethash candidate jg-tag-global-tags) 1) jg-tag-global-tags))
                        )))
          )
     (save-excursion
@@ -49,7 +48,7 @@
   "A Fallback function to set tags of bibtex entries "
   (save-excursion
     (let ((prior-point (- (point) 1))
-          (end-pos +jg-bibtex-marker)
+          (end-pos jg-tag-marker)
           (stripped_tags (+jg-bibtex-split-tags (+jg-text-strip-spaces x)))
           (tag-regexp "\\(OPT\\)?tags")
           )
@@ -62,7 +61,7 @@
                )
           (bibtex-set-field (if has-real-tags-field "tags" "OPTtags")
                             (string-join total-tags ","))
-          (mapc (lambda (x) (puthash x 1 +jg-bibtex-global-tags)) filtered-tags)
+          (mapc (lambda (x) (puthash x 1 jg-tag-global-tags)) filtered-tags)
           ;;(org-ref-bibtex-next-entry)
           (evil-forward-section-begin)
           ))))

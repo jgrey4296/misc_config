@@ -245,7 +245,7 @@
     """ Opens the Tagging Helm """
     (set-marker jg-tag-marker (if (eq evil-state 'visual)  evil-visual-end (line-end-position)))
     (let* ((candidates (+jg-tag-candidates))
-           (main-source (cons `(candidates . ,(mapcar 'car candidates)) jg-tag-helm))
+           (main-source (cons `(candidates . ,candidates) jg-tag-helm))
            )
       (helm :sources '(main-source jg-tag-fallback-source)
             :input "")

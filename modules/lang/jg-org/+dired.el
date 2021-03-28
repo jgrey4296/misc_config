@@ -104,7 +104,6 @@ to the first version found "
           )
     )
   )
-
 (defun +jg-org-remove-surplus-headings ()
   " Go through a buffer, removing additional single star headings,
 and the property block directly below "
@@ -138,12 +137,39 @@ and the property block directly below "
           )
     )
   )
-
 (defun +jg-org-sort-headings ()
   " Call org-sort-entries on a buffer "
   (goto-char (point-min))
   (org-mode)
   (org-show-all)
   (org-sort-entries nil ?a)
+  (sleep-for 0.2)
+  )
+
+(defun +jg-org-dired-clean-whole-duplicate-threads ()
+  " Call org-sort-entries on each dired marked file's content "
+  (interactive)
+  (let ((files (dired-get-marked-files)))
+    (loop for file in files
+          do
+          (with-temp-buffer
+            (insert-file-contents file)
+            (+jg-org-clean-whole-duplicate-threads)
+            (write-file file)
+            )
+          )
+    )
+  )
+(defun +jg-org-clean-whole-duplicate-threads ()
+  " Call org-sort-entries on a buffer "
+  (goto-char (point-min))
+  (org-mode)
+  (org-show-all)
+  ;; map over level 2 subtrees
+  ;; if every applicable heading is a duplicate link,
+  ;; mark it for removal the entire subtree
+
+  ;; remove marked subtrees
+
   (sleep-for 0.2)
   )

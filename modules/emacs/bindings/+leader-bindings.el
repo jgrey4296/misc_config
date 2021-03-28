@@ -482,6 +482,7 @@
         :desc "Line numbers Visual"          "N" #'+jg-toggle-line-numbers-visual
         :desc "Evil goggles"                 "g" #'evil-goggles-mode
         :desc "Soft line wrapping"           "w" #'visual-line-mode
+        :desc "Fill Column Indicator"        "f" #'display-fill-column-indicator-mode
         (:when (featurep! :editor word-wrap)
          :desc "Soft line wrapping"         "w"  #'+word-wrap-mode)
         :desc "Word-wrap mode"               "W" #'+word-wrap-mode

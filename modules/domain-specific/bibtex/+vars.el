@@ -17,7 +17,7 @@
               jg-bibtex-loc-bibtex      "~/github/writing/resources/bibliography"
               jg-bibtex-loc-completions "~/github/writing/resources/completions"
 
-              jg-bibtex-pdf-loc-regexp  "file[[:digit:]]* ?= *{\\(.+mega\\)/\\(.+pdflibrary\\)?"
+              jg-bibtex-pdf-loc-regexp  "file[[:digit:]]*\s*=\s*{\\(.+mega\\)/\\(.+pdflibrary\\)?"
               jg-bibtex-pdf-replace-match-string "~/Mega"
               jg-bibtex-pdf-replace-library-string "pdflibrary"
 

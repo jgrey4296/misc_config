@@ -132,3 +132,20 @@ Prefix-arg to move the file otherwise copy it
     )
   )
 
+
+(defun +jg-org-refile-subtree (arg)
+  ;; based on +org/refile-to-other-window
+  "TODO"
+  (interactive "P")
+  (let ((org-refile-keep arg)
+        (target (read-file-name "Refile to: " jg-org-twitter-loc nil nil nil))
+
+        org-refile-targets
+        current-prefix-arg
+        )
+    (cl-pushnew (cons target (cons :maxlevel 10))
+                org-refile-targets)
+    (call-interactively #'org-refile)
+
+    )
+  )

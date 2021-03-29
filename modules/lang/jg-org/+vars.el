@@ -5,6 +5,7 @@
               jg-org-preferred-linecount 1500
               jg-org-link-move-base "/Volumes/Overflow/missing_images/"
 
+              jg-org-twitter-loc "~/mega/twitterthreads/"
               )
 ;; set pomodoro log variable
 (defcustom jg-org-pomodoro-log-file "~/.doom.d/setup_files/pomodoro_log.org" "The Location of the Pomodoro Log File")

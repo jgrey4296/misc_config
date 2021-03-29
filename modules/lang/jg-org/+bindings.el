@@ -33,6 +33,7 @@
 (map! :map org-mode-map
       :localleader
       "i" nil
+      :desc "Refile" "R" #'+jg-org-refile-subtree
       (:prefix ("f". "Format")
        :desc "Fix Drawers"     :n "d"  #'+jg-org-fix-properties-drawers
        :desc "Clean Org"          "c"  #'+jg-org-clean-org

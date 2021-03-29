@@ -1,25 +1,6 @@
 (after! (evil bind-map)
 
-;;; NOTE: See evil-core.el for full design of evil keybindings
-  ;; Excerpt:
-  ;; * Keymap Hierarchy:
-  ;; ** Overriding keymaps/overlay keymaps
-  ;; ** Emulation mode keymaps
-  ;;     Evil keymaps
-  ;; *** Intercept keymaps
-  ;; *** Local state keymap
-  ;; *** Minor-mode keymaps
-  ;; *** Auxiliary keymaps
-  ;; *** Overriding keymaps
-  ;; *** Global state keymap
-  ;; *** Keymaps for other states
-  ;;
-  ;; ** Minor mode keymaps
-  ;; ** Local keymap (`local-set-key')
-  ;; ** Global keymap (`global-set-key')
-
-
-;;; Code
+  ;; State Creation
   (evil-define-state test
     "Test State."
     :tag "<T>"
@@ -30,7 +11,7 @@
     ;; :suppress-keymap t
     )
 
-  ;; Global
+  ;; Global bind
   (global-set-key (kbd "q") (lambda () (interactive) (message "Global q")))
   ;; evil Global state
   (evil-global-set-key 'test (kbd "q") (lambda () (interactive) (message "global state q")))
@@ -43,10 +24,10 @@
 
     ;; Add those keybindings behind the leader key in the state:
     (bind-map map
-      ;; :override-minor-modes t
-      :evil-keys ("SPC")
-      :evil-states (test)
-      )
+              ;; :override-minor-modes t
+              :evil-keys ("SPC")
+              :evil-states (test)
+              )
     )
 
   ;; override state

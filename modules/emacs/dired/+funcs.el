@@ -52,7 +52,7 @@ Type SPC or `y' to %s one match, DEL or `n' to skip to next,
      file-creator operation fn-list regexp-name-constructor marker-char)))
 
 
-(defun +jg-tag-find-random-marked-file ()
+(defun +jg-dired-find-random-marked-file ()
   "Open random file from marked"
   (interactive)
   (let ((marked (dired-get-marked-files)))

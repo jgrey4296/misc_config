@@ -49,6 +49,6 @@
       :map (dired-mode-map ranger-mode-map)
       :localleader
       (:prefix ("f" . "Find")
-       :desc "Find Random Marked" "r" #'jg-tag-find-random-marked-file
+       :desc "Find Random Marked" "r" #'+jg-dired-find-random-marked-file
        )
       )

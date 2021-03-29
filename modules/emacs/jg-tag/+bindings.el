@@ -28,11 +28,7 @@
        :desc "Index People" "p"          #'+jg-tag-index-people
        :desc "Index Tags" "t"            #'+jg-tag-index-tags
        )
-      (:prefix ("t" . "remove Tag")
-       :desc "Ivy Store Tag" #'+jg-tag-ivy-tag-set
-       :desc "Ivy Clear Tag" #'+jg-tag-ivy-tag-clear
-       )
-      )
+  )
 
 ;; Evil ex commands
 (after! (helm evil)

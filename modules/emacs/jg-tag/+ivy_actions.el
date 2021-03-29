@@ -67,3 +67,11 @@
                  '(("t" +jg-tag-ivy-tag "Tag")
                    ("T" +jg-tag-ivy-tag-set "Set Tag")
                    ("C" +jg-tag-ivy-tag-clear "Clear Tag")))
+
+(map! :map dired-mode-map
+     :localleader
+     (:prefix ("t" . "remove Tag")
+      :desc "Ivy Store Tag" #'+jg-tag-ivy-tag-set
+      :desc "Ivy Clear Tag" #'+jg-tag-ivy-tag-clear
+      )
+     )

@@ -8,8 +8,7 @@
 (defun +jg-org-set-tags (x)
   """ Improved action to add and remove tags Toggle Selected Tags
 Can operate on regions of headings """
-  (let* ((visual-candidates (helm-marked-candidates))
-         (actual-candidates (mapcar (lambda (x) (cadr (assoc x jg-tag-candidates-names))) visual-candidates))
+  (let* ((actual-candidates (mapcar 'car (helm-marked-candidates)))
          (prior-point 1)
          (end-pos jg-tag-marker)
          (current-tags '())

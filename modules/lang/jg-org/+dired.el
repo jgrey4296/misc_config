@@ -55,23 +55,6 @@
     )
   )
 
-(defun +jg-org-dired-remove-duplicate-tweets ()
-  " Find duplicate tweets by permalink, replace with org link
-to the first version found "
-  (interactive)
-  (let ((files (dired-get-marked-files)))
-    (loop for file in files
-          do
-          (message "Removing Duplicates in %s" file)
-          (with-temp-buffer
-            (insert-file-contents file t)
-            (org-mode)
-            (+jg-org-remove-duplicate-tweet-entries)
-            (write-file file)
-            )
-    )
-  )
-)
 (defun +jg-org-dired-clean-marked-files ()
   "Clean marked Org files"
   (interactive)
@@ -88,9 +71,7 @@ to the first version found "
     )
   )
 )
-
-
-(defun +jg-org-dired-clean-remove-surplus-headings ()
+(defun +jg-org-dired-clean-remove-surplus ()
   " Remove additional single star headings in an org file "
   (interactive)
   (let ((files (dired-get-marked-files)))
@@ -99,11 +80,15 @@ to the first version found "
           (with-temp-buffer
             (insert-file-contents file)
             (+jg-org-remove-surplus-headings)
+            (+jg-org-sort-headings)
+            (+jg-org-remove-duplicate-tweet-entries)
+            (+jg-org-clean-whole-duplicate-threads)
             (write-file file)
             )
           )
     )
   )
+
 (defun +jg-org-remove-surplus-headings ()
   " Go through a buffer, removing additional single star headings,
 and the property block directly below "
@@ -120,22 +105,6 @@ and the property block directly below "
         )
       )
     )
-  (sleep-for 0.2)
-  )
-
-(defun +jg-org-dired-clean-sort-headings ()
-  " Call org-sort-entries on each dired marked file's content "
-  (interactive)
-  (let ((files (dired-get-marked-files)))
-    (loop for file in files
-          do
-          (with-temp-buffer
-            (insert-file-contents file)
-            (+jg-org-sort-headings)
-            (write-file file)
-            )
-          )
-    )
   )
 (defun +jg-org-sort-headings ()
   " Call org-sort-entries on a buffer "
@@ -143,22 +112,6 @@ and the property block directly below "
   (org-mode)
   (org-show-all)
   (org-sort-entries nil ?a)
-  (sleep-for 0.2)
-  )
-
-(defun +jg-org-dired-clean-whole-duplicate-threads ()
-  " Call org-sort-entries on each dired marked file's content "
-  (interactive)
-  (let ((files (dired-get-marked-files)))
-    (loop for file in files
-          do
-          (with-temp-buffer
-            (insert-file-contents file)
-            (+jg-org-clean-whole-duplicate-threads)
-            (write-file file)
-            )
-          )
-    )
   )
 (defun +jg-org-clean-whole-duplicate-threads ()
   " Call org-sort-entries on a buffer "
@@ -168,8 +121,49 @@ and the property block directly below "
   ;; map over level 2 subtrees
   ;; if every applicable heading is a duplicate link,
   ;; mark it for removal the entire subtree
+  (defvar jg-dup-2-star (make-marker))
+  (defvar jg-dup-3-star (make-marker))
+  (defvar jg-dup-hash-log (make-hash-table))
 
+  (org-map-entries '+jg-org-map-entry-duplicate-finder t nil)
   ;; remove marked subtrees
+  (let* ((filtered-keys (-filter #'(lambda (x) (gethash x jg-dup-hash-log))
+                                 (hash-table-keys jg-dup-hash-log)))
+         (sorted-keys (sort filtered-keys #'>))
+         )
+    (loop for pos in sorted-keys
+          do
+          (goto-char pos)
+          (org-cut-subtree))
+    )
+
+  (makunbound 'jg-dup-2-star)
+  (makunbound 'jg-dup-3-star)
+  (makunbound 'jg-dup-hash-log)
 
   (sleep-for 0.2)
+  )
+(defun +jg-org-map-entry-duplicate-finder ()
+  (let ((ctx (org-element-context))
+        (props (org-entry-properties)))
+    (cond ((alist-get "PERMALINK" props nil nil #'s-equals?)
+           (puthash (marker-position jg-dup-2-star) nil jg-dup-hash-log)
+           (puthash (marker-position jg-dup-3-star) nil jg-dup-hash-log)
+           )
+          ((s-equals? "Conversations" (plist-get (cadr ctx) :raw-value))
+           nil)
+          ((s-equals? "Links" (plist-get (cadr ctx) :raw-value))
+           nil)
+          ((s-equals? "Media" (plist-get (cadr ctx) :raw-value))
+           nil)
+          ((eq (plist-get (cadr ctx) :level) 2)
+           (move-marker jg-dup-2-star (plist-get (cadr ctx) :begin))
+           (puthash (marker-position jg-dup-2-star) t jg-dup-hash-log)
+           (move-marker jg-dup-3-star jg-dup-2-star)
+           )
+          ((eq (plist-get (cadr ctx) :level) 3)
+           (move-marker jg-dup-3-star (plist-get (cadr ctx) :begin))
+           (puthash (marker-position jg-dup-3-star) t jg-dup-hash-log))
+          )
+    )
   )

@@ -12,3 +12,8 @@
                +jg-twitter-twurl_target_tweet nil
                +jg-twitter-tweet_buff_name "*tweet*"
 )
+
+(setq-default jg-twitter-download-repo "/Volumes/documents/github/py_bookmark_organiser/"
+              jg-twitter-download-env  "bookmark"
+              jg-twitter-download-py   "bkmkorg/io/twitter_automator.py"
+              )

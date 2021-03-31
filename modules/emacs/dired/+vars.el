@@ -33,30 +33,31 @@
                                "__init__.py"
                                "__pycache__"
                                ".."
-                                (and "flycheck"
-                                        (*? anychar)
-                                        ".py")
-                                (and "."
-                                     (? "gitignore"
-                                        "pylintrc"
-                                        "venv"
-                                        "DS_Store"
-                                        "mypy_cache"
-                                        (and "project"
-                                             (? "ile"))
-                                        "svn"
-                                        "git"
-                                        "ccls-cache"
-                                        (and "js"
-                                             (? ".meta"))
-                                        "elc"
-                                        "o"
-                                        "pyo"
-                                        "swp"
-                                        "class"
+                               (and "flycheck"
+                                    (*? anychar)
+                                    ".py")
+                               (and ?.
+                                     (? (or "gitignore"
+                                            "pylintrc"
+                                            "venv"
+                                            "DS_Store"
+                                            "mypy_cache"
+                                            (and "project"
+                                                 (? "ile"))
+                                            "svn"
+                                            "git"
+                                            "ccls-cache"
+                                            (and "js"
+                                                 (? ".meta"))
+                                            "elc"
+                                            "o"
+                                            "pyo"
+                                            "swp"
+                                            "class"
+                                            )
                                         )
                                      )
-                                )
+                               )
                            line-end
                            )
       )

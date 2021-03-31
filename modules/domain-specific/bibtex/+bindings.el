@@ -5,6 +5,7 @@
       :desc "Edit Field"         :n  "\\" #'+jg-bibtex-edit-field
       :desc "Change Entry Type " :n "|"   #'+jg-bibtex-edit-entry-type
       :desc "Select Entry"       :v "i e" #'+jg-bibtex-visual-select-entry
+      :desc "Open Pdf"    :n "RET"        #'+jg-bibtex-open-pdf
       )
 (map! :map bibtex-mode-map
       :localleader

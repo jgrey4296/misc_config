@@ -26,23 +26,40 @@
       image-dired-thumb-size 150)
 
 (setq dired-omit-verbose nil
-      dired-omit-files
-      (string-join '("^GPATH$"
-                     "^GRTAGS$"
-                     "^GTAGS$"
-                     "^\.$"
-                     "^\.\.$"
-                     "^\.gitignore"
-                     "^\.pylintrc"
-                     "^\.venv"
-                     "^__init__.py"
-                     "^.DS_Store$"
-                     "^__pycache__$"
-                     "^flycheck__.+\\.py"
-                     "^\\.mypy_cache$"
-                     "^.project\\(?:ile\\)?\\'"
-                     "^.\\(svn\\|git\\)\\'"
-                     "^.ccls-cache\\'"
-                     "\\(?:\\.js\\)?\\.meta\\'"
-                     "\\.\\(?:elc\\|o\\|pyo\\|swp\\|class\\)\\'")
-                   "\\|"))
+      dired-omit-files (rx line-start
+                           (or "GPATH"
+                               "GRTAGS"
+                               "GTAGS"
+                               "__init__.py"
+                               "__pycache__"
+                               ".."
+                                (and "flycheck"
+                                        (*? anychar)
+                                        ".py")
+                                (and "."
+                                     (? "gitignore"
+                                        "pylintrc"
+                                        "venv"
+                                        "DS_Store"
+                                        "mypy_cache"
+                                        (and "project"
+                                             (? "ile"))
+                                        "svn"
+                                        "git"
+                                        "ccls-cache"
+                                        (and "js"
+                                             (? ".meta"))
+                                        "elc"
+                                        "o"
+                                        "pyo"
+                                        "swp"
+                                        "class"
+                                        )
+                                     )
+                                )
+                           line-end
+                           )
+      )
+
+
+

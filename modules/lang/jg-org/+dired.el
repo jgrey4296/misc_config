@@ -79,6 +79,7 @@
           do
           (with-temp-buffer
             (insert-file-contents file)
+            (indent-region (point-min) (point-max))
             (+jg-org-remove-surplus-headings)
             (+jg-org-sort-headings)
             (+jg-org-remove-duplicate-tweet-entries)
@@ -155,6 +156,8 @@ and the property block directly below "
           ((s-contains? "Links" (plist-get (cadr ctx) :raw-value) t)
            nil)
           ((s-contains? "Media" (plist-get (cadr ctx) :raw-value) t)
+           nil)
+          ((s-contains? "Videos" (plist-get (cadr ctx) :raw-value) t)
            nil)
           ((eq (plist-get (cadr ctx) :level) 2)
            (move-marker jg-dup-2-star (plist-get (cadr ctx) :begin))

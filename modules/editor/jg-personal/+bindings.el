@@ -16,3 +16,10 @@
       "l" 'highlight-lines-matching-regexp
       "f" 'hi-lock-find-patterns
       )
+
+(map! :leader
+      :prefix "t"
+      :desc "Semantic" "S" #'semantic-mode
+      )
+
+;; todo add semantic etc

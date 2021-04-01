@@ -21,6 +21,7 @@
 (package! auto-highlight-symbol)
 (package! centered-cursor-mode)
 (package! evil-visual-mark-mode)
+(package! cedet :built-in 'prefer)
 
 (package! evil-iedit-state)
 (package! semantic)

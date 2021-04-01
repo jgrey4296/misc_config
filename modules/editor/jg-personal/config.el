@@ -36,8 +36,13 @@
   )
 (use-package! semantic
   :defer t
-  :config (add-to-list 'semantic-default-submodes
-                       'global-semantic-idle-summary-mode))
+  :config
+  (add-to-list 'semantic-default-submodes
+               'global-semantic-idle-summary-mode)
+  (add-to-list 'semantic-new-buffer-setup-functions
+               '(emacs-lisp-mode . semantic-default-elisp-setup))
+  ;; TODO setup semantic more, add helm etc
+  )
 (use-package! evil-iedit-state
   :defer t
   :commands (evil-iedit-state evil-iedit-state/iedit-mode)
@@ -54,6 +59,7 @@
 )
 (use-package! helm-gtags
   :defer t)
+(use-package! cedet)
 
 (after! (evil evil-snipe)
   (push 'dired-mode evil-snipe-disabled-modes)

@@ -1,4 +1,5 @@
 ;; Leader no prefix
+;;
 (map! :leader
       :desc "Goto-line"             "SPC" #'evil-avy-goto-line
       :desc "Ibuffer"               "DEL" #'ibuffer
@@ -470,7 +471,7 @@
         :desc "Cancel Debug on Function" "F"     #'cancel-debug-on-entry
         :desc "Flymake"                      "C" #'flymake-mode
         (:when (featurep! :checkers syntax)
-         :desc "Flycheck"                   "c"  #'flycheck-mode)
+         :desc "Flycheck"                   "c"  #'global-flycheck-mode)
         (:when (and (featurep! :checkers spell) (not (featurep! :checkers spell +flyspell)))
          :desc "Spell checker"              "s"  #'spell-fu-mode)
         (:when (featurep! :checkers spell +flyspell)
@@ -508,7 +509,7 @@
        ;; highlight long lines
        ;; auto-completion
        ;; camel-case-motion
-      ;; fill-column indicator
+       ;; fill-column indicator
       )
 ;;; <leader> w --- workspaces/windows
 (map! :leader

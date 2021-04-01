@@ -145,7 +145,8 @@ governed by the variable `bibtex-completion-display-formats'."
   " Custom implementation of helm-bibtex"
   (interactive "P")
   (when arg
-    (bibtex-completion-clear-cache))
+    (progn (+jg-bibtex-build-list)
+           (bibtex-completion-clear-cache)))
   (let* ((bibtex-completion-additional-search-fields '("tags" "year"))
          (candidates (if (or arg (null jg-bibtex-helm-candidates))
                          (progn (message "Generating Candidates")
@@ -181,7 +182,7 @@ governed by the variable `bibtex-completion-display-formats'."
                                       "Edit Notes"           #'+jg-bibtex-edit-notes
                                       )
           :candidates 'helm-bibtex-candidates
-          :filtered-candidate-transformer  '(jg-year-sort-transformer
+          :filtered-candidate-transformer  '(+jg-year-sort-transformer
                                              +jg-bibtex-helm-candidates-formatter
                                              helm-fuzzy-highlight-matches)
           :multimatch

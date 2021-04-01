@@ -40,7 +40,7 @@
       "C-c [" nil)
 
 (map! :leader
-      :desc "Bibtex Helm"               "a h b" #'+jg-tag-helm-bibtex
+      :desc "Bibtex Helm"               "a h b" #'+jg-bibtex-helm-bibtex
       (:prefix ("a b" . "Bibtex")
        :desc "Load Random Bibtex entry"  "r" #'+jg-bibtex-load-random)
       )

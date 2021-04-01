@@ -10,7 +10,7 @@
        :desc "Directory Walk"        "d" #'project-walk-directory-init
        )
        (:prefix ("wf" . "Filter")
-        :desc "Filter Defaults" "d" #'proejct-walk-filter-defaults
+        :desc "Filter Defaults" "SPC" #'project-walk-filter-defaults
         :desc "Filter Name"     "n" #'project-walk-filter-name
         :desc "Filter Ext"      "e" #'project-walk-filter-ext
         :desc "Filter Dir"      "d" #'project-walk-filter-dir

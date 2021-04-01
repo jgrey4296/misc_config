@@ -34,7 +34,7 @@
 (defun project-walk-filter-dir-p (filename)
   (s-contains? project-walk-filter-arg (f-dirname filename)))
 (defun project-walk-keep-p (filename)
-  (s-contains? project-walk-filter-name (f-filename filename)))
+  (s-contains? project-walk-filter-arg (f-filename filename)))
 
 (defun project-walk-regexp-p (filename)
   (s-matches? project-walk-filter-arg filename)

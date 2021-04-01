@@ -23,7 +23,7 @@
 (defun project-walk-filter-defaults-p (filename)
   " Reject if on the blacklist, or the blacklist regexp "
   (let ((in-filter-list (-contains? project-walk-filter-default-exclusions (f-filename filename)))
-        (regexp-pass (s-matches? project-walk-filter-default-regexp filename))
+        (regexp-pass (s-matches? project-walk-filter-default-regexp (f-filename filename)))
         )
     (or in-filter-list regexp-pass)
     ))

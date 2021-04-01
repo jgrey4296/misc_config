@@ -20,44 +20,61 @@
     )
   )
 
-(defun project-walk-filter-p (filename)
-  " Reject if on the blacklist, or extention doesn't match "
-  ;; contain check taken outside cond because it would always use first condition for some reason
-  (let ((in-filter-list (-contains? project-walk-filter-list (f-filename filename)))
-        (name-match (if (not project-walk-filter-name) nil (s-contains? project-walk-filter-name (f-filename filename))))
-        (dir-match (if (not project-walk-filter-dir) nil (s-contains? project-walk-filter-dir (f-dirname filename))))
-        (is-dot-file (s-prefix? "." filename))
+(defun project-walk-filter-defaults-p (filename)
+  " Reject if on the blacklist, or the blacklist regexp "
+  (let ((in-filter-list (-contains? project-walk-filter-default-exclusions (f-filename filename)))
+        (regexp-pass (s-matches? project-walk-filter-default-regexp filename))
         )
-    )
-    (cond (in-filter-list nil)
-          (name-match nil)
-          (dir-match nil)
-          (is-dot-file nil)
-          (project-walk-ext (not (s-equals? (f-ext filename) project-walk-ext)))
-          (t t)
-          )
-    )
-
+    (or in-filter-list regexp-pass)
+    ))
+(defun project-walk-filter-name-p (filename)
+  (s-contains? project-walk-filter-arg (f-filename filename)))
+(defun project-walk-filter-ext-p (filename)
+  (s-equals? (f-ext filename) project-walk-filter-arg))
+(defun project-walk-filter-dir-p (filename)
+  (s-contains? project-walk-filter-arg (f-dirname filename)))
 (defun project-walk-keep-p (filename)
-  (if (s-contains? project-walk-filter-name (f-filename filename))
-      filename
-    nil)
+  (s-contains? project-walk-filter-name (f-filename filename)))
+
+(defun project-walk-regexp-p (filename)
+  (s-matches? project-walk-filter-arg filename)
   )
 
-
-(defun project-walk-filter (arg)
-  (interactive "p")
-  (cond ((eq arg 0) (message "Reminder: 1: Normal, 2: Filter Name, 3: Filter Ext, 4: Filter Dir, 5: Keep"))
-        ((eq arg 2) (setq project-walk-filter-name (read-string "Filename Part to Filter: ")))
-        ((eq arg 3) (setq project-walk-ext (read-string "File ext to Ignore: ")))
-        ((eq arg 4) (setq project-walk-filter-dir (read-string "Dir Part to Filter: ")))
-        ((eq arg 5) (setq project-walk-filter-name (read-string "Keep name: ")))
-        )
-  (cond ((eq arg 5) (setq project-walk-list (-keep 'project-walk-keep-p project-walk-list)))
-        ((> arg 0)  (setq project-walk-list (-filter 'project-walk-filter-p project-walk-list)))
-        (t nil)
-        )
+(defun project-walk-filter-defaults ()
+  (interactive)
+  (setq project-walk-list (-filter #'project-walk-filter-defaults-p project-walk-list))
+)
+(defun project-walk-filter-name (arg)
+  (interactive "MRemove Filenames: ")
+  (setq project-walk-filter-arg arg)
+  (setq project-walk-list (-filter #'project-walk-filter-name-p project-walk-list))
+)
+(defun project-walk-filter-ext (arg)
+  (interactive "MRemove Extensions: ")
+  (setq project-walk-filter-arg arg)
+  (setq project-walk-list (-filter #'project-walk-filter-ext-p project-walk-list))
   )
+(defun project-walk-filter-dir (arg)
+  (interactive "MRemove Directories: ")
+  (setq project-walk-filter-arg arg)
+  (setq project-walk-list (-filter #'project-walk-filter-dir-p project-walk-list))
+  )
+(defun project-walk-filter-keep (arg)
+  (interactive "MKeep filenames: ")
+  (setq project-walk-filter-arg arg)
+  (setq project-walk-list (-keep #'project-walk-keep-p project-walk-list))
+  )
+
+(defun project-walk-filter-keep-regexp (arg)
+  (interactive "MRegexp to keep: ")
+  (setq project-walk-filter-arg arg)
+  (setq project-walk-list (-keep #'project-walk-regexp-p project-walk-list))
+  )
+(defun project-walk-filter-regexp (arg)
+  (interactive "MRegexp to filter: ")
+  (setq project-walk-filter-arg arg)
+  (setq project-walk-list (-filter #'project-walk-regexp-p project-walk-list))
+)
 
 (defun project-walk-next ()
   (interactive)
@@ -84,10 +101,9 @@
   :lighter "Project-Walk"
   :global t
   (setq-default project-walk-list nil
-                project-walk-ext nil
-                project-walk-filter-list '("__init__.py")
-                project-walk-filter-name nil
-                project-walk-filter-dir nil
+                project-walk-filter-default-exclusions '("__init__.py")
+                project-walk-filter-default-regexp (rx line-start ?.)
+                project-walk-filter-arg nil
                 )
 
   (project-walk-init)

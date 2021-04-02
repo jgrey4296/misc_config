@@ -1,4 +1,5 @@
 ;;; lang/jg-python/+bindings.el -*- lexical-binding: t; -*-
+(message "Loading modules/lang/jg-python/+bindings.el")
 
 (map! :after python
       :map python-mode-map

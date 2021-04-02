@@ -1,5 +1,5 @@
 ;;; main/jg-org/+bindings.el -*- lexical-binding: t; -*-
-
+(message "Loading modules/lang/jg-org/+bindings.el")
 
 (map! :leader
        "i t"    #'org-time-stamp

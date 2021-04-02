@@ -1,4 +1,5 @@
 ;;; lang/org/+bindings.el -*- lexical-binding: t; -*-
+(message "Loading modules/lang/org/+bindings.el")
 
 (map! :after org-agenda
       :map org-agenda-mode-map

@@ -1,4 +1,5 @@
 ;;; editor/evil/+bindings.el -*- lexical-binding: t; -*-
+(message "Loading modules/editor/evil/+bindings.el")
 
 (map! :v  "@"     #'+evil:apply-macro
       :m  [C-i]   #'evil-jump-forward

@@ -1,5 +1,7 @@
 ;;; domain-specific/bibtex/+bindings.el -*- lexical-binding: t; -*-
 ;; Bibtex bindings
+(message "Loading modules/domain-specific/bibtex/+bindings.el")
+
 (map! :map bibtex-mode-map
       :desc "Clean entry" :n "C-c C-c"    #'+jg-bibtex-clean-entry
       :desc "Edit Field"         :n  "\\" #'+jg-bibtex-edit-field

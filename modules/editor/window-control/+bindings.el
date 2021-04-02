@@ -1,5 +1,5 @@
 ;;; editor/window-control/+bindings.el -*- lexical-binding: t; -*-
-
+(message "Loading modules/editor/window-control/+bindings.el")
 ;; Bindings
 (map! :leader
       :prefix ("w r" . "Ring")

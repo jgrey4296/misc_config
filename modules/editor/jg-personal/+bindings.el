@@ -1,3 +1,4 @@
+(message "Loading modules/editor/jg-personal/+bindings.el")
 
 (map! :mode vlf-mode
       "] A" 'vlf-next-batch-from-point

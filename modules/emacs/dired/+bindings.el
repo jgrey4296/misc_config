@@ -1,5 +1,7 @@
 ;;; emacs/dired/+bindings.el -*- lexical-binding: t; -*-
 
+(message "Loading modules/emacs/dired/+bindings.el")
+
 ;;;###package dired-git-info
 (map! :after dired
       :map (dired-mode-map ranger-mode-map)

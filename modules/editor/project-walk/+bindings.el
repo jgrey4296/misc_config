@@ -1,4 +1,5 @@
 ;;; editor/project-walk/+bindings.el -*- lexical-binding: t; -*-
+(message "Loading modules/editor/project-walk/+bindings.el")
 
 (map! :leader
       :prefix "p"

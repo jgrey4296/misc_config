@@ -1,4 +1,5 @@
 ;;; util/text/+bindings.el -*- lexical-binding: t; -*-
+(message "Loading modules/util/text/+bindings.el")
 
 ;; Text bindings
 (map! :n "g '" 'evil-operator-string-inflection)

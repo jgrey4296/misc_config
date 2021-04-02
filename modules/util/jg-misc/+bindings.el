@@ -1,4 +1,5 @@
 ;;; util/jg-misc/+bindings.el -*- lexical-binding: t; -*-
+(message "Loading modules/util/jg-misc/+bindings.el")
 
 (map! :leader
       (:prefix "b"

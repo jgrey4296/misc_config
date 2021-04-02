@@ -1,3 +1,4 @@
+(message "Loading modules/emacs/jg-tag/+bindings.el")
 
 ;; Helm bindings
 (map! :leader

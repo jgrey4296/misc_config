@@ -70,14 +70,14 @@
       "I"           #'+lookup/implementations
       "J"           #'evil-join-whitespace
       "L"           #'evil-lion-right
-      "R"           nil ;;#'+eval/buffer
-      "T"           nil ;;#'+workspace:switch-previous
+      "R"           nil ;; #'+eval/buffer
+      "T"           nil ;; #'+workspace:switch-previous
       "U"           #'evil-upcase
       "a"           #'what-cursor-position
       "b"           #'avy-pop-mark
       "c"           #'evilnc-comment-operator
       "d"           #'+lookup/definition
-      "f"           #'+lookup/file
+      "f"           nil ;; #'+lookup/file
       "i"           #'evil-insert-resume
       "l"           #'evil-lion-left
       "p"           #'+evil/reselect-paste
@@ -116,7 +116,8 @@
       "_ "            nil ;; evil-last-non-blank
       "d "            #'evil-goto-definition
       "e "            nil ;; evil-backward-word-end
-      "g "            #'evil-goto-first-line
+      "f "            #'evil-goto-first-line
+      "g "            nil ;; #'evil-goto-first-line
       "j "            #'evil-next-visual-line
       "k "            #'evil-previous-visual-line
       "m "            #'evil-middle-of-visual-line

@@ -59,7 +59,13 @@
 
 (map! :after dired
       :map (dired-mode-map ranger-mode-map)
+      (:prefix "%"
+       :desc "Mark Orgs" :n "o"     #'+jg-org-dired-select-org
+       )
       :localleader
+      (:prefix "m"
+       :desc "Mark Orgs" "o" #'+jg-org-dired-select-org
+       )
       (:prefix ("K" . "Destructive")
        :desc "Clean Marked" "c"     #'+jg-org-clean-marked-files
        :desc "Chop File Names" "C"  #'+jg-org-chop-long-files-from-dired

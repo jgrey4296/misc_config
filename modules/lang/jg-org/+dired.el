@@ -170,3 +170,12 @@ and the property block directly below "
           )
     )
   )
+
+(defun +jg-org-dired-select-org ()
+  (interactive)
+  (dired-mark-if
+   (let ((fn (dired-get-filename 'no-dir t)))
+     (and fn (s-matches? ".+?\.org$" fn))
+    )
+   "matching org")
+  )

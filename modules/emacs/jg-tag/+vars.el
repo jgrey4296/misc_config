@@ -14,4 +14,5 @@
               jg-tag-marker (make-marker)
               jg-tag-twitter-heading-helm-candidates nil
               jg-tag-twitter-helm-candidates nil
+              jg-tag-helm-buffer-name "*Helm Tags*"
               )

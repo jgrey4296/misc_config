@@ -104,6 +104,15 @@
             do (let ((name (substring entry 1)))
                  (insert (format "[[https://twitter.com/%s][%s]]\n" name entry)))))))
 
+(defun +jg-tag-set-tags-re-entrant (x)
+  (+jg-tag-set-tags x)
+  (helm-resume jg-tag-helm-buffer-name)
+  )
+(defun +jg-tag-set-new-tag-re-entrant (x)
+  (+jg-tag-set-new-tag x)
+  (helm-resume jg-tag-helm-buffer-name)
+  )
+
 ;; Dual Helm / Helm-Action:
 (defun +jg-tag-file-select-helm (candidates)
     " Given a list of Files, provide a helm to open them "
@@ -242,16 +251,19 @@
       )
     )
 (defun +jg-tag-helm-tagger (&optional beg end)
-    """ Opens the Tagging Helm """
-    (set-marker jg-tag-marker (if (eq evil-state 'visual)  evil-visual-end (line-end-position)))
-    (let* ((candidates (+jg-tag-candidates))
-           (main-source (cons `(candidates . ,candidates) jg-tag-helm))
-           )
-      (helm :sources '(main-source jg-tag-fallback-source)
-            :input "")
-      )
-    )
+  """ Opens the Tagging Helm """
+  (set-marker jg-tag-marker (if (eq evil-state 'visual)  evil-visual-end (line-end-position)))
+  (get-buffer-create jg-tag-helm-buffer-name)
 
+  (let* ((candidates (+jg-tag-candidates))
+         (main-source (cons `(candidates . ,candidates) jg-tag-helm-source))
+         )
+    (helm :sources '(main-source jg-tag-fallback-source)
+          :input ""
+          :buffer jg-tag-helm-buffer-name
+          )
+    )
+  )
 
 
 ;; Setup
@@ -274,28 +286,32 @@
 (after! helm
   (setq jg-tag-twitter-helm-source
         (helm-make-source "Twitter Helm" 'helm-source
-          :action (helm-make-actions "File Select Helm" '+jg-tag-file-select-helm
-                                     "Insert User Link" '+jg-tag-insert-twitter-link)
+          :action (helm-make-actions "File Select Helm" #'+jg-tag-file-select-helm
+                                     "Insert User Link" #'+jg-tag-insert-twitter-link)
           )
         ;; ==========
         jg-tag-twitter-heading-helm-source
         (helm-make-source "Twitter Heading Helm" 'helm-source
-          :action (helm-make-actions "File Select Helm" '+jg-tag-file-select-helm)
+          :action (helm-make-actions "File Select Helm" #'+jg-tag-file-select-helm)
           )
         ;; ==========
         jg-tag-file-select-source
         (helm-make-source "Twitter File Select Helm" 'helm-source
-          :action (helm-make-actions "Find File" '+jg-tag-find-file)
+          :action (helm-make-actions "Find File" #'+jg-tag-find-file)
           )
         ;; ==========
-        jg-tag-helm
+        jg-tag-helm-source
         (helm-make-source "Helm Tagging" 'helm-source
-          :action (helm-make-actions "Set" '+jg-tag-set-tags))
+          :action (helm-make-actions "Re-entrant-set" #'+jg-tag-set-tags-re-entrant
+                                     "Set"            #'+jg-tag-set-tags)
+          ;; :keymap
+          )
         ;; ==========
         jg-tag-fallback-source
-        (helm-make-source "Helm Fallback Source" 'helm-source
-          :action (helm-make-actions "Create" '+jg-tag-set-new-tag)
-          :filtered-candidate-transformer (lambda (_c _s) (list helm-pattern)))
-          )
+        (helm-build-dummy-source "Helm Tags Fallback Source"
+          :action (helm-make-actions "Re-entrant-Create" #'+jg-tag-set-new-tag-re-entrant
+                                     "Create"            #'+jg-tag-set-new-tag)
 
+          :filtered-candidate-transformer (lambda (_c _s) (list helm-pattern)))
+        )
 )

@@ -2,8 +2,9 @@
 
 (defun +jg-bibtex-tag-setup-hook ()
   (+jg-tag-add-mode-handler 'bibtex-mode
-                            '+jg-bibtex-set-tags
-                            '+jg-bibtex-set-new-tag
+                            #'+jg-bibtex-set-tags
+                            #'+jg-bibtex-set-new-tag
+                            #'+jg-bibtex-get-tags
                             )
 
   )
@@ -66,4 +67,13 @@
           (evil-forward-section-begin)
           ))))
   )
-
+(defun +jg-bibtex-get-tags ()
+  (let ((tags (bibtex-autokey-get-field "tags"))
+        (opttags (bibtex-autokey-get-field "OPTtags")))
+    (split-string (concat (bibtex-autokey-get-field "tags")
+                          (bibtex-autokey-get-field "OPTtags"))
+                  ","
+                  t
+                  "\s")
+    )
+)

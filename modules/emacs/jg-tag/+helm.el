@@ -106,10 +106,16 @@
 
 (defun +jg-tag-set-tags-re-entrant (x)
   (+jg-tag-set-tags x)
+  (with-helm-buffer
+    (setq-local helm-input-local " ")
+  )
   (helm-resume jg-tag-helm-buffer-name)
   )
 (defun +jg-tag-set-new-tag-re-entrant (x)
   (+jg-tag-set-new-tag x)
+  (with-helm-buffer
+    (setq-local helm-input-local " ")
+  )
   (helm-resume jg-tag-helm-buffer-name)
   )
 
@@ -255,7 +261,8 @@
   (set-marker jg-tag-marker (if (eq evil-state 'visual)  evil-visual-end (line-end-position)))
   (get-buffer-create jg-tag-helm-buffer-name)
 
-  (let* ((candidates (+jg-tag-candidates))
+  (let* ((current-tags (+jg-tag-get-tags))
+         (candidates (+jg-tag-candidates current-tags))
          (main-source (cons `(candidates . ,candidates) jg-tag-helm-source))
          )
     (helm :sources '(main-source jg-tag-fallback-source)
@@ -265,6 +272,11 @@
     )
   )
 
+(defun +jg-tag-clean-input (x)
+  (let ((trimmed (string-trim x)))
+    (s-replace-regexp "\s+" "_" trimmed)
+    )
+  )
 
 ;; Setup
 (after! helm-files
@@ -304,6 +316,7 @@
         (helm-make-source "Helm Tagging" 'helm-source
           :action (helm-make-actions "Re-entrant-set" #'+jg-tag-set-tags-re-entrant
                                      "Set"            #'+jg-tag-set-tags)
+          :pattern-transformer #'+jg-tag-clean-input
           ;; :keymap
           )
         ;; ==========

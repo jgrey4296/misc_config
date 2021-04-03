@@ -12,7 +12,7 @@
      ((and aprop (not bprop)) t)
      ((and (not aprop) (not bprop) (> (funcall lookup ap) (funcall lookup bp))))
      )))
-(defun +jg-tag-candidates ()
+(defun +jg-tag-candidates (current-tags)
   " Given Candidates, colour them if they are assigned, then sort them  "
   (let* ((buffer-cand-tags (+jg-tag-get-buffer-tags))
          (global-tags jg-tag-global-tags))
@@ -24,7 +24,6 @@
                (maxTagAmount (apply 'max cand-vals))
                (bar-keys (+jg-text-make-bar-chart cand-pairs maxTagLength maxTagAmount))
                (display-pairs (-zip bar-keys cand-keys))
-               (current-tags (org-get-tags nil t))
                (propertied-tags (cl-map 'list (lambda (candidate)
                                              (let ((candString (car candidate)))
                                                (if (-contains? current-tags (cdr candidate))

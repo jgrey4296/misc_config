@@ -1,9 +1,11 @@
 ;; tags
-(defun +jg-tag-add-mode-handler (mode func-set func-new)
+(defun +jg-tag-add-mode-handler (mode func-set func-new func-get)
   " Register a mode symbol with a function/symbol to
 call when the evil-ex command 't[ag]' is called,
 or +jg-tag-set-tags +jg-tag-set-new-tag"
-  (puthash mode `(,func-set . ,func-new) jg-tag-alt-mapping)
+  (puthash mode `(:set ,func-set
+                  :new ,func-new
+                  :get ,func-get) jg-tag-alt-mapping)
   )
 
 (defun +jg-tag-get-buffer-tags (&optional name depth)
@@ -105,19 +107,25 @@ Return a hash-table of tags with their instance counts"
 (defun +jg-tag-set-tags (x)
   "Utility action to set tags. Works in org *and* bibtex files"
   (if (gethash major-mode jg-tag-alt-mapping)
-      (funcall (car (gethash major-mode jg-tag-alt-mapping)) x)
+      (funcall (plist-get (gethash major-mode jg-tag-alt-mapping) :set) x)
     (message "No Tag Handler found for Mode: %s" major-mode)
   )
 )
 (defun +jg-tag-set-new-tag (x)
   "Utility action to add a new tag. Works for org *and* bibtex"
   (if (gethash major-mode jg-tag-alt-mapping)
-      (funcall (cdr (gethash major-mode jg-tag-alt-mapping)) x)
+      (funcall (plist-get (gethash major-mode jg-tag-alt-mapping) :new) x)
     (message "No Tag Handler found for Mode: %s" major-mode)
   )
 )
 
-
+(defun +jg-tag-get-tags ()
+  "Utility action to get tags for current entry"
+  (if (gethash major-mode jg-tag-alt-mapping)
+      (funcall (plist-get (gethash major-mode jg-tag-alt-mapping) :get))
+    (message "No Tag Handler found for Mode: %s" major-mode)
+    )
+  )
 (defun +jg-tag-select-random-tags (n)
   (interactive "nHow many tags? ")
   (let* ((tags (hash-table-keys jg-tag-global-tags))

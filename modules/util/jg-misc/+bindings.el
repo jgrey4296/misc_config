@@ -6,7 +6,13 @@
        :desc "Undo-Tree" "u" #'+jg-misc-undo-tree)
       (:prefix "t"
        "v r" #'rainbow-mode)
+      (:prefix "w"
+       :desc "Toggle Laybout" "|" #'+jg-window-layout-toggle
+       :desc "Rotate Windows" "\\" #'+jg-rotate-windows-forward
+       )
       )
+
+
 (map! :map help-map
        "DEL" #'free-keys
       )

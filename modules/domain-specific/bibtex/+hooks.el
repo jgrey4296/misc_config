@@ -71,6 +71,7 @@
   )
 (defun +jg-bibtex--recode-non-ascii (x)
   ;; jg-bibtex-non-ascii-inverted
+  ;; BUG can't handle {\\c{s}}
   (with-temp-buffer
     (insert x)
     (goto-char (point-min))
@@ -96,3 +97,20 @@
     (mapc #'+jg-bibtex-set-pair fixed)
     )
   )
+
+(defun +jg-bibtex-smart-replace-nonascii-hook ()
+  "Hook function to replace non-ascii characters in a bibtex entry."
+  (interactive)
+  (save-restriction
+    (bibtex-narrow-to-entry)
+    (goto-char (point-min))
+    (dolist (char (mapcar (lambda (x)
+			    (car x))
+			  org-ref-nonascii-latex-replacements))
+      (while (re-search-forward char nil t)
+        (if (not (string-match "file.*?=" (buffer-substring-no-properties (line-beginning-position) (line-end-position))))
+            (replace-match (cdr (assoc char org-ref-nonascii-latex-replacements)))
+          (goto-char (line-end-position))
+          )
+        )
+      (goto-char (point-min)))))

@@ -4,8 +4,10 @@
 
 (map! :map bibtex-mode-map
       :desc "Clean entry" :n "C-c C-c"    #'+jg-bibtex-clean-entry
+      :desc "Clean entry" :n "TAB"        #'+jg-bibtex-clean-entry
       :desc "Edit Field"         :n  "\\" #'+jg-bibtex-edit-field
       :desc "Change Entry Type " :n "|"   #'+jg-bibtex-edit-entry-type
+      :desc "Change Entry Type" :n "DEL"  #'+jg-bibtex-edit-entry-type
       :desc "Select Entry"       :v "i e" #'+jg-bibtex-visual-select-entry
       :desc "Open Pdf"    :n "RET"        #'+jg-bibtex-open-pdf
       )

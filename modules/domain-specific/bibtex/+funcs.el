@@ -228,6 +228,15 @@ Log into jg-bibtex-rand-log.
   but with a wrapping to override fill-column
   """
   (interactive)
+  (let ((fill-column jg-bibtex-fill-column))
+    (org-ref-clean-bibtex-entry)
+    )
+  )
+(defun +jg-bibtex-clean-entry-move-on-fail ()
+  """ Calls org-ref-clean-bibtex-entry,
+  but with a wrapping to override fill-column
+  """
+  (interactive)
   (condition-case err
       (let ((fill-column jg-bibtex-fill-column))
         (org-ref-clean-bibtex-entry)
@@ -236,11 +245,12 @@ Log into jg-bibtex-rand-log.
      (let (entry)
        (kill-region (bibtex-beginning-of-entry)
                     (bibtex-end-of-entry))
-       (setq entry (current-kill 0 t))
+       (setq entry (string-trim (current-kill 0 t)))
        (widen)
        (save-excursion
          (goto-char (point-max))
          (insert entry)
+         (insert "\n")
          )
        (message "Clean Error, copied entry to end of file")
      )

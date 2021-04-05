@@ -228,32 +228,34 @@ Log into jg-bibtex-rand-log.
   but with a wrapping to override fill-column
   """
   (interactive)
-  (let ((fill-column jg-bibtex-fill-column))
-    (org-ref-clean-bibtex-entry)
-    )
-  )
-(defun +jg-bibtex-clean-entry-move-on-fail ()
-  """ Calls org-ref-clean-bibtex-entry,
-  but with a wrapping to override fill-column
-  """
-  (interactive)
   (condition-case err
       (let ((fill-column jg-bibtex-fill-column))
         (org-ref-clean-bibtex-entry)
         )
     (error
-     (let (entry)
-       (kill-region (bibtex-beginning-of-entry)
-                    (bibtex-end-of-entry))
-       (setq entry (string-trim (current-kill 0 t)))
-       (widen)
-       (save-excursion
-         (goto-char (point-max))
-         (insert entry)
-         (insert "\n")
-         )
-       (message "Clean Error, copied entry to end of file")
-     )
+     (if jg-bibtex-clean-move-entry-on-fail
+         (let (entry)
+           (kill-region (bibtex-beginning-of-entry)
+                        (bibtex-end-of-entry))
+           (setq entry (string-trim (current-kill 0 t)))
+           (widen)
+           (save-excursion
+             (goto-char (point-max))
+             (insert entry)
+             (insert "\n")
+             )
+           (message "Clean Error, copied entry to end of file")
+           )
+       (message "Clean Error: %s" (error-message-string err))
+       )
      )
     )
+  )
+
+(defun +jg-bibtex-clean-error-move-toggle ()
+  (interactive)
+  (setq jg-bibtex-clean-move-entry-on-fail (not jg-bibtex-clean-move-entry-on-fail))
+  (message "Error on clean entry %s move to end of file" (if jg-bibtex-clean-move-entry-on-fail
+                                                             "will"
+                                                           "will not"))
   )

@@ -4,7 +4,7 @@
 
 (map! :map bibtex-mode-map
       :desc "Clean entry" :n "C-c C-c"    #'+jg-bibtex-clean-entry
-      :desc "Clean entry" :n "TAB"        #'+jg-bibtex-clean-entry-move-on-fail
+      :desc "Clean entry" :n "TAB"        #'+jg-bibtex-clean-entry
       :desc "Edit Field"         :n  "\\" #'+jg-bibtex-edit-field
       :desc "Change Entry Type " :n "|"   #'+jg-bibtex-edit-entry-type
       :desc "Change Entry Type" :n "DEL"  #'+jg-bibtex-edit-entry-type
@@ -37,6 +37,9 @@
       :desc "Jump to doi"          "d" #'+jg-bibtex-open-doi
       :desc "Jump to Crossref"     "c" #'+jg-bibtex-goto-crossref-entry)
       ;; TODO search in crossref
+      (:prefix ("v" . "Vars")
+       :desc "Clean Error Move"    "m" #'+jg-bibtex-clean-error-move-toggle
+       )
       )
 
 ;; Reftex binding override

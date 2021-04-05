@@ -90,7 +90,7 @@ the entry of interest in the bibfile.  but does not check that."
          (optfile (bibtex-autokey-get-field "OPTfile"))
          (target (if (not (string-empty-p file)) file optfile))
         )
-    (if (and (not (string-empty-p target)) (f-exists? target))
+    (if (and (not (string-empty-p target)) (f-exists? (f-parent target)))
         (progn
           (message "Opening %s" target)
           (find-file-other-window (f-parent target))

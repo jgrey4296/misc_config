@@ -59,11 +59,8 @@ bibtex-BibTeX-entry-alist for completion options "
   " Copy the entire entry under point "
   (interactive)
   (save-excursion
-    (let (start end)
-      (bibtex-beginning-of-entry)
-      (setq start (point))
-      (bibtex-end-of-entry)
-      (setq end (point))
+    (let ((start (bibtex-beginning-of-entry))
+          (end (bibtex-end-of-entry)))
       (copy-region-as-kill start end)
       )
     )
@@ -96,7 +93,7 @@ the entry of interest in the bibfile.  but does not check that."
     (if (and (not (string-empty-p target)) (f-exists? target))
         (progn
           (message "Opening %s" target)
-          (find-file (f-parent target))
+          (find-file-other-window (f-parent target))
           )
       )
     )
@@ -231,8 +228,22 @@ Log into jg-bibtex-rand-log.
   but with a wrapping to override fill-column
   """
   (interactive)
-  (let ((fill-column jg-bibtex-fill-column))
-    (org-ref-clean-bibtex-entry)
+  (condition-case err
+      (let ((fill-column jg-bibtex-fill-column))
+        (org-ref-clean-bibtex-entry)
+        )
+    (error
+     (let (entry)
+       (kill-region (bibtex-beginning-of-entry)
+                    (bibtex-end-of-entry))
+       (setq entry (current-kill 0 t))
+       (widen)
+       (save-excursion
+         (goto-char (point-max))
+         (insert entry)
+         )
+       (message "Clean Error, copied entry to end of file")
+     )
+     )
     )
   )
-

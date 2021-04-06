@@ -180,10 +180,13 @@ using org-bibtex-fields for completion options "
            (source (if (f-exists? potential-completions)
                        (helm-build-in-file-source "Completion Helm"
                            potential-completions)))
+           (dummy-action #'(lambda (x) (write-region (format "%s\n" (string-trim x)) nil potential-completions t) x))
+           (dummy-source (helm-build-dummy-source "Completion Helm Dummy"
+                           :action (helm-make-actions "Insert into file" dummy-action)))
            new-value
            )
       (setq new-value (if source
-                          (helm :sources source
+                          (helm :sources '(source dummy-source)
                                 :buffer "*helm bibtex completions*"
                                 :input curr-value
                                 )

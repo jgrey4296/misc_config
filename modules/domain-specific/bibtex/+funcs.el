@@ -176,9 +176,21 @@ using org-bibtex-fields for completion options "
            (user-fields (mapcar #'car bibtex-user-optional-fields))
            (chosen (completing-read "Field: " (-concat fields user-fields)))
            (curr-value (bibtex-autokey-get-field chosen))
-           (new-value (read-string (format "(%s) New Value: " chosen)))
+           (potential-completions (f-join jg-bibtex-loc-completions chosen))
+           (source (if (f-exists? potential-completions)
+                       (helm-build-in-file-source "Completion Helm"
+                           potential-completions)))
+           new-value
            )
-      (bibtex-set-field chosen (string-trim new-value))
+      (setq new-value (if source
+                          (helm :sources source
+                                :buffer "*helm bibtex completions*"
+                                :input curr-value
+                                )
+                          (read-string (format "(%s) New Value: " chosen))))
+      (if new-value
+          (bibtex-set-field chosen (string-trim new-value))
+        )
       )
     )
   )

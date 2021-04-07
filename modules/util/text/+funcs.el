@@ -69,3 +69,12 @@ uses org-babel-edit-distance "
       )
     )
   )
+
+(defun +jg-text-regex-reminder ()
+  (interactive)
+  (with-temp-buffer-window "*Regex Char Class Reminder*" 'display-buffer-pop-up-window
+                           nil
+    (princ (yas--template-content (yas-lookup-snippet "Char Classes" 'fundamental-mode)))
+    )
+  nil
+  )

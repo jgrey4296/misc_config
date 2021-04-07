@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: Char Classes
+# uuid: CharClassRegex
+# key: CharClassRegex
+# --
+[:cntrl:]      character whose code is in the range 0–31.
+[:print:]      printing character—either whitespace, or a graphic character matched by ‘[:graph:]’.
+[:blank:]      horizontal whitespace
+[:space:]      character that has whitespace syntax
+
+[:alpha:]      letter
+[:lower:]      lower-case letter, as determined by the current case table (*note Case Tables::).  If ‘case-fold-search’ is non-‘nil’, this also matches any upper-case letter.
+[:upper:]      upper-case letter, as determined by the current case table (*note Case Tables::).  If ‘case-fold-search’ is non-‘nil’, this also matches any lower-case letter.
+[:word:]       character that has word syntax
+
+[:digit:]      This matches ‘0’ through ‘9’.  Thus, ‘[-+[:digit:]]’ matches any digit, as well as ‘+’ and ‘-’.
+[:xdigit:]     the hexadecimal digits: ‘0’ through ‘9’, ‘a’ through ‘f’ and ‘A’ through ‘F’.
+[:alnum:]      letter or digit
+
+[:ascii:]      ASCII character (codes 0–127)
+[:nonascii:]   non-ASCII character
+[:graph:]      graphic characters—everything except whitespace, ASCII and non-ASCII control characters
+[:punct:]      punctuation character.  (At present, for multibyte characters, it matches anything that has non-word syntax.)
+
+[:unibyte:]    unibyte character
+[:multibyte:]  multibyte character

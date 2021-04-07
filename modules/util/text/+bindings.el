@@ -12,3 +12,7 @@
        "p"    #'academic-phrases
        "s"    #'academic-phrases-by-section)
 )
+(map! :leader
+      :prefix "h"
+      :desc "Regex Reminder" "R" #'+jg-text-regex-reminder
+      )

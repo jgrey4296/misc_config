@@ -819,6 +819,10 @@
     to take up entire percentage points of world energy.
 *** Andy Weir: The Egg
 short story about reincarnation of a world of one person?
+
+*** Margins of Error
+A Study of Reliability in Survey Measurement Margins of Error: A Study of Reliability in Survey Measurement
+doi : 10.1177/0094306110396847
 ** Tasks
 *** TODO [[https://quality-diversity.github.io/papers][Quality-Diversity]]
 *** TODO emacs editor

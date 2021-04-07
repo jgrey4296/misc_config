@@ -69,6 +69,12 @@ bibtex-BibTeX-entry-alist for completion options "
   " Copy the cite key of the entry under point "
   (interactive)
   (kill-new (bibtex-completion-get-key-bibtex))
+  (message "Copied Key: %s" (current-kill 0 t))
+  )
+(defun +jg-bibtex-copy-title ()
+  (interactive)
+  (kill-new (bibtex-autokey-get-field "title"))
+  (message "Copied Title: %s" (current-kill 0 t))
   )
 (defun +jg-bibtex-open-pdf ()
   "Open pdf for a bibtex entry, if it exists.

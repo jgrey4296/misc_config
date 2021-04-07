@@ -22,6 +22,7 @@
       (:prefix ("c" . "Copy")
        :desc "Copy Entry"        "e"    #'+jg-bibtex-copy-entry
        :desc "Copy Key"          "k"    #'+jg-bibtex-copy-key
+       :desc "Copy Title"        "t"    #'+jg-bibtex-copy-title
        )
       (:prefix ("e" . "Edit")
        :desc "Change Entry Type" "t"  #'+jg-bibtex-edit-entry-type

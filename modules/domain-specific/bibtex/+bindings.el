@@ -3,13 +3,14 @@
 (message "Loading modules/domain-specific/bibtex/+bindings.el")
 
 (map! :map bibtex-mode-map
-      :desc "Clean entry" :n "C-c C-c"    #'+jg-bibtex-clean-entry
-      :desc "Clean entry" :n "TAB"        #'+jg-bibtex-clean-entry
-      :desc "Edit Field"         :n  "\\" #'+jg-bibtex-edit-field
-      :desc "Change Entry Type " :n "|"   #'+jg-bibtex-edit-entry-type
-      :desc "Change Entry Type" :n "DEL"  #'+jg-bibtex-edit-entry-type
-      :desc "Select Entry"       :v "i e" #'+jg-bibtex-visual-select-entry
-      :desc "Open Pdf"    :n "RET"        #'+jg-bibtex-open-pdf
+      :desc "Clean entry"        :n "C-c C-c" #'+jg-bibtex-clean-entry
+      :desc "Clean entry"        :n "TAB"     #'+jg-bibtex-clean-entry
+      :desc "Edit Field"         :n  "\\"     #'+jg-bibtex-edit-field
+      :desc "Change Entry Type " :n "|"       #'+jg-bibtex-edit-entry-type
+      :desc "Change Entry Type"  :n "DEL"     #'+jg-bibtex-edit-entry-type
+      :desc "Select Entry"       :v "i e"     #'+jg-bibtex-visual-select-entry
+      :desc "Open Pdf"           :n "RET"     #'+jg-bibtex-open-pdf
+      :desc "Open Folder"        :n "M-RET"   #'+jg-bibtex-find-folder
       )
 (map! :map bibtex-mode-map
       :localleader
@@ -40,6 +41,8 @@
       ;; TODO search in crossref
       (:prefix ("v" . "Vars")
        :desc "Clean Error Move"    "m" #'+jg-bibtex-clean-error-move-toggle
+       :desc "Toggle PDF+Doi Open"    "d" #'+jg-bibtex-toggle-doi-load
+       :desc "Toggle PDF+Url Open"    "u" #'+jg-bibtex-toggle-url-load
        )
       )
 

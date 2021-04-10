@@ -6,8 +6,8 @@
               bibtex-completion-pdf-open-function #'(lambda (x) (org-open-link-from-string (format "[[file:%s]]" x)))
               bibtex-user-optional-fields '(("annotation" "Personal Annotation") ("tags" "Set of tags") ("isbn" "ISBN of file") ("doi" "DOI of file") ("url" "Url of file") ("file" "The path of the file") ("translator" "The Translators of the work"))
 
-              jg-bibtex-clean-add-hooks '(+jg-bibtex-smart-replace-nonascii-hook +jg-bibtex-dont-break-lines-hook +jg-bibtex-clean-doi-hook  +jg-bibtex-align-hook +jg-bibtex-check-file-hook)
-              jg-bibtex-clean-remove-hooks '(org-ref-replace-nonascii orcb-clean-doi org-ref-bibtex-format-url-if-doi orcb-check-journal)
+              jg-bibtex-clean-add-hooks '(+jg-bibtex-orcb-key-hook +jg-bibtex-smart-replace-nonascii-hook +jg-bibtex-dont-break-lines-hook +jg-bibtex-clean-doi-hook  +jg-bibtex-align-hook +jg-bibtex-check-file-hook)
+              jg-bibtex-clean-remove-hooks '(orcb-key org-ref-replace-nonascii orcb-clean-doi org-ref-bibtex-format-url-if-doi orcb-check-journal)
 
               jg-bibtex-scholar-search-fields '("author" "editor" "ALTauthor" "Alteditor" "year" "doi" "isbn")
               jg-bibtex-scholar-search-fields-exact '("title")
@@ -30,4 +30,6 @@
               jg-bibtex-remove-field-newlines-regexp "file\\|url\\|title"
 
               jg-bibtex-clean-move-entry-on-fail t
+              jg-bibtex-open-doi-with-pdf t
+              jg-bibtex-open-url-with-pdf t
               )

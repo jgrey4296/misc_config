@@ -88,7 +88,12 @@ the entry of interest in the bibfile.  but does not check that."
       (if (and (not (string-equal "" file)) (file-exists-p file))
           (org-link-open-from-string (format "[[file:%s]]" file))
         (progn (message optfile)
-               (org-link-open-from-string (format "[[file:%s]]" optfile)))))))
+               (org-link-open-from-string (format "[[file:%s]]" optfile))))
+      (if jg-bibtex-open-doi-with-pdf
+          (+jg-bibtex-open-doi))
+      (if jg-bibtex-open-url-with-pdf
+          (+jg-bibtex-open-url))
+      )))
 (defun +jg-bibtex-find-folder ()
   " Find the fold in which the entry's associated file exists "
   (interactive)
@@ -279,4 +284,14 @@ Log into jg-bibtex-rand-log.
   (message "Error on clean entry %s move to end of file" (if jg-bibtex-clean-move-entry-on-fail
                                                              "will"
                                                            "will not"))
+  )
+(defun +jg-bibtex-toggle-doi-load ()
+  (interactive)
+  (setq jg-bibtex-open-doi-with-pdf (not jg-bibtex-open-doi-with-pdf))
+  (message "Open DOI on pdf? %s" jg-bibtex-open-doi-with-pdf)
+  )
+(defun +jg-bibtex-toggle-url-load ()
+  (interactive)
+  (setq jg-bibtex-open-url-with-pdf (not jg-bibtex-open-url-with-pdf))
+  (message "Open URL on pdf? %s" jg-bibtex-open-url-with-pdf)
   )

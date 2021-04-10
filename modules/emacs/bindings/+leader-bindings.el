@@ -511,34 +511,37 @@
        ;; camel-case-motion
        ;; fill-column indicator
       )
-;;; <leader> w --- workspaces/windows
+
 (map! :leader
-      (:when (featurep! :ui workspaces)
-       :prefix ("W" . "Workspaces")
-       :desc "Workspace Counsel" "RET"            #'jg-counsel-workspace
-       ;; Lowercase - workspace, Uppercase - session
-       :desc "Display tab bar"              "TAB" #'+workspace/display
-       :desc "Next workspace"               "]"   #'+workspace/switch-right
-       :desc "Previous workspace"           "["   #'+workspace/switch-left
-       :desc "Switch to last workspace"     "`"   #'+workspace/other
-       :desc "Switch workspace"             "."   #'+workspace/switch-to
-       :desc "Switch to last workspace"     "0"   #'+workspace/switch-to-final
+      :when (featurep! :ui workspaces)
+      :prefix ("W" . "Workspaces")
+      :desc "Workspace Counsel" "RET"            #'jg-counsel-workspace
+      ;; Lowercase - workspace, Uppercase - session
+      :desc "Display tab bar"              "TAB" #'+workspace/display
+      :desc "Next workspace"               "]"   #'+workspace/switch-right
+      :desc "Previous workspace"           "["   #'+workspace/switch-left
+      :desc "Switch to last workspace"     "`"   #'+workspace/other
+      :desc "Switch workspace"             "."   #'+workspace/switch-to
+      :desc "Switch to last workspace"     "0"   #'+workspace/switch-to-final
 
-       :desc "Create workspace"             "c"   #'+workspace/new
-       :desc "Delete workspace"             "k"   #'+workspace/delete
-       :desc "Load workspace from file"     "l"   #'+workspace/load
-       :desc "New workspace"                "n"   #'+workspace/new
-       :desc "Rename workspace"             "r"   #'+workspace/rename
-       :desc "Save workspace"               "s"   #'+workspace/save
-       :desc "Delete session"               "x"   #'+workspace/kill-session
+      :desc "Create workspace"             "c"   #'+workspace/new
+      :desc "Delete workspace"             "k"   #'+workspace/delete
+      :desc "Load workspace from file"     "l"   #'+workspace/load
+      :desc "New workspace"                "n"   #'+workspace/new
+      :desc "Rename workspace"             "r"   #'+workspace/rename
+      :desc "Save workspace"               "s"   #'+workspace/save
+      :desc "Delete session"               "x"   #'+workspace/kill-session
 
-       :desc "Autosave session"              "A"  #'doom/quicksave-session
-       :desc "Load session"                  "L"  #'doom/load-session
-       :desc "Redo window config"            "U"  #'winner-redo
-       :desc "Save session"                  "S"  #'doom/save-session
-       :desc "Undo window config"            "u"  #'winner-undo
-       )
+      :desc "Autosave session"              "A"  #'doom/quicksave-session
+      :desc "Load session"                  "L"  #'doom/load-session
+      :desc "Redo window config"            "U"  #'winner-redo
+      :desc "Save session"                  "S"  #'doom/save-session
+      :desc "Undo window config"            "u"  #'winner-undo
+      )
+;;; <leader> W --- workspaces
+(map! :leader
       :prefix ("w" . "Windows")
+      :desc "Toggle Dedicated" "DEL"                #'+jg-toggle-window-dedication
       :desc "Delete Window" "d"                   #'delete-window
       :desc "Split To Right" "/"                  #'split-window-right
       :desc "Split Below" "-"                     #'split-window-below

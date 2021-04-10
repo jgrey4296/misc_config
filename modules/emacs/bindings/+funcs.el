@@ -236,3 +236,14 @@ Dedicated (locked) windows are left untouched."
          (widen))
         )
   )
+
+(defun +jg-toggle-window-dedication ()
+  (interactive)
+  (let ((curr-window (selected-window)))
+    (set-window-dedicated-p curr-window
+                            (not (window-dedicated-p curr-window)))
+    (if (window-dedicated-p curr-window)
+        (message "Window is now dedicated to %s" (window-buffer curr-window))
+      (message "Window is not dedicated"))
+    )
+  )

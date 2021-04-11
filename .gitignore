@@ -12,3 +12,4 @@ log.*
 GPATH
 GRTAGS
 GTAGS
+*.secret

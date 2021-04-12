@@ -78,3 +78,19 @@ uses org-babel-edit-distance "
     )
   nil
   )
+
+(defun +jg-text-simple-grep (reg)
+  " Copy any matching line into a separate buffer "
+  (interactive "sMatch Regexp: ")
+  (with-temp-buffer-window "*Text-Results*" 'display-buffer-pop-up-window nil
+    (goto-char (point-min))
+    (while (re-search-forward reg nil t)
+      (princ (format "%s : %s\n" (line-number-at-pos) (buffer-substring (line-beginning-position) (line-end-position))))
+      )
+    )
+  (let ((inhibit-read-only t))
+    (with-current-buffer "*Text-Results*"
+      (align-regexp (point-min) (point-max) "\\(\s-*\\):")
+      )
+    )
+  )

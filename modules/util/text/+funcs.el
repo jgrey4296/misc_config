@@ -50,7 +50,7 @@ uses org-babel-edit-distance "
   (buffer-substring-no-properties (line-beginning-position)
                                   (line-end-position))
   )
-(defun +jg-misc-uniquify (L R)
+(defun +jg-text-uniquify (L R)
   (interactive "r")
   (save-excursion
     (goto-char L)
@@ -91,6 +91,34 @@ uses org-babel-edit-distance "
   (let ((inhibit-read-only t))
     (with-current-buffer "*Text-Results*"
       (align-regexp (point-min) (point-max) "\\(\s-*\\):")
+      )
+    )
+  )
+
+(defun +jg-text-remove-leading-whitespace ()
+  (interactive)
+  (let ((start (if (evil-visual-state-p) evil-visual-beginning (line-beginning-position)))
+        (end (if (evil-visual-state-p) evil-visual-end (line-end-position))))
+    (save-excursion
+      (goto-char start)
+      (while (< (point) end)
+        (beginning-of-line-text)
+        (kill-region (line-beginning-position) (point))
+        (forward-line)
+        )
+      )
+    )
+  )
+
+(defun +jg-text-title-case ()
+  (interactive)
+  (let ((start (if (evil-visual-state-p) evil-visual-beginning (line-beginning-position)))
+        (end (if (evil-visual-state-p) evil-visual-end (line-end-position))))
+    (save-excursion
+      (goto-char start)
+      (while (< (point) end)
+        (capitalize-word)
+        )
       )
     )
   )

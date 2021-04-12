@@ -484,6 +484,7 @@
         :desc "Evil goggles"                 "g" #'evil-goggles-mode
         :desc "Soft line wrapping"           "w" #'visual-line-mode
         :desc "Fill Column Indicator"        "f" #'display-fill-column-indicator-mode
+        :desc "Ignore Invisible"             "i" #'+jg-toggle-line-move-ignore-invisible
         (:when (featurep! :editor word-wrap)
          :desc "Soft line wrapping"         "w"  #'+word-wrap-mode)
         :desc "Word-wrap mode"               "W" #'+word-wrap-mode
@@ -568,24 +569,16 @@
        )
       ;; Lines
       (:prefix ("l" . "Lines")
-       ;;:desc "Remove Duplicates"    "u"                 #'
-       ;;:desc "Mark"                 "m"                 #'
        ;; untabify
-       "f"                                    #'flush-lines
-       "K"                                    #'keep-lines
+       :desc "Flush Lines" "f"                                    #'flush-lines
+       :desc "Keep Lines"  "K"                                    #'keep-lines
        :desc "Delete trailing newlines"   "W" #'doom/delete-trailing-newlines
        :desc "Delete trailing whitespace" "w" #'delete-trailing-whitespace
        :desc "Whitespace Cleanup"         "c" #'whitespace-cleanup
        :desc "Indent"                     "i" #'indent-region
        :desc "Random"                     "r" #'+jg-bindings-goto-random-line
        )
-      ;; justify
-      ;; upcase, downcase
-
-      ;; string inflection and surround
-      (:prefix ("s" . "Surround")
-
-       )
+      (:prefix ("i" . "insert"))
       )
 ;;; <leader> y --- snippets
 (map! :leader

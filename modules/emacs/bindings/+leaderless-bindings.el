@@ -16,6 +16,8 @@
 
 ;; Evil States
 (map! :map evil-normal-state-map
+      "Z" nil)
+(map! :map evil-normal-state-map
       :prefix "z"
       "= "          #'ispell-word
       "A"          #'evil-open-fold-rec

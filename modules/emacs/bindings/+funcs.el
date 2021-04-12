@@ -247,3 +247,9 @@ Dedicated (locked) windows are left untouched."
       (message "Window is not dedicated"))
     )
   )
+
+(defun +jg-toggle-line-move-ignore-invisible ()
+  (interactive)
+  (setq line-move-ignore-invisible (not line-move-ignore-invisible))
+  (message "Ignore invisible lines: %s" line-move-ignore-invisible)
+  )

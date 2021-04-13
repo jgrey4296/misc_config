@@ -149,13 +149,13 @@ governed by the variable `bibtex-completion-display-formats'."
     (+jg-bibtex-build-list)
     (bibtex-completion-clear-cache))
   (let* ((bibtex-completion-additional-search-fields '("tags" "year"))
-         (candidates (if (or arg (null jg-bibtex-helm-bibtex-candidates))
+         (candidates (if (or arg (null jg-bibtex-helm-candidates))
                          (progn (message "Generating Candidates")
                                 (bibtex-completion-init)
-                                (setq jg-bibtex-helm-bibtex-candidates
+                                (setq jg-bibtex-helm-candidates
                                       (mapcar '+jg-bibtex-process-candidates (bibtex-completion-candidates)))
-                                jg-bibtex-helm-bibtex-candidates)
-                       jg-bibtex-helm-bibtex-candidates
+                                jg-bibtex-helm-candidates)
+                       jg-bibtex-helm-candidates
                        ))
          )
     (helm-set-local-variable

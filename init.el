@@ -18,6 +18,7 @@
                                         ; Personal Modules:
  :util  ;; ----- ====== -----
  jg-misc
+ jg-mail
  text
 
  :domain-specific  ;; ----- ====== -----
@@ -200,7 +201,7 @@
  ;;web               ; the tubes
 
  :email  ;; ----- ====== -----
- ;;(mu4e +gmail)
+ (mu4e +gmail)
  ;;notmuch
  ;;(wanderlust +gmail)
 

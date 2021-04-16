@@ -36,24 +36,23 @@
       (:when (featurep! :ui popup)
        :desc "Toggle last popup"     "~"    #'+popup/toggle)
 
-      (:prefix ("l" . "<localleader>")) ; bound locally
       (:prefix ("!" . "checkers"))      ; bound by flycheck
 
-      :desc "help"                  "h"    help-map
+      :desc "Desktop"   "1" #'+jg-bindings-goto-desktop
+      :desc "Github"    "2" #'+jg-bindings-goto-github
+      :desc "Mega"      "3" #'+jg-bindings-goto-mega
+      :desc "Home"      "4" #'+jg-bindings-goto-home
+      :desc "Resources" "5" #'+jg-bindings-goto-resources
+
+      :desc "Agenda"    "7" #'+jg-bindings-goto-org-agenda-file
+      :desc "Twitter"   "8" #'jg-browse-twitter
+      ;; :desc "Mail"      "9" #'mu4e
+      :desc "Messages"  "0" #'+jg-bindings-goto-messages
       )
 ;;; <leader> a -- misc
 (map! :leader
      (:prefix ("a" . "JG Misc")
       :desc "Minibuffer history" "m" #'counsel-minibuffer-history
-      (:prefix ("g" . "Goto")
-       :desc "Desktop" "`"   #'+jg-bindings-goto-desktop
-       :desc "Agenda" "a"    #'+jg-bindings-goto-org-agenda-file
-       :desc "Github" "g"    #'+jg-bindings-goto-github
-       :desc "Messages" "m"  #'+jg-bindings-goto-messages
-       :desc "Mega" "M"      #'+jg-bindings-goto-mega
-       :desc "Home" "~"      #'+jg-bindings-goto-home
-       :desc "Resources" "r" #'+jg-bindings-goto-resources
-       :desc "Twitter" "t"   #'jg-browse-twitter)
       )
 )
 ;;; <leader> b --- buffer

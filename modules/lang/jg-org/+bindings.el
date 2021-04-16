@@ -5,6 +5,7 @@
        "i t"    #'org-time-stamp
        "j c"    #'org-goto-calendar
       ;; AGENDA
+      (:prefix ("a o" . "Org"))
       (:prefix ("a o a" . "Agenda")
         "/"   #'org-occur-in-agenda-files
         "f"   #'org-agenda-file-to-front
@@ -17,6 +18,9 @@
 (map! :map org-mode-map
       "C-c [" nil
       "C-c ]" nil
+      ;; (:prefix "z"
+      ;;  :desc "Narrow on Subtree" :n "RET" #'+jg-org-narrow-on-subtree
+      ;;  )
       )
 ;;; Personal
 (map! :map org-mode-map

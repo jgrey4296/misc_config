@@ -14,20 +14,16 @@
 (prefer-coding-system 'utf-8)
 
 (setq +doom-quit-messages nil
-      ;; auto-save-file-name-transforms (quote ((".*" "~/.emacs.d/autosaves/`" t)))
       backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/")))
-      display-buffer-alist '(("*shell*" display-buffer-same-window (nil)) (undo-tree-visualizer-buffer-name display-buffer-at-bottom (nil)))
       display-line-numbers-width 4
       evil-move-beyond-eol t
       evil-move-cursor-back nil
-      evil-snipe-override-mode nil
       evil-snipe-repeat-scope nil
       ispell-personal-dictionary (expand-file-name "~/.doom.d/setup_files/.ispell_english")
       line-move-ignore-invisible t
       overflow-newline-into-fringe t
       pyvenv-default-virtual-env-name "~/anaconda3/envs/"
       tab-always-indent t
-      tab-width 4
       which-key-idle-secondary-delay 0.05
       which-key-sort-order 'which-key-key-order-alpha
       custom-theme-load-path (cons "~/.doom.d/packages/jg-themes" custom-theme-load-path)
@@ -41,10 +37,6 @@
   (defun doom-highlight-non-default-indentation-h () )
   (setq whitespace-style '(face tabs spaces trailing lines space-before-tab newline indentation empty space-after-tab space-mark tab-mark newline-mark))
   )
-
-(smartparens-global-mode 0)
-;;(window-ring-minor-mode)
-;; (global-whitespace-mode)
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the

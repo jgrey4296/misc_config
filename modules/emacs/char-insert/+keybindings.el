@@ -14,6 +14,7 @@
       (:prefix ("N" . ""))
       (:prefix ("O" . ""))
       )
+
 (map! :map global-map
       :prefix "C-x 8"
         :ig "!" #'ignore
@@ -39,7 +40,7 @@
         :ig "{" #'ignore
         :ig "|" #'ignore
         :ig "}" #'ignore
-      )
+        )
 ;; Acute
 (map! :map global-map
       :prefix ("C-x 8 '" . "Acute")

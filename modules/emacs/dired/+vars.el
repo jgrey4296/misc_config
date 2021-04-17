@@ -33,6 +33,7 @@
                                "__init__.py"
                                "__pycache__"
                                ".."
+                               (and "log" ?. (*? anychar))
                                (and "flycheck"
                                     (*? anychar)
                                     ".py")

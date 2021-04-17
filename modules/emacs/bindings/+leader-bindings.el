@@ -585,6 +585,7 @@
        :prefix ("y" . "snippets")
        :desc "Expand Snippet"        "y" #'yas-expand
        :desc "New snippet"           "n" #'yas-new-snippet
+       :desc "Edit Snippet"          "N" #'yas-visit-snippet-file
        :desc "Insert snippet"        "i" #'yas-insert-snippet
        :desc "Find global snippet"   "/" #'yas-visit-snippet-file
        :desc "Reload snippets"       "r" #'yas-reload-all

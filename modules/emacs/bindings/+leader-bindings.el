@@ -15,7 +15,7 @@
 
       ;; C-u is used by evil
       :desc "Universal argument"    "u"   #'universal-argument
-      :desc "Open Url"              "U"   #'jg-browse-url
+      :desc "Open Url"              "?"   #'jg-browse-url
 
       :desc "help"                  "h"    help-map
 

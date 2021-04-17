@@ -1,22 +1,9 @@
 # -*- mode: snippet -*-
 # name: typing
-# key: typing                                      
+# key: typing
+# uuid: typing
 # --
-# https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html
 from typing import List, Set, Dict, Tuple, Optional, Any
 from typing import Callable, Iterator, Union, Match
 from typing import Mapping, MutableMapping, Sequence, Iterable
 from typing import cast, ClassVar, TypeVar, Generic
-# x : bool = True
-# x : int = cast(int, x)
-# xs : List[int] = [2,3]
-
-# def a_func(x: int, y: int = 3.5) -> Optional[int]
-
-# fun_var : Callable[[int,int], Optional[int]] = f
-
-# Forward References:
-# x : (foo : 'A')
-
-# Generics:
-# class Stack(Generic[Typevar('T')])

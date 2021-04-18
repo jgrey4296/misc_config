@@ -25,7 +25,7 @@
       "D"          #'evil-close-folds
       "N"          nil ;; #'doom/widen-indirectly-narrowed-buffer
       "O"          nil
-      "RET"        #'jg-narrow-around-point
+      "RET"        #'+jg-narrow-around-point
       "X"          nil ;; #'kill-current-buffer
       "a"          #'evil-toggle-fold
       "c"          nil
@@ -98,8 +98,8 @@
       "TAB" nil
       "TAB" #'indent-for-tab-command
       "\\" nil
-      "] RET" #'jg-narrowing-move-focus-forward
-      "[ RET" #'jg-narrowing-move-focus-backward
+      "] RET" #'+jg-narrowing-move-focus-forward
+      "[ RET" #'+jg-narrowing-move-focus-backward
       "g b" #'avy-pop-mark
       "g >" #'evil-goto-column
 )

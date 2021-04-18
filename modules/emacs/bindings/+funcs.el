@@ -30,6 +30,35 @@
   (interactive)
   (find-file "~/mega")
   )
+
+(defun +jg-browse-url()
+  (interactive)
+  (let ((url (cond ((eq evil-state 'visual)
+                    (buffer-substring-no-properties evil-visual-beginning evil-visual-end))
+                   (t
+                    (read-string "Search For: "))
+                   ))
+        )
+    (cond ((f-exists? url)
+           (shell-command (format "open %s" url)))
+          ((s-prefix? "@" url)
+           (browse-url (format "https://twitter.com/%s" url)))
+          ((s-prefix? "http" url)
+           (browse-url url))
+          ((s-prefix? "www." url)
+           (browse-url (format "https://%s" url)))
+          ((string-match "\\.com\\|\\.uk" url)
+           (browse-url (format "https://%s" url)))
+          (t
+           (message "Browsing for: %s" (format jg-google-url url))
+           (browse-url (format jg-google-url url)))
+          )
+    )
+  )
+(defun +jg-browse-twitter ()
+  (interactive)
+  (browse-url jg-twitter-url)
+  )
 (defun +jg-bindings-open-link ()
   (interactive)
   (cond ((eq evil-state 'visual)
@@ -64,7 +93,6 @@
     (evil-beginning-of-line)
     )
   )
-
 (defun +jg-bindings-clear-buffer ()
   """ Utility to clear a buffer
     from https://stackoverflow.com/questions/24565068/ """
@@ -83,7 +111,6 @@
   (insert ")")
   )
 
-
 (defun +jg-ibuffer-filter-setup ()
   (interactive)
   (ibuffer-clear-filter-groups)
@@ -93,9 +120,48 @@
   (ibuffer-projectile-set-filter-groups)
   (ibuffer-add-saved-filters "default")
   )
+(defun +jg-toggle-line-numbers ()
+  (interactive)
+  (setq display-line-numbers (if (not (eq display-line-numbers t)) t nil))
+  )
+(defun +jg-toggle-line-numbers-visual ()
+  (interactive)
+  (setq display-line-numbers (if (not (eq display-line-numbers 'visual)) 'visual nil))
+  )
+(defun +jg-toggle-window-dedication ()
+  (interactive)
+  (let ((curr-window (selected-window)))
+    (set-window-dedicated-p curr-window
+                            (not (window-dedicated-p curr-window)))
+    (if (window-dedicated-p curr-window)
+        (message "Window is now dedicated to %s" (window-buffer curr-window))
+      (message "Window is not dedicated"))
+    )
+  )
+(defun +jg-toggle-line-move-ignore-invisible ()
+  (interactive)
+  (setq line-move-ignore-invisible (not line-move-ignore-invisible))
+  (message "Ignore invisible lines: %s" line-move-ignore-invisible)
+  )
 
-;;;###autoload
-(defun jg-toggle-narrow-buffer (arg)
+(defun +jg-narrow-around-point ()
+  (interactive)
+  (cond (current-prefix-arg
+         (narrow-to-region (line-beginning-position)
+                           (point-max)))
+        ((eq evil-state 'visual)
+         (narrow-to-region evil-visual-beginning evil-visual-end))
+        ((not (buffer-narrowed-p))
+         (let ((num (read-number "Lines Around Point to Select: ")))
+           (narrow-to-region (line-beginning-position (- num))
+                             (line-end-position num))
+           )
+         )
+        (t
+         (widen))
+        )
+  )
+(defun +jg-toggle-narrow-buffer (arg)
   "Narrow the buffer to BEG END. If narrowed, widen it.
 If region isn't active, narrow away anything above point
 "
@@ -106,55 +172,11 @@ If region isn't active, narrow away anything above point
          (narrow-to-region evil-visual-beginning evil-visual-end))
         )
   )
-;; From spacemacs-defaults
-;; from @bmag
-(defun spacemacs/window-layout-toggle ()
-  "Toggle between horizontal and vertical layout of two windows."
-  (interactive)
-  (if (= (count-windows) 2)
-      (let* ((window-tree (car (window-tree)))
-             (current-split-vertical-p (car window-tree))
-             (first-window (nth 2 window-tree))
-             (second-window (nth 3 window-tree))
-             (second-window-state (window-state-get second-window))
-             (splitter (if current-split-vertical-p
-                           #'split-window-horizontally
-                         #'split-window-vertically)))
-        (delete-other-windows first-window)
-        ;; `window-state-put' also re-selects the window if needed, so we don't
-        ;; need to call `select-window'
-        (window-state-put second-window-state (funcall splitter)))
-    (error "Can't toggle window layout when the number of windows isn't two.")))
-
-;; originally from magnars and modified by ffevotte for dedicated windows
-;; support, it has quite diverged by now
-(defun spacemacs/rotate-windows-forward (count)
-  "Rotate each window forwards.
-A negative prefix argument rotates each window backwards.
-Dedicated (locked) windows are left untouched."
-  (interactive "p")
-  (let* ((non-dedicated-windows (cl-remove-if 'window-dedicated-p (window-list)))
-         (states (mapcar #'window-state-get non-dedicated-windows))
-         (num-windows (length non-dedicated-windows))
-         (step (+ num-windows count)))
-    (if (< num-windows 2)
-        (error "You can't rotate a single window!")
-      (dotimes (i num-windows)
-        (window-state-put
-         (elt states i)
-         (elt non-dedicated-windows (% (+ step i) num-windows)))))))
-
-(defun spacemacs/rotate-windows-backward (count)
-  "Rotate each window backwards.
-Dedicated (locked) windows are left untouched."
-  (interactive "p")
-  (spacemacs/rotate-windows-forward (* -1 count)))
-
-(defun jg-narrowing-move-focus-backward (arg)
+(defun +jg-narrowing-move-focus-backward (arg)
   (interactive "p")
   (jg-narrowing-move-focus-forward(- arg))
   )
-(defun jg-narrowing-move-focus-forward (arg)
+(defun +jg-narrowing-move-focus-forward (arg)
   (interactive "p")
   (widen)
   (evil-forward-section-begin arg)
@@ -164,7 +186,7 @@ Dedicated (locked) windows are left untouched."
   )
 
 (when (featurep! :ui workspaces)
-  (defun jg-counsel-workspace ()
+  (defun +jg-counsel-workspace ()
     "Forward to `' or `workspace-set' if workspace doesn't exist."
     (interactive)
     (require 'bookmark)
@@ -182,74 +204,3 @@ Dedicated (locked) windows are left untouched."
     )
   )
 
-(defun +jg-toggle-line-numbers ()
-  (interactive)
-  (setq display-line-numbers (if (not (eq display-line-numbers t)) t nil))
-  )
-
-(defun +jg-toggle-line-numbers-visual ()
-  (interactive)
-  (setq display-line-numbers (if (not (eq display-line-numbers 'visual)) 'visual nil))
-  )
-
-(defun jg-browse-url()
-  (interactive)
-  (let ((url (cond ((eq evil-state 'visual)
-                    (buffer-substring-no-properties evil-visual-beginning evil-visual-end))
-                   (t
-                    (read-string "Search For: "))
-                   ))
-        )
-    (cond ((f-exists? url)
-           (shell-command (format "open %s" url)))
-          ((s-prefix? "http" url)
-           (browse-url url))
-          ((s-prefix? "www." url)
-           (browse-url (format "https://%s" url)))
-          ((string-match "\\.com\\|\\.uk" url)
-           (browse-url (format "https://%s" url)))
-          (t
-           (message "Browsing for: %s" (format jg-google-url url))
-           (browse-url (format jg-google-url url)))
-          )
-    )
-  )
-(defun jg-browse-twitter ()
-  (interactive)
-  (browse-url jg-twitter-url)
-  )
-
-(defun jg-narrow-around-point ()
-  (interactive)
-  (cond (current-prefix-arg
-         (narrow-to-region (line-beginning-position)
-                           (point-max)))
-        ((eq evil-state 'visual)
-         (narrow-to-region evil-visual-beginning evil-visual-end))
-        ((not (buffer-narrowed-p))
-         (let ((num (read-number "Lines Around Point to Select: ")))
-           (narrow-to-region (line-beginning-position (- num))
-                             (line-end-position num))
-           )
-         )
-        (t
-         (widen))
-        )
-  )
-
-(defun +jg-toggle-window-dedication ()
-  (interactive)
-  (let ((curr-window (selected-window)))
-    (set-window-dedicated-p curr-window
-                            (not (window-dedicated-p curr-window)))
-    (if (window-dedicated-p curr-window)
-        (message "Window is now dedicated to %s" (window-buffer curr-window))
-      (message "Window is not dedicated"))
-    )
-  )
-
-(defun +jg-toggle-line-move-ignore-invisible ()
-  (interactive)
-  (setq line-move-ignore-invisible (not line-move-ignore-invisible))
-  (message "Ignore invisible lines: %s" line-move-ignore-invisible)
-  )

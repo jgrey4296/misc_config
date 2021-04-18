@@ -15,7 +15,7 @@
 
       ;; C-u is used by evil
       :desc "Universal argument"    "u"   #'universal-argument
-      :desc "Open Url"              "?"   #'jg-browse-url
+      :desc "Open Url"              "?"   #'+jg-browse-url
 
       :desc "help"                  "h"    help-map
 
@@ -45,7 +45,7 @@
       :desc "Resources" "5" #'+jg-bindings-goto-resources
 
       :desc "Agenda"    "7" #'+jg-bindings-goto-org-agenda-file
-      :desc "Twitter"   "8" #'jg-browse-twitter
+      :desc "Twitter"   "8" #'+jg-browse-twitter
       ;; :desc "Mail"      "9" #'mu4e
       :desc "Messages"  "0" #'+jg-bindings-goto-messages
       )
@@ -75,7 +75,7 @@
       :desc "Switch to last buffer"       "l" #'evil-switch-to-windows-last-buffer
       :desc "Pop up scratch buffer"       "x" #'doom/open-scratch-buffer
       :desc "Switch to scratch buffer"    "X" #'doom/switch-to-scratch-buffer
-      :desc "Toggle narrowing"            "-" #'jg-toggle-narrow-buffer
+      :desc "Toggle narrowing"            "-" #'+jg-toggle-narrow-buffer
       :desc "Clone Indirect"              "i" #'clone-indirect-buffer-other-window
 
       (:when (featurep! :ui workspaces)
@@ -214,7 +214,7 @@
       :desc "Find implementations"                  "i" #'+lookup/implementations
       :desc "Jump to documentation"                 "k" #'+lookup/documentation
       :desc "Find type definition"                  "t" #'+lookup/type-definition
-      :desc "Browse URL"                            "u" #'jg-browse-url
+      :desc "Browse URL"                            "u" #'+jg-browse-url
       (:prefix ("b" . "Bookmark")
        :desc "Set bookmark"                "m"           #'bookmark-set
        :desc "Delete bookmark"             "M"           #'bookmark-delete
@@ -437,7 +437,7 @@
       :desc "Jump to mark"                 "m" #'evil-show-marks
       :desc "Jump to symbol"               "i" #'imenu
       :desc "Jump to visible link"         "l" #'link-hint-open-link
-      :desc "Google"                       "g" #'jg-browse-url
+      :desc "Google"                       "g" #'+jg-browse-url
       :desc "Locate file"                  "f" #'+lookup/file
       :desc "Locate file"                  "f" #'locate
       :desc "Look up in all docsets"       "K" #'+lookup/in-all-docsets
@@ -515,7 +515,7 @@
 (map! :leader
       :when (featurep! :ui workspaces)
       :prefix ("W" . "Workspaces")
-      :desc "Workspace Counsel" "RET"            #'jg-counsel-workspace
+      :desc "Workspace Counsel" "RET"            #'+jg-counsel-workspace
       ;; Lowercase - workspace, Uppercase - session
       :desc "Display tab bar"              "TAB" #'+workspace/display
       :desc "Next workspace"               "]"   #'+workspace/switch-right

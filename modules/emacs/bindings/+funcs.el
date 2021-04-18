@@ -185,6 +185,11 @@ If region isn't active, narrow away anything above point
     )
   )
 
+(defun +jg-list-processes ()
+  (interactive)
+  (list-processes)
+  )
+
 (when (featurep! :ui workspaces)
   (defun +jg-counsel-workspace ()
     "Forward to `' or `workspace-set' if workspace doesn't exist."

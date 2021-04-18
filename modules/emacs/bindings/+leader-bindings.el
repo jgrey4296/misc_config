@@ -381,6 +381,12 @@
       (:prefix ("4" . "in other window"))
       (:prefix ("5" . "in other frame"))
       )
+;;; <leader> P -- processes
+(map! :leader
+      :prefix ("P" . "Processes")
+      :desc "List-Processes" "l" #'+jg-list-processes
+      :desc "Helm Processes" "h" #'helm-list-emacs-process
+      )
 ;;; <leader> q --- quit/restart
 (map! :leader
       :prefix ("q" . "quit/restart")
@@ -511,7 +517,7 @@
        ;; camel-case-motion
        ;; fill-column indicator
       )
-
+;;; <leader> W --- Workspaces
 (map! :leader
       :when (featurep! :ui workspaces)
       :prefix ("W" . "Workspaces")
@@ -538,7 +544,7 @@
       :desc "Save session"                  "S"  #'doom/save-session
       :desc "Undo window config"            "u"  #'winner-undo
       )
-;;; <leader> W --- workspaces
+;;; <leader> w --- Windows
 (map! :leader
       :prefix ("w" . "Windows")
       :desc "Toggle Dedicated" "DEL"                #'+jg-toggle-window-dedication

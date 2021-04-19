@@ -122,3 +122,33 @@ uses org-babel-edit-distance "
       )
     )
   )
+
+
+(defun +jg-text-escalate-replace ()
+  " Replace a regex in the region,
+with either a numeric or alphabetical escalation "
+  (interactive)
+  (let* ((start (if (evil-visual-state-p) evil-visual-beginning (point-min)))
+         (end (set-marker (make-marker) (if (evil-visual-state-p) evil-visual-end (point-max))))
+         (reg (read-string "Regexp: " "^.*?\\( \\)"))
+         (base (read-string "Replacement Base: "))
+         (type (car (read-multiple-choice "Increment Digit or Char? "
+                                          '((?d "Digit")
+                                            (?c "Char")))))
+         (current (if (eq ?d type) 0 ?a))
+        )
+
+    (save-excursion
+      (goto-char start)
+      (while (re-search-forward reg end t)
+        (replace-match (format "%s_%s" base (if (eq ?c type) (char-to-string current) current))
+                       t
+                       nil
+                       nil
+                       1)
+        (incf current)
+        (if (and (eq type ?c) (> current ?z)) (setq current ?a))
+        )
+      )
+    )
+  )

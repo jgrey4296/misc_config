@@ -8,6 +8,7 @@
 (map! :n "g '" 'evil-operator-string-inflection)
 (map! :leader
       :prefix "x"
+      :desc "Escalate Regexp" "!" #'+jg-text-escalate-replace
       (:prefix ("c" . "Char")
        :desc "Zap" "z" #'zap-up-to-char
        )

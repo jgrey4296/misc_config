@@ -174,7 +174,7 @@ If region isn't active, narrow away anything above point
   )
 (defun +jg-narrowing-move-focus-backward (arg)
   (interactive "p")
-  (jg-narrowing-move-focus-forward(- arg))
+  (+jg-narrowing-move-focus-forward(- arg))
   )
 (defun +jg-narrowing-move-focus-forward (arg)
   (interactive "p")

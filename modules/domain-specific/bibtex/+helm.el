@@ -141,32 +141,33 @@ governed by the variable `bibtex-completion-display-formats'."
   )
 
 ;; Actual Helm
-(defun +jg-bibtex-helm-bibtex (&optional arg local-bib input)
+(defun +jg-bibtex-helm-bibtex (&optional arg local-bib)
   " Custom implementation of helm-bibtex"
   (interactive "P")
   (when arg
     (message "REBUILDING BIBTEX DATA")
     (+jg-bibtex-build-list)
     (bibtex-completion-clear-cache))
-  (let* ((bibtex-completion-additional-search-fields '("tags" "year"))
-         (candidates (if (or arg (null jg-bibtex-helm-candidates))
-                         (progn (message "Generating Candidates")
-                                (bibtex-completion-init)
-                                (setq jg-bibtex-helm-candidates
-                                      (mapcar '+jg-bibtex-process-candidates (bibtex-completion-candidates)))
-                                jg-bibtex-helm-candidates)
-                       jg-bibtex-helm-candidates
-                       ))
-         )
-    (helm-set-local-variable
-     'helm-candidate-number-limit 5000
-     )
+  (when (null jg-bibtex-helm-candidates)
+    (progn (message "Generating Candidates")
+           (bibtex-completion-init)
+           (setq jg-bibtex-helm-candidates
+                 (mapcar '+jg-bibtex-process-candidates (bibtex-completion-candidates)))
+
+      )
+    )
+  (helm-set-local-variable 'helm-candidate-number-limit 5000)
+
+  (let ((bibtex-completion-additional-search-fields '("tags" "year"))
+        (input (if (evil-visual-state-p) (buffer-substring-no-properties evil-visual-beginning evil-visual-end) ""))
+        )
+
     (helm :sources `(,jg-bibtex-helm-source-bibtex)
           :full-frame helm-bibtex-full-frame
           :buffer "*helm bibtex*"
           :input input
           :bibtex-local-bib local-bib
-          :bibtex-candidates candidates
+          :bibtex-candidates jg-bibtex-helm-candidates
           )))
 
 (after! helm-bibtex

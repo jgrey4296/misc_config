@@ -1,8 +1,12 @@
 
 (load! "+funcs")
 (load! "+vars")
+(load! "+popup")
 (after! evil
   (load! "+bindings")
+  )
+(after! ivy
+  (load! "+ivy_actions")
   )
 
 (after! erlang

@@ -8,7 +8,7 @@
   )
 (defun +jg-bindings-goto-messages ()
   (interactive)
-  (switch-to-buffer "*Messages*")
+  (+jg-misc-ivy-open-as-popup "*Messages*")
   )
 (defun +jg-bindings-goto-home ()
   (interactive)

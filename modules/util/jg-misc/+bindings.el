@@ -12,6 +12,9 @@
        )
       )
 
+(map! :map messages-buffer-mode-map
+      :n "q" #'+popup/close
+      )
 
 (map! :map help-map
        "DEL" #'free-keys

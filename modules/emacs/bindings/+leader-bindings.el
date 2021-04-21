@@ -23,8 +23,8 @@
       ;; TODO pop shell
 
       (:when (featurep! :ui workspaces)
-       :desc "Switch workspace buffer" "," #'persp-switch-to-buffer
-       :desc "Switch buffer"           "<" #'switch-to-buffer)
+       :desc "Switch workspace buffer" "," #'switch-to-buffer)
+
 
       :desc "Switch to last buffer" "TAB"    #'evil-switch-to-windows-last-buffer
       ;; :desc "Resume last search"    "'"
@@ -34,7 +34,9 @@
       :desc "Jump to bookmark"      "RET"  #'bookmark-jump
 
       (:when (featurep! :ui popup)
-       :desc "Toggle last popup"     "~"    #'+popup/toggle)
+       :desc "Toggle last popup"     "~"    #'+popup/toggle
+       :desc  "Popup Buffer"         "<"   #'+jg-misc-ivy-popup-buffer
+       )
 
       (:prefix ("!" . "checkers"))      ; bound by flycheck
 

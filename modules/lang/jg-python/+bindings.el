@@ -36,6 +36,7 @@
        )
       ;; -----------
       :localleader
+      (:prefix ("g" . "Goto"))
       (:prefix ("i" . "imports")
        :desc "Insert missing imports" "i" #'pyimport-insert-missing
        :desc "Remove unused imports"  "r" #'pyimport-remove-unused
@@ -50,14 +51,9 @@
        :desc "Test repeat"     "r" #'python-pytest-repeat
        :desc "Test Popup"      "p" #'python-pytest-popup)
       (:prefix ("e" . "Environment")
-       :desc "activate"    "a" #'pipenv-activate
-       :desc "deactivate"  "d" #'pipenv-deactivate
-       :desc "install"     "i" #'pipenv-install
-       :desc "lock"        "l" #'pipenv-lock
-       :desc "open module" "o" #'pipenv-open
-       :desc "run"         "r" #'pipenv-run
-       :desc "shell"       "s" #'pipenv-shell
-       :desc "uninstall"   "u" #'pipenv-uninstall)
+       :desc "activate"    "a" #'pyvenv-activate
+       :desc "deactivate"  "d" #'pyvenv-deactivate
+       :desc "open module" "o" #'pipenv-open)
       )
 
 (map! :localleader

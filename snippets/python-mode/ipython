@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: ipython
-# key: ipython
-# group: debugging
-# --
-import IPython
-#https://ipython.readthedocs.io/en/stable/config/options/terminal.html
-#IPython.embed(simple_prompt=True)
-#in shell: ipython --simple-prompty --matplotlib

@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: importlib
-# key: importlib
+# name: import.lib
+# key: import.lib
 # --
 import importlib
 

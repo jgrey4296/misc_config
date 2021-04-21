@@ -3,8 +3,6 @@
 # key: argparse
 # group: arguments
 # --
-import argparse
-
 #see https://docs.python.org/3/howto/argparse.html
 parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter,
                                  epilog = "\n".join(["$1"]))

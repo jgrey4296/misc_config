@@ -10,6 +10,7 @@
 # https://docs.python.org/3/library/re.html
 # https://docs.python.org/3/library/weakref.html
 # https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html
+
 from copy import deepcopy
 from dataclasses import dataclass, field, InitVar, replace
 from fractions import Fraction
@@ -20,5 +21,5 @@ from typing import Mapping, MutableMapping, Sequence, Iterable
 from typing import cast, ClassVar, TypeVar, Generic
 from uuid import uuid1, UUID
 from weakref import ref
-import logging as root_logger
 import abc
+import logging as root_logger

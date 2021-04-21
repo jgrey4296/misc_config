@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: sipython
-# key: sipython
-# group: debugging
-# --
-IPython.embed(simple_prompt=True)

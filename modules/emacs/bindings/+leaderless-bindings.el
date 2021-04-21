@@ -174,7 +174,7 @@
       "o" nil
       "s" nil
       "X" nil
-      :desc "Narrow" "RET" #'jg-narrow-around-point
+      :desc "Narrow" "RET" #'+jg-narrow-around-point
       :desc "Widen"  "DEL" #'widen
       )
 ;;

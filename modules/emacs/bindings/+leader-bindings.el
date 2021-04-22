@@ -2,7 +2,7 @@
 ;;
 (map! :leader
       :desc "help"                  "h" help-map
-      :desc "Flycheck"              "!" flycheck-command-map
+      ;;:desc "Flycheck"              "!" flycheck-command-map
 
       :desc "Goto-line"             "SPC" #'evil-avy-goto-line
       :desc "Ibuffer"               "DEL" #'ibuffer
@@ -81,7 +81,7 @@
       :desc "Recompile"                             "C"   #'recompile
       :desc "Send to repl"                          "s"   #'+eval/send-region-to-repl
       (:when (featurep! :checkers syntax)
-       :desc "Flycheck"                            "!"   flycheck-command-map
+       ;;:desc "Flycheck"                            "!"   flycheck-command-map
        :desc "List errors"                         "x"   #'flycheck-list-errors)
       (:when (and (featurep! :tools lsp) (not (featurep! :tools lsp +eglot)))
        :desc "LSP Code actions"                      "a"   #'lsp-execute-code-action

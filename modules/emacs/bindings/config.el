@@ -71,3 +71,11 @@
 (after! ibuffer
   (add-hook 'ibuffer-mode-hook #'+jg-ibuffer-filter-setup)
   )
+
+(after! flycheck
+  (map! :leader
+        :desc "Flycheck" "!" flycheck-command-map
+        :prefix "c"
+        :desc "Flycheck" "!" flycheck-command-map
+        )
+  )

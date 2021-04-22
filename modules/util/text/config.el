@@ -6,7 +6,9 @@
   :defer t
   :commands evil-operator-string-inflection
   )
-
+(use-package! lorem-ipsum
+  :commands (lorem-ipsum-insert-sentences lorem-ipsum-insert-paragraphs lorem-ipsum-insert-list)
+)
 (load! "+vars")
 (load! "+funcs")
 (load! "+barchart")

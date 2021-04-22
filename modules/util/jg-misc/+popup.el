@@ -8,12 +8,11 @@
 
   (remove-hook '+popup-buffer-mode-hook #'+popup-set-modeline-on-enable-h)
   (set-popup-rules!
-    '(("^\\*shell"   :select t      :side bottom :ttl nil :height 0.3 :quit t)
-      ("^\\*Message" :select nil    :side left :ttl nil :width  0.4 :quit t)
-      ("^\\*scratch" :select t      :side right :ttl nil :width  50  :quit t)
-      ("^\\*compilation" :select nil :side right :ttl 5 :width 0.4 :quit t)
+    '(("^\\*shell"       :side bottom :ttl nil :height 0.3 :quit t :select t)
+      ("\\*.*?scratch.*?\\*" :side right  :ttl nil :width  50  :quit t :select t)
+      ("^\\*Messages"    :side left   :ttl nil :width  0.4 :quit t :select nil)
+      ("^\\*compilation" :side right  :ttl 5   :width  0.4 :quit t :select nil)
       )
-
     (when (featurep! +all)
       '(("^\\*"  :slot 1 :vslot -1 :select t)
         ("^ \\*" :slot 1 :vslot -1 :size +popup-shrink-to-fit)))
@@ -46,6 +45,9 @@
       ("^\\*\\(?:Proced\\|timer-list\\|Abbrevs\\|Output\\|Occur\\|unsent mail\\)\\*" :ignore t))
     )
   )
+
+
+
 ;;(set-popup-rule! PREDICATE &key
 ;; IGNORE ACTIONS SIDE SIZE WIDTH HEIGHT SLOT
 ;; VSLOT TTL QUIT SELECT MODELINE AUTOSAVE PARAMETERS)

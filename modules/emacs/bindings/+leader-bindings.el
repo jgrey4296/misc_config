@@ -45,7 +45,7 @@
       :desc "Mega"      "3" #'+jg-bindings-goto-mega
       :desc "Home"      "4" #'+jg-bindings-goto-home
       :desc "Resources" "5" #'+jg-bindings-goto-resources
-
+      :desc "SCRATCH"   "6" #'+jg-bindings-goto-scratch
       :desc "Agenda"    "7" #'+jg-bindings-goto-org-agenda-file
       :desc "Twitter"   "8" #'+jg-browse-twitter
       ;; :desc "Mail"      "9" #'mu4e
@@ -68,7 +68,6 @@
       :desc "Kill other buffers"          "O" #'doom/kill-other-buffers
       :desc "New empty buffer"            "N" #'evil-buffer-new
       :desc "Next buffer"                 "]" #'next-buffer
-      :desc "Pop up scratch buffer"       "x" #'doom/open-scratch-buffer
       :desc "Previous buffer"             "[" #'previous-buffer
       :desc "Read-only mode"              "r" #'read-only-mode
       :desc "Revert buffer"               "R" #'revert-buffer
@@ -76,7 +75,6 @@
       :desc "Save buffer"                 "s" #'basic-save-buffer
       :desc "Switch to last buffer"       "l" #'evil-switch-to-windows-last-buffer
       :desc "Pop up scratch buffer"       "x" #'doom/open-scratch-buffer
-      :desc "Switch to scratch buffer"    "X" #'doom/switch-to-scratch-buffer
       :desc "Toggle narrowing"            "-" #'+jg-toggle-narrow-buffer
       :desc "Clone Indirect"              "i" #'clone-indirect-buffer-other-window
 
@@ -132,14 +130,12 @@
       :desc "Find file"                   "f"   #'find-file
       :desc "Locate file"                 "l"   #'locate
       :desc "Open project editorconfig"   "c"   #'editorconfig-find-current-editorconfig
-      :desc "Open scratch buffer"         "x"   #'doom/open-scratch-buffer
       :desc "Recent files"                "r"   #'recentf-open-files
       :desc "Recent project files"        "R"   #'projectile-recentf
       :desc "Rename/move file"            "M"   #'doom/move-this-file
       :desc "Save file as..."             "S"   #'write-file
       :desc "Save file"                   "s"   #'save-buffer
       :desc "Sudo find file"              "U"   #'doom/sudo-find-file
-      :desc "Switch to scratch buffer"    "X"   #'doom/switch-to-scratch-buffer
       :desc "Yank filename"               "n"   #'+default/yank-buffer-filename
       )
 ;;; <leader> g --- git
@@ -361,8 +357,8 @@
       :desc "Find recent project files"    "r"  #'projectile-recentf
       :desc "Invalidate project cache"     "I"  #'projectile-invalidate-cache
       :desc "Kill project buffers"         "K"  #'projectile-kill-buffers
-      :desc "List project todos"          "t"   #'magit-todos-list
-      :desc "Open project scratch buffer" "x"   #'doom/open-project-scratch-buffer
+      :desc "List project todos"           "t"  #'magit-todos-list
+      :desc "Open project scratch buffer"  "x"  #'+jg-misc-open-project-scratch-buffer
       :desc "Remove known project"         "D"  #'projectile-remove-known-project
       :desc "Repeat last command"          "C"  #'projectile-repeat-last-command
       :desc "Run cmd in project root"      "!"  #'projectile-run-shell-command-in-root
@@ -372,7 +368,6 @@
       :desc "Search project"                "s" #'+default/search-project
       :desc "Switch project"               "p"  #'projectile-switch-project
       :desc "Switch to project buffer"     "b"  #'projectile-switch-to-buffer
-      :desc "Switch to scratch buffer"     "X"  #'doom/switch-to-project-scratch-buffer
       :desc "Test project"                 "T"  #'projectile-test-project
 
       (:when (and (featurep! :tools taskrunner)

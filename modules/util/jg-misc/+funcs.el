@@ -49,3 +49,21 @@ Dedicated (locked) windows are left untouched."
     (error "Can't toggle window layout when the number of windows isn't two.")))
 
 
+(defun +jg-misc-open-scratch-buffer (&optional arg)
+  "Customised doom/open-project-scratch-buffer because it doesn't use pop-to-buffer "
+  (interactive "P")
+  (let (projectile-enable-caching)
+    (funcall #'pop-to-buffer
+     (doom-scratch-buffer
+      arg
+      (cond ((eq doom-scratch-initial-major-mode t)
+             (unless (or buffer-read-only
+                         (derived-mode-p 'special-mode)
+                         (string-match-p "^ ?\\*" (buffer-name)))
+               major-mode))
+            ((null doom-scratch-initial-major-mode)
+             nil)
+            ((symbolp doom-scratch-initial-major-mode)
+             doom-scratch-initial-major-mode))
+      default-directory
+        (doom-project-name)))))

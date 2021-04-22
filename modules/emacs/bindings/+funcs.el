@@ -194,8 +194,7 @@ If region isn't active, narrow away anything above point
   (list-processes)
   )
 
-(when (featurep! :ui workspaces)
-  (defun +jg-counsel-workspace ()
+(defun +jg-counsel-workspace ()
     "Forward to `' or `workspace-set' if workspace doesn't exist."
     (interactive)
     (require 'bookmark)
@@ -211,5 +210,21 @@ If region isn't active, narrow away anything above point
                                (+workspace-switch x t))))
               :caller 'counsel-workspace)
     )
-  )
 
+(defun +jg-binding-keymap-update-descs (the-map)
+  " Update which-key descriptions for a keymap "
+  (let* ((triples (which-key--get-bindings nil the-map))
+         (pairs (mapcar #'+jg-binding-process-triples triples))
+        )
+    (apply #'which-key-add-keymap-based-replacements the-map
+           (flatten-list pairs))
+    )
+  )
+(defun +jg-binding-process-triples (triple)
+  " Convert which-key--get-bindings to a format
+correct for which-key-add-keymap-based-replacements "
+  (mapcar #'substring-no-properties
+          (list (car triple) (caddr triple))))
+(defun +jg-binding-keymap-update-plural (&rest the-maps)
+  (mapcar #'+jg-binding-keymap-update-descs the-maps)
+  )

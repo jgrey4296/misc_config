@@ -10,7 +10,9 @@
   (set-popup-rules!
     '(("^\\*shell"   :select t      :side bottom :ttl nil :height 0.3 :quit t)
       ("^\\*Message" :select nil    :side left :ttl nil :width  0.4 :quit t)
-      ("^\\*scratch" :select t      :side right :ttl nil :width  50  :quit t))
+      ("^\\*scratch" :select t      :side right :ttl nil :width  50  :quit t)
+      ("^\\*compilation" :select nil :side right :ttl 5 :width 0.4 :quit t)
+      )
 
     (when (featurep! +all)
       '(("^\\*"  :slot 1 :vslot -1 :select t)

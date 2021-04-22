@@ -8,6 +8,7 @@
                 python-shell-virtualenv-root "~/anaconda3"
                 python-shell--interpreter nil
                 python-shell--interpreter-args nil
+                flycheck--automatically-enabled-checkers '(python-pylint)
                 )
   (modify-syntax-entry ?_ "w" python-mode-syntax-table)
 )

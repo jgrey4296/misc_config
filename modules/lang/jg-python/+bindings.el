@@ -52,8 +52,7 @@
        :desc "Test Popup"      "p" #'python-pytest-popup)
       (:prefix ("e" . "Environment")
        :desc "activate"    "a" #'pyvenv-activate
-       :desc "deactivate"  "d" #'pyvenv-deactivate
-       :desc "open module" "o" #'pipenv-open)
+       :desc "deactivate"  "d" #'pyvenv-deactivate)
       )
 
 (map! :localleader

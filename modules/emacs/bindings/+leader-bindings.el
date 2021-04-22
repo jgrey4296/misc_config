@@ -484,6 +484,7 @@
         :desc "Soft line wrapping"           "w" #'visual-line-mode
         :desc "Fill Column Indicator"        "f" #'display-fill-column-indicator-mode
         :desc "Ignore Invisible"             "i" #'+jg-toggle-line-move-ignore-invisible
+        :desc "Highlight Parens"             "p" #'global-highlight-parentheses-mode
         (:when (featurep! :editor word-wrap)
          :desc "Soft line wrapping"         "w"  #'+word-wrap-mode)
         :desc "Word-wrap mode"               "W" #'+word-wrap-mode
@@ -510,7 +511,8 @@
        ;; auto-completion
        ;; camel-case-motion
        ;; fill-column indicator
-      )
+       )
+
 ;;; <leader> W --- Workspaces
 (map! :leader
       :when (featurep! :ui workspaces)

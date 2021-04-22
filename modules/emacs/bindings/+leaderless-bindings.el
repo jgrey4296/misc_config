@@ -38,6 +38,12 @@
       :n "] g" #'git-timemachine-show-next-revision
       )
 
+;; Snipe
+(map! :map evil-snipe-mode-map
+      :nm "S" nil
+      :nm "s" nil
+      )
+
 ;; Mouse Deactivation
 (define-key evil-motion-state-map [down-mouse-1] #'ignore)
 (define-key evil-motion-state-map [mouse-1] #'ignore)

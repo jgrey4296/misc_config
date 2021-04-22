@@ -96,12 +96,17 @@
 
 (map! :map evil-motion-state-map
       "TAB" nil
-      "TAB" #'indent-for-tab-command
-      "\\" nil
-      "] RET" #'+jg-narrowing-move-focus-forward
-      "[ RET" #'+jg-narrowing-move-focus-backward
-      "g b" #'avy-pop-mark
-      "g >" #'evil-goto-column
+      "TAB"     #'indent-for-tab-command
+      "\\"  nil
+      "] RET"   #'+jg-narrowing-move-focus-forward
+      "[ RET"   #'+jg-narrowing-move-focus-backward
+      "g b"     #'avy-pop-mark
+      "g >"     #'evil-goto-column
+      "<left>"  #'evil-scroll-left
+      "<right>" #'evil-scroll-right
+      "<up>"    #'evil-scroll-page-up
+      "<down>"  #'evil-scroll-page-down
+      ;; "ESC <down>" #'(lambda () (interactive) (message "Test"))
 )
 (map! :map evil-motion-state-map
       :prefix "g"

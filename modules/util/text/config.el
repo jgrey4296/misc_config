@@ -15,4 +15,5 @@
 
 (after! evil
   (load! "+bindings")
+  (load! "+motions")
   )

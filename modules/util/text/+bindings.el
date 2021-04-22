@@ -18,15 +18,6 @@
       :desc "Remove Leading Whitespace" "L" #'+jg-text-remove-leading-whitespace
       :desc "Jusify"   "j" #'justify-current-line
       )
-      (:prefix ("i" . "insert")
-       "p"    #'academic-phrases
-       "s"    #'academic-phrases-by-section
-       (:prefix ("l" . "Lorem Ipsum")
-        :desc "Sentence"  "s"  #'lorem-ipsum-insert-sentences
-        :desc "Paragraph" "p"  #'lorem-ipsum-insert-paragraphs
-        :desc "List"      "l"  #'lorem-ipsum-insert-list
-        )
-       )
       (:prefix ("w" . "Word")
        :desc "Title Case" "t" #'+jg-text-title-case
        :desc "Inflection" "i" #'evil-operator-string-inflection

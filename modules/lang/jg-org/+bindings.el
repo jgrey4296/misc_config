@@ -27,12 +27,11 @@
       :leader
       :desc "Toggle Links" "t l"   'org-toggle-link-display)
 (map! :map org-mode-map
-      :desc "Next Link"       :n "] p" #'org-next-link
-      :desc "Prev Link"       :n "[ p" #'org-previous-link
-      (:prefix "g"
-       :desc "Forward Heading" :n "j" #'org-forward-heading-same-level
-       :desc "Back Heading"    :n "k" #'org-backward-heading-same-level
-       :desc "Headings Helm"   :n "h" #'helm-org-in-buffer-headings)
+      :desc "Next Link"       :n "] l" #'org-next-link
+      :desc "Prev Link"       :n "[ l" #'org-previous-link
+      :desc "Forward Heading" :n "] j" #'org-forward-heading-same-level
+      :desc "Back Heading"    :n "[ k" #'org-backward-heading-same-level
+      :desc "Headings Helm"   :n "g h" #'helm-org-in-buffer-headings
       )
 (map! :map org-mode-map
       :localleader

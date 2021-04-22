@@ -7,6 +7,7 @@
   (after! evil
     (load! "+leader-bindings")
     (load! "+leaderless-bindings")
+    (load! "+evil-bindings")
     )
 )
 

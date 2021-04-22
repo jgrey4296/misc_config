@@ -190,7 +190,7 @@
        :desc "Paragraph"        "p" #'lorem-ipsum-insert-paragraphs
        :desc "List"             "l" #'lorem-ipsum-insert-list
        :desc "Academic"         "a" #'academic-phrases
-       :desc "Academic Section" "s" #'academic-phrases-by-section
+       :desc "Academic Section" "A" #'academic-phrases-by-section
        )
       ;; TODO lorem ipsum
       ;; TODO password-generator

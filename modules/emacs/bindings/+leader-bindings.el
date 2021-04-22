@@ -1,44 +1,34 @@
 ;; Leader no prefix
 ;;
 (map! :leader
+      :desc "help"                  "h" help-map
+      :desc "Flycheck"              "!" flycheck-command-map
+
       :desc "Goto-line"             "SPC" #'evil-avy-goto-line
       :desc "Ibuffer"               "DEL" #'ibuffer
+      :desc "Jump to bookmark"      "RET" #'bookmark-jump
+      :desc "Open Url"              "?"   #'+jg-browse-url
 
-      :desc "Find file"             "."    #'find-file
-      :desc "Switch buffer"         ","    #'switch-to-buffer
+      :desc "Find file"             "."   #'find-file
+      :desc "Switch buffer"         ","   #'switch-to-buffer
+      :desc "Popup Buffer"          "<"   #'+jg-misc-ivy-popup-buffer
+      :desc "Pop Shell"             "'"   #'shell
+      :desc "Switch to last buffer" "TAB" #'evil-switch-to-windows-last-buffer
+      :desc "Split Window"          "/"   #'split-window-right
+      :desc "Toggle last popup"     "~"   #'+popup/toggle
 
       :desc "Evaluate line/region"  "e"   #'eval-last-sexp
-      :desc "Eval expression"       ";"   #'pp-eval-expression
-      :desc "M-x"                   ":"   #'execute-extended-command
+      :desc "Eval expression"       "E"   #'pp-eval-expression
+      :desc "M-x"                   ";"   #'execute-extended-command
+
       :desc "Org Capture"           "X"   #'org-capture
-      :desc "Pop Shell"             "'"   #'shell
 
       ;; C-u is used by evil
       :desc "Universal argument"    "u"   #'universal-argument
-      :desc "Open Url"              "?"   #'+jg-browse-url
 
-      :desc "help"                  "h"    help-map
-
-      :desc "Split Window"          "/"    #'split-window-right
-      ;; TODO pop shell
-
-      (:when (featurep! :ui workspaces)
-       :desc "Switch workspace buffer" "," #'switch-to-buffer)
-
-
-      :desc "Switch to last buffer" "TAB"    #'evil-switch-to-windows-last-buffer
       ;; :desc "Resume last search"    "'"
       ;; (cond ((featurep! :completion ivy)   #'ivy-resume)
       ;;       ((featurep! :completion helm)  #'helm-resume))
-
-      :desc "Jump to bookmark"      "RET"  #'bookmark-jump
-
-      (:when (featurep! :ui popup)
-       :desc "Toggle last popup"     "~"    #'+popup/toggle
-       :desc  "Popup Buffer"         "<"   #'+jg-misc-ivy-popup-buffer
-       )
-
-      (:prefix ("!" . "checkers"))      ; bound by flycheck
 
       :desc "Desktop"   "1" #'+jg-bindings-goto-desktop
       :desc "Github"    "2" #'+jg-bindings-goto-github
@@ -60,13 +50,12 @@
 ;;; <leader> b --- buffer
 (map! :leader
       :prefix ("b" . "buffer")
-      :desc "Bury buffer"                 "z"   #'bury-buffer
-
+      :desc "Switch buffer"               "b" #'switch-to-buffer
       :desc "Clear Buffer"                "c" #'+jg-bindings-clear-buffer
       :desc "Kill all buffers"            "K" #'doom/kill-all-buffers
       :desc "Kill buffer"                 "d" #'kill-current-buffer
       :desc "Kill other buffers"          "O" #'doom/kill-other-buffers
-      :desc "New empty buffer"            "N" #'evil-buffer-new
+      :desc "New empty buffer"            "n" #'evil-buffer-new
       :desc "Next buffer"                 "]" #'next-buffer
       :desc "Previous buffer"             "[" #'previous-buffer
       :desc "Read-only mode"              "r" #'read-only-mode
@@ -77,12 +66,7 @@
       :desc "Pop up scratch buffer"       "x" #'doom/open-scratch-buffer
       :desc "Toggle narrowing"            "-" #'+jg-toggle-narrow-buffer
       :desc "Clone Indirect"              "i" #'clone-indirect-buffer-other-window
-
-      (:when (featurep! :ui workspaces)
-       :desc "Switch workspace buffer" "b" #'persp-switch-to-buffer
-       :desc "Switch buffer"           "B" #'switch-to-buffer)
-      (:when (not (featurep! :ui workspaces))
-       :desc "Switch buffer"           "b" #'switch-to-buffer)
+      :desc "Bury buffer"                 "z" #'bury-buffer
       )
 ;;; <leader> c --- code
 (map! :leader
@@ -97,6 +81,7 @@
       :desc "Recompile"                             "C"   #'recompile
       :desc "Send to repl"                          "s"   #'+eval/send-region-to-repl
       (:when (featurep! :checkers syntax)
+       :desc "Flycheck"                            "!"   flycheck-command-map
        :desc "List errors"                         "x"   #'flycheck-list-errors)
       (:when (and (featurep! :tools lsp) (not (featurep! :tools lsp +eglot)))
        :desc "LSP Code actions"                      "a"   #'lsp-execute-code-action
@@ -120,6 +105,7 @@
       :prefix ("f" . "file")
       (:when (featurep! :tools editorconfig)
        :desc "Open project editorconfig"  "c"   #'editorconfig-find-current-editorconfig)
+
       :desc "Browse emacs.d"              "E"   #'+default/browse-emacsd
       :desc "Browse private config"       "P"   #'doom/open-private-config
       :desc "Copy this file"              "C"   #'doom/copy-this-file
@@ -195,24 +181,35 @@
       :desc "Evil ex path"                  "p"   (cmd! (evil-ex "R!echo "))
       :desc "From clipboard"                "y"   #'+default/yank-pop
       :desc "From evil register"            "r"   #'evil-ex-registers
+      :desc "From Minibuffer history"       "m"   #'counsel-minibuffer-history
+
+      ;; TODO date, time
+
+      (:prefix ("l" . "Lorem Ipsum")
+       :desc "Sentence"         "s" #'lorem-ipsum-insert-sentences
+       :desc "Paragraph"        "p" #'lorem-ipsum-insert-paragraphs
+       :desc "List"             "l" #'lorem-ipsum-insert-list
+       :desc "Academic"         "a" #'academic-phrases
+       :desc "Academic Section" "s" #'academic-phrases-by-section
+       )
       ;; TODO lorem ipsum
       ;; TODO password-generator
       ;; TODO uuid
       ;; reserve "d" for inserting debug statement by mode
       (:when (featurep! :editor snippets)
        :desc "Snippet"                       "s"   #'yas-insert-snippet)
-      :desc "Unicode"                       "u"   #'unicode-chars-list-chars
+      :desc "Unicode"                       "u"    #'insert-char
       )
 ;;; <leader> j -- Jumping
 (map! :leader
       :prefix ("j" . "Jump")
-      :desc "Jump to Line"                          "l" #'evil-avy-goto-line
-      :desc "Jump to definition"                    "d" #'+lookup/definition
-      :desc "Jump to references"                    "D" #'+lookup/references
-      :desc "Find implementations"                  "i" #'+lookup/implementations
-      :desc "Jump to documentation"                 "k" #'+lookup/documentation
-      :desc "Find type definition"                  "t" #'+lookup/type-definition
-      :desc "Browse URL"                            "u" #'+jg-browse-url
+      :desc "Line"                          "l" #'evil-avy-goto-line
+      :desc "Definition"                    "d" #'+lookup/definition
+      :desc "References"                    "D" #'+lookup/references
+      :desc "Implementations"               "i" #'+lookup/implementations
+      :desc "Documentation"                 "k" #'+lookup/documentation
+      :desc "Type definition"               "t" #'+lookup/type-definition
+      :desc "Browse URL"                    "u" #'+jg-browse-url
       (:prefix ("b" . "Bookmark")
        :desc "Set bookmark"                "m"           #'bookmark-set
        :desc "Delete bookmark"             "M"           #'bookmark-delete
@@ -358,7 +355,7 @@
       :desc "Invalidate project cache"     "I"  #'projectile-invalidate-cache
       :desc "Kill project buffers"         "K"  #'projectile-kill-buffers
       :desc "List project todos"           "t"  #'magit-todos-list
-      :desc "Open project scratch buffer"  "x"  #'+jg-misc-open-project-scratch-buffer
+      :desc "Open project scratch buffer"  "x"  #'+jg-misc-open-scratch-buffer
       :desc "Remove known project"         "D"  #'projectile-remove-known-project
       :desc "Repeat last command"          "C"  #'projectile-repeat-last-command
       :desc "Run cmd in project root"      "!"  #'projectile-run-shell-command-in-root
@@ -527,6 +524,7 @@
       :desc "Switch workspace"             "."   #'+workspace/switch-to
       :desc "Switch to last workspace"     "0"   #'+workspace/switch-to-final
 
+      :desc "Switch workspace buffer" "b" #'persp-switch-to-buffer
       :desc "Create workspace"             "c"   #'+workspace/new
       :desc "Delete workspace"             "k"   #'+workspace/delete
       :desc "Load workspace from file"     "l"   #'+workspace/load

@@ -13,6 +13,7 @@
        )
       :localleader
       :desc "Sort defs" "S" #'+jg-python-sort-class-methods
+      :desc "REPL"      "r" #'+python/open-repl
       )
 
 (map! :after python

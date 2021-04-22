@@ -7,6 +7,8 @@
   (after! evil
     (load! "+leader-bindings")
     (load! "+leaderless-bindings")
+    )
+  (after! (evil which-key)
     (load! "+evil-bindings")
     )
 )
@@ -59,15 +61,6 @@
          :gn [s-return]     #'+default/newline-below
          :gn "S-s-RET"      #'+default/newline-above
          :gn [S-s-return]   #'+default/newline-above)))
-
-
-
-;; (general-define-key :states
-;;                     '(normal visual motion emacs insert)
-;;                     :major-modes t :prefix doom-localleader-key :non-normal-prefix doom-localleader-alt-key :states 'normal :keymaps
-;;                     '(shell-mode-map)
-;;                     "h" #'counsel-shell-history)
-
 
 (after! ibuffer
   (add-hook 'ibuffer-mode-hook #'+jg-ibuffer-filter-setup)

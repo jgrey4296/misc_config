@@ -12,6 +12,7 @@
       ("\\*.*?scratch.*?\\*" :side right  :ttl nil :width  50  :quit t :select t)
       ("^\\*Messages"    :side left   :ttl nil :width  0.4 :quit t :select nil)
       ("^\\*compilation" :side right  :ttl 5   :width  0.4 :quit t :select nil)
+      ("^\\*Pp Eval Output\\*" :side right :ttl 5 :width 0.4 :quit t :select nil)
       )
     (when (featurep! +all)
       '(("^\\*"  :slot 1 :vslot -1 :select t)

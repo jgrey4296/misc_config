@@ -1,8 +1,9 @@
 ;;; emacs/bindings/+evil-maps.el -*- lexical-binding: t; -*-
 
+;; Reminder: evil-mode-map-alist
 
 ;; Normal
-(map! :map evil-normal-state-map
+(map! :map jg-binding-normal-state-map
       :desc "Use Register"      "\""  #'evil-use-register
       :desc "Repeat Substitute" "& "  #'evil-ex-repeat-substitute
       :desc "Repeat"            ". "  #'evil-repeat
@@ -15,6 +16,10 @@
       :desc "Search"   "/"   #'evil-ex-search-forward
       :desc "B-Search" "\\"  #'evil-ex-search-backward
 
+      :desc "Append"        "a" #'evil-append
+      :desc "Change"        "c" #'evil-change
+      :desc "Delete"        "d" #'evil-delete
+      :desc "Delete Line"   "D" #'evil-delete-line
       :desc "Insert"        "i" #'evil-insert
       :desc "Set Marker"    "m" #'evil-set-marker
       :desc "Open Below"    "o" #'evil-open-below
@@ -44,7 +49,7 @@
       "[" nil
       "]" nil
 )
-(map! :map evil-normal-state-map
+(map! :map jg-binding-normal-state-map
       :desc "Repeat Pop"        "C-." #'evil-repeat-pop
       :desc "Paste Pop Next"    "C-n" #'evil-paste-pop-next
       :desc "Paste Pop"         "C-p" #'evil-paste-pop
@@ -65,7 +70,7 @@
       )
 
 ;; Visual
-(map! :map evil-visual-state-map
+(map! :map jg-binding-visual-state-map
       :desc "Mark Buffer"   "RET"      #'+jg-text-whole-buffer-textobj
       :desc "Repeat"        "."        #'evil-repeat
       :desc "Search"        "/"        #'evil-ex-search-forward
@@ -101,7 +106,7 @@
       )
 
 ;; Operator
-(map! :map evil-operator-state-map
+(map! :map jg-binding-operator-state-map
       :desc "Escape"        "C-g" #'evil-escape
       :desc "Surround Edit" "S"   #'evil-Surround-edit
       :desc "Surround"      "s"   #'evil-surround-edit
@@ -114,19 +119,19 @@
       )
 
 ;; Motion
-(map! :map evil-motion-state-map
+(map! :map jg-binding-motion-state-map
       :desc "Indent" "TAB"            #'indent-for-tab-command
       :desc "Return" "RET"            #'evil-ret
 
-      :desc "1st Non Blank" "^"       #'evil-first-non-blank
+      :desc "1st Non Blank"       "^" #'evil-first-non-blank
       :desc "Next 1st Non Blank " "_" #'evil-next-line-1-first-non-blank
-      :desc "Goto Mark" "`"           #'evil-goto-mark
-      :desc "Evil-Ex" ":"             #'evil-ex
-      :desc "Repeat Find Char" ";"    #'evil-repeat-find-char
-      :desc "B-Search" "?"            #'evil-ex-search-backward
-      :desc "Back Paragraph" "{"      #'evil-backward-paragraph
-      :desc "Goto Column" "|"         #'evil-goto-column
-      :desc "Forward Paragraph" "}"   #'evil-forward-paragraph
+      :desc "Goto Mark"           "`" #'evil-goto-mark
+      :desc "Evil-Ex"             ":" #'evil-ex
+      :desc "Repeat Find Char"    ";" #'evil-repeat-find-char
+      :desc "B-Search"            "?" #'evil-ex-search-backward
+      :desc "Back Paragraph"      "{" #'evil-backward-paragraph
+      :desc "Goto Column"         "|" #'evil-goto-column
+      :desc "Forward Paragraph"   "}" #'evil-forward-paragraph
 
       "\\"                            nil
 
@@ -438,38 +443,37 @@
       )
 
 
+(map! :map (jg-binding-normal-state-map jg-binding-visual-state-map jg-binding-motion-state-map)
+      :desc "Do Ops"        "g"   jg-binding-operator-map
+      :desc "Visual Ops"    "z"   jg-binding-vision-map
+      :desc "Backward Motion" "[" jg-binding-backward-motion-map
+      :desc "Forward Motion"  "]" jg-binding-forward-motion-map
+      )
+(map! :map (jg-binding-visual-state-map jg-binding-operator-state-map)
+      :desc "Inner Select"     "i" jg-binding-inner-text-objects-map
+      :desc "Outer Select"     "a" jg-binding-outer-text-objects-map
+      )
+(map! :map jg-binding-operator-state-map
+      :desc "Backward Motion"  "[" jg-binding-backward-motion-map
+      :desc "Forward Motion"   "]" jg-binding-forward-motion-map
+      )
 
 (+jg-binding-keymap-update-plural jg-binding-operator-map
                                   jg-binding-vision-map
                                   jg-binding-forward-motion-map
                                   jg-binding-backward-motion-map
                                   jg-binding-inner-text-objects-map
-                                  jg-binding-outer-text-objects-map)
+                                  jg-binding-outer-text-objects-map
+                                  jg-binding-normal-state-map
+                                  jg-binding-visual-state-map
+                                  jg-binding-operator-state-map
+                                  jg-binding-motion-state-map)
 
-(map! :map evil-normal-state-map
-      :desc "Do Ops"        "g"   jg-binding-operator-map
-      :desc "Visual Ops"    "z"   jg-binding-vision-map
-      :desc "Backward Motion" "[" jg-binding-backward-motion-map
-      :desc "Forward Motion"  "]" jg-binding-forward-motion-map
-      )
-(map! :map evil-visual-state-map
-      :desc "Inner Select"     "i" jg-binding-inner-text-objects-map
-      :desc "Outer Select"     "a" jg-binding-outer-text-objects-map
-
-      :desc "Do Ops"           "g" jg-binding-operator-map
-      :desc "Visual Ops"       "z" jg-binding-vision-map
-      :desc "Backward Motion"  "[" jg-binding-backward-motion-map
-      :desc "Forward Motion"   "]" jg-binding-forward-motion-map
-      )
-(map! :map evil-operator-state-map
-      :desc "Inner Select"     "i" jg-binding-inner-text-objects-map
-      :desc "Outer Select"     "a" jg-binding-outer-text-objects-map
-      :desc "Backward Motion"  "[" jg-binding-backward-motion-map
-      :desc "Forward Motion"   "]" jg-binding-forward-motion-map
-      )
-(map! :map evil-motion-state-map
-      :desc "Do Ops"           "g" jg-binding-operator-map
-      :desc "Visual Ops"       "z" jg-binding-vision-map
-      :desc "Backward Motion"  "[" jg-binding-backward-motion-map
-      :desc "Forward Motion"   "]" jg-binding-forward-motion-map
-      )
+(setq evil-global-keymaps-alist
+      '((evil-emacs-state-minor-mode    . evil-emacs-state-map)
+        (evil-motion-state-minor-mode   . jg-binding-motion-state-map)
+        (evil-replace-state-minor-mode  . evil-replace-state-map)
+        (evil-operator-state-minor-mode . jg-binding-operator-state-map)
+        (evil-visual-state-minor-mode   . jg-binding-visual-state-map)
+        (evil-insert-state-minor-mode   . evil-insert-state-map)
+        (evil-normal-state-minor-mode   . jg-binding-normal-state-map)))

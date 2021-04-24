@@ -11,7 +11,10 @@
       jg-binding-forward-motion-map     (make-sparse-keymap "forward motion")
       jg-binding-backward-motion-map    (make-sparse-keymap "backward motion")
       jg-binding-inner-text-objects-map (make-sparse-keymap "inner textobjs")
-      jg-binding-outer-text-objects-map (make-sparse-keymap "outer textobjs"))
+      jg-binding-outer-text-objects-map (make-sparse-keymap "outer textobjs")
 
-
-
+      jg-binding-normal-state-map (make-sparse-keymap "jg-binding-normal-state-map")
+      jg-binding-visual-state-map (make-sparse-keymap "jg-binding-visual-state-map")
+      jg-binding-operator-state-map (make-sparse-keymap "jg-binding-operator-state-map")
+      jg-binding-motion-state-map (make-sparse-keymap "jg-binding-motion-state-map")
+      )

@@ -117,7 +117,6 @@
 (map! :map evil-motion-state-map
       :desc "Indent" "TAB"            #'indent-for-tab-command
       :desc "Return" "RET"            #'evil-ret
-      :desc "Forward Char" "SPC"      #'evil-forward-char
 
       :desc "1st Non Blank" "^"       #'evil-first-non-blank
       :desc "Next 1st Non Blank " "_" #'evil-next-line-1-first-non-blank
@@ -311,7 +310,7 @@
       :desc "Incr"                "+"   #'evil-numbers/inc-at-pt
       :desc "Decr"                "-"   #'evil-numbers/dec-at-pt
       :desc "Last Change"         ";"   #'goto-last-change
-      :desc "Goto Column"         ">"   #'evil-goto-column
+      :desc "Goto Column"         ">"   #'+jg-text-force-column-motion
       :desc "Apply Macro"         "@"   #'+evil:apply-macro
       :desc "Line End"            "$"   #'evil-end-of-visual-line
       :desc "Line Start"          "0"   #'evil-beginning-of-visual-line
@@ -375,13 +374,12 @@
        :desc "Delete trailing whitespace" "w" #'delete-trailing-whitespace
        :desc "Whitespace Cleanup"         "c" #'whitespace-cleanup
        :desc "Indent"                     "i" #'indent-region
-       :desc "Random"                     "r" #'+jg-bindings-goto-random-line
+       :desc "Random"                     "r" #'+jg-text-goto-random-line-op
        )
       )
 
 ;; Directional Motion
 (map! :map jg-binding-backward-motion-map
-      :desc "Empty Line"   "SPC" #'+jg-text-prev-empty-line-motion
       :desc "Narrow"       "RET" #'+jg-narrowing-move-focus-backward
 
       :desc "Section" "["         #'evil-backward-section-begin
@@ -398,6 +396,7 @@
       "f" nil
       "F" nil
       :desc "Heading"      "h" #'outline-previous-visible-heading
+      :desc "Empty Line"   "l" #'+jg-text-prev-empty-line-motion
       :desc "Begin Method"       "m" #'+evil/previous-beginning-of-method
       :desc "End Method"       "M" #'+evil/previous-end-of-method
       "o" nil
@@ -411,7 +410,6 @@
       )
 (map! :map jg-binding-forward-motion-map
       :desc "Narrow"        "RET" #'+jg-narrowing-move-focus-forward
-      :desc "Empty Line"    "SPC" #'+jg-text-next-empty-line-motion
 
       :desc "Section"    "]"   #'evil-forward-section-begin
       :desc "Open Paren" "["   #'+jg-text-next-open-paren-motion ;; #'evil-forward-section-end
@@ -427,6 +425,7 @@
       "F" nil
       "f" nil
       :desc "Heading"     "h" #'outline-next-visible-heading
+      :desc "Empty Line"    "l" #'+jg-text-next-empty-line-motion
       :desc "Begin Method"      "m" #'+evil/next-beginning-of-method
       :desc "End Method"      "M" #'+evil/next-end-of-method
       "o" nil

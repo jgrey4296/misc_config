@@ -89,14 +89,7 @@
     )
   )
 
-(defun +jg-bindings-goto-random-line ()
-  (interactive)
-  (let ((max-line (line-number-at-pos (point-max))))
-    (goto-char (point-min))
-    (forward-line (random max-line))
-    (evil-beginning-of-line)
-    )
-  )
+
 (defun +jg-bindings-clear-buffer ()
   """ Utility to clear a buffer
     from https://stackoverflow.com/questions/24565068/ """

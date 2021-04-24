@@ -20,7 +20,7 @@
   (backward-char))
 
 (evil-define-motion +jg-text-next-empty-line-motion (count)
-  :type exclusive
+  :type line
   (forward-line)
   (re-search-forward "^[[:space:]]*$" nil nil (or count 1))
   )
@@ -47,6 +47,13 @@
     )
   )
 
+(evil-define-motion +jg-text-force-column-motion (count)
+  "Force Go to column COUNT on the current line.
+Columns are counted from zero."
+  :type exclusive
+  (move-to-column (or count 0) t))
+
+
 ;; Text Objects
 (evil-define-text-object +jg-text-grow-selection-op (count)
   " Grow the selection on either side by count "
@@ -69,7 +76,7 @@
   )
 
 ;; Operators
-(evil-define-operator +jg-text-split-on-char (beg end)
+(evil-define-operator +jg-text-split-on-char-op (beg end)
   :move-point t
   (message "Count: %s" count)
   (let ((last-char (downcase (char-after (+ (point) count))))
@@ -160,4 +167,16 @@ with either a numeric or alphabetical escalation "
 (evil-define-operator +jg-text-line-on-char-op (beg end count)
   ;; TODO
 
+  )
+
+(evil-define-operator +jg-text-goto-random-line-op (beg end)
+  :motion +evil:whole-buffer-txtobj
+  :repeat t
+  :move-point t
+  (let* ((min-line (line-number-at-pos beg))
+         (max-line (- (line-number-at-pos end) min-line))
+         )
+    (forward-line (random max-line))
+    (evil-first-non-blank-of-visual-line)
+    )
   )

@@ -213,9 +213,9 @@ If region isn't active, narrow away anything above point
 
 (defun +jg-binding-keymap-update-descs (the-map)
   " Update which-key descriptions for a keymap "
-  (let* ((triples (which-key--get-bindings nil the-map))
+  (let* ((triples (which-key--get-bindings nil the-map nil t))
          (pairs (mapcar #'+jg-binding-process-triples triples))
-        )
+         )
     (apply #'which-key-add-keymap-based-replacements the-map
            (flatten-list pairs))
     )

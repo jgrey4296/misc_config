@@ -19,7 +19,7 @@
          (pairs (mapcar #'+jg-binding-process-triples triples))
          (prefix-p #'(lambda (x) (string-match "^\+" (cadr x))))
          (filtered (-filter prefix-p pairs))
-         (reduced (mapcar #'(lambda (x) (list (car x) (replace-regexp-in-string "^\++" "+" (cadr x)))) filtered))
+         (reduced (mapcar #'(lambda (x) (list (car x) (replace-regexp-in-string "^\++" "" (cadr x)))) filtered))
          (with-map-pairs (mapcar #'(lambda (x) (cons the-map x)) reduced))
          )
     (mapc #'+jg-binding-update-guard with-map-pairs)
@@ -37,7 +37,6 @@
     ;; (flatten-list filtered))
 
     (mapc #'+jg-binding-update-guard with-map-pairs)
-    (+jg-binding-keymap-update-prefixs the-map)
     )
   )
 (defun +jg-binding-process-triples (triple)
@@ -63,5 +62,25 @@ correct for which-key-add-keymap-based-replacements "
                                     'jg-binding-motion-state-map
                                     )
 
+  (+jg-binding-keymap-update-plural 'evil-operator-state-map
+                                    'evil-normal-state-map
+                                    'evil-visual-state-map
+                                    'evil-motion-state-map)
+
+  (setq  evil-normal-state-map jg-binding-normal-state-map
+         evil-visual-state-map jg-binding-visual-state-map
+         evil-operator-state-map jg-binding-operator-state-map
+         evil-motion-state-map jg-binding-motion-state-map
+         )
+
+
+  (setq evil-global-keymaps-alist
+        '((evil-emacs-state-minor-mode    . evil-emacs-state-map)
+          (evil-motion-state-minor-mode   . evil-motion-state-map)
+          (evil-replace-state-minor-mode  . evil-replace-state-map)
+          (evil-operator-state-minor-mode . evil-operator-state-map)
+          (evil-visual-state-minor-mode   . evil-visual-state-map)
+          (evil-insert-state-minor-mode   . evil-insert-state-map)
+          (evil-normal-state-minor-mode   . evil-normal-state-map)))
   (message "Evil Bindings Complete")
 )

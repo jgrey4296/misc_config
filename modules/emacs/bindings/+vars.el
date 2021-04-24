@@ -3,7 +3,12 @@
 (setq-default jg-google-url "https://duckduckgo.com/?q=%s"
               jg-twitter-url "https://twitter.com"
               default-input-method "greek"
-)
+
+              jg-misc-ibuffer-heuristics (rx (or "backtab"
+                                                 (regexp "\\.\\.")
+                                                 (regexp "^[[:alpha:]]\\{2,\\}")
+                                          )
+              )
 
 
 (setq jg-binding-operator-map           (make-sparse-keymap "evil operators")

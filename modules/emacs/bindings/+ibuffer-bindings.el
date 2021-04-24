@@ -78,3 +78,6 @@
 
 (+jg-binding-keymap-update-plural  ibuffer-mode-map
                                    ibuffer--filter-map)
+
+(add-hook 'ibuffer-mode-hook #'+jg-ibuffer-filter-setup)
+(evil-make-overriding-map ibuffer-mode-map)

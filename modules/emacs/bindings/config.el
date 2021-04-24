@@ -8,8 +8,9 @@
     (load! "+leader-bindings")
     (load! "+leaderless-bindings")
     )
-  (after! (evil which-key)
+  (after! (evil which-key ibuffer)
     (load! "+evil-bindings")
+    (load! "+ibuffer-bindings")
     )
 )
 
@@ -61,10 +62,6 @@
          :gn [s-return]     #'+default/newline-below
          :gn "S-s-RET"      #'+default/newline-above
          :gn [S-s-return]   #'+default/newline-above)))
-
-(after! ibuffer
-  (add-hook 'ibuffer-mode-hook #'+jg-ibuffer-filter-setup)
-  )
 
 (after! flycheck
   (map! :leader

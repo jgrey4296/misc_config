@@ -8,6 +8,8 @@
 (load! "+tags")
 (load! "+text-utils")
 (after! evil
+  (load! "+org-standard-bindings.el")
+  (load! "+org-standard-bindings-2.el")
   (load! "+bindings")
   )
 

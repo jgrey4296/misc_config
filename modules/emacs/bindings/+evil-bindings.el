@@ -37,7 +37,7 @@
       :desc "Change Line"   "S" #'evil-change-whole-line
       :desc "B-delete"      "X" #'evil-delete-backward-char
       :desc "Yank Line"     "Y" #'evil-yank-line
-      :desc " "             "Z" #'ignore
+      "Z" nil
 
       :desc "Do Ops"        "g"   jg-binding-operator-map
       :desc "Visual Ops"    "z"   jg-binding-vision-map
@@ -57,7 +57,7 @@
       :desc "Force Normal State" "<escape>" #'evil-force-normal-state
       :desc "Insert" "<insert>"             #'evil-insert
       :desc "Insert" "<insertchar>"         #'evil-insert
-      :desc " " "<mouse-2>"                 #'ignore ;; #'mouse-yank-primary
+      "<mouse-2>"                 nil
       :desc "Back Char" "DEL"               #'evil-backward-char
       )
 
@@ -74,16 +74,16 @@
       :desc "Escape"        "C-g"      #'evil-escape
       :desc "Macro"         "@"        #'+evil:apply-macro
 
-      :desc " "                       "A" #'ignore
-      :desc " "                       "I" #'ignore
+      "A" nil
+      "I" nil
       :desc "Lookup"                  "K" #'+lookup/documentation
       :desc "Exchange Corners"        "O" #'evil-visual-exchange-corners
       :desc "Change"                  "R" #'evil-change
       :desc "Surround"                "s" #'evil-surround-region
       :desc "Surround Change"         "S" #'evil-surround-change
       :desc "Exchange Point and Mark" "o" #'exchange-point-and-mark
-      :desc " "                       "U" #'ignore
-      :desc " "                       "u" #'ignore
+      "U" nil
+      "u" nil
 
       :desc "Inner Select"     "i" evil-inner-text-objects-map
       :desc "Outer Select"     "a" evil-outer-text-objects-map
@@ -93,11 +93,11 @@
       :desc "Backward Motion"  "[" jg-binding-backward-motion-map
       :desc "Forward Motion"   "]" jg-binding-forward-motion-map
 
-      :desc " " "<insert>"     #'ignore ;; undefined
-      :desc " " "<insertchar>" #'ignore ;; undefined
-      :desc " " "<mouse-2>"    #'ignore ;;#'evil-exit-visual-and-repeat
-      :desc " " "#"            #'ignore ;;#'evil-visualstar/begin-search-backward
-      :desc " " "*"            #'ignore ;;#'evil-visualstar/begin-search-forward
+      "<insert>"     nil;; undefined
+      "<insertchar>" nil ;; undefined
+      "<mouse-2>"    nil ;;#'evil-exit-visual-and-repeat
+      "#"            nil ;;#'evil-visualstar/begin-search-backward
+      "*"            nil ;;#'evil-visualstar/begin-search-forward
 
       )
 ;; Operator
@@ -129,7 +129,7 @@
       :desc "Goto Column" "|"         #'evil-goto-column
       :desc "Forward Paragraph" "}"   #'evil-forward-paragraph
 
-      "\\"                            #'ignore
+      "\\"                            nil
 
       :desc "Scroll Left" "<left>"    #'evil-scroll-left
       :desc "Scroll Right" "<right>"  #'evil-scroll-right
@@ -199,27 +199,27 @@
 
       :desc "Section" "["         #'evil-backward-section-begin
       :desc "Close Paren" "]"     #'+jg-text-prev-close-paren-motion
-      :desc " " "("          #'ignore ;; #'evil-previous-open-paren
-      :desc " " "{"          #'ignore ;; #'evil-previous-open-brace
-      :desc " "       "#"   #'ignore  ;; #'+evil/previous-preproc-directive
+      "("          nil ;; #'evil-previous-open-paren
+      "{"          nil ;; #'evil-previous-open-brace
+      "#"          nil ;; #'+evil/previous-preproc-directive
 
       :desc "Arg"          "a" #'evil-backward-arg
       :desc "Buffer"       "b" #'previous-buffer
       :desc "Comment"      "c" #'+evil/previous-comment
       :desc "Git Hunk"     "d" #'git-gutter:previous-hunk
       :desc "Error"        "e" #'previous-error
-      :desc " "            "f" #'ignore  ;; #'+evil/previous-file
-      :desc " "            "F" #'ignore  ;;#'+evil/previous-frame
+      "f" nil
+      "F" nil
       :desc "Heading"      "h" #'outline-previous-visible-heading
       :desc "Method"       "m" #'+evil/previous-beginning-of-method
       :desc "Method"       "M" #'+evil/previous-end-of-method
-      :desc " "            "o" #'ignore  ;; #'+evil/insert-newline-above
+      "o" nil
       :desc "Ring Window"  "r" #'window-ring-move-perspective-2
       :desc "Section"      "s" #'evil-backward-section-begin
       :desc "Todo"         "t" #'hl-todo-previous
-      :desc " "            "u" #'ignore  ;; #'+evil:url-decode
+      "u" nil
       :desc "Workspace"    "w" #'+workspace/switch-left
-      :desc " "            "y" #'ignore  ;; #'+evil:c-string-decode
+      "y" nil
 
 )
 (map! :map jg-binding-forward-motion-map
@@ -228,27 +228,27 @@
 
       :desc "Section"    "]"   #'evil-forward-section-begin
       :desc "Open Paren" "["   #'+jg-text-next-open-paren-motion ;; #'evil-forward-section-end
-      :desc " "          ")"   #'ignore ;; #'evil-next-close-paren
-      :desc " "          "}"   #'ignore ;; #'evil-next-close-brace
-      :desc " "          "#"   #'ignore ;; #'+evil/next-preproc-directive
+      ")" nil
+      "}" nil
+      "#" nil
 
       :desc "Arg"         "a" #'evil-forward-arg
       :desc "Buffer"      "b" #'next-buffer
       :desc "Comment"     "c" #'+evil/next-comment
       :desc "Git Hunk"    "d" #'git-gutter:next-hunk
       :desc "Error"       "e" #'next-error
-      :desc " "           "F" #'ignore ;; #'+evil/next-frame
-      :desc " "           "f" #'ignore ;; #'+evil/next-file
+      "F" nil
+      "f" nil
       :desc "Heading"     "h" #'outline-next-visible-heading
       :desc "Method"      "m" #'+evil/next-beginning-of-method
       :desc "Method"      "M" #'+evil/next-end-of-method
-      :desc "nothing"     "o" #'ignore ;; #'+evil/insert-newline-below
+      "o" nil
       :desc "Ring Window" "r" #'window-ring-move-perspective
       :desc "Section"     "s" #'evil-forward-section-begin ;; #'evil-next-flyspell-error
       :desc "Todo"        "t" #'hl-todo-next
-      :desc " "           "u" #'ignore ;;#'+evil:url-encode
+      "u" nil
       :desc "Workspace"   "w" #'+workspace/switch-right
-      :desc " "           "y" #'ignore ;;#'+evil:c-string-encode
+      "y"
       )
 
 
@@ -259,20 +259,20 @@
       :desc "ispell-word"   "= "  #'ispell-word
 
       :desc "open-fold-rec" "A" #'evil-open-fold-rec
-      :desc " "             "C" #'ignore
+      "C" nil
       :desc "close-folds"   "D" #'evil-close-folds
-      :desc " "             "N" #'ignore ;; #'doom/widen-indirectly-narrowed-buffer
-      :desc " "             "O" #'ignore
-      :desc " "             "X" #'ignore
+      "N" nil
+      "O" nil
+      "X" nil
 
       :desc "toggle-fold"   "a" #'evil-toggle-fold
-      :desc " "             "c" #'ignore
+      "c" nil
       :desc "close-fold"    "d" #'evil-close-fold
-      :desc " "             "m" #'ignore
-      :desc " "             "n" #'ignore
+      "m" nil
+      "n" nil
       :desc "open-fold"     "o" #'evil-open-fold
       :desc "open-folds"    "r" #'evil-open-folds
-      :desc " "             "s" #'ignore
+      "s" nil
 
       :desc "Center" "z"   #'evil-scroll-line-to-center
       :desc "Top"    "t"   #'evil-scroll-line-to-top
@@ -297,7 +297,8 @@
       :desc "previous-fold"          "k"  #'vimish-fold-previous-fold
       :desc "refold-all"             "m"  #'vimish-fold-refold-all
       :desc "unfold-all"             "r"  #'vimish-fold-unfold-all
-      :desc " " "x" #'ignore)
+      "x" nil
+      )
 )
 
 ;; Text objects

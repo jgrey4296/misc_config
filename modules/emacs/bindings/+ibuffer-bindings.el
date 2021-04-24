@@ -8,6 +8,12 @@
       :desc "negative"            "-" #'negative-argument
       :desc "mark-old-buffers"    "." #'ibuffer-mark-old-buffers
       :desc "Filters"             "\\" ibuffer--filter-map
+
+      "j" #'evil-next-line
+      "k" #'evil-previous-line
+
+      "l" nil
+      "h" #'ignore
 )
 (map! :map ibuffer-mode-map
       :prefix ("%" . "Mark Ops")

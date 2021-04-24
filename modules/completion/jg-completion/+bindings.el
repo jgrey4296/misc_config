@@ -8,6 +8,3 @@
   "M-o"                             #'hydra-ivy/body
   )
 
-(map! :map evil-normal-state-map
-      :prefix "g"
-      "g" #'company-manual-begin)

@@ -210,9 +210,9 @@ If region isn't active, narrow away anything above point
   (if (string-match jg-misc-ibuffer-heuristics (car x)) nil
     t))
 
-(defun +jg-binding-keymap-update-descs (the-map &optional recursive)
+(defun +jg-binding-keymap-update-descs (the-map)
   " Update which-key descriptions for a keymap "
-  (let* ((triples (which-key--get-bindings nil the-map nil recursive))
+  (let* ((triples (which-key--get-bindings nil the-map nil t))
          (pairs (mapcar #'+jg-binding-process-triples triples))
          (filtered (-filter #'+jg-binding-kbd-heuristics pairs))
          )

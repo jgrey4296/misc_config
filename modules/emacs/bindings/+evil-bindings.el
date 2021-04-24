@@ -1,6 +1,9 @@
 ;;; emacs/bindings/+evil-maps.el -*- lexical-binding: t; -*-
 
 ;; Reminder: evil-mode-map-alist
+(map! :map global-map
+      :desc "Complete" :n "g g" #'company-manual-begin
+      :desc "Grow Selection" :v "g g" #'+jg-text-grow-selection-op)
 
 ;; Normal
 (map! :map jg-binding-normal-state-map
@@ -43,11 +46,6 @@
       :desc "Change Line"   "S" #'evil-change-whole-line
       :desc "B-delete"      "X" #'evil-delete-backward-char
       :desc "Yank Line"     "Y" #'evil-yank-line
-      "Z" nil
-      "g" nil
-      "z" nil
-      "[" nil
-      "]" nil
 )
 (map! :map jg-binding-normal-state-map
       :desc "Repeat Pop"        "C-." #'evil-repeat-pop
@@ -65,7 +63,6 @@
       :desc "Force Normal State" "<escape>" #'evil-force-normal-state
       :desc "Insert" "<insert>"             #'evil-insert
       :desc "Insert" "<insertchar>"         #'evil-insert
-      "<mouse-2>"                 nil
       :desc "Back Char" "DEL"               #'evil-backward-char
       )
 
@@ -82,27 +79,12 @@
       :desc "Escape"        "C-g"      #'evil-escape
       :desc "Macro"         "@"        #'+evil:apply-macro
 
-      "A" nil
-      "I" nil
       :desc "Lookup"                  "K" #'+lookup/documentation
       :desc "Exchange Corners"        "O" #'evil-visual-exchange-corners
       :desc "Change"                  "R" #'evil-change
       :desc "Surround"                "s" #'evil-surround-region
       :desc "Surround Change"         "S" #'evil-surround-change
       :desc "Exchange Point and Mark" "o" #'exchange-point-and-mark
-      "U" nil
-      "u" nil
-      "i" nil
-      "a" nil
-      "g" nil
-      "z" nil
-      "[" nil
-      "]" nil
-      "<insert>"     nil;; undefined
-      "<insertchar>" nil ;; undefined
-      "<mouse-2>"    nil ;;#'evil-exit-visual-and-repeat
-      "#"            nil ;;#'evil-visualstar/begin-search-backward
-      "*"            nil ;;#'evil-visualstar/begin-search-forward
       )
 
 ;; Operator
@@ -112,10 +94,6 @@
       :desc "Surround"      "s"   #'evil-surround-edit
       :desc "Select Line"   "l"   #'+jg-text-line-textobj
       :desc "Select Buffer" "RET" #'+jg-text-whole-buffer-textobj
-      "i" nil
-      "a" nil
-      "[" nil
-      "]" nil
       )
 
 ;; Motion
@@ -189,11 +167,6 @@
       :desc  "visual-char"           "v"              #'evil-visual-char
       :desc  "forward-word-begin"    "w"              #'evil-forward-word-begin
       :desc  "yank"                  "y"              #'evil-yank
-
-      "g" nil
-      "z" nil
-      "[" nil
-      "]" nil
       )
 
 ;; Vision / Hiding
@@ -212,6 +185,8 @@
       :desc "toggle-fold"   "a" #'evil-toggle-fold
       "c" nil
       :desc "close-fold"    "d" #'evil-close-fold
+      :desc "Next Fold"     "j" #'+fold/next
+      :desc "Prev Fold"     "k" #'+fold/previous
       "m" nil
       "n" nil
       :desc "open-fold"     "o" #'evil-open-fold
@@ -309,7 +284,7 @@
 
 ;; My Operators
 (map! :map jg-binding-operator-map
-      :desc "Insert Line"         "SPC" #'+evil/insert-newline-below
+
       :desc "Repeat Global Sub"   "&"   #'evil-ex-repeat-global-substitute
 
       :desc "Incr"                "+"   #'evil-numbers/inc-at-pt
@@ -328,11 +303,12 @@
       :desc "Comment"            "c" #'evilnc-comment-operator
       :desc "IEdit"              "e" #'evil-iedit-state/iedit-mode
       :desc "Goto First Line"    "f" #'evil-goto-first-line
-      :desc "Grow Selection"     "g" #'+jg-text-grow-selection-op
+      ;; :desc "Grow Selection"     "g" #'+jg-text-grow-selection-op
       :desc "Insert Resume"      "i" #'evil-insert-resume
       :desc "Join whitespace"    "J" #'evil-join-whitespace
 
       :desc "Middle of Line"     "m" #'evil-middle-of-visual-line
+      :desc "Insert Line"        "o" #'+evil/insert-newline-below
       :desc "Paste"              "p" #'+evil/alt-paste
       :desc "Reselect Region"    "P" #'+evil/reselect-paste
       :desc "Fill"               "q" #'evil-fill-and-move
@@ -467,7 +443,8 @@
                                   jg-binding-normal-state-map
                                   jg-binding-visual-state-map
                                   jg-binding-operator-state-map
-                                  jg-binding-motion-state-map)
+                                  jg-binding-motion-state-map
+                                  )
 
 (setq evil-global-keymaps-alist
       '((evil-emacs-state-minor-mode    . evil-emacs-state-map)

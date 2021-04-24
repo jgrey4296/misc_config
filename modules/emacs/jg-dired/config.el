@@ -7,3 +7,7 @@
   (load! "+vars")
   )
 (load! "+funcs")
+
+(use-package! dired-quick-sort
+  :commands hydra-dired-quick-sort/body
+  )

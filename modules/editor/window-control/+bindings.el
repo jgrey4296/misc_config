@@ -27,13 +27,3 @@
       :desc "Shrink Side Wndows"             "{" #'window-ring-shrink-sides
       )
 
-
-(map! :after evil
-      :map evil-motion-state-map
-      (:prefix "["
-       :desc "Ring Left" "r" #'window-ring-move-perspective-2
-       )
-      (:prefix "]"
-       :desc "Ring Right" "r" #'window-ring-move-perspective
-       )
-      )

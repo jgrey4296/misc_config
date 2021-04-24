@@ -6,8 +6,7 @@
 
               jg-misc-ibuffer-heuristics (rx (or "backtab"
                                                  (regexp "\\.\\.")
-                                                 (regexp "^[[:alpha:]]\\{2,\\}")
-                                          )
+                                                 (regexp "^[[:alpha:]]\\{2,\\}")))
               )
 
 

@@ -75,7 +75,7 @@ Dedicated (locked) windows are left untouched."
 
 (defun +jg-misc-ivy-predicate (x)
   ;; return nil for cruft buffers
-  x
+  (not (string-match jg-misc-ivy-predicate-patterns (car x)))
   )
 
 (defun +jg-misc-ivy-switch-buffer ()
@@ -86,5 +86,6 @@ Dedicated (locked) windows are left untouched."
             :preselect (buffer-name (other-buffer (current-buffer)))
             :action #'ivy--switch-buffer-action
             :matcher #'ivy--switch-buffer-matcher
+            :sort t
             :caller 'ivy-switch-buffer)
   )

@@ -22,5 +22,15 @@
                                               :select nil
                                               :modeline t
                                               :ttl nil)
-              )
 
+              jg-misc-ivy-predicate-patterns (rx (or "*helpful"
+                                                     "*Ibuffer"
+                                                     "*helm-"
+                                                     "doom"
+                                                     "*dired-log"
+                                                     "magit"
+                                                     "*Free Keys"
+                                                     )
+                                              )
+
+              )

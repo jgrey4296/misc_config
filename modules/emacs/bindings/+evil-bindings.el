@@ -434,23 +434,3 @@
       :desc "Forward Motion"   "]" jg-binding-forward-motion-map
       )
 
-(+jg-binding-keymap-update-plural jg-binding-operator-map
-                                  jg-binding-vision-map
-                                  jg-binding-forward-motion-map
-                                  jg-binding-backward-motion-map
-                                  jg-binding-inner-text-objects-map
-                                  jg-binding-outer-text-objects-map
-                                  jg-binding-normal-state-map
-                                  jg-binding-visual-state-map
-                                  jg-binding-operator-state-map
-                                  jg-binding-motion-state-map
-                                  )
-
-(setq evil-global-keymaps-alist
-      '((evil-emacs-state-minor-mode    . evil-emacs-state-map)
-        (evil-motion-state-minor-mode   . jg-binding-motion-state-map)
-        (evil-replace-state-minor-mode  . evil-replace-state-map)
-        (evil-operator-state-minor-mode . jg-binding-operator-state-map)
-        (evil-visual-state-minor-mode   . jg-binding-visual-state-map)
-        (evil-insert-state-minor-mode   . evil-insert-state-map)
-        (evil-normal-state-minor-mode   . jg-binding-normal-state-map)))

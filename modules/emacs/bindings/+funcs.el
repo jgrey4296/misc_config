@@ -205,26 +205,3 @@ If region isn't active, narrow away anything above point
     )
 
 
-(defun +jg-binding-kbd-heuristics (x)
-  " Return True if input is a valid keybinding "
-  (if (string-match jg-misc-ibuffer-heuristics (car x)) nil
-    t))
-
-(defun +jg-binding-keymap-update-descs (the-map)
-  " Update which-key descriptions for a keymap "
-  (let* ((triples (which-key--get-bindings nil the-map nil t))
-         (pairs (mapcar #'+jg-binding-process-triples triples))
-         (filtered (-filter #'+jg-binding-kbd-heuristics pairs))
-         )
-    (apply #'which-key-add-keymap-based-replacements the-map
-           (flatten-list filtered))
-    )
-  )
-(defun +jg-binding-process-triples (triple)
-  " Convert which-key--get-bindings to a format
-correct for which-key-add-keymap-based-replacements "
-  (mapcar #'substring-no-properties
-          (list (car triple) (caddr triple))))
-(defun +jg-binding-keymap-update-plural (&rest the-maps)
-  (mapcar #'+jg-binding-keymap-update-descs the-maps)
-  )

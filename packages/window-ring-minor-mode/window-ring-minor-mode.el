@@ -182,6 +182,9 @@
   )
 
 (defun window-ring-setup-columns (arg &optional soft)
+  " Reset windows to (or arg 3) columns.
+    if SOFT then don't clear the window ring
+  "
   ;; (arg == 1 -> one row) (else -> two rows, only use top)
   ;; Clear
   (if (not window-ring-minor-mode)

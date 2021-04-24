@@ -51,7 +51,6 @@ Type SPC or `y' to %s one match, DEL or `n' to skip to next,
     (dired-create-files
      file-creator operation fn-list regexp-name-constructor marker-char)))
 
-
 (defun +jg-dired-find-random-marked-file ()
   "Open random file from marked"
   (interactive)

@@ -46,6 +46,7 @@
  char-insert
  (bindings +bindings)
  jg-tag
+ jg-dired
 
  :completion ;; ----- ====== -----
  jg-completion

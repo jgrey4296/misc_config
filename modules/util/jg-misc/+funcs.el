@@ -67,3 +67,8 @@ Dedicated (locked) windows are left untouched."
              doom-scratch-initial-major-mode))
       default-directory
         (doom-project-name)))))
+
+(defun +jg-misc-yank-buffer-name ()
+  (interactive)
+  (message (kill-new (buffer-name)))
+  )

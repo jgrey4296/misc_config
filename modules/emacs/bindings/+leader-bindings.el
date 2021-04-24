@@ -50,23 +50,27 @@
 ;;; <leader> b --- buffer
 (map! :leader
       :prefix ("b" . "buffer")
-      :desc "Switch buffer"               "b" #'switch-to-buffer
-      :desc "Clear Buffer"                "c" #'+jg-bindings-clear-buffer
-      :desc "Kill all buffers"            "K" #'doom/kill-all-buffers
-      :desc "Kill buffer"                 "d" #'kill-current-buffer
-      :desc "Kill other buffers"          "O" #'doom/kill-other-buffers
-      :desc "New empty buffer"            "n" #'evil-buffer-new
+      :desc "Clear Buffer"                "DEL" #'+jg-bindings-clear-buffer
+      :desc "Switch to last buffer"       "TAB" #'evil-switch-to-windows-last-buffer
       :desc "Next buffer"                 "]" #'next-buffer
       :desc "Previous buffer"             "[" #'previous-buffer
+      :desc "Toggle narrowing"            "-" #'+jg-toggle-narrow-buffer
+
+      :desc "Switch buffer"               "b" #'switch-to-buffer
+      :desc "Create Buffer"               "c" #'evil-buffer-new
+      :desc "Kill buffer"                 "d" #'kill-current-buffer
+      :desc "Clone Indirect"              "i" #'clone-indirect-buffer-other-window
+      :desc "Kill all buffers"            "K" #'doom/kill-all-buffers
+
+      :desc "New empty buffer"            "n" #'+jg-misc-yank-buffer-name
+      :desc "Kill other buffers"          "O" #'doom/kill-other-buffers
       :desc "Read-only mode"              "r" #'read-only-mode
       :desc "Revert buffer"               "R" #'revert-buffer
       :desc "Save all buffers"            "S" #'evil-write-all
       :desc "Save buffer"                 "s" #'basic-save-buffer
-      :desc "Switch to last buffer"       "l" #'evil-switch-to-windows-last-buffer
       :desc "Pop up scratch buffer"       "x" #'doom/open-scratch-buffer
-      :desc "Toggle narrowing"            "-" #'+jg-toggle-narrow-buffer
-      :desc "Clone Indirect"              "i" #'clone-indirect-buffer-other-window
       :desc "Bury buffer"                 "z" #'bury-buffer
+
       )
 ;;; <leader> c --- code
 (map! :leader
@@ -562,25 +566,6 @@
 ;;; <leader> x -- Text
 (map! :leader
       :prefix ("x" . "Text")
-      :desc "Mark" "m"                                    #'mark-whole-buffer
-      :desc "Iedit" "e"                                   #'evil-iedit-state/iedit-mode
-      :desc "Regexp Builder" "r"                          #'regexp-builder
-      ;; align
-      (:prefix ("a" . "Align")
-       :desc "Regexp"    "r"                              #'align-regexp
-       )
-      ;; Lines
-      (:prefix ("l" . "Lines")
-       ;; untabify
-       :desc "Flush Lines" "f"                                    #'flush-lines
-       :desc "Keep Lines"  "K"                                    #'keep-lines
-       :desc "Delete trailing newlines"   "W" #'doom/delete-trailing-newlines
-       :desc "Delete trailing whitespace" "w" #'delete-trailing-whitespace
-       :desc "Whitespace Cleanup"         "c" #'whitespace-cleanup
-       :desc "Indent"                     "i" #'indent-region
-       :desc "Random"                     "r" #'+jg-bindings-goto-random-line
-       )
-      (:prefix ("i" . "insert"))
       )
 ;;; <leader> y --- snippets
 (map! :leader

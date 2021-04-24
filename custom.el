@@ -137,18 +137,3 @@
        (mode . gnus-summary-mode)
        (mode . gnus-article-mode)))))
  '(org-agenda-files '("/Users/johngrey/.doom.d/setup_files/base_agenda.org")))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :extend nil :stipple nil :background "gray13" :foreground "#dddddd" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 1 :width normal :foundry "default" :family "default"))))
- '(diredfl-flag-mark-line ((t (:background "deepskyblue4"))))
- '(font-lock-comment-face ((t (:foreground "mediumorchid1" :slant italic))))
- '(ivy-current-match ((t (:extend t :background "royalblue" :weight normal))))
- '(ivy-highlight-face ((t (:foreground "mediumvioletred"))))
- '(ivy-prompt-match ((t (:background "palevioletred1"))))
- '(ivy-remote ((t (:foreground "forestgreen"))))
- '(vimish-fold-fringe ((t (:foreground "indianred"))))
- '(vimish-fold-overlay ((t (:background "dodgerblue" :foreground "black" :weight light))))
- '(whitespace-tab ((t (:background "firebrick" :foreground "#505050")))))

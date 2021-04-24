@@ -111,8 +111,6 @@
       :desc "Goto Column"         "|" #'evil-goto-column
       :desc "Forward Paragraph"   "}" #'evil-forward-paragraph
 
-      "\\"                            nil
-
       :desc "Scroll Left" "<left>"    #'evil-scroll-left
       :desc "Scroll Right" "<right>"  #'evil-scroll-right
       :desc "Scroll Up" "<up>"        #'evil-scroll-page-up
@@ -176,22 +174,14 @@
       :desc "ispell-word"   "= "  #'ispell-word
 
       :desc "open-fold-rec" "A" #'evil-open-fold-rec
-      "C" nil
       :desc "close-folds"   "D" #'evil-close-folds
-      "N" nil
-      "O" nil
-      "X" nil
 
       :desc "toggle-fold"   "a" #'evil-toggle-fold
-      "c" nil
       :desc "close-fold"    "d" #'evil-close-fold
       :desc "Next Fold"     "j" #'+fold/next
       :desc "Prev Fold"     "k" #'+fold/previous
-      "m" nil
-      "n" nil
       :desc "open-fold"     "o" #'evil-open-fold
       :desc "open-folds"    "r" #'evil-open-folds
-      "s" nil
 
       :desc "Center" "z"   #'evil-scroll-line-to-center
       :desc "Top"    "t"   #'evil-scroll-line-to-top
@@ -216,7 +206,6 @@
        :desc "previous-fold"          "k"  #'vimish-fold-previous-fold
        :desc "refold-all"             "m"  #'vimish-fold-refold-all
        :desc "unfold-all"             "r"  #'vimish-fold-unfold-all
-       "x" nil
        )
       )
 
@@ -365,59 +354,41 @@
 
       :desc "Section" "["         #'evil-backward-section-begin
       :desc "Close Paren" "]"     #'+jg-text-prev-close-paren-motion
-      "("          nil ;; #'evil-previous-open-paren
-      "{"          nil ;; #'evil-previous-open-brace
-      "#"          nil ;; #'+evil/previous-preproc-directive
 
       :desc "Arg"          "a" #'evil-backward-arg
       :desc "Buffer"       "b" #'previous-buffer
       :desc "Comment"      "c" #'+evil/previous-comment
       :desc "Git Hunk"     "d" #'git-gutter:previous-hunk
       :desc "Error"        "e" #'previous-error
-      "f" nil
-      "F" nil
       :desc "Heading"      "h" #'outline-previous-visible-heading
       :desc "Empty Line"   "l" #'+jg-text-prev-empty-line-motion
       :desc "Begin Method"       "m" #'+evil/previous-beginning-of-method
       :desc "End Method"       "M" #'+evil/previous-end-of-method
-      "o" nil
       :desc "Ring Window"  "r" #'window-ring-move-perspective-2
       :desc "Section"      "s" #'evil-backward-section-begin
       :desc "Todo"         "t" #'hl-todo-previous
-      "u" nil
       :desc "Workspace"    "w" #'+workspace/switch-left
-      "y" nil
-
       )
 (map! :map jg-binding-forward-motion-map
       :desc "Narrow"        "RET" #'+jg-narrowing-move-focus-forward
 
       :desc "Section"    "]"   #'evil-forward-section-begin
       :desc "Open Paren" "["   #'+jg-text-next-open-paren-motion ;; #'evil-forward-section-end
-      ")" nil
-      "}" nil
-      "#" nil
 
-      :desc "Arg"         "a" #'evil-forward-arg
-      :desc "Buffer"      "b" #'next-buffer
-      :desc "Comment"     "c" #'+evil/next-comment
-      :desc "Git Hunk"    "d" #'git-gutter:next-hunk
-      :desc "Error"       "e" #'next-error
-      "F" nil
-      "f" nil
-      :desc "Heading"     "h" #'outline-next-visible-heading
-      :desc "Empty Line"    "l" #'+jg-text-next-empty-line-motion
-      :desc "Begin Method"      "m" #'+evil/next-beginning-of-method
-      :desc "End Method"      "M" #'+evil/next-end-of-method
-      "o" nil
-      :desc "Ring Window" "r" #'window-ring-move-perspective
-      :desc "Section"     "s" #'evil-forward-section-begin ;; #'evil-next-flyspell-error
-      :desc "Todo"        "t" #'hl-todo-next
-      "u" nil
-      :desc "Workspace"   "w" #'+workspace/switch-right
-      "y"
+      :desc "Arg"          "a" #'evil-forward-arg
+      :desc "Buffer"       "b" #'next-buffer
+      :desc "Comment"      "c" #'+evil/next-comment
+      :desc "Git Hunk"     "d" #'git-gutter:next-hunk
+      :desc "Error"        "e" #'next-error
+      :desc "Heading"      "h" #'outline-next-visible-heading
+      :desc "Empty Line"   "l" #'+jg-text-next-empty-line-motion
+      :desc "Begin Method" "m" #'+evil/next-beginning-of-method
+      :desc "End Method"   "M" #'+evil/next-end-of-method
+      :desc "Ring Window"  "r" #'window-ring-move-perspective
+      :desc "Section"      "s" #'evil-forward-section-begin ;; #'evil-next-flyspell-error
+      :desc "Todo"         "t" #'hl-todo-next
+      :desc "Workspace"    "w" #'+workspace/switch-right
       )
-
 
 (map! :map (jg-binding-normal-state-map jg-binding-visual-state-map jg-binding-motion-state-map)
       :desc "Do Ops"        "g"   jg-binding-operator-map

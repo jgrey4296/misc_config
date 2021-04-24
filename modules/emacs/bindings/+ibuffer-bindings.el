@@ -8,9 +8,14 @@
       :desc "negative"            "-" #'negative-argument
       :desc "mark-old-buffers"    "." #'ibuffer-mark-old-buffers
       :desc "Filters"             "\\" ibuffer--filter-map
+      :n "%" nil
+      :n "g" nil
+      :n "s" nil
+      :n "\\" nil
+      :n "o" nil
 
-      "j" #'evil-next-line
-      "k" #'evil-previous-line
+      "j" #'ibuffer-forward-line
+      "k" #'ibuffer-backward-line
 
       "l" nil
       "h" #'ignore
@@ -38,8 +43,8 @@
        :desc "mark-compressed-file-buffers" "z" #'ibuffer-mark-compressed-file-buffers
        )
 (map! :map ibuffer--filter-map
-       "<S-up>"                    nil ;;#'ibuffer-pop-filter-group
-       "<up>"                      #'ibuffer-pop-filter
+       "S-<up>"                    nil
+       "<up>"                      nil
        "RET"                       #'ibuffer-filter-by-mode
        "SPC"                       #'ibuffer-filter-chosen-by-completion
        "TAB"                       #'ibuffer-exchange-filters
@@ -82,8 +87,8 @@
        :desc "or-filter"                     "|" #'ibuffer-or-filter
        )
 
-(+jg-binding-keymap-update-plural  ibuffer-mode-map
-                                   ibuffer--filter-map)
+(+jg-binding-keymap-update-plural  'ibuffer-mode-map
+                                   'ibuffer--filter-map)
 
 (add-hook 'ibuffer-mode-hook #'+jg-ibuffer-filter-setup)
-(evil-make-overriding-map ibuffer-mode-map)
+(evil-make-intercept-map ibuffer-mode-map)

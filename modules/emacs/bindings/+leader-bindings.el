@@ -10,7 +10,7 @@
       :desc "Open Url"              "?"   #'+jg-browse-url
 
       :desc "Find file"             "."   #'find-file
-      :desc "Switch buffer"         ","   #'switch-to-buffer
+      :desc "Switch buffer"         ","   #'+jg-misc-ivy-switch-buffer
       :desc "Popup Buffer"          "<"   #'+jg-misc-ivy-popup-buffer
       :desc "Pop Shell"             "'"   #'shell
       :desc "Switch to last buffer" "TAB" #'evil-switch-to-windows-last-buffer

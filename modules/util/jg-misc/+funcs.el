@@ -72,3 +72,19 @@ Dedicated (locked) windows are left untouched."
   (interactive)
   (message (kill-new (buffer-name)))
   )
+
+(defun +jg-misc-ivy-predicate (x)
+  ;; return nil for cruft buffers
+  x
+  )
+
+(defun +jg-misc-ivy-switch-buffer ()
+  (interactive)
+  (ivy-read "Switch to buffer: " #'internal-complete-buffer
+            :keymap ivy-switch-buffer-map
+            :predicate #'+jg-misc-ivy-predicate
+            :preselect (buffer-name (other-buffer (current-buffer)))
+            :action #'ivy--switch-buffer-action
+            :matcher #'ivy--switch-buffer-matcher
+            :caller 'ivy-switch-buffer)
+  )

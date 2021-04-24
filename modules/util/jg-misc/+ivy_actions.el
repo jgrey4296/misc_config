@@ -4,6 +4,7 @@
   (interactive)
   (ivy-read "Popup Buffer: " #'internal-complete-buffer
             :keymap ivy-switch-buffer-map
+            :predicate #'+jg-misc-ivy-predicate
             :action #'+jg-misc-ivy-open-as-popup
             :matcher #'ivy--switch-buffer-matcher
             :call 'jg-misc-ivy-popup-buffer

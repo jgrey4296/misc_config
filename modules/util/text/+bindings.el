@@ -5,30 +5,14 @@
 (map! "M-z" nil)
 
 ;; Text bindings
-(map! :n "g '" 'evil-operator-string-inflection)
+;; (map! :map jg-bindings-operator-map)
+
 (map! :leader
       :prefix "x"
-      :desc "Escalate Regexp" "!" #'+jg-text-escalate-replace
-      (:prefix ("c" . "Char")
-       :desc "Zap" "z" #'zap-up-to-char
-       )
-      (:prefix ("l" . "Lines")
-      :desc "Split on Char N" "s"         #'+jg-text-split-on-char-n
-      :desc "Uniqify"         "u"         #'+jg-text-uniquify
-      :desc "Remove Leading Whitespace" "L" #'+jg-text-remove-leading-whitespace
-      :desc "Jusify"   "j" #'justify-current-line
-      )
-      (:prefix ("w" . "Word")
-       :desc "Title Case" "t" #'+jg-text-title-case
-       :desc "Inflection" "i" #'evil-operator-string-inflection
-       :desc "Upper"      "U" #'evil-upcase
-       :desc "Down"       "u" #'evil-downcase
-       )
-      (:prefix ("/" . "Search")
-       :desc "Next Similar String" "s"       #'+jg-text-next-similar-string
-       :desc "Simple Grep"     "g"           #'+jg-text-simple-grep
-       )
-
+      (:prefix ("c" . "Char"))
+      (:prefix ("l" . "Lines"))
+      (:prefix ("w" . "Word"))
+      (:prefix ("/" . "Search"))
 )
 (map! :leader
       :prefix "h"

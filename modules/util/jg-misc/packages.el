@@ -2,9 +2,8 @@
 (package! flycheck-plantuml)
 (package! free-keys)
 (package! fsm)
-(package! highlight-parentheses)
+
 (package! plantuml-mode)
-(package! rainbow-mode)
 (package! undo-tree)
 
 (package! 2048-game         :disable t)

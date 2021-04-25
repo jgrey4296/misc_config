@@ -1,6 +1,7 @@
 ;;; util/jg-mail/+funcs.el -*- lexical-binding: t; -*-
 
 (defun +jg-mail-override-mu4e-hook ()
+  (message "Mail override hook: %s" (current-time-string))
   (setq-default smtpmail-smtp-service 465
                 message-send-mail-function   'smtpmail-send-it
                 smtpmail-default-smtp-server "smtp.gmail.com"

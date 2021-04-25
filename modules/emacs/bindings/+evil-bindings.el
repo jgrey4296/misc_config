@@ -1,7 +1,7 @@
 ;;; emacs/bindings/+evil-maps.el -*- lexical-binding: t; -*-
 ;; Reminder: evil-mode-map-alist
 (defun +jg-binding-setup-evil-hook ()
-  (message "Setting up Evil Bindings")
+  (message "Setting up Evil Bindings: %s" (current-time-string))
 
   (global-set-key (kbd "<backtab>")       #'evil-normal-state)
   (map! :map global-map
@@ -416,7 +416,7 @@
 
 
 (defun +jg-binding-evil-finalise-hook ()
-  (message "Finalising Evil bindings")
+  (message "Finalising Evil bindings: %s" (current-time-string))
   ;; Override Evil maps and use my own:
   (+jg-binding-keymap-update-plural 'jg-binding-operator-map
                                     'jg-binding-vision-map

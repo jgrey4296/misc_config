@@ -1,6 +1,7 @@
 ;;; emacs/dired/+vars.el -*- lexical-binding: t; -*-
 
 (defun +jg-dired-var-hook ()
+  (message "Setting up dired vars: %s" (current-time-string))
   (setq dgi-commit-message-format "%h %cs %s"
         dgi-auto-hide-details-p nil)
 

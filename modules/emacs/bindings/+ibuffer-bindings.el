@@ -1,6 +1,6 @@
 ;;; emacs/bindings/+ibuffer-bindings.el -*- lexical-binding: t; -*-
 (defun +jg-binding-ibuffer-setup-hook ()
-  (message "Setting up Ibuffer bindings")
+  (message "Setting up Ibuffer bindings: %s" (current-time-string))
   (map! :map ibuffer-mode-map
         :desc "Do Shell Cmd File"   "!" #'ibuffer-do-shell-command-file
         :desc "add-to-tmp-show"     "+" #'ibuffer-add-to-tmp-show
@@ -90,6 +90,7 @@
 )
 
 (defun +jg-binding-ibuffer-update-hook ()
+  (message "Updating ibuffer: %s" (current-time-string))
   (+jg-binding-keymap-update-plural  'ibuffer-mode-map
                                      'ibuffer--filter-map)
 

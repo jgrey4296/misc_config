@@ -1,6 +1,7 @@
 ;;; util/text/+bindings.el -*- lexical-binding: t; -*-
 
 (defun +jg-text-binding-hook ()
+  (message "Setting up text binding: %s" (current-time-string))
   ;; Get rid of zap to char:
   (map! "M-z" nil)
 

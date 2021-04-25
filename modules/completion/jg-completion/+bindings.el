@@ -1,7 +1,7 @@
 ;;; completion/ivy/+bindings.el -*- lexical-binding: t; -*-
 
 (defun +jg-completion-binding-hook ()
-  (message "Setting up Completion bindings")
+  (message "Setting up Completion bindings: %s" (current-time-string))
 
   (define-key! ivy-minibuffer-map
     [remap doom/delete-backward-word] #'ivy-backward-kill-word

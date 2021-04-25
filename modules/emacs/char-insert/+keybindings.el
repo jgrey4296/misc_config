@@ -1,5 +1,6 @@
 
 (defun +char-insert-binding-hook ()
+  (message "Setting up char insert bindings: %s" (current-time-string))
   (map! :map global-map
         :desc "Insert Char" :gi "C-x 8 RET" #'insert-char
         )

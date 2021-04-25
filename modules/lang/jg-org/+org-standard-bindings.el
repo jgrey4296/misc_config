@@ -1,6 +1,7 @@
 ;; lang/org/+bindings_2.el -*- lexical-binding: t; -*-
 ;; Misc
 (defun +jg-org-main-bindings-hook ()
+  (message "Setting up org main bindings: %s" (current-time-string))
   (map! :after org
         :map org-mode-map
         ;; textmate-esque newline insertion
@@ -238,7 +239,7 @@
 )
 
 (defun +jg-org-personal-binding-hook ()
-  (message "Setting up org personal bindings")
+  (message "Setting up org personal bindings: %s" (current-time-string))
   ;; Wiping old
   (map! :map org-mode-map
         "C-c [" nil

@@ -2,7 +2,7 @@
 ;; Bibtex bindings
 
 (defun +bibtex-binding-hook ()
-  (message "Setting up bibtex bindings")
+  (message "Setting up bibtex bindings: %s" (current-time-string))
   (map! :map bibtex-mode-map
         :desc "Clean entry"        :n "C-c C-c" #'+jg-bibtex-clean-entry
         :desc "Clean entry"        :n "TAB"     #'+jg-bibtex-clean-entry
@@ -53,7 +53,7 @@
 )
 
 (defun +bibtex-general-binding-hook ()
-  (message "Setting up general bibtex bindings")
+  (message "Setting up general bibtex bindings: %s" (current-time-string))
   (map! :leader
         :desc "Bibtex Helm"               "a h b" #'+jg-bibtex-helm-bibtex
         (:prefix ("a b" . "Bibtex")
@@ -62,7 +62,7 @@
 )
 
 (defun +bibtex-dired-binding-hook ()
-  (message "Setting up bibtex bindings")
+  (message "Setting up bibtex bindings: %s" (current-time-string))
   (map! :after dired
         :map dired-mode-map
         :localleader
@@ -73,6 +73,6 @@
 
 
 (defun +bibtex-evil-ex-binding-hook ()
-  (message "Setting up bibtex evil ex")
+  (message "Setting up bibtex evil ex: %s" (current-time-string))
     (evil-ex-define-cmd "ci[te]" #'+jg-bibtex-insert-wrapped)
     )

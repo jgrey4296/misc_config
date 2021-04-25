@@ -1,7 +1,7 @@
 ;;; editor/project-walk/+bindings.el -*- lexical-binding: t; -*-
 
 (defun +project-walk-binding-hook ()
-  (message "Setting up Project Walk Hook")
+  (message "Setting up Project Walk Hook: %s" (current-time-string))
   (map! :leader
         :prefix "p"
         :desc "Project Walk" "W" #'project-walk-minor-mode

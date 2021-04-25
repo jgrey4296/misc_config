@@ -1,6 +1,6 @@
 ;;; main/jg-org/+bindings.el -*- lexical-binding: t; -*-
 (defun +jg-org-general-binding-hook ()
-  (message "Setting up general access org bindings")
+  (message "Setting up general access org bindings: %s" (current-time-string))
   (map! :leader
         "i t"    #'org-time-stamp
         "j c"    #'org-goto-calendar
@@ -17,7 +17,7 @@
   )
 
 (defun +jg-org-dired-binding-hook ()
-  (message "Setting up dired org bindings")
+  (message "Setting up dired org bindings: %s" (current-time-string))
   (map! :after dired
         :map (dired-mode-map ranger-mode-map)
         (:prefix "%"

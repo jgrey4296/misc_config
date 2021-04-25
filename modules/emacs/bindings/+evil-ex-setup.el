@@ -1,7 +1,7 @@
 ;;; main/personal/+evil-setup.el -*- lexical-binding: t; -*-
 
 (defun +jg-binding-evil-ex-setup-hook ()
-  (message "Setting up Evil-Ex bindings")
+  (message "Setting up Evil-Ex bindings: %s" (current-time-string))
 
   (defvar evil-ex-commands nil
     " Custom Evil-ex commands")

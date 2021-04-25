@@ -1,7 +1,7 @@
 ;; Leader no prefix
 ;;
 (defun +jg-binding-setup-leaders-hook ()
-  (message "Setting up leader bindings")
+  (message "Setting up leader bindings: %s" (current-time-string))
   (map! :leader
         :desc "help"                  "h" help-map
         ;;:desc "Flycheck"              "!" flycheck-command-map

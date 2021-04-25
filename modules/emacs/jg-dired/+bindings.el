@@ -2,6 +2,7 @@
 
 
 (defun +jg-dired-binding-hook ()
+  (message "Setting up jg-dired: %s" (current-time-string))
   (map! :map (dired-mode-map ranger-mode-map)
       :m ")"                                #'dired-git-info-mode
       :n "o"                                #'dired-find-file-other-window

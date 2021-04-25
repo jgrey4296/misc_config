@@ -238,8 +238,8 @@
 )
 
 (defun +jg-org-personal-binding-hook ()
-  (message "Setting up org actual bindings")
-;;; Paren Control
+  (message "Setting up org personal bindings")
+  ;; Wiping old
   (map! :map org-mode-map
         "C-c [" nil
         "C-c ]" nil
@@ -247,14 +247,13 @@
         "f" nil
         "." nil
         "i" nil
-        ;; (:prefix "z"
-        ;;  :desc "Narrow on Subtree" :n "RET" #'+jg-org-narrow-on-subtree
-        ;;  )
         )
-;;; Personal
+  ;; Personal
+  ;; <leader>
   (map! :map org-mode-map
         :leader
         :desc "Toggle Links" "t l"   'org-toggle-link-display)
+  ;; <leaderless>
   (map! :map org-mode-map
         :desc "Next Link"       :n "] l" #'org-next-link
         :desc "Prev Link"       :n "[ l" #'org-previous-link
@@ -262,6 +261,7 @@
         :desc "Back Heading"    :n "[ k" #'org-backward-heading-same-level
         :desc "Headings Helm"   :n "g h" #'helm-org-in-buffer-headings
         )
+  ;; <localleader>
   (map! :map org-mode-map
         :localleader
         :desc "Refile" "R" #'+jg-org-refile-subtree

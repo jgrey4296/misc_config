@@ -371,6 +371,12 @@
         :desc "Section"      "s" #'evil-backward-section-begin
         :desc "Todo"         "t" #'hl-todo-previous
         :desc "Workspace"    "w" #'+workspace/switch-left
+
+        ;; TODO rotate text
+       ;;  (:when (featurep! :editor rotate-text)
+       ;; :n "]r"  #'rotate-text
+       ;; :n "[r"  #'rotate-text-backward)
+
         )
   (map! :map jg-binding-forward-motion-map
         :desc "Narrow"     "RET" #'+jg-narrowing-move-focus-forward
@@ -410,6 +416,7 @@
 
 
 (defun +jg-binding-evil-finalise-hook ()
+  (message "Finalising Evil bindings")
   ;; Override Evil maps and use my own:
   (+jg-binding-keymap-update-plural 'jg-binding-operator-map
                                     'jg-binding-vision-map

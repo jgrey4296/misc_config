@@ -18,16 +18,15 @@
         )
   )
 
-(add-hook! doom-first-input :append
-           #'+jg-binding-setup-leaders-hook
-           #'+jg-binding-setup-leaderless-hook
-           #'+jg-binding-setup-evil-hook
-  ;;         #'+jg-binding-evil-finalise-hook
-)
+(add-hook 'doom-first-input-hook #'+jg-binding-setup-leaders-hook -100)
+(add-hook 'doom-first-input-hook #'+jg-binding-setup-leaderless-hook -100)
+(add-hook 'doom-first-input-hook #'+jg-binding-setup-evil-hook -100)
+(add-hook 'doom-first-input-hook #'+jg-binding-evil-finalise-hook -100)
+(add-hook 'doom-first-input-hook #'+jg-binding-evil-submap-hook -100)
 
 (add-hook! ibuffer-load
            #'+jg-binding-ibuffer-setup-hook
-           ;;#'+jg-binding-ibuffer-update-hook
+           #'+jg-binding-ibuffer-update-hook
            )
 
 (add-hook! evil-after-load

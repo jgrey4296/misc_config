@@ -1,6 +1,6 @@
 ;;; util/base_bindings/+bindings.el -*- lexical-binding: t; -*-
 (defun +jg-binding-setup-leaderless-hook ()
-  (message "Setting up Leaderles bindings")
+  (message "Setting up Leaderless bindings")
   (global-set-key (kbd "C-c [") #'+jg-personal-insert-lparen)
   (global-set-key (kbd "C-c ]") #'+jg-personal-insert-rparen)
   (global-set-key (kbd "C-c u") #'universal-argument)

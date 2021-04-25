@@ -48,4 +48,4 @@
 
 (add-hook! doom-first-input
            #'+jg-misc-setup-popup-rules-hook
-           #'jg-misc-binding-hook)
+           #'+jg-misc-binding-hook)

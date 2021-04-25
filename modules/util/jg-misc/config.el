@@ -2,9 +2,7 @@
 (load! "+funcs")
 (load! "+vars")
 (load! "+popup")
-(after! evil
-  (load! "+bindings")
-  )
+(load! "+bindings")
 (after! ivy
   (load! "+ivy_actions")
   )
@@ -15,20 +13,8 @@
         exec-path (cons "/usr/local/opt/erlang/bin" exec-path)
         )
   )
-(use-package! rainbow-mode
-  :defer t
-  :init
-  (add-hook 'prog-mode-hook 'rainbow-mode)
-)
-(use-package! evil-string-inflection
-  :defer t
-  :commands evil-operator-string-inflection
-  )
 (use-package! free-keys
   :commands (free-keys free-keys-set-prefix)
-  )
-(use-package! highlight-parentheses
-  :defer t
   )
 (use-package! undo-tree
   :config
@@ -60,4 +46,6 @@
 
   )
 
-
+(add-hook! doom-first-input
+           #'+jg-misc-setup-popup-rules-hook
+           #'jg-misc-binding-hook)

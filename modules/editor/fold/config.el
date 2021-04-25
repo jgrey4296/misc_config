@@ -2,9 +2,6 @@
 
 ;;
 ;; Packages
-(after! evil
-  (load! "+bindings")
-  )
 (load! "+vars")
 
 
@@ -59,7 +56,6 @@
               nil))
            hs-special-modes-alist
            '((t))))))
-
 
 (use-package! evil-vimish-fold
   :when (featurep! :editor evil)

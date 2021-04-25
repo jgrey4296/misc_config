@@ -7,9 +7,7 @@
 (load! "+helm")
 (load! "+tags")
 (load! "+hydra")
-(after! evil
-  (load! "+bindings")
-  )
+(load! "+bindings")
 
 
 (use-package! bibtex
@@ -32,7 +30,16 @@
         do (add-hook 'org-ref-clean-bibtex-entry-hook hook 100))
   )
 
-(after! (f helm-bibtex)
-  (+jg-bibtex-build-list)
-)
+(add-hook! doom-first-input
+           #'+bibtex-binding-hook
+           #'+bibtex-general-binding-hook
+           #'+jg-bibtex-build-list
+           )
 
+(add-hook! dired-load
+           #'+bibtex-dired-binding-hook
+           )
+
+(add-hook! evil-after-load
+           #'+bibtex-evil-ex-binding-hook
+           )

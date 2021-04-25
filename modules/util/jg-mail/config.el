@@ -1,9 +1,7 @@
 ;;; util/jg-mail/config.el -*- lexical-binding: t; -*-
 
 
-(after! evil
-  (load! "+bindings")
-  )
+(load! "+bindings")
 (load! "+funcs")
 
 (set-email-account! "jgrey4296"
@@ -19,3 +17,5 @@
 (use-package! mu4e
   :hook (mu4e-main-mode . +jg-mail-override-mu4e-hook)
   )
+
+(add-hook! doom-first-input #'+jg-mail-binding-hook)

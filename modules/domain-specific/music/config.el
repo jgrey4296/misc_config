@@ -1,21 +1,7 @@
-(setq-default tidal-interpreter "/usr/local/bin/ghci"
-              ;; tidal-interpreter-arguments
-              ;; (list "-ghci-script" (expand-file-name "~/github/languageLearning/tidal/.ghci"))
-              sclang-auto-scroll-post-buffer t
-              sclang-help-path (quote ("/Applications/SuperCollider/Help"))
-              sclang-program "sclang"
-              sclang-rtf-editor-program "emacs"
-              sclang-show-workspace-on-startup nil
-              sclang-library-configuration-file (expand-file-name "~/.doom.d/modules/jg-music-layer/sclang.yaml")
-              sclang-udp-port 57120
-              sclang-eval-line-forward nil
-              sclang-runtime-directory (expand-file-name "~/.sclang/")
-              sclang-boot-file (expand-file-name "~/.doom.d/modules/jg-music-layer/startup.scd")
+(load! "+vars")
+(load! "+bindings")
+(load! "+hooks")
 
-              jg-music-layer-tidal-workspace "Tidal Workspace"
-              jg-music-layer-sclang-workspace "SCLang Workspace"
-
-              )
 (use-package! jg-music-layer-minor-mode
   :commands (jg-music-layer-minor-mode jg-music-layer-on global-jg-music-layer-mode)
   :config
@@ -58,6 +44,5 @@
   :commands (chuck-mode)
   )
 
-(after! evil
-  (load! "+bindings")
-  )
+
+(add-hook! doom-first-input #'+music-binding-hook)

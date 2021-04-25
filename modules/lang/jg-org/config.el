@@ -7,11 +7,8 @@
 (load! "+vars")
 (load! "+tags")
 (load! "+text-utils")
-(after! evil
-  (load! "+org-standard-bindings.el")
-  (load! "+org-standard-bindings-2.el")
-  (load! "+bindings")
-  )
+(load! "+org-standard-bindings.el")
+(load! "+bindings")
 
 (use-package! link-hint
   :config
@@ -26,6 +23,17 @@
   (push 'org-link link-hint-types)
   )
 
-(after! org
-  (add-hook! 'org-mode-hook #'+jg-org-setup-tags-hook)
-  )
+(add-hook! org-load
+           #'+jg-org-setup-tags-hook
+           #'+jg-org-main-bindings-hook
+           #'+jg-org-personal-binding-hook
+           )
+
+(add-hook! doom-first-input
+           #'+jg-org-general-binding-hook
+
+           )
+
+(add-hook! dired-load
+           #'+jg-org-dired-binding-hook
+           )

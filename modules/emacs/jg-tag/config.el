@@ -3,10 +3,8 @@
   )
 (after! ivy 
   (load! "+ivy_actions"))
-(after! evil
-  (load! "+bindings")
-)
 
+(load! "+bindings")
 (load! "+dired")
 (load! "+helm")
 (load! "+index")
@@ -26,3 +24,14 @@
     (+jg-tag-helm-tagger beg end)
     )
   )
+
+(add-hook! dired-load
+           #'+jg-tag-dired-binding-hook)
+
+(add-hook! doom-first-input
+           #'+jg-tag-binding-hook
+           )
+
+(add-hook! evil-after-load
+           #'+jg-tag-evil-binding-hook
+           )

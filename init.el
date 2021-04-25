@@ -19,7 +19,8 @@
  :util  ;; ----- ====== -----
  jg-misc
  jg-mail
- text
+ jg-text
+ jg-org-unit-test
 
  :domain-specific  ;; ----- ====== -----
  logic
@@ -38,7 +39,6 @@
 
  :lang  ;; ----- ====== -----
  jg-org
- jg-org-unit-test
  jg-lisp
  jg-python
 

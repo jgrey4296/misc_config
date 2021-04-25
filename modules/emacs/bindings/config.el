@@ -20,16 +20,16 @@
 
 (add-hook 'doom-first-input-hook #'+jg-binding-setup-leaders-hook -100)
 (add-hook 'doom-first-input-hook #'+jg-binding-setup-leaderless-hook -100)
-(add-hook 'doom-first-input-hook #'+jg-binding-setup-evil-hook -100)
-(add-hook 'doom-first-input-hook #'+jg-binding-evil-finalise-hook -100)
-(add-hook 'doom-first-input-hook #'+jg-binding-evil-submap-hook -100)
 
 (add-hook! ibuffer-load
            #'+jg-binding-ibuffer-setup-hook
            #'+jg-binding-ibuffer-update-hook
            )
 
-(add-hook! evil-after-load
-           #'+jg-binding-backup-evil-maps-hook
-           #'+jg-binding-evil-ex-setup-hook
-           )
+(add-hook 'evil-after-load-hook #'+jg-binding-evil-ex-setup-hook -100)
+(add-hook 'evil-after-load-hook #'+jg-binding-setup-evil-hook -100)
+(add-hook 'evil-after-load-hook #'+jg-binding-evil-submap-hook -100)
+(add-hook 'evil-after-load-hook #'+jg-binding-evil-finalise-hook -90)
+
+(after! which-key
+  (+jg-binding-update-descs-hook))

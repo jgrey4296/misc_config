@@ -37,7 +37,7 @@
   (map! (:when (featurep! :ui popup)
          "C-`"   #'+popup/toggle
          "C-~"   #'+popup/raise
-       "C-;XXX:  p" #'+popup/other)
+         "C-p" #'+popup/other)
         )
 
   )

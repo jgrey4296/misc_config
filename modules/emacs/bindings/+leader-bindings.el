@@ -20,7 +20,8 @@
         :desc "Toggle last popup"     "~"   #'+popup/toggle
 
         :desc "Evaluate line/region"  "e"   #'eval-last-sexp
-        :desc "Eval expression"       "E"   #'pp-eval-expression
+
+        :desc "Eval expression"       "\""   #'pp-eval-expression
         :desc "M-x"                   ";"   #'execute-extended-command
 
         :desc "Org Capture"           "X"   #'org-capture
@@ -79,6 +80,7 @@
   (map! :leader
         :prefix ("c" . "code")
         :desc "Compile"                               "c"   #'compile
+        :desc "Recompile"                             "C"   #'recompile
         :desc "Evaluate & replace region"             "E"   #'+eval:replace-region
         :desc "Evaluate buffer/region"                "e"   #'+eval/buffer-or-region
         :desc "Find implementations"                  "i"   #'+lookup/implementations
@@ -130,6 +132,7 @@
         :desc "Save file"                   "s"   #'save-buffer
         :desc "Sudo find file"              "U"   #'doom/sudo-find-file
         :desc "Yank filename"               "n"   #'+default/yank-buffer-filename
+
         )
   ;;; <leader> g --- git
   (map! :leader
@@ -142,13 +145,19 @@
          :desc "Jump to next hunk"          "n"   #'git-gutter:next-hunk
          :desc "Jump to previous hunk"      "p"   #'git-gutter:previous-hunk)
         (:when (featurep! :tools magit)
-         :desc "Magit dispatch"             "/"   #'magit-dispatch
          :desc "Forge dispatch"             "'"   #'forge-dispatch
-         :desc "Magit status"               "s"   #'magit-status
-         :desc "Magit status here"          "S"   #'magit-status-here
+         :desc "Git stage file"            "S"   #'magit-stage-file
+         :desc "Git unstage file"          "U"   #'magit-unstage-file
          :desc "Magit blame"                "B"   #'magit-blame-addition
-         :desc "Magit fetch"                "F"   #'magit-fetch
          :desc "Magit buffer log"           "L"   #'magit-log
+         :desc "Magit clone"               "C"   #'magit-clone
+         :desc "Magit dispatch"             "/"   #'magit-dispatch
+         :desc "Magit fetch"                "F"   #'magit-fetch
+         :desc "Magit file delete"         "D"   #'magit-file-delete
+         :desc "Magit file dispatch"       "."   #'magit-file-dispatch
+         :desc "Magit status here"          "S"   #'magit-status-here
+         :desc "Magit status"               "s"   #'magit-status
+         :desc "Magit switch branch"       "b"   #'magit-branch-checkout
          (:prefix ("f" . "find")
           :desc "Find file"                 "f"   #'magit-find-file
           :desc "Find gitconfig file"       "g"   #'magit-find-git-config-file
@@ -173,6 +182,7 @@
           :desc "List pull requests"        "p"   #'forge-list-pullreqs
           :desc "List notifications"        "n"   #'forge-list-notifications)
          (:prefix ("c" . "create")
+          :desc "Branch"                    "b"   #'magit-branch-and-checkout
           :desc "Initialize repo"           "r"   #'magit-init
           :desc "Clone repo"                "R"   #'magit-clone
           :desc "Commit"                    "c"   #'magit-commit-create
@@ -189,7 +199,7 @@
         :desc "From clipboard"                "y"   #'+default/yank-pop
         :desc "From evil register"            "r"   #'evil-ex-registers
         :desc "From Minibuffer history"       "m"   #'counsel-minibuffer-history
-
+        :desc "Unicode"                       "u"    #'insert-char
         ;; TODO date, time
 
         (:prefix ("l" . "Lorem Ipsum")
@@ -205,7 +215,7 @@
         ;; reserve "d" for inserting debug statement by mode
         (:when (featurep! :editor snippets)
          :desc "Snippet"                       "s"   #'yas-insert-snippet)
-        :desc "Unicode"                       "u"    #'insert-char
+
         )
   ;;; <leader> j -- Jumping
   (map! :leader
@@ -286,6 +296,7 @@
         (:when (featurep! :lang org +journal)
          (:prefix ("j" . "journal")
           :desc "New Entry"      "j" #'org-journal-new-entry
+          :desc "New Scheduled Entry" "J" #'org-journal-new-scheduled-entry
           :desc "Search Forever" "s" #'org-journal-search-forever))
         (:when (featurep! :lang org +roam)
          (:prefix ("r" . "roam")
@@ -310,7 +321,6 @@
         )
   ;;; <leader> o --- open
   (map! :leader
-        "o" nil ; we need to unbind it first as Org claims this prefix
         :prefix ("o" . "open")
         :desc "Default browser"    "b"             #'browse-url-of-file
         :desc "Debugger"           "d"             #'+debugger/start
@@ -374,6 +384,10 @@
         :desc "Switch to project buffer"     "b"  #'projectile-switch-to-buffer
         :desc "Test project"                 "T"  #'projectile-test-project
 
+        (:prefix ("%" . "Replace")
+         :desc "Replace in Project"        "r" #'projectile-replace
+         :desc "Replace Regexp in Project" "R" #'projectile-replace-regexp
+         )
         (:when (and (featurep! :tools taskrunner)
                     (or (featurep! :completion ivy)
                         (featurep! :completion helm)))
@@ -458,17 +472,16 @@
         :desc "Search project"               "p" #'+default/search-project
         :desc "Search other project"         "P" #'+default/search-other-project
         :desc "Search project for symbol"    "." #'+default/search-project-for-symbol-at-point
+        :desc "Dictionary"                   "t" #'+lookup/dictionary-definition
         :desc "Thesaurus"                    "T" #'+lookup/synonyms
         )
   ;;; <leader> t --- toggle
   (map! :leader
         :prefix ("t" . "toggle")
-        "d" nil
-        "v" nil
-        "n" nil
-        "C"                        #'global-company-mode
-        :desc "Input Language" "i" #'toggle-input-method
-        :desc "SmartParens"    "s" #'smartparens-global-mode
+        :desc "Global Company"  "C" #'global-company-mode
+        :desc "Input Language" "i"  #'toggle-input-method
+        :desc "SmartParens"    "s"  #'smartparens-global-mode
+        :desc "Read-only mode"               "r" #'read-only-mode
         (:prefix ("d" . "Debug")
          :desc "Debug on Error" "e"               #'toggle-debug-on-error
          :desc "Debug on Var" "v"                 #'debug-on-variable-change
@@ -555,16 +568,17 @@
         :desc "Delete Window" "d"                   #'delete-window
         :desc "Split To Right" "/"                  #'split-window-right
         :desc "Split Below" "-"                     #'split-window-below
-        "k"                                         #'evil-window-up
-        "l"                                         #'evil-window-right
-        "h"                                         #'evil-window-left
-        "j"                                         #'evil-window-down
-        "m"                                         #'doom/window-enlargen
-        "M"                                         #'doom/window-maximize-buffer
-        "b"                                         #'balance-windows
+        :desc "Window up" "k"                                         #'evil-window-up
+        :desc "Window right" "l"                                         #'evil-window-right
+        :desc "Window left" "h"                                         #'evil-window-left
+        :desc "Window right" "j"                                         #'evil-window-down
+        :desc "Enlargen" "m"                                         #'doom/window-enlargen
+        :desc "Maximize" "M"                                         #'doom/window-maximize-buffer
+        :desc "Balance" "b"                                         #'balance-windows
 
-        "{"                                         #'shrink-window-horizontally
-        "}"                                         #'shrink-window
+        :desc "Shrink Horizontal" "{"                                         #'shrink-window-horizontally
+        :desc "Shrink Vertical" "}"                                         #'shrink-window
+
         )
   ;;; <leader> x -- Text
   (map! :leader

@@ -1,6 +1,7 @@
 ;;; util/jg-misc/+popup.el -*- lexical-binding: t; -*-
 
-(defun +jg-misc-late-config-popup ()
+(defun +jg-misc-setup-popup-rules-hook ()
+  (message "Setting up popup rules")
   ;; Setup popup vars:
   (setq +popup--display-buffer-alist nil
         display-buffer-alist nil

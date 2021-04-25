@@ -26,7 +26,6 @@
       tab-always-indent t
       which-key-idle-secondary-delay 0.05
       which-key-sort-order 'which-key-key-order-alpha
-      custom-theme-load-path (cons "~/.doom.d/packages/jg-themes" custom-theme-load-path)
       highlight-indent-guides-suppress-auto-error t
       outline-blank-line nil
       line-move-ignore-invisible t

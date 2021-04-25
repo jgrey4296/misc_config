@@ -6,6 +6,7 @@
 (load! "+leaderless-bindings")
 (load! "+evil-ex-setup")
 (load! "+evil-bindings")
+(load! "+evil-bindings-2")
 (load! "+ibuffer-bindings")
 (load! "+which-key-update")
 

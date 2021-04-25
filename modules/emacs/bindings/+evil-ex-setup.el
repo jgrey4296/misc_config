@@ -1,9 +1,7 @@
 ;;; main/personal/+evil-setup.el -*- lexical-binding: t; -*-
 
-(after! evil
-  (setq-default evil-escape-delay 0.3 )
-  (global-set-key (kbd "<backtab>")       #'evil-normal-state)
-
+(defun +jg-binding-evil-ex-setup-hook ()
+  (message "Setting up Evil-Ex bindings")
 
   (defvar evil-ex-commands nil
     " Custom Evil-ex commands")

@@ -2,9 +2,8 @@
 
 (message "Loading modules/emacs/dired/+bindings.el")
 
-;;;###package dired-git-info
-(map! :after dired
-      :map (dired-mode-map ranger-mode-map)
+(defun +jg-dired-binding-hook ()
+  (map! :map (dired-mode-map ranger-mode-map)
       :m ")"                                #'dired-git-info-mode
       :n "o"                                #'dired-find-file-other-window
       :n "S"                                #'hydra-dired-quick-sort/body
@@ -21,9 +20,11 @@
       (:when (featurep! :lang python)
        "v" 'pyvenv-activate
        )
+      (:prefix "%"
+      :desc "Global Match Rename" :n "R" #'+jg-GLOBAL-dired-do-rename-regexp)
       )
 
-(map! :map dired-mode-map
+  (map! :map dired-mode-map
        :localleader
        (:prefix ("d" . "Describe")
         :desc "Summarise Orgs" "s"         #'+jg-personal-dired-create-summary-of-orgs
@@ -33,19 +34,8 @@
        (:prefix ("K" . "Destructive")
         :desc "Reformat jsons"   "J" #'+jg-dired-reformat-jsons
         )
-      )
-
-(map! :after dired-aux
-      :map dired-mode-map
-      :prefix "%"
-      :desc "Global Match Rename" :n "R" #'+jg-GLOBAL-dired-do-rename-regexp
-      )
-
-;; Dired bindings
-(map! :after dired
-      :map (dired-mode-map ranger-mode-map)
-      :localleader
       (:prefix ("f" . "Find")
        :desc "Find Random Marked" "r" #'+jg-dired-find-random-marked-file
        )
       )
+)

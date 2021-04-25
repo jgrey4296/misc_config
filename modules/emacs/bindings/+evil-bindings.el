@@ -419,34 +419,44 @@
         )
 )
 
-
-(defun +jg-binding-evil-finalise-hook ()
-  (message "Finalising Evil bindings: %s" (current-time-string))
+(defun +jg-binding-update-descs-hook ()
+  (message "Updating Evil Descriptions: %s" (current-time-string))
   ;; Override Evil maps and use my own:
-  (+jg-binding-keymap-update-plural 'jg-binding-operator-map
-                                    'jg-binding-vision-map
-                                    'jg-binding-forward-motion-map
+  (+jg-binding-keymap-update-plural 'jg-binding-forward-motion-map
                                     'jg-binding-backward-motion-map
                                     'jg-binding-inner-text-objects-map
                                     'jg-binding-outer-text-objects-map
-                                    'jg-binding-normal-state-map
-                                    'jg-binding-visual-state-map
-                                    'jg-binding-operator-state-map
-                                    'jg-binding-motion-state-map
                                     )
+
+  (+jg-binding-keymap-update-plural 'jg-binding-operator-map
+                                    'jg-binding-vision-map)
+
+  (+jg-binding-keymap-update-prefixs 'jg-binding-vision-map)
+  (+jg-binding-keymap-update-prefixs 'jg-binding-operator-map)
 
   (+jg-binding-keymap-update-plural 'evil-operator-state-map
                                     'evil-normal-state-map
                                     'evil-visual-state-map
                                     'evil-motion-state-map)
+  )
 
+(defun +jg-binding-evil-finalise-hook ()
+  (message "Finalising Evil bindings: %s" (current-time-string))
+  ;; Backup
+  (setq old-evil-normal-state-map evil-normal-state-map
+        old-evil-visual-state-map evil-visual-state-map
+        old-evil-operator-state-map evil-operator-state-map
+        old-evil-motion-state-map evil-motion-state-map
+        )
+
+  ;; Override
   (setq  evil-normal-state-map jg-binding-normal-state-map
          evil-visual-state-map jg-binding-visual-state-map
          evil-operator-state-map jg-binding-operator-state-map
          evil-motion-state-map jg-binding-motion-state-map
          )
 
-
+  ;; Refresh
   (setq evil-global-keymaps-alist
         '((evil-emacs-state-minor-mode    . evil-emacs-state-map)
           (evil-motion-state-minor-mode   . evil-motion-state-map)

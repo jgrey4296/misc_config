@@ -58,6 +58,7 @@
         :desc "Pop Tag Mark"      "C-t" #'pop-tag-mark
         :desc "Repeat Pop Next"   "M-." #'evil-repeat-pop-next
         :desc "Paste Pop"         "M-y" #'evil-paste-pop
+        :desc "Emacs State"       "C-z" #'evil-emacs-state
 
         "C-f" #'evil-scroll-page-down
         "C-b" #'evil-scroll-page-up
@@ -82,6 +83,7 @@
         :desc "Escape"        "C-g"      #'evil-escape
         :desc "Macro"         "@"        #'+evil:apply-macro
 
+
         :desc "Lookup"                  "K" #'+lookup/documentation
         :desc "Exchange Corners"        "O" #'evil-visual-exchange-corners
         :desc "Change"                  "R" #'evil-change
@@ -103,6 +105,8 @@
   (map! :map jg-binding-motion-state-map
         :desc "Indent" "TAB"            #'indent-for-tab-command
         :desc "Return" "RET"            #'evil-ret
+        :desc "Emacs State"       "C-z" #'evil-emacs-state
+
 
         :desc "1st Non Blank"       "^" #'evil-first-non-blank
         :desc "Next 1st Non Blank " "_" #'evil-next-line-1-first-non-blank
@@ -177,7 +181,6 @@
         :desc "ispell-word"   "= "  #'ispell-word
 
         :desc "open-fold-rec" "A" #'evil-open-fold-rec
-        :desc "close-folds"   "D" #'evil-close-folds
 
         :desc "toggle-fold"   "a" #'evil-toggle-fold
         :desc "close-fold"    "d" #'evil-close-fold
@@ -185,6 +188,7 @@
         :desc "Prev Fold"     "k" #'+fold/previous
         :desc "open-fold"     "o" #'evil-open-fold
         :desc "open-folds"    "r" #'evil-open-folds
+        :desc "Close Folds"   "m" #'evil-close-folds
 
         :desc "Center" "z"   #'evil-scroll-line-to-center
         :desc "Top"    "t"   #'evil-scroll-line-to-top
@@ -338,6 +342,7 @@
          ;; TODO escalate replace op
          )
 
+        "l" nil
         (:prefix ("l" . "Line-ops")
          ;; TODO uniquify, remove leading whitespace, split on char
          :desc "Justify" "j" #'justify-current-line

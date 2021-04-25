@@ -1,7 +1,7 @@
 ;;; editor/window-control/+bindings.el -*- lexical-binding: t; -*-
 
 (defun +window-control-binding-hook ()
-  (message "Setting up Window Control Bindings")
+  (message "Setting up Window Control Bindings: %s" (current-time-string))
   ;; Bindings
   (map! :leader
         :prefix ("w r" . "Ring")

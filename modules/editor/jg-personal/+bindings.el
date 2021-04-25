@@ -1,6 +1,6 @@
 
 (defun +jg-personal-binding-hook ()
-  (message "Setting up personal bindings")
+  (message "Setting up personal bindings: %s" (current-time-string))
   (map! :mode vlf-mode
         "] A" 'vlf-next-batch-from-point
         "] a" 'vlf-next-batch

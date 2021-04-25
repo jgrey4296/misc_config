@@ -1,7 +1,7 @@
 ;;; util/jg-mail/+bindings.el -*- lexical-binding: t; -*-
 
 (defun +jg-mail-binding-hook ()
-  (message "Setting up Mail bindings")
+  (message "Setting up Mail bindings: %s" (current-time-string))
   (map! :leader
         :desc "Mail"      "9" #'mu4e
         )

@@ -1,5 +1,4 @@
 ;;; util/text/+bindings.el -*- lexical-binding: t; -*-
-(message "Loading modules/util/text/+bindings.el")
 
 (defun +jg-text-binding-hook ()
   ;; Get rid of zap to char:

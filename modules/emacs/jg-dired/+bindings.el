@@ -1,6 +1,5 @@
 ;;; emacs/dired/+bindings.el -*- lexical-binding: t; -*-
 
-(message "Loading modules/emacs/dired/+bindings.el")
 
 (defun +jg-dired-binding-hook ()
   (map! :map (dired-mode-map ranger-mode-map)

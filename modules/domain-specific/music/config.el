@@ -1,6 +1,5 @@
 (load! "+vars")
 (load! "+bindings")
-(load! "+hooks")
 
 (use-package! jg-music-layer-minor-mode
   :commands (jg-music-layer-minor-mode jg-music-layer-on global-jg-music-layer-mode)

@@ -1,5 +1,5 @@
-(message "Loading modules/emacs/jg-tag/+bindings.el")
-
+;;; jg-tag/+bindings.el --- summary -*- lexical-binding: t -*-
+;;
 ;; Helm bindings
 (defun +jg-tag-binding-hook ()
   (map! :leader

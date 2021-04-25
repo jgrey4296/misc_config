@@ -1,5 +1,4 @@
 ;;; util/jg-misc/+bindings.el -*- lexical-binding: t; -*-
-(message "Loading modules/util/jg-misc/+bindings.el")
 
 (defun +jg-misc-binding-hook ()
   (message "Setting up jg-misc bindings")

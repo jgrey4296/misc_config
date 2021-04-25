@@ -1,6 +1,5 @@
 ;; Leader no prefix
 ;;
-(message "Loading Leader Bindings %s" (time-to-seconds (get-internal-run-time)))
 (defun +jg-binding-setup-leaders-hook ()
   (message "Setting up leader bindings")
   (map! :leader
@@ -585,4 +584,3 @@
          :desc "Use Temp Template"     "e" #'aya-expand)
         )
 )
-(message "Loaded Leader Bindings %s" (time-to-seconds (get-internal-run-time)))

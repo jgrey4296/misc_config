@@ -20,9 +20,5 @@
          :desc "Filter Regexp"   "r" #'project-walk-filter-regexp
          :desc "Keep Regexp"     "R" #'project-walk-filter-keep-regexp
          )
-        (:prefix "s"
-         :desc "Replace in Project"        "r" #'projectile-replace
-         :desc "Replace Regexp in Project" "R" #'projectile-replace-regexp
-         )
         )
 )

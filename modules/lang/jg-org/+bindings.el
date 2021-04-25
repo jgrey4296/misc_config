@@ -1,5 +1,4 @@
 ;;; main/jg-org/+bindings.el -*- lexical-binding: t; -*-
-(message "Loading modules/lang/jg-org/+bindings.el")
 (defun +jg-org-general-binding-hook ()
   (message "Setting up general access org bindings")
   (map! :leader

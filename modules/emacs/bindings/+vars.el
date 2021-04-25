@@ -11,6 +11,8 @@
                                                  (regexp "/ S")
                                                  )
                                              )
+
+              evil-escape-delay 0.3
               )
 
 
@@ -27,10 +29,3 @@
       jg-binding-motion-state-map (make-sparse-keymap "jg-binding-motion-state-map")
       )
 
-(after! evil
-  (setq old-evil-normal-state-map evil-normal-state-map
-        old-evil-visual-state-map evil-visual-state-map
-        old-evil-operator-state-map evil-operator-state-map
-        old-evil-motion-state-map evil-motion-state-map
-        )
-  )

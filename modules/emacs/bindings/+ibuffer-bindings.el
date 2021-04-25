@@ -10,13 +10,12 @@
         :desc "mark-old-buffers"    "." #'ibuffer-mark-old-buffers
         :desc "Filters"             "\\" ibuffer--filter-map
         :n "%" nil
-        :n "g" nil
         :n "s" nil
         :n "\\" nil
         :n "o" nil
 
-        "j" #'ibuffer-forward-line
-        "k" #'ibuffer-backward-line
+        :desc "Forward Line" "j" #'ibuffer-forward-line
+        :desc "Back Line" "k" #'ibuffer-backward-line
 
         "l" nil
         "h" #'ignore

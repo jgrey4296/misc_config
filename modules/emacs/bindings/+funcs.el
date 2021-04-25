@@ -205,12 +205,3 @@ If region isn't active, narrow away anything above point
     )
 
 
-(defun +jg-binding-backup-evil-maps-hook ()
-  (message "Storing old evil state maps")
-
-  (setq old-evil-normal-state-map evil-normal-state-map
-        old-evil-visual-state-map evil-visual-state-map
-        old-evil-operator-state-map evil-operator-state-map
-        old-evil-motion-state-map evil-motion-state-map
-        )
-  )

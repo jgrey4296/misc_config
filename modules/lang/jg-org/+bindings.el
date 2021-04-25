@@ -18,6 +18,10 @@
 (map! :map org-mode-map
       "C-c [" nil
       "C-c ]" nil
+      :localleader
+      "f" nil
+      "." nil
+      "i" nil
       ;; (:prefix "z"
       ;;  :desc "Narrow on Subtree" :n "RET" #'+jg-org-narrow-on-subtree
       ;;  )
@@ -35,10 +39,9 @@
       )
 (map! :map org-mode-map
       :localleader
-      "i" nil
       :desc "Refile" "R" #'+jg-org-refile-subtree
       (:prefix ("f". "Format")
-       :desc "Fix Drawers"     :n "d"  #'+jg-org-fix-properties-drawers
+       :desc "Fix Drawers"        "d"  #'+jg-org-fix-properties-drawers
        :desc "Clean Org"          "c"  #'+jg-org-clean-org
        :desc "Wrap Numbers"        "w" #'+jg-org-wrap-numbers
        :desc "Wrap non-link urls"  "L" #'+jg-org-wrap-non-link-urls

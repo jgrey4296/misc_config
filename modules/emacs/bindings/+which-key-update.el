@@ -1,5 +1,11 @@
 ;;; emacs/bindings/+which-key-update.el -*- lexical-binding: t; -*-
 
+(defun +jg-binding-process-triples (triple)
+  " Convert which-key--get-bindings to a format
+correct for which-key-add-keymap-based-replacements "
+  (mapcar #'substring-no-properties
+          (list (car triple) (caddr triple))))
+
 (defun +jg-binding-kbd-heuristics (x)
   " Return True if input is a valid keybinding "
   (if (string-match jg-misc-ibuffer-heuristics (car x)) nil
@@ -29,6 +35,7 @@
 
 (defun +jg-binding-keymap-update-descs (the-map)
   " Update which-key descriptions for a keymap "
+  (message "Updating Descriptions for: %s" the-map)
   (let* ((curr-map (eval the-map))
          (triples (which-key--get-bindings nil curr-map nil t))
          (pairs (mapcar #'+jg-binding-process-triples triples))
@@ -41,12 +48,6 @@
     (mapc #'+jg-binding-update-guard with-map-pairs)
     )
   )
-
-(defun +jg-binding-process-triples (triple)
-  " Convert which-key--get-bindings to a format
-correct for which-key-add-keymap-based-replacements "
-  (mapcar #'substring-no-properties
-          (list (car triple) (caddr triple))))
 
 (defun +jg-binding-keymap-update-plural (&rest the-maps)
   (mapcar #'+jg-binding-keymap-update-descs the-maps)

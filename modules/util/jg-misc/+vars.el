@@ -34,3 +34,19 @@
                                               )
 
               )
+
+(defvar +default-minibuffer-maps
+  (append '(minibuffer-local-map
+            minibuffer-local-ns-map
+            minibuffer-local-completion-map
+            minibuffer-local-must-match-map
+            minibuffer-local-isearch-map
+            read-expression-map)
+          (cond ((featurep! :completion ivy)
+                 '(ivy-minibuffer-map
+                   ivy-switch-buffer-map))
+                ((featurep! :completion helm)
+                 '(helm-map
+                   helm-rg-map
+                   helm-read-file-map))))
+  "A list of all the keymaps used for the minibuffer.")

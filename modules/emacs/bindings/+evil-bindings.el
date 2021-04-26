@@ -3,10 +3,6 @@
 (defun +jg-binding-setup-evil-hook ()
   (message "Setting up Evil Bindings: %s" (current-time-string))
 
-  (global-set-key (kbd "<backtab>")       #'evil-normal-state)
-  (map! :map global-map
-        :desc "Complete" :n "g g" #'company-manual-begin
-        :desc "Grow Selection" :v "g g" #'+jg-text-grow-selection-op)
 
   ;; Normal
   (map! :map jg-binding-normal-state-map
@@ -178,7 +174,7 @@
   (map! :map jg-binding-vision-map
         :desc "Narrow"        "RET" #'+jg-narrow-around-point
         :desc "Widen"         "DEL" #'widen
-        :desc "ispell-word"   "= "  #'ispell-word
+        :desc "ispell-word"   "="  #'ispell-word
 
         :desc "open-fold-rec" "A" #'evil-open-fold-rec
 
@@ -201,7 +197,8 @@
          :desc  "lines-matching-regexp"      "l" #'highlight-lines-matching-regexp
          :desc  "phrase"                     "p" #'highlight-phrase
          :desc  "regexp"                     "r" #'highlight-regexp
-         :desc  "unhighlight-regexp"         "u" #'unhighlight-regexp)
+         :desc  "unhighlight-regexp"         "u" #'unhighlight-regexp
+         )
 
         (:prefix ("v" . "Vimish Fold")
          :desc "toggle-all"             "A"  #'vimish-fold-toggle-all
@@ -299,7 +296,8 @@
         :desc "Comment"            "c" #'evilnc-comment-operator
         :desc "IEdit"              "e" #'evil-iedit-state/iedit-mode
         :desc "Goto First Line"    "f" #'evil-goto-first-line
-        ;; :desc "Grow Selection"     "g" #'+jg-text-grow-selection-op
+        :desc "Complete/Grow Selection"  "g" (cmds! (eq evil-state 'normal) #'company-manual-begin
+                                                    (eq evil-state 'visual) #'+jg-text-grow-selection-op)
         :desc "Insert Resume"      "i" #'evil-insert-resume
         :desc "Join whitespace"    "J" #'evil-join-whitespace
 
@@ -403,42 +401,25 @@
         :desc "Workspace"    "w" #'+workspace/switch-right
         )
 
+
+)
+
+(defun +jg-binding-evil-connect-maps-hook ()
+  (map! :map jg-binding-operator-state-map
+        :desc "Backward Motion Op"  "[" jg-binding-backward-motion-map
+        :desc "Forward Motion Op"   "]" jg-binding-forward-motion-map
+        )
   (map! :map (jg-binding-normal-state-map jg-binding-visual-state-map jg-binding-motion-state-map)
         :desc "Do Ops"        "g"   jg-binding-operator-map
         :desc "Visual Ops"    "z"   jg-binding-vision-map
-        :desc "Backward Motion" "[" jg-binding-backward-motion-map
-        :desc "Forward Motion"  "]" jg-binding-forward-motion-map
+        :desc "B Motion" "[" jg-binding-backward-motion-map
+        :desc "F Motion"  "]" jg-binding-forward-motion-map
         )
   (map! :map (jg-binding-visual-state-map jg-binding-operator-state-map)
         :desc "Inner Select"     "i" jg-binding-inner-text-objects-map
         :desc "Outer Select"     "a" jg-binding-outer-text-objects-map
         )
-  (map! :map jg-binding-operator-state-map
-        :desc "Backward Motion"  "[" jg-binding-backward-motion-map
-        :desc "Forward Motion"   "]" jg-binding-forward-motion-map
-        )
 )
-
-(defun +jg-binding-update-descs-hook ()
-  (message "Updating Evil Descriptions: %s" (current-time-string))
-  ;; Override Evil maps and use my own:
-  (+jg-binding-keymap-update-plural 'jg-binding-forward-motion-map
-                                    'jg-binding-backward-motion-map
-                                    'jg-binding-inner-text-objects-map
-                                    'jg-binding-outer-text-objects-map
-                                    )
-
-  (+jg-binding-keymap-update-plural 'jg-binding-operator-map
-                                    'jg-binding-vision-map)
-
-  (+jg-binding-keymap-update-prefixs 'jg-binding-vision-map)
-  (+jg-binding-keymap-update-prefixs 'jg-binding-operator-map)
-
-  (+jg-binding-keymap-update-plural 'evil-operator-state-map
-                                    'evil-normal-state-map
-                                    'evil-visual-state-map
-                                    'evil-motion-state-map)
-  )
 
 (defun +jg-binding-evil-finalise-hook ()
   (message "Finalising Evil bindings: %s" (current-time-string))
@@ -467,3 +448,32 @@
           (evil-normal-state-minor-mode   . evil-normal-state-map)))
   (message "Evil Bindings Complete")
 )
+
+(defun +jg-binding-update-descs-hook ()
+  (message "Updating Evil Descriptions: %s" (current-time-string))
+  ;; Override Evil maps and use my own:
+  (+jg-binding-keymap-update-prefixs 'jg-binding-vision-map)
+  (+jg-binding-keymap-update-prefixs 'jg-binding-operator-map)
+
+  (+jg-binding-keymap-update-plural 'jg-binding-inner-text-objects-map
+                                    'jg-binding-outer-text-objects-map)
+
+  (+jg-binding-keymap-update-plural 'jg-binding-forward-motion-map
+                                    'jg-binding-backward-motion-map
+                                    )
+
+  (+jg-binding-keymap-update-plural 'jg-binding-operator-map
+                                    'jg-binding-vision-map)
+
+  )
+
+(defun +jg-binding-evil-total-hook ()
+  (+jg-binding-setup-evil-hook)
+  (+jg-binding-evil-finalise-hook)
+
+  (after! which-key
+    (+jg-binding-update-descs-hook)
+    (+jg-binding-evil-connect-maps-hook)
+    (global-set-key (kbd "<backtab>")       #'evil-normal-state)
+    )
+  )

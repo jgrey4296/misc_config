@@ -18,8 +18,14 @@
         )
   )
 
+(use-package! general
+  :config
+  (defalias 'general-extended-def-:which-key #'+jg-binding-general-which-key-handler)
+  )
+
 (add-hook 'doom-first-input-hook #'+jg-binding-setup-leaders-hook -100)
 (add-hook 'doom-first-input-hook #'+jg-binding-setup-leaderless-hook -100)
+(add-hook 'doom-first-input-hook #'+jg-binding-evil-total-hook 100)
 
 (add-hook! ibuffer-load
            #'+jg-binding-ibuffer-setup-hook
@@ -27,5 +33,4 @@
            )
 
 (add-hook 'evil-after-load-hook #'+jg-binding-evil-ex-setup-hook)
-(add-hook 'evil-after-load-hook #'+jg-binding-evil-total-hook)
 (add-hook 'evil-after-load-hook #'+jg-binding-evil-submap-hook)

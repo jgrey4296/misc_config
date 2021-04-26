@@ -10,3 +10,4 @@
 
 (package! mouse :disable t)
 (package! ibuffer)
+(package! general)

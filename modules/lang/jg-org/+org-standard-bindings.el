@@ -98,6 +98,7 @@
   (map! :after org
         :map org-mode-map
         :localleader
+        "c" nil
         :prefix ("c" . "clock")
         "c" #'org-clock-cancel
         "d" #'org-clock-mark-default-task
@@ -119,6 +120,7 @@
   (map! :after org
         :map org-mode-map
         :localleader
+        "d" nil
         :prefix ("d" . "date/deadline")
         "d" #'org-deadline
         "s" #'org-schedule

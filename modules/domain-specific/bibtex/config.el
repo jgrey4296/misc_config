@@ -34,9 +34,6 @@
            #'+bibtex-binding-hook
            #'+bibtex-general-binding-hook
            #'+jg-bibtex-build-list
-           )
-
-(add-hook! dired-load
            #'+bibtex-dired-binding-hook
            )
 

@@ -8,7 +8,7 @@
   :commands hydra-dired-quick-sort/body
   )
 
-(add-hook! dired-load
+(add-hook! doom-first-input
            #'+jg-dired-binding-hook
            #'+jg-dired-var-hook
            )

@@ -471,9 +471,9 @@
   (+jg-binding-setup-evil-hook)
   (+jg-binding-evil-finalise-hook)
 
-  (after! which-key
-    (+jg-binding-update-descs-hook)
+  ;;(after! which-key
+    ;;(+jg-binding-update-descs-hook)
     (+jg-binding-evil-connect-maps-hook)
     (global-set-key (kbd "<backtab>")       #'evil-normal-state)
-    )
+    ;;)
   )

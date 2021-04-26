@@ -25,12 +25,9 @@
     )
   )
 
-(add-hook! dired-load
-           #'+jg-tag-dired-binding-hook)
-
 (add-hook! doom-first-input
            #'+jg-tag-binding-hook
-           )
+           #'+jg-tag-dired-binding-hook)
 
 (add-hook! evil-after-load
            #'+jg-tag-evil-binding-hook

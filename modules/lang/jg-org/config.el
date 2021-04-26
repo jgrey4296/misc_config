@@ -23,17 +23,9 @@
   (push 'org-link link-hint-types)
   )
 
-(add-hook! org-load
-           #'+jg-org-setup-tags-hook
-           #'+jg-org-main-bindings-hook
-           #'+jg-org-personal-binding-hook
-           )
+(add-hook 'doom-first-input-hook  #'+jg-org-setup-tags-hook 100)
+(add-hook 'doom-first-input-hook #'+jg-org-general-binding-hook)
+(add-hook 'org-load-hook #'+jg-org-main-bindings-hook 90)
+(add-hook 'org-load-hook #'+jg-org-personal-binding-hook 100)
 
-(add-hook! doom-first-input
-           #'+jg-org-general-binding-hook
-
-           )
-
-(add-hook! dired-load
-           #'+jg-org-dired-binding-hook
-           )
+(add-hook! doom-first-input #'+jg-org-dired-binding-hook)

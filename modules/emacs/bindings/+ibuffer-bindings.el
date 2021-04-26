@@ -90,8 +90,8 @@
 
 (defun +jg-binding-ibuffer-update-hook ()
   (message "Updating ibuffer: %s" (current-time-string))
-  (+jg-binding-keymap-update-plural  'ibuffer-mode-map
-                                     'ibuffer--filter-map)
+  ;; (+jg-binding-keymap-update-plural  'ibuffer-mode-map
+  ;;                                    'ibuffer--filter-map)
 
   (add-hook 'ibuffer-mode-hook #'+jg-ibuffer-filter-setup)
   (evil-make-intercept-map ibuffer-mode-map)

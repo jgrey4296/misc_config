@@ -101,7 +101,7 @@ Return list of pairs
                          (and (numberp ev) (= ev 27))))
                 (setq bindings
                       (append bindings
-                              (which-key--get-keymap-bindings def t key focus))))
+                              (which-key--get-keymap-bindings def t key))))
                (t
                 ;; TODO force which-key entries to override others
                 ;; don't add binding if already defined
@@ -183,14 +183,21 @@ alists. Returns a list (key separator description)."
     )
   )
 
-(defun +jg-consume-prefix-on-maps (prefix maps)
+(defun +jg-consume-prefix-on-maps (prefix maps &optional state)
   " Take a prefix vector, and a list of maps
     lookup-key recursively, returning only keymaps
   "
-  (let* ((current maps))
-    (loop for pre across prefix do
+  (let* ((current maps)
+         (state-plus-prefix (cond ((and prefix state) (vconcat (list (intern (format "%s-state" state))) prefix))
+                                  ((not prefix) (vector (intern (format "%s-state" state))))
+                                  ((not state) prefix)
+                                  (t (error "Prefix Consume issue"))
+                              ))
+         )
+    (loop for pre across state-plus-prefix do
           (setq current (mapcar #'(lambda (x) (if (keymapp x)
-                                             (lookup-key x (key-description `(,pre)))))
+                                             (lookup-key x (if (symbolp pre) `[,pre]
+                                                             (key-description `(,pre))))))
                                 current))
           )
     (-filter #'keymapp current)
@@ -209,8 +216,7 @@ alists. Returns a list (key separator description)."
                                                      active-minor-modes))
          (active-maps (-filter #'identity (seq-concatenate 'list (mapcar #'symbol-value (list major-mode-map-sym evil-state-map-sym))
                                                            minor-mode-maps)))
-         ;; TODO handle prefix
-         (prefix-handled (+jg-consume-prefix-on-maps prefix active-maps))
+         (prefix-handled (+jg-consume-prefix-on-maps prefix active-maps evil-state))
          (ignore-bindings '("self-insert-command" "ignore"
                             "ignore-event" "company-ignore"))
          unformatted bindings)
@@ -218,7 +224,7 @@ alists. Returns a list (key separator description)."
     (if leader-map
         (setq prefix-handled (append (+jg-consume-prefix-on-maps
                                       (vconcat (cdr (append prefix nil)))
-                                      `(,leader-map))
+                                      `(,leader-map) evil-state)
                                      prefix-handled)))
 
     (setq unformatted (mapcar #'which-key--get-keymap-bindings prefix-handled))

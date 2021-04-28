@@ -54,36 +54,3 @@ correct for which-key-add-keymap-based-replacements "
   )
 
 
-;; For which General extension:
-;;general-extended-def-keywords
-(defun +jg-binding-general-which-key-handler (_state keymap key edef kargs)
-  " An alternative which-key implementation for General, using which-key's
-which-key-add-keymap-based-replacements.
-
-Add a which-key description for KEY.
-If :major-modes is specified in EDEF, add the description for the corresponding
-major mode. KEY should not be in the kbd format (kbd should have already been
-run on it)."
-  (general-with-eval-after-load 'which-key
-    (let* ((wk (general--getf2 edef :which-key :wk))
-           (keymaps (plist-get kargs :keymaps))
-           (key (key-description key))
-           (prefix (plist-get kargs :prefix))
-           (binding (or (when (and (plist-get edef :def)
-                                   (not (plist-get edef :keymp)))
-                          (plist-get edef :def))
-                        (when (and prefix
-                                   (string= key prefix))
-                          (plist-get kargs :prefix-command))))
-           (replacement (cond ((consp wk) (cdr wk))
-                              (t wk)))
-           ;;(formatted-repl (car (which-key--format-and-replace `((,key . ,replacement)))))
-           (real-keymap (if (boundp keymap) (symbol-value keymap) (symbol-value (intern (format "%s-map" keymap)))))
-           )
-      (condition-case-unless-debug err
-            (which-key-add-keymap-based-replacements real-keymap key replacement)
-        (error (message "Binding Update Error for: (%s : %s : %s) : %s" keymap key binding replacement err))
-      )
-    )
-  )
-)

@@ -136,4 +136,11 @@
        (mode . gnus-group-mode)
        (mode . gnus-summary-mode)
        (mode . gnus-article-mode)))))
- '(org-agenda-files '("/Users/johngrey/.doom.d/setup_files/base_agenda.org")))
+ '(org-agenda-files '("/Users/johngrey/.doom.d/setup_files/base_agenda.org"))
+ '(org-ref-insert-cite-key "C-c i"))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

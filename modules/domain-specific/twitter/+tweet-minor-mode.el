@@ -5,11 +5,6 @@
 
 (defun +jg-twitter-tweet-length-check (beg end len)
   "After change function to ensure the tweet length is allowed"
-  (message "Total Length: %s, %s"
-           (length (buffer-substring-no-properties (point-min)
-                                                   (point-max)))
-           (point-max)
-           )
   (if (> (point-max) jg-twitter-max-tweet-length)
       ;; To Big:
       (move-overlay jg-twitter-overlay

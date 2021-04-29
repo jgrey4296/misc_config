@@ -12,7 +12,10 @@
        :n "J" #'dired-next-dirline
        :n "K" #'dired-prev-dirline
 
-       :n "v" #'ignore
+       :n "v" nil
+       :n "i" nil
+       ":" nil
+
       (:prefix "]"
        :desc "Next Marked" :n "m" #'dired-next-marked-file
        )

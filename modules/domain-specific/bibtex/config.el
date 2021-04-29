@@ -9,10 +9,8 @@
 (load! "+hydra")
 (after! evil
   (load! "+bindings")
-  (add-hook! evil-after-load
-             #'+bibtex-evil-ex-binding-hook
-             )
-)
+  (after! evil-ex
+    (+bibtex-evil-ex-binding-hook)))
 
 
 (use-package! bibtex

@@ -6,10 +6,10 @@
 
 (after! evil
   (load! "+bindings")
-  (add-hook! evil-after-load
-             #'+jg-tag-evil-binding-hook
-             )
-  )
+(after! evil-ex
+           (+jg-tag-evil-binding-hook)
+           ))
+
 (load! "+dired")
 (load! "+helm")
 (load! "+index")

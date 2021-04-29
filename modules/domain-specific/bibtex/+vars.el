@@ -32,4 +32,7 @@
               jg-bibtex-clean-move-entry-on-fail t
               jg-bibtex-open-doi-with-pdf t
               jg-bibtex-open-url-with-pdf t
+
+              jg-bibtex-tweet-pattern "(%s): %s\nby %s\nTags: %s\nRef: %s\n"
+
               )

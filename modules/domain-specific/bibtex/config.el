@@ -8,6 +8,7 @@
 (load! "+tags")
 (load! "+hydra")
 (after! evil
+  (load! "+motions")
   (load! "+bindings")
   (after! evil-ex
     (+bibtex-evil-ex-binding-hook)))

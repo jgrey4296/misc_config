@@ -13,6 +13,10 @@
         exec-path (cons "/usr/local/opt/erlang/bin" exec-path)
         )
   )
+(after! epa
+  ;; Ascii output of encryptions:
+  (setq epa-armor t)
+  )
 (use-package! free-keys
   :commands (free-keys free-keys-set-prefix)
   )

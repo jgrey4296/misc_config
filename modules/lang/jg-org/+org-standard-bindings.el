@@ -2,8 +2,7 @@
 ;; Misc
 (defun +jg-org-main-bindings-hook ()
   (message "Setting up org main bindings: %s" (current-time-string))
-  (map! :after org
-        :map org-mode-map
+  (map! :map org-mode-map
         ;; textmate-esque newline insertion
         "S-RET"      #'+org/shift-return
         "C-RET"      #'+org/insert-item-below
@@ -22,8 +21,7 @@
 
         )
 ;;; Misc 2
-  (map! :after org
-        :map org-mode-map
+  (map! :map org-mode-map
         :localleader
         "#" #'org-update-statistics-cookies
         "'" #'org-edit-special
@@ -32,8 +30,7 @@
         )
 
 ;;; No Prefix
-  (map! :after org
-        :map org-mode-map
+  (map! :map org-mode-map
         :localleader
         "A" #'org-archive-subtree
         "e" #'org-export-dispatch
@@ -44,8 +41,7 @@
         "T" #'org-todo-list
         )
 ;;; <A> Attachments
-  (map! :after org
-        :map org-mode-map
+  (map! :map org-mode-map
         :localleader
         :prefix ("a" . "attachments")
         "a" #'org-attach
@@ -68,8 +64,7 @@
         )
 
 ;;; <B> Tables
-  (map! :after org
-        :map org-mode-map
+  (map! :map org-mode-map
         :localleader
         :prefix ("b" . "tables")
         "-" #'org-table-insert-hline
@@ -95,8 +90,7 @@
          "p" #'org-plot/gnuplot)
         )
 ;;; <C> Clock
-  (map! :after org
-        :map org-mode-map
+  (map! :map org-mode-map
         :localleader
         "c" nil
         :prefix ("c" . "clock")
@@ -117,8 +111,7 @@
         "-" #'org-clock-timestamps-down
         )
 ;;; <D> Dates
-  (map! :after org
-        :map org-mode-map
+  (map! :map org-mode-map
         :localleader
         "d" nil
         :prefix ("d" . "date/deadline")
@@ -128,15 +121,13 @@
         "T" #'org-time-stamp-inactive
         )
 ;;; <F> Formatting
-  (map! :after org
-        :map org-mode-map
+  (map! :map org-mode-map
         :localleader
         :prefix ("f" . "Format")
 
         )
 ;;; <G> Goto
-  (map! :after org
-        :map org-mode-map
+  (map! :map org-mode-map
         :localleader
         :prefix ("g" . "goto")
         "g" #'org-goto
@@ -154,8 +145,7 @@
         "x" #'org-capture-goto-last-stored
         )
 ;;; <I> Insert
-  (map! :after org
-        :map org-mode-map
+  (map! :map org-mode-map
         :localleader
         :prefix ("i" . "Insert")
         "t" #'org-todo
@@ -164,8 +154,7 @@
         "S" #'org-insert-last-stored-link
         )
 ;;; <L> Links
-  (map! :after org
-        :map org-mode-map
+  (map! :map org-mode-map
         :localleader
         :prefix ("l" . "links")
         "c" #'org-cliplink
@@ -177,8 +166,7 @@
         "S" #'org-insert-last-stored-link
         )
 ;;; <P> Publish
-  (map! :after org
-        :map org-mode-map
+  (map! :map org-mode-map
         :localleader
         :prefix ("P" . "publish")
         "a" #'org-publish-all
@@ -188,8 +176,7 @@
         "s" #'org-publish-sitemap
         )
 ;;; <R> Refile
-  (map! :after org
-        :map org-mode-map
+  (map! :map org-mode-map
         :localleader
         :prefix ("r" . "refile")
         "." #'+org/refile-to-current-file
@@ -202,8 +189,7 @@
         "r" #'org-refile ; to all `org-refile-targets'
         )
 ;;; <S> Subtree
-  (map! :after org
-        :map org-mode-map
+  (map! :map org-mode-map
         :localleader
         :prefix ("s" . "Tree/Subtree")
         "b" #'org-tree-to-indirect-buffer
@@ -224,8 +210,7 @@
          "u" #'org-priority-up)
         )
 ;;; <T> Toggle
-  (map! :after org
-        :map org-mode-map
+  (map! :map org-mode-map
         :localleader
         :prefix ("t" . "Toggle")
         "a" #'org-toggle-archive-tag
@@ -238,6 +223,17 @@
          "f" #'org-table-toggle-formula-debugger
          "o" #'org-table-toggle-coordinate-overlays)
         )
+
+  )
+
+(defun +jg-org-agenda-bind-fix-hook ()
+  (map! :map org-agenda-mode-map
+        :localleader
+        (:prefix ("d" . "Date/time"))
+        (:prefix ("c" . "Clock"))
+        (:prefix ("p" . "Priority")))
+
+  ;;(define-key (evil-get-auxiliary-keymap org-mode-map 'insert) (kbd "<SPC>") nil)
 )
 
 (defun +jg-org-personal-binding-hook ()

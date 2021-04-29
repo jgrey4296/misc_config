@@ -435,6 +435,8 @@
          evil-visual-state-map jg-binding-visual-state-map
          evil-operator-state-map jg-binding-operator-state-map
          evil-motion-state-map jg-binding-motion-state-map
+         evil-inner-text-objects-map jg-binding-inner-text-objects-map
+         evil-outer-text-objects-map jg-binding-outer-text-objects-map
          )
 
   ;; Refresh
@@ -471,9 +473,6 @@
   (+jg-binding-setup-evil-hook)
   (+jg-binding-evil-finalise-hook)
 
-  ;;(after! which-key
-    ;;(+jg-binding-update-descs-hook)
     (+jg-binding-evil-connect-maps-hook)
     (global-set-key (kbd "<backtab>")       #'evil-normal-state)
-    ;;)
   )

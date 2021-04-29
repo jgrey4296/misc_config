@@ -8,5 +8,4 @@
 (load! "+test-reporting")
 (load! "+bindings")
 
-(add-hook! doom-first-input
-           #'+jg-org-unit-test-binding-hook)
+(add-hook! doom-first-input #'+jg-org-unit-test-binding-hook)

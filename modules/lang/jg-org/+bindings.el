@@ -18,8 +18,7 @@
 
 (defun +jg-org-dired-binding-hook ()
   (message "Setting up dired org bindings: %s" (current-time-string))
-  (map! :after dired
-        :map (dired-mode-map ranger-mode-map)
+  (map! :map (dired-mode-map ranger-mode-map)
         (:prefix "%"
          :desc "Mark Orgs" :n "o"     #'+jg-org-dired-select-org
          )

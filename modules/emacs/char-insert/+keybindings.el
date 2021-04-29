@@ -1,11 +1,9 @@
 
 (defun +char-insert-binding-hook ()
   (message "Setting up char insert bindings: %s" (current-time-string))
-  (map! :map global-map
-        :desc "Insert Char" :gi "C-x 8 RET" #'insert-char
+  (map! :desc "Insert Char" :gi "C-x 8 RET" #'insert-char
         )
-  (map! :map global-map
-        :prefix "C-x 8"
+  (map! :prefix "C-x 8"
         (:prefix ("*" . ""))
         (:prefix ("/" . ""))
         (:prefix ("1" . ""))
@@ -18,8 +16,7 @@
         (:prefix ("O" . ""))
         )
 
-  (map! :map global-map
-        :prefix "C-x 8"
+  (map! :prefix "C-x 8"
         :ig "!" #'ignore
         :ig "$" #'ignore
         :ig "+" #'ignore
@@ -45,8 +42,7 @@
         :ig "}" #'ignore
         )
   ;; Acute
-  (map! :map global-map
-        :prefix ("C-x 8 '" . "Acute")
+  (map! :prefix ("C-x 8 '" . "Acute")
         :desc "´" :ig "'" "´"
         :desc "á" :ig "a" "á"
         :desc "ć" :ig "c" "ć"
@@ -67,8 +63,7 @@
         :desc "ź" :ig "z" "ź"
         )
   ;; Cedilla
-  (map! :map global-map
-        :prefix ("C-x 8 ," . "Cedilla")
+  (map! :prefix ("C-x 8 ," . "Cedilla")
         :desc "ç" :ig "c"  "ç"
         :desc "ḑ" :ig "d"  "ḑ"
         :desc "ȩ" :ig "e"  "ȩ"
@@ -82,8 +77,7 @@
         :desc "ţ" :ig "t"  "ţ"
         )
   ;; Diaresis
-  (map! :map global-map
-        :prefix ("C-x 8 \"" . "Diaeresis")
+  (map! :prefix ("C-x 8 \"" . "Diaeresis")
         :desc "ä" :ig "a"  "ä"
         :desc "ë" :ig "e"  "ë"
         :desc "ḧ" :ig "h"  "ḧ"
@@ -96,8 +90,7 @@
         :desc "ÿ" :ig "y"  "ÿ"
         )
   ;; Greek
-  (map! :map global-map
-        :prefix ("C-x 8 g" . "Greek")
+  (map! :prefix ("C-x 8 g" . "Greek")
         ;; Greek Letters
         :desc "α" :ig "a"  "α"
         :desc "β" :ig "b"  "β"
@@ -125,8 +118,7 @@
         :desc "ω" :ig "z"  "ω"
         )
   ;; Grave
-  (map! :map global-map
-        :prefix ("C-x 8 `" . "Grave")
+  (map! :prefix ("C-x 8 `" . "Grave")
         :desc "à" :ig "a"  "à"
         :desc "è" :ig "e"  "è"
         :desc "ì" :ig "i"  "ì"
@@ -137,8 +129,7 @@
         :desc "ỳ" :ig "y"  "ỳ"
         )
   ;; Logic
-  (map! :map global-map
-        :prefix ("C-x 8 l" . "Logic")
+  (map! :prefix ("C-x 8 l" . "Logic")
         :desc "∀" :ig "a"  "∀"
         :desc "∃" :ig "E"  "∃"
         :desc "∄" :ig "N"  "∄"
@@ -160,8 +151,7 @@
         :desc "⚬" :ig "o"  "⚬"
         )
   ;; Math
-  (map! :map global-map
-        :prefix ("C-x 8 M" . "Math")
+  (map! :prefix ("C-x 8 M" . "Math")
         :desc "⊂" :ig "s" "⊂"
         :desc "⊃" :ig "S" "⊃"
         :desc "⊆" :ig "e" "⊆"
@@ -175,8 +165,7 @@
         ;; Fractions
         )
   ;; Subscript
-  (map! :map global-map
-        :prefix ("C-x 8 s" . "Subscript")
+  (map! :prefix ("C-x 8 s" . "Subscript")
         :desc "₁" :ig "1" "₁"
         :desc "₂" :ig "2" "₂"
         :desc "₃" :ig "3" "₃"
@@ -193,13 +182,11 @@
         :desc "₋" :ig "-" "₋"
         )
   ;; Superscript
-  (map! :map global-map
-        :prefix ("C-x 8 S" . "Superscript")
+  (map! :prefix ("C-x 8 S" . "Superscript")
 
         )
   ;; Tilde
-  (map! :map global-map
-        :prefix ("C-x 8 ~" . "Tilde")
+  (map! :prefix ("C-x 8 ~" . "Tilde")
         :desc "ã" :ig "a"  "ã"
         :desc "ẽ" :ig "e"  "ẽ"
         :desc "ĩ" :ig "i"  "ĩ"

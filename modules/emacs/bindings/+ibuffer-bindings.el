@@ -1,5 +1,5 @@
 ;;; emacs/bindings/+ibuffer-bindings.el -*- lexical-binding: t; -*-
-(defun +jg-binding-ibuffer-setup-hook ()
+(defun +jg-ibuffer-setup-hook ()
   (message "Setting up Ibuffer bindings: %s" (current-time-string))
   (map! :map ibuffer-mode-map
         :desc "Do Shell Cmd File"   "!" #'ibuffer-do-shell-command-file
@@ -9,24 +9,21 @@
         :desc "negative"            "-" #'negative-argument
         :desc "mark-old-buffers"    "." #'ibuffer-mark-old-buffers
         :desc "Filters"             "\\" ibuffer--filter-map
-        :n "%" nil
-        :n "s" nil
-        :n "\\" nil
-        :n "o" nil
-
+        "/" nil
         :desc "Forward Line" "j" #'ibuffer-forward-line
         :desc "Back Line" "k" #'ibuffer-backward-line
 
+        "i" #'ignore
         "l" nil
         "h" #'ignore
         )
   (map! :map ibuffer-mode-map
         :prefix ("%" . "Mark Ops")
-        :desc "mark-by-locked"           "L" #'ibuffer-mark-by-locked
-        :desc "mark-by-file-name-regexp" "f" #'ibuffer-mark-by-file-name-regexp
-        :desc "mark-by-content-regexp"   "g" #'ibuffer-mark-by-content-regexp
-        :desc "mark-by-mode-regexp"      "m" #'ibuffer-mark-by-mode-regexp
-        :desc "mark-by-name-regexp"      "n" #'ibuffer-mark-by-name-regexp
+        :desc "mark-by-locked"             "L" #'ibuffer-mark-by-locked
+        :desc "mark-by-file-name-regexp"   "f" #'ibuffer-mark-by-file-name-regexp
+        :desc "mark-by-content-regexp"     "g" #'ibuffer-mark-by-content-regexp
+        :desc "mark-by-mode-regexp"        "m" #'ibuffer-mark-by-mode-regexp
+        :desc "mark-by-name-regexp"        "n" #'ibuffer-mark-by-name-regexp
         )
   (map! :map ibuffer-mode-map
         :prefix ("*" . "Mark All Ops")
@@ -88,11 +85,13 @@
         )
 )
 
-(defun +jg-binding-ibuffer-update-hook ()
+(defun +jg-ibuffer-update-hook ()
   (message "Updating ibuffer: %s" (current-time-string))
   ;; (+jg-binding-keymap-update-plural  'ibuffer-mode-map
   ;;                                    'ibuffer--filter-map)
 
+  (map! :map ibuffer-mode-map
+        [normal-state] nil)
   (add-hook 'ibuffer-mode-hook #'+jg-ibuffer-filter-setup)
-  (evil-make-intercept-map ibuffer-mode-map)
+  (evil-make-overriding-map ibuffer-mode-map)
 )

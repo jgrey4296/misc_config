@@ -3,6 +3,16 @@
 (defun +jg-org-main-bindings-hook ()
   (message "Setting up org main bindings: %s" (current-time-string))
   (map! :map org-mode-map
+        "C-c [" nil
+        "C-c ]" nil
+        :localleader
+        "f" nil
+        "." nil
+        "i" nil
+        "t" nil
+        )
+
+  (map! :map org-mode-map
         ;; textmate-esque newline insertion
         "S-RET"      #'+org/shift-return
         "C-RET"      #'+org/insert-item-below
@@ -23,102 +33,102 @@
 ;;; Misc 2
   (map! :map org-mode-map
         :localleader
-        "#" #'org-update-statistics-cookies
-        "'" #'org-edit-special
-        "*" #'org-ctrl-c-star
-        "," #'org-switchb
+        :desc "update-statistics-cookies"  "#" #'org-update-statistics-cookies
+        :desc "edit-special"               "'" #'org-edit-special
+        :desc "ctrl-c-star"                "*" #'org-ctrl-c-star
+        :desc "switchb"                    "," #'org-switchb
         )
 
 ;;; No Prefix
   (map! :map org-mode-map
         :localleader
-        "A" #'org-archive-subtree
-        "e" #'org-export-dispatch
-        "n" #'org-store-link
-        "o" #'org-set-property
-        "p" #'org-priority
-        "q" #'org-set-tags-command
-        "T" #'org-todo-list
+        :desc "archive-subtree"   "A" #'org-archive-subtree
+        :desc "export-dispatch"   "e" #'org-export-dispatch
+        :desc "store-link"        "n" #'org-store-link
+        :desc "set-property"      "o" #'org-set-property
+        :desc "priority"          "p" #'org-priority
+        :desc "set-tags-command"  "q" #'org-set-tags-command
+        :desc "todo-list"         "T" #'org-todo-list
         )
 ;;; <A> Attachments
   (map! :map org-mode-map
         :localleader
         :prefix ("a" . "attachments")
-        "a" #'org-attach
-        "d" #'org-attach-delete-one
-        "D" #'org-attach-delete-all
-        "f" #'+org/find-file-in-attachments
-        "l" #'+org/attach-file-and-insert-link
-        "n" #'org-attach-new
-        "o" #'org-attach-open
-        "O" #'org-attach-open-in-emacs
-        "r" #'org-attach-reveal
-        "R" #'org-attach-reveal-in-emacs
-        "u" #'org-attach-url
-        "s" #'org-attach-set-directory
-        "S" #'org-attach-sync
+        :desc "attach"                            "a" #'org-attach
+        :desc "attach-delete-one"                 "d" #'org-attach-delete-one
+        :desc "attach-delete-all"                 "D" #'org-attach-delete-all
+        :desc "find-file-in-attachments"     "f" #'+org/find-file-in-attachments
+        :desc "attach-file-and-insert-link"  "l" #'+org/attach-file-and-insert-link
+        :desc "attach-new"                        "n" #'org-attach-new
+        :desc "attach-open"                       "o" #'org-attach-open
+        :desc "attach-open-in-emacs"              "O" #'org-attach-open-in-emacs
+        :desc "attach-reveal"                     "r" #'org-attach-reveal
+        :desc "attach-reveal-in-emacs"            "R" #'org-attach-reveal-in-emacs
+        :desc "attach-url"                        "u" #'org-attach-url
+        :desc "attach-set-directory"              "s" #'org-attach-set-directory
+        :desc "attach-sync"                       "S" #'org-attach-sync
         (:when (featurep! +dragndrop)
-         "c" #'org-download-screenshot
-         "p" #'org-download-clipboard
-         "P" #'org-download-yank)
+         :desc "download-screenshot"              "c" #'org-download-screenshot
+         :desc "download-clipboard"               "p" #'org-download-clipboard
+         :desc "download-yank)"                   "P" #'org-download-yank)
         )
 
 ;;; <B> Tables
   (map! :map org-mode-map
         :localleader
         :prefix ("b" . "tables")
-        "-" #'org-table-insert-hline
-        "a" #'org-table-align
-        "b" #'org-table-blank-field
-        "c" #'org-table-create-or-convert-from-region
-        "e" #'org-table-edit-field
-        "f" #'org-table-edit-formulas
-        "h" #'org-table-field-info
-        "s" #'org-table-sort-lines
-        "r" #'org-table-recalculate
-        "R" #'org-table-recalculate-buffer-tables
+        :desc "table-insert-hline"                   "-" #'org-table-insert-hline
+        :desc "table-align"                          "a" #'org-table-align
+        :desc "table-blank-field"                    "b" #'org-table-blank-field
+        :desc "table-create-or-convert-from-region"  "c" #'org-table-create-or-convert-from-region
+        :desc "table-edit-field"                     "e" #'org-table-edit-field
+        :desc "table-edit-formulas"                  "f" #'org-table-edit-formulas
+        :desc "table-field-info"                     "h" #'org-table-field-info
+        :desc "table-sort-lines"                     "s" #'org-table-sort-lines
+        :desc "table-recalculate"                    "r" #'org-table-recalculate
+        :desc "table-recalculate-buffer-tables"      "R" #'org-table-recalculate-buffer-tables
         (:prefix ("d" . "delete")
-         "c" #'org-table-delete-column
-         "r" #'org-table-kill-row)
+         :desc "table-delete-column"                 "c" #'org-table-delete-column
+         :desc "table-kill-row)"                     "r" #'org-table-kill-row)
         (:prefix ("i" . "insert")
-         "c" #'org-table-insert-column
-         "h" #'org-table-insert-hline
-         "r" #'org-table-insert-row
-         "H" #'org-table-hline-and-move)
+         :desc "table-insert-column"                 "c" #'org-table-insert-column
+         :desc "table-insert-hline"                  "h" #'org-table-insert-hline
+         :desc "table-insert-row"                    "r" #'org-table-insert-row
+         :desc "table-hline-and-move)"               "H" #'org-table-hline-and-move)
 
         (:when (featurep! +gnuplot)
-         "p" #'org-plot/gnuplot)
+         :desc "plot/gnuplot)"                       "p" #'org-plot/gnuplot)
         )
 ;;; <C> Clock
   (map! :map org-mode-map
         :localleader
         "c" nil
         :prefix ("c" . "clock")
-        "c" #'org-clock-cancel
-        "d" #'org-clock-mark-default-task
-        "e" #'org-clock-modify-effort-estimate
-        "E" #'org-set-effort
-        "g" #'org-clock-goto
-        "G" (cmd! (org-clock-goto 'select))
-        "l" #'+org/toggle-last-clock
-        "i" #'org-clock-in
-        "I" #'org-clock-in-last
-        "o" #'org-clock-out
-        "r" #'org-resolve-clocks
-        "R" #'org-clock-report
-        "t" #'org-evaluate-time-range
-        "=" #'org-clock-timestamps-up
-        "-" #'org-clock-timestamps-down
+        :desc "clock-cancel"                  "c" #'org-clock-cancel
+        :desc "clock-mark-default-task"       "d" #'org-clock-mark-default-task
+        :desc "clock-modify-effort-estimate"  "e" #'org-clock-modify-effort-estimate
+        :desc "set-effort"                    "E" #'org-set-effort
+        :desc "clock-goto"                    "g" #'org-clock-goto
+        :desc "Goto Clock"                    "G" (cmd! (org-clock-goto 'select))
+        :desc "+org/toggle-last-clock"        "l" #'+org/toggle-last-clock
+        :desc "clock-in"                      "i" #'org-clock-in
+        :desc "clock-in-last"                 "I" #'org-clock-in-last
+        :desc "clock-out"                     "o" #'org-clock-out
+        :desc "resolve-clocks"                "r" #'org-resolve-clocks
+        :desc "clock-report"                  "R" #'org-clock-report
+        :desc "evaluate-time-range"           "t" #'org-evaluate-time-range
+        :desc "clock-timestamps-up"           "=" #'org-clock-timestamps-up
+        :desc "clock-timestamps-down"         "-" #'org-clock-timestamps-down
         )
 ;;; <D> Dates
   (map! :map org-mode-map
         :localleader
         "d" nil
         :prefix ("d" . "date/deadline")
-        "d" #'org-deadline
-        "s" #'org-schedule
-        "t" #'org-time-stamp
-        "T" #'org-time-stamp-inactive
+        :desc "deadline"             "d" #'org-deadline
+        :desc "schedule"             "s" #'org-schedule
+        :desc "time-stamp"           "t" #'org-time-stamp
+        :desc "time-stamp-inactive"  "T" #'org-time-stamp-inactive
         )
 ;;; <F> Formatting
   (map! :map org-mode-map
@@ -130,98 +140,97 @@
   (map! :map org-mode-map
         :localleader
         :prefix ("g" . "goto")
-        "g" #'org-goto
+        :desc "goto"                              "g" #'org-goto
         (:when (featurep! :completion ivy)
-         "g" #'counsel-org-goto
-         "G" #'counsel-org-goto-all)
+         :desc "counsel-org-goto"                 "g" #'counsel-org-goto
+         :desc "counsel-org-goto-all)"            "G" #'counsel-org-goto-all)
         (:when (featurep! :completion helm)
-         "g" #'helm-org-in-buffer-headings
-         "G" #'helm-org-agenda-files-headings)
-        "c" #'org-clock-goto
-        "C" (cmd! (org-clock-goto 'select))
-        "i" #'org-id-goto
-        "r" #'org-refile-goto-last-stored
-        "v" #'+org/goto-visible
-        "x" #'org-capture-goto-last-stored
+         :desc "helm-org-in-buffer-headings"      "g" #'helm-org-in-buffer-headings
+         :desc "helm-org-agenda-files-headings)"  "G" #'helm-org-agenda-files-headings)
+        :desc "clock-goto"                        "c" #'org-clock-goto
+        :desc "Select Clocked in Task"            "C" (cmd! (org-clock-goto 'select))
+        :desc "id-goto"                           "i" #'org-id-goto
+        :desc "refile-goto-last-stored"           "r" #'org-refile-goto-last-stored
+        :desc "+org/goto-visible"                 "v" #'+org/goto-visible
+        :desc "capture-goto-last-stored"          "x" #'org-capture-goto-last-stored
         )
 ;;; <I> Insert
   (map! :map org-mode-map
         :localleader
         :prefix ("i" . "Insert")
-        "t" #'org-todo
-        "f" #'org-footnote-new
-        "l" #'org-insert-link
-        "S" #'org-insert-last-stored-link
+        :desc "todo"                     "T" #'org-todo
+        :desc "footnote-new"             "f" #'org-footnote-new
+        :desc "insert-link"              "l" #'org-insert-link
+        :desc "insert-last-stored-link"  "S" #'org-insert-last-stored-link
         )
 ;;; <L> Links
   (map! :map org-mode-map
         :localleader
         :prefix ("l" . "links")
-        "c" #'org-cliplink
-        "d" #'+org/remove-link
-        "i" #'org-id-store-link
-        "l" #'org-insert-link
-        "L" #'org-insert-all-links
-        "s" #'org-store-link
-        "S" #'org-insert-last-stored-link
+        :desc "cliplink"                 "c" #'org-cliplink
+        :desc "+org/remove-link"         "d" #'+org/remove-link
+        :desc "id-store-link"            "i" #'org-id-store-link
+        :desc "insert-link"              "l" #'org-insert-link
+        :desc "insert-all-links"         "L" #'org-insert-all-links
+        :desc "store-link"               "s" #'org-store-link
+        :desc "insert-last-stored-link"  "S" #'org-insert-last-stored-link
         )
 ;;; <P> Publish
   (map! :map org-mode-map
         :localleader
         :prefix ("P" . "publish")
-        "a" #'org-publish-all
-        "f" #'org-publish-current-file
-        "p" #'org-publish
-        "P" #'org-publish-current-project
-        "s" #'org-publish-sitemap
+        :desc "publish-all"              "a" #'org-publish-all
+        :desc "publish-current-file"     "f" #'org-publish-current-file
+        :desc "publish"                  "p" #'org-publish
+        :desc "publish-current-project"  "P" #'org-publish-current-project
+        :desc "publish-sitemap"          "s" #'org-publish-sitemap
         )
 ;;; <R> Refile
   (map! :map org-mode-map
         :localleader
         :prefix ("r" . "refile")
-        "." #'+org/refile-to-current-file
-        "c" #'+org/refile-to-running-clock
-        "l" #'+org/refile-to-last-location
-        "f" #'+org/refile-to-file
-        "o" #'+org/refile-to-other-window
-        "O" #'+org/refile-to-other-buffer
-        "v" #'+org/refile-to-visible
-        "r" #'org-refile ; to all `org-refile-targets'
+        :desc "+org/refile-to-current-file"   "." #'+org/refile-to-current-file
+        :desc "+org/refile-to-running-clock"  "c" #'+org/refile-to-running-clock
+        :desc "+org/refile-to-last-location"  "l" #'+org/refile-to-last-location
+        :desc "+org/refile-to-file"           "f" #'+org/refile-to-file
+        :desc "+org/refile-to-other-window"   "o" #'+org/refile-to-other-window
+        :desc "+org/refile-to-other-buffer"   "O" #'+org/refile-to-other-buffer
+        :desc "+org/refile-to-visible"        "v" #'+org/refile-to-visible
+        :desc "refile"                        "r" #'org-refile ; to all `org-refile-targets'
         )
 ;;; <S> Subtree
   (map! :map org-mode-map
         :localleader
         :prefix ("s" . "Tree/Subtree")
-        "b" #'org-tree-to-indirect-buffer
-        "d" #'org-cut-subtree
-        "h" #'org-promote-subtree
-        "j" #'org-move-subtree-down
-        "k" #'org-move-subtree-up
-        "l" #'org-demote-subtree
-        "n" #'org-narrow-to-subtree
-        "r" #'org-refile
-        "s" #'org-sparse-tree
-        "A" #'org-archive-subtree
-        "N" #'widen
-        "S" #'org-sort
+        :desc "tree-to-indirect-buffer"             "b" #'org-tree-to-indirect-buffer
+        :desc "cut-subtree"                         "d" #'org-cut-subtree
+        :desc "promote-subtree"                     "h" #'org-promote-subtree
+        :desc "subtree-down"                        "j" #'org-move-subtree-down
+        :desc "subtree-up"                          "k" #'org-move-subtree-up
+        :desc "demote-subtree"                      "l" #'org-demote-subtree
+        :desc "narrow-to-subtree"                   "n" #'org-narrow-to-subtree
+        :desc "refile"                              "r" #'org-refile
+        :desc "sparse-tree"                         "s" #'org-sparse-tree
+        :desc "archive-subtree"                     "A" #'org-archive-subtree
+        :desc "sort"                                "S" #'org-sort
         (:prefix ("p" . "Org Priority")
-         "d" #'org-priority-down
-         "p" #'org-priority
-         "u" #'org-priority-up)
+         :desc "priority-down"                      "j" #'org-priority-down
+         :desc "priority"                           "p" #'org-priority
+         :desc "priority-up"                        "k" #'org-priority-up)
         )
 ;;; <T> Toggle
   (map! :map org-mode-map
         :localleader
         :prefix ("t" . "Toggle")
-        "a" #'org-toggle-archive-tag
-        "i" #'org-toggle-item
-        "h" #'org-toggle-heading
-        "I" #'org-toggle-inline-images
-        "x" #'org-toggle-checkbox
-        "l" #'org-toggle-link-display
+        :desc "archive-tag"                  "a" #'org-toggle-archive-tag
+        :desc "item"                         "i" #'org-toggle-item
+        :desc "heading"                      "h" #'org-toggle-heading
+        :desc "inline-images"                "I" #'org-toggle-inline-images
+        :desc "checkbox"                     "x" #'org-toggle-checkbox
+        :desc "link-display"                 "l" #'org-toggle-link-display
         (:prefix ("t" . "table")
-         "f" #'org-table-toggle-formula-debugger
-         "o" #'org-table-toggle-coordinate-overlays)
+         :desc "formula-debugger"      "f" #'org-table-toggle-formula-debugger
+         :desc "coordinate-overlays)"  "o" #'org-table-toggle-coordinate-overlays)
         )
 
   )
@@ -239,14 +248,6 @@
 (defun +jg-org-personal-binding-hook ()
   (message "Setting up org personal bindings: %s" (current-time-string))
   ;; Wiping old
-  (map! :map org-mode-map
-        "C-c [" nil
-        "C-c ]" nil
-        :localleader
-        "f" nil
-        "." nil
-        "i" nil
-        )
   ;; Personal
   ;; <leader>
   (map! :map org-mode-map
@@ -271,14 +272,14 @@
          :desc "Wrap non-link urls"  "L" #'+jg-org-wrap-non-link-urls
          :desc "Remove Duplicates"   "D" #'+jg-org-remove-duplicates)
         ;; TODO refine this Codeblocks
-        (:prefix "."
+        (:prefix ("." . "Code Blocks")
          :desc "Edit Codeblock " "e"     #'org-edit-src-code
          :desc "Exec Codeblock"  "E"     #'org-babel-execute-src-block)
         ;; Links
         (:prefix ("l" . "Links")
          ;; "o"   #'+jg-org-open_link_in_buffer
          ;; "O"   #'+jg-org-open_link_externally
-         "n"      #'+jg-org-change_link_name
+         :desc "Change Link Name" "n"      #'+jg-org-change_link_name
          )
         ;; Insertion
         (:prefix ("i" . "Insert")

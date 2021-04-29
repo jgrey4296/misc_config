@@ -34,8 +34,7 @@
 
 (defun +jg-tag-dired-binding-hook ()
   ;; Dired bindings
-  (map! :after dired
-      :map (dired-mode-map ranger-mode-map)
+  (map! :map (dired-mode-map ranger-mode-map)
       :localleader
       (:prefix ("d" . "Describe")
        :desc "Count Untagged Orgs" "u"   #'+jg-tag-dired-directory-count-untagged

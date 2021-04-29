@@ -20,11 +20,7 @@
   (map! :map shell-mode-map
       :localleader
       "h" #'counsel-shell-history)
-  ;; Ibuffer
-  (map! :after ibuffer
-      :mode ibuffer-mode
-      "\\" ibuffer--filter-map
-      )
+
   ;; Flycheck
   (map! :after flycheck
       :map flycheck-error-list-mode-map

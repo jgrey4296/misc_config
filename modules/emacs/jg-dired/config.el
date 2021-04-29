@@ -1,6 +1,8 @@
 ;;; tools/dired/config.el -*- lexical-binding: t; -*-
 
-(load! "+bindings")
+(after! evil
+  (load! "+bindings")
+  )
 (load! "+vars")
 (load! "+funcs")
 
@@ -8,7 +10,6 @@
   :commands hydra-dired-quick-sort/body
   )
 
-(add-hook! doom-first-input
-           #'+jg-dired-binding-hook
-           #'+jg-dired-var-hook
-           )
+
+(add-hook 'dired-load-hook #'+jg-dired-binding-hook)
+(add-hook 'dired-load-hook #'+jg-dired-var-hook)

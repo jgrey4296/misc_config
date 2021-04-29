@@ -22,10 +22,8 @@
 (add-hook 'doom-first-input-hook #'+jg-binding-setup-leaderless-hook -100)
 (add-hook 'doom-first-input-hook #'+jg-binding-evil-total-hook 100)
 
-(add-hook! ibuffer-load
-           #'+jg-binding-ibuffer-setup-hook
-           #'+jg-binding-ibuffer-update-hook
-           )
+(add-hook! ibuffer-mode #'+jg-ibuffer-setup-hook)
+(add-hook! ibuffer-mode #'+jg-ibuffer-update-hook)
 
 (add-hook 'evil-after-load-hook #'+jg-binding-evil-ex-setup-hook)
 (add-hook 'evil-after-load-hook #'+jg-binding-evil-submap-hook)

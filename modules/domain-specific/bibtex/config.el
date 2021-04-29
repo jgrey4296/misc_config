@@ -7,7 +7,12 @@
 (load! "+helm")
 (load! "+tags")
 (load! "+hydra")
-(load! "+bindings")
+(after! evil
+  (load! "+bindings")
+  (add-hook! evil-after-load
+             #'+bibtex-evil-ex-binding-hook
+             )
+)
 
 
 (use-package! bibtex
@@ -34,9 +39,6 @@
            #'+bibtex-binding-hook
            #'+bibtex-general-binding-hook
            #'+jg-bibtex-build-list
-           #'+bibtex-dired-binding-hook
            )
 
-(add-hook! evil-after-load
-           #'+bibtex-evil-ex-binding-hook
-           )
+(add-hook 'dired-load-hook #'+bibtex-dired-binding-hook)

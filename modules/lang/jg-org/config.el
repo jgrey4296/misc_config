@@ -7,8 +7,10 @@
 (load! "+vars")
 (load! "+tags")
 (load! "+text-utils")
-(load! "+org-standard-bindings.el")
-(load! "+bindings")
+(after! evil
+  (load! "+org-standard-bindings.el")
+  (load! "+bindings")
+  )
 
 (use-package! link-hint
   :config
@@ -25,7 +27,7 @@
 
 (add-hook 'doom-first-input-hook #'+jg-org-setup-tags-hook 100)
 (add-hook 'doom-first-input-hook #'+jg-org-general-binding-hook)
-(add-hook 'doom-first-input-hook #'+jg-org-dired-binding-hook)
+(add-hook 'dired-load-hook #'+jg-org-dired-binding-hook)
 (add-hook 'org-load-hook         #'+jg-org-main-bindings-hook 90)
 (add-hook 'org-load-hook         #'+jg-org-personal-binding-hook 100)
 (add-hook 'org-agenda-mode-hook  #'+jg-org-agenda-bind-fix-hook)

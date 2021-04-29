@@ -4,7 +4,12 @@
 (after! ivy 
   (load! "+ivy_actions"))
 
-(load! "+bindings")
+(after! evil
+  (load! "+bindings")
+  (add-hook! evil-after-load
+             #'+jg-tag-evil-binding-hook
+             )
+  )
 (load! "+dired")
 (load! "+helm")
 (load! "+index")
@@ -25,10 +30,5 @@
     )
   )
 
-(add-hook! doom-first-input
-           #'+jg-tag-binding-hook
-           #'+jg-tag-dired-binding-hook)
-
-(add-hook! evil-after-load
-           #'+jg-tag-evil-binding-hook
-           )
+(add-hook! doom-first-input #'+jg-tag-binding-hook)
+(add-hook 'dired-load-hook #'+jg-tag-dired-binding-hook)

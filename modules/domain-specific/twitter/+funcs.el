@@ -50,7 +50,8 @@
     (if (assq 'media_id locals)
         (setq cmd (format "%s&media_ids=%s" cmd (cdr (assq 'media_id locals)))))
 
-    (kill-buffer +jg-twitter-twurl_buff_name)
+    (if (get-buffer +jg-twitter-twurl_buff_name)
+        (kill-buffer +jg-twitter-twurl_buff_name))
 
     (start-process +jg-twitter-twurl_proc_name +jg-twitter-twurl_buff_name
                    +jg-twitter-twurl_command_name  "-d" (format "%s" cmd) "-X" "POST" "-H"

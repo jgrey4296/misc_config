@@ -448,7 +448,7 @@
           (evil-visual-state-minor-mode   . evil-visual-state-map)
           (evil-insert-state-minor-mode   . evil-insert-state-map)
           (evil-normal-state-minor-mode   . evil-normal-state-map)))
-  (message "Evil Bindings Complete")
+  (message "Evil Bindings Complete: %s" (current-time-string))
 )
 
 (defun +jg-binding-update-descs-hook ()

@@ -9,6 +9,15 @@
         if already in that window, tweet it
      """
   (interactive)
+  (let ((selection (if (eq evil-state 'visual)
+                       (buffer-substring-no-properties
+                        evil-visual-beginning
+                        evil-visual-end))))
+    (+jg-twitter-tweet-with-input selection)
+    )
+)
+
+(defun +jg-twitter-tweet-with-input (input)
   (if (string-equal (buffer-name) +jg-twitter-tweet_buff_name)
       (+jg-twitter-twitter-tweet)
     (progn
@@ -17,6 +26,12 @@
       (set (make-local-variable 'backup-inhibited) t)
       (auto-save-mode -1)
       (evil-window-set-height 10)
+      (with-current-buffer +jg-twitter-tweet_buff_name
+        (+jg-twitter-tweet-minor-mode)
+        (if input
+            (insert input)
+          )
+        )
       (redraw-display)
       )
     )
@@ -25,13 +40,17 @@
 (defun +jg-twitter-twitter-tweet ()
   """ Actually tweet """
   (interactive)
-  (+jg-twitter-twitter-tweet-text (buffer-string) (buffer-local-variables) '(+jg-twitter-tweet_sentinel))
+  (+jg-twitter-twitter-tweet-text (buffer-string)
+                                  (buffer-local-variables)
+                                  '(+jg-twitter-tweet_sentinel))
   )
 
 (defun +jg-twitter-twitter-tweet-text (text &optional locals sentinels)
   (let ((cmd (format "status=%s" text)))
     (if (assq 'media_id locals)
         (setq cmd (format "%s&media_ids=%s" cmd (cdr (assq 'media_id locals)))))
+
+    (kill-buffer +jg-twitter-twurl_buff_name)
 
     (start-process +jg-twitter-twurl_proc_name +jg-twitter-twurl_buff_name
                    +jg-twitter-twurl_command_name  "-d" (format "%s" cmd) "-X" "POST" "-H"
@@ -101,7 +120,8 @@
   (let* ((cmd (format "command=%s&media_id=%s" "FINALIZE" +jg-twitter-twurl_media_id)))
     (start-process +jg-twitter-twurl_proc_name +jg-twitter-twurl_buff_name
                    "twurl" "-H" +jg-twitter-twurl_media_host +jg-twitter-twurl_upload "-d" cmd)
-    (set-process-sentinel (get-process +jg-twitter-twurl_proc_name) '+jg-twitter-add_media_id_to_tweet)
+    (set-process-sentinel (get-process +jg-twitter-twurl_proc_name)
+                          '+jg-twitter-add_media_id_to_tweet)
     )
   )
 
@@ -116,8 +136,29 @@
 
 (defun +jg-twitter-tweet_sentinel (&rest args)
   """ Cleanup after tweeting """
-  (message (format "Tweeted %s" args))
   (set-buffer-modified-p nil)
-  (kill-buffer-and-window)
+  (with-current-buffer +jg-twitter-tweet_buff_name
+    (setq +jg-twitter-last-tweet-text-backup
+          (buffer-substring-no-properties (point-min)
+                                          (point-max)))
+    (kill-buffer-and-window)
+    )
   (redraw-display)
+  (with-current-buffer +jg-twitter-twurl_buff_name
+    ;; Get the result
+    (goto-char (point-min))
+    (let* ((obj (json-parse-buffer))
+           (errs (gethash "errors" obj nil))
+           (err (if errs (aref errs 0)))
+           (err-code (if err (gethash "code" err nil)))
+           (err-msg (if err (gethash "message" err nil))))
+      (if err
+          (message (format "Tweet Failed (%s): %s" err-code err-msg))
+        (progn
+          (message "Tweet Sent")
+          (kill-buffer +jg-twitter-twurl_buff_name)
+          )
+        )
+      )
+    )
   )

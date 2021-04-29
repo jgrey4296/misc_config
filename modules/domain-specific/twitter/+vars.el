@@ -11,6 +11,7 @@
                +jg-twitter-twurl_media_id nil
                +jg-twitter-twurl_target_tweet nil
                +jg-twitter-tweet_buff_name "*tweet*"
+               +jg-twitter-last-tweet-text-backup nil
 )
 
 (setq-default jg-twitter-download-repo "/Volumes/documents/github/py_bookmark_organiser/"

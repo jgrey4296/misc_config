@@ -1,8 +1,11 @@
-
-(load! "+bindings")
+(after! evil
+  (load! "+bindings")
+  (load! "+motions")
+  )
 (load! "+vars")
 (load! "+funcs")
 (load! "+downloader")
+(load! "+tweet-minor-mode")
 
 (use-package! tramp
   :init

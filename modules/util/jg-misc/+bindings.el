@@ -27,5 +27,4 @@
         :desc "Quit"          :n "q" #'quit-window
         )
   (message "Finished jg-misc-bindings")
-  (message "Remaining: %s" doom-first-input-hook)
 )

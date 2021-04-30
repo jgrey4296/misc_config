@@ -100,7 +100,7 @@
                 :action (helm-make-actions "action" '+jg-twitter-twitter-upload-image))
               ))
     (helm :sources +jg-twitter-twitter-image-helm-source
-          :input "~/Desktop/")
+          :input "/Volumes/documents/DCIM/")
   )
 
 (defun +jg-twitter-twitter-upload-image (candidate)

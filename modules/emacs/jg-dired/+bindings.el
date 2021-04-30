@@ -22,10 +22,8 @@
       (:prefix "["
        :desc "Prev Marked" :n "m" #'dired-prev-marked-file
        )
-      (:when (featurep! :editor jg-personal)
-        :desc "Expand Subdir" :n "i"                              #'+jg-personal-dired-insert-subdir-maybe-recursive
-        :desc "Remove Subdir" :n "DEL"                            #'dired-kill-subdir
-        )
+      :desc "Expand Subdir" :n "i"                              #'+jg-dired-insert-subdir-maybe-recursive
+      :desc "Remove Subdir" :n "DEL"                            #'dired-kill-subdir
       (:when (featurep! :lang python)
        :n "v" 'pyvenv-activate
        )
@@ -33,13 +31,15 @@
       :desc "Global Match Rename" :n "R" #'+jg-GLOBAL-dired-do-rename-regexp)
       )
 
+  (assert (lookup-key dired-mode-map [normal-state ?i]) #'+jg-dired-insert-subdir-maybe-recursive)
+
   (map! :map dired-mode-map
         :localleader
         :desc "Hide Toggle" "h" #'dired-omit-mode
         (:prefix ("d" . "Describe")
-         :desc "Summarise Orgs" "s"         #'+jg-personal-dired-create-summary-of-orgs
-         :desc "Marked Info" "m"            #'+jg-personal-dired-marked-info
-         :desc "Dired Diff" "d"             #'+jg-personal-dired-diff
+         :desc "Summarise Orgs" "s"         #'+jg-dired-create-summary-of-orgs
+         :desc "Marked Info" "m"            #'+jg-dired-marked-info
+         :desc "Dired Diff" "d"             #'+jg-dired-diff
          )
         (:prefix ("K" . "Destructive")
          :desc "Reformat jsons"   "J" #'+jg-dired-reformat-jsons

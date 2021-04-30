@@ -11,5 +11,5 @@
   )
 
 
-(add-hook 'dired-load-hook #'+jg-dired-binding-hook)
+(add-hook 'doom-first-input-hook #'+jg-dired-binding-hook)
 (add-hook 'dired-load-hook #'+jg-dired-var-hook)

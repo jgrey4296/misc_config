@@ -7,7 +7,6 @@
 (load! "+funcs")
 (load! "+helm-funcs")
 (load! "+ibuffer-funcs")
-(load! "+dired-funcs")
 
 
 (use-package! hl-line

@@ -3,7 +3,5 @@
 # to run scripts like this
 set -euo pipefail
 
-conda init
 conda activate bookmark
-
 python ~/.doom.d/setup_files/cron/auto_bibtex_tweet.py

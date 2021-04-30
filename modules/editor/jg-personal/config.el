@@ -123,7 +123,3 @@
 (add-hook! doom-first-input
            #'+jg-personal-binding-hook
            )
-
-(add-hook 'doom-first-input-hook
-          #'(lambda () (progn (message "Doom first input finished: %s" (current-time-string))) 100)
-          )

@@ -17,13 +17,29 @@
     )
 )
 
-(defun +jg-twitter-tweet-with-input (input)
+(defun +jg-twitter-tweet-reply ()
+  """ Creates a window to write a tweet in,
+        if already in that window, tweet it
+     """
+  (interactive)
+  (let ((selection (if (eq evil-state 'visual)
+                       (buffer-substring-no-properties
+                        evil-visual-beginning
+                        evil-visual-end))))
+    (+jg-twitter-tweet-with-input selection t)
+    )
+)
+
+(defun +jg-twitter-tweet-with-input (input &optional reply)
   (if (string-equal (buffer-name) +jg-twitter-tweet_buff_name)
       (+jg-twitter-twitter-tweet)
     (progn
       (evil-window-new (get-buffer-window (current-buffer))
                        +jg-twitter-tweet_buff_name)
       (set (make-local-variable 'backup-inhibited) t)
+      (if (and reply +jg-twitter-last-tweet-id)
+          (set (make-local-variable 'reply_id) +jg-twitter-last-tweet-id)
+          )
       (auto-save-mode -1)
       (evil-window-set-height 10)
       (with-current-buffer +jg-twitter-tweet_buff_name
@@ -46,9 +62,17 @@
   )
 
 (defun +jg-twitter-twitter-tweet-text (text &optional locals sentinels)
+  ;; Construct the twurl command:
   (let ((cmd (format "status=%s" text)))
+    ;; If an image has been attached:
     (if (assq 'media_id locals)
-        (setq cmd (format "%s&media_ids=%s" cmd (cdr (assq 'media_id locals)))))
+        (setq cmd (format "%s&media_ids=%s" cmd
+                          (cdr (assq 'media_id locals)))))
+
+    ;; If the tweet is a reply to the last tweet:
+    (if (assq 'reply_id locals)
+        (setq cmd (format "%s&in_reply_to_status_id=%s" cmd
+                          (cdr (assq 'reply_id locals)))))
 
     (if (get-buffer +jg-twitter-twurl_buff_name)
         (kill-buffer +jg-twitter-twurl_buff_name))
@@ -152,11 +176,14 @@
            (errs (gethash "errors" obj nil))
            (err (if errs (aref errs 0)))
            (err-code (if err (gethash "code" err nil)))
-           (err-msg (if err (gethash "message" err nil))))
+           (err-msg (if err (gethash "message" err nil)))
+           (id_str (gethash "id_str" obj nil))
+           )
       (if err
           (message (format "Tweet Failed (%s): %s" err-code err-msg))
         (progn
-          (message "Tweet Sent")
+          (message (format "Tweet Sent, id: %s" id_str))
+          (setq +jg-twitter-last-tweet-id id_str)
           (kill-buffer +jg-twitter-twurl_buff_name)
           )
         )

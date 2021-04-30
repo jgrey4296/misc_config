@@ -6,4 +6,4 @@ set -euo pipefail
 conda init
 conda activate bookmark
 
-python ./auto_bibtex_tweet.py
+python ~/.doom.d/setup_files/cron/auto_bibtex_tweet.py

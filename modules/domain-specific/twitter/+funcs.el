@@ -152,11 +152,28 @@
 
 (defun +jg-twitter-add_media_id_to_tweet (&rest args)
   """ Actually insert the media_id to the local vars of the tweet buffer """
-  (with-current-buffer +jg-twitter-twurl_target_tweet
-    (make-local-variable 'media_id)
-    (setq media_id +jg-twitter-twurl_media_id)
+  (let* (obj errs err err-code err-msg)
+    (with-current-buffer +jg-twitter-twurl_buff_name
+      ;; Get the result
+      (goto-char (point-min))
+      (setq obj (json-parse-buffer))
+      (if obj
+          (erase-buffer))
+      )
+
+    (setq errs (cdr (assq 'errors obj))
+          err (if errs (aref errs 0))
+          err-code (if err (cdr (assq 'code err)))
+          err-msg (if err (cdr (assq 'message err))))
+
+    (if err
+        (message (format "Image Upload Failed (%s): %s" err-code err-msg))
+      (with-current-buffer +jg-twitter-twurl_target_tweet
+        (make-local-variable 'media_id)
+        (setq media_id +jg-twitter-twurl_media_id)
+        (message "Media Inserted")
+        ))
     )
-  (message "Media Inserted")
   )
 
 (defun +jg-twitter-tweet_sentinel (&rest args)

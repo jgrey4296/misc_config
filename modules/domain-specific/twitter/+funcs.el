@@ -104,23 +104,31 @@
   )
 
 (defun +jg-twitter-twitter-upload-image (candidate)
-  """ Initialise the upload """
+  " Initialise the upload "
+  ;; TODO set media type better
   (let* ((sz (f-size candidate))
          (cmd (format "command=%s&total_bytes=%s&media_type=image/png" "INIT" sz))
          (target-buffer (buffer-name))
          )
+    (message "Initialising Image Upload: -X POST -H %s -f %s %s"
+             +jg-twitter-twurl_media_host
+             candidate
+             +jg-twitter-twurl_upload
+             )
     (if (> sz 5242880) (message "File too large")
       (progn
         (setq +jg-twitter-twurl_file candidate
               +jg-twitter-twurl_target_tweet target-buffer)
         (with-current-buffer (get-buffer-create +jg-twitter-twurl_buff_name)
           (erase-buffer)
-          (beginning-of-buffer)
-          (start-process +jg-twitter-twurl_proc_name +jg-twitter-twurl_buff_name
-                         "twurl" "-H" +jg-twitter-twurl_media_host
-                         +jg-twitter-twurl_upload "-d" cmd)
-          (set-process-sentinel (get-process +jg-twitter-twurl_proc_name) '+jg-twitter-sentinel_upload)
-          )
+          (beginning-of-buffer))
+
+        (start-process +jg-twitter-twurl_proc_name
+                       +jg-twitter-twurl_buff_name
+                       "twurl" "-X" "POST" "-H" +jg-twitter-twurl_media_host
+                       "-f" candidate +jg-twitter-twurl_upload)
+        (set-process-sentinel (get-process +jg-twitter-twurl_proc_name)
+                              '+jg-twitter-add_media_id_to_tweet)
         )
       )
     )

@@ -26,5 +26,6 @@
         :desc "Set Prefix"    :n "p" #'free-keys-set-prefix
         :desc "Quit"          :n "q" #'quit-window
         )
+  (evil-make-intercept-map free-keys-mode-map)
   (message "Finished jg-misc-bindings")
 )

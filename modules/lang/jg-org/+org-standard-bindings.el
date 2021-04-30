@@ -46,7 +46,6 @@
         :desc "export-dispatch"   "e" #'org-export-dispatch
         :desc "store-link"        "n" #'org-store-link
         :desc "set-property"      "o" #'org-set-property
-        :desc "priority"          "p" #'org-priority
         :desc "set-tags-command"  "q" #'org-set-tags-command
         :desc "todo-list"         "T" #'org-todo-list
         )

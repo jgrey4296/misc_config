@@ -26,6 +26,7 @@
               jg-bibtex-candidates-names '()
 
               jg-bibtex-rand-log ".emacs_rand_bib_log"
+              jg-bibtex-tweet-rand-log ".emacs_tweet_rand_bib_log"
 
               jg-bibtex-remove-field-newlines-regexp "file\\|url\\|title"
 

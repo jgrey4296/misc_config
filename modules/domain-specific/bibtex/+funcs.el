@@ -298,3 +298,35 @@ Log into jg-bibtex-rand-log.
   (setq jg-bibtex-open-url-with-pdf (not jg-bibtex-open-url-with-pdf))
   (message "Open URL on pdf? %s" jg-bibtex-open-url-with-pdf)
   )
+
+
+(defun +jg-bibtex-tweet-random-entry ()
+  (interactive)
+  (if (not bibtex-completion-bibliography)
+      (+jg-bibtex-build-list))
+  ;; TODO : limit to a range of years
+  (let ((chosen-file (nth (random (length bibtex-completion-bibliography))
+                          bibtex-completion-bibliography))
+        (log-file (f-join jg-bibtex-loc-bibtex jg-bibtex-tweet-rand-log))
+        entry
+        )
+    (with-temp-buffer
+      ;; TODO could search for doi's, then move a random number of those matches
+      (insert-file-contents chosen-file)
+      (goto-char (point-min))
+      (forward-char (random (point-max)))
+      (bibtex-previous-entry)
+      (setq entry (bibtex-parse-entry)))
+      (+jg-twitter-tweet-with-input (format jg-bibtex-tweet-pattern
+                                            (alist-get "year" entry nil nil #'equal)
+                                            (alist-get "title" entry nil nil #'equal)
+                                            (alist-get "author" entry nil nil #'equal)
+                                            (alist-get "tags" entry nil nil #'equal)
+                                            (or (alist-get "doi" entry nil nil #'equal)
+                                                (alist-get "url" entry nil nil #'equal)
+                                                (alist-get "isbn" entry nil nil #'equal))
+                                            ))
+      (write-region (format "%s\n" (alist-get "=key=" entry nil nil #'equal)) nil
+                    log-file t)
+    )
+  )

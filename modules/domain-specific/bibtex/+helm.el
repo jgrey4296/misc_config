@@ -71,6 +71,19 @@ modified from the original bibtex-completion-show-entry
       )
     )
   )
+(defun +jg-bibtex-helm-tweet-action (x)
+  (let* ((entry (bibtex-completion-get-entry x)))
+
+    (+jg-twitter-tweet-with-input (format jg-bibtex-tweet-pattern
+                                          (alist-get "year" entry nil nil #'equal)
+                                          (alist-get "title" entry nil nil #'equal)
+                                          (alist-get "author" entry nil nil #'equal)
+                                          (alist-get "tags" entry nil nil #'equal)
+                                          (or (alist-get "doi" entry nil nil #'equal)
+                                              (alist-get "url" entry nil nil #'equal)
+                                              (alist-get "isbn" entry nil nil #'equal))
+                                          )))
+  )
 
 ;; Utilities
 (defun +jg-bibtex-helm-candidates-formatter (candidates _)
@@ -182,6 +195,7 @@ governed by the variable `bibtex-completion-display-formats'."
                                       "Insert Bibtex simple" #'+jg-bibtex-insert-simple
                                       "Show entry"           #'+jg-bibtex-show-entry
                                       "Edit Notes"           #'+jg-bibtex-edit-notes
+                                      "Tweet Entry"          #'+jg-bibtex-helm-tweet-action
                                       )
           :candidates 'helm-bibtex-candidates
           :filtered-candidate-transformer  '(+jg-year-sort-transformer

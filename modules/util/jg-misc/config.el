@@ -19,6 +19,8 @@
   )
 (use-package! free-keys
   :commands (free-keys free-keys-set-prefix)
+  :config
+  (+jg-misc-free-key-binding-update)
   )
 (use-package! undo-tree
   :config

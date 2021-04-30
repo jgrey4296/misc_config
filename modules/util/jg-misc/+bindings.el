@@ -14,11 +14,13 @@
   (map! :map messages-buffer-mode-map
         :n "q" #'+popup/close
         )
+  (evil-make-intercept-map messages-buffer-mode-map)
 
   (map! :map help-map
         "DEL" #'free-keys
         )
-
+)
+(defun +jg-misc-free-key-binding-update ()
   (map! :map free-keys-mode-map
         :desc "Change Buffer" :n "b" #'free-keys-change-buffer
         :desc "Revert Buffer" :n "g" #'revert-buffer
@@ -27,5 +29,4 @@
         :desc "Quit"          :n "q" #'quit-window
         )
   (evil-make-intercept-map free-keys-mode-map)
-  (message "Finished jg-misc-bindings")
 )

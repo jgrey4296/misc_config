@@ -47,7 +47,11 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/github/writing/orgfiles/")
+(setq-default org-directory "~/github/writing/orgfiles/"
+              org-agenda-files `(,(expand-file-name "~/.doom.d/setup_files/base_agenda.org"))
+              org-archive-location (string-join `(,(expand-file-name "~/.doom.d/setup_files/archive.org")
+                                                  "* Main Archive") "::")
+              )
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.

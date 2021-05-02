@@ -17,9 +17,6 @@
 (after! org
   ;;ORG SETUP
   (setq-default
-   org-agenda-files `(,(expand-file-name "~/.doom.d/setup_files/base_agenda.org"))
-   org-archive-location (string-join `(,(expand-file-name "~/.doom.d/setup_files/archive.org")
-                                       "* Main Archive") "::")
    org-fast-tag-selection-single-key nil
    org-from-is-user-regexp "\\<John Grey\\>"
    org-group-tags nil
@@ -29,9 +26,8 @@
 
   (push 'org-indent-mode minor-mode-list)
   (push '("Scholar" . "https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q=%s") org-link-abbrev-alist)
-
-
   )
+
 (after! org-pomodoro
   ;; add a startup hook for pomodoro to tweet the end time
   (add-hook 'org-pomodoro-started-hook '+jg-org-pomodoro-start-hook)

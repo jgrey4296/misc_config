@@ -77,6 +77,7 @@ Columns are counted from zero."
 
 ;; Operators
 (evil-define-operator +jg-text-split-on-char-op (beg end)
+  ;; TODO
   :move-point t
   (message "Count: %s" count)
   (let ((last-char (downcase (char-after (+ (point) count))))

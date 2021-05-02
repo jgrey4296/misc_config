@@ -1,5 +1,8 @@
 ;;; emacs/bindings/+evil-maps.el -*- lexical-binding: t; -*-
 ;; Reminder: evil-mode-map-alist
+;;
+;; TODO add count lines/words, insert line above/below...
+
 (defun +jg-binding-setup-evil-hook ()
   (message "Setting up Evil Bindings: %s" (current-time-string))
 

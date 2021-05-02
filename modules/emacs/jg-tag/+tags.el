@@ -103,7 +103,6 @@ Return a hash-table of tags with their instance counts"
     )
   )
 
-;; TODO set-tags-and-repeat
 (defun +jg-tag-set-tags (x)
   "Utility action to set tags. Works in org *and* bibtex files"
   (if (gethash major-mode jg-tag-alt-mapping)

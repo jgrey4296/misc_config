@@ -7,7 +7,6 @@
  helm-truncate-lines t
  icicle-Completions-text-scale-decrease 0
  indent-tabs-mode nil
- +jg-bookmark-location "~/github/writing/other_files/main_bookmarks.html"
  +jg-personal-dired-recursive-switches "-aBhlR --group-directories-first"
  +jg-personal-major-modes '(ada-mode
                             ams-tex-mode antlr-mode

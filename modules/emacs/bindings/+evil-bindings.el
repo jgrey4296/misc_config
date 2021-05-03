@@ -72,6 +72,7 @@
   ;; Visual
   (map! :map jg-binding-visual-state-map
         :desc "Mark Buffer"   "RET"      #'+jg-text-whole-buffer-textobj
+        :desc "Visual Block"  "DEL"      #'evil-visual-block
         :desc "Repeat"        "."        #'evil-repeat
         :desc "Search"        "/"        #'evil-ex-search-forward
         :desc "B-Search"     "\\"        #'evil-ex-search-backward
@@ -171,6 +172,8 @@
         :desc  "visual-char"           "v"              #'evil-visual-char
         :desc  "forward-word-begin"    "w"              #'evil-forward-word-begin
         :desc  "yank"                  "y"              #'evil-yank
+
+        :desc "visual-block"           "C-v"            #'evil-visual-block
         )
 
   ;; Vision / Hiding

@@ -2,7 +2,12 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("DCIM"
+(("pdflib"
+ (filename . "~/mega/pdflibrary/")
+ (front-context-string . "1320\n  drwxr-xr-")
+ (rear-context-string . "36 Sep  4  2020 ")
+ (position . 145))
+("DCIM"
  (filename . "/Volumes/documents/DCIM/")
  (front-context-string . ".thumbnails\n  dr")
  (rear-context-string . "1K Apr 12  2020 ")
@@ -43,7 +48,7 @@
  (rear-context-string . "52 Feb 25  2020 ")
  (position . 200))
 ("mega"
- (filename . "~/MEGA/AutoSync/")
+ (filename . "~/mega/")
  (front-context-string . "Audio\n  drwxrwxr")
  (rear-context-string . "04 Dec 23 17:49 ")
  (position . 190))

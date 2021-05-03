@@ -32,5 +32,3 @@
 
 (add-hook! ibuffer-mode #'+jg-ibuffer-setup-hook)
 (add-hook! ibuffer-mode #'+jg-ibuffer-update-hook)
-
-

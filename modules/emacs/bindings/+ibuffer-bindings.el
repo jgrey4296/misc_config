@@ -39,6 +39,16 @@
         :desc "mark-unsaved-buffers"         "u" #'ibuffer-mark-unsaved-buffers
         :desc "mark-compressed-file-buffers" "z" #'ibuffer-mark-compressed-file-buffers
         )
+  (map! :map ibuffer-mode-map
+        :prefix ("s" . "Sort")
+        :desc "do-sort-by-alphabetic"       "a"  #'ibuffer-do-sort-by-alphabetic
+        :desc "do-sort-by-filename/process" "f"  #'ibuffer-do-sort-by-filename/process
+        :desc "invert-sorting"              "i"  #'ibuffer-invert-sorting
+        :desc "do-sort-by-major-mode"       "m"  #'ibuffer-do-sort-by-major-mode
+        :desc "do-sort-by-size"             "s"  #'ibuffer-do-sort-by-size
+        :desc "do-sort-by-recency"          "v"  #'ibuffer-do-sort-by-recency
+        )
+
   (map! :map ibuffer--filter-map
         "S-<up>"                    nil
         "<up>"                      nil
@@ -87,11 +97,13 @@
 
 (defun +jg-ibuffer-update-hook ()
   (message "Updating ibuffer: %s" (current-time-string))
-  ;; (+jg-binding-keymap-update-plural  'ibuffer-mode-map
-  ;;                                    'ibuffer--filter-map)
-
   (map! :map ibuffer-mode-map
         [normal-state] nil)
-  (add-hook 'ibuffer-mode-hook #'+jg-ibuffer-filter-setup)
   (evil-make-overriding-map ibuffer-mode-map)
-)
+
+  (ibuffer-clear-filter-groups)
+  (ibuffer-filter-disable)
+
+  (ibuffer-switch-to-saved-filter-groups "my-default")
+  (ibuffer-switch-to-saved-filters "anti-[Helm|Magit|Help]")
+  )

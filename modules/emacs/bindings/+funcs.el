@@ -108,15 +108,7 @@
   (insert ")")
   )
 
-(defun +jg-ibuffer-filter-setup ()
-  (interactive)
-  (ibuffer-clear-filter-groups)
-  (ibuffer-filter-disable)
 
-  ;; Use +jg-ibuffer-defaults
-  (ibuffer-projectile-set-filter-groups)
-  (ibuffer-add-saved-filters "default")
-  )
 (defun +jg-toggle-line-numbers ()
   (interactive)
   (setq display-line-numbers (if (not (eq display-line-numbers t)) t nil))

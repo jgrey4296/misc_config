@@ -63,7 +63,12 @@
       ("debugger-mode"
        (mode . debugger-mode)))))
  '(ibuffer-saved-filters
-   '(("Indirect-Window-Ring"
+   '(("anti-[Helm|Magit|Help]"
+      (not or
+           (derived-mode . helm-major-mode)
+           (derived-mode . helpful-mode)
+           (derived-mode . magit-mode)))
+     ("Indirect-Window-Ring"
       (name . "->"))
      ("default"
       (not or

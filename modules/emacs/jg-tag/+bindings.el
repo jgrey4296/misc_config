@@ -32,9 +32,8 @@
         )
 )
 
-(defun +jg-tag-dired-binding-hook ()
-  ;; Dired bindings
-  (map! :map (dired-mode-map ranger-mode-map)
+;; Dired bindings
+(map! :map dired-mode-map
       :localleader
       (:prefix ("d" . "Describe")
        :desc "Count Untagged Orgs" "u"   #'+jg-tag-dired-directory-count-untagged
@@ -50,10 +49,9 @@
        :desc "Index People" "p"          #'+jg-tag-index-people
        :desc "Index Tags" "t"            #'+jg-tag-index-tags
        )
-  )
 )
 ;; Evil ex commands
-(defun +jg-tag-evil-binding-hook ()
+(after! evil-ex
   (evil-ex-define-cmd "t[ag]"  #'+jg-tag-helm-start)
   (evil-ex-define-cmd "to"     #'+jg-tag-occurrences)
   (evil-ex-define-cmd "toa"    #'+jg-tag-occurrences-in-open-buffers)

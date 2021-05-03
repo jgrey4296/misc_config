@@ -51,7 +51,11 @@
               org-agenda-files `(,(expand-file-name "~/.doom.d/setup_files/base_agenda.org"))
               org-archive-location (string-join `(,(expand-file-name "~/.doom.d/setup_files/archive.org")
                                                   "* Main Archive") "::")
+              initial-buffer-choice "/Volumes/documents/github/emacs_files/setup_files/base_agenda.org"
+              doom-fallback-buffer-name "base_agenda.org"
               )
+
+(add-hook 'doom-first-input-hook #'org-mode)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.

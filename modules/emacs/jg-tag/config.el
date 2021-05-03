@@ -6,9 +6,7 @@
 
 (after! evil
   (load! "+bindings")
-(after! evil-ex
-           (+jg-tag-evil-binding-hook)
-           ))
+)
 
 (load! "+dired")
 (load! "+helm")
@@ -31,4 +29,3 @@
   )
 
 (add-hook! doom-first-input #'+jg-tag-binding-hook)
-(add-hook 'dired-load-hook #'+jg-tag-dired-binding-hook)

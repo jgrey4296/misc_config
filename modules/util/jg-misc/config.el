@@ -2,7 +2,9 @@
 (load! "+funcs")
 (load! "+vars")
 (load! "+popup")
-(load! "+bindings")
+(after! evil
+  (load! "+bindings")
+)
 (after! ivy
   (load! "+ivy_actions")
   )

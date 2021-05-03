@@ -2,7 +2,9 @@
 ;; loaded fourth
 
 (load! "+variables")
-(load! "+bindings")
+(after! evil
+  (load! "+bindings")
+  )
 
 (load! "+funcs")
 (load! "+helm-funcs")
@@ -115,7 +117,3 @@
                   (cdr helm-find-files-actions))
           )
     )
-
-(add-hook! doom-first-input
-           #'+jg-personal-binding-hook
-           )

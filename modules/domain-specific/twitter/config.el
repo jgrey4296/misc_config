@@ -14,8 +14,3 @@
   :config
   (tramp-register-file-name-handlers)
   )
-
-(add-hook! doom-first-input
-           #'+twitter-binding-hook
-           #'+twitter-evil-ex-binding-hook
-           )

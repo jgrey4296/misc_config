@@ -2,7 +2,9 @@
 (load! "+vars")
 (load! "+funcs")
 (load! "+barchart")
-(load! "+bindings")
+(after! evil
+  (load! "+bindings")
+)
 
 (use-package! academic-phrases
   :defer t

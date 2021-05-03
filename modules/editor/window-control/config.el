@@ -5,6 +5,6 @@
   )
 
 (load! "+funcs")
-(load! "+bindings")
-
-(add-hook! doom-first-input #'+window-control-binding-hook)
+(after! evil
+  (load! "+bindings")
+  )

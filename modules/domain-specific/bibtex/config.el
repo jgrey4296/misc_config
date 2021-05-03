@@ -10,9 +10,7 @@
 (after! evil
   (load! "+motions")
   (load! "+bindings")
-  (after! evil-ex
-    (+bibtex-evil-ex-binding-hook)))
-
+)
 
 (use-package! bibtex
   :init
@@ -39,5 +37,3 @@
            #'+bibtex-general-binding-hook
            #'+jg-bibtex-build-list
            )
-
-(add-hook 'dired-load-hook #'+bibtex-dired-binding-hook)

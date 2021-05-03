@@ -61,18 +61,15 @@
         )
 )
 
-(defun +bibtex-dired-binding-hook ()
-  (message "Setting up bibtex bindings: %s" (current-time-string))
-  (map! :after dired
-        :map dired-mode-map
-        :localleader
-        :prefix "K"
-        :desc "Unify Pdf Locations" "U"   #'+jg-bibtex-dired-unify-pdf-locations
-        )
-)
 
-
-(defun +bibtex-evil-ex-binding-hook ()
+(after! evil-ex
   (message "Setting up bibtex evil ex: %s" (current-time-string))
     (evil-ex-define-cmd "ci[te]" #'+jg-bibtex-insert-wrapped)
     )
+
+(map! :after dired
+      :map dired-mode-map
+      :localleader
+      :prefix "K"
+      :desc "Unify Pdf Locations" "U"   #'+jg-bibtex-dired-unify-pdf-locations
+      )

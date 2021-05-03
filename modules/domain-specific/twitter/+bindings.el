@@ -1,13 +1,10 @@
 ;;; domain-specific/twitter/+bindings.el -*- lexical-binding: t; -*-
 
-(defun +twitter-binding-hook ()
-  (message "Twitter binding setup: %s" (current-time-string))
-  (map! :leader
-        :desc "Download Tweet Thread" "a d" #'+jg-tweet-downloader
-        )
-)
+(map! :leader
+      :desc "Download Tweet Thread" "a d" #'+jg-tweet-downloader
+      )
 
-(defun +twitter-evil-ex-binding-hook ()
+(after! evil-ex
   (message "Twitter evil ex binding: %s" (current-time-string))
   (evil-ex-define-cmd "tweet" '+jg-twitter-tweet)
   (evil-ex-define-cmd "image" '+jg-twitter-twitter-add-picture)

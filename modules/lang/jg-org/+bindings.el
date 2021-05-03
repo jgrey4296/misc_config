@@ -16,14 +16,13 @@
         )
   )
 
-(defun +jg-org-dired-binding-hook ()
-  (message "Setting up dired org bindings: %s" (current-time-string))
-  (map! :map (dired-mode-map ranger-mode-map)
+
+  (map! :map dired-mode-map
         (:prefix "%"
          :desc "Mark Orgs" :n "o"     #'+jg-org-dired-select-org
          )
         :localleader
-        (:prefix "m"
+        (:prefix ("m" . "Mark")
          :desc "Mark Orgs" "o" #'+jg-org-dired-select-org
          )
         (:prefix ("K" . "Destructive")
@@ -34,4 +33,3 @@
          :desc "Remove Surplus"   "S" #'+jg-org-dired-clean-remove-surplus
          )
         )
-)

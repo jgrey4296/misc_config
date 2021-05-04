@@ -28,6 +28,8 @@
   :config
   (loop for hook in jg-bibtex-clean-remove-hooks
         do (remove-hook 'org-ref-clean-bibtex-entry-hook hook))
+
+  (add-hook 'org-ref-clean-bibtex-entry-hook #'+jg-bibtex-insert-stub-key -100)
   (loop for hook in jg-bibtex-clean-add-hooks
         do (add-hook 'org-ref-clean-bibtex-entry-hook hook 100))
   )

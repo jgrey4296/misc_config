@@ -142,3 +142,12 @@ the file, unless ALLOW-DUPLICATE-KEYS is non-nil."
 
     (insert key)
     (kill-new key)))
+
+
+(defun +jg-bibtex-insert-stub-key ()
+  (bibtex-beginning-of-entry)
+  (search-forward "{" (line-end-position) t)
+  (if (looking-at ",")
+      (insert (format "stub_key_%s" (random 5000)))
+    )
+  )

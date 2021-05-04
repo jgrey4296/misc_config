@@ -106,6 +106,7 @@
         :desc "Indent" "TAB"            #'indent-for-tab-command
         :desc "Return" "RET"            #'evil-ret
         :desc "Emacs State"       "C-z" #'evil-emacs-state
+        :desc "Redisplay"           "§" #'+jg-bindings-force-redisplay
 
 
         :desc "1st Non Blank"       "^" #'evil-first-non-blank

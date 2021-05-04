@@ -196,4 +196,7 @@ If region isn't active, narrow away anything above point
               :caller 'counsel-workspace)
     )
 
-
+(defun +jg-bindings-force-redisplay ()
+  (interactive)
+  (redisplay t)
+  )

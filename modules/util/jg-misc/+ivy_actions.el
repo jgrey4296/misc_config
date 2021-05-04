@@ -29,6 +29,14 @@
     )
   )
 
+(defun +jg-misc-ivy-reset-popup-rules ()
+  (interactive)
+  (+jg-misc-setup-popup-rules-hook)
+  )
+
 
 (ivy-set-actions 'ivy-switch-buffer
                  '(("p" +jg-misc-ivy-open-as-popup "Popup")))
+
+(ivy-set-actions '+jg-misc-ivy-popup-buffer
+                 '(("p" +jg-misc-ivy-reset-popup-rules "Clear Popup")))

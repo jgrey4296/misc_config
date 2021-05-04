@@ -4,7 +4,9 @@
   (message "Setting up jg-misc bindings: %s" (current-time-string))
   (map! :leader
         (:prefix "b"
-         :desc "Undo-Tree" "u" #'+jg-misc-undo-tree)
+         :desc "Undo-Tree" "u" #'+jg-misc-undo-tree
+         :desc "Clear Popup Rules" "P" #'+jg-misc-ivy-reset-popup-rules
+         )
         (:prefix "w"
          :desc "Toggle Layout" "|" #'+jg-window-layout-toggle
          :desc "Rotate Windows" "\\" #'+jg-rotate-windows-forward

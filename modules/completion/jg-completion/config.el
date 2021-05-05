@@ -5,5 +5,5 @@
              #'+jg-completion-binding-hook)
 )
 (after! ivy
-  (load "+ivy_actions")
+  (load! "+ivy_actions")
   )

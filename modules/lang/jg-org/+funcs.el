@@ -149,3 +149,5 @@ Prefix-arg to move the file otherwise copy it
 
     )
   )
+
+(fset 'ad-Advice-newline-and-indent #'(lambda (x &rest _) (funcall x)))

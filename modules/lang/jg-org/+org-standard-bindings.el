@@ -287,6 +287,4 @@
          :desc "Insert Drawer" "d"       #'org-insert-drawer)
         )
 
-  (map! :map evil-org-mode-map
-        :i "RET" #'org-return)
   )

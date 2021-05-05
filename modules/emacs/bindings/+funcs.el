@@ -200,3 +200,8 @@ If region isn't active, narrow away anything above point
   (interactive)
   (redisplay t)
   )
+
+(defun +jg-bindings-find-snippets-dir ()
+  (interactive)
+  (find-file +snippets-dir)
+  )

@@ -586,7 +586,6 @@
         )
   ;;; <leader> y --- snippets
   (map! :leader
-        (:when (featurep! :editor snippets)
          :prefix ("y" . "snippets")
          :desc "Expand Snippet"        "y" #'yas-expand
          :desc "New snippet"           "n" #'yas-new-snippet
@@ -595,6 +594,7 @@
          :desc "Find global snippet"   "/" #'yas-visit-snippet-file
          :desc "Reload snippets"       "r" #'yas-reload-all
          :desc "Create Temp Template"  "c" #'aya-create
-         :desc "Use Temp Template"     "e" #'aya-expand)
+         :desc "Use Temp Template"     "e" #'aya-expand
+         :desc "Find Snippet Dir"      "d" #'+jg-bindings-find-snippets-dir
         )
 )

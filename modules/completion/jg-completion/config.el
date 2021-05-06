@@ -4,6 +4,6 @@
   (add-hook! doom-first-input
              #'+jg-completion-binding-hook)
 )
-(after! ivy
+(after! (ivy counsel)
   (load! "+ivy_actions")
   )

@@ -5,8 +5,9 @@
 
   (define-key! ivy-minibuffer-map
     [remap doom/delete-backward-word] #'ivy-backward-kill-word
-    "C-c C-e"                         #'+ivy/woccur
+    "C-c RET"                         #'+ivy/woccur
     "C-o"                             #'ivy-dispatching-done
+    "C-h"                             #'ivy-backward-kill-word
     "M-o"                             #'hydra-ivy/body
     )
 

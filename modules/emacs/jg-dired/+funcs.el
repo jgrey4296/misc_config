@@ -122,3 +122,8 @@ Type SPC or `y' to %s one match, DEL or `n' to skip to next,
     (search-forward "tags = {")
     )
   )
+
+(defun +jg-dired-find-literal ()
+  (interactive)
+  (find-file-literally (dired-get-filename))
+  )

@@ -43,6 +43,7 @@
        )
       (:prefix ("f" . "Find")
        :desc "Find Random Marked" "r" #'+jg-dired-find-random-marked-file
+       :desc "Fundamental"        "f" #'+jg-dired-find-literal
        )
       )
 

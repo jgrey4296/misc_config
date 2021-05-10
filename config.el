@@ -32,11 +32,9 @@
       ibuffer-old-time 2
       )
 
-(progn
-  (defun doom-highlight-non-default-indentation-h () )
-  (setq whitespace-style '(face tabs spaces trailing lines space-before-tab newline indentation empty space-after-tab space-mark tab-mark newline-mark))
-  )
-
+;; Override doom's whitespace mode settings:
+(fset 'doom-highlight-non-default-indentation-h #'(lambda () nil))
+(setq whitespace-style '(face tabs spaces trailing lines space-before-tab newline indentation empty space-after-tab space-mark tab-mark newline-mark))
 
 
 

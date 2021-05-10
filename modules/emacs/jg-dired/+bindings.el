@@ -14,6 +14,7 @@
       :n "i" nil
       ":" nil
 
+      "C-h" #'dired-up-directory
 
       :desc "Expand Subdir"        :n "i"                              #'+jg-dired-insert-subdir-maybe-recursive
       :desc "Remove Subdir"        :n "DEL"                            #'dired-kill-subdir

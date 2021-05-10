@@ -102,7 +102,7 @@ Type SPC or `y' to %s one match, DEL or `n' to skip to next,
   (message "%s files are marked" (length (dired-get-marked-files)))
   )
 
-(defun +jg-personal-dired-auto-move ()
+(defun +jg-dired-dired-auto-move ()
   " Auto up directory then down line"
   (interactive)
   (dired-up-directory)

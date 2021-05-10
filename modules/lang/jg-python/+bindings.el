@@ -17,26 +17,8 @@
 
 (map! :after python
       :map python-mode-map
-      :leader
-      (:prefix ("j" . "Jump")
-        :desc "Create Tags"            "C" #'helm-gtags-create-tags
-        :desc "Find Tag"               "d" #'helm-gtags-find-tag
-        :desc "Fing Tag Other Window"  "D" #'helm-gtags-find-tag-other-window
-        :desc "DWIM Other Window"      "G" #'helm-gtags-dwim-other-window
-        :desc "Tags in func"           "i" #'helm-gtags-tags-in-this-function
-        :desc "Parse File"             "l" #'helm-gtags-parse-file
-        :desc "History: Next"          "n" #'helm-gtags-next-history
-        :desc "History: Prev"          "p" #'helm-gtags-previous-history
-        :desc "Find rtag"              "r" #'helm-gtags-find-rtag
-        :desc "Gtags Resume"           "R" #'helm-gtags-resume
-        :desc "Gtags Select"           "s" #'helm-gtags-select
-        :desc "Gtags show stack"       "S" #'helm-gtags-show-stack
-        :desc "Find Symbol"            "y" #'helm-gtags-find-symbol
-        :desc "Update Tags"            "U" #'helm-gtags-update-tags
-       )
-      ;; -----------
       :localleader
-      (:prefix ("g" . "Goto"))
+      (:prefix ("j" . "Jump"))
       (:prefix ("i" . "imports")
        :desc "Insert missing imports" "i" #'pyimport-insert-missing
        :desc "Remove unused imports"  "r" #'pyimport-remove-unused

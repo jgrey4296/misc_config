@@ -134,6 +134,13 @@
         :desc "Sudo find file"              "U"   #'doom/sudo-find-file
         :desc "Yank filename"               "n"   #'+default/yank-buffer-filename
 
+        (:prefix ("b" . "Bookmark")
+         :desc "Set bookmark"                "m"           #'bookmark-set
+         :desc "Delete bookmark"             "M"           #'bookmark-delete
+         :desc "Rename bookmark"             "r"  #'bookmark-rename
+         :desc "Save Bookmarks"              "s" #'bookmark-save
+         :desc "Load Bookmarks"              "l" #'bookmark-load
+         )
         )
   ;;; <leader> g --- git
   (map! :leader
@@ -221,26 +228,24 @@
   ;;; <leader> j -- Jumping
   (map! :leader
         :prefix ("j" . "Jump")
-        :desc "Line"                          "l" #'evil-avy-goto-line
-        :desc "Definition"                    "d" #'+lookup/definition
-        :desc "References"                    "D" #'+lookup/references
-        :desc "Implementations"               "i" #'+lookup/implementations
-        :desc "Documentation"                 "k" #'+lookup/documentation
-        :desc "Type definition"               "t" #'+lookup/type-definition
-        :desc "Browse URL"                    "u" #'+jg-browse-url
-        (:prefix ("b" . "Bookmark")
-         :desc "Set bookmark"                "m"           #'bookmark-set
-         :desc "Delete bookmark"             "M"           #'bookmark-delete
-         :desc "Rename bookmark"             "r"  #'bookmark-rename
-         :desc "Save Bookmarks"              "s" #'bookmark-save
-         :desc "Load Bookmarks"              "l" #'bookmark-load
-         )
-        (:when (featurep! :completion ivy)
-         :desc "Jump to symbol in current workspace" "j"  #'lsp-ivy-workspace-symbol
-         :desc "Jump to symbol in any workspace"     "J"  #'lsp-ivy-global-workspace-symbol)
-        (:when (featurep! :completion helm)
-         :desc "Jump to symbol in current workspace" "j"  #'helm-lsp-workspace-symbol
-         :desc "Jump to symbol in any workspace"     "J"  #'helm-lsp-global-workspace-symbol)
+         :desc "Parse File"            "!" #'helm-gtags-parse-file
+         :desc "Jump to Char"          "." #'avy-goto-char
+         :desc "Create Tags"           "C" #'helm-gtags-create-tags
+         ;; :desc "Find Tag Other Window" "D" #'helm-gtags-find-tag-other-window
+         :desc "References"            "D" #'+lookup/references
+         :desc "Update Tags"           "U" #'helm-gtags-update-tags
+         ;; :desc "Definition"            "d" #'+lookup/definition
+         :desc "Find Tag"              "d" #'helm-gtags-find-tag
+         :desc "Implementations"       "i" #'+lookup/implementations
+         ;; :desc "Tags in func"          "i" #'helm-gtags-tags-in-this-function
+         :desc "Documentation"         "k" #'+lookup/documentation
+         :desc "Line"                  "l" #'evil-avy-goto-line
+         :desc "Avy Pop Mark"          "m" #'avy-pop-mark
+         :desc "Find rtag"             "r" #'helm-gtags-find-rtag
+         :desc "Gtags Select"          "s" #'helm-gtags-select
+         :desc "Type definition"       "t" #'+lookup/type-definition
+         :desc "Browse URL"            "u" #'+jg-browse-url
+         :desc "Find Symbol"           "y" #'helm-gtags-find-symbol
         )
   ;;; <leader> m -- Local Mode
   (map! (:prefix ("m" . "Local Mode")))

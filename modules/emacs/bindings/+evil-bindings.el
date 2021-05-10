@@ -7,7 +7,7 @@
   (message "Setting up Evil Bindings: %s" (current-time-string))
 
 
-  ;; Normal
+  ;; Normal state
   (map! :map jg-binding-normal-state-map
         :desc "Use Register"      "\""  #'evil-use-register
         :desc "Repeat Substitute" "& "  #'evil-ex-repeat-substitute
@@ -68,8 +68,7 @@
         :desc "Insert" "<insertchar>"         #'evil-insert
         :desc "Back Char" "DEL"               #'evil-backward-char
         )
-
-  ;; Visual
+  ;; Visual state
   (map! :map jg-binding-visual-state-map
         :desc "Mark Buffer"   "RET"      #'+jg-text-whole-buffer-textobj
         :desc "Visual Block"  "DEL"      #'evil-visual-block
@@ -91,8 +90,7 @@
         :desc "Surround Change"         "S" #'evil-surround-change
         :desc "Exchange Point and Mark" "o" #'exchange-point-and-mark
         )
-
-  ;; Operator
+  ;; Operator state
   (map! :map jg-binding-operator-state-map
         :desc "Escape"        "C-g" #'evil-escape
         :desc "Surround Edit" "S"   #'evil-Surround-edit
@@ -100,8 +98,7 @@
         :desc "Select Line"   "l"   #'+jg-text-line-textobj
         :desc "Select Buffer" "RET" #'+jg-text-whole-buffer-textobj
         )
-
-  ;; Motion
+  ;; Motion state
   (map! :map jg-binding-motion-state-map
         :desc "Indent" "TAB"            #'indent-for-tab-command
         :desc "Return" "RET"            #'evil-ret
@@ -176,7 +173,6 @@
 
         :desc "visual-block"           "C-v"            #'evil-visual-block
         )
-
   ;; Vision / Hiding
   (map! :map jg-binding-vision-map
         :desc "Narrow"        "RET" #'+jg-narrow-around-point
@@ -219,7 +215,6 @@
          :desc "unfold-all"             "r"  #'vimish-fold-unfold-all
          )
         )
-
   ;; Text objects
   (map! :map jg-binding-inner-text-objects-map
         :desc "Quote"        "\""  #'evil-inner-double-quote
@@ -281,7 +276,6 @@
         :desc  "word"                         "w"   #'evil-a-word
         :desc  "XML attr"                     "x"   #'evil-outer-xml-attr
         )
-
   ;; My Operators
   (map! :map jg-binding-operator-map
 
@@ -295,11 +289,14 @@
         :desc "Line End"            "$"   #'evil-end-of-visual-line
         :desc "Line Start"          "0"   #'evil-beginning-of-visual-line
         :desc "Char"                "?"   #'what-cursor-position
+        :desc "Jump Char"           "."   #'evil-avy-goto-char
+        :desc "Jump to Tag"         ","   #'helm-gtags-find-tag
 
         :desc "Invert"              "~"   #'evil-invert-case
 
         :desc "Align"              "a" #'align-regexp
         :desc "Pop Mark"           "b" #'avy-pop-mark
+        :desc "Push Mark"          "B" #'avy-push-mark
         :desc "Comment"            "c" #'evilnc-comment-operator
         :desc "IEdit"              "e" #'evil-iedit-state/iedit-mode
         :desc "Goto First Line"    "f" #'evil-goto-first-line
@@ -360,7 +357,6 @@
          :desc "Random"                     "r" #'+jg-text-goto-random-line-op
          )
         )
-
   ;; Directional Motion
   (map! :map jg-binding-backward-motion-map
         :desc "Narrow"       "RET" #'+jg-narrowing-move-focus-backward

@@ -8,6 +8,8 @@ from os import listdir, system
 import subprocess
 from random import choice
 import json
+import twitter
+import configparser
 
 from bibtexparser import customization as c
 from bibtexparser.bparser import BibTexParser
@@ -88,10 +90,13 @@ def format_tweet(entry):
         exit()
 
     tags = " ".join(["#{}".format(x.strip()) for x in entry['tags'].split(',')])
-    result += f"{tags}\n"
+    if len(result) <= 250:
+        diff = 250 - len(result)
+        result += tags[:diff]
     result += "#my_bibtex"
-    if len(result) >= 250:
-        logging.warning(f"Resulting Tweet too long: {len(result)}")
+
+    if len(result) >= 280:
+        logging.warning(f"Resulting Tweet too long: {len(result)}\n{result}")
         exit()
 
     return (entry['ID'], result)
@@ -103,7 +108,8 @@ def call_twurl(tweet_text):
                              "-d",
                              full_arg,
                              TWURL_TARGET],
-                            capture_output=True
+                            capture_output=True,
+                            shell=True
                             )
     twurl_output = json.loads(result.stdout)
 
@@ -127,7 +133,22 @@ if __name__ == "__main__":
     db         = parse_bibtex(bib)
     entry      = select_entry(db, tweeted)
     id_str, tweet_text = format_tweet(entry)
-    if call_twurl(tweet_text):
+
+    config = configparser.ConfigParser()
+    with open(expander('~/github/py_bookmark_organiser/secrets.config'),'r') as f:
+        config.read_file(f)
+
+    twit = twitter.Api(consumer_key=config['DEFAULT']['consumerKey'],
+                       consumer_secret=config['DEFAULT']['consumerSecret'],
+                       access_token_key=config['DEFAULT']['accessToken'],
+                       access_token_secret=config['DEFAULT']['accessSecret'],
+                       sleep_on_rate_limit=config['DEFAULT']['sleep'],
+                       tweet_mode='extended')
+
+    try:
+        result = twit.PostUpdate(tweet_text)
         with open(expander(tweeted_log), 'a') as f:
             f.write(f"{id_str}\n")
-        logging.info("Completed")
+            logging.info("Completed")
+    except Exception as err:
+        logging.warning(f"Failure: {err}")

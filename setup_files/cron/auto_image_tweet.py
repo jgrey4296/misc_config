@@ -2,7 +2,7 @@
 # Setup root_logger:
 from os.path import splitext, split
 import logging as root_logger
-from os.path import join, isfile, exists, abspath
+from os.path import join, isfile, exists, abspath, getsize
 from os.path import split, isdir, splitext, expanduser
 from os import listdir, system
 import subprocess
@@ -28,7 +28,7 @@ dcim_whitelist_path = join(split(__file__)[0], "dcim_whitelist")
 if __name__ == "__main__":
     logging.info("Running Auto Image Tweet")
     config = configparser.ConfigParser()
-    with open(expander('~/github/py_bookmark_organiser/secrets.config','r')) as f:
+    with open(expander('~/github/py_bookmark_organiser/secrets.config'),'r') as f:
         config.read_file(f)
 
     twit = twitter.Api(consumer_key=config['DEFAULT']['consumerKey'],
@@ -43,16 +43,18 @@ if __name__ == "__main__":
 
     if not bool(whitelist):
         logging.info("Nothing to tweet from whitelist")
-        return
+        exit()
 
     selected = choice(whitelist).split(":")
     logging.info("Attempting: {}".format(selected))
     msg = ""
-    the_file = expander(selected[0])
+    the_file = expander(selected[0]).strip()
     if len(selected) > 1:
-        msg = selected[1]
+        msg = selected[1].strip()
 
-
+    # TODO auto compress images larger than 5 megs
+    logging.info(f"File size: {getsize(the_file)}")
+    assert(getsize(the_file) < 5000000)
     assert(exists(the_file))
     assert(splitext(the_file)[1].lower() in [".jpg", ".png", ".gif"])
     twit.PostUpdate(msg, media=the_file)

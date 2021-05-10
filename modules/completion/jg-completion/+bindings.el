@@ -9,8 +9,8 @@
     "C-o"                             #'ivy-dispatching-done
     "C-h"                             #'ivy-backward-kill-word
     "M-o"                             #'hydra-ivy/body
-    "<down>"                          #'ivy-scroll-up-command
-    "<up>"                            #'ivy-scroll-down-command
+    "<down>"                          #'ivy-scroll-down-command
+    "<up>"                            #'ivy-scroll-up-command
     )
 
   ;;; :completion

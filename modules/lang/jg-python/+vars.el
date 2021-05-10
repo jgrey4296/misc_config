@@ -9,8 +9,18 @@
                 python-shell--interpreter nil
                 python-shell--interpreter-args nil
                 flycheck--automatically-enabled-checkers '(python-pylint)
+
+                python-prettify-symbols-alist '(("lambda" . "λ")
+                                                ("or" . "∨")
+                                                ("and" . "∧")
+                                                ("None" . "∅")
+                                                ("->" . "→")
+                                                ("self" . "𝕊")
+                                                )
+
+
                 )
-  (modify-syntax-entry ?_ "w" python-mode-syntax-table)
+  (modify-syntax-entry ?_ "_" python-mode-syntax-table)
 )
 
 (defvar +python-ipython-command '("ipython" "-i" "--simple-prompt" "--no-color-info")

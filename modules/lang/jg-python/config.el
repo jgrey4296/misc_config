@@ -22,28 +22,6 @@
   (add-hook! 'python-mode-hook #'+python-use-correct-flycheck-executables-h)
   (setq-hook! 'python-mode-hook tab-width python-indent-offset)
 
-  (set-ligatures! 'python-mode
-    ;; Functional
-    :def    "def"
-    :lambda "lambda"
-    ;; Types
-    :null   "None"
-    :true   "True"
-    :false  "False"
-    :int    "int"
-    :str    "str"
-    :float  "float"
-    :bool   "bool"
-    :tuple  "tuple"
-    ;; Flow
-    :not    "not"
-    :in     "in"
-    :not-in "not in"
-    :and    "and"
-    :or     "or"
-    :for    "for"
-    :return "return"
-    :yield  "yield")
 
   (setq evil-fold-list (cons '((python-mode)
                                :close     +jg-python-close-class-defs

@@ -1,5 +1,5 @@
 0 */2 * * * python /Volumes/documents/github/emacs_files/setup_files/cron/time_announce.py
 7,23,42 */1 * * * bash -i /Volumes/documents/github/emacs_files/setup_files/cron/shell_in_conda_env.sh
 0 3 * * mon bash /Volumes/documents/github/emacs_files/setup_files/cron/maintenance.sh
-0 */6 * * * mysync -a
+0 */6 * * * mbsync -a
 0 0 */1 * * crontab -l > ~/.doom.d/setup_files/cron/crontab.backup

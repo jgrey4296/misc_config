@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/opt/anaconda3/envs/bookmark/bin/python
 # Setup root_logger:
 from os.path import splitext, split
 import logging as root_logger

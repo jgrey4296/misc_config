@@ -2,7 +2,12 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("pdflib"
+(("emacs-cellar"
+ (filename . "/usr/local/Cellar/emacs/27.2/share/emacs/27.2/lisp/")
+ (front-context-string . "calc\n  drwxr-xr-")
+ (rear-context-string . "8K Mar 19 07:19 ")
+ (position . 259))
+("pdflib"
  (filename . "~/mega/pdflibrary/")
  (front-context-string . "1320\n  drwxr-xr-")
  (rear-context-string . "36 Sep  4  2020 ")

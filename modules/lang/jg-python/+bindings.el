@@ -73,6 +73,18 @@
       (:prefix "c"
       :desc "Cython compile buffer"    "c" #'cython-compile))
 
+(defun +jg-python-conda-override ()
+  (map! :map anaconda-mode-map
+        :localleader
+        "g" nil
+        :prefix ("j" . "Jump")
+        :desc "Conda Find Definitions" "d" #'anaconda-mode-find-definitions
+        :desc "Conda Show Doc"         "h" #'anaconda-mode-show-doc
+        :desc "Conda Find Assignments" "a" #'anaconda-mode-find-assignments
+        :desc "Conda Find File"        "f" #'anaconda-mode-find-file
+        :desc "Conda Find Refs"        "u" #'anaconda-mode-find-references)
+  )
+
 ;; NOTE: normal macro expansion adds :major-modes t, which doesn't work for minor modes
 ;; (map! :after anaconda-mode
 ;;       :map anaconda-mode-map

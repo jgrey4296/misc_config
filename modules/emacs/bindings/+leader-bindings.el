@@ -496,35 +496,29 @@
           :desc "Spell checker"              "s"  #'spell-fu-mode)
          (:when (featurep! :checkers spell +flyspell)
           :desc "Spell checker"              "s"  #'flyspell-mode))
-        (:prefix ("v" . "Visual")
-         :desc "Big mode"                     "b" #'doom-big-font-mode
-         :desc "Frame fullscreen"             "F" #'toggle-frame-fullscreen
-         :desc "Line numbers"                 "n" #'+jg-toggle-line-numbers
-         :desc "Line numbers Visual"          "N" #'+jg-toggle-line-numbers-visual
-         :desc "Evil goggles"                 "g" #'evil-goggles-mode
-         :desc "Soft line wrapping"           "w" #'visual-line-mode
-         :desc "Fill Column Indicator"        "f" #'display-fill-column-indicator-mode
-         :desc "Ignore Invisible"             "i" #'+jg-toggle-line-move-ignore-invisible
-         :desc "Highlight Parens"             "p" #'global-highlight-parentheses-mode
-         (:when (featurep! :editor word-wrap)
-          :desc "Soft line wrapping"         "w"  #'+word-wrap-mode)
-         :desc "Word-wrap mode"               "W" #'+word-wrap-mode
-         :desc "Whitespace"                  "w"  #'whitespace-mode
-         :desc "Line Truncate"               "l"  #'toggle-truncate-lines
+        (:prefix (                     "v" . "Visual")
+         :desc "Frame fullscreen"      "F" #'toggle-frame-fullscreen
+         :desc "Line numbers"          "n" #'+jg-toggle-line-numbers
+         :desc "Line numbers Visual"   "N" #'+jg-toggle-line-numbers-visual
+         :desc "Evil goggles"          "g" #'evil-goggles-mode
+         :desc "Fill Column Indicator" "f" #'display-fill-column-indicator-mode
+         :desc "Indent guides"         "i" #'highlight-indent-guides-mode
+         :desc "Highlight Parens"      "(" #'global-highlight-parentheses-mode
+         :desc "Prettify Mode"         "p" #'global-prettify-symbols-mode
+         :desc "Word-wrap mode"        "W" #'+word-wrap-mode
+         :desc "Whitespace"            "w" #'whitespace-mode
+         :desc "Soft line wrapping"    "l" #'visual-line-mode
+         :desc "Line Truncate"         "t" #'toggle-truncate-lines
          )
         (:prefix  ("n" . "Navigation")
-         :desc "Neotree"                      "t" #'neotree-toggle
-         (:when (featurep! :ui minimap)
-          :desc "Minimap mode"               "m"  #'minimap-mode)
-         (:when (featurep! :lang org +present)
-          :desc "org-tree-slide mode"        "p"  #'org-tree-slide-mode)
-
-         :desc "Centered Cursor"              "c" #'centered-cursor-mode
-         (:when (featurep! :ui indent-guides)
-          :desc "Indent guides"              "i"  #'highlight-indent-guides-mode)
-         :desc "Indent style"                 "I" #'doom/toggle-indent-style
-         :desc "Evil-visual-mark"             "v"  #'evil-visual-mark-mode
-         :desc "Auto-Highlight"               "h"  #'auto-highlight-symbol-mode
+         :desc "Neotree"             "t" #'neotree-toggle
+         :desc "Minimap mode"        "m" #'minimap-mode
+         :desc "org-tree-slide mode" "p" #'org-tree-slide-mode
+         :desc "Ignore Invisible"    "i" #'+jg-toggle-line-move-ignore-invisible
+         :desc "Centered Cursor"     "c" #'centered-cursor-mode
+         :desc "Indent style"        "I" #'doom/toggle-indent-style
+         :desc "Evil-visual-mark"    "v" #'evil-visual-mark-mode
+         :desc "Auto-Highlight"      "h" #'auto-highlight-symbol-mode
          )
         (:when (featurep! :lang org +pomodoro)
          :desc "Pomodoro timer"             "t"   #'org-pomodoro)

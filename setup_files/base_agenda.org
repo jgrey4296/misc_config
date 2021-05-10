@@ -114,3 +114,5 @@ Versu, Abl, Cif
 [[https://parl.ai/projects/light/][Parl.ai: NLP and dialogue]]
 [[http://waveform3d.com/][Waveform3d]]
 [[https://sketchfab.com/][Sketchfab]]
+[[https://en.wikipedia.org/wiki/Summa_Theologica][Summa Theologica]]
+[[https://en.wikipedia.org/wiki/Book_of_Common_Prayer][Book of Common Prayer]]

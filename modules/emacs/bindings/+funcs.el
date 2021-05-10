@@ -205,3 +205,24 @@ If region isn't active, narrow away anything above point
   (interactive)
   (find-file +snippets-dir)
   )
+
+(defun +jg-bindings-list-buffer-locals ()
+  (interactive)
+  (let ((vars (buffer-local-variables))
+        (buf (buffer-name (current-buffer)))
+        )
+    (with-temp-buffer-window (format "*Buffer Locals: %s" buf)
+        'display-buffer-pop-up-window
+        (lambda (wind val) (with-selected-window wind
+                        (emacs-lisp-mode))
+          val)
+      (cl-loop for x in vars do
+               (if (string-match jg-binding-local-var-skip-regexp
+                                 (symbol-name (car x)))
+                   (princ (format "(%s : Skipped)" (car x)))
+                 (princ x))
+               (princ "\n")
+               )
+      )
+    )
+  )

@@ -14,6 +14,7 @@
       ("^\\*Messages"    :side left   :ttl nil :width  0.4 :quit t :select nil)
       ("^\\*compilation" :side right  :ttl 5   :width  0.4 :quit t :select nil)
       ("^\\*Pp Eval Output\\*" :side right :ttl 5 :width 0.4 :quit t :select nil)
+      ("^\\*Buffer Locals:" :side right :ttl 5 :width 0.4 :quit t :select nil)
       )
     (when (featurep! +all)
       '(("^\\*"  :slot 1 :vslot -1 :select t)

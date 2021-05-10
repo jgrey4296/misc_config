@@ -65,6 +65,7 @@
         :desc "Kill buffer"                 "d" #'kill-current-buffer
         :desc "Clone Indirect"              "i" #'clone-indirect-buffer-other-window
         :desc "Kill all buffers"            "K" #'doom/kill-all-buffers
+        :desc "Local Variables"             "l" #'+jg-bindings-list-buffer-locals
 
         :desc "New empty buffer"            "n" #'+jg-misc-yank-buffer-name
         :desc "Kill other buffers"          "O" #'doom/kill-other-buffers

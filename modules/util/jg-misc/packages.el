@@ -31,6 +31,7 @@
 (package! xkcd              :disable t)
 (package! zoom-frm          :disable t)
 (package! evil-easymotion   :disable t)
+(package! xt-mouse          :disable t)
 
 ;;(package! flx-ido           :disable t)
 ;;(package! ido-vertical-mode :disable t)

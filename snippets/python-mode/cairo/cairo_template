@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: cairo_template
-# key: cairo_template
+# name: template.cairo
+# uuid: template.cairo
 # group: cairo
 # --
 import sys

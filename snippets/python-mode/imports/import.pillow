@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: pillow
-# key: pillow
+# name: import.pillow
+# uuid: import.pillow
 # group: I/O
 # --
 import PIL

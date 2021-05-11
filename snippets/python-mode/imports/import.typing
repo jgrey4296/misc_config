@@ -1,7 +1,6 @@
 # -*- mode: snippet -*-
-# name: typing
-# key: typing
-# uuid: typing
+# name: import.typing
+# uuid: import.typing
 # --
 from typing import List, Set, Dict, Tuple, Optional, Any
 from typing import Callable, Iterator, Union, Match

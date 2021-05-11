@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: bs4
-# key: bs4
+# name: import.bs4
+# uuid: import.bs4
 # --
 from bs4 import BeautifulSoup

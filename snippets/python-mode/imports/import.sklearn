@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: sklearn
-# key: sklearn
+# name: import.sklearn
+# uuid: import.sklearn
 # group: machine learning
 # --
 import sklearn

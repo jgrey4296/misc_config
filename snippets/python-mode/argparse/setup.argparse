@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: argparse
-# key: argparse
+# name: setup.argparse
+# key: setup.argparse
 # group: arguments
 # --
 #see https://docs.python.org/3/howto/argparse.html

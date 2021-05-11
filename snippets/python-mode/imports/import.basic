@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name:  basic_imports
-# key: basic_imports
+# name:  import.basic
+# uuid: import.basic
 # condition: t
 # --
 # https://docs.python.org/3/library/abc.html

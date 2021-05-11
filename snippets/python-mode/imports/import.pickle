@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: pickle
-# key: pickle
+# name: import.pickle
+# uuid: import.pickle
 # group: I/O
 # --
 import pickle

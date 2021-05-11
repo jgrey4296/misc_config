@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: plt
-# key: plt
+# name: import.plt
+# uuid: import.plt
 # group: visualisation
 # --
 import matplotlib.pyplot as plt

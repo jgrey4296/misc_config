@@ -1,7 +1,6 @@
 # -*- mode: snippet -*-
-# name: metaclass
-# key: metaclass
-# condition: t
+# name: abc.metaclass
+# uuid: abc.metaclass
 # --
 import abc
 

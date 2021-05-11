@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: graphviz
-# key: graphviz
+# name: graphviz.setup
+# uuid: graphviz.setup
 # group: visualisation
 # --
 import graphviz

@@ -1,7 +1,6 @@
 # -*- mode: snippet -*-
-# name: interface
-# key: interface
-# condition: t
+# name: abc.interface
+# uuid: abc.interface
 # --
 # https://docs.python.org/3/library/abc.html
 # from https://realpython.com/python-interface/

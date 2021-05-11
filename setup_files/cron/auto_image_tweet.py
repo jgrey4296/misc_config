@@ -21,26 +21,24 @@ console.setLevel(root_logger.INFO)
 root_logger.getLogger('').addHandler(console)
 logging = root_logger.getLogger(__name__)
 ##############################
-TEMP_LOC = "/Volumes/documents/DCIM/__temp/output.{}"
-conversion_cmd = "convert"
-conversion_arg = "{}:extent=4.9MB"
+TEMP_LOC = "/Volumes/documents/DCIM/__temp/output.jpg"
+# currently using downsize instead of convert with -define jpg:extent=sizekb
+conversion_cmd = join(split(__file__)[0], "downsize")
 
 expander = lambda x: abspath(expanduser(x))
 
 dcim_whitelist_path = join(split(__file__)[0], "dcim_whitelist")
 
 def compress_file(filepath):
+    logging.info("Attempting compression of: {}".format(filepath))
     ext = splitext(filepath)[1][1:]
-    output_file = TEMP_LOC.format(ext)
 
     retcode = subprocess.call([conversion_cmd,
-                               filepath
-                               "-define",
-                               conversion_arg.format(ext),
-                               output_file])
+                               "-s", "4900",
+                               filepath, TEMP_LOC])
 
     if retcode == 0:
-        return output_file
+        return TEMP_LOC
     else:
         logging.warning("Failure converting: {}".format(filepath))
         exit()
@@ -76,6 +74,9 @@ if __name__ == "__main__":
     logging.info(f"File size: {getsize(the_file)}")
     if getsize(the_file) > 4500000:
         the_file = compress_file(the_file)
+    else:
+        logging.info("not now")
+        exit()
 
     assert(getsize(the_file) < 5000000)
     assert(exists(the_file))

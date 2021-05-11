@@ -1,6 +1,8 @@
+SHELL=/usr/local/bin/bash
+BASH_ENV=/Volumes/documents/github/emacs_files/setup_files/exports.bash
 0 */2 * * * /Volumes/documents/github/emacs_files/setup_files/cron/time_announce.py
 7,23,42 */1 * * * /Volumes/documents/github/emacs_files/setup_files/cron/auto_bibtex_tweet.py
 11,38,52 */1 * * * /Volumes/documents/github/emacs_files/setup_files/cron/auto_image_tweet.py
 0 3 * * mon /Volumes/documents/github/emacs_files/setup_files/cron/maintenance.sh
-0 */6 * * * mbsync -a
+0 */6 * * * /usr/local/bin/mbsync -a
 0 0 */1 * * crontab -l > ~/.doom.d/setup_files/cron/crontab.backup

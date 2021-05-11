@@ -93,7 +93,7 @@ def format_tweet(entry):
     if len(result) <= 250:
         diff = 250 - len(result)
         result += tags[:diff]
-    result += "#my_bibtex"
+    result += "\n#my_bibtex"
 
     if len(result) >= 280:
         logging.warning(f"Resulting Tweet too long: {len(result)}\n{result}")

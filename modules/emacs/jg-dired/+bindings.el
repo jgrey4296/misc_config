@@ -48,4 +48,20 @@
        )
       )
 
+(map! :map dired-mode-map
+      :prefix ("%" . "Dired-Do")
+      :desc "flag-garbage-files"           :n "&" #'dired-flag-garbage-files
+      :desc "do-copy-regexp"               :n "C" #'dired-do-copy-regexp
+      :desc "do-hardlink-regexp"           :n "H" #'dired-do-hardlink-regexp
+      :desc "do-rename-regexp"             :n "R" #'dired-do-rename-regexp
+      :desc "do-symlink-regexp"            :n "S" #'dired-do-symlink-regexp
+      :desc "do-relsymlink-regexp"         :n "Y" #'dired-do-relsymlink-regexp
+      :desc "flag-files-regexp"            :n "d" #'dired-flag-files-regexp
+      :desc "mark-files-containing-regexp"  :n "g" #'dired-mark-files-containing-regexp
+      :desc "downcase"                     :n "l" #'dired-downcase
+      :desc "mark-files-regexp"            :n "m" #'dired-mark-files-regexp
+      :desc "do-rename-regexp"             :n "r" #'dired-do-rename-regexp
+      :desc "upcase"                       :n "u" #'dired-upcase
+      )
+
 (evil-make-overriding-map dired-mode-map)

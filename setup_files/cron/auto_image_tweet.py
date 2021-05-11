@@ -10,6 +10,7 @@ from random import choice
 import json
 import twitter
 import configparser
+import subprocess
 
 LOGLEVEL = root_logger.DEBUG
 LOG_FILE_NAME = "log.{}".format(splitext(split(__file__)[1])[0])
@@ -20,10 +21,30 @@ console.setLevel(root_logger.INFO)
 root_logger.getLogger('').addHandler(console)
 logging = root_logger.getLogger(__name__)
 ##############################
+TEMP_LOC = "/Volumes/documents/DCIM/__temp/output.{}"
+conversion_cmd = "convert"
+conversion_arg = "{}:extent=4.9MB"
 
 expander = lambda x: abspath(expanduser(x))
 
 dcim_whitelist_path = join(split(__file__)[0], "dcim_whitelist")
+
+def compress_file(filepath):
+    ext = splitext(filepath)[1][1:]
+    output_file = TEMP_LOC.format(ext)
+
+    retcode = subprocess.call([conversion_cmd,
+                               filepath
+                               "-define",
+                               conversion_arg.format(ext),
+                               output_file])
+
+    if retcode == 0:
+        return output_file
+    else:
+        logging.warning("Failure converting: {}".format(filepath))
+        exit()
+
 
 if __name__ == "__main__":
     logging.info("Running Auto Image Tweet")
@@ -52,8 +73,10 @@ if __name__ == "__main__":
     if len(selected) > 1:
         msg = selected[1].strip()
 
-    # TODO auto compress images larger than 5 megs
     logging.info(f"File size: {getsize(the_file)}")
+    if getsize(the_file) > 4500000:
+        the_file = compress_file(the_file)
+
     assert(getsize(the_file) < 5000000)
     assert(exists(the_file))
     assert(splitext(the_file)[1].lower() in [".jpg", ".png", ".gif"])

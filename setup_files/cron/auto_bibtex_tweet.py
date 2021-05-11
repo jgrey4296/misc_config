@@ -24,19 +24,27 @@ console.setLevel(root_logger.INFO)
 root_logger.getLogger('').addHandler(console)
 logging = root_logger.getLogger(__name__)
 ##############################
-MAX_ATTEMPTS = 20
-TWURL_CMD = "twurl"
-TWURL_TARGET = "/1.1/statuses/update.json"
-BIBTEX_LOC = "~/github/writing/resources/bibliography"
-REQUIRED_KEYS = ["year", "author", "title", "tags"]
-ONE_OF_KEYS = ["doi", "url", "isbn"]
-tweeted_log = "~/github/writing/resources/bibliography/.emacs_tweet_rand_bib_log"
+MAX_ATTEMPTS     = 20
+TWURL_CMD        = "twurl"
+TWURL_TARGET     = "/1.1/statuses/update.json"
+BIBTEX_LOC       = "~/github/writing/resources/bibliography"
+SECRETS_LOC      = '~/github/py_bookmark_organiser/secrets.config'
+
+tweeted_log      = "~/github/writing/resources/bibliography/.emacs_tweet_rand_bib_log"
+bibtex_blacklist = "~/.doom.d/setup_files/cron/bibtex_blacklist"
+
+REQUIRED_KEYS    = ["year", "author", "title", "tags"]
+ONE_OF_KEYS      = ["doi", "url", "isbn"]
 
 expander = lambda x: abspath(expanduser(x))
 
 def select_bibtex():
     logging.info("Selecting bibtex")
-    bibs = [x for x in listdir(expander(BIBTEX_LOC)) if splitext(x)[1] == ".bib"]
+    # load blacklist
+    with open(expander(bibtex_blacklist), 'r') as f:
+        blacklist = [x.strip() for x in f.readlines() if bool(x.strip())]
+
+    bibs = [x for x in listdir(expander(BIBTEX_LOC)) if splitext(x)[1] == ".bib" and x not in blacklist]
     selected = join(BIBTEX_LOC, choice(bibs))
     return selected
 
@@ -65,9 +73,19 @@ def select_entry(db, already_tweeted):
 
     if entry is None:
         logging.warning("No Appropriate Entry Found for db")
-        exit()
 
     return entry
+
+def maybe_blacklist_file(db, file_path):
+    one_of = lambda poss_entry: any([x in poss_entry for x in ONE_OF_KEYS])
+
+    if not any([one_of(x) for x in db.entries]):
+        logging.info(f"Bibtex failed check, blacklisting: {file_path}")
+        with open(expander(bibtex_blacklist), 'a') as f:
+            f.write(f"{split(file_path)[1]}\n")
+
+    exit()
+
 
 def format_tweet(entry):
     # TODO convert strings to appropriate unicode
@@ -132,10 +150,14 @@ if __name__ == "__main__":
     bib        = select_bibtex()
     db         = parse_bibtex(bib)
     entry      = select_entry(db, tweeted)
+
+    if entry is None:
+        maybe_blacklist_file(db, bib)
+
     id_str, tweet_text = format_tweet(entry)
 
     config = configparser.ConfigParser()
-    with open(expander('~/github/py_bookmark_organiser/secrets.config'),'r') as f:
+    with open(expander(SECRETS_LOC),'r') as f:
         config.read_file(f)
 
     twit = twitter.Api(consumer_key=config['DEFAULT']['consumerKey'],
@@ -146,6 +168,7 @@ if __name__ == "__main__":
                        tweet_mode='extended')
 
     try:
+        logging.info(f"Tweeting: {tweet_text}")
         result = twit.PostUpdate(tweet_text)
         with open(expander(tweeted_log), 'a') as f:
             f.write(f"{id_str}\n")

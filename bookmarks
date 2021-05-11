@@ -2,16 +2,46 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("DCIM"
+(("Cellar"
+ (filename . "/usr/local/Cellar/")
+ (front-context-string . "emacs\n  drwxr-xr")
+ (rear-context-string . "96 Apr 16 16:08 ")
+ (position . 1209))
+("emacs-cellar"
+ (filename . "/usr/local/Cellar/emacs/27.2/share/emacs/27.2/lisp/")
+ (front-context-string . "calc\n  drwxr-xr-")
+ (rear-context-string . "8K Mar 19 07:19 ")
+ (position . 259))
+("pdflib"
+ (filename . "~/mega/pdflibrary/")
+ (front-context-string . "1320\n  drwxr-xr-")
+ (rear-context-string . "36 Sep  4  2020 ")
+ (position . 145))
+("DCIM"
  (filename . "/Volumes/documents/DCIM/")
  (front-context-string . ".thumbnails\n  dr")
  (rear-context-string . "1K Apr 12  2020 ")
  (position . 128))
-("acab"
- (filename . "~/github/acab/")
- (front-context-string . "acab\n  drwxrwxr-")
- (rear-context-string . "72 Jan  3 18:45 ")
- (position . 186))
+("dropbox"
+ (filename . "~/Dropbox/")
+ (front-context-string . ".dropbox.cache\n ")
+ (rear-context-string . "92 Mar  4  2020 ")
+ (position . 180))
+("downloads"
+ (filename . "~/Downloads/")
+ (front-context-string . "EXPERIENCE_JAPAN")
+ (rear-context-string . "92 Mar  8 00:25 ")
+ (position . 183))
+("emacs.d"
+ (filename . "~/github/otherLibs/doom-emacs/")
+ (front-context-string . "modules\n  drwxr-")
+ (rear-context-string . "44 Jan 26 19:07 ")
+ (position . 533))
+("~"
+ (filename . "~/")
+ (front-context-string . "Desktop\n  drwx--")
+ (rear-context-string . "68 Jan 28 19:25 ")
+ (position . 2063))
 ("bkmkorg"
  (filename . "~/github/py_bookmark_organiser/")
  (front-context-string . "bkmkorg\n  -rw-r-")
@@ -22,59 +52,29 @@
  (front-context-string . "bibtex_tags\n  dr")
  (rear-context-string . "4K Dec 24 18:28 ")
  (position . 184))
-("doom"
- (filename . "~/github/emacs_files/")
- (front-context-string . "modules\n  drwxr-")
- (rear-context-string . "06 Oct 19 21:20 ")
- (position . 247))
-("downloads"
- (filename . "~/Downloads/")
- (front-context-string . "EXPERIENCE_JAPAN")
- (rear-context-string . "92 Mar  8 00:25 ")
- (position . 183))
-("dropbox"
- (filename . "~/Dropbox/")
- (front-context-string . ".dropbox.cache\n ")
- (rear-context-string . "92 Mar  4  2020 ")
- (position . 180))
-("emacs-cellar"
- (filename . "/usr/local/Cellar/emacs/27.2/share/emacs/27.2/lisp/")
- (front-context-string . "calc\n  drwxr-xr-")
- (rear-context-string . "8K Mar 19 07:19 ")
- (position . 259))
-("emacs.d"
- (filename . "~/github/otherLibs/doom-emacs/")
- (front-context-string . "modules\n  drwxr-")
- (rear-context-string . "44 Jan 26 19:07 ")
- (position . 533))
-("github"
- (filename . "~/github/")
- (front-context-string . ".installed_pylib")
- (rear-context-string . "04 Aug 16  2018 ")
- (position . 180))
-("mega"
- (filename . "~/mega/")
- (front-context-string . "Audio\n  drwxrwxr")
- (rear-context-string . "04 Dec 23 17:49 ")
- (position . 190))
-("pdflib"
- (filename . "~/mega/pdflibrary/")
- (front-context-string . "1320\n  drwxr-xr-")
- (rear-context-string . "36 Sep  4  2020 ")
- (position . 145))
 ("resources"
  (filename . "~/github/writing/resources/")
  (front-context-string . "authors\n  drwxr-")
  (rear-context-string . "52 Feb 25  2020 ")
  (position . 200))
-("writing"
- (filename . "/Volumes/documents/github/writing/")
- (front-context-string . "resources\n  -rw-")
- (rear-context-string . "80 May  4 11:40 ")
- (position . 256))
-("~"
- (filename . "~/")
- (front-context-string . "Desktop\n  drwx--")
- (rear-context-string . "68 Jan 28 19:25 ")
- (position . 2063))
+("mega"
+ (filename . "~/mega/")
+ (front-context-string . "Audio\n  drwxrwxr")
+ (rear-context-string . "04 Dec 23 17:49 ")
+ (position . 190))
+("acab"
+ (filename . "~/github/acab/")
+ (front-context-string . "acab\n  drwxrwxr-")
+ (rear-context-string . "72 Jan  3 18:45 ")
+ (position . 186))
+("doom"
+ (filename . "~/github/emacs_files/")
+ (front-context-string . "modules\n  drwxr-")
+ (rear-context-string . "06 Oct 19 21:20 ")
+ (position . 247))
+("github"
+ (filename . "~/github/")
+ (front-context-string . ".installed_pylib")
+ (rear-context-string . "04 Aug 16  2018 ")
+ (position . 180))
 )

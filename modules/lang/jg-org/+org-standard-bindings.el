@@ -266,7 +266,7 @@
         :desc "Refile" "R" #'+jg-org-refile-subtree
         (:prefix ("f". "Format")
          :desc "Fix Drawers"        "d"  #'+jg-org-fix-properties-drawers
-         :desc "Clean Org"          "c"  #'+jg-org-clean-org
+         :desc "Clean Org"          "c"  #'+jg-org-clean
          :desc "Wrap Numbers"        "w" #'+jg-org-wrap-numbers
          :desc "Wrap non-link urls"  "L" #'+jg-org-wrap-non-link-urls
          :desc "Remove Duplicates"   "D" #'+jg-org-remove-duplicates)

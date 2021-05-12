@@ -88,16 +88,18 @@
           (progn
             (backward-char (+ 1 (length "pic.twitter")))
             (insert "\n\n")))
-      (progn (while (eq 0 (string-match "^[[:space:]]*$" (buffer-substring (line-beginning-position -0)
-                                                                           (line-end-position -0))))
-               (join-line)
-               )
-             (goto-char (line-beginning-position))
-             (insert "\n")
-             (forward-line))
+      (progn
+        (while (eq 0 (string-match "^[[:space:]]*$"
+                                   (buffer-substring (line-beginning-position -0)
+                                                     (line-end-position -0))))
+          (join-line))
+        (goto-char (line-beginning-position))
+        (insert "\n")
+        (forward-line)
+        (end-of-line)
+        )
       )
     )
-
   )
 
 (defun +jg-org-refill-links ()

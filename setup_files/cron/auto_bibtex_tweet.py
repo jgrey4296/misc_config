@@ -39,7 +39,7 @@ ONE_OF_KEYS      = ["doi", "url", "isbn"]
 expander = lambda x: abspath(expanduser(x))
 
 def select_bibtex():
-    logging.info("Selecting bibtex")
+    # logging.info("Selecting bibtex")
     # load blacklist
     with open(expander(bibtex_blacklist), 'r') as f:
         blacklist = [x.strip() for x in f.readlines() if bool(x.strip())]
@@ -49,14 +49,14 @@ def select_bibtex():
     return selected
 
 def parse_bibtex(file_path):
-    logging.info("Parsing: {}".format(file_path))
+    # logging.info("Parsing: {}".format(file_path))
     with open(expander(file_path)) as f:
         database = b.load(f)
 
     return database
 
 def select_entry(db, already_tweeted):
-    logging.info("Selecting Entry")
+    # logging.info("Selecting Entry")
     entry = None
     tried_alts = 0
 
@@ -89,7 +89,7 @@ def maybe_blacklist_file(db, file_path):
 
 def format_tweet(entry):
     # TODO convert strings to appropriate unicode
-    logging.info("Formatting Entry")
+    # logging.info("Formatting Entry")
 
     author = entry['author']
     if len(author) > 30:
@@ -120,7 +120,7 @@ def format_tweet(entry):
     return (entry['ID'], result)
 
 def call_twurl(tweet_text):
-    logging.info(f"Tweeting: {tweet_text}")
+    # logging.info(f"Tweeting: {tweet_text}")
     full_arg = f"status={tweet_text}"
     result = subprocess.run([TWURL_CMD,
                              "-d",
@@ -143,7 +143,7 @@ def call_twurl(tweet_text):
     return False
 
 if __name__ == "__main__":
-    logging.info("Running Auto Bibtex Tweet")
+    # logging.info("Running Auto Bibtex Tweet")
     with open(expander(tweeted_log)) as f:
         tweeted = [x.strip() for x in f.readlines()]
 
@@ -168,10 +168,10 @@ if __name__ == "__main__":
                        tweet_mode='extended')
 
     try:
-        logging.info(f"Tweeting: {tweet_text}")
+        # logging.info(f"Tweeting: {tweet_text}")
         result = twit.PostUpdate(tweet_text)
         with open(expander(tweeted_log), 'a') as f:
             f.write(f"{id_str}\n")
-            logging.info("Completed")
+            # logging.info("Completed")
     except Exception as err:
         logging.warning(f"Failure: {err}")

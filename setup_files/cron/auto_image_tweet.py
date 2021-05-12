@@ -30,7 +30,7 @@ dcim_whitelist_path = join(split(__file__)[0], "dcim_whitelist")
 expander = lambda x: abspath(expanduser(x))
 
 def compress_file(filepath):
-    logging.info("Attempting compression of: {}".format(filepath))
+    #logging.info("Attempting compression of: {}".format(filepath))
     ext = splitext(filepath)[1][1:]
 
     # retcode = subprocess.call([downsize_cmd,
@@ -49,7 +49,7 @@ def compress_file(filepath):
 
 
 if __name__ == "__main__":
-    logging.info("Running Auto Image Tweet")
+    #logging.info("Running Auto Image Tweet")
     config = configparser.ConfigParser()
     with open(expander('~/github/py_bookmark_organiser/secrets.config'),'r') as f:
         config.read_file(f)
@@ -65,17 +65,17 @@ if __name__ == "__main__":
         whitelist = f.readlines()
 
     if not bool(whitelist):
-        logging.info("Nothing to tweet from whitelist")
+        logging.warning("Nothing to tweet from whitelist")
         exit(1)
 
     selected = choice(whitelist).split(":")
-    logging.info("Attempting: {}".format(selected))
+    #logging.info("Attempting: {}".format(selected))
     msg = ""
     the_file = expander(selected[0]).strip()
     if len(selected) > 1:
         msg = selected[1].strip()
 
-    logging.info(f"File size: {getsize(the_file)}")
+    #logging.info(f"File size: {getsize(the_file)}")
     if getsize(the_file) > 4500000:
         the_file = compress_file(the_file)
 
@@ -84,4 +84,4 @@ if __name__ == "__main__":
     assert(splitext(the_file)[1].lower() in [".jpg", ".png", ".gif"])
     twit.PostUpdate(msg, media=the_file)
 
-    logging.info("Finished")
+    #logging.info("Finished")

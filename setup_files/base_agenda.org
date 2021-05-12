@@ -112,8 +112,80 @@ Versu, Abl, Cif
 [[https://www.watercolourworld.org/][Pre-1900 Documentary Watercolours]]
 [[https://www.wikiart.org/en/eyvind-earle][Wiki Art: Eyvind Earle ]]
 [[https://www.xeno-canto.org/][Bird Sounds Database]]
-[[Illinois Library Digital Collection]]
-[[https://sonniss.com/gameaudiogdc][Game Audio Resources]]
+
+*** Universities and Academia
+[[https://blogs.cul.columbia.edu/rbml/2018/09/10/collections-news-albert-field-playing-cards-go-online/][Columbia University Library Playing Cards]]
+[[https://blogs.library.duke.edu/preservation/2019/04/26/quick-pic-choose-your-sumo-hairstyle/][Duke University Libraries: Sumo Hairstyles]]
+[[https://commons.princeton.edu/soviet/][Princeton Visual language of Soviety Childrens books]]
+[[https://digital.library.illinois.edu/][Illinois Library Digital Collection]]
+[[https://hrc.contentdm.oclc.org/digital/collection/p15878coll84][Texas University at Austin Movie Poster Collection]]
+[[https://search.getty.edu/gateway/search?q=&cat=highlight&f=%22Open+Content+Images%22&rows=10&srt=a&dir=s&pg=1][Getty Open Content]]
+[[https://ufdc.ufl.edu/baldwin/all/thumbs][University of Florida Historical Children's Literature]]
+[[https://www.cs.rochester.edu/research/cisd/resources/][Conversational Interaction and Spoken Dialogue Research Group Resources]]
+[[https://www.gla.ac.uk/myglasgow/archivespecialcollections/digitisedcollections/][University of Glasgow Digital Collections]]
+[[https://www.si.edu/openaccess][Smithsonian Open Access]]
+[[https://dasg.ac.uk/?lang=en][Digital Archive of Scottish Gaelic]]
+[[https://www.gla.ac.uk/myglasgow/archivespecialcollections/digitisedcollections/][University of Glasgow Digital Collections]]
+[[https://www.cs.rochester.edu/research/cisd/resources/][Conversational Interaction and Spoken Dialogue Research Group Resources]]
+
+*** Museums and Libraries
+[[https://www.british-history.ac.uk/catalogue][British History Online]]
+[[https://www.vam.ac.uk/collections?type=featured][Victoria and Albert Museum collections]]
+[[https://www.vam.ac.uk/articles/explore-entartete-kunst-the-nazis-inventory-of-degenerate-art#?c=&m=&s=&cv=][Victoria and Albert Museum: Entartete Kunst inventory]]
+[[https://www.parismuseescollections.paris.fr/en][Paris Museum Public Collection]]
+[[https://www.si.edu/openaccess][Smithsonian Open Access]]
+[[https://www.digitalcommonwealth.org/institutions/commonwealth:sf268508b][Boston Public Library Digital Collections]]
+[[https://digital.library.illinois.edu/][Illinois Library Digital Collection]]
+[[https://www.loc.gov/collections/][Library of Congress Digital Collections 2]]
+[[https://www.loc.gov/free-to-use/cats][Library of Congress: Cats]]
+
+*** Government
+[[http://discovery.nationalarchives.gov.uk/][UK National Archives]]
+[[http://lcweb2.loc.gov/cgi-bin/ampage?fileName=rbc0001_2003gen37813page.db&collId=rbc3][Library of Congress Digital Collections]]
+[[https://eros.usgs.gov/image-gallery/earthshots?from=earthshots/node/107#ad-image-0-0][USGS Earthshots]]
+[[https://www.federalregister.gov/][The Federal Register]]
+[[https://www.loc.gov/collections/][Library of Congress Digital Collections 2]]
+[[https://www.loc.gov/free-to-use/cats][Library of Congress: Cats]]
+[[https://archives.parliament.uk/][UK Parliamentry Archives]]
+[[https://hansard.parliament.uk/][Hansard UK]]
+
+*** Archive
+[[http://discovery.nationalarchives.gov.uk/][UK National Archives]]
+[[https://archive.org/details/cbk][Archive.org Cookbook Collection]]
+[[https://sainsburyarchive.org.uk/][Sainsbury Archive of Packaging]]
+[[https://scificorridorarchive.com/][Scifi Corridor Archive]]
+[[https://web.archive.org/web/20180318123241/http://www.thejapaneseheraldry.com/][Wayback Japanese Heraldry]]
+[[https://archive.org/details/noise-arch][Archive.org noise music collection]]
+
+*** Image
+[[http://arabimagefoundation.com/][Arab Image Foundation]]
+[[https://eros.usgs.gov/image-gallery/earthshots?from=earthshots/node/107#ad-image-0-0][USGS Earthshots]]
+[[https://opengameart.org/][Open Game Art]]
+[[https://reference.pictures/][Reference Photos]]
+[[https://disk.yandex.com/a/jwGK2j3W3Y9Tap][Soviet Book paper]]
+[[https://diversityavatars.com/][Diversity Avatars]]
+[[https://medium.com/@dustin/stock-photos-that-dont-suck-62ae4bcbe01b][Stock Photos]]
+[[https://www.wikiart.org/en/eyvind-earle][Wiki Art: Eyvind Earle ]]
+[[https://www.kenney.nl/][Kenny NL]]
+[[https://www.instagram.com/sovietinnerness/][Soviet Innerness instagram]]
+[[https://www.davidrumsey.com/][David Rumsey Map Collection]]
+[[https://www.projectlinework.org/][Project Linework]]
+[[https://control--panel.com/][Control Panel Appreciation]]
+[[https://danismm.tumblr.com/][Vintage Art and Architecture Tumblr]]
+[[http://envelopecollection.com/][Envelope Collection]]
+
+*** Sound
+[[https://www.xeno-canto.org/][Bird Sounds Database]]
+[[https://www.soundsurvey.org.uk/][Sound Survey]]
+[[https://urbansounddataset.weebly.com/][Urban Sound Dataset]]
+[[https://ubu.com/sound/occult.html][UBU Occult sound recordings]]
+[[https://sound-effects.bbcrewind.co.uk/][BBC Sound Effects]]
+[[https://freesound.org/browse/][FreeSound]]
+[[https://blogs.bl.uk/sound-and-vision/2018/11/recording-of-the-week-a-duet-for-ugandan-lyres.html][A Duet for Ugandan Lyres]]
+[[https://dasg.ac.uk/?lang=en][Digital Archive of Scottish Gaelic]]
+[[https://dischord.bandcamp.com/][Discord Records Bandcamp]]
+
+
 ** To Check out
 [[https://parl.ai/projects/light/][Parl.ai: NLP and dialogue]]
 [[http://waveform3d.com/][Waveform3d]]

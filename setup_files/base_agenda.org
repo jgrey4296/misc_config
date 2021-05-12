@@ -22,6 +22,8 @@ Versu, Abl, Cif
 *** [[~/.spacemacs.d/setup_files/pomodoro_log.org][Pomodoro Log]]
 *** [[file:~/Mega/twitterthreads][Twitter Threads]]
 *** TODO [[file:/Volumes/documents/github/corpora][Darius Kuzemi's Corpora]]
+*** [[file:/Volumes/documents/github/otherLibs/data][538 Data]]
+
 ** Resources
 [[http://arabimagefoundation.com/][Arab Image Foundation]]
 [[http://discovery.nationalarchives.gov.uk/][UK National Archives]]
@@ -45,6 +47,7 @@ Versu, Abl, Cif
 [[https://control--panel.com/][Control Panel Appreciation]]
 [[https://danismm.tumblr.com/][Vintage Art and Architecture Tumblr]]
 [[https://dasg.ac.uk/?lang=en][Digital Archive of Scottish Gaelic]]
+[[https://digital.library.illinois.edu/][Illinois Library Digital Collection]]
 [[https://dischord.bandcamp.com/][Discord Records Bandcamp]]
 [[https://disk.yandex.com/a/jwGK2j3W3Y9Tap][Soviet Book paper]]
 [[https://diversityavatars.com/][Diversity Avatars]]
@@ -72,6 +75,7 @@ Versu, Abl, Cif
 [[https://scificorridorarchive.com/][Scifi Corridor Archive]]
 [[https://search.getty.edu/gateway/search?q=&cat=highlight&f=%22Open+Content+Images%22&rows=10&srt=a&dir=s&pg=1][Getty Open Content]]
 [[https://secure.flickr.com/photos/britishlibrary/][British Library Flickr]]
+[[https://sonniss.com/gameaudiogdc][Game Audio Resources]]
 [[https://sound-effects.bbcrewind.co.uk/][BBC Sound Effects]]
 [[https://subslikescript.com/series/Burn_Notice-810788][Burn Notice Scripts]]
 [[https://ubu.com/sound/occult.html][UBU Occult sound recordings]]

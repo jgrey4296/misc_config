@@ -44,8 +44,13 @@ def select_bibtex():
     with open(expander(bibtex_blacklist), 'r') as f:
         blacklist = [x.strip() for x in f.readlines() if bool(x.strip())]
 
-    bibs = [x for x in listdir(expander(BIBTEX_LOC)) if splitext(x)[1] == ".bib" and x not in blacklist]
+
+    bibs = [x for x in listdir(expander(BIBTEX_LOC)) if splitext(x)[1] == ".bib"]
+    filtered = [x for x in bibs if x not in blacklist]
+
+    assert(len(filtered) < len(bibs))
     selected = join(BIBTEX_LOC, choice(bibs))
+
     return selected
 
 def parse_bibtex(file_path):

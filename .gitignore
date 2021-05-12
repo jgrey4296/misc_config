@@ -14,3 +14,4 @@ GRTAGS
 GTAGS
 *.secret
 flycheck*
+dcim_whitelist

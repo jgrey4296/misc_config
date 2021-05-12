@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: import.dataclass
+# uuid: import.dataclass
+# condition: t
+# --
+from dataclasses import dataclass, field, InitVar

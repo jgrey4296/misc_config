@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: util.weakref
+# uuid: util.weakref
+# group: data structures
+# --
+import weakref
+#see https://docs.python.org/3/library/weakref.html#module-weakref
+#Object:
+o = Object()
+r = weakref.ref(o)
+o2 = r()
+o is o2
+
+#

@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: requests
-# key: requests
+# name: setup.requests
+# uuid: setup.requests
 # group: I/O
 # --
 import requests

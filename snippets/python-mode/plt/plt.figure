@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: plt.figure
-# key: plt.figure
+# uuid: plt.figure
 # group: visualisation
 # --
 fig, axes = plt.subplots(2)

@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: sort
-# key: sort
-# group: sorting
-# --
-.sort(axis=-1, kind='quicksort', order=None)

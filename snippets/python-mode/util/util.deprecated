@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: util.deprecated
+# uuid: util.deprecated
+# group: exceptions
+# --
+raise Exception("Deprecated: use $1")

@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: logging
-# key: logging
+# name: setup.logging
+# uuid: setup.logging
 # group: debugging
 # --
 # Setup root_logger:

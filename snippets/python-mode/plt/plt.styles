@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: plt.styles
+# uuid: plt.styles
+# group: visualisation
+# --
+plt.style.use('seaborn-whitegrid')

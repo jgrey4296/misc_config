@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: gtk
-# key: gtk
+# name: setup.gtk
+# uuid: setup.gtk
 # group: visualisation
 # --
 import gi

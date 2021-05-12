@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: ngrams
-# key: ngrams
+# name: nlp.ngrams
+# uuid: nlp.ngrams
 # group: nltk
 # --
 from nltk import ngrams

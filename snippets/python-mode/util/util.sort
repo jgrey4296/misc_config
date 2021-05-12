@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: util.sort
+# uuid: util.sort
+# group: sorting
+# --
+.sort(axis=-1, kind='quicksort', order=None)

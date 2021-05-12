@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: pyplot.axes
-# key: plt.axes
+# name: plt.axes
+# uuid: plt.axes
 # --
 ax = plt.axes()
 #ax.clear()

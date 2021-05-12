@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: main
-# key: main
-# group: file-starter
-# --
-$0
-
-if __name__ == "__main__":
-    $1

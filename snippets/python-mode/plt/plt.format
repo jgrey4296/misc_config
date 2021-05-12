@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: pyplot.format
-# key: plt.format
+# name: reminder.plt
+# uuid: reminder.plt
 # group: visualisation
 # --
 """

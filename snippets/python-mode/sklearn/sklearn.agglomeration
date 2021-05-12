@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: sklearn.agglomeration
-# key: sklearn.agglomeration
+# uuid: sklearn.agglomeration
 # group: machine learning
 # --
 from sklearn import cluster

@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: pyplot.scatter
-# key: plt.scatter
+# name: plt.scatter
+# uuid: plt.scatter
 # group: visualisation
 # --
 x = np.array([])

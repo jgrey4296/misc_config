@@ -1,10 +1,6 @@
 # -*- mode: snippet -*-
 # name: test.skip
-# key: test.skip
+# uuid: test.skip
+# condition: t
 # --
-@unittest.skip("Example")
-@unittest.skipIf(True, "Example")
-@unittest.skupUnless(True, "Example")
-self.skipTest("Example")
-
-@unittest.expectedFailure
+@unittest.skip("$0")

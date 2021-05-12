@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: loglib
-# key: loglib
+# name: setup.loglib
+# key: setup.loglib
 # group: debugging
 # --
 import logging as root_logger

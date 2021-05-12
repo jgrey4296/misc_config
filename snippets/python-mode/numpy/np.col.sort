@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: np.col.sort
+# key: np.col.sort
+# --
+an_array = np.random.random((10,2))
+
+sorted_array = an_array[np.argsort(an_array[:,0])]

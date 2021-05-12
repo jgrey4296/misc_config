@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: pyplot.plot
-# key: plt.plot
+# name: plt.plot
+# uuid: plt.plot
 # group: visualisation
 # --
 

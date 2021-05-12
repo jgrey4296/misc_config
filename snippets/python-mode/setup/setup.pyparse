@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: setup.pyparsing
+# uuid: setup.pyparsing
+# group: parsing
+# --
+import pyparsing as pp
+from pyparsing import pyparsing_common as ppc
+# Group, Suppress, ParseResults, Forward
+
+# OnlyOnce, , FollowedBy, NotAny, OneOrMore, ZeroOrMore,
+# Optional, SkipTo, Combine, Dict
+
+# And, Each, MatchFirst, Or, CharsNotIn, Empty, Keyword,
+# CaselessKeyword, Literal, CaselessLiteral,
+# NoMatch, QuotedString, Regex, White, Word
+
+#PARSER.setParseAction(lambda toks: toks))
+#PARSER.setResultsName('')
+#PARSER.parseString('')
+
+s = pp.Suppress
+op = pp.Optional
+opLn = s(op(pp.LineEnd()))

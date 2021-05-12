@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: util.izip
+# uuid: util.izip
+# group: iterators
+# --
+#from itertools import cycle, islice
+a = [1,2,3,4]
+b = zip(a, islice(cycle(a), 1, None))

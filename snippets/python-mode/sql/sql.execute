@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: sql.execute
-# key: sql.execute
+# uuid: sql.execute
 # group: sql
 # --
 cur.execute("$1")

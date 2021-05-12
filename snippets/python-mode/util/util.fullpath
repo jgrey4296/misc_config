@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: util.fullpath
+# uuid: util.fullpath
+# --
+abspath(expanduser($1))

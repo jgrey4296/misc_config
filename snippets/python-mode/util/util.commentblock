@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: util.comment.block
+# uuid: util.comment.block
+# group: comments
+# --
+#------------------------------
+# def $1
+#------------------------------
+$0

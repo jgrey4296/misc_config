@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: ply
-# key: ply
+# name: nlp.ply
+# uuid: nlp.ply
 # group: parsing
 # --
 import ply.lex as lex

@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: comblock
-# key: comblock
-# group: comments
-# --
-#------------------------------
-# def $1
-#------------------------------
-$0

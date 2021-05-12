@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: not implemented
-# key: notimp
-# group: exceptions
-# --
-raise Exception("Not implemented yet")

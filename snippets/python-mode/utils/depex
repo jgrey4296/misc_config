@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: depex
-# key: depex
-# group: exceptions
-# --
-raise Exception("Deprecated: use $1")

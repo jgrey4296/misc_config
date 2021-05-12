@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: init
-# key: init
-# condition: t
-# --
-
-def __init__(self):
-    super().__init__(self)
-    $0

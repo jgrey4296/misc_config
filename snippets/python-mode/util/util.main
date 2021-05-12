@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: util.main
+# uuid: util.main
+# group: file-starter
+# --
+$0
+
+if __name__ == "__main__":
+    $1

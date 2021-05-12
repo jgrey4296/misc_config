@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: pydisable
-# key: pydisable
-# group: linting
-# --
-#pylint: disable=$0

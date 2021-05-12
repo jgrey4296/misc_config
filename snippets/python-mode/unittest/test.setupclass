@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: setUpClass
-# key: setUpClass
+# name: test.setUpClass
+# uuid: test.setUpClass
 # --
 @classmethod
 def setUpClass(cls):

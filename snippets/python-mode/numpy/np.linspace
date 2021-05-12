@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: np.linspace
+# key: np.linspace
+# group: numpy
+# --
+np.linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None)

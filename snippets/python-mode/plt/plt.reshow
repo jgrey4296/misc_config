@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: plt.reshow
-# key: plt
+# uuid: plt.reshow
 # group: visualisation
 # --
 #From: https://stackoverflow.com/questions/31729948/

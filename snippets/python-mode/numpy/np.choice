@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: choice
-# key: choice
+# name: np.choice
+# key: np.choice
 # group: numpy
 # --
 np.random.choice($1, size=None, replace=True, p=None)$0

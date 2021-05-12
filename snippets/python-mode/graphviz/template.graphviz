@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: template.graphviz
+# uuid: template.graphviz
+# --
+import matplotlib.pyplot as plt
+import pygraphviz as pgv
+import networkx as nx
+
+graph = nx.karate_club_graph()
+pgv_graph = nx.nx_agraph.to_agraph(graph)
+# prog=[‘neato’|’dot’|’twopi’|’circo’|’fdp’|’nop’]
+pgv_graph.layout(prog='circo')
+pgv_graph.draw("{}.png".format("test_graph"))

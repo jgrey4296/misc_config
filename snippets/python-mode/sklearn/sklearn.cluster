@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: sklearn.cluster
-# key: sklearn.cluster
+# uuid: sklearn.cluster
 # group: machine learning
 # --
 from sklearn import cluster

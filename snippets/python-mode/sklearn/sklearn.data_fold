@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: sklearn.data_fold
-# key: sklearn.data_fold
+# uuid: sklearn.data_fold
 # group: machine learning
 # --
 #K fold Cross Validation, manually

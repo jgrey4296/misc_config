@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: sklearn.knn
-# key: sklearn.knn
+# uuid: sklearn.knn
 # group: machine learning
 # --
 #K-Nearest Neighbours classifier

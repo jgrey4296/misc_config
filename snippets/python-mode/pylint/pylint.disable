@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: pylint.disable
-# uuid: pylint.disable
-# key: pylint.disable
-# condition: t
-# --
-# pylint: disable=$0

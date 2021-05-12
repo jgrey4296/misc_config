@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: plt.setup
+# uuid: plt.setup
+# group: visualisation
+# --
+import matplotlib
+import matplotlib.pyplot as plt
+#plt.figure()
+#plt.style.use('classic')
+#plt.plot(X,Y)
+#plt.imshow(matrx, cmap=plt.cm.gray_r)
+#plt.show() / plt.draw() / plt.close()

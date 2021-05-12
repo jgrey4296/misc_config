@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: setup.sqlite
+# uuid: setup.sqlite
+# --
+# https://www.tutorialspoint.com/sqlite/sqlite_commands.htm
+import sqlite3
+
+DB_FILE = 'database.db'
+
+with sqlite3.connect('database.db') as conn:
+    #cursor = conn.execute()
+    #for row in cursor
+
+    #or: conn.execute() conn.commit()

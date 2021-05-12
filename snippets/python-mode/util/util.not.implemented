@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: util.not.implemented
+# uuid: util.not.implemented
+# group: exceptions
+# --
+raise Exception("Not implemented yet")

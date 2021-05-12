@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: sklearn.linear_model
-# key: sklearn.linear
+# uuid: sklearn.linear
 # group: machine learning
 # --
 #Linear Regression

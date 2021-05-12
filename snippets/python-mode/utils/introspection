@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: introspection
-# key: introspection
-# group: meta
-# --
-#dirs(a) : returns list
-#getattr(obj,name)(val)

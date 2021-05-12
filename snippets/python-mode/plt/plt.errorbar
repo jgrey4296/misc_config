@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: pyplot.errorbar
-# key: plt.errorbar
+# name: plt.errorbar
+# uuid: plt.errorbar
 # group: visualisation
 # --
 fig,ax = plt.subplots(1)

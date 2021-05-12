@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: sklearn.error
-# key: sklearn.error
+# uuid: sklearn.error
 # group: machine learning
 # --
 import numpy as np

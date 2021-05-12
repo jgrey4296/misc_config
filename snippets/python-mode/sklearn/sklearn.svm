@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: svm
-# key: sklearn.svm
+# name: sklearn.svm
+# uuid: sklearn.svm
 # group: machine learning
 # --
 import sklearn

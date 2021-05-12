@@ -10,7 +10,6 @@ from random import choice
 import json
 import twitter
 import configparser
-import subprocess
 
 LOGLEVEL = root_logger.DEBUG
 LOG_FILE_NAME = "log.{}".format(splitext(split(__file__)[1])[0])
@@ -22,26 +21,31 @@ root_logger.getLogger('').addHandler(console)
 logging = root_logger.getLogger(__name__)
 ##############################
 TEMP_LOC = "/Volumes/documents/DCIM/__temp/output.jpg"
-# currently using downsize instead of convert with -define jpg:extent=sizekb
-conversion_cmd = join(split(__file__)[0], "downsize")
-
-expander = lambda x: abspath(expanduser(x))
+downsize_cmd = join(split(__file__)[0], "downsize")
+convert_cmd = "convert"
+conversion_arg = "jpeg:extent=4800KB"
 
 dcim_whitelist_path = join(split(__file__)[0], "dcim_whitelist")
+
+expander = lambda x: abspath(expanduser(x))
 
 def compress_file(filepath):
     logging.info("Attempting compression of: {}".format(filepath))
     ext = splitext(filepath)[1][1:]
 
-    retcode = subprocess.call([conversion_cmd,
-                               "-s", "4900",
-                               filepath, TEMP_LOC])
+    # retcode = subprocess.call([downsize_cmd,
+    #                            "-s", "4900",
+    #                            filepath, TEMP_LOC])
 
-    if retcode == 0:
+    retcode = subprocess.call([convert_cmd, filepath,
+                               "-define", conversion_arg,
+                               TEMP_LOC])
+
+    if retcode == 0 and getsize(TEMP_LOC) < 5000000:
         return TEMP_LOC
     else:
         logging.warning("Failure converting: {}".format(filepath))
-        exit()
+        exit(1)
 
 
 if __name__ == "__main__":
@@ -62,7 +66,7 @@ if __name__ == "__main__":
 
     if not bool(whitelist):
         logging.info("Nothing to tweet from whitelist")
-        exit()
+        exit(1)
 
     selected = choice(whitelist).split(":")
     logging.info("Attempting: {}".format(selected))
@@ -74,9 +78,6 @@ if __name__ == "__main__":
     logging.info(f"File size: {getsize(the_file)}")
     if getsize(the_file) > 4500000:
         the_file = compress_file(the_file)
-    else:
-        logging.info("not now")
-        exit()
 
     assert(getsize(the_file) < 5000000)
     assert(exists(the_file))

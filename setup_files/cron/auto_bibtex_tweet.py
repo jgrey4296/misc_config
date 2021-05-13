@@ -49,7 +49,7 @@ def select_bibtex():
     filtered = [x for x in bibs if x not in blacklist]
 
     assert(len(filtered) < len(bibs))
-    selected = join(BIBTEX_LOC, choice(bibs))
+    selected = join(BIBTEX_LOC, choice(filtered))
 
     return selected
 

@@ -4,16 +4,6 @@
   (map! :leader
         "i t"    #'org-time-stamp
         "j c"    #'org-goto-calendar
-        ;; AGENDA
-        (:prefix ("a o" . "Org"))
-        (:prefix ("a o a" . "Agenda")
-         "/"   #'org-occur-in-agenda-files
-         "f"   #'org-agenda-file-to-front
-         "r"   #'org-remove-file
-         "l"   #'org-agenda-list
-         "F"   #'+jg-org-list-agenda-files
-         "t"   #'org-tags-view)
-        )
   )
 
 
@@ -33,3 +23,4 @@
          :desc "Remove Surplus"   "S" #'+jg-org-dired-clean-remove-surplus
          )
         )
+  )

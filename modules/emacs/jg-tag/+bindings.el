@@ -3,10 +3,10 @@
 ;; Helm bindings
 (defun +jg-tag-binding-hook ()
   (map! :leader
-      :prefix ("a h" . "Helms")
+      :prefix ("o h" . "Helms")
       :desc "Firefox Helm"              "f" #'+jg-tag-helm-bookmarks
       :desc "Tag Helm"                  "t" #'+jg-tag-helm-twitter
-      :desc "Twitter Helm"              "h" #'+jg-tag-helm-heading-twitter
+      :desc "Twitter Helm"              "T" #'+jg-tag-helm-heading-twitter
       :desc "Unified Helm"              "u" #'+jg-tag-helm-unified
       )
   (map! :map helm-map

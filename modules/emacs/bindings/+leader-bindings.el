@@ -328,39 +328,45 @@
   ;;; <leader> o --- open
   (map! :leader
         :prefix ("o" . "open")
-        :desc "Default browser"    "b"             #'browse-url-of-file
-        :desc "Debugger"           "d"             #'+debugger/start
-        :desc "Dired"              "-"             #'dired-jump
-        :desc "Org agenda"         "A"             #'org-agenda
-        :desc "REPL (same window)" "R"             #'+eval/open-repl-same-window
-        :desc "REPL"               "r"             #'+eval/open-repl-other-window
+        :desc "Command History"            "DEL" #'counsel-command-history
 
-        (:when (featurep! :ui neotree)
-         :desc "Project sidebar"               "p" #'+neotree/open
-         :desc "Find file in project sidebar"  "P" #'+neotree/find-this-file)
-        (:when (featurep! :ui treemacs)
-         :desc "Project sidebar"               "p" #'+treemacs/toggle
-         :desc "Find file in project rsidebar" "P" #'treemacs-find-file)
-        (:when (featurep! :term shell)
-         :desc "Toggle shell popup"            "t" #'+shell/toggle
-         :desc "Open shell here"               "T" #'+shell/here)
-        (:when (featurep! :term term)
-         :desc "Toggle terminal popup"         "t" #'+term/toggle
-         :desc "Open terminal here"            "T" #'+term/here)
+        :desc "Dired"                        "-" #'dired-jump
+
+        :desc "Default browser"              "b" #'browse-url-of-file
+
+        :desc "REPL"                         "r" #'+eval/open-repl-other-window
+
+        :desc "Project sidebar"              "p" #'+neotree/open
+        :desc "Find file in project sidebar" "P" #'+neotree/find-this-file
+
+        :desc "Rmail"                        "m" #'rmail
+        :desc "External Mail"                "M" #'mu4e
+
         (:when (featurep! :os macos)
          :desc "Reveal in Finder"           "f"    #'+macos/reveal-in-finder
          :desc "Reveal project in Finder"   "F"    #'+macos/reveal-project-in-finder
-         :desc "Send to Transmit"           "u"    #'+macos/send-to-transmit
-         :desc "Send project to Transmit"   "U"    #'+macos/send-project-to-transmit
-         :desc "Send to Launchbar"          "l"    #'+macos/send-to-launchbar
-         :desc "Send project to Launchbar"  "L"    #'+macos/send-project-to-launchbar
-         :desc "Open in iTerm"              "i"    #'+macos/open-in-iterm)
+         )
+
         (:prefix ("a" . "org agenda")
-         :desc "Agenda"         "a"                #'org-agenda
-         :desc "Todo list"      "t"                #'org-todo-list
-         :desc "Tags search"    "m"                #'org-tags-view
-         :desc "View search"    "v"                #'org-search-view)
+         :desc "Agenda"            "a" #'org-agenda
+         :desc "Todo list"         "t" #'org-todo-list
+         :desc "Tags search"       "m" #'org-tags-view
+         :desc "View search"       "v" #'org-search-view
+         :desc "List Agenda Files" "F" #'+jg-org-list-agenda-files
+         "/"   #'org-occur-in-agenda-files
+         "f"   #'org-agenda-file-to-front
+         "r"   #'org-remove-file
+         "l"   #'org-agenda-list
+         )
+
+        (:prefix ("h" . "Helms")
+         :desc "Minibuffer History"           "m" #'counsel-minibuffer-history
+         :desc "Shell History"                "s" #'counsel-shell-history
+
+         )
+        (:prefix ("s" . "Systems"))
         )
+
   ;;; <leader> p --- project
   (map! :leader
         :prefix ("p" . "project")

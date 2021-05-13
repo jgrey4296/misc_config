@@ -21,7 +21,9 @@
   (map! :map help-map
         "DEL" #'free-keys
         )
-)
+
+  )
+
 (defun +jg-misc-free-key-binding-update ()
   (map! :map free-keys-mode-map
         :desc "Change Buffer" :n "b" #'free-keys-change-buffer

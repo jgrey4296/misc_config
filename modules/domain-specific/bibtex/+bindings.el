@@ -55,11 +55,9 @@
 (defun +bibtex-general-binding-hook ()
   (message "Setting up general bibtex bindings: %s" (current-time-string))
   (map! :leader
-        :desc "Bibtex Helm"               "a h b" #'+jg-bibtex-helm-bibtex
-        (:prefix ("a b" . "Bibtex")
-         :desc "Load Random Bibtex entry"  "r" #'+jg-bibtex-load-random)
+        :desc "Bibtex Helm"               "o h b" #'+jg-bibtex-helm-bibtex
+        :desc "Load Random Bibtex entry"  "o !"   #'+jg-bibtex-load-random)
         )
-)
 
 
 (after! evil-ex

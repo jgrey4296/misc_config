@@ -60,7 +60,7 @@ def parse_bibtex(file_path):
 
     return database
 
-def select_entry(db, already_tweeted):
+def select_entry(db, already_tweeted, filename):
     # logging.info("Selecting Entry")
     entry = None
     tried_alts = 0
@@ -77,7 +77,7 @@ def select_entry(db, already_tweeted):
             entry = poss_entry
 
     if entry is None:
-        logging.warning("No Appropriate Entry Found for db")
+        logging.warning(f"No Appropriate Entry Found for db: {filename}")
 
     return entry
 
@@ -154,7 +154,7 @@ if __name__ == "__main__":
 
     bib        = select_bibtex()
     db         = parse_bibtex(bib)
-    entry      = select_entry(db, tweeted)
+    entry      = select_entry(db, tweeted, bib)
 
     if entry is None:
         maybe_blacklist_file(db, bib)

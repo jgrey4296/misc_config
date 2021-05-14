@@ -89,3 +89,35 @@ Dedicated (locked) windows are left untouched."
             :sort t
             :caller 'ivy-switch-buffer)
   )
+
+(defun +jg-misc-get-modes ()
+  (let (major minor)
+    ;; Modes in auto mode alist:
+    (loop for mode in (mapcar 'cdr auto-mode-alist)
+          do
+          (unless (consp mode)
+            (pushnew mode major)))
+
+    (loop for mode in (mapcar 'cdr auto-minor-mode-alist)
+          do
+          (unless (consp mode)
+            (pushnew mode minor)))
+
+    ;; modes from packages:
+    (loop for pkg in (mapcar 'car (doom-package-list))
+          do
+          (cond ((string-match "-minor-mode$" (symbol-name pkg))
+                 (pushnew pkg minor))
+                ((fboundp (intern (format "%s-minor-mode" pkg)))
+                 (pushnew (intern (format "%s-minor-mode" pkg)) minor))
+                ((string-match "-mode$"  (symbol-name pkg))
+                 (pushnew pkg major))
+                ((fboundp (intern (format "%s-mode" pkg)))
+                 (pushnew (intern (format "%s-mode" pkg)) major))
+                (t nil)
+                )
+          )
+
+    (list major minor)
+    )
+  )

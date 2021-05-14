@@ -57,9 +57,3 @@
 (add-hook! doom-first-input
            #'+jg-misc-setup-popup-rules-hook
            #'+jg-misc-binding-hook)
-
-
-;; Rmail binding promotion
-(add-transient-hook! #'rmail
-  (evil-make-intercept-map rmail-mode-map 'normal)
-  )

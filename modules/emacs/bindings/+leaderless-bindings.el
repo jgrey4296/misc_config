@@ -23,12 +23,12 @@
 
   ;; Flycheck
   (map! :after flycheck
-      :map flycheck-error-list-mode-map
-      :n "," nil
-      :n "," #'tabulated-list-sort
-      :n "{" #'tabulated-list-narrow-current-column
-      :n "}" #'tabulated-list-widen-current-column
-      )
+        :map flycheck-error-list-mode-map
+        :n "," nil
+        :n "," #'tabulated-list-sort
+        :n "{" #'tabulated-list-narrow-current-column
+        :n "}" #'tabulated-list-widen-current-column
+        )
   ;; Git Timemachine
   (map! :map git-timemachine-mode-map
       :n "[ g" #'git-timemachine-show-previous-revision

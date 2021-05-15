@@ -1,6 +1,4 @@
 
-
-
 (define-derived-mode inst-mode fundamental-mode "Institution Mode"
   "Major Mode for creating institutions"
   (interactive)

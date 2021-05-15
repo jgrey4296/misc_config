@@ -61,7 +61,7 @@
          :desc "Clean Org"          "c"  #'+jg-org-clean
          :desc "Wrap Numbers"        "w" #'+jg-org-wrap-numbers
          :desc "Wrap non-link urls"  "L" #'+jg-org-wrap-non-link-urls
-         :desc "Remove Duplicates"   "D" #'+jg-org-remove-duplicates)
+         :desc "Remove Duplicates"   "D" #'+jg-org-remove-duplicate-tweet-entries)
         ;; TODO refine this Codeblocks
         (:prefix ("." . "Code Blocks")
          :desc "Edit Codeblock " "e"     #'org-edit-src-code

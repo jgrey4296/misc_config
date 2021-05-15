@@ -81,10 +81,13 @@ def select_entry(db, already_tweeted, filename):
 
     return entry
 
-def maybe_blacklist_file(db, file_path):
-    one_of = lambda poss_entry: any([x in poss_entry for x in ONE_OF_KEYS])
+def maybe_blacklist_file(db, file_path, already_tweeted):
+    has_fields       = lambda poss_entry: any([x in poss_entry for x in ONE_OF_KEYS])
+    not_tweeted_yet  = lambda poss_entry: poss_entry['ID'] not in already_tweeted
 
-    if not any([one_of(x) for x in db.entries]):
+    sufficient_entry = lambda entry: has_fields(entry) and not_tweeted_yet(entry)
+
+    if not any([sufficient_entry(x) for x in db.entries]):
         logging.info(f"Bibtex failed check, blacklisting: {file_path}")
         with open(expander(bibtex_blacklist), 'a') as f:
             f.write(f"{split(file_path)[1]}\n")
@@ -157,7 +160,7 @@ if __name__ == "__main__":
     entry      = select_entry(db, tweeted, bib)
 
     if entry is None:
-        maybe_blacklist_file(db, bib)
+        maybe_blacklist_file(db, bib, tweeted)
 
     id_str, tweet_text = format_tweet(entry)
 

@@ -2,9 +2,11 @@
 ;; Misc
 (defun +jg-org-main-bindings-hook ()
   (message "Setting up org main bindings: %s" (current-time-string))
+  ;; Unbinds
   (map! :map org-mode-map
         "C-c [" nil
         "C-c ]" nil
+
         :localleader
         "f" nil
         "." nil
@@ -12,6 +14,7 @@
         "t" nil
         )
 
+  ;; Leaderless
   (map! :map org-mode-map
         ;; textmate-esque newline insertion
         "S-RET"      #'+org/shift-return
@@ -30,26 +33,22 @@
         [remap doom/forward-to-last-non-comment-or-eol] #'org-end-of-line
 
         )
-;;; Misc 2
+  ;; Local Leader
   (map! :map org-mode-map
         :localleader
-        :desc "update-statistics-cookies"  "#" #'org-update-statistics-cookies
-        :desc "edit-special"               "'" #'org-edit-special
-        :desc "ctrl-c-star"                "*" #'org-ctrl-c-star
-        :desc "switchb"                    "," #'org-switchb
-        )
+        :desc "update-statistics-cookies" "#" #'org-update-statistics-cookies
+        :desc "edit-special"              "'" #'org-edit-special
+        :desc "ctrl-c-star"               "*" #'org-ctrl-c-star
+        :desc "switchb"                   "," #'org-switchb
 
-;;; No Prefix
-  (map! :map org-mode-map
-        :localleader
-        :desc "archive-subtree"   "A" #'org-archive-subtree
-        :desc "export-dispatch"   "e" #'org-export-dispatch
-        :desc "store-link"        "n" #'org-store-link
-        :desc "set-property"      "o" #'org-set-property
-        :desc "set-tags-command"  "q" #'org-set-tags-command
-        :desc "todo-list"         "T" #'org-todo-list
+        :desc "archive-subtree"           "A" #'org-archive-subtree
+        :desc "export-dispatch"           "e" #'org-export-dispatch
+        :desc "store-link"                "n" #'org-store-link
+        :desc "set-property"              "o" #'org-set-property
+        :desc "set-tags-command"          "q" #'org-set-tags-command
+        :desc "todo-list"                 "T" #'org-todo-list
         )
-;;; <A> Attachments
+  ;; <A> Attachments
   (map! :map org-mode-map
         :localleader
         :prefix ("a" . "attachments")
@@ -71,8 +70,7 @@
          :desc "download-clipboard"               "p" #'org-download-clipboard
          :desc "download-yank)"                   "P" #'org-download-yank)
         )
-
-;;; <B> Tables
+  ;; <B> Tables
   (map! :map org-mode-map
         :localleader
         :prefix ("b" . "tables")
@@ -98,7 +96,7 @@
         (:when (featurep! +gnuplot)
          :desc "plot/gnuplot)"                       "p" #'org-plot/gnuplot)
         )
-;;; <C> Clock
+  ;; <C> Clock
   (map! :map org-mode-map
         :localleader
         "c" nil
@@ -119,7 +117,7 @@
         :desc "clock-timestamps-up"           "=" #'org-clock-timestamps-up
         :desc "clock-timestamps-down"         "-" #'org-clock-timestamps-down
         )
-;;; <D> Dates
+  ;; <D> Dates
   (map! :map org-mode-map
         :localleader
         "d" nil
@@ -129,13 +127,13 @@
         :desc "time-stamp"           "t" #'org-time-stamp
         :desc "time-stamp-inactive"  "T" #'org-time-stamp-inactive
         )
-;;; <F> Formatting
+  ;; <F> Formatting
   (map! :map org-mode-map
         :localleader
         :prefix ("f" . "Format")
 
         )
-;;; <G> Goto
+  ;; <G> Goto
   (map! :map org-mode-map
         :localleader
         :prefix ("g" . "goto")
@@ -153,7 +151,7 @@
         :desc "+org/goto-visible"                 "v" #'+org/goto-visible
         :desc "capture-goto-last-stored"          "x" #'org-capture-goto-last-stored
         )
-;;; <I> Insert
+  ;; <I> Insert
   (map! :map org-mode-map
         :localleader
         :prefix ("i" . "Insert")
@@ -162,7 +160,7 @@
         :desc "insert-link"              "l" #'org-insert-link
         :desc "insert-last-stored-link"  "S" #'org-insert-last-stored-link
         )
-;;; <L> Links
+  ;; <L> Links
   (map! :map org-mode-map
         :localleader
         :prefix ("l" . "links")
@@ -174,7 +172,7 @@
         :desc "store-link"               "s" #'org-store-link
         :desc "insert-last-stored-link"  "S" #'org-insert-last-stored-link
         )
-;;; <P> Publish
+  ;; <P> Publish
   (map! :map org-mode-map
         :localleader
         :prefix ("P" . "publish")
@@ -184,7 +182,7 @@
         :desc "publish-current-project"  "P" #'org-publish-current-project
         :desc "publish-sitemap"          "s" #'org-publish-sitemap
         )
-;;; <R> Refile
+  ;; <R> Refile
   (map! :map org-mode-map
         :localleader
         :prefix ("r" . "refile")
@@ -197,7 +195,7 @@
         :desc "+org/refile-to-visible"        "v" #'+org/refile-to-visible
         :desc "refile"                        "r" #'org-refile ; to all `org-refile-targets'
         )
-;;; <S> Subtree
+  ;; <S> Subtree
   (map! :map org-mode-map
         :localleader
         :prefix ("s" . "Tree/Subtree")
@@ -217,7 +215,7 @@
          :desc "priority"                           "p" #'org-priority
          :desc "priority-up"                        "k" #'org-priority-up)
         )
-;;; <T> Toggle
+  ;; <T> Toggle
   (map! :map org-mode-map
         :localleader
         :prefix ("t" . "Toggle")
@@ -234,57 +232,37 @@
 
   )
 
-(defun +jg-org-agenda-bind-fix-hook ()
-  (map! :map org-agenda-mode-map
-        :localleader
-        (:prefix ("d" . "Date/time"))
-        (:prefix ("c" . "Clock"))
-        (:prefix ("p" . "Priority")))
-
-  ;;(define-key (evil-get-auxiliary-keymap org-mode-map 'insert) (kbd "<SPC>") nil)
-)
-
-(defun +jg-org-personal-binding-hook ()
-  (message "Setting up org personal bindings: %s" (current-time-string))
-  ;; Wiping old
-  ;; Personal
-  ;; <leader>
-  (map! :map org-mode-map
-        :leader
-        :desc "Toggle Links" "t l"   'org-toggle-link-display)
-  ;; <leaderless>
-  (map! :map org-mode-map
-        :desc "Next Link"       :n "] l" #'org-next-link
-        :desc "Prev Link"       :n "[ l" #'org-previous-link
-        :desc "Forward Heading" :n "] j" #'org-forward-heading-same-level
-        :desc "Back Heading"    :n "[ k" #'org-backward-heading-same-level
-        :desc "Headings Helm"   :n "g h" #'helm-org-in-buffer-headings
-        )
-  ;; <localleader>
-  (map! :map org-mode-map
-        :localleader
-        :desc "Refile" "R" #'+jg-org-refile-subtree
-        (:prefix ("f". "Format")
-         :desc "Fix Drawers"        "d"  #'+jg-org-fix-properties-drawers
-         :desc "Clean Org"          "c"  #'+jg-org-clean
-         :desc "Wrap Numbers"        "w" #'+jg-org-wrap-numbers
-         :desc "Wrap non-link urls"  "L" #'+jg-org-wrap-non-link-urls
-         :desc "Remove Duplicates"   "D" #'+jg-org-remove-duplicates)
-        ;; TODO refine this Codeblocks
-        (:prefix ("." . "Code Blocks")
-         :desc "Edit Codeblock " "e"     #'org-edit-src-code
-         :desc "Exec Codeblock"  "E"     #'org-babel-execute-src-block)
-        ;; Links
-        (:prefix ("l" . "Links")
-         ;; "o"   #'+jg-org-open_link_in_buffer
-         ;; "O"   #'+jg-org-open_link_externally
-         :desc "Change Link Name" "n"      #'+jg-org-change_link_name
-         )
-        ;; Insertion
-        (:prefix ("i" . "Insert")
-         :desc "Insert Heading Trio" "t" #'+jg-org-insert-heading-trio
-         :desc "Insert Subheading" "h"   #'org-insert-subheading
-         :desc "Insert Drawer" "d"       #'org-insert-drawer)
-        )
-
+(defun +jg-org-evil-standard-bindings-hook ()
+     (map! :map evil-org-mode-map
+            :ni [C-return]   #'+org/insert-item-below
+            :ni [C-S-return] #'+org/insert-item-above
+            ;; more intuitive RET keybinds
+            :n [return]   #'+org/dwim-at-point
+            :n "RET"      #'+org/dwim-at-point
+            :i [return]   (cmd! (org-return electric-indent-mode))
+            :i "RET"      (cmd! (org-return electric-indent-mode))
+            :i [S-return] #'+org/shift-return
+            :i "S-RET"    #'+org/shift-return
+            ;; more vim-esque org motion keys (not covered by evil-org-mode)
+            :m "]h"  #'org-forward-heading-same-level
+            :m "[h"  #'org-backward-heading-same-level
+            :m "]l"  #'org-next-link
+            :m "[l"  #'org-previous-link
+            :m "]c"  #'org-babel-next-src-block
+            :m "[c"  #'org-babel-previous-src-block
+            :n "gQ"  #'org-fill-paragraph
+            ;; sensible vim-esque folding keybinds
+            :n "za"  #'+org/toggle-fold
+            :n "zA"  #'org-shifttab
+            :n "zc"  #'+org/close-fold
+            :n "zC"  #'outline-hide-subtree
+            :n "zm"  #'+org/hide-next-fold-level
+            :n "zM"  #'+org/close-all-folds
+            :n "zn"  #'org-tree-to-indirect-buffer
+            :n "zo"  #'+org/open-fold
+            :n "zO"  #'outline-show-subtree
+            :n "zr"  #'+org/show-next-fold-level
+            :n "zR"  #'+org/open-all-folds
+            :n "zi"  #'org-toggle-inline-images
+            )
   )

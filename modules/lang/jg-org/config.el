@@ -27,7 +27,13 @@
 
 (add-hook 'doom-first-input-hook #'+jg-org-setup-tags-hook 100)
 (add-hook 'doom-first-input-hook #'+jg-org-general-binding-hook)
+
 (add-hook 'org-load-hook         #'+jg-org-main-bindings-hook 90)
 (add-hook 'org-load-hook         #'+jg-org-personal-binding-hook 100)
+
 (add-hook 'org-agenda-mode-hook  #'+jg-org-agenda-bind-fix-hook)
 
+(after! evil-org
+  (add-hook 'evil-org-mode-hook #'+jg-org-evil-standard-bindings-hook 90)
+  (add-hook 'evil-org-mode-hook #'+jg-org-evil-binding-hook 100)
+)

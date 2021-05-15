@@ -2,13 +2,15 @@
 
 
 (map! :map dired-mode-map
-      :n ")"                                #'dired-git-info-mode
-      :n "o"                                #'dired-find-file-other-window
-      :n "S"                                #'hydra-dired-quick-sort/body
+      :n ")" #'dired-git-info-mode
+      :n "o" #'dired-find-file-other-window
+      :n "S" #'hydra-dired-quick-sort/body
       :n "j" #'dired-next-line
       :n "k" #'dired-previous-line
       :n "J" #'dired-next-dirline
       :n "K" #'dired-prev-dirline
+      :n "q" #'kill-current-buffer
+      :n "Q" #'+dired/quit-all
 
       :n "v" nil
       :n "i" nil
@@ -41,6 +43,7 @@
        )
       (:prefix ("K" . "Destructive")
        :desc "Reformat jsons"   "J" #'+jg-dired-reformat-jsons
+       :desc "Replace regexp"   "R" #'dired-do-find-regexp-and-replace
        )
       (:prefix ("f" . "Find")
        :desc "Find Random Marked" "r" #'+jg-dired-find-random-marked-file

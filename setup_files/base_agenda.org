@@ -16,6 +16,7 @@ Versu, Abl, Cif
 ***** Grammar
 
 ** Secondary
+*** [[file:/Volumes/documents/github/writing/orgfiles/taxonomies.org::*Taxonomies][Taxonomies]]
 *** [[file:~/github/writing/resources/bibliography][Bibliography]]
 *** [[~/github/languageLearning][Misc Language Repo]]
 *** [[file:~/Desktop/pdfs/Current][PDFs to integrate]]

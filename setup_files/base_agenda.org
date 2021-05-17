@@ -23,6 +23,7 @@ Versu, Abl, Cif
 *** [[file:~/Mega/twitterthreads][Twitter Threads]]
 *** TODO [[file:/Volumes/documents/github/corpora][Darius Kuzemi's Corpora]]
 *** [[file:/Volumes/documents/github/otherLibs/data][538 Data]]
+*** [[https://learnxinyminutes.com][Learn X in Y]]
 
 ** Resources
 [[http://arabimagefoundation.com/][Arab Image Foundation]]

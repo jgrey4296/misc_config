@@ -178,6 +178,8 @@
         :desc "Narrow"        "RET" #'+jg-narrow-around-point
         :desc "Widen"         "DEL" #'widen
         :desc "ispell-word"   "="  #'ispell-word
+        :desc "Scroll Right"  ">"  #'evil-scroll-column-right
+        :desc "Scroll Left"   "<"  #'evil-scroll-column-left
 
         :desc "open-fold-rec" "A" #'evil-open-fold-rec
 

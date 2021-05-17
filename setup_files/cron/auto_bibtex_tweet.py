@@ -88,7 +88,7 @@ def maybe_blacklist_file(db, file_path, already_tweeted):
     sufficient_entry = lambda entry: has_fields(entry) and not_tweeted_yet(entry)
 
     with open(expander(bibtex_blacklist), 'r') as f:
-        blacklisted = [x.strip() for x in f.readlines]
+        blacklisted = [x.strip() for x in f.readlines()]
 
     assert(file_path not in blacklisted)
     if not any([sufficient_entry(x) for x in db.entries]):

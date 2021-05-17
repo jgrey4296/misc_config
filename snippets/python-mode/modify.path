@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: modify.path
+# uuid: modify.path
+# --
+import sys
+sys.path.append($0)

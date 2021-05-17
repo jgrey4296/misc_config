@@ -34,10 +34,15 @@
   (interactive)
   (find-file "~/mega")
   )
-
-(defun +jg-browse-url()
+(defun +jg-bindings-goto-x-in-y ()
   (interactive)
-  (let ((url (cond ((eq evil-state 'visual)
+  (+jg-browse-url jg-binding-x-in-y-url)
+  )
+
+(defun +jg-browse-url(&optional url)
+  (interactive)
+  (let ((url (cond (url url)
+                   ((eq evil-state 'visual)
                     (buffer-substring-no-properties evil-visual-beginning evil-visual-end))
                    (t
                     (read-string "Search For: "))

@@ -342,6 +342,8 @@
         :desc "Rmail"                        "m" #'rmail
         :desc "External Mail"                "M" #'mu4e
 
+        :desc "Learn X in Y"                 "x" #'+jg-bindings-goto-x-in-y
+
         (:when (featurep! :os macos)
          :desc "Reveal in Finder"           "f"    #'+macos/reveal-in-finder
          :desc "Reveal project in Finder"   "F"    #'+macos/reveal-project-in-finder

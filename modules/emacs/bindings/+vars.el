@@ -20,6 +20,7 @@
                                                        "imenu-generic-expression"
                                                        "font-lock-keywords"))
 
+              jg-binding-x-in-y-url "https://learnxinyminutes.com"
               )
 
 

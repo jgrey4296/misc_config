@@ -34,6 +34,6 @@
 (add-hook 'org-agenda-mode-hook  #'+jg-org-agenda-bind-fix-hook)
 
 (after! evil-org
-  (add-hook 'evil-org-mode-hook #'+jg-org-evil-standard-bindings-hook 90)
-  (add-hook 'evil-org-mode-hook #'+jg-org-evil-binding-hook 100)
+  (add-transient-hook! 'evil-org-mode-hook #'+jg-org-evil-standard-bindings-hook 90)
+  (add-transient-hook! 'evil-org-mode-hook #'+jg-org-evil-binding-hook 100)
 )

@@ -1,0 +1,45 @@
+** clean individual bibtexs
+#+begin_src bash :results value
+find ~/github/writing/resources/bibliography -name "*.bib" |
+    xargs -I {} echo "cd ~/github/py_bookmark_organiser ;
+        bkmkorg/filters/bibtex/clean.py -t {} -o {} -l ~/mega/pdflibrary " | bash
+
+#+end_src
+
+** run tag clean
+#+begin_src bash :results value
+find ~/github/writing/resources/bibliography -name "*.bib" |
+    xargs -I {} echo "cd ~/github/py_bookmark_organiser ;
+       bkmkorg/filters/tag/clean.py -t {} -c ~/github/writing/resources/substitutions " | bash
+
+#+end_src
+    + run on bookmarks and twitter too
+
+** sum tags
+#+begin_src bash :results value
+cd ~/github/py_bookmark_organiser ;
+bkmkorg/describers/tag/totals.py -t ~/github/writing/resources/bibliography -t ~/github/writing/resources/main_bookmarks.html
+-t ~/mega/twitterthreads -c ~/github/writing/resources/substitutions -o ~/github/writing/resources/totals.tags
+#+end_src
+
+** gen graphs
+#+begin_src bash :results value
+cd ~/github/py_bookmark_organiser ;
+bkmkorg/describers/tag/graph.py -t ~/github/writing/resources/bibliography
+-t ~/github/writing/resources/main_bookmarks.html -t ~/mega/twitterthreads
+-o ~/github/writing/resources/tags.edgelist
+#+end_src
+
+** gen tag timelines
+#+begin_src bash  :results value
+cd ~/github/py_bookmark_organiser ;
+bkmkorg/describers/bibtex/timelines.py --library ~/github/writing/resources/bibliography
+--target ~/github/writing/resources/tag_timelines
+#+end_src
+
+** check pdf has associated record
+#+begin_src bash :results value
+cd ~/github/py_bookmark_organiser ;
+bkmkorg/describers/bibtex/file_check.py -t ~/mega/pdflibrary -l ~/github/writing/resources/bibliography
+-o ~/github/writing/resources/cron_reports
+#+end_src

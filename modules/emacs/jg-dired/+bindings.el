@@ -1,7 +1,8 @@
 ;;; emacs/dired/+bindings.el -*- lexical-binding: t; -*-
 
 
-(map! :map dired-mode-map
+(map! :after dired
+      :map dired-mode-map
       :n ")" #'dired-git-info-mode
       :n "o" #'dired-find-file-other-window
       :n "S" #'hydra-dired-quick-sort/body

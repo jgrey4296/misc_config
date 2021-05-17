@@ -1,8 +1,5 @@
 ;;; tools/dired/config.el -*- lexical-binding: t; -*-
 
-(after! evil
-  (load! "+bindings")
-  )
 (load! "+vars")
 (load! "+funcs")
 
@@ -14,3 +11,7 @@
   :config
   (set-face-attribute 'diredfl-flag-mark-line nil :background "blueviolet")
 )
+
+(use-package-hook! dired :post-config
+  (load! "+bindings")
+  )

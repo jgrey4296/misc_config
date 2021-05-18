@@ -11,12 +11,14 @@
 Versu, Abl, Cif
 **** 2: Democracy CSV formulae
 **** 3: Patch Notes
-*** [[file:cron/crontab.backup][Cron Jobs]]
+*** [[~/.doom.d/setup_files/cron/crontab.backup][Cron Jobs]]
 **** Tweet
 ***** Grammar
 
 ** Secondary
-*** [[file:/Volumes/documents/github/writing/orgfiles/taxonomies.org::*Taxonomies][Taxonomies]]
+*** [[file:/Volumes/documents/github/writing/resources/quotes.org][Quotes]]
+*** [[file:/Volumes/documents/github/writing/resources/taxonomies.org][Taxonomies]]
+*** [[file:/Volumes/documents/github/writing/resources/DSLs.org][DSLs]]
 *** [[file:~/github/writing/resources/bibliography][Bibliography]]
 *** [[~/github/languageLearning][Misc Language Repo]]
 *** [[file:~/Desktop/pdfs/Current][PDFs to integrate]]
@@ -25,6 +27,7 @@ Versu, Abl, Cif
 *** TODO [[file:/Volumes/documents/github/corpora][Darius Kuzemi's Corpora]]
 *** [[file:/Volumes/documents/github/otherLibs/data][538 Data]]
 *** [[https://learnxinyminutes.com][Learn X in Y]]
+*** [[file:/Volumes/documents/github/writing/resources/research_questions.org][Research Questions]]
 
 ** Resources
 [[http://arabimagefoundation.com/][Arab Image Foundation]]
@@ -194,3 +197,6 @@ Versu, Abl, Cif
 [[https://sketchfab.com/][Sketchfab]]
 [[https://en.wikipedia.org/wiki/Summa_Theologica][Summa Theologica]]
 [[https://en.wikipedia.org/wiki/Book_of_Common_Prayer][Book of Common Prayer]]
+
+** Reminders
+978-0860206187 - The Usborne Book of Legends: Hercules, Jason, Ulysses. Claudia Zeff

@@ -1,12 +1,12 @@
-** clean individual bibtexs
+** DONE clean individual bibtexs
 #+begin_src bash :results value
 find ~/github/writing/resources/bibliography -name "*.bib" |
     xargs -I {} echo "cd ~/github/py_bookmark_organiser ;
-        bkmkorg/filters/bibtex/clean.py -t {} -o {} -l ~/mega/pdflibrary " | bash
+        bkmkorg/filters/bibtex/clean.py -t {} -o {} " | bash
 
 #+end_src
 
-** run tag clean
+** DONE run tag clean
 #+begin_src bash :results value
 find ~/github/writing/resources/bibliography -name "*.bib" |
     xargs -I {} echo "cd ~/github/py_bookmark_organiser ;
@@ -15,29 +15,29 @@ find ~/github/writing/resources/bibliography -name "*.bib" |
 #+end_src
     + run on bookmarks and twitter too
 
-** sum tags
+** DONE sum tags
 #+begin_src bash :results value
 cd ~/github/py_bookmark_organiser ;
-bkmkorg/describers/tag/totals.py -t ~/github/writing/resources/bibliography -t ~/github/writing/resources/main_bookmarks.html
--t ~/mega/twitterthreads -c ~/github/writing/resources/substitutions -o ~/github/writing/resources/totals.tags
+bkmkorg/describers/tag/totals.py -t ~/github/writing/resources/bibliography -t ~/github/writing/resources/bookmarks/main_bookmarks.html
+-t ~/mega/twitterthreads -c ~/github/writing/resources/substitutions -o ~/github/writing/resources/cron_reports/totals
 #+end_src
 
-** gen graphs
+** DONE gen graphs
 #+begin_src bash :results value
 cd ~/github/py_bookmark_organiser ;
 bkmkorg/describers/tag/graph.py -t ~/github/writing/resources/bibliography
--t ~/github/writing/resources/main_bookmarks.html -t ~/mega/twitterthreads
--o ~/github/writing/resources/tags.edgelist
+-t ~/github/writing/resources/bookmarks/main_bookmarks.html -t ~/mega/twitterthreads
+-o ~/github/writing/resources/cron_reports/tags.edgelist
 #+end_src
 
-** gen tag timelines
+** DONE gen tag timelines
 #+begin_src bash  :results value
 cd ~/github/py_bookmark_organiser ;
 bkmkorg/describers/bibtex/timelines.py --library ~/github/writing/resources/bibliography
---target ~/github/writing/resources/tag_timelines
+--output ~/github/writing/resources/tag_timelines
 #+end_src
 
-** check pdf has associated record
+** TODO check pdf has associated record
 #+begin_src bash :results value
 cd ~/github/py_bookmark_organiser ;
 bkmkorg/describers/bibtex/file_check.py -t ~/mega/pdflibrary -l ~/github/writing/resources/bibliography

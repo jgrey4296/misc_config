@@ -56,6 +56,7 @@
   (map! :map org-mode-map
         :localleader
         :desc "Refile" "R" #'+jg-org-refile-subtree
+        :desc "Todo"   "TAB" #'org-todo
         (:prefix ("f". "Format")
          :desc "Fix Drawers"        "d"  #'+jg-org-fix-properties-drawers
          :desc "Clean Org"          "c"  #'+jg-org-clean

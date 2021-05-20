@@ -27,23 +27,23 @@ PYTHONPATH=/Volumes/documents/github/py_bookmark_organiser/
 # at 4.30am on tuesdays, find any corrupted pdfs
 30 4 * * tue find /Volumes/documents/MEGA/AutoSync/pdflibrary -name "*.pdf" | xargs -I {} echo "pdftk {} dump_data_utf8 2>&1 1>/dev/null | awk '/Error/ { print \"{}: \" \$0}'" | bash > /Volumes/documents/github/writing/resources/cron_reports/pdf_verification
 
-## WED
-# 4am : clean tags
-0 4 * * wed find ~/github/writing/resources/bibliography -name "*.bib" | xargs -I {} echo "cd ~/github/py_bookmark_organiser ; bkmkorg/filters/tag/clean.py -t {} -c ~/github/writing/resources/substitutions " | bash
-# 5am : update tag totals
-0 5 * * wed cd ~/github/py_bookmark_organiser ; bkmkorg/describers/tag/totals.py -t ~/github/writing/resources/bibliography -t ~/github/writing/resources/bookmarks/main_bookmarks.html -t ~/mega/twitterthreads -c ~/github/writing/resources/substitutions -o ~/github/writing/resources/cron_reports/totals
-# 6am : update tag graph
-0 6 * * wed cd ~/github/py_bookmark_organiser ; bkmkorg/describers/tag/graph.py -t ~/github/writing/resources/bibliography -t ~/github/writing/resources/bookmarks/main_bookmarks.html -t ~/mega/twitterthreads -o ~/github/writing/resources/cron_reports/tags.edgelist
-# 7am : update tag timelines
-0 7 * * wed cd ~/github/py_bookmark_organiser ; bkmkorg/describers/bibtex/timelines.py --library ~/github/writing/resources/bibliography --output ~/github/writing/resources/tag_timelines
+## THUR
+# 5am : clean bibtex
+10 5 * * thu find ~/github/writing/resources/bibliography -name "*.bib" | xargs -I {} echo "~/github/py_bookmark_organiser/bkmkorg/filters/bibtex/clean.py -t {} -o {} " | bash
+# 6am : clean tags
+15 6 * * thu find ~/github/writing/resources/bibliography -name "*.bib" | xargs -I {} echo "~/github/py_bookmark_organiser/bkmkorg/filters/tag/clean.py -t {} -c ~/github/writing/resources/substitutions " | bash
+# 7am : update tag totals
+0 7 * * thu ~/github/py_bookmark_organiser/bkmkorg/describers/tag/totals.py -t ~/github/writing/resources/bibliography -t ~/github/writing/resources/bookmarks/main_bookmarks.html -t ~/mega/twitterthreads -c ~/github/writing/resources/substitutions -o ~/github/writing/resources/cron_reports/totals
+# 8am : update tag graph
+0 8 * * thu ~/github/py_bookmark_organiser/bkmkorg/describers/tag/graph.py -t ~/github/writing/resources/bibliography -t ~/github/writing/resources/bookmarks/main_bookmarks.html -t ~/mega/twitterthreads -o ~/github/writing/resources/cron_reports/tags.edgelist
+# 9am : update tag timelines
+0 9 * * thu ~/github/py_bookmark_organiser/bkmkorg/describers/bibtex/timelines.py --library ~/github/writing/resources/bibliography --output ~/github/writing/resources/tag_timelines
 
-## THURS
-# 3am : clean bibtex
-0 3 * * thu find ~/github/writing/resources/bibliography -name "*.bib" | xargs -I {} echo "cd ~/github/py_bookmark_organiser ; bkmkorg/filters/bibtex/clean.py -t {} -o {} " | bash
+## FRI
 # 5am : update tag index
-* 5 * * thu ~/github/py_bookmark_organiser/bkmkorg/describers/tag/indexer.py --target ~/mega/twitterthreads --output ~/github/writing/resources/cron_reports/tw_tag.index
+* 5 * * fri ~/github/py_bookmark_organiser/bkmkorg/describers/tag/indexer.py --target ~/mega/twitterthreads --output ~/github/writing/resources/cron_reports/tw_tag.index
 # 6am : update account index
-* 6 * * thu ~/github/py_bookmark_organiser/bkmkorg/describers/twitter/indexer.py --target ~/mega/twitterthreads --output ~/github/writing/resources/cron_reports/tw_acct.index
+* 6 * * fri ~/github/py_bookmark_organiser/bkmkorg/describers/twitter/indexer.py --target ~/mega/twitterthreads --output ~/github/writing/resources/cron_reports/tw_acct.index
 
 ### TODO
 # 4am : expand any urls in twitter threads

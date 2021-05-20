@@ -41,6 +41,7 @@
  jg-org
  jg-lisp
  jg-python
+ jg-cron
 
  :emacs  ;; ----- ====== -----
  char-insert

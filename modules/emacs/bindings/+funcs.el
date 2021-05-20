@@ -42,6 +42,10 @@
   (interactive)
   (+jg-browse-url jg-binding-py-docs)
   )
+(defun +jg-bindings-goto-beautiful-soup ()
+  (interactive)
+  (+jg-browse-url jg-binding-beautiful-soup)
+  )
 
 (defun +jg-browse-url(&optional url)
   (interactive)

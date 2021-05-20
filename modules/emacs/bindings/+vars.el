@@ -21,6 +21,8 @@
                                                        "font-lock-keywords"))
 
               jg-binding-x-in-y-url "https://learnxinyminutes.com"
+              jg-binding-py-docs    "https://docs.python.org/3/"
+              jg-binding-beautiful-soup "https://beautiful-soup-4.readthedocs.io/en/latest/"
               )
 
 

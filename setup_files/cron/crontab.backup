@@ -1,5 +1,6 @@
 SHELL=/usr/local/bin/bash
 BASH_ENV=/Volumes/documents/github/emacs_files/setup_files/exports.bash
+PYTHONPATH=./
 
 ### DAILY:
 # Speak the time every 2 hours
@@ -27,8 +28,6 @@ BASH_ENV=/Volumes/documents/github/emacs_files/setup_files/exports.bash
 30 4 * * tue find /Volumes/documents/MEGA/AutoSync/pdflibrary -name "*.pdf" | xargs -I {} echo "pdftk {} dump_data_utf8 2>&1 1>/dev/null | awk '/Error/ { print \"{}: \" \$0}'" | bash > /Volumes/documents/github/writing/resources/cron_reports/pdf_verification
 
 ## WED
-# 3am : clean bibtex
-0 3 * * wed find ~/github/writing/resources/bibliography -name "*.bib" | xargs -I {} echo "cd ~/github/py_bookmark_organiser ; bkmkorg/filters/bibtex/clean.py -t {} -o {} " | bash
 # 4am : clean tags
 0 4 * * wed find ~/github/writing/resources/bibliography -name "*.bib" | xargs -I {} echo "cd ~/github/py_bookmark_organiser ; bkmkorg/filters/tag/clean.py -t {} -c ~/github/writing/resources/substitutions " | bash
 # 5am : update tag totals
@@ -37,3 +36,13 @@ BASH_ENV=/Volumes/documents/github/emacs_files/setup_files/exports.bash
 0 6 * * wed cd ~/github/py_bookmark_organiser ; bkmkorg/describers/tag/graph.py -t ~/github/writing/resources/bibliography -t ~/github/writing/resources/bookmarks/main_bookmarks.html -t ~/mega/twitterthreads -o ~/github/writing/resources/cron_reports/tags.edgelist
 # 7am : update tag timelines
 0 7 * * wed cd ~/github/py_bookmark_organiser ; bkmkorg/describers/bibtex/timelines.py --library ~/github/writing/resources/bibliography --output ~/github/writing/resources/tag_timelines
+
+## THURS
+# 3am : clean bibtex
+0 3 * * thu find ~/github/writing/resources/bibliography -name "*.bib" | xargs -I {} echo "cd ~/github/py_bookmark_organiser ; bkmkorg/filters/bibtex/clean.py -t {} -o {} " | bash
+
+
+### TODO
+# ~/github/py_bookmark_organiser/bkmkorg/utils/twitter/url_expander.py --target ~/mega/twitterthreads
+# ~/github/py_bookmark_organiser/bkmkorg/describers/tag/indexer.py --target ~/mega/twitterthreads --output ~/github/writing/resources/cron_reports/tw_tag.index
+# ~/github/py_bookmark_organiser/bkmkorg/describers/twitter/indexer.py --target ~/mega/twitterthreads --output ~/github/writing/resources/cron_reports/tw_acct.index

@@ -46,6 +46,10 @@
   (interactive)
   (+jg-browse-url jg-binding-beautiful-soup)
   )
+(defun +jg-bindings-goto-crontab-guru ()
+  (interactive)
+  (+jg-browse-url jg-binding-crontab-guru)
+)
 
 (defun +jg-browse-url(&optional url)
   (interactive)

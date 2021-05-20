@@ -2,7 +2,12 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("Cellar"
+(("twitter"
+ (filename . "/Volumes/documents/MEGA/AutoSync/twitterthreads/")
+ (front-context-string . "group_a\n  drwxrw")
+ (rear-context-string . "6K Mar 30 07:56 ")
+ (position . 152))
+("Cellar"
  (filename . "/usr/local/Cellar/")
  (front-context-string . "emacs\n  drwxr-xr")
  (rear-context-string . "96 Apr 16 16:08 ")

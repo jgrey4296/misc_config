@@ -12,29 +12,39 @@
         :desc "Quit"   :n  "q" #'mu4e-quit
         )
 
-  (map! :map rmail-mode-map
-        "j" nil
-        "k" nil
-        "v" nil
-        "e" nil
-        :n "n" #'rmail-next-undeleted-message
-        :n "p" #'rmail-previous-undeleted-message
-        :n "q" #'quit-window
-        :n "d" #'rmail-delete-forward
-        :n "Q"  #'rmail-quit
-        )
-
-  (map! :map rmail-summary-mode-map
-        "q"  #'quit-window
-        "Q"  #'rmail-summary-quit
-        "j"  nil
-        "k"  nil
-        )
-
 
   (map! :map org-msg-edit-mode-map
         :localleader
         "RET" #'message-send-and-exit
         "q"   #'org-msg-edit-kill-buffer
+        )
+)
+
+(defun +jg-mail-rmail-binding-hook ()
+  (map! :map rmail-mode-map
+        "j" nil
+        "k" nil
+        "v" nil
+        "e" nil
+        "q" nil
+        "q" #'quit-window
+        :n "n" #'rmail-next-undeleted-message
+        :n "p" #'rmail-previous-undeleted-message
+        :n "q" #'quit-window
+        :n "Q" #'rmail-quit
+        :n "d" #'rmail-delete-forward
+        )
+)
+
+
+(defun +jg-mail-rmail-summary-binding-hook ()
+  (map! :map rmail-summary-mode-map
+        "j"  nil
+        "k"  nil
+        "q"  #'quit-window
+        "Q"  #'rmail-summary-quit
+
+        :n "q"  #'quit-window
+        :n "Q"  #'rmail-summary-quit
         )
 )

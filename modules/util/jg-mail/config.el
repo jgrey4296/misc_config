@@ -18,11 +18,17 @@
   :hook (mu4e-main-mode . +jg-mail-override-mu4e-hook)
   )
 
-(add-hook! doom-first-input #'+jg-mail-binding-hook)
+(add-hook! doom-first-input #'+jg-mail-binding-hook #'+jg-mail-rmail-binding-hook)
 
 ;; Rmail binding promotion
 (add-transient-hook! #'rmail
-  (evil-make-intercept-map rmail-mode-map 'normal)
-  (evil-make-intercept-map rmail-mode-map 'motion)
-  (evil-make-intercept-map rmail-summary-mode-map 'normal)
+  (+jg-mail-rmail-binding-hook)
+  (evil-make-intercept-map rmail-mode-map)
+  ;; (evil-make-intercept-map rmail-mode-map 'motion)
+  ;; (push '(rmail-mode-map) evil-intercept-maps)
+)
+
+(add-transient-hook! #'rmail-summary-mode
+  (evil-make-intercept-map rmail-summary-mode-map)
+  (+jg-mail-rmail-summary-binding-hook)
   )

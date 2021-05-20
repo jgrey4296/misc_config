@@ -23,4 +23,6 @@
 ;; Rmail binding promotion
 (add-transient-hook! #'rmail
   (evil-make-intercept-map rmail-mode-map 'normal)
+  (evil-make-intercept-map rmail-mode-map 'motion)
+  (evil-make-intercept-map rmail-summary-mode-map 'normal)
   )

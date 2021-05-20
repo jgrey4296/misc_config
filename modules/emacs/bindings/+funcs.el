@@ -38,6 +38,10 @@
   (interactive)
   (+jg-browse-url jg-binding-x-in-y-url)
   )
+(defun +jg-bindings-goto-pydocs ()
+  (interactive)
+  (+jg-browse-url jg-binding-py-docs)
+  )
 
 (defun +jg-browse-url(&optional url)
   (interactive)

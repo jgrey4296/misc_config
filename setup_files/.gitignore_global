@@ -1,19 +1,62 @@
-#Compiled source:
-*.com
+# Compiled source:
+*.beam
+*.bl
 *.class
+*.com
 *.dll
 *.exe
+*.exe
+*.hi
+*.meta
 *.o
 *.so
-*.pyc
+ccsat.*
 
-#OS Generated Files:
+# Python:
+*.pyc
+*__pycache__
+flycheck_*
+
+# OS Generated Files:
+*.egg
 .DS_Store
 .DS_Store?
-._*
 .Spotlight-v11
 .Trashes
-ehthumbs.db
-Thumbs.db
+._*
+.dir-locals.el
 .dropbox
+.orgids
+GPATH
+GRTAGS
+GTAGS
+Thumbs.db
 \#.\#
+_site/
+cscope.out
+ehthumbs.db
+node_modules
+tmp/
+~*
+
+# Big Files
+*.aif
+*.aif.*
+*.gif
+*.jpeg
+*.jpg
+*.pdf
+*.pickle
+*.png
+imgs/*
+
+# Passwords
+*.credentials
+*.key
+*.secret
+.secrets.json
+secrets.config
+
+# Logs
+*.log
+log.*

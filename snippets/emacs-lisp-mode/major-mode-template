@@ -3,8 +3,14 @@
 # uuid: major-mode-template
 # --
 
-(defvar $1-mode-map
+(defvar-local $1-mode-map
   (make-sparse-keymap))
+
+;; List of '(regex (groupnum "face")+)
+(defconst $1-font-lock-keywords
+  (list)
+  "Highlighting for $1-mode"
+)
 
 (define-derived-mode $1-mode fundamental-mode
   "$1"
@@ -13,11 +19,7 @@
   (kill-all-local-variables)
   (use-local-map $1-mode-map)
 
-  ;; (let ((base-locks (reverse $1-font-lock-keywords))
-  ;;       (keywords (list $1-keywords-regexp 0 "temp" t)))
-  ;;   (push keywords base-locks)
-  ;;   (set (make-local-variable 'font-lock-defaults) (list (reverse base-locks) nil))
-  ;;   )
+  ;; (set (make-local-variable 'font-lock-defaults) (list $1-font-lock-keywords nil))
   ;; (set (make-local-variable 'font-lock-syntactic-face-function) '$1-syntactic-face-function)
   ;; (set (make-local-variable 'indent-line-function) '$1-indent-line)
   ;; (set (make-local-variable 'comment-style) '(plain))
@@ -32,5 +34,6 @@
   (yas-minor-mode)
 
   )
+(add-to-list 'auto-mode-alist '("" . $1-mode))
 
-(provide '$1)
+(provide '$1-mode)

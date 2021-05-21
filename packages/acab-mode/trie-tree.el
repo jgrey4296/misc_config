@@ -1,7 +1,7 @@
 (require 'dash)
 
-(defstruct trie-tree/node name value
-           (children (make-hash-table :test 'equal)))
+(cl-defstruct trie-tree/node name value
+              (children (make-hash-table :test 'equal)))
 
 ;; Tree Operations
 (defun trie-tree/generate-tree (node n-children layers)

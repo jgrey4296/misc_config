@@ -1,12 +1,12 @@
 ;;; domain-specific/twitter/+downloader.el -*- lexical-binding: t; -*-
 
 (defun +jg-tweet-downloader (id_str)
+  " "
   (interactive "M")
   ;; Start a process
   (let* ((mv-cmd (format "cd %s" jg-twitter-download-repo))
-         (activate-cmd (format "source ${HOME}/anaconda3/bin/activate %s" jg-twitter-download-env))
-         (download-cmd (format "python %s --tweet %s" jg-twitter-download-py id_str))
-         (total-cmd (s-join "; " (list mv-cmd activate-cmd download-cmd)))
+         (download-cmd (format "%s --tweet %s" jg-twitter-download-py id_str))
+         (total-cmd (s-join "; " (list  mv-cmd download-cmd)))
          (process (start-process "Tweet Downloader" "Tweet-Download"
                                  "bash" "-c" total-cmd))
          (sentinel #'(lambda (proc chng)

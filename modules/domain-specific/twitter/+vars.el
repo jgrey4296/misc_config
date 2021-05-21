@@ -16,6 +16,5 @@
 )
 
 (setq-default jg-twitter-download-repo "/Volumes/documents/github/py_bookmark_organiser/"
-              jg-twitter-download-env  "bookmark"
-              jg-twitter-download-py   "bkmkorg/io/twitter_automator.py"
+              jg-twitter-download-py   "bkmkorg/io/twitter/automator.py"
               )

@@ -55,7 +55,7 @@
   (map! :leader
         :prefix ("b" . "buffer")
         :desc "Clear Buffer"                "DEL" #'+jg-bindings-clear-buffer
-        :desc "Switch to last buffer"       "TAB" #'evil-switch-to-windows-last-buffer
+        :desc "Ediff Buffers"               "TAB" #'ediff-buffers
         :desc "Next buffer"                 "]" #'next-buffer
         :desc "Previous buffer"             "[" #'previous-buffer
         :desc "Toggle narrowing"            "-" #'+jg-toggle-narrow-buffer
@@ -113,8 +113,7 @@
   ;;; <leader> f --- file
   (map! :leader
         :prefix ("f" . "file")
-        (:when (featurep! :tools editorconfig)
-         :desc "Open project editorconfig"  "c"   #'editorconfig-find-current-editorconfig)
+         :desc "Ediff Files"                "TAB" #'ediff-files
 
         :desc "Browse emacs.d"              "E"   #'+default/browse-emacsd
         :desc "Browse private config"       "P"   #'doom/open-private-config
@@ -376,10 +375,13 @@
   (map! :leader
         :prefix ("p" . "project")
         :desc "Root Shell"                   "'"  #'projectile-run-shell
-        :desc "Add new project"              "a"  #'projectile-add-known-project
         :desc "Browse other project"         ">"  #'doom/browse-in-other-project
+        :desc "Search project for symbol"     "." #'+default/search-project-for-symbol-at-point
+
+        :desc "Add new project"              "a"  #'projectile-add-known-project
         :desc "Browse project"               "b"  #'+default/browse-project
         :desc "Compile in project"           "c"  #'projectile-compile-project
+        :desc "Open project editorconfig"    "C"   #'editorconfig-find-current-editorconfig
         :desc "Configure project"            "g"  #'projectile-configure-project
         :desc "Discover projects in folder"  "d"  #'+default/discover-projects
         :desc "Edit project .dir-locals"     "e"  #'projectile-edit-dir-locals
@@ -395,8 +397,7 @@
         :desc "Run cmd in project root"      "!"  #'projectile-run-shell-command-in-root
         :desc "Run project"                  "R"  #'projectile-run-project
         :desc "Save project files"           "S"  #'projectile-save-project-buffers
-        :desc "Search project for symbol"     "." #'+default/search-project-for-symbol-at-point
-        :desc "Search project"                "s" #'+default/search-project
+        :desc "Search project"               "s"  #'+default/search-project
         :desc "Switch project"               "p"  #'projectile-switch-project
         :desc "Switch to project buffer"     "b"  #'projectile-switch-to-buffer
         :desc "Test project"                 "T"  #'projectile-test-project

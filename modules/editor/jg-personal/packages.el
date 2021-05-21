@@ -14,7 +14,6 @@
 (package! shell-pop)
 (package! swiper)
 (package! vlf)
-(package! which-key)
 (package! yasnippet)
 (package! yasnippet-snippets)
 (package! doom-snippets)

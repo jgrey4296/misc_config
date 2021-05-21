@@ -118,6 +118,11 @@ Versu, Abl, Cif
 [[https://www.wikiart.org/en/eyvind-earle][Wiki Art: Eyvind Earle ]]
 [[https://www.xeno-canto.org/][Bird Sounds Database]]
 
+[[https://cdnc.ucr.edu/][California Digital Newspaper Collection]]
+[[https://www.newspapers.com/papers/#][Newspapers.com]]
+[[https://chroniclingamerica.loc.gov/][Library of Congress Chronicling America]]
+[[https://www.britishnewspaperarchive.co.uk/search][British Newspaper Archive]]
+
 *** Universities and Academia
 [[https://blogs.cul.columbia.edu/rbml/2018/09/10/collections-news-albert-field-playing-cards-go-online/][Columbia University Library Playing Cards]]
 [[https://blogs.library.duke.edu/preservation/2019/04/26/quick-pic-choose-your-sumo-hairstyle/][Duke University Libraries: Sumo Hairstyles]]
@@ -190,13 +195,11 @@ Versu, Abl, Cif
 [[https://dasg.ac.uk/?lang=en][Digital Archive of Scottish Gaelic]]
 [[https://dischord.bandcamp.com/][Discord Records Bandcamp]]
 
-
 ** To Check out
 [[https://parl.ai/projects/light/][Parl.ai: NLP and dialogue]]
 [[http://waveform3d.com/][Waveform3d]]
 [[https://sketchfab.com/][Sketchfab]]
 [[https://en.wikipedia.org/wiki/Summa_Theologica][Summa Theologica]]
-[[https://en.wikipedia.org/wiki/Book_of_Common_Prayer][Book of Common Prayer]]
 
 ** Reminders
 978-0860206187 - The Usborne Book of Legends: Hercules, Jason, Ulysses. Claudia Zeff

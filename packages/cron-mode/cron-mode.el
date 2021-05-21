@@ -58,6 +58,6 @@
 
   )
 
-(add-to-list 'auto-mode-alist '("crontab\\..+" . acab-mode))
+(add-to-list 'auto-mode-alist '("/crontab\\..+" . cron-mode))
 
 (provide 'cron-mode)

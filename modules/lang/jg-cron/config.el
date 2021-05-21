@@ -3,4 +3,6 @@
 
 (use-package! cron-mode
   :defer t
-  :commands cron-mode)
+  :commands cron-mode
+  :mode ("/crontab\\..+" . cron-mode)
+  )

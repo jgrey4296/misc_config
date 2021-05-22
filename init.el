@@ -28,9 +28,9 @@
  netlogo
  twitter
  bibtex
+ acab-ide
 
  :editor  ;; ----- ====== -----
- ;;  ;;acab-ide
  ;;  ;;jg-states
  overlay_control
  window-control

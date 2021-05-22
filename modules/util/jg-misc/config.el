@@ -57,3 +57,7 @@
 (add-hook! doom-first-input
            #'+jg-misc-setup-popup-rules-hook
            #'+jg-misc-binding-hook)
+
+(after! flycheck-plantuml-executable
+  (setq flycheck-plantuml-executable (executable-find "plantuml"))
+  )

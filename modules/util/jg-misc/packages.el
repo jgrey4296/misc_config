@@ -1,9 +1,9 @@
 ;; (package! fci)
 (package! flycheck-plantuml)
+(package! plantuml-mode)
 (package! free-keys)
 (package! fsm)
 
-(package! plantuml-mode)
 (package! undo-tree)
 
 (package! 2048-game         :disable t)

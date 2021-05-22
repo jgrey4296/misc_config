@@ -202,4 +202,4 @@ Versu, Abl, Cif
 [[https://en.wikipedia.org/wiki/Summa_Theologica][Summa Theologica]]
 
 ** Reminders
-978-0860206187 - The Usborne Book of Legends: Hercules, Jason, Ulysses. Claudia Zeff
+https://github.com/company-mode/company-mode/wiki/Writing-backends

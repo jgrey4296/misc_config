@@ -11,6 +11,8 @@
     "M-o"                             #'hydra-ivy/body
     "<down>"                          #'ivy-scroll-down-command
     "<up>"                            #'ivy-scroll-up-command
+    :localleader
+    :desc "Results as Buffer"        "b" #'ivy-occur
     )
 
   ;;; :completion

@@ -18,7 +18,11 @@
 (map! :after python
       :map python-mode-map
       :localleader
-      (:prefix ("j" . "Jump"))
+      (:prefix ("j" . "Jump")
+       :desc "Docs: Python"        "1" #'+jg-python-browse-pydocs
+       :desc "Docs: Bibtex Parser" "2" #'+jg-python-browse-bibex-parser
+       :desc "Docs: BeautifulSoup" "3" #'+jg-python-browse-beautiful-soup
+       )
       (:prefix ("i" . "imports")
        :desc "Insert missing imports" "i" #'pyimport-insert-missing
        :desc "Remove unused imports"  "r" #'pyimport-remove-unused
@@ -37,18 +41,6 @@
        :desc "deactivate"  "d" #'pyvenv-deactivate)
       )
 
-(map! :localleader
-      :after nose
-      :map nose-mode-map
-      (:prefix ("t" . "Test")
-       "r" #'nosetests-again
-       "a" #'nosetests-all
-       "s" #'nosetests-one
-       "v" #'nosetests-module
-       "A" #'nosetests-pdb-all
-       "O" #'nosetests-pdb-one
-       "V" #'nosetests-pdb-module))
-
 (map! :after cython-mode
       :map cython-mode-map
       :localleader
@@ -60,12 +52,16 @@
         :localleader
         "g" nil
         :prefix ("j" . "Jump")
-        :desc "Conda Find Definitions" "d" #'anaconda-mode-find-definitions
-        :desc "Conda Show Doc"         "h" #'anaconda-mode-show-doc
-        :desc "Conda Find Assignments" "a" #'anaconda-mode-find-assignments
-        :desc "Conda Find File"        "f" #'anaconda-mode-find-file
-        :desc "Conda Find Refs"        "u" #'anaconda-mode-find-references)
+        :desc "Conda: Find Defs"    "d" #'anaconda-mode-find-definitions
+        :desc "Conda: Show Doc"     "h" #'anaconda-mode-show-doc
+        :desc "Conda: Find Assigns" "a" #'anaconda-mode-find-assignments
+        :desc "Conda: Find File"    "f" #'anaconda-mode-find-file
+        :desc "Conda: Find Refs"    "u" #'anaconda-mode-find-references
+        )
   )
+
+
+
 
 ;; NOTE: normal macro expansion adds :major-modes t, which doesn't work for minor modes
 ;; (map! :after anaconda-mode

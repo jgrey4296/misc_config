@@ -11,11 +11,11 @@
                 flycheck--automatically-enabled-checkers '(python-pylint)
 
                 python-prettify-symbols-alist '(("lambda" . "λ")
-                                                ("or" . "∨")
-                                                ("and" . "∧")
-                                                ("None" . "∅")
-                                                ("->" . "→")
-                                                ("self" . "𝕊")
+                                                ("or"     . "∨")
+                                                ("and"    . "∧")
+                                                ("None"   . "∅")
+                                                ("->"     . "→")
+                                                ("self"   . "𝕊")
                                                 )
 
 
@@ -30,3 +30,8 @@
 
 (after! projectile
   (pushnew! projectile-project-root-files "setup.py" "requirements.txt"))
+
+(setq jg-python-docs-url           "https://docs.python.org/3/"
+      jg-python-bibtex-parser-url  "https://bibtexparser.readthedocs.io/en/master/tutorial.html"
+      jg-python-beautiful-soup-url "https://beautiful-soup-4.readthedocs.io/en/latest/"
+)

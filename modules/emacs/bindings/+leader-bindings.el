@@ -341,10 +341,8 @@
         :desc "Rmail"                        "m" #'rmail
         :desc "External Mail"                "M" #'mu4e
 
-        :desc "Learn X in Y"                 "1" #'+jg-bindings-goto-x-in-y
-        :desc "Python Docs"                  "2" #'+jg-bindings-goto-pydocs
-        :desc "Beautiful Soup Docs"          "3" #'+jg-bindings-goto-beautiful-soup
-        :desc "Crontab Guru"                 "4" #'+jg-bindings-goto-crontab-guru
+        :desc "Learn X in Y"                 "1" #'+jg-bindings-browse-x-in-y
+
 
         (:when (featurep! :os macos)
          :desc "Reveal in Finder"           "f"    #'+macos/reveal-in-finder

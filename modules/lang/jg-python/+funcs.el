@@ -108,3 +108,17 @@ Customize python using PYTHONBREAKPOINT env variable
 (defun +python-auto-kill-hook-fn ()
     (add-hook 'kill-buffer-hook #'+python-auto-kill-anaconda-processes-h
               nil 'local))
+
+;; Jump funcs
+(defun +jg-python-browse-bibex-parser ()
+  (interactive)
+  (+jg-browse-url jg-python-bibtex-parser-url)
+  )
+(defun +jg-python-browse-pydocs ()
+  (interactive)
+  (+jg-browse-url jg-python-py-docs-url)
+  )
+(defun +jg-python-browse-beautiful-soup ()
+  (interactive)
+  (+jg-browse-url jg-python-beautiful-soup-url)
+  )

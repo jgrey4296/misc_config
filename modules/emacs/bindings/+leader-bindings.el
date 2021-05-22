@@ -343,7 +343,7 @@
 
         :desc "Learn X in Y"                 "1" (cmd! (+jg-browse-url jg-binding-x-in-y-url))
         :desc "Plant UML"                    "2" (cmd! (+jg-browse-url "http://plantuml.com"))
-
+        :desc "Over API"                     "3" (cmd! (+jg-browse-url "https://overapi.com/"))
 
         (:when (featurep! :os macos)
          :desc "Reveal in Finder"           "f"    #'+macos/reveal-in-finder
@@ -351,15 +351,15 @@
          )
 
         (:prefix ("a" . "org agenda")
-         :desc "Agenda"            "a" #'org-agenda
-         :desc "Todo list"         "t" #'org-todo-list
-         :desc "Tags search"       "m" #'org-tags-view
-         :desc "View search"       "v" #'org-search-view
-         :desc "List Agenda Files" "F" #'+jg-org-list-agenda-files
-         "/"   #'org-occur-in-agenda-files
-         "f"   #'org-agenda-file-to-front
-         "r"   #'org-remove-file
-         "l"   #'org-agenda-list
+         :desc "Agenda"                "a" #'org-agenda
+         :desc "Todo list"             "t" #'org-todo-list
+         :desc "Tags search"           "m" #'org-tags-view
+         :desc "View search"           "v" #'org-search-view
+         :desc "List Agenda Files"     "F" #'+jg-org-list-agenda-files
+         :desc "occur-in-agenda-files" "/" #'org-occur-in-agenda-files
+         :desc "agenda-file-to-front"  "f" #'org-agenda-file-to-front
+         :desc "remove-file"           "r" #'org-remove-file
+         :desc "agenda-list"           "l" #'org-agenda-list
          )
 
         (:prefix ("h" . "Helms")

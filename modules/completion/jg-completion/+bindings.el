@@ -3,16 +3,16 @@
 (defun +jg-completion-binding-hook ()
   (message "Setting up Completion bindings: %s" (current-time-string))
 
-  (define-key! ivy-minibuffer-map
-    [remap doom/delete-backward-word] #'ivy-backward-kill-word
-    "C-c RET"                         #'+ivy/woccur
-    "C-o"                             #'ivy-dispatching-done
-    "C-h"                             #'ivy-backward-kill-word
-    "M-o"                             #'hydra-ivy/body
-    "<down>"                          #'ivy-scroll-down-command
-    "<up>"                            #'ivy-scroll-up-command
-    :localleader
-    :desc "Results as Buffer"        "b" #'ivy-occur
+  (map! :map ivy-minibuffer-map
+        [remap doom/delete-backward-word] #'ivy-backward-kill-word
+        "C-c RET"                         #'+ivy/woccur
+        "C-o"                             #'ivy-dispatching-done
+        "C-h"                             #'ivy-backward-kill-word
+        "M-o"                             #'hydra-ivy/body
+        "<down>"                          #'ivy-scroll-down-command
+        "<up>"                            #'ivy-scroll-up-command
+        :localleader
+        :desc "Results as Buffer"        "b" #'ivy-occur
     )
 
   ;;; :completion

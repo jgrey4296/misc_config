@@ -26,24 +26,24 @@
   "Arguments to python to run IDE server")
 
 ;;Defaults
-(setq-default
- jg-trie-layer/inputs-buffer-name "*Rule Inputs*"
- jg-trie-layer/outputs-buffer-name "*Rule Outputs*"
- jg-trie-layer/working-group-buffer-name "*Rule Working Group*"
- jg-trie-layer/logging-buffer-name "*Rule Logs*"
- jg-trie-layer/python-process-buffer-name "*Rule IDE*"
- jg-trie-layer/working-group-buffer-headings '("Defeaters"
-                                               "Interferers"
-                                               "Alternatives"
-                                               "Equal Depth"
-                                               "Relevant Types"
-                                               "Meta"
-                                               "Layer Stats"
-                                               "Tests")
- jg-trie-layer/data-loc-subdirs '("rules"
-                                  "types"
-                                  "crosscuts"
-                                  "patterns"
-                                  "tests")
+(setq-default jg-trie-layer/inputs-buffer-name         "*Rule Inputs*"
+              jg-trie-layer/outputs-buffer-name        "*Rule Outputs*"
+              jg-trie-layer/working-group-buffer-name  "*Rule Working Group*"
+              jg-trie-layer/logging-buffer-name        "*Rule Logs*"
+              jg-trie-layer/python-process-buffer-name "*Rule IDE*"
 
- )
+              jg-trie-layer/working-group-buffer-headings '("Defeaters"
+                                                            "Interferers"
+                                                            "Alternatives"
+                                                            "Equal Depth"
+                                                            "Relevant Types"
+                                                            "Meta"
+                                                            "Layer Stats"
+                                                            "Tests")
+              jg-trie-layer/data-loc-subdirs '("rules"
+                                               "types"
+                                               "crosscuts"
+                                               "patterns"
+                                               "tests")
+
+              )

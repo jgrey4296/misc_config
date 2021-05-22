@@ -1,7 +1,17 @@
 ;;based On https://www.emacswiki.org/emacs/ModeTutorial
 ;;For allowing code to run when the mode is run:
 (require 'acab-face)
+(require 'acab-hydras)
+(require 'inst-mode)
+(require 'trie-explore-mode)
+(require 'trie-log-mode)
 (require 'trie-management)
+(require 'trie-management)
+(require 'trie-minor-mode)
+(require 'trie-mode)
+(require 'trie-passive-mode)
+(require 'trie-sequence-mode)
+(require 'trie-tree)
 
 (defgroup acab-mode '() "Acab Mode Customizations")
 ;;--------------------

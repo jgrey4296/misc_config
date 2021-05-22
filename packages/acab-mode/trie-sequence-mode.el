@@ -683,11 +683,6 @@ https://stackoverflow.com/questions/1249497 "
 
 
 ;;--------------------
-;;face definitions
-;; use them as symbols 'blah in font-lock-keywords
-;;--------------------
-
-;;--------------------
 ;;Key bindings.
 ;;use sparse-keymap if only a few bindings
 ;;--------------------

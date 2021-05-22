@@ -455,7 +455,6 @@ calculate the bounds that column falls within """
     map)
   "Basic Keymap for Trie-Explore Mode"
   )
-(add-to-list 'auto-mode-alist '("\\.seq\\'" . sequence-mode))
 
 (defconst trie-explore-font-lock-keywords
   (list

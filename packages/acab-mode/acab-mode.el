@@ -1,6 +1,6 @@
 ;;based On https://www.emacswiki.org/emacs/ModeTutorial
 ;;For allowing code to run when the mode is run:
-(require 'trie-face)
+(require 'acab-face)
 (require 'trie-management)
 
 (defgroup acab-mode '() "Acab Mode Customizations")
@@ -21,32 +21,6 @@
 (defconst acab-keywords '("assert" "retract" "end"))
 ;;generate regexp for keywords
 (defconst acab-keywords-regexp (regexp-opt acab-keywords))
-
-;;--------------------
-;;face definitions
-;; use them as symbols 'blah in font-lock-keywords
-;;--------------------
-(defface acab-rulename
-  '((t
-     :foreground "green"
-     :background "black"
-     :underline t))
-  "Face for Rule names"
-  :group 'acab-mode)
-(defface acab-ruleend
-  '((t
-     :foreground "red"
-     :background "black"
-     :underline t
-     ))
-  "Face for the end of rules"
-  :group 'acab-mode)
-(defface acab-closure
-  '((t
-     :background "blue"
-     ))
-  "Face for Enclosed sections"
-  :group 'acab-mode)
 
 ;;--------------------
 ;;Key bindings.

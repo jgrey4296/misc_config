@@ -1,7 +1,7 @@
 ;;based On https://www.emacswiki.org/emacs/ModeTutorial
 ;;For allowing code to run when the mode is run:
 (require 'dash)
-(require 'trie-face)
+(require 'acab-face)
 (require 'trie-management)
 
 (defgroup trie-mode '() "Trie Mode Customizations")
@@ -24,32 +24,6 @@
 (defconst trie-keywords-regexp (regexp-opt trie-keywords))
 
 ;;--------------------
-;;face definitions
-;; use them as symbols 'blah in font-lock-keywords
-;;--------------------
-(defface trie-rulename
-  '((t
-     :foreground "green"
-     :background "black"
-     :underline t))
-  "Face for Rule names"
-  :group 'trie-mode)
-(defface trie-ruleend
-  '((t
-     :foreground "red"
-     :background "black"
-     :underline t
-     ))
-  "Face for the end of rules"
-  :group 'trie-mode)
-(defface trie-closure
-  '((t
-     :background "blue"
-     ))
-  "Face for Enclosed sections"
-  :group 'trie-mode)
-
-;;--------------------
 ;;Key bindings.
 ;;use sparse-keymap if only a few bindings
 ;;--------------------
@@ -69,22 +43,22 @@
 (defconst trie-font-lock-keywords
   (list
    ;;Rule name
-   `("^\\([[:word:].!]+\\):$" (0 "trie-rulename"))
+   `("^\\([[:word:].!]+\\):$" (0 "acab-rulename"))
    ;;punctuation
-   `("\\." (0 ,(trie-face/trie-depth-face 1)))
-   `("!" (0 ,(trie-face/trie-depth-face 2)))
-   `("::" (0 ,(trie-face/trie-depth-face 3) t))
-   `("->\\|\\?" (0 ,(trie-face/trie-depth-face 4) t))
+   `("\\."                    (0 ,(acab-face/acab-depth-face 1)))
+   `("!"                      (0 ,(acab-face/acab-depth-face 2)))
+   `("::"                     (0 ,(acab-face/acab-depth-face 3) t))
+   `("->\\|\\?"               (0 ,(acab-face/acab-depth-face 4) t))
    ;;Variables and tags
-   `("#[[:word:]]+" (0 ,(trie-face/trie-depth-face 5)))
-   `("\\$[[:word:]]+" (0 ,(trie-face/trie-depth-face 6)))
+   `("#[[:word:]]+"           (0 ,(acab-face/acab-depth-face 5)))
+   `("\\$[[:word:]]+"         (0 ,(acab-face/acab-depth-face 6)))
    ;;functions
-   `("\\([-<>=%^*@+&~][[:word:]]*\\)" (1 ,(trie-face/trie-depth-face 7)))
+   `("\\([-<>=%^*@+&~][[:word:]]*\\)" (1 ,(acab-face/acab-depth-face 7)))
    ;;Words
-   `("[[:word:]]" (0 ,(trie-face/trie-depth-face 8)))
+   `("[[:word:]]"             (0 ,(acab-face/acab-depth-face 8)))
    ;;Closures
-   `("[][()]" (0 ,(trie-face/trie-depth-face 9)))
-   `("[([]\.+[])]" (0 "trie-closure" t))
+   `("[][()]"                 (0 ,(acab-face/acab-depth-face 9)))
+   `("[([]\.+[])]"            (0 "acab-closure" t))
    )
   "Minimal highlighting expressions for trie mode")
 
@@ -158,7 +132,7 @@
 ;;--------------------
 ;;Autoloading
 ;;--------------------
-(add-to-list 'auto-mode-alist '("\\.rule\\'" . trie-mode))
+(add-to-list 'auto-mode-alist '("\\.trie\\'" . trie-mode))
 
 
 (defun trie-syntactic-face-function (parse-state)
@@ -174,7 +148,7 @@
   (kill-all-local-variables)
   (use-local-map trie-mode-map)
   (let ((base-locks (reverse trie-font-lock-keywords))
-        (keywords (list trie-keywords-regexp 0 "trie-ruleend" t)))
+        (keywords (list trie-keywords-regexp 0 "acab-ruleend" t)))
     (push keywords base-locks)
     (set (make-local-variable 'font-lock-defaults) (list (reverse base-locks) nil))
     )

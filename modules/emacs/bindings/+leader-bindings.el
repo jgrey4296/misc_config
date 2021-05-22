@@ -342,6 +342,7 @@
         :desc "External Mail"                "M" #'mu4e
 
         :desc "Learn X in Y"                 "1" (cmd! (+jg-browse-url jg-binding-x-in-y-url))
+        :desc "Plant UML"                    "2" (cmd! (+jg-browse-url "http://plantuml.com"))
 
 
         (:when (featurep! :os macos)

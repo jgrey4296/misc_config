@@ -20,22 +20,21 @@
       evil-move-beyond-eol t
       evil-move-cursor-back nil
       evil-snipe-repeat-scope nil
+      highlight-indent-guides-suppress-auto-error t
+      ibuffer-old-time 2
       ispell-personal-dictionary (expand-file-name "~/.doom.d/setup_files/.ispell_english")
       line-move-ignore-invisible t
+      line-move-ignore-invisible t
+      outline-blank-line nil
       overflow-newline-into-fringe t
       pyvenv-default-virtual-env-name "~/anaconda3/envs/"
       tab-always-indent t
       which-key-idle-secondary-delay 0.05
       which-key-sort-order 'which-key-key-order-alpha
-      highlight-indent-guides-suppress-auto-error t
-      outline-blank-line nil
-      line-move-ignore-invisible t
-      ibuffer-old-time 2
+      whitespace-style '(face tabs spaces trailing lines space-before-tab newline indentation empty space-after-tab space-mark tab-mark newline-mark)
       )
-
 ;; Override doom's whitespace mode settings:
 (fset 'doom-highlight-non-default-indentation-h #'(lambda () nil))
-(setq whitespace-style '(face tabs spaces trailing lines space-before-tab newline indentation empty space-after-tab space-mark tab-mark newline-mark))
 
 
 

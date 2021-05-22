@@ -332,6 +332,7 @@
         :desc "Dired"                        "-" #'dired-jump
 
         :desc "Default browser"              "b" #'browse-url-of-file
+        :desc "Calc"                         "c" #'calc
 
         :desc "REPL"                         "r" #'+eval/open-repl-other-window
 

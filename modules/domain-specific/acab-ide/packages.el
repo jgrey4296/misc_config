@@ -1,5 +1,5 @@
-(package! parsec)
+(package! acab-mode :recipe (:local-repo "~/.doom.d/packages/acab-mode"))
+(package! cl-lib :built-in t)
 (package! font-lock+ :recipe (:host github :repo "emacsmirror/font-lock-plus"))
 (package! helm)
-(package! cl-lib)
-(package! acab-mode :recipe (:local-repo "~/.doom.d/packages/acab-mode"))
+(package! parsec)

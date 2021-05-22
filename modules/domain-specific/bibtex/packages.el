@@ -2,7 +2,7 @@
 ;;; domain-specific/bibtex/packages.el
 
 (package! bibtex :built-in 'prefer)
-(package! cl-lib)
+(package! cl-lib :built-in t)
 (package! dash)
 (package! evil)
 (package! helm)

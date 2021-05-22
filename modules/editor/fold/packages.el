@@ -2,9 +2,7 @@
 ;;; editor/fold/packages.el
 
 (package! hideshow :built-in t)
-
-(package! vimish-fold )
-(when (featurep! :editor evil)
-  (package! evil-vimish-fold ))
-(package! cl-lib)
+(package! cl-lib :built-in t)
 (package! origami)
+(package! vimish-fold )
+(package! evil-vimish-fold )

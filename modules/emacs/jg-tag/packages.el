@@ -5,5 +5,5 @@
 (package! tag-clean-minor-mode :recipe '(:local-repo "~/.doom.d/packages/tag-clean-minor-mode"))
 (package! tag-mode :recipe '(:local-repo "~/.doom.d/packages/tag-mode"))
 (package! hydra)
-(package! cl-lib)
+(package! cl-lib :built-in t)
 (package! ivy)

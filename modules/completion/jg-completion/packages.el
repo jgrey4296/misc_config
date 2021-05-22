@@ -5,7 +5,7 @@
 (package! ivy)
 (package! ivy-hydra)
 (package! counsel)
-(package! cl-lib)
+(package! cl-lib :built-in t)
 (package! amx )
 (package! counsel-projectile )
 (package! ivy-rich )

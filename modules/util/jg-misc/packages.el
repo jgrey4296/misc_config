@@ -4,6 +4,7 @@
 (package! free-keys)
 (package! fsm)
 (package! undo-tree)
+(package! ob-plantuml :recipe (:local-repo "~/.doom.d/packages/ob-plantuml"))
 
 (package! 2048-game       :disable t)
 (package! ace-link        :disable t)

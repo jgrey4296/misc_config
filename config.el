@@ -16,6 +16,7 @@
 (setq +doom-quit-messages nil
       backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/")))
       display-line-numbers-width 4
+      evil-collection-setup-minibuffer t
       evil-move-beyond-eol t
       evil-move-cursor-back nil
       evil-snipe-repeat-scope nil

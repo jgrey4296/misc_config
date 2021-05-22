@@ -1,11 +1,5 @@
 ;;; lang/+advice.el -*- lexical-binding: t; -*-
 ;;;
-;; TODO Environment activation
-;; wrap pyvenv activate with advice to look up from cwd
-;; for a .venv, if found, activate,
-;; else, ask for option
-
-;; pyvenv-activate
 
 (defun find-pyvenv (start)
   " Given a starting directory, look in parent dirs

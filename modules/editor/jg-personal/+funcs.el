@@ -1,10 +1,5 @@
 ;; NOTE needs to be recompiled for changes to take effect to bindings
 
-;;----------------------------------------
-(defun +jg-personal-ac-trigger ()
-  (interactive)
-  (auto-complete)
-  )
 ;;--------------------------------------------------
 (defun +jg-personal-flatten (lst)
   """ Utility to flatten a list """

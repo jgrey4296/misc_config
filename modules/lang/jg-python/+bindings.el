@@ -19,9 +19,9 @@
       :map python-mode-map
       :localleader
       (:prefix ("j" . "Jump")
-       :desc "Docs: Python"        "1" #'+jg-python-browse-pydocs
-       :desc "Docs: Bibtex Parser" "2" #'+jg-python-browse-bibex-parser
-       :desc "Docs: BeautifulSoup" "3" #'+jg-python-browse-beautiful-soup
+       :desc "Docs: Python"        "1" (cmd! (+jg-browse-url jg-python-docs-url))
+       :desc "Docs: Bibtex Parser" "2" (cmd! (+jg-browse-url jg-python-bibtex-parser-url))
+       :desc "Docs: BeautifulSoup" "3" (cmd! (+jg-browse-url jg-python-beautiful-soup-url))
        )
       (:prefix ("i" . "imports")
        :desc "Insert missing imports" "i" #'pyimport-insert-missing

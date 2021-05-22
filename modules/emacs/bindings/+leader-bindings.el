@@ -33,16 +33,16 @@
         ;; (cond ((featurep! :completion ivy)   #'ivy-resume)
         ;;       ((featurep! :completion helm)  #'helm-resume))
 
-        :desc "Desktop"   "1" #'+jg-bindings-goto-desktop
-        :desc "Github"    "2" #'+jg-bindings-goto-github
-        :desc "Mega"      "3" #'+jg-bindings-goto-mega
-        :desc "Home"      "4" #'+jg-bindings-goto-home
-        :desc "Resources" "5" #'+jg-bindings-goto-resources
-        :desc "SCRATCH"   "6" #'+jg-bindings-goto-scratch
-        :desc "Agenda"    "7" #'+jg-bindings-goto-org-agenda-file
-        :desc "Twitter"   "8" #'+jg-browse-twitter
+        :desc "Desktop"   "1" (cmd! (find-file "~/Desktop"))
+        :desc "Github"    "2" (cmd! (find-file "~/github"))
+        :desc "Mega"      "3" (cmd! (find-file "~/mega"))
+        :desc "Home"      "4" (cmd! (find-file "~"))
+        :desc "Resources" "5" (cmd! (find-file "~/github/writing/resources"))
+        :desc "SCRATCH"   "6" (cmd! (+jg-misc-ivy-open-as-popup "*scratch*"))
+        :desc "Agenda"    "7" (cmd! (find-file (car org-agenda-files)))
+        :desc "Twitter"   "8" (cmd! (+jg-browse-url jg-twitter-url))
         ;; :desc "Mail"      "9" #'mu4e
-        :desc "Messages"  "0" #'+jg-bindings-goto-messages
+        :desc "Messages"  "0" (cmd! (+jg-misc-ivy-open-as-popup "*Messages*"))
         )
 
   ;;; <leader> a -- misc
@@ -341,7 +341,7 @@
         :desc "Rmail"                        "m" #'rmail
         :desc "External Mail"                "M" #'mu4e
 
-        :desc "Learn X in Y"                 "1" #'+jg-bindings-browse-x-in-y
+        :desc "Learn X in Y"                 "1" (cmd! (+jg-browse-url jg-binding-x-in-y-url))
 
 
         (:when (featurep! :os macos)
@@ -415,7 +415,7 @@
   ;;; <leader> P -- processes
   (map! :leader
         :prefix ("P" . "Processes")
-        :desc "List-Processes" "l" #'+jg-list-processes
+        :desc "List-Processes" "l" (cmd! (list-processes))
         :desc "Helm Processes" "h" #'helm-list-emacs-process
         )
   ;;; <leader> q --- quit/restart
@@ -605,6 +605,6 @@
          :desc "Reload snippets"       "r" #'yas-reload-all
          :desc "Create Temp Template"  "c" #'aya-create
          :desc "Use Temp Template"     "e" #'aya-expand
-         :desc "Find Snippet Dir"      "d" #'+jg-bindings-find-snippets-dir
+         :desc "Find Snippet Dir"      "d" (cmd! (find-file +snippets-dir))
         )
 )

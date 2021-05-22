@@ -8,5 +8,5 @@
   (setq jg-cron-guru-url "https://crontab.guru/")
   (map! :map cron-mode-map
         :localleader
-        :desc "Crontab Guru" "1" (+jg-browse-url-cmd jg-cron-guru-url))
+        :desc "Crontab Guru" "1" (cmd! (+jg-browse-url jg-cron-guru-url)))
   )

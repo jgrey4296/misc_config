@@ -74,7 +74,7 @@ Type SPC or `y' to %s one match, DEL or `n' to skip to next,
   (interactive)
   (let ((marked-files (dired-get-marked-files)))
     (if (eq 2 (length marked-files))
-        (diff (car marked-files) (cadr marked-files))
+        (ediff (car marked-files) (cadr marked-files))
       (message "Mark only 2 files")
       )
     )

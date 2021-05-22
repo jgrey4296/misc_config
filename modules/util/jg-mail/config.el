@@ -1,6 +1,5 @@
 ;;; util/jg-mail/config.el -*- lexical-binding: t; -*-
 
-
 (load! "+bindings")
 (load! "+funcs")
 
@@ -18,17 +17,38 @@
   :hook (mu4e-main-mode . +jg-mail-override-mu4e-hook)
   )
 
-(add-hook! doom-first-input #'+jg-mail-binding-hook #'+jg-mail-rmail-binding-hook)
-
-;; Rmail binding promotion
-(add-transient-hook! #'rmail
-  (+jg-mail-rmail-binding-hook)
+(use-package! rmail
+  :commands rmail
+  :after evil
+  :config
   (evil-make-intercept-map rmail-mode-map)
-  ;; (evil-make-intercept-map rmail-mode-map 'motion)
-  ;; (push '(rmail-mode-map) evil-intercept-maps)
-)
+  (map! :map rmail-mode-map
+        "j" nil
+        "k" nil
+        "v" nil
+        "e" nil
+        "q" nil
+        "q" #'quit-window
+        "n" #'rmail-next-undeleted-message
+        "p" #'rmail-previous-undeleted-message
+        "q" #'quit-window
+        "Q" #'rmail-quit
+        "d" #'rmail-delete-forward
+        )
+  )
 
-(add-transient-hook! #'rmail-summary-mode
+(use-package! rmailsum
+  :commands rmail-summary
+  :after evil
+  :config
   (evil-make-intercept-map rmail-summary-mode-map)
-  (+jg-mail-rmail-summary-binding-hook)
+  (map! :map rmail-summary-mode-map
+        [menu-bar] nil
+        "j"  nil
+        "k"  nil
+        "d"  nil
+        "q"  #'quit-window
+        "Q"  #'rmail-summary-quit
+        "d"  #'rmail-summary-delete-forward
+        )
   )

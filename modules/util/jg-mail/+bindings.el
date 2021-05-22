@@ -1,50 +1,25 @@
 ;;; util/jg-mail/+bindings.el -*- lexical-binding: t; -*-
 
-(defun +jg-mail-binding-hook ()
-  (message "Setting up Mail bindings: %s" (current-time-string))
-  (map! :leader
-        :desc "Mail"      "9" #'mu4e
-        )
+(map! :leader
+      :desc "Mail"      "9" #'mu4e
+      )
 
+(after! mu4e
+  (evil-make-intercept-map mu4e-main-mode-map)
   (map! :map mu4e-main-mode-map
-        :desc "Jump"   :n "RET" #'mu4e~headers-jump-to-maildir
-        :desc "Compose" :n "c" #'mu4e-compose-new
-        :desc "Quit"   :n  "q" #'mu4e-quit
+        :desc "Jump"    "RET" #'mu4e~headers-jump-to-maildir
+        :desc "Compose" "c"   #'mu4e-compose-new
+        :desc "Quit"    "q"   #'mu4e-quit
+        :desc "test"    "a"   (cmd! (message "blah"))
+        "j" nil
+        "k" nil
         )
+  )
 
-
+(after! org-msg
   (map! :map org-msg-edit-mode-map
         :localleader
         "RET" #'message-send-and-exit
         "q"   #'org-msg-edit-kill-buffer
         )
-)
-
-(defun +jg-mail-rmail-binding-hook ()
-  (map! :map rmail-mode-map
-        "j" nil
-        "k" nil
-        "v" nil
-        "e" nil
-        "q" nil
-        "q" #'quit-window
-        :n "n" #'rmail-next-undeleted-message
-        :n "p" #'rmail-previous-undeleted-message
-        :n "q" #'quit-window
-        :n "Q" #'rmail-quit
-        :n "d" #'rmail-delete-forward
-        )
-)
-
-
-(defun +jg-mail-rmail-summary-binding-hook ()
-  (map! :map rmail-summary-mode-map
-        "j"  nil
-        "k"  nil
-        "q"  #'quit-window
-        "Q"  #'rmail-summary-quit
-
-        :n "q"  #'quit-window
-        :n "Q"  #'rmail-summary-quit
-        )
-)
+  )

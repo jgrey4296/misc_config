@@ -1,5 +1,6 @@
 
 (load! "+funcs")
+(load! "+ob-plantuml")
 (load! "+vars")
 (load! "+popup")
 (after! evil
@@ -60,4 +61,10 @@
 
 (after! flycheck-plantuml-executable
   (setq flycheck-plantuml-executable (executable-find "plantuml"))
+  )
+
+(after! ob-plantuml
+  (advice-add #'org-babel-execute:plantuml
+              :override #'+jg-misc-ob-plantuml-execute
+              '((depth . -100)))
   )

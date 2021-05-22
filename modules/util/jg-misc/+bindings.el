@@ -33,4 +33,4 @@
         :desc "Quit"          :n "q" #'quit-window
         )
   (evil-make-intercept-map free-keys-mode-map)
-)
+  )

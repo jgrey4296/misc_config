@@ -12,10 +12,6 @@
 (after! helm
   (load! "+helms")
   )
-(after! hydra
-  (load! "+hydra")
-  )
-
 
 (use-package! acab-mode
   :defer

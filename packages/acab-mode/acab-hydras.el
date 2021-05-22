@@ -1,4 +1,5 @@
 ;;; domain-specific/acab-ide/+hydra.el -*- lexical-binding: t; -*-
+(require 'hydra)
 
 (defhydra trie-help-hydra (:color pink)
   "
@@ -13,9 +14,7 @@
   ("q" nil :exit t)
   )
 
-
-;; TODO Make hydra
-(defhydra trie-sequence_transient ()
+(defhydra trie-sequence-transient ()
   "
    | General           ^^| Change                    ^^| Motion             ^^| Remove              ^^| Sort                         ^^|
    |-------------------^^+---------------------------^^+--------------------^^+---------------------^^+------------------------------^^|
@@ -25,20 +24,20 @@
    | [_b_] Set Right Tab | [_t_] Insert Terminal       |                    ^^|                     ^^|                              ^^|
   "
   ("q" nil :exit t)
-  ("n" trie-sequence/new-table ) ;; org create table, insert
-  ("v" trie-sequence/inspect-table) ;; create a left temp buffer that shows selected column's values (plus highlights active ones)
+  ("n" #'trie-sequence/new-table ) ;; org create table, insert
+  ("v" #'trie-sequence/inspect-table) ;; create a left temp buffer that shows selected column's values (plus highlights active ones)
   ("b" nil ) ;; create a right temp buffer that shows selected column's values (plus highlights active ones)
-  ("i" trie-sequence/insert-rule) ;; specify LHS and RHS, insert into factbase, insert into appropriate columns
-  ("r" trie-sequence/rename-column) ;; Rename the column from default
-  ("t" trie-sequence/insert-terminal) ;; Insert an Input terminal
-  ("c" trie-sequence/centre-column) ;; Centre the current column
-  ("d" trie-sequence/delete-value) ;; Delete the value at point from the table
-  ("D" trie-sequence/delete-column) ;; Delete the column from the table
+  ("i" #'trie-sequence/insert-rule) ;; specify LHS and RHS, insert into factbase, insert into appropriate columns
+  ("r" #'trie-sequence/rename-column) ;; Rename the column from default
+  ("t" #'trie-sequence/insert-terminal) ;; Insert an Input terminal
+  ("c" #'trie-sequence/centre-column) ;; Centre the current column
+  ("d" #'trie-sequence/delete-value) ;; Delete the value at point from the table
+  ("D" #'trie-sequence/delete-column) ;; Delete the column from the table
   ("m" nil ) ;; Merge the left connections and the right connections
-  ("s" trie-sequence/sort-table) ;; sort all columns alphabetically
+  ("s" #'trie-sequence/sort-table) ;; sort all columns alphabetically
   )
 
-(defhydra trie-explore_transient ()
+(defhydra trie-explore-transient ()
   "
    | General           ^^|
    |-------------------^^+

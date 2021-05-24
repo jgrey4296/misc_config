@@ -1,3 +1,5 @@
+;; -*- mode: elisp; lexical-binding: t; -*-
+
 (require 'dash)
 (require 'trie-tree)
 

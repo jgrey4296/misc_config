@@ -2,27 +2,27 @@
 ;; loaded third.
 
 ;;Utilities
-(defun jg-trie-layer/trie-ide-running-p ()
+(defun acab-ide/trie-ide-running-p ()
   " Tests whether the ide is running or not "
-  jg-trie-layer/trie-ide-is-running
+  acab-ide/trie-ide-is-running
   )
-(defun jg-trie-layer/no-op ()
+(defun acab-ide/no-op ()
   (interactive)
   )
 
 ;;Startup and Cleanup
-(defun jg-trie-layer/toggle-trie-ide ()
+(defun acab-ide/toggle-trie-ide ()
   (interactive)
-  (if (jg-trie-layer/trie-ide-running-p)
-      (jg-trie-layer/stop-trie-ide)
-    (jg-trie-layer/start-trie-ide))
+  (if (acab-ide/trie-ide-running-p)
+      (acab-ide/stop-trie-ide)
+    (acab-ide/start-trie-ide))
   )
-(defun jg-trie-layer/start-trie-ide ()
+(defun acab-ide/start-trie-ide ()
   " Start the trie ide, setting up windows, etc "
   (interactive)
   ;; Get the directory to work with
   (let ((location (read-file-name "Institution Location:"))
-        (windows (jg-trie-layer/build-ide-window-layout))
+        (windows (acab-ide/build-ide-window-layout))
         inst-name
         )
 
@@ -32,116 +32,116 @@
         (progn
           ;;get name for inst
           (setq inst-name (read-string "Institution Name: ")
-                jg-trie-layer/ide-data-loc (f-join location (format "%s-data" inst-name)))
+                acab-ide/ide-data-loc (f-join location (format "%s-data" inst-name)))
           )
       ;;else if an org chosen, load it and its data dir
       (progn
         (assert (equal (f-ext location) "org"))
         (setq inst-name (f-base location)
               location (f-parent location)
-              jg-trie-layer/ide-data-loc (f-join location (format "%s-data" inst-name))
+              acab-ide/ide-data-loc (f-join location (format "%s-data" inst-name))
               )
         ))
 
-    (setq jg-trie-layer/ide-pipeline-spec-buffer (format "%s.org" inst-name))
-    (jg-trie-layer/maybe-build-data-loc)
-    (jg-trie-layer/init-ide-buffers-contents location inst-name windows)
+    (setq acab-ide/ide-pipeline-spec-buffer (format "%s.org" inst-name))
+    (acab-ide/maybe-build-data-loc)
+    (acab-ide/init-ide-buffers-contents location inst-name windows)
     ;;Save the window configuration
-    (setq jg-trie-layer/window-configuration windows)
+    (setq acab-ide/window-configuration windows)
 
     ;;start python server
-    (jg-trie-layer/run-python-server location)
-    (jg-trie-layer/load-directory-and-pipeline jg-trie-layer/ide-data-loc)
+    (acab-ide/run-python-server location)
+    (acab-ide/load-directory-and-pipeline acab-ide/ide-data-loc)
 
     )
 
-  (setq jg-trie-layer/trie-ide-is-running t)
+  (setq acab-ide/trie-ide-is-running t)
   )
-(defun jg-trie-layer/stop-trie-ide ()
+(defun acab-ide/stop-trie-ide ()
   (interactive)
   ;;Clear windows, unload data
   (message "Shutting down Trie IDE")
-  (jg-trie-layer/dump-to-files)
+  (acab-ide/dump-to-files)
 
-  (if (and jg-trie-layer/python-process
-           (processp jg-trie-layer/python-process)
-           (process-live-p jg-trie-layer/python-process))
+  (if (and acab-ide/python-process
+           (processp acab-ide/python-process)
+           (process-live-p acab-ide/python-process))
       (progn
         (message "Closing Python Server")
-        (quit-process jg-trie-layer/python-process)
-        (kill-buffer jg-trie-layer/python-process-buffer-name)
-        (setq jg-trie-layer/python-process nil)
+        (quit-process acab-ide/python-process)
+        (kill-buffer acab-ide/python-process-buffer-name)
+        (setq acab-ide/python-process nil)
         )
     )
-  (setq jg-trie-layer/trie-ide-is-running nil)
-  (assert (not (jg-trie-layer/trie-ide-running-p)))
+  (setq acab-ide/trie-ide-is-running nil)
+  (assert (not (acab-ide/trie-ide-running-p)))
   )
 
 ;;Directory and buffer initialisation
-(defun jg-trie-layer/maybe-build-data-loc ( )
-  (if (not (f-exists? jg-trie-layer/ide-data-loc))
-      (progn (mkdir jg-trie-layer/ide-data-loc)
-             (mapc (lambda (x) (mkdir (f-join jg-trie-layer/ide-data-loc x)))
-                   jg-trie-layer/data-loc-subdirs)
+(defun acab-ide/maybe-build-data-loc ( )
+  (if (not (f-exists? acab-ide/ide-data-loc))
+      (progn (mkdir acab-ide/ide-data-loc)
+             (mapc (lambda (x) (mkdir (f-join acab-ide/ide-data-loc x)))
+                   acab-ide/data-loc-subdirs)
              )
     )
   )
-(defun jg-trie-layer/init-ide-buffers-contents (location inst-name windows)
+(defun acab-ide/init-ide-buffers-contents (location inst-name windows)
   ;;create inst stub
-  (if (not (f-exists? (f-join location jg-trie-layer/ide-pipeline-spec-buffer)))
+  (if (not (f-exists? (f-join location acab-ide/ide-pipeline-spec-buffer)))
       (progn
-        (with-current-buffer (get-buffer-create jg-trie-layer/ide-pipeline-spec-buffer)
+        (with-current-buffer (get-buffer-create acab-ide/ide-pipeline-spec-buffer)
           ;; insert default institution contents
           (trie-mode)
           (org-mode)
           (yas-expand-snippet (yas-lookup-snippet "pipeline" 'trie-mode))
-          (write-file (f-join location jg-trie-layer/ide-pipeline-spec-buffer))
+          (write-file (f-join location acab-ide/ide-pipeline-spec-buffer))
           )
         )
     )
 
 
-  (window--display-buffer (find-file (f-join location jg-trie-layer/ide-pipeline-spec-buffer)) (plist-get windows :miscL) 'window)
+  (window--display-buffer (find-file (f-join location acab-ide/ide-pipeline-spec-buffer)) (plist-get windows :miscL) 'window)
   (window--display-buffer (generate-new-buffer "rule_stub")  (plist-get windows :rule) 'window)
-  (window--display-buffer (get-buffer-create jg-trie-layer/inputs-buffer-name)  (plist-get windows :prior)'window)
-  (window--display-buffer (get-buffer-create jg-trie-layer/outputs-buffer-name)  (plist-get windows :post) 'window)
-  (window--display-buffer (get-buffer-create jg-trie-layer/logging-buffer-name)  (plist-get windows :miscR) 'window)
-  (window--display-buffer (get-buffer-create jg-trie-layer/working-group-buffer-name)  (plist-get windows :miscC) 'window)
+  (window--display-buffer (get-buffer-create acab-ide/inputs-buffer-name)  (plist-get windows :prior)'window)
+  (window--display-buffer (get-buffer-create acab-ide/outputs-buffer-name)  (plist-get windows :post) 'window)
+  (window--display-buffer (get-buffer-create acab-ide/logging-buffer-name)  (plist-get windows :miscR) 'window)
+  (window--display-buffer (get-buffer-create acab-ide/working-group-buffer-name)  (plist-get windows :miscC) 'window)
 
-  (jg-trie-layer/build-working-group-buffer)
+  (acab-ide/build-working-group-buffer)
   (with-current-buffer "rule_stub"
     (trie-mode)
     (yas-expand-snippet (yas-lookup-snippet "rule" 'trie-mode) (point-min))
     )
 
-  (with-current-buffer jg-trie-layer/inputs-buffer-name
+  (with-current-buffer acab-ide/inputs-buffer-name
     (insert "AVAILABLE INPUTS Layer 0:\n--------------------\n\n")
     )
-  (with-current-buffer jg-trie-layer/outputs-buffer-name
+  (with-current-buffer acab-ide/outputs-buffer-name
     (insert "AVAILABLE OUTPUTS Layer 1:\n--------------------\n\n")
     )
-  (with-current-buffer jg-trie-layer/logging-buffer-name
+  (with-current-buffer acab-ide/logging-buffer-name
     (insert "LOGGING:\n--------------------\n\n")
     )
   )
-(defun jg-trie-layer/build-working-group-buffer ()
-  (with-current-buffer jg-trie-layer/working-group-buffer-name
+(defun acab-ide/build-working-group-buffer ()
+  (with-current-buffer acab-ide/working-group-buffer-name
     (org-mode)
     (insert "* Working Group\n")
-    (mapc (lambda (x) (insert "** " x ":\n")) jg-trie-layer/working-group-buffer-headings)
+    (mapc (lambda (x) (insert "** " x ":\n")) acab-ide/working-group-buffer-headings)
     )
   )
 
 ;;Window setup
-(defun jg-trie-layer/reset-windows ()
+(defun acab-ide/reset-windows ()
   (interactive)
-  (if (and (jg-trie-layer/trie-ide-running-p) (window-configuration-p jg-trie-layer/window-configuration))
-      (progn (setq jg-trie-layer/window-configuration (jg-trie-layer/build-ide-window-layout))
-             (jg-trie-layer/init-ide-buffers-contents location inst-name jg-trie-layer/window-configuration)
+  (if (and (acab-ide/trie-ide-running-p) (window-configuration-p acab-ide/window-configuration))
+      (progn (setq acab-ide/window-configuration (acab-ide/build-ide-window-layout))
+             (acab-ide/init-ide-buffers-contents location inst-name acab-ide/window-configuration)
              )
     )
   )
-(cl-defun jg-trie-layer/build-ide-window-layout ()
+(cl-defun acab-ide/build-ide-window-layout ()
   """ Setup rule editing windows """
   ;; (terminals - ) priors - rule - posts (terminals)
   ;;                       defeaters
@@ -166,20 +166,20 @@
     (list :prior prior :post post :rule rule :miscL miscL :miscC miscC :miscR miscR)
     )
   )
-(defun jg-trie-layer/show-side-window (buffer &optional left)
+(defun acab-ide/show-side-window (buffer &optional left)
   (interactive)
   ;; For Terminals:
   (display-buffer-in-side-window buffer `((side . ,(if left 'left 'right))))
   )
 
-(defun jg-trie-layer/redisplay-io-window (side content)
+(defun acab-ide/redisplay-io-window (side content)
   ;;delete all content in buffer
   ;;insert content
   ;;TODO redisplay io window
   )
 
 ;;Loading and saving files
-(defun jg-trie-layer/load-directory-and-pipeline (loc)
+(defun acab-ide/load-directory-and-pipeline (loc)
   " Given a location, load into ide "
   ;;Initialise data
   (trie/init-data)
@@ -188,19 +188,19 @@
 
 
   )
-(defun jg-trie-layer/dump-to-files ()
+(defun acab-ide/dump-to-files ()
   (interactive)
   ;;Get all trie-* mode buffers, and the pipeline spec
-  ;;and write to subdirs of jg-trie-layer/ide-data-loc
+  ;;and write to subdirs of acab-ide/ide-data-loc
   (let ((buffers (buffer-list))
         (curr-buff (current-buffer))
-        (special-buffers (list jg-trie-layer/inputs-buffer-name
-                               jg-trie-layer/outputs-buffer-name
-                               jg-trie-layer/working-group-buffer-name
-                               jg-trie-layer/logging-buffer-name))
+        (special-buffers (list acab-ide/inputs-buffer-name
+                               acab-ide/outputs-buffer-name
+                               acab-ide/working-group-buffer-name
+                               acab-ide/logging-buffer-name))
         )
     (mapc (lambda (x)
-            (cond ((and (buffer-file-name x) (f-ancestor-of? jg-trie-layer/ide-data-loc (buffer-file-name x)))
+            (cond ((and (buffer-file-name x) (f-ancestor-of? acab-ide/ide-data-loc (buffer-file-name x)))
                    (progn (save-buffer)
                           (if (not (equal curr-buff x))
                               (kill-buffer x))))
@@ -211,18 +211,18 @@
   )
 
 ;;Python subprocess
-(defun jg-trie-layer/run-python-server (loc)
+(defun acab-ide/run-python-server (loc)
   "Start a subprocess of python, loading the rule engine
 ready to set the pipeline and rulesets, and to test"
   (message "Initializing Python Server")
   ;;start python process
   (setq trie/python-process (make-process :name "Rule IDE Process"
-                                          :buffer jg-trie-layer/python-process-buffer-name
-                                          :command (list jg-trie-layer/process-python-command
-                                                         jg-trie-layer/process-python-args)
+                                          :buffer acab-ide/python-process-buffer-name
+                                          :command (list acab-ide/process-python-command
+                                                         acab-ide/process-python-args)
                                           :connection-type 'pipe
-                                          :filter 'jg-trie-layer/python-filter
-                                          :sentinel 'jg-trie-layer/python-sentinel
+                                          :filter 'acab-ide/python-filter
+                                          :sentinel 'acab-ide/python-sentinel
                                           )
         )
   ;;initialize
@@ -230,18 +230,18 @@ ready to set the pipeline and rulesets, and to test"
   ;;populate emacs side data with loaded+parsed info
 
   )
-(defun jg-trie-layer/python-filter (proc x)
+(defun acab-ide/python-filter (proc x)
   ;; TODO Filter to parse and handle python responses
 
 
   )
-(defun jg-trie-layer/python-sentinel (proc x)
+(defun acab-ide/python-sentinel (proc x)
   ;; TODO Sentinel to handle python state changes
 
   )
 
 ;;Testing
-(defun jg-trie-layer/trigger-tests ()
+(defun acab-ide/trigger-tests ()
   " TODO Trigger a Bank of tests "
   (interactive)
   ;;with buffer rule logs
@@ -256,24 +256,24 @@ ready to set the pipeline and rulesets, and to test"
 
 ;;Python process functions
 
-(defun jg-trie-layer/python-server-load ()
+(defun acab-ide/python-server-load ()
   ;; TODO python server load
-)
-(defun jg-trie-layer/python-server-query ()
+  )
+(defun acab-ide/python-server-query ()
   ;; TODO python server query
-)
-(defun jg-trie-layer/python-server-inspect ()
+  )
+(defun acab-ide/python-server-inspect ()
   ;; TODO python server inspect
-)
-(defun jg-trie-layer/python-server-test ()
+  )
+(defun acab-ide/python-server-test ()
   ;; TODO python server test
-)
-(defun jg-trie-layer/python-server-quit ()
+  )
+(defun acab-ide/python-server-quit ()
   ;; TODO python server quit
-)
-(defun jg-trie-layer/python-server-replace ()
+  )
+(defun acab-ide/python-server-replace ()
   ;; TODO python server replace
-)
-(defun jg-trie-layer/python-server-report ()
+  )
+(defun acab-ide/python-server-report ()
   ;; TODO Python server report
-)
+  )

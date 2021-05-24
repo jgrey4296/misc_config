@@ -1,3 +1,4 @@
+;; -*- mode: elisp; lexical-binding: t; -*-
 ;;based On https://www.emacswiki.org/emacs/ModeTutorial
 ;;For allowing code to run when the mode is run:
 (require 'dash)

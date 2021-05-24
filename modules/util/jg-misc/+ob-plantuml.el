@@ -75,7 +75,7 @@ This function is called by `org-babel-execute-src-block'."
                       (org-babel-process-file-name in-file)
                       " > "
                       (org-babel-process-file-name out-file))))
-    (with-temp-file in-file (insert fullbody))
+    (with-temp-file in-file (insert body))
     (message "%s" cmd)
     (org-babel-eval cmd ""))
   out-file

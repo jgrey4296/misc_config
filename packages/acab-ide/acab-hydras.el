@@ -1,4 +1,5 @@
-;;; domain-specific/acab-ide/+hydra.el -*- lexical-binding: t; -*-
+;; -*- mode: elisp; lexical-binding: t; -*-
+
 (require 'hydra)
 
 (defhydra trie-help-hydra (:color pink)
@@ -45,3 +46,5 @@
   "
   ("q" nil :exit t)
   )
+
+(provide 'acab-hydras)

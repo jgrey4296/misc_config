@@ -1,3 +1,4 @@
+;; -*- mode: eisp; lexical-binding: t; -*-
 ;; Macros for generating faces programmatically for acab mode
 (require 'dash)
 (require 'cl-lib)

@@ -1,9 +1,8 @@
+;; -*- mode: elisp; lexical-binding: t; -*-
+;;
 ;;Variables:
-(defvar trie/python-process nil)
 (defvar trie/dialects '()
   "All defined sub-dsls")
-(defvar trie/cwd nil
-  "The Working directory of Trie Mode")
 (defvar trie/current-priors '()
   "Available Priors for the current rule")
 (defvar trie/current-post '()
@@ -53,8 +52,8 @@
   ;;update working ruleset
   ;;open rule files
   (let ((buf (if (get-buffer x) x (find-file x)))
-        (window (if (window-valid-p (plist-get jg-trie-layer/window-configuration :rule))
-                    (plist-get jg-trie-layer/window-configuration :rule)
+        (window (if (window-valid-p (plist-get acab-ide/window-configuration :rule))
+                    (plist-get acab-ide/window-configuration :rule)
                   (selected-window)))
         )
     (window--display-buffer buf window 'window)
@@ -69,9 +68,9 @@
   ;;update rule hashtable
   (let* ((trie-snippet-rule-name x)
          (file-string (format "%s.rule" (s-replace "." "_" x)))
-         (rule-path (f-join jg-trie-layer/ide-data-loc "rules" file-string))
-         (window (if (window-valid-p (plist-get jg-trie-layer/window-configuration :rule))
-                     (plist-get jg-trie-layer/window-configuration :rule)
+         (rule-path (f-join acab-ide/ide-data-loc "rules" file-string))
+         (window (if (window-valid-p (plist-get acab-ide/window-configuration :rule))
+                     (plist-get acab-ide/window-configuration :rule)
                    (selected-window)))
          )
 

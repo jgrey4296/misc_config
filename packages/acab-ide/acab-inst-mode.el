@@ -1,5 +1,7 @@
+;; -*- mode: elisp; lexical-binding: t; -*-
+;; TODO A high level institution authoring mode
 
-(define-derived-mode inst-mode fundamental-mode "Institution Mode"
+(define-derived-mode acab-inst-mode fundamental-mode "Institution Mode"
   "Major Mode for creating institutions"
   (interactive)
   ;;TODO Specify a working directory
@@ -8,7 +10,7 @@
 
   ;;TODO set up windows
 
-  (setq major-mode 'inst-mode)
+  (setq major-mode 'acab-inst-mode)
   (setq mode-name "INST")
   (run-mode-hooks)
   )
@@ -16,4 +18,4 @@
 
 
 
-(provide 'inst-mode)
+(provide 'acab-inst-mode)

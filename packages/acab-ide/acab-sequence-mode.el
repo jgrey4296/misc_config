@@ -1,3 +1,5 @@
+;; -*- mode: elisp; lexical-binding: t; -*-
+;;
 ;; A Custom mode adapting org-table
 (require 'cl-lib)
 (require 'dash)
@@ -10,74 +12,74 @@
 ;; Mode Variables
 ;;--------------------
 
-(defgroup trie-sequence '() "Customization group for trie-sequence")
+(defgroup acab-sequence '() "Customization group for acab-sequence")
 
-(defconst trie-sequence/left-tab "Trie-SequenceMLeft")
-(defconst trie-sequence/right-tab "Trie-SequenceMRight")
-(defcustom trie-sequence/info-tab "*Seq Info*" "Name of Sequence info buffer" :type '(string))
+(defconst acab-sequence/left-tab "Acab-SequenceMLeft")
+(defconst acab-sequence/right-tab "Acab-SequenceMRight")
+(defcustom acab-sequence/info-tab "*Seq Info*" "Name of Sequence info buffer" :type '(string))
 
-(defcustom trie-sequence/current-colour "green" "Overlay colour for current selection" :type '(color))
-(defcustom trie-sequence/input-colour "blue" "Overlay colour for input selection" :type '(color))
-(defcustom trie-sequence/output-colour "orange" "Overlay colour for output selection" :type '(color))
-(defcustom trie-sequence/rule-divider "->" "String signifying rule rhs"  :type '(string))
-(defcustom trie-sequence/overlay-max 20 "Maximum number of overlays for trie-sequence" :type '(integer))
+(defcustom acab-sequence/current-colour "green" "Overlay colour for current selection" :type '(color))
+(defcustom acab-sequence/input-colour "blue" "Overlay colour for input selection" :type '(color))
+(defcustom acab-sequence/output-colour "orange" "Overlay colour for output selection" :type '(color))
+(defcustom acab-sequence/rule-divider "->" "String signifying rule rhs"  :type '(string))
+(defcustom acab-sequence/overlay-max 20 "Maximum number of overlays for acab-sequence" :type '(integer))
 
-(defvar trie-sequence/overlays '())
-(defvar trie-sequence/free-overlays '())
-(defvar trie-sequence/inspector-overlay nil)
+(defvar acab-sequence/overlays '())
+(defvar acab-sequence/free-overlays '())
+(defvar acab-sequence/inspector-overlay nil)
 ;;--------------------
 ;; Overlays
 ;;--------------------
-(defun trie-sequence/make-overlay (beg end type)
-  (let ((overlay (if trie-sequence/free-overlays (pop trie-sequence/free-overlays) (make-overlay 1 2)))
+(defun acab-sequence/make-overlay (beg end type)
+  (let ((overlay (if acab-sequence/free-overlays (pop acab-sequence/free-overlays) (make-overlay 1 2)))
         (color "green"))
-    (if (not (-contains? trie-sequence/overlays overlay))
-        (push overlay trie-sequence/overlays))
-    (setq color (cond ((equal type :point) trie-sequence/current-colour)
-                      ((equal type :input) trie-sequence/input-colour)
-                      ((equal type :output) trie-sequence/output-colour)))
+    (if (not (-contains? acab-sequence/overlays overlay))
+        (push overlay acab-sequence/overlays))
+    (setq color (cond ((equal type :point) acab-sequence/current-colour)
+                      ((equal type :input) acab-sequence/input-colour)
+                      ((equal type :output) acab-sequence/output-colour)))
     (overlay-put overlay 'face `((foreground-color . ,color)))
     (overlay-put overlay 'font-lock-ignore t)
     (move-overlay overlay beg end)
 
     ))
-(defun trie-sequence/clear-overlays ()
-  (loop for x in trie-sequence/overlays do
-        (push x trie-sequence/free-overlays)
+(defun acab-sequence/clear-overlays ()
+  (loop for x in acab-sequence/overlays do
+        (push x acab-sequence/free-overlays)
         (delete-overlay x)
         )
-  (setq-local trie-sequence/overlays '())
+  (setq-local acab-sequence/overlays '())
   )
-(defun trie-sequence/set-overlays-for-current ()
+(defun acab-sequence/set-overlays-for-current ()
   " Set overlays for the currently selected cell "
   (let* ((row (org-table-current-line))
          (col (org-table-current-column))
          (value (substring-no-properties (org-table-get row col)))
-         (value-hash (trie-sequence/get-table-prop :trie-sequence/value-hashmap))
+         (value-hash (acab-sequence/get-table-prop :acab-sequence/value-hashmap))
          (value-obj (gethash value value-hash))
          ;; Get the inputs and outputs
-         (inputs (trie-sequence/get value-obj :inputs))
-         (outputs (trie-sequence/get value-obj :outputs))
-         (wind (get-buffer-window trie-sequence/info-tab))
+         (inputs (acab-sequence/get value-obj :inputs))
+         (outputs (acab-sequence/get value-obj :outputs))
+         (wind (get-buffer-window acab-sequence/info-tab))
          )
 
     ;;Dealing with side window:
     (if wind
-        (with-current-buffer trie-sequence/info-tab
+        (with-current-buffer acab-sequence/info-tab
           (goto-char (point-min))
           (search-forward-regexp (format "^*** %s" value) nil t)
-          (if (not (overlayp trie-sequence/inspector-overlay))
-              (progn (setq trie-sequence/inspector-overlay (make-overlay 1 2))
-                     (overlay-put trie-sequence/inspector-overlay 'face '((foreground-color . "green")))))
-          (move-overlay trie-sequence/inspector-overlay
+          (if (not (overlayp acab-sequence/inspector-overlay))
+              (progn (setq acab-sequence/inspector-overlay (make-overlay 1 2))
+                     (overlay-put acab-sequence/inspector-overlay 'face '((foreground-color . "green")))))
+          (move-overlay acab-sequence/inspector-overlay
                         (line-beginning-position)
                         (point)
-                        (get-buffer trie-sequence/info-tab))))
+                        (get-buffer acab-sequence/info-tab))))
     ;;Main window:
     (save-excursion
       (goto-char (org-table-begin))
       (search-forward value)
-      (trie-sequence/make-overlay
+      (acab-sequence/make-overlay
        (progn (skip-chars-backward "^|") (point))
        (progn (skip-chars-forward "^|") (point))
        :point)
@@ -85,14 +87,14 @@
       ;;Overlay on inputs
       (loop for x in inputs do
             (goto-char (org-table-begin))
-            (if (trie-sequence/is-terminal-p x)
+            (if (acab-sequence/is-terminal-p x)
                 (progn (search-forward x)
-                       (trie-sequence/make-overlay
+                       (acab-sequence/make-overlay
                         (progn (skip-chars-backward "^|") (point))
                         (progn (skip-chars-forward "^|") (point))
                         :input)))
             (search-forward x)
-            (trie-sequence/make-overlay
+            (acab-sequence/make-overlay
              (progn (skip-chars-backward "^|") (point))
              (progn (skip-chars-forward "^|") (point))
              :input))
@@ -100,14 +102,14 @@
       ;;Overlay on outputs
       (loop for x in outputs do
             (goto-char (org-table-begin))
-            (if (trie-sequence/is-terminal-p x)
+            (if (acab-sequence/is-terminal-p x)
                 (progn (search-forward x)
-                       (trie-sequence/make-overlay
+                       (acab-sequence/make-overlay
                         (progn (skip-chars-backward "^|") (point))
                         (progn (skip-chars-forward "^|") (point))
                         :output)))
             (search-forward x)
-            (trie-sequence/make-overlay
+            (acab-sequence/make-overlay
              (progn (skip-chars-backward "^|") (point))
              (progn (skip-chars-forward "^|") (point))
              :output))
@@ -120,7 +122,7 @@
 ;;--------------------
 ;;Motion
 ;;--------------------
-(defun trie-sequence/user-inc-column (count)
+(defun acab-sequence/user-inc-column (count)
   " Increment the user point by a column,
     Updating the highlights as well "
   (interactive "P")
@@ -143,14 +145,14 @@
                    (move-to-column curr-col))
           )
         ;;Deal with overlays
-        (trie-sequence/clear-overlays)
-        (trie-sequence/set-overlays-for-current)
+        (acab-sequence/clear-overlays)
+        (acab-sequence/set-overlays-for-current)
         )
     ;;No
-    (progn (trie-sequence/clear-overlays)
+    (progn (acab-sequence/clear-overlays)
            (evil-forward-char (prefix-numeric-value count))))
   )
-(defun trie-sequence/user-dec-column (count)
+(defun acab-sequence/user-dec-column (count)
   "Decrement the user point by a column "
   (interactive "P")
   (if (org-at-table-p)
@@ -171,15 +173,15 @@
                    (move-to-column curr-col))
           )
         ;;Deal with overlays
-        (trie-sequence/clear-overlays)
-        (trie-sequence/set-overlays-for-current)
+        (acab-sequence/clear-overlays)
+        (acab-sequence/set-overlays-for-current)
         )
     ;;No
-    (progn (trie-sequence/clear-overlays)
+    (progn (acab-sequence/clear-overlays)
            (evil-backward-char (prefix-numeric-value count))))
   )
 
-(defun trie-sequence/user-dec-line (count)
+(defun acab-sequence/user-dec-line (count)
   "decrement the user point by a line "
   (interactive "P")
   (if (org-at-table-p)
@@ -188,14 +190,14 @@
                    (col (org-table-current-column)))
                (org-table-goto-line (- row (if count (prefix-numeric-value count) 1)))
                (org-table-goto-column col))
-             (trie-sequence/clear-overlays)
-             (trie-sequence/set-overlays-for-current)
+             (acab-sequence/clear-overlays)
+             (acab-sequence/set-overlays-for-current)
              )
     ;;No
-    (progn (trie-sequence/clear-overlays)
+    (progn (acab-sequence/clear-overlays)
            (evil-previous-line (prefix-numeric-value count))))
   )
-(defun trie-sequence/user-inc-line (count)
+(defun acab-sequence/user-inc-line (count)
   "increment the user point by a line "
   (interactive "P")
   (if (org-at-table-p)
@@ -204,20 +206,20 @@
                    (col (org-table-current-column)))
                (org-table-goto-line (+ row (if count (prefix-numeric-value count) 1)))
                (org-table-goto-column col))
-             (trie-sequence/clear-overlays)
-             (trie-sequence/set-overlays-for-current)
+             (acab-sequence/clear-overlays)
+             (acab-sequence/set-overlays-for-current)
              )
     ;;No
-    (progn (trie-sequence/clear-overlays)
+    (progn (acab-sequence/clear-overlays)
            (evil-next-line (prefix-numeric-value count))))
   )
 
-(defun trie-sequence/centre-column ()
+(defun acab-sequence/centre-column ()
   " Centre the current column in the window "
   (interactive)
-  (trie-sequence/horizontal-recenter)
+  (acab-sequence/horizontal-recenter)
   )
-(defun trie-sequence/horizontal-recenter ()
+(defun acab-sequence/horizontal-recenter ()
   " Force horizontal recenter, based on:
 https://stackoverflow.com/questions/1249497 "
   (let ((mid (/ (window-width) 2))
@@ -227,14 +229,14 @@ https://stackoverflow.com/questions/1249497 "
         (set-window-hscroll (selected-window)
                             (- cur mid)))))
 
-(defun trie-sequence/goto-position (row col)
+(defun acab-sequence/goto-position (row col)
   " In a table, go to the Column, Row specified """
   (interactive "N\nN")
   ;; Row first, then column, as goto-line resets column otherwise
   (org-table-goto-line row)
   (org-table-goto-column col))
 
-(defun trie-sequence/scroll ()
+(defun acab-sequence/scroll ()
   " Scroll Left or right "
   ;; get direction
 
@@ -249,134 +251,134 @@ https://stackoverflow.com/questions/1249497 "
 ;;--------------------
 ;; Utilities
 ;;--------------------
-(defun trie-sequence/get-table-prop (sym)
+(defun acab-sequence/get-table-prop (sym)
   " Get a property from the current table "
   (get-text-property (org-table-begin) sym))
-(defun trie-sequence/push-table-prop (sym val)
+(defun acab-sequence/push-table-prop (sym val)
   "Push a value to a list property of the current table"
   (let ((lst (get-text-property (org-table-begin) sym)))
     (push val lst)
     (put-text-property (org-table-begin) (org-table-end) sym lst)))
 
-(defun trie-sequence/is-terminal-p (str)
-  (-contains? (trie-sequence/get-table-prop :trie-sequence/terminals) str))
+(defun acab-sequence/is-terminal-p (str)
+  (-contains? (acab-sequence/get-table-prop :acab-sequence/terminals) str))
 
-(defun trie-sequence/inputless ()
-  (let* ((value-map (trie-sequence/get-table-prop :trie-sequence/value-hashmap)))
-    (-non-nil (mapcar (lambda (x) (if (trie-sequence/get x :inputs)
-                                      (trie-sequence/get x :name)))
+(defun acab-sequence/inputless ()
+  (let* ((value-map (acab-sequence/get-table-prop :acab-sequence/value-hashmap)))
+    (-non-nil (mapcar (lambda (x) (if (acab-sequence/get x :inputs)
+                                      (acab-sequence/get x :name)))
                       (hash-table-values value-map)))))
-(defun trie-sequence/outputless ()
-  (let* ((value-map (trie-sequence/get-table-prop :trie-sequence/value-hashmap)))
-    (-non-nil (mapcar (lambda (x) (if (trie-sequence/get x :outputs)
-                                      (trie-sequence/get x :name)))
+(defun acab-sequence/outputless ()
+  (let* ((value-map (acab-sequence/get-table-prop :acab-sequence/value-hashmap)))
+    (-non-nil (mapcar (lambda (x) (if (acab-sequence/get x :outputs)
+                                      (acab-sequence/get x :name)))
                       (hash-table-values value-map)))))
 
-(defun trie-sequence/analyze-table ()
+(defun acab-sequence/analyze-table ()
   " Update analytics on the table "
   (message "Analyzing table")
   (org-table-analyze)
   ;; create column sets
-  (let* ((depth-hash (trie-sequence/get-table-prop :trie-sequence/depth-hashmap))
+  (let* ((depth-hash (acab-sequence/get-table-prop :acab-sequence/depth-hashmap))
          (dh_max (if (hash-table-empty-p depth-hash) 0 (-max (hash-table-values depth-hash))))
          (true-max (max 3 (+ 1 dh_max))))
-    (put-text-property (org-table-begin) (org-table-end) :trie-sequence/max-depth true-max))
-  (let ((depth-map (trie-sequence/get-table-prop :trie-sequence/depth-hashmap))
-        (depth-sets (make-vector (trie-sequence/get-table-prop :trie-sequence/max-depth) '())))
+    (put-text-property (org-table-begin) (org-table-end) :acab-sequence/max-depth true-max))
+  (let ((depth-map (acab-sequence/get-table-prop :acab-sequence/depth-hashmap))
+        (depth-sets (make-vector (acab-sequence/get-table-prop :acab-sequence/max-depth) '())))
     (maphash (lambda (k v) (aset depth-sets (- v 1) (cons k (aref depth-sets (- v 1))))) depth-map)
-    (put-text-property (org-table-begin) (org-table-end) :trie-sequence/depth-sets depth-sets)
+    (put-text-property (org-table-begin) (org-table-end) :acab-sequence/depth-sets depth-sets)
     ))
 
-(defun trie-sequence/insert-string (str inputs outputs &optional terminal)
+(defun acab-sequence/insert-string (str inputs outputs &optional terminal)
   " Insert a possibly new exclusion string into the value-hashmap, updating IOs"
   (message "Inserting string")
-  (let* ((value-hashmap (trie-sequence/get-table-prop :trie-sequence/value-hashmap))
-         (depth-hashmap (trie-sequence/get-table-prop :trie-sequence/depth-hashmap))
+  (let* ((value-hashmap (acab-sequence/get-table-prop :acab-sequence/value-hashmap))
+         (depth-hashmap (acab-sequence/get-table-prop :acab-sequence/depth-hashmap))
          (current (gethash str value-hashmap `((:name . ,str)
                                                (:inputs . nil )
                                                (:outputs . nil))))
-         (updated (trie-sequence/update-IO current inputs outputs)))
+         (updated (acab-sequence/update-IO current inputs outputs)))
     (puthash str updated value-hashmap)
     ;;Handle graph ordering:
-    (cond ((trie-sequence/is-terminal-p str) nil) ;;already a terminal
+    (cond ((acab-sequence/is-terminal-p str) nil) ;;already a terminal
           ;;New terminal
-          (terminal (progn (trie-sequence/push-table-prop :trie-sequence/terminals str)
+          (terminal (progn (acab-sequence/push-table-prop :acab-sequence/terminals str)
                            (puthash str 1 depth-hashmap)))
           ;; not a terminal, so calc depth
-          (t (let ((min-max (trie-sequence/get-depth-range str)))
+          (t (let ((min-max (acab-sequence/get-depth-range str)))
                (message "Min-Max: %s" min-max)
                ;; if no conflict, set depth
                (if (>= (- (cdr min-max) (car min-max)) 2)
                    (puthash str (+ 1 (car min-max)) depth-hashmap)
                  ;; if conflicts, need to shuffle a side,
                  ;; and insert a new column
-                 (trie-sequence/kahnsort)
+                 (acab-sequence/kahnsort)
                  )
                )))))
-(defun trie-sequence/remove-string (str)
+(defun acab-sequence/remove-string (str)
   " Force a string to be completely removed "
-  (let* ((value-hash (trie-sequence/get-table-prop :trie-sequence/value-hashmap))
-         (depth-hash (trie-sequence/get-table-prop :trie-sequence/depth-hashmap))
-         (terminals (trie-sequence/get-table-prop :trie-sequence/terminals))
+  (let* ((value-hash (acab-sequence/get-table-prop :acab-sequence/value-hashmap))
+         (depth-hash (acab-sequence/get-table-prop :acab-sequence/depth-hashmap))
+         (terminals (acab-sequence/get-table-prop :acab-sequence/terminals))
          (updated-terminals (remove str terminals))
          )
     (message "Removing %s from %s" str terminals)
     (message "Terminals: %s" updated-terminals)
     (remhash str value-hash)
     (remhash str depth-hash)
-    (put-text-property (org-table-begin) (org-table-end) :trie-sequence/terminals updated-terminals)
+    (put-text-property (org-table-begin) (org-table-end) :acab-sequence/terminals updated-terminals)
     ))
 
-(defun trie-sequence/get (obj sym)
+(defun acab-sequence/get (obj sym)
   "Get the inputs from an object"
   (cdr (assoc sym obj)))
-(defun trie-sequence/del (obj syms)
+(defun acab-sequence/del (obj syms)
   "Delete a value from an alist"
   (cond ((not syms) obj)
         ((equal 'symbol (type-of syms))
          (delq (assoc syms obj) obj))
         ((equal 'cons (type-of syms))
-         (trie-sequence/del (delq (assoc (car syms) obj) obj) (cdr syms)))))
+         (acab-sequence/del (delq (assoc (car syms) obj) obj) (cdr syms)))))
 
-(defun trie-sequence/update-IO (obj &optional i o)
+(defun acab-sequence/update-IO (obj &optional i o)
   " Given an object from the value-hashmap, increment its count "
-  (let* ((inputs (trie-sequence/get obj :inputs))
-         (outputs (trie-sequence/get obj :outputs))
-         (rest (trie-sequence/del obj '(:inputs :outputs))))
+  (let* ((inputs (acab-sequence/get obj :inputs))
+         (outputs (acab-sequence/get obj :outputs))
+         (rest (acab-sequence/del obj '(:inputs :outputs))))
     (push `(:inputs . ,(union i inputs)) rest)
     (push `(:outputs . ,(union o outputs)) rest)
     rest))
 
-(defun trie-sequence/get-depth-range (str)
+(defun acab-sequence/get-depth-range (str)
   "Get the (non-inclusive) range of depths available for a value"
   (message "Get Depth Range")
-  (if (trie-sequence/is-terminal-p str)
+  (if (acab-sequence/is-terminal-p str)
       '(1 . 1)
-    (let* ((depth-hash (trie-sequence/get-table-prop :trie-sequence/depth-hashmap))
-           (value-hash (trie-sequence/get-table-prop :trie-sequence/value-hashmap))
+    (let* ((depth-hash (acab-sequence/get-table-prop :acab-sequence/depth-hashmap))
+           (value-hash (acab-sequence/get-table-prop :acab-sequence/value-hashmap))
            (obj (gethash str value-hash))
            (lookup-f (lambda (xs default)
                        (if xs
-                           (mapcar (lambda (x) (if (trie-sequence/is-terminal-p x) default (gethash x depth-hash default))) xs)
+                           (mapcar (lambda (x) (if (acab-sequence/is-terminal-p x) default (gethash x depth-hash default))) xs)
                          `(,default)))))
       (if obj
           ;; exists, so get range
-          (let ((max-input (-max (apply lookup-f `(,(trie-sequence/get obj :inputs) 1))))
-                (min-output (-min (apply lookup-f `(,(trie-sequence/get obj :outputs) 100)))))
+          (let ((max-input (-max (apply lookup-f `(,(acab-sequence/get obj :inputs) 1))))
+                (min-output (-min (apply lookup-f `(,(acab-sequence/get obj :outputs) 100)))))
             `(,max-input . ,min-output))
         ;; doesn't exist, so default range:
         `(1 . 100)))))
-(defun trie-sequence/kahnsort ()
+(defun acab-sequence/kahnsort ()
   " Run Kahnsort on the graph to determine depths "
-  (let* ((value-hash (trie-sequence/get-table-prop :trie-sequence/value-hashmap))
-         (terminals (trie-sequence/get-table-prop :trie-sequence/terminals))
-         (inputless (trie-sequence/inputless))
+  (let* ((value-hash (acab-sequence/get-table-prop :acab-sequence/value-hashmap))
+         (terminals (acab-sequence/get-table-prop :acab-sequence/terminals))
+         (inputless (acab-sequence/inputless))
          (result (kahnsort value-hash (union terminals inputless) terminals))
          ;; having sorted, get components of result:
          (sorted (car result))
          (active (cadr result))
          (undiscovered (caddr result))
-         (max_depth (max (trie-sequence/get-table-prop :trie-sequence/max-depth) (-max (mapcar (lambda (x) (cdr x)) sorted)))))
+         (max_depth (max (acab-sequence/get-table-prop :acab-sequence/max-depth) (-max (mapcar (lambda (x) (cdr x)) sorted)))))
     ;; add / remove columns as necessary
     ;; update columns
     ;; (debug)
@@ -385,7 +387,7 @@ https://stackoverflow.com/questions/1249497 "
 ;;--------------------
 ;;Drawing
 ;;--------------------
-(defun trie-sequence/update-column (col vals)
+(defun acab-sequence/update-column (col vals)
   " Given a column and a list of values, set that column "
   ;;goto start column, row 1
   (save-excursion
@@ -415,12 +417,12 @@ https://stackoverflow.com/questions/1249497 "
                (forward-line)
                )))
     (org-table-align)))
-(defun trie-sequence/redraw-entire-table ()
+(defun acab-sequence/redraw-entire-table ()
   " Redraw the entire table"
   (message "Redrawing")
   (let ((cols org-table-current-ncol)
-        (needed (trie-sequence/get-table-prop :trie-sequence/max-depth))
-        (depth-sets (trie-sequence/get-table-prop :trie-sequence/depth-sets))
+        (needed (acab-sequence/get-table-prop :acab-sequence/max-depth))
+        (depth-sets (acab-sequence/get-table-prop :acab-sequence/depth-sets))
         (count 0))
     ;; Add more columns
     (while (< cols needed)
@@ -432,24 +434,24 @@ https://stackoverflow.com/questions/1249497 "
       (message "Updating column: %s" count)
       (if (and (< 1 count) (< count cols))
           (org-table-put 1 count (format "Depth: %s" count)))
-      (trie-sequence/update-column (+ count 1) (aref depth-sets count))
+      (acab-sequence/update-column (+ count 1) (aref depth-sets count))
       (cl-incf count))
-    (trie-sequence/update-column cols (aref depth-sets 0))
+    (acab-sequence/update-column cols (aref depth-sets 0))
     ))
-(defun trie-sequence/redraw-inspector ()
+(defun acab-sequence/redraw-inspector ()
   (let ((action '(display-buffer-in-side-window (side . left)))
-        (value-hash (trie-sequence/get-table-prop :trie-sequence/value-hashmap))
-        (depth-hash (trie-sequence/get-table-prop :trie-sequence/depth-hashmap))
-        (terminals (seq-copy (trie-sequence/get-table-prop :trie-sequence/terminals)))
+        (value-hash (acab-sequence/get-table-prop :acab-sequence/value-hashmap))
+        (depth-hash (acab-sequence/get-table-prop :acab-sequence/depth-hashmap))
+        (terminals (seq-copy (acab-sequence/get-table-prop :acab-sequence/terminals)))
         )
-    (with-temp-buffer-window trie-sequence/info-tab action nil
+    (with-temp-buffer-window acab-sequence/info-tab action nil
                              (princ "* Sequence Information\n")
                              (if (hash-table-p value-hash)
                                  (progn
                                    (princ "** Values: \n")
                                    (mapc (lambda (k) (princ (format "*** %s :\n\tInputs: %s\n\tOutputs: %s\n\n" k
-                                                                    (trie-sequence/get (gethash k value-hash) :inputs)
-                                                                    (trie-sequence/get (gethash k value-hash) :outputs))))
+                                                                    (acab-sequence/get (gethash k value-hash) :inputs)
+                                                                    (acab-sequence/get (gethash k value-hash) :outputs))))
                                          (sort (hash-table-keys value-hash) (lambda (x y) (string-lessp (downcase x) (downcase y)))))))
                              (if (hash-table-p depth-hash)
                                  (progn
@@ -461,24 +463,24 @@ https://stackoverflow.com/questions/1249497 "
                                    (princ "\n** Terminals: \n")
                                    (mapc (lambda (k) (princ (format "   %s\n" k))) (sort terminals (lambda (x y) (string-lessp (downcase x) (downcase y)))))))
                              )
-    (with-current-buffer trie-sequence/info-tab
+    (with-current-buffer acab-sequence/info-tab
       (org-mode)
       (org-show-all)
       )
     ))
-(defun trie-sequence/inspect-table ()
+(defun acab-sequence/inspect-table ()
   " Open the right tab buffer, displaying details of the selected field "
   ;; create a tab that updates with details
   ;; on current field
   (interactive)
-  (let ((wind (get-buffer-window trie-sequence/info-tab)))
+  (let ((wind (get-buffer-window acab-sequence/info-tab)))
     (if wind
         ;; if exists, lose it
         (delete-window wind)
       ;;otherwise create it
-      (trie-sequence/redraw-inspector))))
+      (acab-sequence/redraw-inspector))))
 
-(defun trie-sequence/highlight ()
+(defun acab-sequence/highlight ()
   ;; choose colour for inputs / outputs
 
   ;; get inputs
@@ -493,15 +495,15 @@ https://stackoverflow.com/questions/1249497 "
 ;;--------------------
 ;;Table Operations
 ;;--------------------
-(defun trie-sequence/new-table ()
+(defun acab-sequence/new-table ()
   " Create a new table, after having moved to empty space "
   (interactive)
   (if (org-at-table-p)
       (progn (goto-char (org-table-end))
              (insert "\n")))
   ;; add default table
-  (let ((input (propertize " Input Terminals " :trie-sequence/terminal t))
-        (output (propertize " Output Terminals " :trie-sequence/terminal t)))
+  (let ((input (propertize " Input Terminals " :acab-sequence/terminal t))
+        (output (propertize " Output Terminals " :acab-sequence/terminal t)))
     (insert "\n")
     (beginning-of-line)
     (insert (format "    |%s| Non-Terminals |%s|\n" input output))
@@ -511,15 +513,15 @@ https://stackoverflow.com/questions/1249497 "
   ;; move point to start of table
   (forward-line -1)
   (goto-char (org-table-begin))
-  (trie-sequence/goto-position 2 2)
+  (acab-sequence/goto-position 2 2)
 
-  (put-text-property (org-table-begin) (org-table-end) :trie-sequence/terminals '())
-  (put-text-property (org-table-begin) (org-table-end) :trie-sequence/depth-hashmap (make-hash-table :test 'equal))
-  (put-text-property (org-table-begin) (org-table-end) :trie-sequence/max-depth 3)
-  (put-text-property (org-table-begin) (org-table-end) :trie-sequence/value-hashmap (make-hash-table :test 'equal))
-  (put-text-property (org-table-begin) (org-table-end) :trie-sequence/depth-sets '())
+  (put-text-property (org-table-begin) (org-table-end) :acab-sequence/terminals '())
+  (put-text-property (org-table-begin) (org-table-end) :acab-sequence/depth-hashmap (make-hash-table :test 'equal))
+  (put-text-property (org-table-begin) (org-table-end) :acab-sequence/max-depth 3)
+  (put-text-property (org-table-begin) (org-table-end) :acab-sequence/value-hashmap (make-hash-table :test 'equal))
+  (put-text-property (org-table-begin) (org-table-end) :acab-sequence/depth-sets '())
   )
-(defun trie-sequence/insert-rule (input)
+(defun acab-sequence/insert-rule (input)
   " Insert an LHS, RHS and optional rule name into the graph "
   (interactive "M")
   (message "Inserting rule")
@@ -531,43 +533,43 @@ https://stackoverflow.com/questions/1249497 "
         (rhs '()))
     (while parts
       (let ((curr (pop parts)))
-        (cond ((equal curr trie-sequence/rule-divider) (setq on_lhs nil))
+        (cond ((equal curr acab-sequence/rule-divider) (setq on_lhs nil))
               (on_lhs (push curr lhs))
               ('t (push curr rhs)))))
 
     ;; have got lhs and rhs, add them
     (loop for x in lhs do
-          (trie-sequence/insert-string x nil rhs))
+          (acab-sequence/insert-string x nil rhs))
     (loop for x in rhs do
-          (trie-sequence/insert-string x lhs nil))
-    (trie-sequence/analyze-table)
+          (acab-sequence/insert-string x lhs nil))
+    (acab-sequence/analyze-table)
     ;; update table
-    (trie-sequence/redraw-entire-table)
+    (acab-sequence/redraw-entire-table)
     ;; (goto-char (org-table-begin))
-    (trie-sequence/goto-position row col)
-    (if (get-buffer-window trie-sequence/info-tab)
-        (trie-sequence/redraw-inspector))
+    (acab-sequence/goto-position row col)
+    (if (get-buffer-window acab-sequence/info-tab)
+        (acab-sequence/redraw-inspector))
     ))
-(defun trie-sequence/insert-terminal (term)
+(defun acab-sequence/insert-terminal (term)
   " Insert a terminal value into the graph "
   ;; get value
   (interactive "M")
   (let ((row (org-table-current-line))
         (col (org-table-current-column)))
     ;; insert into data
-    (trie-sequence/insert-string term '() '() t)
+    (acab-sequence/insert-string term '() '() t)
     ;; insert into table
-    (trie-sequence/analyze-table)
-    (trie-sequence/update-column 1 (trie-sequence/get-table-prop :trie-sequence/terminals))
-    (trie-sequence/update-column org-table-current-ncol (trie-sequence/get-table-prop :trie-sequence/terminals))
+    (acab-sequence/analyze-table)
+    (acab-sequence/update-column 1 (acab-sequence/get-table-prop :acab-sequence/terminals))
+    (acab-sequence/update-column org-table-current-ncol (acab-sequence/get-table-prop :acab-sequence/terminals))
     ;; (goto-char (org-table-begin))
-    (trie-sequence/goto-position row col)
-    (if (get-buffer-window trie-sequence/info-tab)
-        (trie-sequence/redraw-inspector))
+    (acab-sequence/goto-position row col)
+    (if (get-buffer-window acab-sequence/info-tab)
+        (acab-sequence/redraw-inspector))
     )
   )
 
-(defun trie-sequence/delete-value (&optional deleting-column)
+(defun acab-sequence/delete-value (&optional deleting-column)
   " Delete a field from the graph and table "
   (interactive)
   (let* ((curr-line (org-table-current-line))
@@ -576,33 +578,33 @@ https://stackoverflow.com/questions/1249497 "
          )
     ;; remove it from the graph
     ;;TODO: remove from inputs and outputs
-    (trie-sequence/remove-string curr-value)
+    (acab-sequence/remove-string curr-value)
 
     ;; update table
     (org-table-put curr-line curr-col "" t)
-    (trie-sequence/goto-position curr-line curr-col)
-    (if (and (not deleting-column) (get-buffer-window trie-sequence/info-tab))
-        (trie-sequence/redraw-inspector)
+    (acab-sequence/goto-position curr-line curr-col)
+    (if (and (not deleting-column) (get-buffer-window acab-sequence/info-tab))
+        (acab-sequence/redraw-inspector)
         )
     )
   )
-(defun trie-sequence/delete-column ()
+(defun acab-sequence/delete-column ()
   " Delete the current column "
   (interactive)
   (let ((curr-column (org-table-current-column)))
     (org-table-goto-line 2)
     (org-table-goto-column curr-column)
     (while (org-at-table-p)
-      (trie-sequence/delete-value t)
+      (acab-sequence/delete-value t)
       (forward-line)
       (org-table-goto-column curr-column))
     (forward-line -1)
-    (trie-sequence/goto-position 2 curr-column)
-    (trie-sequence/redraw-inspector)
+    (acab-sequence/goto-position 2 curr-column)
+    (acab-sequence/redraw-inspector)
     )
   )
 
-(defun trie-sequence/rename-column ()
+(defun acab-sequence/rename-column ()
   " Rename the current column. Persistently across columm additions and removals "
   (interactive)
   ;; get column data row 1
@@ -610,20 +612,20 @@ https://stackoverflow.com/questions/1249497 "
       (let* ((curr-table-row (org-table-current-line))
              (curr-table-col (org-table-current-column))
              (curr-name (org-table-get 1 curr-table-col))
-             (is-terminal (get-text-property 0 :trie-sequence/terminal curr-name))
+             (is-terminal (get-text-property 0 :acab-sequence/terminal curr-name))
              new-name
              )
         (if (not (or (string-empty-p curr-name) is-terminal))
-            (progn (trie-sequence/goto-position 1 curr-table-col)
+            (progn (acab-sequence/goto-position 1 curr-table-col)
                    (setq new-name (read-string "New Column Name: "))
                    (org-table-put 1 curr-table-col new-name t)
-                   (trie-sequence/goto-position curr-table-row curr-table-col)
+                   (acab-sequence/goto-position curr-table-row curr-table-col)
                    )
           )
         )
     )
   )
-(defun trie-sequence/merge-column ()
+(defun acab-sequence/merge-column ()
   " Merge the left and right connections of a column, removing the middle "
   ;;get current column
 
@@ -636,38 +638,38 @@ https://stackoverflow.com/questions/1249497 "
   ;; update table
 
   )
-(defun trie-sequence/sort-table ()
+(defun acab-sequence/sort-table ()
   " Sort each column of the table alphabetically or by usage count "
   (interactive)
   (let ((max-column org-table-current-ncol)
         (curr-table-column (org-table-current-column))
         (curr-table-line (org-table-current-line))
         (curr-col 1)
-        (column-values (trie-sequence/get-table-prop :trie-sequence/depth-sets))
+        (column-values (acab-sequence/get-table-prop :acab-sequence/depth-sets))
         (curr-count 0)
         curr-values
         )
-    (trie-sequence/goto-position 2 1)
+    (acab-sequence/goto-position 2 1)
     (while (< (org-table-current-column) max-column)
       ;;Get the values
       (setq curr-values (sort (seq-copy (aref column-values curr-count))
                               (lambda (x y) (string-lessp (downcase x) (downcase y)))))
       ;;set the columns values
-      (trie-sequence/update-column curr-col curr-values)
+      (acab-sequence/update-column curr-col curr-values)
       (incf curr-col)
       (incf curr-count)
-      (trie-sequence/goto-position 2 curr-col)
+      (acab-sequence/goto-position 2 curr-col)
       )
     (setq curr-values (sort (seq-copy (aref column-values 0))
                             (lambda (x y) (string-lessp (downcase x) (downcase y)))))
-    (trie-sequence/update-column (- curr-col 1) curr-values)
-    (trie-sequence/goto-position curr-table-line curr-table-column)
+    (acab-sequence/update-column (- curr-col 1) curr-values)
+    (acab-sequence/goto-position curr-table-line curr-table-column)
     )
   )
 ;;--------------------
 ;;Tabs
 ;;--------------------
-(defun trie-sequence/set-tab (col data)
+(defun acab-sequence/set-tab (col data)
   " Set the left or right table to data "
   ;; default to left
   ;; retrieve data
@@ -686,7 +688,7 @@ https://stackoverflow.com/questions/1249497 "
 ;;Key bindings.
 ;;use sparse-keymap if only a few bindings
 ;;--------------------
-(defvar-local trie-sequence-mode-map
+(defvar-local acab-sequence-mode-map
 
   (let ((map (make-keymap)))
     (define-key map "TAB" 'org-table-next-field)
@@ -694,7 +696,7 @@ https://stackoverflow.com/questions/1249497 "
     ;;any potential functions? add particular structures?
     ;;TODO: M-RET to prev-line
     map)
-  " The basic keymap of the trie-sequence mode. Separate from more complex spacemacs bindings "
+  " The basic keymap of the acab-sequence mode. Separate from more complex spacemacs bindings "
   )
 ;; Then register its activation
 
@@ -727,33 +729,33 @@ https://stackoverflow.com/questions/1249497 "
 ;;--------------------
 ;;Autoloading
 ;;--------------------
-(add-to-list 'auto-mode-alist '("\\.seq\\'" . trie-sequence-mode))
+(add-to-list 'auto-mode-alist '("\\.seq\\'" . acab-sequence-mode))
 
 ;; --------------------
 ;;Entry Function
 ;;--------------------
-(define-derived-mode trie-sequence-mode fundamental-mode "Trie-Sequence Mode"
-  "Major Mode for creating a trie-sequence of rules "
+(define-derived-mode acab-sequence-mode fundamental-mode "Acab-Sequence Mode"
+  "Major Mode for creating a acab-sequence of rules "
   (interactive)
   (kill-all-local-variables)
   ;; Set the Org Table minor mode
   (orgtbl-mode)
   ;; set table coordinates to show
-  (use-local-map trie-sequence-mode-map)
-  ;; (set (make-local-variable 'font-lock-defaults) '(trie-sequence-font-lock-keywords))
-  ;; (set (make-local-variable 'indent-line-function) 'trie-sequence-indent-line)
+  (use-local-map acab-sequence-mode-map)
+  ;; (set (make-local-variable 'font-lock-defaults) '(acab-sequence-font-lock-keywords))
+  ;; (set (make-local-variable 'indent-line-function) 'acab-sequence-indent-line)
   ;; (set (make-local-variable 'comment-style) '(plain))
   ;; (set (make-local-variable 'comment-start) "//")
   ;; (set (make-local-variable 'comment-use-syntax) t)
-  ;; (set-syntax-table trie-sequence-mode-syntax-table)
-  (setq major-mode 'trie-sequence-mode
-        mode-name "TRIE-SEQUENCE")
-  ;;(run-mode-hooks 'trie-sequence-mode-hook)
+  ;; (set-syntax-table acab-sequence-mode-syntax-table)
+  (setq major-mode 'acab-sequence-mode
+        mode-name "ACAB-SEQUENCE")
+  ;;(run-mode-hooks 'acab-sequence-mode-hook)
   )
 
 ;; TODO: add to hs-special-modes-alist
 ;; TODO: mod after-change-functions
-(provide 'trie-sequence-mode)
+(provide 'acab-sequence-mode)
 
 ;; useful functions:
 ;; org-table-goto-field

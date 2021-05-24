@@ -1,3 +1,5 @@
+;; -*- mode: elisp; lexical-binding: t; -*-
+
 (require 'dash)
 
 (cl-defstruct trie-tree/node name value

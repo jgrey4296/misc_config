@@ -13,7 +13,6 @@
   (load! "+helms")
   )
 
-(use-package! acab-mode
-  :defer
-
+(use-package! acab-ide
+  :commands acab-ide-minor-mode
   )

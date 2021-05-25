@@ -7,10 +7,10 @@ PYTHONPATH=/Volumes/documents/github/py_bookmark_organiser/
 0 */2 * * * /Volumes/documents/github/emacs_files/setup_files/cron/time_announce.py
 
 # Regularly Tweet an entry from my bibtex
-7,23,42 */1 * * * /Volumes/documents/github/emacs_files/setup_files/cron/auto_bibtex_tweet.py
+7,42 */1 * * * /Volumes/documents/github/emacs_files/setup_files/cron/auto_bibtex_tweet.py
 
 # Regularly tweet an image from the whitelist
-11,38,52 */1 * * * /Volumes/documents/github/emacs_files/setup_files/cron/auto_image_tweet.py
+25,52 */1 * * * /Volumes/documents/github/emacs_files/setup_files/cron/auto_image_tweet.py
 
 # Update mail every 6 hours
 0 */6 * * * /usr/local/bin/mbsync -a

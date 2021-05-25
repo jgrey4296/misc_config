@@ -23,3 +23,10 @@
     (t               nil)
     )
   )
+
+(define-minor-mode acab-company-minor-mode
+  " Minor Mode for Acab Company completion "
+  :lighter "acab-company"
+  :global t
+  :keymap nil
+  )

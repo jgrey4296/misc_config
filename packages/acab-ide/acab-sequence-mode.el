@@ -757,6 +757,5 @@ https://stackoverflow.com/questions/1249497 "
 
 ;; TODO: add to hs-special-modes-alist
 ;; TODO: mod after-change-functions
-
 ;; useful functions:
 ;; org-table-goto-field

@@ -1,4 +1,4 @@
-;; -*- mode: elisp; lexical-binding: t; -*-
+;; -*- mode: emacs-lisp; lexical-binding: t; -*-
 ;;
 ;;Module to topologically sort a graph
 ;;Uses a buffer for the process queue

@@ -1,4 +1,4 @@
-;; -*- mode: elisp; lexical-binding: t; -*-
+;; -*- mode: emacs-lisp; lexical-binding: t; -*-
 ;; https://github.com/company-mode/company-mode/wiki/Writing-backends
 ;;
 (require 'cl-lib)

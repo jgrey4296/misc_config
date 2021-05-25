@@ -1,4 +1,4 @@
-;; -*- mode: elisp; lexical-binding: t; -*-
+;; -*- mode: emacs-lisp; lexical-binding: t; -*-
 
 (require 'hydra)
 (provide 'acab-hydras)

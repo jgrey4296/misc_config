@@ -1,0 +1,62 @@
+#+TITLE: Acab IDE Design
+* Basic Startup Pattern
+#+begin_src plantuml :results value verbatim :preview t
+user -> emacs : Start Ide
+emacs -> emacs : Setup Windows
+emacs -> user : Display
+#+end_src
+
+#+RESULTS:
+#+begin_example
+     ┌────┐          ┌─────┐
+     │user│          │emacs│
+     └─┬──┘          └──┬──┘
+       │   Start Ide    │
+       │ ──────────────>│
+       │                │
+       │                ────┐
+       │                    │ Setup Windows
+       │                <───┘
+       │                │
+       │    Display     │
+       │ <──────────────│
+     ┌─┴──┐          ┌──┴──┐
+     │user│          │emacs│
+     └────┘          └─────┘
+#+end_example
+* Rule Authoring
+#+begin_src plantuml :results value verbatim :preview t
+user -> emacs : New Rule
+emacs -> emacs : Create Buffer
+#+end_src
+
+#+RESULTS:
+#+begin_example
+     ┌────┐          ┌─────┐
+     │user│          │emacs│
+     └─┬──┘          └──┬──┘
+       │    New Rule    │
+       │ ──────────────>│
+       │                │
+       │                ────┐
+       │                    │ Create Buffer
+       │                <───┘
+     ┌─┴──┐          ┌──┴──┐
+     │user│          │emacs│
+     └────┘          └─────┘
+#+end_example
+
+* Trie Insertion
+#+begin_src plantuml :results value verbatim :preview t
+
+#+end_src
+
+* Layer Authoring
+#+begin_src plantuml :results value verbatim :preview t
+
+#+end_src
+
+* Run Rule
+#+begin_src plantuml :results value verbatim :preview t
+
+#+end_src

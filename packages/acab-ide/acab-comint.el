@@ -11,12 +11,15 @@
 (defvar acab-comint/python-args nil)
 (defvar acab-comint/python-process nil)
 (defvar acab-comint/cwd nil)
-
+(defvar acab-comint/buffer-name nil)
+(defvar acab-comint/prompt-regexp "^\\(:\\)")
 
 (defun acab-comint/init ()
-
+  ;; Get/create comint buffer then:
+  ;; (unless buffer
+  ;;   (apply 'make-comint-in-buffer my-comint-buffer-name buffer prog my-comint-args)
+  ;;   (my-comint-mode))))
   )
-
 (defun acab-comint/shut-down ()
 
   )
@@ -24,7 +27,6 @@
 (defun acab-comint/send-input ()
 
   )
-
 (defun acab-comint/get-output ()
 
   )
@@ -93,3 +95,24 @@ ready to set the pipeline and rulesets, and to test"
 
 
   )
+
+(define-derived-mode acab-comint-mode comint-mode "Acab-Comint"
+  "Major Mode for Comint Interaction with Acab-Py"
+  nil "Acab-Comint"
+  ;;Setup:
+  (setq comint-prompt-regexp acab-comint/prompt-regexp)
+
+  ;; Set up transforms:
+  ;; (setq-local comint-input-filter-functions '(nil))
+  ;; (setq-local comint-input-sender nil)
+  ;; (add-hook 'comint-preoutput-filter-functions nil nil t)
+  )
+
+(defun acab-comint/init-hook ()
+  "Helper function to initialize My-Comint"
+  (setq comint-process-echoes t)
+  (setq comint-use-prompt-regexp t)
+  )
+
+;; this has to be done in a hook. grumble grumble.
+(add-hook 'acab-comint-mode-hook 'acab-comint/init-hook)

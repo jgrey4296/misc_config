@@ -1,7 +1,9 @@
 ;; -*- mode: elisp; lexical-binding: t; -*-
 
 (require 'dash)
-(require 'trie-tree)
+(require 'trie-data)
+
+(provide 'trie-explore-mode)
 
 (defgroup trie-explore-mode '() "Trie Exploration Mode Customizations")
 (defcustom trie-explore/overlay-max 20 "Maximum number of overlays for trie-explore-mode" :type '(integer))
@@ -127,13 +129,13 @@ calculate the bounds that column falls within """
 ;; Drawing
 (defun trie-explore/draw-children ()
   (let* ((rev-path (reverse (trie-explore/tree-data-curr-path trie-explore/current-data)))
-         (node (trie-tree/tree-get (trie-explore/tree-data-root trie-explore/current-data) rev-path))
+         (node (trie-data/tree-get (trie-explore/tree-data-root trie-explore/current-data) rev-path))
          (layer (+ 1 (length rev-path)))
          )
     (trie-explore/draw-children-safe node layer))
   )
 (defun trie-explore/draw-children-safe (node layer)
-  (let* ((children (trie-tree/node-children node))
+  (let* ((children (trie-data/node-children node))
          (num_children (length (hash-table-values children)))
          (maxlen (if (hash-table-empty-p children) 20
                    (apply 'max (mapcar (lambda (x) (length x))
@@ -208,8 +210,8 @@ calculate the bounds that column falls within """
 
          (short-path (trie-explore/reduce-list-length (trie-explore/tree-data-curr-path trie-explore/current-data) (- layer 1)))
 
-         (parent (trie-tree/tree-get (trie-explore/tree-data-root trie-explore/current-data) (reverse short-path)))
-         (pchildren (trie-tree/node-children parent))
+         (parent (trie-data/tree-get (trie-explore/tree-data-root trie-explore/current-data) (reverse short-path)))
+         (pchildren (trie-data/node-children parent))
          (pmaxlen (if (hash-table-empty-p pchildren) 20
                     (apply 'max (mapcar (lambda (x) (length x)) (hash-table-keys pchildren)))))
 
@@ -221,8 +223,8 @@ calculate the bounds that column falls within """
          (new-path (if (< 0 layer) (cons substr short-path) '()))
 
          ;;node inspection
-         (node (trie-tree/tree-get (trie-explore/tree-data-root trie-explore/current-data) (reverse new-path)))
-         (children (trie-tree/node-children node))
+         (node (trie-data/tree-get (trie-explore/tree-data-root trie-explore/current-data) (reverse new-path)))
+         (children (trie-data/node-children node))
          (num_children (length (hash-table-values children)))
          (max-children (max (trie-explore/tree-data-max-lines trie-explore/current-data) num_children))
          (indent_upper (car bounds))
@@ -275,14 +277,14 @@ calculate the bounds that column falls within """
   (trie-explore/update-tree-data)
   (let* ((curr-data trie-explore/current-data)
          (parent-path (trie-explore/tree-data-curr-path curr-data))
-         (node (trie-tree/tree-get (trie-explore/tree-data-root curr-data) (reverse parent-path)))
+         (node (trie-data/tree-get (trie-explore/tree-data-root curr-data) (reverse parent-path)))
          (bounds (trie-explore/cols-to-pos (trie-explore/cols-to-bounds (trie-explore/tree-data-indents curr-data) (current-column))))
          (substr (string-trim (buffer-substring-no-properties (cadr bounds) (point))))
          )
     (if (not (eq trie-explore/current-layer (length parent-path)))
         (message "Path / Layer Mismatch")
       (progn
-        (trie-tree/node-add-child node substr)
+        (trie-data/node-add-child node substr)
         (save-excursion
           (move-to-column (- (current-column) (length substr) 3))
           (trie-explore/expand-entry)
@@ -300,9 +302,9 @@ calculate the bounds that column falls within """
     )
   (let* ((value (read-string "Value: "))
          (parent-path (trie-explore/tree-data-curr-path trie-explore/current-data))
-         (node (trie-tree/tree-get (trie-explore/tree-data-root trie-explore/current-data) (reverse parent-path)))
+         (node (trie-data/tree-get (trie-explore/tree-data-root trie-explore/current-data) (reverse parent-path)))
          )
-    (trie-tree/node-add-child node value)
+    (trie-data/node-add-child node value)
     )
   ;;TODO: move to the parent node before re-display
   (trie-explore/expand-entry)
@@ -314,7 +316,7 @@ calculate the bounds that column falls within """
   ;; get the substring
   (let ((to-delete (car (trie-explore/tree-data-curr-path trie-explore/current-data)))
         (path (cdr (trie-explore/tree-data-curr-path trie-explore/current-data))))
-    (trie-tree/tree-remove (trie-explore/tree-data-root trie-explore/current-data)
+    (trie-data/tree-remove (trie-explore/tree-data-root trie-explore/current-data)
                            (reverse path) to-delete)
     (save-excursion
       (trie-explore/layer-decrease)
@@ -384,13 +386,13 @@ calculate the bounds that column falls within """
   ;;insert current buffer into temp
   (let* ((current (current-buffer))
          (name (s-replace "*" "" (buffer-name current)))
-         (tree (make-trie-tree/node :name "__root"))
+         (tree (make-trie-data/node :name "__root"))
         )
     (with-temp-buffer
       (insert-buffer-substring-no-properties current)
       (goto-char (point-min))
       (while (< (point) (point-max))
-        (trie-tree/tree-add tree (s-split-words (buffer-substring (line-beginning-position) (line-end-position)))
+        (trie-data/tree-add tree (s-split-words (buffer-substring (line-beginning-position) (line-end-position)))
         (forward-line)
         )
         )
@@ -413,9 +415,9 @@ calculate the bounds that column falls within """
   """ An initial setup for a tree """
   (interactive)
   (cond
-   ((not tree) (progn (setq tree (make-trie-tree/node :name "__root"))
-                      (trie-tree/generate-tree tree 5 5)))
-   ((equal tree t) (setq tree (make-trie-tree/node :name "__root")))
+   ((not tree) (progn (setq tree (make-trie-data/node :name "__root"))
+                      (trie-data/generate-tree tree 5 5)))
+   ((equal tree t) (setq tree (make-trie-data/node :name "__root")))
    )
 
   (let* ((tree-data (make-trie-explore/tree-data
@@ -488,5 +490,3 @@ calculate the bounds that column falls within """
   (outline-minor-mode)
   (run-mode-hooks)
   )
-
-(provide 'trie-explore-mode)

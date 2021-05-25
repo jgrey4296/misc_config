@@ -1,5 +1,6 @@
 # -*- mode: snippet -*-
 # name: lexical_binding
 # uuid: lexical_binding-elisp
+# key: lexx
 # --
-;; -*- mode: elisp; lexical-binding: t; -*-
+;; -*- mode: emacs-lisp; lexical-binding: t; -*-

@@ -5,11 +5,24 @@
 (require 'cl-lib)
 (require 'company)
 
+;; Applicable Contexts:
+;; Rule/Layer/Pipeline/Ageda names
+;;
+;; Variables marked with $
+;; Operators marked with λ
+;; TYPES marked with ::
+;; TAGS marked with #
+;; The above ↑ could all be linked to acab config setup
+;;
+;; For a separate mode: FSM States, Game States, Agent Names,
+;; String expansions...
 
 (defun acab-company/backend (cmd &rest args)
   (cl-case cmd
     (init            nil)
+    ;; Prefix Acab Company: check context, get line substring
     (prefix          nil)
+    ;; Navigate down context db, return next children
     (candidates      nil)
     (sorted          t)
     (duplicates      t)

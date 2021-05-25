@@ -11,8 +11,10 @@
   (message "Trie Company Backend: %s : %s" cmd args)
   (cl-case cmd
     (init            nil)
-    (prefix          nil)
-    (candidates      nil)
+    ;; For Trie Prefix: get the sentence substring of the line, must end in DOT or BANG
+    (prefix          (buffer-substring (line-beginning-position) (point)))
+    ;; For Trie Candidates: navigate the trie db, return existing children
+    (candidates      (mapcar (lambda (x) (concat (car args) x))'("a" "b" "c" "c" "e")))
     (sorted          t)
     (duplicates      t)
     (no-cache        nil)

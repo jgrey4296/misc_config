@@ -4,6 +4,13 @@
 
 ;; TODO for navigating and narrowing acab-py logs
 
+;; Narrow by Layer, Agent, sentence, string expansion
+;; timestep...
+
+;; Move by ...
+
+;; diff two layers, agent, sentences...
+
 (defvar-local acab-log-mode-map
   (make-sparse-keymap))
 

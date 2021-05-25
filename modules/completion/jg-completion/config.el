@@ -7,3 +7,9 @@
 (after! (ivy counsel)
   (load! "+ivy_actions")
   )
+(after! helm-mode
+  (map! :map helm-map
+        "<tab>" nil
+        "TAB" #'helm-select-action
+        )
+  )

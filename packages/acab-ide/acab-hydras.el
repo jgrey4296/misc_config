@@ -1,6 +1,7 @@
 ;; -*- mode: elisp; lexical-binding: t; -*-
 
 (require 'hydra)
+(provide 'acab-hydras)
 
 (defhydra trie-help-hydra (:color pink)
   "
@@ -46,5 +47,3 @@
   "
   ("q" nil :exit t)
   )
-
-(provide 'acab-hydras)

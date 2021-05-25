@@ -7,7 +7,7 @@
             :predicate #'+jg-misc-ivy-predicate
             :action #'+jg-misc-ivy-open-as-popup
             :matcher #'ivy--switch-buffer-matcher
-            :call 'jg-misc-ivy-popup-buffer
+            :caller 'jg-misc-ivy-popup-buffer
             )
   )
 

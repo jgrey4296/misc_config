@@ -29,66 +29,130 @@
   "Specified channels between layers")
 
 
-(defun acab-ide/init-data ()
-  (setq acab-ide/rules (make-hash-table :test 'equal)
-        acab-ide/types (make-hash-table :test 'equal)
+(defun acab-ide/init ()
+  " Start the trie ide, setting up windows, etc "
+  (interactive)
+  (setq acab-ide/rules     (make-hash-table :test 'equal)
+        acab-ide/types     (make-hash-table :test 'equal)
         acab-ide/crosscuts (make-hash-table :test 'equal)
-        acab-ide/patterns (make-hash-table :test 'equal)
-        acab-ide/tests (make-hash-table :test 'equal)
-        acab-ide/tags (make-hash-table :test 'equal)
-        acab-ide/channels (make-hash-table :test 'equal)
+        acab-ide/patterns  (make-hash-table :test 'equal)
+        acab-ide/tests     (make-hash-table :test 'equal)
+        acab-ide/tags      (make-hash-table :test 'equal)
+        acab-ide/channels  (make-hash-table :test 'equal)
 
         acab-ide/current-priors '()
         acab-ide/current-post '()
         )
+
+
+  ;; Get the directory to work with
+  (let ((location (read-file-name "Institution Location:"))
+        (windows (acab-ide/build-ide-window-layout))
+        inst-name
+        )
+
+    ;;if a dir chosen, get a name for the
+    ;;inst, create a stub, create a data dir
+    (if (f-dir? location)
+        (progn
+          ;;get name for inst
+          (setq inst-name (read-string "Institution Name: ")
+                acab-ide/ide-data-loc (f-join location (format "%s-data" inst-name)))
+          )
+      ;;else if an org chosen, load it and its data dir
+      (progn
+        (assert (equal (f-ext location) "org"))
+        (setq inst-name (f-base location)
+              location (f-parent location)
+              acab-ide/ide-data-loc (f-join location (format "%s-data" inst-name))
+              )
+        ))
+
+    (setq acab-ide/ide-pipeline-spec-buffer (format "%s.org" inst-name))
+    (acab-ide/maybe-build-data-loc)
+    (acab-ide/init-ide-buffers-contents location inst-name windows)
+    ;;Save the window configuration
+    (setq acab-ide/window-configuration windows)
+
+    ;;start python server
+    (acab-ide/run-python-server location)
+    (acab-ide/load-directory-and-pipeline acab-ide/ide-data-loc)
+
+    )
+
+  (setq acab-ide/trie-ide-is-running t)
   )
-
-;; Retrieve
-
-
-;; Insert
-
-
-;;DELETION
-(defun acab-ide/delete-rule ()
+(defun acab-ide/cleanup ()
   (interactive)
-  ;;TODO delete rule
-  ;;remove from hashmap
-  ;;delete file
-  ;;remove from runtime
-  )
-(defun acab-ide/delete-type ()
-  (interactive)
-  ;;TODO delete type
-  )
-(defun acab-ide/delete-crosscut ()
-  (interactive)
-  ;;TODO delete crosscut
-  )
-(defun acab-ide/delete-sequence ()
-  (interactive)
-  ;;TODO delete sequence
+  ;;Clear windows, unload data
+  (message "Shutting down Trie IDE")
+  (acab-ide/dump-to-files)
+
+  (if (and acab-ide/python-process
+           (processp acab-ide/python-process)
+           (process-live-p acab-ide/python-process))
+      (progn
+        (message "Closing Python Server")
+        (quit-process acab-ide/python-process)
+        (kill-buffer acab-ide/python-process-buffer-name)
+        (setq acab-ide/python-process nil)
+        )
+    )
+  (setq acab-ide/trie-ide-is-running nil)
+  (assert (not (acab-ide/trie-ide-running-p)))
   )
 
-(defun acab-ide/show-analysis-results ()
-  ;;TODO show analysis results
+;;Directory and buffer initialisation
+(defun acab-ide/maybe-build-data-loc ( )
+  (if (not (f-exists? acab-ide/ide-data-loc))
+      (progn (mkdir acab-ide/ide-data-loc)
+             (mapc (lambda (x) (mkdir (f-join acab-ide/ide-data-loc x)))
+                   acab-ide/data-loc-subdirs)
+             )
+    )
   )
+;;Loading and saving files
+(defun acab-ide/load-directory-and-pipeline (loc)
+  " Given a location, load into ide "
+  ;;Initialise data
+  (trie/init-data)
+  ;; TODO load directory and setup pipeline
+  ;;command python
 
-;;UPDATE
-(defun acab-ide/update-buffer-contents ()
+
+  )
+(defun acab-ide/dump-to-files ()
   (interactive)
-  ;;TODO update buffer contents
-  )
-(defun acab-ide/sort-conditions-and-actions ()
-  ;;TODO sort conditions and actions
+  ;;Get all trie-* mode buffers, and the pipeline spec
+  ;;and write to subdirs of acab-ide/ide-data-loc
+  (let ((buffers (buffer-list))
+        (curr-buff (current-buffer))
+        (special-buffers (list acab-ide/inputs-buffer-name
+                               acab-ide/outputs-buffer-name
+                               acab-ide/working-group-buffer-name
+                               acab-ide/logging-buffer-name))
+        )
+    (mapc (lambda (x)
+            (cond ((and (buffer-file-name x) (f-ancestor-of? acab-ide/ide-data-loc (buffer-file-name x)))
+                   (progn (save-buffer)
+                          (if (not (equal curr-buff x))
+                              (kill-buffer x))))
+                  ((-contains? special-buffers (buffer-name x))
+                   (kill-buffer x))))
+          buffers)
+    )
   )
 
-;;REMOVAL
-(defun acab-ide/remove-component ()
-  ;;TODO remove component
+(defun acab-ide/retrieve-data (type key)
+
+  )
+(defun acab-ide/insert-data (type data)
+
+  )
+(defun acab-ide/delete-data (type data)
+
   )
 
-;;Analysis
 (defun acab-ide/analyse-data ()
   ;;TODO analyse data
   )

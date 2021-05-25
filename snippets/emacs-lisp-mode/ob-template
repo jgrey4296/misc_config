@@ -42,7 +42,7 @@
 ;; TODO
 (defvar ob-$1-cmd-str "")
 ;; Map Languages to extensions
-(add-to-list 'org-babel-tangle-lang-exts \'($3 . "$2"))
+(add-to-list 'org-babel-tangle-lang-exts '($3 . "$2"))
 ;; Default Headers, as a plist:
 (defconst org-babel-header-args:$1
   '($5)

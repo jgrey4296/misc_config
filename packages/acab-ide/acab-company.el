@@ -1,4 +1,4 @@
-;; -*- mode: elisp; lexical-binding: t; -*-
+;; -*- mode: emacs-lisp; lexical-binding: t; -*-
 
 ;; TODO context aware company completion of rule names, layers,
 ;; operators etc

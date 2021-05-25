@@ -1,4 +1,4 @@
-;; -*- mode: elisp; lexical-binding: t; -*-
+;; -*- mode: emacs-lisp; lexical-binding: t; -*-
 ;;
 ;; TODO mode for authoring activity diagrams
 (provide 'acab-activity-mode)

@@ -1,4 +1,4 @@
-;; -*- mode: elisp; lexical-binding: t; -*-
+;; -*- mode: emacs-lisp; lexical-binding: t; -*-
 ;; [[file:/Volumes/documents/github/emacs_files/lisp/comint-test.el][comint]]
 
 

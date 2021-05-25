@@ -1,4 +1,4 @@
-;; -*- mode: elisp; lexical-binding: t; -*-
+;; -*- mode: emacs-lisp; lexical-binding: t; -*-
 
 ;; TODO a tracery-inspired string expansion helper for authoring grammars
 (provide 'acab-string-expansion-mode)

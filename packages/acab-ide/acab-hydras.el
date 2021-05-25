@@ -47,5 +47,3 @@
   "
   ("q" nil :exit t)
   )
-
-(provide 'acab-hydras)

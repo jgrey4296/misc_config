@@ -1,7 +1,5 @@
 ;; -*- mode: emacs-lisp; lexical-binding: t; -*-
 
-;; -*- mode: emacs-lisp; lexical-binding: t; -*-
-
 ;; ob-template,
 ;; Adapted from:
 ;; Copyright (C) Bjarte Johansen

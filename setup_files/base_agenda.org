@@ -1,3 +1,4 @@
+-*- mode: org; -*-
 #+STARTUP: content
 * Base Agenda
 ** Main

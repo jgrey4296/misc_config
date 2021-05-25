@@ -4,12 +4,12 @@
 ;; and use a macro to expand them, allowing the two to be defined together
 ;; simplifying the addition of new tests
 ;;
-(cl-defstruct jg-org-test-test-extracts start end heading link text)
-(cl-defstruct jg-org-test-test-group name tests link bound start)
-(cl-defstruct jg-org-test-test type locator value)
+(cl-defstruct jg-org-test-extracts start end heading link text)
+(cl-defstruct jg-org-test-group name tests link bound start)
+(cl-defstruct jg-org-test type locator value)
 ;; Current test types:
 '(:section-check :length-check :order-check :citation-check :mention-check :codeblock-check :tag-check)
-(cl-defstruct jg-org-test-test-results name results link)
+(cl-defstruct jg-org-test-results name results link)
 
 (defvar jg-org-test-heading-regexp "^*+ %s$"
   "Regexp to format when searching for a location")
@@ -17,10 +17,10 @@
 (defvar jg-org-test-src-block-regexp "^ +#\\+begin_src"
   "Regexp to find src blocks")
 
-(defun jg-org-test-test-to-string (test)
-  (let ((tt (jg-org-test-test-type test))
-        (loc (jg-org-test-test-locator test))
-        (val (jg-org-test-test-value test))
+(defun jg-org-test-to-string (test)
+  (let ((tt (jg-org-test-type test))
+        (loc (jg-org-test-locator test))
+        (val (jg-org-test-value test))
         )
     (cond
      ((eq tt :section-check ) (format "%s should have section %s." loc val))
@@ -36,7 +36,7 @@
   )
 
 ;; Main Access
-(defun jg-org-test-test-org-file ()
+(defun jg-org-test-org-file ()
   (interactive)
   ;; check file is in org mode
   (assert (eq major-mode 'org-mode))

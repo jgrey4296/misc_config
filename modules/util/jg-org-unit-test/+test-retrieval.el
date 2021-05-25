@@ -19,7 +19,7 @@
                      text (string-trim (buffer-substring-no-properties (plist-get element :contents-begin)
                                                                        (plist-get element :contents-end))))
                (if (not (string-empty-p text))
-                   (make-jg-org-test-test-extracts :start start :end end :heading heading :link link :text text)
+                   (make-jg-org-test-extracts :start start :end end :heading heading :link link :text text)
                  nil)
                )
       nil

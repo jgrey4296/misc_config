@@ -1,5 +1,8 @@
 ;; -*- mode: elisp; lexical-binding: t; -*-
 ;;
+
+(provide 'trie-minor-mode)
+
 (defun trie-minor/test-fun ()
   (interactive)
   (message "Trie minor test")
@@ -11,5 +14,3 @@
   :lighter "TrieMM"
   :keymap (make-sparse-keymap)
   )
-
-(provide 'trie-minor-mode)

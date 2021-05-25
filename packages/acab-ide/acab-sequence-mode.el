@@ -5,6 +5,8 @@
 (require 'dash)
 (require 'org-table)
 (require 'kahnsort)
+
+(provide 'acab-sequence-mode)
 ;; add transient / hydra
 ;; add helm
 
@@ -755,7 +757,6 @@ https://stackoverflow.com/questions/1249497 "
 
 ;; TODO: add to hs-special-modes-alist
 ;; TODO: mod after-change-functions
-(provide 'acab-sequence-mode)
 
 ;; useful functions:
 ;; org-table-goto-field

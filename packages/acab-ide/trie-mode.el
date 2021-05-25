@@ -5,6 +5,8 @@
 (require 'acab-face)
 (require 'trie-management)
 
+(provide 'trie-mode)
+
 (defgroup trie-mode '() "Trie Mode Customizations")
 ;;--------------------
 ;; Mode Variables
@@ -165,7 +167,3 @@
   (outline-minor-mode)
   (yas-minor-mode)
   )
-
-;;TODO later: set no longer needed variables to nil
-
-(provide 'trie-mode)

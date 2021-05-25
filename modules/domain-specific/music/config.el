@@ -42,6 +42,3 @@
 (use-package! chuck-mode
   :commands (chuck-mode)
   )
-
-
-(add-hook! doom-first-input #'+music-binding-hook)

@@ -35,7 +35,5 @@
   )
 
 (add-hook! doom-first-input
-           #'+bibtex-binding-hook
-           #'+bibtex-general-binding-hook
            #'+jg-bibtex-build-list
            )

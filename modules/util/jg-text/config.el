@@ -31,5 +31,3 @@
 (after! evil
   (load! "+motions")
   )
-
-(add-hook! doom-first-input #'+jg-text-binding-hook)

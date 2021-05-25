@@ -59,24 +59,3 @@
         :desc "Conda: Find Refs"    "u" #'anaconda-mode-find-references
         )
   )
-
-
-
-
-;; NOTE: normal macro expansion adds :major-modes t, which doesn't work for minor modes
-;; (map! :after anaconda-mode
-;;       :map anaconda-mode-map
-;;       :localleader ...
-;;
-;; (after! anaconda-mode
-;;   (general-define-key :states
-;;                     '(normal visual motion emacs insert)
-;;                     :prefix doom-localleader-key :non-normal-prefix doom-localleader-alt-key
-;;                     :keymaps '(anaconda-mode-map)
-;;                     :infix "g" "" (list :ignore t :which-key "Goto")
-;;                     "d" (list :def #'anaconda-mode-find-definitions :which-key "Find Definitions")
-;;                     "h" (list :def #'anaconda-mode-show-doc :which-key "Show Docs")
-;;                     "a" (list :def #'anaconda-mode-find-assignments :which-key "Find Assignments")
-;;                     "f" (list :def #'anaconda-mode-find-file :which-key "Find File")
-;;                     "u" (list :def #'anaconda-mode-find-references :which-key "Find References"))
-;;   )

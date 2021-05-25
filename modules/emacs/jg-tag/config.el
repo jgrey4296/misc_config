@@ -27,5 +27,3 @@
     (+jg-tag-helm-tagger beg end)
     )
   )
-
-(add-hook! doom-first-input #'+jg-tag-binding-hook)

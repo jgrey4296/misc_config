@@ -45,11 +45,9 @@
         :desc "Messages"  "0" (cmd! (+jg-misc-ivy-open-as-popup "*Messages*"))
         )
 
-  ;;; <leader> a -- misc
+  ;;; <leader> a -- Unused
   (map! :leader
-        (:prefix ("a" . "JG Misc")
-         :desc "Minibuffer history" "m" #'counsel-minibuffer-history
-         )
+        :prefix "a"
         )
   ;;; <leader> b --- buffer
   (map! :leader
@@ -342,6 +340,7 @@
         :desc "Rmail"                        "m" #'rmail
         :desc "External Mail"                "M" #'mu4e
 
+        :desc "Minibuffer history"           "0" #'counsel-minibuffer-history
         :desc "Learn X in Y"                 "1" (cmd! (+jg-browse-url jg-binding-x-in-y-url))
         :desc "Plant UML"                    "2" (cmd! (+jg-browse-url "http://plantuml.com"))
         :desc "Over API"                     "3" (cmd! (+jg-browse-url "https://overapi.com/"))

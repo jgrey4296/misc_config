@@ -681,15 +681,6 @@ https://stackoverflow.com/questions/1249497 "
 
   )
 
-;;--------------------
-;;definitions
-;;--------------------
-
-
-;;--------------------
-;;Key bindings.
-;;use sparse-keymap if only a few bindings
-;;--------------------
 (defvar-local acab-sequence-mode-map
 
   (let ((map (make-keymap)))
@@ -700,34 +691,6 @@ https://stackoverflow.com/questions/1249497 "
     map)
   " The basic keymap of the acab-sequence mode. Separate from more complex spacemacs bindings "
   )
-;; Then register its activation
-
-
-
-;;--------------------
-;;Keyword based syntax highlighting
-;;Specify as a list of (matcher . facename )
-;;Potential keywords: operators +-*/!.()""$~ < > != == -> @
-;;--------------------
-
-;; highlight exclusion strings
-
-;;--------------------
-;;Indentation
-;; Potential indent points:
-;; newline ending with an EXOP, comma,
-;; reset indent if prior line is empty
-;;
-;;--------------------
-
-;;--------------------
-;;Syntax Table
-;;--------------------
-;;Define the syntax table, for word definitions etc
-;;modify-syntax-entry: character, class/flag, syntable)
-;;classes/syntax flags: include 'w': word, '.':punctuation,
-;; see: C-h ? r elisp manual syntax-tables
-
 
 ;; --------------------
 ;;Entry Function

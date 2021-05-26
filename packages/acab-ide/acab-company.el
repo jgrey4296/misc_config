@@ -5,6 +5,7 @@
 (require 'cl-lib)
 (require 'company)
 
+(provide 'acab-company)
 ;; Applicable Contexts:
 ;; Rule/Layer/Pipeline/Ageda names
 ;;
@@ -17,17 +18,26 @@
 ;; For a separate mode: FSM States, Game States, Agent Names,
 ;; String expansions...
 
+(defun acab-company/get-sentence ()
+
+  )
+
+(defun acab-company/search (sentence)
+
+  )
+
 (defun acab-company/backend (cmd &rest args)
   (cl-case cmd
     (init            nil)
     ;; Prefix Acab Company: check context, get line substring
-    (prefix          nil)
+    (prefix          (acab-company/get-sentence))
     ;; Navigate down context db, return next children
-    (candidates      nil)
+    (candidates      (acab-company/search (car args)))
+    ;; Settings
     (sorted          t)
     (duplicates      t)
-    (no-cache        nil)
     (ignore-case     t)
+    (no-cache        nil)
     (annotation      nil)
     (meta            nil)
     (location        nil)
@@ -41,5 +51,12 @@
   " Minor Mode for Acab Company completion "
   :lighter "acab-company"
   :global t
-  :keymap nil
-  )
+  (cond
+   (acab-company-minor-mode
+    (setq company-backends
+          (add-to-list 'company-backends 'acab-company/backend))
+    (setq company-selection-default nil))
+   (t
+    (setq company-backends
+          (delete 'acab-company/backend company-backends))
+    (setq company-selection-default 0))))

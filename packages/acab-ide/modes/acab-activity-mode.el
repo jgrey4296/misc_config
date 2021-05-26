@@ -1,6 +1,10 @@
 ;; -*- mode: emacs-lisp; lexical-binding: t; -*-
 ;;
 ;; TODO mode for authoring activity diagrams
+;; Auto structure of subject - tool - object - outcome
+;; plus easy expansion to rules - community - div of labour
+;; duplication, replacement, grammar expansion
+
 (provide 'acab-activity-mode)
 
 

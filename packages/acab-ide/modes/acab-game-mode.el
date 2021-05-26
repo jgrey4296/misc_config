@@ -2,6 +2,10 @@
 ;;
 
 ;; TODO a mode for authoring game theoretic structures
+;; providing definition of game structure,
+;; and ascii rendering for review
+;; insertion/deletion of moves/payoffs etc
+
 (provide 'acab-game-mode)
 
 (defvar-local acab-game-mode-map

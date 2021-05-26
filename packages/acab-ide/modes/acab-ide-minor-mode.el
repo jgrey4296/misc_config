@@ -3,6 +3,10 @@
 ;;based On https://www.emacswiki.org/emacs/ModeTutorial
 (provide 'acab-ide-minor-mode)
 
+;; startup/shut down acab
+;; switch modes
+;; popup logs
+
 (defgroup acab-ide '() "Acab Mode Customizations")
 ;;--------------------
 ;; Mode Variables

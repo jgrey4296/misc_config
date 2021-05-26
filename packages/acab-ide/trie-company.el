@@ -7,29 +7,47 @@
 
 (defvar trie-company/completion-trie nil)
 
+(defun trie-company/get-sentence ()
+  ;; Get the sentence from the current position in the working buffer
+  ;; possibly look back past line to get run on sentences
+  (buffer-substring (line-beginning-position) (point))
+  )
+
+(defun trie-company/search (sentence)
+  ;; Return completion options from the acab-ide trie-database
+  ;;for the given sentence
+  (mapcar (lambda (x) (concat sentence x))'("a" "b" "c" "c" "e"))
+  )
+
 (defun trie-company/backend (cmd &rest args)
+  (interactive (list 'interactive))
   (message "Trie Company Backend: %s : %s" cmd args)
   (cl-case cmd
     (init            nil)
     ;; For Trie Prefix: get the sentence substring of the line, must end in DOT or BANG
-    (prefix          (buffer-substring (line-beginning-position) (point)))
+    (prefix          (trie-company/get-sentence))
     ;; For Trie Candidates: navigate the trie db, return existing children
-    (candidates      (mapcar (lambda (x) (concat (car args) x))'("a" "b" "c" "c" "e")))
+    (candidates      (trie-company/search (car args)))
+    ;; Defaults
     (sorted          t)
     (duplicates      t)
-    (no-cache        nil)
     (ignore-case     t)
+    (no-cache        nil)
+    ;; Add data in completion window
     (annotation      nil)
+    ;; Add data in echo
     (meta            nil)
     (location        nil)
     (post-completion nil)
+    ;; For easy use of backend:
+    (interactive     (company-begin-backend 'trie-company/backend))
+    ;; Difference between usage / creation:
     (require-match   nil)
+
     (t               nil)
     )
   )
 
-
-;; TODO provide company completion based on position in a trie
 (define-minor-mode trie-company-minor-mode
  "This minor mode enables completion of trie sentences using company."
   :init-value nil

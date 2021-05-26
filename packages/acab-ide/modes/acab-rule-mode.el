@@ -2,43 +2,34 @@
 ;;
 (provide 'acab-rule-mode)
 
-;; TODO a mode for authoring and editing acab rules
+;; TODO a mode for authoring and editing a *singular* acab rule
 ;;
-;;INSERTION
-(defun acab-ide/el-string-helm ()
-  (interactive)
-  ;;TODO el string helm
-  )
-(defun acab-ide/insert-tag ()
-  (interactive)
-  ;;TODO insert tag
-  ;;select rule window
-  ;;find tags
-  ;;populate tags
-  ;;run tag helm
-
-  )
-(defun acab-ide/insert-transform ()
-  ;;TODO insert transform
-  ;;select rule window
-  ;;find tags
-  ;;populate tags
-  ;;run transform helm
-
-  )
-(defun acab-ide/insert-action ()
-  ;;TODO insert action
-  ;;select rule window
-  ;;find tags
-  ;;populate tags
-  ;;run action helm
-  )
-(defun acab-ide/insert-from-side-buffer ()
-  ;;TODO insert from side buffer
-  )
-
 (defvar-local acab-rule-mode-map
   (make-sparse-keymap))
+
+;; Setup prettify symbols
+;;
+
+;; insert - using acab-company
+;; fold query/transform/action/tags
+;; get precursors / consumers
+;; open tests
+
+
+;; Fontify:
+;; Rule name / end
+;; types (::a)
+;; subsentences [a]
+;; queries a?
+;; transforms a -> b
+;; operators λa
+;; actions λa:
+;; strings "a"
+;; comments
+;; variables $a
+
+;; ensure indentation
+
 
 ;; List of '(regex (groupnum "face")+)
 (defconst acab-rule-font-lock-keywords
@@ -66,5 +57,4 @@
   (run-mode-hooks)
   (outline-minor-mode)
   (yas-minor-mode)
-
   )

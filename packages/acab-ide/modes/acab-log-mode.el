@@ -11,6 +11,10 @@
 
 ;; diff two layers, agent, sentences...
 
+;; queries/transforms/actions/rules/operators
+;; types, strings, rule/layer/agenda
+
+
 (defvar-local acab-log-mode-map
   (make-sparse-keymap))
 

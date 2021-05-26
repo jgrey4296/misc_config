@@ -3,6 +3,7 @@
 (provide 'acab-layer-navigator-mode)
 
 ;; TODO a rule for visualising and navigating between layers of rules
+;; as a window ring
 ;;
 ;;VISUAL
 (defun acab-ide/decrement-priors-layer ()

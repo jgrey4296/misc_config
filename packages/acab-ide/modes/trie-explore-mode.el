@@ -5,6 +5,10 @@
 
 (provide 'trie-explore-mode)
 
+;; Major mode for navigating through acab-database
+;; TODO shift from current data model to use acab database
+
+
 (defgroup trie-explore-mode '() "Trie Exploration Mode Customizations")
 (defcustom trie-explore/overlay-max 20 "Maximum number of overlays for trie-explore-mode" :type '(integer))
 (defcustom trie-explore/selection-color "green" "Color of a selected tree element" :type '(color))

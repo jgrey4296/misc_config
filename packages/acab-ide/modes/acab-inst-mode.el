@@ -1,6 +1,8 @@
 ;; -*- mode: emacs-lisp; lexical-binding: t; -*-
 ;;
 ;; TODO A high level institution authoring mode
+;; Auto structure of participants, activity sets,
+;; values, IGU, roles, induction, artifacts...
 
 (provide 'acab-inst-mode)
 

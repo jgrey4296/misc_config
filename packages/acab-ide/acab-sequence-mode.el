@@ -728,10 +728,6 @@ https://stackoverflow.com/questions/1249497 "
 ;;classes/syntax flags: include 'w': word, '.':punctuation,
 ;; see: C-h ? r elisp manual syntax-tables
 
-;;--------------------
-;;Autoloading
-;;--------------------
-(add-to-list 'auto-mode-alist '("\\.seq\\'" . acab-sequence-mode))
 
 ;; --------------------
 ;;Entry Function

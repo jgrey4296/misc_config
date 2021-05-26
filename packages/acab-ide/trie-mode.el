@@ -132,11 +132,6 @@
     st)
   "Syntax table for the trie-mode")
 
-;;--------------------
-;;Autoloading
-;;--------------------
-(add-to-list 'auto-mode-alist '("\\.trie\\'" . trie-mode))
-
 
 (defun trie-syntactic-face-function (parse-state)
   'font-lock-comment-face

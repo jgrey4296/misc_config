@@ -69,9 +69,3 @@
       ;; Cleanup the IDE
       ))
  )
-
-
-;;;--------------------
-;;Autoloading
-;;--------------------
-(add-to-list 'auto-mode-alist '("\\.acab\\'" . acab-ide-minor-mode))

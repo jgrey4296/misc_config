@@ -68,4 +68,3 @@
   (yas-minor-mode)
 
   )
-(add-to-list 'auto-mode-alist '("\\.rule" . acab-rule-mode))

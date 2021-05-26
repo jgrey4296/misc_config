@@ -34,6 +34,4 @@
   (run-mode-hooks)
   (outline-minor-mode)
   (yas-minor-mode)
-
   )
-(add-to-list 'auto-mode-alist '("\\.activity" . acab-activity-mode))

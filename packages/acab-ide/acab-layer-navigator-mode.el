@@ -53,4 +53,3 @@
   (yas-minor-mode)
 
   )
-(add-to-list 'auto-mode-alist '("\\.layer" . acab-layer-navigator-mode))

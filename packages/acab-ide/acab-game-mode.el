@@ -35,4 +35,3 @@
   (yas-minor-mode)
 
   )
-(add-to-list 'auto-mode-alist '("\\.game" . acab-game-mode))

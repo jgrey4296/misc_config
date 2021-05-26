@@ -1,5 +1,7 @@
 ;;; ../../../Volumes/documents/github/emacs_files/packages/acab-ide/acab-autoload.el -*- lexical-binding: t; -*-
 
+(provide 'acab-autoload)
+
 (add-to-list 'auto-mode-alist '("\\.acab\\'"   . acab-ide-minor-mode))
 (add-to-list 'auto-mode-alist '("\\.trie\\'"   . trie-mode))
 (add-to-list 'auto-mode-alist '("\\.acab.log"  . acab-log-mode))

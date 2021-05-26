@@ -1,21 +1,6 @@
 ;; -*- mode: emacs-lisp; lexical-binding: t; -*-
 
 ;;based On https://www.emacswiki.org/emacs/ModeTutorial
-(require 'acab-comint)
-(require 'acab-face)
-(require 'acab-hydras)
-(require 'acab-log-mode)
-(require 'acab-inst-mode)
-(require 'acab-rule-mode)
-(require 'acab-sequence-mode)
-
-(require 'trie-explore-mode)
-(require 'trie-management)
-(require 'trie-minor-mode)
-(require 'trie-mode)
-(require 'trie-data)
-(require 'trie-company)
-
 (provide 'acab-ide-minor-mode)
 
 (defgroup acab-ide '() "Acab Mode Customizations")

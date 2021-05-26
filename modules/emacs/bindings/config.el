@@ -10,8 +10,6 @@
 (after! evil
   (load! "+leader-bindings")
   (load! "+leaderless-bindings")
-  (load! "+evil-bindings")
-  (load! "+evil-bindings-2")
   )
 (after! evil-ex
   (load! "+evil-ex-setup")
@@ -26,4 +24,9 @@
         )
   )
 
+(defun jg-evil-bind-hook ()
+  (load! "+evil-bindings")
+  (load! "+evil-bindings-2"))
+
 (add-hook! ibuffer-mode #'+jg-ibuffer-update-hook)
+(add-hook! doom-first-input #'jg-evil-bind-hook)

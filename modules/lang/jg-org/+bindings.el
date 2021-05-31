@@ -5,14 +5,16 @@
       "j c"    #'org-goto-calendar
       )
 
-(map! :after dired-mode
-      :map dired-mode-map
+(map! :map dired-mode-map
       (:prefix "%"
        :desc "Mark Orgs" :n "o"     #'+jg-org-dired-select-org
        )
       :localleader
       (:prefix ("m" . "Mark")
        :desc "Mark Orgs" "o" #'+jg-org-dired-select-org
+       )
+      (:prefix ("f" . "Find")
+       :desc "Display Selection" "s" #'+jg-org-display-selection
        )
       (:prefix ("K" . "Destructive")
        :desc "Clean Marked" "c"     #'+jg-org-clean-marked-files

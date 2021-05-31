@@ -40,9 +40,7 @@
       (:prefix ("m" . "Mark")
        :desc "Mark Untagged Orgs" "u"    #'+jg-tag-mark-untagged-orgs
        )
-      (:prefix ("f" . "Find")
-       :desc "Display Tag Selection" "s" #'+jg-tag-display-selection
-       )
+      (:prefix ("f" . "Find"))
       (:prefix ("i" . "Index")
        :desc "Index People" "p"          #'+jg-tag-index-people
        :desc "Index Tags" "t"            #'+jg-tag-index-tags

@@ -21,6 +21,7 @@
               jg-bibtex-pdf-replace-match-string "~/Mega"
               jg-bibtex-pdf-replace-library-string "pdflibrary"
 
+              jg-bibtex-pdf-loc "~/Mega/pdflibrary"
 
               jg-bibtex-helm-candidates nil
               jg-bibtex-candidates-names '()

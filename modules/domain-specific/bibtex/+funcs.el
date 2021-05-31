@@ -154,18 +154,66 @@ the entry of interest in the bibfile.  but does not check that."
                                     (f-entries bib-path
                                                (lambda (f) (f-ext? f "bib"))))))
          )
-      (bibtex-kill-entry)
-      (with-temp-buffer
-        (if (f-exists? target)
-            (insert-file-contents target))
-        (goto-char (point-max))
-        (insert "\n")
-        (bibtex-yank)
-        (write-file target nil)
+    (+jg-bibtex-refile-pdf current-prefix-arg)
+    (bibtex-kill-entry)
+    (with-temp-buffer
+      (if (f-exists? target)
+          (insert-file-contents target))
+      (goto-char (point-max))
+      (insert "\n")
+      (bibtex-yank)
+      (write-file target nil)
       )
+
     )
   )
-(defun +jg-bibtex-visual-select-entry ()
+
+(defun +jg-bibtex-get-files-fn (x)
+  " Given a pair, return the cdr if car matches 'file' "
+  (if (string-match "file" (car x))
+      (string-trim (cdr x) "{" "}")))
+
+(defun +jg-bibtex-refile-pdf (&optional destructive)
+  " Refile a pdf from its location to its pdflib/year/author loc
+returns the new location
+"
+  (if destructive
+      (message "Destructive Refile"))
+  (save-excursion
+    (let* ((entry  (bibtex-parse-entry))
+           (author (s-capitalize (bibtex-autokey-get-names)))
+           (year   (bibtex-text-in-field "year"))
+           (files  (-filter #'identity (mapcar #'+jg-bibtex-get-files-fn entry)))
+           (pdflib jg-bibtex-pdf-loc)
+           (finalpath (f-join pdflib year author))
+           newlocs)
+      (make-directory finalpath 'parents)
+
+      (loop for file in files
+            do
+            (let* ((fname (f-filename file))
+                   (target (f-join finalpath fname)))
+              (message "Relocating %s to %s" file target)
+              (assert (not (f-exists? target)))
+              (if (s-equals? "y" (read-string (format "%sRefile to %s? " (if destructive "Destructive " "")
+                                                      target)))
+                  (progn (if destructive
+                             (f-move file target)
+                           (f-copy file target))
+                         (push target newlocs))
+                (push file newlocs))
+              )
+            )
+
+      ;; Update entry with new locations
+      (loop for file in newlocs
+            with count = 1
+            do
+            (bibtex-set-field (format "file%s" (if (eq count 1) "" count)) file)
+            )
+      )
+    )
+  )(defun +jg-bibtex-visual-select-entry ()
   " Evil visual select the current entry "
   (interactive)
   (evil-visual-make-region (bibtex-beginning-of-entry)

@@ -17,7 +17,7 @@
        :desc "Display Selection" "s" #'+jg-org-display-selection
        )
       (:prefix ("K" . "Destructive")
-       :desc "Clean Marked" "c"     #'+jg-org-clean-marked-files
+       :desc "Clean Marked" "c"     #'+jg-org-dired-clean-marked-files
        :desc "Chop File Names" "C"  #'+jg-org-chop-long-files-from-dired
        :desc "Quick Compress" "Z"   #'+jg-org-quick-compress-orgs
        :desc "Fix Org Links"  "L"   #'+jg-org-dired-fix-org-links

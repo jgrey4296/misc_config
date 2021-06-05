@@ -26,3 +26,8 @@
   )
 
 (add-hook 'doom-first-input-hook #'+jg-org-setup-tags-hook 100)
+
+(after! org
+  (remove-hook 'org-tab-first-hook
+               #'+org-cycle-only-current-subtree-h)
+  )

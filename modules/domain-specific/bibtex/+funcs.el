@@ -248,7 +248,7 @@ using org-bibtex-fields for completion options "
            new-value
            )
       (setq new-value (if source
-                          (helm :sources '(source dummy-source)
+                          (helm :sources (list source dummy-source)
                                 :buffer "*helm bibtex completions*"
                                 :input curr-value
                                 )

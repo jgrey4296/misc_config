@@ -19,6 +19,7 @@
       :desc "New Entry"           "n" #'org-ref-bibtex-new-entry/body
       :desc "Count Entries"       "C" #'bibtex-count-entries
       :desc "Refile"              "r" #'+jg-bibtex-refile-by-year
+      :desc "Rename file"         "R" #'+jg-bibtex-rename-file
       :desc "Scholar Search"      "s" #'+jg-bibtex-google-scholar
       (:prefix ("c" . "Copy")
        :desc "Copy Entry"        "e"    #'+jg-bibtex-copy-entry

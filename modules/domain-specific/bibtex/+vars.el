@@ -14,8 +14,8 @@
               jg-bibtex-scholar-search-string "https://scholar.google.com/scholar?hl=en&q=%s"
               jg-bibtex-fill-column 50000
 
-              jg-bibtex-loc-bibtex      "~/github/writing/resources/bibliography"
-              jg-bibtex-loc-completions "~/github/writing/resources/completions"
+              jg-bibtex-loc-bibtex      "~/github/writing/resources/bibliography/"
+              jg-bibtex-loc-completions "~/github/writing/resources/completions/"
 
               jg-bibtex-pdf-loc-regexp  "file[[:digit:]]*\s*=\s*{\\(.+mega\\)/\\(.+pdflibrary\\)?"
               jg-bibtex-pdf-replace-match-string "~/Mega"

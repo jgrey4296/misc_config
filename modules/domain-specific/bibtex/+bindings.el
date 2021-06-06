@@ -66,4 +66,5 @@
       :localleader
       :prefix "K"
       :desc "Unify Pdf Locations" "U"   #'+jg-bibtex-dired-unify-pdf-locations
+      :desc "Stub Pdfs"           "P"   #'+jg-bibtex-dired-stub-entries
       )

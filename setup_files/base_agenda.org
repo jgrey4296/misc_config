@@ -30,6 +30,9 @@ Versu, Abl, Cif
 *** [[file:/Volumes/documents/github/writing/resources/research_questions.org][Research Questions]]
 
 ** Resources
+[[https://ambientcg.com/][ambiengCG]]
+[[https://tineye.com/][Tin Eye Reverse Image Search]]
+[[https://dopresskit.com/][Presskit]]
 [[http://arabimagefoundation.com/][Arab Image Foundation]]
 [[http://discovery.nationalarchives.gov.uk/][UK National Archives]]
 [[http://envelopecollection.com/][Envelope Collection]]
@@ -200,6 +203,7 @@ Versu, Abl, Cif
 [[http://waveform3d.com/][Waveform3d]]
 [[https://sketchfab.com/][Sketchfab]]
 [[https://en.wikipedia.org/wiki/Summa_Theologica][Summa Theologica]]
-
+https://strongtyping.readthedocs.io/en/latest/
+https://dev.to/matechs/building-custom-dsls-in-typescript-29el
 ** Reminders
 https://github.com/company-mode/company-mode/wiki/Writing-backends

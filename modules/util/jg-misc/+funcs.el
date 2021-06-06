@@ -121,3 +121,34 @@ Dedicated (locked) windows are left untouched."
     (list major minor)
     )
   )
+
+(defun +jg-misc-sync-movements ()
+  ;; TODO
+  ;; Get current windows
+  ;; add advice to evil line move
+
+  )
+
+(defun +jg-misc-ivy-rps-transformer (x)
+  " Cleans a Candidate line for display  "
+  (if (string-match "\.com/\\([0-9/]+\\)/have-you-played-\\(.+?\\)/" x)
+      `(,(format "%s : %s" (match-string 1 x)
+                 (s-replace "-" " " (match-string 2 x)))
+        . ,x)
+    `(,x . ,x)
+    )
+  )
+
+(defun +jg-misc-helm-rps-have-you-playeds ()
+  (interactive)
+  (let* ((target "/Volumes/documents/github/writing/resources/bibliography_plus/have-you-playeds")
+         (source (helm-build-in-file-source "Have You Played Helm" target
+                   :candidate-transformer (lambda (x)
+                                            (mapcar #'+jg-misc-ivy-rps-transformer x))
+                   :action (helm-make-actions "Open" #'(lambda (x) (mapcar #'+jg-browse-url (helm-marked-candidates))))
+                   )))
+    (helm :sources (list source)
+          :buffer "*helm have you played*")
+    )
+
+  )

@@ -10,6 +10,8 @@
        :desc "Toggle Layout" "|" #'+jg-window-layout-toggle
        :desc "Rotate Windows" "\\" #'+jg-rotate-windows-forward
        )
+
+      :desc "Have you Played?" "o h h" #'+jg-misc-helm-rps-have-you-playeds
       )
 
 (map! :map messages-buffer-mode-map

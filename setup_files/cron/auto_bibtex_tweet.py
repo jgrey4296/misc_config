@@ -31,6 +31,7 @@ BIBTEX_LOC       = "~/github/writing/resources/bibliography"
 SECRETS_LOC      = '~/github/py_bookmark_organiser/secrets.config'
 
 tweeted_log      = "~/github/writing/resources/bibliography/.emacs_tweet_rand_bib_log"
+too_long_log     = "~/.doom/setup_files/cron/rejected_tweets.log"
 bibtex_blacklist = "~/.doom.d/setup_files/cron/bibtex_blacklist"
 
 REQUIRED_KEYS    = ["year", "author", "title", "tags"]
@@ -116,18 +117,15 @@ def format_tweet(entry):
     elif "isbn" in entry:
         result += f"isbn: {entry['isbn']}\n"
     else:
-        logging.warning("Bad Identifier")
+        logging.warning(f"Bad Entry: {entry['ID']}")
         exit()
 
     tags = " ".join(["#{}".format(x.strip()) for x in entry['tags'].split(',')])
     if len(result) <= 250:
         diff = 250 - len(result)
         result += tags[:diff]
-    result += "\n#my_bibtex"
 
-    if len(result) >= 280:
-        logging.warning(f"Resulting Tweet too long: {len(result)}\n{result}")
-        exit()
+    result += "\n#my_bibtex"
 
     return (entry['ID'], result)
 
@@ -167,6 +165,16 @@ if __name__ == "__main__":
         maybe_blacklist_file(db, bib, tweeted)
 
     id_str, tweet_text = format_tweet(entry)
+
+    # If the tweet is too long, log it as as single line
+    if len(tweet_text) >= 280:
+        logging.warning(f"Resulting Tweet too long: {len(result)}\n{result}")
+        single_line = tweet_text.replace("\n", " ")
+        with open(too_long_log, 'a') as f:
+            f.write(f"({id_str}) : {single_line}\n")
+
+        exit()
+
 
     config = configparser.ConfigParser()
     with open(expander(SECRETS_LOC),'r') as f:

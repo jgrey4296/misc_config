@@ -152,3 +152,14 @@ Dedicated (locked) windows are left untouched."
     )
 
   )
+
+
+(define-advice projectile-run-compilation (:filter-args (val)
+                                           +jg-misc-command-expander)
+  " Expand variables mentioned in the command "
+  (let ((loc (if (eq major-mode 'dired-mode)
+                 (dired-current-directory)
+               (f-parent (buffer-file-name)))))
+    (list (s-replace "\$" (format "dir=\"%s\"" loc) (car val)))
+    )
+  )

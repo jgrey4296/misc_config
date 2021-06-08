@@ -25,8 +25,6 @@ root_logger.getLogger('').addHandler(console)
 logging = root_logger.getLogger(__name__)
 ##############################
 MAX_ATTEMPTS     = 20
-TWURL_CMD        = "twurl"
-TWURL_TARGET     = "/1.1/statuses/update.json"
 BIBTEX_LOC       = "~/github/writing/resources/bibliography"
 SECRETS_LOC      = '~/github/py_bookmark_organiser/secrets.config'
 
@@ -128,29 +126,6 @@ def format_tweet(entry):
     result += "\n#my_bibtex"
 
     return (entry['ID'], result)
-
-def call_twurl(tweet_text):
-    # logging.info(f"Tweeting: {tweet_text}")
-    full_arg = f"status={tweet_text}"
-    result = subprocess.run([TWURL_CMD,
-                             "-d",
-                             full_arg,
-                             TWURL_TARGET],
-                            capture_output=True,
-                            shell=True
-                            )
-    twurl_output = json.loads(result.stdout)
-
-    if 'errors' not in twurl_output:
-        return True
-
-    else:
-        error_obj = twurl_output['errors'][0]
-        err_code = error_obj['code']
-        err_msg = error_obj['message']
-        logging.warning(f"Twurl Failed: ({err_code}) {err_msg}")
-        system("say Auto-Tweet Failed")
-    return False
 
 if __name__ == "__main__":
     # logging.info("Running Auto Bibtex Tweet")

@@ -143,7 +143,7 @@ if __name__ == "__main__":
 
     # If the tweet is too long, log it as as single line
     if len(tweet_text) >= 280:
-        logging.warning(f"Resulting Tweet too long: {len(result)}\n{result}")
+        logging.warning(f"Resulting Tweet too long: {len(tweet_text)}\n{tweet_text}")
         single_line = tweet_text.replace("\n", " ")
         with open(too_long_log, 'a') as f:
             f.write(f"({id_str}) : {single_line}\n")

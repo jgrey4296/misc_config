@@ -2,6 +2,7 @@
 ;;
 ;; Helm bindings
 (map! :leader
+      :desc "Open Random Untagged Twitter" "o u" #'+jg-tag-open-random-untagged-twitter
       :prefix ("o h" . "Helms")
       :desc "Firefox Helm"              "f" #'+jg-tag-helm-bookmarks
       :desc "Tag Helm"                  "t" #'+jg-tag-helm-twitter

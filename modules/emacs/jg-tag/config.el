@@ -14,6 +14,7 @@
 (load! "+tags")
 (load! "+util")
 (load! "+vars")
+(load! "+funcs")
 
 (use-package! tag-clean-minor-mode
   :defer t)

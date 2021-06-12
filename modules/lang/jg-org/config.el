@@ -27,7 +27,14 @@
 
 (add-hook 'doom-first-input-hook #'+jg-org-setup-tags-hook 100)
 
-(after! org
-  (remove-hook 'org-tab-first-hook
-               #'+org-cycle-only-current-subtree-h)
+(add-hook 'doom-first-input-hook
+          #'(lambda () (remove-hook 'org-tab-first-hook
+                               #'+org-cycle-only-current-subtree-h))
+          )
+
+(use-package! graphviz-dot-mode
+  :defer t
+  :after org
+  :init
+  (push '("dot" . graphviz-dot) org-src-lang-modes)
   )

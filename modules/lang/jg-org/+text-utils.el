@@ -122,6 +122,7 @@ Sort, align, split, save "
 (defun +jg-org-remove-duplicate-tweet-entries ()
   "Find duplicate tweets in an org file and remove them"
   (interactive)
+  (message "Removing Duplicate Tweet Entries")
   (let ((permalinks (make-hash-table :test 'equal))
         ;;Get all entries' (permalink start-bound end-bound level)
         (all-entries (seq-filter 'identity (org-map-entries '+jg-org-map-entries-build-permalink-regions)))

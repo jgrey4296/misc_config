@@ -74,25 +74,33 @@
 (defun +jg-org-dired-clean-remove-surplus ()
   " Remove additional single star headings in an org file "
   (interactive)
-  (let ((files (dired-get-marked-files)))
+  (let ((files (dired-get-marked-files))
+        failures
+        )
     (loop for file in files
           do
           (with-temp-buffer
-            (insert-file-contents file)
-            (indent-region (point-min) (point-max))
-            (+jg-org-remove-surplus-headings)
-            (+jg-org-sort-headings)
-            (+jg-org-remove-duplicate-tweet-entries)
-            (+jg-org-clean-whole-duplicate-threads)
-            (write-file file)
+            (condition-case err
+                (progn
+                  (message "---------- Removing Surplus on: %s" file)
+                  (insert-file-contents file)
+                  (indent-region (point-min) (point-max))
+                  (+jg-org-remove-surplus-headings)
+                  (+jg-org-sort-headings)
+                  (+jg-org-remove-duplicate-tweet-entries)
+                  (+jg-org-clean-whole-duplicate-threads)
+                  (write-file file))
+              (error (push file failures)))
             )
           )
+    (message "Removed Surplus except for: %s" failures)
     )
   )
 
 (defun +jg-org-remove-surplus-headings ()
   " Go through a buffer, removing additional single star headings,
 and the property block directly below "
+  (message "Removing Surplus Top Level Headings")
   (goto-char (point-min))
   (forward-line)
   (let ((kill-whole-line t))
@@ -109,6 +117,7 @@ and the property block directly below "
   )
 (defun +jg-org-sort-headings ()
   " Call org-sort-entries on a buffer "
+  (message "Sorting Headings")
   (goto-char (point-min))
   (org-mode)
   (org-show-all)
@@ -116,6 +125,7 @@ and the property block directly below "
   )
 (defun +jg-org-clean-whole-duplicate-threads ()
   " Call org-sort-entries on a buffer "
+  (message "Removing Duplicate-only subtrees")
   (goto-char (point-min))
   (org-mode)
   (org-show-all)
@@ -125,7 +135,9 @@ and the property block directly below "
   (defvar jg-dup-2-star (make-marker))
   (defvar jg-dup-3-star (make-marker))
   (defvar jg-dup-hash-log (make-hash-table))
+  (clrhash jg-dup-hash-log)
 
+  (goto-char (point-min))
   (org-map-entries '+jg-org-map-entry-duplicate-finder t nil)
   ;; remove marked subtrees
   (let* ((filtered-keys (-filter #'(lambda (x) (gethash x jg-dup-hash-log))

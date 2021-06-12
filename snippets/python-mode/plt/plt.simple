@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: plt.simple
+# uuid: plt.simple
+# --
+import matplotlib
+import matplotlib.pyplot as plt
+import numpy as np
+
+
+def fun(x):
+    if x % 2 == 0:
+        return x/2
+    else:
+        return (3 * x) + 1
+
+X = np.arange(0,100,1)
+current= 32632
+total = []
+for x in range(100):
+    total.append(current)
+    current = fun(current)
+
+Y = np.array(total)
+
+plt.figure()
+plt.style.use('classic')
+plt.plot(X,Y)
+plt.show()

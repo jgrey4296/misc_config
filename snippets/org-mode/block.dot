@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: block.dot
+# uuid: block.dot_
+# --
+#+begin_src dot :file ${1:file} :cmdline -tpng :exports results :results silent
+$0
+#+end_src
+[[file:$1][Results]]

@@ -194,10 +194,10 @@ returns the new location
             (let* ((fname (f-filename file))
                    (target (f-join finalpath fname)))
               (message "Relocating %s to %s" file target)
-              (assert (not (f-exists? target)))
               (if (s-equals? "y" (read-string (format "%sRefile to %s? " (if destructive "Destructive " "")
                                                       target)))
-                  (progn (if destructive
+                  (progn (assert (not (f-exists? target)))
+                         (if destructive
                              (f-move file target)
                            (f-copy file target))
                          (push target newlocs))
@@ -213,7 +213,9 @@ returns the new location
             )
       )
     )
-  )(defun +jg-bibtex-visual-select-entry ()
+  )
+
+(defun +jg-bibtex-visual-select-entry ()
   " Evil visual select the current entry "
   (interactive)
   (evil-visual-make-region (bibtex-beginning-of-entry)

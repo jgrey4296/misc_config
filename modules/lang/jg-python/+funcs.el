@@ -62,7 +62,43 @@ Customize python using PYTHONBREAKPOINT env variable
     )
   )
 
+(defun +jg-python-class-diagram ()
+  " On lines of class definitions 'class A(B..):
+    extract the total hierarchy "
+  (interactive)
+  (goto-char (point-min))
+  (let (graph sorted-graph
+        (regex "^class \\(.+?\\)\\((\\(.*?\\))\\)?:$")
+        )
+    (while (and (< (point) (point-max)) (looking-at regex))
+      (let* ((classname (match-string 1))
+             (parents   (s-split "," (if (match-string 3)
+                                         (match-string 3)
+                                       "") t))
+             (cleaned-parents (mapcar #'(lambda (x) (s-trim (if (s-contains? "." x)
+                                                           (cadr (s-split "\\." x t))
+                                                         x))) parents)))
 
+        (setq graph (concatenate 'list graph (if (null cleaned-parents)
+                                                 `(("object" . ,classname))
+                                               (-zip-fill classname cleaned-parents nil))))
+        )
+      (forward-line)
+      )
+    (setq sorted-graph (-sort #'(lambda (x y) (string-lessp (car x) (car y))) graph))
+    ;; Generate Graphviz description
+    (with-temp-buffer-window "*Python Class Diagram*"
+        'display-buffer-pop-up-window nil
+      (princ "#+begin_src dot :file ~/desktop/class-diagram.png :exports results :results silent\n")
+      (princ "graph {\n")
+      ;; Add individual elements
+      (mapc #'(lambda (x) (princ (format "  \"%s\" -- \"%s\";\n" (car x) (cdr x)))) sorted-graph)
+      (princ "}\n")
+      (princ "#+end_src\n")
+      (princ "[[file:~/desktop/class-diagram.png][Results]]\n")
+      )
+    )
+  )
 ;; Hooks
 (defun +jg-python-outline-regexp-override-hook ()
   (setq-local outline-regexp

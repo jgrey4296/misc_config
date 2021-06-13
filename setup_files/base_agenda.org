@@ -205,5 +205,9 @@ Versu, Abl, Cif
 [[https://en.wikipedia.org/wiki/Summa_Theologica][Summa Theologica]]
 https://strongtyping.readthedocs.io/en/latest/
 https://dev.to/matechs/building-custom-dsls-in-typescript-29el
+https://graphics.stanford.edu/courses/cs348c-96-fall/resources.html
+https://graphviz.org/theory/
 ** Reminders
 https://github.com/company-mode/company-mode/wiki/Writing-backends
+
+fictional syllabi - both of actual papers, and lem-like

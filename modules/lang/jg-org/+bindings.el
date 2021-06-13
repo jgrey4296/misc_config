@@ -94,7 +94,8 @@
       :m "[ h"  nil
       )
 
-(map! :map graphviz-dot-mode-map
+(map! :after graphviz-dot-mode
+      :map graphviz-dot-mode-map
       :localleader
       :desc "Documentation" "1" (cmd! (+jg-browse-url "https://graphviz.org/doc/info/lang.html"))
       )

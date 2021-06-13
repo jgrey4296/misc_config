@@ -29,7 +29,7 @@ BIBTEX_LOC       = "~/github/writing/resources/bibliography"
 SECRETS_LOC      = '~/github/py_bookmark_organiser/secrets.config'
 
 tweeted_log      = "~/github/writing/resources/bibliography/.emacs_tweet_rand_bib_log"
-too_long_log     = "~/.doom/setup_files/cron/rejected_tweets.log"
+too_long_log     = "~/.doom.d/setup_files/cron/rejected_tweets.log"
 bibtex_blacklist = "~/.doom.d/setup_files/cron/bibtex_blacklist"
 
 REQUIRED_KEYS    = ["year", "author", "title", "tags"]
@@ -145,7 +145,7 @@ if __name__ == "__main__":
     if len(tweet_text) >= 280:
         logging.warning(f"Resulting Tweet too long: {len(tweet_text)}\n{tweet_text}")
         single_line = tweet_text.replace("\n", " ")
-        with open(too_long_log, 'a') as f:
+        with open(expander(too_long_log), 'a') as f:
             f.write(f"({id_str}) : {single_line}\n")
 
         exit()

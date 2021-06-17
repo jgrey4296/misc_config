@@ -12,6 +12,8 @@
 Versu, Abl, Cif
 **** 2: Democracy CSV formulae
 **** 3: Patch Notes
+**** TODO use awk for simple counts
+
 *** [[~/.doom.d/setup_files/cron/crontab.backup][Cron Jobs]]
 **** Tweet
 ***** Grammar
@@ -207,7 +209,22 @@ https://strongtyping.readthedocs.io/en/latest/
 https://dev.to/matechs/building-custom-dsls-in-typescript-29el
 https://graphics.stanford.edu/courses/cs348c-96-fall/resources.html
 https://graphviz.org/theory/
+https://q.uiver.app/
+Killing the Black Body or Fatal Invention by @DorothyERoberts
+Racecraft by Barbara and Karen Fields
+Medical Apartheid by @haw95
+The Warmth of Other Suns by @Isabelwilkerson
+Sister Citizen by @MHarrisPerry
+The Pushout by @MoniqueWMorris
+
 ** Reminders
 https://github.com/company-mode/company-mode/wiki/Writing-backends
+index xkcd using explainxkcd
 
 fictional syllabi - both of actual papers, and lem-like
+
+org - add a nav state for moving around headings and subtrees?
+
+tag - amend mode
+
+* TODO simulation sketches

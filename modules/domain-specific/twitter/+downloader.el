@@ -1,8 +1,8 @@
 ;;; domain-specific/twitter/+downloader.el -*- lexical-binding: t; -*-
 
 (defun +jg-tweet-downloader (id_str)
-  " "
-  (interactive "M")
+  " Download a minibuffer supplied tweet id "
+  (interactive "MDownload:\n")
   ;; Start a process
   (let* ((mv-cmd (format "cd %s" jg-twitter-download-repo))
          (download-cmd (format "%s --tweet %s" jg-twitter-download-py id_str))

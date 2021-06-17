@@ -49,7 +49,7 @@
         (insert-file-contents full-file t)
         ;; go to the match
         (goto-char (point-min))
-        (forward-line line-number)
+        (forward-line (1- line-number))
         ;; go up to its thread header
         (if (re-search-backward "^\*\* Thread:" nil t)
             (progn
@@ -63,8 +63,41 @@
     )
   )
 
+(defun +jg-tag-ivy-replace (x)
+  "Opens the current candidate in another window."
+  (when (string-match "\\`\\(.*?\\):\\([0-9]+\\):\\(.*\\)\\'" x)
+    (let* ((file-name   (match-string-no-properties 1 x))
+           (line-number (string-to-number (match-string-no-properties 2 x)))
+           (full-file (expand-file-name file-name (ivy-state-directory ivy-last)))
+           (the-line (s-trim (match-string-no-properties 3 x)))
+           (input ivy-text)
+           the-tag
+          )
+      (setq the-tag (if (not jg-tag-ivy-registered-tag)
+                        (read-string (format "Replace %s with: " the-line))
+                      jg-tag-ivy-registered-tag))
+      ;;(message "Swapping %s for: %s in %s:%s" input the-tag full-file line-number)
+      (with-temp-buffer
+        ;; open the file indirectly
+        (insert-file-contents full-file t)
+        ;; go to the match
+        (goto-char (point-min))
+        (forward-line (1- line-number))
+        (beginning-of-line)
+        ;; Replace
+        (if (re-search-forward input (line-end-position) t)
+            (progn (replace-match the-tag t)
+                   ;; Save the file
+                   (write-file full-file))
+          (message "Match Not Found")))
+      )
+    )
+  )
+
+
 (ivy-set-actions 'counsel-rg
                  '(("t" +jg-tag-ivy-tag "Tag")
                    ("T" +jg-tag-ivy-tag-set "Set Tag")
-                   ("C" +jg-tag-ivy-tag-clear "Clear Tag")))
-
+                   ("C" +jg-tag-ivy-tag-clear "Clear Tag")
+                   ("r" +jg-tag-ivy-replace "Replace Tag")
+                   ))

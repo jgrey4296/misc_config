@@ -153,6 +153,17 @@ Dedicated (locked) windows are left untouched."
 
   )
 
+(defun +jg-misc-helm-xkcd ()
+  " TODO transformers "
+  (interactive)
+  (let* ((target "/Volumes/documents/github/writing/resources/bibliography_plus/xkcds")
+         (source (helm-build-in-file-source "xkcd helm" target
+                   :action (helm-make-actions "Open" #'(lambda (x) (mapcar #'+jg-browse-url (helm-marked-candidates))))
+                   )))
+    (helm :sources (list source)
+          :buffer "*helm xkcd*")
+    )
+  )
 
 (define-advice projectile-run-compilation (:filter-args (val)
                                            +jg-misc-command-expander)

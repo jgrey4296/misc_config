@@ -4,7 +4,8 @@
 
 (map! :map ivy-minibuffer-map
       [remap doom/delete-backward-word] #'ivy-backward-kill-word
-      :ni "TAB"                         #'ivy-dispatching-call
+      :n "TAB"                         #'ivy-dispatching-call
+      :i "<backtab>"                    #'ivy-dispatching-call
       :n  "," #'+ivy/occur
       :n  "." #'hydra-ivy/body
 

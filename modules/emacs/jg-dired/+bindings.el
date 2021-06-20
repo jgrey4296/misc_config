@@ -14,11 +14,13 @@
 
       :n "v" nil
       :n "i" nil
+      :n "I" nil
       ":" nil
 
       "C-h" #'dired-up-directory
 
       :desc "Expand Subdir"        :n "i"                              #'+jg-dired-insert-subdir-maybe-recursive
+      :desc "Expand Marked"        :n "I"                              #'+jg-dired-insert-marked-subdir
       :desc "Remove Subdir"        :n "DEL"                            #'dired-kill-subdir
       :desc "Activate Environment" :n "v" 'pyvenv-activate
 

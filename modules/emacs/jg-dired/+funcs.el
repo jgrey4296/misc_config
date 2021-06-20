@@ -69,6 +69,13 @@ Type SPC or `y' to %s one match, DEL or `n' to skip to next,
     (dired-maybe-insert-subdir dirname switches))
   )
 
+(defun +jg-dired-insert-marked-subdir ()
+  (interactive)
+  (let ((marked (-filter #'f-directory? (dired-get-marked-files))))
+    (mapc #'dired-maybe-insert-subdir marked)
+    )
+  )
+
 (defun +jg-dired-diff ()
   "Diff Files from Dired"
   (interactive)

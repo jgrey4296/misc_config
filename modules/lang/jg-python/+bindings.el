@@ -22,6 +22,11 @@
        :desc "Docs: Python"        "1" (cmd! (+jg-browse-url jg-python-docs-url))
        :desc "Docs: Bibtex Parser" "2" (cmd! (+jg-browse-url jg-python-bibtex-parser-url))
        :desc "Docs: BeautifulSoup" "3" (cmd! (+jg-browse-url jg-python-beautiful-soup-url))
+       :desc "Docs: FlowWeaver"    "4" (cmd! (+jg-browse-url "https://floweaver.readthedocs.io/en/latest/"))
+       :desc "Docs: Matplotlib"    "5" (cmd! (+jg-browse-url "https://matplotlib.org/stable/contents.html"))
+       :desc "Docs: Numpy"         "6" (cmd! (+jg-browse-url "https://numpy.org/doc/stable/"))
+       :desc "Docs: Pandas"        "7" (cmd! (+jg-browse-url "https://pandas.pydata.org/docs/"))
+       :desc "Docs: Seaborn"       "8" (cmd! (+jg-browse-url "https://seaborn.pydata.org/api.html"))
        )
       (:prefix ("i" . "imports")
        :desc "Insert missing imports" "i" #'pyimport-insert-missing

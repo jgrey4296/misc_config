@@ -41,6 +41,11 @@
       :nm "s" nil
       )
 
+(map! :map special-mode-map
+      :n "q" #'quit-window
+      )
+
+
 ;; Mouse Deactivation
 (define-key evil-motion-state-map [down-mouse-1] #'ignore)
 (define-key evil-motion-state-map [mouse-1] #'ignore)

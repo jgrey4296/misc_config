@@ -22,6 +22,7 @@
        :desc "Quick Compress" "Z"   #'+jg-org-quick-compress-orgs
        :desc "Fix Org Links"  "L"   #'+jg-org-dired-fix-org-links
        :desc "Remove Surplus"   "S" #'+jg-org-dired-clean-remove-surplus
+       :desc "Mark as Twitter"  "T" #'+jg-org-dired-add-twitter-prop
        )
       )
 
@@ -61,7 +62,9 @@
        :desc "Clean Org"          "c"  #'+jg-org-clean
        :desc "Wrap Numbers"        "w" #'+jg-org-wrap-numbers
        :desc "Wrap non-link urls"  "L" #'+jg-org-wrap-non-link-urls
-       :desc "Remove Duplicates"   "D" #'+jg-org-remove-duplicate-tweet-entries)
+       :desc "Remove Duplicates"   "D" #'+jg-org-remove-duplicate-tweet-entries
+       :desc "Set as Twitter Buffer" "t" #'+jg-org-add-twitter-property
+       )
       ;; TODO refine this Codeblocks
       (:prefix ("." . "Code Blocks")
        :desc "Edit Codeblock " "e"     #'org-edit-src-code

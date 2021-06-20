@@ -191,3 +191,19 @@ and the property block directly below "
     )
    "matching org")
   )
+
+(defun +jg-org-dired-add-twitter-prop()
+  "Clean marked Org files"
+  (interactive)
+  (let ((files (dired-get-marked-files)))
+    (loop for file in files
+          do
+          (with-temp-buffer
+            (insert-file-contents file t)
+            (org-mode)
+            (+jg-org-add-twitter-property)
+            (write-file file)
+            )
+    )
+  )
+)

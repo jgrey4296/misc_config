@@ -5,7 +5,7 @@
   " "
   (interactive)
   (message "Starting Org Clean")
-
+  (+jg-org-add-twitter-property)
   ;; Initial clean: Wrap links
   (goto-char (point-min))
   (org-show-all)
@@ -235,4 +235,12 @@ to point to a single new line"
 
 
 
+  )
+
+(defun +jg-org-add-twitter-property ()
+  (interactive)
+  (save-excursion
+    (goto-char (point-min))
+    (org-set-property "TWITTER-BUFFER" "t")
+    )
   )

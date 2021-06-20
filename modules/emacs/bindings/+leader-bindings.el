@@ -516,6 +516,7 @@
        :desc "Line numbers"          "n" #'+jg-toggle-line-numbers
        :desc "Line numbers Visual"   "N" #'+jg-toggle-line-numbers-visual
        :desc "Evil goggles"          "g" #'evil-goggles-mode
+       :desc "Hl-line"               "h" #'global-hl-line-mode
        :desc "Fill Column Indicator" "f" #'display-fill-column-indicator-mode
        :desc "Indent guides"         "i" #'highlight-indent-guides-mode
        :desc "Highlight Parens"      "(" #'global-highlight-parentheses-mode

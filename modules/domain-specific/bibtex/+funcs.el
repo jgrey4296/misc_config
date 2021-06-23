@@ -108,7 +108,8 @@ the entry of interest in the bibfile.  but does not check that."
         (progn
           (message "Opening %s" target)
           (find-file-other-window (f-parent target))
-          )
+          (goto-char (point-min))
+          (search-forward (f-filename target)))
       )
     )
   )
@@ -197,9 +198,9 @@ returns the new location
               (if (s-equals? "y" (read-string (format "%sRefile to %s? " (if destructive "Destructive " "")
                                                       target)))
                   (progn (assert (not (f-exists? target)))
-                         (if destructive
-                             (f-move file target)
-                           (f-copy file target))
+                         (if destructive (f-move file target)
+                           (progn (f-copy file target)
+                                  (f-move file (f-join (f-parent file) (format "_refiled_%s" fname)))))
                          (push target newlocs))
                 (push file newlocs))
               )

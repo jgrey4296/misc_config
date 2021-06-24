@@ -195,8 +195,7 @@ returns the new location
             (let* ((fname (f-filename file))
                    (target (f-join finalpath fname)))
               (message "Relocating %s to %s" file target)
-              (if (s-equals? "y" (read-string (format "%sRefile to %s? " (if destructive "Destructive " "")
-                                                      target)))
+              (if (s-equals? "y" (read-string (format "%sRefile to %s? " (if destructive "Destructive " "") target)))
                   (progn (assert (not (f-exists? target)))
                          (if destructive (f-move file target)
                            (progn (f-copy file target)
@@ -211,6 +210,7 @@ returns the new location
             with count = 1
             do
             (bibtex-set-field (format "file%s" (if (eq count 1) "" count)) file)
+            (incf count)
             )
       )
     )

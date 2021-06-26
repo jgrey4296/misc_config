@@ -17,11 +17,10 @@
        :desc "Display Selection" "s" #'+jg-org-display-selection
        )
       (:prefix ("K" . "Destructive")
-       :desc "Clean Marked" "c"     #'+jg-org-dired-clean-marked-files
+       :desc "Clean Marked" "c"     #'+jg-org-dired-clean
        :desc "Chop File Names" "C"  #'+jg-org-chop-long-files-from-dired
        :desc "Quick Compress" "Z"   #'+jg-org-quick-compress-orgs
        :desc "Fix Org Links"  "L"   #'+jg-org-dired-fix-org-links
-       :desc "Remove Surplus"   "S" #'+jg-org-dired-clean-remove-surplus
        :desc "Mark as Twitter"  "T" #'+jg-org-dired-add-twitter-prop
        )
       )
@@ -59,7 +58,7 @@
       :desc "Todo"   "TAB" #'org-todo
       (:prefix ("f". "Format")
        :desc "Fix Drawers"        "d"  #'+jg-org-fix-properties-drawers
-       :desc "Clean Org"          "c"  #'+jg-org-clean
+       :desc "Clean Org"          "c"  #'+jg-org-clean-master
        :desc "Wrap Numbers"        "w" #'+jg-org-wrap-numbers
        :desc "Wrap non-link urls"  "L" #'+jg-org-wrap-non-link-urls
        :desc "Remove Duplicates"   "D" #'+jg-org-remove-duplicate-tweet-entries
@@ -73,13 +72,16 @@
       (:prefix ("l" . "Links")
        ;; "o"   #'+jg-org-open_link_in_buffer
        ;; "O"   #'+jg-org-open_link_externally
-       :desc "Change Link Name" "n"      #'+jg-org-change_link_name
+       :desc "Change Link Name" "n"      #'+jg-org-change-link-name
        )
       ;; Insertion
       (:prefix ("i" . "Insert")
        :desc "Insert Heading Trio" "t" #'+jg-org-insert-heading-trio
        :desc "Insert Subheading" "h"   #'org-insert-subheading
        :desc "Insert Drawer" "d"       #'org-insert-drawer)
+      (:prefix ("j" . "Jump")
+       :desc "Docs: Org"               "1" (cmd! (+jg-browse-url "https://orgmode.org/manual/"))
+       )
       )
 
 (map! :after evil-org

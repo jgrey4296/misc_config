@@ -45,7 +45,6 @@
     (if (equal type "file")
         (call-process "qlmanage" nil 0 nil "-x" path)
       (message "Link not a file"))))
-
 (defun +jg-org-open-selection (pair)
   "Open only a selection of a large file "
   (let ((file (car pair))
@@ -104,34 +103,80 @@ If preferred-length is not specified, use jg-org-preferred-linecount
       )
     )
   )
-(defun +jg-org-move-links ()
-  " Go through all links in a file,
-and either copy, or move, the referenced file to a new location
-Prefix-arg to move the file otherwise copy it
-"
+(defun +jg-org-list-agenda-files ()
+  " Creates a temporary, Org-mode buffer with links to agenda files "
   (interactive)
-  ;;Specify target, or use default
-  (let ((target (read-directory-name "Move To: "
-                                     jg-org-link-move-base))
-        (action (if current-prefix-arg 'rename-file 'copy-file))
-        link
+  (with-output-to-temp-buffer "*Agenda Files*"
+    (set-buffer "*Agenda Files*")
+    (insert "Agenda Files: ")
+    (insert "\n")
+    (mapc (lambda (x)
+            (let ((file_name (last (split-string x "/" t ".org"))))
+              (insert (format "[[%s][%s]]\n" x file_name))
+              )) org-agenda-files)
+    (org-mode)
+    )
+  )
+(defun +jg-org-split-on-headings ()
+  " Split an org file into multiple smaller buffers non-destructively "
+  (interactive)
+  (let ((contents (buffer-substring (point-min) (point-max)))
+        (target-depth (read-number "What Depth Subtrees to Copy? "))
+        (target-dir (read-directory-name "Split into directory: "))
+        (map-fn (lambda ()
+                  (let* ((components (org-heading-components))
+                         (depth (car components)))
+                    ;;Only copy correct depths
+                    (if (eq depth target-depth)
+                        (progn
+                          ;; (message (format "Current : %s %s" count (nth 4 components)))
+                          (org-copy-subtree 1)
+                          (current-kill 0 t)
+                          )
+                      )
+                    )
+                  ))
+        results
         )
-    (if (not (file-exists-p target))
-        (progn (message "Making target directory: %s" target)
-               (mkdir target))
+    (with-temp-buffer
+      (org-mode)
+      (insert contents)
+      (goto-char (point-min))
+      (setq results (-non-nil (org-map-entries map-fn)))
       )
-    (message "Process Type: %s" action)
-    (goto-char (point-min))
-    (while (eq t (org-next-link))
-      (setq link (plist-get (plist-get (org-element-context) 'link) :path))
-      (message "Processing: %s" link)
-      (if (not (f-exists? (f-join target (-last-item (f-split link)))))
-          (funcall action link target)
-        (message "Already Exists"))
+    (-each (-zip-fill target-dir results '()) '+jg-text-org-split-temp-buffer-create)
+    )
+  )
+(defun +jg-org-split-alphabetically ()
+  " Split a buffer of values on separate lines into headings alphabetically "
+  (interactive)
+  (goto-char (point-min))
+  (let ((current ?a)
+        (end ?z))
+    (insert "* Top\n")
+    (while (and (<= current end)
+                (re-search-forward (format "^%c" current)))
+      (goto-char (line-beginning-position))
+      (insert (format "** %c\n" current))
+      (cl-incf current)
       )
     )
   )
-
+(defun +jg-org-split-tag-list ()
+  " Combine the org-split functions into a single routine.
+Sort, align, split, save "
+  (interactive)
+  (let ((text (buffer-string))
+        (sort-fold-case t))
+    (with-temp-buffer
+      (insert text)
+      (sort-lines nil (point-min) (point-max))
+      (align-regexp (point-min) (point-max) "\\(\\s-*\\):" 1 nil t)
+      (jg-tag-org-split-alphabetically)
+      (jg-tag-org-split-on-headings)
+      )
+    )
+  )
 
 (defun +jg-org-refile-subtree (arg)
   ;; based on +org/refile-to-other-window

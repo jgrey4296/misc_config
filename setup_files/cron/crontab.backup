@@ -15,6 +15,9 @@ PYTHONPATH=/Volumes/documents/github/py_bookmark_organiser/
 # Update mail every 6 hours
 0 */6 * * * /usr/local/bin/mbsync -a
 
+# urlexpander
+5,35 */1 * * * /Volumes/documents/github/py_bookmark_organiser/bkmkorg/utils/twitter/url_expander.py --target ~/github/writing/resources/twitter_urls --output ~/github/writing/resources/expanded_urls --count 100
+
 ### WEEKLY:
 ## MON
 # Run updates at 3am on mondays

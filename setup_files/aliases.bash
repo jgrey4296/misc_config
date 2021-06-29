@@ -7,7 +7,6 @@ alias mini="ssh jg@192.168.1.5"
 alias ubun="ssh john@192.168.1.11"
 alias wind="ssh john@192.168.1.2"
 
-
 alias pServer="python -m http.server 8888 &"
 alias qpServer="(python -m http.server 8888 > /dev/null 2>&1) & && (echo 'Running Quiet Server')"
 alias qpoServer="((python -m http.server 8888 > /dev/null 2>&1) &) && (echo 'Running Quiet Server') && (open http://localhost:8888/)"
@@ -60,3 +59,6 @@ alias hs="haskell"
 
 #Disable osx gatekeeper: (needs sudo)
 alias gatekeeper="spctl --master-disable"
+
+# Soar
+alias soar="SoarCLI.sh"

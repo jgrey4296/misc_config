@@ -16,6 +16,9 @@ PATH=~/.npm-global/bin:$PATH
 PATH=/Applications/SuperCollider/SuperCollider.app/Contents/Resources:$PATH
 PATH=/Applications/SuperCollider/SuperCollider.app/Contents/MacOS:$PATH
 
+#Soar
+PATH=~/github/soar:$PATH
+
 #sqlite
 PATH=/usr/local/opt/sqlite/bin:$PATH
 
@@ -45,5 +48,6 @@ GTAGSLABEL=pygments
 
 #Shell Location update
 SHELL="$(which bash)"
+
 
 export PATH

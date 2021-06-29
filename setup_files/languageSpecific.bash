@@ -39,7 +39,6 @@ npm set prefix ~/.npm-global
 export TEXINPUTS=/Volumes/DOCUMENTS/Dropbox/Scripts/tex/:$TEXINPUTS
 
 #PERL
-PERL5LIB=~/programming/perl/modules
 PERL5LIB=~/Desktop/cotillion/packages/prompter/prompter:$PERL5LIB
 PERL5LIB=~/Desktop/cotillion/packages/prompter/prompter/mod_aspects:$PERL5LIB
 PERL5LIB=~/Desktop/cotillion/packages/prompter/prompter/mod_drama:$PERL5LIB
@@ -49,7 +48,6 @@ export PERL5LIB
 
 #Prompter:
 alias prompter="perl ~/Desktop/cotillion/packages/prompter/prompter/prompter.pl"
-
 
 #NLTK:
 export NLTK_DATA=~/assets/nlg/nltk

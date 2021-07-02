@@ -43,6 +43,7 @@
  jg-python
  jg-cron
  jg-kotlin
+ jg-soar
 
  :emacs  ;; ----- ====== -----
  char-insert

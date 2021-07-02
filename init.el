@@ -49,6 +49,7 @@
  (bindings +bindings)
  jg-tag
  jg-dired
+ jg-vc
 
  :completion ;; ----- ====== -----
  jg-completion

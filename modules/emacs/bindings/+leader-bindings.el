@@ -53,25 +53,25 @@
       :prefix ("b" . "buffer")
       :desc "Clear Buffer"                "DEL" #'+jg-bindings-clear-buffer
       :desc "Ediff Buffers"               "TAB" #'ediff-buffers
-      :desc "Next buffer"                 "]" #'next-buffer
-      :desc "Previous buffer"             "[" #'previous-buffer
-      :desc "Toggle narrowing"            "-" #'+jg-toggle-narrow-buffer
+      :desc "Next buffer"                 "]"   #'next-buffer
+      :desc "Previous buffer"             "["   #'previous-buffer
+      :desc "Toggle narrowing"            "-"   #'+jg-toggle-narrow-buffer
 
-      :desc "Switch buffer"               "b" #'switch-to-buffer
-      :desc "Create Buffer"               "c" #'evil-buffer-new
-      :desc "Kill buffer"                 "d" #'kill-current-buffer
-      :desc "Clone Indirect"              "i" #'clone-indirect-buffer-other-window
-      :desc "Kill all buffers"            "K" #'doom/kill-all-buffers
-      :desc "Local Variables"             "l" #'+jg-bindings-list-buffer-locals
+      :desc "Switch buffer"               "b"   #'switch-to-buffer
+      :desc "Create Buffer"               "c"   #'evil-buffer-new
+      :desc "Kill buffer"                 "d"   #'kill-current-buffer
+      :desc "Clone Indirect"              "i"   #'clone-indirect-buffer-other-window
+      :desc "Kill all buffers"            "K"   #'doom/kill-all-buffers
+      :desc "Local Variables"             "l"   #'+jg-bindings-list-buffer-locals
 
-      :desc "New empty buffer"            "n" #'+jg-misc-yank-buffer-name
-      :desc "Kill other buffers"          "O" #'doom/kill-other-buffers
-      :desc "Read-only mode"              "r" #'read-only-mode
-      :desc "Revert buffer"               "R" #'revert-buffer
-      :desc "Save all buffers"            "S" #'evil-write-all
-      :desc "Save buffer"                 "s" #'basic-save-buffer
-      :desc "Pop up scratch buffer"       "x" #'doom/open-scratch-buffer
-      :desc "Bury buffer"                 "z" #'bury-buffer
+      :desc "New empty buffer"            "n"   #'+jg-misc-yank-buffer-name
+      :desc "Kill other buffers"          "O"   #'doom/kill-other-buffers
+      :desc "Read-only mode"              "r"   #'read-only-mode
+      :desc "Revert buffer"               "R"   #'revert-buffer
+      :desc "Save all buffers"            "S"   #'evil-write-all
+      :desc "Save buffer"                 "s"   #'basic-save-buffer
+      :desc "Pop up scratch buffer"       "x"   #'doom/open-scratch-buffer
+      :desc "Bury buffer"                 "z"   #'bury-buffer
 
       )
   ;;; <leader> c --- code

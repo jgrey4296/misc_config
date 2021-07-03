@@ -1,6 +1,6 @@
-;;; util/jg-misc/+popup.el -*- lexical-binding: t; -*-
+;;; util/window-control/+popup.el -*- lexical-binding: t; -*-
 
-(defun +jg-misc-setup-popup-rules-hook ()
+(defun +window-control-setup-popup-rules-hook ()
   (message "Setting up popup rules: %s" (current-time-string))
   ;; Setup popup vars:
   (setq +popup--display-buffer-alist nil
@@ -12,7 +12,7 @@
     '(("^\\*shell"       :side bottom :ttl nil :height 0.3 :quit t :select t)
       ("\\*.*?scratch.*?\\*" :side right  :ttl nil :width  50  :quit t :select t)
       ("^\\*Messages"    :side left   :ttl nil :width  0.4 :quit t :select nil)
-      ("^\\*compilation" :side right  :ttl 5   :width  0.4 :quit t :select nil)
+      ("^\\*compilation" :side bottom :ttl 5   :width  0.4 :quit t :select nil)
       ("^\\*Pp Eval Output\\*" :side right :ttl 5 :width 0.4 :quit t :select nil)
       ("^\\*Buffer Locals:" :side right :ttl 5 :width 0.4 :quit t :select nil)
       )

@@ -5,9 +5,6 @@
               shell-enable-smart-eshell t
               hl-paren-colors '("color-16" "color-16" "color-16" "color-16")
               hl-paren-background-colors '("Springgreen3" "color-26" "color-91" "IndianRed3")
-              undo-tree-visualizer-diff t
-              undo-tree-auto-save-history t
-              undo-tree-enable-undo-in-region t
               ;; Increase undo-limits by a factor of ten to avoid emacs prematurely
               ;; truncating the undo history and corrupting the tree. See
               ;; https://github.com/syl20bnr/spacemacs/issues/12110
@@ -16,12 +13,6 @@
               undo-outer-limit 120000000
               undo-tree-history-directory-alist `(("." . ,(concat doom-cache-dir "undo-tree-hist/")))
 
-              jg-misc-popup-persist-default '(:side bottom
-                                              :height 0.3
-                                              :quit t
-                                              :select nil
-                                              :modeline t
-                                              :ttl nil)
 
               jg-misc-ivy-predicate-patterns (rx (or "*helpful"
                                                      "*Ibuffer"

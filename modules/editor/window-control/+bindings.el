@@ -26,3 +26,18 @@
 
       :desc "Shrink Side Wndows"             "{" #'window-ring-shrink-sides
       )
+
+(map! :leader
+      (:prefix "b"
+       :desc "Undo-Tree" "u" #'+window-control-undo-tree
+       :desc "Clear Popup Rules" "P" #'+window-control-ivy-reset-popup-rules
+       )
+      (:prefix "w"
+       :desc "Toggle Layout" "|" #'+window-control-layout-toggle
+       :desc "Rotate Windows" "\\" #'+window-control-rotate-forward
+       )
+)
+
+(map! :map messages-buffer-mode-map
+      :n "q" #'+popup/close
+      )

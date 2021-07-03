@@ -2,27 +2,14 @@
 
 (message "Setting up jg-misc bindings: %s" (current-time-string))
 (map! :leader
-      (:prefix "b"
-       :desc "Undo-Tree" "u" #'+jg-misc-undo-tree
-       :desc "Clear Popup Rules" "P" #'+jg-misc-ivy-reset-popup-rules
-       )
-      (:prefix "w"
-       :desc "Toggle Layout" "|" #'+jg-window-layout-toggle
-       :desc "Rotate Windows" "\\" #'+jg-rotate-windows-forward
-       )
-
       :desc "Have you Played?" "o h h" #'+jg-misc-helm-rps-have-you-playeds
       )
 
-(map! :map messages-buffer-mode-map
-      :n "q" #'+popup/close
-      )
 (evil-make-intercept-map messages-buffer-mode-map)
 
 (map! :map help-map
       "DEL" #'free-keys
       )
-
 
 (defun +jg-misc-free-key-binding-update ()
   (map! :map free-keys-mode-map

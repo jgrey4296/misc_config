@@ -1,24 +1,24 @@
-;;; util/jg-misc/+ivy_actions.el -*- lexical-binding: t; -*-
+;;; util/window-control/+ivy_actions.el -*- lexical-binding: t; -*-
 
-(defun +jg-misc-ivy-popup-buffer ()
+(defun +window-control-ivy-popup-buffer ()
   (interactive)
   (ivy-read "Popup Buffer: " #'internal-complete-buffer
             :keymap ivy-switch-buffer-map
-            :predicate #'+jg-misc-ivy-predicate
-            :action #'+jg-misc-ivy-open-as-popup
+            :predicate #'+window-control-ivy-predicate
+            :action #'+window-control-ivy-open-as-popup
             :matcher #'ivy--switch-buffer-matcher
-            :caller 'jg-misc-ivy-popup-buffer
+            :caller 'window-control-ivy-popup-buffer
             )
   )
 
-(defun +jg-misc-ivy-open-as-popup (buff)
+(defun +window-control-ivy-open-as-popup (buff)
   (let ((curr-rule (display-buffer-assq-regexp buff display-buffer-alist nil))
         (curr-window (selected-window))
         )
     ;; Add rule if necessary:
     (if (not curr-rule)
         (progn (message "Adding temp rule")
-               (setq curr-rule (+popup-make-rule buff jg-misc-popup-persist-default))
+               (setq curr-rule (+popup-make-rule buff window-control-popup-persist-default))
                (push curr-rule display-buffer-alist))
       )
     (bury-buffer buff)
@@ -29,14 +29,14 @@
     )
   )
 
-(defun +jg-misc-ivy-reset-popup-rules ()
+(defun +window-control-ivy-reset-popup-rules ()
   (interactive)
-  (+jg-misc-setup-popup-rules-hook)
+  (+window-control-setup-popup-rules-hook)
   )
 
 
 (ivy-set-actions 'ivy-switch-buffer
-                 '(("p" +jg-misc-ivy-open-as-popup "Popup")))
+                 '(("p" +window-control-ivy-open-as-popup "Popup")))
 
-(ivy-set-actions '+jg-misc-ivy-popup-buffer
-                 '(("p" +jg-misc-ivy-reset-popup-rules "Clear Popup")))
+(ivy-set-actions '+window-control-ivy-popup-buffer
+                 '(("p" +window-control-ivy-reset-popup-rules "Clear Popup")))

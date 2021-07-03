@@ -2,14 +2,10 @@
 (load! "+funcs")
 (load! "+ob-plantuml")
 (load! "+vars")
-(load! "+popup")
+
 (after! evil
   (load! "+bindings")
 )
-(after! ivy
-  (load! "+ivy_actions")
-  )
-
 (after! erlang
   ;; (also has a load path set in root el file)
   (setq erlang-root-dir "/usr/local/opt/erlang"
@@ -54,9 +50,6 @@
   (advice-add #'undo-tree-save-history :around #'doom-shut-up-a)
 
   )
-
-(add-hook! doom-first-input
-           #'+jg-misc-setup-popup-rules-hook)
 
 
 (after! flycheck-plantuml-executable

@@ -4,3 +4,95 @@
   (interactive "p")
   (window-ring-setup-columns arg t)
   )
+
+(defun +window-control-undo-tree ()
+  (interactive)
+  (if (not undo-tree-mode)
+      (undo-tree-mode))
+   (undo-tree-visualize)
+
+  )
+
+;; From spacemacs originally
+;; originally from magnars and modified by ffevotte for dedicated windows
+;; support, it has quite diverged by now
+(defun +window-control-rotate-forward (count)
+  "Rotate each window forwards.
+A negative prefix argument rotates each window backwards.
+Dedicated (locked) windows are left untouched."
+  (interactive "p")
+  (let* ((non-dedicated-windows (cl-remove-if 'window-dedicated-p (window-list)))
+         (states (mapcar #'window-state-get non-dedicated-windows))
+         (num-windows (length non-dedicated-windows))
+         (step (+ num-windows count)))
+    (if (< num-windows 2)
+        (error "You can't rotate a single window!")
+      (dotimes (i num-windows)
+        (window-state-put
+         (elt states i)
+         (elt non-dedicated-windows (% (+ step i) num-windows)))))))
+
+
+;; from spacemacs originally:
+;; from @bmag
+(defun +window-control-layout-toggle ()
+  "Toggle between horizontal and vertical layout of two windows."
+  (interactive)
+  (if (= (count-windows) 2)
+      (let* ((window-tree (car (window-tree)))
+             (current-split-vertical-p (car window-tree))
+             (first-window (nth 2 window-tree))
+             (second-window (nth 3 window-tree))
+             (second-window-state (window-state-get second-window))
+             (splitter (if current-split-vertical-p
+                           #'split-window-horizontally
+                         #'split-window-vertically)))
+        (delete-other-windows first-window)
+        ;; `window-state-put' also re-selects the window if needed, so we don't
+        ;; need to call `select-window'
+        (window-state-put second-window-state (funcall splitter)))
+    (error "Can't toggle window layout when the number of windows isn't two.")))
+(after! core-ui
+  (message "After core-ui")
+;; Originally from doom/core/core-ui
+;; (defadvice! doom--switch-to-fallback-buffer-maybe-a (&rest _)
+;;   "Switch to `doom-fallback-buffer' if on last real buffer.
+
+;; Advice for `kill-current-buffer'. If in a dedicated window, delete it. If there
+;; are no real buffers left OR if all remaining buffers are visible in other
+;; windows, switch to `doom-fallback-buffer'. Otherwise, delegate to original
+;; `kill-current-buffer'."
+;;   :before-until #'kill-current-buffer
+;;   (let ((buf (current-buffer)))
+;;     (cond ((window-dedicated-p)
+;;            (delete-window)
+;;            t)
+;;           ((eq buf (doom-fallback-buffer))
+;;            (message "Can't kill the fallback buffer.")
+;;            t)
+;;           ((doom-real-buffer-p buf)
+;;            (let ((visible-p (delq (selected-window) (get-buffer-window-list buf nil t))))
+;;              (unless visible-p
+;;                (when (and (buffer-modified-p buf)
+;;                           (not (y-or-n-p
+;;                                 (format "Buffer %s is modified; kill anyway?"
+;;                                         buf))))
+;;                  (user-error "Aborted")))
+;;              (let ((inhibit-redisplay t)
+;;                    (doom-inhibit-switch-buffer-hooks t)
+;;                    buffer-list-update-hook)
+;;                (when (or ;; if there aren't more real buffers than visible buffers,
+;;                       ;; then there are no real, non-visible buffers left.
+;;                       (not (cl-set-difference (doom-real-buffer-list)
+;;                                               (doom-visible-buffers)))
+;;                       ;; if we end up back where we start (or previous-buffer
+;;                       ;; returns nil), we have nowhere left to go
+;;                       (memq (switch-to-prev-buffer nil t) (list buf 'nil)))
+;;                  (switch-to-buffer (doom-fallback-buffer)))
+;;                (unless visible-p
+;;                  (with-current-buffer buf
+;;                    (restore-buffer-modified-p nil))
+;;                  (kill-buffer buf)))
+;;              (run-hooks 'doom-switch-buffer-hook 'buffer-list-update-hook)
+;;              t)))))
+)

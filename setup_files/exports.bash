@@ -19,6 +19,9 @@ PATH=/Applications/SuperCollider/SuperCollider.app/Contents/MacOS:$PATH
 #Soar
 PATH=~/github/soar:$PATH
 
+#CLIPS
+PATH=~/github/otherLibs/clips/:$PATH
+
 #sqlite
 PATH=/usr/local/opt/sqlite/bin:$PATH
 

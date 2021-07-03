@@ -62,3 +62,6 @@ alias gatekeeper="spctl --master-disable"
 
 # Soar
 alias soar="SoarCLI.sh"
+
+# CLIPS
+alias clips="CLIPS\ Console"

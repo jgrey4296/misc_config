@@ -23,6 +23,9 @@ function set_non_standard_python_paths(){
     #source activate root --not used because it slows default startup
 }
 
+# adding csound for python bindings
+export DYLD_FRAMEWORK_PATH="$DYLD_FRAMEWORK_PATH:/usr/local/opt/csound/Frameworks"
+
 #Caffe Stuff:
 #export DYLD_FALLBACK_LIBRARY_PATH=/usr/local/cuda/lib:$HOME/.pyenv/versions/anaconda-2.2.0/lib:/usr/local/lib/:/usr/lib
 

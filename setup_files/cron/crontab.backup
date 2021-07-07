@@ -16,7 +16,7 @@ PYTHONPATH=/Volumes/documents/github/py_bookmark_organiser/
 0 */6 * * * /usr/local/bin/mbsync -a
 
 # urlexpander
-5,35 */1 * * * /Volumes/documents/github/py_bookmark_organiser/bkmkorg/utils/twitter/url_expander.py --target ~/github/writing/resources/twitter_urls --output ~/github/writing/resources/expanded_urls --count 100
+5,20,35,50 */1 * * * /Volumes/documents/github/py_bookmark_organiser/bkmkorg/utils/twitter/url_expander.py --target ~/github/writing/resources/twitter_urls --output ~/github/writing/resources/expanded_urls --count 100
 
 ### WEEKLY:
 ## MON
@@ -47,7 +47,3 @@ PYTHONPATH=/Volumes/documents/github/py_bookmark_organiser/
 0 5 * * fri ~/github/py_bookmark_organiser/bkmkorg/describers/tag/indexer.py --target ~/mega/twitterthreads --output ~/github/writing/resources/cron_reports/tw_tag.index
 # 6am : update account index
 0 6 * * fri ~/github/py_bookmark_organiser/bkmkorg/describers/twitter/indexer.py --target ~/mega/twitterthreads --output ~/github/writing/resources/cron_reports/tw_acct.index
-
-### TODO
-# 4am : expand any urls in twitter threads
-# 0 4 * * thu  ~/github/py_bookmark_organiser/bkmkorg/utils/twitter/url_expander.py --target ~/mega/twitterthreads

@@ -39,6 +39,9 @@ PATH=~/.gem/ruby/2.7.0/bin:$PATH
 PATH=/usr/local/opt/ruby/bin:$PATH
 PATH="$(gem environment gemdir)/bin":$PATH
 
+#for BasicTex:
+PATH=/usr/local/texlive/2020basic/bin/x86_64-darwin/:$PATH
+
 #setting up the prompt:
 PS1='(\j): \D{%D} \A \u:  '
 
@@ -51,6 +54,5 @@ GTAGSLABEL=pygments
 
 #Shell Location update
 SHELL="$(which bash)"
-
 
 export PATH

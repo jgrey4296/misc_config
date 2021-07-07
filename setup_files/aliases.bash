@@ -65,3 +65,6 @@ alias soar="SoarCLI.sh"
 
 # CLIPS
 alias clips="CLIPS\ Console"
+
+# pdf creator
+alias txt2pdf="cupsfilter"

@@ -196,3 +196,13 @@ Sort, align, split, save "
   )
 
 (fset 'ad-Advice-newline-and-indent #'(lambda (x &rest _) (funcall x)))
+
+(defun org-export-inline-image-p (link &optional rules)
+  "Override function for org export, to succeed on file links with
+descriptions"
+  (let ((case-fold-search t))
+    (cl-some (lambda (rule)
+	       (and (string= (org-element-property :type link) (car rule))
+		    (string-match-p (cdr rule)
+				    (org-element-property :path link))))
+	     (or rules org-export-default-inline-image-rule))))

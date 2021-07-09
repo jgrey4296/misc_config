@@ -42,3 +42,5 @@
 (use-package! chuck-mode
   :commands (chuck-mode)
   )
+
+(use-package! csound-mode)

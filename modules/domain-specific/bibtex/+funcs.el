@@ -410,6 +410,8 @@ Log into jg-bibtex-rand-log.
             for file in (-difference files mentioned)
             do
             (insert "@Misc{stub_" (int-to-string count) ",\n"
+                    "  year = {2020},\n"
+                    "  title = {Unknown},\n"
                     "  file = {"  file "}\n"
                     "}\n")
             (incf count)

@@ -2,7 +2,6 @@
 
 (setq-default jg-google-url "https://duckduckgo.com/?q=%s"
               jg-twitter-url "https://twitter.com"
-              default-input-method "greek"
 
               jg-misc-ibuffer-heuristics (rx (or "backtab"
                                                  (regexp "\\.\\.")
@@ -36,4 +35,3 @@
       jg-binding-operator-state-map (make-sparse-keymap "jg-binding-operator-state-map")
       jg-binding-motion-state-map (make-sparse-keymap "jg-binding-motion-state-map")
       )
-

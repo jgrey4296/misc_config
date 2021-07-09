@@ -32,6 +32,7 @@
       which-key-idle-secondary-delay 0.05
       which-key-sort-order 'which-key-key-order-alpha
       whitespace-style '(face tabs spaces trailing lines space-before-tab newline indentation empty space-after-tab space-mark tab-mark newline-mark)
+      default-input-method "greek"
       )
 ;; Override doom's whitespace mode settings:
 (fset 'doom-highlight-non-default-indentation-h #'(lambda () nil))

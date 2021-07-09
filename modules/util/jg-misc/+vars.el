@@ -80,3 +80,7 @@
                    helm-rg-map
                    helm-read-file-map))))
   "A list of all the keymaps used for the minibuffer.")
+
+(after! flycheck
+  (setq-default flycheck-display-errors-delay 1)
+  )

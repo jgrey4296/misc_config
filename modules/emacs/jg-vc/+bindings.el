@@ -19,3 +19,8 @@
       )
 
 ;; (evil-make-intercept-map evil-conflict-merge-state-map)
+
+(map! :map git-commit-mode-map
+      :localleader
+      "1" (cmd! (+jg-browse-url "google.com"))
+      )

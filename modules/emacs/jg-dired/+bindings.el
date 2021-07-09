@@ -37,19 +37,23 @@
 
 (map! :map dired-mode-map
       :localleader
-      :desc "Hide Toggle" "h" #'dired-omit-mode
+      :desc "Hide Toggle"         "h"         #'dired-omit-mode
+      :desc "Symlink"             "S"         #'dired-do-symlink
       (:prefix ("d" . "Describe")
-       :desc "Summarise Orgs" "s"         #'+jg-dired-create-summary-of-orgs
-       :desc "Marked Info" "m"            #'+jg-dired-marked-info
-       :desc "Dired Diff" "d"             #'+jg-dired-diff
+       :desc "Summarise Orgs"     "s"     #'+jg-dired-create-summary-of-orgs
+       :desc "Marked Info"        "m"        #'+jg-dired-marked-info
+       :desc "Dired Diff"         "d"         #'+jg-dired-diff
        )
       (:prefix ("K" . "Destructive")
-       :desc "Reformat jsons"   "J" #'+jg-dired-reformat-jsons
-       :desc "Replace regexp"   "R" #'dired-do-find-regexp-and-replace
+       :desc "Reformat jsons"     "J"   #'+jg-dired-reformat-jsons
+       :desc "Replace regexp"     "R"   #'dired-do-find-regexp-and-replace
        )
       (:prefix ("f" . "Find")
        :desc "Find Random Marked" "r" #'+jg-dired-find-random-marked-file
        :desc "Fundamental"        "f" #'+jg-dired-find-literal
+       )
+      (:prefix ("m" . "Mark")
+       :desc "Symlinks"           "S"    #'dired-mark-symlinks
        )
       )
 
@@ -62,7 +66,7 @@
       :desc "do-symlink-regexp"            :n "S" #'dired-do-symlink-regexp
       :desc "do-relsymlink-regexp"         :n "Y" #'dired-do-relsymlink-regexp
       :desc "flag-files-regexp"            :n "d" #'dired-flag-files-regexp
-      :desc "mark-files-containing-regexp"  :n "g" #'dired-mark-files-containing-regexp
+      :desc "mark-files-containing-regexp" :n "g" #'dired-mark-files-containing-regexp
       :desc "downcase"                     :n "l" #'dired-downcase
       :desc "mark-files-regexp"            :n "m" #'dired-mark-files-regexp
       :desc "do-rename-regexp"             :n "r" #'dired-do-rename-regexp

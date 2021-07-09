@@ -37,11 +37,11 @@
       :desc "Mega"      "3" (cmd! (find-file "~/mega"))
       :desc "Home"      "4" (cmd! (find-file "~"))
       :desc "Resources" "5" (cmd! (find-file "~/github/writing/resources"))
-      :desc "SCRATCH"   "6" (cmd! (+jg-misc-ivy-open-as-popup "*scratch*"))
+      :desc "SCRATCH"   "6" (cmd! (+window-control-ivy-open-as-popup "*scratch*"))
       :desc "Agenda"    "7" (cmd! (find-file (car org-agenda-files)))
       :desc "Twitter"   "8" (cmd! (+jg-browse-url jg-twitter-url))
       ;; :desc "Mail"      "9" #'mu4e
-      :desc "Messages"  "0" (cmd! (+jg-misc-ivy-open-as-popup "*Messages*"))
+      :desc "Messages"  "0" (cmd! (+window-control-ivy-open-as-popup "*Messages*"))
       )
 
   ;;; <leader> a -- Unused
@@ -141,6 +141,7 @@
   ;;; <leader> g --- git
 (map! :leader
       :prefix ("g" . "git")
+      :desc "Docs: Git Manual" "1" (cmd! (+jg-browse-url "https://git-scm.com/doc"))
       :desc "Git revert file"             "R"   #'vc-revert
       (:when (featurep! :ui vc-gutter)
        :desc "Git revert hunk"            "r"   #'git-gutter:revert-hunk

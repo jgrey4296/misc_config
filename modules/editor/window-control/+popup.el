@@ -16,9 +16,11 @@
       ("^\\*Pp Eval Output\\*" :side right :ttl 5 :width 0.4 :quit t :select nil)
       ("^\\*Buffer Locals:" :side right :ttl 5 :width 0.4 :quit t :select nil)
       )
+
     (when (featurep! +all)
       '(("^\\*"  :slot 1 :vslot -1 :select t)
         ("^ \\*" :slot 1 :vslot -1 :size +popup-shrink-to-fit)))
+
     (when (featurep! +defaults)
       '(("^\\*Completions" :ignore t)
         ("^\\*Local variables\\*$" :vslot -1 :slot 1 :size +popup-shrink-to-fit)

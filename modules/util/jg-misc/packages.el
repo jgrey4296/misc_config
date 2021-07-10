@@ -11,15 +11,14 @@
 (package! evil-quickscope)
 (package! evil-snipe)
 (package! exec-path-from-shell)
-
 (package! flycheck)
 (package! neotree)
 (package! origami)
 (package! shell-pop)
 (package! vlf)
-
 (package! evil-iedit-state)
 (package! semantic)
+(package! timeline-mode :recipe (:local-repo "~/.doom.d/packages/timeline-mode"))
 
 ;; Disables
 (package! 2048-game       :disable t)

@@ -1,6 +1,6 @@
+;;; config.el -*- lexical-binding: t; -*-
 
 (load! "+funcs")
-
 (load! "+vars")
 
 (after! evil
@@ -84,3 +84,4 @@
     (remove-overlays nil nil iedit-invisible-overlay-name t)
   )
 )
+(use-package! timeline-mode)

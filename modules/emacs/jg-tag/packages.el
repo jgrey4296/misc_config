@@ -7,3 +7,4 @@
 (package! hydra)
 (package! cl-lib :built-in t)
 (package! ivy)
+(package! tag-timeline-mode :recipe '(:local-repo "~/.doom.d/pakcages/tag-timeline-mode"))

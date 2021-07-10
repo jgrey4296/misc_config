@@ -8,6 +8,8 @@
 
 (use-package! tag-clean-minor-mode :defer t)
 (use-package! tag-mode :defer t)
+(use-package! tag-timeline-mode :defer t)
+
 (after! (evil org helm)
   (+jg-tag-rebuild-tag-database)
 

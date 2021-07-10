@@ -30,13 +30,6 @@
  bibtex
  acab-ide
 
- :editor  ;; ----- ====== -----
- ;;  ;;jg-states
- overlay_control
- (window-control +defaults)
- (jg-personal +active)
- project-walk
-
  :lang  ;; ----- ====== -----
  jg-org
  jg-lisp
@@ -47,11 +40,15 @@
  jg-latex
 
  :emacs  ;; ----- ====== -----
- char-insert
  (bindings +bindings)
- jg-tag
+ (jg-ui +defaults)
+ ;;jg-states
+ fold
  jg-dired
+ jg-tag
  jg-vc
+ project-walk
+ char-insert
 
  :completion ;; ----- ====== -----
  jg-completion
@@ -92,7 +89,7 @@
  :editor
  (evil +everywhere); come to the dark side, we have cookies
  file-templates    ; auto-snippets for empty files
- fold              ; (nigh) universal code folding
+ ;;fold              ; (nigh) universal code folding
  ;;(format +onsave)  ; automated prettiness
  ;;god               ; run Emacs commands without modifier keys
  ;;lispy             ; vim for lisp, for people who don't like vim

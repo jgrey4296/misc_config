@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# --
+#!/opts/anaconda3/envs/ENV/python
+
+$0

@@ -17,7 +17,7 @@
 
       :desc "Print Sequence"                 "p" #'window-ring-print-order
 
-      :desc "Window Ring soft Reset"         "s" #'+window-ring-block-reset
+      :desc "Window Ring soft Reset"         "s" #'+jg-ui-window-ring-block-reset
       :desc "Window Ring Hard Reset"         "S" #'window-ring-setup-columns-command
       :desc "Remove Current Buffer"          "R" #'window-ring-remove-buffer
       :desc "Replace with Buffer"            "r" #'window-ring-replace-buffer
@@ -29,12 +29,12 @@
 
 (map! :leader
       (:prefix "b"
-       :desc "Undo-Tree" "u" #'+window-control-undo-tree
-       :desc "Clear Popup Rules" "P" #'+window-control-ivy-reset-popup-rules
+       :desc "Undo-Tree" "u"         #'+jg-ui-undo-tree
+       :desc "Clear Popup Rules" "P" #'+jg-ui-ivy-reset-popup-rules
        )
       (:prefix "w"
-       :desc "Toggle Layout" "|" #'+window-control-layout-toggle
-       :desc "Rotate Windows" "\\" #'+window-control-rotate-forward
+       :desc "Toggle Layout" "|"     #'+jg-ui-window-layout-toggle
+       :desc "Rotate Windows" "\\"   #'+jg-ui-window-rotate-forward
        )
 )
 

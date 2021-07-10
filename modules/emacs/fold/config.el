@@ -73,4 +73,3 @@
   :init
   (global-origami-mode)
   )
-

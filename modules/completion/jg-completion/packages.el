@@ -10,6 +10,11 @@
 (package! counsel-projectile )
 (package! ivy-rich )
 (package! wgrep )
+(package! yasnippet)
+(package! yasnippet-snippets)
+(package! doom-snippets)
+(package! helm)
+(package! helm-gtags)
 
 (if (featurep! +prescient)
     (package! ivy-prescient )

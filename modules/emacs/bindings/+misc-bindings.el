@@ -45,6 +45,29 @@
       :n "q" #'quit-window
       )
 
+;; Minibuffer
+(define-key! :keymaps +default-minibuffer-maps
+  [escape] #'abort-recursive-edit
+  "C-a"    #'move-beginning-of-line
+  "C-r"    #'evil-paste-from-register
+  "C-u"    #'evil-delete-back-to-indentation
+  "C-v"    #'yank
+  "C-w"    #'doom/delete-backward-word
+  "C-z"    (cmd! (ignore-errors (call-interactively #'undo))))
+
+(define-key! :keymaps +default-minibuffer-maps
+  "C-j"    #'next-line
+  "C-k"    #'previous-line
+  "C-S-j"  #'scroll-up-command
+  "C-S-k"  #'scroll-down-command)
+
+;; Popup
+(map! (:when (featurep! :ui popup)
+       "C-`"   #'+popup/toggle
+       "C-~"   #'+popup/raise
+       "C-p" #'+popup/other)
+      )
+
 
 ;; Mouse Deactivation
 (define-key evil-motion-state-map [down-mouse-1] #'ignore)
@@ -61,3 +84,9 @@
 
 (define-key evil-motion-state-map [mouse-4] #'ignore)
 (define-key evil-motion-state-map [mouse-5] #'ignore)
+
+(after! which-key
+  (let ((prefix-re (regexp-opt (list doom-leader-key doom-leader-alt-key))))
+    (cl-pushnew `((,(format "\\`\\(?:C-w\\|%s w\\) m\\'" prefix-re))
+                  nil . "maximize")
+                which-key-replacement-alist)))

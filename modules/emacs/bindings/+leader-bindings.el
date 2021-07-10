@@ -64,7 +64,7 @@
       :desc "Kill all buffers"            "K"   #'doom/kill-all-buffers
       :desc "Local Variables"             "l"   #'+jg-bindings-list-buffer-locals
 
-      :desc "New empty buffer"            "n"   #'+jg-misc-yank-buffer-name
+      :desc "New empty buffer"            "n"   #'+jg-text-yank-buffer-name
       :desc "Kill other buffers"          "O"   #'doom/kill-other-buffers
       :desc "Read-only mode"              "r"   #'read-only-mode
       :desc "Revert buffer"               "R"   #'revert-buffer

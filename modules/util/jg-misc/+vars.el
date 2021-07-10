@@ -82,5 +82,12 @@
   "A list of all the keymaps used for the minibuffer.")
 
 (after! flycheck
-  (setq-default flycheck-display-errors-delay 1)
-  )
+  (setq-default flycheck-display-errors-delay 1
+                flycheck-display-errors-function nil
+                flycheck-help-echo-function nil
+                flycheck-process-error-functions nil )
+)
+
+(setq-default icicle-Completions-text-scale-decrease 0
+              indent-tabs-mode nil
+              )

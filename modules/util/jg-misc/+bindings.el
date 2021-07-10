@@ -1,14 +1,30 @@
 ;;; util/jg-misc/+bindings.el -*- lexical-binding: t; -*-
+(evil-make-intercept-map messages-buffer-mode-map)
 
-(message "Setting up jg-misc bindings: %s" (current-time-string))
 (map! :leader
       :desc "Have you Played?" "o h h" #'+jg-misc-helm-rps-have-you-playeds
       )
 
-(evil-make-intercept-map messages-buffer-mode-map)
-
 (map! :map help-map
       "DEL" #'free-keys
+      )
+
+(map! :map (sh-mode-map shell-mode-map)
+      :localleader
+      :desc "Docs: Brew"  "1" (cmd! (+jg-browse-url "https://brew.sh/"))
+      :desc "Docs: Awk"   "2" (cmd! (+jg-browse-url "https://www.gnu.org/software/gawk/manual/gawk.html"))
+      )
+
+(map! :mode vlf-mode
+      "] A" 'vlf-next-batch-from-point
+      "] a" 'vlf-next-batch
+      "[ a" 'vlf-prev-batch
+      "SPC a U v " 'vlf-set-batch-size
+      )
+
+(map! :leader
+      :prefix "t"
+      :desc "Semantic" "S" #'semantic-mode
       )
 
 (defun +jg-misc-free-key-binding-update ()
@@ -21,22 +37,3 @@
         )
   (evil-make-intercept-map free-keys-mode-map)
   )
-
-(map! :map (sh-mode-map shell-mode-map)
-      :localleader
-      :desc "Docs: Brew"  "1" (cmd! (+jg-browse-url "https://brew.sh/"))
-      :desc "Docs: Awk"   "2" (cmd! (+jg-browse-url "https://www.gnu.org/software/gawk/manual/gawk.html"))
-      )
-
-(map! :map csharp-mode-map
-      :localleader
-      :desc "Docs: Unity"    "1" (cmd! (+jg-browse-url "https://docs.unity3d.com/Manual/index.html"))
-      :desc "Docs: Unity C#" "2" (cmd! (+jg-browse-url "https://docs.unity3d.com/ScriptReference/index.html"))
-      :desc "Docs: Mono"     "3" (cmd! (+jg-browse-url "http://docs.go-mono.com/"))
-      :desc "Docs: MS C#"    "4" (cmd! (+jg-browse-url "https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/"))
-)
-
-(map! :map fsharp-mode-map
-      :localleader
-      :desc "Docs: F#"       "1" (cmd! (+jg-browse-url "https://docs.microsoft.com/en-us/dotnet/fsharp/"))
-      )

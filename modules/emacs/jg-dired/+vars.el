@@ -14,17 +14,13 @@
       ;; Always copy/delete recursively
       dired-recursive-copies  'always
       dired-recursive-deletes 'top
-      ;; Where to store image caches
-      image-dired-dir (concat doom-cache-dir "image-dired/")
-      image-dired-db-file (concat image-dired-dir "db.el")
-      image-dired-gallery-dir (concat image-dired-dir "gallery/")
-      image-dired-temp-image-file (concat image-dired-dir "temp-image")
-      image-dired-temp-rotate-image-file (concat image-dired-dir "temp-rotate-image")
-      ;; Screens are larger nowadays, we can afford slightly larger thumbnails
-      image-dired-thumb-size 150
-
       dired-omit-verbose nil
-      dired-omit-files (rx line-start
+
+      +jg-dired-recursive-switches "-aBhlR --group-directories-first"
+      )
+
+;; Omit Patterns
+(setq dired-omit-files (rx line-start
                            (or "GPATH"
                                "GRTAGS"
                                "GTAGS"
@@ -60,3 +56,12 @@
                            line-end
                            )
       )
+
+;; image-dired
+(setq image-dired-dir (concat doom-cache-dir "image-dired/")
+      image-dired-db-file (concat image-dired-dir "db.el")
+      image-dired-gallery-dir (concat image-dired-dir "gallery/")
+      image-dired-temp-image-file (concat image-dired-dir "temp-image")
+      image-dired-temp-rotate-image-file (concat image-dired-dir "temp-rotate-image")
+      ;; Screens are larger nowadays, we can afford slightly larger thumbnails
+      image-dired-thumb-size 150)

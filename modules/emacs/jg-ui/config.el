@@ -1,13 +1,7 @@
-;; jg_emacs config.el
-;; loaded fourth
+;;; config.el -*- lexical-binding: t; -*-
 
-(load! "+variables")
-(after! evil
-  (load! "+bindings")
-  )
-
+(load! "+popup")
 (load! "+funcs")
-(load! "+helm-funcs")
 
 
 (use-package! hl-line
@@ -32,44 +26,11 @@
 (use-package! evil-visual-mark-mode
   :defer t
   )
-(use-package! semantic
-  :defer t
-  :config
-  (add-to-list 'semantic-default-submodes
-               'global-semantic-idle-summary-mode)
-  (add-to-list 'semantic-new-buffer-setup-functions
-               '(emacs-lisp-mode . semantic-default-elisp-setup))
-  ;; TODO setup semantic more, add helm etc
+(use-package! window-ring-minor-mode
+  :commands (window-ring-setup-columns window-ring-minor-mode window-ring-setup-columns-command)
   )
-(use-package! evil-iedit-state
-  :defer t
-  :commands (evil-iedit-state evil-iedit-state/iedit-mode)
-  :init
-  (setq iedit-current-symbol-default t
-        iedit-only-at-symbol-boundaries t
-        iedit-toggle-key-default nil)
-  :config
-  (defun iedit-show-all()
-    """ Override iedit's show all so it doesn't mess with invisible line movement"
-    (remove-from-invisibility-spec '(iedit-invisible-overlay-name . t))
-    (remove-overlays nil nil iedit-invisible-overlay-name t)
-  )
-)
-(use-package! helm-gtags
-  :defer t)
-(use-package! cedet)
 
-(after! (evil evil-snipe)
-  (push 'dired-mode evil-snipe-disabled-modes)
-  )
-(after! (yasnippet doom-snippets yasnippet-snippets)
-  (setq yas-snippet-dirs '(+snippets-dir doom-snippets-dir +file-templates-dir yasnippet-snippets-dir))
-  (setq yas--default-user-snippets-dir yas-snippet-dirs)
- )
-(after! evil-quickscope
-  ;; TODO (spacemacs/set-leader-keys "t q" '+jg-personal-toggle-quickscope-always)
-  (global-evil-quickscope-always-mode 1)
-  )
+
 (after! (evil hl-line)
   ;; Set up faces for hl-line colour sync to status
   (defface jg-evil-normal-state '((t :background  "#000000")) "The Evil Normal State Hl-line")
@@ -97,17 +58,6 @@
   (add-hook 'evil-iedit-state-entry-hook        #'(lambda () (interactive) (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-iedit-state))))
   (add-hook 'evil-iedit-insert-state-entry-hook #'(lambda () (interactive) (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-iedit-insert-state))))
   )
-(after! (dired dired-quick-sort)
-  (setq dired-quick-sort-group-directories-last ?y)
-  )
-
-(after! neotree
-  (push "^__pycache__$" neo-hidden-regexp-list)
-  (push "^G\\(PATH\\|R?TAGS\\)$" neo-hidden-regexp-list)
-  (push "^__init__.py$" neo-hidden-regexp-list)
-  )
-
-
 (after! (featurep! :completion helm)
     (setq! helm-find-files-actions
           (append `(,(car helm-find-files-actions))
@@ -117,3 +67,12 @@
                   (cdr helm-find-files-actions))
           )
     )
+(after! evil
+  (load! "+bindings")
+  )
+(after! ivy
+  (load! "+ivy-actions")
+  )
+
+(add-hook! doom-first-input
+           #'+jg-ui-setup-popup-rules-hook)

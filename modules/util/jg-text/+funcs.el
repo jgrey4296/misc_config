@@ -3,6 +3,7 @@
   (buffer-substring-no-properties (line-beginning-position)
                                   (line-end-position))
   )
+
 (defun +jg-text-strip-spaces (str)
   "Utility to replace spaces with underscores in a string.
 Used to guard inputs in tag strings"
@@ -49,4 +50,9 @@ Used to guard inputs in tag strings"
         )
       )
     )
+  )
+
+(defun +jg-text-yank-buffer-name ()
+  (interactive)
+  (message (kill-new (buffer-name)))
   )

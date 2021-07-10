@@ -19,17 +19,10 @@
              doom-scratch-initial-major-mode))
       default-directory
         (doom-project-name)))))
-
-(defun +jg-misc-yank-buffer-name ()
-  (interactive)
-  (message (kill-new (buffer-name)))
-  )
-
 (defun +jg-misc-ivy-predicate (x)
   ;; return nil for cruft buffers
   (not (string-match jg-misc-ivy-predicate-patterns (car x)))
   )
-
 (defun +jg-misc-ivy-switch-buffer ()
   (interactive)
   (ivy-read "Switch to buffer: " #'internal-complete-buffer
@@ -41,7 +34,6 @@
             :sort t
             :caller 'ivy-switch-buffer)
   )
-
 (defun +jg-misc-get-modes ()
   (let (major minor)
     ;; Modes in auto mode alist:
@@ -73,14 +65,12 @@
     (list major minor)
     )
   )
-
 (defun +jg-misc-sync-movements ()
   ;; TODO
   ;; Get current windows
   ;; add advice to evil line move
 
   )
-
 (defun +jg-misc-ivy-rps-transformer (x)
   " Cleans a Candidate line for display  "
   (if (string-match "\.com/\\([0-9/]+\\)/have-you-played-\\(.+?\\)/" x)
@@ -90,7 +80,6 @@
     `(,x . ,x)
     )
   )
-
 (defun +jg-misc-helm-rps-have-you-playeds ()
   (interactive)
   (let* ((target "/Volumes/documents/github/writing/resources/bibliography_plus/have-you-playeds")
@@ -104,7 +93,6 @@
     )
 
   )
-
 (defun +jg-misc-helm-xkcd ()
   " TODO transformers "
   (interactive)
@@ -125,4 +113,73 @@
                (f-parent (buffer-file-name)))))
     (list (s-replace "\$" (format "dir=\"%s\"" loc) (car val)))
     )
+  )
+
+
+(defun +jg-personal-flatten (lst)
+  """ Utility to flatten a list """
+  (letrec ((internal (lambda (x)
+                       (cond
+                        ((null x) nil)
+                        ((atom x) (list x))
+                        (t
+                         (append (funcall internal (car x)) (funcall internal (cdr x))))))))
+    (progn
+      (assert (listp lst))
+      (funcall internal lst))))
+(defun +jg-personal-line-starts-with? (text)
+  (s-starts-with? text (s-trim-left (buffer-substring-no-properties
+                                     (line-beginning-position)
+                                     (line-end-position))))
+  )
+(defun +jg-personal-split-tags()
+  (interactive)
+  (goto-char (point-min))
+  (let ((letter ?a)
+        (end-letter (+ 1 ?z))
+        (beg (point-min))
+        (fst t)
+        subs)
+    (while (and (not (equal letter end-letter))
+                (re-search-forward (format "^%s" (char-to-string letter)) nil nil))
+      (setq subs (buffer-substring beg (- (point) 1)))
+      (with-output-to-temp-buffer (if fst "misc.tags" (format "%s.tags" (char-to-string (- letter 1))))
+        (princ subs)
+        )
+      (setq beg (- (point) 1)
+            letter (+ letter 1)
+            fst nil)
+      )
+    (setq subs (buffer-substring (- (point) 1) (point-max)))
+    (with-output-to-temp-buffer "z.tags"
+      (princ subs)
+      )
+    )
+  )
+(defun +jg-personal-what-face (pos)
+  ;; from: http://stackoverflow.com/questions/1242352/
+  (interactive "d")
+  (let ((face (or (get-char-property (point) 'read-face-name)
+                  (get-char-property (point) 'face))))
+    (if face (message "Face: %s" face) (message "No face at %d" pos))))
+(defun +jg-personal-face-under-cursor-customize (pos)
+  (interactive "d")
+  (let ((face (or (get-char-property (point) 'read-face-name)
+                  (get-char-property (point) 'face))))
+    (if face (customize-face face) (message "No face at %d" pos))))
+(defun +jg-personal-modify-line-end-display-table ()
+  (interactive)
+  " from https://stackoverflow.com/questions/8370778/ "
+  ;; Modify the display table for whitespace, so lines which
+  ;; truncate are not signaled with a $
+  (set-display-table-slot standard-display-table 0 ?\ )
+  )
+(defun +jg-personal-toggle-docstrings ()
+  (interactive)
+  (setq which-key-show-docstrings
+        (if which-key-show-docstrings
+            nil
+          'docstring-only
+            )
+        )
   )

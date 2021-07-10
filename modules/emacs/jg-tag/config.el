@@ -1,13 +1,3 @@
-(after! tag-clean-minor-mode ()
-  (push 'tag-clean-minor-mode minor-mode-list)
-  )
-(after! ivy 
-  (load! "+ivy_actions"))
-
-(after! evil
-  (load! "+bindings")
-)
-
 (load! "+dired")
 (load! "+helm")
 (load! "+index")
@@ -16,10 +6,8 @@
 (load! "+vars")
 (load! "+funcs")
 
-(use-package! tag-clean-minor-mode
-  :defer t)
-(use-package! tag-mode
-  :defer t)
+(use-package! tag-clean-minor-mode :defer t)
+(use-package! tag-mode :defer t)
 (after! (evil org helm)
   (+jg-tag-rebuild-tag-database)
 
@@ -28,3 +16,11 @@
     (+jg-tag-helm-tagger beg end)
     )
   )
+(after! tag-clean-minor-mode
+  (push 'tag-clean-minor-mode minor-mode-list)
+  )
+(after! ivy
+  (load! "+ivy_actions"))
+(after! evil
+  (load! "+bindings")
+)

@@ -122,7 +122,6 @@ Targets `vimmish-fold', `hideshow' and `outline' folds."
      (if (integerp level)
          (hs-hide-level-recursive (- level 1) (point-min) (point-max))
        (hs-hide-all)))))
-  
 
 ;;;###autoload
 (defun +fold/next (count)

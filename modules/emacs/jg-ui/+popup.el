@@ -1,6 +1,6 @@
 ;;; util/window-control/+popup.el -*- lexical-binding: t; -*-
 
-(defun +window-control-setup-popup-rules-hook ()
+(defun +jg-ui-setup-popup-rules-hook ()
   (message "Setting up popup rules: %s" (current-time-string))
   ;; Setup popup vars:
   (setq +popup--display-buffer-alist nil

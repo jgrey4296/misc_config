@@ -70,16 +70,16 @@
 
 
 ;;   ((MODES) PROPERTIES)
-;; 
+;;
 ;; MODES acts as a predicate, containing the symbols of all major or
 ;; minor modes for which the handler should match.  For example:
-;; 
+;;
 ;;   '((outline-minor-mode org-mode) ...)
-;; 
+;;
 ;; PROPERTIES specifies possible folding actions and the functions to be
 ;; applied in the event of a match on one (or more) of the MODES; the
 ;; supported properties are:
-;; 
+;;
 ;;   - `:open-all'
 ;;     Open all folds.
 ;;   - `:close-all'
@@ -92,14 +92,14 @@
 ;;     Open the fold at point recursively.
 ;;   - `:close'
 ;;     Close the fold at point.
-;; 
+;;
 ;; Each value must be a function.  A value of `nil' will cause the action
 ;; to be ignored for that respective handler.  For example:
-;; 
+;;
 ;;   `((org-mode)
 ;;      :close-all  nil
 ;;      :open       ,(lambda ()
 ;;                     (show-entry)
 ;;                     (show-children))
 ;;      :close      hide-subtree)
-;; 
+;;

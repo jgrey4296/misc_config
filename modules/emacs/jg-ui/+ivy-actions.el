@@ -1,17 +1,17 @@
 ;;; util/window-control/+ivy_actions.el -*- lexical-binding: t; -*-
 
-(defun +window-control-ivy-popup-buffer ()
+(defun +jg-ui-ivy-popup-buffer ()
   (interactive)
   (ivy-read "Popup Buffer: " #'internal-complete-buffer
             :keymap ivy-switch-buffer-map
-            :predicate #'+window-control-ivy-predicate
-            :action #'+window-control-ivy-open-as-popup
-            :matcher #'ivy--switch-buffer-matcher
+            :predicate       #'+jg-ui-ivy-predicate
+            :action          #'+jg-ui-ivy-open-as-popup
+            :matcher         #'ivy--switch-buffer-matcher
             :caller 'window-control-ivy-popup-buffer
             )
   )
 
-(defun +window-control-ivy-open-as-popup (buff)
+(defun +jg-ui-ivy-open-as-popup (buff)
   (let ((curr-rule (display-buffer-assq-regexp buff display-buffer-alist nil))
         (curr-window (selected-window))
         )
@@ -29,14 +29,14 @@
     )
   )
 
-(defun +window-control-ivy-reset-popup-rules ()
+(defun +jg-ui-ivy-reset-popup-rules ()
   (interactive)
-  (+window-control-setup-popup-rules-hook)
+  (+jg-ui-setup-popup-rules-hook)
   )
 
 
 (ivy-set-actions 'ivy-switch-buffer
-                 '(("p" +window-control-ivy-open-as-popup "Popup")))
+                 '(("p" +jg-ui-ivy-open-as-popup "Popup")))
 
-(ivy-set-actions '+window-control-ivy-popup-buffer
-                 '(("p" +window-control-ivy-reset-popup-rules "Clear Popup")))
+(ivy-set-actions '+jg-ui-ivy-popup-buffer
+                 '(("p" +jg-ui-ivy-reset-popup-rules "Clear Popup")))

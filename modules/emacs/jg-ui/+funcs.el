@@ -1,11 +1,11 @@
 ;;; editor/window-control/+funcs.el -*- lexical-binding: t; -*-
 
-(defun +window-ring-block-reset (arg)
+(defun +jg-ui-window-ring-block-reset (arg)
   (interactive "p")
   (window-ring-setup-columns arg t)
   )
 
-(defun +window-control-undo-tree ()
+(defun +jg-ui-undo-tree ()
   (interactive)
   (if (not undo-tree-mode)
       (undo-tree-mode))
@@ -16,7 +16,7 @@
 ;; From spacemacs originally
 ;; originally from magnars and modified by ffevotte for dedicated windows
 ;; support, it has quite diverged by now
-(defun +window-control-rotate-forward (count)
+(defun +jg-ui-window-rotate-forward (count)
   "Rotate each window forwards.
 A negative prefix argument rotates each window backwards.
 Dedicated (locked) windows are left untouched."
@@ -35,7 +35,7 @@ Dedicated (locked) windows are left untouched."
 
 ;; from spacemacs originally:
 ;; from @bmag
-(defun +window-control-layout-toggle ()
+(defun +jg-ui-window-layout-toggle ()
   "Toggle between horizontal and vertical layout of two windows."
   (interactive)
   (if (= (count-windows) 2)
@@ -56,7 +56,7 @@ Dedicated (locked) windows are left untouched."
   (message "After core-ui")
   (advice-remove 'kill-current-buffer #'doom--switch-to-fallback-buffer-maybe-a)
   ;; Originally from doom/core/core-ui
-  (defadvice! +window-control-kill-buffer-override (&rest _)
+  (defadvice! +jg-ui-kill-buffer-override (&rest _)
     "Switch to `doom-fallback-buffer' if on last real buffer.
 
 Advice for `kill-current-buffer'. If in a dedicated window, delete it. If there

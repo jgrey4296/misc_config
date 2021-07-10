@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: git.whitespace
+# --
+WHITESPACE: $0
+
+Description:

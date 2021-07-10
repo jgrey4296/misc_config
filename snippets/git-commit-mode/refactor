@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: git.refactor
+# condition: t
+# --
+REFACTOR: $0
+
+Description:

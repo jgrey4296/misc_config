@@ -1,0 +1,3 @@
+#!/bin/sh
+
+# say This is a pre commit hook blah

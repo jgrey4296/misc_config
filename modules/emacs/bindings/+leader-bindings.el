@@ -37,11 +37,11 @@
       :desc "Mega"      "3" (cmd! (find-file "~/mega"))
       :desc "Home"      "4" (cmd! (find-file "~"))
       :desc "Resources" "5" (cmd! (find-file "~/github/writing/resources"))
-      :desc "SCRATCH"   "6" (cmd! (+window-control-ivy-open-as-popup "*scratch*"))
+      :desc "SCRATCH"   "6" (cmd! (+jg-ui-ivy-open-as-popup "*scratch*"))
       :desc "Agenda"    "7" (cmd! (find-file (car org-agenda-files)))
       :desc "Twitter"   "8" (cmd! (+jg-browse-url jg-twitter-url))
       ;; :desc "Mail"      "9" #'mu4e
-      :desc "Messages"  "0" (cmd! (+window-control-ivy-open-as-popup "*Messages*"))
+      :desc "Messages"  "0" (cmd! (+jg-ui-ivy-open-as-popup "*Messages*"))
       )
 
   ;;; <leader> a -- Unused

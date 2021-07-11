@@ -1,10 +1,10 @@
-;;; ../../../Volumes/documents/github/emacs_files/packages/cron-mode/cron-mode.el -*- lexical-binding: t; -*-
+;;; cron-mode.el -*- lexical-binding: t; -*-
 
 (defvar-local cron-mode-map
   (make-sparse-keymap))
 
 ;; List of '(regex (groupnum "face")+)
-(defconst $1-font-lock-keywords
+(defconst cron-mode-font-lock-keywords
   (list
    ;; Basic Assigments
    '("^\\([A-Z_]+\\)=\\(.+\\)"
@@ -32,7 +32,7 @@
      )
 
    )
-  "Highlighting for $1-mode"
+  "Highlighting for cron-mode"
 )
 
 (define-derived-mode cron-mode fundamental-mode
@@ -42,7 +42,7 @@
   (kill-all-local-variables)
   (use-local-map cron-mode-map)
 
-  (set (make-local-variable 'font-lock-defaults) (list $1-font-lock-keywords nil))
+  (set (make-local-variable 'font-lock-defaults) (list cron-mode-font-lock-keywords nil))
   ;; (set (make-local-variable 'font-lock-syntactic-face-function) 'cron-syntactic-face-function)
   ;; (set (make-local-variable 'indent-line-function) 'cron-indent-line)
   ;; (set (make-local-variable 'comment-style) '(plain))

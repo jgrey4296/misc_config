@@ -4,7 +4,7 @@
 (package! evil)
 (package! tag-clean-minor-mode :recipe '(:local-repo "~/.doom.d/packages/tag-clean-minor-mode"))
 (package! tag-mode :recipe '(:local-repo "~/.doom.d/packages/tag-mode"))
+(package! tag-timeline-mode :recipe '(:local-repo "~/.doom.d/packages/tag-timeline-mode"))
 (package! hydra)
 (package! cl-lib :built-in t)
 (package! ivy)
-(package! tag-timeline-mode :recipe '(:local-repo "~/.doom.d/pakcages/tag-timeline-mode"))

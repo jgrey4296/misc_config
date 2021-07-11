@@ -33,8 +33,35 @@
 
 ;; List of '(regex (groupnum "face")+)
 (defconst acab-rule-font-lock-keywords
-  (list)
+  (list
+   ;; Rule Name
+   `(,(rx line-start
+          (group (+ (or word ?? ?.)) ?:))
+     (1 "org-agenda-date"))
+   ;; End
+   '("^end$" (0 "font-lock-warning-face"))
+   ;; Var Block
+   '("|\\|->" (0 "org-code"))
+   ;; Type assign
+   `(,(rx ?( ?: ?: (*? any) ?))
+     (0 "org-list-dt"))
+   ;; Action
+   `(,(rx ?λ (+ (or word ?! ?.)))
+     (0 "org-level-2"))
+   ;; Query
+   `(,(rx (+ (or word ?! ?.)) ??)
+     (0 "org-headline-todo"))
+   ;; Sentence
+   `(,(rx (+ (or word ?! ?.)))
+     (0 "org-level-5"))
+   ;; Variable
+   `(,(rx ?$ (+ alnum)) (0 "org-checkbox" t))
+   )
   "Highlighting for acab-rule-mode"
+  )
+
+(defun acab-rule-indent-line ()
+  ;; TODO
   )
 
 (define-derived-mode acab-rule-mode fundamental-mode
@@ -44,11 +71,11 @@
   (kill-all-local-variables)
   (use-local-map acab-rule-mode-map)
 
-  ;; (set (make-local-variable 'font-lock-defaults) (list acab-rule-font-lock-keywords nil))
+  (set (make-local-variable 'font-lock-defaults) (list acab-rule-font-lock-keywords t))
   ;; (set (make-local-variable 'font-lock-syntactic-face-function) 'acab-rule-syntactic-face-function)
-  ;; (set (make-local-variable 'indent-line-function) 'acab-rule-indent-line)
-  ;; (set (make-local-variable 'comment-style) '(plain))
-  ;; (set (make-local-variable 'comment-start) "//")
+  (set (make-local-variable 'indent-line-function) 'acab-rule-indent-line)
+  (set (make-local-variable 'comment-style) '(plain))
+  (set (make-local-variable 'comment-start) "#")
   ;; (set (make-local-variable 'comment-use-syntax) t)
   ;; (set-syntax-table acab-rule-mode-syntax-table)
   ;;

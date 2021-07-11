@@ -16,7 +16,7 @@
   (kill-all-local-variables)
   (use-local-map tag-timeline-mode-map)
 
-  ;; (set (make-local-variable 'font-lock-defaults) (list tag-timeline-font-lock-keywords nil))
+  (set (make-local-variable 'font-lock-defaults) (list tag-timeline-font-lock-keywords t))
   ;; (set (make-local-variable 'font-lock-syntactic-face-function) 'tag-timeline-syntactic-face-function)
   ;; (set (make-local-variable 'indent-line-function) 'tag-timeline-indent-line)
   ;; (set (make-local-variable 'comment-style) '(plain))

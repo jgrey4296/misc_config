@@ -22,3 +22,8 @@
  )
 
 (use-package! helm-gtags :defer t)
+
+(defun jg-load-templates-hook ()
+  (load! "+file-templates")
+  )
+(add-hook! doom-first-input #'jg-load-templates-hook)

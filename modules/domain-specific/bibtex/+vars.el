@@ -38,3 +38,7 @@
               jg-bibtex-tweet-pattern "(%s): %s\nby %s\nTags: %s\nRef: %s\n"
 
               )
+
+(after! hl-line
+  (push 'bibtex-mode global-hl-line-modes)
+  )

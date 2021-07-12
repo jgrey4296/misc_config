@@ -3,6 +3,6 @@
 # key: trigger-key
 # condition: t
 # --
-DOCUMENT: $0
+[DOCUMENT]: $0
 
 Description:

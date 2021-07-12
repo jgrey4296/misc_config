@@ -2,6 +2,6 @@
 # name: git.fix
 # condition: t
 # --
-FIX: $0
+[FIX]: $0
 
 Description:

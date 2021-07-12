@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: git.feature.major
 # --
-FEATURE: $0
+[FEATURE]: $0
 
 Description:

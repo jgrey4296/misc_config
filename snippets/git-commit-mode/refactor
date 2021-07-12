@@ -2,6 +2,6 @@
 # name: git.refactor
 # condition: t
 # --
-REFACTOR: $0
+[REFACTOR]: $0
 
 Description:

@@ -1,8 +1,6 @@
 ;;; config.el -*- lexical-binding: t; -*-
 
-(load! "+popup")
 (load! "+funcs")
-
 
 (use-package! hl-line
   :defer t
@@ -74,5 +72,7 @@
   (load! "+ivy-actions")
   )
 
-(add-hook! doom-first-input
-           #'+jg-ui-setup-popup-rules-hook)
+(defun jg-load-popup-hook ()
+  (load! "+popup")
+  )
+(add-hook 'doom-first-input #'jg-load-popup-hook)

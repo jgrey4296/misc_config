@@ -225,6 +225,10 @@
   ;;; <leader> j -- Jumping
 (map! :leader
       :prefix ("j" . "Jump")
+      :desc "Learn X in Y"                 "1" (cmd! (+jg-browse-url jg-binding-x-in-y-url))
+      :desc "Plant UML"                    "2" (cmd! (+jg-browse-url "http://plantuml.com"))
+      :desc "Over API"                     "3" (cmd! (+jg-browse-url "https://overapi.com/"))
+
       :desc "Parse File"            "!" #'helm-gtags-parse-file
       :desc "Jump to Char"          "." #'avy-goto-char
       :desc "Create Tags"           "C" #'helm-gtags-create-tags
@@ -327,11 +331,9 @@
       :prefix ("o" . "open")
       :desc "Command History"            "DEL" #'counsel-command-history
 
-      :desc "Dired"                        "-" #'dired-jump
-
       :desc "Default browser"              "b" #'browse-url-of-file
       :desc "Calc"                         "c" #'calc
-
+      :desc "Dired"                        "d" #'dired-jump
       :desc "REPL"                         "r" #'+eval/open-repl-other-window
 
       :desc "Project sidebar"              "p" #'+neotree/open
@@ -341,9 +343,6 @@
       :desc "External Mail"                "M" #'mu4e
 
       :desc "Minibuffer history"           "0" #'counsel-minibuffer-history
-      :desc "Learn X in Y"                 "1" (cmd! (+jg-browse-url jg-binding-x-in-y-url))
-      :desc "Plant UML"                    "2" (cmd! (+jg-browse-url "http://plantuml.com"))
-      :desc "Over API"                     "3" (cmd! (+jg-browse-url "https://overapi.com/"))
 
       (:when (featurep! :os macos)
        :desc "Reveal in Finder"           "f"    #'+macos/reveal-in-finder
@@ -366,7 +365,7 @@
        :desc "Minibuffer History"           "m" #'counsel-minibuffer-history
        :desc "Shell History"                "s" #'counsel-shell-history
 
-       )
+      )
       (:prefix ("s" . "Systems"))
       )
 

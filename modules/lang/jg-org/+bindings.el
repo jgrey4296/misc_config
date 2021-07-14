@@ -56,6 +56,9 @@
       :localleader
       :desc "Refile" "R" #'+jg-org-refile-subtree
       :desc "Todo"   "TAB" #'org-todo
+      :desc "Docs: Org"               "1" (cmd! (+jg-browse-url "https://orgmode.org/manual/"))
+
+
       (:prefix ("f". "Format")
        :desc "Fix Drawers"        "d"  #'+jg-org-fix-properties-drawers
        :desc "Clean Org"          "c"  #'+jg-org-clean-master
@@ -79,9 +82,7 @@
        :desc "Insert Heading Trio" "t" #'+jg-org-insert-heading-trio
        :desc "Insert Subheading" "h"   #'org-insert-subheading
        :desc "Insert Drawer" "d"       #'org-insert-drawer)
-      (:prefix ("j" . "Jump")
-       :desc "Docs: Org"               "1" (cmd! (+jg-browse-url "https://orgmode.org/manual/"))
-       )
+
       )
 
 (map! :after evil-org

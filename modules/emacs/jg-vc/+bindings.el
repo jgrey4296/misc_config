@@ -20,7 +20,7 @@
 
 ;; (evil-make-intercept-map evil-conflict-merge-state-map)
 
-(map! :map git-commit-mode-map
+(map! :map (git-commit-mode-map magit-status-mode)
       :localleader
-      "1" (cmd! (+jg-browse-url "google.com"))
+      "1" (cmd! (+jg-browse-url "https://git-scm.com/doc"))
       )

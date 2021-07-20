@@ -11,43 +11,38 @@
    '("^#.+$" (0 'font-lock-comment-face))
    ;; Year start and end
    `(,(rx line-start
-          (group-n 1 (+ digit) blank)
-          (? (group-n 2 "->" blank)
-             (group-n 3 (+ digit) blank))
+          (group-n 1 (+ digit))
+          (? blank (group-n 2 "->")
+             blank (group-n 3 (+ digit)))
           )
      (1 "font-lock-builtin-face")
-     (2 "font-lock-constant-face")
-     (3 "font-lock-builtin-face")
+     (2 "font-lock-constant-face" nil t)
+     (3 "font-lock-builtin-face" nil t)
      )
    ;; Event description and country
-   `(,(rx (group-n 4 (regexp "\".+?\"") (? blank))
-          (group-n 5 (+ alnum)  (? blank)))
+   `(,(rx blank (group-n 4 (regexp "\".+?\""))
+          blank (group-n 5 (+ alnum)))
      (4 "font-lock-type-face")
      (5 "font-lock-function-name-face"))
    ;; People
-   `(,(rx (? (group-n 6 (* (+ word) ?_ (+ word) (? blank))))) ;; 6: people
-     (6 "font-lock-variable-name-face"))
-                                                              ;; Tags
-   `(,(rx (? (group-n 7 ?: "tags" blank)                      ;; 7: tag header
-             (group-n 8 (+ (or word ?,)))                     ;; 8: tags
-             (? blank)))
-     (7 "org-document-info")
-     (8 "org-list-dt")
-     )
-                                                              ;; Wiki
-   `(,(rx (? (group-n 9 ?: "wiki") blank                      ;; 9: wiki header
-             (group-n 10 (+ (not blank)))
-             (? (or line-end blank))                          ;; 10: wiki link
-             ))
-     (9 "org-document-info")
-     (10 "org-link")
-     )
-                                                              ;; Descr
-   `(,(rx (? (group-n 11 ?: "desc"))                          ;; 11: desc header
-          line-end)
-     (11 "org-document-info"))
+   `(,(rx (? (group-n 6 (* blank (+ word) ?_ (+ word)))))
+     (6 "font-lock-variable-name-face" nil t))
 
-   `("^.+$" . font-lock-warning-face)
+   `(,(rx (? blank (group-n 7 ?: "tags")
+             blank (group-n 8 (+ (or word ?,)))))
+     (7 "org-document-info" nil t)
+     (8 "org-list-dt" nil t))
+
+   `(,(rx (? blank (group-n 9 ?: "wiki")
+             blank (group-n 10 (+ (not blank)))))
+     (9 "org-document-info" nil t)
+     (10 "org-link" nil t))
+
+   `(,(rx (? blank (group-n 11 ?: "desc"))
+          line-end)
+     (11 "org-document-info" nil t))
+
+   `("^.+$" (0 font-lock-warning-face))
    )
   "Highlighting for timeline-mode"
   )
@@ -64,7 +59,7 @@
   ;; (set (make-local-variable 'font-lock-syntactic-face-function) nil)
   ;; (set (make-local-variable 'indent-line-function) 'timeline-indent-line)
   ;; (set (make-local-variable 'comment-style) '(plain))
-  ;; (set (make-local-variable 'comment-start) "//")
+  ;; (set (make-local-variable 'comment-start) "#")
   ;; (set (make-local-variable 'comment-use-syntax) t)
   ;; (set-syntax-table timeline-mode-syntax-table)
   ;;

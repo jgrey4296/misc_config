@@ -37,11 +37,11 @@
       :desc "Mega"      "3" (cmd! (find-file "~/mega"))
       :desc "Home"      "4" (cmd! (find-file "~"))
       :desc "Resources" "5" (cmd! (find-file "~/github/writing/resources"))
-      :desc "SCRATCH"   "6" (cmd! (+jg-misc-ivy-open-as-popup "*scratch*"))
+      :desc "SCRATCH"   "6" (cmd! (+jg-ui-ivy-open-as-popup "*scratch*"))
       :desc "Agenda"    "7" (cmd! (find-file (car org-agenda-files)))
       :desc "Twitter"   "8" (cmd! (+jg-browse-url jg-twitter-url))
       ;; :desc "Mail"      "9" #'mu4e
-      :desc "Messages"  "0" (cmd! (+jg-misc-ivy-open-as-popup "*Messages*"))
+      :desc "Messages"  "0" (cmd! (+jg-ui-ivy-open-as-popup "*Messages*"))
       )
 
   ;;; <leader> a -- Unused
@@ -53,25 +53,25 @@
       :prefix ("b" . "buffer")
       :desc "Clear Buffer"                "DEL" #'+jg-bindings-clear-buffer
       :desc "Ediff Buffers"               "TAB" #'ediff-buffers
-      :desc "Next buffer"                 "]" #'next-buffer
-      :desc "Previous buffer"             "[" #'previous-buffer
-      :desc "Toggle narrowing"            "-" #'+jg-toggle-narrow-buffer
+      :desc "Next buffer"                 "]"   #'next-buffer
+      :desc "Previous buffer"             "["   #'previous-buffer
+      :desc "Toggle narrowing"            "-"   #'+jg-toggle-narrow-buffer
 
-      :desc "Switch buffer"               "b" #'switch-to-buffer
-      :desc "Create Buffer"               "c" #'evil-buffer-new
-      :desc "Kill buffer"                 "d" #'kill-current-buffer
-      :desc "Clone Indirect"              "i" #'clone-indirect-buffer-other-window
-      :desc "Kill all buffers"            "K" #'doom/kill-all-buffers
-      :desc "Local Variables"             "l" #'+jg-bindings-list-buffer-locals
+      :desc "Switch buffer"               "b"   #'switch-to-buffer
+      :desc "Create Buffer"               "c"   #'evil-buffer-new
+      :desc "Kill buffer"                 "d"   #'kill-current-buffer
+      :desc "Clone Indirect"              "i"   #'clone-indirect-buffer-other-window
+      :desc "Kill all buffers"            "K"   #'doom/kill-all-buffers
+      :desc "Local Variables"             "l"   #'+jg-bindings-list-buffer-locals
 
-      :desc "New empty buffer"            "n" #'+jg-misc-yank-buffer-name
-      :desc "Kill other buffers"          "O" #'doom/kill-other-buffers
-      :desc "Read-only mode"              "r" #'read-only-mode
-      :desc "Revert buffer"               "R" #'revert-buffer
-      :desc "Save all buffers"            "S" #'evil-write-all
-      :desc "Save buffer"                 "s" #'basic-save-buffer
-      :desc "Pop up scratch buffer"       "x" #'doom/open-scratch-buffer
-      :desc "Bury buffer"                 "z" #'bury-buffer
+      :desc "New empty buffer"            "n"   #'+jg-text-yank-buffer-name
+      :desc "Kill other buffers"          "O"   #'doom/kill-other-buffers
+      :desc "Read-only mode"              "r"   #'read-only-mode
+      :desc "Revert buffer"               "R"   #'revert-buffer
+      :desc "Save all buffers"            "S"   #'evil-write-all
+      :desc "Save buffer"                 "s"   #'basic-save-buffer
+      :desc "Pop up scratch buffer"       "x"   #'doom/open-scratch-buffer
+      :desc "Bury buffer"                 "z"   #'bury-buffer
 
       )
   ;;; <leader> c --- code
@@ -141,6 +141,7 @@
   ;;; <leader> g --- git
 (map! :leader
       :prefix ("g" . "git")
+      :desc "Docs: Git Manual" "1" (cmd! (+jg-browse-url "https://git-scm.com/doc"))
       :desc "Git revert file"             "R"   #'vc-revert
       (:when (featurep! :ui vc-gutter)
        :desc "Git revert hunk"            "r"   #'git-gutter:revert-hunk
@@ -224,6 +225,10 @@
   ;;; <leader> j -- Jumping
 (map! :leader
       :prefix ("j" . "Jump")
+      :desc "Learn X in Y"                 "1" (cmd! (+jg-browse-url jg-binding-x-in-y-url))
+      :desc "Plant UML"                    "2" (cmd! (+jg-browse-url "http://plantuml.com"))
+      :desc "Over API"                     "3" (cmd! (+jg-browse-url "https://overapi.com/"))
+
       :desc "Parse File"            "!" #'helm-gtags-parse-file
       :desc "Jump to Char"          "." #'avy-goto-char
       :desc "Create Tags"           "C" #'helm-gtags-create-tags
@@ -326,11 +331,9 @@
       :prefix ("o" . "open")
       :desc "Command History"            "DEL" #'counsel-command-history
 
-      :desc "Dired"                        "-" #'dired-jump
-
       :desc "Default browser"              "b" #'browse-url-of-file
       :desc "Calc"                         "c" #'calc
-
+      :desc "Dired"                        "d" #'dired-jump
       :desc "REPL"                         "r" #'+eval/open-repl-other-window
 
       :desc "Project sidebar"              "p" #'+neotree/open
@@ -340,9 +343,6 @@
       :desc "External Mail"                "M" #'mu4e
 
       :desc "Minibuffer history"           "0" #'counsel-minibuffer-history
-      :desc "Learn X in Y"                 "1" (cmd! (+jg-browse-url jg-binding-x-in-y-url))
-      :desc "Plant UML"                    "2" (cmd! (+jg-browse-url "http://plantuml.com"))
-      :desc "Over API"                     "3" (cmd! (+jg-browse-url "https://overapi.com/"))
 
       (:when (featurep! :os macos)
        :desc "Reveal in Finder"           "f"    #'+macos/reveal-in-finder
@@ -365,7 +365,7 @@
        :desc "Minibuffer History"           "m" #'counsel-minibuffer-history
        :desc "Shell History"                "s" #'counsel-shell-history
 
-       )
+      )
       (:prefix ("s" . "Systems"))
       )
 
@@ -516,6 +516,7 @@
        :desc "Line numbers"          "n" #'+jg-toggle-line-numbers
        :desc "Line numbers Visual"   "N" #'+jg-toggle-line-numbers-visual
        :desc "Evil goggles"          "g" #'evil-goggles-mode
+       :desc "Hl-line"               "h" #'global-hl-line-mode
        :desc "Fill Column Indicator" "f" #'display-fill-column-indicator-mode
        :desc "Indent guides"         "i" #'highlight-indent-guides-mode
        :desc "Highlight Parens"      "(" #'global-highlight-parentheses-mode

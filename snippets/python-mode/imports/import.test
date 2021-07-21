@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: import.test
+# uuid: import.test
+# --
+import unittest
+from unittest import mock

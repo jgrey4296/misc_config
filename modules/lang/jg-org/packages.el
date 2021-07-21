@@ -7,3 +7,4 @@
 (package! org-superstar)
 (package! outline-toc)
 (package! link-hint)
+(package! graphviz-dot-mode)

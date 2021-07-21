@@ -1,6 +1,7 @@
 -*- mode: org; -*-
 #+STARTUP: content
 * Base Agenda
+Death by Institution and the Harms of Abstraction.
 ** Main
 *** [[/Volumes/documents/github/acab][Acab]]
 **** 1: Test Semantics
@@ -30,6 +31,9 @@ Versu, Abl, Cif
 *** [[file:/Volumes/documents/github/writing/resources/research_questions.org][Research Questions]]
 
 ** Resources
+[[https://ambientcg.com/][ambiengCG]]
+[[https://tineye.com/][Tin Eye Reverse Image Search]]
+[[https://dopresskit.com/][Presskit]]
 [[http://arabimagefoundation.com/][Arab Image Foundation]]
 [[http://discovery.nationalarchives.gov.uk/][UK National Archives]]
 [[http://envelopecollection.com/][Envelope Collection]]
@@ -200,6 +204,26 @@ Versu, Abl, Cif
 [[http://waveform3d.com/][Waveform3d]]
 [[https://sketchfab.com/][Sketchfab]]
 [[https://en.wikipedia.org/wiki/Summa_Theologica][Summa Theologica]]
+https://strongtyping.readthedocs.io/en/latest/
+https://dev.to/matechs/building-custom-dsls-in-typescript-29el
+https://graphics.stanford.edu/courses/cs348c-96-fall/resources.html
+https://graphviz.org/theory/
+https://q.uiver.app/
+Killing the Black Body or Fatal Invention by @DorothyERoberts
+Racecraft by Barbara and Karen Fields
+Medical Apartheid by @haw95
+The Warmth of Other Suns by @Isabelwilkerson
+Sister Citizen by @MHarrisPerry
+The Pushout by @MoniqueWMorris
 
 ** Reminders
 https://github.com/company-mode/company-mode/wiki/Writing-backends
+index xkcd using explainxkcd
+
+fictional syllabi - both of actual papers, and lem-like
+
+org - add a nav state for moving around headings and subtrees?
+
+tag - amend mode
+
+* TODO simulation sketches

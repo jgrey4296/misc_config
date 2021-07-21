@@ -1,25 +1,31 @@
+;;; config.el -*- lexical-binding: t; -*-
 
 (load! "+funcs")
-(load! "+ob-plantuml")
 (load! "+vars")
-(load! "+popup")
+
 (after! evil
   (load! "+bindings")
 )
-(after! ivy
-  (load! "+ivy_actions")
-  )
-
-(after! erlang
-  ;; (also has a load path set in root el file)
-  (setq erlang-root-dir "/usr/local/opt/erlang"
-        exec-path (cons "/usr/local/opt/erlang/bin" exec-path)
-        )
-  )
 (after! epa
   ;; Ascii output of encryptions:
   (setq epa-armor t)
   )
+(after! (evil evil-snipe)
+  (push 'dired-mode evil-snipe-disabled-modes)
+  )
+(after! evil-quickscope
+  ;; TODO (spacemacs/set-leader-keys "t q" '+jg-personal-toggle-quickscope-always)
+  (global-evil-quickscope-always-mode 1)
+  )
+(after! (dired dired-quick-sort)
+  (setq dired-quick-sort-group-directories-last ?y)
+  )
+(after! neotree
+  (push "^__pycache__$" neo-hidden-regexp-list)
+  (push "^G\\(PATH\\|R?TAGS\\)$" neo-hidden-regexp-list)
+  (push "^__init__.py$" neo-hidden-regexp-list)
+  )
+
 (use-package! free-keys
   :commands (free-keys free-keys-set-prefix)
   :config
@@ -54,17 +60,28 @@
   (advice-add #'undo-tree-save-history :around #'doom-shut-up-a)
 
   )
-
-(add-hook! doom-first-input
-           #'+jg-misc-setup-popup-rules-hook)
-
-
-(after! flycheck-plantuml-executable
-  (setq flycheck-plantuml-executable (executable-find "plantuml"))
+(use-package! cedet)
+(use-package! semantic
+  :defer t
+  :config
+  (add-to-list 'semantic-default-submodes
+               'global-semantic-idle-summary-mode)
+  (add-to-list 'semantic-new-buffer-setup-functions
+               '(emacs-lisp-mode . semantic-default-elisp-setup))
+  ;; TODO setup semantic more, add helm etc
   )
-
-(after! ob-plantuml
-  (advice-add #'org-babel-execute:plantuml
-              :override #'+jg-misc-ob-plantuml-execute
-              '((depth . -100)))
+(use-package! evil-iedit-state
+  :defer t
+  :commands (evil-iedit-state evil-iedit-state/iedit-mode)
+  :init
+  (setq iedit-current-symbol-default t
+        iedit-only-at-symbol-boundaries t
+        iedit-toggle-key-default nil)
+  :config
+  (defun iedit-show-all()
+    """ Override iedit's show all so it doesn't mess with invisible line movement"
+    (remove-from-invisibility-spec '(iedit-invisible-overlay-name . t))
+    (remove-overlays nil nil iedit-invisible-overlay-name t)
   )
+)
+(use-package! timeline-mode)

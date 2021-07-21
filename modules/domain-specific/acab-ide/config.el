@@ -9,15 +9,6 @@
   ;; TODO upgrade to org-superstar?
   (add-hook 'trie-mode-hook 'org-bullets-mode)
 )
-(after! helm
-  (load! "+helms")
-  )
-(after! hydra
-  (load! "+hydra")
-  )
-
-
-(use-package! acab-mode
-  :defer
-
+(use-package! acab-ide
+  :commands acab-ide-minor-mode
   )

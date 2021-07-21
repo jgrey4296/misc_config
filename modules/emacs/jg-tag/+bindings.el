@@ -2,6 +2,7 @@
 ;;
 ;; Helm bindings
 (map! :leader
+      :desc "Open Random Untagged Twitter" "o u" #'+jg-tag-open-random-untagged-twitter
       :prefix ("o h" . "Helms")
       :desc "Firefox Helm"              "f" #'+jg-tag-helm-bookmarks
       :desc "Tag Helm"                  "t" #'+jg-tag-helm-twitter
@@ -40,9 +41,7 @@
       (:prefix ("m" . "Mark")
        :desc "Mark Untagged Orgs" "u"    #'+jg-tag-mark-untagged-orgs
        )
-      (:prefix ("f" . "Find")
-       :desc "Display Tag Selection" "s" #'+jg-tag-display-selection
-       )
+      (:prefix ("f" . "Find"))
       (:prefix ("i" . "Index")
        :desc "Index People" "p"          #'+jg-tag-index-people
        :desc "Index Tags" "t"            #'+jg-tag-index-tags

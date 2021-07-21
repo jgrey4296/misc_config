@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: setup.test
+# uuid: setup.test
+# --
+import unittest
+from unittest import mock
+from typing import List, Set, Dict, Tuple, Optional, Any
+from typing import Callable, Iterator, Union, Match
+from typing import Mapping, MutableMapping, Sequence, Iterable
+from typing import cast, ClassVar, TypeVar, Generic
+
+class Test$1(unittest.TestCase):
+
+    def test_initial_$1(self):
+        $0
+        pass
+
+
+
+if __name__ == '__main__':
+    unittest.main()

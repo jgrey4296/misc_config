@@ -1,8 +1,34 @@
+;;# -*- mode:emacs-lisp; -*-
 ;;;; Emacs Bookmark Format Version 1 ;;;; -*- coding: utf-8 -*-
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("twitter"
+(("emacsd"
+ (filename . "/Volumes/documents/github/otherLibs/doom-emacs/")
+ (front-context-string . "modules\n  drwxr-")
+ (rear-context-string . "44 May 20 08:19 ")
+ (position . 654))
+("language_learning"
+ (filename . "/Volumes/documents/github/languageLearning/")
+ (front-context-string . "android\n  drwxrw")
+ (rear-context-string . "36 Jun  6 15:18 ")
+ (position . 145))
+("current_pdfs"
+ (filename . "~/Desktop/pdfs/Current/")
+ (front-context-string . "10.1.1.697.5168.")
+ (rear-context-string . "4K May 30 16:19 ")
+ (position . 225))
+("writing"
+ (filename . "/Volumes/documents/github/writing/")
+ (front-context-string . "resources\n  -rw-")
+ (rear-context-string . "18 Jun  4 09:26 ")
+ (position . 313))
+("code analysis"
+ (filename . "/Volumes/documents/github/code_analysis/")
+ (front-context-string . "code_analysis\n  ")
+ (rear-context-string . "38 May  8 22:44 ")
+ (position . 141))
+("twitter"
  (filename . "/Volumes/documents/MEGA/AutoSync/twitterthreads/")
  (front-context-string . "group_a\n  drwxrw")
  (rear-context-string . "6K Mar 30 07:56 ")
@@ -37,11 +63,6 @@
  (front-context-string . "EXPERIENCE_JAPAN")
  (rear-context-string . "92 Mar  8 00:25 ")
  (position . 183))
-("emacs.d"
- (filename . "~/github/otherLibs/doom-emacs/")
- (front-context-string . "modules\n  drwxr-")
- (rear-context-string . "44 Jan 26 19:07 ")
- (position . 533))
 ("~"
  (filename . "~/")
  (front-context-string . "Desktop\n  drwx--")

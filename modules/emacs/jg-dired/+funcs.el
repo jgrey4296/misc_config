@@ -64,9 +64,16 @@ Type SPC or `y' to %s one match, DEL or `n' to skip to next,
   "Insert Subdir tree in dired"
   (interactive
    (list (dired-get-filename)
-         (if current-prefix-arg +jg-personal-dired-recursive-switches)))
+         (if current-prefix-arg +jg-dired-recursive-switches)))
   (let ((current-prefix-arg nil))
     (dired-maybe-insert-subdir dirname switches))
+  )
+
+(defun +jg-dired-insert-marked-subdir ()
+  (interactive)
+  (let ((marked (-filter #'f-directory? (dired-get-marked-files))))
+    (mapc #'dired-maybe-insert-subdir marked)
+    )
   )
 
 (defun +jg-dired-diff ()
@@ -126,4 +133,10 @@ Type SPC or `y' to %s one match, DEL or `n' to skip to next,
 (defun +jg-dired-find-literal ()
   (interactive)
   (find-file-literally (dired-get-filename))
+  )
+
+(defun +jg-dired-quick-look ()
+  (interactive)
+  (async-shell-command (format "qlmanage -p %s 2>/dev/null"
+                               (dired-get-filename)))
   )

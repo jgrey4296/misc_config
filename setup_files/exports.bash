@@ -16,6 +16,12 @@ PATH=~/.npm-global/bin:$PATH
 PATH=/Applications/SuperCollider/SuperCollider.app/Contents/Resources:$PATH
 PATH=/Applications/SuperCollider/SuperCollider.app/Contents/MacOS:$PATH
 
+#Soar
+PATH=~/github/soar:$PATH
+
+#CLIPS
+PATH=~/github/otherLibs/clips/:$PATH
+
 #sqlite
 PATH=/usr/local/opt/sqlite/bin:$PATH
 
@@ -32,6 +38,9 @@ PATH=$JACAMO_HOME/scripts:$PATH
 PATH=~/.gem/ruby/2.7.0/bin:$PATH
 PATH=/usr/local/opt/ruby/bin:$PATH
 PATH="$(gem environment gemdir)/bin":$PATH
+
+#for BasicTex:
+PATH=/usr/local/texlive/2020basic/bin/x86_64-darwin/:$PATH
 
 #setting up the prompt:
 PS1='(\j): \D{%D} \A \u:  '

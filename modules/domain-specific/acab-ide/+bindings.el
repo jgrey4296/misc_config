@@ -1,6 +1,6 @@
 ;;; domain-specific/acab-ide/+bindings.el -*- lexical-binding: t; -*-
 ;; Defines all sub-trie modes: trie, trie-visual, sequence etc
-;; "a s t" 'jg-trie-layer/toggle-trie-ide)
+;; "a s t" 'acab-ide/toggle-trie-ide)
 
 (map! :leader
       :prefix "o"
@@ -34,7 +34,7 @@
       ;;Add motions here
       :nv "RET" #'trie-explore/expand-entry
       :i  "RET" #'trie-explore/insert-entry
-      ;; "\t"   #'jg-trie-layer/no-op
+      ;; "\t"   #'acab-ide/no-op
       "TAB"      #'trie-explore/update-tree-data
       ;; h,l : Move column
       "h"       #'trie-explore/layer-decrease
@@ -51,30 +51,30 @@
 (map! :after trie-minor-mode
       :map trie-minor-mode-map
       "?"      #'trie-help-hydra/body
-      "e"      #'jg-trie-layer/explore-trie
+      "e"      #'acab-ide/explore-trie
 
       (:prefix ("f" . "Find")
-      "r"    #'jg-trie-layer/rule-helm
-      "t"    #'jg-trie-layer/type-helm
-      "T"    #'jg-trie-layer/test-helm
-      "c"    #'jg-trie-layer/crosscut-helm
-      "s"    #'jg-trie-layer/pattern-helm
+      "r"    #'acab-ide/rule-helm
+      "t"    #'acab-ide/type-helm
+      "T"    #'acab-ide/test-helm
+      "c"    #'acab-ide/crosscut-helm
+      "s"    #'acab-ide/pattern-helm
       )
       (:prefix ("d" . "Delete")
-      "r"    #'jg-trie-layer/delete-rule
-      "t"    #'jg-trie-layer/delete-type
-      "c"    #'jg-trie-layer/delete-crosscut
-      "s"    #'jg-trie-layer/delete-sequence
+      "r"    #'acab-ide/delete-rule
+      "t"    #'acab-ide/delete-type
+      "c"    #'acab-ide/delete-crosscut
+      "s"    #'acab-ide/delete-sequence
       )
       (:prefix ("l" . "List")
-      "r"    #'jg-trie-layer/list-rules
-      "t"    #'jg-trie-layer/list-types
-      "c"    #'jg-trie-layer/list-crosscuts
-      "s"    #'jg-trie-layer/list-sequences
+      "r"    #'acab-ide/list-rules
+      "t"    #'acab-ide/list-types
+      "c"    #'acab-ide/list-crosscuts
+      "s"    #'acab-ide/list-sequences
       )
 
-      :n "[ [" #'jg-trie-layer/decrement-priors-layer
-      :n "] [" #'jg-trie-layer/increment-priors-layer
-      :n "[ ]" #'jg-trie-layer/decrement-posts-layer
-      :n "] ]" #'jg-trie-layer/increment-posts-layer
+      :n "[ [" #'acab-ide/decrement-priors-layer
+      :n "] [" #'acab-ide/increment-priors-layer
+      :n "[ ]" #'acab-ide/decrement-posts-layer
+      :n "] ]" #'acab-ide/increment-posts-layer
       )

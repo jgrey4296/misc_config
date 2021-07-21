@@ -25,4 +25,17 @@
   (push 'org-link link-hint-types)
   )
 
+(use-package! graphviz-dot-mode
+  :defer t
+  :after org
+  :init
+  (push '("dot" . graphviz-dot) org-src-lang-modes)
+  )
+
+
 (add-hook 'doom-first-input-hook #'+jg-org-setup-tags-hook 100)
+
+(add-hook 'doom-first-input-hook
+          #'(lambda () (remove-hook 'org-tab-first-hook
+                               #'+org-cycle-only-current-subtree-h))
+          )

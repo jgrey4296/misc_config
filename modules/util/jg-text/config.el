@@ -30,4 +30,5 @@
   )
 (after! evil
   (load! "+motions")
+  (load! "+state")
   )

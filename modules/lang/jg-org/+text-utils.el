@@ -10,8 +10,9 @@
   (org-insert-heading 1 nil nil)
   (insert "3: ")
   )
-(defun +jg-org-change_link_name (name)
-  """ Change the name of a link """
+
+(defun +jg-org-change-link-name (name)
+  " Change the name of a link "
   (interactive "s")
   (let ((re org-link-bracket-re))
     (save-excursion
@@ -21,83 +22,70 @@
       )
     )
   )
-
-(defun +jg-org-list-agenda-files ()
-  """ Creates a temporary, Org-mode buffer with links to agenda files """
+(defun +jg-org-fill-paragraph-reverse ()
+  " from END to START of buffer, fill paragraphs "
   (interactive)
-  (with-output-to-temp-buffer "*Agenda Files*"
-    (set-buffer "*Agenda Files*")
-    (insert "Agenda Files: ")
-    (insert "\n")
-    (mapc (lambda (x)
-            (let ((file_name (last (split-string x "/" t ".org"))))
-              (insert (format "[[%s][%s]]\n" x file_name))
-              )) org-agenda-files)
-    (org-mode)
-    )
-  )
-
-(defun +jg-org-split-on-headings ()
-  " Split an org file into multiple smaller buffers non-destructively "
-  (interactive)
-  (let ((contents (buffer-substring (point-min) (point-max)))
-        (target-depth (read-number "What Depth Subtrees to Copy? "))
-        (target-dir (read-directory-name "Split into directory: "))
-        (map-fn (lambda ()
-                  (let* ((components (org-heading-components))
-                         (depth (car components)))
-                    ;;Only copy correct depths
-                    (if (eq depth target-depth)
-                        (progn
-                          ;; (message (format "Current : %s %s" count (nth 4 components)))
-                          (org-copy-subtree 1)
-                          (current-kill 0 t)
-                          )
-                      )
-                    )
-                  ))
-        results
+  (goto-char (point-max))
+  (let ((prog (lambda ()
+                (let ((elem (cadr (org-element-at-point))))
+                  (fill-region-as-paragraph
+                   (cl-getf elem :begin) (cl-getf elem :end)))))
+        curr-elem
+        return-to
         )
-    (with-temp-buffer
-      (org-mode)
-      (insert contents)
-      (goto-char (point-min))
-      (setq results (-non-nil (org-map-entries map-fn)))
+    (while (not (eq (point) (point-min)))
+      (setq curr-elem (org-element-at-point)
+            return-to (cl-getf (cadr curr-elem) :begin))
+      (cond ((eq (car curr-elem) 'property-drawer)
+             (goto-char (- (cl-getf (cadr curr-elem) :begin) 1))
+             )
+            ((eq (car curr-elem) 'headline)
+             (goto-char (- (cl-getf (cadr curr-elem) :begin) 1))
+             )
+            (t
+             (goto-char (cl-getf (cadr curr-elem) :begin))
+             (funcall prog)
+             (insert "\n")
+             )
+            )
+      (goto-char (- return-to 1))
       )
-    (-each (-zip-fill target-dir results '()) '+jg-text-org-split-temp-buffer-create)
     )
   )
-(defun +jg-org-split-alphabetically ()
-  " Split a buffer of values on separate lines into headings alphabetically "
-  (interactive)
+(defun +jg-org-refill-links ()
+  ;;Find and replace
   (goto-char (point-min))
-  (let ((current ?a)
-        (end ?z))
-    (insert "* Top\n")
-    (while (and (<= current end)
-                (re-search-forward (format "^%c" current)))
-      (goto-char (line-beginning-position))
-      (insert (format "** %c\n" current))
-      (cl-incf current)
-      )
+  (while (re-search-forward "]\\[\n[[:space:]]+" nil t)
+    (replace-match "][")
     )
-  )
-(defun +jg-org-split-tag-list ()
-  " Combine the org-split functions into a single routine.
-Sort, align, split, save "
+)
+(defun +jg-org-move-links ()
+  " Go through all links in a file,
+and either copy, or move, the referenced file to a new location
+Prefix-arg to move the file otherwise copy it
+"
   (interactive)
-  (let ((text (buffer-string))
-        (sort-fold-case t))
-    (with-temp-buffer
-      (insert text)
-      (sort-lines nil (point-min) (point-max))
-      (align-regexp (point-min) (point-max) "\\(\\s-*\\):" 1 nil t)
-      (jg-tag-org-split-alphabetically)
-      (jg-tag-org-split-on-headings)
+  ;;Specify target, or use default
+  (let ((target (read-directory-name "Move To: "
+                                     jg-org-link-move-base))
+        (action (if current-prefix-arg 'rename-file 'copy-file))
+        link
+        )
+    (if (not (file-exists-p target))
+        (progn (message "Making target directory: %s" target)
+               (mkdir target))
+      )
+    (message "Process Type: %s" action)
+    (goto-char (point-min))
+    (while (eq t (org-next-link))
+      (setq link (plist-get (plist-get (org-element-context) 'link) :path))
+      (message "Processing: %s" link)
+      (if (not (f-exists? (f-join target (-last-item (f-split link)))))
+          (funcall action link target)
+        (message "Already Exists"))
       )
     )
   )
-
 (defun +jg-org-wrap-numbers (a b)
   "Find numbers and wrap them in parentheses to avoid org treating them as lists"
   (interactive "r")
@@ -118,63 +106,11 @@ Sort, align, split, save "
       )
     )
   )
-
-(defun +jg-org-remove-duplicate-tweet-entries ()
-  "Find duplicate tweets in an org file and remove them"
-  (interactive)
-  (let ((permalinks (make-hash-table :test 'equal))
-        ;;Get all entries' (permalink start-bound end-bound level)
-        (all-entries (seq-filter 'identity (org-map-entries '+jg-org-map-entries-build-permalink-regions)))
-        (to-remove '())
-        (archive-buffer (get-buffer-create "*Org-Cleanup-Tweets*"))
-        )
-    ;;Process all-entries, storing the first instance of a tweet in the hashmap,
-    ;;all subsequent instances in the to-remove list
-    (cl-loop for tweet in all-entries
-             do (if (not (gethash (nth 0 tweet) permalinks))
-                    (let ((m (make-marker)))
-                      (move-marker m (nth 1 tweet))
-                      (puthash (nth 0 tweet) m  permalinks))
-                  (push tweet to-remove)
-                  )
-             )
-    (message "To Remove: %s" (length to-remove))
-    ;;Now remove those duplicates
-    (cl-loop for tweet in to-remove
-             do (let* ((begin (nth 1 tweet))
-                       (end (progn
-                              (goto-char begin)
-                              (plist-get (cadr (org-element-at-point)) :end)))
-                       )
-                  (message "Getting: %s" tweet)
-                  ;; copy tweet into deletion buffer
-                  (princ (buffer-substring-no-properties begin (- end 1))
-                         archive-buffer)
-                  ;; replace it in the original with a replaced link to the remaining
-                  (delete-region begin (- end 1))
-                  (goto-char begin)
-                  ;; TODO Make this a link:
-                  (insert (format "%s [[#%s][Duplicate of %s]]\n\n"
-                                  (make-string (nth 2 tweet) ?*)
-                                  (nth 0 tweet)
-                                  (nth 0 tweet)))
-                  )
-             )
-    )
-  )
-(defun +jg-org-map-entries-build-permalink-regions()
-  " To be run with org-map-entries, extracts permalinks and regions ready to
-  remove duplicates"
-  (let* ((entry-details (cadr (org-element-at-point)))
-         (permalink (plist-get entry-details :PERMALINK))
-         (begin (plist-get entry-details :begin))
-         (level (plist-get entry-details :level))
-         permalink-id
-         )
-    (if (and permalink begin level (string-match "\\[\\[.+?\\]\\[\\(.+?\\)\\]\\]" permalink))
-        (progn (setq permalink-id (match-string 1 permalink))
-               (org-set-property "CUSTOM_ID" permalink-id)
-               `(,permalink-id ,begin ,level))
-      nil)
-    )
+(defun +jg-org-sort-headings ()
+  " Call org-sort-entries on a buffer "
+  (message "Sorting Headings")
+  (goto-char (point-min))
+  (org-mode)
+  (org-show-all)
+  (org-sort-entries nil ?a)
   )

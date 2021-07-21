@@ -30,24 +30,26 @@
  bibtex
  acab-ide
 
- :editor  ;; ----- ====== -----
- ;;  ;;jg-states
- overlay_control
- window-control
- (jg-personal +active)
- project-walk
-
  :lang  ;; ----- ====== -----
  jg-org
  jg-lisp
  jg-python
  jg-cron
+ jg-kotlin
+ jg-soar
+ jg-latex
+ jg-misc-lang
 
  :emacs  ;; ----- ====== -----
- char-insert
  (bindings +bindings)
- jg-tag
+ (jg-ui +defaults)
+ ;;jg-states
+ fold
  jg-dired
+ jg-tag
+ jg-vc
+ project-walk
+ char-insert
 
  :completion ;; ----- ====== -----
  jg-completion
@@ -88,7 +90,7 @@
  :editor
  (evil +everywhere); come to the dark side, we have cookies
  file-templates    ; auto-snippets for empty files
- fold              ; (nigh) universal code folding
+ ;;fold              ; (nigh) universal code folding
  ;;(format +onsave)  ; automated prettiness
  ;;god               ; run Emacs commands without modifier keys
  ;;lispy             ; vim for lisp, for people who don't like vim
@@ -161,7 +163,7 @@
  ;;ess               ; emacs speaks statistics
  ;;factor
  ;;faust             ; dsp, but you get to keep your soul
- ;;fsharp            ; ML stands for Microsoft's Language
+ fsharp            ; ML stands for Microsoft's Language
  ;;fstar             ; (dependent) types and (monadic) effects and Z3
  ;;gdscript          ; the language you waited for
  ;;(go +lsp)         ; the hipster dialect
@@ -172,7 +174,7 @@
  ;;(java +meghanada) ; the poster child for carpal tunnel syndrome
  ;;javascript        ; all(hope(abandon(ye(who(enter(here))))))
  ;;julia             ; a better, faster MATLAB
- ;;kotlin            ; a better, slicker Java(Script)
+ kotlin            ; a better, slicker Java(Script)
  ;;latex             ; writing papers in Emacs has never been so fun
  ;;lean              ; for folks with too much to prove
  ;;ledger            ; be audit you can be

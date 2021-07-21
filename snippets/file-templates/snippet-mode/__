@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# --
+# -*- mode: snippet -*-
+# name: $1
+# uuid: $1
+# --
+$0

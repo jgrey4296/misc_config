@@ -15,3 +15,9 @@
       :prefix "h"
       :desc "Regex Reminder" "R" #'+jg-text-regex-reminder
       )
+
+(map! :map jg-binding-operator-map
+      :prefix "s"
+      :desc "Split on distance" "s" #'+jg-text-split-on-leading-char
+      :desc "Set Buffer Coding" "B" #'set-buffer-file-coding-system
+      )

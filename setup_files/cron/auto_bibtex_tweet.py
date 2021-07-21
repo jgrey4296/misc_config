@@ -25,12 +25,11 @@ root_logger.getLogger('').addHandler(console)
 logging = root_logger.getLogger(__name__)
 ##############################
 MAX_ATTEMPTS     = 20
-TWURL_CMD        = "twurl"
-TWURL_TARGET     = "/1.1/statuses/update.json"
 BIBTEX_LOC       = "~/github/writing/resources/bibliography"
 SECRETS_LOC      = '~/github/py_bookmark_organiser/secrets.config'
 
 tweeted_log      = "~/github/writing/resources/bibliography/.emacs_tweet_rand_bib_log"
+too_long_log     = "~/.doom.d/setup_files/cron/rejected_tweets.log"
 bibtex_blacklist = "~/.doom.d/setup_files/cron/bibtex_blacklist"
 
 REQUIRED_KEYS    = ["year", "author", "title", "tags"]
@@ -116,43 +115,17 @@ def format_tweet(entry):
     elif "isbn" in entry:
         result += f"isbn: {entry['isbn']}\n"
     else:
-        logging.warning("Bad Identifier")
+        logging.warning(f"Bad Entry: {entry['ID']}")
         exit()
 
     tags = " ".join(["#{}".format(x.strip()) for x in entry['tags'].split(',')])
     if len(result) <= 250:
         diff = 250 - len(result)
         result += tags[:diff]
+
     result += "\n#my_bibtex"
 
-    if len(result) >= 280:
-        logging.warning(f"Resulting Tweet too long: {len(result)}\n{result}")
-        exit()
-
     return (entry['ID'], result)
-
-def call_twurl(tweet_text):
-    # logging.info(f"Tweeting: {tweet_text}")
-    full_arg = f"status={tweet_text}"
-    result = subprocess.run([TWURL_CMD,
-                             "-d",
-                             full_arg,
-                             TWURL_TARGET],
-                            capture_output=True,
-                            shell=True
-                            )
-    twurl_output = json.loads(result.stdout)
-
-    if 'errors' not in twurl_output:
-        return True
-
-    else:
-        error_obj = twurl_output['errors'][0]
-        err_code = error_obj['code']
-        err_msg = error_obj['message']
-        logging.warning(f"Twurl Failed: ({err_code}) {err_msg}")
-        system("say Auto-Tweet Failed")
-    return False
 
 if __name__ == "__main__":
     # logging.info("Running Auto Bibtex Tweet")
@@ -167,6 +140,16 @@ if __name__ == "__main__":
         maybe_blacklist_file(db, bib, tweeted)
 
     id_str, tweet_text = format_tweet(entry)
+
+    # If the tweet is too long, log it as as single line
+    if len(tweet_text) >= 280:
+        logging.warning(f"Resulting Tweet too long: {len(tweet_text)}\n{tweet_text}")
+        single_line = tweet_text.replace("\n", " ")
+        with open(expander(too_long_log), 'a') as f:
+            f.write(f"({id_str}) : {single_line}\n")
+
+        exit()
+
 
     config = configparser.ConfigParser()
     with open(expander(SECRETS_LOC),'r') as f:

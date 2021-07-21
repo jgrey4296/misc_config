@@ -19,6 +19,7 @@
       :desc "New Entry"           "n" #'org-ref-bibtex-new-entry/body
       :desc "Count Entries"       "C" #'bibtex-count-entries
       :desc "Refile"              "r" #'+jg-bibtex-refile-by-year
+      :desc "Rename file"         "R" #'+jg-bibtex-rename-file
       :desc "Scholar Search"      "s" #'+jg-bibtex-google-scholar
       (:prefix ("c" . "Copy")
        :desc "Copy Entry"        "e"    #'+jg-bibtex-copy-entry
@@ -37,7 +38,9 @@
        :desc "Jump to Pdf Folder"   "P" #'+jg-bibtex-find-folder
        :desc "Jump to url"          "u" #'+jg-bibtex-open-url
        :desc "Jump to doi"          "d" #'+jg-bibtex-open-doi
-       :desc "Jump to Crossref"     "c" #'+jg-bibtex-goto-crossref-entry)
+       :desc "Jump to Crossref"     "c" #'+jg-bibtex-goto-crossref-entry
+       :desc "Jump to Quicklook"    "l" #'+jg-bibtex-quicklook-pdf
+       )
       ;; TODO search in crossref
       (:prefix ("v" . "Vars")
        :desc "Clean Error Move"    "m" #'+jg-bibtex-clean-error-move-toggle
@@ -66,4 +69,5 @@
       :localleader
       :prefix "K"
       :desc "Unify Pdf Locations" "U"   #'+jg-bibtex-dired-unify-pdf-locations
+      :desc "Stub Pdfs"           "P"   #'+jg-bibtex-dired-stub-entries
       )

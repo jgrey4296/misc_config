@@ -79,6 +79,20 @@ bibtex-BibTeX-entry-alist for completion options "
   (kill-new (bibtex-autokey-get-field "title"))
   (message "Copied Title: %s" (current-kill 0 t))
   )
+(defun +jg-bibtex-quicklook-pdf ()
+  "Open pdf for a bibtex entry, if it exists.
+assumes point is in
+the entry of interest in the bibfile.  but does not check that."
+  (interactive)
+  (save-excursion
+    (let* ((file (bibtex-autokey-get-field "file"))
+           (optfile (bibtex-autokey-get-field "OPTfile")))
+      (message "%s : %s" file (file-exists-p file))
+      (async-shell-command (format "qlmanage -p %s 2>/dev/null"
+                                   (if (and (not (string-equal "" file)) (file-exists-p file))
+                                       file optfile)))
+      )))
+
 (defun +jg-bibtex-open-pdf ()
   "Open pdf for a bibtex entry, if it exists.
 assumes point is in
@@ -88,10 +102,11 @@ the entry of interest in the bibfile.  but does not check that."
     (let* ((file (bibtex-autokey-get-field "file"))
            (optfile (bibtex-autokey-get-field "OPTfile")))
       (message "%s : %s" file (file-exists-p file))
-      (if (and (not (string-equal "" file)) (file-exists-p file))
-          (org-link-open-from-string (format "[[file:%s]]" file))
-        (progn (message optfile)
-               (org-link-open-from-string (format "[[file:%s]]" optfile))))
+      (org-link-open-from-string (format "[[file:%s]]"
+                                         (if (and (not (string-equal "" file))
+                                                  (file-exists-p file))
+                                             file
+                                           optfile)))
       (if jg-bibtex-open-doi-with-pdf
           (+jg-bibtex-open-doi))
       (if jg-bibtex-open-url-with-pdf
@@ -108,7 +123,8 @@ the entry of interest in the bibfile.  but does not check that."
         (progn
           (message "Opening %s" target)
           (find-file-other-window (f-parent target))
-          )
+          (goto-char (point-min))
+          (search-forward (f-filename target)))
       )
     )
   )
@@ -154,17 +170,67 @@ the entry of interest in the bibfile.  but does not check that."
                                     (f-entries bib-path
                                                (lambda (f) (f-ext? f "bib"))))))
          )
-      (bibtex-kill-entry)
-      (with-temp-buffer
-        (if (f-exists? target)
-            (insert-file-contents target))
-        (goto-char (point-max))
-        (insert "\n")
-        (bibtex-yank)
-        (write-file target nil)
+    (+jg-bibtex-refile-pdf current-prefix-arg)
+    (bibtex-kill-entry)
+    (with-temp-buffer
+      (if (f-exists? target)
+          (insert-file-contents target))
+      (goto-char (point-max))
+      (insert "\n")
+      (bibtex-yank)
+      (write-file target nil)
+      )
+
+    )
+  )
+
+(defun +jg-bibtex-get-files-fn (x)
+  " Given a pair, return the cdr if car matches 'file' "
+  (if (string-match "file" (car x))
+      (string-trim (cdr x) "{" "}")))
+
+(defun +jg-bibtex-refile-pdf (&optional destructive)
+  " Refile a pdf from its location to its pdflib/year/author loc
+returns the new location
+"
+  (if destructive
+      (message "Destructive Refile"))
+  (save-excursion
+    (let* ((entry  (bibtex-parse-entry))
+           (author (s-capitalize (bibtex-autokey-get-names)))
+           (year   (bibtex-text-in-field "year"))
+           (files  (-filter #'identity (mapcar #'+jg-bibtex-get-files-fn entry)))
+           (pdflib jg-bibtex-pdf-loc)
+           (finalpath (f-join pdflib year author))
+           newlocs)
+      (make-directory finalpath 'parents)
+
+      (loop for file in files
+            do
+            (let* ((fname (f-filename file))
+                   (target (f-join finalpath fname)))
+              (message "Relocating %s to %s" file target)
+              (if (s-equals? "y" (read-string (format "%sRefile to %s? " (if destructive "Destructive " "") target)))
+                  (progn (assert (not (f-exists? target)))
+                         (if destructive (f-move file target)
+                           (progn (f-copy file target)
+                                  (f-move file (f-join (f-parent file) (format "_refiled_%s" fname)))))
+                         (push target newlocs))
+                (push file newlocs))
+              )
+            )
+
+      ;; Update entry with new locations
+      (loop for file in newlocs
+            with count = 1
+            do
+            (bibtex-set-field (format "file%s" (if (eq count 1) "" count)) file)
+            (incf count)
+            )
       )
     )
   )
+
 (defun +jg-bibtex-visual-select-entry ()
   " Evil visual select the current entry "
   (interactive)
@@ -200,7 +266,7 @@ using org-bibtex-fields for completion options "
            new-value
            )
       (setq new-value (if source
-                          (helm :sources '(source dummy-source)
+                          (helm :sources (list source dummy-source)
                                 :buffer "*helm bibtex completions*"
                                 :input curr-value
                                 )
@@ -328,5 +394,64 @@ Log into jg-bibtex-rand-log.
                                             ))
       (write-region (format "%s\n" (alist-get "=key=" entry nil nil #'equal)) nil
                     log-file t)
+    )
+  )
+
+
+(defun +jg-bibtex-dired-stub-entries ()
+  " Discover all pdfs in a directory, create stubs for them "
+  (interactive)
+  (let* ((curr-dir (dired-current-directory))
+         (files    (f-files curr-dir  (lambda (x) (or (f-ext? x "pdf")
+                                                 (f-ext? x "epub")))))
+         (target-bib (read-file-name "Todo-bib: " jg-bibtex-loc-bibtex))
+         mentioned
+         )
+
+    ;; Get mentioned
+    (with-temp-buffer
+      (if (f-exists? target-bib)
+          (insert-file target-bib))
+      (goto-char (point-min))
+      (while (re-search-forward "^\s*file[0-9]*\s*=\s*{\\(.+?\\)}" nil t)
+        (pushnew (match-string 1) mentioned :test 'equal)
+      )
+      (goto-char (point-max))
+      (insert "\n")
+      (message "Found: %s\n Mentioned: %s\n Remaining: %s"
+               (length files) (length mentioned) (length (-difference files
+                                                                      mentioned)))
+      (loop with count = 0
+            for file in (-difference files mentioned)
+            do
+            (insert "@Misc{stub_" (int-to-string count) ",\n"
+                    "  year = {2020},\n"
+                    "  title = {Unknown},\n"
+                    "  file = {"  file "}\n"
+                    "}\n")
+            (incf count)
+            )
+      (write-file target-bib)
+      )
+    )
+  )
+
+(defun +jg-bibtex-rename-file ()
+  " Rename the file associated with the record "
+  (interactive)
+  (bibtex-beginning-of-entry)
+  (let* ((fields      (bibtex-parse-entry))
+         (file-fields (-filter (lambda (x) (string-match "file" (car x))) fields))
+         (field-selection (if (eq 1 (length file-fields))
+                              (caar file-fields)
+                            (read-string "File Select: " "file")))
+         (filename (bibtex-autokey-get-field field-selection))
+         (ext (f-ext filename))
+         (base (f-parent filename))
+         (new-name (read-string "New Filename: " (f-base filename)))
+         (new-path (f-join base (format "%s.%s" new-name ext))))
+    (message "Moving: %s\nto: %s" filename new-path)
+    (f-move filename new-path)
+    (bibtex-set-field field-selection new-path)
     )
   )

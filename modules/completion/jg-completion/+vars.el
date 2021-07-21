@@ -1,6 +1,6 @@
 ;;; completion/ivy/+vars.el -*- lexical-binding: t; -*-
 
-(after! (ivy helm helm-files)
+(after! (ivy)
   (setq ivy-height 17
         ivy-wrap t
         ivy-fixed-height-minibuffer t
@@ -17,8 +17,10 @@
         ivy-use-selectable-prompt t
         ivy-rich-parse-remote-buffer nil
         swiper-action-recenter t)
-
+)
+(after! (helm helm-files)
   (setq  helm-candidate-number-limit 50
+         helm-truncate-lines t
          ;; Remove extraineous helm UI elements
          helm-display-header-line nil
          helm-mode-line-string nil
@@ -45,15 +47,9 @@
          ;; helm-projectile-fuzzy-match  fuzzy
          ;; helm-recentf-fuzzy-match     fuzzy
          ;; helm-semantic-fuzzy-match    fuzzy
-         )
-
-
-  (setq helm-boring-file-regexp-list
-        (append (list "\\.projects$" "\\.DS_Store$")
-                helm-boring-file-regexp-list)
+         helm-boring-file-regexp-list (append (list "\\.projects$" "\\.DS_Store$") helm-boring-file-regexp-list)
         ;; helm-boring-buffer-regexp-list
-
-
         )
-
   )
+
+(setq company-idle-delay 1)

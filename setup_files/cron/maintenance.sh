@@ -3,6 +3,7 @@ set -euo pipefail
 
 # General maintenance scripts
 # Update node, brew, doom etc
+brew cleanup
 brew update
-doom upgrade
 npm update npm -g
+doom upgrade

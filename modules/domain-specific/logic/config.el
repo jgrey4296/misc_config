@@ -48,3 +48,8 @@
     ;;   (kbd "i t s") 'coq-insert-solve-tactic
     ;;   )
   )
+
+(use-package! clips-mode
+  :init
+  (setq inferior-clips-program "clips")
+  )

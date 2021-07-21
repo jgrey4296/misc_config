@@ -4,14 +4,21 @@
 
 (map! :map ivy-minibuffer-map
       [remap doom/delete-backward-word] #'ivy-backward-kill-word
+      :n "TAB"                         #'ivy-dispatching-call
+      :i "<backtab>"                    #'ivy-dispatching-call
+      :n  "," #'+ivy/occur
+      :n  "." #'hydra-ivy/body
+
       "C-c RET"                         #'+ivy/woccur
       "C-o"                             #'ivy-dispatching-done
       "C-h"                             #'ivy-backward-kill-word
       "M-o"                             #'hydra-ivy/body
+      "C-M-o"                           #'ivy-dispatching-call
       "<down>"                          #'ivy-scroll-down-command
       "<up>"                            #'ivy-scroll-up-command
+
       :localleader
-      :desc "Results as Buffer"        "b" #'ivy-occur
+      :desc "Results as Buffer"        :n "b" #'ivy-occur
       )
 
   ;;; :completion

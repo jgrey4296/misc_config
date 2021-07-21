@@ -151,3 +151,15 @@ the file, unless ALLOW-DUPLICATE-KEYS is non-nil."
       (insert (format "stub_key_%s" (random 5000)))
     )
   )
+
+(defun +jg-bibtex-insert-volume-to-key ()
+  (bibtex-beginning-of-entry)
+  (let ((vol (bibtex-autokey-get-field "volume")))
+    (if vol
+        (progn
+          (goto-char (- (line-end-position) 1))
+          (insert (format "_%s" vol))
+        )
+      )
+    )
+  )

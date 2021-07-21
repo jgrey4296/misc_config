@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: git.document
+# key: trigger-key
+# condition: t
+# --
+[DOCUMENT]: $0
+
+Description:

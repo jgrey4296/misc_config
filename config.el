@@ -38,7 +38,6 @@
 (fset 'doom-highlight-non-default-indentation-h #'(lambda () nil))
 
 
-
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
@@ -54,7 +53,7 @@
               doom-fallback-buffer-name "base_agenda.org"
               )
 
-(add-hook 'doom-first-input-hook #'org-mode)
+;; (add-hook 'doom-first-input-hook #'org-mode)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.

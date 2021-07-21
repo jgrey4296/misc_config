@@ -10,3 +10,6 @@
               undo-tree-auto-save-history t
               undo-tree-enable-undo-in-region t
               )
+
+(push '("^\\*Async Shell Command\\*$" (display-buffer-no-window))
+      display-buffer-alist)

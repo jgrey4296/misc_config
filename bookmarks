@@ -1,8 +1,19 @@
+;;# -*- mode:emacs-lisp; -*-
 ;;;; Emacs Bookmark Format Version 1 ;;;; -*- coding: utf-8 -*-
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("current_pdfs"
+(("emacsd"
+ (filename . "/Volumes/documents/github/otherLibs/doom-emacs/")
+ (front-context-string . "modules\n  drwxr-")
+ (rear-context-string . "44 May 20 08:19 ")
+ (position . 654))
+("language_learning"
+ (filename . "/Volumes/documents/github/languageLearning/")
+ (front-context-string . "android\n  drwxrw")
+ (rear-context-string . "36 Jun  6 15:18 ")
+ (position . 145))
+("current_pdfs"
  (filename . "~/Desktop/pdfs/Current/")
  (front-context-string . "10.1.1.697.5168.")
  (rear-context-string . "4K May 30 16:19 ")
@@ -52,11 +63,6 @@
  (front-context-string . "EXPERIENCE_JAPAN")
  (rear-context-string . "92 Mar  8 00:25 ")
  (position . 183))
-("emacs.d"
- (filename . "~/github/otherLibs/doom-emacs/")
- (front-context-string . "modules\n  drwxr-")
- (rear-context-string . "44 Jan 26 19:07 ")
- (position . 533))
 ("~"
  (filename . "~/")
  (front-context-string . "Desktop\n  drwx--")

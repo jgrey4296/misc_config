@@ -39,6 +39,7 @@
       :localleader
       :desc "Hide Toggle"         "h"         #'dired-omit-mode
       :desc "Symlink"             "S"         #'dired-do-symlink
+      :desc "Quicklook"           "l"         #'+jg-dired-quick-look
       (:prefix ("d" . "Describe")
        :desc "Summarise Orgs"     "s"     #'+jg-dired-create-summary-of-orgs
        :desc "Marked Info"        "m"        #'+jg-dired-marked-info

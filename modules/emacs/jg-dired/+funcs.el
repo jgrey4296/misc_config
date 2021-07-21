@@ -134,3 +134,9 @@ Type SPC or `y' to %s one match, DEL or `n' to skip to next,
   (interactive)
   (find-file-literally (dired-get-filename))
   )
+
+(defun +jg-dired-quick-look ()
+  (interactive)
+  (async-shell-command (format "qlmanage -p %s 2>/dev/null"
+                               (dired-get-filename)))
+  )

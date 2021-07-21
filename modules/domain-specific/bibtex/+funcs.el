@@ -79,6 +79,20 @@ bibtex-BibTeX-entry-alist for completion options "
   (kill-new (bibtex-autokey-get-field "title"))
   (message "Copied Title: %s" (current-kill 0 t))
   )
+(defun +jg-bibtex-quicklook-pdf ()
+  "Open pdf for a bibtex entry, if it exists.
+assumes point is in
+the entry of interest in the bibfile.  but does not check that."
+  (interactive)
+  (save-excursion
+    (let* ((file (bibtex-autokey-get-field "file"))
+           (optfile (bibtex-autokey-get-field "OPTfile")))
+      (message "%s : %s" file (file-exists-p file))
+      (async-shell-command (format "qlmanage -p %s 2>/dev/null"
+                                   (if (and (not (string-equal "" file)) (file-exists-p file))
+                                       file optfile)))
+      )))
+
 (defun +jg-bibtex-open-pdf ()
   "Open pdf for a bibtex entry, if it exists.
 assumes point is in
@@ -88,10 +102,11 @@ the entry of interest in the bibfile.  but does not check that."
     (let* ((file (bibtex-autokey-get-field "file"))
            (optfile (bibtex-autokey-get-field "OPTfile")))
       (message "%s : %s" file (file-exists-p file))
-      (if (and (not (string-equal "" file)) (file-exists-p file))
-          (org-link-open-from-string (format "[[file:%s]]" file))
-        (progn (message optfile)
-               (org-link-open-from-string (format "[[file:%s]]" optfile))))
+      (org-link-open-from-string (format "[[file:%s]]"
+                                         (if (and (not (string-equal "" file))
+                                                  (file-exists-p file))
+                                             file
+                                           optfile)))
       (if jg-bibtex-open-doi-with-pdf
           (+jg-bibtex-open-doi))
       (if jg-bibtex-open-url-with-pdf

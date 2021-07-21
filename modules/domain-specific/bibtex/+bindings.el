@@ -38,7 +38,9 @@
        :desc "Jump to Pdf Folder"   "P" #'+jg-bibtex-find-folder
        :desc "Jump to url"          "u" #'+jg-bibtex-open-url
        :desc "Jump to doi"          "d" #'+jg-bibtex-open-doi
-       :desc "Jump to Crossref"     "c" #'+jg-bibtex-goto-crossref-entry)
+       :desc "Jump to Crossref"     "c" #'+jg-bibtex-goto-crossref-entry
+       :desc "Jump to Quicklook"    "l" #'+jg-bibtex-quicklook-pdf
+       )
       ;; TODO search in crossref
       (:prefix ("v" . "Vars")
        :desc "Clean Error Move"    "m" #'+jg-bibtex-clean-error-move-toggle

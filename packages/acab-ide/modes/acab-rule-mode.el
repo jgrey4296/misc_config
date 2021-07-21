@@ -71,7 +71,7 @@
   (kill-all-local-variables)
   (use-local-map acab-rule-mode-map)
 
-  (set (make-local-variable 'font-lock-defaults) (list acab-rule-font-lock-keywords t))
+  (set (make-local-variable 'font-lock-defaults) (list acab-rule-font-lock-keywords nil))
   ;; (set (make-local-variable 'font-lock-syntactic-face-function) 'acab-rule-syntactic-face-function)
   (set (make-local-variable 'indent-line-function) 'acab-rule-indent-line)
   (set (make-local-variable 'comment-style) '(plain))

@@ -25,6 +25,9 @@ PATH=~/github/otherLibs/clips/:$PATH
 #sqlite
 PATH=/usr/local/opt/sqlite/bin:$PATH
 
+#calibre
+PATH=/Applications/calibre.app/Contents/MacOS:$PATH
+
 #for latex (mactex, when installed):
 export PATH=/usr/local/texlive/2017/bin/x86_64-darwin:$PATH
 

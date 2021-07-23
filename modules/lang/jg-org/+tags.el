@@ -36,18 +36,18 @@ Can operate on regions of headings "
 
 (defun +jg-org-set-new-tag (x)
   "Utility to set a new tag for an org heading"
-    (let ((prior-point (- (point) 1))
-          (end-pos jg-tag-marker)
-          (stripped-tag (+jg-text-strip-spaces x))
-          (heading-re (if (org-property-values "TWITTER-BUFFER")
-                          "^\*\* Thread"
-                        "^\*"
-                        )))
+  (let ((prior-point (- (point) 1))
+        (end-pos jg-tag-marker)
+        (stripped-tag (+jg-text-strip-spaces x))
+        (heading-re (if (org-property-values "TWITTER-BUFFER")
+                        "^\*\* Thread"
+                      "^\*"
+                      )))
 
       (cond ((eq evil-state 'normal)
              (save-excursion
                (if (or (looking-at heading-re) (re-search-backward heading-re nil t))
-                   (+jg-org-integrate-tags actual-candidates))
+                   (+jg-org-integrate-tags (list stripped-tag)))
                ))
             ((eq evil-state 'visual)
              (save-excursion

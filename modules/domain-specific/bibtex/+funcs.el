@@ -455,3 +455,29 @@ Log into jg-bibtex-rand-log.
     (bibtex-set-field field-selection new-path)
     )
   )
+
+
+(defun +jg-bibtex-suppress-watchers ()
+  "bibtex-completion-init adds file watchers for all bibtex files
+This can be annoying at times.
+This function toggles clearing those watchers and recreating them later
+"
+  (interactive)
+  (if bibtex-completion-file-watch-descriptors
+      (progn (message "Clearing Bibtex Watchers")
+        (mapc (lambda (watch-descriptor)
+                     (file-notify-rm-watch watch-descriptor))
+                   bibtex-completion-file-watch-descriptors)
+             (setq bibtex-completion-file-watch-descriptors nil))
+    (progn (message "Setting Bibtex Watchers")
+      (mapc
+       (lambda (file)
+         (if (f-file? file)
+             (let ((watch-descriptor (file-notify-add-watch file '(change)
+                                                            (lambda (event)
+                                                              (bibtex-completion-candidates)))))
+               (setq bibtex-completion-file-watch-descriptors
+                     (cons watch-descriptor bibtex-completion-file-watch-descriptors)))
+           (user-error "Bibliography file %s could not be found" file)))
+       (bibtex-completion-normalize-bibliography))))
+  )

@@ -12,3 +12,8 @@
       :localleader
       :desc "Docs: F#"       "1" (cmd! (+jg-browse-url "https://docs.microsoft.com/en-us/dotnet/fsharp/"))
       )
+
+(map! :map plantuml-mode-map
+      :localleader
+      :desc "Docs: Plantuml" "1" (cmd! (+jg-browse-url "https://plantuml.com/"))
+      )

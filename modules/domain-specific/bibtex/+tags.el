@@ -17,7 +17,6 @@
          (prior-point 1)
          (end-pos jg-tag-marker)
          (current-tags '())
-         (tag-regexp "\\(OPT\\)?tags")
          (has-real-tags-field nil)
          (add-func (lambda (candidate)
                      (if (not (-contains? current-tags candidate))
@@ -33,12 +32,13 @@
       (setq prior-point (- (point) 1))
       (while (and (/= prior-point (point)) (< (point) end-pos))
         (progn
-          (setq current-tags (+jg-bibtex-split-tags (bibtex-autokey-get-field tag-regexp))
-                prior-point (point)
-                has-real-tags-field (not (string-empty-p (bibtex-autokey-get-field "tags")))
-                )
+          (setq has-real-tags-field (not (string-empty-p (bibtex-autokey-get-field "tags"))))
+          (setq current-tags (+jg-bibtex-split-tags (bibtex-autokey-get-field
+                                                     (if has-real-tags-field "tags"
+                                                       "OPTtags")))
+                prior-point (point))
           (mapc add-func actual-candidates)
-          (bibtex-set-field (if has-real-tags-field "tags" "OPTtags")
+          (bibtex-set-field "tags"
                             (string-join current-tags ","))
           ;;(org-ref-bibtex-next-entry)
           (evil-forward-section-begin)
@@ -51,16 +51,16 @@
     (let ((prior-point (- (point) 1))
           (end-pos jg-tag-marker)
           (stripped_tags (+jg-bibtex-split-tags (+jg-text-strip-spaces x)))
-          (tag-regexp "\\(OPT\\)?tags")
           )
       (while (and (/= prior-point (point)) (< (point) end-pos))
         (setq prior-point (point))
-        (let* ((current-tags (+jg-bibtex-split-tags (bibtex-autokey-get-field tag-regexp)))
+        (let* ((has-real-tags-field (not (string-empty-p (bibtex-autokey-get-field "tags"))))
+               (current-tags (+jg-bibtex-split-tags (bibtex-autokey-get-field
+                                                     (if has-real-tags-field "tags" "OPTtags"))))
                (filtered-tags (-filter (lambda (x) (not (-contains? current-tags x))) stripped_tags))
                (total-tags (-concat current-tags filtered-tags))
-               (has-real-tags-field (not (string-empty-p (bibtex-autokey-get-field "tags"))))
                )
-          (bibtex-set-field (if has-real-tags-field "tags" "OPTtags")
+          (bibtex-set-field "tags"
                             (string-join total-tags ","))
           (mapc (lambda (x) (puthash x 1 jg-tag-global-tags)) filtered-tags)
           ;;(org-ref-bibtex-next-entry)

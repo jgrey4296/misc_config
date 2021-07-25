@@ -225,9 +225,9 @@
   ;;; <leader> j -- Jumping
 (map! :leader
       :prefix ("j" . "Jump")
-      :desc "Learn X in Y"                 "1" (cmd! (+jg-browse-url jg-binding-x-in-y-url))
-      :desc "Plant UML"                    "2" (cmd! (+jg-browse-url "http://plantuml.com"))
-      :desc "Over API"                     "3" (cmd! (+jg-browse-url "https://overapi.com/"))
+      :desc "Docs: Learn X in Y"                 "1" (cmd! (+jg-browse-url jg-binding-x-in-y-url))
+      :desc "Docs: Palettes"                     "2" (cmd! (+jg-browse-url "https://www.palettelist.com/"))
+      :desc "Docs: Over API"                     "3" (cmd! (+jg-browse-url "https://overapi.com/"))
 
       :desc "Parse File"            "!" #'helm-gtags-parse-file
       :desc "Jump to Char"          "." #'avy-goto-char

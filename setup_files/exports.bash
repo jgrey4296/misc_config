@@ -17,10 +17,10 @@ PATH=/Applications/SuperCollider/SuperCollider.app/Contents/Resources:$PATH
 PATH=/Applications/SuperCollider/SuperCollider.app/Contents/MacOS:$PATH
 
 #Soar
-PATH=~/github/soar:$PATH
+PATH=~/github/soar-cli:$PATH
 
 #CLIPS
-PATH=~/github/otherLibs/clips/:$PATH
+PATH=~/github/clips/:$PATH
 
 #sqlite
 PATH=/usr/local/opt/sqlite/bin:$PATH
@@ -29,7 +29,7 @@ PATH=/usr/local/opt/sqlite/bin:$PATH
 PATH=/Applications/calibre.app/Contents/MacOS:$PATH
 
 #ceptre
-PATH=/Volumes/documents/github/otherLibs/interactive-lp/bin:$PATH
+PATH=/Volumes/documents/github/ceptre/bin:$PATH
 
 #for latex (mactex, when installed):
 PATH=/usr/local/texlive/2017/bin/x86_64-darwin:$PATH

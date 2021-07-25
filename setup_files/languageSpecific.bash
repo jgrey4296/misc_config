@@ -15,7 +15,6 @@ function set_non_standard_python_paths(){
     echo "Setting Non-Standard Python Paths"
     # Actually using python -m pip ... is better than the next line
     # export PYTHONPATH=/usr/local/lib/python3.7/site-packages # where pip3 installs
-    PYTHONPATH=~/github/otherLibs # personally installed libs
     PYTHONPATH=~/github/:$PYTHONPATH # personally written libs
     PYTHONPATH=$JG_PYLIBS:$PYTHONPATH
     PYTHONPATH=./:$PYTHONPATH
@@ -50,7 +49,7 @@ PERL5LIB=~/Desktop/cotillion/packages/prompter/prompter/mod_services:$PERL5LIB
 export PERL5LIB
 
 #Prompter:
-alias prompter="perl /Volumes/documents/github/otherLibs/cotillion/packages/prompter/prompter/prompter.pl"
+alias prompter="perl /Volumes/documents/github/cotillion/packages/prompter/prompter/prompter.pl"
 
 #NLTK:
 export NLTK_DATA=~/assets/nlg/nltk
@@ -59,7 +58,7 @@ export NLTK_DATA=~/assets/nlg/nltk
 export EDITOR=emacs
 
 #JACAMO
-export JACAMO_HOME=~/github/otherLibs/jacamo/build
+export JACAMO_HOME=~/github/jacamo/build
 export JDK_HOME="$(/usr/libexec/java_home)"
 export JAVA_HOME="$(/usr/libexec/java_home)"
 

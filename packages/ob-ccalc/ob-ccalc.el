@@ -56,7 +56,7 @@
 
 (add-to-list 'org-babel-tangle-lang-exts '("ccalc" . "pl"))
 
-(defvar org-babel-ccalc-location "~/github/otherlibs/ccalc/ccalc.pl")
+(defvar org-babel-ccalc-location "~/github/ccalc/ccalc.pl")
 (defvar org-babel-ccalc-command  "swipl6"
   "Name of the ccalc executable command.")
 (defconst org-babel-header-args:ccalc

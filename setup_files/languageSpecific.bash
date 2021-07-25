@@ -39,7 +39,7 @@ alias jsrepl="env NODE_NO_READLINE=1 node"
 npm set prefix ~/.npm-global
 
 #TEX:
-export TEXINPUTS=/Volumes/DOCUMENTS/Dropbox/Scripts/tex/:$TEXINPUTS
+# export TEXINPUTS=/Volumes/DOCUMENTS/Dropbox/Scripts/tex/:$TEXINPUTS
 
 #PERL
 PERL5LIB=~/Desktop/cotillion/packages/prompter/prompter:$PERL5LIB
@@ -50,16 +50,13 @@ PERL5LIB=~/Desktop/cotillion/packages/prompter/prompter/mod_services:$PERL5LIB
 export PERL5LIB
 
 #Prompter:
-alias prompter="perl ~/Desktop/cotillion/packages/prompter/prompter/prompter.pl"
+alias prompter="perl /Volumes/documents/github/otherLibs/cotillion/packages/prompter/prompter/prompter.pl"
 
 #NLTK:
 export NLTK_DATA=~/assets/nlg/nltk
 
 #Default editor:
 export EDITOR=emacs
-
-#TWINE:
-alias twine="open ~/dropbox/Programs/Twine\ 2.0/index.html"
 
 #JACAMO
 export JACAMO_HOME=~/github/otherLibs/jacamo/build

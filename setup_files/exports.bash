@@ -28,8 +28,11 @@ PATH=/usr/local/opt/sqlite/bin:$PATH
 #calibre
 PATH=/Applications/calibre.app/Contents/MacOS:$PATH
 
+#ceptre
+PATH=/Volumes/documents/github/otherLibs/interactive-lp/bin:$PATH
+
 #for latex (mactex, when installed):
-export PATH=/usr/local/texlive/2017/bin/x86_64-darwin:$PATH
+PATH=/usr/local/texlive/2017/bin/x86_64-darwin:$PATH
 
 #for blender:
 PATH=/Applications/blender/blender.app/Contents/MacOS:$PATH
@@ -47,9 +50,6 @@ PATH=/usr/local/texlive/2020basic/bin/x86_64-darwin/:$PATH
 
 #setting up the prompt:
 PS1='(\j): \D{%D} \A \u:  '
-
-#Setting the location for spacemacs:
-# export SPACEMACSDIR=~/.spacemacs.d/
 
 #for gtags:
 GTAGSCONF=~/.shell_files/gtags.conf

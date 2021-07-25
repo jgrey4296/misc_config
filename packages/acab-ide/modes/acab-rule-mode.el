@@ -35,28 +35,30 @@
 (defconst acab-rule-font-lock-keywords
   (list
    ;; Rule Name
-   `(,(rx line-start
-          (group (+ (or word ?? ?.)) ?:))
-     (1 "org-agenda-date"))
+   `(,(rx line-start (group (+ (or word ?? ?.)) ?:))
+     (1 "org-list-dt"))
    ;; End
-   '("^end$" (0 "font-lock-warning-face"))
-   ;; Var Block
+   '("^end$" (0 "default"))
+   ;; Var Block / Transform arrow
    '("|\\|->" (0 "org-code"))
+   ;; Query
+   `(,(rx (+ (or word ?! ?. ?# ?( ?) ?: ?$ ?λ blank)) ??)
+     (0 "org-headline-todo" nil t)
+     )
    ;; Type assign
-   `(,(rx ?( ?: ?: (*? any) ?))
-     (0 "org-list-dt"))
+   `(,(rx ?( (group ?: ?: (*? any)) ?))
+     (1 "org-list-dt" t))
    ;; Action
    `(,(rx ?λ (+ (or word ?! ?.)))
-     (0 "org-level-2"))
-   ;; Query
-   `(,(rx (+ (or word ?! ?.)) ??)
-     (0 "org-headline-todo"))
+     (0 "org-drawer" t))
    ;; Sentence
    `(,(rx (+ (or word ?! ?.)))
      (0 "org-level-5"))
    ;; Variable
-   `(,(rx ?$ (+ alnum)) (0 "org-checkbox" t))
-   )
+   `(,(rx ?$ (+ alnum)) (0 "org-formula" t))
+   ;; Tags
+   `(,(rx ?# (+ alnum)) (0 "org-column-title" t))
+     )
   "Highlighting for acab-rule-mode"
   )
 

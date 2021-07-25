@@ -127,6 +127,9 @@ Versu, Abl, Cif
 [[https://chroniclingamerica.loc.gov/][Library of Congress Chronicling America]]
 [[https://www.britishnewspaperarchive.co.uk/search][British Newspaper Archive]]
 
+https://lospec.com/palette-list
+https://www.palettelist.com
+https://seaborn.pydata.org/tutorial/color_palettes.html
 *** Universities and Academia
 [[https://blogs.cul.columbia.edu/rbml/2018/09/10/collections-news-albert-field-playing-cards-go-online/][Columbia University Library Playing Cards]]
 [[https://blogs.library.duke.edu/preservation/2019/04/26/quick-pic-choose-your-sumo-hairstyle/][Duke University Libraries: Sumo Hairstyles]]

@@ -27,7 +27,7 @@
 (use-package! window-ring-minor-mode
   :commands (window-ring-setup-columns window-ring-minor-mode window-ring-setup-columns-command)
   )
-
+(use-package! palette-mode)
 
 (after! (evil hl-line)
   ;; Set up faces for hl-line colour sync to status

@@ -1,5 +1,6 @@
 (load! "+vars")
 (load! "+helm-funcs")
+(load! "+funcs")
 
 (after! evil
   (load! "+bindings")

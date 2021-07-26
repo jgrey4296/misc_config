@@ -2,6 +2,9 @@
 
 (message "Setting up Completion bindings: %s" (current-time-string))
 
+(map! :after counsel
+      [remap bookmark-jump] #'+jg-counsel-bookmark)
+
 (map! :map ivy-minibuffer-map
       [remap doom/delete-backward-word] #'ivy-backward-kill-word
       :n "TAB"                         #'ivy-dispatching-call

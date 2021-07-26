@@ -3,3 +3,6 @@
 
 (package! flycheck-plantuml)
 (package! plantuml-mode)
+(package! gradle-mode)
+(package! groovy-mode)
+(package! pasp-mode)

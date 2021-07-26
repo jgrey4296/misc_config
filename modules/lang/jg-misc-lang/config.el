@@ -21,3 +21,6 @@
         exec-path (cons "/usr/local/opt/erlang/bin" exec-path)
         )
   )
+
+(use-package gradle-mode)
+(use-package groovy-mode)

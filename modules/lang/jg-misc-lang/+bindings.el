@@ -17,3 +17,9 @@
       :localleader
       :desc "Docs: Plantuml" "1" (cmd! (+jg-browse-url "https://plantuml.com/"))
       )
+
+(map! :map groovy-mode-map
+      :localleader
+      :desc "Docs: Gradle"   "1" (cmd! (+jg-browse-url "https://docs.gradle.org/current/userguide/userguide.html"))
+      :desc "Docs: Groovy"   "2" (cmd! (+jg-browse-url "https://groovy-lang.org/documentation.html"))
+      )

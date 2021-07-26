@@ -50,7 +50,7 @@
   (yas-minor-mode)
 
   )
-(add-to-list 'auto-mode-alist '("" . ceptre-mode))
+(add-to-list 'auto-mode-alist '("\\.cep" . ceptre-mode))
 
 (provide 'ceptre-mode)
 ;;; ceptre-mode.el ends here

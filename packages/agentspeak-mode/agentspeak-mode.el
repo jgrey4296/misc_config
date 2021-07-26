@@ -49,7 +49,7 @@
   (yas-minor-mode)
 
   )
-(add-to-list 'auto-mode-alist '("" . agentspeak-mode))
+(add-to-list 'auto-mode-alist '("\\.asl" . agentspeak-mode))
 
 
 (provide 'agendspeak-mode)

@@ -34,6 +34,6 @@
   (yas-minor-mode)
 
   )
-(add-to-list 'auto-mode-alist '("" . $1-mode))
+(add-to-list 'auto-mode-alist '("\\\\.$1" . $1-mode))
 
 (provide '$1-mode)

@@ -79,6 +79,16 @@ bibtex-BibTeX-entry-alist for completion options "
   (kill-new (bibtex-autokey-get-field "title"))
   (message "Copied Title: %s" (current-kill 0 t))
   )
+(defun +jg-bibtex-copy-field ()
+  (interactive)
+  (save-excursion
+    (bibtex-beginning-of-entry)
+    (let* ((entry (bibtex-parse-entry))
+           (fields (-reject #'(lambda (x) (s-contains? "=" x)) (mapcar 'car entry)))
+           (selected (ivy-read "Field to Copy: " fields)))
+      (kill-new (bibtex-autokey-get-field selected)))
+    )
+  )
 (defun +jg-bibtex-quicklook-pdf ()
   "Open pdf for a bibtex entry, if it exists.
 assumes point is in

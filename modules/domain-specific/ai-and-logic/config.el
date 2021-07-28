@@ -1,6 +1,19 @@
-;;; specific/jg-logic-layer/config.el -*- lexical-binding: t; -*-
+;; Misc AI Languages:
+(use-package! agentspeak-mode)
+(use-package! ceptre-mode)
+(use-package! instal-mode)
+(use-package! jacamo-mode)
+(use-package! versu-mode)
+(use-package! soar-mode)
+(use-package! clips-mode
+  :init
+  (setq inferior-clips-program "clips")
+  )
+(use-package! netlogo-mode
+  :defer t
+  :commands (netlogo-mode)
+  )
 
-;; TODO
 (after! ob-ccalc
     (org-babel-do-load-languages
      'org-babel-load-languages '((ccalc . t)))
@@ -47,9 +60,4 @@
     ;;   (kbd "i t t") 'coq-insert-tactic
     ;;   (kbd "i t s") 'coq-insert-solve-tactic
     ;;   )
-  )
-
-(use-package! clips-mode
-  :init
-  (setq inferior-clips-program "clips")
   )

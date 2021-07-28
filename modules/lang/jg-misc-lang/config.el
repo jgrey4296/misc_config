@@ -24,10 +24,3 @@
 
 (use-package gradle-mode)
 (use-package groovy-mode)
-
-;; Misc AI Languages:
-(use-package agentspeak-mode)
-(use-package ceptre-mode)
-(use-package instal-mode)
-(use-package jacamo-mode)
-(use-package versu-mode)

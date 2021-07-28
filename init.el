@@ -23,12 +23,12 @@
  jg-org-unit-test
 
  :domain-specific  ;; ----- ====== -----
- logic
  music
  netlogo
  twitter
  bibtex
  acab-ide
+ ai-and-logic
 
  :lang  ;; ----- ====== -----
  jg-org
@@ -36,7 +36,6 @@
  jg-python
  jg-cron
  jg-kotlin
- jg-soar
  jg-latex
  jg-misc-lang
 

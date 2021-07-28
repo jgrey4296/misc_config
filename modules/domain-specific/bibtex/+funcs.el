@@ -102,7 +102,17 @@ the entry of interest in the bibfile.  but does not check that."
                                    (if (and (not (string-equal "" file)) (file-exists-p file))
                                        file optfile)))
       )))
-
+(defun +jg-bibtex-quickswap ()
+  (interactive)
+  (save-excursion
+    (bibtex-beginning-of-entry)
+    (let* ((journal (bibtex-autokey-get-field "journal"))
+           (booktitle (bibtex-autokey-get-field "booktitle")))
+      (bibtex-set-field "booktitle" journal)
+      (bibtex-set-field "journal" booktitle)
+      )
+    )
+  )
 (defun +jg-bibtex-open-pdf ()
   "Open pdf for a bibtex entry, if it exists.
 assumes point is in

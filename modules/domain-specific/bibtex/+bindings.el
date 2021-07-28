@@ -34,6 +34,7 @@
        :desc "Update Field"      "f" #'+jg-bibtex-edit-field
        :desc "Sort Buffer"       "s" #'bibtex-sort-buffer
        :desc "Validate"          "V" #'bibtex-validate
+       :desc "Journal<->BookTitle" "TAB" #'+jg-bibtex-quickswap
        )
       (:prefix ("j" . "Jump")
        :desc "Jump to Pdf"          "p" #'+jg-bibtex-open-pdf

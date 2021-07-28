@@ -50,7 +50,7 @@
   (yas-minor-mode)
 
   )
-(add-to-list 'auto-mode-alist '("\\.jcm" . jacamo-mode))
+(add-to-list 'auto-mode-alist '("\\.\\(jcm\\|mas2j\\)" . jacamo-mode))
 
 (provide 'jacamo-mode)
 

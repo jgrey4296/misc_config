@@ -52,5 +52,5 @@
 (add-to-list 'auto-mode-alist '("\\.asl" . agentspeak-mode))
 
 
-(provide 'agendspeak-mode)
+(provide 'agentspeak-mode)
 ;;; agendspeak-mode.el ends here

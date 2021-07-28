@@ -53,6 +53,4 @@
 (add-to-list 'auto-mode-alist '("\\.ccalc" . ccalc-mode))
 
 (provide 'ccalc-mode)
-
-(provide 'ccalc-mode)
 ;;; ccalc-mode.el ends here

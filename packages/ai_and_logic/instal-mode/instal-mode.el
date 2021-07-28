@@ -53,6 +53,4 @@
 (add-to-list 'auto-mode-alist '("\\.ia[[:alpha:]]$" . instal-mode))
 
 (provide 'instal-mode)
-
-(provide 'instal-mode)
 ;;; instal-mode.el ends here

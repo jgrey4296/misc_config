@@ -53,6 +53,4 @@
 (add-to-list 'auto-mode-alist '("\\.praxis" . versu-mode))
 
 (provide 'versu-mode)
-
-(provide 'versu-mode)
 ;;; versu-mode.el ends here

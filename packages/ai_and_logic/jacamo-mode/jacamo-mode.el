@@ -52,8 +52,6 @@
   )
 (add-to-list 'auto-mode-alist '("\\.\\(jcm\\|mas2j\\)" . jacamo-mode))
 
-(provide 'jacamo-mode)
-
 
 (provide 'jacamo-mode)
 ;;; jacamo-mode.el ends here

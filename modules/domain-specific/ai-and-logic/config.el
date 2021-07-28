@@ -1,4 +1,5 @@
 ;; Misc AI Languages:
+(use-package! abl-mode)
 (use-package! agentspeak-mode)
 (use-package! ceptre-mode)
 (use-package! instal-mode)

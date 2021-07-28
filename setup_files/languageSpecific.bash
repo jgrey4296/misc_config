@@ -18,6 +18,7 @@ function set_non_standard_python_paths(){
     PYTHONPATH=~/github/:$PYTHONPATH # personally written libs
     PYTHONPATH=$JG_PYLIBS:$PYTHONPATH
     PYTHONPATH=./:$PYTHONPATH
+    PYTHONPATH=/usr/local/Cellar/clingo/5.5.0/lib/python3.9/site-packages:$PYTHONPATH
     export PYTHONPATH
     #source activate root --not used because it slows default startup
 }

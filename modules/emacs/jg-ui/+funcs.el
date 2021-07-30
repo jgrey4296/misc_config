@@ -97,3 +97,29 @@ windows, switch to `doom-fallback-buffer'. Otherwise, delegate to original
                (run-hooks 'doom-switch-buffer-hook 'buffer-list-update-hook)
                t)))))
   )
+
+
+(defun +jg-ui-insert-faces ()
+  "insert lisp code for a set of faces automatically"
+  (interactive)
+  (let ((name (read-string "Face Names: "))
+        (num (read-number "Number of Faces: "))
+        (file (read-file-name "File: " jg-ui-default-face-gen-palette-dir))
+        colors
+        )
+
+    (with-temp-buffer
+      (insert-file-contents file)
+      (goto-char (point-min))
+      (while (re-search-forward "#[[:alnum:]]+" nil t)
+        (push (match-string 0) colors)
+        ))
+    (assert (<= num (length colors)))
+
+    (loop for n to (- num 1) do
+          (insert "(defface " name "-face-" (number-to-string n) "\n")
+          (insert "  '((t :foreground \"" (nth n colors) "\"))\n")
+          (insert "  \"Generated " name " " (number-to-string n) " Face\"\n)\n\n")
+          )
+    )
+  )

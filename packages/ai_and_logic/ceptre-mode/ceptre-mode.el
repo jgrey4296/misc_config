@@ -18,6 +18,7 @@
 ;;  Description
 ;;
 ;;; Code:
+(require 'ceptre-faces)
 
 (defvar-local ceptre-mode-map
   (make-sparse-keymap))

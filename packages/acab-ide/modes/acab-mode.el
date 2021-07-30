@@ -1,6 +1,6 @@
 ;;based On https://www.emacswiki.org/emacs/ModeTutorial
 ;;For allowing code to run when the mode is run:
-(require 'acab-face)
+(require 'acab-faces)
 (require 'acab-hydras)
 (require 'inst-mode)
 (require 'trie-explore-mode)
@@ -56,20 +56,20 @@
    ;;Rule name
    `("^\\([[:word:].!]+\\):$" (0 "acab-rulename"))
    ;;punctuation
-   `("\\." (0 ,(acab-face/acab-depth-face 1)))
-   `("!" (0 ,(acab-face/acab-depth-face 2)))
-   `("::" (0 ,(acab-face/acab-depth-face 3) t))
-   `("->\\|\\?" (0 ,(acab-face/acab-depth-face 4) t))
+   `("\\." (0 'acab-face-1))
+   `("!" (0 'acab-face-2))
+   `("::" (0 'acab-face-3 t))
+   `("->\\|\\?" (0 'acab-face-4 t))
    ;;Variables and tags
-   `("#[[:word:]]+" (0 ,(acab-face/acab-depth-face 5)))
-   `("\\$[[:word:]]+" (0 ,(acab-face/acab-depth-face 6)))
+   `("#[[:word:]]+" (0 'acab-face-1))
+   `("\\$[[:word:]]+" (0 'acab-face-2))
    ;;functions
-   `("\\([-<>=%^*@+&~][[:word:]]*\\)" (1 ,(acab-face/acab-depth-face 7)))
+   `("\\([-<>=%^*@+&~][[:word:]]*\\)" (1 'acab-face-3))
    ;;Words
-   `("[[:word:]]" (0 ,(acab-face/acab-depth-face 8)))
+   `("[[:word:]]" (0 'acab-face-4))
    ;;Closures
-   `("[][()]" (0 ,(acab-face/acab-depth-face 9)))
-   `("[([]\.+[])]" (0 "acab-closure" t))
+   `("[][()]" (0 'acab-face-1))
+   `("[([]\.+[])]" (0 'acab-face-2))
    )
   "Minimal highlighting expressions for Acab mode")
 

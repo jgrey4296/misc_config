@@ -1,5 +1,5 @@
 ;;; timeline-mode.el -*- lexical-binding: t; -*-
-
+(require 'timeline-faces)
 (require 'timeline-utilities)
 
 (defvar-local timeline-mode-map
@@ -30,19 +30,19 @@
           (? blank (group-n 11 ?: "desc"))
           line-end
           )
-     (1 "font-lock-builtin-face")
-     (2 "font-lock-constant-face"      nil t)
-     (3 "font-lock-builtin-face"       nil t)
-     (4 "font-lock-type-face")
-     (5 "font-lock-function-name-face")
-     (6 "font-lock-variable-name-face" nil t)
-     (7 "org-document-info"            nil t)
-     (8 "org-list-dt"                  nil t)
-     (9 "org-document-info"            nil t)
-     (10 "org-link"                    nil t)
-     (11 "org-document-info"           nil t))
+     (1 'timeline-face-1)
+     (2 'timeline-face-2  nil t)
+     (3 'timeline-face-4  nil t)
+     (4 'timeline-face-1)
+     (5 'timeline-face-2)
+     (6 'timeline-face-3  nil t)
+     (7 'timeline-face-4  nil t)
+     (8 'timeline-face-1  nil t)
+     (9 'timeline-face-2  nil t)
+     (10 'timeline-face-3 nil t)
+     (11 'timeline-face-4 nil t))
 
-   `("^.+$" (0 font-lock-warning-face))
+   `("^.+$" (0 'timeline-face-1))
    )
   "Highlighting for timeline-mode"
   )

@@ -1,4 +1,5 @@
 ;;; soar-mode.el -*- lexical-binding: t; -*-
+(require 'soar-faces)
 
 (defcustom soar-executable "soar"
   "The executable to use for soar"
@@ -11,28 +12,28 @@
 ;; List of '(regex (groupnum "face")+)
 (defconst soar-font-lock-keywords
   (list
-   `("#.+$" (0 'font-lock-comment-face))
+   `("#.+$" (0 'font-lock-comment-face)) ;; -- MOVE TO SYNTACTIC FONTIFICATION
    `("^\\(sp {\\)\\(.+\\)$"
-     (1 'font-lock-keyword-face)
-     (2 'font-lock-function-name-face))
+     (1 'soar-face-1)
+     (2 'soar-face-2))
    `(,(rx line-start ?})
-     (0 'font-lock-keyword-face))
-   `("-->" (0 'font-lock-constant-face))
-   `("<\\w+>" (0 'font-lock-variable-name-face))
-   `(,(rx ?^ (regexp "[-[:alpha:]]+")) (0 'font-lock-type-face))
+     (0 'soar-face-3))
+   `("-->" (0 'soar-face-4))
+   `("<\\w+>" (0 'soar-face-1))
+   `(,(rx ?^ (regexp "[-[:alpha:]]+")) (0 'soar-face-1))
    `(,(rx "(" (group (or "state" "impasse")))
-     (1 'font-lock-constant-face))
+     (1 'soar-face-2))
    `(,(rx ":" (or "o-support"
                   "i-support"
                   "chunk"
                   "default"))
-     (0 'font-lock-warning-face))
+     (0 'soar-face-2))
    `(,(rx (or "<<" ">>" ?{ ?}))
-     (0 '(:foreground "red")))
+     (0 'soar-face-3))
    `(,(rx (or ?( ?) ))
-     (0 '(:foreground "green")))
+     (0 'soar-face-4))
    `(,(rx (or "<>" ?< ?> "<=" ">=" "=" "<=>"))
-     (0 '(:foreground "green"))
+     (0 'soar-face-1)
      )
    )
   "Highlighting for soar-mode"

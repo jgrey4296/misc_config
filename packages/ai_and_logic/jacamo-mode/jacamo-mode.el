@@ -18,6 +18,7 @@
 ;;
 ;;
 ;;; Code:
+(require 'jacamo-faces)
 
 (defvar-local jacamo-mode-map
   (make-sparse-keymap))

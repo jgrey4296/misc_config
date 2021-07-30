@@ -18,14 +18,40 @@
 ;;  Description
 ;;
 ;;; Code:
+(require 'abl-faces)
 
 (defvar-local abl-mode-map
   (make-sparse-keymap))
 
 ;; List of '(regex (groupnum "face")+)
 (defconst abl-font-lock-keywords
-  (list)
+  (list
+   `(,(rx line-start (* blank) (group-n 1 (or "sequential" "parallel"))
+          blank (group-n 2 "behavior")
+          blank (group-n 3 (+ word))
+          )
+     (1 'abl-face-1)
+     (2 'abl-face-2)
+     (3 'abl-face-3))
+   `(,(rx (or "subgoal" "act" "mental_act" "wait" "precondition"
+              "succeed_step" "fail_step" "specificity" "success_test"
+              "ignore_failure" "persistent" "priority" "initial_tree"
+              "joint" "collective" "teammembers"))
+     (0 'abl-face-1))
+   `(,(rx (or "with" "register"))
+     (0 'abl-face-2))
+   `(,(rx (or "conflict" "wme"))
+     (0 'abl-face-4))
+
+  ;; `(,(rx )
+  ;;    (subexp facename override laxmatch)
+  ;;    )
+   )
   "Highlighting for abl-mode"
+  )
+
+(defconst abl-mode-syntax-table
+  (copy-syntax-table java-mode-syntax-table)
   )
 
 (define-derived-mode abl-mode fundamental-mode
@@ -35,13 +61,14 @@
   (kill-all-local-variables)
   (use-local-map abl-mode-map)
 
-  ;; (set (make-local-variable 'font-lock-defaults) (list abl-font-lock-keywords nil))
+  (set (make-local-variable 'font-lock-defaults) (list abl-font-lock-keywords nil))
   ;; (set (make-local-variable 'font-lock-syntactic-face-function) 'abl-syntactic-face-function)
   ;; (set (make-local-variable 'indent-line-function) 'abl-indent-line)
-  ;; (set (make-local-variable 'comment-style) '(plain))
-  ;; (set (make-local-variable 'comment-start) "//")
-  ;; (set (make-local-variable 'comment-use-syntax) t)
-  ;; (set-syntax-table abl-mode-syntax-table)
+  ;; (set (make-local-variable 'comment-style) '(multi-box plain))
+  ;; (set (make-local-variable 'comment-start) (rx (or "//" "/*")))
+  ;; (set (make-local-variable 'comment-end) (rx (or "*/" line-end)))
+  (set (make-local-variable 'comment-use-syntax) t)
+  (set-syntax-table abl-mode-syntax-table)
   ;;
   (setq major-mode 'abl-mode)
   (setq mode-name "abl")

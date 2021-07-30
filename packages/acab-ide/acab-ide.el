@@ -3,7 +3,7 @@
 
 ;; Components
 (require 'acab-comint)
-(require 'acab-face)
+(require 'acab-faces)
 (require 'acab-hydras)
 
 ;; Modes

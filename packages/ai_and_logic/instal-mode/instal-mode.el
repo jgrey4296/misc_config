@@ -18,6 +18,7 @@
 ;;
 ;;
 ;;; Code:
+(require 'instal-faces)
 
 (defvar-local instal-mode-map
   (make-sparse-keymap))

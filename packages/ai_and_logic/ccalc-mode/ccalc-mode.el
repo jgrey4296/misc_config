@@ -18,6 +18,7 @@
 ;;  Description
 ;;
 ;;; Code:
+(require 'ccalc-faces)
 
 (defvar-local ccalc-mode-map
   (make-sparse-keymap))

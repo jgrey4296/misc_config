@@ -18,12 +18,20 @@
 ;;
 ;;
 ;;; Code:
+(require 'agentspeak-faces)
+
 (defvar-local agentspeak-mode-map
   (make-sparse-keymap))
 
 ;; List of '(regex (groupnum "face")+)
 (defconst agentspeak-font-lock-keywords
-  (list)
+  (list
+   `(,(rx (or "+" "!" "<-" "?" "-" "percept" "self"))
+     (0 'agentspeak-face-1))
+   `(,(rx (group-n 1 (+ word)) (? "(" (group-n 2 (* (or word ","))) ")"))
+     (1 'agentspeak-face-2)
+     (2 'agentspeak-face-3 nil t))
+   )
   "Highlighting for agentspeak-mode"
   )
 
@@ -34,7 +42,7 @@
   (kill-all-local-variables)
   (use-local-map agentspeak-mode-map)
 
-  ;; (set (make-local-variable 'font-lock-defaults) (list agentspeak-font-lock-keywords nil))
+  (set (make-local-variable 'font-lock-defaults) (list agentspeak-font-lock-keywords nil))
   ;; (set (make-local-variable 'font-lock-syntactic-face-function) 'agentspeak-syntactic-face-function)
   ;; (set (make-local-variable 'indent-line-function) 'agentspeak-indent-line)
   ;; (set (make-local-variable 'comment-style) '(plain))

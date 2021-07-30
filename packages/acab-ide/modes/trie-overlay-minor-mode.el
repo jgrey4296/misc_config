@@ -2,7 +2,7 @@
 ;;based On https://www.emacswiki.org/emacs/ModeTutorial
 ;;For allowing code to run when the mode is run:
 (require 'dash)
-(require 'acab-face)
+(require 'acab-faces)
 (require 'trie-management)
 
 (provide 'trie-overlay-minor-mode)

@@ -18,6 +18,7 @@
 ;;  Description
 ;;
 ;;; Code:
+(require 'versu-faces)
 
 (defvar-local versu-mode-map
   (make-sparse-keymap))

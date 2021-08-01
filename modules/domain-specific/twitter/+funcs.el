@@ -5,9 +5,9 @@
   )
 
 (defun +jg-twitter-tweet ()
-  """ Creates a window to write a tweet in,
+  " Creates a window to write a tweet in,
         if already in that window, tweet it
-     """
+     "
   (interactive)
   (let ((selection (if (eq evil-state 'visual)
                        (buffer-substring-no-properties
@@ -18,9 +18,9 @@
 )
 
 (defun +jg-twitter-tweet-reply ()
-  """ Creates a window to write a tweet in,
+  " Creates a window to write a tweet in,
         if already in that window, tweet it
-     """
+     "
   (interactive)
   (let ((selection (if (eq evil-state 'visual)
                        (buffer-substring-no-properties
@@ -54,7 +54,7 @@
   )
 
 (defun +jg-twitter-twitter-tweet ()
-  """ Actually tweet """
+  " Actually tweet "
   (interactive)
   (+jg-twitter-twitter-tweet-text (buffer-string)
                                   (buffer-local-variables)
@@ -91,8 +91,8 @@
     ))
 
 (defun +jg-twitter-twitter-add-picture ()
-  """ start the process of uploading twitter media_id
-        to the local-variables of the current buffer """
+  " start the process of uploading twitter media_id
+        to the local-variables of the current buffer "
   (interactive)
   (if (not (boundp '+jg-twitter-twitter-image-helm-source))
         (setq +jg-twitter-twitter-image-helm-source
@@ -135,7 +135,7 @@
   )
 
 (defun +jg-twitter-sentinel_upload (&rest args)
-  """ Append data """
+  " Append data "
   (let* ((buf-json (with-current-buffer +jg-twitter-twurl_buff_name
                      (beginning-of-buffer) (json-read)))
          (media_str (cdr (assq 'media_id_string buf-json)))
@@ -149,7 +149,7 @@
   )
 
 (defun +jg-twitter-sentinel_final (&rest args)
-  """ Finalize the upload """
+  " Finalize the upload "
   (let* ((cmd (format "command=%s&media_id=%s" "FINALIZE" +jg-twitter-twurl_media_id)))
     (start-process +jg-twitter-twurl_proc_name +jg-twitter-twurl_buff_name
                    "twurl" "-H" +jg-twitter-twurl_media_host +jg-twitter-twurl_upload "-d" cmd)
@@ -159,7 +159,7 @@
   )
 
 (defun +jg-twitter-add_media_id_to_tweet (&rest args)
-  """ Actually insert the media_id to the local vars of the tweet buffer """
+  " Actually insert the media_id to the local vars of the tweet buffer "
   (let* (obj errs err err-code err-msg)
     (with-current-buffer +jg-twitter-twurl_buff_name
       ;; Get the result
@@ -185,7 +185,7 @@
   )
 
 (defun +jg-twitter-tweet_sentinel (&rest args)
-  """ Cleanup after tweeting """
+  " Cleanup after tweeting "
   (set-buffer-modified-p nil)
   (with-current-buffer +jg-twitter-tweet_buff_name
     (setq +jg-twitter-last-tweet-text-backup

@@ -26,7 +26,7 @@
 ;; List of '(regex (groupnum "face")+)
 (defconst agentspeak-font-lock-keywords
   (list
-   `(,(rx (or "+" "!" "<-" "?" "-" "percept" "self"))
+   `(,(rx (or "@" "+" "!" "<-" "?" "-" "percept" "self"))
      (0 'agentspeak-face-1))
    `(,(rx (group-n 1 (+ word)) (? "(" (group-n 2 (* (or word ","))) ")"))
      (1 'agentspeak-face-2)
@@ -34,6 +34,29 @@
    )
   "Highlighting for agentspeak-mode"
   )
+
+(defvar agentspeak-mode-syntax-table
+  (let ((st (make-syntax-table)))
+    (modify-syntax-entry ?. "_" st)
+    (modify-syntax-entry ?! "_" st)
+    (modify-syntax-entry ?$ "_" st)
+    (modify-syntax-entry ?+ "_" st)
+    (modify-syntax-entry ?- "_" st)
+    (modify-syntax-entry ?? "_" st)
+    (modify-syntax-entry ?@ "_" st)
+    (modify-syntax-entry ?\; "_" st)
+    ;;underscores are valid parts of words:
+    (modify-syntax-entry ?_ "w" st)
+    (modify-syntax-entry ?/ "<12" st)
+    (modify-syntax-entry ?\n ">" st)
+    (modify-syntax-entry ?\" "\"\"" st)
+    (modify-syntax-entry ?\( "()" st)
+    (modify-syntax-entry ?\[ "(]" st)
+    (modify-syntax-entry ?: ".:2" st)
+    (setq agentspeak-mode-syntax-table st))
+  "Syntax table for the agentspeak-mode")
+
+
 
 (define-derived-mode agentspeak-mode fundamental-mode
   "agentspeak"
@@ -48,7 +71,7 @@
   ;; (set (make-local-variable 'comment-style) '(plain))
   ;; (set (make-local-variable 'comment-start) "//")
   ;; (set (make-local-variable 'comment-use-syntax) t)
-  ;; (set-syntax-table agentspeak-mode-syntax-table)
+  (set-syntax-table agentspeak-mode-syntax-table)
   ;;
   (setq major-mode 'agentspeak-mode)
   (setq mode-name "agentspeak")

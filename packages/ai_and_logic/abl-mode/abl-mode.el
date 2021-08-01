@@ -41,7 +41,7 @@
    `(,(rx (or "with" "register"))
      (0 'abl-face-2))
    `(,(rx (or "conflict" "wme"))
-     (0 'abl-face-4))
+     (0 'abl-face-0))
 
   ;; `(,(rx )
   ;;    (subexp facename override laxmatch)
@@ -50,11 +50,24 @@
   "Highlighting for abl-mode"
   )
 
-(defconst abl-mode-syntax-table
-  (copy-syntax-table java-mode-syntax-table)
-  )
+(defun abl-mode-generate-syntax-table ()
+  (let ((st (copy-syntax-table java-mode-syntax-table)))
+    (modify-syntax-entry ?. "."     st)
+    (modify-syntax-entry ?! "."     st)
+    (modify-syntax-entry ?$ "_"     st)
+    ;;underscores are valid parts of words:
+    (modify-syntax-entry ?_ "w"     st)
+    (modify-syntax-entry ?/ "<12"   st)
+    (modify-syntax-entry ?\n ">"    st)
+    (modify-syntax-entry ?\" "\"\"" st)
+    (modify-syntax-entry ?\( "()"   st)
+    (modify-syntax-entry ?\[ "(]"   st)
+    (modify-syntax-entry ?: ".:2"   st)
+    st)
+)
 
-(define-derived-mode abl-mode fundamental-mode
+
+(define-derived-mode abl-mode java-mode
   "abl"
   ""
   (interactive)
@@ -68,7 +81,7 @@
   ;; (set (make-local-variable 'comment-start) (rx (or "//" "/*")))
   ;; (set (make-local-variable 'comment-end) (rx (or "*/" line-end)))
   (set (make-local-variable 'comment-use-syntax) t)
-  (set-syntax-table abl-mode-syntax-table)
+  (set-syntax-table (abl-mode-generate-syntax-table))
   ;;
   (setq major-mode 'abl-mode)
   (setq mode-name "abl")

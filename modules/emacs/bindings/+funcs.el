@@ -53,18 +53,18 @@
 
 
 (defun +jg-bindings-clear-buffer ()
-  """ Utility to clear a buffer
-    from https://stackoverflow.com/questions/24565068/ """
+  " Utility to clear a buffer
+    from https://stackoverflow.com/questions/24565068/ "
   (interactive)
   (let ((inhibit-read-only t)) (erase-buffer))
   )
 (defun +jg-personal-insert-lparen ()
-  """ utility to insert a (  """
+  " utility to insert a (  "
   (interactive)
   (insert "(")
   )
 (defun +jg-personal-insert-rparen ()
-  """ utility to insert a ) """
+  " utility to insert a ) "
   (interactive)
   (insert ")")
   )

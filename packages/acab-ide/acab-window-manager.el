@@ -52,7 +52,7 @@
     )
   )
 (cl-defun acab-ide/build-ide-window-layout ()
-  """ Setup rule editing windows """
+  " Setup rule editing windows "
   ;; (terminals - ) priors - rule - posts (terminals)
   ;;                       defeaters
   ;;       upstream stats  - alts - downstream stats

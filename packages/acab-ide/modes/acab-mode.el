@@ -59,14 +59,14 @@
    `("\\." (0 'acab-face-1))
    `("!" (0 'acab-face-2))
    `("::" (0 'acab-face-3 t))
-   `("->\\|\\?" (0 'acab-face-4 t))
+   `("->\\|\\?" (0 'acab-face-0 t))
    ;;Variables and tags
    `("#[[:word:]]+" (0 'acab-face-1))
    `("\\$[[:word:]]+" (0 'acab-face-2))
    ;;functions
    `("\\([-<>=%^*@+&~][[:word:]]*\\)" (1 'acab-face-3))
    ;;Words
-   `("[[:word:]]" (0 'acab-face-4))
+   `("[[:word:]]" (0 'acab-face-0))
    ;;Closures
    `("[][()]" (0 'acab-face-1))
    `("[([]\.+[])]" (0 'acab-face-2))

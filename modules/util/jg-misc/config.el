@@ -79,7 +79,7 @@
         iedit-toggle-key-default nil)
   :config
   (defun iedit-show-all()
-    """ Override iedit's show all so it doesn't mess with invisible line movement"
+    " Override iedit's show all so it doesn't mess with invisible line movement"
     (remove-from-invisibility-spec '(iedit-invisible-overlay-name . t))
     (remove-overlays nil nil iedit-invisible-overlay-name t)
   )

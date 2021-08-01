@@ -2,12 +2,12 @@
 ;; Functions that work on org files/ interact with the outside
 
 (defun +jg-org-open_link_in_buffer ()
-  """ a util function to force links to be open in emacs  """
+  " a util function to force links to be open in emacs  "
   (interactive)
   (org-open-at-point 'in-emacs)
   )
 (defun +jg-org-open_link_externally ()
-  """ Open a link, forcing it to be external to emacs """
+  " Open a link, forcing it to be external to emacs "
   (interactive)
   (let ((current-prefix-arg '(16)))
     (call-interactively 'org-open-at-point)))
@@ -22,7 +22,7 @@
          (path (org-element-property :path context)))
     (and (equal type "file") (not (file-exists-p path)))))
 (defun +jg-org-link-hint-external (uri)
-  """ Open a link, forcing it to be external to emacs """
+  " Open a link, forcing it to be external to emacs "
   (let* ((ext (f-ext uri))
          (open-externally (if ext
                               (-contains? jg-org-external-file-link-types (downcase ext))

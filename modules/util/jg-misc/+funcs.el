@@ -117,7 +117,7 @@
 
 
 (defun +jg-personal-flatten (lst)
-  """ Utility to flatten a list """
+  " Utility to flatten a list "
   (letrec ((internal (lambda (x)
                        (cond
                         ((null x) nil)

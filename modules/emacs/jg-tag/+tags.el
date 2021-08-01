@@ -71,7 +71,7 @@ Return a hash-table of tags with their instance counts"
     )
   )
 (defun +jg-tag-occurrences-in-open-buffers()
-  """ Retrieve all tags in all open buffers, print to a temporary buffer """
+  " Retrieve all tags in all open buffers, print to a temporary buffer "
   (interactive "p")
   (let* ((allbuffers (buffer-list))
          (alltags (make-hash-table :test 'equal))

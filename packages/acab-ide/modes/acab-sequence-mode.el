@@ -232,7 +232,7 @@ https://stackoverflow.com/questions/1249497 "
                             (- cur mid)))))
 
 (defun acab-sequence/goto-position (row col)
-  " In a table, go to the Column, Row specified """
+  " In a table, go to the Column, Row specified "
   (interactive "N\nN")
   ;; Row first, then column, as goto-line resets column otherwise
   (org-table-goto-line row)

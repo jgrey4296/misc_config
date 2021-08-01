@@ -1,8 +1,8 @@
 (defun jg_layer/example_transient_func_setup ()
-  """ Create an example transient state """
+  " Create an example transient state "
 
   (defun jg_layer/example_transient_func ()
-    """ The simple function to call from within the transient state """
+    " The simple function to call from within the transient state "
     (interactive)
     (print "blah")
     )
@@ -23,7 +23,7 @@
   (spacemacs/set-leader-keys "." 'spacemacs/example_transient-transient-state/body)
   )
 (defun jg_layer/example-helm-setup ()
-  """ An Example Helm Setup """
+  " An Example Helm Setup "
 
   (setq-default jg_layer/example_helm-source
                 (helm-make-source "Find Image" 'helm-source-ffiles

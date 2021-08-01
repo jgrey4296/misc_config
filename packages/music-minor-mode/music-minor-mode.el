@@ -1,5 +1,5 @@
 (defun music-minor/music-eval-selection ()
-  """ Evaluate a selected region, or the entire buffer, in tidal OR SCLang """
+  " Evaluate a selected region, or the entire buffer, in tidal OR SCLang "
   (interactive)
   (let* ((start (if (eq evil-state 'visual) evil-visual-beginning (point-min)))
          (last (if (eq evil-state 'visual) evil-visual-end  (point-max)))

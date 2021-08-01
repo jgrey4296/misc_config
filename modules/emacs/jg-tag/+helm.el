@@ -257,7 +257,7 @@
       )
     )
 (defun +jg-tag-helm-tagger (&optional beg end)
-  """ Opens the Tagging Helm """
+  " Opens the Tagging Helm "
   (set-marker jg-tag-marker (if (eq evil-state 'visual)  evil-visual-end (line-end-position)))
   (get-buffer-create jg-tag-helm-buffer-name)
 

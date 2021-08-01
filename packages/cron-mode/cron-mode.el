@@ -16,7 +16,7 @@
      (0 'cron-face-3))
    ;; Headers
    '("^## .+"
-     (0 'cron-face-4))
+     (0 'cron-face-0))
    ;; Headers 2
    '("^### .+"
      (0 'cron-face-1))
@@ -29,7 +29,7 @@
    (list (let ((pat "[[:word:]*,/]+"))
            (format "^\\(%s %s %s %s\\) %s \\(.+\\)$" pat pat pat pat pat))
          '(1 'cron-face-3)
-         '(2 'cron-face-4)
+         '(2 'cron-face-0)
      )
 
    )

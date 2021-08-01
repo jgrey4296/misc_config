@@ -339,9 +339,9 @@ Log into jg-bibtex-rand-log.
     )
   )
 (defun +jg-bibtex-clean-entry ()
-  """ Calls org-ref-clean-bibtex-entry,
+  " Calls org-ref-clean-bibtex-entry,
   but with a wrapping to override fill-column
-  """
+  "
   (interactive)
   (condition-case err
       (let ((fill-column jg-bibtex-fill-column))

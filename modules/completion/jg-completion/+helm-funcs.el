@@ -1,8 +1,8 @@
 ;;; main/jg-personal/+helm-funcs.el -*- lexical-binding: t; -*-
 
 (defun +jg-personal-helm-open-random-action (candidate)
-  """ Helm Action that opens files randomly, by prompting for a file extension
-   searching as necessary, and keeping a log of files opened before """
+  " Helm Action that opens files randomly, by prompting for a file extension
+   searching as necessary, and keeping a log of files opened before "
   (let* ((candidates (helm-marked-candidates))
          (file_ext (read-string "File Extension: "))
          (log_file (f-join (if (f-dir? (car candidates)) (car candidates) (f-dirname (car candidates))) ".emacs_rand_file_log"))
@@ -63,8 +63,8 @@ versus not"
     )
   )
 (defun +jg-personal-bookmark-load-random ()
-  """ Open a random bookmark, log it, and provide a
-      temp buffer to edit tags in """
+  " Open a random bookmark, log it, and provide a
+      temp buffer to edit tags in "
   (interactive)
   (widen)
   (let* ((location (f-dirname (buffer-file-name)))

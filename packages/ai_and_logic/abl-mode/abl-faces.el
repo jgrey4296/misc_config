@@ -20,7 +20,7 @@
 ;;; Code:
 
 (defface abl-face-0
-  '((t :foreground "#292831"))
+  '((t :foreground "#fbbbad"))
   "Generated abl 0 Face"
 )
 

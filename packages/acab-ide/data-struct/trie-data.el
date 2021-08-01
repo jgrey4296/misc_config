@@ -22,7 +22,7 @@
 
 ;; Tree Operations
 (defun trie-data/generate-tree (node n-children layers)
-  """ Create a tree of n-children and layers, using random dictionary words as nodes """
+  " Create a tree of n-children and layers, using random dictionary words as nodes "
   (if (> layers 0)
       (with-temp-buffer
         (insert-file-contents "/usr/share/dict/words")
@@ -40,8 +40,8 @@
     )
   )
 (defun trie-data/tree-add (rootnode path val)
-  """ Add a node with a value as a leaf of path from rootnode, creating
-intermediate nodes if necessary """
+  " Add a node with a value as a leaf of path from rootnode, creating
+intermediate nodes if necessary "
   (let* ((curr-node rootnode)
          (curr-path (pop path))
          )
@@ -54,7 +54,7 @@ intermediate nodes if necessary """
     )
   )
 (defun trie-data/tree-children (rootnode path)
-  """ Get the children of a node, using a path from the root """
+  " Get the children of a node, using a path from the root "
   (let* ((curr-node rootnode)
          (curr-path (pop path))
          )
@@ -70,7 +70,7 @@ intermediate nodes if necessary """
   )
 )
 (defun trie-data/tree-get (rootnode path)
-  """ Get a node using a path from the rootnode """
+  " Get a node using a path from the rootnode "
   (let* ((curr-node rootnode)
          (curr-path (pop path))
          )
@@ -95,7 +95,7 @@ intermediate nodes if necessary """
     )
   )
 (defun trie-data/dfs-tree (n pred)
-  """ Apply Pred to each node, and return the nodes that pass """
+  " Apply Pred to each node, and return the nodes that pass "
   (if (hash-table-empty-p (trie-data/node-children n))
       ;;base case
       (if (apply pred n)
@@ -112,18 +112,18 @@ intermediate nodes if necessary """
 
 ;;Node Operations
 (defun trie-data/node-to-string (n)
-  """ Convert a Tree Node to a User Understandable String """
+  " Convert a Tree Node to a User Understandable String "
   (format "Trie-Data/Node: %s %s (%s)" (trie-data/node-name n)
           (trie-data/node-value n)
           (string-join (hash-table-keys (trie-data/node-children n)) ", "))
   )
 (defun trie-data/node-add-child (n childname)
-  """ Add a new node of childname to node n """
+  " Add a new node of childname to node n "
   (puthash childname (make-trie-data/node :name childname)
            (trie-data/node-children n)))
 (defun trie-data/node-has-child (n childname)
-  """ Check if a node has a child by the name of childname """
+  " Check if a node has a child by the name of childname "
   (-contains? (hash-table-keys (trie-data/node-children n)) childname))
 (defun trie-data/node-get-child (n childname)
-  """ Get the child of a node """
+  " Get the child of a node "
   (gethash childname (trie-data/node-children n)))

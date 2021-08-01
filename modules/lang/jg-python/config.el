@@ -7,7 +7,7 @@
   (load! "+bindings")
   )
 (after! (dired pyvenv-mode)
-    """ Remove the annoying python-shell-setup advice """
+    " Remove the annoying python-shell-setup advice "
     (add-transient-hook! 'dired-mode
       (map! :map dired-mode-map
         :localleader

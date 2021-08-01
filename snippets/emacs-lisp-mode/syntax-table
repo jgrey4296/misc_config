@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: syntax-table
+# uuid: syntax-tabl
+# --
+(defvar $1-mode-syntax-table
+  (let ((st (make-syntax-table)))
+    (modify-syntax-entry ?. "." st)
+    (modify-syntax-entry ?! "." st)
+    (modify-syntax-entry ?$ "_" st)
+    ;;underscores are valid parts of words:
+    (modify-syntax-entry ?_ "w" st)
+    (modify-syntax-entry ?/ "<12" st)
+    (modify-syntax-entry ?\n ">" st)
+    (modify-syntax-entry ?\\" "\\"\\"" st)
+    (modify-syntax-entry ?\\( "()" st)
+    (modify-syntax-entry ?\\[ "(]" st)
+    (modify-syntax-entry ?: ".:2" st)
+    st)
+  "Syntax table for the $1-mode")
+$0

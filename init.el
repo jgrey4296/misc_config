@@ -24,7 +24,6 @@
 
  :domain-specific  ;; ----- ====== -----
  music
- netlogo
  twitter
  bibtex
  acab-ide

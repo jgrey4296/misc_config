@@ -16,7 +16,7 @@ PYTHONPATH=/Volumes/documents/github/py_bookmark_organiser/
 0 */6 * * * /usr/local/bin/mbsync -a
 
 # urlexpander
-5,20,35,50 */1 * * * /Volumes/documents/github/py_bookmark_organiser/bkmkorg/utils/twitter/url_expander.py --target ~/github/writing/resources/twitter_urls --output ~/github/writing/resources/expanded_urls --count 100
+# 5,20,35,50 */1 * * * /Volumes/documents/github/py_bookmark_organiser/bkmkorg/utils/twitter/url_expander.py --target ~/github/writing/resources/twitter_urls --output ~/github/writing/resources/expanded_urls --count 100
 
 ### WEEKLY:
 ## MON
@@ -36,14 +36,14 @@ PYTHONPATH=/Volumes/documents/github/py_bookmark_organiser/
 # 5am : clean tags
 0 5 * * thu find ~/github/writing/resources/bibliography -name "*.bib" | xargs -I {} echo "~/github/py_bookmark_organiser/bkmkorg/filters/tag/clean.py -t {} -c ~/github/writing/resources/substitutions " | bash
 # 6am : update tag totals
-0 6 * * thu ~/github/py_bookmark_organiser/bkmkorg/describers/tag/totals.py -t ~/github/writing/resources/bibliography -t ~/github/writing/resources/bookmarks/main_bookmarks.html -t ~/mega/twitterthreads -c ~/github/writing/resources/substitutions -o ~/github/writing/resources/cron_reports/totals
+0 6 * * thu ~/github/py_bookmark_organiser/bkmkorg/describers/tag/totals.py -t ~/github/writing/resources/bibliography -t ~/github/writing/resources/bookmarks/main_bookmarks.html -t /volumes/documents/twitterthreads -c ~/github/writing/resources/substitutions -o ~/github/writing/resources/cron_reports/totals
 # 7am : update tag graph
-0 7 * * thu ~/github/py_bookmark_organiser/bkmkorg/describers/tag/graph.py -t ~/github/writing/resources/bibliography -t ~/github/writing/resources/bookmarks/main_bookmarks.html -t ~/mega/twitterthreads -o ~/github/writing/resources/cron_reports/tags.edgelist
+0 7 * * thu ~/github/py_bookmark_organiser/bkmkorg/describers/tag/graph.py -t ~/github/writing/resources/bibliography -t ~/github/writing/resources/bookmarks/main_bookmarks.html -t /volumes/documents/twitterthreads -o ~/github/writing/resources/cron_reports/tags.edgelist
 # 8am : update tag timelines
 0 8 * * thu ~/github/py_bookmark_organiser/bkmkorg/describers/bibtex/timelines.py --library ~/github/writing/resources/bibliography --output ~/github/writing/resources/tag_timelines
 
 ## FRI
 # 5am : update tag index
-0 5 * * fri ~/github/py_bookmark_organiser/bkmkorg/describers/tag/indexer.py --target ~/mega/twitterthreads --output ~/github/writing/resources/cron_reports/tw_tag.index
+0 5 * * fri ~/github/py_bookmark_organiser/bkmkorg/describers/tag/indexer.py --target /volumes/documents/twitterthreads --output ~/github/writing/resources/cron_reports/tw_tag.index
 # 6am : update account index
-0 6 * * fri ~/github/py_bookmark_organiser/bkmkorg/describers/twitter/indexer.py --target ~/mega/twitterthreads --output ~/github/writing/resources/cron_reports/tw_acct.index
+0 6 * * fri ~/github/py_bookmark_organiser/bkmkorg/describers/twitter/indexer.py --target /volumes/documents/twitterthreads --output ~/github/writing/resources/cron_reports/tw_acct.index

@@ -6,56 +6,28 @@
 
 ;; TODO For working with acab-py, through a comint
 
-(defvar acab-comint/acab-py-loc nil)
-(defvar acab-comint/python-cmd nil)
-(defvar acab-comint/python-args nil)
-(defvar acab-comint/python-process nil)
+(defvar acab-comint/acab-py-loc "/path/to/acab/py/package")
+(defvar acab-comint/python-cmd "/path/to/acab/env/py")
+(defvar acab-comint/python-args '())
+(defvar acab-comint/process nil)
 (defvar acab-comint/cwd nil)
-(defvar acab-comint/buffer-name nil)
+(defvar acab-comint/buffer-name "*Acab Comint*")
 (defvar acab-comint/prompt-regexp "^\\(:\\)")
 
 (defun acab-comint/init ()
-  ;; Get/create comint buffer then:
-  ;; (unless buffer
-  ;;   (apply 'make-comint-in-buffer my-comint-buffer-name buffer prog my-comint-args)
-  ;;   (my-comint-mode))))
+  " Startup the Acab Comint "
+  (let ((buffer (get-buffer-create acab-comint/buffer-name)))
+    (unless (comint-check-proc buffer)
+      ;; TODO build args
+      (apply 'make-comint-in-buffer acab-comint/buffer-name buffer
+             acab-comint/python-cmd nil acab-comint/python-args))
+    (with-current-buffer buffer
+      (acab-comint-mode))
+    (setq acab-comint/process (get-buffer-process buffer))
+    )
   )
 
-(defun acab-comint/shut-down ()
-
-  )
-
-(defun acab-comint/send-input ()
-
-  )
-
-(defun acab-comint/get-output ()
-
-  )
-
-(defun acab-comint/python-server-load ()
-  ;; TODO python server load
-  )
-(defun acab-comint/python-server-query ()
-  ;; TODO python server query
-  )
-(defun acab-comint/python-server-inspect ()
-  ;; TODO python server inspect
-  )
-(defun acab-comint/python-server-test ()
-  ;; TODO python server test
-  )
-(defun acab-comint/python-server-quit ()
-  ;; TODO python server quit
-  )
-(defun acab-comint/python-server-replace ()
-  ;; TODO python server replace
-  )
-(defun acab-comint/python-server-report ()
-  ;; TODO Python server report
-  )
-
-;;Python subprocess
+;; --------- Python subprocess
 (defun acab-comint/run-python-server (loc)
   "Start a subprocess of python, loading the rule engine
 ready to set the pipeline and rulesets, and to test"
@@ -85,8 +57,40 @@ ready to set the pipeline and rulesets, and to test"
 
   )
 
-;;Testing
-(defun acab-ide/trigger-tests ()
+;; ---- Low Level
+(defun acab-comint/shut-down ()
+
+  )
+(defun acab-comint/send-input (proc x)
+
+  )
+(defun acab-comint/get-output (x)
+
+  )
+
+;; -- High Level Commands
+(defun acab-comint/server-load ()
+  ;; TODO python server load
+  )
+(defun acab-comint/server-query ()
+  ;; TODO python server query
+  )
+(defun acab-comint/server-inspect ()
+  ;; TODO python server inspect
+  )
+(defun acab-comint/server-test ()
+  ;; TODO python server test
+  )
+(defun acab-comint/server-quit ()
+  ;; TODO python server quit
+  )
+(defun acab-comint/server-replace ()
+  ;; TODO python server replace
+  )
+(defun acab-comint/server-report ()
+  ;; TODO Python server report
+  )
+(defun acab-comint/trigger-tests ()
   " TODO Trigger a Bank of tests "
   (interactive)
   ;;with buffer rule logs
@@ -103,18 +107,23 @@ ready to set the pipeline and rulesets, and to test"
   nil "Acab-Comint"
   ;;Setup:
   (setq comint-prompt-regexp acab-comint/prompt-regexp)
+  ;; (setq comint-prompt-read-only t)
+  ;; (set (make-local-variable 'paragraph-separate) "\\'")
+  ;; (set (make-local-variable 'font-lock-defaults) '(my-comint-font-lock-keywords t))
+  (set (make-local-variable 'paragraph-start) acab-comint/prompt-regexp)
+
+  ;; (set (make-local-variable 'font-lock-defaults) '(my-comint-font-lock-keywords t))
 
   ;; Set up transforms:
   ;; (setq-local comint-input-filter-functions '(nil))
   ;; (setq-local comint-input-sender nil)
-  ;; (add-hook 'comint-preoutput-filter-functions nil nil t)
+  (add-hook 'comint-preoutput-filter-functions 'acab-comint/get-output nil t)
   )
 
+;; this has to be done in a hook. grumble grumble.
 (defun acab-comint/init-hook ()
   "Helper function to initialize My-Comint"
   (setq comint-process-echoes t)
   (setq comint-use-prompt-regexp t)
   )
-
-;; this has to be done in a hook. grumble grumble.
 (add-hook 'acab-comint-mode-hook 'acab-comint/init-hook)

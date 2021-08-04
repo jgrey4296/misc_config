@@ -15,7 +15,8 @@
 
 (provide 'acab-mode)
 
-(defgroup acab-mode '() "Acab Mode Customizations")
+(defgroup acab-mode '() "Acab Mode Customizations"
+  :group 'acab-ide)
 ;;--------------------
 ;; Mode Variables
 ;;--------------------

@@ -15,10 +15,7 @@
 
 ;; trie Specific
 (require 'trie-explore-mode)
-(require 'trie-management)
-(require 'trie-minor-mode)
-(require 'trie-mode)
-(require 'trie-data)
+(require 'trie-data )
 (require 'trie-company)
 
 ;; Autoloads

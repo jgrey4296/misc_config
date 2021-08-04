@@ -1,6 +1,7 @@
 ;; -*- mode: emacs-lisp; lexical-binding: t; -*-
 
 ;;based On https://www.emacswiki.org/emacs/ModeTutorial
+(require 'acab-ide-management)
 (provide 'acab-ide-minor-mode)
 
 ;; startup/shut down acab
@@ -12,7 +13,6 @@
 ;; Mode Variables
 ;;--------------------
 (defcustom acab-ide-minor-mode-hook nil "Basic Hook For Acab Mode" :type '(hook))
-(defvar acab-ide/ide-data-loc nil)
 
 ;;--------------------
 ;;Utilities

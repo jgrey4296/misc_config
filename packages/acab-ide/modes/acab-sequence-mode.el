@@ -14,7 +14,8 @@
 ;; Mode Variables
 ;;--------------------
 
-(defgroup acab-sequence '() "Customization group for acab-sequence")
+(defgroup acab-sequence '() "Customization group for acab-sequence"
+  :group 'acab-ide)
 
 (defconst acab-sequence/left-tab "Acab-SequenceMLeft")
 (defconst acab-sequence/right-tab "Acab-SequenceMRight")

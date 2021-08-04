@@ -17,13 +17,7 @@
                                                        "Meta"
                                                        "Layer Stats"
                                                        "Tests")
-              acab-ide/data-loc-subdirs '("rules"
-                                          "types"
-                                          "crosscuts"
-                                          "patterns"
-                                          "tests")
-
-              )
+)
 
 (defun acab-wm/init ()
   (window--display-buffer (find-file (f-join location acab-ide/ide-pipeline-spec-buffer)) (plist-get windows :miscL) 'window)
@@ -32,8 +26,6 @@
   (window--display-buffer (get-buffer-create acab-ide/outputs-buffer-name)  (plist-get windows :post) 'window)
   (window--display-buffer (get-buffer-create acab-ide/logging-buffer-name)  (plist-get windows :miscR) 'window)
   (window--display-buffer (get-buffer-create acab-ide/working-group-buffer-name)  (plist-get windows :miscC) 'window)
-
-
   )
 (defun acab-wm/reset ()
 

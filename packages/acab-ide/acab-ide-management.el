@@ -2,6 +2,7 @@
 ;;
 (provide 'acab-ide-management)
 
+(defvar acab-ide/is-running nil)
 ;;Registered databases for lookup and tracking
 (defvar acab-ide/dialects '()
   "All defined sub-dsls")
@@ -10,6 +11,8 @@
 (defvar acab-ide/current-post '()
   "Available Posts for the current rule")
 
+(defvar acab-ide/ide-data-loc nil
+  "The working directory of acab")
 
 (defvar acab-ide/rules nil
   "Defined rules")
@@ -27,6 +30,12 @@
   "Tag references to other objects")
 (defvar acab-ide/channels nil
   "Specified channels between layers")
+
+(defconst acab-ide/data-loc-subdirs '("rules"
+                                      "types"
+                                      "crosscuts"
+                                      "patterns"
+                                      "tests"))
 
 
 (defun acab-ide/init ()
@@ -48,8 +57,7 @@
   ;; Get the directory to work with
   (let ((location (read-file-name "Institution Location:"))
         (windows (acab-ide/build-ide-window-layout))
-        inst-name
-        )
+        inst-name)
 
     ;;if a dir chosen, get a name for the
     ;;inst, create a stub, create a data dir
@@ -77,10 +85,8 @@
     ;;start python server
     (acab-ide/run-python-server location)
     (acab-ide/load-directory-and-pipeline acab-ide/ide-data-loc)
-
     )
-
-  (setq acab-ide/trie-ide-is-running t)
+  (setq acab-ide/is-running t)
   )
 (defun acab-ide/cleanup ()
   (interactive)
@@ -98,8 +104,8 @@
         (setq acab-ide/python-process nil)
         )
     )
-  (setq acab-ide/trie-ide-is-running nil)
-  (assert (not (acab-ide/trie-ide-running-p)))
+  (setq acab-ide/is-running nil)
+  (assert (not acab-ide/is-running))
   )
 
 ;;Directory and buffer initialisation

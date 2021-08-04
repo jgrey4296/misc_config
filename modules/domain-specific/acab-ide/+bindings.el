@@ -26,11 +26,6 @@
 
 (map! :after trie-explore-mode
       :map trie-explore-mode-map
-      (:prefix ("," . "Trie-Explore Mode Prefix"))
-      (:prefix ("i" . "Init")
-      "i n"     #'trie-explore/initial-setup
-      "i N"     (cmd! (trie-explore/initial-setup t)))
-
       ;;Add motions here
       :nv "RET" #'trie-explore/expand-entry
       :i  "RET" #'trie-explore/insert-entry
@@ -45,7 +40,10 @@
       "D"       #'trie-explore/delete-entry
 
       :localleader
-      "."       #'trie-explore_transient/body
+      (:prefix ("i" . "Init")
+       :desc "Generate Tree" "n"     #'trie-explore/initial-setup
+       :desc "Generate Empty Tree" "N"     (cmd! (trie-explore/initial-setup t)))
+      :desc "Transient Body" "."       #'trie-explore_transient/body
       )
 
 (map! :after trie-minor-mode

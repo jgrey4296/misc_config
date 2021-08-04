@@ -7,7 +7,7 @@
   )
 (after! org
   ;; TODO upgrade to org-superstar?
-  (add-hook 'trie-mode-hook 'org-bullets-mode)
+  (add-hook 'trie-explore-mode-hook 'org-bullets-mode)
 )
 (use-package! acab-ide
   :commands acab-ide-minor-mode

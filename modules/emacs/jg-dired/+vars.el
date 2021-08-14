@@ -49,6 +49,7 @@
                                            "pyo"
                                            "swp"
                                            "class"
+                                           "mypy.ini"
                                            )
                                        )
                                     )

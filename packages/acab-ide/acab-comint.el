@@ -1,29 +1,31 @@
 ;; -*- mode: emacs-lisp; lexical-binding: t; -*-
 ;; [[file:/Volumes/documents/github/emacs_files/lisp/comint-test.el][comint]]
+;; adapted from https://masteringemacs.org/article/comint-writing-command-interpreter
 
 
 (provide 'acab-comint)
 
-;; TODO For working with acab-py, through a comint
+;; For working with acab-py, through a comint
 
-(defvar acab-comint/acab-py-loc "/path/to/acab/py/package")
-(defvar acab-comint/python-cmd "/path/to/acab/env/py")
-(defvar acab-comint/python-args '())
+(setq acab-comint/acab-py-loc "/Volumes/documents/github/acab/")
+(setq acab-comint/python-cmd "/Volumes/documents/github/acab/acab/modules/repl/repl_main.py")
+(setq acab-comint/python-args '("--config" "/Volumes/documents/github/acab/acab/__configs/default"))
 (defvar acab-comint/process nil)
 (defvar acab-comint/cwd nil)
 (defvar acab-comint/buffer-name "*Acab Comint*")
-(defvar acab-comint/prompt-regexp "^\\(:\\)")
+(defvar acab-comint/prompt-regexp "^\\(ACAB REPL: \\)")
 
 (defun acab-comint/init ()
   " Startup the Acab Comint "
+  (interactive)
   (let ((buffer (get-buffer-create acab-comint/buffer-name)))
     (unless (comint-check-proc buffer)
-      ;; TODO build args
       (apply 'make-comint-in-buffer acab-comint/buffer-name buffer
              acab-comint/python-cmd nil acab-comint/python-args))
     (with-current-buffer buffer
       (acab-comint-mode))
     (setq acab-comint/process (get-buffer-process buffer))
+    (switch-to-buffer-other-window buffer)
     )
   )
 
@@ -58,37 +60,35 @@ ready to set the pipeline and rulesets, and to test"
   )
 
 ;; ---- Low Level
-(defun acab-comint/shut-down ()
-
-  )
 (defun acab-comint/send-input (proc x)
-
+  ;; (message "Sending: %s" x)
+  (comint-simple-send proc x)
   )
 (defun acab-comint/get-output (x)
-
+  ;; (message "Received: %s" x)
+  x
   )
 
 ;; -- High Level Commands
-(defun acab-comint/server-load ()
-  ;; TODO python server load
+(defun acab-comint/server-load (f)
+  (interactive "f")
+  (acab-comint/send-input acab-comint/process
+                          (format "load %s" f))
+  )
+(defun acab-comint/server-save (f)
+  (interactive "F")
+  (acab-comint/send-input acab-comint/process
+                          (format "save %s" f))
   )
 (defun acab-comint/server-query ()
-  ;; TODO python server query
+  (interactive)
+  (acab-comint/send-input acab-comint/process "print wm")
   )
 (defun acab-comint/server-inspect ()
-  ;; TODO python server inspect
+  (acab-comint/send-input acab-comint/process "stat")
   )
 (defun acab-comint/server-test ()
   ;; TODO python server test
-  )
-(defun acab-comint/server-quit ()
-  ;; TODO python server quit
-  )
-(defun acab-comint/server-replace ()
-  ;; TODO python server replace
-  )
-(defun acab-comint/server-report ()
-  ;; TODO Python server report
   )
 (defun acab-comint/trigger-tests ()
   " TODO Trigger a Bank of tests "
@@ -101,22 +101,25 @@ ready to set the pipeline and rulesets, and to test"
 
 
   )
+(defun acab-comint/server-quit ()
+  (interactive)
+  (acab-comint/send-input acab-comint/process "exit")
+  )
 
 (define-derived-mode acab-comint-mode comint-mode "Acab-Comint"
   "Major Mode for Comint Interaction with Acab-Py"
   nil "Acab-Comint"
   ;;Setup:
   (setq comint-prompt-regexp acab-comint/prompt-regexp)
-  ;; (setq comint-prompt-read-only t)
+  (setq comint-prompt-read-only t)
   ;; (set (make-local-variable 'paragraph-separate) "\\'")
-  ;; (set (make-local-variable 'font-lock-defaults) '(my-comint-font-lock-keywords t))
   (set (make-local-variable 'paragraph-start) acab-comint/prompt-regexp)
 
   ;; (set (make-local-variable 'font-lock-defaults) '(my-comint-font-lock-keywords t))
 
   ;; Set up transforms:
   ;; (setq-local comint-input-filter-functions '(nil))
-  ;; (setq-local comint-input-sender nil)
+  (setq-local comint-input-sender 'acab-comint/send-input)
   (add-hook 'comint-preoutput-filter-functions 'acab-comint/get-output nil t)
   )
 

@@ -5,7 +5,7 @@
               jg-tag-global-tags (make-hash-table :test 'equal)
               jg-tag-alt-mapping (make-hash-table)
 
-              jg-tag-loc-bookmarks             "~/github/writing/resources/bookmarks/main_bookmarks.html"
+              jg-tag-loc-bookmarks             "~/github/writing/resources/bookmarks/total.bookmarks"
               jg-tag-loc-global-tags           "~/github/writing/resources/cron_reports/totals.tags"
               jg-tag-loc-twitter-account-index "~/github/writing/resources/cron_reports/tw_acct.index"
               jg-tag-loc-twitter-tag-index     "~/github/writing/resources/cron_reports/tw_tag.index"

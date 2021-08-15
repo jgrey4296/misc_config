@@ -64,32 +64,33 @@
 (defun +jg-tag-grep-filter-one-by-one (candidate)
         "A Grep modification for bookmark helm to extract a bookmark's url and tags"
         (if (consp candidate)
-      ;; Already computed do nothing (default as input).
-      candidate
-    (let* ((line   (helm--ansi-color-apply candidate))
-           (split  (helm-grep-split-line line))
-           ;; Normalize Size of this:
-           (lineno (nth 1 split))
-           (norm_ln (s-append (s-repeat (- 6 (string-width lineno)) " ") lineno))
-           ;; The Actual Line:
-           (str    (nth 2 split))
-           (sub    (substring str (or (s-index-of "HREF=" str) 0)))
-           (tag_index (s-index-of "TAGS=\"" sub))
-           (url (substring sub (string-width "HREF=\"") (- tag_index 2)))
-           (tags (substring sub (+ (string-width "HREF=\"") (or tag_index 0)) (s-index-of "\">" sub)))
-           (chopped_tags (substring tags 0 (min 50 (string-width tags))))
-           (norm_tags (s-append (s-repeat (- 50 (string-width chopped_tags)) " ") chopped_tags))
-           )
-      `(,(concat (propertize norm_ln 'face 'helm-grep-lineno)
-                 (propertize (concat ": " norm_tags) 'face 'rainbow-delimiters-depth-3-face)
-                 (propertize (concat ": " url) 'face 'rainbow-delimiters-depth-1-face))
-        :url ,url
-        :tags ,tags
-        :line ,line
+            ;; Already computed do nothing (default as input).
+            candidate
+          (let* ((line   (helm--ansi-color-apply candidate))
+                 (split  (helm-grep-split-line line))
+                 ;; Normalize Size of this:
+                 (lineno (nth 1 split))
+                 (norm-ln (s-append (s-repeat (- 6 (string-width lineno)) " ") lineno))
+                 ;; The Actual Line:
+                 (str    (nth 2 split))
+                 (sub    str) ;;(substring str (or (s-index-of "HREF=" str) 0)))
+                 (tag-index (s-index-of " :" sub)) ;;(s-index-of "TAGS=\"" sub))
+                 (url (substring sub 0 tag-index)) ;;(string-width "HREF=\"") (- tag_index 2)))
+                 (tags (substring sub (+ tag-index 2) nil))
+                 ;; Normalize the lengths of tags so urls are aligned
+                 (chopped_tags (substring tags 0 (min 100 (string-width tags))))
+                 (norm-tags (s-append (s-repeat (- 100 (string-width chopped_tags)) " ") chopped_tags))
+                 )
+            `(,(concat (propertize norm-ln 'face 'helm-grep-lineno)
+                       (propertize (concat ": " norm-tags) 'face 'rainbow-delimiters-depth-3-face)
+                       (propertize (concat ": " url) 'face 'rainbow-delimiters-depth-1-face))
+              :url ,url
+              :tags ,tags
+              :line ,line
+              )
+            )
+          )
         )
-      )
-    )
-  )
 (defun +jg-tag-find-file (x)
   "A simple helm action to open selected files"
   (let ((files (if (helm-marked-candidates) (helm-marked-candidates) (list x))))

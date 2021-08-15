@@ -25,7 +25,7 @@
     (with-current-buffer buffer
       (acab-comint-mode))
     (setq acab-comint/process (get-buffer-process buffer))
-    (switch-to-buffer-other-window buffer)
+    ;; (switch-to-buffer-other-window buffer)
     )
   )
 

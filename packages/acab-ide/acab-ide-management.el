@@ -53,6 +53,7 @@
         acab-ide/current-post '()
         )
 
+  ;; TODO add snippets to snippet loc
 
   ;; Get the directory to work with
   (let ((location (read-file-name "Institution Location:"))
@@ -61,20 +62,18 @@
 
     ;;if a dir chosen, get a name for the
     ;;inst, create a stub, create a data dir
-    (if (f-dir? location)
-        (progn
-          ;;get name for inst
-          (setq inst-name (read-string "Institution Name: ")
-                acab-ide/ide-data-loc (f-join location (format "%s-data" inst-name)))
-          )
-      ;;else if an org chosen, load it and its data dir
-      (progn
-        (assert (equal (f-ext location) "org"))
-        (setq inst-name (f-base location)
-              location (f-parent location)
-              acab-ide/ide-data-loc (f-join location (format "%s-data" inst-name))
-              )
-        ))
+    (assert (f-exists? location))
+    (cond ((f-dir? location)
+             ;;get name for inst
+             (setq inst-name (read-string "Institution Name: ")
+                   acab-ide/ide-data-loc (f-join location (format "%s-data" inst-name)))
+             )
+          ((equal (f-ext location) "org")
+           (setq inst-name (f-base location)
+                 location (f-parent location)
+                 acab-ide/ide-data-loc (f-join location (format "%s-data" inst-name))
+                 )
+           ))
 
     (setq acab-ide/ide-pipeline-spec-buffer (format "%s.org" inst-name))
     (acab-ide/maybe-build-data-loc)
@@ -82,9 +81,10 @@
     ;;Save the window configuration
     (setq acab-ide/window-configuration windows)
 
+    ;; TODO possibly add file-notify watchers
     ;;start python server
-    (acab-ide/run-python-server location)
-    (acab-ide/load-directory-and-pipeline acab-ide/ide-data-loc)
+    ;; (acab-ide/run-python-server location)
+    ;; (acab-ide/load-directory-and-pipeline acab-ide/ide-data-loc)
     )
   (setq acab-ide/is-running t)
   )
@@ -121,7 +121,6 @@
 (defun acab-ide/load-directory-and-pipeline (loc)
   " Given a location, load into ide "
   ;;Initialise data
-  (trie/init-data)
   ;; TODO load directory and setup pipeline
   ;;command python
 

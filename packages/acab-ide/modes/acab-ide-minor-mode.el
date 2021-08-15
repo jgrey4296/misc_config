@@ -2,6 +2,11 @@
 
 ;;based On https://www.emacswiki.org/emacs/ModeTutorial
 (require 'acab-ide-management)
+(require 'acab-comint)
+(require 'acab-company)
+(require 'acab-window-manager)
+(require 'trie-company)
+
 (provide 'acab-ide-minor-mode)
 
 ;; startup/shut down acab
@@ -17,7 +22,6 @@
 ;;--------------------
 ;;Utilities
 ;;--------------------
-;;Utilities
 (defun acab-ide/no-op ()
   (interactive)
   )

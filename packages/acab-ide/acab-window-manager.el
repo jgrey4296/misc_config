@@ -111,7 +111,7 @@
       (progn
         (with-current-buffer (get-buffer-create acab-ide/ide-pipeline-spec-buffer)
           ;; insert default institution contents
-          (trie-mode)
+          (acab-rule-mode)
           (org-mode)
           (yas-expand-snippet (yas-lookup-snippet "pipeline" 'trie-mode))
           (write-file (f-join location acab-ide/ide-pipeline-spec-buffer))
@@ -122,7 +122,7 @@
 
   (acab-ide/build-working-group-buffer)
   (with-current-buffer "rule_stub"
-    (trie-mode)
+    (acab-rule-mode)
     (yas-expand-snippet (yas-lookup-snippet "rule" 'trie-mode) (point-min))
     )
 

@@ -30,12 +30,12 @@
    Additional modules can be registered to other bracket enclosed constructs
 
    Here would be where to define syntactic sugar for additional operators.
-   Such as modal logic operators: ◇, □ and ⚬.  
+   Such as modal logic operators: ◇, □ and ⚬.
    #+NAME: DSL_Specifications
    #+begin_src EL :results value
    macros.operators.sugar:
-       □!box 
-       ◇!diamond 
+       □!box
+       ◇!diamond
        ⚬!circle
    end
    #+end_src

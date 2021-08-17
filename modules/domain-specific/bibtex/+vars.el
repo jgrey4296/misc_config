@@ -42,3 +42,7 @@
 (after! hl-line
   (push 'bibtex-mode global-hl-line-modes)
   )
+
+(after! org
+  (push '("\\.epub" . "ebook-viewer %s") org-file-apps)
+  )

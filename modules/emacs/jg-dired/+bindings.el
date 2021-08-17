@@ -2,15 +2,17 @@
 
 
 (map! :map dired-mode-map
-      :n ")" #'dired-git-info-mode
+      :nv ")" #'dired-git-info-mode
       :n "o" #'dired-find-file-other-window
       :n "S" #'hydra-dired-quick-sort/body
-      :n "j" #'dired-next-line
-      :n "k" #'dired-previous-line
-      :n "J" #'dired-next-dirline
-      :n "K" #'dired-prev-dirline
-      :n "q" #'kill-current-buffer
-      :n "Q" #'+dired/quit-all
+      :nv "j" #'dired-next-line
+      :nv "k" #'dired-previous-line
+      :nv "J" #'dired-next-dirline
+      :nv "K" #'dired-prev-dirline
+      :nv "q" #'kill-current-buffer
+      :nv "Q" #'+dired/quit-all
+      :nv "n" #'evil-ex-search-next
+      :nv "N" #'evil-ex-search-previous
 
       :n "v" nil
       :n "i" nil
@@ -22,7 +24,6 @@
       :desc "Expand Subdir"        :n "i"                              #'+jg-dired-insert-subdir-maybe-recursive
       :desc "Expand Marked"        :n "I"                              #'+jg-dired-insert-marked-subdir
       :desc "Remove Subdir"        :n "DEL"                            #'dired-kill-subdir
-      :desc "Activate Environment" :n "v" 'pyvenv-activate
 
       (:prefix "]"
        :desc "Next Marked" :n "m" #'dired-next-marked-file
@@ -37,9 +38,10 @@
 
 (map! :map dired-mode-map
       :localleader
-      :desc "Hide Toggle"         "h"         #'dired-omit-mode
-      :desc "Symlink"             "S"         #'dired-do-symlink
-      :desc "Quicklook"           "l"         #'+jg-dired-quick-look
+      :desc "Hide Toggle"           "h"         #'dired-omit-mode
+      :desc "Symlink"               "S"         #'dired-do-symlink
+      :desc "Quicklook"             "l"         #'+jg-dired-quick-look
+      :desc "Activate Environment"  "v"         #'pyvenv-activate
       (:prefix ("d" . "Describe")
        :desc "Summarise Orgs"     "s"     #'+jg-dired-create-summary-of-orgs
        :desc "Marked Info"        "m"        #'+jg-dired-marked-info

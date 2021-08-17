@@ -16,6 +16,7 @@ ccsat.*
 *.pyc
 *__pycache__
 flycheck_*
+*.egg-info
 
 # OS Generated Files:
 *.egg

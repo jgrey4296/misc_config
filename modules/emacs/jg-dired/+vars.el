@@ -27,6 +27,7 @@
                                "__init__.py"
                                "__pycache__"
                                ".."
+                               (and (*? anychar) ".egg-info")
                                (and "log" ?. (*? anychar))
                                (and "flycheck"
                                     (*? anychar)

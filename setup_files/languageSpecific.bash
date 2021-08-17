@@ -9,18 +9,13 @@ alias antjs='antlr4 -Dlanguage=JavaScript'
 #------------------------------------------------------------
 
 #Python:
-export JG_PYLIBS=~/github/.installed_pylibs
 
 function set_non_standard_python_paths(){
     echo "Setting Non-Standard Python Paths"
     # Actually using python -m pip ... is better than the next line
-    # export PYTHONPATH=/usr/local/lib/python3.7/site-packages # where pip3 installs
-    PYTHONPATH=~/github/:$PYTHONPATH # personally written libs
-    PYTHONPATH=$JG_PYLIBS:$PYTHONPATH
-    PYTHONPATH=./:$PYTHONPATH
     PYTHONPATH=/usr/local/Cellar/clingo/5.5.0/lib/python3.9/site-packages:$PYTHONPATH
+    PYTHONPATH=./:$PYTHONPATH
     export PYTHONPATH
-    #source activate root --not used because it slows default startup
 }
 
 # adding csound for python bindings

@@ -39,6 +39,9 @@
        :desc "Toggle Layout" "|"     #'+jg-ui-window-layout-toggle
        :desc "Rotate Windows" "\\"   #'+jg-ui-window-rotate-forward
        )
+      (:prefix "t v"
+       :desc "Ruler Mode"     "R"    #'ruler-mode
+       )
       )
 
 (map! :map messages-buffer-mode-map

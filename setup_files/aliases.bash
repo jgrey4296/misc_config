@@ -68,3 +68,8 @@ alias clips="CLIPS\ Console"
 
 # pdf creator
 alias txt2pdf="cupsfilter"
+
+# conda environments
+alias cenv="conda activate"
+alias clist="conda env list"
+alias cexport="conda env export --from-history"

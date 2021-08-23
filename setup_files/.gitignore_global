@@ -11,6 +11,7 @@
 *.o
 *.so
 ccsat.*
+dist/
 
 # Python:
 *.pyc

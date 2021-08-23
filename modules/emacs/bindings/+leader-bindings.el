@@ -64,7 +64,7 @@
       :desc "Kill all buffers"            "K"   #'doom/kill-all-buffers
       :desc "Local Variables"             "l"   #'+jg-bindings-list-buffer-locals
 
-      :desc "New empty buffer"            "n"   #'+jg-text-yank-buffer-name
+      :desc "Yank Buffer Name"            "n"   #'+jg-text-yank-buffer-name
       :desc "Kill other buffers"          "O"   #'doom/kill-other-buffers
       :desc "Read-only mode"              "r"   #'read-only-mode
       :desc "Revert buffer"               "R"   #'revert-buffer
@@ -128,12 +128,12 @@
       :desc "Save file as..."             "S"   #'write-file
       :desc "Save file"                   "s"   #'save-buffer
       :desc "Sudo find file"              "U"   #'doom/sudo-find-file
-      :desc "Yank filename"               "n"   #'+default/yank-buffer-filename
+      :desc "Yank filename"               "n"   #'+default/yank-buffer-path
 
       (:prefix ("b" . "Bookmark")
-       :desc "Set bookmark"                "m"           #'bookmark-set
-       :desc "Delete bookmark"             "M"           #'bookmark-delete
-       :desc "Rename bookmark"             "r"  #'bookmark-rename
+       :desc "Set bookmark"                "m" #'bookmark-set
+       :desc "Delete bookmark"             "M" #'bookmark-delete
+       :desc "Rename bookmark"             "r" #'bookmark-rename
        :desc "Save Bookmarks"              "s" #'bookmark-save
        :desc "Load Bookmarks"              "l" #'bookmark-load
        )

@@ -31,24 +31,42 @@ Versu, Abl, Cif
 *** [[file:/Volumes/documents/github/writing/resources/research_questions.org][Research Questions]]
 
 ** To Check out
-[[https://parl.ai/projects/light/][Parl.ai: NLP and dialogue]]
-[[http://waveform3d.com/][Waveform3d]]
-[[https://sketchfab.com/][Sketchfab]]
-[[https://en.wikipedia.org/wiki/Summa_Theologica][Summa Theologica]]
-https://strongtyping.readthedocs.io/en/latest/
-https://dev.to/matechs/building-custom-dsls-in-typescript-29el
-https://graphics.stanford.edu/courses/cs348c-96-fall/resources.html
-https://graphviz.org/theory/
-https://q.uiver.app/
 Killing the Black Body or Fatal Invention by @DorothyERoberts
-Racecraft by Barbara and Karen Fields
 Medical Apartheid by @haw95
-The Warmth of Other Suns by @Isabelwilkerson
+Racecraft by Barbara and Karen Fields
 Sister Citizen by @MHarrisPerry
 The Pushout by @MoniqueWMorris
-https://patthomson.net/2017/01/23/managing-the-phd-keeping-a-journal/
-https://logicmag.io/play/model-metropolis/
+The Warmth of Other Suns by @Isabelwilkerson
+[[http://waveform3d.com/][Waveform3d]]
+[[https://en.wikipedia.org/wiki/Summa_Theologica][Summa Theologica]]
+[[https://parl.ai/projects/light/][Parl.ai: NLP and dialogue]]
+[[https://sketchfab.com/][Sketchfab]]
+foone - Infocom game by Douglas Adams: Bureaucracy
+http://www.betsydisalvo.com/research.html
+https://anarchopac.wordpress.com/2013/05/31/recommended-reading/amp/
+https://catlikecoding.com/unity/tutorials/
+https://dev.to/matechs/building-custom-dsls-in-typescript-29el
 https://egap.org/resource/10-things-to-know-about-causal-inference/
+https://eu4.paradoxwikis.com/Technology
+https://floppy.foone.org/w/Main_Page
+https://graphics.stanford.edu/courses/cs348c-96-fall/resources.html
+https://graphviz.org/theory/
+https://logicmag.io/play/model-metropolis/
+https://patthomson.net/2017/01/23/managing-the-phd-keeping-a-journal/
+https://pluralistic.net/
+https://q.uiver.app/
+https://stackabuse.com/creating-pdf-invoices-in-python-with-borb/
+https://strongtyping.readthedocs.io/en/latest/
+https://torch.ox.ac.uk/ethicsai#/
+https://twitter.com/WitchesFor/lists
+https://www.alanzucconi.com/tutorials/
+https://www.andrewheiss.com/blog/2021/08/21/r2-euler/
+https://www.cc.gatech.edu/~isbell/pubs/
+https://www.census.gov/quickfacts/fact/table/US/PST045219
+https://www.nomisweb.co.uk/
+https://www.uu.nl/en/research/game-research/research/publications
+https://www.wzchen.com/data-science-books
+https://www.sciencedirect.com/journal/artificial-intelligence/issues
 ** Reminders
 https://github.com/company-mode/company-mode/wiki/Writing-backends
 index xkcd using explainxkcd
@@ -66,13 +84,20 @@ https://web.mit.edu/jemorris/humor/500-miles
 https://pybit.es/articles/ast-intro/
 https://transmediawatch.org/articles
 
-#+NAME: pdf generation
+#+NAME: image to pdf generation
 #+begin_src bash :results value
 convert ? -alpha off ./temp/`?`
 mogrify -orient bottom-left ?
 img2pdf --output `?`.pdf --pagesize A4 --auto-orient ?
 pdftk * cat output diagrams.pdf
 #+end_src
+
+#+NAME: text to pdf generation
+#+begin_src bash :results value
+pandoc ? -o output.pdf
+#+end_src
+https://pandoc.org/
+
 
 
 * TODO simulation sketches

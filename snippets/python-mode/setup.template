@@ -1,0 +1,44 @@
+# -*- mode: snippet -*-
+# name: setup.template
+# uuid: setup.template
+# --
+#!/usr/bin/env python3
+# Reminders:
+# https://docs.python.org/3/distributing/index.html
+# https://packaging.python.org/guides/using-manifest-in/#using-manifest-in
+import setuptools
+
+with open("README.md", "r", encoding="utf-8") as f:
+    long_description = fh.read()
+
+setuptools.setup(
+    name="$1",
+    version="0.0.1",
+    author="John Grey"
+    author_email="jgrey.n.plus.one at gmail.com",
+    description="$2",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
+    url="https://github.com/jgrey4296/$1",
+    project_urls={},
+    # https://pypi.org/classifiers/
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "License :: ACAB",
+        "Operating System :: OS Independent",
+    ],
+    package_dir={"": "$1"},
+    packages=setuptools.find_packages(where="$1"),
+    python_requires=">=3.6",
+    )
+
+# pyproject.toml ##############################################################
+# [build-system]
+# requires = [
+#          "setuptools>=42",
+#          "wheel"
+# ]
+
+# build-backend = "setuptools.build_meta"
+
+# MANIFEST.in #################################################################

@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: decorator
+# --
+def $1(f:Callable):
+    """
+    $0
+    """
+
+    def wrapped(*the_args, **the_kwargs):
+
+        return f(*the_args, **the_kwargs)
+
+    wrapped.__name__ = f.__name__
+    return wrapped

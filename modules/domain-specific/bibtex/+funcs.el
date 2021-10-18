@@ -501,3 +501,7 @@ This function toggles clearing those watchers and recreating them later
            (user-error "Bibliography file %s could not be found" file)))
        (bibtex-completion-normalize-bibliography))))
   )
+
+(defun +jg-bibtex-extract-pdf-data ()
+     ;; TODO use pdftk dump_data to extract titles, authors etc
+     )

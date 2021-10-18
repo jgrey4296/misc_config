@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: method_decorator
+# --
+def $1(f):
+    """
+    $0
+    """
+    def wrapped(self, *the_args, **the_kwargs):
+        return f(self, *the_args, **the_kwargs)
+
+    wrapped.__name__ = f.__name__
+    return wrapped

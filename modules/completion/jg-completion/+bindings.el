@@ -24,6 +24,10 @@
       :desc "Results as Buffer"        :n "b" #'ivy-occur
       )
 
+(map! :map ivy-occur-grep-mode-map
+      :desc "Do Ops" "g" jg-binding-operator-map
+      )
+
   ;;; :completion
 (map! (:when (featurep! :completion company)
        :i "C-@"    (cmds! (not (minibufferp)) #'company-complete-common)

@@ -10,7 +10,7 @@
               jg-tag-loc-twitter-account-index "~/github/writing/resources/cron_reports/tw_acct.index"
               jg-tag-loc-twitter-tag-index     "~/github/writing/resources/cron_reports/tw_tag.index"
               jg-tag-loc-default-helm-directory "~/github/writing/resources/"
-              jg-tag-loc-twitter               "~/mega/twitterthreads"
+              jg-tag-loc-twitter               "/Volumes/documents/twitterthreads/"
 
               jg-tag-marker (make-marker)
               jg-tag-twitter-heading-helm-candidates nil

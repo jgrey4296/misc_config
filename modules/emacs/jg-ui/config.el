@@ -76,3 +76,8 @@
   (load! "+popup")
   )
 (add-hook 'doom-first-input #'jg-load-popup-hook)
+
+;; To overrule ligatures module
+(add-hook! 'doom-init-ui-hook :append
+  (defun +ligatures-init-h ()
+    (remove-hook 'after-change-major-mode-hook #'+ligatures-init-buffer-h)))

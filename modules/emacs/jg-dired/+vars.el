@@ -33,25 +33,25 @@
                                     (*? anychar)
                                     ".py")
                                (and ?.
-                                    (? (or "gitignore"
-                                           "pylintrc"
-                                           "venv"
-                                           "DS_Store"
-                                           "mypy_cache"
-                                           (and "project"
-                                                (? "ile"))
-                                           "svn"
-                                           "git"
-                                           "ccls-cache"
-                                           (and "js"
-                                                (? ".meta"))
-                                           "elc"
-                                           "o"
-                                           "pyo"
-                                           "swp"
-                                           "class"
-                                           "mypy.ini"
-                                           )
+                                    (? (or
+                                        "DS_Store"
+                                        "ccls-cache"
+                                        "class"
+                                        "elc"
+                                        "git"
+                                        "gitignore"
+                                        "mypy.ini"
+                                        "mypy_cache"
+                                        "o"
+                                        "pylintrc"
+                                        "pyo"
+                                        "pytest_cache"
+                                        "svn"
+                                        "swp"
+                                        "venv"
+                                        (and "js" (? ".meta"))
+                                        (and "project" (? "ile"))
+                                        )
                                        )
                                     )
                                )

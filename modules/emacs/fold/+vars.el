@@ -35,7 +35,6 @@
 ;;
 
 
-;; NOTE: be aware `pushing' in reverse order.
 ;; Evil vimish
 (setq jg-vimish-fold-spec '((vimish-fold-mode)
                                  :delete     vimish-fold-delete

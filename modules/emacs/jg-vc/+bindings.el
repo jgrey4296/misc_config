@@ -18,7 +18,7 @@
       doom-leader-key doom-leader-map
       )
 
-;; (evil-make-intercept-map evil-conflict-merge-state-map)
+(evil-make-intercept-map evil-conflict-merge-state-map)
 
 (map! :map (git-commit-mode-map magit-status-mode)
       :localleader

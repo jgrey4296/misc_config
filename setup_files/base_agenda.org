@@ -67,7 +67,9 @@ https://www.nomisweb.co.uk/
 https://www.uu.nl/en/research/game-research/research/publications
 https://www.wzchen.com/data-science-books
 https://www.sciencedirect.com/journal/artificial-intelligence/issues
+https://www.taylorfrancis.com/books/edit/10.4324/9781315302430/organizational-space-beyond-sytze-kingma-karen-dale-varda-wasserman
 ** Reminders
+john wick hex - choreography simulator
 https://github.com/company-mode/company-mode/wiki/Writing-backends
 index xkcd using explainxkcd
 
@@ -97,6 +99,8 @@ pdftk * cat output diagrams.pdf
 pandoc ? -o output.pdf
 #+end_src
 https://pandoc.org/
+
+cron - look at dropbox/docs, mv any files into current_pdfs
 
 
 

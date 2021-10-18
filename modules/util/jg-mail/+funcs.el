@@ -2,17 +2,17 @@
 
 (defun +jg-mail-override-mu4e-hook ()
   (message "Mail override hook: %s" (current-time-string))
-  (setq-default smtpmail-smtp-service 465
-                message-send-mail-function   'smtpmail-send-it
-                smtpmail-default-smtp-server "smtp.gmail.com"
-                smtpmail-smtp-server         "smtp.gmail.com"
-                smtpmail-stream-type  'starttls
-                smtpmail-smtp-service 587
-                auth-sources '("~/.authinfo"
-                               macos-keychain-generic
-                               macos-keychain-internet
-                               "~/authinfo.gpg")
-                )
+  ;; (setq-default smtpmail-smtp-service 465
+  ;;               message-send-mail-function   'smtpmail-send-it
+  ;;               smtpmail-default-smtp-server "smtp.gmail.com"
+  ;;               smtpmail-smtp-server         "smtp.gmail.com"
+  ;;               smtpmail-stream-type  'starttls
+  ;;               smtpmail-smtp-service 587
+  ;;               auth-sources '("~/.authinfo"
+  ;;                              macos-keychain-generic
+  ;;                              macos-keychain-internet
+  ;;                              "~/authinfo.gpg")
+  ;;               )
 
   (setq mu4e-use-fancy-chars nil
         mu4e-headers-draft-mark     '("D" . "D")

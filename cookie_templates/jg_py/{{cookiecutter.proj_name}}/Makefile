@@ -1,0 +1,92 @@
+SHELL   := /usr/local/bin/bash
+PYS		:= $(shell find ./{{cookiecutter.proj_name}} -name '*.py' -not -name '*context.py' -not -name '__init__.py')
+LOGS	:= $(shell find ./ -name '*log.*')
+CACHES	:= $(shell find ./{{cookiecutter.proj_name}}/ -regextype posix-egrep -regex .*\(.mypy_cache\|__pycache__\)$)
+TOP     := ./{{cookiecutter.proj_name}}
+START   := ./{{cookiecutter.proj_name}}
+PAT     :=
+FILE_PAT := "test_*.py"
+LOGLEVEL := WARNING
+
+# If defined, use these overrides
+ifneq (${dir}, )
+	START := ${dir}
+endif
+
+ifneq (${pat}, )
+	PAT = -k ${pat}
+endif
+
+ifneq (${fpat}, )
+	FILE_PAT := ${fpat}
+endif
+
+.PHONY: all pylint clean
+
+all: verbose long
+
+# Building ####################################################################
+build:
+	python -m build
+	pip install -U -e .
+
+dist:
+# use --collect-all {package} for binaries like tkinterdnd2
+	pyinstaller -w {{cookiecutter.proj_name}}/{{cookiecutter.entry_point}}.py
+
+# Linting #####################################################################
+pylint:
+	@echo "Linting"
+	pylint --rcfile=./.pylintrc ${TOP} --ignore=${ig} --ignore-patterns=${igpat}
+
+elint:
+	@echo "Linting -E"
+	pylint --rcfile=./.pylintrc ${TOP} --ignore=${ig} --ignore-patterns=${igpat} -E
+
+# Testing #####################################################################
+long:
+	python -m unittest discover -s ${START} -p "*_tests.py"
+
+test:
+	python -m unittest discover -v -s ${START} -p ${FILE_PAT} -t ${TOP} ${PAT}
+
+faily:
+	@echo "Testing with early fail"
+	python -m unittest discover -v -f -s ${START} ${PAT} -t ${TOP} -p ${FILE_PAT}
+
+
+# Reports #####################################################################
+check:
+	@echo "Shell	= " ${SHELL}
+	@echo "Top		= " ${TOP}
+	@echo "Search	= " ${START}
+	@echo "Pattern	= " ${PAT}
+
+
+line_report:
+	@echo "Counting Lines into linecounts.stats"
+	find . -name "*.py" -not -path "./.git/*" -not -name "test_*.py" -not -name "*__init__.py" -print0 | xargs -0 wc -l | sort > linecounts.report
+
+class_report:
+	@echo "Getting Class Relations"
+	find ./{{cookiecutter.proj_name}} -name "*.py" -not -name "flycheck*" | xargs awk '/^class/ {print $0}' > class.report
+
+# Cleaning ####################################################################
+init:
+	@echo "Auto-creating empty __init__.py's"
+	find ${TOP} -type d -print0 | xargs -0 -I {} touch "{}/__init__.py"
+
+clean:
+	@echo "Cleaning"
+ifeq (${LOGS}, )
+	@echo "No Logs to delete"
+else
+	-rm ${LOGS}
+endif
+ifeq (${CACHES}, )
+	@echo "No Caches to delete"
+else
+	-rm -r ${CACHES}
+endif
+	-rm -rf ./dist
+	-rm -rf ./build

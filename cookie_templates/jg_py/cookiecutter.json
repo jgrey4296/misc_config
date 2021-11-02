@@ -1,0 +1,7 @@
+{
+    "proj_name" : "jg_py_template_project",
+    "env"       : "default",
+    "desc"      : "A Template Python Project",
+    "tags"      : "python",
+    "entry_point" : "default"
+}

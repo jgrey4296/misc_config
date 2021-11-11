@@ -14,6 +14,16 @@
         "j" nil
         "k" nil
         )
+
+  (map! :map mu4e-compose-mode-map
+        :localleader
+        :desc "Switch Context" ";" #'mu4e-context-switch
+        )
+
+  (map! :leader
+        :prefix ("o" . "Open")
+        :desc "Compose Email"                "e" #'compose-mail
+        )
   )
 
 (after! org-msg

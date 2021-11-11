@@ -4,6 +4,19 @@
 ;; TODO add count lines/words, insert line above/below...
 
 (message "Setting up Evil Bindings: %s" (current-time-string))
+(defvar jg-binding-normal-state-map (make-sparse-keymap) "JG map replacing evil-normal-state-map")
+(defvar jg-binding-visual-state-map (make-sparse-keymap) "JG map replacing evil-visual-state-map")
+(defvar jg-binding-operator-state-map (make-sparse-keymap) "JG map replacing evil-operator-state-map")
+(defvar jg-binding-motion-state-map (make-sparse-keymap) "JG map replacing evil-motion-state-map")
+(defvar jg-binding-inner-text-objects-map (make-sparse-keymap) "JG map for selectin text objects")
+(defvar jg-binding-outer-text-objects-map (make-sparse-keymap) "JG map replacing evil-outer-text-objects-map")
+
+
+(defvar old-evil-normal-state-map nil "the original evil-normal-state-map")
+(defvar old-evil-visual-state-map nil "the original evil-visual-state-map")
+(defvar old-evil-operator-state-map nil "the original evil-operator-state-map")
+(defvar old-evil-motion-state-map nil "the original evil-motion-state-map")
+
 ;; Normal state
 (map! :map jg-binding-normal-state-map
       :desc "Use Register"      "\""  #'evil-use-register
@@ -384,9 +397,9 @@
 
       )
 (map! :map jg-binding-forward-motion-map
-      :desc "Narrow"     "RET" #'+jg-narrowing-move-focus-forward
-      :desc "Section"    "]"   #'evil-forward-section-begin
-      :desc "Open Paren" "["   #'+jg-text-next-open-paren-motion ;; #'evil-forward-section-end
+      :desc "Narrow"       "RET" #'+jg-narrowing-move-focus-forward
+      :desc "Section"      "]"   #'evil-forward-section-begin
+      :desc "Open Section" "["   #'+jg-text-next-open-paren-motion ;; #'evil-forward-section-end
 
       :desc "Arg"          "a" #'evil-forward-arg
       :desc "Buffer"       "b" #'next-buffer

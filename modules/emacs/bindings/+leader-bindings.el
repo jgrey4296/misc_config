@@ -334,6 +334,7 @@
       :desc "Default browser"              "b" #'browse-url-of-file
       :desc "Calc"                         "c" #'calc
       :desc "Dired"                        "d" #'dired-jump
+      ;; :desc "Compose Email"                "e" #'mu4e~compose-mail
       :desc "REPL"                         "r" #'+eval/open-repl-other-window
 
       :desc "Project sidebar"              "p" #'+neotree/open

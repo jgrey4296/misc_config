@@ -6,8 +6,17 @@
       :prefix "o"
       "s e" 'trie-explore/explore-current-buffer)
 
-(map! :after trie-mode
-      :map trie-mode-map
+(map! :map acab-rule-mode-map
+      :localleader
+      :desc "Comint Init" "i" #'acab-comint/init
+      :desc "Send Region/Line"     "e" #'acab-comint/send-region
+      :desc "Report Ctxs"          "c" nil
+      :desc "Save State to Buffer" "p" nil
+      :desc "Acab Engine Report"   "r" nil
+      :desc "Kill Comint"          "q" nil
+      )
+
+(map! :map acab-rule-mode-map
       :n "#" #'trie/insert-tag
       :n "C" #'trie/insert-condition
       :n "A" #'trie/insert-action
@@ -76,3 +85,9 @@
       :n "[ ]" #'acab-ide/decrement-posts-layer
       :n "] ]" #'acab-ide/increment-posts-layer
       )
+
+;; (map! :map acab-rule-mode-map
+;;       :desc "Acab-Block" :v "i f"  nil ;;#'acab-ide-block-textobj
+;; :desc "Forward Section"  :vn "] ]" nil ;; #'acab-ide-forward-block-motion
+;; :desc "Backward Section" :vn "[ [" nil ;;#'acab-ide-backward-block-motion
+;;       )

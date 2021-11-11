@@ -49,6 +49,7 @@
       :desc "Docs: Seaborn"       "8" (cmd! (+jg-browse-url "https://seaborn.pydata.org/api.html"))
       :desc "Docs: PyPi"          "9" (cmd! (+jg-browse-url "https://pypi.org/"))
       :desc "Docs: Setuptools"    "0" (cmd! (+jg-browse-url "https://setuptools.readthedocs.io/en/latest/userguide/index.html"))
+      :desc "Docs: Conda Env"     "E" (cmd! (+jg-browse-url "https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html"))
 )
 
 (map! :after cython-mode

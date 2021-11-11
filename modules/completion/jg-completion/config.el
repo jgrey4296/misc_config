@@ -27,4 +27,4 @@
 (defun jg-load-templates-hook ()
   (load! "+file-templates")
   )
-(add-hook! doom-first-input #'jg-load-templates-hook)
+(add-hook 'doom-first-input-hook #'jg-load-templates-hook)

@@ -1,2 +1,2 @@
 
-(load! "+keybindings")
+(add-hook 'doom-first-input-hook #'(lambda () (load! "+keybindings")))

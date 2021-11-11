@@ -27,5 +27,5 @@
   (load! "+evil-bindings")
   (load! "+evil-submap-bindings"))
 
-(add-hook! ibuffer-mode #'+jg-ibuffer-update-hook)
-(add-hook! doom-first-input #'jg-evil-bind-hook)
+(add-hook 'ibuffer-mode-hook #'+jg-ibuffer-update-hook)
+(add-hook 'doom-first-input-hook #'jg-evil-bind-hook -100)

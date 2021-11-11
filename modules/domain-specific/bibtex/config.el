@@ -34,4 +34,4 @@
         do (add-hook 'org-ref-clean-bibtex-entry-hook hook 100))
   )
 
-(add-hook! doom-first-input #'+jg-bibtex-build-list)
+(add-hook 'doom-first-input-hook #'+jg-bibtex-build-list)

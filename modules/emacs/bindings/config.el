@@ -15,6 +15,12 @@
   )
 
 
+(use-package general-mod
+  :after general)
+(use-package which-mod
+  :after which-key)
+
+
 (after! flycheck
   (map! :leader
         :desc "Flycheck" "!" flycheck-command-map

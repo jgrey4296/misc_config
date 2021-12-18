@@ -16,6 +16,7 @@ ln -s "$SHELL_DIR/.condarc" ~/.condarc
 ln -s "$SHELL_DIR/.npmrc" ~/.npmrc
 ln -s "$SHELL_DIR/.gitconfig" ~/.gitconfig
 ln -s "$SHELL_DIR/../snippets" ~/.emacs.d/private/snippets
+ln -s "$SHELL_DIR/.cookiecutterrc" ~/.cookiecutterrc
 
 echo ""
 echo "Appending bash setup to bashrc"

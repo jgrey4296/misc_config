@@ -1,6 +1,7 @@
 [user]
-	name = John Grey
-	email = johngrey4296@gmail.com
+	name	= John Grey
+	email	= johngrey4296@gmail.com
+	github	= jgrey4296
 [push]
 	default = matching
 [credential]

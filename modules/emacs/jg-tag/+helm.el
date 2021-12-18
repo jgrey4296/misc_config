@@ -61,36 +61,6 @@
     (with-helm-current-buffer
       ;;substring -2 to chop off separating marks
       (insert (mapconcat (lambda (x) (format "[[%s][%s]]    : %s" (plist-get x :url) (plist-get x :url) (plist-get x :tags))) candidates "\n")))))
-(defun +jg-tag-grep-filter-one-by-one (candidate)
-        "A Grep modification for bookmark helm to extract a bookmark's url and tags"
-        (if (consp candidate)
-            ;; Already computed do nothing (default as input).
-            candidate
-          (let* ((line   (helm--ansi-color-apply candidate))
-                 (split  (helm-grep-split-line line))
-                 ;; Normalize Size of this:
-                 (lineno (nth 1 split))
-                 (norm-ln (s-append (s-repeat (- 6 (string-width lineno)) " ") lineno))
-                 ;; The Actual Line:
-                 (str    (nth 2 split))
-                 (sub    str) ;;(substring str (or (s-index-of "HREF=" str) 0)))
-                 (tag-index (s-index-of " :" sub)) ;;(s-index-of "TAGS=\"" sub))
-                 (url (substring sub 0 tag-index)) ;;(string-width "HREF=\"") (- tag_index 2)))
-                 (tags (substring sub (+ tag-index 2) nil))
-                 ;; Normalize the lengths of tags so urls are aligned
-                 (chopped_tags (substring tags 0 (min 100 (string-width tags))))
-                 (norm-tags (s-append (s-repeat (- 100 (string-width chopped_tags)) " ") chopped_tags))
-                 )
-            `(,(concat (propertize norm-ln 'face 'helm-grep-lineno)
-                       (propertize (concat ": " norm-tags) 'face 'rainbow-delimiters-depth-3-face)
-                       (propertize (concat ": " url) 'face 'rainbow-delimiters-depth-1-face))
-              :url ,url
-              :tags ,tags
-              :line ,line
-              )
-            )
-          )
-        )
 (defun +jg-tag-find-file (x)
   "A simple helm action to open selected files"
   (let ((files (if (helm-marked-candidates) (helm-marked-candidates) (list x))))
@@ -127,8 +97,8 @@
     ;;(message "File Select Helm Candidates: %s" (helm-marked-candidates))
     ;;process candidates?
     (let*(;;(candidate-names (mapcar 'car (helm-marked-candidates)))
-          (candidate-values (mapcar 'cdr (helm-marked-candidates)))
-          (all-candidates (-flatten candidate-values))
+          (candidate-values (helm-marked-candidates))
+          (all-candidates (-flatten (mapcar (lambda (x) (plist-get x :files)) candidate-values)))
           (source (cons `(candidates . ,all-candidates) jg-tag-file-select-source)))
       (helm :sources source
             :full-frame t
@@ -136,63 +106,132 @@
             )
       )
     )
-
-;; Helm Activators:
-(defun +jg-tag-helm-twitter ()
-    "Run a Helm for searching twitter users"
-    (interactive)
-    ;;if twitter info not loaded, load
-    (if (null jg-tag-twitter-helm-candidates)
-        (with-temp-buffer
-          (setq jg-tag-twitter-helm-candidates '())
-          (insert-file jg-tag-loc-twitter-account-index)
-          (goto-char (point-min))
-          (let (curr)
-            (while (< (point) (point-max))
-              (setq curr (split-string (buffer-substring (point) (line-end-position)) ":" t "\s+"))
-              (push `(,(car curr) . ,curr) jg-tag-twitter-helm-candidates)
-              (forward-line)
-              )
-            )
-          )
-      )
-    ;;add candidates to source
-    (let ((source (cons `(candidates . jg-tag-twitter-helm-candidates) jg-tag-twitter-helm-source)))
-      ;;call helm
-      (helm :sources source
-            :full-frame t
-            :buffer "*helm twitter*"
-            :truncate-lines t
-            )
+(defun +jg-tag-file-display (candidates)
+  (interactive)
+  (let*((candidates (plist-get (car (helm-marked-candidates)) :files)))
+    (with-temp-buffer-window "Helm Twitter Grep Results"
+        'display-buffer-pop-up-window nil
+      (mapcar (lambda (x) (princ x) (princ "\n")) candidates)
       )
     )
-(defun +jg-tag-helm-heading-twitter ()
-    "Run a Helm for searching twitter users"
-    (interactive)
-    ;;if twitter info not loaded, load
-    (if (null jg-tag-twitter-heading-helm-candidates)
-        (with-temp-buffer
-          (setq jg-tag-twitter-heading-helm-candidates '())
-          (insert-file jg-tag-loc-twitter-tag-index)
-          (goto-char (point-min))
-          (let (curr)
-            (while (< (point) (point-max))
-              (setq curr (split-string (buffer-substring (point) (line-end-position)) ":" t "\s+"))
-              (push `(,(car curr) . ,curr) jg-tag-twitter-heading-helm-candidates)
-              (forward-line)
+  )
+
+;; Candidate Transformers
+(defun +jg-tag-sort-by-files (candidates source)
+  (sort candidates (lambda (a b)
+                     (> (plist-get (cdr a) :count) (plist-get (cdr b) :count))
+                     )))
+
+(defun +jg-tag-grep-filter-one-by-one (candidate)
+        "A Grep modification for bookmark helm to extract a bookmark's url and tags"
+        (if (consp candidate)
+            ;; Already computed do nothing (default as input).
+            candidate
+          (let* ((line   (helm--ansi-color-apply candidate))
+                 (split  (helm-grep-split-line line))
+                 ;; Normalize Size of this:
+                 (lineno (nth 1 split))
+                 (norm-ln (s-append (s-repeat (- 6 (string-width lineno)) " ") lineno))
+                 ;; The Actual Line:
+                 (str    (nth 2 split))
+                 (sub    str) ;;(substring str (or (s-index-of "HREF=" str) 0)))
+                 (tag-index (s-index-of " :" sub)) ;;(s-index-of "TAGS=\"" sub))
+                 (url (substring sub 0 tag-index)) ;;(string-width "HREF=\"") (- tag_index 2)))
+                 (tags (substring sub (+ tag-index 2) nil))
+                 ;; Normalize the lengths of tags so urls are aligned
+                 (chopped_tags (substring tags 0 (min 100 (string-width tags))))
+                 (norm-tags (s-append (s-repeat (- 100 (string-width chopped_tags)) " ") chopped_tags))
+                 )
+            `(,(concat (propertize norm-ln 'face 'helm-grep-lineno)
+                       (propertize (concat ": " norm-tags) 'face 'rainbow-delimiters-depth-3-face)
+                       (propertize (concat ": " url) 'face 'rainbow-delimiters-depth-1-face))
+              :url ,url
+              :tags ,tags
+              :line ,line
               )
             )
           )
-      )
-    ;;add candidates to source
-    (let ((source (cons `(candidates . jg-tag-twitter-heading-helm-candidates) jg-tag-twitter-heading-helm-source)))
-      ;;call helm
-      (helm :sources source
-            :full-frame t
-            :buffer "*helm twitter heading*"
-            :truncate-lines t
+        )
+(defun +jg-tag-helm-index-file-transformer (cands)
+  (let* ((as-list (mapcar (lambda (x) (split-string x ":" t "\s+")) cands))
+         (max-tag (apply 'max (mapcar (lambda (x) (length (car x))) as-list)))
+         (has-count (and (car as-list) (cadr (car as-list)) (s-numeric? (cadr (car as-list))))))
+    (mapcar (lambda (x)
+              `(,(format "%s%s: %s" (car x) (s-repeat (+ 1 (- max-tag (length (car x)))) " ") (if has-count (cadr x)
+                                                                                                (length (cdr x))))
+                . (:count ,(if has-count (cadr x) (length (cdr x)))
+                   :files ,(if has-count (cddr x) (cdr x)))))
+            as-list)
+    )
+  )
+(defun +jg-tag-grep-pattern-transformer (pattern)
+  (format "^[^:]*%s[^:]* :" pattern))
+(defun +jg-tag-twitter-grep-filter-one-by-one (candidate)
+        "A Grep modification for twitter grep helm to extract information correctly "
+        (if (consp candidate)
+            ;; Already computed do nothing (default as input).
+            candidate
+          (let* ((line   (helm--ansi-color-apply candidate))
+                 (split  (helm-grep-split-line line))
+                 ;; Normalize Size of this:
+                 (lineno (nth 1 split))
+                 (norm-ln (s-append (s-repeat (- 6 (string-width lineno)) " ") lineno))
+                 ;; The Actual Line:
+                 (str    (nth 2 split))
+                 (sub    str) ;;(substring str (or (s-index-of "HREF=" str) 0)))
+                 (tag-index (s-index-of " :" sub)) ;;(s-index-of "TAGS=\"" sub))
+                 (tag (substring sub 0 tag-index)) ;;(string-width "HREF=\"") (- tag_index 2)))
+                 (file-str (substring sub (+ tag-index 2) nil))
+                 (file-list (split-string file-str ":" t "\s+"))
+                 (has-count (s-numeric? (car file-list)))
+                 (file-count (if has-count (string-to-number (car file-list)) (length file-list)))
+                 (files (if has-count (cdr file-list) file-list))
+                 ;; Normalize the lengths of tags so urls are aligned
+                 (chopped_files (substring file-str (min 100 (string-width file-str))))
+                 (norm-files (s-append (s-repeat (- 100 (string-width chopped_files)) " ") chopped_files))
+                 )
+            `(,(concat (propertize norm-ln 'face 'helm-grep-lineno)
+                       (propertize (concat ": " tag) 'face 'rainbow-delimiters-depth-3-face)
+                       (propertize (concat ": " (number-to-string file-count)) 'face 'rainbow-delimiters-depth-4-face))
+              . (:count ,(if has-count (string-to-number (car file-list)) (length file-list))
+                 :files ,(if has-count (cdr file-list) file-list))
+              )
             )
-      )
+          )
+        )
+;; Helm Activators:
+(defun +jg-tag-helm-tag-twitter ()
+    "Run a Helm for searching twitter tags"
+    (interactive)
+    (helm :sources jg-tag-twitter-tag-helm-source
+          :full-frame t
+          :buffer "*helm twitter*"
+          :truncate-lines t
+          )
+    )
+(defun +jg-tag-helm-twitter-grep (arg)
+  (interactive "p")
+    (helm-set-local-variable
+     'helm-grep-include-files (format "--include=%s" jg-tag-loc-twitter-grep-index)
+     'helm-grep-last-targets `(,jg-tag-loc-twitter-grep-index)
+     'default-directory jg-tag-loc-default-helm-directory
+     )
+    (helm :sources (if (eq arg 4)
+                       jg-tag-twitter-grep-helm-source-alt
+                     jg-tag-twitter-grep-helm-source)
+          :full-frame t
+          :buffer "*helm grep twitter*"
+          :truncate-lines t
+          )
+    )
+(defun +jg-tag-helm-account-twitter ()
+    "Run a Helm for searching twitter users"
+    (interactive)
+    (helm :sources jg-tag-twitter-account-helm-source
+          :full-frame t
+          :buffer "*helm twitter heading*"
+          :truncate-lines t
+          )
     )
 (defun +jg-tag-helm-bookmarks ()
     " Run a Helm for search and opening html bookmarks "
@@ -211,30 +250,30 @@
 (defun +jg-tag-helm-unified ()
     (interactive)
     ;;Load headings if necessary
-    (if (null jg-tag-twitter-heading-helm-candidates)
+    (if (null jg-tag-twitter-account-helm-candidates)
         (with-temp-buffer
-          (setq jg-tag-twitter-heading-helm-candidates '())
-          (insert-file jg-tag-loc-twitter-tag-index)
+          (setq jg-tag-twitter-account-helm-candidates '())
+          (insert-file jg-tag-loc-twitter-account-index)
           (goto-char (point-min))
           (let (curr)
             (while (< (point) (point-max))
               (setq curr (split-string (buffer-substring (point) (line-end-position)) ":"))
-              (push `(,(car curr) . ,(cdr curr)) jg-tag-twitter-heading-helm-candidates)
+              (push `(,(car curr) . ,(cdr curr)) jg-tag-twitter-account-helm-candidates)
               (forward-line)
               )
             )
           )
       )
     ;;Load twitter users if necessary
-    (if (null jg-tag-twitter-helm-candidates)
+    (if (null jg-tag-twitter-tag-helm-candidates)
         (with-temp-buffer
-          (setq jg-tag-twitter-helm-candidates '())
-          (insert-file jg-tag-loc-twitter-account-index)
+          (setq jg-tag-twitter-tag-helm-candidates '())
+          (insert-file jg-tag-loc-twitter-tag-index)
           (goto-char (point-min))
           (let (curr)
             (while (< (point) (point-max))
               (setq curr (split-string (buffer-substring (point) (line-end-position)) ":"))
-              (push `(,(car curr) . ,(cdr curr)) jg-tag-twitter-helm-candidates)
+              (push `(,(car curr) . ,(cdr curr)) jg-tag-twitter-tag-helm-candidates)
               (forward-line)
               )
             )
@@ -247,8 +286,8 @@
      'default-directory jg-tag-loc-default-helm-directory
      )
     ;;add candidates to source
-    (let* ((source-tw (cons `(candidates . jg-tag-twitter-helm-candidates) jg-tag-twitter-helm-source))
-           (source-heading (cons `(candidates . jg-tag-twitter-heading-helm-candidates) jg-tag-twitter-heading-helm-source)))
+    (let* ((source-tw (cons `(candidates . jg-tag-twitter-tag-helm-candidates) jg-tag-twitter-tag-helm-source))
+           (source-heading (cons `(candidates . jg-tag-twitter-account-helm-candidates) jg-tag-twitter-account-helm-source)))
       ;;call helm
       (helm :sources '(source-heading jg-tag-bookmark-helm-source)
             :full-frame t
@@ -294,18 +333,48 @@
           :nomark nil
           :backend "grep --color=always -a -d skip %e -n%cH -e %p %f"
           :pcre nil
-           ))
+          )
+        )
+  (setq jg-tag-twitter-grep-helm-source-alt
+        (helm-make-source "twitter grep helm alt" 'helm-grep-class
+          :action (helm-make-actions "File Select Helm" #'+jg-tag-file-select-helm
+                                     "Display in Temp Buffer" #'+jg-tag-file-display)
+          ;; :filtered-candidate-transformer '+jg-tag-grep-filter-candidate-transformer
+          :filter-one-by-one '+jg-tag-twitter-grep-filter-one-by-one
+          :filtered-candidate-transformer #'+jg-tag-sort-by-files
+          :nomark nil
+          :backend "grep --color=always -a -d skip %e -n%cH -e %p %f"
+          :pattern-transformer '+jg-tag-grep-pattern-transformer
+          :pcre nil
+          ))
 )
+
 (after! helm
-  (setq jg-tag-twitter-helm-source
-        (helm-make-source "Twitter Helm" 'helm-source
+  (setq jg-tag-twitter-tag-helm-source
+        (helm-build-in-file-source "Twitter Helm"
+            jg-tag-loc-twitter-tag-index
           :action (helm-make-actions "File Select Helm" #'+jg-tag-file-select-helm
                                      "Insert User Link" #'+jg-tag-insert-twitter-link)
+          :candidate-transformer #'+jg-tag-helm-index-file-transformer
+          :filtered-candidate-transformer #'+jg-tag-sort-by-files
           )
         ;; ==========
-        jg-tag-twitter-heading-helm-source
-        (helm-make-source "Twitter Heading Helm" 'helm-source
+        jg-tag-twitter-grep-helm-source
+        (helm-build-in-file-source "Twitter Grep Helm"
+            jg-tag-loc-twitter-grep-index
           :action (helm-make-actions "File Select Helm" #'+jg-tag-file-select-helm)
+          :candidate-transformer #'+jg-tag-helm-index-file-transformer
+          :pattern-transformer #'+jg-tag-grep-pattern-transformer
+          :filtered-candidate-transformer #'+jg-tag-sort-by-files
+          )
+        ;; ==========
+        jg-tag-twitter-account-helm-source
+        (helm-build-in-file-source "Twitter Account Helm"
+            jg-tag-loc-twitter-account-index
+          :action (helm-make-actions "File Select Helm" #'+jg-tag-file-select-helm)
+          :candidate-transformer #'+jg-tag-helm-index-file-transformer
+          :pattern-transformer #'+jg-tag-grep-pattern-transformer
+          :filtered-candidate-transformer #'+jg-tag-sort-by-files
           )
         ;; ==========
         jg-tag-file-select-source
@@ -318,7 +387,6 @@
           :action (helm-make-actions "Re-entrant-set" #'+jg-tag-set-tags-re-entrant
                                      "Set"            #'+jg-tag-set-tags)
           :pattern-transformer #'+jg-tag-clean-input
-          ;; :keymap
           )
         ;; ==========
         jg-tag-fallback-source

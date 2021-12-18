@@ -5,10 +5,16 @@
       :desc "Open Random Untagged Twitter" "o u" #'+jg-tag-open-random-untagged-twitter
       :prefix ("o h" . "Helms")
       :desc "Firefox Helm"              "f" #'+jg-tag-helm-bookmarks
-      :desc "Tag Helm"                  "t" #'+jg-tag-helm-twitter
-      :desc "Twitter Helm"              "T" #'+jg-tag-helm-heading-twitter
+      :desc "Twitter Tag Helm"          "t" #'+jg-tag-helm-tag-twitter
+      :desc "Twitter Account Helm"      "T" #'+jg-tag-helm-account-twitter
       :desc "Unified Helm"              "u" #'+jg-tag-helm-unified
+      :desc "Twitter Grep Helm"         "g" #'+jg-tag-helm-twitter-grep
       )
+
+(map! :leader
+      :desc "Insert Tag" "#" #'+jg-tag-simple-ivy
+      )
+
 (map! :map helm-map
       "M-SPC" #'helm-next-page)
 

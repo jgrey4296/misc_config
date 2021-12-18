@@ -50,5 +50,6 @@
 
 (map! :map emacs-lisp-mode-map
       :localleader
-      :desc "Insert Palette Faces" "i c" #'+jg-ui-insert-faces
+      :prefix ("i" . "Insert")
+      :desc "Insert Palette Faces" "c" #'+jg-ui-insert-faces
       )

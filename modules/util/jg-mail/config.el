@@ -1,6 +1,8 @@
 ;;; util/jg-mail/config.el -*- lexical-binding: t; -*-
 
-(load! "+bindings")
+(after! evil
+  (load! "+bindings")
+)
 (load! "+funcs")
 
 (set-email-account! "jgrey4296"
@@ -37,18 +39,17 @@
   :config
   (evil-make-intercept-map rmail-mode-map)
   (map! :map rmail-mode-map
-        "j" nil
-        "k" nil
-        "v" nil
-        "e" nil
-        "q" nil
-        "q" #'quit-window
-        "n" #'rmail-next-undeleted-message
-        "p" #'rmail-previous-undeleted-message
-        "q" #'quit-window
-        "Q" #'rmail-quit
-        "d" #'rmail-delete-forward
-        )
+      "j" nil
+      "k" nil
+      "v" nil
+      "e" nil
+      "q" nil
+      "n" #'rmail-next-undeleted-message
+      "p" #'rmail-previous-undeleted-message
+      "q" #'quit-window
+      "Q" #'rmail-quit
+      "d" #'rmail-delete-forward
+      )
   )
 
 (use-package! rmailsum
@@ -56,13 +57,4 @@
   :after evil
   :config
   (evil-make-intercept-map rmail-summary-mode-map)
-  (map! :map rmail-summary-mode-map
-        [menu-bar] nil
-        "j"  nil
-        "k"  nil
-        "d"  nil
-        "q"  #'quit-window
-        "Q"  #'rmail-summary-quit
-        "d"  #'rmail-summary-delete-forward
-        )
   )

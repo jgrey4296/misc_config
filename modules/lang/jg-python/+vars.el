@@ -26,6 +26,8 @@
 
   )
 
+(defvaralias 'python-shell-interpreter 'py-shell-name)
+
 (defvar +python-ipython-command '("ipython" "-i" "--simple-prompt" "--no-color-info")
   "Command to initialize the ipython REPL for `+python/open-ipython-repl'.")
 (defvar +python-jupyter-command '("jupyter" "console" "--simple-prompt")

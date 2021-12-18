@@ -6,20 +6,17 @@
       :n "z D" nil ;; #'+jg-python-close-class-defs
       :v "i f" #'+jg-python-select-defun
       :v "i F" #'+jg-python-select-class
-      :leader
-      (:prefix ("i" . "Insert")
-        :desc "Insert Breakpoint" "d" #'+jg-python-toggle-breakpoint
-       )
       :localleader
       :desc "Sort defs" "S" #'+jg-python-sort-class-methods
       :desc "REPL"      "r" #'+python/open-repl
       )
 
-(map! :after python
+(map! :after (python pyimport)
       :map python-mode-map
       :localleader
       (:prefix ("i" . "imports")
-       :desc "Insert missing imports" "i" #'pyimport-insert-missing
+       :desc "Insert import"          "i" #'+jg-python-insert-import
+       :desc "Insert Import Snippet"  "I" #'+jg-python-import-snippet
        :desc "Remove unused imports"  "r" #'pyimport-remove-unused
        :desc "Optimize imports"       "o" #'+python/optimize-imports
        :desc "Sort imports"           "s" #'py-isort-buffer

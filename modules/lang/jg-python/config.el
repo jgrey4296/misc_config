@@ -35,10 +35,13 @@
 
   )
 
+(use-package! pyimport
+  :demand
+  )
+
 (use-package-hook! anaconda-mode :post-config
   (+jg-python-conda-override)
   )
-
 
 ;; (after! (origami python-origami)
  ;;  (delq (assoc 'python-mode origami-parser-alist) origami-parser-alist)

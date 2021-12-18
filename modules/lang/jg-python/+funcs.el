@@ -45,7 +45,33 @@ Customize python using PYTHONBREAKPOINT env variable
           (insert trace)
           (python-indent-line)))))
 
+(defun +jg-python-insert-import (&optional arg)
+  " insert the literal string provided/read from minibuffer, at the imports section
+of a python file "
+  (interactive)
+  (let ((arg (if (not arg) (read-string "Import Statement: " "import ") arg)))
+    (pyimport--insert-import arg))
+  )
 
+(defun +jg-python-import-snippet (&optional arg)
+  " Expand a yasnippet template, then insert it at the imports section "
+  (interactive)
+  (setq yas--condition-cache-timestamp (current-time))
+  (let* ((template-alist (mapcar (lambda (x) `(,(yas--template-uuid x) . ,x)) (yas--all-templates (yas--get-snippet-tables))))
+         (template-name (ivy-completing-read "Import Snippet: " template-alist nil nil "import " ))
+         (yas--current-template (alist-get template-name template-alist nil nil 'equal))
+         final)
+    (if yas--current-template
+        (progn (with-temp-buffer
+                 (yas-minor-mode)
+                 (yas-expand-snippet yas--current-template (point-min))
+                 (setq final (buffer-string))
+                 )
+               (pyimport--insert-import final)
+               )
+      )
+    )
+  )
 (defun +jg-python-select-defun ()
   (interactive)
   (let ((start (progn (python-nav-beginning-of-defun)

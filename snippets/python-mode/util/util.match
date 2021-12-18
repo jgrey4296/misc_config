@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: util.match
+# uuid: util.match
+# --
+# https://www.python.org/dev/peps/pep-0634/
+match $1:
+      case $2:
+           pass
+      case _:
+           pass
+$0

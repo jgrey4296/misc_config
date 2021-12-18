@@ -1,17 +1,21 @@
 # -*- mode: snippet -*-
+# name: __acab
+# uuid: __acab
 # --
-#!/opts/anaconda3/envs/ENV/python
+#!/usr/bin/env python3
 from typing import List, Set, Dict, Tuple, Optional, Any
 from typing import Callable, Iterator, Union, Match
 from typing import Mapping, MutableMapping, Sequence, Iterable
 from typing import cast, ClassVar, TypeVar, Generic
-
-import logging as root_logger
+from dataclasses import dataclass, field, InitVar
 from uuid import UUID
+import logging as root_logger
+
+from acab
+config = acab.GET()
+
+from acab import types as AT
 
 logging = root_logger.getLogger(__name__)
 
-from os.path import join, isfile, exists, abspath
-from os.path import split, isdir, splitext, expanduser
-from os import listdir
 $0

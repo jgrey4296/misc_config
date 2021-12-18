@@ -4,5 +4,5 @@
 # --
 import abc
 
-class $1(metaclass=abc.ABCMetaClass):
+class $1(metaclass=abc.ABCMeta):
     """ $0 """

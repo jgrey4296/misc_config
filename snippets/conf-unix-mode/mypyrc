@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: mypyrc
+# uuid: mypyrc
+# --
+# Global options:
+#https://mypy.readthedocs.io/en/stable/config_file.html#config-file
+[mypy]
+python_version = 3.7
+warn_return_any = True
+warn_unused_configs = True
+
+# Per-module options:
+
+[mypy-mycode.foo.*]
+disallow_untyped_defs = True
+
+[mypy-mycode.bar]
+warn_return_any = False
+
+[mypy-somelibrary]
+ignore_missing_imports = True

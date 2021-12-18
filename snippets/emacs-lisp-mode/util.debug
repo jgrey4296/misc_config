@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: util.debug
+# uuid: util.debug
+# --
+(debug)$0

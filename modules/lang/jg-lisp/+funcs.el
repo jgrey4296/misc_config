@@ -1,6 +1,10 @@
 ;;; jg-list/+funcs.el --- summary -*- lexical-binding: t -*-
 
 ;; Simple Functions to feed into sort-subr
+(defun +jg-emacs-toggle-breakpoint ()
+  (interactive)
+  (insert "(debug)\n")
+  )
 
 (defun +__jg-lisp-key-start ()
   (re-search-forward "(defun " nil t)

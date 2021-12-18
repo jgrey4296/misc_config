@@ -30,19 +30,22 @@ ensuring they work across machines "
     )
   )
 
-(defun +jg-bibtex-google-scholar ()
+(defun +jg-bibtex-google-scholar (arg)
   "Open the bibtex entry at point in google-scholar by its doi."
-  (interactive)
+  (interactive "P")
   (let* ((search-texts (mapcar #'bibtex-autokey-get-field jg-bibtex-scholar-search-fields))
          (exact-texts (mapcar #'bibtex-autokey-get-field jg-bibtex-scholar-search-fields-exact))
          (exact-string (s-join " " (mapcar #'(lambda (x) (format "\"%s\"" x))
                                            (-filter #'(lambda (x) (not (string-empty-p x))) exact-texts))))
          (all-terms (s-concat exact-string " " (s-join " " search-texts)))
          (search-string (format jg-bibtex-scholar-search-string all-terms))
+         (alt-search-string (format jg-bibtex-dblp-search-string all-terms))
          )
-    (browse-url search-string)
-    )
-  )
+    (if arg
+        (browse-url alt-search-string)
+      (browse-url search-string)
+      )))
+
 (defun +jg-bibtex-edit-entry-type ()
   " Edit the @type of a bibtex entry, using
 bibtex-BibTeX-entry-alist for completion options "
@@ -113,14 +116,14 @@ the entry of interest in the bibfile.  but does not check that."
       )
     )
   )
-(defun +jg-bibtex-open-pdf ()
+(defun +jg-bibtex-open-pdf (&optional path)
   "Open pdf for a bibtex entry, if it exists.
 assumes point is in
 the entry of interest in the bibfile.  but does not check that."
   (interactive)
   (save-excursion
-    (let* ((file (bibtex-autokey-get-field "file"))
-           (optfile (bibtex-autokey-get-field "OPTfile")))
+    (let* ((file (if path path (bibtex-autokey-get-field "file")))
+           (optfile (if (not path) (bibtex-autokey-get-field "OPTfile"))))
       (message "%s : %s" file (file-exists-p file))
       (org-link-open-from-string (format "[[file:%s]]"
                                          (if (and (not (string-equal "" file))
@@ -264,39 +267,29 @@ returns the new location
     (bibtex-find-crossref (bibtex-text-in-field "crossref"))
     )
   )
-(defun +jg-bibtex-edit-field ()
-  " Edit a specified field in the current entry,
-using org-bibtex-fields for completion options "
-  ;; TODO add completion's for fields in completion loc
-  (interactive)
-  (save-excursion
-    (bibtex-beginning-of-entry)
-    (let* ((composition (-compose #'(lambda (x) (s-replace ":" "" x)) #'symbol-name #'car  ))
-           (fields (mapcar composition org-bibtex-fields))
-           (user-fields (mapcar #'car bibtex-user-optional-fields))
-           (chosen (completing-read "Field: " (-concat fields user-fields)))
-           (curr-value (bibtex-autokey-get-field chosen))
-           (potential-completions (f-join jg-bibtex-loc-completions chosen))
-           (source (if (f-exists? potential-completions)
-                       (helm-build-in-file-source "Completion Helm"
-                           potential-completions)))
-           (dummy-action #'(lambda (x) (write-region (format "%s\n" (string-trim x)) nil potential-completions t) x))
-           (dummy-source (helm-build-dummy-source "Completion Helm Dummy"
-                           :action (helm-make-actions "Insert into file" dummy-action)))
-           new-value
-           )
-      (setq new-value (if source
-                          (helm :sources (list source dummy-source)
-                                :buffer "*helm bibtex completions*"
-                                :input curr-value
-                                )
-                          (read-string (format "(%s) New Value: " chosen))))
-      (if new-value
-          (bibtex-set-field chosen (string-trim new-value))
-        )
-      )
-    )
-  )
+(defun +jg-bibtex-set-field (field value &optional nodelim)
+  "Set FIELD to VALUE in bibtex file.  create field if it does not exist.
+Optional argument NODELIM see `bibtex-make-field'.
+Modified to avoid duplicate comma insertion.
+"
+  (interactive "sfield: \nsvalue: ")
+  (bibtex-beginning-of-entry)
+  (let ((found))
+    (if (setq found (bibtex-search-forward-field field t))
+        ;; we found a field
+        (progn
+          (goto-char (car (cdr found)))
+          (when value
+            (bibtex-kill-field)
+            (bibtex-make-field field nil nil nil)
+            (backward-char)
+            (insert value)))
+      ;; make a new field
+      (bibtex-beginning-of-entry)
+      (forward-line) (beginning-of-line)
+      (bibtex-make-field field t nil nil)
+      (backward-char)
+      (insert value))))
 
 (defun +jg-bibtex-load-random ()
   " Run in a bibtex file, opens a random entry externally,

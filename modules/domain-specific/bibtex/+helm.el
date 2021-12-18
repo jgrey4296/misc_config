@@ -183,6 +183,52 @@ governed by the variable `bibtex-completion-display-formats'."
           :bibtex-candidates jg-bibtex-helm-candidates
           )))
 
+(defun +jg-bibtex-edit-field ()
+  " Edit a specified field in the current entry,
+using org-bibtex-fields for completion options "
+  (interactive)
+  (save-excursion
+    (bibtex-beginning-of-entry)
+    (let* ((composition (-compose #'(lambda (x) (s-replace ":" "" x)) #'symbol-name #'car  ))
+           (fields (mapcar composition org-bibtex-fields))
+           (user-fields (mapcar #'car bibtex-user-optional-fields))
+           (chosen (completing-read "Field: " (-concat fields user-fields)))
+           (curr-value (bibtex-autokey-get-field chosen))
+           (potential-completions (f-join jg-bibtex-loc-completions chosen))
+           (source (if (f-exists? potential-completions)
+                       (helm-build-in-file-source "Completion Helm"
+                           potential-completions
+                         :action (helm-make-actions "Accumulate" #'+jg-bibtex-edit-finish)
+                         )))
+           (dummy-action #'(lambda (x) (write-region (format "%s\n" (string-trim x)) nil potential-completions t) x))
+           (dummy-source (helm-build-dummy-source "Completion Helm Dummy"
+                           :action (helm-make-actions "Insert into file" dummy-action)))
+           new-values
+           )
+      ;; TODO use author ivy
+      ;; TODO repeat helm
+      (setq new-values (if source
+                          (helm :sources (list source dummy-source)
+                                :buffer "*helm bibtex completions*"
+                                :input curr-value
+                                )
+                          (read-string (format "(%s) New Value: " chosen))))
+      (if new-values
+          (+jg-bibtex-set-field chosen (if (listp new-values)
+                                           (string-join (mapcar 'string-trim new-values) " and ")
+                                         new-values) t)
+        )
+      )
+    )
+  )
+
+(defun +jg-bibtex-edit-finish (cand)
+  (let ((marked-cands (helm-marked-candidates)))
+    (if marked-cands
+        marked-cands
+      (list cand)
+      )))
+
 (after! helm-bibtex
   ;; Define the bib helm
 

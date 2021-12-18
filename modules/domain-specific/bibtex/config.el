@@ -17,7 +17,6 @@
   (add-hook! 'bibtex-mode-hook #'+jg-bibtex-tag-setup-hook #'yas-minor-mode #'org-ref-version)
   )
 (use-package! helm-bibtex
-  :defer t
   :commands (bibtex-completion-init)
 )
 (use-package! org-ref

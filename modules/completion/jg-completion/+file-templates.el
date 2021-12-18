@@ -40,7 +40,8 @@
                      '(org-mode))
 
 ;; Python
-(set-file-templates! '("\\.py$" :trigger "__" :mode python-mode)
+(set-file-templates! '(python-mode :trigger "__")
+                     '("\\.py$" :trigger "__" :mode python-mode)
                      '("test_.+\\.py$" :trigger "__tests" :mode python-mode))
 
 

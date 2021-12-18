@@ -9,6 +9,7 @@
 (after! evil
   (load! "+leader-bindings")
   (load! "+misc-bindings")
+  (load! "+help-map"
   )
 (after! evil-ex
   (load! "+evil-ex-setup")
@@ -19,7 +20,6 @@
   :after general)
 (use-package which-mod
   :after which-key)
-
 
 (after! flycheck
   (map! :leader

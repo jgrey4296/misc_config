@@ -198,6 +198,7 @@
   ;;; <leader> i --- insert
 (map! :leader
       :prefix ("i" . "insert")
+      :desc "Debug"                         "d"   #'+jg-bindings-insert-debug
       :desc "Current file name"             "f"   #'+default/insert-file-path
       :desc "Current file path"             "F"   (cmd!! #'+default/insert-file-path t)
       :desc "Evil ex path"                  "p"   (cmd! (evil-ex "R!echo "))

@@ -10,9 +10,10 @@
 (defvar jg-binding-motion-state-map (make-sparse-keymap) "JG map replacing evil-motion-state-map")
 (defvar jg-binding-inner-text-objects-map (make-sparse-keymap) "JG map for selectin text objects")
 (defvar jg-binding-outer-text-objects-map (make-sparse-keymap) "JG map replacing evil-outer-text-objects-map")
-
+(defvar jg-binding-insert-state-map (copy-keymap evil-insert-state-map))
 
 (defvar old-evil-normal-state-map nil "the original evil-normal-state-map")
+(defvar old-evil-iinsert-state-map nil "the original evil-insert-state-map")
 (defvar old-evil-visual-state-map nil "the original evil-visual-state-map")
 (defvar old-evil-operator-state-map nil "the original evil-operator-state-map")
 (defvar old-evil-motion-state-map nil "the original evil-motion-state-map")
@@ -77,6 +78,11 @@
       :desc "Insert" "<insert>"             #'evil-insert
       :desc "Insert" "<insertchar>"         #'evil-insert
       :desc "Back Char" "DEL"               #'evil-backward-char
+      )
+;; Insert state
+(map! :map jg-binding-insert-state-map
+      "TAB" #'company-complete
+
       )
 ;; Visual state
 (map! :map jg-binding-visual-state-map
@@ -143,7 +149,7 @@
       :desc "Repeat B-Find Char"  "," #'evil-repeat-find-char-reverse
       :desc "Prev 1st Non Blank"  "-" #'evil-previous-line-first-non-blank
       :desc "Search"              "/" #'evil-ex-search-forward
-      :desc "BOL"                 "0" #'evil-digit-argument-or-evil-beginning-of-line
+      :desc "BOL"                 "0" #'evil-beginning-of-line
       "1"             #'digit-argument
       "2"             #'digit-argument
       "3"             #'digit-argument
@@ -440,10 +446,12 @@
       old-evil-visual-state-map evil-visual-state-map
       old-evil-operator-state-map evil-operator-state-map
       old-evil-motion-state-map evil-motion-state-map
+      old-evil-insert-state-map evil-insert-state-map
       )
 
 ;; Override
 (setq  evil-normal-state-map jg-binding-normal-state-map
+       evil-insert-state-map jg-binding-insert-state-map
        evil-visual-state-map jg-binding-visual-state-map
        evil-operator-state-map jg-binding-operator-state-map
        evil-motion-state-map jg-binding-motion-state-map

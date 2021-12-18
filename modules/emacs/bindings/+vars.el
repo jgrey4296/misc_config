@@ -1,5 +1,9 @@
 ;;; util/bindings/+vars.el -*- lexical-binding: t; -*-
 
+
+(defvar jg-bindings-wk-filter 'id)
+(setq jg-bindings-wk-filter '+jg-bindings-wk-filter-fn)
+
 (setq-default jg-google-url "https://duckduckgo.com/?q=%s"
               jg-twitter-url "https://twitter.com"
 
@@ -20,6 +24,7 @@
                                                        "font-lock-keywords"))
 
               jg-binding-x-in-y-url "https://learnxinyminutes.com"
+              jg-binding-debug-snippet-name "util.debug"
               )
 
 

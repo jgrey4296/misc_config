@@ -40,12 +40,12 @@
       )
 (map! :map ibuffer-mode-map
       :prefix ("s" . "Sort")
-      :desc "do-sort-by-alphabetic"       "a"  #'ibuffer-do-sort-by-alphabetic
-      :desc "do-sort-by-filename/process" "f"  #'ibuffer-do-sort-by-filename/process
-      :desc "invert-sorting"              "i"  #'ibuffer-invert-sorting
-      :desc "do-sort-by-major-mode"       "m"  #'ibuffer-do-sort-by-major-mode
-      :desc "do-sort-by-size"             "s"  #'ibuffer-do-sort-by-size
-      :desc "do-sort-by-recency"          "v"  #'ibuffer-do-sort-by-recency
+      :desc "alphabetic"       "a"  #'ibuffer-do-sort-by-alphabetic
+      :desc "filename/process" "f"  #'ibuffer-do-sort-by-filename/process
+      :desc "invert"              "i"  #'ibuffer-invert-sorting
+      :desc "major-mode"       "m"  #'ibuffer-do-sort-by-major-mode
+      :desc "sort size"             "s"  #'ibuffer-do-sort-by-size
+      :desc "sort recency"          "v"  #'ibuffer-do-sort-by-recency
       )
 
 (map! :map ibuffer--filter-map

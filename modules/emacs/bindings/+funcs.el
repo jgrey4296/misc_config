@@ -171,3 +171,22 @@ If region isn't active, narrow away anything above point
       )
     )
   )
+
+(defun +jg-bindings-insert-debug ()
+  (interactive)
+  (yas-expand-snippet (yas-lookup-snippet jg-binding-debug-snippet-name) (point)))
+
+
+(defun +jg-bindings-wk-filter-fn (binding)
+  (not (string-match (rx (or "C-"
+                             "C-M"
+                             "M-"
+                             ;; "s-"
+                             ))
+                     (car binding)))
+  )
+
+(defun +jg-which-key-show-top-level (&optional _)
+  "Show top-level bindings."
+  (interactive)
+  (which-key--create-buffer-and-show nil nil '+jg-bindings-wk-filter-fn "Top-level bindings"))

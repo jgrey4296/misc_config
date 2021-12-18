@@ -31,7 +31,7 @@
     (when (keymapp prefix-map)
       (if (keymapp (lookup-key prefix-map [which-key]))
           (setq bindings (which-key--get-keymap-bindings-1 (lookup-key prefix-map [which-key])
-                                                           nil filter all ignore-commands)))
+                                                           nil nil filter all ignore-commands)))
 
       (map-keymap
        (lambda (ev def)
@@ -53,7 +53,7 @@
                       (and (numberp ev) (= ev 27))))
              (setq bindings
                    (which-key--get-keymap-bindings-1
-                    keymap bindings key nil all ignore-commands)))
+                    keymap bindings key filter all ignore-commands)))
             (def
              (let* ((def (if (eq 'menu-item (car-safe def))
                              (which-key--get-menu-item-binding def)
@@ -87,7 +87,7 @@
                                    (funcall filter binding))))
                  (push binding bindings)))))))
        prefix-map))
-    bindings))
+   bindings))
 
 (defun which-key--compute-binding (binding)
   "Replace BINDING with remapped binding if it exists.

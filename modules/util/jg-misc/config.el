@@ -66,6 +66,8 @@
   :config
   (add-to-list 'semantic-default-submodes
                'global-semantic-idle-summary-mode)
+  (add-to-list 'semantic-default-submodes 'semantic-stickyfunc-mode)
+  (add-to-list 'semantic-default-submodes 'semantic-highlight-func-mode)
   (add-to-list 'semantic-new-buffer-setup-functions
                '(emacs-lisp-mode . semantic-default-elisp-setup))
   ;; TODO setup semantic more, add helm etc
@@ -83,5 +85,6 @@
     (remove-from-invisibility-spec '(iedit-invisible-overlay-name . t))
     (remove-overlays nil nil iedit-invisible-overlay-name t)
   )
+
 )
 (use-package! timeline-mode)

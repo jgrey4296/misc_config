@@ -37,3 +37,13 @@
         )
   (evil-make-intercept-map free-keys-mode-map)
   )
+
+(map! :map semantic-mode-map
+      :localleader
+      :prefix ("^" . "Semantic")
+      (:prefix ("t" . "toggle")
+       :desc "Stick-func"     "s" #'semantic-stickyfunc-mode
+       :desc "Highlight-func" "h" #'semantic-highlight-func-mode
+       )
+
+      )

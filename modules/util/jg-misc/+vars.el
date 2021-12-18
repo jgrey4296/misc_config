@@ -13,6 +13,7 @@
               undo-outer-limit 120000000
               undo-tree-history-directory-alist `(("." . ,(concat doom-cache-dir "undo-tree-hist/")))
 
+              jg-misc-rps-have-you-played-loc "/Volumes/documents/github/writing/resources/urls/have-you-playeds"
 
               jg-misc-ivy-predicate-patterns (rx (or "*helpful"
                                                      "*Ibuffer"

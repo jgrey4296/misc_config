@@ -82,7 +82,7 @@
   )
 (defun +jg-misc-helm-rps-have-you-playeds ()
   (interactive)
-  (let* ((target "/Volumes/documents/github/writing/resources/bibliography_plus/have-you-playeds")
+  (let* ((target jg-misc-rps-have-you-played-loc)
          (source (helm-build-in-file-source "Have You Played Helm" target
                    :candidate-transformer (lambda (x)
                                             (mapcar #'+jg-misc-ivy-rps-transformer x))

@@ -3,19 +3,30 @@
 (message "Setting up popup rules: %s" (current-time-string))
 ;; Setup popup vars:
 (setq +popup--display-buffer-alist nil
-      display-buffer-alist nil
+      display-buffer-alist         nil
       )
 
 (remove-hook '+popup-buffer-mode-hook #'+popup-set-modeline-on-enable-h)
+
 (set-popup-rules!
-  '(("^\\*shell"       :side bottom :ttl nil :height 0.3 :quit t :select t)
-    ("\\*.*?scratch.*?\\*" :side right  :ttl nil :width  50  :quit t :select t)
-    ("^\\*Messages"    :side left   :ttl nil :width  0.4 :quit t :select nil)
-    ("^\\*compilation" :side bottom :ttl 5   :width  0.4 :quit t :select nil)
-    ("^\\*Pp Eval Output\\*" :side right :ttl 5 :width 0.4 :quit t :select nil)
-    ("^\\*Buffer Locals:" :side right :ttl 5 :width 0.4 :quit t :select nil)
+  ;; My rulesets
+  '(("^\\*shell"             :side bottom :ttl nil :height 0.3 :quit t :select t)
+    ("\\*.*?scratch.*?\\*"   :side right  :ttl nil :width  50  :quit t :select t)
+    ("^\\*Messages"          :side left   :ttl nil :width  0.4 :quit t :select nil)
+    ("^\\*compilation"       :side bottom :ttl 5   :height 0.4 :quit t :select nil)
+    ("^\\*Pp Eval Output\\*" :side right  :ttl 5   :width 0.4  :quit t :select nil)
+    ("^\\*Buffer Locals:"    :side right  :ttl 5   :width 0.4  :quit t :select nil)
+    ("^\\*pytest\\*"         :side bottom :ttl 5   :height 0.4 :quit t :select t)
     )
 
+  '(("^\\*Warnings" :vslot 99 :size 0.25)
+    ("^\\*Backtrace" :vslot 99 :size 0.4 :quit nil)
+    ("^\\*CPU-Profiler-Report "    :side bottom :vslot 100 :slot 1 :height 0.4 :width 0.5 :quit nil)
+    ("^\\*Memory-Profiler-Report " :side bottom :vslot 100 :slot 2 :height 0.4 :width 0.5 :quit nil)
+    ("^\\*Process List\\*" :side bottom :vslot 101 :size 0.25 :select t :quit t)
+    ("^\\*\\(?:Proced\\|timer-list\\|Abbrevs\\|Output\\|Occur\\|unsent mail\\)\\*" :ignore t))
+
+  ;; Doom Standards
   (when (featurep! +all)
     '(("^\\*"  :slot 1 :vslot -1 :select t)
       ("^ \\*" :slot 1 :vslot -1 :size +popup-shrink-to-fit)))
@@ -41,12 +52,6 @@
       ;; `Info-mode'
       ("^\\*info\\*$" :slot 2 :vslot 2 :size 0.45 :select t)))
 
-  '(("^\\*Warnings" :vslot 99 :size 0.25)
-    ("^\\*Backtrace" :vslot 99 :size 0.4 :quit nil)
-    ("^\\*CPU-Profiler-Report "    :side bottom :vslot 100 :slot 1 :height 0.4 :width 0.5 :quit nil)
-    ("^\\*Memory-Profiler-Report " :side bottom :vslot 100 :slot 2 :height 0.4 :width 0.5 :quit nil)
-    ("^\\*Process List\\*" :side bottom :vslot 101 :size 0.25 :select t :quit t)
-    ("^\\*\\(?:Proced\\|timer-list\\|Abbrevs\\|Output\\|Occur\\|unsent mail\\)\\*" :ignore t))
   )
 
 ;;(set-popup-rule! PREDICATE &key

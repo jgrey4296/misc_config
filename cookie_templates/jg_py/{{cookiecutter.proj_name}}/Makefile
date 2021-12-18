@@ -71,6 +71,9 @@ class_report:
 	@echo "Getting Class Relations"
 	find ./{{cookiecutter.proj_name}} -name "*.py" -not -name "flycheck*" | xargs awk '/^class/ {print $0}' > class.report
 
+export_env:
+	conda env export --from-history > {{cookie_cutter.env}}.yaml
+
 # Cleaning ####################################################################
 init:
 	@echo "Auto-creating empty __init__.py's"

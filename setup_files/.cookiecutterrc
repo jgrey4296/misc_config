@@ -2,7 +2,7 @@ default_context:
     full_name: "John Grey"
     email: "jgrey.n.plus.one at gmail.com"
     github_username: "jgrey4296"
-cookiecutters_dir: "/users/johngrey/.shell_files/../cookie_templates/"
+cookiecutters_dir: "~/.shell_files/../cookie_templates/"
 abbreviations:
     pp: https://github.com/audreyr/cookiecutter-pypackage.git
     gh: https://github.com/{0}.git

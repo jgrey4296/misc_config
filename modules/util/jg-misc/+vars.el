@@ -24,6 +24,7 @@
                                                      "*Free Keys"
                                                      )
                                               )
+              jg-misc-project-cmd-cache-name ".projectile-cmds"
               )
 
 (setq +ligatures-extra-symbols

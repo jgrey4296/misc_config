@@ -9,12 +9,11 @@
 (after! evil
   (load! "+leader-bindings")
   (load! "+misc-bindings")
-  (load! "+help-map"
+  ;; (load! "+help-map")
   )
 (after! evil-ex
   (load! "+evil-ex-setup")
-  )
-
+)
 
 (use-package general-mod
   :after general)

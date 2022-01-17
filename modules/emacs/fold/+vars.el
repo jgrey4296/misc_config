@@ -100,12 +100,13 @@
                           :close      hs-hide-block))
 ;
 ;; All Togther now:
-(setq evil-fold-list (list
-                      jg-diff-fold-spec
-                      jg-ifdef-fold-spec
-                      jg-lisp-fold-spec
-                      jg-outline-fold-spec
-                      jg-origami-fold-spec
-                      jg-hs-fold-spec
-                      jg-vimish-fold-spec
-                      ))
+(setq jg-fold-vars-fold-list (list
+                             jg-diff-fold-spec
+                             jg-ifdef-fold-spec
+                             jg-lisp-fold-spec
+                             jg-outline-fold-spec
+                             jg-origami-fold-spec
+                             jg-hs-fold-spec
+                             jg-vimish-fold-spec
+                             ))
+(setq evil-fold-list jg-fold-vars-fold-list)

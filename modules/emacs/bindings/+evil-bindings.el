@@ -316,7 +316,7 @@
       :desc "Pop Mark"           "b" #'avy-pop-mark
       :desc "Push Mark"          "B" #'avy-push-mark
       :desc "Comment"            "c" #'evilnc-comment-operator
-      :desc "IEdit"              "e" #'evil-iedit-state/iedit-mode
+      :desc "IEdit"              "e" #'iedit-mode
       :desc "Goto First Line"    "f" #'evil-goto-first-line
       :desc "Complete/Grow Selection"  "g" (cmds! (eq evil-state 'normal) #'company-manual-begin
                                                   (eq evil-state 'visual) #'+jg-text-grow-selection-op)

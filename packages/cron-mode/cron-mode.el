@@ -29,7 +29,7 @@
    (list (let ((pat "[[:word:]*,/]+"))
            (format "^\\(%s %s %s %s\\) %s \\(.+\\)$" pat pat pat pat pat))
          '(1 'cron-face-3)
-         '(2 'cron-face-0)
+         '(2 'cron-face-2)
      )
 
    )

@@ -1,0 +1,2 @@
+* {{cookiecutter.proj_name}}
+https://developer.android.com/studio/run/emulator-commandline

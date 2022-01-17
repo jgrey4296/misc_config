@@ -2,6 +2,8 @@
 # Ensure the shell can use conda:
 source ~/anaconda3/etc/profile.d/conda.sh
 
+conda update conda -y
+
 conda update --all -y
 conda env export > ~/.shell_files/conda_envs/base_env.yaml
 

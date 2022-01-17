@@ -1,0 +1,8 @@
+name: acab310
+channels:
+  - defaults
+dependencies:
+  - python=3.10
+  - pyparsing
+  - pygments
+prefix: /opt/anaconda3/envs/acab

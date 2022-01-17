@@ -2,6 +2,9 @@
 # Ensure the shell can use conda:
 source ~/anaconda3/etc/profile.d/conda.sh
 
+conda update --all -y
+conda env export > ~/.shell_files/conda_envs/base_env.yaml
+
 for f in ~/.shell_files/conda_envs/*.yaml; do
     name=`basename -s .yaml $f`
     echo "Found $name"
@@ -9,5 +12,6 @@ for f in ~/.shell_files/conda_envs/*.yaml; do
         echo "Loaded $name"
         conda update --all -y
         conda env export > $f
+        conda deactivate
     fi
 done

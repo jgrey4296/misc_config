@@ -69,6 +69,31 @@ https://www.wzchen.com/data-science-books
 https://www.sciencedirect.com/journal/artificial-intelligence/issues
 https://www.taylorfrancis.com/books/edit/10.4324/9781315302430/organizational-space-beyond-sytze-kingma-karen-dale-varda-wasserman
 ** Reminders
+https://developer.valvesoftware.com/wiki/Response_System
+https://www.micromacro-game.com/en/extracontent.html
+https://economicsfromthetopdown.com/2020/12/10/why-and-how-i-write-scientific-documents-in-plain-text/
+https://www.youtube.com/watch?v=wfzSE4Hoxbc
+https://www.youtube.com/watch?v=SfFh3rIjDME
+https://github.com/fgregg/tax_extension/tree/master#code-for-calculation-tax-extensions-in-cook-county
+https://andrebrock.academia.edu/
+https://wa.aws.amazon.com/wat.concept.coe.en.html
+https://applyingml.com/resources/personalization/
+https://applyingml.com/resources/ml-design-docs/
+https://applyingml.com/
+
+https://bpw1621.com/archive/ordained-the-python-project-template/
+history of automated phone lines?
+
+the eternal cyclinder, but personalities for the trebum.
+Each is named, so if a trebum dies and is resurrected, blame
+the one who was in control.
+React to seeing/getting a mutation based on history. excited if completely new,
+less so if you've seen it before.
+greet resurrected friends, react to their deaths,
+share food and water explicitly,
+negotiate exchanges of inventory
+changes when switching trunks
+
 john wick hex - choreography simulator
 https://github.com/company-mode/company-mode/wiki/Writing-backends
 index xkcd using explainxkcd

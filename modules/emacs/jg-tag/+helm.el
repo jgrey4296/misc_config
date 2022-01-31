@@ -119,8 +119,11 @@
 ;; Candidate Transformers
 (defun +jg-tag-sort-by-files (candidates source)
   (sort candidates (lambda (a b)
-                     (> (plist-get (cdr a) :count) (plist-get (cdr b) :count))
-                     )))
+                     (let ((a-count (plist-get (cdr a) :count))
+                           (b-count (plist-get (cdr b) :count)))
+                       (> (if (stringp a-count) (string-to-number a-count) a-count)
+                          (if (stringp b-count) (string-to-number b-count) b-count))
+                       ))))
 
 (defun +jg-tag-grep-filter-one-by-one (candidate)
         "A Grep modification for bookmark helm to extract a bookmark's url and tags"

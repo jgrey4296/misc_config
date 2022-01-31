@@ -14,6 +14,5 @@ for f in ~/.shell_files/conda_envs/*.yaml; do
         echo "Loaded $name"
         conda update --all -y
         conda env export > $f
-        conda deactivate
     fi
 done

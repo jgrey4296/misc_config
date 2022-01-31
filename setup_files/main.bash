@@ -3,6 +3,9 @@
 
 if [[ $OSTYPE =~ "darwin" ]]; then
    echo "Activating Darwin Setup"
+   # This is how to activate conda if it
+   # complains the shell isn't set up:
+   # source ~/anaconda3/etc/profile.d/conda.sh
    source ~/.shell_files/exports.bash
    source ~/.shell_files/languageSpecific.bash
    source ~/.shell_files/aliases.bash
@@ -15,6 +18,6 @@ if [[ $OSTYPE =~ "darwin" ]]; then
        conda activate $ENV
    else
     echo "Conda: ${OSTYPE}"
-	conda activate base
+	conda activate base310
    fi
 fi

@@ -14,6 +14,9 @@
         "TAB" #'helm-select-action
         )
   )
+(after! company
+  (add-hook! 'minibuffer-inactive-mode-hook :append #'company-mode)
+  )
 (after! (company gtags helm-gtags)
   (set-company-backend! 'python-mode 'company-gtags)
   )

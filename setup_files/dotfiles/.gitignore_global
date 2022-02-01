@@ -1,0 +1,64 @@
+# Compiled source:
+*.beam
+*.bl
+*.class
+*.com
+*.dll
+*.exe
+*.exe
+*.hi
+*.meta
+*.o
+*.so
+ccsat.*
+dist/
+
+# Python:
+*.pyc
+*__pycache__
+flycheck_*
+*.egg-info
+
+# OS Generated Files:
+*.egg
+.DS_Store
+.DS_Store?
+.Spotlight-v11
+.Trashes
+._*
+.dir-locals.el
+.dropbox
+.orgids
+GPATH
+GRTAGS
+GTAGS
+Thumbs.db
+\#.\#
+_site/
+cscope.out
+ehthumbs.db
+node_modules
+tmp/
+~*
+
+# Big Files
+*.aif
+*.aif.*
+*.gif
+*.jpeg
+*.jpg
+*.pdf
+*.pickle
+*.png
+imgs/*
+
+# Passwords
+*.credentials
+*.key
+*.secret
+.secrets.json
+secrets.config
+
+# Logs
+*.log
+log.*

@@ -1,0 +1,7 @@
+channels:
+  - defaults
+  - conda-forge
+ssl_verify: true
+env_prompt: ({name})
+create_default_packages:
+  - pip

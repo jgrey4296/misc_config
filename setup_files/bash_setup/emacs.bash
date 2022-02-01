@@ -9,7 +9,6 @@ alias wemacs="emacs ~/github/writing/main.org"
 #sclang for emacs:
 alias sclangel="sclang -d ~/github/.super_collider_classes/ -r -s -i emacs"
 
-
 # Doom
 PATH=~/.emacs.d/bin/:$PATH
 
@@ -18,4 +17,4 @@ GTAGSCONF=~/.shell_files/gtags.conf
 GTAGSLABEL=pygments
 
 #Default editor:
-export EDITOR=emacs
+EDITOR=emacs

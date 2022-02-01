@@ -7,4 +7,4 @@
 [credential]
 	helper = cache
 [core]
-	excludesfile = ~/.shell_files/.gitignore_global
+	excludesfile = ~/.gitignore_global

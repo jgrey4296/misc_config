@@ -22,7 +22,7 @@
       evil-snipe-repeat-scope nil
       highlight-indent-guides-suppress-auto-error t
       ibuffer-old-time 2
-      ispell-personal-dictionary (expand-file-name "~/.doom.d/setup_files/.ispell_english")
+      ispell-personal-dictionary (expand-file-name "~/.ispell_english")
       line-move-ignore-invisible t
       line-move-ignore-invisible t
       outline-blank-line nil

@@ -32,9 +32,9 @@
 
               jg-bibtex-remove-field-newlines-regexp "file\\|url\\|title"
 
-              jg-bibtex-clean-move-entry-on-fail t
-              jg-bibtex-open-doi-with-pdf t
-              jg-bibtex-open-url-with-pdf t
+              jg-bibtex-clean-move-entry-on-fail nil
+              jg-bibtex-open-doi-with-pdf nil
+              jg-bibtex-open-url-with-pdf nil
 
               jg-bibtex-tweet-pattern "(%s): %s\nby %s\nTags: %s\nRef: %s\n"
 

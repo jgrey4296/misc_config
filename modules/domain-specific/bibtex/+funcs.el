@@ -269,9 +269,8 @@ returns the new location
   )
 (defun +jg-bibtex-set-field (field value &optional nodelim)
   "Set FIELD to VALUE in bibtex file.  create field if it does not exist.
-Optional argument NODELIM see `bibtex-make-field'.
-Modified to avoid duplicate comma insertion.
-"
+Optional argument NODELIM ignored to fit `bibtex-make-field` signature
+Modified to avoid duplicate comma insertion. "
   (interactive "sfield: \nsvalue: ")
   (bibtex-beginning-of-entry)
   (let ((found))
@@ -287,6 +286,8 @@ Modified to avoid duplicate comma insertion.
       ;; make a new field
       (bibtex-beginning-of-entry)
       (forward-line) (beginning-of-line)
+      ;; (bibtex-next-field nil)
+      ;; (forward-char)
       (bibtex-make-field field t nil nil)
       (backward-char)
       (insert value))))
@@ -424,7 +425,7 @@ Log into jg-bibtex-rand-log.
     ;; Get mentioned
     (with-temp-buffer
       (if (f-exists? target-bib)
-          (insert-file target-bib))
+          (insert-file-contents target-bib))
       (goto-char (point-min))
       (while (re-search-forward "^\s*file[0-9]*\s*=\s*{\\(.+?\\)}" nil t)
         (pushnew (match-string 1) mentioned :test 'equal)
@@ -498,3 +499,4 @@ This function toggles clearing those watchers and recreating them later
 (defun +jg-bibtex-extract-pdf-data ()
      ;; TODO use pdftk dump_data to extract titles, authors etc
      )
+(fset 'bibtex-set-field '+jg-bibtex-set-field)

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: test.stub
+# uuid: test.stub
+# --
+@unittest.skip("TODO")
+def test_$1(self):
+   pass

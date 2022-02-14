@@ -1,17 +1,20 @@
-# -*- mode: snippet -*-
-# --
-#!/opts/anaconda3/envs/ENV/python
-from typing import List, Set, Dict, Tuple, Optional, Any
-from typing import Callable, Iterator, Union, Match
-from typing import Mapping, MutableMapping, Sequence, Iterable
-from typing import cast, ClassVar, TypeVar, Generic
-
+#!/usr/bin/env python3
+import abc
 import logging as root_logger
-from uuid import UUID
+from copy import deepcopy
+from dataclasses import InitVar, dataclass, field, replace
+from fractions import Fraction
+from os import listdir
+from os.path import (abspath, exists, expanduser, isdir, isfile, join, split,
+                     splitext)
+from re import Pattern
+from typing import (Any, Callable, ClassVar, Dict, Generic, Iterable, Iterator,
+                    List, Mapping, Match, MutableMapping, Optional, Sequence,
+                    Set, Tuple, TypeAlias, TypeVar, Union, cast)
+from uuid import UUID, uuid1
+from weakref import ref
 
 logging = root_logger.getLogger(__name__)
 
-from os.path import join, isfile, exists, abspath
-from os.path import split, isdir, splitext, expanduser
-from os import listdir
+
 $0

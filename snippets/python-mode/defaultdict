@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: defaultdict
+# uuid: defaultdict
+# key: trigger-key
+# condition: t
+# --
+from collections import defaultdict

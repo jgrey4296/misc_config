@@ -34,7 +34,7 @@
         )
   )
 
-(map! :after rmailsum
+(map! ;:after rmailsum
       :map rmail-summary-mode-map
       [menu-bar] nil
       "j"  nil
@@ -44,6 +44,8 @@
       "q"  #'quit-window
       "Q"  #'rmail-summary-quit
       "d"  #'rmail-summary-delete-forward
+      "\\" #'rmail-summary-end-of-message
+      "/"  #'rmail-search
       :localleader
       :prefix ("s" . "Sort")
       :desc "By Recipient" "r" #'rmail-summary-sort-by-recipient
@@ -61,9 +63,11 @@
       "v" nil
       "e" nil
       "q" nil
+      "/" nil
       "n" #'rmail-next-undeleted-message
       "p" #'rmail-previous-undeleted-message
       "q" #'quit-window
       "Q" #'rmail-quit
       "d" #'rmail-delete-forward
+      "\\" #'rmail-end-of-message
       )

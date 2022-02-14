@@ -9,17 +9,10 @@
                 python-shell--interpreter nil
                 python-shell--interpreter-args nil
                 flycheck--automatically-enabled-checkers '(python-pylint)
-
-                python-prettify-symbols-alist '(("lambda" . "λ")
-                                                ("or"     . "∨")
-                                                ("and"    . "∧")
-                                                ("None"   . "∅")
-                                                ("->"     . "→")
-                                                ("self"   . "𝕊")
-                                                )
-
-
+                python-pdbtrack-activate nil
+                py-pdbtrack-do-tracking-p nil
                 )
+
   (modify-syntax-entry ?_ "_" python-mode-syntax-table)
   (push 'python-pylint flycheck-checkers)
   (push ".mypy.ini" flycheck-python-mypy-ini)

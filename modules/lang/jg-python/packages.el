@@ -5,4 +5,5 @@
 (package! python-mode :built-in nil)
 (package! pipenv :disable t)
 
+(package! python :built-in nil)
 (package! pyimport)

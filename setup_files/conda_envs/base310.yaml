@@ -1,11 +1,30 @@
 name: base310
 channels:
   - defaults
+  - conda-forge
 dependencies:
-  - conda
-  - python=3.10
-  - python.app
-  - conda-env
-  - conda-verify
+  - scipy
+  - wheel
+  - setuptools
+  - readline
+  - pylint
+  - seaborn
+  - pyparsing
+  - matplotlib
+  - jedi
+  - numpy
+  - build
+  - networkx
   - regex
+  - pyqtree
+  - sympy
+  - isort
+  - pandas
+  - pip
+  - python=3.10
+  - conda
+  - conda-verify
+  - conda-env
+  - python.app
+  - pytest
 prefix: /opt/anaconda3/envs/base310

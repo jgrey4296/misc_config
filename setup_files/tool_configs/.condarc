@@ -4,4 +4,25 @@ channels:
 ssl_verify: true
 env_prompt: ({name})
 create_default_packages:
+  - build
+  - isort
+  - jedi
+  - matplotlib
+  - networkx
+  - numpy
+  - pandas
   - pip
+  - pycodestyle
+  - pytest
+  - pylint
+  - pyparsing
+  - pyqtree
+  - python=3.10
+  - readline
+  - regex
+  - scipy
+  - seaborn
+  - setuptools
+  - sqlite
+  - sympy
+  - wheel

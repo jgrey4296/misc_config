@@ -2,9 +2,6 @@
 # Ensure the shell can use conda:
 source ~/anaconda3/etc/profile.d/conda.sh
 
-conda update conda -y
-
-conda update --all -y
 conda env export > ~/.shell_files/conda_envs/base_env.yaml
 
 for f in ~/.shell_files/conda_envs/*.yaml; do
@@ -13,6 +10,9 @@ for f in ~/.shell_files/conda_envs/*.yaml; do
     if conda activate $name; then
         echo "Loaded $name"
         conda update --all -y
-        conda env export > $f
+        conda env export --from-history > $f
     fi
 done
+
+conda update conda -y
+conda update --all -y

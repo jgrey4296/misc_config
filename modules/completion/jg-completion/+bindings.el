@@ -105,4 +105,5 @@
        (:after helm-occur :map helm-occur-map
         [C-return] #'helm-occur-run-goto-line-ow)
        (:after helm-grep :map helm-grep-map
-        [C-return] #'helm-grep-run-other-window-action)))
+        [C-return] #'helm-grep-run-other-window-action))
+      )

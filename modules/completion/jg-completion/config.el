@@ -23,6 +23,7 @@
 (after! (yasnippet doom-snippets yasnippet-snippets)
   (setq yas-snippet-dirs '(+snippets-dir doom-snippets-dir +file-templates-dir yasnippet-snippets-dir))
   (setq yas--default-user-snippets-dir yas-snippet-dirs)
+  (load! "+snippet-fix")
  )
 
 (use-package! helm-gtags :defer t)

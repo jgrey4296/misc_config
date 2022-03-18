@@ -20,6 +20,11 @@
       :localleader
       "h" #'counsel-shell-history)
 
+;; Comint
+;; overrides the default normal mode binding of evil-ret
+(map! :map comint-mode-map
+      :n "RET" #'comint-send-input)
+
 ;; Flycheck
 (map! :after flycheck
       :map flycheck-error-list-mode-map

@@ -37,6 +37,7 @@
  jg-kotlin
  jg-latex
  jg-misc-lang
+ jg-rst
 
  :emacs  ;; ----- ====== -----
  (bindings +bindings)
@@ -190,7 +191,7 @@
  racket            ; a DSL for DSLs
  ;;raku              ; the artist formerly known as perl6
  ;;rest              ; Emacs as a REST client
- ;;rst               ; ReST in peace
+ rst               ; ReST in peace
  ;;(ruby +rails)     ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
  ;;rust              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
  ;;scala             ; java, but good
@@ -219,4 +220,5 @@
 
  :config
  ;;literate
- (default +smartparens))
+ default
+ )

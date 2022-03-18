@@ -8,7 +8,8 @@
                 python-shell-virtualenv-root "~/anaconda3"
                 python-shell--interpreter nil
                 python-shell--interpreter-args nil
-                flycheck--automatically-enabled-checkers '(python-pylint)
+                flycheck--automatically-enabled-checkers (-concat flycheck--automatically-enabled-checkers '(python-pylint python-pyright python-mypy))
+                flycheck--automatically-disabled-checkers '(python-compile)
                 python-pdbtrack-activate nil
                 py-pdbtrack-do-tracking-p nil
                 )
@@ -18,6 +19,11 @@
   (push ".mypy.ini" flycheck-python-mypy-ini)
 
   )
+
+(after! (flycheck python)
+  (flycheck-add-next-checker 'python-pylint '(t . python-pyright))
+  )
+
 
 (defvaralias 'python-shell-interpreter 'py-shell-name)
 

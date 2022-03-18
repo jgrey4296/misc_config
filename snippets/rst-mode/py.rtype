@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: py.rtype
+# uuid: py.rtype
+# --
+:rtype: $0

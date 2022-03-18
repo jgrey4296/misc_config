@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: py.decoratormethod
+# uuid: py.decoratormethod
+# --
+.. py:decoratormethod: ${1:name}
+
+   $0

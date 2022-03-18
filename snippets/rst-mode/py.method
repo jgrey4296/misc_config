@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: py.method
+# uuid: py.method
+# --
+.. py.method:: ${1:Method Signature}
+
+   ${2: Description}
+
+   ${3::abstractmethod:}
+   ${4::classmethod:}
+   ${5::staticmethod:}
+   ${6::property:}
+   ${7::async:}
+   ${8::canonical:}
+
+$0

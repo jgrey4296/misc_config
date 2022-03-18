@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: py.autofunction
+# uuid: py.autofunction
+# --
+.. autofunction:: ${1:function.to.run}
+$0

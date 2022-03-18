@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: py.currentmodule
+# uuid: py.currentmodule
+# --
+
+.. currentmodule:: ${1: Module Name}
+$0

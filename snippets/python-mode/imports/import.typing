@@ -2,7 +2,16 @@
 # name: import.typing
 # uuid: import.typing
 # --
+from __future__ import annotations
 from typing import Tuple, Any
 from typing import Callable, Iterator, Match
 from typing import Mapping, MutableMapping, Sequence, Iterable
 from typing import cast, ClassVar, TypeVar, Generic, TypeAlias
+from typing import TYPE_CHECKING, Protocol, TypeGuard
+from typing import Final, final, overload, runtime_checkable
+import abc
+from dataclasses import dataclass, field, InitVar
+
+if TYPE_CHECKING:
+    # tc only imports
+    pass

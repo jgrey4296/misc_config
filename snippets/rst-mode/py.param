@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: py.param
+# uuid: py.param
+# --
+:param ${1:ParamName}: ${2:Description}
+:type  $1: ${3:Type}
+$0

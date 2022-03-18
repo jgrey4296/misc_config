@@ -3,5 +3,6 @@
 # key: cliarg
 # --
 ifndef ${$1}
-       $1 := "example"
+       $1 := "$2"
 endif
+$0

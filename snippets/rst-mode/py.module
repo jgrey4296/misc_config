@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: py.module
+# uuid: py.module
+# --
+.. py:module:: ${1:module name}
+
+	${2:Module Description}
+
+	${3::platform: MacOS}
+	:synopsis: ${3The Purpose of the Module}
+	${4::deprecated:}
+
+$0

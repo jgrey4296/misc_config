@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: py.exception
+# uuid: py.exception
+# --
+.. py:exception:: ${1:exception signature}
+
+	${2:description}
+
+$0

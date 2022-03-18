@@ -1,20 +1,87 @@
 # -*- mode: snippet -*-
+# uuid: pylibMakefile
 # name: pylibMakefile
 # key: pylibMakefile
 # --
-INSTALL_DIR=$(shell echo $(JG_PYLIBS))
-LIB_NAME=$1
-DEPS=$2
+LIB_NAME	:= $1
 
+PYS			:= $(shell find ./ -name '*.py' -not -name '*context.py' -not -name '__init__.py')
+LOGS		:= $(shell find ./ -name '*log.*')
+CACHES		:= $(shell find ./ -regextype posix-egrep -regex .*\(.mypy_cache\|__pycache__\)$)
+
+TOP			:= ./$1
+START		:= ./$1
+PAT			:=
+FILE_PAT	:= "test_*.py"
+LOGLEVEL	:= WARNING
+
+# Sphinx Variables
+SPHINXOPTS    ?=
+SPHINXBUILD   ?= sphinx-build
+SOURCEDIR     = docs
+BUILDDIR      = build
+
+# If defined, use these overrides
+ifneq (${dir}, )
+	START		:= ${dir}
+endif
+
+ifneq (${pat}, )
+	PAT			:= -k ${pat}
+endif
+
+ifneq ${fpat}, )
+	FILE_PAT	:= ${fpat}
+endif
+ifndef ${doc}
+	doc := "html"
+endif
+
+
+# Put it first so that "make" without argument is like "make help".
+help: # print all the targets
+	# Available make targets:
+	@awk 'BEGIN {FS="[ ]"} /^[a-zA-Z\.]+:/ {print $$1}' ./Makefile
+
+.PHONY: help Makefile
+
+# "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
+# run with `make sphinx target=html` =clean etc
+sphinx: Makefile
+	@$(SPHINXBUILD) -M ${doc} "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+
+docs: sphinx
+	  open ./${BUILDDIR}/html/index.html
+
+# install using the build module, development mode of pip
 install : clean
-	cp -r ./${LIB_NAME} ${INSTALL_DIR}/${LIB_NAME}
+	python -m build
+	pip install -e .
 
-uninstall :
-	rm -r ${INSTALL_DIR}/${LIB_NAME}
+# python unittest discovery
+test:
+	python -m unittest discover -v -s ${START} -p ${FILE_PAT} -t ${TOP} ${PAT}
 
-clean :
-	find . -name "__pycache__" | xargs rm -r
-	find . -name "*.pyc" | xars rm
 
-dependencies:
-    pip install ${DEPS}
+clean:
+	@echo "Cleaning"
+ifeq (${LOGS}, )
+	@echo "No Logs to delete"
+else
+	-rm ${LOGS}
+endif
+ifeq (${CACHES}, )
+	@echo "No Caches to delete"
+else
+	-rm -r ${CACHES}
+endif
+	-rm -rf dist
+
+
+line_report:
+	@echo "Counting Lines into linecounts.stats"
+	find . -name "*.py" -not -path "./.git/*" -not -name "test_*.py" -not -name "*__init__.py" -print0 | xargs -0 wc -l | sort > linecounts.report
+
+class_report:
+	@echo "Getting Class Relations"
+	find ${TOP} -name "*.py" -not -name "flycheck*" | xargs awk '/^class/ {print $0}' > class.report

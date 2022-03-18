@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: py.property
+# uuid: py.property
+# --
+.. py:property:: ${1:name}
+
+   ${2::abstractmethod:}
+   ${3::classmethod:}
+   ${4::type:}
+
+$0

@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: import.acab
+# uuid: import.acab
+# condition: t
+# --
+from acab import setup
+from acab import types as AT
+from acab.core.config.config import AcabConfig
+from acab.error.protocol import AcabProtocolError as APE
+
+import acab.core.data.default_structure as DS
+import acab.interfaces.value as VI
+import acab.interfaces.context as CI
+import acab.core.parsing.default_keys as PK
+import acab.core.parsing.default_symbols as PS
+from acab.error.base import AcabBasicException
+
+config = AcabConfig()

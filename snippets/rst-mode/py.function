@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: py.function
+# uuid: py.function
+# --
+.. py:function:: ${1:The signature of the function}
+
+	${2:The Doc string of the function.}
+
+	:param ${3:name}: ${4:Description of a parameter}
+	:type $3: ${5:The Type of a Parameter}
+	:return: ${6:Description of the return value}
+	:rtype: ${7:The Type of the return value}
+
+$0

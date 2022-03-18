@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: py.var
+# uuid: py.var
+# --
+:var: $0

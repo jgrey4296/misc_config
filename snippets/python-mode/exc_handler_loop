@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: exc_handler_loop
+# uuid: exc_handler_loop
+# --
+def exception_hook_loop(exc_type, exc_value, tb):
+    """ A Simple Exception handler which iterates through frames  """
+    local_vars = {}
+    while tb:
+        filename = tb.tb_frame.f_code.co_filename
+        name = tb.tb_frame.f_code.co_name
+        line_no = tb.tb_lineno
+        print(f"File {filename} line {line_no}, in {name}")
+
+        local_vars = tb.tb_frame.f_locals
+        tb = tb.tb_next
+    print(f"Local variables in top frame: {local_vars}")
+
+
+sys.excepthook = exception_hook_loop

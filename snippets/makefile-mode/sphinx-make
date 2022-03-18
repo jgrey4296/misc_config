@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: sphinx-make
+# uuid: sphinx-make
+# --
+# Minimal makefile for Sphinx documentation
+# Adapted from sphinx-quickstart
+
+# You can set these variables from the command line, and also
+# from the environment for the first two.
+SPHINXOPTS    ?=
+SPHINXBUILD   ?= sphinx-build
+SOURCEDIR     = $1
+BUILDDIR      = build
+
+ifndef ${target}
+	target:= "html"
+endif
+
+# Put it first so that "make" without argument is like "make help".
+help:
+	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+
+.PHONY: help Makefile
+
+# "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
+# run with `make sphinx target=html` =clean etc
+sphinx: Makefile
+	@$(SPHINXBUILD) -M ${target} "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)

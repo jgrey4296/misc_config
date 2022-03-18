@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: py.data
+# uuid: py.data
+# --
+.. py:data:: ${1:name}
+
+	:type: $2
+    :value: $3
+$0

@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: py.attribute
+# uuid: py.attribute
+# --
+.. py:attribute:: ${1:name}
+
+   :type: $2
+   :value: $3
+
+$0

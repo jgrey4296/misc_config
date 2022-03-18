@@ -24,6 +24,7 @@
   (setq yas-snippet-dirs '(+snippets-dir doom-snippets-dir +file-templates-dir yasnippet-snippets-dir))
   (setq yas--default-user-snippets-dir yas-snippet-dirs)
   (load! "+snippet-fix")
+  (add-function :override (symbol-function '+snippet--completing-read-uuid) #'+jg-snippet--completing-read-uuid)
  )
 
 (use-package! helm-gtags :defer t)

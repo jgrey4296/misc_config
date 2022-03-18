@@ -18,17 +18,18 @@
 ;;
 ;;
 ;;; Code:
-(defun +snippet--completing-read-uuid (prompt all-snippets &rest args)
+(defun +jg-snippet--completing-read-uuid (prompt all-snippets &rest args)
   (let* ((snippet-data (cl-loop for (_ . tpl) in (mapcan #'yas--table-templates (if all-snippets
                                                                                    (hash-table-values yas--tables)
                                                                                  (yas--get-snippet-tables)))
 
-                               for txt = (format "%-25s%-30s%s"
-                                                 (yas--template-key tpl)
-                                                 (yas--template-name tpl)
-                                                 (abbreviate-file-name (yas--template-load-file tpl)))
-                               collect
-                               `(,txt . ,(yas--template-uuid tpl))))
+                                unless (null (yas--template-load-file tpl))
+                                for txt = (format "%-25s%-30s%s"
+                                                  (yas--template-key tpl)
+                                                  (yas--template-name tpl)
+                                                  (abbreviate-file-name (yas--template-load-file tpl)))
+                                collect
+                                `(,txt . ,(yas--template-uuid tpl))))
         (selected-value (apply #'completing-read prompt snippet-data args)))
   (alist-get selected-value snippet-data nil nil 'equal)))
 

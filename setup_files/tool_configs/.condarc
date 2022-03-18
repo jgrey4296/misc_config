@@ -4,25 +4,30 @@ channels:
 ssl_verify: true
 env_prompt: ({name})
 create_default_packages:
+  - beautifulsoup4
   - build
   - isort
   - jedi
   - matplotlib
+  - mypy=0.931
   - networkx
   - numpy
   - pandas
   - pip
   - pycodestyle
-  - pytest
+  - pygments
   - pylint
   - pyparsing
   - pyqtree
+  - pyright
+  - pytest
   - python=3.10
   - readline
   - regex
   - scipy
   - seaborn
   - setuptools
+  - sphinx
   - sqlite
   - sympy
   - wheel

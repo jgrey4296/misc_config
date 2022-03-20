@@ -69,6 +69,9 @@ if __name__ == "__main__":
         exit(1)
 
     selected = choice(whitelist).split(":")
+    if not bool(selected) or not exists(selected[0]):
+        quit()
+
     #logging.info("Attempting: {}".format(selected))
     msg = ""
     the_file = expander(selected[0]).strip()

@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: plt.subplot
+# uid: plt.subplot
+# --
+# Create subplots to work with as objs
+# rows, cols
+fig, ax = plt.subplots(2, 2)
+# or
+# plt.subplot(rows, cols, index)

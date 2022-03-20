@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: plt.plot
+# uuid: plt.plot
+# group: visualisation
+# --
+
+#see plt.format snippet
+
+# Quiver plots:
+# Individual point vectors
+# Pos x, y, dir x y
+plt.quiver($1, $2, 1, 0)
+
+# Stream Plots:
+# Connecting point vectors together
+# U and V are the X and Y velocities
+plt.streamplot(X, Y, U, V)

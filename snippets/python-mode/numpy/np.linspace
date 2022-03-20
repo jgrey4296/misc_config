@@ -3,4 +3,10 @@
 # key: np.linspace
 # group: numpy
 # --
-np.linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None)
+np.linspace(${1:start}, ${2:stop}, num=${3:10}, endpoint=True, retstep=False, dtype=None)
+# np.logspace
+# np.geomspace
+# np.arange
+
+# Coordinate matrices:
+# np.meshgrid

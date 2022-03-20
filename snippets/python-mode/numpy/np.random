@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: np.random
+# uuid: np.random
+# --
+from numpy.random import default_rng
+#https://numpy.org/doc/stable/reference/random/generator.html
+
+# Create, seed optional
+rng                    = default_rng()
+# Sample
+rand_f  : float         = rng.random(10)
+rand_is : np.array[int] = rng.integers(low=0, high=10, size=3)
+
+# distributions:
+# beta, binomial, chisquare, dirichlet, exponential, f,
+# gamma, geometric, gumbel, hypergeometric, laplace,
+# logistic, lognormal, logseries, multinomial,
+# normal, pareto, poisson, power, trianglular
+# standard_cauchy, standard_gamma, standard_exponential, standard_normal, standard_t
+
+
+# From Data:
+# rng.choice
+# rng.shuffle     : in-place
+# rng.permutation : copy
+# rng.permuted

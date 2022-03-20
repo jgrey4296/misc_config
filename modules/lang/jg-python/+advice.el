@@ -47,8 +47,8 @@ return (dir-of-venv env-name) or nil
   )
 
 
-(define-advice +eval-open-repl (:around (orig prompt-p &optional displayfn)
-                                +jg-python-repl-advice)
+(define-advice +python/open-repl (:around (orig)
+                                  +jg-python-env-activate-advice)
   " Auto-detect python repl and activate environment if necessary "
 
   ;; look for a venv
@@ -58,11 +58,20 @@ return (dir-of-venv env-name) or nil
             (env-name (cadr found-pyvenv)))
         (message "Activating then py: %s" found-pyvenv)
         (pyvenv-activate found-pyvenv)
-        (+python/open-repl))
+        (funcall orig)
+        )
     ;; start repl as normal
     (progn
-      (message "open repl normally: %s %s" prompt-p displayfn)
-      (funcall-interactively orig prompt-p displayfn)
+      (message "open python repl normally")
+      (funcall-interactively orig)
       )
     )
   )
+
+;; (define-advice +python/open-repl (:around (orig) +jg-open-python-repl-advice)
+;;   " Add python repl to +eval-repl-buffers so other repl functions recognise it "
+;;   (let ((new-buffer (funcall orig)))
+;;     (puthash (cons 'inferior-python-mode (doom-project-root)) new-buffer +eval-repl-buffers)
+;;     (puthash (cons 'python-mode (doom-project-root)) new-buffer +eval-repl-buffers)
+;;     )
+;;   )

@@ -2,6 +2,7 @@
 
 (load! "+funcs")
 (load! "+vars")
+(load! "+advice")
 
 (after! evil
   (load! "+bindings")

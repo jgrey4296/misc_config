@@ -107,3 +107,8 @@
        (:after helm-grep :map helm-grep-map
         [C-return] #'helm-grep-run-other-window-action))
       )
+
+(map! :map helm-map
+      :ni "TAB" #'helm-select-action
+
+      )

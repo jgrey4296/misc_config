@@ -36,7 +36,7 @@
   result
   )
 
-(define-advice +eval/send-region-to-repl (:filter-args (args) +jg-advice-send-repl-auto-line)
+(define-advice +jg-send-region-to-repl (:filter-args (args) +jg-advice-send-repl-auto-line)
   " Handle visual-mode variance for send-region-to-repl "
   (if (not (eq evil-state 'visual))
       (list (line-beginning-position) (line-end-position) (if (eq (length args) 3)  (last args) nil))

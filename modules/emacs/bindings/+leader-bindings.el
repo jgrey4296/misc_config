@@ -86,7 +86,7 @@
       :desc "Format buffer/region"                  "f"   #'+format/region-or-buffer
       :desc "List errors"                           "x"   #'flymake-show-diagnostics-buffer
       :desc "Recompile"                             "C"   #'recompile
-      :desc "Send to repl"                          "s"   #'+eval/send-region-to-repl
+      :desc "Send to repl"                          "s"   #'+jg-send-region-to-repl
       (:when (featurep! :checkers syntax)
        ;;:desc "Flycheck"                            "!"   flycheck-command-map
        :desc "List errors"                         "x"   #'flycheck-list-errors)
@@ -106,6 +106,10 @@
        :desc "LSP Rename"                          "r" #'eglot-rename
        :desc "LSP Find declaration"                "j" #'eglot-find-declaration)
       :desc "Macro Expand"                         "m" #'pp-macroexpand-last-sexp
+      (:prefix ("r" . "Repl")
+       :desc "Clear" "c" #'+jg-repl-clear
+
+       )
       )
   ;;; <leader> f --- file
 (map! :leader
@@ -444,6 +448,8 @@
       :desc "Jump to Register"     "j" #'jump-to-register
       :desc "List Registers"       "l" #'list-registers
       :desc "Killed Text"          "y" #'counsel-yank-pop
+      :desc "Send to Repl"         "r" #'+jg-repl-send-register-to_repl
+      :desc "Clear All"            "K" #'+jg-registers-clear-all
       )
   ;;; <leader> R --- remote
 (map! :leader

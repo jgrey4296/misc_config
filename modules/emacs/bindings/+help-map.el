@@ -19,17 +19,17 @@
 ;;
 ;;; Code:
 
-(map! :map help-map
-      "4" nil
-      "4" #'info-other-window
-      (:prefix "b"
-       "t" #'+jg-which-key-show-top-level)
-      (:prefix "d"
-       "r" (cmd! (info "(elisp) Syntax of Regexps"))
-       )
-      (:prefix ("d p" . "packages"))
-
-
-      )
+(defun +jg-help-map-adjust ()
+  (map! :map help-map
+        "4" nil
+        "4" #'info-other-window
+        (:prefix "b"
+         "t" #'+jg-which-key-show-top-level)
+        (:prefix "d"
+         :desc "Regexp Syntax" "r" (cmd! (info "(elisp) Syntax of Regexps"))
+         )
+        (:prefix ("d p" . "packages"))
+        )
+  )
 
 ;;; +help-map.el ends here

@@ -2,6 +2,8 @@
 
 (load! "+funcs")
 (load! "+vars")
+(load! "+help-map")
+(load! "+repl-commands")
 
 (after! ibuffer
   (load! "+ibuffer-bindings")
@@ -9,7 +11,6 @@
 (after! evil
   (load! "+leader-bindings")
   (load! "+misc-bindings")
-  (load! "+help-map")
   )
 (after! evil-ex
   (load! "+evil-ex-setup")
@@ -34,3 +35,4 @@
 
 (add-hook 'ibuffer-mode-hook #'+jg-ibuffer-update-hook)
 (add-hook 'doom-first-input-hook #'jg-evil-bind-hook -100)
+(add-hook 'doom-first-input-hook #'+jg-help-map-adjust)

@@ -3,6 +3,7 @@
 (load! "+funcs")
 (load! "+vars")
 (load! "+advice")
+(load! "+registers")
 
 (after! evil
   (load! "+bindings")

@@ -42,6 +42,8 @@ The Warmth of Other Suns by @Isabelwilkerson
 [[https://parl.ai/projects/light/][Parl.ai: NLP and dialogue]]
 [[https://sketchfab.com/][Sketchfab]]
 foone - Infocom game by Douglas Adams: Bureaucracy
+https://doc.rust-lang.org/book/title-page.html
+https://flowingdata.com/2015/12/15/a-day-in-the-life-of-americans/
 http://www.betsydisalvo.com/research.html
 https://anarchopac.wordpress.com/2013/05/31/recommended-reading/amp/
 https://catlikecoding.com/unity/tutorials/
@@ -80,6 +82,8 @@ https://wa.aws.amazon.com/wat.concept.coe.en.html
 https://applyingml.com/resources/personalization/
 https://applyingml.com/resources/ml-design-docs/
 https://applyingml.com/
+
+https://medium.com/fluxx-studio-notes/52-things-i-learned-in-2021-8481c4e0d409
 
 https://bpw1621.com/archive/ordained-the-python-project-template/
 history of automated phone lines?

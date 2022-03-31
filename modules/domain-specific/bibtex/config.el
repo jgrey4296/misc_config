@@ -7,6 +7,8 @@
 (load! "+helm")
 (load! "+tags")
 (load! "+hydra")
+(load! "+advice")
+(load! "+dired")
 (after! evil
   (load! "+motions")
   (load! "+bindings")

@@ -2,3 +2,4 @@
 
 export PATH
 export EDITOR
+export TEXMFCNF

@@ -122,7 +122,7 @@ the file, unless ALLOW-DUPLICATE-KEYS is non-nil."
   (let ((key (funcall org-ref-clean-bibtex-key-function
 		      (bibtex-generate-autokey))))
     ;; remove any \\ in the key
-    (setq key (replace-regexp-in-string "\\\\" "" key))
+    (setq key (replace-regexp-in-string "[ \\\\'{}]" "" key))
     ;; first we delete the existing key
     (bibtex-beginning-of-entry)
     (re-search-forward bibtex-entry-maybe-empty-head)
@@ -154,7 +154,7 @@ the file, unless ALLOW-DUPLICATE-KEYS is non-nil."
 
 (defun +jg-bibtex-insert-volume-to-key ()
   (bibtex-beginning-of-entry)
-  (let ((vol (bibtex-autokey-get-field "volume")))
+  (let ((vol (s-replace " " "_" (bibtex-autokey-get-field "volume"))))
     (if vol
         (progn
           (goto-char (- (line-end-position) 1))

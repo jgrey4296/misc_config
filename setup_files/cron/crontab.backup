@@ -16,7 +16,7 @@ PYTHONPATH=/Volumes/documents/github/py_bookmark_organiser/
 0 */6 * * * /usr/local/bin/mbsync -a
 
 # Regularly run tag grep
-0 */1 * * * conda activate bookmark; bkmk-tag-grep -l /Volumes/documents/twitterthreads/ -t ~/github/writing/resources/cron_reports/totals.tags -o ~/github/writing/resources/cron_reports/grep_tags.index
+# 0 */1 * * * conda activate bookmark; bkmk-tag-grep -l /Volumes/documents/twitterthreads/ -t ~/github/writing/resources/cron_reports/totals.tags -o ~/github/writing/resources/cron_reports/grep_tags.index
 
 ### WEEKLY:
 ## MON

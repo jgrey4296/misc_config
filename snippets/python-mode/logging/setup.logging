@@ -3,16 +3,28 @@
 # uuid: setup.logging
 # group: debugging
 # --
-# Setup root_logger:
+# Setup logging:
 from os.path import splitext, split
-import logging as root_logger
-LOGLEVEL = root_logger.DEBUG
-LOG_FILE_NAME = "log.{}".format(splitext(split(__file__)[1])[0])
-root_logger.basicConfig(filename=LOG_FILE_NAME, level=LOGLEVEL, filemode='w')
+from sys import stderr, stdout
+import logging as logmod
 
-console = root_logger.StreamHandler()
-console.setLevel(root_logger.INFO)
-root_logger.getLogger('').addHandler(console)
-logging = root_logger.getLogger(__name__)
+DISPLAY_LEVEL = logmod.DEBUG
+LOG_FILE_NAME = "log.{}".format(splitext(split(__file__)[1])[0])
+LOG_FORMAT    = "%(asctime)s | %(levelname)8s | %(message)s"
+FILE_MODE     = "w"
+STREAM_TARGET = stderr # or stdout
+
+logger          = logmod.getLogger(__name__)
+console_handler = logmod.StreamHandler(STREAM_TARGET)
+file_handler    = logmod.FileHandler(LOG_FILE_NAME, mode=FILE_MODE)
+
+console_handler.setLevel(DISPLAY_LEVEL)
+# console_handler.setFormatter(logmod.Formatter(LOG_FORMAT))
+file_handler.setLevel(logmod.DEBUG)
+# file_handler.setFormatter(logmod.Formatter(LOG_FORMAT))
+
+logger.addHandler(console_handler)
+logger.addHandler(file_handler)
+logging = logger
 ##############################
 $0

@@ -3,5 +3,5 @@
 # key: setup.loglib
 # group: debugging
 # --
-import logging as root_logger
-logging = root_logger.getLogger(__name__)
+import logging as logmod
+logging = logmod.getLogger(__name__)

@@ -1,0 +1,34 @@
+name: acab-dev
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - networkx
+  - jedi
+  - sympy
+  - build
+  - wheel
+  - mypy=0.931
+  - pyright
+  - pygments
+  - matplotlib
+  - sphinx
+  - readline
+  - sty
+  - sqlite
+  - pandas
+  - pyqtree
+  - pylint
+  - seaborn
+  - scipy
+  - isort
+  - pytest
+  - setuptools
+  - pycodestyle
+  - numpy
+  - beautifulsoup4
+  - rich
+  - regex
+  - pip
+  - python=3.10
+prefix: /opt/anaconda3/envs/acab-dev

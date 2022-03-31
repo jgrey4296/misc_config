@@ -2,6 +2,7 @@
 # name: plt.axis_title_control
 # uuid: plt.axis_title_control
 # --
+plt.rcParams.update({'figure.autolayout': True})
 # Axis and Title Control:
 plt.title("Test Plot")
 plt.grid(True)
@@ -21,3 +22,13 @@ plt.xticks(range_v, ["a", "b", "c", "d", "e", "f", "h", "i", "j", "k"])
 plt.ylabel("Y Axis")
 plt.yticks(range(10))
 plt.ylim([0, 5])
+
+# Change Label Rotation (good for dates)
+for tick in plt.xticks()[1]:
+    tick.set_rotation(55)
+
+# Add horizontal and vertical lines:
+plt.axhline(val)
+plt.axvline(val)
+# Annotations
+plt.annotate("Text", coords)

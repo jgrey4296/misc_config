@@ -3,26 +3,10 @@ channels:
   - defaults
   - conda-forge
 dependencies:
-  - scipy
-  - networkx
-  - pip
-  - sqlite
-  - sympy
-  - readline
-  - jedi
-  - seaborn
-  - pylint
   - build
-  - wheel
-  - numpy
-  - pyqtree
-  - pandas
-  - isort
-  - pycodestyle
-  - pyparsing
-  - setuptools
   - python=3.10
-  - regex
-  - matplotlib
-  - pytest
+  - pyparsing
+  - pip
+  - wheel
+  - setuptools
 prefix: /opt/anaconda3/envs/acab

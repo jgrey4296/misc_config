@@ -20,6 +20,7 @@ create_default_packages:
   - pyparsing
   - pyqtree
   - pyright
+  - rich
   - pytest
   - python=3.10
   - readline
@@ -29,5 +30,6 @@ create_default_packages:
   - setuptools
   - sphinx
   - sqlite
+  - sty
   - sympy
   - wheel

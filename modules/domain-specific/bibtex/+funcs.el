@@ -335,12 +335,24 @@ Log into jg-bibtex-rand-log.
 (defun +jg-bibtex-clean-entry ()
   " Calls org-ref-clean-bibtex-entry,
   but with a wrapping to override fill-column
+
+  On an error during cleaning, will move the entry to the bottom of the file
+  if jg-bibtex-clean-move-entry-on-fail is not nil
   "
   (interactive)
   (condition-case err
       (let ((fill-column jg-bibtex-fill-column))
-        (org-ref-clean-bibtex-entry)
-        )
+        (save-excursion
+          (save-restriction
+            (bibtex-narrow-to-entry)
+            (bibtex-beginning-of-entry)
+            (loop for hook in org-ref-clean-bibtex-entry-hook
+                  do
+                  (save-restriction
+                    (save-excursion
+                      (funcall hook)
+                      ))))))
+
     (error
      (if jg-bibtex-clean-move-entry-on-fail
          (let (entry)
@@ -438,10 +450,10 @@ Log into jg-bibtex-rand-log.
       (loop with count = 0
             for file in (-difference files mentioned)
             do
-            (insert "@Misc{stub_" (int-to-string count) ",\n"
-                    "  year = {2020},\n"
-                    "  title = {Unknown},\n"
-                    "  file = {"  file "}\n"
+            (insert (format "@Misc{stub_%s,\n" (int-to-string count))
+                    (format "  year = {%s},\n" (nth 2 (calendar-current-date)))
+                    (format "  title = {%s},\n" (f-no-ext (f-filename file)))
+                    (format "  file = {%s},\n"  file)
                     "}\n")
             (incf count)
             )

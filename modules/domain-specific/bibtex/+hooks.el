@@ -10,7 +10,7 @@
   (let* ((keys (mapcar #'car (bibtex-parse-entry)))
          (paths (-filter #'(lambda (x) (string-match jg-bibtex-remove-field-newlines-regexp x)) keys))
          (path-texts (mapcar #'bibtex-text-in-field paths))
-         (path-cleaned (mapcar #'(lambda (x) (replace-regexp-in-string "\n +" " " x)) path-texts))
+         (path-cleaned (mapcar #'(lambda (x) (replace-regexp-in-string "\n+" " " x)) path-texts))
          )
     ;; Then update:
     (mapc #'(lambda (x) (bibtex-set-field (car x) (cdr x))) (-zip paths path-cleaned))
@@ -26,6 +26,7 @@
       (bibtex-make-field "doi")
       (backward-char)
       (insert (replace-regexp-in-string "^http.*?\.org/" "" doi)))))
+
 (defun +jg-bibtex-align-hook ()
   (let (start end)
     (bibtex-beginning-of-entry)
@@ -38,6 +39,15 @@
     (align-regexp start end "\\(.+?=\\)\\(\s+?\\)[{0-9\"]" 2 1 nil)
     )
 )
+
+(defun +jg-bibtex-indent-hook ()
+  (bibtex-beginning-of-entry)
+  (while (re-search-forward "^.+?= {" nil t)
+    (backward-char 3)
+    (indent-to-column jg-bibtex-indent-equals-column)
+
+    )
+  )
 
 (defun +jg-bibtex--get-file-entries (pair)
   (if (string-match "file" (car pair))
@@ -101,8 +111,6 @@
 (defun +jg-bibtex-smart-replace-nonascii-hook ()
   "Hook function to replace non-ascii characters in a bibtex entry."
   (interactive)
-  (save-restriction
-    (bibtex-narrow-to-entry)
     (goto-char (point-min))
     (dolist (char (mapcar (lambda (x)
 			    (car x))
@@ -113,7 +121,7 @@
           (goto-char (line-end-position))
           )
         )
-      (goto-char (point-min)))))
+      (goto-char (point-min))))
 
 (defun +jg-bibtex-orcb-key-hook (&optional allow-duplicate-keys)
   "Replace the key in the entry.
@@ -155,11 +163,20 @@ the file, unless ALLOW-DUPLICATE-KEYS is non-nil."
 (defun +jg-bibtex-insert-volume-to-key ()
   (bibtex-beginning-of-entry)
   (let ((vol (s-replace " " "_" (bibtex-autokey-get-field "volume"))))
-    (if vol
+    (if (not (s-equals? vol ""))
         (progn
           (goto-char (- (line-end-position) 1))
           (insert (format "_%s" vol))
         )
       )
     )
+  )
+
+
+(defun +jg-bibtex-font-lock-mod-hook ()
+  (pushnew!
+   bibtex-font-lock-keywords
+   '(" title.+$" (0 '(:background "mediumpurple4")))
+   '("\\(file\\).+?=" (1 '(:background "darkgoldenrod")))
+   )
   )

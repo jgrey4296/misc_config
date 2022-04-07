@@ -6,7 +6,7 @@
 # --
 import timeit
 import time
-
+# see https://docs.python.org/3/library/timeit.html
 def autorange_cb(number, took):
     logging.info("Number: {:>3}, Took: {:8.2} seconds", number, time)
 

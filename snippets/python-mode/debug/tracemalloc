@@ -6,7 +6,7 @@
 # --
 import tracemalloc
 import linecache
-
+# see https://docs.python.org/3/library/tracemalloc.html
 human = lambda num, sign=False: tracemalloc._format_size(num, sign)
 
 def print_stat(stat):

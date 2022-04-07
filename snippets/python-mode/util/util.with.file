@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: util.with.file
-# uuid: util.with.file
-# group: I/O
-# --
-with open("$1","$2") as f:
-    data = f.read()
-$0

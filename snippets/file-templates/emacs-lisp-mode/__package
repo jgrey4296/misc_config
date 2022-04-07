@@ -7,7 +7,7 @@
 ;; Created: `(format-time-string "%B %d, %Y")`
 ;; Modified: `(format-time-string "%B %d, %Y")`
 ;; Version: 0.0.1
-;; Keywords: `(mapconcat #'symbol-name (mapcar #'car finder-known-keywords) " ")`
+;; Keywords:
 ;; Homepage: https://github.com/`(cl-find-if-not #'string-empty-p (list (cdr (doom-call-process "git" "config" "user.github")) user-login-name))`
 ;; Package-Requires: ((emacs "24.3"))
 ;; Package written on: ((emacs `emacs-version`))

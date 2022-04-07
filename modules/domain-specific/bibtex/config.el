@@ -16,7 +16,12 @@
 
 (use-package! bibtex
   :init
-  (add-hook! 'bibtex-mode-hook #'+jg-bibtex-tag-setup-hook #'yas-minor-mode #'org-ref-version #'+jg-bibtex-font-lock-mod-hook)
+  (add-hook! 'bibtex-mode-hook
+             #'+jg-bibtex-tag-setup-hook
+             #'yas-minor-mode
+             #'org-ref-version
+             #'+jg-bibtex-font-lock-mod-hook
+             #'+jg-toggle-line-numbers)
   )
 (use-package! helm-bibtex
   :commands (bibtex-completion-init)

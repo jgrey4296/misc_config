@@ -10,7 +10,7 @@
   (let* ((keys (mapcar #'car (bibtex-parse-entry)))
          (paths (-filter #'(lambda (x) (string-match jg-bibtex-remove-field-newlines-regexp x)) keys))
          (path-texts (mapcar #'bibtex-text-in-field paths))
-         (path-cleaned (mapcar #'(lambda (x) (replace-regexp-in-string "\n+" " " x)) path-texts))
+         (path-cleaned (mapcar #'(lambda (x) (replace-regexp-in-string "\n+ *" " " x)) path-texts))
          )
     ;; Then update:
     (mapc #'(lambda (x) (bibtex-set-field (car x) (cdr x))) (-zip paths path-cleaned))
@@ -33,6 +33,7 @@
     (setq start (line-beginning-position 2))
     (bibtex-end-of-entry)
     (setq end (line-end-position 0))
+    (align-regexp start end "\\(\s+?\\)[a-z]" 1 1 nil)
     (align-regexp start end "\\(\s+?\\)=" 1 1 nil)
     (bibtex-end-of-entry)
     (setq end (line-end-position 0))

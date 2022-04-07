@@ -93,17 +93,18 @@
       (:when (and (featurep! :tools lsp) (not (featurep! :tools lsp +eglot)))
        :desc "LSP Code actions"                      "a"   #'lsp-execute-code-action
        :desc "LSP Organize imports"                  "o"   #'lsp-organize-imports
-       :desc "LSP Rename"                            "r"   #'lsp-rename
-       :desc "LSP"                                   "l"   #'+default/lsp-command-map
+       :desc "LSP Rename"                            "R"   #'lsp-rename
+       (:after lsp-mode
+         :desc "LSP"                                   "l"   lsp-command-map)
        (:when (featurep! :completion ivy)
         :desc "Jump to symbol in current workspace" "j"   #'lsp-ivy-workspace-symbol
-        :desc "Jump to symbol in any workspace"     "J"   #'lsp-ivy-global-workspace-symbol)
-       (:when (featurep! :completion helm)
-        :desc "Jump to symbol in current workspace" "j"   #'helm-lsp-workspace-symbol
-        :desc "Jump to symbol in any workspace"     "J"   #'helm-lsp-global-workspace-symbol))
+        :desc "Jump to symbol in any workspace"     "J"   #'lsp-ivy-global-workspace-symbol))
+       ;; (:when (featurep! :completion helm)
+       ;;  :desc "Jump to symbol in current workspace" "j"   #'helm-lsp-workspace-symbol
+       ;;  :desc "Jump to symbol in any workspace"     "J"   #'helm-lsp-global-workspace-symbol))
       (:when (featurep! :tools lsp +eglot)
        :desc "LSP Execute code action"             "a" #'eglot-code-actions
-       :desc "LSP Rename"                          "r" #'eglot-rename
+       :desc "LSP Rename"                          "R" #'eglot-rename
        :desc "LSP Find declaration"                "j" #'eglot-find-declaration)
       :desc "Macro Expand"                         "m" #'pp-macroexpand-last-sexp
       (:prefix ("r" . "Repl")
@@ -606,8 +607,8 @@
   ;;; <leader> y --- snippets
 (map! :leader
       :prefix ("y" . "snippets")
-      :desc "Expand Snippet"        "y" #'yas-expand
-      :desc "New snippet"           "n" #'yas-new-snippet
+      :desc "Expand Snippet"        "y" #'yas-expand-from-trigger-key
+      :desc "New snippet"           "n" #'+jg-new-snippet
       :desc "Edit Snippet"          "N" #'yas-visit-snippet-file
       :desc "Insert snippet"        "i" #'yas-insert-snippet
       :desc "Find global snippet"   "/" #'yas-visit-snippet-file

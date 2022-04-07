@@ -73,6 +73,20 @@
        "C-p" #'+popup/other)
       )
 
+;; LSP
+(map! :after lsp-mode
+      :map lsp-command-map
+      (:prefix ("w" . "Workspaces"))
+      (:prefix ("=" . "Formatting"))
+      (:prefix ("F" . "Folders"))
+      (:prefix ("T" . "Toggles"))
+      (:prefix ("g" . "Goto"))
+      (:prefix ("h" . "Help"))
+      (:prefix ("r" . "Refactoring"))
+      (:prefix ("a" . "Actions"))
+      (:prefix ("G" . "Peek"))
+      )
+
 
 ;; Mouse Deactivation
 (define-key evil-motion-state-map [down-mouse-1] #'ignore)

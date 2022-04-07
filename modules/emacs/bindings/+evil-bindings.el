@@ -81,7 +81,7 @@
       )
 ;; Insert state
 (map! :map jg-binding-insert-state-map
-      "TAB" #'company-complete
+      "TAB" #'+jg-completion-complete-or-snippet
 
       )
 ;; Visual state

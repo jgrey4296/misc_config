@@ -69,46 +69,28 @@
         "C-SPC"    #'ivy-call-and-recenter ; preview
         "C-l"      #'ivy-done
         [C-return] #'+ivy/git-grep-other-window-action))
-
-      (:when (featurep! :completion helm)
-       (:after helm :map helm-map
-        [remap next-line]     #'helm-next-line
-        [remap previous-line] #'helm-previous-line
-        [left]     #'left-char
-        [right]    #'right-char
-        "C-S-f"    #'helm-previous-page
-        "C-S-n"    #'helm-next-source
-        "C-S-p"    #'helm-previous-source
-        (:when (featurep! :editor evil +everywhere)
-         "C-j"    #'helm-next-line
-         "C-k"    #'helm-previous-line
-         "C-S-j"  #'helm-next-source
-         "C-S-k"  #'helm-previous-source)
-        "C-u"      #'helm-delete-minibuffer-contents
-        "C-s"      #'helm-minibuffer-history
-        ;; Swap TAB and C-z
-        "TAB"      #'helm-execute-persistent-action
-        [tab]      #'helm-execute-persistent-action
-        "C-z"      #'helm-select-action)
-       (:after helm-ag :map helm-ag-map
-        "C--"      #'+helm-do-ag-decrease-context
-        "C-="      #'+helm-do-ag-increase-context
-        [left]     nil
-        [right]    nil)
-       (:after helm-files :map (helm-find-files-map helm-read-file-map)
-        [C-return] #'helm-ff-run-switch-other-window
-        "C-w"      #'helm-find-files-up-one-level)
-       (:after helm-locate :map helm-generic-files-map
-        [C-return] #'helm-ff-run-switch-other-window)
-       (:after helm-buffers :map helm-buffer-map
-        [C-return] #'helm-buffer-switch-other-window)
-       (:after helm-occur :map helm-occur-map
-        [C-return] #'helm-occur-run-goto-line-ow)
-       (:after helm-grep :map helm-grep-map
-        [C-return] #'helm-grep-run-other-window-action))
       )
 
-(map! :map helm-map
-      :ni "TAB" #'helm-select-action
-
-      )
+(map! :after helm
+      :map helm-map
+      [remap next-line]     #'helm-next-line
+      [remap previous-line] #'helm-previous-line
+      [left]                #'left-char
+      [right]               #'right-char
+      "C-S-f"               #'helm-previous-page
+      "C-S-n"               #'helm-next-source
+      "C-S-p"               #'helm-previous-source
+      (:when (featurep! :editor evil +everywhere)
+       "C-j"                #'helm-next-line
+       "C-k"                #'helm-previous-line
+       "C-S-j"              #'helm-next-source
+       "C-S-k"              #'helm-previous-source)
+      "C-u"                 #'helm-delete-minibuffer-contents
+      "C-s"                 #'helm-minibuffer-history
+      ;; Swap TAB and C-z
+      :ni "TAB"             #'helm-select-action
+      "<tab>"               #'helm-select-action
+      "TAB"                 #'helm-select-action
+      [tab]                 #'helm-select-action
+      "C-z"                 #'helm-execute-persistent-action
+        )

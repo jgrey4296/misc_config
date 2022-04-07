@@ -130,7 +130,7 @@
         (if (consp candidate)
             ;; Already computed do nothing (default as input).
             candidate
-          (let* ((line   (helm--ansi-color-apply candidate))
+          (let* ((line   (ansi-color-apply candidate))
                  (split  (helm-grep-split-line line))
                  ;; Normalize Size of this:
                  (lineno (nth 1 split))
@@ -174,7 +174,7 @@
         (if (consp candidate)
             ;; Already computed do nothing (default as input).
             candidate
-          (let* ((line   (helm--ansi-color-apply candidate))
+          (let* ((line   (ansi-color-apply candidate))
                  (split  (helm-grep-split-line line))
                  ;; Normalize Size of this:
                  (lineno (nth 1 split))

@@ -20,3 +20,35 @@ Modified to pre-sort bookmarks, caselessly
                             (t
                              (bookmark-set x))))
             :caller 'counsel-bookmark))
+
+
+(defun +jg-completion-complete-or-snippet (&optional arg)
+  (interactive "p")
+  (if (not (yas-expand-from-trigger-key))
+    (progn
+      (message "Company")
+      (company-complete-common-or-cycle)
+      )
+    )
+  )
+
+(defun +jg-new-snippet()
+  "Create a new snippet in `+snippets-dir'."
+  (interactive)
+  (let ((default-directory
+          (expand-file-name (symbol-name major-mode)
+                            +snippets-dir)))
+    (+jg-snippet--ensure-dir default-directory)
+    (with-current-buffer (switch-to-buffer "untitled-snippet")
+      (snippet-mode)
+      (erase-buffer)
+      (+file-templates--expand t :mode 'snippet-mode)
+      (when (bound-and-true-p evil-local-mode)
+        (evil-insert-state)))))
+
+
+(defun +jg-snippet--ensure-dir (dir)
+  (unless (file-directory-p dir)
+    (if (y-or-n-p (format "%S doesn't exist. Create it?" (abbreviate-file-name dir)))
+        (make-directory dir t)
+      (error "%S doesn't exist" (abbreviate-file-name dir)))))

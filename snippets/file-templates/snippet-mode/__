@@ -3,5 +3,7 @@
 # -*- mode: snippet -*-
 # name: $1
 # uuid: $1
+# key:  $1
+# group :
 # --
 $0

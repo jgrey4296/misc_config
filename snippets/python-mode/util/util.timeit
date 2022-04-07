@@ -1,6 +1,8 @@
 # -*- mode: snippet -*-
 # name: util.timeit
 # uuid: util.timeit
+# key: util.timeit
+# mode: python-mode
 # --
 import timeit
 

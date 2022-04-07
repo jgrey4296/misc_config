@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: pyparse.log
+# uuid: pyparse.log
+# key:  pyparse.log
+# group :
+# --
+except pp.ParseException as err:
+    import traceback
+    traceback.print_tb(err.__traceback__)
+    logging.warning(f"Parse Failure: {err.markInputline()}")

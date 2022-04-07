@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: qq
+# key: qq
+# uuid: qq
+# binding: TAB
+# --
+quit()

@@ -28,8 +28,8 @@
 
 (use-package! helm-gtags :defer t)
 
-(defun jg-load-templates-hook ()
+(defun jg-completion-on-load-hook ()
   (load! "+file-templates")
-  (add-function :override (symbol-function '+snippet--completing-read-uuid) #'+jg-snippet--completing-read-uuid)
+  (advice-add '+snippet--completing-read-uuid :override #'+jg-snippet--completing-read-uuid)
   )
-(add-hook 'doom-first-input-hook #'jg-load-templates-hook)
+(add-hook 'doom-first-input-hook #'jg-completion-on-load-hook)

@@ -11,3 +11,4 @@
 (unpin! python-pytest)
 (unpin! pyimport)
 (unpin! py-isort)
+(unpin! yasnippet)

@@ -10,6 +10,8 @@ alias cd="mycd $1"
 alias cdc="mycdc $1"
 alias cda="mycda $1"
 
+alias pse="ps -A | grep emacs"
+
 function mycd(){
     builtin cd "$@" && ls
 }

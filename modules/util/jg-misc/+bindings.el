@@ -47,3 +47,8 @@
        )
 
       )
+
+(map! :map rst-mode-map
+      :localleader
+      :desc "Reference" "1" (cmd! (+jg-browse-url "https://restructuredtext.documatt.com/element/rubric.html"))
+      )

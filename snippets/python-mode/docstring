@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: docstring
+# uuid: docstring
+# key:  docstring
+# group :
+# --
+"""
+$1
+
+Arguments:
+    $2
+
+Returns:
+    $3
+
+"""$0

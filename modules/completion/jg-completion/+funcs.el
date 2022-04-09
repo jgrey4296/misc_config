@@ -52,3 +52,11 @@ Modified to pre-sort bookmarks, caselessly
     (if (y-or-n-p (format "%S doesn't exist. Create it?" (abbreviate-file-name dir)))
         (make-directory dir t)
       (error "%S doesn't exist" (abbreviate-file-name dir)))))
+
+
+(define-advice yas--read-table (:override ()
+                                +jg-snippet-read-table)
+  (let ((tables (hash-table-keys yas--tables)))
+    (intern-soft (ivy-read "Snippet Table: " tables))
+    )
+  )

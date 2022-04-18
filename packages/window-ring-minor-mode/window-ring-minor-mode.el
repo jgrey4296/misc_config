@@ -25,7 +25,8 @@
 (defun window-ring-add-to-head (&optional buffer)
   (interactive)
   (if buffer
-      (ring-insert+extend window-ring buffer t)
+      (progn (message "Adding %s to %s" buffer (ring-elements window-ring))
+             (ring-insert+extend window-ring buffer t))
     (let* ((display-buffer-alist '(("^" display-buffer-no-window)))
            (file (counsel--find-file-1 "Add File to Ring: " nil nil 'window-ring-add-to-head))
            (found-buffer (find-file file))
@@ -38,6 +39,8 @@
             (window-ring-allow-duplicates
              (ring-insert+extend window-ring (buffer-name (make-indirect-buffer buff-name (generate-new-buffer-name buff-name) t))
                                  window-ring-can-grow))
+            (t
+             (message "Buffer %s already in window ring: %s" buff-name (ring-elements window-ring)))
             )
       ;; Set buffer-local background
       (with-current-buffer buff-name
@@ -53,11 +56,13 @@
   )
 (defun window-ring-add-to-tail (buffer)
   (interactive "b")
-  (ring-insert-at-beginning window-ring buffer)
+  (message "Adding %s to %s" buffer (ring-elements window-ring))
+  (ring-insert-at-beginning window-ring (get-buffer buffer))
   )
 
 (defun window-ring-clear-ring ()
   (interactive)
+  (message "Clearing Window Ring")
   (setq window-ring (make-ring window-ring-size)
         window-ring-background-index 0
         )
@@ -95,7 +100,6 @@
                        (window-ring-redisplay)))))
     )
 )
-
 (defun window-ring-replace-buffer(&optional buff-name)
   " Replace the current central window's buffer with the current buffer "
   (interactive)
@@ -249,6 +253,24 @@
     )
   )
 
+(defun window-ring-edit-order ()
+  (interactive)
+  (let ((new-window (split-window (selected-window) nil 'below))
+        (elements (ring-elements window-ring)))
+    (set-window-buffer new-window (get-buffer-create "*window-ring-edit*"))
+    (select-window new-window)
+    (message "Elements: %s" elements)
+    (with-current-buffer "*window-ring-edit*"
+      (auto-save-mode -1)
+      (set-window-text-height (selected-window) 10)
+      (set (make-local-variable 'backup-inhibited) t)
+      (window-ring-edit-minor-mode)
+      (erase-buffer)
+      (mapc (lambda (x) (insert (format "%s\n" x))) elements)
+      )
+    (redraw-display)
+    )
+  )
 
 (define-minor-mode window-ring-minor-mode
   "A Minor Mode for easy control of a 3-ple view of a ring of buffers"
@@ -267,6 +289,30 @@
               )
   (get-buffer-create window-ring-nil-buffer-name)
   (add-hook 'kill-buffer-hook #'window-ring-remove-buffer)
+  )
+
+(defun window-ring-edit-commit ()
+  (interactive)
+  (let ((order (s-split "\n" (buffer-substring-no-properties (point-min) (point-max)) t)))
+    (setq window-ring (make-ring window-ring-size)
+          window-ring-background-index 0
+          )
+    (mapc #'window-ring-add-to-head order)
+    (kill-buffer-and-window)
+    )
+  )
+
+(setq window-ring-edit-map (make-sparse-keymap))
+(evil-define-key '(normal insert) window-ring-edit-map (kbd "C-c C-c") #'window-ring-edit-commit)
+
+(map! :map window-ring-edit-map
+      "C-c C-c" #'window-ring-edit-commit)
+
+
+(define-minor-mode window-ring-edit-minor-mode
+  " A Minor mode to commit changes to the order of window ring buffers "
+  :lighter "Window-Ring-Edit"
+  :keymap window-ring-edit-map
   )
 
 (provide 'window-ring-minor-mode)

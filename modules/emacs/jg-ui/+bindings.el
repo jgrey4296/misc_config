@@ -7,7 +7,7 @@
       (:prefix ("w r" . "Ring")
        :desc "Pop Buffer (Alt: Pop to here)"  "c" #'window-ring-pop-buffer
        :desc "Clear Ring"                     "C" #'window-ring-clear-ring
-
+       :desc "Edit Ring"                      "e" #'window-ring-edit-order
        :desc "Ring Right"                     "l" #'window-ring-move-perspective
        :desc "Ring Left"                      "h" #'window-ring-move-perspective-2
        :desc "Most Recent"                    "L" #'window-ring-goto-most-recent

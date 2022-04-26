@@ -111,7 +111,7 @@
   (let ((loc (if (eq major-mode 'dired-mode)
                  (dired-current-directory)
                (f-parent (buffer-file-name)))))
-    (list (s-replace "\$" (format "dir=\"%s\"" loc) (car val)))
+    (list (s-replace "\$" (format "TEST_TARGET=\"%s\"" loc) (car val)))
     )
   )
 

@@ -25,6 +25,8 @@
                                                      )
                                               )
               jg-misc-project-cmd-cache-name ".projectile-cmds"
+
+              global-hl-line-modes '(bibtex-mode prog-mode text-mode conf-mode special-mode org-agenda-mode comint-mode)
               )
 
 (setq +ligatures-extra-symbols

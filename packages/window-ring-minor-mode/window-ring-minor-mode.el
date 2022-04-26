@@ -152,6 +152,7 @@
 
 (defun window-ring-redisplay ()
   (interactive)
+  (get-buffer-create window-ring-nil-buffer-name)
   (if (eq (length window-ring-windows)
           (length (-remove 'not (mapcar 'window-valid-p window-ring-windows))))
       (window-ring-redisplay-unguarded)
@@ -285,7 +286,7 @@
                 window-ring nil
                 window-ring-nil-buffer-name "*Window-Ring Buffer*"
                 window-ring-background-index 0
-                window-ring-background-color-options '("gray19" "lemonchiffon4")
+                window-ring-background-color-options '("gray19" "gray12" "gray4")
               )
   (get-buffer-create window-ring-nil-buffer-name)
   (add-hook 'kill-buffer-hook #'window-ring-remove-buffer)

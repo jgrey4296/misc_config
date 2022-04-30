@@ -34,12 +34,15 @@ Used to guard inputs in tag strings"
     )
   )
 
-(defun +jg-text-split-on-leading-char (char-no dist)
-  (interactive "nChar Index: \nnDistance: \n")
+(defun +jg-text-split-on-leading-char (char-no width dist)
+  " Loop through the buffer, splitting lines if the substring has a greater levenstein distance from the previous line "
+  (interactive "nChar Index: \nnWidth: \nnDistance: \n")
   (message "Char: %s, Dist: %s" char-no dist)
   (goto-char (point-min))
-  (let ((get-line (lambda () (downcase (buffer-substring-no-properties (line-beginning-position)
-                                                        (min (point-max) (+ (line-beginning-position) char-no))))))
+  (let ((get-line (lambda () (let ((line (s-trim (buffer-substring-no-properties (line-beginning-position) (line-end-position)))))
+                               (if (string-empty-p line)
+                                   ""
+                                 (substring line char-no (+ char-no width))))))
         last-line curr-line)
     (while (< (point) (point-max))
       (setq last-line (funcall get-line))

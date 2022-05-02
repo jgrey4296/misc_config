@@ -11,6 +11,7 @@
               flycheck--automatically-disabled-checkers '(python-compile)
               python-pdbtrack-activate nil
               py-pdbtrack-do-tracking-p nil
+              python-shell-completion-native-disabled-interpreters '("pypy")
               )
 
 (setq jg-python-docs-url           "https://docs.python.org/3/"

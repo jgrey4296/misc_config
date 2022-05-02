@@ -176,7 +176,7 @@ governed by the variable `bibtex-completion-display-formats'."
         )
 
     (helm :sources `(,jg-bibtex-helm-source-bibtex)
-          :full-frame helm-bibtex-full-frame
+          :full-frame nil
           :buffer "*helm bibtex*"
           :input input
           :bibtex-local-bib local-bib
@@ -210,6 +210,7 @@ using org-bibtex-fields for completion options "
       (setq new-values (if source
                           (helm :sources (list source dummy-source)
                                 :buffer "*helm bibtex completions*"
+                                :full-frame nil
                                 :input curr-value
                                 )
                           (read-string (format "(%s) New Value: " chosen))))

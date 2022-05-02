@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: future.annotations
+# uuid: future.annotations
+# key:  future.annotations
+# group :
+# --
+from __future__ import annotations

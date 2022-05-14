@@ -41,6 +41,7 @@ The Warmth of Other Suns by @Isabelwilkerson
 [[https://en.wikipedia.org/wiki/Summa_Theologica][Summa Theologica]]
 [[https://parl.ai/projects/light/][Parl.ai: NLP and dialogue]]
 [[https://sketchfab.com/][Sketchfab]]
+https://ganelson.github.io/inform/index.html
 foone - Infocom game by Douglas Adams: Bureaucracy
 https://doc.rust-lang.org/book/title-page.html
 https://flowingdata.com/2015/12/15/a-day-in-the-life-of-americans/

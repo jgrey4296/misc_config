@@ -53,4 +53,4 @@
   )
 
 (setq company-idle-delay 1)
-(setq avy-all-windows t)
+(setq-default avy-all-windows t)

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: test.fail
+# key: test.fail
+# --
+self.assertTrue(False)

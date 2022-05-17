@@ -1,3 +1,4 @@
+from __future__ import annotations
 import logging as logmod
 from os.path import split, splitext
 from typing import (Any, Callable, ClassVar, Generic, Iterable, Iterator,
@@ -5,6 +6,11 @@ from typing import (Any, Callable, ClassVar, Generic, Iterable, Iterator,
                     TypeVar, cast)
 import unittest
 from unittest import mock
+import warnings
+
+with warnings.catch_warnings():
+    warnings.simplefilter("ignore")
+    pass
 
 class Test(unittest.TestCase):
     @classmethod

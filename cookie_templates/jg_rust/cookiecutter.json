@@ -1,0 +1,10 @@
+{
+    "proj_name"   : "jg_rust_template_project",
+    "env"         : "default",
+    "desc"        : "A Template Rust Project",
+    "tags"        : "rust",
+    "entry_point" : "./src/main.rs",
+    "_copy_without_render": [
+        "docs/_templates/*/*.rst"
+    ]
+}

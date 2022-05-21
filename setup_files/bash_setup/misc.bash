@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+alias browse="python -mwebbrowser"
+
 alias lsa="ls -lha"
 alias lsd="gls -la --group-directories-first"
 alias lsda="ls -la | grep '^d'"

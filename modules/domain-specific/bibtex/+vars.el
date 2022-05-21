@@ -51,5 +51,5 @@
   )
 
 (after! org
-  (push '("\\.epub" . "ebook-viewer %s") org-file-apps)
+  (push '("\\.epub" . "open -a ebook-viewer %s") org-file-apps)
   )

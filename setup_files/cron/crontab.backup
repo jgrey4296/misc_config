@@ -4,13 +4,13 @@ PYTHONPATH=/Volumes/documents/github/py_bookmark_organiser/
 
 ### DAILY:
 # Speak the time every 2 hours
-0 */2 * * * /Volumes/documents/github/emacs_files/setup_files/cron/time_announce.py
+0 */2 * * * conda activate bookmark; bkmk-bot-time
 
 # Regularly Tweet an entry from my bibtex
-7,42 */1 * * * /Volumes/documents/github/emacs_files/setup_files/cron/auto_bibtex_tweet.py
+7,42 */1 * * * conda activate bookmark; bkmk-bot-bibtex
 
 # Regularly tweet an image from the whitelist
-25,52 */1 * * * /Volumes/documents/github/emacs_files/setup_files/cron/auto_image_tweet.py
+25,52 */1 * * * conda activate bookmark; bkmk-bot-image
 
 # Update mail every 6 hours
 0 */6 * * * /usr/local/bin/mbsync -a

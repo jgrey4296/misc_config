@@ -30,63 +30,70 @@ Versu, Abl, Cif
 *** [[file:/Volumes/documents/github/otherLibs/data][538 Data]]
 *** [[file:/Volumes/documents/github/writing/resources/research_questions.org][Research Questions]]
 
-** To Check out
+** Reminders
+*** Urls
+[[http://waveform3d.com/][Waveform3d]]
+[[https://en.wikipedia.org/wiki/Summa_Theologica][Summa Theologica]]
+[[https://parl.ai/projects/light/][Parl.ai: NLP and dialogue]]
+[[https://sketchfab.com/][Sketchfab]]
+http://www.betsydisalvo.com/research.html
+https://anarchopac.wordpress.com/2013/05/31/recommended-reading/amp/
+https://andrebrock.academia.edu/
+https://applyingml.com/
+https://applyingml.com/resources/ml-design-docs/
+https://applyingml.com/resources/personalization/
+https://bpw1621.com/archive/ordained-the-python-project-template/
+https://catlikecoding.com/unity/tutorials/
+https://dev.to/matechs/building-custom-dsls-in-typescript-29el
+https://developer.valvesoftware.com/wiki/Response_System
+https://doc.rust-lang.org/book/title-page.html
+https://economicsfromthetopdown.com/2020/12/10/why-and-how-i-write-scientific-documents-in-plain-text/
+https://egap.org/resource/10-things-to-know-about-causal-inference/
+https://eu4.paradoxwikis.com/Technology
+https://floppy.foone.org/w/Main_Page
+https://flowingdata.com/2015/12/15/a-day-in-the-life-of-americans/
+https://ganelson.github.io/inform/index.html
+https://generativist.falsifiable.com/
+https://github.com/company-mode/company-mode/wiki/Writing-backends
+https://github.com/fgregg/tax_extension/tree/master#code-for-calculation-tax-extensions-in-cook-county
+https://graphics.stanford.edu/courses/cs348c-96-fall/resources.html
+https://graphviz.org/theory/
+https://logicmag.io/play/model-metropolis/
+https://medium.com/fluxx-studio-notes/52-things-i-learned-in-2021-8481c4e0d409
+https://patthomson.net/2017/01/23/managing-the-phd-keeping-a-journal/
+https://pluralistic.net/
+https://pybit.es/articles/ast-intro/
+https://q.uiver.app/
+https://refactoring.guru/
+https://stackabuse.com/creating-pdf-invoices-in-python-with-borb/
+https://strongtyping.readthedocs.io/en/latest/
+https://tenthousandmeters.com/blog/python-behind-the-scenes-11-how-the-python-import-system-works/
+https://torch.ox.ac.uk/ethicsai#/
+https://transmediawatch.org/articles
+https://twitter.com/WitchesFor/lists
+https://wa.aws.amazon.com/wat.concept.coe.en.html
+https://web.mit.edu/jemorris/humor/500-miles
+https://www.alanzucconi.com/tutorials/
+https://www.andrewheiss.com/blog/2021/08/21/r2-euler/
+https://www.cc.gatech.edu/~isbell/pubs/
+https://www.census.gov/quickfacts/fact/table/US/PST045219
+https://www.micromacro-game.com/en/extracontent.html
+https://www.nomisweb.co.uk/
+https://www.sciencedirect.com/journal/artificial-intelligence/issues
+https://www.taylorfrancis.com/books/edit/10.4324/9781315302430/organizational-space-beyond-sytze-kingma-karen-dale-varda-wasserman
+https://www.uu.nl/en/research/game-research/research/publications
+https://www.wzchen.com/data-science-books
+https://www.youtube.com/watch?v=SfFh3rIjDME
+https://www.youtube.com/watch?v=wfzSE4Hoxbc
+*** Other
 Killing the Black Body or Fatal Invention by @DorothyERoberts
 Medical Apartheid by @haw95
 Racecraft by Barbara and Karen Fields
 Sister Citizen by @MHarrisPerry
 The Pushout by @MoniqueWMorris
 The Warmth of Other Suns by @Isabelwilkerson
-[[http://waveform3d.com/][Waveform3d]]
-[[https://en.wikipedia.org/wiki/Summa_Theologica][Summa Theologica]]
-[[https://parl.ai/projects/light/][Parl.ai: NLP and dialogue]]
-[[https://sketchfab.com/][Sketchfab]]
-https://ganelson.github.io/inform/index.html
 foone - Infocom game by Douglas Adams: Bureaucracy
-https://doc.rust-lang.org/book/title-page.html
-https://flowingdata.com/2015/12/15/a-day-in-the-life-of-americans/
-http://www.betsydisalvo.com/research.html
-https://anarchopac.wordpress.com/2013/05/31/recommended-reading/amp/
-https://catlikecoding.com/unity/tutorials/
-https://dev.to/matechs/building-custom-dsls-in-typescript-29el
-https://egap.org/resource/10-things-to-know-about-causal-inference/
-https://eu4.paradoxwikis.com/Technology
-https://floppy.foone.org/w/Main_Page
-https://graphics.stanford.edu/courses/cs348c-96-fall/resources.html
-https://graphviz.org/theory/
-https://logicmag.io/play/model-metropolis/
-https://patthomson.net/2017/01/23/managing-the-phd-keeping-a-journal/
-https://pluralistic.net/
-https://q.uiver.app/
-https://stackabuse.com/creating-pdf-invoices-in-python-with-borb/
-https://strongtyping.readthedocs.io/en/latest/
-https://torch.ox.ac.uk/ethicsai#/
-https://twitter.com/WitchesFor/lists
-https://www.alanzucconi.com/tutorials/
-https://www.andrewheiss.com/blog/2021/08/21/r2-euler/
-https://www.cc.gatech.edu/~isbell/pubs/
-https://www.census.gov/quickfacts/fact/table/US/PST045219
-https://www.nomisweb.co.uk/
-https://www.uu.nl/en/research/game-research/research/publications
-https://www.wzchen.com/data-science-books
-https://www.sciencedirect.com/journal/artificial-intelligence/issues
-https://www.taylorfrancis.com/books/edit/10.4324/9781315302430/organizational-space-beyond-sytze-kingma-karen-dale-varda-wasserman
-** Reminders
-https://developer.valvesoftware.com/wiki/Response_System
-https://www.micromacro-game.com/en/extracontent.html
-https://economicsfromthetopdown.com/2020/12/10/why-and-how-i-write-scientific-documents-in-plain-text/
-https://www.youtube.com/watch?v=wfzSE4Hoxbc
-https://www.youtube.com/watch?v=SfFh3rIjDME
-https://github.com/fgregg/tax_extension/tree/master#code-for-calculation-tax-extensions-in-cook-county
-https://andrebrock.academia.edu/
-https://wa.aws.amazon.com/wat.concept.coe.en.html
-https://applyingml.com/resources/personalization/
-https://applyingml.com/resources/ml-design-docs/
-https://applyingml.com/
 
-https://medium.com/fluxx-studio-notes/52-things-i-learned-in-2021-8481c4e0d409
-
-https://bpw1621.com/archive/ordained-the-python-project-template/
 history of automated phone lines?
 
 the eternal cyclinder, but personalities for the trebum.
@@ -100,7 +107,6 @@ negotiate exchanges of inventory
 changes when switching trunks
 
 john wick hex - choreography simulator
-https://github.com/company-mode/company-mode/wiki/Writing-backends
 index xkcd using explainxkcd
 
 -from:quotedreplies url:1255330066151718912
@@ -109,13 +115,10 @@ fictional syllabi - both of actual papers, and lem-like
 org - add a nav state for moving around headings and subtrees?
 
 tag - amend mode
-https://generativist.falsifiable.com/
-https://tenthousandmeters.com/blog/python-behind-the-scenes-11-how-the-python-import-system-works/
-https://refactoring.guru/
-https://web.mit.edu/jemorris/humor/500-miles
-https://pybit.es/articles/ast-intro/
-https://transmediawatch.org/articles
 
+cron - look at dropbox/docs, mv any files into current_pdfs
+
+** Image Pdf calls
 #+NAME: image to pdf generation
 #+begin_src bash :results value
 convert ? -alpha off ./temp/`?`
@@ -129,9 +132,6 @@ pdftk * cat output diagrams.pdf
 pandoc ? -o output.pdf
 #+end_src
 https://pandoc.org/
-
-cron - look at dropbox/docs, mv any files into current_pdfs
-
 
 
 * TODO simulation sketches

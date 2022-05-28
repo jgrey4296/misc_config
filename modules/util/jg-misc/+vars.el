@@ -27,6 +27,8 @@
               jg-misc-project-cmd-cache-name ".projectile-cmds"
 
               global-hl-line-modes '(bibtex-mode prog-mode text-mode conf-mode special-mode org-agenda-mode comint-mode)
+
+              diary-file "~/.doom.d/diary"
               )
 
 (setq +ligatures-extra-symbols

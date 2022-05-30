@@ -1,4 +1,4 @@
-(package! acab-ide :type 'local :recipe (:local-repo "~/.doom.d/packages/acab-ide" :files ("*.el" "data-struct/*.el" "modes/*.el" "util/*.el")))
+(package! acab-ide :type 'local :recipe (:local-repo "~/github/acab/emacs" :files ("*.el" "data-struct/*.el" "modes/*.el" "util/*.el")))
 (package! cl-lib :built-in t)
 (package! font-lock+ :recipe (:host github :repo "emacsmirror/font-lock-plus"))
 (package! helm)

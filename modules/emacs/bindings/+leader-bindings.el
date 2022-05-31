@@ -288,13 +288,9 @@
 (map! :leader
       :prefix ("n" . "notes")
       :desc "Active org-clock"               "o" #'org-clock-goto
-      :desc "Browse notes"                   "F" #'+default/browse-notes
       :desc "Cancel current org-clock"       "C" #'org-clock-cancel
-      :desc "Find file in notes"             "f" #'+default/find-in-notes
       :desc "Goto capture"                   "N" #'org-capture-goto-target
       :desc "Open deft"                      "d" #'deft
-      :desc "Org agenda"                     "a" #'org-agenda
-      :desc "Org capture"                    "n" #'org-capture
       :desc "Org export to clipboard as RTF" "Y" #'+org/export-to-clipboard-as-rich-text
       :desc "Org export to clipboard"        "y" #'+org/export-to-clipboard
       :desc "Org store link"                 "l" #'org-store-link
@@ -302,7 +298,6 @@
       :desc "Search notes"                   "s" #'+default/org-notes-search
       :desc "Search org agenda headlines"    "S" #'+default/org-notes-headlines
       :desc "Tags search"                    "m" #'org-tags-view
-      :desc "Todo list"                      "t" #'org-todo-list
       :desc "Toggle last org-clock"          "c" #'+org/toggle-last-clock
       :desc "View search"                    "v" #'org-search-view
 
@@ -335,43 +330,47 @@
   ;;; <leader> o --- open
 (map! :leader
       :prefix ("o" . "open")
-      :desc "Command History"            "DEL" #'counsel-command-history
+      :desc "Command History"              "DEL"  #'counsel-command-history
+      :desc "Minibuffer history"           "0"    #'counsel-minibuffer-history
 
-      :desc "Default browser"              "b" #'browse-url-of-file
-      :desc "Calc"                         "c" #'calc
-      :desc "Calendar"                     "C" #'calendar
-      :desc "Dired"                        "d" #'dired-jump
+      :desc "Default browser"              "b"    #'browse-url-of-file
+      :desc "Calc"                         "c"    #'calc
+      :desc "Calendar"                     "C"    #'calendar
+      :desc "Dired"                        "d"    #'dired-jump
       ;; :desc "Compose Email"                "e" #'mu4e~compose-mail
-      :desc "REPL"                         "r" #'+eval/open-repl-other-window
+      :desc "REPL"                         "r"    #'+eval/open-repl-other-window
 
-      :desc "Project sidebar"              "p" #'+neotree/open
-      :desc "Find file in project sidebar" "P" #'+neotree/find-this-file
+      :desc "Project sidebar"              "p"    #'+neotree/open
+      :desc "Find file in project sidebar" "P"    #'+neotree/find-this-file
 
-      :desc "Rmail"                        "m" #'rmail
-      :desc "External Mail"                "M" #'mu4e
+      :desc "Rmail"                        "m"    #'rmail
+      :desc "External Mail"                "M"    #'mu4e
+      :desc "Browse notes"                 "n"    #'+default/browse-notes
+      :desc "Notes"                        "N"    #'+default/find-in-notes
 
-      :desc "Minibuffer history"           "0" #'counsel-minibuffer-history
+      :desc "Todo list"                    "t"    #'org-todo-list
+
 
       (:when (featurep! :os macos)
-       :desc "Reveal in Finder"           "f"    #'+macos/reveal-in-finder
-       :desc "Reveal project in Finder"   "F"    #'+macos/reveal-project-in-finder
+       :desc "Reveal in Finder"           "f"     #'+macos/reveal-in-finder
+       :desc "Reveal project in Finder"   "F"     #'+macos/reveal-project-in-finder
        )
 
       (:prefix ("a" . "org agenda")
-       :desc "Agenda"                "a" #'org-agenda
-       :desc "Todo list"             "t" #'org-todo-list
-       :desc "Tags search"           "m" #'org-tags-view
-       :desc "View search"           "v" #'org-search-view
-       :desc "List Agenda Files"     "F" #'+jg-org-list-agenda-files
-       :desc "occur-in-agenda-files" "/" #'org-occur-in-agenda-files
-       :desc "agenda-file-to-front"  "f" #'org-agenda-file-to-front
-       :desc "remove-file"           "r" #'org-remove-file
-       :desc "agenda-list"           "l" #'org-agenda-list
+       :desc "Agenda"                "a"          #'org-agenda
+       :desc "Todo list"             "t"          #'org-todo-list
+       :desc "Tags search"           "m"          #'org-tags-view
+       :desc "View search"           "v"          #'org-search-view
+       :desc "List Agenda Files"     "F"          #'+jg-org-list-agenda-files
+       :desc "occur-in-agenda-files" "/"          #'org-occur-in-agenda-files
+       :desc "agenda-file-to-front"  "f"          #'org-agenda-file-to-front
+       :desc "remove-file"           "r"          #'org-remove-file
+       :desc "agenda-list"           "l"          #'org-agenda-list
        )
 
       (:prefix ("h" . "Helms")
-       :desc "Minibuffer History"           "m" #'counsel-minibuffer-history
-       :desc "Shell History"                "s" #'counsel-shell-history
+       :desc "Minibuffer History"           "m"   #'counsel-minibuffer-history
+       :desc "Shell History"                "s"   #'counsel-shell-history
 
       )
       (:prefix ("s" . "Systems"))

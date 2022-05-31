@@ -1,0 +1,11 @@
+#+TITLE: Literature Review: $1
+#+DATE:  `(format-time-string "%Y-%m-%d")`
+#+HOME:  https://github.com/`(cl-find-if-not #'string-empty-p (list (cdr (doom-call-process "git" "config" "user.github")) user-login-name))`
+#+EMAIL: 'user-mail-address'
+
+* Overview
+* Onboarding for Undergrads and Laypeople
+* Specifics for Pedants
+* Who you should be reading but aren't.
+* Shibboleths
+* References

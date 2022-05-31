@@ -1,0 +1,35 @@
+# -*- mode: snippet -*-
+# name: TOML
+# uuid: TOML
+# key:  TOML
+# group :
+# --
+[build-system]
+requires = [
+         "setuptools>=42",
+         "wheel"
+]
+
+build-backend = "setuptools.build_meta"
+
+[tool.pyright]
+# strict = acab.*
+verboseOutput               = true
+typeCheckingMode            = "strict"
+pythonVersion               = "3.10"
+
+reportUnusedImport          = false
+reportAssertAlwaysTrue      = "information"
+reportMissingParameterType  = "warning"
+reportMissingTypeArgument   = "warning"
+reportMissingTypeStubs      = "warning"
+reportUnknownMemberType     = "warning"
+reportUnknownParameterType  = "information"
+reportUnknownVariableType   = "warning"
+reportUnnecessaryCast       = "information"
+reportUnnecessaryIsInstance = "warning"
+
+[tool.pytest.ini_options]
+log_cli       = false
+log_level     = "DEBUG"
+log_cli_level = "DEBUG"

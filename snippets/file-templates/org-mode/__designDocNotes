@@ -1,0 +1,16 @@
+#+TITLE: Design Document: $1
+#+DATE:  `(format-time-string "%Y-%m-%d")`
+#+HOME:  https://github.com/`(cl-find-if-not #'string-empty-p (list (cdr (doom-call-process "git" "config" "user.github")) user-login-name))`
+#+EMAIL: 'user-mail-address'
+
+* Vision Statement
+* Audience, Platform
+* Gameplay
+** Controls
+** Interfaces
+** Rules
+** Scoring
+** Levels
+* Characters
+* Story
+* World

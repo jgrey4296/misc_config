@@ -21,6 +21,13 @@
 ;;; Code:
 
 `%`$0
+(load! "+vars")
+(after! evil
+    (load! "+bindings")
+)
 
-(provide '`(file-name-base buffer-file-name)`)
+(use-package! $1
+
+)
+$0
 ;;; `(file-name-nondirectory buffer-file-name)` ends here

@@ -20,7 +20,7 @@
 ;;
 ;;; Code:
 
+(package! $1 :type 'local :recipe (:local-repo "$2" :files ("*.el" "data-struct/*.el" "modes/*.el" "util/*.el")))
 `%`$0
 
-(provide '`(file-name-base buffer-file-name)`)
 ;;; `(file-name-nondirectory buffer-file-name)` ends here

@@ -38,6 +38,7 @@
  jg-latex
  jg-misc-lang
  jg-rst
+ jg-inform
 
  :emacs  ;; ----- ====== -----
  (bindings +bindings)

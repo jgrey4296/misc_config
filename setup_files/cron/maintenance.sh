@@ -4,7 +4,7 @@ set -euo pipefail
 # General maintenance scripts
 # Update node, brew, doom etc
 echo "Conda --------------------"
-./conda_maintenance.sh
+~/.doom.d/setup_files/cron/conda_maintenance.sh
 
 echo "Brew Cleanup --------------------"
 brew cleanup

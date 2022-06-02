@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+alias clingo="clingo -W all"
+
 alias cpu="top -l1 -n0"
 alias browse="python -mwebbrowser"
 alias lsa="ls -lha"

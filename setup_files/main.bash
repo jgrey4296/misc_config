@@ -12,16 +12,15 @@ if [[ $OSTYPE =~ "darwin" ]]; then
    do
        source $fname
    done
-   set_non_standard_python_paths
    source ~/.shell_files/bash_setup/exports.bash
    # Auto Activate an environment if necessary:
-   if test -a ".venv";
+   if [ -a ".venv" ]
    then
        ENV=$(tail -n 1 .venv)
        echo "Conda: ${ENV}"
        conda activate $ENV
    else
     echo "Conda: ${OSTYPE}"
-	conda activate base310
+	conda activate $CONDA_DEFAULT_ENV
    fi
 fi

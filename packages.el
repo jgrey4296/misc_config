@@ -12,3 +12,4 @@
 (unpin! pyimport)
 (unpin! py-isort)
 (unpin! yasnippet)
+(unpin! org)

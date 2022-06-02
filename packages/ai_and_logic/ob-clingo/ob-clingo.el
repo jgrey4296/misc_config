@@ -102,6 +102,7 @@ running just the body through the Clingo process."
       (insert (org-babel-chomp body)))
     (message "Going to execute: %s" command)
     (org-babel-clingo-eval command "")))
+
 (defun org-babel-clingo-eval (cmd body)
   "Run CMD on BODY.
 If CMD succeeds then return its results, otherwise display
@@ -115,9 +116,8 @@ see: https://www.mat.unical.it/aspcomp2013/files/aspoutput.txt
     (with-temp-buffer
       (insert body)
       (setq exit-code
-            (org-babel--shell-command-on-region
-             (point-min) (point-max) cmd err-buff))
-      ;; exit code handling:
+            (org-babel--shell-command-on-region cmd err-buff))
+        ;; exit code handling:
       (cond ((not (numberp exit-code))
              (with-current-buffer err-buff
                (org-babel-eval-error-notify exit-code (buffer-string)))

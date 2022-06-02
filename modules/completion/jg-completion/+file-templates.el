@@ -23,6 +23,7 @@
         ;; Markdown
         (sh-mode)
       )
+)
 
 ;; NOTE: Order from lowest - highest priority
 ;; Org

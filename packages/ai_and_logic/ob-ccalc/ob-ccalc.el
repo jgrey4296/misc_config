@@ -233,9 +233,7 @@ STDERR with `org-babel-eval-error-notify'.
     (with-temp-buffer
       (insert body)
       (setq exit-code
-            (org-babel--shell-command-on-region (point-min)
-                                                (point-max)
-                                                cmd err-buff))
+            (org-babel--shell-command-on-region cmd err-buff))
     ;; exit code handling:
     (message "CCALC EXIT CODE: %s" exit-code)
     (cond ((not (numberp exit-code))

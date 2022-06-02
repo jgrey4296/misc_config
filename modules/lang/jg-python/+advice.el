@@ -75,3 +75,22 @@ return (dir-of-venv env-name) or nil
 ;;     (puthash (cons 'python-mode (doom-project-root)) new-buffer +eval-repl-buffers)
 ;;     )
 ;;   )
+
+(defun jg-conda--get-path-prefix (env-dir)
+  "Get a platform-specific path string to utilize the conda env in ENV-DIR.
+It's platform specific in that it uses the platform's native path separator."
+  (s-trim
+   (with-output-to-string
+     (let ((conda-anaconda-home-tmp conda-anaconda-home))
+       (with-current-buffer standard-output
+         (let* ((conda-executable-path
+                 (concat (file-name-as-directory conda-anaconda-home-tmp)
+                         (file-name-as-directory conda-env-executables-dir)
+                         "conda"))
+                (command-format-string jg-conda-activate-cmd)
+                (command (format command-format-string env-dir))
+                (return-code (process-file shell-file-name nil '(t nil) nil shell-command-switch command)))
+           (unless (= 0 return-code)
+             (error (format "Error: executing command \"%s\" produced error code %d" command return-code)))))))))
+
+(advice-add #'conda--get-path-prefix :override #'jg-conda--get-path-prefix)

@@ -32,6 +32,8 @@ Versu, Abl, Cif
 
 ** Reminders
 *** Urls
+https://github.com/mvcisback/hasse
+https://github.com/mxgmn/MarkovJunior.git
 [[http://waveform3d.com/][Waveform3d]]
 [[https://en.wikipedia.org/wiki/Summa_Theologica][Summa Theologica]]
 [[https://parl.ai/projects/light/][Parl.ai: NLP and dialogue]]

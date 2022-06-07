@@ -3,21 +3,26 @@ channels:
   - defaults
   - conda-forge
 dependencies:
-  - beautifulsoup4
-  - bibtexparser
-  - regex
-  - networkx
-  - lxml
-  - pillow
-  - scikit-learn
-  - python-twitter
-  - pdfrw
-  - pyflakes
-  - build
-  - wheel
-  - jedi
-  - pylint
-  - pandoc
-  - pypandoc
+  - readline
   - python=3.10
+  - wheel
+  - regex
+  - isort
+  - pip
+  - pylint
+  - matplotlib
+  - build
+  - setuptools
+  - jedi
+  - lxml
+  - networkx
+  - pdfrw
+  - pillow
+  - beautifulsoup4
+  - python-twitter
+  - scikit-learn
+  - pypandoc
+  - pyflakes
+  - bibtexparser
+  - pandoc
 prefix: /opt/anaconda3/envs/bookmark

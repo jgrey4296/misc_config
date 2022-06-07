@@ -27,4 +27,9 @@ dependencies:
   - conda-env
   - python.app
   - pytest
+  - python-language-server
+  - jedi-language-server
+  - cookiecutter
+  - img2pdf
+  - clingo
 prefix: /opt/anaconda3/envs/base310

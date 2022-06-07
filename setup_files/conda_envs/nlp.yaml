@@ -3,20 +3,28 @@ channels:
   - defaults
   - conda-forge
 dependencies:
-  - scipy
-  - spacy
-  - lxml
-  - numpy
-  - python=3.10
-  - pyparsing
-  - pandas
-  - networkx
-  - scikit-learn
-  - textblob
-  - beautifulsoup4
-  - pygraphviz
+  - pip
+  - jedi
   - matplotlib
-  - floweaver
-  - ipysankeywidget
+  - pyparsing
+  - regex
+  - setuptools
+  - isort
+  - wheel
+  - readline
   - pylint
+  - python=3.10
+  - build
+  - scikit-learn
+  - pygraphviz
+  - textblob
+  - floweaver
+  - lxml
+  - networkx
+  - ipysankeywidget
+  - numpy
+  - spacy
+  - beautifulsoup4
+  - scipy
+  - pandas
 prefix: /opt/anaconda3/envs/nlp

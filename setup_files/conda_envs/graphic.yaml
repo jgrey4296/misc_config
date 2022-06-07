@@ -3,14 +3,24 @@ channels:
   - defaults
   - conda-forge
 dependencies:
-  - scipy
-  - pillow
-  - imageio
-  - noise
-  - cairo
-  - python=3.10
-  - scikit-learn
+  - matplotlib
+  - readline
+  - isort
   - build
+  - regex
+  - wheel
+  - python=3.10
+  - jedi
+  - setuptools
+  - pip
+  - pylint
+  - pyparsing
+  - pillow
+  - scikit-learn
+  - imageio
   - pyqtree
+  - noise
+  - scipy
   - piexif
+  - pycairo
 prefix: /opt/anaconda3/envs/graphic

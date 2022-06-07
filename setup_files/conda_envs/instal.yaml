@@ -62,4 +62,5 @@ dependencies:
   - pygments
   - inflect
   - flask-restful
+  - clingo
 prefix: /opt/anaconda3/envs/instal

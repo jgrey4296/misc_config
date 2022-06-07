@@ -5,32 +5,37 @@
 # --
 #https://docs.python.org/3/library/unittest.html
 # https://docs.python.org/3/library/unittest.mock.html
+from __future__ import annotations
+import warnings
 
 from os.path import splitext, split
-
+from typing import (TYPE_CHECKING, Any, Callable, ClassVar, Final, Generic,
+                    Iterable, Iterator, Mapping, Match, MutableMapping,
+                    Protocol, Sequence, Tuple, TypeAlias, TypeGuard, TypeVar,
+                    cast, final, overload, runtime_checkable)
 import unittest
 import unittest.mock as mock
+import logging as logmod
 
-import logging
 $0
+
+with warnings.catch_warnings():
+    warnings.simplefilter("ignore")
+    pass
 
 class $2(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        root_logger.getLogger('').setLevel(root_logger.WARNING)
+        LOGLEVEL      = logmod.DEBUG
         LOG_FILE_NAME = "log.{}".format(splitext(split(__file__)[1])[0])
+        cls.file_h        = logmod.FileHandler(LOG_FILE_NAME, mode="w")
 
-        file_h = root_logger.FileHandler(LOG_FILE_NAME, mode='w')
-        file_h.setLevel(root_logger.DEBUG)
-
-        console = root_logger.StreamHandler()
-        console.setLevel(root_logger.WARNING)
-
-        logging = root_logger.getLogger(__name__)
-        logging.setLevel(root_logger.DEBUG)
-        logging.addHandler(console)
-        logging.addHandler(file_h)
+        cls.file_h.setLevel(LOGLEVEL)
+        logging = logmod.getLogger(__name__)
+        logging.root.setLevel(logmod.NOTSET)
+        logging.root.handlers[0].setLevel(logmod.WARNING)
+        logging.root.addHandler(cls.file_h)
 
 
     def setUp(self):
@@ -46,3 +51,6 @@ class $2(unittest.TestCase):
     # @patch(' ') / with patch.object(...)
 
     $3
+
+if __name__ == '__main__':
+    unittest.main()

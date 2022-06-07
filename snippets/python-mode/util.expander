@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: util.expander
+# uuid: util.expander
+# key:  util.expander
+# group :
+# --
+from os.path import abspath, expanduser
+def expander(path):
+    return abspath(expanduser(path))

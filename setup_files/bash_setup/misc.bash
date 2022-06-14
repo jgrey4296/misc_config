@@ -38,5 +38,3 @@ PS1='(\j): \D{%D} \A \u:  '
 
 #Shell Location update
 SHELL="$(which bash)"
-
-CPU_MAX="50"

@@ -135,5 +135,10 @@ pandoc ? -o output.pdf
 #+end_src
 https://pandoc.org/
 
+** Awk
+#+begin_src awk
+awk 'match($0, /HREF="(.+?)"/, a) {print a[1]}'
+
+#+end_src awk
 
 * TODO simulation sketches

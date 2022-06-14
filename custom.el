@@ -142,7 +142,9 @@
        (mode . gnus-summary-mode)
        (mode . gnus-article-mode)))))
  '(org-agenda-files '("/Users/johngrey/.doom.d/setup_files/base_agenda.org"))
- '(safe-local-variable-values '((eval conda-env-activate "acab-dev"))))
+ '(org-ref-insert-cite-key "C-c i")
+ '(safe-local-variable-values '((eval conda-env-activate "acab-dev")))
+ '(warning-suppress-types '(((flycheck syntax-checker)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

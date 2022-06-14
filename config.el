@@ -33,7 +33,7 @@
       which-key-sort-order 'which-key-key-order-alpha
       whitespace-style '(face tabs spaces trailing lines space-before-tab newline indentation empty space-after-tab space-mark tab-mark newline-mark)
       default-input-method "greek"
-
+      avy-all-windows t
       smartparens-global-mode nil
       )
 ;; Override doom's whitespace mode settings:

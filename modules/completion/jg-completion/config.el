@@ -17,6 +17,7 @@
 
 (after! company
   (add-hook! 'minibuffer-inactive-mode-hook :append #'company-mode)
+  (add-hook! 'minibuffer-mode-hook :append #'company-mode)
   )
 (after! (company gtags helm-gtags)
   (set-company-backend! 'python-mode 'company-gtags)

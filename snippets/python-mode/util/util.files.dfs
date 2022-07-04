@@ -7,6 +7,9 @@ from os.path import join, splitext
 from os import listdir
 
 def get_data_files(initial, ext):
+    """
+    DFS `initial` for files with extensions in `ext`
+    """
     logging.info("Getting Data Files")
     if not isinstance(ext, list):
         ext = [ext]

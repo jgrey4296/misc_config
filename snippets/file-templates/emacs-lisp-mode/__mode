@@ -1,0 +1,59 @@
+;;; `(file-name-nondirectory buffer-file-name)` -*- lexical-binding: t; -*-
+;;
+;; Copyright (C) `(format-time-string "%Y")` `user-full-name`
+;;
+;; Author: `user-full-name` <https://github.com/`(cl-find-if-not #'string-empty-p (list (cdr (doom-call-process "git" "config" "user.github")) user-login-name))`>
+;; Maintainer: `user-full-name` <`user-mail-address`>
+;; Created: `(format-time-string "%B %d, %Y")`
+;; Modified: `(format-time-string "%B %d, %Y")`
+;; Version: 0.0.1
+;; Keywords:
+;; Homepage: https://github.com/`(cl-find-if-not #'string-empty-p (list (cdr (doom-call-process "git" "config" "user.github")) user-login-name))`
+;; Package-Requires: ((emacs "24.3"))
+;; Package written on: ((emacs `emacs-version`))
+;;
+;; This file is not part of GNU Emacs.
+;;
+;;; Commentary:
+;;
+;;  $2
+;;
+;;; Code:
+
+(defvar-local $1-mode-map
+    (make-sparse-keymap))
+
+;; List of '(regex (groupnum "face")+)
+(defconst $1-font-lock-keywords
+    (list
+        ;;backquote (,(rx ) (subexp facename override laxmatch))
+        )
+    "Highlighting for $1-mode"
+    )
+
+(define-derived-mode $1-mode fundamental-mode
+    "$1"
+    (interactive)
+    (kill-all-local-variables)
+    (use-local-map $1-mode-map)
+
+    ;; font-lock-defaults: (keywords disable-syntactic case-fold syntax-alist)
+    ;; (set (make-local-variable 'font-lock-defaults) (list $1-font-lock-keywords nil))
+    ;; (set (make-local-variable 'font-lock-syntactic-face-function) '$1-syntactic-face-function)
+    ;; (set (make-local-variable 'indent-line-function) '$1-indent-line)
+    ;; (set (make-local-variable 'comment-style) '(plain))
+    ;; (set (make-local-variable 'comment-start) "//")
+    ;; (set (make-local-variable 'comment-use-syntax) t)
+    ;; (set-syntax-table $1-mode-syntax-table)
+    ;;
+    (setq major-mode '$1-mode)
+    (setq mode-name "$1")
+    (run-mode-hooks)
+    (outline-minor-mode)
+    (yas-minor-mode)
+
+    )
+(add-to-list 'auto-mode-alist '("\\.$1" . $1-mode))
+
+(provide '`(file-name-base buffer-file-name)`)
+;;; `(file-name-nondirectory buffer-file-name)` ends here

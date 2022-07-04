@@ -1,5 +1,7 @@
 # -*- mode: snippet -*-
 # name: test.fail
-# key: test.fail
+# uuid: test.fail
+# key:  test.fail
+# group :
 # --
-self.assertTrue(False)
+self.assertFalse(True)

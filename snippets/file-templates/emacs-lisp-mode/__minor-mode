@@ -1,0 +1,41 @@
+;;; `(file-name-nondirectory buffer-file-name)` -*- lexical-binding: t; -*-
+;;
+;; Copyright (C) `(format-time-string "%Y")` `user-full-name`
+;;
+;; Author: `user-full-name` <https://github.com/`(cl-find-if-not #'string-empty-p (list (cdr (doom-call-process "git" "config" "user.github")) user-login-name))`>
+;; Maintainer: `user-full-name` <`user-mail-address`>
+;; Created: `(format-time-string "%B %d, %Y")`
+;; Modified: `(format-time-string "%B %d, %Y")`
+;; Version: 0.0.1
+;; Keywords:
+;; Homepage: https://github.com/`(cl-find-if-not #'string-empty-p (list (cdr (doom-call-process "git" "config" "user.github")) user-login-name))`
+;; Package-Requires: ((emacs "24.3"))
+;; Package written on: ((emacs `emacs-version`))
+;;
+;; This file is not part of GNU Emacs.
+;;
+;;; Commentary:
+;;
+;;  $2
+;;
+;;; Code:
+
+(define-minor-mode $1-minor-mode
+    " $2 "
+    :lighter "$1"
+    ;; :global t
+    ;; :keymap nil
+
+)
+
+(defun $1-minor-mode/turn-on ()
+ (unless (minibufferp)
+    (if (eq major-mode 'prog-mode)
+        ($1-minor-mode 1))
+    )
+)
+
+(define-globalized-minor-mode global-$1-minor-mode $1-minor-mode/turn-on)
+
+(provide '`(file-name-base buffer-file-name)`)
+;;; `(file-name-nondirectory buffer-file-name)` ends here

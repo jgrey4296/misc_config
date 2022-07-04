@@ -26,7 +26,6 @@ flycheck_*
 .Spotlight-v11
 .Trashes
 ._*
-.dir-locals.el
 .dropbox
 .orgids
 GPATH

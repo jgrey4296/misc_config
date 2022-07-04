@@ -29,8 +29,11 @@
        :desc "Test repeat"     "r" #'python-pytest-repeat
        :desc "Test Popup"      "p" #'python-pytest-popup)
       (:prefix ("e" . "Environment")
-       :desc "activate"    "a" #'pyvenv-activate
-       :desc "deactivate"  "d" #'pyvenv-deactivate)
+       :desc "activate"    "a"    #'pyvenv-activate
+       :desc "deactivate"  "d"    #'pyvenv-deactivate
+       :desc "Choose Support" "c" #'+jg-python-support
+       :desc "Current Support" "C" (cmd! (message "Current Python Support: %s" jg-python-last-chosen-support))
+       )
       )
 
 (map! :after python
@@ -55,7 +58,7 @@
       (:prefix "c"
       :desc "Cython compile buffer"    "c" #'cython-compile))
 
-(defun +jg-python-conda-override ()
+(defun +jg-python-conda-binding-override ()
   (map! :map anaconda-mode-map
         :localleader
         "g" nil

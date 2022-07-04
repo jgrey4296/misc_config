@@ -71,5 +71,20 @@
             nil 'local)
   )
 
+(defun +jg-guarded-yasnippet-fix ()
+  (if yas-global-mode
+      (yasnippet-snippets--fixed-indent)
+    ))
+
+(defun +jg-conda-env-activate ()
+  " Because file-local variables aren't set until after hooks are run,
+use this hook in the dir-locals file itself  "
+  (message "Default: %s" default-directory)
+  (if (not (s-equals? (bound-and-true-p conda-project-env-path)  conda-env-current-name))
+      (progn (pyvenv-activate nil)
+             (conda-env-activate-for-buffer))
+    (message "Current Env: %s" conda-env-current-name))
+  t
+  )
 
 ;;; +hooks.el ends here

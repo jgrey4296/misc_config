@@ -6,4 +6,5 @@
 (package! python :recipe (:host github :repo "emacs-straight/python"))
 (package! pyimport)
 ;; (package! lsp-jedi)
+;; (package! lsp-python-ms)
 (package! lsp-pyright)

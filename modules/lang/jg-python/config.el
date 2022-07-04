@@ -28,25 +28,32 @@
       )
     )
 
-(after! python
+(use-package-hook! python :post-config
   (setq python-mode-hook nil)
+  (setq python-mode-local-vars-hook nil)
   (add-hook! 'python-mode-hook #'outline-minor-mode
              #'+jg-python-outline-regexp-override-hook
              #'+python-use-correct-flycheck-executables-h
-             #'+python-init-anaconda-mode-maybe-h
-             #'+jg-python-auto-kill-conda-hook
              #'doom-modeline-env-setup-python
              #'er/add-python-mode-expansions
              #'evil-collection-python-set-evil-shift-width
              #'doom--setq-tab-width-for-python-mode-h
-             #'yasnippet-snippets--fixed-indent
              )
   (setq-hook! 'python-mode-hook tab-width python-indent-offset)
 )
 
 (use-package-hook! anaconda-mode :post-config
-  (+jg-python-conda-override)
+  (+jg-python-conda-binding-override)
   )
+
+(use-package! lsp-pyright
+  :after lsp-mode
+  :init
+  (add-to-list 'lsp-disabled-clients 'pyls)
+  (add-to-list 'lsp-disabled-clients 'pylsp)
+  (add-to-list 'lsp-disabled-clients 'mspyls)
+)
+
 
 (after! evil
   (setq evil-fold-list (cons '((python-mode)
@@ -60,11 +67,14 @@
                              evil-fold-list))
   )
 
-(after! lsp-mode
-  (add-to-list 'lsp-disabled-clients 'pyls)
-  (add-to-list 'lsp-disabled-clients 'pylsp)
-  (add-to-list 'lsp-disabled-clients 'mspyls)
-)
+  ;; (use-package! lsp-python-ms
+  ;;   :unless (featurep! +pyright)
+  ;;   :after lsp-mode
+  ;;   :preface
+  ;;   (after! python
+  ;;     (setq lsp-python-ms-python-executable-cmd python-shell-interpreter)))
+
+
 ;; (use-package! lsp-jedi
 ;;   :ensure t
 ;;   :after lsp-mode

@@ -143,8 +143,22 @@
        (mode . gnus-article-mode)))))
  '(org-agenda-files '("/Users/johngrey/.doom.d/setup_files/base_agenda.org"))
  '(org-ref-insert-cite-key "C-c i")
- '(safe-local-variable-values '((eval conda-env-activate "acab-dev")))
- '(warning-suppress-types '(((flycheck syntax-checker)))))
+ '(safe-local-variable-values
+   '((eval +jg-conda-env-activate)
+     (conda-project-env-path . "acab-dev")
+     (eval let
+           ((path
+             (concat
+              (locate-dominating-file buffer-file-name ".dir-locals.el")
+              "acab")))
+           (pushnew path python-shell-extra-pythonpaths :test 'equal)
+           (setq-default lsp-pyright-extra-paths
+                         (vector path)))))
+ '(warning-suppress-log-types
+   '(((flycheck syntax-checker))
+     ((flycheck syntax-checker))
+     ((flycheck syntax-checker))))
+ '(warning-suppress-types '(((flycheck syntax-checker)) ((flycheck syntax-checker)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

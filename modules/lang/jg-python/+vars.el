@@ -7,8 +7,8 @@
               python-shell-virtualenv-root "~/anaconda3"
               python-shell--interpreter nil
               python-shell--interpreter-args nil
-              flycheck--automatically-enabled-checkers (-concat flycheck--automatically-enabled-checkers '(python-pylint python-pyright python-mypy))
-              flycheck--automatically-disabled-checkers '(python-compile)
+              flycheck--automatically-enabled-checkers (-concat flycheck--automatically-enabled-checkers '(python-pylint))
+              flycheck--automatically-disabled-checkers '(python-compile python-pyright python-mypy)
               python-pdbtrack-activate nil
               py-pdbtrack-do-tracking-p nil
               python-shell-completion-native-disabled-interpreters '("pypy")
@@ -18,6 +18,7 @@
       jg-python-bibtex-parser-url  "https://bibtexparser.readthedocs.io/en/master/tutorial.html"
       jg-python-beautiful-soup-url "https://beautiful-soup-4.readthedocs.io/en/latest/"
       jg-conda-activate-cmd        "source /Volumes/documents/github/emacs_files/setup_files/bash_setup/python.bash && conda_activate_for_scripts %s"
+      jg-python-last-chosen-support nil
       )
 
 
@@ -31,9 +32,9 @@
 (push ".mypy.ini" flycheck-python-mypy-ini)
 
 
-(after! flycheck
-  (flycheck-add-next-checker 'python-pylint '(t . python-pyright))
-  )
+;; (after! flycheck
+;;   (flycheck-add-next-checker 'python-pylint '(t . python-pyright))
+;;   )
 
 
 (after! projectile

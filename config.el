@@ -35,7 +35,9 @@
       default-input-method "greek"
       avy-all-windows t
       smartparens-global-mode nil
+      +lsp-defer-shutdown 10
       )
+
 ;; Override doom's whitespace mode settings:
 (fset 'doom-highlight-non-default-indentation-h #'(lambda () nil))
 

@@ -1,7 +1,6 @@
 # -*- mode: snippet -*-
-# name: PythonSetupCfg
-# uuid: PythonSetupCfg
-# key:  PythonSetupCfg
+# name: __setup_cfg
+# uuid: __setup_cfg
 # group :
 # --
 [metadata]

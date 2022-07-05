@@ -1,7 +1,6 @@
 # -*- mode: snippet -*-
-# name: TOML
-# uuid: TOML
-# key:  TOML
+# name: __pyproject_toml
+# uuid: __pyproject_toml
 # group :
 # --
 [build-system]

@@ -43,25 +43,26 @@
 
 ;; Python
 (set-file-templates!
- '(python-mode      :trigger "__")
- '("setup\\.py"     :trigger "__setup"          :mode python-mode)
- '("setup\\.cfg"    :trigger "__setup_cfg"      :mode python-mode)
- '("conf\\.py"      :trigger "__conf"           :mode python-mode)
- '("pyproject.toml" :trigger "__pyproject_toml" :mode python-mode)
- '("LICENSE"        :trigger "__license-acab" :mode text-mode)
- '("test_.+\\.py$"  :trigger "__tests" :mode python-mode)
- '("_.+\\.py$"      :trigger "__"      :mode python-mode)
- '("\\.py$"         :trigger "__"      :mode python-mode)
+ '(python-mode       :trigger "__")
+ '("\\.py$"          :trigger "__"               :mode python-mode)
+ '("setup\\.py$"     :trigger "__setup"          :mode python-mode)
+ '("conf\\.py$"      :trigger "__conf"           :mode python-mode)
+ '("_.+\\.py$"       :trigger "__"               :mode python-mode)
+ '("test_.+\\.py$"   :trigger "__tests"          :mode python-mode)
+ '("__init__\\.py$"  :trigger "__init"           :mode python-mode)
+ '("setup\\.cfg$"    :trigger "__setup_cfg"      :mode python-mode)
+ '("pyproject.toml$" :trigger "__pyproject_toml" :mode python-mode)
+ '("LICENSE$"        :trigger "__license-acab"   :mode text-mode)
  )
 
 
 ;; Lisp
 (set-file-templates!
+ '("\\.el$" :when +file-templates-in-emacs-dirs-p :trigger "__doom-module" :mode emacs-lisp-mode)
  '("/.dir-locals.el$")
  '("-test\\.el$" :mode emacs-ert-mode)
- '(emacs-lisp-mode :trigger "__package")
- '("\\.el$" :when +file-templates-in-emacs-dirs-p :trigger "__doom-module" :mode emacs-lisp-mode)
- '("mode\\.el$" :trigger "__mode" :mode emacs-lisp-mode)
+ '(emacs-lisp-mode    :trigger "__package")
+ '("mode\\.el$"       :trigger "__mode" :mode emacs-lisp-mode)
  '("minor-mode\\.el$" :trigger "__minor-mode" :mode emacs-lisp-mode)
  '("packages\\.el$" :when +file-templates-in-emacs-dirs-p :trigger "__doom_packages" :mode emacs-lisp-mode)
  '("config\\.el$"   :when +file-templates-in-emacs-dirs-p :trigger "__doom_config"   :mode emacs-lisp-mode)

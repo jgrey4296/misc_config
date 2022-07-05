@@ -20,7 +20,8 @@ if [[ $OSTYPE =~ "darwin" ]]; then
        echo "Conda: ${ENV}"
        conda activate $ENV
    else
-    echo "Conda: ${OSTYPE}"
-	conda activate $CONDA_DEFAULT_ENV
+       echo "Conda: ${OSTYPE}"
+       conda activate $CONDA_DEFAULT_ENV
    fi
+
 fi

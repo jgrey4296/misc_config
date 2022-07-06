@@ -1,17 +1,18 @@
 [project]
 name            = "{{cookiecutter.proj_name}}"
 version         = "0.0.1"
-description     = ""
+description     = " "
 readme          = "README.md"
 requires-python = ">=3.10"
 license         = {file = "LICENSE"}
-keywords        = []
+keywords        = ["rust", "python"]
 authors         = [
   {email = "{{cookiecutter._email}}"},
-  {name  = "cookiecutter._author"}
+  {name  = "{{cookiecutter._author}}"}
 ]
 classifiers     = [
   "Programming Language :: Python"
+  "Programming Language :: Rust"
 ]
 
 dependencies   = []
@@ -28,7 +29,7 @@ repository    = "https://github.com/{{cookiecutter._github_username}}/{{cookiecu
 changelog     = "https://github.com//{{cookiecutter.proj_name}}/blob/master/CHANGELOG.md"
 
 [project.scripts]
-{{coookiecutter.proj_name}} = {{cookiecutter.proj_name}}.{{cookiecutter.entry_point}}:main
+{{cookiecutter.proj_name}} = {{cookiecutter.proj_name}}.{{cookiecutter.entry_point}}:main
 
 [project.gui-scripts]
 # spam-gui      = "spam:main_gui"
@@ -45,7 +46,7 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
-# packages = ['rust_py']
+# packages = ['{{cookiecutter.proj_name}}']
 include-package-data = true
 
 [tool.setuptools.packages.find]
@@ -53,10 +54,12 @@ namespaces = true
 where = ["."]
 
 [tool.setuptools.package-data]
+{{cookiecutter.proj_name}} = ["{{cookiecutter.proj_name}}.so"]
 "{{cookiecutter.proj_name}}.__configs" = []
 
 
 [tool.setuptools.exclude-package-data]
+
 
 
 [tool.pyright]

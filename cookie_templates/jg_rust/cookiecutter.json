@@ -5,6 +5,7 @@
     "tags"        : "rust",
     "entry_point" : "./src/main.rs",
     "_copy_without_render": [
-        "docs/_templates/*/*.rst"
+        "docs/_templates/*/*.rst",
+        "docs/_static"
     ]
 }

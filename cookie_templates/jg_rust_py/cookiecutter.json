@@ -1,8 +1,8 @@
 {
-    "proj_name"   : "jg_py_template_project",
+    "proj_name"   : "jg_rust_py_template_project",
     "env"         : "base310",
-    "desc"        : "A Template Python Project",
-    "tags"        : "python",
+    "desc"        : "A Template Rust-Python Project",
+    "tags"        : "python", "rust"
     "entry_point" : "default",
     "_author"     : "me",
     "_email"      : "my@email.com"

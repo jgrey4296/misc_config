@@ -1,17 +1,17 @@
-SHELL			:= /usr/local/bin/bash
-LOGLEVEL		:= WARNING
+SHELL		:= /usr/local/bin/bash
+LOGLEVEL	:= WARNING
 
-TOP				:= ./src
-MAIN            := {{cookiecutter.entry_point}}
-BUILD           := ./target
+RUST_TOP	:= ./rust_src
+PY_TOP		:= {{cookiecutter.proj_name}}
+BUILD       := ./build
 
 # Testing variables:
-TEST_TARGET		?= ${TOP}
+TEST_TARGET		?= ${PY_TOP}
 TEST_PAT		:=
 TESTDIRS        :=
 
 # Clean variables:
-LOGS			!= find ${TOP} -name '*log.*'
+LOGS			!= find ${PY_TOP} -name '*log.*'
 
 # Documentation variables:
 doc_target		?= "html"
@@ -20,6 +20,8 @@ SPHINXBUILD		?= sphinx-build
 DOCSOURCEDIR    = docs
 DOCBUILDDIR     = dist/docs
 
+# Extracts the name of the produced rust binary
+NAME != awk 'BEGIN {FS=" "} /name/ {print $$3; exit}' Cargo.toml
 
 # If defined, use these overrides
 ifneq (${pat}, )
@@ -56,19 +58,41 @@ rusthelp:
 	python -mwebbrowser "https://doc.rust-lang.org/book/title-page.html"
 
 # Building ####################################################################
-debug:
+rust_debug:
 	cargo build
+	cp ${BUILD}/debug/lib${NAME}.dylib ${BUILD}/${NAME}.so
 
-release:
+rust_release:
 	cargo build --release
+	cp ${BUILD}/release/lib${NAME}.dylib ${BUILD}/${NAME}.so
+
+editlib: rust_debug
+	pip install -e .
+
+install: rust_release
+	pip install --use-feature=in-tree-build --src ${BUILD}/pip_temp -U .
+
+wheel: rust_release
+	pip wheel --use-feature=in-tree-build -w ${BUILD}/wheel --use-pep517 --src ${BUILD}/pip_temp .
+
+srcbuild: rust_debug
+	pip install --use-feature=in-tree-build -t ${BUILD}/pip_src --src ${BUILD}/pip_temp -U .
+
+uninstall:
+	pip uninstall -y {{cookiecutter.proj_name}}
+
+requirements:
+	pip freeze --all --exclude-editable -r requirements.txt > requirements.txt
 
 run:
 	cargo run
+
 
 # Linting #####################################################################
 lint:
 	@echo "TODO: Linting"
 	cargo check
+
 
 # Testing #####################################################################
 test:
@@ -81,9 +105,9 @@ dtest: ${TESTDIRS}
 
 $(TESTDIRS):
 	@echo "--------------------"
-	@echo "Target: ${TOP}/$@"
+	@echo "Target: ${PY_TOP}/$@"
 	@echo "TODO: Dtest"
-	@echo "Target: ${TOP}/$@"
+	@echo "Target: ${PY_TOP}/$@"
 
 # Cleaning ####################################################################
 clean:
@@ -93,5 +117,4 @@ ifeq (${LOGS}, )
 else
 	-rm ${LOGS}
 endif
-	-rm -rf ./dist
 	-rm -rf ${BUILD}

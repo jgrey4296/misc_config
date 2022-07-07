@@ -70,3 +70,15 @@
         :desc "Conda: Find Refs"    "u" #'anaconda-mode-find-references
         )
   )
+
+(map! :after conf-mode
+      :map conf-mode-map
+      :localleader
+      :desc "Docs: Setuptools"     "1" (cmd! (+jg-browse-url "https://setuptools.pypa.io/en/latest/index.html"))
+
+      )
+
+(map! :map manifest-mode-map
+      :localleader
+      :desc "Docs: Manifest files"  "1" (cmd! (+jg-browse-url "https://docs.python.org/3/distutils/sourcedist.html?highlight=manifest"))
+      )

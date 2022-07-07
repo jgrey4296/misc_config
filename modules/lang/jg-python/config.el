@@ -2,6 +2,7 @@
 
 (doom-log "Config JG Python")
 
+(load! "+manifest-mode")
 (after! python
   (load! "+vars")
 )

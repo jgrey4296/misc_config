@@ -4,8 +4,7 @@
 # key:  warning.suppress
 # group :
 # --
-import warnings
-
+${1:import warnings}
 with warnings.catch_warnings():
     warnings.simplefilter("ignore")
     pass

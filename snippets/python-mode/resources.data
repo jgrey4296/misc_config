@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: resources.data
+# uuid: resources.data
+# key:  resources.data
+# group :
+# --
+${4:from importlib.resources import files}
+data_path = files("${1:package}.${2:data}")
+data_file = data_path.joinpath("${3:filename.ext}")
+data_text = data_file.read_text()

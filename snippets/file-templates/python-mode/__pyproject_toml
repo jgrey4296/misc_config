@@ -3,13 +3,71 @@
 # uuid: __pyproject_toml
 # group :
 # --
+[project]
+name            = "$1"
+version         = "0.0.1"
+description     = "blah"
+readme          = "README.md"
+requires-python = ">=3.10"
+license         = {file = "LICENSE"}
+keywords        = []
+authors         = [
+  {email = "jgrey4296@gmail.com"},
+  {name  = "J Grey"}
+]
+classifiers     = [
+  "Programming Language :: Python"
+]
+
+dependencies   = []
+
+[project.optional-dependencies]
+test = [
+  "pytest < 5.0.0",
+]
+
+[project.urls]
+homepage      = "https://github.com/jgrey4296/$1"
+documentation = "https://readthedocs.org/$1"
+repository    = "https://github.com/jgrey4296/$1"
+changelog     = "https://github.com/jgrey4296/$1/spam/blob/master/CHANGELOG.md"
+
+[project.scripts]
+# $1 = $1.default:main
+
+[project.gui-scripts]
+# spam-gui      = "spam:main_gui"
+
+[project.entry-points."nothing"]
+# tomatoes      = "spam:main_tomatoes"
+
+[tool.pytest.ini_options]
+log_cli       = false
+log_level     = "DEBUG"
+log_cli_level = "DEBUG"
+
+
 [build-system]
 requires = [
-         "setuptools>=42",
+         "setuptools",
          "wheel"
 ]
 
 build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+# packages = ['$1']
+include-package-data = true
+
+[tool.setuptools.packages.find]
+namespaces = true
+where = ["."]
+
+[tool.setuptools.package-data]
+$1 = []
+
+[tool.setuptools.exclude-package-data]
+
 
 [tool.pyright]
 # strict = acab.*
@@ -27,8 +85,3 @@ reportUnknownParameterType  = "information"
 reportUnknownVariableType   = "warning"
 reportUnnecessaryCast       = "information"
 reportUnnecessaryIsInstance = "warning"
-
-[tool.pytest.ini_options]
-log_cli       = false
-log_level     = "DEBUG"
-log_cli_level = "DEBUG"

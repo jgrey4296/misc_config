@@ -7,22 +7,20 @@
 
 # You can set these variables from the command line, and also
 # from the environment for the first two.
+doc_target    ?= "html"
 SPHINXOPTS    ?=
 SPHINXBUILD   ?= sphinx-build
-SOURCEDIR     = $1
-BUILDDIR      = build
+DOCSOURCEDIR   = docs
+DOCBUILDDIR    = dist/docs
 
-ifndef ${target}
-	target:= "html"
-endif
+.PHONY: help Makefile
 
 # Put it first so that "make" without argument is like "make help".
 help:
-	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+	@$(SPHINXBUILD) -M help "$(DOCSOURCEDIR)" "$(DOCBUILDDIR)" $(SPHINXOPTS) $(O)
 
-.PHONY: help Makefile
 
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
 # run with `make sphinx target=html` =clean etc
 sphinx: Makefile
-	@$(SPHINXBUILD) -M ${target} "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+	@$(SPHINXBUILD) -M ${doc_target} "$(DOCSOURCEDIR)" "$(DOCBUILDDIR)" $(SPHINXOPTS) $(O)

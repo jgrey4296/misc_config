@@ -1,18 +1,27 @@
 #!/usr/bin/env bash
 
+alias browse="python -mwebbrowser"
 alias clingo="clingo -W all"
 
+# top with some nice defaults
 alias cpu="top -l1 -n0"
-alias browse="python -mwebbrowser"
-alias lsa="ls -lha"
-alias lsd="gls -la --group-directories-first"
-alias lsda="ls -la | grep '^d'"
+
+# List active emacs
+alias pse="ps -A | grep -e '[0-9] emacs$'"
+alias psp="ps -A | grep -e '[0-9] python$' | grep -iv dropbox"
+
+function mytest {
+    ps -A | awk '/emacs/ { print $0 }' | echo
+}
+
+# Finder Quick Look from cli
 alias ql="qlmanage -p 2>/dev/null"
-alias cd="mycd $1"
-alias cdc="mycdc $1"
-alias cda="mycda $1"
-alias pse="ps -A | grep emacs"
-alias jgf="find . -maxdepth 1 -iname $1"
+
+# ls shortcuts
+alias lsa="ls -lha"
+alias lsd="ls -d */"
+alias lsda="ls -la | grep '^d'"
+alias lsl="ls -l"
 #disk usage:
 alias duh="du -hd 1 | sort"
 #Disable osx gatekeeper: (needs sudo)
@@ -20,21 +29,39 @@ alias gatekeeper="spctl --master-disable"
 # pdf creator
 alias txt2pdf="cupsfilter"
 
-function mycd(){
-    builtin cd "$@" && ls
+# cd + ls
+alias cd="cd_ls"
+function cd_ls {
+    builtin cd $@
+    ls
+}
+alias cdd="cd_ls_dir"
+function cd_ls_dir {
+    builtin cd $@
+    ls -d */
+}
+alias cda="cd_ls_all"
+function cd_ls_all {
+    buildin cd $@
+    ls -la
 }
 
-function mycdc(){
-    builtin cd "$@" && lsc
-}
+# Increment the shell level each time you go into a subshell
+if [ -n "$PROMPT_NUM" ] && [ $PROMPT_NUM -eq $PROMPT_NUM ] 2> null; then
+    PROMPT_NUM=$(($PROMPT_NUM + 1))
+else
+    PROMPT_NUM=1
+fi
+DEPTH_PROMPT=$PROMPT_NUM
 
-function mycda(){
-    builtin cd "$@" && lsa
-}
+if [ $PROMPT_NUM -lt 2 ]; then
+    DEPTH_PROMPT="⟘"
+fi
 
 
 #setting up the prompt:
-PS1='(\j): \D{%D} \A \u:  '
+# num of jobs, date, time, user, depth
+PS1=' (\j): \D{%D} \A \u ($DEPTH_PROMPT):  '
 
 #Shell Location update
 SHELL="$(which bash)"

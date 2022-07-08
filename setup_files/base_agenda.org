@@ -120,7 +120,12 @@ tag - amend mode
 
 cron - look at dropbox/docs, mv any files into current_pdfs
 
-** Image Pdf calls
+** Exporting and scripts
+*** Markdown html export
+Add a local file to `markdown-css-paths`,
+can use npm package `generate-github-markdown-css` as a start
+
+*** Image Pdf calls
 #+NAME: image to pdf generation
 #+begin_src bash :results value
 convert ? -alpha off ./temp/`?`
@@ -135,7 +140,7 @@ pandoc ? -o output.pdf
 #+end_src
 https://pandoc.org/
 
-** Awk
+*** Awk
 #+begin_src awk
 awk 'match($0, /HREF="(.+?)"/, a) {print a[1]}'
 

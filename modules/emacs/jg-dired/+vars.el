@@ -48,6 +48,7 @@
                                         "pytest_cache"
                                         "svn"
                                         "swp"
+                                        "node_modules"
                                         "venv"
                                         (and "js" (? ".meta"))
                                         (and "project" (? "ile"))

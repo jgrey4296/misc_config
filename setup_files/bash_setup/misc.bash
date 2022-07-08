@@ -10,10 +10,6 @@ alias cpu="top -l1 -n0"
 alias pse="ps -A | grep -e '[0-9] emacs$'"
 alias psp="ps -A | grep -e '[0-9] python$' | grep -iv dropbox"
 
-function mytest {
-    ps -A | awk '/emacs/ { print $0 }' | echo
-}
-
 # Finder Quick Look from cli
 alias ql="qlmanage -p 2>/dev/null"
 
@@ -47,7 +43,7 @@ function cd_ls_all {
 }
 
 # Increment the shell level each time you go into a subshell
-if [ -n "$PROMPT_NUM" ] && [ $PROMPT_NUM -eq $PROMPT_NUM ] 2> null; then
+if [ -n "$PROMPT_NUM" ] && [ $PROMPT_NUM -eq $PROMPT_NUM ] 2> /dev/null; then
     PROMPT_NUM=$(($PROMPT_NUM + 1))
 else
     PROMPT_NUM=1

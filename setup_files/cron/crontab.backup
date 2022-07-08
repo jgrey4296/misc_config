@@ -1,6 +1,5 @@
 SHELL=/usr/local/bin/bash
 BASH_ENV=/Volumes/documents/github/emacs_files/setup_files/cron/conda_bashrc
-PYTHONPATH=/Volumes/documents/github/py_bookmark_organiser/
 
 ### Hourly
 0,30 */1 * * * cpu_check

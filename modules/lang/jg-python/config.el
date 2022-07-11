@@ -8,7 +8,6 @@
 )
 (load! "+funcs")
 (load! "+hooks")
-(load! "+advice")
 (after! evil
   (load! "+bindings")
   )
@@ -24,7 +23,7 @@
     (add-transient-hook! 'dired-mode
       (map! :map dired-mode-map
         :localleader
-        :n "v" 'pyvenv-activate
+        :n "v" '+jg-python-activate-venv-and-conda
         )
       )
     )

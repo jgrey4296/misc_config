@@ -47,16 +47,6 @@
         (setq-local flycheck-python-pylint-executable "pylint")
         (setq-local flycheck-python-flake8-executable "flake8")))
 
-(defun +python-init-anaconda-mode-maybe-h ()
-      "Enable `anaconda-mode' if `lsp-mode' is absent and
-`python-shell-interpreter' is present."
-      (unless (or (bound-and-true-p lsp-mode)
-                  (bound-and-true-p eglot--managed-mode)
-                  (bound-and-true-p lsp--buffer-deferred)
-                  (not (executable-find python-shell-interpreter)))
-
-        (anaconda-mode +1)))
-
 (defun +jg-python-auto-kill-anaconda-processes-h ()
     "Kill anaconda processes if this buffer is the last python buffer."
     (when (and (eq major-mode 'python-mode)
@@ -75,16 +65,5 @@
   (if yas-global-mode
       (yasnippet-snippets--fixed-indent)
     ))
-
-(defun +jg-conda-env-activate ()
-  " Because file-local variables aren't set until after hooks are run,
-use this hook in the dir-locals file itself  "
-  (message "Default: %s" default-directory)
-  (if (not (s-equals? (bound-and-true-p conda-project-env-path)  conda-env-current-name))
-      (progn (pyvenv-activate nil)
-             (conda-env-activate-for-buffer))
-    (message "Current Env: %s" conda-env-current-name))
-  t
-  )
 
 ;;; +hooks.el ends here

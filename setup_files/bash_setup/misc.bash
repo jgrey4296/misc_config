@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# alias tar="gtar"
+
 alias browse="python -mwebbrowser"
 alias clingo="clingo -W all"
 

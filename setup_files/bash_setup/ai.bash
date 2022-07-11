@@ -1,23 +1,23 @@
 #!/usr/bin/env bash
 
 # Soar
-SOAR_HOME=~/github/soar-cli
+SOAR_HOME=~/github/MAS/soar-cli
 alias soar="$SOAR_HOME/SoarCLI.sh"
 
 # CLIPS
-CLIPS_HOME=~/github/clips
+CLIPS_HOME=~/github/MAS/clips
 alias clips="$CLIPS_HOME/CLIPS\ Console"
 
 #ceptre
-CEPTRE_HOME=~/github/ceptre
+CEPTRE_HOME=~/github/MAS/ceptre
 alias ceptre="$CEPTRE_HOME/bin/ceptre"
 
 #JACAMO
-JACAMO_HOME=~/github/jacamo/build
+JACAMO_HOME=~/github/MAS/jacamo/build
 JDK_HOME="$(/usr/libexec/java_home)"
 JAVA_HOME="$(/usr/libexec/java_home)"
 #for jacamo (see lang specific)
 PATH=$JACAMO_HOME/scripts:$PATH
 
 #Prompter:
-alias prompter="perl /Volumes/documents/github/cotillion/packages/prompter/prompter/prompter.pl"
+alias prompter="perl /Volumes/documents/github/MAS/cotillion/packages/prompter/prompter/prompter.pl"

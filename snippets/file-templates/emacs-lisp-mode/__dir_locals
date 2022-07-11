@@ -1,0 +1,10 @@
+;; Directory locals file
+;; a List of form:
+;; (mode . (list (varname . value)))
+
+((${1:mode-name}. ((${2:var-name} . ${3:value})
+                  ;;(eval . (a_func))
+                  )
+ )
+)
+$0

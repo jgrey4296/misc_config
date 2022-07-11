@@ -58,10 +58,10 @@
 
 ;; Lisp
 (set-file-templates!
- '("\\.el$" :when +file-templates-in-emacs-dirs-p :trigger "__doom-module" :mode emacs-lisp-mode)
- '("/.dir-locals.el$")
- '("-test\\.el$" :mode emacs-ert-mode)
  '(emacs-lisp-mode    :trigger "__package")
+ '("\\.el$" :when +file-templates-in-emacs-dirs-p :trigger "__doom-module" :mode emacs-lisp-mode)
+ '("-test\\.el$" :mode emacs-ert-mode)
+ '("/.dir-locals.el$" :mode emacs-lisp-mode :trigger "__dir_locals")
  '("mode\\.el$"       :trigger "__mode" :mode emacs-lisp-mode)
  '("minor-mode\\.el$" :trigger "__minor-mode" :mode emacs-lisp-mode)
  '("packages\\.el$" :when +file-templates-in-emacs-dirs-p :trigger "__doom_packages" :mode emacs-lisp-mode)

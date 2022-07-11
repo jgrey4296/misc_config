@@ -7,8 +7,6 @@
 (use-package! versu-mode)
 (use-package! soar-mode)
 (use-package! clips-mode
-  :init
-  (setq inferior-clips-program "clips")
   )
 (use-package! netlogo-mode
   :defer t

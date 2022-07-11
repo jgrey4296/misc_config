@@ -19,7 +19,7 @@
 ;;
 ;;; Code:
 (define-advice +eval--ensure-in-repl-buffer (:filter-return (result) +jg-repl-fix)
-  (message "Result: %s" result)
+  (message "Repl Result: %s" result)
   (if (bufferp result)
       (with-current-buffer result
         (let* ((mode (intern-soft (s-replace "inferior-" "" (symbol-name major-mode))))

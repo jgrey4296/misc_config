@@ -39,6 +39,8 @@
  jg-misc-lang
  jg-rst
  jg-inform
+ jg-erlang
+ jg-haskell
 
  :emacs  ;; ----- ====== -----
  (bindings +bindings)

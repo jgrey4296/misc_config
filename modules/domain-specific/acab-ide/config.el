@@ -12,3 +12,5 @@
 (use-package! acab-ide
   :commands acab-ide-minor-mode
   )
+
+(load! "+repl")

@@ -4,3 +4,5 @@
   (load! "+bindings")
 
   )
+
+(load! "+repl")

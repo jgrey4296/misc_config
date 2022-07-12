@@ -11,6 +11,7 @@
 (after! evil
   (load! "+bindings")
   )
+(load! "+env")
 
 (use-package! pyimport
   :demand

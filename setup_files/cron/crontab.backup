@@ -30,6 +30,8 @@ BASH_ENV=/Volumes/documents/github/emacs_files/setup_files/cron/conda_bashrc
 
 # Backup git repo urls
 0 3 * * wed git_url_backup
+# Backup list of installed brew packages
+30 3 * * wed brew list > ~/.doom.d/setup_files/brew/installed
 
 # backup cron definitions at 4am on mondays
 0 4 * * mon crontab -l > ~/.doom.d/setup_files/cron/crontab.backup

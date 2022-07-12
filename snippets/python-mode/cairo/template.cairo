@@ -3,6 +3,9 @@
 # uuid: template.cairo
 # group: cairo
 # --
+#!/usr/bin/env python3
+from __future__ import annotations
+
 import sys
 import time
 import math
@@ -14,7 +17,6 @@ from cairo_utils.dcel.constants import VertE, EdgeE, FaceE
 import argparse
 from noise import pnoise2, snoise2
 from os.path import splitext, split
-import IPython
 
 #Constants:
 N = 11

@@ -3,6 +3,10 @@
 # uuid: test.suite
 # group: testing
 # --
+"""
+$0
+"""
+from __future__ import annotations
 import unittest
 import logging
 #Import TestCase Instances here:

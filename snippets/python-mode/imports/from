@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: from
-# uuid: from
-# group: imports
-# --
-from $1 import $2
-$0

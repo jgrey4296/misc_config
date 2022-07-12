@@ -6,7 +6,7 @@
 [project]
 name            = "$1"
 version         = "0.0.1"
-description     = "blah"
+description     = ""
 readme          = "README.md"
 requires-python = ">=3.10"
 license         = {file = "LICENSE"}

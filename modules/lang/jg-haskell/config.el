@@ -26,7 +26,6 @@
   (load! "+bindings")
   )
 
-(load! "+advice")
-
+(load! "+repl")
 
 ;;; config.el ends here

@@ -22,6 +22,7 @@
 
 (define-minor-mode $1-minor-mode
     " $2 "
+    :init-value nil
     :lighter "$1"
     ;; :global t
     ;; :keymap nil

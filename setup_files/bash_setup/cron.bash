@@ -2,13 +2,14 @@
 
 DROPBOX_WATCH=( "$HOME/Dropbox/docs" "$HOME/Downloads" )
 DROPBOX_TARGET="$HOME/Desktop/pdfs/Current/"
-CONDA_MAINTENANCE_TARGET="$HOME/.shell_files/conda_envs/base_env.yaml"
+CONDA_MAINTENANCE_TARGET="$HOME/.shell_files/conda_envs/master_list.yaml"
 CPU_MAX="50"
 
 function conda_maintenance(){
     conda_activate_for_scripts
 
-    conda env export > $CONDA_MAINTENANCE_TARGET
+    conda env export --from-history > $CONDA_MAINTENANCE_TARGET
+    echo "--------------------" >> $CONDA_MAINTENANCE_TARGET
 
     for f in ~/.shell_files/conda_envs/*.yaml; do
         name=`basename -s .yaml $f`
@@ -16,7 +17,10 @@ function conda_maintenance(){
         if conda_activate_for_scripts $name; then
             echo "Loaded $name"
             conda update --all -y
-            conda env export --from-history > $f
+            # conda env export --from-history > $f
+
+            conda env export --from-history  > $CONDA_MAINTENANCE_TARGET
+            echo "--------------------" >> $CONDA_MAINTENANCE_TARGET
         fi
     done
 

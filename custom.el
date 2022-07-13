@@ -144,16 +144,7 @@
  '(org-agenda-files '("/Users/johngrey/.doom.d/setup_files/base_agenda.org"))
  '(org-ref-insert-cite-key "C-c i")
  '(safe-local-variable-values
-   '((eval +jg-conda-env-activate)
-     (conda-project-env-path . "acab-dev")
-     (eval let
-           ((path
-             (concat
-              (locate-dominating-file buffer-file-name ".dir-locals.el")
-              "acab")))
-           (pushnew path python-shell-extra-pythonpaths :test 'equal)
-           (setq-default lsp-pyright-extra-paths
-                         (vector path)))))
+   '((eval +jg-python-activate-venv-and-conda)))
  '(warning-suppress-log-types
    '(((flycheck syntax-checker))
      ((flycheck syntax-checker))

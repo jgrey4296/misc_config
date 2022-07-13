@@ -8,7 +8,7 @@ dependencies:
   - sympy
   - build
   - wheel
-  - mypy=0.931
+  - mypy
   - pyright
   - pygments
   - matplotlib

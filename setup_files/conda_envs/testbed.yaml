@@ -15,6 +15,7 @@ dependencies:
   - setuptools
   - sqlite
   - numpy
+  - build
   - pylint
   - jedi
   - pip
@@ -32,7 +33,7 @@ dependencies:
   - jsonschema
   - toposort
   - editdistance
-  - mypy=0.931
+  - mypy
   - pretty_errors
   - stackprinter
   - rich
@@ -46,4 +47,6 @@ dependencies:
   - pyparsing
   - clingo
   - pycairo
+  - openpyxl
+  - pyexcel
 prefix: /opt/anaconda3/envs/testbed

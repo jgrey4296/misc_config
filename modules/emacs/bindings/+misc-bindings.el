@@ -1,4 +1,4 @@
-;;; util/base_bindings/+bindings.el -*- lexical-binding: t; -*-
+;; util/base_bindings/+bindings.el -*- lexical-binding: t; -*-
 (message "Setting up Leaderless bindings: %s" (current-time-string))
 (global-set-key (kbd "C-c [") #'+jg-personal-insert-lparen)
 (global-set-key (kbd "C-c ]") #'+jg-personal-insert-rparen)
@@ -87,6 +87,11 @@
       (:prefix ("G" . "Peek"))
       )
 
+;; Messages
+(map! :map messages-buffer-mode-map
+      :g "0" #'evil-beginning-of-line
+      )
+(evil-make-overriding-map messages-buffer-mode-map)
 
 ;; Mouse Deactivation
 (define-key evil-motion-state-map [down-mouse-1] #'ignore)

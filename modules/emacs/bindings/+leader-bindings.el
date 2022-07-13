@@ -16,7 +16,7 @@
       :desc "Pop Shell"             "'"   #'shell
       :desc "Switch to last buffer" "TAB" #'evil-switch-to-windows-last-buffer
       :desc "Split Window"          "/"   #'split-window-right
-      :desc "Toggle last popup"     "~"   #'+popup/toggle
+      :desc "Toggle last popup"     "`"   #'+popup/toggle
 
       :desc "Evaluate line/region"  "e"   #'eval-last-sexp
 

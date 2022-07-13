@@ -32,4 +32,5 @@ dependencies:
   - cookiecutter
   - img2pdf
   - clingo
+  - sphinx
 prefix: /opt/anaconda3/envs/base310

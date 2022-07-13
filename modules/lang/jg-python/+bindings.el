@@ -1,5 +1,10 @@
 ;;; lang/jg-python/+bindings.el -*- lexical-binding: t; -*-
 
+(map! :map dired-mode-map
+      :localleader
+      :n "v" #'+jg-python-activate-venv-and-conda
+      )
+
 (map! :after python
       :map python-mode-map
       :n "z d" nil ;; #'+jg-python-toggle-all-defs

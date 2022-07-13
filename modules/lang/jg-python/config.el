@@ -19,15 +19,6 @@
 (use-package! lsp-jedi
   :defer)
 
-(after! (dired pyvenv-mode)
-    " Remove the annoying python-shell-setup advice "
-    (add-transient-hook! 'dired-mode
-      (map! :map dired-mode-map
-        :localleader
-        :n "v" '+jg-python-activate-venv-and-conda
-        )
-      )
-    )
 
 (use-package-hook! python :post-config
   (setq python-mode-hook nil)

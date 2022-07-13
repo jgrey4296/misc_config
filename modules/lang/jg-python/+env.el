@@ -113,6 +113,8 @@ return (dir-of-venv env-name) or nil
 (defun +jg-python-activate-venv-and-conda (&optional prefix)
   "Dual Activate pyvenv and conda environments"
   (interactive "P")
+  (require 'pyvenv)
+  (require 'conda)
   (let* ((project (if (not prefix) (find-venv)))
          (env-name (cond ((stringp prefix) prefix)
                          (prefix (conda--read-env-name))

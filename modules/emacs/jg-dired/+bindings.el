@@ -3,8 +3,8 @@
 
 (map! :map dired-mode-map
       :nv ")" #'dired-git-info-mode
-      :n "o" #'dired-find-file-other-window
-      :n "S" #'hydra-dired-quick-sort/body
+      :n "o"  #'dired-find-file-other-window
+      :n "S"  #'hydra-dired-quick-sort/body
       :nv "j" #'dired-next-line
       :nv "k" #'dired-previous-line
       :nv "J" #'dired-next-dirline
@@ -17,7 +17,7 @@
       :n "v" nil
       :n "i" nil
       :n "I" nil
-      ":" nil
+      :n ":" nil
 
       "C-h" #'dired-up-directory
 
@@ -41,7 +41,6 @@
       :desc "Hide Toggle"           "h"         #'dired-omit-mode
       :desc "Symlink"               "S"         #'dired-do-symlink
       :desc "Quicklook"             "l"         #'+jg-dired-quick-look
-      :desc "Activate Environment"  "v"         #'pyvenv-activate
       (:prefix ("d" . "Describe")
        :desc "Summarise Orgs"     "s"     #'+jg-dired-create-summary-of-orgs
        :desc "Marked Info"        "m"        #'+jg-dired-marked-info

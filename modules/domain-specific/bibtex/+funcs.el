@@ -31,21 +31,24 @@ ensuring they work across machines "
   )
 
 (defun +jg-bibtex-google-scholar (arg)
-  "Open the bibtex entry at point in google-scholar by its doi."
+  "Open the bibtex entry at point in google-scholar by its doi.
+With arg, searchs the dplp instead.
+"
   (interactive "P")
   (let* ((search-texts (mapcar #'bibtex-autokey-get-field jg-bibtex-scholar-search-fields))
          (exact-texts (mapcar #'bibtex-autokey-get-field jg-bibtex-scholar-search-fields-exact))
          (exact-string (s-join " " (mapcar #'(lambda (x) (format "\"%s\"" x))
                                            (-filter #'(lambda (x) (not (string-empty-p x))) exact-texts))))
          (all-terms (s-concat exact-string " " (s-join " " search-texts)))
-         (search-string (format jg-bibtex-scholar-search-string all-terms))
-         (alt-search-string (format jg-bibtex-dblp-search-string all-terms))
+         (cleaned (s-replace-regexp "{.+?\\(\\w\\)}" "\\1" all-terms))
+         (search-string (format jg-bibtex-scholar-search-string cleaned))
+         (alt-search-string (format jg-bibtex-dblp-search-string cleaned))
          )
     (if arg
         (browse-url alt-search-string)
       (browse-url search-string)
-      )))
-
+      )
+    ))
 (defun +jg-bibtex-edit-entry-type ()
   " Edit the @type of a bibtex entry, using
 bibtex-BibTeX-entry-alist for completion options "

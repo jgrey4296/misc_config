@@ -11,8 +11,7 @@
       :prefix "t"
        "v r" #'rainbow-mode
       )
-(map! :leader
-      :prefix "h"
+(map! :map help-map
       :desc "Regex Reminder" "R" #'+jg-text-regex-reminder
       )
 

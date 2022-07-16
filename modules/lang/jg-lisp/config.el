@@ -4,3 +4,5 @@
 (after! (evil elisp-mode)
   (load! "+bindings")
   )
+
+(add-to-list 'auto-mode-alist '("\\.el\\.gz" . emacs-lisp-mode))

@@ -44,4 +44,11 @@
 
 
 
+(define-advice org-ref-version (:around (f)
+                                +jg-org-ref-version-override)
+  (let ((kill-ring nil))
+    (funcall f)
+    )
+  )
+
 ;;; +advice.el ends here

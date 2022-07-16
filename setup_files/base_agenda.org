@@ -31,6 +31,199 @@ Versu, Abl, Cif
 *** [[file:/Volumes/documents/github/writing/resources/research_questions.org][Research Questions]]
 
 ** Reminders
+*** Definitions
+**** Modalities
+Alethic     - Possibility
+Deontic     - Permission
+Axiological - Value (intrinsic/extrinsic)
+Epistemic   - Knowledge
+Doxastic    - Belief
+Boulomaic   - Desire
+
+**** Binary Relations
+Injective            -
+Functional           -
+Total                -
+Surjective           -
+Reflexive            -
+Irreflexive          -
+Associativity        -
+Commutativity        -
+Distributivity       -
+Idempotence          -
+Absorption           -
+Monotonicity         -
+Affinity             -
+Duality              -
+
+Symmetric            -
+Antisymmetric        -
+Asymmetric           -
+Transitive           -
+Connected            -
+Strongly Connected   -
+Pre-order            -
+Poset                -
+Partial Order        -
+Strict Partial Order -
+Total Order          -
+Strict Total Order   -
+Equivalence Relation -
+Meet                 -
+Join                 -
+Lattice              -
+
+Morphism             -
+Isomorphic           -
+Monad                -
+Functor              -
+
+**** Operators
+∧ -
+∨ -
+⊢ -
+⊫ - Satistifaction
+⟘ -
+⟙ -
+
+⊂ -
+⊃ -
+∪ -
+∩ -
+
+**** Linguistics
+Noun                    -
+Pronoun                 -
+Verb                    -
+Adjective               -
+Adverbs                 -
+Preposition             -
+Conjunction             -
+Articles                -
+Interjections           -
+
+Open and Closed Classes -
+
+**** Speech Acts
+Illocutionary                   -
+Perlocutionary                  -
+Performative                    -
+Indirect                        -
+
+Direction of Fit                -
+Components:
+Illocutionary Point             -
+Strength of Illocutionary Point -
+Mode of Achievement             -
+Content Conditions              -
+Preparatory Conditions          -
+Sincerity Conditions            -
+Strength of Sincerity           -
+
+Scorekeeping                    -
+
+(Austin):
+Verdictives                     -
+Exercitives                     -
+Commissives                     -
+Behabitives                     -
+Expositives                     -
+
+(Searle):
+Assertives                      -
+Directives                      -
+Commissives                     -
+Expressives                     -
+Declarations                    -
+
+Pragmatics                      -
+
+
+**** Answer Set Programming
+Herbrand Base            -
+Herbrand Universe        -
+Interpretation           -
+
+Minimal Model Semantics  -
+Fixpoint                 -
+Stratified Program       -
+Dependency Graph         -
+Stable Semantics         -
+Gelfond-Lifschitz Reduct -
+
+Brave Reasoning          -
+Cautious Reasoning       -
+
+**** Components of Logic
+Term                                -
+Signature                           -
+
+Open World Assumption               -
+Closed World Assumption             -
+
+Satisfaction                        -
+
+Valid                               -
+Semantic Consequence                -
+Bisimulation                        -
+Hilbert Semantics                   -
+Tarski Semantics                    -
+
+Sequent                             -
+Weakening                           -
+Contraction                         -
+Exchange                            -
+
+α conversion                        -
+β reduction                         -
+η reduction                         -
+
+Resolution                          -
+
+Normal Form                         -
+
+Hoar Triple                         -
+
+law of excluded middle              -
+double negation elimination         -
+cut rule                            -
+material implication                -
+biconditional                       -
+
+
+compactness property                -
+
+first-order correspondence language -
+**** Components of Modal Logic
+Kripke Model -
+□A = ~◇~A
+□            -
+◇            -
+
+**** Logics
+first-order logic  -
+second-order logic -
+
+constructive logic   -
+classical logic      -
+intuitionistic logic -
+substructural logic  -
+
+**** Modal Logics
+K   -
+K45 -
+S   -
+S5  -
+
+**** Linear Logic
+linear logic -
+
+Multiplicative Conjunction - ⨂
+Multiplicative Disjunction - ⅋
+Additive Conjunction - &
+Additive Disjunction - ⨁
+
+
 *** Urls
 https://github.com/mvcisback/hasse
 https://github.com/mxgmn/MarkovJunior.git

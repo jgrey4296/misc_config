@@ -31,6 +31,10 @@
              #'evil-collection-python-set-evil-shift-width
              #'doom--setq-tab-width-for-python-mode-h
              )
+  ;; Always add auto-hide as the last thing
+  (add-hook! 'python-mode-hook :depth 100
+             '+jg-python-auto-hide
+             )
   (setq-hook! 'python-mode-hook tab-width python-indent-offset)
 )
 

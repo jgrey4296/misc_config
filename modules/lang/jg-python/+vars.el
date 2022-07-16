@@ -29,6 +29,11 @@
       jg-python-last-chosen-support nil
       )
 
+(setq-default jg-python-fold-block-start-re "^##-- \\(\\sw+\\)"
+              jg-python-fold-block-end-re   "^##-- End %s"
+              jg-python-import-block-end-re "^\\(__all__\\|\\w\\s-+=\\|defun\\|class\\)"
+              )
+
 
 ;; (defvar +python-ipython-command '("ipython" "-i" "--simple-prompt" "--no-color-info")
 ;;   "Command to initialize the ipython REPL for `+python/open-ipython-repl'.")

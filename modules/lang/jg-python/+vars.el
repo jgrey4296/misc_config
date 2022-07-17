@@ -29,10 +29,10 @@
       jg-python-last-chosen-support nil
       )
 
-(setq-default jg-python-fold-block-start-re "^##-- \\(\\sw+\\)"
+(setq-default jg-python-fold-block-start-re "^##-- \\([^e][^n][^d]\\sw+\\)"
               jg-python-fold-block-end-re   "^##-- End %s"
               jg-python-import-block-end-re "^\\(__all__\\|[[:ascii:]]+?\\s-+=\\|defun\\|class\\)"
-              )
+      )
 
 
 ;; (defvar +python-ipython-command '("ipython" "-i" "--simple-prompt" "--no-color-info")

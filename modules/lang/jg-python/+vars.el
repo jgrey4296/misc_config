@@ -29,9 +29,9 @@
       jg-python-last-chosen-support nil
       )
 
-(setq-default jg-python-fold-block-start-re "^##-- \\([^e][^n][^d]\\sw+\\)"
+(setq-default jg-python-fold-block-start-re "^##-- \\([^e][^n][^d][[:graph:]]+\\)$"
               jg-python-fold-block-end-re   "^##-- End %s"
-              jg-python-import-block-end-re "^\\(__all__\\|[[:ascii:]]+?\\s-+=\\|defun\\|class\\)"
+              jg-python-import-block-end-re "^\\(__all__\\|[[:graph:]]+?\\s-+=\\|defun\\|class\\)"
       )
 
 

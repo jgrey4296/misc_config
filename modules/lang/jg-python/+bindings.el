@@ -11,6 +11,7 @@
       :n "z D" nil ;; #'+jg-python-close-class-defs
       :v "i f" #'+jg-python-select-defun
       :v "i F" #'+jg-python-select-class
+      :n "] ]" #'+jg-python-forward-defun
       :localleader
       :desc "Sort defs" "S" #'+jg-python-sort-class-methods
       :desc "REPL"      "r" #'+python/open-repl

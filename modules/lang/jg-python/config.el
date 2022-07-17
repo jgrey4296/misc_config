@@ -12,6 +12,7 @@
   (load! "+bindings")
   )
 (load! "+env")
+(load! "+nav")
 
 (use-package! pyimport
   :demand

@@ -79,7 +79,7 @@ and closes classes and functions, re-opening only the first class "
     ;; Fold Imports
     (if (re-search-forward "^\\(from\\|import\\)" nil t)
         (let ((start-hide (progn (beginning-of-line) (point)))
-              (end-hide (progn (re-search-forward jg-python-import-block-end-re nil t) (end-of-line 0) (point))))
+              (end-hide (progn (forward-line) (re-search-forward jg-python-import-block-end-re nil t) (end-of-line 0) (point))))
           (if (and start-hide end-hide)
               (vimish-fold start-hide end-hide)
             )

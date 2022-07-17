@@ -31,7 +31,7 @@
 
 (setq-default jg-python-fold-block-start-re "^##-- \\(\\sw+\\)"
               jg-python-fold-block-end-re   "^##-- End %s"
-              jg-python-import-block-end-re "^\\(__all__\\|\\w\\s-+=\\|defun\\|class\\)"
+              jg-python-import-block-end-re "^\\(__all__\\|[[:ascii:]]+?\\s-+=\\|defun\\|class\\)"
               )
 
 

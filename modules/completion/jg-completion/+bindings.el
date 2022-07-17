@@ -94,3 +94,9 @@
       [tab]                 #'helm-select-action
       "C-z"                 #'helm-execute-persistent-action
         )
+
+
+(map! :map snippet-mode-map
+      :localleader
+      "1" (cmd! (+jg-browse-url "https://joaotavora.github.io/yasnippet/snippet-development.html"))
+      )

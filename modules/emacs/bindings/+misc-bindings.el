@@ -16,13 +16,15 @@
 
 ;;
 ;; Shell
-(map! :map shell-mode-map
+(map! :after shell
+      :map shell-mode-map
       :localleader
       "h" #'counsel-shell-history)
 
 ;; Comint
 ;; overrides the default normal mode binding of evil-ret
-(map! :map comint-mode-map
+(map! :after comint
+      :map comint-mode-map
       :n "RET" #'comint-send-input)
 
 ;; Flycheck
@@ -35,13 +37,15 @@
       )
 
 ;; Git Timemachine
-(map! :map git-timemachine-mode-map
+(map! :after git-timemachine
+      :map git-timemachine-mode-map
       :n "[ g" #'git-timemachine-show-previous-revision
       :n "] g" #'git-timemachine-show-next-revision
       )
 
 ;; Snipe
-(map! :map evil-snipe-mode-map
+(map! :after evil-snipe
+      :map evil-snipe-mode-map
       :nm "S" nil
       :nm "s" nil
       )
@@ -88,9 +92,25 @@
       )
 
 ;; Messages
-(map! :map messages-buffer-mode-map
+(map! :after message
+      :map messages-buffer-mode-map
       :g "0" #'evil-beginning-of-line
       )
+
+(map! :after help
+      :map help-map
+      "4" nil
+      "4" #'info-other-window
+      "b" nil
+      "d" nil
+      (:prefix "b"
+       "t" #'+jg-which-key-show-top-level)
+      (:prefix "d"
+       :desc "Regexp Syntax" "r" (cmd! (info "(elisp) Syntax of Regexps"))
+       )
+      (:prefix ("d p" . "packages"))
+      )
+
 (evil-make-overriding-map messages-buffer-mode-map)
 
 ;; Mouse Deactivation

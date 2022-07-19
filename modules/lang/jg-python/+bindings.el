@@ -1,6 +1,7 @@
 ;;; lang/jg-python/+bindings.el -*- lexical-binding: t; -*-
 
-(map! :map dired-mode-map
+(map! :after dired
+      :map dired-mode-map
       :localleader
       :n "v" #'+jg-python-activate-venv-and-conda
       )

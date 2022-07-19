@@ -1,6 +1,7 @@
 ;;; editor/project-walk/+bindings.el -*- lexical-binding: t; -*-
 
-(map! :leader
+(map! :after jg-leader-bindings-loaded
+      :leader
       :prefix "p"
       :desc "Project Walk" "W" #'project-walk-minor-mode
       :desc "Walk to next" "n" #'project-walk-next

@@ -24,6 +24,7 @@
   )
 
 
-(map! :map bibtex-mode-map
+(map! :after bibtex
+      :map bibtex-mode-map
       :localleader
       :desc "Tweet Entry" "t" #'+jg-bibtex-tweet-cmd)

@@ -1,2 +1,3 @@
 
-(add-hook 'doom-first-input-hook #'(lambda () (load! "+keybindings")))
+(after! jg-leader-bindings-loaded
+  (load! "+keybindings"))

@@ -1,7 +1,8 @@
 ;;; jg-tag/+bindings.el --- summary -*- lexical-binding: t -*-
 ;;
 ;; Helm bindings
-(map! :leader
+(map! :after jg-leader-bindings-loaded
+      :leader
       :desc "Open Random Untagged Twitter" "o u" #'+jg-tag-open-random-untagged-twitter
       :prefix ("o h" . "Helms")
       :desc "Firefox Helm"              "f" #'+jg-tag-helm-bookmarks
@@ -11,11 +12,13 @@
       :desc "Twitter Grep Helm"         "g" #'+jg-tag-helm-twitter-grep
       )
 
-(map! :leader
+(map! :after jg-leader-bindings-loaded
+      :leader
       :desc "Insert Tag" "#" #'+jg-tag-simple-ivy
       )
 
-(map! :map helm-map
+(map! :after helm
+      :map helm-map
       "M-SPC" #'helm-next-page)
 
 (defhydra tag-clean ()
@@ -33,12 +36,14 @@
   ("l" #'tag-clean/leave)
   ("!" #'+jg-tag-org-split-on-headings :exit t)
   )
-(map! :map tag-clean-minor-mode-map
+(map! :after 'tag-clean-minor-mode
+      :map tag-clean-minor-mode-map
       "." #'tag-clean/body
       )
 
 ;; Dired bindings
-(map! :map dired-mode-map
+(map! :after dired
+      :map dired-mode-map
       :localleader
       (:prefix ("d" . "Describe")
        :desc "Count Untagged Orgs" "u"   #'+jg-tag-dired-directory-count-untagged
@@ -54,7 +59,7 @@
        )
       )
 ;; Evil ex commands
-(after! evil-ex
+(after! jg-evil-ex-bindings
   (evil-ex-define-cmd "t[ag]"  #'+jg-tag-helm-start)
   (evil-ex-define-cmd "to"     #'+jg-tag-occurrences)
   (evil-ex-define-cmd "toa"    #'+jg-tag-occurrences-in-open-buffers)

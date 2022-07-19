@@ -46,4 +46,4 @@
   :lighter "Tag-Clean"
   )
 
-(provide tag-clean-minor-mode)
+(provide 'tag-clean-minor-mode)

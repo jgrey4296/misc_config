@@ -520,7 +520,7 @@
         :desc "Spell checker"              "s"  #'spell-fu-mode)
        (:when (featurep! :checkers spell +flyspell)
         :desc "Spell checker"              "s"  #'flyspell-mode))
-      (:prefix (                     "v" . "Visual")
+      (:prefix ("v" . "Visual")
        :desc "Frame fullscreen"      "F" #'toggle-frame-fullscreen
        :desc "Line numbers"          "n" #'+jg-toggle-line-numbers
        :desc "Line numbers Visual"   "N" #'+jg-toggle-line-numbers-visual
@@ -617,3 +617,5 @@
       :desc "Use Temp Template"     "e" #'aya-expand
       :desc "Find Snippet Dir"      "d" (cmd! (find-file +snippets-dir))
       )
+
+(provide 'jg-leader-bindings-loaded)

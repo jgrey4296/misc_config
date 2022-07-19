@@ -6,6 +6,7 @@
 (load! "+test-parsing")
 (load! "+test-execution")
 (load! "+test-reporting")
+
 (after! (evil org)
   (defvar org-unit-test-map (make-sparse-keymap))
   (define-minor-mode org-unit-test-minor-mode

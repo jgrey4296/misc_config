@@ -71,7 +71,7 @@
 (defun +jg-tag-insert-twitter-link (candidate)
   (let ((candidates (mapcar 'car (helm-marked-candidates))))
     (with-helm-current-buffer
-      (loop for entry in candidates
+      (cl-loop for entry in candidates
             do (let ((name (substring entry 1)))
                  (insert (format "[[https://twitter.com/%s][%s]]\n" name entry)))))))
 

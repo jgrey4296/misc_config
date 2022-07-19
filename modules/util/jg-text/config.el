@@ -3,12 +3,13 @@
 (load! "+funcs")
 (load! "+barchart")
 (after! evil
-  (load! "+bindings")
   (load! "+operators")
+  (load! "+motions")
+  (load! "+state")
   (load! "+hooks")
+  (load! "+bindings")
   (add-hook! prog-mode :depth 80 #'+jg-text-auto-hide)
 )
-
 
 (use-package! academic-phrases
   :defer t
@@ -31,8 +32,4 @@
 (use-package! evil-string-inflection
   :defer t
   :commands evil-operator-string-inflection
-  )
-(after! evil
-  (load! "+motions")
-  (load! "+state")
   )

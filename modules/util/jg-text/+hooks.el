@@ -9,7 +9,6 @@ Vimish-fold's any blocks matching jg-fold-block-gen's :re pattern
     (save-excursion
       (beginning-of-buffer)
       (vimish-fold-delete-all)
-      (evil-open-folds)
       ;; Fold Groups
       (message "Searching for Fold Blocks")
       (while (re-search-forward (+jg-fold-block-gen :re t) nil t)

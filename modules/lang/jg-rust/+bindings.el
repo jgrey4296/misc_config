@@ -19,7 +19,8 @@
 ;;
 ;;; Code:
 
-(map! :map rust-mode-map
+(map! :after rust-mode
+      :map rust-mode-map
       :localleader
       :desc "Docs: Rust"         "1" (cmd! (+jg-browse-url jg-python-docs-url))
       :desc "Docs: Cargo"        "2" (cmd! (+jg-browse-url jg-cargo-docs-url))

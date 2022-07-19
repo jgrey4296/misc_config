@@ -3,6 +3,10 @@
 (load! "+vars")
 (load! "+funcs")
 
+(use-package-hook! dired :post-config
+  (load! "+bindings")
+)
+
 (use-package! dired-quick-sort
   :commands hydra-dired-quick-sort/body
   )
@@ -11,7 +15,3 @@
   :config
   (set-face-attribute 'diredfl-flag-mark-line nil :background "blueviolet")
 )
-
-(use-package-hook! dired :post-config
-  (load! "+bindings")
-  )

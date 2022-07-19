@@ -8,7 +8,7 @@
         (alltags (make-hash-table :test 'equal))
         )
     ;; (message "Describing marked file tags to depth: %s" targetdepth)
-    (loop for x in marked do
+    (cl-loop for x in marked do
           (maphash (lambda (k v) (cl-incf (gethash k alltags 0) v)) (+jg-tag-get-file-tags x targetdepth))
           )
     (if (not (hash-table-empty-p alltags))

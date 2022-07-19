@@ -471,3 +471,5 @@
 (message "Evil Bindings Complete: %s" (current-time-string))
 
 (global-set-key (kbd "<backtab>")       #'evil-normal-state)
+
+(provide 'jg-evil-bindings)

@@ -60,3 +60,14 @@ Modified to pre-sort bookmarks, caselessly
     (intern-soft (ivy-read "Snippet Table: " tables))
     )
   )
+
+
+(defun +jg-counsel-features ()
+  " Insert from a list of recognized features "
+  (interactive)
+  (ivy-read "Available Features: "
+            (seq-sort #'string-lessp features)
+            :require-match nil
+            :action 'insert
+            )
+  )

@@ -1,7 +1,8 @@
 ;;; editor/window-control/+bindings.el -*- lexical-binding: t; -*-
 
 ;; Bindings
-(map! :leader
+(map! :after jg-leader-bindings-loaded
+      :leader
       :desc "Insert Color"                    "i c" #'helm-colors
 
       (:prefix ("w r" . "Ring")
@@ -30,7 +31,8 @@
        )
       )
 
-(map! :leader
+(map! :after jg-leader-bindings-loaded
+      :leader
       (:prefix "b"
        :desc "Undo-Tree" "u"         #'+jg-ui-undo-tree
        :desc "Clear Popup Rules" "P" #'+jg-ui-ivy-reset-popup-rules
@@ -44,7 +46,8 @@
        )
       )
 
-(map! :map messages-buffer-mode-map
+(map! :after message
+      :map messages-buffer-mode-map
       :n "q" #'+popup/close
       )
 

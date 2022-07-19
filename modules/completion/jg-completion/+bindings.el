@@ -5,7 +5,8 @@
 (map! :after counsel
       [remap bookmark-jump] #'+jg-counsel-bookmark)
 
-(map! :map ivy-minibuffer-map
+(map! :after ivy
+      :map ivy-minibuffer-map
       [remap doom/delete-backward-word] #'ivy-backward-kill-word
       :in "TAB"                         #'ivy-alt-done
       :i "<backtab>"                    #'ivy-dispatching-call
@@ -24,12 +25,14 @@
       :desc "Results as Buffer"        :n "b" #'ivy-occur
       )
 
-(map! :map ivy-occur-grep-mode-map
+(map! :after ivy
+      :map ivy-occur-grep-mode-map
       :desc "Do Ops" "g" jg-binding-operator-map
       )
 
   ;;; :completion
-(map! (:when (featurep! :completion company)
+(map! :after company
+      (:when (featurep! :completion company)
        :i "C-@"    (cmds! (not (minibufferp)) #'company-complete-common)
        :i "C-SPC"  (cmds! (not (minibufferp)) #'company-complete-common)
        (:after company
@@ -96,7 +99,14 @@
         )
 
 
-(map! :map snippet-mode-map
+(map! :after yasnippet
+      :map snippet-mode-map
       :localleader
       "1" (cmd! (+jg-browse-url "https://joaotavora.github.io/yasnippet/snippet-development.html"))
+      )
+
+
+(map! :map emacs-lisp-mode-map
+      :localleader
+      "i f" #'+jg-counsel-features
       )

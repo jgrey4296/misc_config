@@ -107,3 +107,5 @@
 (evil-ex-define-cmd "sor[t]"            #'evil-ex-sort)
 ;; window resizing
 (evil-ex-define-cmd "res[ize]"          #'evil-ex-resize)
+
+(provide 'jg-evil-ex-bindings)

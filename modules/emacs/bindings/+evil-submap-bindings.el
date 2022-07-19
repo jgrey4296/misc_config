@@ -1,7 +1,8 @@
 ;;; config/default/+bindings.el -*- lexical-binding: t; -*-
 
 (message "Setting up Evil Submaps")
-(map! :map (evil-ex-completion-map evil-ex-search-keymap)
+(map! :after evil-ex
+      :map (evil-ex-completion-map evil-ex-search-keymap)
       "C-a" #'evil-beginning-of-line
       "C-b" #'evil-backward-char
       "C-f" #'evil-forward-char

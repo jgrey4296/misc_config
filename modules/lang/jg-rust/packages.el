@@ -20,6 +20,7 @@
 ;;; Code:
 (package! rustic)
 (package! racer)
+(package! rust-mode)
 
 
 ;;; packages.el ends here

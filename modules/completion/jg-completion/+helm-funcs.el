@@ -55,7 +55,7 @@ versus not"
          (count 0)
          (unopened '())
          )
-    (mapc (lambda (x) (if (not (gethash (downcase x) used-files)) (progn (incf count) (push x unopened)))) all-files)
+    (mapc (lambda (x) (if (not (gethash (downcase x) used-files)) (progn (cl-incf count) (push x unopened)))) all-files)
     (with-current-buffer (messages-buffer)
       (message "%s" (mapconcat 'identity unopened "\n"))
       )

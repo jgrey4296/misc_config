@@ -11,6 +11,7 @@
   (load! "+org-standard-bindings.el")
   (load! "+bindings")
   )
+(load! "+file-templates")
 
 (use-package! link-hint
   :config

@@ -1,11 +1,13 @@
 ;;; main/jg-org/+bindings.el -*- lexical-binding: t; -*-
 (message "Setting up general access org bindings: %s" (current-time-string))
-(map! :leader
+(map! :after jg-leader-bindings-loaded
+      :leader
       "i t"    #'org-time-stamp
       "j c"    #'org-goto-calendar
       )
 
-(map! :map dired-mode-map
+(map! :after dired
+      :map dired-mode-map
       (:prefix "%"
        :desc "Mark Orgs" :n "o"     #'+jg-org-dired-select-org
        )
@@ -38,7 +40,8 @@
 ;; Wiping old
 ;; Personal
 ;; <leaderless>
-(map! :map org-mode-map
+(map! :after org
+      :map org-mode-map
       :n "] h" nil
       :n "[ h" nil
       :desc "Next Link"       :n "] l" #'org-next-link
@@ -48,11 +51,13 @@
       :desc "Headings Helm"   :n "g h" #'helm-org-in-buffer-headings
       )
 ;; <leader>
-(map! :map org-mode-map
+(map! :after org
+      :map org-mode-map
       :leader
       :desc "Toggle Links" "t l"   'org-toggle-link-display)
 ;; <localleader>
-(map! :map org-mode-map
+(map! :after org
+      :map org-mode-map
       :localleader
       :desc "Refile" "R" #'+jg-org-refile-subtree
       :desc "Todo"   "TAB" #'org-todo

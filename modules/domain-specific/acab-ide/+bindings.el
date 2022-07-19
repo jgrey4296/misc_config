@@ -2,7 +2,8 @@
 ;; Defines all sub-trie modes: trie, trie-visual, sequence etc
 ;; "a s t" 'acab-ide/toggle-trie-ide)
 
-(map! :leader
+(map! :after jg-leader-bindings-loaded
+      :leader
       :prefix "o"
       "s e" 'trie-explore/explore-current-buffer)
 

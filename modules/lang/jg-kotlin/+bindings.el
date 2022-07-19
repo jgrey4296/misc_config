@@ -1,6 +1,7 @@
 ;;; lang/jg-kotlin/+bindings.el -*- lexical-binding: t; -*-
 
-(map! :map kotlin-mode-map
+(map! :after kotlin-mode
+      :map kotlin-mode-map
       :localleader
       :desc "Docs: Android"  "1" (cmd! (+jg-browse-url "https://developer.android.com/guide"))
       :desc "Docs: Kotlin"   "2" (cmd! (+jg-browse-url "https://kotlinlang.org/docs/home.html"))

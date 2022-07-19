@@ -5,6 +5,12 @@
 (load! "+util")
 (load! "+vars")
 (load! "+funcs")
+(after! ivy
+  (load! "+ivy_actions")
+  )
+(after! evil
+  (load! "+bindings")
+  )
 
 (use-package! tag-clean-minor-mode :defer t)
 (use-package! tag-mode :defer t)
@@ -21,8 +27,3 @@
 (after! tag-clean-minor-mode
   (push 'tag-clean-minor-mode minor-mode-list)
   )
-(after! ivy
-  (load! "+ivy_actions"))
-(after! evil
-  (load! "+bindings")
-)

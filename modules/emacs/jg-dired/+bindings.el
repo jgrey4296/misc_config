@@ -1,7 +1,9 @@
 ;;; emacs/dired/+bindings.el -*- lexical-binding: t; -*-
 
+(message "Setting up Dired bindings")
 
-(map! :map dired-mode-map
+(map! :after evil
+      :map dired-mode-map
       :nv ")" #'dired-git-info-mode
       :n "o"  #'dired-find-file-other-window
       :n "S"  #'hydra-dired-quick-sort/body
@@ -36,7 +38,8 @@
        :desc "Global Match Rename" :n "R" #'+jg-GLOBAL-dired-do-rename-regexp)
       )
 
-(map! :map dired-mode-map
+(map! :after evil
+      :map dired-mode-map
       :localleader
       :desc "Hide Toggle"           "h"         #'dired-omit-mode
       :desc "Symlink"               "S"         #'dired-do-symlink
@@ -59,7 +62,8 @@
        )
       )
 
-(map! :map dired-mode-map
+(map! :after evil
+      :map dired-mode-map
       :prefix ("%" . "Dired-Do")
       :desc "flag-garbage-files"           :n "&" #'dired-flag-garbage-files
       :desc "do-copy-regexp"               :n "C" #'dired-do-copy-regexp

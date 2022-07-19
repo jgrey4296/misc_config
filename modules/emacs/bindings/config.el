@@ -2,14 +2,13 @@
 
 (load! "+funcs")
 (load! "+vars")
-(load! "+help-map")
 (load! "+repl-commands")
 
-(after! ibuffer
-  (load! "+ibuffer-bindings")
-)
 (after! evil
   (load! "+leader-bindings")
+  (load! "+evil-bindings")
+  (load! "+evil-submap-bindings")
+  (load! "+ibuffer-bindings")
   (load! "+misc-bindings")
   )
 (after! evil-ex
@@ -29,10 +28,5 @@
         )
   )
 
-(defun jg-evil-bind-hook ()
-  (load! "+evil-bindings")
-  (load! "+evil-submap-bindings"))
 
 (add-hook 'ibuffer-mode-hook #'+jg-ibuffer-update-hook)
-(add-hook 'doom-first-input-hook #'jg-evil-bind-hook -100)
-(add-hook 'doom-first-input-hook #'+jg-help-map-adjust)

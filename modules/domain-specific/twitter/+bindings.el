@@ -1,6 +1,7 @@
 ;;; domain-specific/twitter/+bindings.el -*- lexical-binding: t; -*-
 
-(map! :leader
+(map! :after jg-leader-bindings-loaded
+      :leader
       :desc "Download Tweet Thread" "P d" #'+jg-tweet-downloader
       )
 

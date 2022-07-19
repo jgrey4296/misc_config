@@ -31,8 +31,9 @@
 (use-package! free-keys
   :commands (free-keys free-keys-set-prefix)
   :config
-  (+jg-misc-free-key-binding-update)
+  (evil-make-intercept-map free-keys-mode-map)
   )
+
 (use-package! undo-tree
   :config
   ;; Compress undo-tree history files with zstd, if available. File size isn't

@@ -2,7 +2,8 @@
 ;; Bibtex bindings
 
 (message "Setting up bibtex bindings: %s" (current-time-string))
-(map! :map bibtex-mode-map
+(map! :after bibtex
+      :map bibtex-mode-map
       :desc "Clean entry"        :n "C-c C-c" #'+jg-bibtex-clean-entry
       :desc "Clean entry"        :n "TAB"     #'+jg-bibtex-clean-entry
       :desc "Edit Field"         :n  "\\"     #'+jg-bibtex-edit-field
@@ -12,7 +13,8 @@
       :desc "Open Pdf"           :n "RET"     #'+jg-bibtex-open-pdf
       :desc "Open Folder"        :n "M-RET"   #'+jg-bibtex-find-folder
       )
-(map! :map bibtex-mode-map
+(map! :after bibtex
+      :map bibtex-mode-map
       :localleader
       :desc "Bibtex Hydra"        "." #'+jg-bibtex-hydra/body
       :desc "Build Bibliography"  "B" #'org-ref-build-full-bibliography
@@ -56,13 +58,13 @@
 (map! :map reftex-mode-map
       "C-c [" nil)
 
-(message "Setting up general bibtex bindings: %s" (current-time-string))
-(map! :leader
+(map! :after jg-leader-bindings-loaded
+      :leader
       :desc "Bibtex Helm"               "o h b" #'+jg-bibtex-helm-bibtex
       :desc "Load Random Bibtex entry"  "o !"   #'+jg-bibtex-load-random)
 
 
-(after! evil-ex
+(after! jg-evil-ex-bindings
   (message "Setting up bibtex evil ex: %s" (current-time-string))
   (evil-ex-define-cmd "ci[te]" #'+jg-bibtex-insert-wrapped)
   )

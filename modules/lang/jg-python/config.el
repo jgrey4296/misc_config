@@ -13,6 +13,7 @@
   (load! "+nav")
   )
 (load! "+env")
+(load! "+file-templates")
 
 (use-package! pyimport
   :demand

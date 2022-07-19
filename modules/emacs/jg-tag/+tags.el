@@ -62,7 +62,7 @@ Return a hash-table of tags with their instance counts"
     (if (eq 'org-mode major-mode)
         (progn
           ;; (message "Getting Tags for all buffers to depth: %s" depth)
-          (maphash (lambda (k v) (incf (gethash k alltags 0) v)) (+jg-tag-get-buffer-tags nil depth))
+          (maphash (lambda (k v) (cl-incf (gethash k alltags 0) v)) (+jg-tag-get-buffer-tags nil depth))
           (if (not (hash-table-empty-p alltags))
               (+jg-tag-chart-tag-counts alltags (buffer-name))
             (message "No Tags in buffer")))
@@ -78,7 +78,7 @@ Return a hash-table of tags with their instance counts"
          (depth (if depth-arg (string-to-number depth-arg) nil))
          )
     ;; (message "Getting Tags for all buffers to depth: %s" depth)
-    (loop for x in allbuffers do
+    (cl-loop for x in allbuffers do
           (if (with-current-buffer x (eq 'org-mode major-mode))
               (maphash (lambda (k v) (if (not (gethash k alltags)) (puthash k 0 alltags))
                          (cl-incf (gethash k alltags) v)) (+jg-tag-get-buffer-tags x depth))

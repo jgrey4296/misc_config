@@ -33,6 +33,7 @@
               jg-python-pycache-loc "~/.pycache"
 
               jg-python-docs-url           "https://docs.python.org/3/"
+              jg-python-lib-url-suffix     "library/%s.html"
               jg-python-bibtex-parser-url  "https://bibtexparser.readthedocs.io/en/master/tutorial.html"
               jg-python-beautiful-soup-url "https://beautiful-soup-4.readthedocs.io/en/latest/"
               jg-conda-activate-cmd        "source /Volumes/documents/github/emacs_files/setup_files/bash_setup/python.bash && conda_activate_for_scripts %s"

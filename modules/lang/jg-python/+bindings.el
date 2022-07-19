@@ -48,7 +48,10 @@
 (map! :after python
       :map (python-mode-map inferior-python-mode-map)
       :localleader
-      :desc "Docs: Python"        "1" (cmd! (+jg-browse-url jg-python-docs-url))
+      :desc "Docs: Python"        "1" (cmd! (+jg-browse-url (s-concat jg-python-docs-url (let ((lib (read-string "Library: ")))
+                                                                                           (if (s-blank? lib)
+                                                                                               nil
+                                                                                             (format jg-python-lib-url-suffix lib))))))
       :desc "Docs: Bibtex Parser" "2" (cmd! (+jg-browse-url jg-python-bibtex-parser-url))
       :desc "Docs: BeautifulSoup" "3" (cmd! (+jg-browse-url jg-python-beautiful-soup-url))
       :desc "Docs: FlowWeaver"    "4" (cmd! (+jg-browse-url "https://floweaver.readthedocs.io/en/latest/"))

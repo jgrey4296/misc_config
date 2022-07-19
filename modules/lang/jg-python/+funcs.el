@@ -125,3 +125,67 @@ of a python file "
       )
     )
   )
+
+(defun +jg-python-cleanup-import-blocks ()
+  " Collect all ##-- imports blocks,
+and move them to the start of the file,
+then sort them
+TODO
+  "
+  (interactive)
+  (let ((source (current-buffer))
+        (collected-imports (make-temp-file "collected-imports"))
+        start end groupname cleaned)
+    ;; Go from bottom of buffer to top
+    (with-current-buffer source
+      (goto-char (point-max))
+      (while (re-search-backward (+jg-fold-block-gen :re t) nil t)
+        (setq groupname (match-string 1))
+        (cond ((and (s-matches? "^imports" groupname)
+                    end
+                    (not start))
+               (beginning-of-line)
+               (setq start (point)))
+              ((and (s-matches? "^end imports" groupname)
+                    (not end))
+               (end-of-line)
+               (setq end (point))))
+        ;; Copy the block to the temp buffer
+        (if (and start end)
+            (progn
+              (-if-let (folds (vimish-fold--folds-in start end))
+                  (vimish-fold--delete (car folds?)))
+              (goto-char end)
+              (insert "\n")
+              (write-region start (+ 1 end) collected-imports t)
+              (kill-region start end)
+              (setq start nil
+                    end nil)
+              (end-of-line -0)
+            )
+          (end-of-line -0)
+          )
+        )
+      )
+    ;; Then cleanup the collect imports
+    (with-temp-buffer
+      (insert-file-contents collected-imports)
+      (goto-char (point-min))
+      (flush-lines "##-- ")
+      (write-file collected-imports)
+      (py-isort-buffer)
+      (setq cleaned (s-trim (buffer-string)))
+      (write-file collected-imports)
+      )
+    ;; And Insert back into original buffer
+    (with-current-buffer source
+      (goto-char (point-min))
+      (re-search-forward "^\"\"\"" nil t)
+      (if (re-search-forward "^\"\"\"" nil t)
+          (progn (end-of-line) (insert (+jg-fold-block-gen :name "imports" :newlines t))
+                 (insert cleaned)
+                 (insert (+jg-fold-block-gen :name "imports" :newlines t :end t))
+                 ))
+      )
+    )
+  )

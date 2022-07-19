@@ -1,65 +1,77 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
-;; from https://github.com/kiwanami/emacs-epc/issues/35
-(setq byte-compile-warnings '(not cl-functions))
-
+;;-- Me
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "John Grey"
       user-mail-address "johngrey4296 at gmail.com")
+;;-- end Me
 
+;;-- Text Encoding
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
 (set-language-environment "UTF-8")
 (prefer-coding-system 'utf-8)
+(setq default-input-method "greek")
+;;-- end Text Encoding
 
-(setq +doom-quit-messages nil
-      backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/")))
-      display-line-numbers-width 4
-      evil-collection-setup-minibuffer t
+;;-- locations
+(setq backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/")))
+      ispell-personal-dictionary (expand-file-name "~/.ispell_english")
+      pyvenv-default-virtual-env-name "~/anaconda3/envs/"
+      org-directory "~/github/writing/orgfiles/"
+      org-agenda-files `(,(expand-file-name "~/.doom.d/setup_files/base_agenda.org"))
+      org-archive-location (string-join `(,(expand-file-name "~/.doom.d/setup_files/archive.org")
+                                          "* Main Archive") "::")
+      initial-buffer-choice "/Volumes/documents/github/emacs_files/setup_files/base_agenda.org"
+      doom-fallback-buffer-name "base_agenda.org"
+      )
+;;-- end locations
+
+;;-- evil
+(setq evil-collection-setup-minibuffer t
       evil-move-beyond-eol t
       evil-move-cursor-back nil
       evil-snipe-repeat-scope nil
-      highlight-indent-guides-suppress-auto-error t
-      ibuffer-old-time 2
-      ispell-personal-dictionary (expand-file-name "~/.ispell_english")
-      line-move-ignore-invisible t
-      line-move-ignore-invisible t
-      outline-blank-line nil
-      overflow-newline-into-fringe t
-      pyvenv-default-virtual-env-name "~/anaconda3/envs/"
-      tab-always-indent t
-      which-key-idle-secondary-delay 0.05
-      which-key-sort-order 'which-key-key-order-alpha
-      whitespace-style '(face tabs spaces trailing lines space-before-tab newline indentation empty space-after-tab space-mark tab-mark newline-mark)
-      default-input-method "greek"
-      avy-all-windows t
-      smartparens-global-mode nil
-      +lsp-defer-shutdown 10
-      )
+ )
+;;-- end evil
 
+;;-- doom settings
+(setq +doom-quit-messages nil
+      doom-theme 'doom-Iosvkem)
 ;; Override doom's whitespace mode settings:
 (fset 'doom-highlight-non-default-indentation-h #'(lambda () nil))
+;;-- end doom settings
+
+;;-- which key
+(setq which-key-idle-secondary-delay 0.05
+      which-key-sort-order 'which-key-key-order-alpha
+ )
+;;-- end which key
+
+;;-- global modes
+(setq smartparens-global-mode nil)
+;;-- end global modes
 
 
-;; There are two ways to load a theme. Both assume the theme is installed and
-;; available. You can either set `doom-theme' or manually load a theme with the
-;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-Iosvkem)
+;;-- misc variables
+(setq
+ +lsp-defer-shutdown 10
+ avy-all-windows t
+ display-line-numbers-type t
+ display-line-numbers-width 4
+ highlight-indent-guides-suppress-auto-error t
+ ibuffer-old-time 2
+ line-move-ignore-invisible t
+ outline-blank-line nil
+ overflow-newline-into-fringe t
+ tab-always-indent t
+ whitespace-style '(face tabs spaces trailing lines space-before-tab newline indentation empty space-after-tab space-mark tab-mark newline-mark)
+ )
+;;-- end misc variables
 
-;; If you use `org' and don't want your org files in the default location below,
-;; change `org-directory'. It must be set before org loads!
-(setq-default org-directory "~/github/writing/orgfiles/"
-              org-agenda-files `(,(expand-file-name "~/.doom.d/setup_files/base_agenda.org"))
-              org-archive-location (string-join `(,(expand-file-name "~/.doom.d/setup_files/archive.org")
-                                                  "* Main Archive") "::")
-              initial-buffer-choice "/Volumes/documents/github/emacs_files/setup_files/base_agenda.org"
-              doom-fallback-buffer-name "base_agenda.org"
-              )
 
-;; (add-hook 'doom-first-input-hook #'org-mode)
-
-;; This determines the style of line numbers in effect. If set to `nil', line
-;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t)
-
+;;-- Byte Compilation
+;; from https://github.com/kiwanami/emacs-epc/issues/35
+(setq byte-compile-warnings '(not cl-functions))
+;;-- end Byte Compilation

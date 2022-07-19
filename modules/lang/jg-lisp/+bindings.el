@@ -13,6 +13,7 @@
 (evil-make-intercept-map edebug-eval-mode-map)
 
 (map! :map edebug-eval-mode-map
+      ;; TODO add a reminder for this
       "s" #'edebug-step-mode
       "q" #'edebug-stop
       "n" #'edebug-next-mode

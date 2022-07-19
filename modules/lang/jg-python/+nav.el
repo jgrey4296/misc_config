@@ -13,7 +13,7 @@
       (setq defun-pos (python-nav-forward-defun)))
     (save-excursion
       (setq fold-block-pos (re-search-forward (+jg-fold-block-gen :re t) defun-pos t)))
-    (goto-char (apply 'min (mapcar '(lambda (x) (if x x (point-max))) (list fold-block-pos defun-pos))))
+    (goto-char (apply 'min (mapcar #'(lambda (x) (if x x (point-max))) (list fold-block-pos defun-pos))))
     )
 )
 
@@ -25,7 +25,7 @@
 (defun +jg-conda-find-defs ()
   (interactive)
   (anaconda-mode-call "infer"
-                      (lambda (result)
+                      #'(lambda (result)
                         (message "%s" result)
                         (anaconda-mode-show-xrefs result 'window "None Found")))
   )
@@ -45,7 +45,7 @@
   (interactive)
   (anaconda-mode-call
    "goto"
-   (lambda (result)
+   #'(lambda (result)
      (anaconda-mode-show-xrefs result nil "No assignments found")))
   )
 
@@ -53,7 +53,7 @@
   (interactive)
   (anaconda-mode-call
    "get_references"
-   (lambda (result)
+   #'(lambda (result)
      (anaconda-mode-show-xrefs result nil "No references found")))
 )
 

@@ -3,8 +3,12 @@
 # uuid: setup.pyparsing
 # group: parsing
 # --
+##-- imports
 import pyparsing as pp
 from pyparsing import pyparsing_common as ppc
+##-- end imports
+
+##-- pyparse
 # Group, Suppress, ParseResults, Forward
 
 # OnlyOnce, , FollowedBy, NotAny, OneOrMore, ZeroOrMore,
@@ -21,3 +25,4 @@ from pyparsing import pyparsing_common as ppc
 s = pp.Suppress
 op = pp.Optional
 opLn = s(op(pp.LineEnd()))
+##-- end pyparse

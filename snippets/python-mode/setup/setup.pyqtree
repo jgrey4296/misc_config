@@ -3,7 +3,9 @@
 # uuid: setup.pyqtree
 # group: data structures
 # --
+##-- imports
 import pyqtree
+##-- end imports
 
 bounds = [0,0,1,1]
 qtree = pyqtree.Index(bbox=bounds)

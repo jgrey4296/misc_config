@@ -2,6 +2,7 @@
 """
 $0
 """
+##-- imports
 from __future__ import annotations
 
 import logging as logmod
@@ -12,10 +13,13 @@ from typing import (Any, Callable, ClassVar, Generic, Iterable, Iterator,
                     Mapping, Match, MutableMapping, Sequence, Tuple, TypeAlias,
                     TypeVar, cast)
 from unittest import mock
+##-- end imports
 
+##-- warnings
 with warnings.catch_warnings():
     warnings.simplefilter("ignore")
     pass
+##-- end warnings
 
 class Test$1(unittest.TestCase):
     @classmethod

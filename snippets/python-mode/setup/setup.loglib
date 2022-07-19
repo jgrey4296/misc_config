@@ -3,5 +3,9 @@
 # key: setup.loglib
 # group: debugging
 # --
+##-- imports
 import logging as logmod
+##-- end imports
+##-- logging
 logging = logmod.getLogger(__name__)
+##-- end logging

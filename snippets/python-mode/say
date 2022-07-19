@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: say
+# uuid: say
+# key:  say
+# --
+##-- imports
+from os import system
+##-- end imports
+
+def say(val:str):
+    system(f'say -v Moira -r 50 "{val}"')

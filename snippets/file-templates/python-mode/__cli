@@ -1,0 +1,73 @@
+#/usr/bin/env python3
+"""
+$0
+"""
+##-- imports
+from __future__ import annotations
+
+import abc
+import logging as logmod
+from copy import deepcopy
+import argparse
+import configparser
+from dataclasses import InitVar, dataclass, field
+
+from re import Pattern
+from typing import (TYPE_CHECKING, Any, Callable, ClassVar, Final, Generic,
+                    Iterable, Iterator, Mapping, Match, MutableMapping,
+                    Protocol, Sequence, Tuple, TypeAlias, TypeGuard, TypeVar,
+                    cast, final, overload, runtime_checkable)
+from uuid import UUID, uuid1
+from weakref import ref
+import argparse
+##-- end imports
+
+##-- type_checking
+if TYPE_CHECKING:
+    # tc only imports
+    pass
+##-- end type_checking
+
+##-- imports
+from os.path import splitext, split
+from sys import stderr, stdout
+import logging as logmod
+##-- end imports
+
+##-- Logging
+DISPLAY_LEVEL = logmod.DEBUG
+LOG_FILE_NAME = "log.{}".format(splitext(split(__file__)[1])[0])
+LOG_FORMAT    = "%(asctime)s | %(levelname)8s | %(message)s"
+FILE_MODE     = "w"
+STREAM_TARGET = stderr # or stdout
+
+logger          = logmod.getLogger(__name__)
+console_handler = logmod.StreamHandler(STREAM_TARGET)
+file_handler    = logmod.FileHandler(LOG_FILE_NAME, mode=FILE_MODE)
+
+console_handler.setLevel(DISPLAY_LEVEL)
+# console_handler.setFormatter(logmod.Formatter(LOG_FORMAT))
+file_handler.setLevel(logmod.DEBUG)
+# file_handler.setFormatter(logmod.Formatter(LOG_FORMAT))
+
+logger.addHandler(console_handler)
+logger.addHandler(file_handler)
+logging = logger
+##-- end Logging
+
+##-- argparse
+#see https://docs.python.org/3/howto/argparse.html
+parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter,
+                                 epilog = "\n".join([""]))
+parser.add_argument('--aBool', action="store_true")
+
+#args.aBool...
+
+##-- End argparse
+
+def main():
+    args = parser.parse_args()
+
+
+if __name__ == '__main__':
+    main()

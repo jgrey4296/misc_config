@@ -3,11 +3,13 @@
 # uuid: setup.logging
 # group: debugging
 # --
+##-- imports
 from os.path import splitext, split
 from sys import stderr, stdout
 import logging as logmod
+##-- End imports
 
-# Logging Setup ##############################
+##-- Logging
 DISPLAY_LEVEL = logmod.DEBUG
 LOG_FILE_NAME = "log.{}".format(splitext(split(__file__)[1])[0])
 LOG_FORMAT    = "%(asctime)s | %(levelname)8s | %(message)s"
@@ -26,5 +28,5 @@ file_handler.setLevel(logmod.DEBUG)
 logger.addHandler(console_handler)
 logger.addHandler(file_handler)
 logging = logger
-# End Logging Setup #########################
+##-- end Logging
 $0

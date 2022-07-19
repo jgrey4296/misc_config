@@ -6,5 +6,6 @@
                   ;;(eval . (a_func))
                   )
  )
+;; (python-mode . ((eval . (+jg-python-activate-venv-and-conda))))
 )
 $0

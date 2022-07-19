@@ -4,14 +4,14 @@
 # group: debugging
 # --
 ##-- imports
-from os.path import splitext, split
+import pathlib
 from sys import stderr, stdout
 import logging as logmod
 ##-- End imports
 
 ##-- Logging
 DISPLAY_LEVEL = logmod.DEBUG
-LOG_FILE_NAME = "log.{}".format(splitext(split(__file__)[1])[0])
+LOG_FILE_NAME = "log.{}".format(pathlib.Path(__file__).stem)
 LOG_FORMAT    = "%(asctime)s | %(levelname)8s | %(message)s"
 FILE_MODE     = "w"
 STREAM_TARGET = stderr # or stdout

@@ -3,8 +3,16 @@
 # uuid: template.makegif
 # group: visualisation
 # --
+##-- imports
+from __future__ import annotations
+import sys
+import pathlib
+from PIL import Image,ImageSequence
+import imageio
+import re
+##-- end imports
 
-#---------- Logging
+##-- logging
 import logging as root_logger
 LOGLEVEL = root_logger.DEBUG
 logFileName = "gif_write.log"
@@ -14,24 +22,21 @@ console = root_logger.StreamHandler()
 console.setLevel(root_logger.INFO)
 root_logger.getLogger('').addHandler(console)
 logging = root_logger.getLogger(__name__)
-#---------- Imports
-import sys
-from os.path import isfile,exists,join, getmtime, splitext
-from os import listdir
-from PIL import Image,ImageSequence
-import imageio
-import re
+##-- end logging
 
-#---------- Constants
-GIF_OUTPUT_DIR = "."
-GIF_NAME = "anim.gif"
 
-SOURCE_DIR = 'images'
-FILE_FORMAT = '.png'
-FPS=12
-numRegex = re.compile(r'(\d+)')
+##-- constants
+GIF_OUTPUT_DIR = pathlib.Path(".")
+GIF_NAME       = "anim.gif"
 
-#---------- Utility
+SOURCE_DIR     = pathlib.Path('images')
+FILE_FORMAT    = '.png'
+FPS            =12
+numRegex       = re.compile(r'(\d+)')
+##-- end constants
+
+
+##-- util
 def getNum(s):
     """ Given a String, extract a number from it,
     or return a default """
@@ -40,27 +45,30 @@ def getNum(s):
         return int(numRegex.search(s).group(0))
     except Exception:
         return 9999999
+##-- end util
+
 #----------
-# NOTE: THE BELOW CODE SHOULD NOT BE INDENTED
 
-# Get all Files
-files = [x for x in listdir(SOURCE_DIR) if isfile(join(SOURCE_DIR,x))]
-# Sort by the number extracted from the filename
-files.sort(key=lambda x: getNum(x))
+if __name__ == "__main__":
+    # Get all Files
+    files = [x for x in SOURCE_DIR.iterdir() if x.is_file()]
+    # Sort by the number extracted from the filename
+    files.sort(key=lambda x: getNum(x))
 
-# Load the images
-images = []
-for filename in files:
-    logging.info("Loading: {}".format(filename))
-    images.append(imageio.imread(join(SOURCE_DIR,filename)))
-
-
-# Export as a Gif
-imageio.mimsave(join(GIF_OUTPUT_DIR,GIF_NAME),images,'GIF')
+    # Load the images
+    images = []
+    for filename in files:
+        logging.info("Loading: {}".format(filename))
+        images.append(imageio.imread(filename))
 
 
+    # Export as a Gif
+    imageio.mimsave(GIF_OUTPUT_DIR/GIF_NAME,images,'GIF')
+
+##-- alt
 #Alternative, for when all the images can't fit in memory:
 # with imageio.get_writer(join(GIF_OUTPUT_DIR,GIF_NAME), mode='I') as writer:
 #     for filename in files:
 #         image = imageio.imread(join(SOURCE_DIR,filename))
 #         writer.append_data(image)
+##-- end alt

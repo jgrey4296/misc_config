@@ -8,10 +8,11 @@
 """
 $0
 """
+##-- imports
 from __future__ import annotations
 import warnings
 
-from os.path import splitext, split
+import pathlib
 from typing import (TYPE_CHECKING, Any, Callable, ClassVar, Final, Generic,
                     Iterable, Iterator, Mapping, Match, MutableMapping,
                     Protocol, Sequence, Tuple, TypeAlias, TypeGuard, TypeVar,
@@ -19,6 +20,8 @@ from typing import (TYPE_CHECKING, Any, Callable, ClassVar, Final, Generic,
 import unittest
 import unittest.mock as mock
 import logging as logmod
+##-- end imports
+
 
 
 with warnings.catch_warnings():
@@ -30,7 +33,7 @@ class $2(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         LOGLEVEL      = logmod.DEBUG
-        LOG_FILE_NAME = "log.{}".format(splitext(split(__file__)[1])[0])
+        LOG_FILE_NAME = "log.{}".format(pathlib.Path(__file__).stem)
         cls.file_h        = logmod.FileHandler(LOG_FILE_NAME, mode="w")
 
         cls.file_h.setLevel(LOGLEVEL)

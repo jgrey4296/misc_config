@@ -4,6 +4,7 @@
 # group: cairo
 # --
 #!/usr/bin/env python3
+##-- imports
 from __future__ import annotations
 
 import sys
@@ -16,19 +17,43 @@ import cairo_utils as utils
 from cairo_utils.dcel.constants import VertE, EdgeE, FaceE
 import argparse
 from noise import pnoise2, snoise2
-from os.path import splitext, split
+import pathlib
+##-- end imports
 
-#Constants:
-N = 11
-SIZE = pow(2,N)
-SCALER = 1 / SIZE
-TIME = 100
-imgPath = "./imgs/"
-imgName = "initialTest"
+
+##-- logging
+LOGLEVEL = logging.DEBUG
+LOG_FILE_NAME = "log.{}".format(pathlib.Path(__file__).stem)
+logging.basicConfig(filename=LOG_FILE_NAME,level=LOGLEVEL,filemode='w')
+
+console = logging.StreamHandler()
+console.setLevel(logging.INFO)
+logging.getLogger('').addHandler(console)
+##-- end logging
+
+##-- constants
+N             = 11
+SIZE          = pow(2,N)
+SCALER        = 1 / SIZE
+TIME          = 100
+imgPath       = "./imgs/"
+imgName       = "initialTest"
 dcel_filename = "theDCEL.pickle"
-currentTime = time.gmtime()
-FONT_SIZE = 0.03
-SCALE = False
+currentTime   = time.gmtime()
+FONT_SIZE     = 0.03
+SCALE         = False
+##-- end constants
+
+##-- argparse
+parser = argparse.ArgumentParser("")
+parser.add_argument('-l', "--loaddcel", action="store_true")
+parser.add_argument('-s', '--static', action="store_true")
+parser.add_argument('-d', '--dontdraw',action="store_true")
+parser.add_argument('--drawsteps', action="store_true")
+parser.add_argument('-n', '--numpoints',type=int, default=N)
+parser.add_argument('-t', '--timesteps', type=int, default=TIME)
+##-- end argparse
+
 
 def tick(dc, i):
     """ Where the main drawing routine goes """
@@ -36,14 +61,6 @@ def tick(dc, i):
     return dc
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser("")
-    parser.add_argument('-l', "--loaddcel", action="store_true")
-    parser.add_argument('-s', '--static', action="store_true")
-    parser.add_argument('-d', '--dontdraw',action="store_true")
-    parser.add_argument('--drawsteps', action="store_true")
-    parser.add_argument('-n', '--numpoints',type=int, default=N)
-    parser.add_argument('-t', '--timesteps', type=int, default=TIME)
-    parser.add_argument('--ipython', action="store_true")
     args = parser.parse_args()
 
     #format the name of the image to be saved thusly:
@@ -55,14 +72,6 @@ if __name__ == "__main__":
                                            currentTime.tm_mon,
                                            currentTime.tm_year)
 
-    #setup logging:
-    LOGLEVEL = logging.DEBUG
-    LOG_FILE_NAME = "log.{}".format(splitext(split(__file__)[1])[0])
-    logging.basicConfig(filename=LOG_FILE_NAME,level=LOGLEVEL,filemode='w')
-
-    console = logging.StreamHandler()
-    console.setLevel(logging.INFO)
-    logging.getLogger('').addHandler(console)
 
     if args.loaddcel:
         theDCEL = utils.dcel.DCEL.loadfile(dcel_filename)
@@ -83,8 +92,6 @@ if __name__ == "__main__":
 
             if args.drawsteps:
                 logging.info("Drawing Step: {}".format(x))
-                if args.ipython:
-                    IPython.embed(simple_prompt=True)
                 utils.dcel.drawing.drawDCEL(ctx, theDCEL, faces=True, edges=True, verts=True)
                 utils.drawing.write_to_png(surface, saveString, i=x)
 
@@ -99,7 +106,3 @@ if __name__ == "__main__":
         logging.info("Drawing to: {}".format(final_name))
         utils.dcel.drawing.drawDCEL(ctx, theDCEL, faces=True, edges=True, background_colour=[0,1,0,1])
         utils.drawing.write_to_png(surface, final_name)
-
-
-    if args.ipython:
-        IPython.embed(simple_prompt=True)

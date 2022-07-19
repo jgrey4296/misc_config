@@ -2,9 +2,15 @@
 # name: util.sha256
 # uuid: util.sha256
 # --
+
+##-- imports
+import pathlib
 from hashlib import sha256
-from os.path import expanduser, abspath
+##-- end imports
+
 
 def file_to_hash(filename):
-    with open(abspath(expanduser(filename)), 'br') as f:
+    path = pathlib.Path(filename)
+    assert(path.exists())
+    with open(path, 'br') as f:
         return sha256(f.read()).hexdigest()

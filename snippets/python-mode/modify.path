@@ -2,6 +2,9 @@
 # name: modify.path
 # uuid: modify.path
 # --
+##-- imports
 from os.path import expanduser, abspath
 import sys
+##-- end imports
+
 sys.path.append(abspath(expanduser($0)))

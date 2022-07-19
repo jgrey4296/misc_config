@@ -3,5 +3,4 @@
 # uuid: bootstrap.path
 # --
 import sys
-from os.path import expanduser, abspath
 sys.path.append("$0")

@@ -6,37 +6,24 @@
 """
     $1
 """
-##############################
-# IMPORTS
-####################
+##-- imports
 import logging as root_logger
-from os.path import splitext, split
+import pathlib
 $3
+##-- end imports
 
-# Setup root_logger:
+##-- logging
+
 LOGLEVEL = root_logger.DEBUG
-LOG_FILE_NAME = "log.{}".format(splitext(split(__file__)[1])[0])
+LOG_FILE_NAME = "log.{}".format(pathlib.Path(__file__).stem)
 root_logger.basicConfig(filename=LOG_FILE_NAME, level=LOGLEVEL, filemode='w')
 
 console = root_logger.StreamHandler()
 console.setLevel(root_logger.INFO)
 root_logger.getLogger('').addHandler(console)
 logging = root_logger.getLogger(__name__)
-##############################
-# CONSTANTS
-####################
+##-- end logging
 
-##############################
-# VARIABLES
-####################
-
-##############################
-# Utilities
-####################
-
-##############################
-# Core Functions
-####################
 
 ########################################
 if __name__ == "__main__":

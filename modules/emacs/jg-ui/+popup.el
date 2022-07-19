@@ -16,7 +16,6 @@
     ("^\\*compilation"       :side bottom :ttl 5   :height 0.4 :quit t :select nil)
     ("^\\*Pp Eval Output\\*" :side right  :ttl 5   :width 0.4  :quit t :select nil)
     ("^\\*Buffer Locals:"    :side right  :ttl 5   :width 0.4  :quit t :select nil)
-    ("^\\*pytest\\*"         :side bottom :ttl 5   :height 0.4 :quit t :select t)
     )
 
   '(("^\\*Warnings" :vslot 99 :size 0.25)

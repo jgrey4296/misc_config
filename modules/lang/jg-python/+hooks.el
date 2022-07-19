@@ -101,5 +101,18 @@ and closes classes and functions, re-opening only the first class "
     )
   )
 
+(defun +jg-python-add-popup-rules ()
+  " Add jg-python-popup-rules to the popup ruleset
+but only the first time this hook is run "
+  (if jg-python-todo-popup-rules
+      (progn
+        (when (bound-and-true-p +popup-mode)
+          (dolist (rule jg-python-popup-rules)
+            (push (+popup-make-rule (car rule) (cdr rule))
+                     +popup--display-buffer-alist))
+          (setq display-buffer-alist +popup--display-buffer-alist
+                jg-python-todo-popup-rules nil))
+        )
+    nil))
 
 ;;; +hooks.el ends here

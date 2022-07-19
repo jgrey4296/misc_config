@@ -39,6 +39,7 @@
   "Highlighting for manifest-mode"
   )
 
+
 (defvar manifest-mode-syntax-table
   (let ((st (make-syntax-table)))
     (modify-syntax-entry ?: "." st)

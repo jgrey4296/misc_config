@@ -28,7 +28,8 @@
        :desc "Remove unused imports"  "r" #'pyimport-remove-unused
        :desc "Optimize imports"       "o" #'+python/optimize-imports
        :desc "Sort imports"           "s" #'py-isort-buffer
-       :desc "Sort region"            "r" #'py-isort-region)
+       :desc "Sort region"            "r" #'py-isort-region
+       :desc "Collect import blocks"  "c" #'+jg-python-cleanup-import-blocks)
       (:prefix ("t" . "test")
        :desc "Test DWIM"       "f" #'python-pytest-file-dwim
        :desc "Test File"       "F" #'python-pytest-file
@@ -71,11 +72,12 @@
         :localleader
         "g" nil
         :prefix ("j" . "Jump")
-        :desc "Conda: Find Defs"    "d" #'anaconda-mode-find-definitions
-        :desc "Conda: Show Doc"     "h" #'anaconda-mode-show-doc
-        :desc "Conda: Find Assigns" "a" #'anaconda-mode-find-assignments
-        :desc "Conda: Find File"    "f" #'anaconda-mode-find-file
-        :desc "Conda: Find Refs"    "u" #'anaconda-mode-find-references
+        ;; :desc "Conda: Find Defs"    "d" #'anaconda-mode-find-definitions
+        :desc "Conda: Find Defs"    "d" #'+jg-conda-find-defs
+        :desc "Conda: Show Doc"     "h" #'+jg-conda-show-doc
+        :desc "Conda: Find Assigns" "a" #'+jg-conda-find-assignments
+        :desc "Conda: Find Refs"    "u" #'+jg-conda-find-references
+        :desc "Conda: Eldoc"        "e" #'+jg-conda-eldoc
         )
   )
 

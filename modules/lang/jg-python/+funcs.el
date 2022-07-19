@@ -154,7 +154,7 @@ TODO
         (if (and start end)
             (progn
               (-if-let (folds (vimish-fold--folds-in start end))
-                  (vimish-fold--delete (car folds?)))
+                  (vimish-fold--delete (car folds)))
               (goto-char end)
               (insert "\n")
               (write-region start (+ 1 end) collected-imports t)

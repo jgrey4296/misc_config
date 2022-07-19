@@ -4,9 +4,9 @@
   " Add auto-hiding on buffer open.
 Vimish-fold's any blocks matching jg-fold-block-gen's :re pattern
 "
-  (if vimish-fold-mode
+  (message "Running Auto Hide: %s %s" major-mode comment-start)
+  (if global-evil-vimish-fold-mode
     (save-excursion
-      (message "Running Auto Hide: %s %s" major-mode comment-start)
       (beginning-of-buffer)
       (vimish-fold-delete-all)
       (evil-open-folds)
@@ -17,7 +17,7 @@ Vimish-fold's any blocks matching jg-fold-block-gen's :re pattern
                start-hide end-hide)
           (cond ((and (s-matches? "^end" group-name)
                       (not start-hide))
-                 (message "Found an End Block Too Early"))
+                 (message "Found an End Block Too Early: %s" group-name))
                 ((s-matches? "^end" group-name)
                  nil)
                 (t
@@ -28,10 +28,13 @@ Vimish-fold's any blocks matching jg-fold-block-gen's :re pattern
 
           (if (and start-hide end-hide (not (vimish-fold--folds-in start-hide end-hide)))
               (progn (message "Folding: %s %s %s" group-name start-hide end-hide)
-                     (vimish-fold start-hide end-hide)))
+                     (vimish-fold start-hide end-hide)
+                     (goto-char end-hide)
+                     (forward-line)))
           (forward-line)
           )
         )
       )
+    (message "Skipping Generic Auto Hide")
     )
   )

@@ -6,6 +6,8 @@
 
 ;; Text bindings
 ;; (map! :map jg-bindings-operator-map)
+(map! :v "z 1" #'+jg-wrap-fold-block
+      )
 
 (map! :leader
       :prefix "t"

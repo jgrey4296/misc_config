@@ -5,6 +5,9 @@
 (after! evil
   (load! "+bindings")
 )
+(load! "+operators")
+
+(add-hook! prog-mode :depth 80 #'+jg-text-auto-hide)
 
 (use-package! academic-phrases
   :defer t

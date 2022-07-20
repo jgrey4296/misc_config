@@ -62,7 +62,7 @@
       :desc "Refile" "R" #'+jg-org-refile-subtree
       :desc "Todo"   "TAB" #'org-todo
       :desc "Docs: Org"               "1" (cmd! (+jg-browse-url "https://orgmode.org/manual/"))
-
+      :desc "Docs: Babel Snippets"   "2" (cmd! (+jg-browse-url "https://orgmode.org/worg/org-contrib/babel/intro.html"))
 
       (:prefix ("f". "Format")
        :desc "Fix Drawers"        "d"  #'+jg-org-fix-properties-drawers

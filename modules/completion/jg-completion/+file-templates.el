@@ -5,6 +5,7 @@
 (setq yas-snippet-dirs '(+snippets-dir doom-snippets-dir +file-templates-dir yasnippet-snippets-dir))
 (setq yas--default-user-snippets-dir yas-snippet-dirs)
 
+;; NOTE: Order from lowest - highest priority
 (setq +file-templates-alist
       '(;; General
         (gitignore-mode)
@@ -24,9 +25,5 @@
         (sh-mode)
       )
 )
-
-;; NOTE: Order from lowest - highest priority
-;; Org
-
 
 (provide 'jg-file-templates)

@@ -14,4 +14,4 @@
         '("pyproject.toml$" :trigger "__pyproject_toml" :mode python-mode)
         '("LICENSE$"        :trigger "__license-acab"   :mode text-mode)
         )
-        )
+)

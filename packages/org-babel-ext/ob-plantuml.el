@@ -26,7 +26,6 @@ This function is called by `org-babel-execute-src-block'."
           (t
            (+jg-misc-ob-plantuml-render fullbody params in-file out-file)))))
 
-
 (defun +jg-misc-ob-plantuml-server (body out-file)
   (message "WARNING: USING PLANTUML SERVER")
   (if (bound-and-true-p org-export-current-backend)

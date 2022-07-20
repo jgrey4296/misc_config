@@ -17,24 +17,16 @@
   :commands (netlogo-mode)
   )
 
-(after! ob-ccalc
-    (org-babel-do-load-languages
-     'org-babel-load-languages '((ccalc . t)))
-    (push '("ccalc" . prolog) org-src-lang-modes)
-    (add-to-list 'auto-mode-alist '("\\.ccalc$" . prolog-mode))
-    )
-(after! ob-clingo
-    (org-babel-do-load-languages
-     'org-babel-load-languages '((clingo . t)))
-    (push '("clingo" . prolog) org-src-lang-modes)
-    (add-to-list 'auto-mode-alist '("\\.lp$" . prolog-mode))
+(after! org
+  (push '("clingo" . prolog) org-src-lang-modes)
+  (push '("ccalc" . prolog) org-src-lang-modes)
   )
+
 (after! ob-prolog
-    (org-babel-do-load-languages
-     'org-babel-load-languages '((prolog . t)))
-    (setq org-babel-prolog-command "swipl")
-    (add-to-list 'auto-mode-alist '("\\.lp$" . prolog-mode))
+  (setq org-babel-prolog-command "swipl")
+  (add-to-list 'auto-mode-alist '("\\.lp$" . prolog-mode))
   )
+
 (use-package-hook! proof-general :post-config
   (set-face-attribute 'proof-locked-face nil
                       :inverse-video t

@@ -1,6 +1,5 @@
 ;;; config.el -*- lexical-binding: t; -*-
 
-(load! "+ob-plantuml")
 (after! evil
   (load! "+bindings")
   )
@@ -15,12 +14,6 @@
               '((depth . -100)))
   )
 
-(after! erlang
-  ;; (also has a load path set in root el file)
-  (setq erlang-root-dir "/usr/local/opt/erlang"
-        exec-path (cons "/usr/local/opt/erlang/bin" exec-path)
-        )
-  )
 
 (use-package gradle-mode)
 (use-package groovy-mode)

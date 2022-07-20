@@ -1,13 +1,17 @@
 ;;; ob-ccalc.el --- org-babel functions for ccalc evaluation.
 
+;; Author: John Grey <https://github.com/jgrey4296>
+;; Maintainer: John Grey <johngrey4296 at gmail.com>
+;; Created: July 20, 2022
+;; Modified: July 20, 2022
+;; Version: 0.0.1
+;; Keywords:
+;; Homepage: https://github.com/jgrey4296
+;; Package-Requires: ((emacs "24.3"))
+;; Package written on: ((emacs 28.1))
+;;
 ;; Adapted from:
-;; Copyright (C) Bjarte Johansen
-
-;; Author: Bjarte Johansen
-;; Keywords: literate programming, reproducible research
-;; Package-Version: 20190410.2130
 ;; URL: https://github.com/ljos/ob-prolog
-;; Version: 1.0.2
 
 ;; This file is NOT part of GNU Emacs.
 
@@ -55,6 +59,7 @@
 
 
 (add-to-list 'org-babel-tangle-lang-exts '("ccalc" . "pl"))
+(add-to-list 'auto-mode-alist '("\\.ccalc$" . prolog-mode))
 
 (defvar org-babel-ccalc-location "~/github/ccalc/ccalc.pl")
 (defvar org-babel-ccalc-command  "swipl6"

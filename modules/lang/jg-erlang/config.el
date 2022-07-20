@@ -27,5 +27,11 @@
   )
 (load! "+repl")
 
+(after! erlang
+  ;; (also has a load path set in root el file)
+  (setq erlang-root-dir "/usr/local/opt/erlang"
+        exec-path (cons "/usr/local/opt/erlang/bin" exec-path)
+        )
+  )
 
 ;;; config.el ends here

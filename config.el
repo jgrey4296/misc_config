@@ -50,7 +50,8 @@
 ;;-- end which key
 
 ;;-- global modes
-(setq smartparens-global-mode nil)
+(setq smartparens-global-mode nil
+      flycheck-global-modes nil)
 ;;-- end global modes
 
 

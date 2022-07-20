@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
+GIT_BKUP_WATCH=( "$HOME/github" "$HOME/github/otherLibs" "$HOME/github/inform" "$HOME/github/python" "$HOME/github/rust" )
+GIT_BKUP_TARGET="$HOME/github/writing/resources/cron_reports/github_urls"
+GIT_BKUP_DROPBOX="$HOME/Dropbox/backups"
 DROPBOX_WATCH=( "$HOME/Dropbox/docs" "$HOME/Downloads" )
-DROPBOX_TARGET="$HOME/Desktop/pdfs/Current/"
+DROPBOX_TARGET="/Volumes/documents/in_progress_pdfs/Current/"
 CONDA_MAINTENANCE_TARGET="$HOME/.shell_files/conda_envs/master_list.yaml"
 CPU_MAX="50"
 
@@ -76,9 +79,6 @@ function dropbox_watcher(){
     echo "Stubbing finished"
 }
 
-GIT_BKUP_WATCH=( "$HOME/github" "$HOME/github/otherLibs" "$HOME/github/inform" "$HOME/github/python" "$HOME/github/rust" )
-GIT_BKUP_TARGET="$HOME/github/writing/resources/cron_reports/github_urls"
-GIT_BKUP_DROPBOX="$HOME/Dropbox/backups"
 
 function git_url_backup(){
 

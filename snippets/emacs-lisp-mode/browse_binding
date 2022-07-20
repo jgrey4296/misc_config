@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: browse_binding
+# uuid: browse_binding
+# key:  browse_binding
+# group :
+# --
+:desc "Docs: $1"   "$2" (cmd! (+jg-browse-url "$3"))$0

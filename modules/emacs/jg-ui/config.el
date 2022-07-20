@@ -8,9 +8,9 @@
 (after! ivy
   (load! "+ivy-actions")
   )
-(after! popup
-  (load! "+popup")
-  )
+
+(add-hook 'doom-init-ui-hook #'(lambda () (load! "+popup")) 'append)
+
 
 (use-package! hl-line
   :defer t

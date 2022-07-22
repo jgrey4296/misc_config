@@ -140,3 +140,31 @@ Type SPC or `y' to %s one match, DEL or `n' to skip to next,
   (async-shell-command (format "qlmanage -p %s 2>/dev/null"
                                (dired-get-filename)))
   )
+
+(defun +jg-dired-epa-list-keys ()
+  (interactive)
+  (epa-list-keys)
+  )
+
+(defun +jg-dired-epa-export-keys (prefix)
+  (interactive "P")
+  (let* ((context (epg-make-context epa-protocol epa-armor))
+         (keys (epa-select-keys context "Select Keys to Export"))
+         (file (read-file-name "To File: ")))
+    (if (not prefix)
+        (epa-export-keys keys file)
+      (progn
+        (setf (epg-context-output-file context) file)
+        (setf (epg-context-operation context) 'export-keys)
+        (setf (epg-context-result context) nil)
+        (epg--start context (cons "--export-secret-keys"
+			          (mapcar
+			           (lambda (key)
+			             (epg-sub-key-id
+			              (car (epg-key-sub-key-list key))))
+			           keys)))
+	(epg-wait-for-completion context)
+        (epg-reset context))
+      )
+    )
+)

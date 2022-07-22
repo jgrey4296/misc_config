@@ -27,4 +27,6 @@
       :prefix "s"
       :desc "Split on distance" "s" #'+jg-text-split-on-leading-char
       :desc "Set Buffer Coding" "B" #'set-buffer-file-coding-system
+      :desc "ENCRYPT"           "!" #'+jg-text-encrypt-region
+      :desc "DECRYPT"           "@" #'+jg-text-decrypt-region
       )

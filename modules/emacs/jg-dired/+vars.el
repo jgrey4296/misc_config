@@ -1,8 +1,12 @@
 ;;; emacs/dired/+vars.el -*- lexical-binding: t; -*-
 
-(setq dgi-commit-message-format "%h %cs %s"
-      dgi-auto-hide-details-p nil)
+;;-- epa/gpg
+(after! epa
+  ;; Ascii output of encryptions:
+  (setq epa-armor t)
+  )
 
+;;-- dired-misc
 (setq dired-create-destination-dirs 'ask
       dired-vc-rename-file t
       dired-clean-confirm-killing-deleted-buffers nil

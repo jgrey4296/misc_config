@@ -8,32 +8,12 @@
 (after! evil
   (load! "+bindings")
 )
-(after! epa
-  ;; Ascii output of encryptions:
-  (setq epa-armor t)
-  )
-(after! (evil evil-snipe)
-  (push 'dired-mode evil-snipe-disabled-modes)
-  )
-(after! evil-quickscope
-  ;; TODO (spacemacs/set-leader-keys "t q" '+jg-personal-toggle-quickscope-always)
-  (global-evil-quickscope-always-mode 1)
-  )
-(after! (dired dired-quick-sort)
-  (setq dired-quick-sort-group-directories-last ?y)
-  )
-(after! neotree
-  (push "^__pycache__$" neo-hidden-regexp-list)
-  (push "^G\\(PATH\\|R?TAGS\\)$" neo-hidden-regexp-list)
-  (push "^__init__.py$" neo-hidden-regexp-list)
-  )
 
 (use-package! free-keys
   :commands (free-keys free-keys-set-prefix)
   :config
   (evil-make-intercept-map free-keys-mode-map)
   )
-
 (use-package! undo-tree
   :config
   ;; Compress undo-tree history files with zstd, if available. File size isn't

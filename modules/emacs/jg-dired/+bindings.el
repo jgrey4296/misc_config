@@ -79,4 +79,21 @@
       :desc "upcase"                       :n "u" #'dired-upcase
       )
 
+(map! :after (evil epa)
+      :map dired-mode-map
+      ";" nil
+      (:prefix (";" . "Encryption")
+       :desc "Decrypt" "d" #'epa-dired-do-decrypt
+       :desc "Encrypt" "e" #'epa-dired-do-encrypt
+       :desc "Sign"    "s" #'epa-dired-do-sign
+       :desc "Verify"  "v" #'epa-dired-do-verify
+       :desc "List Keys" "l" #'+jg-dired-epa-list-keys
+       :desc "Import Keys" "i" #'epa-import-keys
+
+       (:prefix ("K" . "EXPORT")
+        :desc "Keys" "k" #'+jg-dired-epa-export-keys
+        )
+       )
+      )
+
 (evil-make-overriding-map dired-mode-map)

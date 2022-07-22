@@ -85,7 +85,7 @@ and closes classes and functions, re-opening only the first class "
                                (end-of-line)
                                (point)))
               )
-          (if (and start-hide end-hide (not (vimish-fold--folds-in start-hide end-hide)))
+          (if (and start-hide end-hide (not (= start-hide end-hide)) (not (vimish-fold--folds-in start-hide end-hide)))
               (vimish-fold start-hide end-hide)
             )
           )

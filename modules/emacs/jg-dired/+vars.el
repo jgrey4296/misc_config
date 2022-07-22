@@ -23,7 +23,13 @@
       +jg-dired-recursive-switches "-aBhlR --group-directories-first"
       )
 
-;; Omit Patterns
+(after! (dired dired-quick-sort)
+  (setq dired-quick-sort-group-directories-last ?y)
+  )
+;;-- end dired-misc
+
+
+;;-- omit-patterns
 (setq dired-omit-files (rx line-start
                            (or "GPATH"
                                "GRTAGS"
@@ -63,8 +69,11 @@
                            line-end
                            )
       )
+;;-- end omit-patterns
 
-;; image-dired
+
+
+;;-- image-dired
 (setq image-dired-dir (concat doom-cache-dir "image-dired/")
       image-dired-db-file (concat image-dired-dir "db.el")
       image-dired-gallery-dir (concat image-dired-dir "gallery/")
@@ -72,3 +81,10 @@
       image-dired-temp-rotate-image-file (concat image-dired-dir "temp-rotate-image")
       ;; Screens are larger nowadays, we can afford slightly larger thumbnails
       image-dired-thumb-size 150)
+;;-- end image-dired
+
+
+;;-- dgi
+(setq dgi-commit-message-format "%h %cs %s"
+      dgi-auto-hide-details-p nil)
+;;-- end dgi

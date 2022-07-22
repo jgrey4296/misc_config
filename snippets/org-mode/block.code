@@ -1,10 +1,10 @@
 # -*- mode: snippet -*-
-# name: block.code
-# key: block.code
+# name: code
+# key: code
 # group: src
 # --
-#+NAME: $1
-#+begin_src $2 :results value
-	$3
+#+NAME: ${1:Example Code}
+#+begin_src ${2:python} :results ${3:output}
+	$4
 #+end_src
 $0

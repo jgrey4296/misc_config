@@ -38,7 +38,7 @@
               jg-python-beautiful-soup-url "https://beautiful-soup-4.readthedocs.io/en/latest/"
               jg-conda-activate-cmd        "source /Volumes/documents/github/emacs_files/setup_files/bash_setup/python.bash && conda_activate_for_scripts %s"
               jg-python-last-chosen-support nil
-              jg-python-import-block-end-re "^\\(__all__\\|[[:graph:]]+?\\s-+=\\|defun\\|class\\|if TYPE_CHECKING:\\)"
+              jg-python-import-block-end-re "^\\(__all__\\|[[:graph:]]+?\\s-+=\\|def\\|class\\|if TYPE_CHECKING:\\)"
       )
 ;##-- end Personal Vars
 

@@ -138,7 +138,6 @@ Declarations                    -
 
 Pragmatics                      -
 
-
 **** Answer Set Programming
 Herbrand Base            -
 Herbrand Universe        -
@@ -222,7 +221,6 @@ Multiplicative Conjunction - ⨂
 Multiplicative Disjunction - ⅋
 Additive Conjunction - &
 Additive Disjunction - ⨁
-
 
 *** Urls
 https://github.com/mvcisback/hasse

@@ -23,7 +23,7 @@ Vimish-fold's any blocks matching jg-fold-block-gen's :re pattern
                  (setq start-hide (progn (beginning-of-line) (point))
                        end-hide (if (re-search-forward (+jg-fold-block-gen :name group-name :end t :re t) nil t)
                                     (progn (end-of-line) (point))
-                                  (message "Couldn't find: %s" end-re)))))
+                                  (message "Couldn't find: %s" group-name)))))
 
           (if (and start-hide end-hide (not (vimish-fold--folds-in start-hide end-hide)))
               (progn (message "Folding: %s %s %s" group-name start-hide end-hide)

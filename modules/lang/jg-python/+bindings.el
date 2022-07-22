@@ -3,7 +3,7 @@
 (map! :after dired
       :map dired-mode-map
       :localleader
-      :n "v" #'+jg-python-activate-venv-and-conda
+      :desc "Activate Py Environments" :n "v" #'+jg-python-activate-venv-and-conda
       )
 
 (map! :after python

@@ -1,10 +1,89 @@
-;;# -*- mode:emacs-lisp; -*-
-;;;; Emacs Bookmark Format Version 1 ;;;; -*- coding: utf-8 -*-
+;;;; Emacs Bookmark Format Version 1;;;; -*- coding: utf-8-emacs; mode: lisp-data -*-
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("emacsd"
- (filename . "/Volumes/documents/github/otherLibs/doom-emacs/")
+(("in_progress_twitter"
+ (filename . "/Volumes/documents/twitter_temp_download/")
+ (front-context-string . "current.tweets\n ")
+ (rear-context-string . "8K Jul 11 16:11 ")
+ (position . 144))
+("in_progress_pdfs"
+ (filename . "/Volumes/documents/in_progress_pdfs/Current/")
+ (front-context-string . "1-s2.0-S15710661")
+ (rear-context-string . "9K Jul 19 06:40 ")
+ (position . 146))
+("acab"
+ (filename . "/Volumes/documents/github/acab/")
+ (front-context-string . "acab\n  drwxr-xr-")
+ (rear-context-string . "76 Jun 30 03:32 ")
+ (position . 132))
+("org-capture-last-stored"
+ (filename . "/Volumes/documents/github/writing/orgfiles/todo.org")
+ (front-context-string . "** [ ] Cron: dro")
+ (rear-context-string)
+ (position . 9))
+("emacs-cellar"
+ (filename . "/usr/local/Cellar/emacs/28.1/share/emacs/28.1/lisp/")
+ (front-context-string . "calc\n  drwxr-xr-")
+ (rear-context-string . "8K Apr  3 13:29 ")
+ (position . 257))
+("resources"
+ (filename . "/Volumes/documents/github/writing/resources/")
+ (front-context-string . "bibliography\n  d")
+ (rear-context-string . "4K Apr 19 12:16 ")
+ (position . 149))
+("cpython"
+ (filename . "/Volumes/documents/github/python/cpython/Lib/")
+ (front-context-string . "  /Volumes/docum")
+ (rear-context-string)
+ (position . 1))
+("temp_files"
+ (filename . "/private/var/folders/")
+ (front-context-string . "gs\n  drwxr-xr-x ")
+ (rear-context-string . "96 Mar  4  2020 ")
+ (position . 116))
+("TEST"
+ (filename . "/Volumes/documents/github/TEST/")
+ (front-context-string . "python\n  drwxr-x")
+ (rear-context-string . "50 Mar 15 17:07 ")
+ (position . 878))
+("android"
+ (filename . "/Volumes/documents/github/languageLearning/android/")
+ (front-context-string . "BibtexViewer\n  d")
+ (rear-context-string . "44 Dec 26 01:39 ")
+ (position . 151))
+("cookie_templates"
+ (filename . "/Volumes/documents/github/emacs_files/cookie_templates/")
+ (front-context-string . "jg_py\n  -rw-r--r")
+ (rear-context-string . "36 Nov  2 01:58 ")
+ (position . 269))
+("subtitle"
+ (filename . "/Volumes/documents/github/subtitle_proc/")
+ (front-context-string . "makefile\n  -rw-r")
+ (rear-context-string . "72 Oct 29 19:02 ")
+ (position . 251))
+("temp"
+ (filename . "/Volumes/documents/github/temp/")
+ (front-context-string)
+ (rear-context-string . "ilable 71.4 GiB\n")
+ (position . 82))
+("conda"
+ (filename . "/opt/anaconda3/")
+ (front-context-string . "Anaconda-Navigat")
+ (rear-context-string . "96 Mar  4  2020 ")
+ (position . 115))
+("MAS"
+ (filename . "/Volumes/documents/github/maop-code/")
+ (front-context-string . "ch3-exercises\n  ")
+ (rear-context-string . "70 Sep  8  2020 ")
+ (position . 136))
+("jacamo"
+ (filename . "/Volumes/documents/github/jacamo/")
+ (front-context-string . ".github\n  drwxr-")
+ (rear-context-string . "02 Jul 25 16:26 ")
+ (position . 135))
+("emacsd"
+ (filename . "/Volumes/documents/github/doom-emacs/")
  (front-context-string . "modules\n  drwxr-")
  (rear-context-string . "44 May 20 08:19 ")
  (position . 654))
@@ -13,11 +92,6 @@
  (front-context-string . "android\n  drwxrw")
  (rear-context-string . "36 Jun  6 15:18 ")
  (position . 145))
-("current_pdfs"
- (filename . "~/Desktop/pdfs/Current/")
- (front-context-string . "10.1.1.697.5168.")
- (rear-context-string . "4K May 30 16:19 ")
- (position . 225))
 ("writing"
  (filename . "/Volumes/documents/github/writing/")
  (front-context-string . "resources\n  -rw-")
@@ -29,7 +103,7 @@
  (rear-context-string . "38 May  8 22:44 ")
  (position . 141))
 ("twitter"
- (filename . "/Volumes/documents/MEGA/AutoSync/twitterthreads/")
+ (filename . "/Volumes/documents/twitterthreads/")
  (front-context-string . "group_a\n  drwxrw")
  (rear-context-string . "6K Mar 30 07:56 ")
  (position . 152))
@@ -38,11 +112,6 @@
  (front-context-string . "emacs\n  drwxr-xr")
  (rear-context-string . "96 Apr 16 16:08 ")
  (position . 1209))
-("emacs-cellar"
- (filename . "/usr/local/Cellar/emacs/27.2/share/emacs/27.2/lisp/")
- (front-context-string . "calc\n  drwxr-xr-")
- (rear-context-string . "8K Mar 19 07:19 ")
- (position . 259))
 ("pdflib"
  (filename . "~/mega/pdflibrary/")
  (front-context-string . "1320\n  drwxr-xr-")
@@ -69,7 +138,7 @@
  (rear-context-string . "68 Jan 28 19:25 ")
  (position . 2063))
 ("bkmkorg"
- (filename . "~/github/py_bookmark_organiser/")
+ (filename . "/Volumes/documents/github/python/bookmark_organiser/")
  (front-context-string . "bkmkorg\n  -rw-r-")
  (rear-context-string . "08 Dec 10 16:01 ")
  (position . 202))
@@ -78,21 +147,11 @@
  (front-context-string . "bibtex_tags\n  dr")
  (rear-context-string . "4K Dec 24 18:28 ")
  (position . 184))
-("resources"
- (filename . "~/github/writing/resources/")
- (front-context-string . "authors\n  drwxr-")
- (rear-context-string . "52 Feb 25  2020 ")
- (position . 200))
 ("mega"
  (filename . "~/mega/")
  (front-context-string . "Audio\n  drwxrwxr")
  (rear-context-string . "04 Dec 23 17:49 ")
  (position . 190))
-("acab"
- (filename . "~/github/acab/")
- (front-context-string . "acab\n  drwxrwxr-")
- (rear-context-string . "72 Jan  3 18:45 ")
- (position . 186))
 ("doom"
  (filename . "~/github/emacs_files/")
  (front-context-string . "modules\n  drwxr-")

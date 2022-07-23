@@ -25,6 +25,7 @@
                                           "* Main Archive") "::")
       initial-buffer-choice "/Volumes/documents/github/emacs_files/setup_files/base_agenda.org"
       doom-fallback-buffer-name "base_agenda.org"
+      bookmark-default-file "/Volumes/documents/github/emacs_files/bookmarks"
       )
 ;;-- end locations
 

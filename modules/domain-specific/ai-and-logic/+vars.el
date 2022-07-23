@@ -1,6 +1,6 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
-(setq-default soar-repl-buffer-name   "*soar*"
+(setq-default soar-comint-buffer-name   "*soar*"
               clingo-repl-buffer-name "*clingo*"
               ceptre-repl-buffer-name "*ceptre*"
               instal-repl-buffer-name "*instal*"

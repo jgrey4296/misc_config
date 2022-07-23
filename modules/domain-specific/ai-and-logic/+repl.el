@@ -16,7 +16,9 @@
   (interactive "P")
   (require 'soar-mode)
   (if (not (bufferp soar-comint-buffer-name))
-      (run-soar-comint))
+      (make-comint-in-buffer soar-comint-buffer-name
+                             (get-buffer-create soar-comint-buffer-name)
+                             soar-executable))
   (get-buffer-create soar-comint-buffer-name)
   )
 

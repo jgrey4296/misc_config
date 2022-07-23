@@ -12,11 +12,16 @@
       "1" #'+jg-wrap-fold-block
       )
 
+
 (map! :after jg-leader-bindings-loaded
       :leader
       :prefix "t"
-      :n "v r" #'rainbow-mode
+      :desc "Rainbow Mode" :n "v r" #'rainbow-mode
+      :desc "Auto-Hide"    :n "h"   #'+jg-text-toggle-auto-hide
       )
+
+
+
 (map! :after help
       :map help-map
       :desc "Regex Reminder" "R" #'+jg-text-regex-reminder

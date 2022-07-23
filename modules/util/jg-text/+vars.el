@@ -2,6 +2,7 @@
 (setq-default jg-text-last-similarity-arg 1
               jg-fold-block-pattern "%s-- %s"
               jg-fold-block-depth 2
+              jg-text-auto-hide-toggle t
               )
 
 (setq-default evil-surround-pairs-alist

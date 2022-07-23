@@ -59,3 +59,8 @@ Used to guard inputs in tag strings"
   (interactive)
   (message (kill-new (buffer-name)))
   )
+
+(defun +jg-text-toggle-auto-hide ()
+  (interactive)
+  (setq jg-text-auto-hide-toggle (not jg-text-auto-hide-toggle))
+  (message "Auto Hide: %s" jg-text-auto-hide-toggle))

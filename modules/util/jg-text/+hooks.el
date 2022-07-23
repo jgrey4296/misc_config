@@ -5,7 +5,7 @@
 Vimish-fold's any blocks matching jg-fold-block-gen's :re pattern
 "
   (message "Running Auto Hide: %s %s" major-mode comment-start)
-  (if global-evil-vimish-fold-mode
+  (if (and global-evil-vimish-fold-mode jg-text-auto-hide-toggle)
     (save-excursion
       (beginning-of-buffer)
       (vimish-fold-delete-all)

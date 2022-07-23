@@ -1,4 +1,8 @@
-;;; lang/jg-python/+funcs.el -*- lexical-binding: t; -*-
+;;; lang/jg-python/+funcs.el -*- lexical-binding: t; -*-;;-- imports
+
+;;-- end imports
+
+
 (defun +jg-python-close-all-defs ()
     (interactive)
     (save-excursion
@@ -181,11 +185,12 @@ TODO
     (with-current-buffer source
       (goto-char (point-min))
       (re-search-forward "^\"\"\"" nil t)
-      (if (re-search-forward "^\"\"\"" nil t)
-          (progn (end-of-line) (insert (+jg-fold-block-gen :name "imports" :newlines t))
-                 (insert cleaned)
-                 (insert (+jg-fold-block-gen :name "imports" :newlines t :end t))
-                 ))
+      (re-search-forward "^\"\"\"" nil t)
+      (end-of-line)
+      (insert "\n")
+      (insert (+jg-fold-block-gen :name "imports" :newlines t))
+      (insert cleaned)
+      (insert (+jg-fold-block-gen :name "imports" :newlines t :end t))
       )
     )
   )

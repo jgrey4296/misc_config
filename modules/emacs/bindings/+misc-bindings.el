@@ -21,11 +21,21 @@
       :localleader
       "h" #'counsel-shell-history)
 
+(map! :after shell
+      :map shell-mode-map
+      "C-d" #'comint-send-eof
+      )
+(evil-make-intercept-map shell-mode-map)
+
 ;; Comint
 ;; overrides the default normal mode binding of evil-ret
 (map! :after comint
       :map comint-mode-map
-      :n "RET" #'comint-send-input)
+      "C-d" #'comint-send-eof
+      :n "RET" #'comint-send-input
+      )
+
+(evil-make-intercept-map comint-mode-map)
 
 ;; Flycheck
 (map! :after flycheck

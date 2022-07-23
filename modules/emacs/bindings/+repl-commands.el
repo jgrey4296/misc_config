@@ -28,9 +28,12 @@
       )
   )
 
-(defun +jg-repl-send-register-to_repl (reg)
+(defun +jg-repl-send-register-to-repl (reg)
   (interactive "c")
-  (message "Got Reg: %s" (get-register reg))
+  (let ((str (get-register reg)))
+    (message "Got Reg: %s" str)
+    (comint-send-string str)
+    )
   )
 
 

@@ -4,6 +4,8 @@
   (load! "+bindings")
   )
 
+(load! "+vars")
+(load! "+repl")
 (use-package! abl-mode)
 (use-package! agentspeak-mode)
 (use-package! ceptre-mode)

@@ -61,3 +61,5 @@
   )
 ;; this has to be done in a hook. grumble grumble.
 (add-hook 'soar-comint-mode-hook 'soar-comint--initialize)
+
+(provide 'soar-comint)

@@ -1,11 +1,17 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
-(setq-default soar-repl-buffer-name "*soar*"
-              clips-repl-buffer-name "*clips*"
+(setq-default soar-repl-buffer-name   "*soar*"
+              clingo-repl-buffer-name "*clingo*"
+              ceptre-repl-buffer-name "*ceptre*"
+              instal-repl-buffer-name "*instal*"
+              inferior-clips-buffer   nil
 
 
-              soar-executable "soar"
-              inferior-clips-program "clips"
+              soar-executable         "SoarCLI.sh"
+              clingo-executable       "clingo"
+              ceptre-executable       "ceptre"
+              instal-executable       "python -m instal"
+              inferior-clips-program  "CLIPS Console"
               )
 
 (after! proof-general

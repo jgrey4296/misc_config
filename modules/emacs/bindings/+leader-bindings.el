@@ -449,7 +449,7 @@
       :desc "Jump to Register"     "j" #'jump-to-register
       :desc "List Registers"       "l" #'list-registers
       :desc "Killed Text"          "y" #'counsel-yank-pop
-      :desc "Send to Repl"         "r" #'+jg-repl-send-register-to_repl
+      :desc "Send to Repl"         "r" #'+jg-repl-send-register-to-repl
       :desc "Clear All"            "K" #'+jg-registers-clear-all
       )
   ;;; <leader> R --- remote
@@ -503,10 +503,10 @@
   ;;; <leader> t --- toggle
 (map! :leader
       :prefix ("t" . "toggle")
-      :desc "Global Company"  "C" #'global-company-mode
-      :desc "Input Language" "i"  #'toggle-input-method
-      :desc "SmartParens"    "s"  #'smartparens-global-mode
-      :desc "Read-only mode"               "r" #'read-only-mode
+      :desc "Global Company" "C" #'global-company-mode
+      :desc "Input Language" "i" #'toggle-input-method
+      :desc "SmartParens"    "s" #'smartparens-global-mode
+      :desc "Read-only mode" "r" #'read-only-mode
       (:prefix ("d" . "Debug")
        :desc "Debug on Error" "e"               #'toggle-debug-on-error
        :desc "Debug on Var" "v"                 #'debug-on-variable-change
@@ -553,7 +553,7 @@
       ;; fill-column indicator
       )
 
-  ;;; <leader> W --- Workspaces
+;;; <leader> W --- Workspaces
 (map! :leader
       :when (featurep! :ui workspaces)
       :prefix ("W" . "Workspaces")

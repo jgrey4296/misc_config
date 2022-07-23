@@ -1,5 +1,6 @@
 ;;; soar-mode.el -*- lexical-binding: t; -*-
 (require 'soar-faces)
+(require 'soar-comint)
 
 (defcustom soar-executable "soar"
   "The executable to use for soar"

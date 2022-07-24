@@ -2,7 +2,12 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("in_progress_twitter"
+(("bibliography"
+ (filename . "/Volumes/documents/github/writing/resources/bibliography/")
+ (front-context-string)
+ (rear-context-string . "3K Jul 22 13:24 ")
+ (position . 9300))
+("in_progress_twitter"
  (filename . "/Volumes/documents/twitter_temp_download/")
  (front-context-string . "current.tweets\n ")
  (rear-context-string . "8K Jul 11 16:11 ")

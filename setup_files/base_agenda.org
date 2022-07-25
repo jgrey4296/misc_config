@@ -18,17 +18,15 @@ Versu, Abl, Cif
 ***** Grammar
 
 ** Secondary
-*** [[file:/Volumes/documents/github/writing/resources/quotes.org][Quotes]]
-*** [[file:/Volumes/documents/github/writing/resources/taxonomies.org][Taxonomies]]
-*** [[file:/Volumes/documents/github/writing/resources/DSLs.org][DSLs]]
+*** [[file:/Volumes/documents/github/writing/orgfiles/listings/quotes.org][Quotes]]
+*** [[file:/Volumes/documents/github/writing/orgfiles/listings/taxonomies.org][Taxonomies]]
+*** [[/Volumes/documents/github/writing/orgfiles/listings/DSLs.org][DSLs]]
 *** [[file:~/github/writing/resources/bibliography][Bibliography]]
 *** [[~/github/languageLearning][Misc Language Repo]]
-*** [[file:~/Desktop/pdfs/Current][PDFs to integrate]]
-*** [[~/.spacemacs.d/setup_files/pomodoro_log.org][Pomodoro Log]]
-*** [[file:~/Mega/twitterthreads][Twitter Threads]]
+*** [[~/.doom.d/setup_files/pomodoro_log.org][Pomodoro Log]]
+*** [[file:/volumes/documents//twitterthreads][Twitter Threads]]
 *** TODO [[file:/Volumes/documents/github/corpora][Darius Kuzemi's Corpora]]
-*** [[file:/Volumes/documents/github/otherLibs/data][538 Data]]
-*** [[file:/Volumes/documents/github/writing/resources/research_questions.org][Research Questions]]
+*** [[file:/Volumes/documents/github/writing/orgfiles/primary/research_questions.org][Research Questions]]
 
 ** Reminders
 *** Definitions

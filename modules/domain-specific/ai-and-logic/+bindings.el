@@ -8,6 +8,8 @@
       "<up>"   'proof-undo-last-successful-command
       )
 
+(evil-make-intercept-map coq-mode-map)
+
    ;; (spacemacs/set-leader-keys-for-major-mode 'coq-mode
     ;;   (kbd "i m") 'coq-insert-match
     ;;   (kbd "i i") 'coq-insert-intros

@@ -97,3 +97,5 @@
       )
 
 (evil-make-overriding-map dired-mode-map)
+
+(provide 'jg-dired-bindings)

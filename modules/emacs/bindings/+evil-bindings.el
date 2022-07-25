@@ -331,20 +331,20 @@
       :desc "Eval region"        "r" #'+eval:region
       :desc "Replace region"     "R" #'+eval:replace-region
 
-      :desc "Upper"              "U" #'evil-upcase
-      :desc "Down"               "u" #'evil-downcase
+      :desc "Upper"              "U"   #'evil-upcase
+      :desc "Down"               "u"   #'evil-downcase
       :desc "Restore selection"  "v"   #'evil-visual-restore
-      :desc "Fill"               "w"   #'evil-fill
+      :desc "Wrap Line"          "w"   #'evil-fill
       :desc "Exchange"           "x"   #'evil-exchange
       :desc "Yank"               "y"   #'+evil:yank-unindented
       :desc "Zap to Char"        "z"   #'zap-up-to-char
 
       (:prefix ("s" . "String-ops")
-       :desc "Rot13"               "'"   #'evil-rot13
-       :desc "Decode url"         "E" #'+evil:url-decode
-       :desc "Encode url"         "e" #'+evil:url-encode
-       :desc "Inflection"         "i" #'evil-operator-string-inflection
-       :desc "Title Case"         "t" #'+jg-text-title-case-op
+       :desc "Rot13"               "'" #'evil-rot13
+       :desc "Decode url"         "E"  #'+evil:url-decode
+       :desc "Encode url"         "e"  #'+evil:url-encode
+       :desc "Inflection"         "i"  #'evil-operator-string-inflection
+       :desc "Title Case"         "t"  #'+jg-text-title-case-op
 
        )
       (:prefix ("/" . "Search")
@@ -365,7 +365,7 @@
       "l" nil
       (:prefix ("l" . "Line-ops")
        ;; TODO uniquify, remove leading whitespace, split on char
-       :desc "Justify" "j" #'justify-current-line
+       :desc "Justify" "j"                    #'justify-current-line
        :desc "Flush Lines"                "f" #'flush-lines
        :desc "Keep Lines"                 "K" #'keep-lines
        :desc "Delete trailing newlines"   "W" #'doom/delete-trailing-newlines
@@ -439,37 +439,39 @@
       :desc "Outer Select"     "a" jg-binding-outer-text-objects-map
       )
 
-;; Override default evil maps
-(message "Finalising Evil bindings: %s" (current-time-string))
-;; Backup
-(setq old-evil-normal-state-map evil-normal-state-map
-      old-evil-visual-state-map evil-visual-state-map
-      old-evil-operator-state-map evil-operator-state-map
-      old-evil-motion-state-map evil-motion-state-map
-      old-evil-insert-state-map evil-insert-state-map
-      )
+(after! jg-dired-bindings
+  ;; Override default evil maps
+  (message "Finalising Evil bindings: %s" (current-time-string))
+  ;; Backup
+  (setq old-evil-normal-state-map evil-normal-state-map
+        old-evil-visual-state-map evil-visual-state-map
+        old-evil-operator-state-map evil-operator-state-map
+        old-evil-motion-state-map evil-motion-state-map
+        old-evil-insert-state-map evil-insert-state-map
+        )
 
-;; Override
-(setq  evil-normal-state-map jg-binding-normal-state-map
-       evil-insert-state-map jg-binding-insert-state-map
-       evil-visual-state-map jg-binding-visual-state-map
-       evil-operator-state-map jg-binding-operator-state-map
-       evil-motion-state-map jg-binding-motion-state-map
-       evil-inner-text-objects-map jg-binding-inner-text-objects-map
-       evil-outer-text-objects-map jg-binding-outer-text-objects-map
-       )
+  ;; Override
+  (setq evil-normal-state-map jg-binding-normal-state-map
+        evil-insert-state-map jg-binding-insert-state-map
+        evil-visual-state-map jg-binding-visual-state-map
+        evil-operator-state-map jg-binding-operator-state-map
+        evil-motion-state-map jg-binding-motion-state-map
+        evil-inner-text-objects-map jg-binding-inner-text-objects-map
+        evil-outer-text-objects-map jg-binding-outer-text-objects-map
+        )
 
-;; Refresh
-(setq evil-global-keymaps-alist
-      '((evil-emacs-state-minor-mode    . evil-emacs-state-map)
-        (evil-motion-state-minor-mode   . evil-motion-state-map)
-        (evil-replace-state-minor-mode  . evil-replace-state-map)
-        (evil-operator-state-minor-mode . evil-operator-state-map)
-        (evil-visual-state-minor-mode   . evil-visual-state-map)
-        (evil-insert-state-minor-mode   . evil-insert-state-map)
-        (evil-normal-state-minor-mode   . evil-normal-state-map)))
-(message "Evil Bindings Complete: %s" (current-time-string))
+  ;; Refresh
+  (setq evil-global-keymaps-alist
+        '((evil-emacs-state-minor-mode    . evil-emacs-state-map)
+                (evil-motion-state-minor-mode   . evil-motion-state-map)
+                (evil-replace-state-minor-mode  . evil-replace-state-map)
+                (evil-operator-state-minor-mode . evil-operator-state-map)
+                (evil-visual-state-minor-mode   . evil-visual-state-map)
+                (evil-insert-state-minor-mode   . evil-insert-state-map)
+                (evil-normal-state-minor-mode   . evil-normal-state-map)))
+  (message "Evil Bindings Complete: %s" (current-time-string))
 
-(global-set-key (kbd "<backtab>")       #'evil-normal-state)
+  (global-set-key (kbd "<backtab>")       #'evil-normal-state)
 
-(provide 'jg-evil-bindings)
+  (provide 'jg-evil-bindings)
+  )

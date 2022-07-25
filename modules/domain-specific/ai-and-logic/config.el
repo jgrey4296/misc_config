@@ -1,11 +1,12 @@
 ;; Misc AI Languages:
 
-(after! evil
+(after! (coq evil)
   (load! "+bindings")
   )
 
 (load! "+vars")
 (load! "+repl")
+(load! "+funcs")
 (use-package! abl-mode)
 (use-package! agentspeak-mode)
 (use-package! ceptre-mode)

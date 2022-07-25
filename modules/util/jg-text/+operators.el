@@ -21,23 +21,25 @@
   (let* ((encrypted (buffer-substring-no-properties beg end))
          (context (epg-make-context epa-protocol))
          decrypted)
-         ;; (decrypted (epg-decrypt-string (epg-make-context epa-protocol)
-         ;;                                (buffer-substring-no-properties beg end))))
+    ;; (decrypted (epg-decrypt-string (epg-make-context epa-protocol)
+    ;;                                (buffer-substring-no-properties beg end))))
     (let ((input-file (make-temp-file "epg-input"))
-	  (coding-system-for-write 'binary))
+          (output-file (make-temp-file "epg-output"))
+          (coding-system-for-write 'binary))
       (unwind-protect
-	  (progn
-	    (write-region encrypted nil input-file nil 'quiet)
-	    (setf (epg-context-output-file context)
-                  (make-temp-file "epg-output"))
-	    (epg-start-decrypt context (epg-make-data-from-file input-file))
-	    (epg-wait-for-completion context)
-	    (epg--check-error-for-decrypt context)
-	    (setq decrypted (epg-read-output context))
-            (epg-delete-output-file context)
+          (progn
+            (write-region encrypted nil input-file nil 'quiet)
+            (setf (epg-context-output-file context) output-file)
+            (epg-start-decrypt context (epg-make-data-from-file input-file))
+            (epg-wait-for-completion context)
+            (epg--check-error-for-decrypt context)
+            (setq decrypted (epg-read-output context)))
+        (epg-delete-output-file context)
         (if (file-exists-p input-file)
-	    (delete-file input-file))
-        (epg-reset context))))
+            (delete-file input-file))
+        (if (file-exists-p output-file)
+            (delete-file output-file))
+        (epg-reset context)))
 
     (save-excursion
       (goto-char beg)
@@ -46,7 +48,6 @@
       )
     )
   )
-
 
 (evil-define-operator +jg-wrap-fold-block (beg end count &optional name)
   " Operator to easily create fold blocks "

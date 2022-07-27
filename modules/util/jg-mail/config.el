@@ -36,25 +36,21 @@
 (use-package! rmail
   :commands rmail
   :after evil
-  :config
-  (evil-make-intercept-map rmail-mode-map)
-  (map! :map rmail-mode-map
-      "j" nil
-      "k" nil
-      "v" nil
-      "e" nil
-      "q" nil
-      "n" #'rmail-next-undeleted-message
-      "p" #'rmail-previous-undeleted-message
-      "q" #'quit-window
-      "Q" #'rmail-quit
-      "d" #'rmail-delete-forward
-      )
   )
 
 (use-package! rmailsum
-  :commands rmail-summary
-  :after evil
+  :defer
   :config
-  (evil-make-intercept-map rmail-summary-mode-map)
+  (setq rmail-summary-font-lock-keywords
+    `(("^ *[0-9]+D.*" . font-lock-string-face)			; Deleted.
+      ("^ *[0-9]+-.*" . font-lock-type-face)			; Unread.
+      ;; Neither of the below will be highlighted if either of the above are:
+      ("^ *[0-9]+[^D-] \\(......\\)" 1 font-lock-keyword-face)	; Date.
+      ("{ \\([^\n}]+\\) }" 1 font-lock-comment-face)  ; Labels
+      (,(rx (+ alnum) ?@ (+ (any "a-z" "A-Z" "-" ?. )))
+       0 'homoglyph)
+      ("Subject: " 0 'hi-green-b)
+      )
+    )
+  (load! "+advice")
   )

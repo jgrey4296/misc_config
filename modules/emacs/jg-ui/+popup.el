@@ -45,7 +45,7 @@
       ("^\\*Customize" :slot 2 :side right :size 0.5 :select t :quit nil)
       ("^ \\*undo-tree\\*" :slot 2 :side left :size 20 :select t :quit t)
       ;; `help-mode', `helpful-mode'
-      ("^\\*\\([Hh]elp\\|Apropos\\)" :slot 2 :vslot -8 :size 0.35 :select t)
+      ("^\\*\\([Hh]elp\\|Apropos\\)" :slot 2 :vslot -8 :size 0.35 :select t :quit nil)
       ;; `eww' (and used by dash docsets)
       ("^\\*eww\\*" :vslot -11 :size 0.35 :select t)
       ;; `Info-mode'

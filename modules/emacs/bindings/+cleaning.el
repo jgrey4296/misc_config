@@ -1,0 +1,57 @@
+;;; +cleaning.el -*- lexical-binding: t; -*-
+
+(defun +jg-bindings-check-map (the-map)
+  (assert (keymapp the-map))
+  (mapcar (lambda (x)
+            (message "%s : %s"
+                     (format "C-%s" (char-to-string x))
+                     (not (not (lookup-key the-map
+                                           (kbd (format "C-%s" (char-to-string x))))))
+                    )
+            )
+          (number-sequence ?a ?z))
+
+  (mapcar (lambda (x)
+            (message "%s : %s"
+                     (format "M-%s" (char-to-string x))
+                     (not (not (lookup-key the-map
+                                           (kbd (format "M-%s" (char-to-string x))))))
+                    )
+            )
+          (number-sequence ?a ?z))
+  )
+
+(defun +jg-bindings-undefine-metas (the-map)
+  (loop for acc-map in (accessible-keymaps the-map)
+        do
+        (if (not (keymapp acc-map))
+            (setq acc-map (cdr acc-map)))
+        (loop for x in (number-sequence ?a ?z)
+                do
+                (let ((fmt (char-to-string x)))
+                  (if (lookup-key acc-map (kbd (format "C-%s" fmt)))
+                      (define-key acc-map (kbd (format "C-%s" fmt)) nil)
+                    )
+                  (if (and (keymapp acc-map)
+                           (lookup-key acc-map (kbd (format "C-M-%s" fmt))))
+                      (define-key acc-map (kbd (format "C-M-%s" fmt)) nil)
+                    )
+                  (if (lookup-key acc-map (kbd (format "M-%s" fmt)))
+                      (define-key acc-map (kbd (format "M-%s" fmt)) nil)
+                    )
+                  )
+                )
+        (if (lookup-key acc-map '[menu-bar])
+            (define-key acc-map '[menu-bar] nil))
+        (if (lookup-key acc-map '[mouse-1])
+            (define-key acc-map '[mouse-1] nil))
+        (if (lookup-key acc-map '[mouse-2])
+            (define-key acc-map '[mouse-2] nil))
+        (if (lookup-key acc-map '[mouse-3])
+            (define-key acc-map '[mouse-3] nil))
+        (if (lookup-key acc-map '[mouse-4])
+            (define-key acc-map '[mouse-4] nil))
+        (mapc (lambda (x) (if (and (proper-list-p x) (>= 1 (length x)))
+                              (delete x acc-map))) acc-map)
+        )
+  )

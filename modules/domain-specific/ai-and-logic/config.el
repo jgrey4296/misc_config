@@ -20,6 +20,8 @@
   :commands (netlogo-mode)
   )
 
+;; TODO config pasp mode
+
 (after! org
   (push '("clingo" . prolog) org-src-lang-modes)
   (push '("ccalc" . prolog) org-src-lang-modes)

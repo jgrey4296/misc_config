@@ -189,4 +189,5 @@ If region isn't active, narrow away anything above point
 (defun +jg-which-key-show-top-level (&optional _)
   "Show top-level bindings."
   (interactive)
-  (which-key--create-buffer-and-show nil nil '+jg-bindings-wk-filter-fn "Top-level bindings"))
+  (which-key--create-buffer-and-show
+   nil nil '+jg-bindings-wk-filter-fn "Top-level bindings"))

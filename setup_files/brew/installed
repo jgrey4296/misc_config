@@ -231,6 +231,7 @@ wakeonlan
 webp
 wget
 wiiuse
+wordnet
 wxmac
 wxwidgets
 x264
@@ -247,5 +248,7 @@ zimg
 zlib
 zstd
 basictex
+godot
 pdf-images
 pdftotext
+sigil

@@ -16,6 +16,8 @@
       "i" #'ignore
       "l" nil
       "h" #'ignore
+      "n" nil
+      "0" #'evil-beginning-of-line
       )
 (map! :after ibuffer
       :map ibuffer-mode-map

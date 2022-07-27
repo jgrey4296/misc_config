@@ -5,6 +5,5 @@
 (package! plantuml-mode)
 (package! gradle-mode)
 (package! groovy-mode)
-(package! pasp-mode)
 
 (package! ob-plantuml   :recipe `(:local-repo "~/.doom.d/packages/org-babel-ext" :files ("ob-plantuml.el")))

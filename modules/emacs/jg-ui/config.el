@@ -67,3 +67,9 @@
 (add-hook! 'doom-init-ui-hook :append
   (defun +ligatures-init-h ()
     (remove-hook 'after-change-major-mode-hook #'+ligatures-init-buffer-h)))
+
+
+(after! helpful
+  (add-hook 'helpful-mode-hook
+            (lambda () (set-window-dedicated-p (selected-window) nil)))
+  )

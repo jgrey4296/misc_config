@@ -1,4 +1,4 @@
-;;; init.el --- Description -*- lexical-binding: t; -*-
+;;; +debug-macro.el --- Description -*- lexical-binding: t; -*-
 ;;
 ;; Copyright (C) 2021 John Grey
 ;;
@@ -45,4 +45,4 @@
              (nreverse forms)))))
 
 
-;;; init.el ends here
+;;; +debug-macro.el ends here

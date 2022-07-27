@@ -8,6 +8,7 @@
 (package! proof-general)
 (package! soar-mode       :recipe (:local-repo "~/.doom.d/packages/ai_and_logic/soar-mode"))
 (package! versu-mode      :recipe (:local-repo "~/.doom.d/packages/ai_and_logic/versu-mode"))
+(package! pasp-mode)
 
 (package! ob-ccalc        :recipe `(:local-repo "~/.doom.d/packages/org-babel-ext" :files ( "ob-ccalc.el" )))
 (package! ob-ceptre       :recipe `(:local-repo "~/.doom.d/packages/org-babel-ext" :files ( "ob-ceptre.el" )))

@@ -41,7 +41,7 @@
       :desc "Agenda"    "7" (cmd! (find-file (car org-agenda-files)))
       :desc "Twitter"   "8" (cmd! (+jg-browse-url jg-twitter-url))
       ;; :desc "Mail"      "9" #'mu4e
-      :desc "Messages"  "0" (cmd! (+jg-ui-ivy-open-as-popup "*Messages*"))
+      :desc "Messages"  "0" (cmd! (+jg-ui-ivy-open-as-popup "*Messages*") (if current-prefix-arg (+jg-bindings-clear-buffer)))
       )
 
   ;;; <leader> a -- Unused

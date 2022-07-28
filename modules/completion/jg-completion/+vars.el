@@ -1,4 +1,7 @@
 ;;; completion/ivy/+vars.el -*- lexical-binding: t; -*-
+(defvar jg-completion-file-template-rules (make-hash-table))
+(defvar jg-completion-file-templates-dir "/Volumes/documents/github/emacs_files/snippets/file-templates")
+
 
 (after! (ivy)
   (setq ivy-height 17

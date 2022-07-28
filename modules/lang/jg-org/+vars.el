@@ -48,3 +48,23 @@
     (add-to-list 'helm-completing-read-handlers-alist '(org-capture . helm-org-completing-read-tags))
     (add-to-list 'helm-completing-read-handlers-alist '(org-set-tags . helm-org-completing-read-tags))
   )
+;;-- file templates
+(after! jg-file-templates
+  (+jg-completion-add-file-templates
+   'org
+   '(("two_pager\\.org$"     :trigger "__pacheco_vega_two_pager" :mode org-mode)
+     ("lit_review\\.org$"    :trigger "__lit_review"             :mode org-mode)
+     ("inst_pipeline\\.org$" :trigger "__institution_pipeline"   :mode org-mode)
+     ("design_doc\\.org$"    :trigger "__designDocNotes"         :mode org-mode)
+     ("project\\.org$"       :trigger "__project"                :mode org-mode)
+     ("invoice\\.org$"       :trigger "__invoice"                :mode org-mode)
+     ("contact\\.org$"       :trigger "__contact"                :mode org-mode)
+     ("README\\.org$"        :trigger "__doom-readme"            :mode org-mode :when +file-templates-in-emacs-dirs-p )
+
+     (org-journal-mode :ignore t)
+     (org-mode :trigger "__")
+     )
+   )
+  (+jg-completion-activate-file-templates)
+  )
+;;-- end file templates

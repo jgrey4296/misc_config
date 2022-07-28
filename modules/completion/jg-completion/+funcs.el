@@ -71,3 +71,22 @@ Modified to pre-sort bookmarks, caselessly
             :action 'insert
             )
   )
+
+(defun +jg-completion-add-file-templates (sym rules &optional override)
+  (assert (hash-table-p jg-completion-file-template-rules))
+  (if (and (gethash sym jg-completion-file-template-rules) (not override))
+      (message "File Template Ruleset %s already exists" sym)
+    (puthash sym rules jg-completion-file-template-rules)
+    )
+  )
+
+(defun +jg-completion-activate-file-templates ()
+  (setq +file-templates-dir jg-completion-file-templates-dir
+        yas-snippet-dirs (list +snippets-dir
+                               +file-templates-dir
+                               doom-snippets-dir
+                               yasnippet-snippets-dir)
+        yas--default-user-snippets-dir yas-snippet-dirs)
+  (setq +file-templates-alist
+        (-flatten-n 1 (hash-table-values jg-completion-file-template-rules)))
+  )

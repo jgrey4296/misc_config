@@ -51,89 +51,6 @@
     )
   )
 
-
-(defun +jg-bindings-clear-buffer ()
-  " Utility to clear a buffer
-    from https://stackoverflow.com/questions/24565068/ "
-  (interactive)
-  (let ((inhibit-read-only t)) (erase-buffer))
-  )
-(defun +jg-personal-insert-lparen ()
-  " utility to insert a (  "
-  (interactive)
-  (insert "(")
-  )
-(defun +jg-personal-insert-rparen ()
-  " utility to insert a ) "
-  (interactive)
-  (insert ")")
-  )
-
-(defun +jg-toggle-line-numbers ()
-  (interactive)
-  (setq display-line-numbers (if (not (eq display-line-numbers t)) t nil))
-  )
-(defun +jg-toggle-line-numbers-visual ()
-  (interactive)
-  (setq display-line-numbers (if (not (eq display-line-numbers 'visual)) 'visual nil))
-  )
-(defun +jg-toggle-window-dedication ()
-  (interactive)
-  (let ((curr-window (selected-window)))
-    (set-window-dedicated-p curr-window
-                            (not (window-dedicated-p curr-window)))
-    (if (window-dedicated-p curr-window)
-        (message "Window is now dedicated to %s" (window-buffer curr-window))
-      (message "Window is not dedicated"))
-    )
-  )
-(defun +jg-toggle-line-move-ignore-invisible ()
-  (interactive)
-  (setq line-move-ignore-invisible (not line-move-ignore-invisible))
-  (message "Ignore invisible lines: %s" line-move-ignore-invisible)
-  )
-
-(defun +jg-narrow-around-point ()
-  (interactive)
-  (cond (current-prefix-arg
-         (narrow-to-region (line-beginning-position)
-                           (point-max)))
-        ((eq evil-state 'visual)
-         (narrow-to-region evil-visual-beginning evil-visual-end))
-        ((not (buffer-narrowed-p))
-         (let ((num (read-number "Lines Around Point to Select: ")))
-           (narrow-to-region (line-beginning-position (- num))
-                             (line-end-position num))
-           )
-         )
-        (t
-         (widen))
-        )
-  )
-(defun +jg-toggle-narrow-buffer (arg)
-  "Narrow the buffer to BEG END. If narrowed, widen it.
-If region isn't active, narrow away anything above point
-"
-  (interactive "P")
-  (cond ((eq evil-state 'normal)
-         (narrow-to-region (line-beginning-position) (point-max)))
-        ((eq evil-state 'visual)
-         (narrow-to-region evil-visual-beginning evil-visual-end))
-        )
-  )
-(defun +jg-narrowing-move-focus-backward (arg)
-  (interactive "p")
-  (+jg-narrowing-move-focus-forward(- arg))
-  )
-(defun +jg-narrowing-move-focus-forward (arg)
-  (interactive "p")
-  (widen)
-  (evil-forward-section-begin arg)
-  (let ((bounds (+evil:defun-txtobj)))
-    (narrow-to-region (car bounds) (cadr bounds))
-    )
-  )
-
 (defun +jg-counsel-workspace ()
     "Forward to `' or `workspace-set' if workspace doesn't exist."
     (interactive)
@@ -171,11 +88,6 @@ If region isn't active, narrow away anything above point
       )
     )
   )
-
-(defun +jg-bindings-insert-debug ()
-  (interactive)
-  (yas-expand-snippet (yas-lookup-snippet jg-binding-debug-snippet-name) (point)))
-
 
 (defun +jg-bindings-wk-filter-fn (binding)
   (not (string-match (rx (or "C-"

@@ -41,7 +41,7 @@
       :desc "Agenda"    "7" (cmd! (find-file (car org-agenda-files)))
       :desc "Twitter"   "8" (cmd! (+jg-browse-url jg-twitter-url))
       ;; :desc "Mail"      "9" #'mu4e
-      :desc "Messages"  "0" (cmd! (+jg-ui-ivy-open-as-popup "*Messages*") (if current-prefix-arg (+jg-bindings-clear-buffer)))
+      ;; 0 - messages
       )
 
   ;;; <leader> a -- Unused
@@ -51,7 +51,7 @@
   ;;; <leader> b --- buffer
 (map! :leader
       :prefix ("b" . "buffer")
-      :desc "Clear Buffer"                "DEL" #'+jg-bindings-clear-buffer
+      ;; DEL
       :desc "Ediff Buffers"               "TAB" #'ediff-buffers
       :desc "Next buffer"                 "]"   #'next-buffer
       :desc "Previous buffer"             "["   #'previous-buffer
@@ -64,7 +64,7 @@
       :desc "Kill all buffers"            "K"   #'doom/kill-all-buffers
       :desc "Local Variables"             "l"   #'+jg-bindings-list-buffer-locals
 
-      :desc "Yank Buffer Name"            "n"   #'+jg-text-yank-buffer-name
+      ;; n
       :desc "Kill other buffers"          "O"   #'doom/kill-other-buffers
       :desc "Read-only mode"              "r"   #'read-only-mode
       :desc "Revert buffer"               "R"   #'revert-buffer
@@ -203,7 +203,7 @@
   ;;; <leader> i --- insert
 (map! :leader
       :prefix ("i" . "insert")
-      :desc "Debug"                         "d"   #'+jg-bindings-insert-debug
+      ;; d
       :desc "Current file name"             "f"   #'+default/insert-file-path
       :desc "Current file path"             "F"   (cmd!! #'+default/insert-file-path t)
       :desc "Evil ex path"                  "p"   (cmd! (evil-ex "R!echo "))
@@ -356,17 +356,7 @@
        :desc "Reveal project in Finder"   "F"     #'+macos/reveal-project-in-finder
        )
 
-      (:prefix ("a" . "org agenda")
-       :desc "Agenda"                "a"          #'org-agenda
-       :desc "Todo list"             "t"          #'org-todo-list
-       :desc "Tags search"           "m"          #'org-tags-view
-       :desc "View search"           "v"          #'org-search-view
-       :desc "List Agenda Files"     "F"          #'+jg-org-list-agenda-files
-       :desc "occur-in-agenda-files" "/"          #'org-occur-in-agenda-files
-       :desc "agenda-file-to-front"  "f"          #'org-agenda-file-to-front
-       :desc "remove-file"           "r"          #'org-remove-file
-       :desc "agenda-list"           "l"          #'org-agenda-list
-       )
+      (:prefix ("a" . "org agenda"))
 
       (:prefix ("h" . "Helms")
        :desc "Minibuffer History"           "m"   #'counsel-minibuffer-history
@@ -396,7 +386,7 @@
       :desc "Invalidate project cache"     "I"  #'projectile-invalidate-cache
       :desc "Kill project buffers"         "K"  #'projectile-kill-buffers
       :desc "List project todos"           "t"  #'magit-todos-list
-      :desc "Open project scratch buffer"  "x"  #'+jg-misc-open-scratch-buffer
+      ;; x
       :desc "Remove known project"         "D"  #'projectile-remove-known-project
       :desc "Repeat last command"          "C"  #'projectile-repeat-last-command
       :desc "Run cmd in project root"      "!"  #'projectile-run-shell-command-in-root
@@ -521,9 +511,10 @@
        (:when (featurep! :checkers spell +flyspell)
         :desc "Spell checker"              "s"  #'flyspell-mode))
       (:prefix ("v" . "Visual")
+       ;; R
+       ;; n N
+       ;;
        :desc "Frame fullscreen"      "F" #'toggle-frame-fullscreen
-       :desc "Line numbers"          "n" #'+jg-toggle-line-numbers
-       :desc "Line numbers Visual"   "N" #'+jg-toggle-line-numbers-visual
        :desc "Evil goggles"          "g" #'evil-goggles-mode
        :desc "Hl-line"               "h" #'global-hl-line-mode
        :desc "Fill Column Indicator" "f" #'display-fill-column-indicator-mode
@@ -536,10 +527,10 @@
        :desc "Line Truncate"         "t" #'toggle-truncate-lines
        )
       (:prefix  ("n" . "Navigation")
+       ;; i
        :desc "Neotree"             "t" #'neotree-toggle
        :desc "Minimap mode"        "m" #'minimap-mode
        :desc "org-tree-slide mode" "p" #'org-tree-slide-mode
-       :desc "Ignore Invisible"    "i" #'+jg-toggle-line-move-ignore-invisible
        :desc "Centered Cursor"     "c" #'centered-cursor-mode
        :desc "Indent style"        "I" #'doom/toggle-indent-style
        :desc "Evil-visual-mark"    "v" #'evil-visual-mark-mode
@@ -584,20 +575,20 @@
   ;;; <leader> w --- Windows
 (map! :leader
       :prefix ("w" . "Windows")
-      :desc "Toggle Dedicated" "DEL"                #'+jg-toggle-window-dedication
-      :desc "Delete Window" "d"                   #'delete-window
-      :desc "Split To Right" "/"                  #'split-window-right
-      :desc "Split Below" "-"                     #'split-window-below
-      :desc "Window up" "k"                                         #'evil-window-up
-      :desc "Window right" "l"                                         #'evil-window-right
-      :desc "Window left" "h"                                         #'evil-window-left
-      :desc "Window right" "j"                                         #'evil-window-down
-      :desc "Enlargen" "m"                                         #'doom/window-enlargen
-      :desc "Maximize" "M"                                         #'doom/window-maximize-buffer
-      :desc "Balance" "b"                                         #'balance-windows
+      ;; DEL
+      :desc "Delete Window" "d"      #'delete-window
+      :desc "Split To Right" "/"     #'split-window-right
+      :desc "Split Below" "-"        #'split-window-below
+      :desc "Window up" "k"          #'evil-window-up
+      :desc "Window right" "l"       #'evil-window-right
+      :desc "Window left" "h"        #'evil-window-left
+      :desc "Window right" "j"       #'evil-window-down
+      :desc "Enlargen" "m"           #'doom/window-enlargen
+      :desc "Maximize" "M"           #'doom/window-maximize-buffer
+      :desc "Balance" "b"            #'balance-windows
 
-      :desc "Shrink Horizontal" "{"                                         #'shrink-window-horizontally
-      :desc "Shrink Vertical" "}"                                         #'shrink-window
+      :desc "Shrink Horizontal" "{"  #'shrink-window-horizontally
+      :desc "Shrink Vertical" "}"    #'shrink-window
 
       )
   ;;; <leader> x -- Text

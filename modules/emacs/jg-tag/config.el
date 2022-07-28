@@ -6,7 +6,7 @@
 (load! "+vars")
 (load! "+funcs")
 (after! ivy
-  (load! "+ivy_actions")
+  (load! "+ivy-actions")
   )
 (after! evil
   (load! "+bindings")

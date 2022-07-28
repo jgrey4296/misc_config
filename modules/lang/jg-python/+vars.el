@@ -25,8 +25,7 @@
 
 
 ;-- Personal Vars
-(setq-default
-              jg-python-dev-mode nil
+(setq-default jg-python-dev-mode nil
               jg-python-dev-cmd "-X dev"
 
               jg-python-pycache-cmd "-X pycache_prefix=%s"
@@ -49,8 +48,6 @@
 (push 'python-pylint flycheck-checkers)
 (push ".mypy.ini" flycheck-python-mypy-ini)
 ;;-- end flycheck
-
-
 
 ;;-- popup
 (setq jg-python-popup-rules

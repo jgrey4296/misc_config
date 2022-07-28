@@ -21,7 +21,6 @@ Modified to pre-sort bookmarks, caselessly
                              (bookmark-set x))))
             :caller 'counsel-bookmark))
 
-
 (defun +jg-completion-complete-or-snippet (&optional arg)
   (interactive "p")
   (if (not (yas-expand-from-trigger-key))
@@ -46,13 +45,11 @@ Modified to pre-sort bookmarks, caselessly
       (when (bound-and-true-p evil-local-mode)
         (evil-insert-state)))))
 
-
 (defun +jg-snippet--ensure-dir (dir)
   (unless (file-directory-p dir)
     (if (y-or-n-p (format "%S doesn't exist. Create it?" (abbreviate-file-name dir)))
         (make-directory dir t)
       (error "%S doesn't exist" (abbreviate-file-name dir)))))
-
 
 (define-advice yas--read-table (:override ()
                                 +jg-snippet-read-table)
@@ -60,7 +57,6 @@ Modified to pre-sort bookmarks, caselessly
     (intern-soft (ivy-read "Snippet Table: " tables))
     )
   )
-
 
 (defun +jg-counsel-features ()
   " Insert from a list of recognized features "

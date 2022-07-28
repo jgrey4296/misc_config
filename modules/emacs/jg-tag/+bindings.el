@@ -12,11 +12,6 @@
       :desc "Twitter Grep Helm"         "g" #'+jg-tag-helm-twitter-grep
       )
 
-(map! :after jg-leader-bindings-loaded
-      :leader
-      :desc "Insert Tag" "#" #'+jg-tag-simple-ivy
-      )
-
 (map! :after helm
       :map helm-map
       "M-SPC" #'helm-next-page)
@@ -42,7 +37,7 @@
       )
 
 ;; Dired bindings
-(map! :after dired
+(map! :after 'jg-dired-bindings
       :map dired-mode-map
       :localleader
       (:prefix ("d" . "Describe")

@@ -4,6 +4,19 @@
       :leader
       "i t"    #'org-time-stamp
       "j c"    #'org-goto-calendar
+      (:prefix "o"
+       (:prefix ("a" . "Org Agenda")
+        :desc "Agenda"                "a"          #'org-agenda
+        :desc "Todo list"             "t"          #'org-todo-list
+        :desc "Tags search"           "m"          #'org-tags-view
+        :desc "View search"           "v"          #'org-search-view
+        :desc "List Agenda Files"     "F"          #'+jg-org-list-agenda-files
+        :desc "occur-in-agenda-files" "/"          #'org-occur-in-agenda-files
+        :desc "agenda-file-to-front"  "f"          #'org-agenda-file-to-front
+        :desc "remove-file"           "r"          #'org-remove-file
+        :desc "agenda-list"           "l"          #'org-agenda-list
+        )
+       )
       )
 
 (map! :after dired

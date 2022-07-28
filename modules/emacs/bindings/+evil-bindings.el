@@ -4,19 +4,13 @@
 ;; TODO add count lines/words, insert line above/below...
 
 (message "Setting up Evil Bindings: %s" (current-time-string))
-(defvar jg-binding-normal-state-map (make-sparse-keymap) "JG map replacing evil-normal-state-map")
-(defvar jg-binding-visual-state-map (make-sparse-keymap) "JG map replacing evil-visual-state-map")
-(defvar jg-binding-operator-state-map (make-sparse-keymap) "JG map replacing evil-operator-state-map")
-(defvar jg-binding-motion-state-map (make-sparse-keymap) "JG map replacing evil-motion-state-map")
-(defvar jg-binding-inner-text-objects-map (make-sparse-keymap) "JG map for selectin text objects")
-(defvar jg-binding-outer-text-objects-map (make-sparse-keymap) "JG map replacing evil-outer-text-objects-map")
-(defvar jg-binding-insert-state-map (copy-keymap evil-insert-state-map))
+(setq jg-binding-insert-state-map (copy-keymap evil-insert-state-map)
 
-(defvar old-evil-normal-state-map nil "the original evil-normal-state-map")
-(defvar old-evil-iinsert-state-map nil "the original evil-insert-state-map")
-(defvar old-evil-visual-state-map nil "the original evil-visual-state-map")
+(defvar old-evil-normal-state-map   nil "the original evil-normal-state-map")
+(defvar old-evil-iinsert-state-map  nil "the original evil-insert-state-map")
+(defvar old-evil-visual-state-map   nil "the original evil-visual-state-map")
 (defvar old-evil-operator-state-map nil "the original evil-operator-state-map")
-(defvar old-evil-motion-state-map nil "the original evil-motion-state-map")
+(defvar old-evil-motion-state-map   nil "the original evil-motion-state-map")
 
 ;; Normal state
 (map! :map jg-binding-normal-state-map
@@ -81,12 +75,11 @@
       )
 ;; Insert state
 (map! :map jg-binding-insert-state-map
-      "TAB" #'+jg-completion-complete-or-snippet
-
+      ;; TAB
       )
 ;; Visual state
 (map! :map jg-binding-visual-state-map
-      :desc "Mark Buffer"   "RET"      #'+jg-text-whole-buffer-textobj
+      ;; RET
       :desc "Visual Block"  "DEL"      #'evil-visual-block
       :desc "Repeat"        "."        #'evil-repeat
       :desc "Search"        "/"        #'evil-ex-search-forward
@@ -111,8 +104,8 @@
       :desc "Escape"        "C-g" #'evil-escape
       :desc "Surround Edit" "S"   #'evil-Surround-edit
       :desc "Surround"      "s"   #'evil-surround-edit
-      :desc "Select Line"   "l"   #'+jg-text-line-textobj
-      :desc "Select Buffer" "RET" #'+jg-text-whole-buffer-textobj
+      ;; l
+      ;; RET
       )
 ;; Motion state
 (map! :map jg-binding-motion-state-map
@@ -191,46 +184,32 @@
       )
 ;; Vision / Hiding
 (map! :map jg-binding-vision-map
-      :desc "Narrow"        "RET" #'+jg-narrow-around-point
+      ;; RET
       :desc "Widen"         "DEL" #'widen
-      :desc "ispell-word"   "="  #'ispell-word
-      :desc "Scroll Right"  ">"  #'evil-scroll-column-right
-      :desc "Scroll Left"   "<"  #'evil-scroll-column-left
+      :desc "ispell-word"   "="   #'ispell-word
+      :desc "Scroll Right"  ">"   #'evil-scroll-column-right
+      :desc "Scroll Left"   "<"   #'evil-scroll-column-left
 
-      :desc "open-fold-rec" "A" #'evil-open-fold-rec
+      :desc "open-fold-rec" "A"   #'evil-open-fold-rec
 
-      :desc "toggle-fold"   "a" #'evil-toggle-fold
-      :desc "close-fold"    "d" #'evil-close-fold
-      :desc "Next Fold"     "j" #'+fold/next
-      :desc "Prev Fold"     "k" #'+fold/previous
-      :desc "open-fold"     "o" #'evil-open-fold
-      :desc "open-folds"    "r" #'evil-open-folds
-      :desc "Close Folds"   "m" #'evil-close-folds
+      :desc "toggle-fold"   "a"   #'evil-toggle-fold
+      :desc "close-fold"    "d"   #'evil-close-fold
+      :desc "Next Fold"     "j"   #'+fold/next
+      :desc "Prev Fold"     "k"   #'+fold/previous
+      :desc "open-fold"     "o"   #'evil-open-fold
+      :desc "open-folds"    "r"   #'evil-open-folds
+      :desc "Close Folds"   "m"   #'evil-close-folds
 
-      :desc "Center" "z"   #'evil-scroll-line-to-center
-      :desc "Top"    "t"   #'evil-scroll-line-to-top
-      :desc "Bottom" "b"   #'evil-scroll-line-to-bottom
+      :desc "Center" "z"          #'evil-scroll-line-to-center
+      :desc "Top"    "t"          #'evil-scroll-line-to-top
+      :desc "Bottom" "b"          #'evil-scroll-line-to-bottom
 
       (:prefix ("'" . "Highlight")
-       :desc  "symbol-at-point"            "." #'highlight-symbol-at-point
-       :desc  "find-patterns"              "f" #'hi-lock-find-patterns
-       :desc  "write-interactive-patterns" "i" #'hi-lock-write-interactive-patterns
-       :desc  "lines-matching-regexp"      "l" #'highlight-lines-matching-regexp
-       :desc  "phrase"                     "p" #'highlight-phrase
-       :desc  "regexp"                     "r" #'highlight-regexp
-       :desc  "unhighlight-regexp"         "u" #'unhighlight-regexp
+       ;; Reserved
        )
 
       (:prefix ("v" . "Vimish Fold")
-       :desc "toggle-all"             "A"  #'vimish-fold-toggle-all
-       :desc "delete-all"             "D"  #'vimish-fold-delete-all
-       :desc "toggle"                 "a"  #'vimish-fold-toggle
-       :desc "delete"                 "d"  #'vimish-fold-delete
-       :desc "fold"                   "f"  #'vimish-fold
-       :desc "next-fold"              "j"  #'vimish-fold-next-fold
-       :desc "previous-fold"          "k"  #'vimish-fold-previous-fold
-       :desc "refold-all"             "m"  #'vimish-fold-refold-all
-       :desc "unfold-all"             "r"  #'vimish-fold-unfold-all
+       ;; Reserved
        )
       )
 ;; Text objects
@@ -296,13 +275,12 @@
       )
 ;; My Operators
 (map! :map jg-binding-operator-map
-
       :desc "Repeat Global Sub"   "&"   #'evil-ex-repeat-global-substitute
 
       :desc "Incr"                "+"   #'evil-numbers/inc-at-pt
       :desc "Decr"                "-"   #'evil-numbers/dec-at-pt
       :desc "Last Change"         ";"   #'goto-last-change
-      :desc "Goto Column"         ">"   #'+jg-text-force-column-motion
+      ;; >
       :desc "Apply Macro"         "@"   #'+evil:apply-macro
       :desc "Line End"            "$"   #'evil-end-of-visual-line
       :desc "Line Start"          "0"   #'evil-beginning-of-visual-line
@@ -318,8 +296,7 @@
       :desc "Comment"            "c" #'evilnc-comment-operator
       :desc "IEdit"              "e" #'iedit-mode
       :desc "Goto First Line"    "f" #'evil-goto-first-line
-      :desc "Complete/Grow Selection"  "g" (cmds! (eq evil-state 'normal) #'company-manual-begin
-                                                  (eq evil-state 'visual) #'+jg-text-grow-selection-op)
+      ;; g
       :desc "Insert Resume"      "i" #'evil-insert-resume
       :desc "Join whitespace"    "J" #'evil-join-whitespace
 
@@ -344,8 +321,7 @@
        :desc "Decode url"         "E"  #'+evil:url-decode
        :desc "Encode url"         "e"  #'+evil:url-encode
        :desc "Inflection"         "i"  #'evil-operator-string-inflection
-       :desc "Title Case"         "t"  #'+jg-text-title-case-op
-
+       ;; t
        )
       (:prefix ("/" . "Search")
        :desc "Search Word Forward" "*"  #'evil-ex-search-unbounded-word-forward
@@ -353,16 +329,15 @@
        :desc "Lookup"               "D" #'+lookup/references
        :desc "Find File at point"   "F" #'evil-find-file-at-point-with-line
        :desc "Lookup File"          "f" #'+lookup/file
-       :desc "Simple Grep"          "g" #'+jg-text-simple-grep-op
+       ;; g
        :desc "Next Visual"          "j" #'evil-next-visual-line
        :desc "Previous Visual"      "k" #'evil-previous-visual-line
-       :desc "Next Similar String " "s" #'+jg-text-next-similar-string
+       ;; s
        :desc "Regexp Builder"       "r" #'regexp-builder
 
        ;; TODO escalate replace op
        )
 
-      "l" nil
       (:prefix ("l" . "Line-ops")
        ;; TODO uniquify, remove leading whitespace, split on char
        :desc "Justify" "j"                    #'justify-current-line
@@ -372,29 +347,27 @@
        :desc "Delete trailing whitespace" "w" #'delete-trailing-whitespace
        :desc "Whitespace Cleanup"         "c" #'whitespace-cleanup
        :desc "Indent"                     "i" #'indent-region
-       :desc "Random"                     "r" #'+jg-text-goto-random-line-op
+       ;; r
        )
       )
 ;; Directional Motion
 (map! :map jg-binding-backward-motion-map
-      :desc "Narrow"       "RET" #'+jg-narrowing-move-focus-backward
-
-      :desc "Section" "["         #'evil-backward-section-begin
-      :desc "Close Paren" "]"     #'+jg-text-prev-close-paren-motion
-
-      :desc "Arg"          "a" #'evil-backward-arg
-      :desc "Buffer"       "b" #'previous-buffer
-      :desc "Comment"      "c" #'+evil/previous-comment
-      :desc "Git Hunk"     "d" #'git-gutter:previous-hunk
-      :desc "Error"        "e" #'previous-error
-      :desc "Heading"      "h" #'outline-previous-visible-heading
-      :desc "Empty Line"   "l" #'+jg-text-prev-empty-line-motion
-      :desc "Begin Method"       "m" #'+evil/previous-beginning-of-method
-      :desc "End Method"       "M" #'+evil/previous-end-of-method
-      :desc "Ring Window"  "r" #'window-ring-move-perspective-2
-      :desc "Section"      "s" #'evil-backward-section-begin
-      :desc "Todo"         "t" #'hl-todo-previous
-      :desc "Workspace"    "w" #'+workspace/switch-left
+      ;; RET
+      ;; ]
+      ;; l
+      ;; r
+      :desc "Section"      "["   #'evil-backward-section-begin
+      :desc "Arg"          "a"   #'evil-backward-arg
+      :desc "Buffer"       "b"   #'previous-buffer
+      :desc "Comment"      "c"   #'+evil/previous-comment
+      :desc "Git Hunk"     "d"   #'git-gutter:previous-hunk
+      :desc "Error"        "e"   #'previous-error
+      :desc "Heading"      "h"   #'outline-previous-visible-heading
+      :desc "Begin Method" "m"   #'+evil/previous-beginning-of-method
+      :desc "End Method"   "M"   #'+evil/previous-end-of-method
+      :desc "Section"      "s"   #'evil-backward-section-begin
+      :desc "Todo"         "t"   #'hl-todo-previous
+      :desc "Workspace"    "w"   #'+workspace/switch-left
 
       ;; TODO rotate text
       ;;  (:when (featurep! :editor rotate-text)
@@ -403,20 +376,19 @@
 
       )
 (map! :map jg-binding-forward-motion-map
-      :desc "Narrow"       "RET" #'+jg-narrowing-move-focus-forward
-      :desc "Section"      "]"   #'evil-forward-section-begin
-      :desc "Open Section" "["   #'+jg-text-next-open-paren-motion ;; #'evil-forward-section-end
-
+      ;; r
+      ;; RET
+      ;; l
+      ;; [
+      :desc "Section"      "]" #'evil-forward-section-begin
       :desc "Arg"          "a" #'evil-forward-arg
       :desc "Buffer"       "b" #'next-buffer
       :desc "Comment"      "c" #'+evil/next-comment
       :desc "Git Hunk"     "d" #'git-gutter:next-hunk
       :desc "Error"        "e" #'next-error
       :desc "Heading"      "h" #'outline-next-visible-heading
-      :desc "Empty Line"   "l" #'+jg-text-next-empty-line-motion
       :desc "Begin Method" "m" #'+evil/next-beginning-of-method
       :desc "End Method"   "M" #'+evil/next-end-of-method
-      :desc "Ring Window"  "r" #'window-ring-move-perspective
       :desc "Section"      "s" #'evil-forward-section-begin ;; #'evil-next-flyspell-error
       :desc "Todo"         "t" #'hl-todo-next
       :desc "Workspace"    "w" #'+workspace/switch-right
@@ -463,12 +435,12 @@
   ;; Refresh
   (setq evil-global-keymaps-alist
         '((evil-emacs-state-minor-mode    . evil-emacs-state-map)
-                (evil-motion-state-minor-mode   . evil-motion-state-map)
-                (evil-replace-state-minor-mode  . evil-replace-state-map)
-                (evil-operator-state-minor-mode . evil-operator-state-map)
-                (evil-visual-state-minor-mode   . evil-visual-state-map)
-                (evil-insert-state-minor-mode   . evil-insert-state-map)
-                (evil-normal-state-minor-mode   . evil-normal-state-map)))
+          (evil-motion-state-minor-mode   . evil-motion-state-map)
+          (evil-replace-state-minor-mode  . evil-replace-state-map)
+          (evil-operator-state-minor-mode . evil-operator-state-map)
+          (evil-visual-state-minor-mode   . evil-visual-state-map)
+          (evil-insert-state-minor-mode   . evil-insert-state-map)
+          (evil-normal-state-minor-mode   . evil-normal-state-map)))
   (message "Evil Bindings Complete: %s" (current-time-string))
 
   (global-set-key (kbd "<backtab>")       #'evil-normal-state)

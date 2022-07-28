@@ -33,7 +33,6 @@ Can operate on regions of headings "
                       (org-forward-heading-same-level 1)))))
           (t (message "Unknown Tagging State")))))
 
-
 (defun +jg-org-set-new-tag (x)
   "Utility to set a new tag for an org heading"
   (let ((prior-point (- (point) 1))
@@ -58,7 +57,6 @@ Can operate on regions of headings "
                  (+jg-org-integrate-tags (list stripped-tag))
                  (org-forward-heading-same-level 1))))
             (t (message "Unknown Tagging State")))))
-
 
 (defun +jg-org-integrate-tags (xs)
   (let ((current-tags (org-get-tags nil t)))

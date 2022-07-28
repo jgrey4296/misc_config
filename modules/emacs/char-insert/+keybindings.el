@@ -1,16 +1,16 @@
 
 (message "Setting up char insert bindings: %s" (current-time-string))
-(defvar char-insert-cx8-map (make-sparse-keymap))
-(defvar char-insert-acute-map (make-sparse-keymap))
-(defvar char-insert-cedilla-map (make-sparse-keymap))
-(defvar char-insert-diaeresis-map (make-sparse-keymap))
-(defvar char-insert-greek-map (make-sparse-keymap))
-(defvar char-insert-grave-map (make-sparse-keymap))
-(defvar char-insert-logic-map (make-sparse-keymap))
-(defvar char-insert-math-map (make-sparse-keymap))
-(defvar char-insert-subscript-map (make-sparse-keymap))
+(defvar char-insert-cx8-map         (make-sparse-keymap))
+(defvar char-insert-acute-map       (make-sparse-keymap))
+(defvar char-insert-cedilla-map     (make-sparse-keymap))
+(defvar char-insert-diaeresis-map   (make-sparse-keymap))
+(defvar char-insert-greek-map       (make-sparse-keymap))
+(defvar char-insert-grave-map       (make-sparse-keymap))
+(defvar char-insert-logic-map       (make-sparse-keymap))
+(defvar char-insert-math-map        (make-sparse-keymap))
+(defvar char-insert-subscript-map   (make-sparse-keymap))
 (defvar char-insert-superscript-map (make-sparse-keymap))
-(defvar char-insert-tilde-map (make-sparse-keymap))
+(defvar char-insert-tilde-map       (make-sparse-keymap))
 
 
 ;; Acute
@@ -186,10 +186,12 @@
       )
 
 ;; Override
-(map! :map evil-insert-state-map
+(map! :after jg-evil-bindings
+      :map evil-insert-state-map
       :desc "Insert Chars" "C-x 8" char-insert-cx8-map
       )
 
-(map! :map evil-normal-state-map
+(map! :after jg-evil-bindings
+      :map evil-normal-state-map
       :desc "Insert Chars" "C-x 8" char-insert-cx8-map
       )

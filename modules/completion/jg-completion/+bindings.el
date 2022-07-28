@@ -2,10 +2,10 @@
 
 (message "Setting up Completion bindings: %s" (current-time-string))
 
-(map! :after counsel
+(map! :after (counsel jg-leader-bindings-loaded)
       [remap bookmark-jump] #'+jg-counsel-bookmark)
 
-(map! :after ivy
+(map! :after (ivy jg-leader-bindings-loaded)
       :map ivy-minibuffer-map
       [remap doom/delete-backward-word] #'ivy-backward-kill-word
       :in "TAB"                         #'ivy-alt-done
@@ -25,13 +25,13 @@
       :desc "Results as Buffer"        :n "b" #'ivy-occur
       )
 
-(map! :after ivy
+(map! :after (ivy jg-leader-bindings-loaded)
       :map ivy-occur-grep-mode-map
       :desc "Do Ops" "g" jg-binding-operator-map
       )
 
   ;;; :completion
-(map! :after company
+(map! :after (company jg-leader-bindings-loaded)
       (:when (featurep! :completion company)
        :i "C-@"    (cmds! (not (minibufferp)) #'company-complete-common)
        :i "C-SPC"  (cmds! (not (minibufferp)) #'company-complete-common)
@@ -105,8 +105,12 @@
       "1" (cmd! (+jg-browse-url "https://joaotavora.github.io/yasnippet/snippet-development.html"))
       )
 
-
 (map! :map emacs-lisp-mode-map
       :localleader
       "i f" #'+jg-counsel-features
+      )
+
+(map! :after jg-evil-bindings
+      :map jg-binding-insert-state-map
+      "TAB" #'+jg-completion-complete-or-snippet
       )

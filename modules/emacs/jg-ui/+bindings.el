@@ -33,9 +33,13 @@
 
 (map! :after jg-leader-bindings-loaded
       :leader
+      :desc "SCRATCH"                      "6" (cmd! (+jg-ui-ivy-open-as-popup "*scratch*"))
+      :desc "Messages"                     "0" (cmd! (+jg-ui-ivy-open-as-popup "*Messages*") (if current-prefix-arg
+                                                                                                 (with-current-buffer "*Messages*"
+                                                                                                   (+jg-bindings-clear-buffer))))
       (:prefix "b"
-       :desc "Undo-Tree" "u"         #'+jg-ui-undo-tree
-       :desc "Clear Popup Rules" "P" #'+jg-ui-ivy-reset-popup-rules
+       :desc "Undo-Tree"                   "u"     #'+jg-ui-undo-tree
+       :desc "Clear Popup Rules"           "P"     #'+jg-ui-ivy-reset-popup-rules
        )
       (:prefix "w"
        :desc "Toggle Layout" "|"     #'+jg-ui-window-layout-toggle

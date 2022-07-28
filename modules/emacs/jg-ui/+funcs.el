@@ -123,3 +123,24 @@ windows, switch to `doom-fallback-buffer'. Otherwise, delegate to original
           )
     )
   )
+(defun +jg-popup-add-rules (sym rules &optional override)
+  " sym is a symbol to avoid adding duplicate rulesets
+
+  Expects a list of form:
+  '((PATTERN :opt val :opt val) (PATTERN :opt val :opt val))
+  "
+  (assert (hash-table-p jg-popup-display-rules))
+  (if (and (gethash sym jg-popup-display-rules) (not override))
+      (message "Popup Ruleset %s already exists" sym)
+    (progn
+      (assert (listp rules))
+      (assert (listp (car rules)))
+      (assert (stringp (caar rules)))
+      (puthash sym rules jg-popup-display-rules)))
+  )
+
+(defun +jg-popup-activate-rules ()
+  (setq +popup--display-buffer-alist nil
+        display-buffer-alist         nil)
+  (set-popup-rules! (-flatten-n 1 (hash-table-values jg-popup-display-rules)))
+  )

@@ -53,15 +53,16 @@
 
 
 ;;-- popup
-(setq jg-python-todo-popup-rules t
-      jg-python-popup-rules
-      '(
-        ("^\\*pytest\\*"         :side bottom :ttl 5   :height 0.4 :quit t :select t)
+(setq jg-python-popup-rules
+      '(("^\\*pytest\\*"         :side bottom :ttl 5   :height 0.4 :quit t :select t)
         ("^\\*Anaconda\\*"       :side bottom :ttl 5   :height 0.4 :quit t :select nil)
-
         ))
-;;-- end popup
+(after! jg-popup-init
+  (+jg-popup-add-rules 'python jg-python-popup-rules)
+  (+jg-popup-activate-rules)
+  )
 
+;;-- end popup
 
 
 

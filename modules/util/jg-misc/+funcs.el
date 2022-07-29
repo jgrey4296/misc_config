@@ -125,7 +125,7 @@
                         (t
                          (append (funcall internal (car x)) (funcall internal (cdr x))))))))
     (progn
-      (assert (listp lst))
+      (cl-assert (listp lst))
       (funcall internal lst))))
 (defun +jg-personal-line-starts-with? (text)
   (s-starts-with? text (s-trim-left (buffer-substring-no-properties

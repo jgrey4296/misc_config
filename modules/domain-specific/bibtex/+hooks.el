@@ -58,7 +58,7 @@
 (defun +jg-bibtex--check-file-exists (pair)
   (let ((orig (cdr pair))
         (sub (substring (cdr pair) 1 -1)))
-    (assert (eq (string-to-char orig) ?{))
+    (cl-assert (eq (string-to-char orig) ?{))
     (if (not (f-exists? sub))
         (signal 'error `("File Not Found: " ,sub))
       )

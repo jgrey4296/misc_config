@@ -20,7 +20,7 @@
   (mapcar 'jg-org-test-run-test-group testgroups)
   )
 (defun jg-org-test-run-test-group (testgroup)
-  (assert (jg-org-test-group-p testgroup) t)
+  (cl-assert (jg-org-test-group-p testgroup) t)
   (goto-char (jg-org-test-group-start testgroup))
   (let* ((name (jg-org-test-group-name testgroup))
          (bound (jg-org-test-group-bound testgroup))
@@ -29,7 +29,7 @@
     (make-jg-org-test-results :name name :results results :link (jg-org-test-group-link testgroup)))
   )
 (defun jg-org-test-run-test (test bound)
-  (assert (jg-org-test-p test))
+  (cl-assert (jg-org-test-p test))
   (save-excursion
     (condition-case e
         (let ((type (jg-org-test-type test)))

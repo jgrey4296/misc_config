@@ -110,7 +110,7 @@ that uses evil-define-key, allowing state bindings
 Mainly this is useful for a keymap-based-replacement implementation
 of general-extended-def-:which-key
 "
-  (assert (keymapp keymap))
+  (cl-assert (keymapp keymap))
   (while key
     (let* ((string (if (stringp replacement)
                        replacement

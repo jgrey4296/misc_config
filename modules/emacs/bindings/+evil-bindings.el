@@ -4,7 +4,7 @@
 ;; TODO add count lines/words, insert line above/below...
 
 (message "Setting up Evil Bindings: %s" (current-time-string))
-(setq jg-binding-insert-state-map (copy-keymap evil-insert-state-map)
+(setq jg-binding-insert-state-map (copy-keymap evil-insert-state-map))
 
 (defvar old-evil-normal-state-map   nil "the original evil-normal-state-map")
 (defvar old-evil-iinsert-state-map  nil "the original evil-insert-state-map")

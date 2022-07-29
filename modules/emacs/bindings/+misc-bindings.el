@@ -1,7 +1,5 @@
 ;; util/base_bindings/+bindings.el -*- lexical-binding: t; -*-
 (message "Setting up Leaderless bindings: %s" (current-time-string))
-(global-set-key (kbd "C-c [") #'+jg-personal-insert-lparen)
-(global-set-key (kbd "C-c ]") #'+jg-personal-insert-rparen)
 (global-set-key (kbd "C-c u") #'universal-argument)
 
 ;; For minibuffer use:

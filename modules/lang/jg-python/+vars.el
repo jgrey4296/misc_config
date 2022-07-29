@@ -1,30 +1,6 @@
 ;;; lang/jg-python/+vars.el -*- lexical-binding: t; -*-
 
-
-;-- General Python Vars
-(setq-default python-indent-offset 4
-              python-indent-guess-indent-offset nil
-              python-shell-interpreter-args "-i"
-              python-shell-interpreter "python3"
-              python-shell-completion-native-enable t
-              python-shell-virtualenv-root "~/anaconda3"
-              python-pdbtrack-activate nil
-              py-pdbtrack-do-tracking-p nil
-              python-shell-completion-native-disabled-interpreters '("pypy")
-
-              python-shell-interpreter-path-args "-c \"import sys; sys.path = [%s] + sys.path; print(sys.path)\""
-)
-(modify-syntax-entry ?_ "_" python-mode-syntax-table)
-;##-- end General Python Vars
-
-;;-- projectile
-(after! projectile
-  (pushnew! projectile-project-root-files "setup.py" "requirements.txt"))
-;;-- end projectile
-
-
-
-;-- Personal Vars
+;;-- personal vars
 (setq-default jg-python-dev-mode nil
               jg-python-dev-cmd "-X dev"
 
@@ -39,33 +15,57 @@
               jg-python-last-chosen-support nil
               jg-python-import-block-end-re "^\\(__all__\\|[[:graph:]]+?\\s-+=\\|def\\|class\\|if TYPE_CHECKING:\\)"
       )
-;##-- end Personal Vars
+;;-- end personal vars
+
+;;-- general python
+(after! python
+  (setq-default python-indent-offset 4
+                python-indent-guess-indent-offset nil
+                python-shell-interpreter-args "-i"
+                python-shell-interpreter "python3"
+                python-shell-completion-native-enable t
+                python-shell-virtualenv-root "~/anaconda3"
+                python-pdbtrack-activate nil
+                py-pdbtrack-do-tracking-p nil
+                python-shell-completion-native-disabled-interpreters '("pypy")
+
+                python-shell-interpreter-path-args "-c \"import sys; sys.path = [%s] + sys.path; print(sys.path)\""
+                )
+  (modify-syntax-entry ?_ "_" python-mode-syntax-table)
+  )
+;;-- end general python
+
+;;-- projectile
+(after! projectile
+  (pushnew! projectile-project-root-files "setup.py" "requirements.txt"))
+;;-- end projectile
 
 ;;-- flycheck
-(setq-default flycheck--automatically-enabled-checkers (-concat flycheck--automatically-enabled-checkers '(python-pylint))
-              flycheck--automatically-disabled-checkers '(python-compile python-pyright python-mypy)
-              )
-(push 'python-pylint flycheck-checkers)
-(push ".mypy.ini" flycheck-python-mypy-ini)
+(after! flycheck
+  (setq-default flycheck--automatically-enabled-checkers (-concat flycheck--automatically-enabled-checkers '(python-pylint))
+                flycheck--automatically-disabled-checkers '(python-compile python-pyright python-mypy)
+                )
+  (push 'python-pylint flycheck-checkers)
+  (push ".mypy.ini" flycheck-python-mypy-ini)
+  )
 ;;-- end flycheck
 
 ;;-- popup
 (setq jg-python-popup-rules
-      '(("^\\*pytest\\*"         :side bottom :ttl 5   :height 0.4 :quit t :select t)
-        ("^\\*Anaconda\\*"       :side bottom :ttl 5   :height 0.4 :quit t :select nil)
+      '(("^\\*pytest\\*"         :side bottom :ttl 5   :height 0.4 :quit t :select t :priority 50)
+        ("^\\*Anaconda\\*"       :side bottom :ttl 5   :height 0.4 :quit t :select nil :priority 50)
         ))
 (after! jg-popup-init
   (+jg-popup-add-rules 'python jg-python-popup-rules)
-  (+jg-popup-activate-rules)
   )
 
 ;;-- end popup
 
 ;;-- file templates
-(after! 'jg-file-templates
+(after! jg-file-templates
   (+jg-completion-add-file-templates
    'python
-   '(("LICENSE$"        :trigger "__license-acab"   :mode text-mode)
+   '(("LICENSE$"        :trigger "__license-acab"   :mode text-mode :priority 100)
      ("pyproject.toml$" :trigger "__pyproject_toml" :mode python-mode)
      ("setup\\.cfg$"    :trigger "__setup_cfg"      :mode python-mode)
      ("__init__\\.py$"  :trigger "__init"           :mode python-mode)

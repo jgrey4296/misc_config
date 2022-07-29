@@ -12,6 +12,7 @@
   )
 
 (defun +jg-ui-ivy-open-as-popup (buff)
+  (interactive)
   (let ((curr-rule (display-buffer-assq-regexp buff display-buffer-alist nil))
         (curr-window (selected-window))
         )

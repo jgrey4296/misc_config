@@ -1,5 +1,6 @@
 ;;; config.el -*- lexical-binding: t; -*-
 
+(load! "+vars")
 (load! "+funcs")
 (load! "+faces")
 (after! evil
@@ -41,17 +42,17 @@
 
 (after! (evil hl-line)
   ;; hooks for evil state entry hooks to change hl-line colour
-  (add-hook 'evil-normal-state-entry-hook       #'(lambda () (interactive) (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-normal-state))))
-  (add-hook 'evil-insert-state-entry-hook       #'(lambda () (interactive) (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-insert-state))))
-  (add-hook 'evil-visual-state-entry-hook       #'(lambda () (interactive) (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-visual-state))))
-  (add-hook 'evil-motion-state-entry-hook       #'(lambda () (interactive) (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-motion-state))))
-  (add-hook 'evil-emacs-state-entry-hook        #'(lambda () (interactive) (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-emacs-state))))
-  (add-hook 'evil-replace-state-entry-hook      #'(lambda () (interactive) (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-replace-state))))
-  (add-hook 'evil-hybrid-state-entry-hook       #'(lambda () (interactive) (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-hybrid-state))))
-  (add-hook 'evil-evilified-state-entry-hook    #'(lambda () (interactive) (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-evilified-state))))
-  (add-hook 'evil-lisp-state-entry-hook         #'(lambda () (interactive) (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-lisp-state))))
-  (add-hook 'evil-iedit-state-entry-hook        #'(lambda () (interactive) (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-iedit-state))))
-  (add-hook 'evil-iedit-insert-state-entry-hook #'(lambda () (interactive) (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-iedit-insert-state))))
+  (add-hook 'evil-normal-state-entry-hook       (cmd! (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-normal-state))))
+  (add-hook 'evil-insert-state-entry-hook       (cmd! (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-insert-state))))
+  (add-hook 'evil-visual-state-entry-hook       (cmd! (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-visual-state))))
+  (add-hook 'evil-motion-state-entry-hook       (cmd! (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-motion-state))))
+  (add-hook 'evil-emacs-state-entry-hook        (cmd! (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-emacs-state))))
+  (add-hook 'evil-replace-state-entry-hook      (cmd! (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-replace-state))))
+  (add-hook 'evil-hybrid-state-entry-hook       (cmd! (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-hybrid-state))))
+  (add-hook 'evil-evilified-state-entry-hook    (cmd! (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-evilified-state))))
+  (add-hook 'evil-lisp-state-entry-hook         (cmd! (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-lisp-state))))
+  (add-hook 'evil-iedit-state-entry-hook        (cmd! (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-iedit-state))))
+  (add-hook 'evil-iedit-insert-state-entry-hook (cmd! (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-iedit-insert-state))))
   )
 (after! (featurep! :completion helm)
     (setq! helm-find-files-actions

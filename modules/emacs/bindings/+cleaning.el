@@ -1,7 +1,7 @@
 ;;; +cleaning.el -*- lexical-binding: t; -*-
 
 (defun +jg-bindings-check-map (the-map)
-  (assert (keymapp the-map))
+  (cl-assert (keymapp the-map))
   (mapcar (lambda (x)
             (message "%s : %s"
                      (format "C-%s" (char-to-string x))

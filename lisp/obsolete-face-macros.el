@@ -47,19 +47,19 @@
                         (t
                          (append (funcall internal (car x)) (funcall internal (cdr x))))))))
    (progn
-      (assert (listp lst))
+      (cl-assert (listp lst))
       (funcall internal lst))))
 (defun acab-face/make-list-as-big-as-n (lst n)
   " Repeat a list up to size n"
   (progn
-    (assert (listp lst))
-    (assert (numberp n))
+    (cl-assert (listp lst))
+    (cl-assert (numberp n))
     (letrec ((lenlst (length lst)))
       (if (>= lenlst n)
           lst
         (letrec ((repN (+ 1 (/ n lenlst)))
                  (newLst (acab-face/flatten (-repeat repN lst))))
-          (assert (>= (length newLst) n))
+          (cl-assert (>= (length newLst) n))
           newLst)))))
 (defun acab-face/findFace (name)
   (seq-find (lambda (x) (string= (face-name x) name)) (face-list)))

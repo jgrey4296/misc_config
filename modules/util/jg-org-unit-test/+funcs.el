@@ -39,7 +39,7 @@
 (defun jg-org-test-org-file ()
   (interactive)
   ;; check file is in org mode
-  (assert (eq major-mode 'org-mode))
+  (cl-assert (eq major-mode 'org-mode))
   ;; get tests
   (let* ((test-texts (seq-filter 'identity (jg-org-test-find-tests)))
          (parsed-tests (seq-filter 'identity (-flatten (mapcar 'jg-org-test-parse-tests test-texts))))

@@ -1,7 +1,7 @@
 ;;json
 
 (defun +jg-dired-reformat-json-file (file)
-  (assert (f-ext? file "json"))
+  (cl-assert (f-ext? file "json"))
   (with-temp-buffer
     (insert-file file)
     (json-mode-beautify)

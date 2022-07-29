@@ -2,7 +2,7 @@
 (defun jg-org-test-parse-tests (data)
   ;; split text into tests by full stops, defined groups,
   ;; and their originating heading
-  (assert (jg-org-test-extracts-p data))
+  (cl-assert (jg-org-test-extracts-p data))
   (if (not (string-empty-p (string-trim (jg-org-test-extracts-text data))))
       (let ((testgroups (parsec-with-input (jg-org-test-extracts-text data)
                           (parsec-many-till (jg-org-test-parse-group) (parsec-eof))))
@@ -11,7 +11,7 @@
             (start (jg-org-test-extracts-start data))
             )
         (mapc (lambda (x)
-                (assert (jg-org-test-group-p x) t)
+                (cl-assert (jg-org-test-group-p x) t)
                 (setf (jg-org-test-group-link x) link
                       (jg-org-test-group-bound x) bound
                       (jg-org-test-group-start x) start)) testgroups)

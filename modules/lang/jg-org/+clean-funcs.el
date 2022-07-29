@@ -90,7 +90,7 @@ and the property block directly below "
                        (rem-perma (plist-get elem-data :CUSTOM_ID)))
 
                   (message "Removing: %s : %s" (plist-get tweet :permalink) rem-perma)
-                  (assert (s-equals? (plist-get tweet :permalink) rem-perma))
+                  (cl-assert (s-equals? (plist-get tweet :permalink) rem-perma))
                   ;; TODO get links / files and add to kept tweet
 
                   ;; copy tweet into deletion buffer

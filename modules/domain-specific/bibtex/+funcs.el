@@ -237,7 +237,7 @@ returns the new location
                    (target (f-join finalpath fname)))
               (message "Relocating %s to %s" file target)
               (if (s-equals? "y" (read-string (format "%sRefile to %s? " (if destructive "Destructive " "") target)))
-                  (progn (assert (not (f-exists? target)))
+                  (progn (cl-assert (not (f-exists? target)))
                          (if destructive (f-move file target)
                            (progn (f-copy file target)
                                   (f-move file (f-join (f-parent file) (format "_refiled_%s" fname)))))

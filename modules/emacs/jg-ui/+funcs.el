@@ -117,7 +117,7 @@ windows, switch to `doom-fallback-buffer'. Otherwise, delegate to original
       (while (re-search-forward "#[[:alnum:]]+" nil t)
         (push (match-string 0) colors)
         ))
-    (assert (<= num (length colors)))
+    (cl-assert (<= num (length colors)))
 
     (loop for n to (- num 1) do
           (insert "(defface " name "-face-" (number-to-string n) "\n")

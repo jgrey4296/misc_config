@@ -2,6 +2,8 @@
 
 
 (message "Setting up text binding: %s" (current-time-string))
+(global-set-key (kbd "C-c [") #'+jg-text-insert-lparen)
+(global-set-key (kbd "C-c ]") #'+jg-text-insert-rparen)
 ;; Get rid of zap to char:
 (map! "M-z" nil)
 

@@ -1,5 +1,5 @@
 ;;; editor/window-control/+vars.el -*- lexical-binding: t; -*-
-(defvar jg-popup-display-rules (make-hash-table)
+(defvar jg-popup-display-rules (make-hash-table))
 
 (setq-default window-control-popup-persist-default '(:side bottom
                                                      :height 0.3

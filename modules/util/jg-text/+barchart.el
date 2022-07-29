@@ -42,7 +42,7 @@
 (defun +jg-text-barchart-region()
   " Create a Bar Chart of value pairs of the selected region "
   (interactive)
-  (assert (eq evil-state 'visual))
+  (cl-assert (eq evil-state 'visual))
   (let* (;;grab the region
          (text (buffer-substring-no-properties evil-visual-beginning
                                                evil-visual-end))
@@ -107,7 +107,7 @@ and sorts groups alphabetically"
   "Given a pair, create a temp buffer in the cdr directory,
 naming the directory based on the first line of text and insert the car "
   ;; (message "Creating Temp buffer for: %s" args)
-  (assert (f-dir? (cdr args)))
+  (cl-assert (f-dir? (cdr args)))
   (with-temp-buffer
     (org-mode)
     (insert (car args))

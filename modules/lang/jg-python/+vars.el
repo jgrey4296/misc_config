@@ -73,15 +73,13 @@
      ("_cli.+\\.py$"    :trigger "__cli"            :mode python-mode)
      ("conf\\.py$"      :trigger "__conf"           :mode python-mode)
      ("setup\\.py$"     :trigger "__setup"          :mode python-mode)
-     ("\\.py$"          :trigger "__"               :mode python-mode)
-     (python-mode       :trigger "__")
+     ("\\.py$"          :trigger "__"               :mode python-mode :priority -99)
+     (python-mode       :trigger "__" :priority -100)
      )
    )
   (+jg-completion-activate-file-templates)
   )
 ;;-- end file templates
-
-
 
 ;;-- obsolete
 ;; (defvar +python-ipython-command '("ipython" "-i" "--simple-prompt" "--no-color-info")

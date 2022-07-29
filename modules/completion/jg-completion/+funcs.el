@@ -1,3 +1,4 @@
+;;-- counsel
 (defun +jg-counsel-bookmark ()
   "Forward to `bookmark-jump' or `bookmark-set' if bookmark doesn't exist.
 Modified to pre-sort bookmarks, caselessly
@@ -21,6 +22,19 @@ Modified to pre-sort bookmarks, caselessly
                              (bookmark-set x))))
             :caller 'counsel-bookmark))
 
+(defun +jg-counsel-features ()
+  " Insert from a list of recognized features "
+  (interactive)
+  (ivy-read "Available Features: "
+            (seq-sort #'string-lessp features)
+            :require-match nil
+            :action 'insert
+            )
+  )
+;;-- end counsel
+
+
+;;-- snippets
 (defun +jg-completion-complete-or-snippet (&optional arg)
   (interactive "p")
   (if (not (yas-expand-from-trigger-key))
@@ -51,38 +65,44 @@ Modified to pre-sort bookmarks, caselessly
         (make-directory dir t)
       (error "%S doesn't exist" (abbreviate-file-name dir)))))
 
+
 (define-advice yas--read-table (:override ()
                                 +jg-snippet-read-table)
   (let ((tables (hash-table-keys yas--tables)))
     (intern-soft (ivy-read "Snippet Table: " tables))
     )
   )
+;;-- end snippets
 
-(defun +jg-counsel-features ()
-  " Insert from a list of recognized features "
-  (interactive)
-  (ivy-read "Available Features: "
-            (seq-sort #'string-lessp features)
-            :require-match nil
-            :action 'insert
-            )
-  )
 
+;;-- file-templates control
 (defun +jg-completion-add-file-templates (sym rules &optional override)
-  (assert (hash-table-p jg-completion-file-template-rules))
+  (cl-assert (hash-table-p jg-completion-file-template-rules))
   (if (and (gethash sym jg-completion-file-template-rules) (not override))
       (message "File Template Ruleset %s already exists" sym)
-    (puthash sym rules jg-completion-file-template-rules)
+    (puthash sym
+             (cl-loop for (head . body) in rules
+                      for priority = (* -1 (or (plist-get body :priority) 0))
+                      for clean    = (cl-loop for (k v) on body by #'cddr
+                                              unless (eq k :priority)
+                                              collect k and collect v)
+                      collect (cons priority (cons head clean))
+                      )
+             jg-completion-file-template-rules)
     )
   )
 
 (defun +jg-completion-activate-file-templates ()
+  (message "Activating File Templates: %s" (hash-table-keys jg-completion-file-template-rules))
   (setq +file-templates-dir jg-completion-file-templates-dir
         yas-snippet-dirs (list +snippets-dir
                                +file-templates-dir
                                doom-snippets-dir
                                yasnippet-snippets-dir)
         yas--default-user-snippets-dir yas-snippet-dirs)
-  (setq +file-templates-alist
-        (-flatten-n 1 (hash-table-values jg-completion-file-template-rules)))
+  (let ((all-rules (copy-sequence (-flatten-n 1 (hash-table-values jg-completion-file-template-rules)))))
+    (setq +file-templates-alist
+          (mapcar #'cdr (sort all-rules #'(lambda (x y) (< (car x) (car y))))))
+    )
   )
+;;-- end file-templates control

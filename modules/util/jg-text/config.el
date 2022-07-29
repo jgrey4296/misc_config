@@ -8,7 +8,7 @@
   (load! "+state")
   (load! "+hooks")
   (load! "+bindings")
-  (add-hook! prog-mode :depth 80 #'+jg-text-auto-hide)
+  (add-hook! 'prog-mode-hook :depth 80 #'+jg-text-auto-hide)
 )
 
 (use-package! academic-phrases
@@ -27,7 +27,7 @@
 (use-package! rainbow-mode
   :defer t
   :init
-  (add-hook 'prog-mode-hook 'rainbow-mode)
+  (add-hook! 'prog-mode-hook 'rainbow-mode)
 )
 (use-package! evil-string-inflection
   :defer t

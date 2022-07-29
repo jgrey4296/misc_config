@@ -9,9 +9,7 @@
 (after! ivy
   (load! "+ivy-actions")
   )
-
-(add-hook 'doom-init-ui-hook #'(lambda () (load! "+popup")) 'append)
-
+(load! "+popup")
 
 (use-package! hl-line
   :defer t
@@ -40,6 +38,14 @@
   )
 (use-package! palette-mode)
 
+;;-- hooks
+(add-hook! 'doom-first-input-hook #'+jg-popup-activate-rules)
+
+;; To overrule ligatures module
+(add-hook! 'doom-init-ui-hook :append
+  (defun +ligatures-init-h ()
+    (remove-hook 'after-change-major-mode-hook #'+ligatures-init-buffer-h)))
+
 (after! (evil hl-line)
   ;; hooks for evil state entry hooks to change hl-line colour
   (add-hook 'evil-normal-state-entry-hook       (cmd! (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-normal-state))))
@@ -63,14 +69,8 @@
                   (cdr helm-find-files-actions))
           )
     )
-
-;; To overrule ligatures module
-(add-hook! 'doom-init-ui-hook :append
-  (defun +ligatures-init-h ()
-    (remove-hook 'after-change-major-mode-hook #'+ligatures-init-buffer-h)))
-
-
 (after! helpful
   (add-hook 'helpful-mode-hook
             (lambda () (set-window-dedicated-p (selected-window) nil)))
   )
+;;-- end hooks

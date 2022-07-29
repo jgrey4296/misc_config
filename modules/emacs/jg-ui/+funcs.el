@@ -217,24 +217,39 @@ If region isn't active, narrow away anything above point
   (message "Ignore invisible lines: %s" line-move-ignore-invisible)
   )
 ;;-- end ui toggles
+
+;;-- popup control
 (defun +jg-popup-add-rules (sym rules &optional override)
   " sym is a symbol to avoid adding duplicate rulesets
 
   Expects a list of form:
   '((PATTERN :opt val :opt val) (PATTERN :opt val :opt val))
   "
-  (assert (hash-table-p jg-popup-display-rules))
+  (cl-assert (hash-table-p jg-popup-display-rules))
   (if (and (gethash sym jg-popup-display-rules) (not override))
       (message "Popup Ruleset %s already exists" sym)
-    (progn
-      (assert (listp rules))
-      (assert (listp (car rules)))
-      (assert (stringp (caar rules)))
-      (puthash sym rules jg-popup-display-rules)))
+    (puthash sym (cl-loop for (head . body) in rules
+                          for priority = (* -1 (or (plist-get body :priority) 0))
+                          collect (cons priority (+popup-make-rule head body)))
+             jg-popup-display-rules)
+    )
   )
 
 (defun +jg-popup-activate-rules ()
-  (setq +popup--display-buffer-alist nil
-        display-buffer-alist         nil)
-  (set-popup-rules! (-flatten-n 1 (hash-table-values jg-popup-display-rules)))
+  (message "Activating Popup rules: %s" (hash-table-keys jg-popup-display-rules))
+  (let ((all-rules (copy-sequence (-flatten-n 1 (hash-table-values jg-popup-display-rules)))))
+    (setq +popup--display-buffer-alist nil
+          display-buffer-alist (mapcar #'cdr
+                                       (sort all-rules #'(lambda (x y)
+                                                           (< (car x) (car y))))))
+    )
   )
+
+(define-advice set-popup-rules! (:after (&rest args)
+                                 +jg-popup-advice)
+  (+jg-popup-activate-rules))
+
+(define-advice set-popup-rule! (:after (&rest args)
+                                 +jg-popup-advice2)
+  (+jg-popup-activate-rules))
+;;-- end popup control

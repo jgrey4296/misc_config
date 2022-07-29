@@ -2,7 +2,6 @@
 
 (message "Setting file templates dir")
 
-;; From Highest -> lowest priority
 (+jg-completion-add-file-templates
  'general
  '(("/docker-compose\\.yml$" :mode yaml-mode)
@@ -16,8 +15,8 @@
    ;; Markdown
    (markdown-mode)
    ;; Markdown
-   (sh-mode)
-   (gitignore-mode)
+   (sh-mode :priority -100)
+   (gitignore-mode :priority -100)
    (dockerfile-mode)
    (snippet-mode)
    )

@@ -17,7 +17,7 @@
 (defvar jg-org-test-src-block-regexp "^ +#\\+begin_src"
   "Regexp to find src blocks")
 
-(defun jg-org-test-to-string (test)
+(defun +jg-org-test-to-string (test)
   (let ((tt (jg-org-test-type test))
         (loc (jg-org-test-locator test))
         (val (jg-org-test-value test))
@@ -36,7 +36,7 @@
   )
 
 ;; Main Access
-(defun jg-org-test-org-file ()
+(defun +jg-org-test-org-file ()
   (interactive)
   ;; check file is in org mode
   (cl-assert (eq major-mode 'org-mode))

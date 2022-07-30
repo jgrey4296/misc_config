@@ -18,7 +18,7 @@
 ;;
 ;;
 ;;; Code:
-(defun +jg-snippet--completing-read-uuid (prompt all-snippets &rest args)
+(defun +jg-completion-snippet--completing-read-uuid (prompt all-snippets &rest args)
   (let* ((snippet-data (cl-loop for (_ . tpl) in (mapcan #'yas--table-templates (if all-snippets
                                                                                    (hash-table-values yas--tables)
                                                                                  (yas--get-snippet-tables)))

@@ -149,7 +149,7 @@ governed by the variable `bibtex-completion-display-formats'."
     (> (string-to-number c1year) (string-to-number c2year))
     )
   )
-(defun +jg-year-sort-transformer (candidates source)
+(defun +jg-bibtex-year-sort-transformer (candidates source)
   (-sort #'+jg-bibtex-sort-by-year candidates)
   )
 
@@ -245,7 +245,7 @@ using org-bibtex-fields for completion options "
                                       "Tweet Entry"          #'+jg-bibtex-helm-tweet-action
                                       )
           :candidates 'helm-bibtex-candidates
-          :filtered-candidate-transformer  '(+jg-year-sort-transformer
+          :filtered-candidate-transformer  '(+jg-bibtex-year-sort-transformer
                                              +jg-bibtex-helm-candidates-formatter
                                              helm-fuzzy-highlight-matches)
           :multimatch

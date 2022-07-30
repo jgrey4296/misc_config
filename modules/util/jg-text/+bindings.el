@@ -11,7 +11,7 @@
 ;; (map! :map jg-bindings-operator-map)
 (map! :after jg-leader-bindings-loaded
       :map jg-binding-vision-map
-      "1" #'+jg-wrap-fold-block
+      "1" #'+jg-text-wrap-fold-block
       )
 
 (map! :after jg-leader-bindings-loaded

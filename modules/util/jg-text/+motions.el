@@ -107,14 +107,14 @@ Columns are counted from zero."
   :move-point t
   (evil-first-non-blank)
   (let ((R-mark (set-marker (make-marker) end))
-        (current (+jg-get-line))
+        (current (+jg-text-get-line))
         (kill-whole-line t))
     (forward-line 1)
     (while (<= (point) R-mark)
       ;; compare
-      (if (s-equals? current (+jg-get-line))
+      (if (s-equals? current (+jg-text-get-line))
           (kill-line)
-        (progn (setq current (+jg-get-line))
+        (progn (setq current (+jg-text-get-line))
                (forward-line 1))
         )
       )

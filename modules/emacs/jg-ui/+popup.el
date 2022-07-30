@@ -5,7 +5,7 @@
 
 (remove-hook '+popup-buffer-mode-hook #'+popup-set-modeline-on-enable-h)
 
-(+jg-popup-add-rules 'my-rules
+(+jg-ui-popup-add-rules 'my-rules
   '(("^\\*shell"             :side bottom :ttl nil :height 0.3 :quit t :select t :priority 100)
     ("\\*.*?scratch.*?\\*"   :side right  :ttl nil :width  50  :quit t :select t)
     ("^\\*Messages"          :side bottom :ttl nil :height 0.4 :quit t :select nil :priority 100)
@@ -15,7 +15,7 @@
     ("^\\*Async Shell Command\\*$" :actions (display-buffer-no-window))
     )
   )
-(+jg-popup-add-rules 'general
+(+jg-ui-popup-add-rules 'general
  '(("^\\*Warnings" :vslot 99 :size 0.25)
    ("^\\*Backtrace" :vslot 99 :size 0.4 :quit nil)
    ("^\\*CPU-Profiler-Report "    :side bottom :vslot 100 :slot 1 :height 0.4 :width 0.5 :quit nil)
@@ -25,7 +25,7 @@
    )
  )
 
-(+jg-popup-add-rules 'doom
+(+jg-ui-popup-add-rules 'doom
     ;; Doom
    '(("^\\*info\\*$"                                          :slot 2 :vslot 2 :size 0.45 :select t :priority -100)
      ;; `Info-mode'

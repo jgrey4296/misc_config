@@ -29,23 +29,24 @@
               )
   )
 
-(defun +python-use-correct-flycheck-executables-h ()
-      "Use the correct Python executables for Flycheck."
-      (let ((executable python-shell-interpreter))
-        (save-excursion
-          (goto-char (point-min))
-          (save-match-data
-            (when (or (looking-at "#!/usr/bin/env \\(python[^ \n]+\\)")
-                      (looking-at "#!\\([^ \n]+/python[^ \n]+\\)"))
-              (setq executable (substring-no-properties (match-string 1))))))
-        ;; Try to compile using the appropriate version of Python for
-        ;; the file.
-        (setq-local flycheck-python-pycompile-executable executable)
-        ;; We might be running inside a virtualenv, in which case the
-        ;; modules won't be available. But calling the executables
-        ;; directly will work.
-        (setq-local flycheck-python-pylint-executable "pylint")
-        (setq-local flycheck-python-flake8-executable "flake8")))
+(define-advice +python-use-correct-flycheck-executables-h (:override ()
+                                                           +jg-python-flycheck-override)
+  "Use the correct Python executables for Flycheck."
+  (let ((executable python-shell-interpreter))
+    (save-excursion
+      (goto-char (point-min))
+      (save-match-data
+        (when (or (looking-at "#!/usr/bin/env \\(python[^ \n]+\\)")
+                  (looking-at "#!\\([^ \n]+/python[^ \n]+\\)"))
+          (setq executable (substring-no-properties (match-string 1))))))
+    ;; Try to compile using the appropriate version of Python for
+    ;; the file.
+    (setq-local flycheck-python-pycompile-executable executable)
+    ;; We might be running inside a virtualenv, in which case the
+    ;; modules won't be available. But calling the executables
+    ;; directly will work.
+    (setq-local flycheck-python-pylint-executable "pylint")
+    (setq-local flycheck-python-flake8-executable "flake8")))
 
 (defun +jg-python-auto-kill-anaconda-processes-h ()
     "Kill anaconda processes if this buffer is the last python buffer."
@@ -60,11 +61,6 @@
             #'+jg-python-auto-kill-anaconda-processes-h
             nil 'local)
   )
-
-(defun +jg-guarded-yasnippet-fix ()
-  (if yas-global-mode
-      (yasnippet-snippets--fixed-indent)
-    ))
 
 (defun +jg-python-auto-hide ()
   " Add auto-hiding to python.

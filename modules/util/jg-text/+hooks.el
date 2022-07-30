@@ -2,7 +2,7 @@
 
 (defun +jg-text-auto-hide ()
   " Add auto-hiding on buffer open.
-Vimish-fold's any blocks matching jg-fold-block-gen's :re pattern
+Vimish-fold's any blocks matching jg-text-fold-block-gen's :re pattern
 "
   (message "Running Auto Hide: %s %s" major-mode comment-start)
   (if (and global-evil-vimish-fold-mode jg-text-auto-hide-toggle)
@@ -11,7 +11,7 @@ Vimish-fold's any blocks matching jg-fold-block-gen's :re pattern
       (vimish-fold-delete-all)
       ;; Fold Groups
       (message "Searching for Fold Blocks")
-      (while (re-search-forward (+jg-fold-block-gen :re t) nil t)
+      (while (re-search-forward (+jg-text-fold-block-gen :re t) nil t)
         (let* ((group-name (match-string 1))
                start-hide end-hide)
           (cond ((and (s-matches? "^end" group-name)
@@ -21,7 +21,7 @@ Vimish-fold's any blocks matching jg-fold-block-gen's :re pattern
                  nil)
                 (t
                  (setq start-hide (progn (beginning-of-line) (point))
-                       end-hide (if (re-search-forward (+jg-fold-block-gen :name group-name :end t :re t) nil t)
+                       end-hide (if (re-search-forward (+jg-text-fold-block-gen :name group-name :end t :re t) nil t)
                                     (progn (end-of-line) (point))
                                   (message "Couldn't find: %s" group-name)))))
 

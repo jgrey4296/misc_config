@@ -1,7 +1,21 @@
 ;;; completion/ivy/+vars.el -*- lexical-binding: t; -*-
+
+;;-- personal-vars
 (defvar jg-completion-file-template-rules (make-hash-table))
 (defvar jg-completion-file-templates-dir "/Volumes/documents/github/emacs_files/snippets/file-templates")
-
+(setq-default jg-completion-rps-have-you-played-loc "/Volumes/documents/github/writing/resources/urls/have-you-playeds"
+              jg-completion-ivy-predicate-patterns (rx (or "*helpful"
+                                                           "*Ibuffer"
+                                                           "*helm-"
+                                                           "doom"
+                                                           "*dired-log"
+                                                           "magit"
+                                                           "*Free Keys"
+                                                           )
+                                                       )
+              jg-completion-project-cmd-cache-name ".projectile-cmds"
+              )
+;;-- end personal-vars
 
 (after! (ivy)
   (setq ivy-height 17

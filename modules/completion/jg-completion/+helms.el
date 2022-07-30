@@ -1,6 +1,7 @@
-;;; main/jg-personal/+helm-funcs.el -*- lexical-binding: t; -*-
+;;; +helms.el -*- lexical-binding: t; -*-
 
-(defun +jg-personal-helm-open-random-action (candidate)
+;;-- helm actions
+(defun +jg-completion-helm-open-random-action (candidate)
   " Helm Action that opens files randomly, by prompting for a file extension
    searching as necessary, and keeping a log of files opened before "
   (let* ((candidates (helm-marked-candidates))
@@ -39,7 +40,7 @@
       )
     )
   )
-(defun +jg-personal-helm-describe-random-action (candidate)
+(defun +jg-completion-helm-describe-random-action (candidate)
   "Helm action to describt how many of a directory's files have been randomly opened,
 versus not"
   (let* ((candidates (helm-marked-candidates))
@@ -62,7 +63,7 @@ versus not"
     (message "Files not opened randomly: %s" count)
     )
   )
-(defun +jg-personal-bookmark-load-random ()
+(defun +jg-completion-bookmark-load-random ()
   " Open a random bookmark, log it, and provide a
       temp buffer to edit tags in "
   (interactive)
@@ -103,7 +104,7 @@ versus not"
       )
     )
   )
-(defun +jg-personal-helm-open-random-external-action (candidate)
+(defun +jg-completion-helm-open-random-external-action (candidate)
   " Open a random file in an external program, optionally specifying wildcard "
   (interactive)
   (let* ((pattern (car (last (f-split candidate))))
@@ -116,7 +117,7 @@ versus not"
     (debug)
     ;; TODO (spacemacs//open-in-external-app selected)
     ))
-(defun +jg-personal-helm-open-random-exploration-action (candidate)
+(defun +jg-completion-helm-open-random-exploration-action (candidate)
   " Randomly choose a directory until an openably file is found (wildcard optional)"
   ;; TODO
   (interactive)
@@ -132,7 +133,22 @@ versus not"
     (debug)
     ;; TODO (spacemacs//open-in-external-app selected)
     ))
-(defun +jg-personal-switch-major-mode ()
+;;-- end helm actions
+
+;;-- helm transformers
+(defun +jg-completion-helm-rps-transformer (x)
+  " Cleans a Candidate line for display  "
+  (if (string-match "\.com/\\([0-9/]+\\)/have-you-played-\\(.+?\\)/" x)
+      `(,(format "%s : %s" (match-string 1 x)
+                 (s-replace "-" " " (match-string 2 x)))
+        . ,x)
+    `(,x . ,x)
+    )
+  )
+;;-- end helm transformers
+
+;;-- helms
+(defun +jg-completion-switch-major-mode ()
   (interactive)
   (let ((major-modes +jg-personal-major-modes))
     (helm
@@ -142,3 +158,39 @@ versus not"
                 (persistent-action . (lambda (mode) (describe-function (intern mode)))))))
 
   )
+(defun +jg-completion-rps-have-you-playeds ()
+  (interactive)
+  (let* ((target jg-misc-rps-have-you-played-loc)
+         (source (helm-build-in-file-source "Have You Played Helm" target
+                   :candidate-transformer (lambda (x)
+                                            (mapcar #'+jg-completion-helm-rps-transformer x))
+                   :action (helm-make-actions "Open" #'(lambda (x) (mapcar #'+jg-misc-browse-url (helm-marked-candidates))))
+                   )))
+    (helm :sources (list source)
+          :buffer "*helm have you played*")
+    )
+
+  )
+(defun +jg-completion-xkcd ()
+  " TODO transformers "
+  (interactive)
+  (let* ((target "/Volumes/documents/github/writing/resources/bibliography_plus/xkcds")
+         (source (helm-build-in-file-source "xkcd helm" target
+                   :action (helm-make-actions "Open" #'(lambda (x) (mapcar #'+jg-misc-browse-url (helm-marked-candidates))))
+                   )))
+    (helm :sources (list source)
+          :buffer "*helm xkcd*")
+    )
+  )
+;;-- end helms
+
+
+;;-- customisation
+(setq! helm-find-files-actions
+        (append `(,(car helm-find-files-actions))
+                '(("Open Random" . +jg-completion-helm-open-random-action))
+                '(("Describe Random" . +jg-completion-helm-describe-random-action))
+                '(("Open Random External" . +jg-completion-helm-open-random-external-action))
+                (cdr helm-find-files-actions))
+        )
+;;-- end customisation

@@ -86,7 +86,7 @@
           )
     )
   )
-(defun find-venv (&optional start)
+(defun +jg-python-find-venv (&optional start)
   " Given a starting directory, look in parent dirs
 until a .venv file is found.
 
@@ -115,7 +115,7 @@ return (dir-of-venv env-name) or nil
   (interactive "P")
   (require 'pyvenv)
   (require 'conda)
-  (let* ((project (if (not prefix) (find-venv)))
+  (let* ((project (if (not prefix) (+jg-python-find-venv)))
          (env-name (cond ((stringp prefix) prefix)
                          (prefix (conda--read-env-name))
                          (project (cadr project))
@@ -142,7 +142,7 @@ return (dir-of-venv env-name) or nil
   )
 
 (define-advice conda--get-path-prefix (:override (env-dir)
-                                       jg-conda--get-path-prefix)
+                                       jg-python-conda--get-path-prefix)
   "Get a platform-specific path string to utilize the conda env in ENV-DIR.
 It's platform specific in that it uses the platform's native path separator."
   (let* ((conda-anaconda-home-tmp conda-anaconda-home)
@@ -159,7 +159,6 @@ It's platform specific in that it uses the platform's native path separator."
                 (error (format "Error: executing command \"%s\" produced error code %d" command return-code)))
               ))))
     (s-trim result)))
-
 
 (define-advice +python/open-repl (:override ()
                                   +jg-python-env-activate-advice)

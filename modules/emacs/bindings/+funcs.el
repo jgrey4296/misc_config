@@ -1,30 +1,5 @@
 ;;; util/bindings/+funcs.el -*- lexical-binding: t; -*-
 
-(defun +jg-browse-url (&optional url)
-  (interactive)
-  (let ((url (cond (url url)
-                   ((eq evil-state 'visual)
-                    (buffer-substring-no-properties evil-visual-beginning evil-visual-end))
-                   (t
-                    (read-string "Search For: "))
-                   ))
-        )
-    (cond ((f-exists? url)
-           (shell-command (format "open %s" url)))
-          ((s-prefix? "@" url)
-           (browse-url (format "https://twitter.com/%s" url)))
-          ((s-prefix? "http" url)
-           (browse-url url))
-          ((s-prefix? "www." url)
-           (browse-url (format "https://%s" url)))
-          ((string-match "\\.com\\|\\.uk" url)
-           (browse-url (format "https://%s" url)))
-          (t
-           (message "Browsing for: %s" (format jg-google-url url))
-           (browse-url (format jg-google-url url)))
-          )
-    )
-  )
 (defun +jg-bindings-open-link ()
   (interactive)
   (cond ((eq evil-state 'visual)
@@ -50,24 +25,6 @@
           )
     )
   )
-
-(defun +jg-counsel-workspace ()
-    "Forward to `' or `workspace-set' if workspace doesn't exist."
-    (interactive)
-    (require 'bookmark)
-    (ivy-read "Create or jump to workspace: "
-              (+workspace-list-names)
-              :history 'workspace-history
-              :action (lambda (x)
-                        (message "Got: %s" x)
-                        (cond ((string-equal x (+workspace-current-name))
-                               (message "Eq")
-                               (+workspace-save x))
-                              (t
-                               (+workspace-switch x t))))
-              :caller 'counsel-workspace)
-    )
-
 (defun +jg-bindings-list-buffer-locals ()
   (interactive)
   (let ((vars (buffer-local-variables))
@@ -88,7 +45,6 @@
       )
     )
   )
-
 (defun +jg-bindings-wk-filter-fn (binding)
   (not (string-match (rx (or "C-"
                              "C-M"
@@ -97,7 +53,6 @@
                              ))
                      (car binding)))
   )
-
 (defun +jg-which-key-show-top-level (&optional _)
   "Show top-level bindings."
   (interactive)

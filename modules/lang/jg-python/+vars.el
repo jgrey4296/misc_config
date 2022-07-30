@@ -56,7 +56,7 @@
         ("^\\*Anaconda\\*"       :side bottom :ttl 5   :height 0.4 :quit t :select nil :priority 50)
         ))
 (after! jg-popup-init
-  (+jg-popup-add-rules 'python jg-python-popup-rules)
+  (+jg-ui-popup-add-rules 'python jg-python-popup-rules)
   )
 
 ;;-- end popup

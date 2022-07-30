@@ -2,7 +2,7 @@
 
 (map! :after jg-leader-bindings-loaded
       :leader
-      :desc "Download Tweet Thread" "P d" #'+jg-tweet-downloader
+      :desc "Download Tweet Thread" "P d" #'+jg-twitter-downloader
       )
 
 (after! evil-ex

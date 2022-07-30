@@ -1,17 +1,17 @@
 ;; sclang funcs.el
 ;; loaded third.
 
-(defun jg-music-layer/start-system ()
+(defun +jg-music/start-system ()
     "Startup SCLANG, init appropriate elements,
 then start up tidal"
     (interactive)
-    (let ((tidal-buff (get-buffer-create jg-music-layer-tidal-workspace))
-          (sclang-buff (get-buffer-create jg-music-layer-sclang-workspace)))
+    (let ((tidal-buff (get-buffer-create jg-music-tidal-workspace))
+          (sclang-buff (get-buffer-create jg-music-sclang-workspace)))
       (global-jg-music-layer-mode)
       (with-current-buffer sclang-buff
         (sclang-mode)
         (sclang-start)
-        (jg_layer/clear-buffer)
+        (+jg-text-clear-buffer)
         (insert-file-contents sclang-boot-file)
         )
 
@@ -19,30 +19,30 @@ then start up tidal"
         (tidal-mode)
         (tidal-start-haskell)
         )
-      (jg-music-layer/setup-windows)
+      (+jg-music/setup-windows)
       )
     )
-(defun jg-music-layer/setup-windows ()
+(defun +jg-music/setup-windows ()
     (interactive)
     (delete-other-windows)
-    (display-buffer-same-window (get-buffer jg-music-layer-tidal-workspace) nil)
+    (display-buffer-same-window (get-buffer jg-music-tidal-workspace) nil)
     (select-window (split-window-below))
-    (display-buffer-same-window (get-buffer jg-music-layer-sclang-workspace) nil)
+    (display-buffer-same-window (get-buffer jg-music-sclang-workspace) nil)
     (select-window (split-window-right))
     (display-buffer-same-window (get-buffer "*SCLang:PostBuffer*") nil)
-    (select-window (get-buffer-window jg-music-layer-tidal-workspace))
+    (select-window (get-buffer-window jg-music-tidal-workspace))
     (select-window (split-window-right))
     (display-buffer-same-window (get-buffer "*tidal*") nil)
-    (select-window (get-buffer-window jg-music-layer-tidal-workspace))
+    (select-window (get-buffer-window jg-music-tidal-workspace))
     )
-(defun jg-music-layer/setup-minor-mode-keys ()
+(defun +jg-music/setup-minor-mode-keys ()
   (map! :leader
-        "a . h" 'jg-music-layer-minor/hush
-        "a . q" 'jg-music-layer-minor/quit
-        "a . w" 'jg-music-layer/setup-windows
+        "a . h" 'music-minor/hush
+        "a . q" 'music-minor/quit
+        "a . w" '+jg-music/setup-windows
         )
   )
-(defun jg-music-layer/clear-minor-mode-keys ()
+(defun +jg-music/clear-minor-mode-keys ()
   (map! :leader
         "a . h" nil
         "a . q" nil

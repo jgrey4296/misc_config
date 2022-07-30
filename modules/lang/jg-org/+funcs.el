@@ -197,7 +197,8 @@ Sort, align, split, save "
 
 (fset 'ad-Advice-newline-and-indent #'(lambda (x &rest _) (funcall x)))
 
-(defun org-export-inline-image-p (link &optional rules)
+(define-advice org-export-inline-image-p (:override (link &optional rules)
+                                          +jg-org-inline-image-override)
   "Override function for org export, to succeed on file links with
 descriptions"
   (let ((case-fold-search t))

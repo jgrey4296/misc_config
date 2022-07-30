@@ -49,7 +49,7 @@
     )
   )
 
-(evil-define-operator +jg-wrap-fold-block (beg end count &optional name)
+(evil-define-operator +jg-text-wrap-fold-block (beg end count &optional name)
   " Operator to easily create fold blocks "
   :type block
   :keep-visual t
@@ -58,14 +58,14 @@
   ;; add end fold block
   (goto-char end)
   (end-of-line)
-  (insert (+jg-fold-block-gen :name name :end t :newlines t))
+  (insert (+jg-text-fold-block-gen :name name :end t :newlines t))
   ;; and start fold block
   (goto-char beg)
   (beginning-of-line)
-  (insert (+jg-fold-block-gen :name name :newlines t))
+  (insert (+jg-text-fold-block-gen :name name :newlines t))
   )
 
-(cl-defun +jg-fold-block-gen (&rest rst &key name (end nil) (re nil) (newlines nil) (comment comment-start))
+(cl-defun +jg-text-fold-block-gen (&rest rst &key name (end nil) (re nil) (newlines nil) (comment comment-start))
   " Single point to build fold block markers
 Atuo-recognizes the current major-mode's commment syntax
  "

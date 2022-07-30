@@ -2,17 +2,15 @@
 ;;
 (message "Setting up leader bindings: %s" (current-time-string))
 (map! :leader
+      ;; "," "<" "!" "?"
       :desc "help"                  "h" help-map
-      ;;:desc "Flycheck"              "!" flycheck-command-map
-
       :desc "Goto-line"             "SPC" #'evil-avy-goto-line
       :desc "Ibuffer"               "DEL" #'ibuffer
       :desc "Jump to bookmark"      "RET" #'bookmark-jump
-      :desc "Open Url"              "?"   #'+jg-browse-url
 
       :desc "Find file"             "."   #'find-file
-      :desc "Switch buffer"         ","   #'+jg-misc-ivy-switch-buffer
-      :desc "Popup Buffer"          "<"   #'+jg-misc-ivy-popup-buffer
+
+
       :desc "Pop Shell"             "'"   #'shell
       :desc "Switch to last buffer" "TAB" #'evil-switch-to-windows-last-buffer
       :desc "Split Window"          "/"   #'split-window-right
@@ -31,17 +29,13 @@
       ;; :desc "Resume last search"    "'"
       ;; (cond ((featurep! :completion ivy)   #'ivy-resume)
       ;;       ((featurep! :completion helm)  #'helm-resume))
-
+      ;; 0 6 9 8
       :desc "Desktop"   "1" (cmd! (find-file "~/Desktop"))
       :desc "Github"    "2" (cmd! (find-file "~/github"))
       :desc "Mega"      "3" (cmd! (find-file "~/mega"))
       :desc "Home"      "4" (cmd! (find-file "~"))
       :desc "Resources" "5" (cmd! (find-file "~/github/writing/resources"))
-      ;; 6 - scratch
       :desc "Agenda"    "7" (cmd! (find-file (car org-agenda-files)))
-      :desc "Twitter"   "8" (cmd! (+jg-browse-url jg-twitter-url))
-      ;; :desc "Mail"      "9" #'mu4e
-      ;; 0 - messages
       )
 
   ;;; <leader> a -- Unused
@@ -52,10 +46,11 @@
 (map! :leader
       :prefix ("b" . "buffer")
       ;; DEL
+      ;; -
+      ;; n
       :desc "Ediff Buffers"               "TAB" #'ediff-buffers
       :desc "Next buffer"                 "]"   #'next-buffer
       :desc "Previous buffer"             "["   #'previous-buffer
-      :desc "Toggle narrowing"            "-"   #'+jg-toggle-narrow-buffer
 
       :desc "Switch buffer"               "b"   #'switch-to-buffer
       :desc "Create Buffer"               "c"   #'evil-buffer-new
@@ -64,7 +59,6 @@
       :desc "Kill all buffers"            "K"   #'doom/kill-all-buffers
       :desc "Local Variables"             "l"   #'+jg-bindings-list-buffer-locals
 
-      ;; n
       :desc "Kill other buffers"          "O"   #'doom/kill-other-buffers
       :desc "Read-only mode"              "r"   #'read-only-mode
       :desc "Revert buffer"               "R"   #'revert-buffer
@@ -146,7 +140,7 @@
   ;;; <leader> g --- git
 (map! :leader
       :prefix ("g" . "git")
-      :desc "Docs: Git Manual" "1" (cmd! (+jg-browse-url "https://git-scm.com/doc"))
+      ;; 1
       :desc "Git revert file"             "R"   #'vc-revert
       (:when (featurep! :ui vc-gutter)
        :desc "Git revert hunk"            "r"   #'git-gutter:revert-hunk
@@ -231,9 +225,7 @@
   ;;; <leader> j -- Jumping
 (map! :leader
       :prefix ("j" . "Jump")
-      :desc "Docs: Learn X in Y"                 "1" (cmd! (+jg-browse-url jg-binding-x-in-y-url))
-      :desc "Docs: Palettes"                     "2" (cmd! (+jg-browse-url "https://www.palettelist.com/"))
-      :desc "Docs: Over API"                     "3" (cmd! (+jg-browse-url "https://overapi.com/"))
+      ;; 1 2 3 "u"
 
       :desc "Parse File"            "!" #'helm-gtags-parse-file
       :desc "Jump to Char"          "." #'avy-goto-char
@@ -251,7 +243,7 @@
       :desc "Find rtag"             "r" #'helm-gtags-find-rtag
       :desc "Gtags Select"          "s" #'helm-gtags-select
       :desc "Type definition"       "t" #'+lookup/type-definition
-      :desc "Browse URL"            "u" #'+jg-browse-url
+
       :desc "Find Symbol"           "y" #'helm-gtags-find-symbol
       )
   ;;; <leader> m -- Local Mode
@@ -473,7 +465,7 @@
       :desc "Jump to mark"                 "m" #'evil-show-marks
       :desc "Jump to symbol"               "i" #'imenu
       :desc "Jump to visible link"         "l" #'link-hint-open-link
-      :desc "Google"                       "g" #'+jg-browse-url
+      :desc "Google"                       "g" #'+jg-misc-browse-url
       :desc "Locate file"                  "f" #'+lookup/file
       :desc "Locate file"                  "f" #'locate
       :desc "Look up in all docsets"       "K" #'+lookup/in-all-docsets
@@ -548,7 +540,7 @@
 (map! :leader
       :when (featurep! :ui workspaces)
       :prefix ("W" . "Workspaces")
-      :desc "Workspace Counsel" "RET"            #'+jg-counsel-workspace
+      ;; RET
       ;; Lowercase - workspace, Uppercase - session
       :desc "Display tab bar"              "TAB" #'+workspace/display
       :desc "Next workspace"               "]"   #'+workspace/switch-right
@@ -598,8 +590,8 @@
   ;;; <leader> y --- snippets
 (map! :leader
       :prefix ("y" . "snippets")
+      ;; n
       :desc "Expand Snippet"        "y" #'yas-expand-from-trigger-key
-      :desc "New snippet"           "n" #'+jg-new-snippet
       :desc "Edit Snippet"          "N" #'yas-visit-snippet-file
       :desc "Insert snippet"        "i" #'yas-insert-snippet
       :desc "Find global snippet"   "/" #'yas-visit-snippet-file

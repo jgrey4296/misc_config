@@ -35,19 +35,19 @@
        )
 
       (:prefix "%"
-       :desc "Global Match Rename" :n "R" #'+jg-GLOBAL-dired-do-rename-regexp)
+       :desc "Global Match Rename" :n "R" #'+jg-dired-GLOBAL-do-rename-regexp)
       )
 
 (map! :after evil
       :map dired-mode-map
       :localleader
-      :desc "Hide Toggle"           "h"         #'dired-omit-mode
-      :desc "Symlink"               "S"         #'dired-do-symlink
-      :desc "Quicklook"             "l"         #'+jg-dired-quick-look
+      :desc "Hide Toggle"           "h" #'dired-omit-mode
+      :desc "Symlink"               "S" #'dired-do-symlink
+      :desc "Quicklook"             "l" #'+jg-dired-quick-look
       (:prefix ("d" . "Describe")
-       :desc "Summarise Orgs"     "s"     #'+jg-dired-create-summary-of-orgs
-       :desc "Marked Info"        "m"        #'+jg-dired-marked-info
-       :desc "Dired Diff"         "d"         #'+jg-dired-diff
+       :desc "Summarise Orgs"       "s" #'+jg-dired-create-summary-of-orgs
+       :desc "Marked Info"          "m" #'+jg-dired-marked-info
+       :desc "Dired Diff"           "d" #'+jg-dired-diff
        )
       (:prefix ("K" . "Destructive")
        :desc "Reformat jsons"     "J"   #'+jg-dired-reformat-jsons

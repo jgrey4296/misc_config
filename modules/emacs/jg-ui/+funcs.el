@@ -219,7 +219,7 @@ If region isn't active, narrow away anything above point
 ;;-- end ui toggles
 
 ;;-- popup control
-(defun +jg-popup-add-rules (sym rules &optional override)
+(defun +jg-ui-popup-add-rules (sym rules &optional override)
   " sym is a symbol to avoid adding duplicate rulesets
 
   Expects a list of form:
@@ -235,7 +235,7 @@ If region isn't active, narrow away anything above point
     )
   )
 
-(defun +jg-popup-activate-rules ()
+(defun +jg-ui-popup-activate-rules ()
   (message "Activating Popup rules: %s" (hash-table-keys jg-popup-display-rules))
   (let ((all-rules (copy-sequence (-flatten-n 1 (hash-table-values jg-popup-display-rules)))))
     (setq +popup--display-buffer-alist nil
@@ -247,9 +247,9 @@ If region isn't active, narrow away anything above point
 
 (define-advice set-popup-rules! (:after (&rest args)
                                  +jg-popup-advice)
-  (+jg-popup-activate-rules))
+  (+jg-ui-popup-activate-rules))
 
 (define-advice set-popup-rule! (:after (&rest args)
                                  +jg-popup-advice2)
-  (+jg-popup-activate-rules))
+  (+jg-ui-popup-activate-rules))
 ;;-- end popup control

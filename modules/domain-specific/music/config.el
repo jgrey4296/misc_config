@@ -2,18 +2,18 @@
 (after! evil
   (load! "+bindings")
 )
-(use-package! jg-music-layer-minor-mode
-  :commands (jg-music-layer-minor-mode jg-music-layer-on global-jg-music-layer-mode)
+(use-package! music-minor-mode
+  :commands (music-minor-mode music-minor/music-on global-music-mode)
   :config
-  (message "Configuring Jg-Music-Layer Minor")
-  (map! :mode jg-music-layer-minor-mode
-        ". h" 'jg-music-layer-minor/hush
-        ". e" 'jg-music-layer-minor/jg-music-layer-eval-selection
-        ". r" 'jg-music-layer-minor/sclang-restart
-        ". R" 'jg-music-layer-minor/sclang-recompile
-        ". w" 'jg-music-layer/setup-windows
+  (message "Configuring Jg-Music Minor")
+  (map! :map music-minor-mode-map
+        ". h" 'music-minor/hush
+        ". e" 'music-minor/music-eval-selection
+        ". r" 'music-minor/sclang-restart
+        ". R" 'music-minor/sclang-recompile
+        ". w" '+jg-music/setup-windows
         )
-  (add-hook 'jg-music-layer-minor-mode-hook 'jg-music-layer/setup-minor-mode-keys)
+  (add-hook 'music-minor-mode-hook '+jg-music/setup-minor-mode-keys)
   )
 (use-package! sclang
   :commands (sclang-mode )
@@ -23,10 +23,10 @@
   (evil-define-key '(insert normal) sclang-mode-map
     (kbd "C-c [") nil)
   (evil-define-key '(normal insert) sclang-mode-map
-    (kbd "C-c [") 'jg_layer/insert-lparen
-    (kbd "C-c C-c") 'jg-music-layer-minor/jg-music-layer-eval-line)
+    (kbd "C-c [") '+jg-text-insert-lparen
+    (kbd "C-c C-c") 'music-minor/music-eval-line)
   (evil-define-key '(visual) sclang-mode-map
-    (kbd "C-c C-c") 'jg-music-layer-minor/jg-music-layer-eval-selection)
+    (kbd "C-c C-c") 'music-minor/music-eval-selection)
   )
 (use-package! tidal
   :commands (tidal-mode tidal-start-haskell)
@@ -36,9 +36,9 @@
   (evil-define-key '(normal insert visual) tidal-mode-map
     (kbd "C-c C-c") nil)
   (evil-define-key '(normal insert) tidal-mode-map
-    (kbd "C-c C-c") 'jg-music-layer-minor/jg-music-layer-eval-line)
+    (kbd "C-c C-c") 'music-minor/music-eval-line)
   (evil-define-key '(visual) tidal-mode-map
-    (kbd "C-c C-c") 'jg-music-layer-minor/jg-music-layer-eval-selection)
+    (kbd "C-c C-c") 'music-minor/music-eval-selection)
     )
 (use-package! chuck-mode
   :commands (chuck-mode)

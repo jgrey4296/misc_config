@@ -1,5 +1,5 @@
 ;;-- counsel
-(defun +jg-counsel-bookmark ()
+(defun +jg-completion-counsel-bookmark ()
   "Forward to `bookmark-jump' or `bookmark-set' if bookmark doesn't exist.
 Modified to pre-sort bookmarks, caselessly
 "
@@ -22,7 +22,7 @@ Modified to pre-sort bookmarks, caselessly
                              (bookmark-set x))))
             :caller 'counsel-bookmark))
 
-(defun +jg-counsel-features ()
+(defun +jg-completion-counsel-features ()
   " Insert from a list of recognized features "
   (interactive)
   (ivy-read "Available Features: "
@@ -31,8 +31,24 @@ Modified to pre-sort bookmarks, caselessly
             :action 'insert
             )
   )
-;;-- end counsel
 
+(defun +jg-completion-counsel-workspace ()
+    "Forward to `' or `workspace-set' if workspace doesn't exist."
+    (interactive)
+    (require 'bookmark)
+    (ivy-read "Create or jump to workspace: "
+              (+workspace-list-names)
+              :history 'workspace-history
+              :action (lambda (x)
+                        (message "Got: %s" x)
+                        (cond ((string-equal x (+workspace-current-name))
+                               (message "Eq")
+                               (+workspace-save x))
+                              (t
+                               (+workspace-switch x t))))
+              :caller 'counsel-workspace)
+    )
+;;-- end counsel
 
 ;;-- snippets
 (defun +jg-completion-complete-or-snippet (&optional arg)
@@ -45,13 +61,13 @@ Modified to pre-sort bookmarks, caselessly
     )
   )
 
-(defun +jg-new-snippet()
+(defun +jg-completion-new-snippet()
   "Create a new snippet in `+snippets-dir'."
   (interactive)
   (let ((default-directory
           (expand-file-name (symbol-name major-mode)
                             +snippets-dir)))
-    (+jg-snippet--ensure-dir default-directory)
+    (+jg-completion-snippet--ensure-dir default-directory)
     (with-current-buffer (switch-to-buffer "untitled-snippet")
       (snippet-mode)
       (erase-buffer)
@@ -59,21 +75,19 @@ Modified to pre-sort bookmarks, caselessly
       (when (bound-and-true-p evil-local-mode)
         (evil-insert-state)))))
 
-(defun +jg-snippet--ensure-dir (dir)
+(defun +jg-completion-snippet--ensure-dir (dir)
   (unless (file-directory-p dir)
     (if (y-or-n-p (format "%S doesn't exist. Create it?" (abbreviate-file-name dir)))
         (make-directory dir t)
       (error "%S doesn't exist" (abbreviate-file-name dir)))))
 
-
 (define-advice yas--read-table (:override ()
-                                +jg-snippet-read-table)
+                                +jg-completion-snippet-read-table)
   (let ((tables (hash-table-keys yas--tables)))
     (intern-soft (ivy-read "Snippet Table: " tables))
     )
   )
 ;;-- end snippets
-
 
 ;;-- file-templates control
 (defun +jg-completion-add-file-templates (sym rules &optional override)

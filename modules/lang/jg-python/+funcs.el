@@ -33,22 +33,6 @@
         )
       )
     )
-(defun +jg-python-toggle-breakpoint ()
-    "Modified version of spacemacs original
-Add a break point, highlight it.
-Customize python using PYTHONBREAKPOINT env variable
-"
-    (interactive)
-    (let ((trace "breakpoint()")
-          (line (thing-at-point 'line)))
-      (if (and line (string-match trace line))
-          (kill-whole-line)
-        (progn
-          (evil-end-of-line)
-          (insert "\n")
-          (insert trace)
-          (python-indent-line)))))
-
 (defun +jg-python-insert-import (&optional arg)
   " insert the literal string provided/read from minibuffer, at the imports section
 of a python file "
@@ -143,7 +127,7 @@ TODO
     ;; Go from bottom of buffer to top
     (with-current-buffer source
       (goto-char (point-max))
-      (while (re-search-backward (+jg-fold-block-gen :re t) nil t)
+      (while (re-search-backward (+jg-text-fold-block-gen :re t) nil t)
         (setq groupname (match-string 1))
         (cond ((and (s-matches? "^imports" groupname)
                     end
@@ -188,9 +172,9 @@ TODO
       (re-search-forward "^\"\"\"" nil t)
       (end-of-line)
       (insert "\n")
-      (insert (+jg-fold-block-gen :name "imports" :newlines t))
+      (insert (+jg-text-fold-block-gen :name "imports" :newlines t))
       (insert cleaned)
-      (insert (+jg-fold-block-gen :name "imports" :newlines t :end t))
+      (insert (+jg-text-fold-block-gen :name "imports" :newlines t :end t))
       )
     )
   )

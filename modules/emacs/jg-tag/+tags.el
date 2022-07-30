@@ -137,3 +137,5 @@ Return a hash-table of tags with their instance counts"
                              )
     )
   )
+
+(provide 'jg-tags-funcs)

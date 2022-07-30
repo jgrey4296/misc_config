@@ -1,5 +1,4 @@
 (load! "+vars")
-(load! "+helm-funcs")
 (load! "+funcs")
 (load! "+snippet-fix")
 
@@ -7,7 +6,7 @@
   (load! "+bindings")
 )
 (after! (ivy counsel)
-  (load! "+ivy_actions")
+  (load! "+ivys")
   )
 (use-package! helm
   :config
@@ -27,8 +26,13 @@
 
 (after! (yasnippet)
   (load! "+file-templates")
-  (defun jg-completion-on-load-hook ()
-    (advice-add '+snippet--completing-read-uuid :override #'+jg-snippet--completing-read-uuid)
+  (defun +jg-completion-on-load-hook ()
+    (advice-add '+snippet--completing-read-uuid :override #'+jg-completion-snippet--completing-read-uuid)
     )
-  (add-hook 'doom-first-input-hook #'jg-completion-on-load-hook)
+  (add-hook 'doom-first-input-hook #'+jg-completion-on-load-hook)
   )
+
+
+(after! (featurep! :completion helm)
+  (load! "+helms")
+    )

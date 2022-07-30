@@ -63,7 +63,8 @@
         iedit-only-at-symbol-boundaries t
         iedit-toggle-key-default nil)
   :config
-  (defun iedit-show-all()
+  (define-advice iedit-show-all (:override ()
+                                 +jg-misc-iedit-show-all)
     " Override iedit's show all so it doesn't mess with invisible line movement"
     (remove-from-invisibility-spec '(iedit-invisible-overlay-name . t))
     (remove-overlays nil nil iedit-invisible-overlay-name t)

@@ -1,21 +1,31 @@
 ;;; util/jg-misc/+funcs.el -*- lexical-binding: t; -*-
 
-
-(defun +jg-misc-ivy-predicate (x)
-  ;; return nil for cruft buffers
-  (not (string-match jg-misc-ivy-predicate-patterns (car x)))
-  )
-(defun +jg-misc-ivy-switch-buffer ()
+(defun +jg-misc-browse-url (&optional url)
   (interactive)
-  (ivy-read "Switch to buffer: " #'internal-complete-buffer
-            :keymap ivy-switch-buffer-map
-            :predicate #'+jg-misc-ivy-predicate
-            :preselect (buffer-name (other-buffer (current-buffer)))
-            :action #'ivy--switch-buffer-action
-            :matcher #'ivy--switch-buffer-matcher
-            :sort t
-            :caller 'ivy-switch-buffer)
+  (let ((url (cond (url url)
+                   ((eq evil-state 'visual)
+                    (buffer-substring-no-properties evil-visual-beginning evil-visual-end))
+                   (t
+                    (read-string "Search For: "))
+                   ))
+        )
+    (cond ((f-exists? url)
+           (shell-command (format "open %s" url)))
+          ((s-prefix? "@" url)
+           (browse-url (format "https://twitter.com/%s" url)))
+          ((s-prefix? "http" url)
+           (browse-url url))
+          ((s-prefix? "www." url)
+           (browse-url (format "https://%s" url)))
+          ((string-match "\\.com\\|\\.uk" url)
+           (browse-url (format "https://%s" url)))
+          (t
+           (message "Browsing for: %s" (format jg-misc-google-url url))
+           (browse-url (format jg-misc-google-url url)))
+          )
+    )
   )
+
 (defun +jg-misc-get-modes ()
   (let (major minor)
     ;; Modes in auto mode alist:
@@ -53,70 +63,8 @@
   ;; add advice to evil line move
 
   )
-(defun +jg-misc-ivy-rps-transformer (x)
-  " Cleans a Candidate line for display  "
-  (if (string-match "\.com/\\([0-9/]+\\)/have-you-played-\\(.+?\\)/" x)
-      `(,(format "%s : %s" (match-string 1 x)
-                 (s-replace "-" " " (match-string 2 x)))
-        . ,x)
-    `(,x . ,x)
-    )
-  )
-(defun +jg-misc-helm-rps-have-you-playeds ()
-  (interactive)
-  (let* ((target jg-misc-rps-have-you-played-loc)
-         (source (helm-build-in-file-source "Have You Played Helm" target
-                   :candidate-transformer (lambda (x)
-                                            (mapcar #'+jg-misc-ivy-rps-transformer x))
-                   :action (helm-make-actions "Open" #'(lambda (x) (mapcar #'+jg-browse-url (helm-marked-candidates))))
-                   )))
-    (helm :sources (list source)
-          :buffer "*helm have you played*")
-    )
 
-  )
-(defun +jg-misc-helm-xkcd ()
-  " TODO transformers "
-  (interactive)
-  (let* ((target "/Volumes/documents/github/writing/resources/bibliography_plus/xkcds")
-         (source (helm-build-in-file-source "xkcd helm" target
-                   :action (helm-make-actions "Open" #'(lambda (x) (mapcar #'+jg-browse-url (helm-marked-candidates))))
-                   )))
-    (helm :sources (list source)
-          :buffer "*helm xkcd*")
-    )
-  )
-
-(define-advice projectile-run-compilation (:filter-args (val)
-                                           +jg-misc-command-expander)
-  " Expand variables mentioned in the command "
-  (let ((loc (if (eq major-mode 'dired-mode)
-                 (dired-current-directory)
-               (f-parent (buffer-file-name)))))
-    (list (s-replace "\$" (format "TEST_TARGET=\"%s\"" loc) (car val)))
-    )
-  )
-
-(define-advice projectile--run-project-cmd (:around (fn &rest rst)
-                                            +jg-personal-projectile-ivy-cmd-list)
-  " Use an ivy to get the command "
-  (let* ((compilation-read-command nil)
-        (root (projectile-project-root))
-        (cmd-cache (f-join root jg-misc-project-cmd-cache-name))
-        (candidates (if (and root (f-exists? cmd-cache))
-                        (with-temp-buffer
-                          (insert-file-contents cmd-cache)
-                          (sort (s-split "\n" (buffer-string) t) 'string-lessp))))
-        (ivy-val (ivy-read (plist-get rst :prompt-prefix)
-                           candidates)))
-    (if (not (-contains? candidates ivy-val))
-        (append-to-file (format "%s\n" ivy-val) nil cmd-cache)
-        )
-    (apply fn (cons ivy-val (cdr rst)))
-    )
-  )
-
-(defun +jg-personal-flatten (lst)
+(defun +jg-misc-flatten (lst)
   " Utility to flatten a list "
   (letrec ((internal (lambda (x)
                        (cond
@@ -127,12 +75,12 @@
     (progn
       (cl-assert (listp lst))
       (funcall internal lst))))
-(defun +jg-personal-line-starts-with? (text)
+(defun +jg-misc-line-starts-with? (text)
   (s-starts-with? text (s-trim-left (buffer-substring-no-properties
                                      (line-beginning-position)
                                      (line-end-position))))
   )
-(defun +jg-personal-split-tags()
+(defun +jg-misc-split-tags()
   (interactive)
   (goto-char (point-min))
   (let ((letter ?a)
@@ -156,26 +104,26 @@
       )
     )
   )
-(defun +jg-personal-what-face (pos)
+(defun +jg-misc-what-face (pos)
   ;; from: http://stackoverflow.com/questions/1242352/
   (interactive "d")
   (let ((face (or (get-char-property (point) 'read-face-name)
                   (get-char-property (point) 'face))))
     (if face (message "Face: %s" face) (message "No face at %d" pos))))
 
-(defun +jg-personal-face-under-cursor-customize (pos)
+(defun +jg-misc-face-under-cursor-customize (pos)
   (interactive "d")
   (let ((face (or (get-char-property (point) 'read-face-name)
                   (get-char-property (point) 'face))))
     (if face (customize-face face) (message "No face at %d" pos))))
-(defun +jg-personal-modify-line-end-display-table ()
+(defun +jg-misc-modify-line-end-display-table ()
   (interactive)
   " from https://stackoverflow.com/questions/8370778/ "
   ;; Modify the display table for whitespace, so lines which
   ;; truncate are not signaled with a $
   (set-display-table-slot standard-display-table 0 ?\ )
   )
-(defun +jg-personal-toggle-docstrings ()
+(defun +jg-misc-toggle-docstrings ()
   (interactive)
   (setq which-key-show-docstrings
         (if which-key-show-docstrings

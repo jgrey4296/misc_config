@@ -14,7 +14,7 @@
               sclang-runtime-directory (expand-file-name "~/.sclang/")
               sclang-boot-file (expand-file-name "~/.doom.d/modules/jg-music-layer/startup.scd")
 
-              jg-music-layer-tidal-workspace "Tidal Workspace"
-              jg-music-layer-sclang-workspace "SCLang Workspace"
+              jg-music-tidal-workspace "Tidal Workspace"
+              jg-music-sclang-workspace "SCLang Workspace"
 
               )

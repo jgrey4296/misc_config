@@ -36,7 +36,6 @@
     )
   )
 
-
 (defun +jg-send-region-to-repl (beg end &optional inhibit-auto-execute-p)
   "Execute the selected region in the REPL.
 Opens a REPL if one isn't already open. If AUTO-EXECUTE-P, then execute it

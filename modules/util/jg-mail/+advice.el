@@ -125,10 +125,13 @@ the message being processed."
     (apply fn rst))
   )
 
-(defun +jg-princ-as-insert (x buf)
+(defun +jg-mail-princ-as-insert (x buf)
+  " For locally overriding use of princ
+when mail builds the mail-summary buffer,
+as princ strips out any text properties"
   (with-current-buffer buf
     (insert x)
     ))
 
 (function-put 'princ 'original (symbol-function 'princ))
-(function-put 'princ 'mod (symbol-function '+jg-princ-as-insert))
+(function-put 'princ 'mod (symbol-function '+jg-mail-princ-as-insert))

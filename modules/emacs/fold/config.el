@@ -4,6 +4,9 @@
 ;; Packages
 (load! "+vars")
 
+(after! evil
+  (load! "+bindings")
+  )
 
 (use-package! hideshow ; built-in
   :commands (hs-toggle-hiding

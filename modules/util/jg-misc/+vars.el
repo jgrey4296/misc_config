@@ -4,13 +4,23 @@
               indent-tabs-mode nil
               )
 
+;;-- browsing defaults
+(setq-default jg-misc-google-url       "https://duckduckgo.com/?q=%s"
+              jg-misc-twitter-url      "https://twitter.com"
+              jg-misc-x-in-y-url       "https://learnxinyminutes.com"
+              jg-misc-palette-list-url "https://www.palettelist.com/"
+              jg-misc-overapi-url      "https://overapi.com/"
+              jg-misc-github-url       "https://git-scm.com/doc"
+)
+;;-- end browsing defaults
+
+
 
 ;;-- evil-misc
 (after! (evil evil-snipe)
   (push 'dired-mode evil-snipe-disabled-modes)
   )
 (after! evil-quickscope
-  ;; TODO (spacemacs/set-leader-keys "t q" '+jg-personal-toggle-quickscope-always)
   (global-evil-quickscope-always-mode 1)
   )
 ;;-- end evil-snipe
@@ -41,21 +51,6 @@
               undo-tree-history-directory-alist `(("." . ,(concat doom-cache-dir "undo-tree-hist/")))
               )
 ;;-- end undo-limits
-
-;;-- personal-vars
-(setq-default jg-misc-rps-have-you-played-loc "/Volumes/documents/github/writing/resources/urls/have-you-playeds"
-              jg-misc-ivy-predicate-patterns (rx (or "*helpful"
-                                                     "*Ibuffer"
-                                                     "*helm-"
-                                                     "doom"
-                                                     "*dired-log"
-                                                     "magit"
-                                                     "*Free Keys"
-                                                     )
-                                                 )
-              jg-misc-project-cmd-cache-name ".projectile-cmds"
-              )
-;;-- end personal-vars
 
 ;;-- diary
 (setq-default diary-file "~/.doom.d/diary")

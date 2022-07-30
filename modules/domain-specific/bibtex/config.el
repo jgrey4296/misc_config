@@ -21,7 +21,7 @@
              #'yas-minor-mode
              #'org-ref-version
              #'+jg-bibtex-font-lock-mod-hook
-             #'+jg-toggle-line-numbers)
+             #'+jg-ui-toggle-line-numbers)
   )
 (use-package! helm-bibtex
   :commands (bibtex-completion-init)

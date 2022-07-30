@@ -1,5 +1,5 @@
 ;;; util/text/+funcs.el -*- lexical-binding: t; -*-
-(defun +jg-get-line ()
+(defun +jg-text-get-line ()
   (buffer-substring-no-properties (line-beginning-position)
                                   (line-end-position))
   )
@@ -85,5 +85,5 @@ Used to guard inputs in tag strings"
 
 (defun +jg-text-insert-debug ()
   (interactive)
-  (yas-expand-snippet (yas-lookup-snippet jg-binding-debug-snippet-name) (point))
+  (yas-expand-snippet (yas-lookup-snippet jg-text-debug-snippet-name) (point))
   )

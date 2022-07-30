@@ -31,10 +31,6 @@
 
 (map! :after jg-leader-bindings-loaded
       :leader
-      :desc "SCRATCH"                      "6" (cmd! (+jg-ui-ivy-open-as-popup "*scratch*"))
-      :desc "Messages"                     "0" (cmd! (+jg-ui-ivy-open-as-popup "*Messages*") (if current-prefix-arg
-                                                                                                 (with-current-buffer "*Messages*"
-                                                                                                   (+jg-bindings-clear-buffer))))
       :desc "Insert Color"                 "i c"   #'helm-colors
       :desc "Ignore Invisible"             "t n i" #'+jg-ui-toggle-line-move-ignore-invisible
       :desc "Open project scratch buffer"  "p x"   #'+jg-ui-open-scratch-buffer
@@ -67,7 +63,7 @@
 
 (map! :after jg-evil-bindings
       :map jg-binding-vision-map
-      (:prefix ("'" . "Highlight")
+      :prefix ("'" . "Highlight")
        :desc  "symbol-at-point"            "." #'hi-lock-face-symbol-at-point
        :desc  "find-patterns"              "f" #'hi-lock-find-patterns
        :desc  "write-interactive-patterns" "i" #'hi-lock-write-interactive-patterns
@@ -75,33 +71,24 @@
        :desc  "phrase"                     "p" #'hi-lock-face-phrase-buffer
        :desc  "regexp"                     "r" #'hi-lock-face-buffer
        :desc  "unhighlight-regexp"         "u" #'hi-lock-unface-buffer
-       )
+      )
 
-      (:prefix ("v" . "Vimish Fold")
-       :desc "toggle-all"             "A"  #'vimish-fold-toggle-all
-       :desc "delete-all"             "D"  #'vimish-fold-delete-all
-       :desc "toggle"                 "a"  #'vimish-fold-toggle
-       :desc "delete"                 "d"  #'vimish-fold-delete
-       :desc "fold"                   "f"  #'vimish-fold
-       :desc "next-fold"              "j"  #'vimish-fold-next-fold
-       :desc "previous-fold"          "k"  #'vimish-fold-previous-fold
-       :desc "refold-all"             "m"  #'vimish-fold-refold-all
-       :desc "unfold-all"             "r"  #'vimish-fold-unfold-all
-       )
-
-
+(map! :after jg-leader-bindings-loaded
+      :leader
+      :prefix "b"
+      :desc "Toggle narrowing"            "-"   #'+jg-ui-toggle-narrow-buffer
       )
 
 (map! :after jg-evil-bindings
       :map jg-binding-backward-motion-map
-      :desc "Ring Window"  "r"   #'window-ring-move-perspective-2
-      :desc "Narrow"       "RET" #'+jg-narrowing-move-focus-backward
+      :desc "Ring Window"  "r"    #'window-ring-move-perspective-2
+      :desc "Narrow"       "RET"  #'+jg-ui-narrowing-move-focus-backward
       )
 
 (map! :after jg-evil-bindings
       :map jg-binding-forward-motion-map
-      :desc "Narrow"       "RET" #'+jg-narrowing-move-focus-forward
-      :desc "Ring Window"  "r" #'window-ring-move-perspective
+      :desc "Narrow"       "RET"  #'+jg-ui-narrowing-move-focus-forward
+      :desc "Ring Window"  "r"    #'window-ring-move-perspective
 )
 
 (map! :after jg-evil-bindings

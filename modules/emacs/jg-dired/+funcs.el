@@ -2,17 +2,17 @@
 
 (defvar rename-regexp-query nil)
 
-(defun +jg-GLOBAL-dired-do-rename-regexp (regexp newname arg whole-name)
+(defun +jg-dired-GLOBAL-do-rename-regexp (regexp newname arg whole-name)
   "Customised dired-do-rename-regexp from dired-aux to use GLOBAL regexp flag
 
 Rename selected files whose names match REGEXP to NEWNAME.
 "
   (interactive (dired-mark-read-regexp "Rename"))
-  (+jg-GLOBAL-dired-do-create-files-regexp
+  (+jg-dired-GLOBAL-do-create-files-regexp
    #'dired-rename-file
    "Rename" arg regexp newname dired-keep-marker-rename))
 
-(defun +jg-GLOBAL-dired-do-create-files-regexp
+(defun +jg-dired-GLOBAL-do-create-files-regexp
   (file-creator operation arg regexp newname &optional marker-char)
   " Create a new file for each marked file using regexps.
 FILE-CREATOR and OPERATION as in dired-create-files.

@@ -214,64 +214,60 @@
       )
 ;; Text objects
 (map! :map jg-binding-inner-text-objects-map
-      :desc "Quote"        "\""  #'evil-inner-double-quote
-      :desc "Single-quote" "'"   #'evil-inner-single-quote
-      :desc "Paren"        "("   #'evil-inner-paren
-      :desc "Angle"        "<"   #'evil-inner-angle
-      :desc "Bracket"      "["   #'evil-inner-bracket
-      :desc "Curly"        "{"   #'evil-inner-curly
-      :desc "back-quote"   "`"   #'evil-inner-back-quote
+      :desc "\""                   "\""  #'evil-inner-double-quote
+      :desc "'"                    "'"   #'evil-inner-single-quote
+      :desc "`'"                   "`"   #'evil-inner-back-quote
+      :desc "("                    "("   #'evil-inner-paren
+      :desc "<"                    "<"   #'evil-inner-angle
+      :desc "["                    "["   #'evil-inner-bracket
+      :desc "{"                    "{"   #'evil-inner-curly
 
-      :desc "arg"                 "a"   #'evil-inner-arg
-      :desc "paren"               "b"   #'evil-inner-paren
-      :desc "block"               "B"   #'evil-textobj-anyblock-inner-block
-      :desc "comment"             "c"   #'evilnc-inner-comment
-      :desc "defun"               "f"   #'+evil:defun-txtobj
-      :desc "whole-buffer"        "g"   #'+evil:whole-buffer-txtobj
-      :desc "Same Indent Block"   "i"   #'evil-indent-plus-i-indent
-      :desc "+Same Indent Block+" "j"   #'evil-indent-plus-i-indent-up-down
-      :desc "+Same Indent Block"  "k"   #'evil-indent-plus-i-indent-up
-      :desc "Symbol"              "o"   #'evil-inner-symbol
-      :desc "Paragraph"           "p"   #'evil-inner-paragraph
-      :desc "Any-Quote"           "q"   #'+evil:inner-any-quote
-      :desc "Sentence"            "s"   #'evil-inner-sentence
-      :desc "XML Tag"             "t"   #'evil-inner-tag
-      :desc "URL"                 "u"   #'+evil:inner-url-txtobj
-      :desc "WORD"                "W"   #'evil-inner-WORD
-      :desc "word"                "w"   #'evil-inner-word
-      :desc "XML Attr"            "x"   #'evil-inner-xml-attr
+      :desc "arg"                  "a"   #'evil-inner-arg
+      :desc "paren"                "b"   #'evil-inner-paren
+      :desc "block"                "B"   #'evil-textobj-anyblock-inner-block
+      :desc "comment"              "c"   #'evilnc-inner-comment
+      :desc "defun"                "f"   #'+evil:defun-txtobj
+      :desc "whole-buffer"         "g"   #'+evil:whole-buffer-txtobj
+      :desc "Same Indent Block"    "i"   #'evil-indent-plus-i-indent
+      :desc "+Same Indent Block+"  "j"   #'evil-indent-plus-i-indent-up-down
+      :desc "+Same Indent Block"   "k"   #'evil-indent-plus-i-indent-up
+      :desc "Symbol"               "o"   #'evil-inner-symbol
+      :desc "Paragraph"            "p"   #'evil-inner-paragraph
+      :desc "Any-Quote"            "q"   #'+evil:inner-any-quote
+      :desc "Sentence"             "s"   #'evil-inner-sentence
+      :desc "XML Tag"              "t"   #'evil-inner-tag
+      :desc "URL"                  "u"   #'+evil:inner-url-txtobj
+      :desc "WORD"                 "W"   #'evil-inner-WORD
+      :desc "word"                 "w"   #'evil-inner-word
+      :desc "XML Attr"             "x"   #'evil-inner-xml-attr
       )
 (map! :map jg-binding-outer-text-objects-map
-      :desc  "\"" "\""   #'evil-a-double-quote
-      :desc  "'"  "'"   #'evil-a-single-quote
-      :desc  "`'" "`"   #'evil-a-back-quote
-      :desc  "("  "("   #'evil-a-paren
-      :desc  ")"  ")"   #'evil-a-paren
-      :desc  "<"  "<"   #'evil-an-angle
-      :desc  ">"  ">"   #'evil-an-angle
-      :desc  "["  "["   #'evil-a-bracket
-      :desc  "]"  "]"   #'evil-a-bracket
-      :desc  "{"  "{"   #'evil-a-curly
-      :desc  "}"  "}"   #'evil-a-curly
+      :desc  "\""                   "\"" #'evil-a-double-quote
+      :desc  "'"                    "'"  #'evil-a-single-quote
+      :desc  "`'"                   "`"  #'evil-a-back-quote
+      :desc  "("                    "("  #'evil-a-paren
+      :desc  "<"                    "<"  #'evil-an-angle
+      :desc  "["                    "["  #'evil-a-bracket
+      :desc  "{"                    "{"  #'evil-a-curly
 
-      :desc  "outer-arg"                    "a"   #'evil-outer-arg
-      :desc  "a-paren"                      "b"   #'evil-a-paren
-      :desc  "Paren Block"                  "B"   #'evil-textobj-anyblock-a-block
-      :desc  "Commenter"                    "c"   #'evilnc-outer-commenter
-      :desc  "defun"                        "f"   #'+evil:defun-txtobj
-      :desc  "whole-buffer"                 "g"   #'+evil:whole-buffer-txtobj
-      :desc  "Same Indent Block"            "i"   #'evil-indent-plus-a-indent
-      :desc  "+Same Indent Block+"          "j"   #'evil-indent-plus-a-indent-up-down
-      :desc  "+Same Indent Block"           "k"   #'evil-indent-plus-a-indent-up
-      :desc  "Symbol"                       "o"   #'evil-a-symbol
-      :desc  "Paragraph"                    "p"   #'evil-a-paragraph
-      :desc  "outer-any-quote"              "q"   #'+evil:outer-any-quote
-      :desc  "Sentence"                     "s"   #'evil-a-sentence
-      :desc  "XML Tag"                      "t"   #'evil-a-tag
-      :desc  "URL"                          "u"   #'+evil:outer-url-txtobj
-      :desc  "WORD"                         "W"   #'evil-a-WORD
-      :desc  "word"                         "w"   #'evil-a-word
-      :desc  "XML attr"                     "x"   #'evil-outer-xml-attr
+      :desc  "arg"                  "a"  #'evil-outer-arg
+      :desc  "paren"                "b"  #'evil-a-paren
+      :desc  "lock"                 "B"  #'evil-textobj-anyblock-a-block
+      :desc  "comment"              "c"  #'evilnc-outer-commenter
+      :desc  "defun"                "f"  #'+evil:defun-txtobj
+      :desc  "whole-buffer"         "g"  #'+evil:whole-buffer-txtobj
+      :desc  "Same Indent Block"    "i"  #'evil-indent-plus-a-indent
+      :desc  "+Same Indent Block+"  "j"  #'evil-indent-plus-a-indent-up-down
+      :desc  "+Same Indent Block"   "k"  #'evil-indent-plus-a-indent-up
+      :desc  "Symbol"               "o"  #'evil-a-symbol
+      :desc  "Paragraph"            "p"  #'evil-a-paragraph
+      :desc  "Any-Quote"            "q"  #'+evil:outer-any-quote
+      :desc  "Sentence"             "s"  #'evil-a-sentence
+      :desc  "XML Tag"              "t"  #'evil-a-tag
+      :desc  "URL"                  "u"  #'+evil:outer-url-txtobj
+      :desc  "WORD"                 "W"  #'evil-a-WORD
+      :desc  "word"                 "w"  #'evil-a-word
+      :desc  "XML attr"             "x"  #'evil-outer-xml-attr
       )
 ;; My Operators
 (map! :map jg-binding-operator-map

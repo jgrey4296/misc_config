@@ -1,11 +1,6 @@
 ;;; util/jg-misc/+bindings.el -*- lexical-binding: t; -*-
 (evil-make-intercept-map messages-buffer-mode-map)
 
-(map! :after jg-leader-bindings-loaded
-      :leader
-      :desc "Have you Played?" "o h h" #'+jg-misc-helm-rps-have-you-playeds
-      )
-
 (map! :after help
       :map help-map
       "DEL" #'free-keys
@@ -14,8 +9,8 @@
 (map! :after shell
       :map (sh-mode-map shell-mode-map)
       :localleader
-      :desc "Docs: Brew"  "1" (cmd! (+jg-browse-url "https://brew.sh/"))
-      :desc "Docs: Awk"   "2" (cmd! (+jg-browse-url "https://www.gnu.org/software/gawk/manual/gawk.html"))
+      :desc "Docs: Brew"  "1" (cmd! (+jg-misc-browse-url "https://brew.sh/"))
+      :desc "Docs: Awk"   "2" (cmd! (+jg-misc-browse-url "https://www.gnu.org/software/gawk/manual/gawk.html"))
       )
 
 (map! :after vlf-mode
@@ -24,12 +19,6 @@
       "] a" 'vlf-next-batch
       "[ a" 'vlf-prev-batch
       "SPC a U v " 'vlf-set-batch-size
-      )
-
-(map! :after jg-leader-bindings-loaded
-      :leader
-      :prefix "t"
-      :desc "Semantic" "S" #'semantic-mode
       )
 
 (map! :after free-keys
@@ -55,7 +44,7 @@
 (map! :after rst
       :map rst-mode-map
       :localleader
-      :desc "Reference" "1" (cmd! (+jg-browse-url "https://restructuredtext.documatt.com/element/rubric.html"))
+      :desc "Reference" "1" (cmd! (+jg-misc-browse-url "https://restructuredtext.documatt.com/element/rubric.html"))
       )
 
 (after! calendar
@@ -102,3 +91,23 @@
         )
 
   )
+
+
+(map! :after jg-leader-bindings-loaded
+      :leader
+      :desc "Open Url"              "?"   #'+jg-misc-browse-url
+      :desc "Twitter"               "8" (cmd! (+jg-misc-browse-url jg-misc-twitter-url))
+
+      (:prefix "g"
+      :desc "Docs: Git Manual"      "1" (cmd! (+jg-misc-browse-url jg-misc-github-url))
+      )
+      (:prefix "j"
+       :desc "Docs: Learn X in Y"   "1" (cmd! (+jg-misc-browse-url jg-binding-x-in-y-url))
+       :desc "Docs: Palettes"       "2" (cmd! (+jg-misc-browse-url jg-misc-palette-list-url))
+       :desc "Docs: Over API"       "3" (cmd! (+jg-misc-browse-url jg-misc-overapi-url))
+       :desc "Browse URL"           "u" #'+jg-misc-browse-url
+       )
+      (:prefix "t"
+       :desc "Semantic" "S" #'semantic-mode
+       )
+      )

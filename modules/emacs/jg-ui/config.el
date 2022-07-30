@@ -6,9 +6,6 @@
 (after! evil
   (load! "+bindings")
   )
-(after! ivy
-  (load! "+ivy-actions")
-  )
 (load! "+popup")
 
 (use-package! hl-line
@@ -39,7 +36,7 @@
 (use-package! palette-mode)
 
 ;;-- hooks
-(add-hook! 'doom-first-input-hook #'+jg-popup-activate-rules)
+(add-hook! 'doom-first-input-hook #'+jg-ui-popup-activate-rules)
 
 ;; To overrule ligatures module
 (add-hook! 'doom-init-ui-hook :append
@@ -60,15 +57,6 @@
   (add-hook 'evil-iedit-state-entry-hook        (cmd! (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-iedit-state))))
   (add-hook 'evil-iedit-insert-state-entry-hook (cmd! (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-iedit-insert-state))))
   )
-(after! (featurep! :completion helm)
-    (setq! helm-find-files-actions
-          (append `(,(car helm-find-files-actions))
-                  '(("Open Random" . +jg-personal-helm-open-random-action))
-                  '(("Describe Random" . +jg-personal-helm-describe-random-action))
-                  '(("Open Random External" . +jg-personal-helm-open-random-external-action))
-                  (cdr helm-find-files-actions))
-          )
-    )
 (after! helpful
   (add-hook 'helpful-mode-hook
             (lambda () (set-window-dedicated-p (selected-window) nil)))

@@ -119,7 +119,7 @@
       "TAB" #'+jg-completion-complete-or-snippet
       )
 
-(map! :after (ivy yasnippet jg-leader-bindings-loaded)
+(map! :after jg-leader-bindings-loaded
       :leader
       :desc "SCRATCH"                      "6" (cmd! (+jg-completion-ivy-open-as-popup "*scratch*"))
       :desc "Messages"                     "0" (cmd! (+jg-completion-ivy-open-as-popup "*Messages*") (if current-prefix-arg (+jg-text-clear-buffer)))

@@ -34,15 +34,13 @@
       (replace-match (concat default-directory bibfile))
       (write-file  texfile)
       )
-    (shell-command (concat "pdflatex " target))
-    (shell-command (concat "bibtex " target))
-    (shell-command (concat "pdflatex " target))
-    (shell-command (concat "pdflatex " target))
+    (shell-command (concat "pdflatex " (shell-quote-argument target)))
+    (shell-command (concat "bibtex "   (shell-quote-argument target)))
+    (shell-command (concat "pdflatex " (shell-quote-argument target)))
+    (shell-command (concat "pdflatex " (shell-quote-argument target)))
     (org-open-file pdffile)
     )
   )
-
-
 
 (define-advice org-ref-version (:around (f)
                                 +jg-org-ref-version-override)
@@ -50,5 +48,31 @@
     (funcall f)
     )
   )
+
+(define-advice bibtex-set-field (:override (field value &optional nodelim)
+                                 +jg-bibtex-set-field)
+  "Set FIELD to VALUE in bibtex file.  create field if it does not exist.
+Optional argument NODELIM ignored to fit `bibtex-make-field` signature
+Modified to avoid duplicate comma insertion. "
+  (interactive "sfield: \nsvalue: ")
+  (bibtex-beginning-of-entry)
+  (let ((found))
+    (if (setq found (bibtex-search-forward-field field t))
+        ;; we found a field
+        (progn
+          (goto-char (car (cdr found)))
+          (when value
+            (bibtex-kill-field)
+            (bibtex-make-field field nil nil nil)
+            (backward-char)
+            (insert value)))
+      ;; make a new field
+      (bibtex-beginning-of-entry)
+      (forward-line) (beginning-of-line)
+      ;; (bibtex-next-field nil)
+      ;; (forward-char)
+      (bibtex-make-field field t nil nil)
+      (backward-char)
+      (insert value))))
 
 ;;; +advice.el ends here

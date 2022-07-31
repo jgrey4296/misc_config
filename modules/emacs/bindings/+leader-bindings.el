@@ -406,6 +406,7 @@
       :prefix ("P" . "Processes")
       :desc "List-Processes" "l" (cmd! (list-processes))
       :desc "Helm Processes" "h" #'helm-list-emacs-process
+      :desc "Kill Preview"   "p" (cmd! (shell-command "killall Preview"))
       )
   ;;; <leader> q --- quit/restart
 (map! :leader

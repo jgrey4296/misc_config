@@ -23,7 +23,7 @@
       +jg-dired-recursive-switches "-aBhlR --group-directories-first"
       )
 
-(after! (dired dired-quick-sort)
+(after! (dired dired-x dired-quick-sort)
   (setq dired-quick-sort-group-directories-last ?y)
   )
 ;;-- end dired-misc
@@ -60,6 +60,7 @@
                                         "swp"
                                         "node_modules"
                                         "venv"
+                                        "autctex-auto"
                                         (and "js" (? ".meta"))
                                         (and "project" (? "ile"))
                                         )

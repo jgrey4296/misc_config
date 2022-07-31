@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-alias emacs="TERM=xterm-24bits emacs"
+alias emacs="TERM=xterm-24bits emacs -nw"
 alias jges="emacs ~/.shell_files/"
 alias em="emacs"
 alias temacs="emacs ~/github/writing/TODO.org"

@@ -107,15 +107,10 @@
 
 (map! :after help
       :map help-map
-      "4" nil
+      "1" #'+jg-bindings-evil-interactive-reminder
       "4" #'info-other-window
-      "b" nil
-      "d" nil
-      (:prefix "b"
-       "t" #'+jg-which-key-show-top-level)
-      (:prefix "d"
-       :desc "Regexp Syntax" "r" (cmd! (info "(elisp) Syntax of Regexps"))
-       )
+      "b t" #'+jg-which-key-show-top-level
+      :desc "Regexp Syntax" "d r" (cmd! (info "(elisp) Syntax of Regexps"))
       (:prefix ("d p" . "packages"))
       )
 

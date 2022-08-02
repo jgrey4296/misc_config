@@ -88,11 +88,10 @@
       "C-S-f"               #'helm-previous-page
       "C-S-n"               #'helm-next-source
       "C-S-p"               #'helm-previous-source
-      (:when (featurep! :editor evil +everywhere)
-       "C-j"                #'helm-next-line
-       "C-k"                #'helm-previous-line
-       "C-S-j"              #'helm-next-source
-       "C-S-k"              #'helm-previous-source)
+      "C-j"                 #'helm-next-line
+      "C-k"                 #'helm-previous-line
+      "C-S-j"               #'helm-next-source
+      "C-S-k"               #'helm-previous-source
       "C-u"                 #'helm-delete-minibuffer-contents
       "C-s"                 #'helm-minibuffer-history
       ;; Swap TAB and C-z
@@ -101,7 +100,25 @@
       "TAB"                 #'helm-select-action
       [tab]                 #'helm-select-action
       "C-z"                 #'helm-execute-persistent-action
-        )
+      "C-SPC"               #'helm-toggle-visible-mark
+      "C-@"                 #'helm-toggle-visible-mark
+
+      :n "j"                #'helm-next-line
+      :n "k"                #'helm-previous-line
+      :n "J"                #'helm-next-page
+      :n "K"                #'helm-previous-page
+      :n ";"                #'helm-toggle-visible-mark
+      :n "a"                #'helm-mark-all
+      :n "u"                #'helm-unmark-all
+      )
+
+(map! :after helm
+      :map helm-map
+      :localleader
+      "f" #'helm-toggle-full-frame
+      )
+(evil-make-intercept-map helm-map)
+
 
 (map! :after yasnippet
       :map snippet-mode-map

@@ -39,7 +39,7 @@
                                                        "OPTtags")))
                 prior-point (point))
           (mapc add-func actual-candidates)
-          (+jg-bibtex-set-field "tags"
+          (bibtex-set-field "tags"
                             (string-join current-tags ","))
           ;;(org-ref-bibtex-next-entry)
           (evil-forward-section-begin)
@@ -61,7 +61,7 @@
                (filtered-tags (-filter (lambda (x) (not (-contains? current-tags x))) stripped_tags))
                (total-tags (-concat current-tags filtered-tags))
                )
-          (+jg-bibtex-set-field "tags"
+          (bibtex-set-field "tags"
                             (string-join total-tags ","))
           (mapc (lambda (x) (puthash x 1 jg-tag-global-tags)) filtered-tags)
           ;;(org-ref-bibtex-next-entry)

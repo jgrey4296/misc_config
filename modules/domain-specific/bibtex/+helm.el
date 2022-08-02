@@ -1,6 +1,6 @@
 ;;; domain-specific/bibtex/+helm.el -*- lexical-binding: t; -*-
 
-;; Actions
+;;-- actions
 (defun +jg-bibtex-show-entry (keys)
   "Show the first entry in KEYS in the relevant BibTeX file.
 modified from the original bibtex-completion-show-entry
@@ -84,8 +84,30 @@ modified from the original bibtex-completion-show-entry
                                               (alist-get "isbn" entry nil nil #'equal))
                                           )))
   )
+(defun +jg-bibtex-helm-open-files(key)
+  (loop for cand in (helm-marked-candidates)
+        do
+        (let* ((entry (bibtex-completion-get-entry cand))
+               (target (expand-file-name (bibtex-completion-get-value "file" entry)))
+               )
+          (cond ((string-empty-p target)
+                 (message "No File to open"))
+                ((not (file-exists-p target))
+                 (message "File does not exist"))
+                ((f-ext? target "epub")
+                 (shell-command (concat jg-bibtex-open-epub-cmd (shell-quote-argument target))))
+                ((f-ext? target "pdf")
+                 (shell-command (concat jg-bibtex-open-pdf-cmd (shell-quote-argument target))))
+                (t
+                 (message "Unrecognized type")
+                 (shell-command (concat "open " (shell-quote-argument target))))
+                )
+          )
+        )
+  )
+;;-- end actions
 
-;; Utilities
+;;-- utils
 (defun +jg-bibtex-helm-candidates-formatter (candidates _)
   "Format CANDIDATES for display in helm."
   (cl-loop
@@ -152,8 +174,15 @@ governed by the variable `bibtex-completion-display-formats'."
 (defun +jg-bibtex-year-sort-transformer (candidates source)
   (-sort #'+jg-bibtex-sort-by-year candidates)
   )
+(defun +jg-bibtex-edit-finish (cand)
+  (let ((marked-cands (helm-marked-candidates)))
+    (if marked-cands
+        marked-cands
+      (list cand)
+      )))
+;;-- end utils
 
-;; Actual Helm
+;;-- helms
 (defun +jg-bibtex-helm-bibtex (&optional arg local-bib)
   " Custom implementation of helm-bibtex"
   (interactive "P")
@@ -176,7 +205,7 @@ governed by the variable `bibtex-completion-display-formats'."
         )
 
     (helm :sources `(,jg-bibtex-helm-source-bibtex)
-          :full-frame nil
+          :full-frame t
           :buffer "*helm bibtex*"
           :input input
           :bibtex-local-bib local-bib
@@ -215,28 +244,24 @@ using org-bibtex-fields for completion options "
                                 )
                           (read-string (format "(%s) New Value: " chosen))))
       (if new-values
-          (+jg-bibtex-set-field chosen (if (listp new-values)
-                                           (string-join (mapcar 'string-trim new-values) " and ")
-                                         new-values) t)
+          (bibtex-set-field chosen (if (listp new-values)
+                                       (string-join (mapcar 'string-trim new-values) " and ")
+                                     new-values) t)
         )
       )
     )
   )
+;;-- end helms
 
-(defun +jg-bibtex-edit-finish (cand)
-  (let ((marked-cands (helm-marked-candidates)))
-    (if marked-cands
-        marked-cands
-      (list cand)
-      )))
 
+;;-- sources
 (after! helm-bibtex
   ;; Define the bib helm
 
   (setq jg-bibtex-helm-source-bibtex
         (helm-build-sync-source "Bibtex Helm"
           :action (helm-make-actions  "Insert citation"      #'helm-bibtex-insert-citation
-                                      "Open PDF"             #'helm-bibtex-open-pdf
+                                      "Open file"            #'+jg-bibtex-helm-open-files
                                       "Insert BibTeX key"    #'helm-bibtex-insert-key
                                       "Insert BibTeX entry"  #'helm-bibtex-insert-bibtex
                                       "Insert Bibtex simple" #'+jg-bibtex-insert-simple
@@ -253,3 +278,4 @@ using org-bibtex-fields for completion options "
           )
         )
   )
+;;-- end sources

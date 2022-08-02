@@ -361,6 +361,7 @@
   ;;; <leader> p --- project
 (map! :leader
       :prefix ("p" . "project")
+      :desc "Project Root"                 "`"  (cmd! (find-file (doom-project-root)))
       :desc "Root Shell"                   "'"  #'projectile-run-shell
       :desc "Browse other project"         ">"  #'doom/browse-in-other-project
       :desc "Search project for symbol"     "." #'+default/search-project-for-symbol-at-point

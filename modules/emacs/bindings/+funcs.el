@@ -58,3 +58,18 @@
   (interactive)
   (which-key--create-buffer-and-show
    nil nil '+jg-bindings-wk-filter-fn "Top-level bindings"))
+
+(defun +jg-bindings-evil-interactive-reminder ()
+  (interactive)
+  (let ((evil-text (with-temp-buffer
+                     (insert-file-contents "/Volumes/documents/github/doom-emacs/.local/straight/repos/evil/evil-types.el")
+                     (buffer-string)
+                     )))
+    (with-temp-buffer-window "*Evil Interactive Reminder*"
+        'display-buffer-pop-up-window
+        nil
+      (princ evil-text)
+      )
+    nil
+    )
+  )

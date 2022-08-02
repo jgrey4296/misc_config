@@ -170,11 +170,12 @@ It's platform specific in that it uses the platform's native path separator."
   ;; activate environment, start python repl
   (+jg-python-activate-venv-and-conda)
 
-  (let* ((cmd (python-shell-calculate-command))
+  (let* ((default-directory (doom-project-root))
+         (cmd (python-shell-calculate-command))
          (new-buffer (process-buffer
                       (run-python cmd nil t))))
-    (puthash (cons 'inferior-python-mode (doom-project-root)) new-buffer +eval-repl-buffers)
-    (puthash (cons 'python-mode (doom-project-root)) new-buffer +eval-repl-buffers)
+    (puthash (cons 'inferior-python-mode default-directory) new-buffer +eval-repl-buffers)
+    (puthash (cons 'python-mode default-directory) new-buffer +eval-repl-buffers)
     new-buffer
   )
 )
@@ -195,7 +196,8 @@ and adding extra pythonpath locations as the pre-args
                      python-shell-interpreter-args
                      (if jg-python-dev-mode jg-python-dev-cmd)
                      (format jg-python-pycache-cmd (f-canonical jg-python-pycache-loc))
-                     "-c \"import sys; print(sys.path)\""
+                     python-shell-interpreter-path-args
+                     ;; "--dir" (doom-project-root)
                      )
                     )
           )

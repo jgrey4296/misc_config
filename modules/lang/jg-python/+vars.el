@@ -21,15 +21,15 @@
 (after! python
   (setq-default python-indent-offset 4
                 python-indent-guess-indent-offset nil
-                python-shell-interpreter-args "-i"
-                python-shell-interpreter "python3"
                 python-shell-completion-native-enable t
                 python-shell-virtualenv-root "~/anaconda3"
                 python-pdbtrack-activate nil
                 py-pdbtrack-do-tracking-p nil
                 python-shell-completion-native-disabled-interpreters '("pypy")
 
-                python-shell-interpreter-path-args "-c \"import sys; sys.path = [%s] + sys.path; print(sys.path)\""
+                python-shell-interpreter "python3"
+                python-shell-interpreter-args "-i"
+                python-shell-interpreter-path-args "/Volumes/documents/github/emacs_files/modules/lang/jg-python/repl_startup.py "
                 )
   (modify-syntax-entry ?_ "_" python-mode-syntax-table)
   )
@@ -54,6 +54,7 @@
 (setq jg-python-popup-rules
       '(("^\\*pytest\\*"         :side bottom :ttl 5   :height 0.4 :quit t :select t :priority 50)
         ("^\\*Anaconda\\*"       :side bottom :ttl 5   :height 0.4 :quit t :select nil :priority 50)
+        ("^\\*Python\\*"         :side right  :ttl nil :width  0.5 :quit nil :select t :priority 50)
         ))
 (after! jg-popup-init
   (+jg-ui-popup-add-rules 'python jg-python-popup-rules)

@@ -83,7 +83,7 @@
  (rear-context-string . "96 Mar  4  2020 ")
  (position . 115))
 ("MAS"
- (filename . "/Volumes/documents/github/maop-code/")
+ (filename . "~/github/MAS/")
  (front-context-string . "ch3-exercises\n  ")
  (rear-context-string . "70 Sep  8  2020 ")
  (position . 136))

@@ -24,3 +24,9 @@
     (?< . evil-surround-read-tag)
     (?f . evil-surround-function))
 )
+
+(setq-default buffer-invisibility-spec
+              '((jg-text-invis . t)
+                t
+                )
+              )

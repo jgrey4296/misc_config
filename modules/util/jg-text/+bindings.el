@@ -12,6 +12,8 @@
 (map! :after jg-leader-bindings-loaded
       :map jg-binding-vision-map
       "1" #'+jg-text-wrap-fold-block
+      "i" #'+jg-text-make-invisible
+      "I" #'+jg-text-toggle-invisible
       )
 
 (map! :after jg-leader-bindings-loaded

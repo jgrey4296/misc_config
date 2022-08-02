@@ -1,6 +1,6 @@
 ;;; +operators.el -*- lexical-binding: t; -*-
 
-(evil-define-operator +jg-text-encrypt-region (beg end count)
+(evil-define-operator +jg-text-encrypt-region (beg end type)
   " Operator to easily envcrypt a region of text "
   :type exclusive
   (interactive "<R>")
@@ -14,7 +14,7 @@
     )
   )
 
-(evil-define-operator +jg-text-decrypt-region (beg end count)
+(evil-define-operator +jg-text-decrypt-region (beg end type)
   " Operator to easily envcrypt a region of text "
   :type exclusive
   (interactive "<R>")
@@ -49,7 +49,7 @@
     )
   )
 
-(evil-define-operator +jg-text-wrap-fold-block (beg end count &optional name)
+(evil-define-operator +jg-text-wrap-fold-block (beg end type &optional name)
   " Operator to easily create fold blocks "
   :type block
   :keep-visual t
@@ -64,6 +64,41 @@
   (beginning-of-line)
   (insert (+jg-text-fold-block-gen :name name :newlines t))
   )
+
+(evil-define-operator +jg-text-make-invisible (beg end type)
+  " Operator to easily annotate text to be hidden "
+  :type exclusive
+  (interactive "<R>")
+  (put-text-property beg end 'invisible 'jg-text-invis)
+  )
+
+(evil-define-operator +jg-text-toggle-invisible (beg end type prefix)
+  " Operator to show invisible text again "
+  :type exclusive
+  :keep-visual t
+  (interactive "<R>p")
+  (if (eq prefix 4)
+      ;; Toggle the spec
+      (cond ((assoc 'jg-text-invis buffer-invisibility-spec)
+             (setq buffer-invisibility-spec (assq-delete-all 'jg-text-invis buffer-invisibility-spec)))
+            (t
+             (push '(jg-text-invis . t) buffer-invisibility-spec)
+             ))
+    ;; Toggle the property
+    (alter-text-property beg end 'invisible
+                         (lambda (val)
+                           (cond ((eq val 'jg-text-invis)
+                                  'jg-text-invis-disabled
+                                  )
+                                 ((eq val 'jg-text-invis-disabled)
+                                  'jg-text-invis)
+                                 (t val)
+                                 )
+                           )
+                         )
+    )
+  )
+
 
 (cl-defun +jg-text-fold-block-gen (&rest rst &key name (end nil) (re nil) (newlines nil) (comment comment-start))
   " Single point to build fold block markers

@@ -1,7 +1,7 @@
 ;;; util/jg-misc/+bindings.el -*- lexical-binding: t; -*-
 (evil-make-intercept-map messages-buffer-mode-map)
 
-(map! :after help
+(map! :after jg-help-bindings
       :map help-map
       "DEL" #'free-keys
       )

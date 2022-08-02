@@ -7,7 +7,6 @@
       "[" "("
       "]" ")")
 
-(map! :g "C-x h" help-map)
 (map! :map universal-argument-map
       :prefix doom-leader-key     "u" #'universal-argument-more
       :prefix doom-leader-alt-key "u" #'universal-argument-more)
@@ -16,13 +15,10 @@
 ;; Shell
 (map! :after shell
       :map shell-mode-map
+      "C-d" #'comint-send-eof
       :localleader
       "h" #'counsel-shell-history)
 
-(map! :after shell
-      :map shell-mode-map
-      "C-d" #'comint-send-eof
-      )
 (evil-make-intercept-map shell-mode-map)
 
 ;; Comint
@@ -103,15 +99,6 @@
 (map! :after message
       :map messages-buffer-mode-map
       :g "0" #'evil-beginning-of-line
-      )
-
-(map! :after help
-      :map help-map
-      "1" #'+jg-bindings-evil-interactive-reminder
-      "4" #'info-other-window
-      "b t" #'+jg-which-key-show-top-level
-      :desc "Regexp Syntax" "d r" (cmd! (info "(elisp) Syntax of Regexps"))
-      (:prefix ("d p" . "packages"))
       )
 
 (evil-make-overriding-map messages-buffer-mode-map)

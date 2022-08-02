@@ -117,7 +117,9 @@
       :localleader
       "f" #'helm-toggle-full-frame
       )
-(evil-make-intercept-map helm-map)
+(after! helm
+  (evil-make-intercept-map helm-map)
+)
 
 
 (map! :after yasnippet

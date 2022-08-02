@@ -3,7 +3,7 @@
 (message "Setting up leader bindings: %s" (current-time-string))
 (map! :leader
       ;; "," "<" "!" "?"
-      :desc "help"                  "h" help-map
+      ;; :desc "help"                  "h"    help-map
       :desc "Goto-line"             "SPC" #'evil-avy-goto-line
       :desc "Ibuffer"               "DEL" #'ibuffer
       :desc "Jump to bookmark"      "RET" #'bookmark-jump

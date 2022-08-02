@@ -35,5 +35,6 @@
       jg-binding-outer-text-objects-map (make-sparse-keymap "JG map replacing evil-outer-text-objects-map")
       jg-binding-vision-map             (make-sparse-keymap "JG vision manipulation")
       jg-binding-visual-state-map       (make-sparse-keymap "JG map replacing evil-visual-state-map")
+      jg-binding-help-map               nil ;; copied in +help-bindings
       )
 ;;-- end maps

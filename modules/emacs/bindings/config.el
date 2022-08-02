@@ -10,6 +10,7 @@
   (load! "+evil-submap-bindings")
   (load! "+ibuffer-bindings")
   (load! "+misc-bindings")
+  (load! "+help-bindings")
   )
 (after! evil-ex
   (load! "+evil-ex-setup")

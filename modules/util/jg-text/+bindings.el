@@ -31,7 +31,7 @@
        )
       )
 
-(map! :after help
+(map! :after jg-help-bindings
       :map help-map
       :desc "Regex Reminder" "R" #'+jg-text-regex-reminder
       )

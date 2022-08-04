@@ -8,24 +8,28 @@
 ;; Motions
 (evil-define-motion +jg-text-prev-close-paren-motion (count)
   "Go to [count] next unmatched ')'."
-  :type exclusive
+  :type inclusive
   (backward-char)
   (search-backward")" nil t)
-  (forward-char))
+  (forward-char)
+  )
+
 (evil-define-motion +jg-text-next-open-paren-motion (count)
   "Go to [count] next unmatched ')'."
-  :type exclusive
+  :type inclusive
   (forward-char)
   (search-forward "(" nil t)
-  (backward-char))
+  (backward-char)
+  )
 
 (evil-define-motion +jg-text-next-empty-line-motion (count)
   :type line
   (forward-line)
   (re-search-forward "^[[:space:]]*$" nil nil (or count 1))
   )
+
 (evil-define-motion +jg-text-prev-empty-line-motion (count)
-  :type exclusive
+  :type inclusive
   (forward-line -1)
   (re-search-backward "^[[:space:]]*$" nil nil (or  count 1))
   )
@@ -50,24 +54,27 @@
 (evil-define-motion +jg-text-force-column-motion (count)
   "Force Go to column COUNT on the current line.
 Columns are counted from zero."
-  :type exclusive
-  (move-to-column (or count 0) t))
+  :type inclusive
+  (move-to-column (or count 0) t)
+  )
 
 
 ;; Text Objects
 (evil-define-text-object +jg-text-grow-selection-op (count)
   " Grow the selection on either side by count "
-  :type exclusive
+  :type inclusive
   :extend-selection t
   (interactive)
   (list (- evil-visual-beginning 1) (+ evil-visual-end 1))
   )
+
 (evil-define-text-object +jg-text-line-textobj (count)
   " Line object of the current line "
   :type line
   (interactive)
   (list (line-beginning-position) (line-end-position))
   )
+
 (evil-define-text-object +jg-text-whole-buffer-textobj (count)
   " Line object of the current line "
   :type inclusive
@@ -95,6 +102,7 @@ Columns are counted from zero."
       )
     )
   )
+
 (evil-define-operator +jg-text-remove-leading-whitespace-op (beg end count)
   :move-point t
   (while (< (point) end)
@@ -103,6 +111,7 @@ Columns are counted from zero."
     (forward-line)
     )
   )
+
 (evil-define-operator +jg-text-uniquify-op (beg end count)
   :move-point t
   (evil-first-non-blank)
@@ -120,6 +129,7 @@ Columns are counted from zero."
       )
     )
   )
+
 (evil-define-operator +jg-text-escalate-replace-op (beg end count)
   " Replace a regex in the region,
 with either a numeric or alphabetical escalation "
@@ -141,12 +151,14 @@ with either a numeric or alphabetical escalation "
       )
     )
   )
+
 (evil-define-operator +jg-text-title-case-op (beg end)
   :move-point t
   (while (< (point) end)
     (capitalize-word 1)
     )
   )
+
 (evil-define-operator +jg-text-simple-grep-op (beg end count)
   :move-point t
   (interactive)

@@ -2,7 +2,7 @@
 
 (evil-define-operator +jg-text-encrypt-region (beg end type)
   " Operator to easily envcrypt a region of text "
-  :type exclusive
+  :type line
   (interactive "<R>")
   (let* ((encrypted (epg-encrypt-string (epg-make-context epa-protocol epa-armor)
                              (buffer-substring-no-properties beg end) "")))
@@ -16,7 +16,7 @@
 
 (evil-define-operator +jg-text-decrypt-region (beg end type)
   " Operator to easily envcrypt a region of text "
-  :type exclusive
+  :type line
   (interactive "<R>")
   (let* ((encrypted (buffer-substring-no-properties beg end))
          (context (epg-make-context epa-protocol))
@@ -51,7 +51,7 @@
 
 (evil-define-operator +jg-text-wrap-fold-block (beg end type &optional name)
   " Operator to easily create fold blocks "
-  :type block
+  :type line
   :keep-visual t
   (interactive "<R>" (list (read-string "Block Name: ")))
   ;; From bottom to top to not change interfere with positions
@@ -67,14 +67,14 @@
 
 (evil-define-operator +jg-text-make-invisible (beg end type)
   " Operator to easily annotate text to be hidden "
-  :type exclusive
+  :type inclusive
   (interactive "<R>")
   (put-text-property beg end 'invisible 'jg-text-invis)
   )
 
 (evil-define-operator +jg-text-toggle-invisible (beg end type prefix)
   " Operator to show invisible text again "
-  :type exclusive
+  :type inclusive
   :keep-visual t
   (interactive "<R>p")
   (if (eq prefix 4)

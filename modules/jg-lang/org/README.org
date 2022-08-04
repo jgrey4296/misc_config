@@ -7,4 +7,3 @@
   5. Sets up Pomodoro (including tweeting)
   6. Sets up org-drill
   7. Sets up link opening and quicklook, link name changing and agenda listing
-

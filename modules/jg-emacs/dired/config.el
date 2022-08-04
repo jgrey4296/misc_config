@@ -7,17 +7,18 @@
   (load! "+bindings")
 )
 
+;; open -ngF for files with permission errors
 (use-package-hook! dired-x :post-config
   (setq dired-guess-shell-alist-user
-        `(("\\.\\(?:docx\\|pdf\\|djvu\\|eps\\)\\'" "open -ngF")
-          ("\\.\\(?:jpe?g\\|png\\|gif\\|xpm\\)\\'" "open -ngF")
-          ("\\.\\(?:xcf\\)\\'" "open -ngF")
-          ("\\.csv\\'" "open -ngF")
-          ("\\.tex\\'" "open -ngF")
-          ("\\.\\(?:mp4\\|mkv\\|avi\\|flv\\|rm\\|rmvb\\|ogv\\)\\(?:\\.part\\)?\\'" "open -ngF")
-          ("\\.\\(?:mp3\\|flac\\)\\'" "open -ngF")
+        `(("\\.\\(?:docx\\|pdf\\|djvu\\|eps\\)\\'" "open")
+          ("\\.\\(?:jpe?g\\|png\\|gif\\|xpm\\)\\'" "open")
+          ("\\.\\(?:xcf\\)\\'" "open")
+          ("\\.csv\\'" "open")
+          ("\\.tex\\'" "open")
+          ("\\.\\(?:mp4\\|mkv\\|avi\\|flv\\|rm\\|rmvb\\|ogv\\)\\(?:\\.part\\)?\\'" "open")
+          ("\\.\\(?:mp3\\|flac\\)\\'" "open")
           ("\\.html?\\'" "open")
-          ("\\.md\\'" "open -ngF"))
+          ("\\.md\\'" "open"))
         )
   )
 (use-package! dired-quick-sort

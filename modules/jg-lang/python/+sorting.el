@@ -30,4 +30,3 @@
   (goto-char (point-min))
   (widen)
   )
-

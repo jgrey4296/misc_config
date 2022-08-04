@@ -38,6 +38,7 @@
                                "__pycache__"
                                ".."
                                (and (*? anychar) ".egg-info")
+                               (and (*? anychar) ".elc")
                                (and "log" ?. (*? anychar))
                                (and "flycheck"
                                     (*? anychar)

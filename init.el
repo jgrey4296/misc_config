@@ -17,45 +17,42 @@
 (doom!
  ;; Personal Modules:
  :util  ;; ----- ====== -----
+ mail
+ text-manipulation
+ char-insert
+ project-walk
+ tagging
  jg-misc
- jg-mail
- jg-text
  jg-org-unit-test
 
  :domain-specific  ;; ----- ====== -----
  music
  twitter
- bibtex
  acab-ide
  ai-and-logic
 
- :lang  ;; ----- ====== -----
- jg-org
- jg-lisp
- jg-python
- jg-cron
- jg-kotlin
- jg-latex
- jg-misc-lang
- jg-rst
- jg-inform
- jg-erlang
- jg-haskell
+ :jg-lang  ;; ----- ====== -----
+ bibtex
+ cron
+ erlang
+ haskell
+ inform
+ kotlin
+ latex
+ lisp
+ misc-lang
+ org
+ python
+ rst
 
- :emacs  ;; ----- ====== -----
- (bindings +bindings)
- (jg-ui +defaults)
- ;;jg-states
+ :jg-emacs  ;; ----- ====== -----
+ bindings
+ completion
+ dired
  fold
- jg-dired
- jg-tag
- jg-vc
- project-walk
- char-insert
-
- :completion ;; ----- ====== -----
- jg-completion
-
+ ui
+ version-control
+ ;;jg-states
 
  :completion
  company           ; the ultimate code completion backend

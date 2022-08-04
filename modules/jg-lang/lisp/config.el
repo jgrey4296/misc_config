@@ -4,4 +4,5 @@
 (load! "+funcs")
 (after! (evil elisp-mode)
   (load! "+bindings")
+  (load! "+advice")
   )

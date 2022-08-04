@@ -11,8 +11,6 @@
       :nv "k" #'dired-previous-line
       :nv "J" #'dired-next-dirline
       :nv "K" #'dired-prev-dirline
-      :nv "q" #'kill-current-buffer
-      :nv "Q" #'+dired/quit-all
       :nv "n" #'evil-ex-search-next
       :nv "N" #'evil-ex-search-previous
 
@@ -21,11 +19,14 @@
       :n "I" nil
       :n ":" nil
 
+      :nv "q" #'+jg-dired-kill-subdir-or-close-buffer
+      :nv "Q" #'+dired/quit-all
+      :desc "Remove Subdir"        :n "DEL"                            #'dired-kill-subdir
+
       "C-h" #'dired-up-directory
 
       :desc "Expand Subdir"        :n "i"                              #'+jg-dired-insert-subdir-maybe-recursive
       :desc "Expand Marked"        :n "I"                              #'+jg-dired-insert-marked-subdir
-      :desc "Remove Subdir"        :n "DEL"                            #'dired-kill-subdir
 
       (:prefix "]"
        :desc "Next Marked" :n "m" #'dired-next-marked-file
@@ -50,6 +51,7 @@
        :desc "Dired Diff"           "d" #'+jg-dired-diff
        )
       (:prefix ("K" . "Destructive")
+       :desc "lower case files"   "1"   #'+jg-dired-downcase-marked-files
        :desc "Reformat jsons"     "J"   #'+jg-dired-reformat-jsons
        :desc "Replace regexp"     "R"   #'dired-do-find-regexp-and-replace
        )

@@ -6,7 +6,7 @@
       :desc "Docs: Lisp"  "0" (cmd! (+jg-misc-browse-url "https://www.gnu.org/software/emacs/manual/html_node/elisp/index.html"))
       :desc "Docs: Melpa" "1" (cmd! (+jg-misc-browse-url "https://melpa.org/#/"))
       (:prefix ("e" . "eval")
-       :desc "Byte Compile" :n "c" #'byte-compile-file
+       :desc "Byte Compile" :n "c" (cmd! (byte-compile-file buffer-file-name))
        )
       )
 

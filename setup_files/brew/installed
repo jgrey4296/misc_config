@@ -3,6 +3,7 @@ agda
 aom
 atk
 autoconf
+awk
 bash
 bdw-gc
 berkeley-db
@@ -25,6 +26,7 @@ docbook
 docbook-xsl
 elixir
 emacs
+emacs-plus@28
 erlang
 exiftool
 faust
@@ -85,6 +87,7 @@ jasper
 jbig2dec
 jemalloc
 jpeg
+jpeg-turbo
 jpeg-xl
 jq
 lame

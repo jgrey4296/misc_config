@@ -54,18 +54,20 @@ Dedicated (locked) windows are left untouched."
         ;; need to call `select-window'
         (window-state-put second-window-state (funcall splitter)))
     (error "Can't toggle window layout when the number of windows isn't two.")))
+;;-- end layout toggle
+
 (after! core-ui
   (message "After core-ui")
   (advice-remove 'kill-current-buffer #'doom--switch-to-fallback-buffer-maybe-a)
   ;; Originally from doom/core/core-ui
-  (defadvice! +jg-ui-kill-buffer-override (&rest _)
+  (define-advice kill-current-buffer (:before-until (&rest _)
+                                      +jg-ui-kill-buffer-override)
     "Switch to `doom-fallback-buffer' if on last real buffer.
 
 Advice for `kill-current-buffer'. If in a dedicated window, delete it. If there
 are no real buffers left OR if all remaining buffers are visible in other
 windows, switch to `doom-fallback-buffer'. Otherwise, delegate to original
 `kill-current-buffer'."
-    :before-until #'kill-current-buffer
     (let ((buf (current-buffer)))
       (cond ((window-dedicated-p)
              (delete-window)
@@ -99,7 +101,6 @@ windows, switch to `doom-fallback-buffer'. Otherwise, delegate to original
                (run-hooks 'doom-switch-buffer-hook 'buffer-list-update-hook)
                t)))))
   )
-;;-- end layout toggle
 
 ;;-- faces
 (defun +jg-ui-insert-faces ()

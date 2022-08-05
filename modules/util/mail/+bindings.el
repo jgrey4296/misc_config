@@ -46,23 +46,31 @@
    "RET" #'rmail-summary-goto-msg
    "!"   #'rmail-summary-expunge-and-save
    "/"   #'rmail-summary-search
-   "L"   #'+jg-mail-summary-unlabel-by-regex
-   "Q"   #'rmail-summary-quit
+   "Q"   #'+jg-mail-quit-rmail
    "\\"  #'rmail-summary-end-of-message
    "c"   #'rmail-summary-mail
-   "d"   #'rmail-summary-delete-forward
+   "d"   #'+jg-mail-summary-delete-msg
    "u"   #'rmail-summary-undelete
-   "U"   #'rmail-summary-undelete-many
-   "l"   #'+jg-mail-summary-label-by-regex
+   "l"   #'+jg-mail-summary-label-by-regexp
    "q"   #'quit-window
    "r"   #'rmail-summary-reply
    "h"  (cmd! (rmail-summary)
               (beginning-of-buffer))
+   (:prefix ("L" . "Labelling")
+    :desc "Remove Label"          "u" #'rmail-summary-kill-label
+    :desc "Delete Label from all" "U" #'+jg-mail-summary-remove-label
+    :desc "Unlabel by regexp"     "r" #'+jg-mail-summary-unlabel-by-regexp
+    )
    (:prefix ("D" . "Delete")
-    :desc "Delete Msg" "m"                #'+jg-mail-summary-delete-msg
-    :desc "Delete All" "a"                #'+jg-mail-summary-delete-all
-    :desc "Unmark deletions by regex" "u" #'+jg-mail-summary-undelete-by-regex
-    :desc "Delete by Regex" "r"           #'+jg-mail-summary-delete-by-regex
+    :desc "Delete All"      "a" #'+jg-mail-summary-delete-all
+    :desc "Delete by Regex" "r" #'+jg-mail-summary-delete-by-regexp
+    :desc "Delete by Label" "l" #'+jg-mail-summary-delete-by-label
+    :desc "Delete by Date"  "d" #'+jg-mail-summary-delete-older-than
+    )
+   (:prefix ("U" . "Undelete")
+    :desc "Undelete All"       "a" #'+jg-mail-summary-undelete-all
+    :desc "Undelete by Regex"  "r" #'+jg-mail-summary-undelete-by-regexp
+    :desc "Undelete by Label"  "l" #'+jg-mail-summary-undelete-by-label
     )
    (:prefix ("s" . "Sort")
     :desc "By Recipient     " "r" #'rmail-summary-sort-by-recipient
@@ -78,7 +86,7 @@
   (map! :map rmail-mode-map
         "!" #'rmail-expunge-and-save
         "L" #'rmail-kill-label
-        "Q" #'rmail-quit
+        "Q" #'+jg-mail-quit-rmail
         "\\" #'rmail-end-of-message
         "c" #'rmail-mail
         "d" #'rmail-delete-forward

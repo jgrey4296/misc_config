@@ -3,6 +3,9 @@
 (load! "+vars")
 (load! "+funcs")
 (load! "+faces")
+(after! core-ui
+  (load! "+advice")
+  )
 (after! evil
   (load! "+bindings")
   )

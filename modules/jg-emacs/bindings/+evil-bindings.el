@@ -4,6 +4,7 @@
 ;; TODO add count lines/words, insert line above/below...
 
 (message "Setting up Evil Bindings: %s" (current-time-string))
+;;-- setup
 (setq jg-binding-insert-state-map (copy-keymap evil-insert-state-map))
 
 (defvar old-evil-normal-state-map   nil "the original evil-normal-state-map")
@@ -11,9 +12,18 @@
 (defvar old-evil-visual-state-map   nil "the original evil-visual-state-map")
 (defvar old-evil-operator-state-map nil "the original evil-operator-state-map")
 (defvar old-evil-motion-state-map   nil "the original evil-motion-state-map")
+;;-- end setup
 
-;; Normal state
+;;-- normal state
 (map! :map jg-binding-normal-state-map
+      :desc "Indent"            "TAB" #'indent-for-tab-command
+      :desc "Emacs State"       "C-z" #'evil-emacs-state
+      :desc "Redisplay"         "§"   (cmd! (redisplay t))
+      :desc "Evil-Ex"           ":"   #'evil-ex
+      :desc "Lookup"            "K"   #'+lookup/documentation
+      :desc "Shell Cmd"         "!"   #'evil-shell-command
+      :desc "visual-block"      "C-v" #'evil-visual-block
+
       :desc "Use Register"      "\""  #'evil-use-register
       :desc "Repeat Substitute" "& "  #'evil-ex-repeat-substitute
       :desc "Repeat"            ". "  #'evil-repeat
@@ -22,9 +32,6 @@
       :desc "Invert Char"       "~"   #'evil-invert-char
       :desc "Indent"            "= "  #'evil-indent
       :desc "Macro"             "@ "  #'evil-execute-macro
-
-      :desc "Search"   "/"   #'evil-ex-search-forward
-      :desc "B-Search" "\\"  #'evil-ex-search-backward
 
       :desc "Append"        "a" #'evil-append
       :desc "Change"        "c" #'evil-change
@@ -52,7 +59,7 @@
       :desc "Replace-State" "R" #'evil-replace-state
       :desc "Change Line"   "S" #'evil-change-whole-line
       :desc "B-delete"      "X" #'evil-delete-backward-char
-      :desc "Yank Line"     "Y" #'evil-yank-line
+      :desc "Yank-line"     "Y" #'evil-yank-line
       )
 (map! :map jg-binding-normal-state-map
       :desc "Repeat Pop"        "C-." #'evil-repeat-pop
@@ -73,15 +80,22 @@
       :desc "Insert" "<insertchar>"         #'evil-insert
       :desc "Back Char" "DEL"               #'evil-backward-char
       )
-;; Insert state
+;;-- end normal state
+
+;;-- insert state
 (map! :map jg-binding-insert-state-map
+      [escape] 'evil-normal-state
+      :desc "Escape"        "C-g" #'evil-escape
       ;; TAB
       )
-;; Visual state
+;;-- end insert state
+
+;;-- visual state
 (map! :map jg-binding-visual-state-map
-      ;; RET
+      [escape] 'evil-normal-state
+      :desc "Indent" "TAB"             #'indent-for-tab-command
       :desc "Visual Block"  "DEL"      #'evil-visual-block
-      :desc "Repeat"        "."        #'evil-repeat
+      :desc "visual-block"  "C-v"      #'evil-visual-block
       :desc "Search"        "/"        #'evil-ex-search-forward
       :desc "B-Search"     "\\"        #'evil-ex-search-backward
       :desc "Visual Search" "?"        #'evil-visualstar/begin-search-forward
@@ -91,46 +105,46 @@
       :desc "Escape"        "C-g"      #'evil-escape
       :desc "Macro"         "@"        #'+evil:apply-macro
 
-
+      :desc "Yank"                    "y" #'evil-yank
       :desc "Lookup"                  "K" #'+lookup/documentation
       :desc "Exchange Corners"        "O" #'evil-visual-exchange-corners
       :desc "Change"                  "R" #'evil-change
       :desc "Surround"                "s" #'evil-surround-region
-      :desc "Surround Change"         "S" #'evil-surround-change
       :desc "Exchange Point and Mark" "o" #'exchange-point-and-mark
       )
-;; Operator state
+;;-- end visual state
+
+;;-- operator state
 (map! :map jg-binding-operator-state-map
+      [escape] 'evil-normal-state
       :desc "Escape"        "C-g" #'evil-escape
-      :desc "Surround Edit" "S"   #'evil-Surround-edit
-      :desc "Surround"      "s"   #'evil-surround-edit
       ;; l
       ;; RET
       )
-;; Motion state
-(map! :map jg-binding-motion-state-map
-      :desc "Indent" "TAB"            #'indent-for-tab-command
-      :desc "Return" "RET"            #'evil-ret
-      :desc "Emacs State"       "C-z" #'evil-emacs-state
-      :desc "Redisplay"           "§" (cmd! (redisplay t))
+;;-- end operator state
 
+;;-- motion state
+(map! :map jg-binding-motion-state-map
+      :desc "Return" "RET"  #'evil-ret
+      :desc "Search"   "/"  #'evil-ex-search-forward
+      :desc "B-Search" "\\" #'evil-ex-search-backward
 
       :desc "1st Non Blank"       "^" #'evil-first-non-blank
       :desc "Next 1st Non Blank " "_" #'evil-next-line-1-first-non-blank
       :desc "Goto Mark"           "`" #'evil-goto-mark
-      :desc "Evil-Ex"             ":" #'evil-ex
+
+      :desc "Repeat"              "." #'evil-repeat
       :desc "Repeat Find Char"    ";" #'evil-repeat-find-char
       :desc "B-Search"            "?" #'evil-ex-search-backward
       :desc "Back Paragraph"      "{" #'evil-backward-paragraph
       :desc "Goto Column"         "|" #'evil-goto-column
       :desc "Forward Paragraph"   "}" #'evil-forward-paragraph
 
-      :desc "Scroll Left" "<left>"    #'evil-scroll-left
-      :desc "Scroll Right" "<right>"  #'evil-scroll-right
-      :desc "Scroll Up" "<up>"        #'evil-scroll-page-up
-      :desc "Scroll Down" "<down>"    #'evil-scroll-page-down
+      :desc "Scroll Left"  "<left>"  #'evil-scroll-left
+      :desc "Scroll Right" "<right>" #'evil-scroll-right
+      :desc "Scroll Up"    "<up>"    #'evil-scroll-page-up
+      :desc "Scroll Down"  "<down>"  #'evil-scroll-page-down
 
-      :desc "Shell Cmd"           "!" #'evil-shell-command
       :desc "B-Search Word"       "#" #'evil-ex-search-word-backward
       :desc "EOL"                 "$" #'evil-end-of-line
       :desc "Jump Item"           "%" #'evil-jump-item
@@ -158,14 +172,13 @@
       :desc  "find-char-backward"    "F"              #'evil-find-char-backward
       :desc  "goto-line"             "G"              #'evil-goto-line
       :desc  "window-top"            "H"              #'evil-window-top
-      :desc  "lookup"                "K"              #'evil-lookup
+
       :desc  "window-bottom"         "L"              #'evil-window-bottom
       :desc  "window-middle"         "M"              #'evil-window-middle
       :desc  "ex-search-previous"    "N"              #'evil-ex-search-previous
       :desc  "find-char-to-backward" "T"              #'evil-find-char-to-backward
       :desc  "visual-line"           "V"              #'evil-visual-line
       :desc  "forward-WORD-begin"    "W"              #'evil-forward-WORD-begin
-      :desc  "yank-line"             "Y"              #'evil-yank-line
 
       :desc  "backward-word-begin"   "b"              #'evil-backward-word-begin
       :desc  "forward-word-end"      "e"              #'evil-forward-word-end
@@ -178,41 +191,86 @@
       :desc  "find-char-to"          "t"              #'evil-find-char-to
       :desc  "visual-char"           "v"              #'evil-visual-char
       :desc  "forward-word-begin"    "w"              #'evil-forward-word-begin
-      :desc  "yank"                  "y"              #'evil-yank
-
-      :desc "visual-block"           "C-v"            #'evil-visual-block
       )
-;; Vision / Hiding
-(map! :map jg-binding-vision-map
-      ;; RET
-      :desc "Widen"         "DEL" #'widen
-      :desc "ispell-word"   "="   #'ispell-word
-      :desc "Scroll Right"  ">"   #'evil-scroll-column-right
-      :desc "Scroll Left"   "<"   #'evil-scroll-column-left
+;;-- end motion state
 
-      :desc "open-fold-rec" "A"   #'evil-open-fold-rec
+;;-- operators
+(map! :map jg-binding-operator-map
+      ;; g > s
+      :desc "Repeat Global Sub"   "&"   #'evil-ex-repeat-global-substitute
 
-      :desc "toggle-fold"   "a"   #'evil-toggle-fold
-      :desc "close-fold"    "d"   #'evil-close-fold
-      :desc "Next Fold"     "j"   #'+fold/next
-      :desc "Prev Fold"     "k"   #'+fold/previous
-      :desc "open-fold"     "o"   #'evil-open-fold
-      :desc "open-folds"    "r"   #'evil-open-folds
-      :desc "Close Folds"   "m"   #'evil-close-folds
+      :desc "Incr"                "="   #'evil-numbers/inc-at-pt
+      :desc "Incr"                "+"   #'evil-numbers/inc-at-pt
+      :desc "Decr"                "-"   #'evil-numbers/dec-at-pt
+      :desc "Last Change"         ";"   #'goto-last-change
+      :desc "Apply Macro"         "@"   #'+evil:apply-macro
+      :desc "Line End"            "$"   #'evil-end-of-visual-line
+      :desc "Line Start"          "0"   #'evil-beginning-of-visual-line
+      :desc "Char"                "?"#'what-cursor-position
+      :desc "Jump Char"           "."   #'evil-avy-goto-char
+      :desc "Jump to Tag"         ","   #'helm-gtags-find-tag
 
-      :desc "Center" "z"          #'evil-scroll-line-to-center
-      :desc "Top"    "t"          #'evil-scroll-line-to-top
-      :desc "Bottom" "b"          #'evil-scroll-line-to-bottom
+      :desc "Invert"              "~"   #'evil-invert-case
 
-      (:prefix ("'" . "Highlight")
-       ;; Reserved
+      :desc "Align"              "a" #'align-regexp
+      :desc "Pop Mark"           "b" #'avy-pop-mark
+      :desc "Push Mark"          "B" #'avy-push-mark
+      :desc "Comment"            "c" #'evilnc-comment-operator
+      :desc "IEdit"              "e" #'iedit-mode
+      :desc "Goto First Line"    "f" #'evil-goto-first-line
+      :desc "Insert Resume"      "i" #'evil-insert-resume
+      :desc "Join whitespace"    "J" #'evil-join-whitespace
+
+      :desc "Middle of Line"     "m" #'evil-middle-of-visual-line
+      :desc "Insert Line"        "o" #'+evil/insert-newline-below
+      :desc "Paste"              "p" #'+evil/alt-paste
+      :desc "Reselect Region"    "P" #'+evil/reselect-paste
+      :desc "Fill"               "q" #'evil-fill-and-move
+      :desc "Eval region"        "r" #'+eval:region
+      :desc "Replace region"     "R" #'+eval:replace-region
+
+      :desc "Upper"              "U"   #'evil-upcase
+      :desc "Down"               "u"   #'evil-downcase
+      :desc "Restore selection"  "v"   #'evil-visual-restore
+      :desc "Wrap Line"          "w"   #'evil-fill
+      :desc "Exchange"           "x"   #'evil-exchange
+      :desc "Yank"               "y"   #'+evil:yank-unindented
+      :desc "Zap to Char"        "z"   #'zap-up-to-char
+
+      (:prefix ("s" . "String-ops")
+       ;; t
+       :desc "Rot13"               "'" #'evil-rot13
+       :desc "Decode url"         "E"  #'+evil:url-decode
+       :desc "Encode url"         "e"  #'+evil:url-encode
+       :desc "Inflection"         "i"  #'evil-operator-string-inflection
+       )
+      (:prefix ("/" . "Search")
+       :desc "Search Word Forward" "*"  #'evil-ex-search-unbounded-word-forward
+       :desc "Goto Definition"      "d" #'evil-goto-definition
+       :desc "Lookup"               "D" #'+lookup/references
+       :desc "Find File at point"   "F" #'evil-find-file-at-point-with-line
+       :desc "Lookup File"          "f" #'+lookup/file
+       :desc "Next Visual"          "j" #'evil-next-visual-line
+       :desc "Previous Visual"      "k" #'evil-previous-visual-line
+       :desc "Regexp Builder"       "r" #'regexp-builder
+       ;; TODO escalate replace op
        )
 
-      (:prefix ("v" . "Vimish Fold")
-       ;; Reserved
+      (:prefix ("l" . "Line-ops")
+       ;; TODO uniquify, remove leading whitespace, split on char
+       ;; r
+       :desc "Justify" "j"                    #'justify-current-line
+       :desc "Flush Lines"                "f" #'flush-lines
+       :desc "Keep Lines"                 "K" #'keep-lines
+       :desc "Delete trailing newlines"   "W" #'doom/delete-trailing-newlines
+       :desc "Delete trailing whitespace" "w" #'delete-trailing-whitespace
+       :desc "Whitespace Cleanup"         "c" #'whitespace-cleanup
+       :desc "Indent"                     "i" #'indent-region
        )
       )
-;; Text objects
+;;-- end operators
+
+;;-- text objects
 (map! :map jg-binding-inner-text-objects-map
       :desc "\""                   "\""  #'evil-inner-double-quote
       :desc "'"                    "'"   #'evil-inner-single-quote
@@ -269,102 +327,20 @@
       :desc  "word"                 "w"  #'evil-a-word
       :desc  "XML attr"             "x"  #'evil-outer-xml-attr
       )
-;; My Operators
-(map! :map jg-binding-operator-map
-      :desc "Repeat Global Sub"   "&"   #'evil-ex-repeat-global-substitute
+;;-- end text objects
 
-      :desc "Incr"                "="   #'evil-numbers/inc-at-pt
-      :desc "Incr"                "+"   #'evil-numbers/inc-at-pt
-      :desc "Decr"                "-"   #'evil-numbers/dec-at-pt
-      :desc "Last Change"         ";"   #'goto-last-change
-      ;; >
-      :desc "Apply Macro"         "@"   #'+evil:apply-macro
-      :desc "Line End"            "$"   #'evil-end-of-visual-line
-      :desc "Line Start"          "0"   #'evil-beginning-of-visual-line
-      :desc "Char"                "?"   #'what-cursor-position
-      :desc "Jump Char"           "."   #'evil-avy-goto-char
-      :desc "Jump to Tag"         ","   #'helm-gtags-find-tag
-
-      :desc "Invert"              "~"   #'evil-invert-case
-
-      :desc "Align"              "a" #'align-regexp
-      :desc "Pop Mark"           "b" #'avy-pop-mark
-      :desc "Push Mark"          "B" #'avy-push-mark
-      :desc "Comment"            "c" #'evilnc-comment-operator
-      :desc "IEdit"              "e" #'iedit-mode
-      :desc "Goto First Line"    "f" #'evil-goto-first-line
-      ;; g
-      :desc "Insert Resume"      "i" #'evil-insert-resume
-      :desc "Join whitespace"    "J" #'evil-join-whitespace
-
-      :desc "Middle of Line"     "m" #'evil-middle-of-visual-line
-      :desc "Insert Line"        "o" #'+evil/insert-newline-below
-      :desc "Paste"              "p" #'+evil/alt-paste
-      :desc "Reselect Region"    "P" #'+evil/reselect-paste
-      :desc "Fill"               "q" #'evil-fill-and-move
-      :desc "Eval region"        "r" #'+eval:region
-      :desc "Replace region"     "R" #'+eval:replace-region
-
-      :desc "Upper"              "U"   #'evil-upcase
-      :desc "Down"               "u"   #'evil-downcase
-      :desc "Restore selection"  "v"   #'evil-visual-restore
-      :desc "Wrap Line"          "w"   #'evil-fill
-      :desc "Exchange"           "x"   #'evil-exchange
-      :desc "Yank"               "y"   #'+evil:yank-unindented
-      :desc "Zap to Char"        "z"   #'zap-up-to-char
-
-      (:prefix ("s" . "String-ops")
-       :desc "Rot13"               "'" #'evil-rot13
-       :desc "Decode url"         "E"  #'+evil:url-decode
-       :desc "Encode url"         "e"  #'+evil:url-encode
-       :desc "Inflection"         "i"  #'evil-operator-string-inflection
-       ;; t
-       )
-      (:prefix ("/" . "Search")
-       :desc "Search Word Forward" "*"  #'evil-ex-search-unbounded-word-forward
-       :desc "Goto Definition"      "d" #'evil-goto-definition
-       :desc "Lookup"               "D" #'+lookup/references
-       :desc "Find File at point"   "F" #'evil-find-file-at-point-with-line
-       :desc "Lookup File"          "f" #'+lookup/file
-       ;; g
-       :desc "Next Visual"          "j" #'evil-next-visual-line
-       :desc "Previous Visual"      "k" #'evil-previous-visual-line
-       ;; s
-       :desc "Regexp Builder"       "r" #'regexp-builder
-
-       ;; TODO escalate replace op
-       )
-
-      (:prefix ("l" . "Line-ops")
-       ;; TODO uniquify, remove leading whitespace, split on char
-       :desc "Justify" "j"                    #'justify-current-line
-       :desc "Flush Lines"                "f" #'flush-lines
-       :desc "Keep Lines"                 "K" #'keep-lines
-       :desc "Delete trailing newlines"   "W" #'doom/delete-trailing-newlines
-       :desc "Delete trailing whitespace" "w" #'delete-trailing-whitespace
-       :desc "Whitespace Cleanup"         "c" #'whitespace-cleanup
-       :desc "Indent"                     "i" #'indent-region
-       ;; r
-       )
-      )
-;; Directional Motion
-(map! :map jg-binding-backward-motion-map
-      ;; RET
-      ;; ]
-      ;; l
-      ;; r
+;;-- operator motion
+(map! :map jg-binding-backward-operator-motion-map
+      ;; RET ] l r
       :desc "Section"      "["   #'evil-backward-section-begin
       :desc "Arg"          "a"   #'evil-backward-arg
-      :desc "Buffer"       "b"   #'previous-buffer
       :desc "Comment"      "c"   #'+evil/previous-comment
       :desc "Git Hunk"     "d"   #'git-gutter:previous-hunk
-      :desc "Error"        "e"   #'previous-error
       :desc "Heading"      "h"   #'outline-previous-visible-heading
       :desc "Begin Method" "m"   #'+evil/previous-beginning-of-method
       :desc "End Method"   "M"   #'+evil/previous-end-of-method
       :desc "Section"      "s"   #'evil-backward-section-begin
-      :desc "Todo"         "t"   #'hl-todo-previous
-      :desc "Workspace"    "w"   #'+workspace/switch-left
+
 
       ;; TODO rotate text
       ;;  (:when (featurep! :editor rotate-text)
@@ -372,40 +348,102 @@
       ;; :n "[r"  #'rotate-text-backward)
 
       )
-(map! :map jg-binding-forward-motion-map
-      ;; r
-      ;; RET
-      ;; l
-      ;; [
+(map! :map jg-binding-forward-operator-motion-map
+      ;; r RET l [
       :desc "Section"      "]" #'evil-forward-section-begin
       :desc "Arg"          "a" #'evil-forward-arg
-      :desc "Buffer"       "b" #'next-buffer
-      :desc "Comment"      "c" #'+evil/next-comment
       :desc "Git Hunk"     "d" #'git-gutter:next-hunk
-      :desc "Error"        "e" #'next-error
       :desc "Heading"      "h" #'outline-next-visible-heading
       :desc "Begin Method" "m" #'+evil/next-beginning-of-method
       :desc "End Method"   "M" #'+evil/next-end-of-method
-      :desc "Section"      "s" #'evil-forward-section-begin ;; #'evil-next-flyspell-error
+      :desc "Section"      "s" #'evil-forward-section-begin
+      )
+;;-- end operator motion
+
+;;-- non-text motion
+(map! :map jg-binding-backward-general-motion-map
+      :desc "Buffer"       "b"   #'previous-buffer
+      :desc "Git Hunk"     "d"   #'git-gutter:previous-hunk
+      :desc "Error"        "e"   #'previous-error
+      :desc "Heading"      "h"   #'outline-previous-visible-heading
+      :desc "Begin Method" "m"   #'+evil/previous-beginning-of-method
+      :desc "End Method"   "M"   #'+evil/previous-end-of-method
+      :desc "Todo"         "t"   #'hl-todo-previous
+      :desc "Workspace"    "w"   #'+workspace/switch-left
+      )
+(map! :map jg-binding-forward-general-motion-map
+      :desc "Section"      "]" #'evil-forward-section-begin
+      :desc "Arg"          "a" #'evil-forward-arg
+      :desc "Git Hunk"     "d" #'git-gutter:next-hunk
+      :desc "Heading"      "h" #'outline-next-visible-heading
+      :desc "Begin Method" "m" #'+evil/next-beginning-of-method
+      :desc "End Method"   "M" #'+evil/next-end-of-method
+      :desc "Section"      "s" #'evil-forward-section-begin
       :desc "Todo"         "t" #'hl-todo-next
       :desc "Workspace"    "w" #'+workspace/switch-right
+      :desc "Buffer"       "b" #'next-buffer
+      :desc "Comment"      "c" #'+evil/next-comment
+      :desc "Error"        "e" #'next-error
       )
+;;-- end non-text motion
 
+;;-- vision
+(map! :map jg-binding-vision-map
+      ;; RET
+      :desc "Widen"         "DEL" #'widen
+      :desc "ispell-word"   "="   #'ispell-word
+      :desc "Scroll Right"  ">"   #'evil-scroll-column-right
+      :desc "Scroll Left"   "<"   #'evil-scroll-column-left
 
-;; Connect the separate maps together
-(map! :map jg-binding-operator-state-map
-      :desc "Backward Motion Op"  "[" jg-binding-backward-motion-map
-      :desc "Forward Motion Op"   "]" jg-binding-forward-motion-map
+      :desc "open-fold-rec" "A"   #'evil-open-fold-rec
+
+      :desc "toggle-fold"   "a"   #'evil-toggle-fold
+      :desc "close-fold"    "d"   #'evil-close-fold
+      :desc "Next Fold"     "j"   #'+fold/next
+      :desc "Prev Fold"     "k"   #'+fold/previous
+      :desc "open-fold"     "o"   #'evil-open-fold
+      :desc "open-folds"    "r"   #'evil-open-folds
+      :desc "Close Folds"   "m"   #'evil-close-folds
+
+      :desc "Center" "z"          #'evil-scroll-line-to-center
+      :desc "Top"    "t"          #'evil-scroll-line-to-top
+      :desc "Bottom" "b"          #'evil-scroll-line-to-bottom
+
+      (:prefix ("'" . "Highlight")
+       ;; Reserved
+       )
+
+      (:prefix ("v" . "Vimish Fold")
+       ;; Reserved
+       )
       )
-(map! :map (jg-binding-normal-state-map jg-binding-visual-state-map jg-binding-motion-state-map)
+;;-- end vision
+
+;;-- stitching together
+(map! :map jg-binding-normal-state-map
       :desc "Do Ops"        "g"   jg-binding-operator-map
       :desc "Visual Ops"    "z"   jg-binding-vision-map
-      :desc "B Motion" "[" jg-binding-backward-motion-map
-      :desc "F Motion"  "]" jg-binding-forward-motion-map
+      :desc "B Motion"      "["   jg-binding-backward-general-motion-map
+      :desc "F Motion"      "]"   jg-binding-forward-general-motion-map
       )
-(map! :map (jg-binding-visual-state-map jg-binding-operator-state-map)
-      :desc "Inner Select"     "i" jg-binding-inner-text-objects-map
-      :desc "Outer Select"     "a" jg-binding-outer-text-objects-map
+
+(map! :map jg-binding-visual-state-map
+      :desc "Do Ops"           "g" jg-binding-operator-map
+      :desc "Visual Ops"       "z" jg-binding-vision-map
+      )
+
+(map! :map jg-binding-motion-state-map
+      :desc "Backward Motion Op"  "[" jg-binding-backward-operator-motion-map
+      :desc "Forward Motion Op"   "]" jg-binding-forward-operator-motion-map
+      :desc "Inner Select"        "i" jg-binding-inner-text-objects-map
+      :desc "Outer Select"        "a" jg-binding-outer-text-objects-map
+      )
+
+(map! :map jg-binding-operator-state-map
+      :desc "Backward Motion Op"  "[" jg-binding-backward-operator-motion-map
+      :desc "Forward Motion Op"   "]" jg-binding-forward-operator-motion-map
+      :desc "Inner Select"        "i" jg-binding-inner-text-objects-map
+      :desc "Outer Select"        "a" jg-binding-outer-text-objects-map
       )
 
 (after! jg-dired-bindings
@@ -444,3 +482,4 @@
 
   (provide 'jg-evil-bindings)
   )
+;;-- end stitching together

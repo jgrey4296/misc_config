@@ -20,14 +20,12 @@
                                   (message "Python Debug Mode: %s" jg-python-dev-mode))
       )
 
-(map! :after (python pyimport)
+(map! :after (python)
       :map python-mode-map
       :localleader
       (:prefix ("i" . "imports")
        :desc "Insert import"          "i" #'+jg-python-insert-import
        :desc "Insert Import Snippet"  "I" #'+jg-python-import-snippet
-       :desc "Remove unused imports"  "r" #'pyimport-remove-unused
-       :desc "Optimize imports"       "o" #'+python/optimize-imports
        :desc "Sort imports"           "s" #'py-isort-buffer
        :desc "Sort region"            "r" #'py-isort-region
        :desc "Collect import blocks"  "c" #'+jg-python-cleanup-import-blocks)

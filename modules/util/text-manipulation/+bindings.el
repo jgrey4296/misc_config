@@ -9,8 +9,8 @@
 
 ;; Text bindings
 ;; (map! :map jg-bindings-operator-map)
-(map! :after jg-leader-bindings-loaded
-      :map jg-binding-vision-map
+(map! :map jg-binding-vision-map
+      :after jg-leader-bindings-loaded
       "1" #'+jg-text-wrap-fold-block
       "i" #'+jg-text-make-invisible
       "I" #'+jg-text-toggle-invisible
@@ -19,8 +19,9 @@
 (map! :after jg-leader-bindings-loaded
       :leader
       (:prefix "t"
-       :desc "Rainbow Mode" :n "v r" #'rainbow-mode
-       :desc "Auto-Hide"    :n "h"   #'+jg-text-toggle-auto-hide
+       :desc "Rainbow Mode"   :n "v r" #'rainbow-mode
+       :desc "Invisible-spec" :n "v I" #'+jg-text-toggle-invisible-spec
+       :desc "Auto-Hide"      :n "h"   #'+jg-text-toggle-auto-hide
        )
       (:prefix "b"
        :desc "Yank Buffer Name" "n"  #'+jg-text-yank-buffer-name
@@ -31,13 +32,13 @@
        )
       )
 
-(map! :after jg-help-bindings
-      :map help-map
+(map! :map help-map
+      :after jg-help-bindings
       :desc "Regex Reminder" "R" #'+jg-text-regex-reminder
       )
 
-(map! :after jg-evil-bindings
-      :map jg-binding-operator-map
+(map! :map jg-binding-operator-map
+      :after jg-evil-bindings
       :prefix "s"
       :desc "Split on distance" "s" #'+jg-text-split-on-leading-char
       :desc "Set Buffer Coding" "B" #'set-buffer-file-coding-system
@@ -45,19 +46,19 @@
       :desc "DECRYPT"           "@" #'+jg-text-decrypt-region
       )
 
-(map! :after jg-evil-bindings
-      :map jg-binding-visual-state-map
+(map! :map jg-binding-visual-state-map
+      :after jg-evil-bindings
       :desc "Mark Buffer"   "RET"      #'+jg-text-whole-buffer-textobj
       )
 
-(map! :after jg-evil-bindings
-      :map jg-binding-operator-state-map
+(map! :map jg-binding-operator-state-map
+      :after jg-evil-bindings
       :desc "Select Line"   "l"   #'+jg-text-line-textobj
       :desc "Select Buffer" "RET" #'+jg-text-whole-buffer-textobj
       )
 
-(map! :after jg-evil-bindings
-      :map jg-binding-operator-map
+(map! :map jg-binding-operator-map
+      :after jg-evil-bindings
       :desc "Goto Column"              ">" #'+jg-text-force-column-motion
       :desc "Complete/Grow Selection"  "g" (cmds! (eq evil-state 'normal) #'company-manual-begin
                                                   (eq evil-state 'visual) #'+jg-text-grow-selection-op)
@@ -73,14 +74,20 @@
        )
       )
 
-(map! :after jg-evil-bindings
-      :map jg-binding-backward-motion-map
+(map! :map jg-binding-backward-operator-motion-map
+      :after jg-evil-bindings
       :desc "Close Paren"  "]"   #'+jg-text-prev-close-paren-motion
       :desc "Empty Line"   "l"   #'+jg-text-prev-empty-line-motion
       )
 
-(map! :after jg-evil-bindings
-      :map jg-binding-forward-motion-map
-      :desc "Open Section" "["   #'+jg-text-next-open-paren-motion ;; #'evil-forward-section-end
-      :desc "Empty Line"   "l" #'+jg-text-next-empty-line-motion
+(map! :map jg-binding-forward-operator-motion-map
+      :after jg-evil-bindings
+      :desc "Open Section" "["   #'+jg-text-next-open-paren-motion
+      :desc "Empty Line"   "l"   #'+jg-text-next-empty-line-motion
+      )
+
+(map! :map jg-binding-inner-text-objects-map
+      ;; :after jg-evil-bindings
+      :desc "Empty lines"  "l" #'+jg-text-blank-block
+
       )

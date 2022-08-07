@@ -110,6 +110,13 @@
       :n ";"                #'helm-toggle-visible-mark
       :n "a"                #'helm-mark-all
       :n "u"                #'helm-unmark-all
+
+      "C-x 5" nil
+      "C-x 6" nil
+      "C-x 7" nil
+      "C-x 8" nil
+      "C-x 9" nil
+      "C-x 0" nil
       )
 
 (map! :after helm

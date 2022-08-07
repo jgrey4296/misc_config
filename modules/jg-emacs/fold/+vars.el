@@ -1,4 +1,6 @@
 ;;; editor/fold/+vars.el -*- lexical-binding: t; -*-
+
+;;-- reminder
 ;;   evil-fold-list = (list ((MODES) PROPERTIES))
 ;;
 ;; MODES acts as a predicate, containing the symbols of all major or
@@ -33,6 +35,8 @@
 ;;                     (show-children))
 ;;      :close      hide-subtree)
 ;;
+;;-- end reminder
+
 
 
 ;; Evil vimish

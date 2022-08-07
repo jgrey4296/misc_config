@@ -43,7 +43,7 @@
 
               jg-bibtex-tweet-pattern "(%s): %s\nby %s\nTags: %s\nRef: %s\n"
 
-              jg-bibtex-open-pdf-cmd "open "
+              jg-bibtex-open-pdf-cmd "open -nF "
               jg-bibtex-open-epub-cmd "open -a ebook-viewer "
               )
 ;;-- end personal settings
@@ -57,8 +57,6 @@
               jg-bibtex-pdf-loc             "~/Mega/pdflibrary"
  )
 ;;-- end locations
-
-
 
 ;;-- hl line
 (after! hl-line

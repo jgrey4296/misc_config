@@ -179,7 +179,7 @@ the entry of interest in the bibfile.  but does not check that."
   " Edit the @type of a bibtex entry, using
 bibtex-BibTeX-entry-alist for completion options "
   (interactive)
-  (let* ((type-options (mapcar 'car bibtex-BibTeX-entry-alist))
+  (let* ((type-options (mapcar 'car bibtex-entry-alist))
          (selection (completing-read "New Bibtex Type: " type-options))
          )
     (save-excursion

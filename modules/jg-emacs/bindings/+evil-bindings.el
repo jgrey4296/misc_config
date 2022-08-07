@@ -273,6 +273,7 @@
 (map! :map jg-binding-operator-map
       :desc "Repeat Global Sub"   "&"   #'evil-ex-repeat-global-substitute
 
+      :desc "Incr"                "="   #'evil-numbers/inc-at-pt
       :desc "Incr"                "+"   #'evil-numbers/inc-at-pt
       :desc "Decr"                "-"   #'evil-numbers/dec-at-pt
       :desc "Last Change"         ";"   #'goto-last-change

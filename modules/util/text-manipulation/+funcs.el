@@ -65,18 +65,19 @@ Used to guard inputs in tag strings"
   (setq jg-text-auto-hide-toggle (not jg-text-auto-hide-toggle))
   (message "Auto Hide: %s" jg-text-auto-hide-toggle))
 
-
 (defun +jg-text-clear-buffer ()
   " Utility to clear a buffer
     from https://stackoverflow.com/questions/24565068/ "
   (interactive)
   (let ((inhibit-read-only t)) (erase-buffer))
   )
+
 (defun +jg-text-insert-lparen ()
   " utility to insert a (  "
   (interactive)
   (insert "(")
   )
+
 (defun +jg-text-insert-rparen ()
   " utility to insert a ) "
   (interactive)

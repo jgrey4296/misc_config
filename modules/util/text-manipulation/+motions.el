@@ -29,7 +29,7 @@
   )
 
 (evil-define-motion +jg-text-prev-empty-line-motion (count)
-  :type inclusive
+  :type line
   (forward-line -1)
   (re-search-backward "^[[:space:]]*$" nil nil (or  count 1))
   )
@@ -58,7 +58,6 @@ Columns are counted from zero."
   (move-to-column (or count 0) t)
   )
 
-
 ;; Text Objects
 (evil-define-text-object +jg-text-grow-selection-op (count)
   " Grow the selection on either side by count "
@@ -80,6 +79,24 @@ Columns are counted from zero."
   :type inclusive
   (interactive)
   (list (point-min) (point-max))
+  )
+
+(evil-define-text-object +jg-text-blank-block (count &rest rest)
+  :type inclusive
+  :extend-selection t
+  (interactive)
+  (save-excursion
+    (let (beg end)
+      (goto-char evil-visual-beginning)
+      (re-search-backward "[[:graph:]]" nil t)
+      (forward-line 2)
+      (setq beg (line-beginning-position))
+      (re-search-forward "[[:graph:]]" nil t)
+      (forward-line -0)
+      (setq end (line-beginning-position))
+      (list beg end)
+      )
+    )
   )
 
 ;; Operators

@@ -77,28 +77,29 @@
   :type inclusive
   :keep-visual t
   (interactive "<R>p")
-  (if (eq prefix 4)
-      ;; Toggle the spec
-      (cond ((assoc 'jg-text-invis buffer-invisibility-spec)
-             (setq buffer-invisibility-spec (assq-delete-all 'jg-text-invis buffer-invisibility-spec)))
-            (t
-             (push '(jg-text-invis . t) buffer-invisibility-spec)
-             ))
-    ;; Toggle the property
-    (alter-text-property beg end 'invisible
-                         (lambda (val)
-                           (cond ((eq val 'jg-text-invis)
-                                  'jg-text-invis-disabled
-                                  )
-                                 ((eq val 'jg-text-invis-disabled)
-                                  'jg-text-invis)
-                                 (t val)
-                                 )
-                           )
+  ;; Toggle the property
+  (alter-text-property beg end 'invisible
+                       (lambda (val)
+                         (cond ((eq val 'jg-text-invis)
+                                'jg-text-invis-disabled
+                                )
+                               ((eq val 'jg-text-invis-disabled)
+                                'jg-text-invis)
+                               (t val)
+                               )
                          )
-    )
+                       )
   )
 
+(defun +jg-text-toggle-invisible-spec ()
+  (interactive)
+  (cond ((assoc 'jg-text-invis buffer-invisibility-spec)
+         (setq buffer-invisibility-spec (assq-delete-all 'jg-text-invis buffer-invisibility-spec)))
+        (t
+         (push '(jg-text-invis . t) buffer-invisibility-spec)
+         )
+        )
+  )
 
 (cl-defun +jg-text-fold-block-gen (&rest rst &key name (end nil) (re nil) (newlines nil) (comment comment-start))
   " Single point to build fold block markers

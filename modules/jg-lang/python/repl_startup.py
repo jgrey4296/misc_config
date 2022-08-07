@@ -5,6 +5,7 @@
 ##-- imports
 from __future__ import annotations
 
+from os import getcwd
 import pathlib
 import abc
 import argparse
@@ -45,3 +46,6 @@ if args.dir:
     print('Path Amended')
 
 print('reload function imported')
+
+def cwd():
+    print(getcwd())

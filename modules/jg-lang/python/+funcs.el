@@ -37,8 +37,15 @@
   " insert the literal string provided/read from minibuffer, at the imports section
 of a python file "
   (interactive)
-  (let ((arg (if (not arg) (read-string "Import Statement: " "import ") arg)))
-    (pyimport--insert-import arg))
+  (save-excursion
+    (goto-char (point-min))
+    (let ((arg (if (not arg) (read-string "Import Statement: " "import ") arg)))
+      (re-search-forward (+jg-text-fold-block-gen :name "imports" :re t))
+      (re-search-forward "^$")
+      (insert "\n")
+      (insert arg)
+      )
+    )
   )
 
 (defun +jg-python-import-snippet (&optional arg)

@@ -2,9 +2,9 @@
 ;;; lang/jg-python/packages.el
 
 (package! jg-python-origami :recipe (:local-repo "~/.doom.d/packages/jg-python-origami"))
-(package! pipenv :disable t)
 (package! python :recipe (:host github :repo "emacs-straight/python"))
-(package! pyimport)
+(package! pipenv :disable t)
+(package! pyimport :disable t)
 ;; (package! lsp-jedi)
 ;; (package! lsp-python-ms)
 (package! lsp-pyright)

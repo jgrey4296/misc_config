@@ -29,7 +29,7 @@
 
                 python-shell-interpreter "python3"
                 python-shell-interpreter-args "-i"
-                python-shell-interpreter-path-args "/Volumes/documents/github/emacs_files/modules/lang/jg-python/repl_startup.py "
+                python-shell-interpreter-path-args "/Volumes/documents/github/emacs_files/modules/jg-lang/python/repl_startup.py "
                 )
   (modify-syntax-entry ?_ "_" python-mode-syntax-table)
   )

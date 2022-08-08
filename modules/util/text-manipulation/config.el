@@ -8,7 +8,6 @@
   (load! "+state")
   (load! "+hooks")
   (load! "+bindings")
-  (load! "+advice")
   (add-hook! 'prog-mode-hook :depth 80 #'+jg-text-auto-hide)
 )
 

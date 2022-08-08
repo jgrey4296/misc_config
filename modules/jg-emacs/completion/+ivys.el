@@ -25,8 +25,14 @@
     )
   )
 
-;;-- end utils
+(defun +jg-completion-ivy-kill-buffer (buff)
+  (interactive)
+  (with-current-buffer buff
+    (kill-current-buffer)
+    )
+  )
 
+;;-- end utils
 
 ;;-- actions
 ;; Overrides find-file's actions to add "f" for find literally
@@ -34,10 +40,12 @@
                  '(("f" (lambda (x) (find-file-literally x)) "Fundamental")))
 
 (ivy-set-actions 'ivy-switch-buffer
-                 '(("p" +jg-completion-ivy-open-as-popup "Popup")))
+                 '(("p" +jg-completion-ivy-open-as-popup "Popup")
+                   ("k" +jg-completion-ivy-kill-buffer "Kill")
+                   ))
+
 
 ;;-- end actions
-
 
 ;;-- ivys
 (defun +jg-completion-switch-buffer ()
@@ -63,12 +71,6 @@
             )
   )
 ;;-- end ivys
-
-
-
-
-
-
 
 ;;-- advice
 (define-advice projectile-run-compilation (:filter-args (val)

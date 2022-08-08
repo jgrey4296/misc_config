@@ -1,5 +1,91 @@
 ;;; editor/fold/+vars.el -*- lexical-binding: t; -*-
 
+;;-- auto-hide
+(setq-default jg-fold-auto-hide-toggle t
+              jg-fold-block-pattern "%s-- %s"
+              jg-fold-block-depth 2
+              )
+;;-- end auto-hide
+
+;;-- evil-vimish
+(setq jg-vimish-fold-spec '((vimish-fold-mode)
+                                 :delete     vimish-fold-delete
+                                 :open-all   vimish-fold-unfold-all
+                                 :close-all  vimish-fold-refold-all
+                                 :toggle     vimish-fold-toggle
+                                 :open       vimish-fold-unfold
+                                 :open-rec   nil
+                                 :close      vimish-fold-refold))
+;;-- end evil-vimish
+
+;;-- hide show
+(setq jg-hs-fold-spec `((hs-minor-mode emacs-lisp-mode lisp-mode)
+                        :open-all   hs-show-all
+                        :close-all  hs-hide-all
+                        :toggle     hs-toggle-hiding
+                        :open       hs-show-block
+                        :open-rec   nil
+                        :close      hs-hide-block))
+;;-- end hide show
+
+;;-- origami
+(setq jg-origami-fold-spec `((origami-mode)
+                             :open-all   ,(lambda () (origami-open-all-nodes (current-buffer)))
+                             :close-all  ,(lambda () (origami-close-all-nodes (current-buffer)))
+                             :toggle     ,(lambda () (origami-toggle-node (current-buffer) (point)))
+                             :open       ,(lambda () (origami-open-node (current-buffer) (point)))
+                             :open-rec   ,(lambda () (origami-open-node-recursively (current-buffer) (point)))
+                             :close      ,(lambda () (origami-close-node (current-buffer) (point)))))
+;;-- end origami
+
+;;-- outline
+(setq jg-outline-fold-spec `((outline-mode outline-minor-mode org-mode markdown-mode)
+                             :open-all   outline-show-all
+                             :close-all  ,(lambda ()
+                                            (with-no-warnings (outline-hide-sublevels 1)))
+                             :toggle     outline-toggle-children
+                             :open       ,(lambda ()
+                                            (with-no-warnings
+                                              (outline-show-entry)
+                                              (outline-show-children)))
+                             :open-rec   outline-show-subtree
+                             :close      outline-hide-subtree))
+;;-- end outline
+
+;;-- c like ifdef
+(setq jg-ifdef-fold-spec `((hide-ifdef-mode)
+                           :open-all   show-ifdefs
+                           :close-all  hide-ifdefs
+                           :toggle     nil
+                           :open       show-ifdef-block
+                           :open-rec   nil
+                           :close      hide-ifdef-block))
+;;-- end c like ifdef
+
+;;-- diff mode
+(setq jg-diff-fold-spec `((vdiff-mode vdiff-3way-mode)
+                          :open-all   vdiff-open-all-folds
+                          :close-all  vdiff-close-all-folds
+                          :toggle     ,(lambda () (call-interactively 'vdiff-toggle-fold))
+                          :open       ,(lambda () (call-interactively 'vdiff-open-fold))
+                          :open-rec   ,(lambda () (call-interactively 'vdiff-open-fold))
+                          :close      ,(lambda () (call-interactively 'vdiff-close-fold))))
+;;-- end diff mode
+
+;;-- all together
+(setq jg-fold-vars-fold-list (list
+                             jg-diff-fold-spec
+                             jg-ifdef-fold-spec
+                             jg-outline-fold-spec
+                             jg-origami-fold-spec
+                             jg-hs-fold-spec
+                             jg-vimish-fold-spec
+                             ))
+(setq evil-fold-list jg-fold-vars-fold-list)
+;;-- end all together
+
+(provide 'jg-fold-specs)
+
 ;;-- reminder
 ;;   evil-fold-list = (list ((MODES) PROPERTIES))
 ;;
@@ -36,87 +122,3 @@
 ;;      :close      hide-subtree)
 ;;
 ;;-- end reminder
-
-
-;;-- auto-hide
-(setq-default jg-fold-auto-hide-toggle t
-              jg-fold-block-pattern "%s-- %s"
-              jg-fold-block-depth 2
-              )
-;;-- end auto-hide
-
-;; Evil vimish
-(setq jg-vimish-fold-spec '((vimish-fold-mode)
-                                 :delete     vimish-fold-delete
-                                 :open-all   vimish-fold-unfold-all
-                                 :close-all  vimish-fold-refold-all
-                                 :toggle     vimish-fold-toggle
-                                 :open       vimish-fold-unfold
-                                 :open-rec   nil
-                                 :close      vimish-fold-refold))
-
-;; Hide Show
-(setq jg-hs-fold-spec `((hs-minor-mode emacs-lisp-mode lisp-mode)
-                        :open-all   hs-show-all
-                        :close-all  hs-hide-all
-                        :toggle     hs-toggle-hiding
-                        :open       hs-show-block
-                        :open-rec   nil
-                        :close      hs-hide-block))
-;; Origami
-(setq jg-origami-fold-spec `((origami-mode)
-                             :open-all   ,(lambda () (origami-open-all-nodes (current-buffer)))
-                             :close-all  ,(lambda () (origami-close-all-nodes (current-buffer)))
-                             :toggle     ,(lambda () (origami-toggle-node (current-buffer) (point)))
-                             :open       ,(lambda () (origami-open-node (current-buffer) (point)))
-                             :open-rec   ,(lambda () (origami-open-node-recursively (current-buffer) (point)))
-                             :close      ,(lambda () (origami-close-node (current-buffer) (point)))))
-;; Outline
-(setq jg-outline-fold-spec `((outline-mode outline-minor-mode org-mode markdown-mode)
-                             :open-all   outline-show-all
-                             :close-all  ,(lambda ()
-                                            (with-no-warnings (outline-hide-sublevels 1)))
-                             :toggle     outline-toggle-children
-                             :open       ,(lambda ()
-                                            (with-no-warnings
-                                              (outline-show-entry)
-                                              (outline-show-children)))
-                             :open-rec   outline-show-subtree
-                             :close      outline-hide-subtree))
-;; C-like ifdef pragmas
-(setq jg-ifdef-fold-spec `((hide-ifdef-mode)
-                           :open-all   show-ifdefs
-                           :close-all  hide-ifdefs
-                           :toggle     nil
-                           :open       show-ifdef-block
-                           :open-rec   nil
-                           :close      hide-ifdef-block))
-
-;; Diff modes:
-(setq jg-diff-fold-spec `((vdiff-mode vdiff-3way-mode)
-                          :open-all   vdiff-open-all-folds
-                          :close-all  vdiff-close-all-folds
-                          :toggle     ,(lambda () (call-interactively 'vdiff-toggle-fold))
-                          :open       ,(lambda () (call-interactively 'vdiff-open-fold))
-                          :open-rec   ,(lambda () (call-interactively 'vdiff-open-fold))
-                          :close      ,(lambda () (call-interactively 'vdiff-close-fold))))
-;; Lisp:
-(setq jg-lisp-fold-spec `((emacs-lisp-mode lisp-mode)
-                          :open-all   hs-show-all
-                          :close-all  hs-hide-all
-                          :toggle     hs-toggle-hiding
-                          :open       hs-show-block
-                          :open-rec   nil
-                          :close      hs-hide-block))
-;
-;; All Togther now:
-(setq jg-fold-vars-fold-list (list
-                             jg-diff-fold-spec
-                             jg-ifdef-fold-spec
-                             jg-lisp-fold-spec
-                             jg-outline-fold-spec
-                             jg-origami-fold-spec
-                             jg-hs-fold-spec
-                             jg-vimish-fold-spec
-                             ))
-(setq evil-fold-list jg-fold-vars-fold-list)

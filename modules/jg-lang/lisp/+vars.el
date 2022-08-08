@@ -2,6 +2,22 @@
 
 (add-to-list 'auto-mode-alist '("\\.el\\.gz" . emacs-lisp-mode))
 
+
+;;-- fold spec
+(after! jg-fold-specs
+  (setq jg-lisp-fold-spec `((emacs-lisp-mode lisp-mode)
+                            :open-all   hs-show-all
+                            :close-all  hs-hide-all
+                            :toggle     hs-toggle-hiding
+                            :open       hs-show-block
+                            :open-rec   nil
+                            :close      hs-hide-block))
+  (push jg-lisp-fold-spec evil-fold-list)
+  )
+;;-- end fold spec
+
+
+;;-- file templates
 (after! jg-file-templates
   ;; Lisp
   (+jg-completion-add-file-templates
@@ -21,3 +37,4 @@
    )
   (+jg-completion-activate-file-templates)
 )
+;;-- end file templates

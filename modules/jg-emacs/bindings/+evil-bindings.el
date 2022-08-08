@@ -243,6 +243,7 @@
        :desc "Decode url"         "E"  #'+evil:url-decode
        :desc "Encode url"         "e"  #'+evil:url-encode
        :desc "Inflection"         "i"  #'evil-operator-string-inflection
+       :desc "ispell-word"   "="   #'ispell-word
        )
       (:prefix ("/" . "Search")
        :desc "Search Word Forward" "*"  #'evil-ex-search-unbounded-word-forward
@@ -389,21 +390,11 @@
 
 ;;-- vision
 (map! :map jg-binding-vision-map
-      ;; RET
+      ;; RET, 1, aAdocrjkIi
       :desc "Widen"         "DEL" #'widen
-      :desc "ispell-word"   "="   #'ispell-word
       :desc "Scroll Right"  ">"   #'evil-scroll-column-right
       :desc "Scroll Left"   "<"   #'evil-scroll-column-left
 
-      :desc "open-fold-rec" "A"   #'evil-open-fold-rec
-
-      :desc "toggle-fold"   "a"   #'evil-toggle-fold
-      :desc "close-fold"    "d"   #'evil-close-fold
-      :desc "Next Fold"     "j"   #'+fold/next
-      :desc "Prev Fold"     "k"   #'+fold/previous
-      :desc "open-fold"     "o"   #'evil-open-fold
-      :desc "open-folds"    "r"   #'evil-open-folds
-      :desc "Close Folds"   "m"   #'evil-close-folds
 
       :desc "Center" "z"          #'evil-scroll-line-to-center
       :desc "Top"    "t"          #'evil-scroll-line-to-top

@@ -1,11 +1,11 @@
 ;;; +hooks.el -*- lexical-binding: t; -*-
 
-(defun +jg-text-auto-hide ()
+(defun +jg-fold-auto-hide ()
   " Add auto-hiding on buffer open.
-Vimish-fold's any blocks matching jg-text-fold-block-gen's :re pattern
+Vimish-fold's any blocks matching jg-fold-block-gen's :re pattern
 "
   (message "Running Auto Hide: %s %s" major-mode comment-start)
-  (if (and global-evil-vimish-fold-mode jg-text-auto-hide-toggle)
+  (if (and global-evil-vimish-fold-mode jg-fold-auto-hide-toggle)
     (save-excursion
       (beginning-of-buffer)
       (vimish-fold-delete-all)

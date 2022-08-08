@@ -6,9 +6,7 @@
   (load! "+operators")
   (load! "+motions")
   (load! "+state")
-  (load! "+hooks")
   (load! "+bindings")
-  (add-hook! 'prog-mode-hook :depth 80 #'+jg-text-auto-hide)
 )
 
 (use-package! academic-phrases

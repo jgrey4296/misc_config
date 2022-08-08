@@ -38,6 +38,12 @@
 ;;-- end reminder
 
 
+;;-- auto-hide
+(setq-default jg-fold-auto-hide-toggle t
+              jg-fold-block-pattern "%s-- %s"
+              jg-fold-block-depth 2
+              )
+;;-- end auto-hide
 
 ;; Evil vimish
 (setq jg-vimish-fold-spec '((vimish-fold-mode)

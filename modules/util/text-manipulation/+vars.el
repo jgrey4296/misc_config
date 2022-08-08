@@ -1,8 +1,5 @@
 ;;; util/text/+vars.el -*- lexical-binding: t; -*-
 (setq-default jg-text-last-similarity-arg 1
-              jg-fold-block-pattern "%s-- %s"
-              jg-fold-block-depth 2
-              jg-text-auto-hide-toggle t
               jg-text-debug-snippet-name "util.debug"
               )
 

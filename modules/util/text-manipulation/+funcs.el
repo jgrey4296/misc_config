@@ -60,11 +60,6 @@ Used to guard inputs in tag strings"
   (message (kill-new (buffer-name)))
   )
 
-(defun +jg-text-toggle-auto-hide ()
-  (interactive)
-  (setq jg-text-auto-hide-toggle (not jg-text-auto-hide-toggle))
-  (message "Auto Hide: %s" jg-text-auto-hide-toggle))
-
 (defun +jg-text-clear-buffer ()
   " Utility to clear a buffer
     from https://stackoverflow.com/questions/24565068/ "

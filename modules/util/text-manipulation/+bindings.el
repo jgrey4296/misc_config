@@ -11,7 +11,6 @@
 ;; (map! :map jg-bindings-operator-map)
 (map! :map jg-binding-vision-map
       :after jg-leader-bindings-loaded
-      "1" #'+jg-text-wrap-fold-block
       "i" #'+jg-text-make-invisible
       "I" #'+jg-text-toggle-invisible
       )
@@ -21,7 +20,6 @@
       (:prefix "t"
        :desc "Rainbow Mode"   :n "v r" #'rainbow-mode
        :desc "Invisible-spec" :n "v I" #'+jg-text-toggle-invisible-spec
-       :desc "Auto-Hide"      :n "h"   #'+jg-text-toggle-auto-hide
        )
       (:prefix "b"
        :desc "Yank Buffer Name" "n"  #'+jg-text-yank-buffer-name

@@ -68,7 +68,7 @@ Hides imports in a vimish fold,
 Add any sections commented with jg-python-fold-block-[start|end]-re
 and closes classes and functions, re-opening only the first class "
   (message "Running Python Auto Hide")
-  (if jg-text-auto-hide-toggle
+  (if jg-fold-auto-hide-toggle
       (save-excursion
         (beginning-of-buffer)
         (evil-open-folds)

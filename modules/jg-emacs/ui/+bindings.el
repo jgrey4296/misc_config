@@ -89,6 +89,18 @@
 (map! :map messages-buffer-mode-map
       :after message
       :n "q" #'+popup/close
+
+      :desc  "backward-word-begin"   "b"              #'evil-backward-word-begin
+      :desc  "forward-word-end"      "e"              #'evil-forward-word-end
+      :desc  "find-char"             "f"              #'evil-find-char
+      :desc  "backward-char"         "h"              #'evil-backward-char
+      :desc  "next-line"             "j"              #'evil-next-line
+      :desc  "previous-line"         "k"              #'evil-previous-line
+      :desc  "forward-char"          "l"              #'evil-forward-char
+      :desc  "ex-search-next"        "n"              #'evil-ex-search-next
+      :desc  "find-char-to"          "t"              #'evil-find-char-to
+      :desc  "visual-char"           "v"              #'evil-visual-char
+      :desc  "forward-word-begin"    "w"              #'evil-forward-word-begin
       )
 
 (map! :map emacs-lisp-mode-map

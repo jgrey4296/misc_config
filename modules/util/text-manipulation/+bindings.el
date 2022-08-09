@@ -37,12 +37,15 @@
 
 (map! :map jg-binding-operator-map
       :after jg-evil-bindings
-      :prefix "s"
+      (:prefix "s"
       :desc "Split on distance" "s" #'+jg-text-split-on-leading-char
       :desc "Set Buffer Coding" "B" #'set-buffer-file-coding-system
       :desc "ENCRYPT"           "!" #'+jg-text-encrypt-region
       :desc "DECRYPT"           "@" #'+jg-text-decrypt-region
       )
+      :desc "Rotate"            "r" #'rotate-text
+      )
+
 
 (map! :map jg-binding-visual-state-map
       :after jg-evil-bindings

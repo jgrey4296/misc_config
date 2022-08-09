@@ -137,7 +137,7 @@
 
 (map! :map emacs-lisp-mode-map
       :localleader
-      "i f" #'+jg-counsel-features
+      "i f" #'+jg-completion-counsel-features
       )
 
 (map! :after jg-evil-bindings

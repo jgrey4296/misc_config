@@ -206,7 +206,7 @@
       :desc "Apply Macro"         "@"   #'+evil:apply-macro
       :desc "Line End"            "$"   #'evil-end-of-visual-line
       :desc "Line Start"          "0"   #'evil-beginning-of-visual-line
-      :desc "Char"                "?"#'what-cursor-position
+      :desc "Char"                "?"   #'what-cursor-position
       :desc "Jump Char"           "."   #'evil-avy-goto-char
       :desc "Jump to Tag"         ","   #'helm-gtags-find-tag
 
@@ -223,16 +223,15 @@
 
       :desc "Middle of Line"     "m" #'evil-middle-of-visual-line
       :desc "Insert Line"        "o" #'+evil/insert-newline-below
-      :desc "Paste"              "p" #'+evil/alt-paste
-      :desc "Reselect Region"    "P" #'+evil/reselect-paste
-      :desc "Fill"               "q" #'evil-fill-and-move
-      :desc "Eval region"        "r" #'+eval:region
+
       :desc "Replace region"     "R" #'+eval:replace-region
 
       :desc "Upper"              "U"   #'evil-upcase
       :desc "Down"               "u"   #'evil-downcase
+
       :desc "Restore selection"  "v"   #'evil-visual-restore
       :desc "Wrap Line"          "w"   #'evil-fill
+      :desc "Fill"               "q"   #'evil-fill-and-move
       :desc "Exchange"           "x"   #'evil-exchange
       :desc "Yank"               "y"   #'+evil:yank-unindented
       :desc "Zap to Char"        "z"   #'zap-up-to-char
@@ -243,7 +242,7 @@
        :desc "Decode url"         "E"  #'+evil:url-decode
        :desc "Encode url"         "e"  #'+evil:url-encode
        :desc "Inflection"         "i"  #'evil-operator-string-inflection
-       :desc "ispell-word"   "="   #'ispell-word
+       :desc "ispell-word"        "="   #'ispell-word
        )
       (:prefix ("/" . "Search")
        :desc "Search Word Forward" "*"  #'evil-ex-search-unbounded-word-forward

@@ -6,3 +6,6 @@
   (load! "+bindings")
   (load! "+advice")
   )
+
+(use-package! ffap)
+(use-package! find-func)

@@ -17,6 +17,15 @@
       )
 ;;-- end personal vars
 
+;;-- rotate text
+(set-rotate-patterns! 'emacs-lisp-mode
+  :symbols '(("True" "False")
+
+             )
+  )
+
+;;-- end rotate text
+
 ;;-- general python
 (after! python
   (setq-default python-indent-offset 4

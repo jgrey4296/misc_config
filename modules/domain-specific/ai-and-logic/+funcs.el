@@ -16,3 +16,10 @@
 
 
 ;; Also: initial fact list, all heads list, constraints list
+
+
+(defun +jg-pasp-eval (beg end)
+  "Evaluate a region and print it to the echo area (if one line long), otherwise
+to a pop up buffer."
+  (pasp-run-buffer)
+)

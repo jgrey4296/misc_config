@@ -22,15 +22,6 @@
   (get-buffer-create soar-comint-buffer-name)
   )
 
-(defun +clingo/open-repl (&optional arg)
-  (interactive "P")
-  (if (not (bufferp clingo-repl-buffer-name))
-      (make-comint-in-buffer clingo-repl-buffer-name
-                             (get-buffer-create clingo-repl-buffer-name)
-                             clingo-executable))
-  (get-buffer-create clingo-repl-buffer-name)
-  )
-
 (defun +clips-mode/open-repl (&optional arg)
   (interactive "P")
   (require 'clips-mode)
@@ -52,5 +43,4 @@
 (set-repl-handler! 'clips-mode  '+clips-mode/open-repl)
 (set-repl-handler! 'instal-mode '+instal-mode/open-repl)
 (set-repl-handler! 'soar-mode   '+soar-mode/open-repl)
-(set-repl-handler! 'clingo-mode '+clingo/open-repl)
 (set-repl-handler! 'ceptre-mode '+ceptre-mode/open-repl)

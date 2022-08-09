@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: header
+# uuid: header
+# key:  header
+# --
+% -*- mode:pasp; -*-
+%% pasp-arg: --help=2
+%% pasp-arg: --pre=aspif
+%% pasp-arg: --text
+%% pasp-arg: --output reify
+% pasp-arg: -W all
+% pasp-arg: --keep-facts
+% pasp-arg: --stats=1
+% pasp-arg: -n 5
+% pasp-arg: --time-limit=5
+% pasp-arg: --verbose=0

@@ -38,3 +38,8 @@
                       :underline nil
                       )
 )
+
+(use-package! pasp-mode
+  :init
+  (add-to-list 'auto-mode-alist '("\\.lp4" . pasp-mode ))
+  )

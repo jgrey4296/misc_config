@@ -5,15 +5,18 @@
 
 ;;-- emacs source paths
 (after! (ffap find-func)
+  (let ((paths-to-add (-concat
+                       (ffap-all-subdirs "/Volumes/documents/github/emacs-src/lisp/" 1)
+                       (ffap-all-subdirs (expand-file-name "straight/repos" doom-local-dir) 1)
+                       (ffap-all-subdirs (expand-file-name "modules" doom-private-dir))
+                       (ffap-all-subdirs (expand-file-name "packages" doom-private-dir)))))
   (mapc (lambda (x)
           (add-to-list 'find-library-source-path x))
-        (ffap-all-subdirs "/usr/local/Cellar/emacs/28.1/share/emacs/28.1/lisp/"))
-  (mapc (lambda (x)
-          (add-to-list 'find-library-source-path x))
-        (ffap-all-subdirs "/Users/johngrey/.emacs.d/.local/straight/repos/"))
-  (setq find-function-C-source-directory "/Volumes/documents/github/emacs-src/src")
+        paths-to-add)
   )
+  (setq find-function-C-source-directory "/Volumes/documents/github/emacs-src/src")
 
+)
 ;;-- end emacs source paths
 
 ;;-- rotate text

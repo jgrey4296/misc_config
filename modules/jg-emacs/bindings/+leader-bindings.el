@@ -225,7 +225,7 @@
   ;;; <leader> j -- Jumping
 (map! :leader
       :prefix ("j" . "Jump")
-      ;; 1 2 3 "u"
+      ;; 1 2 3 "u" "h"
 
       :desc "Parse File"            "!" #'helm-gtags-parse-file
       :desc "Jump to Char"          "." #'avy-goto-char

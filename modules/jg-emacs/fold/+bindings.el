@@ -3,6 +3,7 @@
 (map! :after jg-lead-bindings-loaded
       :leader
       :desc "Auto-Hide"      :n "t h"   #'+jg-fold-toggle-auto-hide
+      :desc "Jump to Auto-hide-heading" :n "j h" #'+jg-fold-jump-to-heading
       )
 
 (map! :after (vimish-fold jg-evil-bindings)

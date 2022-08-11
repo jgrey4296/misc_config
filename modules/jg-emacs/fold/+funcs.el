@@ -8,7 +8,7 @@
 
 (cl-defun +jg-fold-block-gen (&rest rst &key name (end nil) (re nil) (newlines nil) (comment comment-start))
   " Single point to build fold block markers
-Atuo-recognizes the current major-mode's commment syntax
+Auto-recognizes the current major-mode's commment syntax
  "
   (let* ((comment-str (apply 'concat (make-list jg-fold-block-depth (s-trim comment))))
          (end-str (if end "end " nil))
@@ -21,3 +21,22 @@ Atuo-recognizes the current major-mode's commment syntax
           (re       (s-concat "^[[:blank:]]*" full-pattern))
           (newlines (s-concat (if end "\n" "") full-pattern "\n"))
           (t full-pattern))))
+
+
+(defun +jg-fold-jump-to-heading ()
+  " Ivy to jump to auto-hide sections  "
+  (interactive)
+  (let (sections)
+    (save-excursion
+      (goto-char (point-min))
+      (while (re-search-forward (+jg-fold-block-gen :re t) nil t)
+        (if (not (s-contains? "end " (match-string 1)))
+            (push (match-string 1) sections)
+          )
+        )
+      )
+    (goto-char (point-min))
+    (re-search-forward (+jg-fold-block-gen :name (ivy-read "Heading: " sections)) nil t)
+    (beginning-of-line)
+    )
+  )

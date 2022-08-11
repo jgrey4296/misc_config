@@ -42,17 +42,21 @@
                 python-shell-interpreter-path-args "/Volumes/documents/github/emacs_files/modules/jg-lang/python/repl_startup.py "
                 )
   (modify-syntax-entry ?_ "_" python-mode-syntax-table)
+  )
+;;-- end general python
 
+;;-- outline
+(after! python
   (setq jg-python-outline-regexp
-        (python-rx (or (>= 2 eol))
-                       ?#
+        (python-rx (or ?#
                        upper
                        (: (* space) block-start)
                        (: (* space) ?@)
                        )
+                   )
         )
   )
-;;-- end general python
+;;-- end outline
 
 ;;-- projectile
 (after! projectile

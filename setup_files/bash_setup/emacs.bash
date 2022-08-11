@@ -19,4 +19,4 @@ GTAGSCONF=~/.shell_files/gtags.conf
 GTAGSLABEL=pygments
 
 #Default editor:
-EDITOR=emacs
+EDITOR="vim"

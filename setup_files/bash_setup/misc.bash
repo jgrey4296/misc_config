@@ -63,3 +63,6 @@ PS1=' (\j): \D{%D} \A \u ($DEPTH_PROMPT):  '
 
 #Shell Location update
 SHELL="$(which bash)"
+
+# TEMP locations
+TMPDIR="~/.temp"

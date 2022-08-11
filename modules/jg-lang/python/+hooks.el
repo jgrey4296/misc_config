@@ -19,14 +19,7 @@
 ;;; Code:
 
 (defun +jg-python-outline-regexp-override-hook ()
-  (setq-local outline-regexp
-              (python-rx (or (: line-start (>= 2 eol))
-                      (: line-start ?#)
-                      (: line-start upper)
-                      (: (* space) block-start)
-                      (: (* space) ?@)
-                      ))
-              )
+  (setq-local outline-regexp jg-python-outline-regexp)
   )
 
 (define-advice +python-use-correct-flycheck-executables-h (:override ()

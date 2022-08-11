@@ -113,7 +113,7 @@ Modified to pre-sort bookmarks, caselessly
                                +file-templates-dir
                                doom-snippets-dir
                                yasnippet-snippets-dir)
-        yas--default-user-snippets-dir yas-snippet-dirs)
+        yas--default-user-snippets-dir (car yas-snippet-dirs))
   (let ((all-rules (copy-sequence (-flatten-n 1 (hash-table-values jg-completion-file-template-rules)))))
     (setq +file-templates-alist
           (mapcar #'cdr (sort all-rules #'(lambda (x y) (< (car x) (car y))))))

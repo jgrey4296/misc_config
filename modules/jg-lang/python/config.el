@@ -10,6 +10,7 @@
   (load! "+bindings")
   (load! "+nav")
   )
+(load! "+advice")
 (load! "+env")
 
 (use-package! pyimport

@@ -20,8 +20,8 @@
 ;;; Code:
 (defun +jg-completion-snippet--completing-read-uuid (prompt all-snippets &rest args)
   (let* ((snippet-data (cl-loop for (_ . tpl) in (mapcan #'yas--table-templates (if all-snippets
-                                                                                   (hash-table-values yas--tables)
-                                                                                 (yas--get-snippet-tables)))
+                                                                                    (hash-table-values yas--tables)
+                                                                                  (yas--get-snippet-tables)))
 
                                 unless (null (yas--template-load-file tpl))
                                 for txt = (format "%-25s%-30s%s"

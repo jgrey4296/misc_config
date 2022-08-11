@@ -180,7 +180,7 @@ It's platform specific in that it uses the platform's native path separator."
   )
 )
 
-(define-advice python-shell-calculate-command (:override ()
+(define-advice python-shell-calculate-command (:override (&optional filepath)
                                                +jg-python-shell-calculate-command)
   "Calculate the string used to execute the inferior Python process.
 Adds in a few extra options like dev mode control,
@@ -196,12 +196,30 @@ and adding extra pythonpath locations as the pre-args
                      python-shell-interpreter-args
                      (if jg-python-dev-mode jg-python-dev-cmd)
                      (format jg-python-pycache-cmd (f-canonical jg-python-pycache-loc))
-                     python-shell-interpreter-path-args
+                     (or filepath python-shell-interpreter-path-args)
                      ;; "--dir" (doom-project-root)
                      )
                     )
           )
   )
+
+(defun +python/open-file-repl ()
+  (interactive)
+  (cl-assert (eq (with-current-buffer (current-buffer) major-mode) 'python-mode))
+  (unless python-shell-interpreter
+    (user-error "`python-shell-interpreter' isn't set"))
+
+  (let* ((default-directory (doom-project-root))
+         (cmd (python-shell-calculate-command (buffer-file-name)))
+         (new-buffer (process-buffer
+                      (run-python cmd nil t))))
+    (puthash (cons 'inferior-python-mode default-directory) new-buffer +eval-repl-buffers)
+    (puthash (cons 'python-mode default-directory) new-buffer +eval-repl-buffers)
+    new-buffer
+    )
+
+  )
+
 
 
 (fmakunbound '+python/open-ipython-repl)

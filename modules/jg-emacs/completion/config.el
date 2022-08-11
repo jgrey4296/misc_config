@@ -1,6 +1,7 @@
 (load! "+vars")
 (load! "+funcs")
 (load! "+snippet-fix")
+(load! "+advice")
 
 (after! evil
   (load! "+bindings")

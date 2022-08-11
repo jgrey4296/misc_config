@@ -14,6 +14,7 @@
               jg-conda-activate-cmd        "source /Volumes/documents/github/emacs_files/setup_files/bash_setup/python.bash && conda_activate_for_scripts %s"
               jg-python-last-chosen-support nil
               jg-python-import-block-end-re "^\\(__all__\\|[[:graph:]]+?\\s-+=\\|def\\|class\\|if TYPE_CHECKING:\\)"
+
       )
 ;;-- end personal vars
 
@@ -41,6 +42,15 @@
                 python-shell-interpreter-path-args "/Volumes/documents/github/emacs_files/modules/jg-lang/python/repl_startup.py "
                 )
   (modify-syntax-entry ?_ "_" python-mode-syntax-table)
+
+  (setq jg-python-outline-regexp
+        (python-rx (or (>= 2 eol))
+                       ?#
+                       upper
+                       (: (* space) block-start)
+                       (: (* space) ?@)
+                       )
+        )
   )
 ;;-- end general python
 

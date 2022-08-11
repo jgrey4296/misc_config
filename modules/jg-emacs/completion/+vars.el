@@ -2,7 +2,7 @@
 
 ;;-- personal-vars
 (defvar jg-completion-file-template-rules (make-hash-table))
-(defvar jg-completion-file-templates-dir "/Volumes/documents/github/emacs_files/snippets/file-templates")
+(defvar jg-completion-file-templates-dir (expand-file-name "snippets/file-templates" doom-private-dir))
 (setq-default jg-completion-rps-have-you-played-loc "/Volumes/documents/github/writing/resources/urls/have-you-playeds"
               jg-completion-ivy-predicate-patterns (rx (or "*helpful"
                                                            "*Ibuffer"
@@ -68,6 +68,7 @@
         ;; helm-boring-buffer-regexp-list
         )
   )
+
 
 (setq company-idle-delay 1)
 (setq-default avy-all-windows t)

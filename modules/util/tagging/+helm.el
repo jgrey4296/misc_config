@@ -1,4 +1,27 @@
-;; helm actions
+;; -*- mode: emacs-lisp; lexical-binding: t; -*-
+
+;;-- utils
+(defun +jg-tag-clean-input (x)
+  (let ((trimmed (string-trim x)))
+    (s-replace-regexp "\s+" "_" trimmed)
+    )
+  )
+
+(defun +jg-tag-save-helm-buffer ()
+  (interactive)
+  (let ((results (with-helm-buffer (buffer-string))))
+    (helm-exit-and-execute-action
+     #'(lambda (x)
+         (with-temp-buffer-window "TestBuffer" 'display-buffer-pop-up-frame nil
+           (princ results)
+           )
+         )
+     )
+    )
+  )
+;;-- end utils
+
+;;-- actions
 (defun +jg-tag-open-url-action (x)
   " An action added to helm-grep for loading urls found in bookmarks "
   (let* ((marked (helm-marked-candidates))
@@ -67,14 +90,12 @@
     (mapc 'find-file (mapcar 'string-trim files))
     )
   )
-
 (defun +jg-tag-insert-twitter-link (candidate)
   (let ((candidates (mapcar 'car (helm-marked-candidates))))
     (with-helm-current-buffer
       (cl-loop for entry in candidates
             do (let ((name (substring entry 1)))
                  (insert (format "[[https://twitter.com/%s][%s]]\n" name entry)))))))
-
 (defun +jg-tag-set-tags-re-entrant (x)
   (+jg-tag-set-tags x)
   (with-helm-buffer
@@ -89,8 +110,9 @@
   )
   (helm-resume jg-tag-helm-buffer-name)
   )
+;;-- end actions
 
-;; Dual Helm / Helm-Action:
+;;-- dual helm/action
 (defun +jg-tag-file-select-helm (candidates)
     " Given a list of Files, provide a helm to open them "
     (interactive)
@@ -116,7 +138,9 @@
     )
   )
 
-;; Candidate Transformers
+;;-- end dual helm/action
+
+;;-- candidate transformers
 (defun +jg-tag-sort-by-files (candidates source)
   (sort candidates (lambda (a b)
                      (let ((a-count (plist-get (cdr a) :count))
@@ -124,37 +148,6 @@
                        (> (if (stringp a-count) (string-to-number a-count) a-count)
                           (if (stringp b-count) (string-to-number b-count) b-count))
                        ))))
-
-(defun +jg-tag-grep-filter-one-by-one (candidate)
-        "A Grep modification for bookmark helm to extract a bookmark's url and tags"
-        (if (consp candidate)
-            ;; Already computed do nothing (default as input).
-            candidate
-          (let* ((line   (ansi-color-apply candidate))
-                 (split  (helm-grep-split-line line))
-                 ;; Normalize Size of this:
-                 (lineno (nth 1 split))
-                 (norm-ln (s-append (s-repeat (- 6 (string-width lineno)) " ") lineno))
-                 ;; The Actual Line:
-                 (str    (nth 2 split))
-                 (sub    str) ;;(substring str (or (s-index-of "HREF=" str) 0)))
-                 (tag-index (s-index-of " :" sub)) ;;(s-index-of "TAGS=\"" sub))
-                 (url (substring sub 0 tag-index)) ;;(string-width "HREF=\"") (- tag_index 2)))
-                 (tags (substring sub (+ tag-index 2) nil))
-                 ;; Normalize the lengths of tags so urls are aligned
-                 (chopped_tags (substring tags 0 (min 100 (string-width tags))))
-                 (norm-tags (s-append (s-repeat (- 100 (string-width chopped_tags)) " ") chopped_tags))
-                 )
-            `(,(concat (propertize norm-ln 'face 'helm-grep-lineno)
-                       (propertize (concat ": " norm-tags) 'face 'rainbow-delimiters-depth-3-face)
-                       (propertize (concat ": " url) 'face 'rainbow-delimiters-depth-1-face))
-              :url ,url
-              :tags ,tags
-              :line ,line
-              )
-            )
-          )
-        )
 (defun +jg-tag-helm-index-file-transformer (cands)
   (let* ((as-list (mapcar (lambda (x) (split-string x ":" t "\s+")) cands))
          (max-tag (apply 'max (mapcar (lambda (x) (length (car x))) as-list)))
@@ -167,8 +160,36 @@
             as-list)
     )
   )
-(defun +jg-tag-grep-pattern-transformer (pattern)
-  (format "^[^:]*%s[^:]* :" pattern))
+(defun +jg-tag-grep-filter-one-by-one (candidate)
+        "A Grep modification for bookmark helm to extract a bookmark's url and tags"
+        (if (consp candidate)
+            ;; Already computed do nothing (default as input).
+            candidate
+          (let* ((line   (ansi-color-apply candidate))
+                 (split  (helm-grep-split-line line)))
+            (if (and split (>= (length split) 2))
+                (let* ((lineno (if (nth 1 split) (nth 1 split) "1"))                 ;; Normalize Size of this
+                       (norm-ln (s-append (s-repeat (- 6 (string-width lineno)) " ") lineno))
+                       (str    (nth 2 split))                                        ;; The Actual Line:
+                       (sub    str)                                                  ;;(substring str (or (s-index-of "HREF=" str) 0)))
+                       (tag-index (s-index-of " :" sub))                             ;;(s-index-of "TAGS=\"" sub))
+                       (url (substring sub 0 tag-index))                             ;;(string-width "HREF=\"") (- tag_index 2)))
+                       (tags (substring sub (+ tag-index 2) nil))
+                       (chopped_tags (substring tags 0 (min 100 (string-width tags)))) ;; Normalize the lengths of tags so urls are aligned
+                       (norm-tags (s-append (s-repeat (- 100 (string-width chopped_tags)) " ") chopped_tags))
+                       )
+                  `(,(concat (propertize norm-ln 'face 'helm-grep-lineno)
+                             (propertize (concat ": " norm-tags) 'face 'rainbow-delimiters-depth-3-face)
+                             (propertize (concat ": " url) 'face 'rainbow-delimiters-depth-1-face))
+                    :url ,url
+                    :tags ,tags
+                    :line ,line
+                    )
+                  )
+              )
+            )
+          )
+        )
 (defun +jg-tag-twitter-grep-filter-one-by-one (candidate)
         "A Grep modification for twitter grep helm to extract information correctly "
         (if (consp candidate)
@@ -177,7 +198,7 @@
           (let* ((line   (ansi-color-apply candidate))
                  (split  (helm-grep-split-line line))
                  ;; Normalize Size of this:
-                 (lineno (nth 1 split))
+                 (lineno (if (nth 1 split) (nth 1 split) "1"))
                  (norm-ln (s-append (s-repeat (- 6 (string-width lineno)) " ") lineno))
                  ;; The Actual Line:
                  (str    (nth 2 split))
@@ -202,7 +223,17 @@
             )
           )
         )
-;; Helm Activators:
+;;-- end candidate transformers
+
+;;-- pattern transformers
+(defun +jg-tag-bookmark-helm-pattern-transformer (pattern)
+  pattern
+)
+(defun +jg-tag-grep-pattern-transformer (pattern)
+  (format "^[^:]*%s[^:]* :" pattern))
+;;-- end pattern transformers
+
+;;-- helms
 (defun +jg-tag-helm-tag-twitter ()
     "Run a Helm for searching twitter tags"
     (interactive)
@@ -240,9 +271,10 @@
     " Run a Helm for search and opening html bookmarks "
     (interactive)
     (helm-set-local-variable
-     'helm-grep-include-files (format "--include=%s" jg-tag-loc-bookmarks)
+     ;; 'helm-grep-include-files (format "--include=%s" jg-tag-loc-bookmarks)
      'helm-grep-last-targets `(,jg-tag-loc-bookmarks)
      'default-directory jg-tag-loc-default-helm-directory
+     'helm-grep-default-command (alist-get 'backend jg-tag-bookmark-helm-source)
      )
     (helm :sources jg-tag-bookmark-helm-source
           :full-frame t
@@ -314,14 +346,9 @@
           )
     )
   )
+;;-- end helms
 
-(defun +jg-tag-clean-input (x)
-  (let ((trimmed (string-trim x)))
-    (s-replace-regexp "\s+" "_" trimmed)
-    )
-  )
-
-;; Setup
+;;-- setup
 (after! helm-files
   (setq helm-grep-actions (append helm-grep-actions '(("Open Url" . jg-tag-open-url-action))))
   ;; Build a Custom grep for bookmarks
@@ -332,9 +359,10 @@
                                      "Insert Link" '+jg-tag-insert-links
                                      "Tweet Link"  '+jg-tag-tweet-link-action
                                      )
-          :filter-one-by-one '+jg-tag-grep-filter-one-by-one
+          :filter-one-by-one   '+jg-tag-grep-filter-one-by-one
+          :pattern-transformer '+jg-tag-bookmark-helm-pattern-transformer
           :nomark nil
-          :backend "grep --color=always -a -d skip %e -n%cH -e %p %f"
+          :backend "ggrep --color=always -a -d skip %e -n%cH -e %p %f"
           :pcre nil
           )
         )
@@ -346,7 +374,7 @@
           :filter-one-by-one '+jg-tag-twitter-grep-filter-one-by-one
           :filtered-candidate-transformer #'+jg-tag-sort-by-files
           :nomark nil
-          :backend "grep --color=always -a -d skip %e -n%cH -e %p %f"
+          :backend "ggrep --color=always -a -d skip %e -n%cH -e %p %f"
           :pattern-transformer '+jg-tag-grep-pattern-transformer
           :pcre nil
           ))
@@ -400,3 +428,4 @@
           :filtered-candidate-transformer (lambda (_c _s) (list helm-pattern)))
         )
 )
+;;-- end setup

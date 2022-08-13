@@ -1,6 +1,6 @@
 ;;; jg-tag/+bindings.el --- summary -*- lexical-binding: t -*-
 ;;
-;; Helm bindings
+;;-- helm
 (map! :after jg-leader-bindings-loaded
       :leader
       :desc "Open Random Untagged Twitter" "o u" #'+jg-tag-open-random-untagged-twitter
@@ -14,7 +14,12 @@
 
 (map! :after helm
       :map helm-map
-      "M-SPC" #'helm-next-page)
+      "M-SPC" #'helm-next-page
+      :localleader
+      :desc "Save Results" "s" #'+jg-tag-save-helm-buffer
+      )
+
+;;-- end helm
 
 (defhydra tag-clean ()
   "

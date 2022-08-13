@@ -122,7 +122,7 @@
 (map! :after helm
       :map helm-map
       :localleader
-      "f" #'helm-toggle-full-frame
+      :desc "Toggle Full Frame" "f" #'helm-toggle-full-frame
       )
 (after! helm
   (evil-make-intercept-map helm-map)

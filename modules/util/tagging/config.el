@@ -5,6 +5,7 @@
 (load! "+util")
 (load! "+vars")
 (load! "+funcs")
+(load! "+advice")
 (after! ivy
   (load! "+ivy-actions")
   )

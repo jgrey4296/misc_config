@@ -30,3 +30,12 @@
 (defvar jg-tag-twitter-grep-helm-source)
 
 (defvar jg-tag-all-tags nil)
+
+;;-- popup
+(setq jg-tag-popup-rules
+      '(("^\\*Helm-Bookmark-Results\\*"  :side right :ttl nil :width 0.4 :quit t :select nil :priority 50)
+        ))
+(after! jg-popup-init
+  (+jg-ui-popup-add-rules 'helm-tags jg-tag-popup-rules)
+  )
+;;-- end popup

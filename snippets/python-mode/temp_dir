@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: temp_dir
+# uuid: temp_dir
+# key:  temp_dir
+# group :
+# --
+##-- imports
+import tempfile
+##-- end imports
+
+with tempfile.TemporaryDirectory() as temp_dir:
+     assert(isisntance(temp_dir, str))
+     # Do Stuff
+
+# On Exit of context manager, dir is deleted

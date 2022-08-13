@@ -2,7 +2,12 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("snippets"
+(("emacs-repos"
+ (filename . "/Volumes/documents/github/doom-emacs/.local/straight/repos/")
+ (front-context-string . "evil\n  drwxr-xr-")
+ (rear-context-string . "3K Jul 29 18:37 ")
+ (position . 6145))
+("snippets"
  (filename . "/Volumes/documents/github/emacs_files/snippets/")
  (front-context-string . "shell-mode\n  drw")
  (rear-context-string . "02 May  2 02:49 ")

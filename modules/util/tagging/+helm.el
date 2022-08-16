@@ -324,7 +324,7 @@
     (let* ((source-tw (cons `(candidates . jg-tag-twitter-tag-helm-candidates) jg-tag-twitter-tag-helm-source))
            (source-heading (cons `(candidates . jg-tag-twitter-account-helm-candidates) jg-tag-twitter-account-helm-source)))
       ;;call helm
-      (helm :sources '(source-heading jg-tag-bookmark-helm-source)
+      (helm :sources (list source-heading jg-tag-bookmark-helm-source)
             :full-frame t
             :buffer "*Helm unified*"
             :truncate-lines t
@@ -340,7 +340,7 @@
          (candidates (+jg-tag-candidates current-tags))
          (main-source (cons `(candidates . ,candidates) jg-tag-helm-source))
          )
-    (helm :sources '(main-source jg-tag-fallback-source)
+    (helm :sources (list main-source jg-tag-fallback-source)
           :input ""
           :buffer jg-tag-helm-buffer-name
           )

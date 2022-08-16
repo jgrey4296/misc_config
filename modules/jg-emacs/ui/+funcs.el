@@ -191,6 +191,7 @@ If region isn't active, narrow away anything above point
   )
 
 (defun +jg-ui-popup-activate-rules ()
+  (interactive)
   (message "Activating Popup rules: %s" (hash-table-keys jg-popup-display-rules))
   (let ((all-rules (copy-sequence (-flatten-n 1 (hash-table-values jg-popup-display-rules)))))
     (setq +popup--display-buffer-alist nil

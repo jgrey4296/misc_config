@@ -22,7 +22,7 @@ windows, switch to `doom-fallback-buffer'. Otherwise, delegate to original
              )
             ((window-dedicated-p)
              (delete-window)
-             nil
+             t
              )
             ((and (doom-real-buffer-p buf)
                   (not visible-p)

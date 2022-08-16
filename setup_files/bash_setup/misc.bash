@@ -2,6 +2,9 @@
 
 # alias tar="gtar"
 
+alias grep="ggrep"
+alias sed="gsed"
+
 alias browse="python -mwebbrowser"
 alias clingo="clingo -W all"
 
@@ -65,4 +68,4 @@ PS1=' (\j): \D{%D} \A \u ($DEPTH_PROMPT):  '
 SHELL="$(which bash)"
 
 # TEMP locations
-TMPDIR="~/.temp"
+# TMPDIR="~/.temp"

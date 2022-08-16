@@ -15,6 +15,8 @@
               jg-python-last-chosen-support nil
               jg-python-import-block-end-re "^\\(__all__\\|[[:graph:]]+?\\s-+=\\|def\\|class\\|if TYPE_CHECKING:\\)"
 
+              jg-python-summary-buffer "*Python-Summary*"
+
       )
 ;;-- end personal vars
 
@@ -78,6 +80,7 @@
       '(("^\\*pytest\\*"         :side bottom :ttl 5   :height 0.4 :quit t :select t :priority 50)
         ("^\\*Anaconda\\*"       :side bottom :ttl 5   :height 0.4 :quit t :select nil :priority 50)
         ("^\\*Python\\*"         :side right  :ttl nil :width  0.5 :quit nil :select t :priority 50)
+        ("^\\*Python-Summary\\*" :side right  :ttl nil :width  0.2 :quit t  :select nil :priority 50)
         ))
 (after! jg-popup-init
   (+jg-ui-popup-add-rules 'python jg-python-popup-rules)

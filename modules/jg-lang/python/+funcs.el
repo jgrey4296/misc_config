@@ -185,3 +185,34 @@ TODO
       )
     )
   )
+
+
+(defun +jg-python-summarize-goto (wind pos &rest args)
+  (select-window wind)
+  (goto-char pos)
+  )
+
+(defun +jg-python-summarize ()
+  (interactive)
+  (let ((wind (get-buffer-window (current-buffer)))
+        links)
+    (with-current-buffer (current-buffer)
+      (save-excursion
+        (goto-char (point-min))
+        (while (re-search-forward python-nav-beginning-of-defun-regexp nil t)
+          (push `(,(point) . ,(match-string 0)) links)
+          )
+        )
+      )
+    (with-current-buffer (get-buffer-create jg-python-summary-buffer)
+      (erase-buffer)
+      (cl-loop for link in (reverse links)
+               do
+               (insert-text-button (cdr link) 'action (-partial #'+jg-python-summarize-goto
+                                                                wind (car link)))
+               (insert "\n")
+               )
+      )
+    (display-buffer (get-buffer jg-python-summary-buffer))
+    )
+  )

@@ -16,7 +16,8 @@ LOG_FORMAT    = "%(asctime)s | %(levelname)8s | %(message)s"
 FILE_MODE     = "w"
 STREAM_TARGET = stderr # or stdout
 
-logger          = logmod.getLogger(__name__)
+logging         = logmod.root
+logging.setLevel(logmod.NOTSET)
 console_handler = logmod.StreamHandler(STREAM_TARGET)
 file_handler    = logmod.FileHandler(LOG_FILE_NAME, mode=FILE_MODE)
 
@@ -27,7 +28,5 @@ file_handler.setLevel(logmod.DEBUG)
 
 logger.addHandler(console_handler)
 logger.addHandler(file_handler)
-logger.setLevel(DISPLAY_LEVEL)
-logging = logger
 ##-- end Logging
 $0

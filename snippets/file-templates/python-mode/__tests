@@ -30,14 +30,14 @@ class Test$1(unittest.TestCase):
         cls.file_h        = logmod.FileHandler(LOG_FILE_NAME, mode="w")
         cls.file_h.setLevel(LOGLEVEL)
 
-        logging = logmod.getLogger(__name__)
-        logging.root.addHandler(cls.file_h)
-        logging.root.setLevel(logmod.NOTSET)
+        logging = logmod.root
+        logging.setLevel(logmod.NOTSET)
+        logging.addHandler(cls.file_h)
 
 
     @classmethod
     def tearDownClass(cls):
-        logmod.root.removeHandler(cls.file_h)
+        logging.removeHandler(cls.file_h)
 
     def test_initial(self):
         pass

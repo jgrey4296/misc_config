@@ -37,10 +37,10 @@ class $2(unittest.TestCase):
         cls.file_h        = logmod.FileHandler(LOG_FILE_NAME, mode="w")
 
         cls.file_h.setLevel(LOGLEVEL)
-        logging = logmod.getLogger(__name__)
-        logging.root.setLevel(logmod.NOTSET)
-        logging.root.handlers[0].setLevel(logmod.WARNING)
-        logging.root.addHandler(cls.file_h)
+        logging = logmod.root
+        logging.setLevel(logmod.NOTSET)
+        logging.handlers[0].setLevel(logmod.WARNING)
+        logging.addHandler(cls.file_h)
 
 
     def setUp(self):

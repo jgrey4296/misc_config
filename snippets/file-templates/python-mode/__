@@ -22,9 +22,11 @@ if TYPE_CHECKING:
     pass
 ##-- end imports
 
-
 ##-- logging
 logging = logmod.getLogger(__name__)
+# If CLI:
+# logging = logmod.root
+# logging.setLevel(logmod.NOTSET)
 ##-- end logging
 $0
 

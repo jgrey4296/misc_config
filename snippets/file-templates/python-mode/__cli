@@ -29,7 +29,8 @@ LOG_FORMAT    = "%(asctime)s | %(levelname)8s | %(message)s"
 FILE_MODE     = "w"
 STREAM_TARGET = stderr # or stdout
 
-logger          = logmod.getLogger(__name__)
+logging         = logmod.root
+logging.setLevel(logmod.NOTSET)
 console_handler = logmod.StreamHandler(STREAM_TARGET)
 file_handler    = logmod.FileHandler(LOG_FILE_NAME, mode=FILE_MODE)
 
@@ -38,15 +39,15 @@ console_handler.setLevel(DISPLAY_LEVEL)
 file_handler.setLevel(logmod.DEBUG)
 # file_handler.setFormatter(logmod.Formatter(LOG_FORMAT))
 
-logger.addHandler(console_handler)
-logger.addHandler(file_handler)
-logging = logger
+logging.addHandler(console_handler)
+logging.addHandler(file_handler)
 ##-- end Logging
 
 ##-- argparse
 #see https://docs.python.org/3/howto/argparse.html
 parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter,
                                  epilog = "\n".join([""]))
+argparser.add_argument("-v", "--verbose", action='count', help="increase verbosity of logging (repeatable)")
 parser.add_argument('--aBool', action="store_true")
 
 #args.aBool...
@@ -55,7 +56,8 @@ parser.add_argument('--aBool', action="store_true")
 
 def main():
     args = parser.parse_args()
-
+    verbosity = max(logmod.DEBUG, logmod.WARNING - (10 * (args.verbose or 0)))
+    console_handler.setLevel(verbosity)
 
 if __name__ == '__main__':
     main()

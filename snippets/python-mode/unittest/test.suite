@@ -8,7 +8,7 @@ $0
 """
 from __future__ import annotations
 import unittest
-import logging
+import logging as logmod
 #Import TestCase Instances here:
 
 ##
@@ -21,10 +21,10 @@ def suite():
     return suite
 
 if __name__ == '__main__':
-    #use python $filename to use this logging setup
     LOGLEVEL = logging.INFO
     logFileName = "log.$2"
     logging.basicConfig(filename=logFileName, level=LOGLEVEL, filemode='w')
+    logging.root.setLevel(logmod.NOTSET)
     console = logging.StreamHandler()
     console.setLevel(logging.WARN)
     logging.getLogger().addHandler(console)

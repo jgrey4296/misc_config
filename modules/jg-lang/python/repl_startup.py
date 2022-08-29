@@ -8,6 +8,7 @@ from __future__ import annotations
 from os import getcwd
 import pathlib
 import abc
+import re
 import argparse
 import logging as logmod
 import sys
@@ -45,7 +46,14 @@ if args.dir:
     sys.path = [pathlib.Path(args.dir)] + sys.path
     print('Path Amended')
 
-print('reload function imported')
-
 def cwd():
-    print(getcwd())
+    return pathlib.Path(getcwd())
+
+
+def logattrs():
+    logrecord = logmod.makeLogRecord({})
+    attrs = [x for x in dir(logrecord) if not x.startswith("__")]
+    return attrs
+
+
+print("Reminder: [cwd, logattrs, reload, pp] are loaded")

@@ -187,31 +187,45 @@ TODO
   )
 
 
-(defun +jg-python-summarize-goto (wind pos &rest args)
-  (select-window wind)
-  (goto-char pos)
+(defun +jg-python-summarize-goto (buff pos &rest args)
+  (if-let ((wind (get-buffer-window buff)))
+      (progn
+        (select-window wind)
+        (widen)
+        (goto-char pos)
+        (beginning-of-line)
+        (recenter)
+        )
+    )
   )
 
 (defun +jg-python-summarize ()
   (interactive)
-  (let ((wind (get-buffer-window (current-buffer)))
+  (let ((buffer (current-buffer))
         links)
     (with-current-buffer (current-buffer)
-      (save-excursion
-        (goto-char (point-min))
-        (while (re-search-forward python-nav-beginning-of-defun-regexp nil t)
-          (push `(,(point) . ,(match-string 0)) links)
+      (save-restriction
+        (widen)
+        (save-excursion
+          (goto-char (point-min))
+          (while (re-search-forward python-nav-beginning-of-defun-regexp nil t)
+            (push `(,(point) . ,(match-string 0)) links)
+            )
           )
         )
       )
+    (message "Extracted")
     (with-current-buffer (get-buffer-create jg-python-summary-buffer)
+      (read-only-mode -1)
       (erase-buffer)
       (cl-loop for link in (reverse links)
                do
-               (insert-text-button (cdr link) 'action (-partial #'+jg-python-summarize-goto
-                                                                wind (car link)))
+               (insert-text-button (propertize (cdr link) 'read-only nil)
+                                   'action (-partial #'+jg-python-summarize-goto
+                                                     buffer (car link)))
                (insert "\n")
                )
+      (read-only-mode 1)
       )
     (display-buffer (get-buffer jg-python-summary-buffer))
     )

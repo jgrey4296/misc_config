@@ -17,6 +17,8 @@
 ;; Display: 3 columns, middle column divided in 3
 
 ;; Add-to-list most-recent/oldest
+(require 'evil)
+
 (defun window-ring-add-current-buffer ()
   (interactive)
   (window-ring-add-to-head (buffer-name (current-buffer)))

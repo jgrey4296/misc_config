@@ -48,17 +48,17 @@
 
 (after! (evil hl-line)
   ;; hooks for evil state entry hooks to change hl-line colour
-  (add-hook 'evil-normal-state-entry-hook       (cmd! (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-normal-state))))
-  (add-hook 'evil-insert-state-entry-hook       (cmd! (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-insert-state))))
-  (add-hook 'evil-visual-state-entry-hook       (cmd! (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-visual-state))))
-  (add-hook 'evil-motion-state-entry-hook       (cmd! (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-motion-state))))
-  (add-hook 'evil-emacs-state-entry-hook        (cmd! (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-emacs-state))))
-  (add-hook 'evil-replace-state-entry-hook      (cmd! (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-replace-state))))
-  (add-hook 'evil-hybrid-state-entry-hook       (cmd! (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-hybrid-state))))
-  (add-hook 'evil-evilified-state-entry-hook    (cmd! (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-evilified-state))))
-  (add-hook 'evil-lisp-state-entry-hook         (cmd! (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-lisp-state))))
-  (add-hook 'evil-iedit-state-entry-hook        (cmd! (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-iedit-state))))
-  (add-hook 'evil-iedit-insert-state-entry-hook (cmd! (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-iedit-insert-state))))
+  ;; (add-hook 'evil-normal-state-entry-hook       (-partial #'+jg-ui-hl-line-colour 'jg-evil-normal-state-face))
+  ;; (add-hook 'evil-insert-state-entry-hook       (-partial #'+jg-ui-hl-line-colour 'jg-evil-insert-state-face))
+  ;; (add-hook 'evil-visual-state-entry-hook       (-partial #'+jg-ui-hl-line-colour 'jg-evil-visual-state-face))
+  ;; (add-hook 'evil-motion-state-entry-hook       (-partial #'+jg-ui-hl-line-colour 'jg-evil-motion-state-face))
+  ;; (add-hook 'evil-emacs-state-entry-hook        (-partial #'+jg-ui-hl-line-colour 'jg-evil-emacs-state-face))
+  ;; (add-hook 'evil-replace-state-entry-hook      (-partial #'+jg-ui-hl-line-colour 'jg-evil-replace-state-face))
+  ;; (add-hook 'evil-hybrid-state-entry-hook       (-partial #'+jg-ui-hl-line-colour 'jg-evil-hybrid-state-face))
+  ;; (add-hook 'evil-evilified-state-entry-hook    (-partial #'+jg-ui-hl-line-colour 'jg-evil-evilified-state-face))
+  ;; (add-hook 'evil-lisp-state-entry-hook         (-partial #'+jg-ui-hl-line-colour 'jg-evil-lisp-state-face))
+  ;; (add-hook 'evil-iedit-state-entry-hook        (-partial #'+jg-ui-hl-line-colour 'jg-evil-iedit-state-face))
+  ;; (add-hook 'evil-iedit-insert-state-entry-hook (-partial #'+jg-ui-hl-line-colour 'jg-evil-iedit-insert-state-face))
   )
 (after! helpful
   (add-hook 'helpful-mode-hook

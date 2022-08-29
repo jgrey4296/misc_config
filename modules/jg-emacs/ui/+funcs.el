@@ -74,7 +74,7 @@ Dedicated (locked) windows are left untouched."
         ))
     (cl-assert (<= num (length colors)))
 
-    (loop for n to (- num 1) do
+    (cl-loop for n to (- num 1) do
           (insert "(defface " name "-face-" (number-to-string n) "\n")
           (insert "  '((t :foreground \"" (nth n colors) "\"))\n")
           (insert "  \"Generated " name " " (number-to-string n) " Face\"\n)\n\n")
@@ -209,3 +209,11 @@ If region isn't active, narrow away anything above point
                                  +jg-popup-advice2)
   (+jg-ui-popup-activate-rules))
 ;;-- end popup control
+
+;;-- hl-line control
+(defun +jg-ui-hl-line-colour (face)
+  (hl-line-unhighlight)
+  (setq hl-line-face face)
+  (hl-line-highlight)
+  )
+;;-- end hl-line control

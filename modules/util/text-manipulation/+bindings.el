@@ -42,6 +42,7 @@
       :desc "Set Buffer Coding" "B" #'set-buffer-file-coding-system
       :desc "ENCRYPT"           "!" #'+jg-text-encrypt-region
       :desc "DECRYPT"           "@" #'+jg-text-decrypt-region
+      :desc "Uniquify"          "u" #'delete-duplicate-lines
       )
       :desc "Rotate"            "r" #'rotate-text
       )

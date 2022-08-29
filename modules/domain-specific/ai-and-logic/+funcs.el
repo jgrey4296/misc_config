@@ -23,3 +23,58 @@
 to a pop up buffer."
   (pasp-run-buffer)
 )
+
+
+(defun +jg-pasp-extract-elements ()
+  (interactive)
+  (let ((data (make-hash-table))
+        curr-line
+        accumulating)
+    (save-excursion
+      (goto-char (point-min))
+      (while (< (point) (point-max))
+        ;; get line
+        (setq curr-line
+              (if accumulating
+                  (s-trim (concat curr-line (buffer-substring-no-properties (line-beginning-position) (line-end-position))))
+                (s-trim (buffer-substring-no-properties (line-beginning-position) (line-end-position)))))
+
+        (setq accumulating (not (or (s-matches? "^%" curr-line)
+                                    (s-matches? "\\.$" curr-line))))
+
+        (if (not accumulating)
+            (progn
+              (message "Handling: %s" curr-line)
+              (cond ((s-matches? "^%" curr-line)
+                     t
+                     )
+                    ((s-matches? "^[[:blank:]]*:- " curr-line)
+                     (push curr-line (gethash :constraint data))
+                     )
+                    ((s-matches? " :- " curr-line)
+                     (push curr-line (gethash :rule data))
+                     )
+                    ((s-matches? "^#" curr-line)
+                     (push curr-line (gethash :instruction data))
+                     )
+                    (t
+                     (push curr-line (gethash :constant data))
+                     )
+                    )
+              (setq curr-line nil)
+              )
+          )
+        (forward-line)
+        )
+      (with-temp-buffer-window "analysis" 'display-buffer nil
+        (loop for key in (hash-table-keys data)
+              do
+              (princ key) (princ ":\n\n")
+              (mapc (lambda (x) (princ x) (princ "\n"))
+                    (sort (gethash key data) 'string-lessp))
+              (princ "\n-----\n\n")
+              )
+        )
+      )
+    )
+  )

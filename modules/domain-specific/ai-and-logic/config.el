@@ -7,6 +7,7 @@
 (load! "+vars")
 (load! "+repl")
 (load! "+funcs")
+(load! "+advice")
 (use-package! abl-mode)
 (use-package! agentspeak-mode)
 (use-package! ceptre-mode)

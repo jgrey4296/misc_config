@@ -52,7 +52,7 @@
 (setq-default
               jg-bibtex-loc-bibtex          "~/github/writing/resources/bibliography/"
               jg-bibtex-loc-completions     "~/github/writing/resources/completions/"
-              jg-bibtex-loc-export-bib-file "~/github/emacs_files/modules/domain-specific/bibtex/export.bib"
+              jg-bibtex-loc-export-bib-file "~/github/emacs_files/modules/jg-lang/bibtex/export_template.tex"
               jg-bibtex-loc-temp-dir        "~/.tex/"
               jg-bibtex-pdf-loc             "~/Mega/pdflibrary"
  )

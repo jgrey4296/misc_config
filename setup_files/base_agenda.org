@@ -30,66 +30,499 @@ Versu, Abl, Cif
 
 ** Reminders
 *** Definitions
-**** Modalities
+**** General
+***** Modalities
 Alethic     - Possibility
 Deontic     - Permission
 Axiological - Value (intrinsic/extrinsic)
 Epistemic   - Knowledge
 Doxastic    - Belief
 Boulomaic   - Desire
-
-**** Binary Relations
-Injective            -
-Functional           -
-Total                -
-Surjective           -
-Reflexive            -
-Irreflexive          -
-Associativity        -
-Commutativity        -
-Distributivity       -
-Idempotence          -
-Absorption           -
-Monotonicity         -
-Affinity             -
-Duality              -
-
-Symmetric            -
-Antisymmetric        -
-Asymmetric           -
-Transitive           -
-Connected            -
-Strongly Connected   -
-Pre-order            -
-Poset                -
-Partial Order        -
-Strict Partial Order -
-Total Order          -
-Strict Total Order   -
-Equivalence Relation -
-Meet                 -
-Join                 -
-Lattice              -
-
-Morphism             -
-Isomorphic           -
-Monad                -
-Functor              -
-
-**** Operators
-∧ - and
-∨ - or
-⊢ -
-⊫ - Satistifaction
+Temporal    - Time
+***** Greek
+α Α   - alpha
+β Β   - beta
+γ Γ   - gamma
+δ Δ   - delta
+ε Ε   - epislon
+ζ Ζ   - zeta
+η Η   - eta
+θ Θ   - theta
+ι Ι   - iota
+κ Κ   - kappa
+λ Λ   - lambda
+μ Μ   - mu
+ν Ν   - nu
+ξ Ξ   - xi
+ο Ο   - omicron
+π Π   - pi
+ρ Ρ   - rho
+σ Σ ς - sigma
+τ Τ   - tau
+υ Υ   - upsilon
+φ Φ   - phi
+ψ Ψ   - psi
+ω Ω   - omega
+***** Operators
 ⟘ - bottom / false
 ⟙ - Top / true
+
+∧ - and
+∨ - or
+
+∴ - therefore, qed.
+⊢ - syntactic consequence, sequent, (typing) judgement
+⊨ - semantic consequence
+
+⨂ - (linear logic) Multiplicative Conjunction
+⅋ - (linear logic) Multiplicative Disjunction
+& - (linear logic) Additive Conjunction
+⨁ - (linear logic) Additive Disjunction
 
 ⊂ - Subset
 ⊃ - Superset
 ∪ - union
 ∩ - intersection
+⋀ - lattice join
+⋁ - lattice meet
 
+□ - (modal logic)
+◇ - (modal logic)
+
+⨯ - cartesian product
+
+∫ - Integral
+Δ - Delta
+Σ - Sum
+Π - Product
+
+n! - factorial(n)
+**** General Math
+***** Number Systems
+N - Natural Numbers.             0?, 1, 2, 3...
+Z - Integers.        ... -2, -1, 0,  1, 2...
+Q - Rational Numbers. Fractions of two integers. ∀x,y ∈ Z : x/y.
+
+R - Real Numbers. Decimals.
+C - Complex Numbers. x + y·i, where i = √-1
+H - Quaternions. Extension of Complex numbers. a + b·i + c·j + d·k
+
+π - pi
+***** Probability
+Law of Total Probabilty -
+Bayes Rule              -
+
+Conditional Probability -
+Independence -
+
+Distribution -
+
+Expectation -
+Variance    -
+Covariance  -
+Standard Deviation -
+
+Regression -
+Multiple Regression -
+Conditioning -
+
+Conjugate Prior -
+
+***** Statistics
+***** Linear Algebra
+Scalar -
+Vector -
+Matrix -
+
+Cross Product -
+Dot Product -
+***** Geometry
+Euclidean geometry -
+Non-euclidean geometry -
+Cartesian geometry - (analytic)
+Geometric Transform -
+Affine Transform - a geometric transform that preserves lines and parallelism, but not necessarily distances and angles.
+
+scaling -
+reflection -
+rotation -
+shear -
+hyperplane -
+***** Calculus
+Derivative -
+Definite Integral -
+Indefinite Integral -
+
+l'hopitals rule -
+***** Game Theory
+**** Relations, Orders and Sets
+***** Binary Relations and Functions
+domain                - X in f: X → Y.
+codomain              - Y in f: X → Y.
+
+Injective             - left-unique.               ∀x,z ∈ X, ∀y ∈ Y : xRy ∧ zRy ⇒ x = z
+Surjective            - right-total.               ∀y ∈ Y,   ∃x ∈ X : xRy
+Total                 - left-total.                ∀x ∈ X,   ∃y ∈ Y : f(x) = y
+Partial               - right-unique.              ∀x ∈ X, ∀y,z ∈ Y : xRy ∧ xRz ⇒ y = z
+Bijective             - A Function which is both injective and surjective.
+
+
+transpose             - X, Y and R ⊆ X ⨯ Y : (R^T) = y(R^T)x ⇔ xRy.
+involution            - f(f(x)) = x.
+
+Reflexive             - ∀x ∈ X : xRx.
+Irreflexive           - ∀x ∈ X : not xRx.
+Symmetric             - ∀x,y ∈ X : xRy ⇒ yRx.
+Asymmetric            - ∀x,y ∈ X : xRy ⇒ not yRx.
+Antisymmetric         - ∀x,y ∈ X : xRy and yRx ⇒ x = y.
+Transitive            - ∀x,y,z ∈ X : xRy and yRz ⇒ xRz.
+Connected             - ∀x,y ∈ X : x ≠ y ⇒ xRy or yRx.
+Strongly Connected    - ∀x,y ∈ X : xRy or yRx.
+
+Associativity         - ∀x,y,z ∈ S: (xRy)Rz = xR(yRz).
+Commutativity         - ∀x,y ∈ S  : xRy = yRx.
+Distributivity        - ∀x,y,z ∈ S : xR(yR'z) = (xRy)R'(xRz).   eg: Multiplication, ∧, ∨.
+Idempotence           - f(x) = f(f(x)) = f(...f(x)). eg: multiplication by 1.
+Absorption            - xR(xR'y) = xR'(xRy) = x.
+Duality               - dual((P, <)) = (P, ⧼), ∀x,y ∈ P : x < y ⇔ y ⧼ x.
+
+Left Residual         - relations A, B : A\B = complement(A^T complement(B))
+Right Residual        - relations A, B: A/B = complement(complement(A) B^T))
+Symmetric Quotient    - relations A, B: syq(A, B) = complement(A^T complement(F)) ∩ complement(complement(E)^T F)
+***** Orders
+Pre-order             - reflexive, transitive relation.
+Equivalence Relation  - reflexive, symmetric, transitive relation.
+
+Partial Order         - reflexive,   antisymmetric, transitive relation. Not every element is comparable.
+Total Order           - reflexive,   antisymmetric, transitive and connected relation. Every element is comparable.
+Poset                 - a set S, relation R : (S, R).
+Interval              - interval I of poset (P, <) : I ⊂ P,  ∀x,y ∈ I, ∀z ∈ P : x < z < y ⇒ z ∈ Y.
+
+Strict Partial Order  - irreflexive, antisymmetric, transitive relation.
+Strict Total Order    - irreflexive, antisymmetric, transitive and connected relation.
+
+Reflexive Closure     - smallest reflexive relation over X containing R.
+Transitive Closure    - smallest transitive relation over X containing R.
+Equivalence Closure   - smallest equivalent relation over X containing R.
+
+order-preserving      - (*monotonic*). For posets (S, <), (T, ⧼), function f(S → T) if ∀x,y ∈ S, x < y ⇒ f(x) ⧼ f(y).
+order-reversing       - (*antitonic*). For posets (S, <), (T, ⧼), functiion f(S → T) if ∀x,y ∈ S, x < y ⇒ f(y) ⧼ f(x).
+order-reflecting      - For posets (S, <), (T, ⧼), function f(S → T) if ∀x, y ∈ S: f(x) ⧼ f(y) ⇒ x < y.
+order-embedding       - both order-preserving and order-reflecting.
+
+infimum               - *meet*, *greatest lower bound*. inf(S) ∈ poset (P, <), S ⊂ P, ∀x ∈ S : inf(S) < x. *Single Element or nothing*.
+supremum              - *join*, *least upper bound*. sup(S) ∈ poset (P, <), S ⊂ P, ∀x ∈ S : x < sup(S). *Single Element or nothing*.
+
+Semi-lattice          - Poset X, ∀Y ⊂ X : inf(Y) != ∅
+Lattice               - Poset with infimum and supremum.
+
+Morphism              -
+Isomorphic            -
+Monad                 -
+Functor               -
+***** Set Theory
+Powerset - the set of all subsets of S, including empty set and itself.
+union                 - X, Y : X ∪ Y = {a : ∀a : a ∈ X or  a ∈ Y}
+intersection          - X, Y : X ∪ Y = {a : ∀a : a ∈ X and a ∈ Y}
+**** Logic
+***** Classical Logic Definitions
+Syntactic Entailment - P ⊢ Q : Q is derivable from P in system S by the transformation rules of S, independent of truth assignments.
+Semantic Entailment  - P ⊨ Q : Q is derivable from P in system S by the transformation rules of S if there *not* a model I where P ∈ I and Q ∉ I.
+Sound                - (⊢) ⇒ (⊨).
+Complete             - (⊨) ⇒ (⊢).
+
+Satisfiability       - there exists a model which is true.
+Validity             - every model is true.
+Consistency          - an expression that does not lead to a contradiction.
+Decidability         - a procedure exists for computing the answer of an expression in finite time.
+
+necessary            - Q only when P.
+sufficient           - P therefore Q.
+
+conditional          - material implication.   (P → Q) ⩭ ¬P ∨ Q.
+biconditional        - material equivalence. P ⇔ Q ⇒ P → Q and Q → P
+
+well formed formulas -
+Term                 -
+Signature            -
+Hoare Triple         -
+model                -
+valuation            -
+Bisimulation         -
+Sequent              -
+compactness property -
+first-order correspondence language -
+***** Rules of Inference
+Admissable                  - (redundancy). The set of theorms does not change when a rule is added to the system.
+
+Open World Assumption       - statements whether be true even if they are not known to be true.
+Closed World Assumption     - only statements known to be true are true.
+
+modus ponens   - Affirming the antecedent. (P → Q), P ⊢ Q.
+modus tollens  - Denying the Consequent.   (P → Q), ¬Q ⊢ ¬P.
+contraposition - (modus tollens) Inverting the antecedent and consequent. P → Q becomes ¬Q → ¬P
+inversion      - P → Q becomes  ¬P → ¬Q
+conversion     - P → Q becomes   Q →  P
+complement     - P → Q becomes ¬(P → Q)
+
+Affirming the consequent    - *Fallacy* : (P → Q), Q ⊢ P.
+Denying the antecedent      - *Fallacy* : (P → Q), ¬P ⊢ ¬Q.
+
+import-export        - P → (Q → R) ⩭ (P ∧ Q) → R
+Strengthening        -
+
+law of excluded middle      - P ∨ ¬P
+double negation elimination - ¬¬P ⇒ P.
+
+De Morgan's Laws 1          - not (A ∨ B) = (not A) ∧ (not B).
+De Morgan's Laws 1          - not (A ∧ B) = (not A) ∨ (not B).
+***** Structural Rules
+Weakening                           - Addition does not change the truth of the expression. (A ⊢ X) ⇒ (A, B ⊢ X), (A ⊢ X, Y)
+Contraction                         - Idempotence of entailment. (A, A, A ⊢ X) ⩭ (A ⊢ X) and  (A ⊢ X, X, X) ⩭ (A ⊢ X).
+Exchange                            - Permutation. (A, B ⊢ X) ⩭ (B, A ⊢ X) and (A ⊢ X, Y) ⩭ (A ⊢ Y, X)
+Cut                                 - Generalisation of Modus Ponens. (Γ ⊢ A, Δ) and (Γ', A ⊢ Δ') ⩭ (Γ, Γ' ⊢ Δ, Δ')
+***** Lambda Calculus
+Normal Form         -
+Free Variable       -
+α conversion        - Renaming bound variables in an expression
+β reduction         - Replacing bound variables in body of expression.
+η (eta) reduction   - Converts between (λx.f x) and (f) whenever x does not appear free in f.
+
+De Bruijin Indexing -
+***** Transition System
+***** Modal Logic Definitions
+Kripke Model -
+□A = ~◇~A
+***** Semantics
+Hilbert Semantics      -
+Tarski Semantics       -
+Operational            -
+Structural Operational -
+Denotational           -
+Axiomatic              -
+**** Types of Logics
+***** Propositional
+***** First Order
+***** Second Order
+***** Classical
+***** Constructive
+***** Intuitionistic
+***** Substructural
+***** Input/Output Logics
+***** Linear Logic
+linear logic               -
+
+Multiplicative Conjunction - ⨂
+Multiplicative Disjunction - ⅋
+Additive Conjunction       - &
+Additive Disjunction       - ⨁
+***** Temporal Logics
+temporal logic                      -
+alternating temporal logic          -
+alternating time temporal logic     -
+linear temporal logic               -
+linear time temporal logic          -
+metric temporal logic               -
+temporal action logic               -
+temporal epistemic logic            -
+temporal modal defeasible logic     -
+***** Modal Logics
+modal logic          -
+sabotage modal logic -
+K                    -
+K45                  -
+S                    -
+S5                   -
+***** Description Logic
+***** Misc Logics
+3 valued logics                     -
+BDI stit logic                      -
+KLM logic                           -
+Notation3 logic                     -
+OO logic                            -
+STIT logic                          -
+
+abductive logic                     -
+acceptance logic                    -
+action logic                        -
+action model logic                  -
+adaptive deontic logic              -
+adaptive logic                      -
+adjoint logic                       -
+agency logic                        -
+agent organization logic            -
+arabic logic                        -
+axiomatic logic                     -
+boolean logic                       -
+c1 logic                            -
+categorical logic                   -
+causal logic                        -
+chbdo logic                         -
+choice logic                        -
+coalition logic                     -
+combinatory logic                   -
+computation tree logic              -
+computation tree logic of knowledge -
+computational logic                 -
+conjunctive choice logic            -
+connective action logic             -
+context logic                       -
+contextual logic                    -
+cultural logic                      -
+default logic                       -
+defeasible logic                    -
+definite logic programs             -
+delegation logic                    -
+deontic logic                       -
+dependence logic                    -
+description logic                   -
+diagnostic logic                    -
+dialethic logic                     -
+dialogue logic                      -
+display logic                       -
+doxastic logic                      -
+dyadic deontic logic                -
+dynamic epistemic logic             -
+economic logic                      -
+edinburgh logical framework         -
+emerging logics                     -
+epistemic logic                     -
+epistemic logic of friendship       -
+equilibrium logic                   -
+exclusion logic                     -
+extended logic programs             -
+f logic                             -
+failure logic                       -
+fuzzy logic                         -
+general awareness logic             -
+generalised possibilistic logic     -
+geometric logic                     -
+graphical logic                     -
+herbrand logic                      -
+higher ordered logic                -
+hoare logic                         -
+hybrid logics                       -
+ignorance logic                     -
+imperative logic                    -
+inductive logic                     -
+input output logics                 -
+inquisitive logic                   -
+institutional logic                 -
+interaction logic                   -
+intuitional logic                   -
+justification logic                 -
+lax logic                           -
+legal logic                         -
+linear logic                        -
+logic of agency                     -
+logic of questions                  -
+logic of rules                      -
+mathematical logic                  -
+minimal inconsistency logic         -
+monadic deontic logic               -
+moral logic                         -
+multivalued logic                   -
+neighbourhood logic                 -
+non dialogical acts                 -
+non monotonic logic                 -
+normative logic                     -
+object oriented logic               -
+operational logic                   -
+order sorted logic                  -
+ordered choice logic                -
+ordered logic                       -
+organisational logic                -
+paraconsistent logic                -
+polarized logic                     -
+predicate logic                     -
+procedural logic                    -
+propositional dynamic logic         -
+propositional lax logic             -
+propositional logic                 -
+protological power                  -
+provability logic                   -
+public announcement logic           -
+qualitative choice logic            -
+radiological weapons testing        -
+rational agency logic               -
+relational logic                    -
+separation logic                    -
+service logic                       -
+set based logic programming         -
+social logic                        -
+spatial logic                       -
+specification logic                 -
+strategic logic                     -
+stratified logic                    -
+strictly positive logic             -
+substructural logic                 -
+symbolic logic                      -
+tensor logic                        -
+tool logic                          -
+transaction logic                   -
+**** Logic Programming
+***** Definitions
+From cropper22_induc_logic_progr_at_74
+
+- A *variable* is a string of characters starting with an uppercase letter, e.g. A, B, and C.
+- A *function* symbol is a string of characters starting with a lowercase letter.
+- A *predicate* symbol is a string of characters starting with a lowercase letter, e.g. job or happy. The arity n of a function or predicate symbol p is the number of arguments it takes and is denoted as p/n, e.g. happy/1, head/2, and append/3.
+- A *constant* symbol is a function symbol with zero arity, e.g. alice or bob.
+- A *term* is a variable, or a constant/function symbol of arity n immediately followed by a tuple of n terms.
+- A term is *ground* if it contains no variables.
+- An *atom* is a formula p(t1, . . . , tn), where p is a predicate symbol of arity n and each ti is a term, e.g. lego builder(alice), where lego builder is a predicate symbol of arity 1 and alice is a constant symbol.
+- An atom is *ground* if all of its terms are ground, e.g. lego builder(alice) is ground but lego builder(A), where A is a variable, is not ground.
+- The symbol *not* denotes negation as failure, where an atom is false if it cannot be proven true.
+- A *literal* is an atom A (a positive literal) or its negation not A (a negative literal). For instance, lego builder(alice) is both an atom and a literal but not lego builder(alice) is only a literal because it includes the negation symbol not.
+- A *clause* is of the form h1, ..., hn :- b1, ...,bm where each hi and bj is a literal and the symbol , denotes conjunction. The symbols hi are called the head of the clause. The symbols bi are called the body of the clause. We sometimes use the name rule instead of clause.
+- A *Horn clause* is a clause with at most one positive literal.
+- A *definite clause* is clause of the form h :- b1, b2, ..., bn, i.e. a clause with only one head literal, e.g. qsort(A,B):- empty(A),empty(B). Informally, a definite clause states that the head is true if the body is true, i.e. all of the body literals are proven true. For instance, the rule happy(A):- lego builder(A),enjoys lego(A) says that happy(A) is true when both lego builder(A) and enjoys lego(A) are true.
+- A clause is *ground* if it contains no variables.
+- A *clausal theory* is a set of clauses.
+- A *goal* (also called a constraint) is a clause of the form :- b1, b2, ..., bn, i.e. a clause without a head, e.g. :- head(A,B),head(B,A).
+- A *unit clause* is a clause with no body. For unit clauses, we usually omit the :- symbol, e.g. loves(alice,X).
+- A *fact* is a ground unit clause loves(andrew,laura).
+- A *substitution* is a clause with variables v1, . . . , vn simultaneously replaced with terms t1, . . . , tn and is denoted as θ = {v1/t1, . . . , vn/tn}. For instance, applying the substitution θ = {A/bob} to loves(alice,A) results in loves(alice,bob).
+- A substitution *θ* unifies atoms A and B in the case Aθ = Bθ. Note that atoms A and B need to have a distinct set of variables, i.e., they should not have a variable with the same name, for unification to work properly.
+
+(Procedural) Cut -
+Resolution       -
+Unification      -
+
+***** Prolog
+***** Answer Set Programming
+Herbrand Base            -
+Herbrand Universe        -
+Interpretation           -
+
+Minimal Model Semantics  -
+Fixpoint                 -
+Stratified Program       -
+Dependency Graph         -
+Stable Semantics         -
+Gelfond-Lifschitz Reduct -
+
+Brave Reasoning          -
+Cautious Reasoning       -
+***** Communicating Sequential Processes
+***** satisfiability modulo theory
+**** Causal Models
+DAG      - Directed Acyclic Graph. Every Strict Partial Order is a DAG. Every transitive closure of a DAG is a strict partial order.
+
+Rule of product dcomposition -
+
+Chains   -
+Forks    -
+Collider -
+
+Conditional Independence in Chains -
+Conditional Independence in Forks -
+Conditional Independence in Colliders -
+
+d-separation -
+**** Category theory
 **** Linguistics
+***** Parts of Speech
 Noun                    -
 Pronoun                 -
 Verb                    -
@@ -101,8 +534,7 @@ Articles                -
 Interjections           -
 
 Open and Closed Classes -
-
-**** Speech Acts
+***** Speech Acts
 Illocutionary                   -
 Perlocutionary                  -
 Performative                    -
@@ -135,89 +567,47 @@ Expressives                     -
 Declarations                    -
 
 Pragmatics                      -
+**** Ontology
+**** Turns
+methodological turn -
+linguistic turn     -
+ontological turn    -
+adaptive_turn       -
+computational_turn  -
+historical_turn     -
+institutional_turn  -
+linguistic_turn     -
+methodological_turn -
+ontological_turn    -
+participatory_turn  -
+symbolic_turn       -
+**** Misc
+realism                      -
+positivism                   -
+legalism                     -
+pragmatism                   -
 
-**** Answer Set Programming
-Herbrand Base            -
-Herbrand Universe        -
-Interpretation           -
-
-Minimal Model Semantics  -
-Fixpoint                 -
-Stratified Program       -
-Dependency Graph         -
-Stable Semantics         -
-Gelfond-Lifschitz Reduct -
-
-Brave Reasoning          -
-Cautious Reasoning       -
-
-**** Components of Logic
-Term                                -
-Signature                           -
-
-Open World Assumption               -
-Closed World Assumption             -
-
-Satisfaction                        -
-
-Valid                               -
-Semantic Consequence                -
-Bisimulation                        -
-Hilbert Semantics                   -
-Tarski Semantics                    -
-
-Sequent                             -
-Weakening                           -
-Contraction                         -
-Exchange                            -
-
-α conversion                        -
-β reduction                         -
-η reduction                         -
-
-Resolution                          -
-
-Normal Form                         -
-
-Hoar Triple                         -
-
-law of excluded middle              -
-double negation elimination         -
-cut rule                            -
-material implication                -
-biconditional                       -
+logical positivism           -
+logical realism              -
+methodological individualism -
+methodological legalism      -
+ontological priors           -
+ontological neutrality       -
+sociological realism         -
+technological determinism    -
+legal realism                -
 
 
-compactness property                -
-
-first-order correspondence language -
-**** Components of Modal Logic
-Kripke Model -
-□A = ~◇~A
-□            -
-◇            -
-
-**** Logics
-first-order logic  -
-second-order logic -
-
-constructive logic   -
-classical logic      -
-intuitionistic logic -
-substructural logic  -
-**** Modal Logics
-K   -
-K45 -
-S   -
-S5  -
-
-**** Linear Logic
-linear logic -
-
-Multiplicative Conjunction - ⨂
-Multiplicative Disjunction - ⅋
-Additive Conjunction - &
-Additive Disjunction - ⨁
+**** Politics
+Liberalism       -
+Neoliberalism    -
+Conservatism     -
+Libertarianism   -
+Communitarianism -
+Marxism          -
+Communism        -
+Socialism        -
+Fascism          -
 
 *** Urls
 https://github.com/mvcisback/hasse

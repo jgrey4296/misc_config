@@ -48,7 +48,7 @@ BASH_ENV=/Volumes/documents/github/emacs_files/setup_files/cron/conda_bashrc
 # 5am : clean tags
 0 5 * * thu find ~/github/writing/resources/bibliography -name "*.bib" -print0 | xargs -0 -I {} echo "conda activate bookmark; bkmk-tag-clean -t {} -c ~/github/writing/resources/substitutions " | bash
 # 6am : update tag totals
-0 6 * * thu conda activate bookmark; bkmk-tag-totals -t ~/github/writing/resources/bibliography -t ~/github/writing/resources/bookmarks/total.bookmarks -t /volumes/documents/twitterthreads -c ~/github/writing/resources/substitutions -o ~/github/writing/resources/cron_reports/totals
+0 6 * * thu conda activate bookmark; bkmk-tag-totals -t ~/github/writing/resources/bibliography -t ~/github/writing/resources/bookmarks/total.bookmarks -t /volumes/documents/twitterthreads -c ~/github/writing/resources/substitutions -o ~/github/writing/resources/cron_reports/total.tagss
 # 7am : update tag graph
 0 7 * * thu conda activate bookmark; bkmk-tag-graph --target ~/github/writing/resources/bibliography -t ~/github/writing/resources/bookmarks/total.bookmarks -t /volumes/documents/twitterthreads -o ~/github/writing/resources/cron_reports/tags.edgelist
 # 8am : update tag timelines

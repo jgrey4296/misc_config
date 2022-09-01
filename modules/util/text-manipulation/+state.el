@@ -19,6 +19,9 @@
 ;;
 ;;; Code:
 
+;;-- space remapping state
+(defvar jg-insert-state-sep "_")
+
 (evil-define-state jg-insert
   "Insert State with spaces remapped"
   :tag "<JGI>"
@@ -29,16 +32,23 @@
   :input-method t
   )
 
+(defun +jg-insert-state-set-sep (str)
+  (interactive (list (read-string (format "Separator: ('%s') " jg-insert-state-sep))))
+  (setq jg-insert-state-sep str)
+  )
 
 (map! :map evil-jg-insert-state-map
-      "SPC" "_"
+      "SPC" (cmd! (insert jg-insert-state-sep))
+      "§"   #'+jg-insert-state-set-sep
       ;; TODO map a control to choose the SPC replacement
       )
 
 
-(map! :leader
-      ;; TODO activate the state somewhere better
-      "a" #'evil-jg-insert-state
+;;-- end space remapping state
+
+(map! :map jg-binding-normal-state-map
+      :after jg-evil-bindings
+      :desc "SPC? Insert" "I SPC" #'evil-jg-insert-state
       )
 
 (provide '+state)

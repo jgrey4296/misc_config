@@ -15,53 +15,66 @@
 ;;-- end setup
 
 ;;-- normal state
-(map! :map jg-binding-normal-state-map
-      :desc "Indent"            "TAB" #'indent-for-tab-command
-      :desc "Emacs State"       "C-z" #'evil-emacs-state
-      :desc "Redisplay"         "§"   (cmd! (redisplay t))
-      :desc "Evil-Ex"           ":"   #'evil-ex
-      :desc "Lookup"            "K"   #'+lookup/documentation
-      :desc "Shell Cmd"         "!"   #'evil-shell-command
-      :desc "visual-block"      "C-v" #'evil-visual-block
-
-      :desc "Use Register"      "\""  #'evil-use-register
-      :desc "Repeat Substitute" "& "  #'evil-ex-repeat-substitute
-      :desc "Repeat"            ". "  #'evil-repeat
-      :desc "Shift Left"        "< "  #'evil-shift-left
-      :desc "Shift Right"       "> "  #'evil-shift-right
-      :desc "Invert Char"       "~"   #'evil-invert-char
-      :desc "Indent"            "= "  #'evil-indent
-      :desc "Macro"             "@ "  #'evil-execute-macro
-
-      :desc "Append"        "a" #'evil-append
-      :desc "Change"        "c" #'evil-change
-      :desc "Delete"        "d" #'evil-delete
-      :desc "Delete Line"   "D" #'evil-delete-line
-      :desc "Insert"        "i" #'evil-insert
-      :desc "Set Marker"    "m" #'evil-set-marker
-      :desc "Open Below"    "o" #'evil-open-below
-      :desc "Paste After"   "p" #'evil-paste-after
-      :desc "Record Macro"  "q" #'evil-record-macro
-      :desc "Replace"       "r" #'evil-replace
-      :desc "Substitute"    "s" #'evil-substitute
-      :desc "Undo"          "u" #'evil-undo
-      :desc "Delete"        "x" #'evil-delete-char
-      :desc "Yank"          "y" #'evil-yank
-
-      :desc "Append Line"   "A" #'evil-append-line
-      :desc "Delete Line"   "D" #'evil-delete-line
-      :desc "Insert Line"   "I" #'evil-insert-line
-      :desc "Join"          "J" #'evil-join
-      :desc "Lookup"        "K" #'+lookup/documentation
-      :desc "Open Above"    "O" #'evil-open-above
-      :desc "Paste Before"  "P" #'evil-paste-before
-      :desc "Eval Expr"     "Q" #'pp-eval-expression
-      :desc "Replace-State" "R" #'evil-replace-state
-      :desc "Change Line"   "S" #'evil-change-whole-line
-      :desc "B-delete"      "X" #'evil-delete-backward-char
-      :desc "Yank-line"     "Y" #'evil-yank-line
+(map! :map jg-binding-normal-state-map ;; State Changes
+      :desc "Emacs State"         "C-z"          #'evil-emacs-state
+      :desc "Record Macro"        "q"            #'evil-record-macro
+      :desc "Force Normal State"  "<escape>"     #'evil-force-normal-state
+      :desc "Insert"              "<insert>"     #'evil-insert
+      :desc "Insert"              "<insertchar>" #'evil-insert
+      :desc "Visual"              "v"            #'evil-visual-char
+      (:prefix ("V" . "Visual")
+       :desc "line"         "l"            #'evil-visual-line
+       :desc "Block"        "b"            #'evil-visual-block
       )
-(map! :map jg-binding-normal-state-map
+
+      :desc "Insert"        "i"   #'evil-insert
+      (:prefix ("I" . "Insert Plus")
+       :desc "Replace-State" "r"   #'evil-replace-state
+       :desc "Append Line"   "a"   #'evil-append-line
+       :desc "Prepend Line"  "p"   #'evil-insert-line
+       :desc "Sub Line"      "s"   #'evil-change-whole-line
+       :desc "Open Above"    "k"   #'evil-open-above
+       :desc "Open Below"    "j"   #'evil-open-below
+       )
+)
+(map! :map jg-binding-normal-state-map ;; Commands
+      :desc "Use Register"       "\""  #'evil-use-register
+      :desc "Lookup"             "K"   #'+lookup/documentation
+      :desc "Indent"             "TAB" #'indent-for-tab-command
+      :desc "Macro"              "@"   #'evil-execute-macro
+      :desc "Evil-Ex"            ":"   #'evil-ex
+      :desc "Invert Char"        "~"   #'evil-invert-char
+      :desc "Delete-op"          "d"   #'evil-delete
+      :desc "Paste After"        "p"   #'evil-paste-after
+      :desc "Redisplay"          "§"   (cmd! (redisplay t))
+      :desc "Set Marker"         "m"   #'evil-set-marker
+      :desc "Replace"            "r"   #'evil-replace
+
+      :desc "Undo"               "u"   #'evil-undo
+      :desc "Yank"               "y"   #'evil-yank
+      :desc "Yank-line"          "Y"   #'evil-yank-line
+
+      (:prefix ("D" . "Deletion")
+       :desc "B-delete"           "h"   #'evil-delete-backward-char
+       :desc "Delete"             "l"   #'evil-delete-char
+       :desc "Delete Line"        "L"   #'evil-delete-line
+      )
+      (:prefix ("C" . "Change")
+       :desc "Replace"           "r"   #'evil-replace
+       :desc "Indent"            "i"   #'evil-indent
+       :desc "Change-op"         "c"   #'evil-change
+       :desc "Invert Char"       "v"   #'evil-invert-char
+       :desc "Join line"         "j"   #'evil-join
+       :desc "Shift Left"        "l"   #'evil-shift-left
+       :desc "Shift Right"       "h"   #'evil-shift-right
+       )
+      (:prefix ("P" . "Paste")
+       :desc "Paste After"        "l"   #'evil-paste-after
+       :desc "Paste Before"       "h"   #'evil-paste-before
+       )
+
+      )
+(map! :map jg-binding-normal-state-map ;; chords
       :desc "Repeat Pop"        "C-." #'evil-repeat-pop
       :desc "Paste Pop Next"    "C-n" #'evil-paste-pop-next
       :desc "Paste Pop"         "C-p" #'evil-paste-pop
@@ -69,15 +82,11 @@
       :desc "Pop Tag Mark"      "C-t" #'pop-tag-mark
       :desc "Repeat Pop Next"   "M-." #'evil-repeat-pop-next
       :desc "Paste Pop"         "M-y" #'evil-paste-pop
-      :desc "Emacs State"       "C-z" #'evil-emacs-state
 
       "C-f" #'evil-scroll-page-down
       "C-b" #'evil-scroll-page-up
 
       :desc "Delete" "<deletechar>"         #'evil-delete-char
-      :desc "Force Normal State" "<escape>" #'evil-force-normal-state
-      :desc "Insert" "<insert>"             #'evil-insert
-      :desc "Insert" "<insertchar>"         #'evil-insert
       :desc "Back Char" "DEL"               #'evil-backward-char
       )
 ;;-- end normal state
@@ -93,24 +102,24 @@
 ;;-- visual state
 (map! :map jg-binding-visual-state-map
       [escape] 'evil-normal-state
-      :desc "Indent" "TAB"             #'indent-for-tab-command
-      :desc "Visual Block"  "DEL"      #'evil-visual-block
-      :desc "visual-block"  "C-v"      #'evil-visual-block
-      :desc "Search"        "/"        #'evil-ex-search-forward
-      :desc "B-Search"     "\\"        #'evil-ex-search-backward
-      :desc "Visual Search" "?"        #'evil-visualstar/begin-search-forward
-      :desc "L-Shift"       "<"        #'+evil/shift-left
-      :desc "R-Shift"       ">"        #'+evil/shift-right
-      :desc "Exit"          "<escape>" #'evil-exit-visual-state
-      :desc "Escape"        "C-g"      #'evil-escape
-      :desc "Macro"         "@"        #'+evil:apply-macro
-
-      :desc "Yank"                    "y" #'evil-yank
-      :desc "Lookup"                  "K" #'+lookup/documentation
-      :desc "Exchange Corners"        "O" #'evil-visual-exchange-corners
-      :desc "Change"                  "R" #'evil-change
-      :desc "Surround"                "s" #'evil-surround-region
-      :desc "Exchange Point and Mark" "o" #'exchange-point-and-mark
+      "V" nil
+      :desc "Line select"             "L"        #'evil-visual-line
+      :desc "Block Select"            "B"        #'evil-visual-block
+      :desc "B-Search"                "\\"       #'evil-ex-search-backward
+      :desc "Change"                  "R"        #'evil-change
+      :desc "Escape"                  "C-g"      #'evil-escape
+      :desc "Exchange Corners"        "O"        #'evil-visual-exchange-corners
+      :desc "Exchange Point and Mark" "o"        #'exchange-point-and-mark
+      :desc "Exit"                    "<escape>" #'evil-exit-visual-state
+      :desc "Exit"                    "v"        #'evil-exit-visual-state
+      :desc "Indent"                  "TAB"      #'indent-for-tab-command
+      :desc "L-Shift"                 "<"        #'+evil/shift-left
+      :desc "Macro"                   "@"        #'+evil:apply-macro
+      :desc "R-Shift"                 ">"        #'+evil/shift-right
+      :desc "Search"                  "/"        #'evil-ex-search-forward
+      :desc "Surround"                "s"        #'evil-surround-region
+      :desc "Visual Search"           "?"        #'evil-visualstar/begin-search-forward
+      :desc "Yank"                    "y"        #'evil-yank
       )
 ;;-- end visual state
 
@@ -124,73 +133,77 @@
 ;;-- end operator state
 
 ;;-- motion state
+(map! :map jg-binding-motion-state-map ;; basic
+      :desc "backward-char"         "h"       #'evil-backward-char
+      :desc "next-line"             "j"       #'evil-next-line
+      :desc "previous-line"         "k"       #'evil-previous-line
+      :desc "forward-char"          "l"       #'evil-forward-char
+
+      :desc "EOL"                    "$"       #'evil-end-of-line
+      :desc "BOL"                    "0"       #'evil-beginning-of-line
+      :desc "Return"                 "RET"     #'evil-ret
+      :desc "Search"                 "/"       #'evil-ex-search-forward
+      :desc "B-Search"               "\\"      #'evil-ex-search-backward
+      )
+
+(map! :map jg-binding-motion-state-map ;; word, sen, para, line
+      ;; Char
+      :desc "find-char"             "f"       #'evil-find-char
+      :desc "find-char-to"          "t"       #'evil-find-char-to
+      :desc "find-char-to-backward" "T"       #'evil-find-char-to-backward
+      ;; Word
+      :desc "B-Search Word"         "#"       #'evil-ex-search-word-backward
+      :desc "Search Word Forward"   "*"       #'evil-ex-search-word-forward
+      :desc "backward-WORD-begin"   "B"       #'evil-backward-WORD-begin
+      :desc "backward-word-begin"   "b"       #'evil-backward-word-begin
+      :desc "find-char-backward"    "F"       #'evil-find-char-backward
+      :desc "forward-WORD-begin"    "W"       #'evil-forward-WORD-begin
+      :desc "forward-WORD-end"      "E"       #'evil-forward-WORD-end
+      :desc "forward-word-begin"    "w"       #'evil-forward-word-begin
+      :desc "forward-word-end"      "e"       #'evil-forward-word-end
+      ;; Para
+      :desc "Back Paragraph"        "{"       #'evil-backward-paragraph
+      :desc "Forward Paragraph"     "}"       #'evil-forward-paragraph
+      ;; Sen
+      :desc "F-Sentence"            ")"       #'evil-forward-sentence-begin
+      :desc "B-Sentence"            "("       #'evil-backward-sentence-begin
+      ;; Line
+      :desc "1st Non Blank"         "^"       #'evil-first-non-blank
+      :desc "Goto Mark Line"        "'"       #'evil-goto-mark-line
+      :desc "Prev 1st Non Blank"    "-"       #'evil-previous-line-first-non-blank
+      :desc "Next 1st Non Blank"    "+"       #'evil-next-line-first-non-blank
+      :desc "Next 1st Non Blank"    "_"       #'evil-next-line-1-first-non-blank
+      :desc "goto-line"             "G"       #'evil-goto-line
+      ;; Window
+      :desc "window-bottom"         "L"       #'evil-window-bottom
+      :desc "window-middle"         "M"       #'evil-window-middle
+      :desc "window-top"            "H"       #'evil-window-top
+      )
+
 (map! :map jg-binding-motion-state-map
-      :desc "Return" "RET"  #'evil-ret
-      :desc "Search"   "/"  #'evil-ex-search-forward
-      :desc "B-Search" "\\" #'evil-ex-search-backward
+      :desc "Goto Column"            "|"       #'evil-goto-column
+      :desc "Goto Mark"              "`"       #'evil-goto-mark
+      :desc "Jump Item"              "%"       #'evil-jump-item
+      :desc "Repeat B-Find Char"     ","       #'evil-repeat-find-char-reverse
+      :desc "Repeat Find Char"       ";"       #'evil-repeat-find-char
+      :desc "Repeat"                 "."       #'evil-repeat
+      :desc "Repeat Substitute"      "&"       #'evil-ex-repeat-substitute
+      :desc "Scroll Down"            "<down>"  #'evil-scroll-page-down
+      :desc "Scroll Left"            "<left>"  #'evil-scroll-left
+      :desc "Scroll Right"           "<right>" #'evil-scroll-right
+      :desc "Scroll Up"              "<up>"    #'evil-scroll-page-up
+      :desc "ex-search-next"         "n"       #'evil-ex-search-next
+      :desc "ex-search-previous"     "N"       #'evil-ex-search-previous
 
-      :desc "1st Non Blank"       "^" #'evil-first-non-blank
-      :desc "Next 1st Non Blank " "_" #'evil-next-line-1-first-non-blank
-      :desc "Goto Mark"           "`" #'evil-goto-mark
-
-      :desc "Repeat"              "." #'evil-repeat
-      :desc "Repeat Find Char"    ";" #'evil-repeat-find-char
-      :desc "B-Search"            "?" #'evil-ex-search-backward
-      :desc "Back Paragraph"      "{" #'evil-backward-paragraph
-      :desc "Goto Column"         "|" #'evil-goto-column
-      :desc "Forward Paragraph"   "}" #'evil-forward-paragraph
-
-      :desc "Scroll Left"  "<left>"  #'evil-scroll-left
-      :desc "Scroll Right" "<right>" #'evil-scroll-right
-      :desc "Scroll Up"    "<up>"    #'evil-scroll-page-up
-      :desc "Scroll Down"  "<down>"  #'evil-scroll-page-down
-
-      :desc "B-Search Word"       "#" #'evil-ex-search-word-backward
-      :desc "EOL"                 "$" #'evil-end-of-line
-      :desc "Jump Item"           "%" #'evil-jump-item
-      :desc "Goto Mark Line"      "'" #'evil-goto-mark-line
-      :desc "B-Sentence"          "(" #'evil-backward-sentence-begin
-      :desc "F-Sentence"          ")" #'evil-forward-sentence-begin
-      :desc "Search Word Forward" "*" #'evil-ex-search-word-forward
-      :desc "Next 1st Non Blank"  "+" #'evil-next-line-first-non-blank
-      :desc "Repeat B-Find Char"  "," #'evil-repeat-find-char-reverse
-      :desc "Prev 1st Non Blank"  "-" #'evil-previous-line-first-non-blank
-      :desc "Search"              "/" #'evil-ex-search-forward
-      :desc "BOL"                 "0" #'evil-beginning-of-line
-      "1"             #'digit-argument
-      "2"             #'digit-argument
-      "3"             #'digit-argument
-      "4"             #'digit-argument
-      "5"             #'digit-argument
-      "6"             #'digit-argument
-      "7"             #'digit-argument
-      "8"             #'digit-argument
-      "9"             #'digit-argument
-
-      :desc  "backward-WORD-begin"   "B"              #'evil-backward-WORD-begin
-      :desc  "forward-WORD-end"      "E"              #'evil-forward-WORD-end
-      :desc  "find-char-backward"    "F"              #'evil-find-char-backward
-      :desc  "goto-line"             "G"              #'evil-goto-line
-      :desc  "window-top"            "H"              #'evil-window-top
-
-      :desc  "window-bottom"         "L"              #'evil-window-bottom
-      :desc  "window-middle"         "M"              #'evil-window-middle
-      :desc  "ex-search-previous"    "N"              #'evil-ex-search-previous
-      :desc  "find-char-to-backward" "T"              #'evil-find-char-to-backward
-      :desc  "visual-line"           "V"              #'evil-visual-line
-      :desc  "forward-WORD-begin"    "W"              #'evil-forward-WORD-begin
-
-      :desc  "backward-word-begin"   "b"              #'evil-backward-word-begin
-      :desc  "forward-word-end"      "e"              #'evil-forward-word-end
-      :desc  "find-char"             "f"              #'evil-find-char
-      :desc  "backward-char"         "h"              #'evil-backward-char
-      :desc  "next-line"             "j"              #'evil-next-line
-      :desc  "previous-line"         "k"              #'evil-previous-line
-      :desc  "forward-char"          "l"              #'evil-forward-char
-      :desc  "ex-search-next"        "n"              #'evil-ex-search-next
-      :desc  "find-char-to"          "t"              #'evil-find-char-to
-      :desc  "visual-char"           "v"              #'evil-visual-char
-      :desc  "forward-word-begin"    "w"              #'evil-forward-word-begin
+      "1"                                      #'digit-argument
+      "2"                                      #'digit-argument
+      "3"                                      #'digit-argument
+      "4"                                      #'digit-argument
+      "5"                                      #'digit-argument
+      "6"                                      #'digit-argument
+      "7"                                      #'digit-argument
+      "8"                                      #'digit-argument
+      "9"                                      #'digit-argument
       )
 ;;-- end motion state
 

@@ -28,6 +28,7 @@
       )
 
       :desc "Insert"        "i"   #'evil-insert
+      :desc "Insert Below"  "o"   #'evil-open-below
       (:prefix ("I" . "Insert Plus")
        :desc "Replace-State" "r"   #'evil-replace-state
        :desc "Append Line"   "a"   #'evil-append-line
@@ -35,6 +36,7 @@
        :desc "Sub Line"      "s"   #'evil-change-whole-line
        :desc "Open Above"    "k"   #'evil-open-above
        :desc "Open Below"    "j"   #'evil-open-below
+       :desc "Insert after"  "l"   #'evil-append
        )
 )
 (map! :map jg-binding-normal-state-map ;; Commands
@@ -45,6 +47,8 @@
       :desc "Evil-Ex"            ":"   #'evil-ex
       :desc "Invert Char"        "~"   #'evil-invert-char
       :desc "Delete-op"          "d"   #'evil-delete
+      :desc "Delete-char"        "x"   #'evil-delete-char
+      :desc "B-delete"           "X"  #'evil-delete-backward-char
       :desc "Paste After"        "p"   #'evil-paste-after
       :desc "Redisplay"          "§"   (cmd! (redisplay t))
       :desc "Set Marker"         "m"   #'evil-set-marker
@@ -55,7 +59,8 @@
       :desc "Yank-line"          "Y"   #'evil-yank-line
 
       (:prefix ("D" . "Deletion")
-       :desc "B-delete"           "h"   #'evil-delete-backward-char
+       :desc "B-delete"           "H"   #'evil-delete-backward-char
+       :desc "B-delete word"      "h"   #'evil-delete-backward-word
        :desc "Delete"             "l"   #'evil-delete-char
        :desc "Delete Line"        "L"   #'evil-delete-line
       )
@@ -88,6 +93,10 @@
 
       :desc "Delete" "<deletechar>"         #'evil-delete-char
       :desc "Back Char" "DEL"               #'evil-backward-char
+
+      "c" #'ignore
+      "X" #'ignore
+      "O" #'ignore
       )
 ;;-- end normal state
 

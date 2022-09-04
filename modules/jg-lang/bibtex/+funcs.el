@@ -246,46 +246,6 @@ bibtex-BibTeX-entry-alist for completion options "
       )
     )
   )
-(defun +jg-bibtex-clean-entry ()
-  " Calls org-ref-clean-bibtex-entry,
-  but with a wrapping to override fill-column
-
-  On an error during cleaning, will move the entry to the bottom of the file
-  if jg-bibtex-clean-move-entry-on-fail is not nil
-  "
-  (interactive)
-  (condition-case err
-      (let ((fill-column jg-bibtex-fill-column))
-        (save-excursion
-          (save-restriction
-            (bibtex-narrow-to-entry)
-            (bibtex-beginning-of-entry)
-            (loop for hook in org-ref-clean-bibtex-entry-hook
-                  do
-                  (save-restriction
-                    (save-excursion
-                      (funcall hook)
-                      ))))))
-
-    (error
-     (if jg-bibtex-clean-move-entry-on-fail
-         (let (entry)
-           (kill-region (bibtex-beginning-of-entry)
-                        (bibtex-end-of-entry))
-           (setq entry (string-trim (current-kill 0 t)))
-           (widen)
-           (save-excursion
-             (goto-char (point-max))
-             (insert entry)
-             (insert "\n")
-             )
-           (message "Clean Error, copied entry to end of file")
-           )
-       (message "Clean Error: %s" (error-message-string err))
-       )
-     )
-    )
-  )
 (defun +jg-bibtex-clean-error-move-toggle ()
   (interactive)
   (setq jg-bibtex-clean-move-entry-on-fail (not jg-bibtex-clean-move-entry-on-fail))

@@ -81,4 +81,53 @@ Modified to avoid duplicate comma insertion. "
       (backward-char)
       (insert value))))
 
+(define-advice org-ref-clean-bibtex-entry (:around (func) +jg-bibtex-clean-entry)
+  " Advice on org-ref-clean-bibtex-entry,
+  wrapping it to override fill-column,
+  and move the entry to the bottom of the file on error
+  if jg-bibtex-clean-move-entry-on-fail is not nil
+  "
+  (condition-case err
+      (let ((fill-column jg-bibtex-fill-column))
+        (funcall func)
+        )
+
+    (error
+     (if jg-bibtex-clean-move-entry-on-fail
+         (let (entry)
+           (kill-region (bibtex-beginning-of-entry)
+                        (bibtex-end-of-entry))
+           (setq entry (string-trim (current-kill 0 t)))
+           (widen)
+           (save-excursion
+             (goto-char (point-max))
+             (insert entry)
+             (insert "\n")
+             )
+           (message "Clean Error, copied entry to end of file")
+           )
+       (message "Clean Error: %s" (error-message-string err))
+       )
+     )
+    )
+  (bibtex-end-of-entry)
+  )
+
+(define-advice org-ref-clean-bibtex-entry (:override () +jg-bibtex-clean-entry)
+  (save-excursion
+    (save-restriction
+      (bibtex-narrow-to-entry)
+      (cl-loop for hook in org-ref-clean-bibtex-entry-hook
+               do
+               (message "Hook: %s" hook)
+               (debug)
+               (funcall hook)
+               )
+      )
+    )
+  )
+
+
+(advice-remove 'org-ref-clean-bibtex-entry 'org-ref-clean-bibtex-entry@+jg-bibtex-clean-entry)
+
 ;;; +advice.el ends here

@@ -4,8 +4,8 @@
 (message "Setting up bibtex bindings: %s" (current-time-string))
 (map! :after bibtex
       :map bibtex-mode-map
-      :desc "Clean entry"        :n "C-c C-c" #'+jg-bibtex-clean-entry
-      :desc "Clean entry"        :n "TAB"     #'+jg-bibtex-clean-entry
+      :desc "Clean entry"        :n "C-c C-c" #'org-ref-clean-bibtex-entry
+      :desc "Clean entry"        :n "TAB"     #'org-ref-clean-bibtex-entry
       :desc "Edit Field"         :n  "\\"     #'+jg-bibtex-edit-field
       :desc "Change Entry Type " :n "|"       #'+jg-bibtex-edit-entry-type
       :desc "Change Entry Type"  :n "DEL"     #'+jg-bibtex-edit-entry-type

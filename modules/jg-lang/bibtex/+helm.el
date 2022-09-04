@@ -9,7 +9,7 @@ modified from the original bibtex-completion-show-entry
          (entry (bibtex-completion-get-entry keys))
          (year (bibtex-completion-get-value "year" entry))
          (year-file (f-join bib-loc (format "%s.bib" year)))
-         (todo-file (f-join bib-loc "todo.bib"))
+         (todo-file jg-bibtex-todo-loc)
          )
     (catch 'break
       (dolist (bib-file `(,year-file ,todo-file))
@@ -31,7 +31,7 @@ modified from the original bibtex-completion-show-entry
          (entry (bibtex-completion-get-entry keys))
          (year (bibtex-completion-get-value "year" entry))
          (year-file (f-join bib-loc (format "%s.bib" year)))
-         (todo-file (f-join bib-loc "todo.bib"))
+         (todo-file jg-bibtex-todo-loc)
          )
     (catch 'break
       (dolist (bib-file `(,year-file ,todo-file))

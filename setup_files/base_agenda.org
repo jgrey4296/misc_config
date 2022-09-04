@@ -108,7 +108,9 @@ C - Complex Numbers. x + y·i, where i = √-1
 H - Quaternions. Extension of Complex numbers. a + b·i + c·j + d·k
 
 π - pi
-***** Probability
+
+Peano -
+***** Probability                                                           :todo:
 Law of Total Probabilty -
 Bayes Rule              -
 
@@ -128,15 +130,15 @@ Conditioning -
 
 Conjugate Prior -
 
-***** Statistics
-***** Linear Algebra
+***** Statistics                                                            :todo:
+***** Linear Algebra                                                        :todo:
 Scalar -
 Vector -
 Matrix -
 
 Cross Product -
 Dot Product -
-***** Geometry
+***** Geometry                                                              :todo:
 Euclidean geometry -
 Non-euclidean geometry -
 Cartesian geometry - (analytic)
@@ -148,13 +150,13 @@ reflection -
 rotation -
 shear -
 hyperplane -
-***** Calculus
+***** Calculus                                                              :todo:
 Derivative -
 Definite Integral -
 Indefinite Integral -
 
 l'hopitals rule -
-***** Game Theory
+***** Game Theory                                                           :todo:
 **** Relations, Orders and Sets
 ***** Binary Relations and Functions
 domain                - X in f: X → Y.
@@ -216,11 +218,7 @@ supremum              - *join*, *least upper bound*. sup(S) ∈ poset (P, <), S 
 Semi-lattice          - Poset X, ∀Y ⊂ X : inf(Y) != ∅
 Lattice               - Poset with infimum and supremum.
 
-Morphism              -
-Isomorphic            -
-Monad                 -
-Functor               -
-***** Set Theory
+***** Set Theory                                                            :todo:
 Powerset - the set of all subsets of S, including empty set and itself.
 union                 - X, Y : X ∪ Y = {a : ∀a : a ∈ X or  a ∈ Y}
 intersection          - X, Y : X ∪ Y = {a : ∀a : a ∈ X and a ∈ Y}
@@ -252,36 +250,39 @@ Bisimulation         -
 Sequent              -
 compactness property -
 first-order correspondence language -
+***** Modal Logic Definitions
+Kripke Model -
+□A = ~◇~A
 ***** Rules of Inference
-Admissable                  - (redundancy). The set of theorms does not change when a rule is added to the system.
+Admissable                   - (redundancy). The set of theorms does not change when a rule is added to the system.
 
-Open World Assumption       - statements whether be true even if they are not known to be true.
-Closed World Assumption     - only statements known to be true are true.
+Open World Assumption        - statements whether be true even if they are not known to be true.
+Closed World Assumption      - only statements known to be true are true.
 
-modus ponens   - Affirming the antecedent. (P → Q), P ⊢ Q.
-modus tollens  - Denying the Consequent.   (P → Q), ¬Q ⊢ ¬P.
-contraposition - (modus tollens) Inverting the antecedent and consequent. P → Q becomes ¬Q → ¬P
-inversion      - P → Q becomes  ¬P → ¬Q
-conversion     - P → Q becomes   Q →  P
-complement     - P → Q becomes ¬(P → Q)
+modus ponens                 - Affirming the antecedent. (P → Q), P ⊢ Q.
+modus tollens                - Denying the Consequent.   (P → Q), ¬Q ⊢ ¬P.
+contraposition               - (modus tollens) Inverting the antecedent and consequent. P → Q becomes ¬Q → ¬P
+inversion                    - P → Q becomes  ¬P → ¬Q
+conversion                   - P → Q becomes   Q →  P
+complement                   - P → Q becomes ¬(P → Q)
 
-Affirming the consequent    - *Fallacy* : (P → Q), Q ⊢ P.
-Denying the antecedent      - *Fallacy* : (P → Q), ¬P ⊢ ¬Q.
+Affirming the consequent     - *Fallacy* : (P → Q), Q ⊢ P.
+Denying the antecedent       - *Fallacy* : (P → Q), ¬P ⊢ ¬Q.
 
-import-export        - P → (Q → R) ⩭ (P ∧ Q) → R
-Strengthening        -
+import-export                - P → (Q → R) ⩭ (P ∧ Q) → R
+Strengthening                -
 
-law of excluded middle      - P ∨ ¬P
-double negation elimination - ¬¬P ⇒ P.
+law of excluded middle       - P ∨ ¬P
+double negation elimination  - ¬¬P ⇒ P.
 
-De Morgan's Laws 1          - not (A ∨ B) = (not A) ∧ (not B).
-De Morgan's Laws 1          - not (A ∧ B) = (not A) ∨ (not B).
+De Morgan's Laws 1           - not (A ∨ B) = (not A) ∧ (not B).
+De Morgan's Laws 1           - not (A ∧ B) = (not A) ∨ (not B).
 ***** Structural Rules
 Weakening                           - Addition does not change the truth of the expression. (A ⊢ X) ⇒ (A, B ⊢ X), (A ⊢ X, Y)
 Contraction                         - Idempotence of entailment. (A, A, A ⊢ X) ⩭ (A ⊢ X) and  (A ⊢ X, X, X) ⩭ (A ⊢ X).
 Exchange                            - Permutation. (A, B ⊢ X) ⩭ (B, A ⊢ X) and (A ⊢ X, Y) ⩭ (A ⊢ Y, X)
 Cut                                 - Generalisation of Modus Ponens. (Γ ⊢ A, Δ) and (Γ', A ⊢ Δ') ⩭ (Γ, Γ' ⊢ Δ, Δ')
-***** Lambda Calculus
+***** Lambda Calculus                                                       :todo:
 Normal Form         -
 Free Variable       -
 α conversion        - Renaming bound variables in an expression
@@ -289,18 +290,15 @@ Free Variable       -
 η (eta) reduction   - Converts between (λx.f x) and (f) whenever x does not appear free in f.
 
 De Bruijin Indexing -
-***** Transition System
-***** Modal Logic Definitions
-Kripke Model -
-□A = ~◇~A
-***** Semantics
+***** Transition System                                                     :todo:
+***** Semantics                                                             :todo:
 Hilbert Semantics      -
 Tarski Semantics       -
 Operational            -
 Structural Operational -
 Denotational           -
 Axiomatic              -
-**** Types of Logics
+**** Types of Logics                                                         :todo:
 ***** Propositional
 ***** First Order
 ***** Second Order
@@ -460,7 +458,7 @@ symbolic logic                      -
 tensor logic                        -
 tool logic                          -
 transaction logic                   -
-**** Logic Programming
+**** Logic Programming                                                       :todo:
 ***** Definitions
 From cropper22_induc_logic_progr_at_74
 
@@ -506,7 +504,7 @@ Brave Reasoning          -
 Cautious Reasoning       -
 ***** Communicating Sequential Processes
 ***** satisfiability modulo theory
-**** Causal Models
+**** Causal Models                                                           :todo:
 DAG      - Directed Acyclic Graph. Every Strict Partial Order is a DAG. Every transitive closure of a DAG is a strict partial order.
 
 Rule of product dcomposition -
@@ -520,8 +518,12 @@ Conditional Independence in Forks -
 Conditional Independence in Colliders -
 
 d-separation -
-**** Category theory
-**** Linguistics
+**** Category theory                                                         :todo:
+Morphism              -
+Isomorphic            -
+Monad                 -
+Functor               -
+**** Linguistics                                                             :todo:
 ***** Parts of Speech
 Noun                    -
 Pronoun                 -
@@ -567,8 +569,8 @@ Expressives                     -
 Declarations                    -
 
 Pragmatics                      -
-**** Ontology
-**** Turns
+**** Ontology                                                                :todo:
+**** Turns                                                                   :todo:
 methodological turn -
 linguistic turn     -
 ontological turn    -
@@ -581,7 +583,7 @@ methodological_turn -
 ontological_turn    -
 participatory_turn  -
 symbolic_turn       -
-**** Misc
+**** Misc                                                                    :todo:
 realism                      -
 positivism                   -
 legalism                     -
@@ -597,8 +599,7 @@ sociological realism         -
 technological determinism    -
 legal realism                -
 
-
-**** Politics
+**** Politics                                                                :todo:
 Liberalism       -
 Neoliberalism    -
 Conservatism     -

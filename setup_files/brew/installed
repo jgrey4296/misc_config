@@ -71,6 +71,7 @@ gsettings-desktop-schemas
 gtk+3
 gts
 guile
+gumbo-parser
 harfbuzz
 hdf5
 hicolor-icon-theme
@@ -147,6 +148,7 @@ libxext
 libxrender
 libyaml
 little-cms2
+llvm
 llvm@12
 lua
 lua@5.1
@@ -163,6 +165,8 @@ mono
 mpdecimal
 mpfr
 mu
+mujs
+mupdf
 ncftp
 ncurses
 netpbm

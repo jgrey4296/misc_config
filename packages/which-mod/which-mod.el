@@ -31,7 +31,7 @@
     (when (keymapp prefix-map)
       (if (keymapp (lookup-key prefix-map [which-key]))
           (setq bindings (which-key--get-keymap-bindings-1 (lookup-key prefix-map [which-key])
-                                                           nil nil filter all ignore-commands)))
+                                                           bindings nil filter all ignore-commands)))
 
       (map-keymap
        (lambda (ev def)

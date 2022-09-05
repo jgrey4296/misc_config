@@ -19,28 +19,26 @@
       :desc "Emacs State"         "C-z"          #'evil-emacs-state
       :desc "Record Macro"        "q"            #'evil-record-macro
       :desc "Force Normal State"  "<escape>"     #'evil-force-normal-state
-      :desc "Insert"              "<insert>"     #'evil-insert
-      :desc "Insert"              "<insertchar>" #'evil-insert
       :desc "Visual"              "V"            #'evil-visual-line
       (:prefix ("v" . "Visual")
        :desc "line"         "l"            #'evil-visual-line
        :desc "Block"        "b"            #'evil-visual-block
        :desc "char"         "v"            #'evil-visual-char
-       ;; i and o for immediately going to inner/outer text objs
       )
 
       :desc "Insert Below"  "o"   #'evil-open-below
       :desc "Insert"        "I"   #'evil-insert
       (:prefix ("i" . "Insert Plus")
        :desc "Insert"        "i"   #'evil-insert
-       :desc "Replace-State" "r"   #'evil-replace-state
        :desc "Append Line"   "a"   #'evil-append-line
        :desc "Prepend Line"  "p"   #'evil-insert-line
        :desc "Sub Line"      "s"   #'evil-change-whole-line
        :desc "Open Above"    "k"   #'evil-open-above
        :desc "Open Below"    "j"   #'evil-open-below
        :desc "Insert after"  "l"   #'evil-append
-       :desc "Insert Resume" "r" #'evil-insert-resume
+       :desc "Insert Resume" "!"   #'evil-insert-resume
+       :desc "Replace-State" "r"   #'evil-replace-state
+       ;; SPC reserved for jg-insert-state
        )
 )
 (map! :map jg-binding-normal-state-map ;; Commands
@@ -92,8 +90,6 @@
       :desc "Delete" "<deletechar>"         #'evil-delete-char
       :desc "Back Char" "DEL"               #'evil-backward-char
 
-      "C" #'ignore
-      "O" #'ignore
       )
 ;;-- end normal state
 
@@ -205,6 +201,17 @@
       "7"                                      #'digit-argument
       "8"                                      #'digit-argument
       "9"                                      #'digit-argument
+
+      "C" #'ignore
+      "O" #'ignore
+      "S" #'ignore
+      "A" #'ignore
+      "Z" #'ignore
+      "<" #'ignore
+      ">" #'ignore
+      "?" #'ignore
+      "!" #'ignore
+      "±" #'ignore
       )
 ;;-- end motion state
 
@@ -441,18 +448,20 @@
       :desc "B Motion"      "["   jg-binding-backward-general-motion-map
       :desc "F Motion"      "]"   jg-binding-forward-general-motion-map
 
+      :desc "Inner Select"        "v i" (cmd! (evil-visual-state) (set-transient-map jg-binding-inner-text-objects-map))
+      :desc "Outer Select"        "v a" (cmd! (evil-visual-state) (set-transient-map jg-binding-outer-text-objects-map))
       )
 
 (map! :map jg-binding-visual-state-map
       :desc "Do Ops"           "g" jg-binding-operator-map
       :desc "Visual Ops"       "z" jg-binding-vision-map
+      :desc "Inner Select"        "i" jg-binding-inner-text-objects-map
+      :desc "Outer Select"        "a" jg-binding-outer-text-objects-map
       )
 
 (map! :map jg-binding-motion-state-map
       :desc "Backward Motion Op"  "[" jg-binding-backward-operator-motion-map
       :desc "Forward Motion Op"   "]" jg-binding-forward-operator-motion-map
-      :desc "Inner Select"        "i" jg-binding-inner-text-objects-map
-      :desc "Outer Select"        "a" jg-binding-outer-text-objects-map
       )
 
 (map! :map jg-binding-operator-state-map

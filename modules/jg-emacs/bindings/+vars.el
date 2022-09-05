@@ -11,6 +11,7 @@
                                                  (regexp "/ S")
                                                  )
                                              )
+              which-key-show-operator-state-maps t
 
               evil-escape-delay 0.3
 

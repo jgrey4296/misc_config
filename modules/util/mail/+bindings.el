@@ -93,8 +93,8 @@
         "d" #'rmail-delete-forward
         "h" (cmd! (rmail-summary) (beginning-of-buffer))
         "l" #'rmail-add-label
-        "n" #'rmail-next-undeleted-message
-        "p" #'rmail-previous-message
+        "N" #'rmail-next-undeleted-message
+        "P" #'rmail-previous-message
         "q" #'quit-window
         "r" #'rmail-reply
         "u" #'rmail-undelete-previous-message

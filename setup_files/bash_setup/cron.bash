@@ -18,12 +18,13 @@ function conda_maintenance(){
         name=`basename -s .yaml $f`
         echo "Found $name"
         if conda_activate_for_scripts $name; then
-            echo "Loaded $name"
+            echo "-------------------- Loaded $name"
             conda update --all -y
             # conda env export --from-history > $f
 
-            conda env export --from-history  > $CONDA_MAINTENANCE_TARGET
+            conda env export --from-history  >> $CONDA_MAINTENANCE_TARGET
             echo "--------------------" >> $CONDA_MAINTENANCE_TARGET
+            echo "--------------------"
         fi
     done
 

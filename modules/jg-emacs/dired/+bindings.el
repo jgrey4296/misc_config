@@ -2,11 +2,11 @@
 
 (message "Setting up Dired bindings")
 
-(map! :after evil
-      :map dired-mode-map
+(map! :map dired-mode-map
+      :after evil
       :nv ")" #'dired-git-info-mode
-      :n "o"  #'dired-find-file-other-window
-      :n "S"  #'hydra-dired-quick-sort/body
+      :n  "o" #'dired-find-file-other-window
+      :n  "S" #'hydra-dired-quick-sort/body
       :nv "j" #'dired-next-line
       :nv "k" #'dired-previous-line
       :nv "J" #'dired-next-dirline
@@ -14,10 +14,8 @@
       :nv "n" #'evil-ex-search-next
       :nv "N" #'evil-ex-search-previous
 
-      :n "v" nil
-      :n "i" nil
-      :n "I" nil
-      :n ":" nil
+      :n "v" #'ignore
+      :n ":" #'ignore
 
       :nv "q" #'+jg-dired-kill-subdir-or-close-buffer
       :nv "Q" #'+dired/quit-all
@@ -39,8 +37,8 @@
        :desc "Global Match Rename" :n "R" #'+jg-dired-GLOBAL-do-rename-regexp)
       )
 
-(map! :after evil
-      :map dired-mode-map
+(map! :map dired-mode-map
+      :after evil
       :localleader
       :desc "Hide Toggle"           "h" #'dired-omit-mode
       :desc "Symlink"               "S" #'dired-do-symlink
@@ -64,8 +62,8 @@
        )
       )
 
-(map! :after evil
-      :map dired-mode-map
+(map! :map dired-mode-map
+      :after evil
       :prefix ("%" . "Dired-Do")
       :desc "flag-garbage-files"           :n "&" #'dired-flag-garbage-files
       :desc "do-copy-regexp"               :n "C" #'dired-do-copy-regexp
@@ -81,8 +79,8 @@
       :desc "upcase"                       :n "u" #'dired-upcase
       )
 
-(map! :after (evil epa)
-      :map dired-mode-map
+(map! :map dired-mode-map
+      :after (evil epa)
       ";" nil
       (:prefix (";" . "Encryption")
        :desc "Decrypt" "d" #'epa-dired-do-decrypt

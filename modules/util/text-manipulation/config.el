@@ -7,6 +7,7 @@
   (load! "+motions")
   (load! "+state")
   (load! "+bindings")
+  (load! "+advice")
 )
 
 (use-package! academic-phrases

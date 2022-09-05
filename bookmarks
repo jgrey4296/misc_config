@@ -23,7 +23,7 @@
  (rear-context-string . "66 Aug  2 23:52 ")
  (position . 166))
 ("bib_todo"
- (filename . "/Volumes/documents/github/writing/resources/bibliography/todo.bib")
+ (filename . "/Volumes/documents/github/writing/resources/todo.bib")
  (front-context-string . "  author = {},\n ")
  (rear-context-string . "\n\n@misc{stub_0,\n")
  (position . 1336))

@@ -1,6 +1,7 @@
 ;; Leader no prefix
 ;;
 (message "Setting up leader bindings: %s" (current-time-string))
+;;-- leader
 (map! :leader
       ;; "," "<" "!" "?"
       ;; :desc "help"                  "h"    help-map
@@ -38,11 +39,15 @@
       :desc "Agenda"    "7" (cmd! (find-file (car org-agenda-files)))
       )
 
-  ;;; <leader> a -- Unused
+;;-- end leader
+
+;;-- <leader> a -- Unused
 (map! :leader
       :prefix "a"
       )
-  ;;; <leader> b --- buffer
+;;-- end <leader> a -- Unused
+
+;;-- <leader> b --- buffer
 (map! :leader
       :prefix ("b" . "buffer")
       ;; DEL
@@ -68,7 +73,9 @@
       :desc "Bury buffer"                 "z"   #'bury-buffer
 
       )
-  ;;; <leader> c --- code
+;;-- end <leader> b --- buffer
+
+;;-- <leader> c --- code
 (map! :leader
       :prefix ("c" . "code")
       :desc "Compile"                               "c"   #'compile
@@ -106,7 +113,9 @@
 
        )
       )
-  ;;; <leader> f --- file
+;;-- end <leader> c --- code
+
+;;-- <leader> f --- file
 (map! :leader
       :prefix ("f" . "file")
       :desc "Ediff Files"                "TAB" #'ediff-files
@@ -137,7 +146,9 @@
        :desc "Load Bookmarks"              "l" #'bookmark-load
        )
       )
-  ;;; <leader> g --- git
+;;-- end <leader> f --- file
+
+;;-- <leader> g --- git
 (map! :leader
       :prefix ("g" . "git")
       ;; 1
@@ -194,7 +205,9 @@
         :desc "Issue"                     "i"   #'forge-create-issue
         :desc "Pull request"              "p"   #'forge-create-pullreq))
       )
-  ;;; <leader> i --- insert
+;;-- end <leader> g --- git
+
+;;-- <leader> i --- insert
 (map! :leader
       :prefix ("i" . "insert")
       ;; d
@@ -202,27 +215,27 @@
       :desc "Current file path"             "F"   (cmd!! #'+default/insert-file-path t)
       :desc "Evil ex path"                  "p"   (cmd! (evil-ex "R!echo "))
       :desc "From clipboard"                "y"   #'+default/yank-pop
-      :desc "From evil register"            "r"   #'evil-ex-registers
+      :desc "From evil register"            "r"   #'counsel-evil-registers
       :desc "From Minibuffer history"       "m"   #'counsel-minibuffer-history
       :desc "Unicode"                       "u"    #'insert-char
       ;; TODO date, time
 
-      (:prefix ("l" . "Lorem Ipsum")
+      (:prefix ("L" . "Lorem Ipsum")
        :desc "Sentence"         "s" #'lorem-ipsum-insert-sentences
        :desc "Paragraph"        "p" #'lorem-ipsum-insert-paragraphs
        :desc "List"             "l" #'lorem-ipsum-insert-list
        :desc "Academic"         "a" #'academic-phrases
        :desc "Academic Section" "A" #'academic-phrases-by-section
        )
-      ;; TODO lorem ipsum
       ;; TODO password-generator
       ;; TODO uuid
       ;; reserve "d" for inserting debug statement by mode
-      (:when (featurep! :editor snippets)
-       :desc "Snippet"                       "s"   #'yas-insert-snippet)
+      :desc "Snippet"                       "s"   #'yas-insert-snippet
 
       )
-  ;;; <leader> j -- Jumping
+;;-- end <leader> i --- insert
+
+;;-- <leader> j -- Jumping
 (map! :leader
       :prefix ("j" . "Jump")
       ;; 1 2 3 "u" "h"
@@ -246,9 +259,13 @@
 
       :desc "Find Symbol"           "y" #'helm-gtags-find-symbol
       )
-  ;;; <leader> m -- Local Mode
+;;-- end <leader> j -- Jumping
+
+;;-- <leader> m -- Local Mode
 (map! (:prefix ("m" . "Local Mode")))
-  ;;; <leader> M -- Macros
+;;-- end <leader> m -- Local Mode
+
+;;-- <leader> M -- Macros
 (map! :leader
       :prefix ("M" . "Macros")
       (:prefix ("c" . "Counter")
@@ -276,7 +293,9 @@
        :desc "View last macro" "v"              #'kmacro-view-macro-repeat
        )
       )
-  ;;; <leader> n --- notes
+;;-- end <leader> M -- Macros
+
+;;-- <leader> n --- notes
 (map! :leader
       :prefix ("n" . "notes")
       :desc "Active org-clock"               "o" #'org-clock-goto
@@ -319,7 +338,9 @@
       (:when (featurep! :lang org +noter)
        :desc "Org noter"                  "e" #'org-noter)
       )
-  ;;; <leader> o --- open
+;;-- end <leader> n --- notes
+
+;;-- <leader> o --- open
 (map! :leader
       :prefix ("o" . "open")
       :desc "Command History"              "DEL"  #'counsel-command-history
@@ -357,8 +378,9 @@
       )
       (:prefix ("s" . "Systems"))
       )
+;;-- end <leader> o --- open
 
-  ;;; <leader> p --- project
+;;-- <leader> p --- project
 (map! :leader
       :prefix ("p" . "project")
       :desc "Project Root"                 "`"  (cmd! (find-file (doom-project-root)))
@@ -402,14 +424,18 @@
       (:prefix ("4" . "in other window"))
       (:prefix ("5" . "in other frame"))
       )
-  ;;; <leader> P -- processes
+;;-- end <leader> p --- project
+
+;;-- <leader> P -- processes
 (map! :leader
       :prefix ("P" . "Processes")
       :desc "List-Processes" "l" (cmd! (list-processes))
       :desc "Helm Processes" "h" #'helm-list-emacs-process
       :desc "Kill Preview"   "p" (cmd! (shell-command "killall Preview"))
       )
-  ;;; <leader> q --- quit/restart
+;;-- end <leader> P -- processes
+
+;;-- <leader> q --- quit/restart
 (map! :leader
       :prefix ("q" . "quit/restart")
       :desc "Clear current frame"          "F" #'doom/kill-all-buffers
@@ -424,7 +450,9 @@
       :desc "Restore session from file"    "L" #'doom/load-session
       :desc "Save session to file"         "S" #'doom/save-session
       )
-  ;;; <leader> r -- REGISTERS
+;;-- end <leader> q --- quit/restart
+
+;;-- <leader> r -- REGISTERS
 (map! :leader
       :prefix ("r" . "Registers")
       :desc "Insert Register"      "i" #'insert-register
@@ -436,7 +464,9 @@
       :desc "Send to Repl"         "r" #'+jg-repl-send-register-to-repl
       :desc "Clear All"            "K" #'+jg-registers-clear-all
       )
-  ;;; <leader> R --- remote
+;;-- end <leader> r -- REGISTERS
+
+;;-- <leader> R --- remote
 (map! :leader
       (:when (featurep! :tools upload)
        :prefix ("R" . "remote")
@@ -456,7 +486,9 @@
        :desc "Upload local"               "u" #'ssh-deploy-upload-handler
        )
       )
-  ;;; <leader> s --- search
+;;-- end <leader> R --- remote
+
+;;-- <leader> s --- search
 (map! :leader
       :prefix ("s" . "search")
       :desc "Search Clear" "c"                 #'evil-ex-nohighlight
@@ -484,7 +516,9 @@
       :desc "Dictionary"                   "t" #'+lookup/dictionary-definition
       :desc "Thesaurus"                    "T" #'+lookup/synonyms
       )
-  ;;; <leader> t --- toggle
+;;-- end <leader> s --- search
+
+;;-- <leader> t --- toggle
 (map! :leader
       :prefix ("t" . "toggle")
       :desc "Global Company" "C" #'global-company-mode
@@ -537,8 +571,9 @@
       ;; camel-case-motion
       ;; fill-column indicator
       )
+;;-- end <leader> t --- toggle
 
-;;; <leader> W --- Workspaces
+;;-- <leader> W --- Workspaces
 (map! :leader
       :when (featurep! :ui workspaces)
       :prefix ("W" . "Workspaces")
@@ -566,7 +601,9 @@
       :desc "Save session"                  "S"  #'doom/save-session
       :desc "Undo window config"            "u"  #'winner-undo
       )
-  ;;; <leader> w --- Windows
+;;-- end <leader> W --- Workspaces
+
+;;-- <leader> w --- Windows
 (map! :leader
       :prefix ("w" . "Windows")
       ;; DEL
@@ -585,11 +622,15 @@
       :desc "Shrink Vertical" "}"    #'shrink-window
 
       )
-  ;;; <leader> x -- Text
+;;-- end <leader> w --- Windows
+
+;;-- <leader> x -- Text
 (map! :leader
       :prefix ("x" . "Text")
       )
-  ;;; <leader> y --- snippets
+;;-- end <leader> x -- Text
+
+;;-- <leader> y --- snippets
 (map! :leader
       :prefix ("y" . "snippets")
       ;; n
@@ -602,5 +643,6 @@
       :desc "Use Temp Template"     "e" #'aya-expand
       :desc "Find Snippet Dir"      "d" (cmd! (find-file +snippets-dir))
       )
+;;-- end <leader> y --- snippets
 
 (provide 'jg-leader-bindings-loaded)

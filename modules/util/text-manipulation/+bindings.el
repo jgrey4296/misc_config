@@ -28,6 +28,16 @@
        )
       )
 
+(map! :map jg-binding-normal-state-map
+      :after jg-evil-bindings
+      :desc "Debug"          "i d"   #'+jg-text-insert-debug
+      :desc "Select Buffer"  "v RET" #'+jg-text-whole-buffer-textobj
+
+      :desc "Title Case"     "c t"   #'+jg-text-title-case-op
+      :desc "Rotate"         "c r"   #'rotate-text
+      )
+
+
 (map! :map jg-binding-vision-map
       :after jg-leader-bindings-loaded
       "i" #'+jg-text-make-invisible
@@ -36,7 +46,7 @@
 
 (map! :map jg-binding-visual-state-map
       :after jg-evil-bindings
-      :desc "Mark Buffer"   "RET"      #'+jg-text-whole-buffer-textobj
+      :desc "Select Buffer"   "v RET"      #'+jg-text-whole-buffer-textobj
       )
 
 (map! :map jg-binding-operator-state-map

@@ -16,42 +16,104 @@
 
 ;;-- normal state
 (map! :map jg-binding-normal-state-map ;; State Changes
-      :desc "Emacs State"         "C-z"          #'evil-emacs-state
-      :desc "Record Macro"        "q"            #'evil-record-macro
-      :desc "Force Normal State"  "<escape>"     #'evil-force-normal-state
-      :desc "Visual"              "V"            #'evil-visual-line
-      (:prefix ("v" . "Visual")
-       :desc "line"         "l"            #'evil-visual-line
-       :desc "Block"        "b"            #'evil-visual-block
-       :desc "char"         "v"            #'evil-visual-char
+      :desc "Emacs State"        "C-z"      #'evil-emacs-state
+      :desc "Record Macro"       "q"        #'evil-record-macro
+      :desc "Macro"              "@"        #'evil-execute-macro
+      :desc "Force Normal State" "<escape>" #'evil-force-normal-state
       )
 
+(map! :map jg-binding-normal-state-map ;; Insert+
       :desc "Insert Below"  "o"   #'evil-open-below
       :desc "Insert"        "I"   #'evil-insert
-      (:prefix ("i" . "Insert Plus")
-       :desc "Insert"        "i"   #'evil-insert
-       :desc "Append Line"   "a"   #'evil-append-line
-       :desc "Prepend Line"  "p"   #'evil-insert-line
-       :desc "Sub Line"      "s"   #'evil-change-whole-line
-       :desc "Open Above"    "k"   #'evil-open-above
-       :desc "Open Below"    "j"   #'evil-open-below
-       :desc "Insert after"  "l"   #'evil-append
-       :desc "Insert Resume" "!"   #'evil-insert-resume
-       :desc "Replace-State" "r"   #'evil-replace-state
-       ;; SPC reserved for jg-insert-state
+      :prefix ("i" . "Insert+")
+       :desc "From evil register"       "0"          #'counsel-evil-registers
+
+       :desc "Insert Resume"            "!"          #'evil-insert-resume
+
+       :desc "Insert"                   "i"          #'evil-insert
+       :desc "Insert after"             "l"          #'evil-append
+       :desc "Replace-State"            "r"          #'evil-replace-state
+
+       :desc "Append Line"              "a"          #'evil-append-line
+       :desc "Prepend Line"             "p"          #'evil-insert-line
+       :desc "Sub Line"                 "s"          #'evil-change-whole-line
+
+
+       :desc "Open Below"               "j"          #'evil-open-below
+       :desc "Open Above"               "k"          #'evil-open-above
+
+       :desc "Current file name"        "f"          #'+default/insert-file-path
+       :desc "Current file path"        "F"   (cmd!! #'+default/insert-file-path t)
+       :desc "Snippet"                  "S"          #'yas-insert-snippet
+       :desc "From Minibuffer history"  "m"          #'counsel-minibuffer-history
+       :desc "Unicode"                  "u"          #'insert-char
+       :desc "From Kill Ring"           "y"          #'+default/yank-pop
+
+      ;; SPC reserved for jg-insert-state
+      (:prefix ("L" . "Lorem Ipsum")
+       :desc "Sentence"         "s" #'lorem-ipsum-insert-sentences
+       :desc "Paragraph"        "p" #'lorem-ipsum-insert-paragraphs
+       :desc "List"             "l" #'lorem-ipsum-insert-list
+       :desc "Academic"         "a" #'academic-phrases
+       :desc "Academic Section" "A" #'academic-phrases-by-section
        )
-)
+      )
+(map! :map jg-binding-normal-state-map ;; Visual
+      :desc "Visual"             "V"        #'evil-visual-line
+      (:prefix ("v" . "Visual+")
+       :desc "buffer"             "RET" #'mark-whole-buffer
+       :desc "line"               "l"   #'evil-visual-line
+       :desc "Block"              "b"   #'evil-visual-block
+       :desc "char"               "v"   #'evil-visual-char
+       :desc "Restore selection"  "r"   #'evil-visual-restore
+       )
+      )
+(map! :map jg-binding-normal-state-map ;; Change / paste
+      (:prefix ("c" . "Change")
+        :desc "Zap to Char"                 "z" #'zap-up-to-char
+
+        :desc "Join line"                   "j" #'evil-join
+        :desc "Split Line"                  "RET" #'electric-newline-and-maybe-indent
+
+        :desc "Rot13"                       "'" #'evil-rot13
+        :desc "ispell-word"                 "=" #'ispell-word
+        :desc "Decode url"                  "E" #'+evil:url-decode
+
+        :desc "Comment"                     "c" #'evilnc-comment-operator
+        :desc "Encode url"                  "e" #'+evil:url-encode
+        :desc "Shift Left"                  "h" #'evil-shift-left
+        :desc "Inflection"                  "i" #'evil-operator-string-inflection
+        :desc "Shift Right"                 "l" #'evil-shift-right
+
+        :desc "Upper"                       "U" #'evil-upcase
+        :desc "Down"                        "u" #'evil-downcase
+        :desc "Invert Char"                 "v" #'evil-invert-char
+
+        :desc "Delete trailing whitespace"  "w" #'delete-trailing-whitespace
+        :desc "Delete trailing newlines"    "W" #'doom/delete-trailing-newlines
+
+       )
+
+      :desc "Paste After"        "p"   #'evil-paste-after
+      (:prefix ("P" . "Paste")
+       :desc "Paste After"        "l"   #'evil-paste-after
+       :desc "Paste Before"       "h"   #'evil-paste-before
+       :desc "Reselect"           "v"   #'+evil/reselect-paste
+       :desc "From Register"      "r"   #'evil-paste-from-register
+
+       )
+
+      )
 (map! :map jg-binding-normal-state-map ;; Commands
       :desc "Use Register"       "\""  #'evil-use-register
+      :desc "Join"               "J"   #'evil-join
       :desc "Lookup"             "K"   #'+lookup/documentation
       :desc "Indent"             "TAB" #'indent-for-tab-command
-      :desc "Macro"              "@"   #'evil-execute-macro
       :desc "Evil-Ex"            ":"   #'evil-ex
       :desc "Invert Char"        "~"   #'evil-invert-char
       :desc "Delete-op"          "d"   #'evil-delete
       :desc "Delete-char"        "x"   #'evil-delete-char
       :desc "B-delete"           "X"   #'evil-delete-backward-char
-      :desc "Paste After"        "p"   #'evil-paste-after
       :desc "Redisplay"          "§"   (cmd! (redisplay t))
       :desc "Set Marker"         "m"   #'evil-set-marker
       :desc "Replace"            "r"   #'evil-replace
@@ -59,37 +121,20 @@
       :desc "Undo"               "u"   #'evil-undo
       :desc "Yank"               "y"   #'evil-yank
       :desc "Yank-line"          "Y"   #'evil-yank-line
-
-      (:prefix ("c" . "Change")
-       :desc "Replace"           "r"   #'evil-replace
-       :desc "Indent"            "i"   #'evil-indent
-       :desc "Change-op"         "c"   #'evil-change
-       :desc "Invert Char"       "v"   #'evil-invert-char
-       :desc "Join line"         "j"   #'evil-join
-       :desc "Shift Left"        "l"   #'evil-shift-left
-       :desc "Shift Right"       "h"   #'evil-shift-right
-       )
-      (:prefix ("P" . "Paste")
-       :desc "Paste After"        "l"   #'evil-paste-after
-       :desc "Paste Before"       "h"   #'evil-paste-before
-       )
-
       )
 (map! :map jg-binding-normal-state-map ;; chords
-      :desc "Repeat Pop"        "C-." #'evil-repeat-pop
-      :desc "Paste Pop Next"    "C-n" #'evil-paste-pop-next
-      :desc "Paste Pop"         "C-p" #'evil-paste-pop
-      :desc "Redo"              "C-r" #'evil-redo
-      :desc "Pop Tag Mark"      "C-t" #'pop-tag-mark
-      :desc "Repeat Pop Next"   "M-." #'evil-repeat-pop-next
-      :desc "Paste Pop"         "M-y" #'evil-paste-pop
+      :desc "Repeat Pop"      "C-."          #'evil-repeat-pop
+      :desc "Paste Pop Next"  "C-n"          #'evil-paste-pop-next
+      :desc "Paste Pop"       "C-p"          #'evil-paste-pop
+      :desc "Redo"            "C-r"          #'evil-redo
+      :desc "Pop Tag Mark"    "C-t"          #'pop-tag-mark
+      :desc "Repeat Pop Next" "M-."          #'evil-repeat-pop-next
+      :desc "Paste Pop"       "M-y"          #'evil-paste-pop
+      :desc "Delete"          "<deletechar>" #'evil-delete-char
+      :desc "Back Char"       "DEL"          #'evil-backward-char
 
       "C-f" #'evil-scroll-page-down
       "C-b" #'evil-scroll-page-up
-
-      :desc "Delete" "<deletechar>"         #'evil-delete-char
-      :desc "Back Char" "DEL"               #'evil-backward-char
-
       )
 ;;-- end normal state
 
@@ -97,26 +142,27 @@
 (map! :map jg-binding-visual-state-map
       [escape] 'evil-normal-state
       (:prefix ("v" . "Visual")
+       :desc "buffer"       "RET"          #'mark-whole-buffer
        :desc "line"         "l"            #'evil-visual-line
        :desc "Block"        "b"            #'evil-visual-block
-       :desc "char"         "v"            #'evil-visual-char
-       :desc "exit"         "x"            #'evil-exit-visual-state
+       :desc "char"         "c"            #'evil-visual-char
+       :desc "exit"         "v"            #'evil-normal-state
        )
       :desc "Exchange Corners"        "O"        #'evil-visual-exchange-corners
-      :desc "Exchange Point and Mark" "o"        #'exchange-point-and-mark
+      :desc "Exchange Point and Mark" "o"      #'exchange-point-and-mark
 
       :desc "exit"    "V"        #'evil-exit-visual-state
-      :desc "Escape"  "C-g"      #'evil-escape
-      :desc "Exit"    "<escape>" #'evil-exit-visual-state
 
       :desc "Indent"                  "TAB"      #'indent-for-tab-command
-      :desc "L-Shift"                 "<"        #'+evil/shift-left
       :desc "Macro"                   "@"        #'+evil:apply-macro
+      :desc "L-Shift"                 "<"        #'+evil/shift-left
       :desc "R-Shift"                 ">"        #'+evil/shift-right
       :desc "Search"                  "/"        #'evil-ex-search-forward
       :desc "B-Search"                "\\"       #'evil-ex-search-backward
-      :desc "Surround"                "s"        #'evil-surround-region
       :desc "Visual Search"           "?"        #'evil-visualstar/begin-search-forward
+
+      :desc "Paste Over"              "p"        #'evil-visual-paste
+      :desc "Surround"                "s"        #'evil-surround-region
       :desc "Yank"                    "y"        #'evil-yank
       )
 ;;-- end visual state
@@ -179,6 +225,7 @@
       )
 
 (map! :map jg-binding-motion-state-map
+      :desc "Escape"                 "Q"       #'doom/escape
       :desc "Goto Mark"              "`"       #'evil-goto-mark
       :desc "Jump Item"              "%"       #'evil-jump-item
       :desc "Repeat B-Find Char"     ","       #'evil-repeat-find-char-reverse
@@ -202,10 +249,12 @@
       "8"                                      #'digit-argument
       "9"                                      #'digit-argument
 
+      "J" #'ignore
       "C" #'ignore
       "O" #'ignore
       "S" #'ignore
       "A" #'ignore
+      "a" #'ignore
       "Z" #'ignore
       "<" #'ignore
       ">" #'ignore
@@ -221,8 +270,8 @@
       :desc "Escape"        "C-g" #'evil-escape
       :desc "EOL"                    "$"       #'evil-end-of-visual-line
       :desc "BOL"                    "0"       #'evil-beginning-of-visual-line
-      :desc "Line start"             "k"       #'evil-beginning-of-line
-      :desc "Line End"               "l"       #'evil-end-of-line
+      :desc "line start"             "k"       #'evil-beginning-of-line
+      :desc "Line End"               "j"       #'evil-end-of-line
       :desc "Back Char"              "h"       #'evil-backward-char
       :desc "Forward Char"           "l"       #'evil-forward-char
       )
@@ -373,7 +422,7 @@
 
       :desc "Replace region"     "R" #'+eval:replace-region
 
-      :desc "Invert"              "~"   #'evil-invert-case
+      :desc "Invert"             "~"   #'evil-invert-case
       :desc "Upper"              "U"   #'evil-upcase
       :desc "Down"               "u"   #'evil-downcase
 
@@ -386,11 +435,11 @@
 
       (:prefix ("s" . "String-ops")
        ;; t
-       :desc "Rot13"               "'" #'evil-rot13
-       :desc "Decode url"         "E"  #'+evil:url-decode
-       :desc "Encode url"         "e"  #'+evil:url-encode
-       :desc "Inflection"         "i"  #'evil-operator-string-inflection
-       :desc "ispell-word"        "="   #'ispell-word
+       :desc "Rot13"              "'" #'evil-rot13
+       :desc "Decode url"         "E" #'+evil:url-decode
+       :desc "Encode url"         "e" #'+evil:url-encode
+       :desc "Inflection"         "i" #'evil-operator-string-inflection
+       :desc "ispell-word"        "=" #'ispell-word
        )
       (:prefix ("/" . "Search")
        :desc "Search Word Forward" "*"  #'evil-ex-search-unbounded-word-forward
@@ -407,7 +456,7 @@
       (:prefix ("l" . "Line-ops")
        ;; TODO uniquify, remove leading whitespace, split on char
        ;; r
-       :desc "Justify" "j"                    #'justify-current-line
+       :desc "Justify"                    "j" #'justify-current-line
        :desc "Flush Lines"                "f" #'flush-lines
        :desc "Keep Lines"                 "K" #'keep-lines
        :desc "Delete trailing newlines"   "W" #'doom/delete-trailing-newlines
@@ -423,8 +472,9 @@
       :desc "Visual Mark Mode"    "0" #'evil-visual-mark-mode
       ;; RET, 1, aAdocrjkIi
       :desc "Widen"         "DEL" #'widen
-      :desc "Scroll Right"  ">"   #'evil-scroll-column-right
-      :desc "Scroll Left"   "<"   #'evil-scroll-column-left
+      :desc "Widen"         "w"   #'widen
+      :desc "Scroll Right"  "l"   #'evil-scroll-column-right
+      :desc "Scroll Left"   "h"   #'evil-scroll-column-left
 
 
       :desc "Center" "z"          #'evil-scroll-line-to-center

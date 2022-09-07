@@ -155,7 +155,16 @@
       )
 ;; Superscript
 (map! :map char-insert-superscript-map
-
+      :desc "¹" "1" "¹"
+      :desc "²" "2" "²"
+      :desc "³" "3" "³"
+      :desc "⁴" "4" "⁴"
+      :desc "⁵" "5" "⁵"
+      :desc "⁶" "6" "⁶"
+      :desc "⁷" "7" "⁷"
+      :desc "⁸" "8" "⁸"
+      :desc "⁹" "9" "⁹"
+      :desc "ⁱ" "i" "ⁱ"
       )
 ;; Tilde
 (map! :map char-insert-tilde-map
@@ -172,26 +181,27 @@
 
 ;; Assemble
 (map! :map char-insert-cx8-map
-      :desc "Acute" "'"       char-insert-acute-map
-      :desc "Cedilla" ","     char-insert-cedilla-map
-      :desc "Diaeresis" "\""  char-insert-diaeresis-map
-      :desc "Greek" "g"       char-insert-greek-map
-      :desc "Grave" "`"       char-insert-grave-map
-      :desc "Logic" "l"       char-insert-logic-map
-      :desc "Math" "M"        char-insert-math-map
-      :desc "Subscript" "s"   char-insert-subscript-map
-      :desc "Superscript" "S" char-insert-superscript-map
-      :desc "Tilde" "~"       char-insert-tilde-map
+      :desc "Acute"        "'"       char-insert-acute-map
+      :desc "Cedilla"      ","     char-insert-cedilla-map
+      :desc "Diaeresis"    "\""  char-insert-diaeresis-map
+      :desc "Greek"        "g"       char-insert-greek-map
+      :desc "Grave"        "`"       char-insert-grave-map
+      :desc "Logic"        "l"       char-insert-logic-map
+      :desc "Math"         "M"        char-insert-math-map
+      :desc "Subscript"    "/"   char-insert-subscript-map
+      :desc "Superscript"  "\\" char-insert-superscript-map
+      :desc "Tilde"        "~"       char-insert-tilde-map
       :desc "Counsel Insert" "RET" #'insert-char
       )
 
+
 ;; Override
-(map! :after jg-evil-bindings
-      :map evil-insert-state-map
+(map! :map evil-insert-state-map
+      :after jg-evil-bindings
       :desc "Insert Chars" "C-x 8" char-insert-cx8-map
       )
 
-(map! :after jg-evil-bindings
-      :map evil-normal-state-map
-      :desc "Insert Chars" "C-x 8" char-insert-cx8-map
+(map! :map jg-binding-normal-state-map
+      :after jg-evil-bindings
+      :desc "Char" "I c" char-insert-cx8-map
       )

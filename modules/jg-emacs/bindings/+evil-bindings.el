@@ -24,8 +24,8 @@
 
 (map! :map jg-binding-normal-state-map ;; Insert+
       :desc "Insert Below"  "o"   #'evil-open-below
-      :desc "Insert"        "I"   #'evil-insert
-      :prefix ("i" . "Insert+")
+      :desc "Insert"        "i"   #'evil-insert
+      :prefix ("I" . "Insert+")
        :desc "From evil register"       "0"          #'counsel-evil-registers
 
        :desc "Insert Resume"            "!"          #'evil-insert-resume

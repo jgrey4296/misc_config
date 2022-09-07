@@ -48,7 +48,7 @@
 
 (map! :map jg-binding-normal-state-map
       :after jg-evil-bindings
-      :desc "SPC? Insert" "i SPC" #'evil-jg-insert-state
+      :desc "SPC? Insert" "I SPC" #'evil-jg-insert-state
       )
 
 (provide '+state)

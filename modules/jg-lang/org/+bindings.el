@@ -50,11 +50,10 @@
 ;;(define-key (evil-get-auxiliary-keymap org-mode-map 'insert) (kbd "<SPC>") nil)
 
 (message "Setting up org personal bindings: %s" (current-time-string))
-;; Wiping old
-;; Personal
-;; <leaderless>
+;;-- <leaderless>
 (map! :after org
       :map org-mode-map
+      :n "I" nil
       :n "] h" nil
       :n "[ h" nil
       :desc "Next Link"       :n "] l" #'org-next-link
@@ -63,12 +62,16 @@
       :desc "Back Heading"    :n "[ j" #'org-backward-heading-same-level
       :desc "Headings Helm"   :n "g h" #'helm-org-in-buffer-headings
       )
-;; <leader>
+;;-- end <leaderless>
+
+;;-- <leader
 (map! :after org
       :map org-mode-map
       :leader
       :desc "Toggle Links" "t l"   'org-toggle-link-display)
-;; <localleader>
+;;-- end <leader
+
+;;-- <localleader>
 (map! :after org
       :map org-mode-map
       :localleader
@@ -102,9 +105,12 @@
        :desc "Insert Drawer" "d"       #'org-insert-drawer)
 
       )
+;;-- end <localleader>
 
-(map! :after evil-org
-      :map evil-org-mode-map
+;;-- evil-org
+(map! :map evil-org-mode-map
+      :after evil-org
+      :n "I"   nil
       :n "za"  nil
       :n "zA"  nil
       :n "zc"  nil
@@ -117,6 +123,7 @@
       :m "] h"  nil
       :m "[ h"  nil
       )
+;;-- end evil-org
 
 (map! :after graphviz-dot-mode
       :map graphviz-dot-mode-map

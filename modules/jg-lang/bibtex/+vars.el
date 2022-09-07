@@ -1,16 +1,20 @@
 ;;; domain-specific/bibtex/+vars.el -*- lexical-binding: t; -*-
 
-;;-- bibtex settings
+;;-- general bibtex settings
 (setq-default bibtex-completion-additional-search-fields '("tags" "year")
               bibtex-completion-bibliography nil
               bibtex-completion-pdf-field "file"
               bibtex-completion-pdf-open-function #'(lambda (x) (org-open-link-from-string (format "[[file:%s]]" x)))
-              bibtex-user-optional-fields '(("annotation" "Personal Annotation") ("tags" "Set of tags") ("isbn" "ISBN of file") ("doi" "DOI of file") ("url" "Url of file") ("file" "The path of the file") ("translator" "The Translators of the work"))
+              bibtex-user-optional-fields nil
               bibtex-field-indentation 1
               bibtex-text-indentation 15
               bibtex-align-at-equal-sign t
+
 )
-;;-- end bibtex settings
+;;-- end general bibtex settings
+
+;;-- bibtex fields
+;;-- end bibtex fields
 
 ;;-- personal settings
 (setq-default jg-bibtex-indent-equals-column 14
@@ -50,7 +54,7 @@
               jg-bibtex-rand-log ".emacs_rand_bib_log"
               jg-bibtex-tweet-rand-log ".emacs_tweet_rand_bib_log"
 
-              jg-bibtex-remove-field-newlines-regexp "file\\|url\\|title"
+              jg-bibtex-remove-field-newlines-regexp "^="
 
               jg-bibtex-clean-move-entry-on-fail nil
               jg-bibtex-open-doi-with-pdf nil
@@ -60,6 +64,21 @@
 
               jg-bibtex-open-pdf-cmd "open -nF "
               jg-bibtex-open-epub-cmd "open -a ebook-viewer "
+
+              jg-bibtex-field-rejections '("date"
+                                           "editora"
+                                           "editorb"
+                                           "editorc"
+                                           )
+
+              jg-bibtex-optional-fields '(("annotation" "Personal Annotation")
+                                          ("tags" "Set of tags")
+                                          ("isbn" "ISBN of file")
+                                          ("doi" "DOI of file")
+                                          ("url" "Url of file")
+                                          ("file" "The path of the file")
+                                          ("translator" "The Translators of the work")
+                                          )
               )
 ;;-- end personal settings
 

@@ -1,5 +1,6 @@
 
 (message "Setting up char insert bindings: %s" (current-time-string))
+;;-- keymap creation
 (defvar char-insert-cx8-map         (make-sparse-keymap))
 (defvar char-insert-acute-map       (make-sparse-keymap))
 (defvar char-insert-cedilla-map     (make-sparse-keymap))
@@ -11,9 +12,9 @@
 (defvar char-insert-subscript-map   (make-sparse-keymap))
 (defvar char-insert-superscript-map (make-sparse-keymap))
 (defvar char-insert-tilde-map       (make-sparse-keymap))
+;;-- end keymap creation
 
-
-;; Acute
+;;-- acute
 (map! :map char-insert-acute-map
       :desc "´"  "'" "´"
       :desc "á"  "a" "á"
@@ -34,7 +35,10 @@
       :desc "ý"  "y" "ý"
       :desc "ź"  "z" "ź"
       )
-;; Cedilla
+
+;;-- end acute
+
+;;-- cedilla
 (map! :map char-insert-cedilla-map
       :desc "ç"  "c"  "ç"
       :desc "ḑ"  "d"  "ḑ"
@@ -48,7 +52,9 @@
       :desc "ş"  "s"  "ş"
       :desc "ţ"  "t"  "ţ"
       )
-;; Diaresis
+;;-- end cedilla
+
+;;-- diaresis
 (map! :map char-insert-diaeresis-map
       :desc "ä"  "a"  "ä"
       :desc "ë"  "e"  "ë"
@@ -61,7 +67,9 @@
       :desc "ẍ"  "x"  "ẍ"
       :desc "ÿ"  "y"  "ÿ"
       )
-;; Greek
+;;-- end diaresis
+
+;;-- greek
 (map! :map char-insert-greek-map
       ;; Greek Letters
       :desc "α"  "a"  "α"
@@ -89,7 +97,9 @@
       :desc "ψ"  "y"  "ψ"
       :desc "ω"  "z"  "ω"
       )
-;; Grave
+;;-- end greek
+
+;;-- grave
 (map! :map char-insert-grave-map
       :desc "à"  "a"  "à"
       :desc "è"  "e"  "è"
@@ -100,7 +110,9 @@
       :desc "ẁ"  "w"  "ẁ"
       :desc "ỳ"  "y"  "ỳ"
       )
-;; Logic
+;;-- end grave
+
+;;-- logic
 (map! :map char-insert-logic-map
       :desc "∀"  "a"  "∀"
       :desc "∃"  "E"  "∃"
@@ -122,7 +134,9 @@
       :desc "◇"  "]"  "◇"
       :desc "⚬"  "o"  "⚬"
       )
-;; Math
+;;-- end logic
+
+;;-- math
 (map! :map char-insert-math-map
       :desc "⊂"  "s" "⊂"
       :desc "⊃"  "S" "⊃"
@@ -136,7 +150,9 @@
       :desc "∞"  "8" "∞"
       ;; Fractions
       )
-;; Subscript
+;;-- end math
+
+;;-- subscript
 (map! :map char-insert-subscript-map
       :desc "₁"  "1" "₁"
       :desc "₂"  "2" "₂"
@@ -152,8 +168,11 @@
       :desc "ᵢ"  "i" "ᵢ"
       :desc "₊"  "+" "₊"
       :desc "₋"  "-" "₋"
+      :desc "ₓ"  "x" "ₓ"
       )
-;; Superscript
+;;-- end subscript
+
+;;-- superscript
 (map! :map char-insert-superscript-map
       :desc "¹" "1" "¹"
       :desc "²" "2" "²"
@@ -166,7 +185,9 @@
       :desc "⁹" "9" "⁹"
       :desc "ⁱ" "i" "ⁱ"
       )
-;; Tilde
+;;-- end superscript
+
+;;-- tilde
 (map! :map char-insert-tilde-map
       :desc "ã"  "a"  "ã"
       :desc "ẽ"  "e"  "ẽ"
@@ -177,25 +198,23 @@
       :desc "ṽ"  "v"  "ṽ"
       :desc "ỹ"  "y"  "ỹ"
       )
+;;-- end tilde
 
-
-;; Assemble
+;;-- assemble
 (map! :map char-insert-cx8-map
-      :desc "Acute"        "'"       char-insert-acute-map
-      :desc "Cedilla"      ","     char-insert-cedilla-map
-      :desc "Diaeresis"    "\""  char-insert-diaeresis-map
-      :desc "Greek"        "g"       char-insert-greek-map
-      :desc "Grave"        "`"       char-insert-grave-map
-      :desc "Logic"        "l"       char-insert-logic-map
-      :desc "Math"         "M"        char-insert-math-map
-      :desc "Subscript"    "/"   char-insert-subscript-map
-      :desc "Superscript"  "\\" char-insert-superscript-map
-      :desc "Tilde"        "~"       char-insert-tilde-map
+      :desc "Acute"        "'"               char-insert-acute-map
+      :desc "Cedilla"      ","               char-insert-cedilla-map
+      :desc "Diaeresis"    "\""              char-insert-diaeresis-map
+      :desc "Greek"        "g"               char-insert-greek-map
+      :desc "Grave"        "`"               char-insert-grave-map
+      :desc "Logic"        "l"               char-insert-logic-map
+      :desc "Math"         "M"               char-insert-math-map
+      :desc "Subscript"    "/"               char-insert-subscript-map
+      :desc "Superscript"  "\\"              char-insert-superscript-map
+      :desc "Tilde"        "~"               char-insert-tilde-map
       :desc "Counsel Insert" "RET" #'insert-char
       )
 
-
-;; Override
 (map! :map evil-insert-state-map
       :after jg-evil-bindings
       :desc "Insert Chars" "C-x 8" char-insert-cx8-map
@@ -205,3 +224,5 @@
       :after jg-evil-bindings
       :desc "Char" "I c" char-insert-cx8-map
       )
+
+;;-- end assemble

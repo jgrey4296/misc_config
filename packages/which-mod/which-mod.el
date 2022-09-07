@@ -19,6 +19,7 @@
 ;;
 ;;; Code:
 
+(require 'which-key)
 (message "Loading Which-mod")
 
 (defun which-key--get-keymap-bindings-1

@@ -253,9 +253,8 @@ using org-bibtex-fields for completion options "
   )
 ;;-- end helms
 
-
 ;;-- sources
-(after! helm-bibtex
+(after! helm
   ;; Define the bib helm
 
   (setq jg-bibtex-helm-source-bibtex

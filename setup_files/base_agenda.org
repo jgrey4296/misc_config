@@ -95,8 +95,12 @@ Temporal    - Time
 Δ - Delta
 Σ - Sum
 Π - Product
+μ - The Mean
+σ - Standard Deviation
+ρ = Correlation Coefficient
 
 n! - factorial(n)
+
 **** General Math
 ***** Number Systems
 N - Natural Numbers.             0?, 1, 2, 3...
@@ -110,27 +114,140 @@ H - Quaternions. Extension of Complex numbers. a + b·i + c·j + d·k
 π - pi
 
 Peano -
-***** Probability                                                           :todo:
-Law of Total Probabilty -
-Bayes Rule              -
+***** Probability and Statistics                                            :todo:
+:Axioms:
+∀x, P(X)    >= 0
+P(Certainty) = 1
+P(Union(X)) = ΣP(x ∈ X)
 
-Conditional Probability -
-Independence -
+:END:
+:Law_of_Total_Probability:
+Summing over a partition over a variable can give the independent probability.
 
-Distribution -
+P(A) = P(A, B₁) + P(A, B₂) ... + P(A, B_n)
 
-Expectation -
-Variance    -
-Covariance  -
-Standard Deviation -
+Or with explicit probabilities:
+P(A) = P(A|B₁)P(B₁) + P(A|B₂)P(B₂) ... + P(A|B_n)P(B_n)
+:END:
+:Bayes_Theorem:
+P(A | B) = (P(B | A) * P(A)) / P(B)
+:END:
+:General_Formulas:
+Conditional Probability                 -  P(A | B) = P(A ∩ B) / P(B)
+Independence                            -  P(A)     = P(A|B) = P(A ∩ B) = P(A)P(B)
+Conditional Independence                -  P(A|B,C) = P(A|C)
+:END:
+:Expectation_μ:
+Also: population mean. µ.
 
-Regression -
-Multiple Regression -
-Conditioning -
+Discrete:
+    μ = E(X) = Σ x*P(X=x)
 
-Conjugate Prior -
+    Where P(X) is uniform, it becomes the arithmetic mean:
+    u = E(X) = 1/n * Σx
 
-***** Statistics                                                            :todo:
+Continuous:
+E(X) = ∫ x P(X) dx
+
+Conditional Expectation
+E(Y|x) = Σ y P(Y=y|x)
+
+Linear Functions:
+If Y  = a   X + b then
+ E(Y) = a E(X)
+
+:END:
+:Central_Moments:
+nth moment = E((X-μ)ⁿ)
+
+Odd moments are 0 for symmetric distributions.
+:END:
+:Variance:
+σ²(X)
+Var(X) = E((X - E(X))²)
+
+Var(X) = E(X²) - E(X)²
+
+When Y = a + bX
+Var(Y) = b² * Var(X)
+
+or
+Var(X) = Cov(X,X)
+Var(X+Y) = Var(X) + Var(Y) + 2Cov(X,Y)
+
+Product of Independent Variables:
+Var(XY) = (E(X²)E(Y²)) - (E(X)²E(Y)²)
+Product of Dependent Variables:
+Var(XY) = E(X²Y²) - E(XY)²
+:END:
+:StandardDeviation:
+σ = sqrt(Var(X))
+σ = sqrt(Cov(X,X))
+
+Expressed in the same units as X.
+:END:
+:Covariance:
+σ(XY) = E( (X  - E(X)) (Y - E(Y)) )
+σ(XY) = E(XY) - (E(X) * E(Y))
+σ(XY) = ΣXY   - (ΣX * ΣY)
+
+Measures association between two variables.
+
+
+Properties:
+Cov(aX, bY)   = a * b * Cov(X, Y)
+Cov(X + c, Y) = Cov(X, Y)
+Cov(X + Y, Z) = Cov(X, Z) + Cov(Y, Z)
+Cov(X, X)     = Var(X)
+Cov(X,Y)      = E(XY) - E(X)E(Y)
+
+Cov(Y, X₁) = Cov(β₀ + β₁ * X₁ + β₂ * X₂, X₁) = β₁Var(X₁) + β₂Cov(X₂, X₁)
+:END:
+:Correlation:
+Correlation_Coefficient is the normalization of covariance:
+ρ(XY) = σ(XY) / (σ(X)σ(Y))
+:END:
+:Linear_Regression:
+Linear Approximation of the line:
+y = α + βx
+
+Least Squares minimization of error:
+(where y' = actual data value)
+min(Σ(y_i - y'_i)²) = min(Σ(y_i - α - βx_i)²)
+
+where β = R(YX) = σ(XY) / σ²(X)
+then  α = E(Y) - β*E(X)
+
+:END:
+:Multiple_linear_regression:
+Using the line:
+y = α + (β₁*X₁) + (β₂*X₂)... + ε
+
+By partially regressing on each variable, holding the others steady.
+R(X₁Y.X₂) = Partial Regression Coefficient.
+
+and minimizing the covariance between each variable and the error ε.
+Cov(ε, Xᵢ)
+
+giving:
+denom = Var(X₁)Var(X₂) - Cov(X₁X₂)²
+β₁ = R(YX₁.X₂) = ( Var(X₂)Cov(YX₁) - Cov(YX₂)Cov(X₂X₁) ) / denom
+
+β₂ = R(YX₂.X₁) = ( σ²(X₂)σ(YX₂)σ(YX₂) - σ(YX₁)σ(YX₂) ) / denom
+
+α  = E(Y)
+:END:
+
+
+Distribution                            -
+Joint Distribution                      -
+Partition                               - Exhaustive, mutually exclusive set of events
+
+Marginalization                         - Summing all probabilities of a variable.
+Conditioning                            -
+Conjugate Prior                         -
+Central Limit Theorem -
+
 ***** Linear Algebra                                                        :todo:
 Scalar -
 Vector -
@@ -157,8 +274,9 @@ Indefinite Integral -
 
 l'hopitals rule -
 ***** Game Theory                                                           :todo:
-**** Relations, Orders and Sets
-***** Binary Relations and Functions
+***** Graph Theory
+***** Relations, Orders and Sets
+****** Binary Relations and Functions
 domain                - X in f: X → Y.
 codomain              - Y in f: X → Y.
 
@@ -191,7 +309,7 @@ Duality               - dual((P, <)) = (P, ⧼), ∀x,y ∈ P : x < y ⇔ y ⧼ 
 Left Residual         - relations A, B : A\B = complement(A^T complement(B))
 Right Residual        - relations A, B: A/B = complement(complement(A) B^T))
 Symmetric Quotient    - relations A, B: syq(A, B) = complement(A^T complement(F)) ∩ complement(complement(E)^T F)
-***** Orders
+****** Orders
 Pre-order             - reflexive, transitive relation.
 Equivalence Relation  - reflexive, symmetric, transitive relation.
 
@@ -218,7 +336,7 @@ supremum              - *join*, *least upper bound*. sup(S) ∈ poset (P, <), S 
 Semi-lattice          - Poset X, ∀Y ⊂ X : inf(Y) != ∅
 Lattice               - Poset with infimum and supremum.
 
-***** Set Theory                                                            :todo:
+****** Set Theory                                                          :todo:
 Powerset - the set of all subsets of S, including empty set and itself.
 union                 - X, Y : X ∪ Y = {a : ∀a : a ∈ X or  a ∈ Y}
 intersection          - X, Y : X ∪ Y = {a : ∀a : a ∈ X and a ∈ Y}
@@ -458,6 +576,166 @@ symbolic logic                      -
 tensor logic                        -
 tool logic                          -
 transaction logic                   -
+**** Types of Logics                                                         :todo:
+***** Propositional
+***** First Order
+***** Second Order
+***** Classical
+***** Constructive
+***** Intuitionistic
+***** Substructural
+***** Input/Output Logics
+***** Linear Logic
+linear logic               -
+
+Multiplicative Conjunction - ⨂
+Multiplicative Disjunction - ⅋
+Additive Conjunction       - &
+Additive Disjunction       - ⨁
+***** Temporal Logics
+temporal logic                      -
+alternating temporal logic          -
+alternating time temporal logic     -
+linear temporal logic               -
+linear time temporal logic          -
+metric temporal logic               -
+temporal action logic               -
+temporal epistemic logic            -
+temporal modal defeasible logic     -
+***** Modal Logics
+modal logic          -
+sabotage modal logic -
+K                    -
+K45                  -
+S                    -
+S5                   -
+***** Description Logic
+***** Misc Logics
+3 valued logics                     -
+BDI stit logic                      -
+KLM logic                           -
+Notation3 logic                     -
+OO logic                            -
+STIT logic                          -
+
+abductive logic                     -
+acceptance logic                    -
+action logic                        -
+action model logic                  -
+adaptive deontic logic              -
+adaptive logic                      -
+adjoint logic                       -
+agency logic                        -
+agent organization logic            -
+arabic logic                        -
+axiomatic logic                     -
+boolean logic                       -
+c1 logic                            -
+categorical logic                   -
+causal logic                        -
+chbdo logic                         -
+choice logic                        -
+coalition logic                     -
+combinatory logic                   -
+computation tree logic              -
+computation tree logic of knowledge -
+computational logic                 -
+conjunctive choice logic            -
+connective action logic             -
+context logic                       -
+contextual logic                    -
+cultural logic                      -
+default logic                       -
+defeasible logic                    -
+definite logic programs             -
+delegation logic                    -
+deontic logic                       -
+dependence logic                    -
+description logic                   -
+diagnostic logic                    -
+dialethic logic                     -
+dialogue logic                      -
+display logic                       -
+doxastic logic                      -
+dyadic deontic logic                -
+dynamic epistemic logic             -
+economic logic                      -
+edinburgh logical framework         -
+emerging logics                     -
+epistemic logic                     -
+epistemic logic of friendship       -
+equilibrium logic                   -
+exclusion logic                     -
+extended logic programs             -
+f logic                             -
+failure logic                       -
+fuzzy logic                         -
+general awareness logic             -
+generalised possibilistic logic     -
+geometric logic                     -
+graphical logic                     -
+herbrand logic                      -
+higher ordered logic                -
+hoare logic                         -
+hybrid logics                       -
+ignorance logic                     -
+imperative logic                    -
+inductive logic                     -
+input output logics                 -
+inquisitive logic                   -
+institutional logic                 -
+interaction logic                   -
+intuitional logic                   -
+justification logic                 -
+lax logic                           -
+legal logic                         -
+linear logic                        -
+logic of agency                     -
+logic of questions                  -
+logic of rules                      -
+mathematical logic                  -
+minimal inconsistency logic         -
+monadic deontic logic               -
+moral logic                         -
+multivalued logic                   -
+neighbourhood logic                 -
+non dialogical acts                 -
+non monotonic logic                 -
+normative logic                     -
+object oriented logic               -
+operational logic                   -
+order sorted logic                  -
+ordered choice logic                -
+ordered logic                       -
+organisational logic                -
+paraconsistent logic                -
+polarized logic                     -
+predicate logic                     -
+procedural logic                    -
+propositional dynamic logic         -
+propositional lax logic             -
+propositional logic                 -
+protological power                  -
+provability logic                   -
+public announcement logic           -
+qualitative choice logic            -
+radiological weapons testing        -
+rational agency logic               -
+relational logic                    -
+separation logic                    -
+service logic                       -
+set based logic programming         -
+social logic                        -
+spatial logic                       -
+specification logic                 -
+strategic logic                     -
+stratified logic                    -
+strictly positive logic             -
+substructural logic                 -
+symbolic logic                      -
+tensor logic                        -
+tool logic                          -
+transaction logic                   -
 **** Logic Programming                                                       :todo:
 ***** Definitions
 From cropper22_induc_logic_progr_at_74
@@ -505,24 +783,124 @@ Cautious Reasoning       -
 ***** Communicating Sequential Processes
 ***** satisfiability modulo theory
 **** Causal Models                                                           :todo:
-DAG      - Directed Acyclic Graph. Every Strict Partial Order is a DAG. Every transitive closure of a DAG is a strict partial order.
+:DAGs:
+Directed Acyclic Graph.
+Every Strict Partial Order is a DAG.
+Every transitive closure of a DAG is a strict partial order.
+:END:
 
-Rule of product dcomposition -
+:Rule_of_Product_Decomposition:
+For a DAG g:
+P(X₁, X₂, ... X_n) = ∏ P(x_i | parent(x_i))
 
-Chains   -
-Forks    -
-Collider -
+eg: X -> Y -> Z
+P(X, Y, Z) = P(X) P(Y|X) P(Z|Y)
 
-Conditional Independence in Chains -
-Conditional Independence in Forks -
-Conditional Independence in Colliders -
+:END:
 
-d-separation -
+:Chains:
+eg: X -> Y -> Z
+
+Z and Y are Dependent.
+Y and X are Dependent.
+Z and X are likely dependent.
+Z and X are independent, *conditional on Y*.
+:END:
+:Forks:
+eg: Y <- X -> Z
+
+X and Y are Dependent.
+X and Z are Dependent.
+Z and Y are likely Dependent.
+Y and Z are independent, *conditional on X*.
+:END:
+:Colliders:
+eg: X -> Z <- Y
+
+X and Z are Dependent.
+Y and Z are Dependent.
+X and Y are independent.
+X and Y are dependent, *conditional on Z*.
+:END:
+
+:Conditional_Independence_in_Chains:
+Two variables, X and Y, are conditionally independent given Z, if:
+there is only one unidirectional path between X and Y
+and Z is any set of variables that intercepts that path.
+:END:
+:Conditional_Independent_in_Forks:
+If a variable X is a common cause of variables Y and Z,
+and there is only one path between Y and Z,
+then Y and Z are independent conditional on X.
+:END:
+:Conditional_Independence_in_Colliders:
+If a variable Z is the collision node between two variables X and Y,
+and there is only one path between X and Y,
+then X and Y are unconditionally independent
+but are dependent conditional on Z and any descendants of Z.
+
+:END:
+
+:D-Separation:
+A path p is blocked by a set of nodes Z if and only if
+1. p contains a chain of nodes A -> B -> C or a fork A <- B -> C
+   such that the middle node B is in Z (i.e., B is conditioned on), or
+2. p contains a collider A → B ← C such that the collision node B is not in Z,
+   and no descendant of B is in Z.
+
+If Z blocks every path between two nodes X and Y,
+then X and Y are d-separated, conditional on Z,
+and thus are independent conditional on Z.
+:END:
+
+:Adjustment_Formula:
+
+:END:
+
+:The_Causal_Effect_Rule:
+
+:END:
+
+:The_Truncated_Product_Rule:
+
+:END:
+:The_Backdoor_Criterion:
+
+:END:
+:The_Frontdoor_Criterion:
+
+:END:
+
+:Mediation:
+
+:END:
+:Counterfactuals:
+
+:END:
+
 **** Category theory                                                         :todo:
-Morphism              -
-Isomorphic            -
-Monad                 -
-Functor               -
+[[https://en.wikipedia.org/wiki/Glossary_of_category_theory][Glossary]]
+Natural Transformation -
+:Morphisms:
+
+
+mono       -
+epi        -
+bi         -
+iso        -
+endo       -
+auto       -
+
+retraction -
+section    -
+:END:
+
+:Functors:
+
+:END:
+
+Adjoint -
+
 **** Linguistics                                                             :todo:
 ***** Parts of Speech
 Noun                    -
@@ -583,22 +961,6 @@ methodological_turn -
 ontological_turn    -
 participatory_turn  -
 symbolic_turn       -
-**** Misc                                                                    :todo:
-realism                      -
-positivism                   -
-legalism                     -
-pragmatism                   -
-
-logical positivism           -
-logical realism              -
-methodological individualism -
-methodological legalism      -
-ontological priors           -
-ontological neutrality       -
-sociological realism         -
-technological determinism    -
-legal realism                -
-
 **** Politics                                                                :todo:
 Liberalism       -
 Neoliberalism    -
@@ -609,8 +971,37 @@ Marxism          -
 Communism        -
 Socialism        -
 Fascism          -
+**** Sociology
+symbolic interactionism -
+Iron Cage               -
+Habitus                 -
+Structuration           -
+Total Institution       -
+Time Displacement       -
+Woozle effect           -
+Chicago School          -
+**** Misc                                                                    :todo:
+realism                       -
+positivism                    -
+legalism                      -
+pragmatism                    -
 
+logical positivism            -
+logical realism               -
+methodological individualism  -
+methodological legalism       -
+ontological priors            -
+ontological neutrality        -
+sociological realism          -
+technological determinism     -
+legal realism                 -
+
+Rhizome                       -
+Structuralism                 -
+Post-Structuralism            -
+Diaspora                      -
 *** Urls
+https://wiki.gladiabots.com/index.php?title=Changelog
 https://github.com/mvcisback/hasse
 https://github.com/mxgmn/MarkovJunior.git
 [[http://waveform3d.com/][Waveform3d]]

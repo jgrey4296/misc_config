@@ -47,6 +47,7 @@
 (map! :map jg-binding-visual-state-map
       :after jg-evil-bindings
       :desc "Select Buffer"   "v RET"      #'+jg-text-whole-buffer-textobj
+      :desc "contract"        "v SPC"      #'+jg-text-visual-contract
       )
 
 (map! :map jg-binding-operator-state-map

@@ -210,3 +210,10 @@ with either a numeric or alphabetical escalation "
     (evil-first-non-blank-of-visual-line)
     )
   )
+
+(evil-define-text-object +jg-text-visual-contract (count)
+  " Contract the selection to just the point "
+  :type inclusive
+  (interactive)
+  (list (point) (1+ (point)))
+  )

@@ -305,7 +305,7 @@ supremum              - *join*, *least upper bound*. sup(S) ∈ poset (P, <), S 
 Semi-lattice          - Poset X, ∀Y ⊂ X : inf(Y) != ∅
 Lattice               - Poset with infimum and supremum.
 
-***** Set Theory                                                            :todo:
+***** Set Theory
 Powerset - the set of all subsets of S, including empty set and itself.
 union                 - X, Y : X ∪ Y = {a : ∀a : a ∈ X or  a ∈ Y}
 intersection          - X, Y : X ∪ Y = {a : ∀a : a ∈ X and a ∈ Y}

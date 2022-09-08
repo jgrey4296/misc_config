@@ -51,11 +51,12 @@
 
 (message "Setting up org personal bindings: %s" (current-time-string))
 ;;-- <leaderless>
-(map! :after org
-      :map org-mode-map
+(map! :map org-mode-map
+      :after org
       :n "I" nil
       :n "] h" nil
       :n "[ h" nil
+      :desc "Cycle"           :n "a"   #'org-cycle
       :desc "Next Link"       :n "] l" #'org-next-link
       :desc "Prev Link"       :n "[ l" #'org-previous-link
       :desc "Forward Heading" :n "] j" #'org-forward-heading-same-level

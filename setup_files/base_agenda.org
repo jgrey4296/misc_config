@@ -13,9 +13,6 @@ Death by Institution and the Harms of Abstraction.
 Versu, Abl, Cif
 **** 2: Democracy CSV formulae
 **** 3: Patch Notes
-*** [[~/.doom.d/setup_files/cron/crontab.backup][Cron Jobs]]
-**** Tweet
-***** Grammar
 
 ** Secondary
 *** [[file:/Volumes/documents/github/writing/orgfiles/listings/quotes.org][Quotes]]
@@ -28,10 +25,9 @@ Versu, Abl, Cif
 *** TODO [[file:/Volumes/documents/github/corpora][Darius Kuzemi's Corpora]]
 *** [[file:/Volumes/documents/github/writing/orgfiles/primary/research_questions.org][Research Questions]]
 
-** Reminders
-*** Definitions
-**** General
-***** Modalities
+** Definitions
+*** General
+**** Modalities
 Alethic     - Possibility
 Deontic     - Permission
 Axiological - Value (intrinsic/extrinsic)
@@ -39,7 +35,7 @@ Epistemic   - Knowledge
 Doxastic    - Belief
 Boulomaic   - Desire
 Temporal    - Time
-***** Greek
+**** Greek
 α Α   - alpha
 β Β   - beta
 γ Γ   - gamma
@@ -63,7 +59,7 @@ Temporal    - Time
 φ Φ   - phi
 ψ Ψ   - psi
 ω Ω   - omega
-***** Operators
+**** Operators
 ⟘ - bottom / false
 ⟙ - Top / true
 
@@ -101,8 +97,8 @@ Temporal    - Time
 
 n! - factorial(n)
 
-**** General Math
-***** Number Systems
+*** Math
+**** Number Systems
 N - Natural Numbers.             0?, 1, 2, 3...
 Z - Integers.        ... -2, -1, 0,  1, 2...
 Q - Rational Numbers. Fractions of two integers. ∀x,y ∈ Z : x/y.
@@ -114,7 +110,7 @@ H - Quaternions. Extension of Complex numbers. a + b·i + c·j + d·k
 π - pi
 
 Peano -
-***** Probability and Statistics                                            :todo:
+**** Probability and Statistics
 :Axioms:
 ∀x, P(X)    >= 0
 P(Certainty) = 1
@@ -248,35 +244,8 @@ Conditioning                            -
 Conjugate Prior                         -
 Central Limit Theorem -
 
-***** Linear Algebra                                                        :todo:
-Scalar -
-Vector -
-Matrix -
-
-Cross Product -
-Dot Product -
-***** Geometry                                                              :todo:
-Euclidean geometry -
-Non-euclidean geometry -
-Cartesian geometry - (analytic)
-Geometric Transform -
-Affine Transform - a geometric transform that preserves lines and parallelism, but not necessarily distances and angles.
-
-scaling -
-reflection -
-rotation -
-shear -
-hyperplane -
-***** Calculus                                                              :todo:
-Derivative -
-Definite Integral -
-Indefinite Integral -
-
-l'hopitals rule -
-***** Game Theory                                                           :todo:
-***** Graph Theory
-***** Relations, Orders and Sets
-****** Binary Relations and Functions
+**** Relations, Orders and Sets
+***** Binary Relations and Functions
 domain                - X in f: X → Y.
 codomain              - Y in f: X → Y.
 
@@ -309,7 +278,7 @@ Duality               - dual((P, <)) = (P, ⧼), ∀x,y ∈ P : x < y ⇔ y ⧼ 
 Left Residual         - relations A, B : A\B = complement(A^T complement(B))
 Right Residual        - relations A, B: A/B = complement(complement(A) B^T))
 Symmetric Quotient    - relations A, B: syq(A, B) = complement(A^T complement(F)) ∩ complement(complement(E)^T F)
-****** Orders
+***** Orders
 Pre-order             - reflexive, transitive relation.
 Equivalence Relation  - reflexive, symmetric, transitive relation.
 
@@ -336,12 +305,39 @@ supremum              - *join*, *least upper bound*. sup(S) ∈ poset (P, <), S 
 Semi-lattice          - Poset X, ∀Y ⊂ X : inf(Y) != ∅
 Lattice               - Poset with infimum and supremum.
 
-****** Set Theory                                                          :todo:
+***** Set Theory                                                            :todo:
 Powerset - the set of all subsets of S, including empty set and itself.
 union                 - X, Y : X ∪ Y = {a : ∀a : a ∈ X or  a ∈ Y}
 intersection          - X, Y : X ∪ Y = {a : ∀a : a ∈ X and a ∈ Y}
-**** Logic
-***** Classical Logic Definitions
+**** Linear Algebra
+Scalar -
+Vector -
+Matrix -
+
+Cross Product -
+Dot Product -
+**** Geometry
+Euclidean geometry -
+Non-euclidean geometry -
+Cartesian geometry - (analytic)
+Geometric Transform -
+Affine Transform - a geometric transform that preserves lines and parallelism, but not necessarily distances and angles.
+
+scaling -
+reflection -
+rotation -
+shear -
+hyperplane -
+**** Calculus
+Derivative -
+Definite Integral -
+Indefinite Integral -
+
+l'hopitals rule -
+**** Game Theory
+**** Graph Theory
+*** Logic
+**** Classical Logic Definitions
 Syntactic Entailment - P ⊢ Q : Q is derivable from P in system S by the transformation rules of S, independent of truth assignments.
 Semantic Entailment  - P ⊨ Q : Q is derivable from P in system S by the transformation rules of S if there *not* a model I where P ∈ I and Q ∉ I.
 Sound                - (⊢) ⇒ (⊨).
@@ -368,10 +364,10 @@ Bisimulation         -
 Sequent              -
 compactness property -
 first-order correspondence language -
-***** Modal Logic Definitions
+**** Modal Logic Definitions
 Kripke Model -
 □A = ~◇~A
-***** Rules of Inference
+**** Rules of Inference
 Admissable                   - (redundancy). The set of theorms does not change when a rule is added to the system.
 
 Open World Assumption        - statements whether be true even if they are not known to be true.
@@ -395,12 +391,12 @@ double negation elimination  - ¬¬P ⇒ P.
 
 De Morgan's Laws 1           - not (A ∨ B) = (not A) ∧ (not B).
 De Morgan's Laws 1           - not (A ∧ B) = (not A) ∨ (not B).
-***** Structural Rules
+**** Structural Rules
 Weakening                           - Addition does not change the truth of the expression. (A ⊢ X) ⇒ (A, B ⊢ X), (A ⊢ X, Y)
 Contraction                         - Idempotence of entailment. (A, A, A ⊢ X) ⩭ (A ⊢ X) and  (A ⊢ X, X, X) ⩭ (A ⊢ X).
 Exchange                            - Permutation. (A, B ⊢ X) ⩭ (B, A ⊢ X) and (A ⊢ X, Y) ⩭ (A ⊢ Y, X)
 Cut                                 - Generalisation of Modus Ponens. (Γ ⊢ A, Δ) and (Γ', A ⊢ Δ') ⩭ (Γ, Γ' ⊢ Δ, Δ')
-***** Lambda Calculus                                                       :todo:
+**** Lambda Calculus
 Normal Form         -
 Free Variable       -
 α conversion        - Renaming bound variables in an expression
@@ -408,15 +404,15 @@ Free Variable       -
 η (eta) reduction   - Converts between (λx.f x) and (f) whenever x does not appear free in f.
 
 De Bruijin Indexing -
-***** Transition System                                                     :todo:
-***** Semantics                                                             :todo:
+**** Transition System
+**** Semantics
 Hilbert Semantics      -
 Tarski Semantics       -
 Operational            -
 Structural Operational -
 Denotational           -
 Axiomatic              -
-**** Types of Logics                                                         :todo:
+**** Types of Logics
 ***** Propositional
 ***** First Order
 ***** Second Order
@@ -576,167 +572,7 @@ symbolic logic                      -
 tensor logic                        -
 tool logic                          -
 transaction logic                   -
-**** Types of Logics                                                         :todo:
-***** Propositional
-***** First Order
-***** Second Order
-***** Classical
-***** Constructive
-***** Intuitionistic
-***** Substructural
-***** Input/Output Logics
-***** Linear Logic
-linear logic               -
-
-Multiplicative Conjunction - ⨂
-Multiplicative Disjunction - ⅋
-Additive Conjunction       - &
-Additive Disjunction       - ⨁
-***** Temporal Logics
-temporal logic                      -
-alternating temporal logic          -
-alternating time temporal logic     -
-linear temporal logic               -
-linear time temporal logic          -
-metric temporal logic               -
-temporal action logic               -
-temporal epistemic logic            -
-temporal modal defeasible logic     -
-***** Modal Logics
-modal logic          -
-sabotage modal logic -
-K                    -
-K45                  -
-S                    -
-S5                   -
-***** Description Logic
-***** Misc Logics
-3 valued logics                     -
-BDI stit logic                      -
-KLM logic                           -
-Notation3 logic                     -
-OO logic                            -
-STIT logic                          -
-
-abductive logic                     -
-acceptance logic                    -
-action logic                        -
-action model logic                  -
-adaptive deontic logic              -
-adaptive logic                      -
-adjoint logic                       -
-agency logic                        -
-agent organization logic            -
-arabic logic                        -
-axiomatic logic                     -
-boolean logic                       -
-c1 logic                            -
-categorical logic                   -
-causal logic                        -
-chbdo logic                         -
-choice logic                        -
-coalition logic                     -
-combinatory logic                   -
-computation tree logic              -
-computation tree logic of knowledge -
-computational logic                 -
-conjunctive choice logic            -
-connective action logic             -
-context logic                       -
-contextual logic                    -
-cultural logic                      -
-default logic                       -
-defeasible logic                    -
-definite logic programs             -
-delegation logic                    -
-deontic logic                       -
-dependence logic                    -
-description logic                   -
-diagnostic logic                    -
-dialethic logic                     -
-dialogue logic                      -
-display logic                       -
-doxastic logic                      -
-dyadic deontic logic                -
-dynamic epistemic logic             -
-economic logic                      -
-edinburgh logical framework         -
-emerging logics                     -
-epistemic logic                     -
-epistemic logic of friendship       -
-equilibrium logic                   -
-exclusion logic                     -
-extended logic programs             -
-f logic                             -
-failure logic                       -
-fuzzy logic                         -
-general awareness logic             -
-generalised possibilistic logic     -
-geometric logic                     -
-graphical logic                     -
-herbrand logic                      -
-higher ordered logic                -
-hoare logic                         -
-hybrid logics                       -
-ignorance logic                     -
-imperative logic                    -
-inductive logic                     -
-input output logics                 -
-inquisitive logic                   -
-institutional logic                 -
-interaction logic                   -
-intuitional logic                   -
-justification logic                 -
-lax logic                           -
-legal logic                         -
-linear logic                        -
-logic of agency                     -
-logic of questions                  -
-logic of rules                      -
-mathematical logic                  -
-minimal inconsistency logic         -
-monadic deontic logic               -
-moral logic                         -
-multivalued logic                   -
-neighbourhood logic                 -
-non dialogical acts                 -
-non monotonic logic                 -
-normative logic                     -
-object oriented logic               -
-operational logic                   -
-order sorted logic                  -
-ordered choice logic                -
-ordered logic                       -
-organisational logic                -
-paraconsistent logic                -
-polarized logic                     -
-predicate logic                     -
-procedural logic                    -
-propositional dynamic logic         -
-propositional lax logic             -
-propositional logic                 -
-protological power                  -
-provability logic                   -
-public announcement logic           -
-qualitative choice logic            -
-radiological weapons testing        -
-rational agency logic               -
-relational logic                    -
-separation logic                    -
-service logic                       -
-set based logic programming         -
-social logic                        -
-spatial logic                       -
-specification logic                 -
-strategic logic                     -
-stratified logic                    -
-strictly positive logic             -
-substructural logic                 -
-symbolic logic                      -
-tensor logic                        -
-tool logic                          -
-transaction logic                   -
-**** Logic Programming                                                       :todo:
+**** Logic Programming
 ***** Definitions
 From cropper22_induc_logic_progr_at_74
 
@@ -782,7 +618,29 @@ Brave Reasoning          -
 Cautious Reasoning       -
 ***** Communicating Sequential Processes
 ***** satisfiability modulo theory
-**** Causal Models                                                           :todo:
+**** Category theory
+[[https://en.wikipedia.org/wiki/Glossary_of_category_theory][Glossary]]
+Natural Transformation -
+:Morphisms:
+
+
+mono       -
+epi        -
+bi         -
+iso        -
+endo       -
+auto       -
+
+retraction -
+section    -
+:END:
+
+:Functors:
+
+:END:
+
+Adjoint -
+**** Causal Models
 :DAGs:
 Directed Acyclic Graph.
 Every Strict Partial Order is a DAG.
@@ -877,31 +735,496 @@ and thus are independent conditional on Z.
 :Counterfactuals:
 
 :END:
+*** Misc
+Marxism                        - critique of capitalism, and understanding economic activity through class struggle
+dialectic                      - discourse between opposing points of view (people) to arrive at the truth
+hegelian dialectic/speculative - opposing conceptions, instead of people. Proceeds from abstract, to negatively rational, to positively rational.
+eristic                        - argument to dispute an opponents argument, rather than arrive at truth
+didactic                       - one teaching and leading others through an argument
+hermeneutics                   - method of interpeting texts
+legal formalism                -
+legal positivism               - law as it exists, separate from its morality. "Normatively inert" (John Gardner). Law provides reasonably determinate guidance.
+legal realism                  - view that jurisprudence should emulate the methods of natural science, rely on evidence, test hypotheses.
+logical atomism                - Bertrand Russell, Analytic Philosophy.
+logical positivism             -
+logical realism                -
+methodological individualism   -
+methodological legalism        -
+ontological neutrality         -
+ontological priors             -
+sociological realism           -
+technological determinism      -
+**** Rights
+claim rights                 - entails obligations on others regarding the right holder.
+legal rights                 - rights bestowed by a given legal system, and so modifiable.
+liberty rights               - only regards the right holder.
+natural rights               - rights existing independent of the state/legal system.
+negative rights              - relating to protection from interference.
+positive rights              - relating to protection to act.
+second order rights          - power to/immunity from modification of rights
+**** Stances
+realism        - view of a mind-independent existence of a thing
+positivism     - from David Hume, Augustus Comte, Popper. Empiricism+.
+naturalism     - all beings and events in the universe are natural, so is relevant to study scientifically. Generally not metaphysical.
+materialism    - reducing the universe to physical facts and processes.
+legalism       - (western meaning) strict adherence to the letter of the law.
+interpretivism - law exists through the interpretations and aims of lawyers actions.
+pragmatism     - meaning lies in its observable practical uses and consequences.
+formalism      - rigourous adherence to recognized forms.
+structuralism  - understanding elements by their relationship to a broader system.
+**** Politics
+Liberalism       - John Locke. Replacing norms of hereditary privilege, state religion and monarchy with rights of the individual, consent of the governed.
+Neoliberalism    - conservative focus on free-market capitalism. Privatization, deregulation, globalization, free trade, monetarism, austerity.
+Conservatism     - seeks to preserve traditional institutions and practices. Supposedly for slow change.
+Libertarianism   - seeks to maximize 'liberty', by minimising the state's encroachment on individuals.
+Communitarianism - views individuals as existing and shaped within a broad community,
+individualism    - emphasises the independence and importance of an individual, over their connection to a community.
+Communism        - theoretical post-capitalist economic system with collective ownership of property
+Socialism        - focus on social ownership
+Fascism          - nationalist centralization of authority, capitalist economy with suppression of opposition, with racism.
+**** Art (western)
+***** Ancient
+Thracian (Dacian)
+Nuragic
+Aegean (Cycladic Minoan Minyan ware Mycenaean)
+Greek (Sub-Mycenaean Protogeometric Geometric Orientalizing Archaic Black-figure Red-figure Severe Classical Kerch)
+Hellenistic ("Baroque" Neo-Attic)
+Etruscan
+Scythian
+Iberian
+Gaulish
+Roman (Republican Gallo-Roman Julio-Claudian Pompeian Styles Trajanic Hadrian  Antonines  Commodus )
+Severan (Gallienus)
+***** Medieval
+Late antique
+Early Christian
+Art of Diocletian and the Tetrarchy
+Constantinian art
+Theodosian art
+Migration Period
+Anglo-Saxon
+Hunnic
+Insular
+Lombard
+Visigothic
+Donor portrait
+Pictish
+Mozarabic
+Repoblación
+Viking
+Byzantine
+Iconoclast
+Macedonian
+Italo-Byzantine
+Frankish
+Merovingian
+Carolingian
+Pre-Romanesque
+Ottonian
+Romanesque
+Mosan
+Norman
+Norman-Sicilian
+Opus Anglicanum
+Gothic
+International Gothic
+Lucchese School
+Novgorod School
+Duecento
+Sienese School
+Mudéjar
+Medieval cartography
+Italian school
+Majorcan school
+Mappa mundi
 
-**** Category theory                                                         :todo:
-[[https://en.wikipedia.org/wiki/Glossary_of_category_theory][Glossary]]
-Natural Transformation -
-:Morphisms:
+***** Renaissance
+Italian Renaissance
+Trecento
+Proto-Renaissance
+Florentine School
+Pittura infamante
+Quattrocento
+Ferrarese School
+Forlivese School
+Venetian School
+Di sotto in sù
+Cinquecento
+High Renaissance
+Bolognese School
+Mannerism
+Counter-Maniera
+Northern Renaissance
+Early Netherlandish
+World landscape
+Ghent-Bruges school
+Northern Mannerism
+German Renaissance
+Cologne School
+Danube school
+Dutch and Flemish Renaissance
+Antwerp Mannerism
+Romanism
+Still life
+English Renaissance
+Tudor court
+Cretan School
+Vologda School
+Turquerie
+Fontainebleau School
+
+***** 17th Century
+Baroque
+Flemish Baroque
+Caravaggisti
+Utrecht
+Tenebrism
+Quadratura
+Louis XIII style
+Lutheran Baroque
+Godunov School
+Stroganov School
+Siberian School
+Guild of Romanists
+Dutch Golden Age
+Delft School
+Capriccio
+Heptanese School
+Classicism
+Louis XIV style
+Poussinists and Rubenists
+***** 18th Century
+Rococo
+Rocaille
+Louis XV style
+Frederician
+Chinoiserie
+Fête galante
+Neoclassicism
+Goût grec
+Louis XVI style
+Adam style
+Directoire style
+Picturesque
 
 
-mono       -
-epi        -
-bi         -
-iso        -
-endo       -
-auto       -
+***** 19th Century
+    Academic, c. 16th century–20th century
+    Aesthetic Movement
+    American Barbizon school
+    American Impressionism
+    Amsterdam Impressionism
+    Art Nouveau, c. 1890–1910
+    Arts and Crafts Movement, founded 1860s
+    Barbizon school, c. 1830s–1870s
+    Biedermeier, c. 1815–1848
+    Cloisonnism, c. 1888–1900s (decade)
+    Danish Golden Age c. 1800s-1850s
+    Decadent movement
+    Divisionism, c. 1880s–1910s
+    Düsseldorf School
+    Etching revival
+    Expressionism, c. 1890s–1930s
+    German Romanticism, c. 1790s–1850s
+    Gründerzeit
+    Hague School, c. 1860s–1890s
+    Heidelberg School, c. 1880s–1900s (decade)
+    Hoosier Group
+    Hudson River School, c. 1820s–1900s (decade)
+    Hurufiyya movement mid-20th-century in North Africa and the Middle East
+    Impressionism, c. 1860s–1920s
+    Incoherents, c. 1882-1890s
+    Jugendstil
+    Les Nabis, c. 1890s–1900s (decade)
+    Les Vingt
+    Letras y figuras, c. 1845-1900s
+    Luminism
+    Lyon School
+    Macchiaioli c. 1850s–1900s (decade)
+    Mir iskusstva, founded 1898
+    Modernism, c. 1860s-ongoing
+    Naturalism
+    Nazarene, c. 1810s–1830
+    Neo-Classicism, c. 1780s–1900s (decade)
+    Neo-impressionism, c. 1880s–1910s
+    Norwegian romantic nationalism, c. 1840–1867
+    Norwich School, founded 1803
+    Orientalism
+    Peredvizhniki
+    Pointillism, c. 1880s–1910s
+    Pont-Aven School, c. 1850s–1890s
+    Post-Impressionism, c. 1880s–1900s (decade)
+    Pre-Raphaelite Brotherhood
+    Realism, c. 1850s–1900s (decade)
+    Realism, c. 1850s–1900s (decade)
+    Romanticism, c. 1750s–1890s
+    Secession groups, c. 1890s–1910s
+    Society of American Artists, c. 1877–1906
+    Spanish Eclecticism, c. 1845-1890s
+    Symbolism
+    Synthetism, c. 1877–1900s (decade)
+    Tipos del País
+    Tonalism, c. 1880–1915
+    Vienna Secession, founded 1897
+    Volcano School
+    White Mountain art, c. 1820s–1870s
+    Spiritualist art, c. 1870–
 
-retraction -
-section    -
+***** 20th Century
+****** 1900-1921
+    Academic, c. 1900s (decade)-ongoing
+    American realism, c. 1890s–1920s
+    Analytic Cubism, c. 1909–1912
+    Art Deco, c. 1910–1939
+    Ashcan School, c. 1890s–1920s
+    Australian tonalism, c. 1910s–1930s
+    Berliner Sezession, founded 1898
+    Bloomsbury Group, c. 1900s (decade)–1960s
+    Brandywine School
+    Camden Town Group, c. 1911–1913
+    Constructivism, c. 1920–1922, 1920s–1940s
+    Cubism, c. 1906–1919
+    Cubo-Futurism, c. 1912–1918
+    Czech Cubism, c. 1910–1914
+    Dada, c. 1916–1922
+    Der Blaue Reiter, c. 1911–1914
+    De Stijl, c. 1917–1931
+    Deutscher Werkbund, founded 1907
+    Die Brücke, founded 1905
+    Expressionism c. 1890s–1930s
+    Fauvism, c. 1900–1910
+    Futurism, c. 1909–1916
+    German Expressionism, c. 1913–1930
+    Group of Seven (Canada), c. 1913–1930s
+    Jack of Diamonds, founded 1909
+    Luminism (Impressionism), c. 1900s (decade)–1930s
+    Modernism, c. 1860s–ongoing
+    Neo-Classicism, c. 1900s (decade)–ongoing
+    Neo-primitivism, from 1913
+    Neue Künstlervereinigung München
+    Novembergruppe, founded 1918
+    Objective Abstraction, c. 1933–1936
+    Orphism, c. 1910–1913
+    Photo-Secession, founded c. 1902
+    Pittura Metafisica, c. 1911–1920
+    Proto-Cubism, c. 1906–1908
+    Purism, c. 1917–1930s
+    Rayonism
+    Section d'Or, c. 1912–1914
+    Suprematism, formed c. 1915–1916
+    Synchromism, founded 1912
+    Synthetic Cubism, c. 1912–1919
+    The Eight, c. 1909–1918
+    The Ten, c. 1897–1920
+    Vorticism, founded 1914
+****** 1920-1945
+American Scene painting, c. 1920s–1950s
+Arbeitsrat für Kunst
+Art Deco
+Bauhaus, c. 1919–1933
+Concrete art
+Der Ring
+De Stijl, c. 1917–1931
+Ecole de Paris
+Geometric abstraction
+Gruppo 7
+International Style, c. 1920s–1970s
+Kapists, c. 1930s
+Magic Realism
+Neo-Romanticism
+Neue Sachlichkeit
+Novecento Italiano
+Novembergruppe, founded 1918
+Precisionism, c. 1918–1940s
+Regionalism (art), c. 1930s–1940s
+Return to order, 1918–1922
+Scuola Romana, c. 1928–1945
+Social Realism, c. 1920s–1960s
+Socialist Realism
+Surrealism, c. 1920s–1960s
+Universal Constructivism, c. 1930–1970
+
+****** 1940-1965
+Abstract expressionism
+Action painting
+Arte Povera
+Art Informel
+Assemblage
+Beatnik art
+Chicago Imagists
+CoBrA, c. 1948–1951
+Color Field painting
+Combine painting
+De-collage
+Fluxus
+Happening
+Hard-Edge Painting
+Kinetic Art
+Kitchen Sink School
+Lettrism
+Lyrical abstraction
+Neo-Dada
+New Brutalism
+Northwest School
+Nouveau Réalisme
+Op Art
+Organic abstraction
+Outsider Art
+Panic Movement
+Pop Art
+Post-painterly abstraction
+Process art
+Public art
+Retro art
+Serial art
+Shaped canvas
+Situationist International
+Tachism
+Video art
+
+****** 1965-2000
+Abstract Illusionism
+Appropriation
+Arte Povera
+Art Photography
+Body Art
+Classical Realism
+Conceptual Art
+Dogme 95
+Earth Art
+Figuration Libre
+Funk art
+Graffiti art
+Hyperrealism
+Installation art
+Internet Art
+Land art
+Late modernism
+Light and Space
+Lowbrow
+Lyrical Abstraction
+Mail art
+Massurrealism
+Maximalism
+Minimalism
+Neo-Expressionism
+Neo-figurative
+Neo-pop
+Performance Art
+Postminimalism
+Postmodernism
+Photorealism
+Psychedelic art
+Relational art
+Site-specific art
+Sound Art
+Transavanguardia
+Young British Artists
+
+***** 21st Century
+Algorithmic art
+Altermodernism
+Biomorphism
+Computer art
+Computer graphics
+Craftivism
+Digital art
+Electronic Art
+Empathism
+Environmental art
+Excessivism
+Intentism
+Internet art
+Intervention art
+Metamodernism
+Modern European ink painting
+Neo-minimalism
+New Media Art
+Pixel art
+Post-postmodernism
+Relational art
+Remodernism
+Social practice (art)
+SoFlo Superflat
+Stuckism International
+Superflat
+Superstroke
+Transgressive art
+Toyism
+Unilalianism
+Vaporwave
+Postinternet
+***** Specific Movements
+****** Realism
+The Attempt to represent the subject matter truthfully.
+
+Classical  -
+Literary   -
+New        -
+Theatrical -
+Fantastic  -
+Socialist  -
+******* Neorealism
+Italian -
+Indian  -
+****** Minimalism
+****** Art Nouveau
+****** Expressionism
+****** Romanticism
+****** Impressionism
+****** Modernism
+****** Neo-Classicism
+****** Orientalism
+****** Pointillism
+****** Romanticism
+****** Art Deco
+****** Cubism
+****** Dada
+****** De Stijl
+****** Fauvism
+****** Futurism
+****** Bauhaus
+****** Magical Realism
+****** Surrealism
+****** Brutalism
+****** Pop Art
+******
+
+**** Turns
+adaptive_turn       -
+computational_turn  -
+historical_turn     -
+institutional_turn  -
+
+:linguistic_turn:
+Focusing on relations between language, language users, and the world.
+The birth of Analytic Philosophy
+
+Rorty 1967.
 :END:
 
-:Functors:
-
-:END:
-
-Adjoint -
-
-**** Linguistics                                                             :todo:
+methodological turn -
+ontological turn    -
+participatory turn  -
+symbolic turn       -
+**** Philosophy
+Ordinary language philosophy  - where traditional philosophical problems arise from philosophers distorting words.
+Rhizome                       -
+Structuralism                 -
+Post-Structuralism            -
+Diaspora                      -
+**** Ontology
+**** Sociology
+double hermeneutic      - relationship between lay and social science interpretation of the world.
+symbolic interactionism - George Herbert Mead. Meaning constructed via communication.
+Iron Cage               -
+Habitus                 -
+Structuration           -
+Total Institution       -
+Time Displacement       -
+Woozle effect           -
+Chicago School          -
+**** Linguistics
 ***** Parts of Speech
 Noun                    -
 Pronoun                 -
@@ -947,117 +1270,82 @@ Expressives                     -
 Declarations                    -
 
 Pragmatics                      -
-**** Ontology                                                                :todo:
-**** Turns                                                                   :todo:
-methodological turn -
-linguistic turn     -
-ontological turn    -
-adaptive_turn       -
-computational_turn  -
-historical_turn     -
-institutional_turn  -
-linguistic_turn     -
-methodological_turn -
-ontological_turn    -
-participatory_turn  -
-symbolic_turn       -
-**** Politics                                                                :todo:
-Liberalism       -
-Neoliberalism    -
-Conservatism     -
-Libertarianism   -
-Communitarianism -
-Marxism          -
-Communism        -
-Socialism        -
-Fascism          -
-**** Sociology
-symbolic interactionism -
-Iron Cage               -
-Habitus                 -
-Structuration           -
-Total Institution       -
-Time Displacement       -
-Woozle effect           -
-Chicago School          -
-**** Misc                                                                    :todo:
-realism                       -
-positivism                    -
-legalism                      -
-pragmatism                    -
 
-logical positivism            -
-logical realism               -
-methodological individualism  -
-methodological legalism       -
-ontological priors            -
-ontological neutrality        -
-sociological realism          -
-technological determinism     -
-legal realism                 -
-
-Rhizome                       -
-Structuralism                 -
-Post-Structuralism            -
-Diaspora                      -
-*** Urls
-https://wiki.gladiabots.com/index.php?title=Changelog
+** Urls
+Latex/tikz-compatible diagram editor: https://q.uiver.app/
+*** Github
+https://ganelson.github.io/inform/index.html
+https://github.com/company-mode/company-mode/wiki/Writing-backends
+https://github.com/fgregg/tax_extension/tree/master#code-for-calculation-tax-extensions-in-cook-county
 https://github.com/mvcisback/hasse
 https://github.com/mxgmn/MarkovJunior.git
-[[http://waveform3d.com/][Waveform3d]]
-[[https://en.wikipedia.org/wiki/Summa_Theologica][Summa Theologica]]
-[[https://parl.ai/projects/light/][Parl.ai: NLP and dialogue]]
-[[https://sketchfab.com/][Sketchfab]]
-http://www.betsydisalvo.com/research.html
-https://anarchopac.wordpress.com/2013/05/31/recommended-reading/amp/
-https://andrebrock.academia.edu/
+https://www.micromacro-game.com/en/extracontent.html
+*** Youtube
+https://www.youtube.com/watch?v=SfFh3rIjDME
+https://www.youtube.com/watch?v=wfzSE4Hoxbc
+*** Games
+https://wiki.gladiabots.com/index.php?title=Changelog
+https://developer.valvesoftware.com/wiki/Response_System
+https://eu4.paradoxwikis.com/Technology
+https://logicmag.io/play/model-metropolis/
+*** Machine Learning
 https://applyingml.com/
 https://applyingml.com/resources/ml-design-docs/
 https://applyingml.com/resources/personalization/
-https://bpw1621.com/archive/ordained-the-python-project-template/
-https://catlikecoding.com/unity/tutorials/
-https://dev.to/matechs/building-custom-dsls-in-typescript-29el
-https://developer.valvesoftware.com/wiki/Response_System
-https://doc.rust-lang.org/book/title-page.html
-https://economicsfromthetopdown.com/2020/12/10/why-and-how-i-write-scientific-documents-in-plain-text/
-https://egap.org/resource/10-things-to-know-about-causal-inference/
-https://eu4.paradoxwikis.com/Technology
-https://floppy.foone.org/w/Main_Page
-https://flowingdata.com/2015/12/15/a-day-in-the-life-of-americans/
-https://ganelson.github.io/inform/index.html
-https://generativist.falsifiable.com/
-https://github.com/company-mode/company-mode/wiki/Writing-backends
-https://github.com/fgregg/tax_extension/tree/master#code-for-calculation-tax-extensions-in-cook-county
+[[https://parl.ai/projects/light/][Parl.ai: NLP and dialogue]]
+*** Audio Visual
+[[http://waveform3d.com/][Waveform3d]]
+[[https://sketchfab.com/][Sketchfab]]
 https://graphics.stanford.edu/courses/cs348c-96-fall/resources.html
+https://flowingdata.com/2015/12/15/a-day-in-the-life-of-americans/
 https://graphviz.org/theory/
-https://logicmag.io/play/model-metropolis/
-https://medium.com/fluxx-studio-notes/52-things-i-learned-in-2021-8481c4e0d409
-https://patthomson.net/2017/01/23/managing-the-phd-keeping-a-journal/
-https://pluralistic.net/
+https://www.alanzucconi.com/tutorials/
+https://catlikecoding.com/unity/tutorials/
+
+*** Programming
+https://www.andrewheiss.com/blog/2021/08/21/r2-euler/
+https://dev.to/matechs/building-custom-dsls-in-typescript-29el
+https://doc.rust-lang.org/book/title-page.html
 https://pybit.es/articles/ast-intro/
-https://q.uiver.app/
+https://bpw1621.com/archive/ordained-the-python-project-template/
 https://refactoring.guru/
 https://stackabuse.com/creating-pdf-invoices-in-python-with-borb/
 https://strongtyping.readthedocs.io/en/latest/
 https://tenthousandmeters.com/blog/python-behind-the-scenes-11-how-the-python-import-system-works/
-https://torch.ox.ac.uk/ethicsai#/
-https://transmediawatch.org/articles
-https://twitter.com/WitchesFor/lists
 https://wa.aws.amazon.com/wat.concept.coe.en.html
 https://web.mit.edu/jemorris/humor/500-miles
-https://www.alanzucconi.com/tutorials/
-https://www.andrewheiss.com/blog/2021/08/21/r2-euler/
-https://www.cc.gatech.edu/~isbell/pubs/
-https://www.census.gov/quickfacts/fact/table/US/PST045219
-https://www.micromacro-game.com/en/extracontent.html
+
+*** Economics
 https://www.nomisweb.co.uk/
+https://economicsfromthetopdown.com/2020/12/10/why-and-how-i-write-scientific-documents-in-plain-text/
+https://www.census.gov/quickfacts/fact/table/US/PST045219
+
+*** Causal Inference
+https://egap.org/resource/10-things-to-know-about-causal-inference/
+
+*** Reading lists
+https://anarchopac.wordpress.com/2013/05/31/recommended-reading/amp/
+https://medium.com/fluxx-studio-notes/52-things-i-learned-in-2021-8481c4e0d409
+https://generativist.falsifiable.com/
+https://transmediawatch.org/articles
+https://twitter.com/WitchesFor/lists
 https://www.sciencedirect.com/journal/artificial-intelligence/issues
 https://www.taylorfrancis.com/books/edit/10.4324/9781315302430/organizational-space-beyond-sytze-kingma-karen-dale-varda-wasserman
 https://www.uu.nl/en/research/game-research/research/publications
+http://www.betsydisalvo.com/
+https://andrebrock.academia.edu/
+https://patthomson.net/2017/01/23/managing-the-phd-keeping-a-journal/
+https://torch.ox.ac.uk/ethicsai#/
+https://www.cc.gatech.edu/~isbell/pubs/
 https://www.wzchen.com/data-science-books
-https://www.youtube.com/watch?v=SfFh3rIjDME
-https://www.youtube.com/watch?v=wfzSE4Hoxbc
-*** Other
+
+*** Misc
+https://floppy.foone.org/w/Main_Page
+https://pluralistic.net/
+
+[[https://en.wikipedia.org/wiki/Summa_Theologica][Summa Theologica]]
+
+** Other
 Killing the Black Body or Fatal Invention by @DorothyERoberts
 Medical Apartheid by @haw95
 Racecraft by Barbara and Karen Fields
@@ -1084,11 +1372,7 @@ index xkcd using explainxkcd
 -from:quotedreplies url:1255330066151718912
 fictional syllabi - both of actual papers, and lem-like
 
-org - add a nav state for moving around headings and subtrees?
-
 tag - amend mode
-
-cron - look at dropbox/docs, mv any files into current_pdfs
 
 ** Exporting and scripts
 *** Markdown html export
@@ -1115,7 +1399,6 @@ https://pandoc.org/
 awk 'match($0, /HREF="(.+?)"/, a) {print a[1]}'
 
 #+end_src awk
-
 
 *** Pdf Metadata
 #+begin_src bash

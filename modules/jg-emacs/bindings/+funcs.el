@@ -73,3 +73,10 @@
     nil
     )
   )
+
+(evil-define-text-object +jg-binding-visual-contract (count)
+  " Contract the selection to just the point "
+  :type inclusive
+  (interactive)
+  (list (point) (1+ (point)))
+  )

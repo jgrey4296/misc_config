@@ -147,6 +147,8 @@
        :desc "Block"        "b"            #'evil-visual-block
        :desc "char"         "c"            #'evil-visual-char
        :desc "exit"         "v"            #'evil-normal-state
+       :desc "contract"     "SPC"          #'+jg-binding-visual-contract
+
        )
       :desc "Exchange Corners"        "O"        #'evil-visual-exchange-corners
       :desc "Exchange Point and Mark" "o"      #'exchange-point-and-mark

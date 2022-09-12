@@ -22,9 +22,9 @@
                                             (overlay-get x 'type)))
                             overlays))
          )
-    (if types
+    (if (and types (< (overlay-start (car types)) (point)))
         (progn (goto-char (overlay-end (car types)))
-               (evil-backward-char)
+               (forward-line)
                )
       )
     )
@@ -60,3 +60,8 @@
                           +jg-text-join-line-bol)
   (beginning-of-line)
   )
+
+(advice-remove 'evil-beginning-of-visual-line 'evil-beginning-of-visual-line@+jg-text-invisi-line-respect)
+(advice-remove 'evil-next-line 'evil-next-line@+jg-text-invisi-line-respect)
+(advice-remove 'evil-previous-line 'evil-previous-line@+jg-text-invisi-line-respect)
+(advice-remove 'evil-backward-char 'evil-backward-char@+jg-text-invisi-line-respect)

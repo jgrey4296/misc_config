@@ -33,6 +33,7 @@
        :desc "Insert"                   "i"          #'evil-insert
        :desc "Insert after"             "l"          #'evil-append
        :desc "Replace-State"            "r"          #'evil-replace-state
+       :desc "Replace Selection"        "R"          #'evil-change
 
        :desc "Append Line"              "a"          #'evil-append-line
        :desc "Prepend Line"             "p"          #'evil-insert-line
@@ -61,11 +62,14 @@
 (map! :map jg-binding-normal-state-map ;; Visual
       :desc "Visual"             "V"        #'evil-visual-line
       (:prefix ("v" . "Visual+")
-       :desc "buffer"             "RET" #'mark-whole-buffer
-       :desc "line"               "l"   #'evil-visual-line
-       :desc "Block"              "b"   #'evil-visual-block
-       :desc "char"               "v"   #'evil-visual-char
-       :desc "Restore selection"  "r"   #'evil-visual-restore
+       :desc "buffer"             "RET" (cmd! (evil-visual-state) (mark-whole-buffer))
+       :desc "line"               "j"   #'evil-visual-line
+       :desc "Block"              "k"   #'evil-visual-block
+       :desc "char"               "l"   #'evil-visual-char
+       :desc "Restore selection"  "h"   #'evil-visual-restore
+
+       :desc "Inner Select"       "i" (cmd! (evil-visual-char) (set-transient-map jg-binding-inner-text-objects-map))
+       :desc "Outer Select"       "a" (cmd! (evil-visual-char) (set-transient-map jg-binding-outer-text-objects-map))
        )
       )
 (map! :map jg-binding-normal-state-map ;; Change / paste
@@ -142,28 +146,29 @@
 (map! :map jg-binding-visual-state-map
       [escape] 'evil-normal-state
       (:prefix ("v" . "Visual")
-       :desc "buffer"       "RET"          #'mark-whole-buffer
-       :desc "line"         "l"            #'evil-visual-line
-       :desc "Block"        "b"            #'evil-visual-block
-       :desc "char"         "c"            #'evil-visual-char
-       :desc "exit"         "v"            #'evil-normal-state
+       :desc "buffer"       "RET"           #'mark-whole-buffer
+       :desc "line"         "j"             #'evil-visual-line
+       :desc "Block"        "k"             #'evil-visual-block
+       :desc "char"         "l"             #'evil-visual-char
+       :desc "exit"         "v"             #'evil-normal-state
        )
-      :desc "Exchange Corners"        "O"        #'evil-visual-exchange-corners
-      :desc "Exchange Point and Mark" "o"      #'exchange-point-and-mark
+      :desc "Replace Selection"        "R"          #'evil-change
+      :desc "Exchange Corners"        "O"   #'evil-visual-exchange-corners
+      :desc "Exchange Point and Mark" "o"   #'exchange-point-and-mark
 
-      :desc "exit"    "V"        #'evil-exit-visual-state
+      :desc "exit"    "V"                   #'evil-exit-visual-state
 
-      :desc "Indent"                  "TAB"      #'indent-for-tab-command
-      :desc "Macro"                   "@"        #'+evil:apply-macro
-      :desc "L-Shift"                 "<"        #'+evil/shift-left
-      :desc "R-Shift"                 ">"        #'+evil/shift-right
-      :desc "Search"                  "/"        #'evil-ex-search-forward
-      :desc "B-Search"                "\\"       #'evil-ex-search-backward
-      :desc "Visual Search"           "?"        #'evil-visualstar/begin-search-forward
+      :desc "Indent"                  "TAB" #'indent-for-tab-command
+      :desc "Macro"                   "@"   #'+evil:apply-macro
+      :desc "L-Shift"                 "<"   #'+evil/shift-left
+      :desc "R-Shift"                 ">"   #'+evil/shift-right
+      :desc "Search"                  "/"   #'evil-ex-search-forward
+      :desc "B-Search"                "\\"  #'evil-ex-search-backward
+      :desc "Visual Search"           "?"   #'evil-visualstar/begin-search-forward
 
-      :desc "Paste Over"              "p"        #'evil-visual-paste
-      :desc "Surround"                "s"        #'evil-surround-region
-      :desc "Yank"                    "y"        #'evil-yank
+      :desc "Paste Over"              "p"   #'evil-visual-paste
+      :desc "Surround"                "s"   #'evil-surround-region
+      :desc "Yank"                    "y"   #'evil-yank
       )
 ;;-- end visual state
 
@@ -498,8 +503,6 @@
       :desc "B Motion"      "["   jg-binding-backward-general-motion-map
       :desc "F Motion"      "]"   jg-binding-forward-general-motion-map
 
-      :desc "Inner Select"        "v i" (cmd! (evil-visual-state) (set-transient-map jg-binding-inner-text-objects-map))
-      :desc "Outer Select"        "v a" (cmd! (evil-visual-state) (set-transient-map jg-binding-outer-text-objects-map))
       )
 
 (map! :map jg-binding-visual-state-map

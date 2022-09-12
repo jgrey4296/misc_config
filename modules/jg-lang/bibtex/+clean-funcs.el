@@ -10,40 +10,61 @@
       (insert (format "stub_key_%s" (random 5000)))
     )
   )
-(defun +jg-bibtex-orcb-key-hook (&optional allow-duplicate-keys)
+(defun +jg-bibtex-orcb-key-hook ()
   "Replace the key in the entry.
 Prompts for replacement if the new key duplicates one already in
-the file, unless ALLOW-DUPLICATE-KEYS is non-nil."
-  (let ((key (funcall org-ref-clean-bibtex-key-function
-		      (bibtex-generate-autokey))))
-    ;; remove any \\ in the key
-    (setq key (replace-regexp-in-string "[ \\\\'{}]" "" key))
-    ;; first we delete the existing key
-    (bibtex-beginning-of-entry)
-    (re-search-forward bibtex-entry-maybe-empty-head)
-    (if (match-beginning bibtex-key-in-head)
-	(delete-region (match-beginning bibtex-key-in-head)
-		       (match-end bibtex-key-in-head)))
-    ;; check if the key is in the buffer
-    (when (and (not allow-duplicate-keys)
-               (save-excursion
-                 (bibtex-search-entry key)))
+the file.
+Does not modify keys ending in an underscore
+ "
+  (bibtex-beginning-of-entry)
+  (end-of-line)
+  (forward-char -2)
+  (unless (looking-at "_")
+    (let ((key (bibtex-generate-autokey))
+          handle-duplicate
+          )
+      ;; remove any \\ in the key
+      (setq key (replace-regexp-in-string "[ \\\\'{}]" "" key))
+      ;; first we delete the existing key
+      (bibtex-beginning-of-entry)
+      (re-search-forward bibtex-entry-maybe-empty-head)
+      (if (match-beginning bibtex-key-in-head)
+	  (delete-region (match-beginning bibtex-key-in-head)
+		         (match-end bibtex-key-in-head)))
+      ;; check if the key is in the buffer
       (save-excursion
-	(bibtex-search-entry key)
-	(bibtex-copy-entry-as-kill)
-	(switch-to-buffer-other-window "*duplicate entry*")
-	(bibtex-yank))
-      (setq key (bibtex-read-key "Duplicate Key found, edit: " key)))
+        (save-restriction
+          (widen)
+          (goto-char (point-min))
+          (when (bibtex-search-entry key)
+	    (bibtex-search-entry key)
+	    (bibtex-copy-entry-as-kill)
+            (setq handle-duplicate t)
+            )
+          )
+        )
 
-    (insert key)
-    (kill-new key)))
+      (when handle-duplicate
+        (save-window-excursion
+          (switch-to-buffer-other-window "*duplicate entry*")
+          (bibtex-yank)
+          (setq key (bibtex-read-key "Duplicate Key found, edit: " key))
+          (kill-buffer "*duplicate entry*")
+          )
+        )
+      (insert key)
+      (kill-new key))
+    )
+  )
 (defun +jg-bibtex-insert-volume-to-key ()
   (bibtex-beginning-of-entry)
-  (let ((vol (s-replace " " "_" (bibtex-autokey-get-field "volume"))))
-    (if (not (s-equals? vol ""))
-        (progn
-          (goto-char (- (line-end-position) 1))
-          (insert (format "_%s" vol))
+  (end-of-line)
+  (forward-char -2)
+  (unless (looking-at "_")
+    (let ((vol (s-replace " " "_" (bibtex-autokey-get-field "volume"))))
+      (unless (s-equals? vol "")
+        (goto-char (- (line-end-position) 1))
+        (insert (format "_%s" vol))
         )
       )
     )
@@ -119,9 +140,10 @@ But not in urls
   " Remove newlines from entries "
   (bibtex-beginning-of-entry)
   (beginning-of-line)
-  (let* ((keys (mapcar #'car (bibtex-parse-entry)))
-         (paths (-filter #'(lambda (x) (string-match jg-bibtex-remove-field-newlines-regexp x)) keys))
-         (path-texts (mapcar #'bibtex-text-in-field paths))
+  (let* ((entry (bibtex-parse-entry))
+         (keys (mapcar #'car entry))
+         (paths (-reject #'(lambda (x) (string-match jg-bibtex-remove-field-newlines-regexp x)) keys))
+         (path-texts (mapcar #'bibtex-autokey-get-field paths))
          (path-cleaned (mapcar #'(lambda (x) (replace-regexp-in-string "\n+ *" " " x)) path-texts))
          )
     ;; Then update:
@@ -135,6 +157,7 @@ But not in urls
     (join-line)
     )
   )
+
 ;;-- end whole entry formatting
 
 ;;-- focused funcs

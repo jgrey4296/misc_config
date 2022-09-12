@@ -127,6 +127,21 @@ Modified to avoid duplicate comma insertion. "
     )
   )
 
+(define-advice bibtex-field-list (:filter-return (result)
+                                  +jg-bibtex-field-list-filter)
+  " Filter out unwanted fields, and put my custom fields just after required fields "
+  (let ((req (car result))
+        (opt (cdr result))
+        (field-rejections (s-join " " jg-bibtex-field-rejections))
+        )
+    (cons (-reject (lambda (x) (s-contains? (car x) field-rejections)) req)
+          (-concat jg-bibtex-optional-fields
+                   (-reject (lambda (x) (s-contains? (car x) field-rejections))
+                            opt)
+                   )
+          )
+    )
+  )
 
 (advice-remove 'org-ref-clean-bibtex-entry 'org-ref-clean-bibtex-entry@+jg-bibtex-clean-entry)
 

@@ -1,8 +1,5 @@
 ;; bibtex
 
-(defun +jg-bibtex-extract-pdf-data ()
-     ;; TODO use pdftk dump_data to extract titles, authors etc
-     )
 ;;-- utils
 (defun +jg-bibtex-build-list ()
   "Build a list of all bibtex files to use for bibtex-helm "
@@ -12,8 +9,17 @@
   )
 (defun +jg-bibtex-get-files-fn (x)
   " Given a pair, return the cdr if car matches 'file' "
-  (if (string-match "file" (car x))
-      (string-trim (cdr x) "{" "}")))
+  (when-let ((isfile (string-match "^file[[:digit:]]*" (car x)))
+             (text (string-trim (cdr x) "{" "}"))
+             )
+    (expand-file-name (if (f-relative? text)
+                          (f-join jg-bibtex-pdf-loc text)
+                        text))
+        )
+    )
+(defun +jg-bibtex-file-expand (x)
+  (+jg-bibtex-get-files-fn (cons "file" x))
+  )
 (defun +jg-bibtex-suppress-watchers ()
   "bibtex-completion-init adds file watchers for all bibtex files
 This can be annoying at times.
@@ -47,33 +53,27 @@ assumes point is in
 the entry of interest in the bibfile.  but does not check that."
   (interactive)
   (save-excursion
-    (let* ((file (bibtex-autokey-get-field "file"))
-           (optfile (bibtex-autokey-get-field "OPTfile"))
-           (target (cond (path path)
-                         ((string-empty-p file)
-                          optfile)
-                         (t file)))
-           (full-target (if (f-relative? target)
-                            (f-join jg-bibtex-pdf-loc target)
-                          (expand-file-name target)))
+    (let* ((target (if path
+                       path
+                   (bibtex-autokey-get-field "file" "OPTfile")))
            )
-      (message "%s" full-target)
-      (cond ((string-empty-p full-target)
+      (message "%s" target)
+      (cond ((string-empty-p target)
              (message "No File to open"))
-            ((not (file-exists-p full-target))
+            ((not (file-exists-p target))
              (message "File does not exist"))
-            ((f-ext? full-target "epub")
-             (shell-command (concat jg-bibtex-open-epub-cmd (shell-quote-argument full-target))))
-            ((f-ext? full-target "pdf")
-             (shell-command (concat jg-bibtex-open-pdf-cmd (shell-quote-argument full-target))))
+            ((f-ext? target "epub")
+             (shell-command (concat jg-bibtex-open-epub-cmd (shell-quote-argument target))))
+            ((f-ext? target "pdf")
+             (shell-command (concat jg-bibtex-open-pdf-cmd (shell-quote-argument target))))
             (t
              (message "Unrecognized type")
-             (shell-command (concat "open " (shell-quote-argument full-target))))
+             (shell-command (concat "open " (shell-quote-argument target))))
             )
 
-      (if jg-bibtex-open-doi-with-pdf
+      (when jg-bibtex-open-doi-with-pdf
           (+jg-bibtex-open-doi))
-      (if jg-bibtex-open-url-with-pdf
+      (when jg-bibtex-open-url-with-pdf
           (+jg-bibtex-open-url))
       )))
 (defun +jg-bibtex-open-url ()
@@ -92,37 +92,21 @@ the entry of interest in the bibfile.  but does not check that."
 (defun +jg-bibtex-find-folder ()
   " Find the fold in which the entry's associated file exists "
   (interactive)
-  (let* ((file (bibtex-autokey-get-field "file"))
-         (optfile (bibtex-autokey-get-field "OPTfile"))
-         (target (if (not (string-empty-p file)) file optfile))
-         (full-target (if (f-relative? target)
-                          (f-join jg-bibtex-pdf-loc target)
-                        (expand-file-name target)))
-        )
-    (if (and (not (string-empty-p full-target)) (f-exists? (f-parent full-target)))
-        (progn
-          (message "Opening %s" (f-parent full-target))
-          (find-file-other-window (f-parent full-target))
-          (goto-char (point-min))
-          (search-forward (f-filename full-target)))
-      )
+  (let* ((target (bibtex-autokey-get-field ("file" "OPTfile"))))
+    (when (and (not (string-empty-p target)) (f-exists? (f-parent target)))
+      (message "Opening %s" (f-parent target))
+      (find-file-other-window (f-parent target))
+      (goto-char (point-min))
+      (search-forward (f-filename target)))
     )
   )
 (defun +jg-bibtex-open-folder ()
   " Open the associated file's folder in finder "
   (interactive)
-  (let* ((file (bibtex-autokey-get-field "file"))
-         (optfile (bibtex-autokey-get-field "OPTfile"))
-         (target (if (not (string-empty-p file)) file optfile))
-         (full-target (if (f-relative? target)
-                          (f-join jg-bibtex-pdf-loc target)
-                        (expand-file-name target)))
-        )
-    (if (and (not (string-empty-p full-target)) (f-exists? full-target))
-        (progn
-          (message "Opening %s" full-target)
-          (shell-command (concat "open " (shell-quote-argument (f-parent full-target))))
-          )
+  (let* ((target (bibtex-autokey-get-field ("file" "OPTfile"))))
+    (when (and (not (string-empty-p target)) (f-exists? target))
+      (message "Opening %s" target)
+      (shell-command (concat "open " (shell-quote-argument (f-parent target))))
       )
     )
   )
@@ -136,11 +120,12 @@ Log into jg-bibtex-rand-log.
   (widen)
   (let* ((location (f-dirname (buffer-file-name)))
          (log_file (f-join location jg-bibtex-rand-log))
-         (log_hash (if (f-exists? log_file) (with-temp-buffer
-                                              (insert-file-contents log_file)
-                                              (let ((uf (make-hash-table :test 'equal)))
-                                                (seq-each (lambda (x) (puthash x 't uf)) (split-string (buffer-string) "\n"))
-                                                uf))
+         (log_hash (if (f-exists? log_file)
+                       (with-temp-buffer
+                         (insert-file-contents log_file)
+                         (let ((uf (make-hash-table :test 'equal)))
+                           (seq-each (lambda (x) (puthash x 't uf)) (split-string (buffer-string) "\n"))
+                           uf))
                      (make-hash-table :test 'equal)))
          )
     ;; go to random line
@@ -172,18 +157,10 @@ assumes point is in
 the entry of interest in the bibfile.  but does not check that."
   (interactive)
   (save-excursion
-    (let* ((file (bibtex-autokey-get-field "file"))
-           (optfile (bibtex-autokey-get-field "OPTfile"))
-           (target (cond ((string-empty-p file)
-                          optfile)
-                         (t file)))
-           (full-target (if (f-relative? target)
-                            (f-join jg-bibtex-pdf-loc target)
-                          (expand-file-name target)))
-           )
-      (message "%s : %s" full-target (file-exists-p full-target))
+    (let* ((target (bibtex-autokey-get-field ("file" "OPTfile"))))
+      (message "%s : %s" target (file-exists-p target))
       (async-shell-command (concat "qlmanage -p "
-                                   (shell-quote-argument full-target)
+                                   (shell-quote-argument target)
                                    " 2>/dev/null"))
       )))
 ;;-- end file opening
@@ -257,7 +234,7 @@ bibtex-BibTeX-entry-alist for completion options "
   " Refile a pdf from its location to its pdflib/year/author loc
 returns the new location
 "
-  (if destructive
+  (when destructive
       (message "Destructive Refile"))
   (save-excursion
     (let* ((entry  (bibtex-parse-entry))
@@ -273,16 +250,14 @@ returns the new location
             do
             (let* ((fname (f-filename file))
                    (target (f-join finalpath fname))
-                   (full-source (if (f-relative? file)
-                                    (f-join jg-bibtex-pdf-loc file)
-                                  (expand-file-name file)))
                    )
               (message "Relocating %s to %s" file target)
               (if (s-equals? "y" (read-string (format "%sRefile to %s? " (if destructive "Destructive " "") target)))
                   (progn (cl-assert (not (f-exists? target)))
-                         (if destructive (f-move full-source target)
-                           (progn (f-copy full-source target)
-                                  (f-move full-source (f-join (f-parent full-source) (format "_refiled_%s" fname)))))
+                         (if destructive
+                             (f-move file target)
+                           (progn (f-copy file target)
+                                  (f-move file (f-join (f-parent file) (format "_refiled_%s" fname)))))
                          (push target newlocs))
                 (push file newlocs))
               )
@@ -307,8 +282,8 @@ ensuring they work across machines "
     (goto-char (point-min))
     (while (re-search-forward jg-bibtex-pdf-loc-regexp nil t)
       (replace-match jg-bibtex-pdf-replace-match-string nil nil nil 1)
-      (if (eq 6 (length (match-data)))
-          (replace-match jg-bibtex-pdf-replace-library-string t nil nil 2))
+      (when (eq 6 (length (match-data)))
+        (replace-match jg-bibtex-pdf-replace-library-string t nil nil 2))
       )
     (write-file name)
     )
@@ -335,35 +310,34 @@ ensuring they work across machines "
 (defun +jg-bibtex-dired-unify-pdf-locations ()
   "Unify bibtex pdf paths of marked files"
   (interactive)
-  (let ((files (dired-get-marked-files)))
-    (seq-each '+jg-bibtex-unify-pdf-locations-in-file files)
-    )
+  (seq-each '+jg-bibtex-unify-pdf-locations-in-file (dired-get-marked-files))
   )
+
 (defun +jg-bibtex-refile-by-year ()
   " Kill the current entry and insert it in the appropriate year's bibtex file "
   (interactive)
   (bibtex-beginning-of-entry)
   (let* ((year (bibtex-text-in-field "year"))
          (year-file (format "%s.bib" year))
-         (bib-path jg-bibtex-loc-bibtex)
-         (response (if year (read-string (format "Refile to %s? " year-file))))
-         (target (if (and year (or (s-equals? "y" response) (string-empty-p response)))
-                     (f-join bib-path year-file)
+         (response (when year (read-string (format "Refile to %s? " year-file))))
+         (target (if (or (s-equals? "y" response) (string-empty-p response))
+                     (f-join jg-bibtex-loc-bibtex year-file)
                    (completing-read "Bibtex file: "
                                     (f-entries bib-path
                                                (lambda (f) (f-ext? f "bib"))))))
          )
+    (unless (f-exists? target)
+      (error "Target to refile to doesn't exist: %s" target)
+      )
     (+jg-bibtex-refile-pdf current-prefix-arg)
     (bibtex-kill-entry)
     (with-temp-buffer
-      (if (f-exists? target)
-          (insert-file-contents target))
+      (insert-file-contents target)
       (goto-char (point-max))
       (insert "\n")
       (bibtex-yank)
       (write-file target nil)
       )
-
     )
   )
 ;;-- end entry editing
@@ -394,7 +368,7 @@ ensuring they work across machines "
   )
 (defun +jg-bibtex-tweet-random-entry ()
   (interactive)
-  (if (not bibtex-completion-bibliography)
+  (unless bibtex-completion-bibliography
       (+jg-bibtex-build-list))
   ;; TODO : limit to a range of years
   (let ((chosen-file (nth (random (length bibtex-completion-bibliography))
@@ -428,19 +402,19 @@ With arg, searchs the dplp instead.
 "
   (interactive "P")
   (let* ((search-texts (mapcar #'bibtex-autokey-get-field jg-bibtex-scholar-search-fields))
-         (exact-texts (mapcar #'bibtex-autokey-get-field jg-bibtex-scholar-search-fields-exact))
+         (exact-texts  (mapcar #'bibtex-autokey-get-field jg-bibtex-scholar-search-fields-exact))
          (exact-string (s-join " " (mapcar #'(lambda (x) (format "\"%s\"" x))
                                            (-filter #'(lambda (x) (not (string-empty-p x))) exact-texts))))
          (all-terms (s-concat exact-string " " (s-join " " search-texts)))
          (cleaned (s-replace-regexp "{.+?\\(\\w\\)}" "\\1" all-terms))
-         (search-string (format jg-bibtex-scholar-search-string cleaned))
-         (alt-search-string (format jg-bibtex-dblp-search-string cleaned))
+         (search-string (format (if arg
+                                    jg-bibtex-dblp-search-string
+                                  jg-bibtex-scholar-search-string)
+                                cleaned))
          )
-    (if arg
-        (browse-url alt-search-string)
-      (browse-url search-string)
-      )
-    ))
+    (browse-url search-string)
+    )
+  )
 ;;-- end ui
 
 ;;-- entry stubbing
@@ -448,37 +422,109 @@ With arg, searchs the dplp instead.
   " Discover all pdfs in a directory, create stubs for them "
   (interactive)
   (let* ((curr-dir (dired-current-directory))
-         (files    (f-files curr-dir  (lambda (x) (or (f-ext? x "pdf")
-                                                 (f-ext? x "epub")))))
+         (files    (f-files curr-dir  (lambda (x) (or (f-ext? x "pdf") (f-ext? x "epub")))))
          (target-bib (read-file-name "Todo-bib: " jg-bibtex-loc-bibtex))
          mentioned
          )
-
     ;; Get mentioned
+    (unless (f-exists? target-bib)
+      (error "Target Stub File doesn't exist: %s" target-bib))
     (with-temp-buffer
-      (if (f-exists? target-bib)
-          (insert-file-contents target-bib))
-      (goto-char (point-min))
-      (while (re-search-forward "^\s*file[0-9]*\s*=\s*{\\(.+?\\)}" nil t)
-        (pushnew (match-string 1) mentioned :test 'equal)
+      (insert-file-contents target-bib))
+    (goto-char (point-min))
+    (while (re-search-forward "^\s*file[0-9]*\s*=\s*{\\(.+?\\)}" nil t)
+      (pushnew (match-string 1) mentioned :test 'equal)
       )
-      (goto-char (point-max))
-      (insert "\n")
-      (message "Found: %s\n Mentioned: %s\n Remaining: %s"
-               (length files) (length mentioned) (length (-difference files
-                                                                      mentioned)))
-      (loop with count = 0
-            for file in (-difference files mentioned)
-            do
-            (insert (format "@Misc{stub_%s,\n" (int-to-string count))
-                    (format "  year = {%s},\n" (nth 2 (calendar-current-date)))
-                    (format "  title = {%s},\n" (f-no-ext (f-filename file)))
-                    (format "  file = {%s},\n"  file)
-                    "}\n")
-            (incf count)
-            )
-      (write-file target-bib)
+    (goto-char (point-max))
+    (insert "\n")
+    (message "Found: %s\n Mentioned: %s\n Remaining: %s"
+             (length files) (length mentioned) (length (-difference files
+                                                                    mentioned)))
+    (loop with count = 0
+          for file in (-difference files mentioned)
+          do
+          (insert (format "@Misc{stub_%s,\n" (int-to-string count))
+                  (format "  year = {%s},\n" (nth 2 (calendar-current-date)))
+                  (format "  title = {%s},\n" (f-no-ext (f-filename file)))
+                  (format "  file = {%s},\n"  file)
+                  "}\n")
+          (incf count)
+          )
+    (write-file target-bib)
+    )
+  )
+
+;;-- end entry stubbing
+
+;;-- Meta Retrieval
+(defun +jg-bibtex-meta-retrieval ()
+  (interactive)
+  (save-excursion
+    (bibtex-beginning-of-entry)
+    (let* ((entry (bibtex-parse-entry))
+           (files (-filter #'identity (mapcar #'+jg-bibtex-get-files-fn entry)))
+           (result (cl-loop for file in files
+                            collect
+                            (shell-command-to-string (format "ebook-meta %s" (expand-file-name (if (f-relative? file) (f-join jg-bibtex-pdf-loc file) file))))
+                            ))
+           )
+      (with-temp-buffer-window "*Metadata*" 'display-buffer-pop-up-window nil
+        (princ (s-join "\n" result))
+        )
       )
     )
   )
-;;-- end entry stubbing
+
+(defun +jg-bibtex-apply-meta ()
+  (interactive)
+  (save-excursion
+    (bibtex-beginning-of-entry)
+    (let* ((arg-pairs nil)
+           (entry (bibtex-parse-entry))
+           (target (shell-quote-argument (bibtex-autokey-get-field "file")))
+           (keys (mapcar #'car entry))
+           (meta-opts '(("title     " . "-t")
+                        ("author    " . "-a")
+                        ("comments  " . "-c")
+                        ("publisher " . "-p")
+                        ("series    " . "-s")
+                        ("number    " . "-i")
+                        ("rating    " . "-r")
+                        ("date      " . "-d")
+                        ("isbn      " . "--isbn")
+                        ("ident     " . "--identifier=")
+                        ("tags      " . "--tags=")
+                        ("category  " . "--category=")
+                        ("*Apply*")
+                        ))
+          current
+          )
+      ;; read fields and wrap
+      (while (not (s-equals? "*Apply*" (setq current (ivy-read "Assign to option: " meta-opts))))
+        (when (alist-get current meta-opts nil nil #'equal)
+          (push (cons  (alist-get current meta-opts nil nil #'equal)
+                       (let* ((field (ivy-read "Select Field: " keys))
+                              (text (bibtex-autokey-get-field field)))
+                         (if (string-empty-p text) field text)))
+                arg-pairs)
+          )
+        )
+      (unless arg-pairs
+        (error "Nothing to do"))
+      ;; build and call
+      (let* ((options (s-join " " (cl-loop for pair in arg-pairs
+                                          collect
+                                          (format (if (s-matches? "=$" (car pair)) "%s\"%s\"" "%s \"%s\"") (car pair) (cdr pair)))))
+             (command (format "ebook-meta %s %s" target options))
+             )
+        (message "Command: %s" command)
+        (shell-command command)
+        )
+      )
+    )
+  )
+
+(defun +jg-bibtex-set-ebook-cover ()
+
+
+          )

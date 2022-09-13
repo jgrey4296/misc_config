@@ -4,7 +4,6 @@
 (message "Setting up bibtex bindings: %s" (current-time-string))
 (map! :after bibtex
       :map bibtex-mode-map
-      :desc "Clean entry"        :n "C-c C-c" #'org-ref-clean-bibtex-entry
       :desc "Clean entry"        :n "TAB"     #'org-ref-clean-bibtex-entry
       :desc "Edit Field"         :n  "\\"     #'+jg-bibtex-edit-field
       :desc "Change Entry Type " :n "|"       #'+jg-bibtex-edit-entry-type
@@ -19,16 +18,19 @@
       :desc "Bibtex Hydra"        "."     #'+jg-bibtex-hydra/body
       :desc "Build Bibliography"  "B"     #'org-ref-build-full-bibliography
       :desc "New Entry"           "n"     #'bibtex-entry
+      :desc "Get Meta"            "m"     #'+jg-bibtex-meta-retrieval
       :desc "Count Entries"       "C"     #'bibtex-count-entries
       :desc "Refile"              "r"     #'+jg-bibtex-refile-by-year
       :desc "Rename file"         "R"     #'+jg-bibtex-rename-file
       :desc "Scholar Search"      "s"     #'+jg-bibtex-google-scholar
       :desc "Toggle Watchers"     "W"     #'+jg-bibtex-suppress-watchers
+      :desc "Update from DOI"     "u"     (cmd! (doi-utils-update-bibtex-entry-from-doi (org-ref-bibtex-entry-doi)))
       (:prefix ("c" . "Copy")
-       :desc "Copy Entry"        "e"      #'+jg-bibtex-copy-entry
-       :desc "Copy Key"          "k"      #'+jg-bibtex-copy-key
-       :desc "Copy Title"        "t"      #'+jg-bibtex-copy-title
-       :desc "Copy Field"        "f"      #'+jg-bibtex-copy-field
+       :desc "Copy Entry"         "e"      #'+jg-bibtex-copy-entry
+       :desc "Copy Key"           "k"      #'+jg-bibtex-copy-key
+       :desc "Copy Title"         "t"      #'+jg-bibtex-copy-title
+       :desc "Copy Field"         "f"      #'+jg-bibtex-copy-field
+       :desc "Copy into metadata" "m"      #'+jg-bibtex-apply-meta
        )
       (:prefix ("e" . "Edit")
        :desc "Change Entry Type" "t"      #'+jg-bibtex-edit-entry-type

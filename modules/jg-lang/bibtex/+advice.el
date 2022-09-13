@@ -145,4 +145,16 @@ Modified to avoid duplicate comma insertion. "
 
 (advice-remove 'org-ref-clean-bibtex-entry 'org-ref-clean-bibtex-entry@+jg-bibtex-clean-entry)
 
+(define-advice bibtex-autokey-get-field (:around (fn &rest args)
+                                         +jg-bibtex-autokey-field-expand)
+  (if-let* ((first-arg (if (listp (car args)) (car args) (list (car args))))
+            (matches (-any? (-partial #'s-matches? "file[[:digit:]]*") first-arg))
+            (result (apply fn args))
+            (not-empty (not (s-equals? "" result)))
+            )
+      (+jg-bibtex-file-expand result)
+    (apply fn args)
+    )
+  )
+
 ;;; +advice.el ends here

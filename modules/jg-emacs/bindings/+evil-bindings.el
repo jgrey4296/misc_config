@@ -62,7 +62,7 @@
 (map! :map jg-binding-normal-state-map ;; Visual
       :desc "Visual"             "V"        #'evil-visual-line
       (:prefix ("v" . "Visual+")
-       :desc "buffer"             "RET" (cmd! (evil-visual-state) (mark-whole-buffer))
+       :desc "buffer"             "RET" (cmd! (evil-visual-char) (mark-whole-buffer))
        :desc "line"               "j"   #'evil-visual-line
        :desc "Block"              "k"   #'evil-visual-block
        :desc "char"               "l"   #'evil-visual-char

@@ -476,6 +476,7 @@ With arg, searchs the dplp instead.
   )
 
 (defun +jg-bibtex-apply-meta ()
+  " Use Calibre's ebook-meta program to take bibtex data and apply it to a pdf or epub "
   (interactive)
   (save-excursion
     (bibtex-beginning-of-entry)
@@ -525,6 +526,16 @@ With arg, searchs the dplp instead.
   )
 
 (defun +jg-bibtex-set-ebook-cover ()
+  " Use Calibre's ebook-meta program to select an image and apply it as an epub's cover image "
+  (interactive)
+  (save-excursion
+    (bibtex-beginning-of-entry)
+    (let* ((arg-pairs nil)
+           (entry (bibtex-parse-entry))
+           (target (shell-quote-argument (bibtex-autokey-get-field "file")))
 
 
-          )
+           )
+      )
+    )
+  )

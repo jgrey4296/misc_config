@@ -2,7 +2,18 @@
 (message "Setting up Leaderless bindings: %s" (current-time-string))
 (global-set-key (kbd "C-c u") #'universal-argument)
 
+(map! :map global-map
+      "<f1>" #'ignore
+      "<f2>" #'ignore
+      "<f3>" #'ignore
+      "<f4>" #'ignore
+      "<f5>" #'ignore
+      "<f6>" #'ignore
+      )
+
 ;; For minibuffer use:
+;;
+;;
 (map! :map ctl-x-map
       "[" "("
       "]" ")")

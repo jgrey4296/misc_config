@@ -55,7 +55,7 @@ the entry of interest in the bibfile.  but does not check that."
   (save-excursion
     (let* ((target (if path
                        path
-                   (bibtex-autokey-get-field "file" "OPTfile")))
+                     (bibtex-autokey-get-field '("file" "OPTfile"))))
            )
       (message "%s" target)
       (cond ((string-empty-p target)
@@ -92,7 +92,7 @@ the entry of interest in the bibfile.  but does not check that."
 (defun +jg-bibtex-find-folder ()
   " Find the fold in which the entry's associated file exists "
   (interactive)
-  (let* ((target (bibtex-autokey-get-field ("file" "OPTfile"))))
+  (let* ((target (bibtex-autokey-get-field '("file" "OPTfile"))))
     (when (and (not (string-empty-p target)) (f-exists? (f-parent target)))
       (message "Opening %s" (f-parent target))
       (find-file-other-window (f-parent target))
@@ -103,7 +103,7 @@ the entry of interest in the bibfile.  but does not check that."
 (defun +jg-bibtex-open-folder ()
   " Open the associated file's folder in finder "
   (interactive)
-  (let* ((target (bibtex-autokey-get-field ("file" "OPTfile"))))
+  (let* ((target (bibtex-autokey-get-field '("file" "OPTfile"))))
     (when (and (not (string-empty-p target)) (f-exists? target))
       (message "Opening %s" target)
       (shell-command (concat "open " (shell-quote-argument (f-parent target))))
@@ -157,7 +157,7 @@ assumes point is in
 the entry of interest in the bibfile.  but does not check that."
   (interactive)
   (save-excursion
-    (let* ((target (bibtex-autokey-get-field ("file" "OPTfile"))))
+    (let* ((target (bibtex-autokey-get-field '("file" "OPTfile"))))
       (message "%s : %s" target (file-exists-p target))
       (async-shell-command (concat "qlmanage -p "
                                    (shell-quote-argument target)
@@ -246,7 +246,7 @@ returns the new location
            newlocs)
       (make-directory finalpath 'parents)
 
-      (loop for file in files
+      (cl-loop for file in files
             do
             (let* ((fname (f-filename file))
                    (target (f-join finalpath fname))
@@ -264,11 +264,11 @@ returns the new location
             )
 
       ;; Update entry with new locations
-      (loop for file in newlocs
+      (cl-loop for file in newlocs
             with count = 1
             do
             (bibtex-set-field (format "file%s" (if (eq count 1) "" count)) file)
-            (incf count)
+            (cl-incf count)
             )
       )
     )
@@ -433,14 +433,14 @@ With arg, searchs the dplp instead.
       (insert-file-contents target-bib))
     (goto-char (point-min))
     (while (re-search-forward "^\s*file[0-9]*\s*=\s*{\\(.+?\\)}" nil t)
-      (pushnew (match-string 1) mentioned :test 'equal)
+      (cl-pushnew (match-string 1) mentioned :test 'equal)
       )
     (goto-char (point-max))
     (insert "\n")
     (message "Found: %s\n Mentioned: %s\n Remaining: %s"
              (length files) (length mentioned) (length (-difference files
                                                                     mentioned)))
-    (loop with count = 0
+    (cl-loop with count = 0
           for file in (-difference files mentioned)
           do
           (insert (format "@Misc{stub_%s,\n" (int-to-string count))
@@ -448,7 +448,7 @@ With arg, searchs the dplp instead.
                   (format "  title = {%s},\n" (f-no-ext (f-filename file)))
                   (format "  file = {%s},\n"  file)
                   "}\n")
-          (incf count)
+          (cl-incf count)
           )
     (write-file target-bib)
     )

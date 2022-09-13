@@ -413,62 +413,60 @@
       :desc "Jump Char"           "."   #'evil-avy-goto-char
       :desc "Jump to Tag"         ","   #'helm-gtags-find-tag
 
-
       :desc "Align"              "a" #'align-regexp
       :desc "Pop Mark"           "b" #'avy-pop-mark
       :desc "Push Mark"          "B" (cmd! (avy-push-mark))
       :desc "Comment"            "c" #'evilnc-comment-operator
       :desc "IEdit"              "e" #'iedit-mode
       :desc "Goto First Line"    "f" #'evil-goto-first-line
+      :desc "Middle of Line"     "m" #'evil-middle-of-visual-line
+      :desc "Goto Last Line"     "F" (cmd! (goto-char (point-max)))
       :desc "Join whitespace"    "J" #'evil-join-whitespace
 
-      :desc "Middle of Line"     "m" #'evil-middle-of-visual-line
-      :desc "Insert Line"        "o" #'+evil/insert-newline-below
-
-      :desc "Replace region"     "R" #'+eval:replace-region
-
-      :desc "Invert"             "~"   #'evil-invert-case
-      :desc "Upper"              "U"   #'evil-upcase
-      :desc "Down"               "u"   #'evil-downcase
-
-      :desc "Restore selection"  "v"   #'evil-visual-restore
-      :desc "Wrap Line"          "w"   #'evil-fill
-      :desc "Fill"               "q"   #'evil-fill-and-move
-      :desc "Exchange"           "x"   #'evil-exchange
-      :desc "Yank"               "y"   #'+evil:yank-unindented
-      :desc "Zap to Char"        "z"   #'zap-up-to-char
-
-      (:prefix ("s" . "String-ops")
+      )
+(map! :map jg-binding-operator-map
+      :prefix ("s" . "String-ops")
        ;; t
        :desc "Rot13"              "'" #'evil-rot13
        :desc "Decode url"         "E" #'+evil:url-decode
        :desc "Encode url"         "e" #'+evil:url-encode
        :desc "Inflection"         "i" #'evil-operator-string-inflection
        :desc "ispell-word"        "=" #'ispell-word
-       )
-      (:prefix ("/" . "Search")
-       :desc "Search Word Forward" "*"  #'evil-ex-search-unbounded-word-forward
-       :desc "Goto Definition"      "d" #'evil-goto-definition
-       :desc "Lookup"               "D" #'+lookup/references
-       :desc "Find File at point"   "F" #'evil-find-file-at-point-with-line
-       :desc "Lookup File"          "f" #'+lookup/file
-       :desc "Next Visual"          "j" #'evil-next-visual-line
-       :desc "Previous Visual"      "k" #'evil-previous-visual-line
-       :desc "Regexp Builder"       "r" #'regexp-builder
-       ;; TODO escalate replace op
-       )
+       :desc "Invert"             "~"   #'evil-invert-case
+       :desc "Upper"              "U"   #'evil-upcase
+       :desc "Down"               "u"   #'evil-downcase
 
-      (:prefix ("l" . "Line-ops")
-       ;; TODO uniquify, remove leading whitespace, split on char
-       ;; r
-       :desc "Justify"                    "j" #'justify-current-line
-       :desc "Flush Lines"                "f" #'flush-lines
-       :desc "Keep Lines"                 "K" #'keep-lines
-       :desc "Delete trailing newlines"   "W" #'doom/delete-trailing-newlines
-       :desc "Delete trailing whitespace" "w" #'delete-trailing-whitespace
-       :desc "Whitespace Cleanup"         "c" #'whitespace-cleanup
-       :desc "Indent"                     "i" #'indent-region
+       :desc "Fill"               "q"   #'evil-fill-and-move
+       :desc "Exchange"           "x"   #'evil-exchange
+       :desc "Yank"               "y"   #'+evil:yank-unindented
+       :desc "Zap to Char"        "z"   #'zap-up-to-char
        )
+(map! :map jg-binding-operator-map
+      :prefix ("/" . "Search")
+      :desc "Search Word Forward" "*"  #'evil-ex-search-unbounded-word-forward
+      :desc "Goto Definition"      "d" #'evil-goto-definition
+      :desc "Lookup"               "D" #'+lookup/references
+      :desc "Find File at point"   "F" #'evil-find-file-at-point-with-line
+      :desc "Lookup File"          "f" #'+lookup/file
+      :desc "Next Visual"          "j" #'evil-next-visual-line
+      :desc "Previous Visual"      "k" #'evil-previous-visual-line
+      :desc "Regexp Builder"       "r" #'regexp-builder
+      ;; TODO escalate replace op
+      )
+(map! :map jg-binding-operator-map
+      :prefix ("l" . "Line-ops")
+      ;; TODO uniquify, remove leading whitespace, split on char
+      ;; r
+      :desc "Wrap Line"                  "w"   #'evil-fill
+
+      :desc "Justify"                    "j" #'justify-current-line
+      :desc "Flush Lines"                "f" #'flush-lines
+      :desc "Indent"                     "i" #'indent-region
+      :desc "Keep Lines"                 "K" #'keep-lines
+      :desc "Whitespace Cleanup"         "c" #'whitespace-cleanup
+      :desc "Delete trailing newlines"   "n" #'doom/delete-trailing-newlines
+      :desc "Delete trailing whitespace" "N" #'delete-trailing-whitespace
+
       )
 ;;-- end operators
 

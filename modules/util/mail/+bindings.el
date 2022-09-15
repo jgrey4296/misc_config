@@ -79,10 +79,10 @@
     :desc "By Date          " "d" #'rmail-summary-sort-by-date
     :desc "By Lines         " "l" #'rmail-summary-sort-by-lines
     :desc "By Subject       " "s" #'rmail-summary-sort-by-subject
-    :desc "By Labels        " "b" #'rmail-summary-by-labels
+    :desc "By Labels        " "b" #'+jg-mail-summary-by-labels
     )
-
    )
+
   (map! :map rmail-mode-map
         "!" #'rmail-expunge-and-save
         "L" #'rmail-kill-label

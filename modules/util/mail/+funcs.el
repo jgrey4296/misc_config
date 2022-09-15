@@ -115,6 +115,11 @@
         (kill-buffer summ-buff))
     )
   )
+
+(defun +jg-mail-summary-by-labels (label)
+  (interactive (list (rmail-read-label "Sort By Label: ")))
+  (rmail-summary-by-labels (symbol-name label))
+  )
 ;;-- end misc
 
 ;;-- labelling
@@ -295,8 +300,8 @@
   )
 
 (defun +jg-mail-summary-delete-by-label (label)
-  (interactive "MLabel: ")
-  (+jg-mail-summary-delete-by-test rmail-keyword-header #'string-match label)
+  (interactive (list (rmail-read-label "Delete all mail with Label: ")))
+  (+jg-mail-summary-delete-by-test rmail-keyword-header #'string-match (symbol-name label))
   )
 
 (defun +jg-mail-summary-undelete-by-label (label)

@@ -85,7 +85,7 @@ modified from the original bibtex-completion-show-entry
                                           )))
   )
 (defun +jg-bibtex-helm-open-files(key)
-  (loop for cand in (helm-marked-candidates)
+  (cl-loop for cand in (helm-marked-candidates)
         do
         (let* ((entry (bibtex-completion-get-entry cand))
                (target (expand-file-name (bibtex-completion-get-value "file" entry)))

@@ -65,7 +65,7 @@
            '((t))))))
 
 (use-package! evil-vimish-fold
-  :when (featurep! :editor evil)
+  :when (modulep! :editor evil)
   :commands (evil-vimish-fold/next-fold evil-vimish-fold/previous-fold
              evil-vimish-fold/delete evil-vimish-fold/delete-all
              evil-vimish-fold/create evil-vimish-fold/create-line)

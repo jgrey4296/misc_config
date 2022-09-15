@@ -1,18 +1,18 @@
 ;;; unused.el -*- lexical-binding: t; -*-
 
 ;; Smart tab, these will only work in GUI Emacs
-(map! :i [tab] (cmds! (and (featurep! :editor snippets)
+(map! :i [tab] (cmds! (and (modulep! :editor snippets)
                            (bound-and-true-p yas-minor-mode)
                            (yas-maybe-expand-abbrev-key-filter 'yas-expand))
                       #'yas-expand
-                      (featurep! :completion company +tng)
+                      (modulep! :completion company +tng)
                       #'company-indent-or-complete-common)
       :m [tab] (cmds! (and (bound-and-true-p yas-minor-mode)
                            (evil-visual-state-p)
                            (or (eq evil-visual-selection 'line)
                                (not (memq (char-after) (list ?\( ?\[ ?\{ ?\} ?\] ?\))))))
                       #'yas-insert-snippet
-                      (and (featurep! :editor fold)
+                      (and (modulep! :editor fold)
                            (save-excursion (end-of-line) (invisible-p (point))))
                       #'+fold/toggle
                       ;; Fixes #4548: without this, this tab keybind overrides
@@ -49,12 +49,12 @@
       (:after geiser-doc :map geiser-doc-mode-map
        :n "o"    #'link-hint-open-link)
 
-      ;; (:unless (featurep! :input layout +bepo)
+      ;; (:unless (modulep! :input layout +bepo)
       ;;   (:after (evil-org evil-easymotion)
       ;;    :map evil-org-mode-map
       ;;    :m "gsh" #'+org/goto-visible))
 
-      (:when (featurep! :editor multiple-cursors)
+      (:when (modulep! :editor multiple-cursors)
        :prefix "gz"
        :nv "d" #'evil-mc-make-and-goto-next-match
        :nv "D" #'evil-mc-make-and-goto-prev-match
@@ -83,10 +83,10 @@
       :n "M-C--"  #'doom/decrease-font-size)
 
 ;;; :editor
-(map! (:when (featurep! :editor format)
+(map! (:when (modulep! :editor format)
        :n "gQ" #'+format:region)
 
-      (:when (featurep! :editor multiple-cursors)
+      (:when (modulep! :editor multiple-cursors)
        ;; evil-multiedit
        :v  "R"     #'evil-multiedit-match-all
        :n  "M-d"   #'evil-multiedit-match-symbol-and-next
@@ -101,7 +101,7 @@
          "RET"    #'evil-multiedit-toggle-or-restrict-region
          [return] #'evil-multiedit-toggle-or-restrict-region)))
 
-      (:when (featurep! :editor snippets)
+      (:when (modulep! :editor snippets)
        ;; auto-yasnippet
        :i  [C-tab] #'aya-expand
        :nv [C-tab] #'aya-create))
@@ -115,10 +115,10 @@
        :desc "Revert file"                 "R"   #'vc-revert
        :desc "Copy link to remote"         "y"   #'+vc/browse-at-remote-kill
        :desc "Copy link to homepage"       "Y"   #'+vc/browse-at-remote-kill-homepage
-       (:when (featurep! :ui hydra)
+       (:when (modulep! :ui hydra)
         :desc "SMerge"                    "m"   #'+vc/smerge-hydra/body)
-       (:when (featurep! :ui vc-gutter)
-        (:when (featurep! :ui hydra)
+       (:when (modulep! :ui vc-gutter)
+        (:when (modulep! :ui hydra)
          :desc "VCGutter"                "."   #'+vc/gutter-hydra/body)
         :desc "Revert hunk"               "r"   #'git-gutter:revert-hunk
         :desc "Git stage hunk"            "s"   #'git-gutter:stage-hunk

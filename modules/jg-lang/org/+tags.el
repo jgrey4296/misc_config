@@ -61,7 +61,7 @@ Can operate on regions of headings "
 
 (defun +jg-org-integrate-tags (xs)
   (let ((current-tags (org-get-tags nil t)))
-    (loop for tag in xs do
+    (cl-loop for tag in xs do
           (if (not (-contains? current-tags tag))
               (push tag current-tags)
             (setq current-tags (remove tag current-tags))

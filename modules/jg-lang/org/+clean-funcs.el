@@ -126,7 +126,7 @@ and the property block directly below "
                                  (hash-table-keys jg-dup-hash-log)))
          (sorted-keys (sort filtered-keys #'>))
          )
-    (loop for pos in sorted-keys
+    (cl-loop for pos in sorted-keys
           do
           (goto-char pos)
           (org-cut-subtree))

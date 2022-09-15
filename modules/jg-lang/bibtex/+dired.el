@@ -24,7 +24,7 @@
   (let ((marked (-filter (lambda (x) (s-equals? "bib" (f-ext x))) (dired-get-marked-files))))
     (if (not (f-exists? (f-join default-directory "tex")))
         (mkdir (f-join default-directory "tex")))
-    (loop for fname in marked
+    (cl-loop for fname in marked
           do
           (let* ((bibfile (file-name-nondirectory fname))
                  (bib-base (file-name-sans-extension bibfile))
@@ -45,7 +45,7 @@
 (defun +jg-bibtex-dired-compile-run ()
   (interactive)
   (let ((marked (-filter (lambda (x) (s-equals? "tex" (f-ext x))) (dired-get-marked-files))))
-    (loop for fname in marked
+    (cl-loop for fname in marked
           do
           (let* ((bibfile (file-name-nondirectory fname))
                  (bib-base (file-name-sans-extension bibfile))

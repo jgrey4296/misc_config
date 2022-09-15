@@ -15,14 +15,3 @@
 (package! doom-snippets)
 (package! helm)
 (package! helm-gtags)
-
-(if (featurep! +prescient)
-    (package! ivy-prescient )
-  (when (featurep! +fuzzy)
-    (package! flx )))
-
-(when (featurep! +childframe)
-  (package! ivy-posframe ))
-
-(when (featurep! +icons)
-  (package! all-the-icons-ivy ))

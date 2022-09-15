@@ -34,6 +34,6 @@
   )
 
 
-(after! (featurep! :completion helm)
+(after! 'helm
   (load! "+helms")
-    )
+  )

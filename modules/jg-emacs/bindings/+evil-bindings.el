@@ -295,11 +295,6 @@
       :desc "Section"      "s"   #'evil-backward-section-begin
 
 
-      ;; TODO rotate text
-      ;;  (:when (featurep! :editor rotate-text)
-      ;; :n "]r"  #'rotate-text
-      ;; :n "[r"  #'rotate-text-backward)
-
       )
 (map! :map jg-binding-forward-operator-motion-map
       ;; r RET l [
@@ -423,6 +418,11 @@
       :desc "Goto Last Line"     "F" (cmd! (goto-char (point-max)))
       :desc "Join whitespace"    "J" #'evil-join-whitespace
 
+      ;; TODO use a motion for direction
+       (:when (modulep! :editor rotate-text)
+        :n "r"  #'rotate-text
+        :n "R"  #'rotate-text-backward)
+
       )
 (map! :map jg-binding-operator-map
       :prefix ("s" . "String-ops")
@@ -440,6 +440,10 @@
        :desc "Exchange"           "x"   #'evil-exchange
        :desc "Yank"               "y"   #'+evil:yank-unindented
        :desc "Zap to Char"        "z"   #'zap-up-to-char
+
+       (:when (modulep! :editor rotate-text)
+        :n "r"  #'rotate-text
+        :n "R"  #'rotate-text-backward)
        )
 (map! :map jg-binding-operator-map
       :prefix ("/" . "Search")

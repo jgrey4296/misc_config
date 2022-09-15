@@ -64,10 +64,6 @@
       :desc "attach-url"                        "u" #'org-attach-url
       :desc "attach-set-directory"              "s" #'org-attach-set-directory
       :desc "attach-sync"                       "S" #'org-attach-sync
-      (:when (featurep! +dragndrop)
-       :desc "download-screenshot"              "c" #'org-download-screenshot
-       :desc "download-clipboard"               "p" #'org-download-clipboard
-       :desc "download-yank)"                   "P" #'org-download-yank)
       )
 ;; <B> Tables
 (map! :map org-mode-map
@@ -91,9 +87,7 @@
        :desc "table-insert-hline"                  "h" #'org-table-insert-hline
        :desc "table-insert-row"                    "r" #'org-table-insert-row
        :desc "table-hline-and-move)"               "H" #'org-table-hline-and-move)
-
-      (:when (featurep! +gnuplot)
-       :desc "plot/gnuplot)"                       "p" #'org-plot/gnuplot)
+       :desc "plot/gnuplot"                        "p" #'org-plot/gnuplot
       )
 ;; <C> Clock
 (map! :map org-mode-map
@@ -137,12 +131,8 @@
       :localleader
       :prefix ("g" . "goto")
       :desc "goto"                              "g" #'org-goto
-      (:when (featurep! :completion ivy)
-       :desc "counsel-org-goto"                 "g" #'counsel-org-goto
-       :desc "counsel-org-goto-all)"            "G" #'counsel-org-goto-all)
-      (:when (featurep! :completion helm)
-       :desc "helm-org-in-buffer-headings"      "g" #'helm-org-in-buffer-headings
-       :desc "helm-org-agenda-files-headings)"  "G" #'helm-org-agenda-files-headings)
+      :desc "counsel-org-goto"                  "g" #'counsel-org-goto
+      :desc "counsel-org-goto-all"              "G" #'counsel-org-goto-all
       :desc "clock-goto"                        "c" #'org-clock-goto
       :desc "Select Clocked in Task"            "C" (cmd! (org-clock-goto 'select))
       :desc "id-goto"                           "i" #'org-id-goto

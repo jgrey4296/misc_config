@@ -108,10 +108,10 @@
             minibuffer-local-must-match-map
             minibuffer-local-isearch-map
             read-expression-map)
-          (cond ((featurep! :completion ivy)
+          (cond ((modulep! :completion ivy)
                  '(ivy-minibuffer-map
                    ivy-switch-buffer-map))
-                ((featurep! :completion helm)
+                ((modulep! :completion helm)
                  '(helm-map
                    helm-rg-map
                    helm-read-file-map))))

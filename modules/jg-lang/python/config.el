@@ -64,7 +64,7 @@
   )
 
   ;; (use-package! lsp-python-ms
-  ;;   :unless (featurep! +pyright)
+  ;;   :unless (modulep! :lang python +pyright)
   ;;   :after lsp-mode
   ;;   :preface
   ;;   (after! python

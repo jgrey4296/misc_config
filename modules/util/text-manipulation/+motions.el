@@ -163,7 +163,7 @@ with either a numeric or alphabetical escalation "
     (while (re-search-forward reg end-mark t)
       (replace-match (format "%s_%s" base (if (eq ?c type) (char-to-string current) current))
                      t nil nil 1)
-      (incf current)
+      (cl-incf current)
       (if (and (eq type ?c) (> current ?z)) (setq current ?a))
       )
     )

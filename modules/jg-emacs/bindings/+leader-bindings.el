@@ -28,8 +28,8 @@
       :desc "Universal argument"    "u"   #'universal-argument
 
       ;; :desc "Resume last search"    "'"
-      ;; (cond ((featurep! :completion ivy)   #'ivy-resume)
-      ;;       ((featurep! :completion helm)  #'helm-resume))
+      ;; #'ivy-resume
+      ;; #'helm-resume
       ;; 0 6 9 8
       :desc "Desktop"   "1" (cmd! (find-file "~/Desktop"))
       :desc "Github"    "2" (cmd! (find-file "~/github"))
@@ -88,26 +88,15 @@
       :desc "List errors"                           "x"   #'flymake-show-diagnostics-buffer
       :desc "Recompile"                             "C"   #'recompile
       :desc "Send to repl"                          "s"   #'+jg-send-region-to-repl
-      (:when (featurep! :checkers syntax)
-       ;;:desc "Flycheck"                            "!"   flycheck-command-map
-       :desc "List errors"                         "x"   #'flycheck-list-errors)
-      (:when (and (featurep! :tools lsp) (not (featurep! :tools lsp +eglot)))
-       :desc "LSP Code actions"                      "a"   #'lsp-execute-code-action
-       :desc "LSP Organize imports"                  "o"   #'lsp-organize-imports
-       :desc "LSP Rename"                            "R"   #'lsp-rename
-       (:after lsp-mode
-         :desc "LSP"                                   "l"   lsp-command-map)
-       (:when (featurep! :completion ivy)
-        :desc "Jump to symbol in current workspace" "j"   #'lsp-ivy-workspace-symbol
-        :desc "Jump to symbol in any workspace"     "J"   #'lsp-ivy-global-workspace-symbol))
-       ;; (:when (featurep! :completion helm)
-       ;;  :desc "Jump to symbol in current workspace" "j"   #'helm-lsp-workspace-symbol
-       ;;  :desc "Jump to symbol in any workspace"     "J"   #'helm-lsp-global-workspace-symbol))
-      (:when (featurep! :tools lsp +eglot)
-       :desc "LSP Execute code action"             "a" #'eglot-code-actions
-       :desc "LSP Rename"                          "R" #'eglot-rename
-       :desc "LSP Find declaration"                "j" #'eglot-find-declaration)
-      :desc "Macro Expand"                         "m" #'pp-macroexpand-last-sexp
+       ;;:desc "Flycheck"                           "!"   flycheck-command-map
+      :desc "List errors"                           "x"   #'flycheck-list-errors
+      :desc "LSP Code actions"                      "a"   #'lsp-execute-code-action
+      :desc "LSP Organize imports"                  "o"   #'lsp-organize-imports
+      :desc "LSP Rename"                            "R"   #'lsp-rename
+      :desc "LSP"                                   "l"   #'lsp-command-map
+      :desc "Jump to symbol in current workspace"   "j"   #'lsp-ivy-workspace-symbol
+      :desc "Jump to symbol in any workspace"       "J"   #'lsp-ivy-global-workspace-symbol
+      :desc "Macro Expand"                          "m"   #'pp-macroexpand-last-sexp
       (:prefix ("r" . "Repl")
        :desc "Clear" "c" #'+jg-repl-clear
 
@@ -153,13 +142,11 @@
       :prefix ("g" . "git")
       ;; 1
       :desc "Git revert file"             "R"   #'vc-revert
-      (:when (featurep! :ui vc-gutter)
        :desc "Git revert hunk"            "r"   #'git-gutter:revert-hunk
        :desc "Git stage hunk"             "s"   #'git-gutter:stage-hunk
        :desc "Git time machine"           "t"   #'git-timemachine-toggle
        :desc "Jump to next hunk"          "n"   #'git-gutter:next-hunk
-       :desc "Jump to previous hunk"      "p"   #'git-gutter:previous-hunk)
-      (:when (featurep! :tools magit)
+       :desc "Jump to previous hunk"      "p"   #'git-gutter:previous-hunk
        :desc "Forge dispatch"             "'"   #'forge-dispatch
        :desc "Git stage file"            "S"   #'magit-stage-file
        :desc "Git unstage file"          "U"   #'magit-unstage-file
@@ -189,8 +176,6 @@
         :desc "Browse issues"             "I"   #'forge-browse-issues
         :desc "Browse pull requests"      "P"   #'forge-browse-pullreqs)
        (:prefix ("l" . "list")
-        (:when (featurep! :tools gist)
-         :desc "List gists"               "g"   #'gist-list)
         :desc "List repositories"         "r"   #'magit-list-repositories
         :desc "List submodules"           "s"   #'magit-list-submodules
         :desc "List issues"               "i"   #'forge-list-issues
@@ -203,7 +188,7 @@
         :desc "Commit"                    "c"   #'magit-commit-create
         :desc "Fixup"                     "f"   #'magit-commit-fixup
         :desc "Issue"                     "i"   #'forge-create-issue
-        :desc "Pull request"              "p"   #'forge-create-pullreq))
+        :desc "Pull request"              "p"   #'forge-create-pullreq)
       )
 ;;-- end <leader> g --- git
 
@@ -298,6 +283,8 @@
 ;;-- <leader> n --- notes
 (map! :leader
       :prefix ("n" . "notes")
+      :desc "Bibliographic entries"          "b" #'ivy-bibtex
+      :desc "Org noter"                      "e" #'org-noter
       :desc "Active org-clock"               "o" #'org-clock-goto
       :desc "Cancel current org-clock"       "C" #'org-clock-cancel
       :desc "Goto capture"                   "N" #'org-capture-goto-target
@@ -311,32 +298,10 @@
       :desc "Tags search"                    "m" #'org-tags-view
       :desc "Toggle last org-clock"          "c" #'+org/toggle-last-clock
       :desc "View search"                    "v" #'org-search-view
-
-      (:when (featurep! :lang org +journal)
-       (:prefix ("j" . "journal")
-        :desc "New Entry"      "j" #'org-journal-new-entry
-        :desc "New Scheduled Entry" "J" #'org-journal-new-scheduled-entry
-        :desc "Search Forever" "s" #'org-journal-search-forever))
-      (:when (featurep! :lang org +roam)
-       (:prefix ("r" . "roam")
-        :desc "Find file"                     "f" #'org-roam-find-file
-        :desc "Insert (skipping org-capture)" "I" #'org-roam-insert-immediate
-        :desc "Insert"                        "i" #'org-roam-insert
-        :desc "Org Roam Capture"              "c" #'org-roam-capture
-        :desc "Org Roam"                      "r" #'org-roam
-        :desc "Show graph"                    "g" #'org-roam-graph
-        :desc "Switch to buffer"              "b" #'org-roam-switch-to-buffer
-        (:prefix ("d" . "by date")
-         :desc "Arbitrary date" "d" #'org-roam-dailies-date
-         :desc "Today"          "t" #'org-roam-dailies-today
-         :desc "Tomorrow"       "m" #'org-roam-dailies-tomorrow
-         :desc "Yesterday"      "y" #'org-roam-dailies-yesterday)))
-      (:when (featurep! :tools biblio)
-       :desc "Bibliographic entries"        "b"
-       (cond ((featurep! :completion ivy)   #'ivy-bibtex)
-             ((featurep! :completion helm)  #'helm-bibtex)))
-      (:when (featurep! :lang org +noter)
-       :desc "Org noter"                  "e" #'org-noter)
+      (:prefix ("j" . "journal")
+       :desc "New Entry"      "j" #'org-journal-new-entry
+       :desc "New Scheduled Entry" "J" #'org-journal-new-scheduled-entry
+       :desc "Search Forever" "s" #'org-journal-search-forever)
       )
 ;;-- end <leader> n --- notes
 
@@ -363,8 +328,7 @@
 
       :desc "Todo list"                    "t"    #'org-todo-list
 
-
-      (:when (featurep! :os macos)
+      (:when (modulep! :os macos)
        :desc "Reveal in Finder"           "f"     #'+macos/reveal-in-finder
        :desc "Reveal project in Finder"   "F"     #'+macos/reveal-project-in-finder
        )
@@ -416,10 +380,6 @@
        :desc "Replace in Project"        "r" #'projectile-replace
        :desc "Replace Regexp in Project" "R" #'projectile-replace-regexp
        )
-      (:when (and (featurep! :tools taskrunner)
-                  (or (featurep! :completion ivy)
-                      (featurep! :completion helm)))
-       :desc "List project tasks"         "z"   #'+taskrunner/project-tasks)
       ;; later expanded by projectile
       (:prefix ("4" . "in other window"))
       (:prefix ("5" . "in other frame"))
@@ -468,23 +428,8 @@
 
 ;;-- <leader> R --- remote
 (map! :leader
-      (:when (featurep! :tools upload)
-       :prefix ("R" . "remote")
-       :desc "Browse relative"            "B" #'ssh-deploy-browse-remote-handler
-       :desc "Browse remote files"        "." #'ssh-deploy-browse-remote-handler
-       :desc "Browse remote"              "b" #'ssh-deploy-browse-remote-base-handler
-       :desc "Delete local & remote"      "D" #'ssh-deploy-delete-handler
-       :desc "Detect remote changes"      ">" #'ssh-deploy-remote-changes-handler
-       :desc "Diff local & remote"        "x" #'ssh-deploy-diff-handler
-       :desc "Download remote"            "d" #'ssh-deploy-download-handler
-       :desc "Eshell base terminal"       "e" #'ssh-deploy-remote-terminal-eshell-base-handler
-       :desc "Eshell relative terminal"   "E" #'ssh-deploy-remote-terminal-eshell-handler
-       :desc "Move/rename local & remote" "m" #'ssh-deploy-rename-handler
-       :desc "Open this file on remote"   "o" #'ssh-deploy-open-remote-file-handler
-       :desc "Run deploy script"          "s" #'ssh-deploy-run-deploy-script-handler
-       :desc "Upload local (force)"       "U" #'ssh-deploy-upload-handler-forced
-       :desc "Upload local"               "u" #'ssh-deploy-upload-handler
-       )
+      :prefix "r"
+
       )
 ;;-- end <leader> R --- remote
 
@@ -526,18 +471,15 @@
       :desc "SmartParens"    "s" #'smartparens-global-mode
       :desc "Read-only mode" "r" #'read-only-mode
       (:prefix ("d" . "Debug")
-       :desc "Debug on Error" "e"               #'toggle-debug-on-error
-       :desc "Debug on Var" "v"                 #'debug-on-variable-change
-       :desc "Cancel Debug on Var" "V"          #'cancel-debug-on-variable-change
-       :desc "Debug on Function" "f"            #'debug-on-entry
-       :desc "Cancel Debug on Function" "F"     #'cancel-debug-on-entry
-       :desc "Flymake"                      "C" #'flymake-mode
-       (:when (featurep! :checkers syntax)
-        :desc "Flycheck"                   "c"  #'global-flycheck-mode)
-       (:when (and (featurep! :checkers spell) (not (featurep! :checkers spell +flyspell)))
-        :desc "Spell checker"              "s"  #'spell-fu-mode)
-       (:when (featurep! :checkers spell +flyspell)
-        :desc "Spell checker"              "s"  #'flyspell-mode))
+       :desc "Debug on Error"            "e" #'toggle-debug-on-error
+       :desc "Debug on Var"              "v" #'debug-on-variable-change
+       :desc "Cancel Debug on Var"       "V" #'cancel-debug-on-variable-change
+       :desc "Debug on Function"         "f" #'debug-on-entry
+       :desc "Cancel Debug on Function"  "F" #'cancel-debug-on-entry
+       :desc "Flymake"                   "C" #'flymake-mode
+       :desc "Flycheck"                  "c" #'global-flycheck-mode
+       :desc "Spell checker"            "s" #'flyspell-mode
+       )
       (:prefix ("v" . "Visual")
        ;; R
        ;; n N
@@ -564,7 +506,7 @@
        :desc "Evil-visual-mark"    "v" #'evil-visual-mark-mode
        :desc "Auto-Highlight"      "h" #'auto-highlight-symbol-mode
        )
-      (:when (featurep! :lang org +pomodoro)
+      (:when (modulep! :lang org +pomodoro)
        :desc "Pomodoro timer"             "t"   #'org-pomodoro)
       ;; highlight long lines
       ;; auto-completion
@@ -575,7 +517,7 @@
 
 ;;-- <leader> W --- Workspaces
 (map! :leader
-      :when (featurep! :ui workspaces)
+      :when (modulep! :ui workspaces)
       :prefix ("W" . "Workspaces")
       ;; RET
       ;; Lowercase - workspace, Uppercase - session

@@ -10,12 +10,12 @@ are no real buffers left OR if all remaining buffers are visible in other
 windows, switch to `doom-fallback-buffer'. Otherwise, delegate to original
 `kill-current-buffer'."
     (let* ((buf (current-buffer))
-          (win-list (get-buffer-window-list buf nil t))
-          (visible-p (-contains? win-list (selected-window)))
-          (inhibit-redisplay t)
-          (doom-inhibit-switch-buffer-hooks t)
-          buffer-list-update-hook
-          )
+           (win-list (get-buffer-window-list buf nil t))
+           ;; (visible-p (-contains? win-list (selected-window)))
+           (inhibit-redisplay t)
+           (doom-inhibit-switch-buffer-hooks t)
+           buffer-list-update-hook
+           )
       (cond ((eq buf (doom-fallback-buffer))
              (message "Can't kill the fallback buffer.")
              t
@@ -25,7 +25,7 @@ windows, switch to `doom-fallback-buffer'. Otherwise, delegate to original
              t
              )
             ((and (doom-real-buffer-p buf)
-                  (not visible-p)
+                  (not (-contains? win-list (selected-window)))
                   (buffer-modified-p buf)
                   (not (y-or-n-p (format "Buffer %s is modified; kill anyway?" buf))))
              (user-error "Aborted")

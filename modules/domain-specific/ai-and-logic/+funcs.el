@@ -67,7 +67,7 @@ to a pop up buffer."
         (forward-line)
         )
       (with-temp-buffer-window "analysis" 'display-buffer nil
-        (loop for key in (hash-table-keys data)
+        (cl-loop for key in (hash-table-keys data)
               do
               (princ key) (princ ":\n\n")
               (mapc (lambda (x) (princ x) (princ "\n"))

@@ -85,13 +85,6 @@
   "C-S-j"  #'scroll-up-command
   "C-S-k"  #'scroll-down-command)
 
-;; Popup
-(map! (:when (featurep! :ui popup)
-       "C-`"   #'+popup/toggle
-       "C-~"   #'+popup/raise
-       "C-p" #'+popup/other)
-      )
-
 ;; LSP
 (map! :after lsp-mode
       :map lsp-command-map

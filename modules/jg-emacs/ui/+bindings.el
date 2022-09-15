@@ -27,6 +27,7 @@
       :desc "Narrow"        "RET" #'+jg-ui-narrow-around-point
       )
 
+
 ;;-- window ring
 (map! :after jg-leader-bindings-loaded
       :leader

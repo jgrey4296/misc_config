@@ -43,7 +43,7 @@
   (let* ((files (dired-get-marked-files))
          (orgs (-filter #'(lambda (x) (string-equal "org" (f-ext x))) files))
          )
-    (loop for file in orgs do
+    (cl-loop for file in orgs do
           (with-temp-buffer
             (insert-file file)
             (while (re-search-forward "\\[\\[.+\\(/.+?_files\\)" nil t)
@@ -61,7 +61,7 @@ remove empty threads "
   (interactive)
   (let ((files (dired-get-marked-files))
         failures)
-    (loop for file in files
+    (cl-loop for file in files
           do
           (with-temp-buffer
             (condition-case err
@@ -91,7 +91,7 @@ remove empty threads "
   "Clean marked Org files"
   (interactive)
   (let ((files (dired-get-marked-files)))
-    (loop for file in files
+    (cl-loop for file in files
           do
           (with-temp-buffer
             (insert-file-contents file t)

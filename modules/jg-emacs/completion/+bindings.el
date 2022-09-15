@@ -6,8 +6,8 @@
       [remap bookmark-jump] #'+jg-completion-counsel-bookmark
       )
 
-(map! :after ivy
-      :map ivy-minibuffer-map
+(map! :map ivy-minibuffer-map
+      :after ivy
       [remap doom/delete-backward-word] #'ivy-backward-kill-word
       :in "TAB"                         #'ivy-alt-done
       :i "<backtab>"                    #'ivy-dispatching-call
@@ -26,16 +26,16 @@
       :desc "Results as Buffer"        :n "b" #'ivy-occur
       )
 
-(map! :after (ivy jg-evil-bindings)
-      :map ivy-occur-grep-mode-map
+(map! :map ivy-occur-grep-mode-map
+      :after (ivy jg-evil-bindings)
       :desc "Do Ops" "g" jg-binding-operator-map
       )
 
-(map! :after (company jg-leader-bindings-loaded)
-      :when (featurep! :completion company)
+(map! :map company-active-map
+      :after (company jg-leader-bindings-loaded)
       ;; :i "C-@"    (cmds! (not (minibufferp)) #'company-complete-common)
        ;; :i "C-SPC"  (cmds! (not (minibufferp)) #'company-complete-common)
-       :map company-active-map
+
          "C-w"     nil  ; don't interfere with `evil-delete-backward-word'
          "C-n"     #'company-select-next
          "C-p"     #'company-select-previous
@@ -45,8 +45,7 @@
          "C-u"     #'company-previous-page
          "C-d"     #'company-next-page
          "C-s"     #'company-filter-candidates
-         "C-S-s"   (cond ((featurep! :completion helm) #'helm-company)
-                         ((featurep! :completion ivy)  #'counsel-company))
+         "C-S-s"   #'counsel-company
          "C-SPC"   #'company-complete-common
          "TAB"     #'company-complete-common-or-cycle
          [tab]     #'company-complete-common-or-cycle
@@ -54,8 +53,8 @@
          [f1]      nil
          )
 
-(map! :after (company jg-leader-bindings-loaded)
-      :map company-search-map  ; applies to `company-filter-map' too
+(map! :map company-search-map  ; applies to `company-filter-map' too
+      :after (company jg-leader-bindings-loaded)
       "C-n"     #'company-select-next-or-abort
       "C-p"     #'company-select-previous-or-abort
       "C-j"     #'company-select-next-or-abort
@@ -64,23 +63,22 @@
       [escape]  #'company-search-abort
       )
 
-(map! :when (featurep! :completion ivy)
+(map! :map ivy-minibuffer-map
       :after (ivy jg-leader-bindings-loaded)
-      :map ivy-minibuffer-map
       "C-SPC" #'ivy-call-and-recenter  ; preview file
       "C-l"   #'ivy-alt-done
       "C-v"   #'yank
       )
 
-(map! :after (counsel jg-leader-bindings-loaded)
-      :map counsel-ag-map
+(map! :map counsel-ag-map
+      :after (counsel jg-leader-bindings-loaded)
       "C-SPC"    #'ivy-call-and-recenter ; preview
       "C-l"      #'ivy-done
       [C-return] #'+ivy/git-grep-other-window-action
       )
 
-(map! :after helm
-      :map helm-map
+(map! :map helm-map
+      :after helm
       [remap next-line]     #'helm-next-line
       [remap previous-line] #'helm-previous-line
       [left]                #'left-char
@@ -119,18 +117,18 @@
       "C-x 0" nil
       )
 
-(map! :after helm
-      :map helm-map
+(map! :map helm-map
+      :after helm
       :localleader
       :desc "Toggle Full Frame" "f" #'helm-toggle-full-frame
       )
+
 (after! helm
   (evil-make-intercept-map helm-map)
 )
 
-
-(map! :after yasnippet
-      :map snippet-mode-map
+(map! :map snippet-mode-map
+      :after yasnippet
       :localleader
       "1" (cmd! (+jg-misc-browse-url "https://joaotavora.github.io/yasnippet/snippet-development.html"))
       )
@@ -140,8 +138,8 @@
       "i f" #'+jg-completion-counsel-features
       )
 
-(map! :after jg-evil-bindings
-      :map jg-binding-insert-state-map
+(map! :map jg-binding-insert-state-map
+      :after jg-evil-bindings
       "TAB" #'+jg-completion-complete-or-snippet
       )
 

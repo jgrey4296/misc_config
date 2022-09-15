@@ -190,14 +190,22 @@ If region isn't active, narrow away anything above point
     )
   )
 
-(defun +jg-ui-popup-activate-rules ()
+(defun +jg-ui-popup-activate-rules (&optional force)
   (interactive)
-  (message "Activating Popup rules: %s" (hash-table-keys jg-popup-display-rules))
-  (let ((all-rules (copy-sequence (-flatten-n 1 (hash-table-values jg-popup-display-rules)))))
+  (when (or force (not jg-popup-display-flattened))
+    (message "Reconstructing popup rules: %s" (hash-table-keys jg-popup-display-rules))
+    (setq jg-popup-display-flattened
+          (mapcar #'cdr (sort
+                         (copy-sequence
+                          (-flatten-n 1 (hash-table-values jg-popup-display-rules)))
+                         #'(lambda (x y) (< (car x) (car y))))
+                  )
+          )
+    )
+  (when jg-popup-display-flattened
+    (message "Reapplying popup rules")
     (setq +popup--display-buffer-alist nil
-          display-buffer-alist (mapcar #'cdr
-                                       (sort all-rules #'(lambda (x y)
-                                                           (< (car x) (car y))))))
+          display-buffer-alist jg-popup-display-flattened)
     )
   )
 
@@ -216,4 +224,18 @@ If region isn't active, narrow away anything above point
   (setq hl-line-face face)
   (hl-line-highlight)
   )
+
+
+  (add-hook 'evil-normal-state-entry-hook       (cmd! (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-normal-state))))
+  (add-hook 'evil-insert-state-entry-hook       (cmd! (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-insert-state))))
+  (add-hook 'evil-visual-state-entry-hook       (cmd! (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-visual-state))))
+  (add-hook 'evil-motion-state-entry-hook       (cmd! (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-motion-state))))
+  (add-hook 'evil-emacs-state-entry-hook        (cmd! (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-emacs-state))))
+  (add-hook 'evil-replace-state-entry-hook      (cmd! (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-replace-state))))
+  (add-hook 'evil-hybrid-state-entry-hook       (cmd! (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-hybrid-state))))
+  (add-hook 'evil-evilified-state-entry-hook    (cmd! (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-evilified-state))))
+  (add-hook 'evil-lisp-state-entry-hook         (cmd! (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-lisp-state))))
+  (add-hook 'evil-iedit-state-entry-hook        (cmd! (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-iedit-state))))
+  (add-hook 'evil-iedit-insert-state-entry-hook (cmd! (if (overlayp global-hl-line-overlay) (overlay-put global-hl-line-overlay 'face 'jg-evil-iedit-insert-state))))
+
 ;;-- end hl-line control

@@ -1,6 +1,5 @@
 ;;; +xmllint.el -*- lexical-binding: t; -*-
 
-
 (defun +jg-xml-run-xpath (query)
   " Run an xpath query on the current buffer / file
 Storing and displaying results in a buffer
@@ -9,12 +8,12 @@ Storing and displaying results in a buffer
   (let* ((current (current-buffer))
          (fname (buffer-file-name current))
          (default-directory (f-parent fname))
-         (result (shell-command-to-string (format "xmllint --pretty 2 --htmlout --xpath %s %s" query (f-filename fname))))
+         (result (shell-command-to-string (format jg-xml-xpath-command-string query (f-filename fname))))
          )
-    (with-current-buffer (get-buffer-create "*xpath result*")
+    (with-current-buffer (get-buffer-create jg-xml-xpath-results-buffer-name)
       (insert result)
       )
-    (pop-to-buffer "*xpath result*")
+    (pop-to-buffer jg-xml-xpath-results-buffer-name)
     )
   )
 
@@ -24,14 +23,18 @@ Storing and displaying results in a buffer
   (let* ((fname (buffer-file-name (current-buffer)))
          (default-directory (f-parent fname))
          (comint-buff (make-comint-in-buffer "xmllint"
-                                             "*xmllint*"
+                                             jg-xml-xmllint-shell-buffer-name
                                              "xmllint"
                                              nil
                                              "--shell"
                                              (f-filename fname)
                                              ))
           )
+    (with-current-buffer comint-buff
+      (nxml-mode)
+      )
     (pop-to-buffer comint-buff)
+
     )
   )
 

@@ -22,12 +22,12 @@
 
 
 (load! "+vars")
+(load! "+xmllint")
 (after! evil
   (load! "+bindings")
   )
 
-(use-package!
-
-    )
+(use-package! nxml-mode)
+(use-package! mhtml-mode)
 
 ;;; config.el ends here

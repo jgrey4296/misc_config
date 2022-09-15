@@ -26,7 +26,6 @@ docbook
 docbook-xsl
 elixir
 emacs
-emacs-plus@28
 erlang
 exiftool
 faust
@@ -255,6 +254,7 @@ zimg
 zlib
 zstd
 basictex
+font-fira-code
 godot
 pdf-images
 pdftotext

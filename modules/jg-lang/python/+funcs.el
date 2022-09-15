@@ -1,8 +1,8 @@
-;;; lang/jg-python/+funcs.el -*- lexical-binding: t; -*-;;-- imports
-
-;;-- end imports
+;;; lang/jg-python/+funcs.el -*- lexical-binding: t; -*-
 
 
+
+;;-- display control
 (defun +jg-python-close-all-defs ()
     (interactive)
     (save-excursion
@@ -33,6 +33,10 @@
         )
       )
     )
+
+;;-- end display control
+
+;;-- insert commands
 (defun +jg-python-insert-import (&optional arg)
   " insert the literal string provided/read from minibuffer, at the imports section
 of a python file "
@@ -47,7 +51,6 @@ of a python file "
       )
     )
   )
-
 (defun +jg-python-import-snippet (&optional arg)
   " Expand a yasnippet template, then insert it at the imports section "
   (interactive)
@@ -67,6 +70,11 @@ of a python file "
       )
     )
   )
+
+;;-- end insert commands
+
+;;-- selection control
+;; TODO make these text objects?
 (defun +jg-python-select-defun ()
   (interactive)
   (let ((start (progn (python-nav-beginning-of-defun)
@@ -82,45 +90,9 @@ of a python file "
     (evil-visual-make-region start (point))
     )
   )
+;;-- end selection control
 
-(defun +jg-python-class-diagram ()
-  " On lines of class definitions 'class A(B..):
-    extract the total hierarchy "
-  (interactive)
-  (goto-char (point-min))
-  (let (graph sorted-graph
-        (regex "^class \\(.+?\\)\\((\\(.*?\\))\\)?:$")
-        )
-    (while (and (< (point) (point-max)) (looking-at regex))
-      (let* ((classname (match-string 1))
-             (parents   (s-split "," (if (match-string 3)
-                                         (match-string 3)
-                                       "") t))
-             (cleaned-parents (mapcar #'(lambda (x) (s-trim (if (s-contains? "." x)
-                                                           (cadr (s-split "\\." x t))
-                                                         x))) parents)))
-
-        (setq graph (concatenate 'list graph (if (null cleaned-parents)
-                                                 `(("object" . ,classname))
-                                               (-zip-fill classname cleaned-parents nil))))
-        )
-      (forward-line)
-      )
-    (setq sorted-graph (-sort #'(lambda (x y) (string-lessp (car x) (car y))) graph))
-    ;; Generate Graphviz description
-    (with-temp-buffer-window "*Python Class Diagram*"
-        'display-buffer-pop-up-window nil
-      (princ "#+begin_src dot :file ~/desktop/class-diagram.png :exports results :results silent\n")
-      (princ "graph {\n")
-      ;; Add individual elements
-      (mapc #'(lambda (x) (princ (format "  \"%s\" -- \"%s\";\n" (car x) (cdr x)))) sorted-graph)
-      (princ "}\n")
-      (princ "#+end_src\n")
-      (princ "[[file:~/desktop/class-diagram.png][Results]]\n")
-      )
-    )
-  )
-
+;;-- cleanup
 (defun +jg-python-cleanup-import-blocks ()
   " Collect all ##-- imports blocks,
 and move them to the start of the file,
@@ -185,7 +157,46 @@ TODO
       )
     )
   )
+;;-- end cleanup
 
+;;-- summary
+(defun +jg-python-class-diagram ()
+  " On lines of class definitions 'class A(B..):
+    extract the total hierarchy "
+  (interactive)
+  (goto-char (point-min))
+  (let (graph sorted-graph
+        (regex "^class \\(.+?\\)\\((\\(.*?\\))\\)?:$")
+        )
+    (while (and (< (point) (point-max)) (looking-at regex))
+      (let* ((classname (match-string 1))
+             (parents   (s-split "," (if (match-string 3)
+                                         (match-string 3)
+                                       "") t))
+             (cleaned-parents (mapcar #'(lambda (x) (s-trim (if (s-contains? "." x)
+                                                           (cadr (s-split "\\." x t))
+                                                         x))) parents)))
+
+        (setq graph (concatenate 'list graph (if (null cleaned-parents)
+                                                 `(("object" . ,classname))
+                                               (-zip-fill classname cleaned-parents nil))))
+        )
+      (forward-line)
+      )
+    (setq sorted-graph (-sort #'(lambda (x y) (string-lessp (car x) (car y))) graph))
+    ;; Generate Graphviz description
+    (with-temp-buffer-window "*Python Class Diagram*"
+        'display-buffer-pop-up-window nil
+      (princ "#+begin_src dot :file ~/desktop/class-diagram.png :exports results :results silent\n")
+      (princ "graph {\n")
+      ;; Add individual elements
+      (mapc #'(lambda (x) (princ (format "  \"%s\" -- \"%s\";\n" (car x) (cdr x)))) sorted-graph)
+      (princ "}\n")
+      (princ "#+end_src\n")
+      (princ "[[file:~/desktop/class-diagram.png][Results]]\n")
+      )
+    )
+  )
 
 (defun +jg-python-summarize-goto (buff pos &rest args)
   (if-let ((wind (get-buffer-window buff)))
@@ -198,7 +209,6 @@ TODO
         )
     )
   )
-
 (defun +jg-python-summarize ()
   (interactive)
   (let ((buffer (current-buffer))
@@ -230,3 +240,5 @@ TODO
     (display-buffer (get-buffer jg-python-summary-buffer))
     )
   )
+
+;;-- end summary

@@ -465,7 +465,7 @@ With arg, searchs the dplp instead.
            (files (-filter #'identity (mapcar #'+jg-bibtex-get-files-fn entry)))
            (result (cl-loop for file in files
                             collect
-                            (shell-command-to-string (format "ebook-meta %s" (expand-file-name (if (f-relative? file) (f-join jg-bibtex-pdf-loc file) file))))
+                            (shell-command-to-string (format "ebook-meta %s" (shell-quote-argument (expand-file-name (if (f-relative? file) (f-join jg-bibtex-pdf-loc file) file)))))
                             ))
            )
       (with-temp-buffer-window "*Metadata*" 'display-buffer-pop-up-window nil

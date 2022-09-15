@@ -54,3 +54,20 @@ index xkcd using explainxkcd
 fictional syllabi - both of actual papers, and lem-like
 
 tag - amend mode
+
+** XPath
+#+NAME: Example Code
+#+begin_src xpath :results output
+# display the last names of all people in the doc
+//person/@last-name
+
+# get the 2nd person node
+/people/person[2]
+
+# get all the person nodes that have addresses in denver
+//person[address/@city='denver']
+
+# get all the addresses that have "south" in the street name
+//address[contains(@street, 'south')]
+
+#+end_src

@@ -186,6 +186,7 @@ governed by the variable `bibtex-completion-display-formats'."
 (defun +jg-bibtex-helm-bibtex (&optional arg local-bib)
   " Custom implementation of helm-bibtex"
   (interactive "P")
+  (require 'helm-bibtex)
   (when arg
     (message "REBUILDING BIBTEX DATA")
     (+jg-bibtex-build-list)

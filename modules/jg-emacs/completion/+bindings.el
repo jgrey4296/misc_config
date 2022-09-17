@@ -11,7 +11,7 @@
       [remap doom/delete-backward-word] #'ivy-backward-kill-word
       :in "TAB"                         #'ivy-alt-done
       :i "<backtab>"                    #'ivy-dispatching-call
-      :n  ","                           #'+ivy/occur
+      :n  ","                           #'+ivy/woccur
       :n  "."                           #'hydra-ivy/body
 
       "C-c RET"                         #'+ivy/woccur
@@ -22,6 +22,12 @@
       "<down>"                          #'ivy-scroll-down-command
       "<up>"                            #'ivy-scroll-up-command
 
+      :localleader
+      :desc "Results as Buffer"        :n "b" #'+ivy/woccur
+      )
+
+(map! :map swiper-map
+      :after swiper
       :localleader
       :desc "Results as Buffer"        :n "b" #'ivy-occur
       )

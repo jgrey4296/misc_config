@@ -2,6 +2,7 @@
 (load! "+funcs")
 (load! "+snippet-fix")
 (load! "+advice")
+(load! "+file-templates")
 
 (after! evil
   (load! "+bindings")
@@ -26,13 +27,11 @@
 (use-package! helm-gtags :defer t)
 
 (defun +jg-completion-on-load-hook ()
-  (after! yasnippet
-    (load! "+file-templates")
-    (advice-add '+snippet--completing-read-uuid :override #'+jg-completion-snippet--completing-read-uuid)
-    )
+  (require 'yasnippet)
+  (advice-add '+snippet--completing-read-uuid :override #'+jg-completion-snippet--completing-read-uuid)
+  (+jg-completion-activate-file-templates t)
   )
 (add-hook 'doom-first-file-hook #'+jg-completion-on-load-hook)
-
 
 (after! 'helm
   (load! "+helms")

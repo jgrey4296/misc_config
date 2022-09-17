@@ -52,9 +52,20 @@
 
 ;;-- global modes
 (setq smartparens-global-mode nil
-      flycheck-global-modes nil)
-;;-- end global modes
+      flycheck-global-modes nil
+      )
 
+(remove-hook! doom-first-buffer
+  #'smartparens-global-mode
+  )
+(remove-hook! 'after-change-major-mode-hook
+  #'+ligatures-init-buffer-h
+  #'global-flycheck-mode-enable-in-buffers
+  )
+(remove-hook! 'doom-init-ui-hook
+  #'+ligatures-init-h
+  )
+;;-- end global modes
 
 ;;-- misc variables
 (setq

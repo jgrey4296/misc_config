@@ -398,17 +398,21 @@
 ;;-- <leader> q --- quit/restart
 (map! :leader
       :prefix ("q" . "quit/restart")
-      :desc "Clear current frame"          "F" #'doom/kill-all-buffers
-      :desc "Delete frame"                 "f" #'delete-frame
-      :desc "Kill Emacs (and daemon)"      "K" #'save-buffers-kill-emacs
-      :desc "Quick save current session"   "s" #'doom/quicksave-session
       :desc "Quit Emacs"                   "q" #'kill-emacs
-      :desc "Restart & restore Emacs"      "r" #'doom/restart-and-restore
-      :desc "Restart emacs server"         "d" #'+default/restart-server
-      :desc "Restart Emacs"                "R" #'doom/restart
-      :desc "Restore last session"         "l" #'doom/quickload-session
-      :desc "Restore session from file"    "L" #'doom/load-session
-      :desc "Save session to file"         "S" #'doom/save-session
+      :desc "Pause Emacs"                  "p" #'suspend-emacs
+      :desc "Restart emacs server"         "S" #'+default/restart-server
+
+       (:prefix ("f" . "Frames")
+        :desc "Clear current frame"          "F" #'doom/kill-all-buffers
+        :desc "Delete frame"                 "f" #'delete-frame
+        )
+       (:prefix ("w" . "Sessions")
+        :desc "Save current session"         "s" #'doom/quicksave-session
+        :desc "Load last session"            "l" #'doom/quickload-session
+
+        :desc "Load session from file"       "L" #'doom/load-session
+        :desc "Save session to file"         "S" #'doom/save-session
+        )
       )
 ;;-- end <leader> q --- quit/restart
 

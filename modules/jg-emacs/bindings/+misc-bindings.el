@@ -31,7 +31,7 @@
       "h" #'counsel-shell-history)
 
 (evil-make-intercept-map shell-mode-map)
-
+(evil-make-intercept-map read-expression-map)
 ;; Comint
 ;; overrides the default normal mode binding of evil-ret
 (map! :after comint
@@ -77,7 +77,8 @@
   "C-u"    #'evil-delete-back-to-indentation
   "C-v"    #'yank
   "C-w"    #'doom/delete-backward-word
-  "C-z"    (cmd! (ignore-errors (call-interactively #'undo))))
+  "C-z"    (cmd! (ignore-errors (call-interactively #'undo)))
+  )
 
 (define-key! :keymaps +default-minibuffer-maps
   "C-j"    #'next-line

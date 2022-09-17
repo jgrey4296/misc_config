@@ -188,16 +188,16 @@ governed by the variable `bibtex-completion-display-formats'."
   (interactive "P")
   (require 'helm-bibtex)
   (when arg
-    (message "REBUILDING BIBTEX DATA")
+    (message "Clearing Bibtex File Cache")
     (+jg-bibtex-build-list)
-    (bibtex-completion-clear-cache))
+    (bibtex-completion-clear-cache)
+    (bibtex-completion-init)
+    )
   (when (null jg-bibtex-helm-candidates)
-    (progn (message "Generating Candidates")
-           (bibtex-completion-init)
-           (setq jg-bibtex-helm-candidates
-                 (mapcar '+jg-bibtex-process-candidates (bibtex-completion-candidates)))
+    (message "Generating Candidates")
+    (setq jg-bibtex-helm-candidates
+          (mapcar '+jg-bibtex-process-candidates (bibtex-completion-candidates)))
 
-      )
     )
   (helm-set-local-variable 'helm-candidate-number-limit 5000)
 

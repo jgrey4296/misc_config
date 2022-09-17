@@ -27,3 +27,10 @@
                 t
                 )
               )
+
+(defun disable-vl-mode ()
+  (interactive)
+  (visual-line-mode -1)
+  )
+
+(add-hook! 'text-mode-hook :append #'disable-vl-mode)

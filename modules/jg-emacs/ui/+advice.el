@@ -1,6 +1,9 @@
 ;;; +advice.el -*- lexical-binding: t; -*-
 
-(advice-remove 'kill-current-buffer #'doom--switch-to-fallback-buffer-maybe-a)
+(after! doom-ui
+  (advice-remove 'kill-current-buffer #'doom--switch-to-fallback-buffer-maybe-a)
+  )
+
 (define-advice kill-current-buffer (:before-until (&rest _)
                                       +jg-ui-kill-buffer-override)
     "Switch to `doom-fallback-buffer' if on last real buffer.

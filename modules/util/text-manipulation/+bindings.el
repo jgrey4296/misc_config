@@ -31,7 +31,6 @@
 (map! :map jg-binding-normal-state-map
       :after jg-evil-bindings
       :desc "Debug"          "I d"   #'+jg-text-insert-debug
-      :desc "Select Buffer"  "v RET" #'+jg-text-whole-buffer-textobj
 
       :desc "Title Case"     "c t"   #'+jg-text-title-case-op
       :desc "Rotate"         "c r"   #'rotate-text

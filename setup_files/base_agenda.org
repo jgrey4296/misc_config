@@ -74,7 +74,10 @@ tag - amend mode
 #+end_src
 
 *** [[https://www.videlibri.de/xidel.html][xidel]]
-
+#+begin_src bash
+# Extracts between table and footer
+xidel -s --output-format=xml --xpath "//table/following-sibling::*[//*[@id='printfooter']/preceding::node()]" `?`
+#+end_src
 *** [[http://xmlstar.sourceforge.net/][XML Starlet]]
 
 #+begin_src bash

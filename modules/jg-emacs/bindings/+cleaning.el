@@ -1,28 +1,38 @@
 ;;; +cleaning.el -*- lexical-binding: t; -*-
 
 (defun +jg-bindings-check-map (the-map)
+  " Take a keymap and print out all meta keys of the map "
   (cl-assert (keymapp the-map))
-  (mapcar (lambda (x)
-            (message "%s : %s"
-                     (format "C-%s" (char-to-string x))
-                     (not (not (lookup-key the-map
-                                           (kbd (format "C-%s" (char-to-string x))))))
-                    )
-            )
-          (number-sequence ?a ?z))
+  (let ((c-xs (cl-loop for key in (number-sequence ?a ?z)
+                       when (lookup-key the-map (kbd (format "C-%s" (char-to-string key))))
+                       collect
+                       (format "C-%s" (char-to-string key))))
+        (m-xs (cl-loop for key in (number-sequence ?a ?z)
+                       when (lookup-key the-map (kbd (format "M-%s" (char-to-string key))))
+                       collect
+                       (format "M-%s" (char-to-string key))))
+        (cm-xs (cl-loop for key in (number-sequence ?a ?z)
+                       when (lookup-key the-map (kbd (format "C-M-%s" (char-to-string key))))
+                       collect
+                       (format "C-M-%s" (char-to-string key))))
+        ;; todo: also handle S, and mouse-1, mouse-2
+        )
 
-  (mapcar (lambda (x)
-            (message "%s : %s"
-                     (format "M-%s" (char-to-string x))
-                     (not (not (lookup-key the-map
-                                           (kbd (format "M-%s" (char-to-string x))))))
-                    )
-            )
-          (number-sequence ?a ?z))
+    (message "C-?'s: ")
+    (mapc (lambda (x) (message "%s " x)) c-xs)
+    (message "--------------------")
+    (message "M-?'s: ")
+    (mapc (lambda (x) (message "%s" x)) c-xs)
+    (message "--------------------")
+    (message "C-M-?'s: ")
+    (mapc (lambda (x) (message "%s" x)) c-xs)
+    (list c-xs m-xs cm-xs)
+    )
   )
 
 (defun +jg-bindings-undefine-metas (the-map)
-  (loop for acc-map in (accessible-keymaps the-map)
+  (cl-assert (keymapp the-map))
+  (cl-loop for acc-map in (accessible-keymaps the-map)
         do
         (if (not (keymapp acc-map))
             (setq acc-map (cdr acc-map)))

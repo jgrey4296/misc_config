@@ -195,11 +195,13 @@ If region isn't active, narrow away anything above point
   (when (or force (not jg-popup-display-flattened))
     (message "Reconstructing popup rules: %s" (hash-table-keys jg-popup-display-rules))
     (setq jg-popup-display-flattened
-          (mapcar #'cdr (sort
-                         (copy-sequence
-                          (-flatten-n 1 (hash-table-values jg-popup-display-rules)))
-                         #'(lambda (x y) (< (car x) (car y))))
-                  )
+          (-concat (mapcar #'cdr (sort
+                                  (copy-sequence
+                                   (-flatten-n 1 (hash-table-values jg-popup-display-rules)))
+                                  #'(lambda (x y) (< (car x) (car y))))
+                           )
+                   '(("*jg-customised*" (+popup-buffer)))
+                   )
           )
     )
   (when jg-popup-display-flattened

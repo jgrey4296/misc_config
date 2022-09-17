@@ -3,16 +3,28 @@
 (evil-make-intercept-map nxml-mode-map)
 (evil-make-intercept-map mhtml-mode-map)
 
-(map! :map nxml-mode-map
-      :after 'nxml-mode
-      :desc "Run XPath Query" "?" #'+jg-xml-run-xpath
+(map! :map dired-mode-map
+      :after dired
       :localleader
-      :desc "Run XPath Query" "?" #'+jg-xml-run-xpath
+      :desc "Query Xml" :n "1" #'+jg-xml-dired-run-xidel
+      )
+
+(map! :map nxml-mode-map
+      ;; :after 'nxml-mode
+      "/" nil
+      :i "/" #'nxml-electric-slash
+      :n "=" #'+jg-xml-format-buffer
+      :desc "Run XPath Query" :n "?" #'+jg-xml-run-xidel
+      :localleader
+      :desc "Run XPath Query" :n "?" #'+jg-xml-run-xidel
       )
 
 (map! :map mhtml-mode-map
       ;; :after 'mhtml-mode
-      :desc "Run XPath Query" "?" #'+jg-xml-run-xpath
+      "/" nil
+      :i "/" #'sgml-slash
+      :desc "Run XPath Query" :n "?" #'+jg-xml-run-xidel
       :localleader
-      :desc "Run XPath Query" "?" #'+jg-xml-run-xpath
+      :desc "Run XPath Query" :n "?" #'+jg-xml-run-xidel
+      :desc "Load into shell" :n "l" #'+jg-xml-load-into-repl
       )

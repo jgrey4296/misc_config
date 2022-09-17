@@ -39,12 +39,7 @@
 (use-package! palette-mode)
 
 ;;-- hooks
-(add-hook! 'doom-first-input-hook #'+jg-ui-popup-activate-rules)
-
-;; To overrule ligatures module
-(add-hook! 'doom-init-ui-hook :append
-  (defun +ligatures-init-h ()
-    (remove-hook 'after-change-major-mode-hook #'+ligatures-init-buffer-h)))
+(add-hook! 'doom-first-file-hook #'+jg-ui-popup-activate-rules)
 
 (after! (evil hl-line)
   ;; hooks for evil state entry hooks to change hl-line colour

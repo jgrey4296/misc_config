@@ -21,6 +21,4 @@
    (snippet-mode)
    )
  )
-
-(+jg-completion-activate-file-templates)
 (provide 'jg-file-templates)

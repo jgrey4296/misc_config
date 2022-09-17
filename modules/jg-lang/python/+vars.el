@@ -104,7 +104,6 @@
      (python-mode       :trigger "__" :priority -100)
      )
    )
-  (+jg-completion-activate-file-templates)
   )
 ;;-- end file templates
 

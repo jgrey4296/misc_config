@@ -80,6 +80,5 @@
      (org-mode :trigger "__")
      )
    )
-  (+jg-completion-activate-file-templates)
   )
 ;;-- end file templates

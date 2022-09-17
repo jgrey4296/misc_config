@@ -25,13 +25,13 @@
 
 (use-package! helm-gtags :defer t)
 
-(after! (yasnippet)
-  (load! "+file-templates")
-  (defun +jg-completion-on-load-hook ()
+(defun +jg-completion-on-load-hook ()
+  (after! yasnippet
+    (load! "+file-templates")
     (advice-add '+snippet--completing-read-uuid :override #'+jg-completion-snippet--completing-read-uuid)
     )
-  (add-hook 'doom-first-input-hook #'+jg-completion-on-load-hook)
   )
+(add-hook 'doom-first-file-hook #'+jg-completion-on-load-hook)
 
 
 (after! 'helm

@@ -65,6 +65,5 @@
      (emacs-lisp-mode    :trigger "__package")
      )
    )
-  (+jg-completion-activate-file-templates)
 )
 ;;-- end file templates

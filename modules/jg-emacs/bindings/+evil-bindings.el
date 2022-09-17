@@ -7,6 +7,8 @@
 ;;-- setup
 (setq jg-binding-insert-state-map (copy-keymap evil-insert-state-map))
 
+(suppress-keymap jg-binding-motion-state-map)
+
 (defvar old-evil-normal-state-map   nil "the original evil-normal-state-map")
 (defvar old-evil-iinsert-state-map  nil "the original evil-insert-state-map")
 (defvar old-evil-visual-state-map   nil "the original evil-visual-state-map")
@@ -254,18 +256,6 @@
       "8"                                      #'digit-argument
       "9"                                      #'digit-argument
 
-      "J" #'ignore
-      "C" #'ignore
-      "O" #'ignore
-      "S" #'ignore
-      "A" #'ignore
-      "a" #'ignore
-      "Z" #'ignore
-      "<" #'ignore
-      ">" #'ignore
-      "?" #'ignore
-      "!" #'ignore
-      "±" #'ignore
       )
 ;;-- end motion state
 

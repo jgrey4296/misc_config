@@ -92,8 +92,7 @@ Modified to pre-sort bookmarks, caselessly
 ;;-- file-templates control
 (defun +jg-completion-add-file-templates (sym rules &optional override)
   (cl-assert (hash-table-p jg-completion-file-template-rules))
-  (if (and (gethash sym jg-completion-file-template-rules) (not override))
-      (message "File Template Ruleset %s already exists" sym)
+  (unless (or (gethash sym jg-completion-file-template-rules) (not override))
     (puthash sym
              (cl-loop for (head . body) in rules
                       for priority = (* -1 (or (plist-get body :priority) 0))
@@ -106,17 +105,25 @@ Modified to pre-sort bookmarks, caselessly
     )
   )
 
-(defun +jg-completion-activate-file-templates ()
+(defun +jg-completion-activate-file-templates (&optional force)
+
   (message "Activating File Templates: %s" (hash-table-keys jg-completion-file-template-rules))
-  (setq +file-templates-dir jg-completion-file-templates-dir
-        yas-snippet-dirs (list +snippets-dir
-                               +file-templates-dir
-                               doom-snippets-dir
-                               yasnippet-snippets-dir)
-        yas--default-user-snippets-dir (car yas-snippet-dirs))
-  (let ((all-rules (copy-sequence (-flatten-n 1 (hash-table-values jg-completion-file-template-rules)))))
-    (setq +file-templates-alist
-          (mapcar #'cdr (sort all-rules #'(lambda (x y) (< (car x) (car y))))))
+  (unless (or jg-completion-file-templates-flat (not force))
+    (let ((all-rules (copy-sequence (-flatten-n 1 (hash-table-values jg-completion-file-template-rules)))))
+      (setq jg-completion-file-templates-flat
+            (mapcar #'cdr (sort all-rules #'(lambda (x y) (< (car x) (car y))))))
+      )
+    )
+
+  (when jg-completion-file-templates-flat
+    (setq +file-templates-dir jg-completion-file-templates-dir
+          yas-snippet-dirs (list +snippets-dir
+                                 +file-templates-dir
+                                 doom-snippets-dir
+                                 yasnippet-snippets-dir)
+          yas--default-user-snippets-dir (car yas-snippet-dirs)
+          +file-templates-alist jg-completion-file-templates-flat
+          )
     )
   )
 ;;-- end file-templates control

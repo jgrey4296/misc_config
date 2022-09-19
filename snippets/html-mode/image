@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: image
+# uuid: image
+# key:  image
+# group :
+# --
+<img src="$1" class="$2"/>

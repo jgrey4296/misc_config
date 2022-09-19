@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: centered
+# uuid: centered
+# key:  centered
+# group :
+# --
+.centered {
+  display: block;
+  text-align: center;
+  margin: 1em 0
+}

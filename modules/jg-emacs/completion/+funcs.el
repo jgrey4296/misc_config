@@ -125,5 +125,9 @@ Modified to pre-sort bookmarks, caselessly
           +file-templates-alist jg-completion-file-templates-flat
           )
     )
+
+  (when force
+    (yas-reload-all)
+    )
   )
 ;;-- end file-templates control

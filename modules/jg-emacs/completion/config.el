@@ -30,6 +30,7 @@
   (require 'yasnippet)
   (advice-add '+snippet--completing-read-uuid :override #'+jg-completion-snippet--completing-read-uuid)
   (+jg-completion-activate-file-templates t)
+  (yas-reload-all)
   )
 (add-hook 'doom-first-file-hook #'+jg-completion-on-load-hook)
 

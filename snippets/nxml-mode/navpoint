@@ -5,8 +5,6 @@
 # group :
 # --
 <navPoint class="chapter" id="Chapter$1" playOrder="$1">
-    <navLabel>
-    <text>$2</text>
-    </navLabel>
+    <navLabel> <text>$2</text> </navLabel>
     <content src="$3"/>
 </navPoint>$0

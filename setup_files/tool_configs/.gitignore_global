@@ -61,3 +61,6 @@ secrets.config
 # Logs
 *.log
 log.*
+
+# Auctex
+*.auctex-auto

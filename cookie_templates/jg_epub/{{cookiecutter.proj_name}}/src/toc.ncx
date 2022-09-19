@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1" xml:lang="eng">
+  <head>
+    <meta name="dtb:uid" content="e7ea4372-5863-48e2-9458-b6615e98852c"/>
+    <meta name="dtb:depth" content="1"/>
+    <meta name="dtb:totalPageCount" content="0"/>
+    <meta name="dtb:maxPageNumber" content="0"/>
+  </head>
+  <docTitle>
+    <text>{{cookiecutter.proj_title}}</text>
+  </docTitle>
+  <navMap>
+    <navPoint class="chapter" id="Chapter0" playOrder="0">
+      <navLabel> <text>Introduction</text> </navLabel>
+      <content src="content/intro.xhtml"/>
+    </navPoint>
+  </navMap>
+</ncx>

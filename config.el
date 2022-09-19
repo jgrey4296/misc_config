@@ -16,16 +16,15 @@
 ;;-- end Text Encoding
 
 ;;-- locations
-(setq backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/")))
-      ispell-personal-dictionary (expand-file-name "~/.ispell_english")
+(setq backup-directory-alist          (quote ((".*" . "~/.emacs.d/backups/")))
+      ispell-personal-dictionary      (expand-file-name "~/.ispell_english")
       pyvenv-default-virtual-env-name "~/anaconda3/envs/"
-      org-directory "~/github/writing/orgfiles/"
-      org-agenda-files `(,(expand-file-name "~/.doom.d/setup_files/base_agenda.org"))
-      org-archive-location (string-join `(,(expand-file-name "~/.doom.d/setup_files/archive.org")
-                                          "* Main Archive") "::")
-      initial-buffer-choice "/Volumes/documents/github/emacs_files/setup_files/base_agenda.org"
-      doom-fallback-buffer-name "base_agenda.org"
-      bookmark-default-file "/Volumes/documents/github/emacs_files/bookmarks"
+      org-directory                   "~/github/writing/orgfiles/"
+      org-agenda-files               `(,(expand-file-name "setup_files/base_agenda.org" doom-local-dir))
+      org-archive-location            (string-join `(,(expand-file-name "setup_files/archive.org" doom-local-dir) "* Main Archive") "::")
+      initial-buffer-choice           (expand-file-name "setup_files/base_agenda.org" doom-local-dir)
+      doom-fallback-buffer-name       "base_agenda.org"
+      bookmark-default-file           (expand-file-name "bookmarks" doom-local-dir)
       )
 ;;-- end locations
 
@@ -68,21 +67,19 @@
 ;;-- end global modes
 
 ;;-- misc variables
-(setq
- +lsp-defer-shutdown 10
- avy-all-windows t
- display-line-numbers-type t
- display-line-numbers-width 4
- highlight-indent-guides-suppress-auto-error t
- ibuffer-old-time 2
- line-move-ignore-invisible t
- outline-blank-line nil
- overflow-newline-into-fringe t
- tab-always-indent t
- whitespace-style '(face tabs spaces trailing lines space-before-tab newline indentation empty space-after-tab space-mark tab-mark newline-mark)
+(setq +lsp-defer-shutdown 10
+      avy-all-windows t
+      display-line-numbers-type t
+      display-line-numbers-width 4
+      highlight-indent-guides-suppress-auto-error t
+      ibuffer-old-time 2
+      line-move-ignore-invisible t
+      outline-blank-line nil
+      overflow-newline-into-fringe t
+      tab-always-indent t
+      whitespace-style '(face tabs spaces trailing lines space-before-tab newline indentation empty space-after-tab space-mark tab-mark newline-mark)
  )
 ;;-- end misc variables
-
 
 ;;-- Byte Compilation
 ;; from https://github.com/kiwanami/emacs-epc/issues/35

@@ -12,7 +12,7 @@
 
 ;;-- pomodoro
 ;; set pomodoro log variable
-(defcustom jg-org-pomodoro-log-file "~/.doom.d/setup_files/pomodoro_log.org" "The Location of the Pomodoro Log File")
+(defcustom jg-org-pomodoro-log-file (expand-file-name "setup_files/pomodoro_log.org" doom-local-dir) "The Location of the Pomodoro Log File")
 (defcustom jg-org-pomodoro-buffer-name "*Pomodoro Log*"
   "The name of the Pomodoro Log Buffer to record what I did in")
 (defcustom jg-org-pomodoro-log-message ";; What did the last Pomodoro session accomplish? C-c to finish\n"

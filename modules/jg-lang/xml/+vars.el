@@ -18,3 +18,16 @@
 
 
   )
+
+;;-- fold spec
+(after! jg-fold-specs
+  (setq jg-web-fold-spec `((web-mode)
+                            :open-all   nil
+                            :close-all  nil
+                            :toggle     web-mode-fold-or-unfold
+                            :open       nil
+                            :open-rec   nil
+                            :close      nil))
+  (push jg-web-fold-spec evil-fold-list)
+  )
+;;-- end fold spec

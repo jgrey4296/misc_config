@@ -28,22 +28,26 @@ uses xidel, outputs as xml
          (target-dir (read-directory-name "Output Directory: "))
          (prefix (read-string "Prefix filename with: "))
          (results (cl-loop for fname in marked
-                           collect
+                           do
                            (let ((result (shell-command-to-string (format jg-xml-xidel-command-string
                                                                           query
                                                                           (shell-quote-argument fname))))
                                  (new-fname (f-join target-dir (concat prefix (f-swap-ext (f-filename fname) "xml"))))
                                  )
                              (append-to-file result nil new-fname)
-                             result
+                             ;; result
+
                              )
                            ))
          )
-    (with-current-buffer (get-buffer-create jg-xml-xpath-results-buffer-name)
-      (erase-buffer)
-      (mapc #'insert results)
-      (nxml-mode)
-      )
-    (display-buffer  jg-xml-xpath-results-buffer-name)
-    )
+    1
+    ;; (with-current-buffer (get-buffer-create jg-xml-xpath-results-buffer-name)
+    ;;   (erase-buffer)
+    ;;   (mapc #'insert results)
+    ;;   (nxml-mode)
+    ;;   )
+    ;; (display-buffer  jg-xml-xpath-results-buffer-name)
+    ;; )
+  )
+
   )

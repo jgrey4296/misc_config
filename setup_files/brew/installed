@@ -215,6 +215,7 @@ rubberband
 ruby
 rustup-init
 s-lang
+saxon
 sdl2
 shared-mime-info
 snappy
@@ -243,7 +244,10 @@ wxwidgets
 x264
 x265
 xapian
+xerces-c
+xidel
 xml-coreutils
+xmlstarlet
 xmlto
 xorgproto
 xpdf

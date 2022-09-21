@@ -20,11 +20,11 @@
       ispell-personal-dictionary      (expand-file-name "~/.ispell_english")
       pyvenv-default-virtual-env-name "~/anaconda3/envs/"
       org-directory                   "~/github/writing/orgfiles/"
-      org-agenda-files               `(,(expand-file-name "setup_files/base_agenda.org" doom-local-dir))
-      org-archive-location            (string-join `(,(expand-file-name "setup_files/archive.org" doom-local-dir) "* Main Archive") "::")
-      initial-buffer-choice           (expand-file-name "setup_files/base_agenda.org" doom-local-dir)
+      org-agenda-files               `(,(expand-file-name "setup_files/base_agenda.org" doom-user-dir))
+      org-archive-location            (string-join `(,(expand-file-name "setup_files/archive.org" doom-user-dir) "* Main Archive") "::")
+      initial-buffer-choice           (expand-file-name "setup_files/base_agenda.org" doom-user-dir)
       doom-fallback-buffer-name       "base_agenda.org"
-      bookmark-default-file           (expand-file-name "bookmarks" doom-local-dir)
+      bookmark-default-file           (expand-file-name "bookmarks" doom-user-dir)
       )
 ;;-- end locations
 

@@ -61,7 +61,7 @@
                                         "swp"
                                         "node_modules"
                                         "venv"
-                                        "autctex-auto"
+                                        "auctex-auto"
                                         (and "js" (? ".meta"))
                                         (and "project" (? "ile"))
                                         )

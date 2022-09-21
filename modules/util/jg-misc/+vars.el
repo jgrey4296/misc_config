@@ -53,7 +53,7 @@
 ;;-- end undo-limits
 
 ;;-- diary
-(setq-default diary-file (expand-file-name "diary" doom-local-dir))
+(setq-default diary-file (expand-file-name "diary" doom-user-dir))
 ;;-- end diary
 
 ;;-- ligatures

@@ -47,14 +47,14 @@
   (let* ((fname (buffer-file-name (current-buffer)))
          (is-html (f-ext? fname "html"))
          (default-directory (f-parent fname))
-         (comint-buff (make-comint-in-buffer "xmllint"
+         (comint-buff (apply #'make-comint-in-buffer "xmllint"
                                              jg-xml-xmllint-shell-buffer-name
                                              "xmllint"
                                              nil
-                                             (when is-html "--html")
-                                             "--shell"
-                                             fname
-                                             ))
+                                             (-filter #'identity
+                                                      (list (when is-html "--html")
+                                                            "--shell"
+                                                            fname))))
           )
     (message "Fname: %s" (shell-quote-argument fname))
     (set-process-sentinel (get-buffer-process jg-xml-xmllint-shell-buffer-name)

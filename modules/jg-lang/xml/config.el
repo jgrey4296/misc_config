@@ -24,6 +24,7 @@
 (load! "+vars")
 (load! "+xmllint")
 (load! "+xidel")
+(load! "+funcs")
 (after! evil
   (load! "+bindings")
   )

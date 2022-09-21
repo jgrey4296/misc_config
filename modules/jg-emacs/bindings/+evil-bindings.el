@@ -224,7 +224,6 @@
       :desc "Prev 1st Non Blank"    "-"       #'evil-previous-line-first-non-blank
       :desc "Next 1st Non Blank"    "+"       #'evil-next-line-first-non-blank
       :desc "Next 1st Non Blank"    "_"       #'evil-next-line-1-first-non-blank
-      :desc "goto-line"             "G"       #'evil-goto-line
       ;; Window
       :desc "window-bottom"         "L"       #'evil-window-bottom
       :desc "window-middle"         "M"       #'evil-window-middle
@@ -404,8 +403,8 @@
       :desc "Comment"            "c" #'evilnc-comment-operator
       :desc "IEdit"              "e" #'iedit-mode
       :desc "Goto First Line"    "f" #'evil-goto-first-line
+      :desc "Goto Last Line"     "F" #'evil-goto-line
       :desc "Middle of Line"     "m" #'evil-middle-of-visual-line
-      :desc "Goto Last Line"     "F" (cmd! (goto-char (point-max)))
       :desc "Join whitespace"    "J" #'evil-join-whitespace
 
       ;; TODO use a motion for direction

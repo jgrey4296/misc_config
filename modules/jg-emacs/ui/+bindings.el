@@ -3,7 +3,6 @@
 (map! :after jg-leader-bindings-loaded
       :leader
       :desc "Insert Color"                 "i c"   #'helm-colors
-      :desc "Ignore Invisible"             "t n i" #'+jg-ui-toggle-line-move-ignore-invisible
       :desc "Open project scratch buffer"  "p x"   #'+jg-ui-open-scratch-buffer
       :desc "Toggle Dedicated"             "w DEL" #'+jg-ui-toggle-window-dedication
       (:prefix "b"
@@ -14,11 +13,6 @@
       (:prefix "w"
        :desc "Toggle Layout"               "|"     #'+jg-ui-window-layout-toggle
        :desc "Rotate Windows"              "\\"    #'+jg-ui-window-rotate-forward
-       )
-      (:prefix "t v"
-       :desc "Ruler Mode"                  "R"     #'ruler-mode
-       :desc "Line numbers"                "n"     #'+jg-ui-toggle-line-numbers
-       :desc "Line numbers Visual"         "N"     #'+jg-ui-toggle-line-numbers-visual
        )
       )
 

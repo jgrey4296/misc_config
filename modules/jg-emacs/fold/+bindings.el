@@ -2,7 +2,6 @@
 
 (map! :leader
       :after jg-leader-bindings-loaded
-      :desc "Auto-Hide"                 :n "t h"   #'+jg-fold-toggle-auto-hide
       :desc "Jump to Auto-hide-heading" :n "j h" #'+jg-fold-jump-to-heading
       )
 

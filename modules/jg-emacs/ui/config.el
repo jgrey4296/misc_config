@@ -3,6 +3,9 @@
 (load! "+vars")
 (load! "+funcs")
 (load! "+faces")
+(after! hydra
+  (load! "+hydra")
+  )
 (after! core-ui
   (load! "+advice")
   )
@@ -24,11 +27,21 @@
   (setq hi-lock-auto-select-face t)
   )
 (use-package! auto-highlight-symbol
-  :defer t
+  :commands auto-highlight-symbol-mode
+  :init
+  (defvar auto-highlight-symbol-mode nil)
   )
+
+(use-package! whitespace
+  :commands whitespace-mode
+  :init
+  (defvar whitespace-mode nil)
+  )
+
 (use-package! centered-cursor-mode
-  :defer t
   :commands centered-cursor-mode
+  :init
+  (defvar centered-cursor-mode nil)
   )
 (use-package! evil-visual-mark-mode
   :defer t

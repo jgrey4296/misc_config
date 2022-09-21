@@ -470,10 +470,14 @@
 ;;-- <leader> t --- toggle
 (map! :leader
       :prefix ("t" . "toggle")
-      :desc "Global Company" "C" #'global-company-mode
-      :desc "Input Language" "i" #'toggle-input-method
-      :desc "SmartParens"    "s" #'smartparens-global-mode
-      :desc "Read-only mode" "r" #'read-only-mode
+      (:prefix ("i" . "Input")
+       :desc "Global Company" "C" #'global-company-mode
+       :desc "Input Language" "i" #'toggle-input-method
+       :desc "SmartParens"    "s" #'smartparens-global-mode
+       :desc "Read-only mode" "r" #'read-only-mode
+       :desc "Indent style"   "I" #'doom/toggle-indent-style
+       )
+      ;; v - visual toggles set as hydra in jg-ui
       (:prefix ("d" . "Debug")
        :desc "Debug on Error"            "e" #'toggle-debug-on-error
        :desc "Debug on Var"              "v" #'debug-on-variable-change
@@ -484,38 +488,11 @@
        :desc "Flycheck"                  "c" #'global-flycheck-mode
        :desc "Spell checker"            "s" #'flyspell-mode
        )
-      (:prefix ("v" . "Visual")
-       ;; R
-       ;; n N
-       ;;
-       :desc "Frame fullscreen"      "F" #'toggle-frame-fullscreen
-       :desc "Evil goggles"          "g" #'evil-goggles-mode
-       :desc "Hl-line"               "h" #'global-hl-line-mode
-       :desc "Fill Column Indicator" "f" #'display-fill-column-indicator-mode
-       :desc "Indent guides"         "i" #'highlight-indent-guides-mode
-       :desc "Highlight Parens"      "(" #'global-highlight-parentheses-mode
-       :desc "Prettify Mode"         "p" #'global-prettify-symbols-mode
-       :desc "Word-wrap mode"        "W" #'+word-wrap-mode
-       :desc "Whitespace"            "w" #'whitespace-mode
-       :desc "Soft line wrapping"    "l" #'visual-line-mode
-       :desc "Line Truncate"         "t" #'toggle-truncate-lines
-       )
-      (:prefix  ("n" . "Navigation")
-       ;; i
-       :desc "Neotree"             "t" #'neotree-toggle
-       :desc "Minimap mode"        "m" #'minimap-mode
-       :desc "org-tree-slide mode" "p" #'org-tree-slide-mode
-       :desc "Centered Cursor"     "c" #'centered-cursor-mode
-       :desc "Indent style"        "I" #'doom/toggle-indent-style
-       :desc "Evil-visual-mark"    "v" #'evil-visual-mark-mode
-       :desc "Auto-Highlight"      "h" #'auto-highlight-symbol-mode
-       )
+
       (:when (modulep! :lang org +pomodoro)
        :desc "Pomodoro timer"             "t"   #'org-pomodoro)
       ;; highlight long lines
-      ;; auto-completion
       ;; camel-case-motion
-      ;; fill-column indicator
       )
 ;;-- end <leader> t --- toggle
 

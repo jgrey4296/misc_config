@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: landscape
+# uuid: landscape
+# key:  landscape
+# group :
+# --
+\usepackage{lscape}
+
+\begin{landscape}
+
+\end{landscape}

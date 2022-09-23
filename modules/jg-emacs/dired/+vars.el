@@ -64,6 +64,30 @@
                                         "auctex-auto"
                                         (and "js" (? ".meta"))
                                         (and "project" (? "ile"))
+                                        "PKInstallSandboxManager"
+                                        "TemporaryItems"
+                                        "Trashes"
+                                        "fseventsd"
+                                        "DocumentRevisions-V100"
+                                        "Spotlight-V100"
+                                        "apdisk"
+                                        "Trash"
+                                        "cache"
+                                        "cups"
+                                        "gem"
+                                        "ipython"
+                                        "jupyter"
+                                        "matplotlib"
+                                        "mono"
+                                        "npm"
+                                        "ncftp"
+                                        "offlineimap"
+                                        "rustup"
+                                        "swt"
+                                        "thumbnails"
+                                        "npm-global"
+                                        "swipl-dir-history"
+                                        "CFUserTextEncoding"
                                         )
                                        )
                                     )

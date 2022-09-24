@@ -308,10 +308,6 @@
 (setq window-ring-edit-map (make-sparse-keymap))
 (evil-define-key '(normal insert) window-ring-edit-map (kbd "C-c C-c") #'window-ring-edit-commit)
 
-(map! :map window-ring-edit-map
-      "C-c C-c" #'window-ring-edit-commit)
-
-
 (define-minor-mode window-ring-edit-minor-mode
   " A Minor mode to commit changes to the order of window ring buffers "
   :lighter "Window-Ring-Edit"

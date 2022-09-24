@@ -21,6 +21,9 @@
       :desc "Narrow"        "RET" #'+jg-ui-narrow-around-point
       )
 
+(map! :map window-ring-edit-map
+      "C-c C-c" #'window-ring-edit-commit)
+
 
 ;;-- window ring
 (map! :after jg-leader-bindings-loaded

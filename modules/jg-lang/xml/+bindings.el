@@ -36,4 +36,16 @@
       :localleader
       :desc "Run XPath Query" :n "?" #'+jg-xml-run-xidel
       :desc "Load into shell" :n "l" #'+jg-xml-load-into-repl
+      :desc "Html Reference"  :n "1" (cmd! (+jg-misc-browse-url "https://developer.mozilla.org/en-US/docs/Web/HTML"))
       )
+
+(map! :map css-mode-map
+      :localleader
+      :desc "CSS Reference"   :n "1" (cmd! (+jg-misc-browse-url "https://developer.mozilla.org/en-US/docs/Web/CSS"))
+      )
+
+(map! :map less-css-mode-map
+      :localleader
+       :desc "LESS Reference"  :n "1" (cmd! (+jg-misc-browse-url "https://lesscss.org/features/"))
+       :desc "Compile Less"    :n "c" #'less-css-compile
+       )

@@ -5,6 +5,7 @@
   ;; Ascii output of encryptions:
   (setq epa-armor t)
   )
+;;-- end epa/gpg
 
 ;;-- dired-misc
 (setq dired-create-destination-dirs 'ask
@@ -27,7 +28,6 @@
   (setq dired-quick-sort-group-directories-last ?y)
   )
 ;;-- end dired-misc
-
 
 ;;-- omit-patterns
 (setq dired-omit-files (rx line-start
@@ -88,6 +88,8 @@
                                         "npm-global"
                                         "swipl-dir-history"
                                         "CFUserTextEncoding"
+                                        "dropbox.cache"
+                                        "dropbox"
                                         )
                                        )
                                     )
@@ -96,8 +98,6 @@
                            )
       )
 ;;-- end omit-patterns
-
-
 
 ;;-- image-dired
 (setq image-dired-dir (concat doom-cache-dir "image-dired/")
@@ -108,7 +108,6 @@
       ;; Screens are larger nowadays, we can afford slightly larger thumbnails
       image-dired-thumb-size 150)
 ;;-- end image-dired
-
 
 ;;-- dgi
 (setq dgi-commit-message-format "%h %cs %s"

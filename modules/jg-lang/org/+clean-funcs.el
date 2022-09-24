@@ -11,15 +11,15 @@
   (+jg-org-clean-whole-duplicate-threads)
   (+jg-org-sort-headings)
 
-  ;; Fill Paragraphs from bottom up
-  (+jg-org-fill-paragraph-reverse)
-  ;; Clean links
-  (+jg-org-pic-twitter-clean)
-  (+jg-org-wrap-non-link-urls)
-  ;; Map over entries, removing extra space between entries
-  (setq jg-org-clean-marker (make-marker))
-  (org-map-entries '+jg-org-map-entries-clean-whitespace t nil)
-  (set-marker jg-org-clean-marker nil)
+  ;; ;; Fill Paragraphs from bottom up
+  ;; (+jg-org-fill-paragraph-reverse)
+  ;; ;; Clean links
+  ;; ;; (+jg-org-pic-twitter-clean)
+  ;; (+jg-org-wrap-non-link-urls)
+  ;; ;; Map over entries, removing extra space between entries
+  ;; (setq jg-org-clean-marker (make-marker))
+  ;; (org-map-entries '+jg-org-map-entries-clean-whitespace t nil)
+  ;; (set-marker jg-org-clean-marker nil)
   ;; Tidy all links:
   (+jg-org-property-drawer-clean-links)
   (+jg-org-clean-property-blocks)
@@ -140,7 +140,7 @@ and the property block directly below "
   ;; Find all pic.twitter's and ensure on new line
   (goto-char (point-min))
   (message "Finding pic.twitter's")
-  (while (search-forward "pic.twitter" nil t)
+  (while (search-forward "pic.twitter" nil 1)
     (let ((sub (buffer-substring (line-beginning-position) (point))))
       (if (not (eq 0 (string-match "^[[:space:]]+pic.twitter" sub)))
           (progn (backward-char (+ 1 (length "pic.twitter")))

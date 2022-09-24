@@ -82,7 +82,6 @@
       :desc "Docs: Babel Snippets" "2" (cmd! (+jg-misc-browse-url "https://orgmode.org/worg/org-contrib/babel/intro.html"))
 
       (:prefix ("f". "Format")
-       :desc "Fix Drawers"        "d"  #'+jg-org-fix-properties-drawers
        :desc "Clean Org"          "c"  #'+jg-org-clean-master
        :desc "Wrap Numbers"        "w" #'+jg-org-wrap-numbers
        :desc "Wrap non-link urls"  "L" #'+jg-org-wrap-non-link-urls

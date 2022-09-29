@@ -18,30 +18,29 @@
 (use-package! bibtex
   :init
   (add-hook! 'bibtex-mode-hook
-             #'+jg-bibtex-tag-setup-hook
              #'yas-minor-mode
-             #'org-ref-version
              #'+jg-bibtex-font-lock-mod-hook
-             #'+jg-ui-toggle-line-numbers)
+             #'autohide-minor-mode
+             )
   )
 (use-package! helm-bibtex
   :commands (bibtex-completion-init)
 )
+
+(use-package-hook! bibtex-completion :post-config
+  (provide 'jg-bibtex-vars-go)
+  )
+
 (use-package! org-ref
   :after-call org-ref-version
   :init
   (custom-set-variables '(org-ref-insert-cite-key "C-c i"))
   (add-hook 'bibtex-mode-hook #'reftex-mode)
   :config
-  (setq org-ref-clean-bibtex-entry-hook nil)
   (setq org-ref-clean-bibtex-entry-hook jg-bibtex-clean-hooks)
 
-  ;; (loop for hook in jg-bibtex-clean-hooks
-  ;;       do (add-hook 'org-ref-clean-bibtex-entry-hook hook 100))
   )
 
-(use-package-hook! bibtex-completion :post-config
-  (provide 'jg-bibtex-vars-go)
-  )
-
-(add-hook 'doom-first-file-hook #'+jg-bibtex-build-list)
+(add-hook 'doom-first-file-hook #'bibtex-completion-init)
+(add-hook 'doom-first-file-hook #'+jg-bibtex-build-list 90)
+(add-hook 'doom-first-file-hook #'org-ref-version)

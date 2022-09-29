@@ -1,7 +1,6 @@
 ;;; domain-specific/bibtex/+tags.el -*- lexical-binding: t; -*-
 
-(defun +jg-bibtex-tag-setup-hook ()
-  (require 'jg-tags-funcs)
+(after! jg-tags-funcs
   (+jg-tag-add-mode-handler 'bibtex-mode
                             #'+jg-bibtex-set-tags
                             #'+jg-bibtex-set-new-tag

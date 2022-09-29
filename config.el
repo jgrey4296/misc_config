@@ -54,7 +54,6 @@
       )
 
 (add-hook! doom-first-buffer
-   #'global-centered-cursor-mode
    #'global-highlight-parentheses-mode
    )
 
@@ -81,7 +80,7 @@
 ;;-- end misc variables
 
 ;;-- defaults
-(setq-default line-move-ignore-invisible nil
+(setq-default line-move-ignore-invisible t
               avy-all-windows t
               display-line-numbers-type t
               tab-always-indent t

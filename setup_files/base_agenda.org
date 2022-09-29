@@ -27,6 +27,7 @@ Versu, Abl, Cif
 *** [[file:/Volumes/documents/github/writing/orgfiles/primary/research_questions.org][Research Questions]]
 
 ** Other
+http://ceur-ws.org/
 Killing the Black Body or Fatal Invention by @DorothyERoberts
 Medical Apartheid by @haw95
 Racecraft by Barbara and Karen Fields

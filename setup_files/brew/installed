@@ -149,6 +149,7 @@ libyaml
 little-cms2
 llvm
 llvm@12
+llvm@14
 lua
 lua@5.1
 luarocks

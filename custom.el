@@ -145,7 +145,7 @@
  '(org-ref-insert-cite-key "C-c i")
  '(safe-local-variable-values '((eval +jg-python-activate-venv-and-conda)))
  '(warning-suppress-log-types
-   '((flycheck syntax-checker))
+   '((flycheck syntax-checker)))
  '(warning-suppress-types
    '((org-element-cache)
      (flycheck syntax-checker)))

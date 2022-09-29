@@ -5,6 +5,7 @@
 
 (defvar-local autohide-minor-mode-fold-pattern "%s-- %s")
 (defvar-local autohide-minor-mode-block-depth 2)
+(defvar autohide-minor-mode-exclusions '(helm-major-mode ivy-mode minibuffer-mode ))
 
 (cl-defun autohide-minor-mode-fold-block-gen (&rest rst &key name (end nil) (re nil) (newlines nil) (comment comment-start))
   " Single point to build fold block markers
@@ -93,9 +94,9 @@ Vimish-fold's any blocks matching autohide-minor-mode-fold-pattern
   " Minor mode to automatically hide blocks of text upon loading a buffer "
   :init-value nil
   :lighter "autohide"
-  (if (and autohide-minor-mode (not (minibufferp)))
-      (add-hook 'after-change-major-mode-hook #'autohide-minor-mode-run-folds 100)
-    (remove-hook 'after-change-major-mode-hook #'autohide-minor-mode-run-folds)
+  (if (and autohide-minor-mode (not (minibufferp)) (not (-contains? autohide-minor-mode-exclusions major-mode)))
+      (add-hook 'after-change-major-mode-hook #'autohide-minor-mode-run-folds 100 t)
+    (remove-hook 'after-change-major-mode-hook #'autohide-minor-mode-run-folds t)
     )
   )
 

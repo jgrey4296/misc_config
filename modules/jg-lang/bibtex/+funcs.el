@@ -230,6 +230,48 @@ bibtex-BibTeX-entry-alist for completion options "
                                                              "will"
                                                            "will not"))
   )
+(defun +jg-bibtex-rename-file ()
+  " Rename the file associated with the record "
+  (interactive)
+  (bibtex-beginning-of-entry)
+  (let* ((fields      (bibtex-parse-entry))
+         (file-fields (-filter (lambda (x) (string-match "file" (car x))) fields))
+         (field-selection (if (eq 1 (length file-fields))
+                              (caar file-fields)
+                            (read-string "File Select: " "file")))
+         (filename (bibtex-autokey-get-field field-selection))
+         (ext (f-ext filename))
+         (base (f-parent filename))
+         (new-name (read-string "New Filename: " (f-base filename)))
+         (new-path (f-join base (format "%s.%s" new-name ext))))
+    (message "Moving: %s\nto: %s" filename new-path)
+    (f-move filename new-path)
+    (bibtex-set-field field-selection new-path)
+    )
+  )
+(defun +jg-bibtex-dired-unify-pdf-locations ()
+  "Unify bibtex pdf paths of marked files"
+  (interactive)
+  (seq-each '+jg-bibtex-unify-pdf-locations-in-file (dired-get-marked-files))
+  )
+(defun +jg-bibtex-unify-pdf-locations-in-file (name)
+  "Change all pdf locations in bibtex file to relative,
+ensuring they work across machines "
+  (message "Unifying Locations in %s" name)
+  (with-temp-buffer
+    (insert-file-contents name t)
+    (goto-char (point-min))
+    (while (re-search-forward jg-bibtex-pdf-loc-regexp nil t)
+      (replace-match jg-bibtex-pdf-replace-match-string nil nil nil 1)
+      (when (eq 6 (length (match-data)))
+        (replace-match jg-bibtex-pdf-replace-library-string t nil nil 2))
+      )
+    (write-file name)
+    )
+  )
+;;-- end entry editing
+
+;;-- refiling
 (defun +jg-bibtex-refile-pdf (&optional destructive)
   " Refile a pdf from its location to its pdflib/year/author loc
 returns the new location
@@ -273,46 +315,6 @@ returns the new location
       )
     )
   )
-(defun +jg-bibtex-unify-pdf-locations-in-file (name)
-  "Change all pdf locations in bibtex file to relative,
-ensuring they work across machines "
-  (message "Unifying Locations in %s" name)
-  (with-temp-buffer
-    (insert-file-contents name t)
-    (goto-char (point-min))
-    (while (re-search-forward jg-bibtex-pdf-loc-regexp nil t)
-      (replace-match jg-bibtex-pdf-replace-match-string nil nil nil 1)
-      (when (eq 6 (length (match-data)))
-        (replace-match jg-bibtex-pdf-replace-library-string t nil nil 2))
-      )
-    (write-file name)
-    )
-  )
-(defun +jg-bibtex-rename-file ()
-  " Rename the file associated with the record "
-  (interactive)
-  (bibtex-beginning-of-entry)
-  (let* ((fields      (bibtex-parse-entry))
-         (file-fields (-filter (lambda (x) (string-match "file" (car x))) fields))
-         (field-selection (if (eq 1 (length file-fields))
-                              (caar file-fields)
-                            (read-string "File Select: " "file")))
-         (filename (bibtex-autokey-get-field field-selection))
-         (ext (f-ext filename))
-         (base (f-parent filename))
-         (new-name (read-string "New Filename: " (f-base filename)))
-         (new-path (f-join base (format "%s.%s" new-name ext))))
-    (message "Moving: %s\nto: %s" filename new-path)
-    (f-move filename new-path)
-    (bibtex-set-field field-selection new-path)
-    )
-  )
-(defun +jg-bibtex-dired-unify-pdf-locations ()
-  "Unify bibtex pdf paths of marked files"
-  (interactive)
-  (seq-each '+jg-bibtex-unify-pdf-locations-in-file (dired-get-marked-files))
-  )
-
 (defun +jg-bibtex-refile-by-year ()
   " Kill the current entry and insert it in the appropriate year's bibtex file "
   (interactive)
@@ -340,7 +342,7 @@ ensuring they work across machines "
       )
     )
   )
-;;-- end entry editing
+;;-- end refiling
 
 ;;-- ui
 (defun +jg-bibtex-toggle-doi-load ()

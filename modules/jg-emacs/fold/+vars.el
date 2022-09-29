@@ -1,12 +1,5 @@
 ;;; editor/fold/+vars.el -*- lexical-binding: t; -*-
 
-;;-- auto-hide
-(setq-default jg-fold-auto-hide-toggle t
-              jg-fold-block-pattern "%s-- %s"
-              jg-fold-block-depth 2
-              )
-;;-- end auto-hide
-
 ;;-- vimish-fold
 (setq jg-vimish-fold-spec '((vimish-fold-mode)
                                  :delete     vimish-fold-delete

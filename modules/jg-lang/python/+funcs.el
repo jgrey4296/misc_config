@@ -44,7 +44,7 @@ of a python file "
   (save-excursion
     (goto-char (point-min))
     (let ((arg (if (not arg) (read-string "Import Statement: " "import ") arg)))
-      (re-search-forward (+jg-fold-block-gen :name "imports" :re t))
+      (re-search-forward (autohide-minor-mode-fold-block-gen :name "imports" :re t))
       (re-search-forward "^$")
       (insert "\n")
       (insert arg)
@@ -106,7 +106,7 @@ TODO
     ;; Go from bottom of buffer to top
     (with-current-buffer source
       (goto-char (point-max))
-      (while (re-search-backward (+jg-fold-block-gen :re t) nil t)
+      (while (re-search-backward (autohide-minor-mode-fold-block-gen :re t) nil t)
         (setq groupname (match-string 1))
         (cond ((and (s-matches? "^imports" groupname)
                     end
@@ -151,9 +151,9 @@ TODO
       (re-search-forward "^\"\"\"" nil t)
       (end-of-line)
       (insert "\n")
-      (insert (+jg-fold-block-gen :name "imports" :newlines t))
+      (insert (autohide-minor-mode-fold-block-gen :name "imports" :newlines t))
       (insert cleaned)
-      (insert (+jg-fold-block-gen :name "imports" :newlines t :end t))
+      (insert (autohide-minor-mode-fold-block-gen :name "imports" :newlines t :end t))
       )
     )
   )

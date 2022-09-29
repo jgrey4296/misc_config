@@ -10,13 +10,13 @@
 -------------------------^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^------------------------------^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^---------------------------^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^-------------------------^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 _p_   Highlight Parens   %(+jghdoc global-highlight-parentheses-mode)   _i_  Indent guides          %(+jghdoc highlight-indent-guides-mode) ^^^^^^  _W_   Word-wrap mode     %(+jghdoc +word-wrap-mode) ^^^ _o_  Org-links          %(+jghdoc org-link-descriptive)
 _g_   Evil goggles       %(+jghdoc evil-goggles-mode) ^^^^^^^^^^^^^^^^  _C_  Fill Column Indicator  %(+jghdoc display-fill-column-indicator) ^^^^^  _f_   Auto-fill          %(+jghdoc auto-fill-function)  _v_  Evil Visual Marks  %(+jghdoc evil-visual-mark-mode)
-_h_   Hl-line            %(+jghdoc hl-line-mode) ^^^^^^^^^^^^^^^^^^^^^  _w_  Whitespace             %(+jghdoc whitespace-mode) ^^^^^^^^^^^^^^^^^^^  _t_   Line Truncate      %(+jghdoc truncate-lines) ^^^^ _a_  Auto-hide          %(+jghdoc jg-fold-auto-hide-toggle)
+_h_   Hl-line            %(+jghdoc hl-line-mode) ^^^^^^^^^^^^^^^^^^^^^  _w_  Whitespace             %(+jghdoc whitespace-mode) ^^^^^^^^^^^^^^^^^^^  _t_   Line Truncate      %(+jghdoc truncate-lines) ^^^^ _a_  Auto-hide          %(+jghdoc global-autohide-minor-mode)
 _H_   Highlight Symbols  %(+jghdoc auto-highlight-symbol-mode) ^^^^^^^  _s_  Prettify Symbols Mode  %(+jghdoc prettify-symbols-mode) ^^^^^^^^^^^^^  _l_   Soft line wrapping %(+jghdoc visual-line-mode) ^^ _c_  Center Cursor      %(+jghdoc global-centered-cursor-mode)
 _I_   Ignore Invisible   %(+jghdoc line-move-ignore-invisible) ^^^^^^^  _R_  Ruler                  %(+jghdoc ruler-mode) ^^^^^^^^^^^^^^^^^^^^^^^   ^                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ _T_  Neotree
 _F_   Frame fullscreen     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^  _n_  Line Numbers           %(+jghdoc display-line-numbers) ^^^^^^^^^^^^^   ^                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ _M_  Minimap
 "
 
-  ("a" #'+jg-fold-toggle-auto-hide nil)
+  ("a" #'global-autohide-minor-mode nil)
   ("c" #'global-centered-cursor-mode nil)
   ("C" #'display-fill-column-indicator-mode nil)
   ("f" #'auto-fill-mode nil)

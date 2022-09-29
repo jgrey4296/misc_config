@@ -3,13 +3,9 @@
 ;;
 ;; Packages
 (load! "+vars")
-(load! "+funcs")
-(load! "+hooks")
 
 (after! evil
   (load! "+bindings")
-  (load! "+operators")
-  (add-hook! 'prog-mode-hook :depth 80 #'+jg-fold-auto-hide)
   )
 
 (use-package! hideshow ; built-in
@@ -80,3 +76,5 @@
   :init
   (global-origami-mode)
   )
+
+(use-package! autohide-minor-mode)

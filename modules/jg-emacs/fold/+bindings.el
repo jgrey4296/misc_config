@@ -12,14 +12,14 @@
 
 (map! :map jg-binding-vision-map
       :after jg-evil-bindings
-      :desc "Insert Fold block" "1" #'+jg-fold-wrap-block
+      :desc "Insert Fold block" "1" #'autohide-minor-mode-wrap-block
 
       :desc "open-fold-rec" "A"   #'evil-open-fold-rec
       :desc "toggle-fold"   "a"   #'evil-toggle-fold
       :desc "open-folds"    "o"   #'evil-open-folds
       :desc "Close Folds"   "m"   #'evil-close-folds
 
-      :desc "Refold"        "r"   (cmd! (+jg-fold-auto-hide))
+      :desc "Refold"        "r"   #'autohide-minor-mode-run-folds
       :desc "Next Fold"     "j"   #'+fold/next
       :desc "Prev Fold"     "k"   #'+fold/previous
 )

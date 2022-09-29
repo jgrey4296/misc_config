@@ -150,11 +150,11 @@ If region isn't active, narrow away anything above point
 ;;-- ui toggles
 (defun +jg-ui-toggle-line-numbers ()
   (interactive)
-  (setq display-line-numbers (if (not (eq display-line-numbers t)) t nil))
+  (setq-default display-line-numbers (if (not (eq display-line-numbers t)) t nil))
   )
 (defun +jg-ui-toggle-line-numbers-visual ()
   (interactive)
-  (setq display-line-numbers (if (not (eq display-line-numbers 'visual)) 'visual nil))
+  (setq-default display-line-numbers (if (not (eq display-line-numbers 'visual)) 'visual nil))
   )
 (defun +jg-ui-toggle-window-dedication ()
   (interactive)
@@ -168,7 +168,11 @@ If region isn't active, narrow away anything above point
   )
 (defun +jg-ui-toggle-line-move-ignore-invisible ()
   (interactive)
-  (setq line-move-ignore-invisible (not line-move-ignore-invisible))
+  (let ((newval (not line-move-ignore-invisible)))
+    (setq-default line-move-ignore-invisible newval)
+    (setq-local   line-move-ignore-invisible newval)
+    (setq         line-move-ignore-invisible newval)
+    )
   (message "Ignore invisible lines: %s" line-move-ignore-invisible)
   )
 ;;-- end ui toggles
@@ -191,7 +195,7 @@ If region isn't active, narrow away anything above point
   )
 
 (defun +jg-ui-popup-activate-rules (&optional force)
-  (interactive)
+  (interactive "P")
   (when (or force (not jg-popup-display-flattened))
     (message "Reconstructing popup rules: %s" (hash-table-keys jg-popup-display-rules))
     (setq jg-popup-display-flattened

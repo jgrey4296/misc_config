@@ -50,9 +50,13 @@
 ;;-- end which key
 
 ;;-- global modes
-(setq smartparens-global-mode nil
-      flycheck-global-modes nil
+(setq flycheck-global-modes nil
       )
+
+(add-hook! doom-first-buffer
+   #'global-centered-cursor-mode
+   #'global-highlight-parentheses-mode
+   )
 
 (remove-hook! doom-first-buffer
   #'smartparens-global-mode
@@ -68,18 +72,23 @@
 
 ;;-- misc variables
 (setq +lsp-defer-shutdown 10
-      avy-all-windows t
-      display-line-numbers-type t
       display-line-numbers-width 4
       highlight-indent-guides-suppress-auto-error t
       ibuffer-old-time 2
-      line-move-ignore-invisible t
       outline-blank-line nil
       overflow-newline-into-fringe t
-      tab-always-indent t
-      whitespace-style '(face tabs spaces trailing lines space-before-tab newline indentation empty space-after-tab space-mark tab-mark newline-mark)
- )
+      )
 ;;-- end misc variables
+
+;;-- defaults
+(setq-default line-move-ignore-invisible nil
+              avy-all-windows t
+              display-line-numbers-type t
+              tab-always-indent t
+              indent-tabs-mode nil
+              whitespace-style '(face tabs spaces trailing lines space-before-tab newline indentation empty space-after-tab space-mark tab-mark newline-mark)
+              )
+;;-- end defaults
 
 ;;-- Byte Compilation
 ;; from https://github.com/kiwanami/emacs-epc/issues/35

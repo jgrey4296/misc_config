@@ -83,3 +83,28 @@ Used to guard inputs in tag strings"
   (interactive)
   (yas-expand-snippet (yas-lookup-snippet jg-text-debug-snippet-name) (point))
   )
+
+
+(defun +jg-text-combine-columns (textlst)
+  " particularly for hydra docs "
+  (let* ((cols-as-lines (mapcar (lambda (x)
+                                 (split-string x "\n"))
+                               textlst))
+         (longest-in-col (mapcar (-partial 'apply 'max)
+                                 (mapcar (-partial 'mapcar 'length)
+                                         cols-as-lines)))
+         (padded (cl-loop for col in (-zip-lists longest-in-col cols-as-lines)
+                          collect
+                          (mapcar (-partial 's-pad-right (car col) " ") (cadr col))
+                          ))
+         (line-counts (mapcar #'length cols-as-lines))
+        )
+    (message "Got %s columns of %s lines of lengths %s"
+             (length cols-as-lines) line-counts longest-in-col)
+    (concat "\n" (string-join (cl-loop for cols in (apply '-zip-fill " " (make-list (length cols-as-lines) " ") padded)
+                          collect
+                          (string-join cols " | ")
+                          )
+                 "\n"))
+    )
+  )

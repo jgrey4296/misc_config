@@ -53,8 +53,10 @@
          "C-s"     #'company-filter-candidates
          "C-S-s"   #'counsel-company
          "C-SPC"   #'company-complete-common
-         "TAB"     #'company-complete-common-or-cycle
-         [tab]     #'company-complete-common-or-cycle
+         "TAB"     (cmd! (company-cancel) (indent-for-tab-command))
+         [tab]     (cmd! (company-cancel) (indent-for-tab-command))
+         ;; "TAB"     #'company-complete-common-or-cycle
+         ;; [tab]     #'company-complete-common-or-cycle
          [backtab] #'company-select-previous
          [f1]      nil
          )

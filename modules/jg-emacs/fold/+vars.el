@@ -7,7 +7,7 @@
               )
 ;;-- end auto-hide
 
-;;-- evil-vimish
+;;-- vimish-fold
 (setq jg-vimish-fold-spec '((vimish-fold-mode)
                                  :delete     vimish-fold-delete
                                  :open-all   vimish-fold-unfold-all
@@ -16,7 +16,11 @@
                                  :open       vimish-fold-unfold
                                  :open-rec   nil
                                  :close      vimish-fold-refold))
-;;-- end evil-vimish
+
+(setq-default vimish-fold-header-width 50
+
+              )
+;;-- end vimish-fold
 
 ;;-- hide show
 (setq jg-hs-fold-spec `((hs-minor-mode emacs-lisp-mode lisp-mode)

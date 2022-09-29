@@ -53,13 +53,11 @@ Modified to pre-sort bookmarks, caselessly
 ;;-- snippets
 (defun +jg-completion-complete-or-snippet (&optional arg)
   (interactive "p")
-  (if (not (yas-expand-from-trigger-key))
-    (progn
-      (message "Company")
-      (company-complete-common-or-cycle)
+  (cond ((yas-expand-from-trigger-key) nil)
+        ((company-complete-common-or-cycle) nil)
+        (t (indent-for-tab-command))
       )
     )
-  )
 
 (defun +jg-completion-new-snippet()
   "Create a new snippet in `+snippets-dir'."

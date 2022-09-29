@@ -65,9 +65,9 @@
  '(ibuffer-saved-filters
    '(("anti-[Helm|Magit|Help]"
       (not or
-           (derived-mode . helm-major-mode)
-           (derived-mode . helpful-mode)
-           (derived-mode . magit-mode)))
+       (derived-mode . helm-major-mode)
+       (derived-mode . helpful-mode)
+       (derived-mode . magit-mode)))
      ("Indirect-Window-Ring"
       (name . "->"))
      ("default"
@@ -143,13 +143,13 @@
        (mode . gnus-article-mode)))))
  '(org-agenda-files '("/Users/johngrey/.doom.d/setup_files/base_agenda.org"))
  '(org-ref-insert-cite-key "C-c i")
- '(safe-local-variable-values
-   '((eval +jg-python-activate-venv-and-conda)))
+ '(safe-local-variable-values '((eval +jg-python-activate-venv-and-conda)))
  '(warning-suppress-log-types
-   '(((flycheck syntax-checker))
-     ((flycheck syntax-checker))
-     ((flycheck syntax-checker))))
- '(warning-suppress-types '(((flycheck syntax-checker)) ((flycheck syntax-checker)))))
+   '((flycheck syntax-checker))
+ '(warning-suppress-types
+   '((org-element-cache)
+     (flycheck syntax-checker)))
+ )
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -36,7 +36,6 @@
       :desc "Rotate"         "c r"   #'rotate-text
       )
 
-
 (map! :map jg-binding-vision-map
       :after jg-leader-bindings-loaded
       "i" #'+jg-text-make-invisible

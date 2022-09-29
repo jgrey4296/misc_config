@@ -22,6 +22,7 @@
       :desc "Record Macro"       "q"        #'evil-record-macro
       :desc "Macro"              "@"        #'evil-execute-macro
       :desc "Force Normal State" "<escape>" #'evil-force-normal-state
+      :desc "Eval expression"       "\""   #'pp-eval-expression
       )
 
 (map! :map jg-binding-normal-state-map ;; Insert+
@@ -106,12 +107,10 @@
        :desc "Paste Before"       "h"   #'evil-paste-before
        :desc "Reselect"           "v"   #'+evil/reselect-paste
        :desc "From Register"      "r"   #'evil-paste-from-register
-
        )
-
       )
 (map! :map jg-binding-normal-state-map ;; Commands
-      :desc "Use Register"       "\""  #'evil-use-register
+      :desc "Use Register"       "'"  #'evil-use-register
       :desc "Join"               "J"   #'evil-join
       :desc "Lookup"             "K"   #'+lookup/documentation
       :desc "Indent"             "TAB" #'indent-for-tab-command
@@ -220,7 +219,6 @@
       :desc "B-Sentence"            "("       #'evil-backward-sentence-begin
       ;; Line
       :desc "1st Non Blank"         "^"       #'evil-first-non-blank
-      :desc "Goto Mark Line"        "'"       #'evil-goto-mark-line
       :desc "Prev 1st Non Blank"    "-"       #'evil-previous-line-first-non-blank
       :desc "Next 1st Non Blank"    "+"       #'evil-next-line-first-non-blank
       :desc "Next 1st Non Blank"    "_"       #'evil-next-line-1-first-non-blank
@@ -459,6 +457,7 @@
       :desc "Whitespace Cleanup"         "c" #'whitespace-cleanup
       :desc "Delete trailing newlines"   "n" #'doom/delete-trailing-newlines
       :desc "Delete trailing whitespace" "N" #'delete-trailing-whitespace
+      :desc "Untabify"                   "u" #'untabify
 
       )
 ;;-- end operators

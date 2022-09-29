@@ -1,7 +1,9 @@
 ;;; +advice.el -*- lexical-binding: t; -*-
 
-(define-advice evil-beginning-of-visual-line (:after ()
+(when (modulep! :util text-manipulation +fold-jump)
+  (define-advice evil-beginning-of-visual-line (:after ()
                                               +jg-text-invisi-line-respect)
+  " When theres a vimish fold, move to the start of it "
   (let* ((overlays (overlays-at (point)))
          (types    (-filter (lambda (x) (eq 'vimish-fold--folded
                                             (overlay-get x 'type)))
@@ -15,8 +17,9 @@
     )
   )
 
-(define-advice evil-next-line (:after (&optional count)
+  (define-advice evil-next-line (:after (&optional count)
                                +jg-text-invisi-line-respect)
+  " when theres a fold, jump past it "
   (let* ((overlays (overlays-at (point)))
          (types    (-filter (lambda (x) (eq 'vimish-fold--folded
                                             (overlay-get x 'type)))
@@ -30,9 +33,10 @@
     )
   )
 
-(define-advice evil-previous-line (:after (&optional count)
+  (define-advice evil-previous-line (:after (&optional count)
                                    +jg-text-invisi-line-respect
                                    )
+  " When theres a fold, jump past it "
   (let* ((overlays (overlays-at (point)))
          (types    (-filter (lambda (x) (eq 'vimish-fold--folded
                                             (overlay-get x 'type)))
@@ -44,9 +48,10 @@
     )
   )
 
-(define-advice evil-backward-char (:after (&optional count crosslines noerror)
+  (define-advice evil-backward-char (:after (&optional count crosslines noerror)
                                    +jg-text-invisi-line-respect
                                    )
+  " When theres a fold, jump to its start "
   (let* ((overlays (overlays-at (point)))
          (types    (-filter (lambda (x) (eq 'vimish-fold--folded (overlay-get x 'type))) overlays))
          )
@@ -55,13 +60,10 @@
       )
     )
   )
+)
 
 (define-advice evil-join (:after (beg end)
                           +jg-text-join-line-bol)
+  " When joining lines, don't lose sight of the lhs of the buffer "
   (beginning-of-line)
   )
-
-(advice-remove 'evil-beginning-of-visual-line 'evil-beginning-of-visual-line@+jg-text-invisi-line-respect)
-(advice-remove 'evil-next-line 'evil-next-line@+jg-text-invisi-line-respect)
-(advice-remove 'evil-previous-line 'evil-previous-line@+jg-text-invisi-line-respect)
-(advice-remove 'evil-backward-char 'evil-backward-char@+jg-text-invisi-line-respect)

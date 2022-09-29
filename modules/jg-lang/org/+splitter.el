@@ -1,0 +1,77 @@
+;;; +splitter.el -*- lexical-binding: t; -*-
+
+(defvar jg-org-thread-count 0)
+(defvar jg-org-thread-parent "")
+(defvar jg-org-last-successful-thread "")
+
+(defun +jg-org-thread-log (msg)
+  (with-current-buffer (get-buffer-create "*Org-Thread-Log*")
+    (insert msg "\n")
+    )
+  )
+
+(defun +jg-org-thread-splitter ()
+  (interactive)
+  (setq jg-org-thread-parent "")
+  (with-current-buffer (get-buffer-create "*Org-Thread-Log*")
+    (erase-buffer))
+  (let* ((files (dired-get-marked-files))
+         (testfn (lambda (x) (and (f-ext? x "org")
+                                  (not (string-match "questauthority" x))
+                                  (not (string-match "thread_[[:digit:]]+.org" x)))))
+         (orgs (sort (-flatten (mapcar (lambda (x) (f-entries x testfn t)) files))
+                     #'s-less?))
+         (org-mode-hook nil)
+         (find-file-hook nil)
+         (write-file-functions nil)
+         (write-region-inhibit-fsync t)
+         (org-element-use-cache nil)
+         )
+    (with-current-buffer (get-buffer-create "*Org-Source*")
+      (org-mode))
+    (+jg-org-thread-log (format "Found: %s" orgs))
+    (condition-case err
+        (cl-loop for file in orgs
+                 do
+                 (+jg-org-thread-file-process file)
+                 )
+      (:success (shell-command "say \"Finished Splitting\"") nil)
+      )
+    )
+  )
+
+(defun +jg-org-thread-file-process (file)
+  (+jg-org-thread-log (format "Processing: %s : %s" file (shell-command-to-string "lsof -c emacs | wc -l")))
+  (unless (s-equals? jg-org-thread-parent (f-parent file))
+    (setq jg-org-thread-parent (f-parent file)
+          jg-org-thread-count 0))
+  (condition-case err
+      (with-current-buffer "*Org-Source*"
+        (erase-buffer)
+        (insert-file-contents file)
+        (goto-char (point-min))
+        (org-map-entries '+jg-org-thread-split-fn t nil)
+        )
+    (:success
+     (+jg-org-thread-log (format "Log Count Update:  %s"  (shell-command-to-string "lsof -c emacs | wc -l")))
+     )
+    (t (message "Thread Processor Error: %s : %s : %s" err file (shell-command-to-string "lsof -c emacs | wc -l"))
+       (debug)
+       )
+    )
+  )
+
+  ;; use org-map-continue-from
+(defun +jg-org-thread-split-fn ()
+  (let ((ctx (org-element-context))
+        tree
+        )
+    (cond ((and (eq (car ctx) 'headline)
+                (eq (org-element-property :level ctx) 2))
+           (setq tree (buffer-substring-no-properties (org-element-property :begin ctx)
+                                                       (org-element-property :end ctx)))
+           (with-temp-file (f-join jg-org-thread-parent (format "thread_%s.org" (cl-incf jg-org-thread-count)))
+             (insert tree)))
+          (t nil))
+    )
+  )

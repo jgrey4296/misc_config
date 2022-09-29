@@ -8,9 +8,9 @@
                                                      :select nil
                                                      :modeline t
                                                      :ttl nil)
-
-              undo-tree-visualizer-diff t
-              undo-tree-auto-save-history t
-              undo-tree-enable-undo-in-region t
+              highlight-parentheses-delay      0.3
+              undo-tree-visualizer-diff        t
+              undo-tree-auto-save-history      t
+              undo-tree-enable-undo-in-region  t
               jg-ui-default-face-gen-palette-dir "/Volumes/documents/github/writing/resources/palettes/"
               )

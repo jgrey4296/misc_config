@@ -4,6 +4,7 @@
   (load! "+bindings")
   )
 
+(load! "+indent")
 (load! "+vars")
 (load! "+repl")
 (load! "+funcs")
@@ -21,7 +22,6 @@
   :commands (netlogo-mode)
   )
 
-;; TODO config pasp mode
 
 (after! org
   (push '("clingo" . prolog) org-src-lang-modes)
@@ -43,4 +43,7 @@
 (use-package! pasp-mode
   :init
   (add-to-list 'auto-mode-alist '("\\.lp4" . pasp-mode ))
+  (add-hook 'pasp-mode-hook (lambda ()
+                              (setq-local indent-line-function '+jg-logic-pasp-indent)))
+
   )

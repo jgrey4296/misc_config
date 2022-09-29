@@ -1,0 +1,32 @@
+;;; +indent.el -*- lexical-binding: t; -*-
+
+(defun +jg-logic-pasp-indent ()
+  (interactive)
+  (beginning-of-line)
+  (let ((prior-col 0))
+    (cond ((looking-at "^.*?:-") ;; match constraint
+           (re-search-forward "^[[:blank:]]+" (line-end-position) t)
+           (delete-region (line-beginning-position) (point))
+           )
+          ((and (looking-at ".+?[,\.][[:blank:]]*$") ;; match continued rule
+                (save-excursion (forward-line -1)
+                                (cond ((re-search-forward ":- " (line-end-position) t)
+                                       (setq prior-col (current-column))
+                                       t)
+                                       ((re-search-forward "^[[:blank:]]+\\(.+?,\\)[[:blank:]]*$" (line-end-position) t)
+                                        (goto-char (match-beginning 1))
+                                        (setq prior-col (current-column))
+                                        t)
+                                       (t nil)
+                                       )))
+           (re-search-forward "^[[:blank:]]+" (line-end-position) t)
+           (delete-region (line-beginning-position) (point))
+           (indent-to-column prior-col)
+           )
+          (t
+           (re-search-forward "[[:blank:]]*" (line-end-position) t)
+           (delete-region (line-beginning-position) (point))
+           )
+          )
+    )
+  )

@@ -34,6 +34,7 @@
 ;;-- popup rules
 (setq jg-clingo-popup-rules
       '(((format "^\\*%s\\*" pasp-results-buffer-name) :side right :ttl 5 :width 0.4 :quit t :select nil :priority 50)
+        ("^\\*clingo output\\*" :side right :ttl 5 :width 0.4 :quit t :select nil)
         )
       )
 (after! jg-popup-init

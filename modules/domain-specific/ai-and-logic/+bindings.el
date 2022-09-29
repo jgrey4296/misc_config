@@ -1,7 +1,7 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
 (map! :map coq-mode-map
-      ;; :after coq
+      :after coq
       "RET" nil
       "DEL" nil
       :n "RET"    'proof-goto-point
@@ -14,7 +14,7 @@
       )
 
 (map! :map proof-mode-map
-      ;; :after proof
+      :after proof
       "RET" nil
       "DEL" nil
       :n "RET"    'proof-goto-point
@@ -31,8 +31,10 @@
       :after pasp-mode
       :localleader
       :desc "Prettify" "p" #'prettify-symbols-mode
+      :desc "Compile"  "c" #'pasp-run-buffer
       )
 
+(evil-make-intercept-map pasp-mode-map)
 (evil-make-intercept-map coq-mode-map)
 
    ;; (spacemacs/set-leader-keys-for-major-mode 'coq-mode

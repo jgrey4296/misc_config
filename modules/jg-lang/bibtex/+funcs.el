@@ -327,7 +327,7 @@ ensuring they work across machines "
                                                (lambda (f) (f-ext? f "bib"))))))
          )
     (unless (f-exists? target)
-      (error "Target to refile to doesn't exist: %s" target)
+      (f-touch target)
       )
     (+jg-bibtex-refile-pdf current-prefix-arg)
     (bibtex-kill-entry)
@@ -456,7 +456,7 @@ With arg, searchs the dplp instead.
 
 ;;-- end entry stubbing
 
-;;-- Meta Retrieval
+;;-- meta retrieval
 (defun +jg-bibtex-meta-retrieval ()
   (interactive)
   (save-excursion
@@ -539,3 +539,4 @@ With arg, searchs the dplp instead.
       )
     )
   )
+;;-- end meta retrieval

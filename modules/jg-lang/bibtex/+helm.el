@@ -122,37 +122,37 @@ modified from the original bibtex-completion-show-entry
   "Formats a BibTeX ENTRY for display in results list.
 WIDTH is the width of the results list.  The display format is
 governed by the variable `bibtex-completion-display-formats'."
-  (let* ((format
-          (or (assoc-string (bibtex-completion-get-value "=type=" entry)
-                            bibtex-completion-display-formats-internal
-                            'case-fold)
-              (assoc t bibtex-completion-display-formats-internal)))
-         (format-string (cadr format)))
+  (let* ((entry-type (bibtex-completion-get-value "=type=" entry))
+         (entry-format (cdr (or (assoc-string entry-type jg-bibtex-completion-display-formats 'case-fold)
+                                (assoc t jg-bibtex-completion-display-formats))))
+         )
     (s-format
-     format-string
+     (car entry-format)
      (lambda (field)
        (let* ((field (split-string field ":"))
               (field-name (car field))
-              (field-width (cadr field))
-              (field-value (bibtex-completion-get-value field-name entry)))
-         (when (and (string= field-name "author")
-                    (not field-value))
-           (setq field-value (bibtex-completion-get-value "editor" entry)))
-         (when (and (string= field-name "year")
-                    (not field-value))
-           (setq field-value (car (split-string (bibtex-completion-get-value "date" entry "") "-"))))
-         (setq field-value (bibtex-completion-clean-string (or field-value " ")))
-         (when (member field-name '("author" "editor"))
-           (setq field-value (bibtex-completion-shorten-authors field-value)))
-         (if (not field-width)
-             field-value
-           (setq field-width (string-to-number field-width))
-           (truncate-string-to-width
-            field-value
-            (if (> field-width 0)
-                field-width
-              (- width (cddr format)))
-            0 ?\s)))))))
+              (field-width (cond ((and (cadr field) (string= (cadr field) "*"))
+                                  0)
+                                 ((cadr field)
+                                  (string-to-number (cadr field)))
+                                 (t 0)
+                                 ))
+              (field-value (bibtex-completion-clean-string (or (cond ((string= field-name "author")
+                                                                      (bibtex-completion-shorten-authors (or (bibtex-completion-get-value field-name entry)
+                                                                                                             (bibtex-completion-get-value "editor" entry))))
+                                                                     ((string= field-name "year")
+                                                                      (or (bibtex-completion-get-value field-name entry)
+                                                                          (car (split-string (bibtex-completion-get-value "date" entry "") "-"))))
+                                                                     (t (bibtex-completion-get-value field-name entry)))
+                                                               "")))
+              )
+         (when (and field-width (<= field-width 0))
+           (setq field-width (- width (cadr entry-format))))
+         (when field-width
+           (setq field-value (truncate-string-to-width field-value field-width 0 ?\s t)))
+
+         field-value
+         )))))
 (defun +jg-bibtex-process-candidates (x)
   "Utility to tidy bibtex-completion-candidates for helm-bibtex"
   (cons (s-replace-regexp ",? +" " " (car x))
@@ -201,8 +201,7 @@ governed by the variable `bibtex-completion-display-formats'."
     )
   (helm-set-local-variable 'helm-candidate-number-limit 5000)
 
-  (let ((bibtex-completion-additional-search-fields '("tags" "year"))
-        (input (if (evil-visual-state-p) (buffer-substring-no-properties evil-visual-beginning evil-visual-end) ""))
+  (let ((input (if (evil-visual-state-p) (buffer-substring-no-properties evil-visual-beginning evil-visual-end) ""))
         )
 
     (helm :sources `(,jg-bibtex-helm-source-bibtex)
@@ -221,7 +220,7 @@ using org-bibtex-fields for completion options "
     (bibtex-beginning-of-entry)
     (let* ((composition (-compose #'(lambda (x) (s-replace ":" "" x)) #'symbol-name #'car  ))
            (fields (mapcar composition org-bibtex-fields))
-           (user-fields (mapcar #'car bibtex-user-optional-fields))
+           (user-fields (mapcar #'car jg-bibtex-optional-fields))
            (chosen (completing-read "Field: " (-concat fields user-fields)))
            (curr-value (bibtex-autokey-get-field chosen))
            (potential-completions (f-join jg-bibtex-loc-completions chosen))

@@ -40,4 +40,8 @@
   ;;       do (add-hook 'org-ref-clean-bibtex-entry-hook hook 100))
   )
 
+(use-package-hook! bibtex-completion :post-config
+  (provide 'jg-bibtex-vars-go)
+  )
+
 (add-hook 'doom-first-file-hook #'+jg-bibtex-build-list)

@@ -20,7 +20,6 @@
   (add-hook! 'bibtex-mode-hook
              #'yas-minor-mode
              #'+jg-bibtex-font-lock-mod-hook
-             #'autohide-minor-mode
              )
   )
 (use-package! helm-bibtex

@@ -60,36 +60,33 @@
 Hides imports in a vimish fold,
 Add any sections commented with jg-python-fold-block-[start|end]-re
 and closes classes and functions, re-opening only the first class "
-  (message "Running Python Auto Hide")
   (when autohide-minor-mode
-      (save-excursion
-        (beginning-of-buffer)
-        (evil-open-folds)
-        ;; Fold Imports
-        (message "Searching for import block")
-        (if (re-search-forward "^\\(from\\|import\\|##-- imports\\)" nil t)
-            (let* ((start-hide (progn (beginning-of-line) (point)))
-                   (end-hide (progn (forward-line)
-                                    (re-search-forward jg-python-import-block-end-re nil t)
-                                    (re-search-backward "^\\(from\\|import\\|##-- end imports\\)" (+ 10 start-hide) t)
-                                    (end-of-line)
-                                    (point)))
-                   )
-              (if (and start-hide end-hide (not (= start-hide end-hide)) (not (vimish-fold--folds-in start-hide end-hide)))
-                  (vimish-fold start-hide end-hide)
-                )
-              )
-          )
-        (forward-line)
-        ;; Semi-Fold everything
-        (beginning-of-buffer)
-        (evil-close-folds)
-        (if (re-search-forward "^class " nil t)
-            (let ((current-prefix-arg t))
-              (evil-close-fold))
-          )
+    (message "Running Python Auto Hide")
+    (save-excursion
+      (beginning-of-buffer)
+      ;; Fold Imports
+      (message "Searching for import block")
+      ;; (if (re-search-forward "^\\(from\\|import\\|##-- imports\\)" nil t)
+      ;;     (let* ((start-hide (progn (beginning-of-line) (point)))
+      ;;            (end-hide (progn (forward-line)
+      ;;                             (re-search-forward jg-python-import-block-end-re nil t)
+      ;;                             (re-search-backward "^\\(from\\|import\\|##-- end imports\\)" (+ 10 start-hide) t)
+      ;;                             (end-of-line)
+      ;;                             (point)))
+      ;;            )
+      ;;       (if (and start-hide end-hide (not (= start-hide end-hide)) (not (vimish-fold--folds-in start-hide end-hide)))
+      ;;           (vimish-fold start-hide end-hide)
+      ;;         )
+      ;;       )
+      ;;   )
+      ;; (forward-line)
+      ;; Semi-Fold everything
+      (evil-close-folds)
+      (when (re-search-forward "^class " nil t)
+        (let ((current-prefix-arg t))
+          (evil-close-fold))
         )
+      )
     )
   )
-
 ;;; +hooks.el ends here

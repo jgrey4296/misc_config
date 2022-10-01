@@ -87,7 +87,7 @@
   " Use an ivy to get the command "
   (let* ((compilation-read-command nil)
         (root (projectile-project-root))
-        (cmd-cache (f-join root jg-misc-project-cmd-cache-name))
+        (cmd-cache (f-join root jg-completion-project-cmd-cache-name))
         (candidates (if (and root (f-exists? cmd-cache))
                         (with-temp-buffer
                           (insert-file-contents cmd-cache)

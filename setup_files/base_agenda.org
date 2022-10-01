@@ -72,6 +72,30 @@ tag - amend mode
 # get all the addresses that have "south" in the street name
 //address[contains(@street, 'south')]
 
+# reject certain nodes:
+//(* except script)
+//*[not(self::script)]
+
+# Extract an attribute value:
+//a/extract(@href, '.*')
+#+end_src
+
+#+begin_src xpath
+# Axes
+ancestor
+ancestor-or-self
+attribute / @
+child
+descendant
+descendantor-self
+following
+following-sibling
+parent
+preceding
+preceding-sibling
+self / .
+
+
 #+end_src
 
 *** [[https://www.videlibri.de/xidel.html][xidel]]

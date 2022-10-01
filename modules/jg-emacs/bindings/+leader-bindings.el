@@ -222,28 +222,7 @@
 
 ;;-- <leader> j -- Jumping
 (map! :leader
-      :prefix ("j" . "Jump")
-      ;; 1 2 3 "u" "h"
-
-      :desc "Parse File"            "!" #'helm-gtags-parse-file
-      :desc "Jump to Char"          "." #'avy-goto-char
-      :desc "Create Tags"           "C" #'helm-gtags-create-tags
-      ;; :desc "Find Tag Other Window" "D" #'helm-gtags-find-tag-other-window
-      :desc "References"            "D" #'+lookup/references
-      :desc "Update Tags"           "U" #'helm-gtags-update-tags
-      ;; :desc "Definition"            "d" #'+lookup/definition
-      :desc "Find Tag"              "d" #'helm-gtags-find-tag
-      :desc "Implementations"       "i" #'+lookup/implementations
-      ;; :desc "Tags in func"          "i" #'helm-gtags-tags-in-this-function
-      :desc "Documentation"         "k" #'+lookup/documentation
-      :desc "Line"                  "l" #'evil-avy-goto-line
-      :desc "Avy Pop Mark"          "m" #'avy-pop-mark
-      :desc "Find rtag"             "r" #'helm-gtags-find-rtag
-      :desc "Gtags Select"          "s" #'helm-gtags-select
-      :desc "Type definition"       "t" #'+lookup/type-definition
-
-      :desc "Find Symbol"           "y" #'helm-gtags-find-symbol
-      )
+      :desc "Jump"    "j" jg-binding-jump-map)
 ;;-- end <leader> j -- Jumping
 
 ;;-- <leader> m -- Local Mode
@@ -317,7 +296,7 @@
       :desc "Dired"                        "d"    #'dired-jump
       ;; :desc "Compose Email"                "e" #'mu4e~compose-mail
       :desc "REPL"                         "r"    #'+eval/open-repl-other-window
-
+      :desc "Regexp Builder"               "R"    #'regexp-builder
       :desc "Repo Homepage"                "g"    #'+vc/browse-at-remote-homepage
       :desc "Project sidebar"              "p"    #'+neotree/open
       :desc "Find file in project sidebar" "P"    #'+neotree/find-this-file

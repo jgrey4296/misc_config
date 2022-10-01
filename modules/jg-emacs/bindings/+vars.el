@@ -43,5 +43,6 @@
       jg-binding-visual-state-map             (make-sparse-keymap "JG map replacing evil-visual-state-map")
       jg-binding-insert-state-map       nil ;; copied in +evil-bindings
       jg-binding-help-map               nil ;; copied in +help-bindings
+      jg-binding-jump-map                    (make-sparse-keymap "JG map for jump commands")
       )
 ;;-- end maps

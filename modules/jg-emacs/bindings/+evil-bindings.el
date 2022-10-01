@@ -18,11 +18,11 @@
 
 ;;-- normal state
 (map! :map jg-binding-normal-state-map ;; State Changes
-      :desc "Emacs State"        "C-z"      #'evil-emacs-state
-      :desc "Record Macro"       "q"        #'evil-record-macro
-      :desc "Macro"              "@"        #'evil-execute-macro
-      :desc "Force Normal State" "<escape>" #'evil-force-normal-state
-      :desc "Eval expression"       "\""   #'pp-eval-expression
+      :desc "Emacs State"         "C-z"      #'evil-emacs-state
+      :desc "Record Macro"        "q"        #'evil-record-macro
+      :desc "Macro"               "@"        #'evil-execute-macro
+      :desc "Force Normal State"  "<escape>" #'evil-force-normal-state
+      :desc "Eval expression"     "\""       #'pp-eval-expression
       )
 
 (map! :map jg-binding-normal-state-map ;; Insert+
@@ -389,20 +389,13 @@
       :desc "Incr"                "="   #'evil-numbers/inc-at-pt
       :desc "Incr"                "+"   #'evil-numbers/inc-at-pt
       :desc "Decr"                "-"   #'evil-numbers/dec-at-pt
-      :desc "Last Change"         ";"   #'goto-last-change
       :desc "Apply Macro"         "@"   #'+evil:apply-macro
       :desc "Char"                "?"   #'what-cursor-position
-      :desc "Jump Char"           "."   #'evil-avy-goto-char
-      :desc "Jump to Tag"         ","   #'helm-gtags-find-tag
 
       :desc "Align"              "a" #'align-regexp
-      :desc "Pop Mark"           "b" #'avy-pop-mark
-      :desc "Push Mark"          "B" (cmd! (avy-push-mark))
       :desc "Comment"            "c" #'evilnc-comment-operator
       :desc "IEdit"              "e" #'iedit-mode
-      :desc "Goto First Line"    "f" #'evil-goto-first-line
-      :desc "Goto Last Line"     "F" #'evil-goto-line
-      :desc "Middle of Line"     "m" #'evil-middle-of-visual-line
+
       :desc "Join whitespace"    "J" #'evil-join-whitespace
 
       ;; TODO use a motion for direction
@@ -433,18 +426,6 @@
         :n "R"  #'rotate-text-backward)
        )
 (map! :map jg-binding-operator-map
-      :prefix ("/" . "Search")
-      :desc "Search Word Forward" "*"  #'evil-ex-search-unbounded-word-forward
-      :desc "Goto Definition"      "d" #'evil-goto-definition
-      :desc "Lookup"               "D" #'+lookup/references
-      :desc "Find File at point"   "F" #'evil-find-file-at-point-with-line
-      :desc "Lookup File"          "f" #'+lookup/file
-      :desc "Next Visual"          "j" #'evil-next-visual-line
-      :desc "Previous Visual"      "k" #'evil-previous-visual-line
-      :desc "Regexp Builder"       "r" #'regexp-builder
-      ;; TODO escalate replace op
-      )
-(map! :map jg-binding-operator-map
       :prefix ("l" . "Line-ops")
       ;; TODO uniquify, remove leading whitespace, split on char
       ;; r
@@ -461,6 +442,51 @@
 
       )
 ;;-- end operators
+
+;;-- jump
+(map! :map jg-binding-jump-map
+      ;; 1 2 3 "u" "h"
+      :desc "Last Change"           ";" #'goto-last-change
+      :desc "Jump to Char"          "." #'avy-goto-char
+      :desc "Line"                  "l" #'evil-avy-goto-line
+      :desc "Avy Pop Mark"          "m" #'avy-pop-mark
+      :desc "Pop Mark"              "b" #'avy-pop-mark
+      :desc "Push Mark"             "B" (cmd! (avy-push-mark))
+      :desc "Goto First Line"       "f" #'evil-goto-first-line
+      :desc "Goto Last Line"        "F" #'evil-goto-line
+      :desc "Middle of Line"        "m" #'evil-middle-of-visual-line
+      )
+(map! :map jg-binding-jump-map
+      :desc "Type definition"       "t" #'+lookup/type-definition
+      :desc "References"            "r" #'+lookup/references
+      :desc "Definition"            "d" #'+lookup/definition
+      :desc "Implementations"       "i" #'+lookup/implementations
+      :desc "Documentation"         "k" #'+lookup/documentation
+      )
+(map! :map jg-binding-jump-map
+      :prefix ("g" . "gtags")
+      :desc "Create Tags"           "c" #'helm-gtags-create-tags
+      :desc "Find Symbol"           "y" #'helm-gtags-find-symbol
+      :desc "Find Tag Other Window" "o" #'helm-gtags-find-tag-other-window
+      :desc "Find Tag"              "d" #'helm-gtags-find-tag
+      :desc "Find rtag"             "r" #'helm-gtags-find-rtag
+      :desc "Gtags Select"          "s" #'helm-gtags-select
+      :desc "Parse File"            "p" #'helm-gtags-parse-file
+      :desc "Tags in func"          "i" #'helm-gtags-tags-in-this-function
+      :desc "Update Tags"           "u" #'helm-gtags-update-tags
+      )
+
+(map! :map jg-binding-jump-map
+      :prefix ("/" . "Search")
+      :desc "Find File at point"   "F" #'evil-find-file-at-point-with-line
+      :desc "Goto Definition"      "d" #'evil-goto-definition
+      :desc "Lookup File"          "f" #'+lookup/file
+      :desc "Lookup"               "D" #'+lookup/references
+      :desc "Next Visual"          "j" #'evil-next-visual-line
+      :desc "Previous Visual"      "k" #'evil-previous-visual-line
+      :desc "Search Word Forward"  "*"  #'evil-ex-search-unbounded-word-forward
+      )
+;;-- end jump
 
 ;;-- vision
 (map! :map jg-binding-vision-map
@@ -492,6 +518,7 @@
       :desc "Visual Ops"    "z"   jg-binding-vision-map
       :desc "B Motion"      "["   jg-binding-backward-general-motion-map
       :desc "F Motion"      "]"   jg-binding-forward-general-motion-map
+      :desc "Jumping"       "s"   jg-binding-jump-map
 
       )
 

@@ -31,7 +31,7 @@
       :desc "Load into shell" :n "l" #'+jg-xml-load-into-repl
       )
 
-(map! :map web-mode-map
+(map! :map (web-mode-map so-long-mode-map)
       :desc "Run XPath Query" :n "?" #'+jg-xml-run-xidel
       :localleader
       :desc "Run XPath Query" :n "?" #'+jg-xml-run-xidel

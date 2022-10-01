@@ -298,7 +298,6 @@
       :desc "REPL"                         "r"    #'+eval/open-repl-other-window
       :desc "Regexp Builder"               "R"    #'regexp-builder
       :desc "Repo Homepage"                "g"    #'+vc/browse-at-remote-homepage
-      :desc "Project sidebar"              "p"    #'+neotree/open
       :desc "Find file in project sidebar" "P"    #'+neotree/find-this-file
 
       :desc "Rmail"                        "m"    #'rmail

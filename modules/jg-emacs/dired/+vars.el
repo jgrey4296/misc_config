@@ -37,6 +37,7 @@
                                "__init__.py"
                                "__pycache__"
                                ".."
+                               "TheVolumeSettingsFolder"
                                (and (*? anychar) ".egg-info")
                                (and (*? anychar) ".elc")
                                (and "log" ?. (*? anychar))
@@ -90,6 +91,14 @@
                                         "CFUserTextEncoding"
                                         "dropbox.cache"
                                         "dropbox"
+                                        "com.apple.timemachine.donotpresent"
+                                        "_.TemporaryItems"
+                                        "_.Trashes"
+                                        "_.apdisk"
+                                        "_.com.apple.timemachine.donotpresent"
+                                        "_Machinarium"
+                                        "_PowerLineUtility_Win_180816.zip"
+                                        "_TheVolumeSettingsFolder"
                                         )
                                        )
                                     )

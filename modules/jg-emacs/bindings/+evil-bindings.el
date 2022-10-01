@@ -29,14 +29,14 @@
       :desc "Insert Below"  "o"   #'evil-open-below
       :desc "Insert"        "i"   #'evil-insert
       :prefix ("I" . "Insert+")
-       :desc "From evil register"       "0"          #'counsel-evil-registers
+      :desc "From evil register"       "0"          #'counsel-evil-registers
 
        :desc "Insert Resume"            "!"          #'evil-insert-resume
 
        :desc "Insert"                   "i"          #'evil-insert
        :desc "Insert after"             "l"          #'evil-append
        :desc "Replace-State"            "r"          #'evil-replace-state
-       :desc "Replace Selection"        "R"          #'evil-change
+
 
        :desc "Append Line"              "a"          #'evil-append-line
        :desc "Prepend Line"             "p"          #'evil-insert-line
@@ -153,7 +153,7 @@
        :desc "char"         "l"             #'evil-visual-char
        :desc "exit"         "v"             #'evil-normal-state
        )
-      :desc "Replace Selection"        "R"          #'evil-change
+      :desc "Replace Selection"       "R"   #'evil-change
       :desc "Exchange Corners"        "O"   #'evil-visual-exchange-corners
       :desc "Exchange Point and Mark" "o"   #'exchange-point-and-mark
 
@@ -393,7 +393,6 @@
       :desc "Char"                "?"   #'what-cursor-position
 
       :desc "Align"              "a" #'align-regexp
-      :desc "Comment"            "c" #'evilnc-comment-operator
       :desc "IEdit"              "e" #'iedit-mode
 
       :desc "Join whitespace"    "J" #'evil-join-whitespace

@@ -12,6 +12,7 @@
 *.so
 ccsat.*
 dist/
+build/
 
 # Python:
 *.pyc

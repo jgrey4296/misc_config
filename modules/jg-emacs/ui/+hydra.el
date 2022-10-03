@@ -11,42 +11,43 @@
           (+jg-text-format-hydra-columns '(
 "Visuals              |
 ----------------------
-_p_ Highlight Parens   %(+jghdoc global-highlight-parentheses-mode)
-_g_ Evil goggles       %(+jghdoc evil-goggles-mode)
-_h_ Hl-line            %(+jghdoc hl-line-mode)
-_H_ Highlight Symbols  %(+jghdoc auto-highlight-symbol-mode)
-_I_ Ignore Invisible   %(+jghdoc line-move-ignore-invisible)
 _F_ Frame fullscreen   *
+_g_ Evil goggles       %(+jghdoc evil-goggles-mode)
+_H_ Highlight Symbols  %(+jghdoc auto-highlight-symbol-mode)
+_h_ Hl-line            %(+jghdoc hl-line-mode)
+_I_ Ignore Invisible   %(+jghdoc line-move-ignore-invisible)
+_p_ Highlight Parens   %(+jghdoc global-highlight-parentheses-mode)
 *                   ^^ *"
 
 "Guides                   |
 --------------------------
-_i_ Indent guides          %(+jghdoc highlight-indent-guides-mode)
 _C_ Fill Column Indicator  %(+jghdoc display-fill-column-indicator)
-_w_ Whitespace             %(+jghdoc whitespace-mode)
-_s_ Prettify Symbols Mode  %(+jghdoc prettify-symbols-mode)
-_R_ Ruler                  %(+jghdoc ruler-mode)
+_i_ Indent guides          %(+jghdoc highlight-indent-guides-mode)
 _n_ Line Numbers           %(+jghdoc display-line-numbers)
+_R_ Ruler                  %(+jghdoc ruler-mode)
+_s_ Prettify Symbols Mode  %(+jghdoc prettify-symbols-mode)
+_w_ Whitespace             %(+jghdoc whitespace-mode)
+_G_ Writing                %(+jghdoc (or flyspell-mode writegood-mode))
 *                       ^^ *"
 
 "Wrapping                |
 -------------------------
-_W_ Word-wrap mode        %(+jghdoc +word-wrap-mode)
 _f_ Auto-fill             %(+jghdoc auto-fill-function)
-_t_ Line Truncate         %(+jghdoc truncate-lines)
 _l_ Soft line wrapping    %(+jghdoc visual-line-mode)
+_t_ Line Truncate         %(+jghdoc truncate-lines)
+_W_ Word-wrap mode        %(+jghdoc +word-wrap-mode)
 *                      ^^ *
 *                      ^^ *
 *                      ^^ *"
 
 "Misc                   |
 ------------------------
-_o_  Org-links           %(+jghdoc org-link-descriptive)
-_v_  Evil Visual Marks   %(+jghdoc evil-visual-mark-mode)
 _a_  Auto-hide           %(+jghdoc global-autohide-minor-mode)
 _c_  Center Cursor       %(+jghdoc global-centered-cursor-mode)
-_T_  Neotree             *
 _M_  Minimap             *
+_o_  Org-links           %(+jghdoc org-link-descriptive)
+_T_  Neotree             *
+_v_  Evil Visual Marks   %(+jghdoc evil-visual-mark-mode)
 *                     ^^ *"
 )))
 
@@ -56,6 +57,7 @@ _M_  Minimap             *
   ("f" #'auto-fill-mode                           nil)
   ("F" #'toggle-frame-fullscreen                  nil)
   ("g" #'evil-goggles-mode                        nil)
+  ("G" (progn (flyspell-mode 'toggle) (writegood-mode (unless flyspell-mode -1))) nil)
   ("H" #'auto-highlight-symbol-mode               nil)
   ("h" #'global-hl-line-mode                      nil)
   ("I" #'+jg-ui-toggle-line-move-ignore-invisible nil)

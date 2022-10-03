@@ -199,18 +199,19 @@
 (map! :map jg-binding-motion-state-map ;; word, sen, para, line
       ;; Char
       :desc "find-char"             "f"       #'evil-find-char
-      :desc "find-char-to"          "t"       #'evil-find-char-to
-      :desc "find-char-to-backward" "T"       #'evil-find-char-to-backward
+      ;; :desc "find-char-to"          "t"       #'evil-find-char-to
+      :desc "find-char-backward"    "F"       #'evil-find-char-backward
+      ;; :desc "find-char-to-backward" "T"       #'evil-find-char-to-backward
       ;; Word
+      ;;
       :desc "B-Search Word"         "#"       #'evil-ex-search-word-backward
       :desc "Search Word Forward"   "*"       #'evil-ex-search-word-forward
-      :desc "backward-WORD-begin"   "b"       #'evil-backward-WORD-begin
-      :desc "backward-word-begin"   "B"       #'evil-backward-word-begin
-      :desc "find-char-backward"    "F"       #'evil-find-char-backward
+      :desc "backward-WORD-begin"   "B"       #'evil-backward-WORD-begin
+      :desc "backward-word-begin"   "b"       #'evil-backward-word-begin
       :desc "forward-WORD-begin"    "w"       #'evil-forward-WORD-begin
       :desc "forward-word-begin"    "W"       #'evil-forward-word-begin
-      :desc "forward-WORD-end"      "e"       #'evil-forward-WORD-end
-      :desc "forward-word-end"      "E"       #'evil-forward-word-end
+      :desc "forward-WORD-end"      "E"       #'evil-forward-WORD-end
+      :desc "forward-word-end"      "e"       #'evil-forward-word-end
       ;; Para
       :desc "Back Paragraph"        "{"       #'evil-backward-paragraph
       :desc "Forward Paragraph"     "}"       #'evil-forward-paragraph

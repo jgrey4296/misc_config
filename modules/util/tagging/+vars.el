@@ -20,6 +20,7 @@
               jg-tag-helm-buffer-name "*Helm Tags*"
 
               jg-tag-all-loc "~/github/writing/resources/cron_reports/totals_total.tags"
+              jg-tag-re-entrant-exit-tag "|"
               )
 
 (defvar jg-tag-bookmark-helm-source)

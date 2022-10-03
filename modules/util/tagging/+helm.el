@@ -97,18 +97,22 @@
             do (let ((name (substring entry 1)))
                  (insert (format "[[https://twitter.com/%s][%s]]\n" name entry)))))))
 (defun +jg-tag-set-tags-re-entrant (x)
-  (+jg-tag-set-tags x)
-  (with-helm-buffer
-    (setq-local helm-input-local " ")
-  )
-  (helm-resume jg-tag-helm-buffer-name)
+  (unless (s-equals? (car x) jg-tag-re-entrant-exit-tag)
+    (+jg-tag-set-tags x)
+    (with-helm-buffer
+      (setq-local helm-input-local " ")
+      )
+    (helm-resume jg-tag-helm-buffer-name)
+    )
   )
 (defun +jg-tag-set-new-tag-re-entrant (x)
-  (+jg-tag-set-new-tag x)
-  (with-helm-buffer
-    (setq-local helm-input-local " ")
-  )
-  (helm-resume jg-tag-helm-buffer-name)
+  (unless (s-equals? (car x) jg-tag-re-entrant-exit-tag)
+    (+jg-tag-set-new-tag x)
+    (with-helm-buffer
+      (setq-local helm-input-local " ")
+      )
+    (helm-resume jg-tag-helm-buffer-name)
+    )
   )
 ;;-- end actions
 

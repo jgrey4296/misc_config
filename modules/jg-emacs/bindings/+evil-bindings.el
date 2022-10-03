@@ -204,13 +204,13 @@
       ;; Word
       :desc "B-Search Word"         "#"       #'evil-ex-search-word-backward
       :desc "Search Word Forward"   "*"       #'evil-ex-search-word-forward
-      :desc "backward-WORD-begin"   "B"       #'evil-backward-WORD-begin
-      :desc "backward-word-begin"   "b"       #'evil-backward-word-begin
+      :desc "backward-WORD-begin"   "b"       #'evil-backward-WORD-begin
+      :desc "backward-word-begin"   "B"       #'evil-backward-word-begin
       :desc "find-char-backward"    "F"       #'evil-find-char-backward
-      :desc "forward-WORD-begin"    "W"       #'evil-forward-WORD-begin
-      :desc "forward-WORD-end"      "E"       #'evil-forward-WORD-end
-      :desc "forward-word-begin"    "w"       #'evil-forward-word-begin
-      :desc "forward-word-end"      "e"       #'evil-forward-word-end
+      :desc "forward-WORD-begin"    "w"       #'evil-forward-WORD-begin
+      :desc "forward-word-begin"    "W"       #'evil-forward-word-begin
+      :desc "forward-WORD-end"      "e"       #'evil-forward-WORD-end
+      :desc "forward-word-end"      "E"       #'evil-forward-word-end
       ;; Para
       :desc "Back Paragraph"        "{"       #'evil-backward-paragraph
       :desc "Forward Paragraph"     "}"       #'evil-forward-paragraph

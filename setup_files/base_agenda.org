@@ -27,7 +27,9 @@ Versu, Abl, Cif
 *** [[file:/Volumes/documents/github/writing/orgfiles/primary/research_questions.org][Research Questions]]
 
 ** Other
-http://ceur-ws.org/
+
+https://sites.ualberta.ca/~urban/Projects/English/Motif_Index.htm
+
 Killing the Black Body or Fatal Invention by @DorothyERoberts
 Medical Apartheid by @haw95
 Racecraft by Barbara and Karen Fields
@@ -110,3 +112,222 @@ xml sel -I -t -f -n -m //Trait -c . -n -b ./facade_messy.xml
 #+end_src
 
 *** [[http://saxon.sourceforge.net/][Saxon]]
+
+** Python Testbed
+https://docs.sympy.org/latest/guides/index.html
+https://github.com/Rainbow-Dreamer/musicpy
+https://github.com/dermatologist/nlp-qrmine
+https://gitlab.com/danielhones/pycategories
+https://github.com/AlexPof/colubridae
+https://github.com/AlexPof/opycleid
+https://github.com/tmontes/python-wires/
+https://github.com/oxford-quantum-group/discopy
+https://github.com/petercorke/bdsim
+https://github.com/jgonggrijp/pip-review
+https://github.com/mingrammer/diagrams#getting-started
+https://www.graphviz.org/
+https://github.com/msiedlarek/wiring
+[[https://github.com/FDSaussure/PySankey][https://github.com/FDSaussure/PySankey]]
+[[https://github.com/ricklupton/sankeydata][https://github.com/ricklupton/sankeydata]]
+https://github.com/ricklupton/floweaver
+https://github.com/plotly/plotly.py
+
+adb-shell                     |0.4.3
+alabaster                     |0.7.12
+ansicolors                    |1.1.8
+astroid                       |2.11.7
+attrs                         |21.4.0
+Babel                         |2.9.1
+better-exceptions             |0.3.3
+blas                          |1.0
+blurhash                      |1.1.4
+borb                          |2.1.0
+Bottleneck                    |1.3.5
+brotli                        |1.0.9
+brotli-bin                    |1.0.9
+brotlipy                      |0.7.0
+build                         |0.8.0
+bzip2                         |1.0.8
+ca-certificates               |2022.07.19
+cachecontrol                  |0.12.11
+cachetools                    |4.2.2
+cachy                         |0.3.0
+cairo                         |1.16.0
+certifi                       |2022.9.14
+cffi                          |1.15.1
+chardet                       |4.0.0
+charset-normalizer            |2.0.4
+cleo                          |0.8.1
+clikit                        |0.6.2
+clingo                        |5.6.1
+colorama                      |0.4.5
+commonmark                    |0.9.1
+coverage                      |6.4.4
+crashtest                     |0.3.1
+cryptography                  |37.0.1
+cycler                        |0.11.0
+dataclasses                   |0.8
+decorator                     |5.1.1
+dill                          |0.3.4
+distlib                       |0.3.2
+docutils                      |0.18.1
+editdistance                  |0.5.3
+et-xmlfile                    |1.1.0
+experta                       |1.9.4
+fftw                          |3.3.9
+filelock                      |3.6.0
+flake8                        |4.0.1
+fontconfig                    |2.13.1
+fonttools                     |4.25.0
+freetype                      |2.11.0
+frozendict                    |1.2
+future                        |0.18.2
+gettext                       |0.21.0
+giflib                        |5.2.1
+glib                          |2.69.1
+gmp                           |6.2.1
+gmpy2                         |2.1.2
+hasse                         |0.1.2
+html5lib                      |1.1
+humanfriendly                 |10.0
+icu                           |58.2
+idna                          |3.3
+imagesize                     |1.4.1
+importlib-metadata            |4.11.3
+inflect                       |6.0.0
+intel-openmp                  |2021.4.0
+isort                         |5.9.3
+jedi                          |0.18.1
+Jinja2                        |3.0.3
+jpeg                          |9e
+jsonschema                    |4.16.0
+keyring                       |23.4.0
+kiwisolver                    |1.4.2
+lazy-object-proxy             |1.6.0
+lcms2                         |2.12
+lerc                          |3.0
+llvm-openmp                   |14.0.6
+lml                           |0.1.0
+lockfile                      |0.12.2
+lxml                          |4.9.1
+lz4-c                         |1.9.3
+Markdown                      |3.3.4
+MarkupSafe                    |2.1.1
+mastodon-py                   |1.5.1
+matplotlib                    |3.5.2
+matplotlib-base               |3.5.2
+mccabe                        |0.7.0
+mkl                           |2021.4.0
+mkl-fft                       |1.3.1
+mkl-random                    |1.2.2
+mkl-service                   |2.4.0
+mkl_fft                       |1.3.1
+mkl_random                    |1.2.2
+mpc                           |1.1.0
+mpfr                          |4.0.2
+mpmath                        |1.2.1
+msgpack                       |1.0.3
+munkres                       |1.1.4
+mypy                          |0.910
+mypy-extensions               |0.4.3
+ncurses                       |6.3
+networkx                      |2.8.4
+numexpr                       |2.8.3
+numpy                         |1.21.5
+openpyxl                      |3.0.10
+openssl                       |1.1.1q
+packaging                     |20.9
+pandas                        |1.4.4
+parso                         |0.8.3
+pastel                        |0.2.1
+pcre                          |8.45
+pexpect                       |4.8.0
+Pillow                        |9.2.0
+pip                           |22.2.2
+pixman                        |0.40.0
+pkginfo                       |1.8.2
+platformdirs                  |2.5.2
+poetry                        |1.1.15
+pony                          |0.7.16
+pretty-errors                 |1.2.25
+psutil                        |5.9.0
+ptyprocess                    |0.7.0
+pure-python-adb               |0.3.0.dev0
+py-rete                       |0.0.6
+pyasn1                        |0.4.8
+pycairo                       |1.21.0
+pycodestyle                   |2.8.0
+pycparser                     |2.21
+pydantic                      |1.10.0
+pyexcel                       |0.7.0
+pyexcel-io                    |0.6.6
+pyflakes                      |2.4.0
+Pygments                      |2.11.2
+pylev                         |1.3.0
+pylightxl                     |1.59
+pylint                        |2.14.5
+pyOpenSSL                     |22.0.0
+pyparsing                     |3.0.9
+Pyqtree                       |1.0.0
+pyrlang                       |0.9        /rlang
+pyrlang-term                  |1.4
+pyrsistent                    |0.18.0
+PySocks                       |1.7.1
+pyswip                        |0.2.10
+python-barcode                |0.14.0
+python-dateutil               |2.8.2
+python-magic                  |0.4.25
+python_abi                    |3.10
+pytz                          |2022.1
+PyYAML                        |6.0
+qrcode                        |7.3.1
+railroad-diagrams             |1.1.1
+readline                      |8.1.2
+regex                         |2022.7.9
+requests                      |2.28.1
+requests-toolbelt             |0.9.1
+rich                          |12.5.1
+rsa                           |4.8
+rust-py                       |0.0.1      /_py
+rust-py                       |0.0.1
+schema                        |0.6.7
+scipy                         |1.7.3
+seaborn                       |0.11.2
+semantic-version              |2.10.0
+setuptools                    |63.4.1
+setuptools-rust               |1.4.1
+shellingham                   |1.3.1
+six                           |1.16.0
+snowballstemmer               |2.2.0
+Sphinx                        |5.0.2
+sphinxcontrib-applehelp       |1.0.2
+sphinxcontrib-devhelp         |1.0.2
+sphinxcontrib-htmlhelp        |2.0.0
+sphinxcontrib-jsmath          |1.0.1
+sphinxcontrib-qthelp          |1.0.3
+sphinxcontrib-serializinghtml |1.1.5
+sqlite                        |3.39.3
+stackprinter                  |0.2.5
+sty                           |1.0.0rc2
+sympy                         |1.11.1
+termcolor                     |1.1.0
+texttable                     |1.6.4
+tk                            |8.6.12
+toml                          |0.10.2
+tomli                         |2.0.1
+tomlkit                       |0.11.1
+toposort                      |1.7
+tornado                       |6.2
+typing_extensions             |4.3.0
+tzdata                        |2022c
+urllib3                       |1.26.11
+virtualenv                    |20.16.2
+waitress                      |2.0.0
+webencodings                  |0.5.1
+wheel                         |0.37.1
+wrapt                         |1.14.1
+xz                            |5.2.6
+yaml                          |0.2.5
+zipp                          |3.8.0
+zlib                          |1.2.12
+zstd                          |1.5.2

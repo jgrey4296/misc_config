@@ -2,10 +2,9 @@
 
 (after! doom-ui
   (advice-remove 'kill-current-buffer #'doom--switch-to-fallback-buffer-maybe-a)
-  )
 
-(define-advice kill-current-buffer (:before-until (&rest _)
-                                      +jg-ui-kill-buffer-override)
+  (define-advice kill-current-buffer (:before-until (&rest _)
+                                                    +jg-ui-kill-buffer-override)
     "Switch to `doom-fallback-buffer' if on last real buffer.
 
 Advice for `kill-current-buffer'. If in a dedicated window, delete it. If there
@@ -39,8 +38,10 @@ windows, switch to `doom-fallback-buffer'. Otherwise, delegate to original
              (kill-buffer buf)
              (switch-to-buffer (doom-fallback-buffer))
              t
-            )
+             )
             (t nil)
             )
       )
     )
+
+  )

@@ -38,7 +38,7 @@ BASH_ENV=/Volumes/documents/github/emacs_files/setup_files/cron/conda_bashrc
 
 ## TUES
 # at 4.30am on tuesdays, find any corrupted pdfs
-30 4 * * tue find /Volumes/documents/MEGA/AutoSync/pdflibrary -name "*.pdf" -print0 | xargs -0 -I {} echo "pdftk {} dump_data_utf8 2>&1 1>/dev/null | awk -v fname=\"{}\" '/Error/ { print fname, \":\",\$0}'" | bash > /Volumes/documents/github/writing/resources/cron_reports/pdf_verification
+30 4 * * tue find /Volumes/documents/MEGA/AutoSync/pdflibrary -name "*.pdf" -print0 | xargs -0 -I {} echo "ebook-meta {} 2>&1 1>/dev/null | awk -v fname=\"{}\" '/error/ { print fname, \":\",\$0}'" | bash > /Volumes/documents/github/writing/resources/cron_reports/pdf_verification
 
 # at 2am on tuesdays, update bookmars
 0 2 * * tue conda activate bookmark; bkmk-sql -n -t /Volumes/documents/github/writing/resources/bookmarks/total.bookmarks

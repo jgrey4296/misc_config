@@ -33,6 +33,8 @@
             (with-temp-buffer
               (insert-file-contents jg-bibtex-loc-export-bib-file)
               (goto-char (point-min))
+              (re-search-forward "%title")
+              (replace-match (f-filename (f-no-ext bibfile)))
               (re-search-forward "%target")
               (replace-match (concat default-directory bibfile))
               (write-file texfile)

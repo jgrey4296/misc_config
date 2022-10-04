@@ -7,6 +7,8 @@ DROPBOX_WATCH=( "$HOME/Dropbox/docs" "$HOME/Downloads" )
 DROPBOX_TARGET="/Volumes/documents/in_progress_pdfs/Current/"
 CONDA_MAINTENANCE_TARGET="$HOME/.shell_files/conda_envs/master_list.yaml"
 CPU_MAX="50"
+PDF_LIBRARY="~/mega/pdflibrary/"
+PDF_SUMMARY="/Volumes/documents/in_progress_pdfs/summary/"
 
 function conda_maintenance(){
     conda_activate_for_scripts
@@ -59,7 +61,6 @@ function cpu_check(){
     fi
 }
 
-
 function dropbox_watcher(){
     conda_activate_for_scripts bookmark
 
@@ -79,7 +80,6 @@ function dropbox_watcher(){
     bkmk-bot-stub
     echo "Stubbing finished"
 }
-
 
 function git_url_backup(){
 
@@ -131,8 +131,24 @@ function run_maintenance(){
     echo "NPM Update--------------------"
     npm update npm -g
     echo "--------------------"
+
+    echo "Latex Update--------------------"
+    latex_summarise
+    tlmgr update --all
+    echo "--------------------"
 }
 
+function pdf_summarise(){
+    conda_activate_for_scripts bookmark
+
+    bkmk-pdf-summarise --target "$PDF_LIBRARY" --output "$PDF_SUMMARY" -r
+}
+
+function latex_summarise(){
+    tlmgr info --only-installed > "$HOME/.doom.d/setup_files/latex/installed_packages"
+}
+
+alias dropwatch="dropbox_watcher"
 
 export -f conda_maintenance
 export -f cpu_check

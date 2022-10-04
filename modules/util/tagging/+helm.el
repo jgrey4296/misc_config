@@ -74,9 +74,7 @@
  (let ((candidates (helm-marked-candidates)))
     (with-helm-current-buffer
       ;;Substring -2 to chop off separating marks
-      (insert (mapconcat (lambda (x) (concat (plist-get x :url)
-                                             " : \n"
-                                             (plist-get x :tags)))
+      (insert (mapconcat (lambda (x) (plist-get x :url))
                          candidates "\n\n")))))
 (defun +jg-tag-insert-links (x)
   "Helm action to insert selected candidates formatted as org links"

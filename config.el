@@ -85,6 +85,7 @@
               display-line-numbers-type t
               tab-always-indent t
               indent-tabs-mode nil
+              LaTeX-enable-toolbar nil
               whitespace-style '(face tabs spaces trailing lines space-before-tab newline indentation empty space-after-tab space-mark tab-mark newline-mark)
               )
 ;;-- end defaults

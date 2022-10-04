@@ -2,17 +2,30 @@
 
 (message "Setting up Completion bindings: %s" (current-time-string))
 
+;;-- remap bookmarks
 (map! :after (counsel jg-leader-bindings-loaded)
       [remap bookmark-jump] #'+jg-completion-counsel-bookmark
       )
+;;-- end remap bookmarks
+
+;;-- ivy
+(after! (hydra ivy)
+  (defhydra+ hydra-ivy ()
+    ("i" (evil-insert-state) :exit t)
+    )
+  )
+
 
 (map! :map ivy-minibuffer-map
       :after ivy
       [remap doom/delete-backward-word] #'ivy-backward-kill-word
-      :in "TAB"                         #'ivy-alt-done
+      :ni "TAB"                         #'ivy-alt-done
       :i "<backtab>"                    #'ivy-dispatching-call
       :n  ","                           #'+ivy/woccur
       :n  "."                           #'hydra-ivy/body
+
+      :n "o" #'hydra-ivy/body
+      :n "a" #'ivy-dispatching-done
 
       "C-c RET"                         #'+ivy/woccur
       "C-o"                             #'ivy-dispatching-done
@@ -26,6 +39,13 @@
       :desc "Results as Buffer"        :n "b" #'+ivy/woccur
       )
 
+(map! :map ivy-minibuffer-map
+      :after (ivy jg-leader-bindings-loaded)
+      "C-SPC" #'ivy-call-and-recenter  ; preview file
+      "C-l"   #'ivy-alt-done
+      "C-v"   #'yank
+      )
+
 (map! :map swiper-map
       :after swiper
       :localleader
@@ -37,6 +57,15 @@
       :desc "Do Ops" "g" jg-binding-operator-map
       )
 
+(map! :map counsel-ag-map
+      :after (counsel jg-leader-bindings-loaded)
+      "C-SPC"    #'ivy-call-and-recenter ; preview
+      "C-l"      #'ivy-done
+      [C-return] #'+ivy/git-grep-other-window-action
+      )
+;;-- end ivy
+
+;;-- company
 (map! :map company-active-map
       :after (company jg-leader-bindings-loaded)
       ;; :i "C-@"    (cmds! (not (minibufferp)) #'company-complete-common)
@@ -71,43 +100,25 @@
       [escape]  #'company-search-abort
       )
 
-(map! :map ivy-minibuffer-map
-      :after (ivy jg-leader-bindings-loaded)
-      "C-SPC" #'ivy-call-and-recenter  ; preview file
-      "C-l"   #'ivy-alt-done
-      "C-v"   #'yank
-      )
+;;-- end company
 
-(map! :map counsel-ag-map
-      :after (counsel jg-leader-bindings-loaded)
-      "C-SPC"    #'ivy-call-and-recenter ; preview
-      "C-l"      #'ivy-done
-      [C-return] #'+ivy/git-grep-other-window-action
-      )
+;;-- helm
 
+;; Movement
 (map! :map helm-map
       :after helm
+      :desc "quit" :n "|" (cmd! (helm-exit-and-execute-action nil))
+
+      :ni "C-u"             #'helm-delete-minibuffer-contents
+      :i  "C-s"             #'helm-minibuffer-history
+      "C-SPC"               #'helm-toggle-visible-mark
+
       [remap next-line]     #'helm-next-line
       [remap previous-line] #'helm-previous-line
       [left]                #'left-char
       [right]               #'right-char
-      "C-S-f"               #'helm-previous-page
-      "C-S-n"               #'helm-next-source
-      "C-S-p"               #'helm-previous-source
-      "C-j"                 #'helm-next-line
-      "C-k"                 #'helm-previous-line
-      "C-S-j"               #'helm-next-source
-      "C-S-k"               #'helm-previous-source
-      "C-u"                 #'helm-delete-minibuffer-contents
-      "C-s"                 #'helm-minibuffer-history
-      ;; Swap TAB and C-z
-      :ni "TAB"             #'helm-select-action
-      "<tab>"               #'helm-select-action
-      "TAB"                 #'helm-select-action
-      [tab]                 #'helm-select-action
-      "C-z"                 #'helm-execute-persistent-action
-      "C-SPC"               #'helm-toggle-visible-mark
-      "C-@"                 #'helm-toggle-visible-mark
+      :i  "C-j"             #'helm-next-line
+      :i  "C-k"             #'helm-previous-line
 
       :n "j"                #'helm-next-line
       :n "k"                #'helm-previous-line
@@ -116,6 +127,41 @@
       :n ";"                #'helm-toggle-visible-mark
       :n "a"                #'helm-mark-all
       :n "u"                #'helm-unmark-all
+      )
+
+;; Actions
+(map! :map helm-map
+      :after helm
+
+      :ni [tab] #'helm-select-action
+      "C-z"     #'helm-execute-persistent-action
+      :n "s"    #'helm-select-action
+      :n "1" (cmd! (helm-select-nth-action 1))
+      :n "2" (cmd! (helm-select-nth-action 2))
+      :n "3" (cmd! (helm-select-nth-action 3))
+      :n "4" (cmd! (helm-select-nth-action 4))
+      :n "5" (cmd! (helm-select-nth-action 5))
+      :n "6" (cmd! (helm-select-nth-action 6))
+      :n "7" (cmd! (helm-select-nth-action 7))
+      :n "8" (cmd! (helm-select-nth-action 8))
+      :n "9" (cmd! (helm-select-nth-action 9))
+      )
+
+;; localleader
+(map! :map helm-map
+      :after helm
+      :localleader
+      :desc "Toggle Full Frame" "f" #'helm-toggle-full-frame
+      )
+
+;; Unbinding
+(map! :map helm-map
+      :after helm
+      "C-S-f" nil
+      "C-S-n" nil
+      "C-S-p" nil
+      "C-S-j" nil
+      "C-S-k" nil
 
       "C-x 5" nil
       "C-x 6" nil
@@ -123,34 +169,54 @@
       "C-x 8" nil
       "C-x 9" nil
       "C-x 0" nil
-      )
 
-(map! :map helm-map
-      :after helm
-      :localleader
-      :desc "Toggle Full Frame" "f" #'helm-toggle-full-frame
+      "<f1>"  nil
+      "<f2>"  nil
+      "<f3>"  nil
+      "<f4>"  nil
+      "<f5>"  nil
+      "<f6>"  nil
+      "<f7>"  nil
+      "<f8>"  nil
+      "<f9>"  nil
+      "<f10>" nil
+      "<f11>" nil
+      "<f12>" nil
+
       )
 
 (after! helm
   (evil-make-intercept-map helm-map)
 )
 
+;;-- end helm
+
+;;-- snippets
 (map! :map snippet-mode-map
       :after yasnippet
       :localleader
       "1" (cmd! (+jg-misc-browse-url "https://joaotavora.github.io/yasnippet/snippet-development.html"))
       )
 
+;;-- end snippets
+
+;;-- lisp
 (map! :map emacs-lisp-mode-map
       :localleader
       "i f" #'+jg-completion-counsel-features
       )
 
+;;-- end lisp
+
+;;-- insert state
 (map! :map jg-binding-insert-state-map
       :after jg-evil-bindings
       "TAB" #'+jg-completion-complete-or-snippet
       )
 
+;;-- end insert state
+
+;;-- leader helms
 (map! :after jg-leader-bindings-loaded
       :leader
       :desc "SCRATCH"                      "6" (cmd! (+jg-completion-ivy-open-as-popup "*scratch*"))
@@ -162,3 +228,4 @@
       :desc "Workspace Counsel"     "W RET" #'+jg-completion-counsel-workspace
 
       )
+;;-- end leader helms

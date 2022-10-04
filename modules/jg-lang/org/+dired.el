@@ -59,7 +59,7 @@
   " Remove Surplus headings, sort, remove duplicate tweets,
 remove empty threads "
   (interactive)
-  (let ((files (dired-get-marked-files))
+  (let ((files (-filter #'(lambda (x) (f-ext? x "org")) (dired-get-marked-files)))
         failures)
     (cl-loop for file in files
           do

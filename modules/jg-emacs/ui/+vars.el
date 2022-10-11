@@ -13,5 +13,6 @@
               undo-tree-auto-save-history      t
               undo-tree-enable-undo-in-region  t
               jg-ui-default-face-gen-palette-dir "/Volumes/documents/github/writing/resources/palettes/"
-              display-line-numbers t
+              display-line-numbers             t
+              display-line-numbers-major-tick  20
               )

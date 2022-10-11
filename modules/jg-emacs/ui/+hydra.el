@@ -27,8 +27,7 @@ _n_ Line Numbers           %(+jghdoc display-line-numbers)
 _R_ Ruler                  %(+jghdoc ruler-mode)
 _s_ Prettify Symbols Mode  %(+jghdoc prettify-symbols-mode)
 _w_ Whitespace             %(+jghdoc whitespace-mode)
-_G_ Writing                %(+jghdoc (or flyspell-mode writegood-mode))
-*                       ^^ *"
+_G_ Writing                %(+jghdoc (or flyspell-mode writegood-mode))"
 
 "Wrapping                |
 -------------------------
@@ -48,6 +47,15 @@ _M_  Minimap             *
 _o_  Org-links           %(+jghdoc org-link-descriptive)
 _T_  Neotree             *
 _v_  Evil Visual Marks   %(+jghdoc evil-visual-mark-mode)
+*                     ^^ *"
+"Spare                  |
+------------------------
+*                     ^^ *
+*                     ^^ *
+*                     ^^ *
+*                     ^^ *
+*                     ^^ *
+*                     ^^ *
 *                     ^^ *"
 )))
 

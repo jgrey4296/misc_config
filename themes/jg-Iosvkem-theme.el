@@ -115,11 +115,11 @@ determine the exact padding."
    (highlight      iopink)
    (vertical-bar   base2)
    (selection      aerugo22)
-   (region         bg-alt)
+   (region         base2)
 
    (builtin        magenta)
 
-   (comments       (if jg-iosvkem-brighter-comments base5 base4))
+   (comments       (if jg-iosvkem-brighter-comments dark-cyan base6))
    (doc-comments   (doom-lighten (if jg-iosvkem-brighter-comments dark-cyan base6) 0.25))
 
    (constants      green)
@@ -172,16 +172,18 @@ determine the exact padding."
    ((font-lock-comment-face &override) :background (if jg-iosvkem-comment-bg (doom-lighten bg 0.05)) :slant 'italic)
    ((font-lock-doc-face &override) :slant 'normal)
    ((font-lock-function-name-face &override) :weight 'bold)
+
    ((line-number &override) :foreground base4)
    ((line-number-current-line &override) :foreground iocyan :background bg)
-   ((line-number-major-tick &override) :background red)
+   ((line-number-major-tick &override) :background base1)
+
    ((tooltip &override) :background bg)
    (lazy-highlight :background iocyan :foreground bg :weight 'bold)
 
    ;; hl-line
-   ((hl-line &override) :background base2)
-   ((jg-normal-line &override) :background base2)
-   ((jg-insert-line &override) :background aerugo1 :foreground aerugo21)
+   ((hl-line &override) :background base2 :extend t)
+   ((jg-normal-line &override) :background base2 :extend t)
+   ((jg-insert-line &override) :background aerugo1 :foreground aerugo21 :extend t)
 
    ;; highlight-numbers
    (highlight-numbers-number :foreground numbers)
@@ -249,6 +251,8 @@ determine the exact padding."
    (mode-line :background modeline-bg :foreground modeline-fg :box (if -modeline-pad `(:line-width ,-modeline-pad :color ,modeline-bg)))
    (mode-line-emphasis :foreground (if -modeline-bright base8 highlight))
    (mode-line-inactive :background modeline-bg-inactive :foreground modeline-fg-alt :box (if -modeline-pad `(:line-width ,-modeline-pad :color ,modeline-bg-inactive)))
+
+   ((diredfl-flag-mark-line &override) :background aerugo2)
 
    ;; Base theme variable overrides-
    ;;()

@@ -38,7 +38,7 @@
 
 ;;-- doom settings
 (setq +doom-quit-messages nil
-      doom-theme 'doom-Iosvkem)
+      doom-theme 'jg-Iosvkem)
 ;; Override doom's whitespace mode settings:
 (fset 'doom-highlight-non-default-indentation-h #'(lambda () nil))
 ;;-- end doom settings

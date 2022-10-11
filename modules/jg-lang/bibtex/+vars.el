@@ -113,7 +113,7 @@
 ;;-- strings
 (setq jg-bibtex-completion-display-formats
       '(
-        (t . ("${author:20} || ${title:*} || ${year:4}" 34))
+        (t . ("${author:20} || ${title:*} || ${year:4}" 40))
         )
       )
 (setq jg-bibtex-pdf-loc-regexp               "file[[:digit:]]*\s*=\s*{\\(.+mega\\)/\\(.+pdflibrary\\)?"

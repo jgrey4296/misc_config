@@ -8,6 +8,9 @@ BASH_ENV=/Volumes/documents/github/emacs_files/setup_files/cron/conda_bashrc
 # Speak the time every 2 hours
 0 */2 * * * conda activate bookmark; bkmk-bot-time
 
+# Update pdf summaries
+45 */3 * * * pdf_summarise
+
 # Regularly Tweet an entry from my bibtex
 7,42 */1 * * * conda activate bookmark; bkmk-bot-bibtex
 
@@ -17,32 +20,32 @@ BASH_ENV=/Volumes/documents/github/emacs_files/setup_files/cron/conda_bashrc
 # Update mail every 6 hours
 0 */6 * * * /usr/local/bin/mbsync -a
 
-# Regularly run tag grep
+# Regularly run tag grep - PAUSED
 # 0 */1 * * * conda activate bookmark; bkmk-tag-grep -l /Volumes/documents/twitterthreads/ -t ~/github/writing/resources/cron_reports/totals.tags -o ~/github/writing/resources/cron_reports/grep_tags.index
 
 # Regularly copy over pdfs and epubs, and stub them
-0 */12 * * * dropbox_watcher
+0 */12 * * * dropbox_watcher >/dev/null
 
 ### WEEKLY:
-## MON
+## MON - maintenance
 # Run updates at 3am on mondays
 0 3 * * mon run_maintenance
 
+# backup cron definitions at 4am on mondays
+0 4 * * mon crontab -l > ~/.doom.d/setup_files/cron/crontab.backup
+
+## TUES - bookmarks and pdfs
+# at 2am on tuesdays, update bookmarks
+0 2 * * tue conda activate bookmark; bkmk-sql -n -t /Volumes/documents/github/writing/resources/bookmarks/total.bookmarks
+
+## WED - git and brew
 # Backup git repo urls
 0 3 * * wed git_url_backup
 # Backup list of installed brew packages
 30 3 * * wed brew list > ~/.doom.d/setup_files/brew/installed
 
-# backup cron definitions at 4am on mondays
-0 4 * * mon crontab -l > ~/.doom.d/setup_files/cron/crontab.backup
 
-## TUES
-# at 4.30am on tuesdays, find any corrupted pdfs
-30 4 * * tue find /Volumes/documents/MEGA/AutoSync/pdflibrary -name "*.pdf" -print0 | xargs -0 -I {} echo "ebook-meta {} 2>&1 1>/dev/null | awk -v fname=\"{}\" '/error/ { print fname, \":\",\$0}'" | bash > /Volumes/documents/github/writing/resources/cron_reports/pdf_verification
-
-# at 2am on tuesdays, update bookmars
-0 2 * * tue conda activate bookmark; bkmk-sql -n -t /Volumes/documents/github/writing/resources/bookmarks/total.bookmarks
-## THUR
+## THU - bibtexR
 # 4am : clean bibtex
 0 4 * * thu find ~/github/writing/resources/bibliography -name "*.bib" -print0 | xargs -0 -I {} echo "conda activate bookmark; bkmk-bib-clean -t {} -o {} " | bash
 # 5am : clean tags
@@ -54,8 +57,15 @@ BASH_ENV=/Volumes/documents/github/emacs_files/setup_files/cron/conda_bashrc
 # 8am : update tag timelines
 0 8 * * thu conda activate bookmark; bkmk-bib-timeline --library ~/github/writing/resources/bibliography --output ~/github/writing/resources/tag_timelines
 
-## FRI
-# 5am : update tag index
+## FRI - twitter
+# 5am : update twitter tag index
 0 5 * * fri conda activate bookmark; bkmk-tag-index --target /volumes/documents/twitterthreads --output ~/github/writing/resources/cron_reports/tw_tag.index
-# 6am : update account index
+# 6am : update twitter account index
 0 6 * * fri conda activate bookmark; bkmk-twit-index --target /volumes/documents/twitterthreads --output ~/github/writing/resources/cron_reports/tw_acct.index
+
+## SAT - pdf summaries
+*/20 * * * sat pdf_summarise
+
+## SUN - update bib totals
+25 1 * * sun conda activate bookmark; bkmk-bib-compile --all --target ~/github/writing/resources/bibliography --output /volumes/documents/in_progress_pdfs/total_bib
+0 6 * * sun conda activate bookmark; bkmk-pdf-validity --target ~/mega/pdflibrary/ --output ~/github/writing/resources/cron_reports/file_verification

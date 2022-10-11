@@ -1,4 +1,4 @@
-;;; instal-faces.el -*- lexical-binding: t; -*-
+;;; instal-faces.el -*- lexical-binding: t; no-byte-compile: t; -*-
 ;;
 ;; Copyright (C) 2021 John Grey
 ;;
@@ -19,27 +19,13 @@
 ;;
 ;;; Code:
 
-(defface instal-face-0
-  '((t :foreground "#292831"))
-  "Generated 0 Face"
-)
-
-(defface instal-face-1
-  '((t :foreground "#333f58"))
-  "Generated 1 Face"
-)
-
-(defface instal-face-2
-  '((t :foreground "#4a7a96"))
-  "Generated 2 Face"
-)
-
-(defface instal-face-3
-  '((t :foreground "#ee8695"))
-  "Generated 3 Face"
-)
-
-
+(defface instal-keywords  '((t :foreground "#f2d3ab")) "")
+(defface instal-vars      '((t :foreground "#c2d368")) "")
+(defface instal-operators '((t :foreground "#c69fa5")) "")
+(defface instal-fluents   '((t :foreground "#8b6d9c")) "")
+(defface instal-fluents2  '((t :foreground "#b9a7c3")) "")
+(defface instal-events    '((t :foreground "#494d7e")) "")
+(defface instal-events2   '((t :foreground "#9194b1")) "")
 
 (provide 'instal-faces)
 ;;; instal-faces.el ends here

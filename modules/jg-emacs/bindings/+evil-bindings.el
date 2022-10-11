@@ -208,8 +208,8 @@
       :desc "Search Word Forward"   "*"       #'evil-ex-search-word-forward
       :desc "backward-WORD-begin"   "B"       #'evil-backward-WORD-begin
       :desc "backward-word-begin"   "b"       #'evil-backward-word-begin
-      :desc "forward-WORD-begin"    "w"       #'evil-forward-WORD-begin
-      :desc "forward-word-begin"    "W"       #'evil-forward-word-begin
+      :desc "forward-WORD-begin"    "W"       #'evil-forward-WORD-begin
+      :desc "forward-word-begin"    "w"       #'evil-forward-word-begin
       :desc "forward-WORD-end"      "E"       #'evil-forward-WORD-end
       :desc "forward-word-end"      "e"       #'evil-forward-word-end
       ;; Para
@@ -449,12 +449,14 @@
       :desc "Last Change"           ";" #'goto-last-change
       :desc "Jump to Char"          "." #'avy-goto-char
       :desc "Line"                  "l" #'evil-avy-goto-line
-      :desc "Avy Pop Mark"          "m" #'avy-pop-mark
+      :desc "Middle of Line"        "M" #'evil-middle-of-visual-line
+
+      :desc "Jump to mark"          "m" #'evil-show-marks
       :desc "Pop Mark"              "b" #'avy-pop-mark
       :desc "Push Mark"             "B" (cmd! (avy-push-mark))
       :desc "Goto First Line"       "f" #'evil-goto-first-line
       :desc "Goto Last Line"        "F" #'evil-goto-line
-      :desc "Middle of Line"        "m" #'evil-middle-of-visual-line
+      :desc "Search buffer"         "s" #'swiper
       )
 (map! :map jg-binding-jump-map
       :desc "Type definition"       "t" #'+lookup/type-definition

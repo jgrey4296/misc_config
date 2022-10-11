@@ -101,13 +101,15 @@
       (:prefix "g"
       :desc "Docs: Git Manual"      "1" (cmd! (+jg-misc-browse-url jg-misc-github-url))
       )
-      (:prefix "j"
-       :desc "Docs: Learn X in Y"   "1" (cmd! (+jg-misc-browse-url jg-binding-x-in-y-url))
-       :desc "Docs: Palettes"       "2" (cmd! (+jg-misc-browse-url jg-misc-palette-list-url))
-       :desc "Docs: Over API"       "3" (cmd! (+jg-misc-browse-url jg-misc-overapi-url))
-       :desc "Browse URL"           "u" #'+jg-misc-browse-url
-       )
       (:prefix "t"
        :desc "Semantic" "S" #'semantic-mode
        )
+      )
+
+(map! :map jg-binding-jump-map
+      :after jg-leader-bindings-loaded
+      :desc "Docs: Learn X in Y"   "1" (cmd! (+jg-misc-browse-url jg-misc-x-in-y-url))
+      :desc "Docs: Palettes"       "2" (cmd! (+jg-misc-browse-url jg-misc-palette-list-url))
+      :desc "Docs: Over API"       "3" (cmd! (+jg-misc-browse-url jg-misc-overapi-url))
+      :desc "Browse URL"           "u" #'+jg-misc-browse-url
       )

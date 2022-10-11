@@ -1,0 +1,35 @@
+# -*- mode: snippet -*-
+# name: plotly.sankey
+# uuid: plotly.sankey
+# key:  plotly.sankey
+# group :
+# --
+##-- imports
+import plotly.graph_objects as go
+##-- end imports
+
+def make_sankey(labels:list[str], sources:list[int], targets:list[int], vals:list[int]):
+    nodes = dict(
+        pad = 15,
+        thickness = 15,
+        line = dict(color="black", width=0.5),
+        label = labels,
+        color = "blue"
+        )
+
+    links = dict(
+        source = sources,
+        target = targets,
+        value  = vals,
+        # label  = ["1t3", "1t4", "2t4", "2t3", "3t4"],
+        # color  = ["blue", "green" ,"red", "purple", "grey"],
+        )
+
+
+    fig = go.Figure(data=[go.Sankey(valueformat = ".0f",
+                                    valuesuffix = "%",
+                                    node = nodes,
+                                    link=links)])
+
+    fig.update_layout(title_text=TITLE, font_size=10)
+    fig.show()

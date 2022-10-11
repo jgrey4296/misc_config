@@ -419,10 +419,9 @@
 ;;-- <leader> s --- search
 (map! :leader
       :prefix ("s" . "search")
-      :desc "Search Clear" "c"                 #'evil-ex-nohighlight
+      :desc "Search Clear"                 "c" #'evil-ex-nohighlight
       :desc "Dictionary"                   "t" #'+lookup/dictionary-definition
       :desc "Jump list"                    "j" #'evil-show-jumps
-      :desc "Jump to bookmark"             "b" #'bookmark-jump
       :desc "Jump to link"                 "L" #'ffap-menu
       :desc "Jump to mark"                 "m" #'evil-show-marks
       :desc "Jump to symbol"               "i" #'imenu

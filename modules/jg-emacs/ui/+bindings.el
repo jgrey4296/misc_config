@@ -2,11 +2,8 @@
 
 (map! :after jg-leader-bindings-loaded
       :leader
-      :desc "Insert Color"                 "i c"   #'helm-colors
       :desc "Open project scratch buffer"  "p x"   #'+jg-ui-open-scratch-buffer
-      :desc "Toggle Dedicated"             "w DEL" #'+jg-ui-toggle-window-dedication
       (:prefix "b"
-       :desc "Toggle narrowing"            "-"   #'+jg-ui-toggle-narrow-buffer
        :desc "Undo-Tree"                   "u"     #'+jg-ui-undo-tree
        :desc "Clear Popup Rules"           "P"     #'+jg-ui-ivy-reset-popup-rules
        )
@@ -14,6 +11,11 @@
        :desc "Toggle Layout"               "|"     #'+jg-ui-window-layout-toggle
        :desc "Rotate Windows"              "\\"    #'+jg-ui-window-rotate-forward
        )
+      )
+
+(map! :map jg-binding-helm-map
+      :after jg-evil-bindings
+      :desc "Insert Color"                 "c"     #'helm-colors
       )
 
 (map! :map jg-binding-vision-map

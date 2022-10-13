@@ -45,6 +45,7 @@
 
 ;;-- hooks
 (add-hook! 'doom-first-file-hook #'+jg-ui-popup-activate-rules)
+(add-hook! 'doom-init-ui-hook  #'rainbow-delimiters-mode)
 
 (after! helpful
   (add-hook 'helpful-mode-hook

@@ -60,10 +60,15 @@
 (map! :map reftex-mode-map
       "C-c [" nil)
 
+(map! :map jg-binding-helm-map
+      :after jg-evil-bindings
+      :desc "Bibtex Helm"               "b" #'+jg-bibtex-helm-bibtex
+      )
+
 (map! :after jg-leader-bindings-loaded
       :leader
-      :desc "Bibtex Helm"               "o h b" #'+jg-bibtex-helm-bibtex
-      :desc "Load Random Bibtex entry"  "o !"   #'+jg-bibtex-load-random)
+      :desc "Load Random Bibtex entry"  "o !"   #'+jg-bibtex-load-random
+      )
 
 (map! :after dired
       :map dired-mode-map

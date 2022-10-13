@@ -9,11 +9,11 @@
 ;;-- end remap bookmarks
 
 ;;-- ivy
-(after! (hydra ivy)
-  (defhydra+ hydra-ivy ()
-    ("i" (evil-insert-state) :exit t)
-    )
-  )
+;; (after! (hydra ivy)
+;;   (defhydra+ hydra-ivy ()
+;;     ("i" (evil-insert-state) :exit t)
+;;     )
+;;   )
 
 
 (map! :map ivy-minibuffer-map
@@ -44,6 +44,7 @@
       "C-SPC" #'ivy-call-and-recenter  ; preview file
       "C-l"   #'ivy-alt-done
       "C-v"   #'yank
+      :n "|"  #'abort-recursive-edit
       )
 
 (map! :map swiper-map
@@ -136,15 +137,15 @@
       :ni [tab] #'helm-select-action
       "C-z"     #'helm-execute-persistent-action
       :n "s"    #'helm-select-action
-      :n "1" (cmd! (helm-select-nth-action 1))
-      :n "2" (cmd! (helm-select-nth-action 2))
-      :n "3" (cmd! (helm-select-nth-action 3))
-      :n "4" (cmd! (helm-select-nth-action 4))
-      :n "5" (cmd! (helm-select-nth-action 5))
-      :n "6" (cmd! (helm-select-nth-action 6))
-      :n "7" (cmd! (helm-select-nth-action 7))
-      :n "8" (cmd! (helm-select-nth-action 8))
-      :n "9" (cmd! (helm-select-nth-action 9))
+      :n "1" (cmd! (helm-select-nth-action 0))
+      :n "2" (cmd! (helm-select-nth-action 1))
+      :n "3" (cmd! (helm-select-nth-action 2))
+      :n "4" (cmd! (helm-select-nth-action 3))
+      :n "5" (cmd! (helm-select-nth-action 4))
+      :n "6" (cmd! (helm-select-nth-action 5))
+      :n "7" (cmd! (helm-select-nth-action 6))
+      :n "8" (cmd! (helm-select-nth-action 7))
+      :n "9" (cmd! (helm-select-nth-action 8))
       )
 
 ;; localleader
@@ -223,9 +224,8 @@
       :desc "Messages"                     "0" (cmd! (+jg-completion-ivy-open-as-popup "*Messages*") (if current-prefix-arg (+jg-text-clear-buffer)))
       :desc "Switch buffer"         ","     #'+jg-completion-switch-buffer
       :desc "Popup Buffer"          "<"     #'+jg-completion-popup-buffer
-      :desc "Have you Played?"      "o h h" #'+jg-completion-rps-have-you-playeds
+      :desc "Have you Played?"      "o 1"   #'+jg-completion-rps-have-you-playeds
       :desc "New snippet"           "y n"   #'+jg-completion-new-snippet
       :desc "Workspace Counsel"     "W RET" #'+jg-completion-counsel-workspace
-
       )
 ;;-- end leader helms

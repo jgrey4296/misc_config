@@ -395,6 +395,7 @@
 
       :desc "Align"              "a" #'align-regexp
       :desc "IEdit"              "e" #'iedit-mode
+      :desc "helms"              "h" jg-binding-helm-map
 
       :desc "Join whitespace"    "J" #'evil-join-whitespace
 
@@ -489,6 +490,15 @@
       :desc "Search Word Forward"  "*"  #'evil-ex-search-unbounded-word-forward
       )
 ;;-- end jump
+
+;;-- helm
+(map! :map jg-binding-helm-map
+      :desc "Minibuffer History"           "m"   #'counsel-minibuffer-history
+      :desc "Shell History"                "s"   #'counsel-shell-history
+      :desc "Helm Processes"               "h"   #'helm-list-emacs-process
+      )
+
+;;-- end helm
 
 ;;-- vision
 (map! :map jg-binding-vision-map

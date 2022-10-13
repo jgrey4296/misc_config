@@ -108,7 +108,11 @@ xidel -s --output-format=xml --xpath "//table/following-sibling::*[//*[@id='prin
 *** [[http://xmlstar.sourceforge.net/][XML Starlet]]
 
 #+begin_src bash
+# query, -I(indenting output), -t(template:) -f(file name) -n(new line) -m(match xpath) //Trait -c(copy xpath) . -n -b(break nesting) file
 xml sel -I -t -f -n -m //Trait -c . -n -b ./facade_messy.xml
+
+# delete a path:
+xml ed -d "//div[@id='toc']" ? > mod-`?`
 #+end_src
 
 *** [[http://saxon.sourceforge.net/][Saxon]]

@@ -32,3 +32,11 @@
   :defer t
   :commands evil-operator-string-inflection
   )
+
+(use-package! helm-wordnet :defer t)
+(use-package! wordnut
+  :defer t
+  :init
+  (add-hook 'wordnut-mode-hook 'outline-minor-mode)
+
+  )

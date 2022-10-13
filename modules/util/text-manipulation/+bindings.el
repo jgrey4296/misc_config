@@ -15,17 +15,19 @@
 
 (map! :after jg-leader-bindings-loaded
       :leader
-      (:prefix "t"
-       :desc "Rainbow Mode"   :n "v r" #'rainbow-mode
-       :desc "Invisible-spec" :n "v I" #'+jg-text-toggle-invisible-spec
-       )
       (:prefix "b"
-       :desc "Yank Buffer Name" "n"  #'+jg-text-yank-buffer-name
-       :desc "Clear Buffer" "DEL"    #'+jg-text-clear-buffer
+       :desc "Yank Buffer Name" "n"   #'+jg-text-yank-buffer-name
+       :desc "Clear Buffer"     "DEL" #'+jg-text-clear-buffer
        )
       (:prefix "i"
-       :desc "Debug" "d"             #'+jg-text-insert-debug
+       :desc "Debug"     "d" #'+jg-text-insert-debug
        )
+      )
+
+(map! :map jg-binding-helm-map
+      :after jg-evil-bindings
+      :desc "Word(net)" "w" #'helm-wordnet-suggest
+      :desc "Word(nut)" "W" #'wordnut-search
       )
 
 (map! :map jg-binding-normal-state-map
@@ -34,12 +36,15 @@
 
       :desc "Title Case"     "c t"   #'+jg-text-title-case-op
       :desc "Rotate"         "c r"   #'rotate-text
+
+      (:prefix "z"
+       :desc "Invisible-spec" "I" #'+jg-text-toggle-invisible-spec
+       )
       )
 
 (map! :map jg-binding-vision-map
       :after jg-leader-bindings-loaded
       "i" #'+jg-text-make-invisible
-      "I" #'+jg-text-toggle-invisible
       )
 
 (map! :map jg-binding-visual-state-map

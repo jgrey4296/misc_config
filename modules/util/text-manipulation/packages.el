@@ -5,3 +5,5 @@
 (package! lorem-ipsum)
 (package! rainbow-mode)
 (package! highlight-parentheses)
+(package! helm-wordnet)
+(package! wordnut)

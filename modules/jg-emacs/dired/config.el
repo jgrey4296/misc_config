@@ -7,6 +7,7 @@
   (load! "+bindings")
 )
 
+
 ;; open -ngF for files with permission errors
 (use-package-hook! dired-x :post-config
   (setq dired-guess-shell-alist-user

@@ -44,5 +44,6 @@
       jg-binding-insert-state-map       nil ;; copied in +evil-bindings
       jg-binding-help-map               nil ;; copied in +help-bindings
       jg-binding-jump-map                    (make-sparse-keymap "JG map for jump commands")
+      jg-binding-helm-map                    (make-sparse-keymap "JG Map for helms")
       )
 ;;-- end maps

@@ -287,6 +287,7 @@
 ;;-- <leader> o --- open
 (map! :leader
       :prefix ("o" . "open")
+      :desc "helms" "h"                            jg-binding-helm-map
       :desc "Command History"              "DEL"  #'counsel-command-history
       :desc "Minibuffer history"           "0"    #'counsel-minibuffer-history
 
@@ -314,11 +315,6 @@
 
       (:prefix ("a" . "org agenda"))
 
-      (:prefix ("h" . "Helms")
-       :desc "Minibuffer History"           "m"   #'counsel-minibuffer-history
-       :desc "Shell History"                "s"   #'counsel-shell-history
-
-      )
       (:prefix ("s" . "Systems"))
       )
 ;;-- end <leader> o --- open
@@ -473,6 +469,8 @@
       ;; camel-case-motion
       )
 ;;-- end <leader> t --- toggle
+
+;; <leader> T -- toggle hydra
 
 ;;-- <leader> W --- Workspaces
 (map! :leader

@@ -7,7 +7,7 @@ DROPBOX_WATCH=( "$HOME/Dropbox/docs" "$HOME/Downloads" )
 DROPBOX_TARGET="/Volumes/documents/in_progress_pdfs/Current/"
 CONDA_MAINTENANCE_TARGET="$HOME/.shell_files/conda_envs/master_list.yaml"
 CPU_MAX="50"
-PDF_LIBRARY="~/mega/pdflibrary/"
+PDF_LIBRARY="~/pdflibrary/"
 PDF_SUMMARY="/Volumes/documents/in_progress_pdfs/pdflib_automations/summary/"
 
 function conda_maintenance(){

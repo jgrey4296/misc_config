@@ -116,8 +116,8 @@
         (t . ("${author:20} || ${title:*} || ${year:4}" 40))
         )
       )
-(setq jg-bibtex-pdf-loc-regexp               "file[[:digit:]]*\s*=\s*{\\(.+mega\\)/\\(.+pdflibrary\\)?"
-      jg-bibtex-pdf-replace-match-string     "~/Mega"
+(setq jg-bibtex-pdf-loc-regexp               "file[[:digit:]]*\s*=\s*{\\(.+\\)/\\(.+pdflibrary\\)?"
+      jg-bibtex-pdf-replace-match-string     "~/"
       jg-bibtex-pdf-replace-library-string   "pdflibrary"
       jg-bibtex-remove-field-newlines-regexp "^="
       jg-bibtex-tweet-pattern                "(%s): %s\nby %s\nTags: %s\nRef: %s\n"
@@ -130,7 +130,7 @@
               jg-bibtex-loc-completions     "~/github/writing/resources/completions/"
               jg-bibtex-loc-export-bib-file "~/github/emacs_files/modules/jg-lang/bibtex/export_template.tex"
               jg-bibtex-loc-temp-dir        "~/.tex/"
-              jg-bibtex-pdf-loc             "~/Mega/pdflibrary"
+              jg-bibtex-pdf-loc             "~/pdflibrary"
  )
 ;;-- end locations
 

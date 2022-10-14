@@ -36,6 +36,7 @@
                                "GTAGS"
                                "__init__.py"
                                "__pycache__"
+                               "Icon\015"
                                ".."
                                "TheVolumeSettingsFolder"
                                (and (*? anychar) ".egg-info")
@@ -49,6 +50,7 @@
                                         "DS_Store"
                                         "ccls-cache"
                                         "class"
+                                        "debris"
                                         "elc"
                                         "git"
                                         "gitignore"

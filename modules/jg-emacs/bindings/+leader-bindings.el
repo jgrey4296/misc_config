@@ -31,11 +31,6 @@
       ;; #'ivy-resume
       ;; #'helm-resume
       ;; 0 6 9 8
-      :desc "Desktop"   "1" (cmd! (find-file "~/Desktop"))
-      :desc "Github"    "2" (cmd! (find-file "~/github"))
-      :desc "Mega"      "3" (cmd! (find-file "~/mega"))
-      :desc "Home"      "4" (cmd! (find-file "~"))
-      :desc "Resources" "5" (cmd! (find-file "~/github/writing/resources"))
       :desc "Agenda"    "7" (cmd! (find-file (car org-agenda-files)))
       )
 
@@ -299,6 +294,7 @@
       :desc "REPL"                         "r"    #'+eval/open-repl-other-window
       :desc "Regexp Builder"               "R"    #'regexp-builder
       :desc "Repo Homepage"                "g"    #'+vc/browse-at-remote-homepage
+      :desc "Github Homepage"              "G"    (cmd! (+jg-misc-browse-url user-url))
       :desc "Find file in project sidebar" "P"    #'+neotree/find-this-file
 
       :desc "Rmail"                        "m"    #'rmail

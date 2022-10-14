@@ -2,7 +2,42 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("instal"
+(("script notes"
+ (filename . "/Volumes/documents/github/writing/orgfiles/script_notes.org")
+ (front-context-string . "#+TITLE: Script ")
+ (rear-context-string)
+ (position . 1))
+("homepage"
+ (filename . "/Volumes/documents/github/jgrey4296.github.io/")
+ (front-context-string . ".jekyll-cache\n  ")
+ (rear-context-string . "02 Nov 28  2020 ")
+ (position . 146))
+("dsls"
+ (filename . "/Volumes/documents/github/writing/orgfiles/listings/DSLs.org")
+ (front-context-string . "* DSLs and Logic")
+ (rear-context-string)
+ (position . 1))
+("taxonomies"
+ (filename . "/Volumes/documents/github/writing/orgfiles/listings/taxonomies.org")
+ (front-context-string . "*  Taxonomies   ")
+ (rear-context-string)
+ (position . 1))
+("definitions"
+ (filename . "/Volumes/documents/github/writing/orgfiles/listings/definitions.org")
+ (front-context-string . "* Overview\nhttps")
+ (rear-context-string . "E: Definitions\n\n")
+ (position . 23))
+("quotes"
+ (filename . "/Volumes/documents/github/writing/orgfiles/listings/quotes.org")
+ (front-context-string . " #+TITLE: Quotes")
+ (rear-context-string)
+ (position . 1))
+("corpora"
+ (filename . "/Volumes/documents/github/corpora/data/")
+ (front-context-string . "archetypes\n  drw")
+ (rear-context-string . "40 Oct  7 00:19 ")
+ (position . 197))
+("instal"
  (filename . "/Volumes/documents/github/MAS/instal-stable/")
  (front-context-string . "dsl\n  drwxr-xr-x")
  (rear-context-string . "72 Jul 24 17:00 ")
@@ -143,7 +178,7 @@
  (rear-context-string . "96 Apr 16 16:08 ")
  (position . 1209))
 ("pdflib"
- (filename . "~/mega/pdflibrary/")
+ (filename . "/volumes/documents/pdflibrary/")
  (front-context-string . "1320\n  drwxr-xr-")
  (rear-context-string . "36 Sep  4  2020 ")
  (position . 145))
@@ -178,7 +213,7 @@
  (rear-context-string . "4K Dec 24 18:28 ")
  (position . 184))
 ("mega"
- (filename . "~/mega/")
+ (filename . "/volumes/documents/mega_library/")
  (front-context-string . "Audio\n  drwxrwxr")
  (rear-context-string . "04 Dec 23 17:49 ")
  (position . 190))

@@ -4,7 +4,8 @@
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "John Grey"
-      user-mail-address "johngrey4296 at gmail.com")
+      user-mail-address "johngrey4296 at gmail.com"
+      user-url "https://jgrey4296.github.io/")
 ;;-- end Me
 
 ;;-- Text Encoding

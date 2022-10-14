@@ -254,6 +254,7 @@ bibtex-BibTeX-entry-alist for completion options "
   (interactive)
   (seq-each '+jg-bibtex-unify-pdf-locations-in-file (dired-get-marked-files))
   )
+
 (defun +jg-bibtex-unify-pdf-locations-in-file (name)
   "Change all pdf locations in bibtex file to relative,
 ensuring they work across machines "

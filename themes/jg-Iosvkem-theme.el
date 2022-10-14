@@ -184,6 +184,7 @@ determine the exact padding."
    ((hl-line &override) :background base2 :extend t)
    ((jg-normal-line &override) :background base2 :extend t)
    ((jg-insert-line &override) :background aerugo1 :foreground aerugo21 :extend t)
+   (helm-selection :distant-foreground bg :background aerugo23 :extend t )
 
    ;; highlight-numbers
    (highlight-numbers-number :foreground numbers)

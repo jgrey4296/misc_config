@@ -6,7 +6,7 @@
               jg-org-preferred-linecount 1500
               jg-org-link-move-base "/Volumes/Overflow/missing_images/"
 
-              jg-org-twitter-loc "~/mega/twitterthreads/"
+              jg-org-twitter-loc "~/twitterthreads/"
               )
 ;;-- end personal
 

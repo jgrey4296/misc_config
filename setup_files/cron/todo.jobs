@@ -19,14 +19,14 @@ find ~/github/writing/resources/bibliography -name "*.bib" |
 #+begin_src bash :results value
 cd ~/github/py_bookmark_organiser ;
 bkmkorg/describers/tag/totals.py -t ~/github/writing/resources/bibliography -t ~/github/writing/resources/bookmarks/main_bookmarks.html
--t ~/mega/twitterthreads -c ~/github/writing/resources/substitutions -o ~/github/writing/resources/cron_reports/totals
+-t ~/twitterthreads -c ~/github/writing/resources/substitutions -o ~/github/writing/resources/cron_reports/totals
 #+end_src
 
 ** DONE gen graphs
 #+begin_src bash :results value
 cd ~/github/py_bookmark_organiser ;
 bkmkorg/describers/tag/graph.py -t ~/github/writing/resources/bibliography
--t ~/github/writing/resources/bookmarks/main_bookmarks.html -t ~/mega/twitterthreads
+-t ~/github/writing/resources/bookmarks/main_bookmarks.html -t ~/twitterthreads
 -o ~/github/writing/resources/cron_reports/tags.edgelist
 #+end_src
 
@@ -40,6 +40,6 @@ bkmkorg/describers/bibtex/timelines.py --library ~/github/writing/resources/bibl
 ** TODO check pdf has associated record
 #+begin_src bash :results value
 cd ~/github/py_bookmark_organiser ;
-bkmkorg/describers/bibtex/file_check.py -t ~/mega/pdflibrary -l ~/github/writing/resources/bibliography
+bkmkorg/describers/bibtex/file_check.py -t ~/pdflibrary -l ~/github/writing/resources/bibliography
 -o ~/github/writing/resources/cron_reports
 #+end_src

@@ -2,7 +2,7 @@
 (package! agentspeak-mode :recipe (:local-repo "~/.doom.d/packages/ai_and_logic/agentspeak-mode"))
 (package! ceptre-mode     :recipe (:local-repo "~/.doom.d/packages/ai_and_logic/ceptre-mode"))
 (package! clips-mode)
-(package! instal-mode     :recipe (:local-repo "~/.doom.d/packages/ai_and_logic/instal-mode"))
+(package! instal-mode     :recipe (:local-repo "~/github/MAS/instal-stable/instal-mode"))
 (package! jacamo-mode     :recipe (:local-repo "~/.doom.d/packages/ai_and_logic/jacamo-mode"))
 (package! netlogo-mode    :recipe (:local-repo "~/.doom.d/packages/ai_and_logic/netlogo-mode"))
 (package! proof-general)

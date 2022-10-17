@@ -1,5 +1,5 @@
 ;;; ob-$1.el --- org-babel functions for $1 evaluation
-
+;;-- header
 ;; Author: `user-full-name` <https://github.com/`(cl-find-if-not #'string-empty-p (list (cdr (doom-call-process "git" "config" "user.github")) user-login-name))`>
 ;; Maintainer: `user-full-name` <`user-mail-address`>
 ;; Created: `(format-time-string "%B %d, %Y")`
@@ -33,6 +33,8 @@
 (require 'ob-comint)
 (require 'ob-eval)
 ;; possibly require modes required for your language
+
+;;-- end header
 
 ;; optionally define a file extension for this language
 (add-to-list 'org-babel-tangle-lang-exts '("$1" . "$2"))

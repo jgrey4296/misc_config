@@ -1,4 +1,4 @@
-# key: nil
+# key: strptime_reminder
 # name: strptime_reminder
 # --
 https://docs.python.org/3/library/datetime.html

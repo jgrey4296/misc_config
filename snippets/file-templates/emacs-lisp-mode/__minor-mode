@@ -1,4 +1,5 @@
 ;;; `(file-name-nondirectory buffer-file-name)` -*- lexical-binding: t; -*-
+;;-- header
 ;;
 ;; Copyright (C) `(format-time-string "%Y")` `user-full-name`
 ;;
@@ -19,6 +20,8 @@
 ;;  $2
 ;;
 ;;; Code:
+
+;;-- end header
 
 (define-minor-mode $1-minor-mode
     " $2 "

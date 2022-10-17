@@ -1,4 +1,5 @@
 ;;; `(file-name-nondirectory buffer-file-name)` -*- lexical-binding: t; -*-
+;;-- header
 ;;
 ;; Copyright (C) `(format-time-string "%Y")` `user-full-name`
 ;;
@@ -20,7 +21,10 @@
 ;;
 ;;; Code:
 
+;;-- end header
+
 (defvar-local $1-mode-map
+
     (make-sparse-keymap))
 
 ;; List of '(regex (groupnum "face")+)

@@ -67,5 +67,6 @@ BASH_ENV=/Volumes/documents/github/emacs_files/setup_files/cron/conda_bashrc
 */20 * * * sat pdf_summarise
 
 ## SUN - update bib totals
-25 1 * * sun conda activate bookmark; bkmk-bib-compile --all --target ~/github/writing/resources/bibliography --output /volumes/documents/in_progress_pdfs/total_bib
-0 6 * * sun conda activate bookmark; bkmk-pdf-validity --target ~/mega/pdflibrary/ --output ~/github/writing/resources/cron_reports/file_verification
+25 1 * * sun conda activate bookmark; bkmk-bib-compile --all --target ~/github/writing/resources/bibliography --output /volumes/documents/in_progress_pdfs/pdflib_automations/total_bib
+0 2 * * sun pdftk /volumes/documents/in_progress_pdfs/pdflib_automations/total_bib/*.pdf cat output /volumes/documents/in_progress_pdfs/pdflib_automations/summary/total.pdf
+0 6 * * sun conda activate bookmark; bkmk-pdf-validity --target ~/pdflibrary/ --output ~/github/writing/resources/cron_reports/file_verification

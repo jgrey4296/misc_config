@@ -4,21 +4,28 @@
 *.class
 *.com
 *.dll
+*.elc
 *.exe
 *.exe
 *.hi
 *.meta
 *.o
 *.so
+build/
 ccsat.*
 dist/
-build/
+
+# Rust:
+target/
+/Cargo.lock
 
 # Python:
+*.egg-info
+*.mypy_cache
 *.pyc
 *__pycache__
+docs/_generated_*
 flycheck_*
-*.egg-info
 
 # OS Generated Files:
 *.egg
@@ -40,6 +47,11 @@ ehthumbs.db
 node_modules
 tmp/
 ~*
+
+# Lisp:
+ac-comphist.dat
+*.yas-compiled-snippets.el
+*.el~
 
 # Big Files
 *.aif
@@ -65,3 +77,4 @@ log.*
 
 # Auctex
 *.auctex-auto
+*.auctex

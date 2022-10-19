@@ -49,3 +49,10 @@
       :leader
       :desc "Open Random Untagged Twitter" "o u" #'+jg-tag-open-random-untagged-twitter
       )
+
+(map! :map rawtag-mode-map
+      :desc "Refile Tag"       :n "r" 'rawtags-refile-tag
+      :desc "Refile Person"    :n "p" 'rawtags-refile-person
+      :desc "Add Substitution" :n "a" 'rawtags-add-substitution
+      :desc "Get Similar"      :n "s" 'rawtags-get-similar
+      )

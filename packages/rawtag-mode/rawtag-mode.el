@@ -1,4 +1,4 @@
-;;; +rawtag-mode.el -*- lexical-binding: t; -*-
+;; +rawtag-mode.el -*- lexical-binding: t; no-byte-compile: t; -*-;
 ;;-- header
 ;;
 ;; Copyright (C) 2022 John Grey
@@ -20,6 +20,8 @@
 ;;
 ;;
 ;;; Code:
+
+(require 'evil)
 
 ;;-- end header
 
@@ -102,18 +104,32 @@ Maybe add a substitution "
   ;; use popup.el's popup-create, popup-set-list popup-draw and popup-delete
   )
 
+(defun rawtags-collect-misspellings ()
+  "group words not recognised by ispell at top of buffer"
+  (interactive)
+
+
+
+  )
+
+(defun rawtags-collect-unsubbed ()
+  "group entries that don't have a substitution at the top of the buffer"
+  (interactive)
+
+  )
+
 ;;-- end functions
 
 ;;-- keymap
 (defvar-local rawtag-mode-map
   (make-sparse-keymap))
 
-(map! :map rawtag-mode-map
-      :desc "Refile Tag"       :n "r" 'rawtags-refile-tag
-      :desc "Refile Person"    :n "p" 'rawtags-refile-person
-      :desc "Add Substitution" :n "a" 'rawtags-add-substitution
-      :desc "Get Similar"      :n "s" 'rawtags-get-similar
-      )
+;; (map! :map rawtag-mode-map
+;;       :desc "Refile Tag"       :n "r" 'rawtags-refile-tag
+;;       :desc "Refile Person"    :n "p" 'rawtags-refile-person
+;;       :desc "Add Substitution" :n "a" 'rawtags-add-substitution
+;;       :desc "Get Similar"      :n "s" 'rawtags-get-similar
+;;       )
 
 (evil-make-intercept-map rawtag-mode-map)
 
@@ -125,7 +141,7 @@ Maybe add a substitution "
   (list
    `(,(rx (: line-start "## " (* any) line-end))
      (0 "font-lock-comment-face"))
-   `(,(rx (: line-start (group (+ graph)) (+ blank) ":" blank (+ digit) blank ":" blank (group (+ graph)) line-end))
+   `(,(rx (: line-start (group (+ graph)) (+ blank) ":" blank (+ digit) (+ blank) ":" (+ blank) (group (+ graph)) line-end))
      (1 "hi-red-b"))
    `(,(rx (: line-start (group (+ graph))))
      (1 "diff-header"))
@@ -158,9 +174,10 @@ Maybe add a substitution "
   (yas-minor-mode)
 
   )
-(add-to-list 'auto-mode-alist '("\.rawtags" . rawtag-mode))
+(add-to-list 'auto-mode-alist '("\.rawtags$" . rawtag-mode))
+(add-to-list 'auto-mode-alist '("\.sub\\(_author\\)?$" . rawtag-mode))
 
 ;;-- end mode-definition
 
-(provide '+rawtag-mode)
+(provide 'rawtag-mode)
 ;;; +rawtag-mode.el ends here

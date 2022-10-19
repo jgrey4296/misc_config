@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: local_package
+# uuid: local_package
+# key:  local_package
+# group :
+# --
+(package! $1 :recipe '(:local-repo "$2"))$0

@@ -1,11 +1,11 @@
 ;;; emacs/jg-vc/config.el -*- lexical-binding: t; -*-
 
-(after! evil
+(after! jg-bindings-total
   (load! "+bindings")
   )
 
 (use-package smerge-mode
-  :after (evil jg-leader-bindings-loaded)
+  :after jg-bindings-total
   :init
   (map! :leader
         :desc "Merge Mode"  "g m" #'evil-conflict-merge-state

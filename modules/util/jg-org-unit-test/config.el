@@ -7,7 +7,7 @@
 (load! "+test-execution")
 (load! "+test-reporting")
 
-(after! (evil org)
+(after! (jg-bindings-total org)
   (defvar jg-org-unit-test-map (make-sparse-keymap))
   (define-minor-mode jg-org-unit-test-minor-mode
     "  "

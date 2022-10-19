@@ -26,24 +26,23 @@
 
 ;;-- maps
 (setq
-      jg-binding-backward-operator-motion-map (make-sparse-keymap "backward motion")
-      jg-binding-forward-operator-motion-map  (make-sparse-keymap "forward motion")
-
-      jg-binding-backward-general-motion-map  (make-sparse-keymap "backward motion")
-      jg-binding-forward-general-motion-map   (make-sparse-keymap "forward motion")
-
-      jg-binding-inner-text-objects-map       (make-sparse-keymap "JG map for selecting text objects")
-      jg-binding-outer-text-objects-map       (make-sparse-keymap "JG map replacing evil-outer-text-objects-map")
-
+      jg-binding-insert-state-map            nil ;; copied in +evil-bindings
       jg-binding-motion-state-map             (make-sparse-keymap "JG map replacing evil-motion-state-map")
       jg-binding-normal-state-map             (make-sparse-keymap "JG map replacing evil-normal-state-map")
-      jg-binding-operator-map                 (make-sparse-keymap "JG map of evil operators")
       jg-binding-operator-state-map           (make-sparse-keymap "JG map replacing evil-operator-state-map")
-      jg-binding-vision-map                   (make-sparse-keymap "JG vision manipulation")
       jg-binding-visual-state-map             (make-sparse-keymap "JG map replacing evil-visual-state-map")
-      jg-binding-insert-state-map       nil ;; copied in +evil-bindings
-      jg-binding-help-map               nil ;; copied in +help-bindings
-      jg-binding-jump-map                    (make-sparse-keymap "JG map for jump commands")
-      jg-binding-helm-map                    (make-sparse-keymap "JG Map for helms")
       )
+
+;; Submaps
+(define-prefix-command 'jg-binding-backward-operator-motion-map nil "jgb-backward-op")
+(define-prefix-command 'jg-binding-forward-operator-motion-map  nil "jgb-forward-op")
+(define-prefix-command 'jg-binding-backward-general-motion-map  nil "jgb-backward-motion")
+(define-prefix-command 'jg-binding-forward-general-motion-map   nil "jgb-forward-motion")
+(define-prefix-command 'jg-binding-inner-text-objects-map       nil "jgb-inner")
+(define-prefix-command 'jg-binding-outer-text-objects-map       nil "jgb-outer")
+(define-prefix-command 'jg-binding-help-map                     nil "jgb-help")
+(define-prefix-command 'jg-binding-jump-map                     nil "jgb-jump")
+(define-prefix-command 'jg-binding-helm-map                     nil "jgb-helm")
+(define-prefix-command 'jg-binding-operator-map                 nil "jgb-ops")
+(define-prefix-command 'jg-binding-vision-map                   nil "jgb-vision")
 ;;-- end maps

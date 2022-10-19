@@ -11,7 +11,10 @@
 (defvar char-insert-math-map        (make-sparse-keymap))
 (defvar char-insert-subscript-map   (make-sparse-keymap))
 (defvar char-insert-superscript-map (make-sparse-keymap))
-(defvar char-insert-tilde-map       (make-sparse-keymap))
+;; (defvar char-insert-tilde-map       (make-sparse-keymap))
+(define-prefix-command 'char-insert-tilde-map)
+
+
 ;;-- end keymap creation
 
 ;;-- acute
@@ -211,17 +214,15 @@
       :desc "Math"         "M"               char-insert-math-map
       :desc "Subscript"    "/"               char-insert-subscript-map
       :desc "Superscript"  "\\"              char-insert-superscript-map
-      :desc "Tilde"        "~"               char-insert-tilde-map
+      :desc "Tilde"        "~"               'char-insert-tilde-map
       :desc "Counsel Insert" "RET" #'insert-char
       )
 
 (map! :map evil-insert-state-map
-      :after jg-evil-bindings
       :desc "Insert Chars" "C-x 8" char-insert-cx8-map
       )
 
 (map! :map jg-binding-normal-state-map
-      :after jg-evil-bindings
       :desc "Char" "I c" char-insert-cx8-map
       )
 

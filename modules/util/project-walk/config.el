@@ -1,7 +1,7 @@
 ;;; editor/project-walk/config.el -*- lexical-binding: t; -*-
 
 (load! "+vars")
-(after! evil
+(after! jg-bindings-total
   (load! "+bindings")
 )
 

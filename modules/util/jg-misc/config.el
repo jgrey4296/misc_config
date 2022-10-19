@@ -5,7 +5,7 @@
 (load! "+advice")
 (load! "+registers")
 
-(after! evil
+(after! jg-bindings-total
   (load! "+bindings")
 )
 

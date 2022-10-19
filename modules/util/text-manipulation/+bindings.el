@@ -9,12 +9,10 @@
 
 ;; Text bindings
 (map! :map help-map
-      :after jg-help-bindings
       :desc "Regex Reminder" "R" #'+jg-text-regex-reminder
       )
 
-(map! :after jg-leader-bindings-loaded
-      :leader
+(map! :leader
       (:prefix "b"
        :desc "Yank Buffer Name" "n"   #'+jg-text-yank-buffer-name
        :desc "Clear Buffer"     "DEL" #'+jg-text-clear-buffer
@@ -25,13 +23,11 @@
       )
 
 (map! :map jg-binding-helm-map
-      :after jg-evil-bindings
       :desc "Word(net)" "w" #'helm-wordnet-suggest
       :desc "Word(nut)" "W" #'wordnut-search
       )
 
 (map! :map jg-binding-normal-state-map
-      :after jg-evil-bindings
       :desc "Debug"          "I d"   #'+jg-text-insert-debug
 
       :desc "Title Case"     "c t"   #'+jg-text-title-case-op
@@ -43,24 +39,20 @@
       )
 
 (map! :map jg-binding-vision-map
-      :after jg-leader-bindings-loaded
       "i" #'+jg-text-make-invisible
       )
 
 (map! :map jg-binding-visual-state-map
-      :after jg-evil-bindings
       :desc "Select Buffer"   "v RET"      #'+jg-text-whole-buffer-textobj
       :desc "contract"        "v SPC"      #'+jg-text-visual-contract
       )
 
 (map! :map jg-binding-operator-state-map
-      :after jg-evil-bindings
       :desc "Select Line"   "L"   #'+jg-text-line-textobj
       :desc "Select Buffer" "RET" #'+jg-text-whole-buffer-textobj
       )
 
 (map! :map jg-binding-operator-map
-      :after jg-evil-bindings
       (:prefix ("s" . "String-ops")
       :desc "Split on distance"        "s" #'+jg-text-split-on-leading-char
       :desc "Set Buffer Coding"        "B" #'set-buffer-file-coding-system
@@ -83,19 +75,16 @@
       )
 
 (map! :map jg-binding-backward-operator-motion-map
-      :after jg-evil-bindings
       :desc "Close Paren"  "]"   #'+jg-text-prev-close-paren-motion
       :desc "Empty Line"   "l"   #'+jg-text-prev-empty-line-motion
       )
 
 (map! :map jg-binding-forward-operator-motion-map
-      :after jg-evil-bindings
       :desc "Open Section" "["   #'+jg-text-next-open-paren-motion
       :desc "Empty Line"   "l"   #'+jg-text-next-empty-line-motion
       )
 
 (map! :map jg-binding-inner-text-objects-map
-      ;; :after jg-evil-bindings
       :desc "Empty lines"  "l" #'+jg-text-blank-block
 
       )

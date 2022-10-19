@@ -6,7 +6,7 @@
 (load! "+popup")
 (after! hydra   (load! "+hydra"))
 (after! core-ui (load! "+advice"))
-(after! evil    (load! "+bindings"))
+(after! jg-bindings-total (load! "+bindings"))
 
 (use-package! hl-line
   :defer t

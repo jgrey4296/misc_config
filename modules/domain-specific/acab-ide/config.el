@@ -2,7 +2,7 @@
 ;; loaded fourth
 
 (load! "+vars")
-(after! evil
+(after! jg-bindings-total
   (load! "+bindings")
   )
 (after! org

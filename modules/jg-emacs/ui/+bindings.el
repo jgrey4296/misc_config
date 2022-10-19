@@ -1,7 +1,6 @@
 ;;; editor/window-control/+bindings.el -*- lexical-binding: t; -*-
 
-(map! :after jg-leader-bindings-loaded
-      :leader
+(map! :leader
       :desc "Open project scratch buffer"  "p x"   #'+jg-ui-open-scratch-buffer
       (:prefix "b"
        :desc "Undo-Tree"                   "u"     #'+jg-ui-undo-tree
@@ -14,12 +13,10 @@
       )
 
 (map! :map jg-binding-helm-map
-      :after jg-evil-bindings
       :desc "Insert Color"                 "c"     #'helm-colors
       )
 
 (map! :map jg-binding-vision-map
-      :after jg-evil-bindings
       :desc "Narrow"        "RET" #'+jg-ui-narrow-around-point
       )
 
@@ -28,8 +25,7 @@
 
 
 ;;-- window ring
-(map! :after jg-leader-bindings-loaded
-      :leader
+(map! :leader
       :prefix ("w r" . "Ring")
       :desc "Pop Buffer (Alt: Pop to here)"  "c" #'window-ring-pop-buffer
       :desc "Clear Ring"                     "C" #'window-ring-clear-ring
@@ -58,7 +54,6 @@
 
 ;;-- highlight
 (map! :map jg-binding-vision-map
-      :after jg-evil-bindings
       :prefix ("'" . "Highlight")
        :desc  "symbol-at-point"            "." #'hi-lock-face-symbol-at-point
        :desc  "find-patterns"              "f" #'hi-lock-find-patterns
@@ -73,13 +68,11 @@
 
 ;;-- motion
 (map! :map jg-binding-backward-general-motion-map
-      :after jg-evil-bindings
       :desc "Ring Window"  "r"    #'window-ring-move-perspective-2
       :desc "Narrow"       "RET"  #'+jg-ui-narrowing-move-focus-backward
       )
 
 (map! :map jg-binding-forward-general-motion-map
-      :after jg-evil-bindings
       :desc "Narrow"       "RET"  #'+jg-ui-narrowing-move-focus-forward
       :desc "Ring Window"  "r"    #'window-ring-move-perspective
 )
@@ -109,3 +102,9 @@
       :desc "Insert Palette Faces" "c" #'+jg-ui-insert-faces
       )
 ;;-- end misc
+
+(map! :leader
+      (:prefix "t"
+       :desc "Visual Hydra" "v" '+jg-ui-toggle-hydra/body)
+      "T" '+jg-ui-toggle-hydra/body
+      )

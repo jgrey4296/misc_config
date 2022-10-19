@@ -1,17 +1,14 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
-(map! :leader
-      :after jg-leader-bindings-loaded
-      :desc "Jump to Auto-hide-heading" :n "j h" #'autohide-minor-mode-fold-jump-to-heading
+(map! :map jg-binding-jump-map
+      :desc "Jump to Auto-hide-heading" :n "h" #'autohide-minor-mode-fold-jump-to-heading
       )
 
 (map! :map jg-binding-normal-state-map
-      :after jg-evil-bindings
       :desc "Toggle" "a" #'evil-toggle-fold
       )
 
 (map! :map jg-binding-vision-map
-      :after jg-evil-bindings
       :desc "Insert Fold block" "1" #'autohide-minor-mode-wrap-block
 
       :desc "open-fold-rec" "A"   #'evil-open-fold-rec
@@ -24,7 +21,7 @@
       :desc "Prev Fold"     "k"   #'+fold/previous
 )
 (map! :map jg-binding-vision-map
-      :after (vimish-fold jg-evil-bindings)
+      :after vimish-fold
       :prefix ("v" . "Vimish Fold")
        :desc "toggle-all"             "A"  #'vimish-fold-toggle-all
        :desc "toggle"                 "a"  #'vimish-fold-toggle

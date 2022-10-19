@@ -1,6 +1,6 @@
 ;; Misc AI Languages:
 
-(after! (coq evil)
+(after! (coq jg-bindings-total)
   (load! "+bindings")
   )
 

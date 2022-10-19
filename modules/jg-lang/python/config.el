@@ -6,7 +6,7 @@
 (load! "+vars")
 (load! "+funcs")
 (load! "+hooks")
-(after! evil
+(after! jg-bindings-total
   (load! "+bindings")
   (load! "+nav")
   )

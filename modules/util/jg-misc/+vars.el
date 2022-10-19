@@ -34,8 +34,8 @@
 
 ;;-- line_highlighting
 (setq-default
-              hl-paren-colors '("color-16" "color-16" "color-16" "color-16")
-              hl-paren-background-colors '("Springgreen3" "color-26" "color-91" "IndianRed3")
+              hl-paren-colors '("#bd382b" "#faaa39" "#ffe86b" "#c9de3e" "#62b824")
+              hl-paren-background-colors '("#5f5fec" "#7993f6" "#f65699" "#ff8b97")
               global-hl-line-modes '(bibtex-mode prog-mode text-mode conf-mode special-mode org-agenda-mode comint-mode)
               )
 ;;-- end line_highlighting

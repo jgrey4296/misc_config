@@ -61,12 +61,10 @@
       "C-c [" nil)
 
 (map! :map jg-binding-helm-map
-      :after jg-evil-bindings
       :desc "Bibtex Helm"               "b" #'+jg-bibtex-helm-bibtex
       )
 
-(map! :after jg-leader-bindings-loaded
-      :leader
+(map! :leader
       :desc "Load Random Bibtex entry"  "o !"   #'+jg-bibtex-load-random
       )
 
@@ -82,7 +80,5 @@
        )
       )
 
-(after! jg-evil-ex-bindings
-  (message "Setting up bibtex evil ex: %s" (current-time-string))
-  (evil-ex-define-cmd "ci[te]" #'+jg-bibtex-insert-wrapped)
-  )
+(message "Setting up bibtex evil ex: %s" (current-time-string))
+(evil-ex-define-cmd "ci[te]" #'+jg-bibtex-insert-wrapped)

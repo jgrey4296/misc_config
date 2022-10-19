@@ -7,9 +7,9 @@
 (defcustom acab-defined-depth-count 10 "Number of Acab Faces to Generate" :type '(integer))
 (defcustom acab-outermost-depth-face-count 3 "Generated Acab Faces depth" :type '(integer))
 (defcustom acab-depth-face-name "acab-depth-" "Generated Acab Face Name Base" :type '(string))
-(defcustom acab-depth-color-list '("color-26" "color-47" "color-99" "color-124"
-                                   "color-129" "color-142" "color-164")
+(defcustom acab-depth-color-list '("#87d1ef" "#64a1c2" "#466480" "#2f485c" "#242e35" "#1b2026" "#aa9c8a" "#917f6d" "#86624a")
   "Default Generate Acab Face Colours" :type '(sexp))
+
 
 ;;--------------------
 ;;face definitions

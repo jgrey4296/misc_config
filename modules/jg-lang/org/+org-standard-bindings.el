@@ -1,6 +1,7 @@
 ;; lang/org/+bindings_2.el -*- lexical-binding: t; -*-
 ;; Misc
 (message "Setting up org main bindings: %s" (current-time-string))
+
 ;; Unbinds
 (map! :map org-mode-map
       "C-c [" nil
@@ -219,8 +220,7 @@
        :desc "coordinate-overlays)"  "o" #'org-table-toggle-coordinate-overlays)
       )
 
-(map! :after evil-org
-      :map evil-org-mode-map
+(map! :map evil-org-mode-map
       :ni [C-return]   #'+org/insert-item-below
       :ni [C-S-return] #'+org/insert-item-above
       ;; more intuitive RET keybinds
@@ -237,18 +237,20 @@
       :m "[l"  #'org-previous-link
       :m "]c"  #'org-babel-next-src-block
       :m "[c"  #'org-babel-previous-src-block
-      :n "gQ"  #'org-fill-paragraph
-      ;; sensible vim-esque folding keybinds
-      :n "za"  #'+org/toggle-fold
-      :n "zA"  #'org-shifttab
-      :n "zc"  #'+org/close-fold
-      :n "zC"  #'outline-hide-subtree
-      :n "zm"  #'+org/hide-next-fold-level
-      :n "zM"  #'+org/close-all-folds
       :n "zn"  #'org-tree-to-indirect-buffer
-      :n "zo"  #'+org/open-fold
-      :n "zO"  #'outline-show-subtree
-      :n "zr"  #'+org/show-next-fold-level
-      :n "zR"  #'+org/open-all-folds
-      :n "zi"  #'org-toggle-inline-images
+      )
+(map! :map evil-org-mode-map
+      :n "gQ"   nil ;; #'org-fill-paragraph
+      :n "za"   nil ;; #'+org/toggle-fold
+      :n "zA"   nil ;; #'org-shifttab
+      :n "zc"   nil ;; #'+org/close-fold
+      :n "zC"   nil ;; #'outline-hide-subtree
+      :n "zm"   nil ;; #'+org/hide-next-fold-level
+      :n "zM"   nil ;; #'+org/close-all-folds
+      :n "zo"   nil ;; #'+org/open-fold
+      :n "zO"   nil ;; #'outline-show-subtree
+      :n "zr"   nil ;; #'+org/show-next-fold-level
+      :n "zR"   nil ;; #'+org/open-all-folds
+      :n "zi"   nil ;; #'org-toggle-inline-images
+      :m "gh"   nil
       )

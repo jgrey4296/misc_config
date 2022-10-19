@@ -2,7 +2,7 @@
 (load! "+vars")
 (load! "+funcs")
 (load! "+barchart")
-(after! evil
+(after! jg-bindings-total
   (load! "+operators")
   (load! "+motions")
   (load! "+state")

@@ -4,13 +4,14 @@
 (load! "+vars")
 (load! "+repl-commands")
 
-(after! evil
+(after! (evil general-mod which-mod)
   (load! "+leader-bindings")
   (load! "+evil-bindings")
   (load! "+evil-submap-bindings")
   (load! "+ibuffer-bindings")
   (load! "+misc-bindings")
   (load! "+help-bindings")
+  (provide 'jg-bindings-total)
   )
 (after! evil-ex
   (load! "+evil-ex-setup")

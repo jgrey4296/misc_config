@@ -4,7 +4,9 @@
 (load! "+funcs")
 
 (use-package-hook! dired :post-config
-  (load! "+bindings")
+  (after! jg-bindings-total
+    (load! "+bindings")
+    )
 )
 
 

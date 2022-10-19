@@ -22,7 +22,8 @@
 (message "Loading General Mod")
 
 
-(defun general-extended-def-:which-key (_state keymap key edef kargs)
+(define-advice general-extended-def-:which-key (:override (_state keymap key edef kargs)
+                                                          +jg-general)
   " An alternative which-key implementation for General, using which-key's
 which-key-add-keymap-based-replacements.
 
@@ -92,7 +93,7 @@ of general-extended-def-:which-key
     (setq key (pop more)
           replacement (pop more))))
 
-(defalias 'general-extended-def-:wk #'general-extended-def-:which-key)
+;;(defalias 'general-extended-def-:wk #'general-extended-def-:which-key)
 
 (provide 'general-mod)
 ;;; general.el ends here

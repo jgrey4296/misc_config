@@ -6,10 +6,15 @@
 (load! "+dired")
 (load! "+vars")
 (load! "+tags")
-(load! "+text-utils")
-(after! (evil org)
+(after! (jg-bindings-total jg-org-stage evil-org)
+  (message "Setting up org bindings")
+  (load! "+text-utils")
   (load! "+org-standard-bindings.el")
   (load! "+bindings")
+
+  ;; (evil-make-overriding-map org-mode-map)
+  (setq minor-mode-map-alist (assq-delete-all 'evil-org-mode minor-mode-map-alist))
+  (push `(evil-org-mode . ,evil-org-mode-map) minor-mode-map-alist)
   )
 
 (use-package! link-hint
@@ -30,6 +35,13 @@
   :after org
   :init
   (push '("dot" . graphviz-dot) org-src-lang-modes)
+  )
+
+(use-package-hook! org :post-config
+  (message "post configuring org")
+  ;; (setq org-mode-map      (make-sparse-keymap "jg-org")
+  ;;       evil-org-mode-map (make-sparse-keymap "jg-evil-org"))
+  (provide 'jg-org-stage)
   )
 
 

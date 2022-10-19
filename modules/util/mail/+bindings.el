@@ -1,7 +1,6 @@
 ;;; util/jg-mail/+bindings.el -*- lexical-binding: t; -*-
 
-(map! :after jg-leader-bindings-loaded
-      :leader
+(map! :leader
       :desc "Mail"      "9" #'mu4e
       )
 
@@ -21,8 +20,7 @@
         :desc "Switch Context" ";" #'mu4e-context-switch
         )
 
-  (map! :after jg-leader-bindings-loaded
-        :leader
+  (map! :leader
         :prefix ("o" . "Open")
         :desc "Compose Email"                "e" #'compose-mail
         )

@@ -1,5 +1,5 @@
 (load! "+vars")
-(after! evil
+(after! jg-bindings-total
   (load! "+bindings")
 )
 (use-package! music-minor-mode

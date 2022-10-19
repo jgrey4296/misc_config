@@ -2,7 +2,8 @@
 
 (load! "+vars")
 (load! "+funcs")
-(after! (evil elisp-mode)
+(after! jg-bindings-total
+  (message "Setting up lisp bindings")
   (load! "+bindings")
   (load! "+advice")
   )

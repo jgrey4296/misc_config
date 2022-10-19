@@ -4,6 +4,13 @@
 
 (defvar evil-ex-commands nil
   " Custom Evil-ex commands")
+(map! :map (evil-ex-completion-map evil-ex-search-keymap)
+      "C-a" #'evil-beginning-of-line
+      "C-b" #'evil-backward-char
+      "C-f" #'evil-forward-char
+      :gi "C-j" #'next-complete-history-element
+      :gi "C-k" #'previous-complete-history-element)
+
 
 ;; definition of said commands, adapted from evil-maps
 

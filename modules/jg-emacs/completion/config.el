@@ -4,7 +4,7 @@
 (load! "+advice")
 (load! "+file-templates")
 
-(after! evil
+(after! jg-bindings-total
   (load! "+bindings")
 )
 (after! (ivy counsel)

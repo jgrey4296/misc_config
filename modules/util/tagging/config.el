@@ -9,7 +9,7 @@
 (after! ivy
   (load! "+ivy-actions")
   )
-(after! evil
+(after! jg-bindings-total
   (load! "+bindings")
   )
 

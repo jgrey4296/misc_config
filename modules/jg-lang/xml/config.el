@@ -25,7 +25,7 @@
 (load! "+xmllint")
 (load! "+xidel")
 (load! "+funcs")
-(after! evil
+(after! jg-bindings-total
   (load! "+bindings")
   )
 

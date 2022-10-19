@@ -2,7 +2,6 @@
 ;;
 ;;-- helm
 (map! :map jg-binding-helm-map
-      :after jg-evil-bindings
       :desc "Firefox Helm"              "f" #'+jg-tag-helm-bookmarks
       :desc "Twitter Tag Helm"          "t" #'+jg-tag-helm-tag-twitter
       :desc "Twitter Account Helm"      "T" #'+jg-tag-helm-account-twitter
@@ -37,16 +36,13 @@
        )
       )
 ;; Evil ex commands
-(after! jg-evil-ex-bindings
-  (evil-ex-define-cmd "t[ag]"  #'+jg-tag-helm-start)
-  (evil-ex-define-cmd "to"     #'+jg-tag-occurrences)
-  (evil-ex-define-cmd "toa"    #'+jg-tag-occurrences-in-open-buffers)
-  (evil-ex-define-cmd "tv"     #'org-tags-view)
-  (evil-ex-define-cmd "ts"     #'org-set-tags)
-  )
+(evil-ex-define-cmd "t[ag]"  #'+jg-tag-helm-start)
+(evil-ex-define-cmd "to"     #'+jg-tag-occurrences)
+(evil-ex-define-cmd "toa"    #'+jg-tag-occurrences-in-open-buffers)
+(evil-ex-define-cmd "tv"     #'org-tags-view)
+(evil-ex-define-cmd "ts"     #'org-set-tags)
 
-(map! :after jg-leader-bindings-loaded
-      :leader
+(map! :leader
       :desc "Open Random Untagged Twitter" "o u" #'+jg-tag-open-random-untagged-twitter
       )
 

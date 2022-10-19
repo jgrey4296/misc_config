@@ -2,14 +2,12 @@
 (message "Setting up general access org bindings: %s" (current-time-string))
 
 ;;-- leader map
-(map! :after jg-leader-bindings-loaded
-      :leader
+(map! :leader
       :desc "Insert Timestamp"  "i t"   #'org-time-stamp
       :desc "Jump to Calendar"  "j c"   #'org-goto-calendar
       :desc "Toggle Links"      "t l"   #'org-toggle-link-display
       )
-(map! :after jg-leader-bindings-loaded
-      :leader
+(map! :leader
       :prefix ("o" . "Org")
       :prefix ("a" . "Org Agenda")
       :desc "Agenda"                "a"          #'org-agenda
@@ -26,28 +24,24 @@
 
 ;;-- <leaderless>
 (map! :map org-mode-map
-      :after org
-      :n "I" nil
-      :n "] h" nil
-      :n "[ h" nil
+      ;; :n "I" nil
+      ;; :n "] h" nil
+      ;; :n "[ h" nil
       :desc "Cycle"           :n "a"   #'org-cycle
       :desc "Next Link"       :n "] l" #'org-next-link
       :desc "Prev Link"       :n "[ l" #'org-previous-link
       :desc "Forward Heading" :n "] j" #'org-forward-heading-same-level
       :desc "Back Heading"    :n "[ j" #'org-backward-heading-same-level
-      :desc "Headings Helm"   :n "s o" #'helm-org-in-buffer-headings
       )
 ;;-- end <leaderless>
 
-(map! :map jg-binding-jump-map
-      :desc "Headings Helm"   :n "h" #'helm-org-in-buffer-headings
-
+(map! :map org-mode-map
+      :desc "Headings Helm"   :n "s h" #'helm-org-in-buffer-headings
       )
 
 
 ;;-- <localleader>
-(map! :after org
-      :map org-mode-map
+(map! :map org-mode-map
       :localleader
       :desc "Refile"                 "R" #'+jg-org-refile-subtree
       :desc "Todo"                   "TAB" #'org-todo
@@ -81,7 +75,6 @@
 
 ;;-- evil-org
 (map! :map evil-org-mode-map
-      :after evil-org
       :n "I"   nil
       :n "za"  nil
       :n "zA"  nil

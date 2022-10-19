@@ -1,8 +1,7 @@
 ;;; util/jg-misc/+bindings.el -*- lexical-binding: t; -*-
 (evil-make-intercept-map messages-buffer-mode-map)
 
-(map! :after jg-help-bindings
-      :map help-map
+(map! :map help-map
       "DEL" #'free-keys
       )
 
@@ -93,8 +92,7 @@
   )
 
 
-(map! :after jg-leader-bindings-loaded
-      :leader
+(map! :leader
       :desc "Open Url"              "?"   #'+jg-misc-browse-url
       :desc "Twitter"               "8" (cmd! (+jg-misc-browse-url jg-misc-twitter-url))
 
@@ -107,7 +105,6 @@
       )
 
 (map! :map jg-binding-jump-map
-      :after jg-leader-bindings-loaded
       :desc "Docs: Learn X in Y"   "1" (cmd! (+jg-misc-browse-url jg-misc-x-in-y-url))
       :desc "Docs: Palettes"       "2" (cmd! (+jg-misc-browse-url jg-misc-palette-list-url))
       :desc "Docs: Over API"       "3" (cmd! (+jg-misc-browse-url jg-misc-overapi-url))

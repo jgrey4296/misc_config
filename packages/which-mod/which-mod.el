@@ -22,10 +22,11 @@
 (require 'which-key)
 (message "Loading Which-mod")
 
-(defun which-key--get-keymap-bindings-1
-    (keymap start &optional prefix filter all ignore-commands)
+(define-advice which-key--get-keymap-bindings-1 (:override (keymap start &optional prefix filter all ignore-commands)
+                                                           +jg-which-key)
   "See `which-key--get-keymap-bindings'."
 
+  ;; (message "WK: %s" (car (last keymap)))
   (let ((bindings start)
         (prefix-map (if prefix (lookup-key keymap prefix) keymap)))
     ;; Prefer which-key pseudo-maps:
@@ -90,7 +91,8 @@
        prefix-map))
    bindings))
 
-(defun which-key--compute-binding (binding)
+(define-advice which-key--compute-binding (:override (binding)
+                                                     +jg-which-key)
   "Replace BINDING with remapped binding if it exists.
 
 Requires `which-key-compute-remaps' to be non-nil"

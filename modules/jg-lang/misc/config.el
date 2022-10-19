@@ -1,6 +1,6 @@
 ;;; config.el -*- lexical-binding: t; -*-
 
-(after! evil
+(after! jg-bindings-total
   (load! "+bindings")
   )
 

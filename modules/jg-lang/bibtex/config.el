@@ -10,7 +10,7 @@
 (load! "+hydra")
 (load! "+advice")
 (load! "+dired")
-(after! evil
+(after! jg-bindings-total
   (load! "+motions")
   (load! "+bindings")
 )

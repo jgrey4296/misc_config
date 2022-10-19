@@ -23,7 +23,7 @@
 ;;
 (defhydra +jg-ui-toggle-hydra ()
   "
-_v_isuals    _g_uides       _w_rapping    _n_avigation
+_v_isuals    _g_uides       w_r_apping    _n_avigation
 ^^^^^^^------------------------------------------------
 _h_l-line    _w_hitespace   _t_runcate    _a_uto-hide
 ^^^^^^                                    _c_ursor
@@ -33,7 +33,7 @@ _h_l-line    _w_hitespace   _t_runcate    _a_uto-hide
               (+jg-ui-visuals-hydra/body)) nil :exit t)
   ("g" (progn (+jgh-push #'+jg-ui-toggle-hydra/body)
               (+jg-ui-guides-hydra/body)) nil :exit t)
-  ("w" (progn (+jgh-push #'+jg-ui-toggle-hydra/body)
+  ("r" (progn (+jgh-push #'+jg-ui-toggle-hydra/body)
               (+jg-ui-wrap-hydra/body)) nil :exit t)
   ("n" (progn (+jgh-push #'+jg-ui-toggle-hydra/body)
               (+jg-ui-nav-hydra/body)) nil :exit t)
@@ -44,12 +44,3 @@ _h_l-line    _w_hitespace   _t_runcate    _a_uto-hide
   ("c" #'global-centered-cursor-mode nil :exit nil)
   ("q" (setq jg-ui-toggle-hydra-stack nil) :exit t)
 )
-
-
-(after! jg-leader-bindings-loaded
-  (map! :leader
-        (:prefix "t"
-         :desc "Visual Hydra" "v" '+jg-ui-toggle-hydra/body)
-        "T" '+jg-ui-toggle-hydra/body
-        )
-  )

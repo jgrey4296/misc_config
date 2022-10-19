@@ -1,3 +1,3 @@
 
-(after! jg-leader-bindings-loaded
+(after! jg-bindings-total
   (load! "+keybindings"))

@@ -3,7 +3,6 @@
 (message "Setting up Dired bindings")
 
 (map! :map dired-mode-map
-      :after evil
       :nv ")" #'dired-git-info-mode
       :n  "o" #'dired-find-file-other-window
       :n  "S" #'hydra-dired-quick-sort/body
@@ -38,7 +37,6 @@
       )
 
 (map! :map dired-mode-map
-      :after evil
       :localleader
       :desc "Hide Toggle"           "h" #'dired-omit-mode
       :desc "Symlink"               "S" #'dired-do-symlink
@@ -63,7 +61,6 @@
       )
 
 (map! :map dired-mode-map
-      :after evil
       :prefix ("%" . "Dired-Do")
       :desc "flag-garbage-files"           :n "&" #'dired-flag-garbage-files
       :desc "do-copy-regexp"               :n "C" #'dired-do-copy-regexp
@@ -80,7 +77,7 @@
       )
 
 (map! :map dired-mode-map
-      :after (evil epa)
+      :after epa
       ";" nil
       (:prefix (";" . "Encryption")
        :desc "Decrypt" "d" #'epa-dired-do-decrypt

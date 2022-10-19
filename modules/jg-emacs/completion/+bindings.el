@@ -3,7 +3,7 @@
 (message "Setting up Completion bindings: %s" (current-time-string))
 
 ;;-- remap bookmarks
-(map! :after (counsel jg-leader-bindings-loaded)
+(map! :after counsel
       [remap bookmark-jump] #'+jg-completion-counsel-bookmark
       )
 ;;-- end remap bookmarks
@@ -40,7 +40,7 @@
       )
 
 (map! :map ivy-minibuffer-map
-      :after (ivy jg-leader-bindings-loaded)
+      :after ivy
       "C-SPC" #'ivy-call-and-recenter  ; preview file
       "C-l"   #'ivy-alt-done
       "C-v"   #'yank
@@ -54,12 +54,12 @@
       )
 
 (map! :map ivy-occur-grep-mode-map
-      :after (ivy jg-evil-bindings)
+      :after ivy
       :desc "Do Ops" "g" jg-binding-operator-map
       )
 
 (map! :map counsel-ag-map
-      :after (counsel jg-leader-bindings-loaded)
+      :after counsel
       "C-SPC"    #'ivy-call-and-recenter ; preview
       "C-l"      #'ivy-done
       [C-return] #'+ivy/git-grep-other-window-action
@@ -68,7 +68,7 @@
 
 ;;-- company
 (map! :map company-active-map
-      :after (company jg-leader-bindings-loaded)
+      :after company
       ;; :i "C-@"    (cmds! (not (minibufferp)) #'company-complete-common)
        ;; :i "C-SPC"  (cmds! (not (minibufferp)) #'company-complete-common)
 
@@ -92,7 +92,7 @@
          )
 
 (map! :map company-search-map  ; applies to `company-filter-map' too
-      :after (company jg-leader-bindings-loaded)
+      :after company
       "C-n"     #'company-select-next-or-abort
       "C-p"     #'company-select-previous-or-abort
       "C-j"     #'company-select-next-or-abort
@@ -211,15 +211,13 @@
 
 ;;-- insert state
 (map! :map jg-binding-insert-state-map
-      :after jg-evil-bindings
       "TAB" #'+jg-completion-complete-or-snippet
       )
 
 ;;-- end insert state
 
 ;;-- leader helms
-(map! :after jg-leader-bindings-loaded
-      :leader
+(map! :leader
       :desc "SCRATCH"                      "6" (cmd! (+jg-completion-ivy-open-as-popup "*scratch*"))
       :desc "Messages"                     "0" (cmd! (+jg-completion-ivy-open-as-popup "*Messages*") (if current-prefix-arg (+jg-text-clear-buffer)))
       :desc "Switch buffer"         ","     #'+jg-completion-switch-buffer
@@ -229,3 +227,10 @@
       :desc "Workspace Counsel"     "W RET" #'+jg-completion-counsel-workspace
       )
 ;;-- end leader helms
+
+;;-- shell
+(map! :map shell-mode-map
+      :i "TAB" #'+jg-completion-complete-or-snippet
+      :n "TAB" #'completion-at-point
+      )
+;;-- end shell

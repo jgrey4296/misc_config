@@ -39,6 +39,7 @@ https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users
 https://github.com/sixohsix/twitter                                                             : libraries : twitter
 
 ** architecture
+https://github.com/numba/llvmlite
 flask
 celery
 build                                                                                           : 0.8.0

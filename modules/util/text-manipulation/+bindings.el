@@ -30,8 +30,11 @@
 (map! :map jg-binding-normal-state-map
       :desc "Debug"          "I d"   #'+jg-text-insert-debug
 
-      :desc "Title Case"     "c t"   #'+jg-text-title-case-op
-      :desc "Rotate"         "c r"   #'rotate-text
+      :desc "Rotate"         "R"   #'rotate-text
+      :desc "Zap to Char"    "Z"   #'zap-up-to-char
+      (:prefix "c"
+       :desc "Title Case"     "t"   #'+jg-text-title-case-op
+       )
 
       (:prefix "z"
        :desc "Invisible-spec" "I" #'+jg-text-toggle-invisible-spec

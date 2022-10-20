@@ -120,10 +120,6 @@
 
       :desc "Join whitespace"    "J" #'evil-join-whitespace
 
-      ;; TODO use a motion for direction
-       (:when (modulep! :editor rotate-text)
-        :n "r"  #'rotate-text
-        :n "R"  #'rotate-text-backward)
 
       )
 (map! :map jg-binding-operator-map
@@ -134,22 +130,14 @@
        :desc "Encode url"         "e" #'+evil:url-encode
        :desc "Inflection"         "i" #'evil-operator-string-inflection
        :desc "ispell-word"        "=" #'ispell-word
-       :desc "Invert"             "~"   #'evil-invert-case
-       :desc "Upper"              "U"   #'evil-upcase
-       :desc "Down"               "u"   #'evil-downcase
 
-       :desc "Fill"               "q"   #'evil-fill-and-move
-       :desc "Exchange"           "x"   #'evil-exchange
-       :desc "Yank"               "y"   #'+evil:yank-unindented
-       :desc "Zap to Char"        "z"   #'zap-up-to-char
-
-       (:when (modulep! :editor rotate-text)
-        :n "r"  #'rotate-text
-        :n "R"  #'rotate-text-backward)
+       :desc "Fill"               "q" #'evil-fill-and-move
+       :desc "Exchange"           "x" #'evil-exchange
+       :desc "Yank"               "y" #'+evil:yank-unindented
        )
 (map! :map jg-binding-operator-map
       :prefix ("l" . "Line-ops")
-      ;; TODO uniquify, remove leading whitespace, split on char
+      ;; TODO split on char
       ;; r
       :desc "Wrap Line"                  "w"   #'evil-fill
 
@@ -158,8 +146,6 @@
       :desc "Indent"                     "i" #'indent-region
       :desc "Keep Lines"                 "K" #'keep-lines
       :desc "Whitespace Cleanup"         "c" #'whitespace-cleanup
-      :desc "Delete trailing newlines"   "n" #'doom/delete-trailing-newlines
-      :desc "Delete trailing whitespace" "N" #'delete-trailing-whitespace
       :desc "Untabify"                   "u" #'untabify
 
       )

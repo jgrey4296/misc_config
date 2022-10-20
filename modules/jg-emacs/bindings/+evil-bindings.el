@@ -77,13 +77,12 @@
       )
 (map! :map jg-binding-normal-state-map ;; Change / paste
       (:prefix ("c" . "Change")
-        :desc "Zap to Char"                 "z" #'zap-up-to-char
-
-        :desc "Join line"                   "j" #'evil-join
         :desc "Split Line"                  "RET" #'electric-newline-and-maybe-indent
 
         :desc "Rot13"                       "'" #'evil-rot13
         :desc "ispell-word"                 "=" #'ispell-word
+
+        :desc "Down"                        "d" #'evil-downcase
         :desc "Decode url"                  "E" #'+evil:url-decode
 
         :desc "Comment"                     "c" #'evilnc-comment-operator
@@ -92,9 +91,7 @@
         :desc "Inflection"                  "i" #'evil-operator-string-inflection
         :desc "Shift Right"                 "l" #'evil-shift-right
 
-        :desc "Upper"                       "U" #'evil-upcase
-        :desc "Down"                        "u" #'evil-downcase
-        :desc "Invert Char"                 "v" #'evil-invert-char
+        :desc "Upper"                       "u" #'evil-upcase
 
         :desc "Delete trailing whitespace"  "w" #'delete-trailing-whitespace
         :desc "Delete trailing newlines"    "W" #'doom/delete-trailing-newlines

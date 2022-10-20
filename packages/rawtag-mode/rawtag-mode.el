@@ -184,7 +184,8 @@ Maybe add a substitution "
 
   "a" 'rawtags-add-substitution
   "b" 'rawtags-blocks-of
-  "C" 'rawtags-sub-uppercase
+  "cu" 'rawtags-sub-uppercase
+  "cd" (cmd! (rawtags-sub-uppercase t))
   "r" 'rawtags-refile-tag
   "R" 'rawtags-refile-type
   "s" 'rawtags-get-similar

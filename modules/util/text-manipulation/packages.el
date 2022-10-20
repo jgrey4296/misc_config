@@ -7,3 +7,4 @@
 (package! highlight-parentheses)
 (package! helm-wordnet)
 (package! wordnut)
+(package! rotate-text)

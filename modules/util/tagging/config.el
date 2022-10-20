@@ -13,8 +13,6 @@
   (load! "+bindings")
   )
 
-(use-package! tag-mode :defer t)
-(use-package! tag-timeline-mode :defer t)
 (use-package! rawtag-mode)
 
 (after! (evil org helm)

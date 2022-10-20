@@ -26,9 +26,12 @@
 ;;-- end header
 
 ;;-- vars
-(defvar rawtags-tags-target "~/github/writing/resources/substitutions/tags/")
-(defvar rawtags-people-target "~/github/writing/resources/substitutions/people.sub")
+(defvar rawtags-base-target "~/github/writing/resources/substitutions")
+(defvar rawtags-tags-sub-target "tags")
 
+(defvar rawtags-special-tags '((acronym . "acronyms.sub")
+                               (person  . "people.sub")
+                               ))
 
 
 ;;-- end vars
@@ -39,14 +42,43 @@
   (save-excursion
     (beginning-of-line)
     (unless (looking-at "^## ")
-      (let* ((current (substring (current-word) 0 -4))
-             (val (ivy-read "Select Replacement: "  jg-tag-global-tags :initial-input current  :require-match t))
+      (let* ((current (current-word))
+             (subsel (substring current 0 (when (> (length current) 5) -4)))
+             (val (ivy-read "Select Replacement: "  jg-tag-global-tags :initial-input current))
              )
         (end-of-line)
-        (insert " : " val)
+        (insert " : " (s-replace-regexp " +" "_" (s-trim val)))
         )
       )
     (forward-line)
+    )
+  )
+
+(defun rawtags-sub-uppercase (invert)
+  "Auto-add a substitution of the tag, but uppercase"
+  (interactive "P")
+  (save-excursion
+    (beginning-of-line)
+    (unless (looking-at "^## ")
+      (let* ((current (current-word)))
+        (end-of-line)
+        (insert " : " (s-replace-regexp " +" "_"
+                                        (funcall (if invert 'downcase 'upcase)
+                                                 (s-trim current))))
+        )
+      )
+    (forward-line)
+    )
+
+  )
+
+(defun rawtags-clear-sub ()
+  (interactive)
+  (save-excursion
+    (beginning-of-line)
+    (when (search-forward ":" (line-end-position) t 2)
+      (forward-char -1)
+      (kill-line))
     )
   )
 
@@ -59,15 +91,17 @@ Maybe add a substitution "
     (let* ((line (buffer-substring-no-properties (line-beginning-position) (line-end-position)))
            (first-letter (buffer-substring-no-properties (line-beginning-position) (1+ (line-beginning-position))))
            (filename (format "%s.sub" (downcase first-letter)))
+           (full-target (expand-file-name (f-join rawtags-base-target rawtags-tags-sub-target filename)))
            )
       (cond ((string-empty-p line)
              (message "Empty Line"))
-            ((f-exists? (f-join rawtags-tags-target filename))
+            ((f-exists? full-target)
              (message "First Letter: %s, File: %s" first-letter filename)
-             (append-to-file (s-append "\n" line) nil (f-join rawtags-tags-target filename))
+             (append-to-file (s-append "\n" line) nil full-target)
              )
             (t (message "First Letter: %s, File: %s" first-letter "symbols.sub")
-               (append-to-file (s-append "\n" line)  nil (f-join rawtags-tags-target "symbols.sub"))
+               (append-to-file (s-append "\n" line)  nil
+                               (expand-file-name (f-join rawtags-base-target rawtags-tags-sub-target "symbols.sub")))
                )
             )
       (insert "## ")
@@ -76,21 +110,23 @@ Maybe add a substitution "
   (forward-line)
   )
 
-(defun rawtags-refile-person ()
+(defun rawtags-refile-type ()
   "refile a person to the people.sub
   maybe add a substitution"
   (interactive)
   (beginning-of-line)
   (unless (looking-at "^## ")
     (let* ((line (buffer-substring-no-properties (line-beginning-position) (line-end-position)))
+           (type (ivy-read "Tag Type: " rawtags-special-tags))
+           (target (expand-file-name (f-join rawtags-base-target (cdr (assoc-string type rawtags-special-tags)))))
            )
       (cond ((string-empty-p line)
              (message "Empty Line"))
-            ((f-exists? rawtags-people-target)
-             (message "Appending to %s" rawtags-people-target)
-             (append-to-file (s-append "\n" line) nil rawtags-people-target)
+            ((f-exists? target)
+             (message "Appending to %s" target)
+             (append-to-file (s-append "\n" line) nil target)
              )
-            (t (message "No file to add people to"))
+            (t (message "No file to add tag to"))
             )
       (insert "## ")
       )
@@ -112,10 +148,28 @@ Maybe add a substitution "
 
   )
 
+(defun rawtags-has-sub-p ()
+  "Test if the current line has a substitution"
+  (save-excursion
+    (beginning-of-line)
+    (search-forward ":" (line-end-position) t 2)
+    )
+  )
+
 (defun rawtags-collect-unsubbed ()
   "group entries that don't have a substitution at the top of the buffer"
   (interactive)
 
+  )
+
+(defun rawtags-blocks-of (n)
+  "Separate tags into groups of n with a line in between block "
+  (interactive "nCount:\n")
+  (beginning-of-buffer)
+  (while (< (point) (point-max))
+    (forward-line n)
+    (insert "\n")
+    )
   )
 
 ;;-- end functions
@@ -124,12 +178,17 @@ Maybe add a substitution "
 (defvar-local rawtag-mode-map
   (make-sparse-keymap))
 
-;; (map! :map rawtag-mode-map
-;;       :desc "Refile Tag"       :n "r" 'rawtags-refile-tag
-;;       :desc "Refile Person"    :n "p" 'rawtags-refile-person
-;;       :desc "Add Substitution" :n "a" 'rawtags-add-substitution
-;;       :desc "Get Similar"      :n "s" 'rawtags-get-similar
-;;       )
+(evil-define-key 'normal rawtag-mode-map
+  "~" 'rawtags-sub-uppercase
+  "d" 'rawtags-clear-sub
+
+  "a" 'rawtags-add-substitution
+  "b" 'rawtags-blocks-of
+  "C" 'rawtags-sub-uppercase
+  "r" 'rawtags-refile-tag
+  "R" 'rawtags-refile-type
+  "s" 'rawtags-get-similar
+  )
 
 (evil-make-intercept-map rawtag-mode-map)
 
@@ -139,10 +198,14 @@ Maybe add a substitution "
 ;; List of '(regex (groupnum "face")+)
 (defconst rawtag-font-lock-keywords
   (list
+   ;; Comment:
    `(,(rx (: line-start "## " (* any) line-end))
      (0 "font-lock-comment-face"))
-   `(,(rx (: line-start (group (+ graph)) (+ blank) ":" blank (+ digit) (+ blank) ":" (+ blank) (group (+ graph)) line-end))
+   ;; Sub def:
+   `(,(rx (: line-start (group (+ graph)) (+ blank) ":" blank (+ digit)
+             (+ blank) (group (+ ":" (+ blank) (+ graph) (* blank))) line-end))
      (1 "hi-red-b"))
+   ;; No Sub Def
    `(,(rx (: line-start (group (+ graph))))
      (1 "diff-header"))
    )

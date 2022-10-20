@@ -2,8 +2,6 @@
 (package! dash)
 (package! org)
 (package! evil)
-(package! tag-mode :recipe '(:local-repo "~/.doom.d/packages/tag-mode"))
-(package! tag-timeline-mode :recipe '(:local-repo "~/.doom.d/packages/tag-timeline-mode"))
 (package! hydra)
 (package! cl-lib :built-in t)
 (package! ivy)

@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+jgd Setting Javascript
 #Node:
 PATH=~/.npm-global/bin:$PATH
 

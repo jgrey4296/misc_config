@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+jgd Setting emacs data
 alias emacs="TERM=xterm-24bits emacs -nw"
 alias jges="emacs ~/.shell_files/"
 alias em="emacs"
@@ -11,10 +12,10 @@ alias wemacs="emacs ~/github/writing/main.org"
 #sclang for emacs:
 alias sclangel="sclang -d ~/github/.super_collider_classes/ -r -s -i emacs"
 
-# Doom
+jgd Setting Doom Emacs data
 PATH=~/.emacs.d/bin/:$PATH
 
-#for gtags:
+jgd Setting Gtags Data
 GTAGSCONF=~/.shell_files/gtags.conf
 GTAGSLABEL=pygments
 

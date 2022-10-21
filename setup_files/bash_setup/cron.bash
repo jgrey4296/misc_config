@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+jgd Setting Cron utils
 GIT_BKUP_WATCH=( "$HOME/github" "$HOME/github/otherLibs" "$HOME/github/inform" "$HOME/github/python" "$HOME/github/rust" )
 GIT_BKUP_TARGET="$HOME/github/writing/resources/cron_reports/github_urls"
 GIT_BKUP_DROPBOX="$HOME/Dropbox/backups"

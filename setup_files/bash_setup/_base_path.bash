@@ -1,4 +1,4 @@
-# INITIAL PATH EXPORTS
+jgd Setting Initial Path
 # PATHS:
 PATH=/sbin:/usr/sbin:/bin:/usr/bin
 PATH=/usr/local/sbin:$PATH
@@ -6,11 +6,12 @@ PATH=/usr/local/bin:$PATH
 PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
 PATH=/usr/local/opt/make/libexec/gnubin:$PATH
 PATH=/usr/local/opt/findutils/libexec/gnubin:$PATH
-# sqlite
+
+jgd Setting sqlite
 PATH=/usr/local/opt/sqlite/bin:$PATH
 
-# calibre
+jgd Setting calibre
 PATH=/Applications/calibre.app/Contents/MacOS:$PATH
 
-# for blender:
+jgd Setting blender
 PATH=/Applications/blender/blender.app/Contents/MacOS:$PATH

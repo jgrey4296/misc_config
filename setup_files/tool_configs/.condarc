@@ -4,7 +4,7 @@ channels:
   - defaults
   - conda-forge
 ssl_verify: true
-env_prompt: ({name})
+env_prompt: ""
 create_default_packages:
   - beautifulsoup4
   - build

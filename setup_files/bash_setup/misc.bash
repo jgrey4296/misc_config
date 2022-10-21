@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+jgd Setting misc aliases
 # alias tar="gtar"
 
 alias grep="ggrep"
@@ -46,26 +47,3 @@ function cd_ls_all {
     buildin cd $@
     ls -la
 }
-
-# Increment the shell level each time you go into a subshell
-if [ -n "$PROMPT_NUM" ] && [ $PROMPT_NUM -eq $PROMPT_NUM ] 2> /dev/null; then
-    PROMPT_NUM=$(($PROMPT_NUM + 1))
-else
-    PROMPT_NUM=1
-fi
-DEPTH_PROMPT=$PROMPT_NUM
-
-if [ $PROMPT_NUM -lt 2 ]; then
-    DEPTH_PROMPT="⟘"
-fi
-
-
-#setting up the prompt:
-# num of jobs, date, time, user, depth
-PS1=' (\j): \D{%D} \A \u ($DEPTH_PROMPT):  '
-
-#Shell Location update
-SHELL="$(which bash)"
-
-# TEMP locations
-# TMPDIR="~/.temp"

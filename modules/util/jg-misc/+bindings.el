@@ -91,7 +91,6 @@
 
   )
 
-
 (map! :leader
       :desc "Open Url"              "?"   #'+jg-misc-browse-url
       :desc "Twitter"               "8" (cmd! (+jg-misc-browse-url jg-misc-twitter-url))
@@ -109,4 +108,8 @@
       :desc "Docs: Palettes"       "2" (cmd! (+jg-misc-browse-url jg-misc-palette-list-url))
       :desc "Docs: Over API"       "3" (cmd! (+jg-misc-browse-url jg-misc-overapi-url))
       :desc "Browse URL"           "u" #'+jg-misc-browse-url
+      )
+
+(map! :map eww-mode-map
+      :n "=" 'eww-copy-page-url
       )

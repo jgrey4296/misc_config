@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: gradle.task
+# uuid: task
+# key:  task
+# group :
+# --
+task $1() {
+    $0
+}

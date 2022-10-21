@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: gradle.buildscript
+# uuid: gradle.buildscript
+# key:  gradle.buildscript
+# group :
+# --
+buildscript {
+            $0
+}

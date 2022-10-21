@@ -15,17 +15,21 @@ CEPTRE_HOME=~/github/MAS/ceptre
 # alias ceptre="$CEPTRE_HOME/bin/ceptre"
 PATH=$CEPTRE_HOME/bin:$PATH
 
-jgd Setting JACAMO
-JACAMO_HOME=~/github/MAS/jacamo/build
-
 jgd Setting Java
 JDK_HOME="${HOME}/.gradle/jdks/adoptium-19-x64-hotspot-mac/Contents/Home"
 JAVA_HOME="${HOME}/.gradle/jdks/adoptium-19-x64-hotspot-mac/Contents/Home"
+PATH=$JDK_HOME/bin:$PATH
 
-PATH=$JACAMO_HOME/scripts:$JDK_HOME/bin:$PATH
+jgd Setting Jason
+JASON_HOME=~/github/MAS/jason/build
+PATH=$JASON_HOME/scripts:$PATH
+
+jgd Setting JACAMO
+JACAMO_HOME=~/github/MAS/jacamo/build
+PATH=$JACAMO_HOME/scripts:$PATH
+
+
 
 
 jgd Setting Prompter
 alias prompter="perl /Volumes/documents/github/MAS/cotillion/packages/prompter/prompter/prompter.pl"
-
-export JDK_HOME

@@ -1,0 +1,82 @@
+[project]
+name            = "{{cookiecutter.proj_name}}"
+version         = "0.0.1"
+description     = ""
+readme          = "README.md"
+requires-python = ">=3.10"
+license         = {file = "LICENSE"}
+keywords        = []
+authors         = [
+  {email = "{{cookiecutter._email}}"},
+  {name  = "cookiecutter._author"}
+]
+classifiers     = [
+  "Programming Language :: Python"
+]
+
+dependencies   = []
+
+[project.optional-dependencies]
+test = [
+  "pytest < 5.0.0",
+]
+
+[project.urls]
+homepage      = "https://github.com/{{cookiecutter._github_username}}/{{cookiecutter.proj_name}}"
+documentation = "https://readthedocs.org/{{cookiecutter.proj_name}}"
+repository    = "https://github.com/{{cookiecutter._github_username}}/{{cookiecutter.proj_name}}"
+changelog     = "https://github.com//{{cookiecutter.proj_name}}/blob/master/CHANGELOG.md"
+
+[project.scripts]
+{{cookiecutter.proj_name}} = {{cookiecutter.proj_name}}.{{cookiecutter.entry_point}}:main
+
+[project.gui-scripts]
+# spam-gui      = "spam:main_gui"
+
+[project.entry-points."nothing"]
+# tomatoes      = "spam:main_tomatoes"
+
+[build-system]
+requires = [
+         "setuptools",
+         "wheel"
+]
+
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+# packages = ['rust_py']
+include-package-data = true
+
+[tool.setuptools.packages.find]
+namespaces = true
+where = ["."]
+
+[tool.setuptools.package-data]
+"{{cookiecutter.proj_name}}.__configs" = []
+
+
+[tool.setuptools.exclude-package-data]
+
+
+[tool.pyright]
+# strict = {{cookiecutter.proj_name}}.*
+verboseOutput               = true
+typeCheckingMode            = "strict"
+pythonVersion               = "3.10"
+
+reportUnusedImport          = false
+reportAssertAlwaysTrue      = "information"
+reportMissingParameterType  = "warning"
+reportMissingTypeArgument   = "warning"
+reportMissingTypeStubs      = "warning"
+reportUnknownMemberType     = "warning"
+reportUnknownParameterType  = "information"
+reportUnknownVariableType   = "warning"
+reportUnnecessaryCast       = "information"
+reportUnnecessaryIsInstance = "warning"
+
+[tool.pytest.ini_options]
+log_cli       = false
+log_level     = "DEBUG"
+log_cli_level = "DEBUG"

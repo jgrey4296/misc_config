@@ -6,5 +6,8 @@
 # --
 task $1() {
      description ""
+     //dependsOn
+     //finalizedBy
+     //doLast {}
     $0
 }

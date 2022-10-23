@@ -47,8 +47,8 @@ sourceSets {
 }
 
 task run (type: JavaExec) {
-    dependsOn: 'classes'
-    group       ' JaCaMo'
+    dependsOn   'classes'
+    group       'JaCaMo'
     description 'runs the JaCaMo application'
     doFirst {
         mkdir 'log'
@@ -59,7 +59,7 @@ task run (type: JavaExec) {
 }
 
 task cli (type: JavaExec) {
-    dependsOn: 'classes'
+    dependsOn  'classes'
     group       ' JaCaMo'
     description 'runs the JaCaMo application'
     doFirst {
@@ -72,7 +72,7 @@ task cli (type: JavaExec) {
 
 
 task uberJar(type: Jar) {
-    dependsOn: 'classes'
+    dependsOn  'classes'
     group      ' JaCaMo'
     description 'creates a single runnable jar file with all dependencies'
     duplicatesStrategy 'exclude'
@@ -98,8 +98,8 @@ task uberJar(type: Jar) {
 
     doFirst {
         copy {
-            from 'mytest.jcm'
-            rename 'mytest.jcm','default.jcm'
+            from '{{cookiecutter.proj_name}}.jcm'
+            rename '{{cookiecutter.proj_name}}.jcm','default.jcm'
             into project.buildDir.absolutePath + '/jcm'
         }
     }

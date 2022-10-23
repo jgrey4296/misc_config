@@ -1,21 +1,43 @@
 ;; Indexing
 
+(defun +jg-tag-parse-tag-file (path)
+  " parse a file of tags and insert them into the global tag hash "
+  (with-temp-buffer
+    (insert-file path)
+    (goto-char (point-min))
+    (while (< (point) (point-max))
+      (let ((tagline (split-string (buffer-substring (line-beginning-position) (line-end-position))
+                                   ":" nil " +")))
+        (unless (or (> (length tagline) 2) (string-empty-p (car tagline)))
+          (puthash (car tagline) (string-to-number (cadr tagline))
+                   jg-tag-global-tags)))
+      (forward-line)
+      )
+    )
+  )
+
 (defun +jg-tag-rebuild-tag-database ()
   "Rebuild the tag database from jg-tag-loc-global-tags"
   (interactive)
   (clrhash jg-tag-global-tags)
-  (if (f-exists? jg-tag-loc-global-tags)
-      (with-temp-buffer
-        (insert-file jg-tag-loc-global-tags)
-        (goto-char (point-min))
-        (while (< (point) (point-max))
-          ((lambda (x) (puthash (car x) (string-to-number (cadr x)) jg-tag-global-tags)) (split-string (buffer-substring (line-beginning-position) (line-end-position)) ":" nil " +"))
-          (forward-line)
-          )
+  (cond ((not (f-exists? jg-tag-loc-global-tags))
+         (error "ERROR: GLOBAL-TAGS-LOCATION IS EMPTY")
+         )
+        ((f-dir? jg-tag-loc-global-tags)
+         (let ((files (f-entries jg-tag-loc-global-tags-alt
+                                 (-rpartial 'f-ext? "sub")
+                                 t)))
+           (message "Got Dir")
+           (cl-loop for file in files
+                    do
+                    (+jg-tag-parse-tag-file file))
+           ))
+        ((f-file? jg-tag-loc-global-tags)
+         (+jg-tag-parse-tag-file jg-tag-loc-global-tags))
+        (t (message "ERROR: GLOBAL-TAGS-LOCATION IS EMPTY"))
         )
-    (message "ERROR: GLOBAL-TAGS-LOCATION IS EMPTY")
-    )
   )
+
 (defun +jg-tag-index-people ()
   "Index all twitter users in the current directory "
   (interactive)

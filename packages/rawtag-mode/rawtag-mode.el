@@ -44,7 +44,7 @@
     (unless (looking-at "^## ")
       (let* ((current (current-word))
              (subsel (substring current 0 (when (> (length current) 5) -4)))
-             (val (ivy-read "Select Replacement: "  jg-tag-global-tags :initial-input current))
+             (val (ivy-read "Select Replacement: "  jg-tag-global-tags :initial-input (concat "^" (downcase current))))
              )
         (end-of-line)
         (insert " : " (s-replace-regexp " +" "_" (s-trim val)))
@@ -239,6 +239,7 @@ Maybe add a substitution "
 
   )
 (add-to-list 'auto-mode-alist '("\.rawtags$" . rawtag-mode))
+(add-to-list 'auto-mode-alist '("\.tags$" . rawtag-mode))
 (add-to-list 'auto-mode-alist '("\.sub\\(_author\\)?$" . rawtag-mode))
 
 ;;-- end mode-definition

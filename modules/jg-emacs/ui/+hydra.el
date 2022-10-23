@@ -2,11 +2,15 @@
 
 (load! "+sub-hydras")
 
+;; Row padder:
+;; "*                   ^^ *"
+;;
+
+;;-- stacking
 (defvar jg-ui-toggle-hydra-stack nil)
 (defun +jghdoc (var)
   (if var 1 0)
   )
-
 (defun +jgh-push (func)
   (push func jg-ui-toggle-hydra-stack)
   )
@@ -17,16 +21,16 @@
     )
   )
 
+;;-- end stacking
 
-;; Row padder:
-;; "*                   ^^ *"
-;;
+
 (defhydra +jg-ui-toggle-hydra ()
   "
 _v_isuals    _g_uides       w_r_apping    _n_avigation
 ^^^^^^^------------------------------------------------
 _h_l-line    _w_hitespace   _t_runcate    _a_uto-hide
 ^^^^^^                                    _c_ursor
+^^^^^^                                    _e_ww
 "
 
   ("v" (progn (+jgh-push #'+jg-ui-toggle-hydra/body)
@@ -37,10 +41,11 @@ _h_l-line    _w_hitespace   _t_runcate    _a_uto-hide
               (+jg-ui-wrap-hydra/body)) nil :exit t)
   ("n" (progn (+jgh-push #'+jg-ui-toggle-hydra/body)
               (+jg-ui-nav-hydra/body)) nil :exit t)
-  ("h" #'global-hl-line-mode        nil :exit nil)
-  ("t" #'toggle-truncate-lines      nil :exit nil)
-  ("w" #'whitespace-mode            nil :exit nil)
-  ("a" #'global-autohide-minor-mode nil :exit nil)
-  ("c" #'global-centered-cursor-mode nil :exit nil)
+  ("h" #'global-hl-line-mode          nil  :exit nil)
+  ("t" #'toggle-truncate-lines        nil  :exit nil)
+  ("w" #'whitespace-mode              nil  :exit nil)
+  ("a" #'global-autohide-minor-mode   nil  :exit nil)
+  ("c" #'global-centered-cursor-mode  nil  :exit nil)
+  ("e" #'+jg-misc-toggle-browsing     nil  :exit nil)
   ("q" (setq jg-ui-toggle-hydra-stack nil) :exit t)
 )

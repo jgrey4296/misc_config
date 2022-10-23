@@ -9,6 +9,7 @@
       )
 
 
+;;-- popup
 (after! 'jg-popup-init
   (+jg-ui-popup-add-rules 'nxml
                           `((,jg-xml-xpath-results-buffer-name :side bottom :ttl nil :height 0.3 :quit t :select nil :priority 100)
@@ -18,6 +19,8 @@
 
 
   )
+
+;;-- end popup
 
 ;;-- fold spec
 (after! jg-fold-specs

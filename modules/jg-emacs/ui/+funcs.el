@@ -13,6 +13,29 @@
 
   )
 
+(defun +jg-ui-what-face (pos)
+  ;; from: http://stackoverflow.com/questions/1242352/
+  (interactive "d")
+  (let ((face (or (get-char-property (point) 'read-face-name)
+                  (get-char-property (point) 'face))))
+    (if face (message "Face: %s" face) (message "No face at %d" pos))))
+(defun +jg-ui-face-under-cursor-customize (pos)
+  (interactive "d")
+  (let ((face (or (get-char-property (point) 'read-face-name)
+                  (get-char-property (point) 'face))))
+    (if face (customize-face face) (message "No face at %d" pos))))
+(defun +jg-ui-toggle-docstrings ()
+  (interactive)
+  (setq which-key-show-docstrings
+        (if which-key-show-docstrings
+            nil
+          'docstring-only
+            )
+        )
+  )
+
+
+
 ;;-- window rotation
 ;; From spacemacs originally
 ;; originally from magnars and modified by ffevotte for dedicated windows

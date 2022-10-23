@@ -21,7 +21,7 @@
 ;;-- end personal vars
 
 ;;-- rotate text
-(set-rotate-patterns! 'emacs-lisp-mode
+(set-rotate-patterns! 'python-mode
   :symbols '(("True" "False")
 
              )

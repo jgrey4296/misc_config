@@ -1,9 +1,5 @@
 ;;; +advice.el -*- lexical-binding: t; -*-
 
-(define-advice yas-reload-all (:before (&rest args) +jg-yas-dir-fix)
-  (+jg-completion-activate-file-templates)
-  )
-
 
 ;; (define-advice +eval-open-repl (:override (prompt-p &optional displayfn)
 ;;                                 +jg-repl-filter)

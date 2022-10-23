@@ -1,4 +1,4 @@
-;;; `(file-name-nondirectory buffer-file-name)` -*- lexical-binding: t; -*-
+ ;;; `(file-name-nondirectory buffer-file-name)` -*- lexical-binding: t; no-byte-compile: t;-*-
 ;;-- header
 ;;
 ;; Copyright (C) `(format-time-string "%Y")` `user-full-name`

@@ -16,3 +16,12 @@
               display-line-numbers             t
               display-line-numbers-major-tick  20
               )
+
+;;-- parens
+(setq-default
+              highlight-parentheses-colors            '("black")
+              highlight-parentheses-background-colors '("#60aa00" "yellow" "#da8548" "#d02b61")
+              global-hl-line-modes '(bibtex-mode prog-mode text-mode conf-mode special-mode org-agenda-mode comint-mode)
+              )
+
+;;-- end parens

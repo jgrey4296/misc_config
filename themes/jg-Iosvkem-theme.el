@@ -195,8 +195,10 @@ determine the exact padding."
    ((hes-escape-backslash-face &override) :inherit 'normal :foreground red)
    ((hes-escape-sequence-face &override) :inherit 'normal :foreground red)
 
-   ;; mic-paren
+   ;; paren
    ((paren-face-match &override) :foreground iopink :background bg :weight 'ultra-bold)
+   ;; ((rainbow-delimiters-depth-1-face &override) :background "white")
+
 
    ;; nav-flash
    ((nav-flash-face &override) :background bg-alt :foreground iopink)
@@ -223,13 +225,13 @@ determine the exact padding."
    (css-selector             :foreground blue)
 
    ;; markdown-mode
-   ((markdown-bold-face &override) :foreground cyan)
-   ((markdown-code-face &override) :background (doom-lighten base3 0.05))
+   ((markdown-bold-face &override)   :foreground cyan)
+   ((markdown-code-face &override)   :background (doom-lighten base3 0.05))
    ((markdown-italic-face &override) :foreground cyan)
-   ((markdown-link-face &override) :foreground blue)
-   ((markdown-list-face &override) :foreground magenta)
-   ((markdown-url-face &override) :foreground base5)
-   (markdown-header-delimiter-face :inherit 'bold :foreground red)
+   ((markdown-link-face &override)   :foreground blue)
+   ((markdown-list-face &override)   :foreground magenta)
+   ((markdown-url-face &override)    :foreground base5)
+   (markdown-header-delimiter-face   :inherit 'bold :foreground red)
    (markdown-header-face :inherit 'bold :foreground fg)
    (markdown-markup-face :foreground red)
 

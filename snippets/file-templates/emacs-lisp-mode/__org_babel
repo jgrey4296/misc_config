@@ -1,4 +1,4 @@
-;;; ob-$1.el --- org-babel functions for $1 evaluation
+;;; ob-$1.el --- org-babel functions for $1 evaluation -*- lexical-binding: t; no-byte-compile: t; -*-
 ;;-- header
 ;; Author: `user-full-name` <https://github.com/`(cl-find-if-not #'string-empty-p (list (cdr (doom-call-process "git" "config" "user.github")) user-login-name))`>
 ;; Maintainer: `user-full-name` <`user-mail-address`>

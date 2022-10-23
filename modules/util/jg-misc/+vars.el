@@ -16,8 +16,6 @@
 )
 ;;-- end browsing defaults
 
-
-
 ;;-- evil-misc
 (after! (evil evil-snipe)
   (push 'dired-mode evil-snipe-disabled-modes)
@@ -25,7 +23,7 @@
 (after! evil-quickscope
   (global-evil-quickscope-always-mode 1)
   )
-;;-- end evil-snipe
+;;-- end evil-misc
 
 ;;-- shellvars
 (setq-default shell-default-shell 'shell
@@ -33,14 +31,6 @@
               shell-enable-smart-eshell t
               )
 ;;-- end shellvars
-
-;;-- line_highlighting
-(setq-default
-              hl-paren-colors '("#bd382b" "#faaa39" "#ffe86b" "#c9de3e" "#62b824")
-              hl-paren-background-colors '("#5f5fec" "#7993f6" "#f65699" "#ff8b97")
-              global-hl-line-modes '(bibtex-mode prog-mode text-mode conf-mode special-mode org-agenda-mode comint-mode)
-              )
-;;-- end line_highlighting
 
 ;;-- undo-limits
 (setq-default

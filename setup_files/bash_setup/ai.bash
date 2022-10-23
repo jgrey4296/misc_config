@@ -16,9 +16,15 @@ CEPTRE_HOME=~/github/MAS/ceptre
 PATH=$CEPTRE_HOME/bin:$PATH
 
 jgd Setting Java
-JDK_HOME="${HOME}/.gradle/jdks/adoptium-19-x64-hotspot-mac/Contents/Home"
-JAVA_HOME="${HOME}/.gradle/jdks/adoptium-19-x64-hotspot-mac/Contents/Home"
+# JDK_HOME="${HOME}/.gradle/jdks/adoptium-19-x64-hotspot-mac/Contents/Home"
+JDK_HOME="/usr/local/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home"
+JAVA_HOME=$JDK_HOME
 PATH=$JDK_HOME/bin:$PATH
+
+jgd Setting Gradle
+alias gradle="/usr/local/Cellar/gradle/7.5.1_1/libexec/bin/gradle"
+alias gra="./gradlew -q"
+
 
 jgd Setting Jason
 JASON_HOME=~/github/MAS/jason/build

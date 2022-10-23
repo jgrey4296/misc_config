@@ -5,6 +5,7 @@
 # group :
 # --
 task $1(type:Exec) {
+     description ""
      workingDir '.'
      environment []
      executable '$2'

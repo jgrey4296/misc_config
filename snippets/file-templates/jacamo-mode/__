@@ -1,0 +1,18 @@
+// https://github.com/jacamo-lang/jacamo/blob/master/doc/jcm.adoc#agents-configuration
+
+// import with: uses {}, {}, {}
+mas $1 {
+  agent bob: hwa.asl {        // initial plans for bob are in hwa.asl
+    goals: say("Hello World") // initial goal for bob
+  }
+
+  // Execution Control
+  asl-path  : ., src/agt
+  org-path  : ., src/org
+  java-path : ., src/java
+
+  platform: jade() // cartago("") local()
+  // jacamo.platform.AgentWebInspector("false")
+  // jacamo.platform.EnvironmentWebInspector("false")
+  // jacamo.platform.OrganisationWebInspector("false")
+}

@@ -5,15 +5,10 @@
    October 21, 2022 - 18:34:15
 */
 
-defaultTasks 'run'
 
 plugins {
     id "java"
-
 }
-
-version '1.0'
-group   'org.jacamo'
 
 java {
     toolchain {
@@ -51,20 +46,33 @@ sourceSets {
     }
 }
 
-task run (type: JavaExec, dependsOn: 'classes') {
+task run (type: JavaExec) {
+    dependsOn: 'classes'
     group       ' JaCaMo'
     description 'runs the JaCaMo application'
     doFirst {
         mkdir 'log'
     }
     mainClass = 'jacamo.infra.JaCaMoLauncher'
-    args 'mytest.jcm'
-    // jvmArgs '-Xss15m'
+    args('{{cookiecutter.proj_name}}.jcm', '--log-conf', './{{cookiecutter.proj_name}}/__configs/gui-log.properties')
+    classpath sourceSets.main.runtimeClasspath
+}
+
+task cli (type: JavaExec) {
+    dependsOn: 'classes'
+    group       ' JaCaMo'
+    description 'runs the JaCaMo application'
+    doFirst {
+        mkdir 'log'
+    }
+    mainClass = 'jacamo.infra.JaCaMoLauncher'
+    args('{{cookiecutter.proj_name}}.jcm', '--log-conf', './{{cookiecutter.proj_name}}/__configs/cli-log.properties')
     classpath sourceSets.main.runtimeClasspath
 }
 
 
-task uberJar(type: Jar, dependsOn: 'classes') {
+task uberJar(type: Jar) {
+    dependsOn: 'classes'
     group      ' JaCaMo'
     description 'creates a single runnable jar file with all dependencies'
     duplicatesStrategy 'exclude'

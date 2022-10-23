@@ -1,0 +1,54 @@
+/*
+   build.gradle template
+
+
+*/
+
+plugins {
+ id 'java'
+}
+
+defaultTasks 'run'
+version '1.0'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(19)
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven { url "https://repo.gradle.org/gradle/libs-releases" }
+}
+
+dependencies {
+
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/env'
+        }
+        resources {
+            srcDir 'src/resources'
+        }
+    }
+}
+
+task run (type: JavaExec, dependsOn: 'classes') {
+    description 'runs the application'
+    doFirst {
+        mkdir 'log'
+    }
+    mainClass = '$1'
+    args '$2'
+    classpath sourceSets.main.runtimeClasspath
+}
+
+clean {
+    delete 'bin'
+    delete 'build'
+    delete 'log'
+}

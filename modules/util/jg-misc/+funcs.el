@@ -1,5 +1,6 @@
 ;;; util/jg-misc/+funcs.el -*- lexical-binding: t; -*-
 
+;;-- url browsing
 (defun +jg-misc-browse-url (&optional url)
   (interactive)
   (let ((url (cond (url url)
@@ -9,6 +10,7 @@
                     (read-string "Search For: "))
                    ))
         )
+
     (cond ((f-exists? url)
            (shell-command (format "open %s" url)))
           ((s-prefix? "@" url)
@@ -26,7 +28,20 @@
     )
   )
 
+(defun +jg-misc-toggle-browsing ()
+  (interactive)
+  (message "Browsing: %s"
+           (setq jg-misc-browse-type (cond ((eq jg-misc-browse-type 'eww)
+                                            'external)
+                                           (t 'eww)))
+           )
+
+  )
+
+;;-- end url browsing
+
 (defun +jg-misc-get-modes ()
+
   (let (major minor)
     ;; Modes in auto mode alist:
     (cl-loop for mode in (mapcar 'cdr auto-mode-alist)
@@ -57,13 +72,6 @@
     (list major minor)
     )
   )
-(defun +jg-misc-sync-movements ()
-  ;; TODO
-  ;; Get current windows
-  ;; add advice to evil line move
-
-  )
-
 (defun +jg-misc-flatten (lst)
   " Utility to flatten a list "
   (letrec ((internal (lambda (x)
@@ -80,42 +88,6 @@
                                      (line-beginning-position)
                                      (line-end-position))))
   )
-(defun +jg-misc-split-tags()
-  (interactive)
-  (goto-char (point-min))
-  (let ((letter ?a)
-        (end-letter (+ 1 ?z))
-        (beg (point-min))
-        (fst t)
-        subs)
-    (while (and (not (equal letter end-letter))
-                (re-search-forward (format "^%s" (char-to-string letter)) nil nil))
-      (setq subs (buffer-substring beg (- (point) 1)))
-      (with-output-to-temp-buffer (if fst "misc.tags" (format "%s.tags" (char-to-string (- letter 1))))
-        (princ subs)
-        )
-      (setq beg (- (point) 1)
-            letter (+ letter 1)
-            fst nil)
-      )
-    (setq subs (buffer-substring (- (point) 1) (point-max)))
-    (with-output-to-temp-buffer "z.tags"
-      (princ subs)
-      )
-    )
-  )
-(defun +jg-misc-what-face (pos)
-  ;; from: http://stackoverflow.com/questions/1242352/
-  (interactive "d")
-  (let ((face (or (get-char-property (point) 'read-face-name)
-                  (get-char-property (point) 'face))))
-    (if face (message "Face: %s" face) (message "No face at %d" pos))))
-
-(defun +jg-misc-face-under-cursor-customize (pos)
-  (interactive "d")
-  (let ((face (or (get-char-property (point) 'read-face-name)
-                  (get-char-property (point) 'face))))
-    (if face (customize-face face) (message "No face at %d" pos))))
 (defun +jg-misc-modify-line-end-display-table ()
   (interactive)
   " from https://stackoverflow.com/questions/8370778/ "
@@ -123,12 +95,10 @@
   ;; truncate are not signaled with a $
   (set-display-table-slot standard-display-table 0 ?\ )
   )
-(defun +jg-misc-toggle-docstrings ()
-  (interactive)
-  (setq which-key-show-docstrings
-        (if which-key-show-docstrings
-            nil
-          'docstring-only
-            )
-        )
+
+(defun +jg-misc-sync-movements ()
+  ;; TODO
+  ;; Get current windows
+  ;; add advice to evil line move
+
   )

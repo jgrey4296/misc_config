@@ -11,6 +11,8 @@
               jg-misc-palette-list-url "https://www.palettelist.com/"
               jg-misc-overapi-url      "https://overapi.com/"
               jg-misc-github-url       "https://git-scm.com/doc"
+
+              jg-misc-browse-type 'eww
 )
 ;;-- end browsing defaults
 

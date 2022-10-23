@@ -112,4 +112,5 @@
 
 (map! :map eww-mode-map
       :n "=" 'eww-copy-page-url
+      :n "?" 'eww-browse-with-external-browser
       )

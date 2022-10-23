@@ -43,5 +43,11 @@
       args)
   )
 
+(define-advice browse-url (:before-until (url &rest args)
+                                         +jg-eww-choice)
+  (when (and (eq jg-misc-browse-type 'eww) (not (-contains? args :force)))
+    (eww url))
+  )
+
 (provide '+advice)
 ;;; +advice.el ends here

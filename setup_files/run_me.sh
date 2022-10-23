@@ -18,12 +18,13 @@ echo "Appending bash setup to bash_profile"
 echo "source ~/.setup_files/main.bash" >> ~/.bash_profile
 
 
-echo "Setting up dot file symlinks"
+echo "Setting up tool config symlinks"
 for fname in $(find ~/.shell_files/tool_configs -type f -name ".*")
 do
     basefile=$(basename "$fname")
     ln -s $fname ~/$basefile
 done
+ln -s ~/.shell_files/tool_configs/gradle.properties ~/gradle.properties
 
 echo "Linking snippets"
 ln -s "$SHELL_DIR/../snippets" ~/.emacs.d/private/snippets

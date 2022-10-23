@@ -1,5 +1,6 @@
 ;;; emacs/jg-vc/config.el -*- lexical-binding: t; -*-
 
+(load! "+funcs")
 (after! jg-bindings-total
   (load! "+bindings")
   )

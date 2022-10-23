@@ -25,3 +25,9 @@
       :localleader
       "1" (cmd! (+jg-misc-browse-url "https://git-scm.com/doc"))
       )
+(map! :after jg-bindings-total
+      :leader
+      :prefix "p"
+      :desc "Gradle" :n "g" #'+jg-vcs-run-gradle
+
+      )

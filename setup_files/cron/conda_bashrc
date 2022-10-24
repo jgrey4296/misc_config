@@ -16,9 +16,12 @@ fi
 unset __conda_setup
 # <<< conda init <<<
 
-source ~/.shell_files/bash_setup/base_path.bash
-for fname in $(find ~/.shell_files/bash_setup -type f -name "*.bash" -not -name "exports.bash" -not -name "base_path.bash")
+source ~/.shell_files/bash_setup/_basic_utils.bash
+source ~/.shell_files/bash_setup/_base_path.bash
+
+for fname in $(find ~/.shell_files/bash_setup -type f -name "*.bash" -not -regex ".+?/_.+?\.bash")
 do
     source $fname
 done
 source ~/.shell_files/bash_setup/exports.bash
+source ~/.shell_files/bash_setup/_exports.bash

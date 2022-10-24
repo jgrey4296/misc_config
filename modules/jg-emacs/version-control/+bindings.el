@@ -28,6 +28,6 @@
 (map! :after jg-bindings-total
       :leader
       :prefix "p"
-      :desc "Gradle" :n "g" #'+jg-vcs-run-gradle
-
+      :desc "Gradle -q" :n "g" #'+jg-vcs-run-gradle-quiet
+      :desc "Gradle"    :n "G" #'+jg-vcs-run-gradle
       )

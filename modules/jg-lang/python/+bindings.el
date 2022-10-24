@@ -36,7 +36,7 @@
        :desc "Test Func DWIM"  "t" #'python-pytest-function-dwim
        :desc "Test Func"       "T" #'python-pytest-function
        :desc "Test repeat"     "r" #'python-pytest-repeat
-       :desc "Test Popup"      "p" #'python-pytest-popup)
+       :desc "Test Popup"      "p" #'python-pytest-dispatch)
       (:prefix ("e" . "Environment")
        :desc "activate"    "a"    #'pyvenv-activate
        :desc "deactivate"  "d"    #'pyvenv-deactivate

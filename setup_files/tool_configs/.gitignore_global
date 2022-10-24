@@ -14,6 +14,13 @@
 build/
 ccsat.*
 dist/
+.projectile-cmds
+
+# Gradle
+gradle/
+gradlew
+gradlew.bat
+.gradle/
 
 # Rust:
 target/

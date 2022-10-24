@@ -24,7 +24,7 @@
          (error "ERROR: GLOBAL-TAGS-LOCATION IS EMPTY")
          )
         ((f-dir? jg-tag-loc-global-tags)
-         (let ((files (f-entries jg-tag-loc-global-tags-alt
+         (let ((files (f-entries jg-tag-loc-global-tags
                                  (-rpartial 'f-ext? "sub")
                                  t)))
            (message "Got Dir")

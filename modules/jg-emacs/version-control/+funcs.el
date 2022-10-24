@@ -2,10 +2,13 @@
 
 (defvar +jg-vcs-task-hash (make-hash-table :test 'equal))
 (defvar +jg-vcs-gradle-command "gradlew")
+(defvar +jg-vcs-gradle-command-args '())
 
-(setq ivy-format-orig ivy-format-functions-alist)
-(setq ivy-format-functions-alist (cons '(+jg-vcs-run-gradle . +jg-vcs-format-gradle)
-                                       ivy-format-orig))
+(after! ivy
+  (setq ivy-format-orig ivy-format-functions-alist)
+  (setq ivy-format-functions-alist (cons '(+jg-vcs-run-gradle . +jg-vcs-format-gradle)
+                                         ivy-format-orig))
+)
 
 (defun +jg-vcs-format-gradle (cands)
   " Custom ivy format function to align and use the hashtable values"
@@ -55,7 +58,14 @@
         (exec-path (list (projectile-project-root)))
         )
     (with-current-buffer buff (erase-buffer))
-    (call-process +jg-vcs-gradle-command nil buff nil task)
+    (apply 'call-process +jg-vcs-gradle-command nil buff nil task +jg-vcs-gradle-command-args)
     (+popup-buffer buff)
+    )
+  )
+
+(defun +jg-vcs-run-gradle-quiet (prefix)
+  (interactive "P")
+  (let ((+jg-vcs-gradle-command-args (cons "-q" +jg-vcs-gradle-command-args)))
+    (+jg-vcs-run-gradle prefix)
     )
   )

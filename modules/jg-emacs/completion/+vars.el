@@ -69,6 +69,9 @@
         ;; helm-boring-buffer-regexp-list
         )
   )
+(after! yasnippet
+  (pushnew! yas-prompt-functions '+jg-yas-prompt-fn)
+  )
 
 
 (setq company-idle-delay 1)

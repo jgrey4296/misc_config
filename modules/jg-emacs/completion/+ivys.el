@@ -1,5 +1,6 @@
 ;;; +ivys.el -*- lexical-binding: t; -*-
 
+
 ;;-- utils
 (defun +jg-completion-ivy-predicate (x)
   ;; return nil for cruft buffers
@@ -70,6 +71,22 @@
             :caller 'window-control-ivy-popup-buffer
             )
   )
+
+(defun +jg-yas-prompt-fn (prompt choices &optional display-fn)
+  " Yasnippet ivy which shows groups "
+  (let* ((width 30)
+         (formatted-choices (cl-loop for template in templates
+                                  collect
+                                  (let ((name (s-replace "\\" "/" (s-trim (yas--template-name template))))
+                                        (group (s-trim (apply 'concat (yas--template-group template))))
+                                        )
+                                    (concat " " name (make-string (max 20 (- width (length name))) ? ) ": " group ))))
+         chosen)
+    (setq chosen (ivy-read "Choose Snippet: " formatted-choices :caller '+jg-completion-yas-ivy))
+    (nth (or (cl-position chosen formatted-choices :test #'string=) 0) choices)
+    )
+  )
+
 ;;-- end ivys
 
 ;;-- advice

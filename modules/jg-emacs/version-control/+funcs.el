@@ -5,9 +5,8 @@
 (defvar +jg-vcs-gradle-command-args '())
 
 (after! ivy
-  (setq ivy-format-orig ivy-format-functions-alist)
-  (setq ivy-format-functions-alist (cons '(+jg-vcs-run-gradle . +jg-vcs-format-gradle)
-                                         ivy-format-orig))
+  (ivy-configure 'jg-vcs-gradle-ivy
+    :format-fun #'jg-vcs-format-gradle)
 )
 
 (defun +jg-vcs-format-gradle (cands)
@@ -52,7 +51,7 @@
                )
       )
     )
-  (let ((task (ivy-read "Choose Task: " +jg-vcs-task-hash))
+  (let ((task (ivy-read "Choose Task: " +jg-vcs-task-hash :caller 'jg-vcs-gradle-vy))
         (buff (get-buffer-create "*gradle*"))
         (default-directory (projectile-project-root))
         (exec-path (list (projectile-project-root)))

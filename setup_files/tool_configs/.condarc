@@ -8,6 +8,10 @@ env_prompt: ""
 create_default_packages:
   - beautifulsoup4
   - build
+  - celery
+  - coverage
+  - flask
+  - humanfriendly
   - isort
   - jedi
   - matplotlib
@@ -16,23 +20,28 @@ create_default_packages:
   - numpy
   - pandas
   - pip
+  - pip-review
+  - pony
   - pycodestyle
+  - pycycle
   - pygments
   - pylint
   - pyparsing
   - pyqtree
   - pyright
-  - rich
   - pytest
   - python=3.10
   - readline
   - regex
+  - rich
   - scipy
-  - statsmodels
   - seaborn
+  - semanticversion
   - setuptools
   - sphinx
   - sqlite
+  - stackprinter
+  - statsmodels
   - sty
   - sympy
   - wheel

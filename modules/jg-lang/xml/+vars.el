@@ -6,9 +6,11 @@
 
       jg-xml-xpath-results-buffer-name "*xpath result*"
       jg-xml-xmllint-shell-buffer-name "*xmllint*"
+
       )
 
-
+(pushnew! mailcap-mime-extensions '(".xhtml" . "text/html"))
+(pushnew! mailcap-mime-extensions '(".xml" . "text/html"))
 ;;-- popup
 (after! 'jg-popup-init
   (+jg-ui-popup-add-rules 'nxml

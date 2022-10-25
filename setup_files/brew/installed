@@ -32,6 +32,7 @@ faust
 fd
 ffmpeg
 findutils
+fish
 flac
 fltk
 fluid-synth
@@ -186,7 +187,7 @@ opencore-amr
 openexr
 openjdk
 openjdk@11
-openjdk@8
+openjdk@17
 openjpeg
 openssl@1.1
 opus
@@ -258,6 +259,7 @@ xz
 zeromq
 zimg
 zlib
+zsh
 zstd
 basictex
 font-fira-code

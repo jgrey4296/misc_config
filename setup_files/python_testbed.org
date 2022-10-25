@@ -3,6 +3,62 @@
 * Overview
 
 * Main
+** Core
+  - beautifulsoup4
+  - build
+  - coverage
+  - flask
+  - humanfriendly
+  - isort
+  - jedi
+  - matplotlib
+  - mypy=0.931
+  - networkx
+  - numpy
+  - pandas
+  - pip
+  - pip-review
+  - pony
+  - pycodestyle
+  - pycycle
+  - pygments
+  - pylint
+  - pyparsing
+  - pyqtree
+  - pyright
+  - pytest
+  - python=3.10
+  - readline
+  - regex
+  - rich
+  - scipy
+  - seaborn
+  - semanticversion
+  - setuptools
+  - sphinx
+  - sqlite
+  - stackprinter
+  - statsmodels
+  - sty
+  - sympy
+  - wheel
+
+** To Make Core
+- celery
+- cachetools
+- rope
+- pydot
+- marshmallow
+- pyexcel or similar
+- floweaver
+- plotly
+- pillow
+
+** Alt Cores
+clingo, z3, pysmt, pyswip, pomegranate
+
+astroid
+textblob, inflect, pronouncingpy, spacy
 
 * Links
 ** adb
@@ -40,8 +96,8 @@ https://github.com/sixohsix/twitter                                             
 
 ** architecture
 https://github.com/numba/llvmlite
-flask
-celery
+https://flask.palletsprojects.com/en/2.2.x/
+https://docs.celeryq.dev/en/stable/
 build                                                                                           : 0.8.0
 cachetools                                                                                      : 4.2.2
 cachy                                                                                           : 0.3.0
@@ -58,7 +114,7 @@ pkginfo                                                                         
 platformdirs                                                                                    : 2.5.2
 poetry                                                                                          : 1.1.15
 ptyprocess                                                                                      : 0.7.0
-semantic-version                                                                                : 2.10.0
+https://github.com/rbarrois/python-semanticversion
 setuptools                                                                                      : 63.4.1
 setuptools-rust                                                                                 : 1.4.1
 virtualenv                                                                                      : 20.16.2
@@ -179,7 +235,7 @@ pydantic                                                                        
 pyflakes                                                                                        : 2.4.0
 pylint                                                                                          : 2.14.5
 crashtest                                                                                       : 0.3.1
-coverage                                                                                        : 6.4.4
+https://github.com/nedbat/coveragepy
 flake8                                                                                          : 4.0.1
 https://docs.quantifiedcode.com/python-anti-patterns/index.html
 https://github.com/google/yapf                                                                  : emacs : formatting : libraries : lint : pep8

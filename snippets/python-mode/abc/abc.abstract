@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: abc.abstract
 # uuid: abc.abstract
+# group: abc
 # --
 @abc.abstractmethod $1
 def $2(self$3) -> $4:

@@ -14,6 +14,7 @@ from typing import (Any, Callable, ClassVar, Generic, Iterable, Iterator,
                     TypeVar, cast)
 from unittest import mock
 ##-- end imports
+logging = logmod.root
 
 ##-- warnings
 with warnings.catch_warnings():
@@ -30,7 +31,6 @@ class Test$1(unittest.TestCase):
         cls.file_h        = logmod.FileHandler(LOG_FILE_NAME, mode="w")
         cls.file_h.setLevel(LOGLEVEL)
 
-        logging = logmod.root
         logging.setLevel(logmod.NOTSET)
         logging.addHandler(cls.file_h)
 

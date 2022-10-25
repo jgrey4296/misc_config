@@ -123,6 +123,26 @@
 ;;-- end misc
 
 ;;-- labelling
+(defun +jg-mail-summary-label-by-body-regexp (regexp label)
+  (interactive (list (read-string "Regexp: ") (rmail-read-label "Label: ")))
+  (save-excursion
+    (with-current-buffer rmail-buffer
+      (rmail-swap-buffers)
+      (goto-char (point-min))
+      (while (< (point) (point-max))
+        ;; get current bounds
+        ;; narrow to body
+        ;; search
+        ;; ;; apply label if its found
+        ;; edit and add the label
+        )
+
+      (rmail-swap-buffers)
+      )
+    ;; update the summary vector
+    )
+  )
+
 (defun +jg-mail-summary-edit-label (msg-num label state)
   (save-excursion
     (let* ((summary-buff (current-buffer))

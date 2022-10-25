@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: abc.interface
 # uuid: abc.interface
+# group: abc
 # --
 # https://docs.python.org/3/library/abc.html
 # from https://realpython.com/python-interface/

@@ -1,0 +1,43 @@
+# -*- mode: snippet -*-
+# name: logging.setup
+# uuid: logging.setup
+# key:  logging.setup
+# group : logging
+# --
+##-- imports
+import logging as logmod
+import pathlib
+from sys import stderr, stdout
+
+##-- end imports
+
+##-- logging variables
+DISPLAY_LEVEL     = logmod.DEBUG
+FILE_LEVEL        = logmod.DEBUG
+STREAM_TARGET     = stdout # or stderr
+
+LOG_FILE_NAME     = "log.{}".format(pathlib.Path(__file__).stem)
+FILE_MODE         = "w"
+FILE_LOG_FORMAT   = None # or "%(asctime)s | %(levelname)8s | %(message)s"
+STREAM_LOG_FORMAT = None # or "%(asctime)s | %(levelname)8s | %(message)s"
+##-- end logging variables
+
+##-- Logging Setup
+logging         = logmod.root
+console_handler = logmod.StreamHandler(STREAM_TARGET)
+file_handler    = logmod.FileHandler(LOG_FILE_NAME, mode=FILE_MODE)
+
+# Set Levels
+logging.setLevel(logmod.NOTSET)
+console_handler.setLevel(DISPLAY_LEVEL)
+file_handler.setLevel(FILE_LEVEL)
+
+if FILE_LOG_FORMAT is not None:
+   console_handler.setFormatter(logmod.Formatter(FILE_LOG_FORMAT))
+
+if STREAM_LOG_FORMAT is not None:
+   file_handler.setFormatter(logmod.Formatter(STREAM_LOG_FORMAT))
+
+logging.addHandler(console_handler)
+logging.addHandler(file_handler)
+##-- end Logging Setup

@@ -25,6 +25,11 @@
       :desc "Load into shell" :n "l" #'+jg-xml-load-into-repl
       )
 
+(map! :map (nxml-mode-map mhtml-mode-map web-mode-map)
+      :n "!" (cmd! (eww-open-file (buffer-file-name)))
+      )
+
+
 (map! :map mhtml-mode-map
       :after 'mhtml-mode
       "/" nil

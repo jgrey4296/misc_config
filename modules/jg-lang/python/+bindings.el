@@ -78,6 +78,11 @@
       (:prefix ("0" . "Packaging Docs")
        :desc "Docs: Setuptools"    "1" (cmd! (+jg-misc-browse-url "https://setuptools.readthedocs.io/en/latest/userguide/index.html"))
        :desc "Docs: Conda Env"     "2" (cmd! (+jg-misc-browse-url "https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html"))
+       :desc "Docs: Poetry"        "3" (cmd! (+jg-misc-browse-url "https://python-poetry.org/"))
+       :desc "Docs: Pip"           "4" (cmd! (+jg-misc-browse-url "https://pip.pypa.io/en/stable/"))
+       :desc "Docs: SCons"         "5" (cmd! (+jg-misc-browse-url "https://scons.org/documentation.html"))
+       :desc "Docs: Build"         "6" (cmd! (+jg-misc-browse-url "https://github.com/pypa/build"))
+       :desc "Docs: venv"          "7" (cmd! (+jg-misc-browse-url "https://docs.python.org/3/library/venv.html"))
       )
 )
 

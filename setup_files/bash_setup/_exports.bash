@@ -10,3 +10,4 @@ export JAVA_HOME
 # export TMPDIR
 
 export -f conda_activate_for_scripts
+export -f jgdebug

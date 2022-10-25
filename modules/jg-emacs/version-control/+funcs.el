@@ -6,7 +6,7 @@
 
 (after! ivy
   (ivy-configure 'jg-vcs-gradle-ivy
-    :format-fun #'jg-vcs-format-gradle)
+    :format-fn #'jg-vcs-format-gradle)
 )
 
 (defun +jg-vcs-format-gradle (cands)

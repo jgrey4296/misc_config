@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
 # name: setup.argparse
 # key: setup.argparse
-# group: arguments
+# group: argparse
 # --
 ##-- imports
 import argparse

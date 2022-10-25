@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: abc.metaclass
 # uuid: abc.metaclass
+# group: abc
 # --
 import abc
 

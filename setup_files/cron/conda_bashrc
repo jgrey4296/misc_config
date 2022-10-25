@@ -18,10 +18,8 @@ unset __conda_setup
 
 source ~/.shell_files/bash_setup/_basic_utils.bash
 source ~/.shell_files/bash_setup/_base_path.bash
-
-for fname in $(find ~/.shell_files/bash_setup -type f -name "*.bash" -not -regex ".+?/_.+?\.bash")
-do
-    source $fname
-done
-source ~/.shell_files/bash_setup/exports.bash
+source ~/.shell_files/bash_setup/cron.bash
+source ~/.shell_files/bash_setup/latex.bash
+source ~/.shell_files/bash_setup/python.bash
+source ~/.shell_files/bash_setup/ruby.bash
 source ~/.shell_files/bash_setup/_exports.bash

@@ -1,5 +1,6 @@
 # -*- mode: snippet -*-
 # name: argExpand
 # key: argExpand
+# group: argparse
 # --
 args.$1 = abspath(expanduser(args.$1))

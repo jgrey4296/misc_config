@@ -2,6 +2,7 @@
 # name: argparse.actions
 # key: argparse.actions
 # condition: t
+# group: argparse
 # --
 'store'
 'store_const', const=42

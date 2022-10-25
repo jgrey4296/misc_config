@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
 # name: say
 # uuid: say
-# key:  say
+# key: say
 # --
 ##-- imports
 from os import system

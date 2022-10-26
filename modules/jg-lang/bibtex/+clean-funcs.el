@@ -210,15 +210,16 @@ and orcb-clean-doi
   "Expand a shortened url, using CuRL
 https://tecnoysoft.com/en/how-to-obtain-the-real-url-behind-a-shortened-url-using-curl/
  "
-  (message "Expanding urls")
   (bibtex-beginning-of-entry)
   (let* ((entry (bibtex-parse-entry))
-         (urls (-filter 'identity (mapcar (lambda (x) (when (string-match "url" (car x))
-                                                        (cons (car x) (substring (cdr x) 1 -1))))
-                                          entry)))
+         (matcher (lambda (x) (when (and (string-match "url" (car x))
+                                         (<= (length (cdr x)) 30))
+                                (cons (car x) (substring (cdr x) 1 -1)))))
+         (urls (-filter 'identity (mapcar matcher entry)))
          (result-buffer (get-buffer-create "*CurlResponse*"))
          expanded
          )
+    (when urls (message "Expanding urls"))
     (cl-loop for urlpair in urls
              do
              (with-current-buffer result-buffer

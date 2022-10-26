@@ -56,6 +56,7 @@
 
 (add-hook! doom-first-buffer
    #'global-highlight-parentheses-mode
+   #'global-autohide-minor-mode
    )
 
 (remove-hook! doom-first-buffer

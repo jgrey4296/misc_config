@@ -152,7 +152,7 @@ But not in urls
   )
 (defun +jg-bibtex-remove-empty-fields ()
   (bibtex-beginning-of-entry)
-  (while (re-search-forward "OPT.+= {},?$" nil t)
+  (while (re-search-forward "\\(ALT\\|OPT\\).+= {},?$" nil t)
     (kill-region (line-beginning-position) (line-end-position))
     (join-line)
     )
@@ -198,13 +198,48 @@ and orcb-clean-doi
 (defun +jg-bibtex-check-file-hook ()
   (bibtex-beginning-of-entry)
   (let* ((entry (bibtex-parse-entry))
-        (file-likes (-filter 'identity (mapcar #'+jg-bibtex--get-file-entries entry)))
+         (file-likes (-filter 'identity (mapcar #'+jg-bibtex--get-file-entries entry)))
         )
     (mapc #'+jg-bibtex--check-file-exists file-likes)
     )
   )
 ;;-- end file checking
 
+;;-- url expanding
+(defun +jg-bibtex--expand-shortened-url ()
+  "Expand a shortened url, using CuRL
+https://tecnoysoft.com/en/how-to-obtain-the-real-url-behind-a-shortened-url-using-curl/
+ "
+  (message "Expanding urls")
+  (bibtex-beginning-of-entry)
+  (let* ((entry (bibtex-parse-entry))
+         (urls (-filter 'identity (mapcar (lambda (x) (when (string-match "url" (car x))
+                                                        (cons (car x) (substring (cdr x) 1 -1))))
+                                          entry)))
+         (result-buffer (get-buffer-create "*CurlResponse*"))
+         expanded
+         )
+    (cl-loop for urlpair in urls
+             do
+             (with-current-buffer result-buffer
+               (erase-buffer))
+             (call-process jg-bibtex-curl-cmd nil result-buffer nil jg-bibtex-curl-args (cdr urlpair))
+             (with-current-buffer result-buffer
+               (goto-char (point-min))
+               (when (re-search-forward "^location: " nil t)
+                 (push (cons (car urlpair)
+                             (s-replace "\r" "" (buffer-substring (point) (line-end-position))))
+                       expanded))
+               )
+             )
+    (cl-loop for urlpair in expanded
+             do
+             (bibtex-set-field (car urlpair) (cdr urlpair))
+             )
+    )
+  )
+
+;;-- end url expanding
 
 ;;-- obsolete
 ;; adapted from org-ref/org-ref-core.el: orcb-key-comma

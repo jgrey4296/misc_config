@@ -63,7 +63,7 @@ Modified to avoid duplicate comma insertion. "
   (interactive "sfield: \nsvalue: ")
   (bibtex-beginning-of-entry)
   (let ((found))
-    (if (setq found (bibtex-search-forward-field field t))
+    (if (setq found (bibtex-search-forward-field (concat field "\\b") t))
         ;; we found a field
         (progn
           (goto-char (car (cdr found)))

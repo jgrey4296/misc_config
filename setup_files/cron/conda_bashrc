@@ -16,6 +16,10 @@ fi
 unset __conda_setup
 # <<< conda init <<<
 
+echo "Using: " $0
+# from: https://itecnotes.com/server/cron-how-to-use-the-aliases-in-the-crontab/
+shopt -s expand_aliases
+
 source ~/.shell_files/bash_setup/_basic_utils.bash
 source ~/.shell_files/bash_setup/_base_path.bash
 source ~/.shell_files/bash_setup/cron.bash

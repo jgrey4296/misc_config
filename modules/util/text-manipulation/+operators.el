@@ -56,20 +56,28 @@
   (put-text-property beg end 'invisible 'jg-text-invis)
   )
 
+(evil-define-operator +jg-text-delete-invisible (beg end type)
+  " Operator to easily annotate text to be hidden "
+  :type inclusive
+  (interactive "<R>")
+  (put-text-property beg end 'invisible nil)
+  )
+
 (evil-define-operator +jg-text-toggle-invisible (beg end type prefix)
   " Operator to show invisible text again "
   :type inclusive
-  :keep-visual t
-  (interactive "<R>p")
+  ;; :keep-visual t
+  (interactive "<R>P")
   ;; Toggle the property
   (alter-text-property beg end 'invisible
                        (lambda (val)
-                         (cond ((eq val 'jg-text-invis)
+                         (cond (prefix nil)
+                               ((eq val 'jg-text-invis)
                                 'jg-text-invis-disabled
                                 )
                                ((eq val 'jg-text-invis-disabled)
                                 'jg-text-invis)
-                               (t val)
+                               (t 'jg-text-invis)
                                )
                          )
                        )
@@ -77,10 +85,13 @@
 
 (defun +jg-text-toggle-invisible-spec ()
   (interactive)
-  (cond ((assoc 'jg-text-invis buffer-invisibility-spec)
+  (cond ((and (listp buffer-invisibility-spec) (assoc 'jg-text-invis buffer-invisibility-spec))
          (setq buffer-invisibility-spec (assq-delete-all 'jg-text-invis buffer-invisibility-spec)))
-        (t
+        ((listp buffer-invisibility-spec)
          (push '(jg-text-invis . t) buffer-invisibility-spec)
+         )
+        (t
+         (setq buffer-invisibility-spec (cons '(jg-text-invis . t) buffer-invisibility-spec))
          )
         )
   )

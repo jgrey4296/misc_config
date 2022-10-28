@@ -36,13 +36,13 @@
        :desc "Title Case"     "t"   #'+jg-text-title-case-op
        )
 
-      (:prefix "z"
-       :desc "Invisible-spec" "I" #'+jg-text-toggle-invisible-spec
-       )
       )
 
 (map! :map jg-binding-vision-map
-      "i" #'+jg-text-make-invisible
+      :prefix ("i" . "Invisible")
+      :desc "Add"            "a" #'+jg-text-make-invisible
+      :desc "Delete "        "d" #'+jg-text-delete-invisible
+      :desc "Invisible-spec" "i" #'+jg-text-toggle-invisible-spec
       )
 
 (map! :map jg-binding-visual-state-map

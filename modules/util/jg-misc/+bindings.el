@@ -40,12 +40,6 @@
 
       )
 
-(map! :after rst
-      :map rst-mode-map
-      :localleader
-      :desc "Reference" "1" (cmd! (+jg-misc-browse-url "https://restructuredtext.documatt.com/element/rubric.html"))
-      )
-
 (after! calendar
   (setq calendar-mode-map (make-sparse-keymap))
   (evil-make-overriding-map calendar-mode-map)

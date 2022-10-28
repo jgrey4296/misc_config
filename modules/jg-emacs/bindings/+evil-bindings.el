@@ -161,7 +161,6 @@
       :desc "L-Shift"                 "<"   #'+evil/shift-left
       :desc "R-Shift"                 ">"   #'+evil/shift-right
       :desc "Search"                  "/"   #'evil-ex-search-forward
-      :desc "B-Search"                "\\"  #'evil-ex-search-backward
       :desc "Visual Search"           "?"   #'evil-visualstar/begin-search-forward
 
       :desc "Paste Over"              "p"   #'evil-visual-paste
@@ -190,7 +189,6 @@
       :desc "BOL"                    "0"       #'evil-beginning-of-line
       :desc "Return"                 "RET"     #'evil-ret
       :desc "Search"                 "/"       #'evil-ex-search-forward
-      :desc "B-Search"               "\\"      #'evil-ex-search-backward
       )
 
 (map! :map jg-binding-motion-state-map ;; word, sen, para, line

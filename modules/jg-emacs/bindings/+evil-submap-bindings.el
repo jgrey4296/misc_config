@@ -185,7 +185,6 @@
       :desc "Tags in func"          "i" #'helm-gtags-tags-in-this-function
       :desc "Update Tags"           "u" #'helm-gtags-update-tags
       )
-
 (map! :map jg-binding-jump-map
       :prefix ("/" . "Search")
       :desc "Find File at point"   "F" #'evil-find-file-at-point-with-line

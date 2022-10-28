@@ -59,9 +59,9 @@
    #'global-autohide-minor-mode
    )
 
-(remove-hook! doom-first-buffer
-  #'smartparens-global-mode
-  )
+;; (remove-hook! doom-first-buffer
+;;   #'smartparens-global-mode
+;;   )
 (remove-hook! 'after-change-major-mode-hook
   #'+ligatures-init-buffer-h
   #'global-flycheck-mode-enable-in-buffers

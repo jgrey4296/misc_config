@@ -42,6 +42,8 @@
   :commands (window-ring-setup-columns window-ring-minor-mode window-ring-setup-columns-command)
   )
 (use-package! palette-mode)
+(use-package! paren-state)
+
 
 ;;-- hooks
 (add-hook! 'doom-first-file-hook #'+jg-ui-popup-activate-rules)

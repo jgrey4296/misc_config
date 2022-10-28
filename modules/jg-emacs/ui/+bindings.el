@@ -12,8 +12,12 @@
        )
       )
 
+(map! :map jg-binding-jump-map
+      :desc "Paren State" "p"  #'evil-paren-state
+      )
+
 (map! :map jg-binding-helm-map
-      :desc "Insert Color"                 "c"     #'helm-colors
+      :desc "Insert Color" "c" #'helm-colors
       )
 
 (map! :map jg-binding-vision-map

@@ -15,6 +15,8 @@
               jg-ui-default-face-gen-palette-dir "/Volumes/documents/github/writing/resources/palettes/"
               display-line-numbers             t
               display-line-numbers-major-tick  20
+
+              sp-autoinsert-pair nil
               )
 
 ;;-- parens

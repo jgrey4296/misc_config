@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: assertRaisesCtxMgr
+# uuid: assertRaisesCtxMgr
+# key:  assertRaisesCtxMgr
+# group :
+# --
+with self.assertRaises($1) as cm:
+     $2
+
+the_exc = cm.exception
+$0

@@ -2,7 +2,12 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("script notes"
+(("pdf_automations"
+ (filename . "/Volumes/documents/in_progress_pdfs/pdflib_automations/")
+ (front-context-string . "summary\n  drwxr-")
+ (rear-context-string . "4K Oct 20 03:54 ")
+ (position . 215))
+("script notes"
  (filename . "/Volumes/documents/github/writing/orgfiles/script_notes.org")
  (front-context-string . "#+TITLE: Script ")
  (rear-context-string)

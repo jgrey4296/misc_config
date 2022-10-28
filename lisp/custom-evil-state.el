@@ -1,3 +1,21 @@
+;;; custom-evil-state.el -*- lexical-binding: t; -*-
+;; #+TITLE: Emacs/Evil Keybinding Notes
+;; * Keymap Hierarchy:
+;; NOTE: See evil-core.el for full design of evil keybindings
+;; ** Overriding keymaps/overlay keymaps
+;; ** Emulation mode keymaps
+;; *** Evil keymaps
+;; *** Intercept keymaps
+;; *** Local state keymap
+;; *** Minor-mode keymaps
+;; *** Auxiliary keymaps
+;; *** Overriding keymaps
+;; *** Global state keymap
+;; *** Keymaps for other states
+;; ** Minor mode keymaps
+;; ** Local keymap (`local-set-key')
+;; ** Global keymap (`global-set-key')
+
 (after! (evil bind-map)
 
   ;; State Creation

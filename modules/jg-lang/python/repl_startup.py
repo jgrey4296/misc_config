@@ -40,7 +40,8 @@ parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpForm
 parser.add_argument('--dir')
 ##-- end argparse
 args = parser.parse_args()
-#args.aBool...
+
+initial_globals = set(globals().keys())
 
 if args.dir:
     sys.path = [pathlib.Path(args.dir)] + sys.path
@@ -55,5 +56,7 @@ def logattrs():
     attrs = [x for x in dir(logrecord) if not x.startswith("__")]
     return attrs
 
-
-print("Reminder: [cwd, logattrs, reload, pp] are loaded")
+def remind():
+    current_globals = set(globals().keys()).difference(initial_globals)
+    print("Reminder: [cwd, logattrs, reload, pp, remind] are loaded")
+    print(f"Globals since load: {current_globals}")

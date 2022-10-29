@@ -1,0 +1,51 @@
+%% --------------------------------------------------
+%  Institution Trace Start
+%% --------------------------------------------------
+%% Logical Variable
+\newif\ifIsPartialTrace
+\newif\ifIsVerticalTrace
+
+%% Maybe set vars to true
+${is_partial}
+${is_vertical}
+
+
+\begin{longtable}{@{}l@{}}
+  \resizebox{\textwidth}{!}{
+    \begin{tikzpicture}[
+      start chain=trace going \MainChainRightOrDown,
+      %% subchains
+${subchains}
+      node distance=\VHDist,
+      ]
+      { [continue chain=trace]
+        %% nodes
+        \ifIsPartialTrace
+        \node[coordinate, on chain=trace] (iStart) {};
+        \fi
+
+${chain_nodes}
+
+        \ifIsPartialTrace
+        \node[coordinate, on chain=trace] (iEnd) {};
+        \fi
+        %% Linking
+        \ifIsPartialTrace
+        \draw[dash pattern=on 2pt off 2pt] (iStart) -- (i0);
+        \fi
+
+${chain_links}
+
+        \ifIsPartialTrace
+        \draw[dash pattern=on 2pt off 2pt] (i${last}) -- (iEnd);
+        \fi
+      }
+      %% Sub Chain Bodies
+${fluent_subchains}
+${event_subchains}
+      %% final linking to main chain
+${fluent_links}
+${event_links}
+    \end{tikzpicture}
+  }
+\end{longtable}

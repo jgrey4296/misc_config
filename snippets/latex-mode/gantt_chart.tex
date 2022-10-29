@@ -1,0 +1,10 @@
+\begin{figure}
+  \begin{longtable}{@{}r@{}}
+    \begin{ganttchart} [hgrid,vgrid,canvas/.style={draw=none},bar/.append style={fill=gray}, x unit=0.5cm,y unit chart=0.5cm]{0}{${num}}
+      \gantttitle{${title}}{${numPlusOne}}\\
+      \gantttitlelist{0, ..., ${num}}{1}\\
+      ${content}
+    \end{ganttchart}
+  \end{longtable}
+  \caption{${caption}}
+\end{figure}

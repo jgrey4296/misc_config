@@ -1,0 +1,58 @@
+%% --------------------------------------------------
+% Pdf Tex prelude
+%% --------------------------------------------------
+\documentclass{article}
+\usepackage{todonotes}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{layout}
+\pagestyle{empty}
+\thispagestyle{empty}
+\usetikzlibrary{shadows}
+\usetikzlibrary{decorations}
+\usetikzlibrary{shapes}
+\usetikzlibrary{arrows}
+\usetikzlibrary{calc}
+\usetikzlibrary{fit}
+\usetikzlibrary{backgrounds}
+\usetikzlibrary{positioning}
+\usetikzlibrary{chains}
+\usetikzlibrary{scopes}
+%% Only if the base font of the document is to be sans serif:
+\renewcommand*\familydefault{\sfdefault}
+\usepackage[normalem]{ulem}
+
+\newlength{\tableWidth}
+\setlength{\tableWidth}{5cm}
+
+%% Environment for Events: A Centered Table
+\newenvironment{events} {\begin{tabular}{>{\centering}m{\tableWidth}}} {\end{tabular}}
+%% Environment for Fluents: left aligned boxes of item lists
+\newenvironment{fluents} {\begin{minipage}{\tableWidth}\raggedright \begin{description}[align=left,leftmargin=1em,noitemsep,labelsep=\parindent]} {\end{description}\end{minipage}}
+
+%% Event Macros
+${event_macros}
+
+%% Fluent Macros
+${fluent_macros}
+
+
+%% Direction Control Macros
+\newcommand{\MainChainRightOrDown}{\ifIsVerticalTrace below\else right\fi}
+\newcommand{\SubChainLeftOrBelow}{\ifIsVerticalTrace left\else below\fi}
+\newcommand{\SubChainRightOrAbove}{\ifIsVerticalTrace right\else above\fi}
+\newcommand{\VHDist}{\ifIsVerticalTrace 5cm and 5cm\else 1cm and 5cm\fi}
+
+\begin{document}
+
+\begin{figure}
+${trace}
+\caption{${caption}.\\
+  Bold Fluents are initiated. Struck Through Fluents are terminated.}
+\end{figure}
+
+\clearpage
+\layout*
+\end{document}

@@ -1,0 +1,85 @@
+%% --------------------------------------------------
+%  Gantt Tex Prelude
+%% --------------------------------------------------
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{lscape}
+\usepackage{layout}
+\usepackage{pgfgantt}
+\usepackage{longtable}
+\usepackage[margin=1cm]{geometry}
+\pagestyle{empty}
+\thispagestyle{empty}
+%% Only if the base font of the document is to be sans serif:
+\renewcommand*\familydefault{\sfdefault}
+\begin{document}
+
+\begin{figure}
+  \begin{longtable}{@{}r@{}}
+    % \begin{ganttchart} [hgrid,vgrid,canvas/.style={draw=none},bar/.append style={fill=gray}, x unit=1cm,y unit chart=1cm]{0}{4}
+    \begin{ganttchart} [hgrid,vgrid,canvas/.style={draw=none},bar/.append style={fill=gray}, x unit=1cm, y unit title=1cm]{0}{4}
+      \gantttitle{Observed Events}{5}\ganttnewline
+      \gantttitlelist{0, ..., 4}{1}\\
+      \ganttmilestone{ex\_blue(foo)}{1}\ganttnewline
+
+\ganttmilestone{ex\_green(foo)}{2}\ganttnewline
+
+\ganttmilestone{ex\_red(foo)}{0}\ganttnewline
+
+    \end{ganttchart}
+  \end{longtable}
+  \caption{Tracking the events in the trace}
+\end{figure}
+
+\begin{figure}
+  \begin{longtable}{@{}r@{}}
+    \begin{ganttchart} [hgrid,vgrid,canvas/.style={draw=none},bar/.append style={fill=gray}, x unit=1cm,y unit chart=1cm]{0}{4}
+      \gantttitle{Fluents}{5}\ganttnewline
+      \gantttitlelist{0, ..., 4}{1}\\
+      \ganttbar{live(basic)}{0}{3}\ganttnewline
+
+\ganttbar{perm(ex\_blue(foo))}{0}{3}\ganttnewline
+
+\ganttbar{perm(ex\_red(foo))}{0}{3}\ganttnewline
+
+\ganttbar{perm(in\_red(foo))}{0}{3}\ganttnewline
+
+\ganttbar{perm(null)}{0}{3}\ganttnewline
+
+\ganttbar{pow(in\_red(foo))}{0}{0}\ganttnewline
+
+\ganttbar{pow(null)}{0}{3}\ganttnewline
+
+    \end{ganttchart}
+  \end{longtable}
+  \caption{Gantt Chart for Fluent lives}
+\end{figure}
+
+\begin{figure}
+  \begin{longtable}{@{}r@{}}
+    \begin{ganttchart} [hgrid,vgrid,canvas/.style={draw=none},bar/.append style={fill=gray}, x unit=1cm,y unit chart=1cm]{0}{4}
+      \gantttitle{basic Fluents}{5}\\
+      \gantttitlelist{0, ..., 4}{1}\\
+      \ganttbar{live(basic)}{0}{3}\ganttnewline
+
+\ganttbar{perm(ex\_blue(foo))}{0}{3}\ganttnewline
+
+\ganttbar{perm(ex\_red(foo))}{0}{3}\ganttnewline
+
+\ganttbar{perm(in\_red(foo))}{0}{3}\ganttnewline
+
+\ganttbar{perm(null)}{0}{3}\ganttnewline
+
+\ganttbar{pow(in\_red(foo))}{0}{0}\ganttnewline
+
+\ganttbar{pow(null)}{0}{3}\ganttnewline
+
+    \end{ganttchart}
+  \end{longtable}
+  \caption{Fluent Lives in institution basic}
+\end{figure}
+
+\clearpage
+\layout*
+\end{document}

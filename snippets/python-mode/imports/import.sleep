@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: sleep
+# uuid: sleep
+# group: imports
+# --
+import time
+
+# time.sleep($1)

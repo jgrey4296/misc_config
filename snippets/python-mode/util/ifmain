@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: ifmain
+# uuid: ifmain
+# group: util
+# --
+$0
+
+def main():
+    pass
+
+##-- ifmain
+if __name__ == "__main__":
+    main()
+##-- end ifmain

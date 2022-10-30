@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: footnote
+# uuid: footnote
+# key:  footnote
+# group : sphinx
+# --
+[$1]_
+
+
+.. [$1] ${2:Footnote Text}

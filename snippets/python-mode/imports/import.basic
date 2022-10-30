@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
-# name:  import.basic
-# uuid: import.basic
-# condition: t
+# name:  basic
+# uuid: basic
+# group: imports
 # --
 # https://docs.python.org/3/library/abc.html
 # https://docs.python.org/3/library/copy.html

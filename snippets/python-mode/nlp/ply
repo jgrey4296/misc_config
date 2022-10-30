@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
-# name: nlp.ply
-# uuid: nlp.ply
-# group: parsing
+# name: ply
+# uuid: ply
+# group: nlp lex yacc
 # --
 import ply.lex as lex
 import ply.yacc as yacc

@@ -1,7 +1,6 @@
 # -*- mode: snippet -*-
 # name: acab.ape
 # uuid: acab.ape
-# condition: t
 # group: acab
 # --
 from acab.error.protocol import AcabProtocolError as APE

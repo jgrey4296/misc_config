@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
-# name: asyncio.client
-# uuid: asyncio.client
+# name: client
+# uuid: client
+# group: asynio
 # --
 #!/usr/bin/env python3
 from __future__ import annotations

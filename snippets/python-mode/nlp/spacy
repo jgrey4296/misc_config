@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
-# name: nlp.spacy
-# uuid: nlp.spacy
+# name: spacy
+# uuid: spacy
+# group: nlp
 # --
 import spacy
 

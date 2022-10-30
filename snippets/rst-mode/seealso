@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name  : seealso
+# uuid  : seealso
+# key   : seealso
+# group : sphinx
+# --
+.. seealso::
+
+   $0

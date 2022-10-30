@@ -23,6 +23,7 @@ with warnings.catch_warnings():
 ##-- end warnings
 
 class Test$1(unittest.TestCase):
+    ##-- setup-teardown
     @classmethod
     def setUpClass(cls):
         LOGLEVEL      = logmod.DEBUG
@@ -39,9 +40,13 @@ class Test$1(unittest.TestCase):
     def tearDownClass(cls):
         logging.removeHandler(cls.file_h)
 
+    ##-- end setup-teardown
+
     def test_initial(self):
         pass
 
 
+##-- ifmain
 if __name__ == '__main__':
     unittest.main()
+##-- end ifmain

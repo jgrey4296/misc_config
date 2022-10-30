@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name  : note
+# uuid  : note
+# key   : note
+# group : sphinx
+# --
+.. note::
+
+   $0

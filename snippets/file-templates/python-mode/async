@@ -1,0 +1,44 @@
+# -*- mode: snippet -*-
+# name: template.asyncio
+# uuid: template.asyncio
+# condition: t
+# --
+
+##-- imports
+from __future__ import annotations
+
+import abc
+import logging as logmod
+from copy import deepcopy
+from dataclasses import InitVar, dataclass, field
+from re import Pattern
+from typing import (TYPE_CHECKING, Any, Callable, ClassVar, Final, Generic,
+                    Iterable, Iterator, Mapping, Match, MutableMapping,
+                    Protocol, Sequence, Tuple, TypeAlias, TypeGuard, TypeVar,
+                    cast, final, overload, runtime_checkable)
+from uuid import UUID, uuid1
+from weakref import ref
+from asyncio import run, create_task, gather, sleep
+
+if TYPE_CHECKING:
+    # tc only imports
+    pass
+##-- end imports
+
+async def say_after(delay, what):
+    await sleep(delay)
+    print(what)
+
+async def main():
+    print("start")
+
+    task1 = create_task(say_after(1, "blah"))
+    task2 = create_task(say_after(0.5, "bloo"))
+
+    await gather(task1, task2)
+    print("end")
+
+##-- main
+if __name__ == '__main__':
+    asyncio.run(main())
+##-- end main

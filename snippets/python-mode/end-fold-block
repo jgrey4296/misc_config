@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: end-fold-block
-# uuid: end-fold-block
-# key:  end-fold-block
-# group :
-# --
-##-- End ${1:`jg-last-block-name`}$0

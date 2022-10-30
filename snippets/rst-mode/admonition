@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: admonition
+# uuid: admonition
+# key:  admonition
+# group : sphinx
+# --
+.. admonition:: $1
+
+   $0

@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: topic
+# uuid: topic
+# key:  topic
+# group : sphinx
+# --
+.. topic:: $1
+
+   $0

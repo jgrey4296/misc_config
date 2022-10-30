@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: util.sleep
-# uuid: util.sleep
-# group: time
-# --
-import time
-
-time.sleep($1)

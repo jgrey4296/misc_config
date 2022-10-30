@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name  : todo
+# uuid  : todo
+# key   : todo
+# group : sphinx
+# --
+.. todo::
+
+   $0

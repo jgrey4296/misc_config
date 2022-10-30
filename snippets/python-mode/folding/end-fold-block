@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: end-block
+# uuid: end-block
+# key:  end-block
+# group : folding
+# --
+##-- End ${1:`jg-last-block-name`}$0

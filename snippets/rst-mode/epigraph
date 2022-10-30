@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name  : epigraph
+# uuid  : epigraph
+# key   : epigraph
+# group : sphinx
+# --
+.. epigraph::
+
+   $1
+
+   -- $0

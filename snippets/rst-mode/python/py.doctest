@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name  : py.doctest
+# uuid  : py.doctest
+# key   : py.doctest
+# group : sphinx
+# --
+>>> ${1:print("expected")}
+${2:"expected"}
+
+$0

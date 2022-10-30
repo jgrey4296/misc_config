@@ -69,5 +69,8 @@ def main():
     verbosity = max(logmod.DEBUG, logmod.WARNING - (10 * (args.verbose or 0)))
     console_handler.setLevel(verbosity)
 
+##-- ifmain
 if __name__ == '__main__':
     main()
+
+##-- end ifmain

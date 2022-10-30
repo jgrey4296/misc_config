@@ -1,0 +1,35 @@
+# -*- mode: snippet -*-
+# name: axis_title_control
+# uuid: axis_title_control
+# group: plt
+# --
+plt.rcParams.update({'figure.autolayout': True})
+# Axis and Title Control:
+plt.title("Test Plot")
+plt.grid(True)
+plt.axis(True)
+plt.colorbar(fig)
+# For plots with labels
+# can also specify loc=pos
+plt.legend()
+# min_x, max_x, min_y, max_y
+plt.axis([0, 20, 0, 5])
+
+# Or
+plt.xlabel("X axis")
+plt.xlim([0, 20])
+plt.xticks(range_v, ["a", "b", "c", "d", "e", "f", "h", "i", "j", "k"])
+
+plt.ylabel("Y Axis")
+plt.yticks(range(10))
+plt.ylim([0, 5])
+
+# Change Label Rotation (good for dates)
+for tick in plt.xticks()[1]:
+    tick.set_rotation(55)
+
+# Add horizontal and vertical lines:
+plt.axhline(val)
+plt.axvline(val)
+# Annotations
+plt.annotate("Text", coords)

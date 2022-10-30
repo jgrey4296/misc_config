@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: exc_handler
+# uuid: exc_handler
+# group: exceptions
+# --
+# from https://python.plainenglish.io/creating-beautiful-tracebacks-with-pythons-exception-hooks-c8a79e13558d
+def exception_hook(exc_type, exc_value, tb):
+    """ A Basic exception handler example """
+    print('Traceback:')
+    filename = tb.tb_frame.f_code.co_filename
+    name = tb.tb_frame.f_code.co_name
+    line_no = tb.tb_lineno
+    print(f"File {filename} line {line_no}, in {name}")
+
+    # Exception type and value
+    print(f"{exc_type.__name__}, Message: {exc_value}")
+
+sys.excepthook = exception_hook

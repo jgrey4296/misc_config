@@ -1,5 +1,6 @@
 # -*- mode: snippet -*-
-# name: import.file
-# uuid: import.file
+# name: file
+# uuid: file
+# group: imports
 # --
 import pathlib

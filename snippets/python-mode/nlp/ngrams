@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
-# name: nlp.ngrams
-# uuid: nlp.ngrams
-# group: nltk
+# name: ngrams
+# uuid: ngrams
+# group: nlp nltk
 # --
 from nltk import ngrams
 sentence = "This is a sentence to test ngrammizing on"

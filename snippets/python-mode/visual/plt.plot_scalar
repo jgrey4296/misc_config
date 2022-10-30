@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: plot
+# uuid: plot
+# group: plt
+# --
+
+#see plt.format snippet
+# For Scatter and Line:
+plt.plot(${1:x}, ${2:y}, ${3:format}, ${4:label=LABEL})
+plt.semilogx / plt.semilogy # one log dimension
+plt.loglog  # both log dimensions
+
+# Error Bars:
+ax.errorbar($1, $2, yerr=0.1, xerr=0.1, fmt=$3)
+
+# Vertical Bar Chart:
+plt.bar($1)
+# Horizontal
+plt.hbar($1)
+# Histogram:
+plt.hist($1, bins=10, density=True)
+# plt.hist2d
+
+# Contours:
+plt.contour(X,Y,Z)

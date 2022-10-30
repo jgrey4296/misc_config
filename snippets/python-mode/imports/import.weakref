@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: weakref
+# uuid: weakref
+# group: imports
+# --
+import weakref
+
+##-- weakref reminder
+""" see https://docs.python.org/3/library/weakref.html#module-weakref
+Object:
+o = Object()
+r = weakref.ref(o)
+o2 = r()
+o is o2
+"""
+##-- end weakref reminder

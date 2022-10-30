@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: import.namedtuple
-# uuid: import.namedtuple
-# group: data structures
+# name: namedtuple
+# uuid: namedtuple
+# group: imports
 # --
 from collections import namedtuple

@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
-# name: import.datetime
-# uuid: import.datetime
+# name: datetime
+# uuid: datetime
+# group: imports
 # --
 import datetime
 

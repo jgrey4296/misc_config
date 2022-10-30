@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: sphinx.directive
+# uuid: sphinx.directive
+# key:  sphinx.directive
+# group : sphinx
+# --
+from docutils import nodes
+from docutils.parsers.rst import Directive, directives
+from docutils.statemachine import StringList
+
+def setup(app):
+    """
+    Adds the directive `.. $1::` for use in rst-files
+    """
+    app.add_directive("$1", $2Directive)
+
+class $2Directive(Directive):
+    has_content        = False
+    required_arguments = 0
+    optional_arguments = 0
+
+    the_text = ""
+
+    def run(self):
+        container          = nodes.literal_block()
+        translated_content = StringList($2Directive.the_text.splitlines(keepends=False))
+        self.state.nested_parse(translated_content, 0, container)
+        return [container]

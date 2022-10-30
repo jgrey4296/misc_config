@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: block-start
+# uuid: block-start
+# key:  folding
+# --
+##-- $1 ${1:$(progn (setq jg-last-block-name yas-text) "")}$0

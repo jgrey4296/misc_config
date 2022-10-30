@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: toctree
+# uuid: toctree
+# key:  toctree
+# group : sphinx
+# --
+.. toctree:
+   :caption: $1
+   ..
+      :titlesonly:
+      :hidden:
+
+    $0

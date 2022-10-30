@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: danger
+# uuid: danger
+# key:  danger
+# group : sphinx
+# --
+.. danger::
+
+   $0

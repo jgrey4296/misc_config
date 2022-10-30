@@ -1,7 +1,6 @@
 # -*- mode: snippet -*-
 # name: import.acab
 # uuid: import.acab
-# condition: t
 # group: acab
 # --
 from acab import setup

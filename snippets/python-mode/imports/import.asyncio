@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
-# name: import.asyncio
-# uuid: import.asyncio
-# condition: t
+# name: asyncio
+# uuid: asyncio
+# group: imports
 # --
 from asyncio import run, create_task, gather, sleep
 # https://docs.python.org/3/library/asyncio-task.html#coroutine

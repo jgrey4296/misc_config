@@ -29,6 +29,7 @@
 (defun +jg-completion-on-load-hook ()
   (require 'yasnippet)
   (advice-add '+snippet--completing-read-uuid :override #'+jg-completion-snippet--completing-read-uuid)
+  (pushnew! yas-prompt-functions '+jg-yas-prompt-fn)
   (after! doom-snippets
     (+jg-completion-activate-file-templates t)
     (yas-reload-all)

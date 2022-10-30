@@ -72,7 +72,7 @@
                                    "editorc"
                                    )
       )
-(setq jg-bibtex-search-fields               '("tags" "year")
+(setq jg-bibtex-search-fields               '("tags" "year" "publisher")
       jg-bibtex-scholar-search-fields       '("author" "editor" "ALTauthor" "Alteditor" "year" "doi" "isbn")
       jg-bibtex-scholar-search-fields-exact '("title")
       )

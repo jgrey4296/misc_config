@@ -133,7 +133,8 @@ function run_maintenance(){
 
     echo "Latex Update--------------------"
     latex_summarise
-    tlmgr update --all
+    # tlmgr update --all
+
     echo "--------------------"
 }
 

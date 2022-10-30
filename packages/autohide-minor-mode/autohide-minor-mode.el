@@ -62,7 +62,7 @@ Vimish-fold's any blocks matching autohide-minor-mode-fold-pattern
                (setq start-hide (progn (beginning-of-line) (point))
                      end-hide (if (re-search-forward (autohide-minor-mode-fold-block-gen :name group-name :end t :re t) nil t)
                                   (progn (end-of-line) (point))
-                                (message "Couldn't find: %s" group-name))))
+                                (error "Couldn't find: %s" group-name))))
               )
 
         (when (and start-hide end-hide (not (vimish-fold--folds-in start-hide end-hide)))

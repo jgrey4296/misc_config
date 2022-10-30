@@ -1,5 +1,15 @@
 ;;; editor/fold/+vars.el -*- lexical-binding: t; -*-
 
+(setq autohide-minor-mode-exclusions '(
+                                       helm-major-mode
+                                       ivy-mode
+                                       minibuffer-mode
+                                       dired-mode
+                                       fundamental-mode
+                                       rst-mode
+                                       magit-status-mode
+                                       ))
+
 ;;-- vimish-fold
 (setq jg-vimish-fold-spec '((vimish-fold-mode)
                                  :delete     vimish-fold-delete

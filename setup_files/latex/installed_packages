@@ -30,7 +30,7 @@ i babel-swedish: Babel support for typesetting Swedish
 i babelbib: Multilingual bibliographies
 i bbcard: Bullshit bingo, calendar and baseball-score cards
 i beamer: A LaTeX class for producing presentations and slides
-i bibtex: Process bibliographies for LaTeX, etc
+i bibtex: Process bibliographies (bib files) for LaTeX or other formats
 i bibtex.universal-darwin: universal-darwin files of bibtex
 i bidi-atbegshi: Bidi-aware shipout macros
 i bidicontour: Bidi-aware coloured contour around text
@@ -104,6 +104,7 @@ i font-change-xetex: Macros to change text and mathematics fonts in plain XeTeX
 i fontbook: Generate a font book
 i fontspec: Advanced font selection in XeLaTeX and LuaLaTeX
 i fontwrap: Bind fonts to specific unicode blocks
+i footmisc: A range of footnote options
 i footnotehyper: hyperref aware footnote.sty
 i fp: Fixed point arithmetic
 i garrigues: MetaPost macros for the reproduction of Garrigues' Easter nomogram
@@ -164,6 +165,7 @@ i latex-bin: LaTeX executables and man pages
 i latex-bin.universal-darwin: universal-darwin files of latex-bin
 i latex-firstaid-dev: Development pre-release of the LaTeX firstaid package
 i latex-fonts: A collection of fonts used in LaTeX distributions
+i latex-lab: LaTeX laboratory
 i latexbug: Bug-classification for LaTeX related bugs
 i latexconfig: configuration files for LaTeX-related formats
 i latexmp: Interface for LaTeX-based typesetting in MetaPost

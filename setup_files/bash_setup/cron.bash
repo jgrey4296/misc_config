@@ -70,8 +70,8 @@ function dropbox_watcher(){
         echo "Dir: " $Dir
         cd $Dir
         pwd
-        find . -maxdepth 1 -iregex ".+?*\.\(pdf\|epub\)" | xargs -I {} mv -u -n {} $DROPBOX_TARGET
-        find . -maxdepth 1 -iregex ".+?\.\(pdf\|epub\)" -printf "%f\n" | xargs -I {} mv {} exists_{}
+        find . -maxdepth 1 -iregex ".+?*\.\(pdf\|epub\)" -print0 | xargs -0 -I {} mv -u -n {} $DROPBOX_TARGET
+        find . -maxdepth 1 -iregex ".+?\.\(pdf\|epub\)" -printf "%f\n" -print0 | xargs -0 -I {} mv {} exists_{}
 
     done
 

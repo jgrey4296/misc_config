@@ -36,9 +36,9 @@
 
 (map! :map jacamo-mode-map
       :localleader
-      :desc "Jacamo Github" :n "1" (cmd! (+jg-misc-browse-url "https://github.com/jacamo-lang/jacamo")
-      :desc "Jacamo API" :n "3" (cmd! (+jg-misc-browse-url "https://jacamo.sourceforge.net/doc/api/index.html")
-      :desc "Jason API"  :n "4" (cmd! (+jg-misc-browse-url "https://jason.sourceforge.net/api/index.html")
+      :desc "Jacamo Github" :n "1" (cmd! (+jg-misc-browse-url "https://github.com/jacamo-lang/jacamo"))
+      :desc "Jacamo API" :n "3" (cmd! (+jg-misc-browse-url "https://jacamo.sourceforge.net/doc/api/index.html"))
+      :desc "Jason API"  :n "4" (cmd! (+jg-misc-browse-url "https://jason.sourceforge.net/api/index.html"))
 
       )
 

@@ -5,5 +5,7 @@
 # group : sphinx
 # --
 .. code-block:: ${1:python}
+   :linenos:
+   :caption: ${2:Block Caption}
 
    $0

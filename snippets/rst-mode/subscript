@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : subscript
+# uuid  : subscript
+# key   : subscript
+# group : sphinx
+# --
+:sub:`${0:text}`

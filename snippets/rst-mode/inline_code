@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : inline_code
+# uuid  : inline_code
+# key   : inline_code
+# group : sphinx
+# --
+``${1:inline code}``

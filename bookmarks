@@ -2,7 +2,12 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("pdf_automations"
+(("emacs-src"
+ (filename . "/Volumes/documents/github/emacs-src/lisp/")
+ (front-context-string . "calc\n  drwxrwxr-")
+ (rear-context-string . "5K Jul 29 20:18 ")
+ (position . 144))
+("pdf_automations"
  (filename . "/Volumes/documents/in_progress_pdfs/pdflib_automations/")
  (front-context-string . "summary\n  drwxr-")
  (rear-context-string . "4K Oct 20 03:54 ")

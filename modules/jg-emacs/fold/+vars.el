@@ -8,6 +8,8 @@
                                        fundamental-mode
                                        rst-mode
                                        magit-status-mode
+                                       helpful-mode
+                                       shell-mode
                                        ))
 
 ;;-- vimish-fold

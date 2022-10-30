@@ -16,6 +16,7 @@
               display-line-numbers             t
               display-line-numbers-major-tick  20
 
+              ;; smartparens
               sp-autoinsert-pair nil
               )
 

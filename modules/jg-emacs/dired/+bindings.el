@@ -3,6 +3,7 @@
 (message "Setting up Dired bindings")
 
 (map! :map dired-mode-map
+      :n  "\\" #'+jg-dired-hash-files
       :nv ")" #'dired-git-info-mode
       :n  "o" #'dired-find-file-other-window
       :n  "S" #'hydra-dired-quick-sort/body

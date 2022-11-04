@@ -201,3 +201,19 @@ Type SPC or `y' to %s one match, DEL or `n' to skip to next,
              )
            )
   )
+
+(defun +jg-dired-hash-files ()
+  (interactive)
+  (let* ((marked (dired-get-marked-files))
+         (quoted (mapcar #'shell-quote-argument marked))
+         uniqs
+         dups
+         )
+    (with-current-buffer (get-buffer-create jg-hash-check-buffer) (erase-buffer))
+    (shell-command (format jg-hash-check-command (s-join " " quoted)) jg-hash-check-buffer)
+    (setq uniqs (split-string (with-current-buffer jg-hash-check-buffer (buffer-string)) "\n" " ")
+          dups (-difference marked uniqs))
+    (dired-unmark-all-marks)
+    (dired-mark-if (and (dired-get-filename nil t) (-contains? dups (dired-get-filename nil t))) "Duplicated SHA Checksum")
+    )
+  )

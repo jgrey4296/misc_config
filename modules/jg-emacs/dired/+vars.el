@@ -128,3 +128,9 @@
 (setq dgi-commit-message-format "%h %cs %s"
       dgi-auto-hide-details-p nil)
 ;;-- end dgi
+
+;;-- hash check
+(setq jg-hash-check-command "shasum %s | sort | guniq -w 40 | awk '{print $2}'"
+      jg-hash-check-buffer "*shasum*"
+      )
+;;-- end hash check

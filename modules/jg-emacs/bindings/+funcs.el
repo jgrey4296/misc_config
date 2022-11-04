@@ -73,3 +73,14 @@
     nil
     )
   )
+
+(defun +jg-binding-change-ext ()
+  (interactive)
+  (let* ((current (buffer-file-name))
+        (curr-ext (f-ext current))
+        (newext  (read-string (format "Extension %s -> ." curr-ext)))
+        )
+    (message "Converting %s -> %s" current (f-swap-ext current newext))
+    (rename-file current (f-swap-ext current newext))
+    )
+  )

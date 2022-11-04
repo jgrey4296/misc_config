@@ -543,3 +543,35 @@ With arg, searchs the dplp instead.
     )
   )
 ;;-- end meta retrieval
+
+;;-- window-switching
+(defun +jg-bibtex-window-set-downloads ()
+  (interactive)
+  (let* ((top-wind (split-window-right))
+         (bot-wind (with-selected-window top-wind
+                     (split-window-below)))
+         )
+    (with-selected-window top-wind
+      (bookmark-jump "downloads")
+      )
+    (with-selected-window bot-wind
+      (bookmark-jump "in_progress_pdfs")
+      )
+    )
+  )
+(defun +jg-bibtex-window-set-dropbox()
+  (interactive)
+  (let* ((top-wind (split-window-right))
+         (bot-wind (with-selected-window top-wind
+                     (split-window-below)))
+         )
+    (with-selected-window top-wind
+      (bookmark-jump "dropbox")
+      )
+    (with-selected-window bot-wind
+      (bookmark-jump "in_progress_pdfs")
+      )
+    )
+  )
+
+;;-- end window-switching

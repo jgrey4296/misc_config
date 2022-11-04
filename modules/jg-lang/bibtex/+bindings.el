@@ -4,6 +4,7 @@
 (message "Setting up bibtex bindings: %s" (current-time-string))
 (map! :after bibtex
       :map bibtex-mode-map
+      :desc "Insert from Doi"    :n "?"       (cmd! (doi-utils-insert-bibtex-entry-from-doi (read-string "Doi: ")))
       :desc "Clean entry"        :n "TAB"     #'org-ref-clean-bibtex-entry
       :desc "Edit Field"         :n  "\\"     #'+jg-bibtex-edit-field
       :desc "Change Entry Type " :n "|"       #'+jg-bibtex-edit-entry-type
@@ -15,6 +16,9 @@
 (map! :after bibtex
       :map bibtex-mode-map
       :localleader
+      :desc "Open Download"       "1"     #'+jg-bibtex-window-set-downloads
+      :desc "Open Dropbox"        "2"     #'+jg-bibtex-window-set-dropbox
+      :desc "Open In progress"    "0"     (cmd! (bookmark-jump "in_progress_pdfs" #'switch-to-buffer-other-window))
       :desc "Bibtex Hydra"        "."     #'+jg-bibtex-hydra/body
       :desc "Build Bibliography"  "B"     #'org-ref-build-full-bibliography
       :desc "New Entry"           "n"     #'bibtex-entry

@@ -27,6 +27,7 @@ Versu, Abl, Cif
 *** [[file:/Volumes/documents/github/writing/orgfiles/primary/research_questions.org][Research Questions]]
 
 ** Other
+https://id.loc.gov/
 https://cheapbotsdonequick.com/source/
 https://botwiki.org/learn/#blogs-and-websites-accountable-algorithms
 https://hyperpolyglot.org/

@@ -216,15 +216,15 @@
 
 ;;-- end insert state
 
-;;-- leader helms
+;;-- leader helms/ivys
 (map! :leader
       :desc "SCRATCH"                      "6" (cmd! (+jg-completion-ivy-open-as-popup "*scratch*"))
-      :desc "Messages"                     "0" (cmd! (+jg-completion-ivy-open-as-popup "*Messages*") (if current-prefix-arg (+jg-text-clear-buffer)))
+      :desc "Messages"                     "0" (cmd! (+jg-completion-ivy-open-as-popup "*Messages*") (when current-prefix-arg (with-current-buffer "*Messages*" (+jg-text-clear-buffer))))
       :desc "Switch buffer"         ","     #'+jg-completion-switch-buffer
       :desc "Popup Buffer"          "<"     #'+jg-completion-popup-buffer
       :desc "Have you Played?"      "o 1"   #'+jg-completion-rps-have-you-playeds
       :desc "New snippet"           "y n"   #'+jg-completion-new-snippet
-      :desc "Workspace Counsel"     "W RET" #'+jg-completion-counsel-workspace
+      :desc "Workspace Counsel"     "w RET" #'+jg-completion-counsel-workspace
       )
 ;;-- end leader helms
 

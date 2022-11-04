@@ -5,19 +5,20 @@
 (map! :after bibtex
       :map bibtex-mode-map
       :desc "Insert from Doi"    :n "?"       (cmd! (doi-utils-insert-bibtex-entry-from-doi (read-string "Doi: ")))
-      :desc "Clean entry"        :n "TAB"     #'org-ref-clean-bibtex-entry
-      :desc "Edit Field"         :n  "\\"     #'+jg-bibtex-edit-field
-      :desc "Change Entry Type " :n "|"       #'+jg-bibtex-edit-entry-type
-      :desc "Change Entry Type"  :n "DEL"     #'+jg-bibtex-edit-entry-type
-      :desc "Select Entry"       :v "i e"     #'+jg-bibtex-visual-select-entry
-      :desc "Open Pdf"           :n "RET"     #'+jg-bibtex-open-pdf
-      :desc "Open Folder"        :n "M-RET"   #'+jg-bibtex-find-folder
+      :desc "Clean entry"        :n "TAB"   #'org-ref-clean-bibtex-entry
+      :desc "Edit Field"         :n  "\\"   #'+jg-bibtex-edit-field
+      :desc "Change Entry Type " :n "|"     #'+jg-bibtex-edit-entry-type
+      :desc "Change Entry Type"  :n "DEL"   #'+jg-bibtex-edit-entry-type
+      :desc "Select Entry"       :v "i e"   #'+jg-bibtex-visual-select-entry
+      :desc "Open Pdf"           :n "RET"   #'+jg-bibtex-open-pdf
+      :desc "Open Folder"        :n "M-RET" #'+jg-bibtex-find-folder
+      :desc "Open Download"      :n ">"     #'+jg-bibtex-window-set-downloads
+      :desc "Open Dropbox"       :n "<"     #'+jg-bibtex-window-set-dropbox
       )
 (map! :after bibtex
       :map bibtex-mode-map
       :localleader
-      :desc "Open Download"       "1"     #'+jg-bibtex-window-set-downloads
-      :desc "Open Dropbox"        "2"     #'+jg-bibtex-window-set-dropbox
+      :desc "Reference"           "1"     (cmd! (+jg-misc-browse-url jg-bibtex-reference-url))
       :desc "Open In progress"    "0"     (cmd! (bookmark-jump "in_progress_pdfs" #'switch-to-buffer-other-window))
       :desc "Bibtex Hydra"        "."     #'+jg-bibtex-hydra/body
       :desc "Build Bibliography"  "B"     #'org-ref-build-full-bibliography

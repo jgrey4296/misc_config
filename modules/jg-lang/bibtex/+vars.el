@@ -108,6 +108,7 @@
 ;;-- urls
 (setq jg-bibtex-scholar-search-string "https://scholar.google.com/scholar?hl=en&q=%s"
       jg-bibtex-dblp-search-string    "https://dblp1.uni-trier.de/search?q=%s"
+      jg-bibtex-reference-url         "https://www.bibtex.com/g/bibtex-format/"
  )
 ;;-- end urls
 

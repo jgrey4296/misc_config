@@ -367,7 +367,7 @@
       )
 ;;-- end <leader> P -- processes
 
-;;-- <leader> q --- quit/restart
+;;-- <leader> q --- quit/restart/session
 (map! :leader
       :prefix ("q" . "quit/restart")
       :desc "Quit Emacs"                   "q" #'kill-emacs
@@ -469,53 +469,30 @@
 
 ;; <leader> T -- toggle hydra
 
-;;-- <leader> W --- Workspaces
+;;-- <leader> W --- nil
 (map! :leader
-      :when (modulep! :ui workspaces)
-      :prefix ("W" . "Workspaces")
-      ;; RET
-      ;; Lowercase - workspace, Uppercase - session
-      :desc "Display tab bar"              "TAB" #'+workspace/display
-      :desc "Next workspace"               "]"   #'+workspace/switch-right
-      :desc "Previous workspace"           "["   #'+workspace/switch-left
-      :desc "Switch to last workspace"     "`"   #'+workspace/other
-      :desc "Switch workspace"             "."   #'+workspace/switch-to
-      :desc "Switch to last workspace"     "0"   #'+workspace/switch-to-final
-
-      :desc "Switch workspace buffer" "b" #'persp-switch-to-buffer
-      :desc "Create workspace"             "c"   #'+workspace/new
-      :desc "Delete workspace"             "k"   #'+workspace/delete
-      :desc "Load workspace from file"     "l"   #'+workspace/load
-      :desc "New workspace"                "n"   #'+workspace/new
-      :desc "Rename workspace"             "r"   #'+workspace/rename
-      :desc "Save workspace"               "s"   #'+workspace/save
-      :desc "Delete session"               "x"   #'+workspace/kill-session
-
-      :desc "Autosave session"              "A"  #'doom/quicksave-session
-      :desc "Load session"                  "L"  #'doom/load-session
-      :desc "Redo window config"            "U"  #'winner-redo
-      :desc "Save session"                  "S"  #'doom/save-session
-      :desc "Undo window config"            "u"  #'winner-undo
       )
-;;-- end <leader> W --- Workspaces
+;;-- end <leader> W --- nil
 
 ;;-- <leader> w --- Windows
 (map! :leader
       :prefix ("w" . "Windows")
-      ;; DEL
-      :desc "Delete Window" "d"      #'delete-window
-      :desc "Split To Right" "/"     #'split-window-right
-      :desc "Split Below" "-"        #'split-window-below
-      :desc "Window up" "k"          #'evil-window-up
-      :desc "Window right" "l"       #'evil-window-right
-      :desc "Window left" "h"        #'evil-window-left
-      :desc "Window right" "j"       #'evil-window-down
-      :desc "Enlargen" "m"           #'doom/window-enlargen
-      :desc "Maximize" "M"           #'doom/window-maximize-buffer
-      :desc "Balance" "b"            #'balance-windows
+      ;; RET - workspace counsel
+      :desc "Balance"             "b"   #'balance-windows
+      :desc "Delete Window"       "d"   #'delete-window
+      :desc "Delete workspace"    "DEL" #'+workspace/delete
+      :desc "Maximize"            "m"   #'doom/window-maximize-buffer
+      :desc "Undo window config"  "u"   #'winner-undo
+      :desc "Redo window config"  "U"   #'winner-redo
+      :desc "Window left"         "h"   #'evil-window-left
+      :desc "Window right"        "j"   #'evil-window-down
+      :desc "Window right"        "l"   #'evil-window-right
+      :desc "Window up"           "k"   #'evil-window-up
 
-      :desc "Shrink Horizontal" "{"  #'shrink-window-horizontally
-      :desc "Shrink Vertical" "}"    #'shrink-window
+      :desc "Split Below"         "-"   #'split-window-below
+      :desc "Split To Right"      "/"   #'split-window-right
+      :desc "Shrink Horizontal"   "{"   #'shrink-window-horizontally
+      :desc "Shrink Vertical"     "}"   #'shrink-window
 
       )
 ;;-- end <leader> w --- Windows

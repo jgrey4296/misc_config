@@ -45,7 +45,11 @@
                    ("k" +jg-completion-ivy-kill-buffer "Kill")
                    ))
 
+(ivy-set-actions '+jg-completion-counsel-workspace
+                 '(("r" (lambda (x) (+workspace-rename x (read-string (format "Rename %s -> : " x)))))
 
+                   )
+)
 ;;-- end actions
 
 ;;-- ivys

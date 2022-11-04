@@ -2,7 +2,12 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("emacs-src"
+(("other_git"
+ (filename . "/Volumes/documents/github/otherLibs/")
+ (front-context-string . "mysql2sqlite\n  d")
+ (rear-context-string . "38 Nov  3 06:16 ")
+ (position . 953))
+("emacs-src"
  (filename . "/Volumes/documents/github/emacs-src/lisp/")
  (front-context-string . "calc\n  drwxrwxr-")
  (rear-context-string . "5K Jul 29 20:18 ")

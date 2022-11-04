@@ -15,7 +15,7 @@
       )
 
 (map! :map nxml-mode-map
-      :after 'nxml-mode
+      :after nxml-mode
       "/" nil
       :i "/" #'nxml-electric-slash
       :n "=" #'+jg-xml-format-buffer
@@ -31,7 +31,7 @@
 
 
 (map! :map mhtml-mode-map
-      :after 'mhtml-mode
+      :after mhtml-mode
       "/" nil
       :i "/" #'sgml-slash
       :desc "Run XPath Query" :n "?" #'+jg-xml-run-xidel

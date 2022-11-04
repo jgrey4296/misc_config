@@ -31,8 +31,6 @@
        (starred-name))
       ("Project: emacs_files"
        (projectile-root "emacs_files" . "/Volumes/documents/github/emacs_files/"))
-      ("Project: doom-emacs"
-       (projectile-root "doom-emacs" . "/Volumes/documents/github/otherLibs/doom-emacs/"))
       ("Project: writing"
        (projectile-root "writing" . "/Volumes/documents/github/writing/"))
       ("Project: Dropbox"

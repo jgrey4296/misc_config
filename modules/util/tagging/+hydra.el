@@ -15,7 +15,7 @@
   ("l" #'tag-clean/leave nil)
   ("!" #'+jg-tag-org-split-on-headings nil :exit t)
   )
-(map! :after 'tag-clean-minor-mode
+(map! :after tag-clean-minor-mode
       :map tag-clean-minor-mode-map
       "." #'tag-clean/body
       )

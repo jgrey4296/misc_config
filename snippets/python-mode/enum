@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name  : enum
+# uuid  : enum
+# key   : enum
+# group : imports
+# --
+##-- imports
+from enum import Enum, auto
+##-- end imports
+
+class $1Enum(Enum):
+      ${2:AValue} = auto()
+
+$0

@@ -19,7 +19,7 @@
 ;;-- end helm
 
 ;; Dired bindings
-(map! :after 'jg-dired-bindings
+(map! :after jg-dired-bindings
       :map dired-mode-map
       :localleader
       (:prefix ("d" . "Describe")

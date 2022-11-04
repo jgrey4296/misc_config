@@ -102,7 +102,7 @@
       :desc "Error"        "e" #'next-error
       )
 ;;-- end non-text motion
-;
+
 ;;-- operators
 (map! :map jg-binding-operator-map
       ;; g > s
@@ -122,7 +122,7 @@
 
 
       )
-(map! :map jg-binding-operator-map
+(map! :map jg-binding-operator-map ;; string ops
       :prefix ("s" . "String-ops")
        ;; t
        :desc "Rot13"              "'" #'evil-rot13
@@ -135,7 +135,7 @@
        :desc "Exchange"           "x" #'evil-exchange
        :desc "Yank"               "y" #'+evil:yank-unindented
        )
-(map! :map jg-binding-operator-map
+(map! :map jg-binding-operator-map ;; line ops
       :prefix ("l" . "Line-ops")
       ;; TODO split on char
       ;; r
@@ -152,7 +152,7 @@
 ;;-- end operators
 
 ;;-- jump
-(map! :map jg-binding-jump-map
+(map! :map jg-binding-jump-map ;; avy
       ;; 1 2 3 "u" "h"
       :desc "Last Change"           ";" #'goto-last-change
       :desc "Jump to Char"          "." #'avy-goto-char
@@ -166,14 +166,14 @@
       :desc "Goto Last Line"        "F" #'evil-goto-line
       :desc "Search buffer"         "s" #'swiper
       )
-(map! :map jg-binding-jump-map
+(map! :map jg-binding-jump-map ;; lookup
       :desc "Type definition"       "t" #'+lookup/type-definition
       :desc "References"            "r" #'+lookup/references
       :desc "Definition"            "d" #'+lookup/definition
       :desc "Implementations"       "i" #'+lookup/implementations
       :desc "Documentation"         "k" #'+lookup/documentation
       )
-(map! :map jg-binding-jump-map
+(map! :map jg-binding-jump-map ;; gtags
       :prefix ("g" . "gtags")
       :desc "Create Tags"           "c" #'helm-gtags-create-tags
       :desc "Find Symbol"           "y" #'helm-gtags-find-symbol
@@ -185,7 +185,7 @@
       :desc "Tags in func"          "i" #'helm-gtags-tags-in-this-function
       :desc "Update Tags"           "u" #'helm-gtags-update-tags
       )
-(map! :map jg-binding-jump-map
+(map! :map jg-binding-jump-map ;; search
       :prefix ("/" . "Search")
       :desc "Find File at point"   "F" #'evil-find-file-at-point-with-line
       :desc "Goto Definition"      "d" #'evil-goto-definition

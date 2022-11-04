@@ -29,6 +29,7 @@
       :desc "Insert Below"  "o"   #'evil-open-below
       :desc "Insert"        "i"   #'evil-insert
       :prefix ("I" . "Insert+")
+      ;; SPC reserved for jg-insert-state
       :desc "From evil register"       "0"          #'counsel-evil-registers
 
        :desc "Insert Resume"            "!"          #'evil-insert-resume
@@ -52,8 +53,9 @@
        :desc "From Minibuffer history"  "m"          #'counsel-minibuffer-history
        :desc "Unicode"                  "u"          #'insert-char
        :desc "From Kill Ring"           "y"          #'+default/yank-pop
-
-      ;; SPC reserved for jg-insert-state
+       )
+(map! :map jg-binding-normal-state-map ;; Lorem ipsum
+      :prefix "I"
       (:prefix ("L" . "Lorem Ipsum")
        :desc "Sentence"         "s" #'lorem-ipsum-insert-sentences
        :desc "Paragraph"        "p" #'lorem-ipsum-insert-paragraphs
@@ -64,50 +66,47 @@
       )
 (map! :map jg-binding-normal-state-map ;; Visual
       :desc "Visual"             "V"        #'evil-visual-line
-      (:prefix ("v" . "Visual+")
-       :desc "buffer"             "RET" (cmd! (evil-visual-state) (mark-whole-buffer))
-       :desc "line"               "j"   #'evil-visual-line
-       :desc "Block"              "k"   #'evil-visual-block
-       :desc "char"               "l"   #'evil-visual-char
-       :desc "Restore selection"  "h"   #'evil-visual-restore
+      :prefix ("v" . "Visual+")
+      :desc "buffer"             "RET" (cmd! (evil-visual-state) (mark-whole-buffer))
+      :desc "line"               "j"   #'evil-visual-line
+      :desc "Block"              "k"   #'evil-visual-block
+      :desc "char"               "l"   #'evil-visual-char
+      :desc "Restore selection"  "h"   #'evil-visual-restore
 
-       :desc "Inner Select"       "i" (cmd! (evil-visual-char) (set-transient-map jg-binding-inner-text-objects-map))
-       :desc "Outer Select"       "a" (cmd! (evil-visual-char) (set-transient-map jg-binding-outer-text-objects-map))
-       )
+      :desc "Inner Select"       "i" (cmd! (evil-visual-char) (set-transient-map jg-binding-inner-text-objects-map))
+      :desc "Outer Select"       "a" (cmd! (evil-visual-char) (set-transient-map jg-binding-outer-text-objects-map))
       )
-(map! :map jg-binding-normal-state-map ;; Change / paste
-      (:prefix ("c" . "Change")
-        :desc "Split Line"                  "RET" #'electric-newline-and-maybe-indent
+(map! :map jg-binding-normal-state-map ;; paste
+      :prefix ("c" . "Change")
+      :desc "Split Line"                  "RET" #'electric-newline-and-maybe-indent
 
-        :desc "Rot13"                       "'" #'evil-rot13
-        :desc "ispell-word"                 "=" #'ispell-word
+      :desc "Rot13"                       "'" #'evil-rot13
+      :desc "ispell-word"                 "=" #'ispell-word
 
-        :desc "Down"                        "d" #'evil-downcase
-        :desc "Decode url"                  "E" #'+evil:url-decode
+      :desc "Down"                        "d" #'evil-downcase
+      :desc "Decode url"                  "E" #'+evil:url-decode
 
-        :desc "Comment"                     "c" #'evilnc-comment-operator
-        :desc "Encode url"                  "e" #'+evil:url-encode
-        :desc "Shift Left"                  "h" #'evil-shift-left
-        :desc "Inflection"                  "i" #'evil-operator-string-inflection
-        :desc "Shift Right"                 "l" #'evil-shift-right
+      :desc "Comment"                     "c" #'evilnc-comment-operator
+      :desc "Encode url"                  "e" #'+evil:url-encode
+      :desc "Shift Left"                  "h" #'evil-shift-left
+      :desc "Inflection"                  "i" #'evil-operator-string-inflection
+      :desc "Shift Right"                 "l" #'evil-shift-right
 
-        :desc "Upper"                       "u" #'evil-upcase
+      :desc "Upper"                       "u" #'evil-upcase
 
-        :desc "Delete trailing whitespace"  "w" #'delete-trailing-whitespace
-        :desc "Delete trailing newlines"    "W" #'doom/delete-trailing-newlines
-
+      :desc "Delete trailing whitespace"  "w" #'delete-trailing-whitespace
+      :desc "Delete trailing newlines"    "W" #'doom/delete-trailing-newlines
        )
-
+(map! :map jg-binding-norma-state-map ;; paste
       :desc "Paste After"        "p"   #'evil-paste-after
-      (:prefix ("P" . "Paste")
-       :desc "Paste After"        "l"   #'evil-paste-after
-       :desc "Paste Before"       "h"   #'evil-paste-before
-       :desc "Reselect"           "v"   #'+evil/reselect-paste
-       :desc "From Register"      "r"   #'evil-paste-from-register
-       )
+      :prefix ("P" . "Paste")
+      :desc "Paste After"        "l"   #'evil-paste-after
+      :desc "Paste Before"       "h"   #'evil-paste-before
+      :desc "Reselect"           "v"   #'+evil/reselect-paste
+      :desc "From Register"      "r"   #'evil-paste-from-register
       )
 (map! :map jg-binding-normal-state-map ;; Commands
-      :desc "Use Register"       "'"  #'evil-use-register
+      :desc "Use Register"       "'"   #'evil-use-register
       :desc "Join"               "J"   #'evil-join
       :desc "Lookup"             "K"   #'+lookup/documentation
       :desc "Indent"             "TAB" #'indent-for-tab-command
@@ -143,13 +142,14 @@
 ;;-- visual state
 (map! :map jg-binding-visual-state-map
       [escape] 'evil-normal-state
-      (:prefix ("v" . "Visual")
-       :desc "buffer"       "RET"           #'mark-whole-buffer
-       :desc "line"         "j"             #'evil-visual-line
-       :desc "Block"        "k"             #'evil-visual-block
-       :desc "char"         "l"             #'evil-visual-char
-       :desc "exit"         "v"             #'evil-normal-state
-       )
+      :prefix ("v" . "Visual")
+      :desc "buffer"       "RET"           #'mark-whole-buffer
+      :desc "line"         "j"             #'evil-visual-line
+      :desc "Block"        "k"             #'evil-visual-block
+      :desc "char"         "l"             #'evil-visual-char
+      :desc "exit"         "v"             #'evil-normal-state
+      )
+(map! :map jg-binding-visual-state-map
       :desc "Replace Selection"       "R"   #'evil-change
       :desc "Exchange Corners"        "O"   #'evil-visual-exchange-corners
       :desc "Exchange Point and Mark" "o"   #'exchange-point-and-mark
@@ -255,7 +255,7 @@
 ;;-- operator state
 (map! :map jg-binding-operator-state-map
       [escape] 'evil-normal-state
-      :desc "Escape"        "C-g" #'evil-escape
+      :desc "Escape"                 "C-g"     #'evil-escape
       :desc "EOL"                    "$"       #'evil-end-of-visual-line
       :desc "BOL"                    "0"       #'evil-beginning-of-visual-line
       :desc "line start"             "k"       #'evil-beginning-of-line

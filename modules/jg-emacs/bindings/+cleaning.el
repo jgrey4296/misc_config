@@ -65,3 +65,16 @@
                               (delete x acc-map))) acc-map)
         )
   )
+
+(defun +jg-bindings-all-maps ()
+  (interactive)
+  (let (allmaps)
+    (cl-do-symbols (sym)
+      (when (or (keymapp sym) (and (s-matches? "-map$" (symbol-name sym)) (not (functionp sym))))
+        (push sym allmaps)
+        )
+      )
+    (message "There are %s keymaps" (length allmaps))
+    allmaps
+    )
+  )

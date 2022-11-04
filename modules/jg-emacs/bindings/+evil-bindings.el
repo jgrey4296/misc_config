@@ -97,7 +97,7 @@
       :desc "Delete trailing whitespace"  "w" #'delete-trailing-whitespace
       :desc "Delete trailing newlines"    "W" #'doom/delete-trailing-newlines
        )
-(map! :map jg-binding-norma-state-map ;; paste
+(map! :map jg-binding-normal-state-map ;; paste
       :desc "Paste After"        "p"   #'evil-paste-after
       :prefix ("P" . "Paste")
       :desc "Paste After"        "l"   #'evil-paste-after

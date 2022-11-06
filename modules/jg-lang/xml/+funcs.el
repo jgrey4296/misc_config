@@ -35,3 +35,16 @@
       )
     )
   )
+
+(defun +jg-xml-validate ()
+  (interactive)
+  (let ((f-name (buffer-file-name))
+        (xsd    (read-file-name "XSD Spec: "))
+        )
+    (save-buffer)
+    (shell-command (format "xml val -e -s %s %s"
+                           (shell-quote-argument xsd)
+                           (shell-quote-argument f-name)
+                           ))
+  )
+)

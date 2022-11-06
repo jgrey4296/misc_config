@@ -215,5 +215,6 @@ Type SPC or `y' to %s one match, DEL or `n' to skip to next,
           dups (-difference marked uniqs))
     (dired-unmark-all-marks)
     (dired-mark-if (and (dired-get-filename nil t) (-contains? dups (dired-get-filename nil t))) "Duplicated SHA Checksum")
+    (message "%s Duplicates" (length dups))
     )
   )

@@ -386,7 +386,7 @@
         :desc "Save session to file"         "S" #'doom/save-session
         )
       )
-;;-- end <leader> q --- quit/restart
+;;-- end <leader> q --- quit/restart/session
 
 ;;-- <leader> r -- REGISTERS
 (map! :leader
@@ -482,6 +482,7 @@
       :desc "Delete Window"       "d"   #'delete-window
       :desc "Delete workspace"    "DEL" #'+workspace/delete
       :desc "Maximize"            "m"   #'doom/window-maximize-buffer
+      :desc "Select"              "o"   #'ace-window
       :desc "Undo window config"  "u"   #'winner-undo
       :desc "Redo window config"  "U"   #'winner-redo
       :desc "Window left"         "h"   #'evil-window-left

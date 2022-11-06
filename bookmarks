@@ -2,7 +2,12 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("other_git"
+(("py_testbed"
+ (filename . "/Volumes/documents/github/emacs_files/setup_files/python_testbed.org")
+ (front-context-string)
+ (rear-context-string . "thedocs.io/en/la")
+ (position . 24566))
+("other_git"
  (filename . "/Volumes/documents/github/otherLibs/")
  (front-context-string . "mysql2sqlite\n  d")
  (rear-context-string . "38 Nov  3 06:16 ")

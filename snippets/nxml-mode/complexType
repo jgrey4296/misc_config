@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name  : complexType
+# uuid  : schema.complexType
+# key   : comtype
+# group :
+# --
+<xs:element name="${1:theName}">
+    <xs:complexType>
+    $0
+    </xs:complexType>
+</xs:element>

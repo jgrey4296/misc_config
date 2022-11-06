@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name  : types
+# uuid  : schema.types
+# key   : types
+# group :
+# --
+xs:string
+xs:integer
+xs:boolean
+xs:date

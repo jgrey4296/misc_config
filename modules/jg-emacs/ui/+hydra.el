@@ -29,7 +29,7 @@
 _v_isuals    _g_uides       w_r_apping    _n_avigation
 ^^^^^^^------------------------------------------------
 _h_l-line    _w_hitespace   _t_runcate    _a_uto-hide
-_m_odeline                                _c_ursor
+_m_odeline ^^^^                           _c_ursor
 ^^^^^^                                    _e_ww
 "
 

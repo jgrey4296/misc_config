@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : schema.unbound
+# uuid  : schema.unbound
+# key   : unbound
+# group :
+# --
+maxOccurs="unbounded"$0

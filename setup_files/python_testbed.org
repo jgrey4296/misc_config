@@ -60,7 +60,7 @@ clingo, z3, pysmt, pyswip, pomegranate
 astroid
 textblob, inflect, pronouncingpy, spacy
 
-* Links
+* Categories
 ** adb
 pure-python-adb                                                                                 : 0.3.0.dev0
 https://github.com/JeffLIrion/adb_shell                                                         : adb : android
@@ -338,3 +338,10 @@ https://github.com/mewo2/pronouncingpy                                          
 https://spacy.io/                                                                               : NLP : libraries : python
 inflect                                                                                         : 6.0.0
 snowballstemmer                                                                                 : 2.2.0
+
+** XML
+https://xmlschema.readthedocs.io/en/latest/
+https://pyxb.sourceforge.net/
+http://www.davekuhlman.org/generateDS.html
+https://xsdata.readthedocs.io/en/latest/
+https://github.com/tefra/xsdata-plantuml

@@ -21,8 +21,10 @@
       :n "=" #'+jg-xml-format-buffer
       :desc "Run XPath Query" :n "?" #'+jg-xml-run-xidel
       :localleader
+      :desc "XSD Reference"   :n "1" (cmd! (+jg-misc-browse-url "https://www.w3schools.com/xml/schema_intro.asp"))
       :desc "Run XPath Query" :n "?" #'+jg-xml-run-xidel
       :desc "Load into shell" :n "l" #'+jg-xml-load-into-repl
+      :desc "Validate"        :n "v" #'+jg-xml-validate
       )
 
 (map! :map (nxml-mode-map mhtml-mode-map web-mode-map)

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : schema.attribute
+# uuid  : schema.attribute
+# key   : attribute
+# group :
+# --
+<xs:attribute name="${1:theName}" type="${2:xs:string}"/>

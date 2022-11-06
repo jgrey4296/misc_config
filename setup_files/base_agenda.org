@@ -4,16 +4,8 @@
 Death by Institution and the Harms of Abstraction.
 ** Main
 *** [[/Volumes/documents/github/acab][Acab]]
-**** 1: Test Semantics
-**** 2: Create IDE
-**** 3: Create Content
-
 *** [[/Volumes/documents/github/code_analysis][Code Analysis]]
-**** 1: Counts
-Versu, Abl, Cif
-**** 2: Democracy CSV formulae
-**** 3: Patch Notes
-
+*** [[file:/Volumes/documents/github/MAS/instal-stable][Instal]]
 ** Secondary
 *** [[file:/Volumes/documents/github/writing/orgfiles/listings/quotes.org][Quotes]]
 *** [[file:/Volumes/documents/github/writing/orgfiles/listings/definitions.org::*Overview][Definitions]]

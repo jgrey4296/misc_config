@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : schema.location
+# uuid  : schema.location
+# key   : s.loc
+# group :
+# --
+xsi:noNamespaceSchemaLocation="file://${1:loc}"

@@ -33,7 +33,7 @@
                 org-from-is-user-regexp "\\<John Grey\\>"
                 org-group-tags nil
                 org-use-fast-tag-selection t
-                org-tags-column 80
+                org-tags-column 50
                 )
 
   (push 'org-indent-mode minor-mode-list)

@@ -65,7 +65,6 @@
       :desc "Title Case"               "t"  #'+jg-text-title-case-op
       :desc "Rotate"                   "r" #'rotate-text
       )
-      :desc "Goto Column"              "|" #'+jg-text-force-column-motion
       :desc "Complete/Grow Selection"  "g" (cmds! (eq evil-state 'normal) #'company-manual-begin
                                                   (eq evil-state 'visual) #'+jg-text-grow-selection-op)
       (:prefix ("/" . "Search")
@@ -90,4 +89,12 @@
 (map! :map jg-binding-inner-text-objects-map
       :desc "Empty lines"  "l" #'+jg-text-blank-block
 
+      )
+
+(map! :map jg-binding-jump-map
+      :desc "Force Goto Column" "|" #'+jg-text-force-column-motion
+      )
+
+(map! :map jg-binding-motion-state-map
+      :desc "Goto Column"       "|" #'+jg-text-column-motion
       )

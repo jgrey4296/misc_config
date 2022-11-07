@@ -55,7 +55,16 @@
   "Force Go to column COUNT on the current line.
 Columns are counted from zero."
   :type inclusive
-  (move-to-column (or count 0) t)
+  (move-to-column (or count (read-number "Column: ")) t)
+  )
+
+(evil-define-motion +jg-text-column-motion (count)
+  "Augment evil-goto-column to go to end of line if at beginning"
+  (move-to-column (cond (count count)
+                        ((< 0 (current-column))
+                         0)
+                        (t (point-max)))
+                  )
   )
 
 ;; Text Objects

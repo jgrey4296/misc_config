@@ -185,8 +185,6 @@
       :desc "forward-char"          "l"       #'evil-forward-char
 
       :desc "Goto Column"            "|"       #'evil-goto-column
-      :desc "EOL"                    "$"       #'evil-end-of-line
-      :desc "BOL"                    "0"       #'evil-beginning-of-line
       :desc "Return"                 "RET"     #'evil-ret
       :desc "Search"                 "/"       #'evil-ex-search-forward
       )
@@ -343,12 +341,12 @@
 ;; Refresh
 (setq evil-global-keymaps-alist
 '((evil-emacs-state-minor-mode    . evil-emacs-state-map)
-        (evil-motion-state-minor-mode   . evil-motion-state-map)
-        (evil-replace-state-minor-mode  . evil-replace-state-map)
-        (evil-operator-state-minor-mode . evil-operator-state-map)
-        (evil-visual-state-minor-mode   . evil-visual-state-map)
-        (evil-insert-state-minor-mode   . evil-insert-state-map)
-        (evil-normal-state-minor-mode   . evil-normal-state-map)))
+  (evil-motion-state-minor-mode   . evil-motion-state-map)
+  (evil-replace-state-minor-mode  . evil-replace-state-map)
+  (evil-operator-state-minor-mode . evil-operator-state-map)
+  (evil-visual-state-minor-mode   . evil-visual-state-map)
+  (evil-insert-state-minor-mode   . evil-insert-state-map)
+  (evil-normal-state-minor-mode   . evil-normal-state-map)))
 
 (global-set-key (kbd "<backtab>")       #'evil-normal-state)
 

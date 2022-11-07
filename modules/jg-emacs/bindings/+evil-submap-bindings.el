@@ -154,6 +154,8 @@
 ;;-- jump
 (map! :map jg-binding-jump-map ;; avy
       ;; 1 2 3 "u" "h"
+      :desc "Ibuffer"               "DEL" #'ibuffer
+      :desc "Jump to bookmark"      "RET" #'bookmark-jump
       :desc "Last Change"           ";" #'goto-last-change
       :desc "Jump to Char"          "." #'avy-goto-char
       :desc "Line"                  "l" #'evil-avy-goto-line

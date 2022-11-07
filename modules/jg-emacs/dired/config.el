@@ -4,11 +4,12 @@
 (load! "+funcs")
 
 (use-package-hook! dired :post-config
-  (after! jg-bindings-total
-    (load! "+bindings")
-    )
+  (provide 'jg-dired)
 )
 
+(after! (jg-bindings-total jg-dired)
+  (load! "+bindings")
+  )
 
 ;; open -ngF for files with permission errors
 (use-package-hook! dired-x :post-config

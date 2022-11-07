@@ -60,11 +60,13 @@ Columns are counted from zero."
 
 (evil-define-motion +jg-text-column-motion (count)
   "Augment evil-goto-column to go to end of line if at beginning"
-  (move-to-column (cond (count count)
-                        ((< 0 (current-column))
-                         0)
-                        (t (point-max)))
-                  )
+  (cond (count
+         (move-to-column count))
+        ((> (point) (line-beginning-position))
+         (move-to-column 0))
+        (t
+         (end-of-line))
+        )
   )
 
 ;; Text Objects

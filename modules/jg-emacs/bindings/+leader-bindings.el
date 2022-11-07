@@ -5,7 +5,6 @@
 (map! :leader
       ;; "," "<" "!" "?"
       ;; :desc "help"                  "h"    help-map
-      :desc "Goto-line"             "SPC" #'evil-avy-goto-line
       :desc "Ibuffer"               "DEL" #'ibuffer
       :desc "Jump to bookmark"      "RET" #'bookmark-jump
 
@@ -426,7 +425,6 @@
       :desc "Look up in local docsets"     "k" #'+lookup/in-docsets
       :desc "Look up online (w/ prompt)"   "O" #'+lookup/online-select
       :desc "Look up online"               "o" #'+lookup/online
-      :desc "Search buffer"                "s" #'swiper
       :desc "Search buffer"                "S" #'+default/search-buffer
       :desc "Search current directory"     "d" #'+default/search-cwd
       :desc "Search other directory"       "D" #'+default/search-other-cwd

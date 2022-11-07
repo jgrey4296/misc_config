@@ -98,3 +98,8 @@
 (map! :map jg-binding-motion-state-map
       :desc "Goto Column"       "|" #'+jg-text-column-motion
       )
+
+(map! :map (ivy-minibuffer-map minibuffer-mode-map)
+      :n "<" #'beginning-of-line
+      :n ">" #'end-of-line
+      )

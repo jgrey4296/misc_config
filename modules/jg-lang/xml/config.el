@@ -22,12 +22,13 @@
 
 
 (load! "+vars")
-(load! "+xmllint")
-(load! "+xidel")
 (load! "+funcs")
-(after! jg-bindings-total
+(load! "+xml-utils")
+(after! (jg-bindings-total jg-dired)
   (load! "+bindings")
   )
+
+
 
 (use-package! nxml-mode)
 (use-package! mhtml-mode)

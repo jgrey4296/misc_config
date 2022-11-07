@@ -1,0 +1,216 @@
+;;; +xml-utils.el -*- lexical-binding: t; -*-
+
+;;-- repl
+(defun +jg-xml-load-into-repl ()
+  " Insert new content into an xml lint repl "
+  (interactive)
+  (cond ((process-live-p (get-buffer-process jg-xml-xmllint-shell-buffer-name))
+         ;; live, so load
+         (with-current-buffer jg-xml-xmllint-shell-buffer-name
+           (+jg-text-clear-buffer))
+         (comint-simple-send (get-buffer-process jg-xml-xmllint-shell-buffer-name)
+                             (format "load %s" (current-buffer)))
+         )
+        ((buffer-live-p jg-xml-xmllint-shell-buffer-name)
+         ;; exists, no process
+         (kill-buffer jg-xml-xmllint-shell-buffer-name)
+         (+eval/open-repl-other-window)
+        )
+        (t) ;; don't do anything, as repl will be opened after cond
+        )
+  (+eval/open-repl-other-window)
+  )
+(defun +xml/open-repl ()
+  " Open an xml lint shell comint on the current buffer / file "
+  (interactive)
+  (when (get-buffer jg-xml-xmllint-shell-buffer-name)
+    (with-current-buffer jg-xml-xmllint-shell-buffer-name
+      (erase-buffer)
+      )
+    )
+  (when (process-live-p (get-buffer-process jg-xml-xmllint-shell-buffer-name))
+    (kill-process (get-buffer-process jg-xml-xmllint-shell-buffer-name))
+    )
+
+  (let* ((fname (buffer-file-name (current-buffer)))
+         (is-html (f-ext? fname "html"))
+         (default-directory (f-parent fname))
+         (comint-buff (apply #'make-comint-in-buffer "xmllint"
+                                             jg-xml-xmllint-shell-buffer-name
+                                             "xmllint"
+                                             nil
+                                             (-filter #'identity
+                                                      (list (when is-html "--html")
+                                                            "--shell"
+                                                            fname))))
+          )
+    (message "Fname: %s" (shell-quote-argument fname))
+    (set-process-sentinel (get-buffer-process jg-xml-xmllint-shell-buffer-name)
+                          (lambda (process state)
+                            (message "Xmllint: %s" state)
+                            (when (get-buffer jg-xml-xmllint-shell-buffer-name)
+                              (kill-buffer jg-xml-xmllint-shell-buffer-name)
+                              )
+                            )
+                          )
+    (pop-to-buffer comint-buff)
+    )
+  )
+
+(set-repl-handler! 'nxml-mode #'+xml/open-repl)
+(set-repl-handler! 'mhtml-mode #'+xml/open-repl)
+
+;;-- end repl
+
+(defun +jg-xml-format-buffer ()
+  " Take the file contents, format it through xml lint,
+and redisplay
+ "
+  (interactive)
+  (let* ((current (current-buffer))
+         (temp-file (make-temp-file "xmllint-temp" nil nil (buffer-string)))
+         (result (shell-command-to-string (format jg-xml-format-command-string temp-file)))
+         )
+    (with-current-buffer current
+      (erase-buffer)
+      (insert result)
+      )
+    )
+  )
+
+(defun +jg-xml-run-xidel (query)
+  " Run an xpath query on the current buffer / file
+Storing and displaying results in a buffer
+uses xidel, outputs as xml
+  "
+  (interactive "sXML Query: ")
+  (let* ((current (current-buffer))
+         (fname (buffer-file-name current))
+         (default-directory (f-parent fname))
+         (result (shell-command-to-string (format jg-xml-xidel-command-string
+                                                  query
+                                                  (shell-quote-argument  (f-filename fname)))))
+         )
+    (with-current-buffer (get-buffer-create jg-xml-xpath-results-buffer-name)
+      (erase-buffer)
+      (insert result)
+      (nxml-mode)
+      )
+    (display-buffer  jg-xml-xpath-results-buffer-name)
+    )
+  )
+
+(defun +jg-xml-dired-all-ext (files ext)
+  "Error if all files aren't of the specified extension"
+  (unless (not (-filter 'not (mapcar (-rpartial 'f-ext? ext) files)))
+    (error "Marked Files need to be %s's" ext)))
+
+;;-- dired utils
+
+(defun +jg-xml-dired-run-xidel (query)
+  "Run an xpath query on marked files, saving the output to separate new files"
+  (interactive "sXML Query: ")
+  (let* ((marked (dired-get-marked-files))
+         (target-dir (read-directory-name "Output Directory: "))
+         (prefix (read-string "Prefix filename with: "))
+         (results (cl-loop for fname in marked
+                           do
+                           (let ((result (shell-command-to-string (format jg-xml-xidel-command-string
+                                                                          query
+                                                                          (shell-quote-argument fname))))
+                                 (new-fname (f-join target-dir (concat prefix (f-swap-ext (f-filename fname) "xml"))))
+                                 )
+                             (append-to-file result nil new-fname)
+                             ;; result
+
+                             )
+                           ))
+         )
+    1
+    ;; (with-current-buffer (get-buffer-create jg-xml-xpath-results-buffer-name)
+    ;;   (erase-buffer)
+    ;;   (mapc #'insert results)
+    ;;   (nxml-mode)
+    ;;   )
+    ;; (display-buffer  jg-xml-xpath-results-buffer-name)
+    ;; )
+  )
+
+  )
+(defun +jg-xml-dired-elements ()
+  "Print out the element mapping using xmlstarlet"
+  (interactive)
+  (+jg-xml-dired-all-ext (dired-get-marked-files) "xml")
+  (dired-do-shell-command "xml el -u" nil (dired-get-marked-files))
+  )
+(defun +jg-xml-dired-select ()
+  "Run an xmlstarlet query template on selected files"
+  (interactive)
+  (+jg-xml-dired-all-ext (dired-get-marked-files) "xml")
+  (let ((template (read-string "Query Template: "))
+        )
+    (dired-do-shell-command (format "xml sel -t %s -n *" template)
+                            nil
+                            (dired-get-marked-files))
+    )
+  )
+(defun +jg-xml-dired-validate ()
+  "Validate marked files against an .xsd schema"
+  (interactive)
+  (+jg-xml-dired-all-ext (dired-get-marked-files) "xml")
+  (let ((schema (read-file-name "Schema File: "))
+        )
+    (dired-do-shell-command (format "xml val -e -s %s 2>> validation.errors" schema)
+                            nil
+                            (dired-get-marked-files))
+    )
+  )
+(defun +jg-xml-dired-format ()
+  "Format xml files into fmt-`?` new files with:
+an indent of 4,
+recovering everything parsable,
+removing redundant namespaces,
+encoding as utf-8"
+  (interactive)
+  (+jg-xml-dired-all-ext (dired-get-marked-files) "xml")
+  (let ((files (dired-get-marked-files t))
+        )
+    (message "Test Running on: %s : %s" default-directory files)
+    (dired-do-shell-command "xml fo -s 4 -R -N -e utf-8 ? > fmt-`?`"
+                            nil files)
+    )
+  )
+(defun +jg-xml-dired-generate-schema ()
+  "Generate a trang .xsd schema file from marked files "
+  (interactive)
+  (+jg-xml-dired-all-ext (dired-get-marked-files) "xml")
+  (dired-do-shell-command (format "trang * %s.xsd" (read-string "Schema Name: "))
+                          nil (dired-get-marked-files))
+  )
+(defun +jg-xml-dired-schema-uml ()
+  "Convert an .xsd file into a plantuml .pu file, and create a png and text output for it "
+  (interactive)
+  (+jg-xml-dired-all-ext (dired-get-marked-files) "xsd")
+  (dired-do-shell-command "xsdata generate -o plantuml -pp * > schema.pu" nil (dired-get-marked-files))
+  (dired-do-shell-command "plantuml -filename schema.png"                 nil '("schema.pu"))
+  (dired-do-shell-command "cat ? | plantuml -ttxt -p"                     nil '("schema.pu"))
+  )
+(defun +jg-xml-dired-gen-python ()
+  "Generate python bindings for the marked files/directories"
+  (interactive)
+  (let ((package (read-string "Package Name: "))
+        )
+    (dired-do-shell-command (format "xsdata generate -r -p %s --relative-imports --postponed-annotations ?" package)
+                            nil
+                            (dired-get-marked-files))
+    )
+  )
+(defun +jg-xml-dired-visualise-json ()
+  "Use Plantuml to visualise json files"
+  (interactive)
+  (+jg-xml-dired-all-ext (dired-get-marked-files) "json")
+  (dired-do-shell-command "cat ? | awk 'BEGIN {print \"@startjson\"} END {print \"@endjson\"} {print $0}' | plantuml -p > `?`.png "
+                          nil (dired-get-marked-files))
+  (dired-do-shell-command "open `?`.png" nil (dired-get-marked-files))
+  )
+;;-- end dired utils

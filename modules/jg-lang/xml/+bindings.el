@@ -60,3 +60,25 @@
        :desc "LESS Reference"  :n "1" (cmd! (+jg-misc-browse-url "https://lesscss.org/features/"))
        :desc "Compile Less"    :n "c" #'less-css-compile
        )
+
+
+;;-- xml/json data utils
+(map! :map dired-mode-map
+      :n "x" nil
+      :n "X" nil
+      "x" nil
+      "X" nil
+      :prefix ("x" . "Xml/Json Utils")
+      :desc "Query"    "?" #'+jg-xml-dired-run-xidel
+
+      :desc "Elements"        "e" #'+jg-xml-dired-elements
+      :desc "Select"          "q" #'+jg-xml-dired-select
+      :desc "Validate"        "v" #'+jg-xml-dired-validate
+      :desc "Format"          "f" #'+jg-xml-dired-format
+      :desc "Schema"          "s" #'+jg-xml-dired-generate-schema
+      :desc "Schema Uml"      "u" #'+jg-xml-dired-schema-uml
+      :desc "Generate Python" "p" #'+jg-xml-dired-gen-python
+      :desc "Visualise Json"  "j" '+jg-xml-dired-visualise-json
+      )
+
+;;-- end xml/json data utils

@@ -161,6 +161,7 @@
       :desc "Line"                  "l" #'evil-avy-goto-line
       :desc "Middle of Line"        "M" #'evil-middle-of-visual-line
 
+      :desc "Jump to Window"        "w" #'ace-window
       :desc "Jump to mark"          "m" #'evil-show-marks
       :desc "Pop Mark"              "b" #'avy-pop-mark
       :desc "Push Mark"             "B" (cmd! (avy-push-mark))

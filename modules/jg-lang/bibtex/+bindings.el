@@ -7,7 +7,6 @@
       :desc "Insert from Doi"    :n "?"       (cmd! (doi-utils-insert-bibtex-entry-from-doi (read-string "Doi: ")))
       :desc "Clean entry"        :n "TAB"   #'org-ref-clean-bibtex-entry
       :desc "Edit Field"         :n  "\\"   #'+jg-bibtex-edit-field
-      :desc "Change Entry Type " :n "|"     #'+jg-bibtex-edit-entry-type
       :desc "Change Entry Type"  :n "DEL"   #'+jg-bibtex-edit-entry-type
       :desc "Select Entry"       :v "i e"   #'+jg-bibtex-visual-select-entry
       :desc "Open Pdf"           :n "RET"   #'+jg-bibtex-open-pdf

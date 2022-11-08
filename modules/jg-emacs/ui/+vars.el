@@ -18,6 +18,7 @@
 
               ;; smartparens
               sp-autoinsert-pair nil
+              sp-autoinsert-quote-if-followed-by-closing-pair nil
               )
 
 ;;-- parens

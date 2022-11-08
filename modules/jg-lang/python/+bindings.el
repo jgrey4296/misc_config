@@ -1,18 +1,19 @@
 ;;; lang/jg-python/+bindings.el -*- lexical-binding: t; -*-
 
-(map! :after dired
-      :map dired-mode-map
+(map! :map dired-mode-map
+      :after dired
       :localleader
       :desc "Activate Py Environments" :n "v" #'+jg-python-activate-venv-and-conda
       )
 
-(map! :after python
-      :map python-mode-map
+(map! :map python-mode-map
+      :after python
       :n "z d" nil ;; #'+jg-python-toggle-all-defs
       :n "z D" nil ;; #'+jg-python-close-class-defs
       :v "i f" #'+jg-python-select-defun
       :v "i F" #'+jg-python-select-class
       :n "] ]" #'+jg-python-forward-defun
+      :n "s j" '+jg-python-swipe-to-def
       :localleader
       ;; :desc "Sort defs" "S" #'+jg-python-sort-class-methods
       :desc "Summarize" "s" #'+jg-python-summarize
@@ -21,8 +22,8 @@
                                   (message "Python Debug Mode: %s" jg-python-dev-mode))
       )
 
-(map! :after (python)
-      :map python-mode-map
+(map! :map python-mode-map
+      :after python
       :localleader
       (:prefix ("i" . "imports")
        :desc "Insert import"          "i" #'+jg-python-insert-import
@@ -45,8 +46,8 @@
        )
       )
 
-(map! :after python
-      :map (python-mode-map inferior-python-mode-map)
+(map! :map (python-mode-map inferior-python-mode-map) ;; Doc links
+      :after python
       :localleader
       :desc "Docs: Python"        "1" (cmd! (+jg-misc-browse-url (s-concat jg-python-docs-url (let ((lib (read-string "Library: ")))
                                                                                            (if (s-blank? lib) nil (format jg-python-lib-url-suffix lib))))))
@@ -86,8 +87,8 @@
       )
 )
 
-(map! :after cython-mode
-      :map cython-mode-map
+(map! :map cython-mode-map
+      :after cython-mode
       :localleader
       (:prefix "c"
       :desc "Cython compile buffer"    "c" #'cython-compile))
@@ -106,14 +107,13 @@
         )
   )
 
-(map! :after conf-mode
-      :map conf-mode-map
+(map! :map conf-mode-map ;; setuptools doc link
+      :after conf-mode
       :localleader
       :desc "Docs: Setuptools"     "1" (cmd! (+jg-misc-browse-url "https://setuptools.pypa.io/en/latest/index.html"))
-
       )
 
-(map! :map manifest-mode-map
+(map! :map manifest-mode-map ;; manifest doc link
       :localleader
       :desc "Docs: Manifest files"  "1" (cmd! (+jg-misc-browse-url "https://docs.python.org/3/distutils/sourcedist.html?highlight=manifest"))
       )

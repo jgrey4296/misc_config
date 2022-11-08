@@ -1,7 +1,6 @@
 ;;; lang/jg-python/+funcs.el -*- lexical-binding: t; -*-
 
 
-
 ;;-- display control
 (defun +jg-python-close-all-defs ()
     (interactive)
@@ -242,3 +241,25 @@ TODO
   )
 
 ;;-- end summary
+
+(defun +jg-python-swipe-to-def ()
+  (interactive)
+  (message "Swiping to def: %s" default-directory)
+  (let* ((current-file (buffer-file-name))
+         ;; Get global's stored symbols, filtering for functions
+         (result (with-temp-buffer
+                   (list :exit-status
+                         (shell-command
+                          (format "global -f %s | grep -E \"\.py\s+def .+?\(.+?\)( -> .+?)?:(.+)?$\"" current-file)
+                          (current-buffer))
+                         :output
+                         (split-string (buffer-string) "\n" t "\s+"))))
+         ;; Process into an alist
+         (processed (cl-loop for line in (plist-get result :output)
+                             for components = (split-string line "\s+" t "\s+")
+                             collect (cons (car components) (nth 1 components))))
+         )
+    ;; select and move
+    (ivy-read "Select Function: " processed :action (lambda (x) (goto-line (string-to-number (cdr x)))))
+    )
+  )

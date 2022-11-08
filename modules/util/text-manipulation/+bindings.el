@@ -92,11 +92,11 @@
       )
 
 (map! :map jg-binding-jump-map
-      :desc "Force Goto Column" "|" #'+jg-text-force-column-motion
+      :desc "Force Goto Column" "\\" #'+jg-text-force-column-motion
       )
 
 (map! :map jg-binding-motion-state-map
-      :desc "Goto Column"       "|" #'+jg-text-column-motion
+      :desc "Goto Column"       "\\" #'+jg-text-column-motion
       )
 
 (map! :map (ivy-minibuffer-map minibuffer-mode-map)

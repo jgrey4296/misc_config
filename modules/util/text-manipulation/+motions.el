@@ -62,10 +62,10 @@ Columns are counted from zero."
   "Augment evil-goto-column to go to end of line if at beginning"
   (cond (count
          (move-to-column count))
-        ((> (point) (line-beginning-position))
-         (move-to-column 0))
-        (t
+        ((< (point) (line-end-position))
          (end-of-line))
+        (t
+         (move-to-column 0))
         )
   )
 

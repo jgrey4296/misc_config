@@ -44,7 +44,7 @@
       "C-SPC" #'ivy-call-and-recenter  ; preview file
       "C-l"   #'ivy-alt-done
       "C-v"   #'yank
-      :n "\\"  #'abort-recursive-edit
+      :n "|"  #'abort-recursive-edit
       )
 
 (map! :map swiper-map

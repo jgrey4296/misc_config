@@ -244,13 +244,16 @@ TODO
 
 (defun +jg-python-swipe-to-def ()
   (interactive)
+  ;; TODO make more robust
+  ;; TODO process to mark class owner
+  ;; TODO include vars / arg nums
   (message "Swiping to def: %s" default-directory)
   (let* ((current-file (buffer-file-name))
          ;; Get global's stored symbols, filtering for functions
          (result (with-temp-buffer
                    (list :exit-status
                          (shell-command
-                          (format "global -f %s | grep -E \"\.py\s+def .+?\(.+?\)( -> .+?)?:(.+)?$\"" current-file)
+                          (format "global -f %s | grep -E \"\.py\s+(def|class) .+?\(.+?\)( -> .+?)?:(.+)?$\"" current-file)
                           (current-buffer))
                          :output
                          (split-string (buffer-string) "\n" t "\s+"))))

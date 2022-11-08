@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name  : shell-command
+# uuid  : shell-command
+# key   : shell-command
+# group :
+# --
+(with-temp-buffer
+    (list :status
+          (shell-command "${1:echo 'test'}" (current-buffer))
+          :result
+          (s-trim (buffer-string)))
+    )

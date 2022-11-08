@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name  : call-process
+# uuid  : call-process
+# key   : call-process
+# group :
+# --
+(with-temp-buffer
+  (list :exit-status
+        (call-process "${1:echo}" nil t nil ${2:"hello" "world"})
+        :output
+        (buffer-string)))

@@ -86,7 +86,7 @@ the entry of interest in the bibfile.  but does not check that."
   " Follow the doi link of the current entry in a browser "
   (interactive)
   (when (bibtex-text-in-field "doi")
-    (browse-url (format "https://doi.org/%s" (bibtex-text-in-field "doi")))
+    (browse-url (format jg-bibtex-doi-url (bibtex-text-in-field "doi")))
     )
   )
 (defun +jg-bibtex-find-folder ()
@@ -410,12 +410,8 @@ With arg, searchs the dplp instead.
                                            (-filter #'(lambda (x) (not (string-empty-p x))) exact-texts))))
          (all-terms (s-concat exact-string " " (s-join " " search-texts)))
          (cleaned (s-replace-regexp "{.+?\\(\\w\\)}" "\\1" all-terms))
-         (search-string (format (if arg
-                                    jg-bibtex-dblp-search-string
-                                  jg-bibtex-scholar-search-string)
-                                cleaned))
          )
-    (browse-url search-string)
+    (+lookup/online cleaned "Scholar")
     )
   )
 ;;-- end ui

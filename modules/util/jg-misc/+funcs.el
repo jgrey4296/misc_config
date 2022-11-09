@@ -6,12 +6,12 @@
   (let ((url (cond (url url)
                    ((eq evil-state 'visual)
                     (buffer-substring-no-properties evil-visual-beginning evil-visual-end))
-                   (t
-                    (read-string "Search For: "))
-                   ))
+                   (t nil)))
         )
 
-    (cond ((f-exists? url)
+    (cond ((not url)
+           (+lookup/online-select))
+          ((f-exists? url)
            (shell-command (format "open %s" url)))
           ((s-prefix? "@" url)
            (browse-url (format "https://twitter.com/%s" url)))
@@ -22,8 +22,8 @@
           ((string-match "\\.com\\|\\.uk" url)
            (browse-url (format "https://%s" url)))
           (t
-           (message "Browsing for: %s" (format jg-misc-google-url url))
-           (browse-url (format jg-misc-google-url url)))
+           (message "Don't know what to do")
+           )
           )
     )
   )
@@ -40,6 +40,7 @@
 
 ;;-- end url browsing
 
+;;-- misc
 (defun +jg-misc-get-modes ()
 
   (let (major minor)
@@ -102,3 +103,5 @@
   ;; add advice to evil line move
 
   )
+
+;;-- end misc

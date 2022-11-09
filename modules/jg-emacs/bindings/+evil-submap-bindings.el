@@ -174,7 +174,7 @@
       :desc "References"            "r" #'+lookup/references
       :desc "Definition"            "d" #'+lookup/definition
       :desc "Implementations"       "i" #'+lookup/implementations
-      :desc "Documentation"         "k" #'+lookup/documentation
+      ;; :desc "Documentation"         "k" #'+lookup/documentation
       )
 (map! :map jg-binding-jump-map ;; gtags
       :prefix ("g" . "gtags")

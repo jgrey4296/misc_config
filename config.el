@@ -122,6 +122,7 @@
                                    ("Wolfram alpha" "https://wolframalpha.com/input/?i=%s")
                                    ("Doom Emacs issues" "https://github.com/hlissner/doom-emacs/issues?q=is%%3Aissue+%s")
                                    ("Google images" "https://www.google.com/images?q=%s")
+                                   ("Raw" "%s")
                                    )
       )
 ;;-- end lookup

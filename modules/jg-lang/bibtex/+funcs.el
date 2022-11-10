@@ -571,3 +571,37 @@ With arg, searchs the dplp instead.
   )
 
 ;;-- end window-switching
+
+;;-- subciting
+(defun +jg-bibtex-subcite ()
+  (interactive)
+  (bibtex-beginning-of-entry)
+  (let* ((entry (bibtex-parse-entry))
+         (key (alist-get "=key=" entry nil nil #'s-equals?))
+         (type (alist-get "=type=" entry nil nil #'s-equals?))
+         (year (alist-get "year" entry nil nil #'s-equals?))
+         (cite-type (concat "@In" type))
+         )
+    ;; make key permanent if necessary
+    (unless (s-matches? "_$" key)
+      (bibtex-beginning-of-entry)
+      (setq key (concat key "_"))
+      (search-forward "{" (line-end-position) t)
+      (delete-region (point) (line-end-position))
+      (insert key ",")
+      )
+
+    ;; go to end of entry
+    ;; insert stub
+    (bibtex-end-of-entry)
+    (insert "\n\n")
+    (insert cite-type "{stub-entry,\n")
+    (insert "year = " year ",\n")
+    (insert "crossref = {" key "},\n")
+    (insert "title = {},\n")
+    (insert "author = {},\n")
+    (insert "}")
+    (bibtex-beginning-of-entry)
+    )
+  )
+;;-- end subciting

@@ -108,7 +108,7 @@
 ;; Movement
 (map! :map helm-map
       :after helm
-      :desc "quit" :n "|" (cmd! (helm-exit-and-execute-action nil))
+      :desc "quit" :n "|"  #'evil-force-normal-state
 
       :ni "C-u"             #'helm-delete-minibuffer-contents
       :i  "C-s"             #'helm-minibuffer-history

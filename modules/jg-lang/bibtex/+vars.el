@@ -99,6 +99,7 @@
                               +jg-bibtex-orcb-key-hook
                               +jg-bibtex-insert-volume-to-key
                               ;; Final alignment and indent
+                              +jg-bibtex-clean-whitespace-hook
                               +jg-bibtex-align-hook
                               +jg-bibtex-indent-hook
                               )

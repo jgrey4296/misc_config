@@ -150,6 +150,19 @@ But not in urls
     (mapc #'(lambda (x) (bibtex-set-field (car x) (cdr x))) (-zip paths path-cleaned))
     )
   )
+(defun +jg-bibtex-clean-whitespace-hook()
+  " Remove newlines from entries "
+  (bibtex-beginning-of-entry)
+  (beginning-of-line)
+  (let* ((entry (bibtex-parse-entry))
+         (main (-reject #'(lambda (x) (s-contains? "=" (car x))) entry))
+         (cleaned (mapcar #'(lambda (x) (cons (car x) (s-trim (substring (cdr x) 1 -1)))) main))
+         )
+    ;; Then update:
+    (mapc #'(lambda (x) (bibtex-set-field (car x) (cdr x))) cleaned)
+    )
+  )
+
 (defun +jg-bibtex-remove-empty-fields ()
   (bibtex-beginning-of-entry)
   (while (re-search-forward "\\(ALT\\|OPT\\).+= {},?$" nil t)

@@ -187,6 +187,12 @@ and orcb-clean-doi
       (bibtex-make-field "doi")
       (backward-char)
       (insert (replace-regexp-in-string "^http.*?\.org/" "" doi)))))
+(defun +jg-bibtex-isbn-clean ()
+  (let ((isbn (bibtex-autokey-get-field "isbn")))
+    (unless (string-empty-p isbn)
+      (bibtex-set-field "isbn" (s-replace-regexp "[[:blank:]]+" "-" (s-trim (substring isbn 1 -1))))
+      ))
+  )
 ;;-- end focused funcs
 
 ;;-- file checking

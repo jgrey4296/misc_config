@@ -95,6 +95,7 @@
                               +jg-bibtex-clean-doi-hook
                               +jg-bibtex-check-file-hook
                               +jg-bibtex--expand-shortened-url
+                              +jg-bibtex-isbn-clean
                               ;; generate key
                               +jg-bibtex-orcb-key-hook
                               +jg-bibtex-insert-volume-to-key

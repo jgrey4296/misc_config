@@ -6,6 +6,7 @@
 ;;-- bibtex-mode
 (map! :map bibtex-mode-map ;; main
       :after bibtex
+      :desc "Lock Key"           :n "!"     #'+jg-bibtex-lock-key
       :desc "Insert from Doi"    :n "?"       (cmd! (doi-utils-insert-bibtex-entry-from-doi (read-string "Doi: ")))
       :desc "Clean entry"        :n "TAB"   #'org-ref-clean-bibtex-entry
       :desc "Edit Field"         :n  "\\"   #'+jg-bibtex-edit-field

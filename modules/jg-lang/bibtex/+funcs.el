@@ -573,6 +573,17 @@ With arg, searchs the dplp instead.
 ;;-- end window-switching
 
 ;;-- subciting
+(defun +jg-bibtex-lock-key ()
+  (interactive)
+  (bibtex-beginning-of-entry)
+  (let ((key (bibtex-completion-get-key-bibtex)))
+    (unless (s-matches? "_$" key)
+      (re-search-forward "{" (line-end-position))
+      (kill-line)
+      (insert (concat key "_,"))
+      )
+    )
+  )
 (defun +jg-bibtex-subcite ()
   (interactive)
   (bibtex-beginning-of-entry)
@@ -583,13 +594,7 @@ With arg, searchs the dplp instead.
          (cite-type (concat "@In" type))
          )
     ;; make key permanent if necessary
-    (unless (s-matches? "_$" key)
-      (bibtex-beginning-of-entry)
-      (setq key (concat key "_"))
-      (search-forward "{" (line-end-position) t)
-      (delete-region (point) (line-end-position))
-      (insert key ",")
-      )
+    (+jg-bibtex-lock-key)
 
     ;; go to end of entry
     ;; insert stub

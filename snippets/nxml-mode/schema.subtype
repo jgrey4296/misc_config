@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : schema.subtype
+# uuid  : schema.subtype
+# key   : schema.subtype
+# group :
+# --
+<xs:restriction base="BaseType"/>

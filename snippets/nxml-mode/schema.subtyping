@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name  : schema.subtyping
+# uuid  : schema.subtyping
+# key   : schema.subtyping
+# group :
+# --
+<xs:complexType name="BaseType">
+    <xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="Blah">
+    <xs:complexContent>
+        <xs:extension base="BaseType"/>
+    </xs:complexContent>
+</xs:complexType>

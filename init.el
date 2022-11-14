@@ -35,6 +35,7 @@
  bibtex
  cron
  erlang
+ godot
  haskell
  inform
  kotlin

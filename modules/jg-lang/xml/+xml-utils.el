@@ -100,10 +100,13 @@ uses xidel, outputs as xml
     )
   )
 
-(defun +jg-xml-dired-all-ext (files ext)
+(defun +jg-xml-dired-all-ext (files &rest exts)
   "Error if all files aren't of the specified extension"
-  (unless (not (-filter 'not (mapcar (-rpartial 'f-ext? ext) files)))
-    (error "Marked Files need to be %s's" ext)))
+  (unless  (--all? it
+                   (cl-loop for file in files
+                            collect (--any? (f-ext? file it) exts)))
+    (error "Marked Files need to be %s's" exts)))
+
 
 ;;-- dired utils
 
@@ -138,13 +141,13 @@ uses xidel, outputs as xml
 
   )
 (defun +jg-xml-dired-elements ()
-  "Print out the element mapping using xmlstarlet"
+  "Print out the element mapping using xmlstarlet of all marked files combined"
   (interactive)
-  (+jg-xml-dired-all-ext (dired-get-marked-files) "xml")
-  (dired-do-shell-command "xml el -u" nil (dired-get-marked-files))
+  (+jg-xml-dired-all-ext (dired-get-marked-files) "xml" "html" "htm")
+  (dired-do-shell-command "xml el -u *" nil (dired-get-marked-files))
   )
 (defun +jg-xml-dired-select ()
-  "Run an xmlstarlet query template on selected files"
+  "Run an xmlstarlet query template on marked files "
   (interactive)
   (+jg-xml-dired-all-ext (dired-get-marked-files) "xml")
   (let ((template (read-string "Query Template: "))
@@ -155,12 +158,14 @@ uses xidel, outputs as xml
     )
   )
 (defun +jg-xml-dired-validate ()
-  "Validate marked files against an .xsd schema"
+  "Validate each marked file against an .xsd schema"
   (interactive)
   (+jg-xml-dired-all-ext (dired-get-marked-files) "xml")
   (let ((schema (read-file-name "Schema File: "))
+        (args '("-e"  "--net" "-s" "%s" "?" "2>>" "validation.errors"))
+        (cmd "xml val ")
         )
-    (dired-do-shell-command (format "xml val -e -s %s 2>> validation.errors" schema)
+    (dired-do-shell-command (format (concat cmd (s-join " "args)) schema)
                             nil
                             (dired-get-marked-files))
     )
@@ -172,11 +177,15 @@ recovering everything parsable,
 removing redundant namespaces,
 encoding as utf-8"
   (interactive)
-  (+jg-xml-dired-all-ext (dired-get-marked-files) "xml")
+  (+jg-xml-dired-all-ext (dired-get-marked-files) "xml" "html" "htm")
   (let ((files (dired-get-marked-files t))
-        )
+        (args '("-s" "4" "-R" "-N" "-e" "utf-8" "?" ">" "fmt-`?`"))
+        (cmd "xml fo "))
+    (when (--any? (or (f-ext? it "html") (f-ext? it "htm"))  files)
+      (push "--html" args))
     (message "Test Running on: %s : %s" default-directory files)
-    (dired-do-shell-command "xml fo -s 4 -R -N -e utf-8 ? > fmt-`?`"
+    (message "Command: %s" (concat cmd (s-join " " args)))
+    (dired-do-shell-command (concat cmd (s-join " " args))
                             nil files)
     )
   )

@@ -1,0 +1,23 @@
+##-- tool setup
+tool
+extends ${1:BaseClass}
+
+# Optional
+class_name $2
+
+##-- end tool setup
+
+##-- member variables
+var ${3:test : int = 5}
+
+##-- end member variables
+
+##-- consts
+const TEST = 42
+
+##-- end consts
+
+
+
+
+$0

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : enum
+# uuid  : enum
+# key   : enum
+# group :
+# --
+enum {${1:thing} }

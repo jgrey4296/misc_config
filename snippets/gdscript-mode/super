@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : super
+# uuid  : super
+# key   : super
+# group :
+# --
+.${1:funcName}($2:params)

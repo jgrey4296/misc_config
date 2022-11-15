@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name  : export_flags
+# uuid  : export_flags
+# key   : export_flags
+# group :
+# --
+export(int, FLAGS, ${1:strValues}) var ${1:varName} = ${2:0}
+export(int, LAYERS_2D_PHYSICS)     var layers_2d_physics
+export(int, LAYERS_2D_RENDER)      var layers_2d_render
+export(int, LAYERS_3D_PHYSICS)     var layers_3d_physics
+export(int, LAYERS_3D_RENDER)      var layers_3d_render

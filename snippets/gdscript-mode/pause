@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : pause
+# uuid  : pause
+# key   : pause
+# group :
+# --
+get_tree().paused = True

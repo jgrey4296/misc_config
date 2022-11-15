@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : label
+# uuid  : label
+# key   : label
+# group :
+# --
+@${1:path}

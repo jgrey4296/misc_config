@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name  : iterator
+# uuid  : iterator
+# key   : iterator
+# group :
+# --
+class ${1:My}Iterator:
+	"""
+	Use like:
+	var itr = $1Iterator.new()
+	for i in itr:
+	print(i)
+	"""
+
+    func _init():
+        pass
+
+	func _iter_init() -> bool:
+		return True
+
+	func _iter_next() -> bool:
+		return False
+
+	func _iter_get():
+		return "value"

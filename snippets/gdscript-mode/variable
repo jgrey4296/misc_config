@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : var
+# uuid  : var
+# key   : var
+# group :
+# --
+var ${1:aVar} : ${2:int} = ${3}

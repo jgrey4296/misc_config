@@ -1,0 +1,69 @@
+##-- setup
+class_name $1
+extends ${2:Node}
+
+"""
+${3:docstring}
+"""
+##-- end setup
+
+##-- signals
+signal ${4:example}
+##-- end signals
+
+##-- enums
+
+##-- end enums
+
+##-- consts
+const TEST = 42
+
+##-- end consts
+
+##-- exported vars
+
+##-- end exported vars
+
+##-- member variables
+var ${5:test : int = 42}
+
+##-- end member variables
+
+##-- onready vars
+
+##-- end onready vars
+
+##-- lifecycle methods
+func _init(${6:args}):
+    # Constructor
+    pass
+
+func _enter_tree():
+    # On entrance to scene, can be called multiple times
+    pass
+
+func _ready():
+    # called once, after first entrance to scene
+    # and all children have entered scene too.
+    pass
+
+
+func _process(delta):
+    pass
+
+func _physics_process(delta):
+    pass
+
+func _input(event):
+    pass
+
+func _unhandled_input(event):
+    pass
+
+func _exit_tree():
+    # Upon leaving the scene
+    pass
+
+##-- end lifecycle methods
+
+$0

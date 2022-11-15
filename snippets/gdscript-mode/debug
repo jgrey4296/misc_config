@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : debug
+# uuid  : debug
+# key   : debug
+# group :
+# --
+breakpoint

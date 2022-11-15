@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : resource
+# uuid  : resource
+# key   : resource
+# group :
+# --
+"res://${1:path}"

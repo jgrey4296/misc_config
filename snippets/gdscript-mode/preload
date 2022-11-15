@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : preload
+# uuid  : preload
+# key   : preload
+# group :
+# --
+const ${1:varName} = preload("${2:path}")

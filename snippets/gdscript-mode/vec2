@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : vec2
+# uuid  : vec2
+# key   : vec2
+# group :
+# --
+var ${1:name} = Vector2($2, $3)

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : root
+# uuid  : root
+# key   : root
+# group :
+# --
+get_node("/root")

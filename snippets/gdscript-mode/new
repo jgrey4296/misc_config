@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : new
+# uuid  : new
+# key   : new
+# group :
+# --
+${1:ClassName}.new()

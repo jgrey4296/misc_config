@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name  : onready
+# uuid  : onready
+# key   : onready
+# group :
+# --
+# Defer till the _ready method:
+onready var ${1:varName} = get_node("${2:path}")

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : yield_on_signal
+# uuid  : yield_on_signal
+# key   : yield_on_signal
+# group :
+# --
+yield(${1:val, "${2:sigName}")

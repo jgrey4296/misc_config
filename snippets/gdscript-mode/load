@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : load
+# uuid  : load
+# key   : load
+# group :
+# --
+var $1{1:varName} = load("${2:path}")

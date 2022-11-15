@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : assert
+# uuid  : assert
+# key   : assert
+# group :
+# --
+assert(${1:condition})

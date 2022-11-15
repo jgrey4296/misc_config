@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : typecheck
+# uuid  : typecheck
+# key   : typecheck
+# group :
+# --
+${1:varName} is ${2:type}

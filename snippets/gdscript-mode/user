@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : user
+# uuid  : user
+# key   : user
+# group :
+# --
+"user://${1:path}"

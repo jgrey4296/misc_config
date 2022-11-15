@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : delete
+# uuid  : delete
+# key   : delete
+# group :
+# --
+${1:node}.queue_free()

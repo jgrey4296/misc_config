@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : cast
+# uuid  : cast
+# key   : cast
+# group :
+# --
+$${1:varName} as ${2:type}

@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name  : pause_mode
+# uuid  : pause_mode
+# key   : pause_mode
+# group :
+# --
+# PROCESS, INHERIT, STOP
+pause_mode = Node.PAUSE_MODE_PROCESS

@@ -1,0 +1,39 @@
+# -*- mode: snippet -*-
+# name  : lifecycle
+# uuid  : lifecycle
+# key   : lifecycle
+# group :
+# --
+
+##-- lifecycle methods
+func _init(${1:args}):
+    # Constructor
+    pass
+
+func _enter_tree():
+    # On entrance to scene, can be called multiple times
+    pass
+
+func _ready():
+    # called once, after first entrance to scene
+    # and all children have entered scene too.
+    pass
+
+
+func _process(delta):
+    pass
+
+func _physics_process(delta):
+    pass
+
+func _input(event):
+    pass
+
+func _unhandled_input(event):
+    pass
+
+func _exit_tree():
+    # Upon leaving the scene
+    pass
+
+##-- end lifecycle methods

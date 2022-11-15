@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name  : funcref
+# uuid  : funcref
+# key   : funcref
+# group :
+# --
+${1:theObj}.call("$2{funcName}", ${3:args})
+
+var my_func = funcref($1, "$2")
+my_func.call_func($3)

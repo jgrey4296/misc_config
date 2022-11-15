@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : setget
+# uuid  : setget
+# key   : setget
+# group :
+# --
+setget ${1:setfunc}, ${2:getfunc}

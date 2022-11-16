@@ -2,4 +2,4 @@
 # name: util.debug
 # uuid: util.debug
 # --
-breakpoint()$0
+breakpoint(); pass$0

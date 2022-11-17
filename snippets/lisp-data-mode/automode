@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name  : auto-mode-alist
+# uuid  : auto-mode-alist
+# key   : auto-mode-alist
+# group :
+# --
+;; Local auto-mode-alist for dir-locals.el
+((auto-mode-alist . (("\\.${1:ext}\\'" . ${1:prog-mode}))))

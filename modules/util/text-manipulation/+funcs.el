@@ -60,6 +60,19 @@ Used to guard inputs in tag strings"
   (message (kill-new (buffer-name)))
   )
 
+(defun +jg-text-yank-selection-to-new-buffer ()
+  (interactive)
+  (let ((text (buffer-substring evil-visual-beginning evil-visual-end))
+        (new-buf (get-buffer-create (read-string "New Buffer Name: "))))
+    (with-current-buffer new-buf
+      (insert text)
+      (goto-char (point-min))
+      )
+    (display-buffer new-buf)
+    (select-window (get-buffer-window new-buf))
+    )
+  )
+
 (defun +jg-text-clear-buffer ()
   " Utility to clear a buffer
     from https://stackoverflow.com/questions/24565068/ "

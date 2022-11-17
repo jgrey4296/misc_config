@@ -123,7 +123,7 @@
   (yas-minor-mode)
 
   )
-(add-to-list 'auto-mode-alist '("\.psc" . psc-mode))
+(add-to-list 'auto-mode-alist '("\.psc$" . psc-mode))
 
 (provide 'psc-mode)
 ;;; psc-mode.el ends here

@@ -26,22 +26,77 @@
 ;; List of '(regex (groupnum "face")+)
 (defconst abl-font-lock-keywords
   (list
+   ;; TODO
+   ;; agent def:
+   `(,(rx line-start
+          "behaving_entity" (+ blank)
+          (group-n 1 (+ word))
+          (? (+ blank) "extends" (+ blank) (group-n 2 (+ word))))
+
+     (0 font-lock-keyword-face keep)
+     (1 font-lock-type-face t t)
+     (2 font-lock-type-face t t)
+     )
+   ;; conflict def:
+   `(,(rx line-start (* blank)
+          (? "conflict" (+ blank))
+          (group-n 1 (*? graph))
+          (group-n 2 (? blank (*? any)))
+          ";" )
+     (0 font-lock-keyword-face t)
+     (1 font-lock-type-face t)
+     (2 font-lock-type-face t)
+     )
+   ;; register action / wme:
+   `(,(rx line-start (* blank)
+          "register" (* blank)
+          (group-n 1 (| "action" "wme")) (+ blank)
+          (group-n 2 (*? any))
+          "with"
+          (group-n 3 (*? any))
+          ";" )
+     (0 font-lock-keyword-face t)
+     (1 font-lock-builtin-face t)
+     (2 font-lock-type-face t)
+     (3 font-lock-type-face t)
+     )
+   ;; assignment
+   `(,(rx (group-n 1 (+ word)) (+ blank)
+          "=" (+ blank)
+          (group-n 2 (+? any) ) ";")
+     (0 font-lock-keyword-face)
+     (1 font-lock-variable-name-face t)
+     (2 font-lock-builtin-face t)
+     )
+   ;; wme def
+   `(,(rx line-start (* blank)
+          "wme" (+ blank)
+          (group-n 1 upper (+ word))
+          )
+     (0 font-lock-keyword-face)
+     (1 font-lock-type-face t)
+     )
+   ;; behaviour def
    `(,(rx line-start (* blank) (group-n 1 (or "sequential" "parallel"))
           blank (group-n 2 "behavior")
           blank (group-n 3 (+ word))
+          "("
+          (group-n 4 (* any))
+          ")"
           )
-     (1 'abl-face-1)
-     (2 'abl-face-2)
-     (3 'abl-face-3))
-   `(,(rx (or "subgoal" "act" "mental_act" "wait" "precondition"
+     (0 font-lock-keyword-face)
+     (3 'abl-face-3 t)
+     (4 font-lock-variable-name-face t)
+     )
+   ;; function args:
+   ;; TODO
+   ;; keywords
+   `(,(rx word-start (or "subgoal" "act" "mental_act" "wait" "precondition"
               "succeed_step" "fail_step" "specificity" "success_test"
               "ignore_failure" "persistent" "priority" "initial_tree"
-              "joint" "collective" "teammembers"))
-     (0 'abl-face-1))
-   `(,(rx (or "with" "register"))
-     (0 'abl-face-2))
-   `(,(rx (or "conflict" "wme"))
-     (0 'abl-face-0))
+              "joint" "collective" "teammembers" "wme")
+          word-end)
+     (0 font-lock-keyword-face))
 
   ;; `(,(rx )
   ;;    (subexp facename override laxmatch)
@@ -58,6 +113,7 @@
     ;;underscores are valid parts of words:
     (modify-syntax-entry ?_ "w"     st)
     (modify-syntax-entry ?/ "<12"   st)
+    (modify-syntax-entry ?* "<2"    st)
     (modify-syntax-entry ?\n ">"    st)
     (modify-syntax-entry ?\" "\"\"" st)
     (modify-syntax-entry ?\( "()"   st)

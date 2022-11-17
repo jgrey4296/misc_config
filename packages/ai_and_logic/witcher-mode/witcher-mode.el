@@ -156,7 +156,7 @@
   (yas-minor-mode)
 
   )
-(add-to-list 'auto-mode-alist '("\.ws" . witcher-mode))
+(add-to-list 'auto-mode-alist '("\.ws$" . witcher-mode))
 
 (provide 'witcher-mode)
 ;;; witcher-mode.el ends here

@@ -87,9 +87,9 @@
    ;; `(,(rx word-start (or "None" "bool" "int" "Weapon" "float" "Bool" "ObjectReference" "string" "self" "True" "False") word-end)
    ;;   (0 font-lock-type-face)
    ;;   )
-   )
-  "Highlighting for psc-mode"
-  )
+  ;;  )
+  ;; "Highlighting for psc-mode"
+  ;; )
 
 (defconst psc-mode-syntax-table (make-syntax-table))
 

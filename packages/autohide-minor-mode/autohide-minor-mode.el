@@ -96,7 +96,9 @@ Vimish-fold's any blocks matching autohide-minor-mode-fold-pattern
   :lighter "autohide"
   (when (and autohide-minor-mode
              (not (minibufferp))
-             (not (-contains? autohide-minor-mode-exclusions major-mode)))
+             (not (-contains? autohide-minor-mode-exclusions major-mode))
+             (derived-mode-p 'prog-mode)
+             )
     (autohide-minor-mode-run-folds))
   )
 

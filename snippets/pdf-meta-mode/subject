@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name  : subject
+# uuid  : subject
+# key   : subject
+# group :
+# --
+InfoBegin
+InfoKey: Subject
+InfoValue: ${1:Subject}
+$0

@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name  : title
+# uuid  : title
+# key   : title
+# group :
+# --
+InfoBegin
+InfoKey: Title
+InfoValue: ${1:Title}
+$0

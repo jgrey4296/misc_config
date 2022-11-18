@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name  : bookmark
+# uuid  : bookmark
+# key   : bookmark
+# group :
+# --
+BookmarkBegin
+BookmarkTitle: ${1:Title}
+BookmarkLevel: ${2:1}
+BookmarkPageNumber: $3
+$0

@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name  : creator
+# uuid  : creator
+# key   : creator
+# group :
+# --
+InfoBegin
+InfoKey: Creator
+InfoValue: ${1:something}
+$0

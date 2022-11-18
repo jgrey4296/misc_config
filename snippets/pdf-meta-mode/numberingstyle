@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name  : numberingstyle
+# uuid  : numberingstyle
+# key   : numberingstyle
+# group :
+# --
+DecimalArabicNumerals
+UppercaseRomanNumerals
+LowercaseRomanNumerals
+UppercaseLetters
+LowercaseLetters
+NoNumber

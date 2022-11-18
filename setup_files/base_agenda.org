@@ -19,6 +19,15 @@ Death by Institution and the Harms of Abstraction.
 *** [[file:/Volumes/documents/github/writing/orgfiles/primary/research_questions.org][Research Questions]]
 
 ** Other
+https://www.oise.utoronto.ca/collaborativeindigenousresearch
+https://wiki.facepunch.com/gmod/Beginner_Tutorial_Intro
+https://tutorial.math.lamar.edu/
+https://www.feynmanlectures.caltech.edu/I_toc.html
+https://www.feynmanlectures.caltech.edu/II_toc.html
+https://www.feynmanlectures.caltech.edu/III_toc.html
+https://shadowrun-series.fandom.com/wiki/Gumbo_Script
+https://kidscancode.org/godot_recipes/3.x/recent/
+https://sixages.blogspot.com/
 https://id.loc.gov/
 https://cheapbotsdonequick.com/source/
 https://botwiki.org/learn/#blogs-and-websites-accountable-algorithms
@@ -35,22 +44,10 @@ foone - Infocom game by Douglas Adams: Bureaucracy
 
 history of automated phone lines?
 
-the eternal cyclinder, but personalities for the trebum.
-Each is named, so if a trebum dies and is resurrected, blame
-the one who was in control.
-React to seeing/getting a mutation based on history. excited if completely new,
-less so if you've seen it before.
-greet resurrected friends, react to their deaths,
-share food and water explicitly,
-negotiate exchanges of inventory
-changes when switching trunks
-
 john wick hex - choreography simulator
 index xkcd using explainxkcd
 
 -from:quotedreplies url:1255330066151718912
 fictional syllabi - both of actual papers, and lem-like
-
-tag - amend mode
 
 ** [[file:python_testbed.org][Testbed Notes]]

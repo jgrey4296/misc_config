@@ -201,6 +201,7 @@ list of the cdr of all the `:var' entries."
       (when (eq :var (car param))
         (let ((var (org-babel-clingo--variable-assignment (cdr param))))
           (setq vars (cons var vars)))))))
+
 (defun org-babel-clingo--parse-goal (goal)
   "Evaluate the inline Emacs Lisp in GOAL.
 

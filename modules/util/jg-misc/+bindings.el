@@ -5,23 +5,23 @@
       "DEL" #'free-keys
       )
 
-(map! :after shell
-      :map (sh-mode-map shell-mode-map)
+(map! :map (sh-mode-map shell-mode-map)
+      :after shell
       :localleader
       :desc "Docs: Brew"  "1" (cmd! (+jg-misc-browse-url "https://brew.sh/"))
       :desc "Docs: Awk"   "2" (cmd! (+jg-misc-browse-url "https://www.gnu.org/software/gawk/manual/gawk.html"))
       )
 
-(map! :after vlf-mode
-      :mode vlf-mode
+(map! :mode vlf-mode
+      :after vlf-mode
       "] A" 'vlf-next-batch-from-point
       "] a" 'vlf-next-batch
       "[ a" 'vlf-prev-batch
       "SPC a U v " 'vlf-set-batch-size
       )
 
-(map! :after free-keys
-      :map free-keys-mode-map
+(map! :map free-keys-mode-map
+      :after free-keys
       :desc "Change Buffer" :n "b" #'free-keys-change-buffer
       :desc "Revert Buffer" :n "g" #'revert-buffer
       :desc "Describe Mode" :n "h" #'describe-mode
@@ -29,8 +29,8 @@
       :desc "Quit"          :n "q" #'quit-window
       )
 
-(map! :after semantic
-      :map semantic-mode-map
+(map! :map semantic-mode-map
+      :after semantic
       :localleader
       :prefix ("^" . "Semantic")
       (:prefix ("t" . "toggle")

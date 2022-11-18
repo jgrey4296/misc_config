@@ -28,7 +28,7 @@
 (evil-global-set-key 'paren "u" #'sp-beginning-of-previous-sexp)
 (evil-global-set-key 'paren "o" #'sp-end-of-next-sexp)
 (evil-global-set-key 'paren "i" #'sp-end-of-previous-sexp)
-(evil-global-set-key 'paren "q" #'evil-force-normal-state)
+(evil-global-set-key 'paren "q" #'evil-normal-state)
 
 ;; (evil-global-set-key 'paren "a" #'sp-previous-sexp)
 ;; (evil-global-set-key 'paren "f" #'sp-next-sexp)

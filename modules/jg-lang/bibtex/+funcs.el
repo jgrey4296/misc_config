@@ -62,13 +62,7 @@ the entry of interest in the bibfile.  but does not check that."
              (message "No File to open"))
             ((not (file-exists-p target))
              (message "File does not exist"))
-            ((f-ext? target "epub")
-             (shell-command (concat jg-bibtex-open-epub-cmd (shell-quote-argument target))))
-            ((f-ext? target "pdf")
-             (shell-command (concat jg-bibtex-open-pdf-cmd (shell-quote-argument target))))
-            (t
-             (message "Unrecognized type")
-             (shell-command (concat "open " (shell-quote-argument target))))
+            (t (browse-url target 'local))
             )
 
       (when jg-bibtex-open-doi-with-pdf
@@ -76,6 +70,7 @@ the entry of interest in the bibfile.  but does not check that."
       (when jg-bibtex-open-url-with-pdf
           (+jg-bibtex-open-url))
       )))
+
 (defun +jg-bibtex-open-url ()
   " Open the current entry's url in browser "
   (interactive)
@@ -159,9 +154,7 @@ the entry of interest in the bibfile.  but does not check that."
   (save-excursion
     (let* ((target (bibtex-autokey-get-field '("file" "OPTfile"))))
       (message "%s : %s" target (file-exists-p target))
-      (async-shell-command (concat "qlmanage -p "
-                                   (shell-quote-argument target)
-                                   " 2>/dev/null"))
+      (browse-url target 'quicklook)
       )))
 ;;-- end file opening
 

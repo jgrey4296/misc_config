@@ -1,45 +1,5 @@
 ;;; util/jg-misc/+funcs.el -*- lexical-binding: t; -*-
 
-;;-- url browsing
-(defun +jg-misc-browse-url (&optional url)
-  (interactive)
-  (let ((url (cond (url url)
-                   ((eq evil-state 'visual)
-                    (buffer-substring-no-properties evil-visual-beginning evil-visual-end))
-                   (t nil)))
-        )
-
-    (cond ((not url)
-           (+lookup/online-select))
-          ((f-exists? url)
-           (shell-command (format "open %s" url)))
-          ((s-prefix? "@" url)
-           (browse-url (format "https://twitter.com/%s" url)))
-          ((s-prefix? "http" url)
-           (browse-url url))
-          ((s-prefix? "www." url)
-           (browse-url (format "https://%s" url)))
-          ((string-match "\\.com\\|\\.uk" url)
-           (browse-url (format "https://%s" url)))
-          (t
-           (message "Don't know what to do")
-           )
-          )
-    )
-  )
-
-(defun +jg-misc-toggle-browsing ()
-  (interactive)
-  (message "Browsing: %s"
-           (setq jg-misc-browse-type (cond ((eq jg-misc-browse-type 'eww)
-                                            'external)
-                                           (t 'eww)))
-           )
-
-  )
-
-;;-- end url browsing
-
 ;;-- misc
 (defun +jg-misc-get-modes ()
 

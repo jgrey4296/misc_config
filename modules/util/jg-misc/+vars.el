@@ -4,17 +4,6 @@
               indent-tabs-mode nil
               )
 
-;;-- browsing defaults
-(setq-default jg-misc-google-url       "https://duckduckgo.com/?q=%s"
-              jg-misc-twitter-url      "https://twitter.com"
-              jg-misc-x-in-y-url       "https://learnxinyminutes.com"
-              jg-misc-palette-list-url "https://www.palettelist.com/"
-              jg-misc-overapi-url      "https://overapi.com/"
-              jg-misc-github-url       "https://git-scm.com/doc"
-
-              jg-misc-browse-type 'eww
-)
-;;-- end browsing defaults
 
 ;;-- evil-misc
 (after! (evil evil-snipe)

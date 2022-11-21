@@ -5,13 +5,6 @@
       "DEL" #'free-keys
       )
 
-(map! :map (sh-mode-map shell-mode-map)
-      :after shell
-      :localleader
-      :desc "Docs: Brew"  "1" (cmd! (+jg-misc-browse-url "https://brew.sh/"))
-      :desc "Docs: Awk"   "2" (cmd! (+jg-misc-browse-url "https://www.gnu.org/software/gawk/manual/gawk.html"))
-      )
-
 (map! :mode vlf-mode
       :after vlf-mode
       "] A" 'vlf-next-batch-from-point
@@ -86,25 +79,6 @@
   )
 
 (map! :leader
-      :desc "Open Url"              "?"   #'+jg-misc-browse-url
-      :desc "Twitter"               "8" (cmd! (+jg-misc-browse-url jg-misc-twitter-url))
-
-      (:prefix "g"
-      :desc "Docs: Git Manual"      "1" (cmd! (+jg-misc-browse-url jg-misc-github-url))
-      )
-      (:prefix "t"
+      :prefix "t"
        :desc "Semantic" "S" #'semantic-mode
-       )
-      )
-
-(map! :map jg-binding-jump-map
-      :desc "Docs: Learn X in Y"   "1" (cmd! (+jg-misc-browse-url jg-misc-x-in-y-url))
-      :desc "Docs: Palettes"       "2" (cmd! (+jg-misc-browse-url jg-misc-palette-list-url))
-      :desc "Docs: Over API"       "3" (cmd! (+jg-misc-browse-url jg-misc-overapi-url))
-      :desc "Browse URL"           "u" #'+jg-misc-browse-url
-      )
-
-(map! :map eww-mode-map
-      :n "=" 'eww-copy-page-url
-      :n "?" 'eww-browse-with-external-browser
       )

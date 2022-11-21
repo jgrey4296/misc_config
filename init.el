@@ -24,6 +24,7 @@
  tagging
  jg-misc
  jg-org-unit-test
+ jg-browse
 
  :domain-specific  ;; ----- ====== -----
  music

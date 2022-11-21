@@ -22,13 +22,13 @@
 (map! :after rust-mode
       :map rust-mode-map
       :localleader
-      :desc "Docs: Rust"         "1" (cmd! (+jg-misc-browse-url jg-python-docs-url))
-      :desc "Docs: Cargo"        "2" (cmd! (+jg-misc-browse-url jg-cargo-docs-url))
-      :desc "Docs: Stdlb"        "3" (cmd! (+jg-misc-browse-url jg-rust-stdlib-url))
-      :desc "Docs: Editions"     "4" (cmd! (+jg-misc-browse-url jg-rust-edition-url))
-      :desc "Docs: Rustdoc"      "5" (cmd! (+jg-misc-browse-url jg-rustdoc-url))
-      :desc "Docs: Rust-CPython" "6" (cmd! (+jg-misc-browse-url jg-rust-cpython-url))
-      :desc "Docs: Rust Py03"    "7" (cmd! (+jg-misc-browse-url jg-rust-pyo3-url))
+      :desc "Docs: Rust"         "1" (cmd! (browse-url jg-python-docs-url))
+      :desc "Docs: Cargo"        "2" (cmd! (browse-url jg-cargo-docs-url))
+      :desc "Docs: Stdlb"        "3" (cmd! (browse-url jg-rust-stdlib-url))
+      :desc "Docs: Editions"     "4" (cmd! (browse-url jg-rust-edition-url))
+      :desc "Docs: Rustdoc"      "5" (cmd! (browse-url jg-rustdoc-url))
+      :desc "Docs: Rust-CPython" "6" (cmd! (browse-url jg-rust-cpython-url))
+      :desc "Docs: Rust Py03"    "7" (cmd! (browse-url jg-rust-pyo3-url))
       )
 
 

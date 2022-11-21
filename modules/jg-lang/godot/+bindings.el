@@ -2,6 +2,6 @@
 
 (map! :map gdscript-mode-map
       :localleader
-      :desc "Documentation" :n "1" (cmd! (+jg-misc-browse-url jg-godot-doc-url))
+      :desc "Documentation" :n "1" (cmd! (browse-url jg-godot-doc-url))
 
       )

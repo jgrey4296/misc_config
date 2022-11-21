@@ -294,7 +294,7 @@
       :desc "REPL"                         "r"    #'+eval/open-repl-other-window
       :desc "Regexp Builder"               "R"    #'regexp-builder
       :desc "Repo Homepage"                "g"    #'+vc/browse-at-remote-homepage
-      :desc "Github Homepage"              "G"    (cmd! (+jg-misc-browse-url user-url))
+      :desc "Github Homepage"              "G"    (cmd! (browse-url user-url))
       :desc "Find file in project sidebar" "P"    #'+neotree/find-this-file
 
       :desc "Rmail"                        "m"    #'rmail
@@ -418,7 +418,7 @@
       :desc "Jump to mark"                 "m" #'evil-show-marks
       :desc "Jump to symbol"               "i" #'imenu
       :desc "Jump to visible link"         "l" #'link-hint-open-link
-      :desc "Google"                       "g" #'+jg-misc-browse-url
+      :desc "Google"                       "g" #'browse-url
       :desc "Locate file"                  "f" #'+lookup/file
       :desc "Locate file"                  "f" #'locate
       :desc "Look up in all docsets"       "K" #'+lookup/in-all-docsets

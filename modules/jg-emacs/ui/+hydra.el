@@ -31,6 +31,7 @@ _v_isuals    _g_uides       w_r_apping    _n_avigation
 _h_l-line    _w_hitespace   _t_runcate    _a_uto-hide
 _m_odeline ^^^^                           _c_ursor
 ^^^^^^                                    _e_ww
+^^^^^^                                    _p_review
 "
 
   ("v" (progn (+jgh-push #'+jg-ui-toggle-hydra/body)
@@ -47,6 +48,7 @@ _m_odeline ^^^^                           _c_ursor
   ("w" #'whitespace-mode              nil  :exit nil)
   ("a" #'global-autohide-minor-mode   nil  :exit nil)
   ("c" #'global-centered-cursor-mode  nil  :exit nil)
-  ("e" #'+jg-misc-toggle-browsing     nil  :exit nil)
+  ("e" #'+jg-browse-toggle-browsing   nil  :exit nil)
+  ("p" #'+jg-browse-toggle-preview    nil  :exit nil)
   ("q" (setq jg-ui-toggle-hydra-stack nil) :exit t)
 )

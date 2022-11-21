@@ -164,7 +164,7 @@ versus not"
          (source (helm-build-in-file-source "Have You Played Helm" target
                    :candidate-transformer (lambda (x)
                                             (mapcar #'+jg-completion-helm-rps-transformer x))
-                   :action (helm-make-actions "Open" #'(lambda (x) (mapcar #'+jg-misc-browse-url (helm-marked-candidates))))
+                   :action (helm-make-actions "Open" #'(lambda (x) (mapcar #'browse-url (helm-marked-candidates))))
                    )))
     (helm :sources (list source)
           :buffer "*helm have you played*")
@@ -176,7 +176,7 @@ versus not"
   (interactive)
   (let* ((target "/Volumes/documents/github/writing/resources/bibliography_plus/xkcds")
          (source (helm-build-in-file-source "xkcd helm" target
-                   :action (helm-make-actions "Open" #'(lambda (x) (mapcar #'+jg-misc-browse-url (helm-marked-candidates))))
+                   :action (helm-make-actions "Open" #'(lambda (x) (mapcar #'browse-url (helm-marked-candidates))))
                    )))
     (helm :sources (list source)
           :buffer "*helm xkcd*")

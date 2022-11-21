@@ -4,4 +4,4 @@
 # key:  browse_binding
 # group :
 # --
-:desc "Docs: $1"   "$2" (cmd! (+jg-misc-browse-url "$3"))$0
+:desc "Docs: $1"   "$2" (cmd! (browse-url "$3"))$0

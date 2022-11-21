@@ -196,7 +196,7 @@
 (map! :map snippet-mode-map
       :after yasnippet
       :localleader
-      "1" (cmd! (+jg-misc-browse-url "https://joaotavora.github.io/yasnippet/snippet-development.html"))
+      "1" (cmd! (browse-url "https://joaotavora.github.io/yasnippet/snippet-development.html"))
       )
 
 ;;-- end snippets

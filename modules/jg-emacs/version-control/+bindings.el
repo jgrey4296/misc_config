@@ -23,7 +23,7 @@
 (map! :after (git-commit magit-status)
       :map (git-commit-mode-map magit-status-mode)
       :localleader
-      "1" (cmd! (+jg-misc-browse-url "https://git-scm.com/doc"))
+      "1" (cmd! (browse-url "https://git-scm.com/doc"))
       )
 (map! :after jg-bindings-total
       :leader

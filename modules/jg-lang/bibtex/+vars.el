@@ -264,11 +264,10 @@
 ;;-- end locations
 
 ;;-- commands
-(setq jg-bibtex-open-pdf-cmd  "open -nF "
-      jg-bibtex-open-epub-cmd "open -a ebook-viewer "
-      jg-bibtex-curl-cmd      "curl"
+(setq jg-bibtex-curl-cmd      "curl"
       jg-bibtex-curl-args     "-sLI"
-      bibtex-completion-pdf-open-function #'(lambda (x) (org-open-link-from-string (format "[[file:%s]]" x)))
+      ;; bibtex-completion-pdf-open-function #'(lambda (x) (org-open-link-from-string (format "[[file:%s]]" x)))
+      bibtex-completion-pdf-open-function 'browse-url
  )
 ;;-- end commands
 

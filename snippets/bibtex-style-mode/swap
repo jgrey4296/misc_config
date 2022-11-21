@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : swap
+# uuid  : swap
+# key   : swap
+# group : bst.stack
+# --
+swap$

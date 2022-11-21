@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name  : function
+# uuid  : function
+# key   : function
+# group : bst
+# --
+FUNCTION {${1:name}}
+{
+    $0
+}

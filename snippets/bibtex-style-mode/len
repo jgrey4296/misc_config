@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : len
+# uuid  : len
+# key   : len
+# group : bst.str
+# --
+$1 text.length$

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : period
+# uuid  : period
+# key   : period
+# group : bst.str
+# --
+$1 add.period$

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : purify
+# uuid  : purify
+# key   : purify
+# group : bst.str
+# --
+$1 purify$ % clean chars and whitespace

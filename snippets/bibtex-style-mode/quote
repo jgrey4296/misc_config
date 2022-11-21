@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : quote
+# uuid  : quote
+# key   : quote
+# group : bst.str
+# --
+quote$

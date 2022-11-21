@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : cite
+# uuid  : cite
+# key   : cite
+# group : bst.entry
+# --
+cite$ % add current cite key to stack. for ITERATE and REVERSE

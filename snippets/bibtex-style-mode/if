@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : if
+# uuid  : if
+# key   : if
+# group : bst.cmp
+# --
+${1:val} ${2:if} ${3:else} if$

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : missing
+# uuid  : missing
+# key   : missing
+# group : bst.cmp
+# --
+$1 missing$ % test for field in current entry

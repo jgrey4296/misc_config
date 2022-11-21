@@ -1,0 +1,14 @@
+
+##-- init
+ENTRY {} {} {}
+
+INTEGERS {}
+
+STRINGS {}
+##-- end init
+
+##-- execution
+READ
+
+EXECUTE {}
+##-- end execution

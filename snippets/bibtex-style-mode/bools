@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name  : bools
+# uuid  : bools
+# key   : bools
+# group : bst.funcs
+# --
+FUNCTION {not}
+{   { #0 }
+    { #1 }
+  if$
+}
+
+
+FUNCTION {and}
+{   'skip$
+    { pop$ #0 }
+  if$
+}
+
+
+FUNCTION {or}
+{   { pop$ #1 }
+    'skip$
+  if$
+}

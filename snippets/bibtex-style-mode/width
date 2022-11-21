@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : width
+# uuid  : width
+# key   : width
+# group : bst.str
+# --
+$1 width$

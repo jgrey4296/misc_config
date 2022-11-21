@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : dup
+# uuid  : dup
+# key   : dup
+# group : bst.stack
+# --
+duplicate$ % duplicate top of stack

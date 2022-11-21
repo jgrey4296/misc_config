@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : substr
+# uuid  : substr
+# key   : substr
+# group : bst.str
+# --
+$1 ${2:start} ${3:end} substring$

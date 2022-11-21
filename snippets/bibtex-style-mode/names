@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : names
+# uuid  : names
+# key   : names
+# group : bst.count
+# --
+$1 num.names$ % count names by 'and's in string

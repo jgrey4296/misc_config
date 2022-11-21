@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : skeys
+# uuid  : skeys
+# key   : skeys
+# group : bst.sort
+# --
+sort.key$ % str var for each entry

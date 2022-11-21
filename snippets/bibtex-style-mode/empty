@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : empty
+# uuid  : empty
+# key   : empty
+# group : bst.stack
+# --
+empty$ % add 1 if stack is empty or 0

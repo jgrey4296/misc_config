@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : concat
+# uuid  : concat
+# key   : *
+# group : bst.str
+# --
+$1 $2 *

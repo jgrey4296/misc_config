@@ -23,35 +23,161 @@
                 bibtex-field-indentation             1
                 bibtex-text-indentation              15
                 bibtex-align-at-equal-sign           t
+                org-bibtex-export-arbitrary-fields   t
                 )
   )
 ;;-- end general bibtex settings
 
+;;-- bibtex entry types
+;; (entry-type doc required crossref optional)
+;; req/cross/opt fields are lists of:
+;; (field comment init alt)
+
+;; keep these synced with jg_custom.bst
+(setq bibtex-biblatex-entry-alist
+      '(
+        ("Article" "Article in Journal"
+         (("author") ("title") ("journaltitle" ) ("journal" ) ("date" ) ("year" ))
+         ()
+         ())
+        ("Book" "Single-Volume Book"
+         (("author") ("title") ("date" ) ("year" ))
+         ()
+         ())
+        ("InBook" "Chapter or Pages in a Book" (("title") ("date" ) ("year" ))
+         (("author") ("booktitle"))
+         ()
+         ())
+        ("Booklet" "Booklet (Bound, but no Publisher)"
+         (("author" ) ("editor" ) ("title") ("date" ) ("year" ))
+         ()
+         ())
+        ("Collection" "Single-Volume Collection" ( ("title") ("date" ) ("year" ))
+         ()
+         ())
+        ("InCollection" "Article in a Collection"
+         (("author") ("title") ("date" ) ("year" )) (("booktitle"))
+         ()
+         ())
+        ("Dataset" "Data Set"
+         (("author" ) ("editor" ) ("title") ("date" ) ("year" ))
+         ()
+         ())
+        ("Manual" "Technical Manual"
+         (("author" ) ("editor" ) ("title") ("date" ) ("year" ))
+         ()
+         ())
+        ("Misc" "Miscellaneous"
+         (("author" ) ("editor" ) ("title") ("date" ) ("year" ))
+         ()
+         ())
+        ("Online" "Online Resource"
+         (("author" ) ("editor" ) ("title") ("date" ) ("year" ) ("doi" ) ("eprint" ) ("url" ))
+         ()
+         ())
+        ("Proceedings" "Single-Volume Conference Proceedings" (("title") ("date" ) ("year" ))
+         ()
+         ())
+        ("InProceedings" "Article in Conference Proceedings"
+         (("author") ("title") ("date" ) ("year" )) (("booktitle"))
+         ()
+         ())
+        ("Report" "Technical or Research Report"
+         (("author") ("title")  ("institution" ) ("school" ) ("date" ) ("year" ))
+         ()
+         ())
+        ("Software" "Computer Software"
+         (("author" ) ("editor" ) ("title") ("date" ) ("year" ))
+         ()
+         ())
+        ("Thesis" "PhD or Master's Thesis"
+         (("author") ("title")  ("institution" ) ("school" ) ("date" ) ("year" ))
+         ()
+         ())
+        ("Unpublished" "Unpublished"
+         (("author") ("title") ("date" ) ("year" ))
+         ()
+         ())
+        ("TechReport" ""
+         ()
+         ()
+         ())
+        ("Judicial" ""
+         ()
+         ()
+         ())
+        ("Law" ""
+         ()
+         ()
+         ())
+        ("Standard" ""
+         ()
+         ()
+         ())
+        ("Game" ""
+         ()
+         ()
+         ()
+         )
+        ("Blog" ""
+         ()
+         ()
+         ())
+        ("Tweet" ""
+         ()
+         ()
+         ())
+        ("Thread" ""
+         ()
+         ()
+         ())
+        ("MusicScore" ""
+         ()
+         ()
+         ())
+        )
+      )
+
+;;-- end bibtex entry types
+
 ;;-- bibtex fields
+;; Keep these synced with jg_custom.bst
 (setq org-bibtex-fields '(
+                          (:Custom)
                           (:address              . "Usually the address of the publisher or other type of institution.  For major publishing houses, van Leunen recommends omitting the information entirely.  For small publishers, on the other hand, you can help the reader by giving the complete address.")
                           (:annote               . "An annotation.  It is not used by the standard bibliography styles, but may be used by others that produce an annotated bibliography.")
+                          (:archive)
                           (:author               . "The name(s) of the author(s), in the format described in the LaTeX book.  Remember, all names are separated with the and keyword, and not commas.")
                           (:booktitle            . "Title of a book, part of which is being cited.  See the LaTeX book for how to type titles.  For book entries, use the title field instead.")
                           (:chapter              . "A chapter (or section or whatever) number.")
+                          (:collaboration)
+                          (:country)
                           (:crossref             . "The database key of the entry being cross referenced.")
                           (:doi                  . "The digital object identifier.")
                           (:edition              . "The edition of a book for example, 'Second'.  This should be an ordinal, and should have the first letter capitalized, as shown here; the standard styles convert to lower case when necessary.")
                           (:editor               . "Name(s) of editor(s), typed as indicated in the LaTeX book.  If there is also an author field, then the editor field gives the editor of the book or collection in which the reference appears.")
+                          (:eid)
+                          (:eprint)
+                          (:howpublished)
                           (:institution          . "The sponsoring institution of a technical report.")
+                          (:isbn)
+                          (:issn)
                           (:journal              . "A journal name.")
                           (:key                  . "Used for alphabetizing, cross-referencing, and creating a label when the author information is missing.  This field should not be confused with the key that appears in the \\cite command and at the beginning of the database entry.")
                           (:month                . "The month in which the work was published or, for an unpublished work, in which it was written.  You should use the standard three-letter abbreviation,")
                           (:note                 . "Any additional information that can help the reader.  The first word should be capitalized.")
                           (:number               . "Any additional information that can help the reader.  The first word should be capitalized.")
+                          (:numpages)
                           (:organization         . "The organization that sponsors a conference or that publishes a manual.")
                           (:pages                . "One or more page numbers or range of numbers, such as 42-111 or 7,41,73-97 or 43+ (the ‘+’ in this last example indicates pages following that don’t form simple range). BibTEX requires double dashes for page ranges (--).")
-                          (:unorthodox           . "How something strange has been published.  The first word should be capitalized.")
+                          (:platform)
                           (:publisher            . "The publisher’s name.")
                           (:school               . "The name of the school where a thesis was written.")
                           (:series               . "The name of a series or set of books.  When citing an entire book, the title field gives its title and an optional series field gives the name of a series or multi-volume set in which the book is published.")
+                          (:tags)
                           (:title                . "The work’s title, typed as explained in the LaTeX book.")
                           (:type                 . "The type of a technical report for example, 'Research Note'.")
+                          (:unorthodox           . "How something strange has been published.  The first word should be capitalized.")
                           (:url                  . "Uniform resource locator.")
                           (:volume               . "The volume of a journal or multi-volume book.")
                           (:year                 . "The year of publication or, for an unpublished work, the year it was written.  Generally it should consist of four numerals, such as 1984, although the standard styles can handle any year whose last four nonpunctuation characters are numerals, such as '(about 1984)'")

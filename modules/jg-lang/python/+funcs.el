@@ -266,3 +266,13 @@ TODO
     (ivy-read "Select Function: " processed :action (lambda (x) (goto-line (string-to-number (cdr x)))))
     )
   )
+
+
+(defun +jg-python-related-files-fn (path)
+  (let ((impl (when (s-matches? "^test_" (f-filename path)) (list :impl  (f-join (f-parent (f-parent path)) (s-replace "test_" "" (f-filename path))))))
+        (test (unless (s-matches? "^test_" (f-filename path)) (list :test  (f-join (f-parent path) "__tests" (concat "test_" (f-filename path))))))
+        (other '(:other (list (f-join (car (f-split path)) "errors" (concat (f-base path) "_errors.py")))))
+        )
+    (append impl test other)
+    )
+  )

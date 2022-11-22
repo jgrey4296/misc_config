@@ -62,7 +62,18 @@
 
 ;;-- projectile
 (after! projectile
-  (pushnew! projectile-project-root-files "setup.py" "requirements.txt"))
+  (pushnew! projectile-project-root-files "setup.py" "requirements.txt")
+  (projectile-register-project-type 'jg-python-project '("pyproject.toml")
+                                    :project-file "pyproject.toml"
+                                    :configure "pip install -e %s"
+                                    :test "python -m unittest discover -v -p test_*.py"
+                                    :test-dir '(lambda (x) (f-join x "__tests"))
+                                    :test-prefix "test_"
+                                    :related-files-fn #'+jg-python-related-files-fn
+                                    )
+
+
+  )
 ;;-- end projectile
 
 ;;-- flycheck

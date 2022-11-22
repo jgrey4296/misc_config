@@ -331,7 +331,7 @@
       :desc "Discover projects in folder"  "d"  #'+default/discover-projects
       :desc "Edit project .dir-locals"     "e"  #'projectile-edit-dir-locals
       :desc "Find file in project"         "f"  #'projectile-find-file
-      :desc "Find other file"              "o"  #'projectile-find-other-file
+      :desc "Find other file"              "o"  #'projectile-find-related-file
       :desc "Find recent project files"    "r"  #'projectile-recentf
       :desc "Invalidate project cache"     "I"  #'projectile-invalidate-cache
       :desc "Kill project buffers"         "K"  #'projectile-kill-buffers

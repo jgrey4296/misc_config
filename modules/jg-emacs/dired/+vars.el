@@ -37,7 +37,6 @@
                                "gradle"
                                "gradlew"
                                "gradlew.bat"
-                               "__init__.py"
                                "__pycache__"
                                "Icon\015"
                                ".."
@@ -102,8 +101,6 @@
                                         "_.Trashes"
                                         "_.apdisk"
                                         "_.com.apple.timemachine.donotpresent"
-                                        "_Machinarium"
-                                        "_PowerLineUtility_Win_180816.zip"
                                         "_TheVolumeSettingsFolder"
                                         )
                                        )

@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name  : custom-project
+# uuid  : custom-project
+# key   : custom-project
+# group : projectile
+# --
+(after! projectile
+  (defun +jg-${1:mode}-related-files-fn (path)
+    (let ((impl (when   (s-matches? "^test_" (f-filename path)) (list :impl  (f-join (f-parent (f-parent path)) (s-replace "test_" "" (f-filename path))))))
+          (test (unless (s-matches? "^test_" (f-filename path)) (list :test  (f-join (f-parent path) "__tests" (concat "test_" (f-filename path))))))
+          (other '(:other (list (f-join (car (f-split path)) "errors" (concat (f-base path) "_errors.py")))))
+          )
+      (append impl test other)
+      )
+    )
+  (projectile-register-project-type 'jg-${1:mode}-project '(${2:files)
+                                    :project-file "${3:project-file}"
+                                    :configure   nil
+                                    :test        nil
+                                    :test-dir    nil
+                                    :test-prefix nil
+                                    :related-files-fn #'+jg-${1:mode}-related-files-fn
+                                    )
+  )

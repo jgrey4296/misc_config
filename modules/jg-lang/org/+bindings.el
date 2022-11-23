@@ -37,6 +37,7 @@
 
 (map! :map org-mode-map
       :desc "Headings Helm"   :n "s h" #'helm-org-in-buffer-headings
+      :desc "Hide Drawers"    :n "z d" (cmd! (org-cycle-hide-drawers 'org-cycle-hide-drawers))
       )
 
 

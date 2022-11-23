@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
-# name: paper_description
-# key: paper_description
+# name: paper_summary
+# key: paper_summary
+# group: structure
 # --
 *  $1
 ** Tags

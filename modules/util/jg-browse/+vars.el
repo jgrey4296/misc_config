@@ -18,6 +18,7 @@
 (setq jg-browse-providers-alist '(("DuckDuckGo" +lookup--online-backend-duckduckgo "https://duckduckgo.com/?q=%s")
 
                                    ("Scholar" "https://scholar.google.com/scholar?hl=en&q=%s")
+                                   ("Scholar Archive" "https://scholar.archive.org/search?q=%s")
                                    ("DBLP"    "https://dblp1.uni-trier.de/search?q=%s")
                                    ("Doi"     "https://doi.org/%s")
                                    ("Github" "https://github.com/search?ref=simplesearch&q=%s")

@@ -207,6 +207,7 @@ portaudio
 portmidi
 pure-ftpd
 python@3.10
+python@3.11
 python@3.9
 qt@5
 r
@@ -222,6 +223,7 @@ s-lang
 saxon
 sdl2
 shared-mime-info
+six
 snappy
 speex
 sqlite
@@ -257,6 +259,7 @@ xorgproto
 xpdf
 xvid
 xz
+z3
 zeromq
 zimg
 zlib

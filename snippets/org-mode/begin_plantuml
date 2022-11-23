@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
-# name: block.plantuml
-# uuid: block.plantuml
+# name: begin_plantuml
+# uuid: begin_plantuml
+# group: src
 # --
 #+NAME: $1
 #+begin_src plantuml :results value verbatim :preview t

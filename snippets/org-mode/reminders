@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
 # name: reminders
 # uuid: reminders
-# condition: t
+# group: org
 # --
 *** Org Settings
 **** "#+ARCHIVE %s_done"

@@ -18,13 +18,13 @@
 ;;
 ;;
 ;;; Code:
-(setq-default jg-rust-docs-url "https://doc.rust-lang.org/stable/book/title-page.html"
-              jg-cargo-docs-url "https://doc.rust-lang.org/cargo/"
-              jg-rust-stdlib-url "https://doc.rust-lang.org/std/index.html"
+(setq-default jg-rust-docs-url    "https://doc.rust-lang.org/stable/book/title-page.html"
+              jg-cargo-docs-url   "https://doc.rust-lang.org/cargo/"
+              jg-rust-stdlib-url  "https://doc.rust-lang.org/std/index.html"
               jg-rust-edition-url "https://doc.rust-lang.org/edition-guide/index.html"
-              jg-rustdoc-url "https://doc.rust-lang.org/rustdoc/index.html"
+              jg-rustdoc-url      "https://doc.rust-lang.org/rustdoc/index.html"
               jg-rust-cpython-url "https://dgrunwald.github.io/rust-cpython/doc/cpython/"
-              jg-rust-pyo3-url "https://pyo3.rs/v0.16.4/"
+              jg-rust-pyo3-url    "https://pyo3.rs/v0.16.4/"
  )
 
 

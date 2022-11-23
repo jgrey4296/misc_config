@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
-# name: argument
-# key: argument
+# name: arg
+# key: arg
+# group: structure
 # --
 * The Argument
 ** Conclusion

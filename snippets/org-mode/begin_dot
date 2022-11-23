@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
-# name: block.dot
-# uuid: block.dot_
+# name: begin_dot
+# uuid: begin_dot
+# group: src
 # --
 #+begin_src dot :file ${1:file} :exports results :results silent :cmdline -Tpng
 $0

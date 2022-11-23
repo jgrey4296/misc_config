@@ -1,5 +1,6 @@
 ;;; +browsing.el -*- lexical-binding: t; -*-
 
+;;-- interactive
 (defun +jg-browse-url (&optional url)
   " quick acess to search handlers "
   (interactive)
@@ -34,6 +35,8 @@
            (setq jg-browse-use-preview (not jg-browse-use-preview)))
   )
 
+;;-- end interactive
+
 ;;-- browse program selection
 (defun +jg-browse-default (url &rest args)
   "
@@ -43,7 +46,7 @@ after `browse-url-handlers` have processed the url
   (cond ((-contains? args 'quicklook)
          (call-process "qlmanage" nil nil nil "-p" (shell-quote-argument url)))
         ((and (-contains? args 'local) (f-ext? url "epub"))
-         (apply 'call-process "open" nil nil nil (shell-quote-argument url) jg-browse-epub-args))
+         (apply 'call-process "open" nil nil nil url jg-browse-epub-args))
          ((and (-contains? args 'local) (f-ext? url "pdf") jg-browse-use-preview)
           (apply 'call-process "open" nil nil nil url jg-browse-pdf-args))
          ((not (s-equals? jg-browse-selected-prog "eww"))

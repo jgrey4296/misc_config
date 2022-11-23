@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
-# name: block.pl
-# key: block.pl
+# name: begin_prolog
+# key: begin_prolog
+# group: src
 # --
 #+NAME: $1
 #+HEADER: :goal main

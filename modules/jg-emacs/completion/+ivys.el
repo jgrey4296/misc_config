@@ -78,47 +78,19 @@
 
 (defun +jg-yas-prompt-fn (prompt choices &optional display-fn)
   " Yasnippet ivy which shows groups "
-  (let* ((width 30)
-         (formatted-choices (cl-loop for template in templates
-                                  collect
-                                  (let ((name (s-replace "\\" "/" (s-trim (yas--template-name template))))
-                                        (group (s-trim (apply 'concat (yas--template-group template))))
-                                        )
-                                    (concat " " name (make-string (max 20 (- width (length name))) ? ) ": " group ))))
+  (let* ((max-name 0)
+         (choice-parts (cl-loop for template in choices
+                                collect
+                                (let ((name (s-replace "\\" "/" (s-trim (yas--template-name template))))
+                                      (group (s-trim (apply 'concat (yas--template-group template))))
+                                      )
+                                  (setq max-name (max (length name) max-name))
+                                  (list name group (length name)))))
+         (format-fn (lambda (x) (concat " " (car x) (make-string (- (+ 5 max-name) (nth 2 x)) ? ) " : " (cadr x))))
          chosen)
-    (setq chosen (ivy-read "Choose Snippet: " formatted-choices :caller '+jg-completion-yas-ivy))
+    (setq chosen (ivy-read "Choose Snippet: " (mapcar format-fn choice-parts) :caller '+jg-completion-yas-ivy))
     (nth (or (cl-position chosen formatted-choices :test #'string=) 0) choices)
     )
   )
 
 ;;-- end ivys
-
-;;-- advice
-(define-advice projectile-run-compilation (:filter-args (val)
-                                           +jg-completion-command-expander)
-  " Expand variables mentioned in the command "
-  (let ((loc (if (eq major-mode 'dired-mode)
-                 (dired-current-directory)
-               (f-parent (buffer-file-name)))))
-    (list (s-replace "\$" (format "TEST_TARGET=\"%s\"" loc) (car val)))
-    )
-  )
-(define-advice projectile--run-project-cmd (:around (fn &rest rst)
-                                            +jg-completion-projectile-cmd-list)
-  " Use an ivy to get the command "
-  (let* ((compilation-read-command nil)
-        (root (projectile-project-root))
-        (cmd-cache (f-join root jg-completion-project-cmd-cache-name))
-        (candidates (if (and root (f-exists? cmd-cache))
-                        (with-temp-buffer
-                          (insert-file-contents cmd-cache)
-                          (sort (s-split "\n" (buffer-string) t) 'string-lessp))))
-        (ivy-val (ivy-read (plist-get rst :prompt-prefix)
-                           candidates)))
-    (if (not (-contains? candidates ivy-val))
-        (append-to-file (format "%s\n" ivy-val) nil cmd-cache)
-        )
-    (apply fn (cons ivy-val (cdr rst)))
-    )
-  )
-;;-- end advice

@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: block.session
-# key: block.session
+# name: begin_session
+# key: begin_session
 # group: src
 # --
 #+begin_src $1 :results $2{output | value} :session

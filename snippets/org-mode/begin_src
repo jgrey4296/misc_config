@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: code
-# key: code
+# name: begin_src
+# key: begin_src
 # group: src
 # --
 #+NAME: ${1:Example Code}

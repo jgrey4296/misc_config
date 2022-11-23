@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
-# name: clingo-args
-# key: clingo-args
+# name: args_clingo
+# key: args_clingo
+# group: src
 # --
 
 #+NAME: for testing ob-clingo

@@ -573,15 +573,15 @@ FUNCTION {get.bbl.editor}
 %%-- format
 FUNCTION {fin.entry}
 { add.period$
+  format.url output
   write$
   newline$
-  format.url output
   tags empty$
     { skip$ }
-    { "\begin{lstlisting}" output
-      "Tags: " output
-      format.tags output
-      "\end{lstlisting}"output }
+    { "\begin{lstlisting}" write$ newline$
+      "Tags: "             write$ newline$
+      format.tags          write$ newline$
+      "\end{lstlisting}"   write$ newline$}
   if$
 }
 

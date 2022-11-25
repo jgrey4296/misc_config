@@ -116,7 +116,6 @@
 
       :desc "Align"              "a" #'align-regexp
       :desc "IEdit"              "e" #'iedit-mode
-      :desc "helms"              "h" 'jg-binding-helm-map
 
       :desc "Join whitespace"    "J" #'evil-join-whitespace
 
@@ -154,6 +153,7 @@
 ;;-- jump
 (map! :map jg-binding-jump-map ;; avy
       ;; 1 2 3 "u" "h"
+      :desc "helms"                 "a" 'jg-binding-helm-map
       :desc "Ibuffer"               "DEL" #'ibuffer
       :desc "Jump to bookmark"      "RET" #'bookmark-jump
       :desc "Last Change"           ";" #'goto-last-change

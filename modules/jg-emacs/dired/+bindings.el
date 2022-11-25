@@ -2,7 +2,7 @@
 
 (message "Setting up Dired bindings")
 
-(map! :map dired-mode-map
+(map! :map dired-mode-map ;; main
       :n  "\\" #'+jg-dired-hash-files
       :nv ")" #'dired-git-info-mode
       :n  "o" #'dired-find-file-other-window
@@ -37,11 +37,12 @@
        :desc "Global Match Rename" :n "R" #'+jg-dired-GLOBAL-do-rename-regexp)
       )
 
-(map! :map dired-mode-map
+(map! :map dired-mode-map ;; localleader
       :localleader
       :desc "Hide Toggle"           "h" #'dired-omit-mode
       :desc "Symlink"               "S" #'dired-do-symlink
       :desc "Quicklook"             "l" #'+jg-dired-quick-look
+      :desc "DropWatch"             "w" (cmd! (shell-command "dropbox_watcher"))
       (:prefix ("d" . "Describe")
        :desc "Summarise Orgs"       "s" #'+jg-dired-create-summary-of-orgs
        :desc "Marked Info"          "m" #'+jg-dired-marked-info
@@ -61,7 +62,7 @@
        )
       )
 
-(map! :map dired-mode-map
+(map! :map dired-mode-map ;; dired-do
       :prefix ("%" . "Dired-Do")
       :desc "flag-garbage-files"           :n "&" #'dired-flag-garbage-files
       :desc "do-copy-regexp"               :n "C" #'dired-do-copy-regexp
@@ -77,7 +78,7 @@
       :desc "upcase"                       :n "u" #'dired-upcase
       )
 
-(map! :map dired-mode-map
+(map! :map dired-mode-map ;; encryption
       :after epa
       ";" nil
       (:prefix (";" . "Encryption")

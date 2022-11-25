@@ -46,7 +46,6 @@ ENTRY
     collaboration
     edition
     editor
-    howpublished
     institution
     isbn
     issn
@@ -55,25 +54,38 @@ ENTRY
     month
     note
     number
-    numpages
-    organization
     pages
     publisher
-    school
     series
     title
-    type
     volume
     year
-    % Custom
+    %% Custom -------
+    republished
     annotation
     eid
     eprint
     tags
     doi
+    % thesis type: (phd, masters)
+    type
+    % for software, the system it runs on:
     platform
     url
-    country
+    % For judicial opinions, legislation, standards etc:
+    status
+    plaintiff
+    defendant
+    short_parties
+    counsel
+    dissent
+    concur
+    % casenumber, statutory instrument, HR..., etc:
+    identifier
+    % for music scores:
+    arrangement
+    % for both music and judicial, legislation etc
+    section
   }
   {}
   { label extra.label sort.label short.list }
@@ -165,6 +177,16 @@ MACRO {toois} {"ACM Transactions on Office Information Systems"}
 MACRO {toplas} {"ACM Transactions on Programming Languages and Systems"}
 
 MACRO {tcs} {"Theoretical Computer Science"}
+
+MACRO {hor} {"House of Representatives"}
+
+MACRO {sen} {"Senate"}
+
+MACRO {hol} {"House of Lords"}
+
+MACRO {hoc} {"House of Commons"}
+
+
 
 %%-- end macros
 
@@ -553,12 +575,13 @@ FUNCTION {fin.entry}
 { add.period$
   write$
   newline$
+  format.url output
   tags empty$
     { skip$ }
-    { "\begin{lstlisting}" write$ newline$
-      "Tags: " write$
-      format.tags write$ newline$
-      "\end{lstlisting}" write$ newline$ }
+    { "\begin{lstlisting}" output
+      "Tags: " output
+      format.tags output
+      "\end{lstlisting}"output }
   if$
 }
 
@@ -584,6 +607,37 @@ FUNCTION {format.url}
   if$
 }
 
+FUNCTION {format.isbn}
+{ isbn "isbn" bibinfo.check
+  duplicate$ empty$ 'skip$
+    {
+      new.block
+      "ISBN " swap$ *
+    }
+  if$
+}
+
+
+FUNCTION {format.issn}
+{ issn "issn" bibinfo.check
+  duplicate$ empty$ 'skip$
+    {
+      new.block
+      "ISSN " swap$ *
+    }
+  if$
+}
+
+
+FUNCTION {format.doi}
+{ doi empty$
+    { "" }
+    {
+      new.block
+      "\doi{" doi * "}" *
+    }
+  if$
+}
 
 INTEGERS { nameptr namesleft numnames }
 STRINGS  { bibinfo}
@@ -655,7 +709,6 @@ FUNCTION {format.key}
   if$
 }
 
-
 FUNCTION {format.authors}
 { author "author" format.names
     duplicate$ empty$ 'skip$
@@ -669,7 +722,6 @@ FUNCTION {format.authors}
 }
 
 
-
 FUNCTION {format.editors}
 { editor "editor" format.names duplicate$ empty$ 'skip$
     {
@@ -681,37 +733,6 @@ FUNCTION {format.editors}
   if$
 }
 
-FUNCTION {format.isbn}
-{ isbn "isbn" bibinfo.check
-  duplicate$ empty$ 'skip$
-    {
-      new.block
-      "ISBN " swap$ *
-    }
-  if$
-}
-
-
-FUNCTION {format.issn}
-{ issn "issn" bibinfo.check
-  duplicate$ empty$ 'skip$
-    {
-      new.block
-      "ISSN " swap$ *
-    }
-  if$
-}
-
-
-FUNCTION {format.doi}
-{ doi empty$
-    { "" }
-    {
-      new.block
-      "\doi{" doi * "}" *
-    }
-  if$
-}
 
 FUNCTION {format.note}
 {
@@ -739,9 +760,10 @@ FUNCTION {format.title}
 
 FUNCTION {word.in}
 { bbl.in capitalize
-  " " * }
+  " " *
+}
 
-
+% TODO format the year and republished year together
 FUNCTION {format.date}
 { year "year" bibinfo.check duplicate$ empty$
     {
@@ -857,12 +879,6 @@ FUNCTION {format.journal.eid}
       }
       if$
       swap$ *
-      numpages empty$ 'skip$
-        { bbl.eidpp numpages tie.or.space.prefix
-          "numpages" bibinfo.check * *
-          " (" swap$ * ")" * *
-        }
-      if$
     }
   if$
 }
@@ -1002,12 +1018,8 @@ FUNCTION {format.org.or.pub}
   if$
 }
 
-FUNCTION {format.publisher.address}
+FUNCTION {format.publisher}
 { publisher "publisher" bibinfo.warn format.org.or.pub }
-
-
-FUNCTION {format.organization.address}
-{ organization "organization" bibinfo.check format.org.or.pub }
 
 
 FUNCTION {format.lab.names}
@@ -1034,6 +1046,53 @@ FUNCTION {format.lab.names}
   if$
 }
 
+FUNCTION {format.platform}
+{
+  platform
+}
+
+
+FUNCTION {format.country}
+{
+  country
+}
+
+FUNCTION {format.status}
+{
+  status
+}
+
+FUNCTION {format.arrangement}
+{
+  arrangement
+}
+
+FUNCTION {format.section}
+{
+  section
+}
+
+FUNCTION {format.parties}
+{
+  short_parties empty$
+  { plaintiff " v " * defendants * }
+  { short_parties }
+  if$
+}
+
+FUNCTION {format.counsel}
+{
+  counsel empty$
+  skip$
+  { counsel }
+  if$
+}
+
+FUNCTION {format.dissent}
+{
+  dissent output
+  concur  output
+}
 
 %%-- end format
 
@@ -1064,7 +1123,6 @@ FUNCTION {article}
   new.block
   format.note output
   format.eprint output
-  format.url output
   fin.entry
 }
 
@@ -1088,7 +1146,7 @@ FUNCTION {book}
       new.block
       format.number.series output
       new.sentence
-      format.publisher.address output
+      format.publisher output
     }
     {
       new.block
@@ -1102,7 +1160,6 @@ FUNCTION {book}
   new.block
   format.note output
   format.eprint output
-  format.url output
   fin.entry
 }
 
@@ -1113,15 +1170,12 @@ FUNCTION {booklet}
   new.block
   format.title "title" output.check
   new.block
-  howpublished "howpublished" bibinfo.check output
-  address "address" bibinfo.check output
   format.date "year" output.check
   format.isbn output
   format.doi output
   new.block
   format.note output
   format.eprint output
-  format.url output
   fin.entry
 }
 
@@ -1147,7 +1201,6 @@ FUNCTION {inbook}
       new.block
       format.number.series output
       new.sentence
-      format.publisher.address output
     }
     {
       format.chapter.pages "chapter and pages" output.check
@@ -1165,7 +1218,6 @@ FUNCTION {inbook}
   new.block
   format.note output
   format.eprint output
-  format.url output
   fin.entry
 }
 
@@ -1182,7 +1234,7 @@ FUNCTION {incollection}
       format.number.series output
       format.chapter.pages output
       new.sentence
-      format.publisher.address output
+      format.publisher output
       format.edition output
       format.date "year" output.check
       format.isbn output
@@ -1195,7 +1247,6 @@ FUNCTION {incollection}
   new.block
   format.note output
   format.eprint output
-  format.url output
   fin.entry
 }
 
@@ -1213,9 +1264,9 @@ FUNCTION {inproceedings}
       format.pages output
       new.sentence
       publisher empty$
-        { format.organization.address output }
-        { organization "organization" bibinfo.check output
-          format.publisher.address output
+        { institution output }
+        { institution bibinfo.check output
+          format.publisher output
         }
       if$
       format.date "year" output.check
@@ -1230,7 +1281,6 @@ FUNCTION {inproceedings}
   new.block
   format.note output
   format.eprint output
-  format.url output
   fin.entry
 }
 
@@ -1242,16 +1292,13 @@ FUNCTION {manual}
   author format.key output
   new.block
   format.btitle "title" output.check
-  organization address new.block.checkb
-  organization "organization" bibinfo.check output
-  address "address" bibinfo.check output
+  institution bibinfo.check output
   format.edition output
   format.date "year" output.check
   format.doi output
   new.block
   format.note output
   format.eprint output
-  format.url output
   fin.entry
 }
 
@@ -1262,13 +1309,11 @@ FUNCTION {misc}
   new.block
   format.title output
   new.block
-  howpublished "howpublished" bibinfo.check output
   format.date "year" output.check
   format.doi output
   new.block
   format.note output
   format.eprint output
-  format.url output
   fin.entry
 }
 
@@ -1296,21 +1341,13 @@ FUNCTION {thesis}
   if$
   output.nonnull
 
-  school empty$
-  { institution "school and institution" output.check }
-  { school output.nonnull
-    "school and institution" institution either.or.check
-  }
-  if$
+  institution "institution" output.check
 
-
-  address "address" bibinfo.check output
   format.date "year" output.check
   format.doi output
   new.block
   format.note output
   format.eprint output
-  format.url output
   fin.entry
 }
 
@@ -1332,9 +1369,9 @@ FUNCTION {proceedings}
   format.number.series output
   new.sentence
   publisher empty$
-    { format.organization.address output }
-    { organization "organization" bibinfo.check output
-      format.publisher.address output
+    { institution output }
+    { institution "institution" bibinfo.check output
+      format.country output
     }
   if$
   format.date "year" output.check
@@ -1344,7 +1381,6 @@ FUNCTION {proceedings}
   new.block
   format.note output
   format.eprint output
-  format.url output
   fin.entry
 }
 
@@ -1357,13 +1393,11 @@ FUNCTION {report}
   new.block
   format.tr.number output.nonnull
   institution "institution" bibinfo.warn output
-  address "address" bibinfo.check output
   format.date "year" output.check
   format.doi output
   new.block
   format.note output
   format.eprint output
-  format.url output
   "report" output
   fin.entry
 }
@@ -1378,13 +1412,11 @@ FUNCTION {techreport}
   new.block
   format.tr.number output.nonnull
   institution "institution" bibinfo.warn output
-  address "address" bibinfo.check output
   format.date "year" output.check
   format.doi output
   new.block
   format.note output
   format.eprint output
-  format.url output
   "techreport" output
   fin.entry
 }
@@ -1400,7 +1432,6 @@ FUNCTION {unpublished}
   new.block
   format.note "note" output.check
   format.eprint output
-  format.url output
   fin.entry
 }
 
@@ -1409,70 +1440,159 @@ FUNCTION {default.type} { misc }
 FUNCTION {software}
 {
   output.bibitem
-
-  fin.entry
-}
-
-FUNCTION {judicial}
-{
-  output.bibitem
-
-  fin.entry
-}
-
-FUNCTION {law}
-{
-  output.bibitem
-
-  fin.entry
-}
-
-FUNCTION {standard}
-{
-  output.bibitem
-
+  format.authors output
+  author format.key output
+  new.block
+  format.title output
+  new.block
+  format.date "year" output.check
+  new.block
+  format.platform "platform" output.check
   fin.entry
 }
 
 FUNCTION {game}
 { software }
 
-FUNCTION {blog}
+FUNCTION {documentation}
 {
   output.bibitem
-
+  format.authors output
+  author format.key output
+  new.block
+  format.title output
+  new.block
+  format.date "year" output.check
+  new.block
+  format.platform "platform" output.check
   fin.entry
 }
+
+FUNCTION {case}
+{
+  output.bibitem
+  format.parties output
+  parties format.key output
+  new.block
+  format.title output
+  new.block
+  format.counsel output.check
+  format.date "year" output.check
+  institution "institution" bibinfo.warn output
+  format.country "country" output.check
+  format.identifier "identifier" output.check
+  new.block
+  fin.entry
+
+}
+
+
+FUNCTION {judicial}
+{
+  output.bibitem
+  format.parties output
+  format.authors output
+  author format.key output
+  new.block
+  new.block
+  format.section "section" output.check
+  format.date "year" output.check
+  format.doi output
+  institution "institution" bibinfo.warn output
+  format.status "status" output.check
+  format.dissent "dissent" output.check
+  format.identifier "identifier" output.check
+  new.block
+  fin.entry
+}
+
+FUNCTION {law}
+{
+  output.bibitem
+  format.title output
+  institution "institution" bibinfo.warn output
+  title format.key output
+  format.authors "authors" output.check
+  new.block
+  format.title output
+  new.block
+  format.section "section" output.check
+  format.date "year" output.check
+  format.bvolume "volume" output.check
+  format.status "status" output.check
+  format.identifier "identifier" output.check
+  new.block
+  fin.entry
+}
+
+FUNCTION {standard}
+{
+  output.bibitem
+  format.authors output
+  author format.key output
+  new.block
+  format.title output
+  new.block
+  format.section "section" output.check
+  format.date "year" output.check
+  institution "institution" bibinfo.warn output
+  format.identifier "identifier" output.check
+  new.block
+  fin.entry
+}
+
+FUNCTION {online}
+{
+  output.bibitem
+  format.authors output
+  author format.key output
+  new.block
+  format.title output
+  new.block
+  format.date "year" output.check
+  format.doi output
+  new.block
+  fin.entry
+}
+
+FUNCTION {blog}
+{ online }
 
 FUNCTION {tweet}
-{
-  output.bibitem
-
-  fin.entry
-}
+{ online }
 
 FUNCTION {thread}
-{
-  output.bibitem
-
-  fin.entry
-}
+{ online }
 
 FUNCTION {musicscore}
 {
   output.bibitem
-
+  format.authors output
+  author format.key output
+  new.block
+  format.title output
+  new.block
+  format.part "section" output.check
+  format.date "year" output.check
+  format.doi output
+  format.arrangement "arrangement" output.check
+  new.block
   fin.entry
 }
 
 FUNCTION {dataset}
 {
   output.bibitem
-
+  format.authors output
+  author format.key output
+  new.block
+  format.title output
+  new.block
+  format.date "year" output.check
+  format.doi output
+  new.block
   fin.entry
 }
-
-FUNCTION {online} {}
 
 
 
@@ -1772,6 +1892,7 @@ FUNCTION {end.bib}
 %%-- end head and tail
 
 %%-- execution
+%% TODO separate passes into academic, internet, software, and legal
 READ
 ITERATE {presort}
 EXECUTE {init.extra.label.stuff}

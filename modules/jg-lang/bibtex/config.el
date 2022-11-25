@@ -43,3 +43,8 @@
 (add-hook 'doom-first-file-hook #'bibtex-completion-init)
 (add-hook 'doom-first-file-hook #'+jg-bibtex-build-list 90)
 (add-hook 'doom-first-file-hook #'org-ref-version)
+
+(after! bibtex
+  (add-hook 'bibtex-mode-hook #'(lambda () (bibtex-set-dialect 'jg)))
+  (remove-hook 'bibtex-mode-hook #'org-ref-bibtex-mode-keys)
+  )

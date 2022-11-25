@@ -84,17 +84,6 @@ the entry of interest in the bibfile.  but does not check that."
     (browse-url (format jg-bibtex-doi-url (bibtex-text-in-field "doi")))
     )
   )
-(defun +jg-bibtex-find-folder ()
-  " Find the fold in which the entry's associated file exists "
-  (interactive)
-  (let* ((target (bibtex-autokey-get-field '("file" "OPTfile"))))
-    (when (and (not (string-empty-p target)) (f-exists? (f-parent target)))
-      (message "Opening %s" (f-parent target))
-      (find-file-other-window (f-parent target))
-      (goto-char (point-min))
-      (search-forward (f-filename target)))
-    )
-  )
 (defun +jg-bibtex-open-folder ()
   " Open the associated file's folder in finder "
   (interactive)
@@ -562,7 +551,32 @@ With arg, searchs the dplp instead.
       )
     )
   )
+(defun +jg-bibtex-window-file-folder ()
+  " Find the folder in which the entry's associated file exists "
+  (interactive)
+  (let* ((target (bibtex-autokey-get-field '("file" "OPTfile"))))
+    (when (and (not (string-empty-p target)) (f-exists? (f-parent target)))
+      (message "Opening %s" (f-parent target))
+      (find-file-other-window (f-parent target))
+      (goto-char (point-min))
+      (search-forward (f-filename target))
+      t
+      )
+    )
+  )
 
+(defun +jg-bibtex-window-dwim ()
+  (interactive)
+  (let ((entry-start (save-excursion (bibtex-beginning-of-entry) (point)))
+        (entry-end (save-excursion (bibtex-end-of-entry) (point)))
+        )
+    (if (and (<= entry-start (point))
+             (<= (point) entry-end))
+        (unless (+jg-bibtex-window-file-folder)
+          (+jg-bibtex-window-set-downloads))
+      (+jg-bibtex-window-set-downloads))
+    )
+  )
 ;;-- end window-switching
 
 ;;-- subciting

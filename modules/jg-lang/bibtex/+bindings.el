@@ -14,7 +14,7 @@
       :desc "Select Entry"       :v "i e"   #'+jg-bibtex-visual-select-entry
       :desc "Open Pdf"           :n "RET"   #'+jg-bibtex-open-pdf
       :desc "Open Folder"        :n "M-RET" #'+jg-bibtex-find-folder
-      :desc "Open Download"      :n ">"     #'+jg-bibtex-window-set-downloads
+      :desc "Open DWIM"          :n ">"     #'+jg-bibtex-window-dwim
       :desc "Open Dropbox"       :n "<"     #'+jg-bibtex-window-set-dropbox
       )
 (map! :map bibtex-mode-map ;; localleader
@@ -62,7 +62,6 @@
       :localleader
       :prefix ("j" . "Jump")
       :desc "Jump to Pdf"          "p"   #'+jg-bibtex-open-pdf
-      :desc "Jump to Pdf Folder"   "P"   #'+jg-bibtex-find-folder
       :desc "Jump to url"          "u"   #'+jg-bibtex-open-url
       :desc "Jump to doi"          "d"   #'+jg-bibtex-open-doi
       :desc "Jump to Crossref"     "c"   #'+jg-bibtex-goto-crossref-entry

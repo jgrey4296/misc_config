@@ -209,9 +209,8 @@ using org-bibtex-fields for completion options "
   (save-excursion
     (bibtex-beginning-of-entry)
     (let* ((composition (-compose #'(lambda (x) (s-replace ":" "" x)) #'symbol-name #'car  ))
-           (fields (mapcar composition org-bibtex-fields))
-           (user-fields (mapcar #'car jg-bibtex-optional-fields))
-           (chosen (completing-read "Field: " (-concat fields user-fields)))
+           (fields (mapcar composition bibtex-field-alist))
+           (chosen (completing-read "Field: " fields))
            (curr-value (bibtex-autokey-get-field chosen))
            (potential-completions (f-join jg-bibtex-loc-completions chosen))
            (source (if (f-exists? potential-completions)

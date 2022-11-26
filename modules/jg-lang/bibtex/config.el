@@ -10,6 +10,8 @@
 (load! "+hydra")
 (load! "+advice")
 (load! "+dired")
+(load! "+entries")
+(load! "+fields")
 (after! jg-bindings-total
   (load! "+motions")
   (load! "+bindings")
@@ -45,6 +47,7 @@
 (add-hook 'doom-first-file-hook #'org-ref-version)
 
 (after! bibtex
+  (pushnew! bibtex-dialect-list 'jg)
   (add-hook 'bibtex-mode-hook #'(lambda () (bibtex-set-dialect 'jg)))
   (remove-hook 'bibtex-mode-hook #'org-ref-bibtex-mode-keys)
   )

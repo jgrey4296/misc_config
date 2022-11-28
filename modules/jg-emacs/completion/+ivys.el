@@ -79,17 +79,33 @@
 (defun +jg-yas-prompt-fn (prompt choices &optional display-fn)
   " Yasnippet ivy which shows groups "
   (let* ((max-name 0)
+         (max-group 0)
+         (index 0)
+         ;; Get the bits i care about to create the display
          (choice-parts (cl-loop for template in choices
                                 collect
                                 (let ((name (s-replace "\\" "/" (s-trim (yas--template-name template))))
                                       (group (s-trim (apply 'concat (yas--template-group template))))
+                                      (table (concat "Table:" (yas--table-name (yas--template-table template))))
                                       )
-                                  (setq max-name (max (length name) max-name))
-                                  (list name group (length name)))))
-         (format-fn (lambda (x) (concat " " (car x) (make-string (- (+ 5 max-name) (nth 2 x)) ? ) " : " (cadr x))))
+                                  (cl-incf index)
+                                  (setq max-name (max (length name) max-name)
+                                        max-group (max (length group) max-group))
+                                  (list (list name (length name)) (list group (length group)) table (1- index)))))
+         (format-fn (lambda (x) `(,(concat " "
+                                           ;; template name + gap
+                                           (caar x) (make-string (- (+ 5 max-name) (cadar x)) ? ) " : "
+                                           ;; groups
+                                           (caadr x) (make-string (- (+ 5 max-group) (cadadr x)) ? ) " : "
+                                           ;; table
+                                           (caddr x))
+                                  ;; index
+                                  . ,(car (last x)))))
          chosen)
-    (setq chosen (ivy-read "Choose Snippet: " (mapcar format-fn choice-parts) :caller '+jg-completion-yas-ivy))
-    (nth (or (cl-position chosen formatted-choices :test #'string=) 0) choices)
+    ;; only once i know the max-name, format the choices
+    ;; use :action rather than return value, to use the (str . index) pair
+    (ivy-read "Choose Snippet: " (mapcar format-fn choice-parts) :caller '+jg-completion-yas-ivy :action (lambda (x) (setq chosen (cdr x))))
+    (nth (or chosen 0) choices)
     )
   )
 

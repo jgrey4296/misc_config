@@ -3,6 +3,7 @@
 (load! "+funcs")
 (load! "+vars")
 (load! "+repl-commands")
+(load! "+cleaning")
 
 (after! (evil general-mod which-mod)
   (load! "+leader-bindings")

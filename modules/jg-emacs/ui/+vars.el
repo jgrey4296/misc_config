@@ -17,8 +17,8 @@
               display-line-numbers-major-tick  20
 
               ;; smartparens
-              sp-autoinsert-pair nil
-              sp-autoinsert-quote-if-followed-by-closing-pair nil
+              sp-autoinsert-pair t
+              sp-autoinsert-quote-if-followed-by-closing-pair t
               )
 
 ;;-- parens

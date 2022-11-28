@@ -1,27 +1,28 @@
 SHELL=/usr/local/bin/bash
 BASH_ENV=/Volumes/documents/github/emacs_files/setup_files/cron/conda_bashrc
+JG_NICENESS=10
 
 ### Hourly
 15,45 */1 * * * cpu_check
 
 ### DAILY:
 # Speak the time every 2 hours
-0 */2 * * * conda activate bookmark; bkmk-bot-time
+0 */2 * * * conda activate bookmark; nice -n $JG_NICENESS bkmk-bot-time
 
 # Update pdf summaries
 45 */3 * * * pdf_summarise
 
 # Regularly Tweet an entry from my bibtex
-7,42 */1 * * * conda activate bookmark; bkmk-bot-bibtex
+7,42 */1 * * * conda activate bookmark; nice -n $JG_NICENESS bkmk-bot-bibtex
 
 # Regularly tweet an image from the whitelist
-25,52 */1 * * * conda activate bookmark; bkmk-bot-image
+25,52 */1 * * * conda activate bookmark; nice -n $JG_NICENESS bkmk-bot-image
 
 # Update mail every 6 hours
-0 */6 * * * /usr/local/bin/mbsync -a
+0 */6 * * *  nice -n $JG_NICENESS /usr/local/bin/mbsync -a
 
 # Regularly run tag grep - PAUSED
-# 0 */1 * * * conda activate bookmark; bkmk-tag-grep -l /Volumes/documents/twitterthreads/ -t ~/github/writing/resources/cron_reports/totals.tags -o ~/github/writing/resources/cron_reports/grep_tags.index
+# 0 */1 * * * conda activate bookmark; nice -n $JG_NICENESS bkmk-tag-grep -l /Volumes/documents/twitterthreads/ -t ~/github/writing/resources/cron_reports/totals.tags -o ~/github/writing/resources/cron_reports/grep_tags.index
 
 # Regularly copy over pdfs and epubs, and stub them
 0 */12 * * * dropbox_watcher >/dev/null
@@ -67,6 +68,6 @@ BASH_ENV=/Volumes/documents/github/emacs_files/setup_files/cron/conda_bashrc
 */20 * * * sat pdf_summarise
 
 ## SUN - update bib totals
-25 1 * * sun conda activate bookmark; bkmk-bib-compile --all --target ~/github/writing/resources/bibliography --output /volumes/documents/in_progress_pdfs/pdflib_automations/total_bib
-0 2 * * sun pdftk /volumes/documents/in_progress_pdfs/pdflib_automations/total_bib/*.pdf cat output /volumes/documents/in_progress_pdfs/pdflib_automations/summary/total.pdf
-0 6 * * sun conda activate bookmark; bkmk-pdf-validity --target ~/pdflibrary/ --output ~/github/writing/resources/cron_reports/file_verification
+25 1 * * sun conda activate bookmark; nice -n $JG_NICENESS bkmk-bib-compile --all --target ~/github/writing/resources/bibliography --output /volumes/documents/in_progress_pdfs/pdflib_automations/total_bib
+0 3 * * sun nice -n $JG_NICENESS pdftk /volumes/documents/in_progress_pdfs/pdflib_automations/total_bib/*.pdf cat output /volumes/documents/in_progress_pdfs/pdflib_automations/summary/total.pdf
+0 6 * * sun conda activate bookmark; nice -n $JG_NICENESS bkmk-pdf-validity --target ~/pdflibrary/ --output ~/github/writing/resources/cron_reports/file_verification

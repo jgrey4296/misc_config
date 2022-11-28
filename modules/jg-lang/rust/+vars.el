@@ -25,6 +25,7 @@
               jg-rustdoc-url      "https://doc.rust-lang.org/rustdoc/index.html"
               jg-rust-cpython-url "https://dgrunwald.github.io/rust-cpython/doc/cpython/"
               jg-rust-pyo3-url    "https://pyo3.rs/v0.16.4/"
+              jg-rust-cargo-toml-url "https://doc.rust-lang.org/cargo/reference/manifest.html"
  )
 
 

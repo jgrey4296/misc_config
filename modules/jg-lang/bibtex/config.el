@@ -48,6 +48,11 @@
 
 (after! bibtex
   (pushnew! bibtex-dialect-list 'jg)
+  (let ((sorted-entries
+         (sort (copy-alist bibtex-jg-entry-alist) (lambda (x y) (string-lessp (car x) (car y)))))
+        )
+    (setq bibtex-jg-entry-alist sorted-entries)
+    )
   (add-hook 'bibtex-mode-hook #'(lambda () (bibtex-set-dialect 'jg)))
   (remove-hook 'bibtex-mode-hook #'org-ref-bibtex-mode-keys)
   )

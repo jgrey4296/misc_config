@@ -1,0 +1,39 @@
+# https://doc.rust-lang.org/cargo/reference/config.html
+# paths = [] # path dependency overrides
+
+[alias]
+gdb = "build --profile gdb"
+cfgs = "-Z unstable-options rustc --print=cfg"
+
+
+# [build]
+# jobs = 1                      # number of parallel jobs, defaults to # of CPUs
+# rustc = "rustc"               # the rust compiler tool
+# rustc-wrapper = "…"           # run this wrapper instead of `rustc`
+# rustc-workspace-wrapper = "…" # run this wrapper instead of `rustc` for workspace members
+# rustdoc = "rustdoc"           # the doc generator tool
+# target = "triple"             # build for the target triple (ignored by `cargo install`)
+# target-dir = "target"         # path of where to place all generated artifacts
+# rustflags = ["…", "…"]        # custom flags to pass to all compiler invocations
+# rustdocflags = ["…", "…"]     # custom flags to pass to rustdoc
+# incremental = true            # whether or not to enable incremental compilation
+# dep-info-basedir = "…"        # path for the base directory for targets in depfiles
+
+# [doc]
+# browser = "chromium"          # browser to use with `cargo doc --open`,
+#                               # overrides the `BROWSER` environment variable
+
+# [env]
+# # Set ENV_VAR_NAME=value for any process run by Cargo
+# ENV_VAR_NAME = "value"
+# # Set even if already present in environment
+# ENV_VAR_NAME_2 = { value = "value", force = true }
+# # Value is relative to .cargo directory containing `config.toml`, make absolute
+# ENV_VAR_NAME_3 = { value = "relative/path", relative = true }
+
+# [term]
+# quiet = false          # whether cargo output is quiet
+# verbose = false        # whether cargo provides verbose output
+# color = 'auto'         # whether cargo colorizes output
+# progress.when = 'auto' # whether cargo shows progress bar
+# progress.width = 80    # width of progress bar

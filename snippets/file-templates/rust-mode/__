@@ -1,0 +1,23 @@
+////-- imports
+use std::io;
+use $1;
+////-- end imports
+
+////-- public fns
+
+////-- end public fns
+
+$0
+
+
+////-- tests
+#[cfg(test)]
+#[test]
+fn test_basic() {
+    assert!(True);
+}
+
+
+
+
+////-- end tests

@@ -1,5 +1,66 @@
+# https://doc.rust-lang.org/cargo/reference/manifest.html
+# On nightly:
+# cargo-features = ["profile-rustflags"]
+
 [package]
-name = "${1:Project Name}"
-version = "0.0.1"
-authors = [ "`user-full-name` <`user-mail-address`>" ]
+name        = "${1:Project Name}"
+version     = "0.0.1"
+description = ""
+readme      = "readme.md"
+homepage    = "https://github/jgrey4296"
+license     = ""
+keywords    = []
+authors     = [ "`user-full-name` <`user-mail-address`>" ]
+edition     = "2021"
+publish     = false
+
+# build       = "build.rs"
+# exclude     = []
+# include     = []
+
+##-- debugging profile
+[profile.gdb]
+inherits         = "dev"
+opt-level        = 0
+debug            = true
+split-debuginfo  = 'packed'
+strip            = 'none'
+debug-assertions = true
+overflow-checks  = true
+lto              = "no"
+panic            = 'unwind'
+incremental      = true
+codegen-units    = 256
+rpath            = false
+rustflags        = ['--emit=obj,link']
+
+##-- end debugging profile
+
+##-- dependencies
+[dependencies]
+
+[dev-dependencies]
+
+[build-dependencies]
+
+[target.'cfg(unix)'.dependencies]
+
+##-- end dependencies
+
+##-- features
+[features]
+
+
+##-- end features
+
+##-- targets
+[lib]
+# name = ""
+# path = "src/lib.rs"
+
+[[bin]]
+# name = ""
+# path = "src/main.rs"
+
 $0
+##-- end targets

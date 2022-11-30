@@ -43,6 +43,7 @@ fribidi
 gawk
 gcc
 gd
+gdb
 gdbm
 gdk-pixbuf
 gettext

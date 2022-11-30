@@ -1,5 +1,10 @@
 ;;; util/bindings/+funcs.el -*- lexical-binding: t; -*-
 
+(defun +jg-bindings-system-config ()
+  (interactive)
+  (message "Built with: %s" system-configuration-options)
+  )
+
 (defun +jg-bindings-open-link ()
   (interactive)
   (cond ((eq evil-state 'visual)

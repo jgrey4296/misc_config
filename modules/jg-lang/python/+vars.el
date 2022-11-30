@@ -129,7 +129,6 @@
 
 ;;-- end browse providers
 
-
 ;;-- obsolete
 ;; (defvar +python-ipython-command '("ipython" "-i" "--simple-prompt" "--no-color-info")
 ;;   "Command to initialize the ipython REPL for `+python/open-ipython-repl'.")

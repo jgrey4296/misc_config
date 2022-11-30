@@ -7,6 +7,7 @@
       :desc "Regexp Syntax"             "2" (cmd! (info "(elisp) Syntax of Regexps"))
       "4" #'info-other-window
 
+      "!"    #'+jg-bindings-system-config
       ;; new keybinds
       "'"    #'describe-char
       "u"    #'doom/help-autodefs

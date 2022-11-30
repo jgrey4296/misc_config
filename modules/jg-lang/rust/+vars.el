@@ -52,5 +52,16 @@
   )
 ;;-- end file templates
 
+;;-- browse providers
+(after! jg-browse-providers
+  (pushnew! jg-browse-providers-alist
+            '("Rust Stdlib"  "https://doc.rust-lang.org/std/?search=%s")
+            '("Cargo"        "https://crates.io/search?q=%s")
+            '("Rust Docs"    "https://docs.rs/releases/search?query=%s")
+            )
+  )
+
+;;-- end browse providers
+
 
 ;;; +vars.el ends here

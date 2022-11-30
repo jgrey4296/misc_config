@@ -79,3 +79,13 @@
    )
   )
 ;;-- end file templates
+
+;;-- browse providers
+(after! 'jg-browse-providers
+  (pushnew! jg-browse-providers-alist
+            '("Kotlin" "https://kotlinlang.org/docs/home.html?q=%s&s=full")
+            '("Android" "https://developer.android.com/s/results?q=%s")
+            )
+  )
+
+;;-- end browse providers

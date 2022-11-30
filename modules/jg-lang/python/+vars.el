@@ -118,6 +118,18 @@
   )
 ;;-- end file templates
 
+;;-- browse providers
+(after! jg-browse-providers
+  (pushnew! jg-browse-providers-alist
+            '("Python" "https://docs.python.org/3/search.html?q=%s&check_keywords=yes&area=default")
+            '("Pypi"   "https://pypi.org/search/?q=%s")
+
+            )
+  )
+
+;;-- end browse providers
+
+
 ;;-- obsolete
 ;; (defvar +python-ipython-command '("ipython" "-i" "--simple-prompt" "--no-color-info")
 ;;   "Command to initialize the ipython REPL for `+python/open-ipython-repl'.")

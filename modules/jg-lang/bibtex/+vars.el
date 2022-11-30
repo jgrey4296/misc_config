@@ -108,3 +108,21 @@
   (add-to-list 'global-hl-line-modes 'bibtex-mode)
   )
 ;;-- end hl line
+
+;;-- browse providers
+(after! jg-browse-providers
+  (pushnew! jg-browse-providers-alist
+            '("Scholar"            "https://scholar.google.com/scholar?hl=en&q=%s")
+            '("Scholar Archive"    "https://scholar.archive.org/search?q=%s")
+            '("DBLP"               "https://dblp1.uni-trier.de/search?q=%s")
+            '("Doi"                "https://doi.org/%s")
+            '("Wikipedia"          "https://wikipedia.org/search-redirect.php?language=en&go=Go&search=%s")
+            '("Archive.org"        "https://archive.org/search.php?query=%s")
+            '("Project Gutenberg"  "http://www.gutenberg.org/ebooks/search/?query=%s")
+            '("Amazon UK"          "https://www.amazon.co.uk/s?k=%s")
+            '("Amazon US"          "https://www.amazon.com/s?k=%s")
+            '("IMDB"               "https://www.imdb.com/find?s=all&q=%s")
+            )
+  )
+
+;;-- end browse providers

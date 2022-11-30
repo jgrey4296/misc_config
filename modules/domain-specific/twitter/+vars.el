@@ -18,3 +18,13 @@
 (setq-default jg-twitter-download-repo "/Volumes/documents/github/py_bookmark_organiser/"
               jg-twitter-download-py   "bkmkorg/io/twitter/automator.py"
               )
+
+;;-- browse providers
+(after! jg-browse-providers
+  (pushnew! jg-browse-providers-alist
+            '("Twitter"            "https://twitter.com/%s")
+
+            )
+  )
+
+;;-- end browse providers

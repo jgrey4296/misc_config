@@ -1,5 +1,6 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
+;;-- xml commands
 (setq jg-xml-xpath-command-string  "xmllint --pretty 2 --htmlout --xpath %s %s"
       jg-xml-format-command-string "xmllint --format %s"
       jg-xml-xidel-command-string  "xidel -s --output-format=xml --xpath \"%s\" %s"
@@ -9,8 +10,11 @@
 
       )
 
+;;-- end xml commands
+
 (pushnew! mailcap-mime-extensions '(".xhtml" . "text/html"))
 (pushnew! mailcap-mime-extensions '(".xml" . "text/html"))
+
 ;;-- popup
 (after! 'jg-popup-init
   (+jg-ui-popup-add-rules 'nxml
@@ -36,3 +40,14 @@
   (push jg-web-fold-spec evil-fold-list)
   )
 ;;-- end fold spec
+
+;;-- browse providers
+(after! jg-browse-providers
+  (pushnew! jg-browse-providers-alist
+            '("MDN"                "https://developer.mozilla.org/en-US/search?q=%s")
+
+
+            )
+  )
+
+;;-- end browse providers

@@ -17,26 +17,11 @@
 ;;-- lookup
 (setq jg-browse-providers-alist '(("DuckDuckGo" +lookup--online-backend-duckduckgo "https://duckduckgo.com/?q=%s")
 
-                                   ("Scholar"            "https://scholar.google.com/scholar?hl=en&q=%s")
-                                   ("Scholar Archive"    "https://scholar.archive.org/search?q=%s")
-                                   ("DBLP"               "https://dblp1.uni-trier.de/search?q=%s")
-                                   ("Doi"                "https://doi.org/%s")
                                    ("Github"             "https://github.com/search?ref=simplesearch&q=%s")
-                                   ("Python"             "https://docs.python.org/3/search.html?q=%s&check_keywords=yes&area=default")
-
-                                   ("MDN"                "https://developer.mozilla.org/en-US/search?q=%s")
-                                   ("Rust Docs"          "https://doc.rust-lang.org/std/?search=%s")
                                    ("DevDocs.io"         "https://devdocs.io/#q=%s")
                                    ("StackOverflow"      "https://stackoverflow.com/search?q=%s")
 
-                                   ("Twitter"            "https://twitter.com/%s")
-                                   ("Wikipedia"          "https://wikipedia.org/search-redirect.php?language=en&go=Go&search=%s")
-                                   ("Archive.org"        "https://archive.org/search.php?query=%s")
-                                   ("Project Gutenberg"  "http://www.gutenberg.org/ebooks/search/?query=%s")
                                    ("Youtube"            "https://youtube.com/results?aq=f&oq=&search_query=%s")
-                                   ("Amazon UK"          "https://www.amazon.co.uk/s?k=%s")
-                                   ("Amazon US"          "https://www.amazon.com/s?k=%s")
-                                   ("IMDB"               "https://www.imdb.com/find?s=all&q=%s")
 
                                    ("Learn X in Y"       "https://learnxinyminutes.com/docs/%s")
                                    ("OverAPI"            "https://overapi.com/%s")
@@ -47,6 +32,7 @@
                                    ("Raw"                "%s")
                                    )
       )
+(provide 'jg-browse-providers)
 ;;-- end lookup
 
 ;;-- browsing defaults

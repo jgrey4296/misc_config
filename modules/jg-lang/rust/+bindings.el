@@ -38,7 +38,9 @@
 
       )
 
-(+jg-bindings-undefine-metas rust-mode-map)
-(+jg-bindings-undefine-metas rustic-mode-map)
+(after! rustic
+  (+jg-bindings-undefine-metas rust-mode-map)
+  (+jg-bindings-undefine-metas rustic-mode-map)
+  )
 
 ;;; +bindings.el ends here

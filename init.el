@@ -46,6 +46,7 @@
  org
  python
  rst
+ rust
  xml
 
  :jg-emacs  ;; ----- ====== -----

@@ -55,9 +55,11 @@
 ;;-- browse providers
 (after! jg-browse-providers
   (pushnew! jg-browse-providers-alist
-            '("Rust Stdlib"  "https://doc.rust-lang.org/std/?search=%s")
-            '("Cargo"        "https://crates.io/search?q=%s")
-            '("Rust Docs"    "https://docs.rs/releases/search?query=%s")
+            '("Rust Stdlib"     "https://doc.rust-lang.org/std/?search=%s")
+            '("Rust Crates.io"  "https://crates.io/search?q=%s")
+            '("Rust docs.rs"    "https://docs.rs/releases/search?query=%s")
+            '("Rust lib.rs"     "https://lib.rs/search?q=%s")
+            '("Rust Forums"     "https://users.rust-lang.org/search?q=%s")
             )
   )
 

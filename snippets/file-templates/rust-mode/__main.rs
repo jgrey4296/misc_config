@@ -10,10 +10,14 @@ mod $2;
 
 ////-- standard imports
 use std::io;
-use log::{warn}
+use log;
+use simple_logger;
+
 ////-- end standard imports
 
 fn main() {
+    simple_logger::init().unwrap();
+
     ${0:println!("Hello, world!");}
 
 }

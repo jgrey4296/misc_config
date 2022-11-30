@@ -19,9 +19,7 @@
 ;;
 ;;; Code:
 
-(after! rustic
-  (load! "+vars")
-  )
+(load! "+vars")
 
 (after! jg-bindings-total
   (load! "+bindings")

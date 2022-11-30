@@ -37,6 +37,7 @@
     )
   )
 (add-hook 'doom-first-file-hook #'+jg-completion-on-load-hook)
+(add-hook 'jg-reapply-hook '+jg-completion-file-interactive-activate)
 
 (after! 'helm
   (load! "+helms")

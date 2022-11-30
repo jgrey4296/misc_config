@@ -238,6 +238,11 @@ If region isn't active, narrow away anything above point
     )
   )
 
+(defun +jg-ui-popup-reapply-rules ()
+  (interactive)
+  (+jg-ui-popup-activate-rules t)
+  )
+
 (define-advice set-popup-rules! (:after (&rest args)
                                  +jg-popup-advice)
   (+jg-ui-popup-activate-rules))

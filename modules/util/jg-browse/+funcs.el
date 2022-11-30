@@ -35,6 +35,11 @@
            (setq jg-browse-use-preview (not jg-browse-use-preview)))
   )
 
+(defun +jg-browse-reapply-providers ()
+  (interactive)
+  (setq +lookup-provider-url-alist jg-browse-providers-alist)
+  )
+
 ;;-- end interactive
 
 ;;-- browse program selection

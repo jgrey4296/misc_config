@@ -224,6 +224,7 @@
       :desc "Popup Buffer"          "<"     #'+jg-completion-popup-buffer
       :desc "Have you Played?"      "o 1"   #'+jg-completion-rps-have-you-playeds
       :desc "New snippet"           "y n"   #'+jg-completion-new-snippet
+      :desc "File-Templates"        "y f"   (cmd! (find-file jg-completion-file-templates-dir))
       :desc "Workspace Counsel"     "w RET" #'+jg-completion-counsel-workspace
       )
 ;;-- end leader helms

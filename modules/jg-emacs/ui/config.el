@@ -8,6 +8,8 @@
 (after! core-ui (load! "+advice"))
 (after! jg-bindings-total (load! "+bindings"))
 
+(add-hook 'jg-reapply-hook '+jg-ui-popup-reapply-rules)
+
 (use-package! hl-line
   :defer t
   :init

@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name  : testfn
+# uuid  : testfn
+# key   : testfn
+# group : testing
+# --
+def test_${1:function}(self):
+	# Setup:
+    $0
+    # Pre-check:
+
+    # Action
+
+    # Post-check:
+
+    self.assertFalse(True)

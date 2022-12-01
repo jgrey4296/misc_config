@@ -1,5 +1,7 @@
 ;;; lang/jg-latex/config.el -*- lexical-binding: t; -*-
 
+(load! "+vars")
+
 (use-package tex-mode
   :config
   (map! :after jg-bindings-total

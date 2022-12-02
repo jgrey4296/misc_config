@@ -2,7 +2,12 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("godot"
+(("emacsd"
+ (filename . "/Volumes/documents/github/otherLibs/lisp/")
+ (front-context-string . "emacs-src\n  drwx")
+ (rear-context-string . "6K Nov 30 22:03 ")
+ (position . 313))
+("godot"
  (filename . "/Volumes/documents/github/godot/")
  (front-context-string . "3dTests\n  drwxr-")
  (rear-context-string . "08 Nov 22 01:40 ")
@@ -17,11 +22,6 @@
  (front-context-string . "mysql2sqlite\n  d")
  (rear-context-string . "38 Nov  3 06:16 ")
  (position . 953))
-("emacs-src"
- (filename . "/Volumes/documents/github/emacs-src/lisp/")
- (front-context-string . "calc\n  drwxrwxr-")
- (rear-context-string . "5K Jul 29 20:18 ")
- (position . 144))
 ("pdf_automations"
  (filename . "/Volumes/documents/in_progress_pdfs/pdflib_automations/")
  (front-context-string . "summary\n  drwxr-")
@@ -67,11 +67,6 @@
  (front-context-string . "dsl\n  drwxr-xr-x")
  (rear-context-string . "72 Jul 24 17:00 ")
  (position . 199))
-("emacs-repos"
- (filename . "/Volumes/documents/github/doom-emacs/.local/straight/repos/")
- (front-context-string . "evil\n  drwxr-xr-")
- (rear-context-string . "3K Jul 29 18:37 ")
- (position . 6145))
 ("snippets"
  (filename . "/Volumes/documents/github/emacs_files/snippets/")
  (front-context-string . "shell-mode\n  drw")
@@ -112,11 +107,6 @@
  (front-context-string . "** [ ] Cron: dro")
  (rear-context-string)
  (position . 9))
-("emacs-cellar"
- (filename . "/usr/local/Cellar/emacs/28.1/share/emacs/28.1/lisp/")
- (front-context-string . "calc\n  drwxr-xr-")
- (rear-context-string . "8K Apr  3 13:29 ")
- (position . 257))
 ("resources"
  (filename . "/Volumes/documents/github/writing/resources/")
  (front-context-string . "bibliography\n  d")
@@ -172,11 +162,6 @@
  (front-context-string . ".github\n  drwxr-")
  (rear-context-string . "02 Jul 25 16:26 ")
  (position . 135))
-("emacsd"
- (filename . "/Volumes/documents/github/doom-emacs/")
- (front-context-string . "modules\n  drwxr-")
- (rear-context-string . "44 May 20 08:19 ")
- (position . 654))
 ("language_learning"
  (filename . "/Volumes/documents/github/languageLearning/")
  (front-context-string . "android\n  drwxrw")

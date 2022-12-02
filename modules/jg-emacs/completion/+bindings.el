@@ -27,6 +27,10 @@
       :n "o" #'hydra-ivy/body
       :n "a" #'ivy-dispatching-done
 
+      :n "j" #'ivy-next-line
+      :n "k" #'ivy-previous-line
+      :n "RET" #'ivy-done
+
       "C-c RET"                         #'+ivy/woccur
       "C-o"                             #'ivy-dispatching-done
       "C-h"                             #'ivy-backward-kill-word

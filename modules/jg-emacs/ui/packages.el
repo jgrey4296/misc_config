@@ -11,3 +11,4 @@
 (package! palette-mode :recipe (:local-repo "~/.doom.d/packages/palette-mode"))
 (package! smartparens)
 (package! paren-state :recipe '(:local-repo "~/.doom.d/packages/paren-state"))
+;; (package! vundo)

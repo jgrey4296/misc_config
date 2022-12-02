@@ -14,6 +14,7 @@
   :config
   (evil-make-intercept-map free-keys-mode-map)
   )
+
 (use-package! undo-tree
   :config
   ;; Compress undo-tree history files with zstd, if available. File size isn't

@@ -1,23 +1,72 @@
-#!/usr/bin/env bash
+#!/usr/bin/env Bash
 
 jgd Setting emacs data
-alias emacs="TERM=xterm-24bits emacs -nw"
-alias jges="emacs ~/.shell_files/"
-alias em="emacs"
-alias temacs="emacs ~/github/writing/TODO.org"
-alias wemacs="emacs ~/github/writing/main.org"
-
-# alias emacs2="/usr/local/Cellar/emacs-plus@28/28.1/bin/emacs-28.1"
+TERM="xterm-24bits"
 
 #sclang for emacs:
 alias sclangel="sclang -d ~/github/.super_collider_classes/ -r -s -i emacs"
 
 jgd Setting Doom Emacs data
-PATH=~/.emacs.d/bin/:$PATH
 
 jgd Setting Gtags Data
-GTAGSCONF=~/.shell_files/gtags.conf
+GTAGSCONF=$HOME/.shell_files/gtags.conf
 GTAGSLABEL=pygments
 
 #Default editor:
 EDITOR="vim"
+
+function set-emacs30 () {
+    echo "Setting Emacs 30 no doom"
+    EMACS="/usr/local/Cellar/emacs-plus@29/29.0.50/bin/emacs"
+    EMACSDIR="$HOME/github/otherLibs/lisp/emacs30"
+    PATH=$EMACDIR/bin/:$PATH
+    alias emacs="$EMACS -nw"
+    alias emacsw="$EMACS"
+    if [[ -L "$HOME/.emacs.d" ]]; then
+        echo "Found .emacs.d link, retargeting"
+        rm $HOME/.emacs.d
+        ln -s $EMACSDIR $HOME/.emacs.d
+    else
+        echo "Not a link"
+    fi
+}
+
+function set-emacs-native () {
+    echo "Setting Emacs 28 Native"
+    EMACS="/usr/local/Cellar/emacs-plus@28/28.2/bin/emacs"
+    EMACSDIR="$HOME/github/otherLibs/lisp/doom_native"
+    DOOMDIR="$HOME/.doom.d"
+    PATH=$EMACSDIR/bin/:$PATH
+    alias emacs="$EMACS -nw"
+    alias emacsw="$EMACS"
+    if [[ -L "$HOME/.emacs.d" ]]; then
+        echo "Found .emacs.d link, retargeting"
+        rm $HOME/.emacs.d
+        ln -s $EMACSDIR $HOME/.emacs.d
+    else
+        echo "Not a link"
+    fi
+}
+
+function set-emacs () {
+    echo "Setting Base Emacs"
+    EMACS="/usr/local/Cellar/emacs/28.2/bin/emacs"
+    EMACSDIR="/Volumes/documents/github/otherLibs/lisp/doom_main"
+    DOOMDIR="$HOME/.doom.d"
+    PATH=$EMACSDIR/bin/:$PATH
+    alias emacs="$EMACS -nw"
+    alias emacsw="$EMACS"
+    if [[ -L "$HOME/.emacs.d" ]]; then
+        echo "Found .emacs.d link, retargeting"
+        rm $HOME/.emacs.d
+        ln -s $EMACSDIR $HOME/.emacs.d
+    else
+        echo "Not a link"
+    fi
+}
+
+function report-emacs () {
+    echo "Emacs is    : $EMACS"
+    echo "Emacs Dir is: $EMACSDIR"
+    echo "User  Dir is: $DOOMDIR"
+}

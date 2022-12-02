@@ -3,12 +3,14 @@
 (require 'vimish-fold)
 (require 's)
 (require 'evil)
+(require 'ivy)
 ;;-- end requires
 
 ;;-- vars
 (defvar-local autohide-minor-mode-fold-pattern "%s-- %s %s")
 (defvar-local autohide-minor-mode-block-depth 2)
 (defvar autohide-minor-mode-exclusions '(helm-major-mode ivy-mode minibuffer-mode dired-mode fundamental-mode))
+(defvar autohide-minor-mode-derivations '(prog-mode bibtex-mode conf-mode latex-mode))
 ;;-- end vars
 
 ;;-- main functions
@@ -42,7 +44,7 @@ Vimish-fold's any blocks matching autohide-minor-mode-fold-pattern
   (interactive)
   (message "Running Auto Hide: %s %s" major-mode comment-start)
   (save-excursion
-    (beginning-of-buffer)
+    (goto-char (point-min))
     (vimish-fold-delete-all)
     ;; Fold Groups
     (message "Searching for Fold Blocks")
@@ -81,9 +83,10 @@ Vimish-fold's any blocks matching autohide-minor-mode-fold-pattern
   (when (and autohide-minor-mode
              (not (minibufferp))
              (not (-contains? autohide-minor-mode-exclusions major-mode))
-             (derived-mode-p 'prog-mode)
+             (apply 'derived-mode-p autohide-minor-mode-derivations)
              )
-    (autohide-minor-mode-run-folds))
+    (autohide-minor-mode-run-folds)
+    )
   )
 
 (define-globalized-minor-mode global-autohide-minor-mode

@@ -6,7 +6,7 @@
 ;;-- emacs source paths
 (after! (ffap find-func)
   (let ((paths-to-add (-concat
-                       (ffap-all-subdirs "/Volumes/documents/github/emacs-src/lisp/" 1)
+                       (ffap-all-subdirs "/Volumes/documents/github/otherLibs/lisp/emacs-src/lisp/" 1)
                        (ffap-all-subdirs (expand-file-name "straight/repos" doom-local-dir) 1)
                        (ffap-all-subdirs (expand-file-name "modules" doom-private-dir))
                        (ffap-all-subdirs (expand-file-name "packages" doom-private-dir)))))
@@ -14,7 +14,7 @@
           (add-to-list 'find-library-source-path x))
         paths-to-add)
   )
-  (setq find-function-C-source-directory "/Volumes/documents/github/emacs-src/src")
+  (setq find-function-C-source-directory "/Volumes/documents/github/otherLibs/lisp/emacs-src/src")
 
 )
 ;;-- end emacs source paths
@@ -67,3 +67,13 @@
    )
 )
 ;;-- end file templates
+
+;;-- browse providers
+(after! jg-browse-providers
+  (pushnew! jg-browse-providers-alist
+            '("ELisp Melpa" "https://melpa.org/#/?q=%s")
+            '("Elisp Elpa" "https://elpa.gnu.org/packages/")
+            )
+  )
+
+;;-- end browse providers

@@ -1,5 +1,6 @@
 # reminder: source this file in ~/.bash_profile
 # and source .bash_profile in .bashrc
+export BASH_SILENCE_DEPRECATION_WARNING=1
 
 source ~/.shell_files/bash_setup/_basic_utils.bash
 source ~/.shell_files/bash_setup/_base_path.bash

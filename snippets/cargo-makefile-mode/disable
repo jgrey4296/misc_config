@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name  : disable
+# uuid  : disable
+# key   : disable
+# group : rust, cargo-make
+# --
+[tasks.$1]
+disabled = true
+$0

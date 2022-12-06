@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : glob
+# uuid  : glob
+# key   : glob
+# group : rust, cargo-make
+# --
+{ glob = "./src/**/mod.rs", include_files = true, include_dirs = false, ignore_type = "git" }

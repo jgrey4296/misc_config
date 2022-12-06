@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name  : script
+# uuid  : script
+# key   : script
+# group : rust, cargo-make
+# --
+script_runner = "${1:python}"
+script        = { file = "$1", absolute_path = false }$0

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : condition
+# uuid  : condition
+# key   : cond
+# group : rust, cargo-make
+# --
+condition = {}

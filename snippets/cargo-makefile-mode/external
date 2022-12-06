@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : external
+# uuid  : external
+# key   : ext
+# group : rust, cargo-make
+# --
+{ name = "$1", path = "$2" },

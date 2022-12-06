@@ -28,6 +28,7 @@
               jg-rust-pyo3-url         "https://pyo3.rs/v0.16.4/"
               jg-rust-cargo-toml-url   "https://doc.rust-lang.org/cargo/reference/manifest.html"
               jg-rust-cargo-search-url "https://crates.io/search?q=%s"
+              jg-rust-cargo-make-url   "https://sagiegurari.github.io/cargo-make/"
  )
 
 ;;-- end urls
@@ -38,15 +39,16 @@
   (+jg-completion-add-file-templates
    'rust-mode
    '(
-     ("config\\.toml$" :trigger "__config.toml" :mode rust-mode)
-     ("mod\\.rs$"      :trigger "__mod.rs"      :mode rust-mode)
-     ("Cargo\\.toml$"  :trigger "__Cargo.toml"  :mode rust-mode)
-     ("main\\.rs$"     :trigger "__main.rs"     :mode rust-mode)
-     ("lib\\.rs$"      :trigger "__lib.rs"      :mode rust-mode)
-     ("tests\\.rs"     :trigger "__tests.rs"    :mode rust-mode)
-     ("build\\.rs"     :trigger "__build.rs"    :mode rust-mode)
-     (rustic-mode      :trigger "__"            )
-     (rust-mode        :trigger "__"            )
+     ("config\\.toml$"   :trigger "__config.toml" :mode rust-mode)
+     ("Cargo\\.toml$"    :trigger "__Cargo.toml"  :mode rust-mode)
+     ("Makefile\\.toml$" :trigger "__"            :mode cargo-makefile-mode)
+     ("mod\\.rs$"        :trigger "__mod.rs"      :mode rust-mode)
+     ("main\\.rs$"       :trigger "__main.rs"     :mode rust-mode)
+     ("lib\\.rs$"        :trigger "__lib.rs"      :mode rust-mode)
+     ("tests\\.rs"       :trigger "__tests.rs"    :mode rust-mode)
+     ("build\\.rs"       :trigger "__build.rs"    :mode rust-mode)
+     (rustic-mode        :trigger "__"            )
+     (rust-mode          :trigger "__"            )
      )
    )
   )
@@ -64,6 +66,15 @@
   )
 
 ;;-- end browse providers
+
+;;-- LSP
+(setq lsp-rust-analyzer-server-command '("rustup" "run" "nightly" "rust-analyzer")
+      rustic-analyzer-command '("rustup" "run" "nightly" "rust-analyzer")
+      lsp-rust-server 'rust-analyzer
+ )
+
+
+;;-- end LSP
 
 (after! projectile
   (defun +jg-rust-related-files-fn (path)

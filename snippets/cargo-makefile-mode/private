@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name  : private
+# uuid  : private
+# key   : private
+# group : rust, cargo-make
+# --
+[tasks.private_${1:test}]
+private = true
+command = "echo"
+args    = ["only as dependency"]

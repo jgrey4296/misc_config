@@ -20,10 +20,13 @@
 ;;; Code:
 
 (load! "+vars")
+(load! "+ivy")
 
 (after! jg-bindings-total
   (load! "+bindings")
   )
 
+
+(use-package! cargo-makefile-mode)
 
 ;;; config.el ends here

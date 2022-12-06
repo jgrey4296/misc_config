@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name  : extend
+# uuid  : extend
+# key   : extend
+# group : rust, cargo-make
+# --
+[tasks.$1]
+extend = "${2:sourceTask}"
+$0

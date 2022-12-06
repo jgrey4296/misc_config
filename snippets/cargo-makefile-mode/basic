@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name  : task
+# uuid  : task
+# key   : task
+# group : rust, cargo-make
+# --
+
+[tasks.${1:basic}]
+description = "TODO"
+category    = "TODO"
+command     = "echo"
+args        = ["test"]

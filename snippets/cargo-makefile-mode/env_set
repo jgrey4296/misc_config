@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name  : env_set
+# uuid  : env_set
+# key   : env_set
+# group : rust, cargo-make
+# --
+condition = {
+          env_set     = [ "${1:SOME_ENV_VAR}" ],
+          env_not_set = []
+}

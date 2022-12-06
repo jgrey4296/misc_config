@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name  : env
+# uuid  : env
+# key   : env
+# group : rust, cargo-make
+# --
+[env]
+${1:VAR} = ${2:true}$0

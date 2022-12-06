@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : run
+# uuid  : run
+# key   : run
+# group : rust, cargo-make
+# --
+run_task = "$1"

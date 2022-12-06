@@ -9,64 +9,93 @@ alias sclangel="sclang -d ~/github/.super_collider_classes/ -r -s -i emacs"
 jgd Setting Doom Emacs data
 
 jgd Setting Gtags Data
-GTAGSCONF=$HOME/.shell_files/gtags.conf
-GTAGSLABEL=pygments
+GTAGSCONF="$HOME/.shell_files/gtags.conf"
+GTAGSLABEL="pygments"
 
 #Default editor:
 EDITOR="vim"
 
-function set-emacs30 () {
-    echo "Setting Emacs 30 no doom"
-    EMACS="/usr/local/Cellar/emacs-plus@29/29.0.50/bin/emacs"
-    EMACSDIR="$HOME/github/otherLibs/lisp/emacs30"
-    PATH=$EMACDIR/bin/:$PATH
-    alias emacs="$EMACS -nw"
-    alias emacsw="$EMACS"
-    if [[ -L "$HOME/.emacs.d" ]]; then
-        echo "Found .emacs.d link, retargeting"
-        rm $HOME/.emacs.d
-        ln -s $EMACSDIR $HOME/.emacs.d
-    else
-        echo "Not a link"
-    fi
-}
 
-function set-emacs-native () {
-    echo "Setting Emacs 28 Native"
-    EMACS="/usr/local/Cellar/emacs-plus@28/28.2/bin/emacs"
-    EMACSDIR="$HOME/github/otherLibs/lisp/doom_native"
-    DOOMDIR="$HOME/.doom.d"
-    PATH=$EMACSDIR/bin/:$PATH
-    alias emacs="$EMACS -nw"
-    alias emacsw="$EMACS"
-    if [[ -L "$HOME/.emacs.d" ]]; then
-        echo "Found .emacs.d link, retargeting"
-        rm $HOME/.emacs.d
-        ln -s $EMACSDIR $HOME/.emacs.d
-    else
-        echo "Not a link"
+# LOCS
+EMAIN_DIR="$HOME/github/otherLibs/lisp/doom_main"
+ENAT_DIR="$HOME/github/otherLibs/lisp/doom_native"
+E30_DIR="$HOME/github/otherLibs/lisp/emacs30"
+
+EMAIN_BIN="/usr/local/Cellar/emacs/28.2/bin/emacs"
+ENAT_BIN="/usr/local/Cellar/emacs-plus@28/28.2/bin/emacs"
+E30_BIN="/usr/local/Cellar/emacs-plus@29/29.0.50/bin/emacs"
+
+
+function check-emacs-d () {
+    jgd Setting Emacs-D
+    if [[ ! -e "$HOME/.emacs.d" ]]; then
+	ln -s "$EMACSDIR" "$HOME/.emacs.d"
+    fi
+
+    if [[ (-L "$HOME/.emacs.d")
+            && ($(readlink -f "$HOME/.emacs.d") != $(readlink -f "$EMACSDIR"))
+        ]]; then
+        rm "$HOME/.emacs.d"
+        ln -s "$EMACSDIR" "$HOME/.emacs.d"
     fi
 }
 
 function set-emacs () {
-    echo "Setting Base Emacs"
-    EMACS="/usr/local/Cellar/emacs/28.2/bin/emacs"
-    EMACSDIR="/Volumes/documents/github/otherLibs/lisp/doom_main"
     DOOMDIR="$HOME/.doom.d"
-    PATH=$EMACSDIR/bin/:$PATH
+    case "$1" in
+        "main")
+	    echo "Setting Main Emacs"
+            EMACS="$EMAIN_BIN"
+            EMACSDIR="$EMAIN_DIR"
+        ;;
+        "native")
+	    echo "Setting Native Emacs"
+            EMACS="$ENAT_BIN"
+            EMACSDIR="$ENAT_DIR"
+        ;;
+        "30")
+	    echo "setting Emacs30"
+            EMACS="$E30_BIN"
+            EMACSDIR="$E30_DIR"
+            DOOMDIR=""
+        ;;
+        *)
+            echo "Unrecognized emacs type"
+	    EMACS="$E30_BIN"
+            EMACSDIR="$E30_DIR"
+            DOOMDIR=""
+        ;;
+        esac
+    check-emacs-d
+    PATH="$EMACSDIR/bin/:$PATH"
     alias emacs="$EMACS -nw"
     alias emacsw="$EMACS"
-    if [[ -L "$HOME/.emacs.d" ]]; then
-        echo "Found .emacs.d link, retargeting"
-        rm $HOME/.emacs.d
-        ln -s $EMACSDIR $HOME/.emacs.d
-    else
-        echo "Not a link"
-    fi
+}
+
+function read-emacs () {
+    local curr_emacs="$(basename $(readlink -f $HOME/.emacs.d))"
+    case "$curr_emacs" in
+        "doom_main")
+            echo "currently doom main"
+            set-emacs "main"
+        ;;
+        "doom_native")
+            echo "currently doom native"
+            set-emacs "native"
+        ;;
+        "emacs")
+            echo "currently emacs30"
+            set-emacs "30"
+        ;;
+        *)
+            echo "unknown $curr_emacs"
+            set-emacs "30"
+        ;;
+    esac
 }
 
 function report-emacs () {
-    echo "Emacs is    : $EMACS"
-    echo "Emacs Dir is: $EMACSDIR"
-    echo "User  Dir is: $DOOMDIR"
+    echo "Emacs       : $EMACS"
+    echo ".emacs.d    : $EMACSDIR"
+    echo " .doom.d    : $DOOMDIR"
 }

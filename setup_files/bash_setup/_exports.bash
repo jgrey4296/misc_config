@@ -8,6 +8,9 @@ export PROMPT_NUM
 export JDK_HOME
 export JAVA_HOME
 export TERM
+export EMACS
+export EMACSDIR
+export DOOMDIR
 # export TMPDIR
 
 export -f conda_activate_for_scripts

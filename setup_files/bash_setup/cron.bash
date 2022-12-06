@@ -14,19 +14,19 @@ PDF_SUMMARY="/Volumes/documents/in_progress_pdfs/pdflib_automations/summary/"
 function conda_maintenance(){
     conda_activate_for_scripts
 
-    conda env export --from-history > $CONDA_MAINTENANCE_TARGET
-    echo "--------------------" >> $CONDA_MAINTENANCE_TARGET
+    conda env export --from-history > "$CONDA_MAINTENANCE_TARGET"
+    echo "--------------------" >> "$CONDA_MAINTENANCE_TARGET"
 
-    for f in ~/.shell_files/conda_envs/*.yaml; do
+    for f in "$HOME/.shell_files/conda_envs/*.yaml"; do
         name=`basename -s .yaml $f`
         echo "Found $name"
-        if conda_activate_for_scripts $name; then
+        if conda_activate_for_scripts "$name"; then
             echo "-------------------- Loaded $name"
             conda update --all -y
             # conda env export --from-history > $f
 
-            conda env export --from-history  >> $CONDA_MAINTENANCE_TARGET
-            echo "--------------------" >> $CONDA_MAINTENANCE_TARGET
+            conda env export --from-history  >> "$CONDA_MAINTENANCE_TARGET"
+            echo "--------------------" >> "$CONDA_MAINTENANCE_TARGET"
             echo "--------------------"
         fi
     done
@@ -36,12 +36,12 @@ function conda_maintenance(){
 }
 
 function cpu_check(){
-    if [ $# > 1 ]
+    if [[ $# > 1 ]]
     then
         CPU_MAX="$1"
     fi
 
-    if [ -z $CPU_MAX ]
+    if [[ -z "$CPU_MAX" ]]
     then
         CPU_MAX="50"
 
@@ -49,12 +49,12 @@ function cpu_check(){
 
     # echo "CPU Max: $CPU_MAX"
     CPU=( $(top -l1 -n0 | awk '/CPU/ {print $0}') )
-    UserPerc=( ${CPU[2]} )
+    UserPerc=( "${CPU[2]}" )
     TESTSTR="${UserPerc[0]/\%/} > ${CPU_MAX}"
-    HIGH=$(echo $TESTSTR | bc)
+    HIGH=$(echo "$TESTSTR" | bc)
 
     # echo "$TESTSTR : $HIGH"
-    if [ $HIGH -eq 1 ]
+    if [[ $HIGH -eq 1 ]]
     then
         say -v Moira -r 50 "CPU Usage is higher than ${CPU_MAX} %"
     # else
@@ -65,12 +65,12 @@ function cpu_check(){
 function dropbox_watcher(){
     conda_activate_for_scripts bookmark
 
-    for Dir in ${DROPBOX_WATCH[@]}
+    for Dir in "${DROPBOX_WATCH[@]}"
     do
-        echo "Dir: " $Dir
+        echo "Dir: " "$Dir"
         cd $Dir
         pwd
-        find . -maxdepth 1 -iregex ".+?*\.\(pdf\|epub\)" -print0 | xargs -0 -I {} mv -u -n {} $DROPBOX_TARGET
+        find . -maxdepth 1 -iregex ".+?*\.\(pdf\|epub\)" -print0 | xargs -0 -I {} mv -u -n {} "$DROPBOX_TARGET"
         find . -maxdepth 1 -iregex ".+?\.\(pdf\|epub\)" -printf "%f\n" -print0 | xargs -0 -I {} mv {} exists_{}
 
     done
@@ -82,27 +82,27 @@ function dropbox_watcher(){
 
 function git_url_backup(){
 
-    echo "" > $GIT_BKUP_TARGET
-    for Dir in $GIT_BKUP_WATCH/*
+    echo "" > "$GIT_BKUP_TARGET"
+    for Dir in "$GIT_BKUP_WATCH/*"
     do
         if [ -d $Dir ]
         then
             cd $Dir
             if git rev-parse --is-inside-work-tree > /dev/null 2> /dev/null
             then
-                echo $Dir | sed 's/^.*github/---- github/' >> $GIT_BKUP_TARGET
+                echo "$Dir" | sed 's/^.*github/---- github/' >> "$GIT_BKUP_TARGET"
                 Result=$( git config --local -l | awk '/url/ {print $0}' ) || "nothing"
-                echo $Result >> $GIT_BKUP_TARGET
-                echo "" >> $GIT_BKUP_TARGET
+                echo "$Result" >> "$GIT_BKUP_TARGET"
+                echo "" >> "$GIT_BKUP_TARGET"
             else
-                echo "---- $Dir" >> $GIT_BKUP_TARGET
-                echo "Not a repo" >> $GIT_BKUP_TARGET
-                echo "" >> $GIT_BKUP_TARGET
+                echo "---- $Dir" >> "$GIT_BKUP_TARGET"
+                echo "Not a repo" >> "$GIT_BKUP_TARGET"
+                echo "" >> "$GIT_BKUP_TARGET"
             fi
         fi
     done
 
-    cp $GIT_BKUP_TARGET $GIT_BKUP_DROPBOX
+    cp "$GIT_BKUP_TARGET" "$GIT_BKUP_DROPBOX"
 }
 
 function run_maintenance(){
@@ -134,6 +134,8 @@ function run_maintenance(){
     echo "Latex Update--------------------"
     latex_summarise
     # tlmgr update --all
+
+    # TODO rusutp / cargo
 
     echo "--------------------"
 }

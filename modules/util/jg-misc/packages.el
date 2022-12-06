@@ -16,7 +16,7 @@
 (package! origami)
 (package! semantic)
 (package! shell-pop)
-(package! timeline-mode :recipe (:local-repo "~/.doom.d/packages/timeline-mode"))
+(package! timeline-mode :recipe `(:local-repo ,(expand-file-name "packages/timeline-mode" doom-user-dir)))
 (package! undo-tree)
 (package! vlf)
 

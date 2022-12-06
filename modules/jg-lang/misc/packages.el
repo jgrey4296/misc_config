@@ -6,4 +6,4 @@
 (package! gradle-mode)
 (package! groovy-mode)
 
-(package! ob-plantuml   :recipe `(:local-repo "~/.doom.d/packages/org-babel-ext" :files ("ob-plantuml.el")))
+(package! ob-plantuml   :recipe `(:local-repo ,(expand-file-name "packages/org-babel-ext" doom-user-dir) :files ("ob-plantuml.el")))

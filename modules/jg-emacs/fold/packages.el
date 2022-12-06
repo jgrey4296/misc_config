@@ -6,4 +6,4 @@
 (package! origami)
 (package! vimish-fold )
 (package! evil-vimish-fold )
-(package! autohide-minor-mode :recipe '(:local-repo "~/.doom.d/packages/autohide-minor-mode"))
+(package! autohide-minor-mode :recipe `(:local-repo ,(expand-file-name "packages/autohide-minor-mode" doom-user-dir)))

@@ -5,4 +5,4 @@
 (package! hydra)
 (package! cl-lib :built-in t)
 (package! ivy)
-(package! rawtag-mode :recipe '(:local-repo "~/.doom.d/packages/rawtag-mode"))
+(package! rawtag-mode :recipe `(:local-repo ,(expand-file-name "packages/rawtag-mode" doom-user-dir)))

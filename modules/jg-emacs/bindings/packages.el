@@ -6,6 +6,6 @@
 (package! iedit)
 (package! link-hint )
 (package! expand-region)
-(package! which-mod :recipe (:local-repo "~/.doom.d/packages/which-mod"))
-(package! general-mod :recipe (:local-repo "~/.doom.d/packages/general-mod"))
+(package! which-mod :recipe `(:local-repo ,(expand-file-name "packages/which-mod" doom-user-dir)))
+(package! general-mod :recipe `(:local-repo ,(expand-file-name "packages/general-mod" doom-user-dir)))
 (package! which-key)

@@ -22,5 +22,6 @@
 (package! racer)
 (package! rust-mode)
 
+(package! cargo-makefile-mode :recipe `(:local-repo ,(expand-file-name "packages/cargo-makefile-mode" doom-user-dir)))
 
 ;;; packages.el ends here

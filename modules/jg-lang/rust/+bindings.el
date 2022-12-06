@@ -22,20 +22,21 @@
 (map! :after rustic
       :map rustic-mode-map
       :localleader
-      :desc "Docs: Rust"         "1" (cmd! (browse-url jg-rust-docs-url))
-      :desc "Docs: Cargo"        "2" (cmd! (browse-url jg-cargo-docs-url))
-      :desc "Docs: Stdlb"        "3" (cmd! (browse-url jg-rust-stdlib-url))
-      :desc "Docs: Editions"     "4" (cmd! (browse-url jg-rust-edition-url))
-      :desc "Docs: Rustdoc"      "5" (cmd! (browse-url jg-rustdoc-url))
-      :desc "Docs: Rust-CPython" "6" (cmd! (browse-url jg-rust-cpython-url))
-      :desc "Docs: Rust Py03"    "7" (cmd! (browse-url jg-rust-pyo3-url))
+      :prefix ("d" . "Docs")
+      :desc "Rust"         "1" (cmd! (browse-url jg-rust-docs-url))
+      :desc "Cargo"        "2" (cmd! (browse-url jg-cargo-docs-url))
+      :desc "Stdlb"        "3" (cmd! (browse-url jg-rust-stdlib-url))
+      :desc "Editions"     "4" (cmd! (browse-url jg-rust-edition-url))
+      :desc "Rustdoc"      "5" (cmd! (browse-url jg-rustdoc-url))
+      :desc "Rust-CPython" "6" (cmd! (browse-url jg-rust-cpython-url))
+      :desc "Rust Py03"    "7" (cmd! (browse-url jg-rust-pyo3-url))
       )
 
-(map! :after rust-mode
-      :map conf-mode-map
+(map! :map conf-toml-mode-map
+      :desc "Dependency ivy" :n  "?" #'+jg-rust-dependency-ivy
       :localleader
       :desc "Cargo reference"    "2" (cmd! (browse-url jg-rust-cargo-toml-url))
-
+      :desc "Cargo-Make"         "3" (cmd! (browse-url jg-rust-cargo-make-url))
       )
 
 (after! rustic

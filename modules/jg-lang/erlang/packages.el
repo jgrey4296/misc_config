@@ -20,7 +20,7 @@
 ;;
 ;;; Code:
 
-(package! ob-erlang           :recipe `(:local-repo "~/.doom.d/packages/org-babel-ext" :files ( "ob-erlang.el" )))
+(package! ob-erlang           :recipe `(:local-repo ,(expand-file-name "packages/org-babel-ext" doom-user-dir) :files ( "ob-erlang.el" )))
 
 
 ;;; packages.el ends here

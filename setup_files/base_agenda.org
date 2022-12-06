@@ -3,16 +3,15 @@
 * Base Agenda
 Death by Institution and the Harms of Abstraction.
 ** Main
-*** [[/Volumes/documents/github/acab][Acab]]
-*** [[/Volumes/documents/github/code_analysis][Code Analysis]]
-*** [[file:/Volumes/documents/github/MAS/instal-stable][Instal]]
+*** [[/Volumes/documents/github/python/acab][Acab]]
+*** [[/Volumes/documents/github/python/code_analysis][Code Analysis]]
+*** [[file:/Volumes/documents/github/python/instal][Instal]]
 ** Secondary
 *** [[file:/Volumes/documents/github/writing/orgfiles/listings/quotes.org][Quotes]]
 *** [[file:/Volumes/documents/github/writing/orgfiles/listings/definitions.org::*Overview][Definitions]]
 *** [[file:/Volumes/documents/github/writing/orgfiles/listings/taxonomies.org][Taxonomies]]
 *** [[/Volumes/documents/github/writing/orgfiles/listings/DSLs.org][DSLs]]
 *** [[file:~/github/writing/resources/bibliography][Bibliography]]
-*** [[~/github/languageLearning][Misc Language Repo]]
 *** [[~/.doom.d/setup_files/pomodoro_log.org][Pomodoro Log]]
 *** [[file:/volumes/documents//twitterthreads][Twitter Threads]]
 *** TODO [[file:/Volumes/documents/github/corpora][Darius Kuzemi's Corpora]]

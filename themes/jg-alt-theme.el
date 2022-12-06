@@ -1,42 +1,42 @@
 ;;-*- lexical-binding: t; no-byte-compile: t; -*-
-;;; jg-Iosvkem-theme.el, adapted from the original doom one
+;;; jg-alt-theme.el, adapted from the original doom one
 ;;
 
 (require 'doom-themes)
 
 
 ;;-- variables
-(defgroup jg-iosvkem-theme nil
+(defgroup jg-alt-theme nil
   "Options for the `doom-theme.el' theme."
   :group 'doom-themes)
 
-(defcustom jg-iosvkem-brighter-modeline nil
+(defcustom jg-alt-theme-brighter-modeline nil
   "If non-nil, more vivid colors will be used to style the mode-line."
-  :group 'jg-iosvkem-theme
+  :group 'jg-alt-theme
   :type 'boolean)
 
-(defcustom jg-iosvkem-brighter-comments t
+(defcustom jg-alt-theme-brighter-comments t
   "If non-nil, comments will be highlighted in more vivid colors."
-  :group 'jg-iosvkem-theme
+  :group 'jg-alt-theme
   :type 'boolean)
 
-(defcustom jg-iosvkem-comment-bg jg-iosvkem-brighter-comments
+(defcustom jg-alt-theme-comment-bg jg-alt-theme-brighter-comments
   "If non-nil, comments will have a subtle, darker background. Enhancing their
 legibility."
-  :group 'jg-iosvkem-theme
+  :group 'jg-alt-theme
   :type 'boolean)
 
-(defcustom jg-iosvkem-padded-modeline t
+(defcustom jg-alt-theme-padded-modeline t
   "If non-nil, adds a 4px padding to the mode-line. Can be an integer to
 determine the exact padding."
-  :group 'jg-iosvkem-theme
+  :group 'jg-alt-theme
   :type '(choice integer boolean))
 
 
 ;;-- end variables
 
 ;;; Theme definition
-(def-doom-theme jg-Iosvkem
+(def-doom-theme jg-alt-theme
   "A dark theme inspired by VIM Iosvkem"
   (
 ;;-- colours
@@ -119,18 +119,18 @@ determine the exact padding."
 
    (builtin        magenta)
 
-   (comments       (if jg-iosvkem-brighter-comments urlblue base6))
-   (doc-comments   (doom-lighten (if jg-iosvkem-brighter-comments dark-cyan base6) 0.25))
+   (comments       (if jg-alt-theme-brighter-comments urlblue base6))
+   (doc-comments   (doom-lighten (if jg-alt-theme-brighter-comments urlblue base6) 0.25))
 
-   (constants      green)
-   (functions      magenta)
-   (keywords       blue)
-   (methods        teal)
-   (operators      blue)
-   (type           cyan)
-   (strings        yellow)
-   (variables      dark-cyan)
-   (numbers        green)
+   (constants      aerugo21)
+   (keywords       aerugo16)
+   (functions      aerugo10)
+   (methods        aerugo11)
+   (operators      aerugo9)
+   (type           aerugo5)
+   (strings        aerugo3)
+   (variables      aerugo23)
+   (numbers        aerugo30)
 
 
    (error          red)
@@ -145,10 +145,10 @@ determine the exact padding."
 
 ;;-- custom categories
    (hidden     `(,(car bg) "black" "black"))
-   (-modeline-bright jg-iosvkem-brighter-modeline)
+   (-modeline-bright jg-alt-theme-brighter-modeline)
    (-modeline-pad
-    (when jg-iosvkem-padded-modeline
-      (if (integerp jg-iosvkem-padded-modeline) jg-iosvkem-padded-modeline 4)))
+    (when jg-alt-theme-padded-modeline
+      (if (integerp jg-alt-theme-padded-modeline) jg-alt-theme-padded-modeline 4)))
 
    (modeline-fg     nil)
    (modeline-fg-alt base6)
@@ -169,7 +169,7 @@ determine the exact padding."
 
 ;;-- faces
   (
-   ((font-lock-comment-face &override) :background (if jg-iosvkem-comment-bg (doom-lighten bg 0.05)) :slant 'italic)
+   ((font-lock-comment-face &override) :background (if jg-alt-theme-comment-bg (doom-lighten bg 0.05)) :slant 'italic)
    ((font-lock-doc-face &override) :slant 'normal)
    ((font-lock-function-name-face &override) :weight 'bold)
 
@@ -265,4 +265,4 @@ determine the exact padding."
 
   )
 
-;;; jg-iosvkem-theme.el ends here
+;;; jg-alt-theme.el ends here

@@ -45,3 +45,4 @@ create_default_packages:
   - sty
   - sympy
   - wheel
+  - toml

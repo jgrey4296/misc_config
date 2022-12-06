@@ -5,13 +5,14 @@
               jg-tag-global-tags (make-hash-table :test 'equal)
               jg-tag-alt-mapping (make-hash-table)
 
-              jg-tag-loc-bookmarks              "~/github/writing/resources/bookmarks/total.bookmarks"
-              jg-tag-loc-global-tags            "~/github/writing/resources/substitutions"
-              jg-tag-loc-twitter-account-index  "~/github/writing/resources/cron_reports/tw_acct.index"
-              jg-tag-loc-twitter-tag-index      "~/github/writing/resources/cron_reports/tw_tag.index"
-              jg-tag-loc-default-helm-directory "~/github/writing/resources/"
+              jg-tag-all-loc                    (expand-file-name "~/github/writing/resources/cron_reports/totals_total.tags")
+              jg-tag-loc-bookmarks              (expand-file-name "~/github/writing/resources/bookmarks/total.bookmarks")
+              jg-tag-loc-default-helm-directory (expand-file-name "~/github/writing/resources/")
+              jg-tag-loc-global-tags            (expand-file-name "~/github/writing/resources/substitutions")
               jg-tag-loc-twitter                "/Volumes/documents/twitterthreads/"
-              jg-tag-loc-twitter-grep-index     "~/github/writing/resources/cron_reports/grep_tags.index"
+              jg-tag-loc-twitter-account-index  (expand-file-name "~/github/writing/resources/cron_reports/tw_acct.index")
+              jg-tag-loc-twitter-grep-index     (expand-file-name "~/github/writing/resources/cron_reports/grep_tags.index")
+              jg-tag-loc-twitter-tag-index      (expand-file-name  "~/github/writing/resources/cron_reports/tw_tag.index")
 
               jg-tag-marker (make-marker)
               jg-tag-twitter-heading-helm-candidates nil
@@ -19,7 +20,6 @@
               jg-tag-twitter-grep-helm-candidates nil
               jg-tag-helm-buffer-name "*Helm Tags*"
 
-              jg-tag-all-loc "~/github/writing/resources/cron_reports/totals_total.tags"
               jg-tag-re-entrant-exit-tag "|"
               )
 

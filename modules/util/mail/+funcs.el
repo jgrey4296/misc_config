@@ -9,10 +9,10 @@
   ;;               smtpmail-smtp-server         "smtp.gmail.com"
   ;;               smtpmail-stream-type  'starttls
   ;;               smtpmail-smtp-service 587
-  ;;               auth-sources '("~/.authinfo"
+  ;;               auth-sources `(,(expand-file-name "~/.authinfo")
   ;;                              macos-keychain-generic
   ;;                              macos-keychain-internet
-  ;;                              "~/authinfo.gpg")
+  ;;                              ,(expand-file-name  "~/authinfo.gpg"))
   ;;               )
 
   (setq mu4e-use-fancy-chars nil

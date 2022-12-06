@@ -5,7 +5,7 @@
               jg-python-dev-cmd "-X dev"
 
               jg-python-pycache-cmd "-X pycache_prefix=%s"
-              jg-python-pycache-loc "~/.pycache"
+              jg-python-pycache-loc (expand-file-name  "~/.pycache")
 
               jg-python-docs-url           "https://docs.python.org/3/"
               jg-python-lib-url-suffix     "library/%s.html"
@@ -34,14 +34,14 @@
   (setq-default python-indent-offset 4
                 python-indent-guess-indent-offset nil
                 python-shell-completion-native-enable t
-                python-shell-virtualenv-root "~/anaconda3"
+                python-shell-virtualenv-root (expand-file-name  "~/anaconda")
                 python-pdbtrack-activate nil
                 py-pdbtrack-do-tracking-p nil
                 python-shell-completion-native-disabled-interpreters '("pypy")
 
                 python-shell-interpreter "python3"
                 python-shell-interpreter-args "-i"
-                python-shell-interpreter-path-args "/Volumes/documents/github/emacs_files/modules/jg-lang/python/repl_startup.py "
+                python-shell-interpreter-path-args (doom-module-expand-path :jg-lang 'python "repl_startup.py ")
                 )
   (modify-syntax-entry ?_ "_" python-mode-syntax-table)
   )

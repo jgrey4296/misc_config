@@ -26,7 +26,7 @@
 ;;-- end header
 
 ;;-- vars
-(defvar rawtags-base-target "~/github/writing/resources/substitutions")
+(defvar rawtags-base-target (expand-file-name "~/github/writing/resources/substitutions"))
 (defvar rawtags-tags-sub-target "tags")
 
 (defvar rawtags-special-tags '((acronym . "acronyms.sub")

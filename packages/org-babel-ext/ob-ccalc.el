@@ -1,3 +1,4 @@
+;; -*- no-byte-compile: t; -*-
 ;;; ob-ccalc.el --- org-babel functions for ccalc evaluation.
 
 ;; Author: John Grey <https://github.com/jgrey4296>
@@ -61,7 +62,7 @@
 (add-to-list 'org-babel-tangle-lang-exts '("ccalc" . "pl"))
 (add-to-list 'auto-mode-alist '("\\.ccalc$" . prolog-mode))
 
-(defvar org-babel-ccalc-location "~/github/ccalc/ccalc.pl")
+(defvar org-babel-ccalc-location (expand-file-name "~/github/ccalc/ccalc.pl"))
 (defvar org-babel-ccalc-command  "swipl6"
   "Name of the ccalc executable command.")
 (defconst org-babel-header-args:ccalc

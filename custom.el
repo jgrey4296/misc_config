@@ -139,6 +139,10 @@
        (mode . gnus-group-mode)
        (mode . gnus-summary-mode)
        (mode . gnus-article-mode)))))
+ '(ignored-local-variable-values
+   '((vc-prepare-patches-separately)
+     (diff-add-log-use-relative-names . t)
+     (vc-git-annotate-switches . "-w")))
  '(org-agenda-files '("/Users/johngrey/.doom.d/setup_files/base_agenda.org"))
  '(org-ref-insert-cite-key "C-c i")
  '(safe-local-variable-values '((eval +jg-python-activate-venv-and-conda)))

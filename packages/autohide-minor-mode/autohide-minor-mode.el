@@ -1,4 +1,4 @@
-;;; +autohide.el -*- lexical-binding: t; -*- no-byte-compile: t; -*-
+;;; +autohide.el -*- lexical-binding: t; no-byte-compile: t; -*-
 ;;-- requires
 (require 'vimish-fold)
 (require 's)

@@ -63,7 +63,7 @@
  (rear-context-string . "40 Oct  7 00:19 ")
  (position . 197))
 ("instal"
- (filename . "/Volumes/documents/github/MAS/instal-stable/")
+ (filename . "/Volumes/documents/github/python/instal/")
  (front-context-string . "dsl\n  drwxr-xr-x")
  (rear-context-string . "72 Jul 24 17:00 ")
  (position . 199))
@@ -98,7 +98,7 @@
  (rear-context-string . "9K Jul 19 06:40 ")
  (position . 146))
 ("acab"
- (filename . "/Volumes/documents/github/acab/")
+ (filename . "/Volumes/documents/github/python/acab/")
  (front-context-string . "acab\n  drwxr-xr-")
  (rear-context-string . "76 Jun 30 03:32 ")
  (position . 132))
@@ -173,7 +173,7 @@
  (rear-context-string . "18 Jun  4 09:26 ")
  (position . 313))
 ("code analysis"
- (filename . "/Volumes/documents/github/code_analysis/")
+ (filename . "/Volumes/documents/github/python/code_analysis/")
  (front-context-string . "code_analysis\n  ")
  (rear-context-string . "38 May  8 22:44 ")
  (position . 141))

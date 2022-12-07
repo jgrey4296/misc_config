@@ -201,6 +201,32 @@
       )
 ;;-- end jump
 
+;;-- change
+(map! :map jg-binding-change-map
+      :desc "Split Line"                  "RET" #'electric-newline-and-maybe-indent
+
+      :desc "Rot13"                       "'" #'evil-rot13
+      :desc "ispell-word"                 "=" #'ispell-word
+
+      :desc "Down"                        "d" #'evil-downcase
+      :desc "Decode url"                  "E" #'+evil:url-decode
+
+      :desc "Comment"                     "c" #'evilnc-comment-operator
+      :desc "Encode url"                  "e" #'+evil:url-encode
+      :desc "Shift Left"                  "h" #'evil-shift-left
+      :desc "Inflection"                  "i" #'evil-operator-string-inflection
+      :desc "Shift Right"                 "l" #'evil-shift-right
+
+      :desc "Surround"                    "s" #'evil-surround-region
+      :desc "Upper"                       "u" #'evil-upcase
+
+      :desc "Delete trailing whitespace"  "w" #'delete-trailing-whitespace
+      :desc "Delete trailing newlines"    "W" #'doom/delete-trailing-newlines
+      )
+
+
+;;-- end change
+
 ;;-- helm
 (map! :map jg-binding-helm-map
       :desc "Minibuffer History"           "m"   #'counsel-minibuffer-history

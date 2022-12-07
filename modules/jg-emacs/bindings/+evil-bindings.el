@@ -77,27 +77,6 @@
       :desc "Outer Select"       "a" (cmd! (evil-visual-char) (set-transient-map jg-binding-outer-text-objects-map))
       )
 (map! :map jg-binding-normal-state-map ;; paste
-      :prefix ("c" . "Change")
-      :desc "Split Line"                  "RET" #'electric-newline-and-maybe-indent
-
-      :desc "Rot13"                       "'" #'evil-rot13
-      :desc "ispell-word"                 "=" #'ispell-word
-
-      :desc "Down"                        "d" #'evil-downcase
-      :desc "Decode url"                  "E" #'+evil:url-decode
-
-      :desc "Comment"                     "c" #'evilnc-comment-operator
-      :desc "Encode url"                  "e" #'+evil:url-encode
-      :desc "Shift Left"                  "h" #'evil-shift-left
-      :desc "Inflection"                  "i" #'evil-operator-string-inflection
-      :desc "Shift Right"                 "l" #'evil-shift-right
-
-      :desc "Upper"                       "u" #'evil-upcase
-
-      :desc "Delete trailing whitespace"  "w" #'delete-trailing-whitespace
-      :desc "Delete trailing newlines"    "W" #'doom/delete-trailing-newlines
-       )
-(map! :map jg-binding-normal-state-map ;; paste
       :desc "Paste After"        "p"   #'evil-paste-after
       :prefix ("P" . "Paste")
       :desc "Paste After"        "l"   #'evil-paste-after
@@ -140,7 +119,7 @@
 ;;-- end normal state
 
 ;;-- visual state
-(map! :map jg-binding-visual-state-map
+(map! :map jg-binding-visual-state-map ;; enter/exit
       [escape] 'evil-normal-state
       :prefix ("v" . "Visual")
       :desc "buffer"       "RET"           #'mark-whole-buffer
@@ -164,7 +143,6 @@
       :desc "Visual Search"           "?"   #'evil-visualstar/begin-search-forward
 
       :desc "Paste Over"              "p"   #'evil-visual-paste
-      :desc "Surround"                "s"   #'evil-surround-region
       :desc "Yank"                    "y"   #'evil-yank
       )
 ;;-- end visual state
@@ -296,14 +274,16 @@
       :desc "B Motion"      "["   'jg-binding-backward-general-motion-map
       :desc "F Motion"      "]"   'jg-binding-forward-general-motion-map
       :desc "Jumping"       "s"   'jg-binding-jump-map
-
+      :desc "Change"        "c"   'jg-binding-change-map
       )
 
 (map! :map jg-binding-visual-state-map
-      :desc "Do Ops"           "g"  'jg-binding-operator-map
-      :desc "Visual Ops"       "z"  'jg-binding-vision-map
-      :desc "Inner Select"     "i"  'jg-binding-inner-text-objects-map
-      :desc "Outer Select"     "a"  'jg-binding-outer-text-objects-map
+      :desc "Do Ops"       "g"  'jg-binding-operator-map
+      :desc "Visual Ops"   "z"  'jg-binding-vision-map
+      :desc "Inner Select" "i"  'jg-binding-inner-text-objects-map
+      :desc "Outer Select" "a"  'jg-binding-outer-text-objects-map
+      :desc "Jumping"      "s"  'jg-binding-jump-map
+      :desc "Change"       "c"  'jg-binding-change-map
       )
 
 (map! :map jg-binding-motion-state-map

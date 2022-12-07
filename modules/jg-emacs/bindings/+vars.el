@@ -46,4 +46,5 @@
 (define-prefix-command 'jg-binding-helm-map                     nil "jgb-helm")
 (define-prefix-command 'jg-binding-operator-map                 nil "jgb-ops")
 (define-prefix-command 'jg-binding-vision-map                   nil "jgb-vision")
+(define-prefix-command 'jg-binding-change-map                   nil "jgb-change")
 ;;-- end maps

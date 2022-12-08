@@ -60,13 +60,18 @@ Type SPC or `y' to %s one match, DEL or `n' to skip to next,
     )
   )
 
-(defun +jg-dired-insert-subdir-maybe-recursive (dirname &optional switches)
+(defun +jg-dired-insert-subdir-maybe-recursive (&optional switches)
   "Insert Subdir tree in dired"
-  (interactive
-   (list (dired-get-filename)
-         (if current-prefix-arg +jg-dired-recursive-switches)))
-  (let ((current-prefix-arg nil))
-    (dired-maybe-insert-subdir dirname switches))
+  (interactive (list (if current-prefix-arg +jg-dired-recursive-switches)))
+
+  (let ((marked-files (dired-get-marked-files))
+        (current-prefix-arg nil)
+        )
+    (cl-loop for file in marked-files
+             do
+             (dired-maybe-insert-subdir file switches)
+             )
+    )
   )
 
 (defun +jg-dired-insert-marked-subdir ()

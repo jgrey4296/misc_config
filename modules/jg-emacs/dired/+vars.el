@@ -131,3 +131,16 @@
       jg-hash-check-buffer "*shasum*"
       )
 ;;-- end hash check
+
+;;-- fold spec
+(after! jg-fold-specs
+  (setq jg-dired-fold-spec `((dired-mode)
+                        :open-all   nil
+                        :close-all  nil
+                        :toggle     ,(cmd! (dired-hide-subdir 1))
+                        :open       nil
+                        :open-rec   nil
+                        :close      nil))
+  (push jg-dired-fold-spec evil-fold-list)
+  )
+;;-- end fold spec

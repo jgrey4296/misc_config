@@ -2,7 +2,7 @@
 
 ;;-- personal-vars
 (defvar jg-completion-file-template-rules (make-hash-table))
-(defvar jg-completion-file-templates-dir (expand-file-name "snippets/file-templates" doom-private-dir))
+(defvar jg-completion-file-templates-dir (expand-file-name "file-templates" doom-private-dir))
 (defvar jg-completion-file-templates-flat nil)
 (setq-default jg-completion-rps-have-you-played-loc "/Volumes/documents/github/writing/resources/urls/have-you-playeds"
               jg-completion-ivy-predicate-patterns (rx (or "*helpful"

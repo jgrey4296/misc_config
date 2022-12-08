@@ -1,0 +1,50 @@
+# -*- mode:doit; -*-
+# https://pydoit.org/
+
+##-- imports
+import pathlib as pl
+from doit.action import CmdAction
+from doit import create_after
+from doit.tools import create_folder, set_trace, Interactive, PythonInteractiveAction
+from doit.cmd_clean import Clean
+try:
+    # For py 3.11 onwards:
+    import tomllib as toml
+except ImportError:
+    # Fallback to external package
+    import toml
+##-- end imports
+
+##-- config
+with open("pyproject.toml", "r") as f:
+    pyproject = toml.load(f)
+
+build_dir = pl.Path("build")
+
+DOIT_CONFIG = {
+    "default_tasks" : [],
+    }
+
+##-- end config
+
+##-- util
+def make_task(func):
+    """ decorate a function to be a task-creator """
+    func.create_doit_tasks = func
+    return func
+
+def build_cmd(cmd, args):
+    return " ".join([cmd] + args)
+
+##-- end util
+
+##-- actions
+## Can have auto filled parameters of:
+## targets, dependencies, changed
+## and 'task' gives access to all metadata
+
+##-- end actions
+
+##-- tasks
+
+##-- end tasks

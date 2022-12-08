@@ -2,16 +2,49 @@
 # name: major-mode-template
 # --
 
+;;-- keymap
 (defvar-local $1-mode-map
   (make-sparse-keymap))
 
+;;-- end keymap
+
+;;-- font lock
 ;; List of '(regex (groupnum "face")+)
 (defconst $1-font-lock-keywords
-  (list
-  ;;`(,(rx ) (subexp facename override laxmatch))
-  )
+  (rx-let ((w (x) (: x (0+ blank)))
+           (ln (: punctuation line-end))
+           (basic-syms (| "@" "+" "!" "<-" "?" "-" "&"))
+           (basic-kws  (| "def" "return"))
+           )
+    (list
+     ;;`(,(rx ) (subexp facename override laxmatch))
+     )
+    )
   "Highlighting for $1-mode"
 )
+
+;;-- end font lock
+
+;;-- syntax-table
+(defvar $1-mode-syntax-table
+  (let ((st (make-syntax-table)))
+    (modify-syntax-entry ?. "." st)
+    (modify-syntax-entry ?! "." st)
+    (modify-syntax-entry ?$ "_" st)
+    ;;underscores are valid parts of words:
+    (modify-syntax-entry ?_ "w" st)
+    (modify-syntax-entry ?/ "<12" st)
+    (modify-syntax-entry ?\n ">" st)
+    (modify-syntax-entry ?\" "\"\"" st)
+    (modify-syntax-entry ?\( "()" st)
+    (modify-syntax-entry ?\[ "(]" st)
+    (modify-syntax-entry ?: ".:2" st)
+    st)
+  "Syntax table for the $1-mode")
+
+
+;;-- end syntax-table
+
 
 (define-derived-mode $1-mode fundamental-mode
   "$1"

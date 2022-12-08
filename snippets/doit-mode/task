@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name  : task
+# uuid  : task
+# key   : task
+# group :
+# --
+def task_$1() -> dict:
+    """:: Task definition """
+
+    return {
+        ## Required (callable | tuple(callable, *args, **kwargs))
+        "actions"     : [],
+        ## Optional
+        # "name"      : "...",
+        # Input
+        # "file_dep"  : [],
+        # "watch"     : [],
+        # Output
+        # "targets"   : [],
+        # "verbosity" : 0,
+    }

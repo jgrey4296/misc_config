@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name  : taskdict
+# uuid  : taskdict
+# key   : tdict
+# group :
+# --
+{
+        ## Required (callable | tuple(callable, *args, **kwargs))
+        "actions"     : [],
+        ## Optional
+        # "name"      : "...",
+        # "uptodate"  : [True],
+        # "setup"     : [],
+        # "teardown"  : [],
+        # "getargs"   : { "x": ("taskname", "savedVar")},
+        # Input
+        # "file_dep"  : [],
+        # "task_dep"  : [],
+        # "watch"     : [],
+        # Output
+        # "targets"   : [],
+        # "verbosity" : 0,
+}

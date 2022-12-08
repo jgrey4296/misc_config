@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name  : import.toml
+# uuid  : import.toml
+# key   : import.toml
+# group :
+# --
+try:
+    # For py 3.11 onwards:
+    import tomllib as toml
+except ImportError:
+    # Fallback to external package
+    import toml

@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name  : private-task
+# uuid  : private-task
+# key   : private
+# group :
+# --
+def _task_$1():
+    """:: not included in output """
+    return {
+        "actions"     : [],
+    }

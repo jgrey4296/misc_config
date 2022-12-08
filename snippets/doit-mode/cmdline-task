@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name  : task-cmdline
+# uuid  : task-cmdline
+# key   : task-cmdline
+# group :
+# --
+def task_$1() -> dict:
+    """:: Task definition """
+    cmd  = "$2"
+    args = []
+
+    return {
+        ## Required (callable | tuple(callable, *args, **kwargs))
+        "actions"     : [ build_cmd(cmd, args) ],
+        ## Optional
+        # "name"      : "...",
+        # Input
+        # "file_dep"  : [],
+        # "watch"     : [],
+        # Output
+        # "targets"   : [],
+        # "verbosity" : 0,
+    }

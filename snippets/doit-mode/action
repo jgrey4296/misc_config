@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name  : action
+# uuid  : action
+# key   : action
+# group :
+# --
+def action_$1($2, *args, **kwargs) -> None|bool|dict|string:
+    """ """
+
+    # return TaskFailed
+    return True

@@ -26,7 +26,7 @@ console_handler.setLevel(DISPLAY_LEVEL)
 file_handler.setLevel(logmod.DEBUG)
 # file_handler.setFormatter(logmod.Formatter(LOG_FORMAT))
 
-logger.addHandler(console_handler)
-logger.addHandler(file_handler)
+logging.addHandler(console_handler)
+logging.addHandler(file_handler)
 ##-- end Logging
 $0

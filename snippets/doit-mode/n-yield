@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name  : n-yield
+# uuid  : n-yield
+# key   : ny
+# group :
+# --
+yield {
+    "basename" : "$1",
+    "actions"  : [],
+}

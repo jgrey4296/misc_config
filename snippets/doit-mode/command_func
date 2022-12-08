@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name  : command_func
+# uuid  : command_func
+# key   : command_func
+# group :
+# --
+
+##-- command $1
+def command_$1(*args, **kwargs) -> str:
+
+    return ""
+
+command_$1_fn = CmdAction(command_$1)
+##-- end command $1

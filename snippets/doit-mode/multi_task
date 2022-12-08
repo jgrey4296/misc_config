@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name  : multi-task
+# uuid  : multi-task
+# key   : multi
+# group :
+# --
+def task_multi_$1():
+    """:: generate multiple tasks """
+
+    yield {
+        "basename" : "$1-1",
+        "actions"  : [],
+    }
+
+    yield {
+        "basename" : "$1-2",
+        "actions"  : [],
+    }

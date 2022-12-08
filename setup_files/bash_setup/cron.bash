@@ -8,7 +8,7 @@ DROPBOX_WATCH=( "$HOME/Dropbox/docs" "$HOME/Downloads" )
 DROPBOX_TARGET="/Volumes/documents/in_progress_pdfs/Current/"
 CONDA_MAINTENANCE_TARGET="$HOME/.shell_files/conda_envs/master_list.yaml"
 CPU_MAX="50"
-PDF_LIBRARY="~/pdflibrary/"
+PDF_LIBRARY="$HOME/pdflibrary/"
 PDF_SUMMARY="/Volumes/documents/in_progress_pdfs/pdflib_automations/summary/"
 
 function conda_maintenance(){
@@ -85,9 +85,8 @@ function git_url_backup(){
     echo "" > "$GIT_BKUP_TARGET"
     for Dir in "$GIT_BKUP_WATCH/*"
     do
-        if [ -d $Dir ]
-        then
-            cd $Dir
+        if [[ -d "$Dir" ]]; then
+            cd "$Dir"
             if git rev-parse --is-inside-work-tree > /dev/null 2> /dev/null
             then
                 echo "$Dir" | sed 's/^.*github/---- github/' >> "$GIT_BKUP_TARGET"

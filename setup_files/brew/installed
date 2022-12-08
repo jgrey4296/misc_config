@@ -26,6 +26,8 @@ docbook
 docbook-xsl
 elixir
 emacs
+emacs-plus@28
+emacs-plus@29
 erlang
 exiftool
 faust
@@ -237,6 +239,7 @@ tesseract
 texinfo
 theora
 trash
+tree-sitter
 unbound
 universal-ctags
 unixodbc

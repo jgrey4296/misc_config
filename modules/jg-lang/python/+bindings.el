@@ -87,6 +87,11 @@
       )
 )
 
+(map! :map inferior-python-mode-map
+      :after python
+      "TAB" #'+jg-completion-complete-or-snippet
+      )
+
 (map! :map cython-mode-map
       :after cython-mode
       :localleader

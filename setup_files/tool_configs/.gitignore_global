@@ -54,6 +54,7 @@ ehthumbs.db
 node_modules
 tmp/
 ~*
+.doit.db.db
 
 # Lisp:
 ac-comphist.dat
@@ -77,6 +78,7 @@ imgs/*
 *.secret
 .secrets.json
 secrets.config
+secrets.toml
 
 # Logs
 *.log

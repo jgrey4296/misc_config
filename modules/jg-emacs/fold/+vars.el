@@ -13,14 +13,14 @@
                                        ))
 
 ;;-- vimish-fold
-(setq jg-vimish-fold-spec '((vimish-fold-mode)
-                                 :delete     vimish-fold-delete
-                                 :open-all   vimish-fold-unfold-all
-                                 :close-all  vimish-fold-refold-all
-                                 :toggle     vimish-fold-toggle
-                                 :open       vimish-fold-unfold
-                                 :open-rec   nil
-                                 :close      vimish-fold-refold))
+(setq jg-fold-vimish-spec '((vimish-fold-mode)
+                            :delete     vimish-fold-delete
+                            :open-all   vimish-fold-unfold-all
+                            :close-all  vimish-fold-refold-all
+                            :toggle     vimish-fold-toggle
+                            :open       vimish-fold-unfold
+                            :open-rec   nil
+                            :close      vimish-fold-refold))
 
 (setq-default vimish-fold-header-width 50
 
@@ -28,7 +28,7 @@
 ;;-- end vimish-fold
 
 ;;-- hide show
-(setq jg-hs-fold-spec `((hs-minor-mode emacs-lisp-mode lisp-mode)
+(setq jg-fold-hs-spec `((hs-minor-mode emacs-lisp-mode lisp-mode)
                         :open-all   hs-show-all
                         :close-all  hs-hide-all
                         :toggle     hs-toggle-hiding
@@ -38,7 +38,7 @@
 ;;-- end hide show
 
 ;;-- origami
-(setq jg-origami-fold-spec `((origami-mode)
+(setq jg-fold-origami-spec `((origami-mode)
                              :open-all   ,(lambda () (origami-open-all-nodes (current-buffer)))
                              :close-all  ,(lambda () (origami-close-all-nodes (current-buffer)))
                              :toggle     ,(lambda () (origami-toggle-node (current-buffer) (point)))
@@ -48,7 +48,7 @@
 ;;-- end origami
 
 ;;-- outline
-(setq jg-outline-fold-spec `((outline-mode outline-minor-mode org-mode markdown-mode)
+(setq jg-fold-outline-spec `((outline-mode outline-minor-mode org-mode markdown-mode)
                              :open-all   outline-show-all
                              :close-all  ,(lambda ()
                                             (with-no-warnings (outline-hide-sublevels 1)))
@@ -62,7 +62,7 @@
 ;;-- end outline
 
 ;;-- c like ifdef
-(setq jg-ifdef-fold-spec `((hide-ifdef-mode)
+(setq jg-fold-ifdef-spec `((hide-ifdef-mode)
                            :open-all   show-ifdefs
                            :close-all  hide-ifdefs
                            :toggle     nil
@@ -72,7 +72,7 @@
 ;;-- end c like ifdef
 
 ;;-- diff mode
-(setq jg-diff-fold-spec `((vdiff-mode vdiff-3way-mode)
+(setq jg-fold-diff-spec `((vdiff-mode vdiff-3way-mode)
                           :open-all   vdiff-open-all-folds
                           :close-all  vdiff-close-all-folds
                           :toggle     ,(lambda () (call-interactively 'vdiff-toggle-fold))
@@ -83,12 +83,12 @@
 
 ;;-- all together
 (setq jg-fold-vars-fold-list (list
-                             jg-diff-fold-spec
-                             jg-ifdef-fold-spec
-                             jg-outline-fold-spec
-                             jg-origami-fold-spec
-                             jg-hs-fold-spec
-                             jg-vimish-fold-spec
+                             jg-fold-diff-spec
+                             jg-fold-ifdef-spec
+                             jg-fold-outline-spec
+                             jg-fold-origami-spec
+                             jg-fold-hs-spec
+                             jg-fold-vimish-spec
                              ))
 (setq evil-fold-list jg-fold-vars-fold-list)
 ;;-- end all together

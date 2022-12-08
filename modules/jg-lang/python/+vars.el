@@ -111,6 +111,9 @@
      ("_cli.+\\.py$"    :trigger "__cli"            :mode python-mode)
      ("conf\\.py$"      :trigger "__conf"           :mode python-mode)
      ("setup\\.py$"     :trigger "__setup"          :mode python-mode)
+     ("dodo\\.py$"      :trigger "__dodo"           :mode python-mode)
+     ("SConstruct"      :trigger "__sconstruct"     :mode python-mode)
+     ("SConscript"      :trigger "__sconscript"     :mode python-mode)
      ("\\.py$"          :trigger "__"               :mode python-mode :priority -99)
      (python-mode       :trigger "__" :priority -100)
      )
@@ -128,6 +131,21 @@
   )
 
 ;;-- end browse providers
+
+;;-- fold
+(setq jg-python-fold-spec '((python-mode)
+                            :close     +jg-python-close-class-defs
+                            :close-all +jg-python-close-all-defs
+                            :open      outline-toggle-children
+                            :open-all  outline-show-all
+                            :open-rec  outline-show-subtree
+                            :toggle    outline-toggle-children
+                            )
+      )
+(after! jg-fold-specs
+  (push jg-python-fold-spec evil-fold-list)
+  )
+;;-- end fold
 
 ;;-- obsolete
 ;; (defvar +python-ipython-command '("ipython" "-i" "--simple-prompt" "--no-color-info")

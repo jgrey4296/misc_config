@@ -12,6 +12,9 @@
   )
 (load! "+advice")
 (load! "+env")
+(after! python
+  (load! "+derived-modes")
+  )
 
 (use-package! pyimport
   :demand
@@ -51,17 +54,6 @@
 )
 
 
-(after! evil
-  (setq evil-fold-list (cons '((python-mode)
-                               :close     +jg-python-close-class-defs
-                               :close-all +jg-python-close-all-defs
-                               :open      outline-toggle-children
-                               :open-all  outline-show-all
-                               :open-rec  outline-show-subtree
-                               :toggle    outline-toggle-children
-                               )
-                             evil-fold-list))
-  )
 
   ;; (use-package! lsp-python-ms
   ;;   :unless (modulep! :lang python +pyright)

@@ -4,4 +4,4 @@
 # key   : command
 # group :
 # --
-command_$1 = "$2"
+command_$1 = build_cmd("$1", [])

@@ -36,6 +36,20 @@ def make_task(func):
 def build_cmd(cmd, args):
     return " ".join([cmd] + args)
 
+
+class JGCmdTask:
+
+    def __init__(self, cmd, *args, **kwargs):
+        self.create_doit_tasks = self.make
+        self.cmd = cmd
+        self.args = args
+        self.kwargs = kwargs
+
+    def make(self) -> dict:
+        task_descr = self.kwargs.copy()
+        task_desc['actions'] = [ build_cmd(self.cmd, self.args) ]
+        return task_desc
+
 ##-- end util
 
 ##-- actions

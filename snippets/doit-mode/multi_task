@@ -8,11 +8,11 @@ def task_multi_$1():
     """:: generate multiple tasks """
 
     yield {
-        "basename" : "$1-1",
+        "name" : "1",
         "actions"  : [],
     }
 
     yield {
-        "basename" : "$1-2",
+        "name" : "2",
         "actions"  : [],
     }

@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name  : gtags-tool
+# uuid  : gtags-tool
+# key   : gtags-tool
+# group :
+# --
+
+##-- gtags
+[tool.gtags]
+verbosity = 0
+
+##-- end gtags

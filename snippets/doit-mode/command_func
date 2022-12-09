@@ -6,9 +6,9 @@
 # --
 
 ##-- command $1
-def command_$1(*args, **kwargs) -> str:
+def command_$1(cmd, *args, **kwargs) -> str:
 
-    return ""
+    return build_cmd(cmd, args)
 
 command_$1_fn = CmdAction(command_$1)
 ##-- end command $1

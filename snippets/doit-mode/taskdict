@@ -5,19 +5,30 @@
 # group :
 # --
 {
-        ## Required (callable | tuple(callable, *args, **kwargs))
-        "actions"     : [],
+        ## Required:
+        # "actions"   : ((list, tuple), (None,)),
         ## Optional
-        # "name"      : "...",
-        # "uptodate"  : [True],
-        # "setup"     : [],
-        # "teardown"  : [],
-        # "getargs"   : { "x": ("taskname", "savedVar")},
-        # Input
-        # "file_dep"  : [],
-        # "task_dep"  : [],
-        # "watch"     : [],
-        # Output
-        # "targets"   : [],
-        # "verbosity" : 0,
+        # "targets"   : ((list, tuple), ()),
+        # "verbosity" : ((), (None, 0, 1, 2,)),
+
+        # "basename"  : (string_types, ()),
+        # "title"     : ((Callable,), (None,)),
+        # "name"      : (string_types, ()),
+        # "meta"      : ((dict,), (None,))
+        # "doc"       : (string_types, (None,)),
+        # dependencies
+        # "calc_dep"  : ((list, tuple), ()),
+        # "task_dep"  : ((list, tuple), ()),
+        # "file_dep"  : ((list, tuple), ()),
+        # Pre/Post
+        # "setup"     : ((list, tuple), ()),
+        # "teardown"  : ((list, tuple), ()),
+        # "clean"     : ((list, tuple), (True,)),
+
+        # "getargs"   : ((dict,), ()),
+        # "io"        : ((dict,), (None,)),
+        # "params"    : ((list, tuple,), ()),
+        # "pos_arg"   : (string_types, (None,)),
+        # "uptodate"  : ((list, tuple), ()),
+        # "watch"     : ((list, tuple), ()),
 }

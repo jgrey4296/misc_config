@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name  : pytest-tool
+# uuid  : pytest-tool
+# key   : pytest-tool
+# group :
+# --
+##-- pytest
+[tool.pytest.ini_options]
+log_cli       = false
+log_level     = "DEBUG"
+log_cli_level = "DEBUG"
+
+##-- end pytest

@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name  : checkdir
+# uuid  : checkdir
+# key   : checkdir
+# group :
+# --
+def _task_$1_dircheck():
+    """:: Create directories if they are missing """
+    make = "mkdir -p %(targets)s"
+    echo = "echo making %(targets)s"
+    return {
+        "actions"   : [ CmdAction(f"{make}; {echo}") ],
+        "targets"   : [ $2 ],
+        "uptodate"  : [ lambda task: all([pl.Path(x).exists() for x in task.targets]) ],
+        # "clean" : [ True, doit.task.clean_targets, force_clean_targets],
+    }

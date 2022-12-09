@@ -9,7 +9,6 @@ alias sclangel="sclang -d ~/github/.super_collider_classes/ -r -s -i emacs"
 jgd Setting Doom Emacs data
 
 jgd Setting Gtags Data
-GTAGSCONF="$HOME/.shell_files/gtags.conf"
 GTAGSLABEL="pygments"
 
 #Default editor:

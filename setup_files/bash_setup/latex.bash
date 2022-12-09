@@ -14,4 +14,4 @@ PATH=/usr/local/texlive/2022basic/bin/universal-darwin:$PATH
 #TEXINPUTS=/Volumes/DOCUMENTS/Dropbox/Scripts/tex/:$TEXINPUTS
 
 
-TEXMFCNF=~/.shell_files/tool_configs:
+TEXMFCNF=~/.shell_files/tool_configs/texmf.cnf

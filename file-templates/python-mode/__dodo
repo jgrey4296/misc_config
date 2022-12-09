@@ -5,8 +5,8 @@
 import pathlib as pl
 from doit.action import CmdAction
 from doit import create_after
-from doit.tools import create_folder, set_trace, Interactive, PythonInteractiveAction
-from doit.cmd_clean import Clean
+from doit.tools import set_trace, Interactive, PythonInteractiveAction
+from doit.tasks import clean_targets
 try:
     # For py 3.11 onwards:
     import tomllib as toml
@@ -37,7 +37,26 @@ def build_cmd(cmd, args):
     return " ".join([cmd] + args)
 
 
+def force_clean_targets(task, dryrun):
+    """ remove all targets from a task
+    Add to a tasks 'clean' dict value
+    """
+    for target_s in sorted(task.targets, reverse=True):
+        try:
+            target = pl.Path(target_s)
+            if dryrun:
+                print("%s - dryrun removing '%s'" % (task.name, target))
+                continue
+
+            print("%s - removing '%s'" % (task.name, target))
+            if target.is_file():
+                target.remove()
+            elif target.is_dir():
+                shutil.rmtree(str(target))
+        except OSError as err:
+            print(err)
 class JGCmdTask:
+    """ Utility to create basic command line tasks in one line """
 
     def __init__(self, cmd, *args, **kwargs):
         self.create_doit_tasks = self.make

@@ -203,6 +203,22 @@
       "1" (cmd! (browse-url "https://joaotavora.github.io/yasnippet/snippet-development.html"))
       )
 
+(map! :leader
+      :prefix "y"
+      :desc "Snippet Dir"        "1" (cmd! (find-file +snippets-dir))
+      :desc "File-templates Dir" "2" (cmd! (find-file jg-completion-file-templates-dir))
+      :desc "Cookiecutters Dir"  "3" (cmd! (find-file (expand-file-name "cookie_templates" doom-user-dir)))
+
+      :desc "Temp Template"  :v "t" (cmd! (if (eq evil-state 'visual)
+                                              (setq aya-current (buffer-substring evil-visual-beginning evil-visual-end))
+                                            (aya-expand)))
+      :desc "New snippet"           "n" #'+jg-completion-new-snippet
+      :desc "Expand Snippet"        "y" #'yas-expand-from-trigger-key
+      :desc "Edit Snippet"          "e" #'yas-visit-snippet-file
+      :desc "Insert snippet"        "i" #'yas-insert-snippet
+      :desc "Find global snippet"   "/" #'yas-visit-snippet-file
+      :desc "Reload snippets"       "r" #'yas-reload-all
+      )
 ;;-- end snippets
 
 ;;-- lisp
@@ -227,11 +243,9 @@
       :desc "Switch buffer"         ","     #'+jg-completion-switch-buffer
       :desc "Popup Buffer"          "<"     #'+jg-completion-popup-buffer
       :desc "Have you Played?"      "o 1"   #'+jg-completion-rps-have-you-playeds
-      :desc "New snippet"           "y n"   #'+jg-completion-new-snippet
-      :desc "File-Templates"        "y f"   (cmd! (find-file jg-completion-file-templates-dir))
       :desc "Workspace Counsel"     "w RET" #'+jg-completion-counsel-workspace
       )
-;;-- end leader helms
+;;-- end leader helms/ivys
 
 ;;-- shell
 (map! :map shell-mode-map

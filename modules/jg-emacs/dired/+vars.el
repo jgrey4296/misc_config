@@ -30,85 +30,51 @@
 ;;-- end dired-misc
 
 ;;-- omit-patterns
-(setq dired-omit-files (rx line-start
-                           (or "GPATH"
-                               "GRTAGS"
-                               "GTAGS"
-                               "gradle"
-                               "gradlew"
-                               "gradlew.bat"
-                               "__pycache__"
-                               "Icon\015"
-                               ".."
-                               "TheVolumeSettingsFolder"
-                               (and (*? anychar) ".egg-info")
-                               (and (*? anychar) ".elc")
-                               (and "log" ?. (*? anychar))
-                               (and "flycheck"
-                                    (*? anychar)
-                                    ".py")
-                               (and ?.
-                                    (? (or
-                                        "DS_Store"
-                                        "ccls-cache"
-                                        "class"
-                                        "debris"
-                                        "elc"
-                                        "git"
-                                        "gitignore"
-                                        "mypy.ini"
-                                        "mypy_cache"
-                                        "o"
-                                        "pylintrc"
-                                        "pyo"
-                                        "pytest_cache"
-                                        "svn"
-                                        "gradle"
-                                        "swp"
-                                        "node_modules"
-                                        "venv"
-                                        "auctex-auto"
-                                        (and "js" (? ".meta"))
-                                        (and "project" (? "ile"))
-                                        "PKInstallSandboxManager"
-                                        "TemporaryItems"
-                                        "Trashes"
-                                        "fseventsd"
-                                        "DocumentRevisions-V100"
-                                        "Spotlight-V100"
-                                        "apdisk"
-                                        "Trash"
-                                        "cache"
-                                        "cups"
-                                        "gem"
-                                        "ipython"
-                                        "jupyter"
-                                        "matplotlib"
-                                        "mono"
-                                        "npm"
-                                        "ncftp"
-                                        "offlineimap"
-                                        "rustup"
-                                        "swt"
-                                        "thumbnails"
-                                        "npm-global"
-                                        "swipl-dir-history"
-                                        "CFUserTextEncoding"
-                                        "dropbox.cache"
-                                        "dropbox"
-                                        "com.apple.timemachine.donotpresent"
-                                        "_.TemporaryItems"
-                                        "_.Trashes"
-                                        "_.apdisk"
-                                        "_.com.apple.timemachine.donotpresent"
-                                        "_TheVolumeSettingsFolder"
-                                        )
-                                       )
-                                    )
-                               )
-                           line-end
-                           )
-      )
+
+(rx-let ((filename (*? graph))
+         (system (| ".." "TheVolumeSettingsFolder" (: ?. (? filename) "cache")))
+         (dotfiles (: ?. (? "_.") (| "CFUserTextEncoding" "DS_Store" "DocumentRevisions-V100" "PKInstallSandboxManager"
+                                     "Spotlight-V100" "TemporaryItems" "Trash" "Trashes" "apdisk" "com.apple.timemachine.donotpresent"
+                                     "TheVolumeSettingsFolder"
+                                     "cups" "debris" "fseventsd"
+                                     "offlineimap" "ncftp"
+                                     (: "js" (? ".meta"))
+                                     )))
+         (icons    (| "Icon\015"  (: ?. "thumbnails") ))
+         (gtags    (| "GPATH" "GRTAGS" "GTAGS"))
+         (build-tools (| "gradlew" "gradlew.bat" (: ?. (| "gradle" "rustup" "doit.db.db" "mono" (: "node" (? "_modules")) (: "npm" (? "-global)"))))))
+         (python   (| "__pycache__" (: filename ".egg-info") (: "flycheck" filename ".py") (: ?. (| "ipython" "jupyter" "matplotlib" "mypy.ini" ))))
+         (compiled (| (: filename (: ?. "o" "elc" "pyo"))))
+         (prolog   (| (: ?. (| "swipl-dir-history" "swp" "swt" ))))
+         (java     (| (: filename ".class")))
+         (logs     (| (: "log." filename)))
+         (configs  (| (: ?. (| (: filename "rc") (: "project" (? "ile")) "venv" ))))
+         (latex    (| (: ?. (| "auctex-auto" ))))
+         (dropbox  (| (: ?. "dropbox" )))
+         (ruby     (| (: ?. "gem")))
+         (vcs      (| (: ?. (| (:"git" (? "ignore")) "svn" ))))
+         )
+  (setq dired-omit-files (rx line-start (| system
+                                           dotfiles
+                                           icons
+                                           gtags
+                                           build-tools
+                                           python
+                                           compiled
+                                           prolog
+                                           java
+                                           logs
+                                           configs
+                                           latex
+                                           dropbox
+                                           ruby
+                                           vcs
+                                           )
+                             line-end
+                             )
+        )
+  )
+
 ;;-- end omit-patterns
 
 ;;-- image-dired

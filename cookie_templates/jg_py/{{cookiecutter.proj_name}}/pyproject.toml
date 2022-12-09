@@ -17,16 +17,20 @@ classifiers     = [
 dependencies   = []
 
 [project.optional-dependencies]
-test = [
-  "pytest < 5.0.0",
-]
+docs = [ "sphinx" ]
+dev  = ["doit"]
+test = ["pytest < 5.0.0"]
 
+##-- urls
 [project.urls]
 homepage      = "https://github.com/{{cookiecutter._github_username}}/{{cookiecutter.proj_name}}"
 documentation = "https://readthedocs.org/{{cookiecutter.proj_name}}"
 repository    = "https://github.com/{{cookiecutter._github_username}}/{{cookiecutter.proj_name}}"
 changelog     = "https://github.com//{{cookiecutter.proj_name}}/blob/master/CHANGELOG.md"
 
+##-- end urls
+
+##-- scripts
 [project.scripts]
 {{cookiecutter.proj_name}} = {{cookiecutter.proj_name}}.{{cookiecutter.entry_point}}:main
 
@@ -36,6 +40,9 @@ changelog     = "https://github.com//{{cookiecutter.proj_name}}/blob/master/CHAN
 [project.entry-points."nothing"]
 # tomatoes      = "spam:main_tomatoes"
 
+##-- end scripts
+
+##-- build-system
 [build-system]
 requires = [
          "setuptools",
@@ -59,6 +66,9 @@ where = ["."]
 [tool.setuptools.exclude-package-data]
 
 
+##-- end build-system
+
+##-- pyright
 [tool.pyright]
 # strict = {{cookiecutter.proj_name}}.*
 verboseOutput               = true
@@ -76,7 +86,35 @@ reportUnknownVariableType   = "warning"
 reportUnnecessaryCast       = "information"
 reportUnnecessaryIsInstance = "warning"
 
+##-- end pyright
+
+##-- pytest
 [tool.pytest.ini_options]
 log_cli       = false
 log_level     = "DEBUG"
 log_cli_level = "DEBUG"
+
+##-- end pytest
+
+##-- doit
+
+[tool.doit]
+# backend                = "json"
+verbosity                = 0
+action_string_formatting = "new"
+build_dir                = "build"
+
+# [tool.doit.commands.{command}]
+
+# [tool.doit.tasks.{task}]
+
+##-- end doit
+
+##-- sphinx
+# Use in doit
+# reference https://www.sphinx-doc.org/en/master/man/sphinx-build.html
+[tool.sphinx]
+builder   = "html"
+docs_dir  = "docs"
+verbosity = 0
+##-- end sphinx

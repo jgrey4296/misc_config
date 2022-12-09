@@ -19,7 +19,6 @@ import warnings
 with warnings.catch_warnings():
     warnings.simplefilter("ignore")
     import {{cookiecutter.proj_name}}
-    acab.setup()
 
 # -- Project information -----------------------------------------------------
 

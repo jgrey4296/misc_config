@@ -147,7 +147,10 @@
  '(org-ref-insert-cite-key "C-c i")
  '(safe-local-variable-values '((eval +jg-python-activate-venv-and-conda)))
  '(warning-suppress-log-types '((flycheck syntax-checker)))
- '(warning-suppress-types '((org-element-cache) (flycheck syntax-checker))))
+ '(warning-suppress-types
+   '(((python python-shell-completion-native-turn-on-maybe))
+     (org-element-cache)
+     (flycheck syntax-checker))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

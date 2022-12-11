@@ -1,0 +1,14 @@
+{
+    "proj_name"   : "jg_py_template_project",
+    "desc"        : "A Template Godot Project",
+    "tags"        : "godot",
+    "entry_point" : "default",
+    "_author"     : "me",
+    "_email"      : "my@email.com",
+    "_short_name" : "me",
+    "_github_username": "me",
+    "_copy_without_render" : [
+        "*docs/_static",
+        "*docs/_templates"
+    ]
+}

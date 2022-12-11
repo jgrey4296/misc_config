@@ -22,8 +22,83 @@
 (use-package! lsp-jedi
   :defer)
 
+(use-package! python-mode
+  :mode ("[./]flake8\\'" . conf-mode)
+  :mode ("/Pipfile\\'" . conf-mode)
+  :init
+  (setq python-environment-directory doom-cache-dir
+        python-indent-guess-indent-offset-verbose nil)
 
-(use-package-hook! python :post-config
+  (when (modulep! +lsp)
+    (add-hook 'python-mode-local-vars-hook #'lsp! 'append)
+    ;; Use "mspyls" in eglot if in PATH
+    (when (executable-find "Microsoft.Python.LanguageServer")
+      (set-eglot-client! 'python-mode '("Microsoft.Python.LanguageServer"))))
+
+  (when (modulep! +tree-sitter)
+    (add-hook 'python-mode-local-vars-hook #'tree-sitter! 'append))
+  :config
+  (set-repl-handler! 'python-mode #'+python/open-repl
+    :persist t
+    :send-region #'python-shell-send-region
+    :send-buffer #'python-shell-send-buffer)
+  (set-docsets! '(python-mode inferior-python-mode) "Python 3" "NumPy" "SciPy" "Pandas")
+
+  (set-ligatures! 'python-mode
+    ;; Functional
+    :def "def"
+    :lambda "lambda"
+    ;; Types
+    :null "None"
+    :true "True" :false "False"
+    :int "int" :str "str"
+    :float "float"
+    :bool "bool"
+    :tuple "tuple"
+    ;; Flow
+    :not "not"
+    :in "in" :not-in "not in"
+    :and "and" :or "or"
+    :for "for"
+    :return "return" :yield "yield")
+
+  ;; Stop the spam!
+  (setq python-indent-guess-indent-offset-verbose nil)
+
+  ;; Default to Python 3. Prefer the versioned Python binaries since some
+  ;; systems link the unversioned one to Python 2.
+  (when (and (executable-find "python3")
+             (string= python-shell-interpreter "python"))
+    (setq python-shell-interpreter "python3"))
+
+  (add-hook! 'python-mode-hook
+    (defun +python-use-correct-flycheck-executables-h ()
+      "Use the correct Python executables for Flycheck."
+      (let ((executable python-shell-interpreter))
+        (save-excursion
+          (goto-char (point-min))
+          (save-match-data
+            (when (or (looking-at "#!/usr/bin/env \\(python[^ \n]+\\)")
+                      (looking-at "#!\\([^ \n]+/python[^ \n]+\\)"))
+              (setq executable (substring-no-properties (match-string 1))))))
+        ;; Try to compile using the appropriate version of Python for
+        ;; the file.
+        (setq-local flycheck-python-pycompile-executable executable)
+        ;; We might be running inside a virtualenv, in which case the
+        ;; modules won't be available. But calling the executables
+        ;; directly will work.
+        (setq-local flycheck-python-pylint-executable "pylint")
+        (setq-local flycheck-python-flake8-executable "flake8"))))
+
+  ;; Affects pyenv and conda
+  (when (modulep! :ui modeline)
+    (advice-add #'pythonic-activate :after-while #'+modeline-update-env-in-all-windows-h)
+    (advice-add #'pythonic-deactivate :after #'+modeline-clear-env-in-all-windows-h))
+
+  (setq-hook! 'python-mode-hook tab-width python-indent-offset))
+
+
+(use-package-hook! python-mode :post-config
   (setq python-mode-hook nil)
   (setq python-mode-local-vars-hook nil)
   (add-hook! 'python-mode-hook #'outline-minor-mode

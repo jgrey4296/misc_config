@@ -163,7 +163,7 @@ It's platform specific in that it uses the platform's native path separator."
 (define-advice +python/open-repl (:override ()
                                   +jg-python-env-activate-advice)
   " Auto-detect python repl and activate environment if necessary "
-  (require 'python)
+  (require 'python-mode)
   (unless python-shell-interpreter
     (user-error "`python-shell-interpreter' isn't set"))
   ;; look for a venv

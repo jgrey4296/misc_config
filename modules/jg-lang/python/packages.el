@@ -3,6 +3,8 @@
 
 (package! jg-python-origami :recipe `(:local-repo ,(expand-file-name "packages/jg-python-origami" doom-user-dir)))
 ;; (package! python :recipe `(:local-repo ,(expand-file-name  "~/github/otherLibs/lisp/emacs-src/lisp/progmodes") :files ("python.el")))
+(package! python-mode :recipe (:host gitlab :repo "python-mode-devs/python-mode" :branch "master"))
+
 (package! pipenv :disable t)
 (package! pyimport :disable t)
 ;; (package! lsp-jedi)

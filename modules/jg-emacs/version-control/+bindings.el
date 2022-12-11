@@ -23,7 +23,8 @@
 (map! :after (git-commit magit-status)
       :map (git-commit-mode-map magit-status-mode)
       :localleader
-      "1" (cmd! (browse-url "https://git-scm.com/doc"))
+      :desc "Git Docs"    "1" (cmd! (browse-url "https://git-scm.com/doc"))
+      :desc "Insert Tag"  "i" #'+jg-vcs-insert-tag
       )
 (map! :after jg-bindings-total
       :leader

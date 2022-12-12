@@ -23,7 +23,7 @@
                             :close      vimish-fold-refold))
 
 (setq-default vimish-fold-header-width 50
-
+              vimish-fold-persist-on-saving nil
               )
 ;;-- end vimish-fold
 

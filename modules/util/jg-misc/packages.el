@@ -33,7 +33,6 @@
 (package! jabber          :disable t)
 (package! open-junk-file  :disable t)
 (package! paradox         :disable t)
-(package! pyenv           :disable t)
 (package! rcirc           :disable t)
 (package! ruby-test-mode  :disable t)
 (package! selectric-mode  :disable t)

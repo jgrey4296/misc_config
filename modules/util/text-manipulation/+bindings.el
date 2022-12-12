@@ -19,6 +19,7 @@
        )
       (:prefix "i"
        :desc "Debug"     "d" #'+jg-text-insert-debug
+       :desc "License"   "l" #'license-templates-insert
        )
       )
 
@@ -103,4 +104,9 @@
 (map! :map (ivy-minibuffer-map minibuffer-mode-map)
       :n "<" #'beginning-of-line
       :n ">" #'end-of-line
+      )
+
+(map! :map license-mode-map
+      :localleader
+      :desc "License Reference" "1" (cmd! (browse-url "https://choosealicense.com/licenses/"))
       )

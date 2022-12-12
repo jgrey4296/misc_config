@@ -8,3 +8,4 @@
 (package! helm-wordnet)
 (package! wordnut)
 (package! rotate-text)
+(package! license-templates)

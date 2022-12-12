@@ -49,7 +49,9 @@ _m_odeline ^^^^                           _c_ursor
   ("h" #'global-hl-line-mode          nil  :exit nil)
   ("t" #'toggle-truncate-lines        nil  :exit nil)
   ("w" #'whitespace-mode              nil  :exit nil)
-  ("a" #'global-autohide-minor-mode   nil  :exit nil)
+  ("a" (message "Autohide start hidden %s"
+                (setq autohide-minor-mode-start-hidden (not autohide-minor-mode-start-hidden))
+                nil  :exit nil))
   ("c" #'global-centered-cursor-mode  nil  :exit nil)
   ("e" #'+jg-browse-toggle-browsing   nil  :exit nil)
   ("p" #'+jg-browse-toggle-preview    nil  :exit nil)

@@ -4,11 +4,13 @@
 (require 's)
 (require 'evil)
 (require 'ivy)
+(require 'f)
 ;;-- end requires
 
 ;;-- vars
 (defvar-local autohide-minor-mode-fold-pattern "%s-- %s %s")
 (defvar-local autohide-minor-mode-block-depth 2)
+(defvar autohide-minor-mode-start-hidden t)
 (defvar autohide-minor-mode-exclusions '(helm-major-mode ivy-mode minibuffer-mode dired-mode fundamental-mode))
 (defvar autohide-minor-mode-derivations '(prog-mode bibtex-mode conf-mode latex-mode))
 ;;-- end vars
@@ -73,6 +75,9 @@ Vimish-fold's any blocks matching autohide-minor-mode-fold-pattern
     )
   )
 
+(defun autohide-minor-mode-clear-vimish-cache ()
+  (mapc 'f-delete (f-files vimish-fold-dir))
+  )
 ;;-- end main functions
 
 ;;-- mode definition
@@ -80,13 +85,19 @@ Vimish-fold's any blocks matching autohide-minor-mode-fold-pattern
   " Minor mode to automatically hide blocks of text upon loading a buffer "
   :init-value nil
   :lighter "autohide"
-  (when (and autohide-minor-mode
-             (not (minibufferp))
-             (not (-contains? autohide-minor-mode-exclusions major-mode))
-             (apply 'derived-mode-p autohide-minor-mode-derivations)
+  (message "Determining autohide for: %s : %s : %s" major-mode autohide-minor-mode autohide-minor-mode-start-hidden)
+  (cond ((or (not autohide-minor-mode)
+             (minibufferp)
+             (-contains? autohide-minor-mode-exclusions major-mode)
+             (not (apply 'derived-mode-p autohide-minor-mode-derivations))
              )
-    (autohide-minor-mode-run-folds)
-    )
+         nil)
+        ((and autohide-minor-mode autohide-minor-mode-start-hidden)
+         (autohide-minor-mode-run-folds))
+        (autohide-minor-mode
+         (autohide-minor-mode-clear-vimish-cache)
+         )
+        )
   )
 
 (define-globalized-minor-mode global-autohide-minor-mode

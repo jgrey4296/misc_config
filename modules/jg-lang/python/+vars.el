@@ -17,6 +17,7 @@
 
               jg-python-summary-buffer "*Python-Summary*"
 
+              expand-region-preferred-python-mode 'python-mode
       )
 ;;-- end personal vars
 
@@ -30,7 +31,7 @@
 ;;-- end rotate text
 
 ;;-- general python
-(after! python
+(after! python-mode
   (setq-default python-indent-offset 4
                 python-indent-guess-indent-offset nil
                 python-shell-completion-native-enable t

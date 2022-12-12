@@ -7,7 +7,7 @@
       )
 
 (map! :map python-mode-map
-      :after python
+      :after python-mode
       :n "z d" nil ;; #'+jg-python-toggle-all-defs
       :n "z D" nil ;; #'+jg-python-close-class-defs
       :v "i f" #'+jg-python-select-defun
@@ -23,7 +23,7 @@
       )
 
 (map! :map python-mode-map
-      :after python
+      :after python-mode
       :localleader
       (:prefix ("i" . "imports")
        :desc "Insert import"          "i" #'+jg-python-insert-import
@@ -47,7 +47,7 @@
       )
 
 (map! :map (python-mode-map inferior-python-mode-map) ;; Doc links
-      :after python
+      :after python-mode
       :localleader
       :desc "Docs: Python"        "1" (cmd! (browse-url (s-concat jg-python-docs-url (let ((lib (read-string "Library: ")))
                                                                                            (if (s-blank? lib) nil (format jg-python-lib-url-suffix lib))))))
@@ -88,7 +88,7 @@
 )
 
 (map! :map inferior-python-mode-map
-      :after python
+      :after python-mode
       "TAB" #'+jg-completion-complete-or-snippet
       )
 

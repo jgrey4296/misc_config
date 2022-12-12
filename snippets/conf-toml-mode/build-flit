@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name  : build-flit
+# uuid  : build-flit
+# key   : build-flit
+# group :
+# --
+##-- build-system :: flit
+# https://flit.pypa.io/en/stable/pyproject_toml.html
+[build-system]
+requires      = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+##-- end build-system :: flit

@@ -8,6 +8,19 @@
       )
 ;;-- end remap bookmarks
 
+;;-- browsing
+(map! :leader
+      :prefix "y"
+      :desc "Dir: Code"           "1" (cmd! (find-file jg-completion-code-templates-dir))
+      :desc "Dir: File"           "2" (cmd! (find-file jg-completion-file-templates-dir))
+      :desc "Dir: Projects"       "3" (cmd! (find-file jg-completion-project-templates-dir))
+      :desc "Dir: Git Template"   "4" (cmd! (find-file (expand-file-name "templates/git" doom-user-dir)))
+      :desc "Dir: Doom Snippet"   "5" (cmd! (find-file doom-snippets-dir))
+      :desc "Dir: Yas  Snippet"   "6" (cmd! (find-file yasnippet-snippets-dir))
+)
+;;-- end browsing
+
+
 ;;-- ivy
 ;; (after! (hydra ivy)
 ;;   (defhydra+ hydra-ivy ()
@@ -205,12 +218,6 @@
 
 (map! :leader
       :prefix "y"
-      :desc "Dir: Code"           "1" (cmd! (find-file jg-completion-code-templates-dir))
-      :desc "Dir: File"           "2" (cmd! (find-file jg-completion-file-templates-dir))
-      :desc "Dir: Projects"       "3" (cmd! (find-file jg-completion-project-templates-dir))
-      :desc "Dir: Doom Snippet"   "4" (cmd! (find-file doom-snippets-dir))
-      :desc "Dir: Yas  Snippet"   "5" (cmd! (find-file yasnippet-snippets-dir))
-
       :desc "Temp Template"  :v "t" (cmd! (if (eq evil-state 'visual)
                                               (setq aya-current (buffer-substring evil-visual-beginning evil-visual-end))
                                             (aya-expand)))

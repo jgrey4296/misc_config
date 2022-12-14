@@ -8,3 +8,5 @@
 	helper = cache
 [core]
 	excludesfile = ~/.gitignore_global
+[init]
+	templateDir = ~/.doom.d/templates/git

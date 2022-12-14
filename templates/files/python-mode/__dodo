@@ -1,4 +1,5 @@
-# -*- mode:doit; -*-
+#!/usr/bin/env python3
+# mode:doit; -*-
 # https://pydoit.org/
 
 ##-- imports

@@ -4,6 +4,7 @@
 # key   : entry_points
 # group : toml
 # --
+#!/usr/bin/env python3
 ##-- imports
 from __future__ import annotations
 

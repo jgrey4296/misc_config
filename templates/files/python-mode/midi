@@ -3,6 +3,7 @@
 # key: template.midi
 # group: misc
 # --
+#!/usr/bin/env python3
 ##-- imports
 from __future__ import annotations
 

@@ -3,7 +3,7 @@
 # uuid: template.asyncio
 # condition: t
 # --
-
+#!/usr/bin/env python3
 ##-- imports
 from __future__ import annotations
 

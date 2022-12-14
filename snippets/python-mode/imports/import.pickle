@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: import.pickle
-# uuid: import.pickle
-# group: I/O
-# --
-import pickle
-#with.file
-#pickle.reads/dumps using 'rb'

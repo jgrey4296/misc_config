@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: popup
+# uuid: popup
+# key:  popup
+# group : doom spec
+# --
+;;-- popup
+(setq jg-$1-popup-rules
+      '(
+        ("^\\*$1\\*"         :side right  :ttl nil :width  0.5 :quit nil :select t :priority 50)
+        ))
+(after! jg-popup-init
+  (+jg-ui-popup-add-rules '$1 jg-$1-popup-rules)
+  )
+;;-- end popup

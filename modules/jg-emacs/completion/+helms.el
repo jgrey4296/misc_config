@@ -183,13 +183,3 @@ versus not"
     )
   )
 ;;-- end helms
-
-;;-- customisation
-(setq! helm-find-files-actions
-        (append `(,(car helm-find-files-actions))
-                '(("Open Random" . +jg-completion-helm-open-random-action))
-                '(("Describe Random" . +jg-completion-helm-describe-random-action))
-                '(("Open Random External" . +jg-completion-helm-open-random-external-action))
-                (cdr helm-find-files-actions))
-        )
-;;-- end customisation

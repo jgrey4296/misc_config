@@ -1,0 +1,44 @@
+# -*- mode: snippet -*-
+# name: template
+# key: template
+# --
+;; Sections:
+;; <1> Variable Setup
+;; <2> Initialization
+;; <3> Running
+;; <4> Reporters
+;; <5> Utility
+;; ... Netlogo generated code at the end
+
+
+;; <1> Variable Setup
+globals [ MAXTICKS $1 ]
+;;turtles-own [ energy ]
+;;links-own [ strength ]
+;;patches-own [ food ]
+
+;; <2> Breeds
+;; breed [ wolves wolf ]
+
+
+;;CONSTANTS
+set MAXTICKS 500
+$0
+;; <2> Initialization
+to setup
+   clear-all
+
+   reset-ticks
+end
+
+
+;; <3> Running
+to go
+   if ticks >= MAXTICKS [ stop ]
+
+end
+
+;; <4> Utility
+
+
+;; Generated Code:

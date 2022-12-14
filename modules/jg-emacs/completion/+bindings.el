@@ -205,9 +205,11 @@
 
 (map! :leader
       :prefix "y"
-      :desc "Snippet Dir"        "1" (cmd! (find-file +snippets-dir))
-      :desc "File-templates Dir" "2" (cmd! (find-file jg-completion-file-templates-dir))
-      :desc "Cookiecutters Dir"  "3" (cmd! (find-file (expand-file-name "cookie_templates" doom-user-dir)))
+      :desc "Dir: Code"           "1" (cmd! (find-file jg-completion-code-templates-dir))
+      :desc "Dir: File"           "2" (cmd! (find-file jg-completion-file-templates-dir))
+      :desc "Dir: Projects"       "3" (cmd! (find-file jg-completion-project-templates-dir))
+      :desc "Dir: Doom Snippet"   "4" (cmd! (find-file doom-snippets-dir))
+      :desc "Dir: Yas  Snippet"   "5" (cmd! (find-file yasnippet-snippets-dir))
 
       :desc "Temp Template"  :v "t" (cmd! (if (eq evil-state 'visual)
                                               (setq aya-current (buffer-substring evil-visual-beginning evil-visual-end))

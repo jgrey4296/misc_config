@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: head.full
-# key: head
-# --
-<head>
-  <link rel="stylesheet" href="$1">
-  <script src="$2" data-main="$3"></script>  
-</head>$0

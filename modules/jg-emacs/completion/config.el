@@ -1,21 +1,31 @@
+;;-- file loads
 (load! "+vars")
-(load! "+funcs")
-(load! "+snippet-fix")
-(load! "+advice")
-(load! "+file-templates")
-
+(load! "+projectile")
+(load! "+template-control")
+(load! "+counsel")
+(load! "+yasnippet")
 (after! jg-bindings-total
   (load! "+bindings")
 )
 (after! (ivy counsel)
   (load! "+ivys")
   )
+(after! 'helm
+  (load! "+helms")
+  )
+;;-- end file loads
+
+;;-- helm
 (use-package! helm
   :config
   (setq helm-completing-read-handlers-alist nil)
   )
 (use-package! helm-files)
+(use-package! helm-gtags :defer t)
 
+;;-- end helm
+
+;;-- company
 (after! (company minibuffer)
   (add-hook! 'minibuffer-inactive-mode-hook :append #'company-mode)
   (add-hook! 'minibuffer-mode-hook :append #'company-mode)
@@ -24,21 +34,20 @@
   (set-company-backend! 'python-mode 'company-gtags)
   )
 
-(use-package! helm-gtags :defer t)
+;;-- end company
 
+;;-- hook setup
 (defun +jg-completion-on-load-hook ()
   (require 'yasnippet)
   (advice-add '+snippet--completing-read-uuid :override #'+jg-completion-snippet--completing-read-uuid)
   (add-hook 'yas-prompt-functions #'+jg-yas-prompt-fn -90)
 
   (after! doom-snippets
-    (+jg-completion-activate-file-templates t)
+    (+jg-completion-activate-templates t)
     (yas-reload-all)
     )
   )
 (add-hook 'doom-first-file-hook #'+jg-completion-on-load-hook)
 (add-hook 'jg-reapply-hook '+jg-completion-file-interactive-activate)
 
-(after! 'helm
-  (load! "+helms")
-  )
+;;-- end hook setup

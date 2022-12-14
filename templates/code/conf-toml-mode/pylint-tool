@@ -1,0 +1,215 @@
+# -*- mode: snippet -*-
+# name  : pylint-tool
+# uuid  : pylint-tool
+# key   : pylint-tool
+# group :
+# --
+##-- pylint
+[tool.pylint.main]
+# Generated on:
+# pylint 2.14.5
+# astroid 2.11.7
+# Python 3.10.8 (main, Nov 24 2022, 08:09:04) [Clang 14.0.6 ]
+
+# Minimum Python version to use for version dependent checks.
+py-version = "3.10"
+
+# extension-pkg-allow-list =
+# fail-on =
+
+# Specify a score threshold to be exceeded before program exits with error.
+fail-under = 10
+
+# Files or directories to be skipped. They should be base names, not paths.
+ignore = [".git", "CVS", "parsing", "__tests"]
+ignored-modules = ["pyparsing"]
+# ignore-paths =
+# ignore-patterns =
+
+# Python code to execute, usually for sys.path manipulation
+# init-hook =
+
+jobs                    = 1
+limit-inference-results = 100
+
+# List of plugins (as comma separated values of python module names) to load,
+# load-plugins =
+
+# Pickle collected data for later comparisons.
+persistent = true
+
+# When enabled, pylint would attempt to guess common misconfiguration and emit
+# user-friendly hints instead of false-positive error messages.
+suggestion-mode = true
+
+[tool.pylint.basic]
+# Naming style matching correct argument names.
+argument-naming-style        = "snake_case"
+attr-naming-style            = "snake_case"
+class-attribute-naming-style = "any"
+class-const-naming-style     = "UPPER_CASE"
+class-naming-style           = "PascalCase"
+const-naming-style           = "UPPER_CASE"
+function-naming-style        = "snake_case"
+inlinevar-naming-style       = "any"
+method-naming-style          = "snake_case"
+module-naming-style          = "snake_case"
+variable-naming-style        = "snake_case"
+
+# Regular expression matching correct argument names. Overrides argument-naming-
+# style. If left empty, argument names will be checked with the set naming style.
+argument-rgx = "(([a-z_][a-z0-9_]{2,})|(_[a-z0-9_]*)|(__[a-z][a-z0-9_]+__))$|[a-z]+[0-9]?$"
+const-rgx    = "^logging$|^_AUTHOR$|^_VERSION$|^[A-Z_]+$|^.*?E(num)?$|^Directions$"
+variable-rgx = "(([a-z_][a-z0-9_]{2,})|(_[a-z0-9_]*)|(__[a-z][a-z0-9_]+__))$|[a-z]+_?[0-9]?(_[a_z])?(E(num)?)?$"
+
+bad-names = ["foo", "bar", "baz", "toto", "tutu", "tata"]
+good-names = ["logFileName", "GET", "console", "util", "ex", "Run", "n", "x", "y", "r", "a", "t", "p1", "p2", "p3", "d", "_"]
+
+# Minimum line length for functions/classes that require docstrings
+docstring-min-length = 5
+no-docstring-rgx = "^_"
+
+# Include a hint for the correct naming format with invalid-name.
+include-naming-hint = true
+
+# List of decorators that produce properties, such as abc.abstractproperty.
+property-classes = ["abc.abstractproperty"]
+
+[tool.pylint.classes]
+defining-attr-methods = ["__init__", "__new__", "setUp"]
+exclude-protected     = ["_asdict", "_fields", "_replace", "_source", "_make"]
+
+valid-classmethod-first-arg           = ["cls"]
+valid-metaclass-classmethod-first-arg = ["cls"]
+
+[tool.pylint.design]
+# exclude-too-few-public-methods =
+# ignored-parents =
+
+max-args           = 10
+max-attributes     = 10
+max-bool-expr      = 5
+max-branches       = 5
+max-locals         = 15
+max-parents        = 4
+max-public-methods = 20
+max-returns        = 5
+max-statements     = 50
+min-public-methods = 2
+
+[tool.pylint.exceptions]
+overgeneral-exceptions = ["Exception"]
+
+[tool.pylint.format]
+# expected-line-ending-format =
+
+ignore-long-lines = "^\\s*(# )?<?https?://\\S+>?$"
+indent-after-paren = 4
+indent-string = "    "
+max-line-length = 150
+max-module-lines = 300
+
+[tool.pylint.imports]
+# allow-any-import-level =
+# allow-wildcard-with-all =
+deprecated-modules = ["optparse", "tkinter.tix"]
+
+# ext-import-graph       =
+# import-graph           =
+# int-import-graph       =
+# known-standard-library =
+known-third-party        = ["enchant"]
+# preferred-modules      =
+
+[tool.pylint.logging]
+# `old` means using % formatting, `new` is for `{}` formatting.
+logging-format-style = "new"
+logging-modules = ["logging"]
+
+[tool.pylint."messages control"]
+# Valid levels: HIGH, CONTROL_FLOW, INFERENCE, INFERENCE_FAILURE, UNDEFINED.
+confidence = ["HIGH", "CONTROL_FLOW", "INFERENCE", "INFERENCE_FAILURE", "UNDEFINED"]
+disable    = ["raw-checker-failed", "bad-inline-option", "locally-disabled", "file-ignored", "suppressed-message", "useless-suppression", "deprecated-pragma", "use-symbolic-message-instead", "logging-format-interpolation", "unused-import", "missing-module-docstring", "superfluous-parens", "unnecessary-lambda", "no-else-return", "wrong-import-position", "logging-fstring-interpolation"]
+enable     = ["c-extension-no-member"]
+
+[tool.pylint.miscellaneous]
+# List of note tags to take in consideration, separated by a comma.
+notes = ["FIXME", "XXX", "TODO"]
+
+[tool.pylint.refactoring]
+max-nested-blocks         = 5
+never-returning-functions = ["sys.exit"]
+
+[tool.pylint.reports]
+# Python expression which should return a score less than or equal to 10. You
+# have access to the variables 'fatal', 'error', 'warning', 'refactor',
+# 'convention', and 'info' which contain the number of messages in each category,
+# as well as 'statement' which is the total number of statements analyzed. This
+# score is used by the global evaluation report (RP0004).
+evaluation = "10.0 - ((float(5 * error + warning + refactor + convention) / statement) * 10)"
+score      = true
+
+[tool.pylint.similarities]
+ignore-comments      = true
+ignore-docstrings    = true
+# ignore-imports     =
+ignore-signatures    = true
+min-similarity-lines = 4
+
+[tool.pylint.spelling]
+max-spelling-suggestions = 4
+# spelling-dict =
+spelling-ignore-comment-directives = "fmt: on,fmt: off,noqa:,noqa,nosec,isort:skip,mypy:"
+# spelling-ignore-words =
+# spelling-private-dict-file =
+# spelling-store-unknown-words =
+
+[tool.pylint.string]
+check-quote-consistency          = true
+check-str-concat-over-line-jumps = true
+
+[tool.pylint.typecheck]
+contextmanager-decorators = ["contextlib.contextmanager"]
+# generated-members =
+
+# Tells whether missing members accessed in mixin class should be ignored. A
+# class is considered mixin if its name matches the mixin-class-rgx option.
+# Tells whether to warn about missing members when the owner of the attribute is
+# inferred to be None.
+ignore-none = true
+
+# This flag controls whether pylint should warn about no-member and similar
+# checks whenever an opaque object is returned when inferring. The inference can
+# return multiple potential results while evaluating a Python object, but some
+# branches might not be evaluated, which results in partial inference. In that
+# case, it might be useful to still emit no-member and other checks for the rest
+# of the inferred objects.
+ignore-on-opaque-inference = true
+
+# List of symbolic message names to ignore for Mixin members.
+ignored-checks-for-mixins = ["no-member", "not-async-context-manager", "not-context-manager", "attribute-defined-outside-init"]
+
+# List of class names for which member attributes should not be checked (useful
+# for classes with dynamically set attributes). This supports the use of
+# qualified names.
+ignored-classes = ["optparse.Values", "thread._local", "_thread._local"]
+
+# Show a hint with possible names when a member name was not found. The aspect of
+# finding the hint is based on edit distance.
+missing-member-hint          = true
+missing-member-hint-distance = 1
+missing-member-max-choices   = 1
+
+# Regex pattern to define which classes are considered mixins.
+mixin-class-rgx = ".*[Mm]ixin"
+
+[tool.pylint.variables]
+allow-global-unused-variables = true
+# allowed-redefined-builtins  =
+callbacks                     = ["cb_", "_cb"]
+dummy-variables-rgx           = "_+$|(_[a-zA-Z0-9_]*[a-zA-Z0-9]+?$)|dummy|^ignored_|^unused_"
+ignored-argument-names        = "_.*|^ignored_|^unused_"
+# init-import                 =
+redefining-builtins-modules   = ["six.moves", "past.builtins", "future.builtins", "builtins", "io"]
+
+##-- end pylint

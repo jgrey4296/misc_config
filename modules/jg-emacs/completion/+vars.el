@@ -1,10 +1,7 @@
 ;;; completion/ivy/+vars.el -*- lexical-binding: t; -*-
 
 ;;-- personal-vars
-(defvar jg-completion-file-template-rules (make-hash-table))
-(defvar jg-completion-file-templates-dir (expand-file-name "file-templates" doom-private-dir))
-(defvar jg-completion-file-templates-flat nil)
-(setq-default jg-completion-rps-have-you-played-loc "/Volumes/documents/github/writing/resources/urls/have-you-playeds"
+(setq-default jg-completion-rps-have-you-played-loc (expand-file-name "~/github/writing/resources/urls/have-you-playeds")
               jg-completion-ivy-predicate-patterns (rx (or "*helpful"
                                                            "*Ibuffer"
                                                            "*helm-"
@@ -18,6 +15,7 @@
               )
 ;;-- end personal-vars
 
+;;-- ivy
 (after! (ivy)
   (setq ivy-height 17
         ivy-wrap t
@@ -34,8 +32,12 @@
         ;; enable ability to select prompt (alternative to `ivy-immediate-done')
         ivy-use-selectable-prompt t
         ivy-rich-parse-remote-buffer nil
-        swiper-action-recenter t)
+        swiper-action-recenter t
+        avy-all-windows t)
 )
+;;-- end ivy
+
+;;-- helm
 (after! (helm helm-files)
   (setq  helm-candidate-number-limit 50
          helm-truncate-lines t
@@ -67,8 +69,39 @@
          ;; helm-semantic-fuzzy-match    fuzzy
          helm-boring-file-regexp-list (append (list "\\.projects$" "\\.DS_Store$") helm-boring-file-regexp-list)
         ;; helm-boring-buffer-regexp-list
+         ;;
+
+         helm-find-files-actions
+         (append `(,(car helm-find-files-actions))
+                 '(("Open Random" . +jg-completion-helm-open-random-action))
+                 '(("Describe Random" . +jg-completion-helm-describe-random-action))
+                 '(("Open Random External" . +jg-completion-helm-open-random-external-action))
+                 (cdr helm-find-files-actions))
         )
   )
+;;-- end helm
 
+;;-- company
 (setq company-idle-delay 1)
-(setq-default avy-all-windows t)
+
+;;-- end company
+
+;;-- file-templates
+(after! jg-completion-templates
+  (+jg-completion-add-file-templates
+   'general
+   '(("/docker-compose\\.yml$" :mode yaml-mode)
+     ("/Makefile$"             :mode makefile-gmake-mode)
+     ;; direnv
+     ("/\\.envrc$" :trigger "__envrc" :mode direnv-envrc-mode)
+     ;; Markdown
+     (markdown-mode)
+     ;; Markdown
+     (sh-mode :priority -100)
+     (gitignore-mode :priority -100)
+     (dockerfile-mode)
+     (snippet-mode)
+     )
+   )
+  )
+;;-- end file-templates

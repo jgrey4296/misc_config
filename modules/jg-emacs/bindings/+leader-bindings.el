@@ -30,7 +30,7 @@
       ;; #'ivy-resume
       ;; #'helm-resume
       ;; 0 6 9 8
-      :desc "Agenda"    "7" (cmd! (find-file (car org-agenda-files)))
+      :desc "Agenda"    "7" (cmd! (find-file (expand-file-name "base_agenda.org" doom-user-dir)))
       )
 
 ;;-- end leader

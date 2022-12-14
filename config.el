@@ -19,8 +19,8 @@
 ;;-- locations
 (setq backup-directory-alist          `((".*" . ,(expand-file-name ".local/backups" doom-emacs-dir)))
       bookmark-default-file           (expand-file-name "bookmarks" doom-user-dir)
-      doom-fallback-buffer-name       (expand-file-name "org/base_agenda.org" doom-user-dir)
-      initial-buffer-choice           (expand-file-name "org/base_agenda.org" doom-user-dir)
+      doom-fallback-buffer-name       "base_agenda.org"
+      initial-buffer-choice           (expand-file-name "base_agenda.org" doom-user-dir)
       ispell-personal-dictionary      (expand-file-name "terminal/tool_configs/.ispell_english" doom-user-dir)
       org-agenda-files               `(,(expand-file-name "org/base_agenda.org" doom-user-dir))
       org-archive-location            (string-join `(,(expand-file-name "org/archive.org" doom-user-dir) "* Main Archive") "::")

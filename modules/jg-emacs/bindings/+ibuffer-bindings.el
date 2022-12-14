@@ -19,6 +19,8 @@
       "n" nil
       "0" #'evil-beginning-of-line
       )
+
+;;-- marking
 (map! :after ibuffer
       :map ibuffer-mode-map
       :prefix ("%" . "Mark Ops")
@@ -28,6 +30,10 @@
       :desc "mark-by-mode-regexp"        "m" #'ibuffer-mark-by-mode-regexp
       :desc "mark-by-name-regexp"        "n" #'ibuffer-mark-by-name-regexp
       )
+
+;;-- end marking
+
+;;-- mark all
 (map! :after ibuffer
       :map ibuffer-mode-map
       :prefix ("*" . "Mark All Ops")
@@ -43,6 +49,10 @@
       :desc "mark-unsaved-buffers"         "u" #'ibuffer-mark-unsaved-buffers
       :desc "mark-compressed-file-buffers" "z" #'ibuffer-mark-compressed-file-buffers
       )
+
+;;-- end mark all
+
+;;-- sorting
 (map! :after ibuffer
       :map ibuffer-mode-map
       :prefix ("s" . "Sort")
@@ -53,6 +63,10 @@
       :desc "sort size"             "s"  #'ibuffer-do-sort-by-size
       :desc "sort recency"          "v"  #'ibuffer-do-sort-by-recency
       )
+
+;;-- end sorting
+
+;;-- filtering
 (map! :after ibuffer
       :map ibuffer--filter-map
       "S-<up>"                    nil
@@ -63,8 +77,8 @@
 
       :desc "negate-filter"                 "!" #'ibuffer-negate-filter
       :desc "and-filter"                    "&" #'ibuffer-and-filter
-      :desc "filter stars"        "*" #'ibuffer-filter-by-starred-name
-      :desc "filter file ext"      "." #'ibuffer-filter-by-file-extension
+      :desc "filter stars"                  "*" #'ibuffer-filter-by-starred-name
+      :desc "filter file ext"               "." #'ibuffer-filter-by-file-extension
       :desc "filter-disable"                "/" #'ibuffer-filter-disable
       :desc "filter-by-size-lt"             "<" #'ibuffer-filter-by-size-lt
       :desc "filter-by-size-gt"             ">" #'ibuffer-filter-by-size-gt
@@ -98,6 +112,8 @@
       :desc "delete-saved-filters"          "x" #'ibuffer-delete-saved-filters
       :desc "or-filter"                     "|" #'ibuffer-or-filter
       )
+
+;;-- end filtering
 
 (defun +jg-ibuffer-update-hook ()
   (message "Updating ibuffer: %s" (current-time-string))

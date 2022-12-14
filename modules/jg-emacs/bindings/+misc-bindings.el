@@ -12,8 +12,6 @@
       )
 
 ;; For minibuffer use:
-;;
-;;
 (map! :map ctl-x-map
       "[" "("
       "]" ")")
@@ -22,17 +20,20 @@
       :prefix doom-leader-key     "u" #'universal-argument-more
       :prefix doom-leader-alt-key "u" #'universal-argument-more)
 
-;;
-;; Shell
+(map! :map special-mode-map
+      :n "q" #'quit-window
+      )
+
+;;-- shell
 (map! :after shell
       :map shell-mode-map
       "C-d" #'comint-send-eof
       :localleader
       "h" #'counsel-shell-history)
 
-(evil-make-intercept-map shell-mode-map)
-(evil-make-intercept-map read-expression-map)
-;; Comint
+;;-- end shell
+
+;;-- comint
 ;; overrides the default normal mode binding of evil-ret
 (map! :after comint
       :map comint-mode-map
@@ -40,9 +41,9 @@
       :n "RET" #'comint-send-input
       )
 
-(evil-make-intercept-map comint-mode-map)
+;;-- end comint
 
-;; Flycheck
+;;-- flycheck
 (map! :after flycheck
       :map flycheck-error-list-mode-map
       :n "," nil
@@ -51,25 +52,18 @@
       :n "}" #'tabulated-list-widen-current-column
       )
 
-;; Git Timemachine
-(map! :after git-timemachine
-      :map git-timemachine-mode-map
-      :n "[ g" #'git-timemachine-show-previous-revision
-      :n "] g" #'git-timemachine-show-next-revision
-      )
+;;-- end flycheck
 
-;; Snipe
+;;-- evil snipe
 (map! :after evil-snipe
       :map evil-snipe-mode-map
       :nm "S" nil
       :nm "s" nil
       )
 
-(map! :map special-mode-map
-      :n "q" #'quit-window
-      )
+;;-- end evil snipe
 
-;; Minibuffer
+;;-- minibuffer
 (define-key! :keymaps +default-minibuffer-maps
   [escape] #'abort-recursive-edit
   "C-a"    #'move-beginning-of-line
@@ -86,7 +80,9 @@
   "C-S-j"  #'scroll-up-command
   "C-S-k"  #'scroll-down-command)
 
-;; LSP
+;;-- end minibuffer
+
+;;-- lsp
 (map! :after lsp-mode
       :map lsp-command-map
       (:prefix ("w" . "Workspaces"))
@@ -100,15 +96,25 @@
       (:prefix ("G" . "Peek"))
       )
 
-;; Messages
+;;-- end lsp
+
+;;-- messages
 (map! :after message
       :map messages-buffer-mode-map
       :g "0" #'evil-beginning-of-line
       )
 
-(evil-make-overriding-map messages-buffer-mode-map)
+;;-- end messages
 
-;; Mouse Deactivation
+;;-- evil overrides/intercept
+(evil-make-overriding-map messages-buffer-mode-map)
+(evil-make-intercept-map comint-mode-map)
+(evil-make-intercept-map shell-mode-map)
+(evil-make-intercept-map read-expression-map)
+
+;;-- end evil overrides/intercept
+
+;;-- Mouse Deactivation
 (define-key evil-motion-state-map [down-mouse-1] #'ignore)
 (define-key evil-motion-state-map [mouse-1] #'ignore)
 (define-key evil-motion-state-map [drag-mouse-1] #'ignore)
@@ -123,6 +129,7 @@
 
 (define-key evil-motion-state-map [mouse-4] #'ignore)
 (define-key evil-motion-state-map [mouse-5] #'ignore)
+;;-- end Mouse Deactivation
 
 (after! which-key
   (let ((prefix-re (regexp-opt (list doom-leader-key doom-leader-alt-key))))

@@ -32,3 +32,14 @@
       :desc "Gradle -q" :n "g" #'+jg-vcs-run-gradle-quiet
       :desc "Gradle"    :n "G" #'+jg-vcs-run-gradle
       )
+
+
+;;-- git timemachine
+;; Git Timemachine
+(map! :after git-timemachine
+      :map git-timemachine-mode-map
+      :n "[ g" #'git-timemachine-show-previous-revision
+      :n "] g" #'git-timemachine-show-next-revision
+      )
+
+;;-- end git timemachine

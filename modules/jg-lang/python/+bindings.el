@@ -84,6 +84,7 @@
        :desc "Docs: SCons"         "5" (cmd! (browse-url "https://scons.org/documentation.html"))
        :desc "Docs: Build"         "6" (cmd! (browse-url "https://github.com/pypa/build"))
        :desc "Docs: venv"          "7" (cmd! (browse-url "https://docs.python.org/3/library/venv.html"))
+       :desc "Docs: Doit"          "8" (cmd! (browse-url "https://pydoit.org/contents.html"))
       )
 )
 

@@ -85,7 +85,6 @@ Vimish-fold's any blocks matching autohide-minor-mode-fold-pattern
   " Minor mode to automatically hide blocks of text upon loading a buffer "
   :init-value nil
   :lighter "autohide"
-  (message "Determining autohide for: %s : %s : %s" major-mode autohide-minor-mode autohide-minor-mode-start-hidden)
   (cond ((or (not autohide-minor-mode)
              (minibufferp)
              (-contains? autohide-minor-mode-exclusions major-mode)

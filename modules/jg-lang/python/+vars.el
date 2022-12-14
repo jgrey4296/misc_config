@@ -101,7 +101,7 @@
 ;;-- end popup
 
 ;;-- file templates
-(after! jg-file-templates
+(after! jg-completion-templates
   (+jg-completion-add-file-templates
    'python
    '(("LICENSE$"        :trigger "__license-acab"   :mode text-mode :priority 100)

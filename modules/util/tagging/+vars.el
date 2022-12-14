@@ -9,10 +9,10 @@
               jg-tag-loc-bookmarks              (expand-file-name "~/github/writing/resources/bookmarks/total.bookmarks")
               jg-tag-loc-default-helm-directory (expand-file-name "~/github/writing/resources/")
               jg-tag-loc-global-tags            (expand-file-name "~/github/writing/resources/substitutions")
-              jg-tag-loc-twitter                "/Volumes/documents/twitterthreads/"
               jg-tag-loc-twitter-account-index  (expand-file-name "~/github/writing/resources/cron_reports/tw_acct.index")
               jg-tag-loc-twitter-grep-index     (expand-file-name "~/github/writing/resources/cron_reports/grep_tags.index")
               jg-tag-loc-twitter-tag-index      (expand-file-name  "~/github/writing/resources/cron_reports/tw_tag.index")
+              jg-tag-loc-twitter                "/Volumes/documents/twitterthreads/"
 
               jg-tag-marker (make-marker)
               jg-tag-twitter-heading-helm-candidates nil

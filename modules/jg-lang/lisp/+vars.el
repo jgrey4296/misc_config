@@ -8,8 +8,8 @@
   (let ((paths-to-add (-concat
                        (ffap-all-subdirs "/Volumes/documents/github/otherLibs/lisp/emacs-src/lisp/" 1)
                        (ffap-all-subdirs (expand-file-name "straight/repos" doom-local-dir) 1)
-                       (ffap-all-subdirs (expand-file-name "modules" doom-private-dir))
-                       (ffap-all-subdirs (expand-file-name "packages" doom-private-dir))
+                       (ffap-all-subdirs (expand-file-name "modules" doom-user-dir))
+                       (ffap-all-subdirs (expand-file-name "packages" doom-user-dir))
                        )))
   (mapc (lambda (x)
           (add-to-list 'find-library-source-path x))
@@ -49,7 +49,7 @@
 ;;-- end fold spec
 
 ;;-- file templates
-(after! jg-file-templates
+(after! jg-completion-templates
   ;; Lisp
   (+jg-completion-add-file-templates
    'lisp

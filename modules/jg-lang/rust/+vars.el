@@ -34,7 +34,7 @@
 ;;-- end urls
 
 ;;-- file templates
-(after! jg-file-templates
+(after! jg-completion-templates
   ;; rust-mode
   (+jg-completion-add-file-templates
    'rust-mode

@@ -28,8 +28,8 @@
   (setq python-mode-hook nil)
   (setq python-mode-local-vars-hook nil)
   (add-hook! 'python-mode-hook #'outline-minor-mode
-             #'+jg-python-outline-regexp-override-hook
-             #'+python-use-correct-flycheck-executables-h
+             ;; #'+jg-python-outline-regexp-override-hook
+             ;; #'+python-use-correct-flycheck-executables-h
              #'doom-modeline-env-setup-python
              #'er/add-python-mode-expansions
              #'evil-collection-python-set-evil-shift-width

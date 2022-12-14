@@ -60,7 +60,7 @@
 ;;-- end gradle font lock
 
 ;;-- file templates
-(after! jg-file-templates
+(after! jg-completion-templates
   ;; groovy-mode
   (+jg-completion-add-file-templates
    'java-and-friends

@@ -64,7 +64,7 @@
 ;;-- end projectile
 
 ;;-- file templates
-(after! jg-file-templates
+(after! jg-completion-templates
   (+jg-completion-add-file-templates
    'org
    '(("two_pager\\.org$"     :trigger "__pacheco_vega_two_pager" :mode org-mode)

@@ -2,7 +2,22 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("emacsd"
+(("other_git"
+ (filename . "/Volumes/documents/github/otherLibs/")
+ (front-context-string . "python\n  drwxr-x")
+ (rear-context-string . "4K Dec  9 23:19 ")
+ (position . 1265))
+("doot"
+ (filename . "/Volumes/documents/github/python/doot/")
+ (front-context-string . "build\n  drwxr-xr")
+ (rear-context-string . "02 Dec 12 13:50 ")
+ (position . 191))
+("python"
+ (filename . "/Volumes/documents/github/python/")
+ (front-context-string . "acab\n  drwxr-xr-")
+ (rear-context-string . "8K Nov  8 01:30 ")
+ (position . 186))
+("emacsd"
  (filename . "~/.emacs.d/")
  (front-context-string . "emacs-src\n  drwx")
  (rear-context-string . "6K Nov 30 22:03 ")
@@ -17,11 +32,6 @@
  (front-context-string)
  (rear-context-string . "thedocs.io/en/la")
  (position . 24566))
-("other_git"
- (filename . "/Volumes/documents/github/otherLibs/")
- (front-context-string . "mysql2sqlite\n  d")
- (rear-context-string . "38 Nov  3 06:16 ")
- (position . 953))
 ("pdf_automations"
  (filename . "/Volumes/documents/in_progress_pdfs/pdflib_automations/")
  (front-context-string . "summary\n  drwxr-")
@@ -113,7 +123,7 @@
  (rear-context-string . "4K Apr 19 12:16 ")
  (position . 149))
 ("cpython"
- (filename . "/Volumes/documents/github/python/cpython/Lib/")
+ (filename . "/Volumes/documents/github/otherLibs/python/cpython/")
  (front-context-string . "  /Volumes/docum")
  (rear-context-string)
  (position . 1))

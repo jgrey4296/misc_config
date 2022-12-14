@@ -109,7 +109,6 @@ uses xidel, outputs as xml
 
 
 ;;-- dired utils
-
 (defun +jg-xml-dired-run-xidel (query)
   "Run an xpath query on marked files, saving the output to separate new files"
   (interactive "sXML Query: ")

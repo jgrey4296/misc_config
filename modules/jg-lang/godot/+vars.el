@@ -5,7 +5,7 @@
               )
 
 ;;-- file templates
-(after! jg-file-templates
+(after! jg-completion-templates
   ;; gdscript-mode
   (+jg-completion-add-file-templates
    'gdscript-mode

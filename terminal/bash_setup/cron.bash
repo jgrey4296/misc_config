@@ -6,7 +6,7 @@ GIT_BKUP_TARGET="$HOME/github/writing/resources/cron_reports/github_urls"
 GIT_BKUP_DROPBOX="$HOME/Dropbox/backups"
 DROPBOX_WATCH=( "$HOME/Dropbox/docs" "$HOME/Downloads" )
 DROPBOX_TARGET="/Volumes/documents/in_progress_pdfs/Current/"
-CONDA_MAINTENANCE_TARGET="$HOME/.shell_files/conda_envs/master_list.yaml"
+CONDA_MAINTENANCE_TARGET="$HOME/.doom.d/terminal/conda_envs/master_list.yaml"
 CPU_MAX="50"
 PDF_LIBRARY="$HOME/pdflibrary/"
 PDF_SUMMARY="/Volumes/documents/in_progress_pdfs/pdflib_automations/summary/"
@@ -17,7 +17,7 @@ function conda_maintenance(){
     conda env export --from-history > "$CONDA_MAINTENANCE_TARGET"
     echo "--------------------" >> "$CONDA_MAINTENANCE_TARGET"
 
-    for f in "$HOME/.shell_files/conda_envs/*.yaml"; do
+    for f in "$HOME/.doom.d/terminal/conda_envs/*.yaml"; do
         name=`basename -s .yaml $f`
         echo "Found $name"
         if conda_activate_for_scripts "$name"; then
@@ -70,8 +70,8 @@ function dropbox_watcher(){
         echo "Dir: " "$Dir"
         cd $Dir
         pwd
-        find . -maxdepth 1 -iregex ".+?*\.\(pdf\|epub\)" -print0 | xargs -0 -I {} mv -u -n {} "$DROPBOX_TARGET"
-        find . -maxdepth 1 -iregex ".+?\.\(pdf\|epub\)" -printf "%f\n" -print0 | xargs -0 -I {} mv {} exists_{}
+        find . -maxdepth 1 -iregex ".+?*\.\(pdf\|epub\)" -print0 | xargs -0 -I {} mv -u -n "{}" "$DROPBOX_TARGET"
+        find . -maxdepth 1 -iregex ".+?\.\(pdf\|epub\)" -printf "%f\0" | xargs -0 -I {} mv "{}" "exists_{}"
 
     done
 

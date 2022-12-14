@@ -8,10 +8,10 @@ jgd reminder: tlmgr for installing packages, use --usermode after tlmgr init-use
 
 #for BasicTex:
 # PATH=/usr/local/texlive/2021basic/bin/universal-darwin:$PATH
-PATH=/usr/local/texlive/2022basic/bin/universal-darwin:$PATH
+PATH="/usr/local/texlive/2022basic/bin/universal-darwin:$PATH"
 
 #TEX:
 #TEXINPUTS=/Volumes/DOCUMENTS/Dropbox/Scripts/tex/:$TEXINPUTS
 
 
-TEXMFCNF=~/.shell_files/tool_configs/
+TEXMFCNF="$HOME/.doom.d/terminal/tool_configs:"

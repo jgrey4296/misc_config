@@ -4,7 +4,7 @@ default_context:
     _email: "jgrey.n.plus.one at gmail.com"
     _github_username : "jgrey4296"
 
-cookiecutters_dir: "~/.shell_files/../cookie_templates/"
+cookiecutters_dir: "~/.doom.d/templates/projects/"
 abbreviations:
     pp: https://github.com/audreyr/cookiecutter-pypackage.git
     gh: https://github.com/{0}.git

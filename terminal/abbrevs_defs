@@ -276,4 +276,3 @@
 (define-abbrev-table 'woman-mode-abbrev-table '())
 
 (define-abbrev-table 'xref--xref-buffer-mode-abbrev-table '())
-

@@ -1,10 +1,10 @@
 #!/usr/bin/env Bash
-# reminder: source this file in ~/.bash_profile
+# reminder: source this file in $HOME/.bash_profile
 # and source .bash_profile in .bashrc
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
-source "$HOME/.shell_files/bash_setup/_basic_utils.bash"
-source "$HOME/.shell_files/bash_setup/_base_path.bash"
+source "$HOME/.doom.d/terminal/bash_setup/_basic_utils.bash"
+source "$HOME/.doom.d/terminal/bash_setup/_base_path.bash"
 
 if [[ "$OSTYPE" =~ "darwin" ]]; then
     jgd Activating Darwin
@@ -12,12 +12,12 @@ if [[ "$OSTYPE" =~ "darwin" ]]; then
     # complains the shell isn't set up:
     # source $HOME/anaconda/etc/profile.d/conda.sh
     #
-    for fname in $(find "$HOME/.shell_files/bash_setup" -type f -name "*.bash" -not -regex ".+?/_.+?\.bash")
+    for fname in $(find "$HOME/.doom.d/terminal/bash_setup" -type f -name "*.bash" -not -regex ".+?/_.+?\.bash")
     do
         jgd "-- Sourcing: " "$fname"
         source "$fname"
     done
-    source "$HOME/.shell_files/bash_setup/_exports.bash"
+    source "$HOME/.doom.d/terminal/bash_setup/_exports.bash"
     # Auto Activate an environment if necessary:
     if [ -a ".venv" ]
     then

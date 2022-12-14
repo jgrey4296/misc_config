@@ -11,6 +11,7 @@ export TERM
 export EMACS
 export EMACSDIR
 export DOOMDIR
+export JGLOGDIR
 # export TMPDIR
 
 export -f conda_activate_for_scripts

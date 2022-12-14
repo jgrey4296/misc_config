@@ -19,10 +19,10 @@ unset __conda_setup
 # from: https://itecnotes.com/server/cron-how-to-use-the-aliases-in-the-crontab/
 shopt -s expand_aliases
 
-source "$HOME/.shell_files/bash_setup/_basic_utils.bash"
-source "$HOME/.shell_files/bash_setup/_base_path.bash"
-source "$HOME/.shell_files/bash_setup/cron.bash"
-source "$HOME/.shell_files/bash_setup/latex.bash"
-source "$HOME/.shell_files/bash_setup/python.bash"
-source "$HOME/.shell_files/bash_setup/ruby.bash"
-source "$HOME/.shell_files/bash_setup/_exports.bash"
+source "$HOME/.doom.d/terminal/bash_setup/_basic_utils.bash"
+source "$HOME/.doom.d/terminal/bash_setup/_base_path.bash"
+source "$HOME/.doom.d/terminal/bash_setup/cron.bash"
+source "$HOME/.doom.d/terminal/bash_setup/latex.bash"
+source "$HOME/.doom.d/terminal/bash_setup/python.bash"
+source "$HOME/.doom.d/terminal/bash_setup/ruby.bash"
+source "$HOME/.doom.d/terminal/bash_setup/_exports.bash"

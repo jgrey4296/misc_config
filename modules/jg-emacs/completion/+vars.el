@@ -105,3 +105,14 @@
    )
   )
 ;;-- end file-templates
+
+;;-- projectile compile
+(setq counsel-compile-local-builds '(
+                                     +jg-completion-get-doit-commands
+                                     counsel-compile-get-filtered-history
+                                     ;; counsel-compile-get-build-directories
+                                     counsel-compile-get-make-invocation
+                                     counsel-compile-get-make-help-invocations
+                                     )
+      )
+;;-- end projectile compile

@@ -110,3 +110,28 @@
   )
 
 ;;-- end ivys
+
+;;-- doit command retrieval
+(defun +jg-completion-get-doit-commands (&optional dir)
+  (interactive)
+  ;; counsel-compile-local-builds
+  (let ((default-directory (or dir (projectile-project-root)))
+        result-code
+        result-text
+        )
+    (with-temp-buffer
+      (setq result-code (call-process "doit" nil (current-buffer) nil "list")
+            result-text (buffer-string)
+            )
+      )
+    (if (eq 0 result-code)
+        (cl-loop for line in (split-string result-text "\n" t " \n")
+                 collect (car (split-string line " " t " "))
+             )
+      '()
+      )
+    )
+  )
+
+
+;;-- end doit command retrieval

@@ -1,0 +1,27 @@
+#!/usr/bin/env python3
+"""
+Invoked by git-merge,
+*after* merging, before committing
+bypassed by --no-verify
+No parameters,
+
+exit(1) aborts before committing the merge
+"""
+##-- imports
+import sys
+import pathlib as pl
+import re
+##-- end imports
+
+##-- ifmain
+if __name__ == "__main__":
+    fname = sys.argv[1]
+    with open(pl.Path(fname), 'r') as f:
+        line = f.readline()
+
+    match_re = re.compile(r"^\[\w+\]")
+    if not match_re.match(line):
+        print("Commit Messages need to have a [tag] at the start")
+        exit(1)
+
+##-- end ifmain

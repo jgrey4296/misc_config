@@ -1,0 +1,31 @@
+#!/usr/bin/env python3
+"""
+Invoked by git-push
+two params: name and location of destination remote
+
+info on stdin format:
+<local ref> " " <local object name> " " <remote ref> " " <remote object name> "\n"
+
+exit(1) prevents the push
+write info on failure to stderr
+"""
+##-- imports
+import argparse
+import sys
+import pathlib as pl
+import re
+##-- end imports
+
+##-- argparse
+parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter,
+                                 epilog = "\n".join([""]))
+parser.add_argument('name')
+parser.add_argument('loc')
+##-- end argparse
+
+
+##-- ifmain
+if __name__ == "__main__":
+    args = parser.parse_args()
+
+##-- end ifmain

@@ -257,6 +257,14 @@ determine the exact padding."
 
    ((diredfl-flag-mark-line &override) :background aerugo2)
 
+   ;; Spelling and grammar
+   (writegood-weasels-face  :foreground aerugo7 )
+   (writegood-passive-voice-face :foreground aerugo8 )
+   (writegood-duplicates-face :foreground aerugo9 )
+   (flyspell-incorrect :foreground aerugo6 :background nil)
+   (flyspell-duplicate :foreground aerugo9 )
+
+
    ;; Base theme variable overrides-
    ;;()
    )

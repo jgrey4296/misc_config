@@ -35,7 +35,7 @@ _i_ Indent guides          %(+jghdoc highlight-indent-guides-mode)
 _n_ Line Numbers           %(+jghdoc display-line-numbers)
 _R_ Ruler                  %(+jghdoc ruler-mode)
 _w_ Whitespace             %(+jghdoc whitespace-mode)
-_G_ Writing                %(+jghdoc (or flyspell-mode writegood-mode))"
+_g_ Grammar                %(+jghdoc (or flyspell-mode writegood-mode))"
 
 ""
 )))
@@ -44,7 +44,7 @@ _G_ Writing                %(+jghdoc (or flyspell-mode writegood-mode))"
   ("n" #'+jg-ui-toggle-line-numbers         nil :exit nil)
   ("R" #'ruler-mode                         nil :exit nil)
   ("w" #'whitespace-mode                    nil :exit nil)
-  ("G" (progn (flyspell-mode 'toggle) (writegood-mode (unless flyspell-mode -1))) nil :exit nil)
+  ("g" (progn (flyspell-mode 'toggle) (writegood-mode (unless flyspell-mode -1))) nil :exit nil)
   ("q" +jgh-pop "exit" :exit t)
   )
 

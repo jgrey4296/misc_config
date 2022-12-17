@@ -78,6 +78,22 @@ Vimish-fold's any blocks matching autohide-minor-mode-fold-pattern
 (defun autohide-minor-mode-clear-vimish-cache ()
   (mapc 'f-delete (f-files vimish-fold-dir))
   )
+
+(evil-define-motion autohide-minor-mode-forward-block (count)
+  " Move forward across fold blocks "
+  :jump t
+  :type exclusive
+  (evil-signal-at-bob-or-eob count)
+  (re-search-forward (autohide-minor-mode-fold-block-gen :re t) nil t count)
+)
+
+(evil-define-motion autohide-minor-mode-backward-block (count)
+  " Move forward across fold blocks "
+  :jump t
+  :type exclusive
+  (autohide-minor-mode-forward-block (- (or count 1)))
+  )
+
 ;;-- end main functions
 
 ;;-- mode definition

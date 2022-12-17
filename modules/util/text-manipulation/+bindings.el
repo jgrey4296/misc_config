@@ -74,7 +74,6 @@
        :desc "Next Similar String " "s" #'+jg-text-next-similar-string
        )
       (:prefix ("l" . "Line-ops")
-       :desc "Random"                     "r" #'+jg-text-goto-random-line-op
        )
       )
 
@@ -95,6 +94,7 @@
 
 (map! :map jg-binding-jump-map
       :desc "Force Goto Column" "\\" #'+jg-text-force-column-motion
+      :desc "Random Line "      "?" #'+jg-text-goto-random-line-op
       )
 
 (map! :map jg-binding-motion-state-map

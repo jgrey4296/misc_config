@@ -10,3 +10,7 @@
 	excludesfile = ~/.gitignore_global
 [init]
 	templateDir = ~/.doom.d/templates/git
+[commit]
+	template = ~/.doom.d/templates/files/git/commit
+[hooks]
+	allownonascii = false

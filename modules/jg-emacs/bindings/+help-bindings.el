@@ -51,6 +51,7 @@
 ;;-- bindings
 (map! :map jg-binding-help-map
       :prefix ("b" . "Bindings")
+      "b"   #'describe-bindings
       "f" #'which-key-show-full-keymap
       "i" #'which-key-show-minor-mode-keymap
       "k" #'which-key-show-keymap

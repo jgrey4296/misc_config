@@ -117,7 +117,8 @@
       :desc "Align"              "a" #'align-regexp
       :desc "IEdit"              "e" #'iedit-mode
 
-      :desc "Join whitespace"    "J" #'evil-join-whitespace
+      :desc "Delete trailing whitespace"  "w" #'delete-trailing-whitespace
+      :desc "Delete trailing newlines"    "W" #'doom/delete-trailing-newlines
 
 
       )
@@ -139,7 +140,7 @@
       ;; TODO split on char
       ;; r
       :desc "Wrap Line"                  "w"   #'evil-fill
-
+      :desc "Combine lines"              "c" #'evil-join-whitespace
       :desc "Justify"                    "j" #'justify-current-line
       :desc "Flush Lines"                "f" #'flush-lines
       :desc "Indent"                     "i" #'indent-region
@@ -220,8 +221,6 @@
       :desc "Surround"                    "s" #'evil-surround-region
       :desc "Upper"                       "u" #'evil-upcase
 
-      :desc "Delete trailing whitespace"  "w" #'delete-trailing-whitespace
-      :desc "Delete trailing newlines"    "W" #'doom/delete-trailing-newlines
       )
 
 

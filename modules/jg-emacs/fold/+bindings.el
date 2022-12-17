@@ -36,3 +36,11 @@
        :desc "next-fold"              "j"  #'vimish-fold-next-fold
        :desc "previous-fold"          "k"  #'vimish-fold-previous-fold
       )
+
+(map! :map jg-binding-forward-operator-motion-map
+      :desc "Fold Block"               "1" #'autohide-minor-mode-forward-block
+      )
+
+(map! :map jg-binding-backward-operator-motion-map
+      :desc "Fold Block"               "1" #'autohide-minor-mode-backward-block
+)

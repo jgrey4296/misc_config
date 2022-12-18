@@ -5,17 +5,8 @@
 (defvar jg-bindings-wk-filter 'id)
 (setq   jg-bindings-wk-filter '+jg-bindings-wk-filter-fn)
 
-(setq-default jg-binding-ibuffer-heuristics (rx (or "backtab"
-                                                 (regexp "\\.\\.")
-                                                 (regexp "^[[:alpha:]]\\{2,\\}")
-                                                 (regexp "which-key")
-                                                 (regexp "/ S")
-                                                 )
-                                             )
-              which-key-show-operator-state-maps t
-
+(setq-default which-key-show-operator-state-maps t
               evil-escape-delay 0.3
-
               jg-binding-local-var-skip-regexp (rx (or "-map"
                                                        "keymap"
                                                        "display-table"

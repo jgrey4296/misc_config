@@ -6,7 +6,12 @@
 (load! "+popup")
 (after! hydra   (load! "+hydra"))
 (after! core-ui (load! "+advice"))
-(after! jg-bindings-total (load! "+bindings"))
+(after! jg-bindings-total
+  (load! "+bindings")
+  (after! ibuffer
+    (load! "+ibuffer-bindings")
+    )
+  )
 
 (add-hook 'jg-reapply-hook '+jg-ui-popup-reapply-rules)
 
@@ -49,7 +54,10 @@
 
 ;;-- hooks
 (add-hook! 'doom-first-file-hook #'+jg-ui-popup-activate-rules)
-(add-hook! 'doom-init-ui-hook  #'rainbow-delimiters-mode)
+(add-hook! 'doom-init-ui-hook    #'rainbow-delimiters-mode)
+(after! ibuffer
+  (add-hook! 'ibuffer-mode-hook    #'+jg-ui-ibuffer-update-hook)
+  )
 
 (after! helpful
   (add-hook 'helpful-mode-hook

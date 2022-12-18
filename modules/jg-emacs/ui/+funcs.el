@@ -1,10 +1,14 @@
 ;;; editor/window-control/+funcs.el -*- lexical-binding: t; -*-
 
+;;-- window ring
 (defun +jg-ui-window-ring-block-reset (arg)
   (interactive "p")
   (window-ring-setup-columns arg t)
   )
 
+;;-- end window ring
+
+;;-- misc
 (defun +jg-ui-undo-tree ()
   (interactive)
   (if (not undo-tree-mode)
@@ -34,7 +38,7 @@
         )
   )
 
-
+;;-- end misc
 
 ;;-- window rotation
 ;; From spacemacs originally
@@ -251,3 +255,18 @@ If region isn't active, narrow away anything above point
                                  +jg-popup-advice2)
   (+jg-ui-popup-activate-rules))
 ;;-- end popup control
+
+;;-- ibuffer
+(defun +jg-ui-ibuffer-update-hook ()
+  (message "Updating ibuffer: %s" (current-time-string))
+  (map! :map ibuffer-mode-map
+        [normal-state] nil)
+
+  (setq ibuffer-saved-filters jg-ui-ibuffer-filters)
+  (ibuffer-clear-filter-groups)
+  (ibuffer-filter-disable)
+
+  (ibuffer-switch-to-saved-filter-groups "my-default")
+  (ibuffer-switch-to-saved-filters "anti-[Helm|Magit|Help]")
+  )
+;;-- end ibuffer

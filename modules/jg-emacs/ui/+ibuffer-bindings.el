@@ -1,7 +1,6 @@
 ;;; emacs/bindings/+ibuffer-bindings.el -*- lexical-binding: t; -*-
 (message "Setting up Ibuffer bindings: %s" (current-time-string))
-(map! :after ibuffer
-      :map ibuffer-mode-map
+(map! :map ibuffer-mode-map
       :desc "Do Shell Cmd File"   "!" #'ibuffer-do-shell-command-file
       :desc "add-to-tmp-show"     "+" #'ibuffer-add-to-tmp-show
       :desc "toggle-sorting-mode" "," #'ibuffer-toggle-sorting-mode
@@ -21,8 +20,7 @@
       )
 
 ;;-- marking
-(map! :after ibuffer
-      :map ibuffer-mode-map
+(map! :map ibuffer-mode-map
       :prefix ("%" . "Mark Ops")
       :desc "mark-by-locked"             "L" #'ibuffer-mark-by-locked
       :desc "mark-by-file-name-regexp"   "f" #'ibuffer-mark-by-file-name-regexp
@@ -34,8 +32,7 @@
 ;;-- end marking
 
 ;;-- mark all
-(map! :after ibuffer
-      :map ibuffer-mode-map
+(map! :map ibuffer-mode-map
       :prefix ("*" . "Mark All Ops")
       :desc "unmark-all"                   "*" #'ibuffer-unmark-all
       :desc "mark-dired-buffers"           "/" #'ibuffer-mark-dired-buffers
@@ -53,7 +50,7 @@
 ;;-- end mark all
 
 ;;-- sorting
-(map! :after ibuffer
+(map!
       :map ibuffer-mode-map
       :prefix ("s" . "Sort")
       :desc "alphabetic"       "a"  #'ibuffer-do-sort-by-alphabetic
@@ -67,8 +64,7 @@
 ;;-- end sorting
 
 ;;-- filtering
-(map! :after ibuffer
-      :map ibuffer--filter-map
+(map! :map ibuffer--filter-map
       "S-<up>"                    nil
       "<up>"                      nil
       "RET"                       #'ibuffer-filter-by-mode
@@ -115,15 +111,4 @@
 
 ;;-- end filtering
 
-(defun +jg-ibuffer-update-hook ()
-  (message "Updating ibuffer: %s" (current-time-string))
-  (map! :map ibuffer-mode-map
-        [normal-state] nil)
-  (evil-make-overriding-map ibuffer-mode-map)
-
-  (ibuffer-clear-filter-groups)
-  (ibuffer-filter-disable)
-
-  (ibuffer-switch-to-saved-filter-groups "my-default")
-  (ibuffer-switch-to-saved-filters "anti-[Helm|Magit|Help]")
-  )
+(evil-make-overriding-map ibuffer-mode-map)

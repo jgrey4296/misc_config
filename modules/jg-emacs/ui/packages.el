@@ -12,3 +12,5 @@
 (package! smartparens)
 (package! paren-state :recipe `(:local-repo ,(expand-file-name "packages/paren-state" doom-user-dir)))
 ;; (package! vundo)
+
+(package! ibuffer)

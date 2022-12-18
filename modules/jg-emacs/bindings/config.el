@@ -9,7 +9,6 @@
   (load! "+leader-bindings")
   (load! "+evil-bindings")
   (load! "+evil-submap-bindings")
-  (load! "+ibuffer-bindings")
   (load! "+misc-bindings")
   (load! "+help-bindings")
   (provide 'jg-bindings-total)
@@ -30,6 +29,3 @@
         :desc "Flycheck" "!" flycheck-command-map
         )
   )
-
-
-(add-hook 'ibuffer-mode-hook #'+jg-ibuffer-update-hook)

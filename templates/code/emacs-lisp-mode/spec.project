@@ -7,4 +7,5 @@
 ;;-- projectile
 (after! projectile
   (pushnew! projectile-project-root-files "$1")
+  )
 ;;-- end projectile

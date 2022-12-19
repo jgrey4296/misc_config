@@ -106,10 +106,42 @@
   )
 ;;-- end file-templates
 
+;;-- projectile
+(after! projectile
+  (defun +jg-completion-related-files-fn (path)
+    " Given a relative path to a file, provide projectile with various :kinds of related file "
+    (let ((impl-file  (f-join (f-parent (f-parent path)) (s-replace "test_" "" (f-filename path))))
+          (test-file  (f-join (f-parent path) "__tests" (concat "test_" (f-filename path))))
+          ;;(init-file  (f-join (f-parent path) "__init__.py"))
+          (log-file   (f-join (projectile-project-root) (concat "log." (f-base path))))
+          ;;(error-file (f-join (car (f-split path)) "errors" (concat (f-base path) "_errors.py")))
+          (project    (f-join (projectile-project-root) "dodo.py"))
+          (is-test (s-matches? "^test_" (f-filename path)))
+          )
+      (append (when is-test (list :impl impl-file))
+              (unless is-test (list :test test-file))
+              (when (s-matches? "\/cli\/" path) (list :project project))
+              (list :init-py init-file)
+              (list :log log-file)
+              (list :errors error-file)
+              )
+      )
+    )
+
+  (projectile-register-project-type 'jg-completion-project '("dodo.py")
+                                    :project-file "dodo.py"
+                                    ;; :related-files-fn #'+jg-completion-related-files-fn
+                                    )
+  )
+
+
+;;-- end projectile
+
 ;;-- projectile compile
 (setq counsel-compile-local-builds '(
                                      +jg-completion-get-doit-commands
-                                     counsel-compile-get-filtered-history
+                                     +jg-completion-get-gradle-commands
+                                     ;; counsel-compile-get-filtered-history
                                      ;; counsel-compile-get-build-directories
                                      counsel-compile-get-make-invocation
                                      counsel-compile-get-make-help-invocations

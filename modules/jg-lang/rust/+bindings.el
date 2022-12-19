@@ -30,6 +30,7 @@
       :desc "Rustdoc"      "5" (cmd! (browse-url jg-rustdoc-url))
       :desc "Rust-CPython" "6" (cmd! (browse-url jg-rust-cpython-url))
       :desc "Rust Py03"    "7" (cmd! (browse-url jg-rust-pyo3-url))
+      :desc "Rust by example" "8" (cmd! (browse-rul "https://doc.rust-lang.org/rust-by-example/index.html"))
       )
 
 (map! :map conf-toml-mode-map

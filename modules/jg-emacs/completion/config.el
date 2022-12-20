@@ -2,7 +2,6 @@
 (load! "+vars")
 (load! "+projectile")
 (load! "+template-control")
-(load! "+counsel")
 (load! "+yasnippet")
 (after! jg-bindings-total
   (load! "+bindings")
@@ -40,7 +39,7 @@
 (defun +jg-completion-on-load-hook ()
   (require 'yasnippet)
   (advice-add '+snippet--completing-read-uuid :override #'+jg-completion-snippet--completing-read-uuid)
-  (add-hook 'yas-prompt-functions #'+jg-yas-prompt-fn -90)
+  (add-hook 'yas-prompt-functions #'+jg-completion-yas-prompt-fn -90)
 
   (after! doom-snippets
     (+jg-completion-activate-templates t)

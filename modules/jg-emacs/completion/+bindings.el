@@ -4,7 +4,7 @@
 
 ;;-- remap bookmarks
 (map! :after counsel
-      [remap bookmark-jump] #'+jg-completion-counsel-bookmark
+      [remap bookmark-jump] #'+jg-completion-ivy-bookmark
       )
 ;;-- end remap bookmarks
 
@@ -19,7 +19,6 @@
       :desc "Dir: Yas  Snippet"   "6" (cmd! (find-file yasnippet-snippets-dir))
 )
 ;;-- end browsing
-
 
 ;;-- ivy
 ;; (after! (hydra ivy)
@@ -233,7 +232,7 @@
 ;;-- lisp
 (map! :map emacs-lisp-mode-map
       :localleader
-      "i f" #'+jg-completion-counsel-features
+      "i f" #'+jg-completion-ivy-features
       )
 
 ;;-- end lisp
@@ -252,7 +251,7 @@
       :desc "Switch buffer"         ","     #'+jg-completion-switch-buffer
       :desc "Popup Buffer"          "<"     #'+jg-completion-popup-buffer
       :desc "Have you Played?"      "o 1"   #'+jg-completion-rps-have-you-playeds
-      :desc "Workspace Counsel"     "w RET" #'+jg-completion-counsel-workspace
+      :desc "Workspace Counsel"     "w RET" #'+jg-completion-ivy-workspace
       )
 ;;-- end leader helms/ivys
 

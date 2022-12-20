@@ -91,6 +91,7 @@
   (+jg-completion-add-file-templates
    'general
    '(("/docker-compose\\.yml$" :mode yaml-mode)
+     ("/doot\\.toml$" :trigger "__doot_toml" :mode conf-toml-mode)
      ("/Makefile$"             :mode makefile-gmake-mode)
      ;; direnv
      ("/\\.envrc$" :trigger "__envrc" :mode direnv-envrc-mode)
@@ -128,7 +129,7 @@
       )
     )
 
-  (projectile-register-project-type 'jg-completion-project '("dodo.py")
+  (projectile-register-project-type 'jg-completion-project '("dodo.py" "doot.toml")
                                     :project-file "dodo.py"
                                     ;; :related-files-fn #'+jg-completion-related-files-fn
                                     )

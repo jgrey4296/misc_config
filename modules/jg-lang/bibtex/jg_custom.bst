@@ -80,10 +80,12 @@ ENTRY
     counsel
     dissent
     concur
+    country
     % casenumber, statutory instrument, HR..., etc:
     identifier
     % for music scores:
     arrangement
+    part
     % for both music and judicial, legislation etc
     section
   }
@@ -571,6 +573,15 @@ FUNCTION {get.bbl.editor}
 %%-- end localization
 
 %%-- format
+FUNCTION {format.url}
+{
+  url
+  duplicate$ empty$
+    { pop$ "" }
+    { "\urlprefix\url{" swap$ * "}" * }
+  if$
+}
+
 FUNCTION {fin.entry}
 { add.period$
   format.url output
@@ -579,7 +590,7 @@ FUNCTION {fin.entry}
   tags empty$
     { skip$ }
     { "\begin{lstlisting}" write$ newline$
-      "Tags: "             write$ newline$
+      "Tags: "             write$
       format.tags          write$ newline$
       "\end{lstlisting}"   write$ newline$}
   if$
@@ -598,14 +609,6 @@ FUNCTION {format.eprint}
   if$
 }
 
-FUNCTION {format.url}
-{
-  url
-  duplicate$ empty$
-    { pop$ "" }
-    { "\urlprefix\url{" swap$ * "}" * }
-  if$
-}
 
 FUNCTION {format.isbn}
 { isbn "isbn" bibinfo.check
@@ -1048,34 +1051,54 @@ FUNCTION {format.lab.names}
 
 FUNCTION {format.platform}
 {
-  platform
+  platform empty$
+    { "" }
+    { new.block
+      platform }
+  if$
 }
 
 
 FUNCTION {format.country}
 {
-  country
+  country empty$
+    { "" }
+    { new.block
+      country }
+  if$
 }
 
 FUNCTION {format.status}
 {
-  status
+  status empty$
+    { "" }
+    { new.block
+      status }
+  if$
 }
 
 FUNCTION {format.arrangement}
 {
-  arrangement
+  arrangement empty$
+    { "" }
+    { new.block
+      arrangement }
+  if$
 }
 
 FUNCTION {format.section}
 {
-  section
+  section empty$
+    { "" }
+    { new.block
+      section }
+  if$
 }
 
 FUNCTION {format.parties}
 {
   short_parties empty$
-  { plaintiff " v " * defendants * }
+  { plaintiff " v " * defendant * }
   { short_parties }
   if$
 }
@@ -1090,8 +1113,35 @@ FUNCTION {format.counsel}
 
 FUNCTION {format.dissent}
 {
-  dissent output
-  concur  output
+  dissent empty$
+    { "" }
+    { new.block
+      "Dissent: " dissent }
+  if$
+
+  concur empty$
+  { "" }
+  { new.block
+    "Concurrenct: " concur }
+  if$
+}
+
+FUNCTION {format.identifier}
+{
+  identifier empty$
+    { "" }
+    { new.block
+      identifier }
+  if$
+}
+
+FUNCTION {format.part}
+{
+  part empty$
+    { "" }
+    { new.block
+      part }
+  if$
 }
 
 %%-- end format
@@ -1292,13 +1342,13 @@ FUNCTION {manual}
   author format.key output
   new.block
   format.btitle "title" output.check
-  institution bibinfo.check output
-  format.edition output
+  institution "institution" output.check
+  format.edition "edition" output.check
   format.date "year" output.check
-  format.doi output
+  format.doi "doi" output.check
   new.block
-  format.note output
-  format.eprint output
+  format.note "note" output.check
+  format.eprint "eprint" output.check
   fin.entry
 }
 
@@ -1472,7 +1522,7 @@ FUNCTION {case}
 {
   output.bibitem
   format.parties output
-  parties format.key output
+  short_parties format.key output
   new.block
   format.title output
   new.block

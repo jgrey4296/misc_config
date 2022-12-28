@@ -1,7 +1,6 @@
-;;; util/jg-misc/+ob-plantuml.el -*- lexical-binding: t; -*-
+;;; ob-plantuml.el -*- lexical-binding: t; -*-
 
-
-(defun +jg-misc-ob-plantuml-execute (body params)
+(defun jg-ob-plantuml-execute (body params)
   "Execute a block of plantuml code with org-babel.
 This function is called by `org-babel-execute-src-block'."
   (require 'plantuml-mode)
@@ -20,13 +19,13 @@ This function is called by `org-babel-execute-src-block'."
                           (org-babel-temp-file "plantuml-" ".png"))))
          (in-file (org-babel-temp-file "plantuml-")))
     (cond ((eq plantuml-default-exec-mode 'server)
-           (+jg-misc-ob-plantuml-server fullbody out-file))
+           (jg-ob-plantuml-server fullbody out-file))
           (preview
-           (+jg-misc-ob-plantuml-preview fullbody params in-file out-file))
+           (jg-ob-plantuml-preview fullbody params in-file out-file))
           (t
-           (+jg-misc-ob-plantuml-render fullbody params in-file out-file)))))
+           (jg-ob-plantuml-render fullbody params in-file out-file)))))
 
-(defun +jg-misc-ob-plantuml-server (body out-file)
+(defun jg-ob-plantuml-server (body out-file)
   (message "WARNING: USING PLANTUML SERVER")
   (if (bound-and-true-p org-export-current-backend)
       (user-error "Exporting plantuml diagrams in server mode is not supported (see `plantuml-default-exec-mode')")
@@ -44,7 +43,7 @@ This function is called by `org-babel-execute-src-block'."
   out-file
   )
 
-(defun +jg-misc-ob-plantuml-render (body params in-file out-file)
+(defun jg-ob-plantuml-render (body params in-file out-file)
   (let* ((cmd (concat (cond ((eq plantuml-default-exec-mode 'executable)
                              (unless (executable-find plantuml-executable-path)
                                (error "Could not find plantuml at %s"
@@ -80,8 +79,8 @@ This function is called by `org-babel-execute-src-block'."
   out-file
   )
 
-(defun +jg-misc-ob-plantuml-preview (body params in-file out-file)
+(defun jg-ob-plantuml-preview (body params in-file out-file)
   (with-temp-buffer
-    (insert-file-contents (+jg-misc-ob-plantuml-render body params in-file out-file))
+    (insert-file-contents (jg-ob-plantuml-render body params in-file out-file))
     (buffer-string))
   )

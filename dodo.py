@@ -32,9 +32,4 @@ from doot.groups import *
 from doot.files.ziptask import ZipTask
 ##-- end post-config doot imports
 
-
-##-- ifdodo
-## Equivalent to if main
-if __name__ == "dodo":
-    all_checks = CheckDir.checkdir_group()
-##-- end ifdodo
+all_checks = CheckDir.checkdir_group()

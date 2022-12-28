@@ -1,0 +1,9 @@
+[project]
+name = "test"
+
+##-- doit
+[tool.doit]
+verbosity = 2
+build_dir = "build"
+
+##-- end doit

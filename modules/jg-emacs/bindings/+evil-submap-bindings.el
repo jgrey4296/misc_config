@@ -214,9 +214,9 @@
 
       :desc "Comment"                     "c" #'evilnc-comment-operator
       :desc "Encode url"                  "e" #'+evil:url-encode
-      :desc "Shift Left"                  "h" #'evil-shift-left
+      :desc "Shift Left"                  "h" (cmd! (call-interactively (if (eq evil-state 'visual) 'evil-shift-left 'evil-shift-left-line)))
       :desc "Inflection"                  "i" #'evil-operator-string-inflection
-      :desc "Shift Right"                 "l" #'evil-shift-right
+      :desc "Shift Right"                 "l" (cmd! (call-interactively (if (eq evil-state 'visual) 'evil-shift-right 'evil-shift-right-line)))
 
       :desc "Surround"                    "s" #'evil-surround-region
       :desc "Upper"                       "u" #'evil-upcase

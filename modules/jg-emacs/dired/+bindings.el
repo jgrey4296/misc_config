@@ -32,10 +32,7 @@
       (:prefix "["
        :desc "Prev Marked" :n "m" #'dired-prev-marked-file
        )
-
-      (:prefix "%"
-       :desc "Global Match Rename" :n "R" #'+jg-dired-GLOBAL-do-rename-regexp)
-      )
+)
 
 (map! :map dired-mode-map ;; localleader
       :localleader
@@ -75,6 +72,7 @@
       :desc "downcase"                     :n "l" #'dired-downcase
       :desc "mark-files-regexp"            :n "m" #'dired-mark-files-regexp
       :desc "do-rename-regexp"             :n "r" #'dired-do-rename-regexp
+      :desc "Global Match Rename"          :n "R" #'+jg-dired-GLOBAL-do-rename-regexp
       :desc "upcase"                       :n "u" #'dired-upcase
       )
 

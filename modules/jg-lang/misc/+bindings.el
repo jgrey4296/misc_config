@@ -13,10 +13,6 @@
       :desc "Docs: F#"       "1" (cmd! (browse-url "https://docs.microsoft.com/en-us/dotnet/fsharp/"))
       )
 
-(map! :map plantuml-mode-map
-      :localleader
-      :desc "Docs: Plantuml" "1" (cmd! (browse-url "https://plantuml.com/"))
-      )
 
 (map! :map groovy-mode-map
       :localleader

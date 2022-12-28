@@ -46,3 +46,4 @@ create_default_packages:
   - sympy
   - wheel
   - toml
+  - doit

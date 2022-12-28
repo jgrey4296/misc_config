@@ -49,6 +49,18 @@
                  '(("r" (lambda (x) (+workspace-rename x (read-string (format "Rename %s -> : " x)))) "Rename")
 
                    ))
+
+(defun +jg-completion-workspace-switch (x)
+  (cond ((string-equal x (+workspace-current-name))
+         (+workspace-save x))
+        ((+workspace-exists-p x)
+         (+workspace-switch x))
+        ((-contains? (bookmark-all-names) x)
+         (+workspace-switch x t)
+         (bookmark-jump x))
+        (t (+workspace-switch x t))
+        )
+  )
 ;;-- end actions
 
 ;;-- ivys
@@ -142,19 +154,13 @@ Modified to pre-sort bookmarks, caselessly
   )
 
 (defun +jg-completion-ivy-workspace ()
-    "Forward to `' or `workspace-set' if workspace doesn't exist."
+    "Switch to a workspace or create a new one"
     (interactive)
     (require 'bookmark)
     (ivy-read "Create or jump to workspace: "
               (+workspace-list-names)
               :history 'workspace-history
-              :action (lambda (x)
-                        (message "Got: %s" x)
-                        (cond ((string-equal x (+workspace-current-name))
-                               (message "Eq")
-                               (+workspace-save x))
-                              (t
-                               (+workspace-switch x t))))
+              :action '+jg-completion-workspace-switch
               :caller '+jg-completion-ivy-workspace)
     )
 ;;-- end ivys

@@ -1,38 +1,40 @@
 [project]
-name = "test"
+name = "YourPackage"
 
 ##-- doit
 [tool.doit]
-verbosity = 2
-build_dir = "build"
+verbosity               = 2
+build_dir               = "build"
 
-[tool.doit.commands]
-
-[tool.doit.commands.test]
-pattern  = "*_tests.py"
-verbose  = false
-failfast = false
-
-[tool.doit.commands.lint]
-executable = "pylint"
-errors     = false
-outfile    = "package.lint"
-outfmt     = ""
-
+# [tool.doit.commands.{command}]
 # [tool.doit.tasks.{task}]
 
 ##-- end doit
 
+##-- doot
+[tool.doot]
+temp_dir = ".temp"
 
-##-- doot.jekyll
-[tool.doot.jekyll.genpost]
-ext = "md"
-# used in datetime.strftime
-date_format = "%Y-%m-%d"
-# title_format.format_map({date, title, ext })
-title_format = "{date}{title}.{ext}"
-# 'default' for doot.__template.jekyll_post, else a path:
-# can be overriden on cli
-default_template = "default"
+# Uncomment to activate a group
+# when you import doot.groups.*
+# and doot.groups_secondary.*
+# [tool.doot.tex]
+# [tool.doot.pip]
+# [tool.doot.tex]
+# [tool.doot.jekyll]
+# [tool.doot.sphinx]
+# [tool.doot.gtags]
+# [tool.doot.git]
+# [tool.doot.cargo]
+# [tool.doot.gradle]
+# [tool.doot.epub]
+# [tool.doot.godot]
+# [tool.doot.xml]
+# [tool.doot.sqlite]
+# [tool.doot.json]
+# [tool.doot.plantuml]
+# [tool.doot.csv]
+# [tool.doot.dot]
+# [tool.doot.images]
 
-##-- end doot.jekyll
+##-- end doot

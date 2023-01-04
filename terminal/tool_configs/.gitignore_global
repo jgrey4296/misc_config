@@ -87,3 +87,6 @@ log.*
 # Auctex
 *.auctex-auto
 *.auctex
+
+# doot
+.tasks_cache

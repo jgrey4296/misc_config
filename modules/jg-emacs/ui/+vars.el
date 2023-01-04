@@ -19,7 +19,7 @@
 
 ;;-- smartparens
 (setq-default ;; smartparens
-              sp-autoinsert-pair nil
+              sp-autoinsert-pair t
               sp-autoinsert-quote-if-followed-by-closing-pair nil
               sp-escape-char ""
               )

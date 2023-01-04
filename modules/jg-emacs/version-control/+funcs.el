@@ -1,7 +1,7 @@
 ;;; +funcs.el -*- lexical-binding: t; -*-
 
 (defvar +jg-vcs-task-hash (make-hash-table :test 'equal))
-(defvar +jg-vcs-gradle-command "gradlew")
+(defvar +jg-vcs-gradle-command "gradle")
 (defvar +jg-vcs-gradle-command-args '())
 
 (after! ivy

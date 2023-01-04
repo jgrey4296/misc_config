@@ -113,9 +113,7 @@
       :desc "Find file in private config" "p"   #'doom/open-private-config
       :desc "Find file"                   "f"   #'find-file
       :desc "Locate file"                 "l"   #'locate
-      :desc "Open project editorconfig"   "c"   #'editorconfig-find-current-editorconfig
       :desc "Recent files"                "r"   #'recentf-open-files
-      :desc "Recent project files"        "R"   #'projectile-recentf
       :desc "Rename/move file"            "M"   #'doom/move-this-file
       :desc "Save file as..."             "S"   #'write-file
       :desc "Save file"                   "s"   #'save-buffer
@@ -295,7 +293,6 @@
       :desc "Regexp Builder"               "R"    #'regexp-builder
       :desc "Repo Homepage"                "g"    #'+vc/browse-at-remote-homepage
       :desc "Github Homepage"              "G"    (cmd! (browse-url user-url))
-      :desc "Find file in project sidebar" "P"    #'+neotree/find-this-file
 
       :desc "Rmail"                        "m"    #'rmail
       :desc "External Mail"                "M"    #'mu4e
@@ -306,7 +303,6 @@
 
       (:when (modulep! :os macos)
        :desc "Reveal in Finder"           "f"     #'+macos/reveal-in-finder
-       :desc "Reveal project in Finder"   "F"     #'+macos/reveal-project-in-finder
        )
 
       (:prefix ("a" . "org agenda"))
@@ -315,47 +311,7 @@
       )
 ;;-- end <leader> o --- open
 
-;;-- <leader> p --- project
-(map! :leader
-      :prefix ("p" . "project")
-      :desc "Project Root"                 "`"  (cmd! (find-file (doom-project-root)))
-      :desc "Root Shell"                   "'"  #'projectile-run-shell
-      :desc "Browse other project"         ">"  #'doom/browse-in-other-project
-      :desc "Search project for symbol"     "." #'+default/search-project-for-symbol-at-point
-
-      :desc "Add new project"              "a"  #'projectile-add-known-project
-      :desc "Browse project"               "b"  #'+default/browse-project
-      :desc "Compile in project"           "c"  #'projectile-compile-project
-      :desc "Open project editorconfig"    "C"   #'editorconfig-find-current-editorconfig
-      :desc "Configure project"            "g"  #'projectile-configure-project
-      :desc "Discover projects in folder"  "d"  #'+default/discover-projects
-      :desc "Edit project .dir-locals"     "e"  #'projectile-edit-dir-locals
-      :desc "Find file in project"         "f"  #'projectile-find-file
-      :desc "Find other file"              "o"  #'projectile-find-related-file
-      :desc "Find recent project files"    "r"  #'projectile-recentf
-      :desc "Invalidate project cache"     "I"  #'projectile-invalidate-cache
-      :desc "Kill project buffers"         "K"  #'projectile-kill-buffers
-      :desc "List project todos"           "t"  #'magit-todos-list
-      ;; x
-      :desc "Remove known project"         "D"  #'projectile-remove-known-project
-      :desc "Repeat last command"          "C"  #'projectile-repeat-last-command
-      :desc "Run cmd in project root"      "!"  #'projectile-run-shell-command-in-root
-      :desc "Run project"                  "R"  #'projectile-run-project
-      :desc "Save project files"           "S"  #'projectile-save-project-buffers
-      :desc "Search project"               "s"  #'+default/search-project
-      :desc "Switch project"               "p"  #'projectile-switch-project
-      :desc "Switch to project buffer"     "b"  #'projectile-switch-to-buffer
-      :desc "Test project"                 "T"  #'projectile-test-project
-
-      (:prefix ("%" . "Replace")
-       :desc "Replace in Project"        "r" #'projectile-replace
-       :desc "Replace Regexp in Project" "R" #'projectile-replace-regexp
-       )
-      ;; later expanded by projectile
-      (:prefix ("4" . "in other window"))
-      (:prefix ("5" . "in other frame"))
-      )
-;;-- end <leader> p --- project
+;; <leader> p --- project
 
 ;;-- <leader> P -- processes
 (map! :leader

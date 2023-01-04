@@ -1,7 +1,6 @@
 ;;; editor/window-control/+bindings.el -*- lexical-binding: t; -*-
 
 (map! :leader
-      :desc "Open project scratch buffer"  "p x"   #'+jg-ui-open-scratch-buffer
       (:prefix "b"
        :desc "Undo-Tree"                   "u"     #'+jg-ui-undo-tree
        :desc "Clear Popup Rules"           "P"     #'+jg-ui-ivy-reset-popup-rules

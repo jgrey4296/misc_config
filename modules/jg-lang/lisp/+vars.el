@@ -78,3 +78,9 @@
   )
 
 ;;-- end browse providers
+
+;;-- projectile
+(after! projectile
+  (pushnew! projectile-project-root-files "config.el")
+  )
+;;-- end projectile

@@ -1,6 +1,5 @@
 ;;-- file loads
 (load! "+vars")
-(load! "+projectile")
 (load! "+template-control")
 (load! "+yasnippet")
 (after! jg-bindings-total

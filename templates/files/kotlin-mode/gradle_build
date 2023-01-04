@@ -1,0 +1,7 @@
+
+tasks.register<Copy>("$1") {
+
+    doLast {
+
+    }
+}

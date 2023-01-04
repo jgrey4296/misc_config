@@ -13,7 +13,7 @@ Death by Institution and the Harms of Abstraction.
 *** [[/Volumes/documents/github/writing/orgfiles/listings/DSLs.org][DSLs]]
 *** [[file:~/github/writing/resources/bibliography][Bibliography]]
 *** [[~/.doom.d/setup_files/pomodoro_log.org][Pomodoro Log]]
-*** [[file:/volumes/documents//twitterthreads][Twitter Threads]]
+*** [[file:/volumes/documents/twitterthreads][Twitter Threads]]
 *** TODO [[file:/Volumes/documents/github/corpora][Darius Kuzemi's Corpora]]
 *** [[file:/Volumes/documents/github/writing/orgfiles/primary/research_questions.org][Research Questions]]
 

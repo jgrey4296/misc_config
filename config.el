@@ -90,6 +90,7 @@
               indent-tabs-mode nil
               LaTeX-enable-toolbar nil
               whitespace-style '(face tabs spaces trailing lines space-before-tab newline indentation empty space-after-tab space-mark tab-mark newline-mark)
+              projectile-project-search-path (list (expand-file-name "~/github"))
               )
 ;;-- end defaults
 

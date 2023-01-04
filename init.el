@@ -20,7 +20,6 @@
  mail
  text-manipulation ;; +fold-jump for changing movement behaviour
  char-insert
- project-walk
  tagging
  jg-misc
  jg-org-unit-test
@@ -55,6 +54,7 @@
  dired
  fold
  ui
+ projects
  version-control
  ;;jg-states
 

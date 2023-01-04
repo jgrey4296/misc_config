@@ -12,7 +12,7 @@ import doot
 ##-- end imports
 
 ##-- config
-datatoml    = doot.setup_py()
+data_toml    = doot.setup()
 
 DOIT_CONFIG = {
     "default_tasks" : [],
@@ -23,18 +23,16 @@ DOIT_CONFIG = {
 
 ##-- post-config doot imports
 from doot.files.clean_cache import CleanCacheAction, py_cache_globs
-from doot.files.listall import task_listall
 from doot.files.checkdir import CheckDir
-from doot.utils import globber
+from doot.utils.dir_data import DootDirs
 
 from doot.groups import *
 # from doot.groups_secondary import *
-from doot.files.ziptask import ZipTask
 ##-- end post-config doot imports
-
 
 ##-- ifdodo
 ## Equivalent to if main
 if __name__ == "dodo":
     all_checks = CheckDir.checkdir_group()
+    all_dirs   = DootDirs.dir_group()
 ##-- end ifdodo

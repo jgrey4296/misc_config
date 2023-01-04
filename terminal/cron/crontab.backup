@@ -1,5 +1,5 @@
 SHELL=/usr/local/bin/bash
-BASH_ENV=/Volumes/documents/github/emacs_files/setup_files/cron/conda_bashrc
+BASH_ENV="$HOME/.doom.d/terminal/cron/conda_bashrc"
 JG_NICENESS=10
 
 ### Hourly
@@ -13,10 +13,10 @@ JG_NICENESS=10
 45 */3 * * * pdf_summarise
 
 # Regularly Tweet an entry from my bibtex
-7,42 */1 * * * conda activate bookmark; nice -n $JG_NICENESS bkmk-bot-bibtex
+20 */1 * * * conda activate bookmark; nice -n $JG_NICENESS bkmk-bot-bibtex
 
 # Regularly tweet an image from the whitelist
-25,52 */1 * * * conda activate bookmark; nice -n $JG_NICENESS bkmk-bot-image
+40 */1 * * * conda activate bookmark; nice -n $JG_NICENESS bkmk-bot-image
 
 # Update mail every 6 hours
 0 */6 * * *  nice -n $JG_NICENESS /usr/local/bin/mbsync -a
@@ -33,7 +33,7 @@ JG_NICENESS=10
 0 3 * * mon run_maintenance
 
 # backup cron definitions at 4am on mondays
-0 4 * * mon crontab -l > ~/.doom.d/setup_files/cron/crontab.backup
+0 4 * * mon crontab -l > ~/.doom.d/terminal/cron/crontab.backup
 
 ## TUES - bookmarks and pdfs
 # at 2am on tuesdays, update bookmarks
@@ -43,7 +43,7 @@ JG_NICENESS=10
 # Backup git repo urls
 0 3 * * wed git_url_backup
 # Backup list of installed brew packages
-30 3 * * wed brew list > ~/.doom.d/setup_files/brew/installed
+30 3 * * wed brew list > ~/.doom.d/terminal/brew/installed
 
 
 ## THU - bibtexR

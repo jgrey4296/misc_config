@@ -5,7 +5,7 @@
 (load! "+state-hl-lines")
 (load! "+popup")
 (after! hydra   (load! "+hydra"))
-(after! core-ui (load! "+advice"))
+(after! doom-ui (load! "+advice"))
 (after! jg-bindings-total
   (load! "+bindings")
   (after! ibuffer

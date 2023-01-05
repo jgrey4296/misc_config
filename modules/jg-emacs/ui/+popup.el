@@ -12,6 +12,7 @@
     ("^\\*compilation"       :side bottom :ttl 5   :height 0.4 :quit t :select nil)
     ("^\\*Pp Eval Output\\*" :side right  :ttl 5   :width 0.4  :quit t :select nil)
     ("^\\*Buffer Locals:"    :side right  :ttl 5   :width 0.4  :quit t :select nil)
+    ("^\\*NeoTree\\*$"       :side left   :ttl nil :height 0.4 :quit t :select nil :priority -100)
     ("^\\*Async Shell Command\\*$" :actions (display-buffer-no-window))
     )
   )

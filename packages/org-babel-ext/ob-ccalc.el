@@ -60,7 +60,6 @@
 
 
 (add-to-list 'org-babel-tangle-lang-exts '("ccalc" . "pl"))
-(add-to-list 'auto-mode-alist '("\\.ccalc$" . prolog-mode))
 
 (defvar org-babel-ccalc-location (expand-file-name "~/github/ccalc/ccalc.pl"))
 (defvar org-babel-ccalc-command  "swipl6"

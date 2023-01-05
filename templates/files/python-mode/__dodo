@@ -22,9 +22,6 @@ DOIT_CONFIG = {
 ##-- end config
 
 ##-- post-config doot imports
-from doot.files.clean_cache import CleanCacheAction, py_cache_globs
-from doot.files.checkdir import CheckDir
-from doot.utils.dir_data import DootDirs
 
 from doot.groups import *
 # from doot.groups_secondary import *
@@ -33,6 +30,5 @@ from doot.groups import *
 ##-- ifdodo
 ## Equivalent to if main
 if __name__ == "dodo":
-    all_checks = CheckDir.checkdir_group()
-    all_dirs   = DootDirs.dir_group()
+    pass
 ##-- end ifdodo

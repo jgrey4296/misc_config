@@ -593,6 +593,7 @@ With arg, searchs the dplp instead.
   )
 (defun +jg-bibtex-subcite ()
   (interactive)
+  (+jg-bibtex-lock-key)
   (bibtex-beginning-of-entry)
   (let* ((entry (bibtex-parse-entry))
          (key (alist-get "=key=" entry nil nil #'s-equals?))
@@ -601,7 +602,6 @@ With arg, searchs the dplp instead.
          (cite-type (concat "@In" type))
          )
     ;; make key permanent if necessary
-    (+jg-bibtex-lock-key)
 
     ;; go to end of entry
     ;; insert stub

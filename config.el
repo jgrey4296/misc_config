@@ -102,3 +102,8 @@
 ;;-- lookup
 (setq +lookup-provider-url-alist jg-browse-providers-alist)
 ;;-- end lookup
+
+;;-- auto mode overrides
+(add-to-list 'auto-mode-alist '("\\.pl\\'" . prolog-mode))
+
+;;-- end auto mode overrides

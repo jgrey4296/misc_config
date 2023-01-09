@@ -14,7 +14,7 @@ alias cpu="top -l1 -n0"
 
 # List active emacs
 alias pse="ps -A -O nice | grep -i -E '[0-9]+\.[0-9]+ [^ ]*emacs'"
-alias psp="ps -A | grep -i -E '[0-9] python$' | grep -iv dropbox"
+alias psp="ps -A | grep -i -E 'python' | grep -iv dropbox"
 
 # Finder Quick Look from cli
 alias ql="qlmanage -p 2>/dev/null"

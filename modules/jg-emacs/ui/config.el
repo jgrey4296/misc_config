@@ -5,7 +5,6 @@
 (load! "+state-hl-lines")
 (load! "+popup")
 (after! hydra   (load! "+hydra"))
-(after! doom-ui (load! "+advice"))
 (after! jg-bindings-total
   (load! "+bindings")
   (after! ibuffer
@@ -53,8 +52,12 @@
 
 
 ;;-- hooks
+;;
+(defun +jg-ui-load-advice () (load! "+advice"))
 (add-hook! 'doom-first-file-hook #'+jg-ui-popup-activate-rules)
 (add-hook! 'doom-init-ui-hook    #'rainbow-delimiters-mode)
+(add-hook! 'doom-init-ui-hook    #'+jg-ui-load-advice)
+
 (after! ibuffer
   (add-hook! 'ibuffer-mode-hook    #'+jg-ui-ibuffer-update-hook)
   )

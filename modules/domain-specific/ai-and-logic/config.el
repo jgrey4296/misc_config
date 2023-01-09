@@ -30,7 +30,6 @@
 
 (after! ob-prolog
   (setq org-babel-prolog-command "swipl")
-  (add-to-list 'auto-mode-alist '("\\.lp$" . prolog-mode))
   )
 
 (use-package-hook! proof-general :post-config
@@ -43,6 +42,7 @@
 (use-package! pasp-mode
   :init
   (add-to-list 'auto-mode-alist '("\\.lp4" . pasp-mode ))
+  (add-to-list 'auto-mode-alist '("\\.lp$" . pasp-mode))
   (add-hook 'pasp-mode-hook (lambda ()
                               (setq-local indent-line-function '+jg-logic-pasp-indent)))
 

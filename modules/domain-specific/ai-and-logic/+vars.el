@@ -41,3 +41,20 @@
   (+jg-ui-popup-add-rules 'clingo jg-clingo-popup-rules)
   )
 ;;-- end popup rules
+
+;;-- file templates
+(after! jg-completion-templates
+  ;; logic
+  (+jg-completion-add-file-templates
+   'logic
+   '(
+     ("\\.lp4?"  :trigger "__" :mode pasp-mode)
+     ("\\.pl$"   :trigger "__" :mode prolog-mode)
+     ("\\.clp$"  :trigger "__" :mode clips-mode)
+     ("\\.asl$"  :trigger "__" :mode agentspeak-mode)
+     ("\\.cep$"  :trigger "__" :mode ceptre-mode)
+     ("\\.soar$" :trigger "__" :mode soar-mode)
+     )
+   )
+  )
+;;-- end file templates

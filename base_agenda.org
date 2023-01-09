@@ -18,6 +18,7 @@ Death by Institution and the Harms of Abstraction.
 *** [[file:/Volumes/documents/github/writing/orgfiles/primary/research_questions.org][Research Questions]]
 
 ** Other
+https://www.opensecrets.org/
 https://www.cs.man.ac.uk/~schmidt/tools/
 https://developer.nvidia.com/gpugems/gpugems/contributors
 https://www.oise.utoronto.ca/collaborativeindigenousresearch

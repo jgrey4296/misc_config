@@ -5,28 +5,20 @@
 ##-- imports
 from __future__ import annotations
 
-from os import getcwd
-import pathlib
-import abc
-import re
-import argparse
+import functools
+import itertools
 import logging as logmod
+import pathlib
+import re
 import sys
-from copy import deepcopy
-from dataclasses import InitVar, dataclass, field
 from importlib import reload
+from os import getcwd
 from re import Pattern
-from typing import (TYPE_CHECKING, Any, Callable, ClassVar, Final, Generic,
-                    Iterable, Iterator, Mapping, Match, MutableMapping,
-                    Protocol, Sequence, Tuple, TypeAlias, TypeGuard, TypeVar,
-                    cast, final, overload, runtime_checkable)
 from uuid import UUID, uuid1
 from weakref import ref
+
 import pyparsing as pp
 
-if TYPE_CHECKING:
-    # tc only imports
-    pass
 ##-- end imports
 
 ##-- logging
@@ -58,5 +50,8 @@ def logattrs():
 
 def remind():
     current_globals = set(globals().keys()).difference(initial_globals)
-    print("Reminder: [cwd, logattrs, reload, pp, remind] are loaded")
+    print("Reminder: [cwd, logattrs, reload, pp, remind, itertools, functools, re] are loaded")
     print(f"Globals since load: {current_globals}")
+
+
+remind()

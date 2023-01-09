@@ -49,16 +49,20 @@
 ;;-- end general python
 
 ;;-- outline
-(after! python
+(after! 'python-mode
   (setq jg-python-outline-regexp
-        (python-rx (or ?#
-                       upper
-                       (: (* space) block-start)
-                       (: (* space) ?@)
-                       )
-                   )
+        (rx-let ((kwds (regexp (eval (s-join "\\|" py-outline-mode-keywords))))
+                 )
+        (rx (* blank)
+            (or "##--"
+                (| "@" (+ word))
+                kwds
+                )
+            )
         )
-  )
+        jg-python-outline-end-regexp ":[^\n]*\n"
+        )
+)
 ;;-- end outline
 
 ;;-- projectile

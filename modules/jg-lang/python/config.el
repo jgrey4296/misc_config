@@ -19,33 +19,58 @@
 (use-package! pyimport :demand)
 (use-package! lsp-jedi :defer)
 
-(after! python
-  (require 'python-mode)
-  )
-
 (use-package! python-mode
+  :mode ("[./]flake8\\'" . conf-mode)
+  :mode ("/Pipfile\\'" . conf-mode)
+
+  :init
+  (setq python-environment-directory doom-cache-dir
+        python-indent-guess-indent-offset-verbose nil)
+
+  (when (modulep! +lsp)
+    (add-hook 'python-mode-local-vars-hook #'lsp! 'append))
+  (when (modulep! +tree-sitter)
+    (add-hook 'python-mode-local-vars-hook #'tree-sitter! 'append))
+
   :config
-  (setq python-mode-hook nil)
-  (setq python-mode-local-vars-hook nil)
-  (add-hook! 'python-mode-hook #'outline-minor-mode
-             ;; #'+jg-python-outline-regexp-override-hook
+  (setq python-mode-hook nil
+        python-mode-local-vars-hook nil)
+
+
+  (add-hook! 'python-mode-hook
+             ;; #'outline-minor-mode
              ;; #'+python-use-correct-flycheck-executables-h
              #'doom-modeline-env-setup-python
              #'er/add-python-mode-expansions
              #'evil-collection-python-set-evil-shift-width
              #'doom--setq-tab-width-for-python-mode-h
              )
+
   ;; Always add auto-hide as the last thing
   (add-hook! 'python-mode-hook :depth 100
-             '+jg-python-auto-hide
+             #'+jg-python-auto-hide
+             #'+jg-python-outline-regexp-override-hook
              )
   (setq-hook! 'python-mode-hook tab-width python-indent-offset)
+
+  (set-repl-handler! 'python-mode #'+python/open-repl
+    :persist t
+    :send-region #'python-shell-send-region
+    :send-buffer #'python-shell-send-buffer)
+
+  (set-docsets! '(python-mode inferior-python-mode) "Python 3" "NumPy" "SciPy" "Pandas")
+
+  (when (modulep! :ui modeline)
+    (advice-add #'pythonic-activate :after-while #'+modeline-update-env-in-all-windows-h)
+    (advice-add #'pythonic-deactivate :after #'+modeline-clear-env-in-all-windows-h))
 )
 
 (use-package-hook! anaconda-mode :post-config
   (+jg-python-conda-binding-override)
   )
-
+(use-package-hook! python :post-config
+  (require 'python-mode)
+  )
 (use-package! lsp-pyright
   :after lsp-mode
   :init
@@ -56,12 +81,12 @@
 
 
 
-  ;; (use-package! lsp-python-ms
-  ;;   :unless (modulep! :lang python +pyright)
-  ;;   :after lsp-mode
-  ;;   :preface
-  ;;   (after! python
-  ;;     (setq lsp-python-ms-python-executable-cmd python-shell-interpreter)))
+;; (use-package! lsp-python-ms
+;;   :unless (modulep! :lang python +pyright)
+;;   :after lsp-mode
+;;   :preface
+;;   (after! python
+;;     (setq lsp-python-ms-python-executable-cmd python-shell-interpreter)))
 
 
 ;; (use-package! lsp-jedi

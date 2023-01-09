@@ -25,6 +25,9 @@
 (map! :map python-mode-map
       :after python-mode
       :localleader
+      (:prefix ("o" . "open")
+       :desc "Repl" "r" #'+python/open-repl
+       )
       (:prefix ("i" . "imports")
        :desc "Insert import"          "i" #'+jg-python-insert-import
        :desc "Insert Import Snippet"  "I" #'+jg-python-import-snippet

@@ -19,7 +19,10 @@
 ;;; Code:
 
 (defun +jg-python-outline-regexp-override-hook ()
-  (setq-local outline-regexp jg-python-outline-regexp)
+  (setq-local outline-regexp jg-python-outline-regexp
+              outline-heading-end-regexp jg-python-outline-end-regexp
+              outline-level #'+jg-python-outline-level
+              )
   )
 
 (define-advice +python-use-correct-flycheck-executables-h (:override ()

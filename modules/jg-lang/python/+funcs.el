@@ -287,3 +287,7 @@ TODO
             )
     )
   )
+
+(defun +jg-python-outline-level ()
+  (current-indentation)
+  )

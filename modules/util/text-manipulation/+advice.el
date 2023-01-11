@@ -67,3 +67,9 @@
   " When joining lines, don't lose sight of the lhs of the buffer "
   (beginning-of-line)
   )
+
+(define-advice +evil:defun-txtobj (:around (fn &rest r)
+                                           +jg-text-ensure-visual)
+  (evil-visual-state)
+  (apply fn r)
+  )

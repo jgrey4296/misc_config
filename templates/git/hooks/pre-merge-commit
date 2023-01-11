@@ -1,11 +1,25 @@
 #!/usr/bin/env python3
 """
-Invoked by git-merge,
-*after* merging, before committing
-bypassed by --no-verify
-No parameters,
+This hook is invoked by git-merge(1), and can be bypassed
+with the --no-verify option. It takes no parameters, and is
+invoked after the merge has been carried out successfully
+and before obtaining the proposed commit log message to make
+a commit. Exiting with a non-zero status from this script
+causes the git merge command to abort before creating a
+commit.
 
-exit(1) aborts before committing the merge
+The default pre-merge-commit hook, when enabled, runs the
+pre-commit hook, if the latter is enabled.
+
+This hook is invoked with the environment variable
+GIT_EDITOR=: if the command will not bring up an editor to
+modify the commit message.
+
+If the merge cannot be carried out automatically, the
+conflicts need to be resolved and the result committed
+separately (see git-merge(1)). At that point, this hook will
+not be executed, but the pre-commit hook will, if it is
+enabled.
 """
 ##-- imports
 import sys
@@ -15,13 +29,6 @@ import re
 
 ##-- ifmain
 if __name__ == "__main__":
-    fname = sys.argv[1]
-    with open(pl.Path(fname), 'r') as f:
-        line = f.readline()
-
-    match_re = re.compile(r"^\[\w+\]")
-    if not match_re.match(line):
-        print("Commit Messages need to have a [tag] at the start")
-        exit(1)
+    pass
 
 ##-- end ifmain

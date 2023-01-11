@@ -1,10 +1,26 @@
 #!/usr/bin/env python3
 """
-An basic hook script to check the commit log message.
-Called by "git commit" with one argument, the name of the file
-that has the commit message.  The hook should exit with non-zero
-status after issuing an appropriate message if it wants to stop the
-commit.  The hook is allowed to edit the commit message file.
+This hook is invoked by git-commit(1) right after preparing
+the default log message, and before the editor is started.
+
+It takes *one* to *three* parameters.
+- The first is the name of the file that contains the commit log message.
+- The second is the source of the commit message, and can be:
+---- message (if a -m or -F option was given);
+---- template (if a -t option was given or the configuration option commit.template is set);
+---- merge (if the commit is a merge or a .git/MERGE_MSG file exists);
+---- squash (if a .git/SQUASH_MSG file exists);
+---- commit,
+- The third is a commit object name (if a -c, -C or --amend option was given). when the second is commit.
+
+If the exit status is non-zero, git commit will abort.
+
+The purpose of the hook is to edit the message file in
+place, and it is not suppressed by the --no-verify option. A
+non-zero exit means a failure of the hook and aborts the
+commit. It should not be used as replacement for pre-commit
+hook.
+
 """
 ##-- imports
 import argparse
@@ -16,18 +32,13 @@ import sys
 ##-- argparse
 parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter,
                                  epilog = "\n".join([""]))
-parser.add_argument('commitfile', required=True)
+parser.add_argument('commitfile'),
+parser.add_argument('--source')
+parser.add_argument('--obj')
 ##-- end argparse
 
 ##-- ifmain
 if __name__ == "__main__":
     args = parser.parse_args()
-    with open(pl.Path(args.commitfile), 'r') as f:
-        line = f.readline()
-
-    match_re = re.compile(r"^\[\w+\]")
-    if not match_re.match(line):
-        print("Commit Messages need to have a [tag] at the start")
-        exit(1)
-
+    pass
 ##-- end ifmain

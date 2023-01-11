@@ -18,9 +18,10 @@ function conda_maintenance(){
     echo "--------------------" >> "$CONDA_MAINTENANCE_TARGET"
 
     for f in "$HOME/.doom.d/terminal/conda_envs/*.yaml"; do
-        name=`basename -s .yaml $f`
+        local name=$(basename -s .yaml $f)
         echo "Found $name"
-        if conda_activate_for_scripts "$name"; then
+        if conda_activate_for_scripts "$name"
+        then
             echo "-------------------- Loaded $name"
             conda update --all -y
             # conda env export --from-history > $f
@@ -85,7 +86,8 @@ function git_url_backup(){
     echo "" > "$GIT_BKUP_TARGET"
     for Dir in "$GIT_BKUP_WATCH/*"
     do
-        if [[ -d "$Dir" ]]; then
+        if [[ -d "$Dir" ]]
+        then
             cd "$Dir"
             if git rev-parse --is-inside-work-tree > /dev/null 2> /dev/null
             then
@@ -116,6 +118,7 @@ function run_maintenance(){
 
     echo "Brew Update --------------------"
     brew update
+    brew upgrade
     echo "--------------------"
 
     echo "Doom Upgrade --------------------"
@@ -146,7 +149,7 @@ function pdf_summarise(){
 }
 
 function latex_summarise(){
-    tlmgr info --only-installed > "$HOME/.doom.d/setup_files/latex/installed_packages"
+    tlmgr info --only-installed > "$HOME/.doom.d/terminal/latex/installed_packages"
 }
 
 alias dropwatch="dropbox_watcher"

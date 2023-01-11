@@ -50,6 +50,7 @@
   (add-hook! 'python-mode-hook :depth 100
              #'+jg-python-auto-hide
              #'+jg-python-outline-regexp-override-hook
+             #'+jg-python-bounds-fix-hook
              )
   (setq-hook! 'python-mode-hook tab-width python-indent-offset)
 

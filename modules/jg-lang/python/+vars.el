@@ -43,13 +43,16 @@
                 python-shell-interpreter "python3"
                 python-shell-interpreter-args "-i"
                 python-shell-interpreter-path-args (doom-module-expand-path :jg-lang 'python "repl_startup.py ")
+
+                py-use-font-lock-doc-face-p t
+                py-fontify-shell-buffer-p t
                 )
   (modify-syntax-entry ?_ "_" python-mode-syntax-table)
   )
 ;;-- end general python
 
 ;;-- outline
-(after! 'python-mode
+(after! python-mode
   (setq jg-python-outline-regexp
         (rx-let ((kwds (regexp (eval (s-join "\\|" py-outline-mode-keywords))))
                  )

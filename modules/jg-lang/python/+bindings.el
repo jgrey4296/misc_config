@@ -10,8 +10,8 @@
       :after python-mode
       :n "z d" nil ;; #'+jg-python-toggle-all-defs
       :n "z D" nil ;; #'+jg-python-close-class-defs
-      :v "i f" #'+jg-python-select-defun
-      :v "i F" #'+jg-python-select-class
+      :v "i f" nil ;; #'+jg-python-select-defun
+      :v "i F" nil ;; #'+jg-python-select-class
       :n "] ]" #'+jg-python-forward-defun
       :n "s j" '+jg-python-swipe-to-def
       :localleader

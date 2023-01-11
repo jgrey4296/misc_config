@@ -92,4 +92,14 @@ and closes classes and functions, re-opening only the first class "
       )
     )
   )
+
+(defun +jg-python-def-bounds ()
+  (interactive)
+  (cons (py--end-of-def-or-class-position)
+        (py--beginning-of-def-or-class-position))
+  )
+
+(defun +jg-python-bounds-fix-hook ()
+  (put 'defun 'bounds-of-thing-at-point '+jg-python-def-bounds)
+  )
 ;;; +hooks.el ends here

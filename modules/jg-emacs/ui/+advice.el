@@ -9,7 +9,9 @@
 Advice for `kill-current-buffer'. If in a dedicated window, delete it. If there
 are no real buffers left OR if all remaining buffers are visible in other
 windows, switch to `doom-fallback-buffer'. Otherwise, delegate to original
-`kill-current-buffer'."
+`kill-current-buffer'.
+TODO add fallback to project root
+"
   (let* ((buf (current-buffer))
          (buf-mode (buffer-local-value 'major-mode buf))
          (other-windows (delq (selected-window) (get-buffer-window-list buf nil t)))
@@ -31,6 +33,14 @@ windows, switch to `doom-fallback-buffer'. Otherwise, delegate to original
                 (buffer-modified-p buf)
                 (not (y-or-n-p (format "JG: Buffer %s is modified; kill anyway?" buf))))
            (user-error "Aborted")
+           t
+           )
+          ((and (projectile-project-root)
+                (not (cl-set-difference (doom-real-buffer-list)
+                                        (doom-visible-buffers))))
+           (kill-buffer buf)
+           ;; in a project, go do the project root
+           (find-file (projectile-project-root))
            t
            )
           ((not (cl-set-difference (doom-real-buffer-list)

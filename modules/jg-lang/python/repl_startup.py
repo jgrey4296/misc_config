@@ -5,13 +5,15 @@
 ##-- imports
 from __future__ import annotations
 
+from types import ModuleType
+import argparse
 import functools
 import itertools
 import logging as logmod
 import pathlib
 import re
 import sys
-from importlib import reload
+import importlib
 from os import getcwd
 from re import Pattern
 from uuid import UUID, uuid1
@@ -52,6 +54,15 @@ def remind():
     current_globals = set(globals().keys()).difference(initial_globals)
     print("Reminder: [cwd, logattrs, reload, pp, remind, itertools, functools, re] are loaded")
     print(f"Globals since load: {current_globals}")
+
+def reload():
+    for name, x in globals().items():
+        if isinstance(x, ModuleType):
+            try:
+                print(f"Reloading: {name}")
+                importlib.reload(x)
+            except Exception as err:
+                print(err)
 
 
 remind()

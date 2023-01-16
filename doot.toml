@@ -1,9 +1,13 @@
-[project]
-name = "test"
+verbosity               = 2
 
-##-- doit
-[tool.doit]
-verbosity = 2
-build_dir = "build"
+[tool.doot]
+say-on-exit = false
+glob_ignores = ['.git', '.DS_Store', "__pycache__"]
 
-##-- end doit
+[tool.doot.directories]
+src     = "src"
+codegen = "_codegen"
+temp    = ".temp"
+build   = "build"
+docs    = "docs"
+data    = "data"

@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name  : doot.glob
+# uuid  : doot.glob
+# key   : doot.glob
+# group :
+# --
+
+import doot
+from doot import globber
+
+class $1(globber.EagerFileGlobber):
+    """
+
+    """
+    def __init__(self, name="$2", dirs=None, roots=None, rec=False, exts=None):
+        super().__init__(name, dirs, roots or [dirs.$3], rec=rec, exts=exts or [$4])
+
+    def filter(self, fpath):
+        return self.control.accept
+
+    def subtask_detail(self, task, fpath):
+        task.update({
+            "actions" : []
+        })
+        return task

@@ -164,6 +164,15 @@ TODO
       )
     )
   )
+
+(defun +jg-python-cleanup-ensure-newline-before-def ()
+  (while (re-search-forward "^\s+def " nil t)
+    (forward-line -1)
+    (end-of-line)
+    (insert "\n")
+    (forward-line 2)
+    )
+  )
 ;;-- end cleanup
 
 ;;-- summary

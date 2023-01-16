@@ -92,6 +92,8 @@ and closes classes and functions, re-opening only the first class "
    indent-region-function      'python-indent-region
    indent-line-function        'python-indent-line
    )
+
+  (add-hook 'jg-text-whitespace-clean-hook '+jg-python-cleanup-ensure-newline-before-def 5 t)
   (add-hook 'jg-text-whitespace-clean-hook 'delete-trailing-whitespace 10 t)
   (add-hook 'jg-text-whitespace-clean-hook '+jg-python-cleanup-whitespace 20 t)
   )

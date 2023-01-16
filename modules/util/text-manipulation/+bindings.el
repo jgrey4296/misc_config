@@ -58,6 +58,11 @@
       )
 
 (map! :map jg-binding-operator-map
+      :desc "Whitespace clean" "w" #'+jg-text-whitespace-cleanup
+      :desc "Delete trailing whitespace"  "W" #'delete-trailing-whitespace
+
+      :desc "Complete/Grow Selection"  "g" (cmds! (eq evil-state 'normal) #'company-manual-begin
+                                                  (eq evil-state 'visual) #'+jg-text-grow-selection-op)
       (:prefix ("s" . "String-ops")
       :desc "Split on distance"        "s" #'+jg-text-split-on-leading-char
       :desc "Set Buffer Coding"        "B" #'set-buffer-file-coding-system
@@ -67,8 +72,6 @@
       :desc "Title Case"               "t"  #'+jg-text-title-case-op
       :desc "Rotate"                   "r" #'rotate-text
       )
-      :desc "Complete/Grow Selection"  "g" (cmds! (eq evil-state 'normal) #'company-manual-begin
-                                                  (eq evil-state 'visual) #'+jg-text-grow-selection-op)
       (:prefix ("/" . "Search")
        :desc "Simple Grep"          "g" #'+jg-text-simple-grep-op
        :desc "Next Similar String " "s" #'+jg-text-next-similar-string

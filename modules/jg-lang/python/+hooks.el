@@ -69,21 +69,6 @@ and closes classes and functions, re-opening only the first class "
       (beginning-of-buffer)
       ;; Fold Imports
       (message "Searching for import block")
-      ;; (if (re-search-forward "^\\(from\\|import\\|##-- imports\\)" nil t)
-      ;;     (let* ((start-hide (progn (beginning-of-line) (point)))
-      ;;            (end-hide (progn (forward-line)
-      ;;                             (re-search-forward jg-python-import-block-end-re nil t)
-      ;;                             (re-search-backward "^\\(from\\|import\\|##-- end imports\\)" (+ 10 start-hide) t)
-      ;;                             (end-of-line)
-      ;;                             (point)))
-      ;;            )
-      ;;       (if (and start-hide end-hide (not (= start-hide end-hide)) (not (vimish-fold--folds-in start-hide end-hide)))
-      ;;           (vimish-fold start-hide end-hide)
-      ;;         )
-      ;;       )
-      ;;   )
-      ;; (forward-line)
-      ;; Semi-Fold everything
       (evil-close-folds)
       (when (re-search-forward "^class " nil t)
         (let ((current-prefix-arg t))
@@ -93,13 +78,21 @@ and closes classes and functions, re-opening only the first class "
     )
   )
 
-(defun +jg-python-def-bounds ()
-  (interactive)
-  (cons (py--end-of-def-or-class-position)
-        (py--beginning-of-def-or-class-position))
-  )
+;; (defun +jg-python-def-bounds ()
+;;   (interactive)
+;;   (cons (py--end-of-def-or-class-position)
+;;         (py--beginning-of-def-or-class-position))
+;;   )
 
-(defun +jg-python-bounds-fix-hook ()
-  (put 'defun 'bounds-of-thing-at-point '+jg-python-def-bounds)
+(defun +jg-python-customisation-hook ()
+  ;; (put 'defun 'bounds-of-thing-at-point '+jg-python-def-bounds)
+  (setq-local
+   end-of-defun-function       'python-nav-end-of-defun
+   beginning-of-defun-function 'python-nav-beginning-of-defun
+   indent-region-function      'python-indent-region
+   indent-line-function        'python-indent-line
+   )
+  (add-hook 'jg-text-whitespace-clean-hook 'delete-trailing-whitespace 10 t)
+  (add-hook 'jg-text-whitespace-clean-hook '+jg-python-cleanup-whitespace 20 t)
   )
 ;;; +hooks.el ends here

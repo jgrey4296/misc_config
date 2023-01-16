@@ -1,22 +1,10 @@
 ;;; util/text/+funcs.el -*- lexical-binding: t; -*-
-(defun +jg-text-get-line ()
-  (buffer-substring-no-properties (line-beginning-position)
-                                  (line-end-position))
-  )
 
+;;-- cleaning
 (defun +jg-text-strip-spaces (str)
   "Utility to replace spaces with underscores in a string.
 Used to guard inputs in tag strings"
   (s-replace " " "_" (string-trim str))
-  )
-
-(defun +jg-text-regex-reminder ()
-  (interactive)
-  (with-temp-buffer-window "*Regex Char Class Reminder*" 'display-buffer-pop-up-window
-                           nil
-    (princ (yas--template-content (yas-lookup-snippet "Char Classes" 'fundamental-mode)))
-    )
-  nil
   )
 
 (defun +jg-text-remove-leading-whitespace ()
@@ -33,6 +21,8 @@ Used to guard inputs in tag strings"
       )
     )
   )
+
+;;-- end cleaning
 
 (defun +jg-text-split-on-leading-char (char-no width dist)
   " Loop through the buffer, splitting lines if the substring has a greater levenstein distance from the previous line "
@@ -55,6 +45,7 @@ Used to guard inputs in tag strings"
     )
   )
 
+;;-- utils
 (defun +jg-text-yank-buffer-name ()
   (interactive)
   (message (kill-new (buffer-name)))
@@ -80,6 +71,23 @@ Used to guard inputs in tag strings"
   (let ((inhibit-read-only t)) (erase-buffer))
   )
 
+(defun +jg-text-regex-reminder ()
+  (interactive)
+  (with-temp-buffer-window "*Regex Char Class Reminder*" 'display-buffer-pop-up-window
+                           nil
+    (princ (yas--template-content (yas-lookup-snippet "Char Classes" 'fundamental-mode)))
+    )
+  nil
+  )
+
+(defun +jg-text-get-line ()
+  (buffer-substring-no-properties (line-beginning-position)
+                                  (line-end-position))
+  )
+;;-- end utils
+
+
+;;-- util inserts
 (defun +jg-text-insert-lparen ()
   " utility to insert a (  "
   (interactive)
@@ -97,7 +105,10 @@ Used to guard inputs in tag strings"
   (yas-expand-snippet (yas-lookup-snippet jg-text-debug-snippet-name) (point))
   )
 
+;;-- end util inserts
 
+
+;;-- formatting
 (defun +jg-text-combine-columns (textlst)
   (let* ((rows-of-cols (mapcar (lambda (x)
                                  (mapcar 's-trim (split-string x "\n")))
@@ -154,3 +165,5 @@ Used to guard inputs in tag strings"
                   "\n"))
     )
   )
+
+;;-- end formatting

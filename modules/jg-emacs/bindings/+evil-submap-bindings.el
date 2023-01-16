@@ -117,8 +117,6 @@
       :desc "Align"              "a" #'align-regexp
       :desc "IEdit"              "e" #'iedit-mode
 
-      :desc "Delete trailing whitespace"  "w" #'delete-trailing-whitespace
-      :desc "Delete trailing newlines"    "W" #'doom/delete-trailing-newlines
 
 
       )

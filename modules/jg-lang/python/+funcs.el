@@ -156,6 +156,14 @@ TODO
       )
     )
   )
+
+(defun +jg-python-cleanup-whitespace ()
+  (while (re-search-forward "\n\n\\(\n+\\)" nil t)
+    (let ((matched (length (match-string 1))))
+      (backward-delete-char matched)
+      )
+    )
+  )
 ;;-- end cleanup
 
 ;;-- summary

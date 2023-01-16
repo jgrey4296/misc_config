@@ -1,4 +1,8 @@
 ;;; util/text/+vars.el -*- lexical-binding: t; -*-
+
+(defvar jg-text-whitespace-clean-hook nil)
+
+(add-hook 'jg-text-whitespace-clean-hook 'delete-trailing-whitespace)
 (setq-default jg-text-last-similarity-arg 1
               jg-text-debug-snippet-name "util.debug"
               )

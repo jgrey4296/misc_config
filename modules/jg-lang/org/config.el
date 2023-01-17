@@ -42,6 +42,7 @@
   ;; (setq org-mode-map      (make-sparse-keymap "jg-org")
   ;;       evil-org-mode-map (make-sparse-keymap "jg-evil-org"))
   (provide 'jg-org-stage)
+  (add-hook! 'org-mode-hook #'+jg-org-custom-hook)
   )
 
 

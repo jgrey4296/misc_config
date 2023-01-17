@@ -167,3 +167,20 @@ Used to guard inputs in tag strings"
   )
 
 ;;-- end formatting
+
+
+
+(defun +jg-text-whitespace-cleanup ()
+  "Operator to run cleaning hooks"
+  (interactive)
+  (let ((inhibit-read-only t))
+    (cl-loop for hook in jg-text-whitespace-clean-hook
+             when (functionp hook)
+             do
+             (save-excursion
+               (goto-char (point-min))
+               (apply hook nil)
+               )
+             )
+  )
+)

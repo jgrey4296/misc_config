@@ -4,6 +4,7 @@
 
 (require 'doom-themes)
 
+(defface font-lock-operator-face '() "Missing face used in python mode" :group 'font-lock)
 
 ;;-- variables
 (defgroup jg-iosvkem-theme nil
@@ -172,6 +173,7 @@ determine the exact padding."
    ((font-lock-comment-face &override) :background (if jg-iosvkem-comment-bg (doom-lighten bg 0.05)) :slant 'italic)
    ((font-lock-doc-face &override) :slant 'normal)
    ((font-lock-function-name-face &override) :weight 'bold)
+   ((font-lock-operator-face &override) :foreground blue)
 
    ((line-number &override) :foreground base4)
    ((line-number-current-line &override) :foreground iocyan :background bg)

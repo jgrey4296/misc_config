@@ -160,18 +160,21 @@ TODO
 (defun +jg-python-cleanup-whitespace ()
   (while (re-search-forward "\n\n\\(\n+\\)" nil t)
     (let ((matched (length (match-string 1))))
-      (backward-delete-char matched)
+      (replace-match "" nil nil nil 1)
       )
     )
   )
 
 (defun +jg-python-cleanup-ensure-newline-before-def ()
-  (while (re-search-forward "^\s+def " nil t)
-    (forward-line -1)
-    (end-of-line)
+  (while (re-search-forward "\\(\n\\)\\(\s+@.+?\n\\)*\s+def" nil t)
+    (goto-char (match-end 1))
     (insert "\n")
-    (forward-line 2)
+    (goto-char (match-end 0))
     )
+  )
+
+(defun +jg-python-align-dictionaries ()
+  ;; TODO
   )
 ;;-- end cleanup
 
@@ -283,7 +286,6 @@ TODO
     (ivy-read "Select Function: " processed :action (lambda (x) (goto-line (string-to-number (cdr x)))))
     )
   )
-
 
 (defun +jg-python-related-files-fn (path)
   " Provide projectile with various :kinds of related file "

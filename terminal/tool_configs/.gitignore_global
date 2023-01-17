@@ -27,6 +27,7 @@ target/
 /Cargo.lock
 
 # Python:
+.temp/venv
 *.egg-info
 *.mypy_cache
 *.pyc

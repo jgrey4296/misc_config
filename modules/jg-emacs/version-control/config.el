@@ -5,7 +5,7 @@
   (load! "+bindings")
   )
 
-(use-package smerge-mode
+(use-package! smerge-mode
   :after jg-bindings-total
   :init
   (map! :leader

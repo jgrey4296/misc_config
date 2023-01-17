@@ -95,19 +95,3 @@
          )
         )
   )
-
-(evil-define-operator +jg-text-whitespace-cleanup (beg end type)
-  "Operator to run cleaning hooks"
-  (interactive "<R>")
-  (cl-loop for hook in jg-text-whitespace-clean-hook
-           when (functionp hook)
-           do
-           (save-excursion
-             (save-restriction
-               (narrow-to-region beg end)
-               (goto-char beg)
-               (apply hook nil)
-               )
-             )
-           )
-  )

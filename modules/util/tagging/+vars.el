@@ -5,13 +5,13 @@
               jg-tag-global-tags (make-hash-table :test 'equal)
               jg-tag-alt-mapping (make-hash-table)
 
-              jg-tag-all-loc                    (expand-file-name "~/github/writing/resources/cron_reports/totals_total.tags")
+              jg-tag-all-loc                    (expand-file-name "~/github/writing/.temp/tags/totals.tags")
               jg-tag-loc-bookmarks              (expand-file-name "~/github/writing/resources/bookmarks/total.bookmarks")
               jg-tag-loc-default-helm-directory (expand-file-name "~/github/writing/resources/")
-              jg-tag-loc-global-tags            (expand-file-name "~/github/writing/resources/substitutions")
-              jg-tag-loc-twitter-account-index  (expand-file-name "~/github/writing/resources/cron_reports/tw_acct.index")
-              jg-tag-loc-twitter-grep-index     (expand-file-name "~/github/writing/resources/cron_reports/grep_tags.index")
-              jg-tag-loc-twitter-tag-index      (expand-file-name  "~/github/writing/resources/cron_reports/tw_tag.index")
+              jg-tag-loc-global-tags            (expand-file-name "~/github/writing/resources/tags/substitutions")
+              jg-tag-loc-twitter-account-index  (expand-file-name "~/github/writing/.temp/index/tw_acct.index")
+              jg-tag-loc-twitter-grep-index     (expand-file-name "~/github/writing/resources/index/grep_tags.index")
+              jg-tag-loc-twitter-tag-index      (expand-file-name "~/github/writing/resources/index/tw_tag.index")
               jg-tag-loc-twitter                "/Volumes/documents/twitterthreads/"
 
               jg-tag-marker (make-marker)

@@ -17,9 +17,10 @@
   (load! "+evil-ex-setup")
 )
 
-(use-package general-mod
+(use-package! general-mod
   :after general)
-(use-package which-mod
+
+(use-package! which-mod
   :after which-key)
 
 (after! flycheck

@@ -1,6 +1,7 @@
 ;;; org/jg-org/+org-funcs.el -*- lexical-binding: t; -*-
 ;; Functions that work on org files/ interact with the outside
 
+;;-- utils
 (defun +jg-org-open_link_in_buffer ()
   " a util function to force links to be open in emacs  "
   (interactive)
@@ -61,48 +62,7 @@
                              )
     )
   )
-(defun +jg-org-chop-long-file (name &optional preferred-length)
-  "Take long org files and split them into multiple files
-If preferred-length is not specified, use jg-org-preferred-linecount
-"
-  (message "----------")
-  (message "Chopping: %s" name)
-  (with-temp-buffer
-    (insert-file-contents name t)
-    (goto-char (point-min))
-    (let* ((count 1)
-           (base_name (file-name-sans-extension name))
-           (internal_name (buffer-substring (+ 2 (point-min)) (line-end-position)))
-           (master_name (format "%s_master.org" base_name))
-           (regexp "^\\*\\*[^*]")
-           (last-position (re-search-forward regexp nil t))
-           (linecount 0)
-           (fn-fn (lambda () (format "%s_%s.org" base_name count)))
-           (ln-fn (lambda (a b) (- (line-number-at-pos (max a b))
-                                   (line-number-at-pos (min a b)))))
-           )
-      (append-to-file (format "* %s\n" internal_name) nil master_name)
-      (while (re-search-forward "^\\*\\*[^*]" nil t )
-        (if (not (file-exists-p (funcall fn-fn)))
-            (progn (message "Creating %s" (funcall fn-fn))
-                   (append-to-file (format "* %s %s\n" internal_name count) nil (funcall fn-fn))
-                   (append-to-file (format "** [[%s][%s %s]]\n" (funcall fn-fn) internal_name count) nil master_name)
-                   )
-          )
-        (append-to-file "\n** " nil (funcall fn-fn))
-        (append-to-file last-position (line-beginning-position) (funcall fn-fn))
-        (setq linecount (+ linecount (funcall ln-fn (point) last-position))
-              last-position (point))
-        (if (> linecount (or preferred-length jg-org-preferred-linecount))
-            (setq linecount 0
-                  count (+ 1 count))
-          )
-        )
-      (append-to-file "\n** " nil (funcall fn-fn))
-      (append-to-file last-position (point-max) (funcall fn-fn))
-      )
-    )
-  )
+
 (defun +jg-org-list-agenda-files ()
   " Creates a temporary, Org-mode buffer with links to agenda files "
   (interactive)
@@ -194,6 +154,8 @@ Sort, align, split, save "
 
     )
   )
+;;-- end utils
+
 
 (fset 'ad-Advice-newline-and-indent #'(lambda (x &rest _) (funcall x)))
 

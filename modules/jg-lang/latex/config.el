@@ -2,7 +2,7 @@
 
 (load! "+vars")
 
-(use-package tex-mode
+(use-package! tex-mode
   :config
   (map! :after jg-bindings-total
         :map latex-mode-map

@@ -22,7 +22,7 @@
       doom-fallback-buffer-name       "base_agenda.org"
       initial-buffer-choice           (expand-file-name "base_agenda.org" doom-user-dir)
       ispell-personal-dictionary      (expand-file-name "terminal/tool_configs/.ispell_english" doom-user-dir)
-      org-agenda-files               `(,(expand-file-name "org/base_agenda.org" doom-user-dir))
+      org-agenda-files               `(,(expand-file-name "base_agenda.org" doom-user-dir))
       org-archive-location            (string-join `(,(expand-file-name "org/archive.org" doom-user-dir) "* Main Archive") "::")
       org-directory                   (expand-file-name "~/github/writing/orgfiles/")
       pyvenv-default-virtual-env-name (expand-file-name "~/anaconda/envs/")

@@ -220,25 +220,6 @@ and the property block directly below "
     )
   )
 ;; Utils
-(defun +jg-org-map-entries-clean-whitespace ()
-  "Called from org-map-entries. reduces whitespace prior
-to point to a single new line"
-  (set-marker jg-org-clean-marker (line-end-position))
-  (if (not (eq (point) (point-min)))
-      (progn
-        (while (eq 0 (string-match "^[[:space:]]*$"
-                                   (buffer-substring
-                                    (line-beginning-position 0)
-                                    (line-end-position 0))))
-          (join-line))
-        (if (not (string-equal "*" (buffer-substring
-                                    (line-beginning-position 0)
-                                    (+ 1 (line-beginning-position 0)))))
-            (insert "\n"))
-        (setq org-map-continue-from jg-org-clean-marker)
-        )
-    )
-  )
 (defun +jg-org-map-entry-duplicate-finder ()
   " Find threads that are only duplicates "
   (let ((ctx (org-element-context))

@@ -1,6 +1,8 @@
 aften
 agda
 aom
+apr
+apr-util
 atk
 autoconf
 awk
@@ -228,6 +230,7 @@ ruby-install
 rustup-init
 s-lang
 saxon
+scons
 sdl2
 shared-mime-info
 six
@@ -236,7 +239,9 @@ speex
 sqlite
 srt
 stk
+subversion
 swi-prolog
+swig
 szip
 tcl-tk
 tesseract
@@ -248,6 +253,7 @@ unbound
 universal-ctags
 unixodbc
 unrar
+utf8proc
 wakeonlan
 webp
 wget

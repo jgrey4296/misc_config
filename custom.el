@@ -148,7 +148,8 @@
  '(safe-local-variable-values '((eval +jg-python-activate-venv-and-conda)))
  '(warning-suppress-log-types '((flycheck syntax-checker)))
  '(warning-suppress-types
-   '(((python python-shell-completion-native-turn-on-maybe))
+   '(((defvaralias losing-value woman-topic-history))
+     ((python python-shell-completion-native-turn-on-maybe))
      (org-element-cache)
      (flycheck syntax-checker))))
 (custom-set-faces

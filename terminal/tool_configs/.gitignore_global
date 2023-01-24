@@ -91,3 +91,4 @@ log.*
 
 # doot
 .tasks_cache
+_doot_defaults.toml

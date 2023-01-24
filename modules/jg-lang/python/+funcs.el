@@ -166,7 +166,7 @@ TODO
   )
 
 (defun +jg-python-cleanup-ensure-newline-before-def ()
-  (while (re-search-forward "\\(\n\\)\\(\s+@.+?\n\\)*\s+def" nil t)
+  (while (re-search-forward "\\(\n\\)\\(\s*@.+?\n\\)*\s*\\(def\\|class\\)" nil t)
     (goto-char (match-end 1))
     (insert "\n")
     (goto-char (match-end 0))
@@ -309,4 +309,10 @@ TODO
 
 (defun +jg-python-outline-level ()
   (current-indentation)
+  )
+
+(defun +jg-python-breakpoint-line ()
+  " Get current file path and line, for using in python debugger "
+  (interactive)
+  (kill-new (concat "b " (buffer-file-name) " : "  (format "%s" (line-number-at-pos))))
   )

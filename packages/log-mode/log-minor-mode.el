@@ -1,4 +1,5 @@
 ;;; log-minor-mode.el -*- lexical-binding: t; -*-
+;;-- header
 ;;
 ;; Copyright (C) 2022 John Grey
 ;;
@@ -23,6 +24,8 @@
 ;; - highlight line numbers
 ;;
 ;;; Code:
+
+;;-- end header
 
 (define-minor-mode log-minor-mode
   " A Minor Mode for easily working with log files "

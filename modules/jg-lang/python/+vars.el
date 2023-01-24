@@ -116,7 +116,7 @@
      ("setup\\.cfg$"    :trigger "__setup_cfg"      :mode python-mode)
      ("__init__\\.py$"  :trigger "__init"           :mode python-mode)
      ("test_.+\\.py$"   :trigger "__tests"          :mode python-mode)
-     ("_cli.+\\.py$"    :trigger "__cli"            :mode python-mode)
+     ("cli_.+\\.py$"    :trigger "__cli"            :mode python-mode)
      ("conf\\.py$"      :trigger "__conf"           :mode python-mode)
      ("setup\\.py$"     :trigger "__setup"          :mode python-mode)
      ("dodo\\.py$"      :trigger "__dodo"           :mode python-mode)

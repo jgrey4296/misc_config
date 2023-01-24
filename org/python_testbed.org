@@ -131,6 +131,8 @@ https://github.com/python-rope/rope                                             
 https://github.com/python-rope/ropemacs                                                         : emacs : refactoring : rope
 https://github.com/vinta/awesome-python                                                         : recommendation
 jedi                                                                                            : 0.18.1
+pip-chill
+pip-reqs
 
 ** datastructures
 PyYAML                                                                                          : 6.0

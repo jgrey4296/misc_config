@@ -85,7 +85,7 @@
     (modify-syntax-entry ?\{ "(}" st)
     (modify-syntax-entry ?: ".:2" st)
     (setq agentspeak-mode-syntax-table st))
-  "Syntax table for the agentspeak-mode")
+  "Syntax table for the jacamo-mode")
 
 ;;-- end syntax
 

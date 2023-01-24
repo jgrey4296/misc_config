@@ -20,6 +20,7 @@
       :desc "REPL"      "r" #'+python/open-repl
       :desc "debug"     "d" (cmd! (setq jg-python-dev-mode (not jg-python-dev-mode))
                                   (message "Python Debug Mode: %s" jg-python-dev-mode))
+      :desc "breakpoint" "b" #'+jg-python-breakpoint-line
       )
 
 (map! :map python-mode-map

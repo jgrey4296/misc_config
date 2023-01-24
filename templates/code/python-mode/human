@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name  : human
+# uuid  : human
+# key   : human
+# group :
+# --
+import tracemalloc
+human     = lambda x, y=False: tracemalloc._format_size(x, y)

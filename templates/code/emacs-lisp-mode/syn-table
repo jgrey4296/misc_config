@@ -1,0 +1,35 @@
+# -*- mode: snippet -*-
+# name  : syntax-table
+# uuid  : syntax-table
+# key   : syntax-table
+# group :
+# --
+;;-- syntax
+(defvar $1-mode-syntax-table
+  (let ((st (make-syntax-table)))
+    ;; Symbols
+    (modify-syntax-entry ?. "_" st)
+    (modify-syntax-entry ?! "_" st)
+    (modify-syntax-entry ?$ "_" st)
+    (modify-syntax-entry ?+ "_" st)
+    (modify-syntax-entry ?- "_" st)
+    (modify-syntax-entry ?? "_" st)
+    (modify-syntax-entry ?@ "_" st)
+    (modify-syntax-entry ?\; "_" st)
+    ;;underscores are valid parts of words:
+    (modify-syntax-entry ?_ "w" st)
+    ;; Comments start with // and end on newlines
+    (modify-syntax-entry ?/ ". 124" st)
+    (modify-syntax-entry ?* "_ 23b" st)
+    (modify-syntax-entry ?\n ">" st)
+    ;; Strings
+    (modify-syntax-entry ?\" "\"" st)
+    ;; Pair parens, brackets, braces
+    (modify-syntax-entry ?\( "()" st)
+    (modify-syntax-entry ?\[ "(]" st)
+    (modify-syntax-entry ?\{ "(}" st)
+    (modify-syntax-entry ?: ".:2" st)
+    (setq agentspeak-mode-syntax-table st))
+  "Syntax table for the $1-mode")
+
+;;-- end syntax

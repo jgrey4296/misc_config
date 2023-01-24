@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name  : font-lock
+# uuid  : font-lock
+# key   : font-lock
+# group :
+# --
+(defconst $1-font-lock-keywords
+  (rx-let ((w (x) (: x (0+ blank)))
+           (ln (: punctuation line-end))
+           (basic-syms (| "@" "+" "!" "<-" "?" "-" "&"))
+           (basic-kws  (| "percept" "self" "include" "register_function"))
+           )
+    (list
+     `(,(rx line-start "mas" blank (*? word) (? (* blank) "uses" (group (*? any)) "{"))
+       (0 font-lock-keyword-face)
+       (1 font-lock-variable-name-face))
+     `(,(rx line-start (* blank) (group (or "agent" "goals" "beliefs" "goals" "debug" "verbose"
+                                            "instances" "join" "focus" "roles" "workspace" "artifact"
+                                            "agents" "organisation" "group" "owner" "players"
+                                            (: (or "asl" "org" "java") "-path")
+                                            (: "jacamo.platform." (or "Agent" "Environment" "Organisation") "WebInspector")
+                                            )))
+       (1 font-lock-keyword-face))
+     )
+    )
+  "Highlighting for $1-mode"
+  )

@@ -24,16 +24,18 @@
 ;;-- end header
 
 (defvar-local $1-mode-map
-
     (make-sparse-keymap))
 
+;; Fontlock:
 ;; List of '(regex (groupnum "face")+)
-(defconst $1-font-lock-keywords
-    (list
-        ;;backquote (,(rx ) (subexp facename override laxmatch))
+(rx-let (
+
         )
-    "Highlighting for $1-mode"
-    )
+
+    (defconst $1-font-lock-keywords
+        "Highlighting for $1-mode"
+        )
+)
 
 (define-derived-mode $1-mode fundamental-mode
     "$1"

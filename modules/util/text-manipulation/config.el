@@ -38,3 +38,5 @@
 
   )
 (use-package! license-templates)
+
+(use-package! lint-result-mode)

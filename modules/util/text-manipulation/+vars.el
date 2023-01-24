@@ -7,6 +7,8 @@
               jg-text-debug-snippet-name "util.debug"
               )
 
+(add-hook 'lint-result-mode-hook '+fold/close-all)
+
 ;;-- evil-surround
 (setq-default evil-surround-pairs-alist
   '((?\( . ("( " . " )"))

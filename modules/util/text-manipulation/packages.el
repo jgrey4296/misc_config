@@ -9,3 +9,5 @@
 (package! wordnut)
 (package! rotate-text)
 (package! license-templates)
+
+(package! lint-result-mode :recipe '(:local-repo ,(expand-file-name "lint-result-mode" doom-user-dir)))

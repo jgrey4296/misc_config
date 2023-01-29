@@ -3,17 +3,24 @@ agda
 aom
 apr
 apr-util
+aribb24
+asio
 atk
 autoconf
+automake
 awk
 bash
 bdw-gc
 berkeley-db
+berkeley-db@4
+berkeley-db@5
+bison
 brotli
 c-ares
 ca-certificates
 cabal-install
 cairo
+cargo-c
 cask
 chruby
 cjson
@@ -27,6 +34,8 @@ ctags
 dav1d
 docbook
 docbook-xsl
+docutils
+eigen
 elixir
 emacs
 emacs-plus@28
@@ -109,6 +118,7 @@ libassuan
 libavif
 libb2
 libbluray
+libcython
 libde265
 libepoxy
 libev
@@ -116,6 +126,7 @@ libevent
 libffi
 libgccjit
 libgcrypt
+libgit2
 libgpg-error
 libheif
 libidn
@@ -138,6 +149,7 @@ libsigsegv
 libsndfile
 libsodium
 libsoxr
+libssh2
 libtasn1
 libtiff
 libtool
@@ -156,6 +168,7 @@ libxdmcp
 libxext
 libxrender
 libyaml
+lit
 little-cms2
 llvm
 llvm@12
@@ -169,19 +182,23 @@ m4
 make
 mbedtls
 mcrypt
+meson
 mhash
 minimal-racket
 mono
 mpdecimal
 mpfr
+mpg123
 mu
 mujs
 mupdf
+nasm
 ncftp
 ncurses
 netpbm
 nettle
 nghttp2
+ninja
 node
 npth
 numpy
@@ -198,6 +215,7 @@ openjdk@11
 openjdk@17
 openjpeg
 openssl@1.1
+openssl@3
 opus
 ossp-uuid
 p11-kit
@@ -214,6 +232,7 @@ portaudio
 portmidi
 postgresql@14
 pure-ftpd
+pygments
 python@3.10
 python@3.11
 python@3.9
@@ -227,6 +246,7 @@ rtmpdump
 rubberband
 ruby
 ruby-install
+rust
 rustup-init
 s-lang
 saxon
@@ -236,6 +256,7 @@ shared-mime-info
 six
 snappy
 speex
+sphinx-doc
 sqlite
 srt
 stk
@@ -254,6 +275,7 @@ universal-ctags
 unixodbc
 unrar
 utf8proc
+util-macros
 wakeonlan
 webp
 wget
@@ -271,6 +293,7 @@ xmlstarlet
 xmlto
 xorgproto
 xpdf
+xtrans
 xvid
 xz
 z3

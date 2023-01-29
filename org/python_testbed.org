@@ -97,7 +97,11 @@ https://github.com/sixohsix/twitter                                             
 ** architecture
 https://github.com/numba/llvmlite
 https://flask.palletsprojects.com/en/2.2.x/
+https://palletsprojects.com/p/jinja/
+https://palletsprojects.com/p/werkzeug/
+https://docs.pylonsproject.org/projects/waitress/en/stable/
 https://docs.celeryq.dev/en/stable/
+https://www.rabbitmq.com/
 build                                                                                           : 0.8.0
 cachetools                                                                                      : 4.2.2
 cachy                                                                                           : 0.3.0

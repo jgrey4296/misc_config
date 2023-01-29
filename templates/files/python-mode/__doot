@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# mode:doit; -*-
+# mode:doot; -*-
 # https://pydoit.org/
 
 ##-- imports
@@ -11,24 +11,10 @@ from doit.task import clean_targets
 import doot
 ##-- end imports
 
-##-- config
-data_toml    = doot.setup()
-
-DOIT_CONFIG = {
-    "default_tasks" : [],
-    "action_string_formatting" : "new",
-    }
-
-##-- end config
-
-##-- post-config doot imports
-
 from doot.groups import *
 # from doot.groups_secondary import *
-##-- end post-config doot imports
 
-##-- ifdodo
-## Equivalent to if main
-if __name__ == "dodo":
+##-- ifdoot
+if __name__ == "doot":
     pass
-##-- end ifdodo
+##-- end ifdoot

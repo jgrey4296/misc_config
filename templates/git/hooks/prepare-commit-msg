@@ -33,8 +33,8 @@ import sys
 parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter,
                                  epilog = "\n".join([""]))
 parser.add_argument('commitfile'),
-parser.add_argument('--source')
-parser.add_argument('--obj')
+parser.add_argument('source', nargs="?")
+parser.add_argument('obj', nargs="?")
 ##-- end argparse
 
 ##-- ifmain

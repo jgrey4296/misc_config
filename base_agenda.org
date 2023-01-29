@@ -1,5 +1,7 @@
 -*- mode: org; -*-
 #+STARTUP: content
+[[/Users/johngrey/doot.toml][doot.toml]]
+[[/Users/johngrey/dooter.py][dooter.py]]
 
 * Base Agenda
 Death by Institution and the Harms of Abstraction.
@@ -26,6 +28,12 @@ Death by Institution and the Harms of Abstraction.
 *** [[file:/Volumes/documents/github/writing/orgfiles/primary/research_questions.org][Research Questions]]
 
 ** Other
+https://www.rabbitmq.com/getstarted.html
+https://www.openpolicyagent.org/
+https://en.m.wikipedia.org/wiki/Derinkuyu_underground_city
+https://sharkbombs.com/games/exnovo
+https://www.mcmaster.com/
+https://textbooks.math.gatech.edu/ila/
 https://www.opensecrets.org/
 https://www.cs.man.ac.uk/~schmidt/tools/
 https://developer.nvidia.com/gpugems/gpugems/contributors

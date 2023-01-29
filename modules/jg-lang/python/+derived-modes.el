@@ -13,15 +13,24 @@
 (add-to-list 'auto-mode-alist '("SConstruct" . scons-mode))
 ;;-- end scons
 
-;;-- doit
-(define-derived-mode doit-mode python-mode "doit"
+;;-- doit/doot
+(define-derived-mode doot-mode python-mode "doot"
   ""
   (interactive)
-  (setq-local major-mode 'doit-mode)
-  (setq-local mode-name  "doit")
+  (setq-local major-mode 'doot-mode)
+  (setq-local mode-name  "doot")
   (run-mode-hooks)
   )
 
-(add-to-list 'auto-mode-alist '("dodo.*\\.py" . doit-mode))
+(defun doot-open-toml ()
+  (interactive)
+  (when (and (s-matches? "dooter\\.py" (buffer-name))
+             (f-exists? (f-join default-directory "doot.toml")))
+    (split-window-right)
+    (with-selected-window (selected-window)
+      (find-file (f-join default-directory "doot.toml")))
+    ))
 
-;;-- end doit
+(add-to-list 'auto-mode-alist '("dooter\\.py" . doit-mode))
+
+;;-- end doit/doot

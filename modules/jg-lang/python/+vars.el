@@ -119,7 +119,7 @@
      ("cli_.+\\.py$"    :trigger "__cli"            :mode python-mode)
      ("conf\\.py$"      :trigger "__conf"           :mode python-mode)
      ("setup\\.py$"     :trigger "__setup"          :mode python-mode)
-     ("dodo\\.py$"      :trigger "__dodo"           :mode python-mode)
+     ("dooter\\.py$"    :trigger "__doot"           :mode python-mode)
      ("SConstruct"      :trigger "__sconstruct"     :mode python-mode)
      ("SConscript"      :trigger "__sconscript"     :mode python-mode)
      ("\\.py$"          :trigger "__"               :mode python-mode :priority -99)

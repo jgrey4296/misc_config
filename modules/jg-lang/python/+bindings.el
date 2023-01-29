@@ -127,3 +127,13 @@
       :localleader
       :desc "Docs: Manifest files"  "1" (cmd! (browse-url "https://docs.python.org/3/distutils/sourcedist.html?highlight=manifest"))
       )
+
+(map! :map doot-mode-map
+      :n "s <" #'doot-open-toml
+      )
+
+(map! :leader
+      :prefix ("c v" . "Environments")
+      :desc "Activate Environment" "c" #'+jg-python-activate-venv-and-conda
+
+      )

@@ -12,9 +12,7 @@
   )
 (load! "+advice")
 (load! "+env")
-(after! python-mode
-  (load! "+derived-modes")
-  )
+(load! "+derived-modes")
 
 (use-package! pyimport :demand)
 (use-package! lsp-jedi :defer)

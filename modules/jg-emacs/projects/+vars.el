@@ -5,7 +5,8 @@
 
               jg-projects-walk-popup-rules '(("^\\*Project-Walk\\*" :side left :ttl nil :quit t :select nil :priority -50))
 
-              jg-projects-doit-cmd "doot"
+              jg-projects-doot-cmd "doot"
+              jg-projects-doit-cmd "doit"
               )
 
 ;;-- popup
@@ -29,7 +30,7 @@
 
 ;;-- projectile compile
 (setq counsel-compile-local-builds '(
-                                     +jg-projects-get-doit-commands
+                                     +jg-projects-get-doot-commands
                                      +jg-projects-get-gradle-commands
                                      ;; counsel-compile-get-filtered-history
                                      ;; counsel-compile-get-build-directories

@@ -29,6 +29,7 @@
               jg-rust-cargo-toml-url   "https://doc.rust-lang.org/cargo/reference/manifest.html"
               jg-rust-cargo-search-url "https://crates.io/search?q=%s"
               jg-rust-cargo-make-url   "https://sagiegurari.github.io/cargo-make/"
+              jg-rust-by-example-url   "https://doc.rust-lang.org/stable/rust-by-example/index.html"
  )
 
 ;;-- end urls

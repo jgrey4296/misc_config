@@ -1,15 +1,15 @@
 ;;; +ivys.el -*- lexical-binding: t; -*-
 
 
-;;-- doit command retrieval
-(defun +jg-projects-get-doit-commands (&optional dir)
-  " get tasks from doit, cache them, then wrap them for use in ivy "
+;;-- doot command retrieval
+(defun +jg-projects-get-doot-commands (&optional dir)
+  " get tasks from doot, cache them, then wrap them for use in ivy "
   ;; add to counsel-compile-local-builds
   (interactive)
-  (+jg-projects-doit-tasks dir)
+  (+jg-projects-doot-tasks dir)
   )
 
-;;-- end doit command retrieval
+;;-- end doot command retrieval
 
 ;;-- gradle
 (defun +jg-projects-get-gradle-commands (&optional dir)

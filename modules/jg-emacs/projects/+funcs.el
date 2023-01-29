@@ -82,7 +82,7 @@
         ;;(init-file  (f-join (f-parent path) "__init__.py"))
         (log-file   (f-join (projectile-project-root) (concat "log." (f-base path))))
         ;;(error-file (f-join (car (f-split path)) "errors" (concat (f-base path) "_errors.py")))
-        (project    (f-join (projectile-project-root) "dodo.py"))
+        (project    (f-join (projectile-project-root) "dooter.py"))
         (is-test (s-matches? "^test_" (f-filename path)))
         )
     (append (when is-test (list :impl impl-file))
@@ -100,7 +100,7 @@
   (let ((default-directory (projectile-project-root))
         ivy-opts
         )
-    (setq ivy-opts (+jg-projects-doit-tasks nil (lambda (x) (concat jg-projects-doit-cmd " clean " (when arg "-c ") (car (split-string x" " t " ")))))
+    (setq ivy-opts (+jg-projects-doot-tasks nil (lambda (x) (concat jg-projects-doot-cmd " clean " (when arg "-c ") (car (split-string x" " t " ")))))
           counsel-compile--current-build-dir (or (counsel--compile-root) default-directory))
     (ivy-read "Clean Task: " ivy-opts
               :action #'counsel-compile--action
@@ -108,16 +108,16 @@
     )
   )
 
-(defun +jg-projects-doit-tasks (&optional dir act-fn int-fn)
+(defun +jg-projects-doot-tasks (&optional dir act-fn int-fn)
   ;; check for cache, if cache is newer than dodo file, use that, else run doit list
   (let ((default-directory (or dir (projectile-project-root) default-directory))
-        (act-fn (or act-fn (lambda (x) (concat jg-projects-doit-cmd " " (car (split-string x" " t " "))))))
+        (act-fn (or act-fn (lambda (x) (concat jg-projects-doot-cmd " " (car (split-string x" " t " "))))))
         )
     (unless (and (f-exists? ".tasks_cache")
-                 (time-less-p (f-modification-time "dodo.py") (f-modification-time ".tasks_cache")))
+                 (time-less-p (f-modification-time "dooter.py") (f-modification-time ".tasks_cache")))
         ;; No cache/out of date, so make it
       (message "Creating Cache")
-      (+jg-projects-cache-tasks jg-projects-doit-cmd "list")
+      (+jg-projects-cache-tasks jg-projects-doot-cmd "list")
       )
 
     (with-temp-buffer

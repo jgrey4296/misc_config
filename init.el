@@ -47,6 +47,7 @@
  rst
  rust
  xml
+ toml
 
  :jg-emacs  ;; ----- ====== -----
  bindings

@@ -1,0 +1,73 @@
+verbosity                = 2
+default_tasks            = ["locs::report"]
+action_string_formatting = "new"
+
+[tool.doot]
+notify  = {sleep = false, say-on-exit = false}
+subtask = { sleep = 2 }
+batch   = { sleep = 2, size = 100 }
+
+[tool.doot.globbing]
+ignores = ['.git', '.DS_Store', "__pycache__"]
+
+[tool.doot.logging]
+level        = "DEBUG"
+format       = "{levelname} : {message}                : ({module}.{lineno}.{funcName})"
+filters      =  ["doot", "bkmkorg"]
+
+
+[tool.doot.directories]
+temp               = ".temp"
+logs               = ".logs"
+bots               = ".bots"
+build              = "doot_build"
+
+backup_root        = "/volumes/BackupSD/"
+
+bibtex             = "~/github/writing/resources/bibliography"
+downloads          = "~/Downloads"
+desktop            = "~/Desktop"
+dropbox            = "~/Dropbox/docs"
+bibtex_working     = "/Volumes/documents/in_progress_pdfs/Current/"
+
+bookmarks          = "~/github/writing/resources/bookmarks"
+tags               = "~/github/writing/resources/tags"
+orgs               = "~/github/writing/orgfiles"
+
+thread_library     = "/Volumes/documents/twitterthreads"
+thread_backup      = "/Volumes/BackupSD/Library/twitter_threads"
+
+pdfs               = "/Volumes/documents/pdflibrary"
+pdf_backup         = "/Volumes/BackupSD/Library/pdflibrary"
+
+pdf_summary        = "/Volumes/documents/in_progress_pdfs/pdflib_automations/total_bib"
+pdf_summary_backup = "/Volumes/BackupSD/Library/summary"
+
+movies             = "/Users/johngrey/Movies"
+movies_backup      = "/Volumes/BackupSD/Movies"
+
+images             = "/Volumes/documents/DCIM"
+images_backup      = "/Volumes/BackupSD/Pictures"
+
+firefox            = "~/Library/ApplicationSupport/Firefox"
+
+local_push         = "/volumes/documents/pdflibrary"
+local_pull         = "/volumes/documents/android_test_pull"
+
+
+[tool.doot.files]
+bib_blacklist   = ".bots/bibtex_blacklist"
+bib_compile_tex = ".bots/bib_compile_template.tex"
+bib_success     = ".bots/log.bib_success"
+bib_fail        = ".bots/log.bib_fail"
+bib_style       = ".bots/jg_custom.bst"
+
+image_whitelist = ".bots/dcim_whitelist"
+image_blacklist = ".bots/resolution_blacklist"
+image_temp      = ".bots/conversion_temp"
+
+bookmarks_total = "~/github/writing/resources/bookmarks/total.bookmarks"
+bib_stub_file   = "~/github/writing/resources/todo.bib"
+secrets         = "~/.secrets/bkmkorg.toml"
+
+[tool.doot.group.maintain]

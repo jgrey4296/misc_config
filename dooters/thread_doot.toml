@@ -1,0 +1,16 @@
+verbosity                = 1
+action_string_formatting = "new"
+default_tasks            = []
+
+[tool.doot]
+say-on-exit   = "Doot has finished in twitter threads"
+batch-sleep   = 0.5
+subtask-sleep = 0.5
+batch-size    = 20
+max-batches   = -1
+glob_ignores  = ['.git', '.DS_Store', "__pycache__"]
+
+[tool.doot.directories]
+src     = "."
+data    = "."
+backup  = "/volumes/BackupSD/Library/twitter_threads"

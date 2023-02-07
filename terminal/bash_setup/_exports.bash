@@ -15,5 +15,4 @@ export JGLOGDIR
 export CMAKE_BUILD_PARALLEL_LEVEL
 # export TMPDIR
 
-export -f conda_activate_for_scripts
 export -f jgdebug

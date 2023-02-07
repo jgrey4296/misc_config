@@ -28,7 +28,7 @@ function jgprompt {
     if [ "${PROMPT_NUM-}" -lt 2 ]; then
         DEPTH_PROMPT="⟘"
     fi
-    JGPATH=$(pwd | sed -r 's/.+?\/(.+?\/.+?)/...\/\1/')
+    JGPATH=$(pwd | gsed -r 's/.+?\/(.+?\/.+?)/...\/\1/')
 
     if [[ -n "${CONDA_DEFAULT_ENV-}" ]]; then
         JGCONDA="py:${CONDA_DEFAULT_ENV-}"

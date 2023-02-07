@@ -2,6 +2,8 @@
 
 jgd Python Aliases
 
+CONDA_DEFAULT_ENV=base310
+
 alias pServer="python -m http.server 8888 &"
 alias qpServer="(python -m http.server 8888 > /dev/null 2>&1) & && (echo 'Running Quiet Server')"
 alias qpoServer="((python -m http.server 8888 > /dev/null 2>&1) &) && (echo 'Running Quiet Server') && (open http://localhost:8888/)"
@@ -19,11 +21,3 @@ alias cexport="conda env export --from-history"
 
 #NLTK:
 NLTK_DATA=~/assets/nlg/nltk
-
-jgd Adding conda_activate_for_scripts
-conda_activate_for_scripts() {
-  # Workaround for a conda bug: https://github.com/conda/conda/issues/7980
-  eval "$(conda shell.`basename -- $SHELL` hook)"
-  conda activate $1  # Will activate the base conda env if no arguments are passed.
-  echo "Active conda env for process $$ is now: ${CONDA_DEFAULT_ENV} at ${CONDA_PREFIX}"
-}

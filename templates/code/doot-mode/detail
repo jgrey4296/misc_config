@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name  : detail
+# uuid  : detail
+# key   : detail
+# group : doot
+# --
+def $1_detail(self, task):
+    task.update({
+        "actions" : [
+        $2
+        ],
+    })
+    return task

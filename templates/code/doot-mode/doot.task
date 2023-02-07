@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name  : tasker
+# uuid  : tasker
+# key   : tasker
+# group : doot
+# --
+class $1(DootTasker):
+
+    def __init__(self, name="$2", locs=None):
+        super().__init__(name, locs)
+
+    def task_detail(self, task):
+        task.update({
+            "actions" : [],
+        })
+        return task

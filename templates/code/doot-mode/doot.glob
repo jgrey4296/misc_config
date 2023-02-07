@@ -12,8 +12,8 @@ class $1(globber.EagerFileGlobber):
     """
 
     """
-    def __init__(self, name="$2", dirs=None, roots=None, rec=False, exts=None):
-        super().__init__(name, dirs, roots or [dirs.$3], rec=rec, exts=exts or [$4])
+    def __init__(self, name="$2", locs=None, roots=None, rec=False, exts=None):
+        super().__init__(name, locs, roots or [locs.$3], rec=rec, exts=exts or [$4])
 
     def filter(self, fpath):
         return self.control.accept

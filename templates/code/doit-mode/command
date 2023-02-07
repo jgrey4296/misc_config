@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : command
-# uuid  : command
-# key   : command
-# group :
-# --
-command_$1 = build_cmd("$1", [])

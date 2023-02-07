@@ -11,8 +11,8 @@ class $1(globber.DirGlobber):
     """
 
     """
-    def __init__(self, name="$2", dirs=None, roots=None, rec=True, exts=None):
-        super().__init__(name, dirs, roots or [$3], rec=rec, exts=exts or [$4])
+    def __init__(self, name="$2", locs=None, roots=None, rec=True, exts=None):
+        super().__init__(name, locs, roots or [$3], rec=rec, exts=exts or [$4])
 
     def filter(self, fpath):
         return self.control.accept

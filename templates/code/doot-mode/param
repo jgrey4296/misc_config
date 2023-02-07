@@ -7,4 +7,5 @@
 { "name" : "$1",
   "short" : "$2",
   "type" : ${3:str},
-  "default" : "$4" }
+  "default" : "$4"
+}

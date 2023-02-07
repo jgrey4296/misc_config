@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name  : zipgroup
+# uuid  : zipgroup
+# key   : zipgroup
+# group : analysis
+# --
+[[dataset.subgroup]]
+name      = ""
+file_type = []
+count     = 0
+listing   = []
+exclude   = []

@@ -93,6 +93,7 @@ mastodon-py                                                                     
 https://github.com/praw-dev/praw                                                                : libraries : reddit
 https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference
 https://github.com/sixohsix/twitter                                                             : libraries : twitter
+https://akamhy.github.io/waybackpy/ - wayback machine
 
 ** architecture
 https://github.com/numba/llvmlite
@@ -144,6 +145,7 @@ Pyqtree                                                                         
 imagesize                                                                                       : 1.4.1
 jsonschema                                                                                      : 4.16.0
 numpy                                                                                           : 1.21.5
+https://github.com/ramonhagenaars/nptyping
 pandas                                                                                          : 1.4.4
 pyrsistent                                                                                      : 0.18.0
 schema                                                                                          : 0.6.7
@@ -153,6 +155,7 @@ tomlkit                                                                         
 yaml                                                                                            : 0.2.5
 *** graphs
 https://graphviz.readthedocs.io/en/stable/
+https://github.com/pygraphviz/pygraphviz/issues/398
 https://github.com/pydot/pydot
 https://igraph.org/
 https://networkx.github.io/                                                                     : graph : network : networkx

@@ -28,6 +28,7 @@ Death by Institution and the Harms of Abstraction.
 *** [[file:/Volumes/documents/github/writing/orgfiles/primary/research_questions.org][Research Questions]]
 
 ** Other
+https://www.patches-scrolls.de/patch
 https://www.rabbitmq.com/getstarted.html
 https://www.openpolicyagent.org/
 https://en.m.wikipedia.org/wiki/Derinkuyu_underground_city

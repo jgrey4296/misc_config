@@ -75,6 +75,7 @@ gnu-smalltalk
 gnu-tar
 gnupg
 gnutls
+go
 gobject-introspection
 gpatch
 gpgme
@@ -206,6 +207,7 @@ ocaml
 ocaml-num
 ocaml-zarith
 oniguruma
+opa
 opam
 openblas
 opencore-amr

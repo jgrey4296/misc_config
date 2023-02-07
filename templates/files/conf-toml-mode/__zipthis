@@ -1,0 +1,19 @@
+[data]
+name       = ""
+tags       = []
+file_types = []
+source     = []
+count      = 0
+listing    = []
+ziphash    = ""
+
+[data.log]
+date       = ""
+preprocess = []
+
+[[data.group]]
+name      = ""
+file_type = []
+count     = 0
+listing   = []
+exclude   = []

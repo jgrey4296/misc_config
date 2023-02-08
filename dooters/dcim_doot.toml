@@ -10,5 +10,5 @@ notify  = { say-on-exit = false }
 [tool.doot.globbing]
 ignores  = ['.git', '.DS_Store', "__pycache__"]
 
-[tool.doot.directories]
+[[tool.doot.directories]]
 data    = "."

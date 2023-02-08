@@ -30,3 +30,11 @@
             )
     )
   )
+
+(defun +jg-toml-cleanup-ensure-newline-before-table ()
+  (while (re-search-forward "\\(\n\\)\\(#.+?\n\\)*\\(\\[.+?\\]\\)" nil t)
+    (goto-char (match-end 1))
+    (insert "\n")
+    (goto-char (match-end 0))
+    )
+  )

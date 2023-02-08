@@ -84,17 +84,4 @@ and closes classes and functions, re-opening only the first class "
 ;;         (py--beginning-of-def-or-class-position))
 ;;   )
 
-(defun +jg-python-customisation-hook ()
-  ;; (put 'defun 'bounds-of-thing-at-point '+jg-python-def-bounds)
-  (setq-local
-   end-of-defun-function       'python-nav-end-of-defun
-   beginning-of-defun-function 'python-nav-beginning-of-defun
-   indent-region-function      'python-indent-region
-   indent-line-function        'python-indent-line
-   )
-
-  (add-hook 'jg-text-whitespace-clean-hook '+jg-python-cleanup-ensure-newline-before-def 5 t)
-  (add-hook 'jg-text-whitespace-clean-hook 'delete-trailing-whitespace 10 t)
-  (add-hook 'jg-text-whitespace-clean-hook '+jg-python-cleanup-whitespace 20 t)
-  )
 ;;; +hooks.el ends here

@@ -22,28 +22,16 @@ Used to guard inputs in tag strings"
     )
   )
 
-;;-- end cleaning
-
-(defun +jg-text-split-on-leading-char (char-no width dist)
-  " Loop through the buffer, splitting lines if the substring has a greater levenstein distance from the previous line "
-  (interactive "nChar Index: \nnWidth: \nnDistance: \n")
-  (message "Char: %s, Dist: %s" char-no dist)
-  (goto-char (point-min))
-  (let ((get-line (lambda () (let ((line (s-trim (buffer-substring-no-properties (line-beginning-position) (line-end-position)))))
-                               (if (string-empty-p line)
-                                   ""
-                                 (substring line char-no (+ char-no width))))))
-        last-line curr-line)
-    (while (< (point) (point-max))
-      (setq last-line (funcall get-line))
-      (forward-line)
-      (setq curr-line (funcall get-line))
-      (if (< dist (string-distance last-line curr-line))
-          (insert "\n")
-        )
+(defun +jg-text-cleanup-whitespace ()
+  " compact multiple newlines into just one "
+  (while (re-search-forward "\n\n\\(\n+\\)" nil t)
+    (let ((matched (length (match-string 1))))
+      (replace-match "" nil nil nil 1)
       )
     )
   )
+
+;;-- end cleaning
 
 ;;-- utils
 (defun +jg-text-yank-buffer-name ()
@@ -86,7 +74,6 @@ Used to guard inputs in tag strings"
   )
 ;;-- end utils
 
-
 ;;-- util inserts
 (defun +jg-text-insert-lparen ()
   " utility to insert a (  "
@@ -106,7 +93,6 @@ Used to guard inputs in tag strings"
   )
 
 ;;-- end util inserts
-
 
 ;;-- formatting
 (defun +jg-text-combine-columns (textlst)
@@ -168,9 +154,28 @@ Used to guard inputs in tag strings"
 
 ;;-- end formatting
 
+(defun +jg-text-split-on-leading-char (char-no width dist)
+  " Loop through the buffer, splitting lines if the substring has a greater levenstein distance from the previous line "
+  (interactive "nChar Index: \nnWidth: \nnDistance: \n")
+  (message "Char: %s, Dist: %s" char-no dist)
+  (goto-char (point-min))
+  (let ((get-line (lambda () (let ((line (s-trim (buffer-substring-no-properties (line-beginning-position) (line-end-position)))))
+                               (if (string-empty-p line)
+                                   ""
+                                 (substring line char-no (+ char-no width))))))
+        last-line curr-line)
+    (while (< (point) (point-max))
+      (setq last-line (funcall get-line))
+      (forward-line)
+      (setq curr-line (funcall get-line))
+      (if (< dist (string-distance last-line curr-line))
+          (insert "\n")
+        )
+      )
+    )
+  )
 
-
-(defun +jg-text-whitespace-cleanup ()
+(defun +jg-text-run-whitespace-cleanup ()
   "Operator to run cleaning hooks"
   (interactive)
   (let ((inhibit-read-only t))

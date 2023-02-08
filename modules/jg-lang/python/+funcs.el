@@ -157,13 +157,6 @@ TODO
     )
   )
 
-(defun +jg-python-cleanup-whitespace ()
-  (while (re-search-forward "\n\n\\(\n+\\)" nil t)
-    (let ((matched (length (match-string 1))))
-      (replace-match "" nil nil nil 1)
-      )
-    )
-  )
 
 (defun +jg-python-cleanup-ensure-newline-before-def ()
   (while (re-search-forward "\\(\n\\)\\(\s*@.+?\n\\)*\s*\\(def\\|class\\)" nil t)

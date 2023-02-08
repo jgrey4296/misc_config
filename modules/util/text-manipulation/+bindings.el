@@ -58,7 +58,7 @@
       )
 
 (map! :map jg-binding-operator-map
-      :desc "Whitespace clean" "w" #'+jg-text-whitespace-cleanup
+      :desc "Whitespace clean" "w" #'+jg-text-run-whitespace-cleanup
       :desc "Delete trailing whitespace"  "W" #'delete-trailing-whitespace
 
       :desc "Complete/Grow Selection"  "g" (cmds! (eq evil-state 'normal) #'company-manual-begin

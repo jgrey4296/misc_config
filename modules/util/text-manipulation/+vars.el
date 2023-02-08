@@ -3,6 +3,8 @@
 (defvar jg-text-whitespace-clean-hook nil)
 
 (add-hook 'jg-text-whitespace-clean-hook 'delete-trailing-whitespace)
+(add-hook 'jg-text-whitespace-clean-hook '+jg-text-cleanup-whitespace 50)
+
 (setq-default jg-text-last-similarity-arg 1
               jg-text-debug-snippet-name "util.debug"
               )

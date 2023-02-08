@@ -8,7 +8,6 @@
   (evil-forward-end 'evil-defun))
 (defun +jg-lisp-next-rec-func ()
   (evil-forward-beginning 'evil-defun))
-;; Run this
 (defun +jg-lisp-sort-defuns ()
   " A Lisp buffer sorting function "
   (interactive)
@@ -20,8 +19,6 @@
              #'+jg-lisp-key-start)
   (goto-char (point-min))
   )
-
-
 (defun +jg-lisp-eval (beg end)
   "Evaluate a region and print it to the echo area (if one line long), otherwise
 to a pop up buffer."

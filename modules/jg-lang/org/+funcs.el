@@ -156,7 +156,6 @@ Sort, align, split, save "
   )
 ;;-- end utils
 
-
 (fset 'ad-Advice-newline-and-indent #'(lambda (x &rest _) (funcall x)))
 
 (define-advice org-export-inline-image-p (:override (link &optional rules)
@@ -173,7 +172,7 @@ descriptions"
 (defun +jg-org-custom-hook ()
   (add-hook 'jg-text-whitespace-clean-hook 'delete-trailing-whitespace 10 t)
   (add-hook 'jg-text-whitespace-clean-hook '+jg-org-clean-heading-spaces 20 t)
-  (add-hook 'jg-text-whitespace-clean-hook '+jg-org-clean-newlines 30 t)
+  (add-hook 'jg-text-whitespace-clean-hook '+jg-text-cleanup-whitespace 40 t)
   )
 
 (defun +jg-org-clean-heading-spaces ()
@@ -186,10 +185,4 @@ descriptions"
                        )
                    t
                    nil)
-  )
-
-(defun +jg-org-clean-newlines()
-  (while (re-search-forward "\n\\(\n+\\)" nil t)
-    (replace-match "\n" nil nil nil 1)
-    )
   )

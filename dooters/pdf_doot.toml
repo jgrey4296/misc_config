@@ -9,10 +9,10 @@ notify   = { say-on-exit = false }
 globbing = { ignores = ['.git', '.DS_Store', "__pycache__"] }
 
 [tool.doot.logging]
-log_format    = "{levelname} : {name} : {lineno} : {funcName} : {message}"
-log_filters   = ["bkmkorg", "doot"]
+stream = { level = "INFO", format  = "{levelname:<8} : {message}", filters = ["doot", "bkmkorg"] }
+file   = { level = "DEBUG", format = "{levelname:<8} : {message:<20} : ({module}.{lineno}.{funcName})", filters =  ["doot", "bkmkorg"] }
 
-[tool.doot.directories]
+[[tool.doot.directories]]
 temp    = ".temp"
 build   = "build"
 data    = "."

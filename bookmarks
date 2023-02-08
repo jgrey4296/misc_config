@@ -2,7 +2,12 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("movies"
+(("target"
+ (filename . "/Volumes/documents/github/python/doot/tests/backup_test/")
+ (front-context-string . "doot.toml\n  -rw-")
+ (rear-context-string . "62 Feb  6 23:55 ")
+ (position . 210))
+("movies"
  (filename . "~/Movies/")
  (front-context-string . "jojos\n  -rw-r--r")
  (rear-context-string . "64 Dec 29 16:37 ")

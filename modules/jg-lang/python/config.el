@@ -34,7 +34,6 @@
   (setq python-mode-hook nil
         python-mode-local-vars-hook nil)
 
-
   (add-hook! 'python-mode-hook
              ;; #'outline-minor-mode
              ;; #'+python-use-correct-flycheck-executables-h
@@ -43,6 +42,20 @@
              #'evil-collection-python-set-evil-shift-width
              #'doom--setq-tab-width-for-python-mode-h
              )
+
+  (defun +jg-python-customisation-hook ()
+    ;; (put 'defun 'bounds-of-thing-at-point '+jg-python-def-bounds)
+    (setq-local
+     end-of-defun-function       'python-nav-end-of-defun
+     beginning-of-defun-function 'python-nav-beginning-of-defun
+     indent-region-function      'python-indent-region
+     indent-line-function        'python-indent-line
+     )
+
+    (add-hook 'jg-text-whitespace-clean-hook '+jg-python-cleanup-ensure-newline-before-def 5 t)
+    (add-hook 'jg-text-whitespace-clean-hook 'delete-trailing-whitespace 10 t)
+    (add-hook 'jg-text-whitespace-clean-hook '+jg-text-cleanup-whitespace 20 t)
+    )
 
   ;; Always add auto-hide as the last thing
   (add-hook! 'python-mode-hook :depth 100
@@ -78,15 +91,12 @@
   (add-to-list 'lsp-disabled-clients 'mspyls)
 )
 
-
-
 ;; (use-package! lsp-python-ms
 ;;   :unless (modulep! :lang python +pyright)
 ;;   :after lsp-mode
 ;;   :preface
 ;;   (after! python
 ;;     (setq lsp-python-ms-python-executable-cmd python-shell-interpreter)))
-
 
 ;; (use-package! lsp-jedi
 ;;   :ensure t

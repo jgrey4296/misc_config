@@ -1,6 +1,6 @@
 # -*- mode:doot; -*-
 """
-Stub dooter file for task authoring
+Dooter for image tasks
 
 """
 # https://pydoit.org/

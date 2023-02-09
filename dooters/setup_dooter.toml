@@ -1,0 +1,69 @@
+# -*- mode:doot; -*-
+"""
+Tasks for setting up new systems
+
+"""
+# https://pydoit.org/
+##-- imports
+from __future__ import annotations
+import pathlib as pl
+from doit.action import CmdAction
+from doit import create_after
+from doit.tools import set_trace, Interactive, PythonInteractiveAction
+from doit.task import clean_targets
+
+import doot
+##-- end imports
+
+from doot.taskslib.groups import *
+from doot.taskslib.groups_secondary import *
+
+from doot import tasker, task_mixins
+
+class SetupSystemTask(tasker.DootTasker, task_mixins.FilerMixin, task_mixins.CommanderMixin):
+
+    def __init__(self, name="system::setup", locs=None):
+        super().__init__(name, locs)
+
+    def task_detail(self, task):
+        task.update({
+            (self.log, ["Initialising System", logmod.INFO]),
+
+            (self.log, ["Appending bash setup to bashrc", logmod.INFO]),
+            # echo "source $HOME/.bash_profile" >> "$HOME/.bashrc"
+
+            (self.log, ["Appending bash setup to bash_profile", logmod.INFO]),
+            # echo "source $HOME/.doom.d/terminal/main.bash" >> "$HOME/.bash_profile"
+
+            self.setup_tool_configs,
+
+            (self.log, ["Setting up 24-bit emacs", logmod.INFO]),
+            # self.cmd("tic", "-x", "-o", "~/.terminfo", self.locs.terminal / "tool_configs/terminfo-24bit.src"),
+
+            (self.log, ["Completed Setup", logmod.INFO]),
+            (self.log, ["Don't forget to create $HOME/mega and $HOME/github"]),
+            (self.log, ["and setup $HOME/.authinfo", logmod.INFO]),
+        })
+        return task
+
+    def setup_tool_configs(self):
+        self.log("Setting up tool config symlinks", logmod.INFO)
+        for fpath in (self.locs.terminal / "tool_configs").iterdir():
+            if not fpath.is_file() or fpath.name == ".DS_Store":
+                continue
+
+            self.cmd("ln", "-s", fpath, "$HOME/$basefile")
+
+    def setup_conda_environments(self):
+        self.log("Setting up Conda Envs", logmod.INFO)
+        # for Yaml in $(find $HOME/.doom.d/terminal/conda_envs/ -type f -name "*.yaml")
+        # do
+        # echo "Found Yaml: $Yaml"
+        # conda env create -f "$Yaml"
+        # done
+        #
+
+if __name__ == "dooter":
+    # the equivalent of main
+    setup_sys = SetupSystemTask(locs=doot.locs)
+    pass

@@ -15,4 +15,4 @@ file   = { level = "DEBUG", format = "{levelname:<8} : {message:<20} : ({module}
 [[tool.doot.directories]]
 src     = "."
 data    = "."
-backup  = "/volumes/BackupSD/Library/twitter_threads"
+backup  = "/Volumes/BackupSD/Library/twitter_threads"

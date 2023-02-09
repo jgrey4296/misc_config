@@ -1,0 +1,23 @@
+verbosity                = 2
+default_tasks            = ["locs::report"]
+action_string_formatting = "new"
+
+[tool.doot]
+subtask = { sleep = 1 }
+batch   = { sleep = 1 }
+notify  = { say-on-exit = false }
+
+[tool.doot.logging]
+stream = { level = "INFO", format  = "{levelname:<8} : {message}", filters = ["doot", "bkmkorg"] }
+file   = { level = "DEBUG", format = "{levelname:<8} : {message:<20} : ({module}.{lineno}.{funcName})", filters =  ["doot", "bkmkorg"] }
+
+[tool.doot.globbing]
+ignores  = ['.git', '.DS_Store', "__pycache__"]
+
+[[tool.doot.directories]]
+src     = "src"
+codegen = "_codegen"
+temp    = ".temp"
+build   = "build"
+docs    = "docs"
+data    = "data"

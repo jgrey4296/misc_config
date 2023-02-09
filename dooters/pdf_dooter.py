@@ -1,4 +1,4 @@
-# -*- mode:doit; -*-
+# -*- mode:doot; -*-
 """
 Stub dooter file for task authoring
 

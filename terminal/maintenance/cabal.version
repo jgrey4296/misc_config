@@ -1,0 +1,230 @@
+cabal-install version 3.8.1.0
+compiled using version 3.8.1.0 of the Cabal library
+
+--------------------
+* Cabal
+    Synopsis: A framework for packaging Haskell software
+    Default available version: 3.8.1.0
+    Installed versions: 3.6.3.0
+    Homepage: http://www.haskell.org/cabal/
+    License:  BSD3
+
+* array
+    Synopsis: Mutable and immutable arrays
+    Default available version: 0.5.4.0
+    Installed versions: 0.5.4.0
+    License:  BSD3
+
+* base
+    Synopsis: Basic libraries
+    Default available version: 4.17.0.0
+    Installed versions: 4.16.3.0
+    License:  BSD-3-Clause
+
+* binary
+    Synopsis: Binary serialisation for Haskell values using lazy ByteStrings
+    Default available version: 0.8.9.1
+    Installed versions: 0.8.9.0
+    Homepage: https://github.com/kolmodin/binary
+    License:  BSD-3-Clause
+
+* bytestring
+    Synopsis: Fast, compact, strict and lazy byte strings with a list interface
+    Default available version: 0.11.4.0
+    Installed versions: 0.11.3.1
+    Homepage: https://github.com/haskell/bytestring
+    License:  BSD3
+
+* containers
+    Synopsis: Assorted concrete container types
+    Default available version: 0.6.6
+    Installed versions: 0.6.5.1
+    License:  BSD3
+
+* deepseq
+    Synopsis: Deep evaluation of data structures
+    Default available version: 1.4.8.1
+    Installed versions: 1.4.6.1
+    License:  BSD3
+
+* directory
+    Synopsis: Platform-agnostic library for filesystem operations
+    Default available version: 1.3.8.0
+    Installed versions: 1.3.6.2
+    License:  BSD3
+
+* exceptions
+    Synopsis: Extensible optionally-pure exceptions
+    Default available version: 0.10.7
+    Installed versions: 0.10.4
+    Homepage: http://github.com/ekmett/exceptions/
+    License:  BSD3
+
+* filepath
+    Synopsis: Library for manipulating FilePaths in a cross platform way.
+    Default available version: 1.4.100.0
+    Installed versions: 1.4.2.2
+    Homepage: https://gitlab.haskell.org/haskell/filepath/-/blob/master/README.md
+    License:  BSD-3-Clause
+
+* ghc
+    Synopsis: The GHC API
+    Default available version: 9.4.4
+    Installed versions: 9.2.4
+    Homepage: http://www.haskell.org/ghc/
+    License:  BSD-3-Clause
+
+* ghc-bignum
+    Synopsis: GHC BigNum library
+    Default available version: 1.3
+    Installed versions: 1.2
+    License:  BSD3
+
+* ghc-boot
+    Synopsis: Shared functionality between GHC and its boot libraries
+    Default available version: 9.4.1
+    Installed versions: 9.2.4
+    License:  BSD-3-Clause
+
+* ghc-boot-th
+    Synopsis: Shared functionality between GHC and the @template-haskell@
+              library
+    Default available version: 9.4.1
+    Installed versions: 9.2.4
+    License:  BSD3
+
+* ghc-compact
+    Synopsis: In memory storage of deeply evaluated data structure
+    Default available version: 0.1.0.0
+    Installed versions: 0.1.0.0
+    License:  BSD3
+
+* ghc-heap
+    Synopsis: Functions for walking GHC's heap
+    Default available version: 9.4.1
+    Installed versions: 9.2.4
+    License:  BSD-3-Clause
+
+* ghc-prim
+    Synopsis: GHC primitives
+    Default available version: 0.9.0
+    Installed versions: 0.8.0
+    License:  BSD-3-Clause
+
+* ghci
+    Synopsis: The library supporting GHC's interactive interpreter
+    Default available version: 8.10.2
+    Installed versions: 9.2.4
+    License:  BSD3
+
+* haskeline
+    Synopsis: A command-line interface for user input, written in Haskell.
+    Default available version: 0.8.2
+    Installed versions: 0.8.2
+    Homepage: https://github.com/judah/haskeline
+    License:  BSD3
+
+* hpc
+    Synopsis: Code Coverage Library for Haskell
+    Default available version: 0.6.2.0
+    Installed versions: 0.6.1.0
+    License:  BSD3
+
+* integer-gmp
+    Synopsis: Integer library based on GMP
+    Default available version: 1.1
+    Installed versions: 1.1
+    Homepage: https://www.haskell.org/ghc/
+    License:  BSD3
+
+* libiserv
+    Synopsis: Provides shared functionality between iserv and iserv-proxy.
+    Default available version: 9.2.2
+    Installed versions: 9.2.4
+    License:  BSD3
+
+* mtl
+    Synopsis: Monad classes for transformers, using functional dependencies
+    Default available version: 2.3.1
+    Installed versions: 2.2.2
+    Homepage: http://github.com/haskell/mtl
+    License:  BSD-3-Clause
+
+* parsec
+    Synopsis: Monadic parser combinators
+    Default available version: 3.1.16.1
+    Installed versions: 3.1.15.0
+    Homepage: https://github.com/haskell/parsec
+    License:  BSD2
+
+* pretty
+    Synopsis: Pretty-printing library
+    Default available version: 1.1.3.6
+    Installed versions: 1.1.3.6
+    Homepage: http://github.com/haskell/pretty
+    License:  BSD3
+
+* process
+    Synopsis: Process libraries
+    Default available version: 1.6.16.0
+    Installed versions: 1.6.13.2
+    License:  BSD3
+
+* rts
+    Default available version: [ Not available from any configured repository ]
+    Installed versions: 1.0.2
+    License:  BSD-3-Clause
+
+* stm
+    Synopsis: Software Transactional Memory
+    Default available version: 2.5.1.0
+    Installed versions: 2.5.0.2
+    Homepage: https://wiki.haskell.org/Software_transactional_memory
+    License:  BSD3
+
+* template-haskell
+    Synopsis: Support library for Template Haskell
+    Default available version: 2.19.0.0
+    Installed versions: 2.18.0.0
+    License:  BSD3
+
+* terminfo
+    Synopsis: Haskell bindings to the terminfo library.
+    Default available version: 0.4.1.5
+    Installed versions: 0.4.1.5
+    Homepage: https://github.com/judah/terminfo
+    License:  BSD3
+
+* text
+    Synopsis: An efficient packed Unicode text type.
+    Default available version: 2.0.1
+    Installed versions: 1.2.5.0
+    Homepage: https://github.com/haskell/text
+    License:  BSD-2-Clause
+
+* time
+    Synopsis: A time library
+    Default available version: 1.12.2
+    Installed versions: 1.11.1.1
+    Homepage: https://github.com/haskell/time
+    License:  BSD-2-Clause
+
+* transformers
+    Synopsis: Concrete functor and monad transformers
+    Default available version: 0.6.0.6
+    Installed versions: 0.5.6.2
+    License:  BSD3
+
+* unix
+    Synopsis: POSIX functionality
+    Default available version: 2.8.0.0
+    Installed versions: 2.7.2.2
+    Homepage: https://github.com/haskell/unix
+    License:  BSD3
+
+* xhtml
+    Synopsis: An XHTML combinator library
+    Default available version: 3000.2.2.1
+    Installed versions: 3000.2.2.1
+    Homepage: https://github.com/haskell/xhtml
+    License:  BSD3

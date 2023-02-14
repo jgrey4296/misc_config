@@ -19,9 +19,17 @@
 
 (use-package! bibtex
   :init
+  (defun +jg-bibtex-customisation-hook ()
+
+    (add-hook 'jg-text-whitespace-clean-hook '+jg-bibtex-cleanup-ensure-newline-before-def 5 t)
+    (add-hook 'jg-text-whitespace-clean-hook 'delete-trailing-whitespace 10 t)
+    (add-hook 'jg-text-whitespace-clean-hook '+jg-text-cleanup-whitespace 20 t)
+    )
+
   (add-hook! 'bibtex-mode-hook
              #'yas-minor-mode
              #'+jg-bibtex-font-lock-mod-hook
+             #'+jg-bibtex-customisation-hook
              )
   )
 (use-package! helm-bibtex

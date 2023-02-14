@@ -617,3 +617,13 @@ With arg, searchs the dplp instead.
     )
   )
 ;;-- end subciting
+
+(defun +jg-bibtex-cleanup-ensure-newline-before-def ()
+  (while (re-search-forward "\\(\n\\)\\(@.+?{.+?,\\)$" nil t)
+    (goto-char (match-end 1))
+    (insert "\n")
+    (goto-char (match-end 0))
+    )
+  )
+
+;; (doi-utils-def-bibtex-type book ("edited-book") author title series publisher year pages doi url)

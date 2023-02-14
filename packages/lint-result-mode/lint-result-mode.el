@@ -81,7 +81,7 @@
   (yas-minor-mode)
 
   )
-(add-to-list 'auto-mode-alist '("\.lint" . lint-result-mode))
+(add-to-list 'auto-mode-alist '("\\.lint" . lint-result-mode))
 
 (provide 'lint-result-mode)
 ;;; lint-result-mode.el ends here

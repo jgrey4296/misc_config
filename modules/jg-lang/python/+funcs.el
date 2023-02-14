@@ -1,6 +1,5 @@
 ;;; lang/jg-python/+funcs.el -*- lexical-binding: t; -*-
 
-
 ;;-- display control
 (defun +jg-python-close-all-defs ()
     (interactive)
@@ -156,7 +155,6 @@ TODO
       )
     )
   )
-
 
 (defun +jg-python-cleanup-ensure-newline-before-def ()
   (while (re-search-forward "\\(\n\\)\\(\s*@.+?\n\\)*\s*\\(def\\|class\\)" nil t)

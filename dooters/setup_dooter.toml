@@ -15,8 +15,8 @@ from doit.task import clean_targets
 import doot
 ##-- end imports
 
-from doot.taskslib.groups import *
-from doot.taskslib.groups_secondary import *
+from doot.tasks.groups import *
+from doot.tasks.groups_secondary import *
 
 from doot import tasker, task_mixins
 

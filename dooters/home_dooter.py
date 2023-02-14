@@ -1,9 +1,8 @@
 # -*- mode:doot; -*-
 """
 Dooter for easy access to regular tasks
-
+https://pydoit.org/
 """
-# https://pydoit.org/
 ##-- imports
 from __future__ import annotations
 import pathlib as pl
@@ -17,10 +16,10 @@ import doot
 ##-- end imports
 
 from doot import tasker, globber
-from doot.taskslib.files.backup import BackupTask
-from doot.taskslib.groups import *
-from doot.taskslib.groups_secondary import *
-from doot.taskslib.docs.logs import MoveLogs
+from doot.tasks.files.backup import BackupTask
+from doot.tasks.groups import *
+from doot.tasks.groups_secondary import *
+from doot.tasks.docs.logs import MoveLogs
 
 if __name__ == "dooter":
     # the equivalent of main
@@ -67,6 +66,7 @@ if __name__ == "dooter":
         ##-- android
         adb_up         = android.ADBUpload(locs=doot.locs)
         adb_down       = android.ADBDownload(locs=doot.locs)
+        adb_del        = android.ADBDelete(locs=doot.locs)
         ##-- end android
 
     except ImportError as err:

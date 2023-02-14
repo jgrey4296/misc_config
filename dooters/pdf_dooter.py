@@ -24,11 +24,11 @@ DOIT_CONFIG = {
 ##-- end config
 
 ##-- post-config doot imports
-# from doot.taskslib.groups import *
-# from doot.taskslib.groups_secondary import *
+# from doot.tasks.groups import *
+# from doot.tasks.groups_secondary import *
 ##-- end post-config doot imports
 
-from doot.taskslib.files import listing
+from doot.tasks.files import listing
 
 if __name__ == "dooter":
     # the equivalent of main

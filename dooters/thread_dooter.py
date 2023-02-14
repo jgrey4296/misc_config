@@ -10,14 +10,14 @@ import pathlib as pl
 
 import doot
 from doot import globber
-from doot.taskslib.data import images
-from doot.taskslib.files import hashing
+from doot.tasks.data import images
+from doot.tasks.files import hashing
 
 ##-- end imports
 
-from doot.taskslib.groups import *
-from doot.taskslib.groups_secondary import *
-from doot.taskslib.files.backup import BackupTask
+from doot.tasks.groups import *
+from doot.tasks.groups_secondary import *
+from doot.tasks.files.backup import BackupTask
 from bkmkorg.doot_tasks.orgs import OrgMultiThreadCount, ThreadOrganise, ThreadListings
 
 class TwitHash(hashing.HashAllFiles):

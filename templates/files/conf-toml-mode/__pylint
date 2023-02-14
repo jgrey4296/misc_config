@@ -1,0 +1,184 @@
+[tool.pylint.main]
+# Always return a 0 (non-error) status code
+# exit-zero =
+
+# Return non-zero exit code if any of these messages/categories are detected,
+# fail-on =
+
+# Files or directories to be skipped. They should be base names, not paths.
+ignore = ["CVS", ".git", "__config", "__data", "__templates", "_codegen", "__tests", "__pycache__"]
+
+# List of module names for which member attributes should not be checked
+ignored-modules         = []
+jobs                    = 1
+limit-inference-results = 100
+persistent              = true
+py-version              = "3.10"
+suggestion-mode         = true
+
+# Discover python modules and packages in the file system subtree.
+# recursive =
+
+[tool.pylint.basic]
+argument-naming-style        = "snake_case"
+attr-naming-style            = "snake_case"
+bad-names                    = ["foo", "bar", "baz", "toto", "tutu", "tata"]
+class-attribute-naming-style = "any"
+class-const-naming-style     = "UPPER_CASE"
+class-naming-style           = "PascalCase"
+const-naming-style           = "UPPER_CASE"
+function-naming-style        = "snake_case"
+inlinevar-naming-style       = "any"
+method-naming-style          = "snake_case"
+module-naming-style          = "snake_case"
+no-docstring-rgx             = "^_"
+variable-naming-style        = "snake_case"
+
+# Minimum line length for functions/classes that require docstrings
+docstring-min-length = 10
+
+# Good variable names which should always be accepted, separated by a comma.
+good-names = ["i", "j", "k", "ex", "Run", "_"]
+
+# List of decorators that produce properties, such as abc.abstractproperty.
+property-classes = ["abc.abstractproperty"]
+
+[tool.pylint.classes]
+# List of method names used to declare (i.e. assign) instance attributes.
+defining-attr-methods = ["__init__", "__new__", "setUp", "__post_init__"]
+
+# List of member names, which should be excluded from the protected access warning.
+exclude-protected = ["_asdict", "_fields", "_replace", "_source", "_make"]
+
+# List of valid names for the first argument in a class method.
+valid-classmethod-first-arg = ["cls"]
+
+# List of valid names for the first argument in a metaclass class method.
+valid-metaclass-classmethod-first-arg = ["cls"]
+
+[tool.pylint.design]
+max-args           = 5
+max-attributes     = 7
+max-bool-expr      = 5
+max-branches       = 12
+max-locals         = 15
+max-parents        = 7
+max-public-methods = 20
+max-returns        = 6
+max-statements     = 50
+min-public-methods = 2
+
+[tool.pylint.exceptions]
+overgeneral-exceptions = ["BaseException", "Exception"]
+
+[tool.pylint.format]
+ignore-long-lines  = "^\\s*(# )?<?https?://\\S+>?$"
+indent-after-paren = 4
+indent-string      = "    "
+max-line-length    = 100
+max-module-lines   = 1000
+
+[tool.pylint.imports]
+# Deprecated modules which should not be used, separated by a comma.
+# deprecated-modules =
+
+ext-import-graph = "build/external_deps.gv"
+import-graph     = "build/deps.gv"
+int-import-graph = "build/internal_deps.gv"
+
+known-standard-library = []
+known-third-party      = ["enchant"]
+
+# Couples of modules and preferred modules, separated by a comma.
+ preferred-modules = []
+
+[tool.pylint.logging]
+# The type of string formatting that logging methods do. `old` means using % formatting, `new` is for `{}` formatting.
+logging-format-style = "old"
+
+# Logging modules to check that the string format arguments are in logging function parameter format.
+logging-modules = ["logging"]
+
+[tool.pylint."messages control"]
+confidence = ["HIGH", "CONTROL_FLOW", "INFERENCE", "INFERENCE_FAILURE", "UNDEFINED"]
+disable    = ["raw-checker-failed", "bad-inline-option", "locally-disabled", "file-ignored", "suppressed-message", "useless-suppression", "deprecated-pragma", "use-symbolic-message-instead"]
+enable     = ["c-extension-no-member"]
+
+[tool.pylint.miscellaneous]
+notes = ["FIXME", "XXX", "TODO"]
+
+[tool.pylint.refactoring]
+max-nested-blocks = 5
+never-returning-functions = ["sys.exit", "argparse.parse_error"]
+
+[tool.pylint.reports]
+evaluation = "max(0, 0 if fatal else 10.0 - ((float(5 * error + warning + refactor + convention) / statement) * 10))"
+# Set the output format. Available formats are text, parseable, colorized, json
+# output-format =
+
+score = true
+
+[tool.pylint.similarities]
+ignore-comments      = true
+ignore-docstrings    = true
+ignore-imports       = true
+ignore-signatures    = true
+min-similarity-lines = 4
+
+[tool.pylint.spelling]
+max-spelling-suggestions           = 4
+spelling-ignore-comment-directives = "fmt: on,fmt: off,noqa:,noqa,nosec,isort:skip,mypy:"
+
+[tool.pylint.string]
+check-quote-consistency          = true
+check-str-concat-over-line-jumps = true
+
+[tool.pylint.typecheck]
+# List of decorators that produce context managers,
+contextmanager-decorators = ["contextlib.contextmanager"]
+
+# List of members which are set dynamically and missed by pylint inference system
+generated-members = []
+
+# Tells whether missing members accessed in mixin class should be ignored. A class is considered mixin if its name matches the mixin-class-rgx option.
+# Tells whether to warn about missing members when the owner of the attribute is inferred to be None.
+ignore-none = true
+
+# This flag controls whether pylint should warn about no-member and similar checks whenever an opaque object is returned when inferring.
+ignore-on-opaque-inference = true
+
+# List of symbolic message names to ignore for Mixin members.
+ignored-checks-for-mixins = ["no-member", "not-async-context-manager", "not-context-manager", "attribute-defined-outside-init"]
+
+# List of class names for which member attributes should not be checked (useful for classes with dynamically set attributes). This supports the use of qualified names.
+ignored-classes = ["optparse.Values", "thread._local", "_thread._local", "argparse.Namespace"]
+
+# Show a hint with possible names when a member name was not found. The aspect of finding the hint is based on edit distance.
+missing-member-hint = true
+
+# The minimum edit distance a name should have in order to be considered a similar match for a missing member name.
+missing-member-hint-distance = 1
+
+# The total number of similar names that should be taken in consideration when showing a hint for a missing member.
+missing-member-max-choices = 1
+
+# Regex pattern to define which classes are considered mixins.
+mixin-class-rgx = ".*[Mm]ixin"
+
+[tool.pylint.variables]
+allow-global-unused-variables = true
+
+# List of names allowed to shadow builtins
+# allowed-redefined-builtins =
+
+# List of strings which can identify a callback function by name. A callback name must start or end with one of those strings.
+callbacks = ["cb_", "_cb"]
+
+# A regular expression matching the name of dummy variables (i.e. expected to not be used).
+dummy-variables-rgx = "_+$|(_[a-zA-Z0-9_]*[a-zA-Z0-9]+?$)|dummy|^ignored_|^unused_"
+
+# Argument names that match this expression will be ignored. Default to name with leading underscore.
+ignored-argument-names = "_.*|^ignored_|^unused_"
+
+# List of qualified module names which can have objects that can redefine builtins.
+redefining-builtins-modules = ["six.moves", "past.builtins", "future.builtins", "builtins", "io"]

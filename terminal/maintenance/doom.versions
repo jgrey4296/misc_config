@@ -1,0 +1,46 @@
+GNU Emacs     v28.2            nil
+Doom core     v3.0.0-pre       HEAD -> master fa9ea253f 2022-12-01 04:01:13 +0100
+Doom modules  v22.10.0-pre     HEAD -> master fa9ea253f 2022-12-01 04:01:13 +0100
+
+Copyright (c) 2014-2022 Henrik Lissner.
+
+Doom Emacs uses the MIT license and is provided without warranty of
+any kind. You may redistribute and modify copies if given proper
+attribution. See the LICENSE file for details.
+
+--------------------
+generated  Feb 25, 2023 01:57:28
+system     MacOS 10.15.7 Darwin 19.6.0 x86_64
+emacs      28.2 ~/github/otherLibs/lisp/doom_native
+doom       3.0.0-pre PROFILE=_@0 HEAD -> master fa9ea253f 2022-12-01
+	   04:01:13 +0100 ~/.doom.d/
+shell      /usr/local/bin/bash
+features   ACL GIF GLIB GMP GNUTLS JPEG JSON LCMS2 LIBXML2 MODULES
+	   NATIVE_COMP NOTIFY KQUEUE NS PDUMPER PNG RSVG THREADS TIFF
+	   TOOLKIT_SCROLL_BARS XIM ZLIB
+traits     batch server-running envvar-file custom-file
+modules    :config use-package :util (&user mail) (&user
+	   text-manipulation) (&user char-insert) (&user tagging) (&user
+	   jg-misc) (&user jg-org-unit-test) (&user jg-browse)
+	   :domain-specific (&user music) (&user twitter) (&user
+	   acab-ide) (&user ai-and-logic) :jg-lang (&user bibtex) (&user
+	   cron) (&user erlang) (&user godot) (&user haskell) (&user
+	   inform) (&user kotlin) (&user latex) (&user lisp) (&user
+	   misc) (&user org) (&user python) (&user rst) (&user rust)
+	   (&user xml) (&user toml) :jg-emacs (&user bindings) (&user
+	   completion) (&user dired) (&user fold) (&user ui) (&user
+	   projects) (&user version-control) :completion company ivy :ui
+	   doom doom-quit hl-todo hydra indent-guides ligatures minimap
+	   modeline neotree ophints (popup +defaults) vc-gutter
+	   vi-tilde-fringe window-select workspaces :editor (evil
+	   +everywhere) file-templates format rotate-text snippets
+	   word-wrap :emacs dired electric ibuffer undo vc :term shell
+	   term :checkers syntax (spell +flyspell) grammar :tools biblio
+	   editorconfig (eval +overlay) lookup lsp magit make rgb
+	   tree-sitter :os macos tty :lang agda coq csharp data elixir
+	   emacs-lisp erlang fsharp fstar gdscript (haskell +dante)
+	   idris json julia kotlin latex lua markdown ocaml (org
+	   +gnuplot +pomodoro +journal +noter) plantuml (python +conda
+	   +pyright +poetry +cython) qt racket rst (rust +lsp) scala
+	   scheme sh sml web yaml :email (mu4e +gmail) :config default
+unpin      helpful dash evil-iedit-state yasnippet org

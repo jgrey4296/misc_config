@@ -27,7 +27,7 @@ JG_NICENESS=10
 ### WEEKLY:
 ## MON - maintenance
 # Run updates at 3am on mondays
-# 0 3 * * mon doot maintenance::full
+# 0 3 * * mon doot maintain
 
 # backup cron definitions at 4am on mondays
 # 0 4 * * mon doot crontab::backup
@@ -38,7 +38,7 @@ JG_NICENESS=10
 
 ## WED - git and brew
 # Backup git repo urls
-0 3 * * wed doot maintenance::backup
+0 3 * * wed doot maintain::backup
 
 ## THU - bibtexR
 # 4am : clean bibtex

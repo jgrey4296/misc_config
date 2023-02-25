@@ -1,4 +1,4 @@
-Homebrew 3.6.20-286-g6c27021
+Homebrew 4.0.3-4-g1f1a477
 Homebrew/homebrew-core (git revision dfd06f6a668; last commit 2023-02-06)
 Homebrew/homebrew-cask (git revision bd7dd11080; last commit 2023-02-06)
 
@@ -21,7 +21,7 @@ berkeley-db@4 4.8.30
 berkeley-db@5 5.3.28_1
 bison 3.8.2
 brotli 1.0.9
-c-ares 1.18.1_1
+c-ares 1.18.1_1 1.19.0
 ca-certificates 2023-01-10
 cabal-install 3.8.1.0
 cairo 1.16.0_5
@@ -234,6 +234,7 @@ pcre 8.45
 pcre2 10.42
 pdftk-java 3.3.3
 pinentry 1.2.1
+pinentry-mac 1.1.1.1
 pixman 0.42.2
 pkg-config 0.29.2_3
 plantuml 1.2022.8
@@ -317,3 +318,4 @@ godot 3.5.1
 pdf-images 1.1
 pdftotext latest
 sigil 1.9.20
+wine-stable 7.0

@@ -86,6 +86,7 @@
 
 ;;-- flycheck
 (after! flycheck
+  (setq flycheck-pylintrc '("pylint.toml" "pyproject.toml"))
   (setq-default flycheck--automatically-enabled-checkers (-concat flycheck--automatically-enabled-checkers '(python-pylint))
                 flycheck--automatically-disabled-checkers '(python-compile python-pyright python-mypy)
                 )

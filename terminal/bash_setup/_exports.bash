@@ -15,6 +15,7 @@ export JGLOGDIR
 export CMAKE_BUILD_PARALLEL_LEVEL
 export GPG_TTY
 export JACAMO_HOME
+export MANPATH
 # export TMPDIR
 
 export -f jgdebug

@@ -1,0 +1,24 @@
+Usage: ebook-convert input_file output_file [options]
+
+Convert an e-book from one format to another.
+
+input_file is the input and output_file is the output. Both must be specified as the first two arguments to the command.
+
+The output e-book format is guessed from the file extension of output_file. output_file can also be of the special format .EXT where EXT is the output file extension. In this case, the name of the output file is derived from the name of the input file. Note that the filenames must not start with a hyphen. Finally, if output_file has no extension, then it is treated as a folder and an "open e-book" (OEB) consisting of HTML files is written to that folder. These files are the files that would normally have been passed to the output plugin.
+
+After specifying the input and output file you can customize the conversion by specifying various options. The available options depend on the input and output file types. To get help on them specify the input and output file and then use the -h option.
+
+For full documentation of the conversion system see
+https://manual.calibre-ebook.com/conversion.html
+
+Whenever you pass arguments to ebook-convert that have spaces in them, enclose the arguments in quotation marks. For example: "/some path/with spaces"
+
+Options:
+  --version       show program's version number and exit
+
+  -h, --help      show this help message and exit
+
+  --list-recipes  List builtin recipe names. You can create an e-book from a builtin recipe like this: ebook-convert "Recipe Name.recipe" output.epub
+
+
+Created by Kovid Goyal <kovid@kovidgoyal.net>

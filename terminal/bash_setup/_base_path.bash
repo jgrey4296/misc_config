@@ -15,3 +15,9 @@ PATH=/Applications/calibre.app/Contents/MacOS:$PATH
 
 jgd Setting blender
 PATH=/Applications/blender/blender.app/Contents/MacOS:$PATH
+
+# MAN Paths
+# https://www.howtogeek.com/682871/how-to-create-a-man-page-on-linux/
+MANPATH=/usr/share/man:usr/local/share/man:/usr/local/man
+MANPATH="$HOME/.doom.d/terminal/man":$MANPATH
+# MANPATH=/Library/Apple/usr/share/man:$MANPATH

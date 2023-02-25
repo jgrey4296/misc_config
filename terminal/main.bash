@@ -1,4 +1,14 @@
 #!/usr/bin/env Bash
+
+# Login Shell : "bash -" | "bash --login"
+# Interactive Shell: "bash" | "bash -s" | "bash -i" , with stdin and stderr connected to terminals
+
+# Interactive login reads: /etc/profile -> ~/.bash_profile -> ~/.bash_login -> ~/.profile
+# Interactive, non-login reads: ~/.bashrc
+# Non-Interactive reads: $BASH_ENV
+
+# sh reads: /etc/profile -> ~/.profile
+
 # reminder: source this file in $HOME/.bash_profile
 # and source .bash_profile in .bashrc
 export BASH_SILENCE_DEPRECATION_WARNING=1

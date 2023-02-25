@@ -21,3 +21,5 @@ alias cexport="conda env export --from-history"
 
 #NLTK:
 NLTK_DATA=~/assets/nlg/nltk
+
+MANPATH=/opt/anaconda3/man:$MANPATH

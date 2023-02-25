@@ -146,16 +146,7 @@
  '(org-agenda-files '("/Users/johngrey/.doom.d/setup_files/base_agenda.org"))
  '(org-ref-insert-cite-key "C-c i")
  '(safe-local-variable-values '((eval +jg-python-activate-venv-and-conda)))
- '(warning-suppress-log-types
-   '(((defvaralias losing-value woman-topic-history))
-     ((python python-shell-completion-native-turn-on-maybe))
-     (org-element-cache)
-     (flycheck syntax-checker)))
- '(warning-suppress-types
-   '(((defvaralias losing-value woman-topic-history))
-     ((python python-shell-completion-native-turn-on-maybe))
-     (org-element-cache)
-     (flycheck syntax-checker))))
+ )
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

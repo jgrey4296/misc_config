@@ -107,3 +107,32 @@
 (add-to-list 'auto-mode-alist '("\\.pl\\'" . prolog-mode))
 
 ;;-- end auto mode overrides
+
+;;-- warning suppression
+;; (progn
+;;   (setq jgtest '(1 2 3)
+;;         jgnon  '(blah)
+;;         warning-suppress-log-types '((defvaralias losing-value jgblahtest))
+;;         warning-suppress-types nil ;;'((defvaralias losing-value jgblahtest))
+;;         )
+
+;;   (defvaralias 'jgblahtest 'jgnon)
+;;   (defvaralias 'jgblahtest 'jgtest)
+;; )
+
+(setq warning-suppress-log-types
+      '( ;; Full Suppress
+        ((defvaralias losing-value woman-topic-history))
+        ;; ((python python-shell-completion-native-turn-on-maybe))
+        ;; (org-element-cache)
+        ;; ((flycheck syntax-checker))
+        )
+      warning-suppress-types
+      '( ;; Don't Show
+        ;; ((defvaralias losing-value woman-topic-history))
+        ;; ((python python-shell-completion-native-turn-on-maybe))
+        ;; (org-element-cache)
+        ;; (flycheck syntax-checker)
+        )
+      )
+;;-- end warning suppression

@@ -3,3 +3,4 @@
 
 (package! gradle-mode)
 (package! groovy-mode)
+(package! protobuf-mode)

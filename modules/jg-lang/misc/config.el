@@ -7,3 +7,4 @@
 
 (use-package gradle-mode)
 (use-package groovy-mode)
+(use-package protobuf-mode)

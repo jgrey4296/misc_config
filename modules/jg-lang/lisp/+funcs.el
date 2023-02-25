@@ -38,3 +38,11 @@ to a pop up buffer."
             (error (format "ERROR: %s" e)))
         (kill-buffer buffer))))
    (current-buffer)))
+
+(defun +jg-lisp-cleanup-ensure-newline()
+  (while (re-search-forward "\\(\n\\)\\((\\(def\\|use\\)\\)" nil t)
+    (goto-char (match-end 1))
+    (insert "\n")
+    (goto-char (match-end 0))
+    )
+  )

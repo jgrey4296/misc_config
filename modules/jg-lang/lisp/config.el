@@ -14,6 +14,7 @@
 (use-package-hook! emacs-list-mode :post-config
   (defun +jg-lisp-config-hook ()
     (add-hook 'jg-text-whitespace-clean-hook 'delete-trailing-whitespace 10 t)
+    (add-hook 'jg-text-whitespace-clean-hook '+jg-lisp-cleanup-ensure-newline 10 t)
     (add-hook 'jg-text-whitespace-clean-hook '+jg-text-cleanup-whitespace 20 t)
     )
 

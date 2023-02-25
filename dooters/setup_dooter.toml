@@ -18,9 +18,11 @@ import doot
 from doot.tasks.groups import *
 from doot.tasks.groups_secondary import *
 
-from doot import tasker, task_mixins
+from doot import tasker
+from doot.mixins.filer import FilerMixin
+from doot.mixins.commander import CommanderMixin
 
-class SetupSystemTask(tasker.DootTasker, task_mixins.FilerMixin, task_mixins.CommanderMixin):
+class SetupSystemTask(tasker.DootTasker, FilerMixin, CommanderMixin):
 
     def __init__(self, name="system::setup", locs=None):
         super().__init__(name, locs)

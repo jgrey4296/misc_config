@@ -53,6 +53,7 @@
 - floweaver
 - plotly
 - pillow
+- python.app (conda, for pythonw)
 
 ** Alt Cores
 clingo, z3, pysmt, pyswip, pomegranate
@@ -215,6 +216,7 @@ pretty-errors                                                                   
 rich                                                                                            : 12.5.1
 https://github.com/grappa-py/grappa                                                             : assert : grappa : unit_testing
 
+
 ** graphics
 Pillow                                                                                          : 9.2.0
 imagio
@@ -232,6 +234,7 @@ https://github.com/cprogrammer1994/GLWindow                                     
 https://github.com/renpy/renpy                                                                  : renpy : visual_novel
 
 ** Linting
+https://pre-commit.com/
 autopep8
 https://github.com/bndr/pycycle                                                                 : imports : programming : pycycle : software_engineering
 https://github.com/LuminosoInsight/python-ftfy                                                  : programming : refactor : unicode
@@ -333,6 +336,7 @@ https://pyparsing-docs.readthedocs.io/en/latest/whats_new_in_3_0_0.html#new-feat
 parso                                                                                           : 0.8.3
 pycparser                                                                                       : 2.21
 pyparsing                                                                                       : 3.0.9
+https://construct.readthedocs.io/en/latest/intro.html
 
 *** nlp
 textblob

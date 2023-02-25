@@ -1,19 +1,13 @@
-[data]
+[dataset.instance]
 name       = ""
 tags       = []
-file_types = []
 source     = []
+file_types = []
 count      = 0
-listing    = []
 ziphash    = ""
 
 [data.log]
 date       = ""
 preprocess = []
 
-[[data.group]]
-name      = ""
-file_type = []
-count     = 0
-listing   = []
-exclude   = []
+[[dataset.subgroup]]

@@ -13,6 +13,8 @@ export EMACSDIR
 export DOOMDIR
 export JGLOGDIR
 export CMAKE_BUILD_PARALLEL_LEVEL
+export GPG_TTY
+export JACAMO_HOME
 # export TMPDIR
 
 export -f jgdebug

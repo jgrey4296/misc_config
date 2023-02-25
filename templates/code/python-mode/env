@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : env
+# uuid  : env
+# key   : env
+# group :
+# --
+from os import environ

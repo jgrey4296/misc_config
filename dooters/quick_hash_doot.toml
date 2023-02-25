@@ -3,18 +3,20 @@ default_tasks            = ["locs::report"]
 action_string_formatting = "new"
 
 [tool.doot]
-subtask = { sleep = 1 }
-batch   = { sleep = 1, size=100}
+subtask = { sleep = 0 }
+batch   = { sleep = 0, size=200 }
 notify  = { say-on-exit = false }
 
 [tool.doot.logging]
-stream = { level = "INFO", format  = "-- {message}", filters = ["doot", "bkmkorg"] }
+stream = { level = "INFO", format  = "{levelname:<8} : {message}", filters = ["doot", "bkmkorg"] }
 file   = { level = "DEBUG", format = "{levelname:<8} : {message:<20} : ({module}.{lineno}.{funcName})", filters =  ["doot", "bkmkorg"] }
 
 [tool.doot.globbing]
 ignores  = ['.git', '.DS_Store', "__pycache__"]
 
 [[tool.doot.directories]]
+temp    = ".temp"
+build   = ".temp"
 data    = "."
-build   = ".processes"
-temp    = ".processes"
+
+[tool.doot.group.hashing]

@@ -24,7 +24,7 @@ jgd Setting Jason
 JASON_HOME="$HOME/github/MAS/jason/build"
 
 jgd Setting JACAMO
-JACAMO_HOME=~/github/MAS/jacamo/build
+JACAMO_HOME="$HOME/github/MAS/jacamo/build"
 
 
 jgd Setting Prompter

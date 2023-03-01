@@ -1,12 +1,8 @@
-pdftk port to java 3.3.3 a Handy Tool for Manipulating PDF Documents
-Copyright (c) 2017-2018 Marc Vinyals - https://gitlab.com/pdftk-java/pdftk
-Copyright (c) 2003-2013 Steward and Lee, LLC.
-pdftk includes a modified version of the iText library.
-Copyright (c) 1999-2009 Bruno Lowagie, Paulo Soares, et al.
-This is free software; see the source code for copying conditions. There is
-NO warranty, not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+# pdftk port to java 3.3.3 a Handy Tool for Manipulating PDF Documents
 
-SYNOPSIS
+
+# SYNOPSIS
+
        pdftk <input PDF files | - | PROMPT>
             [ input_pw <input PDF owner passwords | PROMPT> ]
             [ <operation> <operation arguments> ]
@@ -20,6 +16,7 @@ SYNOPSIS
             [ keep_first_id | keep_final_id ] [ drop_xfa ] [ drop_xmp ]
             [ replacement_font <font name> ]
             [ verbose ] [ dont_ask | do_ask ]
+
        Where:
             <operation> may be empty, or:
             [ cat | shuffle | burst | rotate |
@@ -35,10 +32,10 @@ SYNOPSIS
        For Complete Help: pdftk --help
 
 
-DESCRIPTION
-       If PDF is electronic paper, then pdftk is an electronic staple-remover,
-       hole-punch, binder, secret-decoder-ring, and X-Ray-glasses.  Pdftk is a
-       simple tool for doing everyday things with PDF documents.  Use it to:
+# DESCRIPTION
+If PDF is electronic paper, then pdftk is an electronic staple-remover,
+hole-punch, binder, secret-decoder-ring, and X-Ray-glasses.  Pdftk is a
+simple tool for doing everyday things with PDF documents.  Use it to:
 
        * Merge PDF Documents or Collate PDF Page Scans
        * Split PDF Pages into a New Document
@@ -56,8 +53,9 @@ DESCRIPTION
        * Uncompress and Re-Compress Page Streams
        * Repair Corrupted PDF (Where Possible)
 
-OPTIONS
-       A summary of options is included below.
+# OPTIONS
+
+A summary of options is included below.
 
        --help, -h
               Show this summary of options.
@@ -105,6 +103,8 @@ OPTIONS
               ter' mode.  Filter mode takes only one PDF input and creates a
               new PDF after applying all of the output options, like encryp-
               tion and compression.
+
+# OPERATIONS
 
           cat [<page ranges>]
                  Assembles (catenates) pages from input PDFs to create a new
@@ -509,7 +509,7 @@ OPTIONS
               When running in dont_ask mode, pdftk will over-write files with
               its output without notice.
 
-EXAMPLES
+# EXAMPLES
        Collate scanned pages
          pdftk A=even.pdf B=odd.pdf shuffle A B output collated.pdf
          or if odd.pdf is in reverse order:
@@ -576,17 +576,26 @@ EXAMPLES
        Rotate an entire PDF document to 180 degrees
          pdftk in.pdf cat 1-endsouth output out.pdf
 
-NOTES
-       This is a port of pdftk to java. See
-       https://gitlab.com/pdftk-java/pdftk
-       The original program can be found at www.pdftk.com
+# NOTES
+This is a port of pdftk to java. See
+https://gitlab.com/pdftk-java/pdftk
+The original program can be found at www.pdftk.com
 
-AUTHOR
-       Original author of pdftk is Sid Steward (sid.steward at pdflabs dot
-       com).
+# AUTHOR
+Original author of pdftk is Sid Steward (sid.steward at pdflabs dot
+com).
 
-SECURITY CONSIDERATIONS
-       Passing a password as a command line parameter is insecure because it
-       can get saved into the shell's history and be accessible by other users
-       via /proc. Use the keyword PROMPT and input any passwords via standard
-       input instead.
+# SECURITY CONSIDERATIONS
+Passing a password as a command line parameter is insecure because it
+can get saved into the shell's history and be accessible by other users
+via /proc. Use the keyword PROMPT and input any passwords via standard
+input instead.
+
+
+# COPYRIGHT
+Copyright (c) 2017-2018 Marc Vinyals - https://gitlab.com/pdftk-java/pdftk
+Copyright (c) 2003-2013 Steward and Lee, LLC.
+pdftk includes a modified version of the iText library.
+Copyright (c) 1999-2009 Bruno Lowagie, Paulo Soares, et al.
+This is free software; see the source code for copying conditions. There is
+NO warranty, not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.

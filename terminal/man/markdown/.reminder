@@ -1,0 +1,9 @@
+1    Executable programs: Or, shell commands.
+2    System calls: Functions provided by the kernel.
+3    Library calls: Functions within program libraries.
+4    Special files.
+5    File formats and conventions: For example, “/etc/passwd”.
+6    Games.
+7    Miscellaneous: Macro packages and conventions, such as groff.
+8    System administration commands: Usually reserved for root.
+9    Kernel routines: Not usually installed by default.

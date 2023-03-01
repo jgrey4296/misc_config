@@ -236,6 +236,7 @@ determine the exact padding."
    (markdown-header-delimiter-face   :inherit 'bold :foreground red)
    (markdown-header-face :inherit 'bold :foreground fg)
    (markdown-markup-face :foreground red)
+   (markdown-header-face :foreground cyan)
 
    ;; org <built-in>
    (org-hide :foreground hidden)
@@ -266,6 +267,9 @@ determine the exact padding."
    (flyspell-incorrect :foreground aerugo6 :background nil)
    (flyspell-duplicate :foreground aerugo9 )
 
+   ;; hexl
+   ((hexl-address-region &override) :foreground base3)
+   ((hexl-ascii-region &override) :foreground aerugo11)
 
    ;; Base theme variable overrides-
    ;;()

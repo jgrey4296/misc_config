@@ -7,11 +7,6 @@ Tasks for setting up new systems
 ##-- imports
 from __future__ import annotations
 import pathlib as pl
-from doit.action import CmdAction
-from doit import create_after
-from doit.tools import set_trace, Interactive, PythonInteractiveAction
-from doit.task import clean_targets
-
 import doot
 ##-- end imports
 
@@ -26,25 +21,42 @@ class SetupSystemTask(tasker.DootTasker, FilerMixin, CommanderMixin):
 
     def __init__(self, name="system::setup", locs=None):
         super().__init__(name, locs)
+        self.locs.ensure("home", "terminal", "github", "doom_d", "emacs_d", )
+
+    def setup_detail(self, task):
+        task.update({
+            "actions": [
+                (self.mkdirs, [self.locs.home / ".cargo",
+                               self.locs.home / ".secrets",
+                               self.locs.home / ".gradle",
+                               self.locs.home / ".ghc",
+                               self.locs.home / "doot_build"
+                               ])
+            ]
+        })
+        return task
 
     def task_detail(self, task):
         task.update({
             (self.log, ["Initialising System", logmod.INFO]),
+            self.cmd("ln", "-s", self.locs.emacs_d, self.locs.home / ".emacs.d"),
+            self.cmd("ln", "-s", self.locs.doom_d,  self.locs.home / ".doom.d"),
+            self.cmd("ln", "-s", self.locs.github,  self.locs.home / "github"),
+            self.cmd("ln", "-s", self.locs.pdfs,    self.locs.home / "pdflibrary")
 
             (self.log, ["Appending bash setup to bashrc", logmod.INFO]),
-            # echo "source $HOME/.bash_profile" >> "$HOME/.bashrc"
+            (self.append_to, [self.locs.home / ".bashrc", "source $HOME/.bash_profile"]),
 
             (self.log, ["Appending bash setup to bash_profile", logmod.INFO]),
-            # echo "source $HOME/.doom.d/terminal/main.bash" >> "$HOME/.bash_profile"
+            (self.append_to, [self.locs.home / ".bash_profile", "source $HOME/.doom.d/terminal/main.bash"]),
 
             self.setup_tool_configs,
 
             (self.log, ["Setting up 24-bit emacs", logmod.INFO]),
-            # self.cmd("tic", "-x", "-o", "~/.terminfo", self.locs.terminal / "tool_configs/terminfo-24bit.src"),
+            self.cmd("tic", "-x", "-o", "~/.terminfo", self.locs.terminal / "tool_configs/terminfo-24bit.src"),
 
             (self.log, ["Completed Setup", logmod.INFO]),
-            (self.log, ["Don't forget to create $HOME/mega and $HOME/github"]),
-            (self.log, ["and setup $HOME/.authinfo", logmod.INFO]),
+            (self.log, ["Need to setup $HOME/.authinfo", logmod.INFO]),
         })
         return task
 
@@ -54,7 +66,10 @@ class SetupSystemTask(tasker.DootTasker, FilerMixin, CommanderMixin):
             if not fpath.is_file() or fpath.name == ".DS_Store":
                 continue
 
-            self.cmd("ln", "-s", fpath, "$HOME/$basefile")
+            if fpath.name == "cargo_config.toml":
+                self.cmd("ln", "-s", fpath, "$HOME/.cargo/config.toml").execute()
+            else:
+                self.cmd("ln", "-s", fpath, "$HOME/$basefile").execute()
 
     def setup_conda_environments(self):
         self.log("Setting up Conda Envs", logmod.INFO)

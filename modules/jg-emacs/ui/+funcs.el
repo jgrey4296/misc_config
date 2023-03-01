@@ -9,14 +9,6 @@
 ;;-- end window ring
 
 ;;-- misc
-(defun +jg-ui-undo-tree ()
-  (interactive)
-  (if (not undo-tree-mode)
-      (undo-tree-mode))
-  (undo-tree-visualize)
-
-  )
-
 (defun +jg-ui-what-face (pos)
   ;; from: http://stackoverflow.com/questions/1242352/
   (interactive "d")

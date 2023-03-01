@@ -6,6 +6,7 @@
   (load! "+operators")
   (load! "+motions")
   (load! "+state")
+  ;; (load! "+undo-state")
   (load! "+bindings")
   (load! "+advice")
 )
@@ -40,3 +41,14 @@
 (use-package! license-templates)
 
 (use-package! lint-result-mode)
+(use-package! vundo
+  :commands vundo
+  )
+
+(use-package! undo-fu
+  :config
+  ;; Increase undo history limits to reduce likelihood of data loss
+  (setq undo-limit 400000           ; 400kb (default is 160kb)
+        undo-strong-limit 3000000   ; 3mb   (default is 240kb)
+        undo-outer-limit 48000000)  ; 48mb  (default is 24mb)
+  )

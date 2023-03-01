@@ -117,8 +117,6 @@
       :desc "Align"              "a" #'align-regexp
       :desc "IEdit"              "e" #'iedit-mode
 
-
-
       )
 (map! :map jg-binding-operator-map ;; string ops
       :prefix ("s" . "String-ops")

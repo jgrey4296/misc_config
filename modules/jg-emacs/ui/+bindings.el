@@ -2,7 +2,6 @@
 
 (map! :leader
       (:prefix "b"
-       :desc "Undo-Tree"                   "u"     #'+jg-ui-undo-tree
        :desc "Clear Popup Rules"           "P"     #'+jg-ui-ivy-reset-popup-rules
        )
       (:prefix "w"

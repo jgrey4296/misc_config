@@ -4,7 +4,6 @@
 ;;-- leader
 (map! :leader
       ;; "," "<" "!" "?"
-      ;; :desc "help"                  "h"    help-map
       :desc "Ibuffer"               "DEL" #'ibuffer
       :desc "Jump to bookmark"      "RET" #'bookmark-jump
 

@@ -17,10 +17,10 @@
 (package! semantic)
 (package! shell-pop)
 (package! timeline-mode :recipe `(:local-repo ,(expand-file-name "packages/timeline-mode" doom-user-dir)))
-(package! undo-tree)
 (package! vlf)
 
 ;; Disables
+(package! undo-tree       :disable t)
 (package! 2048-game       :disable t)
 (package! ace-link        :disable t)
 (package! desktop         :disable t)
@@ -47,3 +47,4 @@
 (package! evil-easymotion :disable t)
 (package! xt-mouse        :disable t)
 (package! mouse           :disable t)
+(package! undo-fu-session :disable t)

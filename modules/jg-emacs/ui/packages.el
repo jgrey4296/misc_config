@@ -11,6 +11,5 @@
 (package! palette-mode :recipe `(:local-repo ,(expand-file-name "packages/palette-mode" doom-user-dir)))
 (package! smartparens)
 (package! paren-state :recipe `(:local-repo ,(expand-file-name "packages/paren-state" doom-user-dir)))
-;; (package! vundo)
 
 (package! ibuffer)

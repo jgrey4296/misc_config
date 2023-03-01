@@ -46,10 +46,12 @@
 
 ;;-- end space remapping state
 
+
 (map! :map jg-binding-normal-state-map
       :after jg-evil-bindings
       :desc "SPC? Insert" "I SPC" #'evil-jg-insert-state
       )
 
-(provide '+state)
+
+(provide 'jg-text-states)
 ;;; +state.el ends here

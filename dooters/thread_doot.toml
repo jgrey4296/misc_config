@@ -1,18 +1,17 @@
 verbosity                = 1
 action_string_formatting = "new"
 default_tasks            = []
+notify                   = { say-on-exit   = "Doot has finished in twitter threads" }
+batch                    = { sleep = 0.5, size = 20, max = -1 }
+subtask                  = { sleep = 0.5 }
+globbing                 = { ignores  = ['.git', '.DS_Store', "__pycache__"] }
 
-[tool.doot]
-notify   = { say-on-exit   = "Doot has finished in twitter threads" }
-batch    = { sleep = 0.5, size = 20, max = -1 }
-subtask  = { sleep = 0.5 }
-globbing = { ignores  = ['.git', '.DS_Store', "__pycache__"] }
-
-[tool.doot.logging]
+[logging]
 stream = { level = "INFO", format  = "{levelname:<8} : {message}", filters = ["doot", "bkmkorg"] }
 file   = { level = "DEBUG", format = "{levelname:<8} : {message:<20} : ({module}.{lineno}.{funcName})", filters =  ["doot", "bkmkorg"] }
 
-[[tool.doot.directories]]
+[[directories]]
 src     = "."
 data    = "."
 backup  = "/Volumes/BackupSD/Library/twitter_threads"
+temp    = ".temp"

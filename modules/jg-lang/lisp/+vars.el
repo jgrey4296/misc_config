@@ -5,8 +5,8 @@
 
 ;;-- emacs source paths
 (after! (ffap find-func)
-  (let ((paths-to-add (-concat
-                       (ffap-all-subdirs "/Volumes/documents/github/otherLibs/lisp/emacs-src/lisp/" 1)
+  (let ((paths-to-add (append
+                       (ffap-all-subdirs "/Volumes/documents/github/_libs/lisp/emacs-src/lisp/" 1)
                        (ffap-all-subdirs (expand-file-name "straight/repos" doom-local-dir) 1)
                        (ffap-all-subdirs (expand-file-name "modules" doom-user-dir))
                        (ffap-all-subdirs (expand-file-name "packages" doom-user-dir))
@@ -15,7 +15,7 @@
           (add-to-list 'find-library-source-path x))
         paths-to-add)
   )
-  (setq find-function-C-source-directory "/Volumes/documents/github/otherLibs/lisp/emacs-src/src")
+  (setq find-function-C-source-directory "/Volumes/documents/github/_libs/lisp/emacs-src/src")
 
 )
 ;;-- end emacs source paths

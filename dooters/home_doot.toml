@@ -1,26 +1,30 @@
 verbosity                = 1
 default_tasks            = ["locs::report"]
 action_string_formatting = "new"
+notify                   = { sleep = false, say-on-exit = false }
+subtask                  = { sleep = 2 }
+batch                    = { sleep = 0, size = 1000 }
 
-[tool.doot]
-notify  = {sleep = false, say-on-exit = false}
-subtask = { sleep = 2 }
-batch   = { sleep = 0, size = 1000 }
+# [plugins.reporter]
+# custom = "doot.utils.reporter:DootReporter"
 
-[tool.doot.globbing]
+# [plugins.command]
+# run    = "doot.utils.custom_run:DootRun"
+
+[globbing]
 ignores = ['.git', '.DS_Store', "__pycache__"]
 
-[tool.doot.logging]
-stream = { level = "INFO", format  = "-- {message}", filters = ["doot", "bkmkorg"] }
-file   = { level = "DEBUG", format = "{levelname:<8} : {message:<20} : ({module}.{lineno}.{funcName})", filters =  ["doot", "bkmkorg"] }
+[logging]
+stream = { level = "INFO", format  = "-- {message}", filters = ["doot", "bkmkorg", "doit"] }
+file   = { level = "DEBUG", format = "{levelname:<8} : {message:<20} : ({module}.{lineno}.{funcName})", filters =  ["doot", "bkmkorg", "doit"] }
 
-[[tool.doot.directories]] # Core
+[[directories]] # Core
 temp               = ".temp"
 logs               = ".logs"
 bots               = ".bots"
 build              = "doot_build"
 
-[[tool.doot.directories]] # Backup
+[[directories]] # Backup
 backup_root        = "/volumes/BackupSD/"
 images_backup      = "/Volumes/BackupSD/Pictures"
 movies_backup      = "/Volumes/BackupSD/Movies"
@@ -28,7 +32,7 @@ pdf_backup         = "/Volumes/BackupSD/Library/pdflibrary"
 pdf_summary_backup = "/Volumes/BackupSD/Library/summary"
 thread_backup      = "/Volumes/BackupSD/Library/twitter_threads"
 
-[[tool.doot.directories]] # Watch Directories
+[[directories]] # Watch Directories
 bibtex             = "~/github/writing/resources/bibliography"
 downloads          = "~/Downloads"
 desktop            = "~/Desktop"
@@ -36,7 +40,7 @@ dropbox            = "~/Dropbox/docs"
 bibtex_working     = "/Volumes/documents/in_progress_pdfs/Current/"
 firefox            = "~/Library/ApplicationSupport/Firefox"
 
-[[tool.doot.directories]] # libraries
+[[directories]] # libraries
 bookmarks          = "~/github/writing/resources/bookmarks"
 tags               = "~/github/writing/resources/tags"
 orgs               = "~/github/writing/orgfiles"
@@ -46,30 +50,30 @@ movies             = "/Users/johngrey/Movies"
 images             = "/Volumes/documents/DCIM"
 github             = "~/github"
 
-[[tool.doot.files]] # library files
+[[files]] # library files
 bookmarks_total = "~/github/writing/resources/bookmarks/total.bookmarks"
 
-[[tool.doot.directories]] # output
+[[directories]] # output
 pdf_summary        = "/Volumes/documents/in_progress_pdfs/pdflib_automations/total_bib"
 maintain           = "/Volumes/documents/github/emacs_files/terminal/maintenance"
 listings_out       = "doot_build"
 
-[[tool.doot.directories]] # Android
+[[directories]] # Android
 local_push         = "/volumes/documents/pdflibrary"
 local_pull         = "/volumes/documents/android_test_pull"
 
-[[tool.doot.files]] # bibtex bot files
+[[files]] # bibtex bot files
 bib_blacklist   = ".bots/bibtex_blacklist"
 bib_compile_tex = ".bots/bib_compile_template.tex"
 bib_success     = ".bots/log.bib_success"
 bib_fail        = ".bots/log.bib_fail"
 bib_style       = ".bots/jg_custom.bst"
 
-[[tool.doot.files]] # image bot files
+[[files]] # image bot files
 image_whitelist = ".bots/dcim_whitelist"
 image_blacklist = ".bots/resolution_blacklist"
 image_temp      = ".bots/conversion_temp"
 bib_stub_file   = "~/github/writing/resources/todo.bib"
 secrets         = "~/.secrets/bkmkorg.toml"
 
-[tool.doot.group.maintain]
+[group.maintain]

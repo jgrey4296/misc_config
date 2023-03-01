@@ -122,7 +122,7 @@
 
 (setq warning-suppress-log-types
       '( ;; Full Suppress
-        ((defvaralias losing-value woman-topic-history))
+        (defvaralias losing-value woman-topic-history)
         ;; ((python python-shell-completion-native-turn-on-maybe))
         ;; (org-element-cache)
         ;; ((flycheck syntax-checker))

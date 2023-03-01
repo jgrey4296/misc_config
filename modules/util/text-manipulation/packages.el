@@ -9,5 +9,6 @@
 (package! wordnut)
 (package! rotate-text)
 (package! license-templates)
-
+(package! vundo)
+(package! undo-fu)
 (package! lint-result-mode :recipe `(:local-repo ,(expand-file-name "packages/lint-result-mode" doom-user-dir)))

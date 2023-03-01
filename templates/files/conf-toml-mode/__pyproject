@@ -48,12 +48,21 @@ log_cli_level = "DEBUG"
 
 
 [build-system]
+# frontend: https://pypa-build.readthedocs.io/en/latest/index.html
+# frontend: https://pdm.fming.dev/latest/
 requires = [
          "setuptools",
-         "wheel"
+         "wheel",
+         # https://flit.pypa.io/en/stable/index.html
+         # "flit_core > 3.2, <4",
+         # https://pdm-backend.fming.dev/
+         "pdm-backend"
+
 ]
 
 build-backend = "setuptools.build_meta"
+# build-backend = "flit_core.buildapi"
+# build-backend = "pdm.backend"
 
 [tool.setuptools]
 # packages = ['$1']

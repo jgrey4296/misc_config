@@ -8,7 +8,7 @@
 (map! "M-z" nil)
 
 ;; Text bindings
-(map! :map help-map
+(map! :map jg-binding-help-map
       :desc "Regex Reminder" "R" #'+jg-text-regex-reminder
       )
 
@@ -46,6 +46,12 @@
       :desc "Invisible-spec" "i" #'+jg-text-toggle-invisible-spec
       )
 
+(map! :map jg-binding-normal-state-map
+      :after undo-fu
+      :desc "undo" "u" 'undo-fu-only-undo
+      :desc "redo" "U" 'undo-fu-only-redo
+      )
+
 (map! :map jg-binding-visual-state-map
       :desc "Select Buffer"   "v RET"      #'+jg-text-whole-buffer-textobj
       :desc "contract"        "v SPC"      #'+jg-text-visual-contract
@@ -58,10 +64,11 @@
       )
 
 (map! :map jg-binding-operator-map
-      :desc "Whitespace clean" "w" #'+jg-text-run-whitespace-cleanup
+      :desc "Vundo"                       "u" #'vundo
+      :desc "Whitespace clean"            "w" #'+jg-text-run-whitespace-cleanup
       :desc "Delete trailing whitespace"  "W" #'delete-trailing-whitespace
-
-      :desc "Complete/Grow Selection"  "g" (cmds! (eq evil-state 'normal) #'company-manual-begin
+      :desc "Cycle Spacing"               "." #'cycle-spacing
+      :desc "Complete/Grow Selection"     "g" (cmds! (eq evil-state 'normal) #'company-manual-begin
                                                   (eq evil-state 'visual) #'+jg-text-grow-selection-op)
       (:prefix ("s" . "String-ops")
       :desc "Split on distance"        "s" #'+jg-text-split-on-leading-char

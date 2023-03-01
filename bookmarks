@@ -27,8 +27,8 @@
  (front-context-string . "make_test\n  drwx")
  (rear-context-string . "74 Dec  3 13:56 ")
  (position . 246))
-("other_git"
- (filename . "/Volumes/documents/github/otherLibs/")
+("lib_git"
+ (filename . "/Volumes/documents/github/_libs/")
  (front-context-string . "python\n  drwxr-x")
  (rear-context-string . "4K Dec  9 23:19 ")
  (position . 1265))

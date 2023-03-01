@@ -1,24 +1,9 @@
-#!/usr/bin/env Bash
-
-jgd Setting emacs data
-TERM="xterm-24bits"
-
-#sclang for emacs:
-alias sclangel="sclang -d ~/github/.super_collider_classes/ -r -s -i emacs"
-
-jgd Setting Doom Emacs data
-
-jgd Setting Gtags Data
-GTAGSLABEL="pygments"
-
-#Default editor:
-EDITOR="vim"
-
+#!/usr/bin/env bash
 
 # LOCS
-EMAIN_DIR="$HOME/github/otherLibs/lisp/doom_main"
-ENAT_DIR="$HOME/github/otherLibs/lisp/doom_native"
-E30_DIR="$HOME/github/otherLibs/lisp/emacs30"
+EMAIN_DIR="$HOME/github/_libs/lisp/doom_main"
+ENAT_DIR="$HOME/github/_libs/lisp/doom_native"
+E30_DIR="$HOME/github/_libs/lisp/emacs30"
 
 EMAIN_BIN="/usr/local/Cellar/emacs/28.2/bin/emacs"
 ENAT_BIN="/usr/local/Cellar/emacs-plus@28/28.2/bin/emacs"

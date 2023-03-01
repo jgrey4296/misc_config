@@ -1,4 +1,7 @@
 #https://stackoverflow.com/questions/36365801/run-a-crontab-job-using-an-anaconda-env/60977676#60977676
+# This is how to activate conda if it
+# complains the shell isn't set up:
+# source $HOME/anaconda/etc/profile.d/conda.sh
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -14,16 +17,4 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
-# from: https://itecnotes.com/server/cron-how-to-use-the-aliases-in-the-crontab/
-shopt -s expand_aliases
-source "$HOME/.doom.d/terminal/bash_setup/_basic_utils.bash"
-source "$HOME/.doom.d/terminal/bash_setup/_base_path.bash"
-source "$HOME/.doom.d/terminal/bash_setup/cron.bash"
-source "$HOME/.doom.d/terminal/bash_setup/latex.bash"
-source "$HOME/.doom.d/terminal/bash_setup/python.bash"
-source "$HOME/.doom.d/terminal/bash_setup/ruby.bash"
-source "$HOME/.doom.d/terminal/bash_setup/_exports.bash"
-
 CONDA_DEFAULT_ENV=bookmark
-conda activate "$CONDA_DEFAULT_ENV"

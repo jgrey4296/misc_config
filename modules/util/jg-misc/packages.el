@@ -16,7 +16,7 @@
 (package! origami)
 (package! semantic)
 (package! shell-pop)
-(package! timeline-mode :recipe `(:local-repo ,(expand-file-name "packages/timeline-mode" doom-user-dir)))
+(package! timeline-mode :recipe `(:local-repo ,(expand-file-name "packages/major-modes/timeline-mode" doom-user-dir)))
 (package! vlf)
 
 ;; Disables

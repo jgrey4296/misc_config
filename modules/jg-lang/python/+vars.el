@@ -4,14 +4,11 @@
 (setq-default jg-python-dev-mode nil
               jg-python-dev-cmd "-X dev"
 
-              jg-python-pycache-cmd "-X pycache_prefix=%s"
-              jg-python-pycache-loc (expand-file-name  "~/.pycache")
-
               jg-python-docs-url           "https://docs.python.org/3/"
               jg-python-lib-url-suffix     "library/%s.html"
               jg-python-bibtex-parser-url  "https://bibtexparser.readthedocs.io/en/master/tutorial.html"
               jg-python-beautiful-soup-url "https://beautiful-soup-4.readthedocs.io/en/latest/"
-              jg-conda-activate-cmd        "source /Volumes/documents/github/emacs_files/setup_files/bash_setup/python.bash && conda_activate_for_scripts %s"
+              jg-conda-activate-cmd        "source $HOME/.doom.d/terminal/bash/conda.bash && activate %s"
               jg-python-last-chosen-support nil
               jg-python-import-block-end-re "^\\(__all__\\|[[:graph:]]+?\\s-+=\\|def\\|class\\|if TYPE_CHECKING:\\)"
 
@@ -34,14 +31,16 @@
 (after! python-mode
   (setq-default python-indent-offset 4
                 python-indent-guess-indent-offset nil
-                python-shell-completion-native-enable t
+                python-shell-completion-native-enable nil
                 python-shell-virtualenv-root (expand-file-name  "~/anaconda")
-                python-pdbtrack-activate nil
-                py-pdbtrack-do-tracking-p nil
+                python-pdbtrack-activate t
+                py-pdbtrack-do-tracking-p t
                 python-shell-completion-native-disabled-interpreters '("pypy")
 
+                ;; python-shell-interpreter "python3"
                 python-shell-interpreter "python3"
                 python-shell-interpreter-args "-i"
+                ;; python-shell-interpreter-args `("-X" ,(format "pycache_prefix=%s" (expand-file-name  "~/.pycache")))
                 python-shell-interpreter-path-args (doom-module-expand-path :jg-lang 'python "repl_startup.py ")
 
                 py-use-font-lock-doc-face-p t
@@ -113,7 +112,7 @@
   (+jg-completion-add-file-templates
    'python
    '(("LICENSE$"        :trigger "__license-acab"   :mode text-mode :priority 100)
-     ("pyproject.toml$" :trigger "__pyproject_toml" :mode python-mode)
+     ("pyproject.toml$" :trigger "__pyproject"      :mode conf-toml-mode)
      ("setup\\.cfg$"    :trigger "__setup_cfg"      :mode python-mode)
      ("__init__\\.py$"  :trigger "__init"           :mode python-mode)
      ("test_.+\\.py$"   :trigger "__tests"          :mode python-mode)

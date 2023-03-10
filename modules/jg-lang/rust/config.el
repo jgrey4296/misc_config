@@ -26,7 +26,4 @@
   (load! "+bindings")
   )
 
-
-(use-package! cargo-makefile-mode)
-
 ;;; config.el ends here

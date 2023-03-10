@@ -2,7 +2,7 @@
 
 # jgd Setting Javascript
 #Node:
-# PATH=~/.npm-global/bin:$PATH
+PATH="$HOME/.npm-global/bin:$PATH"
 
 #JavaScript:
 #removed --harmony_destructuring

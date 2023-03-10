@@ -195,7 +195,7 @@ and adding extra pythonpath locations as the pre-args
                      (combine-and-quote-strings (list python-shell-interpreter))
                      python-shell-interpreter-args
                      (if jg-python-dev-mode jg-python-dev-cmd)
-                     (format jg-python-pycache-cmd (f-canonical jg-python-pycache-loc))
+                     ;; (format jg-python-pycache-cmd (f-canonical jg-python-pycache-loc))
                      (or filepath python-shell-interpreter-path-args)
                      ;; "--dir" (doom-project-root)
                      )
@@ -222,7 +222,7 @@ and adding extra pythonpath locations as the pre-args
 
 
 
-(fmakunbound '+python/open-ipython-repl)
+;; (fmakunbound '+python/open-ipython-repl)
 (fmakunbound '+python/open-jupyter-repl)
 
 ;;; +env.el ends here

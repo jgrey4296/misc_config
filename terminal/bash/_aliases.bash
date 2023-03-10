@@ -3,6 +3,9 @@
 jgdebug Setting misc aliases
 # alias tar="gtar"
 
+alias ghidra="ghidraRun"
+alias nsa="ghidraRun"
+
 alias grep="ggrep"
 alias sed="gsed"
 
@@ -56,3 +59,5 @@ alias q="exit"
 alias cenv="conda activate"
 alias clist="conda env list"
 alias cexport="conda env export --from-history"
+
+wake="wakeonlan -i 192.168.1.20 90e6ba7391f9"

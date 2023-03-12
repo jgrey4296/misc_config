@@ -36,7 +36,7 @@
         do
         (if (not (keymapp acc-map))
             (setq acc-map (cdr acc-map)))
-        (loop for x in (number-sequence ?a ?z)
+        (cl-loop for x in (number-sequence ?a ?z)
                 do
                 (let ((fmt (char-to-string x)))
                   (if (lookup-key acc-map (kbd (format "C-%s" fmt)))

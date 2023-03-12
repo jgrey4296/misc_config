@@ -1,8 +1,6 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
 ;;-- Me
-;; Some functionality uses this to identify you, e.g. GPG configuration, email
-;; clients, file templates and snippets.
 (setq user-full-name "John Grey"
       user-mail-address "johngrey4296 at gmail.com"
       user-url "https://jgrey4296.github.io/")
@@ -39,8 +37,7 @@
 ;;-- end evil
 
 ;;-- doom settings
-(setq +doom-quit-messages nil
-      doom-theme 'jg-Iosvkem)
+(setq doom-theme 'jg-Iosvkem)
 ;; Override doom's whitespace mode settings:
 (fset 'doom-highlight-non-default-indentation-h #'(lambda () nil))
 ;;-- end doom settings
@@ -52,12 +49,12 @@
 ;;-- end which key
 
 ;;-- global modes
-(setq flycheck-global-modes nil
-      )
+(setq flycheck-global-modes nil)
 
 (add-hook! doom-first-buffer
    #'global-highlight-parentheses-mode
    #'global-autohide-minor-mode
+   #'delete-selection-mode
    )
 
 ;; (remove-hook! doom-first-buffer
@@ -70,6 +67,7 @@
 (remove-hook! 'doom-init-ui-hook
   #'+ligatures-init-h
   )
+
 ;;-- end global modes
 
 ;;-- misc variables

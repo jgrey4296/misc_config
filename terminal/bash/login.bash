@@ -32,3 +32,5 @@ jgd  "Path  :" "$PATH"
 read-emacs
 jg_maybe_inc_prompt
 jg_set_prompt
+
+emacs

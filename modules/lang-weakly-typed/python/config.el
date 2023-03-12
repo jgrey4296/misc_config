@@ -2,17 +2,17 @@
 
 (doom-log "Config JG Python")
 
-(load! "+manifest-mode")
+(load! "modes/+manifest-mode")
 (load! "+vars")
 (load! "+funcs")
-(load! "+hooks")
+(load! "util/+hooks")
 (after! jg-bindings-total
   (load! "+bindings")
-  (load! "+nav")
+  (load! "util/+nav")
   )
 (load! "+advice")
-(load! "+env")
-(load! "+derived-modes")
+(load! "util/+env")
+(load! "modes/+derived-modes")
 
 (use-package-hook! python :post-config
   (require 'python-mode)

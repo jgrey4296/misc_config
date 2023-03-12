@@ -1,16 +1,16 @@
 ;; set pomodoro log variable
 
 (load! "+funcs")
-(load! "+pomodoro-funcs")
-(load! "+clean-funcs")
-(load! "+dired")
+(load! "util/+pomodoro-funcs")
+(load! "util/+clean-funcs")
+(load! "util/+dired")
 (load! "+vars")
-(load! "+tags")
+(load! "util/+tags")
 (after! (jg-bindings-total jg-org-stage evil-org)
   (message "Setting up org bindings")
-  (load! "+text-utils")
-  (load! "+org-standard-bindings.el")
-  (load! "+bindings")
+  (load! "util/+text-utils")
+  (load! "binding/+org-standard-bindings.el")
+  (load! "binding/+bindings")
 
   ;; (evil-make-overriding-map org-mode-map)
   (setq minor-mode-map-alist (assq-delete-all 'evil-org-mode minor-mode-map-alist))

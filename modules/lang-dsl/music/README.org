@@ -1,4 +1,4 @@
 *  Music Layer
   Sets up sclang, tidal, chuck-mode, and a music-minor mode.
-  
+
   Uses sclang.yaml to setup sclang, and bootTidal.hs for Tidal.

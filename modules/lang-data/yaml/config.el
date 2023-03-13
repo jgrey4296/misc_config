@@ -1,6 +1,7 @@
 ;;; lang/yaml/config.el -*- lexical-binding: t; -*-
 
 (use-package! yaml-mode
+  :defer t
   :mode "Procfile\\'"
   :init
   (when (modulep! +lsp)

@@ -14,7 +14,7 @@
   (load! "+bindings")
   )
 
-(use-package! rawtag-mode)
+(use-package! rawtag-mode :defer t)
 
 (after! (evil org helm)
   (+jg-tag-rebuild-tag-database)

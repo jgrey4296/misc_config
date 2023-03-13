@@ -5,10 +5,8 @@
   )
 
 (use-package! sphinx-mode
+  :defer t
   :hook (rst-mode . sphinx-mode))
-
-(use-package! rst
-  )
 
 (use-package! rst
   :defer t

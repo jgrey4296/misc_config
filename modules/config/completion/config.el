@@ -1,3 +1,5 @@
+;; -*- mode: emacs-lisp; lexical-binding: t; -*-
+;;
 ;;-- file loads
 (load! "+vars")
 (load! "+template-control")
@@ -15,10 +17,11 @@
 
 ;;-- helm
 (use-package! helm
+  :commands helm
   :config
   (setq helm-completing-read-handlers-alist nil)
   )
-(use-package! helm-files)
+(use-package! helm-files :defer t)
 (use-package! helm-gtags :defer t)
 
 ;;-- end helm

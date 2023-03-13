@@ -38,7 +38,7 @@
   (add-hook 'wordnut-mode-hook 'outline-minor-mode)
 
   )
-(use-package! license-templates)
+(use-package! license-templates :defer)
 
 (use-package! lint-result-mode)
 (use-package! vundo
@@ -46,6 +46,7 @@
   )
 
 (use-package! undo-fu
+  :defer t
   :config
   ;; Increase undo history limits to reduce likelihood of data loss
   (setq undo-limit 400000           ; 400kb (default is 160kb)

@@ -8,6 +8,7 @@
 ;;; Packages
 
 (use-package! rustic
+  :defer t
   :mode ("\\.rs$" . rustic-mode)
   :preface
   ;; HACK `rustic' sets up some things too early. I'd rather disable it and let

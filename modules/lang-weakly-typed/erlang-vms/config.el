@@ -13,6 +13,7 @@
         )
   )
 (use-package! erlang
+  :defer t
   :mode ("\\.erlang\\'" . erlang-mode)
   :mode ("/rebar\\.config\\(?:\\.script\\)?\\'" . erlang-mode)
   :mode ("/\\(?:app\\|sys\\)\\.config\\'" . erlang-mode)

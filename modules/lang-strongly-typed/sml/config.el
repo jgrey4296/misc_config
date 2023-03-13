@@ -1,6 +1,7 @@
 ;;; lang/sml/config.el -*- lexical-binding: t; -*-
 
 (use-package! sml-mode
+  :defer t
   :mode "\\.s\\(?:ml\\|ig\\)\\'"
   :config
   (set-repl-handler! 'sml-mode #'run-sml)
@@ -23,6 +24,7 @@
 
 
 (use-package! company-mlton
+  :defer t
   :when (modulep! :completion company)
   :hook (sml-mode . company-mlton-init)
   :config

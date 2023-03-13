@@ -8,6 +8,7 @@
 ;;; Packages
 
 (use-package! ruby-mode  ; built-in
+  :defer t
   ;; Other extensions are already registered in `auto-mode-alist' by `ruby-mode'
   :mode "\\.\\(?:a?rb\\|aslsx\\)\\'"
   :mode "/\\(?:Brew\\|Fast\\)file\\'"
@@ -79,6 +80,7 @@
 
 
 (use-package! rubocop
+  :defer t
   :hook (ruby-mode . rubocop-mode)
   :config
   (set-popup-rule! "^\\*RuboCop" :select t)
@@ -122,6 +124,7 @@
         "o" #'bundle-open))
 
 (use-package! chruby
+  :defer t
   :when (modulep! +chruby)
   :hook (ruby-mode . chruby-use-corresponding)
   :config
@@ -137,6 +140,7 @@
 ;;; Testing frameworks
 
 (use-package! rspec-mode
+  :defer t
   :mode ("/\\.rspec\\'" . text-mode)
   :init
   (setq rspec-use-spring-when-possible nil)
@@ -182,6 +186,7 @@
 
 
 (use-package! projectile-rails
+  :defer t
   :when (modulep! +rails)
   :hook ((ruby-mode inf-ruby-mode projectile-rails-server-mode) . projectile-rails-mode)
   :hook (projectile-rails-server-mode . doom-mark-buffer-as-real-h)

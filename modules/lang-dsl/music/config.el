@@ -2,6 +2,7 @@
 (after! jg-bindings-total
   (load! "+bindings")
 )
+
 (use-package! music-minor-mode
   :commands (music-minor-mode music-minor/music-on global-music-mode)
   :config
@@ -43,5 +44,4 @@
 (use-package! chuck-mode
   :commands (chuck-mode)
   )
-
 (use-package! csound-mode)

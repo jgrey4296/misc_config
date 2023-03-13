@@ -1,6 +1,7 @@
 ;;; lang/csharp/config.el -*- lexical-binding: t; -*-
 
 (use-package! csharp-mode
+  :defer t
   :hook (csharp-mode . rainbow-delimiters-mode)
   :config
   (set-electric! 'csharp-mode :chars '(?\n ?\}))

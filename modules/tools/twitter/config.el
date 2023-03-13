@@ -1,3 +1,5 @@
+;; -*- mode: emacs-lisp; lexical-binding: t; -*-
+;;
 (after! jg-bindings-total
   (load! "+bindings")
   (load! "+motions")
@@ -8,6 +10,7 @@
 (load! "+tweet-minor-mode")
 
 (use-package! tramp
+  :defer t
   :init
   (defvar tramp-crypt-directories nil)
   (defvar tramp-crypt-enabled nil)

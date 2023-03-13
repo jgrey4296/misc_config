@@ -48,6 +48,7 @@
       ["Test" +fortran/fpm-test :active (+fortran--fpm-toml) :help "Run the Unit Tests"])))
 
 (use-package! fortran
+  :defer t
   ;; The `.for' extension is automatically recognized by Emacs and invokes
   ;; `fortran-mode', but not its capital variant `.FOR'. Many old files are
   ;; named the latter way, so we account for that manually here.

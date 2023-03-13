@@ -8,6 +8,7 @@
 ;;; Plugins
 
 (use-package! nix-mode
+  :defer t
   :interpreter ("\\(?:cached-\\)?nix-shell" . +nix-shell-init-mode)
   :mode "\\.nix\\'"
   :init

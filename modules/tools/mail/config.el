@@ -16,7 +16,7 @@
   )
 
 (use-package! rmailsum
-  :defer
+  :defer t
   :config
   (load! "+advice")
   )

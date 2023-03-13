@@ -16,6 +16,7 @@ capture, the end position, and the output buffer.")
 ;;; Packages
 
 (use-package! markdown-mode
+  :defer t
   :mode ("/README\\(?:\\.md\\)?\\'" . gfm-mode)
   :init
   (setq markdown-enable-math t ; syntax highlighting for latex fragments

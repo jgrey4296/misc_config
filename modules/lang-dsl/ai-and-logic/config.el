@@ -9,18 +9,15 @@
 (load! "+repl")
 (load! "+funcs")
 (load! "+advice")
-(use-package! abl-mode)
-(use-package! agentspeak-mode)
-(use-package! ceptre-mode)
-(use-package! instal-mode)
-(use-package! jacamo-mode)
-(use-package! versu-mode)
-(use-package! soar-mode)
-(use-package! clips-mode)
-(use-package! netlogo-mode
-  :defer t
-  :commands (netlogo-mode)
-  )
+(use-package! abl-mode        :defer t)
+(use-package! agentspeak-mode :defer t)
+(use-package! ceptre-mode     :defer t)
+(use-package! instal-mode     :defer t)
+(use-package! jacamo-mode     :defer t)
+(use-package! versu-mode      :defer t)
+(use-package! soar-mode       :defer t)
+(use-package! clips-mode      :defer t)
+(use-package! netlogo-mode    :defer t)
 
 
 (after! org

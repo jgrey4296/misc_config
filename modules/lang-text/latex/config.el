@@ -3,6 +3,7 @@
 (load! "+vars")
 
 (use-package! tex-mode
+  :defer t
   :config
   (map! :after jg-bindings-total
         :map latex-mode-map
@@ -121,6 +122,7 @@ If no viewer is found, `latex-preview-pane-mode' is used.")
         :desc "Run a command" "m" #'TeX-command-master))
 
 (use-package! tex-fold
+  :defer t
   :when (modulep! +fold)
   :hook (TeX-mode . +latex-TeX-fold-buffer-h)
   :hook (TeX-mode . TeX-fold-mode)
@@ -195,6 +197,7 @@ Math faces should stay fixed by the mixed-pitch blacklist, this is mostly for
       (apply fn args))))
 
 (use-package! preview
+  :defer t
   :hook (LaTeX-mode . LaTeX-preview-setup)
   :config
   (setq-default preview-scale 1.4
@@ -209,6 +212,7 @@ Math faces should stay fixed by the mixed-pitch blacklist, this is mostly for
         :desc "Unpreview" "P" #'preview-clearout-at-point))
 
 (use-package! cdlatex
+  :defer t
   :when (modulep! +cdlatex)
   :hook (LaTeX-mode . cdlatex-mode)
   :hook (org-mode . org-cdlatex-mode)
@@ -238,10 +242,12 @@ Math faces should stay fixed by the mixed-pitch blacklist, this is mostly for
 
 ;; Nicely indent lines that have wrapped when visual line mode is activated.
 (use-package! adaptive-wrap
+  :defer t
   :hook (LaTeX-mode . adaptive-wrap-prefix-mode)
   :init (setq-default adaptive-wrap-extra-indent 0))
 
 (use-package! auctex-latexmk
+  :defer t
   :when (modulep! +latexmk)
   :after latex
   :init
@@ -254,6 +260,7 @@ Math faces should stay fixed by the mixed-pitch blacklist, this is mostly for
   (auctex-latexmk-setup))
 
 (use-package! evil-tex
+  :defer t
   :when (modulep! :editor evil +everywhere)
   :hook (LaTeX-mode . evil-tex-mode))
 

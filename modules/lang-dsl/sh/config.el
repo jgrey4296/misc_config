@@ -11,6 +11,7 @@
 ;;; Packages
 
 (use-package! sh-script ; built-in
+  :defer t
   :mode ("\\.bats\\'" . sh-mode)
   :mode ("\\.\\(?:zunit\\|env\\)\\'" . sh-mode)
   :mode ("/bspwmrc\\'" . sh-mode)
@@ -76,6 +77,7 @@
   (sp-local-pair 'sh-mode "`" "`" :unless '(sp-point-before-word-p sp-point-before-same-p)))
 
 (use-package! company-shell
+  :defer t
   :when (modulep! :completion company)
   :unless (modulep! +lsp)
   :after sh-script

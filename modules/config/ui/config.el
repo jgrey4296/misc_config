@@ -53,5 +53,5 @@
 (use-package! window-ring-minor-mode
   :commands (window-ring-setup-columns window-ring-minor-mode window-ring-setup-columns-command)
   )
-(use-package! palette-mode)
-(use-package! paren-state)
+(use-package! palette-mode :defer t)
+(use-package! paren-state :defer t)

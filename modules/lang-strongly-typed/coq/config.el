@@ -61,6 +61,7 @@
 ;; This package provides more than just code completion, so we load it whether
 ;; or not :completion company is enabled.
 (use-package! company-coq
+  :defer t
   :hook (coq-mode . company-coq-mode)
   :config
   (set-popup-rule! "^\\*\\(?:response\\|goals\\)\\*" :ignore t)

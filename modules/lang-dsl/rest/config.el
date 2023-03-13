@@ -1,6 +1,7 @@
 ;;; lang/rest/config.el -*- lexical-binding: t; -*-
 
 (use-package! restclient
+  :defer t
   :mode ("\\.http\\'" . restclient-mode)
   ;; line numbers aren't enabled by default in fundamental-mode-derived modes
   :hook (restclient-mode . display-line-numbers-mode)
@@ -31,16 +32,19 @@ certs, rather than reject them silently."
 
 
 (use-package! company-restclient
+  :defer t
   :when (modulep! :completion company)
   :after restclient
   :config (set-company-backend! 'restclient-mode 'company-restclient))
 
 
 (use-package! restclient-jq
+  :defer t
   :when (modulep! +jq)
   :after restclient)
 
 
 (use-package! jq-mode
+  :defer t
   :when (modulep! +jq)
   :after restclient-jq)

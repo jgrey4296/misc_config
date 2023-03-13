@@ -1,6 +1,7 @@
 ;;; lang/data/config.el -*- lexical-binding: t; -*-
 
 (use-package! nxml-mode
+  :defer t
   :mode "\\.p\\(?:list\\|om\\)\\'" ; plist, pom
   :mode "\\.xs\\(?:d\\|lt\\)\\'"   ; xslt, xsd
   :mode "\\.rss\\'"

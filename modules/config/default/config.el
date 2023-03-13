@@ -66,15 +66,6 @@
                         path-separator t))))
 
 
-(use-package! drag-stuff
-  :defer t
-  :init
-  (map! "<M-up>"    #'drag-stuff-up
-        "<M-down>"  #'drag-stuff-down
-        "<M-left>"  #'drag-stuff-left
-        "<M-right>" #'drag-stuff-right))
-
-
 ;;;###package tramp
 (unless IS-WINDOWS
   (setq tramp-default-method "ssh")) ; faster than the default scp

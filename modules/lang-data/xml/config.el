@@ -30,7 +30,7 @@
 
 
 
-(use-package! nxml-mode)
-(use-package! mhtml-mode)
+(use-package! nxml-mode :defer t)
+(use-package! mhtml-mode :defer t)
 
 ;;; config.el ends here

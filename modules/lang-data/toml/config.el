@@ -27,6 +27,7 @@
   )
 
 (use-package! conf-mode
+  :defer t
   :config
   (defun +jg-toml-customisation-hook ()
     (add-hook 'jg-text-whitespace-clean-hook '+jg-toml-cleanup-ensure-newline-before-table 5 t)

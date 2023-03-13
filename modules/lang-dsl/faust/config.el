@@ -1,6 +1,7 @@
 ;;; lang/faust/config.el -*- lexical-binding: t; -*-
 
 (use-package! faustine
+  :defer t
   :mode ("\\.dsp\\'" . faustine-mode)
   :config
   (set-company-backend! '(faust-mode faustine-mode) '(company-dabbrev-code +faust-company-backend company-yasnippet))

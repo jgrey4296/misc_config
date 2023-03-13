@@ -18,6 +18,7 @@
 )
 
 (use-package! bibtex
+  :defer t
   :init
   (defun +jg-bibtex-customisation-hook ()
 

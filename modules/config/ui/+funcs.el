@@ -8,30 +8,6 @@
 
 ;;-- end window ring
 
-;;-- misc
-(defun +jg-ui-what-face (pos)
-  ;; from: http://stackoverflow.com/questions/1242352/
-  (interactive "d")
-  (let ((face (or (get-char-property (point) 'read-face-name)
-                  (get-char-property (point) 'face))))
-    (if face (message "Face: %s" face) (message "No face at %d" pos))))
-(defun +jg-ui-face-under-cursor-customize (pos)
-  (interactive "d")
-  (let ((face (or (get-char-property (point) 'read-face-name)
-                  (get-char-property (point) 'face))))
-    (if face (customize-face face) (message "No face at %d" pos))))
-(defun +jg-ui-toggle-docstrings ()
-  (interactive)
-  (setq which-key-show-docstrings
-        (if which-key-show-docstrings
-            nil
-          'docstring-only
-            )
-        )
-  )
-
-;;-- end misc
-
 ;;-- window rotation
 ;; From spacemacs originally
 ;; originally from magnars and modified by ffevotte for dedicated windows
@@ -74,76 +50,6 @@ Dedicated (locked) windows are left untouched."
         (window-state-put second-window-state (funcall splitter)))
     (error "Can't toggle window layout when the number of windows isn't two.")))
 ;;-- end layout toggle
-
-;;-- faces
-(defun +jg-ui-insert-faces ()
-  "insert lisp code for a set of faces automatically"
-  (interactive)
-  (let ((name (read-string "Face Names: "))
-        (num (read-number "Number of Faces: "))
-        (file (read-file-name "File: " jg-ui-default-face-gen-palette-dir))
-        colors
-        )
-
-    (with-temp-buffer
-      (insert-file-contents file)
-      (goto-char (point-min))
-      (while (re-search-forward "#[[:alnum:]]+" nil t)
-        (push (match-string 0) colors)
-        ))
-    (cl-assert (<= num (length colors)))
-
-    (cl-loop for n to (- num 1) do
-          (insert "(defface " name "-face-" (number-to-string n) "\n")
-          (insert "  '((t :foreground \"" (nth n colors) "\"))\n")
-          (insert "  \"Generated " name " " (number-to-string n) " Face\"\n)\n\n")
-          )
-    )
-  )
-;;-- end faces
-
-;;-- narrowing
-(defun +jg-ui-narrow-around-point ()
-  (interactive)
-  (cond (current-prefix-arg
-         (narrow-to-region (line-beginning-position)
-                           (point-max)))
-        ((eq evil-state 'visual)
-         (narrow-to-region evil-visual-beginning evil-visual-end))
-        ((not (buffer-narrowed-p))
-         (let ((num (read-number "Lines Around Point to Select: ")))
-           (narrow-to-region (line-beginning-position (- num))
-                             (line-end-position num))
-           )
-         )
-        (t
-         (widen))
-        )
-  )
-(defun +jg-ui-toggle-narrow-buffer (arg)
-  "Narrow the buffer to BEG END. If narrowed, widen it.
-If region isn't active, narrow away anything above point
-"
-  (interactive "P")
-  (cond ((eq evil-state 'normal)
-         (narrow-to-region (line-beginning-position) (point-max)))
-        ((eq evil-state 'visual)
-         (narrow-to-region evil-visual-beginning evil-visual-end))
-        )
-  )
-(defun +jg-ui-narrowing-move-focus-backward (arg)
-  (interactive "p")
-  (+jg-ui-narrowing-move-focus-forward(- arg))
-  )
-(defun +jg-ui-narrowing-move-focus-forward (arg)
-  (interactive "p")
-  (widen)
-  (evil-forward-section-begin arg)
-  (let ((bounds (+evil:defun-txtobj)))
-    (narrow-to-region (car bounds) (cadr bounds))
-    )
-  )
-;;-- end narrowing
 
 ;;-- buffer opening
 (defun +jg-ui-open-scratch-buffer (&optional arg)
@@ -195,70 +101,3 @@ If region isn't active, narrow away anything above point
   (message "Ignore invisible lines: %s" line-move-ignore-invisible)
   )
 ;;-- end ui toggles
-
-;;-- popup control
-(defun +jg-ui-popup-add-rules (sym rules &optional override)
-  " sym is a symbol to avoid adding duplicate rulesets
-
-  Expects a list of form:
-  '((PATTERN :opt val :opt val) (PATTERN :opt val :opt val))
-  "
-  (cl-assert (hash-table-p jg-popup-display-rules))
-  (if (and (gethash sym jg-popup-display-rules) (not override))
-      (message "Popup Ruleset %s already exists" sym)
-    (puthash sym (cl-loop for (head . body) in rules
-                          for priority = (* -1 (or (plist-get body :priority) 0))
-                          collect (cons priority (+popup-make-rule head body)))
-             jg-popup-display-rules)
-    )
-  )
-
-(defun +jg-ui-popup-activate-rules (&optional force)
-  (interactive "P")
-  (when (or force (not jg-popup-display-flattened))
-    (message "Reconstructing popup rules: %s" (hash-table-keys jg-popup-display-rules))
-    (setq jg-popup-display-flattened
-          (-concat (mapcar #'cdr (sort
-                                  (copy-sequence
-                                   (-flatten-n 1 (hash-table-values jg-popup-display-rules)))
-                                  #'(lambda (x y) (< (car x) (car y))))
-                           )
-                   '(("*jg-customised*" (+popup-buffer)))
-                   )
-          )
-    )
-  (when jg-popup-display-flattened
-    (message "Reapplying popup rules")
-    (setq +popup--display-buffer-alist nil
-          display-buffer-alist jg-popup-display-flattened)
-    )
-  )
-
-(defun +jg-ui-popup-reapply-rules ()
-  (interactive)
-  (+jg-ui-popup-activate-rules t)
-  )
-
-(define-advice set-popup-rules! (:after (&rest args)
-                                 +jg-popup-advice)
-  (+jg-ui-popup-activate-rules))
-
-(define-advice set-popup-rule! (:after (&rest args)
-                                 +jg-popup-advice2)
-  (+jg-ui-popup-activate-rules))
-;;-- end popup control
-
-;;-- ibuffer
-(defun +jg-ui-ibuffer-update-hook ()
-  (message "Updating ibuffer: %s" (current-time-string))
-  (map! :map ibuffer-mode-map
-        [normal-state] nil)
-
-  (setq ibuffer-saved-filters jg-ui-ibuffer-filters)
-  (ibuffer-clear-filter-groups)
-  (ibuffer-filter-disable)
-
-  (ibuffer-switch-to-saved-filter-groups "my-default")
-  (ibuffer-switch-to-saved-filters "anti-[Helm|Magit|Help]")
-  )
-;;-- end ibuffer

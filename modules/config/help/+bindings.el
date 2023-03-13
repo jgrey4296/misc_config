@@ -1,4 +1,4 @@
-;;; +help-bindings.el -*- lexical-binding: t; -*-
+;;; +bindings.el -*- lexical-binding: t; -*-
 
 (setq jg-binding-help-map (make-keymap))
 
@@ -105,14 +105,41 @@
       )
 ;;-- end packages
 
+;;-- modules
+(map! :map jg-binding-help-map
+      :desc "Module Ivy" "m" #'+jg-help-modules-ivy
 
-(after! jg-leader-bindings-loaded
-  ;; (setq help-map jg-binding-help-map)
-  (map! :leader
-        :desc "help"                  "h"    jg-binding-help-map
-        )
-  (map! :g "C-x h" jg-binding-help-map)
+      )
+
+;;-- end modules
+
+(map! :leader
+      :desc "help" "h" jg-binding-help-map
+      )
+(map! :g "C-x h" jg-binding-help-map)
+
+(defun +jg-help-buffer-list (curr)
+  (cl-remove-if-not #'(lambda (buf)
+                        (with-current-buffer buf
+                          (and (not (eq curr buf))
+                               (derived-mode-p 'helpful-mode))
+                          ))
+                    (buffer-list))
+  )
+
+(defun +jg-help-switch-to-prev-helpful-or-close-window ()
+  (interactive)
+  (if-let ((next-helpful (car-safe (+jg-help-buffer-list (current-buffer))))
+           (curr (current-buffer))
+           )
+      (progn (switch-to-buffer next-helpful t t)
+             (kill-buffer curr))
+    (+popup/quit-window)
+    )
   )
 
 
+(map! :map helpful-mode-map
+      :n "q" #'+jg-help-switch-to-prev-helpful-or-close-window
+      )
 (provide 'jg-help-bindings)

@@ -179,3 +179,5 @@ prevent the popup(s) from messing up the UI (or vice versa)."
 ;;; Hacks
 
 (load! "+hacks")
+
+(provide 'module/popup)

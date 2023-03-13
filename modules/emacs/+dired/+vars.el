@@ -8,20 +8,20 @@
 ;;-- end epa/gpg
 
 ;;-- dired
-(setq-default
- dired-args '("-ahl" "-v" "--group-directories-first")
- insert-directory-program "gls"
- dired-auto-revert-buffer #'dired-buffer-stale-p
- dired-clean-confirm-killing-deleted-buffers nil
- dired-create-destination-dirs 'ask
- dired-dwim-target t
- dired-hide-details-hide-symlink-targets nil
- dired-omit-verbose nil
- dired-recursive-copies  'always
- dired-recursive-deletes 'top
- dired-vc-rename-file t
+(setq-default dired-args '("-ahl" "-v" "--group-directories-first")
+              insert-directory-program "gls"
 
- +jg-dired-recursive-switches "-aBhlR --group-directories-first"
+              dired-auto-revert-buffer #'dired-buffer-stale-p
+              dired-clean-confirm-killing-deleted-buffers nil
+              dired-create-destination-dirs 'ask
+              dired-dwim-target t
+              dired-hide-details-hide-symlink-targets nil
+              dired-omit-verbose nil
+              dired-recursive-copies  'always
+              dired-recursive-deletes 'top
+              dired-vc-rename-file t
+
+              +jg-dired-recursive-switches "-aBhlR --group-directories-first"
  )
 
 (after! (dired dired-x dired-quick-sort)
@@ -101,12 +101,12 @@
 ;;-- fold spec
 (after! jg-fold-specs
   (setq jg-dired-fold-spec `((dired-mode)
-                        :open-all   nil
-                        :close-all  nil
-                        :toggle     ,(cmd! (dired-hide-subdir 1))
-                        :open       nil
-                        :open-rec   nil
-                        :close      nil))
+                             :open-all   nil
+                             :close-all  nil
+                             :toggle     ,(cmd! (dired-hide-subdir 1))
+                             :open       nil
+                             :open-rec   nil
+                             :close      nil))
   (push jg-dired-fold-spec evil-fold-list)
   )
 ;;-- end fold spec

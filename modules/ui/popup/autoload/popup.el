@@ -93,7 +93,7 @@ the buffer is visible, then set another timer and try again later."
   (when alist
     (let ((alist  ; handle defaults
            (cl-remove-duplicates
-            (append alist +popup-default-alist)
+            (append alist (or +popup-default-alist nil))
             :key #'car-safe :from-end t))
           (parameters
            (cl-remove-duplicates

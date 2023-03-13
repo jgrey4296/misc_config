@@ -2,17 +2,23 @@
 
 (load! "+vars")
 (load! "+funcs")
-(load! "+state-hl-lines")
-(load! "+popup")
-(after! hydra   (load! "+hydra"))
+(load! "utils/+state-hl-lines")
+(load! "utils/+hooks")
+(load!  "popup/+funcs")
+(load! "ibuffer/+funcs")
+
+(after! module/popup
+    (load! "popup/config.el")
+    )
+(after! hydra (load! "hydra/+hydra"))
 (after! jg-bindings-total
   (load! "+bindings")
-  (after! ibuffer
-    (load! "+ibuffer-bindings")
-    )
   )
 
-(add-hook 'jg-reapply-hook '+jg-ui-popup-reapply-rules)
+(after! (jg-bindings-total ibuffer)
+  (load! "ibuffer/+ibuffer-bindings")
+ )
+
 
 (use-package! hl-line
   :defer t
@@ -49,21 +55,3 @@
   )
 (use-package! palette-mode)
 (use-package! paren-state)
-
-
-;;-- hooks
-;;
-(defun +jg-ui-load-advice () (load! "+advice"))
-(add-hook! 'doom-first-file-hook #'+jg-ui-popup-activate-rules)
-(add-hook! 'doom-init-ui-hook    #'rainbow-delimiters-mode)
-(add-hook! 'doom-init-ui-hook    #'+jg-ui-load-advice)
-
-(after! ibuffer
-  (add-hook! 'ibuffer-mode-hook    #'+jg-ui-ibuffer-update-hook)
-  )
-
-(after! helpful
-  (add-hook 'helpful-mode-hook
-            (lambda () (set-window-dedicated-p (selected-window) nil)))
-  )
-;;-- end hooks

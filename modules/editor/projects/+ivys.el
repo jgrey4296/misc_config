@@ -1,6 +1,5 @@
 ;;; +ivys.el -*- lexical-binding: t; -*-
 
-
 ;;-- doot command retrieval
 (defun +jg-projects-get-doot-commands (&optional dir)
   " get tasks from doot, cache them, then wrap them for use in ivy "

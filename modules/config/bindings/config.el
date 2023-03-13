@@ -10,9 +10,9 @@
   (load! "evil/+evil-bindings")
   (load! "evil/+evil-submap-bindings")
   (load! "+misc-bindings")
-  (load! "+help-bindings")
   (provide 'jg-bindings-total)
   )
+
 (after! evil-ex
   (load! "evil/+evil-ex-setup")
 )

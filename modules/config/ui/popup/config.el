@@ -1,4 +1,4 @@
-;;; util/window-control/+popup.el -*- lexical-binding: t; -*-
+;;; config/ui/popup/config.el -*- lexical-binding: t; -*-
 
 (message "Setting up popup rules: %s" (current-time-string))
 ;; Setup popup vars:
@@ -53,5 +53,9 @@
 ;;(set-popup-rule! PREDICATE &key
 ;; IGNORE ACTIONS SIDE SIZE WIDTH HEIGHT SLOT
 ;; VSLOT TTL QUIT SELECT MODELINE AUTOSAVE PARAMETERS)
+
+(add-hook! 'doom-first-file-hook #'+jg-ui-popup-activate-rules)
+(add-hook  'jg-reapply-hook      '+jg-ui-popup-reapply-rules)
+
 
 (provide 'jg-popup-init)

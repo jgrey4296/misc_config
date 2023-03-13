@@ -13,28 +13,66 @@
                                        ))
 
 ;;-- vimish-fold
-(setq jg-fold-vimish-spec '((vimish-fold-mode)
-                            :delete     vimish-fold-delete
-                            :open-all   vimish-fold-unfold-all
-                            :close-all  vimish-fold-refold-all
-                            :toggle     vimish-fold-toggle
-                            :open       vimish-fold-unfold
-                            :open-rec   nil
-                            :close      vimish-fold-refold))
-
-(setq-default vimish-fold-header-width 50
+(setq-default vimish-fold-dir (concat doom-cache-dir "vimish-fold/")
+              vimish-fold-indication-mode 'right-fringe
+              evil-vimish-fold-mode-map nil
+              jg-fold-vimish-spec '((vimish-fold-mode)
+                                    :delete     vimish-fold-delete
+                                    :open-all   vimish-fold-unfold-all
+                                    :close-all  vimish-fold-refold-all
+                                    :toggle     vimish-fold-toggle
+                                    :open       vimish-fold-unfold
+                                    :open-rec   nil
+                                    :close      vimish-fold-refold)
+              vimish-fold-header-width 50
               vimish-fold-persist-on-saving nil
               )
 ;;-- end vimish-fold
 
 ;;-- hide show
-(setq jg-fold-hs-spec `((hs-minor-mode emacs-lisp-mode lisp-mode)
-                        :open-all   hs-show-all
-                        :close-all  hs-hide-all
-                        :toggle     hs-toggle-hiding
-                        :open       hs-show-block
-                        :open-rec   nil
-                        :close      hs-hide-block))
+(setq-default hs-hide-comments-when-hiding-all nil
+              hs-set-up-overlay #'+fold-hideshow-set-up-overlay-fn
+              jg-fold-hs-spec `((hs-minor-mode emacs-lisp-mode lisp-mode)
+                                :open-all   hs-show-all
+                                :close-all  hs-hide-all
+                                :toggle     hs-toggle-hiding
+                                :open       hs-show-block
+                                :open-rec   nil
+                                :close      hs-hide-block)
+
+              ;; extra folding support for more languages
+              hs-special-modes-alist
+              (append
+               '((vimrc-mode "{{{" "}}}" "\"")
+                 (yaml-mode "\\s-*\\_<\\(?:[^:]+\\)\\_>"
+                            ""
+                            "#"
+                            +fold-hideshow-forward-block-by-indent-fn nil)
+                 (haml-mode "[#.%]" "\n" "/" +fold-hideshow-haml-forward-sexp-fn nil)
+                 (ruby-mode "class\\|d\\(?:ef\\|o\\)\\|module\\|[[{]"
+                            "end\\|[]}]"
+                            "#\\|=begin"
+                            ruby-forward-sexp)
+                 (matlab-mode "if\\|switch\\|case\\|otherwise\\|while\\|for\\|try\\|catch"
+                              "end"
+                              nil (lambda (_arg) (matlab-forward-sexp)))
+                 (nxml-mode "<!--\\|<[^/>]*[^/]>"
+                            "-->\\|</[^/>]*[^/]>"
+                            "<!--" sgml-skip-tag-forward nil)
+                 (latex-mode
+                  ;; LaTeX-find-matching-end needs to be inside the env
+                  ("\\\\begin{[a-zA-Z*]+}\\(\\)" 1)
+                  "\\\\end{[a-zA-Z*]+}"
+                  "%"
+                  (lambda (_arg)
+                    ;; Don't fold whole document, that's useless
+                    (unless (save-excursion
+                              (search-backward "\\begin{document}"
+                                               (line-beginning-position) t))
+                      (LaTeX-find-matching-end)))
+                  nil))
+               )
+  )
 ;;-- end hide show
 
 ;;-- origami
@@ -83,13 +121,13 @@
 
 ;;-- all together
 (setq jg-fold-vars-fold-list (list
-                             jg-fold-diff-spec
-                             jg-fold-ifdef-spec
-                             jg-fold-outline-spec
-                             jg-fold-origami-spec
-                             jg-fold-hs-spec
-                             jg-fold-vimish-spec
-                             ))
+                              jg-fold-diff-spec
+                              jg-fold-ifdef-spec
+                              jg-fold-outline-spec
+                              jg-fold-origami-spec
+                              jg-fold-hs-spec
+                              jg-fold-vimish-spec
+                              ))
 (setq evil-fold-list jg-fold-vars-fold-list)
 ;;-- end all together
 

@@ -7,6 +7,30 @@
   (load! "+bindings")
   )
 
+(use-package! dired
+  :commands dired-jump
+  :config
+  (set-evil-initial-state! 'image-dired-display-image-mode 'emacs)
+
+  (if (not (executable-find "gls"))
+      (setq dired-listing-switches (car dired-args)
+            insert-directory-program "ls")
+    )
+
+  (setq dired-listing-switches (string-join dired-args " "))
+
+  (add-hook! 'dired-mode-hook '+dired-disable-gnu-ls-flags-maybe-h)
+
+  (put 'dired-find-alternate-file 'disabled nil)
+
+  (defadvice! +dired--no-revert-in-virtual-buffers-a (&rest args)
+    "Don't auto-revert in dired-virtual buffers (see `dired-virtual-revert')."
+    :before-while #'dired-buffer-stale-p
+    (not (eq revert-buffer-function #'dired-virtual-revert)))
+
+  (provide 'jg-dired)
+  )
+
 (use-package! dired-quick-sort
   :commands hydra-dired-quick-sort/body
   )
@@ -23,27 +47,6 @@
         dired-omit-files (concat dired-omit-files "\\|^\\..*$"))
   )
 
-(use-package! dired
-  :commands dired-jump
-  :config
-  (set-evil-initial-state! 'image-dired-display-image-mode 'emacs)
-
-  (if-let (gls (executable-find "gls"))
-      (setq dired-listing-switches (string-join (car dired-args) " ")
-            insert-directory-program "ls")
-    (setq dired-listing-switches (string-join dired-args " ")))
-
-  (add-hook! 'dired-mode-hook '+dired-disable-gnu-ls-flags-maybe-h)
-
-  (put 'dired-find-alternate-file 'disabled nil)
-
-  (defadvice! +dired--no-revert-in-virtual-buffers-a (&rest args)
-    "Don't auto-revert in dired-virtual buffers (see `dired-virtual-revert')."
-    :before-while #'dired-buffer-stale-p
-    (not (eq revert-buffer-function #'dired-virtual-revert)))
-
-  (provide 'jg-dired)
-  )
 
 (use-package! dired-rsync
   :after dired

@@ -18,7 +18,6 @@
       :n ":" #'ignore
 
       :nv "q" #'+jg-dired-kill-subdir-or-close-buffer
-      :nv "Q" #'+dired/quit-all
       :desc "Remove Subdir"        :n "DEL"                            #'dired-kill-subdir
 
       "C-h" #'dired-up-directory
@@ -92,6 +91,20 @@
         )
        )
       )
+
+(map! :after dired
+      :map (dired-mode-map ranger-mode-map)
+      :ng ")" #'dired-git-info-mode)
+
+  (map! :map dirvish-mode-map
+        :n "b" #'dirvish-goto-bookmark
+        :n "z" #'dirvish-show-history
+        :n "f" #'dirvish-file-info-menu
+        :n "F" #'dirvish-toggle-fullscreen
+        :n "l" #'dired-find-file
+        :n "h" #'dired-up-directory
+        :localleader
+        "h" #'dired-omit-mode)
 
 (evil-make-overriding-map dired-mode-map)
 

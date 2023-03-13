@@ -10,7 +10,7 @@
  snippets word-wrap rotate-text tagging
  ;;multiple-cursors
 
- :emacs dired +dired electric ibuffer
+ :emacs (+dired +dirvish) electric ibuffer
  vc browse misc version-control
 
 

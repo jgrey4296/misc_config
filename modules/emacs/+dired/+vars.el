@@ -7,27 +7,27 @@
   )
 ;;-- end epa/gpg
 
-;;-- dired-misc
-(setq dired-create-destination-dirs 'ask
-      dired-vc-rename-file t
-      dired-clean-confirm-killing-deleted-buffers nil
-      dired-hide-details-hide-symlink-targets nil
-      ;; don't prompt to revert; just do it
-      dired-auto-revert-buffer t
-      ;; suggest a target for moving/copying intelligently
-      dired-dwim-target t
-      ;; Always copy/delete recursively
-      dired-recursive-copies  'always
-      dired-recursive-deletes 'top
-      dired-omit-verbose nil
+;;-- dired
+(setq-default
+ dired-args '("-ahl" "-v" "--group-directories-first")
+ insert-directory-program "gls"
+ dired-auto-revert-buffer #'dired-buffer-stale-p
+ dired-clean-confirm-killing-deleted-buffers nil
+ dired-create-destination-dirs 'ask
+ dired-dwim-target t
+ dired-hide-details-hide-symlink-targets nil
+ dired-omit-verbose nil
+ dired-recursive-copies  'always
+ dired-recursive-deletes 'top
+ dired-vc-rename-file t
 
-      +jg-dired-recursive-switches "-aBhlR --group-directories-first"
-      )
+ +jg-dired-recursive-switches "-aBhlR --group-directories-first"
+ )
 
 (after! (dired dired-x dired-quick-sort)
-  (setq dired-quick-sort-group-directories-last ?y)
+  (setq-default dired-quick-sort-group-directories-last ?y)
   )
-;;-- end dired-misc
+;;-- end dired
 
 ;;-- omit-patterns
 
@@ -110,3 +110,40 @@
   (push jg-dired-fold-spec evil-fold-list)
   )
 ;;-- end fold spec
+
+;;-- popup
+(setq jg-dired-popup-rules
+      '(
+        ("^\\*image-dired" :slot 20 :size 0.8 :select t :quit nil :ttl 0)
+        ("^\\*ranger" :ignore t)
+        ))
+(after! jg-popup-init
+  (+jg-ui-popup-add-rules 'dired jg-dired-popup-rules)
+  )
+;;-- end popup
+
+
+;;-- ranger
+(setq ranger-cleanup-on-disable t
+      ranger-excluded-extensions '("mkv" "iso" "mp4")
+      ranger-deer-show-details t
+      ranger-max-preview-size 10
+      ranger-show-literal nil
+      ranger-hide-cursor nil)
+;;-- end ranger
+
+
+;;-- open cmd
+(setq dired-guess-shell-alist-user
+      `(("\\.\\(?:docx\\|pdf\\|djvu\\|eps\\)\\'"               "open")
+        ("\\.\\(?:jpe?g\\|png\\|gif\\|xpm\\)\\'"               "open")
+        ("\\.\\(?:xcf\\)\\'"                                   "open")
+        ("\\.csv\\'"                                           "open")
+        ("\\.tex\\'"                                           "open")
+        ("\\.\\(?:mp4\\|mkv\\|avi\\|flv\\)\\(?:\\.part\\)?\\'" "open")
+        ("\\.\\(?:rm\\|rmvb\\|ogv\\)\\(?:\\.part\\)?\\'"       "open")
+        ("\\.\\(?:mp3\\|flac\\)\\'"                            "open")
+        ("\\.html?\\'"                                         "open")
+        ("\\.md\\'"                                            "open"))
+      )
+;;-- end open cmd

@@ -26,3 +26,5 @@
 (package! xt-mouse        :disable t)
 (package! mouse           :disable t)
 (package! undo-fu-session :disable t)
+(package! wdired          :disable t)
+(package! ranger :disable t)

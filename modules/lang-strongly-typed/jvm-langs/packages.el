@@ -7,4 +7,4 @@
 (package! groovy-mode)
 (package! kotlin-mode)
 (package! lsp-java)
-(when (modulep! +meghanada) (package! meghanada)
+(when (modulep! +meghanada) (package! meghanada))

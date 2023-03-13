@@ -1,0 +1,76 @@
+" https://www.freecodecamp.org/news/vimrc-configuration-guide-customize-your-vim-editor
+" Disable compatibility with vi
+set nocompatible
+
+" Enable type file detection
+filetype on
+
+" Enable plugins
+filetype plugin on
+
+" Load an indent file
+filetype indent on
+
+syntax on
+set number
+set cursorline
+set cursorcolumn
+set shiftwidth=4
+set tabstop=4
+set expandtab
+set scrolloff=10
+set nowrap
+set incsearch
+set ignorecase
+set showcmd
+set showmode
+set showmatch
+set hlsearch
+set wildmenu
+set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
+
+noremap <LeftMouse>    <Nop>
+noremap <RightMouse>   <Nop>
+noremap <MiddleMouse>  <Nop>
+noremap <LeftRelease>  <Nop>
+noremap <RightRelease> <Nop>
+noremap <LeftDrag>     <Nop>
+noremap <RightDrag>    <Nop>
+noremap <MiddleDrag>   <Nop>
+noremap <2-LeftMouse>  <Nop>
+noremap <2-RightMouse> <Nop>
+noremap <3-LeftMouse>  <Nop>
+noremap <3-RightMouse> <Nop>
+noremap <4-LeftMouse>  <Nop>
+noremap <4-RightMouse> <Nop>
+noremap <X1Mouse>      <Nop>
+noremap <X2Mouse>      <Nop>
+noremap <X1Release>    <Nop>
+noremap <X2Release>    <Nop>
+noremap <X1Drag>       <Nop>
+noremap <X2Drag>       <Nop>
+
+imap jf <Esc>
+imap jk <Esc>
+
+function MaybeEnd()
+   if col(".") == (col("$") - 1)
+       echo "At end"
+       exe ":normal 0"
+   else
+       echo "Not At End"
+       exe ":normal $"
+   endif
+endfunction
+
+nmap <Bslash> :call MaybeEnd()<CR>
+
+let mapleader=" "
+nmap <SPACE> <Nop>
+nmap <SPACE>wj <C-W>j
+nmap <SPACE>wk <C-W>k
+nmap <SPACE>wl <C-W>l
+nmap <SPACE>wh <C-W>h
+nmap <SPACE>wd <C-W>q
+nmap <SPACE>w<Bslash> :vsplit<CR>
+nmap <SPACE>w<Bar> :split<CR>

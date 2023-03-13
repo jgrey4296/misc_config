@@ -9,5 +9,6 @@ EDITOR="vim"
 if [[ -n $INSIDE_EMACS ]]
 then
     echo "Inside Emacs"
+    set disable-completion on
     TERM=dumb
 fi

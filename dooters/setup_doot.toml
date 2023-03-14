@@ -20,3 +20,10 @@ doom_d     = ""
 mega       = ""
 pdfs       = ""
 # terminal = ""
+binaries   = "/usr/local/bin"
+
+[extra.binaries]
+soar   = ""
+clips  = ""
+ceptre = ""
+jacamo = ""

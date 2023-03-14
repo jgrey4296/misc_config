@@ -18,6 +18,6 @@ PATH=/Applications/blender/blender.app/Contents/MacOS:$PATH
 
 # MAN Paths
 # https://www.howtogeek.com/682871/how-to-create-a-man-page-on-linux/
-MANPATH=/usr/share/man:usr/local/share/man:/usr/local/man
+MANPATH=/usr/share/man:/usr/local/share/man:/usr/local/man
 MANPATH="$HOME/.doom.d/terminal/man/main":$MANPATH
 # MANPATH=/Library/Apple/usr/share/man:$MANPATH

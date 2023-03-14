@@ -1,15 +1,12 @@
 
 jgd Setting Soar
-SOAR_HOME="$HOME/github/MAS/soar-cli"
-alias soar="$SOAR_HOME/SoarCLI.sh"
+export SOAR_HOME="$HOME/github/MAS/soar-cli"
 
 jgd Setting CLIPS
-CLIPS_HOME="$HOME/github/MAS/clips"
-alias clips="$CLIPS_HOME/CLIPS\ Console"
+export CLIPS_HOME="$HOME/github/MAS/clips"
 
 jgd Setting Ceptre
-CEPTRE_HOME="$HOME/github/MAS/ceptre"
-# alias ceptre="$CEPTRE_HOME/bin/ceptre"
+export CEPTRE_HOME="$HOME/github/MAS/ceptre"
 
 jgd Setting Java
 # JDK_HOME="${HOME}/.gradle/jdks/adoptium-19-x64-hotspot-mac/Contents/Home"
@@ -26,10 +23,9 @@ JASON_HOME="$HOME/github/MAS/jason/build"
 jgd Setting JACAMO
 JACAMO_HOME="$HOME/github/MAS/jacamo/build"
 
-
 jgd Setting Prompter
 alias prompter="perl /Volumes/documents/github/MAS/cotillion/packages/prompter/prompter/prompter.pl"
 
-JG_AI="$SOAR_HOME:$CLIPS_HOME:$CEPTRE_HOME/bin:$JDK_HOME/bin:$JASON_HOME/scripts:$JACAMO_HOME/scripts"
+JG_AI="$JDK_HOME/bin:$JASON_HOME/scripts:$JACAMO_HOME/scripts"
 
 PATH="$JG_AI:$PATH"

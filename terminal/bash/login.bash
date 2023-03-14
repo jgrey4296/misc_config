@@ -33,4 +33,12 @@ read-emacs
 jg_maybe_inc_prompt
 jg_set_prompt
 
-emacs
+if [[ "$TERM_PROGRAM" != "tmux" ]]; then
+    tmux new-window -d -n "emacs" "emacs"
+    tmux new -d -s "shell"
+    tmux attach -t "shell"
+else
+    echo "Already in Tmux"
+fi
+
+# emacs

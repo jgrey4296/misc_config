@@ -16,7 +16,7 @@
 (map! :map jg-binding-help-map
       :prefix ("d" . "docs")
       "!"   #'+jg-bindings-system-config
-      "m"   #'+default/man-or-woman
+      "m"   #'man  ;; #'+default/man-or-woman
       "RET" #'info-emacs-manual
       "o"   #'info-other-window
       )

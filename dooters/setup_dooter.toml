@@ -80,6 +80,11 @@ class SetupSystemTask(tasker.DootTasker, FilerMixin, CommanderMixin):
         # done
         #
 
+    def link_extra_binaries(self):
+        for name,targ in doot.config.extra.binaries.get_table():
+            # make symlink to self.locs.binaries
+            # pass
+
 if __name__ == "dooter":
     # the equivalent of main
     setup_sys = SetupSystemTask(locs=doot.locs)

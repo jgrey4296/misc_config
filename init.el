@@ -20,8 +20,8 @@
  ;; :lang-strongly-typed agda coq dotnet-langs fstar haskell
  ;; :lang-strongly-typed idris jvm-langs lean ocaml rust +rust scala sml
 
- ;; :lang-text +org bibtex inform latex markdown plantuml rst web
- :lang-text (org +gnuplot +pomodoro +journal +noter)
+ ;; :lang-text bibtex inform latex markdown plantuml rst web
+ :lang-text (org +gnuplot +pomodoro +journal +noter) +org
 
  :lang-weakly-typed lisp-langs (python +conda +pyright +poetry +cython)
  ;; :lang-weakly-typed erlang-vms godot lua python ruby

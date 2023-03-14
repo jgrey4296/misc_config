@@ -33,7 +33,7 @@ pdf_summary_backup = "/Volumes/BackupSD/Library/summary"
 thread_backup      = "/Volumes/BackupSD/Library/twitter_threads"
 
 [[directories]] # Watch Directories
-bibtex             = "~/github/writing/resources/bibliography"
+bibtex             = "~/github/jgrey4296.github.io/resources/bibliography"
 downloads          = "~/Downloads"
 desktop            = "~/Desktop"
 dropbox            = "~/Dropbox/docs"
@@ -41,9 +41,9 @@ bibtex_working     = "/Volumes/documents/in_progress_pdfs/Current/"
 firefox            = "~/Library/ApplicationSupport/Firefox"
 
 [[directories]] # libraries
-bookmarks          = "~/github/writing/resources/bookmarks"
-tags               = "~/github/writing/resources/tags"
-orgs               = "~/github/writing/orgfiles"
+bookmarks          = "~/github/jgrey4296.github.io/resources/bookmarks"
+tags               = "~/github/jgrey4296.github.io/resources/tags"
+orgs               = "~/github/jgrey4296.github.io/orgfiles"
 thread_library     = "/Volumes/documents/twitterthreads"
 pdfs               = "/Volumes/documents/pdflibrary"
 movies             = "/Users/johngrey/Movies"
@@ -51,7 +51,7 @@ images             = "/Volumes/documents/DCIM"
 github             = "~/github"
 
 [[files]] # library files
-bookmarks_total = "~/github/writing/resources/bookmarks/total.bookmarks"
+bookmarks_total = "~/github/jgrey4296.github.io/resources/bookmarks/total.bookmarks"
 
 [[directories]] # output
 pdf_summary        = "/Volumes/documents/in_progress_pdfs/pdflib_automations/total_bib"
@@ -73,7 +73,7 @@ bib_style       = ".bots/jg_custom.bst"
 image_whitelist = ".bots/dcim_whitelist"
 image_blacklist = ".bots/resolution_blacklist"
 image_temp      = ".bots/conversion_temp"
-bib_stub_file   = "~/github/writing/resources/todo.bib"
+bib_stub_file   = "~/github/jgrey4296.github.io/resources/todo.bib"
 secrets         = "~/.secrets/bkmkorg.toml"
 
 [group.maintain]

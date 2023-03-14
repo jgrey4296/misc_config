@@ -32,7 +32,7 @@
       ("Project: emacs_files"
        (projectile-root "emacs_files" . "/Volumes/documents/github/emacs_files/"))
       ("Project: writing"
-       (projectile-root "writing" . "/Volumes/documents/github/writing/"))
+       (projectile-root "writing" . "/Volumes/documents/github/jgrey4296.github.io/"))
       ("Project: Dropbox"
        (projectile-root "Dropbox" . "/Users/johngrey/Dropbox/")))
      ("dired"

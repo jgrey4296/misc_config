@@ -1,7 +1,7 @@
 ;;; completion/ivy/+vars.el -*- lexical-binding: t; -*-
 
 ;;-- personal-vars
-(setq-default jg-completion-rps-have-you-played-loc (expand-file-name "~/github/writing/resources/urls/have-you-playeds")
+(setq-default jg-completion-rps-have-you-played-loc (expand-file-name "~/github/jgrey4296.github.io/resources/urls/have-you-playeds")
               jg-completion-ivy-predicate-patterns (rx (or "*helpful"
                                                            "*Ibuffer"
                                                            "*helm-"

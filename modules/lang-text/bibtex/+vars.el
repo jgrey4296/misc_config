@@ -86,9 +86,9 @@
 ;;-- end strings
 
 ;;-- locations
-(setq-default jg-bibtex-loc-bibtex          (expand-file-name "~/github/writing/resources/bibliography/")
-              jg-bibtex-todo-loc            (expand-file-name "~/github/writing/resources/todo.bib")
-              jg-bibtex-loc-completions     (expand-file-name "~/github/writing/resources/completions/")
+(setq-default jg-bibtex-loc-bibtex          (expand-file-name "~/github/jgrey4296.github.io/resources/bibliography/")
+              jg-bibtex-todo-loc            (expand-file-name "~/github/jgrey4296.github.io/resources/todo.bib")
+              jg-bibtex-loc-completions     (expand-file-name "~/github/jgrey4296.github.io/resources/completions/")
               jg-bibtex-loc-export-bib-file (doom-module-expand-path :jg-lang 'bibtex "export_template.tex")
               jg-bibtex-loc-temp-dir        (expand-file-name "~/.tex/")
               jg-bibtex-pdf-loc             (expand-file-name "~/pdflibrary")

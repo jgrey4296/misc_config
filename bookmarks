@@ -58,7 +58,7 @@
  (rear-context-string . "4K Oct 20 03:54 ")
  (position . 215))
 ("script notes"
- (filename . "/Volumes/documents/github/writing/orgfiles/script_notes.org")
+ (filename . "/Volumes/documents/github/jgrey4296.github.io/orgfiles/script_notes.org")
  (front-context-string . "#+TITLE: Script ")
  (rear-context-string)
  (position . 1))
@@ -68,22 +68,22 @@
  (rear-context-string . "02 Nov 28  2020 ")
  (position . 146))
 ("dsls"
- (filename . "/Volumes/documents/github/writing/orgfiles/listings/DSLs.org")
+ (filename . "/Volumes/documents/github/jgrey4296.github.io/orgfiles/listings/DSLs.org")
  (front-context-string . "* DSLs and Logic")
  (rear-context-string)
  (position . 1))
 ("taxonomies"
- (filename . "/Volumes/documents/github/writing/orgfiles/listings/taxonomies.org")
+ (filename . "/Volumes/documents/github/jgrey4296.github.io/orgfiles/listings/taxonomies.org")
  (front-context-string . "*  Taxonomies   ")
  (rear-context-string)
  (position . 1))
 ("definitions"
- (filename . "/Volumes/documents/github/writing/orgfiles/listings/definitions.org")
+ (filename . "/Volumes/documents/github/jgrey4296.github.io/orgfiles/listings/definitions.org")
  (front-context-string . "* Overview\nhttps")
  (rear-context-string . "E: Definitions\n\n")
  (position . 23))
 ("quotes"
- (filename . "/Volumes/documents/github/writing/orgfiles/listings/quotes.org")
+ (filename . "/Volumes/documents/github/jgrey4296.github.io/orgfiles/listings/quotes.org")
  (front-context-string . " #+TITLE: Quotes")
  (rear-context-string)
  (position . 1))
@@ -108,12 +108,12 @@
  (rear-context-string . "66 Aug  2 23:52 ")
  (position . 166))
 ("bib_todo"
- (filename . "/Volumes/documents/github/writing/resources/todo.bib")
+ (filename . "/Volumes/documents/github/jgrey4296.github.io/resources/todo.bib")
  (front-context-string . "  author = {},\n ")
  (rear-context-string . "\n\n@misc{stub_0,\n")
  (position . 1336))
 ("bibliography"
- (filename . "/Volumes/documents/github/writing/resources/bibliography/")
+ (filename . "/Volumes/documents/github/jgrey4296.github.io/resources/bibliography/")
  (front-context-string)
  (rear-context-string . "3K Jul 22 13:24 ")
  (position . 9300))
@@ -133,12 +133,12 @@
  (rear-context-string . "76 Jun 30 03:32 ")
  (position . 132))
 ("org-capture-last-stored"
- (filename . "/Volumes/documents/github/writing/orgfiles/todo.org")
+ (filename . "/Volumes/documents/github/jgrey4296.github.io/orgfiles/todo.org")
  (front-context-string . "** [ ] Cron: dro")
  (rear-context-string)
  (position . 9))
 ("resources"
- (filename . "/Volumes/documents/github/writing/resources/")
+ (filename . "/Volumes/documents/github/jgrey4296.github.io/resources/")
  (front-context-string . "bibliography\n  d")
  (rear-context-string . "4K Apr 19 12:16 ")
  (position . 149))
@@ -193,7 +193,7 @@
  (rear-context-string . "36 Jun  6 15:18 ")
  (position . 145))
 ("writing"
- (filename . "/Volumes/documents/github/writing/")
+ (filename . "/Volumes/documents/github/jgrey4296.github.io/")
  (front-context-string . "resources\n  -rw-")
  (rear-context-string . "18 Jun  4 09:26 ")
  (position . 313))

@@ -22,7 +22,7 @@
       ispell-personal-dictionary      (expand-file-name "terminal/tool_configs/.ispell_english" doom-user-dir)
       org-agenda-files               `(,(expand-file-name "base_agenda.org" doom-user-dir))
       org-archive-location            (string-join `(,(expand-file-name "org/archive.org" doom-user-dir) "* Main Archive") "::")
-      org-directory                   (expand-file-name "~/github/writing/orgfiles/")
+      org-directory                   (expand-file-name "~/github/jgrey4296.github.io/orgfiles/")
       pyvenv-default-virtual-env-name (expand-file-name "~/anaconda/envs/")
       server-auth-dir                 (expand-file-name "~/.secrets")
       )

@@ -69,7 +69,7 @@
     )
   )
 
-(defvar jg-vcs-tag-file (expand-file-name "~/github/writing/resources/completions/vcs_tags"))
+(defvar jg-vcs-tag-file (expand-file-name "~/github/jgrey4296.github.io/resources/completions/vcs_tags"))
 
 (defun +jg-vcs-insert-tag ()
   (interactive)

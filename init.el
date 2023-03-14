@@ -36,7 +36,7 @@
  ;; :lang web yaml
 
  :ui deft doom
- :ui hl-todo hydra indent-guides ligatures
+ :ui hl-todo indent-guides ligatures
  :ui minimap modeline neotree ophints (popup +defaults)
  :ui vc-gutter vi-tilde-fringe window-select workspaces
  ;;:ui treemacs unicode (emoji +unicode)

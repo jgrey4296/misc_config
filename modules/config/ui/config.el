@@ -14,11 +14,9 @@
 (after! jg-bindings-total
   (load! "+bindings")
   )
-
 (after! (jg-bindings-total ibuffer)
   (load! "ibuffer/+ibuffer-bindings")
  )
-
 
 (use-package! hl-line
   :defer t
@@ -55,3 +53,4 @@
   )
 (use-package! palette-mode :defer t)
 (use-package! paren-state :defer t)
+(use-package! hydra)

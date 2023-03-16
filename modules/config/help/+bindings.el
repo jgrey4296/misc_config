@@ -1,5 +1,6 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
+
 (setq jg-binding-help-map (make-keymap))
 
 (map! :map jg-binding-help-map
@@ -10,6 +11,16 @@
       "f"    #'describe-function
       "v"    #'describe-variable
 
+      "DEL" #'free-keys
+      )
+
+(map! :map free-keys-mode-map
+      :after free-keys
+      :desc "Change Buffer" :n "b" #'free-keys-change-buffer
+      :desc "Revert Buffer" :n "g" #'revert-buffer
+      :desc "Describe Mode" :n "h" #'describe-mode
+      :desc "Set Prefix"    :n "p" #'free-keys-set-prefix
+      :desc "Quit"          :n "q" #'quit-window
       )
 
 ;;-- docs
@@ -138,8 +149,8 @@
     )
   )
 
-
 (map! :map helpful-mode-map
       :n "q" #'+jg-help-switch-to-prev-helpful-or-close-window
       )
+
 (provide 'jg-help-bindings)

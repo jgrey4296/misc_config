@@ -1,14 +1,15 @@
 ;; Misc AI Languages:
 
-(after! (coq jg-bindings-total)
-  (load! "+bindings")
-  )
 
 (load! "+indent")
 (load! "+vars")
 (load! "+repl")
 (load! "+funcs")
 (load! "+advice")
+(after! (evil jg-bindings-total)
+  (load! "+bindings")
+  )
+
 (use-package! abl-mode        :defer t)
 (use-package! agentspeak-mode :defer t)
 (use-package! ceptre-mode     :defer t)
@@ -28,13 +29,6 @@
 (after! ob-prolog
   (setq org-babel-prolog-command "swipl")
   )
-
-(use-package-hook! proof-general :post-config
-  (set-face-attribute 'proof-locked-face nil
-                      :inverse-video t
-                      :underline nil
-                      )
-)
 
 (use-package! pasp-mode
   :init

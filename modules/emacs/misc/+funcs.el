@@ -1,8 +1,6 @@
 ;;; util/jg-misc/+funcs.el -*- lexical-binding: t; -*-
 
-;;-- misc
 (defun +jg-misc-get-modes ()
-
   (let (major minor)
     ;; Modes in auto mode alist:
     (cl-loop for mode in (mapcar 'cdr auto-mode-alist)
@@ -33,22 +31,6 @@
     (list major minor)
     )
   )
-(defun +jg-misc-flatten (lst)
-  " Utility to flatten a list "
-  (letrec ((internal (lambda (x)
-                       (cond
-                        ((null x) nil)
-                        ((atom x) (list x))
-                        (t
-                         (append (funcall internal (car x)) (funcall internal (cdr x))))))))
-    (progn
-      (cl-assert (listp lst))
-      (funcall internal lst))))
-(defun +jg-misc-line-starts-with? (text)
-  (s-starts-with? text (s-trim-left (buffer-substring-no-properties
-                                     (line-beginning-position)
-                                     (line-end-position))))
-  )
 (defun +jg-misc-modify-line-end-display-table ()
   (interactive)
   " from https://stackoverflow.com/questions/8370778/ "
@@ -56,12 +38,3 @@
   ;; truncate are not signaled with a $
   (set-display-table-slot standard-display-table 0 ?\ )
   )
-
-(defun +jg-misc-sync-movements ()
-  ;; TODO
-  ;; Get current windows
-  ;; add advice to evil line move
-
-  )
-
-;;-- end misc

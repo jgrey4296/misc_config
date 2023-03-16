@@ -12,6 +12,7 @@
 
 ;;-- end xml commands
 
+(setq mailcap-mime-extensions nil)
 (pushnew! mailcap-mime-extensions '(".xhtml" . "text/html"))
 (pushnew! mailcap-mime-extensions '(".xml" . "text/html"))
 

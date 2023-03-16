@@ -1,4 +1,4 @@
-;;; ../../../Volumes/documents/github/emacs_files/packages/soar-mode/ob-soar.el -*- lexical-binding: t; -*-
+;;; soar-mode/ob-soar.el -*- lexical-binding: t; -*-
 
 ;; -*- mode: emacs-lisp; lexical-binding: t; -*-
 

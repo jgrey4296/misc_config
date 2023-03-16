@@ -92,8 +92,7 @@
        )
       )
 
-(map! :after dired
-      :map (dired-mode-map ranger-mode-map)
+(map! :map dired-mode-map ;; git info
       :ng ")" #'dired-git-info-mode)
 
 (map! :map dirvish-mode-map

@@ -30,6 +30,7 @@
           )
     )
   )
+
 (defun +jg-bindings-list-buffer-locals ()
   (interactive)
   (let ((vars (buffer-local-variables))
@@ -50,6 +51,7 @@
       )
     )
   )
+
 (defun +jg-bindings-wk-filter-fn (binding)
   (not (string-match (rx (or "C-"
                              "C-M"
@@ -58,6 +60,7 @@
                              ))
                      (car binding)))
   )
+
 (defun +jg-which-key-show-top-level (&optional _)
   "Show top-level bindings."
   (interactive)

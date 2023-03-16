@@ -1,6 +1,5 @@
 ;;; util/bindings/+vars.el -*- lexical-binding: t; -*-
 
-(defvar jg-reapply-hook nil)
 
 (defvar jg-bindings-wk-filter 'id)
 (setq   jg-bindings-wk-filter '+jg-bindings-wk-filter-fn)

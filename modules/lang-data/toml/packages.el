@@ -21,6 +21,6 @@
 ;;; Code:
 
 ;; (package!  :type 'local :recipe (:local-repo "" :files ("*.el" "data-struct/*.el" "modes/*.el" "util/*.el")))
-
+(package! conf-mode :built-in t)
 
 ;;; packages.el ends here

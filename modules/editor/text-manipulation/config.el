@@ -49,7 +49,12 @@
   :defer t
   :config
   ;; Increase undo history limits to reduce likelihood of data loss
-  (setq undo-limit 400000           ; 400kb (default is 160kb)
-        undo-strong-limit 3000000   ; 3mb   (default is 240kb)
-        undo-outer-limit 48000000)  ; 48mb  (default is 24mb)
+  (setq-default
+              ;; Increase undo-limits by a factor of ten to avoid emacs prematurely
+              ;; truncating the undo history and corrupting the tree. See
+              ;; https://github.com/syl20bnr/spacemacs/issues/12110
+              undo-limit 800000
+              undo-strong-limit 12000000
+              undo-outer-limit 120000000
+              )
   )

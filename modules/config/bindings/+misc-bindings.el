@@ -9,6 +9,7 @@
       "<f4>" #'ignore
       "<f5>" #'ignore
       "<f6>" #'ignore
+      "<f10>" #'ignore
       )
 
 ;; For minibuffer use:

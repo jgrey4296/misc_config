@@ -22,13 +22,24 @@
 
 
 (load! "+vars")
-(after! evil
+(after! (evil jg-bindings-total)
   (load! "+bindings")
   )
 (after! ivy
   (load! "utils/+ivys")
   )
 
+(after! helpful
+  (add-hook 'helpful-mode-hook
+            (defun jg-unset-helpful-dedicated()
+              (set-window-dedicated-p (selected-window) nil)))
+  )
+
+(use-package! free-keys
+  :commands (free-keys free-keys-set-prefix)
+  :config
+  (evil-make-intercept-map free-keys-mode-map)
+  )
 
 ;; (use-package!
 

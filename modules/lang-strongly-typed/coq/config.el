@@ -1,5 +1,10 @@
 ;;; lang/coq/config.el -*- lexical-binding: t; -*-
 
+(load! "+vars")
+(after! (coq jg-bindings-total)
+  (load! "+bindings")
+  )
+
 ;;;###package proof-general
 (setq proof-splash-enable nil)
 
@@ -57,6 +62,12 @@
         "t" #'coq-insert-tactic
         "T" #'coq-insert-tactical))
 
+(use-package-hook! proof-general :post-config
+  (set-face-attribute 'proof-locked-face nil
+                      :inverse-video t
+                      :underline nil
+                      )
+)
 
 ;; This package provides more than just code completion, so we load it whether
 ;; or not :completion company is enabled.

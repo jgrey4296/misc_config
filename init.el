@@ -10,32 +10,37 @@
  :editor snippets word-wrap rotate-text tagging
  ;;:editor multiple-cursors
 
- :emacs +dired electric ibuffer
+ :emacs +dired electric
  :emacs vc browse misc version-control
 
- ;; :lang-data csv graphql json julia ledger toml xml yaml
+ ;; :lang-data csv graphql
+ :lang-data xml toml json yaml
 
- ;; :lang-dsl  acab-ide ai-and-logic faust fortran music nix qt rest sh solidity
+ ;; :lang-dsl cobol fortran solidity
+ :lang-dsl acab-ide ai-and-logic
+ :lang-dsl rest sh nix
+ :lang-dsl qt
+ ;; :lang-dsl music faust
 
- ;; :lang-strongly-typed agda coq dotnet-langs fstar haskell
- ;; :lang-strongly-typed idris jvm-langs lean ocaml rust +rust scala sml
+ ;; :lang-strongly-typed dotnet-langs fstar haskell
+ ;; :lang-strongly-typed idris jvm-langs lean ocaml scala sml
+ :lang-strongly-typed coq rust +rust
 
- ;; :lang-text bibtex inform latex markdown plantuml rst web
+ :lang-text inform web
  :lang-text (org +gnuplot +pomodoro +journal +noter) +org
+ :lang-text bibtex latex markdown plantuml rst
 
- :lang-weakly-typed lisp-langs (python +conda +pyright +poetry +cython)
+ :lang-weakly-typed lisp-langs (python +conda +pyright +poetry +cython +lsp)
  ;; :lang-weakly-typed erlang-vms godot lua python ruby
 
- :lang emacs-lisp
- ;; :lang agda coq csharp data elixir erlang ess
- ;; :lang faust fsharp fstar gdscript (haskell +dante)
- ;; :lang idris json julia kotlin latex lean
- ;; :lang ledger lua markdown nix ocaml plantuml
- ;; :lang qt racket rest rst (ruby +rails) (rust +lsp)
- ;; :lang scala scheme sh sml solidity
- ;; :lang web yaml
+ :lang emacs-lisp ledger
+ ;; :lang agda csharp elixir erlang ess
+ ;; :lang fsharp gdscript
+ ;; :lang julia kotlin
+ ;; :lang racket rst
+ ;; :lang scheme
 
- :ui deft doom
+ :ui deft doom ibuffer
  :ui hl-todo indent-guides ligatures
  :ui minimap modeline neotree ophints (popup +defaults)
  :ui vc-gutter vi-tilde-fringe window-select workspaces

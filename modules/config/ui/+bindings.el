@@ -1,12 +1,15 @@
 ;;; editor/window-control/+bindings.el -*- lexical-binding: t; -*-
 
 (map! :leader
-      (:prefix "b"
-       :desc "Clear Popup Rules"           "P"     #'+jg-ui-ivy-reset-popup-rules
-       )
       (:prefix "w"
        :desc "Toggle Layout"               "|"     #'+jg-ui-window-layout-toggle
        :desc "Rotate Windows"              "\\"    #'+jg-ui-window-rotate-forward
+       )
+      (:prefix ("t" . "toggle")
+       :desc "Reactivate Templates" "!" (cmd! (run-hooks 'jg-ui-reapply-hook))
+       )
+      (:prefix "b"
+       :desc "Toggle narrowing"            "-"   #'+jg-ui-toggle-narrow-buffer
        )
       )
 
@@ -83,8 +86,6 @@
 ;;-- misc
 (map! :map messages-buffer-mode-map
       :after message
-      :n "q" #'+popup/close
-
       :desc  "backward-word-begin"   "b"              #'evil-backward-word-begin
       :desc  "forward-word-end"      "e"              #'evil-forward-word-end
       :desc  "find-char"             "f"              #'evil-find-char
@@ -104,9 +105,3 @@
       :desc "Insert Palette Faces" "c" #'+jg-ui-insert-faces
       )
 ;;-- end misc
-
-(map! :leader
-      (:prefix "t"
-       :desc "Visual Hydra" "v" '+jg-ui-toggle-hydra/body)
-      "T" '+jg-ui-toggle-hydra/body
-      )

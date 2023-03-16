@@ -3,20 +3,17 @@
 (load! "+vars")
 (load! "+funcs")
 (load! "utils/+state-hl-lines")
-(load! "utils/+hooks")
-(load!  "popup/+funcs")
-(load! "ibuffer/+funcs")
-
-(after! module/popup
-    (load! "popup/config.el")
-    )
-(after! hydra (load! "hydra/+hydra"))
-(after! jg-bindings-total
+(load! "utils/+faces")
+(load! "utils/+narrowing")
+(after! (evil jg-bindings-total)
   (load! "+bindings")
   )
-(after! (jg-bindings-total ibuffer)
-  (load! "ibuffer/+ibuffer-bindings")
- )
+
+(add-hook! 'doom-init-ui-hook  'rainbow-delimiters-mode)
+(add-hook! 'doom-init-ui-hook (defun +jg-ui-load-advice ()
+                                (load! "utils/+advice")
+                                )
+           )
 
 (use-package! hl-line
   :defer t
@@ -45,12 +42,9 @@
   :init
   (defvar centered-cursor-mode nil)
   )
-(use-package! evil-visual-mark-mode
-  :defer t
-  )
 (use-package! window-ring-minor-mode
   :commands (window-ring-setup-columns window-ring-minor-mode window-ring-setup-columns-command)
   )
 (use-package! palette-mode :defer t)
 (use-package! paren-state :defer t)
-(use-package! hydra)
+(use-package! evil-visual-mark-mode :defer t)

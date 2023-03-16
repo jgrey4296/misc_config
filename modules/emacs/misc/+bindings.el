@@ -1,36 +1,12 @@
 ;;; util/jg-misc/+bindings.el -*- lexical-binding: t; -*-
 (evil-make-intercept-map messages-buffer-mode-map)
 
-(map! :map jg-binding-help-map
-      "DEL" #'free-keys
-      )
-
 (map! :mode vlf-mode
       :after vlf-mode
       "] A" 'vlf-next-batch-from-point
       "] a" 'vlf-next-batch
       "[ a" 'vlf-prev-batch
       "SPC a U v " 'vlf-set-batch-size
-      )
-
-(map! :map free-keys-mode-map
-      :after free-keys
-      :desc "Change Buffer" :n "b" #'free-keys-change-buffer
-      :desc "Revert Buffer" :n "g" #'revert-buffer
-      :desc "Describe Mode" :n "h" #'describe-mode
-      :desc "Set Prefix"    :n "p" #'free-keys-set-prefix
-      :desc "Quit"          :n "q" #'quit-window
-      )
-
-(map! :map semantic-mode-map
-      :after semantic
-      :localleader
-      :prefix ("^" . "Semantic")
-      (:prefix ("t" . "toggle")
-       :desc "Stick-func"     "s" #'semantic-stickyfunc-mode
-       :desc "Highlight-func" "h" #'semantic-highlight-func-mode
-       )
-
       )
 
 (after! calendar
@@ -77,8 +53,3 @@
         )
 
   )
-
-(map! :leader
-      :prefix "t"
-       :desc "Semantic" "S" #'semantic-mode
-      )

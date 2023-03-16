@@ -1,5 +1,6 @@
 ;;; ui/popup/+hacks.el -*- lexical-binding: t; -*-
 
+;;-- descr
 ;; What follows are all the hacks needed to get various parts of Emacs and other
 ;; plugins to cooperate with the popup management system. Essentially, it comes
 ;; down to:
@@ -24,6 +25,8 @@
 ;; `after!' or `use-package!').
 
 ;;
+;;-- end descr
+
 ;;; Core functions
 
 (defadvice! +popup--make-case-sensitive-a (fn &rest args)

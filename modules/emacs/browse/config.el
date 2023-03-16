@@ -27,7 +27,7 @@
   (load! "+bindings")
   )
 
-(add-hook 'jg-reapply-hook '+jg-browse-reapply-providers)
+(add-hook 'jg-ui-reapply-hook '+jg-browse-reapply-providers)
 
 ;; (use-package!
 

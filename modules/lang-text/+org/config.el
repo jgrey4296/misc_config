@@ -9,8 +9,8 @@
 (after! (jg-bindings-total jg-org-stage evil-org)
   (message "Setting up org bindings")
   (load! "util/+text-utils")
-  (load! "binding/+org-standard-bindings.el")
-  (load! "binding/+bindings")
+  (load! "bindings/+org-standard-bindings.el")
+  (load! "bindings/+bindings")
 
   ;; (evil-make-overriding-map org-mode-map)
   (setq minor-mode-map-alist (assq-delete-all 'evil-org-mode minor-mode-map-alist))

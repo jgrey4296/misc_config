@@ -122,7 +122,6 @@
   )
 ;;-- end popup
 
-
 ;;-- ranger
 (setq ranger-cleanup-on-disable t
       ranger-excluded-extensions '("mkv" "iso" "mp4")
@@ -131,7 +130,6 @@
       ranger-show-literal nil
       ranger-hide-cursor nil)
 ;;-- end ranger
-
 
 ;;-- open cmd
 (setq dired-guess-shell-alist-user
@@ -147,3 +145,7 @@
         ("\\.md\\'"                                            "open"))
       )
 ;;-- end open cmd
+
+(after! (evil evil-snipe)
+  (push 'dired-mode evil-snipe-disabled-modes)
+  )

@@ -184,6 +184,8 @@
       )
 ;;-- end <leader> g --- git
 
+;; -- help
+
 ;;-- <leader> i --- insert
 (map! :leader
       :prefix ("i" . "insert")
@@ -394,7 +396,6 @@
 ;;-- <leader> t --- toggle
 (map! :leader
       :prefix ("t" . "toggle")
-      :desc "Reactivate Templates" "!" (cmd! (run-hooks 'jg-reapply-hook))
       (:prefix ("i" . "Input")
        :desc "Global Company" "C" #'global-company-mode
        :desc "Input Language" "i" #'toggle-input-method

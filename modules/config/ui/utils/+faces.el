@@ -20,7 +20,6 @@
             )
         )
   )
-
 (defun +jg-ui-insert-faces ()
   "insert lisp code for a set of faces automatically"
   (interactive)

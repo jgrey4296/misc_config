@@ -29,10 +29,12 @@ If region isn't active, narrow away anything above point
          (narrow-to-region evil-visual-beginning evil-visual-end))
         )
   )
+
 (defun +jg-ui-narrowing-move-focus-backward (arg)
   (interactive "p")
   (+jg-ui-narrowing-move-focus-forward(- arg))
   )
+
 (defun +jg-ui-narrowing-move-focus-forward (arg)
   (interactive "p")
   (widen)

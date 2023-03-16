@@ -1,25 +1,21 @@
 ;; -*- mode: emacs-lisp; lexical-binding: t; -*-
 ;;
-;;-- file loads
 (load! "+vars")
 (load! "+template-control")
 (load! "+yasnippet")
-(after! jg-bindings-total
+(after! (evil jg-bindings-total)
   (load! "+bindings")
 )
 (after! (ivy counsel)
   (load! "+ivys")
   )
-(after! 'helm
-  (load! "+helms")
-  )
-;;-- end file loads
 
 ;;-- helm
 (use-package! helm
   :commands helm
   :config
   (setq helm-completing-read-handlers-alist nil)
+  (load! "+helms")
   )
 (use-package! helm-files :defer t)
 (use-package! helm-gtags :defer t)
@@ -49,6 +45,6 @@
     )
   )
 (add-hook 'doom-first-file-hook #'+jg-completion-on-load-hook)
-(add-hook 'jg-reapply-hook '+jg-completion-file-interactive-activate)
+(add-hook 'jg-ui-reapply-hook '+jg-completion-file-interactive-activate)
 
 ;;-- end hook setup

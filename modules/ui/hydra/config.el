@@ -1,6 +1,38 @@
-;;; ui/hydra/config.el -*- lexical-binding: t; -*-
+;;; config.el -*- lexical-binding: t; -*-
+;;
+;; Copyright (C) 2023 John Grey
+;;
+;; Author: John Grey <https://github.com/jgrey4296>
+;; Maintainer: John Grey <johngrey4296 at gmail.com>
+;; Created: March 15, 2023
+;; Modified: March 15, 2023
+;; Version: 0.0.1
+;; Keywords:
+;; Homepage: https://github.com/jgrey4296
+;; Package-Requires: ((emacs "24.3"))
+;; Package written on: ((emacs 28.2))
+;;
+;; This file is not part of GNU Emacs.
+;;
+;;; Commentary:
+;;
+;;
+;;
+;;; Code:
 
-(defadvice! +hydra--inhibit-window-switch-hooks-a (fn)
-  :around #'lv-window
-  (let (doom-switch-window-hook)
-    (funcall fn)))
+
+(load! "+vars")
+(load! "+advice")
+(load! "+stack")
+(load! "+formatting")
+(after! (evil jg-total-bindings hydra)
+  (load! "+bindings")
+  )
+
+(use-package! hydra
+  :config
+  (load! "+sub-hydras")
+  (load! "+hydra")
+  )
+
+;;; config.el ends here

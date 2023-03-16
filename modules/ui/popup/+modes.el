@@ -3,6 +3,7 @@
 ;;
 ;; Global modes
 
+
 (defvar +popup-mode-map (make-sparse-keymap)
   "Active keymap in a session with the popup system enabled. See
 `+popup-mode'.")
@@ -23,16 +24,14 @@
   :keymap +popup-mode-map
   (cond (+popup-mode
          (add-hook 'doom-escape-hook #'+popup-close-on-escape-h 'append)
-         (setq +popup--old-display-buffer-alist display-buffer-alist
-               display-buffer-alist +popup--display-buffer-alist
-               window--sides-inhibit-check t)
+         (+jg-ui-popup-apply-rules t)
+         (setq window--sides-inhibit-check t)
          (dolist (prop +popup-window-parameters)
            (push (cons prop 'writable) window-persistent-parameters)))
         (t
          (remove-hook 'doom-escape-hook #'+popup-close-on-escape-h)
          (setq display-buffer-alist +popup--old-display-buffer-alist
                window--sides-inhibit-check nil)
-         (+popup-cleanup-rules-h)
          (dolist (prop +popup-window-parameters)
            (delq (assq prop window-persistent-parameters)
                  window-persistent-parameters)))))

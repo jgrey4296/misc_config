@@ -1,17 +1,19 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; $DOOMDIR/packages.el
 
+(package! evil)
+(package! evil-quickscope)
+(package! evil-snipe)
+
 (unpin! helpful)
 (unpin! evil-iedit-state)
 (unpin! yasnippet)
 (unpin! org)
 (unpin! undo-fu)
 (unpin! transient)
-
-(package! avy )
-(package! drag-stuff )
-(package! link-hint )
-(package! expand-region )
+(unpin! company)
+(unpin! ivy)
+(unpin! avy )
 
 ;;(package! multiple-cursors             :pin "16223efc2d6dece2d43bbccc189d7a4bab6de571")
 ;;(package! ace-window                   :pin "77115afc1b0b9f633084cf7479c767988106c196")

@@ -1,4 +1,4 @@
-;;; ../../../Volumes/documents/github/emacs_files/packages/window-ring-minor-mode/window-ring-minor-mode.el -*- lexical-binding: t; -*-
+;;; window-ring-minor-mode/window-ring-minor-mode.el -*- lexical-binding: t; -*-
 
 ;;; domain-specific/window-control/window-queue.el -*- lexical-binding: t; -*-
 

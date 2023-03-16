@@ -34,11 +34,7 @@ jg_maybe_inc_prompt
 jg_set_prompt
 
 if [[ "$TERM_PROGRAM" != "tmux" ]]; then
-    tmux new -d -s "shell" "bash"
+    tmux new-session -d "bash"
     tmux new-window -d -n "emacs" "emacs"
-    tmux attach -t "shell"
-else
-    echo "Already in Tmux"
+    tmux attach
 fi
-
-# emacs

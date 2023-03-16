@@ -6,6 +6,7 @@ shopt -s expand_aliases
 source "$HOME/.doom.d/terminal/bash/_basic_utils.bash"
 source "$HOME/.doom.d/terminal/bash/_base_path.bash"
 source "$HOME/.doom.d/terminal/bash/components/rust.bash"
+source "$HOME/.doom.d/terminal/bash/components/latex.bash"
 source "$HOME/.doom.d/terminal/bash/conda.bash"
 conda activate "$CONDA_DEFAULT_ENV"
 

@@ -3,6 +3,7 @@
 # complains the shell isn't set up:
 # source $HOME/anaconda/etc/profile.d/conda.sh
 
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/opt/anaconda3/envs/base310/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
@@ -17,4 +18,5 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
 CONDA_DEFAULT_ENV=bookmark

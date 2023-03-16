@@ -98,12 +98,12 @@
  (rear-context-string . "72 Jul 24 17:00 ")
  (position . 199))
 ("snippets"
- (filename . "/Volumes/documents/github/emacs_files/snippets/")
+ (filename . "/Volumes/documents/github/__configs/snippets/")
  (front-context-string . "shell-mode\n  drw")
  (rear-context-string . "02 May  2 02:49 ")
  (position . 1576))
 ("bindings"
- (filename . "/Volumes/documents/github/emacs_files/modules/jg-emacs/bindings/")
+ (filename . "/Volumes/documents/github/__configs/modules/config/bindings/")
  (front-context-string . "config.el\n  -rw-")
  (rear-context-string . "66 Aug  2 23:52 ")
  (position . 166))
@@ -158,7 +158,7 @@
  (rear-context-string . "44 Dec 26 01:39 ")
  (position . 151))
 ("cookie_templates"
- (filename . "/Volumes/documents/github/emacs_files/cookie_templates/")
+ (filename . "/Volumes/documents/github/__configs/cookie_templates/")
  (front-context-string . "jg_py\n  -rw-r--r")
  (rear-context-string . "36 Nov  2 01:58 ")
  (position . 269))
@@ -253,7 +253,7 @@
  (rear-context-string . "04 Dec 23 17:49 ")
  (position . 190))
 ("doom"
- (filename . "~/github/emacs_files/")
+ (filename . "~/github/__configs/")
  (front-context-string . "modules\n  drwxr-")
  (rear-context-string . "06 Oct 19 21:20 ")
  (position . 247))

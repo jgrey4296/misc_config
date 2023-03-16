@@ -11,7 +11,7 @@ TEXMFHOME = $HOME/Library/texmf
 TEXMFVAR = $HOME/Library/texlive/2021basic/texmf-var
 TEXMFCONFIG = $HOME/Library/texlive/2021basic/texmf-config
 % TEXMFOUTPUT = $HOME/.tex/
-TEXINPUTS = $HOME/github/emacs_files/modules/domain-specific/bibtex/
+TEXINPUTS = $HOME/github/__configs/modules/domain-specific/bibtex/
 
 % output files TEXMFOUTPUT
 % input files TEXINPUTS

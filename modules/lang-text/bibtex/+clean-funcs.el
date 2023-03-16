@@ -133,7 +133,7 @@ But not in urls
          (cleaned (mapcar #'(lambda (x) (replace-regexp-in-string " & " " \\\\& " x)) texts))
          )
     ;; Then update:
-    (mapc #'(lambda (x) (bibtex-set-field (car x) (cdr x))) (-zip focus cleaned))
+    (mapc #'(lambda (x) (bibtex-set-field (car x) (cdr x))) (-zip-pair focus cleaned))
     )
   )
 (defun +jg-bibtex-dont-break-lines-hook()
@@ -147,7 +147,7 @@ But not in urls
          (path-cleaned (mapcar #'(lambda (x) (replace-regexp-in-string "\n+ *" " " x)) path-texts))
          )
     ;; Then update:
-    (mapc #'(lambda (x) (bibtex-set-field (car x) (cdr x))) (-zip paths path-cleaned))
+    (mapc #'(lambda (x) (bibtex-set-field (car x) (cdr x))) (-zip-pair paths path-cleaned))
     )
   )
 (defun +jg-bibtex-clean-whitespace-hook()

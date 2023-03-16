@@ -2,7 +2,7 @@
 ;; Row padding:
 ;; "*                   ^^ *"
 
-(defhydra +jg-ui-toggle-hydra ()
+(defhydra +jg-hydra-ui-toggles ()
   "
 _v_isuals    _g_uides       w_r_apping    _n_avigation
 ^^^^^^^------------------------------------------------
@@ -13,13 +13,13 @@ _m_odeline ^^^^                           _c_ursor
 "
 
   ("v" (progn (+jg-hydra-push #'+jg-ui-toggle-hydra/body)
-              (+jg-ui-visuals-hydra/body)) nil :exit t)
+              (+jg-hydra-visuals/body)) nil :exit t)
   ("g" (progn (+jg-hydra-push #'+jg-ui-toggle-hydra/body)
-              (+jg-ui-guides-hydra/body)) nil :exit t)
+              (+jg-hydra-guides/body)) nil :exit t)
   ("r" (progn (+jg-hydra-push #'+jg-ui-toggle-hydra/body)
-              (+jg-ui-wrap-hydra/body)) nil :exit t)
+              (+jg-hydra-wrap/body)) nil :exit t)
   ("n" (progn (+jg-hydra-push #'+jg-ui-toggle-hydra/body)
-              (+jg-ui-nav-hydra/body)) nil :exit t)
+              (+jg-hydra-nav/body)) nil :exit t)
   ("s" (message "Smartparen: %s"
                 (setq sp-autoinsert-pair (not sp-autoinsert-pair)))
    nil :exit nil)

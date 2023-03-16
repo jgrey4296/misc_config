@@ -2,6 +2,6 @@
 
 (map! :leader
       (:prefix "t"
-       :desc "Visual Hydra" "v" '+jg-ui-toggle-hydra/body)
-      "T" '+jg-ui-toggle-hydra/body
+       :desc "Visual Hydra" "v" '+jg-hydra-ui-toggles/body)
+      "T" '+jg-hydra-ui-toggles/body
       )

@@ -1,10 +1,5 @@
 ;;; util/bindings/+funcs.el -*- lexical-binding: t; -*-
 
-(defun +jg-bindings-system-config ()
-  (interactive)
-  (message "Built with: %s" system-configuration-options)
-  )
-
 (defun +jg-bindings-open-link ()
   (interactive)
   (cond ((eq evil-state 'visual)
@@ -61,27 +56,6 @@
                      (car binding)))
   )
 
-(defun +jg-which-key-show-top-level (&optional _)
-  "Show top-level bindings."
-  (interactive)
-  (which-key--create-buffer-and-show
-   nil nil '+jg-bindings-wk-filter-fn "Top-level bindings"))
-
-(defun +jg-bindings-evil-interactive-reminder ()
-  (interactive)
-  (let ((evil-text (with-temp-buffer
-                     (insert-file-contents "/Volumes/documents/github/doom-emacs/.local/straight/repos/evil/evil-types.el")
-                     (buffer-string)
-                     )))
-    (with-temp-buffer-window "*Evil Interactive Reminder*"
-        'display-buffer-pop-up-window
-        nil
-      (princ evil-text)
-      )
-    nil
-    )
-  )
-
 (defun +jg-binding-change-ext ()
   (interactive)
   (let* ((current (buffer-file-name))
@@ -91,4 +65,9 @@
     (message "Converting %s -> %s" current (f-swap-ext current newext))
     (rename-file current (f-swap-ext current newext))
     )
+  )
+
+(defun +jg-bindings-load-bookmarks()
+  (interactive)
+  (bookmark-load (read-file-name "Load bookmarks file: " doom-user-dir "bookmarks" t "bookmarks") t)
   )

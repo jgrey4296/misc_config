@@ -1,8 +1,8 @@
 ;; Sub-Hydras for the main `jg-ui-toggle-hydra'
 
-(defhydra +jg-ui-visuals-hydra (:color teal)
+(defhydra +jg-hydra-visuals (:color teal)
   (format "%s\n"
-          (+jg-ui-format-hydra-columns '(
+          (+jg-hydra-format-columns '(
 "Visuals
 -------------------------
 _g_ Evil goggles          %(+jg-hydra-doc evil-goggles-mode)
@@ -25,9 +25,9 @@ _s_ Prettify Symbols Mode %(+jg-hydra-doc prettify-symbols-mode)"
   ("q" +jg-hydra-pop "exit" :exit t)
   )
 
-(defhydra +jg-ui-guides-hydra (:color blue)
+(defhydra +jg-hydra-guides (:color blue)
   (format "%s\n"
-          (+jg-ui-format-hydra-columns '(
+          (+jg-hydra-format-columns '(
 "Guides
 --------------------------
 _C_ Fill Column Indicator  %(+jg-hydra-doc display-fill-column-indicator)
@@ -48,9 +48,9 @@ _g_ Grammar                %(+jg-hydra-doc (or flyspell-mode writegood-mode))"
   ("q" +jg-hydra-pop "exit" :exit t)
   )
 
-(defhydra +jg-ui-wrap-hydra (:color green)
+(defhydra +jg-hydra-wrap (:color green)
   (format "%s\n"
-          (+jg-ui-format-hydra-columns '(
+          (+jg-hydra-format-columns '(
 "Wrapping
 -------------------------
 _f_ Auto-fill             %(+jg-hydra-doc auto-fill-function)
@@ -67,9 +67,9 @@ _W_ Word-wrap mode        %(+jg-hydra-doc +word-wrap-mode)"
   ("q" +jg-hydra-pop "exit" :exit t)
   )
 
-(defhydra +jg-ui-nav-hydra (:color yellow)
+(defhydra +jg-hydra-nav(:color yellow)
   (format "%s\n"
-          (+jg-ui-format-hydra-columns '(
+          (+jg-hydra-format-columns '(
 "Misc                   |
 ------------------------
 _a_  Auto-hide           %(+jg-hydra-doc global-autohide-minor-mode)

@@ -124,7 +124,7 @@
        :desc "Delete bookmark"             "M" #'bookmark-delete
        :desc "Rename bookmark"             "r" #'bookmark-rename
        :desc "Save Bookmarks"              "s" #'bookmark-save
-       :desc "Load Bookmarks"              "l" #'bookmark-load
+       :desc "Load Bookmarks"              "l" #'+jg-bindings-load-bookmarks
        )
       )
 ;;-- end <leader> f --- file

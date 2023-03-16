@@ -225,5 +225,5 @@
 ;;;###autodef
 (defun +jg-ui-popup-reapply-rules ()
   (interactive)
-  (+jg-ui-popup-activate-rules t)
+  (+jg-ui-popup-apply-rules t)
   )

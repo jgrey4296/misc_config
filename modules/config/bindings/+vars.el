@@ -31,7 +31,6 @@
 (define-prefix-command 'jg-binding-forward-general-motion-map   nil "jgb-forward-motion")
 (define-prefix-command 'jg-binding-inner-text-objects-map       nil "jgb-inner")
 (define-prefix-command 'jg-binding-outer-text-objects-map       nil "jgb-outer")
-(define-prefix-command 'jg-binding-help-map                     nil "jgb-help")
 (define-prefix-command 'jg-binding-jump-map                     nil "jgb-jump")
 (define-prefix-command 'jg-binding-helm-map                     nil "jgb-helm")
 (define-prefix-command 'jg-binding-operator-map                 nil "jgb-ops")

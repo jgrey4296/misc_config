@@ -12,7 +12,7 @@
                                              )))
          )
     (with-temp-buffer-window "*Generated-Manifest-Entries*" #'display-buffer-pop-up-window nil
-      (cl-loop for ifile in (-zip indices marked)
+      (cl-loop for ifile in (-zip-pair indices marked)
                do
                (cond ((s-equals? type "<navpoint>")
 

@@ -14,21 +14,22 @@
 (defun +jg-help-update-modules-status ()
   " update jg-help-module-times "
   (unless (t) ;; last time updated was today
-  (with-temp-buffer
-    (cl-loop for root in jg-help-module-dirs
-             for loc  in (f-directories root)
-             do
-             (erase-buffer)
-             ;; Most recent files
-             (call-process jg-help-module-find-cmd nil t nil "--sortr" "modified" "--files" loc)
-             ;; mod time of first file
-             ;; if newer than jg-help-module-times:
-             ;; mark in hash table
-             )
-        )
+    (with-temp-buffer
+      (cl-loop for root in jg-help-module-dirs
+               for loc  in (f-directories root)
+               do
+               (erase-buffer)
+               ;; Most recent files
+               (call-process jg-help-module-find-cmd nil t nil "--sortr" "modified" "--files" loc)
+               ;; mod time of first file
+               ;; if newer than jg-help-module-times:
+               ;; mark in hash table
+               )
+      )
+    )
   )
-)
 
+;;;###autodef
 (defun +jg-help-modules-ivy ()
   " List modules, annotating with active or not, and last modified time "
   (interactive)

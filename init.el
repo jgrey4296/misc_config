@@ -14,7 +14,7 @@
  :emacs vc browse misc version-control
 
  ;; :lang-data csv graphql
- :lang-data xml toml json yaml
+ :lang-data xml toml json yaml logs
 
  ;; :lang-dsl cobol fortran solidity
  :lang-dsl acab-ide ai-and-logic
@@ -40,9 +40,9 @@
  ;; :lang racket rst
  ;; :lang scheme
 
- :ui deft doom ibuffer
+ :ui deft doom ibuffer hydra popup
  :ui hl-todo indent-guides ligatures
- :ui minimap modeline neotree ophints (popup +defaults)
+ :ui minimap modeline neotree ophints
  :ui vc-gutter vi-tilde-fringe window-select workspaces
  ;;:ui treemacs unicode (emoji +unicode)
 

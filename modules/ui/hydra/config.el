@@ -25,7 +25,7 @@
 (load! "+advice")
 (load! "+stack")
 (load! "+formatting")
-(after! (evil jg-total-bindings hydra)
+(after! (evil jg-bindings-total hydra)
   (load! "+bindings")
   )
 

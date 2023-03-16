@@ -7,7 +7,6 @@
 (load! "+vars")
 (load! "+helm")
 (load! "+tags")
-(load! "+hydra")
 (load! "+advice")
 (load! "+dired")
 (load! "+entries")
@@ -16,6 +15,9 @@
   (load! "+motions")
   (load! "+bindings")
 )
+(after! hydra
+  (load! "+hydra")
+  )
 
 (use-package! bibtex
   :defer t

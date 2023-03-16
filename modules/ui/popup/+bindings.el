@@ -2,7 +2,7 @@
 
 (map! :leader
       (:prefix "b"
-       :desc "Clear Popup Rules" "P" #'+jg-ui-ivy-reset-popup-rules
+       :desc "Clear Popup Rules" "P" #'+jg-ui-popup-reapply-rules
        )
       )
 
@@ -11,6 +11,6 @@
       :n "q" #'+popup/close
       )
 
-(map! :map help-map
-      :n "u p" #'+popup/diagnose
+(map! :map jg-help-map
+      "u p" #'+popup/diagnose
       )

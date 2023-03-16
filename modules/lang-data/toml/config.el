@@ -37,6 +37,7 @@
 
   (add-hook! 'conf-toml-mode-hook :depth 100
              #'+jg-toml-customisation-hook
+             #'outline-minor-mode
              )
   )
 ;;

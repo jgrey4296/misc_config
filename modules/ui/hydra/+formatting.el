@@ -25,7 +25,7 @@
     )
   )
 
-(defun +jg-ui-format-hydra-columns (textlst)
+(defun +jg-hydra-format-columns (textlst)
   " particularly for hydra docs "
 
   (let* (;; Splt columns into lists of rows

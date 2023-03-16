@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# jgd Setting Javascript
+# jgdebug "Setting Javascript"
 #Node:
 PATH="$HOME/.npm-global/bin:$PATH"
 

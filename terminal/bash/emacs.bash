@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-jgd Setting emacs data
+jgdebug "Setting emacs data"
 TERM="xterm-24bits"
 
 #Default editor:

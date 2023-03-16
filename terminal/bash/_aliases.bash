@@ -45,7 +45,6 @@ function cd_ls {
 }
 
 alias dbash="env JGDEBUG=true bash"
-alias jgd="jgdebug"
 alias q="exit"
 
 # alias pServer="python -m http.server 8888 &"

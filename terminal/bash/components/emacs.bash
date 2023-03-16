@@ -11,7 +11,7 @@ E30_BIN="/usr/local/Cellar/emacs-plus@29/29.0.50/bin/emacs"
 
 
 function check-emacs-d () {
-    jgd Setting Emacs-D
+    jgdebug "Setting Emacs-D"
     if [[ ! -e "$HOME/.emacs.d" ]]; then
 	ln -s "$EMACSDIR" "$HOME/.emacs.d"
     fi

@@ -1,5 +1,5 @@
 
-jgd Setting Up Godot
+jgdebug "Setting Up Godot"
 PATH=/Applications/Godot.app/Contents/MacOS:$PATH
 
 alias gscript="godot --no-window --script"

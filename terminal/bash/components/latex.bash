@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-jgd Setting Latex
-jgd reminder: tlmgr for installing packages, use --usermode after tlmgr init-usertree
+jgdebug "Setting Latex"
+jgdebug "reminder: tlmgr for installing packages, use --usermode after tlmgr init-usertree"
 
 # symlink to /usr/local/texlive/2022basic/bin/universal-darwin
 PATH="/Library/TeX/texbin:$PATH"

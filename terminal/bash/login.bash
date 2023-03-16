@@ -11,7 +11,7 @@ source "$HOME/.doom.d/terminal/bash/conda.bash"
 # Activate components
 for fname in $(find "$HOME/.doom.d/terminal/bash/components" -type f -name "*.bash" -not -regex ".+?/_.+?\.bash")
 do
-    jgd "-- Sourcing: " "$fname"
+    jgdebug ""-- Sourcing: " "$fname""
     source "$fname"
 done
 
@@ -27,7 +27,7 @@ conda activate "$CONDA_DEFAULT_ENV"
 
 echo "CWD   :" `pwd`
 echo "Date  :" `date`
-jgd  "Path  :" "$PATH"
+jgdebug " "Path  :" "$PATH""
 
 read-emacs
 jg_maybe_inc_prompt

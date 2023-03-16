@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-jgd Setting Exports
+jgdebug "Setting Exports"
 export PATH
 export EDITOR
 export TEXMFCNF

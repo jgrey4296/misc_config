@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-jgd Setting Android
+jgdebug "Setting Android"
 JG_AP="$HOME/Library/Android/sdk"
 # Android tools paths
 JG_FP="$JG_AP/tools/bin"
@@ -14,7 +14,7 @@ ANDROID_LIB="/Applications/Android\ Studio.app/Contents/lib/"
 ANDROID_JARS="/Applications/Android\ Studio.app/Contents/plugins/android/lib/"
 ANDROID_SDK="/Users/johngrey/Library/Android/sdk/platforms/android-32/"
 
-jgd Setting Kotlin
+jgdebug "Setting Kotlin"
 JG_FP="/Applications/Android\ Studio.app/Contents/plugins/Kotlin/kotlinc/bin:$JG_FP"
 
 

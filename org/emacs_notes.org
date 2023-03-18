@@ -107,3 +107,12 @@ NOTE: See evil-core.el for full design of evil keybindings
 *** Minor mode keymaps
 *** Local keymap (`local-set-key')
 *** Global keymap (`global-set-key')
+** Thing at Point and movement
+forward-{op}
+beginning-{op}
+end-{op}
+
+then calling (thing-at-point 'op)
+(forward-thing 'thing)
+(beginning-of-thing 'thing)
+(end-of-thing 'thing)

@@ -61,6 +61,3 @@ clear the saved filters for the symbol "
     )
   names
   )
-
-
-;; (define-ibuffer-column SYMBOL (&key NAME INLINE PROPS SUMMARIZER) &rest BODY)

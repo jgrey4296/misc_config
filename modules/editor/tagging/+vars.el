@@ -6,7 +6,7 @@
               jg-tag-alt-mapping (make-hash-table)
 
               jg-tag-all-loc                    (expand-file-name "~/github/jgrey4296.github.io/.temp/tags/totals.tags")
-              jg-tag-loc-bookmarks              (expand-file-name "~/github/jgrey4296.github.io resources/bookmarks/total.bookmarks")
+              jg-tag-loc-bookmarks              (expand-file-name "~/github/jgrey4296.github.io/resources/bookmarks/total.bookmarks")
               jg-tag-loc-default-helm-directory (expand-file-name "~/github/jgrey4296.github.io/resources/")
               jg-tag-loc-global-tags            (expand-file-name "~/github/jgrey4296.github.io/resources/tags/substitutions")
               jg-tag-loc-twitter-account-index  (expand-file-name "~/github/jgrey4296.github.io/.temp/index/tw_acct.index")

@@ -2,8 +2,6 @@
 
 (message "Setting up Ibuffer bindings: %s" (current-time-string))
 (setq jg-ibuffer-mode-map (make-keymap)
-      ;; jg-ibuffer-filter-map (make-keymap)
-      ;; jg-ibuffer-sort-map (make-keymap)
       )
 (define-prefix-command 'jg-ibuffer-filter-map nil "ibuffer-filter")
 (define-prefix-command 'jg-ibuffer-sort-map   nil "ibuffer-sort")
@@ -23,6 +21,9 @@
       :desc "Toggle Marks"        :n "t" #'ibuffer-toggle-marks
       :desc "Update"              :n "g" #'ibuffer-update
       :desc "Formats"             :n "f" #'ibuffer-switch-format
+      :desc "Kill Marked"         :n "D" #'ibuffer-do-delete
+      :desc "Visit"               :n "RET" #'+ibuffer/visit-workspace-buffer
+
       :n "s" #'ignore
       :n "q" #'kill-current-buffer
 )
@@ -36,6 +37,7 @@
       :desc "size"             "s"  #'ibuffer-do-sort-by-size
       :desc "recency"          "v"  #'ibuffer-do-sort-by-recency
       :desc "git status"       "g"  #'ibuffer-do-sort-by-vc-status
+      :desc "project"          "p"  #'ibuffer-do-sort-by-project-name
       )
 
 ;;-- end sorting
@@ -54,7 +56,7 @@
        :desc "and-filter"                    "&"   #'ibuffer-and-filter
        :desc "or-filter"                     "|"   #'ibuffer-or-filter
        :desc "stars"                         "*"   #'ibuffer-filter-by-starred-name
-       :desc "disable filter"                "/"   #'ibuffer-filter-disable
+       :desc "disable filter"                "\\"   #'ibuffer-filter-disable
        :desc "decompose-filter"              "d"   #'ibuffer-decompose-filter
        )
 

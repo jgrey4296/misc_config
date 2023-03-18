@@ -7,26 +7,6 @@
 
 (setq ibuffer-show-empty-filter-groups nil
       ibuffer-filter-group-name-face '(:inherit (success bold))
-      ibuffer-formats `(
-                        ;; Normal
-                        (mark modified read-only locked
-                              " " (name 18 18 :left :elide)
-                              " " (size 10 10 :right)
-                              " " (mode 16 16 :left :elide)
-                              " " project-relative-file)
-                        ;; VC Status
-                        (mark modified read-only locked
-                              " " (name 18 18 :left :elide)
-                              " " (size 10 10 :right)
-                              " " vc-status
-                              )
-                        ;; Project
-                        (mark " " (name 18 18 :left :elide)
-                              " " (project-name 10 10 :left)
-                              " " project-relative-file
-                              )
-                        )
-
       )
 
 ;;-- popup

@@ -1,12 +1,14 @@
 
 (load! "+vars")
 (load! "util/+dired")
-(load! "helm/+helm")
 (load! "util/+index")
 (load! "util/+tags")
 (load! "util/+util")
 (load! "+funcs")
 (load! "+advice")
+(after! helm
+  (load! "helm/+helm")
+  )
 (after! ivy
   (load! "ivy/+ivy-actions")
   )

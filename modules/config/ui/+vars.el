@@ -3,9 +3,6 @@
 (defvar jg-ui-reapply-hook nil)
 
 (setq-default highlight-parentheses-delay      0.3
-              undo-tree-visualizer-diff        t
-              undo-tree-auto-save-history      t
-              undo-tree-enable-undo-in-region  t
               jg-ui-default-face-gen-palette-dir "/Volumes/documents/github/jgrey4296.github.io/resources/palettes/"
               display-line-numbers             t
               display-line-numbers-major-tick  20

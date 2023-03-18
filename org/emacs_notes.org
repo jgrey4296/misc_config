@@ -90,6 +90,9 @@
 
 #+end_src
 ** Keymap Hierarchy:
+https://www.gnu.org/software/emacs/manual/html_node/elisp/Controlling-Active-Maps.html
+https://www.gnu.org/software/emacs/manual/html_node/elisp/Searching-Keymaps.html
+https://github.com/noctuid/evil-guide
 NOTE: See evil-core.el for full design of evil keybindings
 *** Overriding keymaps/overlay keymaps
 *** Emulation mode keymaps

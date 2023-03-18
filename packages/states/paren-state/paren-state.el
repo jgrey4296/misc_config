@@ -3,17 +3,18 @@
 (require 'evil)
 (require 'smartparens)
 
- (evil-define-state paren
-    "Paren State"
-    :tag "<P>"
-    :message "-- Paren --"
-    ;; :enable (motion)
-    ;; :input-method t
-    ;; :suppress-keymap t
-    (setq-local sp-navigate-reindent-after-up nil
-                sp-navigate-reindent-after-up-in-string nil
-                )
-    )
+(evil-define-state paren
+  "Paren State"
+  :tag "<P>"
+  :message "-- Paren --"
+  ;; :enable (motion)
+  ;; :input-method t
+  ;; :suppress-keymap t
+  (setq-local sp-navigate-reindent-after-up nil
+              sp-navigate-reindent-after-up-in-string nil
+              )
+  )
+
 ;; (evil-add-hjkl-bindings global-map 'paren)
 (suppress-keymap evil-paren-state-map)
 (evil-global-set-key 'paren "H" #'sp-beginning-of-sexp)

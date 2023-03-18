@@ -8,6 +8,7 @@
  :editor (evil +everywhere) file-templates format
  :editor char-insert fold projects text-manipulation
  :editor snippets word-wrap rotate-text tagging
+ :editor navigation
  ;;:editor multiple-cursors
 
  :emacs +dired electric

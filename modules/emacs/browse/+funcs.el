@@ -37,6 +37,7 @@
 
 (defun +jg-browse-reapply-providers ()
   (interactive)
+  (message "Reapplying browse providers: %s" (mapcar #'car jg-browse-providers-alist))
   (setq +lookup-provider-url-alist jg-browse-providers-alist)
   )
 

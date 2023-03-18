@@ -128,8 +128,4 @@
       )
 (map! :g "C-x h" jg-help-map)
 
-(map! :map helpful-mode-map
-      :n "q" #'+jg-help-switch-to-prev-helpful-or-close-window
-      )
-
 (provide 'jg-help-bindings)

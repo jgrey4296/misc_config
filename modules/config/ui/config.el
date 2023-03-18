@@ -46,5 +46,4 @@
   :commands (window-ring-setup-columns window-ring-minor-mode window-ring-setup-columns-command)
   )
 (use-package! palette-mode :defer t)
-(use-package! paren-state :defer t)
 (use-package! evil-visual-mark-mode :defer t)

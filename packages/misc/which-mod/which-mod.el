@@ -29,8 +29,8 @@
   ;; (message "WK: %s" (car (last keymap)))
   (let ((bindings start)
         (prefix-map (if prefix (lookup-key keymap prefix) keymap)))
-    ;; Prefer which-key pseudo-maps:
     (when (keymapp prefix-map)
+      ;; Prefer which-key pseudo-maps:
       (if (keymapp (lookup-key prefix-map [which-key]))
           (setq bindings (which-key--get-keymap-bindings-1 (lookup-key prefix-map [which-key])
                                                            bindings nil filter all ignore-commands)))
@@ -67,7 +67,7 @@
                                   (keymapp (cdr-safe def))))
                             ((and (eq (car-safe def) 'which-key)
                                   (not (caddr def)))
-                             (s-append (cadr def) "+"))
+                             (s-prepend "++" (cadr def)))
                             ((eq (car-safe def) 'which-key)
                              (cadr def))
                             ((symbolp def) (which-key--compute-binding def))

@@ -4,8 +4,8 @@
 ;;
 ;; Author: John Grey <https://github.com/jgrey4296>
 ;; Maintainer: John Grey <johngrey4296 at gmail.com>
-;; Created: March 13, 2023
-;; Modified: March 13, 2023
+;; Created: March 17, 2023
+;; Modified: March 17, 2023
 ;; Version: 0.0.1
 ;; Keywords:
 ;; Homepage: https://github.com/jgrey4296
@@ -22,28 +22,10 @@
 
 
 (load! "+vars")
-(load! "+funcs")
 (after! (evil jg-bindings-total)
   (load! "+bindings")
   )
-(after! ivy
-  (load! "utils/+ivys")
-  )
 
-(after! helpful
-  (add-hook 'helpful-mode-hook
-            (defun jg-unset-helpful-dedicated()
-              (set-window-dedicated-p (selected-window) nil)))
-  )
-
-(use-package! free-keys
-  :commands (free-keys free-keys-set-prefix)
-  :config
-  (evil-make-intercept-map free-keys-mode-map)
-  )
-
-;; (use-package!
-
-;;     )
+(use-package! paren-state :defer t)
 
 ;;; config.el ends here

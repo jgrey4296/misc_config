@@ -203,7 +203,6 @@
   " Take defined rules and use them in place of display-buffer-alist "
   (interactive "P")
   (when (or force (not jg-popup-display-flattened))
-    (message "Constructing flattened popup rules: %s" (hash-table-keys jg-popup-display-rules))
     (setq jg-popup-display-flattened
           (-concat (mapcar #'cdr (sort
                                   (copy-sequence
@@ -216,7 +215,7 @@
           )
     )
   (when jg-popup-display-flattened
-    (message "Reapplying popup rules")
+    (message "Applying Popup Rules: %s" (hash-table-keys jg-popup-display-rules))
     (setq jg-popup-misc-rules nil
           display-buffer-alist jg-popup-display-flattened)
     )

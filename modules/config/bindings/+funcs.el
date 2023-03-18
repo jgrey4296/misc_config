@@ -37,8 +37,9 @@
                         (emacs-lisp-mode))
           val)
       (cl-loop for x in vars do
-               (if (string-match jg-binding-local-var-skip-regexp
-                                 (symbol-name (car x)))
+               (if (or (string-match jg-binding-local-var-skip-regexp
+                                     (symbol-name (car x)))
+                        (< 40 (length (format "%s" (cdr x)))))
                    (princ (format "(%s : Skipped)" (car x)))
                  (princ x))
                (princ "\n")

@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name  : ibuffer-filter-spec
+# uuid  : ibuffer-filter-spec
+# key   : ibuffer-filter-spec
+# group :
+# --
+(after! jg-ibuffer-filters-init
+        ;; Filter funcs in ibuffer-filtering-alist
+        (+jg-ibuffer-define-filters '$1 "$2" '())
+        (+jg-ibuffer-define-groups  '$1 "$3" '())
+)

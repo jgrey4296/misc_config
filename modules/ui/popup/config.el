@@ -11,7 +11,7 @@
   )
 
 (add-hook 'doom-init-ui-hook   #'+popup-mode 'append)
-(add-hook 'jg-ui-reapply-hook   '+jg-ui-popup-reapply-rules)
+(add-hook 'jg-ui-reapply-hook  #'+jg-ui-popup-reapply-rules)
 
 (add-hook! '+popup-buffer-mode-hook
            #'+popup-adjust-fringes-h

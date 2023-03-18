@@ -14,10 +14,9 @@
 
               )
 
-
 ;;-- maps
 (setq
-      jg-binding-insert-state-map            nil ;; copied in +evil-bindings
+      jg-binding-insert-state-map             nil ;; copied in +evil-bindings
       jg-binding-motion-state-map             (make-sparse-keymap "JG map replacing evil-motion-state-map")
       jg-binding-normal-state-map             (make-sparse-keymap "JG map replacing evil-normal-state-map")
       jg-binding-operator-state-map           (make-sparse-keymap "JG map replacing evil-operator-state-map")

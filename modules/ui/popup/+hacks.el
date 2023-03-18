@@ -51,7 +51,6 @@ to this commmand."
     (when (and (eq orig-buffer (current-buffer))
                (+popup-buffer-p))
       (+popup/close nil 'force))))
-(global-set-key [remap quit-window] #'+popup/quit-window)
 
 (defadvice! +popup-override-display-buffer-alist-a (fn &rest args)
   "When `pop-to-buffer' is called with non-nil ACTION, that ACTION should

@@ -10,9 +10,6 @@
 ;;-- main control
 (defun +jg-completion-activate-templates (&optional force)
   " Activate stored file templates, and ensure the correct snippet directories are set  "
-  (message "%s Activating File Templates: %s"
-           (if force "Force " "")
-           (hash-table-keys jg-completion-file-template-rules))
   (unless (and jg-completion-file-templates-flat (not force))
     (let ((all-rules (copy-sequence (-flatten-n 1 (hash-table-values jg-completion-file-template-rules)))))
       (setq jg-completion-file-templates-flat
@@ -22,6 +19,7 @@
     )
 
   (when jg-completion-file-templates-flat
+    (message "Activating File Templates: %s" (hash-table-keys jg-completion-file-template-rules))
     (setq +file-templates-dir jg-completion-file-templates-dir
           +snippets-dir jg-completion-code-templates-dir
           yas-snippet-dirs (list +snippets-dir

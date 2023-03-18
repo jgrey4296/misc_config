@@ -1,4 +1,4 @@
-;;; jglog-mode.el -*- lexical-binding: t; no-byte-compile: t; -*-
+;;; jg-log-mode.el -*- lexical-binding: t; no-byte-compile: t; -*-
 ;;-- header
 ;;
 ;; Copyright (C) 2023 John Grey
@@ -23,7 +23,9 @@
 
 ;;-- end header
 
-(defvar-local jglog-mode-map
+(require 'evil)
+
+(defvar-local jg-log-mode-map
   (make-sparse-keymap))
 
 ;; Fontlock:
@@ -32,7 +34,7 @@
 
          )
 
-  (defconst jglog-font-lock-keywords
+  (defconst jg-log-font-lock-keywords
     '(
       ("^\\([A-Z]+\\)\s+:\s+\\(.+?\\)$" (2 'font-lock-type-face))
       ("^\\(DEBUG\\)\s+:\s+\\(.+?\\)$"   (1 'font-lock-comment-face t))
@@ -42,11 +44,11 @@
       ("---+.+"   (0 'header-line-highlight t))
       (" :|: .+?$" (0 'shadow t))
       )
-    "Highlighting for jglog-mode"
+    "Highlighting for jg-log-mode"
     )
   )
 
-(defvar jglog-mode-syntax-table
+(defvar jg-log-mode-syntax-table
   (let ((st (make-syntax-table)))
     (modify-syntax-entry ?. "." st)
     (modify-syntax-entry ?! "." st)
@@ -61,9 +63,9 @@
     (modify-syntax-entry ?\[ "(]" st)
     (modify-syntax-entry ?: ".:2" st)
     st)
-  "Syntax table for the jglog-mode")
+  "Syntax table for the jg-log-mode")
 
-(defun jglog-mode-filter ()
+(defun jg-log-mode-filter ()
   " choose a log level, create a new buffer with just that level int it "
   (interactive)
   (let* ((level (ivy-read "Log Level: " '(debug info warning error)))
@@ -76,31 +78,56 @@
     (with-current-buffer filtered (erase-buffer))
     (call-process "ggrep" nil filtered nil "-E" regex current)
     (with-current-buffer filtered
-      (jglog-mode)
+      (jg-log-mode)
       (goto-char (point-min))
       )
     (display-buffer filtered '(display-buffer-same-window))
     )
   )
 
+(evil-define-motion jg-log-forward-section (count)
+  "Move to the next block of statements that are a different level"
+  :jump t
+  :type inclusive
+  (beginning-of-line)
+  (let ((current-level (word-at-point)))
+    (while (and (not (eobp))
+                (s-equals? current-level (word-at-point)))
+      (forward-line 1)
+      )
+    )
+  )
 
-(define-derived-mode jglog-mode fundamental-mode
-  "jglog"
+(evil-define-motion jg-log-backward-section (count)
+  :jump t
+  :type inclusive
+  (beginning-of-line)
+  (let ((current-level (word-at-point)))
+    (while (and (not (bobp))
+                (s-equals? current-level (word-at-point))
+                )
+      (forward-line -1)
+      )
+    )
+  )
+
+(define-derived-mode jg-log-mode fundamental-mode
+  "jg-log"
   (interactive)
   (kill-all-local-variables)
-  (use-local-map jglog-mode-map)
+  (use-local-map jg-log-mode-map)
 
   ;; font-lock-defaults: (keywords disable-syntactic case-fold syntax-alist)
-  (set (make-local-variable 'font-lock-defaults) (list jglog-font-lock-keywords nil))
-  ;; (set (make-local-variable 'font-lock-syntactic-face-function) 'jglog-syntactic-face-function)
-  ;; (set (make-local-variable 'indent-line-function) 'jglog-indent-line)
+  (set (make-local-variable 'font-lock-defaults) (list jg-log-font-lock-keywords nil))
+  ;; (set (make-local-variable 'font-lock-syntactic-face-function) 'jg-log-syntactic-face-function)
+  ;; (set (make-local-variable 'indent-line-function) 'jg-log-indent-line)
   ;; (set (make-local-variable 'comment-style) '(plain))
   ;; (set (make-local-variable 'comment-start) "//")
   ;; (set (make-local-variable 'comment-use-syntax) t)
-  (set-syntax-table jglog-mode-syntax-table)
+  (set-syntax-table jg-log-mode-syntax-table)
   ;;
-  (setq major-mode 'jglog-mode)
-  (setq mode-name "jglog")
+  (setq major-mode 'jg-log-mode)
+  (setq mode-name "jg-log")
   (run-mode-hooks)
   (outline-minor-mode)
   (yas-minor-mode)
@@ -108,7 +135,7 @@
   (set-buffer-modified-p nil)
 
   )
-(add-to-list 'auto-mode-alist '("log\\..+$" . jglog-mode))
+(add-to-list 'auto-mode-alist '("log\\..+$" . jg-log-mode))
 
-(provide 'jglog-mode)
-;;; jglog-mode.el ends here
+(provide 'jg-log-mode)
+;;; jg-log-mode.el ends here

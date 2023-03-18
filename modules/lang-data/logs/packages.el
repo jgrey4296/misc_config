@@ -20,7 +20,7 @@
 ;;
 ;;; Code:
 
-(package! jglog-mode  :type 'local :recipe `(:local-repo ,(expand-file-name "packages/major-modes/jglog-mode" doom-user-dir) :files ("*.el" "data-struct/*.el" "modes/*.el" "util/*.el")))
+(package! jg-log-mode  :type 'local :recipe `(:local-repo ,(expand-file-name "packages/major-modes/jg-log-mode" doom-user-dir) :files ("*.el" "data-struct/*.el" "modes/*.el" "util/*.el")))
 
 
 ;;; packages.el ends here

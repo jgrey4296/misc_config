@@ -26,10 +26,10 @@
   (load! "+bindings")
   )
 
-(use-package! jglog-mode
-  :defer t
+(use-package! jg-log-mode
+  :commands jg-log-mode
   :init
-  (add-to-list 'auto-mode-alist '("log\\..+$" . jglog-mode))
+  (add-to-list 'auto-mode-alist '("log\\..+$" . jg-log-mode))
 
   )
 

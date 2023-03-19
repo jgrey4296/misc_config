@@ -35,3 +35,12 @@ adjustment.")
         :modeline t
         :ttl nil)
       )
+(setq jg-popup-ivy-predicate-patterns (rx (or "*helpful"
+                                              "*helm-"
+                                              "doom"
+                                              "*dired-log"
+                                              "magit"
+                                              "*Free Keys"
+                                              )
+                                          )
+      )

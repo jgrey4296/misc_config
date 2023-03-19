@@ -1,6 +1,7 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
 (map! :leader
+      :desc "Popup Buffer"          "<"     #'+jg-popup-ivy-buffer
       (:prefix "b"
        :desc "Clear Popup Rules" "P" #'+jg-ui-popup-reapply-rules
        )

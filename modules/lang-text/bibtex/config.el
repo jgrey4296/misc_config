@@ -29,19 +29,23 @@
     (add-hook 'jg-text-whitespace-clean-hook '+jg-text-cleanup-whitespace 20 t)
     )
 
-  (add-hook! 'bibtex-mode-hook
-             #'yas-minor-mode
-             #'+jg-bibtex-font-lock-mod-hook
-             #'+jg-bibtex-customisation-hook
-             )
-
   (pushnew! bibtex-dialect-list 'jg)
   (let ((sorted-entries
          (sort (copy-alist bibtex-jg-entry-alist) (lambda (x y) (string-lessp (car x) (car y)))))
         )
     (setq bibtex-jg-entry-alist sorted-entries)
     )
-  (add-hook 'bibtex-mode-hook #'(defun +jg-bibtex-set-dialect () (bibtex-set-dialect 'jg)))
+
+  (add-hook! 'bibtex-mode-hook
+             #'yas-minor-mode
+             #'outline-minor-mode
+             #'vimish-fold-mode
+             #'+jg-bibtex-font-lock-mod-hook
+             #'+jg-bibtex-customisation-hook
+             #'(lambda () (bibtex-set-dialect 'jg))
+             )
+
+
   )
 
 (use-package! helm-bibtex

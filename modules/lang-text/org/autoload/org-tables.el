@@ -23,7 +23,6 @@ re-align the table if necessary. (Necessary because org-mode has a
     (when (org-looking-at-p " ")
       (forward-char))))
 
-
 ;;
 ;;; Row/Column insertion
 
@@ -39,7 +38,6 @@ re-align the table if necessary. (Necessary because org-mode has a
   "Insert a new row below the current row."
   (interactive)
   (org-table-insert-row 'below))
-
 
 ;;
 ;;; Hooks
@@ -84,7 +82,6 @@ Meant for `org-mode-hook'."
           ;; does not determine the width of the column.
           (when noalign (setq org-table-may-need-update c)))
         t))))
-
 
 ;;
 ;;; Advice

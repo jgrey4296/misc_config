@@ -12,7 +12,6 @@
     (remove-hook 'kill-buffer-hook #'+org-present--cleanup-org-tree-slides-mode
                  'local)))
 
-
 ;;
 ;;; Hooks
 

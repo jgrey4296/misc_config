@@ -50,7 +50,7 @@
                 python-shell-interpreter "python3"
                 python-shell-interpreter-args "-i"
                 ;; python-shell-interpreter-args `("-X" ,(format "pycache_prefix=%s" (expand-file-name  "~/.pycache")))
-                python-shell-interpreter-path-args (doom-module-expand-path :jg-lang 'python "repl_startup.py ")
+                python-shell-interpreter-path-args (doom-module-expand-path :lang-weakly-typed 'python "repl/repl_startup.py ")
 
                 py-use-font-lock-doc-face-p t
                 py-fontify-shell-buffer-p t

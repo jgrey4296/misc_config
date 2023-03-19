@@ -59,4 +59,4 @@ alias cenv="conda activate"
 alias clist="conda env list"
 alias cexport="conda env export --from-history"
 
-wake="wakeonlan -i 192.168.1.20 90e6ba7391f9"
+alias wake="wakeonlan -i 192.168.1.20 90e6ba7391f9"

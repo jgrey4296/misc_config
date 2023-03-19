@@ -2,37 +2,12 @@
 
 
 ;;-- utils
-(defun +jg-completion-ivy-predicate (x)
-  ;; return nil for cruft buffers
-  (not (string-match jg-completion-ivy-predicate-patterns (car x)))
-  )
-
-(defun +jg-completion-ivy-open-as-popup (buff)
-  (interactive)
-  (let ((curr-rule (display-buffer-assq-regexp buff display-buffer-alist nil))
-        (curr-window (selected-window))
-        )
-    ;; Add rule if necessary:
-    (if (not curr-rule)
-        (progn (message "Adding temp rule")
-               (setq curr-rule (+popup-make-rule buff window-control-popup-persist-default))
-               (push curr-rule display-buffer-alist))
-      )
-    (bury-buffer buff)
-    (pop-to-buffer buff)
-    (if (not (alist-get 'select (alist-get 'window-parameters curr-rule)))
-        (select-window curr-window)
-      )
-    )
-  )
-
 (defun +jg-completion-ivy-kill-buffer (buff)
   (interactive)
   (with-current-buffer buff
     (kill-current-buffer)
     )
   )
-
 ;;-- end utils
 
 ;;-- actions
@@ -41,9 +16,10 @@
                  '(("f" (lambda (x) (find-file-literally x)) "Fundamental")))
 
 (ivy-set-actions 'ivy-switch-buffer
-                 '(("p" +jg-completion-ivy-open-as-popup "Popup")
+                 '(
                    ("k" +jg-completion-ivy-kill-buffer "Kill")
-                   ))
+                   )
+                 )
 
 (ivy-set-actions '+jg-completion-ivy-workspace
                  '(("r" (lambda (x) (+workspace-rename x (read-string (format "Rename %s -> : " x)))) "Rename")
@@ -64,29 +40,6 @@
 ;;-- end actions
 
 ;;-- ivys
-(defun +jg-completion-switch-buffer ()
-  (interactive)
-  (ivy-read "Switch to buffer: " #'internal-complete-buffer
-            :keymap ivy-switch-buffer-map
-            :predicate #'+jg-completion-ivy-predicate
-            :preselect (buffer-name (other-buffer (current-buffer)))
-            :action #'ivy--switch-buffer-action
-            :matcher #'ivy--switch-buffer-matcher
-            :sort t
-            :caller 'ivy-switch-buffer)
-  )
-
-(defun +jg-completion-popup-buffer ()
-  (interactive)
-  (ivy-read "Popup Buffer: " #'internal-complete-buffer
-            :keymap ivy-switch-buffer-map
-            :predicate       #'+jg-completion-ivy-predicate
-            :action          #'+jg-completion-ivy-open-as-popup
-            :matcher         #'ivy--switch-buffer-matcher
-            :caller 'window-control-ivy-popup-buffer
-            )
-  )
-
 (defun +jg-completion-yas-prompt-fn (prompt choices &optional display-fn)
   " Yasnippet ivy which shows groups "
   (let* ((max-name 0)

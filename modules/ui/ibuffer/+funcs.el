@@ -79,7 +79,9 @@
   " Define a filter. if :override is first value after sym,
 clear the saved filters for the symbol "
   (interactive)
-  (message "Head: %s Names: %s" (car-safe def) names)
+  ;; (message "Head: %s Names: %s" (car-safe def) names)
+  (unless (gethash sym target nil)
+    (puthash sym (make-hash-table :test 'equal) target))
   (when (and (eq (car def) :override) (pop def))
     (message "Got Override")
     (let ((table (gethash sym target nil)))
@@ -87,7 +89,7 @@ clear the saved filters for the symbol "
       (puthash sym (make-hash-table :test 'equal) target)
       )
     )
-  (message "Names: %s" names)
+  ;; (message "Names: %s" names)
   (while (eq (type-of (car-safe def)) 'string)
     (if (-contains? names (car-safe def))
         (display-warning 'jg-ibuffer-filters (format "Duplicate Ibuffer Spec Defined: %s : %s" (pop def) (pop def)))

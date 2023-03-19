@@ -22,7 +22,7 @@
 
 ;; (package!  :type 'local :recipe (:local-repo "" :files ("*.el" "data-struct/*.el" "modes/*.el" "util/*.el")))
 
-(package! nxml-mode)
+(package! nxml-mode :built-in t)
 (package! mhtml-mode)
 (package! web-mode)
 (package! css-mode)

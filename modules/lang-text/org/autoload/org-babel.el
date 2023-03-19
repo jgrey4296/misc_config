@@ -26,7 +26,6 @@
               ((let ((major-mode (org-src-get-lang-mode lang)))
                  (+eval/region beg end))))))))
 
-
 ;;;###autoload
 (defun +org-lookup-definition-handler (identifier)
   "TODO"
@@ -65,7 +64,6 @@
              'deferred)
             ((user-error "Documentation lookup in SRC blocks isn't supported yet"))))))
 
-
 ;;
 ;;; Commands
 
@@ -77,7 +75,6 @@
     (org-babel-map-src-blocks nil
       (if (or remove-all (< pos end-block))
           (org-babel-remove-result)))))
-
 
 ;;
 ;;; Hooks

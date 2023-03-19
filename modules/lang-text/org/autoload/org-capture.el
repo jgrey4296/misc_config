@@ -2,7 +2,6 @@
 
 (defvar org-capture-initial)
 
-
 ;;
 ;;; External frame
 
@@ -70,7 +69,6 @@ you're done. This can be called from an external shell script."
 (defun +org-capture-available-keys ()
   "TODO"
   (string-join (mapcar #'car org-capture-templates) ""))
-
 
 ;;
 ;;; Capture targets

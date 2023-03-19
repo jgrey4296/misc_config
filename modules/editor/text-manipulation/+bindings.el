@@ -114,6 +114,7 @@
 (map! :map (ivy-minibuffer-map minibuffer-mode-map)
       :n "<" #'beginning-of-line
       :n ">" #'end-of-line
+      :i "j" #'self-insert-command
       )
 
 (map! :map license-mode-map

@@ -14,6 +14,7 @@
                                 (load! "utils/+advice")
                                 )
            )
+(add-hook! 'doom-init-ui-hook (defun +jg-ui-run-reapply () (run-hooks 'jg-ui-reapply-hook)))
 
 (use-package! hl-line
   :defer t

@@ -16,7 +16,6 @@
              (apply #'start-process "ox-clip" "*ox-clip*"
                     (split-string ox-clip-linux-cmd " ")))))))
 
-
 ;;
 ;;; Commands
 

@@ -1,6 +1,7 @@
 ;;; +derived-modes.el -*- lexical-binding: t; no-byte-compile: t; -*-
 
 ;;-- scons
+;;;###autodef
 (define-derived-mode scons-mode python-mode "scons"
   ""
   (interactive)
@@ -14,6 +15,7 @@
 ;;-- end scons
 
 ;;-- doit/doot
+;;;###autodef
 (define-derived-mode doot-mode python-mode "doot"
   ""
   (interactive)

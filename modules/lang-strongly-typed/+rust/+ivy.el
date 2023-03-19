@@ -1,6 +1,6 @@
 ;;; +ivy.el -*- lexical-binding: t; -*-
 
-(defvar jg-rust-dependency-loc (doom-module-expand-path :jg-lang 'rust  "dependencies.ivy"))
+(defvar jg-rust-dependency-loc (doom-module-expand-path :lang-strongly-typed 'rust  "dependencies.ivy"))
 (defvar jg-rust-dependency-collection nil)
 
 

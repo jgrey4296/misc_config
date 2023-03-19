@@ -5,8 +5,11 @@
 (defvar jg-ibuffer-used-filter-names '())
 (defvar jg-ibuffer-used-group-names '())
 
-(setq jg-ibuffer-never-show-regexps
+(defvar jg-ibuffer-never-show-regexps
       (rx (: "*" (or "Minibuf-"
+                     "scratch"
+                     "Messages"
+                     "DOC"
                      "which-key"
                      "server"
                      "Async-native-compile-log"
@@ -14,6 +17,7 @@
                      "eldoc"
                      "org-src-fontification:"
                      "code-converting-work"
+                     "code-conversion-work"
                      "helm candidates"
                      "Pp Eval"
                      ))

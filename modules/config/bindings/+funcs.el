@@ -9,6 +9,7 @@
         (t (org-open-at-point 'in-emacs))
         )
   )
+
 (defun +jg-bindings-open-link-externally ()
   (interactive)
   (let ((current-prefix-arg '(16))

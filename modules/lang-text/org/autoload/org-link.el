@@ -429,7 +429,6 @@ exist, and `org-link' otherwise."
                (image-animate dov))))
          dov)))))
 
-
 ;;
 ;;; Commands
 

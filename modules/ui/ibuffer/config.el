@@ -2,6 +2,8 @@
 
 (load! "+vars")
 (load! "+funcs")
+(load! "+filters")
+(load! "ivy/+ivy")
 (after! (evil jg-bindings-total ibuffer)
   (load! "+bindings")
  )
@@ -10,9 +12,7 @@
   :config
   (load! "+format")
   (load! "+sorting")
-  (load! "+filters")
   (evil-set-initial-state 'ibuffer-mode 'normal)
-  (add-hook! 'ibuffer-hook #'+jg-ibuffer-update)
   (setq-hook! 'ibuffer-hook
     evil-disable-insert-state-bindings t
     )

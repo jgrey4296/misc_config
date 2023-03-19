@@ -5,7 +5,7 @@
 (load! "+macros")
 (load! "+hacks")
 (load! "+rules")
-
+(load! "ivy/+ivy")
 (after! (evil jg-bindings-total)
   (load! "+bindings")
   )

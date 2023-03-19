@@ -40,11 +40,10 @@
   (add-hook 'yas-prompt-functions #'+jg-completion-yas-prompt-fn -90)
 
   (after! doom-snippets
-    (+jg-completion-activate-templates t)
-    (yas-reload-all)
+    (+jg-completion-reapply-file-templates t)
     )
   )
 (add-hook 'doom-first-file-hook #'+jg-completion-on-load-hook)
-(add-hook 'jg-ui-reapply-hook '+jg-completion-file-interactive-activate)
+(add-hook 'jg-ui-reapply-hook '+jg-completion-reapply-file-templates)
 
 ;;-- end hook setup

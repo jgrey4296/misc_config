@@ -121,7 +121,6 @@
              if (member keyword keywords)
              return keywords)))
 
-
 ;;
 ;;; Modes
 
@@ -136,7 +135,6 @@
   (with-silent-modifications
    ;; In case the above un-align tables
    (org-table-map-tables 'org-table-align t)))
-
 
 ;;
 ;;; Commands
@@ -297,7 +295,6 @@ Executes `org-table-copy-down' if in table."
       (org-table-copy-down arg)
     (org-return nil arg)))
 
-
 ;; I use these instead of `org-insert-item' or `org-insert-heading' because they
 ;; impose bizarre whitespace rules depending on cursor location and many
 ;; settings. These commands have a much simpler responsibility.
@@ -312,7 +309,6 @@ Executes `org-table-copy-down' if in table."
   "Inserts a new heading, table cell or item above the current one."
   (interactive "p")
   (dotimes (_ count) (+org--insert-item 'above)))
-
 
 ;;;###autoload
 (defun +org/toggle-last-clock (arg)
@@ -334,7 +330,6 @@ see how ARG affects this command."
               (y-or-n-p "No active clock. Clock in on current item?"))
          (org-clock-in))
         ((org-clock-in-last arg))))
-
 
 ;;; Folds
 ;;;###autoload
@@ -394,7 +389,6 @@ another level of headings on each invocation."
   (let ((new-level (max 1 (- (+org--get-foldlevel) (or count 1)))))
     (outline-hide-sublevels new-level)
     (message "Folded to level %s" new-level)))
-
 
 ;;
 ;;; Hooks

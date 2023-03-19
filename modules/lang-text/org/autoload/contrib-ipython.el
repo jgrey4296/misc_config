@@ -95,7 +95,6 @@ This function is called by `org-babel-execute-src-block'."
   (org-babel-ipython-initiate-session (cdr (assoc :session params))
                                       params))
 
-
 ;;
 ;; * org-src-edit
 
@@ -129,7 +128,6 @@ This function is called by `org-babel-execute-src-block'."
                    (cdr (assoc :session (nth 2 info)))))
           lispy--python-middleware-loaded-p nil)
     (lispy--python-middleware-load)))
-
 
 ;;
 ;; * retina

@@ -21,13 +21,6 @@
 ;;-- end browsing
 
 ;;-- ivy
-;; (after! (hydra ivy)
-;;   (defhydra+ hydra-ivy ()
-;;     ("i" (evil-insert-state) :exit t)
-;;     )
-;;   )
-
-
 (map! :map ivy-minibuffer-map
       :after ivy
       [remap doom/delete-backward-word] #'ivy-backward-kill-word
@@ -246,10 +239,8 @@
 
 ;;-- leader helms/ivys
 (map! :leader
-      :desc "SCRATCH"                      "6" (cmd! (+jg-completion-ivy-open-as-popup "*scratch*"))
-      :desc "Messages"                     "0" (cmd! (+jg-completion-ivy-open-as-popup "*Messages*") (when current-prefix-arg (with-current-buffer "*Messages*" (+jg-text-clear-buffer))))
-      :desc "Switch buffer"         ","     #'+jg-completion-switch-buffer
-      :desc "Popup Buffer"          "<"     #'+jg-completion-popup-buffer
+      :desc "SCRATCH"                      "6" (cmd! (+jg-popup-ivy-open "*scratch*"))
+      :desc "Messages"                     "0" (cmd! (+jg-popup-ivy-open "*Messages*") (when current-prefix-arg (with-current-buffer "*Messages*" (+jg-text-clear-buffer))))
       :desc "Have you Played?"      "o 1"   #'+jg-completion-rps-have-you-playeds
       :desc "Workspace Counsel"     "w RET" #'+jg-completion-ivy-workspace
       )

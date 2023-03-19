@@ -11,7 +11,7 @@
  :editor navigation
  ;;:editor multiple-cursors
 
- :emacs +dired electric
+ :emacs  electric
  :emacs vc browse misc version-control
 
  ;; :lang-data csv graphql
@@ -41,7 +41,7 @@
  ;; :lang racket rst
  ;; :lang scheme
 
- :ui deft doom ibuffer hydra popup
+ :ui deft doom ibuffer hydra popup dired
  :ui hl-todo indent-guides ligatures
  :ui minimap modeline neotree ophints
  :ui vc-gutter vi-tilde-fringe window-select workspaces

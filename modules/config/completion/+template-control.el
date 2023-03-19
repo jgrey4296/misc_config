@@ -8,9 +8,10 @@
 (defvar jg-completion-file-templates-flat nil)
 
 ;;-- main control
-(defun +jg-completion-activate-templates (&optional force)
+(defun +jg-completion-reapply-file-templates (&optional force)
   " Activate stored file templates, and ensure the correct snippet directories are set  "
-  (unless (and jg-completion-file-templates-flat (not force))
+  (interactive)
+  (unless (and jg-completion-file-templates-flat (not (or force (called-interactively-p))))
     (let ((all-rules (copy-sequence (-flatten-n 1 (hash-table-values jg-completion-file-template-rules)))))
       (setq jg-completion-file-templates-flat
             (-concat (mapcar #'cdr (sort all-rules #'(lambda (x y) (< (car x) (car y)))))
@@ -31,14 +32,14 @@
           )
     )
 
-  (when force
+  (when (or force (called-interactively-p))
     (yas-reload-all)
     )
   )
 
-(define-advice yas-reload-all (:before (&rest args) +jg-yas-dir-fix)
-  (+jg-completion-activate-templates)
-  )
+;; (define-advice yas-reload-all (:before (&rest args) +jg-yas-dir-fix)
+;;   (+jg-completion-reapply-file-templates)
+;;   )
 
 ;;-- end main control
 
@@ -59,10 +60,6 @@
     )
   )
 
-(defun +jg-completion-file-interactive-activate ()
-  (interactive)
-  (+jg-completion-activate-templates t)
-  )
 
 ;;-- end file-templates control
 

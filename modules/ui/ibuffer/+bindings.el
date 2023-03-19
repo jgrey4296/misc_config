@@ -1,18 +1,27 @@
 ;;; +bindings.el -*- lexical-binding: t; no-byte-compile: t; -*-
 
 (message "Setting up Ibuffer bindings: %s" (current-time-string))
-(setq jg-ibuffer-mode-map (make-keymap)
+
+(map! :leader
+      :desc "Ibuffer"               "DEL"   #'+jg-ibuffer-default
+      :desc "Switch buffer"         ","     #'+jg-ibuffer-ivy-buffer
       )
+
+
+(setq jg-ibuffer-mode-map (make-keymap))
 (define-prefix-command 'jg-ibuffer-filter-map nil "ibuffer-filter")
 (define-prefix-command 'jg-ibuffer-sort-map   nil "ibuffer-sort")
+(define-prefix-command 'jg-ibuffer-mark-map nil "ibuffer-mark")
 
 (map! :map jg-ibuffer-mode-map
+      :desc "Visit"               :n "RET" #'+ibuffer/visit-workspace-buffer
       :desc "Do Shell Cmd File"   :n "!" #'ibuffer-do-shell-command-file
-      :desc "add-to-tmp-show"     :n "+" #'ibuffer-add-to-tmp-show
+
+      :desc "add-to-tmp-show"     :n "±" #'ibuffer-add-to-tmp-show
+      :desc "add-to-tmp-hide"     :n "§" #'ibuffer-add-to-tmp-hide
+      :desc "negative"            :n "_" #'negative-argument
+
       :desc "toggle-sorting-mode" :n "," #'ibuffer-toggle-sorting-mode
-      :desc "add-to-tmp-hide"     :n "-" #'ibuffer-add-to-tmp-hide
-      :desc "negative"            :n "-" #'negative-argument
-      :desc "mark-old-buffers"    :n "." #'ibuffer-mark-old-buffers
       :desc "Forward Line"        :n "j" #'ibuffer-forward-line
       :desc "Back Line"           :n "k" #'ibuffer-backward-line
       :desc "Mark"                :n "m" #'ibuffer-mark-forward
@@ -22,15 +31,20 @@
       :desc "Update"              :n "g" #'ibuffer-update
       :desc "Formats"             :n "f" #'ibuffer-switch-format
       :desc "Kill Marked"         :n "D" #'ibuffer-do-delete
-      :desc "Visit"               :n "RET" #'+ibuffer/visit-workspace-buffer
+      :desc "change-marks"              "c" #'ibuffer-change-marks
 
-      :n "s" #'ignore
+      :n "l" #'ignore
+      :n "i" #'ignore
+      ;; :n "s" #'ignore
       :n "q" #'kill-current-buffer
-)
+      :n "s" #'ibuffer-jump-to-filter-group
+      (:prefix ("-" . "Mark Ops"))
+      (:prefix ("=" . "Mark All Ops"))
+      )
 
 ;;-- sorting
 (map! :map jg-ibuffer-sort-map
-      :desc "alphabetic"       "a"  #'ibuffer-do-sort-by-alphabetic
+      :desc "Name"             "n"  #'ibuffer-do-sort-by-alphabetic
       :desc "filename/process" "f"  #'ibuffer-do-sort-by-filename/process
       :desc "invert"           "i"  #'ibuffer-invert-sorting
       :desc "major-mode"       "m"  #'ibuffer-do-sort-by-major-mode
@@ -44,46 +58,49 @@
 
 ;;-- filtering
 (map! :map jg-ibuffer-filter-map ;; filters
-      :desc "switch-to-saved-filter-groups"  "."  #'ibuffer-switch-to-saved-filter-groups
-      :desc "add-saved-filters"              ","  #'ibuffer-add-saved-filters
-      :desc "clear-filter-groups"            "\\" #'ibuffer-clear-filter-groups
-      :desc "pop-filter"                     "p"  #'ibuffer-pop-filter
-      :desc "negate-filter"                  "!"  #'ibuffer-negate-filter
+      :desc "switch-to-saved-filter-groups"  "."   #'ibuffer-switch-to-saved-filter-groups
+      :desc "add-saved-filters"              ","   #'ibuffer-add-saved-filters
+      :desc "clear-filter-groups"            "\\"  #'ibuffer-clear-filter-groups
+      :desc "pop-filter"                     "p"   #'ibuffer-pop-filter
+      :desc "negate-filter"                  "!"   #'ibuffer-negate-filter
 
       (:prefix ("f" . "filter ops")
-       :desc "Choose Filter"                  ","   #'ibuffer-filter-chosen-by-completion
+       :desc "Choose Filter"                  ","  #'ibuffer-filter-chosen-by-completion
        :desc "Swap filters"                  "TAB" #'ibuffer-exchange-filters
        :desc "and-filter"                    "&"   #'ibuffer-and-filter
        :desc "or-filter"                     "|"   #'ibuffer-or-filter
        :desc "stars"                         "*"   #'ibuffer-filter-by-starred-name
-       :desc "disable filter"                "\\"   #'ibuffer-filter-disable
+       :desc "disable filter"                "\\"  #'ibuffer-filter-disable
        :desc "decompose-filter"              "d"   #'ibuffer-decompose-filter
        )
 
       (:prefix ("b" . "by")
-       :desc "filter-by-basename"            "n" #'ibuffer-filter-by-basename
-       :desc "filter-by-content"             "C" #'ibuffer-filter-by-content
-       :desc "filter-by-derived-mode"        "M" #'ibuffer-filter-by-derived-mode
-       :desc "filter-by-directory"           "d" #'ibuffer-filter-by-directory
-       :desc "filter-by-filename"            "f" #'ibuffer-filter-by-filename
-       :desc "filter-by-mode"                "m" #'ibuffer-filter-by-mode
-       :desc "filter-by-modified"            "c" #'ibuffer-filter-by-modified
-       :desc "filter-by-name"                "N" #'ibuffer-filter-by-name
-       :desc "filter-by-process"             "p" #'ibuffer-filter-by-process
-       :desc "filter-by-used-mode"           "m" #'ibuffer-filter-by-used-mode
-       :desc "filter-by-visiting-file"       "v" #'ibuffer-filter-by-visiting-file
+       :desc "filter-by-basename"            "n"   #'ibuffer-filter-by-basename
+       :desc "filter-by-content"             "C"   #'ibuffer-filter-by-content
+       :desc "filter-by-derived-mode"        "M"   #'ibuffer-filter-by-derived-mode
+       :desc "filter-by-directory"           "d"   #'ibuffer-filter-by-directory
+       :desc "filter-by-filename"            "f"   #'ibuffer-filter-by-filename
+       :desc "filter-by-mode"                "m"   #'ibuffer-filter-by-mode
+       :desc "filter-by-modified"            "c"   #'ibuffer-filter-by-modified
+       :desc "filter-by-name"                "N"   #'ibuffer-filter-by-name
+       :desc "filter-by-process"             "p"   #'ibuffer-filter-by-process
+       :desc "filter-by-used-mode"           "m"   #'ibuffer-filter-by-used-mode
+       :desc "filter-by-visiting-file"       "v"   #'ibuffer-filter-by-visiting-file
        :desc "by ext"                        "e"   #'ibuffer-filter-by-file-extension
        :desc "by-size-lt"                    "<"   #'ibuffer-filter-by-size-lt
        :desc "by-size-gt"                    ">"   #'ibuffer-filter-by-size-gt
+       :desc "filter"                        "'"   #'ibuffer-filter-chosen-by-completion
        )
 
       )
 
 (map! :map jg-ibuffer-filter-map ;; groups
       :prefix ("g" . "Groups")
-      :desc "filters-to-filter-group"         "g"   #'ibuffer-filters-to-filter-group
+      :desc "filters-to-filter-group"         "g" #'ibuffer-filters-to-filter-group
       :desc "decompose-filter-group"          "d" #'ibuffer-decompose-filter-group
       :desc "pop-filter-group"                "P" #'ibuffer-pop-filter-group
+      :desc "add group"                       "a" #'+jg-ibuffer-add-group
+      :desc "sort groups"                     "s" #'+jg-ibuffer-sort-groups
       )
 
 (map! :map jg-ibuffer-filter-map ;; save/load
@@ -97,27 +114,27 @@
 ;;-- end filtering
 
 ;;-- marking
-(map! :map jg-ibuffer-map ;; basic
-      :prefix ("%" . "Mark Ops")
-      :desc "by locked"                "L" #'ibuffer-mark-by-locked
-      :desc "by file name regexp"      "f" #'ibuffer-mark-by-file-name-regexp
-      :desc "by content regexp"        "g" #'ibuffer-mark-by-content-regexp
-      :desc "by mode regexp"           "m" #'ibuffer-mark-by-mode-regexp
-      :desc "by name regexp"           "n" #'ibuffer-mark-by-name-regexp
+(map! :map jg-ibuffer-mode-map ;; basic
+      :prefix ("-" . "Mark Ops")
+      :desc "by locked"                  "L" #'ibuffer-mark-by-locked
+      :desc "by file name regexp"        "f" #'ibuffer-mark-by-file-name-regexp
+      :desc "by content regexp"          "g" #'ibuffer-mark-by-content-regexp
+      :desc "by mode regexp"             "m" #'ibuffer-mark-by-mode-regexp
+      :desc "by name regexp"             "n" #'ibuffer-mark-by-name-regexp
       )
-(map! :map jg-ibuffer-map ;; all
-      :prefix ("*" . "Mark All Ops")
-      :desc "unmark all"                     "*" #'ibuffer-unmark-all
-      :desc "dired buffers"                  "/" #'ibuffer-mark-dired-buffers
-      :desc "by mode"                        "M" #'ibuffer-mark-by-mode
-      :desc "change-marks"                   "c" #'ibuffer-change-marks
-      :desc "dissociated buffers"       "e" #'ibuffer-mark-dissociated-buffers
-      :desc "help buffers"              "h" #'ibuffer-mark-help-buffers
-      :desc "modified buffers"          "m" #'ibuffer-mark-modified-buffers
-      :desc "read only buffers"         "r" #'ibuffer-mark-read-only-buffers
-      :desc "special buffers"           "s" #'ibuffer-mark-special-buffers
-      :desc "unsaved buffers"           "u" #'ibuffer-mark-unsaved-buffers
-      :desc "compressed-file-buffers"   "z" #'ibuffer-mark-compressed-file-buffers
+(map! :map jg-ibuffer-mode-map ;; all
+      :prefix ("=" . "Mark All Ops")
+      :desc "unmark all"                "*"  #'ibuffer-unmark-all
+      :desc "dired buffers"             "\\" #'ibuffer-mark-dired-buffers
+      :desc "by mode"                   "M"  #'ibuffer-mark-by-mode
+      :desc "dissociated buffers"       "e"  #'ibuffer-mark-dissociated-buffers
+      :desc "help buffers"              "h"  #'ibuffer-mark-help-buffers
+      :desc "modified buffers"          "m"  #'ibuffer-mark-modified-buffers
+      :desc "read only buffers"         "r"  #'ibuffer-mark-read-only-buffers
+      :desc "special buffers"           "s"  #'ibuffer-mark-special-buffers
+      :desc "unsaved buffers"           "u"  #'ibuffer-mark-unsaved-buffers
+      :desc "compressed-file-buffers"   "z"  #'ibuffer-mark-compressed-file-buffers
+      :desc "mark-old-buffers"          "o"  #'ibuffer-mark-old-buffers
       )
 ;;-- end marking
 

@@ -5,8 +5,34 @@
 (defvar jg-ibuffer-used-filter-names '())
 (defvar jg-ibuffer-used-group-names '())
 
-(setq ibuffer-show-empty-filter-groups nil
+(setq jg-ibuffer-never-show-regexps
+      (rx (: "*" (or "Minibuf-"
+                     "which-key"
+                     "server"
+                     "Async-native-compile-log"
+                     "Echo Area"
+                     "eldoc"
+                     "org-src-fontification:"
+                     "code-converting-work"
+                     "helm candidates"
+                     "Pp Eval"
+                     ))
+          (* any)
+          )
+      )
+
+(setq ibuffer-show-empty-filter-groups t
+      ibuffer-default-sorting-mode 'alphabetic
       ibuffer-filter-group-name-face '(:inherit (success bold))
+
+      jg-ibuffer-ivy-predicate-patterns (rx (or "*helpful"
+                                                   "*helm-"
+                                                   "doom"
+                                                   "*dired-log"
+                                                   "magit"
+                                                   "*Free Keys"
+                                                   )
+                                               )
       )
 
 ;;-- popup

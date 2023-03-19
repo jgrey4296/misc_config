@@ -20,7 +20,7 @@
 
 (use-package! ibuffer-projectile
   ;; Group ibuffer's list by project root
-  :hook (ibuffer . ibuffer-projectile-set-filter-groups)
+  ;; :hook (ibuffer . ibuffer-projectile-set-filter-groups)
   :config
   (setq ibuffer-projectile-prefix
         (if (modulep! +icons)

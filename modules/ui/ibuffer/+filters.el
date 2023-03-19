@@ -20,20 +20,20 @@
 ;; Filters:
 
 (+jg-ibuffer-define-filters 'default
-                            "clutter" '(not (or (used-mode . magit-diff-mode)
-                                                (used-mode . magit-process-mode)
-                                                (used-mode . magit-status-mode)
-                                                (used-mode . magit-diff-mode)
-                                                (used-mode . flycheck-error-list-mode)
-                                                (used-mode . helm-major-mode)
-                                                (used-mode . helpful-mode)
-                                                (used-mode . special-mode)
-                                                (derived-mode . helm-major-mode)
-                                                (derived-mode . helpful-mode)
-                                                (derived-mode . magit-mode)))
+                            "-clutter" '(not (or (used-mode . flycheck-error-list-mode)
+                                                 (used-mode . ivy-mode)
+                                                 (used-mode . helm-major-mode)
+                                                 (used-mode . helpful-mode)
+                                                 (used-mode . special-mode)
+                                                 (derived-mode . helm-major-mode)
+                                                 (derived-mode . helpful-mode)
+                                                 (derived-mode . magit-mode)
+                                                 (name . "*vc*")
+                                                 (name . "*shasum*")
+                                                 ))
                             )
 
-(+jg-ibuffer-define-filters 'dired :override
+(+jg-ibuffer-define-filters 'dired
                             "dired" '(used-mode . dired-mode)
                             )
 
@@ -45,7 +45,7 @@
                                                             (file-extension . "scd\\|hs\\|tidal"))
                             )
 
-(+jg-ibuffer-define-filters 'org         "org"         '(used-mode . org-mode))
+(+jg-ibuffer-define-filters 'org         "org"         '(derived-mode . org-mode))
 (+jg-ibuffer-define-filters 'programming
                             "python"      '(used-mode . python-mode)
                             "programming" '(or (derived-mode . prog-mode)
@@ -91,17 +91,37 @@
 
 ;; Groups:
 
-(+jg-ibuffer-define-groups 'dired "dired" '("dired" (saved . "dired")))
-(+jg-ibuffer-define-groups 'default :override
-                           "projects" '(and ("Starred" (starred-name))
-                                            ("Project: configs" (projectile-root "configs" . "/Volumes/documents/github/__configs/"))
-                                            ("Project: writing" (projectile-root "writing" . "/Volumes/documents/github/jgrey4296.github.io/"))
-                                            ("Project: Dropbox" (projectile-root "Dropbox" . "/Users/johngrey/Dropbox/")))
-                           "other"    '(and ("star" (saved . "star"))
-                                            ("org" (saved . "org"))
-                                            ("programming" (saved . "programming"))
-                                            ("dired" (saved . "dired")))
-                           "programming" '("programming" (saved . "programming"))
-                           "org"         '("org" (saved . "org"))
+(+jg-ibuffer-define-groups 'default
+                           "default"  '(("*Starred*"   (saved . "star"))
+                                        ("*Project: configs" (projectile-root . "__configs"))
+                                        ("*Project: writing" (projectile-root . "jgrey4296.github.io"))
+                                        )
+                           "Starred"  '(("*Starred*"   (saved . "star")))
+                           "General"  '(("Starred"     (saved . "star"))
+                                        ("org"         (saved . "org"))
+                                        ("programming" (saved . "programming"))
+                                        ("dired"       (saved . "dired")))
+                           "org"      '(("org"         (saved . "org")))
+                           "dired"    '(("dired"       (saved . "dired")))
+
                            )
+(+jg-ibuffer-define-groups 'projects
+                           "projects" '(("*Starred*" (starred-name))
+                                        ("*Project: configs*" (projectile-root . "__configs"))
+                                        ("*Project: modules*" (projectile-root . "modules"))
+                                        ("*Project: writing*" (projectile-root . "jgrey4296.github.io"))
+                                        ("*Project: Dropbox*" (projectile-root . "Dropbox"))
+                                        )
+                           )
+(+jg-ibuffer-define-groups 'programming
+                           "programming" '(
+                                           ("programming" (saved . "programming"))
+                                           )
+                           )
+
+(+jg-ibuffer-extend-group 'programming "programming"
+                          '("python" (derived-mode . python-mode))
+                          '("lisp"   (derived-mode . emacs-lisp-mode))
+                          )
+
 (provide 'jg-ibuffer-filters-init)

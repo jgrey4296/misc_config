@@ -8,9 +8,11 @@
                             )
 
   )
+
 (defun +jg-bibtex-split-tags (x)
   (split-string x "," t "+")
   )
+
 (defun +jg-bibtex-set-tags (x)
   " Set tags in bibtex entries "
   (let* ((actual-candidates (mapcar 'car (helm-marked-candidates)))
@@ -45,6 +47,7 @@
           )))
     )
 )
+
 (defun +jg-bibtex-set-new-tag (x)
   "A Fallback function to set tags of bibtex entries "
   (save-excursion
@@ -67,6 +70,7 @@
           (evil-forward-section-begin)
           ))))
   )
+
 (defun +jg-bibtex-get-tags ()
   (let ((tags (bibtex-autokey-get-field "tags"))
         (opttags (bibtex-autokey-get-field "OPTtags")))

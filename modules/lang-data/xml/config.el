@@ -24,13 +24,24 @@
 (load! "+vars")
 (load! "+funcs")
 (load! "+xml-utils")
-(after! (jg-bindings-total jg-dired)
+(after! (jg-bindings-total jg-dired nxml-mode)
   (load! "+bindings")
   )
 
 
-
-(use-package! nxml-mode :defer t)
 (use-package! mhtml-mode :defer t)
+
+(use-package! nxml-mode
+  :defer t
+  :mode "\\.p\\(?:list\\|om\\)\\'" ; plist, pom
+  :mode "\\.xs\\(?:d\\|lt\\)\\'"   ; xslt, xsd
+  :mode "\\.rss\\'"
+  :config
+  (setq nxml-slash-auto-complete-flag t
+        nxml-auto-insert-xml-declaration-flag t)
+  (set-company-backend! 'nxml-mode '(company-nxml company-yasnippet))
+  (setq-hook! 'nxml-mode-hook tab-width nxml-child-indent)
+  (add-hook! 'nxml-mode-hook 'hs-minor-mode)
+  )
 
 ;;; config.el ends here

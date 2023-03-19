@@ -11,7 +11,7 @@
       :after dired
       :localleader
       :desc "Query Xml" :n "1"   #'+jg-xml-dired-run-xidel
-      :desc "Manifest"  :n "d m" #'+jg-xml-epub-manifest-generate
+      :desc "Manifest"  :n "i m" #'+jg-xml-epub-manifest-generate
       )
 
 (map! :map nxml-mode-map

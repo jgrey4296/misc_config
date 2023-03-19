@@ -8,7 +8,7 @@
 ;;-- end epa/gpg
 
 ;;-- dired
-(setq-default dired-args '("-ahl" "-v" "--group-directories-first")
+(setq-default dired-args '("-ahlD" "-v" "--group-directories-first")
               insert-directory-program "gls"
 
               dired-auto-revert-buffer #'dired-buffer-stale-p

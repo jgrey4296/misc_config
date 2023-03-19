@@ -102,7 +102,6 @@
       :localleader
       :prefix "K"
       :desc "Unify Pdf Locations" "U"   #'+jg-bibtex-dired-unify-pdf-locations
-      :desc "Stub Pdfs"           "P"   #'+jg-bibtex-dired-stub-entries
       (:prefix ("b" . "Bibtex")
        :desc "Generate Tex for marked Bibtex" "g" #'+jg-bibtex-dired-compile
        :desc "Compile marked tex" "C" #'+jg-bibtex-dired-compile-run

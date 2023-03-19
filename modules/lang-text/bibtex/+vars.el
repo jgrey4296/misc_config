@@ -18,15 +18,13 @@
 ;;-- end personal settings
 
 ;;-- general bibtex settings
-(after! jg-bibtex-vars-go
-  (setq-default bibtex-user-optional-fields          nil
-                bibtex-completion-bibliography       nil
-                bibtex-field-indentation             1
-                bibtex-text-indentation              15
-                bibtex-align-at-equal-sign           t
-                org-bibtex-export-arbitrary-fields   t
-                )
-  )
+(setq-default bibtex-user-optional-fields          nil
+              bibtex-completion-bibliography       nil
+              bibtex-field-indentation             1
+              bibtex-text-indentation              15
+              bibtex-align-at-equal-sign           t
+              org-bibtex-export-arbitrary-fields   t
+              )
 ;;-- end general bibtex settings
 
 ;;-- bibtex fields
@@ -34,36 +32,10 @@
       jg-bibtex-scholar-search-fields       '("author" "editor" "ALTauthor" "Alteditor" "year" "doi" "isbn")
       jg-bibtex-scholar-search-fields-exact '("title")
       )
-(after! jg-bibtex-vars-go
-  (setq bibtex-completion-additional-search-fields jg-bibtex-search-fields
-        bibtex-completion-pdf-field                "file")
-  )
+(setq bibtex-completion-additional-search-fields jg-bibtex-search-fields
+      bibtex-completion-pdf-field                "file")
 ;;-- end bibtex fields
 
-;;-- cleaning hooks
-(setq jg-bibtex-clean-hooks '(+jg-bibtex-insert-stub-key ;; Initial key
-                              ;; Initial formatting
-                              +jg-bibtex-remove-empty-fields
-                              +jg-bibtex-dont-break-lines-hook
-                              +jg-bibtex-smart-replace-nonascii-hook
-                              +jg-bibtex-orcb-&
-
-                              ;; Specific fields
-                              ;; org-ref-title-case-article
-                              +jg-bibtex-clean-doi-hook
-                              +jg-bibtex-check-file-hook
-                              +jg-bibtex--expand-shortened-url
-                              +jg-bibtex-isbn-clean
-                              ;; generate key
-                              +jg-bibtex-orcb-key-hook
-                              +jg-bibtex-insert-volume-to-key
-                              ;; Final alignment and indent
-                              +jg-bibtex-clean-whitespace-hook
-                              +jg-bibtex-align-hook
-                              +jg-bibtex-indent-hook
-                              )
-      )
-;;-- end cleaning hooks
 
 ;;-- urls
 (setq jg-bibtex-reference-url         "https://www.bibtex.com/g/bibtex-format/"
@@ -89,7 +61,7 @@
 (setq-default jg-bibtex-loc-bibtex          (expand-file-name "~/github/jgrey4296.github.io/resources/bibliography/")
               jg-bibtex-todo-loc            (expand-file-name "~/github/jgrey4296.github.io/resources/todo.bib")
               jg-bibtex-loc-completions     (expand-file-name "~/github/jgrey4296.github.io/resources/completions/")
-              jg-bibtex-loc-export-bib-file (doom-module-expand-path :jg-lang 'bibtex "export_template.tex")
+              jg-bibtex-loc-export-bib-file (doom-module-expand-path :lang-text 'bibtex "_data/export_template.tex")
               jg-bibtex-loc-temp-dir        (expand-file-name "~/.tex/")
               jg-bibtex-pdf-loc             (expand-file-name "~/pdflibrary")
  )

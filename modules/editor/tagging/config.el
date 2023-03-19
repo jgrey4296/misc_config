@@ -7,6 +7,9 @@
 (load! "+funcs")
 (load! "+advice")
 (after! helm
+  (load! "helm/+actions")
+  (load! "helm/+transformers")
+  (load! "helm/+sources")
   (load! "helm/+helm")
   )
 (after! ivy

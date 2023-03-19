@@ -3,33 +3,34 @@
 (message "Setting up Dired bindings")
 
 (map! :map dired-mode-map ;; main
-      :n  "\\" #'+jg-dired-hash-files
-      :nv ")" #'dired-git-info-mode
-      :n  "o" #'dired-find-file-other-window
-      :n  "S" #'hydra-dired-quick-sort/body
-      :nv "j" #'dired-next-line
-      :nv "k" #'dired-previous-line
-      :nv "J" #'dired-next-dirline
-      :nv "K" #'dired-prev-dirline
-      :nv "n" #'evil-ex-search-next
-      :nv "N" #'evil-ex-search-previous
+      :n  "\\"                              #'+jg-dired-hash-files
+      :nv ")"                               #'dired-git-info-mode
+      :n  "o"                               #'dired-find-file-other-window
+      :n  "S"                               #'hydra-dired-quick-sort/body
+      :n "s"                                #'+jg-dired-dir-size
+      :nv "j"                               #'dired-next-line
+      :nv "k"                               #'dired-previous-line
+      :nv "J"                               #'dired-next-dirline
+      :nv "K"                               #'dired-prev-dirline
+      :nv "n"                               #'evil-ex-search-next
+      :nv "N"                               #'evil-ex-search-previous
 
-      :n "v" #'ignore
-      :n ":" #'ignore
+      :n "v"                                #'ignore
+      :n ":"                                #'ignore
 
-      :nv "q" #'+jg-dired-kill-subdir-or-close-buffer
-      :desc "Remove Subdir"        :n "DEL"                            #'dired-kill-subdir
+      :nv "q"                               #'+jg-dired-kill-subdir-or-close-buffer
+      :desc "Remove Subdir"        :n "DEL" #'dired-kill-subdir
 
-      "C-h" #'dired-up-directory
+      "C-h"                                 #'dired-up-directory
 
-      :desc "Expand Subdir"        :n "i"                              #'+jg-dired-insert-subdir-maybe-recursive
-      :desc "Expand Marked"        :n "I"                              #'+jg-dired-insert-marked-subdir
+      :desc "Expand Subdir"        :n "i"   #'+jg-dired-insert-subdir-maybe-recursive
+      :desc "Expand Marked"        :n "I"   #'+jg-dired-insert-marked-subdir
 
       (:prefix "]"
-       :desc "Next Marked" :n "m" #'dired-next-marked-file
+       :desc "Next Marked" :n "m"           #'dired-next-marked-file
        )
       (:prefix "["
-       :desc "Prev Marked" :n "m" #'dired-prev-marked-file
+       :desc "Prev Marked" :n "m"           #'dired-prev-marked-file
        )
 )
 

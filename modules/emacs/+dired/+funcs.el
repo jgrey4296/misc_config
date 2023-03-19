@@ -223,3 +223,13 @@ Type SPC or `y' to %s one match, DEL or `n' to skip to next,
     (message "%s Duplicates" (length dups))
     )
   )
+
+(defun +jg-dired-dir-size ()
+  (interactive)
+  (let ((marked (dired-get-marked-files)))
+    (with-temp-buffer
+      (apply 'call-process "du" nil t nil "-hs" marked)
+      (message "Size: %s" (s-trim (buffer-string)))
+      )
+    )
+  )

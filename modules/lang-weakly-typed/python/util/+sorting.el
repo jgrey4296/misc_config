@@ -4,8 +4,10 @@
 (defun +__jg-python-key-start ()
   (re-search-forward "^\s*def ")
   (symbol-at-point))
+
 (defun +__jg-python-next-rec-end-func ()
   (python-nav-forward-sexp))
+
 (defun +__jg-python-next-rec-func ()
   ;; Move Forward
   (beginning-of-defun -1)
@@ -14,6 +16,7 @@
     (forward-line -1)
     )
   )
+
 ;; Run this
 (defun +jg-python-sort-class-methods ()
   (interactive)

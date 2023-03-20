@@ -2,10 +2,10 @@
 
 (doom-log "Config JG Python")
 
-(load! "modes/+manifest-mode")
 (load! "+vars")
 (load! "+funcs")
 (load! "util/+hooks")
+(load! "modes/+manifest-mode")
 (after! jg-bindings-total
   (load! "+bindings")
   (load! "util/+nav")
@@ -14,39 +14,65 @@
 (load! "util/+env")
 (load! "modes/+derived-modes")
 
-(use-package-hook! python :post-config
-  (require 'python-mode)
+(use-package! python
+  :disabled
   )
 
 (use-package! python-mode
   :mode ("[./]flake8\\'" . conf-mode)
-  :mode ("/Pipfile\\'" . conf-mode)
-
+  :mode ("/Pipfile\\'"   . conf-mode)
   :init
-  (setq python-environment-directory doom-cache-dir
-        python-indent-guess-indent-offset-verbose nil)
-
   (when (modulep! +lsp)
     (add-hook 'python-mode-local-vars-hook #'lsp! 'append))
   (when (modulep! +tree-sitter)
     (add-hook 'python-mode-local-vars-hook #'tree-sitter! 'append))
+  (when (executable-find "Microsoft.Python.LanguageServer")
+    (set-eglot-client! 'python-mode '("Microsoft.Python.LanguageServer")))
+
+  (set-docsets! '(python-mode inferior-python-mode) "Python 3" "NumPy" "SciPy" "Pandas")
 
   :config
   (setq python-mode-hook nil
         python-mode-local-vars-hook nil)
 
+  (set-ligatures! 'python-mode
+    ;; Functional
+    :def    "def"
+    :lambda "lambda"
+    ;; Types
+    :null   "None"
+    :true   "True" :false "False"
+    :int    "int"  :str "str" :float  "float" :bool   "bool" :tuple  "tuple"
+    ;; Flow
+    :not    "not"
+    :in     "in"  :not-in "not in"
+    :and    "and" :or "or"
+    :for    "for"
+    :return "return" :yield "yield")
+
+  (set-repl-handler! 'python-mode #'+python/open-repl
+    :persist t
+    :send-region #'python-shell-send-region
+    :send-buffer #'python-shell-send-buffer)
+
+  (when (modulep! :ui modeline)
+    (advice-add #'pythonic-activate :after-while #'+modeline-update-env-in-all-windows-h)
+    (advice-add #'pythonic-deactivate :after #'+modeline-clear-env-in-all-windows-h))
+
+  ;;-- hooks
   (add-hook! 'python-mode-hook
+             #'+python-use-correct-flycheck-executables-h
              #'doom-modeline-env-setup-python
              #'er/add-python-mode-expansions
              #'evil-collection-python-set-evil-shift-width
              #'doom--setq-tab-width-for-python-mode-h
              )
 
-  (defun +jg-python-customisation-hook ()
-    ;; (put 'defun 'bounds-of-thing-at-point '+jg-python-def-bounds)
-    (add-hook 'jg-text-whitespace-clean-hook '+jg-python-cleanup-ensure-newline-before-def 5 t)
-    (add-hook 'jg-text-whitespace-clean-hook 'delete-trailing-whitespace 10 t)
-    (add-hook 'jg-text-whitespace-clean-hook '+jg-text-cleanup-whitespace 20 t)
+  (add-hook! 'python-mode-hook :append :local
+    (add-hook! 'jg-text-whitespace-clean-hook :append :local
+               #'+jg-python-cleanup-ensure-newline-before-def
+               #'delete-trailing-whitespace
+               #'+jg-text-cleanup-whitespace)
     )
 
   ;; Always add auto-hide as the last thing
@@ -57,139 +83,16 @@
              #'+jg-python-auto-hide
              )
   (setq-hook! 'python-mode-hook
-    tab-width                    python-indent-offset
-    end-of-defun-function       'python-nav-end-of-defun
-    beginning-of-defun-function 'python-nav-beginning-of-defun
-    indent-region-function      'python-indent-region
-    indent-line-function        'python-indent-line
+    tab-width                    py-indent-offset
+    end-of-defun-function       'py-forward-def
+    beginning-of-defun-function 'py-down-def
+    indent-region-function      'py-indent-region
+    indent-line-function        'py-indent-line
     )
 
-  (set-repl-handler! 'python-mode #'+python/open-repl
-    :persist t
-    :send-region #'python-shell-send-region
-    :send-buffer #'python-shell-send-buffer)
+  ;;-- end hooks
 
-  (set-docsets! '(python-mode inferior-python-mode) "Python 3" "NumPy" "SciPy" "Pandas")
-
-  (when (modulep! :ui modeline)
-    (advice-add #'pythonic-activate :after-while #'+modeline-update-env-in-all-windows-h)
-    (advice-add #'pythonic-deactivate :after #'+modeline-clear-env-in-all-windows-h))
 )
-
-(use-package-hook! anaconda-mode :post-config
-  (+jg-python-conda-binding-override)
-  (set-company-backend! 'anaconda-mode 'company-anaconda)
-  )
-
-(use-package! company-anaconda
-  :commands 'company-anaconda)
-
-(use-package! lsp-pyright
-  :after lsp-mode
-  :init
-  (add-to-list 'lsp-disabled-clients 'pyls)
-  (add-to-list 'lsp-disabled-clients 'pylsp)
-  (add-to-list 'lsp-disabled-clients 'mspyls)
-)
-
-(use-package! pyimport :demand)
-
-(use-package! lsp-jedi :defer)
-
-;; (use-package! lsp-python-ms
-;;   :unless (modulep! :lang python +pyright)
-;;   :after lsp-mode
-;;   :preface
-;;   (after! python
-;;     (setq lsp-python-ms-python-executable-cmd python-shell-interpreter)))
-
-;; (use-package! lsp-jedi
-;;   :ensure t
-;;   :after lsp-mode
-;;   :config
-;;   (add-to-list 'lsp-enabled-clients 'jedi)
-;;   )
-
-;; (after! (origami python-origami)
- ;;  (delq (assoc 'python-mode origami-parser-alist) origami-parser-alist)
- ;;  (add-to-list 'origami-parser-alist '(python-mode . +jg-origami-python-parser))
- ;;  )
-
-(use-package! python
-  :mode ("[./]flake8\\'" . conf-mode)
-  :mode ("/Pipfile\\'" . conf-mode)
-  :init
-  (setq python-environment-directory doom-cache-dir
-        python-indent-guess-indent-offset-verbose nil)
-
-  (when (modulep! +lsp)
-    (add-hook 'python-mode-local-vars-hook #'lsp! 'append)
-    ;; Use "mspyls" in eglot if in PATH
-    (when (executable-find "Microsoft.Python.LanguageServer")
-      (set-eglot-client! 'python-mode '("Microsoft.Python.LanguageServer"))))
-
-  (when (modulep! +tree-sitter)
-    (add-hook 'python-mode-local-vars-hook #'tree-sitter! 'append))
-  :config
-  (set-repl-handler! 'python-mode #'+python/open-repl
-    :persist t
-    :send-region #'python-shell-send-region
-    :send-buffer #'python-shell-send-buffer)
-  (set-docsets! '(python-mode inferior-python-mode) "Python 3" "NumPy" "SciPy" "Pandas")
-
-  (set-ligatures! 'python-mode
-    ;; Functional
-    :def "def"
-    :lambda "lambda"
-    ;; Types
-    :null "None"
-    :true "True" :false "False"
-    :int "int" :str "str"
-    :float "float"
-    :bool "bool"
-    :tuple "tuple"
-    ;; Flow
-    :not "not"
-    :in "in" :not-in "not in"
-    :and "and" :or "or"
-    :for "for"
-    :return "return" :yield "yield")
-
-  ;; Stop the spam!
-  (setq python-indent-guess-indent-offset-verbose nil)
-
-  ;; Default to Python 3. Prefer the versioned Python binaries since some
-  ;; systems link the unversioned one to Python 2.
-  (when (and (executable-find "python3")
-             (string= python-shell-interpreter "python"))
-    (setq python-shell-interpreter "python3"))
-
-  (add-hook! 'python-mode-hook
-    (defun +python-use-correct-flycheck-executables-h ()
-      "Use the correct Python executables for Flycheck."
-      (let ((executable python-shell-interpreter))
-        (save-excursion
-          (goto-char (point-min))
-          (save-match-data
-            (when (or (looking-at "#!/usr/bin/env \\(python[^ \n]+\\)")
-                      (looking-at "#!\\([^ \n]+/python[^ \n]+\\)"))
-              (setq executable (substring-no-properties (match-string 1))))))
-        ;; Try to compile using the appropriate version of Python for
-        ;; the file.
-        (setq-local flycheck-python-pycompile-executable executable)
-        ;; We might be running inside a virtualenv, in which case the
-        ;; modules won't be available. But calling the executables
-        ;; directly will work.
-        (setq-local flycheck-python-pylint-executable "pylint")
-        (setq-local flycheck-python-flake8-executable "flake8"))))
-
-  ;; Affects pyenv and conda
-  (when (modulep! :ui modeline)
-    (advice-add #'pythonic-activate :after-while #'+modeline-update-env-in-all-windows-h)
-    (advice-add #'pythonic-deactivate :after #'+modeline-clear-env-in-all-windows-h))
-
-  (setq-hook! 'python-mode-hook tab-width python-indent-offset))
-
 
 (use-package! anaconda-mode
   :defer t
@@ -198,57 +101,56 @@
         anaconda-mode-eldoc-as-single-line t)
 
   (add-hook! 'python-mode-local-vars-hook :append
-    (defun +python-init-anaconda-mode-maybe-h ()
-      "Enable `anaconda-mode' if `lsp-mode' is absent and
-`python-shell-interpreter' is present."
-      (unless (or (bound-and-true-p lsp-mode)
-                  (bound-and-true-p eglot--managed-mode)
-                  (bound-and-true-p lsp--buffer-deferred)
-                  (not (executable-find python-shell-interpreter t)))
-        (anaconda-mode +1))))
+             #'+python-init-anaconda-mode-maybe-h)
   :config
-  (set-company-backend! 'anaconda-mode '(company-anaconda))
+  (set-company-backend! 'anaconda-mode 'company-anaconda)
   (set-lookup-handlers! 'anaconda-mode
-    :definition #'anaconda-mode-find-definitions
-    :references #'anaconda-mode-find-references
-    :documentation #'anaconda-mode-show-doc)
-  (set-popup-rule! "^\\*anaconda-mode" :select nil)
+    :definition #'+jg-conda-find-defs
+    :references #'+jg-conda-find-references
+    :documentation #'+jg-conda-show-doc)
 
   (add-hook 'anaconda-mode-hook #'anaconda-eldoc-mode)
 
-  (defun +python-auto-kill-anaconda-processes-h ()
-    "Kill anaconda processes if this buffer is the last python buffer."
-    (when (and (eq major-mode 'python-mode)
-               (not (delq (current-buffer)
-                          (doom-buffers-in-mode 'python-mode (buffer-list)))))
-      (anaconda-mode-stop)))
   (add-hook! 'python-mode-hook
     (add-hook 'kill-buffer-hook #'+python-auto-kill-anaconda-processes-h
               nil 'local))
 
-  (when (featurep 'evil)
-    (add-hook 'anaconda-mode-hook #'evil-normalize-keymaps))
-  (map! :localleader
-        :map anaconda-mode-map
-        :prefix "g"
-        "d" #'anaconda-mode-find-definitions
-        "h" #'anaconda-mode-show-doc
-        "a" #'anaconda-mode-find-assignments
-        "f" #'anaconda-mode-find-file
-        "u" #'anaconda-mode-find-references))
+  (add-hook 'anaconda-mode-hook #'evil-normalize-keymaps)
+)
 
+(use-package! company-anaconda
+  :commands 'company-anaconda)
 
-(use-package! pyimport
-  :defer t
-  :init
-  (map! :after python
-        :map python-mode-map
-        :localleader
-        (:prefix ("i" . "imports")
-          :desc "Insert missing imports" "i" #'pyimport-insert-missing
-          :desc "Remove unused imports"  "R" #'pyimport-remove-unused
-          :desc "Optimize imports"       "o" #'+python/optimize-imports)))
+;;-- lsp
+(use-package! lsp-pyright :after lsp-mode)
+(use-package! lsp-jedi :defer)
 
+(use-package! lsp-python-ms
+  :disabled
+  :unless (modulep! :lang python +pyright)
+  :after (python lsp-mode)
+  :config
+  (setq lsp-python-ms-python-executable-cmd python-shell-interpreter)
+  )
+
+(use-package! lsp-jedi
+  :disabled
+  :ensure t
+  :after lsp-mode
+  :config
+  (add-to-list 'lsp-enabled-clients 'jedi)
+  )
+
+;;-- end lsp
+
+;;-- tests
+;; (after! (origami python-origami)
+;; (load! "util/jg-python-origami")
+ ;;  (delq (assoc 'python-mode origami-parser-alist) origami-parser-alist)
+ ;;  (add-to-list 'origami-parser-alist '(python-mode . +jg-origami-python-parser))
+ ;;  )
+
+(use-package! pyimport :after python-mode)
 
 (use-package! py-isort
   :defer t
@@ -265,42 +167,18 @@
   :preface (defvar nose-mode-map (make-sparse-keymap))
   :minor ("/test_.+\\.py$" . nose-mode)
   :config
-  (set-popup-rule! "^\\*nosetests" :size 0.4 :select nil)
   (set-yas-minor-mode! 'nose-mode)
   (when (featurep 'evil)
     (add-hook 'nose-mode-hook #'evil-normalize-keymaps))
-
-  (map! :localleader
-        :map nose-mode-map
-        :prefix "t"
-        "r" #'nosetests-again
-        "a" #'nosetests-all
-        "s" #'nosetests-one
-        "v" #'nosetests-module
-        "A" #'nosetests-pdb-all
-        "O" #'nosetests-pdb-one
-        "V" #'nosetests-pdb-module))
-
+  )
 
 (use-package! python-pytest
   :commands python-pytest-dispatch
-  :init
-  (map! :after python
-        :localleader
-        :map python-mode-map
-        :prefix ("t" . "test")
-        "a" #'python-pytest
-        "f" #'python-pytest-file-dwim
-        "F" #'python-pytest-file
-        "t" #'python-pytest-function-dwim
-        "T" #'python-pytest-function
-        "r" #'python-pytest-repeat
-        "p" #'python-pytest-dispatch))
+)
 
+;;-- end tests
 
-;;
-;;; Environment management
-
+;;-- envs
 (use-package! pipenv
   :commands pipenv-project-p
   :hook (python-mode . pipenv-mode)
@@ -314,18 +192,7 @@
                    (format "PIPENV_MAX_DEPTH=9999 %s run %%c %%o %%s %%a" bin)
                  "%c %o %s %a")))
       (:description . "Run Python script")))
-  (map! :map python-mode-map
-        :localleader
-        :prefix "e"
-        :desc "activate"    "a" #'pipenv-activate
-        :desc "deactivate"  "d" #'pipenv-deactivate
-        :desc "install"     "i" #'pipenv-install
-        :desc "lock"        "l" #'pipenv-lock
-        :desc "open module" "o" #'pipenv-open
-        :desc "run"         "r" #'pipenv-run
-        :desc "shell"       "s" #'pipenv-shell
-        :desc "uninstall"   "u" #'pipenv-uninstall))
-
+  )
 
 (use-package! pyvenv
   :after python
@@ -337,20 +204,8 @@
   (add-hook 'python-mode-local-vars-hook #'pyvenv-track-virtualenv)
   (add-to-list 'global-mode-string
                '(pyvenv-virtual-env-name (" venv:" pyvenv-virtual-env-name " "))
-               'append))
-
-
-
-(use-package! pyenv-mode
-  :when (modulep! +pyenv)
-  :after python
-  :config
-  (when (executable-find "pyenv")
-    (pyenv-mode +1)
-    (add-to-list 'exec-path (expand-file-name "shims" (or (getenv "PYENV_ROOT") "~/.pyenv"))))
-  (add-hook 'python-mode-local-vars-hook #'+python-pyenv-mode-set-auto-h)
-  (add-hook 'doom-switch-buffer-hook #'+python-pyenv-mode-set-auto-h))
-
+               'append)
+  )
 
 (use-package! conda
   :when (modulep! +conda)
@@ -390,31 +245,12 @@
                '(conda-env-current-name (" conda:" conda-env-current-name " "))
                'append))
 
-
 (use-package! poetry
   :when (modulep! +poetry)
   :after python
   :init
   (setq poetry-tracking-strategy 'switch-buffer)
   (add-hook 'python-mode-hook #'poetry-tracking-mode))
-
-
-(use-package! cython-mode
-  :when (modulep! +cython)
-  :mode "\\.p\\(yx\\|x[di]\\)\\'"
-  :config
-  (setq cython-default-compile-format "cython -a %s")
-  (map! :map cython-mode-map
-        :localleader
-        :prefix "c"
-        :desc "Cython compile buffer"    "c" #'cython-compile))
-
-
-(use-package! flycheck-cython
-  :when (modulep! +cython)
-  :when (modulep! :checkers syntax)
-  :after cython-mode)
-
 
 (use-package! pip-requirements
   :defer t
@@ -432,21 +268,19 @@
     :around #'pip-requirements-mode
     (letf! ((#'pip-requirements-fetch-packages #'ignore))
       (apply fn args))))
+;;-- end envs
 
+;;-- cython
+(use-package! cython-mode
+  :when (modulep! +cython)
+  :mode "\\.p\\(yx\\|x[di]\\)\\'"
+  :config
+  (setq cython-default-compile-format "cython -a %s")
+)
 
-;;
-;;; LSP
+(use-package! flycheck-cython
+  :when (modulep! +cython)
+  :when (modulep! :checkers syntax)
+  :after cython-mode)
 
-(eval-when! (and (modulep! +lsp)
-                 (not (modulep! :tools lsp +eglot)))
-
-  (use-package! lsp-python-ms
-    :unless (modulep! +pyright)
-    :after lsp-mode
-    :preface
-    (after! python
-      (setq lsp-python-ms-python-executable-cmd python-shell-interpreter)))
-
-  (use-package! lsp-pyright
-    :when (modulep! +pyright)
-    :after lsp-mode))
+;;-- end cython

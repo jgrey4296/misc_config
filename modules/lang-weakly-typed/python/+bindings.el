@@ -1,9 +1,9 @@
 ;;; lang/jg-python/+bindings.el -*- lexical-binding: t; -*-
 
-(map! :map dired-mode-map
-      :after dired
-      :localleader
-      :desc "Activate Py Environments" :n "v" #'+jg-python-activate-venv-and-conda
+(map! :leader
+      :prefix ("c v" . "Environments")
+      :desc "Activate Environment" "c" #'+jg-python-activate-venv-and-conda
+
       )
 
 (map! :map python-mode-map
@@ -12,49 +12,57 @@
       :n "z D" nil ;; #'+jg-python-close-class-defs
       :v "i f" nil ;; #'+jg-python-select-defun
       :v "i F" nil ;; #'+jg-python-select-class
-      :n "] ]" #'+jg-python-forward-defun
+      ;; :n "] ]" #'+jg-python-forward-defun
       :n "s j" '+jg-python-swipe-to-def
       :localleader
       ;; :desc "Sort defs" "S" #'+jg-python-sort-class-methods
       :desc "Summarize" "s" #'+jg-python-summarize
-      :desc "REPL"      "r" #'+python/open-repl
+      :desc "REPL"      "r" #'+python/open-ipython-repl
       :desc "debug"     "d" (cmd! (setq jg-python-dev-mode (not jg-python-dev-mode))
                                   (message "Python Debug Mode: %s" jg-python-dev-mode))
       :desc "track"     ";"  #'py-pdbtrack-toggle-stack-tracking
       :desc "breakpoint" "b" #'+jg-python-breakpoint-line
       )
 
-(map! :map shell-mode-map
+(map! :map python-mode-map ;; imports
       :localleader
-      :desc "PdbTrack" ";" #'py-pdbtrack-toggle-stack-tracking
-      )
-
-(map! :map python-mode-map
-      :after python-mode
-      :localleader
-      (:prefix ("o" . "open")
-       :desc "Repl" "r" #'+python/open-repl
-       )
-      (:prefix ("i" . "imports")
+      :prefix ("i" . "imports")
        :desc "Insert import"          "i" #'+jg-python-insert-import
        :desc "Insert Import Snippet"  "I" #'+jg-python-import-snippet
        :desc "Sort imports"           "s" #'py-isort-buffer
        :desc "Sort region"            "r" #'py-isort-region
-       :desc "Collect import blocks"  "c" #'+jg-python-cleanup-import-blocks)
-      (:prefix ("t" . "test")
+       :desc "Collect import blocks"  "c" #'+jg-python-cleanup-import-blocks
+       :desc "Insert missing imports" "i" #'pyimport-insert-missing
+       :desc "Remove unused imports"  "R" #'pyimport-remove-unused
+       :desc "Optimize imports"       "o" #'+python/optimize-imports
+       )
+
+(map! :map python-mode-map ;; tests
+      :localleader
+      :prefix ("t" . "test")
        :desc "Test DWIM"       "f" #'python-pytest-file-dwim
        :desc "Test File"       "F" #'python-pytest-file
        :desc "Test Func DWIM"  "t" #'python-pytest-function-dwim
        :desc "Test Func"       "T" #'python-pytest-function
        :desc "Test repeat"     "r" #'python-pytest-repeat
-       :desc "Test Popup"      "p" #'python-pytest-dispatch)
-      (:prefix ("e" . "Environment")
+       :desc "Test Popup"      "p" #'python-pytest-dispatch
+       )
+
+(map! :map python-mode-map ;; environment
+      :prefix ("e" . "Environment")
        :desc "activate"    "a"    #'pyvenv-activate
        :desc "deactivate"  "d"    #'pyvenv-deactivate
        :desc "Choose Support" "c" #'+jg-python-support
        :desc "Current Support" "C" (cmd! (message "Current Python Support: %s" jg-python-last-chosen-support))
+       :desc "activate"    "a" #'pipenv-activate
+       :desc "deactivate"  "d" #'pipenv-deactivate
+       :desc "install"     "i" #'pipenv-install
+       :desc "lock"        "l" #'pipenv-lock
+       :desc "open module" "o" #'pipenv-open
+       :desc "run"         "r" #'pipenv-run
+       :desc "shell"       "s" #'pipenv-shell
+       :desc "uninstall"   "u" #'pipenv-uninstall
        )
-      )
 
 (map! :map (python-mode-map inferior-python-mode-map) ;; Doc links
       :after python-mode
@@ -109,19 +117,33 @@
       (:prefix "c"
       :desc "Cython compile buffer"    "c" #'cython-compile))
 
-(defun +jg-python-conda-binding-override ()
-  (map! :map anaconda-mode-map
-        :localleader
-        "g" nil
-        :prefix ("j" . "Jump")
-        ;; :desc "Conda: Find Defs"    "d" #'anaconda-mode-find-definitions
-        :desc "Conda: Find Defs"    "d" #'+jg-conda-find-defs
-        :desc "Conda: Show Doc"     "h" #'+jg-conda-show-doc
-        :desc "Conda: Find Assigns" "a" #'+jg-conda-find-assignments
-        :desc "Conda: Find Refs"    "u" #'+jg-conda-find-references
-        :desc "Conda: Eldoc"        "e" #'+jg-conda-eldoc
-        )
-  )
+(map! :map anaconda-mode-map
+      :after anaconda-mode
+      :localleader
+      "g" nil
+      :prefix ("j" . "Jump")
+      ;; :desc "Conda: Find Defs"    "d" #'anaconda-mode-find-definitions
+      :desc "Conda: Find Defs"    "d" #'+jg-conda-find-defs
+      :desc "Conda: Show Doc"     "h" #'+jg-conda-show-doc
+      :desc "Conda: Find Assigns" "a" #'+jg-conda-find-assignments
+      :desc "Conda: Find Refs"    "u" #'+jg-conda-find-references
+      :desc "Conda: Eldoc"        "e" #'+jg-conda-eldoc
+      )
+
+(map! :map doot-mode-map
+      :n "s <" #'doot-open-toml
+      )
+
+(map! :map dired-mode-map
+      :after dired
+      :localleader
+      :desc "Activate Py Environments" :n "v" #'+jg-python-activate-venv-and-conda
+      )
+
+(map! :map shell-mode-map
+      :localleader
+      :desc "PdbTrack" ";" #'py-pdbtrack-toggle-stack-tracking
+      )
 
 (map! :map conf-mode-map ;; setuptools doc link
       :after conf-mode
@@ -134,12 +156,15 @@
       :desc "Docs: Manifest files"  "1" (cmd! (browse-url "https://docs.python.org/3/distutils/sourcedist.html?highlight=manifest"))
       )
 
-(map! :map doot-mode-map
-      :n "s <" #'doot-open-toml
-      )
-
-(map! :leader
-      :prefix ("c v" . "Environments")
-      :desc "Activate Environment" "c" #'+jg-python-activate-venv-and-conda
-
+(map! :map nose-mode-map
+      :after node
+      :localleader
+      :prefix "t"
+      "r" #'nosetests-again
+      "a" #'nosetests-all
+      "s" #'nosetests-one
+      "v" #'nosetests-module
+      "A" #'nosetests-pdb-all
+      "O" #'nosetests-pdb-one
+      "V" #'nosetests-pdb-module
       )

@@ -38,25 +38,20 @@
 
 ;;-- general python
 (after! python-mode
-  (setq-default python-indent-offset 4
-                python-indent-guess-indent-offset nil
-                python-shell-completion-native-enable nil
-                python-shell-virtualenv-root (expand-file-name  "~/anaconda")
-                python-pdbtrack-activate t
+  (setq-default py-indent-offset 4
+                py-shell-virtualenv-root (expand-file-name  "~/anaconda")
                 py-pdbtrack-do-tracking-p t
-                python-shell-completion-native-disabled-interpreters '("pypy")
 
-                ;; python-shell-interpreter "python3"
-                python-shell-interpreter "python3"
-                python-shell-interpreter-args "-i"
+                py-python-command "python3"
+                py-python-command-args '("-i")
                 ;; python-shell-interpreter-args `("-X" ,(format "pycache_prefix=%s" (expand-file-name  "~/.pycache")))
-                python-shell-interpreter-path-args (doom-module-expand-path :lang-weakly-typed 'python "repl/repl_startup.py ")
+                jg-python-repl-start-file (doom-module-expand-path :lang-weakly-typed 'python "repl/repl_startup.py ")
 
                 py-use-font-lock-doc-face-p t
                 py-fontify-shell-buffer-p t
                 )
   (modify-syntax-entry ?_ "_" python-mode-syntax-table)
-  )
+)
 ;;-- end general python
 
 ;;-- outline
@@ -105,7 +100,9 @@
 ;;-- popup
 (setq jg-python-popup-rules
       '(("^\\*pytest\\*"         :side bottom :ttl 5   :height 0.4 :quit t :select t :priority 50)
+        ("^\\*nosetests" :size 0.4 :select nil)
         ("^\\*Anaconda\\*"       :side bottom :ttl 5   :height 0.4 :quit t :select nil :priority 50)
+        ("^\\*anaconda-mode"     :side bottom :ttl 5   :height 0.4 :quit t :select nil :priority 50)
         ("^\\*Python\\*"         :side right  :ttl nil :width  0.5 :quit nil :select t :priority 50)
         ("^\\*Python-Summary\\*" :side right  :ttl nil :width  0.2 :quit t  :select nil :priority 50)
         ))
@@ -163,15 +160,6 @@
   )
 ;;-- end fold
 
-;;-- obsolete
-;; (defvar +python-ipython-command '("ipython" "-i" "--simple-prompt" "--no-color-info")
-;;   "Command to initialize the ipython REPL for `+python/open-ipython-repl'.")
-;; (defvar +python-jupyter-command '("jupyter" "console" "--simple-prompt")
-;;   "Command to initialize the jupyter REPL for `+python/open-jupyter-repl'.")
-;; (after! flycheck
-;;   (flycheck-add-next-checker 'python-pylint '(t . python-pyright))
-;;   )
-;;-- end obsolete
 
 ;;-- smartparens
 (after! smartparens-python
@@ -187,3 +175,10 @@
   ;; TODO Fix this upstream, in doom-snippets, instead
   (setq sp-python-insert-colon-in-function-definitions nil))
 ;;-- end smartparens
+
+;;-- lsp
+(defvar lsp-disabled-clients nil)
+(add-to-list 'lsp-disabled-clients 'pyls)
+(add-to-list 'lsp-disabled-clients 'pylsp)
+(add-to-list 'lsp-disabled-clients 'mspyls)
+;;-- end lsp

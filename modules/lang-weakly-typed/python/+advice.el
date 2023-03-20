@@ -1,36 +1,5 @@
 ;;; +advice.el -*- lexical-binding: t; -*-
 
-;; (define-advice python-info-dedenter-statement-p (:override ()
-;;                                                  +jg-python-dedenter-rx-override)
-
-;;   "Return point if current statement is a dedenter.
-;; Sets `match-data' to the keyword that starts the dedenter
-;; statement."
-;;   (save-excursion
-;;     (python-nav-beginning-of-statement)
-;;     (when (and (not (python-syntax-context-type))
-;;                (or (looking-at (python-rx dedenter))
-;;                    (looking-at "\n\n+")
-;;                    )
-;;                )
-;;       (point)
-;;       )
-;;     )
-;;   )
-
-;; (define-advice outline-next-heading (:before-until()
-;;                                      +jg-python-override)
-;;   (interactive)
-;;   (if (and (bolp) (not (eobp))) (forward-char 1))
-;;   (if (eq major-mode 'python-mode)
-;;       (let* ((indent (python-indent--calculate-indentation))
-;;              (total outline-regexp)) ;;(eval `(rx (or ,outline-regexp (** 1 ,indent " ") )))))
-;;         (if (re-search-forward (concat "^\\(?:" total "\\)") nil 'move)
-;;             (goto-char (match-beginning 0))
-;;           )
-;;         )
-;;     )
-;;   )
 
 (define-advice py--pdbtrack-get-source-buffer (:override (block) +jg-python-pdftrack-silence)
 
@@ -78,4 +47,66 @@
              (format "(Non-file source: '%s')" filename))
 
             (t (format "Not found: %s(), %s" funcname filename)))))
+  )
+
+(define-advice conda--get-path-prefix (:override (env-dir)
+                                       jg-python-conda--get-path-prefix)
+  "Get a platform-specific path string to utilize the conda env in ENV-DIR.
+It's platform specific in that it uses the platform's native path separator."
+  (let* ((conda-anaconda-home-tmp conda-anaconda-home)
+         (conda-executable-path
+          (concat (file-name-as-directory conda-anaconda-home-tmp)
+                  (file-name-as-directory conda-env-executables-dir)
+                  "conda"))
+         (base-command jg-conda-activate-cmd)
+         (command (format base-command env-dir))
+         (result
+          (with-output-to-string
+            (with-current-buffer standard-output
+              (unless (= 0 (process-file shell-file-name nil '(t nil) nil shell-command-switch command))
+                (error (format "Error: executing command \"%s\" produced error code %d" command return-code)))
+              ))))
+    (s-trim result)))
+
+(define-advice +python/open-repl (:override ()
+                                  +jg-python-env-activate-advice)
+  " Auto-detect python repl and activate environment if necessary "
+  (require 'python-mode)
+  (unless python-shell-interpreter
+    (user-error "`python-shell-interpreter' isn't set"))
+  ;; look for a venv
+  ;; activate environment, start python repl
+  (+jg-python-activate-venv-and-conda)
+
+  (let* ((default-directory (doom-project-root))
+         (cmd (python-shell-calculate-command))
+         (new-buffer (process-buffer
+                      (run-python cmd nil t))))
+    (puthash (cons 'inferior-python-mode default-directory) new-buffer +eval-repl-buffers)
+    (puthash (cons 'python-mode default-directory) new-buffer +eval-repl-buffers)
+    new-buffer
+  )
+)
+
+(define-advice python-shell-calculate-command (:override (&optional filepath)
+                                               +jg-python-shell-calculate-command)
+  "Calculate the string used to execute the inferior Python process.
+Adds in a few extra options like dev mode control,
+a custom pycache location,
+and adding extra pythonpath locations as the pre-args
+"
+;; `python-shell-make-comint' expects to be able to
+;; `split-string-and-unquote' the result of this function.
+  (s-join " "
+          (--remove (not it)
+                    (list
+                     (combine-and-quote-strings (list python-shell-interpreter))
+                     python-shell-interpreter-args
+                     (if jg-python-dev-mode jg-python-dev-cmd)
+                     ;; (format jg-python-pycache-cmd (f-canonical jg-python-pycache-loc))
+                     (or filepath python-shell-interpreter-path-args)
+                     ;; "--dir" (doom-project-root)
+                     )
+                    )
+          )
   )

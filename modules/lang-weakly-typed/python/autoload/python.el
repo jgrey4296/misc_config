@@ -53,18 +53,18 @@ falling back on searching your PATH."
          (string-join (cdr +python-ipython-command) " ")))
     (+python/open-repl)))
 
-;;;###autoload
-(defun +python/open-jupyter-repl ()
-  "Open a Jupyter console."
-  (interactive)
-  (require 'python)
-  (add-to-list 'python-shell-completion-native-disabled-interpreters "jupyter")
-  (let ((python-shell-interpreter
-         (or (+python-executable-find (car +python-jupyter-command))
-             "jupyter"))
-        (python-shell-interpreter-args
-         (string-join (cdr +python-jupyter-command) " ")))
-    (+python/open-repl)))
+;; ;;;###autoload
+;; (defun +python/open-jupyter-repl ()
+;;   "Open a Jupyter console."
+;;   (interactive)
+;;   (require 'python)
+;;   (add-to-list 'python-shell-completion-native-disabled-interpreters "jupyter")
+;;   (let ((python-shell-interpreter
+;;          (or (+python-executable-find (car +python-jupyter-command))
+;;              "jupyter"))
+;;         (python-shell-interpreter-args
+;;          (string-join (cdr +python-jupyter-command) " ")))
+;;     (+python/open-repl)))
 
 ;;;###autoload
 (defun +python/optimize-imports ()

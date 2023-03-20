@@ -10,14 +10,12 @@
   (let ((fold-block-pos (point))
         (defun-pos (point)))
     (save-excursion
-      (setq defun-pos (python-nav-forward-defun)))
+      (setq defun-pos (py-down-def-or-class)))
     (save-excursion
       (setq fold-block-pos (re-search-forward (autohide-minor-mode-fold-block-gen :re t) defun-pos t)))
     (goto-char (apply 'min (mapcar #'(lambda (x) (if x x (point-max))) (list fold-block-pos defun-pos))))
     )
 )
-
-
 
 ;; Customisations of Conda navigation
 ;; TODO add code for using window-ring
@@ -26,13 +24,13 @@
   (interactive)
   (anaconda-mode-call "infer"
                       #'(lambda (result)
-                        (message "%s" result)
-                        (anaconda-mode-show-xrefs result 'window "None Found")))
+                          (message "%s" result)
+                          (anaconda-mode-show-xrefs result 'window "None Found")))
   )
 
 (defun +jg-conda-show-doc ()
   (interactive)
-  (anaconda-mode-call "show_doc" '+jg-conda-show-doc-callback)
+  (anaconda-mode-call "show_doc" #'+jg-conda-show-doc-callback)
   )
 
 (defun +jg-conda-show-doc-callback (result)
@@ -61,5 +59,5 @@
   (interactive)
   (anaconda-mode-call
    "eldoc"
-   'anaconda-mode-eldoc-callback)
+   #'anaconda-mode-eldoc-callback)
   )

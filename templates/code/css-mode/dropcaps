@@ -1,0 +1,18 @@
+/* from https://css-tricks.com/snippets/css/drop-caps/ */
+/* Larger Letter at start of chapter, using a span: */
+/* css3: */
+.css3-dropcap:first-letter {
+  float: left;
+  font-size: 800%;
+}
+
+/* https://www.scottohara.me/blog/2017/04/14/inclusively-hidden.html */
+.sr-only:not(:focus):not(:active) {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}

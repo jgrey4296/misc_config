@@ -4,4 +4,4 @@
 # key:   page-break
 # group :
 # --
-page-break-after: always;
+.new-page { page-break-before:always; }

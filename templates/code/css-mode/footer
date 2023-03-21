@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name  : footer
+# uuid  : footer
+# key   : footer
+# group :
+# --
+.sticky-footer {
+    position:fixed;
+    left:0px;
+    bottom:0px;
+    /* or top:0px for header */
+    height:32px;
+    width:100%;
+}

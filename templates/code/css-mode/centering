@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name  : centering
+# uuid  : centering
+# key   : centering
+# group :
+# --
+/* centering things: */
+.h-wrapper { width: 1024px; margin: auto; }
+.v-wrapper { min-height: 10px; display: table-cell; vertical-align: middle; }

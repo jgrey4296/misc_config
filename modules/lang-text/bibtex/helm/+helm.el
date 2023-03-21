@@ -1,6 +1,5 @@
 ;;; domain-specific/bibtex/+helm.el -*- lexical-binding: t; -*-
 
-
 (defun +jg-bibtex-helm-bibtex (&optional arg local-bib)
   " Custom implementation of helm-bibtex"
   (interactive "P")

@@ -50,7 +50,6 @@
       (progn (message "Killing Ananaconda")
              (anaconda-mode-stop))))
 
-
 (defun +jg-python-auto-kill-conda-hook ()
   (add-hook 'kill-buffer-hook
             #'+jg-python-auto-kill-anaconda-processes-h
@@ -85,11 +84,5 @@ and closes classes and functions, re-opening only the first class "
               (bound-and-true-p lsp--buffer-deferred)
               (not (executable-find python-shell-interpreter t)))
     (anaconda-mode +1)))
-
-;; (defun +jg-python-def-bounds ()
-;;   (interactive)
-;;   (cons (py--end-of-def-or-class-position)
-;;         (py--beginning-of-def-or-class-position))
-;;   )
 
 ;;; +hooks.el ends here

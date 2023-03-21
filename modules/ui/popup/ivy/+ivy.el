@@ -25,7 +25,7 @@
   )
 
 
-(ivy-set-actions 'ivy-switch-buffer
+(ivy-add-actions 'ivy-switch-buffer
                  '(("p" +jg-popup-ivy-open "Popup"))
                  )
 

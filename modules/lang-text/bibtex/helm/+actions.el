@@ -1,7 +1,5 @@
 ;;; +actions.el -*- lexical-binding: t; -*-
 
-
-;;-- actions
 (defun +jg-bibtex-show-entry (keys)
   "Show the first entry in KEYS in the relevant BibTeX file.
 modified from the original bibtex-completion-show-entry
@@ -96,4 +94,3 @@ modified from the original bibtex-completion-show-entry
           )
         )
   )
-;;-- end actions

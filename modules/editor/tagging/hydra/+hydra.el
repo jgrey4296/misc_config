@@ -1,5 +1,7 @@
 ;;; +hydra.el -*- lexical-binding: t; -*-
 
+(require 'hydra)
+
 (defhydra tag-clean ()
   "
                | Commands   ^^|

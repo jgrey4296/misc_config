@@ -27,7 +27,6 @@
 (package! poetry)
 
 ;; Testing frameworks
-(package! nose)
 (package! python-pytest)
 
 ;; Import managements

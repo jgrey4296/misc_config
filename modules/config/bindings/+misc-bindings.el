@@ -96,7 +96,14 @@
       (:prefix ("a" . "Actions"))
       (:prefix ("G" . "Peek"))
       )
-
+(map! :after lsp-mode
+      :leader
+      :prefix "c"
+      :desc "LSP Code actions"                      "a"   #'lsp-execute-code-action
+      :desc "LSP Organize imports"                  "o"   #'lsp-organize-imports
+      :desc "LSP Rename"                            "R"   #'lsp-rename
+      :desc "LSP"                                   "l"   lsp-command-map
+      )
 ;;-- end lsp
 
 ;;-- messages

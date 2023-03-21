@@ -24,7 +24,6 @@ Death by Institution and the Harms of Abstraction.
 *** [[~/.doom.d/setup_files/pomodoro_log.org][Pomodoro Log]]
 *** [[file:/volumes/documents/twitterthreads][Twitter Threads]]
 
-*** TODO [[file:/Volumes/documents/github/corpora][Darius Kuzemi's Corpora]]
 *** [[file:/Volumes/documents/github/jgrey4296.github.io/orgfiles/primary/research_questions.org][Research Questions]]
 
 ** Other

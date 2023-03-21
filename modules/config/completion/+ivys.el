@@ -15,13 +15,13 @@
 (ivy-add-actions 'counsel-find-file
                  '(("f" (lambda (x) (find-file-literally x)) "Fundamental")))
 
-(ivy-set-actions 'ivy-switch-buffer
+(ivy-add-actions 'ivy-switch-buffer
                  '(
                    ("k" +jg-completion-ivy-kill-buffer "Kill")
                    )
                  )
 
-(ivy-set-actions '+jg-completion-ivy-workspace
+(ivy-add-actions '+jg-completion-ivy-workspace
                  '(("r" (lambda (x) (+workspace-rename x (read-string (format "Rename %s -> : " x)))) "Rename")
 
                    ))

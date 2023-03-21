@@ -26,6 +26,8 @@
   (load! "+bindings")
   )
 
-(use-package! paren-state :defer t)
+(use-package! paren-state
+  :commands paren-state
+  )
 
 ;;; config.el ends here

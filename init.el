@@ -31,8 +31,8 @@
  :lang-text (org +gnuplot +pomodoro +journal +noter) +org
  :lang-text bibtex latex markdown plantuml rst
 
- :lang-weakly-typed lisp-langs (python +conda +pyright +poetry +cython +lsp)
- ;; :lang-weakly-typed erlang-vms godot lua python ruby
+ :lang-weakly-typed lisp-langs (python +conda +pyright +poetry +cython +lsp) lua
+ ;; :lang-weakly-typed erlang-vms godot ruby
 
  :lang emacs-lisp ledger
  ;; :lang agda csharp elixir erlang ess

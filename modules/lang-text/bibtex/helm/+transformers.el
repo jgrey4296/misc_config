@@ -1,6 +1,5 @@
 ;;; +transformers.el -*- lexical-binding: t; -*-
 
-
 (defun +jg-bibtex-helm-candidates-formatter (candidates _)
   "Format CANDIDATES for display in helm."
   (cl-loop
@@ -10,7 +9,6 @@
    for entry-key = (bibtex-completion-get-value "=key=" entry)
    collect (cons (+jg-bibtex-completion-format-entry entry width) entry-key))
 )
-
 (defun +jg-bibtex-completion-format-entry (entry width)
   "Formats a BibTeX ENTRY for display in results list.
 WIDTH is the width of the results list.  The display format is
@@ -51,7 +49,6 @@ governed by the variable `bibtex-completion-display-formats'."
   (cons (s-replace-regexp ",? +" " " (car x))
         (cdr x))
   )
-
 (defun +jg-bibtex-sort-by-year (c1 c2)
   (let* ((c1year (alist-get "year" c1 nil nil 'string-equal))
          (c2year (alist-get "year" c2 nil nil 'string-equal)))

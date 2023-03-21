@@ -4,6 +4,7 @@
 (load! "+hooks")
 (load! "tags/+tags")
 (load! "+advice")
+(load! "helm/+all")
 (load! "dired/+dired")
 (load! "dialect/+entries")
 (load! "dialect/+fields")

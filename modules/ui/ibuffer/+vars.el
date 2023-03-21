@@ -20,6 +20,8 @@
                      "code-conversion-work"
                      "helm candidates"
                      "Pp Eval"
+                     "RNC Input"
+                     "counsel"
                      ))
           (* any)
           )

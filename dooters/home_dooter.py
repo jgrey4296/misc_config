@@ -64,5 +64,7 @@ if __name__ == "dooter":
         adb_del        = android.ADBDelete(locs=doot.locs)
         ##-- end android
 
+        # breakpoint()
+        # pass
     except ImportError as err:
         print("No bkmkorg to import: ", str(err))

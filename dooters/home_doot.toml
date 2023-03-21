@@ -49,6 +49,7 @@ pdfs               = "/Volumes/documents/pdflibrary"
 movies             = "/Users/johngrey/Movies"
 images             = "/Volumes/documents/DCIM"
 github             = "~/github"
+git_libs           = "~/github/_libs"
 
 [[files]] # library files
 bookmarks_total = "~/github/jgrey4296.github.io/resources/bookmarks/total.bookmarks"

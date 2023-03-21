@@ -14,20 +14,12 @@
 (after! hydra
   (load! "hydra/+hydra")
   )
-(after! helm
-  (load! "helm/+all")
-  )
 
 (use-package! bibtex
   :defer t
   :config
   (load! "util/+all")
   (load! "clean/+all")
-  (defun +jg-bibtex-customisation-hook ()
-    (add-hook 'jg-text-whitespace-clean-hook '+jg-bibtex-cleanup-ensure-newline-before-def 5 t)
-    (add-hook 'jg-text-whitespace-clean-hook 'delete-trailing-whitespace 10 t)
-    (add-hook 'jg-text-whitespace-clean-hook '+jg-text-cleanup-whitespace 20 t)
-    )
 
   (pushnew! bibtex-dialect-list 'jg)
   (let ((sorted-entries
@@ -39,12 +31,19 @@
   (add-hook! 'bibtex-mode-hook
              #'yas-minor-mode
              #'outline-minor-mode
-             #'vimish-fold-mode
+             ;; #'vimish-fold-mode
              #'+jg-bibtex-font-lock-mod-hook
-             #'+jg-bibtex-customisation-hook
-             #'(lambda () (bibtex-set-dialect 'jg))
              )
 
+  (add-hook! 'bibtex-mode-hook :append
+    (bibtex-set-dialect 'jg)
+    (require 'helm)
+    (setq-local jg-text-whitespace-clean-hook
+                '(+jg-bibtex-cleanup-ensure-newline-before-def
+                  delete-trailing-whitespace
+                  +jg-text-cleanup-whitespace)
+               )
+    )
 
   )
 

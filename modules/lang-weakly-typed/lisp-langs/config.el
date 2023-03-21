@@ -15,16 +15,14 @@
 (use-package! ffap)
 (use-package! find-func)
 
-(use-package-hook! emacs-list-mode :post-config
-  (defun +jg-lisp-config-hook ()
-    (add-hook 'jg-text-whitespace-clean-hook 'delete-trailing-whitespace 10 t)
-    (add-hook 'jg-text-whitespace-clean-hook '+jg-lisp-cleanup-ensure-newline 10 t)
-    (add-hook 'jg-text-whitespace-clean-hook '+jg-text-cleanup-whitespace 20 t)
-    )
-
+(use-package-hook! emacs-lisp-mode :post-config
   (add-hook! 'emacs-lisp-mode-hook :depth 100
-             #'+jg-lisp-config-hook
-             )
+    (setq-local jg-text-whitespace-clean-hook
+                '(delete-trailing-whitespace
+                  +jg-lisp-cleanup-ensure-newline
+                  +jg-text-cleanup-whitespace)
+                )
+    )
   )
 
 (use-package! elisp-mode

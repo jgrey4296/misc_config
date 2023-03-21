@@ -169,12 +169,6 @@ descriptions"
 				    (org-element-property :path link))))
 	     (or rules org-export-default-inline-image-rule))))
 
-(defun +jg-org-custom-hook ()
-  (add-hook 'jg-text-whitespace-clean-hook 'delete-trailing-whitespace 10 t)
-  (add-hook 'jg-text-whitespace-clean-hook '+jg-org-clean-heading-spaces 20 t)
-  (add-hook 'jg-text-whitespace-clean-hook '+jg-text-cleanup-whitespace 40 t)
-  )
-
 (defun +jg-org-clean-heading-spaces ()
   (org-map-entries #'(lambda ()
                        (forward-line -1)

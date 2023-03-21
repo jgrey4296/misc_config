@@ -69,23 +69,23 @@
              )
 
   (add-hook! 'python-mode-hook :append :local
-    (add-hook! 'jg-text-whitespace-clean-hook :append :local
-               #'+jg-python-cleanup-ensure-newline-before-def
-               #'delete-trailing-whitespace
-               #'+jg-text-cleanup-whitespace)
+    (setq-local jg-text-whitespace-clean-hook
+               '(+jg-python-cleanup-ensure-newline-before-def
+                 delete-trailing-whitespace
+                 +jg-text-cleanup-whitespace)
+               )
     )
 
   ;; Always add auto-hide as the last thing
   (add-hook! 'python-mode-hook :depth 100
              #'anaconda-mode
              #'+jg-python-outline-regexp-override-hook
-             #'+jg-python-customisation-hook
              #'+jg-python-auto-hide
              )
   (setq-hook! 'python-mode-hook
     tab-width                    py-indent-offset
-    end-of-defun-function       'py-forward-def
-    beginning-of-defun-function 'py-down-def
+    end-of-defun-function       #'python-nav-end-of-defun
+    beginning-of-defun-function #'python-nav-beginning-of-defun
     indent-region-function      'py-indent-region
     indent-line-function        'py-indent-line
     )

@@ -39,10 +39,14 @@
 
 (use-package-hook! org :post-config
   (message "post configuring org")
-  ;; (setq org-mode-map      (make-sparse-keymap "jg-org")
-  ;;       evil-org-mode-map (make-sparse-keymap "jg-evil-org"))
   (provide 'jg-org-stage)
-  (add-hook! 'org-mode-hook #'+jg-org-custom-hook)
+  (add-hook! org-mode-hook :append
+    (setq-local  jg-text-whitespace-clean-hook
+                 '(delete-trailing-whitespace
+                   +jg-org-clean-heading-spaces
+                   +jg-text-cleanup-whitespace)
+                 )
+    )
   )
 
 

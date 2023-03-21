@@ -29,15 +29,15 @@
 (use-package! conf-mode
   :defer t
   :config
-  (defun +jg-toml-customisation-hook ()
-    (add-hook 'jg-text-whitespace-clean-hook '+jg-toml-cleanup-ensure-newline-before-table 5 t)
-    (add-hook 'jg-text-whitespace-clean-hook 'delete-trailing-whitespace 10 t)
-    (add-hook 'jg-text-whitespace-clean-hook '+jg-text-cleanup-whitespace 20 t)
-    )
 
   (add-hook! 'conf-toml-mode-hook :depth 100
              #'+jg-toml-customisation-hook
              #'outline-minor-mode
+             (setq-local jg-text-whitespace-clean-hook
+                         '(+jg-toml-cleanup-ensure-newline-before-table
+                           delete-trailing-whitespace
+                           +jg-text-cleanup-whitespace)
+                         )
              )
   )
 ;;

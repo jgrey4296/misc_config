@@ -36,5 +36,5 @@ jg_set_prompt
 if [[ "$TERM_PROGRAM" != "tmux" ]]; then
     tmux new-session -d "bash"
     tmux new-window -d -n "emacs" "emacs"
-    tmux attach
+    tmux -2 attach
 fi

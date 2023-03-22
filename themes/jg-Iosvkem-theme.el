@@ -170,23 +170,23 @@ determine the exact padding."
 
 ;;-- faces
   (
-   ((font-lock-comment-face &override) :background (if jg-iosvkem-comment-bg (doom-lighten bg 0.05)) :slant 'italic)
-   ((font-lock-doc-face &override) :slant 'normal)
+   ((font-lock-comment-face &override)       :background (if jg-iosvkem-comment-bg (doom-lighten bg 0.05)) :slant 'italic)
+   ((font-lock-doc-face &override)           :slant 'normal)
    ((font-lock-function-name-face &override) :weight 'bold)
-   ((font-lock-operator-face &override) :foreground blue)
+   ((font-lock-operator-face &override)      :foreground blue)
 
-   ((line-number &override) :foreground base4)
-   ((line-number-current-line &override) :foreground iocyan :background bg)
-   ((line-number-major-tick &override) :background base1)
+   ((line-number &override)                  :foreground base4)
+   ((line-number-current-line &override)     :foreground iocyan :background bg)
+   ((line-number-major-tick &override)       :background base1)
 
-   ((tooltip &override) :background bg)
-   (lazy-highlight :background iocyan :foreground bg :weight 'bold)
+   ((tooltip &override)                      :background bg)
+   (lazy-highlight                           :background iocyan :foreground bg :weight 'bold)
 
    ;; hl-line
-   ((hl-line &override) :background base2 :extend t)
+   ((hl-line &override)        :background base2 :extend t)
    ((jg-normal-line &override) :background base2 :extend t)
    ((jg-insert-line &override) :background aerugo1 :foreground aerugo21 :extend t)
-   (helm-selection :distant-foreground bg :background aerugo23 :extend t )
+   (helm-selection             :distant-foreground bg :background aerugo23 :extend t )
 
    ;; highlight-numbers
    (highlight-numbers-number :foreground numbers)
@@ -195,7 +195,7 @@ determine the exact padding."
 
    ;;;; highlight-escape-sequences
    ((hes-escape-backslash-face &override) :inherit 'normal :foreground red)
-   ((hes-escape-sequence-face &override) :inherit 'normal :foreground red)
+   ((hes-escape-sequence-face &override)  :inherit 'normal :foreground red)
 
    ;; paren
    ((paren-face-match &override) :foreground iopink :background bg :weight 'ultra-bold)
@@ -234,15 +234,15 @@ determine the exact padding."
    ((markdown-list-face &override)   :foreground magenta)
    ((markdown-url-face &override)    :foreground base5)
    (markdown-header-delimiter-face   :inherit 'bold :foreground red)
-   (markdown-header-face :inherit 'bold :foreground fg)
-   (markdown-markup-face :foreground red)
-   (markdown-header-face :foreground cyan)
+   (markdown-header-face             :inherit 'bold :foreground fg)
+   (markdown-markup-face             :foreground red)
+   (markdown-header-face             :foreground cyan)
 
    ;; org <built-in>
-   (org-hide :foreground hidden)
-   (org-link :foreground urlblue :underline t)
-   ((org-block &override) :background bg-alt)
-   ((org-quote &override) :background bg-alt)
+   (org-hide                         :foreground hidden)
+   (org-link                         :foreground urlblue :underline t)
+   ((org-block &override)            :background bg-alt)
+   ((org-quote &override)            :background bg-alt)
    ((org-block-begin-line &override) :foreground comments :background bg)
 
    ;; solaire-mode and mode line
@@ -254,22 +254,25 @@ determine the exact padding."
     :inherit 'mode-line-inactive
     :background modeline-bg-inactive-alt
     :box (if -modeline-pad `(:line-width ,-modeline-pad :color ,modeline-bg-inactive-alt)))
-   (mode-line :background modeline-bg :foreground modeline-fg :box (if -modeline-pad `(:line-width ,-modeline-pad :color ,modeline-bg)))
+   (mode-line          :background modeline-bg :foreground modeline-fg :box (if -modeline-pad `(:line-width ,-modeline-pad :color ,modeline-bg)))
    (mode-line-emphasis :foreground (if -modeline-bright base8 highlight))
    (mode-line-inactive :background modeline-bg-inactive :foreground modeline-fg-alt :box (if -modeline-pad `(:line-width ,-modeline-pad :color ,modeline-bg-inactive)))
 
    ((diredfl-flag-mark-line &override) :background aerugo2)
 
    ;; Spelling and grammar
-   (writegood-weasels-face  :foreground aerugo7 )
+   (writegood-weasels-face       :foreground aerugo7 )
    (writegood-passive-voice-face :foreground aerugo8 )
-   (writegood-duplicates-face :foreground aerugo9 )
-   (flyspell-incorrect :foreground aerugo6 :background nil)
-   (flyspell-duplicate :foreground aerugo9 )
+   (writegood-duplicates-face    :foreground aerugo9 )
+   (flyspell-incorrect           :foreground aerugo6 :background nil)
+   (flyspell-duplicate           :foreground aerugo9 )
 
    ;; hexl
    ((hexl-address-region &override) :foreground base3)
-   ((hexl-ascii-region &override) :foreground aerugo11)
+   ((hexl-ascii-region &override)   :foreground aerugo11)
+
+   ;; Workspace
+   ((+workspace-tab-selected-face &override) :background (doom-darken magenta 0.4))
 
    ;; Base theme variable overrides-
    ;;()

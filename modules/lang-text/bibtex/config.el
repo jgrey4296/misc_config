@@ -47,6 +47,11 @@
     )
 
   )
+(after! bibtex
+  (setq bibtex-dialect 'biblatex
+        bibtex-align-at-equal-sign t
+        bibtex-text-indentation 20)
+  (define-key bibtex-mode-map (kbd "C-c \\") #'bibtex-fill-entry))
 
 (use-package! helm-bibtex
   :commands (bibtex-completion-init)

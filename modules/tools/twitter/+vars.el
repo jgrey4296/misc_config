@@ -20,10 +20,9 @@
               )
 
 ;;-- browse providers
-(after! jg-browse-providers
-  (pushnew! jg-browse-providers-alist
-            '("Twitter"            "https://twitter.com/%s")
-
+(after! jg-ui-reapply-hook-ready!
+  (+jg-browse-add-lookup-spec 'twitter
+            '(("Twitter"            "https://twitter.com/%s"))
             )
   )
 

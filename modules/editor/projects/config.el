@@ -23,15 +23,16 @@
 
 (load! "+vars")
 (load! "+funcs")
-(after! evil
+(after! (evil jg-bindings-total)
   (load! "+bindings")
   )
 (after! (ivy counsel)
   (load! "+ivys")
   )
 
-
 (use-package! project-walk
   :commands (project-walk-minor-mode project-walk-next)
 )
+
+(add-hook! jg-ui-reapply-hook #'jg-project-reapply-specs)
 ;;; config.el ends here

@@ -24,7 +24,7 @@
   :keymap +popup-mode-map
   (cond (+popup-mode
          (add-hook 'doom-escape-hook #'+popup-close-on-escape-h 'append)
-         (+jg-ui-popup-apply-rules t)
+         (+jg-popup-reapply-specs)
          (setq window--sides-inhibit-check t)
          (dolist (prop +popup-window-parameters)
            (push (cons prop 'writable) window-persistent-parameters)))

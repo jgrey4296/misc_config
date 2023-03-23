@@ -59,43 +59,40 @@
 
 ;;-- end gradle font lock
 
-;;-- file templates
-(after! jg-completion-templates
+;;-- file spec
+(after! jg-ui-reapply-hook-ready
   ;; groovy-mode
-  (+jg-completion-add-file-templates
-   'java-and-friends
-   '(
-     ;; java
-     ("/main\\.java$"    :trigger "__main"         :mode java-mode)
-     ("/src/.+\\.java$" :mode java-mode)
+  (+jg-snippets-add-file-spec 'java-and-friends
+                              '(
+                                ;; java
+                                ("/main\\.java$"    :trigger "__main"         :mode java-mode)
+                                ("/src/.+\\.java$" :mode java-mode)
 
-     ;; Gradle
-     ("build\\.gradle$"           :trigger "build.gradle"    :mode groovy-mode)
-     ("settings\\.gradle$"        :trigger "settings.gradle" :mode groovy-mode)
+                                ;; Gradle
+                                ("build\\.gradle$"           :trigger "build.gradle"    :mode groovy-mode)
+                                ("settings\\.gradle$"        :trigger "settings.gradle" :mode groovy-mode)
 
-     ;; Kotlin
-     ("build\\.gradle\\.kts$"     :trigger "build.gradle.kts" :mode kotlin-mode)
-     )
-   )
+                                ;; Kotlin
+                                ("build\\.gradle\\.kts$"     :trigger "build.gradle.kts" :mode kotlin-mode)
+                                )
+                              )
   )
-;;-- end file templates
+;;-- end file spec
 
 ;;-- browse providers
-(after! jg-browse-providers
-  (pushnew! jg-browse-providers-alist
-            '("Kotlin" "https://kotlinlang.org/docs/home.html?q=%s&s=full")
-            '("Android" "https://developer.android.com/s/results?q=%s")
-            )
+(after! jg-ui-reapply-hook-ready
+  (+jg-browse-add-lookup-spec 'java
+                              '(
+                                ("Kotlin" "https://kotlinlang.org/docs/home.html?q=%s&s=full")
+                                ("Android" "https://developer.android.com/s/results?q=%s")
+                                )
+                              )
   )
 
-;;-- end browse providers
+;;-- end browse spec
 
-;;-- projectile
-(after! projectile
-  (pushnew! projectile-project-root-files "build.gradle")
-  (pushnew! projectile-project-root-files "build.gradle.kts")
-
-  (defun +jg-kotlin-related-files-fn (path)
+;;-- project spec
+(defun +jg-kotlin-related-files-fn (path)
     " Given a relative path to a file, provide projectile with various :kinds of related file "
     (let ((impl-file  (f-join (f-parent (f-parent path)) (s-replace "test_" "" (f-filename path))))
           (test-file  (f-join (f-parent path) "__tests" (concat "test_" (f-filename path))))
@@ -114,12 +111,10 @@
               )
       )
     )
+(after! jg-ui-reapply-hook-ready
+  (pushnew! projectile-project-root-files "build.gradle")
+  (pushnew! projectile-project-root-files "build.gradle.kts")
 
-  (projectile-register-project-type 'jg-kotlin-project '("build.gradle" "build.gradle.kts")
-                                    :project-file "build.grade"
-                                    ;; :related-files-fn #'+jg-kotlin-related-files-fn
-                                    )
+  (+jg-projects-add-spec 'jg-kotlin-project '(("build.gradle" "build.gradle.kts") :project-file "build.grade"))
   )
-
-
-;;-- end projectile
+;;-- end project spec

@@ -2,7 +2,7 @@
 
 (load! "+vars")
 (load! "+funcs")
-(load! "+filters")
+(load! "+specs")
 (load! "ivy/+ivy")
 (after! (evil jg-bindings-total ibuffer)
   (load! "+bindings")
@@ -51,4 +51,4 @@
     (find-file _file _wildcards))
   )
 
-(add-hook 'jg-ui-reapply-hook #'+jg-ibuffer-reapply-filters)
+(add-hook! 'jg-ui-reapply-hook #'+jg-ibuffer-reapply-specs)

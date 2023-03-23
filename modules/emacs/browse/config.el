@@ -27,10 +27,6 @@
   (load! "+bindings")
   )
 
-(add-hook 'jg-ui-reapply-hook '+jg-browse-reapply-providers)
-
-;; (use-package!
-
-;;     )
+(add-hook! 'jg-ui-reapply-hook #'+jg-browse-reapply-lookup-specs #'+jg-browse-reapply-handler-specs)
 
 ;;; config.el ends here

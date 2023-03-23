@@ -3,7 +3,7 @@
 (message "Setting up popup rules: %s" (current-time-string))
 ;; Setup popup vars:
 
-(+jg-ui-popup-add-rules 'my-rules
+(+jg-popup-add-spec 'my-rules
   '(("^\\*shell"             :side bottom :ttl nil :height 0.3 :quit t :select t :priority 100)
     ("\\*.*?scratch.*?\\*"   :side right  :ttl nil :width  50  :quit t :select t)
     ("^\\*Messages"          :side bottom :ttl nil :height 0.4 :quit t :select nil :priority 100)
@@ -14,7 +14,7 @@
     ("^\\*Async Shell Command\\*$" :actions (display-buffer-no-window))
     )
   )
-(+jg-ui-popup-add-rules 'general
+(+jg-popup-add-spec 'general
  '(("^\\*Warnings" :vslot 99 :size 0.25)
    ("^\\*Backtrace" :vslot 99 :size 0.4 :quit nil)
    ("^\\*CPU-Profiler-Report "    :side bottom :vslot 100 :slot 1 :height 0.4 :width 0.5 :quit nil)
@@ -23,7 +23,7 @@
    ("^\\*\\(?:Proced\\|timer-list\\|Abbrevs\\|Output\\|Occur\\|unsent mail\\)\\*" :ignore t)
    )
  )
-(+jg-ui-popup-add-rules 'doom
+(+jg-popup-add-spec 'doom
     ;; Doom
    '(("^\\*info\\*$"                                          :slot 2 :vslot 2 :size 0.45 :select t :priority -100)
      ;; `Info-mode'
@@ -50,5 +50,3 @@
 ;;(set-popup-rule! PREDICATE &key
 ;; IGNORE ACTIONS SIDE SIZE WIDTH HEIGHT SLOT
 ;; VSLOT TTL QUIT SELECT MODELINE AUTOSAVE PARAMETERS)
-
-(provide 'jg-popup-init)

@@ -34,36 +34,36 @@
 
 ;;-- end urls
 
-;;-- file templates
-(after! jg-completion-templates
+;;-- file spec
+(after! jg-ui-reapply-hook-ready
   ;; rust-mode
-  (+jg-completion-add-file-templates
-   'rust-mode
-   '(
-     ("config\\.toml$"   :trigger "__config.toml" :mode rust-mode)
-     ("Cargo\\.toml$"    :trigger "__Cargo.toml"  :mode rust-mode)
-     ("Makefile\\.toml$" :trigger "__"            :mode cargo-makefile-mode)
-     ("mod\\.rs$"        :trigger "__mod.rs"      :mode rust-mode)
-     ("main\\.rs$"       :trigger "__main.rs"     :mode rust-mode)
-     ("lib\\.rs$"        :trigger "__lib.rs"      :mode rust-mode)
-     ("tests\\.rs"       :trigger "__tests.rs"    :mode rust-mode)
-     ("build\\.rs"       :trigger "__build.rs"    :mode rust-mode)
-     (rustic-mode        :trigger "__"            )
-     (rust-mode          :trigger "__"            )
-     )
-   )
+  (+jg-snippets-add-file-spec 'rust-mode
+                              '(
+                                ("config\\.toml$"   :trigger "__config.toml" :mode rust-mode)
+                                ("Cargo\\.toml$"    :trigger "__Cargo.toml"  :mode rust-mode)
+                                ("Makefile\\.toml$" :trigger "__"            :mode cargo-makefile-mode)
+                                ("mod\\.rs$"        :trigger "__mod.rs"      :mode rust-mode)
+                                ("main\\.rs$"       :trigger "__main.rs"     :mode rust-mode)
+                                ("lib\\.rs$"        :trigger "__lib.rs"      :mode rust-mode)
+                                ("tests\\.rs"       :trigger "__tests.rs"    :mode rust-mode)
+                                ("build\\.rs"       :trigger "__build.rs"    :mode rust-mode)
+                                (rustic-mode        :trigger "__"            )
+                                (rust-mode          :trigger "__"            )
+                                )
+                              )
   )
 ;;-- end file templates
 
-;;-- browse providers
-(after! jg-browse-providers
-  (pushnew! jg-browse-providers-alist
-            '("Rust Stdlib"     "https://doc.rust-lang.org/std/?search=%s")
-            '("Rust Crates.io"  "https://crates.io/search?q=%s")
-            '("Rust docs.rs"    "https://docs.rs/releases/search?query=%s")
-            '("Rust lib.rs"     "https://lib.rs/search?q=%s")
-            '("Rust Forums"     "https://users.rust-lang.org/search?q=%s")
-            )
+;;-- browse spec
+(after! jg-ui-reapply-hook-ready
+  (+jg-browse-add-lookup-spec 'rust
+                              '(("Rust Stdlib"     "https://doc.rust-lang.org/std/?search=%s")
+                                ("Rust Crates.io"  "https://crates.io/search?q=%s")
+                                ("Rust docs.rs"    "https://docs.rs/releases/search?query=%s")
+                                ("Rust lib.rs"     "https://lib.rs/search?q=%s")
+                                ("Rust Forums"     "https://users.rust-lang.org/search?q=%s")
+                                )
+                              )
   )
 
 ;;-- end browse providers
@@ -97,16 +97,7 @@
               )
       )
     )
-
-  (projectile-register-project-type 'jg-rust-project '("Cargo.toml")
-                                    :project-file "Cargo.toml"
-                                    :configure   nil
-                                    :test        nil
-                                    :test-dir    nil
-                                    :test-prefix nil
-                                    :related-files-fn #'+jg-rust-related-files-fn
-                                    )
+(after! jg-ui-reapply-hook-ready
+  (+jg-projects-add-spec 'jg-rust-project '(("Cargo.toml") :project-file "Cargo.toml" :configure   nil :test        nil :test-dir    nil :test-prefix nil :related-files-fn #'+jg-rust-related-files-fn))
   )
-
-
 ;;; +vars.el ends here

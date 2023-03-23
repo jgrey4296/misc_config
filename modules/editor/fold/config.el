@@ -26,3 +26,8 @@
 (use-package! origami :defer t)
 
 (use-package! autohide-minor-mode)
+
+(add-hook! 'jg-ui-reapply-hook
+           #'+jg-fold-reapply-specs
+           #'+jg-fold-hideshow-reapply-specs
+           )

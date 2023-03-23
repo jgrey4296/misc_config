@@ -55,45 +55,45 @@ See `+emacs-lisp-non-package-mode' for details.")
 ;;-- end rotate text
 
 ;;-- fold spec
-(after! jg-fold-specs
-  (setq jg-lisp-fold-spec `((emacs-lisp-mode lisp-mode)
-                            :open-all   hs-show-all
-                            :close-all  hs-hide-all
-                            :toggle     hs-toggle-hiding
-                            :open       hs-show-block
-                            :open-rec   nil
-                            :close      hs-hide-block))
-  (push jg-lisp-fold-spec evil-fold-list)
+(after! jg-ui-reapply-hook-ready
+  (+jg-fold-add-spec 'lisp
+                     `((emacs-lisp-mode lisp-mode)
+                       :open-all   hs-show-all
+                       :close-all  hs-hide-all
+                       :toggle     hs-toggle-hiding
+                       :open       hs-show-block
+                       :open-rec   nil
+                       :close      hs-hide-block))
   )
 ;;-- end fold spec
 
-;;-- file templates
-(after! jg-completion-templates
-  ;; Lisp
-  (+jg-completion-add-file-templates
-   'lisp
-   '(("/test/.+\\.el$"   :when +file-templates-in-emacs-dirs-p :trigger "__doom-test"     :mode emacs-lisp-mode)
-     ("/doctor\\.el$"    :when +file-templates-in-emacs-dirs-p :trigger "__doom-doctor"   :mode emacs-lisp-mode)
-     ("config\\.el$"     :when +file-templates-in-emacs-dirs-p :trigger "__doom_config"   :mode emacs-lisp-mode)
-     ("packages\\.el$"   :when +file-templates-in-emacs-dirs-p :trigger "__doom_packages" :mode emacs-lisp-mode)
-     ("minor-mode\\.el$" :trigger "__minor-mode" :mode emacs-lisp-mode)
-     ("mode\\.el$"       :trigger "__mode"       :mode emacs-lisp-mode)
-     ("ob-.+?\\.el$"     :mode emacs-lisp-mode :trigger "__org_babel")
-     ("/.dir-locals.el$" :mode emacs-lisp-mode :trigger "__dir_locals")
-     ("-test\\.el$"      :mode emacs-ert-mode)
-     ("\\.el$"           :when +file-templates-in-emacs-dirs-p :trigger "__doom-module" :mode emacs-lisp-mode)
-     (emacs-lisp-mode    :trigger "__package")
-     )
-   )
-)
-;;-- end file templates
+;;-- file spec
+(after! jg-ui-reapply-hook-ready
+  (+jg-snippets-add-file-spec 'lisp
+                              '(("/test/.+\\.el$"   :when +file-templates-in-emacs-dirs-p :trigger "__doom-test"     :mode emacs-lisp-mode)
+                                ("/doctor\\.el$"    :when +file-templates-in-emacs-dirs-p :trigger "__doom-doctor"   :mode emacs-lisp-mode)
+                                ("config\\.el$"     :when +file-templates-in-emacs-dirs-p :trigger "__doom_config"   :mode emacs-lisp-mode)
+                                ("packages\\.el$"   :when +file-templates-in-emacs-dirs-p :trigger "__doom_packages" :mode emacs-lisp-mode)
+                                ("minor-mode\\.el$" :trigger "__minor-mode" :mode emacs-lisp-mode)
+                                ("mode\\.el$"       :trigger "__mode"       :mode emacs-lisp-mode)
+                                ("ob-.+?\\.el$"     :mode emacs-lisp-mode :trigger "__org_babel")
+                                ("/.dir-locals.el$" :mode emacs-lisp-mode :trigger "__dir_locals")
+                                ("-test\\.el$"      :mode emacs-ert-mode)
+                                ("\\.el$"           :when +file-templates-in-emacs-dirs-p :trigger "__doom-module" :mode emacs-lisp-mode)
+                                (emacs-lisp-mode    :trigger "__package")
+                                )
+                              )
+  )
+;;-- end file spec
 
 ;;-- browse providers
-(after! jg-browse-providers
-  (pushnew! jg-browse-providers-alist
-            '("ELisp Melpa" "https://melpa.org/#/?q=%s")
-            '("Elisp Elpa" "https://elpa.gnu.org/packages/")
-            )
+(after! jg-ui-reapply-hook-ready
+  (+jg-browse-add-lookup-spec 'lisp
+                              '(
+                                ("ELisp Melpa" "https://melpa.org/#/?q=%s")
+                                ("Elisp Elpa" "https://elpa.gnu.org/packages/")
+                                )
+                              )
   )
 
 ;;-- end browse providers

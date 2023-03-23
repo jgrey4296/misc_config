@@ -64,21 +64,33 @@
 ;;-- end projectile
 
 ;;-- file templates
-(after! jg-completion-templates
-  (+jg-completion-add-file-templates
-   'org
-   '(("two_pager\\.org$"     :trigger "__pacheco_vega_two_pager" :mode org-mode)
-     ("lit_review\\.org$"    :trigger "__lit_review"             :mode org-mode)
-     ("inst_pipeline\\.org$" :trigger "__institution_pipeline"   :mode org-mode)
-     ("design_doc\\.org$"    :trigger "__designDocNotes"         :mode org-mode)
-     ("project\\.org$"       :trigger "__project"                :mode org-mode)
-     ("invoice\\.org$"       :trigger "__invoice"                :mode org-mode)
-     ("contact\\.org$"       :trigger "__contact"                :mode org-mode)
-     ("README\\.org$"        :trigger "__doom-readme"            :mode org-mode :when +file-templates-in-emacs-dirs-p )
-
-     (org-journal-mode :ignore t)
-     (org-mode :trigger "__")
-     )
-   )
+(after! jg-ui-reapply-hook-ready
+  (+jg-snippets-add-file-spec 'org
+                              '(
+                                ("two_pager\\.org$"     :trigger "__pacheco_vega_two_pager" :mode org-mode)
+                                ("lit_review\\.org$"    :trigger "__lit_review"             :mode org-mode)
+                                ("inst_pipeline\\.org$" :trigger "__institution_pipeline"   :mode org-mode)
+                                ("design_doc\\.org$"    :trigger "__designDocNotes"         :mode org-mode)
+                                ("project\\.org$"       :trigger "__project"                :mode org-mode)
+                                ("invoice\\.org$"       :trigger "__invoice"                :mode org-mode)
+                                ("contact\\.org$"       :trigger "__contact"                :mode org-mode)
+                                ("README\\.org$"        :trigger "__doom-readme"            :mode org-mode :when +file-templates-in-emacs-dirs-p )
+                                (org-journal-mode :ignore t)
+                                (org-mode :trigger "__")
+                                )
+                              )
   )
 ;;-- end file templates
+
+;;-- fold spec
+(after! jg-ui-reapply-hook-ready
+  (+jg-fold-add-spec 'org
+                     `((org-mode)
+                       :open-all   nil
+                       :close-all  org-cycle-global
+                       :toggle     org-cycle
+                       :open       nil
+                       :open-rec   nil
+                       :close      nil))
+  )
+;;-- end fold spec

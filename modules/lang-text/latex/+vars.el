@@ -75,23 +75,22 @@ If no viewer is found, `latex-preview-pane-mode' is used.")
 
 ;;-- end reftex
 
-;;-- browse providers
-(after! jg-browse-providers
-  (pushnew! jg-browse-providers-alist
-            '("Latex Packages" "https://www.ctan.org/search?phrase=%s")
-            )
+;;-- browse spec
+(after! jg-ui-reapply-hook-ready
+  (+jg-browse-add-lookup-spec 'latex
+                              '(("Latex Packages" "https://www.ctan.org/search?phrase=%s"))
+                              )
   )
 
 ;;-- end browse providers
 
-;;-- popup
-(setq jg-latex-popup-rules
-      '(
-        (" output\\*$" :size 15)
-        ("^\\*TeX \\(?:Help\\|errors\\)"  :size 0.3 :select t :ttl nil)
-        ("^\*latex\*"         :side right  :ttl nil :width  0.5 :quit nil :select t :priority 50)
-        ))
-(after! jg-popup-init
-  (+jg-ui-popup-add-rules 'latex jg-latex-popup-rules)
+;;-- popup spec
+(after! jg-ui-reapply-hook-ready
+  (+jg-popup-add-spec 'latex
+                          '(
+                            (" output\\*$" :size 15)
+                            ("^\\*TeX \\(?:Help\\|errors\\)"  :size 0.3 :select t :ttl nil)
+                            ("^\*latex\*"         :side right  :ttl nil :width  0.5 :quit nil :select t :priority 50)
+                            ))
   )
 ;;-- end popup

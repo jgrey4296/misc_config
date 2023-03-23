@@ -93,34 +93,34 @@
 ;;-- end dgi
 
 ;;-- hash check
-(setq jg-hash-check-command "shasum %s | sort | guniq -w 40 | awk '{print $2}'"
-      jg-hash-check-buffer "*shasum*"
-      )
+(defvar jg-hash-check-command "shasum %s | sort | guniq -w 40 | awk '{print $2}'")
+(defvar jg-hash-check-buffer "*shasum*")
 ;;-- end hash check
 
 ;;-- fold spec
-(after! jg-fold-specs
-  (setq jg-dired-fold-spec `((dired-mode)
-                             :open-all   nil
-                             :close-all  nil
-                             :toggle     ,(cmd! (dired-hide-subdir 1))
-                             :open       nil
-                             :open-rec   nil
-                             :close      nil))
-  (push jg-dired-fold-spec evil-fold-list)
+(after! jg-ui-reapply-hook-ready
+  (+jg-fold-add-spec 'dired
+                     `((dired-mode)
+                       :open-all   nil
+                       :close-all  nil
+                       :toggle     ,(cmd! (dired-hide-subdir 1))
+                       :open       nil
+                       :open-rec   nil
+                       :close      nil
+                       ))
   )
 ;;-- end fold spec
 
-;;-- popup
-(setq jg-dired-popup-rules
-      '(
-        ("^\\*image-dired" :slot 20 :size 0.8 :select t :quit nil :ttl 0)
-        ("^\\*ranger" :ignore t)
-        ))
-(after! jg-popup-init
-  (+jg-ui-popup-add-rules 'dired jg-dired-popup-rules)
+;;-- popup spec
+(after! jg-ui-reapply-hook-ready
+  (+jg-popup-add-spec 'dired
+                          '(
+                            ("^\\*image-dired" :slot 20 :size 0.8 :select t :quit nil :ttl 0)
+                            ("^\\*ranger" :ignore t)
+                            )
+                          )
   )
-;;-- end popup
+;;-- end popup spec
 
 ;;-- ranger
 (setq ranger-cleanup-on-disable t

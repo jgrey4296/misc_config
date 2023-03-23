@@ -1,11 +1,8 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
-;;-- projectile
-(after! projectile
+;;-- project-type
+(after! jg-ui-reapply-hook-ready
   (pushnew! projectile-project-root-files "dooter.py" "doot.toml")
-  (projectile-register-project-type 'jg-toml-project '("dooter.py")
-                                    :project-file "doot.toml"
-                                    :related-files-fn #'+jg-toml-related-files-fn
-                                    )
+  (+jg-projects-add-spec 'jg-toml-project '(("dooter.py") :project-file "doot.toml" :related-files-fn #'+jg-toml-related-files-fn))
   )
-;;-- end projectile
+;;-- end project-type

@@ -8,10 +8,12 @@
       )
 
 ;;-- browse providers
-(after! jg-browse-providers
-  (pushnew! jg-browse-providers-alist
-            '("Erlang/OPT" "https://www.erlang.org/doc/search?q=%s")
-            '("Elixir"     "https://hexdocs.pm/elixir/search.html?q=%s")
+(after! jg-ui-reapply-hook-ready
+  (+jg-browse-add-lookup-spec 'erlang
+            '(
+              ("Erlang/OPT" "https://www.erlang.org/doc/search?q=%s")
+              ("Elixir"     "https://hexdocs.pm/elixir/search.html?q=%s")
+            )
             )
   )
 

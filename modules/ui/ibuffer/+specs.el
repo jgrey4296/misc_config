@@ -19,7 +19,7 @@
 
 ;; Filters:
 
-(+jg-ibuffer-define-filters 'default
+(+jg-ibuffer-add-filter-spec 'default
                             "-clutter" '(not (or (used-mode . flycheck-error-list-mode)
                                                  (used-mode . ivy-mode)
                                                  (used-mode . helm-major-mode)
@@ -33,26 +33,26 @@
                                                  ))
                             )
 
-(+jg-ibuffer-define-filters 'dired
+(+jg-ibuffer-add-filter-spec 'dired
                             "dired" '(used-mode . dired-mode)
                             )
 
-(+jg-ibuffer-define-filters 'window-ring "Window-Ring" '(name . "->"))
-(+jg-ibuffer-define-filters 'stars       "star"        '(name . "^*"))
-(+jg-ibuffer-define-filters 'music       "music"       '(or (name . "*\\(tidal\\|SCLang\\)")
+(+jg-ibuffer-add-filter-spec 'window-ring "Window-Ring" '(name . "->"))
+(+jg-ibuffer-add-filter-spec 'stars       "star"        '(name . "^*"))
+(+jg-ibuffer-add-filter-spec 'music       "music"       '(or (name . "*\\(tidal\\|SCLang\\)")
                                                             (used-mode . sclang-mode)
                                                             (used-mode . tidal-mode)
                                                             (file-extension . "scd\\|hs\\|tidal"))
                             )
 
-(+jg-ibuffer-define-filters 'org         "org"         '(derived-mode . org-mode))
-(+jg-ibuffer-define-filters 'programming
+(+jg-ibuffer-add-filter-spec 'org         "org"         '(derived-mode . org-mode))
+(+jg-ibuffer-add-filter-spec 'programming
                             "python"      '(used-mode . python-mode)
                             "programming" '(or (derived-mode . prog-mode)
                                                (mode . ess-mode)
                                                (mode . compilation-mode))
                             )
-(+jg-ibuffer-define-filters 'text
+(+jg-ibuffer-add-filter-spec 'text
                             "text"        '(and (derived-mode . text-mode) (not (starred-name)))
                             "TeX"         '(or (derived-mode . tex-mode)
                                                (mode . latex-mode)
@@ -67,14 +67,14 @@
                                                (derived-mode . haml-mode)
                                                (mode . sass-mode))
                             )
-(+jg-ibuffer-define-filters 'mail "mail" '(or (mode . message-mode)
+(+jg-ibuffer-add-filter-spec 'mail "mail" '(or (mode . message-mode)
                                               (mode . mail-mode)
                                               (mode . gnus-group-mode)
                                               (mode . gnus-summary-mode)
                                               (mode . gnus-article-mode))
                             )
 
-(+jg-ibuffer-define-filters 'data
+(+jg-ibuffer-add-filter-spec 'data
                             "csv"     '()
                             "graphql" '()
                             "json"    '()
@@ -84,14 +84,14 @@
                             "yaml"    '()
                             )
 
-(+jg-ibuffer-define-filters 'doot
+(+jg-ibuffer-add-filter-spec 'doot
                             "dooter" '()
                             "doot"   '()
                             )
 
 ;; Groups:
 
-(+jg-ibuffer-define-groups 'default
+(+jg-ibuffer-add-group-spec 'default
                            "default"  '(("*Starred*"   (saved . "star"))
                                         ("*Project: configs" (projectile-root . "__configs"))
                                         ("*Project: writing" (projectile-root . "jgrey4296.github.io"))
@@ -105,7 +105,7 @@
                            "dired"    '(("dired"       (saved . "dired")))
 
                            )
-(+jg-ibuffer-define-groups 'projects
+(+jg-ibuffer-add-group-spec 'projects
                            "projects" '(("*Starred*" (starred-name))
                                         ("*Project: configs*" (projectile-root . "__configs"))
                                         ("*Project: modules*" (projectile-root . "modules"))
@@ -113,7 +113,7 @@
                                         ("*Project: Dropbox*" (projectile-root . "Dropbox"))
                                         )
                            )
-(+jg-ibuffer-define-groups 'programming
+(+jg-ibuffer-add-group-spec 'programming
                            "programming" '(
                                            ("programming" (saved . "programming"))
                                            )
@@ -123,5 +123,3 @@
                           '("python" (derived-mode . python-mode))
                           '("lisp"   (derived-mode . emacs-lisp-mode))
                           )
-
-(provide 'jg-ibuffer-filters-init)

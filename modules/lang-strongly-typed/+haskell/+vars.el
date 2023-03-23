@@ -1,14 +1,16 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
-;;-- browse providers
-(after! jg-browse-providers
-  (pushnew! jg-browse-providers-alist
-            '("Haskell Cabal" "https://hackage.haskell.org/packages/search?terms=%s")
-            '("Haskell Typeclassopedia" "https://wiki.haskell.org/index.php?search=%s&title=Special%3ASearch&fulltext=Search")
+;;-- browse spec
+(after! jg-ui-reapply-hook-ready
+   (+jg-browse-add-lookup-spec 'haskell
+                               '(
+                                ("Haskell Cabal" "https://hackage.haskell.org/packages/search?terms=%s")
+                                ("Haskell Typeclassopedia" "https://wiki.haskell.org/index.php?search=%s&title=Special%3ASearch&fulltext=Search")
             )
   )
+   )
 
-;;-- end browse providers
+;;-- end browse spec
 
 ;; Removes haskell-mode trailing braces
 (after! smartparens-haskell

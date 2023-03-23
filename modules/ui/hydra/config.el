@@ -23,16 +23,14 @@
 
 (load! "+vars")
 (load! "+advice")
-(load! "+stack")
-(load! "+formatting")
 (after! (evil jg-bindings-total hydra)
   (load! "+bindings")
   )
 
 (use-package! hydra
   :config
-  (load! "+sub-hydras")
-  (load! "+hydra")
+  (load! "toggle/+sub-hydras")
+  (load! "toggle/+hydra")
   )
 
 ;;; config.el ends here

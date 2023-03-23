@@ -1,6 +1,9 @@
 ;;; editor/window-control/+vars.el -*- lexical-binding: t; -*-
 
 (defvar jg-ui-reapply-hook nil)
+(add-hook! 'jg-ui-reapply-hook :depth -100
+  (defun +jg-ui-reapply-hook-head ()
+    (provide 'jg-ui-reapply-hook-ready)))
 
 (setq-default highlight-parentheses-delay      0.3
               jg-ui-default-face-gen-palette-dir "/Volumes/documents/github/jgrey4296.github.io/resources/palettes/"
@@ -9,8 +12,7 @@
 )
 
 ;;-- smartparens
-(setq-default ;; smartparens
-              sp-autoinsert-pair t
+(setq-default sp-autoinsert-pair t
               sp-autoinsert-quote-if-followed-by-closing-pair nil
               sp-escape-char ""
               )
@@ -18,8 +20,7 @@
 ;;-- end smartparens
 
 ;;-- parens
-(setq-default
-              highlight-parentheses-colors            '("black")
+(setq-default highlight-parentheses-colors            '("black")
               highlight-parentheses-background-colors '("#60aa00" "yellow" "#da8548" "#d02b61")
               global-hl-line-modes '(bibtex-mode prog-mode text-mode conf-mode special-mode org-agenda-mode comint-mode)
               )

@@ -126,13 +126,8 @@
 
 (defvar +popup--old-display-buffer-alist nil)
 
-;;;###autoload
-(defvar jg-popup-display-rules (make-hash-table))
-;;;###autoload
-(defvar jg-popup-misc-rules nil)
-
-;;;###autoload
-(defvar jg-popup-display-flattened nil)
+(defvar jg-popup-display-specs (make-hash-table))
+(defvar jg-popup-misc-specs nil)
 
 ;;;###autoload
 (defvar +popup-defaults
@@ -164,29 +159,8 @@
                    (window-parameters ,@params)))))
 
 ;;;###autodef
-(defun +jg-ui-popup-add-rules (sym rules &optional override)
-  "sym is a symbol to avoid adding duplicate rulesets
-
-  Expects a list of form:
-  '((PATTERN :opt val :opt val) (PATTERN :opt val :opt val))
-  "
-  (cl-assert (hash-table-p jg-popup-display-rules))
-  (when (and (gethash sym jg-popup-display-rules) override)
-    (message "Popup Ruleset %s already exists, overriding" sym)
-    (puthash sym nil jg-popup-display-rules)
-    )
-
-  (puthash sym
-           (append (cl-loop for (head . body) in rules
-                            for priority = (* -1 (or (plist-get body :priority) 0))
-                            collect (cons priority (+popup-make-rule head body)))
-                   (gethash sym jg-popup-display-rules))
-           jg-popup-display-rules)
-  )
-
-;;;###autodef
 (defun set-popup-rule! (predicate &rest plist)
-  (push (+popup-make-rule predicate plist) jg-popup-misc-rules)
+  (push (+popup-make-rule predicate plist) jg-popup-misc-specs)
   )
 
 ;;;###autodef
@@ -199,30 +173,41 @@
   )
 
 ;;;###autodef
-(defun +jg-ui-popup-apply-rules (&optional force)
-  " Take defined rules and use them in place of display-buffer-alist "
-  (interactive "P")
-  (when (or force (not jg-popup-display-flattened))
-    (setq jg-popup-display-flattened
-          (-concat (mapcar #'cdr (sort
-                                  (copy-sequence
-                                   (-flatten-n 1 (hash-table-values jg-popup-display-rules)))
-                                  #'(lambda (x y) (< (car x) (car y))))
-                           )
-                   '(("*jg-customised*" (+popup-buffer)))
-                   jg-popup-misc-rules
-                   )
-          )
+(defun +jg-popup-add-spec (sym rules &optional override)
+  "sym is a symbol to avoid adding duplicate rulesets
+
+  Expects a list of form:
+  '((PATTERN :opt val :opt val) (PATTERN :opt val :opt val))
+  "
+  (cl-assert (hash-table-p jg-popup-display-specs))
+  (when (and (gethash sym jg-popup-display-specs) override)
+    (message "Popup Ruleset %s already exists, overriding" sym)
+    (puthash sym nil jg-popup-display-specs)
     )
-  (when jg-popup-display-flattened
-    (message "Applying Popup Rules: %s" (hash-table-keys jg-popup-display-rules))
-    (setq jg-popup-misc-rules nil
-          display-buffer-alist jg-popup-display-flattened)
-    )
-)
+
+  (puthash sym
+           (append (cl-loop for (head . body) in rules
+                            for priority = (* -1 (or (plist-get body :priority) 0))
+                            collect (cons priority (+popup-make-rule head body)))
+                   (gethash sym jg-popup-display-specs))
+           jg-popup-display-specs)
+  )
 
 ;;;###autodef
-(defun +jg-ui-popup-reapply-rules ()
+(defun +jg-popup-reapply-specs ()
+  " Take defined rules and use them in place of display-buffer-alist "
   (interactive)
-  (+jg-ui-popup-apply-rules t)
+  (let ((flattened
+        (-concat (mapcar #'cdr (sort
+                                (copy-sequence
+                                 (-flatten-n 1 (hash-table-values jg-popup-display-specs)))
+                                #'(lambda (x y) (< (car x) (car y)))))
+
+                 '(("*jg-customised*" (+popup-buffer)))
+                 jg-popup-misc-specs
+                 )
+            ))
+    (message "Applying Popup Rules: %s" (hash-table-keys jg-popup-display-specs))
+    (setq display-buffer-alist flattened)
+    )
   )

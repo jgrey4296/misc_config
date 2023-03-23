@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name  : project-spec
+# uuid  : project-spec
+# key   : project-spec
+# group : doom spec
+# --
+;;-- projectile
+(after! jg-ui-reapply-hook-ready
+  (+jg-projects-add-spec '$1
+                         '(
+                           ("marker-files")
+                           :project-file project-file
+                           :compilation-dir compilation-dir
+                           :configure configure
+                           :compile compile
+                           :install install
+                           :package package
+                           :test test
+                           :run run
+                           :test-suffix test-suffix
+                           :test-prefix test-prefix
+                           :src-dir src-dir
+                           :test-dir test-dir
+                           :related-files-fn related-files-fn
+                           )
+                         )
+  )
+;;-- end projectile

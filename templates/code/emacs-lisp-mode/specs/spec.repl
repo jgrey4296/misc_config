@@ -5,10 +5,8 @@
 # group : doom spec
 # --
 ;;-- repl
-;; TODO implement this furter
-(setq-default $1-repl-buffer "*$1*"
-              $1-command "$2")
-
+(defvar $1-repl-buffer "*$1*")
+(defvar $1-command     "$2")
 (defun +$1-mode/open-repl (&optional arg)
   (interactive "P")
   (require '$1-mode)
@@ -17,5 +15,7 @@
   (get-buffer-create $1-repl-buffer)
   )
 
-(set-repl-handler! '$1-mode '+$1-mode/open-repl)
+(after! jg-ui-reapply-hook-ready
+  (set-repl-handler! '$1-mode '+$1-mode/open-repl)
+)
 ;;-- end repl

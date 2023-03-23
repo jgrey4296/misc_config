@@ -5,6 +5,7 @@
 # group : doom  spec
 # --
 ;;-- rotate text
+(after! jg-ui-reapply-hook-ready
 (set-rotate-patterns! '$1-mode
   :symbols '(
              ("t" "nil")

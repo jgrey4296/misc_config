@@ -4,8 +4,10 @@
 # key   : ibuffer-filter-spec
 # group :
 # --
-(after! jg-ibuffer-filters-init
+##-- ibuffer spec
+(after! jg-ui-reapply-hook-ready
         ;; Filter funcs in ibuffer-filtering-alist
         (+jg-ibuffer-define-filters '$1 "$2" '())
         (+jg-ibuffer-define-groups  '$1 "$3" '())
 )
+##-- end ibuffer spec

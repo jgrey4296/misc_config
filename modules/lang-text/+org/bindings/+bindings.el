@@ -27,7 +27,7 @@
       ;; :n "I" nil
       ;; :n "] h" nil
       ;; :n "[ h" nil
-      :desc "Cycle"           :n "a"   #'org-cycle
+      ;; :desc "Cycle"           :n "a"   #'org-cycle
       :desc "Next Link"       :n "] l" #'org-next-link
       :desc "Prev Link"       :n "[ l" #'org-previous-link
       :desc "Forward Heading" :n "] j" #'org-forward-heading-same-level

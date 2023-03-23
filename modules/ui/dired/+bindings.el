@@ -1,30 +1,45 @@
 ;;; emacs/dired/+bindings.el -*- lexical-binding: t; -*-
 
 (message "Setting up Dired bindings")
+(defvar jg-dired-mode-map (make-sparse-keymap))
 
-(map! :map dired-mode-map ;; main
-      :n  "\\"                              #'+jg-dired-hash-files
-      :nv ")"                               #'dired-git-info-mode
-      :n  "o"                               #'dired-find-file-other-window
-      :n  "S"                               #'hydra-dired-quick-sort/body
-      :n "s"                                #'+jg-dired-dir-size
-      :nv "j"                               #'dired-next-line
-      :nv "k"                               #'dired-previous-line
-      :nv "J"                               #'dired-next-dirline
-      :nv "K"                               #'dired-prev-dirline
-      :nv "n"                               #'evil-ex-search-next
-      :nv "N"                               #'evil-ex-search-previous
-
-      :n "v"                                #'ignore
-      :n ":"                                #'ignore
-
-      :nv "q"                               #'+jg-dired-kill-subdir-or-close-buffer
-      :desc "Remove Subdir"        :n "DEL" #'dired-kill-subdir
-
-      "C-h"                                 #'dired-up-directory
-
-      :desc "Expand Subdir"        :n "i"   #'+jg-dired-insert-subdir-maybe-recursive
-      :desc "Expand Marked"        :n "I"   #'+jg-dired-insert-marked-subdir
+(map! :map jg-dired-mode-map ;; main
+      "RET"                        #'dired-find-file
+      :desc "Hide Toggle"     "."  #'dired-omit-mode
+      "+"                          #'dired-create-directory
+      "-"                          #'dired-up-directory
+      "v"                          #'evil-visual-mode
+       "\\"                        #'+jg-dired-hash-files
+      ")"                          #'dired-git-info-mode
+       "o"                         #'dired-find-file-other-window
+       "S"                         #'hydra-dired-quick-sort/body
+      "s"                          #'+jg-dired-dir-size
+      "j"                          #'dired-next-line
+      "k"                          #'dired-previous-line
+      "J"                          #'dired-next-dirline
+      "K"                          #'dired-prev-dirline
+      "n"                          #'evil-ex-search-next
+      "N"                          #'evil-ex-search-previous
+      " m"                         #'dired-mark
+      "M"                          #'+jg-dired-marked-info
+      "u"                          #'dired-unmark
+      "U"                          #'dired-unmark-all-marks
+      "t"                          #'dired-toggle-marks
+      :nv "q"                      #'+jg-dired-kill-subdir-or-close-buffer
+      :desc "Remove Subdir"  "DEL" #'dired-kill-subdir
+      :desc "Expand Subdir"  "i"   #'+jg-dired-insert-subdir-maybe-recursive
+      :desc "Expand Marked"  "I"   #'+jg-dired-insert-marked-subdir
+      "C" #'dired-do-copy
+      "B" 'dired-do-byte-compile
+      "D" 'dired-do-delete
+      "R" 'dired-do-rename
+      "!" 'dired-do-shell-command
+      "=" 'dired-diff
+      "&" 'dired-do-async-shell-command
+      "Z" 'dired-do-compress
+      "c" 'dired-do-compress-to
+      "$" 'dired-hide-subdir
+      "\M-$" 'dired-hide-all
 
       (:prefix "]"
        :desc "Next Marked" :n "m"           #'dired-next-marked-file
@@ -32,17 +47,16 @@
       (:prefix "["
        :desc "Prev Marked" :n "m"           #'dired-prev-marked-file
        )
+      "x" #'ignore
 )
 
-(map! :map dired-mode-map ;; localleader
+(map! :map jg-dired-mode-map ;; localleader
       :localleader
-      :desc "Hide Toggle"           "h" #'dired-omit-mode
       :desc "Symlink"               "S" #'dired-do-symlink
       :desc "Quicklook"             "l" #'+jg-dired-quick-look
       :desc "DropWatch"             "w" (cmd! (shell-command "dropbox_watcher"))
       (:prefix ("d" . "Describe")
        :desc "Summarise Orgs"       "s" #'+jg-dired-create-summary-of-orgs
-       :desc "Marked Info"          "m" #'+jg-dired-marked-info
        :desc "Dired Diff"           "d" #'+jg-dired-diff
        )
       (:prefix ("K" . "Destructive")
@@ -59,7 +73,7 @@
        )
       )
 
-(map! :map dired-mode-map ;; dired-do
+(map! :map jg-dired-mode-map ;; dired-do
       :prefix ("%" . "Dired-Do")
       :desc "flag-garbage-files"           :n "&" #'dired-flag-garbage-files
       :desc "do-copy-regexp"               :n "C" #'dired-do-copy-regexp
@@ -76,7 +90,7 @@
       :desc "upcase"                       :n "u" #'dired-upcase
       )
 
-(map! :map dired-mode-map ;; encryption
+(map! :map jg-dired-mode-map ;; encryption
       :after epa
       ";" nil
       (:prefix (";" . "Encryption")
@@ -93,8 +107,6 @@
        )
       )
 
-(map! :map dired-mode-map ;; git info
-      :ng ")" #'dired-git-info-mode)
 
 (map! :map dirvish-mode-map
       :n "b" #'dirvish-goto-bookmark
@@ -106,6 +118,7 @@
       :localleader
       "h" #'dired-omit-mode)
 
-(evil-make-overriding-map dired-mode-map)
+;; (evil-make-intercept-map jg-dired-mode-map)
 
+(setq dired-mode-map jg-dired-mode-map)
 (provide 'jg-dired-bindings)

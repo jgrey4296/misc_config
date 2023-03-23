@@ -376,8 +376,6 @@
       :desc "Jump to symbol"               "i" #'imenu
       :desc "Jump to visible link"         "l" #'link-hint-open-link
       :desc "Google"                       "g" #'browse-url
-      :desc "Locate file"                  "f" #'+lookup/file
-      :desc "Locate file"                  "f" #'locate
       :desc "Look up in all docsets"       "K" #'+lookup/in-all-docsets
       :desc "Look up in local docsets"     "k" #'+lookup/in-docsets
       :desc "Look up online (w/ prompt)"   "O" #'+lookup/online-select

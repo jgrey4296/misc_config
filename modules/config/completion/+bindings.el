@@ -8,18 +8,6 @@
       )
 ;;-- end remap bookmarks
 
-;;-- browsing
-(map! :leader
-      :prefix "y"
-      :desc "Dir: Code"           "1" (cmd! (find-file jg-completion-code-templates-dir))
-      :desc "Dir: File"           "2" (cmd! (find-file jg-completion-file-templates-dir))
-      :desc "Dir: Projects"       "3" (cmd! (find-file jg-completion-project-templates-dir))
-      :desc "Dir: Git Template"   "4" (cmd! (find-file (expand-file-name "templates/git" doom-user-dir)))
-      :desc "Dir: Doom Snippet"   "5" (cmd! (find-file doom-snippets-dir))
-      :desc "Dir: Yas  Snippet"   "6" (cmd! (find-file yasnippet-snippets-dir))
-)
-;;-- end browsing
-
 ;;-- ivy
 (map! :map ivy-minibuffer-map
       :after ivy
@@ -53,8 +41,9 @@
       "C-SPC" #'ivy-call-and-recenter  ; preview file
       "C-l"   #'ivy-alt-done
       "C-v"   #'yank
-      :n "|"  #'abort-recursive-edit
+      "|"  #'abort-recursive-edit
       )
+
 
 (map! :map swiper-map
       :after swiper
@@ -201,27 +190,6 @@
 
 ;;-- end helm
 
-;;-- snippets
-(map! :map snippet-mode-map
-      :after yasnippet
-      :localleader
-      "1" (cmd! (browse-url "https://joaotavora.github.io/yasnippet/snippet-development.html"))
-      )
-
-(map! :leader
-      :prefix "y"
-      :desc "Temp Template"  :v "t" (cmd! (if (eq evil-state 'visual)
-                                              (setq aya-current (buffer-substring evil-visual-beginning evil-visual-end))
-                                            (aya-expand)))
-      :desc "New snippet"           "n" #'+jg-completion-new-snippet
-      :desc "Expand Snippet"        "y" #'yas-expand-from-trigger-key
-      :desc "Edit Snippet"          "e" #'yas-visit-snippet-file
-      :desc "Insert snippet"        "i" #'yas-insert-snippet
-      :desc "Find global snippet"   "/" #'yas-visit-snippet-file
-      :desc "Reload snippets"       "r" #'yas-reload-all
-      )
-;;-- end snippets
-
 ;;-- lisp
 (map! :map emacs-lisp-mode-map
       :localleader
@@ -229,13 +197,6 @@
       )
 
 ;;-- end lisp
-
-;;-- insert state
-(map! :map jg-binding-insert-state-map
-      "TAB" #'+jg-completion-complete-or-snippet
-      )
-
-;;-- end insert state
 
 ;;-- leader helms/ivys
 (map! :leader
@@ -245,10 +206,3 @@
       :desc "Workspace Counsel"     "w RET" #'+jg-completion-ivy-workspace
       )
 ;;-- end leader helms/ivys
-
-;;-- shell
-(map! :map shell-mode-map
-      :i "TAB" #'+jg-completion-complete-or-snippet
-      :n "TAB" #'completion-at-point
-      )
-;;-- end shell

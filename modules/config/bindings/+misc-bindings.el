@@ -26,11 +26,14 @@
       )
 
 ;;-- shell
-(map! :after shell
-      :map shell-mode-map
-      "C-d" #'comint-send-eof
-      :localleader
-      "h" #'counsel-shell-history)
+(after! shell
+  (map! :map shell-mode-map
+        "C-d" #'comint-send-eof
+        :localleader
+        "h" #'counsel-shell-history
+        )
+  (evil-make-intercept-map shell-mode-map)
+)
 
 ;;-- end shell
 
@@ -117,7 +120,6 @@
 ;;-- evil overrides/intercept
 (evil-make-overriding-map messages-buffer-mode-map)
 (evil-make-intercept-map comint-mode-map)
-(evil-make-intercept-map shell-mode-map)
 (evil-make-intercept-map read-expression-map)
 
 ;;-- end evil overrides/intercept

@@ -1,35 +1,11 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
-(setq-default jg-projects-cmd-cache-name ".projectile-cmds"
-              projectile-completion-system 'ivy
+(defvar jg-projects-cmd-cache-name ".projectile-cmds")
+(defvar jg-projects-doot-cmd "doot")
+(defvar jg-projects-doit-cmd "doit")
 
-              jg-projects-walk-popup-rules '(("^\\*Project-Walk\\*" :side left :ttl nil :quit t :select nil :priority -50))
-
-              jg-projects-doot-cmd "doot"
-              jg-projects-doit-cmd "doit"
-              )
-
-;;-- popup
-(after! jg-popup-init
-  (+jg-ui-popup-add-rules 'proj-walk jg-projects-walk-popup-rules)
-  )
-
-;;-- end popup
-
-;;-- projectile
-(after! projectile
-
-  (projectile-register-project-type 'jg-completion-project '("dodo.py" "doot.toml")
-                                    :project-file "dodo.py"
-                                    ;; :related-files-fn #'+jg-projects-related-files-fn
-                                    )
-  )
-
-
-;;-- end projectile
-
-;;-- projectile compile
-(setq counsel-compile-local-builds '(
+(setq projectile-completion-system 'ivy
+      counsel-compile-local-builds '(
                                      +jg-projects-get-doot-commands
                                      +jg-projects-get-gradle-commands
                                      ;; counsel-compile-get-filtered-history

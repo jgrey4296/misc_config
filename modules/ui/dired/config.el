@@ -47,7 +47,6 @@
         dired-omit-files (concat dired-omit-files "\\|^\\..*$"))
   )
 
-
 (use-package! dired-rsync
   :after dired
   )

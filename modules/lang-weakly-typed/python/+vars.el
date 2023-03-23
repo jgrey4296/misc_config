@@ -2,29 +2,21 @@
 
 (defvar +python-ipython-command '("ipython" "-i" "--simple-prompt" "--no-color-info")
   "Command to initialize the ipython REPL for `+python/open-ipython-repl'.")
-
 (defvar +python-jupyter-command '("jupyter" "console" "--simple-prompt")
   "Command to initialize the jupyter REPL for `+python/open-jupyter-repl'.")
 
-(after! projectile
-  (pushnew! projectile-project-root-files "pyproject.toml" "requirements.txt" "setup.py"))
-
 ;;-- personal vars
-(setq-default jg-python-dev-mode nil
-              jg-python-dev-cmd "-X dev"
-
-              jg-python-docs-url           "https://docs.python.org/3/"
-              jg-python-lib-url-suffix     "library/%s.html"
-              jg-python-bibtex-parser-url  "https://bibtexparser.readthedocs.io/en/master/tutorial.html"
-              jg-python-beautiful-soup-url "https://beautiful-soup-4.readthedocs.io/en/latest/"
-              jg-conda-activate-cmd        "source $HOME/.doom.d/terminal/bash/conda.bash && activate %s"
-              jg-python-last-chosen-support nil
-              jg-python-import-block-end-re "^\\(__all__\\|[[:graph:]]+?\\s-+=\\|def\\|class\\|if TYPE_CHECKING:\\)"
-
-              jg-python-summary-buffer "*Python-Summary*"
-
-              expand-region-preferred-python-mode 'python-mode
-      )
+(defvar jg-python-dev-mode nil)
+(defvar jg-python-dev-cmd "-X dev")
+(defvar jg-python-docs-url           "https://docs.python.org/3/")
+(defvar jg-python-lib-url-suffix     "library/%s.html")
+(defvar jg-python-bibtex-parser-url  "https://bibtexparser.readthedocs.io/en/master/tutorial.html")
+(defvar jg-python-beautiful-soup-url "https://beautiful-soup-4.readthedocs.io/en/latest/")
+(defvar jg-conda-activate-cmd        "source $HOME/.doom.d/terminal/bash/conda.bash && activate %s")
+(defvar jg-python-last-chosen-support nil)
+(defvar jg-python-import-block-end-re "^\\(__all__\\|[[:graph:]]+?\\s-+=\\|def\\|class\\|if TYPE_CHECKING:\\)")
+(defvar jg-python-summary-buffer      "*Python-Summary*")
+(setq expand-region-preferred-python-mode 'python-mode)
 ;;-- end personal vars
 
 ;;-- rotate text
@@ -44,6 +36,7 @@
 
                 py-python-command "python3"
                 py-python-command-args '("-i")
+                python-shell-interpreter "python3"
                 ;; python-shell-interpreter-args `("-X" ,(format "pycache_prefix=%s" (expand-file-name  "~/.pycache")))
                 jg-python-repl-start-file (doom-module-expand-path :lang-weakly-typed 'python "repl/repl_startup.py ")
 
@@ -70,21 +63,6 @@
         )
 )
 ;;-- end outline
-
-;;-- projectile
-(after! projectile
-  (pushnew! projectile-project-root-files "setup.py" "requirements.txt")
-  (projectile-register-project-type 'jg-python-project '("pyproject.toml")
-                                    :project-file "pyproject.toml"
-                                    :configure "pip install -e %s"
-                                    :test "python -m unittest discover -v -p test_*.py"
-                                    :test-dir '(lambda (x) (f-join x "__tests"))
-                                    :test-prefix "test_"
-                                    :related-files-fn #'+jg-python-related-files-fn
-                                    )
-
-  )
-;;-- end projectile
 
 ;;-- flycheck
 (after! flycheck

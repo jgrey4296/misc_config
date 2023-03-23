@@ -50,5 +50,5 @@
   )
 
 
-(add-hook 'doom-first-file-hook #'+jg-org-setup-tags-hook 100)
+;;(add-hook 'doom-first-file-hook #'+jg-org-setup-tags-hook 100)
 ;; (remove-hook 'org-tab-first-hook #'+org-cycle-only-current-subtree-h)

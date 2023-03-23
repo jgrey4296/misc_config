@@ -76,9 +76,7 @@
 
 
 ;;-- end LSP
-
-(after! projectile
-  (defun +jg-rust-related-files-fn (path)
+(defun +jg-rust-related-files-fn (path)
     " Given a relative path to a file, provide projectile with various :kinds of related file "
     (let ((impl-file  (f-join (f-parent (f-parent path)) (s-replace "test_" "" (f-filename path))))
           (test-file  (f-join (f-parent path) "__tests" (concat "test_" (f-filename path))))

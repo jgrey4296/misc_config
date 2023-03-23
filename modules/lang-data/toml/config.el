@@ -22,7 +22,7 @@
 
 (load! "+vars")
 (load! "+funcs")
-(after! evil
+(after! (evil jg-bindings-total)
   (load! "+bindings")
   )
 

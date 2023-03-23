@@ -1,13 +1,11 @@
 ;;; lang/jg-org/+vars.el -*- lexical-binding: t; -*-
 
 ;;-- personal
-(setq-default jg-org-external-file-link-types '("jpg" "jpeg" "png" "mp4" "html")
-              jg-org-clean-marker nil
-              jg-org-preferred-linecount 1500
-              jg-org-link-move-base "/Volumes/Overflow/missing_images/"
-
-              jg-org-twitter-loc (expand-file-name  "~/twitterthreads/")
-              )
+(defvar jg-org-external-file-link-types '("jpg" "jpeg" "png" "mp4" "html"))
+(defvar jg-org-clean-marker nil)
+(defvar jg-org-preferred-linecount 1500)
+(defvar jg-org-link-move-base "/Volumes/Overflow/missing_images/")
+(defvar jg-org-twitter-loc (expand-file-name  "~/twitterthreads/"))
 ;;-- end personal
 
 ;;-- pomodoro

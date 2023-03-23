@@ -1,7 +1,7 @@
 ;;; init.el -*- lexical-binding: t; -*-
 
 (doom!
- :config default bindings completion disabled ui help
+ :config default bindings completion disabled ui help snippets search
  :app   (rss +org)
  :completion company ivy
 

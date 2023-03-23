@@ -20,7 +20,7 @@
 ;;
 ;;; Code:
 
-
 (package! project-walk :recipe (:local-repo "~/.doom.d/packages/project-walk"))
+(package! counsel-projectile)
 
 ;;; packages.el ends here

@@ -27,7 +27,7 @@
   )
 
 (use-package! paren-state
-  :commands paren-state
+  :commands evil-paren-state
   )
 
 ;;; config.el ends here

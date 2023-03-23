@@ -8,29 +8,26 @@
 ;;-- end epa/gpg
 
 ;;-- dired
-(setq-default dired-args '("-ahlD" "-v" "--group-directories-first")
-              insert-directory-program "gls"
 
-              dired-auto-revert-buffer #'dired-buffer-stale-p
-              dired-clean-confirm-killing-deleted-buffers nil
-              dired-create-destination-dirs 'ask
-              dired-dwim-target t
-              dired-hide-details-hide-symlink-targets nil
-              dired-omit-verbose nil
-              dired-recursive-copies  'always
-              dired-recursive-deletes 'top
-              dired-vc-rename-file t
+  (setq-default dired-args '("-ahlD" "-v" "--group-directories-first")
+                insert-directory-program "gls"
 
-              +jg-dired-recursive-switches "-aBhlR --group-directories-first"
- )
+                dired-auto-revert-buffer #'dired-buffer-stale-p
+                dired-clean-confirm-killing-deleted-buffers nil
+                dired-create-destination-dirs 'ask
+                dired-dwim-target t
+                dired-hide-details-hide-symlink-targets nil
+                dired-omit-verbose nil
+                dired-recursive-copies  'always
+                dired-recursive-deletes 'top
+                dired-vc-rename-file t
+                dired-quick-sort-group-directories-last ?y
 
-(after! (dired dired-x dired-quick-sort)
-  (setq-default dired-quick-sort-group-directories-last ?y)
-  )
+                +jg-dired-recursive-switches "-aBhlR --group-directories-first"
+                )
 ;;-- end dired
 
 ;;-- omit-patterns
-
 (rx-let ((filename (*? graph))
          (system (| "." "TheVolumeSettingsFolder" (: ?. (? filename) "cache")))
          (dotfiles (: ?. (? "_.") (| "CFUserTextEncoding" "DS_Store" "DocumentRevisions-V100" "PKInstallSandboxManager"

@@ -11,29 +11,6 @@
     )
   )
 
-(defun +jg-ibuffer-reapply-filters ()
-  (message "Applying Ibuffer Filters: %s" (hash-table-keys jg-ibuffer-filters))
-  (message "Applying Ibuffer Groups: %s" (hash-table-keys jg-ibuffer-filter-groups))
-  (setq ibuffer-saved-filters
-        (cl-loop for table being the hash-values of jg-ibuffer-filters
-                 append (cl-loop for key being the hash-keys of table
-                                  using (hash-values val)
-                                  collect (cons key (list val))
-                                  )
-
-                 )
-
-        ibuffer-saved-filter-groups
-        (cl-loop for table being the hash-values of jg-ibuffer-filter-groups
-                 append (cl-loop for key being the hash-keys of table
-                                  using (hash-values val)
-                                  collect (cons key val)
-                                  )
-
-                 )
-        )
-  )
-
 (defun +jg-ibuffer-add-group (name)
   (interactive (list (completing-read "Group: " ibuffer-saved-filter-groups nil t)))
   (setq ibuffer-filter-groups

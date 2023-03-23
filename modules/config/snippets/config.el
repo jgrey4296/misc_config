@@ -4,8 +4,8 @@
 ;;
 ;; Author: John Grey <https://github.com/jgrey4296>
 ;; Maintainer: John Grey <johngrey4296 at gmail.com>
-;; Created: March 13, 2023
-;; Modified: March 13, 2023
+;; Created: March 23, 2023
+;; Modified: March 23, 2023
 ;; Version: 0.0.1
 ;; Keywords:
 ;; Homepage: https://github.com/jgrey4296
@@ -20,26 +20,24 @@
 ;;
 ;;; Code:
 
-
 (load! "+vars")
-(load! "+funcs")
+(load! "+yasnippet")
 (after! (evil jg-bindings-total)
   (load! "+bindings")
   )
-(after! ivy
-  (load! "utils/+ivys")
+(after! doom-snippets
+  (+jg-snippets-reapply-file-specs)
   )
-(after! helpful
-  (add-hook 'helpful-mode-hook
-            (defun jg-unset-helpful-dedicated()
-              (set-window-dedicated-p (selected-window) nil)))
-  )
+;;-- hook setup
+(defun +jg-snippets-on-load-hook ()
+  (require 'yasnippet)
+  (advice-add '+snippet--completing-read-uuid :override #'+jg-snippets--completing-read-uuid)
+  (add-hook 'yas-prompt-functions #'+jg-snippets-yas-prompt-fn -90)
 
-(use-package! free-keys
-  :commands (free-keys free-keys-set-prefix)
-  :config
-  (evil-make-intercept-map free-keys-mode-map)
   )
+(add-hook 'doom-first-file-hook #'+jg-snippets-on-load-hook)
+(add-hook 'jg-ui-reapply-hook '+jg-snippets-reapply-file-specs)
 
+;;-- end hook setup
 
 ;;; config.el ends here

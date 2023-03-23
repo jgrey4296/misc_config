@@ -1,9 +1,9 @@
 ;;; completion/ivy/+vars.el -*- lexical-binding: t; -*-
 
 ;;-- personal-vars
-(setq-default jg-completion-rps-have-you-played-loc
-              (expand-file-name "~/github/jgrey4296.github.io/resources/urls/have-you-playeds")
-              )
+(defvar jg-completion-rps-have-you-played-loc
+  (expand-file-name "~/github/jgrey4296.github.io/resources/urls/have-you-playeds")
+  )
 ;;-- end personal-vars
 
 ;;-- ivy
@@ -73,24 +73,4 @@
 
 ;;-- company
 (setq company-idle-delay 1)
-
 ;;-- end company
-
-;;-- file-templates
-(after! jg-completion-templates
-  (+jg-completion-add-file-templates
-   'general
-   '(("/docker-compose\\.yml$" :mode yaml-mode)
-     ;; direnv
-     ("/\\.envrc$" :trigger "__envrc" :mode direnv-envrc-mode)
-     ;; Markdown
-     (markdown-mode)
-     ;; Markdown
-     (sh-mode :priority -100)
-     (gitignore-mode :priority -100)
-     (dockerfile-mode)
-     (snippet-mode)
-     )
-   )
-  )
-;;-- end file-templates

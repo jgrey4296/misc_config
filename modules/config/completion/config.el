@@ -1,8 +1,6 @@
 ;; -*- mode: emacs-lisp; lexical-binding: t; -*-
 ;;
 (load! "+vars")
-(load! "+template-control")
-(load! "+yasnippet")
 (after! (evil jg-bindings-total)
   (load! "+bindings")
 )
@@ -32,18 +30,3 @@
   )
 
 ;;-- end company
-
-;;-- hook setup
-(defun +jg-completion-on-load-hook ()
-  (require 'yasnippet)
-  (advice-add '+snippet--completing-read-uuid :override #'+jg-completion-snippet--completing-read-uuid)
-  (add-hook 'yas-prompt-functions #'+jg-completion-yas-prompt-fn -90)
-
-  (after! doom-snippets
-    (+jg-completion-reapply-file-templates t)
-    )
-  )
-(add-hook 'doom-first-file-hook #'+jg-completion-on-load-hook)
-(add-hook 'jg-ui-reapply-hook '+jg-completion-reapply-file-templates)
-
-;;-- end hook setup

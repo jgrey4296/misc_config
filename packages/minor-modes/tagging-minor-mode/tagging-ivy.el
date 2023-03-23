@@ -1,18 +1,17 @@
-;;; util/jg-tag/+ivy_actions.el -*- lexical-binding: t; -*-
-
+;;; tagging-ivy.el -*- lexical-binding: t; -*-
 ;; Adds actions to ivy for easy search + tagging of files from dired
-(defvar jg-tag-ivy-registered-tag nil)
+(defvar tagging-minor-mode-selected-tag nil)
 
 (defun +jg-tag-ivy-tag-set (x)
   " Register a tag to reuse "
   (message "Registering")
-  (setq jg-tag-ivy-registered-tag (read-string "Store Tag: "))
+  (setq tagging-minor-mode-selected-tag (read-string "Store Tag: "))
   )
 
 (defun +jg-tag-ivy-tag-clear (x)
   " Clear the registered tag "
   (message "Clearing")
-  (setq jg-tag-ivy-registered-tag nil)
+  (setq tagging-minor-mode-selected-tag nil)
   )
 
 (defun +jg-tag-ivy-set-tags (tag)
@@ -41,7 +40,7 @@
            (line-number (string-to-number (match-string-no-properties 2 x)))
            (full-file (expand-file-name file-name (ivy-state-directory ivy-last)))
            (input (plist-get (plist-get (ivy-state-extra-props ivy-last) :ivy-data) :text))
-           (the-tag (if (not jg-tag-ivy-registered-tag) (read-string "Tag as: ") jg-tag-ivy-registered-tag))
+           (the-tag (if (not tagging-minor-mode-selected-tag) (read-string "Tag as: ") tagging-minor-mode-selected-tag))
           )
       (message "Using Tag: %s" the-tag)
       (with-temp-buffer
@@ -73,9 +72,9 @@
            (input ivy-text)
            the-tag
           )
-      (setq the-tag (if (not jg-tag-ivy-registered-tag)
+      (setq the-tag (if (not tagging-minor-mode-selected-tag)
                         (read-string (format "Replace %s with: " the-line))
-                      jg-tag-ivy-registered-tag))
+                      tagging-minor-mode-selected-tag))
       ;;(message "Swapping %s for: %s in %s:%s" input the-tag full-file line-number)
       (with-temp-buffer
         ;; open the file indirectly

@@ -1,6 +1,6 @@
-;; dired actions
+;;; dired-tagging.el -*- lexical-binding: t; -*-
 
-(defun +jg-tag-describe-marked-tags ()
+(defun tagging-minor-mode/dired-describe-marked-tags ()
   "Describe tags in marked files"
   (interactive)
   (let ((marked (dired-get-marked-files))
@@ -17,7 +17,7 @@
       )
     )
   )
-(defun +jg-tag-mark-untagged-orgs ()
+(defun tagging-minor-mode/dired-mark-untagged()
   "Mark org files which are not tagged at heading depth 2"
   (interactive)
   (dired-map-over-marks
@@ -27,7 +27,7 @@
    nil
    )
   )
-(defun +jg-tag-dired-directory-count-untagged ()
+(defun tagging-minor-mode/dired-count-untagged ()
   "Count marked org files that are untagged"
   (interactive)
   (let ((counts 0)

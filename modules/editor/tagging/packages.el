@@ -6,3 +6,4 @@
 (package! cl-lib :built-in t)
 (package! ivy)
 (package! rawtag-mode :recipe `(:local-repo ,(expand-file-name "packages/major-modes/rawtag-mode" doom-user-dir)))
+(package! tagging-minor-mode :recipe `(:local-repo ,(expand-file-name "packages/minor-modes/tagging-minor-mode" doom-user-dir)))

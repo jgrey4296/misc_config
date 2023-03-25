@@ -14,10 +14,10 @@
 ;;; to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 ;;; copies of the Software, and to permit persons to whom the Software is
 ;;; furnished to do so, subject to the following conditions:
-;;; 
+;;;
 ;;; The above copyright notice and this permission notice shall be included in
 ;;; all copies or substantial portions of the Software.
-;;; 
+;;;
 ;;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 ;;; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 ;;; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -27,7 +27,7 @@
 ;;; THE SOFTWARE.
 
 (defun regexp-for-keyword-at-start-of-line (keywords)
-  "Create a regexp to match one of a keyword from KEYWORDS at beginning of line, 
+  "Create a regexp to match one of a keyword from KEYWORDS at beginning of line,
 possibly preceded by whitespace."
   (concat "[ \t]*" (regexp-for-keywords keywords)) )
 
@@ -39,7 +39,7 @@ possibly preceded by whitespace."
 				   "retract" "update" "not")
   "Drools commands and operators occuring within actions.")
 
-(defvar drools-toplevel-keywords 
+(defvar drools-toplevel-keywords
   '("rule" "end" "package" "import" "function" "global" "expander")
   "Drools keywords that occur at top-level in source file, and should always be indented to 0")
 
@@ -50,12 +50,12 @@ possibly preceded by whitespace."
 				    "agenda-group" "auto-focus" "ruleflow-group")
   "Drools attributes that occur within a rule (before the sections).")
 
-(defvar drools-toplevel-keyword-regexp 
+(defvar drools-toplevel-keyword-regexp
   (regexp-for-keyword-at-start-of-line drools-toplevel-keywords)
   "Regexp to match a line starting with a top-level Drools keyword" )
 
-(defvar drools-section-keyword-regexp 
-  (regexp-for-keyword-at-start-of-line (append drools-section-keywords)) 
+(defvar drools-section-keyword-regexp
+  (regexp-for-keyword-at-start-of-line (append drools-section-keywords))
   "Regexp to match a line starting with a Drools section keyword" )
 
 (defvar drools-indenting-keyword-regexp (regexp-for-keywords '("rule" "when" "then"))
@@ -73,7 +73,7 @@ possibly preceded by whitespace."
 	 'font-lock-keyword-face)
    (cons (regexp-for-keywords drools-attribute-keywords)
 	 'font-lock-keyword-face) )
-  "Default highlighting expressions for Drools mode") 
+  "Default highlighting expressions for Drools mode")
 
 (defvar drools-mode-syntax-table
   (let ((drools-mode-syntax-table (make-syntax-table)))
@@ -111,9 +111,9 @@ after the bracket and sit at the start of that text. If not, move to first text 
 	  (skip-backward-sexp-and-space) )
 	(skip-chars-forward " \t")
 	nil)
-    (scan-error 
+    (scan-error
      (let (bracket)
-       (skip-chars-backward " \t\n") 
+       (skip-chars-backward " \t\n")
        (setq bracket (char-to-string (char-after (1- (point)))))
        (let ( (text-after-bracket (not (looking-at "[ \t]*$"))) )
 	 (if text-after-bracket
@@ -124,7 +124,7 @@ after the bracket and sit at the start of that text. If not, move to first text 
   "Indent line function for Drools mode"
   (interactive)
   (beginning-of-line)
-  (cond 
+  (cond
    ((looking-at drools-toplevel-keyword-regexp) ;; top-level keywords, absolute indent to 0
     (indent-line-to 0))
    ((looking-at drools-section-keyword-regexp)  ;; section-level keywords, absolute indent to 1 tab width
@@ -151,7 +151,7 @@ after the bracket and sit at the start of that text. If not, move to first text 
 	     (t (setq new-indent (current-column))) ) ) ) )
       (setq new-indent (+ unindent new-indent))
       (if (< new-indent 0)
-	  (progn 
+	  (progn
 	    (message "Invalid syntax, cannot indent further left than margin")
 	    (setq new-indent 0) ) )
       (indent-line-to new-indent) ) ) ) )

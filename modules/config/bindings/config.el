@@ -39,4 +39,11 @@
         evil-escape-key-sequence "jk"
         evil-escape-delay 0.15
         )
+
+  ;; To fix interference between evil-escape and evil-ex
+  (defun jg-evil-escape-fix2 (&rest args)
+    nil
+    )
+  (advice-add 'evil-escape--insert-func :override #'jg-evil-escape-fix2)
+  (advice-add 'evil-escape--delete-func :override #'jg-evil-escape-fix2)
   )

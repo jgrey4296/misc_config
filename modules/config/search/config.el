@@ -22,12 +22,12 @@
 
 
 (load! "+vars")
-(load! "+funcs")
+
 (after! (evil jg-bindings-total)
   (load! "+bindings")
   )
-
-(after! dired
+(after! (jg-bindings-total dired)
+  (load! "+funcs")
   (add-hook! 'dired-mode-hook #'fd-dired-minor-mode)
   )
 

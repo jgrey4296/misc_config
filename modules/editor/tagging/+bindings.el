@@ -19,8 +19,8 @@
 ;;-- end helm
 
 ;; Dired bindings
-(map! :after jg-dired-bindings
-      :map dired-mode-map
+(map! :map dired-mode-map
+      :after jg-dired-bindings
       :localleader
       (:prefix ("d" . "Describe")
        :desc "Count Untagged Orgs" "u"   #'+jg-tag-dired-directory-count-untagged

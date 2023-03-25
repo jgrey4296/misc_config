@@ -3,7 +3,6 @@
 (map! :leader
       :prefix ("c v" . "Environments")
       :desc "Activate Environment" "c" #'+jg-python-activate-venv-and-conda
-
       )
 
 (map! :map python-mode-map
@@ -136,11 +135,10 @@
       )
 
 (map! :map dired-mode-map
-      :after dired
+      :after jg-dired-bindings
       :localleader
       :desc "Activate Py Environments" :n "v" #'+jg-python-activate-venv-and-conda
       )
-
 (map! :map shell-mode-map
       :localleader
       :desc "PdbTrack" ";" #'py-pdbtrack-toggle-stack-tracking

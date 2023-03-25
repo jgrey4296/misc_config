@@ -91,8 +91,8 @@
 ;;-- end evil-org
 
 ;;-- dired
-(map! :after dired
-      :map dired-mode-map
+(map! :map dired-mode-map
+      :after jg-dired-bindings
       (:prefix "%"
        :desc "Mark Orgs" :n "o"     #'+jg-org-dired-select-org
        )

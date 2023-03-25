@@ -9,40 +9,6 @@
 ;;-- end remap bookmarks
 
 ;;-- ivy
-(map! :map ivy-minibuffer-map
-      :after ivy
-      [remap doom/delete-backward-word] #'ivy-backward-kill-word
-      :ni "TAB"                         #'ivy-alt-done
-      :i "<backtab>"                    #'ivy-dispatching-call
-      :n  ","                           #'+ivy/woccur
-      :n  "."                           #'hydra-ivy/body
-
-      :n "o" #'hydra-ivy/body
-      :n "a" #'ivy-dispatching-done
-
-      :n "j" #'ivy-next-line
-      :n "k" #'ivy-previous-line
-      :n "RET" #'ivy-done
-
-      "C-c RET"                         #'+ivy/woccur
-      "C-o"                             #'ivy-dispatching-done
-      "C-h"                             #'ivy-backward-kill-word
-      "M-o"                             #'hydra-ivy/body
-      "C-M-o"                           #'ivy-dispatching-call
-      "<down>"                          #'ivy-scroll-down-command
-      "<up>"                            #'ivy-scroll-up-command
-
-      :localleader
-      :desc "Results as Buffer"        :n "b" #'+ivy/woccur
-      )
-
-(map! :map ivy-minibuffer-map
-      :after ivy
-      "C-SPC" #'ivy-call-and-recenter  ; preview file
-      "C-l"   #'ivy-alt-done
-      "C-v"   #'yank
-      "|"  #'abort-recursive-edit
-      )
 
 
 (map! :map swiper-map

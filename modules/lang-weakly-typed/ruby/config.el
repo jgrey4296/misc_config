@@ -150,6 +150,7 @@
   (set-popup-rule! "^\\*\\(rspec-\\)?compilation" :size 0.3 :ttl nil :select t)
   (setq rspec-use-rvm (executable-find "rvm"))
   (map! :localleader
+        :after jg-dired-bindings
         :prefix "t"
         :map (rspec-verifiable-mode-map rspec-dired-mode-map rspec-mode-map)
         "a" #'rspec-verify-all

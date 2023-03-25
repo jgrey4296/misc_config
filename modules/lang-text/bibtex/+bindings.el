@@ -97,8 +97,8 @@
 ;;-- end jg bindings
 
 ;;-- dired
-(map! :after dired
-      :map dired-mode-map
+(map! :map dired-mode-map
+      :after jg-dired-bindings
       :localleader
       :prefix "K"
       :desc "Unify Pdf Locations" "U"   #'+jg-bibtex-dired-unify-pdf-locations

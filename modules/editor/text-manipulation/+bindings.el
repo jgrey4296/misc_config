@@ -111,12 +111,6 @@
       :desc "Goto Column"       "\\" #'+jg-text-column-motion
       )
 
-(map! :map (ivy-minibuffer-map minibuffer-mode-map)
-      :n "<" #'beginning-of-line
-      :n ">" #'end-of-line
-      :i "j" #'self-insert-command
-      )
-
 (map! :map license-mode-map
       :localleader
       :desc "License Reference" "1" (cmd! (browse-url "https://choosealicense.com/licenses/"))

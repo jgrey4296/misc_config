@@ -1,7 +1,5 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
-
-
 (map! :map jg-help-map
       :desc "Interactive Code Reminder" "1" #'+jg-help-evil-interactive-reminder
       :desc "Regexp Syntax"             "2" (cmd! (info "(elisp) Syntax of Regexps"))
@@ -9,6 +7,7 @@
       "'"    #'describe-char
       "f"    #'describe-function
       "v"    #'describe-variable
+      "l"    #'view-lossage
 
       "DEL" #'free-keys
       )

@@ -67,25 +67,6 @@
 
 ;;-- end evil snipe
 
-;;-- minibuffer
-(define-key! :keymaps +default-minibuffer-maps
-  [escape] #'abort-recursive-edit
-  "C-a"    #'move-beginning-of-line
-  "C-r"    #'evil-paste-from-register
-  "C-u"    #'evil-delete-back-to-indentation
-  "C-v"    #'yank
-  "C-w"    #'doom/delete-backward-word
-  "C-z"    (cmd! (ignore-errors (call-interactively #'undo)))
-  )
-
-(define-key! :keymaps +default-minibuffer-maps
-  "C-j"    #'next-line
-  "C-k"    #'previous-line
-  "C-S-j"  #'scroll-up-command
-  "C-S-k"  #'scroll-down-command)
-
-;;-- end minibuffer
-
 ;;-- lsp
 (map! :after lsp-mode
       :map lsp-command-map

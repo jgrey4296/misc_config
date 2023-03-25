@@ -8,7 +8,7 @@
 )
 
 (map! :map dired-mode-map
-      :after dired
+      :after jg-dired-bindings
       :localleader
       :desc "Query Xml" :n "1"   #'+jg-xml-dired-run-xidel
       :desc "Manifest"  :n "i m" #'+jg-xml-epub-manifest-generate

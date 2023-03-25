@@ -6,6 +6,7 @@
 (load! "util/+cleaning")
 
 (after! (evil general-mod which-mod)
+  (load! "+minibuffer-bindings")
   (load! "+leader-bindings")
   (load! "evil/+evil-bindings")
   (load! "evil/+evil-submap-bindings")
@@ -28,5 +29,14 @@
         :desc "Flycheck" "!" flycheck-command-map
         :prefix "c"
         :desc "Flycheck" "!" flycheck-command-map
+        )
+  )
+
+(after! evil-escape
+  (setq evil-escape-inhibit-functions nil ;; '(evil-ex-p)
+        evil-escape-excluded-states '(normal multiedit emacs motion)
+        evil-escape-excluded-major-modes '(neotree-mode treemacs-mode vterm-mode)
+        evil-escape-key-sequence "jk"
+        evil-escape-delay 0.15
         )
   )

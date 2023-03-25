@@ -6,12 +6,6 @@
       "C-j"    #'next-line
       "C-k"    #'previous-line
       )
-
-;; For folks with `evil-collection-setup-minibuffer' enabled
-(define-key! :states 'insert :keymaps +default-minibuffer-maps
-  "C-j"    #'next-line
-  "C-k"    #'previous-line)
-
 (define-key! read-expression-map
   "C-j" #'next-line-or-history-element
   "C-k" #'previous-line-or-history-element)

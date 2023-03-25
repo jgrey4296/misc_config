@@ -30,6 +30,7 @@
                      :open-rec   nil
                      :close      vimish-fold-refold
                      )
+                   200
                    )
 ;;-- end vimish-fold
 
@@ -60,7 +61,7 @@
                       )
 
 (+jg-fold-add-spec 'hide-show
-                   `((hs-minor-mode emacs-lisp-mode lisp-mode)
+                   `((hs-minor-mode)
                      :open-all   hs-show-all
                      :close-all  hs-hide-all
                      :toggle     hs-toggle-hiding
@@ -68,6 +69,7 @@
                      :open-rec   nil
                      :close      hs-hide-block
                      )
+                   50
                    )
 
 ;;-- end hide show
@@ -83,6 +85,7 @@
                        :open-rec   ,(lambda () (origami-open-node-recursively (current-buffer) (point)))
                        :close      ,(lambda () (origami-close-node            (current-buffer) (point)))
                        )
+                     50
                      )
   )
 ;;-- end origami
@@ -101,6 +104,7 @@
                      :open-rec   outline-show-subtree
                      :close      outline-hide-subtree
                      )
+                   25
                    )
 ;;-- end outline
 
@@ -114,6 +118,7 @@
                      :open-rec   nil
                      :close      hide-ifdef-block
                      )
+                   50
                    )
 ;;-- end c like ifdef
 

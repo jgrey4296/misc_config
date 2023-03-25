@@ -125,7 +125,6 @@
 ;;-- end description
 
 (defvar +popup--old-display-buffer-alist nil)
-
 (defvar jg-popup-display-specs (make-hash-table))
 (defvar jg-popup-misc-specs nil)
 

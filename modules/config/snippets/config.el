@@ -25,9 +25,7 @@
 (after! (evil jg-bindings-total)
   (load! "+bindings")
   )
-(after! doom-snippets
-  (+jg-snippets-reapply-file-specs)
-  )
+
 ;;-- hook setup
 (defun +jg-snippets-on-load-hook ()
   (require 'yasnippet)

@@ -3,6 +3,7 @@
 (defvar jg-ui-reapply-hook nil)
 (add-hook! 'jg-ui-reapply-hook :depth -100
   (defun +jg-ui-reapply-hook-head ()
+    (message "UI Reapply Spec Hook Firing")
     (provide 'jg-ui-reapply-hook-ready)))
 
 (setq-default highlight-parentheses-delay      0.3

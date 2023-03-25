@@ -29,7 +29,7 @@
   :suppress-keymap nil
   :entry-hook (evil-start-track-last-insertion)
   :exit-hook (evil-stop-track-last-insertion)
-  :input-method t
+  :input-method nil
   )
 
 (defun +jg-insert-state-set-sep (str)

@@ -10,8 +10,8 @@
 (use-package! dired
   :commands dired-jump
   :config
+  (provide 'jg-dired)
   (set-evil-initial-state! 'image-dired-display-image-mode 'emacs)
-
   (if (not (executable-find "gls"))
       (setq dired-listing-switches (car dired-args)
             insert-directory-program "ls")
@@ -28,7 +28,6 @@
     :before-while #'dired-buffer-stale-p
     (not (eq revert-buffer-function #'dired-virtual-revert)))
 
-  (provide 'jg-dired)
   )
 
 (use-package! dired-quick-sort

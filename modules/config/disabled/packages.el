@@ -30,3 +30,4 @@
 (package! ranger          :disable t)
 (package! drag-stuff      :disable t)
 (package! evil-colleciton-ibuffer :disable t)
+(package! evil-traces :disable t)

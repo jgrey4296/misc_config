@@ -30,9 +30,11 @@
   (load! "utils/+ivys")
   )
 (after! helpful
-  (add-hook 'helpful-mode-hook
+  (add-hook! 'helpful-mode-hook
             (defun jg-unset-helpful-dedicated()
-              (set-window-dedicated-p (selected-window) nil)))
+              (set-window-dedicated-p (selected-window) nil))
+            #'outline-minor-mode
+            )
   )
 
 (use-package! free-keys

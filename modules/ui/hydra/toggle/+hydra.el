@@ -12,13 +12,13 @@ _m_odeline ^^^^                           _c_ursor
 ^^^^^^                                    _p_review
 "
 
-  ("v" (progn (+jg-hydra-push #'+jg-ui-toggle-hydra/body)
+  ("v" (progn (+jg-hydra-push #'+jg-hydra-ui-toggles/body)
               (+jg-hydra-visuals/body)) nil :exit t)
-  ("g" (progn (+jg-hydra-push #'+jg-ui-toggle-hydra/body)
+  ("g" (progn (+jg-hydra-push #'+jg-hydra-ui-toggles/body)
               (+jg-hydra-guides/body)) nil :exit t)
-  ("r" (progn (+jg-hydra-push #'+jg-ui-toggle-hydra/body)
+  ("r" (progn (+jg-hydra-push #'+jg-hydra-ui-toggles/body)
               (+jg-hydra-wrap/body)) nil :exit t)
-  ("n" (progn (+jg-hydra-push #'+jg-ui-toggle-hydra/body)
+  ("n" (progn (+jg-hydra-push #'+jg-hydra-ui-toggles/body)
               (+jg-hydra-nav/body)) nil :exit t)
   ("s" (message "Smartparen: %s"
                 (setq sp-autoinsert-pair (not sp-autoinsert-pair)))
@@ -33,5 +33,5 @@ _m_odeline ^^^^                           _c_ursor
   ("c" #'global-centered-cursor-mode  nil  :exit nil)
   ("e" #'+jg-browse-toggle-browsing   nil  :exit nil)
   ("p" #'+jg-browse-toggle-preview    nil  :exit nil)
-  ("q" (setq jg-ui-toggle-hydra-stack nil) :exit t)
+  ("q" (setq jg-toggle-hydra-stack nil) :exit t)
 )

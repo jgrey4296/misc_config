@@ -7,7 +7,6 @@
 ;; Created: November 24, 2021
 ;; Modified: November 24, 2021
 ;; Version: 0.0.1
-;; Keywords: abbrev bib c calendar comm convenience data docs emulations extensions faces files frames games hardware help hypermedia i18n internal languages lisp local maint mail matching mouse multimedia news outlines processes terminals tex tools unix vc wp
 ;; Homepage: https://github.com/johngrey/to_integrate
 ;; Package-Requires: ((emacs "24.3"))
 ;;
@@ -26,71 +25,70 @@
                                                            +jg-which-key)
   "See `which-key--get-keymap-bindings'."
 
-  ;; (message "WK: %s" (car (last keymap)))
   (let ((bindings start)
         (prefix-map (if prefix (lookup-key keymap prefix) keymap)))
     (when (keymapp prefix-map)
       ;; Prefer which-key pseudo-maps:
-      (if (keymapp (lookup-key prefix-map [which-key]))
+      (when (keymapp (lookup-key prefix-map [which-key]))
           (setq bindings (which-key--get-keymap-bindings-1 (lookup-key prefix-map [which-key])
                                                            bindings nil filter all ignore-commands)))
-
-      (map-keymap
-       (lambda (ev def)
-         (let* ((key (vconcat prefix (list ev)))
-                (key-desc (key-description key)))
-           (cond
-            ((assoc (key-description (list ev)) bindings))
-            ((assoc key-desc bindings))
-            ((and (listp ignore-commands) (symbolp def) (memq def ignore-commands)))
-            ((or (string-match-p
-                  which-key--ignore-non-evil-keys-regexp key-desc)
-                 (eq ev 'menu-bar)))
-            ((and (keymapp def)
-                  (string-match-p which-key--evil-keys-regexp key-desc)))
-            ((and (keymapp def)
-                  (or all
-                      ;; event 27 is escape, so this will pick up meta
-                      ;; bindings and hopefully not too much more
-                      (and (numberp ev) (= ev 27))))
-             (setq bindings
-                   (which-key--get-keymap-bindings-1
-                    keymap bindings key filter all ignore-commands)))
-            (def
-             (let* ((def (if (eq 'menu-item (car-safe def))
-                             (which-key--get-menu-item-binding def)
-                           def))
-                    (binding
-                     (cons key-desc
-                           (cond
-                            ((and (eq (car-safe def) 'which-key)
-                                  (keymapp (cdr-safe def))))
-                            ((and (eq (car-safe def) 'which-key)
-                                  (not (caddr def)))
-                             (s-prepend "++" (cadr def)))
-                            ((eq (car-safe def) 'which-key)
-                             (cadr def))
-                            ((symbolp def) (which-key--compute-binding def))
-                            ((keymapp def) "prefix")
-                            ((eq 'lambda (car-safe def)) "+lambda")
-                            ((eq 'closure (car-safe def)) "+closure")
-                            ((stringp def) def)
-                            ((vectorp def) (key-description def))
-                            ((and (consp def)
-                                  ;; looking for (STRING . DEFN)
-                                  (stringp (car def)))
-                             (concat (when (keymapp (cdr-safe def))
-                                       "group:")
-                                     (car def)))
-                            (t "unknown")))))
-               (when (and binding
-                          (or (null filter)
-                              (and (functionp filter)
-                                   (funcall filter binding))))
-                 (push binding bindings)))))))
-       prefix-map))
-   bindings))
-
+        (map-keymap
+         (lambda (ev def)
+           (let* ((key (vconcat prefix (list ev)))
+                  (key-desc (key-description key)))
+             (cond
+              ((assoc (key-description (list ev)) bindings))
+              ((assoc key-desc bindings))
+              ((and (listp ignore-commands) (symbolp def) (memq def ignore-commands))
+               (push (cons key-desc "") bindings)
+               )
+              ((or (string-match-p
+                    which-key--ignore-non-evil-keys-regexp key-desc)
+                   (eq ev 'menu-bar)))
+              ((and (keymapp def)
+                    (string-match-p which-key--evil-keys-regexp key-desc)))
+              ((and (keymapp def)
+                    (or all
+                        ;; event 27 is escape, so this will pick up meta
+                        ;; bindings and hopefully not too much more
+                        (and (numberp ev) (= ev 27))))
+               (setq bindings
+                     (which-key--get-keymap-bindings-1
+                      keymap bindings key filter all ignore-commands)))
+              (def
+               (let* ((def (if (eq 'menu-item (car-safe def))
+                               (which-key--get-menu-item-binding def)
+                             def))
+                      (binding
+                       (cons key-desc
+                             (cond
+                              ((and (eq (car-safe def) 'which-key)
+                                    (keymapp (cdr-safe def))))
+                              ((and (eq (car-safe def) 'which-key)
+                                    (not (caddr def)))
+                               (s-prepend "++" (cadr def)))
+                              ((eq (car-safe def) 'which-key)
+                               (cadr def))
+                              ((symbolp def) (which-key--compute-binding def))
+                              ((keymapp def) "prefix")
+                              ((eq 'lambda (car-safe def)) "+lambda")
+                              ((eq 'closure (car-safe def)) "+closure")
+                              ((stringp def) def)
+                              ((vectorp def) (key-description def))
+                              ((and (consp def)
+                                    ;; looking for (STRING . DEFN)
+                                    (stringp (car def)))
+                               (concat (when (keymapp (cdr-safe def))
+                                         "group:")
+                                       (car def)))
+                              (t "unknown")))))
+                 (when (and binding
+                            (or (null filter)
+                                (and (functionp filter)
+                                     (funcall filter binding))))
+                   (push binding bindings)))))))
+         prefix-map))
+      bindings))
 (define-advice which-key--compute-binding (:override (binding)
                                                      +jg-which-key)
   "Replace BINDING with remapped binding if it exists.

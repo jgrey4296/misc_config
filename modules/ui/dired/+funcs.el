@@ -185,28 +185,6 @@ Type SPC or `y' to %s one match, DEL or `n' to skip to next,
     )
   )
 
-(defun +jg-dired-downcase-marked-files ()
-  (interactive)
-  (cl-loop for file in (dired-get-marked-files)
-           do
-           (let* ((case-fold-search nil)
-                  (dir (f-parent file))
-                  (oldname (f-filename file))
-                  (newname (downcase (downcase (s-replace-regexp "\\([A-Z]\\)" "_\\1" (f-no-ext oldname)))))
-                 )
-             (dired-rename-file file
-                                (f-join dir
-                                        (concat (if (s-starts-with? "_" newname)
-                                                    (substring newname 1)
-                                                  newname)
-                                                "." (f-ext oldname)))
-                                nil
-                                )
-
-             )
-           )
-  )
-
 (defun +jg-dired-hash-files ()
   (interactive)
   (let* ((marked (dired-get-marked-files))

@@ -14,12 +14,12 @@
                      "code-converting-work"
                      "code-conversion-work"
                      "helm candidates"
-                     "Pp Eval"
+                     ;; "Pp Eval"
                      "RNC Input"
                      "counsel"
-                     ))
-          (* any)
-          )
+                     )
+             (* any)
+             ))
       )
 
 (setq ibuffer-show-empty-filter-groups t
@@ -27,13 +27,13 @@
       ibuffer-filter-group-name-face '(:inherit (success bold))
 
       jg-ibuffer-ivy-predicate-patterns (rx (or "*helpful"
-                                                   "*helm-"
-                                                   "doom"
-                                                   "*dired-log"
-                                                   "magit"
-                                                   "*Free Keys"
-                                                   )
-                                               )
+                                                "*helm-"
+                                                "doom"
+                                                "*dired-log"
+                                                "magit"
+                                                "*Free Keys"
+                                                )
+                                            )
       )
 
 ;;-- popup spec

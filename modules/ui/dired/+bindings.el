@@ -71,6 +71,7 @@
       :desc "compress to"         :n "Z" #'dired-do-compress-to
       :desc "new dir"             :n "n" #'dired-create-directory
       :desc "symlink"             :n "S" #'dired-do-symlink
+      :desc "Relative Symlink"    :n "~" #'dired-do-relsymlink
       :desc "downcase"            :n "d" #'dired-downcase
       :desc "upcase"              :n "u" #'dired-upcase
       :desc "do-rename-regexp"    :n "R" #'dired-do-rename-regexp

@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 
-CMAKE_BUILD_PARALLEL_LEVEL=2
+export CMAKE_BUILD_PARALLEL_LEVEL=2
+export make_jobs=1

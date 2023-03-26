@@ -83,7 +83,7 @@
 ;;-- fold spec
 (after! jg-ui-reapply-hook-ready
   (+jg-fold-add-spec 'org
-                     `((org-mode)
+                     `((org-mode doom-docs-org-mode)
                        :open-all   nil
                        :close-all  org-cycle-global
                        :toggle     org-cycle

@@ -32,10 +32,9 @@
       jg-bibtex-scholar-search-fields       '("author" "editor" "ALTauthor" "Alteditor" "year" "doi" "isbn")
       jg-bibtex-scholar-search-fields-exact '("title")
       )
-(setq bibtex-completion-additional-search-fields jg-bibtex-search-fields
-      bibtex-completion-pdf-field                "file")
+(setq bibtex-completion-additional-search-fields jg-bibtex-search-fields)
+(setq bibtex-completion-pdf-field "file")
 ;;-- end bibtex fields
-
 
 ;;-- urls
 (setq jg-bibtex-reference-url         "https://www.bibtex.com/g/bibtex-format/"
@@ -71,8 +70,8 @@
 (setq jg-bibtex-curl-cmd      "curl"
       jg-bibtex-curl-args     "-sLI"
       ;; bibtex-completion-pdf-open-function #'(lambda (x) (org-open-link-from-string (format "[[file:%s]]" x)))
-      bibtex-completion-pdf-open-function 'browse-url
- )
+      )
+(defvar bibtex-completion-pdf-open-function 'browse-url)
 ;;-- end commands
 
 ;;-- hl line

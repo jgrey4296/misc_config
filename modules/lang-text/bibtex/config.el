@@ -23,8 +23,7 @@
   (load! "clean/+all")
 
   (pushnew! bibtex-dialect-list 'jg)
-  (let ((sorted-entries
-         (sort (copy-alist bibtex-jg-entry-alist) (lambda (x y) (string-lessp (car x) (car y)))))
+  (let ((sorted-entries (sort (copy-alist bibtex-jg-entry-alist) (lambda (x y) (string-lessp (car x) (car y)))))
         )
     (setq bibtex-jg-entry-alist sorted-entries)
     )
@@ -32,7 +31,6 @@
   (add-hook! 'bibtex-mode-hook
              #'yas-minor-mode
              #'outline-minor-mode
-             ;; #'vimish-fold-mode
              #'+jg-bibtex-font-lock-mod-hook
              )
 
@@ -47,15 +45,21 @@
     )
 
   )
-(after! bibtex
-  (setq bibtex-dialect 'biblatex
-        bibtex-align-at-equal-sign t
-        bibtex-text-indentation 20)
-  (define-key bibtex-mode-map (kbd "C-c \\") #'bibtex-fill-entry))
 
 (use-package! helm-bibtex
   :commands (bibtex-completion-init)
 )
+(use-package! ivy-bibtex
+  :when (modulep! :completion ivy)
+  :defer t
+  :config
+  (add-to-list 'ivy-re-builders-alist '(ivy-bibtex . ivy--regex-plus))
+  )
+(use-package! bibtex-completion
+  :when (or (modulep! :completion ivy)
+            (modulep! :completion helm))
+  :defer t
+  )
 
 (use-package! org-ref
   :after-call org-ref-version
@@ -82,18 +86,6 @@
 (use-package! oc-biblatex :after oc)
 (use-package! oc-csl :after oc)
 (use-package! oc-natbib :after oc)
-
-(use-package! bibtex-completion
-  :when (or (modulep! :completion ivy)
-            (modulep! :completion helm))
-  :defer t
-  )
-(use-package! ivy-bibtex
-  :when (modulep! :completion ivy)
-  :defer t
-  :config
-  (add-to-list 'ivy-re-builders-alist '(ivy-bibtex . ivy--regex-plus))
-  )
 
 (add-hook 'doom-first-file-hook #'bibtex-completion-init)
 (add-hook 'doom-first-file-hook #'+jg-bibtex-build-list 90)

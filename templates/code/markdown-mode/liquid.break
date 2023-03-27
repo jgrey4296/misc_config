@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : liquid.break
+# uuid  : liquid.break
+# key   : liquid.break
+# group :
+# --
+i{% break %}

@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name  : jekyll-header
+# uuid  : jekyll-header
+# key   : jekyll-header
+# group :
+# --
+---
+layout: default
+title: $1
+date:
+tags: []
+---
+$0

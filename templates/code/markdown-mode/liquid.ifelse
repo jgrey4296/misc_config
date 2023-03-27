@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name  : liquid.ifelse
+# uuid  : liquid.ifelse
+# key   : liquid.ifelse
+# group :
+# --
+{% if ${1:condition} %}
+$2
+{% endif %}

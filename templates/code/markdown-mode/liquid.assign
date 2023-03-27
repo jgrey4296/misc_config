@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : liquid.assign
+# uuid  : liquid.assign
+# key   : liquid.assign
+# group :
+# --
+{% assign ${1:name} = ${2:'value'} %}

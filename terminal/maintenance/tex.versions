@@ -12,21 +12,11 @@ i automata: Finite state machines, graphs and trees in MetaPost
 i auxhook: Hooks for auxiliary files
 i awesomebox: Draw admonition blocks in your documents, illustrated with FontAwesome icons
 i babel: Multilingual support for LaTeX, LuaLaTeX, XeLaTeX, and Plain TeX
-i babel-basque: Babel contributed support for Basque
-i babel-czech: Babel support for Czech
-i babel-danish: Babel contributed support for Danish
-i babel-dutch: Babel contributed support for Dutch
 i babel-english: Babel support for English
-i babel-finnish: Babel support for Finnish
 i babel-french: Babel contributed support for French
 i babel-german: Babel support for documents written in German
-i babel-hungarian: Babel support for Hungarian (Magyar)
 i babel-italian: Babel support for Italian text
-i babel-norsk: Babel support for Norwegian
-i babel-polish: Babel support for Polish
-i babel-portuges: Babel support for Portuges
 i babel-spanish: Babel support for Spanish
-i babel-swedish: Babel support for typesetting Swedish
 i babelbib: Multilingual bibliographies
 i bbcard: Bullshit bingo, calendar and baseball-score cards
 i beamer: A LaTeX class for producing presentations and slides
@@ -124,21 +114,11 @@ i hycolor: Implements colour for packages hyperref and bookmark
 i hyperref: Extensive support for hypertext in LaTeX
 i hyph-utf8: Hyphenation patterns expressed in UTF-8
 i hyphen-base: core hyphenation support files
-i hyphen-basque: Basque hyphenation patterns.
-i hyphen-czech: Czech hyphenation patterns.
-i hyphen-danish: Danish hyphenation patterns.
-i hyphen-dutch: Dutch hyphenation patterns.
 i hyphen-english: English hyphenation patterns.
-i hyphen-finnish: Finnish hyphenation patterns.
 i hyphen-french: French hyphenation patterns.
 i hyphen-german: German hyphenation patterns.
-i hyphen-hungarian: Hungarian hyphenation patterns.
 i hyphen-italian: Italian hyphenation patterns.
-i hyphen-norwegian: Norwegian Bokmal and Nynorsk hyphenation patterns.
-i hyphen-polish: Polish hyphenation patterns.
-i hyphen-portuguese: Portuguese hyphenation patterns.
 i hyphen-spanish: Spanish hyphenation patterns.
-i hyphen-swedish: Swedish hyphenation patterns.
 i hyphenex: US English hyphenation exceptions file
 i ifplatform: Conditionals to test which platform is being used
 i iftex: Am I running under pdfTeX, XeTeX or LuaTeX?

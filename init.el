@@ -1,18 +1,17 @@
 ;;; init.el -*- lexical-binding: t; -*-
 
 (doom!
- :config default bindings completion disabled ui help snippets search
+ :config default bindings completion disabled help programming search snippets ui
  :app   (rss +org)
  :completion company ivy
 
+ :editor char-insert fold navigation projects tagging text-manipulation
  :editor (evil +everywhere) file-templates format
- :editor char-insert fold projects text-manipulation
- :editor snippets word-wrap rotate-text tagging
- :editor navigation
+ :editor fold snippets word-wrap rotate-text
  ;;:editor multiple-cursors
 
- :emacs  electric
- :emacs vc browse misc version-control
+ :emacs electric vc
+ :emacs browse dired hydra ibuffer misc popup version-control
 
  ;; :lang-data csv graphql
  :lang-data xml toml json yaml logs
@@ -41,7 +40,7 @@
  ;; :lang racket rst
  ;; :lang scheme
 
- :ui deft doom ibuffer hydra popup dired
+ :ui deft doom
  :ui hl-todo indent-guides ligatures
  :ui minimap modeline neotree ophints
  :ui vc-gutter vi-tilde-fringe window-select workspaces
@@ -52,8 +51,8 @@
 
  :checkers syntax (spell +flyspell) grammar
 
- :tools biblio debugger editorconfig (eval +overlay)
- :tools lookup lsp magit rgb tmux tree-sitter mail twitter
+ :tools debugger doot lookup (eval +overlay) lsp magit mail tmux twitter
+ :tools editorconfig tools rgb tree-sitter mail
  ;;:tools ein make
 
  :email (mu4e +gmail)

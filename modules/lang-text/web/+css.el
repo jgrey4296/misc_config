@@ -16,7 +16,6 @@ If set to `nil', disable all the above behaviors.")
             '("less" "css")
             '("styl" "css")))
 
-
 ;;
 ;;; Major modes
 
@@ -37,36 +36,20 @@ If set to `nil', disable all the above behaviors.")
            #'rainbow-mode)
 
 ;; built-in. Contains both css-mode & scss-mode
-(after! css-mode
-  ;; css-mode hooks apply to scss and less-css modes
-  (map! :localleader
-        :map scss-mode-map
-        "b" #'+css/scss-build
-        :map (css-mode-map scss-mode-map less-css-mode-map)
-        "rb" #'+css/toggle-inline-or-block)
+(use-package! counsel-css
+  :after css-mode
+  :when (modulep! :completion ivy)
+  :hook (css-mode . counsel-css-imenu-setup)
+  )
 
-  (use-package! counsel-css
-    :when (modulep! :completion ivy)
-    :hook (css-mode . counsel-css-imenu-setup)
-    :init
-    (map! :map (css-mode-map scss-mode-map less-css-mode-map)
-          :localleader ";" #'counsel-css))
-
-  (use-package! helm-css-scss
-    :when (modulep! :completion helm)
-    :defer t
-    :init
-    (map! :map (css-mode-map scss-mode-map less-css-mode-map)
-          :localleader ";" #'helm-css-scss)
-    :config
-    (setq helm-css-scss-split-direction #'split-window-vertically
-          helm-css-scss-split-with-multiple-windows t)))
-
+(use-package! helm-css-scss
+  :when (modulep! :completion helm)
+  :defer t
+  )
 
 (after! sass-mode
   (set-company-backend! 'sass-mode 'company-css)
-  (map! :map sass-mode-map :localleader "b" #'+css/sass-build))
-
+  )
 
 ;;
 ;;; Tools

@@ -100,12 +100,10 @@
 (map! :map dired-mode-map
       :after jg-dired-bindings
       :localleader
-      :prefix "K"
+      :prefix ("b" . "bibtex")
       :desc "Unify Pdf Locations" "U"   #'+jg-bibtex-dired-unify-pdf-locations
-      (:prefix ("b" . "Bibtex")
        :desc "Generate Tex for marked Bibtex" "g" #'+jg-bibtex-dired-compile
        :desc "Compile marked tex" "C" #'+jg-bibtex-dired-compile-run
-       )
       )
 
 ;;-- end dired

@@ -21,7 +21,7 @@ from doot.tasks.files.backup import BackupTask
 from doot.tasks.groups import *
 from doot.tasks.groups_secondary import *
 
-from bkmkorg.doot_tasks.orgs import (OrgMultiThreadCount, ThreadListings,
+from doot.tasks.bkmkorg.orgs import (OrgMultiThreadCount, ThreadListings,
                                      ThreadOrganise)
 
 class TwitHash(hashing.HashAllFiles):

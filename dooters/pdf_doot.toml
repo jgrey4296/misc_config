@@ -7,8 +7,8 @@ notify   = { say-on-exit = false }
 globbing = { ignores = ['.git', '.DS_Store', "__pycache__"] }
 
 [logging]
-stream = { level = "INFO", format  = "{levelname:<8} : {message}", filters = ["doot", "bkmkorg"] }
-file   = { level = "DEBUG", format = "{levelname:<8} : {message:<20} : ({module}.{lineno}.{funcName})", filters =  ["doot", "bkmkorg"] }
+stream = { level = "INFO", format  = "{levelname:<8} : {message}", filters = ["doot"] }
+file   = { level = "DEBUG", format = "{levelname:<8} : {message:<20} : ({module}.{lineno}.{funcName})", filters =  ["doot"] }
 
 [[directories]]
 temp    = ".temp"

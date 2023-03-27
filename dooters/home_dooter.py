@@ -26,8 +26,8 @@ if __name__ == "dooter":
     ##-- end backup
 
     try:
-        from bkmkorg.doot_tasks import bibtex, basic, bookmark, tags, android, backup
-        from bkmkorg.doot_tasks import socmedia_post as post
+        from doot.tasks.bkmkorg import bibtex, basic, bookmark, tags, android, backup
+        from doot.tasks.bkmkorg import socmedia_post as post
 
         time_announce  = basic.TimeAnnounce(locs=doot.locs)
         twitter_access = basic.TwitterAccess(locs=doot.locs)

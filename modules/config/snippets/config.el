@@ -26,6 +26,10 @@
   (load! "+bindings")
   )
 
+(define-advice doom-snippets-initialize (:override () +jg-snippets-fix)
+  nil
+  )
+
 ;;-- hook setup
 (defun +jg-snippets-on-load-hook ()
   (require 'yasnippet)

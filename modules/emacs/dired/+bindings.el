@@ -57,24 +57,25 @@
        )
 )
 (map! :map jg-dired-mode-map ;; change
+      :desc "Delete"              :n "D" #'dired-do-delete
+
       :prefix ("c" . "Change")
       :desc "Reformat jsons"      :n "J" #'+jg-dired-reformat-jsons
       :desc "Replace grep"        :n "G" #'dired-do-find-regexp-and-replace
       :desc "kill"                :n "K" #'dired-do-delete
-
-      :desc "copy"                :n "c" #'dired-do-copy
-      :desc "byte compile"        :n "b" #'dired-do-byte-compile
-      :desc "rename"              :n "r" #'dired-do-rename
-      :desc "do-rename-regexp"    :n "R" #'dired-do-rename-regexp
       :desc "Global Match Rename" :n "R" #'+jg-dired-GLOBAL-do-rename-regexp
-      :desc "compress"            :n "z" #'dired-do-compress
-      :desc "compress to"         :n "Z" #'dired-do-compress-to
-      :desc "new dir"             :n "n" #'dired-create-directory
       :desc "symlink"             :n "S" #'dired-do-symlink
       :desc "Relative Symlink"    :n "~" #'dired-do-relsymlink
+
+      :desc "byte compile"        :n "b" #'dired-do-byte-compile
+      :desc "compress to"         :n "Z" #'dired-do-compress-to
+      :desc "compress"            :n "z" #'dired-do-compress
+      :desc "copy"                :n "c" #'dired-do-copy
       :desc "downcase"            :n "d" #'dired-downcase
+      :desc "move"                :n "m" #'+jg-dired-move
+      :desc "new dir"             :n "n" #'dired-create-directory
+      :desc "rename"              :n "r" #'+jg-dired-rename
       :desc "upcase"              :n "u" #'dired-upcase
-      :desc "do-rename-regexp"    :n "R" #'dired-do-rename-regexp
       )
 (map! :map jg-dired-mode-map ;; describe
       :prefix ("d" . "describe")

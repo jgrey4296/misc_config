@@ -211,3 +211,12 @@ Type SPC or `y' to %s one match, DEL or `n' to skip to next,
       )
     )
   )
+
+(defalias '+jg-dired-move 'dired-do-rename)
+
+(defun +jg-dired-rename ()
+  (interactive)
+  (let ((dired-dwim-target nil))
+    (dired-do-rename)
+    )
+  )

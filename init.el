@@ -52,7 +52,7 @@
  :checkers syntax (spell +flyspell) grammar
 
  :tools debugger doot lookup (eval +overlay) lsp magit mail tmux twitter
- :tools editorconfig tools rgb tree-sitter mail
+ :tools editorconfig rgb tree-sitter mail
  ;;:tools ein make
 
  :email (mu4e +gmail)

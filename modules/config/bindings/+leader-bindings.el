@@ -328,6 +328,7 @@
       :prefix ("q" . "quit/restart")
       :desc "Quit Emacs"                   "q" #'kill-emacs
       :desc "Pause Emacs"                  "p" #'suspend-emacs
+      :desc "Kill Server"                  "s" (cmd! (server-force-stop))
       :desc "Restart emacs server"         "S" #'+default/restart-server
 
        (:prefix ("f" . "Frames")

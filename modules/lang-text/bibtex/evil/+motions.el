@@ -23,7 +23,6 @@
     )
   )
 
-
 (map! :after bibtex
       :map bibtex-mode-map
       :localleader

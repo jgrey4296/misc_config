@@ -2,6 +2,11 @@
 
 ;; Use file-template specs
 
+(defun +file-templates-in-emacs-dirs-p (file)
+  "Returns t if FILE is in Doom or your private directory."
+  (or (file-in-directory-p file doom-user-dir)
+      (file-in-directory-p file doom-emacs-dir)))
+
 (defun +file-template-p (rule)
   "Return t if RULE applies to the current buffer."
   (let ((pred (car rule))
@@ -66,7 +71,6 @@ evil is loaded and enabled)."
         (symbol-name (car m))
       (format "%s %s" (car m) (cdr m)))))
 
-
 ;;; Commands
 ;;;###autoload
 (defun +file-templates/insert-license ()
@@ -101,7 +105,6 @@ for it. This is used for testing."
                      :key #'yas--template-key :test #'equal))
         (message "Found %s" (cons pred plist))
       (message "Found rule, but can't find associated snippet: %s" (cons pred plist)))))
-
 
 ;;; Trigger functions
 (defun +file-templates-insert-doom-docs-fn ()

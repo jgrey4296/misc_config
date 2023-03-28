@@ -26,6 +26,8 @@
       ;; "$"                        #'dired-hide-all
       :desc "Expand Subdir"  :n "i" #'+jg-dired-insert-subdir-maybe-recursive
       :desc "Expand Marked"  :n "I" #'+jg-dired-insert-marked-subdir
+      :n "y" #'dired-copy-filename-as-kill
+
       )
 (map! :map jg-dired-mode-map ;; mark
       :n "t"                                      #'dired-toggle-marks
@@ -86,6 +88,8 @@
       :n "s" #'+jg-dired-dir-size
       :n "i" 'dired-hide-details-mode
       :n "g" #'dired-git-info-mode
+      :n "p" (cmd! (dired-copy-filename-as-kill 0))
+      :n "n" #'dired-copy-filename-as-kill
       )
 (map! :map jg-dired-mode-map ;; open
       :prefix ("o" . "Open")
@@ -93,6 +97,7 @@
       :desc "Other Window"        :n "o" #'dired-find-file-other-window
       :desc "Quicklook"           :n "l" #'+jg-dired-quick-look
       :desc "Find Random Marked"  :n "r" #'+jg-dired-find-random-marked-file
+      :desc "Eww"                 :n "e" #'eww-open-file
       )
 (map! :map jg-dired-mode-map ;; encryption
       :after epa

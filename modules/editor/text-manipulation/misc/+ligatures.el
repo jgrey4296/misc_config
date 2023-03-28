@@ -1,7 +1,6 @@
 ;;; +ligatures.el -*- lexical-binding: t; -*-
 
 
-;;-- ligatures
 ;; TODO move to text
 (setq +ligatures-extra-symbols
       '(;; org
@@ -42,5 +41,3 @@
         :pipe          "|"
         :dot           "•")
       )
-
-;;-- end ligatures

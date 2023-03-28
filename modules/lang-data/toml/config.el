@@ -31,7 +31,6 @@
   :config
 
   (add-hook! 'conf-toml-mode-hook :depth 100
-             #'+jg-toml-customisation-hook
              #'outline-minor-mode
              (setq-local jg-text-whitespace-clean-hook
                          '(+jg-toml-cleanup-ensure-newline-before-table

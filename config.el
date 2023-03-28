@@ -28,6 +28,8 @@
       )
 ;;-- end locations
 
+(setq server-log t)
+
 ;;-- evil
 (setq evil-collection-setup-minibuffer t
       evil-move-beyond-eol t

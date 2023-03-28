@@ -9,6 +9,7 @@
       :desc "Dir: Git Template"   "4" (cmd! (find-file (expand-file-name "templates/git" doom-user-dir)))
       :desc "Dir: Doom Snippet"   "5" (cmd! (find-file doom-snippets-dir))
       :desc "Dir: Yas  Snippet"   "6" (cmd! (find-file yasnippet-snippets-dir))
+      :desc "Debug File Template" "?" #'+file-templates/debug
 )
 ;;-- end browsing
 

@@ -1,20 +1,24 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
-;;-- file specs
-(after! jg-ui-reapply-hook-ready
-  (+jg-snippets-add-file-spec
-   'general
-   '(("/docker-compose\\.yml$" :mode yaml-mode)
-     ;; direnv
-     ("/\\.envrc$" :trigger "__envrc" :mode direnv-envrc-mode)
-     ;; Markdown
-     (markdown-mode)
-     ;; Markdown
-     (sh-mode :priority -100)
-     (gitignore-mode :priority -100)
-     (dockerfile-mode)
-     (snippet-mode)
-     )
+(defvar jg-snippets-code-templates-dir    (expand-file-name "templates/code" doom-user-dir))
+(defvar jg-snippets-file-templates-dir    (expand-file-name "templates/files" doom-user-dir))
+(defvar jg-snippets-project-templates-dir (expand-file-name "templates/projects" doom-user-dir))
+(defvar +file-templates-dir nil)
+(defvar +file-templates-default-trigger "__")
+(defvar +file-templates-inhibit nil)
+(defvar jg-snippets-file-specs (make-hash-table))
+
+(+jg-snippets-add-file-spec
+ 'general
+ '(("/docker-compose\\.yml$" :mode yaml-mode)
+   ;; direnv
+   ("/\\.envrc$" :trigger "__envrc" :mode direnv-envrc-mode)
+   ;; Markdown
+   (markdown-mode)
+   ;; Markdown
+   (sh-mode :priority -100)
+   (gitignore-mode :priority -100)
+   (dockerfile-mode)
+   (snippet-mode)
    )
-  )
-;;-- end file specs
+ )

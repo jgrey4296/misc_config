@@ -39,7 +39,7 @@
   )
 (add-hook 'doom-first-file-hook #'+jg-snippets-on-load-hook)
 (add-hook 'jg-ui-reapply-hook '+jg-snippets-reapply-file-specs)
-
+(add-hook 'doom-switch-buffer-hook #'+file-templates-check-h)
 ;;-- end hook setup
 
 ;;; config.el ends here

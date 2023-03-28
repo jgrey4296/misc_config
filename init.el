@@ -6,7 +6,7 @@
  :completion company ivy
 
  :editor char-insert fold navigation projects tagging text-manipulation
- :editor (evil +everywhere) file-templates format
+ :editor (evil +everywhere) format
  :editor fold snippets word-wrap rotate-text
  ;;:editor multiple-cursors
 

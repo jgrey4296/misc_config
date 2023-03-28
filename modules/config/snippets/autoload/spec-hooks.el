@@ -1,10 +1,6 @@
 ;; -*- mode:emacs-lisp; no-byte-compile: t;  -*-
 
-(defvar jg-snippets-code-templates-dir    (expand-file-name "templates/code" doom-user-dir))
-(defvar jg-snippets-file-templates-dir    (expand-file-name "templates/files" doom-user-dir))
-(defvar jg-snippets-project-templates-dir (expand-file-name "templates/projects" doom-user-dir))
-
-(defvar jg-snippets-file-specs (make-hash-table))
+;; Definee and reapply file specs
 
 ;;;###autodef
 (defun +jg-snippets-reapply-file-specs ()
@@ -21,7 +17,7 @@
                                  +file-templates-dir
                                  doom-snippets-dir
                                  yasnippet-snippets-dir)
-          yas--default-user-snippets-dir jg-snippets-file-templates-dir
+          yas--default-user-snippets-dir jg-snippets-code-templates-dir
           +file-templates-alist flattened
           )
     )

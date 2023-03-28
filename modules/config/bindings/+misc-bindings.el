@@ -122,6 +122,10 @@
 (define-key evil-motion-state-map [mouse-5] #'ignore)
 ;;-- end Mouse Deactivation
 
+(map! :map calendar-mode-map
+      :n "RET" #'+jg-bindings-calendar-insert-date
+      )
+
 (after! which-key
   (let ((prefix-re (regexp-opt (list doom-leader-key doom-leader-alt-key))))
     (cl-pushnew `((,(format "\\`\\(?:C-w\\|%s w\\) m\\'" prefix-re))

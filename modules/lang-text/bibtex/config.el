@@ -2,7 +2,6 @@
 
 (load! "+vars")
 (load! "+hooks")
-(load! "tags/+tags")
 (load! "+advice")
 (load! "helm/+all")
 (load! "dired/+dired")

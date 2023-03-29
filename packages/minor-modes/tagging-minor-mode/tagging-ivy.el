@@ -1,20 +1,23 @@
 ;;; tagging-ivy.el -*- lexical-binding: t; -*-
 ;; Adds actions to ivy for easy search + tagging of files from dired
+
+(require 'ivy)
+
 (defvar tagging-minor-mode-selected-tag nil)
 
-(defun +jg-tag-ivy-tag-set (x)
+(defun tagging-minor-mode-ivy-tag-set (x)
   " Register a tag to reuse "
   (message "Registering")
   (setq tagging-minor-mode-selected-tag (read-string "Store Tag: "))
   )
 
-(defun +jg-tag-ivy-tag-clear (x)
+(defun tagging-minor-mode-ivy-tag-clear (x)
   " Clear the registered tag "
   (message "Clearing")
   (setq tagging-minor-mode-selected-tag nil)
   )
 
-(defun +jg-tag-ivy-set-tags (tag)
+(defun tagging-minor-mode-ivy-set-tags (tag)
   (goto-char (line-beginning-position))
   (if (re-search-forward "^\*\* Thread:.+?\s+\\(:.+?:\\)$" (line-end-position) t)
         (let* ((match (match-data))
@@ -33,7 +36,7 @@
       (goto-char (line-end-position))
       (insert "          " ":" tag ":"))))
 
-(defun +jg-tag-ivy-tag (x)
+(defun tagging-minor-mode-ivy-tag (x)
   "Opens the current candidate in another window."
   (when (string-match "\\`\\(.*?\\):\\([0-9]+\\):\\(.*\\)\\'" x)
     (let* ((file-name   (match-string-no-properties 1 x))
@@ -53,7 +56,7 @@
         (if (re-search-backward "^\*\* Thread:" nil t)
             (progn
               ;; Set Tags
-              (+jg-tag-ivy-set-tags the-tag)
+              (tagging-minor-mode-ivy-set-tags the-tag)
               ;; Save the file
               (write-file full-file))
           )
@@ -62,7 +65,7 @@
     )
   )
 
-(defun +jg-tag-ivy-replace (x)
+(defun tagging-minor-mode-ivy-replace (x)
   "Opens the current candidate in another window."
   (when (string-match "\\`\\(.*?\\):\\([0-9]+\\):\\(.*\\)\\'" x)
     (let* ((file-name   (match-string-no-properties 1 x))
@@ -93,10 +96,9 @@
     )
   )
 
-
 (ivy-set-actions 'counsel-rg
-                 '(("t" +jg-tag-ivy-tag "Tag")
-                   ("T" +jg-tag-ivy-tag-set "Set Tag")
-                   ("C" +jg-tag-ivy-tag-clear "Clear Tag")
-                   ("r" +jg-tag-ivy-replace "Replace Tag")
+                 '(("t" tagging-minor-mode-ivy-tag "Tag")
+                   ("T" tagging-minor-mode-ivy-tag-set "Set Tag")
+                   ("C" tagging-minor-mode-ivy-tag-clear "Clear Tag")
+                   ("r" tagging-minor-mode-ivy-replace "Replace Tag")
                    ))

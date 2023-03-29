@@ -1,6 +1,5 @@
 
 (load! "+vars")
-(load! "util/+index")
 (load! "+funcs")
 (load! "helm/+sources")
 (load! "helm/+actions")
@@ -12,11 +11,20 @@
   )
 (after! (evil org)
   ;; (+jg-tag-rebuild-tag-database)
-  (require 'helm)
   (evil-define-operator +jg-tag-helm-start (beg end rest)
     (interactive "<R>")
     (+jg-tag-helm-tagger beg end)
     )
   )
 
-(use-package! rawtag-mode :defer t)
+(use-package! rawtag-mode
+  :commands rawtag-mode
+  )
+(use-package! tagging-minor-mode
+  :after (evil helm)
+  :commands global-tagging-minor-mode
+  :config
+  (tagging-minor-mode-rebuild-tag-database)
+  )
+
+(add-hook! 'doom-first-file-hook #'global-tagging-minor-mode)

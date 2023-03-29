@@ -23,20 +23,28 @@
 
 ;;-- end header
 
-;;-- spec registration
-(defvar tagging-minor-mode-spec-table (make-hash-table))
+(require 'evil)
+(require 'tagging-minor-mode-helm-tagger)
+(require 'tag-charting)
+(require 'f)
 
-(defun tagging-minor-mode-add-spec  (sym setfn newfn getfn)
-  " Register a mode symbol with a function/symbol to
+(defvar tagging-minor-mode-global-tags      (make-hash-table :test 'equal))
+(defvar-local tagging-minor-mode-local-tags (make-hash-table :test 'equal))
+(defvar tagging-minor-mode-marker           (make-marker))
+(defvar tagging-minor-mode-substitution-sources  (expand-file-name "~/github/jgrey4296.github.io/resources/tags/substitutions"))
+(defvar tagging-minor-mode-main-loc         (expand-file-name "~/github/jgrey4296.github.io/.temp/tags/totals.tags"))
+(defvar tagging-minor-mode-all-tags         nil)
+(defvar tagging-minor-mode-spec-table       (make-hash-table))
+
+;;-- spec registration
+(defun tagging-minor-mode-add-spec  (sym defsAlist)
+  " Register a mode symbol with an alist for :get :set :new and :buff tags
 call when the evil-ex command 't[ag]' is called"
-    (puthash sym `(:set setfn :new newfn :get getfn) tagging-minor-mode-spec-table)
+  (message "Registering Tag Handlers for %s" sym)
+    (puthash sym defsAlist tagging-minor-mode-spec-table)
   )
 
 ;;-- end spec registration
-(defvar tagging-minor-mode-global-tags      (make-hash-table :test 'equal))
-(defvar-local tagging-minor-mode-local-tags (make-hash-table :test 'equal))
-(defvar tagging-minor-mode-totals           (expand-file-name "~/github/jgrey4296.github.io/resources/tags/substitutions"))
-(defvar tagging-minor-mode-marker            (make-marker))
 
 ;;-- mode def
 (define-minor-mode tagging-minor-mode
@@ -50,53 +58,14 @@ call when the evil-ex command 't[ag]' is called"
 
 (defun tagging-minor-mode/turn-on ()
   (unless (minibufferp)
-    (if (eq major-mode 'prog-mode)
-        (tagging-minor-mode 1))
+    (tagging-minor-mode 1)
     )
   )
 
-(define-globalized-minor-mode global-tagging-minor-mode tagging-minor-mode/turn-on)
-
+(define-globalized-minor-mode global-tagging-minor-mode tagging-minor-mode tagging-minor-mode/turn-on)
 
 ;;-- end mode def
 
-(defun tagging-minor-mode-occurrences ()
-  " Create a Bar Chart of Tags in the current buffer "
-  (interactive)
-  (let* ((depth-arg evil-ex-argument)
-         (depth (if depth-arg (string-to-number depth-arg) nil))
-         (alltags (make-hash-table :test 'equal))
-         )
-    (if (eq 'org-mode major-mode)
-        (progn
-          ;; (message "Getting Tags for all buffers to depth: %s" depth)
-          (maphash (lambda (k v) (cl-incf (gethash k alltags 0) v)) (+jg-tag-get-buffer-tags nil depth))
-          (if (not (hash-table-empty-p alltags))
-              (+jg-tag-chart-tag-counts alltags (buffer-name))
-            (message "No Tags in buffer")))
-      (message "Not in an org buffer")
-      )
-    )
-  )
-(defun tagging-minor-mode-occurrences-in-open-buffers()
-  " Retrieve all tags in all open buffers, print to a temporary buffer "
-  (interactive "p")
-  (let* ((allbuffers (buffer-list))
-         (alltags (make-hash-table :test 'equal))
-         (depth (if depth-arg (string-to-number depth-arg) nil))
-         )
-    ;; (message "Getting Tags for all buffers to depth: %s" depth)
-    (cl-loop for x in allbuffers do
-          (if (with-current-buffer x (eq 'org-mode major-mode))
-              (maphash (lambda (k v) (if (not (gethash k alltags)) (puthash k 0 alltags))
-                         (cl-incf (gethash k alltags) v)) (+jg-tag-get-buffer-tags x depth))
-            )
-          )
-    (if (not (hash-table-empty-p alltags))
-        (+jg-tag-chart-tag-counts alltags "Active Files")
-      (message "No Tags in buffers"))
-    )
-  )
 (defun tagging-minor-mode-random-selection  (n)
   (interactive "nHow many tags? ")
   (let* ((tags (hash-table-keys tagging-minor-mode-global-tags))
@@ -110,23 +79,66 @@ call when the evil-ex command 't[ag]' is called"
     )
   )
 
-(defun +jg-tag-set-tags (x)
-  "Utility action to set tags. Works in org *and* bibtex files"
-  (-when-let (handlers (gethash major-mode tagging-minor-mode-spec-table nil))
-      (funcall (plist-get handlers :set) x)
+;;-- defaults
+(defun tagging-minor-mode-set-tags-default (x)
+
   )
+
+(defun tagging-minor-mode-new-tag-default (x)
+
+  )
+
+(defun tagging-minor-mode-get-tag-default (x)
+
+  )
+
+(defun tagging-minor-mode-buffer-tags-default (x)
+
+  )
+
+(tagging-minor-mode-add-spec 'default '((:get tagging-minor-mode-get-tag-default)
+                                        (:set tagging-minor-mode-set-tags-default)
+                                        (:new tagging-minor-mode-new-tag-default)
+                                        (:buff tagging-minor-mode-buffer-tags-default)
+                                        ))
+;;-- end defaults
+
+(defun tagging-minor-mode--get-handlers ()
+  (or (gethash major-mode tagging-minor-mode-spec-table nil)
+      (gethash 'default tagging-minor-mode-spec-table))
+  )
+
+(defun tagging-minor-mode-set-tags (x)
+  "Utility action to set tags. Works in org *and* bibtex files"
+  (let ((handlers (tagging-minor-mode--get-handlers)))
+    (save-excursion
+      (funcall (alist-get :set handlers) x)
+      )
+    )
 )
-(defun +jg-tag-set-new-tag (x)
+
+(defun tagging-minor-mode-set-new-tag (x)
   "Utility action to add a new tag. Works for org *and* bibtex"
-  (-when-let (handlers (gethash major-mode tagging-minor-mode-spec-table nil))
-    (funcall (plist-get handlers :new) x)
+  (let ((handlers (tagging-minor-mode--get-handlers)))
+    (save-excursion
+      (funcall (alist-get :new handlers) x)
+      )
     )
   )
-(defun +jg-tag-get-tags ()
+
+(defun tagging-minor-mode-get-tags ()
   "Utility action to get tags for current entry"
-   (-when-let (handlers (gethash major-mode tagging-minor-mode-spec-table nil))
+  (let ((handlers (tagging-minor-mode--get-handlers)))
      (save-excursion
-       (funcall (plist-get handlers :get))
+       (funcall (alist-get :get handlers))
+       )
+     )
+   )
+
+(defun tagging-minor-mode-get-buffer-tags ()
+  (let ((handlers (tagging-minor-mode--get-handlers)))
+     (save-excursion
+       (funcall (alist-get :buff handlers))
        )
      )
    )
@@ -141,20 +153,21 @@ call when the evil-ex command 't[ag]' is called"
                                    ":" nil " +")))
         (unless (or (> (length tagline) 2) (string-empty-p (car tagline)))
           (puthash (car tagline) (string-to-number (cadr tagline))
-                   jg-tag-global-tags)))
+                   tagging-minor-mode-global-tags)))
       (forward-line)
       )
     )
   )
+
 (defun tagging-minor-mode-rebuild-tag-database ()
-  "Rebuild the tag database from jg-tag-loc-global-tags"
+  "Rebuild the tag database from tagging-minor-mode-main-loc"
   (interactive)
-  (clrhash jg-tag-global-tags)
-  (cond ((not (f-exists? jg-tag-loc-global-tags))
+  (clrhash tagging-minor-mode-global-tags)
+  (cond ((not (f-exists? tagging-minor-mode-main-loc))
          (error "ERROR: GLOBAL-TAGS-LOCATION IS EMPTY")
          )
-        ((f-dir? jg-tag-loc-global-tags)
-         (let ((files (f-entries jg-tag-loc-global-tags
+        ((f-dir? tagging-minor-mode-main-loc)
+         (let ((files (f-entries tagging-minor-mode-main-loc
                                  (-rpartial 'f-ext? "sub")
                                  t)))
            (message "Got Dir")
@@ -162,11 +175,12 @@ call when the evil-ex command 't[ag]' is called"
                     do
                     (tagging-minor-mode-parse-tag-file file))
            ))
-        ((f-file? jg-tag-loc-global-tags)
-         (tagging-minor-mode-parse-tag-file jg-tag-loc-global-tags))
+        ((f-file? tagging-minor-mode-main-loc)
+         (tagging-minor-mode-parse-tag-file tagging-minor-mode-main-loc))
         (t (message "ERROR: GLOBAL-TAGS-LOCATION IS EMPTY"))
         )
   )
+
 
 (provide 'tagging-minor-mode)
 ;;; tagging-minor-mode.el ends here

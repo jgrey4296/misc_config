@@ -140,19 +140,4 @@
             )
       )
     )
-(defun +jg-tag-helm-tagger (&optional beg end)
-  " Opens the Tagging Helm "
-  (set-marker jg-tag-marker (if (eq evil-state 'visual)  evil-visual-end (line-end-position)))
-  (get-buffer-create jg-tag-helm-buffer-name)
-
-  (let* ((current-tags (+jg-tag-get-tags))
-         (candidates (+jg-tag-candidates current-tags))
-         (main-source (cons `(candidates . ,candidates) jg-tag-helm-source))
-         )
-    (helm :sources (list main-source jg-tag-fallback-source)
-          :input ""
-          :buffer jg-tag-helm-buffer-name
-          )
-    )
-  )
 ;;-- end helms

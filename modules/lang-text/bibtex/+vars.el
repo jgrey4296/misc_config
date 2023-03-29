@@ -97,3 +97,16 @@
 )
 
 ;;-- end browse spec
+
+;;-- tagging spec
+(after! tagging-minor-mode
+  (tagging-minor-mode-add-spec 'bibtex-mode
+                               '((:set . +jg-bibtex-set-tags)
+                                 (:new . +jg-bibtex-set-new-tag)
+                                 (:get . +jg-bibtex-get-tags)
+                                 ;; todo :buff
+                                 )
+                               )
+  )
+
+;;-- end tagging spec

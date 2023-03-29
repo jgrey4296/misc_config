@@ -1,12 +1,12 @@
 ;;; timeline-tags.el -*- lexical-binding: t; -*-
 ;; Handlers for jg-tags
 
-(defun +timeline-setup-tags-hook ()
-  ;; TODO wrap this in a guard
-  (+jg-tag-add-mode-handler 'timeline-mode
-                            #'+timeline-set-tags
-                            #'+timeline-set-new-tag
-                            #'+timeline-get-tags
+(eval-after-load  'tagging-minor-mode
+  (tagging-minor-mode-add-spec  'timeline-mode
+                            '((:set +timeline-set-tags)
+                              (:new +timeline-set-new-tag)
+                              (:get +timeline-get-tags)
+                              )
                             )
   )
 

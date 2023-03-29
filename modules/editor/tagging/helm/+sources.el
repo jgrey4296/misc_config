@@ -4,12 +4,6 @@
 (require 'helm-utils)
 (require 'helm-files)
 
-(defun +jg-tag-clean-input (x)
-  (let ((trimmed (string-trim x)))
-    (s-replace-regexp "\s+" "_" trimmed)
-    )
-  )
-
 (setq helm-grep-actions (append helm-grep-actions '(("Open Url" . jg-tag-open-url-action))))
 
 ;; Build a Custom grep for bookmarks
@@ -70,18 +64,4 @@
       (helm-make-source "Twitter File Select Helm" 'helm-source
         :action (helm-make-actions "Find File" #'+jg-tag-find-file)
         )
-      )
-(setq jg-tag-helm-source
-      (helm-make-source "Helm Tagging" 'helm-source
-        :action (helm-make-actions "Re-entrant-set" #'+jg-tag-set-tags-re-entrant
-                                   "Set"            #'+jg-tag-set-tags)
-        :pattern-transformer #'+jg-tag-clean-input
-        )
-      )
-(setq jg-tag-fallback-source
-      (helm-build-dummy-source "Helm Tags Fallback Source"
-        :action (helm-make-actions "Re-entrant-Create" #'+jg-tag-set-new-tag-re-entrant
-                                   "Create"            #'+jg-tag-set-new-tag)
-
-        :filtered-candidate-transformer (lambda (_c _s) (list helm-pattern)))
       )

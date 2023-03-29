@@ -5,7 +5,6 @@
 (load! "util/+clean-funcs")
 (load! "util/+dired")
 (load! "+vars")
-(load! "util/+tags")
 (after! (jg-bindings-total jg-org-stage evil-org)
   (message "Setting up org bindings")
   (load! "util/+text-utils")
@@ -50,5 +49,4 @@
   )
 
 
-;;(add-hook 'doom-first-file-hook #'+jg-org-setup-tags-hook 100)
 ;; (remove-hook 'org-tab-first-hook #'+org-cycle-only-current-subtree-h)

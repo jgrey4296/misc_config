@@ -92,3 +92,15 @@
                        :close      nil))
   )
 ;;-- end fold spec
+
+;;-- tagging spec
+(after! 'tagging-minor-mode
+  (tagging-minor-mode-add-spec 'org-mode
+                               '((:set +jg-org-set-tags)
+                                 (:new +jg-org-set-new-tag)
+                                 (:get org-get-tags)
+                                 ;; todo :buff
+                                 )
+                            )
+  )
+;;-- end tagging spec

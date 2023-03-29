@@ -16,6 +16,7 @@
          (or (not (plist-member plist :when)) (funcall (plist-get plist :when) buffer-file-name))
          rule)))
 
+;;;###autoload
 (defun +file-templates-check-h ()
   "Check if the current buffer is a candidate for file template expansion. It
 must be non-read-only, empty, and there must be a rule in

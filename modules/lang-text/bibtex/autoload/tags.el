@@ -1,33 +1,26 @@
-;;; domain-specific/bibtex/+tags.el -*- lexical-binding: t; -*-
-
-(after! jg-tags-funcs
-  (+jg-tag-add-mode-handler 'bibtex-mode
-                            #'+jg-bibtex-set-tags
-                            #'+jg-bibtex-set-new-tag
-                            #'+jg-bibtex-get-tags
-                            )
-
-  )
+;;; tags.el -*- lexical-binding: t; -*-
+(require 'doi-utils)
 
 (defun +jg-bibtex-split-tags (x)
   (split-string x "," t "+")
   )
 
+;;;###autodef
 (defun +jg-bibtex-set-tags (x)
   " Set tags in bibtex entries "
   (let* ((actual-candidates (mapcar 'car (helm-marked-candidates)))
          (prior-point 1)
-         (end-pos jg-tag-marker)
+         (end-pos tagging-minor-mode-marker)
          (current-tags '())
          (has-real-tags-field nil)
          (add-func (lambda (candidate)
                      (if (not (-contains? current-tags candidate))
                          (progn
                            (push candidate current-tags)
-                           (puthash candidate 1 jg-tag-global-tags))
+                           (puthash candidate 1 tagging-minor-mode-global-tags))
                        (progn
                          (setq current-tags (remove candidate current-tags))
-                         (puthash candidate (- (gethash candidate jg-tag-global-tags) 1) jg-tag-global-tags))
+                         (puthash candidate (- (gethash candidate tagging-minor-mode-global-tags) 1) tagging-minor-mode-global-tags))
                        )))
          )
     (save-excursion
@@ -48,12 +41,13 @@
     )
 )
 
+;;;###autodef
 (defun +jg-bibtex-set-new-tag (x)
   "A Fallback function to set tags of bibtex entries "
   (save-excursion
     (let ((prior-point (- (point) 1))
-          (end-pos jg-tag-marker)
-          (stripped_tags (+jg-bibtex-split-tags (+jg-text-strip-spaces x)))
+          (end-pos tagging-minor-mode-marker)
+          (stripped_tags (+jg-bibtex-split-tags (tagging-minor-mode--trim-input x)))
           )
       (while (and (/= prior-point (point)) (< (point) end-pos))
         (setq prior-point (point))
@@ -65,12 +59,13 @@
                )
           (bibtex-set-field "tags"
                             (string-join total-tags ","))
-          (mapc (lambda (x) (puthash x 1 jg-tag-global-tags)) filtered-tags)
+          (mapc (lambda (x) (puthash x 1 tagging-minor-mode-global-tags)) filtered-tags)
           ;;(org-ref-bibtex-next-entry)
           (evil-forward-section-begin)
           ))))
   )
 
+;;;###autodef
 (defun +jg-bibtex-get-tags ()
   (let ((tags (bibtex-autokey-get-field "tags"))
         (opttags (bibtex-autokey-get-field "OPTtags")))

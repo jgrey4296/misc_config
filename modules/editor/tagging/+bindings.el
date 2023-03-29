@@ -24,10 +24,10 @@
       :localleader
       (:prefix ("d" . "Describe")
        :desc "Count Untagged Orgs" "u"   #'+jg-tag-dired-directory-count-untagged
-       :desc "Describe Marked Tags" "t"  #'+jg-tag-describe-marked-tags
+       :desc "Describe Marked Tags" "t"  #'+jg-tag-dired-describe-marked-tags
        )
       (:prefix ("m" . "Mark")
-       :desc "Mark Untagged Orgs" "u"    #'+jg-tag-mark-untagged-orgs
+       :desc "Mark Untagged Orgs" "u"    #'+jg-tag-dired-mark-untagged-orgs
        )
       (:prefix ("f" . "Find"))
       (:prefix ("i" . "Index")
@@ -35,10 +35,6 @@
        :desc "Index Tags" "t"            #'+jg-tag-index-tags
        )
       )
-;; Evil ex commands
-(evil-ex-define-cmd "t[ag]"  #'+jg-tag-helm-start)
-(evil-ex-define-cmd "to"     #'+jg-tag-occurrences)
-(evil-ex-define-cmd "toa"    #'+jg-tag-occurrences-in-open-buffers)
 (evil-ex-define-cmd "tv"     #'org-tags-view)
 (evil-ex-define-cmd "ts"     #'org-set-tags)
 

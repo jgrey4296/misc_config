@@ -45,13 +45,6 @@
     (+jg-twitter-twitter-tweet-text text nil '(+jg-twitter-tweet_sentinel))
     ))
 
-(defun +jg-tag-insert-candidates (x)
-  "A Helm action to insert selected candidates into the current buffer "
-  (let ((candidates (helm-marked-candidates)))
-    (with-helm-current-buffer
-      ;;Substring -2 to chop off separating marks
-      (insert (mapconcat (lambda (x) (substring x 0 -2)) candidates "\n")))))
-
 (defun +jg-tag-insert-bookmarks (x)
  (let ((candidates (helm-marked-candidates)))
     (with-helm-current-buffer

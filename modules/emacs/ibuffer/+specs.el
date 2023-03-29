@@ -20,18 +20,19 @@
 ;; Filters:
 
 (+jg-ibuffer-add-filter-spec 'default
-                            "-clutter" '(not (or (used-mode . flycheck-error-list-mode)
-                                                 (used-mode . ivy-mode)
-                                                 (used-mode . helm-major-mode)
-                                                 (used-mode . helpful-mode)
-                                                 (used-mode . special-mode)
-                                                 (derived-mode . helm-major-mode)
-                                                 (derived-mode . helpful-mode)
-                                                 (derived-mode . magit-mode)
-                                                 (name . "*vc*")
-                                                 (name . "*shasum*")
-                                                 ))
-                            )
+                             "-clutter" '(not (or (name . "*http ")
+                                                  (used-mode . flycheck-error-list-mode)
+                                                  (used-mode . ivy-mode)
+                                                  (used-mode . helm-major-mode)
+                                                  (used-mode . helpful-mode)
+                                                  (used-mode . special-mode)
+                                                  (derived-mode . helm-major-mode)
+                                                  (derived-mode . helpful-mode)
+                                                  (derived-mode . magit-mode)
+                                                  (name . "*vc*")
+                                                  (name . "*shasum*")
+                                                  ))
+                             )
 
 (+jg-ibuffer-add-filter-spec 'dired
                             "dired" '(used-mode . dired-mode)

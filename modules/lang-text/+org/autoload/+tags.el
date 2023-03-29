@@ -1,13 +1,6 @@
 ;;; lang/jg-org/+tags.el -*- lexical-binding: t; -*-
-(defun +jg-org-setup-tags-hook ()
-  (require 'jg-tags-funcs)
-  (+jg-tag-add-mode-handler 'org-mode
-                            #'+jg-org-set-tags
-                            #'+jg-org-set-new-tag
-                            #'org-get-tags
-                            )
-  )
 
+;;;###autodef
 (defun +jg-org-set-tags (x)
   " Improved action to add and remove tags Toggle Selected Tags
 Can operate on regions of headings "
@@ -34,6 +27,7 @@ Can operate on regions of headings "
                       (org-forward-heading-same-level 1)))))
           (t (message "Unknown Tagging State")))))
 
+;;;###autodef
 (defun +jg-org-set-new-tag (x)
   "Utility to set a new tag for an org heading"
   (let ((prior-point (- (point) 1))
@@ -71,3 +65,67 @@ Can operate on regions of headings "
     (org-set-tags (sort current-tags #'string-lessp))
     )
 )
+
+;;;###autodef
+(defun +jg-org-get-buffer-tags (&optional name depth)
+  "Process a buffer and get all tags from a specified depth of heading
+if no depth is specified, get all tags of all headings
+returns a hash-table of the tags, and their instance counts.
+"
+  (let ((tag-set (make-hash-table :test 'equal))
+        (tagdepth-p (if (and depth (> depth 0)) (lambda (x) (eq depth x)) 'identity))
+        )
+    ;; (message "Get buffer tags: %s %s" name tagdepth-p)
+    (with-current-buffer (if name name (current-buffer))
+      (save-excursion ;;store where you are in the current
+        (goto-char (point-min))
+        ;;where to store tags:
+        ;;split tags into list
+        (mapc (lambda (x) (cl-incf (gethash x tag-set 0)))
+              ;;TODO: fix tag depth filtering
+              (-flatten
+               (org-map-entries (lambda () (if (funcall tagdepth-p (car (org-heading-components)))
+                                               (org-get-tags nil t) '())))))
+        tag-set
+        )
+      )
+    )
+  )
+
+(defun +jg-org-get-file-tags (filename &optional depth)
+  "Get tags from a specified file, at an org specified depth.
+If depth is not specified, default to get all tags from all headings
+Return a hash-table of tags with their instance counts"
+  (let ((tagcounts (make-hash-table :test 'equal))
+        (tagdepth-p (if (and depth (> depth 0)) (lambda (x) (eq depth x)) 'identity))
+        raw-tags
+        )
+    ;; (message "Get file tags: %s %s" filename depth)
+    (with-temp-buffer
+      (insert-file filename)
+      (org-mode)
+      (goto-char (point-min))
+      (setq raw-tags (org-map-entries (lambda () (if (funcall tagdepth-p (car (org-heading-components))) (org-get-tags nil t) '()))))
+      )
+    (mapc (lambda (x) (cl-incf (gethash x tagcounts 0))) (-flatten raw-tags))
+    tagcounts
+    )
+  )
+
+(defun +jg-org-tagged-p  (filename)
+  "Test an org file. Returns true if the file has tags for all depth 2 headings"
+  (with-temp-buffer
+    (insert-file-contents filename)
+    (goto-char (point-min))
+    (org-mode)
+    (let* ((mapped (org-map-entries (lambda () `(,(car (org-heading-components)) ,(org-get-tags nil t)))))
+           (filtered (seq-filter (lambda (x) (and (eq 2 (car x)) (null (cadr x)))) mapped)))
+      (seq-empty-p filtered)
+      )
+    )
+  )
+
+(defun +jg-org-format-temp-buffer (bufname name)
+
+
+  )

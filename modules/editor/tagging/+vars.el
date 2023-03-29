@@ -1,11 +1,6 @@
 ;;; main/jg-tag/+vars.el -*- lexical-binding: t; -*-
 
-(defvar jg-tag-candidate-counts '())
-(defvar jg-tag-candidates-names '())
 
-(defvar jg-tag-all-tags nil)
-
-(defvar jg-tag-all-loc                    (expand-file-name "~/github/jgrey4296.github.io/.temp/tags/totals.tags"))
 (defvar jg-tag-loc-bookmarks              (expand-file-name "~/github/jgrey4296.github.io/resources/bookmarks/total.bookmarks"))
 (defvar jg-tag-loc-default-helm-directory (expand-file-name "~/github/jgrey4296.github.io/resources/"))
 (defvar jg-tag-loc-global-tags            (expand-file-name "~/github/jgrey4296.github.io/resources/tags/substitutions"))
@@ -18,7 +13,6 @@
 (defvar jg-tag-twitter-helm-candidates nil)
 (defvar jg-tag-twitter-grep-helm-candidates nil)
 
-(defvar jg-tag-re-entrant-exit-tag "|")
 
 (defvar jg-tag-bookmark-helm-source)
 (defvar jg-tag-twitter-helm-source)

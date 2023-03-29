@@ -130,7 +130,7 @@
 
 ;;-- open cmd
 (setq dired-guess-shell-alist-user
-      `(("\\.\\(?:docx\\|pdf\\|djvu\\|eps\\)\\'"               "open")
+      `(("\\.\\(?:docx\\|pdf\\|djvu\\|eps\\)\\'"               "open -a Preview -nF")
         ("\\.\\(?:jpe?g\\|png\\|gif\\|xpm\\)\\'"               "open")
         ("\\.\\(?:xcf\\)\\'"                                   "open")
         ("\\.csv\\'"                                           "open")

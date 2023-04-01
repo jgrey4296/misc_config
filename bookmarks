@@ -237,11 +237,6 @@
  (front-context-string . "Desktop\n  drwx--")
  (rear-context-string . "68 Jan 28 19:25 ")
  (position . 2063))
-("bkmkorg"
- (filename . "/Volumes/documents/github/python/bookmark_organiser/")
- (front-context-string . "bkmkorg\n  -rw-r-")
- (rear-context-string . "08 Dec 10 16:01 ")
- (position . 202))
 ("desktop"
  (filename . "~/Desktop/")
  (front-context-string . "bibtex_tags\n  dr")

@@ -17,9 +17,18 @@
        :desc "Yank Buffer Name" "n"   #'+jg-text-yank-buffer-name
        :desc "Clear Buffer"     "DEL" #'+jg-text-clear-buffer
        )
+
       (:prefix "i"
        :desc "Debug"     "d" #'+jg-text-insert-debug
-       :desc "License"   "l" #'license-templates-insert
+       :desc "License"   "L" #'license-templates-insert
+
+       (:prefix ("l" . "Lorem Ipsum")
+        :desc "Sentence"         "s" #'lorem-ipsum-insert-sentences
+        :desc "Paragraph"        "p" #'lorem-ipsum-insert-paragraphs
+        :desc "List"             "l" #'lorem-ipsum-insert-list
+        :desc "Academic"         "a" #'academic-phrases
+        :desc "Academic Section" "A" #'academic-phrases-by-section
+        )
        )
       )
 

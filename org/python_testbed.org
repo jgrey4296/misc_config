@@ -192,6 +192,7 @@ http://seaborn.pydata.org/index.html
 https://jiffyclub.github.io/palettable/
 
 ** docs
+pelican
 commonmark                                                                                      : 0.9.1
 Markdown                                                                                        : 3.3.4
 https://www.sphinx-doc.org/en/master/contents.html                                              : documentation : programming : python : software_engineering : sphinx
@@ -353,6 +354,7 @@ inflect                                                                         
 snowballstemmer                                                                                 : 2.2.0
 
 ** XML
+scrapy
 https://xmlschema.readthedocs.io/en/latest/
 https://pyxb.sourceforge.net/
 http://www.davekuhlman.org/generateDS.html

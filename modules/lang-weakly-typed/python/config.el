@@ -36,21 +36,6 @@
   (setq python-mode-hook nil
         python-mode-local-vars-hook nil)
 
-  ;; (set-ligatures! 'python-mode
-  ;;   ;; Functional
-  ;;   :def    "def"
-  ;;   :lambda "lambda"
-  ;;   ;; Types
-  ;;   :null   "None"
-  ;;   :true   "True" :false "False"
-  ;;   :int    "int"  :str "str" :float  "float" :bool   "bool" :tuple  "tuple"
-  ;;   ;; Flow
-  ;;   :not    "not"
-  ;;   :in     "in"  :not-in "not in"
-  ;;   :and    "and" :or "or"
-  ;;   :for    "for"
-  ;;   :return "return" :yield "yield")
-
   (set-repl-handler! 'python-mode #'+python/open-repl
     :persist t
     :send-region #'python-shell-send-region

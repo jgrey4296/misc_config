@@ -54,16 +54,6 @@
        :desc "Unicode"                  "u"          #'insert-char
        :desc "From Kill Ring"           "y"          #'+default/yank-pop
        )
-(map! :map jg-binding-normal-state-map ;; Lorem ipsum
-      :prefix "I"
-      (:prefix ("L" . "Lorem Ipsum")
-       :desc "Sentence"         "s" #'lorem-ipsum-insert-sentences
-       :desc "Paragraph"        "p" #'lorem-ipsum-insert-paragraphs
-       :desc "List"             "l" #'lorem-ipsum-insert-list
-       :desc "Academic"         "a" #'academic-phrases
-       :desc "Academic Section" "A" #'academic-phrases-by-section
-       )
-      )
 (map! :map jg-binding-normal-state-map ;; Visual
       :desc "Visual"             "V"        #'evil-visual-line
       :prefix ("v" . "Visual+")

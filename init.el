@@ -30,7 +30,7 @@
  :lang-text (org +gnuplot +pomodoro +journal +noter) +org
  :lang-text bibtex latex markdown plantuml rst
 
- :lang-weakly-typed lisp-langs (python +conda +pyright +poetry +cython +lsp) lua
+ :lang-weakly-typed lisp-langs (python +conda +pyright +cython +lsp) lua
  ;; :lang-weakly-typed erlang-vms godot ruby
 
  :lang emacs-lisp ledger

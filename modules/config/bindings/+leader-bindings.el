@@ -196,20 +196,14 @@
       :desc "From clipboard"                "y"   #'+default/yank-pop
       :desc "From evil register"            "r"   #'counsel-evil-registers
       :desc "From Minibuffer history"       "m"   #'counsel-minibuffer-history
-      :desc "Unicode"                       "u"    #'insert-char
+      :desc "Unicode"                       "u"   #'insert-char
+      :desc "Snippet"                       "s"   #'yas-insert-snippet
       ;; TODO date, time
 
-      (:prefix ("L" . "Lorem Ipsum")
-       :desc "Sentence"         "s" #'lorem-ipsum-insert-sentences
-       :desc "Paragraph"        "p" #'lorem-ipsum-insert-paragraphs
-       :desc "List"             "l" #'lorem-ipsum-insert-list
-       :desc "Academic"         "a" #'academic-phrases
-       :desc "Academic Section" "A" #'academic-phrases-by-section
-       )
+      ;; (:prefix ("l" . "Lorem Ipsum"))
       ;; TODO password-generator
       ;; TODO uuid
       ;; reserve "d" for inserting debug statement by mode
-      :desc "Snippet"                       "s"   #'yas-insert-snippet
 
       )
 ;;-- end <leader> i --- insert

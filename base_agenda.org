@@ -21,10 +21,26 @@ Death by Institution and the Harms of Abstraction.
 *** [[/Volumes/documents/github/jgrey4296.github.io/orgfiles/listings/DSLs.org][DSLs]]
 *** [[file:~/github/jgrey4296.github.io/resources/bibliography][Bibliography]]
 
-*** [[~/.doom.d/setup_files/pomodoro_log.org][Pomodoro Log]]
+*** [[org/pomodoro_log.org][Pomodoro Log]]
 *** [[file:/volumes/documents/twitterthreads][Twitter Threads]]
 
 *** [[file:/Volumes/documents/github/jgrey4296.github.io/orgfiles/primary/research_questions.org][Research Questions]]
+
+*** Doot
+**** Builders
+- clips
+- coq
+- soar
+- z3
+- erlang
+- grunt - haskell - homebrew - mono - pdf - poetry - py compile - ruby - sclang
+
+**** bibtex
+- waybacker
+- library summary
+- compile
+- hash verify
+- timelines
 
 ** Other
 https://www.patches-scrolls.de/patch
@@ -68,4 +84,4 @@ index xkcd using explainxkcd
 -from:quotedreplies url:1255330066151718912
 fictional syllabi - both of actual papers, and lem-like
 
-** [[file:python_testbed.org][Testbed Notes]]
+** [[file:org/python_testbed.org][Testbed Notes]]

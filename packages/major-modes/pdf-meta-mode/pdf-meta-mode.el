@@ -23,6 +23,9 @@
 (require 'evil)
 ;;-- end header
 
+(defvar pdf-meta--cmd    "pdftk")
+(defvar pdf-meta--window "*Pdf-Meta*")
+
 (defun pdf-meta-beginning-of-section (&optional arg)
   (re-search-backward "^\\w+$" nil t arg)
   )
@@ -52,6 +55,90 @@
 (defun pdf-meta-dec-bookmark-level ()
   (interactive)
   (pdf-meta-inc-bookmark-level t)
+  )
+
+(defun pdf-meta-extract-info ()
+  " Create a .info file for each marked pdf "
+  (interactive)
+  (let ((marked (dired-get-marked-files)))
+    (cl-loop for file in marked
+             do
+             (call-process pdf-meta--cmd nil `((:file ,(concat (f-filename file) ".info")) nil)
+                    nil file "dump_data_utf8")
+             )
+    )
+  )
+
+(defun pdf-meta-update-info ()
+  " Apply the current info file onto a pdf file "
+  (interactive)
+  (let* ((fname (buffer-file-name (current-buffer)))
+         (target (read-file-name "Apply Onto: "
+                                 default-directory
+                                 nil t
+                                 (f-no-ext (buffer-file-name (current-buffer)))
+                                 (-rpartial #'f-ext? "pdf")
+                                 ))
+         (updated (concat (f-no-ext target) "_updated.pdf"))
+         )
+    (with-temp-buffer-window pdf-meta--window nil nil
+      (call-process pdf-meta--cmd nil pdf-meta--window nil target "update_info_utf8" fname "output" updated)
+      ;; (princ (format "Fname: %s\nTarget: %s\nUpdated: %s\n----------\n" fname target updated))
+      )
+    )
+  )
+
+(defun pdf-meta-split ()
+  " Split marked pdfs according to a pattern "
+  (interactive)
+  (let* ((marked (dired-get-marked-files))
+         (out_target (read-file-name "Output Dir: " default-directory nil nil "out"))
+         stem current
+        )
+    (unless (f-directory? out_target) (f-mkdir out_target))
+    (cl-loop for file in marked
+             do
+             (setq stem (f-no-ext (f-filename file))
+                   current (f-join out_target stem))
+             (unless (f-directory? current) (f-mkdir current))
+             (call-process pdf-meta--cmd nil nil nil file "burst" "output" (format "%s/%s_%s.pdf" current stem "%04d" ))
+             )
+    )
+  )
+
+(defun pdf-meta-join ()
+  "Join marked pdfs together"
+  (interactive)
+  (let* ((target (read-file-name "Output Target: " default-directory nil nil "out.pdf" (-rpartial #'f-ext? "pdf")))
+         (args   (append (dired-get-marked-files) '("cat" "output" ) (list target)))
+         )
+    (apply #'call-process pdf-meta--cmd nil nil nil args)
+    )
+  )
+
+(defun pdf-meta-attach ()
+  "Attach marked files to a pdf"
+  (interactive)
+  (let* ((target (read-file-name "Target: " default-directory nil t nil (-rpartial #'f-ext? "pdf")))
+         (marked (dired-get-marked-files))
+         (args   (append (list target "attach_files") marked (list "output" (format "%s_attached.pdf" (f-no-ext target)))))
+         )
+    (apply #'call-process pdf-meta--cmd nil nil nil args)
+    )
+  )
+
+(defun pdf-meta-detach ()
+  "Unpack files out of a pdf"
+  (interactive)
+  (let ((target (read-directory-name "Output Target: " default-directory nil nil "unpacked"))
+        (marked (dired-get-marked-files))
+        )
+    (unless (f-directory? target) (f-mkdir target))
+    (cl-loop for file in marked
+             do
+             (call-process pdf-meta--cmd nil nil nil file "unpack_files" "output" target)
+             )
+    )
   )
 
 ;;-- key-map

@@ -51,7 +51,7 @@
 
  :checkers syntax (spell +flyspell) grammar
 
- :tools debugger doot lookup (eval +overlay) lsp magit mail tmux twitter
+ :tools debugger doot lookup (eval +overlay) lsp magit mail tmux twitter pdf
  :tools editorconfig rgb tree-sitter mail
  ;;:tools ein make
 

@@ -24,9 +24,5 @@
 
 (package! nxml-mode :built-in t)
 (package! mhtml-mode)
-(package! web-mode)
-(package! css-mode)
-(package! less-css-mode)
-(package! counsel-css)
 
 ;;; packages.el ends here

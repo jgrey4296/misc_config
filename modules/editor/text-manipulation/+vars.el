@@ -78,6 +78,7 @@
                                  ("dict" "set")
                                  ("journal" "booktitle")
                                  ("author" "editor")
+                                 ("published" "draft")
                                  )
               rotate-text-symbols '(("∃" "∀" "∄" "∈" )
                                     ("∧" "∨")

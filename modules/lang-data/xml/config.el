@@ -44,4 +44,10 @@
   (add-hook! 'nxml-mode-hook 'hs-minor-mode)
   )
 
+(when (modulep! +lsp) (add-hook! '(nxml-mode-local-vars-hook html-mode-local-vars-hook) :append #'lsp!))
+
+(when (modulep! +tree-sitter)
+  (add-hook! '(html-mode-local-vars-hook
+               mhtml-mode-local-vars-hook)
+               :append #'tree-sitter!))
 ;;; config.el ends here

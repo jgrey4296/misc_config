@@ -9,8 +9,9 @@
 (when (and (package! web-mode) (modulep! :completion company)) (package! company-web))
 
 ;; +css.el
-(package! css-mode      :built-in t)
-(package! less-css-mode :built-in t)
+(package! css-mode)
+(package! less-css-mode)
+(package! counsel-css)
 
 (package! sass-mode)
 (package! stylus-mode)

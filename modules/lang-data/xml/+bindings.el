@@ -31,7 +31,6 @@
       :n "!" (cmd! (eww-open-file (buffer-file-name)))
       )
 
-
 (map! :map mhtml-mode-map
       :after mhtml-mode
       "/" nil
@@ -49,18 +48,6 @@
       :desc "Load into shell" :n "l" #'+jg-xml-load-into-repl
       :desc "Html Reference"  :n "1" (cmd! (browse-url "https://developer.mozilla.org/en-US/docs/Web/HTML"))
       )
-
-(map! :map css-mode-map
-      :localleader
-      :desc "CSS Reference"   :n "1" (cmd! (browse-url "https://developer.mozilla.org/en-US/docs/Web/CSS"))
-      )
-
-(map! :map less-css-mode-map
-      :localleader
-       :desc "LESS Reference"  :n "1" (cmd! (browse-url "https://lesscss.org/features/"))
-       :desc "Compile Less"    :n "c" #'less-css-compile
-       )
-
 
 ;;-- xml/json data utils
 (map! :map dired-mode-map

@@ -1,11 +1,5 @@
 ;;; lang/web/autoload/css.el -*- lexical-binding: t; -*-
 
-;; ;;;###autoload
-;; TODO (defun +css/scss-build ())
-
-;; ;;;###autoload
-;; TODO (defun +css/sass-build ())
-
 (defun +css--toggle-inline-or-block (beg end)
   (skip-chars-forward " \t")
   (let ((orig (point-marker)))

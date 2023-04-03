@@ -8,6 +8,11 @@
       :desc "Docs: Gradle"   "3" (cmd! (browse-url "https://docs.gradle.org/current/userguide/userguide.html"))
       :desc "Docs: Kotlin Quick Ref" "4" (cmd! (browse-url "https://kotlin-quick-reference.com/025-R-kotlin-repl.html"))
       :desc "Docs: Android Source" "5" (cmd! (find-file "/Users/johngrey/Library/Android/sdk/sources/android-30/"))
+
+      :prefix ("b" . "build")
+      :desc "gradlew assemble" "a" (cmd! (+kotlin/run-gradlew "assemble"))
+      :desc "gradlew build"    "b" (cmd! (+kotlin/run-gradlew "build"))
+      :desc "gradlew test"     "t" (cmd! (+kotlin/run-gradlew "test"))
 )
 
 (map! :map groovy-mode-map

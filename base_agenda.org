@@ -2,6 +2,7 @@
 #+STARTUP: content
 [[/Users/johngrey/doot.toml][doot.toml]]
 [[/Users/johngrey/dooter.py][dooter.py]]
+[[file:/Volumes/documents/github/jgrey4296.github.io][homepage]]
 
 * Base Agenda
 Death by Institution and the Harms of Abstraction.
@@ -43,6 +44,7 @@ Death by Institution and the Harms of Abstraction.
 - timelines
 
 ** Other
+https://github.com/orgs/pelican-plugins/repositories
 https://www.patches-scrolls.de/patch
 https://www.rabbitmq.com/getstarted.html
 https://www.openpolicyagent.org/

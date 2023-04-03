@@ -4,6 +4,5 @@ rustflags = [
   "-C", "link-arg=dynamic_lookup",
 ]
 
-
 [build]
 target-dir = "build"

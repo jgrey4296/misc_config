@@ -26,6 +26,7 @@
 (defvar pdf-meta--cmd    "pdftk")
 (defvar pdf-meta--window "*Pdf-Meta*")
 
+;;-- in-file funcs
 (defun pdf-meta-beginning-of-section (&optional arg)
   (re-search-backward "^\\w+$" nil t arg)
   )
@@ -57,18 +58,6 @@
   (pdf-meta-inc-bookmark-level t)
   )
 
-(defun pdf-meta-extract-info ()
-  " Create a .info file for each marked pdf "
-  (interactive)
-  (let ((marked (dired-get-marked-files)))
-    (cl-loop for file in marked
-             do
-             (call-process pdf-meta--cmd nil `((:file ,(concat (f-filename file) ".info")) nil)
-                    nil file "dump_data_utf8")
-             )
-    )
-  )
-
 (defun pdf-meta-update-info ()
   " Apply the current info file onto a pdf file "
   (interactive)
@@ -87,7 +76,23 @@
       )
     )
   )
+;;-- end in-file funcs
 
+;;-- dired funcs
+;;;###autoload
+(defun pdf-meta-extract-info ()
+  " Create a .info file for each marked pdf "
+  (interactive)
+  (let ((marked (dired-get-marked-files)))
+    (cl-loop for file in marked
+             do
+             (call-process pdf-meta--cmd nil `((:file ,(concat (f-filename file) ".info")) nil)
+                    nil file "dump_data_utf8")
+             )
+    )
+  )
+
+;;;###autoload
 (defun pdf-meta-split ()
   " Split marked pdfs according to a pattern "
   (interactive)
@@ -106,6 +111,7 @@
     )
   )
 
+;;;###autoload
 (defun pdf-meta-join ()
   "Join marked pdfs together"
   (interactive)
@@ -116,6 +122,7 @@
     )
   )
 
+;;;###autoload
 (defun pdf-meta-attach ()
   "Attach marked files to a pdf"
   (interactive)
@@ -127,6 +134,7 @@
     )
   )
 
+;;;###autoload
 (defun pdf-meta-detach ()
   "Unpack files out of a pdf"
   (interactive)
@@ -140,6 +148,8 @@
              )
     )
   )
+
+;;-- end dired funcs
 
 ;;-- key-map
 (defvar-local pdf-meta-mode-map

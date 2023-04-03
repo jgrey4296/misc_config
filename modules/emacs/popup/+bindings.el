@@ -28,6 +28,7 @@
       )
 
 (map! :map jg-popup-neotree-mode-map
+      :after neotree
       :n "i"  #'ignore
       :n "g"  #'neotree-refresh
       :n "q"  #'neotree-hide

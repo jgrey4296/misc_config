@@ -25,7 +25,7 @@
 (map! :map jg-help-map
       :prefix ("d" . "docs")
       "!"   #'+jg-help-system-config
-      "m"   #'man  ;; #'+default/man-or-woman
+      "m"   #'+jg-help-man ;; #'man  ;; #'+man-or-woman
       "RET" #'info-emacs-manual
       "o"   #'info-other-window
       )

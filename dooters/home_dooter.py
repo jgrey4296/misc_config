@@ -15,7 +15,7 @@ from doot.tasks.files.backup import BackupTask
 from doot.tasks.groups import *
 from doot.tasks.groups_secondary import *
 from doot.tasks.docs.logs import MoveLogs
-from doot.tasks.bkmkorg import bibtex, basic, bookmark, tags, android, backup
+from doot.tasks.bkmkorg import bibtex, basic, bookmark, tags, android
 from doot.tasks.bkmkorg import socmedia_post as post
 
 if __name__ == "dooter":
@@ -46,9 +46,9 @@ if __name__ == "dooter":
     ##-- end bookmarks
 
     ##-- backup
-    backup_movies  = BackupTask("backup::movies", locs=doot.locs, roots=[doot.locs.movies], output=doot.locs.movies_backup)
-    backup_images  = BackupTask("backup::images", locs=doot.locs, roots=[doot.locs.images], output=doot.locs.images_backup)
-    backup_pdfs    = BackupTask("backup::pdfs",   locs=doot.locs, roots=[doot.locs.pdfs], output=doot.locs.pdf_backup)
+    backup_movies  = BackupTask("backup::movies",  locs=doot.locs, roots=[doot.locs.movies], output=doot.locs.movies_backup)
+    backup_images  = BackupTask("backup::images",  locs=doot.locs, roots=[doot.locs.images], output=doot.locs.images_backup)
+    backup_pdfs    = BackupTask("backup::pdfs",    locs=doot.locs, roots=[doot.locs.pdfs], output=doot.locs.pdf_backup)
     backup_summary = BackupTask("backup::summary", locs=doot.locs, roots=[doot.locs.pdf_summary], output=doot.locs.pdf_summary_backup)
     backup_twitter = BackupTask("backup::twitter", locs=doot.locs, roots=[doot.locs.thread_library], output=doot.locs.thread_backup)
     ##-- end backup

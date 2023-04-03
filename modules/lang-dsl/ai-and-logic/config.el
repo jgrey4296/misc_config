@@ -10,15 +10,15 @@
   (load! "+bindings")
   )
 
-(use-package! abl-mode        :defer t)
-(use-package! agentspeak-mode :defer t)
-(use-package! ceptre-mode     :defer t)
+(use-package! abl-mode        :defer t :mode ("\\.abl" . abl-mode) )
+(use-package! agentspeak-mode :defer t :mode ("\\.asm" . agentspeak-mode) )
+(use-package! ceptre-mode     :defer t :mode ("\\.cep" . ceptre-mode) )
 (use-package! instal-mode     :defer t)
-(use-package! jacamo-mode     :defer t)
-(use-package! versu-mode      :defer t)
-(use-package! soar-mode       :defer t)
+(use-package! jacamo-mode     :defer t :mode ("\\.\\(jcm\\|mas2j\\)" . jacamo-mode) )
+(use-package! versu-mode      :defer t :mode ("\\.\\(praxis\\|type\\|data\\)" . versu-mode) )
+(use-package! soar-mode       :defer t :mode ("\\.soar" . soar-mode) )
 (use-package! clips-mode      :defer t)
-(use-package! netlogo-mode    :defer t)
+(use-package! netlogo-mode    :defer t :mode ("\\.\\(nls\\|nlogo\\)" . netlogo-mode) )
 
 
 (after! org

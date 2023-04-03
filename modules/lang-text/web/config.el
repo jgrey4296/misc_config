@@ -106,7 +106,7 @@
 
 (use-package! css-mode
   :config
-  (add-hook! 'css-mode-hook #'hs-minor-mode)
+  (add-hook! 'css-mode-hook #'hs-minor-mode #'smartparens-mode)
   (setq-hook! 'css-mode-hook
     ;; Correctly continue /* and // comments on newline-and-indent
     comment-line-break-function #'+css/comment-indent-new-line
@@ -132,7 +132,7 @@
   )
 
 (def-project-mode! +web-pelican-mode
-  :modes '(web-mode python-mode css-mode markdown-mode)
+  :modes '(web-mode python-mode markdown-mode)
   :files ("pelican.toml")
   :on-enter
   (when (derived-mode-p 'web-mode)

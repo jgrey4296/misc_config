@@ -11,4 +11,4 @@ features = ["extension-module"]
 
 [lib]
 crate-type = ["cdylib"]
-path       = "rust_src/lib.rs"
+path       = "{{cookiecutter.proj_name}}/lib.rs"

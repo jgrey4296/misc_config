@@ -36,7 +36,6 @@
 ;;-- end hook setup
 
 (after! jg-snippets-applied
-  (require 'yasnippet)
   (advice-add '+snippet--completing-read-uuid :override #'+jg-snippets--completing-read-uuid)
   (add-hook 'yas-prompt-functions #'+jg-snippets-yas-prompt-fn -90)
   (yas-reload-all)

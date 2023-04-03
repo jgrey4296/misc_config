@@ -43,5 +43,8 @@
 (use-package! window-ring-minor-mode
   :commands (window-ring-setup-columns window-ring-minor-mode window-ring-setup-columns-command)
   )
-(use-package! palette-mode :defer t)
+(use-package! palette-mode
+  :mode ("\\.palette" . palette-mode)
+  :commands palette-mode
+  )
 (use-package! evil-visual-mark-mode :defer t)

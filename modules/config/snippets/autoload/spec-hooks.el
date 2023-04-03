@@ -6,6 +6,7 @@
 (defun +jg-snippets-reapply-file-specs ()
   " Activate stored file templates, and ensure the correct snippet directories are set  "
   (interactive)
+  (require 'yasnippet)
   (let* ((all-rules (copy-sequence (-flatten-n 1 (hash-table-values jg-snippets-file-specs))))
          (flattened (-concat (mapcar #'cdr (sort all-rules #'(lambda (x y) (< (car x) (car y)))))
                              '(("*jg-modified*"))))
@@ -13,10 +14,7 @@
     (message "Activating File Templates: %s" (hash-table-keys jg-snippets-file-specs))
     (setq +file-templates-dir jg-snippets-file-templates-dir
           +snippets-dir       jg-snippets-code-templates-dir
-          yas-snippet-dirs (list +snippets-dir
-                                 +file-templates-dir
-                                 doom-snippets-dir
-                                 yasnippet-snippets-dir)
+          yas-snippet-dirs (-filter #'identity (list +snippets-dir +file-templates-dir doom-snippets-dir yasnippet-snippets-dir))
           yas--default-user-snippets-dir jg-snippets-code-templates-dir
           +file-templates-alist flattened
           )

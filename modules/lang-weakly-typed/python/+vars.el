@@ -30,18 +30,25 @@
 
 ;;-- general python
 (after! python-mode
-  (setq-default py-indent-offset 4
-                py-shell-virtualenv-root (expand-file-name  "~/anaconda")
-                py-pdbtrack-do-tracking-p t
+  (setq-default py-indent-offset 4 python-indent-offset 4
+                py-shell-virtualenv-root (expand-file-name  "~/anaconda") python-shell-virtualenv-root (expand-file-name  "~/anaconda")
+                py-pdbtrack-do-tracking-p t python-pdbtrack-activate t
 
-                py-python-command "python3"
-                py-python-command-args '("-i")
-                python-shell-interpreter "python3"
+                py-python-command "python3" python-shell-interpreter "python3"
+                py-python-command-args '("-i") python-shell-interpreter-args "-i"
                 ;; python-shell-interpreter-args `("-X" ,(format "pycache_prefix=%s" (expand-file-name  "~/.pycache")))
                 jg-python-repl-start-file (doom-module-expand-path :lang-weakly-typed 'python "repl/repl_startup.py ")
 
                 py-use-font-lock-doc-face-p t
                 py-fontify-shell-buffer-p t
+
+                python-indent-guess-indent-offset nil
+                python-shell-completion-native-enable nil
+                python-shell-completion-native-disabled-interpreters '("pypy")
+
+                ;; python-shell-interpreter "python3"
+                ;; python-shell-interpreter-args `("-X" ,(format "pycache_prefix=%s" (expand-file-name  "~/.pycache")))
+                python-shell-interpreter-path-args (doom-module-expand-path :lang-weakly-typed 'python "repl/repl_startup.py ")
                 )
   (modify-syntax-entry ?_ "_" python-mode-syntax-table)
 )

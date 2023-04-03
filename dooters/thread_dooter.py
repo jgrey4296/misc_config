@@ -3,9 +3,9 @@
 Dooter for twitter archive tasks
 
 """
-# https://pydoit.org/
 from __future__ import annotations
 
+import logging as logmod
 import pathlib as pl
 
 import doot
@@ -15,14 +15,15 @@ from doot.mixins.delayed import DelayedMixin
 from doot.mixins.filer import FilerMixin
 from doot.mixins.targeted import TargetedMixin
 from doot.mixins.zipper import ZipperMixin
-
+from doot.tasks.bkmkorg.orgs import (OrgMultiThreadCount, ThreadListings,
+                                     ThreadOrganise)
 from doot.tasks.files import hashing
 from doot.tasks.files.backup import BackupTask
 from doot.tasks.groups import *
 from doot.tasks.groups_secondary import *
+from doot.tasks.data import images
 
-from doot.tasks.bkmkorg.orgs import (OrgMultiThreadCount, ThreadListings,
-                                     ThreadOrganise)
+logging = logmod.getLogger(__name__)
 
 class TwitHash(hashing.HashAllFiles):
     """
@@ -93,12 +94,8 @@ class TwitCompress(DelayedMixin, TargetedMixin, globber.DootEagerGlobber, Zipper
 
 if __name__ == "dooter":
     # the equivalent of main
-    try:
-        from doot.tasks.data import images
-        # hasher    = images.HashImages(doot.locs, rec=True)
-        # ocr       = images.OCRGlobber(doot.locs)
-    except ImportError as err:
-        logging.warning("Import Failure: %s", err)
+    # hasher    = images.HashImages(doot.locs, rec=True)
+    # ocr       = images.OCRGlobber(doot.locs)
     # gitlog = GitLogTask(locs=doot.locs)
     hasher      = TwitHash(locs=doot.locs, rec=True)
     extractor   = ThreadListings(locs=doot.locs)

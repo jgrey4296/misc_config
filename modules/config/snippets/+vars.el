@@ -7,7 +7,6 @@
 (defvar +file-templates-default-trigger "__")
 (defvar +file-templates-inhibit nil)
 (defvar jg-snippets-file-specs (make-hash-table))
-(defvar doom-snippets-dir nil)
 
 (+jg-snippets-add-file-spec
  'general

@@ -1,5 +1,6 @@
 [package]
-
-name = "{{cookiecutter.proj_name}}"
+name    = "{{cookiecutter.proj_name}}"
 version = "0.0.1"
 authors = [ "Author: John Grey "]
+
+[dependencies.cpython]

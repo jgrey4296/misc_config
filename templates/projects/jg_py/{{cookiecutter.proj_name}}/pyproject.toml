@@ -95,26 +95,3 @@ log_level     = "DEBUG"
 log_cli_level = "DEBUG"
 
 ##-- end pytest
-
-##-- doit
-
-[tool.doit]
-# backend                = "json"
-verbosity                = 0
-action_string_formatting = "new"
-build_dir                = "build"
-
-# [tool.doit.commands.{command}]
-
-# [tool.doit.tasks.{task}]
-
-##-- end doit
-
-##-- sphinx
-# Use in doit
-# reference https://www.sphinx-doc.org/en/master/man/sphinx-build.html
-[tool.sphinx]
-builder   = "html"
-docs_dir  = "docs"
-verbosity = 0
-##-- end sphinx

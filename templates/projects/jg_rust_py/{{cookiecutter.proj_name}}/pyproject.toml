@@ -1,20 +1,20 @@
 [project]
-name            = "{{cookiecutter.proj_name}}"
+name            = "rust_py"
 version         = "0.0.1"
-description     = " "
+description     = ""
 readme          = "README.md"
 requires-python = ">=3.10"
 license         = {file = "LICENSE"}
-keywords        = ["rust", "python"]
+keywords        = []
 authors         = [
-  {email = "{{cookiecutter._email}}"},
-  {name  = "{{cookiecutter._author}}"}
+  {email = "jgrey4296@gmail.com"},
+  {name  = "J Grey"}
 ]
 classifiers     = [
   "Programming Language :: Python"
-  "Programming Language :: Rust"
 ]
 
+##-- dependencies
 dependencies   = []
 
 [project.optional-dependencies]
@@ -22,14 +22,20 @@ test = [
   "pytest < 5.0.0",
 ]
 
-[project.urls]
-homepage      = "https://github.com/{{cookiecutter._github_name}}/{{cookiecutter.proj_name}}"
-documentation = "https://readthedocs.org/{{cookiecutter.proj_name}}"
-repository    = "https://github.com/{{cookiecutter._github_username}}/{{cookiecutter.proj_name}}"
-changelog     = "https://github.com//{{cookiecutter.proj_name}}/blob/master/CHANGELOG.md"
+##-- end dependencies
 
+##-- urls
+[project.urls]
+homepage      = "https://github.com/jgrey4296/rust_py"
+documentation = "https://readthedocs.org/rust_py"
+repository    = "https://github.com/jgrey4296/rust_py"
+changelog     = "https://github.com/jgrey496/rust_py/blob/master/CHANGELOG.md"
+
+##-- end urls
+
+##-- scripts
 [project.scripts]
-{{cookiecutter.proj_name}} = {{cookiecutter.proj_name}}.{{cookiecutter.entry_point}}:main
+# spam-cli      = "spam:main_cli"
 
 [project.gui-scripts]
 # spam-gui      = "spam:main_gui"
@@ -37,6 +43,9 @@ changelog     = "https://github.com//{{cookiecutter.proj_name}}/blob/master/CHAN
 [project.entry-points."nothing"]
 # tomatoes      = "spam:main_tomatoes"
 
+##-- end scripts
+
+##-- build system
 [build-system]
 requires = [
          "setuptools",
@@ -46,24 +55,23 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
-# packages = ['{{cookiecutter.proj_name}}']
+# packages = ["rust_py"]
 include-package-data = true
 
 [tool.setuptools.packages.find]
-namespaces = true
 where = ["."]
 
 [tool.setuptools.package-data]
-{{cookiecutter.proj_name}} = ["{{cookiecutter.proj_name}}.so"]
-"{{cookiecutter.proj_name}}.__configs" = []
-
+"rust_py.__data" = ["*.so"]
 
 [tool.setuptools.exclude-package-data]
 
 
+##-- end build system
 
+##-- pyright
 [tool.pyright]
-# strict = {{cookiecutter.proj_name}}.*
+# strict = acab.*
 verboseOutput               = true
 typeCheckingMode            = "strict"
 pythonVersion               = "3.10"
@@ -79,7 +87,12 @@ reportUnknownVariableType   = "warning"
 reportUnnecessaryCast       = "information"
 reportUnnecessaryIsInstance = "warning"
 
+##-- end pyright
+
+##-- pytest
 [tool.pytest.ini_options]
 log_cli       = false
 log_level     = "DEBUG"
 log_cli_level = "DEBUG"
+
+##-- end pytest

@@ -20,6 +20,7 @@
           yas--default-user-snippets-dir jg-snippets-code-templates-dir
           +file-templates-alist flattened
           )
+    (provide 'jg-snippets-applied)
     )
   )
 

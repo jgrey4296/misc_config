@@ -31,15 +31,15 @@
   )
 
 ;;-- hook setup
-(defun +jg-snippets-on-load-hook ()
+(add-hook 'jg-ui-reapply-hook      #'+jg-snippets-reapply-file-specs)
+(add-hook 'doom-switch-buffer-hook #'+file-templates-check-h)
+;;-- end hook setup
+
+(after! jg-snippets-applied
   (require 'yasnippet)
   (advice-add '+snippet--completing-read-uuid :override #'+jg-snippets--completing-read-uuid)
   (add-hook 'yas-prompt-functions #'+jg-snippets-yas-prompt-fn -90)
-
+  (yas-reload-all)
   )
-(add-hook 'doom-first-file-hook #'+jg-snippets-on-load-hook)
-(add-hook 'jg-ui-reapply-hook '+jg-snippets-reapply-file-specs)
-(add-hook 'doom-switch-buffer-hook #'+file-templates-check-h)
-;;-- end hook setup
 
 ;;; config.el ends here

@@ -84,11 +84,10 @@ Dedicated (locked) windows are left untouched."
 (defun +jg-ui-toggle-window-dedication ()
   (interactive)
   (let ((curr-window (selected-window)))
-    (set-window-dedicated-p curr-window
-                            (not (window-dedicated-p curr-window)))
+    (set-window-dedicated-p curr-window (not (window-dedicated-p curr-window)))
     (if (window-dedicated-p curr-window)
         (message "Window is now dedicated to %s" (window-buffer curr-window))
-      (message "Window is not dedicated"))
+      (message "Window is un-dedicated"))
     )
   )
 (defun +jg-ui-toggle-line-move-ignore-invisible ()

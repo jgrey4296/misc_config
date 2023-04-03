@@ -4,6 +4,7 @@
       (:prefix "w"
        :desc "Toggle Layout"               "|"     #'+jg-ui-window-layout-toggle
        :desc "Rotate Windows"              "\\"    #'+jg-ui-window-rotate-forward
+       :desc "Dedicate"                    "."     #'+jg-ui-toggle-window-dedication
        )
       (:prefix ("t" . "toggle")
        :desc "Reactivate Templates" "!" (cmd! (run-hooks 'jg-ui-reapply-hook))

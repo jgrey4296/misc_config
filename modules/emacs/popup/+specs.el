@@ -5,14 +5,15 @@
 
 (+jg-popup-add-spec 'my-rules
   '(("^\\*shell"             :side bottom :ttl nil :height 0.3 :quit t :select t :priority 100)
-    ("\\*.*?scratch.*?\\*"   :side right  :ttl nil :width  50  :quit t :select t)
-    ("^\\*Messages"          :side bottom :ttl nil :height 0.4 :quit t :select nil :priority 100)
-    ("^\\*compilation"       :side bottom :ttl 5   :height 0.4 :quit t :select nil)
-    ("^\\*Pp Eval Output\\*" :side right  :ttl 20   :width 0.4  :quit t :select nil)
-    ("^\\*Buffer Locals:"    :side right  :ttl 5   :width 0.4  :quit t :select nil)
-    ("^\\s-\\*NeoTree\\*$"       :side left   :ttl nil :height 0.4 :quit t :select nil :priority -100)
-    ("^\\*Async Shell Command\\*$" :actions (display-buffer-no-window))
-    )
+    ("\*.*?scratch.*?\\*"   :side right  :ttl nil :width  50  :quit t :select t)
+    ("\\*Messages"          :side bottom :ttl nil :height 0.4 :quit t :select nil :priority 100)
+    ("\\*compilation"       :side bottom :ttl 5   :height 0.4 :quit t :select nil)
+    ("\\*Pp Eval Output\\*" :side right  :ttl 20  :width 0.4  :quit t :select nil)
+    ("\\*Buffer Locals:"    :side right  :ttl 5   :width 0.4  :quit t :select nil)
+    ;; ("\\s-\\*NeoTree\\*"   :side left   :ttl nil :height 0.4 :quit nil :select nil :priority -90)
+    ("\\*NeoTree\\*"   :side right :ttl nil :height 0.4 :quit nil :select nil :priority -100)
+    ("\\*Async Shell Command\\*$" :actions (display-buffer-no-window))
+    ) t
   )
 (+jg-popup-add-spec 'general
  '(("^\\*Warnings" :vslot 99 :size 0.25)

@@ -17,6 +17,7 @@ Example : (set-eglot-client! 'python-mode `(,(concat doom-data-dir \"lsp/mspyls/
 ;;      making them tough to scrape, and b) their contents change frequently
 ;;      (every time you move your cursor).
 (defvar +eglot--help-buffer nil)
+
 ;;;###autoload
 (defun +eglot-lookup-documentation (_identifier)
   "Request documentation for the thing at point."

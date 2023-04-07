@@ -8,22 +8,8 @@
   (load! "+advice")
   )
 
-;; `elisp-mode' is loaded at startup. In order to lazy load its config we need
-;; to pretend it isn't loaded
+;; `elisp-mode' is loaded at startup. In order to lazy load its config we need to pretend it isn't loaded
 (defer-feature! elisp-mode emacs-lisp-mode)
-
-(use-package! ffap)
-(use-package! find-func)
-
-(use-package-hook! emacs-lisp-mode :post-config
-  (add-hook! 'emacs-lisp-mode-hook :depth 100
-    (setq-local jg-text-whitespace-clean-hook
-                '(delete-trailing-whitespace
-                  +jg-lisp-cleanup-ensure-newline
-                  +jg-text-cleanup-whitespace)
-                )
-    )
-  )
 
 (use-package! elisp-mode
   :mode ("\\.Cask\\'" . emacs-lisp-mode)
@@ -57,20 +43,6 @@
     ;; hideshow for that.
     outline-regexp +emacs-lisp-outline-regexp
     outline-level #'+emacs-lisp-outline-level)
-
-  ;; DEPRECATED: Remove when 27.x support is dropped.
-  (when (< emacs-major-version 28)
-    ;; As of Emacs 28+, `emacs-lisp-mode' uses a shorter label in the mode-line
-    ;; ("ELisp/X", where X = l or d, depending on `lexical-binding'). In <=27,
-    ;; it uses "Emacs-Lisp". The former is more useful, so I backport it:
-    (setq-hook! 'emacs-lisp-mode-hook
-      mode-name `("ELisp"
-                  (lexical-binding (:propertize "/l"
-                                    help-echo "Using lexical-binding mode")
-                                   (:propertize "/d"
-                                    help-echo "Using old dynamic scoping mode"
-                                    face warning
-                                    mouse-face mode-line-highlight)))))
 
   ;; Fixed indenter that intends plists sensibly.
   (advice-add #'calculate-lisp-indent :override #'+emacs-lisp--calculate-lisp-indent-a)
@@ -128,122 +100,15 @@
                             (if (< (length str) limit) "" truncated))))
         ret)))
 
-  (map! :localleader
-        :map (emacs-lisp-mode-map lisp-interaction-mode-map)
-        :desc "Expand macro" "m" #'macrostep-expand
-        (:prefix ("d" . "debug")
-          "f" #'+emacs-lisp/edebug-instrument-defun-on
-          "F" #'+emacs-lisp/edebug-instrument-defun-off)
-        (:prefix ("e" . "eval")
-          "b" #'eval-buffer
-          "d" #'eval-defun
-          "e" #'eval-last-sexp
-          "r" #'eval-region
-          "l" #'load-library)
-        (:prefix ("g" . "goto")
-          "f" #'find-function
-          "v" #'find-variable
-          "l" #'find-library)))
+  (add-hook! 'emacs-lisp-mode-hook :depth 100
+    (setq-local jg-text-whitespace-clean-hook
+                '(delete-trailing-whitespace
+                  +jg-lisp-cleanup-ensure-newline
+                  +jg-text-cleanup-whitespace)
+                )
+    )
 
-(use-package! ielm
-  :defer t
-  :config
-  (set-lookup-handlers! 'inferior-emacs-lisp-mode
-    :definition    #'+emacs-lisp-lookup-definition
-    :documentation #'+emacs-lisp-lookup-documentation)
-
-  ;; Adapted from http://www.modernemacs.com/post/comint-highlighting/ to add
-  ;; syntax highlighting to ielm REPLs.
-  (setq ielm-font-lock-keywords
-        (append '(("\\(^\\*\\*\\*[^*]+\\*\\*\\*\\)\\(.*$\\)"
-                   (1 font-lock-comment-face)
-                   (2 font-lock-constant-face)))
-                (when (require 'highlight-numbers nil t)
-                  (highlight-numbers--get-regexp-for-mode 'emacs-lisp-mode))
-                (cl-loop for (matcher . match-highlights)
-                         in (append lisp-el-font-lock-keywords-2
-                                    lisp-cl-font-lock-keywords-2)
-                         collect
-                         `((lambda (limit)
-                             (when ,(if (symbolp matcher)
-                                        `(,matcher limit)
-                                      `(re-search-forward ,matcher limit t))
-                               ;; Only highlight matches after the prompt
-                               (> (match-beginning 0) (car comint-last-prompt))
-                               ;; Make sure we're not in a comment or string
-                               (let ((state (syntax-ppss)))
-                                 (not (or (nth 3 state)
-                                          (nth 4 state))))))
-                           ,@match-highlights)))))
-
-
-;;
-;;; Packages
-
-;;;###package overseer
-(autoload 'overseer-test "overseer" nil t)
-;; Properly lazy load overseer by not loading it so early:
-(remove-hook 'emacs-lisp-mode-hook #'overseer-enable-mode)
-
-
-(use-package! flycheck-cask
-  :when (modulep! :checkers syntax)
-  :defer t
-  :init
-  (add-hook! 'emacs-lisp-mode-hook
-    (add-hook 'flycheck-mode-hook #'flycheck-cask-setup nil t)))
-
-
-(use-package! flycheck-package
-  :when (modulep! :checkers syntax)
-  :after flycheck
-  :config (flycheck-package-setup))
-
-
-(use-package! elisp-demos
-  :defer t
-  :init
-  (advice-add #'describe-function-1 :after #'elisp-demos-advice-describe-function-1)
-  (advice-add #'helpful-update :after #'elisp-demos-advice-helpful-update)
-  :config
-  (advice-add #'elisp-demos--search :around #'+emacs-lisp--add-doom-elisp-demos-a))
-
-
-(use-package! buttercup
-  :defer t
-  :minor ("/test[/-].+\\.el$" . buttercup-minor-mode)
-  :preface
-  ;; buttercup.el doesn't define a keymap for `buttercup-minor-mode', as we have
-  ;; to fool its internal `define-minor-mode' call into thinking one exists, so
-  ;; it will associate it with the mode.
-  (defvar buttercup-minor-mode-map (make-sparse-keymap))
-  :config
-  (set-popup-rule! "^\\*Buttercup\\*$" :size 0.45 :select nil :ttl 0)
-  (set-yas-minor-mode! 'buttercup-minor-mode)
-  (when (featurep 'evil)
-    (add-hook 'buttercup-minor-mode-hook #'evil-normalize-keymaps))
-  (map! :localleader
-        :map buttercup-minor-mode-map
-        :prefix "t"
-        "t" #'+emacs-lisp/buttercup-run-file
-        "a" #'+emacs-lisp/buttercup-run-project
-        "s" #'buttercup-run-at-point))
-
-
-;;
-;;; Project modes
-
-(def-project-mode! +emacs-lisp-ert-mode
-  :modes '(emacs-lisp-mode)
-  :match "/test[/-].+\\.el$"
-  :add-hooks '(overseer-enable-mode))
-
-(after! projectile
-  (add-to-list 'projectile-project-root-files "info.rkt"))
-
-
-;;
-;;; Packages
+  )
 
 (use-package! racket-mode
   :mode "\\.rkt\\'"  ; give it precedence over :lang scheme
@@ -280,52 +145,87 @@
               (modulep! :editor lispy))
     (add-hook 'racket-mode-hook #'racket-smart-open-bracket-mode))
 
-  (map! (:map racket-xp-mode-map
-         [remap racket-doc]              #'racket-xp-documentation
-         [remap racket-visit-definition] #'racket-xp-visit-definition
-         [remap next-error]              #'racket-xp-next-error
-         [remap previous-error]          #'racket-xp-previous-error)
-        (:localleader
-         :map racket-mode-map
-         "a" #'racket-align
-         "A" #'racket-unalign
-         "f" #'racket-fold-all-tests
-         "F" #'racket-unfold-all-tests
-         "h" #'racket-doc
-         "i" #'racket-unicode-input-method-enable
-         "l" #'racket-logger
-         "o" #'racket-profile
-         "p" #'racket-cycle-paren-shapes
-         "r" #'racket-run
-         "R" #'racket-run-and-switch-to-repl
-         "t" #'racket-test
-         "u" #'racket-backward-up-list
-         "y" #'racket-insert-lambda
-         (:prefix ("m" . "macros")
-          "d" #'racket-expand-definition
-          "e" #'racket-expand-last-sexp
-          "r" #'racket-expand-region
-          "a" #'racket-expand-again)
-         (:prefix ("g" . "goto")
-          "b" #'racket-unvisit
-          "d" #'racket-visit-definition
-          "m" #'racket-visit-module
-          "r" #'racket-open-require-path)
-         (:prefix ("s" . "send")
-          "d" #'racket-send-definition
-          "e" #'racket-send-last-sexp
-          "r" #'racket-send-region)
-         :map racket-repl-mode-map
-         "l" #'racket-logger
-         "h" #'racket-repl-documentation
-         "y" #'racket-insert-lambda
-         "u" #'racket-backward-up-list
-         (:prefix ("m" . "macros")
-          "d" #'racket-expand-definition
-          "e" #'racket-expand-last-sexp
-          "f" #'racket-expand-file
-          "r" #'racket-expand-region)
-         (:prefix ("g" . "goto")
-          "b" #'racket-unvisit
-          "m" #'racket-visit-module
-          "d" #'racket-repl-visit-definition))))
+  )
+
+(use-package! ielm
+  :defer t
+  :config
+  (set-lookup-handlers! 'inferior-emacs-lisp-mode
+    :definition    #'+emacs-lisp-lookup-definition
+    :documentation #'+emacs-lisp-lookup-documentation)
+
+  ;; Adapted from http://www.modernemacs.com/post/comint-highlighting/ to add
+  ;; syntax highlighting to ielm REPLs.
+  (setq ielm-font-lock-keywords
+        (append '(("\\(^\\*\\*\\*[^*]+\\*\\*\\*\\)\\(.*$\\)"
+                   (1 font-lock-comment-face)
+                   (2 font-lock-constant-face)))
+                (when (require 'highlight-numbers nil t)
+                  (highlight-numbers--get-regexp-for-mode 'emacs-lisp-mode))
+                (cl-loop for (matcher . match-highlights)
+                         in (append lisp-el-font-lock-keywords-2
+                                    lisp-cl-font-lock-keywords-2)
+                         collect
+                         `((lambda (limit)
+                             (when ,(if (symbolp matcher)
+                                        `(,matcher limit)
+                                      `(re-search-forward ,matcher limit t))
+                               ;; Only highlight matches after the prompt
+                               (> (match-beginning 0) (car comint-last-prompt))
+                               ;; Make sure we're not in a comment or string
+                               (let ((state (syntax-ppss)))
+                                 (not (or (nth 3 state)
+                                          (nth 4 state))))))
+                           ,@match-highlights)))))
+
+(use-package! flycheck-cask
+  :when (modulep! :checkers syntax)
+  :defer t
+  :init
+  (add-hook! 'emacs-lisp-mode-hook
+    (add-hook 'flycheck-mode-hook #'flycheck-cask-setup nil t)))
+
+(use-package! flycheck-package
+  :when (modulep! :checkers syntax)
+  :after flycheck
+  :config (flycheck-package-setup))
+
+(use-package! elisp-demos
+  :defer t
+  :init
+  (advice-add #'describe-function-1 :after #'elisp-demos-advice-describe-function-1)
+  (advice-add #'helpful-update :after #'elisp-demos-advice-helpful-update)
+  :config
+  (advice-add #'elisp-demos--search :around #'+emacs-lisp--add-doom-elisp-demos-a))
+
+(use-package! buttercup
+  :defer t
+  :minor ("/test[/-].+\\.el$" . buttercup-minor-mode)
+  :preface
+  ;; buttercup.el doesn't define a keymap for `buttercup-minor-mode', as we have
+  ;; to fool its internal `define-minor-mode' call into thinking one exists, so
+  ;; it will associate it with the mode.
+  (defvar buttercup-minor-mode-map (make-sparse-keymap))
+  :config
+  (set-popup-rule! "^\\*Buttercup\\*$" :size 0.45 :select nil :ttl 0)
+  (set-yas-minor-mode! 'buttercup-minor-mode)
+  (when (featurep 'evil)
+    (add-hook 'buttercup-minor-mode-hook #'evil-normalize-keymaps))
+  )
+
+(use-package! ffap)
+
+(use-package! find-func)
+
+(def-project-mode! +emacs-lisp-ert-mode
+  :modes '(emacs-lisp-mode)
+  :match "/test[/-].+\\.el$"
+  :add-hooks '(overseer-enable-mode))
+
+(after! projectile
+  (add-to-list 'projectile-project-root-files "info.rkt"))
+
+;;;###package overseer
+(autoload 'overseer-test "overseer" nil t)
+;; Properly lazy load overseer by not loading it so early:
+(remove-hook 'emacs-lisp-mode-hook #'overseer-enable-mode)

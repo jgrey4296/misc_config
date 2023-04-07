@@ -122,6 +122,15 @@
 (define-key evil-motion-state-map [mouse-5] #'ignore)
 ;;-- end Mouse Deactivation
 
+;;-- helm
+(map! :map jg-binding-helm-map
+      :desc "Minibuffer History"           "m"   #'counsel-minibuffer-history
+      :desc "Shell History"                "s"   #'counsel-shell-history
+      :desc "Helm Processes"               "h"   #'helm-list-emacs-process
+      )
+
+;;-- end helm
+
 (map! :map calendar-mode-map
       :n "RET" #'+jg-bindings-calendar-insert-date
       )

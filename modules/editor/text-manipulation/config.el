@@ -5,7 +5,7 @@
   (load! "evil/+operators")
   (load! "evil/+motions")
   (load! "evil/+state")
-  ;; (load! "+undo-state")
+  (load! "evil/+text-obj")
   (load! "+bindings")
   (load! "+advice")
 )

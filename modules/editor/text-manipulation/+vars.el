@@ -98,3 +98,8 @@
               )
 
 ;;-- end rotate-text
+
+(after! evil
+  (setq-default evil-shift-width 4)
+  (remove-hook! 'after-change-major-mode-hook #'doom--setq-evil-shift-width-for-after-change-major-mode-h)
+  )

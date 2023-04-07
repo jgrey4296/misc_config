@@ -124,3 +124,23 @@
       :localleader
       :desc "License Reference" "1" (cmd! (browse-url "https://choosealicense.com/licenses/"))
       )
+
+(map! :map jg-binding-change-map
+      :desc "Split Line"                  "RET" #'electric-newline-and-maybe-indent
+
+      :desc "Rot13"                       "'" #'evil-rot13
+      :desc "ispell-word"                 "=" #'ispell-word
+
+      :desc "Comment"                     "c" #'evilnc-comment-operator
+      :desc "downcase"                    "d" #'evil-downcase
+      :desc "UpperCase"                   "u" #'evil-upcase
+      :desc "inflection"                  "i" #'evil-operator-string-inflection
+
+      :desc "Encode url"                  "e" #'+evil:url-encode
+      :desc "Decode url"                  "E" #'+evil:url-decode
+
+      :desc "Shift Left"                  "h" #'+jg-text-shift-left
+      :desc "Shift Right"                 "l" #'+jg-text-shift-right
+
+      :desc "Surround"                    "s" #'evil-surround-region
+      )

@@ -217,15 +217,6 @@
 
 ;;-- end change
 
-;;-- helm
-(map! :map jg-binding-helm-map
-      :desc "Minibuffer History"           "m"   #'counsel-minibuffer-history
-      :desc "Shell History"                "s"   #'counsel-shell-history
-      :desc "Helm Processes"               "h"   #'helm-list-emacs-process
-      )
-
-;;-- end helm
-
 ;;-- vision
 (map! :map jg-binding-vision-map
       :desc "Visual Mark Mode"    "0" #'evil-visual-mark-mode

@@ -31,7 +31,9 @@
       :desc "Update"              :n "g" #'ibuffer-update
       :desc "Formats"             :n "f" #'ibuffer-switch-format
       :desc "Kill Marked"         :n "D" #'ibuffer-do-delete
-      :desc "change-marks"              "c" #'ibuffer-change-marks
+      :desc "change-marks"        :n "c" #'ibuffer-change-marks
+
+      :desc "Write Marked"        :n "W" #'ibuffer-do-save
 
       :n "l" #'ignore
       :n "i" #'ignore

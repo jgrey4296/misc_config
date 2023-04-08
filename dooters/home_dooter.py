@@ -58,6 +58,3 @@ if __name__ == "dooter":
     adb_down       = android.ADBDownload(locs=doot.locs)
     adb_del        = android.ADBDelete(locs=doot.locs)
     ##-- end android
-
-    # breakpoint()
-    # pass

@@ -214,9 +214,12 @@ with either a numeric or alphabetical escalation "
   :repeat t
   :keep-visual t
   (interactive "<r><vc>")
-  (evil-shift-left beg end count t)
-  (evil-normal-state)
-  (evil-visual-restore)
+  (let ((state evil-state))
+    (evil-shift-left beg end count t)
+    (when (eq state 'visual)
+      (evil-normal-state)
+      (evil-visual-restore))
+    )
   )
 
 (evil-define-operator +jg-text-shift-right (beg end count)
@@ -226,7 +229,10 @@ with either a numeric or alphabetical escalation "
   :repeat t
   :keep-visual t
   (interactive "<r><vc>")
-  (evil-shift-right beg end count t)
-  (evil-normal-state)
-  (evil-visual-restore)
+  (let ((state evil-state))
+    (evil-shift-right beg end count t)
+    (when (eq state 'visual)
+      (evil-normal-state)
+      (evil-visual-restore))
+    )
   )

@@ -1,9 +1,11 @@
 ;;; spec-hooks.el -*- lexical-binding: t; -*-
 
 ;; Template for registering and applying ui settings
+
 (defvar jg-projects-spec-table       (make-hash-table))
 
 ;;;###autodef
+
 (defun +jg-projects-add-spec (sym rules &optional priority override)
   "Register a projects spec for evil-projects-lit "
   (when (or (not (gethash sym jg-projects-spec-table)) override)
@@ -11,7 +13,8 @@
     )
   )
 
-;;;###autodef
+;;;###autoload
+
 (defun +jg-projects-reapply-specs ()
   " Apply specs to the target "
   (interactive)

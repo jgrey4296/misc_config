@@ -34,5 +34,5 @@
   :commands (project-walk-minor-mode project-walk-next)
 )
 
-(add-hook! 'jg-ui-reapply-hook #'jg-project-reapply-specs)
+(add-hook! 'jg-ui-reapply-hook #'+jg-projects-reapply-specs)
 ;;; config.el ends here

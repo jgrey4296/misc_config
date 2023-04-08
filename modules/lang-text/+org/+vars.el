@@ -5,7 +5,7 @@
 (defvar jg-org-clean-marker nil)
 (defvar jg-org-preferred-linecount 1500)
 (defvar jg-org-link-move-base "/Volumes/Overflow/missing_images/")
-(defvar jg-org-twitter-loc (expand-file-name  "~/twitterthreads/"))
+(defvar jg-org-twitter-loc "/Volumes/documents/twitter_threads/")
 ;;-- end personal
 
 ;;-- pomodoro

@@ -17,10 +17,7 @@ from doot.tasks.data import images
 from doot.tasks.files import hashing
 
 if __name__ == "dooter":
-    # the equivalent of main
     ocr    = images.OCRGlobber(locs=doot.locs)
-    # breakpoint()
-    # pass
     hasher     = hashing.HashAllFiles(locs=doot.locs, roots=[doot.locs.data], rec=True)
     hash_group = hashing.GroupHashes(locs=doot.locs, roots=[doot.locs.root], rec=True)
     hash_dups  = hashing.DetectDuplicateHashes(locs=doot.locs)

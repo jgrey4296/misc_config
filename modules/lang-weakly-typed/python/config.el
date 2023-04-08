@@ -30,6 +30,11 @@
   (when (executable-find "Microsoft.Python.LanguageServer")
     (set-eglot-client! 'python-mode '("Microsoft.Python.LanguageServer")))
 
+  (setq-hook! 'python-mode-hook
+    indent-line-function #'python-indent-line
+    indent-region-function #'python-indent-region
+    )
+
   (set-docsets! '(python-mode inferior-python-mode) "Python 3" "NumPy" "SciPy" "Pandas")
 
   :config

@@ -7,11 +7,6 @@
  (front-context-string . "doot\n  drwxr-xr-")
  (rear-context-string . "46 Feb  8 06:31 ")
  (position . 303))
-("target"
- (filename . "/Volumes/documents/github/python/doot/tests/backup_test/")
- (front-context-string . "doot.toml\n  -rw-")
- (rear-context-string . "62 Feb  6 23:55 ")
- (position . 210))
 ("movies"
  (filename . "~/Movies/")
  (front-context-string . "jojos\n  -rw-r--r")
@@ -73,7 +68,7 @@
  (rear-context-string)
  (position . 1))
 ("taxonomies"
- (filename . "/Volumes/documents/github/jgrey4296.github.io/orgfiles/listings/taxonomies.org")
+ (filename . "~/github/jgrey4296.github.io/orgfiles/taxonomies/")
  (front-context-string . "*  Taxonomies   ")
  (rear-context-string)
  (position . 1))
@@ -83,12 +78,12 @@
  (rear-context-string . "E: Definitions\n\n")
  (position . 23))
 ("quotes"
- (filename . "/Volumes/documents/github/jgrey4296.github.io/orgfiles/listings/quotes.org")
+ (filename . "/Volumes/documents/github/jgrey4296.github.io/orgfiles/quotes/")
  (front-context-string . " #+TITLE: Quotes")
  (rear-context-string)
  (position . 1))
 ("corpora"
- (filename . "/Volumes/documents/github/corpora/data/")
+ (filename . "~/github/_libs/javascript/corpora/")
  (front-context-string . "archetypes\n  drw")
  (rear-context-string . "40 Oct  7 00:19 ")
  (position . 197))
@@ -98,7 +93,7 @@
  (rear-context-string . "72 Jul 24 17:00 ")
  (position . 199))
 ("snippets"
- (filename . "/Volumes/documents/github/__configs/snippets/")
+ (filename . "~/.doom.d/templates/code/")
  (front-context-string . "shell-mode\n  drw")
  (rear-context-string . "02 May  2 02:49 ")
  (position . 1576))
@@ -153,12 +148,12 @@
  (rear-context-string . "50 Mar 15 17:07 ")
  (position . 878))
 ("android"
- (filename . "/Volumes/documents/github/languageLearning/android/")
+ (filename . "~/github/android/")
  (front-context-string . "BibtexViewer\n  d")
  (rear-context-string . "44 Dec 26 01:39 ")
  (position . 151))
 ("cookie_templates"
- (filename . "/Volumes/documents/github/__configs/cookie_templates/")
+ (filename . "~/.doom.d/templates/projects/")
  (front-context-string . "jg_py\n  -rw-r--r")
  (rear-context-string . "36 Nov  2 01:58 ")
  (position . 269))
@@ -167,11 +162,6 @@
  (front-context-string . "makefile\n  -rw-r")
  (rear-context-string . "72 Oct 29 19:02 ")
  (position . 251))
-("temp"
- (filename . "/Volumes/documents/github/temp/")
- (front-context-string)
- (rear-context-string . "ilable 71.4 GiB\n")
- (position . 82))
 ("conda"
  (filename . "/opt/anaconda3/")
  (front-context-string . "Anaconda-Navigat")
@@ -203,7 +193,7 @@
  (rear-context-string . "38 May  8 22:44 ")
  (position . 141))
 ("twitter"
- (filename . "/Volumes/documents/twitterthreads/")
+ (filename . "/Volumes/documents/twitter_threads/")
  (front-context-string . "group_a\n  drwxrw")
  (rear-context-string . "6K Mar 30 07:56 ")
  (position . 152))

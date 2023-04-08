@@ -7,7 +7,7 @@
 (defvar jg-tag-loc-twitter-account-index  (expand-file-name "~/github/jgrey4296.github.io/.temp/index/tw_acct.index"))
 (defvar jg-tag-loc-twitter-grep-index     (expand-file-name "~/github/jgrey4296.github.io/resources/index/grep_tags.index"))
 (defvar jg-tag-loc-twitter-tag-index      (expand-file-name "~/github/jgrey4296.github.io/resources/index/tw_tag.index"))
-(defvar jg-tag-loc-twitter                "/Volumes/documents/twitterthreads/")
+(defvar jg-tag-loc-twitter                "/Volumes/documents/twitter_threads/")
 
 (defvar jg-tag-twitter-heading-helm-candidates nil)
 (defvar jg-tag-twitter-helm-candidates nil)

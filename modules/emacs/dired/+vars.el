@@ -36,6 +36,7 @@
                                      "cups" "debris" "fseventsd"
                                      "offlineimap" "ncftp"
                                      (: "js" (? ".meta"))
+                                     "doot_defaults.toml"
                                      )))
          (icons    (| "Icon\015"  (: ?. "thumbnails") ))
          (gtags    (| "GPATH" "GRTAGS" "GTAGS"))

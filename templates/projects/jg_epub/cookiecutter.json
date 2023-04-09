@@ -5,7 +5,6 @@
     "_short_name" : "me",
     "_github_username": "me",
     "_copy_without_render" : [
-        "*docs/_static",
-        "*docs/_templates"
+        "*src/_theme"
     ]
 }

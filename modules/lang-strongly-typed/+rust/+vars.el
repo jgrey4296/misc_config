@@ -52,7 +52,7 @@
                                 )
                               )
   )
-;;-- end file templates
+;;-- end file spec
 
 ;;-- browse spec
 (after! jg-ui-reapply-hook-ready
@@ -66,7 +66,7 @@
                               )
   )
 
-;;-- end browse providers
+;;-- end browse spec
 
 ;;-- LSP
 (setq lsp-rust-analyzer-server-command '("rustup" "run" "nightly" "rust-analyzer")

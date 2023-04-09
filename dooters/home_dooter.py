@@ -47,17 +47,11 @@ if __name__ == "dooter":
     ##-- end bookmarks
 
     ##-- backup
-    backup_movies  = BackupTask("backup::movies",  locs=doot.locs, roots=[doot.locs.movies], output=doot.locs.movies_backup)
-    backup_images  = BackupTask("backup::images",  locs=doot.locs, roots=[doot.locs.images], output=doot.locs.images_backup)
-    backup_pdfs    = BackupTask("backup::pdfs",    locs=doot.locs, roots=[doot.locs.pdfs], output=doot.locs.pdf_backup)
-    backup_summary = BackupTask("backup::summary", locs=doot.locs, roots=[doot.locs.pdf_summary], output=doot.locs.pdf_summary_backup)
-    backup_twitter = BackupTask("backup::twitter", locs=doot.locs, roots=[doot.locs.thread_library], output=doot.locs.thread_backup)
-
-    backup_twitter_v2 = BackupCollectorTask("backup::twitter.2", locs=doot.locs, source=doot.locs.thread_library, backup=doot.locs.thread_backup)
-    backup_pdfs_v2    = BackupCollectorTask("backup::pdfs.2",    locs=doot.locs, source=doot.locs.pdfs,           backup=doot.locs.pdf_backup)
-    backup_summary    = BackupCollectorTask("backup::summary",   locs=doot.locs, source=doot.locs.pdf_summary,    backup=doot.locs.pdf_summary_backup)
-    backup_movies     = BackupCollectorTask("backup::movies",    locs=doot.locs, source=doot.locs.movies,         backup=doot.locs.movies_backup)
-    backup_images     = BackupCollectorTask("backup::images",    locs=doot.locs, source=doot.locs.images,         backup=doot.locs.images_backup)
+    backup_twitter = BackupCollectorTask("backup::twitter", locs=doot.locs, source=doot.locs.thread_library, backup=doot.locs.thread_backup)
+    backup_pdfs    = BackupCollectorTask("backup::pdfs",    locs=doot.locs, source=doot.locs.pdfs,           backup=doot.locs.pdf_backup)
+    backup_summary = BackupCollectorTask("backup::summary", locs=doot.locs, source=doot.locs.pdf_summary,    backup=doot.locs.pdf_summary_backup)
+    backup_movies  = BackupCollectorTask("backup::movies",  locs=doot.locs, source=doot.locs.movies,         backup=doot.locs.movies_backup)
+    backup_images  = BackupCollectorTask("backup::images",  locs=doot.locs, source=doot.locs.images,         backup=doot.locs.images_backup)
 
     ##-- end backup
 

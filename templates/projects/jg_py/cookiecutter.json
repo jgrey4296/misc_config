@@ -2,7 +2,7 @@
     "proj_name"   : "jg_py_template",
     "env"         : "base310",
     "entry_point" : "__main__",
-    "python"      : "3.10"
+    "python"      : "3.10",
     "_author"     : "me",
     "_email"      : "my@email.com",
     "_short_name" : "me",

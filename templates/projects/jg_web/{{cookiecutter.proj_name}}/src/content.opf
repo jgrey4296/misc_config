@@ -6,8 +6,8 @@
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xmlns:calibre="http://calibre.kovidgoyal.net/2009/metadata">
         <dc:language>en</dc:language>
-        <dc:title>{{cookiecutter.proj_title}}</dc:title>
-        <meta name="calibre:title_sort" content="{{cookiecutter.proj_title}}"/>
+        <dc:title>{{cookiecutter.proj_name}}</dc:title>
+        <meta name="calibre:title_sort" content="{{cookiecutter.proj_name}}"/>
         <dc:creator opf:file-as="{{cookiecutter._author}}" opf:role="aut">{{cookiecutter._author}}</dc:creator>
         <meta name="cover" content="cover"/>
     </metadata>

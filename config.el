@@ -26,6 +26,8 @@
       pyvenv-default-virtual-env-name (expand-file-name "~/anaconda/envs/")
       server-auth-dir                 (expand-file-name "~/.secrets")
       )
+
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/.local/modules"))
 ;;-- end locations
 
 (setq server-log t)

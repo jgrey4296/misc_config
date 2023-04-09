@@ -1,6 +1,6 @@
 {
     "proj_name"   : "jg_jacamo_template",
-    "tags"        : "jacamo", "java", "kotlin",
+    "tags"        : ["jacamo", "java", "kotlin"],
     "_author"     : "me",
     "_email"      : "my@email.com",
     "_short_name" : "me",

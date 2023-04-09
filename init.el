@@ -22,9 +22,10 @@
  :lang-dsl qt
  ;; :lang-dsl music faust
 
- ;; :lang-strongly-typed dotnet-langs fstar haskell
- ;; :lang-strongly-typed idris jvm-langs lean ocaml scala sml
+ ;; :lang-strongly-typed fstar haskell
+ ;; :lang-strongly-typed idris lean ocaml scala sml
  :lang-strongly-typed coq rust +rust
+ :lang-strongly-type jvm-langs dotnet-langs
 
  :lang-text inform web
  :lang-text (org +gnuplot +pomodoro +journal +noter) +org

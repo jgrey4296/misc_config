@@ -5,6 +5,8 @@
 gdb = "build --profile gdb"
 cfgs = "-Z unstable-options rustc --print=cfg"
 
+[build]
+target-dir = "build"
 
 # [build]
 # jobs = 1                      # number of parallel jobs, defaults to # of CPUs

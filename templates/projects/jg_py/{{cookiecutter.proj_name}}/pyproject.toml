@@ -3,12 +3,12 @@ name            = "{{cookiecutter.proj_name}}"
 version         = "0.0.1"
 description     = ""
 readme          = "README.md"
-requires-python = ">=3.10"
+requires-python = ">={{cookiecutter.python}}"
 license         = {file = "LICENSE"}
 keywords        = []
 authors         = [
+  {name  = "{{cookiecutter._author}}"}
   {email = "{{cookiecutter._email}}"},
-  {name  = "cookiecutter._author"}
 ]
 classifiers     = [
   "Programming Language :: Python"
@@ -18,8 +18,8 @@ dependencies   = []
 
 [project.optional-dependencies]
 docs = [ "sphinx" ]
-dev  = ["doit"]
-test = ["pytest < 5.0.0"]
+dev  = [ "https://github.com/jgrey4296/doot", "pipreqs" ]
+test = [ "pytest < 5.0.0" ]
 
 ##-- urls
 [project.urls]
@@ -32,7 +32,7 @@ changelog     = "https://github.com//{{cookiecutter.proj_name}}/blob/master/CHAN
 
 ##-- scripts
 [project.scripts]
-{{cookiecutter.proj_name}} = {{cookiecutter.proj_name}}.{{cookiecutter.entry_point}}:main
+{{cookiecutter.proj_name}} = "{{cookiecutter.proj_name}}.{{cookiecutter.entry_point}}:main"
 
 [project.gui-scripts]
 # spam-gui      = "spam:main_gui"
@@ -52,19 +52,16 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
-# packages = ['rust_py']
 include-package-data = true
 
 [tool.setuptools.packages.find]
-namespaces = true
 where = ["."]
 
 [tool.setuptools.package-data]
 "{{cookiecutter.proj_name}}.__configs" = []
-
+"{{cookiecutter.proj_name}}.__data"    = ["*.so"]
 
 [tool.setuptools.exclude-package-data]
-
 
 ##-- end build-system
 
@@ -73,7 +70,7 @@ where = ["."]
 # strict = {{cookiecutter.proj_name}}.*
 verboseOutput               = true
 typeCheckingMode            = "strict"
-pythonVersion               = "3.10"
+pythonVersion               = "{{cookiecutter.python}}"
 
 reportUnusedImport          = false
 reportAssertAlwaysTrue      = "information"
@@ -88,6 +85,19 @@ reportUnnecessaryIsInstance = "warning"
 
 ##-- end pyright
 
+##-- mypy
+# https://mypy.readthedocs.io/en/stable/config_file.html#config-file
+[mypy]
+python_version      = {{cookiecutter.python}}
+warn_return_any     = true
+warn_unused_configs = true
+
+# Per-module options:
+[mypy-pyparsing]
+ignore_missing_imports = true
+
+##-- end mypy
+
 ##-- pytest
 [tool.pytest.ini_options]
 log_cli       = false
@@ -95,3 +105,34 @@ log_level     = "DEBUG"
 log_cli_level = "DEBUG"
 
 ##-- end pytest
+
+##-- sphinx
+[tool.sphinx]
+author     = "{{cookiecutter._author}}"
+copyright  = "{% now 'utc' %}"
+extensions = ['sphinx.ext.doctest', 'sphinx.ext.autodoc', 'sphinx.ext.autosummary', 'sphinx.ext.napoleon']
+templates  = ['_templates']
+exclude    = ['**/flycheck_*.py']
+
+[tool.sphinx.autosummary]
+generate = true
+
+[tool.sphinx.autodoc]
+add_module_names   = false
+inherit_docstrings = true
+
+[tool.sphinx.autodoc.defaults]
+members           = true
+undoc-members     = true
+private-members   = false
+special-members   = false
+inherited-members = true
+show-inheritance  = true
+
+[tool.sphinx.html]
+theme       = 'alabaster'
+static      = ['_static']
+
+[tool.sphinx.html.options]
+
+##-- end sphinx

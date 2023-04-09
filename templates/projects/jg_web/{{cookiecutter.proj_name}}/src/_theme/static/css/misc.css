@@ -1,0 +1,39 @@
+code { font-size : 15px; }
+
+.break { page-break-after : always; }
+
+.centered { display : block; text-align : center; margin : 1em 0; }
+
+.right { text-align : right; }
+
+/* Centered quote, as a box to allow */
+/* child text-aligning */
+.quote { display : table; box-sizing : content-box; margin : 1em auto; width : fit-content; }
+
+.pull-quote { width : 300px; float : right; margin : 10px; font-family : Georgia, "Times New Roman", Times, serif; /* font : italic bold #777777; */ }
+
+.sticky-footer { position :fixed; left :0px; bottom :0px; /* or top :0px for header */     height :32px; width :100%; }
+
+/* from https://css-tricks.com/snippets/css/drop-caps/ */
+/* Larger Letter at start of chapter, using a span: */
+.dropcap:first-letter { font-size : 500%; float : left; line-height : 200%; }
+
+.upcap:first-letter { font-size : 800%; float : none; /* line-height : 200%; */ }
+
+/* https://www.scottohara.me/blog/2017/04/14/inclusively-hidden.html */
+.sr-only:not(:focus):not(:active) {
+    clip : rect(0 0 0 0);
+    clip-path : inset(50%);
+    height : 1px;
+    overflow : hidden;
+    position : absolute;
+    white-space : nowrap;
+    width : 1px;
+}
+
+/* from https://www.codecademy.com/resources/blog/30-css-snippets/ */
+.shadow { box-shadow : 0px 5px 5px rgba(0,0,0,0.4); -moz-box-shadow : 0px 5px 5px rgba(0,0,0,0.4); -webkit-box-shadow : 0px 5px 5px rgba(0,0,0,0.4); }
+
+.text-with-shadow { text-shadow: 4px 4px 8px #000; }
+
+ul { line-height : 1.5; }

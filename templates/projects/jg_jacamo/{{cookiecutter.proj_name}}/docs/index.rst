@@ -1,4 +1,4 @@
-Welcome to {{cookiecutter.proj_name}}'s documentation!
+{{cookiecutter.proj_name}}
 ================================
 
 .. toctree::
@@ -9,7 +9,7 @@ Welcome to {{cookiecutter.proj_name}}'s documentation!
    :recursive:
    :toctree: _generated_{{cookiecutter.proj_name}}
 
-   acab
+   {{cookiecutter.proj_name}}
 
 
 

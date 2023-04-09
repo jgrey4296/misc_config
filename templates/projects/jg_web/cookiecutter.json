@@ -1,0 +1,11 @@
+{
+    "proj_name"   : "jg_web_template",
+    "_author"     : "me",
+    "_email"      : "my@email.com",
+    "_short_name" : "me",
+    "_github_username": "me",
+    "_copy_without_render" : [
+        "*docs/_static",
+        "*docs/_templates"
+    ]
+}

@@ -1,9 +1,5 @@
 {
-    "proj_name"   : "jg_py_template_project",
-    "proj_title"  : "jg epub",
-    "desc"        : "A Template Epub Project",
-    "tags"        : "epub",
-    "entry_point" : "default",
+    "proj_name"   : "jg_py_template",
     "_author"     : "me",
     "_email"      : "my@email.com",
     "_short_name" : "me",

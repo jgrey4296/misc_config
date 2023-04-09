@@ -1,6 +1,16 @@
+# https://doc.rust-lang.org/cargo/reference/manifest.html
 [package]
 name    = "{{cookiecutter.proj_name}}"
 version = "0.0.1"
-authors = [ "Author: John Grey "]
+edition = "{{cookiecutter.edition}}"
+authors = [ "{{cookiecutter._author}}"]
 
-[dependencies.cpython]
+[lib]
+crate-type = ["cdylib"]
+
+[[bin]]
+name = "{{cookiecutter.proj_name}}"
+
+[dependencies]
+
+[dev-dependencies]

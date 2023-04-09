@@ -15,61 +15,51 @@ import sys
 sys.path.insert(0, os.path.abspath('../{{cookiecutter.proj_name}}'))
 
 import warnings
+import tomler
+
+data = tomler.load("../pyproject.toml")
 
 with warnings.catch_warnings():
     warnings.simplefilter("ignore")
     import {{cookiecutter.proj_name}}
-    acab.setup()
 
 # -- Project information -----------------------------------------------------
 
-project   = '{{cookiecutter.proj_name}}'
-copyright = "{% now 'utc' %}"
-author    = '{{cookiecutter._author}}'
+project   = data.on_fail("Unknown Project Name").project.name()
+copyright = data.on_fail("{% now 'utc' %}").tool.sphinx.copyright()
+author    = data.on_fail("{{cookiecutter._author}}").tool.sphinx.author()
 
 # -- General configuration ---------------------------------------------------
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx.ext.doctest',
-              'sphinx.ext.autodoc',
-              'sphinx.ext.autosummary',
-              'sphinx.ext.napoleon']
+extensions = data.on_fail([], list).tool.sphinx.extensions()
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+templates_path = data.on_fail([], list).tool.sphinx.templates()
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = ['**/flycheck_*.py']
+exclude_patterns = data.on_fail([], list).tool.sphinx.exclude()
 
-autosummary_generate = True
+if 'sphinx.ext.autosummary' in extensions:
+    autosummary_generate = data.on_fail(false, bool).tool.sphinx.autosummary.generate()
 
-autodoc_default_options = {
-    'members'       : True,
-    'undoc-members' : True,
-    # 'private-members': True,
-    # 'special-members': True,
-    'inherited-members': True,
-    'show-inheritance' : True,
-    }
-add_module_names = False
-autodoc_inherit_docstrings = True
+if 'sphinx.ext.autodoc' in extensions:
+    autodoc_default_options    = data.on_fail({}, dict).tool.sphinx.autodoc.defaults(wrapper=dict)
+    add_module_names           = data.on_fail(false, bool).tool.sphinx.autodoc.add_module_names()
+    autodoc_inherit_docstrings = data.on_fail(false, bool).tool.sphinx.autodoc.inherit_docstrings()
 
 # -- Options for HTML output -------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'alabaster'
-
-html_theme_options = {
-
-    }
-
+html_theme = data.on_fail("alabaster", str).tool.sphinx.html.theme()
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+html_static_path = data.on_fail([], list).tool.sphinx.html.static()
+html_theme_options = data.on_fail({}, dict).tool.sphinx.html.options(wrapper=dict)

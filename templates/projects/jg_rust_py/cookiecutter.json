@@ -1,9 +1,9 @@
 {
-    "proj_name"   : "jg_rust_py_template_project",
+    "proj_name"   : "jg_rust_py_template",
     "env"         : "base310",
-    "desc"        : "A Template Rust-Python Project",
-    "tags"        : "python", "rust"
-    "entry_point" : "default",
+    "python"      : "3.10"
+    "edition"     : "2021"
+    "entry_point" : "__main__",
     "_author"     : "me",
     "_email"      : "my@email.com"
     "_short_name" : "me",

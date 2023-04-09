@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block html_lang %}{{ article.lang }}{% endblock %}
+
+{% block title %}{{ SITENAME }} - {{ article.title|striptags  }}{% endblock %}
+
+{% block style %}
+  {{ super() }}
+  <link rel="stylesheet" href="theme/css/article.css">
+{% endblock style %}
+
+{% block head %}
+  {{ super() }}
+
+  {% if article.description %}
+    <meta name="description" content="{{article.description}}" />
+  {% endif %}
+
+  {% for tag in article.tags %}
+    <meta name="tags" content="{{tag}}" />
+  {% endfor %}
+
+{% endblock %}
+
+{% block content %}
+  <header class="content-header">
+    <h1>
+      <a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark"
+         title="Permalink to {{ article.title|striptags }}">{{ article.title }}</a>
+    </h1>
+    <div class="content-meta">
+      <time class="published" datetime="{{ article.date.isoformat() }}">
+        {{ article.locale_date }}
+      </time>
+      {% if article.modified %}
+        <time class="modified" datetime="{{ article.modified.isoformat() }}">
+          {{ article.locale_modified }}
+        </time>
+      {% endif %}
+      {% if article.tags %}
+        <div class="tags">
+          Tags:
+          {% for tag in article.tags %}
+            <a href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  </header>
+
+  <article class="content-actual">
+    {{ article.content }}
+  </article>
+
+{% endblock %}

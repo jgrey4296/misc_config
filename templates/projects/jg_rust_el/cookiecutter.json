@@ -1,0 +1,8 @@
+{
+    "proj_name"   : "jg_rust_emacs_template",
+    "edition"     : "2021",
+    "_copy_without_render": [
+        "docs/_templates/*/*.rst",
+        "docs/_static"
+    ]
+}

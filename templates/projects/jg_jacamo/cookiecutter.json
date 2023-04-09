@@ -1,8 +1,6 @@
 {
-    "proj_name"   : "jg_jacamo_template_project",
-    "desc"        : "A Template Jacamo Project",
+    "proj_name"   : "jg_jacamo_template",
     "tags"        : "jacamo", "java", "kotlin",
-    "entry_point" : "default",
     "_author"     : "me",
     "_email"      : "my@email.com",
     "_short_name" : "me",

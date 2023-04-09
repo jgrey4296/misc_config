@@ -1,14 +1,19 @@
+# https://doc.rust-lang.org/cargo/reference/manifest.html
+
 [package]
 name    = "{{cookiecutter.proj_name}}"
 version = "0.1.0"
-edition = "2021"
+edition = "{{cookiecutter.edition}}"
+authors = [ "{{cookiecutter._author}}"]
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+crate-type = ["cdylib"]
+path       = "{{cookiecutter.proj_name}}/lib.rs"
+
+[dependncies]
 
 [dependencies.cpython]
 version = "0.7"
 features = ["extension-module"]
 
-[lib]
-crate-type = ["cdylib"]
-path       = "{{cookiecutter.proj_name}}/lib.rs"
+[dev-dependencies]

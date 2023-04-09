@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<package xmlns="http://www.idpf.org/2007/opf" version="2.0" unique-identifier="uuid_id">
+    <metadata xmlns:opf="http://www.idpf.org/2007/opf"
+              xmlns:dc="http://purl.org/dc/elements/1.1/"
+              xmlns:dcterms="http://purl.org/dc/terms/"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xmlns:calibre="http://calibre.kovidgoyal.net/2009/metadata">
+        <dc:language>en</dc:language>
+        <dc:title>{{cookiecutter.proj_title}}</dc:title>
+        <meta name="calibre:title_sort" content="{{cookiecutter.proj_title}}"/>
+        <dc:creator opf:file-as="{{cookiecutter._author}}" opf:role="aut">{{cookiecutter._author}}</dc:creator>
+        <meta name="cover" content="cover"/>
+    </metadata>
+    <manifest>
+        <!-- Cover Image: -->
+        <item id="cover"     href="cover_image.jpg"        media-type="image/jpeg"/>
+        <!-- Content -->
+        <item id="titlepage" href="content/intro.xhtml"    media-type="application/xhtml+xml"/>
+        <!-- Images -->
+        <item id="eagle"     href="images/eagle.png"       media-type="image/jpeg"/>
+        <!-- Styles -->
+        <item id="page_css"  href="styles/page_styles.css" media-type="text/css"/>
+        <item id="css"       href="styles/stylesheet.css"  media-type="text/css"/>
+        <!-- Table of Contents -->
+        <item id="ncx"       href="toc.ncx"                media-type="application/x-dtbncx+xml"/>
+    </manifest>
+    <spine toc="ncx">
+        <itemref idref="titlepage"/>
+    </spine>
+    <guide>
+        <reference type="cover" href="cover_image.jpg" title="Title page"/>
+    </guide>
+</package>

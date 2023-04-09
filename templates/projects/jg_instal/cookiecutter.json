@@ -1,8 +1,5 @@
 {
-    "proj_name"   : "jg_instal_template_project",
-    "desc"        : "A Template Instal Project",
-    "tags"        : "python",
-    "entry_point" : "default",
+    "proj_name"   : "jg_instal_template",
     "_author"     : "me",
     "_email"      : "my@email.com",
     "_short_name" : "me",

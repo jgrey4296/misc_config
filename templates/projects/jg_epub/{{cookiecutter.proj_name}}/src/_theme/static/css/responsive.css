@@ -1,0 +1,18 @@
+@media (max-width: 900px) {
+    body { font-size : 100%; }
+    body nav { font-size: 100%; }
+    body :is(header, main, footer) { margin-left: 0; margin-right: 0; }
+}
+
+@media (min-width: 900px) and (max-width: 1200px) {
+   #left-sb { visibility: visible; }
+   body :is(header, main, footer) { margin-left: var(--sidebar-width); margin-right: 0; }
+
+}
+
+@media (min-width: 1200px) {
+    #left-sb, #right-sb { visibility: visible; }
+    h2 { text-align: left; }
+    h3 { text-align: left; }
+    body :is(header, main, footer) { margin-left: var(--sidebar-width); margin-right: var(--sidebar-width); }
+}

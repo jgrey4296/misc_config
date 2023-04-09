@@ -1,0 +1,21 @@
+verbosity                = 2
+default_tasks            = []
+action_string_formatting = "new"
+notify                   = { say-on-exit = false }
+globbing                 = { ignores = ['.git', '.DS_Store', "__pycache__"] }
+subtask                  = { sleep = 1 }
+batch                    = { sleep = 1 }
+zip                      = { level = 5 }
+
+[logging]
+stream = { level = "INFO", format  = "{levelname:<8} : {message}", filters = ["doot"] }
+file   = { level = "DEBUG", format = "{levelname:<8} : {message:<20} :|: ({module}.{lineno}.{funcName})", filters =  ["doot"] }
+
+[[directories]] # Core
+src         = "{{cookiecutter.proj_name}}"
+codegen     = "{{cookiecutter.proj_name}}/_codegen"
+temp        = ".temp"
+build       = "build"
+docs        = "docs"
+
+[group.lisp]

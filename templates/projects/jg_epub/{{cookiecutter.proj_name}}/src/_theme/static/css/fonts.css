@@ -1,0 +1,55 @@
+/* https://htmlcheatsheet.com/css/ */
+.basic-arial {
+    font-family     : "Arial Black", Gadget, sans-serif;
+    font-size       : 19px;
+    letter-spacing  : 2px;
+    word-spacing    : 2px;
+    color           : #000000;
+    font-weight     : normal;
+    /* text-decoration : underline rgb(68, 68, 68); */
+    font-style      : normal;
+    font-variant    : normal;
+    text-transform  : none;
+}
+
+.basic-georgia {
+    font-family     : Georgia, serif;
+    font-size       : 19px;
+    letter-spacing  : 2px;
+    word-spacing    : 2px;
+    color           : #000000;
+    font-weight     : 400;
+    text-decoration : rgb(68, 68, 68);
+    font-style      : normal;
+    font-variant    : normal;
+    text-transform  : none;
+}
+
+.basic-tnr{
+    font-family     : "Times New Roman", serif;
+    font-size       : 19px;
+    letter-spacing  : 2px;
+    word-spacing    : 2px;
+    color           : #000000;
+    font-weight     : 400;
+    text-decoration : rgb(68, 68, 68);
+    font-style      : normal;
+    font-variant    : normal;
+    text-transform  : none;
+}
+
+.mono {
+    font-family         : monospace;
+}
+
+header {
+    font-family     : Georgia, serif;
+    letter-spacing  : 2px;
+    word-spacing    : 2px;
+    color           : #000000;
+    font-weight     : 400;
+    text-decoration : rgb(68, 68, 68);
+    font-style      : normal;
+    font-variant    : normal;
+    text-transform  : none;
+}

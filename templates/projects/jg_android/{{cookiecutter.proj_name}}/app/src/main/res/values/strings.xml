@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">{{cookiecutter.proj_name}}</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="share_activity_text">Tweet to Add</string>
+    <string name="add_tweet_button">Add Tweet</string>
+
+    <string name="tweets_file">current.tweets</string>
+</resources>

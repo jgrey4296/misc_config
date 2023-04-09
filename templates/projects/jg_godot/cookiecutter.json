@@ -1,8 +1,5 @@
 {
-    "proj_name"   : "jg_py_template_project",
-    "desc"        : "A Template Godot Project",
-    "tags"        : "godot",
-    "entry_point" : "default",
+    "proj_name"   : "jg_py_template",
     "_author"     : "me",
     "_email"      : "my@email.com",
     "_short_name" : "me",

@@ -2,6 +2,7 @@
 
 (load! "+vars")
 (load! "+funcs")
+(load! "+cookiecutter")
 (load! "+hooks")
 (after! (jg-bindings-total jg-dired)
   (load! "+bindings")

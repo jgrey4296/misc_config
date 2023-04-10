@@ -78,6 +78,7 @@
       :desc "new dir"             :n "n" #'dired-create-directory
       :desc "rename"              :n "r" #'+jg-dired-rename
       :desc "upcase"              :n "u" #'dired-upcase
+      :desc "Project"             :n "p" #'+jg-dired-cookiecutter
       )
 (map! :map jg-dired-mode-map ;; describe
       :prefix ("d" . "describe")

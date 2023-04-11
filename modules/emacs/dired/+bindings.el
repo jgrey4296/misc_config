@@ -60,6 +60,7 @@
 )
 (map! :map jg-dired-mode-map ;; change
       :desc "Delete"              :n "D" #'dired-do-delete
+      :desc "Touch"               :n "T" #'+jg-dired-touch
 
       :prefix ("c" . "Change")
       :desc "Reformat jsons"      :n "J" #'+jg-dired-reformat-jsons
@@ -79,6 +80,11 @@
       :desc "rename"              :n "r" #'+jg-dired-rename
       :desc "upcase"              :n "u" #'dired-upcase
       :desc "Project"             :n "p" #'+jg-dired-cookiecutter
+      )
+(map! :map jg-dired-mode-map ;; change, specific
+      :prefix (">" . "File Type Specific")
+      ;; p - pdf
+      ;; d - pandoc
       )
 (map! :map jg-dired-mode-map ;; describe
       :prefix ("d" . "describe")

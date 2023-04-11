@@ -144,3 +144,15 @@
 
       :desc "Surround"                    "s" #'evil-surround-region
       )
+
+(map! :map jg-dired-mode-map
+      (:prefix ("> d" . "Pandoc")
+       :desc "Make Style File" :n "s" #'+jg-text-pandoc-gen-style
+       :desc "Compile"         :n "c" #'+jg-text-pandoc-compile
+       )
+      (:prefix ("> j" . "jq")
+       :desc "Format" :n "f" #'+jg-text-jq-format
+       :desc "Manual" :n "?" (cmd! (+jg-browse-url "https://stedolan.github.io/jq/manual/"))
+       :desc "Expr"   :n "e" #'+jg-text-jq-expr
+       )
+      )

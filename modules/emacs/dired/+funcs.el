@@ -220,3 +220,8 @@ Type SPC or `y' to %s one match, DEL or `n' to skip to next,
     (dired-do-rename)
     )
   )
+
+(defun +jg-dired-touch (target)
+  (interactive "MTouch File: \n")
+  (call-process "touch" nil nil nil (f-join default-directory target))
+  )

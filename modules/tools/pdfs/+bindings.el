@@ -1,7 +1,7 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
 (map! :map jg-dired-mode-map
-      :prefix ("c ;" . "File Type Specific")
+      :prefix ("> p" . "Pdf calls")
       :desc "Pdf Info"   :n "i" #'pdf-meta-extract-info
       :desc "Pdf Split"  :n "s" #'pdf-meta-split
       :desc "Pdf Join"   :n "j" #'pdf-meta-join

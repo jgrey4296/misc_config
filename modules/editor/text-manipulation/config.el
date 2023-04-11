@@ -1,6 +1,8 @@
 ;;; util/text/config.el -*- lexical-binding: t; -*-
 (load! "+vars")
 (load! "misc/+funcs")
+(load! "misc/+pandoc")
+(load! "misc/+jq")
 (after! jg-bindings-total
   (load! "evil/+operators")
   (load! "evil/+motions")

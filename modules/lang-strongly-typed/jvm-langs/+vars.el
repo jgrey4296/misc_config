@@ -97,7 +97,7 @@ If the depth is 2, the first two directories are removed: net.lissner.game.")
   )
 ;;-- end file spec
 
-;;-- browse providers
+;;-- browse spec
 (after! jg-ui-reapply-hook-ready
   (+jg-browse-add-lookup-spec 'java
                               '(
@@ -133,6 +133,8 @@ If the depth is 2, the first two directories are removed: net.lissner.game.")
   (pushnew! projectile-project-root-files "build.gradle")
   (pushnew! projectile-project-root-files "build.gradle.kts")
 
+  (+jg-projects-add-spec 'gradlew '(("gradlew")                      :project-file "gradlew"                 :compilation-dir nil :configure nil :compile "./gradlew build"            :test "./gradlew test"                         :install nil :package nil             :run nil :test-suffix "Spec"))
+  (+jg-projects-add-spec 'gradle '(("build.gradle") :project-file "build.gradle" :compilation-dir nil :configure nil :compile "gradle build" :test "gradle test" :install nil :package nil :run nil :test-suffix "Spec"))
   (+jg-projects-add-spec 'jg-kotlin-project '(("build.gradle" "build.gradle.kts") :project-file "build.grade"))
   )
 ;;-- end project spec

@@ -1,5 +1,6 @@
 ;;; lang/haskell/config.el -*- lexical-binding: t; -*-
 
+(load! "+vars")
 (after! projectile
   (add-to-list 'projectile-project-root-files "stack.yaml"))
 

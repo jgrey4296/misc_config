@@ -86,7 +86,7 @@ See `+emacs-lisp-non-package-mode' for details.")
   )
 ;;-- end file spec
 
-;;-- browse providers
+;;-- browse specs
 (after! jg-ui-reapply-hook-ready
   (+jg-browse-add-lookup-spec 'lisp
                               '(
@@ -96,10 +96,17 @@ See `+emacs-lisp-non-package-mode' for details.")
                               )
   )
 
-;;-- end browse providers
+;;-- end browse specs
 
 ;;-- projectile
 (after! projectile
   (pushnew! projectile-project-root-files "config.el")
+  )
+;;-- end projectile
+
+;;-- projectile
+(after! jg-ui-reapply-hook-ready
+  (+jg-projects-add-spec 'emacs-eldev '(projectile-eldev-project-p   :project-file "Eldev"                   :compilation-dir nil :configure nil :compile "eldev compile"              :test "eldev test"                             :install nil :package "eldev package" :run "eldev emacs"))
+  (+jg-projects-add-spec 'emacs-cask '(("Cask")                      :project-file "Cask"                    :compilation-dir nil :configure nil :compile "cask install"               :test nil                                      :install nil :package nil             :run nil :test-suffix "-test" :test-prefix "test-"))
   )
 ;;-- end projectile

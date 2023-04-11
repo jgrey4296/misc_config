@@ -14,7 +14,6 @@
   )
 
 ;;;###autoload
-
 (defun +jg-projects-reapply-specs ()
   " Apply specs to the target "
   (interactive)

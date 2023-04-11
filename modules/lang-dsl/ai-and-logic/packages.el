@@ -1,12 +1,8 @@
-(package! abl-mode        :recipe `(:local-repo ,(expand-file-name "packages/major-modes/ai_and_logic/abl-mode" doom-user-dir)))
 (package! agentspeak-mode :recipe `(:local-repo ,(expand-file-name "packages/major-modes/ai_and_logic/agentspeak-mode" doom-user-dir)))
-(package! ceptre-mode     :recipe `(:local-repo ,(expand-file-name "packages/major-modes/ai_and_logic/ceptre-mode" doom-user-dir)))
 (package! clips-mode)
 (package! instal-mode     :recipe `(:local-repo ,(expand-file-name "~/github/python/instal/instal-mode")))
 (package! jacamo-mode     :recipe `(:local-repo ,(expand-file-name "packages/major-modes/ai_and_logic/jacamo-mode" doom-user-dir)))
-(package! netlogo-mode    :recipe `(:local-repo ,(expand-file-name "packages/major-modes/ai_and_logic/netlogo-mode" doom-user-dir)))
 (package! soar-mode       :recipe `(:local-repo ,(expand-file-name "packages/major-modes/ai_and_logic/soar-mode" doom-user-dir)))
-(package! versu-mode      :recipe `(:local-repo ,(expand-file-name "packages/major-modes/ai_and_logic/versu-mode" doom-user-dir)))
 (package! pasp-mode)
 (package! z3-mode)
 

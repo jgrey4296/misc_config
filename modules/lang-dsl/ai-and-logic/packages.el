@@ -1,8 +1,8 @@
-(package! agentspeak-mode :recipe `(:local-repo ,(expand-file-name "packages/major-modes/ai_and_logic/agentspeak-mode" doom-user-dir)))
-(package! clips-mode)
 (package! instal-mode     :recipe `(:local-repo ,(expand-file-name "~/github/python/instal/instal-mode")))
-(package! jacamo-mode     :recipe `(:local-repo ,(expand-file-name "packages/major-modes/ai_and_logic/jacamo-mode" doom-user-dir)))
-(package! soar-mode       :recipe `(:local-repo ,(expand-file-name "packages/major-modes/ai_and_logic/soar-mode" doom-user-dir)))
+(package! agentspeak-mode :recipe `(:local-repo ,(expand-file-name "packages/major-modes/agentspeak-mode" doom-user-dir)))
+(package! jacamo-mode     :recipe `(:local-repo ,(expand-file-name "packages/major-modes/jacamo-mode" doom-user-dir)))
+(package! soar-mode       :recipe `(:local-repo ,(expand-file-name "packages/major-modes/soar-mode" doom-user-dir)))
+(package! clips-mode)
 (package! pasp-mode)
 (package! z3-mode)
 

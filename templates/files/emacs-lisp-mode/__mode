@@ -23,39 +23,71 @@
 
 ;;-- end header
 
+;;-- imports
+
+;;-- end imports
+
+;;-- keymap
+
 (defvar-local $1-mode-map
     (make-sparse-keymap))
 
-;; Fontlock:
-;; List of '(regex (groupnum "face")+)
-(rx-let (
+;;-- end keymap
 
+;;-- font lock
+
+(defconst $1-font-lock-keywords
+    (rx-let ((w (x) (: x (0+ blank)))
+                (g (x) (group x))
+                (ln (: punctuation line-end))
+                (word+ (group word-start (+ (| word punct)) (0+ blank)))
+                (basic-syms (| "@" "+" "!" "<-" "?" "-" "&"))
+                (basic-kws  (| "percept" "self" "include" "register_function"))
+                (agent-ids (| "beliefs" "goals" "debug" "verbose" "ag-class" "ag-arch" "ag-bb-class" "myparameter" "instances" "join" "focus" "roles"))
+                (org-ids   (| "responsible-for" "debug" "group" "players" "owner"))
+                )
+        (list
+
+            )
         )
-
-    (defconst $1-font-lock-keywords
-    '(
-
-    )
     "Highlighting for $1-mode"
     )
-)
+
+;;-- end font lock
+
+;;-- syntax
 
 (defvar $1-mode-syntax-table
     (let ((st (make-syntax-table)))
-        (modify-syntax-entry ?. "." st)
-        (modify-syntax-entry ?! "." st)
+        ;; Symbols
+        (modify-syntax-entry ?. "_" st)
+        (modify-syntax-entry ?! "_" st)
         (modify-syntax-entry ?$ "_" st)
+        (modify-syntax-entry ?+ "_" st)
+        (modify-syntax-entry ?- "_" st)
+        (modify-syntax-entry ?? "_" st)
+        (modify-syntax-entry ?@ "_" st)
+        (modify-syntax-entry ?\; "_" st)
         ;;underscores are valid parts of words:
         (modify-syntax-entry ?_ "w" st)
-        (modify-syntax-entry ?/ "<12" st)
+        ;; Comments start with // and end on newlines
+        (modify-syntax-entry ?/ ". 124" st)
+        (modify-syntax-entry ?* "_ 23b" st)
         (modify-syntax-entry ?\n ">" st)
-        (modify-syntax-entry ?\" "\"\"" st)
+        ;; Strings
+        (modify-syntax-entry ?\" "\"" st)
+        ;; Pair parens, brackets, braces
         (modify-syntax-entry ?\( "()" st)
         (modify-syntax-entry ?\[ "(]" st)
+        (modify-syntax-entry ?\{ "(}" st)
         (modify-syntax-entry ?: ".:2" st)
         st)
-    "Syntax table for the $1-mode")
+    "Syntax table for the $1-mode"
+    )
 
+;;-- end syntax
+
+;;-- mode definition
 
 (define-derived-mode $1-mode fundamental-mode
     "$1"
@@ -64,22 +96,23 @@
     (use-local-map $1-mode-map)
 
     ;; font-lock-defaults: (keywords disable-syntactic case-fold syntax-alist)
-    ;; (set (make-local-variable 'font-lock-defaults) (list $1-font-lock-keywords nil))
+    (set (make-local-variable 'font-lock-defaults) (list $1-font-lock-keywords nil))
     ;; (set (make-local-variable 'font-lock-syntactic-face-function) '$1-syntactic-face-function)
     ;; (set (make-local-variable 'indent-line-function) '$1-indent-line)
-    ;; (set (make-local-variable 'comment-style) '(plain))
-    ;; (set (make-local-variable 'comment-start) "//")
-    ;; (set (make-local-variable 'comment-use-syntax) t)
-    ;; (set-syntax-table $1-mode-syntax-table)
+    (set (make-local-variable 'comment-style) '(plain))
+    (set (make-local-variable 'comment-start) "//")
+    (set (make-local-variable 'comment-use-syntax) t)
+    (set-syntax-table $1-mode-syntax-table)
     ;;
     (setq major-mode '$1-mode)
     (setq mode-name "$1")
-    (run-mode-hooks)
     (outline-minor-mode)
     (yas-minor-mode)
-
+    (run-mode-hooks)
     )
 (add-to-list 'auto-mode-alist '("\\.$1" . $1-mode))
+
+;;-- end mode definition
 
 (provide '`(file-name-base buffer-file-name)`)
 ;;; `(file-name-nondirectory buffer-file-name)` ends here

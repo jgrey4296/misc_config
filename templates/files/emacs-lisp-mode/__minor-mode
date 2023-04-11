@@ -23,6 +23,16 @@
 
 ;;-- end header
 
+;;-- imports
+
+;;-- end imports
+
+;;-- vars
+
+;;-- end vars
+
+;;-- mode definition
+
 (define-minor-mode $1-minor-mode
     " $2 "
     :init-value nil
@@ -40,6 +50,8 @@
 )
 
 (define-globalized-minor-mode global-$1-minor-mode $1-minor-mode/turn-on)
+
+;;-- end mode definition
 
 (provide '`(file-name-base buffer-file-name)`)
 ;;; `(file-name-nondirectory buffer-file-name)` ends here

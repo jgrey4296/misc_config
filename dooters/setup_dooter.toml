@@ -42,7 +42,7 @@ class SetupSystemTask(tasker.DootTasker, FilerMixin, CommanderMixin):
             self.cmd("ln", "-s", self.locs.emacs_d, self.locs.home / ".emacs.d"),
             self.cmd("ln", "-s", self.locs.doom_d,  self.locs.home / ".doom.d"),
             self.cmd("ln", "-s", self.locs.github,  self.locs.home / "github"),
-            self.cmd("ln", "-s", self.locs.pdfs,    self.locs.home / "pdflibrary")
+            self.cmd("ln", "-s", self.locs.pdfs,    self.locs.home / "pdf_library")
 
             (self.log, ["Appending bash setup to bashrc", logmod.INFO]),
             (self.append_to, [self.locs.home / ".bashrc", "source $HOME/.bash_profile"]),

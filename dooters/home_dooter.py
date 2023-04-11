@@ -18,6 +18,7 @@ from doot.tasks.docs.logs import MoveLogs
 from doot.tasks.bkmkorg import bibtex, basic, bookmark, tags, android
 from doot.tasks.bkmkorg import socmedia_post as post
 from doot.tasks.files.backup_collector import BackupCollectorTask
+from doot.tasks.files.deleter import DeleterTask
 
 if __name__ == "dooter":
     # the equivalent of main
@@ -60,3 +61,5 @@ if __name__ == "dooter":
     adb_down       = android.ADBDownload(locs=doot.locs)
     adb_del        = android.ADBDelete(locs=doot.locs)
     ##-- end android
+
+    deleter = DeleterTask(locs=doot.locs)

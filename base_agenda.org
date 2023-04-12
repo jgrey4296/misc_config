@@ -3,6 +3,7 @@
 [[/Users/johngrey/doot.toml][doot.toml]]
 [[/Users/johngrey/dooter.py][dooter.py]]
 [[file:/Volumes/documents/github/jgrey4296.github.io][homepage]]
+https://firefox-source-docs.mozilla.org/index.html
 
 * Base Agenda
 Death by Institution and the Harms of Abstraction.

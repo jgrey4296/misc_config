@@ -46,3 +46,17 @@
       )
     )
   )
+
+(evil-define-text-object +jg-text-spaces (count)
+  "select spaces on the same line"
+  :type inclusive
+  :extend-selection t
+  (interactive)
+    (let (beg end)
+      (save-excursion
+        (setq beg (1+ (re-search-backward (rx (not blank)) (save-excursion (beginning-of-line)) t)))
+        (setq end (1- (re-search-forward (rx blank (| graph eol)) (save-excursion (end-of-line)))))
+        )
+      (list beg end)
+      )
+    )

@@ -49,11 +49,13 @@
 (map! :map jg-help-map
       :prefix ("u" . "UI")
       "b" #'describe-bindings
-      "c" #'describe-coding-system
+      "C" #'describe-coding-system
+      "c" #'helm-colors
       "f" #'describe-face
       "L" #'describe-language-environment
       "l" #'load-theme
       "M" #'doom/describe-active-minor-mode
+      "r" #'+jg-help-reset-major-mode
       )
 ;;-- end ui
 

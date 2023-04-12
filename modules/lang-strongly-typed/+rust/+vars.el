@@ -96,6 +96,6 @@
       )
     )
 (after! jg-ui-reapply-hook-ready
-  (+jg-projects-add-spec 'jg-rust-project '(("Cargo.toml") :project-file "Cargo.toml" :configure   nil :test        nil :test-dir    nil :test-prefix nil :related-files-fn #'+jg-rust-related-files-fn))
+  (+jg-projects-add-spec 'jg-rust-project '(("Cargo.toml") :project-file "Cargo.toml" :configure   nil :test        nil :test-dir    nil :test-prefix nil :related-files-fn +jg-rust-related-files-fn))
   )
 ;;; +vars.el ends here

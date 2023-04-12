@@ -16,3 +16,4 @@ ignores  = ['.git', '.DS_Store', "__pycache__"]
 data    = "."
 build   = ".processes"
 temp    = ".processes"
+backup  = "/Volumes/BackupSD/Pictures"

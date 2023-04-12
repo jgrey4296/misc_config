@@ -92,7 +92,7 @@
   (+jg-projects-add-spec 'python-pkg '(("setup.py")                  :project-file "setup.py"                :compilation-dir nil :configure nil :compile "python setup.py build"      :test "python -m unittest discover"            :install nil :package nil             :run nil :test-suffix "_test" :test-prefix "test_"))
   (+jg-projects-add-spec 'python-pip '(("requirements.txt")          :project-file "requirements.txt"        :compilation-dir nil :configure nil :compile "python setup.py build"      :test "python -m unittest discover"            :install nil :package nil             :run nil :test-suffix "_test" :test-prefix "test_"))
   (+jg-projects-add-spec 'django '(("manage.py")                     :project-file "manage.py"               :compilation-dir nil :configure nil :compile "python manage.py runserver" :test "python manage.py test"                  :install nil :package nil             :run nil :test-suffix "_test" :test-prefix "test_"))
-  (+jg-projects-add-spec 'jg-python-project '(("pyproject.toml") :project-file "pyproject.toml" :configure "pip install -e %s" :test "python -m unittest discover -v -p test_*.py" :test-dir '(lambda (x) (f-join x "__tests")) :test-prefix "test_" :related-files-fn #'+jg-python-related-files-fn))
+  (+jg-projects-add-spec 'jg-python-project '(("pyproject.toml") :project-file "pyproject.toml" :configure "pip install -e %s" :test "python -m unittest discover -v -p test_*.py" :test-dir (lambda (x) (f-join x "__tests")) :test-prefix "test_" :related-files-fn +jg-python-related-files-fn))
   )
 ;;-- end project spec
 

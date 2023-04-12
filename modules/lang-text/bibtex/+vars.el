@@ -48,9 +48,9 @@
         (t . ("${author:20} || ${title:*} || ${year:4}" 40))
         )
       )
-(setq jg-bibtex-pdf-loc-regexp               "file[[:digit:]]*\s*=\s*{\\(.+\\)/\\(.+pdflibrary\\)?"
+(setq jg-bibtex-pdf-loc-regexp               "file[[:digit:]]*\s*=\s*{\\(.+\\)/\\(.+pdf_library\\)?"
       jg-bibtex-pdf-replace-match-string     "~/"
-      jg-bibtex-pdf-replace-library-string   "pdflibrary"
+      jg-bibtex-pdf-replace-library-string   "pdf_library"
       jg-bibtex-remove-field-newlines-regexp "^="
       jg-bibtex-tweet-pattern                "(%s): %s\nby %s\nTags: %s\nRef: %s\n"
  )
@@ -62,7 +62,7 @@
               jg-bibtex-loc-completions     (expand-file-name "~/github/jgrey4296.github.io/resources/completions/")
               jg-bibtex-loc-export-bib-file (doom-module-expand-path :lang-text 'bibtex "_data/export_template.tex")
               jg-bibtex-loc-temp-dir        (expand-file-name "~/.tex/")
-              jg-bibtex-pdf-loc             (expand-file-name "~/pdflibrary")
+              jg-bibtex-pdf-loc             (expand-file-name "~/pdf_library")
  )
 ;;-- end locations
 

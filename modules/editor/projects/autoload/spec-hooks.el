@@ -4,8 +4,7 @@
 
 (defvar jg-projects-spec-table       (make-hash-table))
 
-;;;###autodef
-
+;;;###autoload
 (defun +jg-projects-add-spec (sym rules &optional priority override)
   "Register a projects spec for evil-projects-lit "
   (when (or (not (gethash sym jg-projects-spec-table)) override)

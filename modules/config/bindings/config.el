@@ -14,7 +14,7 @@
   )
 
 (after! evil-ex
-  (load! "evil/+evil-ex-setup")
+  (load! "submaps/+evil-ex-setup")
 )
 
 (use-package! general-mod

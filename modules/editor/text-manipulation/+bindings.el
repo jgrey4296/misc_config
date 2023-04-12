@@ -18,8 +18,8 @@
        )
 
       (:prefix "i"
-       :desc "Debug"     "d" #'+jg-text-insert-debug
-       :desc "License"   "L" #'license-templates-insert
+       :desc "Breakpoint" "b" #'+jg-text-insert-debug
+       :desc "License"    "L" #'license-templates-insert
 
        (:prefix ("l" . "Lorem Ipsum")
         :desc "Sentence"         "s" #'lorem-ipsum-insert-sentences
@@ -31,8 +31,9 @@
        )
       )
 
+;;-- evil bindings
 (map! :map jg-binding-normal-state-map
-      :desc "Debug"          "I d"   #'+jg-text-insert-debug
+      :desc "breakpoint"          "I b"   #'+jg-text-insert-debug
 
       :desc "Rotate"         "R"   #'rotate-text
       :desc "Zap to Char"    "Z"   #'zap-up-to-char
@@ -78,8 +79,12 @@
 
 (map! :map jg-binding-inner-text-objects-map
       :desc "Empty lines"  "l" #'+jg-text-blank-block
-
       )
+
+(map! :map jg-binding-outer-text-objects-map
+      :desc "Spaces"       "l" #'+jg-text-spaces
+      )
+;;-- end evil bindings
 
 (map! :map jg-binding-jump-map
       :desc "Force Goto Column" "\\" #'+jg-text-force-column-motion
@@ -96,9 +101,9 @@
       )
 
 (map! :map jg-binding-change-map
-      :desc "Split Line"                  "RET" #'electric-newline-and-maybe-indent
-      :desc "Set Buffer Coding"          "0"   #'set-buffer-file-coding-system
-      :desc "Indent"                     "TAB" #'indent-region
+      :desc "split line"                  "ret" #'electric-newline-and-maybe-indent
+      :desc "set buffer coding"          "0"   #'set-buffer-file-coding-system
+      :desc "indent"                     "tab" #'indent-region
 
       :desc "Align"                       "a" #'align-regexp
       :desc "Comment"                     "c" #'evilnc-comment-operator
@@ -110,21 +115,6 @@
       :desc "Incr"                        "K" #'+jg-text-inc-num
       :desc "Shift Left"                  "h" #'+jg-text-shift-left
       :desc "Shift Right"                 "l" #'+jg-text-shift-right
-
-      (:prefix ("t" . "text")
-       :desc "Cycle Spacing"               "." #'cycle-spacing
-       :desc "Exchange"                    "x" #'evil-exchange
-
-       :desc "Split on distance"          "s" #'+jg-text-split-on-leading-char
-       :desc "Title Case"                 "t" #'+jg-text-title-case-op
-       )
-
-      (:prefix ("l" . "lines")
-       :desc "Wrap Line"                  "w" #'evil-fill
-       :desc "Fill"                       "W" #'evil-fill-and-move
-       :desc "Combine lines"              "c" #'evil-join-whitespace
-       :desc "Justify"                    "j" #'justify-current-line
-       )
 
       (:prefix ("w" . "Words")
        :desc "ispell-word"               "s" #'ispell-word
@@ -138,7 +128,21 @@
        :desc "Decode url"                  "U" #'+evil:url-decode
        :desc "ENCRYPT"                     "e" #'+jg-text-encrypt-region
        :desc "DECRYPT"                     "E" #'+jg-text-decrypt-region
-      )
+       )
+
+      (:prefix ("i" . "lines")
+       :desc "Wrap Line"                  "w" #'evil-fill
+       :desc "Fill"                       "W" #'evil-fill-and-move
+       :desc "Combine lines"              "c" #'evil-join-whitespace
+       :desc "Justify"                    "j" #'justify-current-line
+       )
+
+      (:prefix ("o" . "text")
+       :desc "Cycle Spacing"               "." #'cycle-spacing
+       :desc "Exchange"                    "x" #'evil-exchange
+       :desc "Split on distance"          "s" #'+jg-text-split-on-leading-char
+       :desc "Title Case"                 "t" #'+jg-text-title-case-op
+       )
 
       )
 
@@ -146,13 +150,14 @@
       :desc "Vundo"                       "u" #'vundo
       :desc "Complete/Grow Selection"     "g" (cmds! (eq evil-state 'normal) #'company-manual-begin
                                                      (eq evil-state 'visual) #'+jg-text-grow-selection-op)
+      :desc "Align"                       "a" #'align-regexp
+      :desc "Yank"                        "y" #'+evil:yank-unindented
 
-       :desc "Yank"                        "y" #'+evil:yank-unindented
 
-       (:prefix ("w" . "whitespace")
-        :desc "Whitespace clean"            "w" #'+jg-text-run-whitespace-cleanup
-        :desc "Delete trailing whitespace"  "W" #'delete-trailing-whitespace
-        :desc "Whitespace Cleanup"          "c" #'whitespace-cleanup
+      (:prefix ("w" . "whitespace")
+       :desc "Whitespace clean"            "w" #'+jg-text-run-whitespace-cleanup
+       :desc "Delete trailing whitespace"  "W" #'delete-trailing-whitespace
+       :desc "Whitespace Cleanup"          "c" #'whitespace-cleanup
        )
 
       (:prefix ("f" . "filter")

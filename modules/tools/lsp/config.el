@@ -92,6 +92,15 @@
           (setq-local flycheck-checker old-checker))
       (apply fn args)))
 
+  (defadvice! +jg-lsp-dont-select-session (fn &rest args)
+    " Dont auto select lsp session buffer "
+    :around #'lsp-describe-session
+    (let ((curr (selected-window)))
+      (apply fn args)
+      (select-window curr)
+      )
+    )
+
   (add-hook! 'lsp-mode-hook #'+lsp-optimization-mode)
 
   (when (modulep! :completion company)

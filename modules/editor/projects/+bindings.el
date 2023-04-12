@@ -14,8 +14,9 @@
       :desc "Open project scratch buffer"  "x"  #'+jg-ui-open-scratch-buffer
 
       :desc "Find file in project"         "f"  #'projectile-find-file
-      :desc "Find other file"              "o"  #'projectile-find-related-file
+      :desc "Find other file"              "o"  #'+jg-projects-find-related
 
+      :desc "Print Project Type"           "?" #'+jg-projects-detect-type
 
       ;; later expanded by projectile
       (:prefix ("4" . "in other window"))

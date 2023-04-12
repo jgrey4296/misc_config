@@ -153,3 +153,9 @@
       )
     )
   )
+
+(defun +jg-projects-detect-type ()
+  (interactive)
+  (message "Project Type: %s" (projectile-detect-project-type default-directory))
+
+  )

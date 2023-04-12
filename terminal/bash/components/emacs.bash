@@ -7,7 +7,6 @@ E30_DIR="$HOME/github/_libs/lisp/emacs30"
 
 EMAIN_BIN="/usr/local/Cellar/emacs/28.2/bin/emacs"
 ENAT_BIN="/usr/local/Cellar/emacs-plus@28/28.2/bin/emacs"
-E30_BIN="/usr/local/Cellar/emacs-plus@29/29.0.50/bin/emacs"
 
 
 function check-emacs-d () {

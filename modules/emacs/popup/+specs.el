@@ -4,7 +4,7 @@
 ;; Setup popup vars:
 
 (+jg-popup-add-spec 'my-rules
-  '(("^\\*shell"             :side bottom :ttl nil :height 0.3 :quit t :select t :priority 100)
+  '(("^\\*shell"            :side bottom :ttl nil :height 0.3 :quit t :select t :priority 100)
     ("\*.*?scratch.*?\\*"   :side right  :ttl nil :width  50  :quit t :select t)
     ("\\*Messages"          :side bottom :ttl nil :height 0.4 :quit t :select nil :priority 100)
     ("\\*compilation"       :side bottom :ttl 5   :height 0.4 :quit t :select nil)
@@ -12,7 +12,7 @@
     ("\\*Buffer Locals:"    :side right  :ttl 5   :width 0.4  :quit t :select nil)
     ;; ("\\s-\\*NeoTree\\*"   :side left   :ttl nil :height 0.4 :quit nil :select nil :priority -90)
     ("\\*NeoTree\\*"   :side left :ttl nil :height 0.4 :quit nil :select nil :priority -100)
-    ("\\*Async Shell Command\\*$" :actions (display-buffer-no-window))
+    ("\\*Async Shell Command\\*\\'" :actions (display-buffer-no-window))
     )
   )
 (+jg-popup-add-spec 'general
@@ -26,7 +26,7 @@
  )
 (+jg-popup-add-spec 'doom
     ;; Doom
-   '(("^\\*info\\*$"                                          :slot 2 :vslot 2 :size 0.45 :select t :priority -100)
+   '(("^\\*info\\*\\'"                                          :slot 2 :vslot 2 :size 0.45 :select t :priority -100)
      ;; `Info-mode'
      ("^\\*eww\\*"                                            :vslot -11 :size 0.35 :select t :priority -100)
      ("^\\*\\([Hh]elp\\|Apropos\\)"                           :slot 2 :vslot -8 :size 0.35 :select t :quit nil :priority -100)
@@ -42,7 +42,7 @@
      ;; transient buffers (no interaction required)
      ("^\\*\\(?:doom \\|Pp E\\)"                              :vslot -3 :size +popup-shrink-to-fit :autosave t :select ignore :quit t :ttl 0 :priority -100)
      ("^\\*\\(?:[Cc]ompil\\(?:ation\\|e-Log\\)\\|Messages\\)" :vslot -2 :size 0.3  :autosave t :quit t :ttl nil :priority -100)
-     ("^\\*Local variables\\*$"                               :vslot -1 :slot 1 :size +popup-shrink-to-fit :priority -100)
+     ("^\\*Local variables\\*\\'"                               :vslot -1 :slot 1 :size +popup-shrink-to-fit :priority -100)
      ("^\\*Completions" :ignore t :priority -100)
      ("^ \\*"                                                 :slot 1 :vslot -1 :size +popup-shrink-to-fit :priority -100)
      ("^\\*"                                                  :slot 1 :vslot -1 :select t :priority -100)

@@ -190,20 +190,12 @@
 (map! :leader
       :prefix ("i" . "insert")
       ;; d
-      :desc "Current file name"             "f"   #'+default/insert-file-path
-      :desc "Current file path"             "F"   (cmd!! #'+default/insert-file-path t)
-      :desc "Evil ex path"                  "p"   (cmd! (evil-ex "R!echo "))
+      :desc "Evil ex path"                  ":"   (cmd! (evil-ex "R!echo "))
       :desc "From clipboard"                "y"   #'+default/yank-pop
       :desc "From evil register"            "r"   #'counsel-evil-registers
       :desc "From Minibuffer history"       "m"   #'counsel-minibuffer-history
       :desc "Unicode"                       "u"   #'insert-char
       :desc "Snippet"                       "s"   #'yas-insert-snippet
-      ;; TODO date, time
-
-      ;; (:prefix ("l" . "Lorem Ipsum"))
-      ;; TODO password-generator
-      ;; TODO uuid
-      ;; reserve "d" for inserting debug statement by mode
 
       )
 ;;-- end <leader> i --- insert

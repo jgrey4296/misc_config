@@ -15,11 +15,14 @@ import doot
 # from doot.tasks.groups_secondary import *
 from doot.tasks.data import images
 from doot.tasks.files import hashing
+from doot.tasks.files import deleter
+from doot.tasks.files.backup_collector import BackupCollectorTask
 
 if __name__ == "dooter":
-    ocr    = images.OCRGlobber(locs=doot.locs)
-    hasher     = hashing.HashAllFiles(locs=doot.locs, roots=[doot.locs.data], rec=True)
-    hash_group = hashing.GroupHashes(locs=doot.locs, roots=[doot.locs.root], rec=True)
-    hash_dups  = hashing.DetectDuplicateHashes(locs=doot.locs)
-    hash_clean = hashing.RemoveMissingHashes(locs=doot.locs)
-    hash_delete = hashing.DeleteDuplicates(locs=doot.locs)
+    ocr         = images.OCRGlobber(locs=doot.locs)
+    hasher      = hashing.HashAllFiles(locs=doot.locs, roots=[doot.locs.data], rec=True)
+    hash_group  = hashing.GroupHashes(locs=doot.locs)
+    hash_dups   = hashing.DetectDuplicateHashes(locs=doot.locs)
+    hash_clean  = hashing.MarkDuplicates(locs=doot.locs)
+    hash_delete = deleter.DeleterTask(locs=doot.locs)
+    backup      = BackupCollectorTask(locs=doot.locs, source=doot.locs.root, backup=doot.locs.backup)

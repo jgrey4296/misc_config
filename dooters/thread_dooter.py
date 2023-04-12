@@ -10,7 +10,6 @@ import pathlib as pl
 
 import doot
 from doot import globber
-from doot.mixins.commander import CommanderMixin
 from doot.mixins.delayed import DelayedMixin
 from doot.mixins.filer import FilerMixin
 from doot.mixins.targeted import TargetedMixin
@@ -19,6 +18,7 @@ from doot.tasks.bkmkorg.orgs import (OrgMultiThreadCount, ThreadListings,
                                      ThreadOrganise)
 from doot.tasks.files import hashing
 from doot.tasks.files.backup import BackupTask
+from doot.tasks.files.backup_collector import BackupCollectorTask
 from doot.tasks.groups import *
 from doot.tasks.groups_secondary import *
 from doot.tasks.data import images
@@ -94,12 +94,12 @@ class TwitCompress(DelayedMixin, TargetedMixin, globber.DootEagerGlobber, Zipper
 
 if __name__ == "dooter":
     # the equivalent of main
-    # hasher    = images.HashImages(doot.locs, rec=True)
-    # ocr       = images.OCRGlobber(doot.locs)
-    # gitlog = GitLogTask(locs=doot.locs)
+    hasher      = images.HashImages(locs=doot.locs, rec=True)
+    ocr         = images.OCRGlobber(locs=doot.locs)
     hasher      = TwitHash(locs=doot.locs, rec=True)
     extractor   = ThreadListings(locs=doot.locs)
     threadcount = OrgMultiThreadCount(locs=doot.locs)
     threadorg   = ThreadOrganise(locs=doot.locs)
-    backup      = BackupTask("twitter::backup", doot.locs, [doot.locs.root], output=doot.locs.backup)
+    # backup    = BackupTask("twitter::backup", doot.locs, [doot.locs.root], output=doot.locs.backup)
+    backup      = BackupCollectorTask("backup::twitter", doot.locs, source=doot.locs.root, backup=doot.locs.backup)
     compress    = TwitCompress(locs=doot.locs)

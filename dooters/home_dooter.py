@@ -19,12 +19,14 @@ from doot.tasks.bkmkorg import bibtex, basic, bookmark, tags, android
 from doot.tasks.bkmkorg import socmedia_post as post
 from doot.tasks.files.backup_collector import BackupCollectorTask
 from doot.tasks.files.deleter import DeleterTask
+from doot.reporters.time import TimeAnnounce
+from doot.reporters.tags import TagsReport
 
 if __name__ == "dooter":
     # the equivalent of main
     movelogs = MoveLogs(locs=doot.locs)
 
-    time_announce  = basic.TimeAnnounce(locs=doot.locs)
+    time_announce  = TimeAnnounce(locs=doot.locs)
     twitter_access = basic.TwitterAccess(locs=doot.locs)
 
     ##-- posting
@@ -40,7 +42,7 @@ if __name__ == "dooter":
     ##-- tags
     tag_clean      = tags.TagsCleaner(locs=doot.locs)
     tag_update     = tags.TagsIndexer(locs=doot.locs)
-    tag_report     = tags.TagsReport(locs=doot.locs)
+    tag_report     = TagsReport(locs=doot.locs)
     ##-- end tags
 
     ##-- bookmarks

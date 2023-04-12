@@ -58,3 +58,10 @@
     (+popup/quit-window)
     )
   )
+
+(defun +jg-help-reset-major-mode ()
+  (interactive)
+  (fundamental-mode)
+  (set-auto-mode)
+  (font-lock-debug-fontify)
+  )

@@ -1,8 +1,14 @@
 ;;; lang/jg-python/+bindings.el -*- lexical-binding: t; -*-
 
 (map! :leader
-      :prefix ("c v" . "Environments")
-      :desc "Activate Environment" "c" #'+jg-python-activate-venv-and-conda
+      (:prefix ("c v" . "Environments")
+       :desc "Activate Environment" "c" #'+jg-python-activate-venv-and-conda
+       )
+      )
+
+(map! :map python-mode-map
+      :desc "Insert Exception"       :n "I e" #'+jg-python-exception-ivy
+      :desc "Insert Datetime format" :n "I d" #'+jg-python-datetime-ivy
       )
 
 (map! :map python-mode-map

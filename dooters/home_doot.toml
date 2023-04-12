@@ -25,7 +25,7 @@ bots               = ".bots"
 build              = "doot_build"
 
 [[directories]] # Backup
-backup_root        = "/volumes/BackupSD/"
+backup_root        = "/Volumes/BackupSD/"
 images_backup      = "/Volumes/BackupSD/Pictures"
 movies_backup      = "/Volumes/BackupSD/Movies"
 pdf_backup         = "/Volumes/BackupSD/Library/pdf_library"

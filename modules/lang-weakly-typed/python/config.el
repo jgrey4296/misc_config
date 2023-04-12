@@ -29,22 +29,14 @@
     (add-hook 'python-mode-local-vars-hook #'tree-sitter! 'append))
   (when (executable-find "Microsoft.Python.LanguageServer")
     (set-eglot-client! 'python-mode '("Microsoft.Python.LanguageServer")))
-
-  (setq-hook! 'python-mode-hook
-    indent-line-function #'python-indent-line
-    indent-region-function #'python-indent-region
-    )
-
   (set-docsets! '(python-mode inferior-python-mode) "Python 3" "NumPy" "SciPy" "Pandas")
 
   :config
-  (setq python-mode-hook nil
-        python-mode-local-vars-hook nil)
-
   (set-repl-handler! 'python-mode #'+python/open-repl
     :persist t
     :send-region #'python-shell-send-region
     :send-buffer #'python-shell-send-buffer)
+
 
   (when (modulep! :ui modeline)
     (advice-add #'pythonic-activate :after-while #'+modeline-update-env-in-all-windows-h)
@@ -59,26 +51,23 @@
              #'doom--setq-tab-width-for-python-mode-h
              )
 
-  (add-hook! 'python-mode-hook :append :local
-    (setq-local jg-text-whitespace-clean-hook
-               '(+jg-python-cleanup-ensure-newline-before-def
-                 delete-trailing-whitespace
-                 +jg-text-cleanup-whitespace)
-               )
-    )
-
   ;; Always add auto-hide as the last thing
   (add-hook! 'python-mode-hook :depth 100
              #'anaconda-mode
              #'+jg-python-outline-regexp-override-hook
              #'+jg-python-auto-hide
              )
+
   (setq-hook! 'python-mode-hook
+    jg-text-whitespace-clean-hook '(+jg-python-cleanup-ensure-newline-before-def delete-trailing-whitespace +jg-text-cleanup-whitespace)
     tab-width                    py-indent-offset
     end-of-defun-function       #'python-nav-end-of-defun
     beginning-of-defun-function #'python-nav-beginning-of-defun
-    indent-region-function      'py-indent-region
-    indent-line-function        'py-indent-line
+
+    indent-line-function        #'python-indent-line
+    indent-region-function      #'python-indent-region
+    ;; indent-region-function      #'py-indent-region
+    ;; indent-line-function        #'py-indent-line
     )
 
   ;;-- end hooks
@@ -113,7 +102,9 @@
   :commands 'company-anaconda)
 
 ;;-- lsp
+
 (use-package! lsp-pyright :after lsp-mode)
+
 (use-package! lsp-jedi :defer)
 
 (use-package! lsp-python-ms
@@ -170,6 +161,7 @@
 ;;-- end tests
 
 ;;-- envs
+
 (use-package! pipenv
   :commands pipenv-project-p
   :hook (python-mode . pipenv-mode)
@@ -262,6 +254,7 @@
 ;;-- end envs
 
 ;;-- cython
+
 (use-package! cython-mode
   :when (modulep! +cython)
   :mode "\\.p\\(yx\\|x[di]\\)\\'"

@@ -79,6 +79,8 @@
                                  ("journal" "booktitle")
                                  ("author" "editor")
                                  ("published" "draft")
+                                 ("inclusive" "exclusive")
+                                 ("prepend" "append")
                                  )
               rotate-text-symbols '(("∃" "∀" "∄" "∈" )
                                     ("∧" "∨")

@@ -14,10 +14,6 @@
        )
       )
 
-(map! :map jg-binding-helm-map
-      :desc "Insert Color" "c" #'helm-colors
-      )
-
 (map! :map jg-binding-vision-map
       :desc "Narrow"        "RET" #'+jg-ui-narrow-around-point
       )

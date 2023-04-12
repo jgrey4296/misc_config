@@ -15,13 +15,11 @@
               )
 
 ;;-- maps
-(setq
-      jg-binding-insert-state-map             nil ;; copied in +evil-bindings
-      jg-binding-motion-state-map             (make-sparse-keymap "JG map replacing evil-motion-state-map")
-      jg-binding-normal-state-map             (make-sparse-keymap "JG map replacing evil-normal-state-map")
-      jg-binding-operator-state-map           (make-sparse-keymap "JG map replacing evil-operator-state-map")
-      jg-binding-visual-state-map             (make-sparse-keymap "JG map replacing evil-visual-state-map")
-      )
+(defvar jg-binding-insert-state-map             nil) ;; copied in +evil-bindings
+(defvar jg-binding-motion-state-map             (make-sparse-keymap "JG map replacing evil-motion-state-map"))
+(defvar jg-binding-normal-state-map             (make-sparse-keymap "JG map replacing evil-normal-state-map"))
+(defvar jg-binding-operator-state-map           (make-sparse-keymap "JG map replacing evil-operator-state-map"))
+(defvar jg-binding-visual-state-map             (make-sparse-keymap "JG map replacing evil-visual-state-map"))
 
 ;; Submaps
 (define-prefix-command 'jg-binding-backward-operator-motion-map nil "jgb-backward-op")

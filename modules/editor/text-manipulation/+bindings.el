@@ -1,6 +1,5 @@
 ;;; util/text/+bindings.el -*- lexical-binding: t; -*-
 
-
 (message "Setting up text binding: %s" (current-time-string))
 (global-set-key (kbd "C-c [") #'+jg-text-insert-lparen)
 (global-set-key (kbd "C-c ]") #'+jg-text-insert-rparen)
@@ -30,11 +29,6 @@
         :desc "Academic Section" "A" #'academic-phrases-by-section
         )
        )
-      )
-
-(map! :map jg-binding-helm-map
-      :desc "Word(net)" "w" #'helm-wordnet-suggest
-      :desc "Word(nut)" "W" #'wordnut-search
       )
 
 (map! :map jg-binding-normal-state-map
@@ -72,30 +66,6 @@
       :desc "Select Buffer" "RET" #'+jg-text-whole-buffer-textobj
       )
 
-(map! :map jg-binding-operator-map
-      :desc "Vundo"                       "u" #'vundo
-      :desc "Whitespace clean"            "w" #'+jg-text-run-whitespace-cleanup
-      :desc "Delete trailing whitespace"  "W" #'delete-trailing-whitespace
-      :desc "Cycle Spacing"               "." #'cycle-spacing
-      :desc "Complete/Grow Selection"     "g" (cmds! (eq evil-state 'normal) #'company-manual-begin
-                                                  (eq evil-state 'visual) #'+jg-text-grow-selection-op)
-      (:prefix ("s" . "String-ops")
-      :desc "Split on distance"        "s" #'+jg-text-split-on-leading-char
-      :desc "Set Buffer Coding"        "B" #'set-buffer-file-coding-system
-      :desc "ENCRYPT"                  "!" #'+jg-text-encrypt-region
-      :desc "DECRYPT"                  "@" #'+jg-text-decrypt-region
-      :desc "Uniquify"                 "u" #'delete-duplicate-lines
-      :desc "Title Case"               "t"  #'+jg-text-title-case-op
-      :desc "Rotate"                   "r" #'rotate-text
-      )
-      (:prefix ("/" . "Search")
-       :desc "Simple Grep"          "g" #'+jg-text-simple-grep-op
-       :desc "Next Similar String " "s" #'+jg-text-next-similar-string
-       )
-      (:prefix ("l" . "Line-ops")
-       )
-      )
-
 (map! :map jg-binding-backward-operator-motion-map
       :desc "Close Paren"  "]"   #'+jg-text-prev-close-paren-motion
       :desc "Empty Line"   "l"   #'+jg-text-prev-empty-line-motion
@@ -127,32 +97,91 @@
 
 (map! :map jg-binding-change-map
       :desc "Split Line"                  "RET" #'electric-newline-and-maybe-indent
+      :desc "Set Buffer Coding"          "0"   #'set-buffer-file-coding-system
+      :desc "Indent"                     "TAB" #'indent-region
 
-      :desc "Rot13"                       "'" #'evil-rot13
-      :desc "ispell-word"                 "=" #'ispell-word
-
+      :desc "Align"                       "a" #'align-regexp
       :desc "Comment"                     "c" #'evilnc-comment-operator
-      :desc "downcase"                    "d" #'evil-downcase
-      :desc "UpperCase"                   "u" #'evil-upcase
-      :desc "inflection"                  "i" #'evil-operator-string-inflection
+      :desc "Surround"                    "s" #'evil-surround-region
 
-      :desc "Encode url"                  "e" #'+evil:url-encode
-      :desc "Decode url"                  "E" #'+evil:url-decode
-
+      :desc "downcase"                    "j" #'evil-downcase
+      :desc "UpperCase"                   "k" #'evil-upcase
+      :desc "Decr"                        "J" #'+jg-text-dec-num
+      :desc "Incr"                        "K" #'+jg-text-inc-num
       :desc "Shift Left"                  "h" #'+jg-text-shift-left
       :desc "Shift Right"                 "l" #'+jg-text-shift-right
 
-      :desc "Surround"                    "s" #'evil-surround-region
+      (:prefix ("t" . "text")
+       :desc "Cycle Spacing"               "." #'cycle-spacing
+       :desc "Exchange"                    "x" #'evil-exchange
+
+       :desc "Split on distance"          "s" #'+jg-text-split-on-leading-char
+       :desc "Title Case"                 "t" #'+jg-text-title-case-op
+       )
+
+      (:prefix ("l" . "lines")
+       :desc "Wrap Line"                  "w" #'evil-fill
+       :desc "Fill"                       "W" #'evil-fill-and-move
+       :desc "Combine lines"              "c" #'evil-join-whitespace
+       :desc "Justify"                    "j" #'justify-current-line
+       )
+
+      (:prefix ("w" . "Words")
+       :desc "ispell-word"               "s" #'ispell-word
+       :desc "inflection"                "i" #'evil-operator-string-inflection
+       :desc "Rotate"                    "r" #'Rotate-Text
+       )
+
+      (:prefix ("e" . "encode")
+       :desc "Rot13"                       "r" #'evil-rot13
+       :desc "Encode url"                  "u" #'+evil:url-encode
+       :desc "Decode url"                  "U" #'+evil:url-decode
+       :desc "ENCRYPT"                     "e" #'+jg-text-encrypt-region
+       :desc "DECRYPT"                     "E" #'+jg-text-decrypt-region
+      )
+
+      )
+
+(map! :map jg-binding-operator-map
+      :desc "Vundo"                       "u" #'vundo
+      :desc "Complete/Grow Selection"     "g" (cmds! (eq evil-state 'normal) #'company-manual-begin
+                                                     (eq evil-state 'visual) #'+jg-text-grow-selection-op)
+
+       :desc "Yank"                        "y" #'+evil:yank-unindented
+
+       (:prefix ("w" . "whitespace")
+        :desc "Whitespace clean"            "w" #'+jg-text-run-whitespace-cleanup
+        :desc "Delete trailing whitespace"  "W" #'delete-trailing-whitespace
+        :desc "Whitespace Cleanup"          "c" #'whitespace-cleanup
+       )
+
+      (:prefix ("f" . "filter")
+       :desc "Flush Lines"                "f"   #'flush-lines
+       :desc "Keep Lines"                 "k"   #'keep-lines
+       :desc "Uniquify"                   "u"   #'delete-duplicate-lines
+       :desc "Untabify"                   "TAB" #'untabify
+       )
+
+      (:prefix ("i" . "info")
+       :desc "Word(net)"                 "w" #'helm-wordnet-suggest
+       :desc "Word(nut)"                 "W" #'wordnut-search
+       )
+
+      (:prefix ("/" . "Search")
+       :desc "Simple Grep"          "g" #'+jg-text-simple-grep-op
+       :desc "Next Similar String " "s" #'+jg-text-next-similar-string
+       )
+
       )
 
 (map! :map jg-dired-mode-map
       (:prefix ("> d" . "Pandoc")
-       :desc "Make Style File" :n "s" #'+jg-text-pandoc-gen-style
-       :desc "Compile"         :n "c" #'+jg-text-pandoc-compile
+       :desc "Make Style File" "s" #'+jg-text-pandoc-gen-style
+       :desc "Compile"          "c" #'+jg-text-pandoc-compile
        )
       (:prefix ("> j" . "jq")
-       :desc "Format" :n "f" #'+jg-text-jq-format
-       :desc "Manual" :n "?" (cmd! (+jg-browse-url "https://stedolan.github.io/jq/manual/"))
-       :desc "Expr"   :n "e" #'+jg-text-jq-expr
+       :desc "Format" "f" #'+jg-text-jq-format
+       :desc "Manual" "?" (cmd! (+jg-browse-url "https://stedolan.github.io/jq/manual/"))
+       :desc "Expr"   "e" #'+jg-text-jq-expr
        )
       )

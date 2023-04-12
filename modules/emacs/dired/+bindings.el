@@ -83,8 +83,8 @@
       )
 (map! :map jg-dired-mode-map ;; change, specific
       :prefix (">" . "File Type Specific")
-      ;; p - pdf
-      ;; d - pandoc
+      (:prefix ("p" . "pdf"))
+      (:prefix ("d" . "pandoc"))
       )
 (map! :map jg-dired-mode-map ;; describe
       :prefix ("d" . "describe")

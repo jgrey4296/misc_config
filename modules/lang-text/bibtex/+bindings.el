@@ -59,13 +59,13 @@
       )
 (map! :map bibtex-mode-map ;; jump
       :after bibtex
-      :localleader
-      :prefix ("j" . "Jump")
-      :desc "Jump to Pdf"          "p"   #'+jg-bibtex-open-pdf
-      :desc "Jump to url"          "u"   #'+jg-bibtex-open-url
-      :desc "Jump to doi"          "d"   #'+jg-bibtex-open-doi
-      :desc "Jump to Crossref"     "c"   #'+jg-bibtex-goto-crossref-entry
-      :desc "Jump to Quicklook"    "l"   #'+jg-bibtex-quicklook-pdf
+      :prefix ("s j" . "bibtex")
+      :desc "Load Random Bibtex entry" "r"   #'+jg-bibtex-load-random
+      :desc "Jump to Pdf"              "p"   #'+jg-bibtex-open-pdf
+      :desc "Jump to url"              "u"   #'+jg-bibtex-open-url
+      :desc "Jump to doi"              "d"   #'+jg-bibtex-open-doi
+      :desc "Jump to Crossref"         "c"   #'+jg-bibtex-goto-crossref-entry
+      :desc "Jump to Quicklook"        "l"   #'+jg-bibtex-quicklook-pdf
       )
 (map! :map bibtex-mode-map ;; vars
       :after bibtex
@@ -90,20 +90,14 @@
       :desc "Bibtex Helm"               "b" #'+jg-bibtex-helm-bibtex
       )
 
-(map! :leader
-      :desc "Load Random Bibtex entry"  "o !"   #'+jg-bibtex-load-random
-      )
-
 ;;-- end jg bindings
 
 ;;-- dired
 (map! :map dired-mode-map
       :after jg-dired-bindings
-      :localleader
-      :prefix ("b" . "bibtex")
-      :desc "Unify Pdf Locations" "U"   #'+jg-bibtex-dired-unify-pdf-locations
-       :desc "Generate Tex for marked Bibtex" "g" #'+jg-bibtex-dired-compile
-       :desc "Compile marked tex" "C" #'+jg-bibtex-dired-compile-run
+      :prefix ("> b" . "bibtex")
+      :desc "Generate Tex for marked Bibtex" "g" #'+jg-bibtex-dired-compile
+      :desc "Compile marked tex"             "C" #'+jg-bibtex-dired-compile-run
       )
 
 ;;-- end dired

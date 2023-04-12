@@ -236,3 +236,33 @@ with either a numeric or alphabetical escalation "
       (evil-visual-restore))
     )
   )
+
+(evil-define-operator +jg-text-inc-num (beg end type count)
+  :type line
+  :motion beginning-of-visual-line
+  :repeat t
+  :keep-visual t
+  (interactive "<v><vc>")
+  (let ((state evil-state))
+    (if (not (eq state 'visual))
+        (evil-numbers/inc-at-pt (or count 1) beg)
+      (evil-numbers/inc-at-pt count beg end 'block)
+      (evil-normal-state)
+      (evil-visual-restore))
+    )
+  )
+
+(evil-define-operator +jg-text-dec-num (beg end type count)
+  :type line
+  :motion beginning-of-visual-line
+  :repeat t
+  :keep-visual t
+  (interactive "<v><vc>")
+    (let ((state evil-state))
+      (if (not (eq state 'visual))
+          (evil-numbers/dec-at-pt (or count 1) beg)
+        (evil-numbers/dec-at-pt count beg end 'block)
+        (evil-normal-state)
+        (evil-visual-restore))
+      )
+  )

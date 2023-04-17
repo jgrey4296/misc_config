@@ -21,74 +21,85 @@
 (require 'which-key)
 (message "Loading Which-mod")
 
+(defvar which-mod-bindings nil)
+
+(defvar which-mod-ignores-fns '(digit-argument))
+
+(define-advice which-key--get-keymap-bindings (:around (fn keymap &optional start &rest args) which-mod-init)
+  (setq which-mod-bindings start)
+  (apply fn keymap start args)
+  (-filter #'(lambda (x) (s-present-p (cdr-safe x))) which-mod-bindings)
+  )
+
 (define-advice which-key--get-keymap-bindings-1 (:override (keymap start &optional prefix filter all ignore-commands)
-                                                           +jg-which-key)
+                                                           which-mod-main)
   "See `which-key--get-keymap-bindings'."
 
-  (let ((bindings start)
-        (prefix-map (if prefix (lookup-key keymap prefix) keymap)))
+  (let ((prefix-map (if prefix (lookup-key keymap prefix) keymap)))
+    ;; Prefer which-key pseudo-maps:
+    (when (and (keymapp prefix-map) (keymapp (lookup-key prefix-map [which-key])))
+      (which-key--get-keymap-bindings-1 (lookup-key prefix-map [which-key]) nil nil nil all ignore-commands))
+
     (when (keymapp prefix-map)
-      ;; Prefer which-key pseudo-maps:
-      (when (keymapp (lookup-key prefix-map [which-key]))
-          (setq bindings (which-key--get-keymap-bindings-1 (lookup-key prefix-map [which-key])
-                                                           bindings nil filter all ignore-commands)))
-        (map-keymap
-         (lambda (ev def)
-           (let* ((key (vconcat prefix (list ev)))
-                  (key-desc (key-description key)))
-             (cond
-              ((assoc (key-description (list ev)) bindings))
-              ((assoc key-desc bindings))
-              ((and (listp ignore-commands) (symbolp def) (memq def ignore-commands))
-               (push (cons key-desc "") bindings)
-               )
-              ((or (string-match-p
-                    which-key--ignore-non-evil-keys-regexp key-desc)
-                   (eq ev 'menu-bar)))
-              ((and (keymapp def)
-                    (string-match-p which-key--evil-keys-regexp key-desc)))
-              ((and (keymapp def)
-                    (or all
-                        ;; event 27 is escape, so this will pick up meta
-                        ;; bindings and hopefully not too much more
-                        (and (numberp ev) (= ev 27))))
-               (setq bindings
-                     (which-key--get-keymap-bindings-1
-                      keymap bindings key filter all ignore-commands)))
-              (def
-               (let* ((def (if (eq 'menu-item (car-safe def))
-                               (which-key--get-menu-item-binding def)
-                             def))
-                      (binding
-                       (cons key-desc
-                             (cond
-                              ((and (eq (car-safe def) 'which-key)
-                                    (keymapp (cdr-safe def))))
-                              ((and (eq (car-safe def) 'which-key)
-                                    (not (caddr def)))
-                               (s-prepend "++" (cadr def)))
-                              ((eq (car-safe def) 'which-key)
-                               (cadr def))
-                              ((symbolp def) (which-key--compute-binding def))
-                              ((keymapp def) "prefix")
-                              ((eq 'lambda (car-safe def)) "+lambda")
-                              ((eq 'closure (car-safe def)) "+closure")
-                              ((stringp def) def)
-                              ((vectorp def) (key-description def))
-                              ((and (consp def)
-                                    ;; looking for (STRING . DEFN)
-                                    (stringp (car def)))
-                               (concat (when (keymapp (cdr-safe def))
-                                         "group:")
-                                       (car def)))
-                              (t "unknown")))))
-                 (when (and binding
-                            (or (null filter)
-                                (and (functionp filter)
-                                     (funcall filter binding))))
-                   (push binding bindings)))))))
-         prefix-map))
-      bindings))
+        (map-keymap (-partial #'which-mod-handle-binding prefix filter all ignore-commands) prefix-map))
+    which-mod-bindings
+    )
+  )
+
+(defun which-mod-handle-binding (prefix filter all ignore-commands ev def)
+  " main discriminator to add bindings to which-mod-bindings "
+  (let* ((key (vconcat prefix (list ev)))
+         (key-desc (key-description key)))
+    (cond
+     ((assoc (key-description (list ev)) which-mod-bindings)) ;; ignore raw binding that have already been set
+     ((assoc key-desc which-mod-bindings)) ;; ignore bindings that have already been set
+     ((and (listp ignore-commands) (symbolp def) (memq def ignore-commands)) ;; add empty entry for ignored commands
+      (push (cons key-desc "") which-mod-bindings)
+      )
+     ((and (symbolp def) (memq def which-mod-ignores-fns))
+      (push (cons key-desc "") which-mod-bindings)
+      )
+     ((or (string-match-p which-key--ignore-non-evil-keys-regexp key-desc) (eq ev 'menu-bar)) ;; ignoring extra stuff
+      nil )
+     ((and (keymapp def) (string-match-p which-key--evil-keys-regexp key-desc)) ;; ignoring evil states
+      nil)
+     ((and (keymapp def) (or all (and (numberp ev) (= ev 27)))) ;; event 27 is escape, so this will pick up meta
+      (which-key--get-keymap-bindings-1 keymap nil key filter all ignore-commands))
+     ((eq 'menu-item (car-safe def)) ;; ignore menu items (which-key--get-menu-item-binding def)
+      nil)
+     (def
+      (let ((binding (cons key-desc (which-mod-handle-def def))))
+        (when (and binding
+                   (or (null filter) (and (functionp filter) (funcall filter (cons key-desc def)))))
+          (push binding which-mod-bindings))
+        )
+      )
+     )
+    )
+  )
+
+(defun which-mod-handle-def (def)
+  " handler for defs "
+  (cond
+   ((and (eq (car-safe def) 'which-key) (keymapp (cdr-safe def))) ;; ignore which-keys that are submaps without names
+    nil)
+   ((and (eq (car-safe def) 'which-key) (not (caddr def)))
+    (s-prepend "++" (cadr def))) ;; ++submap name
+   ((eq (car-safe def) 'which-key) ;; described binding
+    (cadr def))
+   ((symbolp def) ;; remapped binding
+    (which-key--compute-binding def))
+   ((keymapp def) "prefix") ;; unnamed submap
+   ((eq 'lambda (car-safe def)) "+lambda") ;; unnamed lambda
+   ((eq 'closure (car-safe def)) "+closure") ;; unnamed closure
+   ((stringp def) def)
+   ((vectorp def) (key-description def))
+   ((and (consp def) (stringp (car def))) ;; looking for (STRING . DEFN)
+    (concat (when (keymapp (cdr-safe def)) "group:")
+            (car def)))
+   (t "unknown"))
+  )
+
 (define-advice which-key--compute-binding (:override (binding)
                                                      +jg-which-key)
   "Replace BINDING with remapped binding if it exists.
@@ -127,6 +138,11 @@ of general-extended-def-:which-key
         ))
     (setq key (pop more)
           replacement (pop more))))
+
+(define-advice which-key--evil-operator-filter (:override (binding) which-mod)
+  (let ((def (cdr binding)))
+    (and (functionp def)
+         (not (evil-get-command-property def :suppress-operator)))))
 
 ;; (setq which-key-key-replacement-alist
 ;;         (delete '("left" . "←") which-key-key-replacement-alist))

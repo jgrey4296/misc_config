@@ -8,6 +8,6 @@
 ;; or: (define-prefix-command 'jg-$1-map-cmd nil "$1")
 (suppress-keymap jg-binding-motion-state-map)
 ;; Above global evil maps: (evil-make-overriding-map jg-$1-map)
-;; or: (add-to-list evil-overriding-maps '(jg-$1-map))
+;; or: (add-to-list 'evil-overriding-maps '(jg-$1-map))
 ;; Above all evil maps (evil-make-intercept-map jg-$1-map)
-;; or: (add-to-list evil-intercept-maps '(jg-$1-map))
+;; or: (add-to-list 'evil-intercept-maps '(jg-$1-map))

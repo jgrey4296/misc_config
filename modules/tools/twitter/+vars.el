@@ -19,11 +19,11 @@
               jg-twitter-download-py   "bkmkorg/io/twitter/automator.py"
               )
 
-;;-- browse providers
+;;-- lookup spec
 (after! jg-ui-reapply-hook-ready!
   (+jg-browse-add-lookup-spec 'twitter
             '(("Twitter"            "https://twitter.com/%s"))
             )
   )
 
-;;-- end browse providers
+;;-- end lookup spec

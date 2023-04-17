@@ -7,7 +7,7 @@
 
 ;;;###autodef
 (defun +jg-browse-add-lookup-spec (sym rules &optional priority override)
-  "Register a browse spec for +lookup "
+  "Register a browse spec for +lookup. rules are tuples (name url) "
   (when (or (not (gethash sym jg-browse-lookup-spec-table)) override)
     (puthash sym (cons (or priority 0) rules) jg-browse-lookup-spec-table)
     )

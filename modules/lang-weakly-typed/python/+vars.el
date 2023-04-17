@@ -178,4 +178,19 @@
 (add-to-list 'lsp-disabled-clients 'pyls)
 (add-to-list 'lsp-disabled-clients 'pylsp)
 (add-to-list 'lsp-disabled-clients 'mspyls)
+
+(setq lsp-pyright-extra-paths #'[]
+      lsp-pyright-venv-path   (list (expand-file-name "~/anaconda"))
+
+      )
 ;;-- end lsp
+
+;;-- jg-company
+(setq jg-python-company-activation (rx (| "error" "lib"))
+      jg-python-company-kws (let ((ht (make-hash-table :test 'equal)))
+                              (puthash "error" +jg-python-ivy-exceptions ht)
+                              (puthash "lib" '() ht)
+                              ht
+                              )
+      )
+;;-- end jg-company

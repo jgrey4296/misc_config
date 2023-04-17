@@ -2,6 +2,7 @@
 
 (doom-log "Config JG Python")
 
+(load! "util/+ivys")
 (load! "+vars")
 (load! "+funcs")
 (load! "util/+hooks")
@@ -37,13 +38,13 @@
     :send-region #'python-shell-send-region
     :send-buffer #'python-shell-send-buffer)
 
-
   (when (modulep! :ui modeline)
     (advice-add #'pythonic-activate :after-while #'+modeline-update-env-in-all-windows-h)
     (advice-add #'pythonic-deactivate :after #'+modeline-clear-env-in-all-windows-h))
 
   ;;-- hooks
   (add-hook! 'python-mode-hook
+             #'anaconda-mode
              #'+python-use-correct-flycheck-executables-h
              #'doom-modeline-env-setup-python
              #'er/add-python-mode-expansions
@@ -53,7 +54,6 @@
 
   ;; Always add auto-hide as the last thing
   (add-hook! 'python-mode-hook :depth 100
-             #'anaconda-mode
              #'+jg-python-outline-regexp-override-hook
              #'+jg-python-auto-hide
              )
@@ -68,6 +68,13 @@
     indent-region-function      #'python-indent-region
     ;; indent-region-function      #'py-indent-region
     ;; indent-line-function        #'py-indent-line
+    )
+
+  (after! jg-company-minor-mode
+    (setq-hook! 'python-mode-hook
+      jg-company-minor-mode-activation-re jg-python-company-activation
+      jg-company-minor-mode-kws jg-python-company-kws
+      )
     )
 
   ;;-- end hooks

@@ -9,6 +9,7 @@
 (map! :map python-mode-map
       :desc "Insert Exception"       :n "I e" #'+jg-python-exception-ivy
       :desc "Insert Datetime format" :n "I d" #'+jg-python-datetime-ivy
+      :desc "Insert lib" :n "I \\" #'+jg-python-libs-ivy
       )
 
 (map! :map python-mode-map

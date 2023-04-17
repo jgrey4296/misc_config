@@ -3,7 +3,7 @@
 (doom!
  :config default bindings completion disabled help programming search snippets ui
  :app   (rss +org)
- :completion company ivy
+ :completion company ivy jg-company
 
  :editor char-insert fold navigation projects tagging text-manipulation
  :editor (evil +everywhere) format

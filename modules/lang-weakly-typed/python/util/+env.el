@@ -20,6 +20,7 @@
 ;;  both pvenv and conda
 ;;
 ;;; Code:
+
 (defun +jg-python-support ()
   " Toggle dev support from conda, lsp, or nothing "
   (interactive)
@@ -86,6 +87,7 @@
           )
     )
   )
+
 (defun +jg-python-find-venv (&optional start)
   " Given a starting directory, look in parent dirs
 until a .venv file is found.
@@ -157,8 +159,5 @@ return (dir-of-venv env-name) or nil
     )
 
   )
-
-
-
 
 ;;; +env.el ends here

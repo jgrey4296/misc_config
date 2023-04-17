@@ -1,72 +1,6 @@
 ;;; +exception_ivy.el -*- lexical-binding: t; -*-
 
-(defvar +jg-python-ivy-exceptions '("BaseException"
-                                "SystemExit"
-                                "KeyboardInterrupt"
-                                "GeneratorExit"
-                                "Exception"
-                                "StopIteration"
-                                "StopAsyncIteration"
-                                "ArithmeticError"
-                                "FloatingPointError"
-                                "OverflowError"
-                                "ZeroDivisionError"
-                                "AssertionError"
-                                "AttributeError"
-                                "BufferError"
-                                "EOFError"
-                                "ImportError"
-                                "ModuleNotFoundError"
-                                "LookupError"
-                                "IndexError"
-                                "KeyError"
-                                "MemoryError"
-                                "NameError"
-                                "UnboundLocalError"
-                                "OSError"
-                                "BlockingIOError"
-                                "ChildProcessError"
-                                "ConnectionError"
-                                "BrokenPipeError"
-                                "ConnectionAbortedError"
-                                "ConnectionRefusedError"
-                                "ConnectionResetError"
-                                "FileExistsError"
-                                "FileNotFoundError"
-                                "InterruptedError"
-                                "IsADirectoryError"
-                                "NotADirectoryError"
-                                "PermissionError"
-                                "ProcessLookupError"
-                                "TimeoutError"
-                                "ReferenceError"
-                                "RuntimeError"
-                                "NotImplementedError"
-                                "RecursionError"
-                                "SyntaxError"
-                                "IndentationError"
-                                "TabError"
-                                "SystemError"
-                                "TypeError"
-                                "ValueError"
-                                "UnicodeError"
-                                "UnicodeDecodeError"
-                                "UnicodeEncodeError"
-                                "UnicodeTranslateError"
-                                "Warning"
-                                "DeprecationWarning"
-                                "PendingDeprecationWarning"
-                                "RuntimeWarning"
-                                "SyntaxWarning"
-                                "UserWarning"
-                                "FutureWarning"
-                                "ImportWarning"
-                                "UnicodeWarning"
-                                "BytesWarning"
-                                "ResourceWarning"
-                                )
-  )
-
+(defvar +jg-python-ivy-exceptions '("BaseException" "SystemExit" "KeyboardInterrupt" "GeneratorExit" "Exception" "StopIteration" "StopAsyncIteration" "ArithmeticError" "FloatingPointError" "OverflowError" "ZeroDivisionError" "AssertionError" "AttributeError" "BufferError" "EOFError" "ImportError" "ModuleNotFoundError" "LookupError" "IndexError" "KeyError" "MemoryError" "NameError" "UnboundLocalError" "OSError" "BlockingIOError" "ChildProcessError" "ConnectionError" "BrokenPipeError" "ConnectionAbortedError" "ConnectionRefusedError" "ConnectionResetError" "FileExistsError" "FileNotFoundError" "InterruptedError" "IsADirectoryError" "NotADirectoryError" "PermissionError" "ProcessLookupError" "TimeoutError" "ReferenceError" "RuntimeError" "NotImplementedError" "RecursionError" "SyntaxError" "IndentationError" "TabError" "SystemError" "TypeError" "ValueError" "UnicodeError" "UnicodeDecodeError" "UnicodeEncodeError" "UnicodeTranslateError" "Warning" "DeprecationWarning" "PendingDeprecationWarning" "RuntimeWarning" "SyntaxWarning" "UserWarning" "FutureWarning" "ImportWarning" "UnicodeWarning" "BytesWarning" "ResourceWarning"))
 (defvar +jg-python-ivy-datetimes '(
                                    "%a    Weekday as locale’s abbreviated name. Sun, Mon, …, Sat (en_US);"
                                    "%A    Weekday as locale’s full name. Sunday, Monday, …, Saturday (en_US);"
@@ -98,11 +32,12 @@
                                    "https://docs.python.org/3/library/datetime.html"
                                    )
   )
-
 (defvar +jg-python-ivy-argparse '(
 
                                   )
   )
+(defvar +jg-python-ivy-libs-file (expand-file-name "~/.temp/pylibs"))
+(defvar +jg-python-ivy-libs '("alabaster" "applaunchservices" "appnope" "arrow" "astroid" "asttokens" "atomicwrites" "attrs" "automat" "autopep8" "babel" "backcall" "beautifulsoup4" "bibtexparser" "binaryornot" "black" "blas" "bleach" "blinker" "blurhash" "brotli" "brotli-bin" "brotlipy" "build" "bzip2" "ca-certificates" "certifi" "cffi" "cfgv" "chardet" "charset-normalizer" "citeproc-py" "click" "cloudpickle" "comm" "constantly" "cookiecutter" "cryptography" "cssselect" "cycler" "debugpy" "decorator" "defusedxml" "diff-match-patch" "dill" "distlib" "docopt" "docstring-to-markdown" "docutils" "doit" "doit-graph" "doot" "entrypoints" "executing" "fastjsonschema" "feedgenerator" "fftw" "filelock" "flake8" "fonttools" "freetype" "future" "giflib" "hyperlink" "icu" "identify" "idna" "imagesize" "importlib-metadata" "incremental" "inflection" "intel-openmp" "intervaltree" "ipykernel" "ipython" "ipython-genutils" "isort" "itemadapter" "itemloaders" "jaraco-classes" "jedi" "jellyfish" "jinja2" "jinja2-time" "jmespath" "joblib" "jpeg" "jsonschema" "jupyter-client" "jupyter-core" "jupyterlab-pygments" "keyring" "kiwisolver" "lazy-object-proxy" "lcms2" "lerc" "libbrotlicommon" "libbrotlidec" "libbrotlienc" "libcxx" "libdeflate" "libffi" "libgfortran" "libgfortran5" "libiconv" "libpng" "libtiff" "libwebp" "libwebp-base" "libxml2" "libxslt" "llvm-openmp" "lxml" "lz4-c" "markdown" "markdown-it-py" "markdown-word-count" "markupsafe" "mastodon-py" "matplotlib" "matplotlib-base" "matplotlib-inline" "mccabe" "mdurl" "mistune" "mkl" "mkl-service" "mkl_fft" "mkl_random" "more-itertools" "munkres" "mypy-extensions" "nbclient" "nbconvert" "nbformat" "ncurses" "nest-asyncio" "networkx" "nodeenv" "numpy" "numpy-base" "numpydoc" "oauthlib" "openssl" "packaging" "pandoc" "pandocfilters" "parsel" "parso" "pathspec" "pdfrw" "pelican" "pelican-graphviz" "pelican-image-process" "pelican-liquid-tags" "pelican-pandoc-reader" "pelican-seo" "pelican-sitemap" "pelican-thumbnailer" "pelican-webassets" "pep517" "pexpect" "pickleshare" "pillow" "pip" "pip-chill" "pipreqs" "platformdirs" "pluggy" "pony" "pre-commit" "prompt-toolkit" "protego" "psutil" "ptyprocess" "pure-eval" "pure-python-adb" "pyasn1" "pyasn1-modules" "pycodestyle" "pycparser" "pydispatcher" "pydocstyle" "pyflakes" "pygments" "pygraphviz" "pyjwt" "pylatexenc" "pylint" "pylint-venv" "pyls-spyder" "pymupdf" "pyobjc-core" "pyobjc-framework-cocoa" "pyobjc-framework-coreservices" "pyobjc-framework-fsevents" "pyopenssl" "pypandoc" "pyparsing" "pypdf2" "pyqt5" "pyqt5-qt5" "pyqt5-sip" "pyqtwebengine" "pyqtwebengine-qt5" "pyrsistent" "pysocks" "python" "python-dateutil" "python-liquid" "python-lsp-black" "python-lsp-jsonrpc" "python-lsp-server" "python-magic" "python-slugify" "python-twitter" "pytoolconfig" "pytz" "pyyaml" "pyzmq" "qdarkstyle" "qstylizer" "qtawesome" "qtconsole" "qtpy" "queuelib" "readline" "regex" "requests" "requests-file" "requests-oauthlib" "rich" "rope" "rsa" "rtree" "ruamel-yaml" "ruamel-yaml-clib" "scikit-learn" "scipy" "scrapy" "service-identity" "setuptools" "six" "snowballstemmer" "sortedcontainers" "soupsieve" "sphinx" "sphinxcontrib-applehelp" "sphinxcontrib-devhelp" "sphinxcontrib-htmlhelp" "sphinxcontrib-jsmath" "sphinxcontrib-qthelp" "sphinxcontrib-serializinghtml" "spyder-kernels" "sqlite" "stack-data" "text-unidecode" "textdistance" "threadpoolctl" "three-merge" "tinycss2" "tk" "tldextract" "toml" "tomler" "tomli" "tomlkit" "tornado" "traitlets" "tweepy" "twisted" "typing_extensions" "tzdata" "ujson" "unidecode" "urllib3" "virtualenv" "w3lib" "watchdog" "wcwidth" "webassets" "webencodings" "whatthepatch" "wheel" "wrapt" "wurlitzer" "xz" "yapf" "yarg" "zipp" "zlib" "zope-interface" "zstd"))
 
 (defun +jg-python-exception-ivy ()
   (interactive)
@@ -112,4 +47,15 @@
 (defun +jg-python-datetime-ivy ()
   (interactive)
   (insert (car (s-split " " (ivy-read "Datetime strptime: " +jg-python-ivy-datetimes :require-match t) t)))
+  )
+
+(defun +jg-python-libs-ivy ()
+  (interactive)
+  (unless +jg-python-ivy-libs
+    (with-temp-buffer
+      (insert-file-contents +jg-python-ivy-libs-file)
+      (setq +jg-python-ivy-libs (s-split "\n" (buffer-string) t))
+      )
+    )
+  (insert (car (s-split " " (ivy-read "Datetime strptime: " +jg-python-ivy-libs :require-match t) t)))
   )

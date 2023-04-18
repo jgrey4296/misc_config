@@ -42,7 +42,7 @@
                      )
 
 (spec-handling-new! file-templates +file-templates-alist t append
-                    (cl-loop for rule in vars
+                    (cl-loop for rule in val
                              for priority = (* -1 (or (plist-get rule :priority) 0))
                              for clean    = (cl-loop for (k v) on body by #'cddr
                                                      unless (eq k :priority)

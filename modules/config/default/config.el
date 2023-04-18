@@ -3,6 +3,7 @@
 (load! "+vars")
 
 (use-package spec-handling
+  :commands (run-spec-handlers spec-handling-new! spec-handling-add! spec-handling-setq)
   :init
   (after! jg-bindings-total
     (map! :leader

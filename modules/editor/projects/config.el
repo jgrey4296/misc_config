@@ -31,7 +31,7 @@
   )
 
 ;; +jg-projects-add-spec
-(spec-handling-new! projects projectile-project-types collect
+(spec-handling-new! projects projectile-project-types nil collect
                     `(,key . ,(apply 'projectile--build-project-plist val))
                     )
 

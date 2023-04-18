@@ -36,7 +36,7 @@
       :desc "breakpoint"          "I b"   #'+jg-text-insert-debug
 
       :desc "Rotate"         "R"   #'rotate-text
-      :desc "Zap to Char"    "Z"   #'zap-up-to-char
+      ;; :desc "Zap to Char"    "Z"   #'zap-up-to-char
       (:prefix "c"
        :desc "Title Case"     "t"   #'+jg-text-title-case-op
        )

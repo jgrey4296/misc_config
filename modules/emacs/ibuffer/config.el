@@ -51,13 +51,14 @@
     (find-file _file _wildcards))
   )
 
+(spec-handling-clear! ibuffer-filters)
+(ibuffer-filters-reapply-specs-fn)
 (spec-handling-new! ibuffer-filters ibuffer-saved-filters nil collect
                     (cons (symbol-name key) val)
                     )
 
 (spec-handling-new! ibuffer-groups ibuffer-saved-filter-groups nil append
-                    (cl-loop for key being the hash-keys of table
-                             using (hash-values val)
+                    (cl-loop for rule in val
                              collect (cons key val)
                              )
                     )

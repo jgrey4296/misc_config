@@ -20,7 +20,7 @@
 ;; Filters:
 
 (spec-handling-add! ibuffer-filters nil
-                    ('-clutter (not (or (name . "*http ")
+                    (-clutter (not (or (name . "*http ")
                                         (used-mode . flycheck-error-list-mode)
                                         (used-mode . ivy-mode)
                                         (used-mode . helm-major-mode)
@@ -33,29 +33,29 @@
                                         (name . "*shasum*")
                                         ))
                                )
-                    ('dired (used-mode . dired-mode))
+                    (dired (used-mode . dired-mode))
                     )
 
 (spec-handling-add! ibuffer-filters nil
-                    ('window-ring (name . "->"))
-                    ('stars       (name . "^*"))
-                    ('music       (or (name . "*\\(tidal\\|SCLang\\)")
+                    (window-ring (name . "->"))
+                    (stars       (name . "^*"))
+                    (music       (or (name . "*\\(tidal\\|SCLang\\)")
                                       (used-mode . sclang-mode)
                                       (used-mode . tidal-mode)
                                       (file-extension . "scd\\|hs\\|tidal")))
 
-                    ('org         (derived-mode . org-mode))
-                    ('python      (used-mode . python-mode))
-                    ('programming (or (derived-mode . prog-mode)
+                    (org         (derived-mode . org-mode))
+                    (python      (used-mode . python-mode))
+                    (programming (or (derived-mode . prog-mode)
                                       (mode . ess-mode)
                                       (mode . compilation-mode)))
-                    ('text        (and (derived-mode . text-mode) (not (starred-name))))
-                    ('TeX         (or (derived-mode . tex-mode)
+                    (text        (and (derived-mode . text-mode) (not (starred-name))))
+                    (TeX         (or (derived-mode . tex-mode)
                                       (mode . latex-mode)
                                       (mode . context-mode)
                                       (mode . ams-tex-mode)))
-                    ('bibtex      (used-mode . bibtex-mode))
-                    ('web         (or (derived-mode . sgml-mode)
+                    (bibtex      (used-mode . bibtex-mode))
+                    (web         (or (derived-mode . sgml-mode)
                                       (derived-mode . css-mode)
                                       (mode . javascript-mode)
                                       (mode . js2-mode)
@@ -65,53 +65,53 @@
                             )
 
 (spec-handling-add! ibuffer-filters nil
-                    ('mail (or (mode . message-mode)
+                    (mail (or (mode . message-mode)
                                (mode . mail-mode)
                                (mode . gnus-group-mode)
                                (mode . gnus-summary-mode)
                                (mode . gnus-article-mode))))
 
 (spec-handling-add! ibuffer-filters nil
-                    ('csv     ())
-                    ('graphql ())
-                    ('json    ())
-                    ('logs    ())
-                    ('toml    ())
-                    ('xml     ())
-                    ('yaml    ())
+                    (csv     ())
+                    (graphql ())
+                    (json    ())
+                    (logs    ())
+                    (toml    ())
+                    (xml     ())
+                    (yaml    ())
                     )
 
 (spec-handling-add! ibuffer-filters nil
-                    ('doot ()))
+                    (doot ()))
 
 ;; Groups:
 
-(spec-handling-add! ibuffer-groups nil
-                    ('default  (("*Starred*"   (saved . "star"))
+(spec-handling-add! ibuffer-groups t
+                    (default  (("*Starred*"   (saved . "stars"))
                                 ("*Project: configs" (projectile-root . "__configs"))
                                 ("*Project: writing" (projectile-root . "jgrey4296.github.io"))
                                 ))
-                    ('starred (("*Starred*"   (saved . "star"))))
-                    ('General (("Starred"     (saved . "star"))
+                    (starred (("*Starred*"   (saved . "stars"))))
+                    (General (("Starred"     (saved . "stars"))
                                ("org"         (saved . "org"))
                                ("programming" (saved . "programming"))
                                ("dired"       (saved . "dired"))))
-                    ('org     (("org"         (saved . "org"))))
-                    ('dired   (("dired"       (saved . "dired"))))
+                    (org     (("org"         (saved . "org"))))
+                    (dired   (("dired"       (saved . "dired"))))
                     )
 
 (spec-handling-add! ibuffer-groups nil
-                    ('projects (("*Starred*" (starred-name))
+                    (projects (("*Starred*" (starred-name))
                                 ("*Project: configs*" (projectile-root . "__configs"))
                                 ("*Project: modules*" (projectile-root . "modules"))
                                 ("*Project: writing*" (projectile-root . "jgrey4296.github.io"))
                                 ("*Project: Dropbox*" (projectile-root . "Dropbox"))
                                 ))
-                    ('programming (("programming" (saved . "programming"))))
+                    (programming (("programming" (saved . "programming"))))
                     )
 
 (spec-handling-extend! ibuffer-groups nil
-                       ('programming
+                       (programming
                         '("python" (derived-mode . python-mode))
                         '("lisp"   (derived-mode . emacs-lisp-mode))
                         )

@@ -4,7 +4,7 @@
   (interactive)
   (if (get-buffer "*Ibuffer*")
       (switch-to-buffer "*Ibuffer*")
-    (ibuffer nil nil '((saved . "-clutter")) nil nil
+    (ibuffer nil nil '((saved . "dired")) nil nil
              (cdr (assoc "default" ibuffer-saved-filter-groups)))
     (push jg-ibuffer-never-show-regexps ibuffer-tmp-hide-regexps)
     (+jg-ibuffer-sort-groups)

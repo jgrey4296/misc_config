@@ -1,4 +1,7 @@
 ;;; spec-handling.el -*- lexical-binding: t; -*-
+(require 's)
+(require 'dash)
+(require 'cl-lib)
 
 (defvar spec-handling-hook nil)
 
@@ -40,8 +43,8 @@ TODO: add spec format docstring
         (fname (macroexp-file-name))
         )
      `(unless (-contains? spec-handling-hook (function ,reapply-name))
-        (defvar ,table-name (make-hash-table) ,(format "Macro generated hash-table to store specs for %s" type ))
-
+        (defvar ,table-name nil  ,(format "Macro generated hash-table to store specs for %s" type ))
+        (setq ,table-name (make-hash-table :test 'equal))
         (defun ,reapply-name (&optional dry)
           ,(format "Macro-Generated spec application fn for: %s\n from: %s" type fname)
           (interactive)
@@ -74,7 +77,7 @@ TODO: add spec format docstring
         (feature-name (spec-handling--symname type 'spec-feature))
         (fname (macroexp-file-name))
         )
-    `(eval-after-load (quote ,feature-name)
+    `(with-eval-after-load (quote ,feature-name)
       (cl-loop for val in (quote ,rules)
                ,@(if override
                      '(do)
@@ -107,7 +110,8 @@ TODO: add spec format docstring
         (reapply-name (spec-handling--symname type 'reapply-specs-fn))
         )
     `(progn
-      (setq ,table-name (make-hash-table :test 'equal))
+       (when (boundp (quote ,table-name))
+         (clrhash ,table-name))
       (remove-hook 'spec-handling-hook (function ,reapply-name))
       )
     )

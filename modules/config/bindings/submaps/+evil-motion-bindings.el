@@ -1,5 +1,7 @@
 ;;; +evil-motion-bindings.el -*- lexical-binding: t; -*-
 
+(suppress-keymap jg-binding-motion-state-map)
+
 (map! :map jg-binding-backward-general-motion-map
       :desc "Buffer"       "b"   #'previous-buffer
       :desc "Git Hunk"     "d"   #'git-gutter:previous-hunk

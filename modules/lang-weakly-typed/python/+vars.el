@@ -83,79 +83,79 @@
 ;;-- end flycheck
 
 ;;-- project spec
-(after! jg-ui-reapply-hook-ready
+(after! projectile
   (pushnew! projectile-project-root-files "pyproject.toml" "requirements.txt" "setup.py")
   (pushnew! projectile-project-root-files "setup.py" "requirements.txt")
-  (+jg-projects-add-spec 'python-poetry '(("poetry.lock")            :project-file "poetry.lock"             :compilation-dir nil :configure nil :compile "poetry build"               :test "poetry run python -m unittest discover" :install nil :package nil             :run nil :test-suffix "_test" :test-prefix "test_"))
-  (+jg-projects-add-spec 'python-pipenv '( ("Pipfile")               :project-file "Pipfile"                 :compilation-dir nil :configure nil :compile "pipenv run build"           :test "pipenv run test"                        :install nil :package nil             :run nil :test-suffix "_test" :test-prefix "test_"))
-  (+jg-projects-add-spec 'python-tox '(("tox.ini")                   :project-file "tox.ini"                 :compilation-dir nil :configure nil :compile "tox -r --notest"            :test "tox"                                    :install nil :package nil             :run nil :test-suffix "_test" :test-prefix "test_"))
-  (+jg-projects-add-spec 'python-pkg '(("setup.py")                  :project-file "setup.py"                :compilation-dir nil :configure nil :compile "python setup.py build"      :test "python -m unittest discover"            :install nil :package nil             :run nil :test-suffix "_test" :test-prefix "test_"))
-  (+jg-projects-add-spec 'python-pip '(("requirements.txt")          :project-file "requirements.txt"        :compilation-dir nil :configure nil :compile "python setup.py build"      :test "python -m unittest discover"            :install nil :package nil             :run nil :test-suffix "_test" :test-prefix "test_"))
-  (+jg-projects-add-spec 'django '(("manage.py")                     :project-file "manage.py"               :compilation-dir nil :configure nil :compile "python manage.py runserver" :test "python manage.py test"                  :install nil :package nil             :run nil :test-suffix "_test" :test-prefix "test_"))
-  (+jg-projects-add-spec 'jg-python-project '(("pyproject.toml") :project-file "pyproject.toml" :configure "pip install -e %s" :test "python -m unittest discover -v -p test_*.py" :test-dir (lambda (x) (f-join x "__tests")) :test-prefix "test_" :related-files-fn +jg-python-related-files-fn))
   )
+(spec-handling-add! projects nil
+                    ('python-poetry ("poetry.lock") :project-file "poetry.lock" :compilation-dir nil :configure nil :compile "poetry build" :test "poetry run python -m unittest discover" :install nil :package nil :run nil :test-suffix "_test" :test-prefix "test_")
+                    ('python-pipenv ("Pipfile") :project-file "Pipfile" :compilation-dir nil :configure nil :compile "pipenv run build" :test "pipenv run test" :install nil :package nil :run nil :test-suffix "_test" :test-prefix "test_")
+                    ('python-tox ("tox.ini") :project-file "tox.ini" :compilation-dir nil :configure nil :compile "tox -r --notest" :test "tox" :install nil :package nil :run nil :test-suffix "_test" :test-prefix "test_")
+                    ('python-pkg ("setup.py") :project-file "setup.py" :compilation-dir nil :configure nil :compile "python setup.py build" :test "python -m unittest discover" :install nil :package nil :run nil :test-suffix "_test" :test-prefix "test_")
+                    ('python-pip ("requirements.txt") :project-file "requirements.txt" :compilation-dir nil :configure nil :compile "python setup.py build" :test "python -m unittest discover" :install nil :package nil :run nil :test-suffix "_test" :test-prefix "test_")
+                    ('django ("manage.py") :project-file "manage.py" :compilation-dir nil :configure nil :compile "python manage.py runserver" :test "python manage.py test" :install nil :package nil :run nil :test-suffix "_test" :test-prefix "test_")
+                    ('jg-python-project ("pyproject.toml") :project-file "pyproject.toml" :configure "pip install -e %s" :test "python -m unittest discover -v -p test_*.py" :test-dir (lambda (x) (f-join x "__tests")) :test-prefix "test_" :related-files-fn +jg-python-related-files-fn)
+                    )
 ;;-- end project spec
 
 ;;-- popup spec
-(after! jg-ui-reapply-hook-ready
-  (+jg-popup-add-spec 'python
-                          '(("^\\*pytest\\*"         :side bottom :ttl 5   :height 0.4 :quit t :select t :priority 50)
-                            ("^\\*nosetests" :size 0.4 :select nil)
-                            ("^\\*Anaconda\\*"       :side bottom :ttl 5   :height 0.4 :quit t :select nil :priority 50)
-                            ("^\\*anaconda-mode"     :side bottom :ttl 5   :height 0.4 :quit t :select nil :priority 50)
-                            ("^\\*Python\\*"         :side right  :ttl nil :width  0.5 :quit nil :select t :priority 50)
-                            ("^\\*Python-Summary\\*" :side right  :ttl nil :width  0.2 :quit t  :select nil :priority 50)
-                            ))
-  )
+
+(spec-handling-add! popup nil
+                    ('python
+                     ("^\\*pytest\\*"         :side bottom :ttl 5   :height 0.4 :quit t :select t :priority 50)
+                     ("^\\*nosetests"         :size 0.4 :select nil)
+                     ("^\\*Anaconda\\*"       :side bottom :ttl 5   :height 0.4 :quit t :select nil :priority 50)
+                     ("^\\*anaconda-mode"     :side bottom :ttl 5   :height 0.4 :quit t :select nil :priority 50)
+                     ("^\\*Python\\*"         :side right  :ttl nil :width  0.5 :quit nil :select t :priority 50)
+                     ("^\\*Python-Summary\\*" :side right  :ttl nil :width  0.2 :quit t  :select nil :priority 50)
+                     )
+                    )
 
 ;;-- end popup spec
 
 ;;-- file spec
-(after! jg-ui-reapply-hook-ready
-  (+jg-snippets-add-file-spec 'python
-                         '(("LICENSE$"        :trigger "__license-acab"   :mode text-mode :priority 100)
-                           ("pyproject.toml$" :trigger "__pyproject"      :mode conf-toml-mode)
-                           ("setup\\.cfg$"    :trigger "__setup_cfg"      :mode python-mode)
-                           ("__init__\\.py$"  :trigger "__init"           :mode python-mode)
-                           ("test_.+\\.py$"   :trigger "__tests"          :mode python-mode)
-                           ("cli_.+\\.py$"    :trigger "__cli"            :mode python-mode)
-                           ("conf\\.py$"      :trigger "__conf"           :mode python-mode)
-                           ("setup\\.py$"     :trigger "__setup"          :mode python-mode)
-                           ("dooter\\.py$"    :trigger "__doot"           :mode python-mode)
-                           ("SConstruct"      :trigger "__sconstruct"     :mode python-mode)
-                           ("SConscript"      :trigger "__sconscript"     :mode python-mode)
-                           ("\\.py$"          :trigger "__"               :mode python-mode :priority -99)
-                           (python-mode       :trigger "__" :priority -100)
-                           )
-                         )
-  )
+(spec-handling-add! file-templates nil
+                    ('python
+                     ("LICENSE$"        :trigger "__license-acab"   :mode text-mode :priority 100)
+                     ("pyproject.toml$" :trigger "__pyproject"      :mode conf-toml-mode)
+                     ("setup\\.cfg$"    :trigger "__setup_cfg"      :mode python-mode)
+                     ("__init__\\.py$"  :trigger "__init"           :mode python-mode)
+                     ("test_.+\\.py$"   :trigger "__tests"          :mode python-mode)
+                     ("cli_.+\\.py$"    :trigger "__cli"            :mode python-mode)
+                     ("conf\\.py$"      :trigger "__conf"           :mode python-mode)
+                     ("setup\\.py$"     :trigger "__setup"          :mode python-mode)
+                     ("dooter\\.py$"    :trigger "__doot"           :mode python-mode)
+                     ("SConstruct"      :trigger "__sconstruct"     :mode python-mode)
+                     ("SConscript"      :trigger "__sconscript"     :mode python-mode)
+                     ("\\.py$"          :trigger "__"               :mode python-mode :priority -99)
+                     (python-mode       :trigger "__" :priority -100)
+                     )
+                    )
 ;;-- end file spec
 
 ;;-- browse spec
-(after! jg-ui-reapply-hook-ready
-  (+jg-browse-add-lookup-spec 'python
-                              '(
-                                ("Python" "https://docs.python.org/3/search.html?q=%s&check_keywords=yes&area=default")
-                                ("Pypi"   "https://pypi.org/search/?q=%s")
-                                )
-                              )
-  )
+(spec-handling-add! browser nil
+                    ('python
+                     ("Python" "https://docs.python.org/3/search.html?q=%s&check_keywords=yes&area=default")
+                     ("Pypi"   "https://pypi.org/search/?q=%s")
+                     )
+                    )
 
 ;;-- end browse spec
 
 ;;-- fold spec
-(after! jg-ui-reapply-hook-ready
-  (+jg-fold-add-spec 'python
-                     '((python-mode)
-                       :close     +jg-python-close-class-defs
-                       :close-all +jg-python-close-all-defs
-                       :open      outline-toggle-children
-                       :open-all  outline-show-all
-                       :open-rec  outline-show-subtree
-                       :toggle    outline-toggle-children
-                       )
+(spec-handling-add! fold nil
+                    ('python
+                     :modes (python-mode)
+                     :triggers (:close     +jg-python-close-class-defs
+                                :close-all +jg-python-close-all-defs
+                                :open      outline-toggle-children
+                                :open-all  outline-show-all
+                                :open-rec  outline-show-subtree
+                                :toggle    outline-toggle-children
+                                )
                      )
-  )
+                    )
 ;;-- end fold spec
 
 ;;-- smartparens

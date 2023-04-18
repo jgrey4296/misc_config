@@ -17,28 +17,30 @@
 (pushnew! mailcap-mime-extensions '(".xml" . "text/html"))
 
 ;;-- popup
-(after! jg-ui-reapply-hook-ready
-  (+jg-popup-add-spec 'nxml
-                          `((,jg-xml-xpath-results-buffer-name :side bottom :ttl nil :height 0.3 :quit t :select nil :priority 100)
-                            (,jg-xml-xmllint-shell-buffer-name :side right  :ttl nil :width  0.3 :quit t :select t   :priority 100)
-                            )
+
+(spec-handling-add! popup nil
+                    ('nxml
+                          ((,jg-xml-xpath-results-buffer-name :side bottom :ttl nil :height 0.3 :quit t :select nil :priority 100)
+                           (,jg-xml-xmllint-shell-buffer-name :side right  :ttl nil :width  0.3 :quit t :select t   :priority 100)
+                           )
                           )
-  )
+                    )
 
 ;;-- end popup
 
 ;;-- fold spec
-(after! jg-ui-reapply-hook-ready
-  (+jg-fold-add-spec 'xml
-                     `((web-mode)
-                       :open-all   nil
-                       :close-all  nil
-                       :toggle     web-mode-fold-or-unfold
-                       :open       nil
-                       :open-rec   nil
-                       :close      nil
-                       ))
-  )
+(spec-handling-add! fold nil
+                      ('xml
+                       :modes (web-mode)
+                       :triggers (:open-all   nil
+                                  :close-all  nil
+                                  :toggle     web-mode-fold-or-unfold
+                                  :open       nil
+                                  :open-rec   nil
+                                  :close      nil
+                                  )
+                       )
+                      )
 ;;-- end fold spec
 
 ;;-- browse providers

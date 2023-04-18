@@ -2,6 +2,16 @@
 
 (load! "+vars")
 
+(use-package spec-handling
+  :init
+  (after! jg-bindings-total
+    (map! :leader
+       :desc "Reactivate Templates" "t !" #'run-spec-handlers
+    )
+  )
+  (add-hook! 'doom-init-ui-hook #'run-spec-handlers)
+  )
+
 ;;; Smartparens config
 
 (when (modulep! +smartparens)

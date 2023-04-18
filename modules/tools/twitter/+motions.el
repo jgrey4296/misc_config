@@ -8,5 +8,5 @@
 
 
 (map! :map jg-binding-operator-map
-      :prefix "s"
-      :desc "Tweet Text" "T" #'+jg-twitter-tweet-operator)
+      :desc "Tweet" "T" #'+jg-twitter-tweet-operator
+      )

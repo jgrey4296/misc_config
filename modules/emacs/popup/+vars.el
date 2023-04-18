@@ -45,14 +45,16 @@ adjustment.")
 (setq neo-toggle-window-keep-p t)
 
 ;;-- fold spec
-(after! jg-ui-reapply-hook-ready
-  (+jg-fold-add-spec 'neotree
-                     `((neotree-mode)
-     :open-all   nil
-     :close-all  neotree-collapse-all
-     :toggle     nil
-     :open       +neotree/expand-or-open
-     :open-rec   nil
-     :close      +neotree/collapse
-     )))
+(spec-handling-add! fold nil
+                    ('neotree
+                     :modes (neotree-mode)
+                     :triggers (:open-all   nil
+                                :close-all  neotree-collapse-all
+                                :toggle     nil
+                                :open       +neotree/expand-or-open
+                                :open-rec   nil
+                                :close      +neotree/collapse
+                                )
+                     )
+                    )
 ;;-- end fold spec

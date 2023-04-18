@@ -125,7 +125,6 @@
 ;;-- end description
 
 (defvar +popup--old-display-buffer-alist nil)
-(defvar jg-popup-display-specs (make-hash-table))
 (defvar jg-popup-misc-specs nil)
 
 ;;;###autoload
@@ -135,27 +134,25 @@
 
 ;;;###autoload
 (defun +popup-make-rule (predicate plist)
-  (if (plist-get plist :ignore)
-      (list predicate nil)
-    (let* ((plist (append plist +popup-defaults))
-           (alist
-            `((actions       . ,(plist-get plist :actions))
-              (side          . ,(plist-get plist :side))
-              (size          . ,(plist-get plist :size))
-              (window-width  . ,(plist-get plist :width))
-              (window-height . ,(plist-get plist :height))
-              (slot          . ,(plist-get plist :slot))
-              (vslot         . ,(plist-get plist :vslot))))
-           (params
-            `((ttl      . ,(plist-get plist :ttl))
-              (quit     . ,(plist-get plist :quit))
-              (select   . ,(plist-get plist :select))
-              (modeline . ,(plist-get plist :modeline))
-              (autosave . ,(plist-get plist :autosave))
-              ,@(plist-get plist :parameters))))
-      `(,predicate (+popup-buffer)
-                   ,@alist
-                   (window-parameters ,@params)))))
+  (let* ((plist (append plist +popup-defaults))
+         (alist
+          `((actions       . ,(plist-get plist :actions))
+            (side          . ,(plist-get plist :side))
+            (size          . ,(plist-get plist :size))
+            (window-width  . ,(plist-get plist :width))
+            (window-height . ,(plist-get plist :height))
+            (slot          . ,(plist-get plist :slot))
+            (vslot         . ,(plist-get plist :vslot))))
+         (params
+          `((ttl      . ,(plist-get plist :ttl))
+            (quit     . ,(plist-get plist :quit))
+            (select   . ,(plist-get plist :select))
+            (modeline . ,(plist-get plist :modeline))
+            (autosave . ,(plist-get plist :autosave))
+            ,@(plist-get plist :parameters))))
+    `(,predicate (+popup-buffer)
+      ,@alist
+      (window-parameters ,@params))))
 
 ;;;###autodef
 (defun set-popup-rule! (predicate &rest plist)
@@ -168,45 +165,5 @@
     (dolist (rule rules)
       (set-popup-rule! (car rule) (cdr rule))
       )
-    )
-  )
-
-;;;###autodef
-(defun +jg-popup-add-spec (sym rules &optional override)
-  "sym is a symbol to avoid adding duplicate rulesets
-
-  Expects a list of form:
-  '((PATTERN :opt val :opt val) (PATTERN :opt val :opt val))
-  "
-  (cl-assert (hash-table-p jg-popup-display-specs))
-  (when (and (gethash sym jg-popup-display-specs) override)
-    (message "Popup Ruleset %s already exists, overriding" sym)
-    (puthash sym nil jg-popup-display-specs)
-    )
-
-  (puthash sym
-           (append (cl-loop for (head . body) in rules
-                            for priority = (* -1 (or (plist-get body :priority) 0))
-                            collect (cons priority (+popup-make-rule head body)))
-                   (gethash sym jg-popup-display-specs))
-           jg-popup-display-specs)
-  )
-
-;;;###autodef
-(defun +jg-popup-reapply-specs ()
-  " Take defined rules and use them in place of display-buffer-alist "
-  (interactive)
-  (let ((flattened
-        (-concat (mapcar #'cdr (sort
-                                (copy-sequence
-                                 (-flatten-n 1 (hash-table-values jg-popup-display-specs)))
-                                #'(lambda (x y) (< (car x) (car y)))))
-
-                 '(("*jg-customised*" (+popup-buffer)))
-                 jg-popup-misc-specs
-                 )
-            ))
-    (message "Applying Popup Rules: %s" (hash-table-keys jg-popup-display-specs))
-    (setq display-buffer-alist flattened)
     )
   )

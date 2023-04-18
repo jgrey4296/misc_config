@@ -11,7 +11,6 @@
 
 (add-hook! 'doom-init-ui-hook  'rainbow-delimiters-mode)
 (add-hook! 'doom-init-ui-hook (defun +jg-ui-load-advice () (load! "utils/+advice")))
-(add-hook! 'doom-init-ui-hook (defun +jg-ui-run-reapply () (run-hooks 'jg-ui-reapply-hook)))
 
 (use-package! hl-line
   :defer t

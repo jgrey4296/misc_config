@@ -1,11 +1,5 @@
 ;;; editor/window-control/+vars.el -*- lexical-binding: t; -*-
 
-(defvar jg-ui-reapply-hook nil)
-(add-hook! 'jg-ui-reapply-hook :depth -100
-  (defun +jg-ui-reapply-hook-head ()
-    (message "UI Reapply Spec Hook Firing")
-    (provide 'jg-ui-reapply-hook-ready)))
-
 (setq-default highlight-parentheses-delay      0.3
               jg-ui-default-face-gen-palette-dir "/Volumes/documents/github/jgrey4296.github.io/resources/palettes/"
               display-line-numbers             t

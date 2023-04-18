@@ -20,10 +20,12 @@
 (defvar jg-tag-twitter-grep-helm-source)
 
 ;;-- popup
-(after! jg-ui-reapply-hook-ready
-  (+jg-popup-add-spec 'tagging
-                         '(("^\\*Helm-Bookmark-Results\\*"  :side right :ttl nil :width 0.4 :quit t :select nil :priority 50)
-                           )
-                         )
-  )
+
+(spec-handling-add! popup nil
+                    ('tagging
+                     (
+                      ("^\\*Helm-Bookmark-Results\\*"  :side right :ttl nil :width 0.4 :quit t :select nil :priority 50)
+                      )
+                     )
+                    )
 ;;-- end popup

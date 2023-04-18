@@ -78,23 +78,19 @@ If the depth is 2, the first two directories are removed: net.lissner.game.")
 ;;-- end gradle font lock
 
 ;;-- file spec
-(after! jg-ui-reapply-hook-ready
-  ;; groovy-mode
-  (+jg-snippets-add-file-spec 'java-and-friends
-                              '(
-                                ;; java
-                                ("/main\\.java$"    :trigger "__main"         :mode java-mode)
-                                ("/src/.+\\.java$" :mode java-mode)
-
-                                ;; Gradle
-                                ("build\\.gradle$"           :trigger "build.gradle"    :mode groovy-mode)
-                                ("settings\\.gradle$"        :trigger "settings.gradle" :mode groovy-mode)
-
-                                ;; Kotlin
-                                ("build\\.gradle\\.kts$"     :trigger "build.gradle.kts" :mode kotlin-mode)
-                                )
-                              )
-  )
+(spec-handling-add! file-templates nil
+                    ('java
+                     ("/main\\.java$"    :trigger "__main"         :mode java-mode)
+                     ("/src/.+\\.java$" :mode java-mode)
+                     )
+                    ('gradle
+                     ("build\\.gradle$"           :trigger "build.gradle"    :mode groovy-mode)
+                     ("settings\\.gradle$"        :trigger "settings.gradle" :mode groovy-mode)
+                     )
+                    ('kotlin
+                     ("build\\.gradle\\.kts$"     :trigger "build.gradle.kts" :mode kotlin-mode)
+                     )
+                    )
 ;;-- end file spec
 
 ;;-- browse spec
@@ -129,12 +125,14 @@ If the depth is 2, the first two directories are removed: net.lissner.game.")
               )
       )
     )
-(after! jg-ui-reapply-hook-ready
+(after! projectile
   (pushnew! projectile-project-root-files "build.gradle")
   (pushnew! projectile-project-root-files "build.gradle.kts")
-
-  (+jg-projects-add-spec 'gradlew '(("gradlew")                      :project-file "gradlew"                 :compilation-dir nil :configure nil :compile "./gradlew build"            :test "./gradlew test"                         :install nil :package nil             :run nil :test-suffix "Spec"))
-  (+jg-projects-add-spec 'gradle '(("build.gradle") :project-file "build.gradle" :compilation-dir nil :configure nil :compile "gradle build" :test "gradle test" :install nil :package nil :run nil :test-suffix "Spec"))
-  (+jg-projects-add-spec 'jg-kotlin-project '(("build.gradle" "build.gradle.kts") :project-file "build.grade"))
   )
+
+(spec-handling-add! projects nil
+                    ('gradlew ("gradlew") :project-file "gradlew" :compilation-dir nil :configure nil :compile "./gradlew build" :test "./gradlew test" :install nil :package nil :run nil :test-suffix "Spec")
+                    ('gradle ("build.gradle") :project-file "build.gradle" :compilation-dir nil :configure nil :compile "gradle build" :test "gradle test" :install nil :package nil :run nil :test-suffix "Spec")
+                    ('jg-kotlin-project ("build.gradle" "build.gradle.kts") :project-file "build.grade")
+                    )
 ;;-- end project spec

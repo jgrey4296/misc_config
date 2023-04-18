@@ -6,19 +6,18 @@
 (defvar +file-templates-dir nil)
 (defvar +file-templates-default-trigger "__")
 (defvar +file-templates-inhibit nil)
-(defvar jg-snippets-file-specs (make-hash-table))
 
-(+jg-snippets-add-file-spec
- 'general
- '(("/docker-compose\\.yml$" :mode yaml-mode)
-   ;; direnv
-   ("/\\.envrc$" :trigger "__envrc" :mode direnv-envrc-mode)
-   ;; Markdown
-   (markdown-mode)
-   ;; Markdown
-   (sh-mode :priority -100)
-   (gitignore-mode :priority -100)
-   (dockerfile-mode)
-   (snippet-mode)
-   )
+(spec-handling-add! file-templates nil
+                    ('general
+                     ("/docker-compose\\.yml$" :mode yaml-mode)
+                     ;; direnv
+                     ("/\\.envrc$" :trigger "__envrc" :mode direnv-envrc-mode)
+                     ;; Markdown
+                     (markdown-mode)
+                     ;; Markdown
+                     (sh-mode :priority -100)
+                     (gitignore-mode :priority -100)
+                     (dockerfile-mode)
+                     (snippet-mode)
+                     )
  )

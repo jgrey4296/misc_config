@@ -35,23 +35,20 @@
 ;;-- end urls
 
 ;;-- file spec
-(after! jg-ui-reapply-hook-ready
-  ;; rust-mode
-  (+jg-snippets-add-file-spec 'rust-mode
-                              '(
-                                ("config\\.toml$"   :trigger "__config.toml" :mode rust-mode)
-                                ("Cargo\\.toml$"    :trigger "__Cargo.toml"  :mode rust-mode)
-                                ("Makefile\\.toml$" :trigger "__"            :mode cargo-makefile-mode)
-                                ("mod\\.rs$"        :trigger "__mod.rs"      :mode rust-mode)
-                                ("main\\.rs$"       :trigger "__main.rs"     :mode rust-mode)
-                                ("lib\\.rs$"        :trigger "__lib.rs"      :mode rust-mode)
-                                ("tests\\.rs"       :trigger "__tests.rs"    :mode rust-mode)
-                                ("build\\.rs"       :trigger "__build.rs"    :mode rust-mode)
-                                (rustic-mode        :trigger "__"            )
-                                (rust-mode          :trigger "__"            )
-                                )
-                              )
-  )
+(spec-handling-add! file-templates
+                    ('rust
+                     ("config\\.toml$"   :trigger "__config.toml" :mode rust-mode)
+                     ("Cargo\\.toml$"    :trigger "__Cargo.toml"  :mode rust-mode)
+                     ("Makefile\\.toml$" :trigger "__"            :mode cargo-makefile-mode)
+                     ("mod\\.rs$"        :trigger "__mod.rs"      :mode rust-mode)
+                     ("main\\.rs$"       :trigger "__main.rs"     :mode rust-mode)
+                     ("lib\\.rs$"        :trigger "__lib.rs"      :mode rust-mode)
+                     ("tests\\.rs"       :trigger "__tests.rs"    :mode rust-mode)
+                     ("build\\.rs"       :trigger "__build.rs"    :mode rust-mode)
+                     (rustic-mode        :trigger "__"            )
+                     (rust-mode          :trigger "__"            )
+                     )
+                    )
 ;;-- end file spec
 
 ;;-- browse spec
@@ -95,7 +92,11 @@
               )
       )
     )
-(after! jg-ui-reapply-hook-ready
-  (+jg-projects-add-spec 'jg-rust-project '(("Cargo.toml") :project-file "Cargo.toml" :configure   nil :test        nil :test-dir    nil :test-prefix nil :related-files-fn +jg-rust-related-files-fn))
+
+(after! projectile
+  (add-to-list 'projectile-project-root-files "Cargo.toml")
   )
-;;; +vars.el ends here
+(spec-handling-add! projects t
+                    ('jg-rust ("Cargo.toml") :project-file "Cargo.toml" :configure nil :test nil :test-dir nil :test-prefix nil :related-files-fn +jg-rust-related-files-fn)
+                    ( 'rust-cargo ("Cargo.toml") :project-file "Cargo.toml" :compilation-dir nil :configure nil :compile "cargo build" :test "cargo test" :install nil :package nil :run "cargo run")
+                    )

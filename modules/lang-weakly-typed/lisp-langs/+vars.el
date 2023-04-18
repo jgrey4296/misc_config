@@ -55,35 +55,36 @@ See `+emacs-lisp-non-package-mode' for details.")
 ;;-- end rotate text
 
 ;;-- fold spec
-(after! jg-ui-reapply-hook-ready
-  (+jg-fold-add-spec 'lisp
-                     `((emacs-lisp-mode lisp-mode)
-                       :open-all   hs-show-all
-                       :close-all  hs-hide-all
-                       :toggle     hs-toggle-hiding
-                       :open       hs-show-block
-                       :open-rec   nil
-                       :close      hs-hide-block))
-  )
+(spec-handling-add! fold nil
+                    ('lisp
+                     :modes (emacs-lisp-mode lisp-mode)
+                     :triggers (:open-all   hs-show-all
+                                :close-all  hs-hide-all
+                                :toggle     hs-toggle-hiding
+                                :open       hs-show-block
+                                :open-rec   nil
+                                :close      hs-hide-block
+                                )
+                     )
+                    )
 ;;-- end fold spec
 
 ;;-- file spec
-(after! jg-ui-reapply-hook-ready
-  (+jg-snippets-add-file-spec 'lisp
-                              '(("/test/.+\\.el$"   :when +file-templates-in-emacs-dirs-p :trigger "__doom-test"     :mode emacs-lisp-mode)
-                                ("/doctor\\.el$"    :when +file-templates-in-emacs-dirs-p :trigger "__doom-doctor"   :mode emacs-lisp-mode)
-                                ("config\\.el$"     :when +file-templates-in-emacs-dirs-p :trigger "__doom_config"   :mode emacs-lisp-mode)
-                                ("packages\\.el$"   :when +file-templates-in-emacs-dirs-p :trigger "__doom_packages" :mode emacs-lisp-mode)
-                                ("minor-mode\\.el$" :trigger "__minor-mode" :mode emacs-lisp-mode)
-                                ("mode\\.el$"       :trigger "__mode"       :mode emacs-lisp-mode)
-                                ("ob-.+?\\.el$"     :mode emacs-lisp-mode :trigger "__org_babel")
-                                ("/.dir-locals.el$" :mode emacs-lisp-mode :trigger "__dir_locals")
-                                ("-test\\.el$"      :mode emacs-ert-mode)
-                                ("\\.el$"           :when +file-templates-in-emacs-dirs-p :trigger "__doom-module" :mode emacs-lisp-mode)
-                                (emacs-lisp-mode    :trigger "__package")
-                                )
-                              )
-  )
+(spec-handling-add! file-templates nil
+                    ('lisp
+                     ("/test/.+\\.el$"   :when +file-templates-in-emacs-dirs-p :trigger "__doom-test"     :mode emacs-lisp-mode)
+                     ("/doctor\\.el$"    :when +file-templates-in-emacs-dirs-p :trigger "__doom-doctor"   :mode emacs-lisp-mode)
+                     ("config\\.el$"     :when +file-templates-in-emacs-dirs-p :trigger "__doom_config"   :mode emacs-lisp-mode)
+                     ("packages\\.el$"   :when +file-templates-in-emacs-dirs-p :trigger "__doom_packages" :mode emacs-lisp-mode)
+                     ("minor-mode\\.el$" :trigger "__minor-mode" :mode emacs-lisp-mode)
+                     ("mode\\.el$"       :trigger "__mode"       :mode emacs-lisp-mode)
+                     ("ob-.+?\\.el$"     :mode emacs-lisp-mode :trigger "__org_babel")
+                     ("/.dir-locals.el$" :mode emacs-lisp-mode :trigger "__dir_locals")
+                     ("-test\\.el$"      :mode emacs-ert-mode)
+                     ("\\.el$"           :when +file-templates-in-emacs-dirs-p :trigger "__doom-module" :mode emacs-lisp-mode)
+                     (emacs-lisp-mode    :trigger "__package")
+                     )
+                    )
 ;;-- end file spec
 
 ;;-- browse specs
@@ -102,11 +103,8 @@ See `+emacs-lisp-non-package-mode' for details.")
 (after! projectile
   (pushnew! projectile-project-root-files "config.el")
   )
-;;-- end projectile
-
-;;-- projectile
-(after! jg-ui-reapply-hook-ready
-  (+jg-projects-add-spec 'emacs-eldev '(projectile-eldev-project-p   :project-file "Eldev"                   :compilation-dir nil :configure nil :compile "eldev compile"              :test "eldev test"                             :install nil :package "eldev package" :run "eldev emacs"))
-  (+jg-projects-add-spec 'emacs-cask '(("Cask")                      :project-file "Cask"                    :compilation-dir nil :configure nil :compile "cask install"               :test nil                                      :install nil :package nil             :run nil :test-suffix "-test" :test-prefix "test-"))
-  )
+(spec-handling-add! projects nil
+                    ('emacs-eldev #'projectile-eldev-project-p :project-file "Eldev" :compilation-dir nil :configure nil :compile "eldev compile" :test "eldev test" :install nil :package "eldev package" :run "eldev emacs")
+                    ('emacs-cask ("Cask") :project-file "Cask" :compilation-dir nil :configure nil :compile "cask install" :test nil :install nil :package nil :run nil :test-suffix "-test" :test-prefix "test-")
+                    )
 ;;-- end projectile

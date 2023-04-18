@@ -96,29 +96,28 @@
 ;;-- end hash check
 
 ;;-- fold spec
-(after! jg-ui-reapply-hook-ready
-  (+jg-fold-add-spec 'dired
-                     `((dired-mode)
-                       :open-all   nil
-                       :close-all  nil
-                       :toggle     ,(cmd! (dired-hide-subdir 1))
-                       :open       nil
-                       :open-rec   nil
-                       :close      nil
-                       ))
-  )
+(spec-handling-add! fold nil
+                    ('dired
+                     :modes (dired-mode)
+                     :triggers (:open-all   nil
+                                :close-all  nil
+                                :toggle     ,(cmd! (dired-hide-subdir 1))
+                                :open       nil
+                                :open-rec   nil
+                                :close      nil
+                                )
+                     )
+                    )
 ;;-- end fold spec
 
 ;;-- popup spec
-(after! jg-ui-reapply-hook-ready
-  (+jg-popup-add-spec 'dired
-                          '(
-                            ("^\\*image-dired" :slot 20 :size 0.8 :select t :quit nil :ttl 0)
-                            ("^\\*ranger" :ignore t)
-                            ("^*CookieCutter*" :side bottom :select nil :quit t :ttl 0)
-                            )
-                          )
-  )
+(spec-handling-add! popup nil
+                    ('dired
+                     ("^\\*image-dired" :slot 20 :size 0.8 :select t :quit nil :ttl 0)
+                     ("^\\*ranger" :ignore t)
+                     ("^*CookieCutter*" :side bottom :select nil :quit t :ttl 0)
+                     )
+                    )
 ;;-- end popup spec
 
 ;;-- ranger

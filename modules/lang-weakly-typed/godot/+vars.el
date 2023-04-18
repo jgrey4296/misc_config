@@ -5,12 +5,9 @@
               )
 
 ;;-- file templates
-(after! jg-ui-reapply-hook-ready
-  (+jg-snippets-add-file-spec
-   'gdscript-mode
-   '(
-     ("\\.gd$"           :trigger "__" :mode gdscript-mode)
-     )
-   )
-  )
+(spec-handling-add! file-templates nil
+                    ('gdscript-mode
+                     ("\\.gd$"           :trigger "__" :mode gdscript-mode)
+                     )
+                    )
 ;;-- end file templates

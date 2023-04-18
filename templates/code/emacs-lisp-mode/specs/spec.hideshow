@@ -5,12 +5,11 @@
 # group :
 # --
 ##-- hideshow spec
-(after! jg-ui-reapply-hook-ready
-  (+jg-fold-hs-add-spec '$1
-                        '( ;;MODE START END COMMENT-START FORWARD-SEXP-FUNC ADJUST-BEG-FUNC
-                          ($1-mode " " " ")
-                          )
-                        )
-  )
+  (spec-handling-add! hideshow nil
+                      ('$1
+                       ;;MODE START END COMMENT-START FORWARD-SEXP-FUNC ADJUST-BEG-FUNC
+                       ($1-mode " " " ")
+                       )
+                      )
 
 ##-- end hideshow spec

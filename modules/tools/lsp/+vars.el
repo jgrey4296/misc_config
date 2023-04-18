@@ -64,30 +64,30 @@ Can be a list of backends; accepts any value `company-backends' accepts.")
 ;;-- end ignore dirs
 
 ;;-- popup
-(after! jg-ui-reapply-hook-ready
-  (+jg-popup-add-spec
-   'lsp
-   '(
-     ("^\*lsp session\*"  :side right  :ttl nil :width 0.5 :quit t :select nil :priority 50)
-     ("^\\*lsp-\\(help\\|install\\)" :size 0.35 :quit t :select t)
-     ("^\\*eglot-help" :size 0.15 :quit t :select t)
-     )
-   )
-  )
+(spec-handling-add! popup nil
+                    ('lsp
+                     (
+                      ("^\*lsp session\*"  :side right  :ttl nil :width 0.5 :quit t :select nil :priority 50)
+                      ("^\\*lsp-\\(help\\|install\\)" :size 0.35 :quit t :select t)
+                      ("^\\*eglot-help" :size 0.15 :quit t :select t)
+                      )
+                     )
+                    )
 ;;-- end popup
 
 ;;-- fold spec
-(after! jg-ui-reapply-hook-ready
-  (+jg-fold-add-spec 'lsp-browser
-                     `((lsp-browser-mode)
-     :open-all   +jg-lsp-toggle-widget-on-line
-     :close-all  +jg-lsp-toggle-widget-on-line
-     :toggle     +jg-lsp-toggle-widget-on-line
-     :open       +jg-lsp-toggle-widget-on-line
-     :open-rec   +jg-lsp-toggle-widget-on-line
-     :close      +jg-lsp-toggle-widget-on-line
-     ))
-  )
+(spec-handling-add! fold nil
+                    ('lsp-browser
+                     :modes (lsp-browser-mode)
+                     :triggers (:open-all   +jg-lsp-toggle-widget-on-line
+                                :close-all  +jg-lsp-toggle-widget-on-line
+                                :toggle     +jg-lsp-toggle-widget-on-line
+                                :open       +jg-lsp-toggle-widget-on-line
+                                :open-rec   +jg-lsp-toggle-widget-on-line
+                                :close      +jg-lsp-toggle-widget-on-line
+                                )
+                     )
+                    )
 ;;-- end fold spec
 
 ;;-- lookup spec

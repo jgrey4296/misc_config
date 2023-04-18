@@ -28,15 +28,16 @@ If set to `nil', disable all the above behaviors.")
     ["Sass" (memq major-mode '(scss-mode sass-mode))]))
 
 ;;-- fold spec
-(after! jg-ui-reapply-hook-ready
-  (+jg-fold-add-spec 'web
-                     `((web-mode)
-     :open-all   nil
-     :close-all  nil
-     :toggle     web-mode-fold-or-unfold
-     :open       nil
-     :open-rec   nil
-     :close      nil
-     ))
-  )
+(spec-handling-add! fold nil
+                    ('web
+                     :modes (web-mode)
+                     :triggers (:open-all   nil
+                                :close-all  nil
+                                :toggle     web-mode-fold-or-unfold
+                                :open       nil
+                                :open-rec   nil
+                                :close      nil
+                                )
+                     )
+                    )
 ;;-- end fold spec

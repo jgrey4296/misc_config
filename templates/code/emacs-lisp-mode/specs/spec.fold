@@ -5,14 +5,14 @@
 # group :
 # --
 ;;-- fold spec
-(after! jg-ui-reapply-hook-ready
-  (+jg-fold-add-spec '$1
-                     `(($1-mode)
-                       :open-all   hs-show-all
-                       :close-all  hs-hide-all
-                       :toggle     hs-toggle-hiding
-                       :open       hs-show-block
-                       :open-rec   nil
-                       :close      hs-hide-block
-                       )))
+(spec-handling-add! fold nil
+                    ('$1
+                     ($1-mode)
+                     :open-all   hs-show-all
+                     :close-all  hs-hide-all
+                     :toggle     hs-toggle-hiding
+                     :open       hs-show-block
+                     :open-rec   nil
+                     :close      hs-hide-block
+                     ))
 ;;-- end fold spec

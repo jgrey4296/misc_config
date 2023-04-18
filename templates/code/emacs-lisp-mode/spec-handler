@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name  : spec-handler
+# uuid  : spec-handler
+# key   : spec-handler
+# group :
+# --
+(spec-handling-add! ${1:type} ${2:override}
+                    ($0)
+)

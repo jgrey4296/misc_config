@@ -43,5 +43,4 @@
   (evil-make-intercept-map free-keys-mode-map)
   )
 
-(add-hook! 'jg-ui-reapply-hook #'+jg-help-man-completion-build)
 ;;; config.el ends here

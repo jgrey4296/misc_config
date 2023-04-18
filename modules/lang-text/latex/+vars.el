@@ -85,12 +85,11 @@ If no viewer is found, `latex-preview-pane-mode' is used.")
 ;;-- end browse providers
 
 ;;-- popup spec
-(after! jg-ui-reapply-hook-ready
-  (+jg-popup-add-spec 'latex
-                          '(
-                            (" output\\*$" :size 15)
-                            ("^\\*TeX \\(?:Help\\|errors\\)"  :size 0.3 :select t :ttl nil)
-                            ("^\*latex\*"         :side right  :ttl nil :width  0.5 :quit nil :select t :priority 50)
-                            ))
-  )
+(spec-handling-add! popup nil
+                    ('latex
+                      (" output\\*$" :size 15)
+                      ("^\\*TeX \\(?:Help\\|errors\\)"  :size 0.3 :select t :ttl nil)
+                      ("^\*latex\*"         :side right  :ttl nil :width  0.5 :quit nil :select t :priority 50)
+                      )
+                    )
 ;;-- end popup

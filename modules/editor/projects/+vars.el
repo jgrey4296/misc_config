@@ -17,21 +17,19 @@
 
 
 ;;-- file spec
-(after! jg-ui-reapply-hook-ready
-  (+jg-snippets-add-file-spec 'project
-                              '(
-                                ("/doot\\.toml$" :trigger "__doot_toml" :mode conf-toml-mode)
-                                ("/Makefile$"             :mode makefile-gmake-mode)
-                                )
-                              )
-  )
+(spec-handling-add! file-templates nil
+                    ('project
+                     ("/doot\\.toml$" :trigger "__doot_toml" :mode conf-toml-mode)
+                     ("/Makefile$"             :mode makefile-gmake-mode)
+                     )
+                    )
 ;;-- end file spec
 
 ;;-- popup spec
-(after! jg-popup-init
-  (+jg-popup-add-spec 'proj-walk
-                      '(("^\\*Project-Walk\\*" :side left :ttl nil :quit t :select nil :priority -50))
-                      )
-  )
+(spec-handling-add! popup nil
+                    ('proj-walk
+                     ("^\\*Project-Walk\\*" :side left :ttl nil :quit t :select nil :priority -50)
+                     )
+                    )
 
 ;;-- end popup spec

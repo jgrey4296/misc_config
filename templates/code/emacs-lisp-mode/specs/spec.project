@@ -5,9 +5,8 @@
 # group : doom spec
 # --
 ;;-- projectile
-(after! jg-ui-reapply-hook-ready
-  (+jg-projects-add-spec '$1
-                         '(
+(spec-handling-add! projects
+  ('$1
                            ("marker-files")
                            :project-file project-file
                            :compilation-dir compilation-dir
@@ -22,7 +21,6 @@
                            :src-dir src-dir
                            :test-dir test-dir
                            :related-files-fn related-files-fn
-                           )
                          )
   )
 ;;-- end projectile

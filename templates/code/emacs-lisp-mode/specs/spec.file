@@ -5,13 +5,9 @@
 # group :
 # --
 ;;-- file spec
-(after! jg-ui-reapply-hook-ready
-  ;; $1
-  (+jg-snippets-add-file-spec
-   '${1:mode}
-   '(
-     ("$1.$2$"           :trigger "__" :mode $1-mode)
-     )
+(spec-handling-add! file-templates nil
+   ('${1:mode}
+      ("$1.$2$"           :trigger "__" :mode $1-mode)
    )
 )
 ;;-- end file spec

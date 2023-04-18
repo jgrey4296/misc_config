@@ -51,4 +51,17 @@
     (find-file _file _wildcards))
   )
 
-(add-hook! 'jg-ui-reapply-hook #'+jg-ibuffer-reapply-specs)
+(spec-handling-new! ibuffer-filters ibuffer-saved-filters nil collect
+                    (cons (symbol-name key) val)
+                    )
+
+(spec-handling-new! ibuffer-groups ibuffer-saved-filter-groups nil append
+                    (cl-loop for key being the hash-keys of table
+                             using (hash-values val)
+                             collect (cons key val)
+                             )
+                    )
+
+(spec-handling-new! ibuffer-formats ibuffer-formats nil collect
+                    val
+                    )

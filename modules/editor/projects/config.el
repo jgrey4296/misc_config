@@ -30,9 +30,13 @@
   (load! "+ivys")
   )
 
+;; +jg-projects-add-spec
+(spec-handling-new! projects projectile-project-types collect
+                    `(,key . ,(apply 'projectile--build-project-plist val))
+                    )
+
 (use-package! project-walk
   :commands (project-walk-minor-mode project-walk-next)
 )
 
-(add-hook! 'jg-ui-reapply-hook #'+jg-projects-reapply-specs)
 ;;; config.el ends here

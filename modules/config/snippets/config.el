@@ -31,9 +31,25 @@
   )
 
 ;;-- hook setup
-(add-hook 'jg-ui-reapply-hook      #'+jg-snippets-reapply-file-specs)
 (add-hook 'doom-switch-buffer-hook #'+file-templates-check-h)
 ;;-- end hook setup
+
+(spec-handling-setq! snippets
+                     +file-templates-dir jg-snippets-file-templates-dir
+                     +snippets-dir       jg-snippets-code-templates-dir
+                     yas-snippet-dirs    (-filter #'identity (list +snippets-dir +file-templates-dir doom-snippets-dir yasnippet-snippets-dir))
+                     yas--default-user-snippets-dir jg-snippets-code-templates-dir
+                     )
+
+(spec-handling-new! file-templates +file-templates-alist t append
+                    (cl-loop for rule in vars
+                             for priority = (* -1 (or (plist-get rule :priority) 0))
+                             for clean    = (cl-loop for (k v) on body by #'cddr
+                                                     unless (eq k :priority)
+                                                     collect k and collect v)
+                             collect (cons priority (cons head clean))
+                             )
+                    )
 
 (after! jg-snippets-applied
   (advice-add '+snippet--completing-read-uuid :override #'+jg-snippets--completing-read-uuid)

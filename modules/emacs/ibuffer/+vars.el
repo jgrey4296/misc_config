@@ -37,10 +37,9 @@
       )
 
 ;;-- popup spec
-(after! jg-ui-reapply-hook-ready
-  (+jg-popup-add-spec 'ibuffer
-                         '(
-                           ("^\*Ibuffer\*$"         :side right  :ttl 5 :width  0.5 :quit nil :select t :priority 50)
-                           ))
-  )
+(spec-handling-add! popup nil
+                    ('ibuffer
+                     ("^\*Ibuffer\*$"         :side right  :ttl 5 :width  0.5 :quit nil :select t :priority 50)
+                     )
+                    )
 ;;-- end popup spec

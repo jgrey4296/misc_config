@@ -5,11 +5,11 @@
 # group : doom spec
 # --
 ;;-- popup
-(after! jg-ui-reapply-hook-ready
-  (+jg-popup-add-spec
-   '$1
-   '(
-     ("^\\*$1\\*"  :side right  :ttl nil :width  0.5 :quit nil :select t :priority 50)
-     )
-   ))
+(spec-handling-add! popup nil
+                    ('$1
+                     (
+                       ("^\\*$1\\*"  :side right  :ttl nil :width  0.5 :quit nil :select t :priority 50)
+                       )
+                     )
+                    )
 ;;-- end popup

@@ -21,10 +21,17 @@
                        'js-mode)))
   :config
   (set-repl-handler! 'nix-mode #'+nix/open-repl)
-  (set-company-backend! 'nix-mode 'company-nixos-options)
-  (set-lookup-handlers! 'nix-mode
-    :documentation '(+nix/lookup-option :async t))
-  (set-popup-rule! "^\\*nixos-options-doc\\*$" :ttl 0 :quit t)
+  (spec-handling-add! company nil (nix-mode company-nixos-options))
+  (spec-handling-add! lookup-handler nil
+                      (nix-mode
+                       :documentation '(+nix/lookup-option :async t)
+                       )
+                      )
+  (spec-handling-add! popup nil
+                      ('nix
+                       ("^\\*nixos-options-doc\\*$" :ttl 0 :quit t)
+                       )
+                      )
 
   ;; Fix #3927: disable idle completion because `company-nixos-options' is
   ;; dreadfully slow. It can still be invoked manually..
@@ -35,15 +42,7 @@
   (when (modulep! +tree-sitter)
     (add-hook 'nix-mode-local-vars-hook #'tree-sitter! 'append))
 
-  (map! :localleader
-        :map nix-mode-map
-        "f" #'nix-update-fetch
-        "p" #'nix-format-buffer
-        "r" #'nix-repl-show
-        "s" #'nix-shell
-        "b" #'nix-build
-        "u" #'nix-unpack
-        "o" #'+nix/lookup-option))
+  )
 
 
 (use-package! nix-update

@@ -1,19 +1,5 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
-(map! :map yas-keymap
-       ;; "C-e"         #'+snippets/goto-end-of-field
-       ;; "C-a"         #'+snippets/goto-start-of-field
-       [M-right]     #'+snippets/goto-end-of-field
-       [M-left]      #'+snippets/goto-start-of-field
-       [M-backspace] #'+snippets/delete-to-start-of-field
-       [backspace]   #'+snippets/delete-backward-char
-       [delete]      #'+snippets/delete-forward-char-or-field
-       )
-(map! :map yas-minor-mode-map
-       [remap yas-new-snippet]        #'+snippets/new
-       [remap yas-visit-snippet-file] #'+snippets/edit
-       )
-
 ;;-- browsing
 (map! :leader
       :prefix "y"
@@ -42,10 +28,12 @@
                                             (aya-expand)))
       :desc "New snippet"           "n" #'+jg-snippets-new-snippet
       :desc "Expand Snippet"        "y" #'yas-expand-from-trigger-key
-      :desc "Edit Snippet"          "e" #'yas-visit-snippet-file
+      :desc "Edit Snippet"          "e" #'+snippets/edit
       :desc "Insert snippet"        "i" #'yas-insert-snippet
       :desc "Find global snippet"   "/" #'yas-visit-snippet-file
       :desc "Reload snippets"       "r" #'yas-reload-all
+
+
       )
 ;;-- end snippets
 

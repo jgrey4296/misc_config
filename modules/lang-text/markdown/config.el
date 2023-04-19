@@ -60,10 +60,13 @@ capture, the end position, and the output buffer.")
   :config
   (set-flyspell-predicate! '(markdown-mode gfm-mode)
     #'+markdown-flyspell-word-p)
-  (set-lookup-handlers! '(markdown-mode gfm-mode)
-    ;; `markdown-follow-thing-at-point' may open an external program or a
-    ;; buffer. No good way to tell, so pretend it's async.
-    :file '(markdown-follow-thing-at-point :async t))
+  (spec-handling-add! lookup-handler nil
+                      ((markdown-mode gfm-mode)
+                       ;; `markdown-follow-thing-at-point' may open an external program or a
+                       ;; buffer. No good way to tell, so pretend it's async.
+                       :file '(markdown-follow-thing-at-point :async t)
+                       )
+                      )
 
   (sp-local-pair '(markdown-mode gfm-mode) "`" "`"
                  :unless '(:add sp-point-before-word-p sp-point-before-same-p))

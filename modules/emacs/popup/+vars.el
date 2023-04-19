@@ -34,6 +34,10 @@ adjustment.")
 
 (defvar-local +popup--timer              nil)
 
+(defvar +popup-defaults
+  (list :side   'bottom :height 0.16 :width  40 :quit   t :select #'ignore :ttl    5)
+  "Default properties for popup rules defined with `set-popup-rule!'.")
+
 (setq window-control-popup-persist-default '(:side bottom
                                              :height 0.3
                                              :quit t
@@ -44,7 +48,6 @@ adjustment.")
 (setq jg-popup-ivy-predicate-patterns (rx (or "*helpful" "*helm-" "doom" "*dired-log" "magit" "*Free Keys")))
 (setq neo-toggle-window-keep-p t)
 
-;;-- fold spec
 (spec-handling-add! fold nil
                     ('neotree
                      :modes (neotree-mode)
@@ -57,4 +60,3 @@ adjustment.")
                                 )
                      )
                     )
-;;-- end fold spec

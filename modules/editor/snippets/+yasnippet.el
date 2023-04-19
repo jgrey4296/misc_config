@@ -28,13 +28,6 @@
         (make-directory dir t)
       (error "%S doesn't exist" (abbreviate-file-name dir)))))
 
-(define-advice yas--read-table (:override ()
-                                +jg-snippets-read-table)
-  (let ((tables (hash-table-keys yas--tables)))
-    (intern-soft (ivy-read "Snippet Table: " tables))
-    )
-  )
-
 (defun +jg-snippets--completing-read-uuid (prompt all-snippets &rest args)
   "Custom formatter for yasnippet, to display groups of snippets "
   (let* ((snippet-data (cl-loop for (_ . tpl) in (mapcan #'yas--table-templates (if all-snippets

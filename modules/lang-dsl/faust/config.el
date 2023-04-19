@@ -4,7 +4,11 @@
   :defer t
   :mode ("\\.dsp\\'" . faustine-mode)
   :config
-  (set-company-backend! '(faust-mode faustine-mode) '(company-dabbrev-code +faust-company-backend company-yasnippet))
+  (spec-handling-add! company nil
+                      ((faust-mode faustine-mode)
+                       (company-dabbrev-code +faust-company-backend company-yasnippet)
+                       )
+                      )
 
   ;; HACK Both `faust-mode' and `faustine-mode' are hardcoded to use
   ;; auto-complete. This silences the obnoxious 'You really should install and
@@ -23,4 +27,5 @@
         "h" #'faustine-online-doc
         "o" #'faustine-toggle-output-buffer
         "s" #'faustine-source-code
-        "r" #'faustine-run))
+        "r" #'faustine-run)
+  )

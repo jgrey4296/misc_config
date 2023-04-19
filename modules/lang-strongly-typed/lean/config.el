@@ -33,4 +33,5 @@
   :after lean-mode
   :init
   (advice-add #'company-lean-hook :override #'ignore)
-  (set-company-backend! 'lean-mode 'company-lean))
+  (spec-handling-add! company nil (lean-mode company-lean))
+  )

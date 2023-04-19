@@ -4,13 +4,8 @@
 
 (require 'doom-themes)
 
-(defface font-lock-operator-face
-  '((t :background  "darkseagreen2")
-    )
-  "Missing face used in python mode"
-  :group 'font-lock
-  )
-
+(defface font-lock-operator-face '((t :background  "darkseagreen2")) "Missing face used in python mode" :group 'font-lock)
+(defface highlight-numbers-number '() "missing face" :group 'highlight)
 
 ;;-- variables
 (defgroup jg-iosvkem-theme nil

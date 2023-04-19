@@ -20,10 +20,10 @@
               )
 
 ;;-- lookup spec
-(after! jg-ui-reapply-hook-ready!
-  (+jg-browse-add-lookup-spec 'twitter
-            '(("Twitter"            "https://twitter.com/%s"))
-            )
-  )
+(spec-handling-add! lookup-url nil
+                    ('twitter
+                     ("Twitter"            "https://twitter.com/%s")
+                     )
+                    )
 
 ;;-- end lookup spec

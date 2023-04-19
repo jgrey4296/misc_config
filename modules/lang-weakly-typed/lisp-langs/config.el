@@ -15,59 +15,9 @@
   :mode ("\\.Cask\\'" . emacs-lisp-mode)
   :interpreter ("doomscript" . emacs-lisp-mode)
   :config
-  (set-repl-handler! '(emacs-lisp-mode lisp-interaction-mode) #'+emacs-lisp/open-repl)
-  (set-eval-handler! '(emacs-lisp-mode lisp-interaction-mode) #'+emacs-lisp-eval)
-  (set-lookup-handlers! '(emacs-lisp-mode lisp-interaction-mode helpful-mode)
-    :definition    #'+emacs-lisp-lookup-definition
-    :documentation #'+emacs-lisp-lookup-documentation)
-  (set-docsets! '(emacs-lisp-mode lisp-interaction-mode) "Emacs Lisp")
-  (set-ligatures! 'emacs-lisp-mode :lambda "lambda")
-  (set-rotate-patterns! 'emacs-lisp-mode
-    :symbols '(("t" "nil")
-               ("let" "let*")
-               ("when" "unless")
-               ("advice-add" "advice-remove")
-               ("defadvice!" "undefadvice!")
-               ("add-hook" "remove-hook")
-               ("add-hook!" "remove-hook!")
-               ("it" "xit")
-               ("describe" "xdescribe")))
-
-  (setq-hook! 'emacs-lisp-mode-hook
-    ;; Emacs' built-in elisp files use a hybrid tab->space indentation scheme
-    ;; with a tab width of 8. Any smaller and the indentation will be
-    ;; unreadable. Since Emacs' lisp indenter doesn't respect this variable it's
-    ;; safe to ignore this setting otherwise.
-    tab-width 8
-    ;; Don't treat autoloads or sexp openers as outline headers, we have
-    ;; hideshow for that.
-    outline-regexp +emacs-lisp-outline-regexp
-    outline-level #'+emacs-lisp-outline-level)
-
-  ;; Fixed indenter that intends plists sensibly.
-  (advice-add #'calculate-lisp-indent :override #'+emacs-lisp--calculate-lisp-indent-a)
-
   ;; variable-width indentation is superior in elisp. Otherwise, `dtrt-indent'
   ;; and `editorconfig' would force fixed indentation on elisp.
   (add-to-list 'doom-detect-indentation-excluded-modes 'emacs-lisp-mode)
-
-  (add-hook! 'emacs-lisp-mode-hook
-             ;; Allow folding of outlines in comments
-             #'outline-minor-mode
-             ;; Make parenthesis depth easier to distinguish at a glance
-             #'rainbow-delimiters-mode
-             ;; Make quoted symbols easier to distinguish from free variables
-             #'highlight-quoted-mode
-             ;; Extend imenu support to Doom constructs
-             #'+emacs-lisp-extend-imenu-h
-             ;; Ensure straight sees modifications to installed packages
-             #'+emacs-lisp-init-straight-maybe-h)
-
-  ;; UX: Flycheck's two emacs-lisp checkers produce a *lot* of false positives
-  ;;   in non-packages (like Emacs configs or elisp scripts), so I disable
-  ;;   `emacs-lisp-checkdoc' and set `byte-compile-warnings' to a subset of the
-  ;;   original in the flycheck instance (see `+emacs-lisp-linter-warnings').
-  (add-hook 'flycheck-mode-hook #'+emacs-lisp-non-package-mode)
 
   ;; Enhance elisp syntax highlighting, by highlighting Doom-specific
   ;; constructs, defined symbols, and truncating :pin's in `package!' calls.
@@ -80,6 +30,9 @@
            ;; highlight defined, special variables & functions
            (when +emacs-lisp-enable-extra-fontification
              `((+emacs-lisp-highlight-vars-and-faces . +emacs-lisp--face)))))
+
+  ;; Fixed indenter that intends plists sensibly.
+  (advice-add #'calculate-lisp-indent :override #'+emacs-lisp--calculate-lisp-indent-a)
 
   ;; Recenter window after following definition
   (advice-add #'elisp-def :after #'doom-recenter-a)
@@ -100,31 +53,40 @@
                             (if (< (length str) limit) "" truncated))))
         ret)))
 
-  (add-hook! 'emacs-lisp-mode-hook :depth 100
-    (setq-local jg-text-whitespace-clean-hook
-                '(delete-trailing-whitespace
-                  +jg-lisp-cleanup-ensure-newline
-                  +jg-text-cleanup-whitespace)
-                )
-    )
+  ;; UX: Flycheck's two emacs-lisp checkers produce a *lot* of false positives
+  ;;   in non-packages (like Emacs configs or elisp scripts), so I disable
+  ;;   `emacs-lisp-checkdoc' and set `byte-compile-warnings' to a subset of the
+  ;;   original in the flycheck instance (see `+emacs-lisp-linter-warnings').
+  (add-hook 'flycheck-mode-hook #'+emacs-lisp-non-package-mode)
+
+  (add-hook! 'emacs-lisp-mode-hook
+             ;; Allow folding of outlines in comments
+             #'outline-minor-mode
+             ;; Make parenthesis depth easier to distinguish at a glance
+             #'rainbow-delimiters-mode
+             ;; Make quoted symbols easier to distinguish from free variables
+             #'highlight-quoted-mode
+             ;; Extend imenu support to Doom constructs
+             #'+emacs-lisp-extend-imenu-h
+             ;; Ensure straight sees modifications to installed packages
+             #'+emacs-lisp-init-straight-maybe-h)
+
+  (setq-hook! 'emacs-lisp-mode-hook
+    ;; Emacs' built-in elisp files use a hybrid tab->space indentation scheme
+    ;; with a tab width of 8. Any smaller and the indentation will be
+    ;; unreadable. Since Emacs' lisp indenter doesn't respect this variable it's
+    ;; safe to ignore this setting otherwise.
+    tab-width 8
+    ;; Don't treat autoloads or sexp openers as outline headers, we have
+    ;; hideshow for that.
+    outline-regexp +emacs-lisp-outline-regexp
+    outline-level #'+emacs-lisp-outline-level)
 
   )
 
 (use-package! racket-mode
   :mode "\\.rkt\\'"  ; give it precedence over :lang scheme
   :config
-  (set-repl-handler! 'racket-mode #'+racket/open-repl)
-  (set-lookup-handlers! '(racket-mode racket-repl-mode)
-    :definition    #'+racket-lookup-definition
-    :documentation #'+racket-lookup-documentation)
-  (set-docsets! 'racket-mode "Racket")
-  (set-ligatures! 'racket-mode
-    :lambda  "lambda"
-    :map     "map"
-    :dot     ".")
-  (set-rotate-patterns! 'racket-mode
-    :symbols '(("#true" "#false")))
-
   (add-hook! 'racket-mode-hook
              #'rainbow-delimiters-mode
              #'highlight-quoted-mode)
@@ -150,9 +112,6 @@
 (use-package! ielm
   :defer t
   :config
-  (set-lookup-handlers! 'inferior-emacs-lisp-mode
-    :definition    #'+emacs-lisp-lookup-definition
-    :documentation #'+emacs-lisp-lookup-documentation)
 
   ;; Adapted from http://www.modernemacs.com/post/comint-highlighting/ to add
   ;; syntax highlighting to ielm REPLs.
@@ -176,14 +135,18 @@
                                (let ((state (syntax-ppss)))
                                  (not (or (nth 3 state)
                                           (nth 4 state))))))
-                           ,@match-highlights)))))
+                           ,@match-highlights))))
+
+  )
 
 (use-package! flycheck-cask
   :when (modulep! :checkers syntax)
   :defer t
   :init
   (add-hook! 'emacs-lisp-mode-hook
-    (add-hook 'flycheck-mode-hook #'flycheck-cask-setup nil t)))
+    (add-hook 'flycheck-mode-hook #'flycheck-cask-setup nil t))
+
+  )
 
 (use-package! flycheck-package
   :when (modulep! :checkers syntax)
@@ -207,7 +170,6 @@
   ;; it will associate it with the mode.
   (defvar buttercup-minor-mode-map (make-sparse-keymap))
   :config
-  (set-popup-rule! "^\\*Buttercup\\*$" :size 0.45 :select nil :ttl 0)
   (set-yas-minor-mode! 'buttercup-minor-mode)
   (when (featurep 'evil)
     (add-hook 'buttercup-minor-mode-hook #'evil-normalize-keymaps))

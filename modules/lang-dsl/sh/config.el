@@ -6,7 +6,6 @@
     "sleep" "sudo" "touch")
   "A list of common shell commands to be fontified especially in `sh-mode'.")
 
-
 ;;
 ;;; Packages
 
@@ -23,7 +22,7 @@
       ("-i" "%d" (unless indent-tabs-mode tab-width))
       ("-ln" "%s" (pcase sh-shell (`bash "bash") (`mksh "mksh") (_ "posix")))))
   (set-repl-handler! 'sh-mode #'+sh/open-repl)
-  (set-lookup-handlers! 'sh-mode :documentation #'+sh-lookup-documentation-handler)
+  (spec-handling-add! lookup-handler nil (sh-mode :documentation +sh-lookup-documentation-handler))
   (set-ligatures! 'sh-mode
     ;; Functional
     :def "function"
@@ -82,7 +81,7 @@
   :unless (modulep! +lsp)
   :after sh-script
   :config
-  (set-company-backend! 'sh-mode '(company-shell company-files))
+  (spec-handling-add! company nil (sh-mode (company-shell company-files)))
   (setq company-shell-delete-duplicates t
         ;; whatis lookups are exceptionally slow on macOS (#5860)
         company-shell-dont-fetch-meta IS-MAC))
@@ -90,11 +89,14 @@
 (use-package! fish-mode
   :when (modulep! +fish)
   :defer t
-  :config (set-formatter! 'fish-mode #'fish_indent))
+  :config
+  (set-formatter! 'fish-mode #'fish_indent)
+  )
 
 (use-package! powershell
   :when (modulep! +powershell)
   :defer t
   :config
   (when (modulep! +lsp)
-    (add-hook 'powershell-mode-local-vars-hook #'lsp! 'append)))
+    (add-hook 'powershell-mode-local-vars-hook #'lsp! 'append))
+  )

@@ -51,12 +51,16 @@
       (merlin-mode)))
 
   (after! tuareg
-    (set-company-backend! 'tuareg-mode 'merlin-company-backend)
-    (set-lookup-handlers! 'tuareg-mode :async t
-      :definition #'merlin-locate
-      :references #'merlin-occurrences
-      :documentation #'merlin-document))
-  :config
+    (spec-handling-add! company nil (tuareg-mode merlin-company-backend))
+    (spec-handling-add! lookup-handler nil
+                        (tuareg-mode :async t
+                                     :definition #'merlin-locate
+                                     :references #'merlin-occurrences
+                                     :documentation #'merlin-document
+                                     )
+                        )
+    )
+    :config
   (setq merlin-completion-with-doc t)
 
   (map! :localleader

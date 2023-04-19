@@ -1,12 +1,20 @@
 ;;; lang/rest/config.el -*- lexical-binding: t; -*-
 
+(after! jg-bindings-total
+  (load! "+bindings")
+  )
+
 (use-package! restclient
   :defer t
   :mode ("\\.http\\'" . restclient-mode)
   ;; line numbers aren't enabled by default in fundamental-mode-derived modes
   :hook (restclient-mode . display-line-numbers-mode)
   :config
-  (set-popup-rule! "^\\*HTTP Response" :size 0.4 :quit 'other)
+  (spec-handling-add! popup nil
+                      ('rest
+                       ("^\\*HTTP Response" :size 0.4 :quit 'other)
+                       )
+                      )
 
   (setq-hook! 'restclient-mode-hook
     imenu-generic-expression '((nil "^[A-Z]+\s+.+" 0)))
@@ -19,30 +27,20 @@ certs, rather than reject them silently."
     (let (gnutls-verify-error)
       (apply fn args)))
 
-  (map! :map restclient-mode-map
-        :n [return] #'+rest/dwim-at-point
-        :n "za" #'restclient-toggle-body-visibility
-        :n "zm" #'+rest/fold-all
-        :n "zr" #'outline-show-all
-
-        :localleader
-        "e" #'restclient-http-send-current
-        "E" #'restclient-http-send-current-raw
-        "c" #'restclient-copy-curl-command))
-
+ )
 
 (use-package! company-restclient
   :defer t
   :when (modulep! :completion company)
   :after restclient
-  :config (set-company-backend! 'restclient-mode 'company-restclient))
-
+  :config
+  (spec-handling-add! company nil (restclient-mode company-restclient))
+  )
 
 (use-package! restclient-jq
   :defer t
   :when (modulep! +jq)
   :after restclient)
-
 
 (use-package! jq-mode
   :defer t

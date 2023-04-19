@@ -28,4 +28,5 @@
   :when (modulep! :completion company)
   :hook (sml-mode . company-mlton-init)
   :config
-  (set-company-backend! 'sml-mode company-mlton-grouped-backend))
+  (spec-handling-add! company nil (sml-mode company-mlton-grouped-backend))
+  )

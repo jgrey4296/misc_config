@@ -3,15 +3,15 @@
 (doom!
  :config default bindings completion disabled help programming search ui
  :app   (rss +org)
- :completion company ivy jg-company
+ :completion company ivy
 
  :editor char-insert fold navigation projects tagging text-manipulation
  :editor (evil +everywhere) format
- :editor fold snippets word-wrap rotate-text
+ :editor fold snippets word-wrap rotate-text lookup
  ;;:editor multiple-cursors
 
  :emacs electric vc
- :emacs browse dired hydra ibuffer misc popup version-control
+ :emacs dired hydra ibuffer misc popup version-control
 
  ;; :lang-data csv graphql
  :lang-data xml toml json yaml logs
@@ -28,7 +28,7 @@
  :lang-strongly-typed jvm-langs dotnet-langs
 
  :lang-text inform web
- :lang-text (org +gnuplot +pomodoro +journal +noter) +org
+ :lang-text (org +gnuplot +pomodoro +journal +noter)
  :lang-text bibtex latex markdown plantuml rst
 
  :lang-weakly-typed lisp-langs (python +conda +pyright +cython +lsp) lua
@@ -52,7 +52,7 @@
 
  :checkers syntax (spell +flyspell) grammar
 
- :tools debugger doot lookup (eval +overlay) lsp magit mail tmux twitter pdfs
+ :tools debugger doot  (eval +overlay) lsp mail tmux twitter pdfs
  :tools editorconfig rgb tree-sitter mail
  ;;:tools ein make
 

@@ -19,21 +19,16 @@
 
 ;;-- end links
 
-;;-- browse specs
-(after! jg-ui-reapply-hook-ready
-  (+jg-browse-add-lookup-spec 'erlang
-            '(
-              ("Erlang/OPT" "https://www.erlang.org/doc/search?q=%s")
-              ("Elixir"     "https://hexdocs.pm/elixir/search.html?q=%s")
-            )
-            )
-  )
+;;-- specs
+(spec-handling-add! lookup-url nil
+                   ('erlang
+                      ("Erlang/OPT" "https://www.erlang.org/doc/search?q=%s")
+                      ("Elixir"     "https://hexdocs.pm/elixir/search.html?q=%s")
+                      )
+                   )
 
-;;-- end browse specs
-
-;;-- projectile
 (spec-handling-add! projects nil
                     ('elixir ("mix.exs") :project-file "mix.exs" :compilation-dir nil :configure nil :compile "mix compile" :test "mix test" :install nil :package nil :run nil :test-suffix "_test" :src-dir "lib/")
                     ('rebar ("rebar.config") :project-file "rebar.config" :compilation-dir nil :configure nil :compile "rebar3 compile" :test "rebar3 do eunit,ct" :install nil :package nil :run nil :test-suffix "_SUITE")
   )
-;;-- end projectile
+;;-- end specs

@@ -3,7 +3,6 @@
 ;; sp's default rules are obnoxious, so disable them
 (provide 'smartparens-lua)
 
-
 ;;
 ;;; Major modes
 
@@ -13,10 +12,10 @@
   ;; lua-indent-level defaults to 3 otherwise. Madness.
   (setq lua-indent-level 2)
   :config
-  (set-lookup-handlers! 'lua-mode :documentation 'lua-search-documentation)
+  (spec-handling-add! lookup-handler nil (lua-mode :documentation 'lua-search-documentation))
   (set-electric! 'lua-mode :words '("else" "end"))
   (set-repl-handler! 'lua-mode #'+lua/open-repl)
-  (set-company-backend! 'lua-mode '(company-lua company-yasnippet))
+  (spec-handling-add! company nil (lua-mode (company-lua company-yasnippet)))
 
   (when (modulep! +lsp)
     (add-hook 'lua-mode-local-vars-hook #'lsp! 'append)
@@ -44,8 +43,9 @@ lua-language-server.")
       (set-eglot-client! 'lua-mode (+lua-generate-lsp-server-command)))
 
     (when (modulep! +tree-sitter)
-      (add-hook 'lua-mode-local-vars-hook #'tree-sitter! 'append))))
+      (add-hook 'lua-mode-local-vars-hook #'tree-sitter! 'append)))
 
+  )
 
 (use-package! moonscript
   :when (modulep! +moonscript)
@@ -59,14 +59,15 @@ lua-language-server.")
   (when (modulep! :checkers syntax)
     (require 'flycheck-moonscript nil t)))
 
-
 (use-package! fennel-mode
   :when (modulep! +fennel)
   :defer t
   :config
-  (set-lookup-handlers! 'fennel-mode
-    :definition #'fennel-find-definition
-    :documentation #'fennel-show-documentation)
+  (spec-handling-add! lookup-handler nil
+                      (fennel-mode
+                       :definition #'fennel-find-definition
+                       :documentation #'fennel-show-documentation)
+                      )
   (set-repl-handler! 'fennel-mode #'fennel-repl)
 
   (setq-hook! 'fennel-mode-hook
@@ -77,11 +78,9 @@ lua-language-server.")
     outline-regexp "[ \t]*;;;;* [^ \t\n]")
 
   (when (modulep! +tree-sitter)
-    (add-hook! 'fennel-mode-local-vars-hook 'tree-sitter! 'append)))
+    (add-hook! 'fennel-mode-local-vars-hook 'tree-sitter! 'append))
 
-
-;;
-;;; Frameworks
+  )
 
 (def-project-mode! +lua-love-mode
   :modes '(moonscript-mode lua-mode markdown-mode json-mode)

@@ -57,7 +57,7 @@
 (map! :map jg-binding-normal-state-map ;; Commands
       :desc "Use Register"       "'"   #'evil-use-register
       :desc "Join"               "J"   #'evil-join
-      :desc "Lookup"             "K"   #'+lookup/documentation
+      ;; K
       :desc "Indent"             "TAB" #'indent-for-tab-command
       :desc "Evil-Ex"            ":"   #'evil-ex
       :desc "Invert Char"        "~"   #'evil-invert-char

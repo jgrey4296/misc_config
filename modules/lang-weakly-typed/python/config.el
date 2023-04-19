@@ -90,11 +90,13 @@
   (add-hook! 'python-mode-local-vars-hook :append
              #'+python-init-anaconda-mode-maybe-h)
   :config
-  (set-company-backend! 'anaconda-mode 'company-anaconda)
-  (set-lookup-handlers! 'anaconda-mode
-    :definition #'+jg-conda-find-defs
-    :references #'+jg-conda-find-references
-    :documentation #'+jg-conda-show-doc)
+  (spec-handling-add! company nil (anaconda-mode company-anaconda))
+  (spec-handling-add! lookup-handler nil
+                      (anaconda-mode
+                       :definition #'+jg-conda-find-defs
+                       :references #'+jg-conda-find-references
+                       :documentation #'+jg-conda-show-doc)
+                      )
 
   (add-hook 'anaconda-mode-hook #'anaconda-eldoc-mode)
 

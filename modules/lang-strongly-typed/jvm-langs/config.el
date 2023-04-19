@@ -6,11 +6,9 @@
 
   )
 (load! "+repl")
+(load! "+gradle")
 (after! projectile
   (pushnew! projectile-project-root-files "gradlew" "build.gradle"))
-
-;;
-;;; java-mode
 
 (use-package! java-mode
   :commands java-mode

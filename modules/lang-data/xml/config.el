@@ -39,12 +39,13 @@
   :config
   (setq nxml-slash-auto-complete-flag t
         nxml-auto-insert-xml-declaration-flag t)
-  (set-company-backend! 'nxml-mode '(company-nxml company-yasnippet))
+  (spec-handling-add! company nil (nxml-mode (company-nxml company-yasnippet)))
   (setq-hook! 'nxml-mode-hook tab-width nxml-child-indent)
   (add-hook! 'nxml-mode-hook 'hs-minor-mode)
   )
 
-(when (modulep! +lsp) (add-hook! '(nxml-mode-local-vars-hook html-mode-local-vars-hook) :append #'lsp!))
+(when (modulep! +lsp)
+  (add-hook! '(nxml-mode-local-vars-hook html-mode-local-vars-hook) :append #'lsp!))
 
 (when (modulep! +tree-sitter)
   (add-hook! '(html-mode-local-vars-hook

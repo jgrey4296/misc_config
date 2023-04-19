@@ -1,6 +1,7 @@
 ;;; editor/snippets/config.el -*- lexical-binding: t; -*-
 
 (load! "+vars")
+(load! "+yasnippet")
 (after! (yasnippet jg-bindings-total)
   (load! "+bindings")
   )
@@ -14,15 +15,11 @@
   :defer-incrementally eldoc easymenu help-mode
   :commands (yas-minor-mode yas-minor-mode-on yas-expand yas-expand-snippet yas-lookup-snippet yas-insert-snippet yas-new-snippet yas-visit-snippet-file yas-activate-extra-mode yas-deactivate-extra-mode yas-maybe-expand-abbrev-key-filter)
   :init
-
   ;; Lazy load yasnippet until it is needed
   (add-transient-hook! #'company-yasnippet (require 'yasnippet))
 
   :config
   (add-to-list 'doom-debug-variables '(yas-verbosity . 3))
-
-  ;; default snippets library, if available
-  (add-to-list 'load-path +snippets-dir)
 
   ;; HACK In case `+snippets-dir' and `doom-snippets-dir' are the same, or duplicates exist in `yas-snippet-dirs'.
   (advice-add #'yas-snippet-dirs :filter-return #'delete-dups)
@@ -79,8 +76,23 @@
         (when +snippets--smartparens-enabled-p
           (smartparens-mode 1)))))
 
+  (define-advice yas--read-table (:override () +jg-snippets)
+    (let ((tables (hash-table-keys yas--tables)))
+      (intern-soft (ivy-read "Snippet Table: " tables))
+      )
+    )
+
+  (advice-add '+snippet--completing-read-uuid :override #'+jg-snippets--completing-read-uuid)
+
   ;; If in a daemon session, front-load this expensive work:
   (yas-global-mode +1)
+  )
+
+(use-package! yasnippet-snippets
+  :defer t
+  :after yasnippet
+  :config
+  (push yasnippet-snippets-dir jg-snippet-dirs)
   )
 
 (use-package! doom-snippets
@@ -109,13 +121,8 @@ swaps `yas-global-mode' with `yas-minor-mode'."
                              for priority = (* -1 (or (plist-get rule :priority) 0))
                              for clean    = (cl-loop for (k v) on rule by #'cddr
                                                      unless (eq k :priority)
-                                                     collect k and collect v)
-                             collect (cons priority (cons key clean))
+                                                     if k collect k
+                                                     if v collect v)
+                             collect (cons priority clean)
                              )
                     )
-
-(after! jg-snippets-applied
-  (advice-add '+snippet--completing-read-uuid :override #'+jg-snippets--completing-read-uuid)
-  (add-hook 'yas-prompt-functions #'+jg-snippets-yas-prompt-fn -90)
-  (yas-reload-all)
-  )

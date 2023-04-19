@@ -4,3 +4,4 @@
 (package! yasnippet)
 (package! auto-yasnippet)
 (package! doom-snippets :recipe (:host github :repo "doomemacs/snippets" :files (:defaults "*")))
+(package! yasnippet-snippets)

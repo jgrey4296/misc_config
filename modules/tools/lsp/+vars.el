@@ -63,7 +63,7 @@ Can be a list of backends; accepts any value `company-backends' accepts.")
 
 ;;-- end ignore dirs
 
-;;-- popup
+;;-- specs
 (spec-handling-add! popup nil
                     ('lsp
                      (
@@ -73,9 +73,7 @@ Can be a list of backends; accepts any value `company-backends' accepts.")
                       )
                      )
                     )
-;;-- end popup
 
-;;-- fold spec
 (spec-handling-add! fold nil
                     ('lsp-browser
                      :modes (lsp-browser-mode)
@@ -88,38 +86,41 @@ Can be a list of backends; accepts any value `company-backends' accepts.")
                                 )
                      )
                     )
-;;-- end fold spec
 
-;;-- lookup spec
-(after! jg-ui-reapply-hook-ready
-  (+jg-browse-add-lookup-spec 'lsp'
-                              '("lsp" "url")
+;; (spec-handling-add! lookup-url nil
+;;                     ('lsp
+;;                      ("lsp" "url")
+;;                      )
+;;                     )
 
-                              )
+(spec-handling-add! lookup-handler nil
+                    (lsp-mode
+                     :definition #'+lsp-lookup-definition-handler
+                     :references #'+lsp-lookup-references-handler
+                     :documentation '(lsp-describe-thing-at-point :async t)
+                     :implementations '(lsp-find-implementation :async t)
+                     :type-definition #'lsp-find-type-definition
+                     )
+                    (eglot--managed-mode
+                     :definition      #'xref-find-definitions
+                     :references      #'xref-find-references
+                     :implementations #'eglot-find-implementation
+                     :type-definition #'eglot-find-typeDefinition
+                     :documentation   #'+eglot-lookup-documentation
+                     )
+                    )
 
-  (set-lookup-handlers! 'lsp-mode
-    :definition #'+lsp-lookup-definition-handler
-    :references #'+lsp-lookup-references-handler
-    :documentation '(lsp-describe-thing-at-point :async t)
-    :implementations '(lsp-find-implementation :async t)
-    :type-definition #'lsp-find-type-definition)
-
-  (when (modulep! +peek)
-    (set-lookup-handlers! 'lsp-ui-mode
-      :definition      'lsp-ui-peek-find-definitions
-      :implementations 'lsp-ui-peek-find-implementation
-      :references      'lsp-ui-peek-find-references
-      :async t)
-    )
-
-  (set-lookup-handlers! 'eglot--managed-mode
-    :definition      #'xref-find-definitions
-    :references      #'xref-find-references
-    :implementations #'eglot-find-implementation
-    :type-definition #'eglot-find-typeDefinition
-    :documentation   #'+eglot-lookup-documentation
-    )
-
+(when (modulep! +peek)
+  (spec-handling-add! lookup-handler nil
+                      (lsp-ui-mode
+                       :definition         'lsp-ui-peek-find-definitions
+                       :implementations    'lsp-ui-peek-find-implementation
+                       :references         'lsp-ui-peek-find-references
+                       :async t
+                       )
+                      )
   )
 
-;;-- end lookup spec
+
+
+;;-- end specs

@@ -34,8 +34,29 @@
                              LaTeX-section-label)
         LaTeX-fill-break-at-separators nil
         LaTeX-item-indent 0)
-  (when +latex--company-backends
-    (set-company-backend! 'latex-mode +latex--company-backends))
+  (spec-handling-add! company nil (latex-mode +latex--company-backends))
+  )
+
+
+;; Fix #1849: allow fill-paragraph in itemize/enumerate.
+(defadvice! +latex--re-indent-itemize-and-enumerate-a (fn &rest args)
+  :around #'LaTeX-fill-region-as-para-do
+  (let ((LaTeX-indent-environment-list
+         (append LaTeX-indent-environment-list
+                 '(("itemize"   +latex-indent-item-fn)
+                   ("enumerate" +latex-indent-item-fn)))))
+    (apply fn args)))
+(defadvice! +latex--dont-indent-itemize-and-enumerate-a (fn &rest args)
+  :around #'LaTeX-fill-region-as-paragraph
+  (let ((LaTeX-indent-environment-list LaTeX-indent-environment-list))
+    (delq! "itemize" LaTeX-indent-environment-list 'assoc)
+    (delq! "enumerate" LaTeX-indent-environment-list 'assoc)
+    (apply fn args)))
+
+(use-package! tex-mode
+  :defer t
+  :mode ("\\.tex\\'" . LaTeX-mode)
+  :config
 
   ;; Provide proper indentation for LaTeX "itemize", "enumerate", and
   ;; "description" environments. See
@@ -43,39 +64,7 @@
   ;; Set `+latex-indent-item-continuation-offset' to 0 to disable this.
   (dolist (env '("itemize" "enumerate" "description"))
     (add-to-list 'LaTeX-indent-environment-list `(,env +latex-indent-item-fn)))
-
-  ;; Fix #1849: allow fill-paragraph in itemize/enumerate.
-  (defadvice! +latex--re-indent-itemize-and-enumerate-a (fn &rest args)
-    :around #'LaTeX-fill-region-as-para-do
-    (let ((LaTeX-indent-environment-list
-           (append LaTeX-indent-environment-list
-                   '(("itemize"   +latex-indent-item-fn)
-                     ("enumerate" +latex-indent-item-fn)))))
-      (apply fn args)))
-  (defadvice! +latex--dont-indent-itemize-and-enumerate-a (fn &rest args)
-    :around #'LaTeX-fill-region-as-paragraph
-    (let ((LaTeX-indent-environment-list LaTeX-indent-environment-list))
-      (delq! "itemize" LaTeX-indent-environment-list 'assoc)
-      (delq! "enumerate" LaTeX-indent-environment-list 'assoc)
-      (apply fn args))))
-(after! (latex smartparens-latex)
-  ;; We have to use lower case modes here, because `smartparens-mode' uses
-  ;; the same during configuration.
-  (let ((modes '(tex-mode plain-tex-mode latex-mode LaTeX-mode)))
-    ;; All these excess pairs dramatically slow down typing in LaTeX buffers,
-    ;; so we remove them. Let snippets do their job.
-    (dolist (open '("\\left(" "\\left[" "\\left\\{" "\\left|"
-                    "\\bigl(" "\\biggl(" "\\Bigl(" "\\Biggl(" "\\bigl["
-                    "\\biggl[" "\\Bigl[" "\\Biggl[" "\\bigl\\{" "\\biggl\\{"
-                    "\\Bigl\\{" "\\Biggl\\{"
-                    "\\lfloor" "\\lceil" "\\langle"
-                    "\\lVert" "\\lvert" "`"))
-      (sp-local-pair modes open nil :actions :rem))
-    ;; And tweak these so that users can decide whether they want use LaTeX
-    ;; quotes or not, via `+latex-enable-plain-double-quotes'.
-    (sp-local-pair modes "``" nil :unless '(:add sp-in-math-p))))
-(add-to-list 'auto-mode-alist '("\\.tex\\'" . LaTeX-mode))
-(use-package! tex-mode :defer t)
+  )
 
 (use-package! tex-fold
   :defer t
@@ -110,7 +99,7 @@ Math faces should stay fixed by the mixed-pitch blacklist, this is mostly for
                       'TeX-fold-folded-face
                       :family (face-attribute 'variable-pitch :family)
                       :height (face-attribute 'variable-pitch :height))))))
-)
+  )
 
 (use-package! preview
   :defer t
@@ -132,7 +121,7 @@ Math faces should stay fixed by the mixed-pitch blacklist, this is mostly for
   :config
   ;; Use \( ... \) instead of $ ... $.
   (setq cdlatex-use-dollar-to-ensure-math nil)
- )
+  )
 
 ;; Nicely indent lines that have wrapped when visual line mode is activated.
 (use-package! adaptive-wrap
@@ -179,14 +168,16 @@ Math faces should stay fixed by the mixed-pitch blacklist, this is mostly for
   :hook (LaTeX-mode . reftex-mode)
   :config
   ;; Set up completion for citations and references.
-  (set-company-backend! 'reftex-mode 'company-reftex-labels 'company-reftex-citations)
-  (when (modulep! :editor evil)
-    (add-hook 'reftex-mode-hook #'evil-normalize-keymaps))
+  (spec-handling-add! company nil (reftex-mode (company-reftex-labels company-reftex-citations)))
+  (add-hook 'reftex-mode-hook #'evil-normalize-keymaps)
+
   (add-hook! 'reftex-toc-mode-hook
     (reftex-toc-rescan)
     (map! :map 'local
           :e "j"   #'next-line
           :e "k"   #'previous-line
           :e "q"   #'kill-buffer-and-window
-          :e "ESC" #'kill-buffer-and-window))
+          :e "ESC" #'kill-buffer-and-window
+          )
+    )
   )

@@ -29,24 +29,26 @@
 (require 'f)
 
 (defvar tagging-minor-mode-global-tags      (make-hash-table :test 'equal))
+
 (defvar-local tagging-minor-mode-local-tags (make-hash-table :test 'equal))
+
 (defvar tagging-minor-mode-marker           (make-marker))
+
 (defvar tagging-minor-mode-substitution-sources  (expand-file-name "~/github/jgrey4296.github.io/resources/tags/substitutions"))
+
 (defvar tagging-minor-mode-main-loc         (expand-file-name "~/github/jgrey4296.github.io/.temp/tags/totals.tags"))
+
 (defvar tagging-minor-mode-all-tags         nil)
-(defvar tagging-minor-mode-spec-table       (make-hash-table))
 
-;;-- spec registration
-(defun tagging-minor-mode-add-spec  (sym defsAlist)
-  " Register a mode symbol with an alist for :get :set :new and :buff tags
-call when the evil-ex command 't[ag]' is called"
-  (message "Registering Tag Handlers for %s" sym)
-    (puthash sym defsAlist tagging-minor-mode-spec-table)
-  )
-
-;;-- end spec registration
+(defvar-local tagging-minor-mode-handlers '(:new #'tagging-minor-mode-new-tag-default
+                                            :set #'tagging-minor-mode-set-tags-default
+                                            :get #'tagging-minor-mode-get-tag-default
+                                            :buff #'tagging-minor-mode-buffer-tags-default
+                                            )
+                                            "A plist of handlers for tagging")
 
 ;;-- mode def
+
 (define-minor-mode tagging-minor-mode
   "  "
   :init-value nil
@@ -80,67 +82,51 @@ call when the evil-ex command 't[ag]' is called"
   )
 
 ;;-- defaults
-(defun tagging-minor-mode-set-tags-default (x)
 
+(defun tagging-minor-mode-set-tags-default (x)
+  (warn "Default Set Tags")
   )
 
 (defun tagging-minor-mode-new-tag-default (x)
-
+  (warn "Default New Tag")
   )
 
-(defun tagging-minor-mode-get-tag-default (x)
-
+(defun tagging-minor-mode-get-tag-default ()
+  (warn "Default Get Tag")
   )
 
-(defun tagging-minor-mode-buffer-tags-default (x)
-
+(defun tagging-minor-mode-buffer-tags-default ()
+  (warn "Default Tag Bugger")
   )
 
-(tagging-minor-mode-add-spec 'default '((:get tagging-minor-mode-get-tag-default)
-                                        (:set tagging-minor-mode-set-tags-default)
-                                        (:new tagging-minor-mode-new-tag-default)
-                                        (:buff tagging-minor-mode-buffer-tags-default)
-                                        ))
 ;;-- end defaults
 
-(defun tagging-minor-mode--get-handlers ()
-  (or (gethash major-mode tagging-minor-mode-spec-table nil)
-      (gethash 'default tagging-minor-mode-spec-table))
-  )
 
 (defun tagging-minor-mode-set-tags (x)
   "Utility action to set tags. Works in org *and* bibtex files"
-  (let ((handlers (tagging-minor-mode--get-handlers)))
-    (save-excursion
-      (funcall (alist-get :set handlers) x)
+  (save-excursion
+    (funcall (plist-get (buffer-local-value 'tagging-minor-mode-handlers (current-buffer)) :set) x)
       )
-    )
-)
+  )
 
 (defun tagging-minor-mode-set-new-tag (x)
   "Utility action to add a new tag. Works for org *and* bibtex"
-  (let ((handlers (tagging-minor-mode--get-handlers)))
     (save-excursion
-      (funcall (alist-get :new handlers) x)
-      )
+      (funcall (plist-get (buffer-local-value 'tagging-minor-mode-handlers (current-buffer)) :new) x)
     )
   )
 
 (defun tagging-minor-mode-get-tags ()
   "Utility action to get tags for current entry"
-  (let ((handlers (tagging-minor-mode--get-handlers)))
      (save-excursion
-       (funcall (alist-get :get handlers))
+       (funcall (plist-get (buffer-local-value 'tagging-minor-mode-handlers (current-buffer)) :get))
        )
-     )
    )
 
 (defun tagging-minor-mode-get-buffer-tags ()
-  (let ((handlers (tagging-minor-mode--get-handlers)))
      (save-excursion
-       (funcall (alist-get :buff handlers))
+       (funcall (plist-get (buffer-local-value 'tagging-minor-mode-handlers (current-buffer)) :buff))
        )
-     )
    )
 
 (defun tagging-minor-mode-parse-tag-file (path)
@@ -180,7 +166,6 @@ call when the evil-ex command 't[ag]' is called"
         (t (message "ERROR: GLOBAL-TAGS-LOCATION IS EMPTY"))
         )
   )
-
 
 (provide 'tagging-minor-mode)
 ;;; tagging-minor-mode.el ends here

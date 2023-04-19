@@ -16,7 +16,7 @@
 (pushnew! mailcap-mime-extensions '(".xhtml" . "text/html"))
 (pushnew! mailcap-mime-extensions '(".xml" . "text/html"))
 
-;;-- popup
+;;-- specs
 
 (spec-handling-add! popup nil
                     ('nxml
@@ -26,9 +26,6 @@
                           )
                     )
 
-;;-- end popup
-
-;;-- fold spec
 (spec-handling-add! fold nil
                       ('xml
                        :modes (web-mode)
@@ -41,15 +38,11 @@
                                   )
                        )
                       )
-;;-- end fold spec
 
-;;-- browse providers
-(after! jg-ui-reapply-hook-ready
-  (+jg-browse-add-lookup-spec 'xml
-                              '(
-                                ("MDN"                "https://developer.mozilla.org/en-US/search?q=%s")
-                                )
-                              )
-  )
+(spec-handling-add! lookup-url nil
+                    ('xml
+                     ("Firefox Dev" "https://developer.mozilla.org/en-US/search?q=%s")
+                     )
+                    )
 
-;;-- end browse providers
+;;-- end specs

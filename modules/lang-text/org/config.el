@@ -1,8 +1,22 @@
 ;;; lang/org/config.el -*- lexical-binding: t; -*-
 
+(load! "+funcs")
+(load! "util/+pomodoro-funcs")
+(load! "util/+clean-funcs")
+(load! "util/+dired")
+(load! "+definitions")
 (load! "+vars")
 (load! "+hooks")
 
+(after! (jg-bindings-total jg-org-stage)
+  (load! "util/+text-utils")
+  (load! "bindings/+org-standard-bindings.el")
+  (load! "bindings/+bindings")
+
+  ;; (evil-make-overriding-map org-mode-map)
+  (setq minor-mode-map-alist (assq-delete-all 'evil-org-mode minor-mode-map-alist))
+  (push `(evil-org-mode . ,evil-org-mode-map) minor-mode-map-alist)
+  )
 
 (use-package! toc-org ; auto-table of contents
   :hook (org-mode . toc-org-enable)
@@ -23,9 +37,6 @@
   :commands org-encrypt-entries org-encrypt-entry org-decrypt-entries org-decrypt-entry
   :hook (org-reveal-start . org-decrypt-entry)
   :preface
-  ;; org-crypt falls back to CRYPTKEY property then `epa-file-encrypt-to', which
-  ;; is a better default than the empty string `org-crypt-key' defaults to.
-  (defvar org-crypt-key nil)
   (after! org
     (add-to-list 'org-tags-exclude-from-inheritance "crypt")
     (add-hook! 'org-mode-hook
@@ -87,10 +98,6 @@
   :hook (org-mode . evil-org-mode)
   :hook (org-capture-mode . evil-insert-state)
   :hook (doom-docs-org-mode . evil-org-mode)
-  :init
-  (defvar evil-org-retain-visual-state-on-shift t)
-  (defvar evil-org-special-o/O '(table-row))
-  (defvar evil-org-use-additional-insert t)
   :config
   (add-hook 'evil-org-mode-hook #'evil-normalize-keymaps)
   (evil-org-set-key-theme)
@@ -109,7 +116,38 @@
   (evil-define-key* 'motion evil-org-agenda-mode-map
     (kbd doom-leader-key) nil))
 
-;;
+(use-package! link-hint
+  :config
+  ;; override default org link to open externally sometimes
+  (link-hint-define-type 'org-link
+    :next #'link-hint--next-org-link
+    :at-point-p #'link-hint--org-link-at-point-p
+    :vars '(org-mode org-agenda-mode org-link-minor-mode)
+    :open #'+jg-org-link-hint-external
+    :open-multiple t
+    :copy #'kill-new)
+  (push 'org-link link-hint-types)
+  )
+
+(use-package! graphviz-dot-mode
+  :defer t
+  :after org
+  :init
+  (push '("dot" . graphviz-dot) org-src-lang-modes)
+  )
+
+(use-package-hook! org :post-config
+  (message "post configuring org")
+  (provide 'jg-org-stage)
+  (add-hook! org-mode-hook :append
+    (setq-local  jg-text-whitespace-clean-hook
+                 '(delete-trailing-whitespace
+                   +jg-org-clean-heading-spaces
+                   +jg-text-cleanup-whitespace)
+                 )
+    )
+  )
+
 ;;; Bootstrap
 
 (use-package! org
@@ -118,34 +156,6 @@
   org-list org-pcomplete org-src org-footnote org-macro ob org org-agenda
   org-capture
   :preface
-  ;; Set to nil so we can detect user changes to them later (and fall back on
-  ;; defaults otherwise).
-  (defvar org-directory nil)
-  (defvar org-id-locations-file nil)
-  (defvar org-attach-id-dir nil)
-  (defvar org-babel-python-command nil)
-
-  (setq org-persist-directory (concat doom-cache-dir "org/persist/")
-        org-publish-timestamp-directory (concat doom-cache-dir "org/timestamps/")
-        org-preview-latex-image-directory (concat doom-cache-dir "org/latex/")
-        ;; Recognize a), A), a., A., etc -- must be set before org is loaded.
-        org-list-allow-alphabetical t)
-
-  ;; Make most of the default modules opt-in to lighten its first-time load
-  ;; delay. I sincerely doubt most users use them all.
-  (defvar org-modules
-    '(;; ol-w3m
-      ;; ol-bbdb
-      ol-bibtex
-      ;; ol-docview
-      ;; ol-gnus
-      ;; ol-info
-      ;; ol-irc
-      ;; ol-mhe
-      ;; ol-rmail
-      ;; ol-eww
-      ))
-
   ;;; Custom org modules
   (dolist (flag (doom-module-context-get 'flags))
     (load! (concat "contrib/" (substring (symbol-name flag) 1)) nil t))
@@ -220,16 +230,6 @@
   :config
   (add-to-list 'doom-debug-variables 'org-export-async-debug)
 
-  (set-company-backend! 'org-mode 'company-capf)
-  (set-eval-handler! 'org-mode #'+org-eval-handler)
-  (set-lookup-handlers! 'org-mode
-    :definition #'+org-lookup-definition-handler
-    :references #'+org-lookup-references-handler
-    :documentation #'+org-lookup-documentation-handler)
-
-  ;; Save target buffer after archiving a node.
-  (setq org-archive-subtree-save-file-p t)
-
   ;; Don't number headings with these tags
   (setq org-num-face '(:inherit org-special-keyword :underline nil :weight bold)
         org-num-skip-tags '("noexport" "nonum"))
@@ -264,4 +264,6 @@
       (remove-hook 'post-command-hook #'+org-play-all-gifs-h t)
       (pcase +org-startup-with-animated-gifs
         (`at-point (add-hook 'post-command-hook #'+org-play-gif-at-point-h nil t))
-        (`t (add-hook 'post-command-hook #'+org-play-all-gifs-h nil t))))))
+        (`t (add-hook 'post-command-hook #'+org-play-all-gifs-h nil t)))))
+
+  )

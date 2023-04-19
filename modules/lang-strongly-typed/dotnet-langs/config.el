@@ -10,9 +10,12 @@
   :hook (csharp-mode . rainbow-delimiters-mode)
   :config
   (set-electric! 'csharp-mode :chars '(?\n ?\}))
-  (set-rotate-patterns! 'csharp-mode
-    :symbols '(("public" "protected" "private")
-               ("class" "struct")))
+  (spec-handling-add! rotate-text nil
+                      (csharp-mode
+                       :symbols '(("public" "protected" "private")
+                                  ("class" "struct"))
+                       )
+                      )
 
   (sp-local-pair 'csharp-mode "<" ">"
                  :when '(+csharp-sp-point-in-type-p)
@@ -37,25 +40,22 @@ or terminating simple string."
   (if (fboundp #'csharp-tree-sitter-mode)
       (add-to-list 'auto-mode-alist '("\\.cs\\'" . csharp-tree-sitter-mode))))
 
-(after! fsharp-mode
+(use-package! fsharp-mode
+  :defer t
+  :config
   (when (executable-find "dotnet")
     (setq inferior-fsharp-program "dotnet fsi --readline-"))
+
   (if (modulep! +lsp)
       (progn
         (setq fsharp-ac-intellisense-enabled nil)
         (add-hook 'fsharp-mode-local-vars-hook #'lsp! 'append))
+
     (setq fsharp-ac-use-popup nil) ; Use a buffer for docs rather than a pop-up
-    (set-lookup-handlers! 'fsharp-mode :async t :definition #'fsharp-ac/gotodefn-at-point)
-    (set-company-backend! 'fsharp-mode 'fsharp-ac/company-backend))
+    (spec-handling-add! lookup-handler nil (fsharp-mode :async t :definition #'fsharp-ac/gotodefn-at-point))
+    (spec-handling-add! company nil (fsharp-mode fsharp-ac/company-backend)))
   (set-repl-handler! 'fsharp-mode #'run-fsharp)
-  (map! :localleader
-        :map fsharp-mode-map
-        "b" #'fsharp-ac/pop-gotodefn-stack ; Useful for re-tracing your steps
-        "e" #'fsharp-eval-region
-        "l" #'fsharp-load-buffer-file
-        (:unless (modulep! +lsp)
-         "q" #'fsharp-ac/stop-process
-         "t" #'fsharp-ac/show-tooltip-at-point)))
+  )
 
 ;; Unity shaders
 (use-package! shader-mode

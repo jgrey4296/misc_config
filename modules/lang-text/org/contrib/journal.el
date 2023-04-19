@@ -43,7 +43,7 @@
   ;; interpret it as anything other than a date.
   (setq org-journal-carryover-items  "TODO=\"TODO\"|TODO=\"PROJ\"|TODO=\"STRT\"|TODO=\"WAIT\"|TODO=\"HOLD\"")
 
-  (set-company-backend! 'org-journal-mode 'company-capf 'company-dabbrev)
+  (spec-handling-add! company nil (org-journal-mode company-capf company-dabbrev))
 
   (map! (:map org-journal-mode-map
          :n "]f"  #'org-journal-next-entry

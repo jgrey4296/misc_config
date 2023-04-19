@@ -18,6 +18,10 @@
 ;;
 ;;
 ;;; Code:
+
+(after! projectile
+  (add-to-list 'projectile-project-root-files "Cargo.toml")
+  )
 ;;-- urls
 (setq-default jg-rust-docs-url         "https://doc.rust-lang.org/stable/book/title-page.html"
               jg-cargo-docs-url        "https://doc.rust-lang.org/cargo/"
@@ -34,7 +38,7 @@
 
 ;;-- end urls
 
-;;-- file spec
+;;-- specs
 (spec-handling-add! file-templates
                     ('rust
                      ("config\\.toml$"   :trigger "__config.toml" :mode rust-mode)
@@ -49,30 +53,17 @@
                      (rust-mode          :trigger "__"            )
                      )
                     )
-;;-- end file spec
 
-;;-- browse spec
-(after! jg-ui-reapply-hook-ready
-  (+jg-browse-add-lookup-spec 'rust
-                              '(("Rust Stdlib"     "https://doc.rust-lang.org/std/?search=%s")
-                                ("Rust Crates.io"  "https://crates.io/search?q=%s")
-                                ("Rust docs.rs"    "https://docs.rs/releases/search?query=%s")
-                                ("Rust lib.rs"     "https://lib.rs/search?q=%s")
-                                ("Rust Forums"     "https://users.rust-lang.org/search?q=%s")
-                                )
-                              )
-  )
+(spec-handling-add! lookup-url nil
+                    ('rust
+                     ("Rust Stdlib"     "https://doc.rust-lang.org/std/?search=%s")
+                     ("Rust Crates.io"  "https://crates.io/search?q=%s")
+                     ("Rust docs.rs"    "https://docs.rs/releases/search?query=%s")
+                     ("Rust lib.rs"     "https://lib.rs/search?q=%s")
+                     ("Rust Forums"     "https://users.rust-lang.org/search?q=%s")
+                     )
+                    )
 
-;;-- end browse spec
-
-;;-- LSP
-(setq lsp-rust-analyzer-server-command '("rustup" "run" "nightly" "rust-analyzer")
-      rustic-analyzer-command '("rustup" "run" "nightly" "rust-analyzer")
-      lsp-rust-server 'rust-analyzer
- )
-
-
-;;-- end LSP
 (defun +jg-rust-related-files-fn (path)
     " Given a relative path to a file, provide projectile with various :kinds of related file "
     (let ((impl-file  (f-join (f-parent (f-parent path)) (s-replace "test_" "" (f-filename path))))
@@ -93,10 +84,18 @@
       )
     )
 
-(after! projectile
-  (add-to-list 'projectile-project-root-files "Cargo.toml")
-  )
 (spec-handling-add! projects t
-                    ('jg-rust ("Cargo.toml") :project-file "Cargo.toml" :configure nil :test nil :test-dir nil :test-prefix nil :related-files-fn +jg-rust-related-files-fn)
+                    ('jg-rust ("Cargo.toml")     :project-file "Cargo.toml" :configure nil :test nil :test-dir nil :test-prefix nil :related-files-fn +jg-rust-related-files-fn)
                     ( 'rust-cargo ("Cargo.toml") :project-file "Cargo.toml" :compilation-dir nil :configure nil :compile "cargo build" :test "cargo test" :install nil :package nil :run "cargo run")
                     )
+
+;;-- end specs
+
+;;-- LSP
+(setq lsp-rust-analyzer-server-command '("rustup" "run" "nightly" "rust-analyzer")
+      rustic-analyzer-command '("rustup" "run" "nightly" "rust-analyzer")
+      lsp-rust-server 'rust-analyzer
+ )
+
+
+;;-- end LSP

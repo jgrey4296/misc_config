@@ -6,23 +6,23 @@
   )
 (load! "+repl")
 
-(after! erlang
-  ;; (also has a load path set in root el file)
-  (setq erlang-root-dir "/usr/local/opt/erlang"
-        exec-path (cons "/usr/local/opt/erlang/bin" exec-path)
-        )
-  )
 (use-package! erlang
   :defer t
   :mode ("\\.erlang\\'" . erlang-mode)
   :mode ("/rebar\\.config\\(?:\\.script\\)?\\'" . erlang-mode)
   :mode ("/\\(?:app\\|sys\\)\\.config\\'" . erlang-mode)
   :config
+  (setq erlang-root-dir "/usr/local/opt/erlang"
+        exec-path (cons "/usr/local/opt/erlang/bin" exec-path)
+        )
+
   (when (modulep! +lsp)
     (add-hook 'erlang-mode-local-vars-hook #'lsp! 'append))
 
   (when (modulep! +tree-sitter)
-    (add-hook 'erlang-mode-local-vars-hook #'tree-sitter! 'append)))
+    (add-hook 'erlang-mode-local-vars-hook #'tree-sitter! 'append))
+  )
+
 (after! projectile
   (add-to-list 'projectile-project-root-files "mix.exs"))
 
@@ -82,30 +82,22 @@
 (use-package! alchemist
   :hook (elixir-mode . alchemist-mode)
   :config
-  (set-lookup-handlers! 'elixir-mode
-    :definition #'alchemist-goto-definition-at-point
-    :documentation #'alchemist-help-search-at-point)
+  (spec-handling-add! lookup-handler nil
+                      (elixir-mode
+                       :definition #'alchemist-goto-definition-at-point
+                       :documentation #'alchemist-help-search-at-point
+                       )
+                      )
   (set-eval-handler! 'elixir-mode #'alchemist-eval-region)
   (set-repl-handler! 'elixir-mode #'alchemist-iex-project-run)
-  (map! :after elixir-mode
-        :localleader
-        :map elixir-mode-map
-        "m" #'alchemist-mix
-        "c" #'alchemist-mix-compile
-        "i" #'alchemist-iex-project-run
-        "f" #'elixir-format
-        (:prefix ("e" . "eval")
-         "e" #'alchemist-iex-send-last-sexp
-         "r" #'alchemist-iex-send-region
-         "l" #'alchemist-iex-send-current-line
-         "R" #'alchemist-iex-reload-module)))
+  )
 
 
 (use-package! alchemist-company
   :when (modulep! :completion company)
   :commands alchemist-company
   :config
-  (set-company-backend! 'alchemist-mode '(alchemist-company company-yasnippet))
+  (spec-handling-add! company nil (alchemist-mode (alchemist-company company-yasnippet)))
   ;; Alchemist doesn't use hook symbols to add these backends, so we have to use
   ;; the entire closure to get rid of it.
   (let ((fn (byte-compile (lambda () (add-to-list (make-local-variable 'company-backends) 'alchemist-company)))))
@@ -114,14 +106,4 @@
 
 (use-package! exunit
   :hook (elixir-mode . exunit-mode)
-  :init
-  (map! :after elixir-mode
-        :localleader
-        :map elixir-mode-map
-        :prefix ("t" . "test")
-        "a" #'exunit-verify-all
-        "r" #'exunit-rerun
-        "v" #'exunit-verify
-        "T" #'exunit-toggle-file-and-test
-        "t" #'exunit-toggle-file-and-test-other-window
-        "s" #'exunit-verify-single))
+  )

@@ -1,69 +1,110 @@
-;;; +vars.el -*- lexical-binding: t; -*-
+;;; lang/jg-org/+vars.el -*- lexical-binding: t; -*-
 
 
-(defvar +org-babel-native-async-langs '(python)
-  "Languages that will use `ob-comint' instead of `ob-async' for `:async'.")
+;;-- personal
+(defvar jg-org-external-file-link-types '("jpg" "jpeg" "png" "mp4" "html"))
+(defvar jg-org-clean-marker nil)
+(defvar jg-org-preferred-linecount 1500)
+(defvar jg-org-link-move-base "/Volumes/Overflow/missing_images/")
+(defvar jg-org-twitter-loc "/Volumes/documents/twitter_threads/")
+;;-- end personal
 
-(defvar +org-babel-mode-alist
-  '((c . C)
-    (cpp . C)
-    (C++ . C)
-    (D . C)
-    (elisp . emacs-lisp)
-    (sh . shell)
-    (bash . shell)
-    (matlab . octave)
-    (rust . rustic-babel)
-    (amm . ammonite))
-  "An alist mapping languages to babel libraries. This is necessary for babel
-libraries (ob-*.el) that don't match the name of the language.
+;;-- pomodoro
+;; set pomodoro log variable
+(defcustom jg-org-pomodoro-log-file (expand-file-name "setup_files/pomodoro_log.org" doom-user-dir) "The Location of the Pomodoro Log File")
+(defcustom jg-org-pomodoro-buffer-name "*Pomodoro Log*"
+  "The name of the Pomodoro Log Buffer to record what I did in")
+(defcustom jg-org-pomodoro-log-message ";; What did the last Pomodoro session accomplish? C-c to finish\n"
+  "The message to add to the log buffer to spur comments")
+(after! org-pomodoro
+  ;; add a startup hook for pomodoro to tweet the end time
+  (add-hook 'org-pomodoro-started-hook '+jg-org-pomodoro-start-hook)
+  ;; add a finished hook to ask for a recap of what was done,
+  ;; and store it in a pomodoro log file
+  (add-hook 'org-pomodoro-finished-hook '+jg-org-pomodoro-end-hook)
+  )
+;;-- end pomodoro
 
-For example, (fish . shell) will cause #+begin_src fish blocks to load
-ob-shell.el when executed.")
+;;-- org core
+(after! org
+  ;;ORG SETUP
+  (setq-default org-fast-tag-selection-single-key nil
+                org-from-is-user-regexp "\\<John Grey\\>"
+                org-group-tags nil
+                org-use-fast-tag-selection t
+                org-tags-column 50
+                )
+  ;; Save target buffer after archiving a node.
+  (setq org-archive-subtree-save-file-p t)
 
-(defvar +org-babel-load-functions ()
-  "A list of functions executed to load the current executing src block. They
-take one argument (the language specified in the src block, as a string). Stops
-at the first function to return non-nil.")
+  (push 'org-indent-mode minor-mode-list)
+  (push '("Scholar" . "https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q=%s") org-link-abbrev-alist)
+  )
+;;-- end org core
 
-(defvar +org-capture-todo-file "todo.org"
-  "Default target for todo entries.
+;;-- visual
+(after! org-superstar
+  (setq org-hide-leading-stars t)
+  )
+;;-- end visual
 
-Is relative to `org-directory', unless it is absolute. Is used in Doom's default
-`org-capture-templates'.")
+;;-- completion
+(after! helm-org
+    ;; TODO add a keybind for helm-org-rifle
+    (add-to-list 'helm-completing-read-handlers-alist '(org-capture . helm-org-completing-read-tags))
+    (add-to-list 'helm-completing-read-handlers-alist '(org-set-tags . helm-org-completing-read-tags))
+  )
+;;-- end completion
 
-(defvar +org-capture-changelog-file "changelog.org"
-  "Default target for changelog entries.
+;;-- projectile
+(after! org-projectile
+  ;; from https://emacs.stackexchange.com/questions/18194/
+  (setq org-projectile-capture-template "** TODO [[%F::%(with-current-buffer (org-capture-get :original-buffer) (number-to-string (line-number-at-pos)))][%?]]\n\t%t\n\t
+%(with-current-buffer (org-capture-get :original-buffer) (buffer-substring (line-beginning-position) (line-end-position)))\n")
+  )
+;;-- end projectile
 
-Is relative to `org-directory' unless it is absolute. Is used in Doom's default
-`org-capture-templates'.")
-
-(defvar +org-capture-notes-file "notes.org"
-  "Default target for storing notes.
-
-Used as a fall back file for org-capture.el, for templates that do not specify a
-target file.
-
-Is relative to `org-directory', unless it is absolute. Is used in Doom's default
-`org-capture-templates'.")
-
-(defvar +org-capture-journal-file "journal.org"
-  "Default target for storing timestamped journal entries.
-
-Is relative to `org-directory', unless it is absolute. Is used in Doom's default
-`org-capture-templates'.")
-
-(defvar +org-capture-projects-file "projects.org"
-  "Default, centralized target for org-capture templates.")
-
-(defvar +org-habit-graph-padding 2
-  "The padding added to the end of the consistency graph")
-
-(defvar +org-habit-min-width 30
-  "Hides the consistency graph if the `org-habit-graph-column' is less than this value")
-
-(defvar +org-habit-graph-window-ratio 0.3
-  "The ratio of the consistency graphs relative to the window width")
-
-(defvar +org-startup-with-animated-gifs nil
-  "If non-nil, and the cursor is over a gif inline-image preview, animate it!")
+;;-- specs
+(spec-handling-add! file-templates nil
+                    ('org
+                     ("two_pager\\.org$"     :trigger "__pacheco_vega_two_pager" :mode org-mode)
+                     ("lit_review\\.org$"    :trigger "__lit_review"             :mode org-mode)
+                     ("inst_pipeline\\.org$" :trigger "__institution_pipeline"   :mode org-mode)
+                     ("design_doc\\.org$"    :trigger "__designDocNotes"         :mode org-mode)
+                     ("project\\.org$"       :trigger "__project"                :mode org-mode)
+                     ("invoice\\.org$"       :trigger "__invoice"                :mode org-mode)
+                     ("contact\\.org$"       :trigger "__contact"                :mode org-mode)
+                     ("README\\.org$"        :trigger "__doom-readme"            :mode org-mode :when +file-templates-in-emacs-dirs-p )
+                     (org-journal-mode :ignore t)
+                     (org-mode :trigger "__")
+                     )
+                    )
+(spec-handling-add! fold nil
+                    ('org
+                     :modes (org-mode doom-docs-org-mode)
+                     :triggers (:open-all   nil
+                                :close-all  org-cycle-global
+                                :toggle     org-cycle
+                                :open       nil
+                                :open-rec   nil
+                                :close      nil
+                                )
+                     )
+                    )
+(spec-handling-add! tagging nil
+                    (org-mode
+                     :set +jg-org-set-tags
+                     :new +jg-org-set-new-tag
+                     :get org-get-tags
+                     )
+                    )
+(spec-handling-add! company nil (org-mode company-capf))
+(spec-handling-add! lookup-handler nil
+                    (org-mode
+                     :definition #'+org-lookup-definition-handler
+                     :references #'+org-lookup-references-handler
+                     :documentation #'+org-lookup-documentation-handler
+                     )
+                    )
+(set-eval-handler! 'org-mode #'+org-eval-handler)
+;;-- end specs

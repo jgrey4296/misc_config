@@ -142,7 +142,7 @@
 
 (use-package! sass-mode
   :config
-  (set-company-backend! 'sass-mode 'company-css)
+  (spec-handling-add! company nil (sass-mode company-css))
   )
 
 (when (modulep! +lsp)
@@ -157,9 +157,6 @@
 (when (modulep! +tree-sitter) (add-hook! 'css-mode-local-vars-hook :append #'tree-sitter!))
 
 
-(after! pug-mode
-  (set-company-backend! 'pug-mode 'company-web-jade))
-(after! web-mode
-  (set-company-backend! 'web-mode 'company-css 'company-web-html))
-(after! slim-mode
-  (set-company-backend! 'slim-mode 'company-web-slim))
+(spec-handling-add! company nil (pug-mode company-web-jade))
+(spec-handling-add! company nil (web-mode company-css company-web-html))
+(spec-handling-add! company nil (slim-mode company-web-slim))

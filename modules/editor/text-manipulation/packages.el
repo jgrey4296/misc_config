@@ -6,7 +6,6 @@
 (package! rainbow-mode)
 (package! highlight-parentheses)
 (package! helm-wordnet)
-(package! wordnut)
 (package! rotate-text)
 (package! license-templates)
 (package! vundo)

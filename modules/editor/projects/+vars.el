@@ -1,7 +1,9 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
 (defvar jg-projects-cmd-cache-name ".projectile-cmds")
+
 (defvar jg-projects-doot-cmd "doot")
+
 (defvar jg-projects-doit-cmd "doit")
 
 (setq projectile-completion-system 'ivy
@@ -15,21 +17,15 @@
                                      )
       )
 
-
-;;-- file spec
 (spec-handling-add! file-templates nil
                     ('project
                      ("/doot\\.toml$" :trigger "__doot_toml" :mode conf-toml-mode)
                      ("/Makefile$"             :mode makefile-gmake-mode)
                      )
                     )
-;;-- end file spec
 
-;;-- popup spec
 (spec-handling-add! popup nil
                     ('proj-walk
                      ("^\\*Project-Walk\\*" :side left :ttl nil :quit t :select nil :priority -50)
                      )
                     )
-
-;;-- end popup spec

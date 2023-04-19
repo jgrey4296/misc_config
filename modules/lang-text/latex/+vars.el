@@ -75,16 +75,13 @@ If no viewer is found, `latex-preview-pane-mode' is used.")
 
 ;;-- end reftex
 
-;;-- browse spec
-(after! jg-ui-reapply-hook-ready
-  (+jg-browse-add-lookup-spec 'latex
-                              '(("Latex Packages" "https://www.ctan.org/search?phrase=%s"))
-                              )
+;;-- specs
+(spec-handling-add! lookup-url nil
+  ( 'latex
+    ("Latex Packages" "https://www.ctan.org/search?phrase=%s")
   )
+)
 
-;;-- end browse providers
-
-;;-- popup spec
 (spec-handling-add! popup nil
                     ('latex
                       (" output\\*$" :size 15)
@@ -92,4 +89,24 @@ If no viewer is found, `latex-preview-pane-mode' is used.")
                       ("^\*latex\*"         :side right  :ttl nil :width  0.5 :quit nil :select t :priority 50)
                       )
                     )
-;;-- end popup
+;;-- end specs
+
+
+(after! (latex smartparens-latex)
+  ;; We have to use lower case modes here, because `smartparens-mode' uses
+  ;; the same during configuration.
+  (let ((modes '(tex-mode plain-tex-mode latex-mode LaTeX-mode)))
+    ;; All these excess pairs dramatically slow down typing in LaTeX buffers,
+    ;; so we remove them. Let snippets do their job.
+    (dolist (open '("\\left(" "\\left[" "\\left\\{" "\\left|"
+                    "\\bigl(" "\\biggl(" "\\Bigl(" "\\Biggl(" "\\bigl["
+                    "\\biggl[" "\\Bigl[" "\\Biggl[" "\\bigl\\{" "\\biggl\\{"
+                    "\\Bigl\\{" "\\Biggl\\{"
+                    "\\lfloor" "\\lceil" "\\langle"
+                    "\\lVert" "\\lvert" "`"))
+      (sp-local-pair modes open nil :actions :rem))
+    ;; And tweak these so that users can decide whether they want use LaTeX
+    ;; quotes or not, via `+latex-enable-plain-double-quotes'.
+    (sp-local-pair modes "``" nil :unless '(:add sp-in-math-p)))
+
+  )

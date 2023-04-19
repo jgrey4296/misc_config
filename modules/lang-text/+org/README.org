@@ -1,9 +1,0 @@
-* JG Org Layer
-  Customizations for Org Mode:
-  1. Sets up helm-org
-  2. Places base agenda
-  3. Adds numerous keybindings
-  4. Sets up academic-phrases
-  5. Sets up Pomodoro (including tweeting)
-  6. Sets up org-drill
-  7. Sets up link opening and quicklook, link name changing and agenda listing

@@ -80,33 +80,28 @@
   )
 ;;-- end hl line
 
-;;-- browse spec
-(after! jg-ui-reapply-hook-ready
-  (+jg-browse-add-lookup-spec 'bibtex
-                              '(("Scholar"  "https://scholar.google.com/scholar?hl=en&q=%s")
-                              ("Scholar Archive"    "https://scholar.archive.org/search?q=%s")
-                              ("DBLP"               "https://dblp1.uni-trier.de/search?q=%s")
-                              ("Doi"                "https://doi.org/%s")
-                              ("Wikipedia"          "https://wikipedia.org/search-redirect.php?language=en&go=Go&search=%s")
-                              ("Archive.org"        "https://archive.org/search.php?query=%s")
-                              ("Project Gutenberg"  "http://www.gutenberg.org/ebooks/search/?query=%s")
-                              ("Amazon UK"          "https://www.amazon.co.uk/s?k=%s")
-                              ("Amazon US"          "https://www.amazon.com/s?k=%s")
-                              ("IMDB"               "https://www.imdb.com/find?s=all&q=%s")
-                              ))
-)
+;;-- specs
+(spec-handling-add! lookup-url nil
+                    ('bibtex
+                     ("Scholar"  "https://scholar.google.com/scholar?hl=en&q=%s")
+                     ("Scholar Archive"    "https://scholar.archive.org/search?q=%s")
+                     ("DBLP"               "https://dblp1.uni-trier.de/search?q=%s")
+                     ("Doi"                "https://doi.org/%s")
+                     ("Wikipedia"          "https://wikipedia.org/search-redirect.php?language=en&go=Go&search=%s")
+                     ("Archive.org"        "https://archive.org/search.php?query=%s")
+                     ("Project Gutenberg"  "http://www.gutenberg.org/ebooks/search/?query=%s")
+                     ("Amazon UK"          "https://www.amazon.co.uk/s?k=%s")
+                     ("Amazon US"          "https://www.amazon.com/s?k=%s")
+                     ("IMDB"               "https://www.imdb.com/find?s=all&q=%s")
+                     )
+                    )
 
-;;-- end browse spec
+(spec-handling-add! tagging nil
+                    (bibtex-mode
+                     :set  +jg-bibtex-set-tags
+                     :new  +jg-bibtex-set-new-tag
+                     :get  +jg-bibtex-get-tags
+                     )
+                    )
 
-;;-- tagging spec
-(after! tagging-minor-mode
-  (tagging-minor-mode-add-spec 'bibtex-mode
-                               '((:set . +jg-bibtex-set-tags)
-                                 (:new . +jg-bibtex-set-new-tag)
-                                 (:get . +jg-bibtex-get-tags)
-                                 ;; todo :buff
-                                 )
-                               )
-  )
-
-;;-- end tagging spec
+;;-- end specs

@@ -19,14 +19,6 @@
 (setq expand-region-preferred-python-mode 'python-mode)
 ;;-- end personal vars
 
-;;-- rotate text
-(set-rotate-patterns! 'python-mode
-  :symbols '(("True" "False")
-
-             )
-  )
-
-;;-- end rotate text
 
 ;;-- general python
 (after! python-mode
@@ -82,7 +74,7 @@
   )
 ;;-- end flycheck
 
-;;-- project spec
+;;-- specs
 (after! projectile
   (pushnew! projectile-project-root-files "pyproject.toml" "requirements.txt" "setup.py")
   (pushnew! projectile-project-root-files "setup.py" "requirements.txt")
@@ -96,9 +88,6 @@
                     ('django ("manage.py") :project-file "manage.py" :compilation-dir nil :configure nil :compile "python manage.py runserver" :test "python manage.py test" :install nil :package nil :run nil :test-suffix "_test" :test-prefix "test_")
                     ('jg-python-project ("pyproject.toml") :project-file "pyproject.toml" :configure "pip install -e %s" :test "python -m unittest discover -v -p test_*.py" :test-dir (lambda (x) (f-join x "__tests")) :test-prefix "test_" :related-files-fn +jg-python-related-files-fn)
                     )
-;;-- end project spec
-
-;;-- popup spec
 
 (spec-handling-add! popup nil
                     ('python
@@ -111,9 +100,6 @@
                      )
                     )
 
-;;-- end popup spec
-
-;;-- file spec
 (spec-handling-add! file-templates nil
                     ('python
                      ("LICENSE$"        :trigger "__license-acab"   :mode text-mode :priority 100)
@@ -131,9 +117,7 @@
                      (python-mode       :trigger "__" :priority -100)
                      )
                     )
-;;-- end file spec
 
-;;-- browse spec
 (spec-handling-add! browser nil
                     ('python
                      ("Python" "https://docs.python.org/3/search.html?q=%s&check_keywords=yes&area=default")
@@ -141,9 +125,6 @@
                      )
                     )
 
-;;-- end browse spec
-
-;;-- fold spec
 (spec-handling-add! fold nil
                     ('python
                      :modes (python-mode)
@@ -156,7 +137,17 @@
                                 )
                      )
                     )
-;;-- end fold spec
+
+(spec-handling-add! rotate-text nil
+                    ('python-mode
+                     :symbols '(("True" "False"))
+                     )
+                    )
+
+(spec-handling-add! company nil
+                    (python-mode company-gtags)
+                    )
+;;-- end specs
 
 ;;-- smartparens
 (after! smartparens-python

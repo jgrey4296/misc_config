@@ -3,73 +3,6 @@
 ;;; Commands
 
 ;;;###autoload
-(defun +snippets/goto-start-of-field ()
-  "Go to the beginning of the current field."
-  (interactive)
-  (let* ((snippet (car (yas-active-snippets)))
-         (active-field (yas--snippet-active-field snippet))
-         (position (if (yas--field-p active-field)
-                       (yas--field-start active-field)
-                     -1)))
-    (if (= (point) position)
-        (move-beginning-of-line 1)
-      (goto-char position))))
-
-;;;###autoload
-(defun +snippets/goto-end-of-field ()
-  "Go to the end of the current field."
-  (interactive)
-  (let* ((snippet (car (yas-active-snippets)))
-         (active-field (yas--snippet-active-field snippet))
-         (position (if (yas--field-p active-field)
-                       (yas--field-end active-field)
-                     -1)))
-    (if (= (point) position)
-        (move-end-of-line 1)
-      (goto-char position))))
-
-;;;###autoload
-(defun +snippets/delete-backward-char (&optional field)
-  "Prevents Yas from interfering with backspace deletion."
-  (interactive)
-  (let ((field (or field (and (overlayp yas--active-field-overlay)
-                              (overlay-buffer yas--active-field-overlay)
-                              (overlay-get yas--active-field-overlay 'yas--field)))))
-    (unless (and (yas--field-p field)
-                 (eq (point) (marker-position (yas--field-start field))))
-      (call-interactively #'delete-backward-char))))
-
-;;;###autoload
-(defun +snippets/delete-forward-char-or-field (&optional field)
-  "Delete forward, or skip the current field if it's empty. This is to prevent
-buggy behavior when <delete> is pressed in an empty field."
-  (interactive)
-  (let ((field (or field (and yas--active-field-overlay
-                              (overlay-buffer yas--active-field-overlay)
-                              (overlay-get yas--active-field-overlay 'yas--field)))))
-    (cond ((not (yas--field-p field))
-           (delete-char 1))
-          ((and (not (yas--field-modified-p field))
-                (eq (point) (marker-position (yas--field-start field))))
-           (yas--skip-and-clear field)
-           (yas-next-field 1))
-          ((eq (point) (marker-position (yas--field-end field))) nil)
-          ((delete-char 1)))))
-
-;;;###autoload
-(defun +snippets/delete-to-start-of-field (&optional field)
-  "Delete to start-of-field."
-  (interactive)
-  (unless field
-    (setq field (and (overlayp yas--active-field-overlay)
-                     (overlay-buffer yas--active-field-overlay)
-                     (overlay-get yas--active-field-overlay 'yas--field))))
-  (when (yas--field-p field)
-    (let ((sof (marker-position (yas--field-start field))))
-      (when (and field (> (point) sof))
-        (delete-region sof (point))))))
-
-;;;###autoload
 (defun +snippets/find ()
   "Open a snippet file (in all of `yas-snippet-dirs')."
   (interactive)
@@ -111,54 +44,6 @@ buggy behavior when <delete> is pressed in an empty field."
           (setq header-line-format "This is a built-in snippet. Press C-c C-e to modify it"
                 +snippet--current-snippet-uuid template-uuid)))
     (user-error "Cannot find template with UUID %S" template-uuid)))
-
-;;;###autoload
-(defun +snippets/new ()
-  "Create a new snippet in `+snippets-dir'."
-  (interactive)
-  (let ((default-directory
-          (expand-file-name (symbol-name major-mode)
-                            +snippets-dir)))
-    (+snippet--ensure-dir default-directory)
-    (with-current-buffer (switch-to-buffer "untitled-snippet")
-      (snippet-mode)
-      (erase-buffer)
-      (yas-expand-snippet (concat "# -*- mode: snippet -*-\n"
-                                  "# name: $1\n"
-                                  "# uuid: $2\n"
-                                  "# key: ${3:trigger-key}${4:\n"
-                                  "# condition: t}\n"
-                                  "# --\n"
-                                  "$0"))
-      (when (bound-and-true-p evil-local-mode)
-        (evil-insert-state)))))
-
-;;;###autoload
-(defun +snippets/new-alias (template-uuid)
-  "Create an alias for a snippet with uuid TEMPLATE-UUID.
-
-You will be prompted for a snippet to alias."
-  (interactive
-   (list
-    (+snippet--completing-read-uuid "Select snippet to alias: "
-                                    current-prefix-arg)))
-  (unless (require 'doom-snippets nil t)
-    (user-error "This command requires the `doom-snippets' library bundled with Doom Emacs"))
-  (let ((default-directory (expand-file-name (symbol-name major-mode) +snippets-dir)))
-    (+snippet--ensure-dir default-directory)
-    (with-current-buffer (switch-to-buffer "untitled-snippet")
-      (snippet-mode)
-      (erase-buffer)
-      (yas-expand-snippet
-       (concat "# -*- mode: snippet -*-\n"
-               "# name: $1\n"
-               "# key: ${2:trigger-key}${3:\n"
-               "# condition: t}\n"
-               "# type: command\n"
-               "# --\n"
-               "(%alias \"${4:" (or template-uuid "uuid") "}\")"))
-      (when (bound-and-true-p evil-local-mode)
-        (evil-insert-state)))))
 
 ;;;###autoload
 (defun +snippets/edit (template-uuid)

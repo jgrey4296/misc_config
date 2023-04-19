@@ -1,10 +1,8 @@
 ;;; util/text/+vars.el -*- lexical-binding: t; -*-
 
-(defvar jg-text-whitespace-clean-hook nil)
-
-(add-hook! 'jg-text-whitespace-clean-hook
-           #'delete-trailing-whitespace
-           #'+jg-text-cleanup-whitespace 50)
+(defvar-local jg-text-whitespace-clean-hook '(#'delete-trailing-whitespace
+                                              #'+jg-text-cleanup-whitespace)
+  )
 
 (setq-default jg-text-last-similarity-arg 1
               jg-text-debug-snippet-name "util.debug"
@@ -102,6 +100,9 @@
 ;;-- end rotate-text
 
 (after! evil
-  (setq-default evil-shift-width 4)
   (remove-hook! 'after-change-major-mode-hook #'doom--setq-evil-shift-width-for-after-change-major-mode-h)
   )
+
+(spec-handling-setq! evil-shift
+                     evil-shift-width 4
+                     )

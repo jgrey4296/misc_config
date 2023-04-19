@@ -1,5 +1,6 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
+;;-- definitions
 (defvar +emacs-lisp-enable-extra-fontification t
   "If non-nil, highlight special forms, and defined functions and variables.")
 
@@ -19,8 +20,13 @@ package-lint, and checkdoc) can be more overwhelming than helpful.
 
 See `+emacs-lisp-non-package-mode' for details.")
 
+;;-- end definitions
+
 (add-to-list 'auto-mode-alist '("\\.el\\.gz" . emacs-lisp-mode))
-(set-eval-handler! '(emacs-lisp-mode lisp-interaction-mode) #'+jg-lisp-eval)
+
+(after! projectile
+  (pushnew! projectile-project-root-files "config.el")
+  )
 
 ;;-- emacs source paths
 (after! (ffap find-func)
@@ -39,25 +45,17 @@ See `+emacs-lisp-non-package-mode' for details.")
 )
 ;;-- end emacs source paths
 
-;;-- rotate text
-(set-rotate-patterns! 'emacs-lisp-mode
-  :symbols '(("t" "nil")
-             ("let" "let*")
-             ("when" "unless")
-             ("advice-add" "advice-remove")
-             ("defadvice!" "undefadvice!")
-             ("add-hook" "remove-hook")
-             ("add-hook!" "remove-hook!")
-             ("it" "xit")
-             ("describe" "xdescribe")
-             )
-  )
-;;-- end rotate text
+;;-- specs
 
-;;-- fold spec
+(spec-handling-add! popup nil
+                    ('lisp
+                     ("^\\*Buttercup\\*$" :size 0.45 :select nil :ttl 0)
+                     )
+                    )
 (spec-handling-add! fold nil
                     ('lisp
                      :modes (emacs-lisp-mode lisp-mode)
+                     :priority 100
                      :triggers (:open-all   hs-show-all
                                 :close-all  hs-hide-all
                                 :toggle     hs-toggle-hiding
@@ -67,10 +65,7 @@ See `+emacs-lisp-non-package-mode' for details.")
                                 )
                      )
                     )
-;;-- end fold spec
-
-;;-- file spec
-(spec-handling-add! file-templates nil
+(spec-handling-add! file-templates t
                     ('lisp
                      ("/test/.+\\.el$"   :when +file-templates-in-emacs-dirs-p :trigger "__doom-test"     :mode emacs-lisp-mode)
                      ("/doctor\\.el$"    :when +file-templates-in-emacs-dirs-p :trigger "__doom-doctor"   :mode emacs-lisp-mode)
@@ -85,26 +80,66 @@ See `+emacs-lisp-non-package-mode' for details.")
                      (emacs-lisp-mode    :trigger "__package")
                      )
                     )
-;;-- end file spec
-
-;;-- browse specs
-(after! jg-ui-reapply-hook-ready
-  (+jg-browse-add-lookup-spec 'lisp
-                              '(
-                                ("ELisp Melpa" "https://melpa.org/#/?q=%s")
-                                ("Elisp Elpa" "https://elpa.gnu.org/packages/")
-                                )
-                              )
-  )
-
-;;-- end browse specs
-
-;;-- projectile
-(after! projectile
-  (pushnew! projectile-project-root-files "config.el")
-  )
-(spec-handling-add! projects nil
-                    ('emacs-eldev #'projectile-eldev-project-p :project-file "Eldev" :compilation-dir nil :configure nil :compile "eldev compile" :test "eldev test" :install nil :package "eldev package" :run "eldev emacs")
-                    ('emacs-cask ("Cask") :project-file "Cask" :compilation-dir nil :configure nil :compile "cask install" :test nil :install nil :package nil :run nil :test-suffix "-test" :test-prefix "test-")
+(spec-handling-add! lookup-url nil
+                    ('lisp
+                     ("elisp melpa" "https://melpa.org/#/?q=%s")
+                     ("elisp elpa" "https://elpa.gnu.org/packages/")
+                     )
                     )
-;;-- end projectile
+(spec-handling-add! projects nil
+                    ('emacs-eldev #'projectile-eldev-project-p :project-file "eldev" :compilation-dir nil :configure nil :compile "eldev compile" :test "eldev test" :install nil :package "eldev package" :run "eldev emacs")
+                    ('emacs-cask ("cask") :project-file "cask" :compilation-dir nil :configure nil :compile "cask install" :test nil :install nil :package nil :run nil :test-suffix "-test" :test-prefix "test-")
+                    )
+(spec-handling-add! lookup-handler nil
+                    ((emacs-lisp-mode lisp-interaction-mode helpful-mode)
+                     :definition    +emacs-lisp-lookup-definition
+                     :documentation +emacs-lisp-lookup-documentation
+                     )
+                    ((racket-mode racket-repl-mode)
+                     :definition    #'+racket-lookup-definition
+                     :documentation #'+racket-lookup-documentation
+                     )
+                    ('inferior-emacs-lisp-mode
+                      :definition    #'+emacs-lisp-lookup-definition
+                      :documentation #'+emacs-lisp-lookup-documentation
+                      )
+                    )
+(spec-handling-add! rotate-text t
+                    ('emacs-lisp-mode
+                     :symbols '(("t" "nil")
+                                ("let" "let*")
+                                ("when" "unless")
+                                ("advice-add" "advice-remove")
+                                ("defadvice!" "undefadvice!")
+                                ("add-hook" "remove-hook")
+                                ("add-hook!" "remove-hook!")
+                                ("it" "xit")
+                                ("describe" "xdescribe")
+                                )
+                     )
+                    ('racket-mode
+                     :symbols '(("#true" "#false"))
+                     )
+                    )
+(spec-handling-add! company t
+                    (emacs-lisp-mode (company-capf company-yasnippet identity))
+                    )
+(spec-handling-add! whitespace-cleanup nil
+    (emacs-lisp-mode (delete-trailing-whitespace +jg-lisp-cleanup-ensure-newline +jg-text-cleanup-whitespace))
+    )
+
+(set-repl-handler! '(emacs-lisp-mode lisp-interaction-mode) #'+emacs-lisp/open-repl)
+(set-repl-handler! 'racket-mode #'+racket/open-repl)
+(set-eval-handler! '(emacs-lisp-mode lisp-interaction-mode) #'+emacs-lisp-eval)
+(set-eval-handler! '(emacs-lisp-mode lisp-interaction-mode) #'+jg-lisp-eval)
+
+;; (set-ligatures! 'emacs-lisp-mode :lambda "lambda")
+;; (set-ligatures! 'racket-mode
+;;   :lambda  "lambda"
+;;   :map     "map"
+;;   :dot     ".")
+
+(set-docsets! 'racket-mode "Racket")
+(set-docsets! '(emacs-lisp-mode lisp-interaction-mode) "Emacs Lisp")
+
+;;-- end specs

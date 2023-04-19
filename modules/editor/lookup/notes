@@ -1,0 +1,78 @@
+;; -*- mode: emacs-lisp -*-
+;; "What am I looking at?" This module helps you answer this question.
+;;
+;;   + `+lookup/definition': a jump-to-definition that should 'just work'
+;;   + `+lookup/implementations': find a symbol's implementations in the current
+;;                                project
+;;   + `+lookup/references': find a symbol's references in the current project
+;;   + `+lookup/file': open the file referenced at point
+;;   + `+lookup/online'; look up a symbol on online resources
+;;   + `+lookup/in-docsets': look up in Dash docsets
+;;
+;; This module uses `xref', an experimental new library in Emacs. It may change
+;; in the future. When xref can't be depended on it will fall back to
+;; `dumb-jump' to find what you want.
+
+ "Define jump handlers for major or minor MODES.
+
+A handler is either an interactive command that changes the current buffer
+and/or location of the cursor, or a function that takes one argument: the
+identifier being looked up, and returns either nil (failed to find it), t
+(succeeded at changing the buffer/moving the cursor), or 'deferred (assume this
+handler has succeeded, but expect changes not to be visible yet).
+
+There are several kinds of handlers, which can be defined with the following
+properties:
+
+:definition FN
+  Run when jumping to a symbol's definition. Used by `+lookup/definition'.
+:implementations FN
+  Run when looking for implementations of a symbol in the current project. Used
+  by `+lookup/implementations'.
+:type-definition FN
+  Run when jumping to a symbol's type definition. Used by
+  `+lookup/type-definition'.
+:references FN
+  Run when looking for usage references of a symbol in the current project. Used
+  by `+lookup/references'.
+:documentation FN
+  Run when looking up documentation for a symbol. Used by
+  `+lookup/documentation'.
+:file FN
+  Run when looking up the file for a symbol/string. Typically a file path. Used
+  by `+lookup/file'.
+:xref-backend FN
+  Defines an xref backend for a major-mode. A :definition and :references
+  handler isn't necessary with a :xref-backend, but will have higher precedence
+  if they exist.
+:async BOOL
+  Indicates that *all* supplied FNs are asynchronous. Note: lookups will not try
+  any handlers after async ones, due to their nature. To get around this, you
+  must write a specialized wrapper to await the async response, or use a
+  different heuristic to determine, ahead of time, whether the async call will
+  succeed or not.
+
+  If you only want to specify one FN is async, declare it inline instead:
+
+    (set-lookup-handlers! 'rust-mode
+      :definition '(racer-find-definition :async t))
+
+Handlers can either be interactive or non-interactive. Non-interactive handlers
+must take one argument: the identifier being looked up. This function must
+change the current buffer or window or return non-nil when it succeeds.
+
+If it doesn't change the current buffer, or it returns nil, the lookup module
+will fall back to the next handler in `+lookup-definition-functions',
+`+lookup-implementations-functions', `+lookup-type-definition-functions',
+`+lookup-references-functions', `+lookup-file-functions' or
+`+lookup-documentation-functions'.
+
+Consecutive `set-lookup-handlers!' calls will overwrite previously defined
+handlers for MODES. If used on minor modes, they are stacked onto handlers
+defined for other minor modes or the major mode it's activated in.
+
+This can be passed nil as its second argument to unset handlers for MODES. e.g.
+
+  (set-lookup-handlers! 'python-mode nil)
+
+\(fn MODES &key DEFINITION IMPLEMENTATIONS TYPE-DEFINITION REFERENCES DOCUMENTATION FILE XREF-BACKEND ASYNC)"

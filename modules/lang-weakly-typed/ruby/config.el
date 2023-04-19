@@ -50,10 +50,10 @@
           (robe-mode +1))))
   :config
   (set-repl-handler! 'ruby-mode #'robe-start)
-  (set-company-backend! 'ruby-mode 'company-robe 'company-dabbrev-code)
-  (set-lookup-handlers! 'ruby-mode
-    :definition #'robe-jump
-    :documentation #'robe-doc)
+  (spec-handling-add! company nil (ruby-mode (company-robe 'company-dabbrev-code)))
+  (spec-handling-add! lookup-handler nil (ruby-mode
+                                          :definition #'robe-jump
+                                          :documentation #'robe-doc))
   (when (boundp 'read-process-output-max)
     ;; Robe can over saturate IPC, making interacting with it slow/clobbering
     ;; the GC, so increase the amount of data Emacs reads from it at a time.
@@ -83,7 +83,7 @@
   :defer t
   :hook (ruby-mode . rubocop-mode)
   :config
-  (set-popup-rule! "^\\*RuboCop" :select t)
+  (spec-handling-add! popup nil (ruby ("^\\*RuboCop" :select t)))
   (map! :localleader
         :map rubocop-mode-map
         "f" #'rubocop-check-current-file
@@ -147,7 +147,9 @@
   (when (modulep! :editor evil)
     (add-hook 'rspec-mode-hook #'evil-normalize-keymaps))
   :config
-  (set-popup-rule! "^\\*\\(rspec-\\)?compilation" :size 0.3 :ttl nil :select t)
+  (spec-handling-add! popup nil
+                      ('rspec ("^\\*\\(rspec-\\)?compilation" :size 0.3 :ttl nil :select t))
+                      )
   (setq rspec-use-rvm (executable-find "rvm"))
   (map! :localleader
         :after jg-dired-bindings
@@ -198,7 +200,7 @@
   (when (modulep! :lang web)
     (add-hook 'web-mode-hook #'projectile-rails-mode))
   :config
-  (set-popup-rule! "^\\*\\(projectile-\\)?rails" :ttl nil)
+  (spec-handling-add! popup nil ('rails ("^\\*\\(projectile-\\)?rails" :ttl nil)))
   (when (modulep! :editor evil)
     (add-hook 'projectile-rails-mode-hook #'evil-normalize-keymaps))
   (map! :localleader

@@ -19,10 +19,10 @@
               vimish-fold-persist-on-saving nil
               )
 
-(spec-handling-add! fold t
+(spec-handling-add! fold nil
                     ('vimish
                      :modes (vimish-fold-mode)
-                     :priority 200
+                     :priority 0
                      :triggers (:delete     vimish-fold-delete
                                 :open-all   vimish-fold-unfold-all
                                 :close-all  vimish-fold-refold-all
@@ -83,7 +83,7 @@
   (spec-handling-add! fold nil
                       ('origami
                        :modes (origami-mode)
-                       :priority 50
+                       :priority -100
                        :triggers (:open-all   origami-open-all-nodes
                                   :close-all  origami-close-all-nodes
                                   :toggle     origami-toggle-node
@@ -132,6 +132,7 @@
 (spec-handling-add! fold nil
                     ('vdiff
                      :modes (vdiff-mode vdiff-3way-mode)
+                     :priority 200
                      :triggers (:open-all   vdiff-open-all-folds
                                 :close-all  vdiff-close-all-folds
                                 :toggle     ,(lambda () (call-interactively 'vdiff-toggle-fold))

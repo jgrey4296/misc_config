@@ -29,12 +29,6 @@ ignored. This makes it easy to override built-in snippets with private ones."
                    return it)
         (car choices)))))
 
-(defun +snippet--ensure-dir (dir)
-  (unless (file-directory-p dir)
-    (if (y-or-n-p (format "%S doesn't exist. Create it?" (abbreviate-file-name dir)))
-        (make-directory dir t)
-      (error "%S doesn't exist" (abbreviate-file-name dir)))))
-
 (defun +snippet--get-template-by-uuid (uuid &optional mode)
   "Look up the template by uuid in child-most to parent-most mode order.
 Finds correctly active snippets from parent modes (based on Yas' logic)."

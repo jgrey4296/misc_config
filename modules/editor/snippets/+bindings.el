@@ -1,5 +1,19 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
+(map! :map yas-keymap
+       ;; "C-e"         #'+snippets/goto-end-of-field
+       ;; "C-a"         #'+snippets/goto-start-of-field
+       [M-right]     #'+snippets/goto-end-of-field
+       [M-left]      #'+snippets/goto-start-of-field
+       [M-backspace] #'+snippets/delete-to-start-of-field
+       [backspace]   #'+snippets/delete-backward-char
+       [delete]      #'+snippets/delete-forward-char-or-field
+       )
+(map! :map yas-minor-mode-map
+       [remap yas-new-snippet]        #'+snippets/new
+       [remap yas-visit-snippet-file] #'+snippets/edit
+       )
+
 ;;-- browsing
 (map! :leader
       :prefix "y"
@@ -16,6 +30,7 @@
 ;;-- snippets
 (map! :map snippet-mode-map
       :after yasnippet
+      "C-c C-k" #'+snippet--abort
       :localleader
       "1" (cmd! (browse-url "https://joaotavora.github.io/yasnippet/snippet-development.html"))
       )

@@ -51,8 +51,6 @@
     (find-file _file _wildcards))
   )
 
-(spec-handling-clear! ibuffer-filters)
-(ibuffer-filters-reapply-specs-fn)
 (spec-handling-new! ibuffer-filters ibuffer-saved-filters nil collect
                     (cons (symbol-name key) val)
                     )

@@ -26,6 +26,7 @@
       ibuffer-default-sorting-mode 'alphabetic
       ibuffer-filter-group-name-face '(:inherit (success bold))
 
+      jg-ibuffer-default-group "-clutter"
       jg-ibuffer-ivy-predicate-patterns (rx (or "*helpful"
                                                 "*helm-"
                                                 "doom"

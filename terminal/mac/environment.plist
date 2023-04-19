@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- link to ~/Library/LaunchAgents/environ,ent.plist -->
+<!-- https://stackoverflow.com/questions/36141784 -->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+  <!--   <key>Label</key> <string>my.startup</string> -->
+  <!--   <key>ProgramArguments</key> <array> -->
+  <!--   <string>sh</string> -->
+  <!--   <string>-c</string> -->
+  <!--   <string> -->
+  <!--     launchctl setenv JAVA_HOME /Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home -->
+  <!--     launchctl setenv M2_HOME /Users/chrismanning/apache-maven-3.2.5 -->
+  <!--   </string> -->
+  <!-- </array> -->
+  <!-- <key>RunAtLoad</key> <true/> -->
+  </dict>
+</plist>

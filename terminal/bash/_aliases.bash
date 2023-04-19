@@ -60,3 +60,6 @@ alias clist="conda env list"
 alias cexport="conda env export --from-history"
 
 alias wake="wakeonlan -i 192.168.1.20 90e6ba7391f9"
+
+# Nushell
+alias nu="nu --config ~/config.nu --env-config ~/env.nu"

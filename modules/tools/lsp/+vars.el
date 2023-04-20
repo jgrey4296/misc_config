@@ -77,6 +77,7 @@ Can be a list of backends; accepts any value `company-backends' accepts.")
 (spec-handling-add! fold nil
                     ('lsp-browser
                      :modes (lsp-browser-mode)
+                     :priority 30
                      :triggers (:open-all   +jg-lsp-toggle-widget-on-line
                                 :close-all  +jg-lsp-toggle-widget-on-line
                                 :toggle     +jg-lsp-toggle-widget-on-line

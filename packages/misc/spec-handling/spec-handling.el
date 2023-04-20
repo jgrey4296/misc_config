@@ -5,6 +5,7 @@
 
 (defvar spec-handling-hook nil)
 (defvar spec-handling-feature-set nil)
+(defvar spec-handling-types (make-hash-table :test 'equal))
 (defconst spec-handling-generated-name-plist '(:table "spec-table"
                                                :apply "reapply-specs-fn"
                                                :feature "spec-feature"
@@ -14,7 +15,16 @@
                                                ))
 (defconst spec-handling-symbol-separator "-")
 
-(defun spec-handling--symname (&rest names)
+(defun spec-handling--add-type (type file &optional form)
+  (unless (or (null file)
+              (--some (and (eq (car it) (or form :source)) (eq (cadr it) file))
+                      (gethash type spec-handling-types nil)))
+    (push (list (or form :use) file) (gethash type spec-handling-types))
+    )
+  (gethash type spec-handling-types nil)
+)
+
+(defun spec-handling--sym-name (&rest names)
   (intern (string-join (mapcar (lambda (x)
                                  (cond
                                   ((keywordp x)
@@ -35,7 +45,11 @@
   (provide 'spec-handling-first-run)
   )
 
-;;(add-hook 'spec-handling-hook #'spec-handling-first-run -100)
+(defun spec-handling-cleanup-after-provide (sym)
+  (interactive "x")
+  (setq after-load-alist (--remove (equal (car it) sym) after-load-alist))
+  nil
+  )
 
 ;;;###autoload
 (defun run-spec-handlers ()
@@ -56,11 +70,12 @@ target
 TODO: add spec format docstring
  "
   (cl-assert (-contains? '(collect append do) accum-kw))
-  (let ((table-name (spec-handling--symname type :table))
-        (reapply-name (spec-handling--symname type :apply))
-        (feature-name (spec-handling--symname type :feature))
+  (let ((table-name (spec-handling--sym-name type :table))
+        (reapply-name (spec-handling--sym-name type :apply))
+        (feature-name (spec-handling--sym-name type :feature))
         (fname (macroexp-file-name))
         )
+    (spec-handling--add-type type fname :definition)
      `(unless (featurep (quote ,feature-name))
         (defvar ,table-name (make-hash-table :test 'equal),(format "Macro generated hash-table to store specs for %s" type ))
         (fset (function ,reapply-name)
@@ -96,11 +111,12 @@ TODO: add spec format docstring
 ;;;###autoload
 (defmacro spec-handling-new-hooks! (type &rest body)
   " register handlers for given modes adapted from doom' set-rotate-patterns! "
-  (let ((table-name (spec-handling--symname type :table))
-        (reapply-name (spec-handling--symname type :apply))
-        (feature-name (spec-handling--symname type :feature))
+  (let ((table-name (spec-handling--sym-name type :table))
+        (reapply-name (spec-handling--sym-name type :apply))
+        (feature-name (spec-handling--sym-name type :feature))
         (fname (macroexp-file-name))
         )
+    (spec-handling--add-type type fname :hooks-definition)
     `(unless (-contains? spec-handling-hook (function ,reapply-name))
        (defvar ,table-name nil  ,(format "Macro generated hash-table to store specs for %s" type ))
        (setq ,table-name (make-hash-table :test 'equal))
@@ -114,7 +130,7 @@ TODO: add spec format docstring
                         (cl-loop for key in (ensure-list modes)
                                  do
                                  (message "Making %s Hook for %s" (quote ,type) key)
-                                 (let ((fn-name (spec-handling--symname (quote ,type) key :mode-hook)))
+                                 (let ((fn-name (spec-handling--sym-name (quote ,type) key :mode-hook)))
                                    (fset fn-name
                                          (-partial (lambda (val)
                                                      ,@body
@@ -138,10 +154,11 @@ TODO: add spec format docstring
 ;;;###autoload
 (defmacro spec-handling-add! (type override &rest rules)
   (let* ((fname (macroexp-file-name))
-         (table-name (spec-handling--symname type :table))
-         (feature-name (spec-handling--symname type :feature))
-         (add-fn-name (spec-handling--symname type fname :add))
+         (table-name (spec-handling--sym-name type :table))
+         (feature-name (spec-handling--sym-name type :feature))
+         (add-fn-name (spec-handling--sym-name type fname :add))
          )
+    (spec-handling--add-type type fname :addition)
     `(with-eval-after-load (quote ,feature-name)
        (cl-loop for val in (quote ,rules)
                 ,@(if override '(do)
@@ -156,7 +173,9 @@ TODO: add spec format docstring
 
 ;;;###autoload
 (defmacro spec-handling-setq! (type &rest vals)
-  (let ((set-name (spec-handling--symname type :set)))
+  (let ((set-name (spec-handling--sym-name type :set))
+        (fname (macroexp-file-name)))
+    (spec-handling--add-type type fname :setting)
     `(progn
        (fset (function ,set-name) (lambda () (setq ,@vals)))
        (add-hook 'spec-handling-hook (function ,set-name) 99)
@@ -167,13 +186,17 @@ TODO: add spec format docstring
 ;;;###autoload
 (defmacro spec-handling-extend! (type &rest rules)
   " extend a registered spec with more rules "
+  (let ((fname (macroexp-file-name)))
+    (spec-handling--add-type type fname :extension)
+    '()
+    )
   )
 
 ;;;###autoload
 (defmacro spec-handling-clear! (type)
-  (let ((table-name (spec-handling--symname type :table))
-        (reapply-name (spec-handling--symname type :apply))
-        (feature-name (spec-handling--symname type :feature))
+  (let ((table-name (spec-handling--sym-name type :table))
+        (reapply-name (spec-handling--sym-name type :apply))
+        (feature-name (spec-handling--sym-name type :feature))
         )
     `(progn
        (when (boundp (quote ,table-name)) (clrhash ,table-name) (unintern (quote ,table-name) nil))
@@ -186,11 +209,31 @@ TODO: add spec format docstring
     )
   )
 
-(defun spec-handling-cleanup-after-provide (sym)
-  (interactive "x")
-  (setq after-load-alist (--remove (equal (car it) sym) after-load-alist))
-  nil
+;;;###autoload
+(defun spec-handling-report ()
+  (interactive)
+  (with-temp-buffer-window "*Spec-Report*" #'display-buffer-same-window nil
+    (princ "-------------------- Registered Specs --------------------\n\n")
+    (cl-loop for key being the hash-keys of spec-handling-types
+             using (hash-values vals)
+             do
+             (princ (format "-- SPEC: %s\n" key))
+             (dolist (def (--select (equal (car it) :definition) vals))
+               (princ (format "----- Defined in: %s\n\n" (cdr def))))
+             (dolist (def (--select (equal (car it) :hooks-definition) vals))
+               (princ (format "----- Hook Defined in: %s\n\n" (cdr def))))
+             (princ "\n----- Additions Defined in: \n")
+             (dolist (def (--select (equal (car it) :addition) vals))
+               (princ (format "%s\n" (cdr def))))
+             (dolist (def (--select (equal (car it) :extension) vals))
+               (princ (format "Extended in %s\n" (cdr def))))
+             (princ "\n----- Settings Defined in: \n")
+             (dolist (def (--select (equal (car it) :setting ) vals))
+               (princ (format "%s\n" (cdr def))))
+             )
+    )
   )
+
 
 (provide 'spec-handling)
 

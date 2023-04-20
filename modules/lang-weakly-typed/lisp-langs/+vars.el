@@ -55,7 +55,7 @@ See `+emacs-lisp-non-package-mode' for details.")
 (spec-handling-add! fold nil
                     ('lisp
                      :modes (emacs-lisp-mode lisp-mode)
-                     :priority 100
+                     :priority 25
                      :triggers (:open-all   hs-show-all
                                 :close-all  hs-hide-all
                                 :toggle     hs-toggle-hiding

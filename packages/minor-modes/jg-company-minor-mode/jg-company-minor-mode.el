@@ -28,8 +28,8 @@
 ;;-- end imports
 
 ;;-- vars
-(defvar jg-company-minor-mode-activation-re nil)
-(defvar jg-company-minor-mode-kws (make-hash-table :test 'equal))
+(defvar-local jg-company-minor-mode-activation-re nil)
+(defvar-local jg-company-minor-mode-kws (make-hash-table :test 'equal))
 ;;-- end vars
 
 ;;-- mode definition
@@ -62,15 +62,14 @@
 
 (defun jg-company/backend (cmd &rest args)
   (interactive (list 'interactive))
-  (message "Completing: %s %s" cmd args)
   (cl-case cmd
     (init            nil)
     ;; Get the value to complete
-    (prefix  (when (and jg-company-minor-mode-activation-re
-                        (s-matches? jg-company-minor-mode-activation-re (current-word)))
+    (prefix  (when (and (buffer-local-value jg-company-minor-mode-activation-re (current-buffer))
+                        (s-matches? (buffer-local-value jg-company-minor-mode-activation-re (current-buffer)) (current-word)))
                (current-word)))
     ;; Get candidates of completion
-    (candidates (gethash (current-word) jg-company-minor-mode-kws))
+    (candidates (gethash (current-word) (buffer-local-value jg-company-minor-mode-kws (current-buffer))))
     ;; Defaults
     (sorted          t)
     (duplicates      nil)

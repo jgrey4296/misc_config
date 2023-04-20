@@ -126,3 +126,8 @@ swaps `yas-global-mode' with `yas-minor-mode'."
                              collect (cons priority clean)
                              )
                     )
+
+(after! (doom-snippets yasnippet-snippets)
+  (when (functionp 'snippets-spec-set)
+    (snippets-spec-set)
+    ))

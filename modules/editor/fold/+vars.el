@@ -22,7 +22,7 @@
 (spec-handling-add! fold nil
                     ('vimish
                      :modes (vimish-fold-mode)
-                     :priority 0
+                     :priority -50
                      :triggers (:delete     vimish-fold-delete
                                 :open-all   vimish-fold-unfold-all
                                 :close-all  vimish-fold-refold-all
@@ -65,7 +65,7 @@
 (spec-handling-add! fold nil
                     ('hide-show
                      :modes (hs-minor-mode)
-                     :priority 50
+                     :priority -25
                      :triggers (:open-all   hs-show-all
                                 :close-all  hs-hide-all
                                 :toggle     hs-toggle-hiding
@@ -100,7 +100,7 @@
 (spec-handling-add! fold nil
                     ('outline
                      :modes (outline-mode outline-minor-mode markdown-mode)
-                     :priority 25
+                     :priority -25
                      :triggers (:open-all   outline-show-all
                                 :close-all #'(with-no-warnings (outline-hide-sublevels 1))
                                 :toggle     outline-toggle-children
@@ -116,7 +116,7 @@
 (spec-handling-add! fold nil
                     ('ifdef
                      :modes (hide-ifdef-mode)
-                     :priority 50
+                     :priority -25
                      :triggers (:open-all   show-ifdefs
                                 :close-all  hide-ifdefs
                                 :toggle     nil

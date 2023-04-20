@@ -31,6 +31,7 @@ If set to `nil', disable all the above behaviors.")
 (spec-handling-add! fold nil
                     ('web
                      :modes (web-mode)
+                     :priority 25
                      :triggers (:open-all   nil
                                 :close-all  nil
                                 :toggle     web-mode-fold-or-unfold

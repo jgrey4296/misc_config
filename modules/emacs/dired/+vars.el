@@ -99,6 +99,7 @@
 (spec-handling-add! fold nil
                     ('dired
                      :modes (dired-mode)
+                     :priority 50
                      :triggers (:open-all   nil
                                 :close-all  nil
                                 :toggle     ,(cmd! (dired-hide-subdir 1))

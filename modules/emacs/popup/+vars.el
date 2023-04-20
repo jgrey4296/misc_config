@@ -51,6 +51,7 @@ adjustment.")
 (spec-handling-add! fold nil
                     ('neotree
                      :modes (neotree-mode)
+                     :priority 25
                      :triggers (:open-all   nil
                                 :close-all  neotree-collapse-all
                                 :toggle     nil

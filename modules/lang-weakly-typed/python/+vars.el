@@ -128,6 +128,7 @@
 (spec-handling-add! fold nil
                     ('python
                      :modes (python-mode)
+                     :priority 25
                      :triggers (:close     +jg-python-close-class-defs
                                 :close-all +jg-python-close-all-defs
                                 :open      outline-toggle-children

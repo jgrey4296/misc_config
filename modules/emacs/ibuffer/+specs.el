@@ -86,7 +86,7 @@
 
 ;; Groups:
 
-(spec-handling-add! ibuffer-groups t
+(spec-handling-add! ibuffer-groups nil
                     (default  (("*Starred*"   (saved . "stars"))
                                 ("*Project: configs" (projectile-root . "__configs"))
                                 ("*Project: writing" (projectile-root . "jgrey4296.github.io"))

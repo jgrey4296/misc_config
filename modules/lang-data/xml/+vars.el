@@ -29,6 +29,7 @@
 (spec-handling-add! fold nil
                       ('xml
                        :modes (web-mode)
+                       :priority 25
                        :triggers (:open-all   nil
                                   :close-all  nil
                                   :toggle     web-mode-fold-or-unfold

@@ -18,3 +18,19 @@
               jg-music-sclang-workspace "SCLang Workspace"
 
               )
+
+(spec-handling-add! lookup-regular nil
+                    (csound-mode
+                     ("Csound Manual" . "https://csound.com/docs/manual/PartOverview.html")
+                     ("Csound tutorial" . "http://www.csounds.com/toots/index.html")
+                     )
+                    (sclang-mode
+                     ("Supercollider docs" . "http://doc.sccode.org/")
+                     )
+                    (chuck-mode
+                     ("Chuck manual" . "https://chuck.cs.princeton.edu/doc/")
+                     )
+                    (tidal-mode
+                     ("Tidal manual" . "https://tidalcycles.org/docs/")
+                     )
+                    )

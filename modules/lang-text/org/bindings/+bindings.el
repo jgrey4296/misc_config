@@ -46,8 +46,6 @@
       :localleader
       :desc "Refile"                 "R" #'+jg-org-refile-subtree
       :desc "Todo"                   "TAB" #'org-todo
-      :desc "Docs: Org"              "1" (cmd! (browse-url "https://orgmode.org/manual/"))
-      :desc "Docs: Babel Snippets"   "2" (cmd! (browse-url "https://orgmode.org/worg/org-contrib/babel/intro.html"))
 
       (:prefix ("f". "Format")
        :desc "Clean Org"             "c" #'+jg-org-clean-master
@@ -120,5 +118,4 @@
 (map! :after graphviz-dot-mode
       :map graphviz-dot-mode-map
       :localleader
-      :desc "Documentation" "1" (cmd! (browse-url "https://graphviz.org/doc/info/lang.html"))
       )

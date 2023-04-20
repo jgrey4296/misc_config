@@ -2,7 +2,6 @@
 
 (map! :map latex-mode-map
       :localleader
-      :desc "Docs: Latex Wikibook" "0" (cmd! (browse-url "https://en.m.wikibooks.org/wiki/LaTeX"))
       :desc "View"          "v" #'TeX-view
       :desc "Compile"       "c" #'TeX-command-run-all
       :desc "Run a command" "m" #'TeX-command-master)

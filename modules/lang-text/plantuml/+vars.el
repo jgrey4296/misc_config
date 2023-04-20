@@ -6,3 +6,9 @@
   )
 
 (add-to-list 'auto-mode-alist '("\\.plantuml" . plantuml-mode))
+
+(spec-handling-add! lookup-regular nil
+                    (plantuml-mode
+                     ("Plantuml Manual" . "https://plantuml.com/")
+                     )
+                    )

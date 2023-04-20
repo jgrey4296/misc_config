@@ -26,7 +26,6 @@
 (after! projectile
   (add-to-list 'projectile-project-root-files "mix.exs"))
 
-
 ;;
 ;;; Packages
 
@@ -72,12 +71,10 @@
              "\\_<-?[[:digit:]]+\\(?:_[[:digit:]]\\{3\\}\\)*\\_>"
              highlight-numbers-modelist)))
 
-
 (use-package! flycheck-credo
   :when (modulep! :checkers syntax)
   :after elixir-mode
   :config (flycheck-credo-setup))
-
 
 (use-package! alchemist
   :hook (elixir-mode . alchemist-mode)
@@ -91,7 +88,6 @@
   (set-eval-handler! 'elixir-mode #'alchemist-eval-region)
   (set-repl-handler! 'elixir-mode #'alchemist-iex-project-run)
   )
-
 
 (use-package! alchemist-company
   :when (modulep! :completion company)

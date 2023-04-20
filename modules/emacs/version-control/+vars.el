@@ -68,3 +68,10 @@ Only has an effect in GUI Emacs.")
                      ("^\\*\\(?:[^/]+/[^ ]+ #[0-9]+\\*$\\|Issues\\|Pull-Requests\\|forge\\)" :ignore t)
                      )
                     )
+
+(spec-handling-add! lookup-regular nil
+                    ((magit-mode magit-status-mode magit-commit-mode)
+                     ("Git" . "https://git-scm.com/doc")
+                     ("Github" . "https://docs.github.com/en")
+                     )
+                    )

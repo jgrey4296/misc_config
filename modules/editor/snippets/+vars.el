@@ -16,6 +16,9 @@
 (defvar +file-templates-dir jg-snippets-file-templates-dir)
 (defvar yas-snippet-dirs    (list jg-snippets-code-templates-dir))
 
+;; default snippets library, if available
+(add-to-list 'load-path jg-snippets-code-templates-dir)
+
 (spec-handling-add! file-templates nil
                     ('general
                      ("/docker-compose\\.yml$" :mode yaml-mode)
@@ -31,10 +34,6 @@
                      )
  )
 
-
-;; default snippets library, if available
-(add-to-list 'load-path jg-snippets-code-templates-dir)
-
 (spec-handling-setq! snippets
                      +file-templates-dir jg-snippets-file-templates-dir
                      +snippets-dir       jg-snippets-code-templates-dir
@@ -43,3 +42,9 @@
                      yas--default-user-snippets-dir jg-snippets-code-templates-dir
                      yas-prompt-functions '(+jg-snippets-yas-prompt-fn)
                      )
+
+(spec-handling-add! lookup-regular nil
+                    (snippet-mode-map
+                     ("Yasnippet Manual" . "https://joaotavora.github.io/yasnippet/snippet-development.html")
+                     )
+                    )

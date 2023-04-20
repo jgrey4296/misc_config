@@ -127,4 +127,20 @@ If the depth is 2, the first two directories are removed: net.lissner.game.")
                     ('gradle ("build.gradle") :project-file "build.gradle" :compilation-dir nil :configure nil :compile "gradle build" :test "gradle test" :install nil :package nil :run nil :test-suffix "Spec")
                     ('jg-kotlin-project ("build.gradle" "build.gradle.kts") :project-file "build.grade")
                     )
+(spec-handling-add! lookup-regular nil
+                    (kotlin-mode
+                     ("Android docs" . "https://developer.android.com/guide")
+                     ("Kotlin reference" . "https://kotlinlang.org/docs/home.html")
+                     ("Gradle Reference" . "https://docs.gradle.org/current/userguide/userguide.html")
+                     ("Kotlin Quick Reference" . "https://kotlin-quick-reference.com/025-R-kotlin-repl.html")
+                     ("JDK Reference" . "https://docs.oracle.com/en/java/javase/20/")
+                     )
+                    (java-mode
+                     ("JDK Reference" . "https://docs.oracle.com/en/java/javase/20/")
+                     )
+                    (groovy-mode
+                     ("Gradle Refernce" . "https://docs.gradle.org/current/dsl/index.html")
+                     ("Groovy Reference" . "https://groovy-lang.org/documentation.html")
+                     )
+                    )
 ;;-- end specs

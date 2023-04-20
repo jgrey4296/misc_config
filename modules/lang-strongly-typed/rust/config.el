@@ -1,17 +1,18 @@
 ;;; lang/rust/config.el -*- lexical-binding: t; -*-
 
 (load! "+vars")
+(load! "+ivy")
 
-;;
+(after! jg-bindings-total
+  (load! "+bindings")
+  )
+
 ;;; Packages
 
 (use-package! rustic
   :defer t
   :mode ("\\.rs$" . rustic-mode)
   :preface
-  ;; HACK `rustic' sets up some things too early. I'd rather disable it and let
-  ;;   our respective modules standardize how they're initialized.
-  (setq rustic-lsp-client nil)
   (after! rustic-lsp
     (remove-hook 'rustic-mode-hook 'rustic-setup-lsp))
   (after! rustic-flycheck
@@ -27,17 +28,6 @@
     (add-to-list 'org-src-lang-modes '("rust" . rustic)))
   :config
   (add-hook 'rustic-mode-hook #'rainbow-delimiters-mode)
-  (set-docsets! 'rustic-mode "Rust")
-  (set-popup-rule! "^\\*rustic-compilation" :vslot -1)
-
-  (setq rustic-indent-method-chain t)
-
-  ;; Conflicts with (and is redundant with) :ui ligatures
-  (setq rust-prettify-symbols-alist nil)
-
-  ;; Leave automatic reformatting to the :editor format module.
-  (setq rustic-babel-format-src-block nil
-        rustic-format-trigger nil)
 
   (if (not (modulep! +lsp))
       (after! rustic-flycheck

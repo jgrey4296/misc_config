@@ -2,7 +2,7 @@
 
 (map! :leader
       :desc "Open Url"              "?"   #'+jg-browse-url
-      :desc "Twitter"               "8" (cmd! (browse-url jg-browse-twitter-url))
+      :desc "Lookup Regular"        "m 1" #'lookup-regular-go
 
       (:prefix "g"
        :desc "Docs: Git Manual"      "1" (cmd! (browse-url jg-browse-github-url))
@@ -18,18 +18,9 @@
       :n "?" 'eww-browse-with-external-browser
       )
 
-
-(map! :map (sh-mode-map shell-mode-map)
-      :after shell
-      :localleader
-      :desc "Docs: Brew"  "1" (cmd! (browse-url "https://brew.sh/"))
-      :desc "Docs: Awk"   "2" (cmd! (browse-url "https://www.gnu.org/software/gawk/manual/gawk.html"))
-      )
-
 (map! :map jg-binding-normal-state-map
       :desc "Lookup" "K" #'+lookup/documentation
       )
-
 
 ;; The lookup commands are superior, and will consult xref if there are no
 ;; better backends available.

@@ -212,25 +212,34 @@ TODO: add spec format docstring
 ;;;###autoload
 (defun spec-handling-report ()
   (interactive)
-  (with-temp-buffer-window "*Spec-Report*" #'display-buffer-same-window nil
-    (princ "-------------------- Registered Specs --------------------\n\n")
-    (cl-loop for key being the hash-keys of spec-handling-types
-             using (hash-values vals)
-             do
-             (princ (format "-- SPEC: %s\n" key))
-             (dolist (def (--select (equal (car it) :definition) vals))
-               (princ (format "----- Defined in: %s\n\n" (cdr def))))
-             (dolist (def (--select (equal (car it) :hooks-definition) vals))
-               (princ (format "----- Hook Defined in: %s\n\n" (cdr def))))
-             (princ "\n----- Additions Defined in: \n")
-             (dolist (def (--select (equal (car it) :addition) vals))
-               (princ (format "%s\n" (cdr def))))
-             (dolist (def (--select (equal (car it) :extension) vals))
-               (princ (format "Extended in %s\n" (cdr def))))
-             (princ "\n----- Settings Defined in: \n")
-             (dolist (def (--select (equal (car it) :setting ) vals))
-               (princ (format "%s\n" (cdr def))))
-             )
+  (let ((temp-buffer-window-show-hook '(org-mode)))
+    (with-temp-buffer-window "*Spec-Report*" #'display-buffer-same-window nil
+      (princ (format "* (%s) Registered Specs --------------------\n\n" (length (hash-table-keys spec-handling-types))))
+      (cl-loop for key being the hash-keys of spec-handling-types
+               using (hash-values vals)
+               do
+               (let ((defs (--select (-contains? '(:definition :hooks-definition) (car it)) vals))
+                     (adds (--select (equal :addition (car it)) vals))
+                     (exts (--select (equal :extension (car it)) vals))
+                     (sets (--select (equal :setting (car it)) vals))
+                     )
+                 (princ (format "** SPEC: %s\n" key))
+                 (if defs
+                     (dolist (def defs) (princ (format "*** Defined in: %s\n" (cadr def))))
+                   (princ "*** SPEC NOT DEFINED ------------------------------\n"))
+                 (if (null adds)
+                     (princ "\n*** No Additions Defined\n")
+                   (princ "\n*** Additions Defined in: \n")
+                   (dolist (add adds) (princ (format "%s\n" (cadr add)))))
+                 (when exts
+                   (dolist (ext exts) (princ (format "**** Extended in %s\n" (cadr ext)))))
+                 (when sets
+                   (princ "\n*** Settings Defined in: \n")
+                   (dolist (set sets) (princ (format "%s\n" (cadr set)))))
+                 (princ "\n\n")
+                 )
+               )
+      )
     )
   )
 

@@ -106,5 +106,19 @@
                      :documentation #'+org-lookup-documentation-handler
                      )
                     )
+(spec-handling-add! whitespace-cleanup nil
+                    (org-mode
+                     (delete-trailing-whitespace +jg-org-clean-heading-spaces +jg-text-cleanup-whitespace)
+                     )
+                 )
+(spec-handling-add! lookup-regular nil
+                    (org-mode
+                     ("Org Manual" . "https://orgmode.org/manual/")
+                     ("Babel Manual" . "https://orgmode.org/worg/org-contrib/babel/intro.html")
+                     )
+                    (graphviz-dot-mode
+                     ("Graphviz docs" . "https://graphviz.org/doc/info/lang.html")
+                     )
+                    )
 (set-eval-handler! 'org-mode #'+org-eval-handler)
 ;;-- end specs

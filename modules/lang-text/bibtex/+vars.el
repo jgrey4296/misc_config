@@ -37,7 +37,7 @@
 ;;-- end bibtex fields
 
 ;;-- urls
-(setq jg-bibtex-reference-url         "https://www.bibtex.com/g/bibtex-format/"
+(setq
       jg-bibtex-doi-url               "https://doi.org/%s"
       )
 ;;-- end urls
@@ -103,5 +103,15 @@
                      :get  +jg-bibtex-get-tags
                      )
                     )
+(spec-handling-add! whitespace-cleanup nil
+                    (bibtex-mode
+                     (+jg-bibtex-cleanup-ensure-newline-before-def delete-trailing-whitespace +jg-text-cleanup-whitespace)
+                     )
+    )
 
+(spec-handling-add! lookup-regular nil
+                    (bibtex-mode
+                     ("bibtex reference" . "https://www.bibtex.com/g/bibtex-format/")
+                     )
+                    )
 ;;-- end specs

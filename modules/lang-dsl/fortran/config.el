@@ -84,3 +84,9 @@
     '("Fortran"
       ["Compile" +fortran/build :active t :help "Compile with Project"]
       ["Run" +fortran/run :active t :help "Run the Executable"])))
+
+(spec-handling-add! lookup-regular nil
+                    (fortran-mode
+                     ("Fortran Reference" . "https://www.intel.com/content/www/us/en/docs/fortran-compiler/developer-guide-reference/2023-0/language-reference.html")
+                     )
+                    )

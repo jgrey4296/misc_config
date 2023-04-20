@@ -67,3 +67,8 @@
                                       +lookup-file-functions (plist-get val :file)
                                       )
                           )
+
+(spec-handling-new-hooks! lookup-regular
+                          ;; Val : alist of (name . url)
+                          (setq-local lookup-regular-targets val)
+                          )

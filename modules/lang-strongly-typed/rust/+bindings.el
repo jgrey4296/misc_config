@@ -22,16 +22,6 @@
 (map! :after rustic
       :map rustic-mode-map
       :localleader
-      (:prefix ("d" . "Docs")
-      :desc "Rust"         "1" (cmd! (browse-url jg-rust-docs-url))
-      :desc "Cargo"        "2" (cmd! (browse-url jg-cargo-docs-url))
-      :desc "Stdlb"        "3" (cmd! (browse-url jg-rust-stdlib-url))
-      :desc "Editions"     "4" (cmd! (browse-url jg-rust-edition-url))
-      :desc "Rustdoc"      "5" (cmd! (browse-url jg-rustdoc-url))
-      :desc "Rust-CPython" "6" (cmd! (browse-url jg-rust-cpython-url))
-      :desc "Rust Py03"    "7" (cmd! (browse-url jg-rust-pyo3-url))
-      :desc "Rust by example" "8" (cmd! (browse-rul "https://doc.rust-lang.org/rust-by-example/index.html"))
-      )
       (:prefix ("b" . "build")
        :desc "cargo audit"      "a" #'+rust/cargo-audit
        :desc "cargo build"      "b" #'rustic-cargo-build
@@ -52,8 +42,6 @@
 (map! :map conf-toml-mode-map
       :desc "Dependency ivy" :n  "?" #'+jg-rust-dependency-ivy
       :localleader
-      :desc "Cargo reference"    "2" (cmd! (browse-url jg-rust-cargo-toml-url))
-      :desc "Cargo-Make"         "3" (cmd! (browse-url jg-rust-cargo-make-url))
       )
 
 (after! rustic

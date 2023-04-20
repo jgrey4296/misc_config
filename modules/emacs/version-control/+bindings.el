@@ -48,14 +48,12 @@
       :n [tab] #'magit-section-toggle
       :nv "gz" #'magit-refresh
       :localleader
-      :desc "Git Docs"    "1" (cmd! (browse-url "https://git-scm.com/doc"))
       :desc "Insert Tag"  "i" #'+jg-vcs-insert-tag
       )
 
 (map! :map git-commit-mode-map
       :after git-commit
       :localleader
-      :desc "Git Docs"    "1" (cmd! (browse-url "https://git-scm.com/doc"))
       :desc "Insert Tag"  "i" #'+jg-vcs-insert-tag
       )
 

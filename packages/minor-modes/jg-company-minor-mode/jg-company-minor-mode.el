@@ -65,11 +65,11 @@
   (cl-case cmd
     (init            nil)
     ;; Get the value to complete
-    (prefix  (when (and (buffer-local-value jg-company-minor-mode-activation-re (current-buffer))
-                        (s-matches? (buffer-local-value jg-company-minor-mode-activation-re (current-buffer)) (current-word)))
+    (prefix  (when (and (buffer-local-value 'jg-company-minor-mode-activation-re (current-buffer))
+                        (s-matches? (buffer-local-value 'jg-company-minor-mode-activation-re (current-buffer)) (current-word)))
                (current-word)))
     ;; Get candidates of completion
-    (candidates (gethash (current-word) (buffer-local-value jg-company-minor-mode-kws (current-buffer))))
+    (candidates (gethash (current-word) (buffer-local-value 'jg-company-minor-mode-kws (current-buffer))))
     ;; Defaults
     (sorted          t)
     (duplicates      nil)

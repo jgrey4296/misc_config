@@ -51,3 +51,10 @@
 
 (use-package! nix-repl
   :commands nix-repl-show)
+
+(spec-handling-add! lookup-regular nil
+                    (nix-mode
+                     ("Nix Reference" . "https://nixos.org/learn.html")
+                     ("Nix Language" . "https://nixos.org/guides/nix-language.html")
+                     )
+                    )

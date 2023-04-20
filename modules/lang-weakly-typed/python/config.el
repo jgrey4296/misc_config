@@ -59,7 +59,6 @@
              )
 
   (setq-hook! 'python-mode-hook
-    jg-text-whitespace-clean-hook '(+jg-python-cleanup-ensure-newline-before-def delete-trailing-whitespace +jg-text-cleanup-whitespace)
     tab-width                    py-indent-offset
     end-of-defun-function       #'python-nav-end-of-defun
     beginning-of-defun-function #'python-nav-beginning-of-defun

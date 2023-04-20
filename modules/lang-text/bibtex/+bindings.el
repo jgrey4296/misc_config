@@ -20,7 +20,6 @@
 (map! :map bibtex-mode-map ;; localleader
       :after bibtex
       :localleader
-      :desc "Reference"           "1"     (cmd! (browse-url jg-bibtex-reference-url))
       :desc "Open In progress"    "0"     (cmd! (bookmark-jump "in_progress_pdfs" #'switch-to-buffer-other-window))
       :desc "Bibtex Hydra"        "."     #'+jg-bibtex-hydra/body
 

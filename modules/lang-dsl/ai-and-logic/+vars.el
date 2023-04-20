@@ -15,7 +15,7 @@
 (set-eval-handler! '(pasp-mode) #'+jg-pasp-eval)
 ;;-- end eval handler
 
-;;-- popup spec
+;;-- specs
 
 (spec-handling-add! popup nil
                     ('clingo
@@ -23,9 +23,6 @@
                      ("^\\*clingo output\\*" :side right :ttl 5 :width 0.4 :quit t :select nil)
                      )
                     )
-;;-- end popup spec
-
-;;-- file spec
 (spec-handling-add! file-templates nil
                     ('logic
                      ("\\.lp4?"  :trigger "__" :mode pasp-mode)
@@ -36,4 +33,29 @@
                      ("\\.soar$" :trigger "__" :mode soar-mode)
                      )
                     )
-;;-- end file spec
+(spec-handling-add! lookup-regular nil
+                    (jacamo-mode
+                     ("Jacamo Github" . "https://github.com/jacamo-lang/jacamo")
+                     ("Jacamo API" . "https://jacamo.sourceforge.net/doc/api/index.html")
+                     ("JASON Api" . "https://jason.sourceforge.net/api/index.html")
+                     ("JASON Github" . "https://github.com/jason-lang/jason")
+                     )
+                    (prolog-mode
+                     ("SWIPL reference" . "https://www.swi-prolog.org/pldoc/doc_for?object=manual")
+                     ("SWIPL CLI" . "https://www.swi-prolog.org/pldoc/man?section=cmdline")
+                     )
+                    (soar-mode
+                     ("Soar Reference" . "https://soar.eecs.umich.edu/articles/articles/documentation/73-command-line-help")
+                     )
+                    (pasp-mode
+                     ("Potassco homepage" . "https://potassco.org/doc/")
+                     )
+                    (z3-mode
+                     ("Z3 github" . "https://github.com/Z3Prover/z3")
+                     ("Z3 Guide" . "https://z3prover.github.io/papers/programmingz3.html")
+                     ("Z3 internals" . "https://z3prover.github.io/papers/z3internals.html")
+                     ("F* Z3 guide" . "http://fstar-lang.org/tutorial/book/under_the_hood/uth_smt.html#understanding-how-f-uses-z3")
+                     ("Z3 Tutorial" . "https://www.philipzucker.com/z3-rise4fun/guide.html")
+                     )
+                    )
+;;-- end specs

@@ -89,6 +89,14 @@ If no viewer is found, `latex-preview-pane-mode' is used.")
                       ("^\*latex\*"         :side right  :ttl nil :width  0.5 :quit nil :select t :priority 50)
                       )
                     )
+(spec-handling-add! lookup-regular nil
+                    (latex-mode
+                     ("Latex Wikibook" . "https://en.m.wikibooks.org/wiki/LaTeX")
+                     ("CTAN packages" . "https://www.ctan.org/pkg/latex")
+                     ("Overleaf docs" . "https://www.overleaf.com/learn")
+                     ("Latex Tutorial" . "https://latex-tutorial.com/")
+                     )
+                    )
 ;;-- end specs
 
 

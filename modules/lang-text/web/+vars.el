@@ -27,7 +27,7 @@ If set to `nil', disable all the above behaviors.")
     "CSS" "HTML" "Bourbon" "Compass"
     ["Sass" (memq major-mode '(scss-mode sass-mode))]))
 
-;;-- fold spec
+;;-- specs
 (spec-handling-add! fold nil
                     ('web
                      :modes (web-mode)
@@ -41,4 +41,19 @@ If set to `nil', disable all the above behaviors.")
                                 )
                      )
                     )
-;;-- end fold spec
+(spec-handling-add! lookup-regular nil
+                    ((css-mode less-css-mode scss-mode sass-mode)
+                     ("CSS Reference" . "https://developer.mozilla.org/en-US/docs/Web/CSS")
+                     ("LESS Reference" . "https://lesscss.org/features/")
+                     ("Cheatsheet" . "https://htmlcheatsheet.com/css/")
+                     ("Css templates" . "https://markdowncss.github.io/")
+                     )
+                    (web-mode
+                     ("HTML Reference" . "https://developer.mozilla.org/en-US/docs/Web/HTML")
+                     ("Cheatsheet" . "https://htmlcheatsheet.com/")
+                     )
+                    (+web-pelican-mode
+                     ("Pelican" . "https://docs.getpelican.com/en/latest/")
+                     )
+                    )
+;;-- end specs

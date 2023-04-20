@@ -18,7 +18,6 @@
       :after yasnippet
       "C-c C-k" #'+snippet--abort
       :localleader
-      "1" (cmd! (browse-url "https://joaotavora.github.io/yasnippet/snippet-development.html"))
       )
 
 (map! :leader

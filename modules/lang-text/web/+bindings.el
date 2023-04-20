@@ -84,10 +84,6 @@
       :n "s j" #'counsel-css
 
       :localleader
-      :desc "CSS Reference"   :n "1" (cmd! (browse-url "https://developer.mozilla.org/en-US/docs/Web/CSS"))
-      :desc "LESS Reference"  :n "2" (cmd! (browse-url "https://lesscss.org/features/"))
-
-
       (:prefix ("b" . "build")
        :desc "Compile Less" :n "l" #'less-css-compile
       )

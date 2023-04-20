@@ -127,3 +127,44 @@
 ;; Tree sitter
 (eval-when! (modulep! +tree-sitter)
   (add-hook! 'tuareg-mode-local-vars-hook #'tree-sitter!))
+
+(use-package! sml-mode
+  :defer t
+  :mode "\\.s\\(?:ml\\|ig\\)\\'"
+  :config
+  (set-repl-handler! 'sml-mode #'run-sml)
+
+  ;; don't auto-close apostrophes (type 'a = foo) and backticks (`Foo)
+  (sp-with-modes 'sml-mode
+    (sp-local-pair "'" nil :actions nil)
+    (sp-local-pair "`" nil :actions nil))
+
+  (map! :map sml-mode-map
+        :i "RET"   #'reindent-then-newline-and-indent
+        :i "S-SPC" #'sml-electric-space
+        :i "|"     #'sml-electric-pipe
+        :localleader
+        :desc "Run SML" "'" #'run-sml
+        :prefix ("e" . "eval")
+        :desc "Run buffer"                  "b" #'sml-prog-proc-send-buffer
+        :desc "Run the paragraph"           "f" #'sml-send-function
+        :desc "Run region"                  "r" #'sml-prog-proc-send-region))
+
+
+(use-package! company-mlton
+  :defer t
+  :when (modulep! :completion company)
+  :hook (sml-mode . company-mlton-init)
+  :config
+  (spec-handling-add! company nil (sml-mode company-mlton-grouped-backend))
+  )
+
+(spec-handling-add! lookup-regular nil
+                    (ocaml-mode
+                     ("OCaml Reference" . "https://v2.ocaml.org/releases/5.0/htmlman/index.html")
+                     ("Ocaml Tutorial" . "https://ocaml.org/docs/up-and-running")
+                     )
+                    (sml-mode
+                     ("SML Docs" . "https://smlfamily.github.io/")
+                     )
+                    )

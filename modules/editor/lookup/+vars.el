@@ -107,9 +107,6 @@ Dictionary.app behind the scenes to get definitions.")
       jg-browse-curl-args "-sLI"
 
       jg-browse-use-preview t
-      jg-browse-google-url       "https://duckduckgo.com/?q=%s"
-      jg-browse-twitter-url      "https://twitter.com"
-      jg-browse-github-url       "https://git-scm.com/doc"
 
       browse-url-browser-function '+jg-browse-default
       browse-url-default-handlers nil
@@ -147,5 +144,18 @@ Dictionary.app behind the scenes to get definitions.")
                       ("^@" . +jg-browse-twitter)
                       ("."  . +jg-browse-default)
                       )
+                    )
+(spec-handling-add! lookup-regular nil
+                    (shell-mode
+                     ("Brew" . "https://brew.sh/")
+                     ("Awk" . "https://www.gnu.org/software/gawk/manual/gawk.html")
+                     ("Bash reference" . "https://www.gnu.org/software/bash/manual/bash.html")
+                     ("Sed Reference" . "https://www.gnu.org/software/sed/manual/sed.html")
+                     ("Ripgrep manual" . "https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md")
+                     ("Nushell cmds" . "https://www.nushell.sh/commands/")
+                     ("Nushell" . "https://www.nushell.sh/book/")
+                     ("Nushell cookbook" . "https://www.nushell.sh/cookbook/")
+                     ("Nushell github" . "https://github.com/nushell/nushell")
+                     )
                     )
 ;;-- end specs

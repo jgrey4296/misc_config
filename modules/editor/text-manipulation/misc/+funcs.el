@@ -1,6 +1,7 @@
 ;;; util/text/+funcs.el -*- lexical-binding: t; -*-
 
 ;;-- cleaning
+
 (defun +jg-text-strip-spaces (str)
   "Utility to replace spaces with underscores in a string.
 Used to guard inputs in tag strings"
@@ -34,6 +35,7 @@ Used to guard inputs in tag strings"
 ;;-- end cleaning
 
 ;;-- utils
+
 (defun +jg-text-yank-buffer-name ()
   (interactive)
   (message (kill-new (buffer-name)))
@@ -75,6 +77,7 @@ Used to guard inputs in tag strings"
 ;;-- end utils
 
 ;;-- util inserts
+
 (defun +jg-text-insert-lparen ()
   " utility to insert a (  "
   (interactive)
@@ -93,7 +96,6 @@ Used to guard inputs in tag strings"
   )
 
 ;;-- end util inserts
-
 
 (defun +jg-text-split-on-leading-char (char-no width dist)
   " Loop through the buffer, splitting lines if the substring has a greater levenstein distance from the previous line "

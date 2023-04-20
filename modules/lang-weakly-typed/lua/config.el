@@ -93,3 +93,9 @@ lua-language-server.")
     (map! :localleader
           :map +lua-love-mode-map
           "b" #'+lua/run-love-game)))
+
+(spec-handling-add! lookup-regular nil
+                    (lua-mode
+                     ("Lua Manual" . "https://www.lua.org/manual/5.4/")
+                     )
+                    )

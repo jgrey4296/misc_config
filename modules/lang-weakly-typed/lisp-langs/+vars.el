@@ -96,12 +96,12 @@ See `+emacs-lisp-non-package-mode' for details.")
                      :documentation +emacs-lisp-lookup-documentation
                      )
                     ((racket-mode racket-repl-mode)
-                     :definition    #'+racket-lookup-definition
-                     :documentation #'+racket-lookup-documentation
+                     :definition    +racket-lookup-definition
+                     :documentation +racket-lookup-documentation
                      )
                     ('inferior-emacs-lisp-mode
-                      :definition    #'+emacs-lisp-lookup-definition
-                      :documentation #'+emacs-lisp-lookup-documentation
+                      :definition    +emacs-lisp-lookup-definition
+                      :documentation +emacs-lisp-lookup-documentation
                       )
                     )
 (spec-handling-add! rotate-text t
@@ -124,9 +124,16 @@ See `+emacs-lisp-non-package-mode' for details.")
 (spec-handling-add! company t
                     (emacs-lisp-mode (company-capf company-yasnippet identity))
                     )
-(spec-handling-add! whitespace-cleanup nil
-    (emacs-lisp-mode (delete-trailing-whitespace +jg-lisp-cleanup-ensure-newline +jg-text-cleanup-whitespace))
+(spec-handling-add! whitespace-cleanup t
+    (emacs-lisp-mode delete-trailing-whitespace +jg-lisp-cleanup-ensure-newline +jg-text-cleanup-whitespace)
     )
+(spec-handling-add! lookup-regular t
+                    (emacs-lisp-mode
+                     ("GNU Lisp" . "https://www.gnu.org/software/emacs/manual/html_node/elisp/index.html")
+                     ("Melpa" . "https://melpa.org/#/")
+                     )
+                    )
+
 
 (set-repl-handler! '(emacs-lisp-mode lisp-interaction-mode) #'+emacs-lisp/open-repl)
 (set-repl-handler! 'racket-mode #'+racket/open-repl)

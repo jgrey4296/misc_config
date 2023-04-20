@@ -139,13 +139,6 @@
 (use-package-hook! org :post-config
   (message "post configuring org")
   (provide 'jg-org-stage)
-  (add-hook! org-mode-hook :append
-    (setq-local  jg-text-whitespace-clean-hook
-                 '(delete-trailing-whitespace
-                   +jg-org-clean-heading-spaces
-                   +jg-text-cleanup-whitespace)
-                 )
-    )
   )
 
 ;;; Bootstrap

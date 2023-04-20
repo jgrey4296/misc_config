@@ -5,8 +5,16 @@
   (load! "+bindings")
   )
 
-;;;###package proof-general
-(setq proof-splash-enable nil)
+(use-package! proof-general
+  :defer t
+  :init
+  (setq proof-splash-enable nil)
+  :config
+  (set-face-attribute 'proof-locked-face nil
+                      :inverse-video t
+                      :underline nil
+                      )
+  )
 
 
 ;;;###package coq
@@ -22,52 +30,6 @@
 ;; library included with Doom).
 (setq coq-mode-abbrev-table '())
 
-(map! :after coq-mode
-      :map coq-mode-map
-      :localleader
-      "]"  #'proof-assert-next-command-interactive
-      "["  #'proof-undo-last-successful-command
-      "."  #'proof-goto-point
-      (:prefix ("l" . "layout")
-        "c" #'pg-response-clear-displays
-        "l" #'proof-layout-windows
-        "p" #'proof-prf)
-      (:prefix ("p" . "proof")
-        "i" #'proof-interrupt-process
-        "p" #'proof-process-buffer
-        "q" #'proof-shell-exit
-        "r" #'proof-retract-buffer)
-      (:prefix ("a" . "about/print/check")
-        "a" #'coq-Print
-        "A" #'coq-Print-with-all
-        "b" #'coq-About
-        "B" #'coq-About-with-all
-        "c" #'coq-Check
-        "C" #'coq-Check-show-all
-        "f" #'proof-find-theorems
-        (:prefix ("i" . "implicits")
-          "b" #'coq-About-with-implicits
-          "c" #'coq-Check-show-implicits
-          "i" #'coq-Print-with-implicits))
-      (:prefix ("g" . "goto")
-        "e" #'proof-goto-command-end
-        "l" #'proof-goto-end-of-locked
-        "s" #'proof-goto-command-start)
-      (:prefix ("i" . "insert")
-        "c" #'coq-insert-command
-        "e" #'coq-end-Section
-        "i" #'coq-insert-intros
-        "r" #'coq-insert-requires
-        "s" #'coq-insert-section-or-module
-        "t" #'coq-insert-tactic
-        "T" #'coq-insert-tactical))
-
-(use-package-hook! proof-general :post-config
-  (set-face-attribute 'proof-locked-face nil
-                      :inverse-video t
-                      :underline nil
-                      )
-)
 
 ;; This package provides more than just code completion, so we load it whether
 ;; or not :completion company is enabled.
@@ -75,12 +37,6 @@
   :defer t
   :hook (coq-mode . company-coq-mode)
   :config
-  (set-popup-rule! "^\\*\\(?:response\\|goals\\)\\*" :ignore t)
-  (set-lookup-handlers! 'company-coq-mode
-    :definition #'company-coq-jump-to-definition
-    :references #'company-coq-grep-symbol
-    :documentation #'company-coq-doc)
-
   (setq company-coq-disabled-features '(hello company-defaults spinner))
 
   (if (modulep! :completion company)
@@ -91,13 +47,33 @@
     ;; https://github.com/cpitclaudel/company-coq/issues/42
     (add-to-list 'company-coq-disabled-features 'company))
 
-  (map! :map coq-mode-map
-        :localleader
-        "ao" #'company-coq-occur
-        (:prefix "i"
-          "l" #'company-coq-lemma-from-goal
-          "m" #'company-coq-insert-match-construct)
-        (:prefix ("h" . "help")
-          "e" #'company-coq-document-error
-          "E" #'company-coq-browse-error-messages
-          "h" #'company-coq-doc)))
+  )
+
+
+(spec-handling-add! popup nil
+                    ('coq
+                     ("^\\*\\(?:response\\|goals\\)\\*" :ignore t)
+                     )
+                    )
+(spec-handling-add! lookup-handler nil
+                    (company-coq-mode
+                     :definition company-coq-jump-to-definition
+                     :references company-coq-grep-symbol
+                     :documentation company-coq-doc
+                     )
+                    )
+(spec-handling-add! lookup-regular nil
+                    ((coq-mode proof-general)
+                     ("Proof general github" . "https://github.com/ProofGeneral/PG/")
+                     ("Proof General Manual" . "https://proofgeneral.github.io/doc/master/userman/")
+                     ("Coq Github" . "https://github.com/coq/coq")
+                     ("Coq Manual" . "https://coq.inria.fr/distrib/current/refman/")
+                     ("Coq Standard Lib" . "https://coq.inria.fr/distrib/current/stdlib/")
+                     ("Logical Foundations (1)" . "https://softwarefoundations.cis.upenn.edu/lf-current/toc.html")
+                     ("Prog Lang Foundations (2)" . "https://softwarefoundations.cis.upenn.edu/plf-current/toc.html")
+                     ("Verified Functional Algorithms (3)". "https://softwarefoundations.cis.upenn.edu/vfa-current/toc.html")
+                     ("Quickchik (4)". "https://softwarefoundations.cis.upenn.edu/qc-current/toc.html")
+                     ("Verified C (5)" . "https://softwarefoundations.cis.upenn.edu/vc-current/toc.html")
+                     ("Separation Logic (6)" . "https://softwarefoundations.cis.upenn.edu/slf-current/toc.html")
+                     )
+                    )

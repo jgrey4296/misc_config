@@ -1,6 +1,8 @@
 ;;; lang/idris/config.el -*- lexical-binding: t; -*-
 
-(after! idris-mode
+(use-package! idris-mode
+  :defer t
+  :config
   (add-hook 'idris-mode-hook #'turn-on-idris-simple-indent)
   (when (modulep! +lsp)
     (add-hook 'idris-mode-hook #'lsp! 'append))
@@ -17,4 +19,13 @@
         "w" #'idris-make-with-block
         "m" #'idris-add-missing
         "p" #'idris-proof-search
-        "h" #'idris-docs-at-point))
+        "h" #'idris-docs-at-point)
+
+  )
+
+(spec-handling-add! lookup-regular nil
+                    (idris-mode
+                     ("Idris Documentation" . "https://www.idris-lang.org/pages/documentation.html")
+                     ("Idris Manual" . "https://idris2.readthedocs.io/en/latest/index.html")
+                     )
+                    )

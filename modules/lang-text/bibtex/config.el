@@ -36,11 +36,6 @@
   (add-hook! 'bibtex-mode-hook :append
     (bibtex-set-dialect 'jg)
     (require 'helm)
-    (setq-local jg-text-whitespace-clean-hook
-                '(+jg-bibtex-cleanup-ensure-newline-before-def
-                  delete-trailing-whitespace
-                  +jg-text-cleanup-whitespace)
-               )
     )
 
   )

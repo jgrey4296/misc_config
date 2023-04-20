@@ -20,6 +20,6 @@
     )
 )
 
-(define-globalized-minor-mode global-$1-minor-mode $1-minor-mode/turn-on)
+(define-globalized-minor-mode global-$1-minor-mode $1-minor-mode $1-minor-mode/turn-on)
 
 (provide '$1-minor-mode)

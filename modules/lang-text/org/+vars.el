@@ -66,7 +66,7 @@
 
 ;;-- specs
 (spec-handling-add! file-templates nil
-                    ('org
+                    '(org
                      ("two_pager\\.org$"     :trigger "__pacheco_vega_two_pager" :mode org-mode)
                      ("lit_review\\.org$"    :trigger "__lit_review"             :mode org-mode)
                      ("inst_pipeline\\.org$" :trigger "__institution_pipeline"   :mode org-mode)
@@ -80,7 +80,7 @@
                      )
                     )
 (spec-handling-add! fold nil
-                    ('org
+                    '(org
                      :modes (org-mode doom-docs-org-mode)
                      :triggers (:open-all   nil
                                 :close-all  org-cycle-global
@@ -93,21 +93,23 @@
                     )
 (spec-handling-add! tagging nil
                     '(org-mode
-                     :set #'+jg-org-set-tags
-                     :new #'+jg-org-set-new-tag
-                     :get #'org-get-tags
+                     :set +jg-org-set-tags
+                     :new +jg-org-set-new-tag
+                     :get org-get-tags
                      )
                     )
 (spec-handling-add! lookup-handler nil
                     '(org-mode
-                     :definition #'+org-lookup-definition-handler
-                     :references #'+org-lookup-references-handler
-                     :documentation #'+org-lookup-documentation-handler
+                     :definition +org-lookup-definition-handler
+                     :references +org-lookup-references-handler
+                     :documentation +org-lookup-documentation-handler
                      )
                     )
 (spec-handling-add! whitespace-cleanup nil
                     '(org-mode
-                     (#'delete-trailing-whitespace #'+jg-org-clean-heading-spaces #'+jg-text-cleanup-whitespace)
+                      delete-trailing-whitespace
+                      +jg-org-clean-heading-spaces
+                      +jg-text-cleanup-whitespace
                      )
                  )
 (spec-handling-add! lookup-regular nil

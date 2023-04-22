@@ -20,6 +20,10 @@ If the depth is 2, the first two directories are removed: net.lissner.game.")
 (setq-default kotlin-repl-buffer "*kotlin*"
               kotlin-command "kotlinc")
 
+(setq scala-indent:align-parameters t
+      ;; indent block comments to first asterix, not second
+      scala-indent:use-javadoc-style t)
+
 (after! projectile
   (pushnew! projectile-project-root-files "build.gradle")
   (pushnew! projectile-project-root-files "build.gradle.kts")
@@ -82,21 +86,21 @@ If the depth is 2, the first two directories are removed: net.lissner.game.")
 
 ;;-- specs
 (spec-handling-add! file-templates nil
-                    ('java
-                     ("/main\\.java$"    :trigger "__main"         :mode java-mode)
-                     ("/src/.+\\.java$" :mode java-mode)
+                    '(java
+                     ("/main\\.java$"    :trigger "__main" :mode java-mode)
+                     ("/src/.+\\.java$"                    :mode java-mode)
                      )
-                    ('gradle
+                    '(gradle
                      ("build\\.gradle$"           :trigger "build.gradle"    :mode groovy-mode)
                      ("settings\\.gradle$"        :trigger "settings.gradle" :mode groovy-mode)
                      )
-                    ('kotlin
+                    '(kotlin
                      ("build\\.gradle\\.kts$"     :trigger "build.gradle.kts" :mode kotlin-mode)
                      )
                     )
 
 (spec-handling-add! lookup-url nil
-                    ('java
+                    '(java
                      ("Kotlin" "https://kotlinlang.org/docs/home.html?q=%s&s=full")
                      ("Android" "https://developer.android.com/s/results?q=%s")
                      )
@@ -123,24 +127,33 @@ If the depth is 2, the first two directories are removed: net.lissner.game.")
     )
 
 (spec-handling-add! projects nil
-                    ('gradlew ("gradlew") :project-file "gradlew" :compilation-dir nil :configure nil :compile "./gradlew build" :test "./gradlew test" :install nil :package nil :run nil :test-suffix "Spec")
-                    ('gradle ("build.gradle") :project-file "build.gradle" :compilation-dir nil :configure nil :compile "gradle build" :test "gradle test" :install nil :package nil :run nil :test-suffix "Spec")
-                    ('jg-kotlin-project ("build.gradle" "build.gradle.kts") :project-file "build.grade")
+                    '(gradlew ("gradlew") :project-file "gradlew" :compilation-dir nil :configure nil :compile "./gradlew build" :test "./gradlew test" :install nil :package nil :run nil :test-suffix "Spec")
+                    '(gradle ("build.gradle") :project-file "build.gradle" :compilation-dir nil :configure nil :compile "gradle build" :test "gradle test" :install nil :package nil :run nil :test-suffix "Spec")
+                    '(jg-kotlin-project ("build.gradle" "build.gradle.kts") :project-file "build.grade")
                     )
 (spec-handling-add! lookup-regular nil
-                    (kotlin-mode
+                    '(kotlin-mode
                      ("Android docs" . "https://developer.android.com/guide")
                      ("Kotlin reference" . "https://kotlinlang.org/docs/home.html")
                      ("Gradle Reference" . "https://docs.gradle.org/current/userguide/userguide.html")
                      ("Kotlin Quick Reference" . "https://kotlin-quick-reference.com/025-R-kotlin-repl.html")
                      ("JDK Reference" . "https://docs.oracle.com/en/java/javase/20/")
                      )
-                    (java-mode
+                    '(java-mode
                      ("JDK Reference" . "https://docs.oracle.com/en/java/javase/20/")
                      )
-                    (groovy-mode
+                    '(groovy-mode
                      ("Gradle Refernce" . "https://docs.gradle.org/current/dsl/index.html")
                      ("Groovy Reference" . "https://groovy-lang.org/documentation.html")
+                     )
+                    '(scala-mode
+                     ("Scala Documentation" . "https://docs.scala-lang.org/")
+                     ("Scala API" . "https://docs.scala-lang.org/api/all.html")
+                     ("Scala Cheatsheet" . "https://docs.scala-lang.org/cheatsheets/index.html")
+                     ("Scala Language Reference" . "https://docs.scala-lang.org/scala3/reference/")
+                     ("Scala Language Spec" . "https://scala-lang.org/files/archive/spec/2.13/")
+                     ("SBT Reference" . "https://www.scala-sbt.org/1.x/docs/index.html")
+                     ("Scala LSP" . "https://scalameta.org/metals/docs/")
                      )
                     )
 ;;-- end specs

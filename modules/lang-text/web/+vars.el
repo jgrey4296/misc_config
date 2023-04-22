@@ -29,7 +29,7 @@ If set to `nil', disable all the above behaviors.")
 
 ;;-- specs
 (spec-handling-add! fold nil
-                    ('web
+                    '(web
                      :modes (web-mode)
                      :priority 25
                      :triggers (:open-all   nil

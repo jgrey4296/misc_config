@@ -1,7 +1,7 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
 (spec-handling-add! lookup-regular nil
-                    (rst-mode
+                    '(rst-mode
                      ("Restructured Text Reference" .  "https://restructuredtext.documatt.com/index.html")
                      ("Docutils Reference" .  "https://docutils.sourceforge.io/docs/user/rst/quickstart.html")
                      ("Guide" .  "https://www.writethedocs.org/guide/writing/reStructuredText/")

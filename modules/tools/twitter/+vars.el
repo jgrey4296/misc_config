@@ -21,7 +21,7 @@
 
 ;;-- lookup spec
 (spec-handling-add! lookup-url nil
-                    ('twitter
+                    '(twitter
                      ("Twitter"            "https://twitter.com/%s")
                      )
                     )

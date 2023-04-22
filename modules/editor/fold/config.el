@@ -29,7 +29,7 @@
 
 (spec-handling-new! fold evil-fold-list t collect
                     (append (list (* -1 (or (plist-get val :priority) 0)))
-                            (list (plist-get val :modes))
+                            (list (ensure-list (plist-get val :modes)))
                             (plist-get val :triggers)
                             )
                     )

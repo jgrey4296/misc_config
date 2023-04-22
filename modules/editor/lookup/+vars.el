@@ -114,7 +114,7 @@ Dictionary.app behind the scenes to get definitions.")
 
 ;;-- specs
 (spec-handling-add! lookup-url nil
-                    ('defaults
+                    '(defaults
                       ("DuckDuckGo"         +lookup--online-backend-duckduckgo "https://duckduckgo.com/?q=%s")
                       ("Github"             "https://github.com/search?ref=simplesearch&q=%s")
                       ("DevDocs.io"         "https://devdocs.io/#q=%s")
@@ -130,7 +130,7 @@ Dictionary.app behind the scenes to get definitions.")
                        )
                      )
 (spec-handling-add! lookup-url nil
-                    ('plus
+                    '(plus
                      ("Google"            +lookup--online-backend-google "https://google.com/search?q=%s")
                      ("Google images"     "https://www.google.com/images?q=%s")
                      ("Google maps"       "https://maps.google.com/maps?q=%s")
@@ -140,13 +140,13 @@ Dictionary.app behind the scenes to get definitions.")
                      )
                     )
 (spec-handling-add! browse-handler nil
-                    ('default
+                    '(default
                       ("^@" . +jg-browse-twitter)
                       ("."  . +jg-browse-default)
                       )
                     )
 (spec-handling-add! lookup-regular nil
-                    (shell-mode
+                    '(shell-mode
                      ("Brew" . "https://brew.sh/")
                      ("Awk" . "https://www.gnu.org/software/gawk/manual/gawk.html")
                      ("Bash reference" . "https://www.gnu.org/software/bash/manual/bash.html")

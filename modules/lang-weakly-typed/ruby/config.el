@@ -51,12 +51,12 @@
   :config
   (set-repl-handler! 'ruby-mode #'robe-start)
   (spec-handling-add! company nil
-                      '(ruby-mode (:mode . #'company-robe))
+                      '(ruby-mode (:mode . company-robe))
                       )
   (spec-handling-add! lookup-handler nil
                       '(ruby-mode
-                        :definition #'robe-jump
-                        :documentation #'robe-doc)
+                        :definition robe-jump
+                        :documentation robe-doc)
                       )
   (when (boundp 'read-process-output-max)
     ;; Robe can over saturate IPC, making interacting with it slow/clobbering
@@ -152,7 +152,7 @@
     (add-hook 'rspec-mode-hook #'evil-normalize-keymaps))
   :config
   (spec-handling-add! popup nil
-                      ('rspec ("^\\*\\(rspec-\\)?compilation" :size 0.3 :ttl nil :select t))
+                      '(rspec ("^\\*\\(rspec-\\)?compilation" :size 0.3 :ttl nil :select t))
                       )
   (setq rspec-use-rvm (executable-find "rvm"))
   (map! :localleader

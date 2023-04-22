@@ -74,6 +74,7 @@
   :commands jg-company/backend
   )
 
+
 (defvar-local company-backends-sort-vals nil)
 (defconst jg-company-backend-position-default 60)
 (defconst jg-company-backend-positions
@@ -99,7 +100,6 @@
   )
 
 (spec-handling-new-hooks! company
-                          (message "Setting company backends: %s" val)
                           (setq-local company-backends-sort-vals (append (mapcar #'+jg-company-position-parse val)
                                                                          company-backends-sort-vals)
                                       company-backends (seq-uniq (mapcar #'cdr

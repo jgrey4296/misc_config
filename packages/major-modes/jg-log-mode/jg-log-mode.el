@@ -135,7 +135,7 @@
   (set-buffer-modified-p nil)
 
   )
-(add-to-list 'auto-mode-alist '("log\\..+$" . jg-log-mode))
+(add-to-list 'auto-mode-alist '("/log\\..+$" . jg-log-mode))
 
 (provide 'jg-log-mode)
 ;;; jg-log-mode.el ends here

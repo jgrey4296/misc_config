@@ -44,11 +44,11 @@
                       )
                     )
 (spec-handling-add! company nil
-                    '(nix-mode (:mode . #'company-nixos-options))
+                    '(nix-mode (:mode . company-nixos-options))
                     )
 (spec-handling-add! lookup-handler nil
                     '(nix-mode
-                     :documentation (#'+nix/lookup-option :async t)
+                     :documentation (+nix/lookup-option :async t)
                      )
                     )
 (spec-handling-add! popup nil

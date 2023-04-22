@@ -110,7 +110,7 @@ TODO: add spec format docstring
 
 ;;;###autoload
 (defmacro spec-handling-new-hooks! (type &rest body)
-  " register handlers for given modes adapted from doom' set-rotate-patterns! "
+  " register handlers for given modes. adapted from doom's set-rotate-patterns! "
   (let ((table-name (spec-handling--sym-name type :table))
         (reapply-name (spec-handling--sym-name type :apply))
         (feature-name (spec-handling--sym-name type :feature))
@@ -160,7 +160,7 @@ TODO: add spec format docstring
          )
     (spec-handling--add-type type fname :addition)
     `(with-eval-after-load (quote ,feature-name)
-       (cl-loop for val in (quote ,rules)
+       (cl-loop for val in (list ,@rules)
                 ,@(if override '(do)
                     `(if (gethash (car val) ,table-name nil)
                          do (message "Spec Handling Add: Attempt to override Spec: %s - %s - %s" (quote ,type) (car val) ,fname)

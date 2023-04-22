@@ -20,9 +20,9 @@
                     )
 
 (spec-handling-add! popup t
-                    ('defaults
-                      ("*jg-customised*" :priority -200)
-                      )
+                    '(defaults
+                       ("*jg-customised*" :priority -200)
+                       )
                     )
 
 (add-hook! 'doom-init-ui-hook   #'+popup-mode 'append)

@@ -10,7 +10,7 @@ import argparse
 import functools
 import itertools
 import logging as logmod
-import pathlib
+import pathlib as pl
 import re
 import sys
 import importlib

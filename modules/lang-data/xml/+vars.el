@@ -16,26 +16,12 @@
 ;;-- specs
 
 (spec-handling-add! popup nil
-                    ('nxml
-                          ((,jg-xml-xpath-results-buffer-name :side bottom :ttl nil :height 0.3 :quit t :select nil :priority 100)
-                           (,jg-xml-xmllint-shell-buffer-name :side right  :ttl nil :width  0.3 :quit t :select t   :priority 100)
-                           )
-                          )
-                    )
-
-(spec-handling-add! fold nil
-                      ('xml
-                       :modes (web-mode)
-                       :priority 25
-                       :triggers (:open-all   nil
-                                  :close-all  nil
-                                  :toggle     web-mode-fold-or-unfold
-                                  :open       nil
-                                  :open-rec   nil
-                                  :close      nil
-                                  )
+                    `(nxml
+                      ((,jg-xml-xpath-results-buffer-name :side bottom :ttl nil :height 0.3 :quit t :select nil :priority 100)
+                       (,jg-xml-xmllint-shell-buffer-name :side right  :ttl nil :width  0.3 :quit t :select t   :priority 100)
                        )
                       )
+                    )
 
 (spec-handling-add! lookup-url nil
                     '(xml

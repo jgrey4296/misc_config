@@ -97,7 +97,7 @@ lua-language-server.")
           "b" #'+lua/run-love-game)))
 
 (spec-handling-add! lookup-regular nil
-                    (lua-mode
+                    '(lua-mode
                      ("Lua Manual" . "https://www.lua.org/manual/5.4/")
                      )
                     )

@@ -15,7 +15,7 @@
 ;;-- specs
 (spec-handling-add! projects nil
                     '(dotnet-sln ("src") :project-file "?*.sln" :compilation-dir nil :configure nil :compile "dotnet build" :test "dotnet test" :install nil :package nil :run "dotnet run")
-                    '(dotnet #'projectile-dotnet-project-p :project-file ("?*.csproj" "?*.fsproj") :compilation-dir nil :configure nil :compile "dotnet build" :test "dotnet test" :install nil :package nil :run "dotnet run")
+                    '(dotnet projectile-dotnet-project-p :project-file ("?*.csproj" "?*.fsproj") :compilation-dir nil :configure nil :compile "dotnet build" :test "dotnet test" :install nil :package nil :run "dotnet run")
                     )
 (spec-handling-add! rotate-text nil
                     '(csharp-mode
@@ -36,7 +36,7 @@
                      )
                     )
 (spec-handling-add! lookup-handler nil
-                    '(fsharp-mode :async t :definition #'fsharp-ac/gotodefn-at-point)
+                    '(fsharp-mode :async t :definition fsharp-ac/gotodefn-at-point)
                     )
 (spec-handling-add! company nil
                     '(fsharp-mode (:mode . #'fsharp-ac/company-backend))

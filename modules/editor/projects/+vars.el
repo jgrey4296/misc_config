@@ -18,14 +18,14 @@
       )
 
 (spec-handling-add! file-templates nil
-                    ('project
+                    '(project
                      ("/doot\\.toml$" :trigger "__doot_toml" :mode conf-toml-mode)
                      ("/Makefile$"             :mode makefile-gmake-mode)
                      )
                     )
 
 (spec-handling-add! popup nil
-                    ('proj-walk
+                    '(proj-walk
                      ("^\\*Project-Walk\\*" :side left :ttl nil :quit t :select nil :priority -50)
                      )
                     )

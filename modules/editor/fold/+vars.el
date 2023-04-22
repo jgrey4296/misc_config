@@ -19,8 +19,8 @@
               vimish-fold-persist-on-saving nil
               )
 
-(spec-handling-add! fold nil
-                    ('vimish
+(spec-handling-add! fold t
+                    '(vimish
                      :modes (vimish-fold-mode)
                      :priority -50
                      :triggers (:delete     vimish-fold-delete
@@ -40,13 +40,13 @@
               hs-set-up-overlay #'+fold-hideshow-set-up-overlay-fn
               )
 (spec-handling-add! hideshow t
-                    ('default
+                    '(default
                       ;;MODE START END COMMENT-START FORWARD-SEXP-FUNC ADJUST-BEG-FUNC
                       (vimrc-mode "{{{" "}}}" "\"")
-                      (yaml-mode "\\s-*\\_<\\(?:[^:]+\\)\\_>" "" "#" +fold-hideshow-forward-block-by-indent-fn nil)
-                      (haml-mode "[#.%]" "\n" "/" +fold-hideshow-haml-forward-sexp-fn nil)
-                      (ruby-mode "class\\|d\\(?:ef\\|o\\)\\|module\\|[[{]" "end\\|[]}]" "#\\|=begin" ruby-forward-sexp)
-                      (matlab-mode "if\\|switch\\|case\\|otherwise\\|while\\|for\\|try\\|catch" "end" nil (lambda (_arg) (matlab-forward-sexp)))
+                      (yaml-mode "\\s-*\\_<\\(?:[^:]+\\)\\_>" "" "#" #'+fold-hideshow-forward-block-by-indent-fn nil)
+                      (haml-mode "[#.%]" "\n" "/" #'+fold-hideshow-haml-forward-sexp-fn nil)
+                      (ruby-mode "class\\|d\\(?:ef\\|o\\)\\|module\\|[[{]" "end\\|[]}]" "#\\|=begin" #'ruby-forward-sexp)
+                      (matlab-mode "if\\|switch\\|case\\|otherwise\\|while\\|for\\|try\\|catch" "end" nil #'(lambda (_arg) (matlab-forward-sexp)))
                       (nxml-mode "<!--\\|<[^/>]*[^/]>"
                                  "-->\\|</[^/>]*[^/]>"
                                  "<!--" sgml-skip-tag-forward nil)
@@ -54,7 +54,7 @@
                        ("\\\\begin{[a-zA-Z*]+}\\(\\)" 1)
                        "\\\\end{[a-zA-Z*]+}"
                        "%"
-                       (lambda (_arg) ;; Don't fold whole document, that's useless
+                       #'(lambda (_arg) ;; Don't fold whole document, that's useless
                          (unless (save-excursion
                                    (search-backward "\\begin{document}"
                                                     (line-beginning-position) t))
@@ -63,7 +63,7 @@
                       )
 
 (spec-handling-add! fold nil
-                    ('hide-show
+                    `(hide-show
                      :modes (hs-minor-mode)
                      :priority -25
                      :triggers (:open-all   hs-show-all
@@ -81,7 +81,7 @@
 ;;-- origami
 (when (modulep! +origami)
   (spec-handling-add! fold nil
-                      ('origami
+                      '(origami
                        :modes (origami-mode)
                        :priority -100
                        :triggers (:open-all   origami-open-all-nodes
@@ -97,14 +97,14 @@
 ;;-- end origami
 
 ;;-- outline
-(spec-handling-add! fold nil
-                    ('outline
+(spec-handling-add! fold t
+                    `(outline
                      :modes (outline-mode outline-minor-mode markdown-mode)
                      :priority -25
                      :triggers (:open-all   outline-show-all
-                                :close-all #'(with-no-warnings (outline-hide-sublevels 1))
+                                :close-all  ,(cmd! (with-no-warnings (outline-hide-sublevels 1)))
                                 :toggle     outline-toggle-children
-                                :open       #'(with-no-warnings (outline-show-entry) (outline-show-children))
+                                :open       ,(cmd! (with-no-warnings (outline-show-entry) (outline-show-children)))
                                 :open-rec   outline-show-subtree
                                 :close      outline-hide-subtree
                                 )
@@ -114,7 +114,7 @@
 
 ;;-- c like ifdef
 (spec-handling-add! fold nil
-                    ('ifdef
+                    '(ifdef
                      :modes (hide-ifdef-mode)
                      :priority -25
                      :triggers (:open-all   show-ifdefs
@@ -130,15 +130,15 @@
 
 ;;-- diff mode
 (spec-handling-add! fold nil
-                    ('vdiff
+                    '(vdiff
                      :modes (vdiff-mode vdiff-3way-mode)
                      :priority 200
                      :triggers (:open-all   vdiff-open-all-folds
                                 :close-all  vdiff-close-all-folds
-                                :toggle     ,(lambda () (call-interactively 'vdiff-toggle-fold))
-                                :open       ,(lambda () (call-interactively 'vdiff-open-fold))
-                                :open-rec   ,(lambda () (call-interactively 'vdiff-open-fold))
-                                :close      ,(lambda () (call-interactively 'vdiff-close-fold))
+                                :toggle     vdiff-toggle-fold
+                                :open       vdiff-open-fold
+                                :open-rec   vdiff-open-fold
+                                :close      vdiff-close-fold
                                 )
                      )
                     )

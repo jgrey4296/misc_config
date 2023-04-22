@@ -82,7 +82,7 @@
 
 ;;-- specs
 (spec-handling-add! lookup-url nil
-                    ('bibtex
+                    '(bibtex
                      ("Scholar"  "https://scholar.google.com/scholar?hl=en&q=%s")
                      ("Scholar Archive"    "https://scholar.archive.org/search?q=%s")
                      ("DBLP"               "https://dblp1.uni-trier.de/search?q=%s")
@@ -97,20 +97,22 @@
                     )
 
 (spec-handling-add! tagging nil
-                    (bibtex-mode
+                    '(bibtex-mode
                      :set  +jg-bibtex-set-tags
                      :new  +jg-bibtex-set-new-tag
                      :get  +jg-bibtex-get-tags
                      )
                     )
 (spec-handling-add! whitespace-cleanup nil
-                    (bibtex-mode
-                     (+jg-bibtex-cleanup-ensure-newline-before-def delete-trailing-whitespace +jg-text-cleanup-whitespace)
+                    '(bibtex-mode
+                     +jg-bibtex-cleanup-ensure-newline-before-def
+                     delete-trailing-whitespace
+                     +jg-text-cleanup-whitespace
                      )
-    )
+                    )
 
 (spec-handling-add! lookup-regular nil
-                    (bibtex-mode
+                    '(bibtex-mode
                      ("bibtex reference" . "https://www.bibtex.com/g/bibtex-format/")
                      )
                     )

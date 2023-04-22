@@ -124,3 +124,27 @@
 (after! (evil evil-snipe)
   (push 'dired-mode evil-snipe-disabled-modes)
   )
+
+;;-- specs
+(spec-handling-add! fold nil
+                    `(dired
+                     :modes (dired-mode)
+                     :priority 50
+                     :triggers (:open-all   nil
+                                :close-all  nil
+                                :toggle     ,(cmd! (dired-hide-subdir 1))
+                                :open       nil
+                                :open-rec   nil
+                                :close      nil
+                                )
+                     )
+                    )
+
+(spec-handling-add! popup nil
+                    '(dired
+                     ("^\\*image-dired" :slot 20 :size 0.8 :select t :quit nil :ttl 0)
+                     ("^\\*ranger" :ignore t)
+                     ("^*CookieCutter*" :side bottom :select nil :quit t :ttl 0)
+                     )
+                    )
+;;-- end specs

@@ -8,7 +8,13 @@
 (add-to-list 'auto-mode-alist '("\\.plantuml" . plantuml-mode))
 
 (spec-handling-add! lookup-regular nil
-                    (plantuml-mode
+                    '(plantuml-mode
                      ("Plantuml Manual" . "https://plantuml.com/")
                      )
+                    )
+
+(spec-handling-add! popup nil
+                    '(plantuml
+                      ("^\\*PLANTUML" :size 0.4 :select nil :ttl 0)
+                      )
                     )

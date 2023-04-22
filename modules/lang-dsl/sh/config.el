@@ -22,7 +22,7 @@
       ("-i" "%d" (unless indent-tabs-mode tab-width))
       ("-ln" "%s" (pcase sh-shell (`bash "bash") (`mksh "mksh") (_ "posix")))))
   (set-repl-handler! 'sh-mode #'+sh/open-repl)
-  (spec-handling-add! lookup-handler nil (sh-mode :documentation +sh-lookup-documentation-handler))
+  (spec-handling-add! lookup-handler nil '(sh-mode :documentation #'+sh-lookup-documentation-handler))
   (set-ligatures! 'sh-mode
     ;; Functional
     :def "function"

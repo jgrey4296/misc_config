@@ -11,9 +11,9 @@
   :hook (restclient-mode . display-line-numbers-mode)
   :config
   (spec-handling-add! popup nil
-                      ('rest
-                       ("^\\*HTTP Response" :size 0.4 :quit 'other)
-                       )
+                      '(rest
+                        ("^\\*HTTP Response" :size 0.4 :quit 'other)
+                        )
                       )
 
   (setq-hook! 'restclient-mode-hook

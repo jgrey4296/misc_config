@@ -58,7 +58,7 @@
 
 ;;-- specs
 (spec-handling-add! popup nil
-                    ('lsp
+                    '(lsp
                      (
                       ("^\*lsp session\*"  :side right  :ttl nil :width 0.5 :quit t :select nil :priority 50)
                       ("^\\*lsp-\\(help\\|install\\)" :size 0.35 :quit t :select t)
@@ -68,7 +68,7 @@
                     )
 
 (spec-handling-add! fold nil
-                    ('lsp-browser
+                    '(lsp-browser
                      :modes (lsp-browser-mode)
                      :priority 30
                      :triggers (:open-all   +jg-lsp-toggle-widget-on-line
@@ -88,28 +88,28 @@
 ;;                     )
 
 (spec-handling-add! lookup-handler nil
-                    (lsp-mode
-                     :definition #'+lsp-lookup-definition-handler
-                     :references #'+lsp-lookup-references-handler
-                     :documentation '(lsp-describe-thing-at-point :async t)
-                     :implementations '(lsp-find-implementation :async t)
-                     :type-definition #'lsp-find-type-definition
+                    '(lsp-mode
+                     :definition +lsp-lookup-definition-handler
+                     :references +lsp-lookup-references-handler
+                     :documentation (lsp-describe-thing-at-point :async t)
+                     :implementations (lsp-find-implementation :async t)
+                     :type-definition lsp-find-type-definition
                      )
-                    (eglot--managed-mode
-                     :definition      #'xref-find-definitions
-                     :references      #'xref-find-references
-                     :implementations #'eglot-find-implementation
-                     :type-definition #'eglot-find-typeDefinition
-                     :documentation   #'+eglot-lookup-documentation
+                    '(eglot--managed-mode
+                     :definition      xref-find-definitions
+                     :references      xref-find-references
+                     :implementations eglot-find-implementation
+                     :type-definition eglot-find-typeDefinition
+                     :documentation   +eglot-lookup-documentation
                      )
                     )
 
 (when (modulep! +peek)
   (spec-handling-add! lookup-handler nil
-                      (lsp-ui-mode
-                       :definition         'lsp-ui-peek-find-definitions
-                       :implementations    'lsp-ui-peek-find-implementation
-                       :references         'lsp-ui-peek-find-references
+                      '(lsp-ui-mode
+                       :definition         lsp-ui-peek-find-definitions
+                       :implementations    lsp-ui-peek-find-implementation
+                       :references         lsp-ui-peek-find-references
                        :async t
                        )
                       )

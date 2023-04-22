@@ -60,18 +60,18 @@ Only has an effect in GUI Emacs.")
       )
 
 (spec-handling-add! popup t
-                    ('magit
+                    '(magit
                      ("^\\(?:\\*magit\\|magit:\\| \\*transient\\*\\)" :ignore t :priority 200)
                      )
-                    ('forge
+                    '(forge
                      ( "^\\*?[0-9]+:\\(?:new-\\|[0-9]+$\\)" :size 0.45 :modeline t :ttl 0 :quit nil)
                      ("^\\*\\(?:[^/]+/[^ ]+ #[0-9]+\\*$\\|Issues\\|Pull-Requests\\|forge\\)" :ignore t)
                      )
                     )
 
 (spec-handling-add! lookup-regular nil
-                    ((magit-mode magit-status-mode magit-commit-mode)
-                     ("Git" . "https://git-scm.com/doc")
-                     ("Github" . "https://docs.github.com/en")
-                     )
+                    '((magit-mode magit-status-mode magit-commit-mode)
+                      ("Git" . "https://git-scm.com/doc")
+                      ("Github" . "https://docs.github.com/en")
+                      )
                     )

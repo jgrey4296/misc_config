@@ -49,7 +49,7 @@ adjustment.")
 (setq neo-toggle-window-keep-p t)
 
 (spec-handling-add! fold nil
-                    ('neotree
+                    '(neotree
                      :modes (neotree-mode)
                      :priority 25
                      :triggers (:open-all   nil

@@ -25,6 +25,7 @@
       org-directory                   (expand-file-name "~/github/jgrey4296.github.io/orgfiles/")
       pyvenv-default-virtual-env-name (expand-file-name "~/anaconda/envs/")
       server-auth-dir                 (expand-file-name "~/.secrets")
+      native-comp-eln-load-path       (list (expand-file-name "cache/eln" doom-local-dir))
       )
 
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/.local/modules"))

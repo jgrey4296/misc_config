@@ -59,12 +59,12 @@
                     )
 
 (spec-handling-new-hooks! lookup-handler
-                          (setq-local +lookup-definition-functions (plist-get val :definition)
+                          (setq-local +lookup-definition-functions      (plist-get val :definition)
                                       +lookup-implementations-functions (plist-get val :implementations)
                                       +lookup-type-definition-functions (plist-get val :type-definition)
-                                      +lookup-references-functions (plist-get val :references)
-                                      +lookup-documentation-functions (plist-get val :documentation)
-                                      +lookup-file-functions (plist-get val :file)
+                                      +lookup-references-functions      (plist-get val :references)
+                                      +lookup-documentation-functions   (plist-get val :documentation)
+                                      +lookup-file-functions            (plist-get val :file)
                                       )
                           )
 

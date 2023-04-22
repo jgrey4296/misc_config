@@ -20,18 +20,18 @@
 (add-to-list 'load-path jg-snippets-code-templates-dir)
 
 (spec-handling-add! file-templates nil
-                    ('general
-                     ("/docker-compose\\.yml$" :mode yaml-mode)
-                     ;; direnv
-                     ("/\\.envrc$" :trigger "__envrc" :mode direnv-envrc-mode)
-                     ;; Markdown
-                     (markdown-mode)
-                     ;; Markdown
-                     (sh-mode :priority -100)
-                     (gitignore-mode :priority -100)
-                     (dockerfile-mode)
-                     (snippet-mode)
-                     )
+                    '(general
+                      ("/docker-compose\\.yml$" :mode yaml-mode)
+                      ;; direnv
+                      ("/\\.envrc$" :trigger "__envrc" :mode direnv-envrc-mode)
+                      ;; Markdown
+                      (markdown-mode)
+                      ;; Markdown
+                      (sh-mode :priority -100)
+                      (gitignore-mode :priority -100)
+                      (dockerfile-mode)
+                      (snippet-mode)
+                      )
  )
 
 (spec-handling-setq! snippets
@@ -40,7 +40,7 @@
                      yas-snippet-dirs    (-filter #'identity (append (list jg-snippets-code-templates-dir jg-snippets-file-templates-dir)
                                                                      jg-snippet-dirs))
                      yas--default-user-snippets-dir jg-snippets-code-templates-dir
-                     yas-prompt-functions '(#'+jg-snippets-yas-prompt-fn)
+                     yas-prompt-functions '(+jg-snippets-yas-prompt-fn)
                      )
 
 (spec-handling-add! lookup-regular nil
@@ -50,5 +50,5 @@
                     )
 
 (spec-handling-add! company
-                    '(yas-minor-mode (:disfavour . #'company-yasnippet))
+                    '(yas-minor-mode (:disfavour . company-yasnippet))
                     )

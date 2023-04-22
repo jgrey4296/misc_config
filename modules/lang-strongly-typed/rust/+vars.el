@@ -34,12 +34,12 @@
 
 ;;-- specs
 (spec-handling-add! popup nil
-                    ('rust
+                    '(rust
                      ("^\\*rustic-compilation" :vslot -1)
                      )
                     )
 (spec-handling-add! file-templates
-                    ('rust
+                    '(rust
                      ("config\\.toml$"   :trigger "__config.toml" :mode rust-mode)
                      ("Cargo\\.toml$"    :trigger "__Cargo.toml"  :mode rust-mode)
                      ("Makefile\\.toml$" :trigger "__"            :mode cargo-makefile-mode)
@@ -54,7 +54,7 @@
                     )
 
 (spec-handling-add! lookup-url nil
-                    ('rust
+                    '(rust
                      ("Rust Stdlib"     "https://doc.rust-lang.org/std/?search=%s")
                      ("Rust Crates.io"  "https://crates.io/search?q=%s")
                      ("Rust docs.rs"    "https://docs.rs/releases/search?query=%s")
@@ -84,12 +84,12 @@
     )
 
 (spec-handling-add! projects t
-                    ('jg-rust ("Cargo.toml")     :project-file "Cargo.toml" :configure nil :test nil :test-dir nil :test-prefix nil :related-files-fn +jg-rust-related-files-fn)
-                    ( 'rust-cargo ("Cargo.toml") :project-file "Cargo.toml" :compilation-dir nil :configure nil :compile "cargo build" :test "cargo test" :install nil :package nil :run "cargo run")
+                    '(jg-rust ("Cargo.toml")     :project-file "Cargo.toml" :configure nil :test nil :test-dir nil :test-prefix nil :related-files-fn +jg-rust-related-files-fn)
+                    '(rust-cargo ("Cargo.toml") :project-file "Cargo.toml" :compilation-dir nil :configure nil :compile "cargo build" :test "cargo test" :install nil :package nil :run "cargo run")
                     )
 
 (spec-handling-add! lookup-regular nil
-                    ( (rust-mode rustic-mode)
+                    '((rust-mode rustic-mode)
                       ("Rust By Example"         . "https://doc.rust-lang.org/rust-by-example/index.html")
                       ("rust book"               . "https://doc.rust-lang.org/stable/book/title-page.html")
                       ("cargo book"              . "https://doc.rust-lang.org/cargo/")

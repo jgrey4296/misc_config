@@ -2,6 +2,7 @@
 
 ;;
 ;;; Packages
+(load! "+vars")
 
 (when (modulep! +lsp)
   (add-hook! '(tuareg-mode-local-vars-hook

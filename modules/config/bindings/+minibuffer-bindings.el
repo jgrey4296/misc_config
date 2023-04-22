@@ -22,7 +22,7 @@
 
 (map! :map minibuffer-mode-map
       :i "j" #'self-insert-command
-      :i "|" #'minibuffer-keyboard-quit
+      :n "|" #'minibuffer-keyboard-quit
       "RET"  #'exit-minibuffer
       )
 

@@ -24,8 +24,8 @@
   )
 
 (spec-handling-add! lookup-regular nil
-                    (idris-mode
-                     ("Idris Documentation" . "https://www.idris-lang.org/pages/documentation.html")
-                     ("Idris Manual" . "https://idris2.readthedocs.io/en/latest/index.html")
-                     )
+                    '(idris-mode
+                      ("Idris Documentation" . "https://www.idris-lang.org/pages/documentation.html")
+                      ("Idris Manual" . "https://idris2.readthedocs.io/en/latest/index.html")
+                      )
                     )

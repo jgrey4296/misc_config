@@ -1,4 +1,4 @@
- ;;; jg-company-minor-mode.el -*- lexical-binding: t; no-byte-compile: t;-*-
+ ;;; jg-company.el -*- lexical-binding: t; no-byte-compile: t;-*-
 ;;-- header
 ;;
 ;; Copyright (C) 2023 John Grey
@@ -28,48 +28,20 @@
 ;;-- end imports
 
 ;;-- vars
-(defvar-local jg-company-minor-mode-activation-re nil)
-(defvar-local jg-company-minor-mode-kws (make-hash-table :test 'equal))
+(defvar-local jg-company-activation-re nil)
+(defvar-local jg-company-kws (make-hash-table :test 'equal))
 ;;-- end vars
-
-;;-- mode definition
-
-(define-minor-mode jg-company-minor-mode
-  "  "
-  :init-value nil
-  :lighter "jg-company"
-  ;; :global t
-  ;; :keymap nil
-  (unless (-contains? company-backends 'jg-company/backend)
-    (message "Pushing to %s" company-backends)
-    (push 'jg-company/backend company-backends)
-    )
-  )
-
-(defun jg-company-minor-mode/turn-on ()
-  (unless (minibufferp)
-    (jg-company-minor-mode 1)
-    )
-  )
-
-(define-globalized-minor-mode global-jg-company-minor-mode
-  jg-company-minor-mode
-  jg-company-minor-mode/turn-on
-  (message "Activating global jg-company-minor-mode")
-  )
-
-;;-- end mode definition
 
 (defun jg-company/backend (cmd &rest args)
   (interactive (list 'interactive))
   (cl-case cmd
     (init            nil)
     ;; Get the value to complete
-    (prefix  (when (and (buffer-local-value 'jg-company-minor-mode-activation-re (current-buffer))
-                        (s-matches? (buffer-local-value 'jg-company-minor-mode-activation-re (current-buffer)) (current-word)))
+    (prefix  (when (and (buffer-local-value 'jg-company-activation-re (current-buffer))
+                        (s-matches? (buffer-local-value 'jg-company-activation-re (current-buffer)) (current-word)))
                (current-word)))
     ;; Get candidates of completion
-    (candidates (gethash (current-word) (buffer-local-value 'jg-company-minor-mode-kws (current-buffer))))
+    (candidates (gethash (current-word) (buffer-local-value 'jg-company-kws (current-buffer))))
     ;; Defaults
     (sorted          t)
     (duplicates      nil)
@@ -94,5 +66,5 @@
     )
   )
 
-(provide 'jg-company-minor-mode)
-;;; jg-company-minor-mode.el ends here
+(provide 'jg-company)
+;;; jg-company.el ends here

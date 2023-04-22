@@ -34,7 +34,9 @@ certs, rather than reject them silently."
   :when (modulep! :completion company)
   :after restclient
   :config
-  (spec-handling-add! company nil (restclient-mode company-restclient))
+  (spec-handling-add! company nil
+                      '(restclient-mode (:mode . #'company-restclient))
+                      )
   )
 
 (use-package! restclient-jq

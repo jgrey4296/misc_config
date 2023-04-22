@@ -4,7 +4,6 @@
 (after! jg-bindings-total
   (load! "+bindings"))
 
-
 (use-package! markdown-mode
   :defer t
   :mode ("/README\\(?:\\.md\\)?\\'" . gfm-mode)

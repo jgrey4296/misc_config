@@ -40,11 +40,15 @@
                      yas-snippet-dirs    (-filter #'identity (append (list jg-snippets-code-templates-dir jg-snippets-file-templates-dir)
                                                                      jg-snippet-dirs))
                      yas--default-user-snippets-dir jg-snippets-code-templates-dir
-                     yas-prompt-functions '(+jg-snippets-yas-prompt-fn)
+                     yas-prompt-functions '(#'+jg-snippets-yas-prompt-fn)
                      )
 
 (spec-handling-add! lookup-regular nil
-                    (snippet-mode-map
+                    '(snippet-mode-map
                      ("Yasnippet Manual" . "https://joaotavora.github.io/yasnippet/snippet-development.html")
                      )
+                    )
+
+(spec-handling-add! company
+                    '(yas-minor-mode (:disfavour . #'company-yasnippet))
                     )

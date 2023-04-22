@@ -78,22 +78,12 @@
 
 (use-package! alchemist
   :hook (elixir-mode . alchemist-mode)
-  :config
-  (spec-handling-add! lookup-handler nil
-                      (elixir-mode
-                       :definition #'alchemist-goto-definition-at-point
-                       :documentation #'alchemist-help-search-at-point
-                       )
-                      )
-  (set-eval-handler! 'elixir-mode #'alchemist-eval-region)
-  (set-repl-handler! 'elixir-mode #'alchemist-iex-project-run)
   )
 
 (use-package! alchemist-company
   :when (modulep! :completion company)
   :commands alchemist-company
   :config
-  (spec-handling-add! company nil (alchemist-mode (alchemist-company company-yasnippet)))
   ;; Alchemist doesn't use hook symbols to add these backends, so we have to use
   ;; the entire closure to get rid of it.
   (let ((fn (byte-compile (lambda () (add-to-list (make-local-variable 'company-backends) 'alchemist-company)))))

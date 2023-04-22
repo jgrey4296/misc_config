@@ -13,9 +13,12 @@
           '(all-the-icons-fileicon "graphql" :v-adjust -0.05 :face all-the-icons-rhodamine))
     (setf (alist-get 'graphql-mode all-the-icons-mode-icon-alist)
           '(all-the-icons-fileicon "graphql" :v-adjust -0.05 :face all-the-icons-rhodamine)))
-  (if (modulep! +lsp)
-      (add-hook 'graphql-mode-local-vars-hook #'lsp! 'append)
-    (spec-handling-add! company nil (graphql-mode company-graphql)))
+  (when (modulep! +lsp)
+    (add-hook 'graphql-mode-local-vars-hook #'lsp! 'append)
+    )
+  (spec-handling-add! company nil
+                      '(graphql-mode (:mode . #'company-graphql))
+                      )
 
   (add-hook 'graphql-mode-hook #'rainbow-delimiters-mode)
   (set-docsets! 'graphql-mode :add "GraphQL Specification")

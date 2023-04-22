@@ -34,7 +34,6 @@
                              LaTeX-section-label)
         LaTeX-fill-break-at-separators nil
         LaTeX-item-indent 0)
-  (spec-handling-add! company nil (latex-mode +latex--company-backends))
   )
 
 
@@ -152,23 +151,17 @@ Math faces should stay fixed by the mixed-pitch blacklist, this is mostly for
 (use-package! company-auctex
   :when (modulep! :completion company)
   :defer t
-  :init
-  (add-to-list '+latex--company-backends #'company-auctex-environments nil #'eq)
-  (add-to-list '+latex--company-backends #'company-auctex-macros nil #'eq)
   )
 
 (use-package! company-math
   :when (modulep! :completion company)
   :defer t
-  :init
-  (add-to-list '+latex--company-backends #'+latex-symbols-company-backend nil #'eq)
   )
 
 (use-package! reftex
   :hook (LaTeX-mode . reftex-mode)
   :config
   ;; Set up completion for citations and references.
-  (spec-handling-add! company nil (reftex-mode (company-reftex-labels company-reftex-citations)))
   (add-hook 'reftex-mode-hook #'evil-normalize-keymaps)
 
   (add-hook! 'reftex-toc-mode-hook

@@ -1,6 +1,5 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
-;;-- xml commands
 (setq jg-xml-xpath-command-string  "xmllint --pretty 2 --htmlout --xpath %s %s"
       jg-xml-format-command-string "xmllint --format %s"
       jg-xml-xidel-command-string  "xidel -s --output-format=xml --xpath \"%s\" %s"
@@ -9,8 +8,6 @@
       jg-xml-xmllint-shell-buffer-name "*xmllint*"
 
       )
-
-;;-- end xml commands
 
 (setq mailcap-mime-extensions nil)
 (pushnew! mailcap-mime-extensions '(".xhtml" . "text/html"))
@@ -41,9 +38,11 @@
                       )
 
 (spec-handling-add! lookup-url nil
-                    ('xml
+                    '(xml
                      ("Firefox Dev" "https://developer.mozilla.org/en-US/search?q=%s")
                      )
                     )
-
+(spec-handling-add! company nil
+                    '(nxml-mode (:mode . #'company-nxml))
+                    )
 ;;-- end specs

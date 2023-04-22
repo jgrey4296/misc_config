@@ -14,19 +14,33 @@
 
 ;;-- specs
 (spec-handling-add! projects nil
-                    ('dotnet-sln ("src") :project-file "?*.sln" :compilation-dir nil :configure nil :compile "dotnet build" :test "dotnet test" :install nil :package nil :run "dotnet run")
-                    ('dotnet #'projectile-dotnet-project-p :project-file ("?*.csproj" "?*.fsproj") :compilation-dir nil :configure nil :compile "dotnet build" :test "dotnet test" :install nil :package nil :run "dotnet run")
+                    '(dotnet-sln ("src") :project-file "?*.sln" :compilation-dir nil :configure nil :compile "dotnet build" :test "dotnet test" :install nil :package nil :run "dotnet run")
+                    '(dotnet #'projectile-dotnet-project-p :project-file ("?*.csproj" "?*.fsproj") :compilation-dir nil :configure nil :compile "dotnet build" :test "dotnet test" :install nil :package nil :run "dotnet run")
+                    )
+(spec-handling-add! rotate-text nil
+                    '(csharp-mode
+                     :symbols (("public" "protected" "private")
+                               ("class" "struct"))
+                     )
                     )
 (spec-handling-add! lookup-regular nil
-                    (csharp-mode
+                    '(csharp-mode
                      ("Unity Manual" . "https://docs.unity3d.com/Manual/index.html")
                      ("Unity C# Reference" . "https://docs.unity3d.com/ScriptReference/index.html")
                      ("Mono Reference" . "http://docs.go-mono.com/")
                      ("Microsoft C# reference" . "https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/")
 
                      )
-                    (fsharp-mode
+                    '(fsharp-mode
                      ("Microsoft F# reference" . "https://docs.microsoft.com/en-us/dotnet/fsharp/")
                      )
                     )
+(spec-handling-add! lookup-handler nil
+                    '(fsharp-mode :async t :definition #'fsharp-ac/gotodefn-at-point)
+                    )
+(spec-handling-add! company nil
+                    '(fsharp-mode (:mode . #'fsharp-ac/company-backend))
+                    )
+(set-electric! 'csharp-mode :chars '(?\n ?\}))
+(set-repl-handler! 'fsharp-mode #'run-fsharp)
 ;;-- end specs

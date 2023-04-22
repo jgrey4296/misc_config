@@ -92,31 +92,30 @@
                      )
                     )
 (spec-handling-add! tagging nil
-                    (org-mode
-                     :set +jg-org-set-tags
-                     :new +jg-org-set-new-tag
-                     :get org-get-tags
+                    '(org-mode
+                     :set #'+jg-org-set-tags
+                     :new #'+jg-org-set-new-tag
+                     :get #'org-get-tags
                      )
                     )
-(spec-handling-add! company nil (org-mode company-capf))
 (spec-handling-add! lookup-handler nil
-                    (org-mode
+                    '(org-mode
                      :definition #'+org-lookup-definition-handler
                      :references #'+org-lookup-references-handler
                      :documentation #'+org-lookup-documentation-handler
                      )
                     )
 (spec-handling-add! whitespace-cleanup nil
-                    (org-mode
-                     (delete-trailing-whitespace +jg-org-clean-heading-spaces +jg-text-cleanup-whitespace)
+                    '(org-mode
+                     (#'delete-trailing-whitespace #'+jg-org-clean-heading-spaces #'+jg-text-cleanup-whitespace)
                      )
                  )
 (spec-handling-add! lookup-regular nil
-                    (org-mode
-                     ("Org Manual" . "https://orgmode.org/manual/")
-                     ("Babel Manual" . "https://orgmode.org/worg/org-contrib/babel/intro.html")
-                     )
-                    (graphviz-dot-mode
+                    '(org-mode
+                      ("Org Manual" . "https://orgmode.org/manual/")
+                      ("Babel Manual" . "https://orgmode.org/worg/org-contrib/babel/intro.html")
+                      )
+                    '(graphviz-dot-mode
                      ("Graphviz docs" . "https://graphviz.org/doc/info/lang.html")
                      )
                     )

@@ -50,10 +50,14 @@
           (robe-mode +1))))
   :config
   (set-repl-handler! 'ruby-mode #'robe-start)
-  (spec-handling-add! company nil (ruby-mode (company-robe 'company-dabbrev-code)))
-  (spec-handling-add! lookup-handler nil (ruby-mode
-                                          :definition #'robe-jump
-                                          :documentation #'robe-doc))
+  (spec-handling-add! company nil
+                      '(ruby-mode (:mode . #'company-robe))
+                      )
+  (spec-handling-add! lookup-handler nil
+                      '(ruby-mode
+                        :definition #'robe-jump
+                        :documentation #'robe-doc)
+                      )
   (when (boundp 'read-process-output-max)
     ;; Robe can over saturate IPC, making interacting with it slow/clobbering
     ;; the GC, so increase the amount of data Emacs reads from it at a time.

@@ -39,7 +39,6 @@
   :config
   (setq nxml-slash-auto-complete-flag t
         nxml-auto-insert-xml-declaration-flag t)
-  (spec-handling-add! company nil (nxml-mode (company-nxml company-yasnippet)))
   (setq-hook! 'nxml-mode-hook tab-width nxml-child-indent)
   (add-hook! 'nxml-mode-hook 'hs-minor-mode)
   )

@@ -6,7 +6,9 @@
 (after! solidity-mode
   (setq solidity-comment-style 'slash)
   (set-docsets! 'solidity-mode "Solidity")
-  (spec-handling-add! company nil (solidity-mode company-solidity))
+  (spec-handling-add! company nil
+                      '(solidity-mode (:mode . #'company-solidity))
+                      )
   )
 
 (use-package! solidity-flycheck  ; included with solidity-mode

@@ -17,12 +17,6 @@
   (setq plantuml-jar-path (concat doom-data-dir "plantuml.jar")
         org-plantuml-jar-path plantuml-jar-path)
   :config
-  (spec-handling-add! popup nil
-                      ('plantuml
-                       ("^\\*PLANTUML" :size 0.4 :select nil :ttl 0)
-                       )
-                      )
-
   (setq plantuml-default-exec-mode
         (cond ((file-exists-p plantuml-jar-path) 'jar)
               ((executable-find "plantuml") 'executable)

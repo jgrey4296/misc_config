@@ -67,15 +67,9 @@
     indent-region-function      #'python-indent-region
     ;; indent-region-function      #'py-indent-region
     ;; indent-line-function        #'py-indent-line
+    jg-company-activation-re jg-python-company-activation
+    jg-company-kws           jg-python-company-kws
     )
-
-  (after! jg-company-minor-mode
-    (setq-hook! 'python-mode-hook
-      jg-company-minor-mode-activation-re jg-python-company-activation
-      jg-company-minor-mode-kws jg-python-company-kws
-      )
-    )
-
   ;;-- end hooks
 
 )
@@ -89,13 +83,6 @@
   (add-hook! 'python-mode-local-vars-hook :append
              #'+python-init-anaconda-mode-maybe-h)
   :config
-  (spec-handling-add! company nil (anaconda-mode company-anaconda))
-  (spec-handling-add! lookup-handler nil
-                      (anaconda-mode
-                       :definition #'+jg-conda-find-defs
-                       :references #'+jg-conda-find-references
-                       :documentation #'+jg-conda-show-doc)
-                      )
 
   (add-hook 'anaconda-mode-hook #'anaconda-eldoc-mode)
 

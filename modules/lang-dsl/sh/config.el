@@ -81,7 +81,9 @@
   :unless (modulep! +lsp)
   :after sh-script
   :config
-  (spec-handling-add! company nil (sh-mode (company-shell company-files)))
+  (spec-handling-add! company nil
+                      '(sh-mode (:mode . #'company-shell) (:mode .  #'company-files))
+                      )
   (setq company-shell-delete-duplicates t
         ;; whatis lookups are exceptionally slow on macOS (#5860)
         company-shell-dont-fetch-meta IS-MAC))

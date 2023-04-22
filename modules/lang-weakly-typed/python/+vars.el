@@ -159,60 +159,8 @@
                      (python-mode       :trigger "__" :priority -100)
                      )
                     )
-(spec-handling-add! lookup-url nil
-                    ('python
-                     ("Python" "https://docs.python.org/3/search.html?q=%s&check_keywords=yes&area=default")
-                     ("Pypi"   "https://pypi.org/search/?q=%s")
-                     )
-                    )
-(spec-handling-add! lookup-regular nil
-                    (python-mode
-                     ("Python" . "https://docs.python.org/3/")
-                     ("Pypi"   "https://pypi.org/")
-                     ("Bibtex Parser" . "https://bibtexparser.readthedocs.io/en/master/tutorial.html")
-                     ("Beautiful Soup" .  "https://beautiful-soup-4.readthedocs.io/en/latest/")
-                     ("Pyparsing" . "https://pyparsing-docs.readthedocs.io/en/latest/")
-                     ("PyRight" . "https://github.com/Microsoft/pyright")
-                     ("Z3" . "https://github.com/Z3Prover/z3")
-                     ("Sorobn" . "https://github.com/MaxHalford/sorobn")
-                     ("Pomegranate" . "https://pomegranate.readthedocs.io/en/latest/")
-                     ("Pgmpy" . "https://pgmpy.org/")
-                     ("Rich" . "https://rich.readthedocs.io/en/stable/introduction.html")
-                     ("Flowweaver" . "https://floweaver.readthedocs.io/en/latest/")
-                     ("Matplotlib" . "https://matplotlib.org/stable/contents.html")
-                     ("Numpy" . "https://numpy.org/doc/stable/")
-                     ("Pandas" . "https://pandas.pydata.org/docs/")
-                     ("Seaborn" . "https://seaborn.pydata.org/api.html")
-                     ("Pony" . "https://github.com/ponyorm/pony/")
-                     ("Marshmallow" . "https://marshmallow.readthedocs.io/en/stable/")
-                     ("Pylightxl" . "https://github.com/PydPiper/pylightxl")
-                     ("pyexcel" . "https://github.com/pyexcel/pyexcel")
-                     ("Setuptools" . "https://setuptools.readthedocs.io/en/latest/userguide/index.html")
-                     ("Conda" . "https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html")
-                     ("Poetry" . "https://python-poetry.org/")
-                     ("Pip" . "https://pip.pypa.io/en/stable/")
-                     ("Scons" . "https://scons.org/documentation.html")
-                     ("Build" . "https://github.com/pypa/build")
-                     ("Venv" . "https://docs.python.org/3/library/venv.html")
-                     ("Doit" . "https://pydoit.org/contents.html")
-                     ("Construct" . "https://construct.readthedocs.io/en/latest/")
-                     ("Python/C api" . "https://docs.python.org/3/c-api/index.html")
-                     ("Pathlib" . "https://docs.python.org/3/library/pathlib.html")
-                     ("itertools" . "https://docs.python.org/3/library/itertools.html")
-                     ("functools" . "https://docs.python.org/3/library/functools.html")
-                     ("zlib" . "https://docs.python.org/3/library/zlib.html")
-                     ("string" . "https://docs.python.org/3/library/string.html")
-                     ("re" . "https://docs.python.org/3/library/re.html")
-                     )
-                    (conf-mode
-                     ("Setuptools" . "https://setuptools.readthedocs.io/en/latest/userguide/index.html")
-                     )
-                    (manifest-mode
-                     ("Manifest format" . "https://docs.python.org/3/distutils/sourcedist.html?highlight=manifest")
-                     )
-                    )
 (spec-handling-add! fold nil
-                    ('python
+                    '(python
                      :modes (python-mode)
                      :priority 25
                      :triggers (:close     +jg-python-close-class-defs
@@ -225,17 +173,75 @@
                      )
                     )
 (spec-handling-add! rotate-text nil
-                    ('python-mode
+                    '(python-mode
                      :symbols '(("True" "False"))
                      )
                     )
 (spec-handling-add! company nil
-                    (python-mode company-gtags)
+                    '(python-mode (:front . #'jg-company/backend ) (:front . #'company-gtags))
+                    '(anaconda-mode (:favour . #'company-anaconda))
                     )
 (spec-handling-add! whitespace-cleanup nil
-                    (python-mode
+                    '(python-mode
                      (+jg-python-cleanup-ensure-newline-before-def delete-trailing-whitespace +jg-text-cleanup-whitespace)
                      )
                     )
-
+(spec-handling-add! lookup-handler nil
+                    '(anaconda-mode
+                      :definition #'+jg-conda-find-defs
+                      :references #'+jg-conda-find-references
+                      :documentation #'+jg-conda-show-doc)
+                    )
+(spec-handling-add! lookup-url nil
+                    '(python
+                     ("Python" "https://docs.python.org/3/search.html?q=%s&check_keywords=yes&area=default")
+                     ("Pypi"   "https://pypi.org/search/?q=%s")
+                     )
+                    )
+(spec-handling-add! lookup-regular nil
+                    '(python-mode
+                      ("Python" . "https://docs.python.org/3/")
+                      ("Pypi"   "https://pypi.org/")
+                      ("Bibtex Parser" . "https://bibtexparser.readthedocs.io/en/master/tutorial.html")
+                      ("Beautiful Soup" .  "https://beautiful-soup-4.readthedocs.io/en/latest/")
+                      ("Pyparsing" . "https://pyparsing-docs.readthedocs.io/en/latest/")
+                      ("PyRight" . "https://github.com/Microsoft/pyright")
+                      ("Z3" . "https://github.com/Z3Prover/z3")
+                      ("Sorobn" . "https://github.com/MaxHalford/sorobn")
+                      ("Pomegranate" . "https://pomegranate.readthedocs.io/en/latest/")
+                      ("Pgmpy" . "https://pgmpy.org/")
+                      ("Rich" . "https://rich.readthedocs.io/en/stable/introduction.html")
+                      ("Flowweaver" . "https://floweaver.readthedocs.io/en/latest/")
+                      ("Matplotlib" . "https://matplotlib.org/stable/contents.html")
+                      ("Numpy" . "https://numpy.org/doc/stable/")
+                      ("Pandas" . "https://pandas.pydata.org/docs/")
+                      ("Seaborn" . "https://seaborn.pydata.org/api.html")
+                      ("Pony" . "https://github.com/ponyorm/pony/")
+                      ("Marshmallow" . "https://marshmallow.readthedocs.io/en/stable/")
+                      ("Pylightxl" . "https://github.com/PydPiper/pylightxl")
+                      ("pyexcel" . "https://github.com/pyexcel/pyexcel")
+                      ("Setuptools" . "https://setuptools.readthedocs.io/en/latest/userguide/index.html")
+                      ("Conda" . "https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html")
+                      ("Poetry" . "https://python-poetry.org/")
+                      ("Pip" . "https://pip.pypa.io/en/stable/")
+                      ("Scons" . "https://scons.org/documentation.html")
+                      ("Build" . "https://github.com/pypa/build")
+                      ("Venv" . "https://docs.python.org/3/library/venv.html")
+                      ("Doit" . "https://pydoit.org/contents.html")
+                      ("Construct" . "https://construct.readthedocs.io/en/latest/")
+                      ("Python/C api" . "https://docs.python.org/3/c-api/index.html")
+                      ("Pathlib" . "https://docs.python.org/3/library/pathlib.html")
+                      ("itertools" . "https://docs.python.org/3/library/itertools.html")
+                      ("functools" . "https://docs.python.org/3/library/functools.html")
+                      ("zlib" . "https://docs.python.org/3/library/zlib.html")
+                      ("string" . "https://docs.python.org/3/library/string.html")
+                      ("re" . "https://docs.python.org/3/library/re.html")
+                     )
+                    '(conf-mode
+                     ("Setuptools" . "https://setuptools.readthedocs.io/en/latest/userguide/index.html")
+                     )
+                    '(manifest-mode
+                     ("Manifest format" . "https://docs.python.org/3/distutils/sourcedist.html?highlight=manifest")
+                     )
+                    )
 ;;-- end specs

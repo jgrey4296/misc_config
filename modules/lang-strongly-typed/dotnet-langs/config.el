@@ -9,13 +9,6 @@
   :defer t
   :hook (csharp-mode . rainbow-delimiters-mode)
   :config
-  (set-electric! 'csharp-mode :chars '(?\n ?\}))
-  (spec-handling-add! rotate-text nil
-                      (csharp-mode
-                       :symbols '(("public" "protected" "private")
-                                  ("class" "struct"))
-                       )
-                      )
 
   (sp-local-pair 'csharp-mode "<" ">"
                  :when '(+csharp-sp-point-in-type-p)
@@ -52,9 +45,7 @@ or terminating simple string."
         (add-hook 'fsharp-mode-local-vars-hook #'lsp! 'append))
 
     (setq fsharp-ac-use-popup nil) ; Use a buffer for docs rather than a pop-up
-    (spec-handling-add! lookup-handler nil (fsharp-mode :async t :definition #'fsharp-ac/gotodefn-at-point))
-    (spec-handling-add! company nil (fsharp-mode fsharp-ac/company-backend)))
-  (set-repl-handler! 'fsharp-mode #'run-fsharp)
+    )
   )
 
 ;; Unity shaders

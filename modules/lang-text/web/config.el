@@ -141,22 +141,14 @@
   )
 
 (use-package! sass-mode
-  :config
-  (spec-handling-add! company nil (sass-mode company-css))
+  :defer t
   )
 
 (when (modulep! +lsp)
-  (add-hook! '(css-mode-local-vars-hook
-               scss-mode-local-vars-hook
-               sass-mode-local-vars-hook
-               less-css-mode-local-vars-hook
-               web-mode-local-vars-hook
-               )
-             :append #'lsp!))
+  (add-hook! '(css-mode-hook scss-mode-hook sass-mode-hook less-css-mode-hook web-mode-hook)
+             :append #'lsp!)
+  )
 
-(when (modulep! +tree-sitter) (add-hook! 'css-mode-local-vars-hook :append #'tree-sitter!))
-
-
-(spec-handling-add! company nil (pug-mode company-web-jade))
-(spec-handling-add! company nil (web-mode company-css company-web-html))
-(spec-handling-add! company nil (slim-mode company-web-slim))
+(when (modulep! +tree-sitter)
+  (add-hook! 'css-mode-local-vars-hook :append #'tree-sitter!)
+  )

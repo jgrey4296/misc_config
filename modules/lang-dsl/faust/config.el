@@ -5,9 +5,8 @@
   :mode ("\\.dsp\\'" . faustine-mode)
   :config
   (spec-handling-add! company nil
-                      ((faust-mode faustine-mode)
-                       (company-dabbrev-code +faust-company-backend company-yasnippet)
-                       )
+                      '((faust-mode faustine-mode)
+                        (:mode . #'+faust-company-backend))
                       )
 
   ;; HACK Both `faust-mode' and `faustine-mode' are hardcoded to use

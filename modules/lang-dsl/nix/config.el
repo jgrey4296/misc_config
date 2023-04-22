@@ -3,7 +3,6 @@
 (after! tramp
   (add-to-list 'tramp-remote-path "/run/current-system/sw/bin"))
 
-
 ;;
 ;;; Plugins
 
@@ -20,18 +19,6 @@
                          'json-mode
                        'js-mode)))
   :config
-  (set-repl-handler! 'nix-mode #'+nix/open-repl)
-  (spec-handling-add! company nil (nix-mode company-nixos-options))
-  (spec-handling-add! lookup-handler nil
-                      (nix-mode
-                       :documentation '(+nix/lookup-option :async t)
-                       )
-                      )
-  (spec-handling-add! popup nil
-                      ('nix
-                       ("^\\*nixos-options-doc\\*$" :ttl 0 :quit t)
-                       )
-                      )
 
   ;; Fix #3927: disable idle completion because `company-nixos-options' is
   ;; dreadfully slow. It can still be invoked manually..
@@ -44,17 +31,30 @@
 
   )
 
-
 (use-package! nix-update
   :commands nix-update-fetch)
-
 
 (use-package! nix-repl
   :commands nix-repl-show)
 
 (spec-handling-add! lookup-regular nil
-                    (nix-mode
-                     ("Nix Reference" . "https://nixos.org/learn.html")
-                     ("Nix Language" . "https://nixos.org/guides/nix-language.html")
+                    '(nix-mode
+                      ("Nix Reference" . "https://nixos.org/learn.html")
+                      ("Nix Language" . "https://nixos.org/guides/nix-language.html")
+                      )
+                    )
+(spec-handling-add! company nil
+                    '(nix-mode (:mode . #'company-nixos-options))
+                    )
+(spec-handling-add! lookup-handler nil
+                    '(nix-mode
+                     :documentation (#'+nix/lookup-option :async t)
                      )
                     )
+(spec-handling-add! popup nil
+                    '(nix
+                      ("^\\*nixos-options-doc\\*$" :ttl 0 :quit t)
+                      )
+                    )
+
+(set-repl-handler! 'nix-mode #'+nix/open-repl)

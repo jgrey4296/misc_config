@@ -15,7 +15,9 @@
   (spec-handling-add! lookup-handler nil (lua-mode :documentation 'lua-search-documentation))
   (set-electric! 'lua-mode :words '("else" "end"))
   (set-repl-handler! 'lua-mode #'+lua/open-repl)
-  (spec-handling-add! company nil (lua-mode (company-lua company-yasnippet)))
+  (spec-handling-add! company nil
+                      '(lua-mode (:mode . #'company-lua))
+                      )
 
   (when (modulep! +lsp)
     (add-hook 'lua-mode-local-vars-hook #'lsp! 'append)

@@ -50,17 +50,7 @@
     (when (executable-find "ocamlmerlin")
       (merlin-mode)))
 
-  (after! tuareg
-    (spec-handling-add! company nil (tuareg-mode merlin-company-backend))
-    (spec-handling-add! lookup-handler nil
-                        (tuareg-mode :async t
-                                     :definition #'merlin-locate
-                                     :references #'merlin-occurrences
-                                     :documentation #'merlin-document
-                                     )
-                        )
-    )
-    :config
+  :config
   (setq merlin-completion-with-doc t)
 
   (map! :localleader
@@ -156,15 +146,4 @@
   :when (modulep! :completion company)
   :hook (sml-mode . company-mlton-init)
   :config
-  (spec-handling-add! company nil (sml-mode company-mlton-grouped-backend))
   )
-
-(spec-handling-add! lookup-regular nil
-                    (ocaml-mode
-                     ("OCaml Reference" . "https://v2.ocaml.org/releases/5.0/htmlman/index.html")
-                     ("Ocaml Tutorial" . "https://ocaml.org/docs/up-and-running")
-                     )
-                    (sml-mode
-                     ("SML Docs" . "https://smlfamily.github.io/")
-                     )
-                    )

@@ -74,14 +74,6 @@
 
   (add-hook! 'lsp-mode-hook #'+lsp-optimization-mode)
 
-  (when (modulep! :completion company)
-    (add-hook! 'lsp-completion-mode-hook
-      (defun +lsp-init-company-backends-h ()
-        (when lsp-completion-mode
-          (set (make-local-variable 'company-backends)
-               (cons +lsp-company-backends
-                     (remove +lsp-company-backends
-                             (remq 'company-capf company-backends))))))))
 
   (defadvice! +lsp-defer-server-shutdown-a (fn &optional restart)
     "Defer server shutdown for a few seconds.

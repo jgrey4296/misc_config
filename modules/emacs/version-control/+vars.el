@@ -14,6 +14,13 @@ left and right fringe.
 
 Only has an effect in GUI Emacs.")
 
+;; TODO Implement me
+(defvar +vc-gutter-in-margin nil
+  "If non-nil, use the margin for diffs instead of the fringe.")
+
+(defvar +vc-gutter-in-remote-files nil
+  "If non-nil, enable the vc gutter in remote files (e.g. open through TRAMP).")
+
 (defvar +magit--pos nil)
 (defvar forge-add-default-bindings nil)
 (defvar evil-collection-magit-use-z-for-folds t)

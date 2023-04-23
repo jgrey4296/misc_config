@@ -6,13 +6,13 @@
 (defvar spec-handling-hook nil)
 (defvar spec-handling-feature-set nil)
 (defvar spec-handling-types (make-hash-table :test 'equal))
-(defconst spec-handling-generated-name-plist '(:table "spec-table"
-                                               :apply "reapply-specs-fn"
-                                               :feature "spec-feature"
-                                               :mode-hook "spec-hook-init-fn"
-                                               :set "spec-set"
-                                               :add "spec-add-delayed-fn"
-                                               ))
+(defconst spec-handling-gensym-plist '(:table "spec-table"
+                                       :apply "reapply-specs-fn"
+                                       :feature "spec-feature"
+                                       :mode-hook "spec-hook-init-fn"
+                                       :set "spec-set"
+                                       :add "spec-add-delayed-fn"
+                                       ))
 (defconst spec-handling-symbol-separator "-")
 
 (defun spec-handling--add-type (type file &optional form)
@@ -24,11 +24,13 @@
   (gethash type spec-handling-types nil)
 )
 
-(defun spec-handling--sym-name (&rest names)
+(defun spec-handling--gensym (&rest names)
+  " make a newly interned symbol from the provided name strings/symbols/keywords,
+separated by 'spec-handling-symbol-separator', looking up keywords in 'spec-handling-gensym-plist' "
   (intern (string-join (mapcar (lambda (x)
                                  (cond
                                   ((keywordp x)
-                                   (plist-get spec-handling-generated-name-plist x))
+                                   (plist-get spec-handling-gensym-plist x))
                                   ((symbolp x)
                                    (symbol-name x))
                                   (t
@@ -46,6 +48,9 @@
   )
 
 (defun spec-handling-cleanup-after-provide (sym)
+  " Remove closures from 'after-load-alist' that are now unneeded, because 'sym' has been provided.
+this stops them being re-run repeatedly
+"
   (interactive "x")
   (setq after-load-alist (--remove (equal (car it) sym) after-load-alist))
   nil
@@ -70,9 +75,9 @@ target
 TODO: add spec format docstring
  "
   (cl-assert (-contains? '(collect append do) accum-kw))
-  (let ((table-name (spec-handling--sym-name type :table))
-        (reapply-name (spec-handling--sym-name type :apply))
-        (feature-name (spec-handling--sym-name type :feature))
+  (let ((table-name (spec-handling--gensym type :table))
+        (reapply-name (spec-handling--gensym type :apply))
+        (feature-name (spec-handling--gensym type :feature))
         (fname (macroexp-file-name))
         )
     (spec-handling--add-type type fname :definition)
@@ -111,9 +116,9 @@ TODO: add spec format docstring
 ;;;###autoload
 (defmacro spec-handling-new-hooks! (type &rest body)
   " register handlers for given modes. adapted from doom's set-rotate-patterns! "
-  (let ((table-name (spec-handling--sym-name type :table))
-        (reapply-name (spec-handling--sym-name type :apply))
-        (feature-name (spec-handling--sym-name type :feature))
+  (let ((table-name (spec-handling--gensym type :table))
+        (reapply-name (spec-handling--gensym type :apply))
+        (feature-name (spec-handling--gensym type :feature))
         (fname (macroexp-file-name))
         )
     (spec-handling--add-type type fname :hooks-definition)
@@ -130,7 +135,7 @@ TODO: add spec format docstring
                         (cl-loop for key in (ensure-list modes)
                                  do
                                  (message "Making %s Hook for %s" (quote ,type) key)
-                                 (let ((fn-name (spec-handling--sym-name (quote ,type) key :mode-hook)))
+                                 (let ((fn-name (spec-handling--gensym (quote ,type) key :mode-hook)))
                                    (fset fn-name
                                          (-partial (lambda (val)
                                                      ,@body
@@ -154,9 +159,9 @@ TODO: add spec format docstring
 ;;;###autoload
 (defmacro spec-handling-add! (type override &rest rules)
   (let* ((fname (macroexp-file-name))
-         (table-name (spec-handling--sym-name type :table))
-         (feature-name (spec-handling--sym-name type :feature))
-         (add-fn-name (spec-handling--sym-name type fname :add))
+         (table-name (spec-handling--gensym type :table))
+         (feature-name (spec-handling--gensym type :feature))
+         (add-fn-name (spec-handling--gensym type fname :add))
          )
     (spec-handling--add-type type fname :addition)
     `(with-eval-after-load (quote ,feature-name)
@@ -173,7 +178,7 @@ TODO: add spec format docstring
 
 ;;;###autoload
 (defmacro spec-handling-setq! (type &rest vals)
-  (let ((set-name (spec-handling--sym-name type :set))
+  (let ((set-name (spec-handling--gensym type :set))
         (fname (macroexp-file-name)))
     (spec-handling--add-type type fname :setting)
     `(progn
@@ -194,9 +199,9 @@ TODO: add spec format docstring
 
 ;;;###autoload
 (defmacro spec-handling-clear! (type)
-  (let ((table-name (spec-handling--sym-name type :table))
-        (reapply-name (spec-handling--sym-name type :apply))
-        (feature-name (spec-handling--sym-name type :feature))
+  (let ((table-name (spec-handling--gensym type :table))
+        (reapply-name (spec-handling--gensym type :apply))
+        (feature-name (spec-handling--gensym type :feature))
         )
     `(progn
        (when (boundp (quote ,table-name)) (clrhash ,table-name) (unintern (quote ,table-name) nil))

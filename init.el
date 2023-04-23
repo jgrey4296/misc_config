@@ -7,7 +7,7 @@
 
  :editor char-insert fold navigation projects tagging text-manipulation
  :editor (evil +everywhere) format
- :editor fold snippets word-wrap lookup
+ :editor fold snippets lookup workspaces
  ;;:editor multiple-cursors
 
  :emacs electric vc
@@ -39,9 +39,7 @@
  ;; :lang julia
 
  :ui deft doom
- :ui hl-todo indent-guides ligatures
  :ui minimap modeline neotree ophints
- :ui vc-gutter vi-tilde-fringe window-select workspaces
  ;;:ui treemacs unicode (emoji +unicode)
 
  :term shell term vterm

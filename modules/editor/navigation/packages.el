@@ -22,4 +22,9 @@
 
 (package! paren-state :recipe `(:local-repo ,(expand-file-name "packages/states/paren-state" doom-user-dir)))
 
+(if (modulep! +switch-window)
+    (package! switch-window)
+  (package! ace-window))
+
+(when (modulep! +numbers) (package! winum))
 ;;; packages.el ends here

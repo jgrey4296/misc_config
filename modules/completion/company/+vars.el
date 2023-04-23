@@ -35,9 +35,9 @@
   )
 
 (spec-handling-add! company nil
-                    '(prog-mode (:back      . #'company-capf) (:back . #'company-files))
-                    '(text-mode (:disfavour . (:separate #'company-dabbrev #'company-ispell)))
-                    '(conf-mode (:disfavour . #'company-dabbrev-code ))
+                    '(prog-mode (:back      . company-capf) (:back . company-files))
+                    '(text-mode (:disfavour . (:separate company-dabbrev company-ispell)))
+                    '(conf-mode (:disfavour . company-dabbrev-code ))
                     )
 (spec-handling-setq! company
                      company-dict-dir (expand-file-name "templates/company-dicts" doom-user-dir)

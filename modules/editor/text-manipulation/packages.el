@@ -11,3 +11,10 @@
 (package! vundo)
 (package! undo-fu)
 (package! lint-result-mode :recipe `(:local-repo ,(expand-file-name "packages/major-modes/lint-result-mode" doom-user-dir)))
+(package! highlight-indent-guides)
+(package! hl-todo)
+
+;; (package! objed)
+
+(package! adaptive-wrap)
+(package! visual-fill-column)

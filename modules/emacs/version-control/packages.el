@@ -9,3 +9,8 @@
 (package! magit-todos )
 (package! vdiff)
 (package! vdiff-magit)
+(package! vi-tilde-fringe)
+
+(if (modulep! +diff-hl)
+    (package! diff-hl)
+  (package! git-gutter-fringe))

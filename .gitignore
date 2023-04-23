@@ -9,3 +9,5 @@ elpa/
 log.*
 tw_acct.index
 tw_tag.index
+/modules/editor/projects/doom-projects.el
+/modules/emacs/doom-ui.el

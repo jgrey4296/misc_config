@@ -7,11 +7,11 @@
       :desc "Switch buffer"         ","     #'+jg-ibuffer-ivy-buffer
       )
 
-
 (setq jg-ibuffer-mode-map (make-keymap))
+
 (define-prefix-command 'jg-ibuffer-filter-map nil "ibuffer-filter")
 (define-prefix-command 'jg-ibuffer-sort-map   nil "ibuffer-sort")
-(define-prefix-command 'jg-ibuffer-mark-map nil "ibuffer-mark")
+(define-prefix-command 'jg-ibuffer-mark-map   nil "ibuffer-mark")
 
 (map! :map jg-ibuffer-mode-map
       :desc "Visit"               :n "RET" #'+ibuffer/visit-workspace-buffer

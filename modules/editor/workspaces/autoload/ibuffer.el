@@ -1,5 +1,4 @@
 ;;; emacs/ibuffer/autoload/workspaces.el -*- lexical-binding: t; -*-
-;;;###if (modulep! :ui workspaces)
 
 ;;;###autoload
 (defun +ibuffer-workspace (workspace-name)
@@ -32,3 +31,12 @@
       ;; Or add the buffer to the current workspace
       (persp-add-buffer buf))
     (switch-to-buffer buf)))
+
+
+(require 'ibuf-ext)
+
+(define-ibuffer-filter workspace-buffers
+    "Filter for workspace buffers"
+  (:reader (+workspace-get (read-string "workspace name: "))
+   :description "workspace")
+  (memq buf (+workspace-buffer-list qualifier)))

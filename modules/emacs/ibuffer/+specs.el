@@ -2,12 +2,6 @@
 
 (require 'ibuf-ext)
 
-(define-ibuffer-filter workspace-buffers
-    "Filter for workspace buffers"
-  (:reader (+workspace-get (read-string "workspace name: "))
-   :description "workspace")
-  (memq buf (+workspace-buffer-list qualifier)))
-
 (setq-default jg-ibuffer-heuristics (rx (or "backtab"
                                             (regexp "\\.\\.")
                                             (regexp "^[[:alpha:]]\\{2,\\}")

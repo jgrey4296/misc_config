@@ -49,3 +49,5 @@
       :n "TAB" #'completion-at-point
       )
 ;;-- end shell
+
+(define-key yas-minor-mode-map [menu-bar] nil)

@@ -19,6 +19,8 @@
       :desc "Refold"        "r"   #'autohide-minor-mode-run-folds
       :desc "Next Fold"     "j"   #'+fold/next
       :desc "Prev Fold"     "k"   #'+fold/previous
+
+      ;; TODO fold string
 )
 (map! :map jg-binding-vision-map
       :after vimish-fold

@@ -64,8 +64,11 @@ run on it)."
   )
 
 (defun general-which-key--pseudo-key (key &optional prefix)
-  "Replace the last key in the sequence KEY by a special symbol
-in order for which-key to allow looking up a description for the key."
+  "insert a special symbol as the penultimate symbol in the sequence 'key'
+in order for which-key to allow looking up a description for the key.
+
+so (SPC d f) -> (SPC d which-key f)
+"
   (let ((seq (listify-key-sequence key)))
     (vconcat (or prefix (butlast seq)) [which-key] (last seq))))
 

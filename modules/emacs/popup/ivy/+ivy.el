@@ -2,7 +2,7 @@
 
 (defun +jg-popup-ivy-predicate (x)
   ;; return nil for cruft buffers
-  (not (string-match jg-popup-ivy-predicate-patterns%20(car%20x)))
+  (not (string-match jg-popup-ivy-predicate-patterns (car x)))
   )
 
 (defun +jg-popup-ivy-open (buff)
@@ -34,7 +34,7 @@
   (ivy-read "Popup Buffer: " #'internal-complete-buffer
             :keymap ivy-switch-buffer-map
             :predicate       #'+jg-popup-ivy-predicate
-            :action          #'+jg-popup-ivy-open-as-popup
+            :action          #'+jg-popup-ivy-open
             :matcher         #'ivy--switch-buffer-matcher
             :sort t
             :caller 'window-control-ivy-popup-buffer

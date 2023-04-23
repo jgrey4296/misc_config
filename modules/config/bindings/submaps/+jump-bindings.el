@@ -47,5 +47,5 @@
       :desc "Lookup"               "D" #'+lookup/references
       :desc "Next Visual"          "j" #'evil-next-visual-line
       :desc "Previous Visual"      "k" #'evil-previous-visual-line
-      :desc "Search Word Forward"  "*"  #'evil-ex-search-unbounded-word-forward
+      :desc "Search Word Forward"  "*" #'evil-ex-search-unbounded-word-forward
       )

@@ -67,28 +67,6 @@ It's platform specific in that it uses the platform's native path separator."
               ))))
     (s-trim result)))
 
-(define-advice +python/open-repl (:override ()
-                                  +jg-python-env-activate-advice)
-  " Auto-detect python repl and activate environment if necessary "
-  (require 'python-mode)
-  (unless python-shell-interpreter
-
-(user-error "`python-shell-interpreter' isn't set"))
-  ;; look for a venv
-  ;; activate environment, start python repl
-  (+jg-python-activate-venv-and-conda)
-
-  (let* (
-(default-directory (doom-project-root))
-         (cmd (python-shell-calculate-command))
-         (new-buffer (process-buffer
-                      (run-python cmd nil t))))
-    (puthash (cons 'inferior-python-mode default-directory) new-buffer +eval-repl-buffers)
-    (puthash (cons 'python-mode default-directory) new-buffer +eval-repl-buffers)
-    new-buffer
-  )
-)
-
 (define-advice python-shell-calculate-command (:override (&optional filepath)
                                                +jg-python-shell-calculate-command)
   "Calculate the string used to execute the inferior Python process.

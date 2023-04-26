@@ -1,78 +1,72 @@
-;;; lang/jg-python/+funcs.el -*- lexical-binding: t; -*-
+;;; +nav.el -*- lexical-binding: t; -*-
+;; Customisations of Conda navigation
+;; TODO add code for using window-ring
 
-;;-- display control
-(defun +jg-python-close-all-defs ()
-    (interactive)
+;;;###autoload
+(evil-define-motion +jg-python-forward-defun (count)
+  " Custom Python movement, taking fold-blocks into account "
+  :jump t
+  :type exclusive
+  (evil-signal-at-bob-or-eob count)
+  (let ((fold-block-pos (point))
+        (defun-pos (point)))
     (save-excursion
-      (goto-char (point-min))
-      (while (python-nav-forward-defun)
-        (outline-hide-subtree)
-        )
-      )
-    )
-(defun +jg-python-close-class-defs ()
-    (interactive)
+      (setq defun-pos (py-down-def-or-class)))
     (save-excursion
-      (end-of-line)
-      (unless (not (re-search-backward "^class " nil t))
-        (if (not current-prefix-arg)
-            (progn
-              (outline-hide-subtree)
-              (outline-toggle-children))
-          (outline-show-subtree)
-          (forward-line)
-          (while (and (python-nav-forward-defun)
-                      (progn (beginning-of-line)
-                             (not (looking-at-p "^class"))))
-            (outline-toggle-children)
-            (forward-line)
-            )
-          )
-        )
-      )
+      (setq fold-block-pos (re-search-forward (autohide-minor-mode-fold-block-gen :re t) defun-pos t)))
+    (goto-char (apply 'min (mapcar #'(lambda (x) (if x x (point-max))) (list fold-block-pos defun-pos))))
     )
+)
 
-;;-- end display control
-
-;;-- insert commands
-(defun +jg-python-insert-import (&optional arg)
-  " insert the literal string provided/read from minibuffer, at the imports section
-of a python file "
+;;;###autoload
+(defun +jg-conda-find-defs ()
   (interactive)
-  (save-excursion
-    (goto-char (point-min))
-    (let ((arg (if (not arg) (read-string "Import Statement: " "import ") arg)))
-      (re-search-forward (autohide-minor-mode-fold-block-gen :name "imports" :re t))
-      (re-search-forward "^$")
-      (insert "\n")
-      (insert arg)
-      )
-    )
-  )
-(defun +jg-python-import-snippet (&optional arg)
-  " Expand a yasnippet template, then insert it at the imports section "
-  (interactive)
-  (setq yas--condition-cache-timestamp (current-time))
-  (let* ((template-alist (mapcar (lambda (x) `(,(yas--template-uuid x) . ,x)) (yas--all-templates (yas--get-snippet-tables))))
-         (template-name (ivy-completing-read "Import Snippet: " template-alist nil nil "import " ))
-         (yas--current-template (alist-get template-name template-alist nil nil 'equal))
-         final)
-    (if yas--current-template
-        (progn (with-temp-buffer
-                 (yas-minor-mode)
-                 (yas-expand-snippet yas--current-template (point-min))
-                 (setq final (buffer-string))
-                 )
-               (pyimport--insert-import final)
-               )
-      )
-    )
+  (anaconda-mode-call "infer"
+                      #'(lambda (result)
+                          (message "%s" result)
+                          (anaconda-mode-show-xrefs result 'window "None Found")))
   )
 
-;;-- end insert commands
+;;;###autoload
+(defun +jg-conda-show-doc ()
+  (interactive)
+  (anaconda-mode-call "show_doc" #'+jg-conda-show-doc-callback)
+  )
 
-;;-- selection control
-;; TODO make these text objects?
+;;;###autoload
+(defun +jg-conda-show-doc-callback (result)
+  (if (> (length result) 0)
+      (+popup-buffer (anaconda-mode-documentation-view result))
+    (message "No documentation available"))
+  )
+
+;;;###autoload
+(defun +jg-conda-find-assignments ()
+  (interactive)
+  (anaconda-mode-call
+   "goto"
+   #'(lambda (result)
+     (anaconda-mode-show-xrefs result nil "No assignments found")))
+  )
+
+;;;###autoload
+(defun +jg-conda-find-references ()
+  (interactive)
+  (anaconda-mode-call
+   "get_references"
+   #'(lambda (result)
+     (anaconda-mode-show-xrefs result nil "No references found")))
+)
+
+;;;###autoload
+(defun +jg-conda-eldoc ()
+  (interactive)
+  (anaconda-mode-call
+   "eldoc"
+   #'anaconda-mode-eldoc-callback)
+  )
+
+;;;###autoload
 (defun +jg-python-select-defun ()
   (interactive)
   (let ((start (progn (python-nav-beginning-of-defun)
@@ -81,6 +75,8 @@ of a python file "
                     (point))))
     (evil-visual-make-region start end))
   )
+
+;;;###autoload
 (defun +jg-python-select-class ()
   (interactive)
   (let ((start (re-search-backward "^class")))
@@ -88,88 +84,8 @@ of a python file "
     (evil-visual-make-region start (point))
     )
   )
-;;-- end selection control
 
-;;-- cleanup
-(defun +jg-python-cleanup-import-blocks ()
-  " Collect all ##-- imports blocks,
-and move them to the start of the file,
-then sort them
-TODO
-  "
-  (interactive)
-  (let ((source (current-buffer))
-        (collected-imports (make-temp-file "collected-imports"))
-        start end groupname cleaned)
-    ;; Go from bottom of buffer to top
-    (with-current-buffer source
-      (goto-char (point-max))
-      (while (re-search-backward (autohide-minor-mode-fold-block-gen :re t) nil t)
-        (setq groupname (match-string 1))
-        (cond ((and (s-matches? "^imports" groupname)
-                    end
-                    (not start))
-               (beginning-of-line)
-               (setq start (point)))
-              ((and (s-matches? "^end imports" groupname)
-                    (not end))
-               (end-of-line)
-               (setq end (point))))
-        ;; Copy the block to the temp buffer
-        (if (and start end)
-            (progn
-              (-if-let (folds (vimish-fold--folds-in start end))
-                  (vimish-fold--delete (car folds)))
-              (goto-char end)
-              (insert "\n")
-              (write-region start (+ 1 end) collected-imports t)
-              (kill-region start end)
-              (setq start nil
-                    end nil)
-              (end-of-line -0)
-            )
-          (end-of-line -0)
-          )
-        )
-      )
-    ;; Then cleanup the collect imports
-    (with-temp-buffer
-      (insert-file-contents collected-imports)
-      (goto-char (point-min))
-      (flush-lines "##-- ")
-      (write-file collected-imports)
-      (py-isort-buffer)
-      (setq cleaned (s-trim (buffer-string)))
-      (write-file collected-imports)
-      )
-    ;; And Insert back into original buffer
-    (with-current-buffer source
-      (goto-char (point-min))
-      (re-search-forward "^\"\"\"" nil t)
-      (re-search-forward "^\"\"\"" nil t)
-      (end-of-line)
-      (insert "\n")
-      (insert (autohide-minor-mode-fold-block-gen :name "imports" :newlines t))
-      (insert cleaned)
-      (insert (autohide-minor-mode-fold-block-gen :name "imports" :newlines t :end t))
-      )
-    )
-  )
-
-(defun +jg-python-cleanup-ensure-newline-before-def ()
-  (while (re-search-forward "\\(\n\\)\\(\s*@.+?\n\\)*\s*\\(def\\|class\\)" nil t)
-    (goto-char (match-end 1))
-    (insert "\n")
-    (goto-char (match-end 0))
-    )
-  )
-
-(defun +jg-python-align-dictionaries ()
-  ;; TODO
-  )
-;;-- end cleanup
-
-;;-- summary
+;;;###autoload
 (defun +jg-python-class-diagram ()
   " On lines of class definitions 'class A(B..):
     extract the total hierarchy "
@@ -208,6 +124,7 @@ TODO
     )
   )
 
+;;;###autoload
 (defun +jg-python-summarize-goto (buff pos &rest args)
   (if-let ((wind (get-buffer-window buff)))
       (progn
@@ -219,6 +136,8 @@ TODO
         )
     )
   )
+
+;;;###autoload
 (defun +jg-python-summarize ()
   (interactive)
   (let ((buffer (current-buffer))
@@ -251,8 +170,7 @@ TODO
     )
   )
 
-;;-- end summary
-
+;;;###autoload
 (defun +jg-python-swipe-to-def ()
   (interactive)
   ;; TODO make more robust
@@ -264,7 +182,8 @@ TODO
          (result (with-temp-buffer
                    (list :exit-status
                          (shell-command
-                          (format "global -f %s | grep -E \"\.py\s+(def|class) .+?\(.+?\)( -> .+?)?:(.+)?$\"" current-file)
+                          (format "global -f %s | grep -E \"\.py\s+
+(def|class) .+?\(.+?\)( -> .+?)?:(.+)?$\"" current-file)
                           (current-buffer))
                          :output
                          (split-string (buffer-string) "\n" t "\s+"))))
@@ -278,6 +197,7 @@ TODO
     )
   )
 
+;;;###autoload
 (defun +jg-python-related-files-fn (path)
   " Provide projectile with various :kinds of related file "
   (let* ((root (projectile-project-root))
@@ -312,10 +232,12 @@ TODO
     )
   )
 
+;;;###autoload
 (defun +jg-python-outline-level ()
   (current-indentation)
   )
 
+;;;###autoload
 (defun +jg-python-breakpoint-line ()
   " Get current file path and line, for using in python debugger "
   (interactive)

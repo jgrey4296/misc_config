@@ -21,25 +21,31 @@ falling back on searching your PATH."
             ((executable-find exe))))))
 
 ;;;###autoload
-(defun +python/open-repl ()
+(defun +jg-python/open-repl ()
   "Open the Python REPL."
   (interactive)
   (require 'python)
   (unless python-shell-interpreter
     (user-error "`python-shell-interpreter' isn't set"))
+
+  (unless jg-python-env-state
+    (+jg-python-handle-env!))
+
+  ;; (puthash (cons 'inferior-python-mode default-directory) new-buffer +eval-repl-buffers)
+  ;; (puthash (cons 'python-mode default-directory) new-buffer +eval-repl-buffers)
+
   (pop-to-buffer
    (process-buffer
-    (let ((dedicated (bound-and-true-p python-shell-dedicated)))
-      (if-let* ((pipenv (+python-executable-find "pipenv"))
-                (pipenv-project (pipenv-project-p)))
-          (let ((default-directory pipenv-project)
-                (python-shell-interpreter-args
-                 (format "run %s %s"
-                         python-shell-interpreter
-                         python-shell-interpreter-args))
-                (python-shell-interpreter pipenv))
-            (run-python nil dedicated t))
-        (run-python nil dedicated t))))))
+    (let ((dedicated (bound-and-true-p python-shell-dedicated))
+          (default-directory (projectile-project-root))
+          )
+      (run-python nil dedicated t)
+      )
+    )
+   )
+  )
+
+
 
 ;;;###autoload
 (defun +python/open-ipython-repl ()
@@ -53,18 +59,26 @@ falling back on searching your PATH."
          (string-join (cdr +python-ipython-command) " ")))
     (+python/open-repl)))
 
-;; ;;;###autoload
-;; (defun +python/open-jupyter-repl ()
-;;   "Open a Jupyter console."
-;;   (interactive)
-;;   (require 'python)
-;;   (add-to-list 'python-shell-completion-native-disabled-interpreters "jupyter")
-;;   (let ((python-shell-interpreter
-;;          (or (+python-executable-find (car +python-jupyter-command))
-;;              "jupyter"))
-;;         (python-shell-interpreter-args
-;;          (string-join (cdr +python-jupyter-command) " ")))
-;;     (+python/open-repl)))
+;;;###autoload
+(defun +python/open-file-repl ()
+  (interactive)
+  (cl-assert (eq (with-current-buffer (current-buffer) major-mode) 'python-mode))
+  (unless python-shell-interpreter
+
+(user-error "`python-shell-interpreter' isn't set"))
+
+  (let* (
+
+(default-directory (doom-project-root))
+         (cmd (python-shell-calculate-command (buffer-file-name)))
+         (new-buffer (process-buffer
+                      (run-python cmd nil t))))
+    (puthash (cons 'inferior-python-mode default-directory) new-buffer +eval-repl-buffers)
+    (puthash (cons 'python-mode default-directory) new-buffer +eval-repl-buffers)
+    new-buffer
+    )
+
+  )
 
 ;;;###autoload
 (defun +python/optimize-imports ()

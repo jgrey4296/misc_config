@@ -1,22 +1,6 @@
-;;; +hooks.el -*- lexical-binding: t; -*-
-;;
-;; Copyright (C) 2022 John Grey
-;;
-;; Author: John Grey <johngrey4296 at gmail.com>
-;; Maintainer: John Grey <johngrey4296 at gmail.com>
-;; Created: April 05, 2022
-;; Modified: April 05, 2022
-;; Version: 0.0.1
-;; Homepage: https://github.com/johngrey/+hooks
-;; Package-Requires: ((emacs "24.3"))
-;;
-;; This file is not part of GNU Emacs.
-;;
-;;; Commentary:
-;;
-;;
-;;
-;;; Code:
+;;; hooks.el -*- lexical-binding: t; -*-
+
+;;;###autoload
 (defun +python-use-correct-flycheck-executables-h ()
       "Use the correct Python executables for Flycheck."
       (let ((executable python-shell-interpreter))
@@ -35,32 +19,10 @@
         (setq-local flycheck-python-pylint-executable "pylint")
         (setq-local flycheck-python-flake8-executable "flake8")))
 
+;;;###autoload
 (defun +jg-python-outline-regexp-override-hook ()
   (setq-local outline-regexp jg-python-outline-regexp
               outline-heading-end-regexp jg-python-outline-end-regexp
               outline-level #'+jg-python-outline-level
               )
   )
-
-(defun +jg-python-auto-hide ()
-  " Add auto-hiding to python.
-Hides imports in a vimish fold,
-Add any sections commented with jg-python-fold-block-[start|end]-re
-and closes classes and functions, re-opening only the first class "
-  (when autohide-minor-mode
-    (message "Running Python Auto Hide")
-    (save-excursion
-      (beginning-of-buffer)
-      ;; Fold Imports
-      (message "Searching for import block")
-      (evil-close-folds)
-      (when (re-search-forward "^class " nil t)
-        (let ((current-prefix-arg t))
-          (evil-close-fold))
-        )
-      )
-    )
-  )
-
-
-;;; +hooks.el ends here

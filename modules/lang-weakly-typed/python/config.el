@@ -2,17 +2,12 @@
 
 (doom-log "Config JG Python")
 
-(load! "util/+ivys")
 (load! "+vars")
-(load! "+funcs")
-(load! "util/+hooks")
 (load! "modes/+manifest-mode")
 (after! jg-bindings-total
   (load! "+bindings")
-  (load! "util/+nav")
   )
 (load! "+advice")
-(load! "util/+env")
 (load! "modes/+derived-modes")
 
 (use-package! python

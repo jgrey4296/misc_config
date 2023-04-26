@@ -249,7 +249,7 @@
                     )
 
 (set-docsets! '(python-mode inferior-python-mode) "Python 3" "NumPy" "SciPy" "Pandas")
-(set-repl-handler! 'python-mode #'+python/open-repl
+(set-repl-handler! 'python-mode #'+jg-python/open-repl
   :persist t
   :send-region #'python-shell-send-region
   :send-buffer #'python-shell-send-buffer)
@@ -261,5 +261,19 @@
                    (format "PIPENV_MAX_DEPTH=9999 %s run %%c %%o %%s %%a" bin)
                  "%c %o %s %a")))
       (:description . "Run Python script")))
+(set-ligatures! 'python-mode
+                ;; Functional
+                :def    "def"
+                :lambda "lambda"
+                ;; Types
+                :null   "None"
+                :true   "True" :false "False"
+                :int    "int"  :str "str" :float  "float" :bool   "bool" :tuple  "tuple"
+                ;; Flow
+                :not    "not"
+                :in     "in"  :not-in "not in"
+                :and    "and" :or "or"
+                :for    "for"
+                :return "return" :yield "yield")
 
 ;;-- end specs

@@ -8,8 +8,8 @@
       :desc "Search project for symbol"    "."  #'+default/search-project-for-symbol-at-point
       :desc "Walk to next"                 "n"  #'project-walk-next
 
+      :desc "Find file in project sidebar" "s"    #'+neotree/find-this-file
       :desc "Compile in project"           "c"  #'projectile-compile-project
-      :desc "Search project"               "s"  #'+default/search-project
       :desc "List project todos"           "t"  #'magit-todos-list
       :desc "Open project scratch buffer"  "x"  #'+jg-ui-open-scratch-buffer
 
@@ -59,7 +59,6 @@
 ;;-- find files
 (map! :leader
       :prefix ("p b" . "browse")
-      :desc "Find file in project sidebar" "s"    #'+neotree/find-this-file
       :desc "Open project editorconfig"    "e"    #'editorconfig-find-current-editorconfig
       :desc "Edit project .dir-locals"     "l"    #'projectile-edit-dir-locals
       :desc "Configure project"            "c"    #'+jg-projects-open-configs

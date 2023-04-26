@@ -2,7 +2,12 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("doot"
+(("conda"
+ (filename . "/usr/local/anaconda3/")
+ (front-context-string . "envs\n  drwxr-xr-")
+ (rear-context-string . "28 Apr 24 19:31 ")
+ (position . 484))
+("doot"
  (filename . "/Volumes/documents/github/python/doot/")
  (front-context-string . "doot\n  drwxr-xr-")
  (rear-context-string . "46 Feb  8 06:31 ")
@@ -162,11 +167,6 @@
  (front-context-string . "makefile\n  -rw-r")
  (rear-context-string . "72 Oct 29 19:02 ")
  (position . 251))
-("conda"
- (filename . "/opt/anaconda3/")
- (front-context-string . "Anaconda-Navigat")
- (rear-context-string . "96 Mar  4  2020 ")
- (position . 115))
 ("MAS"
  (filename . "~/github/MAS/")
  (front-context-string . "ch3-exercises\n  ")

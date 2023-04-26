@@ -39,7 +39,7 @@
  ;; :lang julia
 
  :ui deft doom
- :ui minimap modeline neotree ophints
+ :ui minimap neotree ophints
  ;;:ui treemacs unicode (emoji +unicode)
 
  :term shell term vterm
@@ -47,9 +47,9 @@
 
  :checkers syntax (spell +flyspell) grammar
 
- :tools debugger doot  (eval +overlay) lsp mail tmux twitter pdfs
+ :tools  doot  (eval +overlay) lsp mail tmux twitter pdfs
  :tools editorconfig rgb tree-sitter mail
- ;;:tools ein make
+ ;;:tools ein make debugger
 
  :email (mu4e +gmail)
 

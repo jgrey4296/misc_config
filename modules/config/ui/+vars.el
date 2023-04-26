@@ -182,3 +182,27 @@ and cannot run in."
               )
 
 ;;-- end parens
+
+;;-- modeline
+;; We display project info in the modeline ourselves
+(setq projectile-dynamic-mode-line nil
+      ;; Set these early so they don't trigger variable watchers
+      doom-modeline-bar-width 3
+      doom-modeline-github          nil
+      doom-modeline-mu4e            nil
+      doom-modeline-persp-name      nil
+      doom-modeline-minor-modes     nil
+      doom-modeline-major-mode-icon nil
+      doom-modeline-buffer-file-name-style 'relative-from-project
+      ;; Only show file encoding if it's non-UTF-8 and different line endings
+      ;; than the current OSes preference
+      doom-modeline-buffer-encoding 'nondefault
+      doom-modeline-default-eol-type
+      (cond (IS-MAC 2)
+            (IS-WINDOWS 1)
+            (0))
+
+      doom-modeline-icon nil
+      )
+
+;;-- end modeline

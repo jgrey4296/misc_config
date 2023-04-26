@@ -80,29 +80,9 @@ See `+emacs-lisp-non-package-mode' for details.")
                      (emacs-lisp-mode    :trigger "__package")
                      )
                     )
-(spec-handling-add! lookup-url nil
-                    '(lisp
-                     ("elisp melpa" "https://melpa.org/#/?q=%s")
-                     ("elisp elpa" "https://elpa.gnu.org/packages/")
-                     )
-                    )
 (spec-handling-add! projects nil
                     '(emacs-eldev projectile-eldev-project-p :project-file "eldev" :compilation-dir nil :configure nil :compile "eldev compile" :test "eldev test" :install nil :package "eldev package" :run "eldev emacs")
                     '(emacs-cask ("cask") :project-file "cask" :compilation-dir nil :configure nil :compile "cask install" :test nil :install nil :package nil :run nil :test-suffix "-test" :test-prefix "test-")
-                    )
-(spec-handling-add! lookup-handler t
-                    '((emacs-lisp-mode lisp-interaction-mode helpful-mode)
-                      :definition    +emacs-lisp-lookup-definition
-                      :documentation +emacs-lisp-lookup-documentation
-                     )
-                    '((racket-mode racket-repl-mode)
-                     :definition    +racket-lookup-definition
-                     :documentation +racket-lookup-documentation
-                     )
-                    '(inferior-emacs-lisp-mode
-                      :definition    +emacs-lisp-lookup-definition
-                      :documentation +emacs-lisp-lookup-documentation
-                      )
                     )
 (spec-handling-add! rotate-text nil
                     '(emacs-lisp-mode
@@ -123,15 +103,37 @@ See `+emacs-lisp-non-package-mode' for details.")
                     )
 
 (spec-handling-add! whitespace-cleanup nil
-                    '(emacs-lisp-mode delete-trailing-whitespace +jg-lisp-cleanup-ensure-newline +jg-text-cleanup-whitespace)
+                    '(emacs-lisp-mode delete-trailing-whitespace
+                      +jg-lisp-cleanup-ensure-newline
+                      +jg-text-cleanup-whitespace)
     )
+
 (spec-handling-add! lookup-regular nil
                     '(emacs-lisp-mode
                       ("GNU Lisp" . "https://www.gnu.org/software/emacs/manual/html_node/elisp/index.html")
                       ("Melpa" . "https://melpa.org/#/")
                       )
                     )
-
+(spec-handling-add! lookup-url nil
+                    '(lisp
+                     ("elisp melpa" "https://melpa.org/#/?q=%s")
+                     ("elisp elpa" "https://elpa.gnu.org/packages/")
+                     )
+                    )
+(spec-handling-add! lookup-handler t
+                    '((emacs-lisp-mode lisp-interaction-mode helpful-mode)
+                      :definition    +emacs-lisp-lookup-definition
+                      :documentation +emacs-lisp-lookup-documentation
+                     )
+                    '((racket-mode racket-repl-mode)
+                     :definition    +racket-lookup-definition
+                     :documentation +racket-lookup-documentation
+                     )
+                    '(inferior-emacs-lisp-mode
+                      :definition    +emacs-lisp-lookup-definition
+                      :documentation +emacs-lisp-lookup-documentation
+                      )
+                    )
 
 (set-repl-handler! '(emacs-lisp-mode lisp-interaction-mode) #'+emacs-lisp/open-repl)
 (set-repl-handler! 'racket-mode #'+racket/open-repl)

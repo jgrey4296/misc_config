@@ -23,7 +23,7 @@
 
 (load! "+vars")
 (load! "+minor-modes")
-(after! evil
+(after! jg-total-bindings
   (load! "+bindings")
   )
 

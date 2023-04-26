@@ -17,6 +17,8 @@
                      ;; "Pp Eval"
                      "RNC Input"
                      "counsel"
+                     "refs-/"
+                     "Neotree"
                      )
              (* any)
              ))

@@ -1,5 +1,6 @@
 ;;; util/bindings/+funcs.el -*- lexical-binding: t; -*-
 
+;;;###autoload
 (defun +jg-bindings-open-link ()
   (interactive)
   (cond ((eq evil-state 'visual)
@@ -10,6 +11,7 @@
         )
   )
 
+;;;###autoload
 (defun +jg-bindings-open-link-externally ()
   (interactive)
   (let ((current-prefix-arg '(16))
@@ -27,6 +29,7 @@
     )
   )
 
+;;;###autoload
 (defun +jg-bindings-list-buffer-locals ()
   (interactive)
   (let ((vars (buffer-local-variables))
@@ -49,6 +52,7 @@
     )
   )
 
+;;;###autoload
 (defun +jg-bindings-wk-filter-fn (binding)
   (not (string-match (rx (or "C-"
                              "C-M"
@@ -58,6 +62,7 @@
                      (car binding)))
   )
 
+;;;###autoload
 (defun +jg-binding-change-ext ()
   (interactive)
   (let* ((current (buffer-file-name))
@@ -69,11 +74,13 @@
     )
   )
 
+;;;###autoload
 (defun +jg-bindings-load-bookmarks()
   (interactive)
   (bookmark-load (read-file-name "Load bookmarks file: " doom-user-dir "bookmarks" t "bookmarks") t)
   )
 
+;;;###autoload
 (defun +jg-bindings-calendar-insert-date ()
   " from https://emacs.stackexchange.com/questions/42529/insert-date-using-a-calendar "
   (interactive)

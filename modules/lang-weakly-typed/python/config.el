@@ -3,6 +3,7 @@
 (doom-log "Config JG Python")
 
 (load! "+vars")
+(load! "+funcs")
 (load! "modes/+manifest-mode")
 (after! jg-bindings-total
   (load! "+bindings")

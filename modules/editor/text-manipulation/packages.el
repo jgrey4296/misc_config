@@ -13,6 +13,16 @@
 (package! lint-result-mode :recipe `(:local-repo ,(expand-file-name "packages/major-modes/lint-result-mode" doom-user-dir)))
 (package! highlight-indent-guides)
 (package! hl-todo)
+(package! avy)
+(package! exec-path-from-shell)
+(package! f)
+(package! flycheck)
+(package! fsm)
+(package! neotree)
+(package! origami)
+(package! shell-pop)
+(package! timeline-mode :recipe `(:local-repo ,(expand-file-name "packages/major-modes/timeline-mode" doom-user-dir)))
+(package! vlf)
 
 ;; (package! objed)
 

@@ -1,7 +1,6 @@
 ;;; tools/lookup/config.el -*- lexical-binding: t; -*-
 
 (load! "+vars")
-(load! "+funcs")
 (load! "+backends")
 (after! jg-bindings-total
   (load! "+bindings")

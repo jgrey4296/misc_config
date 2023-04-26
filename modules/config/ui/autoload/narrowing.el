@@ -1,5 +1,6 @@
 ;;; -*- lexical-binding: t; -*-
 
+;;;###autoload
 (defun +jg-ui-narrow-around-point ()
   (interactive)
   (cond (current-prefix-arg
@@ -18,6 +19,7 @@
         )
   )
 
+;;;###autoload
 (defun +jg-ui-toggle-narrow-buffer (arg)
   "Narrow the buffer to BEG END. If narrowed, widen it.
 If region isn't active, narrow away anything above point
@@ -30,11 +32,13 @@ If region isn't active, narrow away anything above point
         )
   )
 
+;;;###autoload
 (defun +jg-ui-narrowing-move-focus-backward (arg)
   (interactive "p")
   (+jg-ui-narrowing-move-focus-forward(- arg))
   )
 
+;;;###autoload
 (defun +jg-ui-narrowing-move-focus-forward (arg)
   (interactive "p")
   (widen)

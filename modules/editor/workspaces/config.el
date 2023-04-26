@@ -1,58 +1,16 @@
 ;;; ui/workspaces/config.el -*- lexical-binding: t; -*-
 
-;; `persp-mode' gives me workspaces, a workspace-restricted `buffer-list', and
-;; file-based session persistence. I used workgroups2 before this, but abandoned
-;; it because it was unstable and slow; `persp-mode' is neither (and still
-;; maintained).
-;;
-;; NOTE persp-mode requires `workgroups' for file persistence in Emacs 24.4.
-
-(defvar +workspaces-main "main"
-  "The name of the primary and initial workspace, which cannot be deleted.")
-
-(defvar +workspaces-switch-project-function #'doom-project-find-file
-  "The function to run after `projectile-switch-project' or
-`counsel-projectile-switch-project'. This function must take one argument: the
-new project directory.")
-
-(defvar +workspaces-on-switch-project-behavior 'non-empty
-  "Controls the behavior of workspaces when switching to a new project.
-
-Can be one of the following:
-
-t           Always create a new workspace for the project
-'non-empty  Only create a new workspace if the current one already has buffers
-            associated with it.
-nil         Never create a new workspace on project switch.")
-
-;; FIXME actually use this for wconf bookmark system
-(defvar +workspaces-data-file "_workspaces"
-  "The basename of the file to store single workspace perspectives. Will be
-stored in `persp-save-dir'.")
-
-(defvar +workspace--old-uniquify-style nil)
-
-
-;;
-;; Packages
+(load! "+vars")
+(after! jg-bindings-total
+  (load! "+bindings"))
 
 (use-package! persp-mode
   :unless noninteractive
   :commands persp-switch-to-buffer
   :hook (doom-init-ui . persp-mode)
   :config
-  (setq persp-autokill-buffer-on-remove 'kill-weak
-        persp-reset-windows-on-nil-window-conf nil
-        persp-nil-hidden t
-        persp-auto-save-fname "autosave"
-        persp-save-dir (concat doom-data-dir "workspaces/")
-        persp-set-last-persp-for-new-frames t
-        persp-switch-to-added-buffer nil
-        persp-kill-foreign-buffer-behaviour 'kill
-        persp-remove-buffers-from-nil-persp-behaviour nil
-        persp-auto-resume-time -1 ; Don't auto-load on startup
-        persp-auto-save-opt (if noninteractive 0 1)) ; auto-save on kill
-
+  ;; Per-workspace `winner-mode' history
+  (add-to-list 'window-persistent-parameters '(winner-ring . t))
 
   ;;;; Create main workspace
   ;; The default perspective persp-mode creates is special and doesn't represent
@@ -105,9 +63,6 @@ stored in `persp-save-dir'.")
              (when +workspace--old-uniquify-style
                (setq uniquify-buffer-name-style +workspace--old-uniquify-style))
              (advice-remove #'doom-buffer-list #'+workspace-buffer-list)))))
-
-  ;; Per-workspace `winner-mode' history
-  (add-to-list 'window-persistent-parameters '(winner-ring . t))
 
   (add-hook! 'persp-before-deactivate-functions
     (defun +workspaces-save-winner-data-h (_)
@@ -166,16 +121,6 @@ stored in `persp-save-dir'.")
       (setf (aref persp 2)
             (cl-delete-if-not #'persp-get-buffer-or-null (persp-buffers persp)))))
 
-  ;; Delete the current workspace if closing the last open window
-  (define-key! persp-mode-map
-    [remap delete-window] #'+workspace/close-window-or-workspace
-    [remap evil-window-delete] #'+workspace/close-window-or-workspace)
-
-  ;; per-frame workspaces
-  (setq persp-init-frame-behaviour t
-        persp-init-new-frame-behaviour-override nil
-        persp-interactive-init-frame-behaviour-override #'+workspaces-associate-frame-fn
-        persp-emacsclient-init-frame-behaviour-override #'+workspaces-associate-frame-fn)
   (add-hook 'delete-frame-functions #'+workspaces-delete-associated-workspace-h)
   (add-hook 'server-done-hook #'+workspaces-delete-associated-workspace-h)
 
@@ -213,11 +158,6 @@ stored in `persp-save-dir'.")
         '(:columns ((ivy-rich-candidate (:width 50))
                     (+workspace--ivy-rich-preview))))))
 
-  (when (modulep! :completion helm)
-    (after! helm-projectile
-      (setcar helm-source-projectile-projects-actions
-              '("Switch to Project" . +workspaces-switch-to-project-h))))
-
   ;; Don't bother auto-saving the session if no real buffers are open.
   (advice-add #'persp-asave-on-exit :around #'+workspaces-autosave-real-buffers-a)
 
@@ -248,11 +188,13 @@ stored in `persp-save-dir'.")
   (persp-def-buffer-save/load
    :mode 'eshell-mode :tag-symbol 'def-eshell-buffer
    :save-vars '(major-mode default-directory))
+
   ;; compile
   (persp-def-buffer-save/load
    :mode 'compilation-mode :tag-symbol 'def-compilation-buffer
    :save-vars '(major-mode default-directory compilation-directory
                 compilation-environment compilation-arguments))
+
   ;; magit
   (persp-def-buffer-save/load
    :mode 'magit-status-mode :tag-symbol 'def-magit-status-buffer
@@ -260,6 +202,7 @@ stored in `persp-save-dir'.")
    :load-function (lambda (savelist &rest _)
                     (cl-destructuring-bind (buffer-name vars &rest _rest) (cdr savelist)
                       (magit-status (alist-get 'default-directory vars)))))
+
   ;; Restore indirect buffers
   (defvar +workspaces--indirect-buffers-to-restore nil)
   (persp-def-buffer-save/load
@@ -285,11 +228,12 @@ stored in `persp-save-dir'.")
               (make-indirect-buffer base-buffer buffer-name t)))))
       (setq +workspaces--indirect-buffers-to-restore nil)))
 
-;;; tab-bar
+  ;; tab-bar
   (add-hook! 'tab-bar-mode-hook
     (defun +workspaces-set-up-tab-bar-integration-h ()
       (add-hook 'persp-before-deactivate-functions #'+workspaces-save-tab-bar-data-h)
       (add-hook 'persp-activated-functions #'+workspaces-load-tab-bar-data-h)
       ;; Load and save configurations for tab-bar.
       (add-hook 'persp-before-save-state-to-file-functions #'+workspaces-save-tab-bar-data-to-file-h)
-      (+workspaces-load-tab-bar-data-from-file-h))))
+      (+workspaces-load-tab-bar-data-from-file-h)))
+  )

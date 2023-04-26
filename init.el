@@ -11,7 +11,7 @@
  ;;:editor multiple-cursors
 
  :emacs electric vc
- :emacs dired hydra ibuffer misc popup version-control
+ :emacs dired hydra ibuffer popup version-control
 
  :lang-data csv graphql
  :lang-data xml toml json yaml logs

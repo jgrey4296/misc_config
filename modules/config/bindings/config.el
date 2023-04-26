@@ -1,6 +1,5 @@
 ;;; config/default/config.el -*- lexical-binding: t; -*-
 
-(load! "+funcs")
 (load! "+vars")
 (load! "+repl-commands")
 (load! "util/+cleaning")

@@ -167,6 +167,12 @@ and cannot run in."
               display-line-numbers-major-tick  20
 )
 
+(after! neotree
+  (push "^__pycache__$" neo-hidden-regexp-list)
+  (push "^G\\(PATH\\|R?TAGS\\)$" neo-hidden-regexp-list)
+  (push "^__init__.py$" neo-hidden-regexp-list)
+  )
+
 ;;-- smartparens
 (setq-default sp-autoinsert-pair t
               sp-autoinsert-quote-if-followed-by-closing-pair nil

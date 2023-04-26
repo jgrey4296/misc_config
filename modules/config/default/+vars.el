@@ -70,3 +70,10 @@
   (setq tramp-default-method "ssh")) ; faster than the default scp
 
 ;;-- end tramp
+
+(setq-default diary-file (expand-file-name "diary" doom-user-dir))
+
+(setq-default shell-default-shell 'shell
+              shell-protect-eshell-prompt 0
+              shell-enable-smart-eshell t
+              )

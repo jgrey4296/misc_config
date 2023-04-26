@@ -4,7 +4,6 @@
 (load! "+funcs")
 (load! "utils/+state-hl-lines")
 (load! "utils/+faces")
-(load! "utils/+narrowing")
 (after! (evil jg-bindings-total)
   (load! "+bindings")
   )

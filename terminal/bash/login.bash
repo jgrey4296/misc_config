@@ -31,7 +31,7 @@ jg_maybe_inc_prompt
 jg_set_prompt
 
 if [[ "$TERM_PROGRAM" != "tmux" ]]; then
-    tmux new-session -d "bash"
+    tmux new-session -d "nu" "--config" "~/config.nu" "--env-config" "~/env.nu"
     tmux new-window -d -n "emacs" "emacs -nw"
     tmux -2 attach
 fi

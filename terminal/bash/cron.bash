@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -eo pipefail
 
 # # from: https://itecnotes.com/server/cron-how-to-use-the-aliases-in-the-crontab/
 shopt -s expand_aliases
@@ -8,7 +8,6 @@ source "$HOME/.doom.d/terminal/bash/_base_path.bash"
 source "$HOME/.doom.d/terminal/bash/components/rust.bash"
 source "$HOME/.doom.d/terminal/bash/components/latex.bash"
 source "$HOME/.doom.d/terminal/bash/conda.bash"
-conda activate "default"
 
 CPU_MAX="50"
 function cpu_check(){
@@ -37,11 +36,3 @@ function cpu_check(){
         # echo "CPU Usage is fine"
     fi
 }
-
-# source "$HOME/.doom.d/terminal/bash/bash_setup/_basic_utils.bash"
-# source "$HOME/.doom.d/terminal/bash/bash_setup/_base_path.bash"
-# source "$HOME/.doom.d/terminal/bash/bash_setup/cron.bash"
-# source "$HOME/.doom.d/terminal/bash/bash_setup/latex.bash"
-# source "$HOME/.doom.d/terminal/bash/bash_setup/python.bash"
-# source "$HOME/.doom.d/terminal/bash/bash_setup/ruby.bash"
-# source "$HOME/.doom.d/terminal/bash/bash_setup/_exports.bash"

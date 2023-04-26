@@ -1,1 +1,1 @@
-~/anaconda/envs/{{cookiecutter.env}}/
+{{cookiecutter.env}}

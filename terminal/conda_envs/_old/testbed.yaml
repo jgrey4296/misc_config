@@ -49,4 +49,4 @@ dependencies:
   - pycairo
   - openpyxl
   - pyexcel
-prefix: /opt/anaconda3/envs/testbed
+prefix: /usr/local/anaconda3/envs/testbed

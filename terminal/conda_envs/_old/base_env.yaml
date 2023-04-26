@@ -196,4 +196,4 @@ dependencies:
     - click-completion==0.5.2
     - crayons==0.3.0
     - shellingham==1.3.2
-prefix: /opt/anaconda3
+prefix: /usr/local/anaconda3

@@ -31,4 +31,4 @@ dependencies:
   - regex
   - pip
   - python=3.10
-prefix: /opt/anaconda3/envs/acab-dev
+prefix: /usr/local/anaconda3/envs/acab-dev

@@ -27,4 +27,4 @@ dependencies:
   - beautifulsoup4
   - scipy
   - pandas
-prefix: /opt/anaconda3/envs/nlp
+prefix: /usr/local/anaconda3/envs/nlp

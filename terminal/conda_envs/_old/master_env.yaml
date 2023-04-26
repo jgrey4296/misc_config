@@ -330,4 +330,4 @@ dependencies:
     - en-core-web-sm==2.1.0
     - service-factory==0.1.5
     - twitter==1.18.0
-prefix: /opt/anaconda3
+prefix: /usr/local/anaconda3

@@ -1,4 +1,4 @@
-name: bookmark
+name: /opt/anaconda3/envs/bookmark
 channels:
   - defaults
   - conda-forge

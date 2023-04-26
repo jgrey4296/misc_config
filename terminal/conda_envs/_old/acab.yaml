@@ -9,4 +9,4 @@ dependencies:
   - pip
   - wheel
   - setuptools
-prefix: /opt/anaconda3/envs/acab
+prefix: /usr/local/anaconda3/envs/acab

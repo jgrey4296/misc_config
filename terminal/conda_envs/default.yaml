@@ -1,0 +1,28 @@
+name: default
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - readline
+  - wheel
+  - regex
+  - isort
+  - pip
+  - pylint
+  - matplotlib
+  - build
+  - setuptools
+  - jedi
+  - lxml
+  - networkx
+  - pdfrw
+  - pillow
+  - beautifulsoup4
+  - python-twitter
+  - scikit-learn
+  - pypandoc
+  - pyflakes
+  - bibtexparser
+  - pandoc
+  - pelican
+  - pylatexenc

@@ -39,4 +39,4 @@ dependencies:
     - requests==2.24.0
     - requests-oauthlib==1.3.0
     - urllib3==1.25.9
-prefix: /opt/anaconda3/envs/youtube
+prefix: /usr/local/anaconda3/envs/youtube

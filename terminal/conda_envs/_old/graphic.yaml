@@ -23,4 +23,4 @@ dependencies:
   - scipy
   - piexif
   - pycairo
-prefix: /opt/anaconda3/envs/graphic
+prefix: /usr/local/anaconda3/envs/graphic

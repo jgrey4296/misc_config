@@ -8,7 +8,7 @@ source "$HOME/.doom.d/terminal/bash/_base_path.bash"
 source "$HOME/.doom.d/terminal/bash/components/rust.bash"
 source "$HOME/.doom.d/terminal/bash/components/latex.bash"
 source "$HOME/.doom.d/terminal/bash/conda.bash"
-conda activate "$CONDA_DEFAULT_ENV"
+conda activate "default"
 
 CPU_MAX="50"
 function cpu_check(){

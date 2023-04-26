@@ -14,4 +14,4 @@ dependencies:
   - seaborn
   - numpy
   - pyyaml
-prefix: /opt/anaconda3/envs/machine_learning
+prefix: /usr/local/anaconda3/envs/machine_learning

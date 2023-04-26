@@ -1,5 +1,5 @@
 envs_dirs:
-  - /opt/anaconda3/envs
+  - /usr/local/anaconda3/envs
 channels:
   - defaults
   - conda-forge
@@ -8,27 +8,20 @@ env_prompt: ""
 create_default_packages:
   - beautifulsoup4
   - build
-  - celery
   - coverage
-  - flask
   - humanfriendly
   - isort
   - jedi
   - matplotlib
-  - mypy=0.931
   - networkx
   - numpy
   - pandas
   - pip
-  - pip-review
   - pony
-  - pycodestyle
-  - pycycle
   - pygments
   - pylint
   - pyparsing
   - pyqtree
-  - pyright
   - pytest
   - python=3.11
   - readline
@@ -36,7 +29,6 @@ create_default_packages:
   - rich
   - scipy
   - seaborn
-  - semanticversion
   - setuptools
   - sphinx
   - sqlite
@@ -45,6 +37,12 @@ create_default_packages:
   - sty
   - sympy
   - wheel
-  - toml
-  - doit
   - pre-commit
+  # - celery
+  # - flask
+  # - mypy=0.931
+  # - pip-review
+  # - pycodestyle
+  # - pycycle
+  # - pyright
+  # - semanticversion

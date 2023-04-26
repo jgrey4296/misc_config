@@ -23,4 +23,4 @@ dependencies:
   - pip:
     - pyside6==6.2.1
     - shiboken6==6.2.1
-prefix: /opt/anaconda3/envs/ui
+prefix: /usr/local/anaconda3/envs/ui

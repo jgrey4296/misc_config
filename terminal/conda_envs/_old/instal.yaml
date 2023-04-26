@@ -63,4 +63,4 @@ dependencies:
   - inflect
   - flask-restful
   - clingo
-prefix: /opt/anaconda3/envs/instal
+prefix: /usr/local/anaconda3/envs/instal

@@ -33,4 +33,4 @@ dependencies:
   - img2pdf
   - clingo
   - sphinx
-prefix: /opt/anaconda3/envs/base310
+prefix: /usr/local/anaconda3/envs/base310

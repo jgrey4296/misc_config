@@ -15,12 +15,3 @@ SHELL="$(which bash)"
 
 jg_maybe_inc_prompt
 jg_set_prompt
-
-# TODO handle venv and condaenv?
-# Auto Activate an environment if necessary:
-if [ -f ".venv" ]
-then
-    ENV=$(tail -n 1 .venv)
-    echo "Env Conda : ${ENV}"
-    conda activate "$ENV"
-fi

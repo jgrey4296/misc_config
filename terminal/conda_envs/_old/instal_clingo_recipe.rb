@@ -43,9 +43,9 @@ class Clingo < Formula
                          "-DPYCLINGO_USE_INSTALL_PREFIX=ON",
                          "-DPYCLINGO_USER_INSTALL=OFF",
                          "-DCLINGO_BUILD_WITH_LUA=OFF",
-                         "-DPython_EXECUTABLE=/opt/anaconda3/envs/instal/bin/python",
+                         "-DPython_EXECUTABLE=/usr/local/anaconda3/envs/instal/bin/python",
                          "-DPYCLINGO_DYNAMIC_LOOKUP=ON",
-                         "-DPython_ROOT=/opt/anaconda3/envs/instal",
+                         "-DPython_ROOT=/usr/local/anaconda3/envs/instal",
                          *std_cmake_args
     system "make", "install"
   end

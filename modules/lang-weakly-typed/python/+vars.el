@@ -9,19 +9,10 @@
 ;;-- personal vars
 
 (defvar jg-python-dev-mode nil)
-
 (defvar jg-python-dev-cmd "-X dev")
-
 (defvar jg-python-docs-url           "https://docs.python.org/3/")
-
 (defvar jg-python-lib-url-suffix     "library/%s.html")
-
-(defvar jg-conda-activate-cmd        "source $HOME/.doom.d/terminal/bash/conda.bash && activate %s")
-
-(defvar jg-python-last-chosen-support nil)
-
 (defvar jg-python-import-block-end-re "^\\(__all__\\|[[:graph:]]+?\\s-+=\\|def\\|class\\|if TYPE_CHECKING:\\)")
-
 (defvar jg-python-summary-buffer      "*Python-Summary*")
 (setq expand-region-preferred-python-mode 'python-mode)
 ;;-- end personal vars
@@ -178,10 +169,10 @@
                      )
                     )
 (spec-handling-add! company nil
-                    '(python-mode (:front . #'jg-company/backend ) (:front . #'company-gtags))
-                    '(anaconda-mode (:favour . #'company-anaconda))
+                    '(python-mode (:front . jg-company/backend ) (:front . company-gtags))
+                    '(anaconda-mode (:favour . company-anaconda))
                     )
-(spec-handling-add! whitespace-cleanup t
+(spec-handling-add! whitespace-cleanup nil
                     '(python-mode
                       +jg-python-cleanup-ensure-newline-before-def
                       delete-trailing-whitespace
@@ -246,4 +237,29 @@
                      ("Manifest format" . "https://docs.python.org/3/distutils/sourcedist.html?highlight=manifest")
                      )
                     )
+(spec-handling-add! modeline t
+                    '(python
+                      (jg-python-env-state (:eval (+jg-python-env-state-line)))
+                      )
+                    )
+(spec-handling-add! python-env nil
+                    '(default
+                       (:activate . none)
+                       (:support  . none))
+                    )
+
+(set-docsets! '(python-mode inferior-python-mode) "Python 3" "NumPy" "SciPy" "Pandas")
+(set-repl-handler! 'python-mode #'+python/open-repl
+  :persist t
+  :send-region #'python-shell-send-region
+  :send-buffer #'python-shell-send-buffer)
+(set-eval-handler! 'python-mode
+    '((:command . (lambda () python-shell-interpreter))
+      (:exec (lambda ()
+               (if-let* ((bin (executable-find "pipenv" t))
+                         (_ (pipenv-project-p)))
+                   (format "PIPENV_MAX_DEPTH=9999 %s run %%c %%o %%s %%a" bin)
+                 "%c %o %s %a")))
+      (:description . "Run Python script")))
+
 ;;-- end specs

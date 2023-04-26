@@ -1,6 +1,5 @@
 ;;; +advice.el -*- lexical-binding: t; -*-
 
-
 (define-advice py--pdbtrack-get-source-buffer (:override (block) +jg-python-pdftrack-silence)
 
   (if (and (not (string-match py-pdbtrack-stack-entry-regexp block))
@@ -73,12 +72,14 @@ It's platform specific in that it uses the platform's native path separator."
   " Auto-detect python repl and activate environment if necessary "
   (require 'python-mode)
   (unless python-shell-interpreter
-    (user-error "`python-shell-interpreter' isn't set"))
+
+(user-error "`python-shell-interpreter' isn't set"))
   ;; look for a venv
   ;; activate environment, start python repl
   (+jg-python-activate-venv-and-conda)
 
-  (let* ((default-directory (doom-project-root))
+  (let* (
+(default-directory (doom-project-root))
          (cmd (python-shell-calculate-command))
          (new-buffer (process-buffer
                       (run-python cmd nil t))))

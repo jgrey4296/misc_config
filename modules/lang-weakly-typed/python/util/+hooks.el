@@ -42,20 +42,6 @@
               )
   )
 
-(defun +jg-python-auto-kill-anaconda-processes-h ()
-    "Kill anaconda processes if this buffer is the last python buffer."
-    (when (and (eq major-mode 'python-mode)
-               (not (delq (current-buffer)
-                          (doom-buffers-in-mode 'python-mode (buffer-list)))))
-      (progn (message "Killing Ananaconda")
-             (anaconda-mode-stop))))
-
-(defun +jg-python-auto-kill-conda-hook ()
-  (add-hook 'kill-buffer-hook
-            #'+jg-python-auto-kill-anaconda-processes-h
-            nil 'local)
-  )
-
 (defun +jg-python-auto-hide ()
   " Add auto-hiding to python.
 Hides imports in a vimish fold,
@@ -76,13 +62,5 @@ and closes classes and functions, re-opening only the first class "
     )
   )
 
-(defun +python-init-anaconda-mode-maybe-h ()
-  "Enable `anaconda-mode' if `lsp-mode' is absent and
-`python-shell-interpreter' is present."
-  (unless (or (bound-and-true-p lsp-mode)
-              (bound-and-true-p eglot--managed-mode)
-              (bound-and-true-p lsp--buffer-deferred)
-              (not (executable-find python-shell-interpreter t)))
-    (anaconda-mode +1)))
 
 ;;; +hooks.el ends here

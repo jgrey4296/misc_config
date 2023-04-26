@@ -1,9 +1,11 @@
 ;;; lang/jg-python/+bindings.el -*- lexical-binding: t; -*-
 
 (map! :leader
-      (:prefix ("c v" . "Environments")
-       :desc "Activate Environment" "c" #'+jg-python-activate-venv-and-conda
-       )
+      :prefix ("c v" . "Environments")
+      :desc "Activate Env" "a" #'+jg-python-handle-env!
+      :desc "Clear Env"    "d" #'+jg-python-clear-env!
+      :desc "Report Env"   "r" #'+jg-python-env-report!
+      :desc "Lock Env"     "l" #'+jg-python-env-lock!
       )
 
 (map! :map python-mode-map
@@ -57,20 +59,15 @@
 (map! :map python-mode-map ;; environment
       :localleader
       :prefix ("e" . "Environment")
-      :desc "activate"    "a"    #'pyvenv-activate
-      :desc "deactivate"  "d"    #'pyvenv-deactivate
       :desc "Choose Support" "c" #'+jg-python-support
       :desc "Current Support" "C" (cmd! (message "Current Python Support: %s" jg-python-last-chosen-support))
-      :desc "activate"    "a" #'pipenv-activate
-      :desc "deactivate"  "d" #'pipenv-deactivate
       :desc "install"     "i" #'pipenv-install
-      :desc "lock"        "l" #'pipenv-lock
+      :desc "pipenv lock" "l" #'pipenv-lock
       :desc "open module" "o" #'pipenv-open
       :desc "run"         "r" #'pipenv-run
       :desc "shell"       "s" #'pipenv-shell
       :desc "uninstall"   "u" #'pipenv-uninstall
       )
-
 
 (map! :map inferior-python-mode-map
       :after python-mode
@@ -103,7 +100,6 @@
 (map! :map dired-mode-map
       :after jg-dired-bindings
       :localleader
-      :desc "Activate Py Environments" :n "v" #'+jg-python-activate-venv-and-conda
       )
 (map! :map shell-mode-map
       :localleader

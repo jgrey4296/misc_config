@@ -24,32 +24,23 @@
   :mode ("[./]flake8\\'" . conf-mode)
   :mode ("/Pipfile\\'"   . conf-mode)
   :init
-  (when (modulep! +lsp)
-    (add-hook 'python-mode-local-vars-hook #'lsp! 'append))
-  (when (modulep! +tree-sitter)
-    (add-hook 'python-mode-local-vars-hook #'tree-sitter! 'append))
   (when (executable-find "Microsoft.Python.LanguageServer")
     (set-eglot-client! 'python-mode '("Microsoft.Python.LanguageServer")))
-  (set-docsets! '(python-mode inferior-python-mode) "Python 3" "NumPy" "SciPy" "Pandas")
 
+  (spec-handling-add! python-env nil
+                      '(flycheck
+                        (:support . flycheck)
+                        )
+                      )
   :config
-  (set-repl-handler! 'python-mode #'+python/open-repl
-    :persist t
-    :send-region #'python-shell-send-region
-    :send-buffer #'python-shell-send-buffer)
-
-  (when (modulep! :ui modeline)
-    (advice-add #'pythonic-activate :after-while #'+modeline-update-env-in-all-windows-h)
-    (advice-add #'pythonic-deactivate :after #'+modeline-clear-env-in-all-windows-h))
 
   ;;-- hooks
   (add-hook! 'python-mode-hook
-             #'anaconda-mode
              #'+python-use-correct-flycheck-executables-h
-             #'doom-modeline-env-setup-python
              #'er/add-python-mode-expansions
              #'evil-collection-python-set-evil-shift-width
              #'doom--setq-tab-width-for-python-mode-h
+             #'+jg-python-handle-env!
              )
 
   ;; Always add auto-hide as the last thing
@@ -67,8 +58,8 @@
     indent-region-function      #'python-indent-region
     ;; indent-region-function      #'py-indent-region
     ;; indent-line-function        #'py-indent-line
-    jg-company-activation-re jg-python-company-activation
-    jg-company-kws           jg-python-company-kws
+    jg-company-activation-re    jg-python-company-activation
+    jg-company-kws              jg-python-company-kws
     )
   ;;-- end hooks
 
@@ -79,18 +70,16 @@
   :init
   (setq anaconda-mode-installation-directory (concat doom-data-dir "anaconda/")
         anaconda-mode-eldoc-as-single-line t)
-
-  (add-hook! 'python-mode-local-vars-hook :append
-             #'+python-init-anaconda-mode-maybe-h)
+  (spec-handling-add! python-env nil
+                      '(anaconda
+                        (:support . conda)
+                        )
+                      )
   :config
-
-  (add-hook 'anaconda-mode-hook #'anaconda-eldoc-mode)
-
-  (add-hook! 'python-mode-hook
-    (add-hook 'kill-buffer-hook #'+jg-python-auto-kill-anaconda-processes-h
-              nil 'local))
-
-  (add-hook 'anaconda-mode-hook #'evil-normalize-keymaps)
+  (add-hook! 'anaconda-mode-hook
+             #'anaconda-eldoc-mode
+             #'evil-normalize-keymaps
+             )
 )
 
 (use-package! company-anaconda
@@ -98,14 +87,29 @@
 
 ;;-- lsp
 
-(use-package! lsp-pyright :after lsp-mode)
-
-(use-package! lsp-jedi :defer)
+(use-package! lsp-pyright
+  :after lsp-mode
+  :when (modulep! +lsp)
+  :init
+  ;; (add-to-list 'lsp-enabled-clients 'pyright)
+  (spec-handling-add! python-env nil
+                      '(pyright
+                        (:support . lsp)
+                        )
+                      )
+  )
 
 (use-package! lsp-python-ms
   :disabled
-  :unless (modulep! :lang python +pyright)
+  :unless (modulep! +pyright)
   :after (python lsp-mode)
+  :init
+  (add-to-list 'lsp-disabled-clients 'python-ms)
+  (spec-handling-add! python-env nil
+                      '(lsp-ms
+                        (:support . lsp)
+                        )
+                      )
   :config
   (setq lsp-python-ms-python-executable-cmd python-shell-interpreter)
   )
@@ -114,18 +118,19 @@
   :disabled
   :ensure t
   :after lsp-mode
-  :config
-  (add-to-list 'lsp-enabled-clients 'jedi)
+  :init
+  (add-to-list 'lsp-disabled-clients 'jedi)
+  (spec-handling-add! python-env nil
+                      '(lsp-jedi
+                        (:support . lsp)
+                        )
+                      )
+
   )
 
 ;;-- end lsp
 
 ;;-- tests
-;; (after! (origami python-origami)
-;; (load! "util/jg-python-origami")
- ;;  (delq (assoc 'python-mode origami-parser-alist) origami-parser-alist)
- ;;  (add-to-list 'origami-parser-alist '(python-mode . +jg-origami-python-parser))
- ;;  )
 
 (use-package! pyimport :after python-mode)
 
@@ -141,7 +146,9 @@
 
 (use-package! nose
   :commands nose-mode
-  :preface (defvar nose-mode-map (make-sparse-keymap))
+  :preface
+
+(defvar nose-mode-map (make-sparse-keymap))
   :minor ("/test_.+\\.py$" . nose-mode)
   :config
   (set-yas-minor-mode! 'nose-mode)
@@ -156,20 +163,27 @@
 ;;-- end tests
 
 ;;-- envs
+(use-package! pythonic
+  :defer t
+  :init
+  (spec-handling-add! python-env nil
+                      '(pythonic
+                        (:activator . pythonic)
+                        )
+                      )
+  (advice-add #'pythonic-activate :after-while #'+modeline-update-env-in-all-windows-h)
+  (advice-add #'pythonic-deactivate :after #'+modeline-clear-env-in-all-windows-h)
+  )
 
 (use-package! pipenv
   :commands pipenv-project-p
-  :hook (python-mode . pipenv-mode)
-  :init (setq pipenv-with-projectile nil)
-  :config
-  (set-eval-handler! 'python-mode
-    '((:command . (lambda () python-shell-interpreter))
-      (:exec (lambda ()
-               (if-let* ((bin (executable-find "pipenv" t))
-                         (_ (pipenv-project-p)))
-                   (format "PIPENV_MAX_DEPTH=9999 %s run %%c %%o %%s %%a" bin)
-                 "%c %o %s %a")))
-      (:description . "Run Python script")))
+  :init
+  (setq pipenv-with-projectile nil)
+  (spec-handling-add! python-env nil
+                      '(pipenv
+                        (:activator . pipenv)
+                        )
+                      )
   )
 
 (use-package! pyvenv
@@ -178,57 +192,37 @@
   (when (modulep! :ui modeline)
     (add-hook 'pyvenv-post-activate-hooks #'+modeline-update-env-in-all-windows-h)
     (add-hook 'pyvenv-pre-deactivate-hooks #'+modeline-clear-env-in-all-windows-h))
-  :config
-  (add-hook 'python-mode-local-vars-hook #'pyvenv-track-virtualenv)
-  (add-to-list 'global-mode-string
-               '(pyvenv-virtual-env-name (" venv:" pyvenv-virtual-env-name " "))
-               'append)
+  (spec-handling-add! python-env nil
+                      '(pyvenv
+                        (:activator . pyvenv)
+                        )
+                      )
   )
 
 (use-package! conda
   :when (modulep! +conda)
   :after python
+  :init
+  (spec-handling-add! python-env nil
+                      '(conda_el
+                        (:activator . conda)
+                        )
+                      )
+
   :config
-  ;; The location of your anaconda home will be guessed from a list of common
-  ;; possibilities, starting with `conda-anaconda-home''s default value (which
-  ;; will consult a ANACONDA_HOME envvar, if it exists).
-  ;;
-  ;; If none of these work for you, `conda-anaconda-home' must be set
-  ;; explicitly. Afterwards, run M-x `conda-env-activate' to switch between
-  ;; environments
-  (or (cl-loop for dir in (list conda-anaconda-home
-                                "~/.anaconda"
-                                "~/.miniconda"
-                                "~/.miniconda3"
-                                "~/.miniforge3"
-                                "~/anaconda3"
-                                "~/miniconda3"
-                                "~/miniforge3"
-                                "~/opt/miniconda3"
-                                "/usr/bin/anaconda3"
-                                "/usr/local/anaconda3"
-                                "/usr/local/miniconda3"
-                                "/usr/local/Caskroom/miniconda/base"
-                                "~/.conda")
-               if (file-directory-p dir)
-               return (setq conda-anaconda-home (expand-file-name dir)
-                            conda-env-home-directory (expand-file-name dir)))
-      (message "Cannot find Anaconda installation"))
-
-  ;; integration with term/eshell
-  (conda-env-initialize-interactive-shells)
-  (after! eshell (conda-env-initialize-eshell))
-
-  (add-to-list 'global-mode-string
-               '(conda-env-current-name (" conda:" conda-env-current-name " "))
-               'append))
+  (setq conda-anaconda-home (or (getenv "ANACONDA_HOME") "/usr/local/anaconda3"))
+  (setq conda-env-home-directory (f-join conda-anaconda-home "envs"))
+)
 
 (use-package! poetry
-  :when (modulep! +poetry)
   :after python
   :init
-  (setq poetry-tracking-strategy 'switch-buffer)
-  (add-hook 'python-mode-hook #'poetry-tracking-mode))
+  (spec-handling-add! python-env nil
+                      '(poetry
+                        (:activator . poetry)
+                        )
+                      )
+  )
 
 (use-package! pip-requirements
   :defer t
@@ -237,11 +231,13 @@
   ;;   https://pypi.org/simple, which causes unexpected hangs (see #5998). This
   ;;   advice defers this behavior until the first time completion is invoked.
   ;; REVIEW More sensible behavior should be PRed upstream.
-  (defadvice! +python--init-completion-a (&rest args)
+
+(defadvice! +python--init-completion-a (&rest args)
     "Call `pip-requirements-fetch-packages' first time completion is invoked."
     :before #'pip-requirements-complete-at-point
     (unless pip-packages (pip-requirements-fetch-packages)))
-  (defadvice! +python--inhibit-pip-requirements-fetch-packages-a (fn &rest args)
+
+(defadvice! +python--inhibit-pip-requirements-fetch-packages-a (fn &rest args)
     "No-op `pip-requirements-fetch-packages', which can be expensive."
     :around #'pip-requirements-mode
     (letf! ((#'pip-requirements-fetch-packages #'ignore))
@@ -263,3 +259,13 @@
   :after cython-mode)
 
 ;;-- end cython
+
+;; (after! (origami python-origami)
+;; (load! "util/jg-python-origami")
+ ;;  (delq (assoc 'python-mode origami-parser-alist) origami-parser-alist)
+ ;;  (add-to-list 'origami-parser-alist '(python-mode . +jg-origami-python-parser))
+ ;;  )
+
+(spec-handling-new! python-env jg-python-env-registered nil append
+                    val
+                    )

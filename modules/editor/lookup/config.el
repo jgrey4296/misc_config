@@ -23,10 +23,6 @@
 (use-package! ivy-xref
   :when (modulep! :completion ivy)
   :config
-  (set-popup-rule! "^\\*xref\\*$" :ignore t)
-  (setq xref-show-definitions-function #'ivy-xref-show-defs
-        xref-show-xrefs-function       #'ivy-xref-show-xrefs)
-
   ;; HACK Fix #4386: `ivy-xref-show-xrefs' calls `fetcher' twice, which has
   ;; side effects that breaks in some cases (i.e. on `dired-do-find-regexp').
   (defadvice! +lookup--fix-ivy-xrefs (fn fetcher alist)

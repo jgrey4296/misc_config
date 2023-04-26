@@ -112,6 +112,9 @@ Dictionary.app behind the scenes to get definitions.")
       browse-url-default-handlers nil
       )
 
+(setq xref-show-definitions-function #'ivy-xref-show-defs
+      xref-show-xrefs-function       #'ivy-xref-show-xrefs)
+
 ;;-- specs
 (spec-handling-add! lookup-url nil
                     '(defaults
@@ -157,5 +160,10 @@ Dictionary.app behind the scenes to get definitions.")
                      ("Nushell cookbook" . "https://www.nushell.sh/cookbook/")
                      ("Nushell github" . "https://github.com/nushell/nushell")
                      )
+                    )
+(spec-handling-add! popup nil
+                    '(lookup
+                      ("^\\*xref\\*$" :ignore t)
+                      )
                     )
 ;;-- end specs

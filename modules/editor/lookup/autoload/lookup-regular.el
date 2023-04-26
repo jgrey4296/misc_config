@@ -58,6 +58,7 @@
 
 ;;-- end mode definition
 
+;;;###autoload
 (defun lookup-regular-go ()
   (interactive)
   (ivy-read "Lookup: "

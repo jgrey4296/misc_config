@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : autoload-explicit
+# uuid  : autoload-explicit
+# key   : autoload-explicit
+# group :
+# --
+(autoload '${1:fn} "${2:file}"${3:"`%`${4:doc}" ${5:t} ${6:type}})

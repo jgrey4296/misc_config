@@ -99,7 +99,7 @@ TODO: add spec format docstring
                             )
                      )
                   (unless dry
-                    (setq ,target (-reject #'null vals)))
+                    (setq ,target (cl-remove-duplicates (-reject #'null vals))))
                   vals
                   )
                 )
@@ -178,6 +178,7 @@ TODO: add spec format docstring
 
 ;;;###autoload
 (defmacro spec-handling-setq! (type &rest vals)
+  " register a hook to run late in 'spec-handling-hook' to in a setq "
   (let ((set-name (spec-handling--gensym type :set))
         (fname (macroexp-file-name)))
     (spec-handling--add-type type fname :setting)

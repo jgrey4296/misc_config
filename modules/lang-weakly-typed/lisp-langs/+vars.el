@@ -140,11 +140,11 @@ See `+emacs-lisp-non-package-mode' for details.")
 (set-eval-handler! '(emacs-lisp-mode lisp-interaction-mode) #'+emacs-lisp-eval)
 (set-eval-handler! '(emacs-lisp-mode lisp-interaction-mode) #'+jg-lisp-eval)
 
-;; (set-ligatures! 'emacs-lisp-mode :lambda "lambda")
-;; (set-ligatures! 'racket-mode
-;;   :lambda  "lambda"
-;;   :map     "map"
-;;   :dot     ".")
+(spec-handling-add! ligatures t
+                    '(emacs-lisp-mode
+                      "lambda" ?λ
+                      )
+                    )
 
 (set-docsets! 'racket-mode "Racket")
 (set-docsets! '(emacs-lisp-mode lisp-interaction-mode) "Emacs Lisp")

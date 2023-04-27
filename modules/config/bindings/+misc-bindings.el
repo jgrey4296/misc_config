@@ -52,14 +52,20 @@
 ;;-- end comint
 
 ;;-- flycheck
-(map! :after flycheck
-      :map flycheck-error-list-mode-map
+(map! :map flycheck-error-list-mode-map
+      :after flycheck
       :n "," nil
       :n "," #'tabulated-list-sort
       :n "{" #'tabulated-list-narrow-current-column
       :n "}" #'tabulated-list-widen-current-column
       )
 
+(map! :leader
+      :after flycheck
+      :desc "Flycheck" "!" flycheck-command-map
+      :prefix "c"
+      :desc "Flycheck" "!" flycheck-command-map
+      )
 ;;-- end flycheck
 
 ;;-- evil snipe

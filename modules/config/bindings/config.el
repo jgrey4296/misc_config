@@ -16,19 +16,10 @@
   (load! "submaps/+evil-ex-setup")
 )
 
-(use-package! general-mod
-  :after general)
-
-(use-package! which-mod
-  :after which-key)
-
-(after! flycheck
-  (map! :leader
-        :desc "Flycheck" "!" flycheck-command-map
-        :prefix "c"
-        :desc "Flycheck" "!" flycheck-command-map
-        )
+(use-package! faster-whichkey
+  :after (which-key general)
   )
+
 
 (after! evil-escape
   (setq evil-escape-inhibit-functions nil ;; '(evil-ex-p)

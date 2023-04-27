@@ -184,7 +184,7 @@
     (add-hook 'pyvenv-pre-deactivate-hooks #'+modeline-clear-env-in-all-windows-h))
   (spec-handling-add! python-env nil
                       '(pyvenv
-                        (:activator . pyvenv)
+                        (:activator . venv)
                         )
                       )
   )

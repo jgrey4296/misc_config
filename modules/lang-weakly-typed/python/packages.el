@@ -3,6 +3,8 @@
 
 (package! python-mode :recipe (:host gitlab :repo "python-mode-devs/python-mode" :branch "master"))
 ;; (package! python :disable t :recipe (:local-repo "/usr/local/Cellar/emacs-plus@28/28.2/share/emacs/28.2/lisp/progmodes/"))
+(package! env-handling :recipe `(:local-repo ,(expand-file-name "packages/misc/env-handling" doom-user-dir)))
+(package! toml)
 ;; (package! python :type 'built-in :disable t)
 ;;(package! python-rx)
 (package! pythonic)

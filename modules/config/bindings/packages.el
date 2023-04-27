@@ -5,6 +5,5 @@
 (package! iedit)
 (package! link-hint )
 (package! expand-region)
-(package! which-mod :recipe `(:local-repo ,(expand-file-name "packages/misc/which-mod" doom-user-dir)))
-(package! general-mod :recipe `(:local-repo ,(expand-file-name "packages/misc/general-mod" doom-user-dir)))
+(package! faster-whichkey :recipe `(:local-repo ,(expand-file-name "packages/misc/faster-whichkey" doom-user-dir)))
 (package! which-key)

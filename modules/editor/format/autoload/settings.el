@@ -2,6 +2,7 @@
 
 ;; This must be redefined here because `format-all' only makes it available at
 ;; compile time.
+
 (defconst +format-system-type
   (cl-case system-type
     (windows-nt 'windows)
@@ -22,7 +23,6 @@
            if (atom choice) return choice
            else if (eql +format-system-type (car choice))
            return (cadr choice)))
-
 
 (defun +format--make-command (formatter &rest _)
   `(format-all--buffer-thunk

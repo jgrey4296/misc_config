@@ -179,12 +179,35 @@
                       +jg-text-cleanup-whitespace
                      )
                     )
-(spec-handling-add! lookup-handler nil
-                    '(anaconda-mode
-                      :definition +jg-conda-find-defs
-                      :references +jg-conda-find-references
-                      :documentation +jg-conda-show-doc)
+(spec-handling-add! modeline t
+                    '(python
+                      (jg-python-env-state (:eval (+jg-python-env-state-line)))
+                      )
                     )
+(spec-handling-add! python-env nil
+                    '(default (:activate . none) (:support  . none))
+                    '(pyright (:support . lsp))
+                    )
+(spec-handling-add! ligatures t
+                    '(python-mode
+                      ;; Functional
+                      "def"    :def
+                      "lambda" :lambda
+                      ;; Types
+                      "None" :null
+                      "True" :true "False" :false
+                      "int"  :int "str" :str "float" :float "bool" :bool "tuple" :tuple
+                      ;; Flow
+                      "not"    :not
+                      "in"     :in
+                      "not in" :not-in
+                      "and"    :and "or" :or
+                      "for"    :for
+                      "return" :return
+                      "yield"  :yield
+                      )
+                    )
+
 (spec-handling-add! lookup-url nil
                     '(python
                      ("Python" "https://docs.python.org/3/search.html?q=%s&check_keywords=yes&area=default")
@@ -237,17 +260,14 @@
                      ("Manifest format" . "https://docs.python.org/3/distutils/sourcedist.html?highlight=manifest")
                      )
                     )
-(spec-handling-add! modeline t
-                    '(python
-                      (jg-python-env-state (:eval (+jg-python-env-state-line)))
-                      )
+(spec-handling-add! lookup-handler nil
+                    '(anaconda-mode
+                      :definition +jg-conda-find-defs
+                      :references +jg-conda-find-references
+                      :documentation +jg-conda-show-doc)
                     )
-(spec-handling-add! python-env nil
-                    '(default (:activate . none) (:support  . none))
-                    '(pyright (:support . lsp))
-                    )
-
-(set-docsets! '(python-mode inferior-python-mode) "Python 3" "NumPy" "SciPy" "Pandas")
+(set-docsets! '(python-mode inferior-python-mode)
+              "Python 3" "NumPy" "SciPy" "Pandas")
 (set-repl-handler! 'python-mode #'+jg-python/open-repl
   :persist t
   :send-region #'python-shell-send-region
@@ -260,19 +280,4 @@
                    (format "PIPENV_MAX_DEPTH=9999 %s run %%c %%o %%s %%a" bin)
                  "%c %o %s %a")))
       (:description . "Run Python script")))
-(set-ligatures! 'python-mode
-                ;; Functional
-                :def    "def"
-                :lambda "lambda"
-                ;; Types
-                :null   "None"
-                :true   "True" :false "False"
-                :int    "int"  :str "str" :float  "float" :bool   "bool" :tuple  "tuple"
-                ;; Flow
-                :not    "not"
-                :in     "in"  :not-in "not in"
-                :and    "and" :or "or"
-                :for    "for"
-                :return "return" :yield "yield")
-
 ;;-- end specs

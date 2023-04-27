@@ -6,6 +6,8 @@
       :desc "Clear Env"    "d" #'+jg-python-clear-env!
       :desc "Report Env"   "r" #'+jg-python-env-report!
       :desc "Lock Env"     "l" #'+jg-python-env-lock!
+      :desc "Create venv"  "c" #'pyvenv-create
+
       )
 
 (map! :map python-mode-map

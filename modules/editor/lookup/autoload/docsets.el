@@ -1,5 +1,4 @@
 ;;; tools/lookup/autoload/docsets.el -*- lexical-binding: t; -*-
-;;;###if (modulep! +docsets)
 
 (defvar dash-docs-docsets nil)
 

@@ -91,7 +91,7 @@ and call the currently used lsp/conda client entrypoint"
   (let* ((local-env (+jg-python-find-venv))
          (env-name (plist-get local-env :env))
          (env-path (plist-get local-env :path))
-         (root (or (projectile-project-root) current-directory))
+         (root (or (projectile-project-root) default-directory))
         )
     (unless (plist-get jg-python-env-state :activator) ;; Select handler
       (setf (plist-get jg-python-env-state :activator)
@@ -249,3 +249,17 @@ executable and packages."
   (when-let (home (read-directory-name "Set conda home: " "~" nil nil conda-anaconda-home))
     (setq conda-anaconda-home home)
     (message "Successfully changed conda home to: %s" (abbreviate-file-name home))))
+
+;;;###autoload
+(defun +jg-python-create-venv ()
+  (interactive)
+  (let ((dir (f-relative (read-directory-name "Venv dir: " (projectile-project-root))
+                         (projectile-project-root)))
+        )
+    (call-process "python" nil nil nil "-m" "venv" dir)
+    (with-temp-buffer
+      (insert dir)
+      (write-file (f-join (projectile-project-root) ".venv"))
+      )
+    )
+)

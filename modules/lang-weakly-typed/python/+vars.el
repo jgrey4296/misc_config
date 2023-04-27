@@ -243,9 +243,8 @@
                       )
                     )
 (spec-handling-add! python-env nil
-                    '(default
-                       (:activate . none)
-                       (:support  . none))
+                    '(default (:activate . none) (:support  . none))
+                    '(pyright (:support . lsp))
                     )
 
 (set-docsets! '(python-mode inferior-python-mode) "Python 3" "NumPy" "SciPy" "Pandas")

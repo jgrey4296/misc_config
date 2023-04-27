@@ -87,12 +87,6 @@
   :after lsp-mode
   :when (modulep! +lsp)
   :init
-  ;; (add-to-list 'lsp-enabled-clients 'pyright)
-  (spec-handling-add! python-env nil
-                      '(pyright
-                        (:support . lsp)
-                        )
-                      )
   )
 
 (use-package! lsp-python-ms

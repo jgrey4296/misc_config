@@ -25,11 +25,10 @@
 
   (spec-handling-add! python-env nil
                       '(flycheck
-                        (:support . flycheck)
+                        (:setup . flycheck)
                         )
                       )
   :config
-
   ;;-- hooks
   (add-hook! 'python-mode-hook
              #'+python-use-correct-flycheck-executables-h
@@ -68,7 +67,7 @@
         anaconda-mode-eldoc-as-single-line t)
   (spec-handling-add! python-env nil
                       '(anaconda
-                        (:support . conda)
+                        (:setup . conda)
                         )
                       )
   :config
@@ -97,7 +96,7 @@
   (add-to-list 'lsp-disabled-clients 'python-ms)
   (spec-handling-add! python-env nil
                       '(lsp-ms
-                        (:support . lsp)
+                        (:setup . lsp)
                         )
                       )
   :config
@@ -112,7 +111,7 @@
   (add-to-list 'lsp-disabled-clients 'jedi)
   (spec-handling-add! python-env nil
                       '(lsp-jedi
-                        (:support . lsp)
+                        (:setup . lsp)
                         )
                       )
 
@@ -158,7 +157,7 @@
   :init
   (spec-handling-add! python-env nil
                       '(pythonic
-                        (:activator . pythonic)
+                        (:setup . pythonic)
                         )
                       )
   (advice-add #'pythonic-activate :after-while #'+modeline-update-env-in-all-windows-h)
@@ -171,7 +170,7 @@
   (setq pipenv-with-projectile nil)
   (spec-handling-add! python-env nil
                       '(pipenv
-                        (:activator . pipenv)
+                        (:setup . pipenv)
                         )
                       )
   )
@@ -184,7 +183,7 @@
     (add-hook 'pyvenv-pre-deactivate-hooks #'+modeline-clear-env-in-all-windows-h))
   (spec-handling-add! python-env nil
                       '(pyvenv
-                        (:activator . venv)
+                        (:setup . venv)
                         )
                       )
   )
@@ -195,7 +194,7 @@
   :init
   (spec-handling-add! python-env nil
                       '(conda_el
-                        (:activator . conda)
+                        (:setup . conda)
                         )
                       )
 
@@ -209,7 +208,7 @@
   :init
   (spec-handling-add! python-env nil
                       '(poetry
-                        (:activator . poetry)
+                        (:setup . poetry)
                         )
                       )
   )
@@ -256,6 +255,6 @@
  ;;  (add-to-list 'origami-parser-alist '(python-mode . +jg-origami-python-parser))
  ;;  )
 
-(spec-handling-new! python-env jg-python-env-registered nil append
+(spec-handling-new! python-env env-handling-registered nil append
                     val
                     )

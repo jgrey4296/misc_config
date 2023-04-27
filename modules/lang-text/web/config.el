@@ -27,7 +27,11 @@
   (add-to-list 'auto-mode-alist '("\\.vue\\'" . web-mode) 'append)
   :mode "\\.vue\\'"
   :config
-  (set-docsets! 'web-mode "HTML" "CSS" "Twig" "WordPress")
+  (spec-handling-add! docsets
+                      '(web-mode
+                        "HTML" "CSS" "Twig" "WordPress"
+                        )
+                      )
 
   ;; tidy is already defined by the format-all package. We redefine it to add
   ;; more sensible arguments to the tidy command.

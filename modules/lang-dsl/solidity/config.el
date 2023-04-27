@@ -5,7 +5,7 @@
 
 (after! solidity-mode
   (setq solidity-comment-style 'slash)
-  (set-docsets! 'solidity-mode "Solidity")
+  (spec-handling-add docsets '(solidity-mode "Solidity"))
   (spec-handling-add! company nil
                       '(solidity-mode (:mode . #'company-solidity))
                       )

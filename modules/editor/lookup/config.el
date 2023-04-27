@@ -45,11 +45,24 @@
 
 (use-package! browse-url)
 
-(spec-handling-new! lookup-url +lookup-provider-url-alist nil append
+(use-package! dash-docs
+  :defer t
+  :config
+  (setq dash-docs-enable-debugging init-file-debug
+        dash-docs-docsets-path (concat doom-data-dir "docsets/")
+        dash-docs-min-length 2
+        dash-docs-browser-func #'eww)
+
+  (require 'counsel-dash nil t)
+)
+
+(use-package! browse-select)
+
+;;-- specs
+(spec-handling-new! browse-handler browse-url-handlers nil append
                     val
                     )
-
-(spec-handling-new! browse-handler browse-url-handlers nil append
+(spec-handling-new! lookup-url +lookup-provider-url-alist nil append
                     val
                     )
 
@@ -67,3 +80,9 @@
                           ;; Val : alist of (name . url)
                           (setq-local lookup-regular-targets val)
                           )
+
+(spec-handling-new-hooks! docsets
+                          (setq-local dash-docs-docsets val)
+                          )
+
+;;-- end specs

@@ -21,7 +21,11 @@
                       )
 
   (add-hook 'graphql-mode-hook #'rainbow-delimiters-mode)
-  (set-docsets! 'graphql-mode :add "GraphQL Specification")
+  (spec-handling-add! docsets
+                      '(graphql-mode
+                        "GraphQL Specification"
+                        )
+                      )
 
   (set-electric! 'graphql-mode
     :chars '(?\} ?\))

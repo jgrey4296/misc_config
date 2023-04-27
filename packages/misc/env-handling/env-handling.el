@@ -9,7 +9,7 @@
 (defvar env-handling-state nil)
 
 ;;;###autoload
-(defvar env-handling-registered '((:activator none) (:support none)) )
+(defvar env-handling-registered '((:setup none) (:support none) (:teardown none)) )
 
 ;;;###autoload
 (defvar env-handling-markers '(".venv" ".conda" "Pipfile" "pyproject.toml"))
@@ -31,15 +31,15 @@ and call the currently used lsp/conda client entrypoint"
          (env-path (plist-get local-env :path))
          (root (or (projectile-project-root) default-directory))
         )
-    (unless (plist-get env-handling-state :activator) ;; Select handler
-      (setf (plist-get env-handling-state :activator)
-            (intern (ivy-read "Python Env Handler: " (env-handling--get-handlers :activator) :require-match t)))
+    (unless (plist-get env-handling-state :setup) ;; Select handler
+      (setf (plist-get env-handling-state :setup)
+            (intern (ivy-read "Python Env Handler: " (env-handling--get-handlers :setup) :require-match t)))
       )
     (unless (plist-get env-handling-state :support)  ;; select support
       (setf (plist-get env-handling-state :support)
             (intern (ivy-read "Python Support: " (env-handling--get-handlers :support) :require-match t)))
       )
-    (unless (or env-name (not (eq (plist-get env-handling-state :activator) 'conda)))
+    (unless (or env-name (not (eq (plist-get env-handling-state :setup) 'conda)))
       (setq env-name (conda-env-read-name "Select Environment: "))
       )
     (add-to-list 'python-shell-extra-pythonpaths root)
@@ -47,7 +47,7 @@ and call the currently used lsp/conda client entrypoint"
     (when (boundp 'lsp-pyright-extra-paths)
       (setq lsp-pyright-extra-paths (vconcat lsp-pyright-extra-paths (vector root))))
 
-    (pcase (plist-get env-handling-state :activator)
+    (pcase (plist-get env-handling-state :setup)
       ((and (guard (plist-get env-handling-state :locked)) (guard (not (string-equal (plist-get env-handling-state :env) env-name))))
        (message "Environment is locked"))
       ((and (guard (plist-get env-handling-state :env)) (guard (string-equal (plist-get env-handling-state :env) env-name)))
@@ -111,29 +111,10 @@ and call the currently used lsp/conda client entrypoint"
   )
 
 ;;;###autoload
-(defun env-handling-state-line ()
-  (if (plist-get env-handling-state :env)
-      (format "Python (%s:%s): %s"
-              (plist-get env-handling-state :activator)
-              (plist-get env-handling-state :support)
-              (if (plist-get env-handling-state :locked)
-                  (concat "[" (plist-get env-handling-state :env) "]")
-                (plist-get env-handling-state :env))
-              )
-    "")
-  )
-
-;;;###autoload
-(defun env-handling-report! ()
-  (interactive)
-  (message "PyEnv: %s" (env-handling-state-line))
-)
-
-;;;###autoload
 (defun env-handling-clear-env! ()
   (interactive)
   (message "Clearing python environment")
-  (pcase (plist-get env-handling-state :activator)
+  (pcase (plist-get env-handling-state :setup)
     ('pipenv (pipenv-deactivate))
     ('poetry (poetry-venv-deactivate))
     ('conda
@@ -162,6 +143,25 @@ and call the currently used lsp/conda client entrypoint"
   (setf (plist-get env-handling-state :locked) (not (plist-get env-handling-state :locked)))
   (message "Env Loc: %s" (plist-get env-handling-state :locked))
   )
+
+;;;###autoload
+(defun env-handling-state-line ()
+  (if (plist-get env-handling-state :env)
+      (format "Python (%s:%s): %s"
+              (plist-get env-handling-state :setup)
+              (plist-get env-handling-state :support)
+              (if (plist-get env-handling-state :locked)
+                  (concat "[" (plist-get env-handling-state :env) "]")
+                (plist-get env-handling-state :env))
+              )
+    "")
+  )
+
+;;;###autoload
+(defun env-handling-report! ()
+  (interactive)
+  (message "PyEnv: %s" (env-handling-state-line))
+)
 
 ;;;###autoload
 (defun env-handling-auto-kill-support-hook()
@@ -194,66 +194,91 @@ and call the currently used lsp/conda client entrypoint"
   )
 
 ;;;###autoload
-(defun +python/set-conda-home ()
-  "Set `conda-anaconda-home' (ANACONDA_HOME).
-
-Usually it's `~/.anaconda3' on local machine, but it can be set to a remote
-directory using TRAMP syntax, e.g. `/ssh:host:/usr/bin/anaconda3'. This way, you
-can use a remote conda environment, including the corresponding remote python
-executable and packages."
+(defun env-handling-create-env ()
   (interactive)
-  (require 'conda)
-  (when-let (home (read-directory-name "Set conda home: " "~" nil nil conda-anaconda-home))
-    (setq conda-anaconda-home home)
-    (message "Successfully changed conda home to: %s" (abbreviate-file-name home))))
+  (let ((setup (ivy-read "Python Env Handler: " (env-handling--get-handlers :setup) :require-match t))
+        (name (read-string "Conda Env to create: "))
+        (ver  (format "python=%s" (read-string "Python Version: " "3.11")))
+        (packages (split-string (read-string "Packages: ") " " t t))
+        )
+    (pcase setup
+      ("conda" (apply 'call-process "conda" nil nil nil "create" "-n" name ver packages))
+      ("venv"  (apply 'call-process "python" nil nil nil "-m" "venv" (read-directory-name "Venv Dir: " default-directory)))
+      (""
+       )
+      )
+    )
+  )
 
-(defun env-handling-conda-create-env ()
+;;;###autoload
+(defun env-handling-add-package ()
   (interactive)
-  (let ((name (read-string "Conda Env to create: ")))
-    (call-process "" )
+  (let ((setup (ivy-read "Python Env Handler: " (env-handling--get-handlers :setup) :require-match t))
+        (packages (split-string (read-string "Packages: ") " " t t))
+        )
+    (pcase setup
+      ("conda" (apply 'call-process "conda" nil nil nil "install" packages))
+      ("pip"   (apply 'call-process "pip" nil nil nil "install" packages))
+      ("poetry" (poetry-add))
+      ("pipenv" (apply 'call-process "pipenv" nil nil nil "install" packages))
+      )
     )
   )
 
 (defun env-handling-find-venv (&optional start)
   " Given a starting directory, look in parent dirs
-until a .venv file is found.
+until a environment marker file is found.
 
 return (:path dir-of-venv? :env env-name?)
 "
   (let ((root (projectile-project-root))
         (text "")
-        result)
+        markers result)
 
-      (when (and root (f-exists? (f-join root ".venv")))
+    (setq markers (--filter (f-exists? (f-join root it)) env-handling-markers))
+
+    (when markers
         (with-temp-buffer
-          (insert-file-contents (f-join root".venv"))
+          (insert-file-contents (f-join root (car markers)))
           (goto-char (point-min))
-          (setq text
-                (string-trim (buffer-substring-no-properties (point-min) (line-end-position))))
-          )
-        )
+          (cond ((f-ext? (car markers) "toml")
+                 (let ((alist (toml:read-from-string (buffer-substring-no-properties (point-min) (line-end-position)))))
 
-      (list :path (pcase (f-parent text)
-                    ((pred string-empty-p) nil)
-                    ("/" root)
-                    ("./" root)
-                    ("../" root)
-                    (v v)
-                    )
-            :env (pcase (f-filename text)
-                   ((pred string-empty-p) nil)
-                   (v v)
-                   )
-            )
+                   ))
+                ((string-equal (car markers) "Pipfile")
+                 (let ((alist (toml:read-from-string (buffer-substring-no-properties (point-min) (line-end-position)))))
+
+                   ))
+                (t
+                 (setq text
+                       (string-trim (buffer-substring-no-properties (point-min) (line-end-position))))
+                 )
+                )
+          )
       )
+
+    (list :path (pcase (f-parent text)
+                  ((pred string-empty-p) nil)
+                  ("/" root)
+                  ("./" root)
+                  ("../" root)
+                  (v v)
+                  )
+          :env (pcase (f-filename text)
+                 ((pred string-empty-p) nil)
+                 (v v)
+                 )
+          )
+    )
   )
 
 (defun env-handling-state--init()
   (setq env-handling-state (list :support nil
-                                  :activator nil
-                                  :env nil
-                                  :path nil
-                                  :locked nil)
+                                 :setup   nil
+                                 :env     nil
+                                 :path    nil
+                                 :locked  nil
+                                 :type    nil)
         )
   )
 

@@ -103,7 +103,7 @@
                       ("Embedded Rust"           . "https://docs.rust-embedded.org/book/")
                      )
                     )
- (set-docsets! 'rustic-mode "Rust")
+(spec-handling-add! docsets '(rustic-mode "Rust"))
 ;;-- end specs
 
 ;;-- LSP

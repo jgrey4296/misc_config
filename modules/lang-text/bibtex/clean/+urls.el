@@ -19,7 +19,7 @@ https://tecnoysoft.com/en/how-to-obtain-the-real-url-behind-a-shortened-url-usin
              do
              (with-current-buffer result-buffer
                (erase-buffer))
-             (call-process jg-bibtex-curl-cmd nil result-buffer nil jg-bibtex-curl-args (cdr urlpair))
+             (call-process browse-select-curl-cmd nil result-buffer nil (append browse-select-curl-args (cdr urlpair)))
              (with-current-buffer result-buffer
                (goto-char (point-min))
                (when (re-search-forward "^location: " nil t)

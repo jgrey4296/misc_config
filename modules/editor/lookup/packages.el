@@ -13,3 +13,6 @@
 
 (package! wordnut)
 (package! browse-url)
+(package! dash-docs)
+(package! counsel-dash)
+(package! browse-select :recipe `(:local-repo ,(expand-file-name "packages/misc/browse-select" doom-user-dir)))

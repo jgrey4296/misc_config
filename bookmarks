@@ -2,7 +2,12 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("conda"
+(("terminal"
+ (filename . "/Volumes/documents/github/__configs/terminal/")
+ (front-context-string . "bash\n  drwxr-xr-")
+ (rear-context-string . "10 Apr 26 17:29 ")
+ (position . 199))
+("conda"
  (filename . "/usr/local/anaconda3/")
  (front-context-string . "envs\n  drwxr-xr-")
  (rear-context-string . "28 Apr 24 19:31 ")

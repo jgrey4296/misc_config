@@ -13,102 +13,32 @@ Used by `+lookup/online'.")
 (defvar +lookup-open-url-fn #'browse-url
   "Function to use to open search urls.")
 
-(defvar +lookup-definition-functions
+(defvar +lookup-definition-defaults
   '(+lookup-dictionary-definition-backend-fn
     +lookup-xref-definitions-backend-fn
     +lookup-dumb-jump-backend-fn
     +lookup-project-search-backend-fn
     +lookup-evil-goto-definition-backend-fn)
-  "Functions for `+lookup/definition' to try, before resorting to `dumb-jump'.
-Stops at the first function to return non-nil or change the current
-window/point.
+)
+(defvar +lookup-implementations-defaults ())
 
-If the argument is interactive (satisfies `commandp'), it is called with
-`call-interactively' (with no arguments). Otherwise, it is called with one
-argument: the identifier at point. See `set-lookup-handlers!' about adding to
-this list.")
+(defvar +lookup-type-definition-defaults ())
 
-(defvar +lookup-implementations-functions ()
-  "Function for `+lookup/implementations' to try. Stops at the first function to
-return non-nil or change the current window/point.
+(defvar +lookup-references-defaults '(+lookup-thesaurus-definition-backend-fn
+                                      +lookup-xref-references-backend-fn
+                                      +lookup-project-search-backend-fn)
+  )
 
-If the argument is interactive (satisfies `commandp'), it is called with
-`call-interactively' (with no arguments). Otherwise, it is called with one
-argument: the identifier at point. See `set-lookup-handlers!' about adding to
-this list.")
+(defvar +lookup-documentation-defaults '(+lookup-dash-docsets-backend-fn +lookup-online-backend-fn))
 
-(defvar +lookup-type-definition-functions ()
-  "Functions for `+lookup/type-definition' to try. Stops at the first function to
-return non-nil or change the current window/point.
+(defvar +lookup-file-defaults '(+lookup-bug-reference-backend-fn +lookup-ffap-backend-fn))
 
-If the argument is interactive (satisfies `commandp'), it is called with
-`call-interactively' (with no arguments). Otherwise, it is called with one
-argument: the identifier at point. See `set-lookup-handlers!' about adding to
-this list.")
-
-(defvar +lookup-references-functions
-  '(+lookup-thesaurus-definition-backend-fn
-    +lookup-xref-references-backend-fn
-    +lookup-project-search-backend-fn)
-  "Functions for `+lookup/references' to try, before resorting to `dumb-jump'.
-Stops at the first function to return non-nil or change the current
-window/point.
-
-If the argument is interactive (satisfies `commandp'), it is called with
-`call-interactively' (with no arguments). Otherwise, it is called with one
-argument: the identifier at point. See `set-lookup-handlers!' about adding to
-this list.")
-
-(defvar +lookup-documentation-functions
-  '(+lookup-online-backend-fn)
-  "Functions for `+lookup/documentation' to try, before resorting to
-`dumb-jump'. Stops at the first function to return non-nil or change the current
-window/point.
-
-If the argument is interactive (satisfies `commandp'), it is called with
-`call-interactively' (with no arguments). Otherwise, it is called with one
-argument: the identifier at point. See `set-lookup-handlers!' about adding to
-this list.")
-
-(defvar +lookup-file-functions
-  '(+lookup-bug-reference-backend-fn
-    +lookup-ffap-backend-fn)
-  "Function for `+lookup/file' to try, before restoring to `find-file-at-point'.
-Stops at the first function to return non-nil or change the current
-window/point.
-
-If the argument is interactive (satisfies `commandp'), it is called with
-`call-interactively' (with no arguments). Otherwise, it is called with one
-argument: the identifier at point. See `set-lookup-handlers!' about adding to
-this list.")
-
-(defvar +lookup-dictionary-prefer-offline (modulep! +offline)
-  "If non-nil, look up dictionaries online.
-
-Setting this to nil will force it to use offline backends, which may be less
-than perfect, but available without an internet connection.
-
-Used by `+lookup/dictionary-definition' and `+lookup/synonyms'.
-
-For `+lookup/dictionary-definition', this is ignored on Mac, where Emacs users
-Dictionary.app behind the scenes to get definitions.")
+(defvar +lookup-dictionary-prefer-offline nil)
 
 ;;-- end handlers
 
-(setq jg-browse-selected-prog "firefox"
-      jg-browse-variant-progs (with-temp-buffer
-                                (insert-file (expand-file-name "~/.browsers"))
-                                (split-string (buffer-string) "\n" t " +")
-                                )
-
-      jg-browse-pdf-args  '("-a" "Preview" "-nF")
-      jg-browse-epub-args '("-a" "ebook-viewer")
-      jg-browse-curl-cmd  "curl"
-      jg-browse-curl-args "-sLI"
-
-      jg-browse-use-preview t
-
-      browse-url-browser-function '+jg-browse-default
+(setq browse-select-default-prog "firefox"
+      browse-url-browser-function 'browse-select-default
       browse-url-default-handlers nil
       )
 
@@ -144,8 +74,8 @@ Dictionary.app behind the scenes to get definitions.")
                     )
 (spec-handling-add! browse-handler nil
                     '(default
-                      ("^@" . +jg-browse-twitter)
-                      ("."  . +jg-browse-default)
+                      ("^@" . browse-select-twitter)
+                      ("."  . browse-select-default)
                       )
                     )
 (spec-handling-add! lookup-regular nil

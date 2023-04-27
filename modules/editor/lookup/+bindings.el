@@ -1,7 +1,7 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
 (map! :leader
-      :desc "Open Url"              "?"   #'+jg-browse-url
+      :desc "Open Url"              "?"   #'browse-select-goto-url
       :desc "Lookup Regular"        "m 1" #'lookup-regular-go
 
       (:prefix "g"
@@ -10,7 +10,7 @@
       )
 
 (map! :map jg-binding-jump-map
-      :desc "Browse URL"           "u" #'+jg-browse-url
+      :desc "Browse URL"           "u" #'browse-select-goto-url
       )
 
 (map! :map eww-mode-map

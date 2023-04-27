@@ -10,7 +10,7 @@
 
 ;;-- specs
 (spec-handling-add! lookup-handler nil '(sh-mode :documentation #'+sh-lookup-documentation-handler))
-(set-docsets! 'sh-mode "Bash")
+(spec-handling-add! docsets '(sh-mode "Bash"))
 (set-electric! 'sh-mode :words '("else" "elif" "fi" "done" "then" "do" "esac" ";;"))
 (set-formatter! 'shfmt '("shfmt" "-ci"
                          ("-i" "%d" (unless indent-tabs-mode tab-width))

@@ -146,7 +146,9 @@ See `+emacs-lisp-non-package-mode' for details.")
                       )
                     )
 
-(set-docsets! 'racket-mode "Racket")
-(set-docsets! '(emacs-lisp-mode lisp-interaction-mode) "Emacs Lisp")
+(spec-handling-add! docsets
+                    '(racket-mode "Racket")
+                    '((emacs-lisp-mode lisp-interaction-mode) "Emacs Lisp")
+                    )
 
 ;;-- end specs

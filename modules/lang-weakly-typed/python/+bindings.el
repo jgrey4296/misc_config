@@ -2,10 +2,10 @@
 
 (map! :leader
       :prefix ("c v" . "Environments")
-      :desc "Activate Env" "a" #'+jg-python-handle-env!
-      :desc "Clear Env"    "d" #'+jg-python-clear-env!
-      :desc "Report Env"   "r" #'+jg-python-env-report!
-      :desc "Lock Env"     "l" #'+jg-python-env-lock!
+      :desc "Activate Env" "a" #'env-handling-handle-env!
+      :desc "Clear Env"    "d" #'env-handling-clear-env!
+      :desc "Report Env"   "r" #'env-handling-report!
+      :desc "Lock Env"     "l" #'env-handling-lock!
       :desc "Create venv"  "c" #'pyvenv-create
 
       )

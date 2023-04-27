@@ -4,7 +4,7 @@
 (load! "+repl-commands")
 (load! "util/+cleaning")
 
-(after! (evil general-mod which-mod)
+(after! (evil faster-whichkey)
   (load! "+minibuffer-bindings")
   (load! "+leader-bindings")
   (load! "submaps/+evil-bindings")

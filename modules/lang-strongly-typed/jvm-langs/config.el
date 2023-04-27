@@ -34,16 +34,17 @@
 (use-package! groovy-mode
   :mode "\\.g\\(?:radle\\|roovy\\)$"
   :config
-  (set-docsets! 'groovy-mode "Groovy" "Groovy_JDK")
+  (spec-handling-add! docsets '(groovy-mode "Groovy" "Groovy_JDK"))
   (set-eval-handler! 'groovy-mode "groovy")
-  (set-repl-handler! 'groovy-mode #'+java/open-groovy-repl))
+  (set-repl-handler! 'groovy-mode #'+java/open-groovy-repl)
+  )
 
 (use-package! kotlin-mode
   :commands kotlin-mode
   :config
   (when (modulep! +lsp)
     (add-hook 'kotlin-mode-local-vars-hook #'lsp! 'append))
-  (set-docsets! 'kotlin-mode "Kotlin")
+  (spec-handling-add! docsets '(kotlin-mode "Kotlin"))
   (set-repl-handler! 'kotlin-mode #'kotlin-repl)
 
 )

@@ -23,9 +23,13 @@ If set to `nil', disable all the above behaviors.")
             '("styl" "css")))
 
 (after! (:any css-mode sass-mode)
-  (set-docsets! '(css-mode scss-mode sass-mode)
-    "CSS" "HTML" "Bourbon" "Compass"
-    ["Sass" (memq major-mode '(scss-mode sass-mode))]))
+  (spec-handling-add! docsets
+                      '((css-mode scss-mode sass-mode)
+                        "CSS" "HTML" "Bourbon" "Compass"
+                        "Sass"
+                        )
+                      )
+  )
 
 ;;-- specs
 (spec-handling-add! fold nil

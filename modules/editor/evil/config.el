@@ -1,5 +1,6 @@
 ;;; editor/evil/config.el -*- lexical-binding: t; -*-
 
+(load! "+defs")
 (load! "+vars")
 (after! evil-ex (load! "+commands") (load! "+evil-ex-setup"))
 

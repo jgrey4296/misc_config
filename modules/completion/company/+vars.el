@@ -35,7 +35,7 @@
   )
 
 (spec-handling-add! company nil
-                    '(prog-mode (:back      . company-capf) (:back . company-files))
+                    '(prog-mode (:disfavour . company-dabbrev-code) (:back      . company-capf) (:back . company-files))
                     '(text-mode (:disfavour . (:separate company-dabbrev company-ispell)))
                     '(conf-mode (:disfavour . company-dabbrev-code ))
                     )

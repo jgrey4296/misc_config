@@ -1,7 +1,7 @@
 ;;; +ivys.el -*- lexical-binding: t; -*-
 
-
 ;;-- utils
+
 (defun +jg-completion-ivy-kill-buffer (buff)
   (interactive)
   (with-current-buffer buff
@@ -21,11 +21,6 @@
                    )
                  )
 
-(ivy-add-actions '+jg-completion-ivy-workspace
-                 '(("r" (lambda (x) (+workspace-rename x (read-string (format "Rename %s -> : " x)))) "Rename")
-
-                   ))
-
 (defun +jg-completion-workspace-switch (x)
   (cond ((string-equal x (+workspace-current-name))
          (+workspace-save x))
@@ -40,6 +35,7 @@
 ;;-- end actions
 
 ;;-- ivys
+
 (defun +jg-completion-ivy-bookmark ()
   "Forward to `bookmark-jump' or `bookmark-set' if bookmark doesn't exist.
 Modified to pre-sort bookmarks, caselessly
@@ -54,7 +50,8 @@ Modified to pre-sort bookmarks, caselessly
                                   (member x (bookmark-all-names))
                                   (file-directory-p (bookmark-location x)))
                              (with-ivy-window
-                               (let ((default-directory (bookmark-location x)))
+                               (let (
+(default-directory (bookmark-location x)))
                                  (counsel-find-file))))
                             ((member x (bookmark-all-names))
                              (with-ivy-window
@@ -73,14 +70,4 @@ Modified to pre-sort bookmarks, caselessly
             )
   )
 
-(defun +jg-completion-ivy-workspace ()
-    "Switch to a workspace or create a new one"
-    (interactive)
-    (require 'bookmark)
-    (ivy-read "Create or jump to workspace: "
-              (+workspace-list-names)
-              :history 'workspace-history
-              :action '+jg-completion-workspace-switch
-              :caller '+jg-completion-ivy-workspace)
-    )
 ;;-- end ivys

@@ -49,6 +49,6 @@
                      )
                     )
 
-(spec-handling-add! company
-                    '(yas-minor-mode (:disfavour . company-yasnippet))
+(spec-handling-add! company nil
+                    '(yas-minor-mode (:back . company-yasnippet))
                     )

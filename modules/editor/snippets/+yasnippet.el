@@ -2,8 +2,8 @@
 
 (defun +jg-snippets-complete-or-snippet (&optional arg)
   (interactive "p")
-  (cond ((yas-expand-from-trigger-key) nil)
-        ((company-complete-common-or-cycle) nil)
+  (cond ((company-complete-common-or-cycle) nil)
+        ((yas-expand-from-trigger-key) nil)
         (t (indent-for-tab-command))
       )
     )

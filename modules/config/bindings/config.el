@@ -1,7 +1,6 @@
 ;;; config/default/config.el -*- lexical-binding: t; -*-
 
 (load! "+vars")
-(load! "+repl-commands")
 (load! "util/+cleaning")
 
 (after! (evil faster-whichkey)
@@ -11,10 +10,6 @@
   (load! "+misc-bindings")
   (provide 'jg-bindings-total)
   )
-
-(after! evil-ex
-  (load! "submaps/+evil-ex-setup")
-)
 
 (use-package! faster-whichkey
   :after (which-key general)

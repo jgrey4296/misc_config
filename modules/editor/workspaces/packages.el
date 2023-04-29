@@ -1,4 +1,5 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; ui/workspaces/packages.el
 
-(package! persp-mode :pin "df95ea710e2a72f7a88293b72137acb0ca024d90")
+(package! persp-mode)
+(package! window-ring-minor-mode :recipe `(:local-repo ,(expand-file-name "packages/minor-modes/window-ring-minor-mode" doom-user-dir)))

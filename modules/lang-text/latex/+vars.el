@@ -121,4 +121,28 @@ If no viewer is found, `latex-preview-pane-mode' is used.")
                      ("Latex Tutorial" . "https://latex-tutorial.com/")
                      )
                     )
+(spec-handling-add! evil-embrace nil
+                    '(latex-mode
+                      (?\' . ,(make-embrace-pair-struct
+                               :key ?\'
+                               :left "`"
+                               :right "\'"
+                               :left-regexp (regexp-quote "`")
+                               :right-regexp (regexp-quote "\'")
+                               ))
+                      (?\' . ,(make-embrace-pair-struct
+                               :key ?\"
+                               :left "``"
+                               :right "\'\'"
+                               :left-regexp (regexp-quote "``")
+                               :right-regexp (regexp-quote "\'\'")
+                               ))
+                      (?l . ,(make-embrace-pair-struct
+                              :key ?l
+                              :left-regexp "\\[a-z+]{"
+                              :right-regexp "}"
+                              :read-function #'+evil--embrace-latex
+                              ))
+                      )
+                    )
 ;;-- end specs

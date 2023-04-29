@@ -22,7 +22,6 @@
 (package! xcscope         :disable t)
 (package! xkcd            :disable t)
 (package! zoom-frm        :disable t)
-(package! evil-easymotion :disable t)
 (package! xt-mouse        :disable t)
 (package! mouse           :disable t)
 (package! undo-fu-session :disable t)

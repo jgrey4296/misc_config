@@ -3,19 +3,19 @@
 (message "Setting up org main bindings: %s" (current-time-string))
 
 ;; Unbinds
-(map! :map org-mode-map
-      "C-c [" nil
-      "C-c ]" nil
+;; (map! :map org-mode-map
+;;       "C-c [" nil
+;;       "C-c ]" nil
 
-      :localleader
-      "f" nil
-      "." nil
-      "i" nil
-      "t" nil
-      )
+;;       :localleader
+;;       "f" nil
+;;       "." nil
+;;       "i" nil
+;;       "t" nil
+;;       )
 
 ;; Leaderless
-(map! :map org-mode-map
+(map! :map jg-org-mode-map
       ;; textmate-esque newline insertion
       "S-RET"      #'+org/shift-return
       "C-RET"      #'+org/insert-item-below
@@ -31,10 +31,10 @@
       ;; Org-aware C-a/C-e
       [remap doom/backward-to-bol-or-indent]          #'org-beginning-of-line
       [remap doom/forward-to-last-non-comment-or-eol] #'org-end-of-line
-
+      [tab]        #'org-cycle
       )
 ;; Local Leader
-(map! :map org-mode-map
+(map! :map jg-org-mode-map
       :localleader
       :desc "update-statistics-cookies" "#" #'org-update-statistics-cookies
       :desc "edit-special"              "'" #'org-edit-special
@@ -49,7 +49,7 @@
       :desc "todo-list"                 "T" #'org-todo-list
       )
 ;; <A> Attachments
-(map! :map org-mode-map
+(map! :map jg-org-mode-map
       :localleader
       :prefix ("a" . "attachments")
       :desc "attach"                            "a" #'org-attach
@@ -67,7 +67,7 @@
       :desc "attach-sync"                       "S" #'org-attach-sync
       )
 ;; <B> Tables
-(map! :map org-mode-map
+(map! :map jg-org-mode-map
       :localleader
       :prefix ("b" . "tables")
       :desc "table-insert-hline"                   "-" #'org-table-insert-hline
@@ -91,9 +91,8 @@
        :desc "plot/gnuplot"                        "p" #'org-plot/gnuplot
       )
 ;; <C> Clock
-(map! :map org-mode-map
+(map! :map jg-org-mode-map
       :localleader
-      "c" nil
       :prefix ("c" . "clock")
       :desc "clock-cancel"                  "c" #'org-clock-cancel
       :desc "clock-mark-default-task"       "d" #'org-clock-mark-default-task
@@ -112,9 +111,8 @@
       :desc "clock-timestamps-down"         "-" #'org-clock-timestamps-down
       )
 ;; <D> Dates
-(map! :map org-mode-map
+(map! :map jg-org-mode-map
       :localleader
-      "d" nil
       :prefix ("d" . "date/deadline")
       :desc "deadline"             "d" #'org-deadline
       :desc "schedule"             "s" #'org-schedule
@@ -122,13 +120,13 @@
       :desc "time-stamp-inactive"  "T" #'org-time-stamp-inactive
       )
 ;; <F> Formatting
-(map! :map org-mode-map
+(map! :map jg-org-mode-map
       :localleader
       :prefix ("f" . "Format")
 
       )
 ;; <G> Goto
-(map! :map org-mode-map
+(map! :map jg-org-mode-map
       :localleader
       :prefix ("g" . "goto")
       :desc "goto"                              "g" #'org-goto
@@ -142,16 +140,18 @@
       :desc "capture-goto-last-stored"          "x" #'org-capture-goto-last-stored
       )
 ;; <I> Insert
-(map! :map org-mode-map
+(map! :map jg-org-mode-map
       :localleader
       :prefix ("i" . "Insert")
       :desc "todo"                     "T" #'org-todo
       :desc "footnote-new"             "f" #'org-footnote-new
       :desc "insert-link"              "l" #'org-insert-link
       :desc "insert-last-stored-link"  "S" #'org-insert-last-stored-link
+      :desc "insert citation"          "@" #'org-cite-insert
+      :desc "insert new id"            "I" #'org-id-get-create
       )
 ;; <L> Links
-(map! :map org-mode-map
+(map! :map jg-org-mode-map
       :localleader
       :prefix ("l" . "links")
       :desc "cliplink"                 "c" #'org-cliplink
@@ -163,7 +163,7 @@
       :desc "insert-last-stored-link"  "S" #'org-insert-last-stored-link
       )
 ;; <P> Publish
-(map! :map org-mode-map
+(map! :map jg-org-mode-map
       :localleader
       :prefix ("P" . "publish")
       :desc "publish-all"              "a" #'org-publish-all
@@ -173,20 +173,20 @@
       :desc "publish-sitemap"          "s" #'org-publish-sitemap
       )
 ;; <R> Refile
-(map! :map org-mode-map
+(map! :map jg-org-mode-map
       :localleader
       :prefix ("r" . "refile")
-      :desc "+org/refile-to-current-file"   "." #'+org/refile-to-current-file
-      :desc "+org/refile-to-running-clock"  "c" #'+org/refile-to-running-clock
-      :desc "+org/refile-to-last-location"  "l" #'+org/refile-to-last-location
-      :desc "+org/refile-to-file"           "f" #'+org/refile-to-file
-      :desc "+org/refile-to-other-window"   "o" #'+org/refile-to-other-window
-      :desc "+org/refile-to-other-buffer"   "O" #'+org/refile-to-other-buffer
-      :desc "+org/refile-to-visible"        "v" #'+org/refile-to-visible
-      :desc "refile"                        "r" #'org-refile ; to all `org-refile-targets'
+      :desc "refile-to-current-file"   "." #'+org/refile-to-current-file
+      :desc "refile-to-running-clock"  "c" #'+org/refile-to-running-clock
+      :desc "refile-to-last-location"  "l" #'+org/refile-to-last-location
+      :desc "refile-to-file"           "f" #'+org/refile-to-file
+      :desc "refile-to-other-window"   "o" #'+org/refile-to-other-window
+      :desc "refile-to-other-buffer"   "O" #'+org/refile-to-other-buffer
+      :desc "refile-to-visible"        "v" #'+org/refile-to-visible
+      :desc "refile"                   "r" #'org-refile ; to all `org-refile-targets'
       )
 ;; <S> Subtree
-(map! :map org-mode-map
+(map! :map jg-org-mode-map
       :localleader
       :prefix ("s" . "Tree/Subtree")
       :desc "tree-to-indirect-buffer"             "b" #'org-tree-to-indirect-buffer
@@ -206,7 +206,7 @@
        :desc "priority-up"                        "k" #'org-priority-up)
       )
 ;; <T> Toggle
-(map! :map org-mode-map
+(map! :map jg-org-mode-map
       :localleader
       :prefix ("t" . "Toggle")
       :desc "archive-tag"                  "a" #'org-toggle-archive-tag
@@ -220,7 +220,7 @@
        :desc "coordinate-overlays)"  "o" #'org-table-toggle-coordinate-overlays)
       )
 
-(map! :map evil-org-mode-map
+(map! :map jg-org-mode-map
       :ni [C-return]   #'+org/insert-item-below
       :ni [C-S-return] #'+org/insert-item-above
       ;; more intuitive RET keybinds
@@ -238,19 +238,4 @@
       :m "]c"  #'org-babel-next-src-block
       :m "[c"  #'org-babel-previous-src-block
       :n "zn"  #'org-tree-to-indirect-buffer
-      )
-(map! :map evil-org-mode-map
-      :n "gQ"   nil ;; #'org-fill-paragraph
-      :n "za"   nil ;; #'+org/toggle-fold
-      :n "zA"   nil ;; #'org-shifttab
-      :n "zc"   nil ;; #'+org/close-fold
-      :n "zC"   nil ;; #'outline-hide-subtree
-      :n "zm"   nil ;; #'+org/hide-next-fold-level
-      :n "zM"   nil ;; #'+org/close-all-folds
-      :n "zo"   nil ;; #'+org/open-fold
-      :n "zO"   nil ;; #'outline-show-subtree
-      :n "zr"   nil ;; #'+org/show-next-fold-level
-      :n "zR"   nil ;; #'+org/open-all-folds
-      :n "zi"   nil ;; #'org-toggle-inline-images
-      :m "gh"   nil
       )

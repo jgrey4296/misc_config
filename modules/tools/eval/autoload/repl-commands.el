@@ -19,6 +19,7 @@
 ;;
 ;;; Code:
 
+;;;###autoload
 (defun +jg-repl-clear ()
   (interactive)
   (if (+eval--ensure-in-repl-buffer)
@@ -28,6 +29,7 @@
       )
   )
 
+;;;###autoload
 (defun +jg-repl-send-register-to-repl (reg)
   (interactive "c")
   (let ((str (get-register reg)))
@@ -36,6 +38,7 @@
     )
   )
 
+;;;###autoload
 (defun +jg-send-region-to-repl (beg end &optional inhibit-auto-execute-p)
   "Execute the selected region in the REPL.
 Opens a REPL if one isn't already open. If AUTO-EXECUTE-P, then execute it
@@ -77,5 +80,4 @@ immediately after."
     ))
 
 
-(provide '+repl-commands)
 ;;; +repl-commands.el ends here

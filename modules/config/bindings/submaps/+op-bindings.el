@@ -14,19 +14,14 @@
       ;; RET ] l r
       :desc "Section"      "["   #'evil-backward-section-begin
       :desc "Arg"          "a"   #'evil-backward-arg
-      :desc "Comment"      "c"   #'+evil/previous-comment
-      :desc "Git Hunk"     "d"   #'git-gutter:previous-hunk
-      :desc "Heading"      "h"   #'outline-previous-visible-heading
       :desc "Begin Method" "m"   #'+evil/previous-beginning-of-method
       :desc "End Method"   "M"   #'+evil/previous-end-of-method
       :desc "Section"      "s"   #'evil-backward-section-begin
-
       )
 (map! :map jg-binding-forward-operator-motion-map
       ;; r RET l [
       :desc "Section"      "]" #'evil-forward-section-begin
       :desc "Arg"          "a" #'evil-forward-arg
-      :desc "Git Hunk"     "d" #'git-gutter:next-hunk
       :desc "Heading"      "h" #'outline-next-visible-heading
       :desc "Begin Method" "m" #'+evil/next-beginning-of-method
       :desc "End Method"   "M" #'+evil/next-end-of-method

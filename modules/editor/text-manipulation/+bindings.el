@@ -13,6 +13,8 @@
       )
 
 (map! :leader
+      :desc "Clear All"            "rK" #'+jg-text-clear-all
+
       (:prefix "b"
        :desc "Yank Buffer Name" "n"   #'+jg-text-yank-buffer-name
        :desc "Clear Buffer"     "DEL" #'+jg-text-clear-buffer
@@ -118,7 +120,6 @@
       :desc "Shift Right"                 "l" #'+jg-text-shift-right
 
       (:prefix ("w" . "Words")
-       :desc "ispell-word"               "s" #'ispell-word
        :desc "inflection"                "i" #'evil-operator-string-inflection
        :desc "Rotate"                    "r" #'Rotate-Text
        )

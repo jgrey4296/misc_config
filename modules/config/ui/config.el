@@ -48,10 +48,6 @@
 (defvar centered-cursor-mode nil)
   )
 
-(use-package! window-ring-minor-mode
-  :commands (window-ring-setup-columns window-ring-minor-mode window-ring-setup-columns-command)
-  )
-
 (use-package! palette-mode
   :mode ("\\.palette" . palette-mode)
   :commands palette-mode
@@ -120,32 +116,3 @@
                     ;; formatted as mode-line-format specifies
                     val
                     )
-
-(spec-handling-new-hooks! ligatures
-                          (setq-local prettify-symbols-alist
-                                      (let (head alist)
-                                        (while val
-                                          (setq head (pop val))
-                                          (pcase (pop val)
-                                            ((and c (guard (characterp c)))
-                                             (push (cons head c) alist))
-                                            ((and c (guard (keywordp c)) (let l (plist-get +ligatures-extra-symbols c)) (guard l))
-                                             (push (cons head l) alist))
-                                            )
-                                          )
-                                        alist
-                                        )
-                                      )
-                          )
-
-;;-- ligatures
-
-(add-hook! 'doom-init-ui-hook :append (defun +ligature-init-composition-table-h ()
-                                        (dolist (char-regexp +ligatures-composition-alist)
-                                          (set-char-table-range
-                                           +ligature--composition-table
-                                           (car char-regexp) `([,(cdr char-regexp) 0 font-shape-gstring])))
-                                        (set-char-table-parent +ligature--composition-table composition-function-table))
-           )
-
-;;-- end ligatures

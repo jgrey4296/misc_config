@@ -1,6 +1,5 @@
 ;;; +nav.el -*- lexical-binding: t; -*-
 ;; Customisations of Conda navigation
-;; TODO add code for using window-ring
 
 
 ;;;###autoload

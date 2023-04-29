@@ -1,5 +1,10 @@
 ;;; lang/jg-org/+vars.el -*- lexical-binding: t; -*-
 
+(defvar jg-org-mode-map (make-sparse-keymap))
+
+;; (textobjects insert navigation additional shift todo heading calendar)
+(setq evil-org-key-theme '(textobjects insert shift todo))
+
 
 ;;-- personal
 (defvar jg-org-external-file-link-types '("jpg" "jpeg" "png" "mp4" "html"))
@@ -64,6 +69,15 @@
   )
 ;;-- end projectile
 
+;;-- spelling
+;; Don't spellcheck org blocks
+(pushnew! ispell-skip-region-alist
+          '(":\\(PROPERTIES\\|LOGBOOK\\):" . ":END:")
+          '("#\\+BEGIN_SRC" . "#\\+END_SRC")
+          '("#\\+BEGIN_EXAMPLE" . "#\\+END_EXAMPLE"))
+
+;;-- end spelling
+
 ;;-- specs
 (spec-handling-add! file-templates nil
                     '(org
@@ -120,6 +134,17 @@
                     '(graphviz-dot-mode
                      ("Graphviz docs" . "https://graphviz.org/doc/info/lang.html")
                      )
+                    )
+(spec-handling-add! popup nil
+                    '(org-mode
+                      ("^\\*Org Links" :slot -1 :vslot -1 :size 2 :ttl 0)
+                      ("^ ?\\*\\(?:Agenda Com\\|Calendar\\|Org Export Dispatcher\\)" :slot -1 :vslot -1 :size #'+popup-shrink-to-fit :ttl 0)
+                      ("^\\*Org \\(?:Select\\|Attach\\)" :slot -1 :vslot -2 :ttl 0 :size 0.25)
+                      ("^\\*Org Agenda"     :ignore t)
+                      ("^\\*Org Src"        :size 0.42  :quit nil :select t :autosave t :modeline t :ttl nil)
+                      ("^\\*Org-Babel")
+                      ("^\\*Capture\\*$\\|CAPTURE-.*$" :size 0.42 :quit nil :select t :autosave ignore)
+                      )
                     )
 (set-eval-handler! 'org-mode #'+org-eval-handler)
 ;;-- end specs

@@ -3,28 +3,28 @@
 (suppress-keymap jg-binding-motion-state-map)
 
 (map! :map jg-binding-backward-general-motion-map
-      :desc "Buffer"       "b"   #'previous-buffer
-      :desc "Git Hunk"     "d"   #'git-gutter:previous-hunk
-      :desc "Error"        "e"   #'previous-error
-      :desc "Heading"      "h"   #'outline-previous-visible-heading
-      :desc "Begin Method" "m"   #'+evil/previous-beginning-of-method
-      :desc "End Method"   "M"   #'+evil/previous-end-of-method
-      :desc "Todo"         "t"   #'hl-todo-previous
-      :desc "Workspace"    "w"   #'+workspace/switch-left
+      :desc "Buffer"                      "b" #'previous-buffer
+      :desc "Comment"                     "c" #'+evil/previous-comment
+      :desc "Previous File in Dir, alpha" "f" #'+evil/previous-file
+      :desc "Error"                       "e" #'previous-error
+      :desc "Heading"                     "h" #'outline-previous-visible-heading
+      :desc "Begin Method"                "m" #'+evil/previous-beginning-of-method
+      :desc "End Method"                  "M" #'+evil/previous-end-of-method
+      :desc "Todo"                        "t" #'hl-todo-previous
       )
+
 (map! :map jg-binding-forward-general-motion-map
-      :desc "Section"      "]" #'evil-forward-section-begin
-      :desc "Arg"          "a" #'evil-forward-arg
-      :desc "Git Hunk"     "d" #'git-gutter:next-hunk
-      :desc "Heading"      "h" #'outline-next-visible-heading
-      :desc "Begin Method" "m" #'+evil/next-beginning-of-method
-      :desc "End Method"   "M" #'+evil/next-end-of-method
-      :desc "Section"      "s" #'evil-forward-section-begin
-      :desc "Todo"         "t" #'hl-todo-next
-      :desc "Workspace"    "w" #'+workspace/switch-right
-      :desc "Buffer"       "b" #'next-buffer
-      :desc "Comment"      "c" #'+evil/next-comment
-      :desc "Error"        "e" #'next-error
+      :desc "Section"                 "]" #'evil-forward-section-begin
+      :desc "Arg"                     "a" #'evil-forward-arg
+      :desc "Next File in Dir, alpha" "f" #'+evil/next-file
+      :desc "Heading"                 "h" #'outline-next-visible-heading
+      :desc "Begin Method"            "m" #'+evil/next-beginning-of-method
+      :desc "End Method"              "M" #'+evil/next-end-of-method
+      :desc "Section"                 "s" #'evil-forward-section-begin
+      :desc "Todo"                    "t" #'hl-todo-next
+      :desc "Buffer"                  "b" #'next-buffer
+      :desc "Comment"                 "c" #'+evil/next-comment
+      :desc "Error"                   "e" #'next-error
       )
 
 (map! :map jg-binding-motion-state-map ;; basic
@@ -33,7 +33,7 @@
       :desc "previous-line"         "k"       #'evil-previous-line
       :desc "forward-char"          "l"       #'evil-forward-char
 
-      :desc "Goto Column"            "\\"       #'evil-goto-column
+      :desc "Goto Column"            "\\"      #'evil-goto-column
       :desc "Return"                 "RET"     #'evil-ret
       :desc "Search"                 "/"       #'evil-ex-search-forward
       )
@@ -97,3 +97,15 @@
       "9"                                      #'digit-argument
 
       )
+
+;; TODO make a hydra for this
+;; "H"       #'+evil/window-move-left
+;; "J"       #'+evil/window-move-down
+;; "K"       #'+evil/window-move-up
+;; "L"       #'+evil/window-move-right
+;; "C-S-w"   #'ace-swap-window
+;; evil-lion
+;; :n "gl" #'evil-lion-left
+;; :n "gL" #'evil-lion-right
+;; :v "gl" #'evil-lion-left
+;; :v "gL" #'evil-lion-right

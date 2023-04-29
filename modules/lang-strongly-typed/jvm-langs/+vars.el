@@ -156,4 +156,12 @@ If the depth is 2, the first two directories are removed: net.lissner.game.")
                      ("Scala LSP" . "https://scalameta.org/metals/docs/")
                      )
                     )
+(spec-handling-add! evil-embrace nil
+                    '(scala-mode
+                      ,(cons ?f (make-embrace-pair-struct
+                                 :key ?$
+                                 :left "${"
+                                 :right "}"))
+                      )
+                    )
 ;;-- end specs

@@ -1,9 +1,6 @@
 ;; When you get to the right edge, it goes back to how it normally prints
 (setq prettify-symbols-unprettify-at-point 'right-edge)
 
-(add-hook! 'doom-init-ui-hook :append
-  (defun +ligatures-init-h ()
-    (add-hook 'after-change-major-mode-hook #'+ligatures-init-buffer-h)))
 
 (cond
  ;; The emacs-mac build of Emacs appears to have built-in support for ligatures,

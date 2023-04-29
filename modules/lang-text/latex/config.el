@@ -14,8 +14,6 @@
     ispell-parser 'tex
     ;; Don't auto-fill in math blocks.
     fill-nobreak-predicate (cons #'texmathp fill-nobreak-predicate))
-  ;; Enable word wrapping.
-  (add-hook 'TeX-mode-hook #'visual-line-mode)
   ;; Enable `rainbow-mode' after applying styles to the buffer.
   (add-hook 'TeX-update-style-hook #'rainbow-delimiters-mode)
 

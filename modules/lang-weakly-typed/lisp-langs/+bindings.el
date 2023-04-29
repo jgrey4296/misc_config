@@ -4,8 +4,9 @@
 (evil-make-intercept-map edebug-eval-mode-map)
 
 (map! :map emacs-lisp-mode-map
+      :n "?"                   #'eros-eval-last-sexp
       :localleader
-      :desc "Sort Defuns" "S" #'+jg-lisp-sort-defuns
+      :desc "Sort Defuns" "S"  #'+jg-lisp-sort-defuns
       :desc "Pretty Print" "P" #'pp-buffer
       (:prefix ("e" . "eval")
        :desc "Byte Compile" :n "c" (cmd! (byte-compile-file buffer-file-name))

@@ -2,6 +2,7 @@
 
 (defvar jg-text-jq-cmd "jq")
 
+;;;###autoload
 (defun +jg-text-jq-format ()
   (interactive)
   (let ((marked (dired-get-marked-files)))
@@ -15,6 +16,7 @@
     )
   )
 
+;;;###autoload
 (defun +jg-text-jq-expr()
   (interactive)
   (let ((marked (dired-get-marked-files))

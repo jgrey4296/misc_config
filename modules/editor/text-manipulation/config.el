@@ -1,8 +1,6 @@
 ;;; util/text/config.el -*- lexical-binding: t; -*-
+(load! "+defs")
 (load! "+vars")
-(load! "misc/+funcs")
-(load! "misc/+pandoc")
-(load! "misc/+jq")
 (after! jg-bindings-total
   (load! "evil/+operators")
   (load! "evil/+motions")
@@ -41,7 +39,10 @@
 
 (use-package! license-templates :defer)
 
-(use-package! lint-result-mode)
+(use-package! lint-result-mode
+  :config
+  (add-hook 'lint-result-mode-hook '+fold/close-all)
+  )
 
 (use-package! vundo
   :commands vundo
@@ -75,7 +76,8 @@
 
   ;; `highlight-indent-guides' breaks when `org-indent-mode' is active
   (add-hook! 'org-mode-local-vars-hook
-    (defun +indent-guides-disable-maybe-h ()
+
+(defun +indent-guides-disable-maybe-h ()
       (and highlight-indent-guides-mode
            (bound-and-true-p org-indent-mode)
            (highlight-indent-guides-mode -1)))))
@@ -107,18 +109,20 @@
           ("BUG" error bold)
           ("XXX" font-lock-constant-face bold)))
 
-
-  (defadvice! +hl-todo-clamp-font-lock-fontify-region-a (fn &rest args)
+(defadvice! +hl-todo-clamp-font-lock-fontify-region-a (fn &rest args)
     "Fix an `args-out-of-range' error in some modes."
     :around #'hl-todo-mode
-    (letf! (defun font-lock-fontify-region (beg end &optional loudly)
+    (letf!
+
+(defun font-lock-fontify-region (beg end &optional loudly)
              (funcall font-lock-fontify-region (max beg 1) end loudly))
       (apply fn args)))
 
   ;; Use a more primitive todo-keyword detection method in major modes that
   ;; don't use/have a valid syntax table entry for comments.
   (add-hook! '(pug-mode-hook haml-mode-hook)
-    (defun +hl-todo--use-face-detection-h ()
+
+(defun +hl-todo--use-face-detection-h ()
       "Use a different, more primitive method of locating todo keywords."
       (set (make-local-variable 'hl-todo-keywords)
            '(((lambda (limit)
@@ -138,7 +142,8 @@
         iedit-only-at-symbol-boundaries t
         iedit-toggle-key-default nil)
   :config
-  (define-advice iedit-show-all (:override ()
+
+(define-advice iedit-show-all (:override ()
                                  +jg-misc-iedit-show-all)
     " Override iedit's show all so it doesn't mess with invisible line movement"
     (remove-from-invisibility-spec '(iedit-invisible-overlay-name . t))
@@ -146,7 +151,20 @@
   )
 
 )
+
 (use-package! timeline-mode :defer t)
+
+(when (memq 'visual-line-mode text-mode-hook)
+  (remove-hook 'text-mode-hook #'visual-line-mode)
+  (add-hook 'text-mode-hook #'+word-wrap-mode))
+
+(add-hook! 'doom-init-ui-hook :append (defun +ligature-init-composition-table-h ()
+                                        (dolist (char-regexp +ligatures-composition-alist)
+                                          (set-char-table-range
+                                           +ligature--composition-table
+                                           (car char-regexp) `([,(cdr char-regexp) 0 font-shape-gstring])))
+                                        (set-char-table-parent +ligature--composition-table composition-function-table))
+           )
 
 (spec-handling-new-hooks! rotate-text
                           (setq-local rotate-text-local-symbols    (plist-get val :symbols)
@@ -157,4 +175,21 @@
 
 (spec-handling-new-hooks! whitespace-cleanup
                           (setq-local jg-text-whitespace-clean-hook (ensure-list val))
+                          )
+
+(spec-handling-new-hooks! ligatures
+                          (setq-local prettify-symbols-alist
+                                      (let (head alist)
+                                        (while val
+                                          (setq head (pop val))
+                                          (pcase (pop val)
+                                            ((and c (guard (characterp c)))
+                                             (push (cons head c) alist))
+                                            ((and c (guard (keywordp c)) (let l (plist-get +ligatures-extra-symbols c)) (guard l))
+                                             (push (cons head l) alist))
+                                            )
+                                          )
+                                        alist
+                                        )
+                                      )
                           )

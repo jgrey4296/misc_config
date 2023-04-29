@@ -33,14 +33,6 @@
 
 (setq server-log t)
 
-;;-- evil
-(setq evil-collection-setup-minibuffer t
-      evil-move-beyond-eol t
-      evil-move-cursor-back nil
-      evil-snipe-repeat-scope nil
- )
-;;-- end evil
-
 ;;-- doom settings
 (setq doom-theme 'jg-Iosvkem)
 ;; Override doom's whitespace mode settings:
@@ -65,12 +57,9 @@
 ;; (remove-hook! doom-first-buffer
 ;;   #'smartparens-global-mode
 ;;   )
+
 (remove-hook! 'after-change-major-mode-hook
-  #'+ligatures-init-buffer-h
   #'global-flycheck-mode-enable-in-buffers
-  )
-(remove-hook! 'doom-init-ui-hook
-  #'+ligatures-init-h
   )
 
 ;;-- end global modes

@@ -65,6 +65,16 @@
       [escape]  #'company-search-abort
       )
 
+;; ;; TODO Omni-completion
+;; :i "C-l"    #'+company/whole-lines
+;; :i "C-k"    #'+company/dict-or-keywords
+;; :i "C-f"    #'company-files
+;; :i "C-]"    #'company-etags
+;; :i "s"      #'company-ispell
+;; :i "C-s"    #'company-yasnippet
+;; :i "C-o"    #'company-capf
+;; :i "C-n"    #'+company/dabbrev
+;; :i "C-p"    #'+company/dabbrev-code-previous
 ;;-- end company
 
 ;;-- helm

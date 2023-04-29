@@ -21,6 +21,11 @@
       :desc "Quit"          :n "q" #'quit-window
       )
 
+(map! :map helpful-mode-map
+      :n "q" #'+jg-help-switch-to-prev-helpful-or-close-window
+      :n "=" #'helpful-update
+      )
+
 ;;-- docs
 (map! :map jg-help-map
       :prefix ("d" . "docs")

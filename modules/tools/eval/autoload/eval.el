@@ -11,14 +11,14 @@
       (insert output)
       (goto-char (point-min))
       (if (fboundp '+word-wrap-mode)
-          (+word-wrap-mode +1)
-        (visual-line-mode +1)))
+          (+word-wrap-mode +1))
     (when-let (win (display-buffer output-buffer))
       (fit-window-to-buffer
        win (/ (frame-height) 2)
        nil (/ (frame-width) 2)))
     (select-window origin)
     output-buffer))
+  )
 
 ;;;###autoload
 (defun +eval-display-results-in-overlay (output &optional source-buffer)
@@ -73,11 +73,8 @@
            output source-buffer)
   output)
 
-
-;;
-;;; Commands
-
 (defvar quickrun-option-cmdkey)
+
 ;;;###autoload
 (defun +eval/buffer ()
   "Evaluate the whole buffer."
@@ -134,7 +131,8 @@
 (defun +eval/line-or-region ()
   "Evaluate the current line or selected region."
   (interactive)
-  (if (use-region-p)
+  (if
+(use-region-p)
       (call-interactively #'+eval/region)
     (+eval/region (line-beginning-position) (line-end-position))))
 
@@ -146,7 +144,8 @@ If a REPL is open the code will be evaluated in it, otherwise a quickrun
 runner will be used."
   (interactive)
   (call-interactively
-   (if (use-region-p)
+   (if
+(use-region-p)
        #'+eval/region
      #'+eval/buffer)))
 

@@ -8,12 +8,12 @@
 (load! "+vars")
 (load! "+hooks")
 
-(after! (jg-bindings-total jg-org-stage)
+(after! jg-bindings-total
   (load! "util/+text-utils")
   (load! "bindings/+org-standard-bindings.el")
   (load! "bindings/+bindings")
 
-  ;; (evil-make-overriding-map org-mode-map)
+  (evil-make-overriding-map org-mode-map)
   (setq minor-mode-map-alist (assq-delete-all 'evil-org-mode minor-mode-map-alist))
   (push `(evil-org-mode . ,evil-org-mode-map) minor-mode-map-alist)
   )
@@ -99,6 +99,7 @@
   :hook (org-capture-mode . evil-insert-state)
   :hook (doom-docs-org-mode . evil-org-mode)
   :config
+  (setq evil-org-mode-map nil)
   (add-hook 'evil-org-mode-hook #'evil-normalize-keymaps)
   (evil-org-set-key-theme)
   (add-hook! 'org-tab-first-hook :append
@@ -136,12 +137,6 @@
   (push '("dot" . graphviz-dot) org-src-lang-modes)
   )
 
-(use-package-hook! org :post-config
-  (message "post configuring org")
-  (provide 'jg-org-stage)
-  )
-
-;;; Bootstrap
 
 (use-package! org
   :defer-incrementally
@@ -178,9 +173,9 @@
              #'+org-init-export-h
              #'+org-init-habit-h
              #'+org-init-hacks-h
+             #'+org-init-smartparens-h
              #'+org-init-keybinds-h
-             #'+org-init-popup-rules-h
-             #'+org-init-smartparens-h)
+             )
 
   ;; Wait until an org-protocol link is opened via emacsclient to load
   ;; `org-protocol'. Normally you'd simply require `org-protocol' and use it,
@@ -221,6 +216,7 @@
     (run-hooks 'org-load-hook))
 
   :config
+  (setq org-mode-map jg-org-mode-map)
   (add-to-list 'doom-debug-variables 'org-export-async-debug)
 
   ;; Don't number headings with these tags

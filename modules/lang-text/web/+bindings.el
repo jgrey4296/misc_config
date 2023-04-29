@@ -9,6 +9,10 @@
       :nv "[t"  #'web-mode-tag-previous
       :nv "]T"  #'web-mode-element-child
       :nv "[T"  #'web-mode-element-parent
+
+      :m  "cex"  #'+web:encode-html-entities
+      :m  "cex"  #'+web:decode-html-entities
+
       :localleader
       :desc "Rehighlight buffer" "h" #'web-mode-reload
       :desc "Indent buffer"      "i" #'web-mode-buffer-indent

@@ -47,3 +47,9 @@ stored in `persp-save-dir'.")
       persp-interactive-init-frame-behaviour-override #'+workspaces-associate-frame-fn
       persp-emacsclient-init-frame-behaviour-override #'+workspaces-associate-frame-fn
       )
+
+(spec-handling-add! popup nil
+                    '(window-ring
+                       ("^\\*WR Buffers: "         :side left :ttl nil :width  0.5 :quit nil :select nil :priority 50)
+                    )
+)

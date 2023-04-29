@@ -237,3 +237,8 @@
       (add-hook 'persp-before-save-state-to-file-functions #'+workspaces-save-tab-bar-data-to-file-h)
       (+workspaces-load-tab-bar-data-from-file-h)))
   )
+
+(use-package! window-ring-minor-mode
+  :hook (doom-init-ui . window-ring-minor-mode)
+  :commands window-ring-new
+  )

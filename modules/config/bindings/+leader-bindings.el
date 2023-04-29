@@ -91,10 +91,7 @@
       :desc "Jump to symbol in current workspace"   "j"   #'lsp-ivy-workspace-symbol
       :desc "Jump to symbol in any workspace"       "J"   #'lsp-ivy-global-workspace-symbol
       :desc "Macro Expand"                          "m"   #'pp-macroexpand-last-sexp
-      (:prefix ("r" . "Repl")
-       :desc "Clear" "c" #'+jg-repl-clear
-
-       )
+      (:prefix ("r" . "Repl"))
       )
 ;;-- end <leader> c --- code
 
@@ -339,8 +336,6 @@
       :desc "Jump to Register"     "j" #'jump-to-register
       :desc "List Registers"       "l" #'list-registers
       :desc "Killed Text"          "y" #'counsel-yank-pop
-      :desc "Send to Repl"         "r" #'+jg-repl-send-register-to-repl
-      :desc "Clear All"            "K" #'+jg-registers-clear-all
       )
 ;;-- end <leader> r -- REGISTERS
 

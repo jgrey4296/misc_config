@@ -19,16 +19,15 @@
         [remap magit-browse-thing] #'forge-browse-dwim)
 
       :nv "*"  #'magit-worktree
-      :nv "zt" #'evil-scroll-line-to-top
-      :nv "zz" #'evil-scroll-line-to-center
-      :nv "zb" #'evil-scroll-line-to-bottom
       :nv "g=" #'magit-diff-default-context
       :nv "gi" #'forge-jump-to-issues
       :nv "gm" #'forge-jump-to-pullreqs
-      :nv "]" #'magit-section-forward-sibling
-      :nv "[" #'magit-section-backward-sibling
+      :nv "]"  #'magit-section-forward-sibling
+      :nv "["  #'magit-section-backward-sibling
       :nv "gr" #'magit-refresh
       :nv "gR" #'magit-refresh-all
+      :m "]d"  #'+vc-gutter/next-hunk
+      :m "[d"  #'+vc-gutter/previous-hunk
       )
 
 ;; Close transient with ESC

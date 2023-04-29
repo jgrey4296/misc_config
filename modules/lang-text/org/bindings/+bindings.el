@@ -23,26 +23,25 @@
 ;;-- end leader map
 
 ;;-- <leaderless>
-(map! :map org-mode-map
+(map! :map jg-org-mode-map
       ;; :n "I" nil
       ;; :n "] h" nil
       ;; :n "[ h" nil
       ;; :desc "Cycle"           :n "a"   #'org-cycle
-      :desc "Next Link"       :n "] l" #'org-next-link
-      :desc "Prev Link"       :n "[ l" #'org-previous-link
-      :desc "Forward Heading" :n "] j" #'org-forward-heading-same-level
-      :desc "Back Heading"    :n "[ j" #'org-backward-heading-same-level
+      :desc "Next Link"       :m "] l" #'org-next-link
+      :desc "Prev Link"       :m "[ l" #'org-previous-link
+      :desc "Forward Heading" :m "] j" #'org-forward-heading-same-level
+      :desc "Back Heading"    :m "[ j" #'org-backward-heading-same-level
       )
 ;;-- end <leaderless>
 
-(map! :map org-mode-map
+(map! :map jg-org-mode-map
       :desc "Headings Helm"   :n "s h" #'helm-org-in-buffer-headings
       :desc "Hide Drawers"    :n "z d" (cmd! (org-cycle-hide-drawers 'org-cycle-hide-drawers))
       )
 
-
 ;;-- <localleader>
-(map! :map org-mode-map
+(map! :map jg-org-mode-map
       :localleader
       :desc "Refile"                 "R" #'+jg-org-refile-subtree
       :desc "Todo"                   "TAB" #'org-todo
@@ -56,7 +55,10 @@
       ;; TODO refine this Codeblocks
       (:prefix ("." . "Code Blocks")
        :desc "Edit Codeblock "     "e" #'org-edit-src-code
-       :desc "Exec Codeblock"      "E" #'org-babel-execute-src-block)
+       :desc "Exec Codeblock"      "E" #'org-babel-execute-src-block
+       :desc "Clear Result"        "k" #'org-babel-remove-result
+       :desc "Clear All Results"   "K" #'+org/remove-result-blocks
+       )
       ;; Links
       (:prefix ("l" . "Links")
        ;; "o"   #'+jg-org-open_link_in_buffer
@@ -70,23 +72,6 @@
        :desc "Insert Drawer"       "d" #'org-insert-drawer)
       )
 ;;-- end <localleader>
-
-;;-- evil-org
-(map! :map evil-org-mode-map
-      :n "I"   nil
-      :n "za"  nil
-      :n "zA"  nil
-      :n "zc"  nil
-      :n "zC"  nil
-      :n "zm"  nil
-      :n "zM"  nil
-      :n "zo"  nil
-      :n "zR"  nil
-
-      :m "] h"  nil
-      :m "[ h"  nil
-      )
-;;-- end evil-org
 
 ;;-- dired
 (map! :map dired-mode-map
@@ -120,29 +105,36 @@
       :localleader
       )
 
-(map! (:map org-journal-mode-map
+(map! :map org-journal-mode-map
        :n "]f"  #'org-journal-next-entry
        :n "[f"  #'org-journal-previous-entry
        :n "C-n" #'org-journal-next-entry
-       :n "C-p" #'org-journal-previous-entry)
-      (:map org-journal-search-mode-map
+       :n "C-p" #'org-journal-previous-entry
+       )
+(map! :map org-journal-search-mode-map
             "C-n" #'org-journal-search-next
-            "C-p" #'org-journal-search-previous)
+            "C-p" #'org-journal-search-previous
+            )
+(map! :map org-journal-mode-map
       :localleader
-      (:map org-journal-mode-map
-            (:prefix "j"
-                     "c" #'org-journal-new-entry
-                     "d" #'org-journal-new-date-entry
-                     "n" #'org-journal-next-entry
-                     "p" #'org-journal-previous-entry)
-            (:prefix "s"
-                     "s" #'org-journal-search
-                     "f" #'org-journal-search-forever
-                     "F" #'org-journal-search-future
-                     "w" #'org-journal-search-calendar-week
-                     "m" #'org-journal-search-calendar-month
-                     "y" #'org-journal-search-calendar-year))
-      (:map org-journal-search-mode-map
-            "n" #'org-journal-search-next
-            "p" #'org-journal-search-prev)
+      (:prefix "j"
+               "c" #'org-journal-new-entry
+               "d" #'org-journal-new-date-entry
+               "n" #'org-journal-next-entry
+               "p" #'org-journal-previous-entry
+               )
+      (:prefix "s"
+               "s" #'org-journal-search
+               "f" #'org-journal-search-forever
+               "F" #'org-journal-search-future
+               "w" #'org-journal-search-calendar-week
+               "m" #'org-journal-search-calendar-month
+               "y" #'org-journal-search-calendar-year
+               )
       )
+(map! :map org-journal-search-mode-map
+      "n" #'org-journal-search-next
+      "p" #'org-journal-search-prev
+      )
+
+(setq org-mode-map jg-org-mode-map)

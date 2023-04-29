@@ -1,6 +1,5 @@
 ;;; +derived-modes.el -*- lexical-binding: t; -*-
 
-;;-- mode derivation
 (define-derived-mode license-mode text-mode "license"
   ""
   (interactive)
@@ -10,4 +9,3 @@
   )
 
 (add-to-list 'auto-mode-alist '("LICENSE" . license-mode))
-;;-- end mode derivation

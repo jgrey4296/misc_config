@@ -151,4 +151,14 @@ See `+emacs-lisp-non-package-mode' for details.")
                     '((emacs-lisp-mode lisp-interaction-mode) "Emacs Lisp")
                     )
 
+(spec-handling-add! evil-embrace nil
+                    `((lisp-mode emacs-lisp-mode clojure-mode racket-mode hy-mode)
+                      (?f . ,(make-embrace-pair-struct
+                              :key ?f
+                              :read-function #'+evil--embrace-elisp-fn
+                              :left-regexp "([^ ]+ "
+                              :right-regexp ")"))
+                      )
+                    )
+
 ;;-- end specs

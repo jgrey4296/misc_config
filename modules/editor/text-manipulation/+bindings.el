@@ -1,6 +1,6 @@
 ;;; util/text/+bindings.el -*- lexical-binding: t; -*-
 
-(message "Setting up text binding: %s" (current-time-string))
+(doom-log "Setting up text binding: %s" (current-time-string))
 (global-set-key (kbd "C-c [") #'+jg-text-insert-lparen)
 (global-set-key (kbd "C-c ]") #'+jg-text-insert-rparen)
 (evil-make-intercept-map messages-buffer-mode-map)

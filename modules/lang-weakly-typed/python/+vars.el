@@ -186,7 +186,7 @@
                     )
 (spec-handling-add! python-env t
                     '(default (:setup . none) (:support  . none))
-                    '(pyright (:setup . lsp))
+                    '(pyright (:support . lsp))
                     )
 (spec-handling-add! ligatures t
                     '(python-mode

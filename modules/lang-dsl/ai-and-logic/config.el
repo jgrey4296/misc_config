@@ -26,8 +26,9 @@
   )
 
 (use-package! pasp-mode
+  :after evil
   :init
-  (add-to-list 'auto-mode-alist '("\\.lp4" . pasp-mode ))
+  (add-to-list 'auto-mode-alist '("\\.lp4" . pasp-mode))
   (add-to-list 'auto-mode-alist '("\\.lp$" . pasp-mode))
   (add-hook 'pasp-mode-hook (lambda ()
                               (setq-local indent-line-function '+jg-logic-pasp-indent)))

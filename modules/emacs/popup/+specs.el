@@ -1,6 +1,6 @@
 ;;; config/ui/popup/config.el -*- lexical-binding: t; -*-
 
-(message "Setting up initial popup rules: %s" (current-time-string))
+(doom-log "Setting up initial popup rules: %s" (current-time-string))
 ;; Setup popup vars:
 
 (spec-handling-add! popup nil

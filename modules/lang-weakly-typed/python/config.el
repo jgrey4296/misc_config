@@ -25,7 +25,7 @@
 
   (spec-handling-add! python-env nil
                       '(flycheck
-                        (:setup . flycheck)
+                        (:support . flycheck)
                         )
                       )
   :config
@@ -67,7 +67,7 @@
         anaconda-mode-eldoc-as-single-line t)
   (spec-handling-add! python-env nil
                       '(anaconda
-                        (:setup . conda)
+                        (:support . conda)
                         )
                       )
   :config
@@ -96,7 +96,7 @@
   (add-to-list 'lsp-disabled-clients 'python-ms)
   (spec-handling-add! python-env nil
                       '(lsp-ms
-                        (:setup . lsp)
+                        (:support . lsp)
                         )
                       )
   :config
@@ -111,7 +111,7 @@
   (add-to-list 'lsp-disabled-clients 'jedi)
   (spec-handling-add! python-env nil
                       '(lsp-jedi
-                        (:setup . lsp)
+                        (:support . lsp)
                         )
                       )
 

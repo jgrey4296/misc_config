@@ -1,6 +1,6 @@
 ;;; +repl.el -*- lexical-binding: t; -*-
 
-(message "Setting up ai and logic repls")
+(doom-log "Setting up ai and logic repls")
 
 (defun +ceptre-mode/open-repl (&optional arg)
   (interactive "P")

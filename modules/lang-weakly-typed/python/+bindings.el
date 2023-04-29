@@ -2,7 +2,7 @@
 
 (map! :leader
       :prefix ("c v" . "Environments")
-      :desc "Activate Env" "a" #'env-handling-handle-env!
+      :desc "Activate Env" "a" #'env-handling-go!
       :desc "Clear Env"    "d" #'env-handling-clear-env!
       :desc "Report Env"   "r" #'env-handling-report!
       :desc "Lock Env"     "l" #'env-handling-lock!

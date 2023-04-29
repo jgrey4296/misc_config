@@ -13,9 +13,7 @@
   (load! "bindings/+org-standard-bindings.el")
   (load! "bindings/+bindings")
 
-  (evil-make-overriding-map org-mode-map)
-  (setq minor-mode-map-alist (assq-delete-all 'evil-org-mode minor-mode-map-alist))
-  (push `(evil-org-mode . ,evil-org-mode-map) minor-mode-map-alist)
+  ;; (push `(evil-org-mode . ,evil-org-mode-map) minor-mode-map-alist)
   )
 
 (use-package! toc-org ; auto-table of contents
@@ -99,7 +97,7 @@
   :hook (org-capture-mode . evil-insert-state)
   :hook (doom-docs-org-mode . evil-org-mode)
   :config
-  (setq evil-org-mode-map nil)
+  (setq evil-org-mode-map jg-org-mode-map)
   (add-hook 'evil-org-mode-hook #'evil-normalize-keymaps)
   (evil-org-set-key-theme)
   (add-hook! 'org-tab-first-hook :append

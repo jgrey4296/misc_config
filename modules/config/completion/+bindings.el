@@ -1,6 +1,6 @@
 ;;; completion/ivy/+bindings.el -*- lexical-binding: t; -*-
 
-(message "Setting up Completion bindings: %s" (current-time-string))
+(doom-log "Setting up Completion bindings: %s" (current-time-string))
 
 ;;-- remap bookmarks
 (map! :after counsel

@@ -3,7 +3,6 @@
 (load! "+vars")
 (load! "+funcs")
 (after! jg-bindings-total
-  (message "Setting up lisp bindings")
   (load! "+bindings")
   (load! "+advice")
   )

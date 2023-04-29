@@ -1,5 +1,5 @@
 
-(message "Setting up char insert bindings: %s" (current-time-string))
+(doom-log "Setting up char insert bindings: %s" (current-time-string))
 ;;-- keymap creation
 (defvar char-insert-cx8-map         (make-sparse-keymap))
 (defvar char-insert-acute-map       (make-sparse-keymap))

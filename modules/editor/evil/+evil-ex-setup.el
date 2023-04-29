@@ -1,6 +1,6 @@
 ;;; main/personal/+evil-setup.el -*- lexical-binding: t; -*-
 
-(message "Setting up Evil-Ex bindings: %s" (current-time-string))
+(doom-log "Setting up Evil-Ex bindings: %s" (current-time-string))
 
 (defvar evil-ex-commands nil
   " Custom Evil-ex commands")

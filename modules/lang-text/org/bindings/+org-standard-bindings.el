@@ -1,6 +1,6 @@
 ;; lang/org/+bindings_2.el -*- lexical-binding: t; -*-
 ;; Misc
-(message "Setting up org main bindings: %s" (current-time-string))
+(doom-log "Setting up org main bindings: %s" (current-time-string))
 
 ;; Unbinds
 ;; (map! :map org-mode-map

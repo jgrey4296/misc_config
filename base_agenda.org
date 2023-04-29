@@ -4,6 +4,8 @@
 [[/Users/johngrey/dooter.py][dooter.py]]
 [[file:/Volumes/documents/github/jgrey4296.github.io][homepage]]
 https://firefox-source-docs.mozilla.org/index.html
+https://annas-archive.org/
+https://rust.godbolt.org/
 
 * Base Agenda
 Death by Institution and the Harms of Abstraction.

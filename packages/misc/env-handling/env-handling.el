@@ -1,7 +1,6 @@
 ;;; lang/python/autoload/conda.el -*- lexical-binding: t; no-byte-compile: t; -*-
 
 ;; TODO add registered setup / teardown functions
-;; TODO replace .venv with marker-file var
 
 ;;-- vars
 
@@ -17,7 +16,7 @@
 ;;-- end vars
 
 ;;;###autoload
-(defun env-handling-handle-env! ()
+(defun env-handling-go! ()
   "Dispatch to activate appropriate environment
 and call the currently used lsp/conda client entrypoint"
   (interactive)

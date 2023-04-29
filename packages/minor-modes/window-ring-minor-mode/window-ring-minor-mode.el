@@ -1,7 +1,4 @@
-;;; window-ring-minor-mode/window-ring-minor-mode.el -*- lexical-binding: t; no-byte-compile: t; -*-
-
-;;; domain-specific/window-control/window-queue.el -*- lexical-binding: t; -*-
-
+;;; window-ring-minor-mode/window-ring-minor-mode.el -*- lexical-binding: t; -*-
 ;; See: https://www.gnu.org/software/emacs/manual/html_node/elisp/Windows.html
 ;; Window Queue: Display N windows on screen, and have the be
 ;; views of adjacent buffers in a list
@@ -67,6 +64,7 @@
   )
 
 (defvar window-ring--adding nil)
+
 (defvar window-ring-buffer-test-fn 'identity
   "one argument, current buffer, return non-nil to add to current ring")
 
@@ -85,7 +83,6 @@
 (defun window-ring-p (&optional arg)
   (interactive "p")
   (when (persp-parameter 'window-ring)
-    (when arg (message "In window ring"))
     t)
   )
 
@@ -94,11 +91,11 @@
   (when (and (window-ring-p)
              (ring-member (persp-parameter 'window-ring-actual)
                           (or buffer (current-buffer))))
-    (when arg (message "Buffer in ring: %s" (or buffer (current-buffer))))
     t)
   )
 
 ;;-- creation
+
 (defun window-ring-new ()
   " create a new perspective and ring "
   (interactive)
@@ -118,7 +115,6 @@
 
 (defun window-ring-create-persp-fn (persp hash)
   (when window-ring--adding
-    (message "Creating Window-ring")
     (modify-persp-parameters `((window-ring . t)
                                (window-ring-actual . ,(make-ring 1))
                                (window-ring-grow . t)
@@ -133,13 +129,11 @@
                              )
     (ring-insert+extend (persp-parameter 'window-ring-actual persp)
                         (persp-parameter 'window-ring-scratch persp))
-    (message "Window-ring created")
     )
   )
 
 (defun window-ring-activate-persp-fn (type)
   (when (persp-parameter 'window-ring)
-    (message "Activating Window-ring: %s" (persp-parameter 'name))
     (cond ('frame)
           ('window
 
@@ -150,7 +144,6 @@
 
 (defun window-ring-deactivate-persp-fn (type)
   (when (persp-parameter 'window-ring)
-    (message "Deactivating Window-ring: %s" (persp-parameter 'name))
     (cond ('frame)
           ('window)
           )
@@ -168,7 +161,6 @@
   (interactive "p")
   ;; (arg == 1 -> one row) (else -> two rows, only use top)
   ;; Clear
-  (message "Setting up window ring columns: %s" arg)
   (persp-delete-other-windows)
   (let ((leftmost (selected-window))
         centre rightmost)
@@ -206,9 +198,9 @@
 
 (defun window-ring-add-current-buffer (&optional arg)
   (interactive "p")
-  (message "Adding Current Buffer: %s" (current-buffer))
-  (when (or (buffer-local-boundp 'window-ring-buffer (current-buffer))
-            (funcall window-ring-buffer-test-fn (current-buffer)))
+  (when (and (persp-parameter 'window-ring)
+             (or (buffer-local-boundp 'window-ring-buffer (current-buffer))
+                 (funcall window-ring-buffer-test-fn (current-buffer))))
     (window-ring-add-to-head (current-buffer) arg)
     )
   )
@@ -216,7 +208,6 @@
 (defun window-ring-add-to-head (buffer arg)
   (interactive "b\np")
   (with-window-ring
-      (message "Adding %s to %s head" buffer (persp-name wr-persp))
     (ring-insert+extend wr-actual buffer t)
     )
   (when arg (window-ring-redisplay))
@@ -225,7 +216,6 @@
 (defun window-ring-add-to-tail (buffer arg)
   (interactive "b\np")
   (with-window-ring
-      (message "Adding %s to %s tail" buffer (persp-name wr-persp))
     (ring-insert-at-beginning window-ring buffer)
     )
   (when arg (window-ring-redisplay))
@@ -238,7 +228,6 @@
 (defun window-ring-clear-ring (&optional arg)
   (interactive "p")
   (with-window-ring
-      (message "Clearing Ring")
     (modify-persp-parameters `((window-ring-actual . ,(make-ring 1))
                                (window-ring-focus . 0)
                                ) wr-persp)
@@ -271,7 +260,6 @@
                       (ring-member wr-actual buff)))
              )
         (when index
-          (message "Removing: %s" index)
           (ring-remove wr-actual index)
           (ring-resize wr-actual (ring-length wr-actual))
           )
@@ -302,7 +290,6 @@
   (when arg (window-ring-redisplay))
   )
 
-
 ;;-- end removal
 
 ;;-- movement
@@ -311,7 +298,6 @@
   (interactive)
   (with-window-ring
       (modify-persp-parameters `((window-ring-loop . ,(not wr-loop))))
-    (message "Window ring loop: %s" (persp-parameter 'window-ring-loop))
     )
   )
 
@@ -334,7 +320,6 @@
                              (window-ring-newer (ring-length wr-actual) wr-focus wr-loop)))
                 )
            (when new-focus
-             (message "Focus %s -> %s" wr-focus new-focus)
              (modify-persp-parameters `((window-ring-focus . ,new-focus)))
              )
            )
@@ -379,7 +364,6 @@
       (window-ring-redisplay-actual)
     )
   )
-
 
 (defun window-ring-newer (len index loop)
   (pcase index
@@ -478,7 +462,6 @@
       (let ((buffers (ring-elements wr-actual))
             (edit-buffer (get-buffer-create (format "*WR Buffers: %s*" (persp-parameter 'name))))
             )
-        (message "buffers: %s" buffers)
         (with-current-buffer edit-buffer
           (auto-save-mode -1)
           (window-ring-edit-minor-mode 1)
@@ -512,6 +495,7 @@
   )
 
 (setq window-ring-edit-map (make-sparse-keymap))
+
 (define-key window-ring-edit-map (kbd "C-c C-c") #'window-ring-edit-commit)
 
 (define-minor-mode window-ring-edit-minor-mode

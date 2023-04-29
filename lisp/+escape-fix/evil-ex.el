@@ -306,7 +306,7 @@ is appended to the line."
                    (format ".,.%+d" arg)))))
              evil-ex-initial-input)))
      (list (when (> (length s) 0) s))))
-  (message "-- Entering Evil-ex")
+  (doom-log "-- Entering Evil-ex")
   (let ((evil-ex-current-buffer (current-buffer))
         (evil-ex-previous-command (unless initial-input
                                     (car evil-ex-history)))
@@ -327,13 +327,13 @@ is appended to the line."
              'evil-ex-history
              (when evil-want-empty-ex-last-command evil-ex-previous-command)
              t)))
-    (message "executing result: %s " result)
+    (doom-log "executing result: %s " result)
     (evil-ex-execute result)))
 
 (defun evil-ex-execute (result)
   "Execute RESULT as an ex command on `evil-ex-current-buffer'."
   ;; empty input means repeating the previous command
-  (message "Executing")
+  (doom-log "Executing")
   (when (and (zerop (length result))
              evil-want-empty-ex-last-command)
     (setq result evil-ex-previous-command))
@@ -347,7 +347,7 @@ is appended to the line."
   "Close the minibuffer if it is empty.
 Otherwise behaves like `delete-backward-char'."
   (interactive)
-  (message "Deleting backward")
+  (doom-log "Deleting backward")
   (call-interactively
    (if (zerop (length (minibuffer-contents-no-properties)))
        #'abort-recursive-edit
@@ -355,13 +355,13 @@ Otherwise behaves like `delete-backward-char'."
 
 (defun evil-ex-abort ()
   "Cancel Ex state when another buffer is selected."
-  (message "aborting: %s %s" real-this-command this-command)
+  (doom-log "aborting: %s %s" real-this-command this-command)
   (unless (or (minibufferp)
               (memq this-command '(mouse-drag-region choose-completion)))
     (abort-recursive-edit)))
 
 (defun evil-ex-command-window-execute (config result)
-  (message "command window execute")
+  (doom-log "command window execute")
   (select-window (active-minibuffer-window) t)
   (set-window-configuration config)
   (delete-minibuffer-contents)
@@ -374,7 +374,7 @@ Otherwise behaves like `delete-backward-char'."
 
 (defun evil-ex-elisp-completion-at-point ()
   "Complete an `evil-ex' Elisp expression."
-  (message "completion at point")
+  (doom-log "completion at point")
   (and (evil--ex-elisp-p)
        (fboundp 'elisp-completion-at-point)
        (elisp-completion-at-point)))
@@ -383,7 +383,7 @@ Otherwise behaves like `delete-backward-char'."
   "Initialize Ex minibuffer.
 This function registers hooks that are used for the interactive
 actions during Ex state."
-  (message "- ex setting up")
+  (doom-log "- ex setting up")
   (add-hook 'post-command-hook #'evil-ex-abort)
   (add-hook 'after-change-functions #'evil-ex-update nil t)
   (add-hook 'minibuffer-exit-hook #'evil-ex-teardown nil t)
@@ -397,7 +397,7 @@ actions during Ex state."
 (defun evil-ex-teardown ()
   "Deinitialize Ex minibuffer.
 Clean up everything set up by `evil-ex-setup'."
-  (message "tearing down")
+  (doom-log "tearing down")
   (remove-hook 'post-command-hook #'evil-ex-abort)
   (when evil-ex-argument-handler
     (let ((runner (evil-ex-argument-handler-runner
@@ -413,7 +413,7 @@ This function is usually called from `after-change-functions'
 hook. If BEG is non-nil (which is the case when called from
 `after-change-functions'), then an error description is shown
 in case of incomplete or unknown commands."
-  (message "-- ex updating: %s %s %s" real-this-command this-command beg)
+  (doom-log "-- ex updating: %s %s %s" real-this-command this-command beg)
   (let* ((prompt (minibuffer-prompt-end))
          (string (or string (minibuffer-contents-no-properties)))
          arg bang cmd count expr func handler range type)
@@ -449,9 +449,9 @@ in case of incomplete or unknown commands."
             evil-ex-bang bang
             evil-ex-argument arg)
       ;; test the current command
-      (message "Cmd, minibufferp: %s %s" cmd (minibufferp))
+      (doom-log "Cmd, minibufferp: %s %s" cmd (minibufferp))
       (when (and cmd (minibufferp))
-        (message "when cmd: %s %s" real-this-command this-command)
+        (doom-log "when cmd: %s %s" real-this-command this-command)
         (setq func (evil-ex-completed-binding cmd t))
         (cond
          ;; update argument-handler
@@ -478,14 +478,14 @@ in case of incomplete or unknown commands."
          ;; show error message only when called from `after-change-functions'
          (beg
           (let ((prefix (try-completion cmd (evil-ex-completion-table))))
-            (message "Beg: %s" beg)
+            (doom-log "Beg: %s" beg)
             (cond
              ((stringp prefix) (evil-ex-echo "Incomplete command"))
              ((null prefix) (evil-ex-echo "Unknown command"))))))))))
 
 (defun evil-ex-echo (string &rest args)
   "Display a message after the current Ex command."
-  (message "echo: %s %s" real-this-command this-command)
+  (doom-log "echo: %s %s" real-this-command this-command)
   (with-selected-window (minibuffer-window)
     (unless (or evil-no-display (zerop (length string)))
       (let ((string (format " [%s]" (apply #'format string args)))
@@ -503,7 +503,7 @@ in case of incomplete or unknown commands."
 
 (defun evil--ex-remove-echo-overlay ()
   "Remove echo overlay from Ex minibuffer."
-  (message "remove echo")
+  (doom-log "remove echo")
   (when evil-ex-echo-overlay
     (delete-overlay evil-ex-echo-overlay)
     (setq evil-ex-echo-overlay nil))
@@ -512,7 +512,7 @@ in case of incomplete or unknown commands."
 (defun evil-ex-completion ()
   "Complete the current Ex command or argument."
   (interactive)
-  (message "completion")
+  (doom-log "completion")
   (let (after-change-functions)
     (evil-ex-update)
     (completion-at-point)
@@ -520,7 +520,7 @@ in case of incomplete or unknown commands."
      (minibuffer-prompt-end) (point-max) '(face evil))))
 
 (defun evil-ex-command-completion-at-point ()
-  (message "completiong command")
+  (doom-log "completiong command")
   (let ((beg (if evil-ex-cmd
                  (get-text-property 0 'ex-index evil-ex-cmd)
                (point)))
@@ -528,7 +528,7 @@ in case of incomplete or unknown commands."
     (list beg end (evil-ex-completion-table) :exclusive 'no)))
 
 (defun evil-ex-completion-table ()
-  (message "Completion table: %s %s" real-this-command this-command)
+  (doom-log "Completion table: %s %s" real-this-command this-command)
   (let ((ex-cmds
          (cl-loop
           for (cmd . fun) in evil-ex-commands unless (stringp fun)
@@ -593,7 +593,7 @@ in case of incomplete or unknown commands."
       `(boundaries 0 . ,(length (cdr action)))))))
 
 (defun evil-ex-argument-completion-at-point ()
-  (message "completion at point")
+  (doom-log "completion at point")
   (let ((context (evil-ex-syntactic-context)))
     (when (memq 'argument context)
       ;; if it's an autoload, load the function; this allows external
@@ -757,9 +757,9 @@ works accordingly."
 
 (defun evil-ex-completed-binding (command &optional noerror)
   "Return the final binding of the completion of COMMAND."
-  (message "Completed binding: %s %s" real-this-command this-command)
+  (doom-log "Completed binding: %s %s" real-this-command this-command)
   (let ((completion (try-completion command evil-ex-commands)))
-    (message "completion: %s" completion)
+    (doom-log "completion: %s" completion)
     (evil-ex-binding (if (eq completion t) command
                        (or completion command))
                      noerror)))
@@ -769,7 +769,7 @@ works accordingly."
   "Replace special symbols in FILE-NAME.
 Replaces % by the current file-name,
 Replaces # by the alternate file-name in FILE-NAME."
-  (message "replace special filenames")
+  (doom-log "replace special filenames")
   (let ((remote (file-remote-p file-name))
         (current-fname (buffer-file-name))
         (alternate-fname (and (other-buffer)
@@ -804,7 +804,7 @@ This function interprets special file names like # and %."
 (defun evil-ex-repeat (&optional count)
   "Repeat the last Ex command."
   (interactive "P")
-  (message "repeat")
+  (doom-log "repeat")
   (when count
     (goto-char (point-min))
     (forward-line (1- count)))
@@ -822,7 +822,7 @@ This function interprets special file names like # and %."
 
 (defun evil-ex-call-command (range command argument)
   "Execute the given command COMMAND."
-  (message "call command")
+  (doom-log "call command")
   (let* ((count (when (numberp range) range))
          (range (when (evil-range-p range) range))
          (bang (when (string-match-p ".!$" command) t))
@@ -1062,7 +1062,7 @@ NUMBER defaults to 1."
   "Parse STRING as an Ex expression and return an evaluation tree.
 If SYNTAX is non-nil, return a syntax tree instead.
 START is the start symbol, which defaults to `expression'."
-  (message "parsse: %s %s" real-this-command this-command)
+  (doom-log "parse: %s %s" real-this-command this-command)
   (let ((result (funcall
                  (evil-parser evil-ex-grammar expression range)
                  string (or start 'expression) syntax)))
@@ -1073,7 +1073,7 @@ START is the start symbol, which defaults to `expression'."
 
 (defun evil-ex-command-force-p (command)
   "Whether COMMAND accepts the bang argument."
-  (message "force: %s %s" real-this-command this-command)
+  (doom-log "force: %s %s" real-this-command this-command)
   (let ((binding (evil-ex-completed-binding command t)))
     (when binding
       (evil-get-command-property binding :ex-bang))))
@@ -1081,7 +1081,7 @@ START is the start symbol, which defaults to `expression'."
 (defun evil-ex-syntactic-context (&optional pos)
   "Return the syntactical context of the character at POS.
 POS defaults to the current position of point."
-  (message "syntactic")
+  (doom-log "syntactic")
   (setq pos (max (- (or pos (point)) (minibuffer-prompt-end)) 0))
   (let* ((tree (evil-ex-parse (minibuffer-contents-no-properties) t))
          (i 0) j result)

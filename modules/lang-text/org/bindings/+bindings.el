@@ -1,5 +1,5 @@
 ;;; main/jg-org/+bindings.el -*- lexical-binding: t; -*-
-(message "Setting up general access org bindings: %s" (current-time-string))
+(doom-log "Setting up general access org bindings: %s" (current-time-string))
 
 ;;-- leader map
 (map! :leader
@@ -137,4 +137,5 @@
       "p" #'org-journal-search-prev
       )
 
+(evil-make-overriding-map jg-org-mode-map)
 (setq org-mode-map jg-org-mode-map)

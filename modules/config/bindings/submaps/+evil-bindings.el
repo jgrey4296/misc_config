@@ -1,7 +1,7 @@
 ;;; emacs/bindings/+evil-maps.el -*- lexical-binding: t; -*-
 ;; Reminder: evil-mode-map-alist
 
-(message "Setting up Evil Bindings: %s" (current-time-string))
+(doom-log "Setting up Evil Bindings: %s" (current-time-string))
 ;;-- setup
 (setq jg-binding-insert-state-map (copy-keymap evil-insert-state-map))
 

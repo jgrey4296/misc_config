@@ -1,4 +1,5 @@
 ;;; lang/emacs-lisp/+bindings.el -*- lexical-binding: t; -*-
+(doom-log "Setting up lisp bindings")
 
 (setq edebug-eval-mode-map (make-sparse-keymap))
 (evil-make-intercept-map edebug-eval-mode-map)

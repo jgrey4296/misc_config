@@ -50,6 +50,6 @@ stored in `persp-save-dir'.")
 
 (spec-handling-add! popup nil
                     '(window-ring
-                       ("^\\*WR Buffers: "         :side left :ttl nil :width  0.5 :quit nil :select nil :priority 50)
+                       ("^\\*WR Buffers: "         :side left :ttl nil :width  0.2 :quit nil :select nil :priority 50)
                     )
 )

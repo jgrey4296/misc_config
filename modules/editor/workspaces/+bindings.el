@@ -20,10 +20,11 @@
 
 (map! :leader
       :prefix "w"
-      :desc "Ring Right"                     "l" #'window-ring-move-focus
-      :desc "Ring Left"                      "h" #'window-ring-move-focus-alt
+      ;; :desc "Ring Right"                     "l" #'window-ring-move-focus
+      ;; :desc "Ring Left"                      "h" #'window-ring-move-focus-alt
       :desc "Most Recent"                    "L" #'window-ring-goto-most-recent
       :desc "Oldest"                         "H" #'window-ring-goto-oldest
+      :desc "Print Ring"                     "p" #'window-ring-print-order
       )
 
 ;;-- end window ring
@@ -33,11 +34,11 @@
       "C-c C-c" #'window-ring-edit-commit)
 
 (map! :map jg-binding-backward-general-motion-map
-      :desc "Ring Window"  "r"    #'window-ring-move-focus
+      :desc "Ring Window"  "r"    #'window-ring-move-focus-alt
       :desc "Workspace"    "w"    #'+workspace/switch-left
       )
 
 (map! :map jg-binding-forward-general-motion-map
-      :desc "Ring Window"  "r"    #'window-ring-move-focus-alt
+      :desc "Ring Window"  "r"    #'window-ring-move-focus
       :desc "Workspace"    "w"    #'+workspace/switch-right
 )

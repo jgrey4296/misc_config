@@ -1,4 +1,4 @@
-;;; window-ring-minor-mode/window-ring-minor-mode.el -*- lexical-binding: t; -*-
+;;; window-ring-minor-mode/window-ring-minor-mode.el -*- lexical-binding: t; no-byte-compile: t; -*-
 
 ;;; domain-specific/window-control/window-queue.el -*- lexical-binding: t; -*-
 
@@ -18,194 +18,163 @@
 
 ;; Add-to-list most-recent/oldest
 (require 'evil)
+(require 'persp-mode)
+(require 'cl-lib)
 
-(defun window-ring-add-current-buffer ()
-  (interactive)
-  (window-ring-add-to-head (buffer-name (current-buffer)))
-  (window-ring-redisplay)
-  )
-(defun window-ring-add-to-head (&optional buffer)
-  (interactive)
-  (if buffer
-      (progn (message "Adding %s to %s" buffer (ring-elements window-ring))
-             (ring-insert+extend window-ring buffer t))
-    (let* ((display-buffer-alist '(("^" display-buffer-no-window)))
-           (file (counsel--find-file-1 "Add File to Ring: " nil nil 'window-ring-add-to-head))
-           (found-buffer (find-file file))
-           (buff-name (buffer-name found-buffer))
+;; persp-buffer-list-function
+
+(defmacro with-window-ring (&rest body)
+  (declare (indent 1))
+  `(when (persp-parameter 'window-ring)
+     (let ((wr-persp      (get-current-persp))
+           (wr-actual     (persp-parameter 'window-ring-actual))
+           (wr-grow       (persp-parameter 'window-ring-grow))
+           (wr-loop       (persp-parameter 'window-ring-loop))
+           (wr-duplicates (persp-parameter 'window-ring-duplicates))
+           (wr-focus      (persp-parameter 'window-ring-focus))
+           (wr-max        (persp-parameter 'window-ring-max))
+           (wr-scratch    (persp-parameter 'window-ring-scratch))
            )
-
-      (message "File-name: %s : %s" buff-name file)
-      (cond ((not (ring-member window-ring buff-name))
-             (ring-insert+extend window-ring buff-name window-ring-can-grow))
-            (window-ring-allow-duplicates
-             (ring-insert+extend window-ring (buffer-name (make-indirect-buffer buff-name (generate-new-buffer-name buff-name) t))
-                                 window-ring-can-grow))
-            (t
-             (message "Buffer %s already in window ring: %s" buff-name (ring-elements window-ring)))
-            )
-      ;; Set buffer-local background
-      (with-current-buffer buff-name
-        (message "REMAPPING: %s : %s" window-ring-background-index (nth window-ring-background-index window-ring-background-color-options))
-        (face-remap-set-base 'default :background (nth window-ring-background-index window-ring-background-color-options))
-        )
-      (cl-incf window-ring-background-index)
-      (if (<= (length window-ring-background-color-options) window-ring-background-index)
-          (setq window-ring-background-index 0))
-
-      )
-    )
-  )
-(defun window-ring-add-to-tail (buffer)
-  (interactive "b")
-  (message "Adding %s to %s" buffer (ring-elements window-ring))
-  (ring-insert-at-beginning window-ring (get-buffer buffer))
+       ,@body
+       )
+     )
   )
 
-(defun window-ring-clear-ring ()
-  (interactive)
-  (message "Clearing Window Ring")
-  (setq window-ring (make-ring window-ring-size)
-        window-ring-background-index 0
-        )
-  (window-ring-add-to-head (buffer-name (current-buffer)))
-  (window-ring-redisplay)
-)
-(defun window-ring-pop-buffer (arg)
-  (interactive "p")
-  (if (eq arg 4)
-      ;;Pop everything from most-recent to here
-      (let ((most-recent #'(lambda () (ring-ref window-ring 0)))
-            (current (ring-ref window-ring window-ring-focus)))
-            (while (and (ring-length window-ring)
-                        (not (string-equal (funcall most-recent)
-                                           current)))
-              (ring-remove window-ring 0)
-              )
-            )
-    ;; else pop the most recent
-    (ring-remove window-ring 0)
-    )
-  (window-ring-redisplay)
-  )
-
-(defun window-ring-remove-buffer (&optional buff-name)
-  " Remove the current buffer from the ring "
-  (interactive)
-  (if (and window-ring-minor-mode window-ring)
-      (let* ((buff (if buff-name buff-name (buffer-name (current-buffer))))
-             (mem (if window-ring (ring-member window-ring buff) nil)))
-        (if mem
-            (progn (message "Removing: %s" mem)
-                   (ring-remove window-ring mem)
-                   (if (not buff-name)
-                       (window-ring-redisplay)))))
-    )
-)
-(defun window-ring-replace-buffer(&optional buff-name)
-  " Replace the current central window's buffer with the current buffer "
-  (interactive)
- (if (and window-ring-minor-mode window-ring)
-      (let* ((buff (if buff-name buff-name (buffer-name (current-buffer))))
-             (mem (if window-ring (ring-member window-ring buff) nil))
-             (centre (ring-ref window-ring window-ring-focus))
-             (ring-list (ring-elements window-ring)))
-        (if (not mem)
-            (progn
-              (setf (nth (position centre ring-list :test 's-equals?) ring-list) buff)
-              (setq window-ring (ring-convert-sequence-to-ring ring-list)))
-          )
-        )
-   )
- )
-
-(defun window-ring-move-perspective (arg)
-  (interactive "p")
-  (let ((new-focus (cond ((and window-ring-can-loop (eq arg 1))
-                          (ring-minus1 window-ring-focus (length (cddr window-ring))))
-                         (window-ring-can-loop
-                          (ring-plus1 window-ring-focus (length (cddr window-ring))))
-                         ((eq arg 1)
-                          (max 0 (- window-ring-focus 1)))
-                         (t (min (- (ring-length window-ring) 1) (+ window-ring-focus 1))))))
-    ;; If can't loop, clamp and put empty buffers in windows
-    ;; use get-buffer-create
-    (message "Focus %s -> %s" window-ring-focus new-focus)
-    (setq window-ring-focus new-focus)
-    )
-  ;; Redisplay
-  (window-ring-redisplay)
-  )
-(defun window-ring-move-perspective-2 ()
-  (interactive)
-  (window-ring-move-perspective 4))
-
-(defun window-ring-goto-most-recent ()
-  (interactive)
-  (setq window-ring-focus 0)
-  (message "Focus: %s" window-ring-focus)
-  (window-ring-redisplay)
-  )
-(defun window-ring-goto-oldest ()
-  (interactive)
-  (setq window-ring-focus (- (ring-length window-ring) 1))
-  (window-ring-redisplay)
-  )
-
-(defun window-ring-redisplay ()
-  (interactive)
-  (get-buffer-create window-ring-nil-buffer-name)
-  (if (eq (length window-ring-windows)
-          (length (-remove 'not (mapcar 'window-valid-p window-ring-windows))))
-      (window-ring-redisplay-unguarded)
-      ))
-
-(defun window-ring-redisplay-unguarded ()
-  (let* ((at-start (eq 0 window-ring-focus))
-         (at-end (eq window-ring-focus (- (ring-length window-ring) 1)))
-         (len-one (eq 1 (ring-length window-ring)))
-         (centre (ring-ref window-ring window-ring-focus))
-         (leftmost (if (or len-one (and at-end (not window-ring-can-loop)))
-                       window-ring-nil-buffer-name
-                     (ring-next window-ring centre)))
-         (rightmost (if (or len-one (and at-start (not window-ring-can-loop)))
-                        window-ring-nil-buffer-name
-                      (ring-previous window-ring centre)))
+(defmacro with-other-window-ring (wr-name &rest body)
+  (declare (indent 1))
+  `(let ((persp (persp-get-by-name wr-name))
+         (when (persp-parameter 'window-ring persp)
+           (let ((wr-persp      persp)
+                 (wr-actual     (persp-parameter 'window-ring-actual persp))
+                 (wr-grow       (persp-parameter 'window-ring-grow persp))
+                 (wr-loop       (persp-parameter 'window-ring-loop persp))
+                 (wr-duplicates (persp-parameter 'window-ring-duplicates persp))
+                 (wr-focus      (persp-parameter 'window-ring-focus persp))
+                 (wr-max        (persp-parameter 'window-ring-max persp))
+                 )
+             ,@body
+             )
+           )
          )
-    ;; Assign to the column windows
-    ;; If cant loop, pad leftmost and rightmost with empy buffers
-    (message "Trio: %s -> %s -> %s" leftmost centre rightmost)
-    (if (and (eq (length window-ring-windows) 3)
-             (not (member nil (mapcar 'window-live-p window-ring-windows))))
-        (mapc #'(lambda (xy) (set-window-buffer (cadr xy) (car xy)))
-              (-zip-lists (list leftmost centre rightmost)
-                          window-ring-windows)))
-    (select-window (nth 1 window-ring-windows))
-      ))
-
-(defun window-ring-setup-columns-command (arg)
-  (interactive "p")
-  (window-ring-setup-columns arg)
+     )
   )
 
-(defun window-ring-setup-columns (arg &optional soft)
+(defmacro when-window-ring (&rest body)
+  (declare (indent 1))
+  `(when (persp-parameter 'window-ring)
+     ,@body
+     )
+  )
+
+(defvar window-ring--adding nil)
+(defvar window-ring-buffer-test-fn 'identity
+  "one argument, current buffer, return non-nil to add to current ring")
+
+(define-minor-mode window-ring-minor-mode
+  "A Minor Mode for easy control of a 3-ple view of a ring of buffers"
+  :lighter "Window-Ring"
+  :global t
+  (add-to-list 'persp-created-functions #'window-ring-create-persp-fn)
+  (add-to-list 'persp-activated-functions #'window-ring-activate-persp-fn)
+  (add-to-list 'persp-before-deactivate-functions #'window-ring-deactivate-persp-fn)
+  (add-to-list 'persp-before-kill-functions #'window-ring-kill-persp-fn)
+  (add-hook 'find-file-hook #'window-ring-add-current-buffer)
+  (add-hook 'kill-buffer-hook #'window-ring-remove-buffer)
+  )
+
+(defun window-ring-p (&optional arg)
+  (interactive "p")
+  (when (persp-parameter 'window-ring)
+    (when arg (message "In window ring"))
+    t)
+  )
+
+(defun window-ring-buffer-p (&optional arg buffer)
+  (interactive "p")
+  (when (and (window-ring-p)
+             (ring-member (persp-parameter 'window-ring-actual)
+                          (or buffer (current-buffer))))
+    (when arg (message "Buffer in ring: %s" (or buffer (current-buffer))))
+    t)
+  )
+
+;;-- creation
+(defun window-ring-new ()
+  " create a new perspective and ring "
+  (interactive)
+  (let ((ring-name (format "%s-WR" (read-string "New Ring: ")))
+        )
+    (setq window-ring--adding t)
+    (persp-add-new ring-name)
+    (persp-switch ring-name)
+    (switch-to-buffer (persp-parameter 'window-ring-scratch))
+    (persp-add-buffer (current-buffer))
+    (add-hook 'find-file-hook #'window-ring-add-current-buffer)
+    (add-hook 'kill-buffer-hook #'window-ring-remove-buffer)
+    (window-ring-setup-columns t nil)
+    (setq window-ring--adding nil)
+    )
+  )
+
+(defun window-ring-create-persp-fn (persp hash)
+  (when window-ring--adding
+    (message "Creating Window-ring")
+    (modify-persp-parameters `((window-ring . t)
+                               (window-ring-actual . ,(make-ring 1))
+                               (window-ring-grow . t)
+                               (window-ring-loop . t)
+                               (window-ring-duplicates . t)
+                               (window-ring-focus . 0)
+                               (window-ring-max . -1)
+                               (window-ring-backgrounds . ("gray19" "gray12" "gray4"))
+                               (window-ring-scratch . ,(get-buffer-create (format "*%s*" (persp-name persp))))
+                               )
+                             persp
+                             )
+    (ring-insert+extend (persp-parameter 'window-ring-actual persp)
+                        (persp-parameter 'window-ring-scratch persp))
+    (message "Window-ring created")
+    )
+  )
+
+(defun window-ring-activate-persp-fn (type)
+  (when (persp-parameter 'window-ring)
+    (message "Activating Window-ring: %s" (persp-parameter 'name))
+    (cond ('frame)
+          ('window
+
+           )
+          )
+    )
+  )
+
+(defun window-ring-deactivate-persp-fn (type)
+  (when (persp-parameter 'window-ring)
+    (message "Deactivating Window-ring: %s" (persp-parameter 'name))
+    (cond ('frame)
+          ('window)
+          )
+    )
+  )
+
+(defun window-ring-reset-columns (&optional arg)
+  (interactive "p")
+  (window-ring-setup-columns arg t)
+  )
+
+(defun window-ring-setup-columns (&optional arg soft)
   " Reset windows to (or arg 3) columns.
-    if SOFT then don't clear the window ring
-  "
+    if SOFT then don't clear the window ring "
+  (interactive "p")
   ;; (arg == 1 -> one row) (else -> two rows, only use top)
   ;; Clear
-  (if (not window-ring-minor-mode)
-      (window-ring-minor-mode 1))
-
-  (delete-other-windows)
+  (message "Setting up window ring columns: %s" arg)
+  (persp-delete-other-windows)
   (let ((leftmost (selected-window))
         centre rightmost)
-  ;; split
-   (message "ARG: %s" arg)
-    (if (eq arg 4)
-        ;; Split as top 3 columns
-        (split-window-below)
-      )
+    ;; split
+    (when (< 1 arg) ;; Split as top 3 columns
+      (split-window-below))
 
     ;; Split as 3 columns
     (setq centre (split-window-right))
@@ -213,105 +182,343 @@
     (setq rightmost (split-window-right))
 
     ;; init ring
-
-    (if (not (and soft window-ring))
-        (progn
-          (setq window-ring (make-ring window-ring-size))
-          (window-ring-add-to-head (buffer-name (current-buffer))))
-      (message "Soft window-ring reset")
+    (unless soft
+      (modify-persp-parameters `((window-ring-actual . ,(make-ring 1))))
+      (window-ring-add-current-buffer)
       )
 
-    (setq window-ring-windows (list leftmost centre rightmost))
+    (when arg
+      (balance-windows)
+      (window-ring-redisplay)
+      )
     )
-  (balance-windows)
-  (window-ring-redisplay)
+  )
+
+(defun window-ring-kill-persp-fn (persp)
+  (with-other-window-ring persp
+      (message "Killing Window Ring")
+    )
+  )
+
+;;-- end creation
+
+;;-- addition
+
+(defun window-ring-add-current-buffer (&optional arg)
+  (interactive "p")
+  (message "Adding Current Buffer: %s" (current-buffer))
+  (when (or (buffer-local-boundp 'window-ring-buffer (current-buffer))
+            (funcall window-ring-buffer-test-fn (current-buffer)))
+    (window-ring-add-to-head (current-buffer) arg)
+    )
+  )
+
+(defun window-ring-add-to-head (buffer arg)
+  (interactive "b\np")
+  (with-window-ring
+      (message "Adding %s to %s head" buffer (persp-name wr-persp))
+    (ring-insert+extend wr-actual buffer t)
+    )
+  (when arg (window-ring-redisplay))
+  )
+
+(defun window-ring-add-to-tail (buffer arg)
+  (interactive "b\np")
+  (with-window-ring
+      (message "Adding %s to %s tail" buffer (persp-name wr-persp))
+    (ring-insert-at-beginning window-ring buffer)
+    )
+  (when arg (window-ring-redisplay))
+  )
+
+;;-- end addition
+
+;;-- removal
+
+(defun window-ring-clear-ring (&optional arg)
+  (interactive "p")
+  (with-window-ring
+      (message "Clearing Ring")
+    (modify-persp-parameters `((window-ring-actual . ,(make-ring 1))
+                               (window-ring-focus . 0)
+                               ) wr-persp)
+    )
+  (window-ring-add-current-buffer arg)
+)
+
+(defun window-ring-pop-buffers (&optional arg)
+  (interactive "p")
+  (with-window-ring
+      ;;Pop everything from most-recent to here
+      (let ((most-recent (-partial #'ring-ref wr-actual 0))
+            (target (ring-ref wr-actual wr-focus))
+            )
+        (while (and (ring-length wr-actual)
+                    (not (eq (funcall most-recent) target)))
+          (ring-remove wr-actual 0))
+        )
+    (ring-resize wr-actual (ring-length wr-actual))
+    )
+  (when arg (window-ring-redisplay))
+  )
+
+(defun window-ring-remove-buffer (&optional buffer arg)
+  " Remove the current buffer from the ring "
+  (interactive "b\np")
+  (with-window-ring
+      (let* ((buff (if (bufferp buffer) buffer (current-buffer)))
+             (index (unless (ring-empty-p wr-actual)
+                      (ring-member wr-actual buff)))
+             )
+        (when index
+          (message "Removing: %s" index)
+          (ring-remove wr-actual index)
+          (ring-resize wr-actual (ring-length wr-actual))
+          )
+        )
+    )
+  (when arg (window-ring-redisplay))
+  )
+
+(defun window-ring-replace-buffer(&optional buffer arg)
+  " Replace the current focus buffer with the current buffer "
+  (interactive "b\np")
+  ;; TODO use with-other-window-ring
+  (with-window-ring
+      (let* ((buff (if (bufferp buffer) buffer (current-buffer)))
+             (empty-p (ring-empty-p wr-actual))
+             (index (unless empty-p (ring-member wr-actual buff)))
+             (centre (unless empty-p (ring-ref wr-actual wr-focus)))
+             (ring-list (unless empty-p (ring-elements wr-actual)))
+             )
+        (when index
+          (setf (nth (cl-position centre ring-list) ring-list) buff)
+          (modify-persp-parameters `((window-ring-actual .
+                                      ,(ring-convert-sequence-to-ring ring-list)))
+                                   )
+          )
+        )
+    )
+  (when arg (window-ring-redisplay))
+  )
+
+
+;;-- end removal
+
+;;-- movement
+
+(defun window-ring-toggle-loop ()
+  (interactive)
+  (with-window-ring
+      (modify-persp-parameters `((window-ring-loop . ,(not wr-loop))))
+    (message "Window ring loop: %s" (persp-parameter 'window-ring-loop))
+    )
+  )
+
+;;;###autoload
+(defun window-ring-move-focus (&optional arg)
+  " move the focus towards the most recent addition to window ring.
+ if arg is not nil, move towards oldest "
+  (interactive "p")
+  (cond ((persp-parameter 'window-ring)
+         (let* ((wr-persp      (get-current-persp))
+                (wr-actual     (persp-parameter 'window-ring-actual))
+                (wr-grow       (persp-parameter 'window-ring-grow))
+                (wr-loop       (persp-parameter 'window-ring-loop))
+                (wr-duplicates (persp-parameter 'window-ring-duplicates))
+                (wr-focus      (persp-parameter 'window-ring-focus))
+                (wr-max        (persp-parameter 'window-ring-max))
+                (wr-scratch    (persp-parameter 'window-ring-scratch))
+                (new-focus (if (< 1 arg)
+                               (window-ring-older (ring-length wr-actual) wr-focus wr-loop)
+                             (window-ring-newer (ring-length wr-actual) wr-focus wr-loop)))
+                )
+           (when new-focus
+             (message "Focus %s -> %s" wr-focus new-focus)
+             (modify-persp-parameters `((window-ring-focus . ,new-focus)))
+             )
+           )
+         (window-ring-redisplay)
+         )
+        ((< 1 arg)
+         (evil-window-left 1))
+        (t
+         (evil-window-right 1))
+        )
+  )
+
+;;;###autoload
+(defun window-ring-move-focus-alt ()
+  (interactive)
+  (window-ring-move-focus 2)
+  )
+
+(defun window-ring-goto-most-recent (&optional arg)
+  (interactive "p")
+  (with-window-ring
+      (modify-persp-parameters '((window-ring-focus . 0)))
+    )
+  (when arg (window-ring-redisplay))
+  )
+
+(defun window-ring-goto-oldest (&optional arg)
+  (interactive)
+  (with-window-ring
+      (modify-persp-parameters '((window-ring-focus . -1)))
+    )
+  (when arg (window-ring-redisplay))
+  )
+
+;;-- end movement
+
+;;-- display
+
+(defun window-ring-redisplay ()
+  (interactive)
+  (when-window-ring
+      (window-ring-redisplay-actual)
+    )
+  )
+
+
+(defun window-ring-newer (len index loop)
+  (pcase index
+    ((pred null) nil)
+    ((or (guard loop) (guard (< 0 index)))
+     (ring-minus1 index len))
+    (_ nil)
+    )
+  )
+
+(defun window-ring-older (len index loop)
+  (pcase index
+    ((pred null) nil)
+    ((or (guard loop) (guard (< index (1- len))))
+     (ring-plus1 index len))
+    (_ nil)
+    )
+  )
+
+(defun window-ring-set-window (window index)
+  (with-window-ring
+      (set-window-buffer window (if index
+                                    (ring-ref wr-actual index)
+                                  wr-scratch))
+
+    )
+  )
+
+(defun window-ring-redisplay-actual ()
+  (with-window-ring
+      (let* ((largest  (get-largest-window))
+             (ring-len (ring-length wr-actual))
+             (curr-win (window-next-sibling largest))
+             (index    (window-ring-newer ring-len wr-focus wr-loop))
+             )
+        (set-window-buffer largest (ring-ref wr-actual wr-focus))
+        (while curr-win
+          (window-ring-set-window curr-win index)
+          (setq curr-win (window-next-sibling curr-win)
+                index (window-ring-newer ring-len index wr-loop)))
+        (setq index (window-ring-older ring-len wr-focus wr-loop)
+              curr-win (window-prev-sibling largest))
+        (while curr-win
+          (window-ring-set-window curr-win index)
+          (setq curr-win (window-prev-sibling curr-win)
+                index (window-ring-newer ring-len index wr-loop))
+          )
+        )
+    )
   )
 
 (defun window-ring-print-order ()
   (interactive)
-  (let* ((curr-elem (ring-ref window-ring window-ring-focus))
-         (elements (ring-elements window-ring))
-         (marked-elements (mapcar #'(lambda (x)
-                                      (if (string-equal x curr-elem)
-                                          (format "%s  <--- Focus" x)
-                                        x)) elements))
-         )
-    ;; Print in a temporary buffer
-    (with-temp-buffer "*Window Ring*"
-        ;; '(display-buffer-in-side-window . ((side . right) (slot . 1)))
-        ;; '(lambda (win val) (delete-window win))
-      (princ "Ring Buffers:\n\t")
-      (princ (string-join marked-elements "\n\t"))
+  (with-window-ring
+      (let ((index (window-ring-older (ring-length wr-actual) wr-focus nil))
+            (len (ring-length wr-actual))
+            (older ())
+            (newer ())
+            (focus (ring-ref wr-actual wr-focus))
+            )
+        (while index
+          (push (buffer-name (ring-ref wr-actual index)) older)
+          (setq index (window-ring-older len index nil)))
+        (setq index (window-ring-newer len wr-focus nil))
+        (while index
+          (push (buffer-name (ring-ref wr-actual index)) newer)
+          (setq index (window-ring-newer len index nil)))
+        (with-temp-buffer (format "*WR Buffers: %s*" (persp-name (get-current-persp)))
+                          (princ "Ring Buffers:\n")
+                          (mapcar #'(lambda (x) (princ x) (princ " | ")) older)
+                          (princ (format "[%s] | " (buffer-name focus)))
+                          (mapcar #'(lambda (x) (princ x) (princ " | ")) (reverse newer))
+                          )
       )
     )
   )
 
 (defun window-ring-shrink-sides (amt)
   (interactive "NShrink By: ")
-  (with-selected-window (car (last window-ring-windows))
-    (shrink-window-horizontally amt)
-      )
-  (with-selected-window (first window-ring-windows)
-    (shrink-window-horizontally amt)
-    )
+  (with-window-ring
+      (let ((curr (selected-window)))
+        (walk-windows #'(lambda (wind)
+                          (when (not (eq wind curr))
+                            (with-selected-window wind
+                              (shrink-window-horizontally amt))))
+                      )))
   )
+
+;;-- end display
+
+;;-- edit
 
 (defun window-ring-edit-order ()
   (interactive)
-  (let ((new-window (split-window (selected-window) nil 'below))
-        (elements (ring-elements window-ring)))
-    (set-window-buffer new-window (get-buffer-create "*window-ring-edit*"))
-    (select-window new-window)
-    (message "Elements: %s" elements)
-    (with-current-buffer "*window-ring-edit*"
-      (auto-save-mode -1)
-      (set-window-text-height (selected-window) 10)
-      (set (make-local-variable 'backup-inhibited) t)
-      (window-ring-edit-minor-mode)
-      (erase-buffer)
-      (mapc (lambda (x) (insert (format "%s\n" x))) elements)
-      )
-    (redraw-display)
+  (with-window-ring
+      (let ((buffers (ring-elements wr-actual))
+            (edit-buffer (get-buffer-create (format "*WR Buffers: %s*" (persp-parameter 'name))))
+            )
+        (message "buffers: %s" buffers)
+        (with-current-buffer edit-buffer
+          (auto-save-mode -1)
+          (window-ring-edit-minor-mode 1)
+          (set (make-local-variable 'backup-inhibited) t)
+          (erase-buffer)
+          (mapc (lambda (x) (insert (format "%s\n" (buffer-name x))))
+                (reverse buffers))
+          )
+        (display-buffer edit-buffer)
+        )
     )
-  )
-
-(define-minor-mode window-ring-minor-mode
-  "A Minor Mode for easy control of a 3-ple view of a ring of buffers"
-  :lighter "Window-Ring"
-  :global t
-  (setq-default window-ring-size 1
-                window-ring-can-grow t
-                window-ring-can-loop t
-                window-ring-allow-duplicates t
-                window-ring-focus 0
-                window-ring-windows '()
-                window-ring nil
-                window-ring-nil-buffer-name "*Window-Ring Buffer*"
-                window-ring-background-index 0
-                window-ring-background-color-options '("gray19" "gray12" "gray4")
-              )
-  (get-buffer-create window-ring-nil-buffer-name)
-  (add-hook 'kill-buffer-hook #'window-ring-remove-buffer)
   )
 
 (defun window-ring-edit-commit ()
   (interactive)
-  (let ((order (s-split "\n" (buffer-substring-no-properties (point-min) (point-max)) t)))
-    (setq window-ring (make-ring window-ring-size)
-          window-ring-background-index 0
-          )
-    (mapc #'window-ring-add-to-head order)
-    (kill-buffer-and-window)
+  (with-window-ring
+      (let ((order (s-split "\n" (buffer-substring-no-properties
+                                  (point-min) (point-max)) t)))
+        (modify-persp-parameters `((window-ring-actual . ,(make-ring 1))
+                                   (window-ring-focus . 0))
+                                 )
+        (cl-loop for name in order
+                 when (get-buffer (string-trim name))
+                 do
+                 (window-ring-add-to-head (get-buffer (string-trim name)))
+                 )
+        (kill-buffer-and-window)
+        )
     )
+  (window-ring-redisplay)
   )
 
 (setq window-ring-edit-map (make-sparse-keymap))
-(evil-define-key '(normal insert) window-ring-edit-map (kbd "C-c C-c") #'window-ring-edit-commit)
+(define-key window-ring-edit-map (kbd "C-c C-c") #'window-ring-edit-commit)
 
 (define-minor-mode window-ring-edit-minor-mode
   " A Minor mode to commit changes to the order of window ring buffers "
   :lighter "Window-Ring-Edit"
   :keymap window-ring-edit-map
   )
+;;-- end edit
 
 (provide 'window-ring-minor-mode)

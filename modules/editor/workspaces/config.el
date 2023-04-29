@@ -3,7 +3,9 @@
 (load! "+vars")
 (after! jg-bindings-total
   (load! "+bindings"))
-
+(after! (ivy counsel)
+  (load! "+ivys")
+  )
 (use-package! persp-mode
   :unless noninteractive
   :commands persp-switch-to-buffer

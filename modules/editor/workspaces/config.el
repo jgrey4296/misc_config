@@ -92,6 +92,35 @@
                 winner-ring-alist alist
                 winner-pending-undo-ring pending-undo-ring)))))
 
+  ;; Fix #1973: visual selection surviving workspace changes
+  (add-hook 'persp-before-deactivate-functions #'deactivate-mark)
+  (add-hook 'persp-add-buffer-on-after-change-major-mode-filter-functions #'doom-unreal-buffer-p)
+  ;; Don't try to persist dead/remote buffers. They cause errors.
+  (add-hook! 'persp-filter-save-buffers-functions
+             (defun +workspaces-dead-buffer-p (buf)
+               ;; Fix #1525: Ignore dead buffers in PERSP's buffer list
+               (not (buffer-live-p buf)))
+
+             (defun +workspaces-remote-buffer-p (buf)
+               ;; And don't save TRAMP buffers; they're super slow to restore
+               (let ((dir (buffer-local-value 'default-directory buf)))
+                 (ignore-errors (file-remote-p dir)))))
+  (add-hook! 'persp-after-load-state-functions
+    (defun +workspaces-reload-indirect-buffers-h (&rest _)
+      (dolist (ibc +workspaces--indirect-buffers-to-restore)
+        (cl-destructuring-bind (buffer-name . base-buffer-name) ibc
+          (let ((base-buffer (get-buffer base-buffer-name)))
+            (when (buffer-live-p base-buffer)
+              (when (get-buffer buffer-name)
+                (setq buffer-name (generate-new-buffer-name buffer-name)))
+              (make-indirect-buffer base-buffer buffer-name t)))))
+      (setq +workspaces--indirect-buffers-to-restore nil)))
+  (after! posframe
+    ;; Fix #1017: stop session persistence from restoring a broken posframe
+    (add-hook! 'persp-after-load-state-functions
+               (defun +workspaces-delete-all-posframes-h (&rest _)
+                 (posframe-delete-all))))
+
   ;;;; Registering buffers to perspectives
   (add-hook! 'doom-switch-buffer-hook
     (defun +workspaces-add-current-buffer-h ()
@@ -103,49 +132,17 @@
            persp-add-buffer-on-after-change-major-mode-filter-functions)
           (persp-add-buffer (current-buffer) (get-current-persp) nil nil))))
 
-  (add-hook 'persp-add-buffer-on-after-change-major-mode-filter-functions
-            #'doom-unreal-buffer-p)
   (add-hook 'delete-frame-functions #'+workspaces-delete-associated-workspace-h)
   (add-hook 'server-done-hook #'+workspaces-delete-associated-workspace-h)
-  ;; Fix #1973: visual selection surviving workspace changes
-  (add-hook 'persp-before-deactivate-functions #'deactivate-mark)
 
   ;; Otherwise, buffers opened via bookmarks aren't treated as "real" and are
   ;; excluded from the buffer list.
   (add-hook 'bookmark-after-jump-hook #'+workspaces-add-current-buffer-h)
 
-  (after! posframe
-    ;; Fix #1017: stop session persistence from restoring a broken posframe
-    (add-hook! 'persp-after-load-state-functions
-               (defun +workspaces-delete-all-posframes-h (&rest _)
-                 (posframe-delete-all))))
-
-  ;; Don't try to persist dead/remote buffers. They cause errors.
-  (add-hook! 'persp-filter-save-buffers-functions
-             (defun +workspaces-dead-buffer-p (buf)
-               ;; Fix #1525: Ignore dead buffers in PERSP's buffer list
-               (not (buffer-live-p buf)))
-
-             (defun +workspaces-remote-buffer-p (buf)
-               ;; And don't save TRAMP buffers; they're super slow to restore
-               (let ((dir (buffer-local-value 'default-directory buf)))
-                 (ignore-errors (file-remote-p dir)))))
-
   (add-hook! 'jg-projects-switch-hook
              #'+workspaces-set-project-action-fn
              #'+workspaces-switch-to-project-h
              )
-
-  (add-hook! 'persp-after-load-state-functions
-    (defun +workspaces-reload-indirect-buffers-h (&rest _)
-      (dolist (ibc +workspaces--indirect-buffers-to-restore)
-        (cl-destructuring-bind (buffer-name . base-buffer-name) ibc
-          (let ((base-buffer (get-buffer base-buffer-name)))
-            (when (buffer-live-p base-buffer)
-              (when (get-buffer buffer-name)
-                (setq buffer-name (generate-new-buffer-name buffer-name)))
-              (make-indirect-buffer base-buffer buffer-name t)))))
-      (setq +workspaces--indirect-buffers-to-restore nil)))
 
   ;; tab-bar
   (add-hook! 'tab-bar-mode-hook
@@ -187,32 +184,6 @@
   (advice-add #'persp-asave-on-exit :around #'+workspaces-autosave-real-buffers-a)
 
   ;;-- end advice
-
-  (setq projectile-switch-project-action #'+jg-projects-switch)
-
-  (setq counsel-projectile-switch-project-action
-        '(1 ("o" +workspaces-switch-to-project-h "open project in new workspace")
-          ("O" counsel-projectile-switch-project-action "jump to a project buffer or file")
-          ("f" counsel-projectile-switch-project-action-find-file "jump to a project file")
-          ("d" counsel-projectile-switch-project-action-find-dir "jump to a project directory")
-          ("D" counsel-projectile-switch-project-action-dired "open project in dired")
-          ("b" counsel-projectile-switch-project-action-switch-to-buffer "jump to a project buffer")
-          ("m" counsel-projectile-switch-project-action-find-file-manually "find file manually from project root")
-          ("w" counsel-projectile-switch-project-action-save-all-buffers "save all project buffers")
-          ("k" counsel-projectile-switch-project-action-kill-buffers "kill all project buffers")
-          ("r" counsel-projectile-switch-project-action-remove-known-project "remove project from known projects")
-          ("c" counsel-projectile-switch-project-action-compile "run project compilation command")
-          ("C" counsel-projectile-switch-project-action-configure "run project configure command")
-          ("e" counsel-projectile-switch-project-action-edit-dir-locals "edit project dir-locals")
-          ("v" counsel-projectile-switch-project-action-vc "open project in vc-dir / magit / monky")
-          ("s" (lambda (project)
-                 (let ((projectile-switch-project-action
-                        (lambda () (call-interactively #'+ivy/project-search))))
-                   (counsel-projectile-switch-project-by-name project))) "search project")
-          ("xs" counsel-projectile-switch-project-action-run-shell "invoke shell from project root")
-          ("xe" counsel-projectile-switch-project-action-run-eshell "invoke eshell from project root")
-          ("xt" counsel-projectile-switch-project-action-run-term "invoke term from project root")
-          ("X" counsel-projectile-switch-project-action-org-capture "org-capture into project")))
 
   (when (modulep! :completion ivy)
     (after! ivy-rich

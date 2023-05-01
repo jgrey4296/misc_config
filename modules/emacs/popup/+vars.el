@@ -61,3 +61,9 @@ adjustment.")
                                 )
                      )
                     )
+
+(spec-handling-add! popup t
+                    '(defaults
+                       ("*jg-customised*" :priority -200)
+                       )
+                    )

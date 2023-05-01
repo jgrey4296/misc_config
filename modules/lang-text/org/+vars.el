@@ -93,11 +93,11 @@
                      (org-mode :trigger "__")
                      )
                     )
-(spec-handling-add! fold nil
+(spec-handling-add! fold t
                     '(org
                      :modes (org-mode doom-docs-org-mode)
-                     :triggers (:open-all   nil
-                                :close-all  org-cycle-global
+                     :triggers (:open-all   +org/open-all-folds
+                                :close-all  +org/close-all-folds
                                 :toggle     org-cycle
                                 :open       nil
                                 :open-rec   nil

@@ -38,8 +38,6 @@ stored in `persp-save-dir'.")
 
 (defvar jg-projects-doot-cmd "doot")
 
-(defvar jg-projects-doit-cmd "doit")
-
 (setq projectile-completion-system 'ivy
       counsel-compile-local-builds '(
                                      +jg-projects-get-doot-commands
@@ -51,6 +49,7 @@ stored in `persp-save-dir'.")
                                      )
       )
 
+;;-- persp
 (setq persp-autokill-buffer-on-remove 'kill-weak
       persp-reset-windows-on-nil-window-conf nil
       persp-nil-hidden t
@@ -71,23 +70,49 @@ stored in `persp-save-dir'.")
       persp-emacsclient-init-frame-behaviour-override #'+workspaces-associate-frame-fn
       )
 
+(setq projectile-switch-project-action #'+jg-projects-switch)
+
+(setq counsel-projectile-switch-project-action
+      '(1 ("o" +workspaces-switch-to-project-h "open project in new workspace")
+        ("O" counsel-projectile-switch-project-action "jump to a project buffer or file")
+        ("f" counsel-projectile-switch-project-action-find-file "jump to a project file")
+        ("d" counsel-projectile-switch-project-action-find-dir "jump to a project directory")
+        ("D" counsel-projectile-switch-project-action-dired "open project in dired")
+        ("b" counsel-projectile-switch-project-action-switch-to-buffer "jump to a project buffer")
+        ("m" counsel-projectile-switch-project-action-find-file-manually "find file manually from project root")
+        ("w" counsel-projectile-switch-project-action-save-all-buffers "save all project buffers")
+        ("k" counsel-projectile-switch-project-action-kill-buffers "kill all project buffers")
+        ("r" counsel-projectile-switch-project-action-remove-known-project "remove project from known projects")
+        ("c" counsel-projectile-switch-project-action-compile "run project compilation command")
+        ("C" counsel-projectile-switch-project-action-configure "run project configure command")
+        ("e" counsel-projectile-switch-project-action-edit-dir-locals "edit project dir-locals")
+        ("v" counsel-projectile-switch-project-action-vc "open project in vc-dir / magit / monky")
+        ("s" (lambda (project)
+               (let ((projectile-switch-project-action
+                      (lambda () (call-interactively #'+ivy/project-search))))
+                 (counsel-projectile-switch-project-by-name project))) "search project")
+        ("xs" counsel-projectile-switch-project-action-run-shell "invoke shell from project root")
+        ("xe" counsel-projectile-switch-project-action-run-eshell "invoke eshell from project root")
+        ("xt" counsel-projectile-switch-project-action-run-term "invoke term from project root")
+        ("X" counsel-projectile-switch-project-action-org-capture "org-capture into project")))
+
+
+;;-- end persp
+
 ;;-- specs
 (spec-handling-add! popup nil
                     '(window-ring
-                       ("^\\*WR Buffers: "         :side left :ttl nil :width  0.2 :quit nil :select nil :priority 50)
+                      ("^\\*WR Buffers: "         :side left :ttl nil :width  0.2 :quit nil :select nil :priority 50)
+                      )
+                    '(proj-walk
+                     ("^\\*Project-Walk\\*" :side left :ttl nil :quit t :select nil :priority -50)
+                     )
                     )
-)
 
 (spec-handling-add! file-templates nil
                     '(project
                      ("/doot\\.toml$" :trigger "__doot_toml" :mode conf-toml-mode)
                      ("/Makefile$"             :mode makefile-gmake-mode)
-                     )
-                    )
-
-(spec-handling-add! popup nil
-                    '(proj-walk
-                     ("^\\*Project-Walk\\*" :side left :ttl nil :quit t :select nil :priority -50)
                      )
                     )
 ;;-- end specs

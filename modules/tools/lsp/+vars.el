@@ -59,11 +59,9 @@
 ;;-- specs
 (spec-handling-add! popup nil
                     '(lsp
-                     (
                       ("^\*lsp session\*"  :side right  :ttl nil :width 0.5 :quit t :select nil :priority 50)
                       ("^\\*lsp-\\(help\\|install\\)" :size 0.35 :quit t :select t)
                       ("^\\*eglot-help" :size 0.15 :quit t :select t)
-                      )
                      )
                     )
 

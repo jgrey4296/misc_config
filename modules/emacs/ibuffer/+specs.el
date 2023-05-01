@@ -82,32 +82,36 @@
 ;; Groups:
 
 (spec-handling-add! ibuffer-groups nil
-                    '(default  (("*Starred*"   (saved . "stars"))
-                                ("*Project: configs" (projectile-root . "__configs"))
-                                ("*Project: writing" (projectile-root . "jgrey4296.github.io"))
-                                ))
-                    '(starred (("*Starred*"   (saved . "stars"))))
-                    '(General (("Starred"     (saved . "stars"))
-                               ("org"         (saved . "org"))
-                               ("programming" (saved . "programming"))
-                               ("dired"       (saved . "dired"))))
-                    '(org     (("org"         (saved . "org"))))
-                    '(dired   (("dired"       (saved . "dired"))))
+                    '(default
+                       ("*Starred*"   (saved . "stars"))
+                       ("*Project: configs" (projectile-root . "__configs"))
+                       ("*Project: writing" (projectile-root . "jgrey4296.github.io"))
+                       )
+                    '(starred ("*Starred*"   (saved . "stars")))
+                    '(general
+                      ("Starred"     (saved . "stars"))
+                      ("org"         (saved . "org"))
+                      ("programming" (saved . "programming"))
+                      ("dired"       (saved . "dired"))
+                      )
+                    '(org     ("org"         (saved . "org")))
+                    '(dired   ("dired"       (saved . "dired")))
                     )
 
 (spec-handling-add! ibuffer-groups nil
-                    '(projects (("*Starred*" (starred-name))
-                                ("*Project: configs*" (projectile-root . "__configs"))
-                                ("*Project: modules*" (projectile-root . "modules"))
-                                ("*Project: writing*" (projectile-root . "jgrey4296.github.io"))
-                                ("*Project: Dropbox*" (projectile-root . "Dropbox"))
-                                ))
-                    '(programming (("programming" (saved . "programming"))))
+                    '(projects
+                      ("*Starred*" (starred-name))
+                      ("*Project: configs*" (projectile-root . "__configs"))
+                      ("*Project: modules*" (projectile-root . "modules"))
+                      ("*Project: writing*" (projectile-root . "jgrey4296.github.io"))
+                      ("*Project: Dropbox*" (projectile-root . "Dropbox"))
+                      )
+                    '(programming ("programming" (saved . "programming")))
                     )
 
 (spec-handling-extend! ibuffer-groups nil
                        '(programming
-                        ("python" (derived-mode . python-mode))
-                        ("lisp"   (derived-mode . emacs-lisp-mode))
-                        )
+                         ("python" (derived-mode . python-mode))
+                         ("lisp"   (derived-mode . emacs-lisp-mode))
+                         )
                        )

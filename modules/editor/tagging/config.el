@@ -9,8 +9,7 @@
 (after! jg-bindings-total
   (load! "+bindings")
   )
-(after! (evil org)
-  ;; (+jg-tag-rebuild-tag-database)
+(after! evil-ex
   (evil-define-operator +jg-tag-helm-start (beg end rest)
     (interactive "<R>")
     (+jg-tag-helm-tagger beg end)
@@ -22,7 +21,6 @@
   )
 (use-package! tagging-minor-mode
   :after (evil helm)
-  :commands global-tagging-minor-mode
   :config
   (tagging-minor-mode-rebuild-tag-database)
   )
@@ -38,4 +36,3 @@
                                             )
                                       )
                           )
-(spec-handling-clear! tagging)

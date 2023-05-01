@@ -20,16 +20,10 @@
 
 (use-package! ibuffer-projectile
   ;; Group ibuffer's list by project root
-  ;; :hook (ibuffer . ibuffer-projectile-set-filter-groups)
+  :hook (ibuffer . ibuffer-projectile-set-filter-groups)
   :config
-  (setq ibuffer-projectile-prefix
-        (if (modulep! +icons)
-            (concat (all-the-icons-octicon
-                     "file-directory"
-                     :face ibuffer-filter-group-name-face
-                     :v-adjust -0.05)
-                    " ")
-          "Project: ")))
+  (setq ibuffer-projectile-prefix "Project: ")
+  )
 
 (use-package! ibuffer-vc
   :after ibuffer
@@ -55,10 +49,8 @@
                     (cons (symbol-name key) val)
                     )
 
-(spec-handling-new! ibuffer-groups ibuffer-saved-filter-groups nil append
-                    (cl-loop for rule in val
-                             collect (cons key val)
-                             )
+(spec-handling-new! ibuffer-groups ibuffer-saved-filter-groups nil collect
+                    (cons (symbol-name key) val)
                     )
 
 (spec-handling-new! ibuffer-formats ibuffer-formats nil collect

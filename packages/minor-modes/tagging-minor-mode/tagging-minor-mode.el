@@ -40,10 +40,10 @@
 
 (defvar tagging-minor-mode-all-tags         nil)
 
-(defvar-local tagging-minor-mode-handlers '(:new #'tagging-minor-mode-new-tag-default
-                                            :set #'tagging-minor-mode-set-tags-default
-                                            :get #'tagging-minor-mode-get-tag-default
-                                            :buff #'tagging-minor-mode-buffer-tags-default
+(defvar-local tagging-minor-mode-handlers '(:new tagging-minor-mode-new-tag-default
+                                            :set tagging-minor-mode-set-tags-default
+                                            :get tagging-minor-mode-get-tag-default
+                                            :buff tagging-minor-mode-buffer-tags-default
                                             )
                                             "A plist of handlers for tagging")
 

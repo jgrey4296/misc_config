@@ -236,7 +236,7 @@ TODO: add spec format docstring
                  (if (null adds)
                      (princ "\n*** No Additions Defined\n")
                    (princ "\n*** Additions Defined in: \n")
-                   (dolist (add adds) (princ (format "%s\n" (cadr add)))))
+                   (dolist (add adds) (princ (format "[[%s]]\n" (cadr add)))))
                  (when exts
                    (dolist (ext exts) (princ (format "**** Extended in %s\n" (cadr ext)))))
                  (when sets

@@ -10,7 +10,7 @@
   (load! "+bindings")
   )
 
-(spec-handling-new! popup display-buffer-alist t append
+(spec-handling-new! popup display-buffer-alist t collect
                     (cl-loop for rule in val
                              collect
                              (cons (* -1 (or (plist-get (cdr rule) :priority) 0))
@@ -19,11 +19,6 @@
                              )
                     )
 
-(spec-handling-add! popup t
-                    '(defaults
-                       ("*jg-customised*" :priority -200)
-                       )
-                    )
 
 (add-hook! 'doom-init-ui-hook   #'+popup-mode 'append)
 

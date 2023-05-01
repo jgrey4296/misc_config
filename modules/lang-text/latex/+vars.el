@@ -97,8 +97,8 @@ If no viewer is found, `latex-preview-pane-mode' is used.")
 
 ;;-- specs
 (spec-handling-add! company nil
-                    '(reftex-mode (:mode . #'company-reftex-labels) (:mode . #'company-reftex-citations))
-                    '(latex-mode (:mode . #'company-auctex-environments) (:mode . #'company-auctex-macros) (:mode . #'+latex-symbols-company-backend))
+                    '(reftex-mode (:mode . company-reftex-labels) (:mode . company-reftex-citations))
+                    '(latex-mode (:mode . company-auctex-environments) (:mode . company-auctex-macros) (:mode . +latex-symbols-company-backend))
                     )
 (spec-handling-add! lookup-url nil
                     '(latex

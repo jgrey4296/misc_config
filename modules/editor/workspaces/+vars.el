@@ -1,6 +1,7 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
 ;;-- defs
+
 (defvar +workspaces-main "main"
   "The name of the primary and initial workspace, which cannot be deleted.")
 
@@ -20,13 +21,35 @@ t           Always create a new workspace for the project
 nil         Never create a new workspace on project switch.")
 
 ;; FIXME actually use this for wconf bookmark system
+
 (defvar +workspaces-data-file "_workspaces"
   "The basename of the file to store single workspace perspectives. Will be
 stored in `persp-save-dir'.")
 
 (defvar +workspace--old-uniquify-style nil)
 
+(defvar +workspaces--indirect-buffers-to-restore nil)
+
 ;;-- end defs
+
+(defvar jg-projects-switch-hook nil)
+
+(defvar jg-projects-cmd-cache-name ".projectile-cmds")
+
+(defvar jg-projects-doot-cmd "doot")
+
+(defvar jg-projects-doit-cmd "doit")
+
+(setq projectile-completion-system 'ivy
+      counsel-compile-local-builds '(
+                                     +jg-projects-get-doot-commands
+                                     +jg-projects-get-gradle-commands
+                                     ;; counsel-compile-get-filtered-history
+                                     ;; counsel-compile-get-build-directories
+                                     counsel-compile-get-make-invocation
+                                     counsel-compile-get-make-help-invocations
+                                     )
+      )
 
 (setq persp-autokill-buffer-on-remove 'kill-weak
       persp-reset-windows-on-nil-window-conf nil
@@ -48,8 +71,23 @@ stored in `persp-save-dir'.")
       persp-emacsclient-init-frame-behaviour-override #'+workspaces-associate-frame-fn
       )
 
+;;-- specs
 (spec-handling-add! popup nil
                     '(window-ring
                        ("^\\*WR Buffers: "         :side left :ttl nil :width  0.2 :quit nil :select nil :priority 50)
                     )
 )
+
+(spec-handling-add! file-templates nil
+                    '(project
+                     ("/doot\\.toml$" :trigger "__doot_toml" :mode conf-toml-mode)
+                     ("/Makefile$"             :mode makefile-gmake-mode)
+                     )
+                    )
+
+(spec-handling-add! popup nil
+                    '(proj-walk
+                     ("^\\*Project-Walk\\*" :side left :ttl nil :quit t :select nil :priority -50)
+                     )
+                    )
+;;-- end specs

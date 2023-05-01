@@ -1,13 +1,17 @@
 ;;; jg-list/+funcs.el --- summary -*- lexical-binding: t -*-
 
 ;; Simple Functions to feed into sort-subr
+
 (defun +jg-lisp-key-start ()
   (re-search-forward "(defun " nil t)
   (symbol-at-point))
+
 (defun +jg-lisp-next-rec-end-func ()
   (evil-forward-end 'evil-defun))
+
 (defun +jg-lisp-next-rec-func ()
   (evil-forward-beginning 'evil-defun))
+
 (defun +jg-lisp-sort-defuns ()
   " A Lisp buffer sorting function "
   (interactive)
@@ -19,6 +23,7 @@
              #'+jg-lisp-key-start)
   (goto-char (point-min))
   )
+
 (defun +jg-lisp-eval (beg end)
   "Evaluate a region and print it to the echo area (if one line long), otherwise
 to a pop up buffer."
@@ -41,7 +46,7 @@ to a pop up buffer."
 
 (defun +jg-lisp-cleanup-ensure-newline()
   (while (re-search-forward (rx (group ) (opt ";;;###" (+? any) "\n")
-                                (syntax open-parenthesis)  (| "def" "use") (+? any) eol) nil t)
+                                bol (syntax open-parenthesis)  (| "def" "use") (+? any) eol) nil t)
     (goto-char (match-beginning 1))
     (insert "\n")
     (goto-char (match-end 0))

@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name  : asset
+# uuid  : asset
+# key   : asset
+# group :
+# --
+[[asset]]
+author  = "$1"
+source  = ["$2"]
+files   = []
+license = []

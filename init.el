@@ -5,7 +5,7 @@
  :app   (rss +org)
  :completion company ivy
 
- :editor char-insert fold navigation projects tagging text-manipulation
+ :editor char-insert fold navigation tagging text-manipulation
  :editor (evil +everywhere) format
  :editor fold snippets lookup workspaces
  ;;:editor multiple-cursors

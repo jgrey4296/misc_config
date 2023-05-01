@@ -1,6 +1,4 @@
 ;;; lookup-regular.el -*- lexical-binding: t; -*-
-
- ;;; lookup-regular.el -*- lexical-binding: t; no-byte-compile: t;-*-
 ;;-- header
 ;;
 ;; Copyright (C) 2023 John Grey
@@ -27,6 +25,7 @@
 
 ;;-- imports
 (require 'ivy)
+(require 'browse-url)
 ;;-- end imports
 
 ;;-- vars

@@ -57,6 +57,7 @@
 )
 
 (use-package! browse-select)
+(use-package! lookup-regular)
 
 ;;-- specs
 (spec-handling-new! browse-handler browse-url-handlers nil append

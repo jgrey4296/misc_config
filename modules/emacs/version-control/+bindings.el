@@ -5,10 +5,6 @@
 
 (map! :leader
       :desc "Merge Mode"  "g m" #'evil-conflict-merge-state
-      (:prefix "p"
-       :desc "Gradle -q" :n "g" #'+jg-vcs-run-gradle-quiet
-       :desc "Gradle"    :n "G" #'+jg-vcs-run-gradle
-       )
       )
 
 (map! :map magit-mode-map

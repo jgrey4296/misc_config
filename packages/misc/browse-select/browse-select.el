@@ -8,7 +8,7 @@
 
 (defvar browse-select-use-preview t)
 (defvar browse-select-pdf-args  '("-a" "Preview" "-nF"))
-(defvar browse-select-epub=args '("-a" "ebook-viewer"))
+(defvar browse-select-epub-args '("-a" "ebook-viewer"))
 (defvar browse-select-curl-cmd  "curl")
 (defvar browse-select-curl-args  '("-sLI"))
 
@@ -63,14 +63,17 @@
 after `browse-url-handlers` have processed the url
 "
   (cond ((-contains? args 'quicklook)
-         (call-process "qlmanage" nil nil nil "-p" (shell-quote-argument url)))
+         (start-process "open-ql" "*browse-select*" "qlmanage" "-p" (shell-quote-argument url)))
         ((and (-contains? args 'local) (f-ext? url "epub"))
-         (apply 'call-process "open" nil nil nil url browse-select-epub-args))
+         (apply 'start-process "open-epub" "*browse-select*" "open" url browse-select-epub-args)
+         )
         ((and (-contains? args 'local) (f-ext? url "pdf") browse-select-use-preview)
-          (apply 'call-process "open" nil nil nil url browse-select-pdf-args))
+         (apply 'start-process "open-pdf" "*browse-select*" "open" url browse-select-pdf-args)
+         )
         ((not (s-equals? browse-select-default-prog "eww"))
          (message "Using %s" browse-select-default-prog)
-         (call-process browse-select-default-prog nil nil nil url))
+         (start-process "open-url" "*browse-select*" browse-select-default-prog url)
+         )
         (t
          (eww-browse-url url args))
         )

@@ -6,7 +6,7 @@
       :desc "Clear Env"    "d" #'env-handling-clear-env!
       :desc "Report Env"   "r" #'env-handling-report!
       :desc "Lock Env"     "l" #'env-handling-lock!
-      :desc "Create venv"  "c" #'pyvenv-create
+      :desc "Create venv"  "c" #'env-handling-create-env!
 
       )
 

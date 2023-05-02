@@ -6,6 +6,8 @@
 https://firefox-source-docs.mozilla.org/index.html
 https://annas-archive.org/
 https://rust.godbolt.org/
+https://rust-unofficial.github.io/too-many-lists/
+https://doc.rust-lang.org/nightly/nomicon/
 
 * Base Agenda
 Death by Institution and the Harms of Abstraction.

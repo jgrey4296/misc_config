@@ -39,7 +39,7 @@
 (setq-default hs-hide-comments-when-hiding-all nil
               hs-set-up-overlay #'+fold-hideshow-set-up-overlay-fn
               )
-(spec-handling-add! hideshow t
+(spec-handling-add! hideshow nil
                     '(default
                       ;;MODE START END COMMENT-START FORWARD-SEXP-FUNC ADJUST-BEG-FUNC
                       (vimrc-mode "{{{" "}}}" "\"")

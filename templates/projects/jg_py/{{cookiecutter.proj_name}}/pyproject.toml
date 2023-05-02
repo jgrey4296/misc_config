@@ -45,8 +45,8 @@ changelog     = "https://github.com//{{cookiecutter.proj_name}}/blob/master/CHAN
 ##-- build-system
 [build-system]
 requires = [
-         "setuptools",
-         "wheel"
+         "setuptools >= 63.1.0",
+         "wheel >= 0.37.1"
 ]
 
 build-backend = "setuptools.build_meta"
@@ -55,10 +55,12 @@ build-backend = "setuptools.build_meta"
 include-package-data = true
 
 [tool.setuptools.packages.find]
-where = ["."]
+namespaces = true
+where      = ["."]
+include    = ["{{cookiecutter.proj_name}}*"]
 
 [tool.setuptools.package-data]
-"{{cookiecutter.proj_name}}.__configs" = []
+"*" = ["*"]
 "{{cookiecutter.proj_name}}.__data"    = ["*.so"]
 
 [tool.setuptools.exclude-package-data]

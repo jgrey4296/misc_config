@@ -6,9 +6,12 @@
 
   )
 (load! "+repl")
-(load! "+gradle")
 (after! projectile
   (pushnew! projectile-project-root-files "gradlew" "build.gradle"))
+(after! ivy
+  (ivy-configure 'jg-vcs-gradle-ivy
+    :format-fn #'jg-vcs-format-gradle)
+)
 
 (use-package! java-mode
   :commands java-mode

@@ -13,6 +13,9 @@
 ;;;###autoload
 (defvar env-handling-markers '(".venv" ".conda" "Pipfile" "pyproject.toml"))
 
+(defconst env-handling-process-name "env-handling-proc")
+(defconst env-handling-buffer-name "*env-handling*")
+
 ;;-- end vars
 
 ;;;###autoload
@@ -193,33 +196,48 @@ and call the currently used lsp/conda client entrypoint"
   )
 
 ;;;###autoload
-(defun env-handling-create-env ()
+(defun env-handling-create-env! ()
   (interactive)
   (let ((setup (ivy-read "Python Env Handler: " (env-handling--get-handlers :setup) :require-match t))
         (name (read-string "Conda Env to create: "))
         (ver  (format "python=%s" (read-string "Python Version: " "3.11")))
-        (packages (split-string (read-string "Packages: ") " " t t))
+        (packages (split-string (read-string "Packages: ") " " t " +"))
         )
     (pcase setup
-      ("conda" (apply 'call-process "conda" nil nil nil "create" "-n" name ver packages))
-      ("venv"  (apply 'call-process "python" nil nil nil "-m" "venv" (read-directory-name "Venv Dir: " default-directory)))
-      (""
-       )
+      ("conda" (apply 'start-process env-handling-process-name env-handling-buffer-name "conda" "create" "--yes" "-n" name ver packages))
+      ("venv"
+       ;; (apply 'start-process env-handling-process-name env-handling-buffer-name "python" "-m" "venv" (read-directory-name "Venv Dir: " default-directory)))
+       (pyvenv-create))
+      (_ (message "Unrecognized env setup choice"))
       )
     )
   )
 
 ;;;###autoload
-(defun env-handling-add-package ()
+(defun env-handling-add-package! ()
   (interactive)
   (let ((setup (ivy-read "Python Env Handler: " (env-handling--get-handlers :setup) :require-match t))
         (packages (split-string (read-string "Packages: ") " " t t))
         )
     (pcase setup
-      ("conda" (apply 'call-process "conda" nil nil nil "install" packages))
-      ("pip"   (apply 'call-process "pip" nil nil nil "install" packages))
+      ("conda" (apply 'start-process env-handling-process-name env-handling-buffer-name "conda" "install" "--yes" packages))
+      ("pip"   (apply 'start-process env-handling-process-name env-handling-buffer-name "pip" "--no-input" "install" packages))
       ("poetry" (poetry-add))
-      ("pipenv" (apply 'call-process "pipenv" nil nil nil "install" packages))
+      ("pipenv" (apply 'start-process env-handling-process-name env-handling-buffer-name "pipenv" "--non-interactive" "install" packages))
+      )
+    )
+  )
+
+;;;###autoload
+(defun env-handling-update! ()
+  (interactive)
+  (let ((setup (ivy-read "Python Env Handler: " (env-handling--get-handlers :setup) :require-match t))
+        )
+    (pcase setup
+      ("conda" (apply 'start-process env-handling-process-name env-handling-buffer-name "conda" "update" "--all" "--yes"))
+      ("pip"   (apply 'start-process env-handling-process-name env-handling-buffer-name "pip" "--no-input" "install" "--upgrade" ))
+      ("poetry" (poetry-update))
+      ("pipenv" (apply 'start-process env-handling-process-name env-handling-buffer-name "pipenv" "--non-interactive" "upgrade" ))
       )
     )
   )

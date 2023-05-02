@@ -58,13 +58,14 @@
       )
 (map! :map bibtex-mode-map ;; jump
       :after bibtex
+      :i "s" #'self-insert-command
       :prefix ("s j" . "bibtex")
-      :desc "Load Random Bibtex entry" "r"   #'+jg-bibtex-load-random
-      :desc "Jump to Pdf"              "p"   #'+jg-bibtex-open-pdf
-      :desc "Jump to url"              "u"   #'+jg-bibtex-open-url
-      :desc "Jump to doi"              "d"   #'+jg-bibtex-open-doi
-      :desc "Jump to Crossref"         "c"   #'+jg-bibtex-goto-crossref-entry
-      :desc "Jump to Quicklook"        "l"   #'+jg-bibtex-quicklook-pdf
+      :desc "Load Random Bibtex entry" :n "r"   #'+jg-bibtex-load-random
+      :desc "Jump to Pdf"              :n "p"   #'+jg-bibtex-open-pdf
+      :desc "Jump to url"              :n "u"   #'+jg-bibtex-open-url
+      :desc "Jump to doi"              :n "d"   #'+jg-bibtex-open-doi
+      :desc "Jump to Crossref"         :n "c"   #'+jg-bibtex-goto-crossref-entry
+      :desc "Jump to Quicklook"        :n "l"   #'+jg-bibtex-quicklook-pdf
       )
 (map! :map bibtex-mode-map ;; vars
       :after bibtex

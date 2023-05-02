@@ -38,8 +38,7 @@ stored in `persp-save-dir'.")
 
 (defvar jg-projects-doot-cmd "doot")
 
-(setq projectile-completion-system 'ivy
-      counsel-compile-local-builds '(
+(setq counsel-compile-local-builds '(
                                      +jg-projects-get-doot-commands
                                      +jg-projects-get-gradle-commands
                                      ;; counsel-compile-get-filtered-history
@@ -48,6 +47,41 @@ stored in `persp-save-dir'.")
                                      counsel-compile-get-make-help-invocations
                                      )
       )
+
+;;-- projectile
+(setq projectile-completion-system 'ivy
+      projectile-cache-file (concat doom-cache-dir "projectile.cache")
+      projectile-auto-discover nil ;; Auto-discovery is slow instead (`projectile-discover-projects-in-search-path').
+      projectile-enable-caching (not noninteractive)
+      projectile-globally-ignored-files '(".DS_Store" "TAGS")
+      projectile-globally-ignored-file-suffixes '(".elc" ".pyc" ".o")
+      projectile-kill-buffers-filter 'kill-only-files
+      projectile-known-projects-file (concat doom-cache-dir "projectile.projects")
+      projectile-ignored-projects '("~/")
+      projectile-ignored-project-function #'doom-project-ignored-p)
+
+;; In the interest of performance, we reduce the number of project root marker
+;; files/directories projectile searches for when resolving the project root.
+(setq projectile-project-root-files-bottom-up '(".projectile"  ; projectile's root marker
+                                                ".project"     ; doom project marker
+                                                ".git"        ; Git VCS root dir
+                                                )
+      ;; This will be filled by other modules. We build this list manually so
+      ;; projectile doesn't perform so many file checks every time it resolves
+      ;; a project's root -- particularly when a file has no project.
+      projectile-project-root-files '()
+      projectile-project-root-files-top-down-recurring '("Makefile" "doot.toml" "Cargo.toml")
+
+      compilation-buffer-name-function #'projectile-compilation-buffer-name
+      compilation-save-buffers-predicate #'projectile-current-project-buffer-p
+
+      projectile-git-submodule-command nil
+      projectile-indexing-method 'hybrid
+      projectile-generic-command #'+jg-projects-generic-command
+      )
+
+
+;;-- end projectile
 
 ;;-- persp
 (setq persp-autokill-buffer-on-remove 'kill-weak
@@ -96,7 +130,6 @@ stored in `persp-save-dir'.")
         ("xt" counsel-projectile-switch-project-action-run-term "invoke term from project root")
         ("X" counsel-projectile-switch-project-action-org-capture "org-capture into project")))
 
-
 ;;-- end persp
 
 ;;-- specs
@@ -114,5 +147,33 @@ stored in `persp-save-dir'.")
                      ("/doot\\.toml$" :trigger "__doot_toml" :mode conf-toml-mode)
                      ("/Makefile$"             :mode makefile-gmake-mode)
                      )
+                    )
+
+(spec-handling-add! project-ignored nil
+                    `(doom
+                      ,(abbreviate-file-name doom-local-dir)
+                      )
+                    '(default
+                       "^\\.idea$"
+                       "^\\.vscode$"
+                       "^\\.ensime_cache$"
+                       "^\\.eunit$"
+                       "^\\.git$"
+                       "^\\.hg$"
+                       "^\\.fslckout$"
+                       "^_FOSSIL_$"
+                       "^\\.bzr$"
+                       "^_darcs$"
+                       "^\\.pijul$"
+                       "^\\.tox$"
+                       "^\\.svn$"
+                       "^\\.stack-work$"
+                       "^\\.ccls-cache$"
+                       "^\\.cache$"
+                       "^\\.clangd$"
+                    )
+                    '(doot
+                      ".temp"
+                      )
                     )
 ;;-- end specs

@@ -144,7 +144,7 @@
             ,@(plist-get plist :parameters))))
     (if (plist-get plist :ignore)
         `(,predicate ())
-      `(,predicate (+popup-buffer)
+      `(,predicate +popup-buffer
         ,@alist
         (window-parameters ,@params)))
     )

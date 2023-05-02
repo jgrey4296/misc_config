@@ -1,10 +1,6 @@
-;;; +gradle.el -*- lexical-binding: t; -*-
+;;; gradle.el -*- lexical-binding: t; -*-
 
-(after! ivy
-  (ivy-configure 'jg-vcs-gradle-ivy
-    :format-fn #'jg-vcs-format-gradle)
-)
-
+;;;###autoload
 (defun +jg-vcs-format-gradle (cands)
   " Custom ivy format function to align and use the hashtable values"
   (let* ((maxlen (+ 5 (apply 'max (mapcar 'length (hash-table-keys +jg-vcs-task-hash)))))
@@ -21,6 +17,7 @@
     )
   )
 
+;;;###autoload
 (defun +jg-vcs-run-gradle (prefix)
   (interactive "P")
   (when (or prefix (hash-table-empty-p +jg-vcs-task-hash))
@@ -53,6 +50,7 @@
     )
   )
 
+;;;###autoload
 (defun +jg-vcs-run-gradle-quiet (prefix)
   (interactive "P")
   (let ((+jg-vcs-gradle-command-args (cons "-q" +jg-vcs-gradle-command-args)))

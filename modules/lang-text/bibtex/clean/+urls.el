@@ -1,5 +1,12 @@
 ;;; +urls.el -*- lexical-binding: t; -*-
 
+
+(defun +jg-bibtex--url-matcher (x)
+  (when (and (string-match "url" (car x))
+             (<= (length (cdr x)) 30))
+    (cons (car x) (substring (cdr x) 1 -1)))
+  )
+
 ;;;###autodef
 (defun +jg-bibtex--expand-shortened-url ()
   "Expand a shortened url, using CuRL
@@ -7,10 +14,7 @@ https://tecnoysoft.com/en/how-to-obtain-the-real-url-behind-a-shortened-url-usin
  "
   (bibtex-beginning-of-entry)
   (let* ((entry (bibtex-parse-entry))
-         (matcher (lambda (x) (when (and (string-match "url" (car x))
-                                         (<= (length (cdr x)) 30))
-                                (cons (car x) (substring (cdr x) 1 -1)))))
-         (urls (-filter 'identity (mapcar matcher entry)))
+         (urls (-reject #'(lambda (x) (or (null x) (string-equal (cdr x) ""))) (mapcar #'+jg-bibtex--url-matcher entry)))
          (result-buffer (get-buffer-create "*CurlResponse*"))
          expanded
          )

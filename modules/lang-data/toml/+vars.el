@@ -15,3 +15,9 @@
                       +jg-text-cleanup-whitespace
                       )
                     )
+
+(spec-handling-add! lookup-regular nil
+                    '(conf-toml-mode
+                      ("toml spec" . "https://toml.io/en/v1.0.0")
+                      )
+                    )

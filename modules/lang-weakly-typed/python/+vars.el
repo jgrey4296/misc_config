@@ -216,6 +216,7 @@
                     )
 (spec-handling-add! lookup-regular nil
                     '(python-mode
+                      ("pyproject.toml spec" . "https://packaging.python.org/en/latest/specifications/declaring-project-metadata/#declaring-project-metadata")
                       ("argparse"          . "https://docs.python.org/3/howto/argparse.html")
                       ("astroid"           . "https://pylint.pycqa.org/projects/astroid/en/latest/index.html")
                       ("beautiful Soup"    . "https://beautiful-soup-4.readthedocs.io/en/latest/")
@@ -266,6 +267,7 @@
                       ("re"                . "https://docs.python.org/3/library/re.html")
                       ("rich"              . "https://rich.readthedocs.io/en/stable/introduction.html")
                       ("scikit-learn"      . "https://scikit-learn.org/stable/user_guide.html")
+                      ("scrapy"            . "https://docs.scrapy.org/en/latest/")
                       ("scons"             . "https://scons.org/documentation.html")
                       ("seaborn"           . "https://seaborn.pydata.org/api.html")
                       ("setuptools"        . "https://setuptools.readthedocs.io/en/latest/userguide/index.html")

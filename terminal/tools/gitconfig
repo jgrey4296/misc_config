@@ -9,6 +9,7 @@
 [core]
 	excludesfile = ~/.gitignore_global
 [init]
+	defaultBranch = main
 	templateDir = ~/.doom.d/templates/git
 [commit]
 	template = ~/.doom.d/templates/files/git/commit

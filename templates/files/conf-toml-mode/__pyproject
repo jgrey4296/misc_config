@@ -1,24 +1,18 @@
 [project]
 name            = "$1"
-version         = "0.0.1"
+version         = "0.1.0"
 description     = ""
 readme          = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 license         = {file = "LICENSE"}
 keywords        = []
 authors         = [
-  {email = "jgrey4296@gmail.com"},
-  {name  = "J Grey"}
+  {email = "jgrey4296@gmail.com", name  = "J Grey"}
 ]
 classifiers     = [
   "Programming Language :: Python"
 ]
-urls = {
-     homepage      = "https://github.com/jgrey4296/$1",
-     documentation = "https://readthedocs.org/$1",
-     repository    = "https://github.com/jgrey4296/$1",
-     changelog     = "https://github.com/jgrey4296/$1/spam/blob/master/CHANGELOG.md",
-}
+
 
 ##-- dependencies
 dependencies   = []
@@ -29,6 +23,15 @@ test = [
 ]
 
 ##-- end dependencies
+
+##-- urls
+[project.urls]
+homepage      = "https://github.com/jgrey4296/$1",
+documentation = "https://readthedocs.org/$1",
+repository    = "https://github.com/jgrey4296/$1",
+changelog     = "https://github.com/jgrey4296/$1/spam/blob/master/CHANGELOG.md",
+
+##-- end urls
 
 ##-- entry points
 [project.scripts] # CLI
@@ -47,12 +50,12 @@ test = [
 # frontend: https://pypa-build.readthedocs.io/en/latest/index.html
 # frontend: https://pdm.fming.dev/latest/
 requires = [
-         "setuptools",
-         "wheel",
+         "setuptools >= 63.1.0",
+         "wheel >= 0.37.1"
          # https://flit.pypa.io/en/stable/index.html
          # "flit_core > 3.2, <4",
          # https://pdm-backend.fming.dev/
-         "pdm-backend"
+         # "pdm-backend"
 
 ]
 
@@ -61,15 +64,15 @@ build-backend = "setuptools.build_meta"
 # build-backend = "pdm.backend"
 
 [tool.setuptools]
-# packages = ['$1']
 include-package-data = true
 
 [tool.setuptools.packages.find]
 namespaces = true
-where = ["."]
+where      = ["."]
+include    = ["$1*"]
 
 [tool.setuptools.package-data]
-$1 = []
+"*" = ["*"]
 
 [tool.setuptools.exclude-package-data]
 

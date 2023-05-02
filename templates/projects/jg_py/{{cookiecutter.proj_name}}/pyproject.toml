@@ -67,6 +67,8 @@ include    = ["{{cookiecutter.proj_name}}*"]
 
 ##-- end build-system
 
+# Tools #######################################################################
+
 ##-- pyright
 [tool.pyright]
 # strict = {{cookiecutter.proj_name}}.*

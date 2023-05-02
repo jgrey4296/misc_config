@@ -68,9 +68,7 @@ TODO
 
 ;;;###autoload
 (defun +jg-python-cleanup-ensure-newline-before-def ()
-  (while (re-search-forward "\\(\n\\)\\(\s*@.+?\n\\)*\s*\\
-
-(def\\|class\\)" nil t)
+  (while (re-search-forward "\\(\n\\)\\(\s*@.+?\n\\)*\s*\\(def\\|class\\)" nil t)
     (goto-char (match-end 1))
     (insert "\n")
     (goto-char (match-end 0))
@@ -82,8 +80,8 @@ TODO
   ;; TODO
   )
 
-
 ;; Simple Functions to feed into sort-subr
+
 (defun +__jg-python-key-start ()
   (re-search-forward "^\s*def ")
   (symbol-at-point))

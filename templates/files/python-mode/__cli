@@ -5,21 +5,11 @@ $0
 ##-- imports
 from __future__ import annotations
 
-import abc
 import argparse
-import configparser
 import logging as logmod
-from copy import deepcopy
-from dataclasses import InitVar, dataclass, field
-import pathlib
+import pathlib as pl
 from re import Pattern
 from sys import stderr, stdout
-from typing import (TYPE_CHECKING, Any, Callable, ClassVar, Final, Generic,
-                    Iterable, Iterator, Mapping, Match, MutableMapping,
-                    Protocol, Sequence, Tuple, TypeAlias, TypeGuard, TypeVar,
-                    cast, final, overload, runtime_checkable)
-from uuid import UUID, uuid1
-from weakref import ref
 ##-- end imports
 
 ##-- logging variables
@@ -54,13 +44,10 @@ logging.addHandler(file_handler)
 ##-- end Logging Setup
 
 ##-- argparse
-#see https://docs.python.org/3/howto/argparse.html
 parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter,
                                  epilog = "\n".join([""]))
 argparser.add_argument("-v", "--verbose", action='count', help="increase verbosity of logging (repeatable)")
 parser.add_argument('--aBool', action="store_true")
-
-#args.aBool...
 
 ##-- End argparse
 

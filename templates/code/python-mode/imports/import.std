@@ -1,7 +1,9 @@
-#!/usr/bin/env python3
-"""
-$0
-"""
+# -*- mode: snippet -*-
+# name  : import.std
+# uuid  : import.std
+# key   : import.std
+# group :
+# --
 ##-- imports
 from __future__ import annotations
 
@@ -52,8 +54,3 @@ from typing import (TYPE_CHECKING, Any, Callable, ClassVar, Final, Generic,
 # import spacy # nlp = spacy.load("en_core_web_sm")
 
 ##-- end imports
-
-##-- logging
-logging = logmod.getLogger(__name__)
-##-- end logging
-$0

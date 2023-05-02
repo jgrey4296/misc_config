@@ -38,6 +38,21 @@ create_default_packages:
   - sympy
   - wheel
   - pre-commit
+  - pipreqs
+  - boltons
+  - more-itertools
+  - cleo
+  - railroad-diagrams
+  - pycycle
+  # - spacy
+  # - pomegranate
+  # - setuptools-rust
+  # - sh
+  - validators
+  # - thefuzz
+  - stackprinter
+  # - dirty-equals
+  - tqdm
   # - celery
   # - flask
   # - mypy=0.931

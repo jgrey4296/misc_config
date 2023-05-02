@@ -1,49 +1,58 @@
 #+TITLE: Python Testbed notes
 
 * Overview
+https://github.com/vinta/awesome-python
 
 * Main
 ** Core
-  - beautifulsoup4
-  - build
-  - coverage
-  - flask
-  - humanfriendly
-  - isort
-  - jedi
-  - matplotlib
-  - mypy=0.931
-  - networkx
-  - numpy
-  - pandas
-  - pip
-  - pip-review
-  - pony
-  - pycodestyle
-  - pycycle
-  - pygments
-  - pylint
-  - pyparsing
-  - pyqtree
-  - pyright
-  - pytest
-  - python=3.10
-  - readline
-  - regex
-  - rich
-  - scipy
-  - seaborn
-  - semanticversion
-  - setuptools
-  - sphinx
-  - sqlite
-  - stackprinter
-  - statsmodels
-  - sty
-  - sympy
-  - wheel
+- boltons
+- dirty-equals
+- flask
+- more-itertools
+- mypy
+- pip-review
+- pycodestyle
+- pycycle
+- pyright
+- semanticversion
+- sh
+- stackprinter
+- thefuzz
+- tqdm
+- validators
+- beautifulsoup4
+- build
+- coverage
+- humanfriendly
+- isort
+- jedi
+- matplotlib
+- networkx
+- numpy
+- pandas
+- pip
+- pony
+- pre-commit
+- pygments
+- pylint
+- pyparsing
+- pyqtree
+- pytest
+- readline
+- regex
+- rich
+- scipy
+- seaborn
+- setuptools
+- sphinx
+- sqlite
+- statsmodels
+- sty
+- sympy
+- wheel
 
 ** To Make Core
+- llvmlite
 - celery
 - cachetools
 - rope
@@ -67,6 +76,11 @@ pure-python-adb                                                                 
 https://github.com/JeffLIrion/adb_shell                                                         : adb : android
 
 ** algorithms
+https://more-itertools.readthedocs.io/en/stable/
+https://python-validators.github.io/validators/
+https://github.com/seatgeek/thefuzz
+https://dirty-equals.helpmanual.io/latest/
+https://boltons.readthedocs.io/en/latest/
 cycler                                                                                          : 0.11.0
 noise
 editdistance                                                                                    : 0.5.3
@@ -179,6 +193,7 @@ https://github.com/pyexcel/pyexcel                                              
 https://github.com/PydPiper/pylightxl                                                           : excel : library : spreadsheets
 
 ** diagrams
+https://github.com/cknd/stackprinter
 https://github.com/daleroberts/itermplot                                                        : iterm2 : matplotlib : visualisation
 https://github.com/mingrammer/diagrams#getting-started
 https://github.com/plotly/plotly.py
@@ -192,7 +207,7 @@ http://seaborn.pydata.org/index.html
 https://jiffyclub.github.io/palettable/
 
 ** docs
-pelican
+https://docs.getpelican.com/en/latest/
 commonmark                                                                                      : 0.9.1
 Markdown                                                                                        : 3.3.4
 https://www.sphinx-doc.org/en/master/contents.html                                              : documentation : programming : python : software_engineering : sphinx
@@ -214,13 +229,14 @@ bibtexparser
 ** exceptions
 better-exceptions                                                                               : 0.3.3
 pretty-errors                                                                                   : 1.2.25
-rich                                                                                            : 12.5.1
+https://rich.readthedocs.io/en/stable/introduction.html
 https://github.com/grappa-py/grappa                                                             : assert : grappa : unit_testing
 
 
 ** graphics
-Pillow                                                                                          : 9.2.0
-imagio
+https://tqdm.github.io/
+https://pillow.readthedocs.io/en/stable/
+https://imageio.readthedocs.io/en/stable/index.html
 https://github.com/inconvergent/hyphae/blob/master/hyphae.py                                    : graphics : inconvergent : programming
 https://github.com/vvanirudh/Pixel-Art                                                          : machine_learning : pixel_art
 https://pycairo.readthedocs.io/en/latest/reference/context.html                                 : cairo : libraries : python : reference
@@ -284,14 +300,13 @@ https://github.com/petercorke/bdsim
 https://github.com/pysmt/pysmt                                                                  : SMT : library
 https://github.com/uber/causalml                                                                : causal_inference : machine_learning
 https://github.com/yuce/pyswip
-https://github.com/yuce/pyswip                                                                  : __come_back_to : dsl : prolog : swipl
 https://gitlab.com/danielhones/pycategories
 https://pomegranate.readthedocs.io/en/latest/index.html                                         : causal_model : library : markov_models : pomegranate : statistics
 https://potassco.org/
 https://pysathq.github.io/
 
 ** stats
-http://scikit-learn.org/stable/documentation.html
+https://scikit-learn.org/stable/user_guide.html
 https://github.com/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers  : bayes : hacker : statistics
 https://github.com/MaxHalford/sorobn                                                            : bayesian_network : library
 https://github.com/amitkaps/weed                                                                : data_analysis : education : reference : statistics : tutorial
@@ -310,7 +325,6 @@ https://utkuufuk.com/2018/05/04/learning-curves/
 https://www.statsmodels.org/stable/index.html                                                   : library : statistics
 
 ** Text manipulation
-stackprinter                                                                                    : 0.2.5
 ansicolors                                                                                      : 1.1.8
 humanfriendly                                                                                   : 10.0
 fontconfig                                                                                      : 2.13.1
@@ -322,9 +336,9 @@ termcolor                                                                       
 MarkupSafe                                                                                      : 2.1.1
 texttable                                                                                       : 1.6.4
 *** parsing
-beautifulsoup
-Pygments                                                                                        : 2.11.2
-astroid                                                                                         : 2.11.7
+https://beautiful-soup-4.readthedocs.io/en/latest/
+https://pygments.org/docs/
+https://pylint.pycqa.org/projects/astroid/en/latest/index.html
 et-xmlfile                                                                                      : 1.1.0
 html5lib                                                                                        : 1.1
 https://github.com/Rainbow-Dreamer/musicpy

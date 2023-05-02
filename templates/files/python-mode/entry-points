@@ -9,24 +9,21 @@
 from __future__ import annotations
 
 import argparse
-try:
-    from toml import load
-except ImportError:
-    from tomli import load
+import tomllib
 
 ##-- end imports
 
 parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter,
                                  epilog = "\n".join([""]))
 
-parser.add_argument('--config', default="/Volumes/documents/github/python/bookmark_organiser/pyproject.toml")
+parser.add_argument("--config", default="$1")
 
 
 def main():
     args = parser.parse_args()
 
-    with open(args.config, 'rb') as f:
-        cfg = load(f)
+    with open(args.config, "rb") as f:
+        cfg = tomllib.load(f)
 
     print("Entry Points in bkmkorg:")
     entry_points = sorted([x for x in cfg['project']['scripts'].keys()])

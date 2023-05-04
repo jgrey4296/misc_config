@@ -7,3 +7,6 @@
 (unless (executable-find "npm")
   (warn! "Couldn't find npm, most server installers won't work and will have to be installed manually.
 For more information, see https://emacs-lsp.github.io/lsp-mode/page/languages/."))
+
+(unless (fboundp 'module-load)
+  (warn! "Emacs was not built with dynamic modules support. Tree sitter needs this to function"))

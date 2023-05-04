@@ -2,7 +2,7 @@
 # name  : iterator
 # uuid  : iterator
 # key   : iterator
-# group :
+# group : godot
 # --
 class ${1:My}Iterator:
 	"""

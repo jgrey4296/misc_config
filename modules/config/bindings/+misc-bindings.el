@@ -29,27 +29,6 @@
       :n "q" #'quit-window
       )
 
-;;-- shell
-(after! shell
-  (map! :map shell-mode-map
-        "C-d" #'comint-send-eof
-        :localleader
-        "h" #'counsel-shell-history
-        )
-  (evil-make-intercept-map shell-mode-map)
-)
-
-;;-- end shell
-
-;;-- comint
-;; overrides the default normal mode binding of evil-ret
-(map! :after comint
-      :map comint-mode-map
-      "C-d" #'comint-send-eof
-      :n "RET" #'comint-send-input
-      )
-
-;;-- end comint
 
 ;;-- flycheck
 (map! :map flycheck-error-list-mode-map
@@ -68,38 +47,6 @@
       )
 ;;-- end flycheck
 
-;;-- evil snipe
-(map! :after evil-snipe
-      :map evil-snipe-mode-map
-      :nm "S" nil
-      :nm "s" nil
-      )
-
-;;-- end evil snipe
-
-;;-- lsp
-(map! :after lsp-mode
-      :map lsp-command-map
-      (:prefix ("w" . "Workspaces"))
-      (:prefix ("=" . "Formatting"))
-      (:prefix ("F" . "Folders"))
-      (:prefix ("T" . "Toggles"))
-      (:prefix ("g" . "Goto"))
-      (:prefix ("h" . "Help"))
-      (:prefix ("r" . "Refactoring"))
-      (:prefix ("a" . "Actions"))
-      (:prefix ("G" . "Peek"))
-      )
-(map! :after lsp-mode
-      :leader
-      :prefix "c"
-      :desc "LSP Code actions"                      "a"   #'lsp-execute-code-action
-      :desc "LSP Organize imports"                  "o"   #'lsp-organize-imports
-      :desc "LSP Rename"                            "R"   #'lsp-rename
-      :desc "LSP"                                   "l"   lsp-command-map
-      )
-;;-- end lsp
-
 ;;-- messages
 (map! :after message
       :map messages-buffer-mode-map
@@ -110,7 +57,6 @@
 
 ;;-- evil overrides/intercept
 (evil-make-overriding-map messages-buffer-mode-map)
-(evil-make-intercept-map comint-mode-map)
 (evil-make-intercept-map read-expression-map)
 
 ;;-- end evil overrides/intercept
@@ -139,15 +85,6 @@
 
 (define-key evil-motion-state-map [mouse-5] #'ignore)
 ;;-- end Mouse Deactivation
-
-;;-- helm
-(map! :map jg-binding-helm-map
-      :desc "Minibuffer History"           "m"   #'counsel-minibuffer-history
-      :desc "Shell History"                "s"   #'counsel-shell-history
-      :desc "Helm Processes"               "h"   #'helm-list-emacs-process
-      )
-
-;;-- end helm
 
 (map! :map calendar-mode-map
       :n "RET" #'+jg-bindings-calendar-insert-date

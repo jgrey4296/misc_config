@@ -5,7 +5,7 @@
   (load! "+bindings")
   )
 (after! ivy
-  (load "+ivys")
+  (load! "+ivys")
   )
 
 (use-package! ivy
@@ -322,7 +322,7 @@
   (setq ivy-flx-limit 10000)
   )
 
-(use-package! siper
+(use-package! swiper
   :config
   (setq swiper-action-recenter t)
   )

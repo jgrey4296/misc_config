@@ -239,7 +239,6 @@ https://pillow.readthedocs.io/en/stable/
 https://imageio.readthedocs.io/en/stable/index.html
 https://github.com/inconvergent/hyphae/blob/master/hyphae.py                                    : graphics : inconvergent : programming
 https://github.com/vvanirudh/Pixel-Art                                                          : machine_learning : pixel_art
-https://pycairo.readthedocs.io/en/latest/reference/context.html                                 : cairo : libraries : python : reference
 jpeg                                                                                            : 9e
 ncurses                                                                                         : 6.3
 pastel                                                                                          : 0.2.1
@@ -249,6 +248,16 @@ https://github.com/Dvlv/Tkinter-By-Example                                      
 https://www.learnpyqt.com/blog/pyqt6-vs-pyside6/                                                : programming : pyside : python : pytq
 https://github.com/cprogrammer1994/GLWindow                                                     : open_gl
 https://github.com/renpy/renpy                                                                  : renpy : visual_novel
+
+*** Cairo
+https://pycairo.readthedocs.io/en/latest/reference/context.html                                 : cairo : libraries : python : reference
+
+brew install pkg-config libffi cairo
+pip install pycairo
+
+dont install cairo using conda,
+if python complains, try:
+pip install pygobject
 
 ** Linting
 https://pre-commit.com/

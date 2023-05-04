@@ -1,18 +1,27 @@
 ;;; completion/ivy/+bindings.el -*- lexical-binding: t; -*-
 
 (doom-log "Setting up Completion bindings: %s" (current-time-string))
-(after! (evil helm)
-  (evil-make-intercept-map helm-map)
-)
+(setq helm-map (make-sparse-keymap))
+(set-keymap-parent helm-map minibuffer-local-map)
+;; (evil-make-intercept-map helm-map)
+
+(map! :leader
+      :desc "SCRATCH"                      "6" (cmd! (+jg-popup-ivy-open "*scratch*"))
+      :desc "Messages"                     "0" (cmd! (+jg-popup-ivy-open "*Messages*") (when current-prefix-arg (with-current-buffer "*Messages*" (+jg-text-clear-buffer))))
+      :desc "Have you Played?"      "o 1"   #'+jg-completion-rps-have-you-playeds
+      )
+
+(map! :map jg-binding-helm-map
+      :desc "Minibuffer History"           "m"   #'counsel-minibuffer-history
+      :desc "Shell History"                "s"   #'counsel-shell-history
+      :desc "Helm Processes"               "h"   #'helm-list-emacs-process
+      )
 
 ;;-- remap bookmarks
-(map! :after counsel
-      [remap bookmark-jump] #'+jg-completion-ivy-bookmark
-      )
+(map!
+ [remap bookmark-jump] #'+jg-completion-ivy-bookmark
+ )
 ;;-- end remap bookmarks
-
-
-;;-- helm
 
 ;; Movement
 (map! :map helm-map
@@ -42,7 +51,7 @@
 ;; Actions
 (map! :map helm-map
       :after helm
-
+      :ni [ret] #'helm-maybe-exit-minibuffer
       :ni [tab] #'helm-select-action
       "C-z"     #'helm-execute-persistent-action
       :n "s"    #'helm-select-action
@@ -63,45 +72,3 @@
       :localleader
       :desc "Toggle Full Frame" "f" #'helm-toggle-full-frame
       )
-
-;; Unbinding
-(map! :map helm-map
-      :after helm
-      "C-S-f" nil
-      "C-S-n" nil
-      "C-S-p" nil
-      "C-S-j" nil
-      "C-S-k" nil
-
-      "C-x 5" nil
-      "C-x 6" nil
-      "C-x 7" nil
-      "C-x 8" nil
-      "C-x 9" nil
-      "C-x 0" nil
-
-      "<f1>"  nil
-      "<f2>"  nil
-      "<f3>"  nil
-      "<f4>"  nil
-      "<f5>"  nil
-      "<f6>"  nil
-      "<f7>"  nil
-      "<f8>"  nil
-      "<f9>"  nil
-      "<f10>" nil
-      "<f11>" nil
-      "<f12>" nil
-
-      )
-
-
-;;-- end helm
-
-;;-- leader helms/ivys
-(map! :leader
-      :desc "SCRATCH"                      "6" (cmd! (+jg-popup-ivy-open "*scratch*"))
-      :desc "Messages"                     "0" (cmd! (+jg-popup-ivy-open "*Messages*") (when current-prefix-arg (with-current-buffer "*Messages*" (+jg-text-clear-buffer))))
-      :desc "Have you Played?"      "o 1"   #'+jg-completion-rps-have-you-playeds
-      )
-;;-- end leader helms/ivys

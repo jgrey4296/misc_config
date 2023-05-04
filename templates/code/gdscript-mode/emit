@@ -2,6 +2,6 @@
 # name  : emit
 # uuid  : emit
 # key   : emit
-# group :
+# group : godot
 # --
 emit_signal("${1:sigName}", ${2:args})

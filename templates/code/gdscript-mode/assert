@@ -2,6 +2,6 @@
 # name  : assert
 # uuid  : assert
 # key   : assert
-# group :
+# group : godot
 # --
 assert(${1:condition})

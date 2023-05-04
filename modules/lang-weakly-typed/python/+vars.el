@@ -18,14 +18,18 @@
 ;;-- end personal vars
 
 ;;-- general python
-(after! python-mode
-  (setq-default py-indent-offset 4 python-indent-offset 4
-                py-shell-virtualenv-root (expand-file-name  "~/anaconda") python-shell-virtualenv-root (expand-file-name  "~/anaconda")
-                py-pdbtrack-do-tracking-p t python-pdbtrack-activate t
+(defvaralias 'python-indent-offset 'py-indent-offset)
+(defvaralias 'python-pdbtrack-activate 'py-pdbtrack-do-tracking-p)
+(defvaralias 'python-shell-interpreter 'py-python-command)
+(defvaralias 'python-shell-interpreter-args 'py-python-command-args)
 
-                py-python-command "python3" python-shell-interpreter "python3"
-                py-python-command-args '("-i") python-shell-interpreter-args "-i"
-                ;; python-shell-interpreter-args `("-X" ,(format "pycache_prefix=%s" (expand-file-name  "~/.pycache")))
+(after! python-mode
+  (setq-default py-indent-offset 4
+                py-shell-virtualenv-root (expand-file-name  "~/anaconda") python-shell-virtualenv-root (expand-file-name  "~/anaconda")
+                py-pdbtrack-do-tracking-p t
+
+                py-python-command "python3"
+                py-python-command-args '("-i")
                 jg-python-repl-start-file (doom-module-expand-path :lang-weakly-typed 'python "repl/repl_startup.py ")
 
                 py-use-font-lock-doc-face-p t
@@ -216,6 +220,7 @@
                     )
 (spec-handling-add! lookup-regular nil
                     '(python-mode
+                      ("python-twitter" . "https://python-twitter.readthedocs.io/en/latest/")
                       ("pyproject.toml spec" . "https://packaging.python.org/en/latest/specifications/declaring-project-metadata/#declaring-project-metadata")
                       ("argparse"          . "https://docs.python.org/3/howto/argparse.html")
                       ("astroid"           . "https://pylint.pycqa.org/projects/astroid/en/latest/index.html")
@@ -260,7 +265,7 @@
                       ("pygments"          . "https://pygments.org/docs/")
                       ("pylightxl"         . "https://github.com/PydPiper/pylightxl")
                       ("pyparsing"         . "https://pyparsing-docs.readthedocs.io/en/latest/")
-                      ("pypi"              . "https://pypi .org/")
+                      ("pypi"              . "https://pypi.org/")
                       ("python"            . "https://docs.python.org/3/")
                       ("python/C api"      . "https://docs.python.org/3/c-api/index.html")
                       ("railroad-diagrams" . "https://github.com/tabatkins/railroad-diagrams")

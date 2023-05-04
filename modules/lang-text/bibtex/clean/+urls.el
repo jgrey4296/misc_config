@@ -7,7 +7,6 @@
     (cons (car x) (substring (cdr x) 1 -1)))
   )
 
-;;;###autodef
 (defun +jg-bibtex--expand-shortened-url ()
   "Expand a shortened url, using CuRL
 https://tecnoysoft.com/en/how-to-obtain-the-real-url-behind-a-shortened-url-using-curl/

@@ -2,6 +2,6 @@
 # name  : pause
 # uuid  : pause
 # key   : pause
-# group :
+# group : godot
 # --
 get_tree().paused = True

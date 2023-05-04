@@ -2,7 +2,7 @@
 # name  : onready
 # uuid  : onready
 # key   : onready
-# group :
+# group : godot
 # --
 # Defer till the _ready method:
 onready var ${1:varName} = get_node("${2:path}")

@@ -2,6 +2,6 @@
 # name  : debug
 # uuid  : debug
 # key   : debug
-# group :
+# group : godot
 # --
 breakpoint

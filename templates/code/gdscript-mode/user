@@ -2,6 +2,6 @@
 # name  : user
 # uuid  : user
 # key   : user
-# group :
+# group : godot
 # --
 "user://${1:path}"

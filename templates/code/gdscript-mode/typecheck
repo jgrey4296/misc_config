@@ -2,6 +2,6 @@
 # name  : typecheck
 # uuid  : typecheck
 # key   : typecheck
-# group :
+# group : godot
 # --
 ${1:varName} is ${2:type}

@@ -1,7 +1,6 @@
 ;;; +keys.el -*- lexical-binding: t; -*-
 
 
-;;;###autodef
 (defun +jg-bibtex-insert-stub-key ()
   "Insert a stub key if there isnt an actual one"
   (bibtex-beginning-of-entry)
@@ -11,7 +10,6 @@
     )
   )
 
-;;;###autodef
 (defun +jg-bibtex-orcb-key-hook ()
   "Replace the key in the entry.
 Prompts for replacement if the new key duplicates one already in
@@ -59,7 +57,6 @@ Does not modify keys ending in an underscore
     )
   )
 
-;;;###autodef
 (defun +jg-bibtex-insert-volume-to-key ()
   (bibtex-beginning-of-entry)
   (end-of-line)

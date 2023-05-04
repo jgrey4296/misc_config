@@ -2,6 +2,6 @@
 # name  : load
 # uuid  : load
 # key   : load
-# group :
+# group : godot
 # --
 var $1{1:varName} = load("${2:path}")

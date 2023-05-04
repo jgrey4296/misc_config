@@ -2,6 +2,6 @@
 # name  : enum
 # uuid  : enum
 # key   : enum
-# group :
+# group : godot
 # --
 enum {${1:thing} }

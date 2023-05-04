@@ -149,4 +149,21 @@ server getting expensively restarted when reverting buffers."
   :hook (eglot-managed-mode . flycheck-eglot-mode)
   )
 
+(use-package! tree-sitter
+  :defer t
+  :config
+  (require 'tree-sitter-langs)
+  )
+
+(use-package! evil-textobj-tree-sitter
+  :when (modulep! :editor evil +everywhere)
+  :defer t
+  :init (after! tree-sitter (require 'evil-textobj-tree-sitter))
+  :config
+  (after! which-key
+    (setq which-key-allow-multiple-replacements t)
+    (pushnew!
+     which-key-replacement-alist
+     '(("" . "\\`+?evil-textobj-tree-sitter-function--\\(.*\\)\\(?:.inner\\|.outer\\)") . (nil . "\\1"))))
+  )
 ;;; config.el ends here

@@ -2,7 +2,7 @@
 # name  : group
 # uuid  : group
 # key   : group
-# group :
+# group : godot
 # --
 ${1:node}.add_to_group("${2:groupName}")
 $1.remove_from_group("$2")

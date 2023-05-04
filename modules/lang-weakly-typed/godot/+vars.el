@@ -11,6 +11,7 @@
                     '(gdscript-mode
                      ("Godot Docs" . "https://docs.godotengine.org/en/stable/")
                      ("GdScript Reference" . "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html" )
+                     ("GDScript" . "https://gdscript.com/solutions/")
                      )
                     )
 ;;-- end file templates

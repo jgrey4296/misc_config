@@ -2,7 +2,7 @@
 # name  : coroutine
 # uuid  : coroutine
 # key   : coroutine
-# group :
+# group : godot
 # --
 func ${1:funcName}(${2:args}) -> ${3:retType}:
      # pause till `resume` is called on obj:

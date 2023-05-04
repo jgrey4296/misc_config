@@ -35,7 +35,6 @@
              #'er/add-python-mode-expansions
              #'evil-collection-python-set-evil-shift-width
              #'doom--setq-tab-width-for-python-mode-h
-             #'+jg-python-handle-env!
              )
 
   ;; Always add auto-hide as the last thing
@@ -49,10 +48,8 @@
     end-of-defun-function       #'python-nav-end-of-defun
     beginning-of-defun-function #'python-nav-beginning-of-defun
 
-    indent-line-function        #'python-indent-line
-    indent-region-function      #'python-indent-region
-    ;; indent-region-function      #'py-indent-region
-    ;; indent-line-function        #'py-indent-line
+    indent-line-function        #'py-indent-line
+    indent-region-function      #'py-indent-region
     jg-company-activation-re    jg-python-company-activation
     jg-company-kws              jg-python-company-kws
     )

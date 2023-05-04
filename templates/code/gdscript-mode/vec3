@@ -2,6 +2,6 @@
 # name  : vec3
 # uuid  : vec3
 # key   : vec3
-# group :
+# group : godot
 # --
 var ${1:name} = Vector3($2, $3, $4)

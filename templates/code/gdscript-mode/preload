@@ -2,6 +2,6 @@
 # name  : preload
 # uuid  : preload
 # key   : preload
-# group :
+# group : godot
 # --
 const ${1:varName} = preload("${2:path}")

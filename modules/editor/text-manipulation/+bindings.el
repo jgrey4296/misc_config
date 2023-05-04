@@ -40,10 +40,6 @@
 
       :desc "Rotate"         "R"   #'rotate-text
       ;; :desc "Zap to Char"    "Z"   #'zap-up-to-char
-      (:prefix "c"
-       :desc "Title Case"     "t"   #'+jg-text-title-case-op
-       )
-
       )
 
 (map! :map jg-binding-vision-map
@@ -104,9 +100,9 @@
       )
 
 (map! :map jg-binding-change-map
-      :desc "split line"                  "ret" #'electric-newline-and-maybe-indent
+      :desc "split line"                  "RET" #'electric-newline-and-maybe-indent
       :desc "set buffer coding"          "0"   #'set-buffer-file-coding-system
-      :desc "indent"                     "tab" #'indent-region
+      :desc "indent"                     "TAB" #'indent-region
 
       :desc "Align"                       "a" #'align-regexp
       :desc "Comment"                     "c" #'evilnc-comment-operator
@@ -118,6 +114,7 @@
       :desc "Incr"                        "K" #'+jg-text-inc-num
       :desc "Shift Left"                  "h" #'+jg-text-shift-left
       :desc "Shift Right"                 "l" #'+jg-text-shift-right
+      :desc "Title Case"     "t"   #'+jg-text-title-case-op
 
       (:prefix ("w" . "Words")
        :desc "inflection"                "i" #'evil-operator-string-inflection
@@ -142,8 +139,8 @@
       (:prefix ("o" . "text")
        :desc "Cycle Spacing"               "." #'cycle-spacing
        :desc "Exchange"                    "x" #'evil-exchange
-       :desc "Split on distance"          "s" #'+jg-text-split-on-leading-char
-       :desc "Title Case"                 "t" #'+jg-text-title-case-op
+       :desc "Split on distance"           "s" #'+jg-text-split-on-leading-char
+       :desc "Title Case"                  "t" #'+jg-text-title-case-op
        )
 
       )

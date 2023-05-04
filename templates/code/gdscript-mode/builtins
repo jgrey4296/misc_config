@@ -2,7 +2,7 @@
 # name  : builtins
 # uuid  : builtins
 # key   : builtins
-# group :
+# group : godot
 # --
 null, bool, int, float, String
 Vector2, Vector3, Transform2D, Plane, Quat, AABB

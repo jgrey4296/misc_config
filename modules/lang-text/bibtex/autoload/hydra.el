@@ -1,5 +1,6 @@
 ;;; domain-specific/bibtex/+hydra.el -*- lexical-binding: t; -*-
 
+
 (defhydra +jg-bibtex-hydra (:color blue)
   "
 _w_: WOS

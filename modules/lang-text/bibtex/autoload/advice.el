@@ -19,7 +19,8 @@
 ;;
 ;;; Code:
 
-(define-advice org-ref-build-full-bibliography (:override () +jg-build-bibliography)
+;;;###autoload
+(defun +jg-build-bibliography ()
   "Build pdf of all bibtex entries, and open it."
   (interactive)
   (let* ((loc default-directory)
@@ -48,15 +49,15 @@
     )
   )
 
-(define-advice org-ref-version (:around (f)
-                                +jg-org-ref-version-override)
+;;;###autoload
+(defun +jg-org-ref-version-override (f)
   (let ((kill-ring nil))
     (funcall f)
     )
   )
 
-(define-advice bibtex-set-field (:override (field value &optional nodelim)
-                                 +jg-bibtex-set-field)
+;;;###autoload
+(defun +jg-bibtex-set-field (field value &optional nodelim)
   "Set FIELD to VALUE in bibtex file.  create field if it does not exist.
 Optional argument NODELIM ignored to fit `bibtex-make-field` signature
 Modified to avoid duplicate comma insertion. "
@@ -81,8 +82,8 @@ Modified to avoid duplicate comma insertion. "
       (backward-char)
       (insert value))))
 
-(define-advice bibtex-autokey-get-field (:around (fn &rest args)
-                                         +jg-bibtex-autokey-field-expand)
+;;;###autoload
+(defun +jg-bibtex-autokey-field-expand (fn &rest args)
   (if-let* ((first-arg (if (listp (car args)) (car args) (list (car args))))
             (matches (-any? (-partial #'s-matches? "file[[:digit:]]*") first-arg))
             (result (apply fn args))
@@ -93,4 +94,12 @@ Modified to avoid duplicate comma insertion. "
     )
   )
 
+;;;###autoload
+(advice-add 'org-ref-build-full-bibliography :override #'+jg-build-bibliography)
+;;;###autoload
+(advice-add 'bibtex-autokey-get-field :around #'+jg-bibtex-autokey-field-expand)
+;;;###autoload
+(advice-add 'bibtex-set-field :override #'+jg-bibtex-set-field)
+;;;###autoload
+(advice-add 'org-ref-version :around #'+jg-org-ref-version-override)
 ;;; +advice.el ends here

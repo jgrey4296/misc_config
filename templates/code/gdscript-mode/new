@@ -2,6 +2,6 @@
 # name  : new
 # uuid  : new
 # key   : new
-# group :
+# group : godot
 # --
 ${1:ClassName}.new()

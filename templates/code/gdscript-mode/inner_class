@@ -2,7 +2,7 @@
 # name  : inner_class
 # uuid  : inner_class
 # key   : inner_class
-# group :
+# group : godot
 # --
 class ${1:innerName}:
       # construct with $1.new()

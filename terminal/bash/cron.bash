@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-set -eo pipefail
-
+set -o pipefail
 # # from: https://itecnotes.com/server/cron-how-to-use-the-aliases-in-the-crontab/
 shopt -s expand_aliases
+
 source "$HOME/.doom.d/terminal/bash/_basic_utils.bash"
 source "$HOME/.doom.d/terminal/bash/_base_path.bash"
 source "$HOME/.doom.d/terminal/bash/components/rust.bash"

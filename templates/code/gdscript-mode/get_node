@@ -2,6 +2,6 @@
 # name  : get_node
 # uuid  : get_node
 # key   : get_node
-# group :
+# group : godot
 # --
 $${1:path}

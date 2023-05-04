@@ -1,19 +1,12 @@
 ;;; domain-specific/bibtex/config.el -*- lexical-binding: t; -*-
 
 (load! "+vars")
-(load! "+hooks")
-(load! "+advice")
-(load! "helm/+all")
-(load! "dired/+dired")
 (load! "dialect/+entries")
 (load! "dialect/+fields")
 (after! jg-bindings-total
   (load! "evil/+motions")
   (load! "+bindings")
 )
-(after! hydra
-  (load! "hydra/+hydra")
-  )
 
 (use-package! bibtex
   :defer t
@@ -43,12 +36,14 @@
 (use-package! helm-bibtex
   :commands (bibtex-completion-init)
 )
+
 (use-package! ivy-bibtex
   :when (modulep! :completion ivy)
   :defer t
   :config
   (add-to-list 'ivy-re-builders-alist '(ivy-bibtex . ivy--regex-plus))
   )
+
 (use-package! bibtex-completion
   :when (or (modulep! :completion ivy)
             (modulep! :completion helm))
@@ -77,10 +72,14 @@
         org-cite-export-processors '((latex biblatex) (t csl))
         org-support-shift-select t)
   )
+
 (use-package! oc-biblatex :after oc)
+
 (use-package! oc-csl :after oc)
+
 (use-package! oc-natbib :after oc)
 
 (add-hook 'doom-first-file-hook #'bibtex-completion-init)
 (add-hook 'doom-first-file-hook #'+jg-bibtex-build-list 90)
 (add-hook 'doom-first-file-hook #'org-ref-version)
+(autoload '+jg-bibtex-hydra/body (file-name-concat (dir!) "autoload" "hydra.el") t)

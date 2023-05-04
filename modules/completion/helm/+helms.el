@@ -147,7 +147,6 @@ versus not"
   )
 ;;-- end helm transformers
 
-;;-- helms
 (defun +jg-completion-switch-major-mode ()
   (interactive)
   (let ((major-modes +jg-personal-major-modes))
@@ -182,4 +181,3 @@ versus not"
           :buffer "*helm xkcd*")
     )
   )
-;;-- end helms

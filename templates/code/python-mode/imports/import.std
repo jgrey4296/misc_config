@@ -4,7 +4,8 @@
 # key   : import.std
 # group :
 # --
-##-- imports
+##-- std imports
+## Standard imports i keep having to import, as an auto snippet
 from __future__ import annotations
 
 # import abc
@@ -17,6 +18,8 @@ import pathlib as pl
 import re
 import time
 import types
+import importlib
+from importlib.metadata import entry_points
 # from copy import deepcopy
 # from dataclasses import InitVar, dataclass, field
 from typing import (TYPE_CHECKING, Any, Callable, ClassVar, Final, Generic,
@@ -53,4 +56,4 @@ from typing import (TYPE_CHECKING, Any, Callable, ClassVar, Final, Generic,
 # import z3
 # import spacy # nlp = spacy.load("en_core_web_sm")
 
-##-- end imports
+##-- end std imports

@@ -2,6 +2,6 @@
 # name  : delete
 # uuid  : delete
 # key   : delete
-# group :
+# group : godot
 # --
 ${1:node}.queue_free()

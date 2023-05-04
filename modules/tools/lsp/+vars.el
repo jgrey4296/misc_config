@@ -12,6 +12,17 @@
 
 (defvar +lsp--deferred-shutdown-timer nil)
 
+(defvar +tree-sitter-hl-enabled-modes '(not web-mode typescript-tsx-mode)
+  "A list of major modes which should be highlighted by tree-sitter.
+
+If this list begins with `not', then it negates the list.
+If it is t, it is enabled in all modes.
+If nil, it is disabled in all modes")
+
+(defvar +tree-sitter-inner-text-objects-map (make-sparse-keymap))
+(defvar +tree-sitter-outer-text-objects-map (make-sparse-keymap))
+(defvar +tree-sitter-goto-previous-map (make-sparse-keymap))
+(defvar +tree-sitter-goto-next-map (make-sparse-keymap))
 ;;-- end definitions
 
 ;;-- lsp
@@ -44,6 +55,13 @@
         eglot-stay-out-of '(flymake)
         )
 ;;-- end eglot
+
+;;-- tree-sitter
+(setq tree-sitter-debug-jump-buttons t ;; This makes every node a link to a section of code
+      tree-sitter-debug-highlight-jump-region t ;; and this highlights the entire sub tree in your code
+      )
+
+;;-- end tree-sitter
 
 ;;-- ignore dirs
 (setq lsp-file-watch-ignored-directories (rx "\/" (|

@@ -19,6 +19,7 @@
 ;;
 ;;; Code:
 
+;;;###autoload
 (defun +jg-bibtex-dired-compile ()
   (interactive)
   (let ((marked (-filter (lambda (x) (s-equals? "bib" (f-ext x))) (dired-get-marked-files))))
@@ -44,6 +45,7 @@
     )
   )
 
+;;;###autoload
 (defun +jg-bibtex-dired-compile-run ()
   (interactive)
   (let ((marked (-filter (lambda (x) (s-equals? "tex" (f-ext x))) (dired-get-marked-files))))

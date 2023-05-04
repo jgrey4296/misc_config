@@ -2,7 +2,7 @@
 # name  : export_flags
 # uuid  : export_flags
 # key   : export_flags
-# group :
+# group : godot
 # --
 export(int, FLAGS, ${1:strValues}) var ${1:varName} = ${2:0}
 export(int, LAYERS_2D_PHYSICS)     var layers_2d_physics

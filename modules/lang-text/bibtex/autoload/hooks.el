@@ -1,5 +1,6 @@
 ;;; util/+jg-bibtex/+hooks.el -*- lexical-binding: t; -*-
 
+;;;###autoload
 (defun +jg-bibtex-font-lock-mod-hook ()
   (pushnew!
    bibtex-font-lock-keywords

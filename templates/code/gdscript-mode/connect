@@ -2,6 +2,6 @@
 # name  : connect
 # uuid  : connect
 # key   : connect
-# group :
+# group : godot
 # --
 ${1:node}.connect("${2:signalName}", ${3:listener}, "${4:listenFunc}")

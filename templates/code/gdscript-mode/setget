@@ -2,6 +2,6 @@
 # name  : setget
 # uuid  : setget
 # key   : setget
-# group :
+# group : godot
 # --
 setget ${1:setfunc}, ${2:getfunc}

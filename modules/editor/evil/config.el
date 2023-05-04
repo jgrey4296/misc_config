@@ -262,6 +262,11 @@
   :hook (doom-first-input . evil-snipe-override-mode)
   :hook (doom-first-input . evil-snipe-mode)
   :init
+  (map! :after evil-snipe
+        :map evil-snipe-mode-map
+        :nm "S" nil
+        :nm "s" nil
+        )
 )
 
 (use-package! evil-surround

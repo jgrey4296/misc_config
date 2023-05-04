@@ -2,6 +2,6 @@
 # name  : resource
 # uuid  : resource
 # key   : resource
-# group :
+# group : godot
 # --
 "res://${1:path}"

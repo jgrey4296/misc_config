@@ -5,10 +5,9 @@
  :app   (rss +org)
  :completion company ivy helm
 
- :editor char-insert fold navigation tagging text-manipulation
  :editor (evil +everywhere) format
+ :editor char-insert fold navigation tagging text-manipulation
  :editor fold snippets lookup workspaces
- ;;:editor multiple-cursors
 
  :emacs electric vc
  :emacs dired hydra ibuffer popup version-control
@@ -42,13 +41,10 @@
  :ui minimap neotree ophints
  ;;:ui treemacs unicode (emoji +unicode)
 
- :term shell term vterm
- ;;:term eshell
-
  :checkers syntax (spell +flyspell) grammar
 
- :tools  doot  (eval +overlay) lsp mail tmux twitter pdfs
- :tools editorconfig rgb tree-sitter mail
+ :tools  doot  (eval +overlay) lsp mail twitter pdfs
+ :tools editorconfig rgb tree-sitter mail term
  ;;:tools ein make debugger
 
  :email (mu4e +gmail)

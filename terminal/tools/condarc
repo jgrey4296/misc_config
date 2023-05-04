@@ -42,17 +42,16 @@ create_default_packages:
   - boltons
   - more-itertools
   - cleo
-  - railroad-diagrams
-  - pycycle
+  - validators
+  - stackprinter
+  - tqdm
+  # - railroad-diagrams
   # - spacy
   # - pomegranate
   # - setuptools-rust
   # - sh
-  - validators
   # - thefuzz
-  - stackprinter
   # - dirty-equals
-  - tqdm
   # - celery
   # - flask
   # - mypy=0.931

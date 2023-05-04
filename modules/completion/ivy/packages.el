@@ -5,11 +5,11 @@
 (package! ivy)
 (package! ivy-hydra)
 (package! ivy-avy)
+(package! ivy-rich)
 (package! counsel)
 
 (package! amx)
 (package! counsel-projectile)
-(package! ivy-rich)
 (package! wgrep)
 
 (package! ivy-prescient)

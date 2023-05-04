@@ -11,6 +11,7 @@
              company-manual-begin
              company-grab-line)
   :hook (doom-first-input . global-company-mode)
+
   :init
   (when (modulep! +tng)
     (add-hook 'global-company-mode-hook #'company-tng-mode))

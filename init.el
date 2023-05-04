@@ -1,9 +1,9 @@
 ;;; init.el -*- lexical-binding: t; -*-
 
 (doom!
- :config default bindings completion disabled help programming search ui
+ :config default bindings disabled help programming search ui
  :app   (rss +org)
- :completion company ivy
+ :completion company ivy helm
 
  :editor char-insert fold navigation tagging text-manipulation
  :editor (evil +everywhere) format

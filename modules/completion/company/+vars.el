@@ -34,11 +34,17 @@
 
   )
 
+(add-hook! 'minibuffer-inactive-mode-hook :append #'company-mode)
+(add-hook! 'minibuffer-setup-hook :append #'company-mode)
+
 (spec-handling-add! company nil
-                    '(prog-mode (:disfavour . company-dabbrev-code) (:back      . company-capf) (:back . company-files))
+                    '(prog-mode (:disfavour . (:separate company-dabbrev-code company-capf)) (:back . company-files))
                     '(text-mode (:disfavour . (:separate company-dabbrev company-ispell)))
                     '(conf-mode (:disfavour . company-dabbrev-code ))
+                    '(minibuffer-inactive-mode (:disfavour . (:separate company-dabbrev-code company-capf)) (:back . company-files))
+                    '(minibuffer-mode (:disfavour . (:separate company-dabbrev-code company-capf)) (:back . company-files))
                     )
+
 (spec-handling-setq! company
                      company-dict-dir (expand-file-name "templates/company-dicts" doom-user-dir)
                      )

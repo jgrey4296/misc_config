@@ -1,6 +1,9 @@
 ;;; completion/ivy/+bindings.el -*- lexical-binding: t; -*-
 
 (doom-log "Setting up Completion bindings: %s" (current-time-string))
+(after! (evil helm)
+  (evil-make-intercept-map helm-map)
+)
 
 ;;-- remap bookmarks
 (map! :after counsel
@@ -8,74 +11,6 @@
       )
 ;;-- end remap bookmarks
 
-;;-- ivy
-
-
-(map! :map swiper-map
-      :after swiper
-      :localleader
-      :desc "Results as Buffer"        :n "b" #'ivy-occur
-      )
-
-(map! :map ivy-occur-grep-mode-map
-      :after ivy
-      :desc "Do Ops" "g" jg-binding-operator-map
-      )
-
-(map! :map counsel-ag-map
-      :after counsel
-      "C-SPC"    #'ivy-call-and-recenter ; preview
-      "C-l"      #'ivy-done
-      [C-return] #'+ivy/git-grep-other-window-action
-      )
-;;-- end ivy
-
-;;-- company
-(map! :map company-active-map
-      :after company
-      ;; :i "C-@"    (cmds! (not (minibufferp)) #'company-complete-common)
-       ;; :i "C-SPC"  (cmds! (not (minibufferp)) #'company-complete-common)
-
-         "C-w"     nil  ; don't interfere with `evil-delete-backward-word'
-         "C-n"     #'company-select-next
-         "C-p"     #'company-select-previous
-         "C-j"     #'company-select-next
-         "C-k"     #'company-select-previous
-         "C-h"     #'company-show-doc-buffer
-         "C-u"     #'company-previous-page
-         "C-d"     #'company-next-page
-         "C-s"     #'company-filter-candidates
-         "C-S-s"   #'counsel-company
-         "C-SPC"   #'company-complete-common
-         "TAB"     (cmd! (company-cancel) (indent-for-tab-command))
-         [tab]     (cmd! (company-cancel) (indent-for-tab-command))
-         ;; "TAB"     #'company-complete-common-or-cycle
-         ;; [tab]     #'company-complete-common-or-cycle
-         [backtab] #'company-select-previous
-         [f1]      nil
-         )
-
-(map! :map company-search-map  ; applies to `company-filter-map' too
-      :after company
-      "C-n"     #'company-select-next-or-abort
-      "C-p"     #'company-select-previous-or-abort
-      "C-j"     #'company-select-next-or-abort
-      "C-k"     #'company-select-previous-or-abort
-      "C-s"     #'company-filter-candidates
-      [escape]  #'company-search-abort
-      )
-
-;; ;; TODO Omni-completion
-;; :i "C-l"    #'+company/whole-lines
-;; :i "C-k"    #'+company/dict-or-keywords
-;; :i "C-f"    #'company-files
-;; :i "C-]"    #'company-etags
-;; :i "s"      #'company-ispell
-;; :i "C-s"    #'company-yasnippet
-;; :i "C-o"    #'company-capf
-;; :i "C-n"    #'+company/dabbrev
-;; :i "C-p"    #'+company/dabbrev-code-previous
-;;-- end company
 
 ;;-- helm
 
@@ -160,25 +95,13 @@
 
       )
 
-(after! helm
-  (evil-make-intercept-map helm-map)
-)
 
 ;;-- end helm
-
-;;-- lisp
-(map! :map emacs-lisp-mode-map
-      :localleader
-      "i f" #'+jg-completion-ivy-features
-      )
-
-;;-- end lisp
 
 ;;-- leader helms/ivys
 (map! :leader
       :desc "SCRATCH"                      "6" (cmd! (+jg-popup-ivy-open "*scratch*"))
       :desc "Messages"                     "0" (cmd! (+jg-popup-ivy-open "*Messages*") (when current-prefix-arg (with-current-buffer "*Messages*" (+jg-text-clear-buffer))))
       :desc "Have you Played?"      "o 1"   #'+jg-completion-rps-have-you-playeds
-      :desc "Workspace Counsel"     "w RET" #'+jg-completion-ivy-workspace
       )
 ;;-- end leader helms/ivys

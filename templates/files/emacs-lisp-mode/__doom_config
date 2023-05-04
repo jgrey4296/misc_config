@@ -20,7 +20,7 @@
 ;;
 ;;; Code:
 
-`%`$0
+$0
 (load! "+vars")
 (after! evil
     (load! "+bindings")

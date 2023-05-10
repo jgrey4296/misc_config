@@ -1,4 +1,5 @@
 
+;;;###autoload
 (defun +dired-disable-gnu-ls-flags-maybe-h ()
   "Remove extraneous switches from `dired-actual-switches' when it's
 uncertain that they are supported (e.g. over TRAMP or on Windows).

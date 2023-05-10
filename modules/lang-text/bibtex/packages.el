@@ -9,7 +9,6 @@
 (package! helm-bibtex)
 (package! hydra)
 (package! org-ref)
-(package! bibtex-completion)
 (package! ivy-bibtex)
 (package! parsebib)
 (package! citeproc)

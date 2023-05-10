@@ -56,7 +56,10 @@
   (require 'counsel-dash nil t)
 )
 
-(use-package! browse-select)
+(use-package! browse-select
+  :config
+  (browse-select-load-variants)
+  )
 (use-package! lookup-regular)
 
 ;;-- specs

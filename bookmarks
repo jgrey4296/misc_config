@@ -2,7 +2,12 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("dootle"
+(("tomler"
+ (filename . "/Volumes/documents/github/python/tomler/")
+ (front-context-string)
+ (rear-context-string . "0K May  2 22:49 ")
+ (position . 899))
+("dootle"
  (filename . "/Volumes/documents/github/python/dootle/")
  (front-context-string . "pyproject.toml\n ")
  (rear-context-string . "5K May  2 23:31 ")
@@ -13,7 +18,7 @@
  (rear-context-string . "10 Apr 26 17:29 ")
  (position . 199))
 ("conda"
- (filename . "/usr/local/anaconda3/")
+ (filename . "/usr/local/Caskroom/mambaforge/base/")
  (front-context-string . "envs\n  drwxr-xr-")
  (rear-context-string . "28 Apr 24 19:31 ")
  (position . 484))

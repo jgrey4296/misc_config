@@ -55,9 +55,9 @@ alias q="exit"
 # alias pipupdate="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1 | xargs -n1 pip install -U"
 
 # conda environments
-alias cenv="conda activate"
-alias clist="conda env list"
-alias cexport="conda env export --from-history"
+alias cenv="mamba activate"
+alias clist="mamba env list"
+alias cexport="mamba env export --from-history"
 
 alias wake="wakeonlan -i 192.168.1.20 90e6ba7391f9"
 

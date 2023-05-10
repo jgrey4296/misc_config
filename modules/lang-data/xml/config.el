@@ -22,8 +22,6 @@
 
 
 (load! "+vars")
-(load! "+funcs")
-(load! "+xml-utils")
 (after! (jg-bindings-total jg-dired nxml-mode)
   (load! "+bindings")
   )

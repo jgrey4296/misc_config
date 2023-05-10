@@ -28,6 +28,9 @@
                         (:support . flycheck)
                         )
                       )
+  (setq py-complete-function nil
+        py-do-completion-p nil
+        py-company-pycomplete-p t)
   :config
   ;;-- hooks
   (add-hook! 'python-mode-hook
@@ -198,6 +201,7 @@
   :config
   (setq conda-anaconda-home (or (getenv "ANACONDA_HOME") "/usr/local/anaconda3"))
   (setq conda-env-home-directory (f-join conda-anaconda-home "envs"))
+
 )
 
 (use-package! poetry

@@ -10,8 +10,5 @@ source "$HOME/.doom.d/terminal/bash/emacs.bash"
 # Setup Conda
 source "$HOME/.doom.d/terminal/bash/conda.bash"
 
-#Shell Location update
-SHELL="$(which bash)"
-
 jg_maybe_inc_prompt
 jg_set_prompt

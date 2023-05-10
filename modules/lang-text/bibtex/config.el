@@ -56,7 +56,7 @@
   (custom-set-variables '(org-ref-insert-cite-key "C-c i"))
   (add-hook 'bibtex-mode-hook #'reftex-mode)
   :config
-  (setq org-ref-clean-bibtex-entry-hook jg-bibtex-clean-hooks)
+  (setq-hook! 'bibtex-mode-hook org-ref-clean-bibtex-entry-hook jg-bibtex-clean-hooks)
   (remove-hook 'bibtex-mode-hook #'org-ref-bibtex-mode-keys)
   )
 
@@ -81,5 +81,4 @@
 
 (add-hook 'doom-first-file-hook #'bibtex-completion-init)
 (add-hook 'doom-first-file-hook #'+jg-bibtex-build-list 90)
-(add-hook 'doom-first-file-hook #'org-ref-version)
 (autoload '+jg-bibtex-hydra/body (file-name-concat (dir!) "autoload" "hydra.el") t)

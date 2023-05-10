@@ -9,15 +9,30 @@
 # And here is the theme collection
 # https://github.com/nushell/nu_scripts/tree/main/themes
 #
+source ~/.doom.d/terminal/nu/themes.nu
 
+def cmerge [...recs] {
+    mut total = {}
+    for $n in $recs {
+        $total = ($total | merge $n)
+    }
+    $total
+}
+
+def nuopen [arg, --raw (-r)] { if $raw { open -r $arg } else { open $arg } }
+alias open = ^open
 
 # The default config record. This is where much of your global configuration is setup.
-let-env config = {
+let banner = {
   # true or false to enable or disable the welcome banner at startup
   show_banner: false
+ }
+
+
+let cmds = {
   ls: {
     use_ls_colors: true # use the LS_COLORS environment variable to colorize output
-    clickable_links: true # enable or disable clickable links. Your terminal has to support links.
+    clickable_links: false # enable or disable clickable links. Your terminal has to support links.
   }
   rm: {
     always_trash: true # always act as if -t was given. Can be overridden with -p
@@ -98,6 +113,10 @@ let-env config = {
     sync_on_enter: true # Enable to share history between multiple sessions, else you have to close the session to write history to file
     file_format: "plaintext" # "sqlite" or "plaintext"
   }
+}
+
+
+let general = {
   completions: {
     case_sensitive: false # set to true to enable case-sensitive completions
     quick: true  # set this to false to prevent auto-selecting completions when only one remains
@@ -124,10 +143,12 @@ let-env config = {
   float_precision: 2 # the precision for displaying floats in tables
   # buffer_editor: "emacs" # command that will be used to edit the current line buffer with ctrl+o, if unset fallback to $env.EDITOR and $env.VISUAL
   use_ansi_coloring: true
-  edit_mode: emacs # emacs, vi
+  edit_mode: vi # emacs, vi
   shell_integration: true # enables terminal markers and a workaround to arrow keys stop working issue
   render_right_prompt_on_last_line: false # true or false to enable or disable right prompt to be rendered on last line of the prompt.
+}
 
+let hooks = {
   hooks: {
     pre_prompt: [{||
       null  # replace with source code to run before the prompt is shown
@@ -147,6 +168,9 @@ let-env config = {
       null  # replace with source code to return an error message when a command is not found
     }
   }
+}
+
+let menus = {
   menus: [
       # Configuration for default nushell menus
       # Note the lack of source parameter
@@ -266,6 +290,9 @@ let-env config = {
         }
       }
   ]
+}
+
+let bindings = {
   keybindings: [
     {
       name: completion_menu
@@ -369,3 +396,6 @@ let-env config = {
     }
   ]
 }
+
+
+let-env config = (cmerge $banner $cmds $general $hooks $bindings)

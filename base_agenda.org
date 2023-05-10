@@ -5,6 +5,7 @@
 [[file:/Volumes/documents/github/jgrey4296.github.io][homepage]]
 
 https://github.com/libgdx/gdx-ai
+
 * Base Agenda
 Death by Institution and the Harms of Abstraction.
 

@@ -21,15 +21,16 @@
 (defvaralias 'python-indent-offset 'py-indent-offset)
 (defvaralias 'python-pdbtrack-activate 'py-pdbtrack-do-tracking-p)
 (defvaralias 'python-shell-interpreter 'py-python-command)
-(defvaralias 'python-shell-interpreter-args 'py-python-command-args)
+(defvaralias 'python-shell-virtualenv-root 'py-shell-virtualenv-root)
 
 (after! python-mode
   (setq-default py-indent-offset 4
-                py-shell-virtualenv-root (expand-file-name  "~/anaconda") python-shell-virtualenv-root (expand-file-name  "~/anaconda")
+                py-shell-virtualenv-root (getenv "ANACONDA_ENVS")
                 py-pdbtrack-do-tracking-p t
 
                 py-python-command "python3"
                 py-python-command-args '("-i")
+                python-shell-interpreter-args "-i"
                 jg-python-repl-start-file (doom-module-expand-path :lang-weakly-typed 'python "repl/repl_startup.py ")
 
                 py-use-font-lock-doc-face-p t
@@ -98,7 +99,7 @@
 (add-to-list 'lsp-disabled-clients 'mspyls)
 
 (setq lsp-pyright-extra-paths #'[]
-      lsp-pyright-venv-path   (list (expand-file-name "~/anaconda"))
+      lsp-pyright-venv-path   (list (getenv "ANACONDA_ENVS"))
 
       )
 ;;-- end lsp
@@ -220,8 +221,14 @@
                     )
 (spec-handling-add! lookup-regular nil
                     '(python-mode
-                      ("python-twitter" . "https://python-twitter.readthedocs.io/en/latest/")
-                      ("pyproject.toml spec" . "https://packaging.python.org/en/latest/specifications/declaring-project-metadata/#declaring-project-metadata")
+                      ("Twisted"           . "https://docs.twisted.org/en/stable/")
+                      ("Mamba"             . "https://mamba.readthedocs.io/")
+                      ("SnakeMake"         . "https://snakemake.readthedocs.io/")
+                      ("Luigi"             . "https://luigi.readthedocs.io/en/stable/index.html")
+                      ("Dagster"           . "https://docs.dagster.io/")
+                      ("Petl"              . "https://petl.readthedocs.io/en/stable/index.html")
+                      ("python-twitter"    . "https://python-twitter.readthedocs.io/en/latest/")
+                      ("pyproject          .toml spec" . "https://packaging.python.org/en/latest/specifications/declaring-project-metadata/#declaring-project-metadata")
                       ("argparse"          . "https://docs.python.org/3/howto/argparse.html")
                       ("astroid"           . "https://pylint.pycqa.org/projects/astroid/en/latest/index.html")
                       ("beautiful Soup"    . "https://beautiful-soup-4.readthedocs.io/en/latest/")

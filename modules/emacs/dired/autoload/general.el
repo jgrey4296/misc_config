@@ -1,7 +1,59 @@
-;;; emacs/dired/+funcs.el -*- lexical-binding: t; -*-
+;;; emacs/dired/autoload.el -*- lexical-binding: t; -*-
 
 (defvar rename-regexp-query nil)
 
+;;;###autoload
+(defun +dired-enable-git-info-h ()
+  "Enable `dired-git-info-mode' in git repos."
+  (and (not (file-remote-p default-directory))
+       (locate-dominating-file "." ".git")
+       (dired-git-info-mode 1)))
+
+;;;###autoload
+(defun +jg-dired-touch (target)
+  (interactive "MTouch File: \n")
+  (call-process "touch" nil nil nil (f-join default-directory target))
+  )
+
+;;;###autoload
+(defun +jg-dired-rename ()
+  (interactive)
+  (let ((dired-dwim-target nil))
+    (dired-do-rename)
+    )
+  )
+
+;;;###autoload
+(defun +jg-dired-hash-files ()
+  (interactive)
+  (let* ((marked (dired-get-marked-files))
+         (quoted (mapcar #'shell-quote-argument marked))
+         uniqs
+         dups
+         )
+    (with-current-buffer (get-buffer-create jg-hash-check-buffer) (erase-buffer))
+    (shell-command (format jg-hash-check-command (s-join " " quoted)) jg-hash-check-buffer)
+    (setq uniqs (split-string (with-current-buffer jg-hash-check-buffer (buffer-string)) "\n" " ")
+          dups (-difference marked uniqs))
+    (dired-unmark-all-marks)
+    (dired-mark-if (and (dired-get-filename nil t) (-contains? dups (dired-get-filename nil t))) "Duplicated SHA Checksum")
+    (message "%s Duplicates" (length dups))
+    )
+  )
+
+;;;###autoload
+(defun +jg-dired-kill-subdir-or-close-buffer ()
+  (interactive)
+  (condition-case err
+      (dired-kill-subdir)
+    (error
+     (cl-assert (string-equal "Attempt to kill top level directory" (cadr err)))
+     (kill-current-buffer)
+     )
+    )
+  )
+
+;;;###autoload
 (defun +jg-dired-GLOBAL-do-rename-regexp (regexp newname arg whole-name)
   "Customised dired-do-rename-regexp from dired-aux to use GLOBAL regexp flag
 
@@ -12,6 +64,7 @@ Rename selected files whose names match REGEXP to NEWNAME.
    #'dired-rename-file
    "Rename" arg regexp newname dired-keep-marker-rename))
 
+;;;###autoload
 (defun +jg-dired-GLOBAL-do-create-files-regexp
   (file-creator operation arg regexp newname &optional marker-char)
   " Create a new file for each marked file using regexps.
@@ -51,6 +104,7 @@ Type SPC or `y' to %s one match, DEL or `n' to skip to next,
     (dired-create-files
      file-creator operation fn-list regexp-name-constructor marker-char)))
 
+;;;###autoload
 (defun +jg-dired-find-random-marked-file ()
   "Open random file from marked"
   (interactive)
@@ -60,6 +114,7 @@ Type SPC or `y' to %s one match, DEL or `n' to skip to next,
     )
   )
 
+;;;###autoload
 (defun +jg-dired-insert-subdir-maybe-recursive (&optional switches)
   "Insert Subdir tree in dired"
   (interactive (list (if current-prefix-arg +jg-dired-recursive-switches)))
@@ -74,6 +129,7 @@ Type SPC or `y' to %s one match, DEL or `n' to skip to next,
     )
   )
 
+;;;###autoload
 (defun +jg-dired-insert-marked-subdir ()
   (interactive)
   (let ((marked (-filter #'f-directory? (dired-get-marked-files))))
@@ -81,6 +137,7 @@ Type SPC or `y' to %s one match, DEL or `n' to skip to next,
     )
   )
 
+;;;###autoload
 (defun +jg-dired-diff ()
   "Diff Files from Dired"
   (interactive)
@@ -92,6 +149,7 @@ Type SPC or `y' to %s one match, DEL or `n' to skip to next,
     )
   )
 
+;;;###autoload
 (defun +jg-dired-create-summary-of-orgs ()
   "Index org files subtree of cwd"
   (interactive)
@@ -108,12 +166,14 @@ Type SPC or `y' to %s one match, DEL or `n' to skip to next,
     )
   )
 
+;;;###autoload
 (defun +jg-dired-marked-info ()
   "Count marked files"
   (interactive)
   (message "%s files are marked" (length (dired-get-marked-files)))
   )
 
+;;;###autoload
 (defun +jg-dired-dired-auto-move ()
   " Auto up directory then down line"
   (interactive)
@@ -135,22 +195,19 @@ Type SPC or `y' to %s one match, DEL or `n' to skip to next,
     )
   )
 
+;;;###autoload
 (defun +jg-dired-find-literal ()
   (interactive)
   (find-file-literally (dired-get-filename))
   )
 
-(defun +jg-dired-quick-look ()
-  (interactive)
-  (async-shell-command (format "qlmanage -p %s 2>/dev/null"
-                               (dired-get-filename)))
-  )
-
+;;;###autoload
 (defun +jg-dired-epa-list-keys ()
   (interactive)
   (epa-list-keys)
   )
 
+;;;###autoload
 (defun +jg-dired-epa-export-keys (prefix)
   (interactive "P")
   (let* ((context (epg-make-context epa-protocol epa-armor))
@@ -173,55 +230,3 @@ Type SPC or `y' to %s one match, DEL or `n' to skip to next,
       )
     )
 )
-
-(defun +jg-dired-kill-subdir-or-close-buffer ()
-  (interactive)
-  (condition-case err
-      (dired-kill-subdir)
-    (error
-     (cl-assert (string-equal "Attempt to kill top level directory" (cadr err)))
-     (kill-current-buffer)
-     )
-    )
-  )
-
-(defun +jg-dired-hash-files ()
-  (interactive)
-  (let* ((marked (dired-get-marked-files))
-         (quoted (mapcar #'shell-quote-argument marked))
-         uniqs
-         dups
-         )
-    (with-current-buffer (get-buffer-create jg-hash-check-buffer) (erase-buffer))
-    (shell-command (format jg-hash-check-command (s-join " " quoted)) jg-hash-check-buffer)
-    (setq uniqs (split-string (with-current-buffer jg-hash-check-buffer (buffer-string)) "\n" " ")
-          dups (-difference marked uniqs))
-    (dired-unmark-all-marks)
-    (dired-mark-if (and (dired-get-filename nil t) (-contains? dups (dired-get-filename nil t))) "Duplicated SHA Checksum")
-    (message "%s Duplicates" (length dups))
-    )
-  )
-
-(defun +jg-dired-dir-size ()
-  (interactive)
-  (let ((marked (dired-get-marked-files)))
-    (with-temp-buffer
-      (apply 'call-process "du" nil t nil "-hs" marked)
-      (message "Size: %s" (s-trim (buffer-string)))
-      )
-    )
-  )
-
-(defalias '+jg-dired-move 'dired-do-rename)
-
-(defun +jg-dired-rename ()
-  (interactive)
-  (let ((dired-dwim-target nil))
-    (dired-do-rename)
-    )
-  )
-
-(defun +jg-dired-touch (target)
-  (interactive "MTouch File: \n")
-  (call-process "touch" nil nil nil (f-join default-directory target))
-  )

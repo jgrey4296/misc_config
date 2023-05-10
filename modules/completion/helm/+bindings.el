@@ -43,7 +43,8 @@
       :n "k"                #'helm-previous-line
       :n "J"                #'helm-next-page
       :n "K"                #'helm-previous-page
-      :n ";"                #'helm-toggle-visible-mark
+      :n ";"                #'+jg-helm-next-source
+      :n "m"                #'helm-toggle-visible-mark
       :n "a"                #'helm-mark-all
       :n "u"                #'helm-unmark-all
       )
@@ -51,8 +52,8 @@
 ;; Actions
 (map! :map helm-map
       :after helm
-      :ni [ret] #'helm-maybe-exit-minibuffer
-      :ni [tab] #'helm-select-action
+      :ni "RET" #'helm-maybe-exit-minibuffer
+      :ni "TAB" #'helm-select-action
       "C-z"     #'helm-execute-persistent-action
       :n "s"    #'helm-select-action
       :n "1" (cmd! (helm-select-nth-action 0))

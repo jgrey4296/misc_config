@@ -27,4 +27,6 @@
   )
 
 
+(use-package! snakemake-mode)
+
 ;;; config.el ends here

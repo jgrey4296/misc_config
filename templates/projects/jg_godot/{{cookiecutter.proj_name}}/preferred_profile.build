@@ -1,0 +1,11 @@
+{
+	"disabled_build_options": {
+		"openxr": false
+	},
+	"disabled_classes": [
+		"XRCamera3D",
+		"XRNode3D",
+		"XROrigin3D"
+	],
+	"type": "build_profile"
+}

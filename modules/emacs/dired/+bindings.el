@@ -59,7 +59,7 @@
        )
 )
 (map! :map jg-dired-mode-map ;; change
-      :desc "Delete"              :n "D" #'dired-do-delete
+      :desc "Delete"              :n "D" #'+jg-dired-async-trash
       :desc "Touch"               :n "T" #'+jg-dired-touch
 
       :prefix ("c" . "Change")
@@ -75,7 +75,7 @@
       :desc "compress"            :n "z" #'dired-do-compress
       :desc "copy"                :n "c" #'dired-do-copy
       :desc "downcase"            :n "d" #'dired-downcase
-      :desc "move"                :n "m" #'+jg-dired-move
+      :desc "move"                :n "m" #'dired-do-rename
       :desc "new dir"             :n "n" #'dired-create-directory
       :desc "rename"              :n "r" #'+jg-dired-rename
       :desc "upcase"              :n "u" #'dired-upcase

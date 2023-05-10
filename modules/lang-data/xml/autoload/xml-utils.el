@@ -1,6 +1,8 @@
 ;;; +xml-utils.el -*- lexical-binding: t; -*-
-
+;; TODO make async
 ;;-- repl
+
+;;;###autoload
 (defun +jg-xml-load-into-repl ()
   " Insert new content into an xml lint repl "
   (interactive)
@@ -20,6 +22,8 @@
         )
   (+eval/open-repl-other-window)
   )
+
+;;;###autoload
 (defun +xml/open-repl ()
   " Open an xml lint shell comint on the current buffer / file "
   (interactive)
@@ -57,11 +61,9 @@
     )
   )
 
-(set-repl-handler! 'nxml-mode #'+xml/open-repl)
-(set-repl-handler! 'mhtml-mode #'+xml/open-repl)
-
 ;;-- end repl
 
+;;;###autoload
 (defun +jg-xml-format-buffer ()
   " Take the file contents, format it through xml lint,
 and redisplay
@@ -78,6 +80,7 @@ and redisplay
     )
   )
 
+;;;###autoload
 (defun +jg-xml-run-xidel (query)
   " Run an xpath query on the current buffer / file
 Storing and displaying results in a buffer
@@ -100,6 +103,7 @@ uses xidel, outputs as xml
     )
   )
 
+;;;###autoload
 (defun +jg-xml-dired-all-ext (files &rest exts)
   "Error if all files aren't of the specified extension"
   (unless  (--all? it
@@ -107,8 +111,9 @@ uses xidel, outputs as xml
                             collect (--any? (f-ext? file it) exts)))
     (error "Marked Files need to be %s's" exts)))
 
-
 ;;-- dired utils
+
+;;;###autoload
 (defun +jg-xml-dired-run-xidel (query)
   "Run an xpath query on marked files, saving the output to separate new files"
   (interactive "sXML Query: ")
@@ -139,12 +144,16 @@ uses xidel, outputs as xml
   )
 
   )
+
+;;;###autoload
 (defun +jg-xml-dired-elements ()
   "Print out the element mapping using xmlstarlet of all marked files combined"
   (interactive)
   (+jg-xml-dired-all-ext (dired-get-marked-files) "xml" "html" "htm")
   (dired-do-shell-command "xml el -u *" nil (dired-get-marked-files))
   )
+
+;;;###autoload
 (defun +jg-xml-dired-select ()
   "Run an xmlstarlet query template on marked files "
   (interactive)
@@ -156,6 +165,8 @@ uses xidel, outputs as xml
                             (dired-get-marked-files))
     )
   )
+
+;;;###autoload
 (defun +jg-xml-dired-validate ()
   "Validate each marked file against an .xsd schema"
   (interactive)
@@ -169,6 +180,8 @@ uses xidel, outputs as xml
                             (dired-get-marked-files))
     )
   )
+
+;;;###autoload
 (defun +jg-xml-dired-format ()
   "Format xml files into fmt-`?` new files with:
 an indent of 4,
@@ -188,6 +201,8 @@ encoding as utf-8"
                             nil files)
     )
   )
+
+;;;###autoload
 (defun +jg-xml-dired-generate-schema ()
   "Generate a trang .xsd schema file from marked files "
   (interactive)
@@ -195,6 +210,8 @@ encoding as utf-8"
   (dired-do-shell-command (format "trang * %s.xsd" (read-string "Schema Name: "))
                           nil (dired-get-marked-files))
   )
+
+;;;###autoload
 (defun +jg-xml-dired-schema-uml ()
   "Convert an .xsd file into a plantuml .pu file, and create a png and text output for it "
   (interactive)
@@ -203,6 +220,8 @@ encoding as utf-8"
   (dired-do-shell-command "plantuml -filename schema.png"                 nil '("schema.pu"))
   (dired-do-shell-command "cat ? | plantuml -ttxt -p"                     nil '("schema.pu"))
   )
+
+;;;###autoload
 (defun +jg-xml-dired-gen-python ()
   "Generate python bindings for the marked files/directories"
   (interactive)
@@ -213,6 +232,8 @@ encoding as utf-8"
                             (dired-get-marked-files))
     )
   )
+
+;;;###autoload
 (defun +jg-xml-dired-visualise-json ()
   "Use Plantuml to visualise json files"
   (interactive)

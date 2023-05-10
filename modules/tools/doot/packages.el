@@ -20,6 +20,6 @@
 ;;
 ;;; Code:
 
-
+(package! snakemake-mode)
 
 ;;; packages.el ends here

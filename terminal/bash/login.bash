@@ -8,7 +8,7 @@ source "$HOME/.doom.d/terminal/bash/_aliases.bash"
 # Activate components
 for fname in $(find "$HOME/.doom.d/terminal/bash/components" -type f -name "*.bash" -not -regex ".+?/_.+?\.bash")
 do
-    jgdebug ""-- Sourcing: " "$fname""
+    jgdebug "-- Sourcing: $fname"
     source "$fname"
 done
 
@@ -19,12 +19,9 @@ BASH_ENV="$HOME/.doom.d/terminal/bash/non_interactive.bash"
 source "$HOME/.doom.d/terminal/bash/emacs.bash"
 source "$HOME/.doom.d/terminal/bash/_exports.bash"
 
-#Shell Location update
-SHELL="$(which bash)"
-
-echo "CWD   :" `pwd`
-echo "Date  :" `date`
-jgdebug " "Path  :" "$PATH""
+echo "CWD   : $(pwd)"
+echo "Date  : $(date)"
+jgdebug "Path  : $PATH"
 
 read-emacs
 jg_maybe_inc_prompt

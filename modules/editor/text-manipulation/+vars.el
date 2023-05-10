@@ -98,10 +98,5 @@
 (spec-handling-setq! evil-shift
                      evil-shift-width 4
                      )
-(spec-handling-add! lookup-regular nil
-                    '(dired-mode
-                     ("Jq Manual" . "https://stedolan.github.io/jq/manual/")
-                     )
-                    )
 
 ;;-- end specs

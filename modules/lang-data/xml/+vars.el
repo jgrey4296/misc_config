@@ -30,4 +30,7 @@
 (spec-handling-add! company nil
                     '(nxml-mode (:mode . #'company-nxml))
                     )
+
+(set-repl-handler! 'nxml-mode #'+xml/open-repl)
+(set-repl-handler! 'mhtml-mode #'+xml/open-repl)
 ;;-- end specs

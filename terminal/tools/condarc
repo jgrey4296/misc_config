@@ -1,8 +1,9 @@
 envs_dirs:
-  - /usr/local/anaconda3/envs
+  - /usr/local/Caskroom/mambaforge/base/envs
 channels:
   - defaults
   - conda-forge
+  - bioconda
 ssl_verify: true
 env_prompt: ""
 create_default_packages:

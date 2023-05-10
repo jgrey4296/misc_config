@@ -86,9 +86,11 @@
               )
 ;;-- end defaults
 
-;;-- Byte Compilation
+;;-- byte / native compilation
 ;; from https://github.com/kiwanami/emacs-epc/issues/35
-(setq byte-compile-warnings '(not cl-functions))
+(setq byte-compile-warnings '(not cl-functions)
+      native-comp-async-jobs-number 1
+      )
 ;;-- end Byte Compilation
 
 ;;-- auto mode overrides

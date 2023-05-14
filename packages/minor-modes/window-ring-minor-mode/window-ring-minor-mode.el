@@ -75,6 +75,7 @@
   (add-to-list 'persp-before-kill-functions #'window-ring-kill-persp-fn)
   (add-hook 'find-file-hook #'window-ring-add-current-buffer)
   (add-hook 'kill-buffer-hook #'window-ring-remove-buffer)
+  (add-hook 'kill-buffer-query-functions #'window-ring-protect-scratch-p -50)
   )
 
 (defun window-ring-p (&optional arg)
@@ -91,6 +92,13 @@
     t)
   )
 
+(defun window-ring-protect-scratch-p ()
+  (not (with-window-ring
+           (eq (current-buffer) wr-scratch)
+         )
+       )
+  )
+
 ;;-- creation
 
 (defun window-ring-new ()
@@ -105,6 +113,7 @@
     (persp-add-buffer (current-buffer))
     (add-hook 'find-file-hook #'window-ring-add-current-buffer)
     (add-hook 'kill-buffer-hook #'window-ring-remove-buffer)
+    (add-hook 'kill-buffer-query-functions #'window-ring-protect-scratch-p -50)
     (window-ring-setup-columns t nil)
     (setq window-ring--adding nil)
     )
@@ -155,14 +164,14 @@
 (defun window-ring-setup-columns (&optional arg soft)
   " Reset windows to (or arg 3) columns.
     if SOFT then don't clear the window ring "
-  (interactive "p")
+  (interactive "pi")
   ;; (arg == 1 -> one row) (else -> two rows, only use top)
   ;; Clear
   (persp-delete-other-windows)
   (let ((leftmost (selected-window))
         centre rightmost)
     ;; split
-    (when (< 1 arg) ;; Split as top 3 columns
+    (when (and (numberp arg) (< 1 arg)) ;; Split as top 3 columns
       (split-window-below))
 
     ;; Split as 3 columns
@@ -195,6 +204,7 @@
 
 (defun window-ring-add-current-buffer (&optional arg)
   (interactive "p")
+  (message "Possibly adding to ring: %s" (current-buffer))
   (when (and (persp-parameter 'window-ring)
              (or (buffer-local-boundp 'window-ring-buffer (current-buffer))
                  (funcall window-ring-buffer-test-fn (current-buffer))))
@@ -202,18 +212,20 @@
     )
   )
 
-(defun window-ring-add-to-head (buffer arg)
+(defun window-ring-add-to-head (buffer &optional arg)
   (interactive "b\np")
   (with-window-ring
-    (ring-insert+extend wr-actual buffer t)
+      (-when-let (buff (get-buffer buffer))
+        (ring-insert+extend wr-actual buff t))
     )
   (when arg (window-ring-redisplay))
   )
 
-(defun window-ring-add-to-tail (buffer arg)
+(defun window-ring-add-to-tail (buffer &optional arg)
   (interactive "b\np")
   (with-window-ring
-    (ring-insert-at-beginning window-ring buffer)
+      (-when-let (buff (get-buffer buffer))
+        (ring-insert-at-beginning window-ring buffer))
     )
   (when arg (window-ring-redisplay))
   )
@@ -381,26 +393,29 @@
   )
 
 (defun window-ring-set-window (window index)
+  (message "setting Window: %s (%s) : %s" window (window-live-p window) index)
   (with-window-ring
-      (set-window-buffer window (if index
-                                    (ring-ref wr-actual index)
-                                  wr-scratch))
-
+      (unless (window-live-p window) (select-window window))
+    (set-window-buffer window (if index
+                                  (ring-ref wr-actual index)
+                                wr-scratch))
     )
   )
 
 (defun window-ring-redisplay-actual ()
   (with-window-ring
-      (let* ((largest  (get-largest-window))
+      (let* ((largest  (get-largest-window 'visible))
              (ring-len (ring-length wr-actual))
              (curr-win (window-next-sibling largest))
              (index    (window-ring-newer ring-len wr-focus wr-loop))
              )
+        (message "Windows: Largest: %s (%s) curr: %s (%s)" largest (window-live-p largest) curr-win (window-live-p curr-win))
         (set-window-buffer largest (ring-ref wr-actual wr-focus))
         (while curr-win
           (window-ring-set-window curr-win index)
           (setq curr-win (window-next-sibling curr-win)
                 index (window-ring-newer ring-len index wr-loop)))
+        (message "Getting older")
         (setq index (window-ring-older ring-len wr-focus wr-loop)
               curr-win (window-prev-sibling largest))
         (while curr-win

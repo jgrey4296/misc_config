@@ -169,7 +169,6 @@
           (cadr prev-buffers)
         head)))
 
-
   (defadvice! +workspaces-remove-dead-buffers-a (persp)
     " HACK Fixes #4196, #1525: selecting deleted buffer error when quitting Emacs
         or on some buffer listing ops. "
@@ -239,7 +238,6 @@
 (spec-handling-new! projects projectile-project-types nil collect
                     `(,key . ,(apply 'projectile--build-project-plist val))
                     )
-
 
 (spec-handling-new! project-ignored projectile-globally-ignored-directories nil append
                     val

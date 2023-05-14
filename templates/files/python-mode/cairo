@@ -22,7 +22,7 @@ import pathlib
 
 ##-- logging
 LOGLEVEL = logging.DEBUG
-LOG_FILE_NAME = "log.{}".format(pathlib.Path(__file__).stem)
+LOG_FILE_NAME = "log.{}".format(pl.Path(__file__).stem)
 logging.basicConfig(filename=LOG_FILE_NAME,level=LOGLEVEL,filemode='w')
 
 console = logging.StreamHandler()

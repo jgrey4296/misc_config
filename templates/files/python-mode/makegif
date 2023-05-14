@@ -31,10 +31,10 @@ logging = log_mod.getLogger(__name__)
 ##-- end logging
 
 ##-- constants
-GIF_OUTPUT_DIR = pathlib.Path(".")
+GIF_OUTPUT_DIR = pl.Path(".")
 GIF_NAME       = "anim.gif"
 
-SOURCE_DIR     = pathlib.Path('images')
+SOURCE_DIR     = pl.Path('images')
 FILE_FORMAT    = '.png'
 FPS            =12
 numRegex       = re.compile(r'(\d+)')

@@ -9,12 +9,12 @@
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
-# documentation root, use pathlib.Path.resolve to make it absolute, like shown here.
+# documentation root, use pl.Path.resolve to make it absolute, like shown here.
 #
 import os
 import sys
-import pathlib
-sys.path.insert(0, pathlib.Path('../$1').resolve())
+import pathlib as pl
+sys.path.insert(0, pl.Path('../$1').resolve())
 
 import $1
 

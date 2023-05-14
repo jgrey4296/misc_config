@@ -17,7 +17,7 @@ DISPLAY_LEVEL     = logmod.DEBUG
 FILE_LEVEL        = logmod.DEBUG
 STREAM_TARGET     = stdout # or stderr
 
-LOG_FILE_NAME     = "log.{}".format(pathlib.Path(__file__).stem)
+LOG_FILE_NAME     = "log.{}".format(pl.Path(__file__).stem)
 FILE_MODE         = "w"
 FILE_LOG_FORMAT   = None # or "%(asctime)s | %(levelname)8s | %(message)s"
 STREAM_LOG_FORMAT = None # or "%(asctime)s | %(levelname)8s | %(message)s"

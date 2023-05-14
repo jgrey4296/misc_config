@@ -70,7 +70,7 @@
   :config
   (add-hook! 'comint-mode-hook (defun jg-remove-comint-capf ()
                                  (remove-hook 'completion-at-point-functions 'comint-completion-at-point t)
-                                 (add-hook 'completion-at-point-functions 'comint-dynamic-complete-filename)
+                                 (add-hook 'completion-at-point-functions 'comint-dynamic-complete-filename nil t)
                                  ))
   )
 ;;; config.el ends here

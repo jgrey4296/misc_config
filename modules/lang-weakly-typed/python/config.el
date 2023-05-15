@@ -28,9 +28,10 @@
                         (:support . flycheck)
                         )
                       )
-  (setq py-complete-function nil
-        py-do-completion-p nil
-        py-company-pycomplete-p t)
+  (setq py-complete-function #'(lambda () nil)
+        py-do-completion-p nil ;; nil
+        py-company-pycomplete-p nil
+        py-fast-process-p nil)
   :config
   ;;-- hooks
   (add-hook! 'python-mode-hook

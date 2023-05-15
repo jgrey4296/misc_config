@@ -28,8 +28,8 @@ falling back on searching your PATH."
   (unless python-shell-interpreter
     (user-error "`python-shell-interpreter' isn't set"))
 
-  (unless jg-python-env-state
-    (+jg-python-handle-go!))
+  (unless env-handling-state
+    (env-handling-go!))
 
   ;; (puthash (cons 'inferior-python-mode default-directory) new-buffer +eval-repl-buffers)
   ;; (puthash (cons 'python-mode default-directory) new-buffer +eval-repl-buffers)

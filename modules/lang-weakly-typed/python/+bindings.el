@@ -73,7 +73,7 @@
 
 (map! :map inferior-python-mode-map
       :after python-mode
-      "TAB" #'+jg-completion-complete-or-snippet
+      "TAB" #'+jg-snippets-complete-or-snippet
       )
 
 (map! :map cython-mode-map

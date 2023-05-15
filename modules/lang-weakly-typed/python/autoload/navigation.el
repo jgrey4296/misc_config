@@ -5,10 +5,22 @@
 ;;;###autoload
 (defun +jg-conda-find-defs ()
   (interactive)
-  (anaconda-mode-call "infer"
-                      #'(lambda (result)
-                          (message "%s" result)
-                          (anaconda-mode-show-xrefs result 'window "None Found")))
+  (anaconda-mode-call "infer" #'+jg-conda-pop-to-xref)
+  )
+
+(defun +jg-conda-pop-to-xref (result)
+  (if (stringp result)
+      (message result)
+    (let* ((window-ring-suppress-adding t)
+           (xrefs (anaconda-mode-make-xrefs result))
+           (marker (save-excursion (xref-location-marker (xref-item-location (cl-first xrefs)))))
+           (buf (marker-buffer marker))
+           )
+      (+popup-buffer buf)
+      (with-current-buffer buf
+        (xref--goto-char marker))
+      )
+    )
   )
 
 ;;;###autoload

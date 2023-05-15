@@ -1,5 +1,5 @@
 ;; util/base_bindings/+bindings.el -*- lexical-binding: t; -*-
-(message "Setting up Leaderless bindings: %s" (current-time-string))
+(doom-log "Setting up Misc Bindings")
 (global-set-key (kbd "C-c u") #'universal-argument)
 
 (define-key! read-expression-map

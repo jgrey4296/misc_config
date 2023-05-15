@@ -5,7 +5,7 @@
   )
 
 (spec-handling-add! projects nil
-                    '(jg-toml-project ("dooter.py") :project-file "doot.toml" :related-files-fn #'+jg-toml-related-files-fn)
+                    '(jg-toml-project ("doot.toml") :project-file "doot.toml" :related-files-fn #'+jg-toml-related-files-fn)
                     )
 
 (spec-handling-add! whitespace-cleanup nil

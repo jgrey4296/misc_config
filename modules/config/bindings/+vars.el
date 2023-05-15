@@ -6,11 +6,6 @@
 
 (setq-default which-key-show-operator-state-maps t
               evil-escape-delay 0.3
-              jg-binding-local-var-skip-regexp (rx (or "-map"
-                                                       "keymap"
-                                                       "display-table"
-                                                       "imenu-generic-expression"
-                                                       "font-lock-keywords"))
 
               )
 

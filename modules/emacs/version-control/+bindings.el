@@ -59,6 +59,10 @@
       :n [tab] #'magit-section-toggle
       )
 
+(map! :map magit-process-mode-map
+      :n "`" #'quit-window
+      )
+
 (map! :map magit-remote-section-map
       :when (not forge-add-default-bindings)
       [remap magit-browse-thing] #'forge-browse-remote

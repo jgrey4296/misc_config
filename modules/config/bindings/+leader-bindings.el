@@ -56,7 +56,7 @@
       :desc "Change Extension"            "e"   #'+jg-binding-change-ext
       :desc "Clone Indirect"              "i"   #'clone-indirect-buffer-other-window
       :desc "Kill all buffers"            "K"   #'doom/kill-all-buffers
-      :desc "Local Variables"             "l"   #'+jg-bindings-list-buffer-locals
+      ;; :desc "Local Variables"             "l"   #'+jg-bindings-list-buffer-locals
 
       :desc "Kill other buffers"          "O"   #'doom/kill-other-buffers
       :desc "Read-only mode"              "r"   #'read-only-mode
@@ -68,6 +68,8 @@
 
       )
 ;;-- end <leader> b --- buffer
+
+;; <leader> B - bookmarks
 
 ;;-- <leader> c --- code
 (map! :leader
@@ -116,13 +118,6 @@
       :desc "Sudo find file"              "U"   #'doom/sudo-find-file
       :desc "Yank filename"               "n"   #'+default/yank-buffer-path
 
-      (:prefix ("b" . "Bookmark")
-       :desc "Set bookmark"                "m" #'bookmark-set
-       :desc "Delete bookmark"             "M" #'bookmark-delete
-       :desc "Rename bookmark"             "r" #'bookmark-rename
-       :desc "Save Bookmarks"              "s" #'bookmark-save
-       :desc "Load Bookmarks"              "l" #'+jg-bindings-load-bookmarks
-       )
       )
 ;;-- end <leader> f --- file
 

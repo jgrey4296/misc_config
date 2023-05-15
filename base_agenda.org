@@ -16,34 +16,18 @@ Death by Institution and the Harms of Abstraction.
 *** [[file:/Volumes/documents/github/python/instal][Instal]]
 
 ** Secondary
-*** [[file:/Volumes/documents/github/jgrey4296.github.io/orgfiles/listings/quotes.org][Quotes]]
+*** [[file:/Volumes/documents/github/jgrey4296.github.io/orgfiles/quotes][Quotes]]
 
 *** [[file:/Volumes/documents/github/jgrey4296.github.io/orgfiles/listings/definitions.org::*Overview][Definitions]]
-*** [[file:/Volumes/documents/github/jgrey4296.github.io/orgfiles/listings/taxonomies.org][Taxonomies]]
+*** [[file:/Volumes/documents/github/jgrey4296.github.io/orgfiles/taxonomies][Taxonomies]]
 
-*** [[/Volumes/documents/github/jgrey4296.github.io/orgfiles/listings/DSLs.org][DSLs]]
+*** [[/Volumes/documents/github/jgrey4296.github.io/orgfiles/taxonomies/DSLs.org][DSLs]]
 *** [[file:~/github/jgrey4296.github.io/resources/bibliography][Bibliography]]
 
 *** [[org/pomodoro_log.org][Pomodoro Log]]
 *** [[file:/Volumes/documents/twitter_threads][Twitter Threads]]
 
 *** [[file:/Volumes/documents/github/jgrey4296.github.io/orgfiles/primary/research_questions.org][Research Questions]]
-
-*** Doot
-**** Builders
-- clips
-- coq
-- soar
-- z3
-- erlang
-- grunt - haskell - homebrew - mono - pdf - poetry - py compile - ruby - sclang
-
-**** bibtex
-- waybacker
-- library summary
-- compile
-- hash verify
-- timelines
 
 ** Other
 https://llvm.org/docs/LangRef.html

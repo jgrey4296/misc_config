@@ -130,7 +130,8 @@
 ;;-- end modules
 
 (map! :leader
-      :desc "help" "h" jg-help-map
+      :desc "help"            "h" jg-help-map
+      :desc "Local Variables" "b l"   #'+jg-help-list-buffer-locals
       )
 (map! :g "C-x h" jg-help-map)
 

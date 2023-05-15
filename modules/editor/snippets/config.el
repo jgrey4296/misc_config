@@ -9,7 +9,7 @@
 (define-advice doom-snippets-initialize (:override () +jg-snippets-fix)
   nil
   )
-(add-hook 'doom-switch-buffer-hook #'+file-templates-check-h)
+(add-hook 'doom-switch-buffer-hook #'+file-templates-maybe-expand-h)
 
 (use-package! yasnippet
   :defer-incrementally eldoc easymenu help-mode

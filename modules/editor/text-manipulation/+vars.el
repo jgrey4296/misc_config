@@ -9,6 +9,7 @@
 (defvar jg-text-debug-snippet-name "util.debug")
 
 ;;-- evil-surround
+;; later modified by evil-embrace
 (setq-default evil-surround-pairs-alist
   '((?\( . ("( " . " )"))
     (?\[ . ("[ " . " ]"))
@@ -25,8 +26,12 @@
     (?> . ("<" . ">"))
     (?t . evil-surround-read-tag)
     (?< . evil-surround-read-tag)
-    (?f . evil-surround-function))
+    (?f . evil-surround-function)
+    (?F . evil-surround-prefix-function)
+    )
 )
+
+
 
 ;;-- end evil-surround
 

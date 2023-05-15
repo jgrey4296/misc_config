@@ -2,7 +2,6 @@
 ;;
 ;;-- helm
 (map! :map jg-binding-helm-map
-      :desc "Firefox Helm"              "f" #'+jg-tag-helm-bookmarks
       :desc "Twitter Tag Helm"          "t" #'+jg-tag-helm-tag-twitter
       :desc "Twitter Account Helm"      "T" #'+jg-tag-helm-account-twitter
       :desc "Unified Helm"              "u" #'+jg-tag-helm-unified

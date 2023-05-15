@@ -1,7 +1,7 @@
 ;;; +transformers.el -*- lexical-binding: t; -*-
 
-
 ;;-- candidate transformers
+
 (defun +jg-tag-sort-by-files (candidates source)
   (sort candidates (lambda (a b)
                      (let ((a-count (plist-get (cdr a) :count))
@@ -9,6 +9,7 @@
                        (> (if (stringp a-count) (string-to-number a-count) a-count)
                           (if (stringp b-count) (string-to-number b-count) b-count))
                        ))))
+
 (defun +jg-tag-helm-index-file-transformer (cands)
   (let* ((as-list (mapcar (lambda (x) (split-string x ":" t "\s+")) cands))
          (max-tag (apply 'max (mapcar (lambda (x) (length (car x))) as-list)))
@@ -21,6 +22,7 @@
             as-list)
     )
   )
+
 (defun +jg-tag-grep-filter-one-by-one (candidate)
         "A Grep modification for bookmark helm to extract a bookmark's url and tags"
         (if (consp candidate)
@@ -51,6 +53,7 @@
             )
           )
         )
+
 (defun +jg-tag-twitter-grep-filter-one-by-one (candidate)
         "A Grep modification for twitter grep helm to extract information correctly "
         (if (consp candidate)
@@ -87,9 +90,7 @@
 ;;-- end candidate transformers
 
 ;;-- pattern transformers
-(defun +jg-tag-bookmark-helm-pattern-transformer (pattern)
-  pattern
-)
+
 (defun +jg-tag-grep-pattern-transformer (pattern)
   (format "^[^:]*%s[^:]* :" pattern))
 ;;-- end pattern transformers

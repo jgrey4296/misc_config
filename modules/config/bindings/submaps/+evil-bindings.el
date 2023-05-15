@@ -51,7 +51,7 @@
       )
 
 ;; Override default evil maps
-(message "Finalising Evil bindings: %s" (current-time-string))
+(doom-log "Finalising Evil bindings: %s" (current-time-string))
 ;; Override
 (setq evil-normal-state-map       jg-binding-normal-state-map
       evil-insert-state-map       jg-binding-insert-state-map
@@ -74,7 +74,7 @@
 
 (global-set-key (kbd "<backtab>")       #'evil-normal-state)
 
-(message "Evil Bindings Complete: %s" (current-time-string))
+(doom-log "Evil Bindings Complete: %s" (current-time-string))
 
 (provide 'jg-evil-bindings)
 ;;-- end stitching together

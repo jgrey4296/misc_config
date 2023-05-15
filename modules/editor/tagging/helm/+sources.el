@@ -7,20 +7,6 @@
 (setq helm-grep-actions (append helm-grep-actions '(("Open Url" . jg-tag-open-url-action))))
 
 ;; Build a Custom grep for bookmarks
-(setq jg-tag-bookmark-helm-source
-      (helm-make-source "Bookmark Helm" 'helm-grep-class
-        :action (helm-make-actions "Open Url" '+jg-tag-open-url-action
-                                   "Insert"   '+jg-tag-insert-bookmarks
-                                   "Insert Link" '+jg-tag-insert-links
-                                   "Tweet Link"  '+jg-tag-tweet-link-action
-                                   )
-        :filter-one-by-one   '+jg-tag-grep-filter-one-by-one
-        :pattern-transformer '+jg-tag-bookmark-helm-pattern-transformer
-        :nomark nil
-        :backend "ggrep --color=always -a -d skip %e -n%cH -e %p %f"
-        :pcre nil
-        )
-      )
 (setq jg-tag-twitter-grep-helm-source-alt
       (helm-make-source "twitter grep helm alt" 'helm-grep-class
         :action (helm-make-actions "File Select Helm" #'+jg-tag-file-select-helm

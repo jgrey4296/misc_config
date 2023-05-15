@@ -43,7 +43,7 @@ separated by 'spec-handling-symbol-separator', looking up keywords in 'spec-hand
   )
 
 (defun spec-handling-first-run ()
-  (message "UI Reapply Spec Hook Firing")
+  (message "Reapply Spec Hook Firing")
   (provide 'spec-handling-first-run)
   )
 
@@ -134,7 +134,6 @@ TODO: add spec format docstring
                         do
                         (cl-loop for key in (ensure-list modes)
                                  do
-                                 (message "Making %s Hook for %s" (quote ,type) key)
                                  (let ((fn-name (spec-handling--gensym (quote ,type) key :mode-hook)))
                                    (fset fn-name
                                          (-partial (lambda (val)

@@ -76,21 +76,6 @@
           :truncate-lines t
           )
     )
-(defun +jg-tag-helm-bookmarks ()
-    " Run a Helm for search and opening html bookmarks "
-    (interactive)
-    (helm-set-local-variable
-     ;; 'helm-grep-include-files (format "--include=%s" jg-tag-loc-bookmarks)
-     'helm-grep-last-targets `(,jg-tag-loc-bookmarks)
-     'default-directory jg-tag-loc-default-helm-directory
-     'helm-grep-default-command (alist-get 'backend jg-tag-bookmark-helm-source)
-     )
-    (helm :sources jg-tag-bookmark-helm-source
-          :full-frame t
-          :buffer "*helm bookmarks*"
-          :truncate-lines t
-          )
-    )
 (defun +jg-tag-helm-unified ()
     (interactive)
     ;;Load headings if necessary

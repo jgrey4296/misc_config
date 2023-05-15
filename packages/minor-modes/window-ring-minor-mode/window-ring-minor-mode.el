@@ -61,9 +61,8 @@
   )
 
 (defvar window-ring--adding nil)
-
-(defvar window-ring-buffer-test-fn 'identity
-  "one argument, current buffer, return non-nil to add to current ring")
+(defvar window-ring-suppress-adding nil)
+(defvar window-ring-buffer-test-fn 'identity "one argument, current buffer, return non-nil to add to current ring")
 
 (define-minor-mode window-ring-minor-mode
   "A Minor Mode for easy control of a 3-ple view of a ring of buffers"
@@ -204,10 +203,12 @@
 
 (defun window-ring-add-current-buffer (&optional arg)
   (interactive "p")
-  (message "Possibly adding to ring: %s" (current-buffer))
   (when (and (persp-parameter 'window-ring)
              (or (buffer-local-boundp 'window-ring-buffer (current-buffer))
-                 (funcall window-ring-buffer-test-fn (current-buffer))))
+                 (funcall window-ring-buffer-test-fn (current-buffer)))
+             (not window-ring-suppress-adding)
+             )
+    (message "Adding to ring: %s %s" (current-buffer) window-ring-suppress-adding)
     (window-ring-add-to-head (current-buffer) arg)
     )
   )

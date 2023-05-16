@@ -8,7 +8,14 @@
 (defvar env-handling-state nil)
 
 ;;;###autoload
-(defvar env-handling-registered '((:setup none) (:support none) (:teardown none)) )
+(defvar env-handling-registered '((:setup none)
+                                  (:support none)
+                                  (:teardown none)
+                                  (:create none)
+                                  (:install none)
+                                  (:update none)
+                                  )
+  )
 
 ;;;###autoload
 (defvar env-handling-markers '(".venv" ".conda" "Pipfile" "pyproject.toml"))
@@ -29,30 +36,40 @@ and call the currently used lsp/conda client entrypoint"
 
   ;;-- environment activation
   (let* ((local-env (env-handling-find-venv))
-         (env-name (plist-get local-env :env))
-         (env-path (plist-get local-env :path))
+         (env-name (string-trim (plist-get local-env :env)))
+         (env-path (string-trim (plist-get local-env :path)))
          (root (or (projectile-project-root) default-directory))
         )
     (unless (plist-get env-handling-state :setup) ;; Select handler
       (setf (plist-get env-handling-state :setup)
-            (intern (ivy-read "Python Env Handler: " (env-handling--get-handlers :setup) :require-match t)))
+            (let* ((vals (env-handling--get-handlers :setup))
+                   (chosen (ivy-read "Python Env Handler: " vals :require-match t))
+                  )
+              (cons (intern chosen) (alist-get (intern chosen) vals))))
       )
     (unless (plist-get env-handling-state :support)  ;; select support
       (setf (plist-get env-handling-state :support)
-            (intern (ivy-read "Python Support: " (env-handling--get-handlers :support) :require-match t)))
+            (let* ((vals (env-handling--get-handlers :support))
+                   (chosen (ivy-read "Python Support: " vals :require-match t)))
+              (cons (intern chosen) (alist-get (intern chosen) vals))))
       )
-    (unless (or env-name (not (eq (plist-get env-handling-state :setup) 'conda)))
-      (setq env-name (conda-env-read-name "Select Environment: "))
+    (unless (or env-name (not (eq (car-safe (plist-get env-handling-state :setup)) 'conda)))
+      (setq env-name (string-trim (conda-env-read-name "Select Conda Environment: ")))
       )
     (add-to-list 'python-shell-extra-pythonpaths root)
     (add-to-list 'py-shell-extra-pythonpaths root)
     (when (boundp 'lsp-pyright-extra-paths)
       (setq lsp-pyright-extra-paths (vconcat lsp-pyright-extra-paths (vector root))))
 
-    (pcase (plist-get env-handling-state :setup)
-      ((and (guard (plist-get env-handling-state :locked)) (guard (not (string-equal (plist-get env-handling-state :env) env-name))))
+    (let ((setup (plist-get env-handling-state :setup))
+          (locked (plist-get env-handling-state :locked))
+          (curr-env (plist-get env-handling-state :env))
+          )
+    (pcase (car-safe setup)
+      ;;-- failures
+      ((and (guard locked) (guard (not (string-equal curr-env env-name))))
        (message "Environment is locked"))
-      ((and (guard (plist-get env-handling-state :env)) (guard (string-equal (plist-get env-handling-state :env) env-name)))
+      ((and (guard curr-env) (guard (string-equal curr-env env-name)))
        (message "Environment is current"))
       ((and 'conda (guard env-name) (guard (not (f-exists? (f-join conda-env-home-directory env-name)))))
        (message "Conda Environment Doesn't exist: %s %s" conda-env-home-directory env-name))
@@ -62,75 +79,54 @@ and call the currently used lsp/conda client entrypoint"
        (message "Not a pipenv project"))
       ((and 'poetry (guard (not (poetry-ensure-in-project))))
        (message "Not in a poetry project"))
-      ('pipenv
-       (message "Activating pipenv")
-       (pipenv-activate))
-      ('poetry
-       (message "Activating via poetry")
-       (poetry-venv-workon))
-      ((and 'conda (guard env-name) (guard (not (string-empty-p env-name))))
-       (message "Activating Conda Environment: %s" env-name)
-       (conda-env-activate env-name)
-       (setenv "CONDA_DEFAULT_ENV" env-name))
-      ('venv
-       (message "Activating via venv")
-       (pyvenv-activate (f-join env-path env-name)))
-      ('pythonic
-       (message "Activating via pythonic")
-       (pythonic-activate (f-join env-path env-name)))
+       ;;-- end failures
+      ((and (let setup-fn (cadr setup)) (guard (functionp setup-fn)))
+       (message "Activating %s" (car setup))
+       (funcall setup-fn env-path env-name))
       )
     (setf (plist-get env-handling-state :env) env-name
           (plist-get env-handling-state :path) env-path
           )
     )
-  ;;-- end environment activation
+    ;;-- end environment activation
 
-  ;;-- support activation
-  (pcase (plist-get env-handling-state :support)
-    ('eglot
-     (message "Adding eglot support")
-     (eglot-ensure))
-    ('lsp
-     (message "Adding lsp support")
-     (lsp-deferred))
-    ('tree-sitter
-     (message "Adding tree-sitter support")
-     (tree-sitter!))
-    ('conda
-     (message "Adding conda support")
-     (anaconda-mode 1))
-    ('flycheck
-     (message "Adding flycheck support")
-     (unless flycheck-enabled-checkers
-       (let ((chosen (intern (ivy-read "Flychecker: " flycheck-disabled-checkers :require-match t))))
-         (delete chosen flycheck-disabled-checkers)
-         (add-to-list flycheck-enabled-checkers chosen)
-         ))
-     (flycheck-mode 1))
+    ;;-- support activation
+    (let ((support (plist-get env-handling-state :support)))
+      (pcase (car-safe support)
+        ((and (let support-fn (cadr support)) (guard (functionp support-fn)))
+         (message "Activating %s" (car support))
+         (funcall support-fn env-path env-name))
+        ('none nil)
+        (_ (message "Support Lacks a setup function"))
+        )
+      )
+    ;;-- end support activation
     )
-  ;;-- end support activation
-
   )
 
 ;;;###autoload
 (defun env-handling-clear-env! ()
   (interactive)
-  (message "Clearing python environment")
-  (pcase (plist-get env-handling-state :setup)
-    ('pipenv (pipenv-deactivate))
-    ('poetry (poetry-venv-deactivate))
-    ('conda
-     (conda-env-deactivate)
-     (setenv "conda_default_env" nil))
-    ('venv (pyvenv-deactivate))
-    ('pythonic (pythonic-deactivate))
+  (let ((setup (plist-get env-handling-state :setup)))
+    (message "Clearing python environment")
+    (pcase (car-safe setup)
+      ((and (let teardown-fn (caddr setup)) (guard (functionp teardown-fn)))
+       (funcall teardown-fn))
+      ('none nil)
+      (_
+       (message "No Env Teardown function found: %s" setup))
+      )
     )
-  (pcase (plist-get env-handling-state :support)
-    ('eglot (signal 'eglot-todo (current-buffer)))
-    ('lsp (lsp-shutdown-workspace lsp--cur-workspace))
-    ('tree-sitter (tree-sitter-mode -1))
-    ('conda (anaconda-mode-stop) (anaconda-mode -1))
-    ('flycheck (flycheck-mode -1))
+
+  (let ((support (plist-get env-handling-state :support)))
+    (message "Clearing python support")
+    (pcase (car-safe support)
+       ((and (let teardown-fn (caddr support)) (guard (functionp teardown-fn)))
+        (funcall teardown-fn))
+       ('none nil)
+       (_
+        (message "No Support Teardown function found: %s" support))
+      )
     )
 
   (setq env-handling-state nil
@@ -150,8 +146,8 @@ and call the currently used lsp/conda client entrypoint"
 (defun env-handling-state-line ()
   (if (plist-get env-handling-state :env)
       (format "Python (%s:%s): %s"
-              (plist-get env-handling-state :setup)
-              (plist-get env-handling-state :support)
+              (car-safe (plist-get env-handling-state :setup))
+              (car-safe (plist-get env-handling-state :support))
               (if (plist-get env-handling-state :locked)
                   (concat "[" (plist-get env-handling-state :env) "]")
                 (plist-get env-handling-state :env))
@@ -174,23 +170,18 @@ and call the currently used lsp/conda client entrypoint"
   )
 
 (defun env-handling-auto-kill-suppport-processes-h ()
-  (let ((no-more-pyfiles (and (eq major-mode 'python-mode)
-                              (not (delq (current-buffer)
-                                         (doom-buffers-in-mode 'python-mode (buffer-list))))))
-        )
+  (let* ((no-more-pyfiles (and (eq major-mode 'python-mode)
+                               (not (delq (current-buffer)
+                                          (doom-buffers-in-mode 'python-mode (buffer-list))))))
+
+         (curr     (car-safe (plist-get env-handling-state :support)))
+         (teardown (cadr (alist-get curr (env-handling--get-handlers :teardown))))
+         )
     (message "Killing Support Processes")
-    (pcase (plist-get env-handling-state :support)
-      ((and 'lsp (guard no-more-pyfiles))
-       (lsp-disconnect)
-       (lsp-workspace-shutdown lsp--cur-workspace))
-      ('lsp
-       (lsp-disconnect))
-      ((and 'conda (guard no-more-pyfiles))
-       (anaconda-mode-stop)
-       (anaconda-eldoc-mode -1))
-      ('flycheck
-       (flycheck-mode -1)
-       )
+    (pcase teardown
+      ((pred functionp)
+       (funcall teardown))
+      (_ nil)
       )
     )
   )
@@ -198,17 +189,14 @@ and call the currently used lsp/conda client entrypoint"
 ;;;###autoload
 (defun env-handling-create-env! ()
   (interactive)
-  (let ((setup (ivy-read "Python Env Handler: " (env-handling--get-handlers :setup) :require-match t))
-        (name (read-string "Conda Env to create: "))
-        (ver  (format "python=%s" (read-string "Python Version: " "3.11")))
-        (packages (split-string (read-string "Packages: ") " " t " +"))
+  (let* ((handlers (env-handling--get-handlers :create))
+         (type (ivy-read "Python Env Handler: " handlers :require-match t))
+         (handler (car (alist-get (intern type) handlers)))
         )
-    (pcase setup
-      ("conda" (apply 'start-process env-handling-process-name env-handling-buffer-name "conda" "create" "--yes" "-n" name ver packages))
-      ("venv"
-       ;; (apply 'start-process env-handling-process-name env-handling-buffer-name "python" "-m" "venv" (read-directory-name "Venv Dir: " default-directory)))
-       (pyvenv-create))
-      (_ (message "Unrecognized env setup choice"))
+    (pcase handler
+      ((pred functionp)
+       (funcall handler))
+      (x (message "Unrecognized env setup choice: %s" handler))
       )
     )
   )
@@ -216,14 +204,14 @@ and call the currently used lsp/conda client entrypoint"
 ;;;###autoload
 (defun env-handling-add-package! ()
   (interactive)
-  (let ((setup (ivy-read "Python Env Handler: " (env-handling--get-handlers :setup) :require-match t))
-        (packages (split-string (read-string "Packages: ") " " t t))
+  (let* ((handlers (env-handling--get-handlers :install))
+         (chosen (ivy-read "Python Env Handler: " handlers :require-match t))
+         (handler (cadr (alist-get (intern chosen) handlers)))
         )
-    (pcase setup
-      ("conda" (apply 'start-process env-handling-process-name env-handling-buffer-name "conda" "install" "--yes" packages))
-      ("pip"   (apply 'start-process env-handling-process-name env-handling-buffer-name "pip" "--no-input" "install" packages))
-      ("poetry" (poetry-add))
-      ("pipenv" (apply 'start-process env-handling-process-name env-handling-buffer-name "pipenv" "--non-interactive" "install" packages))
+    (pcase handler
+      ((pred functionp)
+       (funcall handler))
+      (_ (message "No handler found"))
       )
     )
   )
@@ -231,13 +219,14 @@ and call the currently used lsp/conda client entrypoint"
 ;;;###autoload
 (defun env-handling-update! ()
   (interactive)
-  (let ((setup (ivy-read "Python Env Handler: " (env-handling--get-handlers :setup) :require-match t))
+  (let* ((handlers (env-handling--get-handlers :update))
+         (chosen (ivy-read "Python Env Handler: " handlers :require-match t))
+         (handler (alist-get (intern chosen) handlers))
         )
-    (pcase setup
-      ("conda" (apply 'start-process env-handling-process-name env-handling-buffer-name "conda" "update" "--all" "--yes"))
-      ("pip"   (apply 'start-process env-handling-process-name env-handling-buffer-name "pip" "--no-input" "install" "--upgrade" ))
-      ("poetry" (poetry-update))
-      ("pipenv" (apply 'start-process env-handling-process-name env-handling-buffer-name "pipenv" "--non-interactive" "upgrade" ))
+    (pcase handler
+      ((pred functionp)
+       (funcall handler))
+      (_ (message "No handler found"))
       )
     )
   )

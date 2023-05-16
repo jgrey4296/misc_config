@@ -23,11 +23,6 @@
   (when (executable-find "Microsoft.Python.LanguageServer")
     (set-eglot-client! 'python-mode '("Microsoft.Python.LanguageServer")))
 
-  (spec-handling-add! python-env nil
-                      '(flycheck
-                        (:support . flycheck)
-                        )
-                      )
   (setq py-complete-function #'(lambda () nil)
         py-do-completion-p nil ;; nil
         py-company-pycomplete-p nil
@@ -67,8 +62,14 @@
   (setq anaconda-mode-installation-directory (concat doom-data-dir "anaconda/")
         anaconda-mode-eldoc-as-single-line t)
   (spec-handling-add! python-env nil
-                      '(anaconda
-                        (:support . conda)
+                      `(anaconda
+                        (:support conda
+                                  ,#'(lambda (path name) (add-hook 'python-mode-hook #'anaconda-mode))
+                                  ,#'(lambda () (anaconda-mode-stop) (remove-hook 'python-mode-hook #'anaconda-mode))
+                                  )
+                        (:teardown conda
+                                   ,#'(lambda () (anaconda-mode-stop)
+                                        (anaconda-eldoc-mode -1)))
                         )
                       )
   :config
@@ -95,11 +96,6 @@
   :after (python lsp-mode)
   :init
   (add-to-list 'lsp-disabled-clients 'python-ms)
-  (spec-handling-add! python-env nil
-                      '(lsp-ms
-                        (:support . lsp)
-                        )
-                      )
   :config
   (setq lsp-python-ms-python-executable-cmd python-shell-interpreter)
   )
@@ -110,12 +106,6 @@
   :after lsp-mode
   :init
   (add-to-list 'lsp-disabled-clients 'jedi)
-  (spec-handling-add! python-env nil
-                      '(lsp-jedi
-                        (:support . lsp)
-                        )
-                      )
-
   )
 
 ;;-- end lsp
@@ -157,8 +147,11 @@
   :defer t
   :init
   (spec-handling-add! python-env nil
-                      '(pythonic
-                        (:setup . pythonic)
+                      `(pythonic
+                        (:setup pythonic
+                                ,#'(lambda (path name) (pythonic-activate (f-join path name)))
+                                ,#'pythonic-deactivate
+                                )
                         )
                       )
   (advice-add #'pythonic-activate :after-while #'+modeline-update-env-in-all-windows-h)
@@ -170,8 +163,27 @@
   :init
   (setq pipenv-with-projectile nil)
   (spec-handling-add! python-env nil
-                      '(pipenv
-                        (:setup . pipenv)
+                      `(pipenv
+                        (:setup pipenv
+                                ,#'(lambda (path name) (pipenv-activate))
+                                ,#'pipenv-deactivate
+                                )
+                        (:install pipenv
+                                  ,#'(lambda ()
+                                       (apply 'start-process env-handling-process-name env-handling-buffer-name "pipenv" "--non-interactive" "install"
+                                              (split-string (read-string "Packages: ") " " t t))))
+                        (:update pipenv
+                                 ,#'(lambda ()
+                                     (apply 'start-process env-handling-process-name env-handling-buffer-name "pipenv" "--non-interactive" "upgrade" )))
+                        )
+                      `(pip
+                        (:install pip
+                                  ,#'(lambda ()
+                                    (apply 'start-process env-handling-process-name env-handling-buffer-name "pip" "--no-input" "install"
+                                           (split-string (read-string "Packages: ") " " t t))))
+                        (:update pip
+                                 ,#'(lambda ()
+                                   (apply 'start-process env-handling-process-name env-handling-buffer-name "pip" "--no-input" "install" "--upgrade" )))
                         )
                       )
   )
@@ -183,8 +195,12 @@
     (add-hook 'pyvenv-post-activate-hooks #'+modeline-update-env-in-all-windows-h)
     (add-hook 'pyvenv-pre-deactivate-hooks #'+modeline-clear-env-in-all-windows-h))
   (spec-handling-add! python-env nil
-                      '(pyvenv
-                        (:setup . venv)
+                      `(venv
+                        (:setup venv
+                                ,#'(lambda (path name) (pyvenv-activate (f-join path name)))
+                                ,#'pyvenv-deactivate
+                                )
+                        (:create venv ,#'pyvenv-create)
                         )
                       )
   )
@@ -193,9 +209,34 @@
   :when (modulep! +conda)
   :after python
   :init
-  (spec-handling-add! python-env nil
-                      '(conda_el
-                        (:setup . conda)
+  (spec-handling-add! python-env t
+                      `(conda_el
+                        (:setup conda
+                                ,#'(lambda (path name)
+                                   (conda-env-activate name)
+                                   (setenv "CONDA_DEFAULT_ENV" name)
+                                   )
+                                ,#'(lambda ()
+                                    (conda-env-deactivate)
+                                    (setenv "CONDA_DEFAULT_ENV" nil)
+                                    )
+                                )
+                        (:create conda
+                                 ,#'(lambda (&rest args)
+                                   (let ((name (read-string "Env name to create: "))
+                                         (ver  (format "python=%s" (read-string "Python Version: " "3.11")))
+                                         (packages (split-string (read-string "Packages: ") " " t " +"))
+                                         )
+                                     (apply 'start-process env-handling-process-name env-handling-buffer-name "conda" "create" "--yes" "-n" name ver packages)))
+                                 )
+                        (:install conda
+                                  ,#'(lambda ()
+                                      (apply 'start-process env-handling-process-name env-handling-buffer-name "conda" "install" "--yes"
+                                             (split-string (read-string "Packages: ") " " t t)))
+                                  )
+                        (:update conda
+                                 ,#'(lambda () (apply 'start-process env-handling-process-name env-handling-buffer-name "conda" "update" "--all" "--yes"))
+                                 )
                         )
                       )
 
@@ -209,8 +250,13 @@
   :after python
   :init
   (spec-handling-add! python-env nil
-                      '(poetry
-                        (:setup . poetry)
+                      `(poetry
+                        (:setup poetry
+                                ,#'(lambda (path name) (poetry-venv-workon))
+                                ,#'poetry-venv-deactivate
+                                )
+                        (:update poetry ,#'poetry-update)
+                        (:install poetry ,#'poetry-add)
                         )
                       )
   )

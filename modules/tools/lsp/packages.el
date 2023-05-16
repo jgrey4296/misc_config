@@ -7,6 +7,10 @@
 (package! lsp-ui)
 (package! lsp-ivy)
 
+(package! cedet :built-in 'prefer)
+(package! semantic)
+(package! flycheck)
+
 (package! tree-sitter)
 (package! tree-sitter-langs)
 (package! tree-sitter-indent)

@@ -191,9 +191,8 @@
                       (env-handling-state (:eval (env-handling-state-line)))
                       )
                     )
-(spec-handling-add! python-env t
-                    '(default (:setup . none) (:support  . none))
-                    '(pyright (:support . lsp))
+(spec-handling-add! python-env nil
+                    '(default (:setup  none) (:support none))
                     )
 (spec-handling-add! ligatures t
                     '(python-mode
@@ -223,6 +222,7 @@
                     )
 (spec-handling-add! lookup-regular nil
                     '(python-mode
+                      ("Logging" . "https://docs.python.org/3/library/logging.html")
                       ("Match Statement" . "https://docs.python.org/3/reference/compound_stmts.html#the-match-statement")
                       ("Match Spec PEP" . "https://peps.python.org/pep-0634/")
                       ("Mocks" . "https://docs.python.org/3/library/unittest.mock.html")

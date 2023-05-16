@@ -30,6 +30,16 @@
       "C-k" #'lsp-ui-peek--select-prev-file
       "C-j" #'lsp-ui-peek--select-next-file)
 
+(map! :map semantic-mode-map
+      :after semantic
+      :localleader
+      :prefix ("^" . "Semantic")
+      (:prefix ("t" . "toggle")
+       :desc "Stick-func"     "s" #'semantic-stickyfunc-mode
+       :desc "Highlight-func" "h" #'semantic-highlight-func-mode
+       )
+
+      )
 
 (evil-define-key '(visual operator) 'tree-sitter-mode
   "i" +tree-sitter-inner-text-objects-map

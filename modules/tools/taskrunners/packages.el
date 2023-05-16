@@ -20,8 +20,7 @@
 ;;
 ;;; Code:
 
-(package! cedet :built-in 'prefer)
-(package! semantic)
-(package! flycheck)
-
+(package! snakemake-mode)
+(package! taskrunner)
+(package! ivy-taskrunner :recipe (:host github :repo "emacs-taskrunner/ivy-taskrunner"))
 ;;; packages.el ends here

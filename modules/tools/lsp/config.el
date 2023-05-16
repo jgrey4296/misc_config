@@ -35,6 +35,16 @@
         lsp-server-install-dir (concat doom-data-dir "lsp")
         lsp-keymap-prefix nil)
 
+  (spec-handling-add! python-env nil
+                      `(lsp
+                        (:support lsp
+                                  ,#'(lambda (path name) (lsp-deferred))
+                                  ,#'(lambda () (lsp-shutdown-workspace lsp--cur-workspace))
+                                  )
+                        (:teardown lsp lsp-disconnect)
+                        )
+                      )
+
   :config
   (add-to-list 'doom-debug-variables 'lsp-log-io)
 
@@ -121,6 +131,16 @@ instead is more sensible."
 (use-package! eglot
   :commands eglot eglot-ensure
   :hook (eglot-managed-mode . +lsp-optimization-mode)
+  :init
+  (spec-handling-add! python-env nil
+                      `(eglot
+                        (:support eglot
+                                  ,#'(lambda (path name) (eglot-ensure))
+                                  ,#'(lambda () (signal 'eglot-todo (current-buffer)))
+                                  )
+                        )
+                      )
+
   :config
   (add-to-list 'doom-debug-variables '(eglot-events-buffer-size . 0))
 
@@ -142,7 +162,8 @@ server getting expensively restarted when reverting buffers."
                         (prog1 (funcall eglot-shutdown server)
                           (+lsp-optimization-mode -1))))
                 server)))
-      (funcall fn server))))
+      (funcall fn server)))
+  )
 
 (use-package! flycheck-eglot
   :when (modulep! :checkers syntax)
@@ -151,6 +172,15 @@ server getting expensively restarted when reverting buffers."
 
 (use-package! tree-sitter
   :defer t
+  :init
+  (spec-handling-add! python-env nil
+                      `(tree-sitter!
+                        (:support tree-sitter
+                                  ,#'(lambda (path name) (tree-sitter!))
+                                  ,(-partial #'tree-sitter-mode -1)
+                                  )
+                        )
+                      )
   :config
   (require 'tree-sitter-langs)
   )
@@ -166,4 +196,36 @@ server getting expensively restarted when reverting buffers."
      which-key-replacement-alist
      '(("" . "\\`+?evil-textobj-tree-sitter-function--\\(.*\\)\\(?:.inner\\|.outer\\)") . (nil . "\\1"))))
   )
+
+(use-package! cedet)
+(use-package! semantic
+  :defer t
+  :init
+  (spec-handling-add! python-env nil
+                      `(semantic
+                        (:support semantic ,#'(lamdba (path name) (semantic-mode)))
+                        )
+                      )
+  :config
+  ;;  global-semanticdb-minor-mode        - Maintain tag database.
+  ;;  global-semantic-idle-scheduler-mode - Reparse buffer when idle.
+  ;;  global-semantic-idle-summary-mode   - Show summary of tag at point.
+  ;;  global-semantic-idle-completions-mode - Show completions when idle.
+  ;;  global-semantic-decoration-mode     - Additional tag decorations.
+  ;;  global-semantic-highlight-func-mode - Highlight the current tag.
+  ;;  global-semantic-stickyfunc-mode     - Show current fun in header line.
+  ;;  global-semantic-mru-bookmark-mode   - Provide switch-to-buffer-like keybinding for tag names.
+  ;;  global-semantic-idle-local-symbol-highlight-mode - Highlight references of the symbol under point.
+  ;;
+  ;;  For internals of the semantic parser in action:
+  ;;  global-semantic-highlight-edits-mode - Visualize incremental parser by highlighting not-yet parsed changes.
+  ;;  global-semantic-show-unmatched-syntax-mode - Highlight unmatched lexical syntax tokens.
+  ;;  global-semantic-show-parser-state-mode - Display the parser cache state.
+  (add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode)
+  (add-to-list 'semantic-default-submodes 'semantic-stickyfunc-mode)
+  (add-to-list 'semantic-default-submodes 'semantic-highlight-func-mode)
+  (add-to-list 'semantic-new-buffer-setup-functions '(emacs-lisp-mode . semantic-default-elisp-setup))
+
+  )
+
 ;;; config.el ends here

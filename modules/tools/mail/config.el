@@ -3,7 +3,6 @@
 (after! jg-bindings-total
   (load! "+bindings")
 )
-(load! "+funcs")
 
 
 (use-package! mu4e

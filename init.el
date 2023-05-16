@@ -1,7 +1,7 @@
 ;;; init.el -*- lexical-binding: t; -*-
 
 (doom!
- :config default bindings disabled help programming search ui
+ :config default bindings disabled help search ui
  :app   (rss +org)
  :completion company ivy helm
 
@@ -43,8 +43,9 @@
 
  :checkers syntax (spell +flyspell) grammar
 
- :tools  doot  (eval +overlay) lsp mail twitter pdfs
+ :tools (eval +overlay) lsp mail twitter pdfs
  :tools editorconfig rgb tree-sitter mail term
+ :tools taskrunners
  ;;:tools ein make debugger
 
  :email (mu4e +gmail)

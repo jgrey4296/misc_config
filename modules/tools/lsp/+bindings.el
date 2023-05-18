@@ -1,5 +1,10 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
+(setq lsp-mode-map (make-sparse-keymap)
+      lsp-command-map (make-sparse-keymap)
+      lsp-signature-mode-map (make-sparse-keymap)
+      )
+
 (map! :leader
       :prefix "c"
       :desc "LSP Code actions"                      "a"   #'lsp-execute-code-action
@@ -8,6 +13,7 @@
       :desc "LSP"                                   "l"   lsp-command-map
       )
 
+;;-- lsp
 (map! :map lsp-command-map
       (:prefix ("w" . "Workspaces"))
       (:prefix ("=" . "Formatting"))
@@ -20,6 +26,83 @@
       (:prefix ("G" . "Peek"))
       )
 
+(map! :map lsp-command-map ;; Workspaces
+      :prefix ("w" . "Workspaces")
+      :desc "disconnect"       "D" #'lsp-disconnect
+      :desc "describe session" "d" #'lsp-describe-session
+      :desc "shutdown server"  "q" #'lsp-workspace-shutdown
+      :desc "restart server"   "r" #'lsp-workspace-restart
+      :desc "start server"     "s" #'lsp
+)
+
+(map! :map lsp-command-map ;; Formatting
+      :prefix ("=" . "Formatting")
+      :desc "format buffer" "=" #'lsp-format-buffer
+      :desc "format region" "r" #'lsp-format-region
+)
+
+(map! :map lsp-command-map ;; Folders
+      :prefix ("F" . "Folders")
+      :desc "add folder"          "a" #'lsp-workspace-folders-add
+      :desc "un-blacklist folder" "b" #'lsp-workspace-blacklist-remove
+      :desc "remove folder"       "r" #'lsp-workspace-folders-remove
+      )
+
+(map! :map lsp-command-map ;; toggles
+      :prefix ("t". "Toggles")
+      :desc "toggle modeline diagnostics"  "D" #'lsp-modeline-diagnostics-mode
+      :desc "toggle log io"                "L" #'lsp-toggle-trace-io
+      :desc "toggle sideline"              "S" #'lsp-ui-sideline-mode
+      :desc "toggle treemacs integration"  "T" #'lsp-treemacs-sync-mode
+      :desc "toggle modeline code actions" "a" #'lsp-modeline-code-actions-mode
+      :desc "toggle breadcrumb"            "b" #'lsp-headerline-breadcrumb-mode
+      :desc "toggle documentation popup"   "d" #'lsp-ui-doc-mode
+      :desc "toggle on type formatting"    "f" #'lsp-toggle-on-type-formatting
+      :desc "toggle highlighting"          "h" #'lsp-toggle-symbol-highlight
+      :desc "toggle lenses"                "l" #'lsp-lens-mode
+      :desc "toggle signature"             "s" #'lsp-toggle-signature-auto-activate
+      )
+
+(map! :map lsp-command-map ;; goto
+      :prefix ("g" . "Goto")
+      :desc "find symbol in workspace"     "a" #'xref-find-apropos
+      :desc "find declarations"            "d" #'lsp-find-declaration
+      :desc "show errors"                  "e" #'lsp-treemacs-errors-list
+      :desc "find definitions"             "g" #'lsp-find-definition
+      :desc "call hierarchy"               "h" #'lsp-treemacs-call-hierarchy
+      :desc "find implementations"         "i" #'lsp-find-implementation
+      :desc "find references"              "r" #'lsp-find-references
+      :desc "find type definition"         "t" #'lsp-find-type-definition
+      )
+
+(map! :map lsp-command-map ;; help
+      :prefix ("h" . "Help")
+      :desc "glance symbol"                "g" #'lsp-ui-doc-glance
+      :desc "describe symbol at point"     "h" #'lsp-describe-thing-at-point
+      :desc "signature help"               "s" #'lsp-signature-activate
+      )
+
+(map! :map lsp-command-map ;; refactoring
+      :prefix ("r" . "Refactoring")
+      :desc "organize imports"             "o" #'lsp-organize-imports
+      :desc "rename"                       "r" #'lsp-rename
+      )
+
+(map! :map lsp-command-map ;; actions
+      :prefix ("a" . "Actions")
+      :desc "code actions"                 "a" #'lsp-execute-code-action
+      :desc "highlight symbol"             "h" #'lsp-document-highlight
+      :desc "lens"                         "l" #'lsp-avy-lens
+      )
+
+(map! :map lsp-command-map ;; peek
+      :prefix ("G" . "Peek")
+      :desc "peek definitions"      "g" #'lsp-ui-peek-find-definitions
+      :desc "peek implementations"  "i" #'lsp-ui-peek-find-implementation
+      :desc "peek references"       "r" #'lsp-ui-peek-find-references
+      :desc "peek workspace symbol" "s" #'lsp-ui-peek-find-workspace-symbol
+)
+
 (map! :map lsp-browser-mode-map
 
       )
@@ -30,6 +113,13 @@
       "C-k" #'lsp-ui-peek--select-prev-file
       "C-j" #'lsp-ui-peek--select-next-file)
 
+;;-- end lsp
+
+;;-- eglot
+
+;;-- end eglot
+
+;;-- semantic
 (map! :map semantic-mode-map
       :after semantic
       :localleader
@@ -41,6 +131,9 @@
 
       )
 
+;;-- end semantic
+
+;;-- tree-sitter
 (evil-define-key '(visual operator) 'tree-sitter-mode
   "i" +tree-sitter-inner-text-objects-map
   "a" +tree-sitter-outer-text-objects-map
@@ -49,8 +142,6 @@
   "[g" +tree-sitter-goto-previous-map
   "]g" +tree-sitter-goto-next-map
   )
-
-;;-- tree-sitter text obs
 (map! (:map +tree-sitter-inner-text-objects-map
             "A" (+tree-sitter-get-textobj '("parameter.inner" "call.inner"))
             "f" (+tree-sitter-get-textobj "function.inner")
@@ -85,4 +176,4 @@
             "v" (+tree-sitter-goto-textobj "conditional.outer")
             "l" (+tree-sitter-goto-textobj "loop.outer")))
 
-;;-- end tree-sitter text obs
+;;-- end tree-sitter

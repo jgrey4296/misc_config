@@ -1,9 +1,7 @@
 ;;; emacs/ibuffer/config.el -*- lexical-binding: t; -*-
 
 (load! "+vars")
-(load! "+funcs")
 (load! "+specs")
-(load! "ivy/+ivy")
 (after! (evil jg-bindings-total ibuffer)
   (load! "+bindings")
  )
@@ -20,7 +18,7 @@
 
 (use-package! ibuffer-projectile
   ;; Group ibuffer's list by project root
-  :hook (ibuffer . ibuffer-projectile-set-filter-groups)
+  ;; :hook (ibuffer . ibuffer-projectile-set-filter-groups)
   :config
   (setq ibuffer-projectile-prefix "Project: ")
   )

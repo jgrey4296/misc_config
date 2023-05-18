@@ -1,5 +1,6 @@
 SHELL=/usr/local/bin/bash
-BASH_ENV="$HOME/.doom.d/terminal/cron/conda_bashrc"
+BASH_ENV="$HOME/.doom.d/terminal/bash/cron.bash"
+CONDA_DEFAULT_ENV="default"
 JG_NICENESS=10
 
 ### Hourly
@@ -7,54 +8,54 @@ JG_NICENESS=10
 
 ### DAILY:
 # Speak the time every 2 hours
-0 */2 * * * doot say::time
+0 */2 * * * doot -r error-only  say::time
 
 # Regularly Tweet an entry from my bibtex
-20 */1 * * * doot post::bib
+20 */1 * * * doot -r error-only  post::bib
 
 # Regularly tweet an image from the whitelist
-40 */1 * * * doot post::image
+40 */1 * * * doot -r error-only  post::image
 
 # Update mail every 6 hours
-0 */6 * * * doot mail::check
+0 */6 * * * doot -r error-only  mail::check
 
 # Regularly run tag grep - PAUSED
-# 0 */1 * * * doot tags::grep
+# 0 */1 * * * doot -r error-only  tags::grep
 
 # Regularly copy over pdfs and epubs, and stub them
-0 */12 * * * doot bibtex::stub
+# 0 */12 * * * doot -r error-only  bibtex::stub
 
 ### WEEKLY:
 ## MON - maintenance
 # Run updates at 3am on mondays
-# 0 3 * * mon doot maintain
+# 0 3 * * mon doot -r error-only  maintain
 
 # backup cron definitions at 4am on mondays
-# 0 4 * * mon doot crontab::backup
+# 0 4 * * mon doot -r error-only  crontab::backup
 
 ## TUES - bookmarks and pdfs
 # at 2am on tuesdays, update bookmarks
-# 0 2 * * tue doot bkmk::update
+# 0 2 * * tue doot -r error-only  bkmk::update
 
 ## WED - git and brew
 # Backup git repo urls
-0 3 * * wed doot maintain::backup
+# 0 3 * * wed doot -r error-only  maintain::backup
 
 ## THU - bibtexR
 # 4am : clean bibtex
-# 0 4 * * thu doot bibtex::clean
+# 0 4 * * thu doot -r error-only  bibtex::clean
 # 5am : clean tags
-# 0 5 * * thu doot tags::clean
+# 0 5 * * thu doot -r error-only  tags::clean
 
 ## FRI - twitter
 # 6am : update tag totals
-# 0 6 * * fri doot tags::index
+# 0 6 * * fri doot -r error-only  tags::index
 # 8am : update tag graph
-# 0 8 * * thu doot tags::report
+# 0 8 * * thu doot -r error-only  tags::report
 
 ## SAT - pdf summaries
-# */20 * * * sat doot bibtex::summary
+# */20 * * * sat doot -r error-only  bibtex::summary
 
 ## SUN - update bib totals
-# 25 1 * * sun doot bibtex::compile
-# 0 6 * * sun doot bibtex::verify
+# 25 1 * * sun doot -r error-only  bibtex::compile
+# 0 6 * * sun doot -r error-only  bibtex::verify

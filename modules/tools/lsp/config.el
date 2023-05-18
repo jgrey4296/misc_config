@@ -23,10 +23,11 @@
 
 (load! "+vars")
 (load! "+minor-modes")
-(after! jg-total-bindings
+(after! jg-bindings-total
   (load! "+bindings")
   )
 
+;;-- lsp
 (use-package! lsp-mode
   :commands lsp-install-server
   :init
@@ -35,13 +36,19 @@
         lsp-server-install-dir (concat doom-data-dir "lsp")
         lsp-keymap-prefix nil)
 
-  (spec-handling-add! python-env nil
+  (spec-handling-add! python-env t
                       `(lsp
                         (:support lsp
-                                  ,#'(lambda (path name) (lsp-deferred))
-                                  ,#'(lambda () (lsp-shutdown-workspace lsp--cur-workspace))
+                                  ,#'(lambda (state) (add-hook 'python-mode-hook #'lsp-deferred))
+                                  ,#'(lambda (state)
+                                       (when lsp-mode
+                                         (lsp-mode -1))
+                                       (when lsp--last-active-workspaces
+                                         (lsp-workspace-shutdown (car lsp--last-active-workspaces)))
+                                       (remove-hook 'python-mode-hook #'lsp-deferred)
+                                       )
                                   )
-                        (:teardown lsp lsp-disconnect)
+                        (:teardown lsp ,#'(lambda (state) (lsp-disconnect)))
                         )
                       )
 
@@ -128,6 +135,9 @@ instead is more sensible."
   :when (modulep! :completion ivy)
   :commands lsp-ivy-workspace-symbol lsp-ivy-global-workspace-symbol)
 
+;;-- end lsp
+
+;;-- eglot
 (use-package! eglot
   :commands eglot eglot-ensure
   :hook (eglot-managed-mode . +lsp-optimization-mode)
@@ -135,8 +145,11 @@ instead is more sensible."
   (spec-handling-add! python-env nil
                       `(eglot
                         (:support eglot
-                                  ,#'(lambda (path name) (eglot-ensure))
-                                  ,#'(lambda () (signal 'eglot-todo (current-buffer)))
+                                  ,#'(lambda (state) (add-hook 'python-mode-hook #'eglot-ensure))
+                                  ,#'(lambda (state)
+                                       (signal 'eglot-todo (current-buffer))
+                                       (remove-hook 'python-mode-hook #'eglot-ensure)
+                                       )
                                   )
                         )
                       )
@@ -170,14 +183,18 @@ server getting expensively restarted when reverting buffers."
   :hook (eglot-managed-mode . flycheck-eglot-mode)
   )
 
+;;-- end eglot
+
+;;-- tree sitter
 (use-package! tree-sitter
   :defer t
   :init
   (spec-handling-add! python-env nil
                       `(tree-sitter!
                         (:support tree-sitter
-                                  ,#'(lambda (path name) (tree-sitter!))
-                                  ,(-partial #'tree-sitter-mode -1)
+                                  ,#'(lambda (state) (add-hook 'python-mode-hook #'tree-sitter!))
+                                  ,#'(lambda (state)
+                                       (remove-hook 'python-mode-hook #'tree-sitter!))
                                   )
                         )
                       )
@@ -197,13 +214,19 @@ server getting expensively restarted when reverting buffers."
      '(("" . "\\`+?evil-textobj-tree-sitter-function--\\(.*\\)\\(?:.inner\\|.outer\\)") . (nil . "\\1"))))
   )
 
+;;-- end tree sitter
+
+;;-- semantic
 (use-package! cedet)
 (use-package! semantic
   :defer t
   :init
   (spec-handling-add! python-env nil
                       `(semantic
-                        (:support semantic ,#'(lamdba (path name) (semantic-mode)))
+                        (:support semantic
+                                  ,#'(lambda (state) (add-hook 'python-mode-hook #'semantic-mode))
+                                  ,#'(lambda (state) (remove-hook 'python-mode-hook #'semantic-mode))
+                                  )
                         )
                       )
   :config
@@ -227,5 +250,7 @@ server getting expensively restarted when reverting buffers."
   (add-to-list 'semantic-new-buffer-setup-functions '(emacs-lisp-mode . semantic-default-elisp-setup))
 
   )
+
+;;-- end semantic
 
 ;;; config.el ends here

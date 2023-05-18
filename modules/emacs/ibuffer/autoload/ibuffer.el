@@ -1,16 +1,40 @@
 ;; -*- lexical-binding: t -*-
 
+(defun +jg-ibuffer-generate-project-groups ()
+  "Create a set of ibuffer filter groups based on the projectile root dirs of buffers."
+  (let ((roots (ibuffer-remove-duplicates
+                (delq nil (mapcar 'ibuffer-projectile-root (buffer-list))))))
+    (mapcar (lambda (root)
+              (cons (funcall ibuffer-projectile-group-name-function (car root) (cdr root))
+                    `((projectile-root . ,root))))
+            roots))
+  )
+
+(defun +jg-ibuffer-generate-groups ()
+  (append (+jg-ibuffer-generate-project-groups)
+          (when jg-ibuffer-default-group
+            (cdr (assoc jg-ibuffer-default-group ibuffer-saved-filter-groups)))
+          )
+  )
+
+;;;###autoload
 (defun +jg-ibuffer-default()
   (interactive)
   (if (get-buffer "*Ibuffer*")
       (switch-to-buffer "*Ibuffer*")
-    (ibuffer nil nil `((saved . ,jg-ibuffer-default-group)) nil nil
-             (cdr (assoc "default" ibuffer-saved-filter-groups)))
+    (ibuffer nil nil
+             (when jg-ibuffer-default-filter ;; filter
+               `((saved . ,jg-ibuffer-default-filter)))
+             nil nil
+             ;; groups
+             (+jg-ibuffer-generate-groups)
+             )
     (push jg-ibuffer-never-show-regexps ibuffer-tmp-hide-regexps)
     (+jg-ibuffer-sort-groups)
     )
   )
 
+;;;###autoload
 (defun +jg-ibuffer-add-group (name)
   (interactive (list (completing-read "Group: " ibuffer-saved-filter-groups nil t)))
   (setq ibuffer-filter-groups
@@ -19,6 +43,7 @@
   (ibuffer-update 0)
   )
 
+;;;###autoload
 (defun +jg-ibuffer-sort-groups ()
   (interactive)
   (setq ibuffer-filter-groups (sort ibuffer-filter-groups

@@ -73,6 +73,7 @@
                    '(toml    ())
                    '(xml     ())
                    '(yaml    ())
+                   '(zip     ())
                     )
 
 (spec-handling-add! ibuffer-filters nil
@@ -84,8 +85,8 @@
 (spec-handling-add! ibuffer-groups nil
                     '(default
                        ("*Starred*"   (saved . "stars"))
-                       ("*Project: configs" (projectile-root . "__configs"))
-                       ("*Project: writing" (projectile-root . "jgrey4296.github.io"))
+                       ;; ("*Project: configs" (projectile-root . "__configs"))
+                       ;; ("*Project: writing" (projectile-root . "jgrey4296.github.io"))
                        )
                     '(starred ("*Starred*"   (saved . "stars")))
                     '(general

@@ -9,68 +9,80 @@
 ;;-- personal vars
 
 (defvar jg-python-dev-mode nil)
+
 (defvar jg-python-dev-cmd "-X dev")
+
 (defvar jg-python-docs-url           "https://docs.python.org/3/")
+
 (defvar jg-python-lib-url-suffix     "library/%s.html")
+
 (defvar jg-python-import-block-end-re "^\\(__all__\\|[[:graph:]]+?\\s-+=\\|def\\|class\\|if TYPE_CHECKING:\\)")
+
 (defvar jg-python-summary-buffer      "*Python-Summary*")
+
 (setq expand-region-preferred-python-mode 'python-mode)
 ;;-- end personal vars
 
 ;;-- general python
+
 (defvaralias 'python-indent-offset 'py-indent-offset)
+
 (defvaralias 'python-pdbtrack-activate 'py-pdbtrack-do-tracking-p)
+
 (defvaralias 'python-shell-interpreter 'py-python-command)
+
 (defvaralias 'python-shell-virtualenv-root 'py-shell-virtualenv-root)
 
 (after! python-mode
-  (setq-default py-indent-offset 4
-                py-shell-virtualenv-root (getenv "ANACONDA_ENVS")
-                py-pdbtrack-do-tracking-p t
+  (setq py-indent-offset 4
+        conda-anaconda-home (or (getenv "ANACONDA_HOME") "/usr/local/anaconda3")
+        conda-env-home-directory (or (getenv "ANACONDA_ENVS") (f-join conda-anaconda-home "envs"))
+        py-shell-virtualenv-root conda-env-home-directory
+        lsp-pyright-venv-path conda-env-home-directory
 
-                py-python-command "python3"
-                py-python-command-args '("-i")
-                python-shell-interpreter-args "-i"
-                jg-python-repl-start-file (doom-module-expand-path :lang-weakly-typed 'python "repl/repl_startup.py ")
+        py-pdbtrack-do-tracking-p t
 
-                py-use-font-lock-doc-face-p t
-                py-fontify-shell-buffer-p t
+        py-python-command "python3"
+        py-python-command-args '("-i")
+        python-shell-interpreter-args "-i"
 
-                python-indent-guess-indent-offset nil
-                python-shell-completion-native-enable nil
-                python-shell-completion-native-disabled-interpreters '("pypy")
+        py-use-font-lock-doc-face-p t
+        py-fontify-shell-buffer-p t
 
-                ;; python-shell-interpreter "python3"
-                ;; python-shell-interpreter-args `("-X" ,(format "pycache_prefix=%s" (expand-file-name  "~/.pycache")))
-                python-shell-interpreter-path-args (doom-module-expand-path :lang-weakly-typed 'python "repl/repl_startup.py ")
-                )
-  (modify-syntax-entry ?_ "_" python-mode-syntax-table)
+        python-indent-guess-indent-offset nil
+        python-shell-completion-native-enable nil
+        python-shell-completion-native-disabled-interpreters '("pypy")
+
+        jg-python-repl-start-file (doom-module-expand-path :lang-weakly-typed 'python "repl/repl_startup.py ")
+        python-shell-interpreter-path-args (doom-module-expand-path :lang-weakly-typed 'python "repl/repl_startup.py ")
+        )
+        (modify-syntax-entry ?_ "_" python-mode-syntax-table)
 )
 ;;-- end general python
 
 ;;-- outline
 (after! python-mode
-  (setq jg-python-outline-regexp
-        (rx-let ((kwds (regexp (eval (s-join "\\|" py-outline-mode-keywords))))
-                 )
-        (rx (* blank)
-            (or "##--"
-                (| "@" (+ word))
-                kwds
-                )
-            )
-        )
-        jg-python-outline-end-regexp ":[^\n]*\n"
-        )
-)
+  (rx-let ((kwds (regexp (eval (s-join "\\|" py-outline-mode-keywords))))
+           )
+    (setq jg-python-outline-regexp
+          (rx (* blank)
+              (or "##--"
+                  (| "@" (+ word))
+                  kwds
+                  )
+              )
+          jg-python-outline-end-regexp ":[^\n]*\n"
+          )
+    )
+  )
 ;;-- end outline
 
 ;;-- flycheck
 (after! flycheck
-  (setq flycheck-pylintrc '("pylint.toml" "pyproject.toml"))
-  (setq-default flycheck--automatically-enabled-checkers (-concat flycheck--automatically-enabled-checkers '(python-pylint))
-                flycheck--automatically-disabled-checkers '(python-compile python-pyright python-mypy)
-                )
+  (setq flycheck-pylintrc '("pylint.toml" "pyproject.toml")
+        flycheck--automatically-enabled-checkers (-concat flycheck--automatically-enabled-checkers '(python-pylint))
+        flycheck--automatically-disabled-checkers '(python-compile python-pyright python-mypy)
+        )
   (push 'python-pylint flycheck-checkers)
   (push ".mypy.ini" flycheck-python-mypy-ini)
   )
@@ -98,10 +110,11 @@
 (add-to-list 'lsp-disabled-clients 'pylsp)
 (add-to-list 'lsp-disabled-clients 'mspyls)
 
-(setq lsp-pyright-extra-paths #'[]
-      lsp-pyright-venv-path   (list (getenv "ANACONDA_ENVS"))
-
-      )
+(after! python-mode
+  (setq lsp-pyright-extra-paths #'[]
+        lsp-pyright-venv-path   (list conda-env-home-directory)
+        )
+  )
 ;;-- end lsp
 
 ;;-- jg-company
@@ -222,6 +235,8 @@
                     )
 (spec-handling-add! lookup-regular nil
                     '(python-mode
+                      ("PyGObject" . "https://pygobject.readthedocs.io/en/latest/")
+                      ("Pyright" . "https://microsoft.github.io/pyright/#/configuration")
                       ("Logging" . "https://docs.python.org/3/library/logging.html")
                       ("Match Statement" . "https://docs.python.org/3/reference/compound_stmts.html#the-match-statement")
                       ("Match Spec PEP" . "https://peps.python.org/pep-0634/")
@@ -316,10 +331,10 @@
                      )
                     )
 (spec-handling-add! lookup-handler nil
-                    '(anaconda-mode
-                      :definition +jg-conda-find-defs
-                      :references +jg-conda-find-references
-                      :documentation +jg-conda-show-doc)
+                    `(anaconda-mode
+                      :definition ,#'+jg-conda-find-defs
+                      :references ,#'+jg-conda-find-references
+                      :documentation ,#'+jg-conda-show-doc)
                     )
 (spec-handling-add! docsets
                     '((python-mode inferior-python-mode)

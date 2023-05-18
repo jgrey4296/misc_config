@@ -36,8 +36,8 @@ and call the currently used lsp/conda client entrypoint"
 
   ;;-- environment activation
   (let* ((local-env (env-handling-find-venv))
-         (env-name (string-trim (plist-get local-env :env)))
-         (env-path (string-trim (plist-get local-env :path)))
+         (env-name (plist-get local-env :name))
+         (env-path (plist-get local-env :path))
          (root (or (projectile-project-root) default-directory))
         )
     (unless (plist-get env-handling-state :setup) ;; Select handler
@@ -53,39 +53,30 @@ and call the currently used lsp/conda client entrypoint"
                    (chosen (ivy-read "Python Support: " vals :require-match t)))
               (cons (intern chosen) (alist-get (intern chosen) vals))))
       )
-    (unless (or env-name (not (eq (car-safe (plist-get env-handling-state :setup)) 'conda)))
-      (setq env-name (string-trim (conda-env-read-name "Select Conda Environment: ")))
-      )
     (add-to-list 'python-shell-extra-pythonpaths root)
     (add-to-list 'py-shell-extra-pythonpaths root)
-    (when (boundp 'lsp-pyright-extra-paths)
-      (setq lsp-pyright-extra-paths (vconcat lsp-pyright-extra-paths (vector root))))
 
     (let ((setup (plist-get env-handling-state :setup))
           (locked (plist-get env-handling-state :locked))
           (curr-env (plist-get env-handling-state :env))
+          final-env
           )
-    (pcase (car-safe setup)
+      (pcase (car-safe setup)
       ;;-- failures
       ((and (guard locked) (guard (not (string-equal curr-env env-name))))
        (message "Environment is locked"))
       ((and (guard curr-env) (guard (string-equal curr-env env-name)))
        (message "Environment is current"))
-      ((and 'conda (guard env-name) (guard (not (f-exists? (f-join conda-env-home-directory env-name)))))
-       (message "Conda Environment Doesn't exist: %s %s" conda-env-home-directory env-name))
-      ((and 'venv (guard env-name) (guard (not (f-exists? (f-join root env-path env-name)))))
-       (message "Virtual environment doesn't exist: %s : %s : %s" root env-path env-name))
-      ((and 'pipenv (guard (not (pipenv-project-p))))
-       (message "Not a pipenv project"))
-      ((and 'poetry (guard (not (poetry-ensure-in-project))))
-       (message "Not in a poetry project"))
+      ((and (guard env-path) (guard env-name) (guard (not (f-exists? (f-join env-path env-name)))))
+       (message "Environment Path Doesn't exist: %s %s" env-path env-name))
        ;;-- end failures
       ((and (let setup-fn (cadr setup)) (guard (functionp setup-fn)))
        (message "Activating %s" (car setup))
-       (funcall setup-fn env-path env-name))
+       (setq final-env (funcall setup-fn env-handling-state local-env))
+       )
       )
-    (setf (plist-get env-handling-state :env) env-name
-          (plist-get env-handling-state :path) env-path
+    (setf (plist-get env-handling-state :env) (plist-get (or final-env local-env) :name)
+          (plist-get env-handling-state :path) (plist-get (or final-env local-env) :path)
           )
     )
     ;;-- end environment activation
@@ -95,7 +86,7 @@ and call the currently used lsp/conda client entrypoint"
       (pcase (car-safe support)
         ((and (let support-fn (cadr support)) (guard (functionp support-fn)))
          (message "Activating %s" (car support))
-         (funcall support-fn env-path env-name))
+         (funcall support-fn env-handling-state))
         ('none nil)
         (_ (message "Support Lacks a setup function"))
         )
@@ -111,7 +102,7 @@ and call the currently used lsp/conda client entrypoint"
     (message "Clearing python environment")
     (pcase (car-safe setup)
       ((and (let teardown-fn (caddr setup)) (guard (functionp teardown-fn)))
-       (funcall teardown-fn))
+       (funcall teardown-fn env-handling-state))
       ('none nil)
       (_
        (message "No Env Teardown function found: %s" setup))
@@ -122,7 +113,7 @@ and call the currently used lsp/conda client entrypoint"
     (message "Clearing python support")
     (pcase (car-safe support)
        ((and (let teardown-fn (caddr support)) (guard (functionp teardown-fn)))
-        (funcall teardown-fn))
+        (funcall teardown-fn env-handling-state))
        ('none nil)
        (_
         (message "No Support Teardown function found: %s" support))
@@ -180,7 +171,7 @@ and call the currently used lsp/conda client entrypoint"
     (message "Killing Support Processes")
     (pcase teardown
       ((pred functionp)
-       (funcall teardown))
+       (funcall teardown env-handling-state))
       (_ nil)
       )
     )
@@ -195,7 +186,7 @@ and call the currently used lsp/conda client entrypoint"
         )
     (pcase handler
       ((pred functionp)
-       (funcall handler))
+       (funcall handler env-handling-state))
       (x (message "Unrecognized env setup choice: %s" handler))
       )
     )
@@ -210,7 +201,7 @@ and call the currently used lsp/conda client entrypoint"
         )
     (pcase handler
       ((pred functionp)
-       (funcall handler))
+       (funcall handler env-handling-state))
       (_ (message "No handler found"))
       )
     )
@@ -225,7 +216,7 @@ and call the currently used lsp/conda client entrypoint"
         )
     (pcase handler
       ((pred functionp)
-       (funcall handler))
+       (funcall handler env-handling-state))
       (_ (message "No handler found"))
       )
     )
@@ -235,7 +226,7 @@ and call the currently used lsp/conda client entrypoint"
   " Given a starting directory, look in parent dirs
 until a environment marker file is found.
 
-return (:path dir-of-venv? :env env-name?)
+return (:marker path-of-dotvenv? :env env-name? :path dir-of-venv? )
 "
   (let ((root (projectile-project-root))
         (text "")
@@ -249,12 +240,14 @@ return (:path dir-of-venv? :env env-name?)
           (goto-char (point-min))
           (cond ((f-ext? (car markers) "toml")
                  (let ((alist (toml:read-from-string (buffer-substring-no-properties (point-min) (line-end-position)))))
-
+                   (message "Don't know how to handle toml files yet")
                    ))
-                ((string-equal (car markers) "Pipfile")
+                ((string-equal (f-filename (car markers)) "Pipfile")
                  (let ((alist (toml:read-from-string (buffer-substring-no-properties (point-min) (line-end-position)))))
-
+                   (message "Don't know how to handle pipfiles yet")
                    ))
+                ((string-equal (f-filename (car markers)) ".conda")
+                 (message "need to do .conda"))
                 (t
                  (setq text
                        (string-trim (buffer-substring-no-properties (point-min) (line-end-position))))
@@ -263,18 +256,30 @@ return (:path dir-of-venv? :env env-name?)
           )
       )
 
-    (list :path (pcase (f-parent text)
-                  ((pred string-empty-p) nil)
-                  ("/" root)
-                  ("./" root)
-                  ("../" root)
-                  (v v)
-                  )
-          :env (pcase (f-filename text)
-                 ((pred string-empty-p) nil)
-                 (v v)
-                 )
-          )
+    (let* ((parts (split-string text ":" t " +"))
+           (head (car-safe parts))
+           )
+
+      (list :marker (f-join root (car markers))
+            :name (pcase head
+                   ('nil nil)
+                   ("conda"
+                    (cadr parts))
+                   ((pred f-directory?)
+                    (f-filename head))
+                   (_ head)
+                   )
+            :path (pcase head
+                    ('nil nil)
+                    ("conda" conda-env-home-directory)
+                    ((pred f-directory?)
+                     (f-base head))
+                    ((guard (f-directory? (f-join root ".temp/venv")))
+                     (f-join root ".temp/venv"))
+                    (_ conda-env-home-directory)
+                    )
+            )
+      )
     )
   )
 

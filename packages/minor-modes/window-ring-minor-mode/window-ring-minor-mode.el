@@ -18,7 +18,9 @@
 (require 'persp-mode)
 (require 'cl-lib)
 
-;; persp-buffer-list-function
+(defvar window-ring--adding nil)
+(defvar window-ring-suppress-adding nil)
+(defvar window-ring-buffer-test-fn 'identity "one argument, current buffer, return non-nil to add to current ring")
 
 (defmacro with-window-ring (&rest body)
   (declare (indent 1))
@@ -61,14 +63,11 @@
   )
 
 (defmacro with-window-ring-adding (&rest body)
-  `(let ((window-ring-adding t))
+  `(let ((window-ring--adding t))
      ,@body
      )
   )
 
-(defvar window-ring--adding nil)
-(defvar window-ring-suppress-adding nil)
-(defvar window-ring-buffer-test-fn 'identity "one argument, current buffer, return non-nil to add to current ring")
 
 (define-minor-mode window-ring-minor-mode
   "A Minor Mode for easy control of a 3-ple view of a ring of buffers"
@@ -127,7 +126,7 @@
   )
 
 (defun window-ring-create-persp-fn (persp hash)
-  (message "Initializing window ring")
+  (message "Initializing window ring %s" window-ring--adding)
   (when window-ring--adding
     (modify-persp-parameters `((window-ring . t)
                                (window-ring-actual . ,(make-ring 1))

@@ -34,6 +34,7 @@
              #'er/add-python-mode-expansions
              #'evil-collection-python-set-evil-shift-width
              #'doom--setq-tab-width-for-python-mode-h
+             #'tree-sitter!
              )
 
   ;; Always add auto-hide as the last thing
@@ -57,19 +58,20 @@
 )
 
 (use-package! anaconda-mode
-  :defer t
-  :init
+  :commands (anaconda-mode anaconda-mode-stop)
+  :preface
   (setq anaconda-mode-installation-directory (concat doom-data-dir "anaconda/")
         anaconda-mode-eldoc-as-single-line t)
   (spec-handling-add! python-env nil
                       `(anaconda
                         (:support conda
-                                  ,#'(lambda (path name) (add-hook 'python-mode-hook #'anaconda-mode))
-                                  ,#'(lambda () (anaconda-mode-stop) (remove-hook 'python-mode-hook #'anaconda-mode))
+                                  ,#'(lambda (state) (add-hook 'python-mode-hook #'anaconda-mode))
+                                  ,#'(lambda (state) (anaconda-mode-stop) (remove-hook 'python-mode-hook #'anaconda-mode))
                                   )
                         (:teardown conda
-                                   ,#'(lambda () (anaconda-mode-stop)
-                                        (anaconda-eldoc-mode -1)))
+                                   ,#'(lambda (state) (anaconda-mode-stop)
+                                        (anaconda-eldoc-mode -1))
+                                   )
                         )
                       )
   :config
@@ -80,14 +82,37 @@
 )
 
 (use-package! company-anaconda
-  :commands 'company-anaconda)
+  :commands 'company-anaconda
+  )
 
 ;;-- lsp
 
 (use-package! lsp-pyright
   :after lsp-mode
   :when (modulep! +lsp)
-  :init
+  :preface
+  (spec-handling-add! python-env nil
+                      `(pyright
+                        (:support pyright
+                                  ,#'(lambda (state)
+                                       (when (plist-get state :name)
+                                         (setq lsp-pyright-extra-paths (vector python-shell-extra-pythonpaths
+                                                                               (f-join (plist-get state :path)
+                                                                                       (plist-get state :name)))))
+                                       (add-hook 'python-mode-hook #'lsp-deferred)
+                                       )
+                                  ,#'(lambda (state)
+                                       (when (and (boundp 'lsp-mode) lsp-mode)
+                                         (lsp-mode -1))
+                                       (when (fboundp 'lsp--last-active-workspaces)
+                                         (lsp-workspace-shutdown (car lsp--last-active-workspaces)))
+                                       (remove-hook 'python-mode-hook #'lsp-deferred)
+                                       (setq lsp-pyright-extra-paths #'[])
+                                       )
+                                  )
+                        (:teardown pyright ,#'(lambda (state) (lsp-disconnect)))
+                        )
+                      )
   )
 
 (use-package! lsp-python-ms
@@ -122,7 +147,8 @@
         :localleader
         (:prefix ("i" . "imports")
           :desc "Sort imports"      "s" #'py-isort-buffer
-          :desc "Sort region"       "r" #'py-isort-region)))
+          :desc "Sort region"       "r" #'py-isort-region))
+  )
 
 (use-package! nose
   :commands nose-mode
@@ -149,8 +175,9 @@
   (spec-handling-add! python-env nil
                       `(pythonic
                         (:setup pythonic
-                                ,#'(lambda (path name) (pythonic-activate (f-join path name)))
-                                ,#'pythonic-deactivate
+                                ,#'(lambda (state local) (pythonic-activate (f-join (plist-get state :path) (plist-get state :name)))
+                                     nil)
+                                ,#'(lambda (state) (pythonic-deactivate))
                                 )
                         )
                       )
@@ -165,25 +192,29 @@
   (spec-handling-add! python-env nil
                       `(pipenv
                         (:setup pipenv
-                                ,#'(lambda (path name) (pipenv-activate))
-                                ,#'pipenv-deactivate
+                                ,#'(lambda (state local) (pipenv-activate) nil)
+                                ,#'(lambda (state) (pipenv-deactivate))
                                 )
                         (:install pipenv
-                                  ,#'(lambda ()
+                                  ,#'(lambda (state)
                                        (apply 'start-process env-handling-process-name env-handling-buffer-name "pipenv" "--non-interactive" "install"
-                                              (split-string (read-string "Packages: ") " " t t))))
+                                              (split-string (read-string "Packages: ") " " t t)))
+                                  )
                         (:update pipenv
-                                 ,#'(lambda ()
-                                     (apply 'start-process env-handling-process-name env-handling-buffer-name "pipenv" "--non-interactive" "upgrade" )))
+                                 ,#'(lambda (state)
+                                      (apply 'start-process env-handling-process-name env-handling-buffer-name "pipenv" "--non-interactive" "upgrade" ))
+                                 )
                         )
                       `(pip
                         (:install pip
-                                  ,#'(lambda ()
+                                  ,#'(lambda (state)
                                     (apply 'start-process env-handling-process-name env-handling-buffer-name "pip" "--no-input" "install"
-                                           (split-string (read-string "Packages: ") " " t t))))
+                                           (split-string (read-string "Packages: ") " " t t)))
+                                  )
                         (:update pip
-                                 ,#'(lambda ()
-                                   (apply 'start-process env-handling-process-name env-handling-buffer-name "pip" "--no-input" "install" "--upgrade" )))
+                                 ,#'(lambda (state)
+                                      (apply 'start-process env-handling-process-name env-handling-buffer-name "pip" "--no-input" "install" "--upgrade" ))
+                                 )
                         )
                       )
   )
@@ -197,10 +228,13 @@
   (spec-handling-add! python-env nil
                       `(venv
                         (:setup venv
-                                ,#'(lambda (path name) (pyvenv-activate (f-join path name)))
-                                ,#'pyvenv-deactivate
+                                ,#'(lambda (state local) (pyvenv-activate (f-join
+                                                                           (plist-get state :path)
+                                                                           (plist-get state :name)))
+                                     nil)
+                                ,#'(lambda (state) (pyvenv-deactivate))
                                 )
-                        (:create venv ,#'pyvenv-create)
+                        (:create venv ,#'(lambda (state) (pyvenv-create)))
                         )
                       )
   )
@@ -212,37 +246,39 @@
   (spec-handling-add! python-env t
                       `(conda_el
                         (:setup conda
-                                ,#'(lambda (path name)
-                                   (conda-env-activate name)
-                                   (setenv "CONDA_DEFAULT_ENV" name)
+                                ,#'(lambda (state local)
+                                     (let ((env-name (or (plist-get local :name)
+                                                         (plist-get state :name)
+                                                         (string-trim (conda-env-read-name "Select Conda Environment: ")))))
+                                       (conda-env-activate env-name)
+                                       (setenv "CONDA_DEFAULT_ENV" env-name)
+                                       (list :name env-name :path conda-env-home-directory)
+                                       )
                                    )
-                                ,#'(lambda ()
+                                ,#'(lambda (state)
                                     (conda-env-deactivate)
                                     (setenv "CONDA_DEFAULT_ENV" nil)
                                     )
                                 )
                         (:create conda
-                                 ,#'(lambda (&rest args)
-                                   (let ((name (read-string "Env name to create: "))
-                                         (ver  (format "python=%s" (read-string "Python Version: " "3.11")))
-                                         (packages (split-string (read-string "Packages: ") " " t " +"))
-                                         )
-                                     (apply 'start-process env-handling-process-name env-handling-buffer-name "conda" "create" "--yes" "-n" name ver packages)))
+                                 ,#'(lambda (state)
+                                      (let ((name (read-string "Env name to create: "))
+                                            (ver  (format "python=%s" (read-string "Python Version: " "3.11")))
+                                            (packages (split-string (read-string "Packages: ") " " t " +"))
+                                            )
+                                        (apply 'start-process env-handling-process-name env-handling-buffer-name "conda" "create" "--yes" "-n" name ver packages)))
                                  )
                         (:install conda
-                                  ,#'(lambda ()
+                                  ,#'(lambda (state)
                                       (apply 'start-process env-handling-process-name env-handling-buffer-name "conda" "install" "--yes"
                                              (split-string (read-string "Packages: ") " " t t)))
                                   )
                         (:update conda
-                                 ,#'(lambda () (apply 'start-process env-handling-process-name env-handling-buffer-name "conda" "update" "--all" "--yes"))
+                                 ,#'(lambda (state) (apply 'start-process env-handling-process-name env-handling-buffer-name "conda" "update" "--all" "--yes"))
                                  )
                         )
                       )
-
   :config
-  (setq conda-anaconda-home (or (getenv "ANACONDA_HOME") "/usr/local/anaconda3"))
-  (setq conda-env-home-directory (f-join conda-anaconda-home "envs"))
 
 )
 
@@ -252,11 +288,11 @@
   (spec-handling-add! python-env nil
                       `(poetry
                         (:setup poetry
-                                ,#'(lambda (path name) (poetry-venv-workon))
-                                ,#'poetry-venv-deactivate
+                                ,#'(lambda (state) (poetry-venv-workon) nil)
+                                ,#'(lambda (state) (poetry-venv-deactivate))
                                 )
-                        (:update poetry ,#'poetry-update)
-                        (:install poetry ,#'poetry-add)
+                        (:update poetry ,#'(lambda (state) (poetry-update)))
+                        (:install poetry ,#'(lambda (state) (poetry-add)))
                         )
                       )
   )

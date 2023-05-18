@@ -24,7 +24,7 @@
              #'yas-minor-mode
              #'outline-minor-mode
              #'+jg-bibtex-font-lock-mod-hook
-             )
+             #'reftex-mode)
 
   (add-hook! 'bibtex-mode-hook :append
     (bibtex-set-dialect 'jg)
@@ -51,10 +51,9 @@
   )
 
 (use-package! org-ref
-  :after-call org-ref-version
+  :after bibtex
   :init
   (custom-set-variables '(org-ref-insert-cite-key "C-c i"))
-  (add-hook 'bibtex-mode-hook #'reftex-mode)
   :config
   (setq-hook! 'bibtex-mode-hook org-ref-clean-bibtex-entry-hook jg-bibtex-clean-hooks)
   (remove-hook 'bibtex-mode-hook #'org-ref-bibtex-mode-keys)

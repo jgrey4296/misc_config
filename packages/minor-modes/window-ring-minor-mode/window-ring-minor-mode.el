@@ -60,6 +60,12 @@
      )
   )
 
+(defmacro with-window-ring-adding (&rest body)
+  `(let ((window-ring-adding t))
+     ,@body
+     )
+  )
+
 (defvar window-ring--adding nil)
 (defvar window-ring-suppress-adding nil)
 (defvar window-ring-buffer-test-fn 'identity "one argument, current buffer, return non-nil to add to current ring")
@@ -103,22 +109,25 @@
 (defun window-ring-new ()
   " create a new perspective and ring "
   (interactive)
+  (message "Creating new window ring")
   (let ((ring-name (format "%s-WR" (read-string "New Ring: ")))
+        (curr (current-buffer))
         )
-    (setq window-ring--adding t)
-    (persp-add-new ring-name)
-    (persp-switch ring-name)
-    (switch-to-buffer (persp-parameter 'window-ring-scratch))
-    (persp-add-buffer (current-buffer))
-    (add-hook 'find-file-hook #'window-ring-add-current-buffer)
-    (add-hook 'kill-buffer-hook #'window-ring-remove-buffer)
-    (add-hook 'kill-buffer-query-functions #'window-ring-protect-scratch-p -50)
-    (window-ring-setup-columns t nil)
-    (setq window-ring--adding nil)
+    (with-window-ring-adding
+     (persp-add-new ring-name)
+     (persp-switch ring-name)
+     (add-hook 'find-file-hook              #'window-ring-add-current-buffer)
+     (add-hook 'kill-buffer-hook            #'window-ring-remove-buffer)
+     (add-hook 'kill-buffer-query-functions #'window-ring-protect-scratch-p -50)
+     (switch-to-buffer (persp-parameter 'window-ring-scratch))
+     (window-ring-add-to-head curr)
+     (window-ring-setup-columns t t)
+     )
     )
   )
 
 (defun window-ring-create-persp-fn (persp hash)
+  (message "Initializing window ring")
   (when window-ring--adding
     (modify-persp-parameters `((window-ring . t)
                                (window-ring-actual . ,(make-ring 1))
@@ -128,7 +137,7 @@
                                (window-ring-focus . 0)
                                (window-ring-max . -1)
                                (window-ring-backgrounds . ("gray19" "gray12" "gray4"))
-                               (window-ring-scratch . ,(get-buffer-create (format "*%s*" (persp-name persp))))
+                               (window-ring-scratch . ,(get-buffer-create (format "*%s*" (safe-persp-name persp))))
                                )
                              persp
                              )
@@ -208,7 +217,6 @@
                  (funcall window-ring-buffer-test-fn (current-buffer)))
              (not window-ring-suppress-adding)
              )
-    (message "Adding to ring: %s %s" (current-buffer) window-ring-suppress-adding)
     (window-ring-add-to-head (current-buffer) arg)
     )
   )
@@ -217,7 +225,9 @@
   (interactive "b\np")
   (with-window-ring
       (-when-let (buff (get-buffer buffer))
-        (ring-insert+extend wr-actual buff t))
+        (message "Adding buffer to window ring: %s" buffer)
+        (ring-insert+extend wr-actual buff t)
+        )
     )
   (when arg (window-ring-redisplay))
   )
@@ -238,12 +248,13 @@
 (defun window-ring-clear-ring (&optional arg)
   (interactive "p")
   (with-window-ring
+      (message "Clearing Window Ring")
     (modify-persp-parameters `((window-ring-actual . ,(make-ring 1))
                                (window-ring-focus . 0)
                                ) wr-persp)
     )
   (window-ring-add-current-buffer arg)
-)
+  )
 
 (defun window-ring-pop-buffers (&optional arg)
   (interactive "p")
@@ -394,7 +405,7 @@
   )
 
 (defun window-ring-set-window (window index)
-  (message "setting Window: %s (%s) : %s" window (window-live-p window) index)
+  (message "Window Ring Setting Window: %s (%s) : %s" window (window-live-p window) index)
   (with-window-ring
       (unless (window-live-p window) (select-window window))
     (set-window-buffer window (if index
@@ -411,12 +422,12 @@
              (index    (window-ring-newer ring-len wr-focus wr-loop))
              )
         (message "Windows: Largest: %s (%s) curr: %s (%s)" largest (window-live-p largest) curr-win (window-live-p curr-win))
+        (message "Window-ring-state: (%s) %s" ring-len wr-actual)
         (set-window-buffer largest (ring-ref wr-actual wr-focus))
         (while curr-win
           (window-ring-set-window curr-win index)
           (setq curr-win (window-next-sibling curr-win)
                 index (window-ring-newer ring-len index wr-loop)))
-        (message "Getting older")
         (setq index (window-ring-older ring-len wr-focus wr-loop)
               curr-win (window-prev-sibling largest))
         (while curr-win

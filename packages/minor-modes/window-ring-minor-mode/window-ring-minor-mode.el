@@ -19,8 +19,12 @@
 (require 'cl-lib)
 
 (defvar window-ring--adding nil)
+
 (defvar window-ring-suppress-adding nil)
+
 (defvar window-ring-buffer-test-fn 'identity "one argument, current buffer, return non-nil to add to current ring")
+
+(defvar window-ring-column-fn #'window-ring-setup-columns-default)
 
 (defmacro with-window-ring (&rest body)
   (declare (indent 1))
@@ -67,7 +71,6 @@
      ,@body
      )
   )
-
 
 (define-minor-mode window-ring-minor-mode
   "A Minor Mode for easy control of a 3-ple view of a ring of buffers"
@@ -120,7 +123,7 @@
      (add-hook 'kill-buffer-query-functions #'window-ring-protect-scratch-p -50)
      (switch-to-buffer (persp-parameter 'window-ring-scratch))
      (window-ring-add-to-head curr)
-     (window-ring-setup-columns t t)
+     (window-ring-reset-columns t)
      )
     )
   )
@@ -169,12 +172,25 @@
   )
 
 (defun window-ring-setup-columns (&optional arg soft)
-  " Reset windows to (or arg 3) columns.
+  " Reset windows using `window-ring-column-fn`
     if SOFT then don't clear the window ring "
   (interactive "pi")
+  (persp-delete-other-windows)
+  (funcall window-ring-column-fn arg soft)
+
+  ;; init ring
+  (unless soft
+    (modify-persp-parameters `((window-ring-actual . ,(make-ring 1))))
+    (window-ring-add-current-buffer)
+    )
+
+  (when arg
+    (window-ring-redisplay))
+  )
+
+(defun window-ring-setup-columns-default (&optional arg soft)
   ;; (arg == 1 -> one row) (else -> two rows, only use top)
   ;; Clear
-  (persp-delete-other-windows)
   (let ((leftmost (selected-window))
         centre rightmost)
     ;; split
@@ -186,17 +202,27 @@
     (select-window centre)
     (setq rightmost (split-window-right))
 
-    ;; init ring
-    (unless soft
-      (modify-persp-parameters `((window-ring-actual . ,(make-ring 1))))
-      (window-ring-add-current-buffer)
-      )
-
-    (when arg
-      (balance-windows)
-      (window-ring-redisplay)
-      )
+    (when (and arg evil-auto-balance-windows)
+      (balance-windows))
     )
+  )
+
+(defun window-ring-setup-columns-alt (&optional arg soft)
+  " "
+  (let ((leftmost (selected-window))
+        )
+    (split-window-right)
+    (split-window-right)
+
+    )
+  )
+
+(defun window-ring-setup-vertical (&optional arg soft)
+  (split-window-below)
+  (split-window-below)
+
+  (when (and arg evil-auto-balance-windows)
+    (balance-windows))
   )
 
 (defun window-ring-kill-persp-fn (persp)
@@ -385,6 +411,31 @@
     )
   )
 
+(defun window-ring-redisplay-actual ()
+  (with-window-ring
+      (let* ((largest  (get-largest-window 'visible))
+             (ring-len (ring-length wr-actual))
+             (curr-win (window-next-sibling largest))
+             (index    (window-ring-newer ring-len wr-focus wr-loop))
+             )
+        (message "Windows: Largest: %s (%s) curr: %s (%s)" largest (window-live-p largest) curr-win (window-live-p curr-win))
+        (message "Window-ring-state: (%s) %s" ring-len wr-actual)
+        (set-window-buffer largest (ring-ref wr-actual wr-focus))
+        (while curr-win
+          (window-ring-set-window curr-win index)
+          (setq curr-win (window-next-sibling curr-win)
+                index (window-ring-newer ring-len index wr-loop)))
+        (setq index (window-ring-older ring-len wr-focus wr-loop)
+              curr-win (window-prev-sibling largest))
+        (while curr-win
+          (window-ring-set-window curr-win index)
+          (setq curr-win (window-prev-sibling curr-win)
+                index (window-ring-older ring-len index wr-loop))
+          )
+        )
+    )
+  )
+
 (defun window-ring-newer (len index loop)
   (pcase index
     ((pred null) nil)
@@ -410,31 +461,6 @@
     (set-window-buffer window (if index
                                   (ring-ref wr-actual index)
                                 wr-scratch))
-    )
-  )
-
-(defun window-ring-redisplay-actual ()
-  (with-window-ring
-      (let* ((largest  (get-largest-window 'visible))
-             (ring-len (ring-length wr-actual))
-             (curr-win (window-next-sibling largest))
-             (index    (window-ring-newer ring-len wr-focus wr-loop))
-             )
-        (message "Windows: Largest: %s (%s) curr: %s (%s)" largest (window-live-p largest) curr-win (window-live-p curr-win))
-        (message "Window-ring-state: (%s) %s" ring-len wr-actual)
-        (set-window-buffer largest (ring-ref wr-actual wr-focus))
-        (while curr-win
-          (window-ring-set-window curr-win index)
-          (setq curr-win (window-next-sibling curr-win)
-                index (window-ring-newer ring-len index wr-loop)))
-        (setq index (window-ring-older ring-len wr-focus wr-loop)
-              curr-win (window-prev-sibling largest))
-        (while curr-win
-          (window-ring-set-window curr-win index)
-          (setq curr-win (window-prev-sibling curr-win)
-                index (window-ring-newer ring-len index wr-loop))
-          )
-        )
     )
   )
 

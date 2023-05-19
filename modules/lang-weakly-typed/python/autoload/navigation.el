@@ -1,13 +1,6 @@
 ;;; +nav.el -*- lexical-binding: t; -*-
 ;; Customisations of Conda navigation
 
-
-;;;###autoload
-(defun +jg-conda-find-defs ()
-  (interactive)
-  (anaconda-mode-call "infer" #'+jg-conda-pop-to-xref)
-  )
-
 (defun +jg-conda-pop-to-xref (result)
   (if (stringp result)
       (message result)
@@ -21,6 +14,12 @@
         (xref--goto-char marker))
       )
     )
+  )
+
+;;;###autoload
+(defun +jg-conda-find-defs ()
+  (interactive)
+  (anaconda-mode-call "infer" #'+jg-conda-pop-to-xref)
   )
 
 ;;;###autoload
@@ -179,6 +178,7 @@
                    (list :exit-status
                          (shell-command
                           (format "global -f %s | grep -E \"\.py\s+
+
 (def|class) .+?\(.+?\)( -> .+?)?:(.+)?$\"" current-file)
                           (current-buffer))
                          :output
@@ -202,28 +202,40 @@
          (fparent (f-parent path))
 
          (doot-toml  (f-join root "doot.toml"))
-         (dooter     (f-join root "dooter.py"))
+         (tasks-file (f-join root "doot_tasks.toml"))
+         (tasks-dir  (f-join root "doot_tasks"))
          (project    (f-join root "pyproject.toml"))
          (log-file   (f-join root (concat "log." fbase)))
 
-         (impl-file  (f-join fparent (s-replace "test_" "" fname)))
-         (test-file  (f-join fparent "__tests" (concat "test_" fname)))
-         (init-file  (f-join fparent "__init__.py"))
-         (error-file (f-join (car (f-split path)) "errors" (concat fbase "_errors.py")))
+         (impl-file  (f-join root (f-parent fparent) (s-replace "test_" "" fname)))
+         (test-file  (f-join root fparent "__tests" (concat "test_" fname)))
+         (init-file  (f-join root fparent "__init__.py"))
+         (error-file (f-join root (car (f-split path)) "errors" (concat fbase "_errors.py")))
 
          (is-test      (s-matches? "^test_" fname))
          (is-dooter    (s-matches? "dooter.py" fname))
          (is-doot-toml (s-matches? "doot.toml" fname))
          )
-    (append (when (and is-test (f-exists? impl-file)) (list :impl impl-file))
-            (when (and (not is-test) (f-exists? test-file)) (list :test test-file))
+    (append (when (and is-test (f-exists? impl-file))
+              (list :impl impl-file))
+            (when (and (not is-test) (f-exists? test-file))
+              (list :test test-file))
 
-            (list :config doot-toml)
-            (list :tasks dooter)
-            (list :project project)
-            (list :init-py init-file)
-            (list :log log-file)
-            (list :errors error-file)
+            (when (f-exists? doot-toml)
+              (list :config doot-toml))
+            (when (f-exists? tasks-file)
+              (list :tasks tasks-file))
+            (when (f-exists? tasks-dir)
+              (list :tasks tasks-dir))
+
+            (when (f-exists? project)
+              (list :pyproject project))
+            (when (f-exists? init-file)
+              (list :init-py init-file))
+            (when (f-exists? log-file)
+              (list :log log-file))
+            (when (f-exists? error-file)
+              (list :errors error-file))
             )
     )
   )

@@ -1,5 +1,6 @@
 ;;; +funcs.el -*- lexical-binding: t; -*-
 
+;;;###autoload
 (defun +jg-toml-open-dooter ()
   (interactive)
   (when (and (equal (buffer-name) "doot.toml")
@@ -8,6 +9,7 @@
       (find-file (f-join default-directory "dooter.py")))
     ))
 
+;;;###autoload
 (defun +jg-toml-related-files-fn (path)
   " Provide projectile with various :kinds of related file "
   (let* ((root (projectile-project-root))
@@ -31,6 +33,7 @@
     )
   )
 
+;;;###autoload
 (defun +jg-toml-cleanup-ensure-newline-before-table ()
   (while (re-search-forward "\\(\n\\)\\(#.+?\n\\)*\\(\\[.+?\\]\\)" nil t)
     (goto-char (match-end 1))

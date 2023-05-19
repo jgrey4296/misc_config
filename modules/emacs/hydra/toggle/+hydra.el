@@ -3,14 +3,14 @@
 ;; "*                   ^^ *"
 
 (defhydra +jg-hydra-ui-toggles ()
-  "
-_v_isuals    _g_uides       w_r_apping    _n_avigation
-^^^^^^^------------------------------------------------
-_h_l-line    _w_hitespace   _t_runcate    _a_uto-hide
-_m_odeline ^^^^                           _c_ursor
-^^^^                        _s_martparen  _e_ww
-^^^^^^                                    _p_review
-"
+  (format "%s\n"
+          (+jg-hydra-format-columns
+           '(visuals hl-line modeline)
+           '(guides whitespace)
+           '(w_r_apping truncate smartparen)
+           '(navigation auto-hide cursor eww preview)
+           )
+          )
 
   ("v" (progn (+jg-hydra-push #'+jg-hydra-ui-toggles/body)
               (+jg-hydra-visuals/body)) nil :exit t)

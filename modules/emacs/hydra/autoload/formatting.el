@@ -2,60 +2,125 @@
 (require 's)
 (require 'dash)
 
-(defun +jg-ui-combine-columns (textlst)
-  (let* ((rows-of-cols (mapcar (lambda (x)
-                                 (mapcar 's-trim (split-string x "\n")))
-                               textlst))
-         (longest-in-col (mapcar (-partial 'apply 'max)
-                                 (mapcar (-partial 'mapcar 'length)
-                                         rows-of-cols)))
-         (padded (cl-loop for col in (-zip-lists longest-in-col rows-of-cols)
-                          collect
-                          (mapcar (-partial 's-pad-right (car col) " ") (cadr col))
-                          ))
-         (line-counts (mapcar #'length rows-of-cols))
+(defun +jg-hydra-first-char-format (text &optional index)
+  (let ((index (or index 1))
+        (fmtter (lambda (i x) (format "%s_%s_%s^^"
+                                      (if (< 0 (1- i )) (substring x 0 (1- i)) "")
+                                      (substring x (1- i) i)
+                                      (substring x i))
+                  ))
         )
-    (message "Got %s columns of %s lines of lengths %s"
-             (length rows-of-cols) line-counts longest-in-col)
-    (concat "\n" (string-join (cl-loop for cols in (apply '-zip-fill " " (make-list (length rows-of-cols) " ") padded)
-                          collect
-                          (string-join cols " | ")
-                          )
-                 "\n"))
+    (cond
+     ((and (symbolp text) (s-contains? "_" (symbol-name text)))
+      (concat (symbol-name text)
+              (make-string (s-count-matches "_" (symbol-name text)) ?^)))
+     ((symbolp text)
+      (funcall fmtter index (symbol-name text)))
+     ((not (stringp text))
+      (error "bad arg to hydraw char formatter" text))
+     ((or (string-equal "T/F" text) (s-contains? "%" text))
+      text)
+     ((not (s-contains? "_" text))
+      (funcall fmtter index text))
+     (t
+      (concat text (make-string (s-count-matches "_" text) ?^)))
+     )
+     )
+    )
+
+;;;###autoload
+(defun +jg-hydra-format-columns (&rest columns)
+  (let* ((fmt (mapcar (-partial #'mapcar #'+jg-hydra-first-char-format) columns))
+         (titles (mapcar #'car columns))
+         (max-row (apply #'max (mapcar #'length columns)))
+         (pad-str " ")
+         (empty-pad-amnt 4)
+         (concat-str "^^^^")
+         (norm-pad-amnt 2)
+         padded
+         fmt-columns
+         header
+         )
+    (cl-loop for column in fmt
+             do
+             (let* ((longest (if (string-equal (car column) "T/F") 6 (apply #'max (mapcar #'length column))))
+                    (empty-lines (mapcar (-partial (-compose (-partial #'concat concat-str) #'make-string) (- longest empty-pad-amnt))
+                                         (make-list (max 0 (- max-row (length column))) (string-to-char pad-str))))
+                   )
+               (push (mapcar (-partial #'s-pad-right (+ longest norm-pad-amnt) pad-str)
+                             (append column empty-lines))
+                     padded)
+               )
+             )
+    (setq fmt-columns (mapcar (-rpartial #'string-join " | ")
+                              (apply #'-zip-lists (reverse padded))
+                              )
+          header (car fmt-columns)
+          )
+    (string-join (append (list header
+                               (make-string (- (length header) (* 4 (length columns))) ?-))
+                         (cdr fmt-columns))
+     "\n")
     )
   )
 
-;;;###autodef
-(defun +jg-hydra-format-columns (textlst)
-  " particularly for hydra docs "
+;; (defhydra jg-test-hydra ()
+;;   (format "%s\n" (+jg-hydra-format-columns
+;;                   '(vis_u_als hl-line modeline)
+;;                   '(gu_i_des whitespace bloo)
+;;                   '(wrapping truncate smartparen)
+;;                   '(navigation auto-hide cursor eww preview)
+;;                   )
+;;           )
 
-  (let* (;; Splt columns into lists of rows
-         (rows-of-cols (mapcar (lambda (x)
-                                 (mapcar 's-trim (split-string x "\n")))
-                               textlst))
-         ;; Get the longest row
-         (longest-in-col (funcall (-compose (-partial 'mapcar
-                                                      (-partial 'apply 'max))
-                                            (-partial 'mapcar
-                                                      (-partial 'mapcar 'length)))
-                                  rows-of-cols))
-         ;; Pad all columns in each row
-         (padded (cl-loop for col in (-zip-lists longest-in-col rows-of-cols)
-                          collect
-                          (mapcar (-partial 's-pad-right (car col) "^") (cadr col))
-                          ))
-         ;; Count the number of columns in each column
-         (row-counts (mapcar #'length rows-of-cols))
-         ;; make a tuple of the row count with the padded columns
-         (tuple-pad (apply '-zip-fill " " (make-list (length rows-of-cols) " ") padded))
-        )
-    ;; Join all column's for each row
-    ;; Then join all rows
-    (concat "\n" (string-join
-                  (cl-loop for cols in tuple-pad
-                           collect
-                           (string-join cols " | ")
-                          )
-                  "\n"))
-    )
-  )
+;;   ("a" nil)
+;;   ("c" nil)
+;;   ("e" nil)
+;;   ("g" nil)
+;;   ("h" nil)
+;;   ("m" nil)
+;;   ("n" nil)
+;;   ("p" nil)
+;;   ("s" nil)
+;;   ("t" nil)
+;;   ("v" nil)
+;;   ("i" nil)
+;;   ("w" nil)
+;;   ("b" nil)
+;;   ("u" nil)
+;;   )
+
+;; (+jg-hydra-format-columns
+;;  '(Visuals
+;;    "_g_ Evil goggles          "
+;;    "_H_ Highlight Symbols     "
+;;    "_h_ Hl-line               "
+;;    "_I_ Ignore Invisible      "
+;;    "_p_ Highlight Parens      "
+;;    "_r_ Rainbow Mode          "
+;;    "_s_ Prettify Symbols Mode "
+;;    )
+;;  '(Markers
+;;    " %(+jg-hydra-doc evil-goggles-mode)"
+;;    " %(+jg-hydra-doc auto-highlight-symbol-mode)"
+;;    " %(+jg-hydra-doc hl-line-mode)"
+;;    " %(+jg-hydra-doc line-move-ignore-invisible)"
+;;    " %(+jg-hydra-doc global-highlight-parentheses-mode)"
+;;    " %(+jg-hydra-doc rainbow-mode)"
+;;    " %(+jg-hydra-doc prettify-symbols-mode)"
+;;    )
+;;  )
+
+;; (+jg-hydra-format-columns '(
+;;                             "Visuals
+;; -------------------------
+;; _g_ Evil goggles          %(+jg-hydra-doc evil-goggles-mode)
+;; _H_ Highlight Symbols     %(+jg-hydra-doc auto-highlight-symbol-mode)
+;; _h_ Hl-line               %(+jg-hydra-doc hl-line-mode)
+;; _I_ Ignore Invisible      %(+jg-hydra-doc line-move-ignore-invisible)
+;; _p_ Highlight Parens      %(+jg-hydra-doc global-highlight-parentheses-mode)
+;; _r_ Rainbow Mode          %(+jg-hydra-doc rainbow-mode)
+;; _s_ Prettify Symbols Mode %(+jg-hydra-doc prettify-symbols-mode)"
+
+;; ""
+;; ))

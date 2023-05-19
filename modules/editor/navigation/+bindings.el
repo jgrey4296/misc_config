@@ -7,6 +7,8 @@
 (map! :map evil-paren-state-map
       "a" #'evil-toggle-fold
       "z" 'jg-binding-vision-map
+      "\\" #'+jg-text-column-motion
+      "SPC" doom-leader-map
       )
 
 (map! :leader

@@ -6,11 +6,10 @@
   [remap delete-window] #'+workspace/close-window-or-workspace
   [remap evil-window-delete] #'+workspace/close-window-or-workspace)
 
-;;-- window ring
 (map! :leader
       :desc "Window Hydra" "W" #'hydra-workspace/body
+      :desc "Ring Hydra"   "R" #'hydra-window-ring/body
       )
-;;-- end window ring
 
 (map! :leader
       :prefix ("w" . "Windows")
@@ -34,21 +33,16 @@
 
 (map! :leader
       :prefix ("p" . "project")
-      :desc "Run cmd in project root"      "!"  #'projectile-run-shell-command-in-root
-      :desc "Project Root"                 "`"  (cmd! (find-file (doom-project-root)))
-      :desc "Root Shell"                   "'"  #'projectile-run-shell
-      :desc "Search project for symbol"    "."  #'+default/search-project-for-symbol-at-point
-      :desc "Walk to next"                 "n"  #'project-walk-next
+      :desc "run cmd in project root"      "!"  #'projectile-run-shell-command-in-root
+      :desc "project root"                 "`"  (cmd! (find-file (doom-project-root)))
+      :desc "root shell"                   "'"  #'projectile-run-shell
+      :desc "search project for symbol"    "."  #'+default/search-project-for-symbol-at-point
 
-      :desc "Find file in project sidebar" "s"    #'+neotree/find-this-file
-      :desc "Compile in project"           "c"  #'projectile-compile-project
-      :desc "List project todos"           "t"  #'magit-todos-list
-      :desc "Open project scratch buffer"  "x"  #'+jg-ui-open-scratch-buffer
+      :desc "compile in project"           "c"  #'projectile-compile-project
+      :desc "open project scratch buffer"  "x"  #'+jg-ui-open-scratch-buffer
 
-      :desc "Find file in project"         "f"  #'projectile-find-file
-      :desc "Find other file"              "o"  #'+jg-projects-find-related
-
-      :desc "Print Project Type"           "?" #'+jg-projects-detect-type
+      :desc "find file in project"         "f"  #'projectile-find-file
+      :desc "find other file"              "o"  #'+jg-projects-find-related
 
       ;; later expanded by projectile
       (:prefix ("4" . "in other window"))
@@ -58,10 +52,10 @@
 ;;-- management
 (map! :leader
       :prefix ("p m" . "management")
-       :desc "Invalidate project cache"     "C"  #'projectile-invalidate-cache
-       :desc "Browse other project"         ">"  #'doom/browse-in-other-project
-       :desc "Add new project"              "a"  #'projectile-add-known-project
-       :desc "Discover projects in folder"  "d"  #'+default/discover-projects
+       :desc "invalidate project cache"     "c"  #'projectile-invalidate-cache
+       :desc "browse other project"         ">"  #'doom/browse-in-other-project
+       :desc "add new project"              "a"  #'projectile-add-known-project
+       :desc "discover projects in folder"  "d"  #'+default/discover-projects
        :desc "Clear Known Projects"         "D"  #'projectile-clear-known-projects
        :desc "Switch project"               "p"  #'projectile-switch-project
       )

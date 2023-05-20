@@ -409,7 +409,6 @@
       ;; RET - workspace counsel
       :desc "Balance"             "b"   #'balance-windows
       :desc "Delete Window"       "d"   #'delete-window
-      :desc "Delete workspace"    "DEL" #'+workspace/delete
       :desc "Maximize"            "m"   #'doom/window-maximize-buffer
       :desc "Undo window config"  "u"   #'winner-undo
       :desc "Redo window config"  "U"   #'winner-redo

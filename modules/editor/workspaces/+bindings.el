@@ -8,26 +8,16 @@
 
 ;;-- window ring
 (map! :leader
-      :prefix ("W" . "Window Ring")
-      :desc "New Ring"                       "n" #'window-ring-new
-      :desc "Clear Ring"                     "c" #'window-ring-clear-ring
-      :desc "Edit Ring"                      "e" #'window-ring-edit-order
-      :desc "Print Sequence"                 "p" #'window-ring-print-order
-      :desc "Window Ring Hard Reset"         "r" #'window-ring-reset-columns
-      :desc "Toggle Ring Loop"               "l" #'window-ring-toggle-loop
-      :desc "Shrink Side Wndows"             "s" #'window-ring-shrink-sides
+      :desc "Window Hydra" "W" #'hydra-workspace/body
       )
+;;-- end window ring
 
 (map! :leader
-      :prefix "w"
-      ;; :desc "Ring Right"                     "l" #'window-ring-move-focus
-      ;; :desc "Ring Left"                      "h" #'window-ring-move-focus-alt
+      :prefix ("w" . "Windows")
+      :desc "Delete workspace"               "DEL" #'+workspace/delete
       :desc "Most Recent"                    "L" #'window-ring-goto-most-recent
       :desc "Oldest"                         "H" #'window-ring-goto-oldest
-      :desc "Print Ring"                     "p" #'window-ring-print-order
       )
-
-;;-- end window ring
 
 (map! :map window-ring-edit-map
       "C-c C-c" #'window-ring-edit-commit)

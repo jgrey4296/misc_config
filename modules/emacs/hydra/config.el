@@ -23,7 +23,7 @@
 
 (load! "+vars")
 (load! "+advice")
-(after! (evil jg-bindings-total hydra)
+(after! (jg-bindings-total hydra)
   (load! "+bindings")
   )
 

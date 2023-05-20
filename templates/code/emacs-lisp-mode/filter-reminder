@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name  : filter-reminder
+# uuid  : filter-reminder
+# key   : filter-reminder
+# group :
+# --
+(let ((data '(1 2 3 4 5))
+      (test (-partial #'< 3))
+      results)
+  (push (list :filter (-filter test data)) results)
+  (push (list :select (-select test data)) results)
+  (push (list :select (-keep test data)) results)
+  (push (list :remove (-remove test data)) results)
+  (push (list :reject (-reject test data)) results)
+  (push (list :non-nil (-non-nil data)) results)
+  (message "%s" results)
+  )

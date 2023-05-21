@@ -320,6 +320,8 @@
   )
 
 (defun window-ring-newer (len index loop)
+  " given the ring length, current index, and loop param
+return the next newer index "
   (pcase index
     ((pred null) nil)
     ((or (guard loop) (guard (< 0 index)))
@@ -329,6 +331,8 @@
   )
 
 (defun window-ring-older (len index loop)
+  " given the ring length, current index, and loop param,
+return the next older index"
   (pcase index
     ((pred null) nil)
     ((or (guard loop) (guard (< index (1- len))))
@@ -529,12 +533,13 @@
                 (wr-grow       (persp-parameter 'window-ring-grow))
                 (wr-loop       (persp-parameter 'window-ring-loop))
                 (wr-duplicates (persp-parameter 'window-ring-duplicates))
+                (curr-focus    (ring-member wr-actual (current-buffer)))
                 (wr-focus      (persp-parameter 'window-ring-focus))
                 (wr-max        (persp-parameter 'window-ring-max))
                 (wr-scratch    (persp-parameter 'window-ring-scratch))
                 (new-focus (if (< 1 arg)
-                               (window-ring-older (ring-length wr-actual) wr-focus wr-loop)
-                             (window-ring-newer (ring-length wr-actual) wr-focus wr-loop)))
+                               (window-ring-older (ring-length wr-actual) curr-focus wr-loop)
+                             (window-ring-newer (ring-length wr-actual) curr-focus wr-loop)))
                 )
            (when new-focus
              (modify-persp-parameters `((window-ring-focus . ,new-focus)))
@@ -555,21 +560,76 @@
   (window-ring-move-focus 2)
   )
 
-(defun window-ring-goto-most-recent (&optional arg)
+;;;###autoload
+(defun window-ring-goto-newest (&optional arg)
   (interactive "p")
   (with-window-ring
       (modify-persp-parameters '((window-ring-focus . 0)))
+    (when arg (window-ring-redisplay))
     )
-  (when arg (window-ring-redisplay))
   )
 
+;;;###autoload
 (defun window-ring-goto-oldest (&optional arg)
-  (interactive)
+  (interactive "p")
   (with-window-ring
-      (modify-persp-parameters '((window-ring-focus . -1)))
+      (modify-persp-parameters `((window-ring-focus . ,(1- (ring-length wr-actual)))))
+    (when arg (window-ring-redisplay))
     )
-  (when arg (window-ring-redisplay))
   )
+
+
+;;;###autoload
+(defun window-ring-move-buffer-right (&optional arg)
+  (interactive "p")
+  (with-window-ring
+      (let* ((curr-focus (ring-member wr-actual (current-buffer)))
+             (curr (ring-ref wr-actual curr-focus))
+             (next (ring-ref wr-actual (window-ring-newer (ring-length wr-actual) curr-focus wr-loop)))
+             (as-seq (ring-elements wr-actual))
+             new-ring
+            )
+        (setq new-ring (ring-convert-sequence-to-ring (cl-loop for val in as-seq
+                                                               collect (cond ((eq val curr)
+                                                                              next)
+                                                                             ((eq val next)
+                                                                              curr)
+                                                                             (t val))
+                                                               )))
+      (modify-persp-parameters `((window-ring-actual . ,new-ring)))
+      (modify-persp-parameters `((window-ring-focus . ,(ring-member new-ring curr))))
+      )
+    (when arg (window-ring-redisplay))
+    (select-window (get-buffer-window (current-buffer)))
+    )
+  )
+
+;;;###autoload
+(defun window-ring-move-buffer-left (&optional arg)
+  (interactive "p")
+  (with-window-ring
+      (let* ((curr-focus (ring-member wr-actual (current-buffer)))
+             (curr (ring-ref wr-actual curr-focus))
+             (next (ring-ref wr-actual (window-ring-older (ring-length wr-actual) curr-focus wr-loop)))
+             (as-seq (ring-elements wr-actual))
+             new-ring
+            )
+        (setq new-ring (ring-convert-sequence-to-ring (cl-loop for val in as-seq
+                                                               collect (cond ((eq val curr)
+                                                                              next)
+                                                                             ((eq val next)
+                                                                              curr)
+                                                                             (t val))
+                                                               )))
+      (modify-persp-parameters `((window-ring-actual . ,new-ring)))
+      (modify-persp-parameters `((window-ring-focus . ,(ring-member new-ring curr))))
+      )
+    (when arg (window-ring-redisplay))
+    (select-window (get-buffer-window (current-buffer)))
+    )
+  )
+
+
 
 ;;-- end movement
 

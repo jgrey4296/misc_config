@@ -80,6 +80,8 @@
                       add
                       Remove
                       "c_h_oose"
+                      "_[_ move left"
+                      "_]_ move right"
                       )
                     '(blank
                       "%-4(persp-parameter 'window-ring-loop)"
@@ -97,6 +99,8 @@
     ("K" window-ring-clear-ring         :exit t)
     ("a" window-ring-add-current-buffer :exit t)
     ("R" window-ring-remove-buffer      :exit t)
+    ("[" window-ring-move-buffer-left   :exit nil)
+    ("]" window-ring-move-buffer-right  :exit nil)
     ("h" nil)
     )
   )

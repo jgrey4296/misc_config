@@ -23,11 +23,13 @@
 
 (map! :map jg-binding-backward-general-motion-map
       :desc "Ring Window"  "r"    #'window-ring-move-focus-alt
+      :desc "Ring Oldest"  "R"    #'window-ring-goto-oldest
       :desc "Workspace"    "w"    #'+workspace/switch-left
       )
 
 (map! :map jg-binding-forward-general-motion-map
       :desc "Ring Window"  "r"    #'window-ring-move-focus
+      :desc "Ring Newest"  "R"    #'window-ring-goto-newest
       :desc "Workspace"    "w"    #'+workspace/switch-right
 )
 

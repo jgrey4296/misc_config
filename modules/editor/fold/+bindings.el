@@ -6,6 +6,7 @@
 
 (map! :map jg-binding-normal-state-map
       :desc "Toggle" "a" #'evil-toggle-fold
+      :desc "open-fold-rec" "A"   #'evil-open-fold-rec
       )
 
 (map! :map jg-binding-vision-map

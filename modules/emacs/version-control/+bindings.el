@@ -10,6 +10,7 @@
 (map! :map magit-mode-map
       :nv "q" #'+magit/quit
       :nv "Q" #'+magit/quit-all
+      :nv "z" jg-binding-vision-map
 
       (:when (not forge-add-default-bindings)
         [remap magit-browse-thing] #'forge-browse-dwim)

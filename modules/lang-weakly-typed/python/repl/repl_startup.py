@@ -38,11 +38,11 @@ args = parser.parse_args()
 initial_globals = set(globals().keys())
 
 if args.dir:
-    sys.path = [pathlib.Path(args.dir)] + sys.path
+    sys.path = [pl.Path(args.dir)] + sys.path
     print('Path Amended')
 
 def cwd():
-    return pathlib.Path(getcwd())
+    return pl.Path(getcwd())
 
 
 def logattrs():

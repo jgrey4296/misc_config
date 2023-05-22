@@ -1,6 +1,7 @@
 ;;; +subcite.el -*- lexical-binding: t; -*-
 
 
+;;;###autoload
 (defun +jg-bibtex-lock-key ()
   (interactive)
   (bibtex-beginning-of-entry)
@@ -13,6 +14,7 @@
     )
   )
 
+;;;###autoload
 (defun +jg-bibtex-subcite ()
   (interactive)
   (+jg-bibtex-lock-key)

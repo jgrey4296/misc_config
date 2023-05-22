@@ -1,5 +1,6 @@
 ;;; +metadata.el -*- lexical-binding: t; -*-
 
+;;;###autoload
 (defun +jg-bibtex-meta-retrieval ()
   (interactive)
   (save-excursion
@@ -18,6 +19,7 @@
     )
   )
 
+;;;###autoload
 (defun +jg-bibtex-apply-meta ()
   " Use Calibre's ebook-meta program to take bibtex data and apply it to a pdf or epub "
   (interactive)
@@ -68,6 +70,7 @@
     )
   )
 
+;;;###autoload
 (defun +jg-bibtex-set-ebook-cover ()
   " Use Calibre's ebook-meta program to select an image and apply it as an epub's cover image "
   (interactive)

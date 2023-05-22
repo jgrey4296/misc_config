@@ -1,17 +1,20 @@
 ;;; +ui.el -*- lexical-binding: t; -*-
 
+;;;###autoload
 (defun +jg-bibtex-toggle-doi-load ()
   (interactive)
   (setq jg-bibtex-open-doi-with-pdf (not jg-bibtex-open-doi-with-pdf))
   (message "Open DOI on pdf? %s" jg-bibtex-open-doi-with-pdf)
   )
 
+;;;###autoload
 (defun +jg-bibtex-toggle-url-load ()
   (interactive)
   (setq jg-bibtex-open-url-with-pdf (not jg-bibtex-open-url-with-pdf))
   (message "Open URL on pdf? %s" jg-bibtex-open-url-with-pdf)
   )
 
+;;;###autoload
 (defun +jg-bibtex-visual-select-entry ()
   " Evil visual select the current entry "
   (interactive)
@@ -19,6 +22,7 @@
                            (bibtex-end-of-entry))
 )
 
+;;;###autoload
 (defun +jg-bibtex-goto-crossref-entry ()
   " Follow the crossref field in the entry "
   (interactive)
@@ -27,6 +31,7 @@
     )
   )
 
+;;;###autoload
 (defun +jg-bibtex-tweet-random-entry ()
   (interactive)
   (unless bibtex-completion-bibliography
@@ -58,6 +63,7 @@
     )
   )
 
+;;;###autoload
 (defun +jg-bibtex-google-scholar (arg)
   "Open the bibtex entry at point in google-scholar by its doi.
 With arg, searchs the dplp instead.

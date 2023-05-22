@@ -1,6 +1,7 @@
 ;;; +editing.el -*- lexical-binding: t; -*-
 
 
+;;;###autoload
 (defun +jg-bibtex-edit-entry-type ()
   " Edit the @type of a bibtex entry, using
 bibtex-BibTeX-entry-alist for completion options "
@@ -17,6 +18,7 @@ bibtex-BibTeX-entry-alist for completion options "
     )
   )
 
+;;;###autoload
 (defun +jg-bibtex-copy-entry ()
   " Copy the entire entry under point "
   (interactive)
@@ -28,6 +30,7 @@ bibtex-BibTeX-entry-alist for completion options "
     )
   )
 
+;;;###autoload
 (defun +jg-bibtex-copy-key ()
   " Copy the cite key of the entry under point "
   (interactive)
@@ -35,12 +38,14 @@ bibtex-BibTeX-entry-alist for completion options "
   (message "Copied Key: %s" (current-kill 0 t))
   )
 
+;;;###autoload
 (defun +jg-bibtex-copy-title ()
   (interactive)
   (kill-new (bibtex-autokey-get-field "title"))
   (message "Copied Title: %s" (current-kill 0 t))
   )
 
+;;;###autoload
 (defun +jg-bibtex-copy-field ()
   (interactive)
   (save-excursion
@@ -52,6 +57,7 @@ bibtex-BibTeX-entry-alist for completion options "
     )
   )
 
+;;;###autoload
 (defun +jg-bibtex-quickswap ()
   (interactive)
   (save-excursion
@@ -64,6 +70,7 @@ bibtex-BibTeX-entry-alist for completion options "
     )
   )
 
+;;;###autoload
 (defun +jg-bibtex-clean-error-move-toggle ()
   (interactive)
   (setq jg-bibtex-clean-move-entry-on-fail (not jg-bibtex-clean-move-entry-on-fail))
@@ -72,6 +79,7 @@ bibtex-BibTeX-entry-alist for completion options "
                                                            "will not"))
   )
 
+;;;###autoload
 (defun +jg-bibtex-rename-file ()
   " Rename the file associated with the record "
   (interactive)
@@ -92,12 +100,14 @@ bibtex-BibTeX-entry-alist for completion options "
     )
   )
 
+;;;###autoload
 (defun +jg-bibtex-dired-unify-pdf-locations ()
   "Unify bibtex pdf paths of marked files"
   (interactive)
   (seq-each '+jg-bibtex-unify-pdf-locations-in-file (dired-get-marked-files))
   )
 
+;;;###autoload
 (defun +jg-bibtex-unify-pdf-locations-in-file (name)
   "Change all pdf locations in bibtex file to relative,
 ensuring they work across machines "

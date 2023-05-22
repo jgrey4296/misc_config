@@ -1,5 +1,7 @@
 ;;; domain-specific/bibtex/+helm.el -*- lexical-binding: t; -*-
+(require 'helm)
 (require 'helm-source)
+(require 'helm-bibtex)
 
 (defvar jg-bibtex-field-to-string-fn (-compose (-partial #'s-replace ":" "") #'symbol-name #'car))
 
@@ -223,7 +225,11 @@ governed by the variable `bibtex-completion-display-formats'."
 (defun +jg-bibtex-helm-bibtex (&optional arg local-bib)
   " Custom implementation of helm-bibtex"
   (interactive "P")
-  (require 'helm-bibtex)
+  (when (directory-files default-directory 't "\.bib$")
+    (setq-local bibtex-completion-bibliography (directory-files default-directory 't "\.bib$")
+                jg-bibtex-helm-candidates nil
+                )
+    )
   (when arg
     (message "Clearing Bibtex File Cache")
     (+jg-bibtex-build-list)
@@ -254,7 +260,6 @@ governed by the variable `bibtex-completion-display-formats'."
   " Edit a specified field in the current entry,
 using org-bibtex-fields for completion options "
   (interactive)
-  (require 'helm)
   (save-excursion
     (bibtex-beginning-of-entry)
     (let* ((chosen (completing-read "Field: " (+jg-bibtex-sort-fields)))

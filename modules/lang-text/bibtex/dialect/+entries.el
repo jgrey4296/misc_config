@@ -6,7 +6,7 @@
 ;; (field comment init alt)
 
 ;; keep these synced with jg_custom.bst
-(setq bibtex-jg-entry-alist nil)
+(defvar bibtex-jg-entry-alist nil)
 
 ;;-- standard
 (pushnew! bibtex-jg-entry-alist

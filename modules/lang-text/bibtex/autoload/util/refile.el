@@ -1,5 +1,6 @@
 ;;; +refile.el -*- lexical-binding: t; -*-
 
+;;;###autoload
 (defun +jg-bibtex-refile-pdf (&optional destructive)
   " Refile a pdf from its location to its pdflib/year/author loc
 returns the new location
@@ -44,6 +45,7 @@ returns the new location
     )
   )
 
+;;;###autoload
 (defun +jg-bibtex-refile-by-year ()
   " Kill the current entry and insert it in the appropriate year's bibtex file "
   (interactive)

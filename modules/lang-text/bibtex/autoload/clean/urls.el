@@ -1,12 +1,14 @@
 ;;; +urls.el -*- lexical-binding: t; -*-
 
 
+;;;###autoload
 (defun +jg-bibtex--url-matcher (x)
   (when (and (string-match "url" (car x))
              (<= (length (cdr x)) 30))
     (cons (car x) (substring (cdr x) 1 -1)))
   )
 
+;;;###autoload
 (defun +jg-bibtex--expand-shortened-url ()
   "Expand a shortened url, using CuRL
 https://tecnoysoft.com/en/how-to-obtain-the-real-url-behind-a-shortened-url-using-curl/

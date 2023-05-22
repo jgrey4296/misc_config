@@ -1,5 +1,6 @@
 ;;; +clean_funcs.el -*- lexical-binding: t; -*-
 
+;;;###autoload
 (defun +jg-bibtex-clean-doi-hook ()
   "Remove http://dx.doi.org/ in the doi field.
 Used instead of org-ref-bibtex-format-url-if-doi
@@ -14,6 +15,7 @@ and orcb-clean-doi
       (backward-char)
       (insert (replace-regexp-in-string "^http.*?\.org/" "" doi)))))
 
+;;;###autoload
 (defun +jg-bibtex-isbn-clean ()
   (let ((isbn (bibtex-autokey-get-field "isbn")))
     (unless (string-empty-p isbn)

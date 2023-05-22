@@ -1,5 +1,6 @@
 ;;; +entry.el -*- lexical-binding: t; -*-
 
+;;;###autoload
 (defun +jg-bibtex-smart-replace-nonascii-hook ()
   "Replace non-ascii characters in a bibtex entry.
 but not in file or url entries
@@ -17,6 +18,7 @@ but not in file or url entries
         )
       (goto-char (point-min))))
 
+;;;###autoload
 (defun +jg-bibtex-align-hook ()
   " Aligns a bibtex entry's '{field} =' "
   (let (start end)
@@ -32,6 +34,7 @@ but not in file or url entries
     )
 )
 
+;;;###autoload
 (defun +jg-bibtex-indent-hook ()
   " Indent all fields to jg-bibtex-indent-equals-column "
   (bibtex-beginning-of-entry)
@@ -42,6 +45,7 @@ but not in file or url entries
     )
   )
 
+;;;###autoload
 (defun +jg-bibtex-bibtex-entry-commas ()
   " Ensure all fields have a comma at the end of the line"
   (bibtex-beginning-of-entry)
@@ -53,6 +57,7 @@ but not in file or url entries
     )
   )
 
+;;;###autoload
 (defun +jg-bibtex-orcb-& ()
   "Replace naked & with \& in a bibtex entry.
 Replace &amp; as well
@@ -69,6 +74,7 @@ But not in urls
     )
   )
 
+;;;###autoload
 (defun +jg-bibtex-dont-break-lines-hook()
   " Remove newlines from entries "
   (bibtex-beginning-of-entry)
@@ -84,6 +90,7 @@ But not in urls
     )
   )
 
+;;;###autoload
 (defun +jg-bibtex-clean-whitespace-hook()
   " Remove newlines from entries "
   (bibtex-beginning-of-entry)
@@ -97,6 +104,7 @@ But not in urls
     )
   )
 
+;;;###autoload
 (defun +jg-bibtex-remove-empty-fields ()
   (bibtex-beginning-of-entry)
   (while (re-search-forward "\\(ALT\\|OPT\\).+= {},?$" nil t)

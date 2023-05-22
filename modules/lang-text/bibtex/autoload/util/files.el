@@ -1,5 +1,6 @@
 ;;; +files.el -*- lexical-binding: t; -*-
 
+;;;###autoload
 (defun +jg-bibtex-open-pdf (&optional path)
   "Open pdf for a bibtex entry, if it exists.
 assumes point is in
@@ -24,8 +25,10 @@ the entry of interest in the bibfile.  but does not check that."
           (+jg-bibtex-open-url))
       )))
 
+;;;###autoload
 (defun +jg-bibtex-open-url () " Open the current entry's url in browser " (interactive) (when (bibtex-text-in-field "url") (browse-url (bibtex-text-in-field "url"))))
 
+;;;###autoload
 (defun +jg-bibtex-open-doi ()
   " Follow the doi link of the current entry in a browser "
   (interactive)
@@ -34,6 +37,7 @@ the entry of interest in the bibfile.  but does not check that."
     )
   )
 
+;;;###autoload
 (defun +jg-bibtex-open-folder ()
   " Open the associated file's folder in finder "
   (interactive)
@@ -45,6 +49,7 @@ the entry of interest in the bibfile.  but does not check that."
     )
   )
 
+;;;###autoload
 (defun +jg-bibtex-load-random ()
   " Run in a bibtex file, opens a random entry externally,
       and logs it has been opened in a separate file.
@@ -87,6 +92,7 @@ Log into jg-bibtex-rand-log.
     )
   )
 
+;;;###autoload
 (defun +jg-bibtex-quicklook-pdf ()
   "Open pdf for a bibtex entry, if it exists.
 assumes point is in

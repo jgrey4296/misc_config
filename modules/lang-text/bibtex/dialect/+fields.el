@@ -1,9 +1,8 @@
 ;;; +fields.el -*- lexical-binding: t; -*-
 
-
-
 ;; Keep these synced with jg_custom.bst
-(setq bibtex-jg-field-alist nil)
+
+(defvar bibtex-jg-field-alist nil)
 
 ;;-- basic
 (pushnew! bibtex-jg-field-alist

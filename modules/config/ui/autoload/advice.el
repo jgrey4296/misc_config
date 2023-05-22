@@ -2,8 +2,8 @@
 
 (advice-remove 'kill-current-buffer #'doom--switch-to-fallback-buffer-maybe-a)
 
-(define-advice kill-current-buffer (:before-until (&rest _)
-                                                  +jg-ui-kill-buffer-override)
+;;;###autoload
+(defun +jg-ui-kill-buffer-override  (&rest _)
   "Switch to `doom-fallback-buffer' if on last real buffer.
 
 Advice for `kill-current-buffer'. If in a dedicated window, delete it. If there
@@ -54,3 +54,6 @@ TODO add fallback to project root
           )
     )
   )
+
+;;;###autoload
+(advice-add 'kill-current-buffer :before-until #'+jg-ui-kill-buffer-override)

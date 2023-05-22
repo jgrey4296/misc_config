@@ -1,6 +1,7 @@
 ;;; +windows.el -*- lexical-binding: t; -*-
 
 
+;;;###autoload
 (defun +jg-bibtex-window-set-downloads ()
   (interactive)
   (let* ((top-wind (split-window-right))
@@ -16,6 +17,7 @@
     )
   )
 
+;;;###autoload
 (defun +jg-bibtex-window-set-dropbox()
   (interactive)
   (let* ((top-wind (split-window-right))
@@ -31,6 +33,7 @@
     )
   )
 
+;;;###autoload
 (defun +jg-bibtex-window-file-folder ()
   " Find the folder in which the entry's associated file exists "
   (interactive)
@@ -45,6 +48,7 @@
     )
   )
 
+;;;###autoload
 (defun +jg-bibtex-window-dwim ()
   (interactive)
   (let ((entry-start (save-excursion (bibtex-beginning-of-entry) (point)))

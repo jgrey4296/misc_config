@@ -3,11 +3,11 @@
 (defhydra +jg-hydra-visuals (:color teal)
   (format "%s\n"
           (+jg-hydra-format-columns
-           '(Visuals
-             "_g_ Evil goggles"
-             "_H_ Highlight Symbols"
-             "_h_ Hl-line"
-             "_I_ Ignore Invisible"
+           '("|Visuals"
+             "Evil _g_oggles"
+             "Highlight _S_ymbols"
+             "hl-line"
+             "ignore _i_nvisible"
              )
            '(blank
              "%-10(+jg-hydra-doc evil-goggles-mode)"
@@ -16,27 +16,33 @@
              "%-10(+jg-hydra-doc line-move-ignore-invisible)"
              )
            '(blank
-             "_p_ Highlight Parens"
-             "_r_ Rainbow Mode"
-             "_s_ Prettify Symbols Mode"
+             "Highlight _w_rappers"
+             "Rainbow _c_olours"
+             "pretty Symbols"
+             "quick_s_cope"
+             "high_l_ight changes"
              )
            '(blank
-             "%-10(+jg-hydra-doc global-highlight-parentheses-mode)"
+             "%-10(+jg-hydra-doc highlight-parentheses-mode)"
              "%-10(+jg-hydra-doc rainbow-mode)"
              "%-10(+jg-hydra-doc prettify-symbols-mode)"
+             "%(+jg-hydra-doc evil-quickscope-always-mode)/%-4(+jg-hydra-doc evil-quickscope-mode)"
+             "%-10(+jg-hydra-doc highlight-changes-visible-mode)"
              )
            )
           )
   ("g" #'evil-goggles-mode                        nil :exit nil)
-  ("H" #'auto-highlight-symbol-mode               nil :exit nil)
-  ("h" #'global-hl-line-mode                      nil :exit nil)
-  ("I" #'+jg-ui-toggle-line-move-ignore-invisible nil :exit nil)
-  ("p" #'global-highlight-parentheses-mode        nil :exit nil)
-  ("r" #'rainbow-mode                             nil :exit nil)
-  ("s" #'prettify-symbols-mode                    nil :exit nil)
+  ("S" #'auto-highlight-symbol-mode               nil :exit nil)
+  ("h" #'hl-line-mode                             nil :exit nil)
+  ("i" #'+jg-ui-toggle-line-move-ignore-invisible nil :exit nil)
+  ("w" #'highlight-parentheses-mode               nil :exit nil)
+  ("c" #'rainbow-mode                             nil :exit nil)
+  ("p" #'prettify-symbols-mode                    nil :exit nil)
+  ("l" #'highlight-changes-visible-mode           nil :exit nil)
+  ("s" (progn (evil-quickscope-always-mode 'toggle)
+              (evil-quickscope-mode (if evil-quickscope-always-mode -1 1)))
+   nil :exit nil)
   ("q" +jg-hydra-pop "exit" :exit t)
-  ("V" nil)
-  ("T" nil)
   )
 
 (defhydra +jg-hydra-guides (:color blue)
@@ -109,7 +115,7 @@
            '(blank
              "%-10(+jg-hydra-doc global-autohide-minor-mode)"
              "%-10(+jg-hydra-doc evil-auto-balance-windows)"
-             "%-10(+jg-hydra-doc global-centered-cursor-mode)"
+             "%-10(+jg-hydra-doc centered-cursor-mode)"
              "%-10(+jg-hydra-doc org-link-descriptive)"
              "%-10(+jg-hydra-doc evil-visual-mark-mode)"
              )
@@ -122,7 +128,7 @@
   ("N" t)
   ("a" #'global-autohide-minor-mode  nil :exit nil)
   ("b" (setq evil-auto-balance-windows (not evil-auto-balance-windows))  nil :exit nil)
-  ("c" #'global-centered-cursor-mode nil :exit nil)
+  ("c" #'centered-cursor-mode        nil :exit nil)
   ("M" #'minimap-mode                nil :exit nil)
   ("o" #'org-toggle-link-display     nil :exit nil)
   ("T" #'neotree-toggle              nil :exit nil)

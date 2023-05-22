@@ -7,7 +7,8 @@
 (map! :map bibtex-mode-map ;; main
       :after bibtex
       :desc "Lock Key"           :n "!"     #'+jg-bibtex-lock-key
-      :desc "Insert from Doi"    :n "?"       (cmd! (doi-utils-insert-bibtex-entry-from-doi (read-string "Doi: ")))
+      :desc "Insert from Doi"    :n "id"    (cmd! (doi-utils-insert-bibtex-entry-from-doi (read-string "Doi: ")))
+      :desc "Insert from PMID"   :n "ip"    (cmd! (pubmed-insert-bibtex-from-pmid (read-string "PMID: ")))
       :desc "Clean entry"        :n "TAB"   #'org-ref-clean-bibtex-entry
       :desc "Edit Field"         :n  "\\"   #'+jg-bibtex-edit-field
       :desc "Change Entry Type"  :n "DEL"   #'+jg-bibtex-edit-entry-type
@@ -26,6 +27,7 @@
       :desc "Subcite"             "\\"    #'+jg-bibtex-subcite
       :desc "Build Bibliography"  "B"     #'org-ref-build-full-bibliography
       :desc "Insert from DOI"     "d"     (cmd! (doi-utils-insert-bibtex-entry-from-doi (read-string "DOI: ")))
+      :desc "Insert from PMID"    "p"     (cmd! (pubmed-insert-bibtex-from-pmid (read-string "PMID: ")))
       :desc "New Entry"           "n"     #'bibtex-entry
       :desc "Get Meta"            "m"     #'+jg-bibtex-meta-retrieval
       :desc "Count Entries"       "C"     #'bibtex-count-entries

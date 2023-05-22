@@ -235,6 +235,7 @@
                     )
 (spec-handling-add! lookup-regular nil
                     '(python-mode
+                      ("datetime" . "https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior")
                       ("PyGObject" . "https://pygobject.readthedocs.io/en/latest/")
                       ("Pyright" . "https://microsoft.github.io/pyright/#/configuration")
                       ("Logging" . "https://docs.python.org/3/library/logging.html")

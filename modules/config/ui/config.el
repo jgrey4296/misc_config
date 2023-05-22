@@ -2,21 +2,31 @@
 
 (load! "+vars")
 (load! "+funcs")
-(load! "utils/+state-hl-lines")
-(load! "utils/+faces")
 (after! (evil jg-bindings-total)
   (load! "+bindings")
   )
 
 (add-hook! 'doom-init-ui-hook  'rainbow-delimiters-mode)
-(add-hook! 'doom-init-ui-hook
-
-(defun +jg-ui-load-advice () (load! "utils/+advice")))
+(add-hook! 'doom-init-ui-hook (defun +jg-ui-load-advice () (load! "utils/+advice")))
 
 (use-package! hl-line
   :defer t
-  :init
-  (global-hl-line-mode)
+  :hook (doom-first-file . global-hl-line-mode)
+  :config
+  (after! evil
+    ;; hooks for evil state entry hooks to change hl-line colour
+    (add-hook! '(evil-normal-state-entry-hook
+                 evil-insert-state-entry-hook
+                 evil-visual-state-entry-hook
+                 evil-motion-state-entry-hook
+                 evil-emacs-state-entry-hook
+                 evil-replace-state-entry-hook
+                 evil-hybrid-state-entry-hook
+                 evil-evilified-state-entry-hook
+                 evil-lisp-state-entry-hook
+                 evil-iedit-state-entry-hook)
+               #'+jg-ui-state-line-change)
+    )
   )
 
 (use-package! hi-lock
@@ -111,6 +121,49 @@
   :when (modulep! :editor evil)
   :after-call evil-ex-start-search evil-ex-start-word-search evil-ex-search-activate-highlight
   :config (global-anzu-mode +1))
+
+(use-package! hilit-chg
+  :hook (doom-first-file . global-highlight-changes-mode)
+  )
+
+(use-package! so-long
+  :hook (doom-first-file . global-so-long-mode)
+  :config
+
+  (defun doom-buffer-has-long-lines-p ()
+    (unless (bound-and-true-p visual-line-mode)
+      (so-long-detected-long-line-p)))
+
+  (setq so-long-predicate #'doom-buffer-has-long-lines-p)
+  ;; Don't disable syntax highlighting and line numbers, or make the buffer
+  ;; read-only, in `so-long-minor-mode', so we can have a basic editing
+  ;; experience in them, at least. It will remain off in `so-long-mode',
+  ;; however, because long files have a far bigger impact on Emacs performance.
+  (delq! 'font-lock-mode so-long-minor-modes)
+  (delq! 'display-line-numbers-mode so-long-minor-modes)
+  (delq! 'buffer-read-only so-long-variable-overrides 'assq)
+  ;; ...but at least reduce the level of syntax highlighting
+  (add-to-list 'so-long-variable-overrides '(font-lock-maximum-decoration . 1))
+  ;; ...and insist that save-place not operate in large/long files
+  (add-to-list 'so-long-variable-overrides '(save-place-alist . nil))
+  ;; But disable everything else that may be unnecessary/expensive for large or
+  ;; wide buffers.
+  (appendq! so-long-minor-modes
+            '(spell-fu-mode
+              eldoc-mode
+              highlight-numbers-mode
+              better-jumper-local-mode
+              ws-butler-mode
+              auto-composition-mode
+              undo-tree-mode
+              highlight-indent-guides-mode
+              hl-fill-column-mode
+              ;; These are redundant on Emacs 29+
+              flycheck-mode
+              smartparens-mode
+              smartparens-strict-mode)
+            )
+)
 
 (spec-handling-new! modeline global-mode-string nil collect
                     ;; formatted as mode-line-format specifies

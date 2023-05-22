@@ -15,3 +15,13 @@
 	template = ~/.doom.d/templates/files/git/commit
 [hooks]
 	allownonascii = false
+[pretty]
+# reminder: use 'format:', doesnt need to wrap in a string
+# data access with %{char}
+# see line 1199 of git-log man
+# useful: [%aI - ISO 8601 date] [%as - short date] [%an - author] [%h - short hash]
+# [%s - subject]
+jgsimple = format:"!!! %h : %aI : %s "
+
+[alias]
+jglog = log --pretty=jgsimple --name-only

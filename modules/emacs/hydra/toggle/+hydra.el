@@ -5,7 +5,7 @@
 (defhydra +jg-hydra-ui-toggles ()
   (format "%s\n"
           (+jg-hydra-format-columns
-           '(visuals hl-line modeline)
+           '(visuals hl-line modeline "high_l_ight changes")
            '(guides whitespace)
            '(w_r_apping truncate smartparen)
            '(navigation auto-hide cursor eww preview)
@@ -20,9 +20,7 @@
               (+jg-hydra-wrap/body)) nil :exit t)
   ("n" (progn (+jg-hydra-push #'+jg-hydra-ui-toggles/body)
               (+jg-hydra-nav/body)) nil :exit t)
-  ("s" (message "Smartparen: %s"
-                (setq sp-autoinsert-pair (not sp-autoinsert-pair)))
-   nil :exit nil)
+  ("s" (message "Smartparen: %s" (setq sp-autoinsert-pair (not sp-autoinsert-pair))) nil :exit nil)
   ("m" #'hide-mode-line-mode nil :exit nil)
   ("h" #'global-hl-line-mode          nil  :exit nil)
   ("t" #'toggle-truncate-lines        nil  :exit nil)
@@ -33,5 +31,6 @@
   ("c" #'global-centered-cursor-mode  nil  :exit nil)
   ("e" #'browse-select-toggle-browsing   nil  :exit nil)
   ("p" #'browse-select-toggle-preview    nil  :exit nil)
+  ("l" #'global-highlight-changes-mode nil :exit nil)
   ("q" (setq jg-toggle-hydra-stack nil) :exit t)
 )

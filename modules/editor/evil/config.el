@@ -295,6 +295,10 @@
              evil-visualstar/begin-search-backward)
 )
 
+(use-package! evil-quickscope
+  :hook (doom-first-file . global-evil-quickscope-mode)
+  )
+
 (use-package! exato
   :commands evil-outer-xml-attr evil-inner-xml-attr
   )

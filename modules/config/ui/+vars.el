@@ -1,16 +1,17 @@
 ;;; editor/window-control/+vars.el -*- lexical-binding: t; -*-
 
 
-(setq-default jg-ui-default-face-gen-palette-dir "/Volumes/documents/github/jgrey4296.github.io/resources/palettes/"
-              highlight-parentheses-delay      0.3
+(defvar jg-ui-default-face-gen-palette-dir "/Volumes/documents/github/jgrey4296.github.io/resources/palettes/")
+
+(setq-default highlight-parentheses-delay      0.3
               display-line-numbers             t
               display-line-numbers-major-tick  20
-)
+              )
 
 (after! neotree
-  (push "^__pycache__$" neo-hidden-regexp-list)
+  (push "^__pycache__$"          neo-hidden-regexp-list)
   (push "^G\\(PATH\\|R?TAGS\\)$" neo-hidden-regexp-list)
-  (push "^__init__.py$" neo-hidden-regexp-list)
+  (push "^__init__.py$"          neo-hidden-regexp-list)
   )
 
 (setq-default sp-autoinsert-pair t
@@ -44,3 +45,7 @@
       )
 
 ;;-- end modeline
+
+;;-- so long
+(setq so-long-threshold 5000)
+;;-- end so long

@@ -44,10 +44,6 @@
 
 ;;-- end invisibility
 
-(after! evil-quickscope
-  (global-evil-quickscope-always-mode 1)
-  )
-
 (after! evil
   (remove-hook! 'after-change-major-mode-hook #'doom--setq-evil-shift-width-for-after-change-major-mode-h)
   )

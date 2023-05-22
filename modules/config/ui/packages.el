@@ -11,3 +11,4 @@
 (package! doom-modeline)
 (package! anzu)
 (package! evil-anzu)
+(package! hilit-chg)

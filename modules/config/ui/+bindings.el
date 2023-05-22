@@ -17,6 +17,7 @@
 
 ;;-- highlight
 (map! :map jg-binding-vision-map
+      :desc "Delete Change Highlight"      "c" #'highlight-changes-remove-highlight
       :prefix ("'" . "Highlight")
        :desc  "symbol-at-point"            "." #'hi-lock-face-symbol-at-point
        :desc  "find-patterns"              "f" #'hi-lock-find-patterns
@@ -25,6 +26,7 @@
        :desc  "phrase"                     "p" #'hi-lock-face-phrase-buffer
        :desc  "regexp"                     "r" #'hi-lock-face-buffer
        :desc  "unhighlight-regexp"         "u" #'hi-lock-unface-buffer
+       :desc "changes"                     "c" #'highlight-changes-visible-mode
       )
 
 ;;-- end highlight

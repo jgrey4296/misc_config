@@ -302,3 +302,6 @@
 (use-package! exato
   :commands evil-outer-xml-attr evil-inner-xml-attr
   )
+
+(use-package! evil-escape
+  :after evil)

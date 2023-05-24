@@ -2,7 +2,7 @@
 ;;; lang/latex/packages.el
 
 (package! tex-mode)
-(package! auctex :recipe (:files ("*.el" "*.info" "dir" "doc" "etc" "images" "latex" "style")))
+(package! auctex :recipe (:build (:not autoloads) :files ("*.el" "*.info" "dir" "doc" "etc" "images" "latex" "style")))
 (package! adaptive-wrap)
 (package! latex-preview-pane)
 (when (modulep! :editor evil +everywhere)

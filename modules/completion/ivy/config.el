@@ -7,6 +7,9 @@
 (after! ivy
   (load! "+ivys")
   )
+(after! (ivy hydra)
+  (load! "+hydras")
+  )
 
 (use-package! ivy
   :hook (doom-first-input . ivy-mode)

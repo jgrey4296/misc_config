@@ -35,7 +35,6 @@
 (package! org-contrib :recipe (:host github :repo "emacsmirror/org-contrib"))
 
 
-(package! helm-org)
 (package! org-drill)
 (package! org-pomodoro)
 (package! org-projectile)

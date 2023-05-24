@@ -1,32 +1,33 @@
-(package! undo-tree       :disable t)
-(package! 2048-game       :disable t)
-(package! ace-link        :disable t)
-(package! desktop         :disable t)
-(package! doc-view        :disable t)
-(package! erc             :disable t)
-(package! fancy-battery   :disable t)
-(package! golden-ratio    :disable t)
-(package! helm-cscope     :disable t)
-(package! helm-games      :disable t)
-(package! jabber          :disable t)
-(package! open-junk-file  :disable t)
-(package! paradox         :disable t)
-(package! rcirc           :disable t)
-(package! ruby-test-mode  :disable t)
-(package! selectric-mode  :disable t)
-(package! slack           :disable t)
-(package! smex            :disable t)
-(package! sudoku          :disable t)
-(package! tetris          :disable t)
-(package! typit           :disable t)
-(package! xcscope         :disable t)
-(package! xkcd            :disable t)
-(package! zoom-frm        :disable t)
-(package! xt-mouse        :disable t)
-(package! mouse           :disable t)
-(package! undo-fu-session :disable t)
-(package! wdired          :disable t)
-(package! ranger          :disable t)
-(package! drag-stuff      :disable t)
-(package! evil-collection-ibuffer :disable t)
-(package! evil-traces :disable t)
+(disable-packages! undo-tree
+                   2048-game
+                   ace-link
+                   desktop
+                   doc-view
+                   erc
+                   fancy-battery
+                   golden-ratio
+                   helm-cscope
+                   helm-games
+                   jabber
+                   open-junk-file
+                   paradox
+                   rcirc
+                   ruby-test-mode
+                   selectric-mode
+                   slack
+                   smex
+                   sudoku
+                   tetris
+                   typit
+                   xcscope
+                   xkcd
+                   zoom-frm
+                   xt-mouse
+                   mouse
+                   undo-fu-session
+                   wdired
+                   ranger
+                   drag-stuff
+                   evil-collection-ibuffer
+                   evil-traces
+                   )

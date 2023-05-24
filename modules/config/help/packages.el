@@ -21,5 +21,5 @@
 ;;; Code:
 
 (package! free-keys)
-
+(package! helpful)
 ;;; packages.el ends here

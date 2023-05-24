@@ -19,6 +19,7 @@
 (package! exato)
 (package! evil-quick-diff :recipe (:host github :repo "rgrinberg/evil-quick-diff"))
 (package! evil-quickscope)
+(package! evil-iedit-state)
 
 (when (modulep! +everywhere)
   ;; `evil-collection-neotree' uses the `neotree-make-executor' macro, but this

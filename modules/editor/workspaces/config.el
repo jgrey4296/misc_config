@@ -9,6 +9,9 @@
 (after! (ivy counsel)
   (load! "+ivys")
   )
+(after! hydra
+  (load! "+hydras")
+  )
 
 (use-package! persp-mode
   :unless noninteractive

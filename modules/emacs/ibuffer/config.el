@@ -2,9 +2,25 @@
 
 (load! "+vars")
 (load! "+specs")
-(after! (evil jg-bindings-total ibuffer)
+(load! "+spec-defs")
+(after! (jg-bindings-total ibuffer)
   (load! "+bindings")
  )
+(after! (ibuffer ivy)
+  (defadvice! +ibuffer--use-counsel-maybe-a (_file &optional _wildcards)
+    "Use `counsel-find-file' instead of `find-file'."
+    :override #'ibuffer-find-file
+    (interactive
+     (let* ((buf (ibuffer-current-buffer))
+            (default-directory (if (buffer-live-p buf)
+                                   (with-current-buffer buf
+                                     default-directory)
+                                 default-directory)))
+       (list (counsel--find-file-1 "Find file: " nil
+                                   #'identity
+                                   'counsel-find-file) t)))
+    (find-file _file _wildcards))
+  )
 
 (use-package! ibuffer
   :config
@@ -26,31 +42,3 @@
 (use-package! ibuffer-vc
   :after ibuffer
   )
-
-(after! (ibuffer ivy)
-  (defadvice! +ibuffer--use-counsel-maybe-a (_file &optional _wildcards)
-    "Use `counsel-find-file' instead of `find-file'."
-    :override #'ibuffer-find-file
-    (interactive
-     (let* ((buf (ibuffer-current-buffer))
-            (default-directory (if (buffer-live-p buf)
-                                   (with-current-buffer buf
-                                     default-directory)
-                                 default-directory)))
-       (list (counsel--find-file-1 "Find file: " nil
-                                   #'identity
-                                   'counsel-find-file) t)))
-    (find-file _file _wildcards))
-  )
-
-(spec-handling-new! ibuffer-filters ibuffer-saved-filters nil collect
-                    (cons (symbol-name key) val)
-                    )
-
-(spec-handling-new! ibuffer-groups ibuffer-saved-filter-groups nil collect
-                    (cons (symbol-name key) val)
-                    )
-
-(spec-handling-new! ibuffer-formats ibuffer-formats nil collect
-                    val
-                    )

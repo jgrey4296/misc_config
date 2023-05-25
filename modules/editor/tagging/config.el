@@ -5,6 +5,7 @@
 (load! "helm/+actions")
 (load! "helm/+transformers")
 (load! "helm/+helm")
+(load! "+spec-defs")
 
 (after! jg-bindings-total
   (load! "+bindings")
@@ -15,24 +16,14 @@
     (+jg-tag-helm-tagger beg end)
     )
   )
+(add-hook! 'doom-first-file-hook #'global-tagging-minor-mode)
 
 (use-package! rawtag-mode
   :commands rawtag-mode
   )
+
 (use-package! tagging-minor-mode
   :after (evil helm)
   :config
   (tagging-minor-mode-rebuild-tag-database)
   )
-
-(add-hook! 'doom-first-file-hook #'global-tagging-minor-mode)
-
-(spec-handling-new-hooks! tagging
-                          (setq-local tagging-minor-mode-handlers
-                                      (list :new (plist-get val :new)
-                                            :set (plist-get val :set)
-                                            :get (plist-get val :get)
-                                            :buff (plist-get val :buff)
-                                            )
-                                      )
-                          )

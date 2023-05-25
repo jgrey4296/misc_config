@@ -21,7 +21,7 @@
 ;;; Code:
 
 (load! "+vars")
-(after! (evil jg-bindings-total)
+(after! jg-bindings-total
   (load! "+bindings")
   )
 

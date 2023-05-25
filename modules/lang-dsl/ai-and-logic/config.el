@@ -6,7 +6,7 @@
 (load! "+repl")
 (load! "+funcs")
 (load! "+advice")
-(after! (evil jg-bindings-total)
+(after! jg-bindings-total
   (load! "+bindings")
   )
 

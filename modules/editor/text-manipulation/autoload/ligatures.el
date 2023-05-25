@@ -1,6 +1,5 @@
 ;;; ui/ligatures/autoload/ligatures.el -*- lexical-binding: t; -*-
 
-
 ;;;###autodef
 (defun set-ligatures! (modes &rest plist)
   "Associates string patterns with icons in certain major-modes.
@@ -45,6 +44,7 @@ Pretty symbols can be unset for emacs-lisp-mode with:
                   (dolist (cell results old-results)
                     (setf (alist-get (car cell) old-results) (cdr cell)))
                 results))))))
+
 (defun +ligatures--correct-symbol-bounds (ligature-alist)
   "Prepend non-breaking spaces to a ligature.
 

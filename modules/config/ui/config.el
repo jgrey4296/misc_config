@@ -2,13 +2,12 @@
 
 (load! "+vars")
 (load! "+funcs")
-(after! (evil jg-bindings-total)
+(load! "+spec-defs")
+(after! jg-bindings-total
   (load! "+bindings")
   )
 
-
-(add-hook! 'doom-init-ui-hook  #'rainbow-delimiters-mode)
-
+;;-- highlight
 (use-package! hl-line
   :defer t
   :hook (doom-first-file . global-hl-line-mode)
@@ -37,33 +36,90 @@
   (setq hi-lock-auto-select-face t)
   )
 
+(use-package! hl-todo
+  :hook (prog-mode . hl-todo-mode)
+  :hook (yaml-mode . hl-todo-mode)
+  :config
+  (defadvice! +hl-todo-clamp-font-lock-fontify-region-a (fn &rest args)
+    "Fix an `args-out-of-range' error in some modes."
+    :around #'hl-todo-mode
+    (letf! #'font-lock-fontify-region (apply fn args))
+    )
+
+  ;; Use a more primitive todo-keyword detection method in major modes that
+  ;; don't use/have a valid syntax table entry for comments.
+  (add-hook! '(pug-mode-hook haml-mode-hook) #'+hl-todo--use-face-detection-h)
+)
+
+(use-package! highlight-indent-guides
+  :defer t
+  :init
+  (defvar highlight-indent-guides-mode nil)
+  :hook ((prog-mode text-mode conf-mode) . highlight-indent-guides-mode)
+  :config
+  ;; (when (doom-context-p 'init)
+  ;; call hligast late enough to be useful
+  ;; (add-hook 'doom-first-buffer-hook #'highlight-indent-guides-auto-set-faces)
+  ;; )
+
+  ;; `highlight-indent-guides' breaks when `org-indent-mode' is active
+  (add-hook! 'org-mode-local-vars-hook #'+indent-guides-disable-maybe-h)
+  )
+
+(use-package! highlight-parentheses :defer t)
+
 (use-package! auto-highlight-symbol
   :commands auto-highlight-symbol-mode
   :init
-
-(defvar auto-highlight-symbol-mode nil)
+  (defvar auto-highlight-symbol-mode nil)
   )
+
+(use-package! hilit-chg
+  :hook (doom-first-buffer . global-highlight-changes-mode)
+  )
+
+;;-- end highlight
+
+;;-- whitespace
 
 (use-package! whitespace
   :commands whitespace-mode
   :init
-
-(defvar whitespace-mode nil)
+  (defvar whitespace-mode)
   )
+;;-- end whitespace
+
+;;-- cursor
 
 (use-package! centered-cursor-mode
   :commands centered-cursor-mode
   :init
-
-(defvar centered-cursor-mode nil)
+  (defvar centered-cursor-mode nil)
   )
+
+;;-- end cursor
+
+;;-- colours
 
 (use-package! palette-mode
   :mode ("\\.palette" . palette-mode)
   :commands palette-mode
   )
 
-(use-package! evil-visual-mark-mode :defer t)
+(use-package! rainbow-mode
+  :defer t
+  :init
+  (add-hook! 'prog-mode-hook 'rainbow-mode)
+)
+
+(use-package! rainbow-delimiters
+  :config
+  (add-hook! 'doom-init-ui-hook  #'rainbow-delimiters-mode)
+  )
+
+;;-- end colours
+
+;;-- modeline
 
 (use-package! doom-modeline
   :hook (doom-after-init . doom-modeline-mode)
@@ -114,58 +170,11 @@
     (with-silent-modifications (apply fn args)))
 )
 
+;;-- end modeline
+
+;;-- search results
+
 (use-package! anzu
   :after-call isearch-mode)
 
-(use-package! evil-anzu
-  :when (modulep! :editor evil)
-  :after-call evil-ex-start-search evil-ex-start-word-search evil-ex-search-activate-highlight
-  :config (global-anzu-mode +1))
-
-(use-package! hilit-chg
-  :hook (doom-first-file . global-highlight-changes-mode)
-  )
-
-(use-package! so-long
-  :hook (doom-first-file . global-so-long-mode)
-  :config
-
-  (defun doom-buffer-has-long-lines-p ()
-    (unless (bound-and-true-p visual-line-mode)
-      (so-long-detected-long-line-p)))
-
-  (setq so-long-predicate #'doom-buffer-has-long-lines-p)
-  ;; Don't disable syntax highlighting and line numbers, or make the buffer
-  ;; read-only, in `so-long-minor-mode', so we can have a basic editing
-  ;; experience in them, at least. It will remain off in `so-long-mode',
-  ;; however, because long files have a far bigger impact on Emacs performance.
-  (delq! 'font-lock-mode so-long-minor-modes)
-  (delq! 'display-line-numbers-mode so-long-minor-modes)
-  (delq! 'buffer-read-only so-long-variable-overrides 'assq)
-  ;; ...but at least reduce the level of syntax highlighting
-  (add-to-list 'so-long-variable-overrides '(font-lock-maximum-decoration . 1))
-  ;; ...and insist that save-place not operate in large/long files
-  (add-to-list 'so-long-variable-overrides '(save-place-alist . nil))
-  ;; But disable everything else that may be unnecessary/expensive for large or
-  ;; wide buffers.
-  (appendq! so-long-minor-modes
-            '(spell-fu-mode
-              eldoc-mode
-              highlight-numbers-mode
-              better-jumper-local-mode
-              ws-butler-mode
-              auto-composition-mode
-              undo-tree-mode
-              highlight-indent-guides-mode
-              hl-fill-column-mode
-              ;; These are redundant on Emacs 29+
-              flycheck-mode
-              smartparens-mode
-              smartparens-strict-mode)
-            )
-)
-
-(spec-handling-new! modeline global-mode-string nil collect
-                    ;; formatted as mode-line-format specifies
-                    val
-                    )
+;;-- end search results

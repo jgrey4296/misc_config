@@ -230,17 +230,17 @@ TODO: add spec format docstring
                      )
                  (princ (format "** SPEC: %s\n" key))
                  (if defs
-                     (dolist (def defs) (princ (format "*** Defined in: %s\n" (cadr def))))
+                     (dolist (def defs) (princ (format "*** Defined in: [[%s]]\n" (cadr def))))
                    (princ "*** SPEC NOT DEFINED ------------------------------\n"))
                  (if (null adds)
                      (princ "\n*** No Additions Defined\n")
                    (princ "\n*** Additions Defined in: \n")
                    (dolist (add adds) (princ (format "[[%s]]\n" (cadr add)))))
                  (when exts
-                   (dolist (ext exts) (princ (format "**** Extended in %s\n" (cadr ext)))))
+                   (dolist (ext exts) (princ (format "**** Extended in [[%s]]\n" (cadr ext)))))
                  (when sets
                    (princ "\n*** Settings Defined in: \n")
-                   (dolist (set sets) (princ (format "%s\n" (cadr set)))))
+                   (dolist (set sets) (princ (format "[[%s]]\n" (cadr set)))))
                  (princ "\n\n")
                  )
                )

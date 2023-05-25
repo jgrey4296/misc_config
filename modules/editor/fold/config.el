@@ -3,6 +3,7 @@
 ;;
 ;; Packages
 (load! "+vars")
+(load! "+spec-defs")
 (after! jg-bindings-total
   (load! "+bindings")
   )
@@ -26,14 +27,3 @@
 (use-package! origami :defer t)
 
 (use-package! autohide-minor-mode)
-
-(spec-handling-new! fold evil-fold-list t collect
-                    (append (list (* -1 (or (plist-get val :priority) 0)))
-                            (list (ensure-list (plist-get val :modes)))
-                            (plist-get val :triggers)
-                            )
-                    )
-
-(spec-handling-new! hideshow hs-special-modes-alist nil append
-                    val
-                    )

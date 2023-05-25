@@ -104,7 +104,6 @@
   ;; Make J (evil-join) remove comment delimiters when joining lines.
   (advice-add #'evil-join :around #'+evil-join-a)
 
-
   (defadvice! +evil--no-squeeze-on-fill-a (fn &rest args)
     " Prevent gw (`evil-fill') and gq (`evil-fill-and-move') from squeezing
         spaces. It doesn't in vim, so it shouldn't in evil. "
@@ -299,9 +298,40 @@
   :hook (doom-first-file . global-evil-quickscope-mode)
   )
 
+(use-package! evil-escape
+  :after evil)
+
+(use-package! evil-iedit-state
+  :defer t
+  :commands (evil-iedit-state evil-iedit-state/iedit-mode)
+  :init
+  (setq iedit-current-symbol-default t
+        iedit-only-at-symbol-boundaries t
+        iedit-toggle-key-default nil)
+  :config
+
+(define-advice iedit-show-all (:override ()
+                                 +jg-misc-iedit-show-all)
+    " Override iedit's show all so it doesn't mess with invisible line movement"
+    (remove-from-invisibility-spec '(iedit-invisible-overlay-name . t))
+    (remove-overlays nil nil iedit-invisible-overlay-name t)
+  )
+
+)
+
+(use-package! evil-string-inflection
+  :defer t
+  :commands evil-operator-string-inflection
+  )
+
+(use-package! evil-visual-mark-mode :defer t)
+
+(use-package! evil-anzu
+  :when (modulep! :editor evil)
+  :after-call evil-ex-start-search evil-ex-start-word-search evil-ex-search-activate-highlight
+  :config (global-anzu-mode +1)
+  )
+
 (use-package! exato
   :commands evil-outer-xml-attr evil-inner-xml-attr
   )
-
-(use-package! evil-escape
-  :after evil)

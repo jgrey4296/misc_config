@@ -38,6 +38,31 @@
                                      ("\\[" . "\\]")
                                      ("<" . ">"))
       )
+
+;;-- evil-surround
+;; later modified by evil-embrace
+(setq-default evil-surround-pairs-alist
+  '((?\( . ("( " . " )"))
+    (?\[ . ("[ " . " ]"))
+    (?\{ . ("{ " . " }"))
+
+    (?\) . ("(" . ")"))
+    (?\] . ("[" . "]"))
+    (?\} . ("{" . "}"))
+
+    (?# . ("#{" . "}"))
+    (?b . ("(" . ")"))
+    (?p . ("(" . ")"))
+    (?B . ("{" . "}"))
+    (?> . ("<" . ">"))
+    (?t . evil-surround-read-tag)
+    (?< . evil-surround-read-tag)
+    (?f . evil-surround-function)
+    (?F . evil-surround-prefix-function)
+    )
+)
+;;-- end evil-surround
+
 ;;-- specs
 
 (spec-handling-add! popup nil

@@ -1,6 +1,6 @@
 ;;; lang/json/config.el -*- lexical-binding: t; -*-
 
-(after! (evil jg-bindings-total json-mode)
+(after! (jg-bindings-total json-mode)
   (load! "+bindings")
   )
 

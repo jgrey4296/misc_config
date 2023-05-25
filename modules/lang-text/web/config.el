@@ -1,7 +1,7 @@
 ;;; lang/web/config.el -*- lexical-binding: t; -*-
 
 (load! "+vars")
-(after! (evil jg-bindings-total)
+(after! jg-bindings-total
   (load! "+bindings")
   )
 

@@ -17,3 +17,4 @@
 (package! counsel-dash)
 (package! browse-select :recipe `(:local-repo ,(expand-file-name "packages/misc/browse-select" doom-user-dir)))
 (package! lookup-regular :recipe `(:local-repo ,(expand-file-name "packages/misc/lookup-regular" doom-user-dir)))
+(package! helm-wordnet)

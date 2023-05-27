@@ -120,3 +120,11 @@ swaps `yas-global-mode' with `yas-minor-mode'."
       (apply fn args)))
 
   )
+
+(use-package! academic-phrases :defer t)
+
+(use-package! license-templates :defer t)
+
+(use-package! lorem-ipsum
+  :commands (lorem-ipsum-insert-sentences lorem-ipsum-insert-paragraphs lorem-ipsum-insert-list)
+)

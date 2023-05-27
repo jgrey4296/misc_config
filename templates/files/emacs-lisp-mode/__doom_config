@@ -22,7 +22,8 @@
 
 $0
 (load! "+vars")
-(after! evil
+;; (load! "+spec-defs")
+(after! jg-bindings-total
     (load! "+bindings")
 )
 

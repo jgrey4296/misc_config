@@ -1,7 +1,7 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; config/default/packages.el
 
-(package! avy)
+(package! f)
 (package! link-hint)
 
 (unless (modulep! :editor evil)

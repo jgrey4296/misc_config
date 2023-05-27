@@ -63,3 +63,5 @@
   )
 
 (use-package! lookup-regular)
+
+(use-package! helm-wordnet :defer t)

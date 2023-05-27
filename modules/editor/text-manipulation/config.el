@@ -21,26 +21,10 @@
 
 (add-hook! 'doom-init-ui-hook :append #'+ligature-init-composition-table-h)
 
-(use-package! academic-phrases :defer t)
-
-(use-package! helm-wordnet :defer t)
-
-(use-package! lorem-ipsum
-  :commands (lorem-ipsum-insert-sentences lorem-ipsum-insert-paragraphs lorem-ipsum-insert-list)
-)
-
-(use-package! license-templates :defer t)
-
 (use-package! lint-result-mode
   :config
   (add-hook 'lint-result-mode-hook '+fold/close-all)
   )
-
-(use-package! vundo
-  :commands vundo
-  )
-
-(use-package! undo-fu :defer t)
 
 (use-package! timeline-mode :defer t)
 

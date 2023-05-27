@@ -1,6 +1,7 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
 ;;-- handlers
+
 (defvar +lookup-provider-url-alist nil
   "An alist that maps online resources to either:
 
@@ -20,6 +21,7 @@ Used by `+lookup/online'.")
     +lookup-project-search-backend-fn
     +lookup-evil-goto-definition-backend-fn)
 )
+
 (defvar +lookup-implementations-defaults ())
 
 (defvar +lookup-type-definition-defaults ())
@@ -95,5 +97,12 @@ Used by `+lookup/online'.")
                     '(lookup
                       ("^\\*xref\\*$" :ignore t)
                       )
+                    )
+
+(spec-handling-add! lookup-handler nil
+                    `(text-mode
+                     :definition ,#'wordnut-search
+                     :implementations ,#'helm-wordnet-suggest
+                     )
                     )
 ;;-- end specs

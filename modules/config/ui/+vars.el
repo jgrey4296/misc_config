@@ -6,6 +6,10 @@
 (setq-default highlight-parentheses-delay      0.3
               display-line-numbers             t
               display-line-numbers-major-tick  20
+
+              highlight-parentheses-colors            '("black")
+              highlight-parentheses-background-colors '("#60aa00" "yellow" "#da8548" "#d02b61")
+              global-hl-line-modes '(bibtex-mode prog-mode text-mode conf-mode special-mode org-agenda-mode comint-mode)
               )
 
 (after! neotree
@@ -14,14 +18,35 @@
   (push "^__init__.py$"          neo-hidden-regexp-list)
   )
 
-(setq-default sp-autoinsert-pair t
-              sp-autoinsert-quote-if-followed-by-closing-pair nil
-              sp-escape-char ""
+;;-- hl todo
+(setq hl-todo-highlight-punctuation ":"
+        hl-todo-keyword-faces
+        '(;; For reminders to change or add something at a later date.
+          ("TODO" warning bold)
+          ;; For code (or code paths) that are broken, unimplemented, or slow,
+          ;; and may become bigger problems later.
+          ("FIXME" error bold)
+          ;; For code that needs to be revisited later, either to upstream it,
+          ;; improve it, or address non-critical issues.
+          ("REVIEW" font-lock-keyword-face bold)
+          ;; For code smells where questionable practices are used
+          ;; intentionally, and/or is likely to break in a future update.
+          ("HACK" font-lock-constant-face bold)
+          ;; For sections of code that just gotta go, and will be gone soon.
+          ;; Specifically, this means the code is deprecated, not necessarily
+          ;; the feature it enables.
+          ("DEPRECATED" font-lock-doc-face bold)
+          ;; Extra keywords commonly found in the wild, whose meaning may vary
+          ;; from project to project.
+          ("NOTE" success bold)
+          ("BUG" error bold)
+          ("XXX" font-lock-constant-face bold))
+        )
+;;-- end hl todo
 
-              highlight-parentheses-colors            '("black")
-              highlight-parentheses-background-colors '("#60aa00" "yellow" "#da8548" "#d02b61")
-              global-hl-line-modes '(bibtex-mode prog-mode text-mode conf-mode special-mode org-agenda-mode comint-mode)
-              )
+;;-- highlight indent guides
+(setq highlight-indent-guides-method 'character)
+;;-- end highlight indent guides
 
 ;;-- modeline
 ;; We display project info in the modeline ourselves

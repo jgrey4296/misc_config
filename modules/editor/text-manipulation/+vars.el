@@ -18,6 +18,11 @@
         sp-max-prefix-length 25
         sp-max-pair-length 4
         )
+
+(setq-default sp-autoinsert-pair t
+              sp-autoinsert-quote-if-followed-by-closing-pair nil
+              sp-escape-char ""
+)
 ;;-- end smartparens
 
 ;;-- invisibility
@@ -28,6 +33,14 @@
               )
 
 ;;-- end invisibility
+
+;;-- ws butler
+;; ws-butler normally preserves whitespace in the buffer (but strips it from
+;; the written file). While sometimes convenient, this behavior is not
+;; intuitive. To the average user it looks like whitespace cleanup is failing,
+;; which causes folks to redundantly install their own.
+(setq ws-butler-keep-whitespace-before-point nil)
+;;-- end ws butler
 
 ;;-- specs
 (spec-handling-setq! rotate-text
@@ -82,53 +95,3 @@
                      )
 
 ;;-- end specs
-
-;;-- hl todo
-(setq hl-todo-highlight-punctuation ":"
-        hl-todo-keyword-faces
-        '(;; For reminders to change or add something at a later date.
-          ("TODO" warning bold)
-          ;; For code (or code paths) that are broken, unimplemented, or slow,
-          ;; and may become bigger problems later.
-          ("FIXME" error bold)
-          ;; For code that needs to be revisited later, either to upstream it,
-          ;; improve it, or address non-critical issues.
-          ("REVIEW" font-lock-keyword-face bold)
-          ;; For code smells where questionable practices are used
-          ;; intentionally, and/or is likely to break in a future update.
-          ("HACK" font-lock-constant-face bold)
-          ;; For sections of code that just gotta go, and will be gone soon.
-          ;; Specifically, this means the code is deprecated, not necessarily
-          ;; the feature it enables.
-          ("DEPRECATED" font-lock-doc-face bold)
-          ;; Extra keywords commonly found in the wild, whose meaning may vary
-          ;; from project to project.
-          ("NOTE" success bold)
-          ("BUG" error bold)
-          ("XXX" font-lock-constant-face bold))
-        )
-;;-- end hl todo
-
-;;-- undo
-(setq-default
-  ;; Increase undo history limits to reduce likelihood of data loss
- ;; Increase undo-limits by a factor of ten to avoid emacs prematurely
- ;; truncating the undo history and corrupting the tree. See
- ;; https://github.com/syl20bnr/spacemacs/issues/12110
- undo-limit 800000
- undo-strong-limit 12000000
- undo-outer-limit 120000000
- )
-;;-- end undo
-
-;;-- highlight indent guides
-(setq highlight-indent-guides-method 'character)
-;;-- end highlight indent guides
-
-;;-- ws butler
-;; ws-butler normally preserves whitespace in the buffer (but strips it from
-;; the written file). While sometimes convenient, this behavior is not
-;; intuitive. To the average user it looks like whitespace cleanup is failing,
-;; which causes folks to redundantly install their own.
-(setq ws-butler-keep-whitespace-before-point nil)
-;;-- end ws butler

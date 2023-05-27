@@ -1,3 +1,8 @@
 ;;; `(+file-templates-get-short-path)` -*- lexical-binding: t; -*-
 
+;; Uses the doom dsl for checking setup
+;; macros defined:
+;; assert! error! warn! success! section! explain!
+
+
 $0

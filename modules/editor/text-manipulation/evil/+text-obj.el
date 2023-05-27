@@ -1,38 +1,33 @@
 ;;; +text-obj.el -*- lexical-binding: t; -*-
 
-(evil-define-text-object +jg-text-visual-contract (count)
+(evil-define-text-object +jg-text-visual-contract (&rest args)
   " Contract the selection to just the point "
   :type inclusive
-  (interactive)
   (list (point) (1+ (point)))
   )
 
-(evil-define-text-object +jg-text-grow-selection-op (count)
+(evil-define-text-object +jg-text-grow-selection-op (count &rest args)
   " Grow the selection on either side by count "
   :type inclusive
   :extend-selection t
-  (interactive)
-  (list (- evil-visual-beginning 1) (+ evil-visual-end 1))
+  (list (- evil-visual-beginning (or count 1)) (+ evil-visual-end (or count 1)))
   )
 
-(evil-define-text-object +jg-text-line-textobj (count)
+(evil-define-text-object +jg-text-line-textobj (count &rest args)
   " Line object of the current line "
   :type line
-  (interactive)
   (list (line-beginning-position) (line-end-position))
   )
 
-(evil-define-text-object +jg-text-whole-buffer-textobj (count)
+(evil-define-text-object +jg-text-whole-buffer-textobj (count &rest args)
   " Line object of the current line "
   :type inclusive
-  (interactive)
   (list (point-min) (point-max))
   )
 
-(evil-define-text-object +jg-text-blank-block (count &rest rest)
+(evil-define-text-object +jg-text-blank-block (count &rest args)
   :type inclusive
   :extend-selection t
-  (interactive)
   (save-excursion
     (let (beg end)
       (goto-char evil-visual-beginning)
@@ -47,16 +42,15 @@
     )
   )
 
-(evil-define-text-object +jg-text-spaces (count)
+(evil-define-text-object +jg-text-spaces (count &rest args)
   "select spaces on the same line"
   :type inclusive
   :extend-selection t
-  (interactive)
-    (let (beg end)
-      (save-excursion
-        (setq beg (1+ (re-search-backward (rx (not blank)) (save-excursion (beginning-of-line)) t)))
-        (setq end (1- (re-search-forward (rx blank (| graph eol)) (save-excursion (end-of-line)))))
-        )
-      (list beg end)
+  (let (beg end)
+    (save-excursion
+      (setq beg (1+ (re-search-backward (rx (not blank)) (save-excursion (beginning-of-line)) t)))
+      (setq end (1- (re-search-forward (rx blank (| graph eol)) (save-excursion (end-of-line)))))
       )
+    (list beg end)
     )
+  )

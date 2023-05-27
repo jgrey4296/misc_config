@@ -11,3 +11,11 @@
 (defun font-lock-fontify-region (beg end &optional loudly)
   (funcall font-lock-fontify-region (max beg 1) end loudly)
   )
+
+;;;###autoload
+(defun +modeline-hide-in-non-status-buffer-h ()
+  "Show minimal modeline in magit-status buffer, no modeline elsewhere."
+  (if (eq major-mode 'magit-status-mode)
+      (doom-modeline-set-modeline 'magit)
+    (hide-mode-line-mode))
+  )

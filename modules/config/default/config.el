@@ -10,7 +10,7 @@
        :desc "Reactivate Templates" "t !" #'run-spec-handlers
     )
   )
-  (add-hook! 'doom-init-ui-hook #'run-spec-handlers)
+  (add-hook! 'doom-init-ui-hook :append #'run-spec-handlers)
   )
 
 ;;; Smartparens config

@@ -1,6 +1,7 @@
 ;;; editor/window-control/+vars.el -*- lexical-binding: t; -*-
 
-
+(defvar mouse-wheel-down-event nil)
+(defvar mouse-wheel-up-event nil)
 (defvar jg-ui-default-face-gen-palette-dir "/Volumes/documents/github/jgrey4296.github.io/resources/palettes/")
 
 (setq-default highlight-parentheses-delay      0.3

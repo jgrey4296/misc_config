@@ -57,3 +57,32 @@ TODO add fallback to project root
 
 ;;;###autoload
 (advice-add 'kill-current-buffer :before-until #'+jg-ui-kill-buffer-override)
+
+;;;###autoload
+(defun +hl-todo-clamp-font-lock-fontify-region-a (fn &rest args)
+  "Fix an `args-out-of-range' error in some modes."
+  :around #'hl-todo-mode
+  (letf! #'font-lock-fontify-region (apply fn args))
+  )
+
+;;;###autoload
+(advice-add 'hl-todo-mode :around #'+hl-todo-clamp-font-lock-fontify-region-a)
+
+;;;###autoload
+(defun +modeline-disable-icon-in-daemon-a ()
+  ;; HACK Fix #4102 due to empty all-the-icons return value (caused by
+  ;;      `doom--disable-all-the-icons-in-tty-a' advice) in tty daemon frames.
+  (when (display-graphic-p)
+    (apply fn args))
+  )
+
+;;;###autoload
+(advice-add 'doom-modeline-propertize-icon :around #'+modeline-disable-icon-in-daemon-a)
+
+;;;###autoload
+(defun +modeline--inhibit-modification-hooks-a (fn &rest args)
+  (with-silent-modifications (apply fn args))
+  )
+
+;;;###autoload
+(advice-add 'ws-butler-after-save :around #'+modeline--inhibit-modification-hooks-a)

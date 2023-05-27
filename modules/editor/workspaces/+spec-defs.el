@@ -1,9 +1,9 @@
 ;;; +spec-defs.el -*- lexical-binding: t; -*-
 
-(spec-handling-new! projects projectile-project-types nil collect
+(spec-handling-new! projects projectile-project-types :loop 'collect
                     `(,key . ,(apply #'projectile--build-project-plist val))
                     )
 
-(spec-handling-new! project-ignored projectile-globally-ignored-directories nil append
+(spec-handling-new! project-ignored projectile-globally-ignored-directories :loop 'append
                     val
                     )

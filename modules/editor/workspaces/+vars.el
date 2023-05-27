@@ -133,7 +133,7 @@ stored in `persp-save-dir'.")
 ;;-- end persp
 
 ;;-- specs
-(spec-handling-add! popup nil
+(spec-handling-add! popup
                     '(window-ring
                       ("^\\*WR Buffers: "         :side left :ttl nil :width  0.2 :quit nil :select nil :priority 50)
                       )
@@ -142,14 +142,14 @@ stored in `persp-save-dir'.")
                      )
                     )
 
-(spec-handling-add! file-templates nil
+(spec-handling-add! file-templates
                     '(project
                      ("/doot\\.toml$" :trigger "__doot_toml" :mode conf-toml-mode)
                      ("/Makefile$"             :mode makefile-gmake-mode)
                      )
                     )
 
-(spec-handling-add! project-ignored nil
+(spec-handling-add! project-ignored
                     `(doom
                       ,(abbreviate-file-name doom-local-dir)
                       )

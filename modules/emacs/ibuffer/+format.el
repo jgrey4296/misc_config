@@ -9,7 +9,7 @@
    )
   (file-size-human-readable (buffer-size)))
 
-(spec-handling-add! ibuffer-formats nil
+(spec-handling-add! ibuffer-formats
                     '(normal
                      mark modified read-only locked
                      " " (name 18 18 :left :elide)

@@ -20,18 +20,18 @@
 ;;-- end links
 
 ;;-- specs
-(spec-handling-add! lookup-url nil
+(spec-handling-add! lookup-url
                     '(erlang
                       ("Erlang/OPT" "https://www.erlang.org/doc/search?q=%s")
                       ("Elixir"     "https://hexdocs.pm/elixir/search.html?q=%s")
                       )
                     )
 
-(spec-handling-add! projects nil
+(spec-handling-add! projects
                     '(elixir ("mix.exs") :project-file "mix.exs" :compilation-dir nil :configure nil :compile "mix compile" :test "mix test" :install nil :package nil :run nil :test-suffix "_test" :src-dir "lib/")
                     '(rebar ("rebar.config") :project-file "rebar.config" :compilation-dir nil :configure nil :compile "rebar3 compile" :test "rebar3 do eunit,ct" :install nil :package nil :run nil :test-suffix "_SUITE")
                     )
-(spec-handling-add! lookup-regular nil
+(spec-handling-add! lookup-regular
                     '(erlang
                       ("Erlang/OPT" . "https://www.erlang.org/doc/")
                       ("Erlang Reference" . "https://www.erlang.org/doc/reference_manual/users_guide.html")
@@ -47,10 +47,10 @@
                       )
                     )
 
-(spec-handling-add! lookup-handler nil
-                    '(elixir-mode
-                     :definition    alchemist-goto-definition-at-point
-                     :documentation alchemist-help-search-at-point
+(spec-handling-add! lookup-handler
+                    `(elixir-mode
+                     :definition    ,#'alchemist-goto-definition-at-point
+                     :documentation ,#'alchemist-help-search-at-point
                      )
                     )
 (set-eval-handler! 'elixir-mode #'alchemist-eval-region)

@@ -19,7 +19,7 @@
 
 ;;-- popup
 
-(spec-handling-add! popup nil
+(spec-handling-add! popup
                     '(tagging
                       ("^\\*Helm-Bookmark-Results\\*"  :side right :ttl nil :width 0.4 :quit t :select nil :priority 50)
                      )

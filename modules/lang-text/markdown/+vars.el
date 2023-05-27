@@ -44,7 +44,7 @@ capture, the end position, and the output buffer.")
       )
 
 
-(spec-handling-add! lookup-handler nil
+(spec-handling-add! lookup-handler
                     '((markdown-mode gfm-mode)
                      ;; `markdown-follow-thing-at-point' may open an external program or a
                      ;; buffer. No good way to tell, so pretend it's async.
@@ -52,7 +52,7 @@ capture, the end position, and the output buffer.")
                      )
                     )
 
-(spec-handling-add! lookup-regular nil
+(spec-handling-add! lookup-regular
                     '(markdown-mode
                      ("mdbook" . "https://rust-lang.github.io/mdBook/")
                      ("markdown cheatsheet" . "https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet")

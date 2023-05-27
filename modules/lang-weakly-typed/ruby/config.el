@@ -50,13 +50,13 @@
           (robe-mode +1))))
   :config
   (set-repl-handler! 'ruby-mode #'robe-start)
-  (spec-handling-add! company nil
+  (spec-handling-add! company
                       '(ruby-mode (:mode . company-robe))
                       )
-  (spec-handling-add! lookup-handler nil
-                      '(ruby-mode
-                        :definition robe-jump
-                        :documentation robe-doc)
+  (spec-handling-add! lookup-handler
+                      `(ruby-mode
+                        :definition ,#'robe-jump
+                        :documentation ,#'robe-doc)
                       )
   (when (boundp 'read-process-output-max)
     ;; Robe can over saturate IPC, making interacting with it slow/clobbering
@@ -87,7 +87,7 @@
   :defer t
   :hook (ruby-mode . rubocop-mode)
   :config
-  (spec-handling-add! popup nil (ruby ("^\\*RuboCop" :select t)))
+  (spec-handling-add! popup (ruby ("^\\*RuboCop" :select t)))
   (map! :localleader
         :map rubocop-mode-map
         "f" #'rubocop-check-current-file
@@ -151,7 +151,7 @@
   (when (modulep! :editor evil)
     (add-hook 'rspec-mode-hook #'evil-normalize-keymaps))
   :config
-  (spec-handling-add! popup nil
+  (spec-handling-add! popup
                       '(rspec ("^\\*\\(rspec-\\)?compilation" :size 0.3 :ttl nil :select t))
                       )
   (setq rspec-use-rvm (executable-find "rvm"))
@@ -204,7 +204,7 @@
   (when (modulep! :lang web)
     (add-hook 'web-mode-hook #'projectile-rails-mode))
   :config
-  (spec-handling-add! popup nil ('rails ("^\\*\\(projectile-\\)?rails" :ttl nil)))
+  (spec-handling-add! popup ('rails ("^\\*\\(projectile-\\)?rails" :ttl nil)))
   (when (modulep! :editor evil)
     (add-hook 'projectile-rails-mode-hook #'evil-normalize-keymaps))
   (map! :localleader

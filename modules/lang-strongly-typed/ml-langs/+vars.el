@@ -2,11 +2,11 @@
 
 
 
-(spec-handling-add! company nil
+(spec-handling-add! company
                     '(tuareg-mode #'merlin-company-backend)
                     '(sml-mode #'company-mlton-grouped-backend)
                     )
-(spec-handling-add! lookup-handler nil
+(spec-handling-add! lookup-handler
                     '(tuareg-mode :async t
                       :definition merlin-locate
                       :references merlin-occurrences
@@ -14,7 +14,7 @@
                       )
                     )
 
-(spec-handling-add! lookup-regular nil
+(spec-handling-add! lookup-regular
                     '(ocaml-mode
                       ("OCaml Reference" . "https://v2.ocaml.org/releases/5.0/htmlman/index.html")
                       ("Ocaml Tutorial" . "https://ocaml.org/docs/up-and-running")

@@ -8,7 +8,7 @@
 ;;                     `(jg-toml-project ("doot.toml") :project-file "doot.toml" :related-files-fn ,#'+jg-toml-related-files-fn)
 ;;                     )
 
-(spec-handling-add! whitespace-cleanup nil
+(spec-handling-add! whitespace-cleanup
                     `(conf-toml-mode
                       ,#'+jg-toml-cleanup-ensure-newline-before-table
                       ,#'delete-trailing-whitespace
@@ -16,7 +16,7 @@
                       )
                     )
 
-(spec-handling-add! lookup-regular nil
+(spec-handling-add! lookup-regular
                     '(conf-toml-mode
                       ("toml spec" . "https://toml.io/en/v1.0.0")
                       )

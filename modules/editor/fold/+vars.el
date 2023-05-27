@@ -19,17 +19,17 @@
               vimish-fold-persist-on-saving nil
               )
 
-(spec-handling-add! fold t
-                    '(vimish
+(spec-handling-add! fold
+                    `(vimish
                      :modes (vimish-fold-mode)
                      :priority -50
-                     :triggers (:delete     vimish-fold-delete
-                                :open-all   vimish-fold-unfold-all
-                                :close-all  vimish-fold-refold-all
-                                :toggle     vimish-fold-toggle
-                                :open       vimish-fold-unfold
+                     :triggers (:delete     ,#'vimish-fold-delete
+                                :open-all   ,#'vimish-fold-unfold-all
+                                :close-all  ,#'vimish-fold-refold-all
+                                :toggle     ,#'vimish-fold-toggle
+                                :open       ,#'vimish-fold-unfold
                                 :open-rec   nil
-                                :close      vimish-fold-refold
+                                :close      ,#'vimish-fold-refold
                                 )
                      )
                     )
@@ -39,7 +39,7 @@
 (setq-default hs-hide-comments-when-hiding-all nil
               hs-set-up-overlay #'+fold-hideshow-set-up-overlay-fn
               )
-(spec-handling-add! hideshow nil
+(spec-handling-add! hideshow
                     '(default
                       ;;MODE START END COMMENT-START FORWARD-SEXP-FUNC ADJUST-BEG-FUNC
                       (vimrc-mode "{{{" "}}}" "\"")
@@ -62,16 +62,16 @@
                        nil))
                       )
 
-(spec-handling-add! fold nil
+(spec-handling-add! fold
                     `(hide-show
                      :modes (hs-minor-mode)
                      :priority -25
-                     :triggers (:open-all   hs-show-all
-                                :close-all  hs-hide-all
-                                :toggle     hs-toggle-hiding
-                                :open       hs-show-block
+                     :triggers (:open-all   ,#'hs-show-all
+                                :close-all  ,#'hs-hide-all
+                                :toggle     ,#'hs-toggle-hiding
+                                :open       ,#'hs-show-block
                                 :open-rec   nil
-                                :close      hs-hide-block
+                                :close      ,#'hs-hide-block
                                 )
                      )
                     )
@@ -97,48 +97,48 @@
 ;;-- end origami
 
 ;;-- outline
-(spec-handling-add! fold t
+(spec-handling-add! fold
                     `(outline
                      :modes (outline-mode outline-minor-mode markdown-mode)
                      :priority -25
-                     :triggers (:open-all   outline-show-all
+                     :triggers (:open-all   ,#'outline-show-all
                                 :close-all  ,(cmd! (with-no-warnings (outline-hide-sublevels 1)))
-                                :toggle     outline-toggle-children
+                                :toggle     ,#'outline-toggle-children
                                 :open       ,(cmd! (with-no-warnings (outline-show-entry) (outline-show-children)))
-                                :open-rec   outline-show-subtree
-                                :close      outline-hide-subtree
+                                :open-rec   ,#'outline-show-subtree
+                                :close      ,#'outline-hide-subtree
                                 )
                      )
                     )
 ;;-- end outline
 
 ;;-- c like ifdef
-(spec-handling-add! fold nil
+(spec-handling-add! fold
                     '(ifdef
                      :modes (hide-ifdef-mode)
                      :priority -25
-                     :triggers (:open-all   show-ifdefs
-                                :close-all  hide-ifdefs
+                     :triggers (:open-all   ,#'show-ifdefs
+                                :close-all  ,#'hide-ifdefs
                                 :toggle     nil
-                                :open       show-ifdef-block
+                                :open       ,#'show-ifdef-block
                                 :open-rec   nil
-                                :close      hide-ifdef-block
+                                :close      ,#'hide-ifdef-block
                                 )
                      )
                     )
 ;;-- end c like ifdef
 
 ;;-- diff mode
-(spec-handling-add! fold nil
+(spec-handling-add! fold
                     '(vdiff
                      :modes (vdiff-mode vdiff-3way-mode)
                      :priority 200
-                     :triggers (:open-all   vdiff-open-all-folds
-                                :close-all  vdiff-close-all-folds
-                                :toggle     vdiff-toggle-fold
-                                :open       vdiff-open-fold
-                                :open-rec   vdiff-open-fold
-                                :close      vdiff-close-fold
+                     :triggers (:open-all   ,#'vdiff-open-all-folds
+                                :close-all  ,#'vdiff-close-all-folds
+                                :toggle     ,#'vdiff-toggle-fold
+                                :open       ,#'vdiff-open-fold
+                                :open-rec   ,#'vdiff-open-fold
+                                :close      ,#'vdiff-close-fold
                                 )
                      )
                     )

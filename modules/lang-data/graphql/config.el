@@ -16,17 +16,16 @@
   (when (modulep! +lsp)
     (add-hook 'graphql-mode-local-vars-hook #'lsp! 'append)
     )
-  (spec-handling-add! company nil
+  (spec-handling-add! company
                       '(graphql-mode (:mode . #'company-graphql))
                       )
 
-  (add-hook 'graphql-mode-hook #'rainbow-delimiters-mode)
   (spec-handling-add! docsets
                       '(graphql-mode
                         "GraphQL Specification"
                         )
                       )
-
+  (add-hook 'graphql-mode-hook #'rainbow-delimiters-mode)
   (set-electric! 'graphql-mode
     :chars '(?\} ?\))
     :words '("or" "and"))

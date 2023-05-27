@@ -110,4 +110,11 @@
        :desc "Keep"                             "k"   #'project-walk-filter-keep
       )
 
+(map! :map jg-binding-forward-general-motion-map
+      :desc "Walk Next" "n" #'project-walk-next
+      :map jg-binding-backward-general-motion-map
+      :desc "Walk Back" "n" #'project-walk-prev
+      )
+
+
 ;;-- end project walk

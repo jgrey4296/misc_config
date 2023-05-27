@@ -63,7 +63,7 @@
   :preface
   (setq anaconda-mode-installation-directory (concat doom-data-dir "anaconda/")
         anaconda-mode-eldoc-as-single-line t)
-  (spec-handling-add! python-env nil
+  (spec-handling-add! python-env
                       `(anaconda
                         (:support conda
                                   ,#'(lambda (state) (add-hook 'python-mode-hook #'anaconda-mode))

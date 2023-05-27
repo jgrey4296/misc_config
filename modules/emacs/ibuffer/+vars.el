@@ -41,7 +41,7 @@
       )
 
 ;;-- popup spec
-(spec-handling-add! popup nil
+(spec-handling-add! popup
                     '(ibuffer
                       ("^\*Ibuffer\*$"         :side right  :ttl 5 :width  0.5 :quit nil :select t :priority 50)
                       )

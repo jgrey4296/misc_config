@@ -96,24 +96,24 @@ If no viewer is found, `latex-preview-pane-mode' is used.")
 ;;-- end smartparens
 
 ;;-- specs
-(spec-handling-add! company nil
+(spec-handling-add! company
                     '(reftex-mode (:mode . company-reftex-labels) (:mode . company-reftex-citations))
                     '(latex-mode (:mode . company-auctex-environments) (:mode . company-auctex-macros) (:mode . +latex-symbols-company-backend))
                     )
-(spec-handling-add! lookup-url nil
+(spec-handling-add! lookup-url
                     '(latex
                       ("Latex Packages" "https://www.ctan.org/search?phrase=%s")
                       )
                     )
 
-(spec-handling-add! popup nil
+(spec-handling-add! popup
                     '(latex
                       (" output\\*$" :size 15)
                       ("^\\*TeX \\(?:Help\\|errors\\)"  :size 0.3 :select t :ttl nil)
                       ("^\*latex\*" :side right  :ttl nil :width  0.5 :quit nil :select t :priority 50)
                       )
                     )
-(spec-handling-add! lookup-regular nil
+(spec-handling-add! lookup-regular
                     '(latex-mode
                      ("Latex Wikibook" . "https://en.m.wikibooks.org/wiki/LaTeX")
                      ("CTAN packages" . "https://www.ctan.org/pkg/latex")
@@ -121,7 +121,7 @@ If no viewer is found, `latex-preview-pane-mode' is used.")
                      ("Latex Tutorial" . "https://latex-tutorial.com/")
                      )
                     )
-(spec-handling-add! evil-embrace nil
+(spec-handling-add! evil-embrace
                     '(latex-mode
                       (?\' . ,(make-embrace-pair-struct
                                :key ?\'

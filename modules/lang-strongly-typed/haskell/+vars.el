@@ -4,33 +4,33 @@
       haskell-process-auto-import-loaded-modules t
       haskell-process-show-overlays (not (modulep! :checkers syntax))) ; redundant with flycheck
 
-(spec-handling-add! projects nil
+(spec-handling-add! projects
                     '(haskell-stack ("stack.yaml") :project-file "stack.yaml" :compilation-dir nil :configure nil :compile "stack build" :test "stack build --test" :install nil :package nil :run nil :test-suffix "Spec")
                     '(haskell-cabal projectile-cabal-project-p :project-file nil :compilation-dir nil :configure nil :compile "cabal build" :test "cabal test" :install nil :package nil :run "cabal run" :test-suffix "Spec")
 )
-(spec-handling-add! file-templates nil
+(spec-handling-add! file-templates
                     '(haskell
                      (haskell-mode :trigger haskell-auto-insert-module-template :project t)
                      )
                     )
-(spec-handling-add! popup nil
+(spec-handling-add! popup
                     '(haskell
                      ("^\\*haskell\\*" :quit nil)
                      )
                     )
-(spec-handling-add! lookup-regular nil
+(spec-handling-add! lookup-regular
                     '(haskell-mode
                      ("GHC reference" . "https://downloads.haskell.org/ghc/latest/docs/users_guide/index.html")
                      ("Typeclassopedia" . "https://wiki.haskell.org/Typeclassopedia")
                      )
                     )
-(spec-handling-add! lookup-url nil
+(spec-handling-add! lookup-url
                     '(haskell
                      ("Haskell Cabal" "https://hackage.haskell.org/packages/search?terms=%s")
                      ("Haskell Typeclassopedia" "https://wiki.haskell.org/index.php?search=%s&title=Special%3ASearch&fulltext=Search")
                      )
                     )
-(spec-handling-add! lookup-handler nil
+(spec-handling-add! lookup-handler
                     '(haskell-mode :definition haskell-mode-jump-to-def-or-tag)
                     )
 

@@ -65,7 +65,7 @@
 
 ;;-- specs
 
-(spec-handling-add! popup nil
+(spec-handling-add! popup
                     '(evil
                       ("^\\*evil-registers" :size 0.3)
                       ("^\\*Command Line"   :size 8)

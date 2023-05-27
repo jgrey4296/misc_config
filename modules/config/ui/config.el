@@ -57,8 +57,7 @@
   ;; (add-hook 'doom-first-buffer-hook #'highlight-indent-guides-auto-set-faces)
   ;; )
 
-  ;; `highlight-indent-guides' breaks when `org-indent-mode' is active
-  (add-hook! 'org-mode-local-vars-hook #'+indent-guides-disable-maybe-h)
+  ;; errors when first file is org: (add-hook! 'org-mode-local-vars-hook #'+indent-guides-disable-maybe-h)
   )
 
 (use-package! highlight-parentheses :defer t)

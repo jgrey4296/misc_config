@@ -48,7 +48,7 @@ adjustment.")
 (setq jg-popup-ivy-predicate-patterns (rx (or "*helpful" "*helm-" "doom" "*dired-log" "magit" "*Free Keys")))
 (setq neo-toggle-window-keep-p t)
 
-(spec-handling-add! fold nil
+(spec-handling-add! fold
                     '(neotree
                      :modes (neotree-mode)
                      :priority 25
@@ -62,7 +62,7 @@ adjustment.")
                      )
                     )
 
-(spec-handling-add! popup t
+(spec-handling-add! popup
                     '(defaults
                        ("*jg-customised*" :priority -200)
                        )

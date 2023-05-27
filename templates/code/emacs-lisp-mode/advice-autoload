@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name  : advice-autoload
+# uuid  : advice-autoload
+# key   : advice-autoload
+# group :
+# --
+;;;###autoload
+(defun $1 ()
+       $0
+)
+
+;;;###autoload
+(advice-add '$2 :${3:override} #'$1)

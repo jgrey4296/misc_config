@@ -48,7 +48,7 @@ Used by `+lookup/online'.")
       xref-show-xrefs-function       #'ivy-xref-show-xrefs)
 
 ;;-- specs
-(spec-handling-add! lookup-url nil
+(spec-handling-add! lookup-url
                     '(defaults
                       ("DuckDuckGo"         +lookup--online-backend-duckduckgo "https://duckduckgo.com/?q=%s")
                       ("Github"             "https://github.com/search?ref=simplesearch&q=%s")
@@ -64,7 +64,7 @@ Used by `+lookup/online'.")
                       ("Raw"                "%s")
                        )
                      )
-(spec-handling-add! lookup-url nil
+(spec-handling-add! lookup-url
                     '(plus
                      ("Google"            +lookup--online-backend-google "https://google.com/search?q=%s")
                      ("Google images"     "https://www.google.com/images?q=%s")
@@ -74,13 +74,13 @@ Used by `+lookup/online'.")
                      ("Rust Docs" "https://doc.rust-lang.org/std/?search=%s")
                      )
                     )
-(spec-handling-add! browse-handler nil
+(spec-handling-add! browse-handler
                     '(default
                       ("^@" . browse-select-twitter)
                       ("."  . browse-select-default)
                       )
                     )
-(spec-handling-add! lookup-regular nil
+(spec-handling-add! lookup-regular
                     '(shell-mode
                      ("Brew" . "https://brew.sh/")
                      ("Awk" . "https://www.gnu.org/software/gawk/manual/gawk.html")
@@ -93,13 +93,13 @@ Used by `+lookup/online'.")
                      ("Nushell github" . "https://github.com/nushell/nushell")
                      )
                     )
-(spec-handling-add! popup nil
+(spec-handling-add! popup
                     '(lookup
                       ("^\\*xref\\*$" :ignore t)
                       )
                     )
 
-(spec-handling-add! lookup-handler nil
+(spec-handling-add! lookup-handler
                     `(text-mode
                      :definition ,#'wordnut-search
                      :implementations ,#'helm-wordnet-suggest

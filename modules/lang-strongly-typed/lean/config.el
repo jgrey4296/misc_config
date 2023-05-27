@@ -35,10 +35,10 @@
   (advice-add #'company-lean-hook :override #'ignore)
   )
 
-(spec-handling-add! company nil
+(spec-handling-add! company
                     '(lean-mode company-lean)
                     )
-(spec-handling-add! lookup-regular nil
+(spec-handling-add! lookup-regular
                     '(lean-mode
                      ("Theorem Proving in Lean 4" . "https://leanprover.github.io/theorem_proving_in_lean4/")
                      ("Lean Manual" . "https://leanprover.github.io/lean4/doc/")

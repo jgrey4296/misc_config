@@ -12,10 +12,10 @@
   ;; lua-indent-level defaults to 3 otherwise. Madness.
   (setq lua-indent-level 2)
   :config
-  (spec-handling-add! lookup-handler nil (lua-mode :documentation 'lua-search-documentation))
+  (spec-handling-add! lookup-handler (lua-mode :documentation 'lua-search-documentation))
   (set-electric! 'lua-mode :words '("else" "end"))
   (set-repl-handler! 'lua-mode #'+lua/open-repl)
-  (spec-handling-add! company nil
+  (spec-handling-add! company
                       '(lua-mode (:mode . #'company-lua))
                       )
 
@@ -65,10 +65,10 @@ lua-language-server.")
   :when (modulep! +fennel)
   :defer t
   :config
-  (spec-handling-add! lookup-handler nil
-                      (fennel-mode
-                       :definition #'fennel-find-definition
-                       :documentation #'fennel-show-documentation)
+  (spec-handling-add! lookup-handler
+                      `(fennel-mode
+                       :definition ,#'fennel-find-definition
+                       :documentation ,#'fennel-show-documentation)
                       )
   (set-repl-handler! 'fennel-mode #'fennel-repl)
 
@@ -96,7 +96,7 @@ lua-language-server.")
           :map +lua-love-mode-map
           "b" #'+lua/run-love-game)))
 
-(spec-handling-add! lookup-regular nil
+(spec-handling-add! lookup-regular
                     '(lua-mode
                      ("Lua Manual" . "https://www.lua.org/manual/5.4/")
                      )

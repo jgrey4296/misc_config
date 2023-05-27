@@ -50,19 +50,19 @@
   )
 
 
-(spec-handling-add! popup nil
+(spec-handling-add! popup
                     '(coq
                      ("^\\*\\(?:response\\|goals\\)\\*" :ignore t)
                      )
                     )
-(spec-handling-add! lookup-handler nil
-                    '(company-coq-mode
-                      :definition company-coq-jump-to-definition
-                      :references company-coq-grep-symbol
-                      :documentation company-coq-doc
+(spec-handling-add! lookup-handler
+                    `(company-coq-mode
+                      :definition ,#'company-coq-jump-to-definition
+                      :references ,#'company-coq-grep-symbol
+                      :documentation ,#'company-coq-doc
                       )
                     )
-(spec-handling-add! lookup-regular nil
+(spec-handling-add! lookup-regular
                     '((coq-mode proof-general)
                       ("Proof general github" . "https://github.com/ProofGeneral/PG/")
                       ("Proof General Manual" . "https://proofgeneral.github.io/doc/master/userman/")

@@ -30,7 +30,7 @@
 ;; default snippets library, if available
 (add-to-list 'load-path jg-snippets-code-templates-dir)
 
-(spec-handling-add! file-templates nil
+(spec-handling-add! file-templates
                     '(general
                       ("/docker-compose\\.yml$" :mode yaml-mode)
                       ;; direnv
@@ -54,12 +54,12 @@
                      yas-prompt-functions '(+jg-snippets-yas-prompt-fn)
                      )
 
-(spec-handling-add! lookup-regular nil
+(spec-handling-add! lookup-regular
                     '(snippet-mode-map
                      ("Yasnippet Manual" . "https://joaotavora.github.io/yasnippet/snippet-development.html")
                      )
                     )
 
-(spec-handling-add! company nil
+(spec-handling-add! company
                     '(yas-minor-mode (:back . company-yasnippet))
                     )

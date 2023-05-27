@@ -19,7 +19,7 @@
       flycheck-posframe-error-prefix "X "
       )
 
-(spec-handling-add! popup nil
+(spec-handling-add! popup
                     '(flycheck
                       ("^\\*Flycheck error messages\\*" :select nil)
                       ("^\\*Flycheck errors\\*" :size 0.25)

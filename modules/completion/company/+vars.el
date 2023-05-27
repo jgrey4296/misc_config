@@ -37,7 +37,7 @@
 (add-hook! 'minibuffer-inactive-mode-hook :append #'company-mode)
 (add-hook! 'minibuffer-setup-hook :append #'company-mode)
 
-(spec-handling-add! company nil
+(spec-handling-add! company
                     '(prog-mode (:disfavour . (:separate company-dabbrev-code company-capf)) (:back . company-files))
                     '(text-mode (:disfavour . (:separate company-dabbrev company-ispell)))
                     '(conf-mode (:disfavour . company-dabbrev-code ))

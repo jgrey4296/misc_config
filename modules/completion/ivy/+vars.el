@@ -42,7 +42,7 @@ results buffer.")
 ;;-- end company
 
 ;;-- specs
-(spec-handling-add! popup nil
+(spec-handling-add! popup
                     '(ivy
                       ("^\\*ivy-occur" :size 0.35 :ttl 0 :quit nil)
                       )

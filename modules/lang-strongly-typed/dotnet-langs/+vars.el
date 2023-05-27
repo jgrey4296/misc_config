@@ -1,4 +1,4 @@
-
+;; -*- mode:emacs-lisp; lexical-binding: t;-*-
 
 ;;-- csharp
 
@@ -13,17 +13,17 @@
 ;;-- end unity
 
 ;;-- specs
-(spec-handling-add! projects nil
+(spec-handling-add! projects
                     '(dotnet-sln ("src") :project-file "?*.sln" :compilation-dir nil :configure nil :compile "dotnet build" :test "dotnet test" :install nil :package nil :run "dotnet run")
                     '(dotnet projectile-dotnet-project-p :project-file ("?*.csproj" "?*.fsproj") :compilation-dir nil :configure nil :compile "dotnet build" :test "dotnet test" :install nil :package nil :run "dotnet run")
                     )
-(spec-handling-add! rotate-text nil
+(spec-handling-add! rotate-text
                     '(csharp-mode
                      :symbols (("public" "protected" "private")
                                ("class" "struct"))
                      )
                     )
-(spec-handling-add! lookup-regular nil
+(spec-handling-add! lookup-regular
                     '(csharp-mode
                      ("Unity Manual" . "https://docs.unity3d.com/Manual/index.html")
                      ("Unity C# Reference" . "https://docs.unity3d.com/ScriptReference/index.html")
@@ -35,10 +35,10 @@
                      ("Microsoft F# reference" . "https://docs.microsoft.com/en-us/dotnet/fsharp/")
                      )
                     )
-(spec-handling-add! lookup-handler nil
+(spec-handling-add! lookup-handler
                     '(fsharp-mode :async t :definition fsharp-ac/gotodefn-at-point)
                     )
-(spec-handling-add! company nil
+(spec-handling-add! company
                     '(fsharp-mode (:mode . #'fsharp-ac/company-backend))
                     )
 (set-electric! 'csharp-mode :chars '(?\n ?\}))

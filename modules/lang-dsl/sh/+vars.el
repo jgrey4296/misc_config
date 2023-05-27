@@ -9,7 +9,7 @@
 
 
 ;;-- specs
-(spec-handling-add! lookup-handler nil '(sh-mode :documentation #'+sh-lookup-documentation-handler))
+(spec-handling-add! lookup-handler '(sh-mode :documentation #'+sh-lookup-documentation-handler))
 (spec-handling-add! docsets '(sh-mode "Bash"))
 (set-electric! 'sh-mode :words '("else" "elif" "fi" "done" "then" "do" "esac" ";;"))
 (set-formatter! 'shfmt '("shfmt" "-ci"

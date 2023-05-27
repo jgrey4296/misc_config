@@ -75,7 +75,7 @@ If nil, it is disabled in all modes")
 ;;-- end ignore dirs
 
 ;;-- specs
-(spec-handling-add! popup nil
+(spec-handling-add! popup
                     '(lsp
                       ("^\*lsp session\*"  :side right  :ttl nil :width 0.5 :quit t :select nil :priority 50)
                       ("^\\*lsp-\\(help\\|install\\)" :size 0.35 :quit t :select t)
@@ -83,16 +83,16 @@ If nil, it is disabled in all modes")
                      )
                     )
 
-(spec-handling-add! fold nil
+(spec-handling-add! fold
                     '(lsp-browser
                      :modes (lsp-browser-mode)
                      :priority 30
-                     :triggers (:open-all   +jg-lsp-toggle-widget-on-line
-                                :close-all  +jg-lsp-toggle-widget-on-line
-                                :toggle     +jg-lsp-toggle-widget-on-line
-                                :open       +jg-lsp-toggle-widget-on-line
-                                :open-rec   +jg-lsp-toggle-widget-on-line
-                                :close      +jg-lsp-toggle-widget-on-line
+                     :triggers (:open-all   ,#'+jg-lsp-toggle-widget-on-line
+                                :close-all  ,#'+jg-lsp-toggle-widget-on-line
+                                :toggle     ,#'+jg-lsp-toggle-widget-on-line
+                                :open       ,#'+jg-lsp-toggle-widget-on-line
+                                :open-rec   ,#'+jg-lsp-toggle-widget-on-line
+                                :close      ,#'+jg-lsp-toggle-widget-on-line
                                 )
                      )
                     )
@@ -103,7 +103,7 @@ If nil, it is disabled in all modes")
 ;;                      )
 ;;                     )
 
-(spec-handling-add! lookup-handler nil
+(spec-handling-add! lookup-handler
                     `(lsp-mode
                      :definition ,#'+lsp-lookup-definition-handler
                      :references ,#'+lsp-lookup-references-handler
@@ -121,11 +121,11 @@ If nil, it is disabled in all modes")
                     )
 
 (when (modulep! +peek)
-  (spec-handling-add! lookup-handler nil
-                      '(lsp-ui-mode
-                       :definition         lsp-ui-peek-find-definitions
-                       :implementations    lsp-ui-peek-find-implementation
-                       :references         lsp-ui-peek-find-references
+  (spec-handling-add! lookup-handler
+                      `(lsp-ui-mode
+                       :definition         ,#'lsp-ui-peek-find-definitions
+                       :implementations    ,#'lsp-ui-peek-find-implementation
+                       :references         ,#'lsp-ui-peek-find-references
                        :async t
                        )
                       )

@@ -13,7 +13,7 @@
 
 ;; Filters:
 
-(spec-handling-add! ibuffer-filters nil
+(spec-handling-add! ibuffer-filters
                     '(-clutter (not (or (name . "*http ")
                                         (used-mode . flycheck-error-list-mode)
                                         (used-mode . ivy-mode)
@@ -30,7 +30,7 @@
                     '(dired (used-mode . dired-mode))
                     )
 
-(spec-handling-add! ibuffer-filters nil
+(spec-handling-add! ibuffer-filters
                     '(window-ring (name . "->"))
                     '(stars       (name . "^*"))
                     '(music       (or (name . "*\\(tidal\\|SCLang\\)")
@@ -58,14 +58,14 @@
                                       (mode . sass-mode)))
                             )
 
-(spec-handling-add! ibuffer-filters nil
+(spec-handling-add! ibuffer-filters
                     '(mail (or (mode . message-mode)
                                (mode . mail-mode)
                                (mode . gnus-group-mode)
                                (mode . gnus-summary-mode)
                                (mode . gnus-article-mode))))
 
-(spec-handling-add! ibuffer-filters nil
+(spec-handling-add! ibuffer-filters
                    '(csv     ())
                    '(graphql ())
                    '(json    ())
@@ -76,13 +76,13 @@
                    '(zip     ())
                     )
 
-(spec-handling-add! ibuffer-filters nil
+(spec-handling-add! ibuffer-filters
                     '(doot ())
                     )
 
 ;; Groups:
 
-(spec-handling-add! ibuffer-groups nil
+(spec-handling-add! ibuffer-groups
                     '(default
                        ("*Starred*"   (saved . "stars"))
                        ;; ("*Project: configs" (projectile-root . "__configs"))
@@ -99,7 +99,7 @@
                     '(dired   ("dired"       (saved . "dired")))
                     )
 
-(spec-handling-add! ibuffer-groups nil
+(spec-handling-add! ibuffer-groups
                     '(projects
                       ("*Starred*" (starred-name))
                       ("*Project: configs*" (projectile-root . "__configs"))
@@ -110,7 +110,7 @@
                     '(programming ("programming" (saved . "programming")))
                     )
 
-(spec-handling-extend! ibuffer-groups nil
+(spec-handling-add! ibuffer-groups :form 'extend
                        '(programming
                          ("python" (derived-mode . python-mode))
                          ("lisp"   (derived-mode . emacs-lisp-mode))

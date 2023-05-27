@@ -26,12 +26,12 @@
         )
   )
 
-(spec-handling-new-hooks! company
-                          (setq-local company-backends-sort-vals (append (mapcar #'+jg-company-position-parse val)
-                                                                         company-backends-sort-vals)
-                                      company-backends (seq-uniq (mapcar #'cdr
-                                                                         (sort company-backends-sort-vals
-                                                                               #'(lambda (a b) (< (car a) (car b)))
-                                                                               )))
-                                      )
-                          )
+(spec-handling-new! company :loop 'hook
+                    (setq-local company-backends-sort-vals (append (mapcar #'+jg-company-position-parse val)
+                                                                   company-backends-sort-vals)
+                                company-backends (seq-uniq (mapcar #'cdr
+                                                                   (sort company-backends-sort-vals
+                                                                         #'(lambda (a b) (< (car a) (car b)))
+                                                                         )))
+                                )
+                    )

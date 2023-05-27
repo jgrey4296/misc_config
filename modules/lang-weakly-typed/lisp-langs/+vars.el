@@ -47,44 +47,44 @@ See `+emacs-lisp-non-package-mode' for details.")
 
 ;;-- specs
 
-(spec-handling-add! popup nil
+(spec-handling-add! popup
                     '(lisp
                      ("^\\*Buttercup\\*$" :size 0.45 :select nil :ttl 0)
                      )
                     )
-(spec-handling-add! fold nil
-                    '(lisp
+(spec-handling-add! fold
+                    `(lisp
                      :modes (emacs-lisp-mode lisp-mode)
                      :priority 25
-                     :triggers (:open-all  hs-show-all
-                                :close-all hs-hide-all
-                                :toggle    hs-toggle-hiding
-                                :open      hs-show-block
+                     :triggers (:open-all  ,#'hs-show-all
+                                :close-all ,#'hs-hide-all
+                                :toggle    ,#'hs-toggle-hiding
+                                :open      ,#'hs-show-block
                                 :open-rec  nil
-                                :close     hs-hide-block
+                                :close     ,#'hs-hide-block
                                 )
                      )
                     )
-(spec-handling-add! file-templates t
-                    '(lisp
-                     ("/test/.+\\.el$"   :when +file-templates-in-emacs-dirs-p :trigger "__doom-test"     :mode emacs-lisp-mode)
-                     ("/doctor\\.el$"    :when +file-templates-in-emacs-dirs-p :trigger "__doom-doctor"   :mode emacs-lisp-mode)
-                     ("config\\.el$"     :when +file-templates-in-emacs-dirs-p :trigger "__doom_config"   :mode emacs-lisp-mode)
-                     ("packages\\.el$"   :when +file-templates-in-emacs-dirs-p :trigger "__doom_packages" :mode emacs-lisp-mode)
+(spec-handling-add! file-templates
+                    `(lisp
+                     ("/test/.+\\.el$"   :when ,#'+file-templates-in-emacs-dirs-p :trigger "__doom-test"     :mode emacs-lisp-mode)
+                     ("/doctor\\.el$"    :when ,#'+file-templates-in-emacs-dirs-p :trigger "__doom-doctor"   :mode emacs-lisp-mode)
+                     ("config\\.el$"     :when ,#'+file-templates-in-emacs-dirs-p :trigger "__doom_config"   :mode emacs-lisp-mode)
+                     ("packages\\.el$"   :when ,#'+file-templates-in-emacs-dirs-p :trigger "__doom_packages" :mode emacs-lisp-mode)
                      ("minor-mode\\.el$" :trigger "__minor-mode" :mode emacs-lisp-mode)
                      ("mode\\.el$"       :trigger "__mode"       :mode emacs-lisp-mode)
                      ("ob-.+?\\.el$"     :mode emacs-lisp-mode :trigger "__org_babel")
                      ("/.dir-locals.el$" :mode emacs-lisp-mode :trigger "__dir_locals")
                      ("-test\\.el$"      :mode emacs-ert-mode)
-                     ("\\.el$"           :when +file-templates-in-emacs-dirs-p :trigger "__doom-module" :mode emacs-lisp-mode)
+                     ("\\.el$"           :when ,#'+file-templates-in-emacs-dirs-p :trigger "__doom-module" :mode emacs-lisp-mode)
                      (emacs-lisp-mode    :trigger "__package")
                      )
                     )
-(spec-handling-add! projects nil
+(spec-handling-add! projects
                     '(emacs-eldev projectile-eldev-project-p :project-file "eldev" :compilation-dir nil :configure nil :compile "eldev compile" :test "eldev test" :install nil :package "eldev package" :run "eldev emacs")
                     '(emacs-cask ("cask") :project-file "cask" :compilation-dir nil :configure nil :compile "cask install" :test nil :install nil :package nil :run nil :test-suffix "-test" :test-prefix "test-")
                     )
-(spec-handling-add! rotate-text nil
+(spec-handling-add! rotate-text
                     '(emacs-lisp-mode
                      :symbols (("t" "nil")
                                ("let" "let*")
@@ -102,36 +102,38 @@ See `+emacs-lisp-non-package-mode' for details.")
                      )
                     )
 
-(spec-handling-add! whitespace-cleanup nil
-                    '(emacs-lisp-mode delete-trailing-whitespace
-                      +jg-lisp-cleanup-ensure-newline
-                      +jg-text-cleanup-whitespace)
+(spec-handling-add! whitespace-cleanup
+                    '(emacs-lisp-mode
+                      ,#'delete-trailing-whitespace
+                      ,#'+jg-lisp-cleanup-ensure-newline
+                      ,#'+jg-text-cleanup-whitespace)
     )
 
-(spec-handling-add! lookup-regular nil
+(spec-handling-add! lookup-regular
                     '(emacs-lisp-mode
                       ("GNU Lisp" . "https://www.gnu.org/software/emacs/manual/html_node/elisp/index.html")
                       ("Melpa" . "https://melpa.org/#/")
+                      ("Doom"  . "https://github.com/doomemacs/doomemacs")
                       )
                     )
-(spec-handling-add! lookup-url nil
+(spec-handling-add! lookup-url
                     '(lisp
                      ("elisp melpa" "https://melpa.org/#/?q=%s")
                      ("elisp elpa" "https://elpa.gnu.org/packages/")
                      )
                     )
-(spec-handling-add! lookup-handler t
-                    '((emacs-lisp-mode lisp-interaction-mode helpful-mode)
-                      :definition    +emacs-lisp-lookup-definition
-                      :documentation +emacs-lisp-lookup-documentation
+(spec-handling-add! lookup-handler
+                    `((emacs-lisp-mode lisp-interaction-mode helpful-mode)
+                      :definition    ,#'+emacs-lisp-lookup-definition
+                      :documentation ,#'+emacs-lisp-lookup-documentation
                      )
                     '((racket-mode racket-repl-mode)
-                     :definition    +racket-lookup-definition
-                     :documentation +racket-lookup-documentation
+                     :definition    ,#'+racket-lookup-definition
+                     :documentation ,#'+racket-lookup-documentation
                      )
                     '(inferior-emacs-lisp-mode
-                      :definition    +emacs-lisp-lookup-definition
-                      :documentation +emacs-lisp-lookup-documentation
+                      :definition    ,#'+emacs-lisp-lookup-definition
+                      :documentation ,#'+emacs-lisp-lookup-documentation
                       )
                     )
 
@@ -140,7 +142,7 @@ See `+emacs-lisp-non-package-mode' for details.")
 (set-eval-handler! '(emacs-lisp-mode lisp-interaction-mode) #'+emacs-lisp-eval)
 (set-eval-handler! '(emacs-lisp-mode lisp-interaction-mode) #'+jg-lisp-eval)
 
-(spec-handling-add! ligatures t
+(spec-handling-add! ligatures
                     '(emacs-lisp-mode
                       "lambda" ?λ
                       )
@@ -151,7 +153,7 @@ See `+emacs-lisp-non-package-mode' for details.")
                     '((emacs-lisp-mode lisp-interaction-mode) "Emacs Lisp")
                     )
 
-(spec-handling-add! evil-embrace nil
+(spec-handling-add! evil-embrace
                     `((lisp-mode emacs-lisp-mode clojure-mode racket-mode hy-mode)
                       (?f . ,(make-embrace-pair-struct
                               :key ?f

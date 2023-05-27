@@ -1,6 +1,6 @@
 ;;; +spec-defs.el -*- lexical-binding: t; -*-
 
-(spec-handling-new! file-templates +file-templates-alist t append
+(spec-handling-new! file-templates +file-templates-alist :sorted t :loop 'append
                     (cl-loop for rule in val
                              for priority = (* -1 (or (plist-get rule :priority) 0))
                              for clean    = (cl-loop for (k v) on rule by #'cddr

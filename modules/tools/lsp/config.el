@@ -36,7 +36,7 @@
         lsp-server-install-dir (concat doom-data-dir "lsp")
         lsp-keymap-prefix nil)
 
-  (spec-handling-add! python-env t
+  (spec-handling-add! python-env
                       `(lsp
                         (:support lsp
                                   ,#'(lambda (state) (add-hook 'python-mode-hook #'lsp-deferred))
@@ -142,7 +142,7 @@ instead is more sensible."
   :commands eglot eglot-ensure
   :hook (eglot-managed-mode . +lsp-optimization-mode)
   :init
-  (spec-handling-add! python-env nil
+  (spec-handling-add! python-env
                       `(eglot
                         (:support eglot
                                   ,#'(lambda (state) (add-hook 'python-mode-hook #'eglot-ensure))
@@ -189,7 +189,7 @@ server getting expensively restarted when reverting buffers."
 (use-package! tree-sitter
   :defer t
   :init
-  (spec-handling-add! python-env nil
+  (spec-handling-add! python-env
                       `(tree-sitter!
                         (:support tree-sitter
                                   ,#'(lambda (state) (add-hook 'python-mode-hook #'tree-sitter!))
@@ -221,7 +221,7 @@ server getting expensively restarted when reverting buffers."
 (use-package! semantic
   :defer t
   :init
-  (spec-handling-add! python-env nil
+  (spec-handling-add! python-env
                       `(semantic
                         (:support semantic
                                   ,#'(lambda (state) (add-hook 'python-mode-hook #'semantic-mode))

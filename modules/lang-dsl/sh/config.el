@@ -54,7 +54,7 @@
   :unless (modulep! +lsp)
   :after sh-script
   :config
-  (spec-handling-add! company nil
+  (spec-handling-add! company
                       '(sh-mode (:mode . #'company-shell) (:mode .  #'company-files))
                       )
   (setq company-shell-delete-duplicates t

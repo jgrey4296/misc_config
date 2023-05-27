@@ -23,12 +23,13 @@
   :defer t
 )
 
-(spec-handling-add! hideshow t
+(spec-handling-add! hideshow
                     `(json
                       (json-mode ,(rx (| "[" "{") line-end) ,(rx (| "]" "}") (opt ",") line-end))
                      )
                     )
-(spec-handling-add! fold t
+
+(spec-handling-add! fold
                     '(json
                      :modes (json-mode)
                      :priority 25

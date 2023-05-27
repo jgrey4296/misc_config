@@ -9,7 +9,9 @@
   :commands dired-jump
   :config
   (provide 'jg-dired)
-  (set-evil-initial-state! 'image-dired-display-image-mode 'emacs)
+  (spec-handling-add! evil-initial
+                      '(image-dired-display-iamge-mode emacs)
+                      )
   (if (not (executable-find "gls"))
       (setq dired-listing-switches (car dired-args)
             insert-directory-program "ls")

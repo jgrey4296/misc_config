@@ -17,13 +17,13 @@
 
 ;;-- specs
 
-(spec-handling-add! popup nil
+(spec-handling-add! popup
                     `(clingo
                      (,(format "^\\*%s\\*" pasp-results-buffer-name) :side right :ttl 5 :width 0.4 :quit t :select nil :priority 50)
                      ("^\\*clingo output\\*" :side right :ttl 5 :width 0.4 :quit t :select nil)
                      )
                     )
-(spec-handling-add! file-templates nil
+(spec-handling-add! file-templates
                     '(logic
                      ("\\.lp4?"  :trigger "__" :mode pasp-mode)
                      ("\\.pl$"   :trigger "__" :mode prolog-mode)
@@ -33,7 +33,7 @@
                      ("\\.soar$" :trigger "__" :mode soar-mode)
                      )
                     )
-(spec-handling-add! lookup-regular nil
+(spec-handling-add! lookup-regular
                     '(jacamo-mode
                      ("Jacamo Github" . "https://github.com/jacamo-lang/jacamo")
                      ("Jacamo API" . "https://jacamo.sourceforge.net/doc/api/index.html")

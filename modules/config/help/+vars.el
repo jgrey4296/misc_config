@@ -9,15 +9,15 @@
       manual-program (executable-find "man")
       )
 
-(spec-handling-add! fold nil
-                    '(helpful
+(spec-handling-add! fold
+                    `(helpful
                       :modes (helpful-mode)
-                      :triggers (:open-all  hs-show-all
-                                :close-all hs-hide-all
-                                :toggle    hs-toggle-hiding
-                                :open      hs-show-block
-                                :open-rec  nil
-                                :close     hs-hide-block
+                      :triggers (:open-all  ,#'hs-show-all
+                                 :close-all ,#'hs-hide-all
+                                 :toggle    ,#'hs-toggle-hiding
+                                 :open      ,#'hs-show-block
+                                 :open-rec  nil
+                                 :close     ,#'hs-hide-block
                                  )
                       )
                     )

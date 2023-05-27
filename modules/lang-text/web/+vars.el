@@ -32,7 +32,7 @@ If set to `nil', disable all the above behaviors.")
   )
 
 ;;-- specs
-(spec-handling-add! fold nil
+(spec-handling-add! fold
                     '(web
                      :modes (web-mode)
                      :priority 25
@@ -45,7 +45,7 @@ If set to `nil', disable all the above behaviors.")
                                 )
                      )
                     )
-(spec-handling-add! lookup-regular nil
+(spec-handling-add! lookup-regular
                     '((css-mode less-css-mode scss-mode sass-mode)
                      ("CSS Reference" . "https://developer.mozilla.org/en-US/docs/Web/CSS")
                      ("LESS Reference" . "https://lesscss.org/features/")
@@ -60,11 +60,11 @@ If set to `nil', disable all the above behaviors.")
                      ("Pelican" . "https://docs.getpelican.com/en/latest/")
                      )
                     )
-(spec-handling-add! company nil
-                    '(alchemist-mode (:mode . #'alchemist-company))
-                    '(pug-mode (:mode . #'company-web-jade))
-                    '(web-mode (:favour . #'company-css) (:mode . #'company-web-html))
-                    '(slim-mode (:mode . #'company-web-slim))
-                    '(sass-mode (:mode . #'company-css))
+(spec-handling-add! company
+                    `(alchemist-mode (:mode . ,#'alchemist-company))
+                    `(pug-mode (:mode . ,#'company-web-jade))
+                    `(web-mode (:favour . ,#'company-css) (:mode . ,#'company-web-html))
+                    `(slim-mode (:mode . ,#'company-web-slim))
+                    `(sass-mode (:mode . ,#'company-css))
                     )
 ;;-- end specs

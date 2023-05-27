@@ -126,7 +126,7 @@
 ;;-- end clean hooks
 
 ;;-- specs
-(spec-handling-add! lookup-url nil
+(spec-handling-add! lookup-url
                     '(bibtex
                      ("Scholar"  "https://scholar.google.com/scholar?hl=en&q=%s")
                      ("Scholar Archive"    "https://scholar.archive.org/search?q=%s")
@@ -141,14 +141,14 @@
                      )
                     )
 
-(spec-handling-add! tagging nil
+(spec-handling-add! tagging
                     '(bibtex-mode
                      :set  +jg-bibtex-set-tags
                      :new  +jg-bibtex-set-new-tag
                      :get  +jg-bibtex-get-tags
                      )
                     )
-(spec-handling-add! whitespace-cleanup nil
+(spec-handling-add! whitespace-cleanup
                     '(bibtex-mode
                      +jg-bibtex-cleanup-ensure-newline-before-def
                      delete-trailing-whitespace
@@ -156,7 +156,7 @@
                      )
                     )
 
-(spec-handling-add! lookup-regular nil
+(spec-handling-add! lookup-regular
                     '(bibtex-mode
                      ("bibtex reference" . "https://www.bibtex.com/g/bibtex-format/")
                      )

@@ -23,7 +23,7 @@
                                           comint-filename-completion)
       )
 
-(spec-handling-add! popup nil
+(spec-handling-add! popup
                     '(vterm
                       ("^\\*vterm" :size 0.25 :vslot -4 :select t :quit nil :ttl 0)
                       )

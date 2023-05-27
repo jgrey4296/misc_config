@@ -157,8 +157,9 @@ ensure it is built when we actually use Forge."
       (pcase-let* ((`(,states _ ,evil-binding ,fn) binding))
         (dolist (state states)
           (evil-collection-define-key state 'code-review-mode-map evil-binding fn))))
-    (evil-set-initial-state 'code-review-mode evil-default-state))
-
+    )
+  (spec-handling-add! evil-initial
+                      '(code-review-mode evil-default-state))
   :config
   (transient-append-suffix 'magit-merge "i"
     '("y" "Review pull request" +magit/start-code-review))

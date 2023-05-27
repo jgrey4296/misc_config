@@ -1,9 +1,7 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
-;;-- popup
-(spec-handling-add! popup nil
+(spec-handling-add! popup
    '(pdf-meta
      ("^\*Pdf-Meta\*"  :side bottom :ttl nil :quit t :select nil :priority 50)
     )
    )
-;;-- end popup

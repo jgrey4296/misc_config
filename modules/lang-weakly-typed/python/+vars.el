@@ -132,7 +132,7 @@
   (pushnew! projectile-project-root-files "pyproject.toml" "requirements.txt" "setup.py")
   (pushnew! projectile-project-root-files "setup.py" "requirements.txt")
   )
-(spec-handling-add! projects nil
+(spec-handling-add! projects
                    `(jg-python-project ("pyproject.toml") :project-file "pyproject.toml" :configure "pip install -e %s" :test "python -m unittest discover -v -p test_*.py" :test-dir (lambda (x) (f-join x "__tests")) :test-prefix "test_" :related-files-fn ,#'+jg-python-related-files-fn)
                    '(python-poetry ("poetry.lock") :project-file "poetry.lock" :compilation-dir nil :configure nil :compile "poetry build" :test "poetry run python -m unittest discover" :install nil :package nil :run nil :test-suffix "_test" :test-prefix "test_")
                    '(python-pipenv ("Pipfile") :project-file "Pipfile" :compilation-dir nil :configure nil :compile "pipenv run build" :test "pipenv run test" :install nil :package nil :run nil :test-suffix "_test" :test-prefix "test_")
@@ -141,7 +141,7 @@
                    '(python-pip ("requirements.txt") :project-file "requirements.txt" :compilation-dir nil :configure nil :compile "python setup.py build" :test "python -m unittest discover" :install nil :package nil :run nil :test-suffix "_test" :test-prefix "test_")
                    '(django ("manage.py") :project-file "manage.py" :compilation-dir nil :configure nil :compile "python manage.py runserver" :test "python manage.py test" :install nil :package nil :run nil :test-suffix "_test" :test-prefix "test_")
                     )
-(spec-handling-add! popup nil
+(spec-handling-add! popup
                     '(python
                      ("^\\*pytest\\*"         :side bottom :ttl 5   :height 0.4 :quit t :select t :priority 50)
                      ("^\\*nosetests"         :size 0.4 :select nil)
@@ -151,7 +151,7 @@
                      ("^\\*Python-Summary\\*" :side right  :ttl nil :width  0.2 :quit t  :select nil :priority 50)
                      )
                     )
-(spec-handling-add! file-templates nil
+(spec-handling-add! file-templates
                     '(python
                      ("LICENSE$"        :trigger "__license-acab"   :mode text-mode :priority 100)
                      ("pyproject.toml$" :trigger "__pyproject"      :mode conf-toml-mode)
@@ -168,46 +168,46 @@
                      (python-mode       :trigger "__" :priority -100)
                      )
                     )
-(spec-handling-add! fold nil
-                    '(python
+(spec-handling-add! fold
+                    `(python
                      :modes (python-mode)
                      :priority 25
-                     :triggers (:close     +jg-python-close-class-defs
-                                :close-all +jg-python-close-all-defs
-                                :open      outline-toggle-children
-                                :open-all  outline-show-all
-                                :open-rec  outline-show-subtree
-                                :toggle    outline-toggle-children
+                     :triggers (:close     ,#'+jg-python-close-class-defs
+                                :close-all ,#'+jg-python-close-all-defs
+                                :open      ,#'outline-toggle-children
+                                :open-all  ,#'outline-show-all
+                                :open-rec  ,#'outline-show-subtree
+                                :toggle    ,#'outline-toggle-children
                                 )
                      )
                     )
-(spec-handling-add! rotate-text nil
+(spec-handling-add! rotate-text
                     '(python-mode
                       :symbols (("True" "False")
                                 ("dict" "list")
                                 )
                       )
                     )
-(spec-handling-add! company nil
+(spec-handling-add! company
                     '(python-mode (:front . jg-company/backend ) (:front . company-gtags))
                     '(anaconda-mode (:favour . company-anaconda))
                     )
-(spec-handling-add! whitespace-cleanup nil
-                    '(python-mode
-                      +jg-python-cleanup-ensure-newline-before-def
-                      delete-trailing-whitespace
-                      +jg-text-cleanup-whitespace
+(spec-handling-add! whitespace-cleanup
+                    `(python-mode
+                      ,#'+jg-python-cleanup-ensure-newline-before-def
+                      ,#'delete-trailing-whitespace
+                      ,#'+jg-text-cleanup-whitespace
                      )
                     )
-(spec-handling-add! modeline nil
+(spec-handling-add! modeline
                     '(python
                       (env-handling-state (:eval (env-handling-state-line)))
                       )
                     )
-(spec-handling-add! python-env nil
+(spec-handling-add! python-env
                     '(default (:setup  none) (:support none))
                     )
-(spec-handling-add! ligatures t
+(spec-handling-add! ligatures
                     '(python-mode
                       ;; Functional
                       "def"    :def
@@ -227,23 +227,23 @@
                       )
                     )
 
-(spec-handling-add! lookup-url nil
+(spec-handling-add! lookup-url
                     '(python
                      ("Python" "https://docs.python.org/3/search.html?q=%s&check_keywords=yes&area=default")
                      ("Pypi"   "https://pypi.org/search/?q=%s")
                      )
                     )
-(spec-handling-add! lookup-regular nil
+(spec-handling-add! lookup-regular
                     '(python-mode
-                      ("Awesome Libs" "https://github.com/vinta/awesome-python")
-                      ("datetime" . "https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior")
-                      ("PyGObject" . "https://pygobject.readthedocs.io/en/latest/")
-                      ("Pyright" . "https://microsoft.github.io/pyright/#/configuration")
-                      ("Logging" . "https://docs.python.org/3/library/logging.html")
-                      ("Match Statement" . "https://docs.python.org/3/reference/compound_stmts.html#the-match-statement")
-                      ("Match Spec PEP" . "https://peps.python.org/pep-0634/")
-                      ("Mocks" . "https://docs.python.org/3/library/unittest.mock.html")
-                      ("Unittest" . "https://docs.python.org/3/library/unittest.html")
+                      ("Awesome Libs"      . "https://github.com/vinta/awesome-python")
+                      ("datetime"          . "https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior")
+                      ("PyGObject"         . "https://pygobject.readthedocs.io/en/latest/")
+                      ("Pyright"           . "https://microsoft.github.io/pyright/#/configuration")
+                      ("Logging"           . "https://docs.python.org/3/library/logging.html")
+                      ("Match Statement"   . "https://docs.python.org/3/reference/compound_stmts.html#the-match-statement")
+                      ("Match Spec PEP"    . "https://peps.python.org/pep-0634/")
+                      ("Mocks"             . "https://docs.python.org/3/library/unittest.mock.html")
+                      ("Unittest"          . "https://docs.python.org/3/library/unittest.html")
                       ("Twisted"           . "https://docs.twisted.org/en/stable/")
                       ("Mamba"             . "https://mamba.readthedocs.io/")
                       ("SnakeMake"         . "https://snakemake.readthedocs.io/")
@@ -332,7 +332,7 @@
                      ("Manifest format" . "https://docs.python.org/3/distutils/sourcedist.html?highlight=manifest")
                      )
                     )
-(spec-handling-add! lookup-handler nil
+(spec-handling-add! lookup-handler
                     `(anaconda-mode
                       :definition ,#'+jg-conda-find-defs
                       :references ,#'+jg-conda-find-references

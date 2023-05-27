@@ -126,7 +126,7 @@
   )
 
 ;;-- specs
-(spec-handling-add! fold nil
+(spec-handling-add! fold
                     `(dired
                      :modes (dired-mode)
                      :priority 50
@@ -140,7 +140,7 @@
                      )
                     )
 
-(spec-handling-add! popup nil
+(spec-handling-add! popup
                     '(dired
                      ("^\\*image-dired" :slot 20 :size 0.8 :select t :quit nil :ttl 0)
                      ("^\\*ranger" :ignore t)

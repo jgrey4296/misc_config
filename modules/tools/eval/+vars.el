@@ -8,14 +8,14 @@ buffer rather than an overlay on the line at point or the minibuffer.")
 (setq eval-expression-print-length nil
       eval-expression-print-level  nil)
 
-(spec-handling-add! popup nil
-                    '(eval
-                      ((lambda (bufname _) (when (boundp '+eval-repl-mode) (buffer-local-value '+eval-repl-mode (get-buffer bufname))))
-                       :ttl (lambda (buf) (unless (plist-get +eval-repl-plist :persist)
-                                            (when-let (process (get-buffer-process buf))
-                                              (set-process-query-on-exit-flag process nil)
-                                              (kill-process process)
-                                              (kill-buffer buf))))
+(spec-handling-add! popup
+                    `(eval
+                      (,#'(lambda (bufname _) (when (boundp '+eval-repl-mode) (buffer-local-value '+eval-repl-mode (get-buffer bufname))))
+                       :ttl ,#'(lambda (buf) (unless (plist-get +eval-repl-plist :persist)
+                                               (when-let (process (get-buffer-process buf))
+                                                 (set-process-query-on-exit-flag process nil)
+                                                 (kill-process process)
+                                                 (kill-buffer buf))))
                        :size 0.25 :quit nil)
                       )
                     '(quickrun

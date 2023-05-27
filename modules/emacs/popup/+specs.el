@@ -3,7 +3,7 @@
 (doom-log "Setting up initial popup rules: %s" (current-time-string))
 ;; Setup popup vars:
 
-(spec-handling-add! popup nil
+(spec-handling-add! popup
                     '(my-rules
                       ("^\\*shell"            :side bottom :ttl nil :height 0.3 :quit t :select t :priority 100)
                       ("\*.*?scratch.*?\\*"   :side right  :ttl nil :width  50  :quit t :select t)
@@ -16,7 +16,7 @@
                       ("\\*Async Shell Command\\*\\'" :actions (display-buffer-no-window))
                       )
                     )
-(spec-handling-add! popup nil
+(spec-handling-add! popup
                     '(general
                       ("^\\*Warnings" :vslot 99 :size 0.25)
                       ("^\\*Backtrace" :vslot 99 :size 0.4 :quit nil :ttl nil)
@@ -26,7 +26,7 @@
                       ("^\\*\\(?:Proced\\|timer-list\\|Abbrevs\\|Output\\|Occur\\|unsent mail\\)\\*" :ignore t)
                       )
                     )
-(spec-handling-add! popup nil
+(spec-handling-add! popup
                     '(doom
                       ;; Doom
                       ("^\\*info\\*\\'"                                          :slot 2 :vslot 2 :size 0.45 :select t :priority -100)

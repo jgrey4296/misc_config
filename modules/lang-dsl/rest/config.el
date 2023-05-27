@@ -10,7 +10,7 @@
   ;; line numbers aren't enabled by default in fundamental-mode-derived modes
   :hook (restclient-mode . display-line-numbers-mode)
   :config
-  (spec-handling-add! popup nil
+  (spec-handling-add! popup
                       '(rest
                         ("^\\*HTTP Response" :size 0.4 :quit 'other)
                         )
@@ -34,7 +34,7 @@ certs, rather than reject them silently."
   :when (modulep! :completion company)
   :after restclient
   :config
-  (spec-handling-add! company nil
+  (spec-handling-add! company
                       '(restclient-mode (:mode . #'company-restclient))
                       )
   )

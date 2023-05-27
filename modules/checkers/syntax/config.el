@@ -29,7 +29,7 @@
   :commands flycheck-list-errors flycheck-buffer
   :hook (doom-first-buffer . global-flycheck-mode)
   :init
-  (spec-handling-add! python-env nil
+  (spec-handling-add! python-env
                       '(flycheck
                         (:support flycheck #'(lambda (path name)
                                                (unless flycheck-enabled-checkers

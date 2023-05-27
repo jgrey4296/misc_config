@@ -33,7 +33,7 @@
 
 
 ;;-- specs
-(spec-handling-add! popup nil
+(spec-handling-add! popup
                     '(rust
                      ("^\\*rustic-compilation" :vslot -1)
                      )
@@ -53,7 +53,7 @@
                      )
                     )
 
-(spec-handling-add! lookup-url nil
+(spec-handling-add! lookup-url
                     '(rust
                      ("Rust Stdlib"     "https://doc.rust-lang.org/std/?search=%s")
                      ("Rust Crates.io"  "https://crates.io/search?q=%s")
@@ -83,12 +83,12 @@
       )
     )
 
-(spec-handling-add! projects t
+(spec-handling-add! projects
                     '(jg-rust ("Cargo.toml")     :project-file "Cargo.toml" :configure nil :test nil :test-dir nil :test-prefix nil :related-files-fn +jg-rust-related-files-fn)
                     '(rust-cargo ("Cargo.toml") :project-file "Cargo.toml" :compilation-dir nil :configure nil :compile "cargo build" :test "cargo test" :install nil :package nil :run "cargo run")
                     )
 
-(spec-handling-add! lookup-regular nil
+(spec-handling-add! lookup-regular
                     '((rust-mode rustic-mode)
                       ("Rust By Example"         . "https://doc.rust-lang.org/rust-by-example/index.html")
                       ("rust book"               . "https://doc.rust-lang.org/stable/book/title-page.html")

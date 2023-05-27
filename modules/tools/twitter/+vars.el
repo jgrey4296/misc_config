@@ -20,7 +20,7 @@
               )
 
 ;;-- lookup spec
-(spec-handling-add! lookup-url nil
+(spec-handling-add! lookup-url
                     '(twitter
                      ("Twitter"            "https://twitter.com/%s")
                      )

@@ -79,7 +79,7 @@
 ;;-- end spelling
 
 ;;-- specs
-(spec-handling-add! file-templates nil
+(spec-handling-add! file-templates
                     '(org
                      ("two_pager\\.org$"     :trigger "__pacheco_vega_two_pager" :mode org-mode)
                      ("lit_review\\.org$"    :trigger "__lit_review"             :mode org-mode)
@@ -93,7 +93,7 @@
                      (org-mode :trigger "__")
                      )
                     )
-(spec-handling-add! fold t
+(spec-handling-add! fold
                     '(org
                      :modes (org-mode doom-docs-org-mode)
                      :triggers (:open-all   +org/open-all-folds
@@ -105,28 +105,28 @@
                                 )
                      )
                     )
-(spec-handling-add! tagging nil
-                    '(org-mode
-                     :set +jg-org-set-tags
-                     :new +jg-org-set-new-tag
-                     :get org-get-tags
+(spec-handling-add! tagging
+                    `(org-mode
+                     :set ,#'+jg-org-set-tags
+                     :new ,#'+jg-org-set-new-tag
+                     :get ,#'org-get-tags
                      )
                     )
-(spec-handling-add! lookup-handler nil
-                    '(org-mode
-                     :definition +org-lookup-definition-handler
-                     :references +org-lookup-references-handler
-                     :documentation +org-lookup-documentation-handler
+(spec-handling-add! lookup-handler
+                    `(org-mode
+                     :definition ,#'+org-lookup-definition-handler
+                     :references ,#'+org-lookup-references-handler
+                     :documentation ,#'+org-lookup-documentation-handler
                      )
                     )
-(spec-handling-add! whitespace-cleanup nil
-                    '(org-mode
-                      delete-trailing-whitespace
-                      +jg-org-clean-heading-spaces
-                      +jg-text-cleanup-whitespace
+(spec-handling-add! whitespace-cleanup
+                    `(org-mode
+                      ,#'delete-trailing-whitespace
+                      ,#'+jg-org-clean-heading-spaces
+                      ,#'+jg-text-cleanup-whitespace
                      )
                  )
-(spec-handling-add! lookup-regular nil
+(spec-handling-add! lookup-regular
                     '(org-mode
                       ("Org Manual" . "https://orgmode.org/manual/")
                       ("Babel Manual" . "https://orgmode.org/worg/org-contrib/babel/intro.html")
@@ -135,7 +135,7 @@
                      ("Graphviz docs" . "https://graphviz.org/doc/info/lang.html")
                      )
                     )
-(spec-handling-add! popup nil
+(spec-handling-add! popup
                     '(org-mode
                       ("^\\*Org Links" :slot -1 :vslot -1 :size 2 :ttl 0)
                       ("^ ?\\*\\(?:Agenda Com\\|Calendar\\|Org Export Dispatcher\\)" :slot -1 :vslot -1 :size #'+popup-shrink-to-fit :ttl 0)

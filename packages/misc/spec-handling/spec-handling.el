@@ -98,7 +98,7 @@ this stops them being re-run repeatedly
   )
 
 ;;;###autoload
-(cl-defmacro spec-handling-new! (type target &rest body &key (sorted nil) (loop 'do) &allow-other-keys)
+(cl-defmacro spec-handling-new! (type target &rest body &key (sorted nil) (rmdups nil) (loop 'do) &allow-other-keys)
   " Simplifies Spec application and definition
 body is run for each (key . (vals)) of the spec-table and sets the value of target
 
@@ -114,12 +114,12 @@ return the generated feature name of this spec type
          (vals (make-symbol "vals"))
          (loop-kw (unquote! loop))
          (sort-fn (pcase sorted
-                    (nil nil)
+                    ('nil nil)
                     (t #'(lambda (x y) (< (car x) (car y))))
                     (_ sorted)))
          (unless-check (pcase loop-kw
-                         ('hook '((-contains? spec-handling-hook (function ,reapply-name))))
-                         (_     '((featurep (quote ,feature-name))))
+                         ('hook `((-contains? spec-handling-hook (function ,reapply-name))))
+                         (_     `((featurep (quote ,feature-name))))
                          )
                        )
          )

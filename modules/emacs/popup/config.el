@@ -11,7 +11,7 @@
   (load! "+bindings")
   )
 
-(add-hook! 'doom-init-ui-hook   #'+popup-mode 'append)
+(add-hook! 'doom-init-ui-hook :append #'+popup-mode)
 
 (add-hook! '+popup-buffer-mode-hook
            #'+popup-adjust-fringes-h

@@ -25,6 +25,7 @@
                                         (derived-mode . magit-mode)
                                         (name . "*vc*")
                                         (name . "*shasum*")
+                                        (name . "[[:space:]]+\\*.+")
                                         ))
                                )
                     '(dired (used-mode . dired-mode))

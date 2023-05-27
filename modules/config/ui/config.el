@@ -60,7 +60,13 @@
   ;; errors when first file is org: (add-hook! 'org-mode-local-vars-hook #'+indent-guides-disable-maybe-h)
   )
 
-(use-package! highlight-parentheses :defer t)
+(use-package! highlight-parentheses
+  :defer t
+  :init
+  (add-hook! doom-first-buffer
+             #'global-highlight-parentheses-mode
+             )
+  )
 
 (use-package! auto-highlight-symbol
   :commands auto-highlight-symbol-mode
@@ -75,7 +81,6 @@
 ;;-- end highlight
 
 ;;-- whitespace
-
 (use-package! whitespace
   :commands whitespace-mode
   :init
@@ -115,8 +120,11 @@
 
 ;;-- modeline
 
+(use-package! all-the-icons
+  :disabled t)
+
 (use-package! doom-modeline
-  :hook (doom-after-init . doom-modeline-mode)
+  :hook (doom-init-ui . doom-modeline-mode)
   :hook (doom-modeline-mode . size-indication-mode) ; filesize in modeline
   :hook (doom-modeline-mode . column-number-mode)   ; cursor column in modeline
   :init
@@ -130,7 +138,6 @@
   (add-hook    'after-setting-font-hook #'+modeline-resize-for-font-h)
   (add-hook    'doom-load-theme-hook #'doom-modeline-refresh-bars)
   (add-hook!   'magit-mode-hook #'+modeline-hide-in-non-status-buffer-h)
-
   )
 
 ;;-- end modeline
@@ -143,6 +150,7 @@
 
 ;;-- end search results
 
+;;-- transient
 ;; (use-package! transient
 ;;   :config
 
@@ -156,3 +164,5 @@
 ;;      ]
 ;;     )
 ;;   )
+
+;;-- end transient

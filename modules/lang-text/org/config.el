@@ -135,7 +135,6 @@
   (push '("dot" . graphviz-dot) org-src-lang-modes)
   )
 
-
 (use-package! org
   :defer-incrementally
   calendar find-func format-spec org-macs org-compat org-faces org-entities

@@ -1,7 +1,6 @@
 ;;; ui/workspaces/config.el -*- lexical-binding: t; -*-
 
 (load! "+vars")
-(load! "+vars")
 (load! "+funcs")
 (load! "+spec-defs")
 (after! jg-bindings-total

@@ -202,10 +202,10 @@
   :init
   (after! evil-surround (evil-embrace-enable-evil-surround-integration))
   :config
-  (spec-handling-new-hooks! evil-embrace
-                            ;; TODO
-                            (setq embrace--pairs-list (append val embrace--pairs-list))
-                            )
+  (spec-handling-new! evil-embrace nil :loop 'hook
+                      ;; TODO
+                      (setq embrace--pairs-list (append val embrace--pairs-list))
+                      )
 
   (defun +evil-embrace-angle-bracket-modes-hook-h ()
     (let ((var (make-local-variable 'evil-embrace-evil-surround-keys)))

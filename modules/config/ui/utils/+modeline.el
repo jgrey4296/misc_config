@@ -1,6 +1,5 @@
 ;;; +modeline.el -*- lexical-binding: t; -*-
 
-
 ;; Define your custom doom-modeline
 (doom-modeline-def-modeline 'my-simple-line
 '(bar matches buffer-info remote-host buffer-position parrot selection-info)
@@ -25,8 +24,8 @@
    t)
   )
 (doom-modeline 'minimal)
-(doom-modeline-set-modeline 'magit-mode)
-mode-line-format
+;; (doom-modeline-set-modeline 'magit-mode)
+;; mode-line-format
 
 (map! :map jg-help-map
       :prefix "u"

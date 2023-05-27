@@ -5,7 +5,7 @@
 (use-package! pythonic
   :defer t
   :init
-  (spec-handling-add! python-env nil
+  (spec-handling-add! python-env
                       `(pythonic
                         (:setup pythonic
                                 ,#'(lambda (state local) (pythonic-activate (f-join (plist-get state :path) (plist-get state :name)))
@@ -22,7 +22,7 @@
   :commands pipenv-project-p
   :init
   (setq pipenv-with-projectile nil)
-  (spec-handling-add! python-env nil
+  (spec-handling-add! python-env
                       `(pipenv
                         (:setup pipenv
                                 ,#'(lambda (state local) (pipenv-activate) nil)
@@ -58,7 +58,7 @@
   (when (modulep! :ui modeline)
     (add-hook 'pyvenv-post-activate-hooks #'+modeline-update-env-in-all-windows-h)
     (add-hook 'pyvenv-pre-deactivate-hooks #'+modeline-clear-env-in-all-windows-h))
-  (spec-handling-add! python-env nil
+  (spec-handling-add! python-env
                       `(venv
                         (:setup venv
                                 ,#'(lambda (state local) (pyvenv-activate (f-join
@@ -76,7 +76,7 @@
   :when (modulep! +conda)
   :after python
   :init
-  (spec-handling-add! python-env t
+  (spec-handling-add! python-env
                       `(conda_el
                         (:setup conda
                                 ,#'(lambda (state local)
@@ -118,7 +118,7 @@
 (use-package! poetry
   :after python
   :init
-  (spec-handling-add! python-env nil
+  (spec-handling-add! python-env
                       `(poetry
                         (:setup poetry
                                 ,#'(lambda (state) (poetry-venv-workon) nil)

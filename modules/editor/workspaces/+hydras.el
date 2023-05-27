@@ -2,7 +2,6 @@
 ;;
 ;; TODO hydra for control of workspaces, windows, window-ring settings
 (require 'hydra)
-(require 'transient)
 
 (defhydra hydra-workspace ()
   (format "%s\n" (+jg-hydra-format-columns
@@ -102,30 +101,4 @@
   ("[" window-ring-move-buffer-left   :exit nil)
   ("]" window-ring-move-buffer-right  :exit nil)
   ("h" nil)
-  )
-
-(progn
-  (transient-make-toggle! hide-mode-line-mode)
-  (transient-make-call!   quickscope
-                          (format "")
-
-                          )
-  )
-
-;;;###autoload
-(transient-define-prefix jg-transient-workspace ()
-  ""
-  []
-  [""
-   ("q" "Quit" transient-quit-one)
-   ]
-  )
-
-;;;###autoload
-(transient-define-prefix jg-transient-window-ring ()
-  ""
-  []
-  [""
-   ("q" "Quit" transient-quit-one)
-   ]
   )

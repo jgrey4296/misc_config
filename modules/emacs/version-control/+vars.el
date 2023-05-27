@@ -66,7 +66,7 @@ Only has an effect in GUI Emacs.")
       code-review-download-dir (concat doom-data-dir "code-review/")
       )
 
-(spec-handling-add! popup t
+(spec-handling-add! popup
                     '(magit
                      ("^\\(?:\\*magit\\|magit:\\| \\*transient\\*\\)" :ignore t :priority 200)
                      )

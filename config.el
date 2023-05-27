@@ -49,8 +49,6 @@
 (setq flycheck-global-modes nil)
 
 (add-hook! doom-first-buffer
-   #'global-highlight-parentheses-mode
-   #'global-autohide-minor-mode
    #'delete-selection-mode
    )
 

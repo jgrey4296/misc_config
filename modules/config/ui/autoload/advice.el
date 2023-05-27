@@ -59,17 +59,7 @@ TODO add fallback to project root
 (advice-add 'kill-current-buffer :before-until #'+jg-ui-kill-buffer-override)
 
 ;;;###autoload
-(defun +hl-todo-clamp-font-lock-fontify-region-a (fn &rest args)
-  "Fix an `args-out-of-range' error in some modes."
-  :around #'hl-todo-mode
-  (letf! #'font-lock-fontify-region (apply fn args))
-  )
-
-;;;###autoload
-(advice-add 'hl-todo-mode :around #'+hl-todo-clamp-font-lock-fontify-region-a)
-
-;;;###autoload
-(defun +modeline-disable-icon-in-daemon-a ()
+(defun +modeline-disable-icon-in-daemon-a (fn &rest args)
   ;; HACK Fix #4102 due to empty all-the-icons return value (caused by
   ;;      `doom--disable-all-the-icons-in-tty-a' advice) in tty daemon frames.
   (when (display-graphic-p)

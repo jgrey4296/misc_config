@@ -1,9 +1,10 @@
 ;;; -*- lexical-binding: t; -*-
 
 ;; A Simple minor mode to walk through every file in a project
-(defvar project-walk-buffer "*Project-Walk*")
-(defvar project-walk-root-text "# Root: ")
 
+(defvar project-walk-buffer "*Project-Walk*")
+
+(defvar project-walk-root-text "# Root: ")
 
 (defun project-walk-init ()
   (interactive)
@@ -19,6 +20,7 @@
       )
     )
   )
+
 (defun project-walk-directory-init ()
   (interactive)
   (let* ((current (read-directory-name "Starting Point: "))
@@ -44,6 +46,7 @@
     (flush-lines project-walk-filter-default-exclusions)
     )
 )
+
 (defun project-walk-filter-keep (arg)
   (interactive "MKeep filenames: ")
   (with-current-buffer project-walk-buffer
@@ -52,6 +55,7 @@
     (keep-lines arg)
     )
   )
+
 (defun project-walk-filter (arg)
   (interactive "MRegexp to filter: ")
   (with-current-buffer project-walk-buffer
@@ -61,36 +65,59 @@
     )
 )
 
+(defun project-walk--root ()
+  (with-current-buffer project-walk-buffer
+    (goto-char (point-max))
+    (when (re-search-backward project-walk-root-text nil t)
+      (buffer-substring (+ (point) (length project-walk-root-text))
+                        (line-end-position)))))
+
+(defun project-walk--find (file)
+  (let ((root (project-walk--root)))
+    (cond ((and (s-matches? "^/" file)
+                (f-exists? file))
+           (find-file file))
+          ((and root (f-exists? (f-join root file)))
+           (find-file (f-join root file)))
+          (t (message "Doesn't exist: %s %s" file root))
+          )
+    )
+  )
+
 (defun project-walk-next ()
+  " Go to the next buffer in 'project-walk-buffer
+going by the root (signified by (rx bol #))
+or by the last visited file (signified by (rx bol *))
+ "
   (interactive)
   (cond ((null (get-buffer project-walk-buffer))
          (message "Project Walk Not Started"))
-        ((with-current-buffer project-walk-buffer
-           (goto-char (point-max))
-           (re-search-backward "^\\(*\\|#\\) ")
-           (forward-line)
-           (not (< (point) (point-max))))
-         (message "Project Walk Completed"))
         (t (with-current-buffer project-walk-buffer
-             (let ((root (progn (goto-char (point-min))
-                                (buffer-substring (search-forward project-walk-root-text)
-                                                  (line-end-position))))
-                   (lineno (let ((maxline (line-number-at-pos (point-max)))
-                                 (minline (progn (re-search-backward "^\\(*\\|#\\) ")
-                                                 (forward-line 1)
-                                                 (line-number-at-pos))))
-                             (list minline maxline)))
-                   (filename (progn (goto-char (point-max))
-                                    (re-search-backward "^\\(*\\|#\\) ")
-                                    (forward-line 1)
-                                    (insert "* ")
-                                    (buffer-substring (point)
-                                                      (line-end-position))))
-                   )
-               (message "Walk List: %s/%s : %s" (1- (car lineno)) (1- (cadr lineno)) filename)
-               (find-file (f-join root filename))
-               ))
+             (goto-char (point-max))
+             (if (re-search-backward "^* " nil t)
+                 (forward-line 1)
+               (goto-char (point-min)))
+             (insert "* ")
+             (cond ((looking-at "/")
+                    (find-file (buffer-substring (point) (line-end-position))))
+                   (t (project-walk--find (buffer-substring (point) (line-end-position))))
+                   ))
            )
+        )
+  )
+
+(defun project-walk-prev ()
+  (interactive)
+  (cond ((null (get-buffer project-walk-buffer))
+         (message "Project Walk Not Started"))
+        (t (with-current-buffer project-walk-buffer
+             (goto-char (point-max))
+             (when (re-search-backward "^* " nil t)
+               (delete-region (point) (+ (point) 2))
+               )
+             (cond ((looking-at "/") (find-file (buffer-substring (point) (line-end-position))))
+                   (t (project-walk--find (buffer-substring (point) (line-end-position))))
+             )))
         )
   )
 
@@ -138,6 +165,7 @@
         )
   )
 
+;;;###autoload
 (define-minor-mode project-walk-minor-mode
   " A minor mode to walk through all "
   :lighter "Project-Walk"

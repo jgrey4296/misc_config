@@ -4,8 +4,11 @@
 (require 'benchmark)
 
 (defvar spec-handling-hook nil)
+
 (defvar spec-handling-feature-set nil)
+
 (defvar spec-handling-types (make-hash-table :test 'equal))
+
 (defconst spec-handling-gensym-plist '(:table "spec-table"
                                        :apply "reapply-specs-fn"
                                        :feature "spec-feature"
@@ -13,9 +16,18 @@
                                        :set "spec-set"
                                        :add "spec-add-delayed-fn"
                                        ))
+
 (defconst spec-handling-symbol-separator "-")
 
+(defun unquote! (val)
+  (if (and (consp val) (memq (car val) '(quote function)))
+      (cadr val)
+    val
+    )
+  )
+
 (defun spec-handling--add-type (type file &optional form)
+  "register a type of spec handler and where it is used"
   (unless (or (null file)
               (--some (and (eq (car it) (or form :source)) (eq (cadr it) file))
                       (gethash type spec-handling-types nil)))
@@ -56,6 +68,24 @@ this stops them being re-run repeatedly
   nil
   )
 
+(defun spec-handling--new-hook (type body)
+  " generate the loop body for a new hook "
+  `(do
+    (cl-loop for mode in (ensure-list key)
+             do
+             (let ((fn-name (spec-handling--gensym (quote ,type) mode :mode-hook)))
+               (fset fn-name
+                     (-partial (lambda (val)
+                                 ,@body
+                                 )
+                               val)
+                     )
+               (add-hook (intern (format "%s-hook" mode)) fn-name)
+               )
+             )
+    )
+  )
+
 ;;;###autoload
 (defun run-spec-handlers ()
   " Run spec handlers defined with spec-handling-new! and spec-handling-add! "
@@ -68,43 +98,70 @@ this stops them being re-run repeatedly
   )
 
 ;;;###autoload
-(defmacro spec-handling-new! (type target sorted accum-kw &rest body)
+(cl-defmacro spec-handling-new! (type target &rest body &key (sorted nil) (loop 'do) &allow-other-keys)
   " Simplifies Spec application and definition
-body is run for each (key . (vals)) of the spec-table and set as the value of
-target
+body is run for each (key . (vals)) of the spec-table and sets the value of target
+
+if target is 'do, the specs are applied in the body and don't target a variable
 TODO: add spec format docstring
+
+return the generated feature name of this spec type
  "
-  (cl-assert (-contains? '(collect append do) accum-kw))
-  (let ((table-name (spec-handling--gensym type :table))
-        (reapply-name (spec-handling--gensym type :apply))
-        (feature-name (spec-handling--gensym type :feature))
-        (fname (macroexp-file-name))
-        )
-    (spec-handling--add-type type fname :definition)
-     `(unless (featurep (quote ,feature-name))
+  (let* ((table-name (spec-handling--gensym type :table))
+         (reapply-name (spec-handling--gensym type :apply))
+         (feature-name (spec-handling--gensym type :feature))
+         (fname (macroexp-file-name))
+         (vals (make-symbol "vals"))
+         (loop-kw (unquote! loop))
+         (sort-fn (pcase sorted
+                    (nil nil)
+                    (t #'(lambda (x y) (< (car x) (car y))))
+                    (_ sorted)))
+         (unless-check (pcase loop-kw
+                         ('hook '((-contains? spec-handling-hook (function ,reapply-name))))
+                         (_     '((featurep (quote ,feature-name))))
+                         )
+                       )
+         )
+    ;; Remove keywords and their values from body:
+    (while (keywordp (car body)) (pop body) (pop body))
+    (cl-assert body t "Body of a spec handling definition can not be empty")
+    (cl-assert (memq loop-kw '(collect append do hook)))
+    (cl-assert (or target (memq loop-kw '(do hook))) t "Must have a target if loop isnt a 'do or 'hook")
+    (cl-assert (not (and target (memq loop-kw '(do hook)))) t "Can't have a target if loop is a 'do or 'hook")
+    (cl-assert (not (and sorted (memq loop-kw '(do hook)))) t "Sorting a 'do or 'hook loop doesn't make sense")
+    (spec-handling--add-type type fname (pcase loop-kw
+                                          ('hook :hooks-definition)
+                                          (_ :definition)
+                                          ))
+    ;; The macro's returned code:
+     `(unless ,@unless-check
         (defvar ,table-name (make-hash-table :test 'equal),(format "Macro generated hash-table to store specs for %s" type ))
         (fset (function ,reapply-name)
               (lambda (&optional dry)
-                ,(format "Macro-Generated spec application fn for: %s\n from: %s" type fname)
+                ,(format "Macro-Generated spec application fn for: %s\n from: %s\nArgs: (Sorted %s) (loop kw: %s)" type fname sorted loop)
                 (interactive)
-                (let ((vals (cl-loop for key being the hash-keys of ,table-name
-                                     using (hash-values val)
-                                     ,accum-kw
-                                     ,@body
-                                     )))
-                  ,(when sorted
-                     `(setq vals (mapcar #'cdr
-                                         (sort vals #'(lambda (x y) (< (car x) (car y))))
-                                         )
-                            )
+                (let ((,vals (cl-loop for key being the hash-keys of ,table-name
+                                      using (hash-values val)
+                                      ,@(pcase loop-kw
+                                          ('hook (spec-handling--new-hook type body))
+                                          (_ `(,loop-kw ,@body))
+                                          )
+                                      )))
+                  ,@(when sorted
+                     `((setq ,vals (mapcar #'cdr (sort ,vals ,sort-fn))))
                      )
-                  (unless dry
-                    (setq ,target (cl-remove-duplicates (-reject #'null vals))))
-                  vals
+                  ,@(when rmdups
+                      `((setq ,vals (cl-remove-duplicates (-reject #'null ,vals))))
+                      )
+                  ,@(when target
+                      `((unless dry
+                          (setq ,target ,vals)))
+                      )
+                  ,vals
                   )
                 )
               )
-
         (add-hook (quote spec-handling-hook) (function ,reapply-name))
         (provide (quote ,feature-name))
         (spec-handling-cleanup-after-provide (quote ,feature-name))
@@ -114,70 +171,8 @@ TODO: add spec format docstring
   )
 
 ;;;###autoload
-(defmacro spec-handling-new-hooks! (type &rest body)
-  " register handlers for given modes. adapted from doom's set-rotate-patterns! "
-  (let ((table-name (spec-handling--gensym type :table))
-        (reapply-name (spec-handling--gensym type :apply))
-        (feature-name (spec-handling--gensym type :feature))
-        (fname (macroexp-file-name))
-        )
-    (spec-handling--add-type type fname :hooks-definition)
-    `(unless (-contains? spec-handling-hook (function ,reapply-name))
-       (defvar ,table-name nil  ,(format "Macro generated hash-table to store specs for %s" type ))
-       (setq ,table-name (make-hash-table :test 'equal))
-       (fset (quote ,reapply-name)
-             (lambda (&optional dry)
-               ,(format "Macro-Generated spec application fn for: %s\n from: %s" type fname)
-               (interactive)
-               (cl-loop for modes being the hash-keys of ,table-name
-                        using (hash-values val)
-                        do
-                        (cl-loop for key in (ensure-list modes)
-                                 do
-                                 (let ((fn-name (spec-handling--gensym (quote ,type) key :mode-hook)))
-                                   (fset fn-name
-                                         (-partial (lambda (val)
-                                                     ,@body
-                                                     )
-                                                   val)
-                                         )
-                                   (add-hook (intern (format "%s-hook" key)) fn-name)
-                                   )
-                                 )
-                        )
-               )
-             )
-       (add-hook (quote spec-handling-hook) (function ,reapply-name))
-       (provide (quote ,feature-name))
-       (spec-handling-cleanup-after-provide (quote ,feature-name))
-       (quote ,feature-name)
-       )
-    )
-  )
-
-;;;###autoload
-(defmacro spec-handling-add! (type override &rest rules)
-  (let* ((fname (macroexp-file-name))
-         (table-name (spec-handling--gensym type :table))
-         (feature-name (spec-handling--gensym type :feature))
-         (add-fn-name (spec-handling--gensym type fname :add))
-         )
-    (spec-handling--add-type type fname :addition)
-    `(with-eval-after-load (quote ,feature-name)
-       (cl-loop for val in (list ,@rules)
-                ,@(if override '(do)
-                    `(if (gethash (car val) ,table-name nil)
-                         do (message "Spec Handling Add: Attempt to override Spec: %s - %s - %s" (quote ,type) (car val) ,fname)
-                         else do))
-                (puthash (car val) (cdr val) ,table-name)
-                )
-         )
-    )
-  )
-
-;;;###autoload
 (defmacro spec-handling-setq! (type &rest vals)
-  " register a hook to run late in 'spec-handling-hook' to in a setq "
+  " generate a setq hook "
   (let ((set-name (spec-handling--gensym type :set))
         (fname (macroexp-file-name)))
     (spec-handling--add-type type fname :setting)
@@ -189,11 +184,36 @@ TODO: add spec format docstring
   )
 
 ;;;###autoload
-(defmacro spec-handling-extend! (type &rest rules)
-  " extend a registered spec with more rules "
-  (let ((fname (macroexp-file-name)))
-    (spec-handling--add-type type fname :extension)
-    '()
+(cl-defmacro spec-handling-add! (type &rest rules &key (form 'basic) &allow-other-keys)
+  (let* ((fname (macroexp-file-name))
+         (tempvar (make-symbol "curr"))
+         (table-name (spec-handling--gensym type :table))
+         (feature-name (spec-handling--gensym type :feature))
+         (add-fn-name (spec-handling--gensym type fname :add))
+         (add-code (pcase (unquote! form)
+                     ('basic
+                      `(if (gethash (car val) ,table-name nil)
+                           do (message "Spec Handling Add: Attempt to override Spec: %s - %s - %s" (quote ,type) (car val) ,fname)
+                           else do (puthash (car val) (cdr val) ,table-name)))
+                     ('override `(do (puthash (car val) (cdr val) ,table-name)))
+                     ('extend `(do (let ((,tempvar (gethash (car val) ,table-name nil)))
+                                     (puthash (car val)
+                                              (append ,tempvar (cdr val))
+                                              ,table-name))))
+                      )
+                     )
+         )
+
+    (while (keywordp (car rules )) (pop rules) (pop rules))
+    (spec-handling--add-type type fname (pcase (unquote! form)
+                                          ('override :override)
+                                          ('extend :extension)
+                                          (_ :addition)))
+    `(with-eval-after-load (quote ,feature-name)
+       (cl-loop for val in (list ,@rules)
+                ,@add-code
+                )
+       )
     )
   )
 
@@ -217,12 +237,15 @@ TODO: add spec format docstring
 ;;;###autoload
 (defun spec-handling-report ()
   (interactive)
-  (let ((temp-buffer-window-show-hook '(org-mode)))
+  (let ((temp-buffer-window-show-hook '(org-mode))
+        (unique-files (make-hash-table :test 'equal))
+        )
     (with-temp-buffer-window "*Spec-Report*" #'display-buffer-same-window nil
       (princ (format "* (%s) Registered Specs --------------------\n\n" (length (hash-table-keys spec-handling-types))))
       (cl-loop for key being the hash-keys of spec-handling-types
                using (hash-values vals)
                do
+               (mapcar (-compose (-rpartial #'puthash t unique-files) #'cadr) vals)
                (let ((defs (--select (-contains? '(:definition :hooks-definition) (car it)) vals))
                      (adds (--select (equal :addition (car it)) vals))
                      (exts (--select (equal :extension (car it)) vals))
@@ -244,10 +267,12 @@ TODO: add spec format docstring
                  (princ "\n\n")
                  )
                )
+      (princ "* File List:\n")
+      (dolist (file (sort (hash-table-keys unique-files) #'string-lessp))
+        (princ (format "%s\n" file)))
       )
     )
   )
-
 
 (provide 'spec-handling)
 

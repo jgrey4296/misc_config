@@ -20,14 +20,6 @@
       :desc "Goto Last Line"        "F"   #'evil-goto-line
       :desc "Search buffer"         "s"   #'swiper
       )
-(map! :map jg-binding-jump-map ;; lookup
-      :desc "Type definition"       "t" #'+lookup/type-definition
-      :desc "References"            "r" #'+lookup/references
-      :desc "Definition"            "d" #'+lookup/definition
-      :desc "Implementations"       "i" #'+lookup/implementations
-      :desc "Find other file"       "o" #'projectile-toggle-between-implementation-and-test
-      ;; :desc "Documentation"      "k" #'+lookup/documentation
-      )
 (map! :map jg-binding-jump-map ;; gtags
       :prefix ("g" . "gtags")
       :desc "Create Tags"           "c" #'helm-gtags-create-tags

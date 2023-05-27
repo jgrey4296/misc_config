@@ -31,7 +31,14 @@
       :desc "Insert snippet"        "i" #'yas-insert-snippet
       :desc "Find global snippet"   "/" #'yas-visit-snippet-file
       :desc "Reload snippets"       "r" #'yas-reload-all
-
+       (:prefix ("l" . "Lorem Ipsum")
+        :desc "Sentence"         "s" #'lorem-ipsum-insert-sentences
+        :desc "Paragraph"        "p" #'lorem-ipsum-insert-paragraphs
+        :desc "List"             "l" #'lorem-ipsum-insert-list
+        :desc "Academic"         "a" #'academic-phrases
+        :desc "Academic Section" "A" #'academic-phrases-by-section
+        :desc "License"               "L" #'license-templates-insert
+        )
 
       )
 ;;-- end snippets

@@ -11,7 +11,18 @@
 
 (map! :map jg-binding-jump-map
       :desc "Browse URL"           "u" #'browse-select-goto-url
-      )
+
+      (:prefix ("k" . "Docs")
+       :desc "Type definition"       "t" #'+lookup/type-definition
+       :desc "References"            "r" #'+lookup/references
+       :desc "Definition"            "d" #'+lookup/definition
+       :desc "Implementations"       "i" #'+lookup/implementations
+       :desc "Find other file"       "o" #'projectile-toggle-between-implementation-and-test
+       :desc "Documentation"         "k" #'+lookup/documentation
+       :desc "Word(net)"                 "w" #'helm-wordnet-suggest
+       :desc "Word(nut)"                 "W" #'wordnut-search
+       )
+)
 
 (map! :map eww-mode-map
       :n "=" 'eww-copy-page-url

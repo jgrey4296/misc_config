@@ -1,6 +1,7 @@
 ;;; editor/window-control/+bindings.el -*- lexical-binding: t; -*-
 
 (map! :leader
+      :desc "Transient Toggle"              "T"    #'jg-toggle-main
       (:prefix "w"
        :desc "Toggle Layout"               "|"     #'+jg-ui-window-layout-toggle
        :desc "Rotate Windows"              "\\"    #'+jg-ui-window-rotate-forward
@@ -65,3 +66,10 @@
       :desc "Insert Palette Faces" "c" #'+jg-ui-insert-faces
       )
 ;;-- end misc
+
+;;-- transient
+;; transient-map transient-base-map transient-edit-map
+
+
+
+;;-- end transient

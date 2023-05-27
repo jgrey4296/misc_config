@@ -22,15 +22,6 @@
 
       (:prefix "i"
        :desc "Breakpoint" "b" #'+jg-text-insert-debug
-       :desc "License"    "L" #'license-templates-insert
-
-       (:prefix ("l" . "Lorem Ipsum")
-        :desc "Sentence"         "s" #'lorem-ipsum-insert-sentences
-        :desc "Paragraph"        "p" #'lorem-ipsum-insert-paragraphs
-        :desc "List"             "l" #'lorem-ipsum-insert-list
-        :desc "Academic"         "a" #'academic-phrases
-        :desc "Academic Section" "A" #'academic-phrases-by-section
-        )
        )
       )
 
@@ -49,13 +40,9 @@
       :desc "Invisible-spec" "i" #'+jg-text-toggle-invisible-spec
       )
 
-(map! :map jg-binding-normal-state-map
-      :after undo-fu
-      :desc "undo" "u" 'undo-fu-only-undo
-      :desc "redo" "U" 'undo-fu-only-redo
-      )
 
 (map! :map jg-binding-visual-state-map
+      :desc "Grow Selection " "v g"        #'+jg-text-grow-selection-op
       :desc "Select Buffer"   "v RET"      #'+jg-text-whole-buffer-textobj
       :desc "contract"        "v SPC"      #'+jg-text-visual-contract
       :desc "Clone selection" "|"          #'+jg-text-yank-selection-to-new-buffer
@@ -101,8 +88,8 @@
 
 (map! :map jg-binding-change-map
       :desc "split line"                  "RET" #'electric-newline-and-maybe-indent
-      :desc "set buffer coding"          "0"   #'set-buffer-file-coding-system
-      :desc "indent"                     "TAB" #'indent-region
+      :desc "set buffer coding"           "0"   #'set-buffer-file-coding-system
+      :desc "indent"                      "TAB" #'indent-region
 
       :desc "Align"                       "a" #'align-regexp
       :desc "Comment"                     "c" #'evilnc-comment-operator
@@ -114,7 +101,7 @@
       :desc "Incr"                        "K" #'+jg-text-inc-num
       :desc "Shift Left"                  "h" #'+jg-text-shift-left
       :desc "Shift Right"                 "l" #'+jg-text-shift-right
-      :desc "Title Case"     "t"   #'+jg-text-title-case-op
+      :desc "Title Case"                  "t" #'+jg-text-title-case-op
 
       (:prefix ("w" . "Words")
        :desc "inflection"                "i" #'evil-operator-string-inflection
@@ -146,7 +133,6 @@
       )
 
 (map! :map jg-binding-operator-map
-      :desc "Vundo"                       "u" #'vundo
       :desc "Complete/Grow Selection"     "g" (cmds! (eq evil-state 'normal) #'company-manual-begin
                                                      (eq evil-state 'visual) #'+jg-text-grow-selection-op)
       :desc "Align"                       "a" #'align-regexp
@@ -164,11 +150,6 @@
        :desc "Keep Lines"                 "k"   #'keep-lines
        :desc "Uniquify"                   "u"   #'delete-duplicate-lines
        :desc "Untabify"                   "TAB" #'untabify
-       )
-
-      (:prefix ("i" . "info")
-       :desc "Word(net)"                 "w" #'helm-wordnet-suggest
-       :desc "Word(nut)"                 "W" #'wordnut-search
        )
 
       (:prefix ("/" . "Search")
@@ -190,13 +171,6 @@
        )
       )
 
-(map! :mode vlf-mode
-      :after vlf-mode
-      "] A" 'vlf-next-batch-from-point
-      "] a" 'vlf-next-batch
-      "[ a" 'vlf-prev-batch
-      "SPC a U v " 'vlf-set-batch-size
-      )
 
 (after! calendar
   (setq calendar-mode-map (make-sparse-keymap))

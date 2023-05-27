@@ -40,6 +40,7 @@
 (map! :map jg-help-map
       :prefix ("c" . "code")
       "a" #'doom/help-autodefs
+      "b" #'eieio-browse
       "f" #'describe-function
       "P" #'find-library
       "t" #'doom/toggle-profiler

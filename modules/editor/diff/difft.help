@@ -1,0 +1,151 @@
+Difftastic 0.47.0
+Wilfred Hughes <me@wilfred.me.uk>
+A structural diff that understands syntax.
+
+USAGE:
+    difft [OPTIONS] OLD-PATH NEW-PATH
+
+OPTIONS:
+        --background <BACKGROUND>
+            Set the background brightness. Difftastic will prefer brighter colours on dark
+            backgrounds.
+
+            [env: DFT_BACKGROUND=]
+            [default: dark]
+            [possible values: dark, light]
+
+        --byte-limit <LIMIT>
+            Use a text diff if either input file exceeds this size.
+
+            [env: DFT_BYTE_LIMIT=]
+            [default: 1000000]
+
+        --check-only
+            Report whether there are any changes, but don't calculate them. Much faster.
+
+            [env: DFT_CHECK_ONLY=]
+
+        --color <WHEN>
+            When to use color output.
+
+            [env: DFT_COLOR=]
+            [default: auto]
+            [possible values: always, auto, never]
+
+        --context <LINES>
+            The number of contextual lines to show around changed lines.[env: DFT_CONTEXT=]
+            [default: 3]
+
+        --display <MODE>
+            Display mode for showing results.
+
+            side-by-side: Display the before file and the after file in two separate columns, with
+            line numbers aligned according to unchanged content. If a change is exclusively
+            additions or exclusively removals, use a single column.
+
+            side-by-side-show-both: The same as side-by-side, but always uses two columns.
+
+            inline: A single column display, closer to traditional diff display.
+
+            [env: DFT_DISPLAY=]
+            [default: side-by-side]
+            [possible values: side-by-side, side-by-side-show-both, inline]
+
+        --exit-code
+            Set the exit code to 1 if there are syntactic changes in any files. For files where
+            there is no detected language (e.g. unsupported language or binary files), sets the exit
+            code if there are any byte changes.
+
+            [env: DFT_EXIT_CODE=]
+
+        --graph-limit <LIMIT>
+            Use a text diff if the structural graph exceed this number of nodes in memory.
+
+            [env: DFT_GRAPH_LIMIT=]
+            [default: 3000000]
+
+    -h, --help
+            Print help information
+
+        --ignore-comments
+            Don't consider comments when diffing.
+
+            [env: DFT_IGNORE_COMMENTS=]
+
+        --list-languages
+            Print the all the languages supported by difftastic, along with their extensions.
+
+        --missing-as-empty
+            Treat paths that don't exist as equivalent to an empty file. Only applies when diffing
+            files, not directories.
+
+        --override <GLOB:NAME>
+            Associate this glob pattern with this language, overriding normal language detection.
+            For example:
+
+            $ difft --override='*.c:C++' old.c new.c
+
+            Language names are matched case insensitively. Overrides may also specify the language
+            "text" to treat a file as plain text.
+
+            This argument may be given more than once. For example:
+
+            $ difft --override='CustomFile:json' --override='*.c:text' old.c new.c
+
+            To configure multiple overrides using environment variables, difftastic also accepts
+            DFT_OVERRIDE_1 up to DFT_OVERRIDE_9.
+
+            $ export DFT_OVERRIDE='CustomFile:json'
+            $ export DFT_OVERRIDE_1='*.c:text'
+            $ export DFT_OVERRIDE_2='*.js:javascript jsx'
+
+            When multiple overrides are specified, the first matching override wins.
+
+            [env: DFT_OVERRIDE=]
+
+        --parse-error-limit <LIMIT>
+            Use a text diff if the number of parse errors exceeds this value.
+
+            [env: DFT_PARSE_ERROR_LIMIT=]
+            [default: 0]
+
+        --skip-unchanged
+            Don't display anything if a file is unchanged.
+
+        --syntax-highlight <on/off>
+            Enable or disable syntax highlighting.
+
+            [env: DFT_SYNTAX_HIGHLIGHT=]
+            [default: on]
+            [possible values: on, off]
+
+        --tab-width <NUM_SPACES>
+            Treat a tab as this many spaces.[env: DFT_TAB_WIDTH=]
+            [default: 8]
+
+    -V, --version
+            Print version information
+
+        --width <COLUMNS>
+            Use this many columns when calculating line wrapping. If not specified, difftastic will
+            detect the terminal width.[env: DFT_WIDTH=]
+
+DEBUG OPTIONS:
+        --dump-syntax <PATH>
+            Parse a single file with tree-sitter and display the difftastic syntax tree.
+
+        --dump-ts <PATH>
+            Parse a single file with tree-sitter and display the tree-sitter parse tree.
+
+You can compare two files with difftastic by specifying them as arguments.
+
+$ difft old.js new.js
+
+You can also use directories as arguments. Difftastic will walk both directories and compare files
+with matching names.
+
+$ difft old/ new/
+
+Difftastic can also be invoked with 7 arguments in the format that GIT_EXTERNAL_DIFF expects.
+
+See the full manual at: https://difftastic.wilfred.me.uk/

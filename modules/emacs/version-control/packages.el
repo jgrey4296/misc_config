@@ -7,7 +7,6 @@
 (package! forge )
 (package! code-review :recipe (:files ("graphql" "code-review*.el")))
 (package! magit-todos )
-(package! vdiff)
 (package! vdiff-magit)
 (package! vi-tilde-fringe)
 

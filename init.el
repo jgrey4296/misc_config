@@ -7,7 +7,7 @@
 
  :editor (evil +everywhere) format
  :editor char-insert fold navigation tagging text-manipulation
- :editor fold snippets lookup workspaces
+ :editor fold snippets lookup workspaces diff
 
  :emacs electric vc autosave
  :emacs dired hydra ibuffer popup version-control

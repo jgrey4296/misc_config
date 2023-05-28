@@ -6,21 +6,6 @@
 (after! (jg-bindings-total ibuffer)
   (load! "+bindings")
  )
-(after! (ibuffer ivy)
-  (defadvice! +ibuffer--use-counsel-maybe-a (_file &optional _wildcards)
-    "Use `counsel-find-file' instead of `find-file'."
-    :override #'ibuffer-find-file
-    (interactive
-     (let* ((buf (ibuffer-current-buffer))
-            (default-directory (if (buffer-live-p buf)
-                                   (with-current-buffer buf
-                                     default-directory)
-                                 default-directory)))
-       (list (counsel--find-file-1 "Find file: " nil
-                                   #'identity
-                                   'counsel-find-file) t)))
-    (find-file _file _wildcards))
-  )
 
 (use-package! ibuffer
   :config

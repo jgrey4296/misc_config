@@ -115,6 +115,9 @@ See `+emacs-lisp-non-package-mode' for details.")
                       ("Melpa" . "https://melpa.org/#/")
                       ("Doom"  . "https://github.com/doomemacs/doomemacs")
                       )
+                    '(racket-mode
+                      ("Racket Docs" . "https://docs.racket-lang.org/")
+                      )
                     )
 (spec-handling-add! lookup-url
                     '(lisp

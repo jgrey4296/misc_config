@@ -2,6 +2,13 @@
 (require 'transient)
 
 (defvar fmt-as-bool-pair '("T" . "F"))
+(defvar transient-quit!
+  [
+   ""
+   ("q" "Quit" transient-quit-one)
+   ]
+  " Reusable simple quit for transients "
+  )
 
 ;;;###autoload
 (defun fmt-as-bool (arg)
@@ -36,13 +43,16 @@
   (let ((fullname (intern (format "jg-transient-toggle-%s" (symbol-name mode))))
         (name (or desc (symbol-name mode)))
         )
-     `(transient-define-suffix ,fullname ()
+    `(progn
+       (defvar ,mode nil)
+       (transient-define-suffix ,fullname ()
                :transient t
                ,@(when key (list :key key))
                :description (lambda () (format "%-2s : %s" (fmt-as-bool ,mode) ,name))
                (interactive)
                (,mode 'toggle)
                )
+       )
      )
   )
 
@@ -50,11 +60,11 @@
 (cl-defmacro transient-make-call! (mode fmt &body body)
   (let ((fullname (intern (format "jg-transient-call-%s" (symbol-name mode))))
         )
-     `(transient-define-suffix ,fullname ()
-               :transient t
-               :description (lambda () fmt)
-               (interactive)
-               ,@body
-               )
+    `(transient-define-suffix ,fullname ()
+         :transient t
+         :description (lambda () ,fmt)
+         (interactive)
+         ,@body
+         )
      )
   )

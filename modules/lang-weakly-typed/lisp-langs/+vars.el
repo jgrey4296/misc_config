@@ -103,7 +103,7 @@ See `+emacs-lisp-non-package-mode' for details.")
                     )
 
 (spec-handling-add! whitespace-cleanup
-                    '(emacs-lisp-mode
+                    `(emacs-lisp-mode
                       ,#'delete-trailing-whitespace
                       ,#'+jg-lisp-cleanup-ensure-newline
                       ,#'+jg-text-cleanup-whitespace)

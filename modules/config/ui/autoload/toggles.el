@@ -1,16 +1,17 @@
 ;;; toggles.el -*- lexical-binding: t; -*-
 
-
 ;;;###autoload
 (defun +jg-ui-toggle-line-numbers ()
   (interactive)
   (setq-default display-line-numbers (if (not (eq display-line-numbers t)) t nil))
   )
+
 ;;;###autoload
 (defun +jg-ui-toggle-line-numbers-visual ()
   (interactive)
   (setq-default display-line-numbers (if (not (eq display-line-numbers 'visual)) 'visual nil))
   )
+
 ;;;###autoload
 (defun +jg-ui-toggle-window-dedication ()
   (interactive)
@@ -21,6 +22,7 @@
       (message "Window is un-dedicated"))
     )
   )
+
 ;;;###autoload
 (defun +jg-ui-toggle-line-move-ignore-invisible ()
   (interactive)

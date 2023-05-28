@@ -1,7 +1,6 @@
 ;;; editor/window-control/+funcs.el -*- lexical-binding: t; -*-
 
 
-;;-- buffer opening
 (defun +jg-ui-open-scratch-buffer (&optional arg)
   "Customised doom/open-project-scratch-buffer because it doesn't use pop-to-buffer "
   (interactive "P")
@@ -19,8 +18,8 @@
             ((symbolp doom-scratch-initial-major-mode)
              doom-scratch-initial-major-mode))
       default-directory
-        (doom-project-name)))))
-;;-- end buffer opening
+      (doom-project-name))))
+  )
 
 (defun +jg-misc-modify-line-end-display-table ()
   (interactive)

@@ -51,7 +51,9 @@ If no viewer is found, `latex-preview-pane-mode' is used.")
       ;; Automatically insert braces after sub/superscript in `LaTeX-math-mode'.
       TeX-electric-sub-and-superscript t
       ;; Just save, don't ask before each compilation.
-      TeX-save-query nil)
+      TeX-save-query nil
+      LaTeX-enable-toolbar nil
+      )
 
 ;;-- reftex
 ;; Get RefTeX working with BibLaTeX, see

@@ -2,7 +2,7 @@
 
 ;;-- definitions
 
-(defvar +lsp-defer-shutdown 3 "If non-nil, defer shutdown of LSP servers for this many seconds after last workspace buffer is closed.")
+(defvar +lsp-defer-shutdown 10 "If non-nil, defer shutdown of LSP servers for this many seconds after last workspace buffer is closed.")
 
 (defvar +lsp--default-read-process-output-max nil)
 

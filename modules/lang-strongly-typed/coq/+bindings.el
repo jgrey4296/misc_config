@@ -1,7 +1,9 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
-(map! :after coq-mode
-      :map coq-mode-map
+(defvar jg-coq-mode-map (make-sparse-keymap))
+(evil-make-intercept-map jg-coq-mode-map)
+
+(map! :map jg-coq-mode-map
       :localleader
       "]"  #'proof-assert-next-command-interactive
       "["  #'proof-undo-last-successful-command
@@ -40,7 +42,7 @@
         "t" #'coq-insert-tactic
         "T" #'coq-insert-tactical)
       )
-(map! :map coq-mode-map
+(map! :map jg-coq-mode-map
         :localleader
         "ao" #'company-coq-occur
         (:prefix "i"
@@ -51,7 +53,7 @@
           "E" #'company-coq-browse-error-messages
           "h" #'company-coq-doc))
 
-(map! :map coq-mode-map
+(map! :map jg-coq-mode-map
       :after coq
       "RET" nil
       "DEL" nil
@@ -78,11 +80,7 @@
 
       )
 
-(evil-make-intercept-map coq-mode-map)
 
-;; (spacemacs/set-leader-keys-for-major-mode 'coq-mode
-;;   (kbd "i m") 'coq-insert-match
-;;   (kbd "i i") 'coq-insert-intros
-;;   (kbd "i t t") 'coq-insert-tactic
-;;   (kbd "i t s") 'coq-insert-solve-tactic
-;;   )
+(after! coq-mode
+  (setq coq-mode-map jg-coq-mode-map)
+  )

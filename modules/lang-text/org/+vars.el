@@ -1,24 +1,29 @@
 ;;; lang/jg-org/+vars.el -*- lexical-binding: t; -*-
 
-(defvar jg-org-mode-map (make-sparse-keymap))
-
 ;; (textobjects insert navigation additional shift todo heading calendar)
 (setq evil-org-key-theme '(textobjects insert shift todo))
 
-
 ;;-- personal
+
 (defvar jg-org-external-file-link-types '("jpg" "jpeg" "png" "mp4" "html"))
+
 (defvar jg-org-clean-marker nil)
+
 (defvar jg-org-preferred-linecount 1500)
+
 (defvar jg-org-link-move-base "/Volumes/Overflow/missing_images/")
+
 (defvar jg-org-twitter-loc "/Volumes/documents/twitter_threads/")
 ;;-- end personal
 
 ;;-- pomodoro
 ;; set pomodoro log variable
+
 (defcustom jg-org-pomodoro-log-file (expand-file-name "setup_files/pomodoro_log.org" doom-user-dir) "The Location of the Pomodoro Log File")
+
 (defcustom jg-org-pomodoro-buffer-name "*Pomodoro Log*"
   "The name of the Pomodoro Log Buffer to record what I did in")
+
 (defcustom jg-org-pomodoro-log-message ";; What did the last Pomodoro session accomplish? C-c to finish\n"
   "The message to add to the log buffer to spur comments")
 (after! org-pomodoro

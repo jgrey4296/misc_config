@@ -5,6 +5,8 @@
 (after! evil
   (load! "+bindings")
   )
+(add-hook! 'minibuffer-inactive-mode-hook :append #'company-mode)
+(add-hook! 'minibuffer-setup-hook :append #'company-mode)
 
 (use-package! company
   :commands (company-complete-common

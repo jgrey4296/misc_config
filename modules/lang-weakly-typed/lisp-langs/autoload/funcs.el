@@ -2,16 +2,20 @@
 
 ;; Simple Functions to feed into sort-subr
 
+;;;###autoload
 (defun +jg-lisp-key-start ()
   (re-search-forward "(defun " nil t)
   (symbol-at-point))
 
+;;;###autoload
 (defun +jg-lisp-next-rec-end-func ()
   (evil-forward-end 'evil-defun))
 
+;;;###autoload
 (defun +jg-lisp-next-rec-func ()
   (evil-forward-beginning 'evil-defun))
 
+;;;###autoload
 (defun +jg-lisp-sort-defuns ()
   " A Lisp buffer sorting function "
   (interactive)
@@ -24,6 +28,7 @@
   (goto-char (point-min))
   )
 
+;;;###autoload
 (defun +jg-lisp-eval (beg end)
   "Evaluate a region and print it to the echo area (if one line long), otherwise
 to a pop up buffer."
@@ -44,6 +49,7 @@ to a pop up buffer."
         (kill-buffer buffer))))
    (current-buffer)))
 
+;;;###autoload
 (defun +jg-lisp-cleanup-ensure-newline()
   (while (re-search-forward (rx (group ) (opt ";;;###" (+? any) "\n")
                                 bol (syntax open-parenthesis)  (| "def" "use") (+? any) eol) nil t)

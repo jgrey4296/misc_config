@@ -1,5 +1,6 @@
 ;;; lang/jg-org/+dired.el -*- lexical-binding: t; -*-
 
+;;;###autoload
 (defun +jg-org-display-selection (n)
   "Open only a selection of large files "
   (interactive "nNum Chars: ")
@@ -8,6 +9,8 @@
               (-zip-fill n files '()))
     )
   )
+
+;;;###autoload
 (defun +jg-org-dired-clean ()
   " Remove Surplus headings, sort, remove duplicate tweets,
 remove empty threads "
@@ -31,6 +34,8 @@ remove empty threads "
     (message "Removed Surplus except for: %s" failures)
     )
   )
+
+;;;###autoload
 (defun +jg-org-dired-select-org ()
   (interactive)
   (dired-mark-if

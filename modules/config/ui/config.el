@@ -6,6 +6,8 @@
 (after! jg-bindings-total
   (load! "+bindings")
   )
+(autoload #'jg-toggle-main
+  (file-name-concat (dir!) "autoload/transient-toggles"))
 
 ;;-- highlight
 

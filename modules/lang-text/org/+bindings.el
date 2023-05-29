@@ -1,6 +1,11 @@
 ;;; main/jg-org/+bindings.el -*- lexical-binding: t; -*-
 (doom-log "Setting up general access org bindings: %s" (current-time-string))
 
+(defvar jg-org-mode-map (make-sparse-keymap))
+(evil-make-overriding-map jg-org-mode-map)
+
+(load! "util/+org-standard-bindings")
+
 ;;-- leader map
 (map! :leader
       :desc "Insert Timestamp"  "i t"   #'org-time-stamp
@@ -136,5 +141,9 @@
       "p" #'org-journal-search-prev
       )
 
-(evil-make-overriding-map jg-org-mode-map)
-(setq org-mode-map jg-org-mode-map)
+(after! (evil-org org-mode)
+  (setq org-mode-map jg-org-mode-map
+        evil-org-mode-map jg-org-mode-map
+        )
+
+  )

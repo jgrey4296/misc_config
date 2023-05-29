@@ -8,6 +8,10 @@
 
 (defvar jg-text-debug-snippet-name "util.debug")
 
+(setq-default tab-always-indent t
+              indent-tabs-mode nil
+              )
+
 ;;-- smartparens
 (setq sp-highlight-pair-overlay nil
         sp-highlight-wrap-overlay nil

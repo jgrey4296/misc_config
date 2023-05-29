@@ -3,7 +3,9 @@
 (load! "+defs")
 (load! "+vars")
 (load! "+spec-defs")
-(after! evil-ex (load! "+commands") (load! "+evil-ex-setup"))
+(after! (evil-collection evil-ex)
+  (load! "+commands") (load! "+evil-ex-setup")
+  )
 
 (use-package! evil
   :hook (doom-after-modules-config . evil-mode)

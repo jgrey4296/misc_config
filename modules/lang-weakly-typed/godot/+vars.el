@@ -1,7 +1,6 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
 
-;;-- file templates
 (spec-handling-add! file-templates
                     '(gdscript-mode
                      ("\\.gd$"           :trigger "__" :mode gdscript-mode)
@@ -14,6 +13,6 @@
                      ("GDScript" . "https://gdscript.com/solutions/")
                      ("GuT" . "https://bitwes.github.io/GutWiki/Godot4/Home.html")
                      ("GdUnit" . "https://mikeschulze.github.io/gdUnit4/")
+                     ("Shaders" . "https://www.ronja-tutorials.com/")
                      )
                     )
-;;-- end file templates

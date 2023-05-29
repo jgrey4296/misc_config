@@ -76,8 +76,7 @@ variable for an explanation of the defaults (in comments). See
   ;;         (kill-new (prin1-to-string list))))))
 
   (defvar evil-collection-mode-list
-    `(2048-game
-      ag
+    `(ag
       alchemist
       anaconda-mode
       apropos

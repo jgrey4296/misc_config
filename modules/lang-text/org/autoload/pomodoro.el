@@ -1,6 +1,6 @@
 ;;; org/jg-org/+org-pomodoro-funcs.el -*- lexical-binding: t; -*-
 
-
+;;;###autoload
 (defun +jg-org-pomodoro-start-hook ()
   ;; tweet out start and end points
   ;; use org-pomodoro-end-time
@@ -8,6 +8,8 @@
    (format "Emacs Pomodoro Timer Session to end: %s"
            (format-time-string "%H:%M (%d, %b, %Y)" org-pomodoro-end-time)))
   )
+
+;;;###autoload
 (defun +jg-org-pomodoro-end-hook ()
   ;; create the temp buffer
   (progn
@@ -24,6 +26,8 @@
     (redraw-display)
     )
   )
+
+;;;###autoload
 (defun +jg-org-pomodoro-finish ()
   ;; get the text
   (interactive)

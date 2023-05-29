@@ -1,6 +1,7 @@
 ;;; lang/jg-org/+text-utils.el -*- lexical-binding: t; -*-
 ;; Functions to operate on Org Text
 
+;;;###autoload
 (defun +jg-org-insert-heading-trio ()
   (interactive)
   (org-insert-subheading 1)
@@ -11,6 +12,7 @@
   (insert "3: ")
   )
 
+;;;###autoload
 (defun +jg-org-change-link-name (name)
   " Change the name of a link "
   (interactive "s")
@@ -22,6 +24,8 @@
       )
     )
   )
+
+;;;###autoload
 (defun +jg-org-fill-paragraph-reverse ()
   " from END to START of buffer, fill paragraphs "
   (interactive)
@@ -52,6 +56,8 @@
       )
     )
   )
+
+;;;###autoload
 (defun +jg-org-refill-links ()
   ;;Find and replace
   (goto-char (point-min))
@@ -59,6 +65,8 @@
     (replace-match "][")
     )
 )
+
+;;;###autoload
 (defun +jg-org-move-links ()
   " Go through all links in a file,
 and either copy, or move, the referenced file to a new location
@@ -86,6 +94,8 @@ Prefix-arg to move the file otherwise copy it
       )
     )
   )
+
+;;;###autoload
 (defun +jg-org-wrap-numbers (a b)
   "Find numbers and wrap them in parentheses to avoid org treating them as lists"
   (interactive "r")
@@ -95,6 +105,8 @@ Prefix-arg to move the file otherwise copy it
     (replace-match "\n(\\1)")
     )
   )
+
+;;;###autoload
 (defun +jg-org-wrap-non-link-urls ()
   "Find urls that are not wrapped into org link format, and wrap them"
   (interactive)
@@ -106,6 +118,8 @@ Prefix-arg to move the file otherwise copy it
       )
     )
   )
+
+;;;###autoload
 (defun +jg-org-sort-headings ()
   " Call org-sort-entries on a buffer "
   (message "Sorting Headings")

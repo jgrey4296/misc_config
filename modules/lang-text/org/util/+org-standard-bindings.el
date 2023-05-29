@@ -2,18 +2,6 @@
 ;; Misc
 (doom-log "Setting up org main bindings: %s" (current-time-string))
 
-;; Unbinds
-;; (map! :map org-mode-map
-;;       "C-c [" nil
-;;       "C-c ]" nil
-
-;;       :localleader
-;;       "f" nil
-;;       "." nil
-;;       "i" nil
-;;       "t" nil
-;;       )
-
 ;; Leaderless
 (map! :map jg-org-mode-map
       ;; textmate-esque newline insertion

@@ -1,13 +1,13 @@
 ;;; +hooks.el -*- lexical-binding: t; -*-
 
-;;; `org-load' hooks
-
+;;;###autoload
 (defun +org-init-org-directory-h ()
   (unless org-directory
     (setq-default org-directory "~/org"))
   (unless org-id-locations-file
     (setq org-id-locations-file (expand-file-name ".orgids" org-directory))))
 
+;;;###autoload
 (defun +org-init-agenda-h ()
   (unless org-agenda-files
     (setq-default org-agenda-files (list org-directory)))
@@ -31,6 +31,7 @@
    ;; them anyway (see `+org-exclude-agenda-buffers-from-workspace-h')
    org-agenda-inhibit-startup t))
 
+;;;###autoload
 (defun +org-init-appearance-h ()
   "Configures the UI for `org-mode'."
   (setq org-indirect-buffer-display 'current-window
@@ -126,6 +127,7 @@
     :quote_end "#+END_QUOTE"
     :quote_end "#+end_quote"))
 
+;;;###autoload
 (defun +org-init-babel-h ()
   (setq org-src-preserve-indentation t  ; use native major-mode indentation
         org-src-tab-acts-natively t     ; we do this ourselves
@@ -253,6 +255,7 @@ Also adds support for a `:sync' parameter to override `:async'."
       (setq org-ditaa-jar-path     (expand-file-name "scripts/ditaa.jar")
             org-ditaa-eps-jar-path (expand-file-name "scripts/DitaaEps.jar")))))
 
+;;;###autoload
 (defun +org-init-babel-lazy-loader-h ()
   "Load babel libraries lazily when babel blocks are executed."
   (defun +org--babel-lazy-load (lang &optional async)
@@ -294,6 +297,7 @@ Also adds support for a `:sync' parameter to override `:async'."
 
   (advice-add #'org-babel-do-load-languages :override #'ignore))
 
+;;;###autoload
 (defun +org-init-capture-defaults-h ()
   "Sets up some reasonable defaults, as well as two `org-capture' workflows that
 I like:
@@ -388,6 +392,7 @@ relative to `org-directory', unless it is an absolute path."
                     org-eldoc-breadcrumb-separator
                     header-line-format)))))
 
+;;;###autoload
 (defun +org-init-capture-frame-h ()
   (add-hook 'org-capture-after-finalize-hook #'+org-capture-cleanup-frame-h)
 
@@ -398,6 +403,7 @@ relative to `org-directory', unless it is an absolute path."
   (when (modulep! :ui doom-dashboard)
     (add-hook '+doom-dashboard-inhibit-functions #'+org-capture-frame-p)))
 
+;;;###autoload
 (defun +org-init-attachments-h ()
   "Sets up org's attachment system."
   (setq org-attach-store-link-p 'attached     ; store link after attaching files
@@ -422,6 +428,7 @@ relative to `org-directory', unless it is an absolute path."
   ;; Add inline image previews for attachment links
   (org-link-set-parameters "attachment" :image-data-fun #'+org-inline-image-data-fn))
 
+;;;###autoload
 (defun +org-init-custom-links-h ()
   ;; Modify default file: links to colorize broken file links red
   (org-link-set-parameters
@@ -585,6 +592,7 @@ relative to `org-directory', unless it is an absolute path."
     :before-while #'org-yt-image-data-fun
     (not (eq org-display-remote-inline-images 'skip))))
 
+;;;###autoload
 (defun +org-init-export-h ()
   "TODO"
   (setq org-export-with-smart-quotes t
@@ -633,6 +641,7 @@ mutating hooks on exported output, like formatters."
            (delete-file load-file-name))))
       (apply fn args))))
 
+;;;###autoload
 (defun +org-init-habit-h ()
   (add-hook! 'org-agenda-mode-hook
     (defun +org-habit-resize-graph-h ()
@@ -652,6 +661,7 @@ mutating hooks on exported output, like formatters."
           (setq-local org-habit-following-days following-days)
           (setq-local org-habit-graph-column graph-column-adjusted))))))
 
+;;;###autoload
 (defun +org-init-hacks-h ()
   "Getting org to behave."
   ;; Open file links in current window, rather than new ones
@@ -801,6 +811,7 @@ can grow up to be fully-fledged org-mode buffers."
         (downcase uuid)
       uuid)))
 
+;;;###autoload
 (defun +org-init-keybinds-h ()
   "Sets up org-mode and evil keybindings. Tries to fix the idiosyncrasies
 between the two."
@@ -823,6 +834,7 @@ between the two."
 
 )
 
+;;;###autoload
 (defun +org-init-smartparens-h ()
   ;; Disable the slow defaults
   (provide 'smartparens-org))

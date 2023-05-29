@@ -97,6 +97,8 @@
 ;;-- end origami
 
 ;;-- outline
+(setq outline-blank-line nil)
+
 (spec-handling-add! fold
                     `(outline
                      :modes (outline-mode outline-minor-mode markdown-mode)

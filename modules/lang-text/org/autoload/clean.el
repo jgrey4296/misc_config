@@ -1,6 +1,8 @@
 ;;; +clean-funcs.el --- summary -*- lexical-binding: t -*-
 ;;
 ;; Main Function
+
+;;;###autoload
 (defun +jg-org-clean-master ()
   (interactive)
   (goto-char (point-min))
@@ -57,6 +59,7 @@ and the property block directly below "
       )
     )
   )
+
 (defun +jg-org-remove-duplicate-tweet-entries ()
   "Find duplicate tweets in an org file and remove them"
   (interactive)
@@ -108,6 +111,7 @@ and the property block directly below "
              )
     )
   )
+
 (defun +jg-org-clean-whole-duplicate-threads ()
   " remove threads which are just trees of duplicate links "
   (message "Removing Duplicate-only subtrees")
@@ -136,6 +140,7 @@ and the property block directly below "
   (makunbound 'jg-dup-3-star)
   (makunbound 'jg-dup-hash-log)
   )
+
 (defun +jg-org-pic-twitter-clean ()
   ;; Find all pic.twitter's and ensure on new line
   (goto-char (point-min))
@@ -157,6 +162,7 @@ and the property block directly below "
       )
     )
   )
+
 (defun +jg-org-property-drawer-clean-links ()
   ;; DO NOT USE ORG-NEXT-LINK
   ;; it ignores links in property drawers
@@ -198,6 +204,7 @@ and the property block directly below "
     (goto-char jg-org-clean-marker)
     )
   )
+
 (defun +jg-org-clean-property-blocks ()
   " Find Property blocks and clean newlines in them "
   (goto-char (point-min))
@@ -219,7 +226,7 @@ and the property block directly below "
       )
     )
   )
-;; Utils
+
 (defun +jg-org-map-entry-duplicate-finder ()
   " Find threads that are only duplicates "
   (let ((ctx (org-element-context))
@@ -250,6 +257,7 @@ and the property block directly below "
           )
     )
   )
+
 (defun +jg-org-map-entries-build-permalink-regions()
   " To be run with org-map-entries, extracts permalinks and regions ready to
   remove duplicates"
@@ -291,6 +299,7 @@ asks user to delete line if file does not."
       )
     )
   )
+
 (defun +jg-org-add-twitter-property ()
   (interactive)
   (save-excursion

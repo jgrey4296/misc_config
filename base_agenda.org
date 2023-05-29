@@ -5,8 +5,8 @@
 [[file:/Volumes/documents/github/jgrey4296.github.io][homepage]]
 
 https://github.com/libgdx/gdx-ai
-
-transient, avy
+https://www.ronja-tutorials.com/
+https://en.m.wikipedia.org/wiki/Grey_literature
 
 * Base Agenda
 Death by Institution and the Harms of Abstraction.

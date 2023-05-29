@@ -17,6 +17,7 @@
         )
   (add-hook 'music-minor-mode-hook '+jg-music/setup-minor-mode-keys)
   )
+
 (use-package! sclang
   :commands (sclang-mode )
   :config
@@ -30,6 +31,7 @@
   (evil-define-key '(visual) sclang-mode-map
     (kbd "C-c C-c") 'music-minor/music-eval-selection)
   )
+
 (use-package! tidal
   :commands (tidal-mode tidal-start-haskell)
   :config
@@ -42,7 +44,9 @@
   (evil-define-key '(visual) tidal-mode-map
     (kbd "C-c C-c") 'music-minor/music-eval-selection)
     )
+
 (use-package! chuck-mode
   :commands (chuck-mode)
   )
+
 (use-package! csound-mode)

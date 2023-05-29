@@ -33,47 +33,43 @@
 
 (defvaralias 'python-shell-virtualenv-root 'py-shell-virtualenv-root)
 
-(after! python-mode
-  (setq py-indent-offset 4
-        conda-anaconda-home (or (getenv "ANACONDA_HOME") "/usr/local/anaconda3")
-        conda-env-home-directory (or (getenv "ANACONDA_ENVS") (f-join conda-anaconda-home "envs"))
-        py-shell-virtualenv-root conda-env-home-directory
-        lsp-pyright-venv-path conda-env-home-directory
+(setq py-indent-offset 4
+      conda-anaconda-home (or (getenv "ANACONDA_HOME") "/usr/local/anaconda3")
+      conda-env-home-directory (or (getenv "ANACONDA_ENVS") (f-join conda-anaconda-home "envs"))
+      py-shell-virtualenv-root conda-env-home-directory
+      lsp-pyright-venv-path conda-env-home-directory
 
-        py-pdbtrack-do-tracking-p t
+      py-pdbtrack-do-tracking-p t
 
-        py-python-command "python3"
-        py-python-command-args '("-i")
-        python-shell-interpreter-args "-i"
+      py-python-command "python3"
+      py-python-command-args '("-i")
+      python-shell-interpreter-args "-i"
 
-        py-use-font-lock-doc-face-p t
-        py-fontify-shell-buffer-p t
+      py-use-font-lock-doc-face-p t
+      py-fontify-shell-buffer-p t
 
-        python-indent-guess-indent-offset nil
-        python-shell-completion-native-enable nil
-        python-shell-completion-native-disabled-interpreters '("pypy")
+      python-indent-guess-indent-offset nil
+      python-shell-completion-native-enable nil
+      python-shell-completion-native-disabled-interpreters '("pypy")
 
-        jg-python-repl-start-file (doom-module-expand-path :lang-weakly-typed 'python "repl/repl_startup.py ")
-        python-shell-interpreter-path-args (doom-module-expand-path :lang-weakly-typed 'python "repl/repl_startup.py ")
+      jg-python-repl-start-file (doom-module-expand-path :lang-weakly-typed 'python "repl/repl_startup.py ")
+      python-shell-interpreter-path-args (doom-module-expand-path :lang-weakly-typed 'python "repl/repl_startup.py ")
         )
         (modify-syntax-entry ?_ "_" python-mode-syntax-table)
-)
 ;;-- end general python
 
 ;;-- outline
-(after! python-mode
-  (rx-let ((kwds (regexp (eval (s-join "\\|" py-outline-mode-keywords))))
-           )
-    (setq jg-python-outline-regexp
-          (rx (* blank)
-              (or "##--"
-                  (| "@" (+ word))
-                  kwds
-                  )
-              )
-          jg-python-outline-end-regexp ":[^\n]*\n"
-          )
-    )
+(rx-let ((kwds (regexp (eval (s-join "\\|" py-outline-mode-keywords))))
+         )
+  (setq jg-python-outline-regexp
+        (rx (* blank)
+            (or "##--"
+                (| "@" (+ word))
+                kwds
+                )
+            )
+        jg-python-outline-end-regexp ":[^\n]*\n"
+        )
   )
 ;;-- end outline
 
@@ -110,11 +106,9 @@
 (add-to-list 'lsp-disabled-clients 'pylsp)
 (add-to-list 'lsp-disabled-clients 'mspyls)
 
-(after! python-mode
-  (setq lsp-pyright-extra-paths #'[]
-        lsp-pyright-venv-path   (list conda-env-home-directory)
-        )
-  )
+(setq lsp-pyright-extra-paths #'[]
+      lsp-pyright-venv-path   (list conda-env-home-directory)
+      )
 ;;-- end lsp
 
 ;;-- jg-company

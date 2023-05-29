@@ -58,7 +58,9 @@ stored in `persp-save-dir'.")
       projectile-kill-buffers-filter 'kill-only-files
       projectile-known-projects-file (concat doom-cache-dir "projectile.projects")
       projectile-ignored-projects '("~/")
-      projectile-ignored-project-function #'doom-project-ignored-p)
+      projectile-ignored-project-function #'doom-project-ignored-p
+      projectile-project-search-path (list (expand-file-name "~/github"))
+      )
 
 ;; In the interest of performance, we reduce the number of project root marker
 ;; files/directories projectile searches for when resolving the project root.

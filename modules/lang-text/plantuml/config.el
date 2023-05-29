@@ -16,17 +16,18 @@
               (plantuml-default-exec-mode)))
   )
 
-
 (use-package! flycheck-plantuml
   :when (modulep! :checkers syntax)
   :after plantuml-mode
   :config (flycheck-plantuml-setup))
 
-
 (after! ob-plantuml
   ;; HACK Force ob-plantuml to use `plantuml-mode''s building mechanism, which
   ;;      is more sophisticated.
+  ;; (advice-add #'org-babel-execute:plantuml
+  ;;             :override #'+plantuml-org-babel-execute:plantuml-a)
   (advice-add #'org-babel-execute:plantuml
-              :override #'+plantuml-org-babel-execute:plantuml-a)
+              :override #'jg-ob-plantuml-execute
+              '((depth . -100)))
   (add-to-list 'org-babel-default-header-args:plantuml
                '(:cmdline . "-charset utf-8")))

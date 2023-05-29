@@ -37,64 +37,25 @@
 (setq doom-theme 'jg-Iosvkem)
 ;; Override doom's whitespace mode settings:
 (fset 'doom-highlight-non-default-indentation-h #'(lambda () nil))
+
+(fset 'ad-Advice-newline-and-indent #'(lambda (x &rest _) (funcall x)))
 ;;-- end doom settings
 
-;;-- which key
-(setq which-key-idle-secondary-delay 0.05
-      which-key-sort-order 'which-key-key-order-alpha
- )
-;;-- end which key
-
 ;;-- global modes
-(setq flycheck-global-modes nil)
+(setq initial-major-mode #'emacs-lisp-mode)
 
 (add-hook! doom-first-buffer
    #'delete-selection-mode
    )
 
-;; (remove-hook! doom-first-buffer
-;;   #'smartparens-global-mode
-;;   )
-
-(remove-hook! 'after-change-major-mode-hook
-  #'global-flycheck-mode-enable-in-buffers
-  )
-
 ;;-- end global modes
-
-;;-- misc variables
-(setq +lsp-defer-shutdown 10
-      display-line-numbers-width 4
-      highlight-indent-guides-suppress-auto-error t
-      ibuffer-old-time 2
-      outline-blank-line nil
-      overflow-newline-into-fringe t
-      )
-;;-- end misc variables
-
-;;-- defaults
-(setq-default line-move-ignore-invisible t
-              avy-all-windows t
-              display-line-numbers-type t
-              tab-always-indent t
-              indent-tabs-mode nil
-              LaTeX-enable-toolbar nil
-              whitespace-style '(face tabs spaces trailing lines space-before-tab newline indentation empty space-after-tab space-mark tab-mark newline-mark)
-              projectile-project-search-path (list (expand-file-name "~/github"))
-              )
-;;-- end defaults
 
 ;;-- byte / native compilation
 ;; from https://github.com/kiwanami/emacs-epc/issues/35
 (setq byte-compile-warnings '(not cl-functions)
       native-comp-async-jobs-number 1
       )
-;;-- end Byte Compilation
-
-;;-- auto mode overrides
-(add-to-list 'auto-mode-alist '("\\.pl\\'" . prolog-mode))
-
-;;-- end auto mode overrides
+;;-- end byte / native compilation
 
 ;;-- warning suppression
 ;; (progn
@@ -117,7 +78,7 @@
         )
       warning-suppress-types
       '( ;; Don't Show
-        ;; ((defvaralias losing-value woman-topic-history))
+        (defvaralias losing-value python-shell-interpreter)
         ;; ((python python-shell-completion-native-turn-on-maybe))
         ;; (org-element-cache)
         ;; (flycheck syntax-checker)

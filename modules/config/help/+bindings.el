@@ -8,6 +8,7 @@
       "f"    #'describe-function
       "v"    #'describe-variable
       "l"    #'view-lossage
+      "t"    #'list-timers
 
       "DEL" #'free-keys
       )

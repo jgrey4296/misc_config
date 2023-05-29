@@ -23,12 +23,6 @@
     (add-hook 'erlang-mode-local-vars-hook #'tree-sitter! 'append))
   )
 
-(after! projectile
-  (add-to-list 'projectile-project-root-files "mix.exs"))
-
-;;
-;;; Packages
-
 (use-package! elixir-mode
   :defer t
   :init

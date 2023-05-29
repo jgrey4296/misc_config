@@ -134,6 +134,10 @@
   :defer t
   )
 
+(use-package! sass-mode
+  :defer t
+  )
+
 (def-project-mode! +web-pelican-mode
   :modes '(web-mode python-mode markdown-mode)
   :files ("pelican.toml")
@@ -141,10 +145,6 @@
   (when (derived-mode-p 'web-mode)
     ;; use web-mode-engines
     (web-mode-set-engine "django"))
-  )
-
-(use-package! sass-mode
-  :defer t
   )
 
 (when (modulep! +lsp)

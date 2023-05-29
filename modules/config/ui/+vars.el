@@ -7,10 +7,22 @@
 (setq-default highlight-parentheses-delay      0.3
               display-line-numbers             t
               display-line-numbers-major-tick  20
+              display-line-numbers-width 4
+              display-line-numbers-type t
+
+              overflow-newline-into-fringe t
 
               highlight-parentheses-colors            '("black")
               highlight-parentheses-background-colors '("#60aa00" "yellow" "#da8548" "#d02b61")
               global-hl-line-modes '(bibtex-mode prog-mode text-mode conf-mode special-mode org-agenda-mode comint-mode)
+
+              line-move-ignore-invisible t
+              avy-all-windows t
+
+              whitespace-style '(face tabs spaces trailing lines space-before-tab newline indentation empty space-after-tab space-mark tab-mark newline-mark)
+
+              which-key-idle-secondary-delay 0.05
+              which-key-sort-order 'which-key-key-order-alpha
               )
 
 (after! neotree
@@ -46,7 +58,9 @@
 ;;-- end hl todo
 
 ;;-- highlight indent guides
-(setq highlight-indent-guides-method 'character)
+(setq highlight-indent-guides-method 'character
+      highlight-indent-guides-suppress-auto-error t
+      )
 ;;-- end highlight indent guides
 
 ;;-- modeline

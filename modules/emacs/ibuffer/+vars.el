@@ -27,6 +27,7 @@
 (setq ibuffer-show-empty-filter-groups t
       ibuffer-default-sorting-mode 'alphabetic
       ibuffer-filter-group-name-face '(:inherit (success bold))
+      ibuffer-old-time 2
 
       jg-ibuffer-default-filter "-clutter"
       jg-ibuffer-default-group "default"

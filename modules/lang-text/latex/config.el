@@ -31,27 +31,12 @@
         LaTeX-item-indent 0)
   )
 
-
-;; Fix #1849: allow fill-paragraph in itemize/enumerate.
-(defadvice! +latex--re-indent-itemize-and-enumerate-a (fn &rest args)
-  :around #'LaTeX-fill-region-as-para-do
-  (let ((LaTeX-indent-environment-list
-         (append LaTeX-indent-environment-list
-                 '(("itemize"   +latex-indent-item-fn)
-                   ("enumerate" +latex-indent-item-fn)))))
-    (apply fn args)))
-(defadvice! +latex--dont-indent-itemize-and-enumerate-a (fn &rest args)
-  :around #'LaTeX-fill-region-as-paragraph
-  (let ((LaTeX-indent-environment-list LaTeX-indent-environment-list))
-    (delq! "itemize" LaTeX-indent-environment-list 'assoc)
-    (delq! "enumerate" LaTeX-indent-environment-list 'assoc)
-    (apply fn args)))
-
 (use-package! tex-mode
   :defer t
   :mode ("\\.tex\\'" . LaTeX-mode)
   :config
-
+  (load! "+fontification")
+  (load! "+viewers")
   ;; Provide proper indentation for LaTeX "itemize", "enumerate", and
   ;; "description" environments. See
   ;; http://emacs.stackexchange.com/questions/3083/how-to-indent-items-in-latex-auctex-itemize-environments.
@@ -117,11 +102,11 @@ Math faces should stay fixed by the mixed-pitch blacklist, this is mostly for
   (setq cdlatex-use-dollar-to-ensure-math nil)
   )
 
-;; Nicely indent lines that have wrapped when visual line mode is activated.
 (use-package! adaptive-wrap
   :defer t
   :hook (LaTeX-mode . adaptive-wrap-prefix-mode)
   :init (setq-default adaptive-wrap-extra-indent 0)
+  ;; Nicely indent lines that have wrapped when visual line mode is activated.
   )
 
 (use-package! auctex-latexmk

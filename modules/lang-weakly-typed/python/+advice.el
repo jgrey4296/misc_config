@@ -1,7 +1,7 @@
 ;;; +advice.el -*- lexical-binding: t; -*-
 
-(define-advice py--pdbtrack-get-source-buffer (:override (block) +jg-python-pdftrack-silence)
-
+;;;###autoload
+(defun +jg-python-pdbtrack-silence (block)
   (if (and (not (string-match py-pdbtrack-stack-entry-regexp block))
            ;; pydb integration still to be done
            ;; (not (string-match py-pydbtrack-stack-entry-regexp block))
@@ -48,8 +48,37 @@
             (t (format "Not found: %s(), %s" funcname filename)))))
   )
 
-(define-advice conda--get-path-prefix (:override (env-dir)
-                                       jg-python-conda--get-path-prefix)
+;;;###autoload
+(advice-add 'py--pdbtrack-get-source-buffer :override #'+jg-python-pdfbrack-silence)
+
+;;;###autoload
+(defun +jg-python-shell-calculate-command (&optional filepath)
+  "Calculate the string used to execute the inferior Python process.
+Adds in a few extra options like dev mode control,
+a custom pycache location,
+and adding extra pythonpath locations as the pre-args
+"
+  ;; `python-shell-make-comint' expects to be able to
+  ;; `split-string-and-unquote' the result of this function.
+  (s-join " "
+          (--remove (not it)
+                    (list
+                     (combine-and-quote-strings (list python-shell-interpreter))
+                     python-shell-interpreter-args
+                     (if jg-python-dev-mode jg-python-dev-cmd)
+                     ;; (format jg-python-pycache-cmd (f-canonical jg-python-pycache-loc))
+                     (or filepath python-shell-interpreter-path-args)
+                     ;; "--dir" (doom-project-root)
+                     )
+                    )
+          )
+    )
+
+;;;###autoload
+(advice-add 'python-shell-calculate-command :override #'+jg-python-shell-calculate-command)
+
+;;;###autoload
+(defun +jg-python-conda-get-path-prefix (env-dir)
   "Get a platform-specific path string to utilize the conda env in ENV-DIR.
 It's platform specific in that it uses the platform's native path separator."
   (let* ((conda-anaconda-home-tmp conda-anaconda-home)
@@ -65,27 +94,8 @@ It's platform specific in that it uses the platform's native path separator."
               (unless (= 0 (process-file shell-file-name nil '(t nil) nil shell-command-switch command))
                 (error (format "Error: executing command \"%s\" produced error code %d" command return-code)))
               ))))
-    (s-trim result)))
-
-(define-advice python-shell-calculate-command (:override (&optional filepath)
-                                               +jg-python-shell-calculate-command)
-  "Calculate the string used to execute the inferior Python process.
-Adds in a few extra options like dev mode control,
-a custom pycache location,
-and adding extra pythonpath locations as the pre-args
-"
-;; `python-shell-make-comint' expects to be able to
-;; `split-string-and-unquote' the result of this function.
-  (s-join " "
-          (--remove (not it)
-                    (list
-                     (combine-and-quote-strings (list python-shell-interpreter))
-                     python-shell-interpreter-args
-                     (if jg-python-dev-mode jg-python-dev-cmd)
-                     ;; (format jg-python-pycache-cmd (f-canonical jg-python-pycache-loc))
-                     (or filepath python-shell-interpreter-path-args)
-                     ;; "--dir" (doom-project-root)
-                     )
-                    )
-          )
+    (s-trim result))
   )
+
+;;;###autoload
+(advice-add 'conda--get-path-prefix :override #'+jg-python-conda-get-path-prefix)

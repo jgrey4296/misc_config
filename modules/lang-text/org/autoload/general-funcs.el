@@ -2,16 +2,22 @@
 ;; Functions that work on org files/ interact with the outside
 
 ;;-- utils
+
+;;;###autoload
 (defun +jg-org-open_link_in_buffer ()
   " a util function to force links to be open in emacs  "
   (interactive)
   (org-open-at-point 'in-emacs)
   )
+
+;;;###autoload
 (defun +jg-org-open_link_externally ()
   " Open a link, forcing it to be external to emacs "
   (interactive)
   (let ((current-prefix-arg '(16)))
     (call-interactively 'org-open-at-point)))
+
+;;;###autoload
 (defun +jg-org-link-not-exists-p ()
   (let* ((context (org-element-lineage
                    (org-element-context)
@@ -22,6 +28,8 @@
          (type (org-element-property :type context))
          (path (org-element-property :path context)))
     (and (equal type "file") (not (file-exists-p path)))))
+
+;;;###autoload
 (defun +jg-org-link-hint-external (uri)
   " Open a link, forcing it to be external to emacs "
   (let* ((ext (f-ext uri))
@@ -34,6 +42,8 @@
         (call-interactively 'org-open-at-point)
       (error (org-open-link-from-string uri))))
   )
+
+;;;###autoload
 (defun +jg-org-quicklook-link ()
   (let* ((context (org-element-lineage
                    (org-element-context)
@@ -46,6 +56,8 @@
     (if (equal type "file")
         (call-process "qlmanage" nil 0 nil "-x" path)
       (message "Link not a file"))))
+
+;;;###autoload
 (defun +jg-org-open-selection (pair)
   "Open only a selection of a large file "
   (let ((file (car pair))
@@ -63,6 +75,7 @@
     )
   )
 
+;;;###autoload
 (defun +jg-org-list-agenda-files ()
   " Creates a temporary, Org-mode buffer with links to agenda files "
   (interactive)
@@ -77,6 +90,8 @@
     (org-mode)
     )
   )
+
+;;;###autoload
 (defun +jg-org-split-on-headings ()
   " Split an org file into multiple smaller buffers non-destructively "
   (interactive)
@@ -107,6 +122,8 @@
     (-each (-zip-fill target-dir results '()) '+jg-text-org-split-temp-buffer-create)
     )
   )
+
+;;;###autoload
 (defun +jg-org-split-alphabetically ()
   " Split a buffer of values on separate lines into headings alphabetically "
   (interactive)
@@ -122,6 +139,8 @@
       )
     )
   )
+
+;;;###autoload
 (defun +jg-org-split-tag-list ()
   " Combine the org-split functions into a single routine.
 Sort, align, split, save "
@@ -138,6 +157,7 @@ Sort, align, split, save "
     )
   )
 
+;;;###autoload
 (defun +jg-org-refile-subtree (arg)
   ;; based on +org/refile-to-other-window
   "TODO"
@@ -156,19 +176,7 @@ Sort, align, split, save "
   )
 ;;-- end utils
 
-(fset 'ad-Advice-newline-and-indent #'(lambda (x &rest _) (funcall x)))
-
-(define-advice org-export-inline-image-p (:override (link &optional rules)
-                                          +jg-org-inline-image-override)
-  "Override function for org export, to succeed on file links with
-descriptions"
-  (let ((case-fold-search t))
-    (cl-some (lambda (rule)
-	       (and (string= (org-element-property :type link) (car rule))
-		    (string-match-p (cdr rule)
-				    (org-element-property :path link))))
-	     (or rules org-export-default-inline-image-rule))))
-
+;;;###autoload
 (defun +jg-org-clean-heading-spaces ()
   (org-map-entries #'(lambda ()
                        (forward-line -1)
@@ -180,3 +188,17 @@ descriptions"
                    t
                    nil)
   )
+
+;;;###autoload
+(defun +jg-org-inline-image-override (link &optional rules)
+  "Override function for org export, to succeed on file links with descriptions"
+  (let ((case-fold-search t))
+    (cl-some (lambda (rule)
+	       (and (string= (org-element-property :type link) (car rule))
+		    (string-match-p (cdr rule)
+				    (org-element-property :path link))))
+	     (or rules org-export-default-inline-image-rule)))
+  )
+
+;;;###autoload
+(advice-add 'org-export-inline-image-p :override #'+jg-org-inline-image-override)

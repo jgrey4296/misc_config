@@ -1,9 +1,7 @@
 ;;; lang/solidity/config.el -*- lexical-binding: t; -*-
 
-;;
-;;; Packages
-
-(after! solidity-mode
+(use-package! solidity-mode
+  :config
   (setq solidity-comment-style 'slash)
   (spec-handling-add docsets '(solidity-mode "Solidity"))
   (spec-handling-add! company nil

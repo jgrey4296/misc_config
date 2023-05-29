@@ -81,8 +81,3 @@
 (use-package! company-anaconda
   :commands 'company-anaconda
   )
-
-(load! "+envs")
-(load! "+lsp")
-(load! "+testing")
-(load! "+cython")

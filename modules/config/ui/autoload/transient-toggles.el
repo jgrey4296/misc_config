@@ -149,9 +149,8 @@
   :choices browse-select-variants
   )
 
-;;;###autoload
 (transient-define-prefix jg-toggle-main ()
-  "Main controler for ui settings"
+  "Main controller for ui settings"
   [
    [
    (jg-transient-toggle-hide-mode-line-mode)

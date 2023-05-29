@@ -87,7 +87,6 @@
   :hook (org-capture-mode . evil-insert-state)
   :hook (doom-docs-org-mode . evil-org-mode)
   :config
-  (setq evil-org-mode-map jg-org-mode-map)
   (add-hook 'evil-org-mode-hook #'evil-normalize-keymaps)
   (evil-org-set-key-theme)
   (add-hook! 'org-tab-first-hook :append
@@ -203,7 +202,6 @@
     (run-hooks 'org-load-hook))
 
   :config
-  (setq org-mode-map jg-org-mode-map)
   (add-to-list 'doom-debug-variables 'org-export-async-debug)
 
   ;; Don't number headings with these tags

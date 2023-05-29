@@ -21,10 +21,8 @@
 ;;; Code:
 
 
-(load! "+vars")
-(after! jg-bindings-total
-  (load! "+bindings")
-  )
+(defer-load! "+vars")
+(defer-load! jg-bindings-total "+bindings")
 
 (use-package! jg-log-mode
   :commands jg-log-mode

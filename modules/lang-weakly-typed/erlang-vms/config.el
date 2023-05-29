@@ -1,10 +1,10 @@
 ;;; lang/erlang/config.el -*- lexical-binding: t; -*-
 
-(load! "+vars")
-(after! jg-bindings-total
-  (load! "+bindings")
-  )
-(load! "+repl")
+(defer-load! "+vars" "+repl")
+
+(defer-load! jg-bindings-total "+bindings")
+(after! projectile
+  (add-to-list 'projectile-project-root-files "mix.exs"))
 
 (use-package! erlang
   :defer t

@@ -1,15 +1,8 @@
 ;;; lang/plantuml/config.el -*- lexical-binding: t; -*-
 
-(load! "+vars")
-(after! jg-bindings-total
-  (load! "+bindings")
-  )
+(defer-load! "+vars")
 
-(after! ob-plantuml
-  (advice-add #'org-babel-execute:plantuml
-              :override #'jg-ob-plantuml-execute
-              '((depth . -100)))
-  )
+(defer-load! jg-bindings-total "+bindings")
 
 (use-package! plantuml-mode
   :commands plantuml-download-jar

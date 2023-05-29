@@ -1,5 +1,6 @@
 ;;; init.el -*- lexical-binding: t; -*-
 
+(load! "defer-macro")
 (doom!
  :config default bindings disabled help search ui
  :app   (rss +org)

@@ -1,11 +1,7 @@
 ;;; lang/java/config.el -*- lexical-binding: t; -*-
 
-(load! "+vars")
-(after! jg-bindings-total
-  (load! "+bindings")
-
-  )
-(load! "+repl")
+(defer-load! "+vars" "+repl")
+(defer-load! jg-bindings-total "+bindings")
 (after! projectile
   (pushnew! projectile-project-root-files "gradlew" "build.gradle"))
 (after! ivy

@@ -1,7 +1,8 @@
-(load! "+vars")
-(after! jg-bindings-total
-  (load! "+bindings")
-)
+;;; config.el -*- lexical-binding: t; -*-
+
+(defer-load! "+vars")
+
+(defer-load! jg-bindings-total "+bindings")
 
 (use-package! music-minor-mode
   :commands (music-minor-mode music-minor/music-on global-music-mode)

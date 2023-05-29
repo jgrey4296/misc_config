@@ -1,9 +1,7 @@
 ;;; lang/coq/config.el -*- lexical-binding: t; -*-
 
-(load! "+vars")
-(after! (coq jg-bindings-total)
-  (load! "+bindings")
-  )
+(defer-load! "+vars")
+(defer-load! (jg-bindings-total coq) "+bindings")
 
 (use-package! proof-general
   :defer t

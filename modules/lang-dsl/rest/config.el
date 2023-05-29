@@ -1,8 +1,6 @@
 ;;; lang/rest/config.el -*- lexical-binding: t; -*-
 
-(after! jg-bindings-total
-  (load! "+bindings")
-  )
+(defer-load! jg-bindings-total "+bindings")
 
 (use-package! restclient
   :defer t

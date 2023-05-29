@@ -1,13 +1,8 @@
 ;;; lang/rust/config.el -*- lexical-binding: t; -*-
 
-(load! "+vars")
-(load! "+ivy")
+(defer-load! "+vars" "+ivy")
 
-(after! jg-bindings-total
-  (load! "+bindings")
-  )
-
-;;; Packages
+(defer-load! jg-bindings-total "+bindings")
 
 (use-package! rustic
   :defer t

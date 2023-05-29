@@ -1,8 +1,7 @@
 ;;; lang/haskell/config.el -*- lexical-binding: t; -*-
 
-(load! "+vars")
-(after! jg-bindings-total
-  (load! "+bindings"))
+(defer-load! "+vars")
+(defer-load! jg-bindings-total "+bindings")
 (after! projectile
   (add-to-list 'projectile-project-root-files "stack.yaml"))
 

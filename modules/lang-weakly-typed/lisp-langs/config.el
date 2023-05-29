@@ -1,11 +1,7 @@
 ;;; lang/emacs-lisp/config.el -*- lexical-binding: t; -*-
 
 (load! "+vars")
-(load! "+funcs")
-(after! jg-bindings-total
-  (load! "+bindings")
-  (load! "+advice")
-  )
+(defer-load! jg-bindings-total "+bindings")
 
 ;; `elisp-mode' is loaded at startup. In order to lazy load its config we need to pretend it isn't loaded
 (defer-feature! elisp-mode emacs-lisp-mode)

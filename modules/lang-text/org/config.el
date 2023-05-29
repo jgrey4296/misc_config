@@ -1,20 +1,10 @@
 ;;; lang/org/config.el -*- lexical-binding: t; -*-
 
-(load! "+funcs")
-(load! "util/+pomodoro-funcs")
-(load! "util/+clean-funcs")
-(load! "util/+dired")
 (load! "+definitions")
-(load! "+vars")
-(load! "+hooks")
 
-(after! jg-bindings-total
-  (load! "util/+text-utils")
-  (load! "bindings/+org-standard-bindings.el")
-  (load! "bindings/+bindings")
+(defer-load! "+vars")
 
-  ;; (push `(evil-org-mode . ,evil-org-mode-map) minor-mode-map-alist)
-  )
+(defer-load! jg-bindings-total "+bindings")
 
 (use-package! toc-org ; auto-table of contents
   :hook (org-mode . toc-org-enable)

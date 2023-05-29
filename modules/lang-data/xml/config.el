@@ -20,12 +20,9 @@
 ;;
 ;;; Code:
 
+(defer-load! "+vars")
 
-(load! "+vars")
-(after! (jg-bindings-total jg-dired nxml-mode)
-  (load! "+bindings")
-  )
-
+(defer-load! (jg-bindings-total jg-dired nxml-mode) "+bindings")
 
 (use-package! mhtml-mode :defer t)
 

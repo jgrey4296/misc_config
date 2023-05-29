@@ -2,15 +2,11 @@
 
 (doom-log "Config JG Python")
 
-(load! "+vars")
-(load! "+funcs")
-(load! "+spec-defs")
-(load! "+advice")
-(load! "modes/+derived-modes")
-(load! "modes/+manifest-mode")
-(after! jg-bindings-total
-  (load! "+bindings")
-  )
+(defer-load! python-mode "+vars")
+(defer-load! "+spec-defs"  "modes/+derived-modes"  "modes/+manifest-mode")
+(defer-load! "+envs" "+lsp"  "+testing"  "+cython")
+(defer-load! jg-bindings-total "+bindings")
+(autoload #'+jg-python-forward-defun (file-name-concat (dir!) "autoload/funcs") nil t)
 
 (use-package! python
   :config

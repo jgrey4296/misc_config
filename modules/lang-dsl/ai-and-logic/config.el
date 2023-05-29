@@ -1,14 +1,10 @@
 ;; Misc AI Languages:
 
 
-(load! "+indent")
-(load! "+vars")
-(load! "+repl")
-(load! "+funcs")
-(load! "+advice")
-(after! jg-bindings-total
-  (load! "+bindings")
-  )
+(defer-load! "+indent" "+vars" "+repl" "+funcs" "+advice")
+(defer-load! jg-bindings-total "+bindings")
+
+;; (add-to-list 'auto-mode-alist '("\\.pl\\'" . prolog-mode))
 
 (use-package! agentspeak-mode :defer t :mode ("\\.asl" . agentspeak-mode) )
 (use-package! instal-mode     :defer t)

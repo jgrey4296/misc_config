@@ -21,10 +21,8 @@
 ;;; Code:
 
 
-(load! "+vars")
-(after! evil
-  (load! "+bindings")
-  )
+(defer-load! "+vars")
+(defer-load! jg-bindings-total "+bindings")
 
 
 ;;; config.el ends here

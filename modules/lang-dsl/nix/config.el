@@ -1,10 +1,10 @@
 ;;; lang/nix/config.el -*- lexical-binding: t; -*-
 
+(defer-load! "+vars")
+(defer-load! jg-bindings-total "+bindings")
+
 (after! tramp
   (add-to-list 'tramp-remote-path "/run/current-system/sw/bin"))
-
-;;
-;;; Plugins
 
 (use-package! nix-mode
   :defer t

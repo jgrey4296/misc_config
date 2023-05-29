@@ -1,8 +1,6 @@
 ;;; lang/json/config.el -*- lexical-binding: t; -*-
 
-(after! (jg-bindings-total json-mode)
-  (load! "+bindings")
-  )
+(defer-load! (jg-bindings-total json-mode) "+bindings")
 
 (use-package! json-mode
   :mode "\\.js\\(?:on\\|[hl]int\\(?:rc\\)?\\)\\'"

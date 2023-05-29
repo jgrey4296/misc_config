@@ -1,17 +1,16 @@
 ;;; domain-specific/bibtex/config.el -*- lexical-binding: t; -*-
 
-(load! "+vars")
-(load! "dialect/+entries")
-(load! "dialect/+fields")
-(after! jg-bindings-total
-  (load! "evil/+motions")
-  (load! "+bindings")
-)
+(defer-load! "+vars")
+(defer-load! jg-bindings-total "evil/+motions" "+bindings")
+(autoload '+jg-bibtex-hydra/body (file-name-concat (dir!) "autoload/hydra.el") nil t)
 
 (use-package! bibtex
   :defer t
   :config
+  (load! "dialect/+entries")
+  (load! "dialect/+fields")
   (pushnew! bibtex-dialect-list 'jg)
+
   (let ((sorted-entries (sort (copy-alist bibtex-jg-entry-alist) (lambda (x y) (string-lessp (car x) (car y)))))
         )
     (setq bibtex-jg-entry-alist sorted-entries)

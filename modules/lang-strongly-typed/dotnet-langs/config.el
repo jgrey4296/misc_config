@@ -1,9 +1,7 @@
 ;;; lang/csharp/config.el -*- lexical-binding: t; -*-
 
-(load! "+vars")
-(after! jg-bindings-total
-  (load! "+bindings")
-  )
+(defer-load! "+vars")
+(defer-load! jg-bindings-total "+bindings")
 
 (use-package! csharp-mode
   :defer t

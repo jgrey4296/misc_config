@@ -1,12 +1,9 @@
 ;;; lang/latex/config.el -*- lexical-binding: t; -*-
 
-(load! "+vars")
-(after! jg-bindings-total
-  (load! "+bindings")
-  )
+(defer-load! "+vars")
+(defer-load! jg-bindings-total "+bindings")
+
 (after! tex
-  (load! "+fontification")
-  (load! "+viewers")
   ;; Set-up chktex.
   (setcar (cdr (assoc "Check" TeX-command-list)) "chktex -v6 -H %s")
   (setq-hook! 'TeX-mode-hook

@@ -96,7 +96,8 @@
   (define-key python-mode-map (kbd "DEL") nil)
   ;; Interferes with the def snippet in doom-snippets
   ;; TODO Fix this upstream, in doom-snippets, instead
-  (setq sp-python-insert-colon-in-function-definitions nil))
+  (setq sp-python-insert-colon-in-function-definitions nil)
+  )
 ;;-- end smartparens
 
 ;;-- lsp

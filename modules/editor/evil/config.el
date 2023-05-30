@@ -40,6 +40,11 @@
       (put 'cursor 'evil-normal-color (face-background 'cursor)))
     )
 
+  (defun +default-disable-delete-selection-mode-h ()
+    (delete-selection-mode -1))
+  (add-hook 'evil-insert-state-entry-hook #'delete-selection-mode)
+  (add-hook 'evil-insert-state-exit-hook  #'+default-disable-delete-selection-mode-h)
+
   (defun +evil-default-cursor-fn ()
     (evil-set-cursor-color (get 'cursor 'evil-normal-color)))
 

@@ -38,3 +38,12 @@
   ;; Does some strange indentation if it pastes in the snippet
   (setq-hook! 'haskell-mode-hook yas-indent-line 'fixed)
   )
+
+(after! smartparens-haskell
+  (sp-with-modes '(haskell-mode haskell-interactive-mode)
+    (sp-local-pair "{-" "-}" :actions :rem)
+    (sp-local-pair "{-#" "#-}" :actions :rem)
+    (sp-local-pair "{-@" "@-}" :actions :rem)
+    (sp-local-pair "{-" "-")
+    (sp-local-pair "{-#" "#-")
+    (sp-local-pair "{-@" "@-")))

@@ -1,17 +1,10 @@
 ;;; ui/workspaces/config.el -*- lexical-binding: t; -*-
 
 (load! "+vars")
-(load! "+funcs")
-(load! "+spec-defs")
-(after! jg-bindings-total
-  (load! "+bindings")
-  )
-(after! (ivy counsel)
-  (load! "+ivys")
-  )
-(after! hydra
-  (load! "+hydras")
-  )
+(defer-load! "+spec-defs")
+(defer-load! jg-bindings-total "+bindings")
+(defer-load! (ivy counsel) "+ivys")
+(defer-load! hydra "+hydras")
 
 (use-package! persp-mode
   :unless noninteractive

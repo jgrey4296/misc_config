@@ -2,17 +2,17 @@
 
 (defvar jg-hydra-stack nil)
 
-;;;###autodef
+;;;###autoload
 (defun +jg-hydra-doc (var)
   (if var 1 0)
   )
 
-;;;###autodef
+;;;###autoload
 (defun +jg-hydra-push (func)
   (push func jg-hydra-stack)
   )
 
-;;;###autodef
+;;;###autoload
 (defun +jg-hydra-pop ()
   (interactive)
   (when jg-hydra-stack

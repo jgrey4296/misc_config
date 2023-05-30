@@ -1,6 +1,12 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
 
+(after! smartparens-ml
+  (sp-with-modes '(tuareg-mode fsharp-mode)
+    (sp-local-pair "(*" "*)" :actions nil)
+    (sp-local-pair "(*" "*"
+                   :actions '(insert)
+                   :post-handlers '(("| " "SPC") ("|[i]*)[d-2]" "RET")))))
 
 (spec-handling-add! company
                     '(tuareg-mode #'merlin-company-backend)

@@ -1,6 +1,6 @@
 ;; Indexing
 
-;;;###autodef
+;;;###autoload
 (defun +jg-tag-index-people ()
   "Index all twitter users in the current directory "
   (interactive)
@@ -40,7 +40,7 @@
   (message "Finished writing file")
   )
 
-;;;###autodef
+;;;###autoload
 (defun +jg-tag-index-tags()
   " Run routine to index all tags in org files "
   (interactive)

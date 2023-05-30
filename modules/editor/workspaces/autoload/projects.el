@@ -31,3 +31,117 @@
     (concat "rg -0 --files --follow --color=never --hidden -g!.git"
             (if IS-WINDOWS " --path-separator=/")))
    ("find . -type f -print0")))
+
+;;;###autoload
+(defun +jg-projects-open-configs ()
+  (interactive)
+  (let ((default-directory (projectile-project-root))
+        (current-window (selected-window))
+        configs
+        )
+    (setq configs (-filter #'f-exists? projectile-project-root-files))
+    (message "Existing: " configs)
+    (cl-loop for file in configs
+             do
+             (with-selected-window current-window
+               (find-file file)
+               (setq current-window (split-window-right))
+               )
+             )
+    (when configs
+      (delete-window current-window)
+      )
+    (balance-windows)
+    )
+  )
+
+;;;###autoload
+(defun +jg-projects-related-files-fn (path)
+  " Given a relative path to a file, provide projectile with various :kinds of related file "
+  (let ((impl-file  (f-join (f-parent (f-parent path)) (s-replace "test_" "" (f-filename path))))
+        (test-file  (f-join (f-parent path) "__tests" (concat "test_" (f-filename path))))
+        ;;(init-file  (f-join (f-parent path) "__init__.py"))
+        (log-file   (f-join (projectile-project-root) (concat "log." (f-base path))))
+        ;;(error-file (f-join (car (f-split path)) "errors" (concat (f-base path) "_errors.py")))
+        (project    (f-join (projectile-project-root) "dooter.py"))
+        (is-test (s-matches? "^test_" (f-filename path)))
+        )
+    (append (when is-test (list :impl impl-file))
+            (unless is-test (list :test test-file))
+            (when (s-matches? "\/cli\/" path) (list :project project))
+            (list :init-py init-file)
+            (list :log log-file)
+            (list :errors error-file)
+            )
+    )
+  )
+
+;;;###autoload
+(defun +jg-projects-clean(arg)
+  (interactive "P")
+  (let ((default-directory (projectile-project-root))
+        ivy-opts
+        )
+    (setq ivy-opts (+jg-projects-doot-tasks nil (lambda (x) (concat jg-projects-doot-cmd " clean " (when arg "-c ") (car (split-string x" " t " ")))))
+          counsel-compile--current-build-dir (or (counsel--compile-root) default-directory))
+    (ivy-read "Clean Task: " ivy-opts
+              :action #'counsel-compile--action
+              :caller 'jg-projects-clean)
+    )
+  )
+
+;;;###autoload
+(defun +jg-projects-doot-tasks (&optional dir act-fn int-fn)
+  ;; check for cache, if cache is newer than dodo file, use that, else run doit list
+  (let ((default-directory (or dir (projectile-project-root) default-directory))
+        (act-fn (or act-fn (lambda (x) (concat jg-projects-doot-cmd " " (car (split-string x" " t " "))))))
+        )
+    (unless (and (f-exists? ".tasks_cache")
+                 (time-less-p (f-modification-time "dooter.py") (f-modification-time ".tasks_cache")))
+        ;; No cache/out of date, so make it
+      (message "Creating Cache")
+      (+jg-projects-cache-tasks jg-projects-doot-cmd "list")
+      )
+
+    (with-temp-buffer
+      (insert-file-contents ".tasks_cache")
+      (+jg-projects-annotate-cmds (split-string (buffer-string) "\n" t " \n")
+                                 act-fn int-fn
+                                 )
+      )
+    )
+  )
+
+;;;###autoload
+(defun +jg-projects-annotate-cmds (cmds act-fn &optional int-fn)
+  (cl-loop for cmd in cmds
+           collect (let ((cmd-str cmd)
+                         (cmd-act (funcall act-fn cmd))
+                         (interactive (when int-fn (funcall int-fn cmd)))
+                         )
+                     ;; The cmd text prop is what is actually run, the text itself is what is shown
+                     (set-text-properties 0 (length cmd-str) `(cmd ,cmd-act
+                                                               interactive ,interactive
+                                                               ) cmd-str)
+                     cmd-str))
+  )
+
+;;;###autoload
+(defun +jg-projects-cache-tasks (cmd &rest args)
+  " run doit list, cache to .tasks_cache"
+  (let (result-code result-text results)
+    (with-temp-buffer
+      (setq result-code (apply 'call-process cmd nil (current-buffer) nil args)
+            result-text (buffer-string)
+            )
+      (write-region (point-min) (point-max) ".tasks_cache")
+      )
+    )
+  )
+
+;;;###autoload
+(defun +jg-projects-detect-type ()
+  (interactive)
+  (message "Project Type: %s" (projectile-detect-project-type default-directory))
+
+  )

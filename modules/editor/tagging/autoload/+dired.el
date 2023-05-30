@@ -1,6 +1,6 @@
 ;;; +tags.el -*- lexical-binding: t; -*-
 
-;;;###autodef
+;;;###autoload
 (defun +jg-tag-dired-describe-marked-tags ()
   "Describe tags in marked files"
   (interactive)
@@ -19,7 +19,7 @@
     )
   )
 
-;;;###autodef
+;;;###autoload
 (defun +jg-tag-dired-mark-untagged()
   "Mark org files which are not tagged at heading depth 2"
   (interactive)
@@ -31,7 +31,7 @@
    )
   )
 
-;;;###autodef
+;;;###autoload
 (defun +jg-tag-dired-count-untagged ()
   "Count marked org files that are untagged"
   (interactive)

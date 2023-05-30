@@ -30,6 +30,9 @@
       :n "q" #'quit-window
       )
 
+;; Consistently use q to quit windows
+(after! tabulated-list
+  (define-key tabulated-list-mode-map "q" #'quit-window))
 
 ;;-- evil overrides/intercept
 (evil-make-overriding-map messages-buffer-mode-map)

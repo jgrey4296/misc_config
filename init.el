@@ -1,12 +1,15 @@
 ;;; init.el -*- lexical-binding: t; -*-
 
+
 (load! "defer-macro")
 (doom!
- :config default bindings disabled help search ui
+ :config default
+ :editor (evil +everywhere)
+ :config bindings disabled help search ui
  :app   (rss +org)
  :completion company ivy helm
 
- :editor (evil +everywhere) format
+ :editor format
  :editor char-insert fold navigation tagging text-manipulation
  :editor fold snippets lookup workspaces diff
 

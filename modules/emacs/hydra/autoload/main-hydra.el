@@ -5,7 +5,7 @@
 (require 'hydra)
 (load! "sub-hydras")
 
-;;;###autoload (autoload '+jy-hydra-ui-toggles/body "main-hydra")
+;;;###autoload (autoload '+jy-hydra-ui-toggles/body "emacs/hydra/autoload/main-hydra")
 (defhydra +jg-hydra-ui-toggles ()
   (format "%s\n"
           (hydra-utils-format-columns

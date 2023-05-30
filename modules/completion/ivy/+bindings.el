@@ -2,6 +2,11 @@
 
 (doom-log "Setting up Completion bindings: %s" (current-time-string))
 
+(map! :leader
+      :desc "SCRATCH"                      "6" (cmd! (+jg-popup-ivy-open "*scratch*"))
+      :desc "Messages"                     "0" (cmd! (+jg-popup-ivy-open "*Messages*") (when current-prefix-arg (with-current-buffer "*Messages*" (+jg-text-clear-buffer))))
+      )
+
 ;;-- remaps
 (map! :after counsel
       [remap bookmark-jump]              #'+jg-ivy-bookmark
@@ -35,7 +40,8 @@
       [remap projectile-switch-to-buffer] #'counsel-projectile-switch-to-buffer
       [remap projectile-grep]             #'counsel-projectile-grep
       [remap projectile-ag]               #'counsel-projectile-ag
-      [remap projectile-switch-project]   #'counsel-projectile-switch-project)
+      [remap projectile-switch-project]   #'counsel-projectile-switch-project
+      )
 ;;-- end remaps
 
 ;;-- ivy

@@ -163,6 +163,7 @@ See `+emacs-lisp-non-package-mode' for details.")
                       ("GNU Lisp" . "https://www.gnu.org/software/emacs/manual/html_node/elisp/index.html")
                       ("Melpa" . "https://melpa.org/#/")
                       ("Doom"  . "https://github.com/doomemacs/doomemacs")
+                      ("Yasnippet Manual" . "https://joaotavora.github.io/yasnippet/snippet-development.html")
                       )
                     '(racket-mode
                       ("Racket Docs" . "https://docs.racket-lang.org/")

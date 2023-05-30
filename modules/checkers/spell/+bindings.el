@@ -1,8 +1,5 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
-(global-set-key [remap ispell-word] #'+spell/correct)
-
-
 (map! :map jg-binding-change-map
       :prefix ("w" . "Words")
        :desc "ispell-word"               "s" #'ispell-word

@@ -7,7 +7,8 @@
 
 ;; Motions
 
-;;;###autoload (autoload '+jg-text-prev-close-paren-motion "evil-motions" nil t)
+
+;;;###autoload (autoload '+jg-text-prev-close-paren-motion "editor/text-manipulation/autoload/evil-motions.el" nil t)
 (evil-define-motion +jg-text-prev-close-paren-motion (count)
   "Go to [count] next unmatched ')'."
   :type inclusive
@@ -16,7 +17,7 @@
   (forward-char)
   )
 
-;;;###autoload (autoload '+jg-text-next-open-paren-motion "evil-motions" nil t)
+;;;###autoload (autoload '+jg-text-next-open-paren-motion "editor/text-manipulation/autoload/evil-motions.el" nil t)
 (evil-define-motion +jg-text-next-open-paren-motion (count)
   "Go to [count] next unmatched ')'."
   :type inclusive
@@ -25,21 +26,21 @@
   (backward-char)
   )
 
-;;;###autoload (autoload '+jg-text-next-empty-line-motion "evil-motions" nil t)
+;;;###autoload (autoload '+jg-text-next-empty-line-motion "editor/text-manipulation/autoload/evil-motions.el" nil t)
 (evil-define-motion +jg-text-next-empty-line-motion (count)
   :type line
   (forward-line)
   (re-search-forward "^[[:space:]]*$" nil nil (or count 1))
   )
 
-;;;###autoload (autoload '+jg-text-prev-empty-line-motion "evil-motions" nil t)
+;;;###autoload (autoload '+jg-text-prev-empty-line-motion "editor/text-manipulation/autoload/evil-motions.el" nil t)
 (evil-define-motion +jg-text-prev-empty-line-motion (count)
   :type line
   (forward-line -1)
   (re-search-backward "^[[:space:]]*$" nil nil (or  count 1))
   )
 
-;;;###autoload (autoload '+jg-text-next-similar-string "evil-motions" nil t)
+;;;###autoload (autoload '+jg-text-next-similar-string "editor/text-manipulation/autoload/evil-motions.el" nil t)
 (evil-define-motion +jg-text-next-similar-string (count)
   (interactive)
   (let* ((bound (or current-prefix-arg jg-text-last-similarity-arg))
@@ -57,7 +58,7 @@
     )
   )
 
-;;;###autoload (autoload '+jg-text-force-column-motion "evil-motions" nil t)
+;;;###autoload (autoload '+jg-text-force-column-motion "editor/text-manipulation/autoload/evil-motions.el" nil t)
 (evil-define-motion +jg-text-force-column-motion (count)
   "Force Go to column COUNT on the current line.
 Columns are counted from zero."
@@ -65,7 +66,7 @@ Columns are counted from zero."
   (move-to-column (or count (read-number "Column: ")) t)
   )
 
-;;;###autoload (autoload '+jg-text-column-motion "evil-motions" nil t)
+;;;###autoload (autoload '+jg-text-column-motion "editor/text-manipulation/autoload/evil-motions.el" nil t)
 (evil-define-motion +jg-text-column-motion (count)
   "Augment evil-goto-column to go to end of line if at beginning"
   (cond (count

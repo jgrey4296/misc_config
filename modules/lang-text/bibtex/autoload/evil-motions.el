@@ -1,6 +1,6 @@
 ;;; domain-specific/bibtex/+motions.el -*- lexical-binding: t; -*-
 
-;;;###autoload (autoload '+jg-bibtex-tweet-operator "evil-motions" nil t)
+;;;###autoload (autoload '+jg-bibtex-tweet-operator "lang-text/bibtex/autoload/evil-motions" nil t)
 (evil-define-operator +jg-bibtex-tweet-operator (beg end)
   :type line
   (+jg-bibtex-tweet-cmd)

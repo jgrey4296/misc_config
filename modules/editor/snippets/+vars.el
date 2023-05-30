@@ -3,6 +3,7 @@
 ;; Reduce default verbosity. 3 is too chatty about initializing yasnippet. 2
 ;; is just right (only shows errors).
 
+;;-- defs
 (defvar yas-verbosity 2)
 
 (defvar +snippets--smartparens-enabled-p t)
@@ -26,6 +27,8 @@
 (defvar +file-templates-dir jg-snippets-file-templates-dir)
 
 (defvar yas-snippet-dirs    (list jg-snippets-code-templates-dir))
+
+;;-- end defs
 
 ;; default snippets library, if available
 (add-to-list 'load-path jg-snippets-code-templates-dir)

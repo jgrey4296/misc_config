@@ -1,6 +1,6 @@
 ;;; -*- lexical-binding: t; -*-
 
-;;;###autoload (autoload 'evil-conflict-merge-state "conflict-merge-state" nil t)
+;;;###autoload (autoload 'evil-conflict-merge-state "emacs/version-control/autoload/conflict-merge-state" nil t)
  (evil-define-state conflict-merge
     "Merge Conflict State."
     :tag "<MC>"

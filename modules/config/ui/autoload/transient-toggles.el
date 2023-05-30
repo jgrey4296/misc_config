@@ -50,7 +50,7 @@
   (transient-make-call!   spelling
                           (format "%s : Spelling" (fmt-as-bool flyspell-mode))
                           (flyspell-mode 'toggle)
-                          (writegood-mode (unless flyspell-mode -1))
+                          (writegood-mode (if flypsell-mode 1 -1))
                           )
 
   )
@@ -149,7 +149,7 @@
   :choices browse-select-variants
   )
 
-;;;###autoload (autoload #'jg-toggle-main "transient-toggles" nil t)
+;;;###autoload (autoload #'jg-toggle-main "config/ui/autoload/transient-toggles" nil t)
 (transient-define-prefix jg-toggle-main ()
   "Main controller for ui settings"
   [

@@ -21,7 +21,7 @@
 
 (defvar jg-insert-state-sep "_")
 
-;;;###autoload (autoload 'evil-jg-insert-state "evil-state" nil t)
+;;;###autoload (autoload 'evil-jg-insert-state "editor/text-manipulation/autoload/evil-state" nil t)
 (evil-define-state jg-insert
   "Insert State with spaces remapped"
   :tag "<JGI>"

@@ -21,13 +21,13 @@
 ;;; Code:
 
 (load! "+vars")
-(after! evil
+(after! jg-bindings-total
   (load! "+bindings")
   )
 
 (use-package! flycheck
   :commands flycheck-list-errors flycheck-buffer
-  :hook (doom-first-buffer . global-flycheck-mode)
+  ;; :hook (doom-first-buffer . global-flycheck-mode)
   :init
   (spec-handling-add! python-env
                       '(flycheck
@@ -44,9 +44,9 @@
                         (:teardown flycheck (-partial flycheck-mode -1))
                         )
                       )
+  (setq flycheck-global-modes nil)
 
   :config
-
   (add-hook! 'doom-escape-hook :append
     (defun +syntax-check-buffer-h ()
       "Flycheck buffer on ESC in normal mode."
@@ -54,6 +54,9 @@
         (ignore-errors (flycheck-buffer))
         nil)))
 
+  (remove-hook! 'after-change-major-mode-hook
+    #'global-flycheck-mode-enable-in-buffers
+    )
 )
 
 (use-package! flycheck-popup-tip

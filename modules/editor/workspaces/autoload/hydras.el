@@ -3,7 +3,7 @@
 ;; TODO hydra for control of workspaces, windows, window-ring settings
 (require 'hydra)
 
-;;;###autoload (autoload 'hydra-workspace/body "hydras" nil t)
+;;;###autoload (autoload 'hydra-workspace/body "editor/workspaces/autoload/hydras" nil t)
 (defhydra hydra-workspace ()
   (format "%s\n" (+jg-hydra-format-columns
                   '("|Projects"
@@ -63,7 +63,7 @@
   ("d" +jg-ui-toggle-window-dedication                                       :exit nil)
   )
 
-;;;###autoload (autoload 'hydra-window-ring/body "hydras" nil t)
+;;;###autoload (autoload 'hydra-window-ring/body "editor/workspaces/autoload/hydras" nil t)
 (defhydra hydra-window-ring ()
   (format "%s\n" (+jg-hydra-format-columns
                   '("|Window-Ring"

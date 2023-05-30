@@ -6,8 +6,6 @@
 ;; (evil-make-intercept-map helm-map)
 
 (map! :leader
-      :desc "SCRATCH"                      "6" (cmd! (+jg-popup-ivy-open "*scratch*"))
-      :desc "Messages"                     "0" (cmd! (+jg-popup-ivy-open "*Messages*") (when current-prefix-arg (with-current-buffer "*Messages*" (+jg-text-clear-buffer))))
       :desc "Have you Played?"      "o 1"   #'+jg-completion-rps-have-you-playeds
       )
 
@@ -17,11 +15,6 @@
       :desc "Helm Processes"               "h"   #'helm-list-emacs-process
       )
 
-;;-- remap bookmarks
-(map!
- [remap bookmark-jump] #'+jg-completion-ivy-bookmark
- )
-;;-- end remap bookmarks
 
 ;; Movement
 (map! :map helm-map

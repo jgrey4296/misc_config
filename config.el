@@ -19,7 +19,6 @@
       bookmark-default-file           (expand-file-name "bookmarks" doom-user-dir)
       doom-fallback-buffer-name       "base_agenda.org"
       initial-buffer-choice           (expand-file-name "base_agenda.org" doom-user-dir)
-      ispell-personal-dictionary      (expand-file-name "terminal/tool_configs/.ispell_english" doom-user-dir)
       org-agenda-files               `(,(expand-file-name "base_agenda.org" doom-user-dir))
       org-archive-location            (string-join `(,(expand-file-name "org/archive.org" doom-user-dir) "* Main Archive") "::")
       org-directory                   (expand-file-name "~/github/jgrey4296.github.io/orgfiles/")

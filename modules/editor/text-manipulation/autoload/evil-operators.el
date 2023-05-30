@@ -1,6 +1,6 @@
 ;;; +operators.el -*- lexical-binding: t; -*-
 
-;;;###autoload (autoload '+jg-text-encrypt-region "evil-operators" nil t)
+;;;###autoload (autoload '+jg-text-encrypt-region "editor/text-manipulation/autoload/evil-operators" nil t)
 (evil-define-operator +jg-text-encrypt-region (beg end type)
   " Operator to easily envcrypt a region of text "
   :type line
@@ -15,7 +15,7 @@
     )
   )
 
-;;;###autoload (autoload '+jg-text-decrypt-region "evil-operators" nil t)
+;;;###autoload (autoload '+jg-text-decrypt-region "editor/text-manipulation/autoload/evil-operators" nil t)
 (evil-define-operator +jg-text-decrypt-region (beg end type)
   " Operator to easily envcrypt a region of text "
   :type line
@@ -51,7 +51,7 @@
     )
   )
 
-;;;###autoload (autoload '+jg-text-toggle-invisible-spec "evil-operators" nil t)
+;;;###autoload (autoload '+jg-text-toggle-invisible-spec "editor/text-manipulation/autoload/evil-operators" nil t)
 (defun +jg-text-toggle-invisible-spec ()
   (interactive)
   (cond ((and (listp buffer-invisibility-spec) (assoc 'jg-text-invis buffer-invisibility-spec))
@@ -65,7 +65,7 @@
         )
   )
 
-;;;###autoload (autoload '+jg-text-make-invisible "evil-operators" nil t)
+;;;###autoload (autoload '+jg-text-make-invisible "editor/text-manipulation/autoload/evil-operators" nil t)
 (evil-define-operator +jg-text-make-invisible (beg end type)
   " Operator to easily annotate text to be hidden "
   :type inclusive
@@ -73,7 +73,7 @@
   (put-text-property beg end 'invisible 'jg-text-invis)
   )
 
-;;;###autoload (autoload '+jg-text-delete-invisible "evil-operators" nil t)
+;;;###autoload (autoload '+jg-text-delete-invisible "editor/text-manipulation/autoload/evil-operators" nil t)
 (evil-define-operator +jg-text-delete-invisible (beg end type)
   " Operator to easily annotate text to be hidden "
   :type inclusive
@@ -81,7 +81,7 @@
   (put-text-property beg end 'invisible nil)
   )
 
-;;;###autoload (autoload '+jg-text-toggle-invisible "evil-operators" nil t)
+;;;###autoload (autoload '+jg-text-toggle-invisible "editor/text-manipulation/autoload/evil-operators" nil t)
 (evil-define-operator +jg-text-toggle-invisible (beg end type prefix)
   " Operator to show invisible text again "
   :type inclusive
@@ -102,7 +102,7 @@
                        )
   )
 
-;;;###autoload (autoload '+jg-text-split-on-char-op "evil-operators" nil t)
+;;;###autoload (autoload '+jg-text-split-on-char-op "editor/text-manipulation/autoload/evil-operators" nil t)
 (evil-define-operator +jg-text-split-on-char-op (beg end)
   ;; TODO
   :move-point t
@@ -123,7 +123,7 @@
     )
   )
 
-;;;###autoload (autoload '+jg-text-remove-leading-whitespace-op "evil-operators" nil t)
+;;;###autoload (autoload '+jg-text-remove-leading-whitespace-op "editor/text-manipulation/autoload/evil-operators" nil t)
 (evil-define-operator +jg-text-remove-leading-whitespace-op (beg end count)
   :move-point t
   (while (< (point) end)
@@ -133,7 +133,7 @@
     )
   )
 
-;;;###autoload (autoload '+jg-text-uniquify-op "evil-operators" nil t)
+;;;###autoload (autoload '+jg-text-uniquify-op "editor/text-manipulation/autoload/evil-operators" nil t)
 (evil-define-operator +jg-text-uniquify-op (beg end count)
   :move-point t
   (evil-first-non-blank)
@@ -152,7 +152,7 @@
     )
   )
 
-;;;###autoload (autoload '+jg-text-get-line "evil-operators" nil t)
+;;;###autoload (autoload '+jg-text-get-line "editor/text-manipulation/autoload/evil-operators" nil t)
 (evil-define-operator +jg-text-escalate-replace-op (beg end count)
   " Replace a regex in the region,
 with either a numeric or alphabetical escalation "
@@ -175,7 +175,7 @@ with either a numeric or alphabetical escalation "
     )
   )
 
-;;;###autoload (autoload '+jg-text-title-case-op "evil-operators" nil t)
+;;;###autoload (autoload '+jg-text-title-case-op "editor/text-manipulation/autoload/evil-operators" nil t)
 (evil-define-operator +jg-text-title-case-op (beg end)
   :move-point t
   (while (< (point) end)
@@ -183,7 +183,7 @@ with either a numeric or alphabetical escalation "
     )
   )
 
-;;;###autoload (autoload '+jg-text-simple-grep-op "evil-operators" nil t)
+;;;###autoload (autoload '+jg-text-simple-grep-op "editor/text-manipulation/autoload/evil-operators" nil t)
 (evil-define-operator +jg-text-simple-grep-op (beg end count)
   :move-point t
   (interactive)
@@ -202,12 +202,12 @@ with either a numeric or alphabetical escalation "
     )
   )
 
-;;;###autoload (autoload '+jg-text-line-on-char-op "evil-operators" nil t)
+;;;###autoload (autoload '+jg-text-line-on-char-op "editor/text-manipulation/autoload/evil-operators" nil t)
 (evil-define-operator +jg-text-line-on-char-op (beg end count)
   (warn 'todo)
   )
 
-;;;###autoload (autoload '+jg-text-goto-random-line-op "evil-operators" nil t)
+;;;###autoload (autoload '+jg-text-goto-random-line-op "editor/text-manipulation/autoload/evil-operators" nil t)
 (evil-define-operator +jg-text-goto-random-line-op (beg end)
   :motion +evil:whole-buffer-txtobj
   :repeat t
@@ -220,7 +220,7 @@ with either a numeric or alphabetical escalation "
     )
   )
 
-;;;###autoload (autoload '+jg-text-goto-random-line-op "evil-operators" nil t)
+;;;###autoload (autoload '+jg-text-goto-random-line-op "editor/text-manipulation/autoload/evil-operators" nil t)
 (evil-define-operator +jg-text-shift-left (beg end count)
   "Shift text left, preserving state"
   :type line
@@ -236,7 +236,7 @@ with either a numeric or alphabetical escalation "
     )
   )
 
-;;;###autoload (autoload '+jg-text-shift-right "evil-operators" nil t)
+;;;###autoload (autoload '+jg-text-shift-right "editor/text-manipulation/autoload/evil-operators" nil t)
 (evil-define-operator +jg-text-shift-right (beg end count)
   "shift text right, preserving state"
   :type line
@@ -252,7 +252,7 @@ with either a numeric or alphabetical escalation "
     )
   )
 
-;;;###autoload (autoload '+jg-text-shift-right "evil-operators" nil t)
+;;;###autoload (autoload '+jg-text-shift-right "editor/text-manipulation/autoload/evil-operators" nil t)
 (evil-define-operator +jg-text-inc-num (beg end type count)
   :type line
   :motion beginning-of-visual-line
@@ -268,7 +268,7 @@ with either a numeric or alphabetical escalation "
     )
   )
 
-;;;###autoload (autoload '+jg-text-dec-num "evil-operators" nil t)
+;;;###autoload (autoload '+jg-text-dec-num "editor/text-manipulation/autoload/evil-operators" nil t)
 (evil-define-operator +jg-text-dec-num (beg end type count)
   :type line
   :motion beginning-of-visual-line

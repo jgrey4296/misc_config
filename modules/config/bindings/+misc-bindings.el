@@ -13,6 +13,7 @@
       "<f4>" #'ignore
       "<f5>" #'ignore
       "<f6>" #'ignore
+      "<f9>" #'ignore
       "<f10>" #'ignore
       )
 

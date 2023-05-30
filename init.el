@@ -10,7 +10,7 @@
  :editor char-insert fold navigation tagging text-manipulation
  :editor fold snippets lookup workspaces diff
 
- :emacs electric vc autosave
+ :emacs electric vc autosave calendar
  :emacs dired hydra ibuffer popup version-control
 
  :lang-data csv graphql

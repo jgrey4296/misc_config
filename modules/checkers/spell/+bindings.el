@@ -7,7 +7,8 @@
       :prefix ("w" . "Words")
        :desc "ispell-word"               "s" #'ispell-word
        :desc "add word to dict"          "a" #'+spell/add-word
-       :desc "remove word from dict"     "A" #'+spell/remove-word
+       :desc "Word(net)"                 "w" #'helm-wordnet-suggest
+       :desc "Word(nut)"                 "W" #'wordnut-search
        )
 
 ;; (map! :map jg-binding-forward-general-motion-map

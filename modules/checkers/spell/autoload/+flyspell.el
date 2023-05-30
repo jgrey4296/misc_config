@@ -61,12 +61,6 @@ or session. Otherwise, the addition is permanent."
   (ispell-pdict-save t))
 
 ;;;###autoload
-(defun +spell/remove-word (word &optional _scope)
-  "Remove WORD from your personal dictionary."
-  (interactive)
-  (user-error "Not supported yet with +flyspell"))
-
-;;;###autoload
 (defun +spell/next-error ()
   "Jump to next flyspell error."
   (interactive)

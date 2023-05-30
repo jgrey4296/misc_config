@@ -1,18 +1,18 @@
 ;;; util/text/config.el -*- lexical-binding: t; -*-
 (load! "+defs")
 (load! "+vars")
+
 (defer-load! "+spec-defs")
-(defer-load! jg-bindings-total "evil/+operators" "evil/+motions" "evil/+state" "evil/+text-obj" "+bindings" "+advice")
-(defer-load! "modes/+derived-modes")
+(after! jg-bindings-total (load! "+bindings"))
+
 (after! evil
   (remove-hook! 'after-change-major-mode-hook #'doom--setq-evil-shift-width-for-after-change-major-mode-h)
   )
+(add-hook! 'doom-init-ui-hook :append #'+ligature-init-composition-table-h)
 (when (memq 'visual-line-mode text-mode-hook)
   (remove-hook 'text-mode-hook #'visual-line-mode)
   (add-hook 'text-mode-hook #'+word-wrap-mode)
   )
-
-(add-hook! 'doom-init-ui-hook :append #'+ligature-init-composition-table-h)
 
 (use-package! lint-result-mode
   :config
@@ -157,6 +157,5 @@
    :post-handlers '(("| " "SPC")
                     (" | " "*")
                     ("|[i]\n[i]" "RET")))
-
 
   )

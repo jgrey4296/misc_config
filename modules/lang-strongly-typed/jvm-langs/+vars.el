@@ -115,6 +115,15 @@
                     '(gradle ("build.gradle") :project-file "build.gradle" :compilation-dir nil :configure nil :compile "gradle build" :test "gradle test" :install nil :package nil :run nil :test-suffix "Spec")
                     '(jg-kotlin-project ("build.gradle" "build.gradle.kts") :project-file "build.grade")
                     )
+(spec-handling-add! evil-embrace
+                    '(scala-mode
+                      ,(cons ?f (make-embrace-pair-struct
+                                 :key ?$
+                                 :left "${"
+                                 :right "}"))
+                      )
+                    )
+;;-- end specs
 (spec-handling-add! lookup-regular
                     '(kotlin-mode
                      ("Android docs" . "https://developer.android.com/guide")
@@ -139,13 +148,4 @@
                      ("SBT Reference" . "https://www.scala-sbt.org/1.x/docs/index.html")
                      ("Scala LSP" . "https://scalameta.org/metals/docs/")
                      )
-                    )
-(spec-handling-add! evil-embrace
-                    '(scala-mode
-                      ,(cons ?f (make-embrace-pair-struct
-                                 :key ?$
-                                 :left "${"
-                                 :right "}"))
-                      )
-                    )
-;;-- end specs
+)

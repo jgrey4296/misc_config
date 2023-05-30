@@ -1,21 +1,19 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
 
-(setq diff-command "difft"
-      diff-switches (string-join '(
-                                   "--color" "never" ;; always/auto/never
-                                   "--syntax-highlight" "off" ;; on/off
-                                   "--display" "side-by-side" ;; side-by-side/inline
-                                   ) " ")
+(setq diff-command "diff"
+      diff-switches "-u"
+      ;; (string-join '(
+      ;;                "--color" "never" ;; always/auto/never
+      ;;                "--syntax-highlight" "off" ;; on/off
+      ;;                "--display" "side-by-side" ;; side-by-side/inline
+      ;;                ) " ")
 
       vdiff-diff-algorithm 'diff
       vdiff-diff3-command '("diff3")
 
-      ediff-custom-diff-program "difft"
-      ediff-custom-diff-options ""
-
-      ediff-diff-program "diff"
-      ediff-diff-options ""
+      ediff-custom-diff-program "diff"
+      ediff-custom-diff-options "-c"
 
       vc-git-diff-switches '("--histogram")
       )
@@ -30,10 +28,10 @@
       ;; `vdiff-diff-algorithms' for the associated command line arguments.
       vdiff-diff-algorithms '((diff . "diff -u")
                               (diff-minimal . "diff -u --minimal")
-                              (git-diff . "git --no-pager diff --no-index --no-color")
-                              (git-diff-myers . "git --no-pager diff --myers --no-index --no-color")
-                              (git-diff-minimal . "git --no-pager diff --minimal --no-index --no-color")
-                              (git-diff-patience . "git --no-pager diff --patience --no-index --no-color")
+                              (git-diff           . "git --no-pager diff --no-index --no-color")
+                              (git-diff-myers     . "git --no-pager diff --myers --no-index --no-color")
+                              (git-diff-minimal   . "git --no-pager diff --minimal --no-index --no-color")
+                              (git-diff-patience  . "git --no-pager diff --patience --no-index --no-color")
                               (git-diff-histogram . "git --no-pager diff --histogram --no-index --no-color")
                               (custom . "difft")
                               )

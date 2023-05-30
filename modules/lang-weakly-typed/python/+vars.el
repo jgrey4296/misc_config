@@ -228,6 +228,33 @@
                      ("Pypi"   "https://pypi.org/search/?q=%s")
                      )
                     )
+(spec-handling-add! lookup-handler
+                    `(anaconda-mode
+                      :definition ,#'+jg-conda-find-defs
+                      :references ,#'+jg-conda-find-references
+                      :documentation ,#'+jg-conda-show-doc)
+                    )
+(spec-handling-add! docsets
+                    '((python-mode inferior-python-mode)
+                      "Python 3" "NumPy" "SciPy" "Pandas"
+                      )
+                    )
+(set-repl-handler! 'python-mode #'+jg-python/open-repl
+  :persist t
+  :send-region #'python-shell-send-region
+  :send-buffer #'python-shell-send-buffer
+  )
+(set-eval-handler! 'python-mode
+    '((:command . (lambda () python-shell-interpreter))
+      (:exec (lambda ()
+               (if-let* ((bin (executable-find "pipenv" t))
+                         (_ (pipenv-project-p)))
+                   (format "PIPENV_MAX_DEPTH=9999 %s run %%c %%o %%s %%a" bin)
+                 "%c %o %s %a")))
+      (:description . "Run Python script"))
+    )
+;;-- end specs
+
 (spec-handling-add! lookup-regular
                     '(python-mode
                       ("Awesome Libs"      . "https://github.com/vinta/awesome-python")
@@ -327,29 +354,3 @@
                      ("Manifest format" . "https://docs.python.org/3/distutils/sourcedist.html?highlight=manifest")
                      )
                     )
-(spec-handling-add! lookup-handler
-                    `(anaconda-mode
-                      :definition ,#'+jg-conda-find-defs
-                      :references ,#'+jg-conda-find-references
-                      :documentation ,#'+jg-conda-show-doc)
-                    )
-(spec-handling-add! docsets
-                    '((python-mode inferior-python-mode)
-                      "Python 3" "NumPy" "SciPy" "Pandas"
-                      )
-                    )
-(set-repl-handler! 'python-mode #'+jg-python/open-repl
-  :persist t
-  :send-region #'python-shell-send-region
-  :send-buffer #'python-shell-send-buffer
-  )
-(set-eval-handler! 'python-mode
-    '((:command . (lambda () python-shell-interpreter))
-      (:exec (lambda ()
-               (if-let* ((bin (executable-find "pipenv" t))
-                         (_ (pipenv-project-p)))
-                   (format "PIPENV_MAX_DEPTH=9999 %s run %%c %%o %%s %%a" bin)
-                 "%c %o %s %a")))
-      (:description . "Run Python script"))
-    )
-;;-- end specs

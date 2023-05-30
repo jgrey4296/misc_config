@@ -22,15 +22,14 @@
 
 
 (load! "+vars")
-(load! "+advice")
 (after! (jg-bindings-total hydra)
   (load! "+bindings")
   )
 
 (use-package! hydra
-  :config
-  (load! "toggle/+sub-hydras")
-  (load! "toggle/+hydra")
+  :after hydra-utils
   )
+
+(use-package! hydra-utils :defer t)
 
 ;;; config.el ends here

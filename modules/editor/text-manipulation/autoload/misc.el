@@ -62,3 +62,12 @@
     (list major minor)
     )
   )
+
+;;;###autoload
+(defun +jg-text-join-line-bol (beg end)
+  " When joining lines, don't lose sight of the lhs of the buffer "
+  (beginning-of-line)
+  )
+
+;;;###autoload
+(advice-add 'evil-join :after #'+jg-text-join-line-bol)

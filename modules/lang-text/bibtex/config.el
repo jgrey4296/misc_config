@@ -1,8 +1,7 @@
 ;;; domain-specific/bibtex/config.el -*- lexical-binding: t; -*-
 
 (defer-load! "+vars")
-(defer-load! jg-bindings-total "evil/+motions" "+bindings")
-(autoload '+jg-bibtex-hydra/body (file-name-concat (dir!) "autoload/hydra.el") nil t)
+(defer-load! jg-bindings-total "+bindings")
 
 (use-package! bibtex
   :defer t

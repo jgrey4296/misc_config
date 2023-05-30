@@ -33,7 +33,6 @@
       :desc "previous-line"         "k"       #'evil-previous-line
       :desc "forward-char"          "l"       #'evil-forward-char
 
-      :desc "Goto Column"            "\\"      #'evil-goto-column
       :desc "Return"                 "RET"     #'evil-ret
       :desc "Search"                 "/"       #'evil-ex-search-forward
       )

@@ -4,12 +4,6 @@
 (after! jg-bindings-total
   (load! "+bindings")
   )
-(after! ivy
-  (load! "+ivys")
-  )
-(after! (ivy hydra)
-  (load! "+hydras")
-  )
 
 (use-package! ivy
   :hook (doom-first-input . ivy-mode)
@@ -41,6 +35,7 @@
 
   ;; Fix #4886: otherwise our remaps are overwritten
   (setq ivy-mode-map (make-sparse-keymap))
+
   :config
   ;; Counsel changes a lot of ivy's state at startup; to control for that, we
   ;; need to load it as early as possible. Some packages (like `ivy-prescient')
@@ -49,8 +44,7 @@
 
   ;; Highlight each ivy candidate including the following newline, so that it
   ;; extends to the right edge of the window
-  (setf (alist-get 't ivy-format-functions-alist)
-        #'+ivy-format-function-line-or-arrow)
+  (setf (alist-get 't ivy-format-functions-alist) #'+ivy-format-function-line-or-arrow)
 
   ;; Integrate `ivy' with `better-jumper'; ensure a jump point is registered
   ;; before jumping to new locations with ivy
@@ -59,15 +53,7 @@
           (with-ivy-window
             (setq +ivy--origin (point-marker)))))
 
-  (add-hook! 'minibuffer-exit-hook
-    (defun +ivy--set-jump-point-maybe-h ()
-      (when (markerp (bound-and-true-p +ivy--origin))
-        (unless (equal (ignore-errors (with-ivy-window (point-marker)))
-                       +ivy--origin)
-          (with-current-buffer (marker-buffer +ivy--origin)
-            (better-jumper-set-jump +ivy--origin)))
-        (set-marker +ivy--origin nil))
-      (setq +ivy--origin nil)))
+  (add-hook! 'minibuffer-exit-hook #'+ivy--set-jump-point-maybe-h)
 
   (after! yasnippet
     (add-hook 'yas-prompt-functions #'+ivy-yas-prompt-fn))

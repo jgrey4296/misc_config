@@ -15,6 +15,11 @@
 (set-eval-handler! '(pasp-mode) #'+jg-pasp-eval)
 ;;-- end eval handler
 
+(set-repl-handler! 'clips-mode  '+clips-mode/open-repl)
+(set-repl-handler! 'instal-mode '+instal-mode/open-repl)
+(set-repl-handler! 'soar-mode   '+soar-mode/open-repl)
+(set-repl-handler! 'ceptre-mode '+ceptre-mode/open-repl)
+
 ;;-- specs
 
 (spec-handling-add! popup
@@ -33,6 +38,8 @@
                      ("\\.soar$" :trigger "__" :mode soar-mode)
                      )
                     )
+;;-- end specs
+
 (spec-handling-add! lookup-regular
                     '(jacamo-mode
                      ("Jacamo Github" . "https://github.com/jacamo-lang/jacamo")
@@ -58,4 +65,3 @@
                      ("Z3 Tutorial" . "https://www.philipzucker.com/z3-rise4fun/guide.html")
                      )
                     )
-;;-- end specs

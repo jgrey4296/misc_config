@@ -1,6 +1,6 @@
 ;;; domain-specific/bibtex/+hydra.el -*- lexical-binding: t; -*-
 
-
+;;;###autoload (autoload '+jg-bibtex-hydra/body "hydra" nil t)
 (defhydra +jg-bibtex-hydra (:color blue)
   "
 _w_: WOS

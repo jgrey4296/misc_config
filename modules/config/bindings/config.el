@@ -1,7 +1,6 @@
 ;;; config/default/config.el -*- lexical-binding: t; -*-
 
 (load! "+vars")
-(load! "util/+cleaning")
 
 (after! (evil faster-whichkey)
   (load! "+minibuffer-bindings")

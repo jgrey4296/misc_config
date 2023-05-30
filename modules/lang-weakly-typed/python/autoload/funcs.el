@@ -1,5 +1,7 @@
 ;;; +funcs.el -*- lexical-binding: t; -*-
 
+
+;;;###autoload (autoload #'+jg-python-forward-defun "funcs" nil t)
 (evil-define-motion +jg-python-forward-defun (count)
   " Custom Python movement, taking fold-blocks into account "
   :jump t

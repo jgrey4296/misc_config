@@ -85,6 +85,7 @@
       )
 
 (map! :map evil-conflict-merge-state-map
+      :after conflict-merge-state
       :desc "Next Conflict"  "j"   #'smerge-next
       :desc "Prev Conflict"  "k"   #'smerge-prev
       :desc "Choose Upper"   "U"   #'smerge-keep-upper

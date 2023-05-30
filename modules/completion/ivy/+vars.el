@@ -35,6 +35,17 @@ results buffer.")
       swiper-action-recenter t
       avy-all-windows t
       )
+
+(after! ivy
+  (ivy-add-actions 'counsel-find-file
+                   '(("f" (lambda (x) (find-file-literally x)) "Fundamental")))
+  (ivy-add-actions 'ivy-switch-buffer
+                   '(
+                     ("k" +jg-ivy-kill-buffer "Kill")
+                     )
+                   )
+  )
+
 ;;-- end ivy
 
 ;;-- company

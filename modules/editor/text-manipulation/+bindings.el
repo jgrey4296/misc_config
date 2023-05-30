@@ -25,10 +25,12 @@
        )
       )
 
+
 ;;-- evil bindings
 (map! :map jg-binding-normal-state-map
       :desc "breakpoint"          "I b"   #'+jg-text-insert-debug
 
+      :desc "SPC? Insert" "I SPC" #'evil-jg-insert-state
       :desc "Rotate"         "R"   #'rotate-text
       ;; :desc "Zap to Char"    "Z"   #'zap-up-to-char
       )

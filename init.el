@@ -44,7 +44,7 @@
 
  :checkers syntax (spell +flyspell) grammar
 
- :tools (eval +overlay) lsp mail twitter pdfs
+ :tools (eval +overlay) ide-support mail twitter pdfs
  :tools editorconfig rgb tree-sitter mail term
  :tools taskrunners
  ;;:tools ein make debugger

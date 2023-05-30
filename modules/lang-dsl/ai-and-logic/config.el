@@ -1,7 +1,7 @@
 ;; Misc AI Languages:
 
 
-(defer-load! "+indent" "+vars" "+repl" "+funcs" "+advice")
+(defer-load! "+vars")
 (defer-load! jg-bindings-total "+bindings")
 
 ;; (add-to-list 'auto-mode-alist '("\\.pl\\'" . prolog-mode))

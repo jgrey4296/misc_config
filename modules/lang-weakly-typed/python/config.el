@@ -3,10 +3,9 @@
 (doom-log "Config JG Python")
 
 (defer-load! python-mode "+vars")
-(defer-load! "+spec-defs"  "modes/+derived-modes"  "modes/+manifest-mode")
+(defer-load! "+spec-defs")
 (defer-load! "+envs" "+lsp"  "+testing"  "+cython")
 (defer-load! jg-bindings-total "+bindings")
-(autoload #'+jg-python-forward-defun (file-name-concat (dir!) "autoload/funcs") nil t)
 
 (use-package! python
   :config

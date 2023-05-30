@@ -14,14 +14,14 @@
 
 ;;-- smartparens
 (setq sp-highlight-pair-overlay nil
-        sp-highlight-wrap-overlay nil
-        sp-highlight-wrap-tag-overlay nil
-        sp-show-pair-from-inside t
-        sp-cancel-autoskip-on-backward-movement nil
-        sp-pair-overlay-keymap (make-sparse-keymap)
-        sp-max-prefix-length 25
-        sp-max-pair-length 4
-        )
+      sp-highlight-wrap-overlay t
+      sp-highlight-wrap-tag-overlay t
+      sp-show-pair-from-inside t
+      sp-cancel-autoskip-on-backward-movement nil
+      sp-pair-overlay-keymap (make-sparse-keymap)
+      sp-max-prefix-length 25
+      sp-max-pair-length 4
+      )
 
 (setq-default sp-autoinsert-pair t
               sp-autoinsert-quote-if-followed-by-closing-pair nil

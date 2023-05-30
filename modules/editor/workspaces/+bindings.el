@@ -7,8 +7,9 @@
   [remap evil-window-delete] #'+workspace/close-window-or-workspace)
 
 (map! :leader
-      :desc "Window Hydra" "W" #'hydra-workspace/body
-      :desc "Ring Hydra"   "R" #'hydra-window-ring/body
+      :desc "Window Hydra"       "W" #'hydra-workspace/body
+      :desc "Ring Hydra"         "R" #'hydra-window-ring/body
+      :desc "Workspace Counsel"  "w RET" #'+jg-workspaces-ivy
       )
 
 (map! :leader

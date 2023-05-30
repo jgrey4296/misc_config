@@ -194,7 +194,7 @@
 
 ;;-- <leader> j -- Jumping
 (map! :leader
-      :desc "Jump"    "j" jg-binding-jump-map)
+      :desc "Jump"    "j" #'jg-binding-jump-map)
 ;;-- end <leader> j -- Jumping
 
 ;;-- <leader> m -- Local Mode

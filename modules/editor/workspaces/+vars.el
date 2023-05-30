@@ -39,8 +39,8 @@ stored in `persp-save-dir'.")
 (defvar jg-projects-doot-cmd "doot")
 
 (setq counsel-compile-local-builds '(
-                                     +jg-projects-get-doot-commands
-                                     +jg-projects-get-gradle-commands
+                                     +jg-workspaces-get-doot-commands
+                                     +jg-workspaces-get-gradle-commands
                                      ;; counsel-compile-get-filtered-history
                                      ;; counsel-compile-get-build-directories
                                      counsel-compile-get-make-invocation

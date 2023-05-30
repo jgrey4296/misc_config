@@ -22,7 +22,7 @@
 
 
 (defer-load! "+vars")
-(defer-load! jg-bindings-total "+bindings")
+(after! jg-bindings-total (load! "+bindings"))
 
 (use-package! vundo
   :commands vundo

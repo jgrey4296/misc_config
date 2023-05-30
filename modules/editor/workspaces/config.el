@@ -2,9 +2,7 @@
 
 (load! "+vars")
 (defer-load! "+spec-defs")
-(defer-load! jg-bindings-total "+bindings")
-(defer-load! (ivy counsel) "+ivys")
-(defer-load! hydra "+hydras")
+(after! jg-bindings-total (load! "+bindings"))
 
 (use-package! persp-mode
   :unless noninteractive
@@ -225,6 +223,14 @@
 (use-package! window-ring-minor-mode
   :hook (doom-init-ui . window-ring-minor-mode)
   :commands window-ring-new
+  :config
+  (after! ivy
+    (ivy-add-actions '+jg-workspaces-ivy
+                     '(("r" +jg-workspaces-rename "Rename")
+                       ("l" +jg-workspaces-new-ring "new loop")
+                       )
+                     )
+    )
   )
 
 (use-package! project-walk

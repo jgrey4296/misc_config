@@ -4,7 +4,7 @@
 
 ;;-- remaps
 (map! :after counsel
-      [remap bookmark-jump]              #'+jg-completion-ivy-bookmark
+      [remap bookmark-jump]              #'+jg-ivy-bookmark
       [remap apropos]                    #'counsel-apropos
       [remap bookmark-jump]              #'counsel-bookmark
       [remap compile]                    #'+ivy/compile
@@ -110,7 +110,7 @@
 ;;-- lisp
 (map! :map emacs-lisp-mode-map
       :localleader
-      "i f" #'+jg-completion-ivy-features
+      "i f" #'+jg-ivy-features
       )
 
 ;;-- end lisp
@@ -119,6 +119,12 @@
 (map! :leader
       :desc "SCRATCH"                      "6" (cmd! (+jg-popup-ivy-open "*scratch*"))
       :desc "Messages"                     "0" (cmd! (+jg-popup-ivy-open "*Messages*") (when current-prefix-arg (with-current-buffer "*Messages*" (+jg-text-clear-buffer))))
-      :desc "Workspace Counsel"            "w RET" #'+jg-completion-ivy-workspace
       )
 ;;-- end leader helms/ivys
+
+(map! :map ivy-minibuffer-map
+      [remap doom/delete-backward-word] #'ivy-backward-kill-word
+      "C-c C-e"                         #'+ivy/woccur
+      "C-o"                             #'ivy-dispatching-done
+      "M-o"                             #'hydra-ivy/body
+      )

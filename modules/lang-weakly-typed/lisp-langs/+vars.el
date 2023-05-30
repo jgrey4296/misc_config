@@ -109,16 +109,6 @@ See `+emacs-lisp-non-package-mode' for details.")
                       ,#'+jg-text-cleanup-whitespace)
     )
 
-(spec-handling-add! lookup-regular
-                    '(emacs-lisp-mode
-                      ("GNU Lisp" . "https://www.gnu.org/software/emacs/manual/html_node/elisp/index.html")
-                      ("Melpa" . "https://melpa.org/#/")
-                      ("Doom"  . "https://github.com/doomemacs/doomemacs")
-                      )
-                    '(racket-mode
-                      ("Racket Docs" . "https://docs.racket-lang.org/")
-                      )
-                    )
 (spec-handling-add! lookup-url
                     '(lisp
                      ("elisp melpa" "https://melpa.org/#/?q=%s")
@@ -167,3 +157,14 @@ See `+emacs-lisp-non-package-mode' for details.")
                     )
 
 ;;-- end specs
+
+(spec-handling-add! lookup-regular
+                    '(emacs-lisp-mode
+                      ("GNU Lisp" . "https://www.gnu.org/software/emacs/manual/html_node/elisp/index.html")
+                      ("Melpa" . "https://melpa.org/#/")
+                      ("Doom"  . "https://github.com/doomemacs/doomemacs")
+                      )
+                    '(racket-mode
+                      ("Racket Docs" . "https://docs.racket-lang.org/")
+                      )
+                    )

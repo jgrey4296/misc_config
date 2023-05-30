@@ -149,6 +149,7 @@
   :choices browse-select-variants
   )
 
+;;;###autoload (autoload #'jg-toggle-main "transient-toggles" nil t)
 (transient-define-prefix jg-toggle-main ()
   "Main controller for ui settings"
   [

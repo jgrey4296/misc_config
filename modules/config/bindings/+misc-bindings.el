@@ -30,31 +30,6 @@
       )
 
 
-;;-- flycheck
-(map! :map flycheck-error-list-mode-map
-      :after flycheck
-      :n "," nil
-      :n "," #'tabulated-list-sort
-      :n "{" #'tabulated-list-narrow-current-column
-      :n "}" #'tabulated-list-widen-current-column
-      )
-
-(map! :leader
-      :after flycheck
-      :desc "Flycheck" "!" flycheck-command-map
-      :prefix "c"
-      :desc "Flycheck" "!" flycheck-command-map
-      )
-;;-- end flycheck
-
-;;-- messages
-(map! :after message
-      :map messages-buffer-mode-map
-      :g "0" #'evil-beginning-of-line
-      )
-
-;;-- end messages
-
 ;;-- evil overrides/intercept
 (evil-make-overriding-map messages-buffer-mode-map)
 (evil-make-intercept-map read-expression-map)

@@ -9,7 +9,6 @@
 ;;-- leader map
 (map! :leader
       :desc "Insert Timestamp"  "i t"   #'org-time-stamp
-      :desc "Jump to Calendar"  "j c"   #'org-goto-calendar
       :desc "Toggle Links"      "t l"   #'org-toggle-link-display
       )
 (map! :leader

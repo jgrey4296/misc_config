@@ -31,6 +31,7 @@
       :desc "Insert snippet"        "i" #'yas-insert-snippet
       :desc "Find global snippet"   "/" #'yas-visit-snippet-file
       :desc "Reload snippets"       "r" #'yas-reload-all
+      :desc "Random Var"            "v" #'+snippets-random-var
        (:prefix ("l" . "Lorem Ipsum")
         :desc "Sentence"         "s" #'lorem-ipsum-insert-sentences
         :desc "Paragraph"        "p" #'lorem-ipsum-insert-paragraphs

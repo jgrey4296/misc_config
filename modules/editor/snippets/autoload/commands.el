@@ -79,3 +79,28 @@ shadow the default snippet)."
          (concat "\\[yas-load-snippet-buffer-and-close] to finish, "
                  "\\[+snippet--abort] to abort, "
                  "\\[yas-tryout-snippet] to test it"))))
+
+(defvar +snippets-random-var-names '(bar bloo baz barry other))
+(defvar +snippets-random-var-join ":")
+
+;;;###autoload
+(defun +snippets-random-var (arg)
+  (interactive "P")
+  (cond ((consp arg)
+         (insert (seq-random-elt +snippets-random-var-names)))
+        ((numberp arg)
+         (let ((head (seq-random-elt +snippets-random-var-names))
+               (body (mapcar #'(lambda (x)
+                                 (symbol-name (seq-random-elt +snippets-random-var-names)))
+                             (make-list (1- arg) t)))
+               )
+           (insert ?\"
+                   (string-join `(,(symbol-name head) ""
+                                      ,@body)
+                                +snippets-random-var-join)
+                   ?\"
+                   )))
+        (t
+         (insert ?\" (symbol-name (seq-random-elt +snippets-random-var-names))  ?\"))
+        )
+  )

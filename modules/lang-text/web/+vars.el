@@ -45,6 +45,25 @@ If set to `nil', disable all the above behaviors.")
                                 )
                      )
                     )
+(spec-handling-add! company
+                    `(alchemist-mode (:mode . ,#'alchemist-company))
+                    `(pug-mode (:mode . ,#'company-web-jade))
+                    `(web-mode (:favour . ,#'company-css) (:mode . ,#'company-web-html))
+                    `(slim-mode (:mode . ,#'company-web-slim))
+                    `(sass-mode (:mode . ,#'company-css))
+                    )
+(spec-handling-add! tree-sit-lang
+                    '(css-mode        . css)
+                    '(html-mode       . html)
+                    '(mhtml-mode      . html)
+                    '(javascript-mode . javascript)
+                    '(js-mode         . javascript)
+                    '(js2-mode        . javascript)
+                    '(js3-mode        . javascript)
+                    '(typescript-mode . typescript)
+                    )
+;;-- end specs
+
 (spec-handling-add! lookup-regular
                     '((css-mode less-css-mode scss-mode sass-mode)
                      ("CSS Reference" . "https://developer.mozilla.org/en-US/docs/Web/CSS")
@@ -60,11 +79,3 @@ If set to `nil', disable all the above behaviors.")
                      ("Pelican" . "https://docs.getpelican.com/en/latest/")
                      )
                     )
-(spec-handling-add! company
-                    `(alchemist-mode (:mode . ,#'alchemist-company))
-                    `(pug-mode (:mode . ,#'company-web-jade))
-                    `(web-mode (:favour . ,#'company-css) (:mode . ,#'company-web-html))
-                    `(slim-mode (:mode . ,#'company-web-slim))
-                    `(sass-mode (:mode . ,#'company-css))
-                    )
-;;-- end specs

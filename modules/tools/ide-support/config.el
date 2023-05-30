@@ -122,6 +122,12 @@
                                   )
                         )
                       )
+
+  (spec-handling-new! tree-sit-lang
+                      tree-sitter-major-mode-language-alist
+                      :loop collect
+                      `(,key . ,val)
+                      )
   :config
   (require 'tree-sitter-langs)
   )

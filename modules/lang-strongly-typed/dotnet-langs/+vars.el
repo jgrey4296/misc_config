@@ -23,6 +23,19 @@
                                ("class" "struct"))
                      )
                     )
+(spec-handling-add! tree-sit-lang
+                    '(csharp-mode     . c-sharp)
+                    )
+(spec-handling-add! lookup-handler
+                    '(fsharp-mode :async t :definition fsharp-ac/gotodefn-at-point)
+                    )
+(spec-handling-add! company
+                    '(fsharp-mode (:mode . #'fsharp-ac/company-backend))
+                    )
+(set-electric! 'csharp-mode :chars '(?\n ?\}))
+(set-repl-handler! 'fsharp-mode #'run-fsharp)
+;;-- end specs
+
 (spec-handling-add! lookup-regular
                     '(csharp-mode
                      ("Unity Manual" . "https://docs.unity3d.com/Manual/index.html")
@@ -35,12 +48,3 @@
                      ("Microsoft F# reference" . "https://docs.microsoft.com/en-us/dotnet/fsharp/")
                      )
                     )
-(spec-handling-add! lookup-handler
-                    '(fsharp-mode :async t :definition fsharp-ac/gotodefn-at-point)
-                    )
-(spec-handling-add! company
-                    '(fsharp-mode (:mode . #'fsharp-ac/company-backend))
-                    )
-(set-electric! 'csharp-mode :chars '(?\n ?\}))
-(set-repl-handler! 'fsharp-mode #'run-fsharp)
-;;-- end specs

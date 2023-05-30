@@ -8,6 +8,9 @@
                    :actions '(insert)
                    :post-handlers '(("| " "SPC") ("|[i]*)[d-2]" "RET")))))
 
+(spec-handling-add! tree-sit-lang
+                    '(ocaml-mode      . ocaml)
+                    )
 (spec-handling-add! company
                     '(tuareg-mode #'merlin-company-backend)
                     '(sml-mode #'company-mlton-grouped-backend)

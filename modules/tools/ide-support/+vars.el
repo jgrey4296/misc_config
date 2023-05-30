@@ -20,8 +20,11 @@ If it is t, it is enabled in all modes.
 If nil, it is disabled in all modes")
 
 (defvar +tree-sitter-inner-text-objects-map (make-sparse-keymap))
+
 (defvar +tree-sitter-outer-text-objects-map (make-sparse-keymap))
+
 (defvar +tree-sitter-goto-previous-map (make-sparse-keymap))
+
 (defvar +tree-sitter-goto-next-map (make-sparse-keymap))
 ;;-- end definitions
 
@@ -97,12 +100,6 @@ If nil, it is disabled in all modes")
                      )
                     )
 
-;; (spec-handling-add! lookup-url nil
-;;                     ('lsp
-;;                      ("lsp" "url")
-;;                      )
-;;                     )
-
 (spec-handling-add! lookup-handler
                     `(lsp-mode
                      :definition ,#'+lsp-lookup-definition-handler
@@ -131,4 +128,15 @@ If nil, it is disabled in all modes")
                       )
   )
 
+(spec-handling-add! tree-sit-lang
+                '(agda-mode       . agda)
+                '(c-mode          . c)
+                '(c++-mode        . cpp)
+
+                '(elm-mode        . elm)
+
+                '(julia-mode      . julia)
+                '(ruby-mode       . ruby)
+                '(tuareg-mode     . ocaml)
+                )
 ;;-- end specs

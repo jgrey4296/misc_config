@@ -20,5 +20,8 @@
                       ("^\\*nixos-options-doc\\*$" :ttl 0 :quit t)
                       )
                     )
+(spec-handling-add! tree-sit-lang
+                    '(nix-mode . nix)
+                    )
 
 (set-repl-handler! 'nix-mode #'+nix/open-repl)

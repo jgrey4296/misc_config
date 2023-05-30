@@ -221,7 +221,10 @@
                       "yield"  :yield
                       )
                     )
-
+(spec-handling-add! tree-sit-lang
+                    '(python-mode . python)
+                    '(doot-mode . python)
+                    )
 (spec-handling-add! lookup-url
                     '(python
                      ("Python" "https://docs.python.org/3/search.html?q=%s&check_keywords=yes&area=default")

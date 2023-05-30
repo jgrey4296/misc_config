@@ -45,7 +45,7 @@
     (ivy-read "Create or jump to workspace: "
               (+workspace-list-names)
               :history 'workspace-history
-              :action '(+jg-workspaces-switch)
+              :action #'+jg-workspaces-switch
               :caller '+jg-workspaces-ivy)
     )
 

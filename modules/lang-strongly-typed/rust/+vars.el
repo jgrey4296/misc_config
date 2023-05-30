@@ -19,7 +19,6 @@
 ;;
 ;;; Code:
 
-
 (setq rustic-lsp-client nil ;; HACK `rustic' sets up some things too early. I'd rather disable it and let our respective modules standardize how they're initialized.
       rustic-indent-method-chain t
       rust-prettify-symbols-alist nil ;; Conflicts with (and is redundant with) :ui ligatures
@@ -31,13 +30,13 @@
   (add-to-list 'projectile-project-root-files "Cargo.toml")
   )
 
-
 ;;-- specs
 (spec-handling-add! popup
                     '(rust
                      ("^\\*rustic-compilation" :vslot -1)
                      )
                     )
+
 (spec-handling-add! file-templates
                     '(rust
                      ("config\\.toml$"   :trigger "__config.toml" :mode rust-mode)
@@ -88,6 +87,21 @@
                     '(rust-cargo ("Cargo.toml") :project-file "Cargo.toml" :compilation-dir nil :configure nil :compile "cargo build" :test "cargo test" :install nil :package nil :run "cargo run")
                     )
 
+(spec-handling-add! docsets '(rustic-mode "Rust"))
+;;-- end specs
+
+;;-- LSP
+(setq lsp-rust-analyzer-server-command '("rustup" "run" "nightly" "rust-analyzer")
+      rustic-analyzer-command '("rustup" "run" "nightly" "rust-analyzer")
+      lsp-rust-server 'rust-analyzer
+ )
+(spec-handling-add! tree-sit-lang
+                    '(rust-mode       . rust)
+                    '(rustic-mode     . rust)
+                    )
+
+;;-- end LSP
+
 (spec-handling-add! lookup-regular
                     '((rust-mode rustic-mode)
                       ("Rust By Example"         . "https://doc.rust-lang.org/rust-by-example/index.html")
@@ -103,14 +117,3 @@
                       ("Embedded Rust"           . "https://docs.rust-embedded.org/book/")
                      )
                     )
-(spec-handling-add! docsets '(rustic-mode "Rust"))
-;;-- end specs
-
-;;-- LSP
-(setq lsp-rust-analyzer-server-command '("rustup" "run" "nightly" "rust-analyzer")
-      rustic-analyzer-command '("rustup" "run" "nightly" "rust-analyzer")
-      lsp-rust-server 'rust-analyzer
- )
-
-
-;;-- end LSP

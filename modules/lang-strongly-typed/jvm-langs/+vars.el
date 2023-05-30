@@ -82,7 +82,10 @@
                      ("build\\.gradle\\.kts$"     :trigger "build.gradle.kts" :mode kotlin-mode)
                      )
                     )
-
+(spec-handling-add! tree-sit-lang
+                    '(java-mode       . java)
+                    '(scala-mode      . scala)
+                    )
 (spec-handling-add! lookup-url
                     '(java
                      ("Kotlin" "https://kotlinlang.org/docs/home.html?q=%s&s=full")

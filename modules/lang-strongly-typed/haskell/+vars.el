@@ -18,12 +18,6 @@
                      ("^\\*haskell\\*" :quit nil)
                      )
                     )
-(spec-handling-add! lookup-regular
-                    '(haskell-mode
-                     ("GHC reference" . "https://downloads.haskell.org/ghc/latest/docs/users_guide/index.html")
-                     ("Typeclassopedia" . "https://wiki.haskell.org/Typeclassopedia")
-                     )
-                    )
 (spec-handling-add! lookup-url
                     '(haskell
                      ("Haskell Cabal" "https://hackage.haskell.org/packages/search?terms=%s")
@@ -33,7 +27,9 @@
 (spec-handling-add! lookup-handler
                     '(haskell-mode :definition haskell-mode-jump-to-def-or-tag)
                     )
-
+(spec-handling-add! tree-sit-lang
+                    '(haskell-mode . haskell)
+                    )
 (set-repl-handler!
     '(haskell-mode haskell-cabal-mode literate-haskell-mode)
     #'+haskell/open-repl :persist t)
@@ -46,3 +42,10 @@
     (sp-local-pair "{-" "-")
     (sp-local-pair "{-#" "#-")
     (sp-local-pair "{-@" "@-")))
+
+(spec-handling-add! lookup-regular
+                    '(haskell-mode
+                     ("GHC reference" . "https://downloads.haskell.org/ghc/latest/docs/users_guide/index.html")
+                     ("Typeclassopedia" . "https://wiki.haskell.org/Typeclassopedia")
+                     )
+                    )

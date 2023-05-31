@@ -5,7 +5,7 @@
 
 ;;;###autoload (autoload 'hydra-workspace/body "editor/workspaces/autoload/hydras" nil t)
 (defhydra hydra-workspace ()
-  (format "%s\n" (+jg-hydra-format-columns
+  (format "%s\n" (hydra-utils-format-columns
                   '("|Projects"
                     "_?_ project type"
                     "_`_ root"
@@ -34,7 +34,7 @@
                     "_\\_ rotate buffers"
                     )
                   '(blank
-                    "%-10(+jg-hydra-doc evil-auto-balance-windows)"
+                    "%-10(hydra-utils-doc evil-auto-balance-windows)"
                     "%-10(window-dedicated-p (selected-window))"
                     )
                   ))
@@ -65,7 +65,7 @@
 
 ;;;###autoload (autoload 'hydra-window-ring/body "editor/workspaces/autoload/hydras" nil t)
 (defhydra hydra-window-ring ()
-  (format "%s\n" (+jg-hydra-format-columns
+  (format "%s\n" (hydra-utils-format-columns
                   '("|Window-Ring"
                     new
                     convert

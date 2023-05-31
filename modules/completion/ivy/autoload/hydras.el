@@ -5,7 +5,7 @@
 
 ;;;###autoload (autoload 'hydra-ivy/body "completion/ivy/autoload/hydras" nil t)
 (defhydra hydra-ivy (:hint nil :color pink)
-  (format "%s\n" (+jg-hydra-format-columns
+  (format "%s\n" (hydra-utils-format-columns
                   '("|Top-to-bottom" "_g_: Top" "_G_: Bottom" "_u_: scroll up" "_d_: scroll down")
                   '(blank k blank j)
                   '("|Call" forward "_RET_: done" "_TAB_: alt-done" occur)

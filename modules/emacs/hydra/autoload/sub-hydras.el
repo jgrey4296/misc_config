@@ -10,10 +10,10 @@
              "ignore _i_nvisible"
              )
            '(blank
-             "%-10(+jg-hydra-doc evil-goggles-mode)"
-             "%-10(+jg-hydra-doc auto-highlight-symbol-mode)"
-             "%-10(+jg-hydra-doc hl-line-mode)"
-             "%-10(+jg-hydra-doc line-move-ignore-invisible)"
+             "%-10(hydra-utils-doc evil-goggles-mode)"
+             "%-10(hydra-utils-doc auto-highlight-symbol-mode)"
+             "%-10(hydra-utils-doc hl-line-mode)"
+             "%-10(hydra-utils-doc line-move-ignore-invisible)"
              )
            '(blank
              "Highlight _w_rappers"
@@ -23,11 +23,11 @@
              "high_l_ight changes"
              )
            '(blank
-             "%-10(+jg-hydra-doc highlight-parentheses-mode)"
-             "%-10(+jg-hydra-doc rainbow-mode)"
-             "%-10(+jg-hydra-doc prettify-symbols-mode)"
-             "%(+jg-hydra-doc evil-quickscope-always-mode)/%-4(+jg-hydra-doc evil-quickscope-mode)"
-             "%-10(+jg-hydra-doc highlight-changes-visible-mode)"
+             "%-10(hydra-utils-doc highlight-parentheses-mode)"
+             "%-10(hydra-utils-doc rainbow-mode)"
+             "%-10(hydra-utils-doc prettify-symbols-mode)"
+             "%(hydra-utils-doc evil-quickscope-always-mode)/%-4(hydra-utils-doc evil-quickscope-mode)"
+             "%-10(hydra-utils-doc highlight-changes-visible-mode)"
              )
            )
           )
@@ -55,18 +55,18 @@
              "_R_ Ruler"
              )
            '(blank
-             "%-10(+jg-hydra-doc display-fill-column-indicator)"
-             "%-10(+jg-hydra-doc highlight-indent-guides-mode)"
-             "%-10(+jg-hydra-doc display-line-numbers)"
-             "%-10(+jg-hydra-doc ruler-mode)"
+             "%-10(hydra-utils-doc display-fill-column-indicator)"
+             "%-10(hydra-utils-doc highlight-indent-guides-mode)"
+             "%-10(hydra-utils-doc display-line-numbers)"
+             "%-10(hydra-utils-doc ruler-mode)"
              )
            '(blank
              "_w_ Whitespace"
              "_g_ Grammar"
              )
            '(blank
-             "%-10(+jg-hydra-doc whitespace-mode)"
-             "%-10(+jg-hydra-doc (or flyspell-mode writegood-mode))"
+             "%-10(hydra-utils-doc whitespace-mode)"
+             "%-10(hydra-utils-doc (or flyspell-mode writegood-mode))"
              )
            )
           )
@@ -90,10 +90,10 @@
              "_W_ Word-wrap mode"
              )
            '(blank
-            "%-10(+jg-hydra-doc auto-fill-function)"
-            "%-10(+jg-hydra-doc visual-line-mode)"
-            "%-10(+jg-hydra-doc truncate-lines)"
-            "%-10(+jg-hydra-doc +word-wrap-mode)"
+            "%-10(hydra-utils-doc auto-fill-function)"
+            "%-10(hydra-utils-doc visual-line-mode)"
+            "%-10(hydra-utils-doc truncate-lines)"
+            "%-10(hydra-utils-doc +word-wrap-mode)"
             )))
   ("f" #'auto-fill-mode        nil :exit nil)
   ("l" #'visual-line-mode      nil :exit nil)
@@ -113,11 +113,11 @@
              "_v_  Evil Visual Marks"
              )
            '(blank
-             "%-10(+jg-hydra-doc global-autohide-minor-mode)"
-             "%-10(+jg-hydra-doc evil-auto-balance-windows)"
-             "%-10(+jg-hydra-doc centered-cursor-mode)"
-             "%-10(+jg-hydra-doc org-link-descriptive)"
-             "%-10(+jg-hydra-doc evil-visual-mark-mode)"
+             "%-10(hydra-utils-doc global-autohide-minor-mode)"
+             "%-10(hydra-utils-doc evil-auto-balance-windows)"
+             "%-10(hydra-utils-doc centered-cursor-mode)"
+             "%-10(hydra-utils-doc org-link-descriptive)"
+             "%-10(hydra-utils-doc evil-visual-mark-mode)"
              )
            '(blank
              "_T_  Neotree"

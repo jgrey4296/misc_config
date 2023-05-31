@@ -49,7 +49,7 @@
   )
 
 ;;;###autoload
-(advice-add 'py--pdbtrack-get-source-buffer :override #'+jg-python-pdfbrack-silence)
+(advice-add 'py--pdbtrack-get-source-buffer :override #'+jg-python-pdbtrack-silence)
 
 ;;;###autoload
 (defun +jg-python-shell-calculate-command (&optional filepath)

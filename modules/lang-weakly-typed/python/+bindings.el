@@ -56,6 +56,7 @@
       :desc "Test Func"       "T" #'python-pytest-function
       :desc "Test repeat"     "r" #'python-pytest-repeat
       :desc "Test Popup"      "p" #'python-pytest-dispatch
+      :desc "Make Testfile"   "m" #'+jg-python-make-test-file
       )
 
 (map! :map python-mode-map ;; environment

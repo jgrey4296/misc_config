@@ -4,7 +4,7 @@ cffi @ file:///Users/builder/ci_310/cffi_1643393868399/work
 distlib @ file:///tmp/build/80754af9/distlib_1622544193819/work
 future @ file:///Users/builder/ci_310/future_1642502263251/work
 pip==21.2.4
-setuptools==63.1.0
+setuptools==65.5.1
 setuptools-rust==1.4.1
 virtualenv @ file:///Users/builder/ci_310/virtualenv_1642616456514/work
 wheel==0.37.1

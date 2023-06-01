@@ -32,6 +32,8 @@ Death by Institution and the Harms of Abstraction.
 *** [[file:/Volumes/documents/github/jgrey4296.github.io/orgfiles/primary/research_questions.org][Research Questions]]
 
 ** Other
+https://en.m.wikipedia.org/wiki/Accounting,_Organizations_and_Society
+https://en.m.wikipedia.org/wiki/Technological_Forecasting_and_Social_Change
 https://www.gov.uk/official-documents
 https://llvm.org/docs/LangRef.html
 https://afutureworththinkingabout.com/?p=5142

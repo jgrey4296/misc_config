@@ -2,6 +2,17 @@
 
 (defer-load! "+vars")
 (defer-load! jg-bindings-total "+bindings")
+(defer! 240 ;; when idle for 4 minutes
+  (unless jg-bibtex-helm-candidates
+    (require 'helm)
+    (require 'helm-source)
+    (require 'helm-bibtex)
+    (+jg-bibtex-build-list)
+    (bibtex-completion-clear-cache)
+    (bibtex-completion-init)
+    (mapcar #'+jg-bibtex-process-candidates (bibtex-completion-candidates))
+    )
+  )
 
 (use-package! bibtex
   :defer t
@@ -29,7 +40,7 @@
   )
 
 (use-package! helm-bibtex
-  :commands (bibtex-completion-init)
+  :defer t
 )
 
 (use-package! ivy-bibtex
@@ -72,7 +83,3 @@
 (use-package! oc-csl :after oc)
 
 (use-package! oc-natbib :after oc)
-
-(add-hook 'doom-first-file-hook #'bibtex-completion-init)
-(add-hook 'doom-first-file-hook #'+jg-bibtex-build-list 90)
-(autoload '+jg-bibtex-hydra/body (file-name-concat (dir!) "autoload" "hydra.el") t)

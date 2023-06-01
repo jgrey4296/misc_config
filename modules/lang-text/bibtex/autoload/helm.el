@@ -196,6 +196,7 @@ governed by the variable `bibtex-completion-display-formats'."
          field-value
          )))))
 
+;;;###autoload
 (defun +jg-bibtex-process-candidates (x)
   "Utility to tidy bibtex-completion-candidates for helm-bibtex"
   (cons (s-replace-regexp ",? +" " " (car x))

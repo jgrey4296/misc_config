@@ -29,3 +29,17 @@
       )
     )
   )
+
+;;;###autoload
+(defun +jg-help-load-package-list ()
+  (unless doom--help-packages-list
+    (setq doom--help-packages-list
+          (delete-dups
+           (append (mapcar #'car package-alist)
+                   (mapcar #'car package--builtins)
+                   (mapcar #'intern
+                           (hash-table-keys straight--build-cache))
+                   (mapcar #'car (doom-package-list 'all))
+                   nil)))
+    )
+  )

@@ -40,3 +40,11 @@
           )
     )
   )
+
+(defmacro defer! (time &rest body)
+  `(run-with-idle-timer ,time nil
+    (lambda ()
+      ,@body
+      )
+    )
+  )

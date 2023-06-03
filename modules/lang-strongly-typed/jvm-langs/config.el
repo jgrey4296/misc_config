@@ -33,7 +33,7 @@
 (use-package! groovy-mode
   :mode "\\.g\\(?:radle\\|roovy\\)$"
   :config
-  (spec-handling-add! docsets '(groovy-mode "Groovy" "Groovy_JDK"))
+  (spec-handling-add! docsets '(groovy-mode "Groovy" "Groovy_JDK" "Gradle_DSL", "Gradle_Groovy_API", "Gradle_User_Guide"))
   (set-eval-handler! 'groovy-mode "groovy")
   (set-repl-handler! 'groovy-mode #'+java/open-groovy-repl)
   )

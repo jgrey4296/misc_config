@@ -1,6 +1,7 @@
 ;;; ivy-plus.el -*- lexical-binding: t; -*-
 (require 'ivy)
 
+;;;###autoload
 (defun +jg-ivy-kill-buffer (buff)
   (interactive)
   (with-current-buffer buff

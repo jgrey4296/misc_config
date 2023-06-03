@@ -6,27 +6,23 @@
 
 (load! "util/+org-standard-bindings")
 
-;;-- leader map
 (map! :leader
       :desc "Insert Timestamp"  "i t"   #'org-time-stamp
       :desc "Toggle Links"      "t l"   #'org-toggle-link-display
-      )
-(map! :leader
       :prefix ("o" . "Org")
-      :prefix ("a" . "Org Agenda")
-      :desc "Agenda"                "a"          #'org-agenda
-      :desc "Todo list"             "t"          #'org-todo-list
-      :desc "Tags search"           "m"          #'org-tags-view
-      :desc "View search"           "v"          #'org-search-view
-      :desc "List Agenda Files"     "F"          #'+jg-org-list-agenda-files
-      :desc "occur-in-agenda-files" "/"          #'org-occur-in-agenda-files
-      :desc "agenda-file-to-front"  "f"          #'org-agenda-file-to-front
-      :desc "remove-file"           "r"          #'org-remove-file
-      :desc "agenda-list"           "l"          #'org-agenda-list
+      (:prefix ("a" . "Org Agenda")
+       :desc "Agenda"                "a"          #'org-agenda
+       :desc "Todo list"             "t"          #'org-todo-list
+       :desc "Tags search"           "m"          #'org-tags-view
+       :desc "View search"           "v"          #'org-search-view
+       :desc "List Agenda Files"     "F"          #'+jg-org-list-agenda-files
+       :desc "occur-in-agenda-files" "/"          #'org-occur-in-agenda-files
+       :desc "agenda-file-to-front"  "f"          #'org-agenda-file-to-front
+       :desc "remove-file"           "r"          #'org-remove-file
+       :desc "agenda-list"           "l"          #'org-agenda-list
+       )
       )
-;;-- end leader map
 
-;;-- <leaderless>
 (map! :map jg-org-mode-map
       ;; :n "I" nil
       ;; :n "] h" nil
@@ -36,14 +32,14 @@
       :desc "Prev Link"       :m "[ l" #'org-previous-link
       :desc "Forward Heading" :m "] j" #'org-forward-heading-same-level
       :desc "Back Heading"    :m "[ j" #'org-backward-heading-same-level
-      )
-;;-- end <leaderless>
-
-(map! :map jg-org-mode-map
       :desc "Hide Drawers"    :n "z d" (cmd! (org-cycle-hide-drawers 'org-cycle-hide-drawers))
+      :desc "Insert Heading"  :n "RET" #'org-insert-heading
+      :vn "c l" #'org-demote-subtree
+      :vn "c h" #'org-promote-subtree
+      :vn "c K" #'org-move-subtree-up
+      :vn "c J" #'org-move-subtree-down
       )
 
-;;-- <localleader>
 (map! :map jg-org-mode-map
       :localleader
       :desc "Refile"                 "R" #'+jg-org-refile-subtree
@@ -74,7 +70,6 @@
        :desc "Insert Subheading"   "h" #'org-insert-subheading
        :desc "Insert Drawer"       "d" #'org-insert-drawer)
       )
-;;-- end <localleader>
 
 ;;-- dired
 (map! :map dired-mode-map
@@ -143,6 +138,8 @@
 (after! (evil-org org-mode)
   (setq org-mode-map jg-org-mode-map
         evil-org-mode-map jg-org-mode-map
+        minor-mode-map-alist (assq-delete-all 'evil-org-mode minor-mode-map-alist)
         )
+  (push (cons 'evil-org-mode jg-org-mode-map) minor-mode-map-alist)
 
   )

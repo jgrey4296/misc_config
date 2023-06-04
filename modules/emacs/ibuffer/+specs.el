@@ -1,7 +1,5 @@
 ;;; +filters.el -*- lexical-binding: t; -*-
 
-(require 'ibuf-ext)
-
 (setq-default jg-ibuffer-heuristics (rx (or "backtab"
                                             (regexp "\\.\\.")
                                             (regexp "^[[:alpha:]]\\{2,\\}")
@@ -10,6 +8,26 @@
                                             )
                                         )
               )
+
+(spec-handling-add! ibuffer-formats
+                    '(normal
+                     mark modified read-only locked
+                     " " (name 18 18 :left :elide)
+                     " " (size 10 10 :right)
+                     " " (mode 16 16 :left :elide)
+                     " " project-relative-file)
+                    '(vc-status
+                     mark modified read-only locked
+                     " " (name 18 18 :left :elide)
+                     " " (size 10 10 :right)
+                     " " vc-status
+                     )
+                    '(project
+                     mark " " (name 18 18 :left :elide)
+                     " " (project-name 10 10 :left)
+                     " " project-relative-file
+                     )
+                    )
 
 ;; Filters:
 

@@ -41,10 +41,24 @@
                                             )
       )
 
-;;-- popup spec
+;;-- spec
 (spec-handling-add! popup
                     '(ibuffer
                       ("^\*Ibuffer\*$"         :side right  :ttl 5 :width  0.5 :quit nil :select t :priority 50)
                       )
                     )
-;;-- end popup spec
+(spec-handling-add! fold
+                    `(ibuffer
+                     :modes (ibuffer-mode)
+                     :priority 50
+                     :triggers (:delete     nil
+                                :open-all   nil
+                                :close-all  nil
+                                :toggle     ,#'ibuffer-toggle-filter-group
+                                :open       nil
+                                :open-rec   nil
+                                :close      nil
+                                )
+                     )
+                    )
+;;-- end spec

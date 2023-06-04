@@ -1,4 +1,5 @@
 ;;; emacs/ibuffer/autoload/workspaces.el -*- lexical-binding: t; -*-
+(require 'ibuf-ext)
 
 ;;;###autoload
 (defun +ibuffer-workspace (workspace-name)
@@ -32,11 +33,45 @@
       (persp-add-buffer buf))
     (switch-to-buffer buf)))
 
-
-(require 'ibuf-ext)
-
+;;;###autoload (autoload 'ibuffer-filter-by-workspace-buffers "modules/editor/workspaces/autoload/ibuffer" nil t)
 (define-ibuffer-filter workspace-buffers
     "Filter for workspace buffers"
-  (:reader (+workspace-get (read-string "workspace name: "))
+  (:reader (ivy-read "workspace name: " (+workspace-list-names))
    :description "workspace")
-  (memq buf (+workspace-buffer-list qualifier)))
+  (memq buf (+workspace-buffer-list (+workspace-get qualifier)))
+  )
+
+;;;###autoload (autoload 'ibuffer-filter-by-window-ring-buffers "modules/editor/workspaces/autoload/ibuffer" nil t)
+(define-ibuffer-filter window-ring
+    "Filter by current window ring"
+  (:description "Window-Ring")
+  (window-ring-buffer-p nil buf)
+)
+
+
+;;;###autoload (autoload 'ibuffer-make-column-workspace "modules/editor/workspaces/autoload/ibuffer.el" nil t)
+(define-ibuffer-column workspace
+  (:name "Workspace"
+   :inline t
+   )
+  (string-join (cl-loop for workspace in (+workspace-list-names)
+           if (persp-contain-buffer-p (current-buffer) (+workspace-get workspace))
+           collect workspace
+           ) ", ")
+  )
+
+(defun +jg-ibuffer-generate-project-groups ()
+  "Create a set of ibuffer filter groups based on the projectile root dirs of buffers."
+  (let ((roots (ibuffer-remove-duplicates
+                (delq nil (mapcar 'ibuffer-projectile-root (buffer-list))))))
+    (mapcar (lambda (root)
+              (cons (funcall ibuffer-projectile-group-name-function (car root) (cdr root))
+                    `((projectile-root . ,root))))
+            roots))
+  )
+
+(defun +jg-ibuffer-generate-workspace-groups ()
+  (mapcar (lambda (workspace)
+            (list (format "Workspace: %s" workspace) `(workspace-buffers . ,workspace)))
+          (+workspace-list-names))
+  )

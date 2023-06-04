@@ -9,8 +9,6 @@
 
 (use-package! ibuffer
   :config
-  (load! "+format")
-  (load! "+sorting")
   (evil-set-initial-state 'ibuffer-mode 'normal)
   (setq-hook! 'ibuffer-hook
     evil-disable-insert-state-bindings t

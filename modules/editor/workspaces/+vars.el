@@ -178,4 +178,13 @@ stored in `persp-save-dir'.")
                       ".temp"
                       )
                     )
+
+(spec-handling-add! ibuffer-formats
+                    '(workspaces
+                      mark modified read-only locked
+                      " " (name 18 18 :left :elide)
+                      " " (size 10 10 :right)
+                      " " (mode 16 16 :left :elide)
+                      " " workspace)
+                      )
 ;;-- end specs

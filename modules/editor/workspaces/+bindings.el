@@ -119,3 +119,15 @@
 
 
 ;;-- end project walk
+
+;;-- ibuffer
+(map! :map jg-ibuffer-filter-map
+      (:prefix "b"
+       :desc "filter-by-workspace"   "w" #'ibuffer-filter-by-workspace-buffers
+       :desc "filter-by-window-ring" "R" #'ibuffer-filter-by-window-ring-buffers
+      )
+      (:prefix "g"
+       :desc "Group by Workspace"   "w" (ibuffer-generate! (+jg-ibuffer-generate-workspace-groups))
+       )
+      )
+;;-- end ibuffer

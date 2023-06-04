@@ -103,6 +103,7 @@
       :desc "pop-filter-group"                "P" #'ibuffer-pop-filter-group
       :desc "add group"                       "a" #'+jg-ibuffer-add-group
       :desc "sort groups"                     "s" #'+jg-ibuffer-sort-groups
+      :desc "Projects"                        "p" (ibuffer-generate! (+jg-ibuffer-generate-project-groups))
       )
 
 (map! :map jg-ibuffer-filter-map ;; save/load

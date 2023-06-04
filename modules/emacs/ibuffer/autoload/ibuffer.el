@@ -1,5 +1,7 @@
 ;; -*- lexical-binding: t -*-
 
+(defvar jg-ibuffer-generate-group-hook nil)
+
 (defun +jg-ibuffer-generate-project-groups ()
   "Create a set of ibuffer filter groups based on the projectile root dirs of buffers."
   (let ((roots (ibuffer-remove-duplicates
@@ -10,8 +12,11 @@
             roots))
   )
 
-(defun +jg-ibuffer-generate-groups ()
-  (append (+jg-ibuffer-generate-project-groups)
+(defun +jg-ibuffer-run-generate-hook ()
+  (append (cl-loop for fn in jg-ibuffer-generate-group-hook
+                   append
+                   (funcall fn)
+                   )
           (when jg-ibuffer-default-group
             (cdr (assoc jg-ibuffer-default-group ibuffer-saved-filter-groups)))
           )
@@ -27,7 +32,7 @@
                `((saved . ,jg-ibuffer-default-filter)))
              nil nil
              ;; groups
-             (+jg-ibuffer-generate-groups)
+             (+jg-ibuffer-run-generate-hook)
              )
     (push jg-ibuffer-never-show-regexps ibuffer-tmp-hide-regexps)
     (+jg-ibuffer-sort-groups)
@@ -63,6 +68,22 @@
   (ibuffer-update 0)
   )
 
+;;;###autoload (autoload 'ibuffer-make-column-size "modules/emacs/ibuffer/autoload/ibuffer" nil t)
+(define-ibuffer-column size
+  (:name "Size"
+   :inline t
+   )
+  (file-size-human-readable (buffer-size))
+  )
+
+;;;###autoload
+(defmacro ibuffer-generate! (&rest body)
+  `(lambda ()
+     (interactive)
+     (setq ibuffer-filter-groups ,@body)
+     (ibuffer-update t)
+     )
+  )
 
 ;;-- test
 ;; (define-ibuffer-filter jg-projectile-root

@@ -166,11 +166,6 @@
        :desc "Make Style File" "s" #'+jg-text-pandoc-gen-style
        :desc "Compile"          "c" #'+jg-text-pandoc-compile
        )
-      (:prefix ("> j" . "jq")
-       :desc "Format" "f" #'+jg-text-jq-format
-       :desc "Manual" "?" (cmd! (+jg-browse-url "https://stedolan.github.io/jq/manual/"))
-       :desc "Expr"   "e" #'+jg-text-jq-expr
-       )
       )
 
 

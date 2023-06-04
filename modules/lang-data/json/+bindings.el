@@ -8,3 +8,13 @@
       "x" #'json-nullify-sexp
       "f" #'json-mode-beautify
       "s" #'counsel-jq)
+
+(map! :map jg-dired-mode-map
+      (:prefix ("> j" . "jq")
+       :desc "Format" "f" #'+jg-json-jq-format
+       :desc "Manual" "?" (cmd! (+jg-browse-url "https://stedolan.github.io/jq/manual/"))
+       :desc "Expr"   "e" #'+jg-json-jq-expr
+       )
+
+      :desc "Reformat jsons"      :n "cJ" #'+jg-dired-reformat-jsons
+      )

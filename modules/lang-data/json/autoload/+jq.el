@@ -4,7 +4,7 @@
 (defvar jg-text-jq-cmd "jq")
 
 ;;;###autoload
-(defun +jg-text-jq-format ()
+(defun +jg-json-jq-format ()
   (interactive)
   (let ((marked (dired-get-marked-files)))
     (cl-loop for file in marked
@@ -18,7 +18,7 @@
   )
 
 ;;;###autoload
-(defun +jg-text-jq-expr()
+(defun +jg-json-jq-expr()
   (interactive)
   (let ((marked (dired-get-marked-files))
         (expr (read-string "JQ Expr: " "."))

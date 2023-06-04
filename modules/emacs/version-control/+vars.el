@@ -82,3 +82,18 @@ Only has an effect in GUI Emacs.")
                       ("Github" . "https://docs.github.com/en")
                       )
                     )
+
+(spec-handling-add! fold :form 'override
+                    `(magit
+                      :modes (magit-status-mode)
+                      :priority 50
+                      :triggers (:delete     nil
+                                 :open-all   nil
+                                 :close-all  nil
+                                 :toggle     ,(cmd! (magit-section-toggle (magit-current-section)))
+                                 :open       nil
+                                 :open-rec   nil
+                                 :close      nil
+                                 )
+                      )
+                    )

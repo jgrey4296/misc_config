@@ -10,7 +10,9 @@
   " Set tags in bibtex entries "
   (let* ((actual-candidates (mapcar 'car (helm-marked-candidates)))
          (prior-point 1)
-         (end-pos tagging-minor-mode-marker)
+         (end-pos (max tagging-minor-mode-marker (save-excursion
+                                                   (bibtex-end-of-entry)
+                                                   (point))))
          (current-tags '())
          (has-real-tags-field nil)
          (add-func (lambda (candidate)
@@ -46,7 +48,9 @@
   "A Fallback function to set tags of bibtex entries "
   (save-excursion
     (let ((prior-point (- (point) 1))
-          (end-pos tagging-minor-mode-marker)
+          (end-pos (max tagging-minor-mode-marker (save-excursion
+                                                    (bibtex-end-of-entry)
+                                                    (point))))
           (stripped_tags (+jg-bibtex-split-tags (tagging-minor-mode--trim-input x)))
           )
       (while (and (/= prior-point (point)) (< (point) end-pos))

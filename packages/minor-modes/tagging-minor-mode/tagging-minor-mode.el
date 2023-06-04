@@ -106,7 +106,7 @@
   "Utility action to set tags. Works in org *and* bibtex files"
   (save-excursion
     (funcall (plist-get (buffer-local-value 'tagging-minor-mode-handlers (current-buffer)) :set) x)
-      )
+    )
   )
 
 (defun tagging-minor-mode-set-new-tag (x)

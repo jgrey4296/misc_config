@@ -63,7 +63,6 @@
       :desc "Touch"               :n "T" #'+jg-dired-touch
 
       :prefix ("c" . "Change")
-      :desc "Reformat jsons"      :n "J" #'+jg-dired-reformat-jsons
       :desc "Replace grep"        :n "G" #'dired-do-find-regexp-and-replace
       :desc "kill"                :n "K" #'dired-do-delete
       :desc "Global Match Rename" :n "R" #'+jg-dired-GLOBAL-do-rename-regexp

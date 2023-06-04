@@ -1,14 +1,15 @@
 ;;; +ivy.el -*- lexical-binding: t; -*-
+(require 'ivy)
 
-(defvar jg-rust-dependency-loc (doom-module-expand-path :lang-strongly-typed 'rust  "dependencies.ivy"))
+;; TODO add action for inserting new entries into dependency list
+
+(defvar jg-rust-dependency-loc (doom-module-expand-path :lang-strongly-typed 'rust  "_data/dependencies.ivy"))
 (defvar jg-rust-dependency-collection nil)
 
 
-
-;; TODO add action for inserting new entries into dependency list
+;;;###autoload
 (defun +jg-rust-dependency-ivy ()
   (interactive)
-
   ;; Read dependencies.ivy
   (unless jg-rust-dependency-collection
     (setq jg-rust-dependency-collection

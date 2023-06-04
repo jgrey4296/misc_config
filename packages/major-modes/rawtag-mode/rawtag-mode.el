@@ -254,9 +254,9 @@ Maybe add a substitution "
   (yas-minor-mode)
 
   )
-(add-to-list 'auto-mode-alist '("\.rawtags$" . rawtag-mode))
-(add-to-list 'auto-mode-alist '("\.tags$" . rawtag-mode))
-(add-to-list 'auto-mode-alist '("\.sub\\(_author\\)?$" . rawtag-mode))
+(add-to-list 'auto-mode-alist '("\\.rawtags\\'" . rawtag-mode))
+(add-to-list 'auto-mode-alist '("\\.tags\\'" . rawtag-mode))
+(add-to-list 'auto-mode-alist '("\\.sub\\(_author\\)?\\'" . rawtag-mode))
 
 ;;-- end mode-definition
 

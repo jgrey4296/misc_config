@@ -24,5 +24,12 @@
 (defer-load! "+vars")
 (defer-load! jg-bindings-total "+bindings")
 
+(define-derived-mode nushell-mode conf-colon-mode
+  "Nushell"
+  " Mode for editing nushell scripts "
+  (outline-minor-mode)
+  )
+
+(add-to-list 'auto-mode-alist '("\\.nu\\'" . nushell-mode))
 
 ;;; config.el ends here

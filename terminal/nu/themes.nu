@@ -1,6 +1,4 @@
-# # -*- mode:conf; -*-
 
-# Nushell Config File
 let dark_theme = {
     # color for nushell primitives
     separator: white

@@ -19,7 +19,7 @@
 ;;
 ;;; Code:
 
-(setq rustic-lsp-client nil ;; HACK `rustic' sets up some things too early. I'd rather disable it and let our respective modules standardize how they're initialized.
+(setq rustic-lsp-client (if (modulep! :tools lsp +eglot) 'eglot 'lsp-mode) ;; HACK `rustic' sets up some things too early. I'd rather disable it and let our respective modules standardize how they're initialized.
       rustic-indent-method-chain t
       rust-prettify-symbols-alist nil ;; Conflicts with (and is redundant with) :ui ligatures
       rustic-babel-format-src-block nil ;; Leave automatic reformatting to the :editor format module.

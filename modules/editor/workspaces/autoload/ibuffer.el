@@ -51,9 +51,7 @@
 
 ;;;###autoload (autoload 'ibuffer-make-column-workspace "modules/editor/workspaces/autoload/ibuffer.el" nil t)
 (define-ibuffer-column workspace
-  (:name "Workspace"
-   :inline t
-   )
+  (:name "Workspace")
   (string-join (cl-loop for workspace in (+workspace-list-names)
            if (persp-contain-buffer-p (current-buffer) (+workspace-get workspace))
            collect workspace

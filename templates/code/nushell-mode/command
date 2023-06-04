@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name  : command
+# uuid  : command
+# key   : command
+# group :
+# --
+def $1 [$2] {
+    $0
+}

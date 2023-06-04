@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name  : module
+# uuid  : module
+# key   : mod
+# group :
+# --
+module $1 {
+       $0
+
+}

@@ -110,7 +110,7 @@
     (yas-minor-mode)
     (run-mode-hooks)
     )
-(add-to-list 'auto-mode-alist '("\\.$1" . $1-mode))
+(add-to-list 'auto-mode-alist '("\\.$1\\'" . $1-mode))
 
 ;;-- end mode definition
 

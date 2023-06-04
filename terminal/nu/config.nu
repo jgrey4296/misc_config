@@ -1,4 +1,3 @@
-# # -*- mode:conf; -*-
 # Nushell Config File
 #
 # version = 0.78.0
@@ -11,6 +10,7 @@
 #
 source ~/.doom.d/terminal/nu/themes.nu
 
+# Merges TOP LEVEL ONLY dicts, will clobber subdicts with same name
 def cmerge [...recs] {
     mut total = {}
     for $n in $recs {
@@ -22,7 +22,6 @@ def cmerge [...recs] {
 def nuopen [arg, --raw (-r)] { if $raw { open -r $arg } else { open $arg } }
 alias open = ^open
 
-# The default config record. This is where much of your global configuration is setup.
 let banner = {
   # true or false to enable or disable the welcome banner at startup
   show_banner: false
@@ -397,5 +396,5 @@ let bindings = {
   ]
 }
 
-
+# { } --------------------------------------------------
 let-env config = (cmerge $banner $cmds $general $hooks $bindings)

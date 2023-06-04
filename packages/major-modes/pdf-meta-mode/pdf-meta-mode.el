@@ -206,7 +206,7 @@
   (yas-minor-mode)
   )
 
-(add-to-list 'auto-mode-alist '("\.pdf_meta$" . pdf-meta-mode))
+(add-to-list 'auto-mode-alist '("\\.pdf_meta\\'" . pdf-meta-mode))
 
 (provide 'pdf-meta-mode)
 ;;; pdf-meta-mode.el ends here

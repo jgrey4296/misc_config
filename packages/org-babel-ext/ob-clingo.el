@@ -58,7 +58,7 @@
 (require 'prolog)
 
 (add-to-list 'org-babel-tangle-lang-exts '("prolog" . "pl"))
-(add-to-list 'auto-mode-alist '("\\.lp$" . pasp-mode))
+(add-to-list 'auto-mode-alist '("\\.lp\\'" . pasp-mode))
 
 (defvar org-babel-clingo-command  "clingo"
   "Name of the clingo executable command.")

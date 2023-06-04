@@ -49,18 +49,18 @@
       )
 
 (map! :map lsp-command-map ;; toggles
-      :prefix ("t". "Toggles")
-      :desc "toggle modeline diagnostics"  "D" #'lsp-modeline-diagnostics-mode
-      :desc "toggle log io"                "L" #'lsp-toggle-trace-io
-      :desc "toggle sideline"              "S" #'lsp-ui-sideline-mode
-      :desc "toggle treemacs integration"  "T" #'lsp-treemacs-sync-mode
-      :desc "toggle modeline code actions" "a" #'lsp-modeline-code-actions-mode
-      :desc "toggle breadcrumb"            "b" #'lsp-headerline-breadcrumb-mode
-      :desc "toggle documentation popup"   "d" #'lsp-ui-doc-mode
-      :desc "toggle on type formatting"    "f" #'lsp-toggle-on-type-formatting
-      :desc "toggle highlighting"          "h" #'lsp-toggle-symbol-highlight
-      :desc "toggle lenses"                "l" #'lsp-lens-mode
-      :desc "toggle signature"             "s" #'lsp-toggle-signature-auto-activate
+      :prefix ("T". "Toggles")
+      :desc "modeline diagnostics"  "D" #'lsp-modeline-diagnostics-mode
+      :desc "log io"                "L" #'lsp-toggle-trace-io
+      :desc "sideline"              "S" #'lsp-ui-sideline-mode
+      :desc "treemacs integration"  "T" #'lsp-treemacs-sync-mode
+      :desc "modeline code actions" "a" #'lsp-modeline-code-actions-mode
+      :desc "breadcrumb"            "b" #'lsp-headerline-breadcrumb-mode
+      :desc "documentation popup"   "d" #'lsp-ui-doc-mode
+      :desc "on type formatting"    "f" #'lsp-toggle-on-type-formatting
+      :desc "highlighting"          "h" #'lsp-toggle-symbol-highlight
+      :desc "lenses"                "l" #'lsp-lens-mode
+      :desc "signature"             "s" #'lsp-toggle-signature-auto-activate
       )
 
 (map! :map lsp-command-map ;; goto

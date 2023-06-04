@@ -25,8 +25,4 @@
 
 (package! exato)
 
-(when (modulep! :ui neotree)
-  (package! neotree)
-  (autoload 'neotree-make-executor "neotree" nil nil 'macro)
-  )
 (package! evil-collection)

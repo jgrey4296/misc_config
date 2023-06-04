@@ -1,6 +1,7 @@
 ;;; ui/workspaces/config.el -*- lexical-binding: t; -*-
 
 (load! "+vars")
+
 (defer-load! "+spec-defs")
 (after! jg-bindings-total (load! "+bindings"))
 
@@ -235,4 +236,12 @@
 
 (use-package! project-walk
   :commands (project-walk-minor-mode project-walk-next)
+  )
+
+(use-package! neotree
+  :commands (neotree-show neotree-hide neotree-toggle neotree-dir neotree-find neo-global--with-buffer neo-global--window-exists-p)
+  :config
+  (after! winner
+    (add-to-list 'winner-boring-buffers neo-buffer-name))
+  (add-hook! 'neo-enter-hook #'+neotree-fix-cursor-h)
   )

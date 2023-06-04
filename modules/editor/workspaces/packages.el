@@ -6,3 +6,4 @@
 (package! project-walk :recipe (:local-repo "~/.doom.d/packages/misc/project-walk"))
 (package! counsel-projectile)
 (package! projectile)
+(package! neotree)

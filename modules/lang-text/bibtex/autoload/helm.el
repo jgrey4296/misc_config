@@ -226,11 +226,11 @@ governed by the variable `bibtex-completion-display-formats'."
 (defun +jg-bibtex-helm-bibtex (&optional arg local-bib)
   " Custom implementation of helm-bibtex"
   (interactive "P")
-  (when (directory-files default-directory 't "\.bib$")
-    (setq-local bibtex-completion-bibliography (directory-files default-directory 't "\.bib$")
-                jg-bibtex-helm-candidates nil
-                )
-    )
+  ;; (when (directory-files default-directory 't "\.bib$")
+  ;;   (setq-local bibtex-completion-bibliography (directory-files default-directory 't "\.bib$")
+  ;;               jg-bibtex-helm-candidates nil
+  ;;               )
+  ;;   )
   (when arg
     (message "Clearing Bibtex File Cache")
     (+jg-bibtex-build-list)

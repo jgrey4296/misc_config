@@ -48,6 +48,26 @@ stored in `persp-save-dir'.")
                                      )
       )
 
+;;-- neotree
+(setq neo-create-file-auto-open nil
+      neo-toggle-window-keep-p t
+      neo-auto-indent-point nil
+      neo-autorefresh nil
+      neo-mode-line-type 'none
+      neo-window-width 30
+      neo-show-updir-line nil
+      neo-theme 'icons
+      neo-banner-message nil
+      neo-confirm-create-file #'off-p
+      neo-confirm-create-directory #'off-p
+      neo-show-hidden-files nil
+      neo-keymap-style 'concise
+      neo-hidden-regexp-list (list dired-omit-files)
+
+        )
+
+;;-- end neotree
+
 ;;-- projectile
 (setq projectile-completion-system 'ivy
       projectile-cache-file (concat doom-cache-dir "projectile.cache")
@@ -141,6 +161,23 @@ stored in `persp-save-dir'.")
                       )
                     '(proj-walk
                      ("^\\*Project-Walk\\*" :side left :ttl nil :quit t :select nil :priority -50)
+                     )
+                    '(neotree
+                      ("\\*NeoTree\\*"   :side left :ttl nil :height 0.4 :quit nil :select nil :priority -100)
+                      )
+                    )
+
+(spec-handling-add! fold
+                    '(neotree
+                     :modes (neotree-mode)
+                     :priority 25
+                     :triggers (:open-all   nil
+                                :close-all  neotree-collapse-all
+                                :toggle     nil
+                                :open       +neotree/expand-or-open
+                                :open-rec   nil
+                                :close      +neotree/collapse
+                                )
                      )
                     )
 

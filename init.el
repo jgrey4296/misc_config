@@ -42,7 +42,7 @@
  ;; :lang julia
 
  :ui deft doom
- :ui minimap neotree ophints
+ :ui minimap ophints
  ;;:ui treemacs unicode (emoji +unicode)
 
  :checkers syntax (spell +flyspell) grammar

@@ -5,7 +5,6 @@
 (package! flycheck)
 (package! fsm)
 (package! lint-result-mode :recipe `(:local-repo ,(expand-file-name "packages/major-modes/lint-result-mode" doom-user-dir)))
-(package! neotree)
 (package! origami)
 (package! rotate-text)
 (package! shell-pop)

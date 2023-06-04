@@ -4,9 +4,6 @@
 [[/Users/johngrey/dooter.py][dooter.py]]
 [[file:/Volumes/documents/github/jgrey4296.github.io][homepage]]
 
-https://github.com/libgdx/gdx-ai
-https://www.ronja-tutorials.com/
-https://en.m.wikipedia.org/wiki/Grey_literature
 
 * Base Agenda
 Death by Institution and the Harms of Abstraction.
@@ -32,44 +29,49 @@ Death by Institution and the Harms of Abstraction.
 *** [[file:/Volumes/documents/github/jgrey4296.github.io/orgfiles/primary/research_questions.org][Research Questions]]
 
 ** Other
-https://en.m.wikipedia.org/wiki/Accounting,_Organizations_and_Society
-https://en.m.wikipedia.org/wiki/Technological_Forecasting_and_Social_Change
-https://www.gov.uk/official-documents
-https://llvm.org/docs/LangRef.html
-https://afutureworththinkingabout.com/?p=5142
-https://firefox-source-docs.mozilla.org/index.html
-https://annas-archive.org/
-https://rust.godbolt.org/
-https://rust-unofficial.github.io/too-many-lists/
-https://doc.rust-lang.org/nightly/nomicon/
 
-https://github.com/charlax/professional-programming
+
+https://afutureworththinkingabout.com/?p=5142
+https://annas-archive.org/
+https://botwiki.org/learn/#blogs-and-websites-accountable-algorithms
+https://cheapbotsdonequick.com/source/
+https://collections.library.yale.edu/
 https://dev.epicgames.com/documentation/en-us/uefn/verse-language-reference
+https://developer.nvidia.com/gpugems/gpugems/contributors
+https://doc.rust-lang.org/nightly/nomicon/
+https://en.m.wikipedia.org/wiki/Accounting,_Organizations_and_Society
+https://en.m.wikipedia.org/wiki/Derinkuyu_underground_city
+https://en.m.wikipedia.org/wiki/Grey_literature
+https://en.m.wikipedia.org/wiki/Technological_Forecasting_and_Social_Change
+https://firefox-source-docs.mozilla.org/index.html
+https://github.com/charlax/professional-programming
+https://github.com/libgdx/gdx-ai
 https://github.com/orgs/pelican-plugins/repositories
+https://hyperpolyglot.org/
+https://id.loc.gov/
+https://kidscancode.org/godot_recipes/3.x/recent/
+https://llvm.org/docs/LangRef.html
+https://rust-unofficial.github.io/too-many-lists/
+https://rust.godbolt.org/
+https://shadowrun-series.fandom.com/wiki/Gumbo_Script
+https://sharkbombs.com/games/exnovo
+https://sites.ualberta.ca/~urban/Projects/English/Motif_Index.htm
+https://sixages.blogspot.com/
+https://textbooks.math.gatech.edu/ila/
+https://tutorial.math.lamar.edu/
+https://wiki.facepunch.com/gmod/Beginner_Tutorial_Intro
+https://www.cs.man.ac.uk/~schmidt/tools/
+https://www.feynmanlectures.caltech.edu/III_toc.html
+https://www.feynmanlectures.caltech.edu/II_toc.html
+https://www.feynmanlectures.caltech.edu/I_toc.html
+https://www.gov.uk/official-documents
+https://www.mcmaster.com/
+https://www.oise.utoronto.ca/collaborativeindigenousresearch
+https://www.openpolicyagent.org/
+https://www.opensecrets.org/
 https://www.patches-scrolls.de/patch
 https://www.rabbitmq.com/getstarted.html
-https://www.openpolicyagent.org/
-https://en.m.wikipedia.org/wiki/Derinkuyu_underground_city
-https://sharkbombs.com/games/exnovo
-https://www.mcmaster.com/
-https://textbooks.math.gatech.edu/ila/
-https://www.opensecrets.org/
-https://www.cs.man.ac.uk/~schmidt/tools/
-https://developer.nvidia.com/gpugems/gpugems/contributors
-https://www.oise.utoronto.ca/collaborativeindigenousresearch
-https://wiki.facepunch.com/gmod/Beginner_Tutorial_Intro
-https://tutorial.math.lamar.edu/
-https://www.feynmanlectures.caltech.edu/I_toc.html
-https://www.feynmanlectures.caltech.edu/II_toc.html
-https://www.feynmanlectures.caltech.edu/III_toc.html
-https://shadowrun-series.fandom.com/wiki/Gumbo_Script
-https://kidscancode.org/godot_recipes/3.x/recent/
-https://sixages.blogspot.com/
-https://id.loc.gov/
-https://cheapbotsdonequick.com/source/
-https://botwiki.org/learn/#blogs-and-websites-accountable-algorithms
-https://hyperpolyglot.org/
-https://sites.ualberta.ca/~urban/Projects/English/Motif_Index.htm
+https://www.ronja-tutorials.com/
 
 Killing the Black Body or Fatal Invention by @DorothyERoberts
 Medical Apartheid by @haw95

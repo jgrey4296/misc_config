@@ -1,5 +1,7 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
+(defvar jg-neotree-mode-map (make-sparse-keymap))
+
 ;; Delete the current workspace if closing the last open window
 
 (define-key! persp-mode-map
@@ -10,29 +12,16 @@
       :desc "Window Hydra"       "W" #'hydra-workspace/body
       :desc "Ring Hydra"         "R" #'hydra-window-ring/body
       :desc "Workspace Counsel"  "w RET" #'+jg-workspaces-ivy
+      :n "p RET" #'+neotree/find-this-file
       )
 
 (map! :leader
       :prefix ("w" . "Windows")
-      :desc "Delete workspace"               "DEL" #'+workspace/delete
-      :desc "Most Recent"                    "L" #'window-ring-goto-most-recent
-      :desc "Oldest"                         "H" #'window-ring-goto-oldest
+      :desc "Neotree Sidebar"              "s" #'+neotree/open
+      :desc "Delete workspace"             "DEL" #'+workspace/delete
+      :desc "Most Recent"                  "L" #'window-ring-goto-most-recent
+      :desc "Oldest"                       "H" #'window-ring-goto-oldest
       )
-
-(map! :map window-ring-edit-map
-      "C-c C-c" #'window-ring-edit-commit)
-
-(map! :map jg-binding-backward-general-motion-map
-      :desc "Ring Window"  "r"    #'window-ring-move-focus-alt
-      :desc "Ring Oldest"  "R"    #'window-ring-goto-oldest
-      :desc "Workspace"    "w"    #'+workspace/switch-left
-      )
-
-(map! :map jg-binding-forward-general-motion-map
-      :desc "Ring Window"  "r"    #'window-ring-move-focus
-      :desc "Ring Newest"  "R"    #'window-ring-goto-newest
-      :desc "Workspace"    "w"    #'+workspace/switch-right
-)
 
 (map! :leader
       :prefix ("p" . "project")
@@ -117,7 +106,6 @@
       :desc "Walk Back" "n" #'project-walk-prev
       )
 
-
 ;;-- end project walk
 
 ;;-- ibuffer
@@ -131,3 +119,46 @@
        )
       )
 ;;-- end ibuffer
+
+;;-- neotree
+(map! :map jg-neotree-mode-map
+      :after neotree
+      :n "v"   (neotree-make-executor :file-fn 'neo-open-file-vertical-split)
+
+      :n "i"  #'ignore
+      :n "g"  #'neotree-refresh
+      :n "q"  #'neotree-hide
+      :n "Q"  (cmd! (kill-buffer (current-buffer)))
+      :n "."  #'neotree-hidden-file-toggle
+      :n "\\" #'neotree-change-root
+      :n "r"  #'neotree-rename-node
+
+      :n "h"  #'+neotree/collapse-or-up
+      :n "l"  #'+neotree/expand-or-open
+      :n "H"  #'neotree-select-up-node
+      :n "L"  #'neotree-select-down-node
+      :n "n"  #'neotree-select-next-sibling-node
+      :n "N"  #'neotree-select-previous-sibling-node
+
+      :n "RET" (neotree-make-executor :file-fn 'neo-open-file :dir-fn  'neo-open-dir)
+      )
+
+(setq neotree-mode-map jg-neotree-mode-map)
+;;-- end neotree
+
+;;-- window-ring
+(map! :map window-ring-edit-map
+      "C-c C-c" #'window-ring-edit-commit)
+
+(map! :map jg-binding-backward-general-motion-map
+      :desc "ring window"  "r"    #'window-ring-move-focus-alt
+      :desc "ring oldest"  "R"    #'window-ring-goto-oldest
+      :desc "workspace"    "w"    #'+workspace/switch-left
+      )
+
+(map! :map jg-binding-forward-general-motion-map
+      :desc "ring window"  "r"    #'window-ring-move-focus
+      :desc "ring newest"  "R"    #'window-ring-goto-newest
+      :desc "workspace"    "w"    #'+workspace/switch-right
+)
+;;-- end window-ring

@@ -80,7 +80,6 @@
       :desc "Evaluate buffer/region"                "e"   #'+eval/buffer-or-region
       :desc "Find implementations"                  "i"   #'+lookup/implementations
       :desc "Find type definition"                  "t"   #'+lookup/type-definition
-      :desc "Format buffer/region"                  "f"   #'+format/region-or-buffer
       :desc "List errors"                           "x"   #'flymake-show-diagnostics-buffer
       :desc "Recompile"                             "C"   #'recompile
       :desc "Send to repl"                          "s"   #'+jg-send-region-to-repl

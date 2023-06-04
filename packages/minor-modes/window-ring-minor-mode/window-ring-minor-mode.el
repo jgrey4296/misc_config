@@ -361,7 +361,7 @@ return the next older index"
             )
         (message "Ring Buffers: %s"
                  (string-join (mapcar #'(lambda (x) (if (string-equal x focus)
-                                                        (propertize (format "[%s] " x) 'face '(:background "blue"))
+                                                        (propertize (format "<- [%s] ->" x) 'face '(:background "blue"))
                                                       (format "%s" x)))
                                       elements)
                               " | "))
@@ -388,7 +388,7 @@ return the next older index"
         (with-temp-buffer (format "*WR Buffers: %s*" (persp-name (get-current-persp)))
                           (princ "Ring Buffers: ")
                           (mapcar #'(lambda (x) (princ x) (princ " | ")) older)
-                          (princ (format "[%s] | " (buffer-name focus)))
+                          (princ (format " <- [%s] -> " (buffer-name focus)))
                           (mapcar #'(lambda (x) (princ x) (princ " | ")) (reverse newer))
                           )
       )

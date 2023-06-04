@@ -25,12 +25,6 @@
               which-key-sort-order 'which-key-key-order-alpha
               )
 
-(after! neotree
-  (push "^__pycache__$"          neo-hidden-regexp-list)
-  (push "^G\\(PATH\\|R?TAGS\\)$" neo-hidden-regexp-list)
-  (push "^__init__.py$"          neo-hidden-regexp-list)
-  )
-
 ;;-- hl todo
 (setq hl-todo-highlight-punctuation ":"
         hl-todo-keyword-faces

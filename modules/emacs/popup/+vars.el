@@ -46,21 +46,7 @@ adjustment.")
                                              :ttl nil)
       )
 (setq jg-popup-ivy-predicate-patterns (rx (or "*helpful" "*helm-" "doom" "*dired-log" "magit" "*Free Keys")))
-(setq neo-toggle-window-keep-p t)
 
-(spec-handling-add! fold
-                    '(neotree
-                     :modes (neotree-mode)
-                     :priority 25
-                     :triggers (:open-all   nil
-                                :close-all  neotree-collapse-all
-                                :toggle     nil
-                                :open       +neotree/expand-or-open
-                                :open-rec   nil
-                                :close      +neotree/collapse
-                                )
-                     )
-                    )
 
 (spec-handling-add! popup
                     '(defaults

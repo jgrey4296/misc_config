@@ -1,41 +1,9 @@
 ;;; tools/debugger/config.el -*- lexical-binding: t; -*-
 
-(defvar +debugger--realgud-alist
-  '((realgud:bashdb    :modes (sh-mode))
-    (realgud:gdb)
-    (realgud:gub       :modes (go-mode))
-    (realgud:kshdb     :modes (sh-mode))
-    (realgud:pdb       :modes (python-mode))
-    (realgud:perldb    :modes (perl-mode perl6-mode))
-    (realgud:rdebug    :modes (ruby-mode))
-    (realgud:remake)
-    (realgud:trepan    :modes (perl-mode perl6-mode))
-    (realgud:trepan2   :modes (python-mode))
-    (realgud:trepan3k  :modes (python-mode))
-    (realgud:trepanjs  :modes (javascript-mode js2-mode js3-mode))
-    (realgud:trepanpl  :modes (perl-mode perl6-mode raku-mode))
-    (realgud:zshdb     :modes (sh-mode))))
+(defer-load! "+vars")
 
-(defvar +debugger--dap-alist
-  `(((:lang cc +lsp)         :after ccls        :require (dap-lldb dap-gdb-lldb))
-    ((:lang elixir +lsp)     :after elixir-mode :require dap-elixir)
-    ((:lang go +lsp)         :after go-mode     :require dap-dlv-go)
-    ((:lang java +lsp)       :after java-mode   :require lsp-java)
-    ((:lang php +lsp)        :after php-mode    :require dap-php)
-    ((:lang python +lsp)     :after python      :require dap-python)
-    ((:lang ruby +lsp)       :after ruby-mode   :require dap-ruby)
-    ((:lang rust +lsp)       :after rustic-mode :require (dap-lldb dap-cpptools))
-    ((:lang javascript +lsp)
-     :after (js2-mode typescript-mode)
-     :require (dap-node dap-chrome dap-firefox ,@(if IS-WINDOWS '(dap-edge)))))
-  "TODO")
-
-;;
+(defer-load! jg-total-bindings "+bindings")
 ;;; Packages
-
-;;;###package gdb
-(setq gdb-show-main t
-      gdb-many-windows t)
 
 (use-package! projectile-variable
   :defer t
@@ -47,13 +15,6 @@
 (use-package! realgud
   :defer t
   :init
-
-(use-package! realgud-trepan-ni
-    :defer t
-    :init (add-to-list '+debugger--realgud-alist
-                       '(realgud:trepan-ni :modes (javascript-mode js2-mode js3-mode)
-                                           :package realgud-trepan-ni)))
-
   ;; Realgud doesn't generate its autoloads properly so we do it ourselves
   (dolist (debugger +debugger--realgud-alist)
     (autoload (car debugger)
@@ -65,7 +26,6 @@
   :config
   (set-popup-rule! "^\\*\\(?:trepanjs:\\(?:g\\|zsh\\|bash\\)db\\|pdb \\)"
     :size 20 :select nil :quit nil)
-
 
 (defadvice! +debugger--cleanup-after-realgud-a (&optional buf)
     "Kill command buffer when debugging session ends (which closes its popup)."
@@ -110,6 +70,13 @@
              (message "Error running command: %s" (mapconcat #'identity cmd-args " "))))
       cmd-buf)))
 
+(use-package! realgud-trepan-ni
+    :defer t
+    :init (add-to-list '+debugger--realgud-alist
+                       '(realgud:trepan-ni :modes (javascript-mode js2-mode js3-mode)
+                         :package realgud-trepan-ni))
+    )
+
 (use-package! dap-mode
   :when (and (modulep! +lsp) (not (modulep! :tools lsp +eglot)))
   :hook (dap-mode . dap-tooltip-mode)
@@ -127,22 +94,6 @@
 
   (dap-mode 1)
 
-
-(define-minor-mode +dap-running-session-mode
-    "A mode for adding keybindings to running sessions"
-    :init-value nil
-    :keymap (make-sparse-keymap)
-    (when (bound-and-true-p evil-mode)
-      (evil-normalize-keymaps))  ; if you use evil, this is necessary to update the keymaps
-    ;; The following code adds to the dap-terminated-hook so that this minor
-    ;; mode will be deactivated when the debugger finishes
-    (when +dap-running-session-mode
-      (let ((session-at-creation (dap--cur-active-session-or-die)))
-        (add-hook 'dap-terminated-hook
-                  (lambda (session)
-                    (when (eq session session-at-creation)
-                      (+dap-running-session-mode -1)))))))
-
   ;; Activate this minor mode when dap is initialized
   (add-hook 'dap-session-created-hook #'+dap-running-session-mode)
   ;; Activate this minor mode when hitting a breakpoint in another file
@@ -154,9 +105,11 @@
 
   (map! :localleader
         :map +dap-running-session-mode-map
-        "d" #'dap-hydra))
+        "d" #'dap-hydra)
+  )
 
 (use-package! dap-ui
   :when (and (modulep! +lsp) (not (modulep! :tools lsp +eglot)))
   :hook (dap-mode . dap-ui-mode)
-  :hook (dap-ui-mode . dap-ui-controls-mode))
+  :hook (dap-ui-mode . dap-ui-controls-mode)
+  )

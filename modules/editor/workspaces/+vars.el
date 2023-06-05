@@ -62,9 +62,10 @@ stored in `persp-save-dir'.")
       neo-confirm-create-directory #'off-p
       neo-show-hidden-files nil
       neo-keymap-style 'concise
-      neo-hidden-regexp-list (list dired-omit-files)
-
-        )
+      )
+(after! dired
+  (setq neo-hidden-regexp-list (list dired-omit-files))
+  )
 
 ;;-- end neotree
 

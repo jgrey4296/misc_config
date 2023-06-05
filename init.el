@@ -6,14 +6,14 @@
  :config default
  :editor (evil +everywhere)
  :config bindings disabled help search ui
- :app   (rss +org)
  :completion company ivy helm
 
  :editor format
  :editor char-insert fold navigation tagging text-manipulation
  :editor fold snippets lookup workspaces diff undo
+ :editor large-files
 
- :emacs electric vc autosave calendar
+ :emacs autosave calendar
  :emacs dired hydra ibuffer popup version-control
 
  :lang-data csv graphql
@@ -37,23 +37,26 @@
  :lang-weakly-typed lisp-langs (python +conda +pyright +cython +lsp) lua
  :lang-weakly-typed erlang-vms godot ruby
 
- :lang emacs-lisp ledger
+ :checkers (spell +flyspell)
+
+ :tools ide-support twitter pdfs
+ :tools mail term
+ :tools taskrunners
+ ;;:tools debugger
+
+ ;; --------------------------------------------------
+ ;; Doom Standard modules
+ :app   (rss +org)
+ :email (mu4e +gmail)
+ :emacs electric vc
+ :lang ledger
  ;; :lang agda ess
  ;; :lang julia
-
  :ui deft doom
  :ui minimap ophints
  ;;:ui treemacs unicode (emoji +unicode)
-
- :checkers (spell +flyspell)
-
- :tools (eval +overlay) ide-support mail twitter pdfs
- :tools editorconfig rgb tree-sitter mail term
- :tools taskrunners
- ;;:tools ein make debugger
-
- :email (mu4e +gmail)
-
+ ;; :tools make
+ :tools (eval +overlay)
+ :tools editorconfig rgb
  :os (:if IS-MAC macos) tty
-
  )

@@ -9,9 +9,12 @@
 
 (package! cedet :built-in 'prefer)
 (package! semantic)
-(package! flycheck)
 
 (package! tree-sitter)
 (package! tree-sitter-langs)
 (package! tree-sitter-indent)
 (when (modulep! :editor evil +everywhere) (package! evil-textobj-tree-sitter))
+
+(package! flycheck)
+(package! flycheck-popup-tip)
+(when (modulep! +childframe) (package! flycheck-posframe))

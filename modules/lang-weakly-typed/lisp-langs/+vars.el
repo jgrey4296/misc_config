@@ -160,6 +160,7 @@ See `+emacs-lisp-non-package-mode' for details.")
 
 (spec-handling-add! lookup-regular
                     '(emacs-lisp-mode
+                      ("Flycheck" . "https://www.flycheck.org/en/latest/")
                       ("GNU Lisp" . "https://www.gnu.org/software/emacs/manual/html_node/elisp/index.html")
                       ("Melpa" . "https://melpa.org/#/")
                       ("Doom"  . "https://github.com/doomemacs/doomemacs")

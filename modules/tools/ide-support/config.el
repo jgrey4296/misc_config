@@ -20,13 +20,13 @@
 ;;
 ;;; Code:
 
-
 (load! "+vars")
 (after! jg-bindings-total
   (load! "+bindings")
   )
 
 ;;-- lsp
+
 (use-package! lsp-mode
   :commands lsp-install-server
   :init
@@ -81,6 +81,7 @@
 ;;-- end lsp
 
 ;;-- eglot
+
 (use-package! eglot
   :commands eglot eglot-ensure
   :hook (eglot-managed-mode . +lsp-optimization-mode)
@@ -110,6 +111,7 @@
 ;;-- end eglot
 
 ;;-- tree sitter
+
 (use-package! tree-sitter
   :defer t
   :init
@@ -147,7 +149,9 @@
 ;;-- end tree sitter
 
 ;;-- semantic
+
 (use-package! cedet)
+
 (use-package! semantic
   :defer t
   :init
@@ -182,5 +186,80 @@
   )
 
 ;;-- end semantic
+
+;;-- flycheck
+
+(use-package! flycheck
+  :commands flycheck-list-errors flycheck-buffer
+  ;; :hook (doom-first-buffer . global-flycheck-mode)
+  :init
+  (defvar flycheck-checkers)
+  (defvar flycheck-disabled-checkers)
+
+  (spec-handling-add! python-env
+                      '(flycheck
+                        (:support flycheck #'(lambda (path name)
+                                               (unless flycheck-enabled-checkers
+                                                 (let ((chosen (intern (ivy-read "Flychecker: " flycheck-disabled-checkers :require-match t))))
+                                                   (delete chosen flycheck-disabled-checkers)
+                                                   (add-to-list flycheck-enabled-checkers chosen)
+                                                   ))
+                                               (add-hook 'python-mode-hook #'flycheck-mode)
+                                               )
+                                  (-partial #'flycheck-mode -1)
+                                  )
+                        (:teardown flycheck (-partial flycheck-mode -1))
+                        )
+                      )
+  (setq flycheck-global-modes nil)
+
+  ;; (spec-handling-new! flycheck nil :loop 'do
+
+
+  ;;                     )
+  ;; (spec-handling-new! flycheck-disabled nil :loop 'do
+
+  ;;                     )
+
+  :config
+  (add-hook! 'doom-escape-hook :append #'+syntax-check-buffer-h)
+
+  (remove-hook! 'after-change-major-mode-hook
+    #'global-flycheck-mode-enable-in-buffers
+    )
+)
+
+(use-package! flycheck-popup-tip
+  :commands flycheck-popup-tip-show-popup flycheck-popup-tip-delete-popup
+  :hook (flycheck-mode . +syntax-init-popups-h)
+  :config
+  (after! evil
+    ;; Don't display popups while in insert or replace mode, as it can affect
+    ;; the cursor's position or cause disruptive input delays.
+    (add-hook! '(evil-insert-state-entry-hook evil-replace-state-entry-hook)
+               #'flycheck-popup-tip-delete-popup)
+    (defadvice! +syntax--disable-flycheck-popup-tip-maybe-a (&rest _)
+      :before-while #'flycheck-popup-tip-show-popup
+      (if evil-local-mode
+          (eq evil-state 'normal)
+        (not (bound-and-true-p company-backend)))))
+  )
+
+(use-package! flycheck-posframe
+  :when (modulep! +childframe)
+  :hook (flycheck-mode . +syntax-init-popups-h)
+  :config
+  (after! company
+    ;; Don't display popups if company is open
+    (add-hook 'flycheck-posframe-inhibit-functions #'company--active-p))
+  (after! evil
+    ;; Don't display popups while in insert or replace mode, as it can affect
+    ;; the cursor's position or cause disruptive input delays.
+    (add-hook! 'flycheck-posframe-inhibit-functions
+               #'evil-insert-state-p
+               #'evil-replace-state-p))
+  )
+
+;;-- end flycheck
 
 ;;; config.el ends here

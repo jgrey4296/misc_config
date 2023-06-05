@@ -45,7 +45,7 @@
  :ui minimap ophints
  ;;:ui treemacs unicode (emoji +unicode)
 
- :checkers syntax (spell +flyspell) grammar
+ :checkers (spell +flyspell)
 
  :tools (eval +overlay) ide-support mail twitter pdfs
  :tools editorconfig rgb tree-sitter mail term

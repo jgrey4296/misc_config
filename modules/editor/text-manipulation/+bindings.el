@@ -25,7 +25,6 @@
        )
       )
 
-
 ;;-- evil bindings
 (map! :map jg-binding-normal-state-map
       :desc "breakpoint"          "I b"   #'+jg-text-insert-debug
@@ -41,7 +40,6 @@
       :desc "Delete "        "d" #'+jg-text-delete-invisible
       :desc "Invisible-spec" "i" #'+jg-text-toggle-invisible-spec
       )
-
 
 (map! :map jg-binding-visual-state-map
       :desc "Grow Selection " "v g"        #'+jg-text-grow-selection-op
@@ -140,6 +138,10 @@
       :desc "Align"                       "a" #'align-regexp
       :desc "Yank"                        "y" #'+evil:yank-unindented
 
+      (:prefix ("d" . "Describe")
+      "g" #'writegood-grade-level
+      "r" #'writegood-reading-ease
+      )
 
       (:prefix ("w" . "whitespace")
        :desc "Whitespace clean"            "w" #'+jg-text-run-whitespace-cleanup
@@ -167,7 +169,6 @@
        :desc "Compile"          "c" #'+jg-text-pandoc-compile
        )
       )
-
 
 (after! calendar
   (setq calendar-mode-map (make-sparse-keymap))

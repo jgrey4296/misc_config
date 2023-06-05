@@ -70,3 +70,10 @@ Do nothing if `lsp-ui-mode' is active and `lsp-ui-sideline-enable' is non-nil."
     (tabulated-list-init-header)
     )
   )
+
+;;;###autoload
+(defun +syntax-check-buffer-h ()
+      "Flycheck buffer on ESC in normal mode."
+      (when flycheck-mode
+        (ignore-errors (flycheck-buffer))
+        nil))

@@ -34,7 +34,7 @@
           ((f-exists? url)
            (shell-command (format "open %s" url)))
           (t
-           (browse-url url)
+           (call-interactively #'+lookup/online url)
            )
           )
     )

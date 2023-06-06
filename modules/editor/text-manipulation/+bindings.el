@@ -25,6 +25,7 @@
        )
       )
 
+
 ;;-- evil bindings
 (map! :map jg-binding-normal-state-map
       :desc "breakpoint"          "I b"   #'+jg-text-insert-debug

@@ -21,11 +21,9 @@
 ;;; Code:
 
 $0
-(load! "+vars")
-;; (load! "+spec-defs")
-(after! jg-bindings-total
-    (load! "+bindings")
-)
+(defer-load! "+vars")
+;; (defer-load! "+spec-defs")
+(defer-load! jg-bindings-total "+bindings")
 
 (use-package! $1
 

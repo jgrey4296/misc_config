@@ -17,10 +17,6 @@
       "<f10>" #'ignore
       )
 
-;; For minibuffer use:
-(map! :map ctl-x-map
-      "[" "("
-      "]" ")")
 
 (map! :map universal-argument-map
       :prefix doom-leader-key     "u" #'universal-argument-more

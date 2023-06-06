@@ -187,6 +187,7 @@
       (ztree ztree-diff)))
 (defvar +evil-collection-disabled-list
   '(anaconda-mode
+    minibuffer
     neotree
     buff-menu
     calc
@@ -211,7 +212,6 @@
   "A list of `evil-collection' modules to ignore. See the definition of this
 variable for an explanation of the defaults (in comments). See
 `evil-collection-mode-list' for a list of available options.")
-(defvar evil-collection-setup-minibuffer nil)
 (defvar evil-collection-want-unimpaired-p nil)              ;; We do this ourselves, and better.
 (defvar evil-collection-want-find-usages-bindings-p nil)    ;; Doom binds goto-reference on gD and goto-assignments on gA ourselves
 (defvar evil-collection-outline-enable-in-minor-mode-p nil) ;; Reduces keybind conflicts between outline-mode and org-mode (which is derived from outline-mode).
@@ -318,10 +318,6 @@ and complains if a module is loaded too early (during startup)."
       (+evil-collection-init 'replace))
     (add-transient-hook! 'indent-rigidly
       (+evil-collection-init '(indent "indent")))
-    (add-transient-hook! 'minibuffer-setup-hook
-      (when evil-collection-setup-minibuffer
-        (+evil-collection-init 'minibuffer)
-        (evil-collection-minibuffer-insert)))
     (add-transient-hook! 'process-menu-mode
       (+evil-collection-init '(process-menu simple)))
     (add-transient-hook! 'shortdoc-mode

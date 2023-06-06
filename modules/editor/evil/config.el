@@ -231,16 +231,6 @@
 (use-package! evil-escape
   :commands evil-escape
   :hook (doom-first-input . evil-escape-mode)
-  :init
-  :config
-  ;; `evil-escape' in the minibuffer is more disruptive than helpful. That is,
-  ;; unless we have `evil-collection-setup-minibuffer' enabled, in which case we
-  ;; want the same behavior in insert mode as we do in normal buffers.
-  (add-hook! 'evil-escape-inhibit-functions
-    (defun +evil-inhibit-escape-in-minibuffer-fn ()
-      (and (minibufferp)
-           (or (not (bound-and-true-p evil-collection-setup-minibuffer))
-               (evil-normal-state-p)))))
   )
 
 (use-package! evil-exchange

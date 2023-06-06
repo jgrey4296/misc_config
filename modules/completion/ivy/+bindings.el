@@ -127,10 +127,3 @@
       :desc "Messages"                     "0" (cmd! (+jg-popup-ivy-open "*Messages*") (when current-prefix-arg (with-current-buffer "*Messages*" (+jg-text-clear-buffer))))
       )
 ;;-- end leader helms/ivys
-
-(map! :map ivy-minibuffer-map
-      [remap doom/delete-backward-word] #'ivy-backward-kill-word
-      "C-c C-e"                         #'+ivy/woccur
-      "C-o"                             #'ivy-dispatching-done
-      "M-o"                             #'hydra-ivy/body
-      )

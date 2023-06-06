@@ -111,4 +111,5 @@
 
 (map! :map py-test-minor-mode-map
       :n "RET" #'python-pytest-function-dwim
+      :i "RET" #'evil-ret
       )

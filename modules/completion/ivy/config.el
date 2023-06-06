@@ -64,11 +64,6 @@
     (add-to-list 'ivy-dispatching-done-hydra-exit-keys '("C-o" nil))
     (defhydra+ hydra-ivy () ("M-o" nil)))
 
-  (define-key! ivy-minibuffer-map
-    [remap doom/delete-backward-word] #'ivy-backward-kill-word
-    "C-c C-e" #'+ivy/woccur
-    "C-o" #'ivy-dispatching-done
-    "M-o" #'hydra-ivy/body)
   )
 
 (use-package! ivy-rich

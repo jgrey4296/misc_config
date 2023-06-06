@@ -16,6 +16,7 @@
   )
 
 (use-package! nose
+  :disabled t
   :commands nose-mode
   :preface
   (defvar nose-mode-map (make-sparse-keymap))

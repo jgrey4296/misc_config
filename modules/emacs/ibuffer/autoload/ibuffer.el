@@ -68,7 +68,7 @@
   (ibuffer-update 0)
   )
 
-;;;###autoload (autoload 'ibuffer-make-column-size "modules/emacs/ibuffer/autoload/ibuffer" nil t)
+;;;###autoload (autoload 'ibuffer-make-column-size "emacs/ibuffer/autoload/ibuffer" nil t)
 (define-ibuffer-column size
   (:name "Size")
   (file-size-human-readable (buffer-size))

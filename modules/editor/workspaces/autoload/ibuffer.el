@@ -33,7 +33,7 @@
       (persp-add-buffer buf))
     (switch-to-buffer buf)))
 
-;;;###autoload (autoload 'ibuffer-filter-by-workspace-buffers "modules/editor/workspaces/autoload/ibuffer" nil t)
+;;;###autoload (autoload 'ibuffer-filter-by-workspace-buffers "editor/workspaces/autoload/ibuffer" nil t)
 (define-ibuffer-filter workspace-buffers
     "Filter for workspace buffers"
   (:reader (ivy-read "workspace name: " (+workspace-list-names))
@@ -41,7 +41,7 @@
   (memq buf (+workspace-buffer-list (+workspace-get qualifier)))
   )
 
-;;;###autoload (autoload 'ibuffer-filter-by-window-ring-buffers "modules/editor/workspaces/autoload/ibuffer" nil t)
+;;;###autoload (autoload 'ibuffer-filter-by-window-ring-buffers "editor/workspaces/autoload/ibuffer" nil t)
 (define-ibuffer-filter window-ring
     "Filter by current window ring"
   (:description "Window-Ring")
@@ -49,7 +49,7 @@
 )
 
 
-;;;###autoload (autoload 'ibuffer-make-column-workspace "modules/editor/workspaces/autoload/ibuffer.el" nil t)
+;;;###autoload (autoload 'ibuffer-make-column-workspace "editor/workspaces/autoload/ibuffer.el" nil t)
 (define-ibuffer-column workspace
   (:name "Workspace")
   (string-join (cl-loop for workspace in (+workspace-list-names)

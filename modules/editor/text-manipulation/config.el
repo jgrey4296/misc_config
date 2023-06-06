@@ -8,6 +8,7 @@
 (after! evil
   (remove-hook! 'after-change-major-mode-hook #'doom--setq-evil-shift-width-for-after-change-major-mode-h)
   )
+
 (add-hook! 'doom-init-ui-hook :append #'+ligature-init-composition-table-h)
 (when (memq 'visual-line-mode text-mode-hook)
   (remove-hook 'text-mode-hook #'visual-line-mode)

@@ -13,7 +13,7 @@
  :editor fold snippets lookup workspaces diff undo
  :editor large-files
 
- :emacs autosave calendar
+ :emacs autosave calendar minibuffer
  :emacs dired hydra ibuffer popup version-control
 
  :lang-data csv graphql

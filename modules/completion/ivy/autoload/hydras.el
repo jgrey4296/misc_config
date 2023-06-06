@@ -3,15 +3,15 @@
 (require 'hydra)
 
 
-;;;###autoload (autoload 'hydra-ivy/body "completion/ivy/autoload/hydras" nil t)
-(defhydra hydra-ivy (:hint nil :color pink)
+;;;###autoload (autoload 'jg-ivy-hydra/body "completion/ivy/autoload/hydras" nil t)
+(defhydra jg-ivy-hydra (:hint nil :color pink)
   (format "%s\n" (hydra-utils-format-columns
                   '("|Top-to-bottom" "_g_: Top" "_G_: Bottom" "_u_: scroll up" "_d_: scroll down")
                   '(blank k blank j)
                   '("|Call" forward "_RET_: done" "_TAB_: alt-done" occur)
                   '("|Cancel" insert quit)
                   `(,(format "%-12s" "|options") "_c_alling: %-8s(if ivy-calling \"on\" \"off\")" "_m_atcher: %-8s(ivy--matcher-desc)" "_t_runcate: %-7`truncate-lines" "_C_ase-fold: %-6`ivy-case-fold-search")
-                  '("|Actions _w_/_s_/_a_" "%8s(ivy-action-name)" "_<_/_>_: shrink/grow")
+                  '("|Actions _[_/_]_/_a_" "%8s(ivy-action-name)" "_<_/_>_: shrink/grow")
                   ))
   ;; arrows
   ("h" ivy-beginning-of-buffer)
@@ -22,8 +22,7 @@
   ("d" ivy-scroll-up-command)
   ("u" ivy-scroll-down-command)
   ("e" ivy-scroll-down-command)
-  ;; actions
-  ("q" keyboard-escape-quit :exit t)
+  ("q" nil)
   ("<escape>" keyboard-escape-quit :exit t)
   ("TAB" ivy-alt-done :exit nil)
   ("RET" ivy-done :exit t)
@@ -34,9 +33,9 @@
   ("m" ivy-toggle-fuzzy)
   ("t" (setq truncate-lines (not truncate-lines)))
   ("o" ivy-occur :exit t)
-  ("w" ivy-prev-action)
-  ("s" ivy-next-action)
-  ("a" nil) ;;ivy-hydra--read-action)
+  ("[" ivy-prev-action)
+  ("]" ivy-next-action)
+  ("a" ivy-hydra--read-action)
   (">" ivy-minibuffer-grow)
   ("<" ivy-minibuffer-shrink)
   ("C" ivy-toggle-case-fold)

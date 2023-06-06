@@ -38,10 +38,21 @@
   )
 
 (map! :map evil-jg-insert-state-map
+      [escape] #'evil-normal-state
       "SPC" (cmd! (insert jg-insert-state-sep))
       "§"   #'+jg-insert-state-set-sep
+      "TAB" #'evil-insert-state
       ;; TODO map a control to choose the SPC replacement
       )
 
+;;;###autoload
+(defun +jg-insert-state-escape-advice (&rest r)
+  " extends evil-escape for this new state "
+  (when (evil-jg-insert-state-p)
+    #'evil-normal-state)
+  )
+
+;;;###autoload
+(advice-add 'evil-escape-func :before-until #'+jg-insert-state-escape-advice)
 
 ;;; +state.el ends here

@@ -46,6 +46,16 @@ results buffer.")
                    )
   )
 
+(after! ivy-hydra
+  (setq ivy-dispatching-done-hydra-exit-keys
+        '(("q" nil :exit t)
+          ("C-o" nil)
+          ("M-o" nil "back")
+          ("C-g" nil)
+          )
+        )
+  )
+
 ;;-- end ivy
 
 ;;-- company

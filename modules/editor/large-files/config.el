@@ -21,20 +21,14 @@
 ;;; Code:
 
 
-(load! "+vars")
-(after! jg-bindings-total
-  (load! "+bindings")
-  )
+(defer-load! "+vars")
+(defer-load! jg-bindings-total "+bindings")
 
 (use-package! so-long
   :hook (doom-first-file . global-so-long-mode)
   :config
-
-  (defun doom-buffer-has-long-lines-p ()
-    (unless (bound-and-true-p visual-line-mode)
-      (so-long-detected-long-line-p)))
-
   (setq so-long-predicate #'doom-buffer-has-long-lines-p)
+
   ;; Don't disable syntax highlighting and line numbers, or make the buffer
   ;; read-only, in `so-long-minor-mode', so we can have a basic editing
   ;; experience in them, at least. It will remain off in `so-long-mode',
@@ -42,6 +36,7 @@
   (delq! 'font-lock-mode so-long-minor-modes)
   (delq! 'display-line-numbers-mode so-long-minor-modes)
   (delq! 'buffer-read-only so-long-variable-overrides 'assq)
+
   ;; ...but at least reduce the level of syntax highlighting
   (add-to-list 'so-long-variable-overrides '(font-lock-maximum-decoration . 1))
   ;; ...and insist that save-place not operate in large/long files

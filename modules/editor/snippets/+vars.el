@@ -32,6 +32,8 @@
 
 ;; default snippets library, if available
 (add-to-list 'load-path jg-snippets-code-templates-dir)
+(setq yas-indent-line 'fixed)
+
 
 (spec-handling-add! file-templates
                     '(general

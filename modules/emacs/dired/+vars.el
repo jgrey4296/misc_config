@@ -71,6 +71,7 @@
                              line-end
                              )
         )
+  (provide 'dired-omit-files-set)
   )
 
 ;;-- end omit-patterns

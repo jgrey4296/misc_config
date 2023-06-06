@@ -1,18 +1,24 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
+
+
 (setq lsp-mode-map (make-sparse-keymap)
       lsp-command-map (make-sparse-keymap)
       lsp-signature-mode-map (make-sparse-keymap)
       )
 
 (map! :leader
-
       :prefix "c"
-      :desc "Flycheck" "!" flycheck-command-map
       :desc "LSP Code actions"                      "a"   #'lsp-execute-code-action
       :desc "LSP Organize imports"                  "o"   #'lsp-organize-imports
       :desc "LSP Rename"                            "R"   #'lsp-rename
       :desc "LSP"                                   "l"   lsp-command-map
+      )
+
+(map! :leader
+      :after flycheck
+      :prefix "c"
+      :desc "Flycheck" "!" flycheck-command-map
       )
 
 ;;-- lsp

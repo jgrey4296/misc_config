@@ -63,7 +63,7 @@ stored in `persp-save-dir'.")
       neo-show-hidden-files nil
       neo-keymap-style 'concise
       )
-(after! dired
+(after! 'dired-omit-files-set
   (setq neo-hidden-regexp-list (list dired-omit-files))
   )
 

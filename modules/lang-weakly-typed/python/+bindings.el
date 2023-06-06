@@ -108,3 +108,7 @@
       :localleader
       :desc "PdbTrack" ";" #'py-pdbtrack-toggle-stack-tracking
       )
+
+(map! :map py-test-minor-mode-map
+      :n "RET" #'python-pytest-function-dwim
+      )

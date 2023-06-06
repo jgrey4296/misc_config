@@ -31,6 +31,7 @@
              #'evil-collection-python-set-evil-shift-width
              #'doom--setq-tab-width-for-python-mode-h
              #'tree-sitter!
+             #'maybe-py-test-minor-mode
              )
 
   ;; Always add auto-hide as the last thing

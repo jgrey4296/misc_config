@@ -27,29 +27,26 @@
       :i  "<backtab>" #'ivy-dispatching-call
       :n  ","         #'+ivy/woccur
 
-      :n "/"         #'+ivy/woccur
+      :n "/"          #'+ivy/woccur
 
-      :n "q"          #'abort-recursive-edit
+      :n  "q"         #'abort-recursive-edit
       :n  "a"         #'ivy-dispatching-done
       :n  "o"         #'jg-ivy-hydra/body
       :n  "."         #'jg-ivy-hydra/body
-      :g  "RET"       #'ivy-done
+      :ig  "RET"      #'ivy-done
 
       :n  "|"         #'abort-recursive-edit
       :i  "|"         #'self-insert-command
 
-      :n  "j"         #'ivy-next-line
+      :nv "j"         #'ivy-next-line
       :i  "j"         #'self-insert-command
       :n  "k"         #'ivy-previous-line
-      :n  "RET"       #'ivy-done
 
       :n  "K"         #'previous-history-element
       :n  "J"         #'next-history-element
 
       :n  "<"         #'beginning-of-line
       :n  ">"         #'end-of-line
-      :i  "j"         #'self-insert-command
-      :nv "j"         #'ivy-next-line
       :n  "v"         #'ignore
 )
 (map! :map jg-minibuffer-ivy-map
@@ -72,10 +69,11 @@
 
 (map! :map jg-minibuffer-local-map
       [escape] #'abort-recursive-edit
-      "RET"    #'exit-minibuffer
-      :i "j" #'self-insert-command
-      :n "|" #'minibuffer-keyboard-quit
-      :g "RET"  #'exit-minibuffer
+      :g "RET" #'exit-minibuffer
+      :ni "RET" #'exit-minibuffer
+      :i "j"   #'self-insert-command
+      :n "|"   #'minibuffer-keyboard-quit
+      :g "RET" #'exit-minibuffer
       )
 (map! :map jg-minibuffer-local-map
       "C-j"    #'next-line
@@ -87,7 +85,7 @@
       )
 
 (map! :map (jg-minibuffer-evil-ex-completion-map jg-minibuffer-evil-ex-search-keymap)
-      "RET" #'exit-minibuffer
+      :g "RET" #'exit-minibuffer
       "C-a" #'evil-beginning-of-line
       "C-b" #'evil-backward-char
       "C-f" #'evil-forward-char

@@ -50,3 +50,14 @@ If prefix ARG is non-nil, prompt for a known project to open in dired."
          (if arg
              (list (completing-read "Open dired in project: " projectile-known-projects))
            (dired-read-dir-and-switches ""))))
+
+;;;###autoload
+(defun file-notify-rm-watch-silent-advice (descriptor)
+  " Removes the callback from a file notification watcher *before* cancelling it "
+  (when-let* ((watch (gethash descriptor file-notify-descriptors)))
+    (setf (file-notify--watch-callback
+           (gethash descriptor file-notify-descriptors)) #'identity))
+  )
+
+;;;###autoload
+(advice-add 'file-notify-rm-watch :before #'file-notify-rm-watch-silent-advice)

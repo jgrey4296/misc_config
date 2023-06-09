@@ -45,6 +45,7 @@
 ;; Actions
 (map! :map helm-map
       :after helm
+      "RET" #'helm-maybe-exit-minibuffer
       :ni "RET" #'helm-maybe-exit-minibuffer
       :ni "TAB" #'helm-select-action
       "C-z"     #'helm-execute-persistent-action

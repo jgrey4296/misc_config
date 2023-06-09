@@ -54,11 +54,12 @@
 
 (spec-handling-add! lookup-url
                     '(rust
-                     ("Rust Stdlib"     "https://doc.rust-lang.org/std/?search=%s")
-                     ("Rust Crates.io"  "https://crates.io/search?q=%s")
-                     ("Rust docs.rs"    "https://docs.rs/releases/search?query=%s")
-                     ("Rust lib.rs"     "https://lib.rs/search?q=%s")
-                     ("Rust Forums"     "https://users.rust-lang.org/search?q=%s")
+                     ("Rust Stdlib"      "https://doc.rust-lang.org/std/?search=%s")
+                     ("Rust Crates.io"   "https://crates.io/search?q=%s")
+                     ("Rust docs"        "https://docs.rs/releases/search?query=%s")
+                     ("Rust Docs stdlib" "https://doc.rust-lang.org/std/?search=%s")
+                     ("Rust lib.rs"      "https://lib.rs/search?q=%s")
+                     ("Rust Forums"      "https://users.rust-lang.org/search?q=%s")
                      )
                     )
 
@@ -104,6 +105,11 @@
 
 (spec-handling-add! lookup-regular
                     '((rust-mode rustic-mode)
+                      ("Rust Error Codes"        . "https://doc.rust-lang.org/error_codes/error-index.html")
+                      ("Rust Decompiler"         . "https://rust.godbolt.org/")
+                      ("Rustc"                   . "https://doc.rust-lang.org/rustc/index.html")
+                      ("Rust Command Line"       . "https://rust-cli.github.io/book/index.html")
+                      ("Rust Design Patterns"    . "https://rust-unofficial.github.io/patterns/additional_resources/design-principles.html")
                       ("Rust By Example"         . "https://doc.rust-lang.org/rust-by-example/index.html")
                       ("rust book"               . "https://doc.rust-lang.org/stable/book/title-page.html")
                       ("cargo book"              . "https://doc.rust-lang.org/cargo/")
@@ -115,5 +121,7 @@
                       ("rust manifest reference" . "https://doc.rust-lang.org/cargo/reference/manifest.html")
                       ("rust crates"             . "https://crates.io/")
                       ("Embedded Rust"           . "https://docs.rust-embedded.org/book/")
+                      ("Rust Collections"  . "https://doc.rust-lang.org/std/collections/index.html")
+                      ("Rust Lists" . "https://rust-unofficial.github.io/too-many-lists/")
                      )
                     )

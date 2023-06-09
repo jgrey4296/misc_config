@@ -188,6 +188,7 @@
 
 ;;-- flycheck
 (map! :map flycheck-error-list-mode-map
+      "?" #'+jg-checkers-column-format
       :n "C-n"    #'flycheck-error-list-next-error
       :n "C-p"    #'flycheck-error-list-previous-error
       :n "j"      #'flycheck-error-list-next-error
@@ -201,7 +202,6 @@
       )
 
 (map! :map tabulated-list-mode-map
-      "?" #'+jg-checkers-column-format
       :n "w" #'tabulated-list-next-column
       :n "b" #'tabulated-list-previous-column
       )

@@ -66,8 +66,8 @@ Do nothing if `lsp-ui-mode' is active and `lsp-ui-sideline-enable' is non-nil."
                 (face flycheck-error-list-checker-name))
               10 t)]
           )
-    (tabulated-list-print t)
     (tabulated-list-init-header)
+    (tabulated-list-print t)
     )
   )
 

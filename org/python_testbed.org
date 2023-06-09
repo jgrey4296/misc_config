@@ -284,6 +284,7 @@ mypy
 ** misc
 https://mrandri19.github.io/2022/01/12/a-PPL-in-70-lines-of-python.html                         : DAG : __come_back_to : probability : programming
 https://github.com/jarun/Buku                                                                   : bookmark_organisation : cli : libraries
+https://github.com/joeyespo/pytest-watch
 
 ** Other Langs
 *** erlang
@@ -361,6 +362,7 @@ parso                                                                           
 pycparser                                                                                       : 2.21
 pyparsing                                                                                       : 3.0.9
 https://construct.readthedocs.io/en/latest/intro.html
+https://argh.readthedocs.io/en/latest/
 
 *** nlp
 textblob

@@ -3,7 +3,7 @@
 [[/Users/johngrey/doot.toml][doot.toml]]
 [[/Users/johngrey/dooter.py][dooter.py]]
 [[file:/Volumes/documents/github/jgrey4296.github.io][homepage]]
-
+https://docs.google.com/spreadsheets/u/0/d/11Ps8ILDHH-vojJGyIx7CcaoB5l1mBRHy3OQAgWkm0W4/htmlview#gid=0
 
 * Base Agenda
 Death by Institution and the Harms of Abstraction.
@@ -29,8 +29,23 @@ Death by Institution and the Harms of Abstraction.
 *** [[file:/Volumes/documents/github/jgrey4296.github.io/orgfiles/primary/research_questions.org][Research Questions]]
 
 ** Other
+Killing the Black Body or Fatal Invention by @DorothyERoberts
+Medical Apartheid by @haw95
+Racecraft by Barbara and Karen Fields
+Sister Citizen by @MHarrisPerry
+The Pushout by @MoniqueWMorris
+The Warmth of Other Suns by @Isabelwilkerson
+foone - Infocom game by Douglas Adams: Bureaucracy
 
+history of automated phone lines?
 
+john wick hex - choreography simulator
+index xkcd using explainxkcd
+
+-from:quotedreplies url:1255330066151718912
+fictional syllabi - both of actual papers, and lem-like
+
+** Links
 https://afutureworththinkingabout.com/?p=5142
 https://annas-archive.org/
 https://botwiki.org/learn/#blogs-and-websites-accountable-algorithms
@@ -51,8 +66,6 @@ https://hyperpolyglot.org/
 https://id.loc.gov/
 https://kidscancode.org/godot_recipes/3.x/recent/
 https://llvm.org/docs/LangRef.html
-https://rust-unofficial.github.io/too-many-lists/
-https://rust.godbolt.org/
 https://shadowrun-series.fandom.com/wiki/Gumbo_Script
 https://sharkbombs.com/games/exnovo
 https://sites.ualberta.ca/~urban/Projects/English/Motif_Index.htm
@@ -71,22 +84,5 @@ https://www.openpolicyagent.org/
 https://www.opensecrets.org/
 https://www.patches-scrolls.de/patch
 https://www.rabbitmq.com/getstarted.html
-https://www.ronja-tutorials.com/
-
-Killing the Black Body or Fatal Invention by @DorothyERoberts
-Medical Apartheid by @haw95
-Racecraft by Barbara and Karen Fields
-Sister Citizen by @MHarrisPerry
-The Pushout by @MoniqueWMorris
-The Warmth of Other Suns by @Isabelwilkerson
-foone - Infocom game by Douglas Adams: Bureaucracy
-
-history of automated phone lines?
-
-john wick hex - choreography simulator
-index xkcd using explainxkcd
-
--from:quotedreplies url:1255330066151718912
-fictional syllabi - both of actual papers, and lem-like
 
 ** [[file:org/python_testbed.org][Testbed Notes]]

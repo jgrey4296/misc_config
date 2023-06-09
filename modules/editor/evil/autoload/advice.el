@@ -1,5 +1,47 @@
 ;;; editor/evil/autoload/advice.el -*- lexical-binding: t; -*-
 
+(defun +evil--insert-newline (&optional above _noextranewline)
+  (let ((pos (save-excursion (beginning-of-line-text) (point)))
+        comment-auto-fill-only-comments)
+    (require 'smartparens)
+    (evil-narrow-to-field
+      (if above
+          (if (save-excursion (nth 4 (sp--syntax-ppss pos)))
+              (evil-save-goal-column
+                (setq evil-auto-indent nil)
+                (goto-char pos)
+                (let ((ws (abs (skip-chars-backward " \t"))))
+                  ;; FIXME oh god why
+                  (save-excursion
+                    (if comment-line-break-function
+                        (funcall comment-line-break-function nil)
+                      (comment-indent-new-line))
+                    (when (and (derived-mode-p 'c-mode 'c++-mode 'objc-mode 'java-mode 'js2-mode)
+                               (eq (char-after) ?/))
+                      (insert "*"))
+                    (insert
+                     (make-string (max 0 (+ ws (skip-chars-backward " \t")))
+                                  32)))
+                  (insert (make-string (max 1 ws) 32))))
+            (evil-move-beginning-of-line)
+            (insert (if use-hard-newlines hard-newline "\n"))
+            (forward-line -1)
+            (back-to-indentation))
+        (evil-move-end-of-line)
+        (cond ((sp-point-in-comment pos)
+               (setq evil-auto-indent nil)
+               (if comment-line-break-function
+                   (funcall comment-line-break-function nil)
+                 (comment-indent-new-line)))
+              ;; TODO Find a better way to do this
+              ((and (eq major-mode 'haskell-mode)
+                    (fboundp 'haskell-indentation-newline-and-indent))
+               (setq evil-auto-indent nil)
+               (haskell-indentation-newline-and-indent))
+              (t
+               (insert (if use-hard-newlines hard-newline "\n"))
+               (back-to-indentation)))))))
+
 ;;;###autoload
 (defun +evil-escape-a (&rest _)
   "Call `doom/escape' if `evil-force-normal-state' is called interactively."
@@ -74,48 +116,6 @@ more information on modifiers."
                         (setq path (substring path 0 -1))))))
               (replace-match path t t nil 2))))
         (replace-regexp-in-string "\\\\\\([#%]\\)" "\\1" (buffer-string) t)))))
-
-(defun +evil--insert-newline (&optional above _noextranewline)
-  (let ((pos (save-excursion (beginning-of-line-text) (point)))
-        comment-auto-fill-only-comments)
-    (require 'smartparens)
-    (evil-narrow-to-field
-      (if above
-          (if (save-excursion (nth 4 (sp--syntax-ppss pos)))
-              (evil-save-goal-column
-                (setq evil-auto-indent nil)
-                (goto-char pos)
-                (let ((ws (abs (skip-chars-backward " \t"))))
-                  ;; FIXME oh god why
-                  (save-excursion
-                    (if comment-line-break-function
-                        (funcall comment-line-break-function nil)
-                      (comment-indent-new-line))
-                    (when (and (derived-mode-p 'c-mode 'c++-mode 'objc-mode 'java-mode 'js2-mode)
-                               (eq (char-after) ?/))
-                      (insert "*"))
-                    (insert
-                     (make-string (max 0 (+ ws (skip-chars-backward " \t")))
-                                  32)))
-                  (insert (make-string (max 1 ws) 32))))
-            (evil-move-beginning-of-line)
-            (insert (if use-hard-newlines hard-newline "\n"))
-            (forward-line -1)
-            (back-to-indentation))
-        (evil-move-end-of-line)
-        (cond ((sp-point-in-comment pos)
-               (setq evil-auto-indent nil)
-               (if comment-line-break-function
-                   (funcall comment-line-break-function nil)
-                 (comment-indent-new-line)))
-              ;; TODO Find a better way to do this
-              ((and (eq major-mode 'haskell-mode)
-                    (fboundp 'haskell-indentation-newline-and-indent))
-               (setq evil-auto-indent nil)
-               (haskell-indentation-newline-and-indent))
-              (t
-               (insert (if use-hard-newlines hard-newline "\n"))
-               (back-to-indentation)))))))
 
 ;;;###autoload
 (defun +evil--insert-newline-below-and-respect-comments-a (fn count)
@@ -231,3 +231,108 @@ Adapted from https://github.com/emacs-evil/evil/issues/606"
   (set-syntax-table (let* ((table (make-syntax-table)))
                       (modify-syntax-entry ?/ "." table)
                       table)))
+
+;; Start help-with-tutorial in emacs state
+;;;###autoload
+(advice-add #'help-with-tutorial :after (lambda (&rest _) (evil-emacs-state +1)))
+
+
+;;;###autoload
+(defun +evil--dont-move-cursor-a (fn &rest args)
+  " HACK '=' moves the cursor to the beginning of selection. Disable this,
+      since it's more disruptive than helpful. "
+  (save-excursion (apply fn args))
+  )
+
+;;;###autoload
+(advice-add 'evil-indent :around #'+evil--dont-move-cursor-a)
+
+;;;###autoload
+(defun +evil--make-numbered-markers-global-a (char)
+  " REVIEW In evil, registers 2-9 are buffer-local. In vim, they're global,
+    so... Perhaps this should be PRed upstream? "
+  (and (>= char ?2) (<= char ?9)))
+
+;;;###autoload
+(advice-add 'evil-global-marker-p :after-until #'+evil--make-numbered-markers-global-a)
+
+;;;###autoload
+(defun +evil--fix-local-vars-a (&rest _)
+  " REVIEW Fix #2493: dir-locals cannot target fundamental-mode when evil-mode
+    is active. See hlissner/doom-emacs#2493. Revert this if
+    emacs-evil/evil#1268 is resolved upstream. "
+  (when (eq major-mode 'fundamental-mode)
+    (hack-local-variables)))
+
+;;;###autoload
+(advice-add 'turn-on-evil-mode :before #'+evil--fix-local-vars-a)
+
+;;;###autoload
+(defun +evil--fix-helpful-key-in-evil-ex-a (key-sequence)
+  " HACK Invoking helpful from evil-ex throws a 'No recursive edit is in
+        progress' error because, between evil-ex and helpful,
+       `abort-recursive-edit' gets called one time too many. "
+  (when (evil-ex-p)
+    (run-at-time 0.1 nil #'helpful-key key-sequence)
+    (abort-recursive-edit)))
+
+;;;###autoload
+(advice-add 'helpful-key :before #'+evil--fix-helpful-key-in-evil-ex-a)
+
+
+;; Make J (evil-join) remove comment delimiters when joining lines.
+;;;###autoload
+(advice-add #'evil-join :around #'+evil-join-a)
+
+;;;###autoload
+(defun +evil--no-squeeze-on-fill-a (fn &rest args)
+  " Prevent gw (`evil-fill') and gq (`evil-fill-and-move') from squeezing
+        spaces. It doesn't in vim, so it shouldn't in evil. "
+
+  (letf! (defun fill-region (from to &optional justify nosqueeze to-eop)
+           (funcall fill-region from to justify t to-eop))
+    (apply fn args)))
+
+;;;###autoload
+(advice-add 'evil-fill :around #'+evil--no-squeeze-on-fill-a)
+
+;;;###autoload
+(advice-add 'evil-fill-and-move :around #'+evil--no-squeeze-on-fill-a)
+
+
+;; Make ESC (from normal mode) the universal escaper. See `doom-escape-hook'.
+;;;###autoload
+(advice-add #'evil-force-normal-state :after #'+evil-escape-a)
+
+;; monkey patch `evil-ex-replace-special-filenames' to improve support for
+;; file modifiers like %:p:h. This adds support for most of vim's modifiers,
+;; and one custom one: %:P (expand to the project root).
+;;;###autoload
+(advice-add #'evil-ex-replace-special-filenames :override #'+evil-replace-filename-modifiers-a)
+
+;; make `try-expand-dabbrev' (from `hippie-expand') work in minibuffer
+;;;###autoload
+(add-hook 'minibuffer-inactive-mode-hook #'+evil--fix-dabbrev-in-minibuffer-h)
+
+;; Focus and recenter new splits
+;;;###autoload
+(advice-add #'evil-window-split  :override #'+evil-window-split-a)
+;;;###autoload
+(advice-add #'evil-window-vsplit :override #'+evil-window-vsplit-a)
+
+;; Make o/O continue comments (see `+evil-want-o/O-to-continue-comments' to disable)
+;;;###autoload
+(advice-add #'evil-open-above :around #'+evil--insert-newline-above-and-respect-comments-a)
+;;;###autoload
+(advice-add #'evil-open-below :around #'+evil--insert-newline-below-and-respect-comments-a)
+
+
+;;;###autoload
+(defun +jg-misc-iedit-show-all ()
+    " Override iedit's show all so it doesn't mess with invisible line movement"
+    (remove-from-invisibility-spec '(iedit-invisible-overlay-name . t))
+    (remove-overlays nil nil iedit-invisible-overlay-name t)
+  )
+
+;;;###autoload
+(advice-add 'iedit-show-all :override #'+jg-misc-iedit-show-all)

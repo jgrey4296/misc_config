@@ -27,38 +27,18 @@
   ;; UX: It also clobbers clipboard managers (see emacs-evil/evil#336).
   (setq evil-visual-update-x-selection-p nil)
 
-  ;; Start help-with-tutorial in emacs state
-  (advice-add #'help-with-tutorial :after (lambda (&rest _) (evil-emacs-state +1)))
 
   (add-hook! '(doom-load-theme-hook doom-after-modules-config-hook)
-    (defun +evil-update-cursor-color-h ()
-      " Change the cursor color in emacs state. We do it this roundabout way
-        to ensure changes in theme doesn't break these colors. "
-      (put 'cursor 'evil-emacs-color  (face-foreground 'warning))
-      (put 'cursor 'evil-normal-color (face-background 'cursor)))
+    #'+evil-update-cursor-color-h
     )
 
-  (defun +default-disable-delete-selection-mode-h ()
-    (delete-selection-mode -1))
   (add-hook 'evil-insert-state-entry-hook #'delete-selection-mode)
   (add-hook 'evil-insert-state-exit-hook  #'+default-disable-delete-selection-mode-h)
-
-  (defun +evil-default-cursor-fn ()
-    (evil-set-cursor-color (get 'cursor 'evil-normal-color)))
-
-  (defun +evil-emacs-cursor-fn ()
-    (evil-set-cursor-color (get 'cursor 'evil-emacs-color)))
 
   ;; Ensure `evil-shift-width' always matches `tab-width'; evil does not police this itself, so we must.
   (setq-hook! 'after-change-major-mode-hook evil-shift-width tab-width)
 
-  (add-hook! 'doom-escape-hook
-    (defun +evil-disable-ex-highlights-h ()
-      "Disable ex search buffer highlights."
-      (when (evil-ex-hl-active-p 'evil-ex-search)
-        (evil-ex-nohighlight)
-        t))
-    )
+  (add-hook! 'doom-escape-hook #'+evil-disable-ex-highlights-h)
 
   ;; --- evil hacks -------------------------
   (after! eldoc
@@ -66,76 +46,8 @@
     (eldoc-add-command 'evil-normal-state 'evil-insert 'evil-change 'evil-delete 'evil-replace))
 
   (unless noninteractive
-    (add-hook! 'after-save-hook
-      (defun +evil-display-vimlike-save-message-h ()
-        "Shorter, vim-esque save messages."
-        (message "\"%s\" %dL, %dC written"
-                 (if buffer-file-name
-                     (file-relative-name (file-truename buffer-file-name) (doom-project-root))
-                   (buffer-name))
-                 (count-lines (point-min) (point-max))
-                 (buffer-size))))
+    (add-hook! 'after-save-hook #'+evil-display-vimlike-save-message-h)
     )
-
-  (defadvice! +evil--dont-move-cursor-a (fn &rest args)
-    " HACK '=' moves the cursor to the beginning of selection. Disable this,
-      since it's more disruptive than helpful. "
-    :around #'evil-indent
-    (save-excursion (apply fn args))
-    )
-
-  (defadvice! +evil--make-numbered-markers-global-a (char)
-    " REVIEW In evil, registers 2-9 are buffer-local. In vim, they're global,
-    so... Perhaps this should be PRed upstream? "
-    :after-until #'evil-global-marker-p
-    (and (>= char ?2) (<= char ?9)))
-
-  (defadvice! +evil--fix-local-vars-a (&rest _)
-    " REVIEW Fix #2493: dir-locals cannot target fundamental-mode when evil-mode
-    is active. See hlissner/doom-emacs#2493. Revert this if
-    emacs-evil/evil#1268 is resolved upstream. "
-    :before #'turn-on-evil-mode
-    (when (eq major-mode 'fundamental-mode)
-      (hack-local-variables)))
-
-  (defadvice! +evil--fix-helpful-key-in-evil-ex-a (key-sequence)
-    " HACK Invoking helpful from evil-ex throws a 'No recursive edit is in
-        progress' error because, between evil-ex and helpful,
-       `abort-recursive-edit' gets called one time too many. "
-    :before #'helpful-key
-    (when (evil-ex-p)
-      (run-at-time 0.1 nil #'helpful-key key-sequence)
-      (abort-recursive-edit)))
-
-  ;; Make J (evil-join) remove comment delimiters when joining lines.
-  (advice-add #'evil-join :around #'+evil-join-a)
-
-  (defadvice! +evil--no-squeeze-on-fill-a (fn &rest args)
-    " Prevent gw (`evil-fill') and gq (`evil-fill-and-move') from squeezing
-        spaces. It doesn't in vim, so it shouldn't in evil. "
-    :around '(evil-fill evil-fill-and-move)
-    (letf! (defun fill-region (from to &optional justify nosqueeze to-eop)
-             (funcall fill-region from to justify t to-eop))
-      (apply fn args)))
-
-  ;; Make ESC (from normal mode) the universal escaper. See `doom-escape-hook'.
-  (advice-add #'evil-force-normal-state :after #'+evil-escape-a)
-
-  ;; monkey patch `evil-ex-replace-special-filenames' to improve support for
-  ;; file modifiers like %:p:h. This adds support for most of vim's modifiers,
-  ;; and one custom one: %:P (expand to the project root).
-  (advice-add #'evil-ex-replace-special-filenames :override #'+evil-replace-filename-modifiers-a)
-
-  ;; make `try-expand-dabbrev' (from `hippie-expand') work in minibuffer
-  (add-hook 'minibuffer-inactive-mode-hook #'+evil--fix-dabbrev-in-minibuffer-h)
-
-  ;; Focus and recenter new splits
-  (advice-add #'evil-window-split  :override #'+evil-window-split-a)
-  (advice-add #'evil-window-vsplit :override #'+evil-window-vsplit-a)
-
-  ;; Make o/O continue comments (see `+evil-want-o/O-to-continue-comments' to disable)
-  (advice-add #'evil-open-above :around #'+evil--insert-newline-above-and-respect-comments-a)
-  (advice-add #'evil-open-below :around #'+evil--insert-newline-below-and-respect-comments-a)
 
   ;; --- custom interactive codes -----------
   ;; These arg types will highlight matches in the current buffer
@@ -143,12 +55,6 @@
     :runner (lambda (flag &optional arg) (+evil-ex-regexp-match flag arg 'inverted)))
   (evil-ex-define-argument-type regexp-global-match
     :runner +evil-ex-regexp-match)
-
-  (defun +evil--regexp-match-args (arg)
-    (when (evil-ex-p)
-      (cl-destructuring-bind (&optional arg flags)
-          (evil-delimited-arguments arg 2)
-        (list arg (string-to-list flags)))))
 
   ;; Other commands can make use of this
   (evil-define-interactive-code "<//>"
@@ -212,13 +118,6 @@
                       (setq embrace--pairs-list (append val embrace--pairs-list))
                       )
 
-  (defun +evil-embrace-angle-bracket-modes-hook-h ()
-    (let ((var (make-local-variable 'evil-embrace-evil-surround-keys)))
-      (set var (delq ?< evil-embrace-evil-surround-keys))
-      (set var (delq ?> evil-embrace-evil-surround-keys)))
-    (embrace-add-pair-regexp ?< "\\_<[a-z0-9-_]+<" ">" #'+evil--embrace-angle-brackets)
-    (embrace-add-pair ?> "<" ">"))
-
   ;; Add escaped-sequence support to embrace
   (setf (alist-get ?\\ (default-value 'embrace--pairs-list))
         (make-embrace-pair-struct
@@ -236,11 +135,7 @@
 (use-package! evil-exchange
   :commands evil-exchange
   :config
-  (add-hook! 'doom-escape-hook
-    (defun +evil--escape-exchange-h ()
-      (when evil-exchange--overlays
-        (evil-exchange-cancel)
-        t)))
+  (add-hook! 'doom-escape-hook #'+evil--escape-exchange-h)
   )
 
 (use-package! evil-quick-diff
@@ -304,14 +199,6 @@
   (setq iedit-current-symbol-default t
         iedit-only-at-symbol-boundaries t
         iedit-toggle-key-default nil)
-  :config
-
-(define-advice iedit-show-all (:override ()
-                                 +jg-misc-iedit-show-all)
-    " Override iedit's show all so it doesn't mess with invisible line movement"
-    (remove-from-invisibility-spec '(iedit-invisible-overlay-name . t))
-    (remove-overlays nil nil iedit-invisible-overlay-name t)
-  )
 
 )
 

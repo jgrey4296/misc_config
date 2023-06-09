@@ -64,14 +64,14 @@ Used by `+lookup/online'.")
                       ("Raw"                "%s")
                        )
                      )
-(spec-handling-add! lookup-url
+(spec-handling-add! lookup-url :form 'override
                     '(plus
                      ("Google"            +lookup--online-backend-google "https://google.com/search?q=%s")
                      ("Google images"     "https://www.google.com/images?q=%s")
                      ("Google maps"       "https://maps.google.com/maps?q=%s")
                      ("Project Gutenberg" "http://www.gutenberg.org/ebooks/search/?query=%s")
                      ("Wikipedia"         "https://wikipedia.org/search-redirect.php?language=en&go=Go&search=%s")
-                     ("Rust Docs" "https://doc.rust-lang.org/std/?search=%s")
+                     ("Wiki Quote"        "https://en.m.wikiquote.org/w/index.php?search=%s")
                      )
                     )
 (spec-handling-add! browse-handler

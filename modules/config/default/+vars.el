@@ -55,4 +55,6 @@
 
 ;;-- end tramp
 
-(setq-default diary-file (expand-file-name "~/github/jgrey4296.github.io/orgfiles/main.diary"))
+(setq-default diary-file (expand-file-name "~/github/jgrey4296.github.io/orgfiles/main.diary")
+              major-mode #'emacs-lisp-mode
+              )

@@ -41,7 +41,7 @@
 
  :tools ide-support twitter pdfs
  :tools mail term
- :tools taskrunners
+ :tools taskrunners processes
  ;;:tools debugger
 
  ;; --------------------------------------------------

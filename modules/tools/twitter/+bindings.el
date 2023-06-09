@@ -1,8 +1,5 @@
 ;;; domain-specific/twitter/+bindings.el -*- lexical-binding: t; -*-
 
-(map! :leader
-      :desc "Download Tweet Thread" "P d" #'+jg-twitter-downloader
-      )
 
 (after! evil-ex
   (message "Twitter evil ex binding: %s" (current-time-string))

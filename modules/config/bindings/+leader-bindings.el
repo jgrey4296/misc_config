@@ -9,7 +9,6 @@
 
       :desc "Find file"             "."   #'find-file
 
-
       :desc "Pop Shell"             "'"   #'shell
       :desc "Switch to last buffer" "TAB" #'evil-switch-to-windows-last-buffer
       :desc "Split Window"          "/"   #'split-window-right
@@ -25,20 +24,17 @@
       ;; C-u is used by evil
       :desc "Universal argument"    "u"   #'universal-argument
 
-      ;; :desc "Resume last search"    "'"
-      ;; #'ivy-resume
-      ;; #'helm-resume
       ;; 0 6 9 8
       :desc "Agenda"    "7" (cmd! (find-file (expand-file-name "base_agenda.org" doom-user-dir)))
       )
 
-;;-- end leader
-
-;;-- <leader> a -- Unused
 (map! :leader
-      :prefix "a"
+      (:prefix ("y" . "snippets"))
+      (:prefix ("B" . "Bookmarks"))
+      (:prefix ("p". "Project"))
+      (:prefix ("m" . "Local Mode"))
       )
-;;-- end <leader> a -- Unused
+;;-- end leader
 
 ;;-- <leader> b --- buffer
 (map! :leader
@@ -68,8 +64,6 @@
 
       )
 ;;-- end <leader> b --- buffer
-
-;; <leader> B - bookmarks
 
 ;;-- <leader> c --- code
 (map! :leader
@@ -175,7 +169,7 @@
       )
 ;;-- end <leader> g --- git
 
-;; -- help
+;; -- <leader> h - help
 
 ;;-- <leader> i --- insert
 (map! :leader
@@ -195,10 +189,6 @@
 (map! :leader
       :desc "Jump"    "j" #'jg-binding-jump-map)
 ;;-- end <leader> j -- Jumping
-
-;;-- <leader> m -- Local Mode
-(map! (:prefix ("m" . "Local Mode")))
-;;-- end <leader> m -- Local Mode
 
 ;;-- <leader> M -- Macros
 (map! :leader
@@ -233,7 +223,6 @@
 ;;-- <leader> n --- notes
 (map! :leader
       :prefix ("n" . "notes")
-      :desc "Bibliographic entries"          "b" #'ivy-bibtex
       :desc "Org noter"                      "e" #'org-noter
       :desc "Active org-clock"               "o" #'org-clock-goto
       :desc "Cancel current org-clock"       "C" #'org-clock-cancel
@@ -286,17 +275,6 @@
       (:prefix ("s" . "Systems"))
       )
 ;;-- end <leader> o --- open
-
-;; <leader> p --- project
-
-;;-- <leader> P -- processes
-(map! :leader
-      :prefix ("P" . "Processes")
-      :desc "List-Processes" "l" (cmd! (list-processes))
-      :desc "Helm Processes" "h" #'helm-list-emacs-process
-      :desc "Kill Preview"   "p" (cmd! (shell-command "killall Preview"))
-      )
-;;-- end <leader> P -- processes
 
 ;;-- <leader> q --- quit/restart/session
 (map! :leader
@@ -394,13 +372,6 @@
       )
 ;;-- end <leader> t --- toggle
 
-;; <leader> T -- toggle hydra
-
-;;-- <leader> W --- nil
-(map! :leader
-      )
-;;-- end <leader> W --- nil
-
 ;;-- <leader> w --- Windows
 (map! :leader
       :prefix ("w" . "Windows")
@@ -428,11 +399,5 @@
       :prefix ("x" . "Text")
       )
 ;;-- end <leader> x -- Text
-
-;;-- <leader> y --- snippets
-(map! :leader
-      :prefix ("y" . "snippets")
-      )
-;;-- end <leader> y --- snippets
 
 (provide 'jg-leader-bindings-loaded)

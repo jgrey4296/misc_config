@@ -92,7 +92,7 @@ bibtex-BibTeX-entry-alist for completion options "
          (filename (bibtex-autokey-get-field field-selection))
          (ext (f-ext filename))
          (base (f-parent filename))
-         (new-name (read-string "New Filename: " (f-base filename)))
+         (new-name (string-trim (read-string "New Filename: " (f-base filename))))
          (new-path (f-join base (format "%s.%s" new-name ext))))
     (message "Moving: %s\nto: %s" filename new-path)
     (f-move filename new-path)

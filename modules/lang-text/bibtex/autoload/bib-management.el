@@ -32,21 +32,33 @@ This can be annoying at times.
 This function toggles clearing those watchers and recreating them later
 "
   (interactive)
-  (if bibtex-completion-file-watch-descriptors
+  (when bibtex-completion-file-watch-descriptors
       (progn (message "Clearing Bibtex Watchers")
-        (mapc (lambda (watch-descriptor)
+             (message "Descriptors: %s" (length (hash-table-keys file-notify-descriptors)))
+             (mapc (lambda (watch-descriptor)
                      (file-notify-rm-watch watch-descriptor))
                    bibtex-completion-file-watch-descriptors)
+             (message "Post Removal Descriptors: %s" (length (hash-table-keys file-notify-descriptors)))
              (setq bibtex-completion-file-watch-descriptors nil))
-    (progn (message "Setting Bibtex Watchers")
-      (mapc
-       (lambda (file)
-         (if (f-file? file)
-             (let ((watch-descriptor (file-notify-add-watch file '(change)
-                                                            (lambda (event)
-                                                              (bibtex-completion-candidates)))))
-               (setq bibtex-completion-file-watch-descriptors
-                     (cons watch-descriptor bibtex-completion-file-watch-descriptors)))
-           (user-error "Bibliography file %s could not be found" file)))
-       (bibtex-completion-normalize-bibliography))))
+    )
+  nil
+  )
+
+;;;###autoload
+(defun +jg-bibtex-init-file-watchers ()
+  " Check that all specified bibliography files exist and add file
+   watches for automatic reloading of the bibliography when a file
+   is changed: "
+  (interactive)
+  (when bibtex-completion-file-watch-descriptors
+    (error "There are already file watchers for bibtex files"))
+  (setq bibtex-completion-file-watch-descriptors
+        (cl-loop for file in (bibtex-completion-normalize-bibliography)
+                 if (f-file? file)
+                 collect
+                 (file-notify-add-watch file
+                                        '(change)
+                                        (lambda (event) (bibtex-completion-candidates)))
+                 )
+        )
   )

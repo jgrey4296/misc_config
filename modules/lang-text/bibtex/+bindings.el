@@ -89,12 +89,12 @@
 
 ;;-- end reftex
 
-;;-- jg bindings
 (map! :map jg-binding-helm-map
-      :desc "Bibtex Helm"               "b" #'+jg-bibtex-helm-bibtex
+      :desc "Bibtex Ivy"                "b" #'ivy-bibtex
+      :desc "Bibtex Helm"               "B" #'+jg-bibtex-helm-bibtex
+      :desc "Bibtex Local"              "l" #'ivy-bibtex-with-local-bibliography
+      :desc "Bibtex Helm Local"         "L" #'helm-bibtex-with-local-bibliography
       )
-
-;;-- end jg bindings
 
 ;;-- dired
 (map! :map dired-mode-map

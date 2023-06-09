@@ -95,6 +95,31 @@ Modified to avoid duplicate comma insertion. "
   )
 
 ;;;###autoload
+(defun +jg-bibtex-init-no-file-watchers ()
+  "Check that the files and directories specified by the user actually exist.
+Also sets `bibtex-completion-display-formats-internal'."
+  (+jg-bibtex-suppress-watchers)
+  ;; Pre-calculate minimal widths needed by the format strings for
+  ;; various entry types:
+  (setq bibtex-completion-display-formats-internal
+        (mapcar (lambda (format)
+                  (let* ((format-string (cdr format))
+                         (fields-width 0)
+                         (string-width
+                          (string-width
+                           (s-format format-string
+                                     (lambda (field)
+                                       (setq fields-width
+                                             (+ fields-width
+                                                (string-to-number
+                                                 (or (cadr (split-string field ":"))
+                                                     ""))))
+                                       "")))))
+                    (-cons* (car format) format-string (+ fields-width string-width))))
+                bibtex-completion-display-formats))
+  )
+
+;;;###autoload
 (advice-add 'org-ref-build-full-bibliography :override #'+jg-build-bibliography)
 ;;;###autoload
 (advice-add 'bibtex-autokey-get-field :around #'+jg-bibtex-autokey-field-expand)
@@ -102,4 +127,8 @@ Modified to avoid duplicate comma insertion. "
 (advice-add 'bibtex-set-field :override #'+jg-bibtex-set-field)
 ;;;###autoload
 (advice-add 'org-ref-version :around #'+jg-org-ref-version-override)
+;;;###autoload
+(advice-add 'bibtex-completion-init :override #'+jg-bibtex-init-no-file-watchers)
+
+
 ;;; +advice.el ends here

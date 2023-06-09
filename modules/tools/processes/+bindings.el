@@ -8,4 +8,5 @@
       :desc "Process Tree"   "t" #'+jg-processes-tree
       :desc "Process Tree"   "T" #'+jg-processes-tree-all
       :desc "Launchctl List" "c" #'+jg-processes-launchctl
+      :desc "Emacs"          "e" (cmd! (message "Emacs PID: %s" (emacs-pid)))
       )

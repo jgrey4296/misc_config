@@ -152,7 +152,7 @@
     )
   )
 
-;;;###autoload (autoload '+jg-text-get-line "editor/text-manipulation/autoload/evil-operators" nil t)
+;;;###autoload (autoload '+jg-text-escalate-replace-op "editor/text-manipulation/autoload/evil-operators" nil t)
 (evil-define-operator +jg-text-escalate-replace-op (beg end count)
   " Replace a regex in the region,
 with either a numeric or alphabetical escalation "
@@ -220,7 +220,7 @@ with either a numeric or alphabetical escalation "
     )
   )
 
-;;;###autoload (autoload '+jg-text-goto-random-line-op "editor/text-manipulation/autoload/evil-operators" nil t)
+;;;###autoload (autoload '+jg-text-shift-left "editor/text-manipulation/autoload/evil-operators" nil t)
 (evil-define-operator +jg-text-shift-left (beg end count)
   "Shift text left, preserving state"
   :type line
@@ -252,7 +252,7 @@ with either a numeric or alphabetical escalation "
     )
   )
 
-;;;###autoload (autoload '+jg-text-shift-right "editor/text-manipulation/autoload/evil-operators" nil t)
+;;;###autoload (autoload '+jg-text-inc-num  "editor/text-manipulation/autoload/evil-operators" nil t)
 (evil-define-operator +jg-text-inc-num (beg end type count)
   :type line
   :motion beginning-of-visual-line

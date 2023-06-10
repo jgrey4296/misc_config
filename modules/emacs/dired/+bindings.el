@@ -27,7 +27,7 @@
       :desc "Expand Subdir"  :n "i" #'+jg-dired-insert-subdir-maybe-recursive
       :desc "Expand Marked"  :n "I" #'+jg-dired-insert-marked-subdir
       :n "y" #'dired-copy-filename-as-kill
-
+      :n "Y" (cmd! (dired-copy-filename-as-kill 0))
       )
 (map! :map jg-dired-mode-map ;; mark
       :n "t"                                      #'dired-toggle-marks

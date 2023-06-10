@@ -54,10 +54,6 @@ https://collections.library.yale.edu/
 https://dev.epicgames.com/documentation/en-us/uefn/verse-language-reference
 https://developer.nvidia.com/gpugems/gpugems/contributors
 https://doc.rust-lang.org/nightly/nomicon/
-https://en.m.wikipedia.org/wiki/Accounting,_Organizations_and_Society
-https://en.m.wikipedia.org/wiki/Derinkuyu_underground_city
-https://en.m.wikipedia.org/wiki/Grey_literature
-https://en.m.wikipedia.org/wiki/Technological_Forecasting_and_Social_Change
 https://firefox-source-docs.mozilla.org/index.html
 https://github.com/charlax/professional-programming
 https://github.com/libgdx/gdx-ai
@@ -84,5 +80,17 @@ https://www.openpolicyagent.org/
 https://www.opensecrets.org/
 https://www.patches-scrolls.de/patch
 https://www.rabbitmq.com/getstarted.html
+
+https://en.m.wikipedia.org/wiki/Kahlil_Gibran
+https://en.m.wikipedia.org/wiki/Computational_geometry
+https://en.m.wikipedia.org/wiki/Differential_privacy
+https://en.m.wikipedia.org/wiki/C%2B%2B#Standardization
+https://en.m.wikipedia.org/wiki/Deep_learning
+https://en.m.wikipedia.org/wiki/Accounting,_Organizations_and_Society
+https://en.m.wikipedia.org/wiki/Library_and_information_science
+https://en.m.wikipedia.org/wiki/Derinkuyu_underground_city
+https://en.m.wikipedia.org/wiki/Grey_literature
+https://en.m.wikipedia.org/wiki/Technological_Forecasting_and_Social_Change
+https://en.m.wikipedia.org/wiki/Operations_research
 
 ** [[file:org/python_testbed.org][Testbed Notes]]

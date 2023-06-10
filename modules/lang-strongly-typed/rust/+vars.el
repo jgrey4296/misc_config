@@ -105,6 +105,7 @@
 
 (spec-handling-add! lookup-regular
                     '((rust-mode rustic-mode)
+                      ("Md Book" . "https://rust-lang.github.io/mdBook/")
                       ("Rust Error Codes"        . "https://doc.rust-lang.org/error_codes/error-index.html")
                       ("Rust Decompiler"         . "https://rust.godbolt.org/")
                       ("Rustc"                   . "https://doc.rust-lang.org/rustc/index.html")

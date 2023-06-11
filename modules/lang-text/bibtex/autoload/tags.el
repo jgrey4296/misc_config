@@ -35,8 +35,7 @@
                                                        "OPTtags")))
                 prior-point (point))
           (mapc add-func actual-candidates)
-          (bibtex-set-field "tags"
-                            (string-join current-tags ","))
+          (bibtex-set-field "tags" (string-join current-tags ","))
           ;;(org-ref-bibtex-next-entry)
           (evil-forward-section-begin)
           )))
@@ -53,20 +52,19 @@
                                                     (point))))
           (stripped_tags (+jg-bibtex-split-tags (tagging-minor-mode--trim-input x)))
           )
-      (while (and (/= prior-point (point)) (< (point) end-pos))
-        (setq prior-point (point))
-        (let* ((has-real-tags-field (not (string-empty-p (bibtex-autokey-get-field "tags"))))
-               (current-tags (+jg-bibtex-split-tags (bibtex-autokey-get-field
-                                                     (if has-real-tags-field "tags" "OPTtags"))))
-               (filtered-tags (-filter (lambda (x) (not (-contains? current-tags x))) stripped_tags))
-               (total-tags (-concat current-tags filtered-tags))
-               )
-          (bibtex-set-field "tags"
-                            (string-join total-tags ","))
-          (mapc (lambda (x) (puthash x 1 tagging-minor-mode-global-tags)) filtered-tags)
-          ;;(org-ref-bibtex-next-entry)
-          (evil-forward-section-begin)
-          ))))
+      (save-excursion
+        (while (and (/= prior-point (point)) (< (point) end-pos))
+          (setq prior-point (point))
+          (let* ((has-real-tags-field (not (string-empty-p (bibtex-autokey-get-field "tags"))))
+                 (current-tags (+jg-bibtex-split-tags (bibtex-autokey-get-field (if has-real-tags-field "tags" "OPTtags"))))
+                 (filtered-tags (-filter (lambda (x) (not (-contains? current-tags x))) stripped_tags))
+                 (total-tags (-concat current-tags filtered-tags))
+                 )
+            (bibtex-set-field "tags" (string-join total-tags ","))
+            (mapc (lambda (x) (puthash x 1 tagging-minor-mode-global-tags)) filtered-tags)
+            ;;(org-ref-bibtex-next-entry)
+            (evil-forward-section-begin)
+            )))))
   )
 
 ;;;###autoload

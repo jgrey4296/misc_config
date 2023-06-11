@@ -1,8 +1,11 @@
 ;;; ivy.el -*- lexical-binding: t; -*-
 
 (defvar jg-help-modules-cache nil)
+
 (defvar jg-help-binding-file-name "+bindings.el")
+
 (defvar jg-help-config-file-name "config.el")
+
 (defvar jg-help-var-file-name "+vars.el")
 
 (defun +jg-help-cache-modules ()
@@ -30,7 +33,6 @@
       )
     )
   )
-
 
 ;;;###autoload
 (defun +jg-help-edit-vars ()

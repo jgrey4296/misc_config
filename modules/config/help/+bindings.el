@@ -27,6 +27,13 @@
       :n "=" #'helpful-update
       )
 
+(map! :map jg-help-map
+      :prefix ("e" . "Edit")
+      :desc "bindings" "b" #'+jg-help-edit-bindings
+      :desc "Vars"     "v" #'+jg-help-edit-vars
+      :desc "Config"   "c" #'+jg-help-edit-config
+      )
+
 ;;-- docs
 (map! :map jg-help-map
       :prefix ("d" . "docs")
@@ -69,7 +76,8 @@
 ;;-- bindings
 (map! :map jg-help-map
       :prefix ("b" . "Bindings")
-      "b"   #'describe-bindings
+      "b" #'describe-bindings
+      "e" #'+jg-help-edit-bindings
       "f" #'which-key-show-full-keymap
       "i" #'which-key-show-minor-mode-keymap
       "k" #'which-key-show-keymap
@@ -123,13 +131,6 @@
       )
 ;;-- end packages
 
-;;-- modules
-(map! :map jg-help-map
-      :desc "Module Ivy" "m" #'+jg-help-modules-ivy
-
-      )
-
-;;-- end modules
 
 (map! :leader
       :desc "help"            "h" jg-help-map

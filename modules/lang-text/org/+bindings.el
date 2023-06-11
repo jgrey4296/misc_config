@@ -33,7 +33,9 @@
       :desc "Forward Heading" :m "] j" #'org-forward-heading-same-level
       :desc "Back Heading"    :m "[ j" #'org-backward-heading-same-level
       :desc "Hide Drawers"    :n "z d" (cmd! (org-cycle-hide-drawers 'org-cycle-hide-drawers))
-      :desc "Insert Heading"  :n "RET" #'org-insert-heading
+      :desc "DWIM"            :n "RET" #'+org/dwim-at-point
+      :desc "Insert Heading"  :n "M-RET" #'org-insert-heading
+      :desc "Insert Item"     :i "M-RET" #'+org/insert-item-below
       :vn "c l" #'org-demote-subtree
       :vn "c h" #'org-promote-subtree
       :vn "c K" #'org-move-subtree-up
@@ -135,7 +137,7 @@
       "p" #'org-journal-search-prev
       )
 
-(after! (evil-org org-mode)
+(after! (evil-org org)
   (setq org-mode-map jg-org-mode-map
         evil-org-mode-map jg-org-mode-map
         minor-mode-map-alist (assq-delete-all 'evil-org-mode minor-mode-map-alist)

@@ -33,7 +33,7 @@
       :n  "a"         #'ivy-dispatching-done
       :n  "o"         #'jg-ivy-hydra/body
       :n  "."         #'jg-ivy-hydra/body
-      :ig  "RET"      #'ivy-done
+      :ing  "RET"      #'ivy-done
 
       :n  "|"         #'abort-recursive-edit
       :i  "|"         #'self-insert-command

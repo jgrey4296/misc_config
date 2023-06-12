@@ -6,6 +6,7 @@
   [
    ""
    ("q" "Quit" transient-quit-one)
+   ("Q" "Quit" transient-quit-all)
    ]
   " Reusable simple quit for transients "
   )

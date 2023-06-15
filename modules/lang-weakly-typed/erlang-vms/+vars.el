@@ -57,5 +57,6 @@
                       ("Elixir shell" . "https://hexdocs.pm/iex/IEx.html")
                       ("Elixir logging" . "https://hexdocs.pm/logger/Logger.html")
                       ("Elxir mix build tool" . "https://hexdocs.pm/mix/Mix.html")
+                      ("Erlang Nifs" . "https://www.erlang.org/doc/tutorial/nif.html")
                       )
                     )

@@ -22,15 +22,16 @@
 ;;;###autoload
 (defun +jg-bibtex-dired-compile ()
   (interactive)
-  (let ((marked (-filter (lambda (x) (s-equals? "bib" (f-ext x))) (dired-get-marked-files))))
-    (if (not (f-exists? (f-join default-directory "tex")))
-        (mkdir (f-join default-directory "tex")))
+  (let ((marked (-filter (lambda (x) (s-equals? "bib" (f-ext x))) (dired-get-marked-files)))
+        (temp (f-join (projectile-project-root) ".temp"))
+        )
+    (mkdir (f-join temp "tex") t)
     (cl-loop for fname in marked
           do
           (let* ((bibfile (file-name-nondirectory fname))
                  (bib-base (file-name-sans-extension bibfile))
                  (target bib-base)
-                 (texfile (f-join default-directory "tex" (concat target ".tex"))))
+                 (texfile (f-join temp "tex" (concat target ".tex"))))
             (with-temp-buffer
               (insert-file-contents jg-bibtex-loc-export-bib-file)
               (goto-char (point-min))

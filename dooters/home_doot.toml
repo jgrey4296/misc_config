@@ -60,8 +60,8 @@ maintain           = "/Volumes/documents/github/__configs/terminal/maintenance"
 listings_out       = "doot_build"
 
 [[directories]] # Android
-local_push         = "/volumes/documents/pdf_library"
-local_pull         = "/volumes/documents/android_test_pull"
+local_push         = "/Volumes/documents/pdf_library"
+local_pull         = "/Volumes/documents/android_test_pull"
 
 [[files]] # bibtex bot files
 bib_blacklist   = ".bots/bibtex_blacklist"

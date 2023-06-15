@@ -25,10 +25,15 @@ TODO add fallback to project root
           ((window-dedicated-p) ;; delete dedicated windows too
            (delete-window)
            t)
+          ((eq buf-mode 'dired-mode)
+           (kill-buffer buf)
+           (cl-loop for persp in (persp-other-persps-with-buffer-except-nil buf)
+                    do
+                    (kill-buffer buf))
+           t)
           (other-windows ;; ignore if other windows have the buffer
            (bury-buffer)
            t)
-          ((eq buf-mode 'dired-mode) nil) ;; kill dired buffers
           ((and (doom-real-buffer-p buf)
                 (buffer-modified-p buf)
                 (not (y-or-n-p (format "JG: Buffer %s is modified; kill anyway?" buf))))

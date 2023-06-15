@@ -19,69 +19,76 @@
 )
 
 (map! :map web-mode-map ;; attributes
+      :localleader
       :prefix ("a" . "attribute")
-      "b" #'web-mode-attribute-beginning
-      "e" #'web-mode-attribute-end
-      "i" #'web-mode-attribute-insert
-      "n" #'web-mode-attribute-next
-      "s" #'web-mode-attribute-select
-      "k" #'web-mode-attribute-kill
-      "p" #'web-mode-attribute-previous
-      "t" #'web-mode-attribute-transpose
+      :n "b" #'web-mode-attribute-beginning
+      :n "e" #'web-mode-attribute-end
+      :n "i" #'web-mode-attribute-insert
+      :n "n" #'web-mode-attribute-next
+      :n "s" #'web-mode-attribute-select
+      :n "k" #'web-mode-attribute-kill
+      :n "p" #'web-mode-attribute-previous
+      :n "t" #'web-mode-attribute-transpose
 )
 
 (map! :map web-mode-map ;; block
+      :localleader
       :prefix ("b" . "block")
-      "b" #'web-mode-block-beginning
-      "c" #'web-mode-block-close
-      "e" #'web-mode-block-end
-      "k" #'web-mode-block-kill
-      "n" #'web-mode-block-next
-      "p" #'web-mode-block-previous
-      "s" #'web-mode-block-select
+      :n "b" #'web-mode-block-beginning
+      :n "c" #'web-mode-block-close
+      :n "e" #'web-mode-block-end
+      :n "k" #'web-mode-block-kill
+      :n "n" #'web-mode-block-next
+      :n "p" #'web-mode-block-previous
+      :n "s" #'web-mode-block-select
 )
 
 (map! :map web-mode-map ;; dom
+      :localleader
       :prefix ("d" . "dom")
-      "a" #'web-mode-dom-apostrophes-replace
-      "d" #'web-mode-dom-errors-show
-      "e" #'web-mode-dom-entities-encode
-      "n" #'web-mode-dom-normalize
-      "q" #'web-mode-dom-quotes-replace
-      "t" #'web-mode-dom-traverse
-      "x" #'web-mode-dom-xpath
+      :n "a" #'web-mode-dom-apostrophes-replace
+      :n "d" #'web-mode-dom-errors-show
+      :n "e" #'web-mode-dom-entities-encode
+      :n "n" #'web-mode-dom-normalize
+      :n "q" #'web-mode-dom-quotes-replace
+      :n "t" #'web-mode-dom-traverse
+      :n "x" #'web-mode-dom-xpath
       )
 
 (map! :map web-mode-map ;; elements
+      :localleader
       :prefix ("e" . "element")
-      "/" #'web-mode-element-close
-      "a" #'web-mode-element-content-select
-      "b" #'web-mode-element-beginning
-      "c" #'web-mode-element-clone
-      "d" #'web-mode-element-child
-      "e" #'web-mode-element-end
-      "f" #'web-mode-element-children-fold-or-unfold
-      "i" #'web-mode-element-insert
-      "k" #'web-mode-element-kill
-      "m" #'web-mode-element-mute-blanks
-      "n" #'web-mode-element-next
-      "p" #'web-mode-element-previous
-      "r" #'web-mode-element-rename
-      "s" #'web-mode-element-select
-      "t" #'web-mode-element-transpose
-      "u" #'web-mode-element-parent
-      "v" #'web-mode-element-vanish
-      "w" #'web-mode-element-wrap)
+      :n "/" #'web-mode-element-close
+      :n "a" #'web-mode-element-content-select
+      :n "b" #'web-mode-element-beginning
+      :n "c" #'web-mode-element-clone
+      :n "d" #'web-mode-element-child
+      :n "e" #'web-mode-element-end
+      :n "f" #'web-mode-element-children-fold-or-unfold
+      :n "i" #'web-mode-element-insert
+      :n "k" #'web-mode-element-kill
+      :n "m" #'web-mode-element-mute-blanks
+      :n "n" #'web-mode-element-next
+      :n "p" #'web-mode-element-previous
+      :n "r" #'web-mode-element-rename
+      :n "s" #'web-mode-element-select
+      :n "t" #'web-mode-element-transpose
+      :n "u" #'web-mode-element-parent
+      :n "v" #'web-mode-element-vanish
+      :n "w" #'web-mode-element-wrap
+      )
 
 (map! :map web-mode-map ;; tags
+      :localleader
       :prefix ("t" . "tag")
-      "a" #'web-mode-tag-attributes-sort
-      "b" #'web-mode-tag-beginning
-      "e" #'web-mode-tag-end
-      "m" #'web-mode-tag-match
-      "n" #'web-mode-tag-next
-      "p" #'web-mode-tag-previous
-      "s" #'web-mode-tag-select)
+      :n "a" #'web-mode-tag-attributes-sort
+      :n "b" #'web-mode-tag-beginning
+      :n "e" #'web-mode-tag-end
+      :n "m" #'web-mode-tag-match
+      :n "n" #'web-mode-tag-next
+      :n "p" #'web-mode-tag-previous
+      :n "s" #'web-mode-tag-select
+      )
 
 (map! :map (css-mode-map less-css-mode-map scss-mode-map sass-mode-map)
       :n "|" #'+css/toggle-inline-or-block

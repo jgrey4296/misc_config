@@ -121,6 +121,8 @@ If no viewer is found, `latex-preview-pane-mode' is used.")
                      ("CTAN packages" . "https://www.ctan.org/pkg/latex")
                      ("Overleaf docs" . "https://www.overleaf.com/learn")
                      ("Latex Tutorial" . "https://latex-tutorial.com/")
+                     ("Fonts" . "https://tug.org/FontCatalogue/")
+                     ("Font Installation" . "https://tug.org/fonts/fontinstall.html")
                      )
                     )
 (spec-handling-add! evil-embrace

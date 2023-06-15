@@ -321,7 +321,7 @@
                       ("pylightxl"         . "https://github.com/PydPiper/pylightxl")
                       ("pyparsing"         . "https://pyparsing-docs.readthedocs.io/en/latest/")
                       ("pypi"              . "https://pypi.org/")
-                      ("python"            . "https://docs.python.org/3/")
+                      ("python stdlib"     . "https://docs.python.org/3/library/index.html")
                       ("python/C api"      . "https://docs.python.org/3/c-api/index.html")
                       ("railroad-diagrams" . "https://github.com/tabatkins/railroad-diagrams")
                       ("re"                . "https://docs.python.org/3/library/re.html")

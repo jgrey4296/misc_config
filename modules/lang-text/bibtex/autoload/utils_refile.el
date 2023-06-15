@@ -73,3 +73,23 @@ returns the new location
       )
     )
   )
+
+;;;###autoload
+(defun +jg-bibtex-refile-to-unsourced ()
+  " Kill the current entry and insert it in the appropriate year's bibtex file "
+  (interactive)
+  (bibtex-beginning-of-entry)
+  (let* ((target jg-bibtex-unsourced-bib-file)
+         (response (read-string "Refile to unsourced? "))
+         )
+    (unless (f-exists? target) (f-touch target))
+    (bibtex-kill-entry)
+    (with-temp-buffer
+      (insert-file-contents target)
+      (goto-char (point-max))
+      (insert "\n")
+      (bibtex-yank)
+      (write-file target nil)
+      )
+    )
+)

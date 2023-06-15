@@ -17,44 +17,45 @@
         )
 
 (map! :map markdown-mode-map
+      :localleader
       :prefix ("i" . "insert")
-      :desc "Table Of Content"  "T" #'markdown-toc-generate-toc
-      :desc "Image"             "i" #'markdown-insert-image
-      :desc "Link"              "l" #'markdown-insert-link
-      :desc "<hr>"              "-" #'markdown-insert-hr
-      :desc "Heading 1"         "1" #'markdown-insert-header-atx-1
-      :desc "Heading 2"         "2" #'markdown-insert-header-atx-2
-      :desc "Heading 3"         "3" #'markdown-insert-header-atx-3
-      :desc "Heading 4"         "4" #'markdown-insert-header-atx-4
-      :desc "Heading 5"         "5" #'markdown-insert-header-atx-5
-      :desc "Heading 6"         "6" #'markdown-insert-header-atx-6
-      :desc "Code block"        "C" #'markdown-insert-gfm-code-block
-      :desc "Pre region"        "P" #'markdown-pre-region
-      :desc "Blockquote region" "Q" #'markdown-blockquote-region
-      :desc "Checkbox"          "[" #'markdown-insert-gfm-checkbox
-      :desc "Bold"              "b" #'markdown-insert-bold
-      :desc "Inline code"       "c" #'markdown-insert-code
-      :desc "Italic"            "e" #'markdown-insert-italic
-      :desc "Footnote"          "f" #'markdown-insert-footnote
-      :desc "Header dwim"       "h" #'markdown-insert-header-dwim
-      :desc "Italic"            "i" #'markdown-insert-italic
-      :desc "Kbd"               "k" #'markdown-insert-kbd
-      :desc "Pre"               "p" #'markdown-insert-pre
-      :desc "New blockquote"    "q" #'markdown-insert-blockquote
-      :desc "Strike through"    "s" #'markdown-insert-strike-through
-      :desc "Table"             "t" #'markdown-insert-table
-      :desc "Wiki link"         "w" #'markdown-insert-wiki-link
+      :desc "Table Of Content"   :n "T" #'markdown-toc-generate-toc
+      :desc "Image"              :n "i" #'markdown-insert-image
+      :desc "Link"               :n "l" #'markdown-insert-link
+      :desc "<hr>"               :n "-" #'markdown-insert-hr
+      :desc "Heading 1"          :n "1" #'markdown-insert-header-atx-1
+      :desc "Heading 2"          :n "2" #'markdown-insert-header-atx-2
+      :desc "Heading 3"          :n "3" #'markdown-insert-header-atx-3
+      :desc "Heading 4"          :n "4" #'markdown-insert-header-atx-4
+      :desc "Heading 5"          :n "5" #'markdown-insert-header-atx-5
+      :desc "Heading 6"          :n "6" #'markdown-insert-header-atx-6
+      :desc "Code block"         :n "C" #'markdown-insert-gfm-code-block
+      :desc "Pre region"         :n "P" #'markdown-pre-region
+      :desc "Blockquote region"  :n "Q" #'markdown-blockquote-region
+      :desc "Checkbox"           :n "[" #'markdown-insert-gfm-checkbox
+      :desc "Bold"               :n "b" #'markdown-insert-bold
+      :desc "Inline code"        :n "c" #'markdown-insert-code
+      :desc "Italic"             :n "e" #'markdown-insert-italic
+      :desc "Footnote"           :n "f" #'markdown-insert-footnote
+      :desc "Header dwim"        :n "h" #'markdown-insert-header-dwim
+      :desc "Italic"             :n "i" #'markdown-insert-italic
+      :desc "Kbd"                :n "k" #'markdown-insert-kbd
+      :desc "Pre"                :n "p" #'markdown-insert-pre
+      :desc "New blockquote"     :n "q" #'markdown-insert-blockquote
+      :desc "Strike through"     :n "s" #'markdown-insert-strike-through
+      :desc "Table"              :n "t" #'markdown-insert-table
+      :desc "Wiki link"          :n "w" #'markdown-insert-wiki-link
 )
 
 (map! :map markdown-mode-map
       :prefix ("t" . "toggle")
-      :desc "Inline LaTeX"      "e" #'markdown-toggle-math
-      :desc "Code highlights"   "f" #'markdown-toggle-fontify-code-blocks-natively
-      :desc "Inline images"     "i" #'markdown-toggle-inline-images
-      :desc "URL hiding"        "l" #'markdown-toggle-url-hiding
-      :desc "Markup hiding"     "m" #'markdown-toggle-markup-hiding
-      :desc "Wiki links"        "w" #'markdown-toggle-wiki-links
-      :desc "GFM checkbox"      "x" #'markdown-toggle-gfm-checkbox
+      :desc "Inline LaTeX"     :n "e" #'markdown-toggle-math
+      :desc "Code highlights"  :n "f" #'markdown-toggle-fontify-code-blocks-natively
+      :desc "Inline images"    :n "i" #'markdown-toggle-inline-images
+      :desc "URL hiding"       :n "l" #'markdown-toggle-url-hiding
+      :desc "Markup hiding"    :n "m" #'markdown-toggle-markup-hiding
+      :desc "Wiki links"       :n "w" #'markdown-toggle-wiki-links
+      :desc "GFM checkbox"     :n "x" #'markdown-toggle-gfm-checkbox
 )
 
 (map! :map evil-markdown-mode-map

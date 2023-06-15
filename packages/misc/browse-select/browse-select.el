@@ -7,13 +7,39 @@
 (defvar browse-select-variant-file "~/.browsers")
 
 (defvar browse-select-use-preview t)
+
 (defvar browse-select-pdf-args  '("-a" "Preview" "-nF"))
+
 (defvar browse-select-epub-args '("-a" "ebook-viewer"))
+
 (defvar browse-select-curl-cmd  "curl")
+
 (defvar browse-select-curl-args  '("-sLI"))
+
+(defvar browse-select-focus-target  "iTerm")
+
+(defvar browse-select-twitter-url "https://twitter.com/search?q=%s")
+
+(defvar browse-select-amazon-url "")
+
+
+;;;###autoload
+(defun browse-select-regain-focus ()
+  " For when a command will change focus to something else (preview, firefox)
+force it back to the terminal
+"
+  (when (and (boundp 'IS-MAC) IS-MAC)
+    (call-process "osascript" nil nil nil
+                  "-e" (format "tell application \"%s\"" browse-select-focus-target)
+                  "-e" "activate"
+                  "-e" "end tell"
+                  )
+    )
+  )
 
 ;;;###autoload
 (defun browse-select-load-variants ()
+  " Get a list of possible browsers to use from persistent file"
   (with-temp-buffer
     (insert-file (expand-file-name browse-select-variant-file))
     (setq browse-select-variants (split-string (buffer-string) "\n" t " +"))
@@ -30,11 +56,11 @@
                    (t nil)))
         )
     (cond ((not url)
-           (+lookup/online-select))
+           (+lookup/online-select)) ;; TODO factor +lookup into browse-select
           ((f-exists? url)
            (shell-command (format "open %s" url)))
           (t
-           (call-interactively #'+lookup/online url)
+           (call-interactively #'+lookup/online url) ;;TODO
            )
           )
     )
@@ -77,11 +103,14 @@ after `browse-url-handlers` have processed the url
         (t
          (eww-browse-url url args))
         )
+
+  (sleep-for 2)
+  (browse-select-regain-focus)
   )
 
 ;;;###autoload
 (defun browse-select-twitter (url &rest args)
-  (browse-select-default (format "%s/%s" browse-select-twitter-url (substring url 1)))
+  (browse-select-default (format browse-select-twitter-url (substring url 1)))
   )
 
 ;;;###autoload

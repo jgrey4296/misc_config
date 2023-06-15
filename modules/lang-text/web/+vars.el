@@ -75,7 +75,4 @@ If set to `nil', disable all the above behaviors.")
                      ("HTML Reference" . "https://developer.mozilla.org/en-US/docs/Web/HTML")
                      ("Cheatsheet" . "https://htmlcheatsheet.com/")
                      )
-                    '(+web-pelican-mode
-                     ("Pelican" . "https://docs.getpelican.com/en/latest/")
-                     )
                     )

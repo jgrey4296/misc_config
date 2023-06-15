@@ -79,3 +79,14 @@ With arg, searchs the dplp instead.
     (+lookup/online cleaned "Scholar")
     )
   )
+
+;;;###autoload
+(defun +jg-bibtex-lookup-orcid (arg)
+  (interactive "P")
+  (let* ((fields (split-string (bibtex-autokey-get-field '("author" "editor")) " and " t " +"))
+         (chosen (ivy-read "Search For: " fields))
+         (cleaned (s-replace-regexp "[^[:word:]]+" "+" chosen))
+         )
+    (+lookup/online cleaned "ORCID")
+    )
+  )

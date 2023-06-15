@@ -2,7 +2,12 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("tomler"
+(("tex"
+ (filename . "/usr/local/texlive/")
+ (front-context-string)
+ (rear-context-string . "48 Mar 14 18:20 ")
+ (position . 215))
+("tomler"
  (filename . "/Volumes/documents/github/python/tomler/")
  (front-context-string)
  (rear-context-string . "0K May  2 22:49 ")

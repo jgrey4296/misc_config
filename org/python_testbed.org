@@ -5,6 +5,7 @@ https://github.com/vinta/awesome-python
 
 * Main
 ** Core
+- construct
 - boltons
 - dirty-equals
 - flask
@@ -52,8 +53,8 @@ https://github.com/vinta/awesome-python
 - wheel
 
 ** To Make Core
+- https://github.com/openlawlibrary/pygls
 - llvmlite
-- celery
 - cachetools
 - rope
 - pydot
@@ -111,12 +112,12 @@ https://github.com/sixohsix/twitter                                             
 https://akamhy.github.io/waybackpy/ - wayback machine
 
 ** architecture
-https://github.com/numba/llvmlite
+https://github.com/twisted/twisted
+https://github.com/mcfletch/pydispatcher
 https://flask.palletsprojects.com/en/2.2.x/
 https://palletsprojects.com/p/jinja/
 https://palletsprojects.com/p/werkzeug/
 https://docs.pylonsproject.org/projects/waitress/en/stable/
-https://docs.celeryq.dev/en/stable/
 https://www.rabbitmq.com/
 build                                                                                           : 0.8.0
 cachetools                                                                                      : 4.2.2
@@ -131,9 +132,9 @@ packaging                                                                       
 pexpect                                                                                         : 4.8.0
 pip                                                                                             : 22.2.2
 pkginfo                                                                                         : 1.8.2
-platformdirs                                                                                    : 2.5.2
-poetry                                                                                          : 1.1.15
-ptyprocess                                                                                      : 0.7.0
+https://github.com/platformdirs/platformdirs
+https://github.com/pytest-dev/pluggy
+https://github.com/pexpect/ptyprocess
 https://github.com/rbarrois/python-semanticversion
 setuptools                                                                                      : 63.4.1
 setuptools-rust                                                                                 : 1.4.1
@@ -144,25 +145,26 @@ wrapt                                                                           
 ** best-practices
 https://github.com/csurfer/pyheatmagic                                                          : heatmap : ipython
 https://github.com/fredcamps/lsp-jedi                                                           : emacs : lisp : lsp
+https://github.com/python-lsp/python-lsp-server
 https://github.com/gregmalcolm/python_koans                                                     : education : koan : learning : libraries : practice
 https://github.com/jgonggrijp/pip-review
 https://github.com/norvig/pytudes                                                               : etudes : peter_norvig : practice : programming
 https://github.com/python-rope/rope                                                             : refactoring
 https://github.com/python-rope/ropemacs                                                         : emacs : refactoring : rope
 https://github.com/vinta/awesome-python                                                         : recommendation
-jedi                                                                                            : 0.18.1
 pip-chill
 pip-reqs
 
 ** datastructures
+https://github.com/pytransitions/transitions
 PyYAML                                                                                          : 6.0
 Pyqtree                                                                                         : 1.0.0
 imagesize                                                                                       : 1.4.1
 jsonschema                                                                                      : 4.16.0
 numpy                                                                                           : 1.21.5
 pandas                                                                                          : 1.4.4
-pyrsistent                                                                                      : 0.18.0
-schema                                                                                          : 0.6.7
+https://github.com/tobgu/pyrsistent
+https://github.com/keleshev/schema
 toml                                                                                            : 0.10.2
 tomli                                                                                           : 2.0.1
 tomlkit                                                                                         : 0.11.1
@@ -224,14 +226,13 @@ pandoc
 *** pdfs
 https://github.com/pmaupin/pdfrw/                                                               : pdf : pdfrw : programming
 https://github.com/jorisschellekens/borb
-bibtexparser
+https://github.com/sciunto-org/python-bibtexparser
 
 ** exceptions
 better-exceptions                                                                               : 0.3.3
 pretty-errors                                                                                   : 1.2.25
 https://rich.readthedocs.io/en/stable/introduction.html
 https://github.com/grappa-py/grappa                                                             : assert : grappa : unit_testing
-
 
 ** graphics
 https://tqdm.github.io/
@@ -260,6 +261,9 @@ if python complains, try:
 pip install pygobject
 
 ** Linting
+https://github.com/ORCID/python-orcid
+https://github.com/xlcnd/isbntools
+https://github.com/xlcnd/isbnlib
 https://pre-commit.com/
 autopep8
 https://github.com/bndr/pycycle                                                                 : imports : programming : pycycle : software_engineering
@@ -279,14 +283,20 @@ https://docs.quantifiedcode.com/python-anti-patterns/index.html
 https://github.com/google/yapf                                                                  : emacs : formatting : libraries : lint : pep8
 *** Typing
 https://github.com/Microsoft/pyright                                                            : libraries : library : pyright : type_checking : type_inference : type_systems
+https://github.com/python/typeshed
 mypy
 
 ** misc
 https://mrandri19.github.io/2022/01/12/a-PPL-in-70-lines-of-python.html                         : DAG : __come_back_to : probability : programming
 https://github.com/jarun/Buku                                                                   : bookmark_organisation : cli : libraries
 https://github.com/joeyespo/pytest-watch
+https://github.com/kovidgoyal/calibre
 
 ** Other Langs
+https://github.com/yuce/pyswip
+https://github.com/numba/llvmlite
+https://github.com/fortran-lang/fortls
+https://github.com/cython/cython
 *** erlang
 https://github.com/Pyrlang/Pyrlang                                                              : erlang
 https://github.com/hdima/erlport                                                                : erlang : erlport
@@ -311,7 +321,6 @@ https://github.com/pysmt/pysmt                                                  
 https://github.com/uber/causalml                                                                : causal_inference : machine_learning
 https://github.com/yuce/pyswip
 https://gitlab.com/danielhones/pycategories
-https://pomegranate.readthedocs.io/en/latest/index.html                                         : causal_model : library : markov_models : pomegranate : statistics
 https://potassco.org/
 https://pysathq.github.io/
 
@@ -335,8 +344,9 @@ https://utkuufuk.com/2018/05/04/learning-curves/
 https://www.statsmodels.org/stable/index.html                                                   : library : statistics
 
 ** Text manipulation
+https://github.com/cgpotts/swda
 ansicolors                                                                                      : 1.1.8
-humanfriendly                                                                                   : 10.0
+https://github.com/xolox/python-humanfriendly
 fontconfig                                                                                      : 2.13.1
 fonttools                                                                                       : 4.25.0
 freetype                                                                                        : 2.11.0
@@ -345,6 +355,7 @@ https://github.com/tartley/colorama                                             
 termcolor                                                                                       : 1.1.0
 MarkupSafe                                                                                      : 2.1.1
 texttable                                                                                       : 1.6.4
+https://github.com/jg-rp/liquid
 *** parsing
 https://beautiful-soup-4.readthedocs.io/en/latest/
 https://pygments.org/docs/
@@ -376,12 +387,24 @@ https://github.com/fluhus/wordnet-to-json                                       
 https://github.com/mewo2/pronouncingpy                                                          : libraries : pronunciation
 https://spacy.io/                                                                               : NLP : libraries : python
 inflect                                                                                         : 6.0.0
+https://github.com/jaraco/inflect
 snowballstemmer                                                                                 : 2.2.0
 
 ** XML
-scrapy
+https://github.com/scrapy/scrapy
 https://xmlschema.readthedocs.io/en/latest/
 https://pyxb.sourceforge.net/
 http://www.davekuhlman.org/generateDS.html
 https://xsdata.readthedocs.io/en/latest/
 https://github.com/tefra/xsdata-plantuml
+** argumentation
+https://github.com/Open-Argumentation/ALIAS
+https://github.com/open-argumentation/SADFace
+https://github.com/siwells/DGDL
+** Task runners
+https://github.com/snakemake/snakemake
+https://github.com/pydoit/doit
+https://github.com/spotify/luigi
+https://github.com/python-poetry/poetry
+https://github.com/SCons/scons
+https://github.com/celery/celery

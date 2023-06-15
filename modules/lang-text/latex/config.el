@@ -29,14 +29,17 @@
                              LaTeX-section-label)
         LaTeX-fill-break-at-separators nil
         LaTeX-item-indent 0)
+  ;; (defvar TeX-view-program-selection nil)
+  ;; (defvar TeX-view-program-list nil)
+  ;; (load! "+viewers")
   )
 
 (use-package! tex-mode
   :defer t
   :mode ("\\.tex\\'" . LaTeX-mode)
   :config
+  (defvar LaTeX-indent-environment-list nil)
   (load! "+fontification")
-  (load! "+viewers")
   ;; Provide proper indentation for LaTeX "itemize", "enumerate", and
   ;; "description" environments. See
   ;; http://emacs.stackexchange.com/questions/3083/how-to-indent-items-in-latex-auctex-itemize-environments.
@@ -154,3 +157,5 @@ Math faces should stay fixed by the mixed-pitch blacklist, this is mostly for
           )
     )
   )
+
+(use-package! auctex :defer t)

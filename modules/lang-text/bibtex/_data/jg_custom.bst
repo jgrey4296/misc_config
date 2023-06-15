@@ -591,7 +591,7 @@ FUNCTION {fin.entry}
   newline$
   tags empty$
     { skip$ }
-    { "\begin{lstlisting}" write$ newline$
+    { "\begin{lstlisting}[breaklines=true,breakatwhitespace=true]" write$ newline$
       "Tags: "             write$
       format.tags          write$ newline$
       "\end{lstlisting}"   write$ newline$}

@@ -1,5 +1,6 @@
 ;;; +files.el -*- lexical-binding: t; -*-
 
+
 ;;;###autoload
 (defun +jg-bibtex-open-pdf (&optional path)
   "Open pdf for a bibtex entry, if it exists.
@@ -26,7 +27,12 @@ the entry of interest in the bibfile.  but does not check that."
       )))
 
 ;;;###autoload
-(defun +jg-bibtex-open-url () " Open the current entry's url in browser " (interactive) (when (bibtex-text-in-field "url") (browse-url (bibtex-text-in-field "url"))))
+(defun +jg-bibtex-open-url ()
+  " Open the current entry's url in browser "
+  (interactive)
+  (when (bibtex-text-in-field "url")
+    (browse-url (bibtex-text-in-field "url")))
+  )
 
 ;;;###autoload
 (defun +jg-bibtex-open-doi ()

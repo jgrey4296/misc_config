@@ -32,9 +32,11 @@
       :desc "Insert from PMID"    "p"     (cmd! (pubmed-insert-bibtex-from-pmid (read-string "PMID: ")))
       :desc "New Entry"           "n"     #'bibtex-entry
       :desc "Get Meta"            "m"     #'+jg-bibtex-meta-retrieval
+      :desc "Lookup ORCID"        "o"     #'+jg-bibtex-lookup-orcid
       :desc "Count Entries"       "C"     #'bibtex-count-entries
       :desc "Refile"              "r"     #'+jg-bibtex-refile-by-year
       :desc "Rename file"         "R"     #'+jg-bibtex-rename-file
+      :desc "Refile to Unsourced" "U"     #'+jg-bibtex-refile-to-unsourced
       :desc "Scholar Search"      "s"     #'+jg-bibtex-google-scholar
       :desc "Toggle Watchers"     "W"     #'+jg-bibtex-suppress-watchers
       :desc "Update from DOI"     "u"     (cmd! (doi-utils-update-bibtex-entry-from-doi (org-ref-bibtex-entry-doi)))

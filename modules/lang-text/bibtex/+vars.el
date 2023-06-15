@@ -35,6 +35,8 @@
 (defvar jg-bibtex-loc-temp-dir        (expand-file-name "~/.tex/"))
 
 (defvar jg-bibtex-pdf-loc             (expand-file-name "~/pdf_library"))
+
+(defvar jg-bibtex-unsourced-bib-file (expand-file-name "~/github/jgrey4296.github.io/resources/to_source.bib"))
 ;;-- end locations
 
 ;;-- general bibtex settings
@@ -138,6 +140,7 @@
                      ("Amazon UK"          "https://www.amazon.co.uk/s?k=%s")
                      ("Amazon US"          "https://www.amazon.com/s?k=%s")
                      ("IMDB"               "https://www.imdb.com/find?s=all&q=%s")
+                     ("ORCID" "https://orcid.org/orcid-search/search?firstName=%s&otherFields=true")
                      )
                     )
 
@@ -159,6 +162,7 @@
 (spec-handling-add! lookup-regular
                     '(bibtex-mode
                      ("bibtex reference" . "https://www.bibtex.com/g/bibtex-format/")
+                     ("Diacritics" . "https://en.wikibooks.org/wiki/LaTeX/Special_Characters")
                      )
                     )
 ;;-- end specs

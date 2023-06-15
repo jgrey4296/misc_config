@@ -1,22 +1,26 @@
 ;;; +ox-html-jg-templates.el -*- lexical-binding: t; -*-
+(require 'cl-lib)
+(require 'dash)
+(require 's)
+
 
 ;;-- blocks
-(defun +jg-org-html-fontify-code (code lang)
+(defun org-html-jg-fontify-code (code lang)
   "Color CODE with htmlize library.
 CODE is a string representing the source code to colorize.  LANG
 is the language used for CODE, as a string, or nil."
   (when code
     (cond
      ;; No language.  Possibly an example block.
-     ((not lang) (+jg-org-html-encode-plain-text code))
+     ((not lang) (org-html-jg-encode-plain-text code))
      ;; Plain text explicitly set.
-     ((not +jg-org-html-htmlize-output-type) (+jg-org-html-encode-plain-text code))
+     ((not org-html-jg-htmlize-output-type) (org-html-jg-encode-plain-text code))
      ;; No htmlize library or an inferior version of htmlize.
      ((not (progn (require 'htmlize nil t)
 		  (fboundp 'htmlize-region-for-paste)))
       ;; Emit a warning.
       (message "Cannot fontify source block (htmlize.el >= 1.34 required)")
-      (+jg-org-html-encode-plain-text code))
+      (org-html-jg-encode-plain-text code))
      (t
       ;; Map language
       (setq lang (or (assoc-default lang org-src-lang-modes) lang))
@@ -24,13 +28,13 @@ is the language used for CODE, as a string, or nil."
 	(cond
 	 ;; Case 1: Language is not associated with any Emacs mode
 	 ((not (functionp lang-mode))
-	  (+jg-org-html-encode-plain-text code))
+	  (org-html-jg-encode-plain-text code))
 	 ;; Case 2: Default.  Fontify code.
 	 (t
 	  ;; htmlize
 	  (setq code
-		(let ((output-type +jg-org-html-htmlize-output-type)
-		      (font-prefix +jg-org-html-htmlize-font-prefix)
+		(let ((output-type org-html-jg-htmlize-output-type)
+		      (font-prefix org-html-jg-htmlize-font-prefix)
 		      (inhibit-read-only t))
 		  (with-temp-buffer
 		    ;; Switch to language-specific mode.
@@ -49,8 +53,8 @@ is the language used for CODE, as a string, or nil."
 		    (org-src-mode)
 		    (set-buffer-modified-p nil)
 		    ;; Htmlize region.
-		    (let ((+jg-org-html-htmlize-output-type output-type)
-			  (+jg-org-html-htmlize-font-prefix font-prefix))
+		    (let ((org-html-jg-htmlize-output-type output-type)
+			  (org-html-jg-htmlize-font-prefix font-prefix))
 		      (org-html-htmlize-region-for-paste
 		       (point-min) (point-max))))))
 	  ;; Strip any enclosing <pre></pre> tags.
@@ -58,7 +62,7 @@ is the language used for CODE, as a string, or nil."
 		 (end (and beg (string-match "</pre>\\'" code))))
 	    (if (and beg end) (substring code beg end) code)))))))))
 
-(defun +jg-org-html-do-format-code
+(defun org-html-jg-do-format-code
     (code &optional lang refs retain-labels num-start wrap-lines)
   "Format CODE string as source code.
 Optional arguments LANG, REFS, RETAIN-LABELS, NUM-START, WRAP-LINES
@@ -74,7 +78,7 @@ wrapped in code elements."
 	  (and num-start
 	       (format "%%%ds: "
 		       (length (number-to-string (+ code-length num-start))))))
-	 (code (+jg-org-html-fontify-code code lang)))
+	 (code (org-html-jg-fontify-code code lang)))
     (org-export-format-code
      code
      (lambda (loc line-num ref)
@@ -100,7 +104,7 @@ wrapped in code elements."
 		 ref loc)))
      num-start refs)))
 
-(defun +jg-org-html-format-code (element info)
+(defun org-html-jg-format-code (element info)
   "Format contents of ELEMENT as source code.
 ELEMENT is either an example or a source block.  INFO is a plist
 used as a communication channel."
@@ -115,51 +119,51 @@ used as a communication channel."
 	 (num-start (org-export-get-loc element info))
 	 ;; Should lines be wrapped in code elements?
 	 (wrap-lines (plist-get info :html-wrap-src-lines)))
-    (+jg-org-html-do-format-code code lang refs retain-labels num-start wrap-lines)))
+    (org-html-jg-do-format-code code lang refs retain-labels num-start wrap-lines)))
 
-(defun +jg-org-html-inline-src-block (inline-src-block _contents info)
+(defun org-html-jg-inline-src-block (inline-src-block _contents info)
   "Transcode an INLINE-SRC-BLOCK element from Org to HTML.
 CONTENTS holds the contents of the item.  INFO is a plist holding
 contextual information."
   (let* ((lang (org-element-property :language inline-src-block))
-	 (code (+jg-org-html-fontify-code
+	 (code (org-html-jg-fontify-code
 		(org-element-property :value inline-src-block)
 		lang))
 	 (label
-	  (let ((lbl (+jg-org-html--reference inline-src-block info t)))
+	  (let ((lbl (org-html-jg--reference inline-src-block info t)))
 	    (if (not lbl) "" (format " id=\"%s\"" lbl)))))
     (format "<code class=\"src src-%s\"%s>%s</code>" lang label code)))
 
-(defun +jg-org-html-example-block (example-block _contents info)
+(defun org-html-jg-example-block (example-block _contents info)
   "Transcode a EXAMPLE-BLOCK element from Org to HTML.
 CONTENTS is nil.  INFO is a plist holding contextual
 information."
   (let ((attributes (org-export-read-attribute :attr_html example-block)))
     (if (plist-get attributes :textarea)
-	(+jg-org-html--textarea-block example-block)
+	(org-html-jg--textarea-block example-block)
       (format "<pre class=\"example\"%s>\n%s</pre>"
-	      (let* ((reference (+jg-org-html--reference example-block info))
+	      (let* ((reference (org-html-jg--reference example-block info))
 		     (a (org-html--make-attribute-string
 			 (if (or (not reference) (plist-member attributes :id))
 			     attributes
 			   (plist-put attributes :id reference)))))
 		(if (org-string-nw-p a) (concat " " a) ""))
-	      (+jg-org-html-format-code example-block info)))))
+	      (org-html-jg-format-code example-block info)))))
 
-(defun +jg-org-html-export-snippet (export-snippet _contents _info)
+(defun org-html-jg-export-snippet (export-snippet _contents _info)
   "Transcode a EXPORT-SNIPPET object from Org to HTML.
 CONTENTS is nil.  INFO is a plist holding contextual
 information."
   (when (eq (org-export-snippet-backend export-snippet) 'html-jg)
     (org-element-property :value export-snippet)))
 
-(defun +jg-org-html-export-block (export-block _contents _info)
+(defun org-html-jg-export-block (export-block _contents _info)
   "Transcode a EXPORT-BLOCK element from Org to HTML.
 CONTENTS is nil.  INFO is a plist holding contextual information."
   (when (string= (org-element-property :type export-block) "HTML")
     (org-remove-indentation (org-element-property :value export-block))))
 
-(defun +jg-org-html-drawer (drawer contents info)
+(defun org-html-jg-drawer (drawer contents info)
   "Transcode a DRAWER element from Org to HTML.
 CONTENTS holds the contents of the block.  INFO is a plist
 holding contextual information."
@@ -167,26 +171,26 @@ holding contextual information."
 	   (org-element-property :drawer-name drawer)
 	   contents))
 
-(defun +jg-org-html-code (code _contents info)
+(defun org-html-jg-code (code _contents info)
   "Transcode CODE from Org to HTML.
 CONTENTS is nil.  INFO is a plist holding contextual
 information."
   (format (or (cdr (assq 'code (plist-get info :html-text-markup-alist))) "%s")
-	  (+jg-org-html-encode-plain-text (org-element-property :value code))))
+	  (org-html-jg-encode-plain-text (org-element-property :value code))))
 
-(defun +jg-org-html-property-drawer (_property-drawer contents _info)
+(defun org-html-jg-property-drawer (_property-drawer contents _info)
   "Transcode a PROPERTY-DRAWER element from Org to HTML.
 CONTENTS holds the contents of the drawer.  INFO is a plist
 holding contextual information."
   (and (org-string-nw-p contents)
        (format "<pre class=\"example\">\n%s</pre>" contents)))
 
-(defun +jg-org-html-quote-block (quote-block contents info)
+(defun org-html-jg-quote-block (quote-block contents info)
   "Transcode a QUOTE-BLOCK element from Org to HTML.
 CONTENTS holds the contents of the block.  INFO is a plist
 holding contextual information."
   (format "<blockquote%s>\n%s</blockquote>"
-	  (let* ((reference (+jg-org-html--reference quote-block info t))
+	  (let* ((reference (org-html-jg--reference quote-block info t))
 		 (attributes (org-export-read-attribute :attr_html quote-block))
 		 (a (org-html--make-attribute-string
 		     (if (or (not reference) (plist-member attributes :id))
@@ -195,15 +199,15 @@ holding contextual information."
 	    (if (org-string-nw-p a) (concat " " a) ""))
 	  contents))
 
-(defun +jg-org-html-src-block (src-block _contents info)
+(defun org-html-jg-src-block (src-block _contents info)
   "Transcode a SRC-BLOCK element from Org to HTML.
 CONTENTS holds the contents of the item.  INFO is a plist holding
 contextual information."
   (if (org-export-read-attribute :attr_html src-block :textarea)
-      (+jg-org-html--textarea-block src-block)
+      (org-html-jg--textarea-block src-block)
     (let* ((lang (org-element-property :language src-block))
-	   (code (+jg-org-html-format-code src-block info))
-	   (label (let ((lbl (+jg-org-html--reference src-block info t)))
+	   (code (org-html-jg-format-code src-block info))
+	   (label (let ((lbl (org-html-jg--reference src-block info t)))
 		    (if lbl (format " id=\"%s\"" lbl) "")))
 	   (klipsify  (and  (plist-get info :html-klipsify-src)
                             (member lang '("javascript" "js"
@@ -239,7 +243,7 @@ contextual information."
 
 ;;-- toc
 
-(defun +jg-org-html-toc (depth info &optional scope)
+(defun org-html-jg-toc (depth info &optional scope)
   "Build a table of contents.
 DEPTH is an integer specifying the depth of the table.  INFO is
 a plist used as a communication channel.  Optional argument SCOPE
@@ -247,12 +251,12 @@ is an element defining the scope of the table.  Return the table
 of contents as a string, or nil if it is empty."
   (let ((toc-entries
 	 (mapcar (lambda (headline)
-		   (cons (+jg-org-html--format-toc-headline headline info)
+		   (cons (org-html-jg--format-toc-headline headline info)
 			 (org-export-get-relative-level headline info)))
 		 (org-export-collect-headlines info depth scope))))
     (when toc-entries
       (let ((toc (concat "<div id=\"text-table-of-contents\" role=\"doc-toc\">"
-			 (+jg-org-html--toc-text toc-entries)
+			 (org-html-jg--toc-text toc-entries)
 			 "</div>\n")))
 	(if scope toc
 	  (let ((outer-tag (if (org-html--html5-fancy-p info)
@@ -267,7 +271,7 @@ of contents as a string, or nil if it is empty."
 		    toc
 		    (format "</%s>\n" outer-tag))))))))
 
-(defun +jg-org-html--toc-text (toc-entries)
+(defun org-html-jg--toc-text (toc-entries)
   "Return innards of a table of contents, as a string.
 TOC-ENTRIES is an alist where key is an entry title, as a string,
 and value is its relative level, as an integer."
@@ -291,7 +295,7 @@ and value is its relative level, as an integer."
       toc-entries "")
      (org-html--make-string (- prev-level start-level) "</li>\n</ul>\n"))))
 
-(defun +jg-org-html--format-toc-headline (headline info)
+(defun org-html-jg--format-toc-headline (headline info)
   "Return an appropriate table of contents entry for HEADLINE.
 INFO is a plist used as a communication channel."
   (let* ((headline-number (org-export-get-headline-number headline info))
@@ -309,7 +313,7 @@ INFO is a plist used as a communication channel."
 		    (org-export-get-tags headline info))))
     (format "<a href=\"#%s\">%s</a>"
 	    ;; Label.
-	    (+jg-org-html--reference headline info)
+	    (org-html-jg--reference headline info)
 	    ;; Body.
 	    (concat
 	     (and (not (org-export-low-level-p headline info))
@@ -319,7 +323,7 @@ INFO is a plist used as a communication channel."
 	     (apply (plist-get info :html-format-headline-function)
 		    todo todo-type priority text tags :section-number nil)))))
 
-(defun +jg-org-html-list-of-listings (info)
+(defun org-html-jg-list-of-listings (info)
   "Build a list of listings.
 INFO is a plist used as a communication channel.  Return the list
 of listings as a string, or nil if it is empty."
@@ -337,7 +341,7 @@ of listings as a string, or nil if it is empty."
 					 (org-html--translate "Listing %d:" info))))
 		(mapconcat
 		 (lambda (entry)
-		   (let ((label (+jg-org-html--reference entry info t))
+		   (let ((label (org-html-jg--reference entry info t))
 			 (title (org-trim
 				 (org-export-data
 				  (or (org-export-get-caption entry t)
@@ -357,7 +361,7 @@ of listings as a string, or nil if it is empty."
 		 lol-entries "\n"))
 	      "\n</ul>\n</div>\n</div>"))))
 
-(defun +jg-org-html-list-of-tables (info)
+(defun org-html-jg-list-of-tables (info)
   "Build a list of tables.
 INFO is a plist used as a communication channel.  Return the list
 of tables as a string, or nil if it is empty."
@@ -375,7 +379,7 @@ of tables as a string, or nil if it is empty."
 					 (org-html--translate "Table %d:" info))))
 		(mapconcat
 		 (lambda (entry)
-		   (let ((label (+jg-org-html--reference entry info t))
+		   (let ((label (org-html-jg--reference entry info t))
 			 (title (org-trim
 				 (org-export-data
 				  (or (org-export-get-caption entry t)
@@ -399,7 +403,7 @@ of tables as a string, or nil if it is empty."
 ;;-- end toc
 
 ;;-- footnotes
-(defun +jg-org-html-footnote-reference (footnote-reference _contents info)
+(defun org-html-jg-footnote-reference (footnote-reference _contents info)
   "Transcode a FOOTNOTE-REFERENCE element from Org to HTML.
 CONTENTS is nil.  INFO is a plist holding contextual information."
   (concat
@@ -416,12 +420,12 @@ CONTENTS is nil.  INFO is a plist holding contextual information."
 			".100"))))
      (format
       (plist-get info :html-footnote-format)
-      (+jg-org-html--anchor
+      (org-html-jg--anchor
        id n (format " class=\"footref\" href=\"#fn.%d\" role=\"doc-backlink\"" n) info)))))
 ;;-- end footnotes
 
 ;;-- headlines
-(defun +jg-org-html-headline (headline contents info)
+(defun org-html-jg-headline (headline contents info)
   "Transcode a HEADLINE element from Org to HTML.
 CONTENTS holds the contents of the headline.  INFO is a plist
 holding contextual information."
@@ -438,7 +442,7 @@ holding contextual information."
                           (org-element-property :priority headline)))
            (text (org-export-data (org-element-property :title headline) info))
            (tags (when (plist-get info :with-tags)
-                   (+jg-org-html--tags (org-export-get-tags headline info) info)))
+                   (org-html-jg--tags (org-export-get-tags headline info) info)))
            (permalink (-if-let* ((perma (org-element-property :PERMALINK headline))
                                  (matches (string-match org-link-bracket-re perma)))
                           (match-string 1 perma)))
@@ -447,9 +451,9 @@ holding contextual information."
            (full-text (funcall (plist-get info :html-format-headline-function)
                                todo todo-type priority text tags info))
            (contents (or contents ""))
-	   (id (+jg-org-html--reference headline info))
+	   (id (org-html-jg--reference headline info))
 	   (formatted-link (cond (permalink
-                                  (+jg-org-html--anchor id full-text (s-concat "href=\"" permalink "\"") info))
+                                  (org-html-jg--anchor id full-text (s-concat "href=\"" permalink "\"") info))
                                  ((plist-get info :html-self-link-headlines)
 		                  (format "<a href=\"#%s\">%s</a>" id full-text))
                                  (t
@@ -467,10 +471,10 @@ holding contextual information."
 	     (and (org-export-first-sibling-p headline info)
 		  (apply #'format "<%s class=\"org-%s\">\n"
 			 (make-list 2 html-type)))
-	     (+jg-org-html-format-list-item
+	     (org-html-jg-format-list-item
 	      contents (if numberedp 'ordered 'unordered)
 	      nil info nil
-	      (concat (+jg-org-html--anchor id nil nil info) formatted-text)) "\n"
+	      (concat (org-html-jg--anchor id nil nil info) formatted-text)) "\n"
 	     (and (org-export-last-sibling-p headline info)
 		  (format "</%s>\n" html-type))))
 	;; Standard headline.  Export it as a section.
@@ -480,7 +484,7 @@ holding contextual information."
 	       (org-element-property :HTML_HEADLINE_CLASS headline))
               (first-content (car (org-element-contents headline))))
           (format "<%s id=\"%s\" class=\"%s\">%s%s</%s>\n"
-                  (+jg-org-html--container headline info)
+                  (org-html-jg--container headline info)
                   (format "outline-container-%s" id)
                   (concat (format "outline-%d" level)
                           (and extra-class " ")
@@ -503,26 +507,26 @@ holding contextual information."
                   ;; class="outline-...> which is needed by
                   ;; `org-info.js'.
                   (if (eq (org-element-type first-content) 'section) contents
-                    (concat (+jg-org-html-section first-content "" info) contents))
-                  (+jg-org-html--container headline info)))))))
+                    (concat (org-html-jg-section first-content "" info) contents))
+                  (org-html-jg--container headline info)))))))
 
-(defun +jg-org-html-format-headline-default-function
+(defun org-html-jg-format-headline-default-function
     (todo _todo-type priority text tags info)
   "Default format function for a headline.
-See `+jg-org-html-format-headline-function' for details."
-  (let ((todo (+jg-org-html--todo todo info))
-	(priority (+jg-org-html--priority priority info)))
+See `org-html-jg-format-headline-function' for details."
+  (let ((todo (org-html-jg--todo todo info))
+	(priority (org-html-jg--priority priority info)))
     (concat todo (and todo " ")
 	    priority (and priority " ")
 	    text)))
 
-(defun +jg-org-html--container (headline info)
+(defun org-html-jg--container (headline info)
   (or (org-element-property :HTML_CONTAINER headline)
       (if (= 1 (org-export-get-relative-level headline info))
 	  (plist-get info :html-container)
 	"div")))
 
-(defun +jg-org-html-section (section contents info)
+(defun org-html-jg-section (section contents info)
   "Transcode a SECTION element from Org to HTML.
 CONTENTS holds the contents of the section.  INFO is a plist
 holding contextual information."
@@ -545,7 +549,7 @@ holding contextual information."
 		    (org-export-get-reference parent info))
 		(or contents ""))))))
 
-(defun +jg-org-html-paragraph (paragraph contents info)
+(defun org-html-jg-paragraph (paragraph contents info)
   "Transcode a PARAGRAPH element from Org to HTML.
 CONTENTS is the contents of the paragraph, as a string.  INFO is
 the plist used as a communication channel."
@@ -565,12 +569,12 @@ the plist used as a communication channel."
       ;; First paragraph in an item has no tag if it is alone or
       ;; followed, at most, by a sub-list.
       contents)
-     ((+jg-org-html-standalone-image-p paragraph info)
+     ((org-html-jg-standalone-image-p paragraph info)
       ;; Standalone image.
       (let ((caption
 	     (let ((raw (org-export-data
 			 (org-export-get-caption paragraph) info))
-		   (+jg-org-html-standalone-image-predicate
+		   (org-html-jg-standalone-image-predicate
 		    #'org-html--has-caption-p))
 	       (if (not (org-string-nw-p raw)) raw
 		 (concat "<span class=\"figure-number\">"
@@ -578,11 +582,11 @@ the plist used as a communication channel."
 				 (org-export-get-ordinal
 				  (org-element-map paragraph 'link
 				    #'identity info t)
-				  info nil #'+jg-org-html-standalone-image-p))
+				  info nil #'org-html-jg-standalone-image-p))
 			 " </span>"
 			 raw))))
-	    (label (+jg-org-html--reference paragraph info)))
-	(+jg-org-html--wrap-image contents info caption label)))
+	    (label (org-html-jg--reference paragraph info)))
+	(org-html-jg--wrap-image contents info caption label)))
      ;; Regular paragraph.
      (t (format "<p%s%s class=\"twit-text\">\n%s</p>"
 		(if (org-string-nw-p attributes)
@@ -592,20 +596,20 @@ the plist used as a communication channel."
 ;;-- end headlines
 
 ;;-- visual formatting
-(defun +jg-org-html-entity (entity _contents _info)
+(defun org-html-jg-entity (entity _contents _info)
   "Transcode an ENTITY object from Org to HTML.
 CONTENTS are the definition itself.  INFO is a plist holding
 contextual information."
   (org-element-property :html entity))
 
-(defun +jg-org-html-bold (_bold contents info)
+(defun org-html-jg-bold (_bold contents info)
   "Transcode BOLD from Org to HTML.
 CONTENTS is the text with bold markup.  INFO is a plist holding
 contextual information."
   (format (or (cdr (assq 'bold (plist-get info :html-text-markup-alist))) "%s")
 	  contents))
 
-(defun +jg-org-html-italic (_italic contents info)
+(defun org-html-jg-italic (_italic contents info)
   "Transcode ITALIC from Org to HTML.
 CONTENTS is the text with italic markup.  INFO is a plist holding
 contextual information."
@@ -620,19 +624,19 @@ contextual information."
 	  (rpl (cdr a)))
       (setq string (replace-regexp-in-string re rpl string t)))))
 
-(defun +jg-org-html-encode-plain-text (text)
+(defun org-html-jg-encode-plain-text (text)
   "Convert plain text characters from TEXT to HTML equivalent.
-Possible conversions are set in `+jg-org-html-protect-char-alist'."
-  (dolist (pair +jg-org-html-protect-char-alist text)
+Possible conversions are set in `org-html-jg-protect-char-alist'."
+  (dolist (pair org-html-jg-protect-char-alist text)
     (setq text (replace-regexp-in-string (car pair) (cdr pair) text t t))))
 
-(defun +jg-org-html-plain-text (text info)
+(defun org-html-jg-plain-text (text info)
   "Transcode a TEXT string from Org to HTML.
 TEXT is the string to transcode.  INFO is a plist holding
 contextual information."
   (let ((output text))
     ;; Protect following characters: <, >, &.
-    (setq output (+jg-org-html-encode-plain-text output))
+    (setq output (org-html-jg-encode-plain-text output))
     ;; Handle smart quotes.  Be sure to provide original string since
     ;; OUTPUT may have been modified.
     (when (plist-get info :with-smart-quotes)
@@ -649,7 +653,7 @@ contextual information."
     ;; Return value.
     output))
 
-(defun +jg-org-html-strike-through (_strike-through contents info)
+(defun org-html-jg-strike-through (_strike-through contents info)
   "Transcode STRIKE-THROUGH from Org to HTML.
 CONTENTS is the text with strike-through markup.  INFO is a plist
 holding contextual information."
@@ -658,27 +662,27 @@ holding contextual information."
        "%s")
    contents))
 
-(defun +jg-org-html-subscript (_subscript contents _info)
+(defun org-html-jg-subscript (_subscript contents _info)
   "Transcode a SUBSCRIPT object from Org to HTML.
 CONTENTS is the contents of the object.  INFO is a plist holding
 contextual information."
   (format "<sub>%s</sub>" contents))
 
-(defun +jg-org-html-superscript (_superscript contents _info)
+(defun org-html-jg-superscript (_superscript contents _info)
   "Transcode a SUPERSCRIPT object from Org to HTML.
 CONTENTS is the contents of the object.  INFO is a plist holding
 contextual information."
   (format "<sup>%s</sup>" contents))
 
-(defun +jg-org-html-timestamp (timestamp _contents info)
+(defun org-html-jg-timestamp (timestamp _contents info)
   "Transcode a TIMESTAMP object from Org to HTML.
 CONTENTS is nil.  INFO is a plist holding contextual
 information."
-  (let ((value (+jg-org-html-plain-text (org-timestamp-translate timestamp) info)))
+  (let ((value (org-html-jg-plain-text (org-timestamp-translate timestamp) info)))
     (format "<span class=\"timestamp-wrapper\"><span class=\"timestamp\">%s</span></span>"
 	    (replace-regexp-in-string "--" "&#x2013;" value))))
 
-(defun +jg-org-html-underline (_underline contents info)
+(defun org-html-jg-underline (_underline contents info)
   "Transcode UNDERLINE from Org to HTML.
 CONTENTS is the text with underline markup.  INFO is a plist
 holding contextual information."
@@ -686,14 +690,14 @@ holding contextual information."
 	      "%s")
 	  contents))
 
-(defun +jg-org-html-verbatim (verbatim _contents info)
+(defun org-html-jg-verbatim (verbatim _contents info)
   "Transcode VERBATIM from Org to HTML.
 CONTENTS is nil.  INFO is a plist holding contextual
 information."
   (format (or (cdr (assq 'verbatim (plist-get info :html-text-markup-alist))) "%s")
-	  (+jg-org-html-encode-plain-text (org-element-property :value verbatim))))
+	  (org-html-jg-encode-plain-text (org-element-property :value verbatim))))
 
-(defun +jg-org-html-keyword (keyword _contents info)
+(defun org-html-jg-keyword (keyword _contents info)
   "Transcode a KEYWORD element from Org to HTML.
 CONTENTS is nil.  INFO is a plist holding contextual information."
   (let ((key (org-element-property :key keyword))
@@ -712,13 +716,13 @@ CONTENTS is nil.  INFO is a plist holding contextual information."
 		   (org-export-resolve-link
 		    (org-strip-quotes (match-string 1 value)) info))
 		  ((string-match-p "\\<local\\>" value) keyword)))) ;local
-	    (+jg-org-html-toc depth info scope)))
-	 ((string= "listings" value) (+jg-org-html-list-of-listings info))
-	 ((string= "tables" value) (+jg-org-html-list-of-tables info))))))))
+	    (org-html-jg-toc depth info scope)))
+	 ((string= "listings" value) (org-html-jg-list-of-listings info))
+	 ((string= "tables" value) (org-html-jg-list-of-tables info))))))))
 ;;-- end visual formatting
 
 ;;-- lists
-(defun +jg-org-html-plain-list (plain-list contents _info)
+(defun org-html-jg-plain-list (plain-list contents _info)
   "Transcode a PLAIN-LIST element from Org to HTML.
 CONTENTS is the contents of the list.  INFO is a plist holding
 contextual information."
@@ -739,22 +743,22 @@ contextual information."
 				    " "))))
 	    contents
 	    type)))
-(defun +jg-org-html-checkbox (checkbox info)
+(defun org-html-jg-checkbox (checkbox info)
   "Format CHECKBOX into HTML.
 INFO is a plist holding contextual information.  See
-`+jg-org-html-checkbox-type' for customization options."
+`org-html-jg-checkbox-type' for customization options."
   (cdr (assq checkbox
 	     (cdr (assq (plist-get info :html-checkbox-type)
-			+jg-org-html-checkbox-types)))))
+			org-html-jg-checkbox-types)))))
 
-(defun +jg-org-html-format-list-item (contents type checkbox info
+(defun org-html-jg-format-list-item (contents type checkbox info
 					   &optional term-counter-id
 					   headline)
   "Format a list item into HTML."
   (let ((class (if checkbox
 		   (format " class=\"%s\""
 			   (symbol-name checkbox)) ""))
-	(checkbox (concat (+jg-org-html-checkbox checkbox info)
+	(checkbox (concat (org-html-jg-checkbox checkbox info)
 			  (and checkbox " ")))
 	(br (org-html-close-tag "br" nil info))
 	(extra-newline (if (and (org-string-nw-p contents) headline) "\n" "")))
@@ -788,7 +792,7 @@ INFO is a plist holding contextual information.  See
        (`unordered "</li>")
        (`descriptive "</dd>")))))
 
-(defun +jg-org-html-item (item contents info)
+(defun org-html-jg-item (item contents info)
   "Transcode an ITEM element from Org to HTML.
 CONTENTS holds the contents of the item.  INFO is a plist holding
 contextual information."
@@ -798,18 +802,18 @@ contextual information."
 	 (checkbox (org-element-property :checkbox item))
 	 (tag (let ((tag (org-element-property :tag item)))
 		(and tag (org-export-data tag info)))))
-    (+jg-org-html-format-list-item
+    (org-html-jg-format-list-item
      contents type checkbox info (or tag counter))))
 
 ;;-- end lists
 
 ;;-- latex
-(defun +jg-org-html-format-latex (latex-frag processing-type info)
+(defun org-html-jg-format-latex (latex-frag processing-type info)
   "Format a LaTeX fragment LATEX-FRAG into HTML.
 PROCESSING-TYPE designates the tool used for conversion.  It can
 be `verbatim', `html', nil, t or symbols in
 `org-preview-latex-process-alist', e.g., `dvipng', `dvisvgm' or
-`imagemagick'.  See `+jg-org-html-with-latex' for more information.
+`imagemagick'.  See `org-html-jg-with-latex' for more information.
 INFO is a plist containing export properties."
   (let ((cache-relpath "") (cache-dir ""))
     (unless (eq processing-type 'html)
@@ -840,7 +844,7 @@ INFO is a plist containing export properties."
 		       "Creating LaTeX Image..." nil processing-type)
      (buffer-string))))
 
-(defun +jg-org-html--wrap-latex-environment (contents _ &optional caption label)
+(defun org-html-jg--wrap-latex-environment (contents _ &optional caption label)
   "Wrap CONTENTS string within appropriate environment for equations.
 When optional arguments CAPTION and LABEL are given, use them for
 caption and \"id\" attribute."
@@ -854,22 +858,22 @@ caption and \"id\" attribute."
             (format "\n<span class=\"equation-label\">\n%s\n</span>"
                     caption))))
 
-(defun +jg-org-html--math-environment-p (element &optional _)
+(defun org-html-jg--math-environment-p (element &optional _)
   "Non-nil when ELEMENT is a LaTeX math environment.
 Math environments match the regular expression defined in
 `org-latex-math-environments-re'.  This function is meant to be
 used as a predicate for `org-export-get-ordinal' or a value to
-`+jg-org-html-standalone-image-predicate'."
+`org-html-jg-standalone-image-predicate'."
   (string-match-p org-latex-math-environments-re
                   (org-element-property :value element)))
 
-(defun +jg-org-html--latex-environment-numbered-p (element)
+(defun org-html-jg--latex-environment-numbered-p (element)
   "Non-nil when ELEMENT contains a numbered LaTeX math environment.
 Starred and \"displaymath\" environments are not numbered."
   (not (string-match-p "\\`[ \t]*\\\\begin{\\(.*\\*\\|displaymath\\)}"
 		       (org-element-property :value element))))
 
-(defun +jg-org-html--unlabel-latex-environment (latex-frag)
+(defun org-html-jg--unlabel-latex-environment (latex-frag)
   "Change environment in LATEX-FRAG string to an unnumbered one.
 For instance, change an `equation' environment to `equation*'."
   (replace-regexp-in-string
@@ -880,60 +884,60 @@ For instance, change an `equation' environment to `equation*'."
 			     latex-frag nil nil 1)
    nil nil 1))
 
-(defun +jg-org-html-latex-environment (latex-environment _contents info)
+(defun org-html-jg-latex-environment (latex-environment _contents info)
   "Transcode a LATEX-ENVIRONMENT element from Org to HTML.
 CONTENTS is nil.  INFO is a plist holding contextual information."
   (let ((processing-type (plist-get info :with-latex))
 	(latex-frag (org-remove-indentation
 		     (org-element-property :value latex-environment)))
         (attributes (org-export-read-attribute :attr_html latex-environment))
-        (label (+jg-org-html--reference latex-environment info t))
-        (caption (and (+jg-org-html--latex-environment-numbered-p latex-environment)
+        (label (org-html-jg--reference latex-environment info t))
+        (caption (and (org-html-jg--latex-environment-numbered-p latex-environment)
 		      (number-to-string
 		       (org-export-get-ordinal
 			latex-environment info nil
 			(lambda (l _)
-			  (and (+jg-org-html--math-environment-p l)
-			       (+jg-org-html--latex-environment-numbered-p l))))))))
+			  (and (org-html-jg--math-environment-p l)
+			       (org-html-jg--latex-environment-numbered-p l))))))))
     (cond
      ((assq processing-type org-preview-latex-process-alist)
       (let ((formula-link
-             (+jg-org-html-format-latex
-              (+jg-org-html--unlabel-latex-environment latex-frag)
+             (org-html-jg-format-latex
+              (org-html-jg--unlabel-latex-environment latex-frag)
               processing-type info)))
         (when (and formula-link (string-match "file:\\([^]]*\\)" formula-link))
           (let ((source (org-export-file-uri (match-string 1 formula-link))))
-	    (+jg-org-html--wrap-latex-environment
-	     (+jg-org-html--format-image source attributes info)
+	    (org-html-jg--wrap-latex-environment
+	     (org-html-jg--format-image source attributes info)
 	     info caption label)))))
-     (t (+jg-org-html--wrap-latex-environment latex-frag info caption label)))))
+     (t (org-html-jg--wrap-latex-environment latex-frag info caption label)))))
 
-(defun +jg-org-html-latex-fragment (latex-fragment _contents info)
+(defun org-html-jg-latex-fragment (latex-fragment _contents info)
   "Transcode a LATEX-FRAGMENT object from Org to HTML.
 CONTENTS is nil.  INFO is a plist holding contextual information."
   (let ((latex-frag (org-element-property :value latex-fragment))
 	(processing-type (plist-get info :with-latex)))
     (cond
      ((memq processing-type '(t html))
-      (+jg-org-html-format-latex latex-frag 'html info))
+      (org-html-jg-format-latex latex-frag 'html info))
      ((assq processing-type org-preview-latex-process-alist)
       (let ((formula-link
-	     (+jg-org-html-format-latex latex-frag processing-type info)))
+	     (org-html-jg-format-latex latex-frag processing-type info)))
 	(when (and formula-link (string-match "file:\\([^]]*\\)" formula-link))
 	  (let ((source (org-export-file-uri (match-string 1 formula-link))))
-	    (+jg-org-html--format-image source nil info)))))
+	    (org-html-jg--format-image source nil info)))))
      (t latex-frag))))
 ;;-- end latex
 
 ;;-- links
-(defun +jg-org-html-image-link-filter (data _backend info)
-  (org-export-insert-image-links data info +jg-org-html-inline-image-rules))
+(defun org-html-jg-image-link-filter (data _backend info)
+  (org-export-insert-image-links data info org-html-jg-inline-image-rules))
 
-(defun +jg-org-html-inline-image-p (link info)
+(defun org-html-jg-inline-image-p (link info)
   "Non-nil when LINK is meant to appear as an image.
 INFO is a plist used as a communication channel.  LINK is an
 inline image when it has no description and targets an image
-file (see `+jg-org-html-inline-image-rules' for more information), or
+file (see `org-html-jg-inline-image-rules' for more information), or
 if its description is a single link targeting an image file."
   (if (not (org-element-contents link))
       (org-export-inline-image-p
@@ -952,8 +956,8 @@ if its description is a single link targeting an image file."
 	     (_ t)))
          info t)))))
 
-(defvar +jg-org-html-standalone-image-predicate)
-(defun +jg-org-html-standalone-image-p (element info)
+(defvar org-html-jg-standalone-image-predicate)
+(defun org-html-jg-standalone-image-p (element info)
   "Non-nil if ELEMENT is a standalone image.
 
 INFO is a plist holding contextual information.
@@ -966,7 +970,7 @@ An element or object is a standalone image when
   - its type is `link' and its containing paragraph has no other
     content save white spaces.
 
-Bind `+jg-org-html-standalone-image-predicate' to constrain paragraph
+Bind `org-html-jg-standalone-image-predicate' to constrain paragraph
 further.  For example, to check for only captioned standalone
 images, set it to:
 
@@ -975,9 +979,9 @@ images, set it to:
 		     (`paragraph element)
 		     (`link (org-export-get-parent element)))))
     (and (eq (org-element-type paragraph) 'paragraph)
-	 (or (not (and (boundp '+jg-org-html-standalone-image-predicate)
-                       (fboundp +jg-org-html-standalone-image-predicate)))
-	     (funcall +jg-org-html-standalone-image-predicate paragraph))
+	 (or (not (and (boundp 'org-html-jg-standalone-image-predicate)
+                       (fboundp org-html-jg-standalone-image-predicate)))
+	     (funcall org-html-jg-standalone-image-predicate paragraph))
 	 (catch 'exit
 	   (let ((link-count 0))
 	     (org-element-map (org-element-contents paragraph)
@@ -986,13 +990,13 @@ images, set it to:
 		 (when (pcase (org-element-type obj)
 			 (`plain-text (org-string-nw-p obj))
 			 (`link (or (> (cl-incf link-count) 1)
-				    (not (+jg-org-html-inline-image-p obj info))))
+				    (not (org-html-jg-inline-image-p obj info))))
 			 (_ t))
 		   (throw 'exit nil)))
 	       info nil 'link)
 	     (= link-count 1))))))
 
-(defun +jg-org-html-link (link desc info)
+(defun org-html-jg-link (link desc info)
   "Transcode a LINK object from Org to HTML.
 DESC is the description part of the link, or the empty string.
 INFO is a plist holding contextual information.  See
@@ -1002,7 +1006,7 @@ INFO is a plist holding contextual information.  See
 	 (link-org-files-as-html-maybe
 	  (lambda (raw-path info)
 	    ;; Treat links to `file.org' as links to `file.html', if
-	    ;; needed.  See `+jg-org-html-link-org-files-as-html'.
+	    ;; needed.  See `org-html-jg-link-org-files-as-html'.
 	    (cond
 	     ((and (plist-get info :html-link-org-files-as-html)
 		   (string= ".org"
@@ -1053,13 +1057,13 @@ INFO is a plist holding contextual information.  See
 	   (let* ((parent (org-export-get-parent-element link))
 		  (link (let ((container (org-export-get-parent link)))
 			  (if (and (eq 'link (org-element-type container))
-				   (+jg-org-html-inline-image-p link info))
+				   (org-html-jg-inline-image-p link info))
 			      container
 			    link))))
 	     (and (eq link (org-element-map parent 'link #'identity info t))
 		  (org-export-read-attribute :attr_html parent)))
 	   ;; Also add attributes from link itself.  Currently, those
-	   ;; need to be added programmatically before `+jg-org-html-link'
+	   ;; need to be added programmatically before `org-html-jg-link'
 	   ;; is invoked, for example, by backends building upon HTML
 	   ;; export.
 	   (org-export-read-attribute :attr_html link)))
@@ -1073,7 +1077,7 @@ INFO is a plist holding contextual information.  See
      ((and (plist-get info :html-inline-images)
 	   (org-export-inline-image-p
 	    link (plist-get info :html-inline-image-rules)))
-      (+jg-org-html--format-image path attributes-plist info))
+      (org-html-jg--format-image path attributes-plist info))
      ;; Radio target: Transcode target's contents and use them as
      ;; link's description.
      ((string= type "radio")
@@ -1106,7 +1110,7 @@ INFO is a plist holding contextual information.  See
 			(org-element-property :raw-link link) info))))
 	  ;; Link points to a headline.
 	  (`headline
-	   (let ((href (+jg-org-html--reference destination info))
+	   (let ((href (org-html-jg--reference destination info))
 		 ;; What description to use?
 		 (desc
 		  ;; Case 1: Headline is numbered and LINK has no
@@ -1133,21 +1137,21 @@ INFO is a plist holding contextual information.  See
 	       ;; environment.  Use "ref" or "eqref" macro, depending on user
                ;; preference to refer to those in the document.
                (format (plist-get info :html-equation-reference-format)
-                       (+jg-org-html--reference destination info))
-             (let* ((ref (+jg-org-html--reference destination info))
-                    (+jg-org-html-standalone-image-predicate
+                       (org-html-jg--reference destination info))
+             (let* ((ref (org-html-jg--reference destination info))
+                    (org-html-jg-standalone-image-predicate
                      #'org-html--has-caption-p)
                     (counter-predicate
                      (if (eq 'latex-environment (org-element-type destination))
-                         #'+jg-org-html--math-environment-p
+                         #'org-html-jg--math-environment-p
                        #'org-html--has-caption-p))
                     (number
 		     (cond
 		      (desc nil)
-		      ((+jg-org-html-standalone-image-p destination info)
+		      ((org-html-jg-standalone-image-p destination info)
 		       (org-export-get-ordinal
 			(org-element-map destination 'link #'identity info t)
-			info 'link '+jg-org-html-standalone-image-p))
+			info 'link 'org-html-jg-standalone-image-p))
 		      (t (org-export-get-ordinal
 			  destination info nil counter-predicate))))
                     (desc
@@ -1159,7 +1163,7 @@ INFO is a plist holding contextual information.  See
      ;; Coderef: replace link with the reference name or the
      ;; equivalent line number.
      ((string= type "coderef")
-      (let ((fragment (concat "coderef-" (+jg-org-html-encode-plain-text path))))
+      (let ((fragment (concat "coderef-" (org-html-jg-encode-plain-text path))))
 	(format "<a href=\"#%s\" %s%s>%s</a>"
 		fragment
 		(format "class=\"coderef\" onmouseover=\"CodeHighlightOn(this, \
@@ -1171,12 +1175,12 @@ INFO is a plist holding contextual information.  See
      ;; External link with a description part.
      ((and path desc)
       (format "<a href=\"%s\"%s>%s</a>"
-	      (+jg-org-html-encode-plain-text path)
+	      (org-html-jg-encode-plain-text path)
 	      attributes
 	      desc))
      ;; External link without a description part.
      (path
-      (let ((path (+jg-org-html-encode-plain-text path)))
+      (let ((path (org-html-jg-encode-plain-text path)))
 	(format "<a href=\"%s\"%s>%s</a>" path attributes path)))
      ;; No path, only description.  Try to do something useful.
      (t
@@ -1185,7 +1189,7 @@ INFO is a plist holding contextual information.  See
 ;;-- end links
 
 ;;-- tables
-(defun +jg-org-html-table-cell (table-cell contents info)
+(defun org-html-jg-table-cell (table-cell contents info)
   "Transcode a TABLE-CELL element from Org to HTML.
 CONTENTS is nil.  INFO is a plist used as a communication
 channel."
@@ -1193,8 +1197,8 @@ channel."
 	 (table (org-export-get-parent-table table-cell))
 	 (cell-attrs
 	  (if (not (plist-get info :html-table-align-individual-fields)) ""
-	    (format (if (and (boundp '+jg-org-html-format-table-no-css)
-			     +jg-org-html-format-table-no-css)
+	    (format (if (and (boundp 'org-html-jg-format-table-no-css)
+			     org-html-jg-format-table-no-css)
 			" align=\"%s\"" " class=\"org-%s\"")
 		    (org-export-table-cell-alignment table-cell info)))))
     (when (or (not contents) (string= "" (org-trim contents)))
@@ -1217,7 +1221,7 @@ channel."
 		  contents
 		  (cdr data-tags)))))))
 
-(defun +jg-org-html-table-row (table-row contents info)
+(defun org-html-jg-table-row (table-row contents info)
   "Transcode a TABLE-ROW element from Org to HTML.
 CONTENTS is the contents of the row.  INFO is a plist used as a
 communication channel."
@@ -1264,7 +1268,7 @@ communication channel."
 		      row-close-tag)
 	      (and end-group-p (cdr group-tags))))))
 
-(defun +jg-org-html-table-first-row-data-cells (table info)
+(defun org-html-jg-table-first-row-data-cells (table info)
   "Transcode the first row of TABLE.
 INFO is a plist used as a communication channel."
   (let ((table-row
@@ -1276,7 +1280,7 @@ INFO is a plist used as a communication channel."
     (if (not special-column-p) (org-element-contents table-row)
       (cdr (org-element-contents table-row)))))
 
-(defun +jg-org-html-table--table.el-table (table _info)
+(defun org-html-jg-table--table.el-table (table _info)
   "Format table.el tables into HTML.
 INFO is a plist used as a communication channel."
   (when (eq (org-element-property :type table) 'table.el)
@@ -1293,13 +1297,13 @@ INFO is a plist used as a communication channel."
 	(prog1 (org-trim (buffer-string))
 	  (kill-buffer) )))))
 
-(defun +jg-org-html-table (table contents info)
+(defun org-html-jg-table (table contents info)
   "Transcode a TABLE element from Org to HTML.
 CONTENTS is the contents of the table.  INFO is a plist holding
 contextual information."
   (if (eq (org-element-property :type table) 'table.el)
       ;; "table.el" table.  Convert it using appropriate tools.
-      (+jg-org-html-table--table.el-table table info)
+      (org-html-jg-table--table.el-table table info)
     ;; Standard table.
     (let* ((caption (org-export-get-caption table))
 	   (number (org-export-get-ordinal
@@ -1307,12 +1311,12 @@ contextual information."
 	   (attributes
 	    (org-html--make-attribute-string
 	     (org-combine-plists
-	      (list :id (+jg-org-html--reference table info t))
+	      (list :id (org-html-jg--reference table info t))
 	      (and (not (org-html-html5-p info))
 		   (plist-get info :html-table-attributes))
 	      (org-export-read-attribute :attr_html table))))
 	   (alignspec
-	    (if (bound-and-true-p +jg-org-html-format-table-no-css)
+	    (if (bound-and-true-p org-html-jg-format-table-no-css)
 		"align=\"%s\""
 	      "class=\"org-%s\""))
 	   (table-column-specs
@@ -1334,7 +1338,7 @@ contextual information."
 		    (when (org-export-table-cell-ends-colgroup-p
 			   table-cell info)
 		      "\n</colgroup>"))))
-	       (+jg-org-html-table-first-row-data-cells table info) "\n"))))
+	       (org-html-jg-table-first-row-data-cells table info) "\n"))))
       (format "<table%s>\n%s\n%s\n%s</table>"
 	      (if (equal attributes "") "" (concat " " attributes))
 	      (if (not caption) ""
@@ -1351,7 +1355,7 @@ contextual information."
 ;;-- end tables
 
 ;;-- misc
-(defun +jg-org-html-clock (clock _contents _info)
+(defun org-html-jg-clock (clock _contents _info)
   "Transcode a CLOCK element from Org to HTML.
 CONTENTS is nil.  INFO is a plist used as a communication
 channel."
@@ -1365,32 +1369,32 @@ channel."
 	  (let ((time (org-element-property :duration clock)))
 	    (and time (format " <span class=\"timestamp\">(%s)</span>" time)))))
 
-(defun +jg-org-html-center-block (_center-block contents _info)
+(defun org-html-jg-center-block (_center-block contents _info)
   "Transcode a CENTER-BLOCK element from Org to HTML.
 CONTENTS holds the contents of the block.  INFO is a plist
 holding contextual information."
   (format "<div class=\"org-center\">\n%s</div>" contents))
 
-(defun +jg-org-html-dynamic-block (_dynamic-block contents _info)
+(defun org-html-jg-dynamic-block (_dynamic-block contents _info)
   "Transcode a DYNAMIC-BLOCK element from Org to HTML.
 CONTENTS holds the contents of the block.  INFO is a plist
 holding contextual information.  See `org-export-data'."
   contents)
 
-(defun +jg-org-html-fixed-width (fixed-width _contents _info)
+(defun org-html-jg-fixed-width (fixed-width _contents _info)
   "Transcode a FIXED-WIDTH element from Org to HTML.
 CONTENTS is nil.  INFO is a plist holding contextual information."
   (format "<pre class=\"example\">\n%s</pre>"
-	  (+jg-org-html-do-format-code
+	  (org-html-jg-do-format-code
 	   (org-remove-indentation
 	    (org-element-property :value fixed-width)))))
 
-(defun +jg-org-html-horizontal-rule (_horizontal-rule _contents info)
+(defun org-html-jg-horizontal-rule (_horizontal-rule _contents info)
   "Transcode an HORIZONTAL-RULE  object from Org to HTML.
 CONTENTS is nil.  INFO is a plist holding contextual information."
   (org-html-close-tag "hr" nil info))
 
-(defun +jg-org-html-inlinetask (inlinetask contents info)
+(defun org-html-jg-inlinetask (inlinetask contents info)
   "Transcode an INLINETASK element from Org to HTML.
 CONTENTS holds the contents of the block.  INFO is a plist
 holding contextual information."
@@ -1406,22 +1410,22 @@ holding contextual information."
     (funcall (plist-get info :html-format-inlinetask-function)
 	     todo todo-type priority text tags contents info)))
 
-(defun +jg-org-html-format-inlinetask-default-function
+(defun org-html-jg-format-inlinetask-default-function
     (todo todo-type priority text tags contents info)
   "Default format function for inlinetasks.
-See `+jg-org-html-format-inlinetask-function' for details."
+See `org-html-jg-format-inlinetask-function' for details."
   (format "<div class=\"inlinetask\">\n<b>%s</b>%s\n%s</div>"
-	  (+jg-org-html-format-headline-default-function
+	  (org-html-jg-format-headline-default-function
 	   todo todo-type priority text tags info)
 	  (org-html-close-tag "br" nil info)
 	  contents))
 
-(defun +jg-org-html-line-break (_line-break _contents info)
+(defun org-html-jg-line-break (_line-break _contents info)
   "Transcode a LINE-BREAK object from Org to HTML.
 CONTENTS is nil.  INFO is a plist holding contextual information."
   (concat (org-html-close-tag "br" nil info) "\n"))
 
-(defun +jg-org-html-node-property (node-property _contents _info)
+(defun org-html-jg-node-property (node-property _contents _info)
   "Transcode a NODE-PROPERTY element from Org to HTML.
 CONTENTS is nil.  INFO is a plist holding contextual
 information."
@@ -1430,7 +1434,7 @@ information."
           (let ((value (org-element-property :value node-property)))
             (if value (concat " " value) ""))))
 
-(defun +jg-org-html-planning (planning _contents info)
+(defun org-html-jg-planning (planning _contents info)
   "Transcode a PLANNING element from Org to HTML.
 CONTENTS is nil.  INFO is a plist used as a communication
 channel."
@@ -1445,21 +1449,21 @@ channel."
 	     (format "<span class=\"timestamp-kwd\">%s</span> \
 <span class=\"timestamp\">%s</span> "
 		     string
-		     (+jg-org-html-plain-text (org-timestamp-translate timestamp)
+		     (org-html-jg-plain-text (org-timestamp-translate timestamp)
 					  info))))))
      `((,org-closed-string . ,(org-element-property :closed planning))
        (,org-deadline-string . ,(org-element-property :deadline planning))
        (,org-scheduled-string . ,(org-element-property :scheduled planning)))
      ""))))
 
-(defun +jg-org-html-radio-target (radio-target text info)
+(defun org-html-jg-radio-target (radio-target text info)
   "Transcode a RADIO-TARGET object from Org to HTML.
 TEXT is the text of the target.  INFO is a plist holding
 contextual information."
-  (let ((ref (+jg-org-html--reference radio-target info)))
-    (+jg-org-html--anchor ref text nil info)))
+  (let ((ref (org-html-jg--reference radio-target info)))
+    (org-html-jg--anchor ref text nil info)))
 
-(defun +jg-org-html-special-block (special-block contents info)
+(defun org-html-jg-special-block (special-block contents info)
   "Transcode a SPECIAL-BLOCK element from Org to HTML.
 CONTENTS holds the contents of the block.  INFO is a plist
 holding contextual information."
@@ -1473,7 +1477,7 @@ holding contextual information."
                                     (if class (concat class " " block-type)
                                       block-type)))))
     (let* ((contents (or contents ""))
-	   (reference (+jg-org-html--reference special-block info))
+	   (reference (org-html-jg--reference special-block info))
 	   (a (org-html--make-attribute-string
 	       (if (or (not reference) (plist-member attributes :id))
 		   attributes
@@ -1483,20 +1487,20 @@ holding contextual information."
 	  (format "<%s%s>\n%s</%s>" block-type str contents block-type)
 	(format "<div%s>\n%s\n</div>" str contents)))))
 
-(defun +jg-org-html-statistics-cookie (statistics-cookie _contents _info)
+(defun org-html-jg-statistics-cookie (statistics-cookie _contents _info)
   "Transcode a STATISTICS-COOKIE object from Org to HTML.
 CONTENTS is nil.  INFO is a plist holding contextual information."
   (let ((cookie-value (org-element-property :value statistics-cookie)))
     (format "<code>%s</code>" cookie-value)))
 
-(defun +jg-org-html-target (target _contents info)
+(defun org-html-jg-target (target _contents info)
   "Transcode a TARGET object from Org to HTML.
 CONTENTS is nil.  INFO is a plist holding contextual
 information."
-  (let ((ref (+jg-org-html--reference target info)))
-    (+jg-org-html--anchor ref nil nil info)))
+  (let ((ref (org-html-jg--reference target info)))
+    (org-html-jg--anchor ref nil nil info)))
 
-(defun +jg-org-html-verse-block (_verse-block contents info)
+(defun org-html-jg-verse-block (_verse-block contents info)
   "Transcode a VERSE-BLOCK element from Org to HTML.
 CONTENTS is verse block contents.  INFO is a plist holding
 contextual information."
@@ -1511,7 +1515,7 @@ contextual information."
 		  (re (format "\\(?:%s\\)?[ \t]*\n" (regexp-quote br))))
 	     (replace-regexp-in-string re (concat br "\n") contents)))))
 
-(defun +jg-org-html-final-function (contents _backend info)
+(defun org-html-jg-final-function (contents _backend info)
   "Filter to indent the HTML and convert HTML entities."
   (with-temp-buffer
     (insert contents)
@@ -1521,4 +1525,4 @@ contextual information."
     (buffer-substring-no-properties (point-min) (point-max))))
 ;;-- end misc
 
-(provide '+ox-html-jg-templates)
+(provide 'ox-html-jg-templates)

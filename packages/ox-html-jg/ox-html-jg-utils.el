@@ -2,7 +2,7 @@
 
 ;;-- internal
 
-(defun +jg-org-html--reference (datum info &optional named-only)
+(defun org-html-jg--reference (datum info &optional named-only)
   "Return an appropriate reference for DATUM.
 
 DATUM is an element or a `target' type object.  INFO is the
@@ -32,7 +32,7 @@ targets and targets."
      (t
       (org-export-get-reference datum info)))))
 
-(defun +jg-org-html--wrap-image (contents info &optional caption label)
+(defun org-html-jg--wrap-image (contents info &optional caption label)
   "Wrap CONTENTS string within an appropriate environment for images.
 INFO is a plist used as a communication channel.  When optional
 arguments CAPTION and LABEL are given, use them for caption and
@@ -50,7 +50,7 @@ arguments CAPTION and LABEL are given, use them for caption and
 			"\n<p>%s</p>")
 		      caption)))))
 
-(defun +jg-org-html--format-image (source attributes info)
+(defun org-html-jg--format-image (source attributes info)
   "Return \"img\" tag with given SOURCE and ATTRIBUTES.
 SOURCE is a string specifying the location of the image.
 ATTRIBUTES is a plist, as returned by
@@ -63,7 +63,7 @@ a communication channel."
      (list :src source
            :alt (if (string-match-p
                      (concat "^" org-preview-latex-image-directory) source)
-                    (+jg-org-html-encode-plain-text
+                    (org-html-jg-encode-plain-text
                      (org-find-text-property-in-string 'org-latex-src source))
                   (file-name-nondirectory source)))
      (if (string= "svg" (file-name-extension source))
@@ -71,7 +71,7 @@ a communication channel."
        attributes)))
    info))
 
-(defun +jg-org-html--textarea-block (element)
+(defun org-html-jg--textarea-block (element)
   "Transcode ELEMENT into a textarea block.
 ELEMENT is either a source or an example block."
   (let* ((code (car (org-export-unravel-code element)))
@@ -84,7 +84,7 @@ ELEMENT is either a source or an example block."
 ;;-- end internal
 
 ;;-- table
-(defun +jg-org-html-footnote-section (info)
+(defun org-html-jg-footnote-section (info)
   "Format the footnote section.
 INFO is a plist used as a communication channel."
   (pcase (org-export-collect-footnote-definitions info)
@@ -106,7 +106,7 @@ INFO is a plist used as a communication channel."
 	      ;; a "footpara" class paragraph.
 	      (let ((inline? (not (org-element-map def org-element-all-elements
 				    #'identity nil t)))
-		    (anchor (+jg-org-html--anchor
+		    (anchor (org-html-jg--anchor
 			     (format "fn.%d" n)
 			     n
 			     (format " class=\"footnum\" href=\"#fnr.%d\" role=\"doc-backlink\"" n)
@@ -125,17 +125,17 @@ INFO is a plist used as a communication channel."
 
 ;;-- template building
 
-(defun +jg-org-html--build-meta-info (info)
+(defun org-html-jg--build-meta-info (info)
   "Return meta tags for exported document.
 INFO is a plist used as a communication channel."
-  (let* ((title (+jg-org-html-plain-text
+  (let* ((title (org-html-jg-plain-text
 		 (org-element-interpret-data (plist-get info :title)) info))
 	 ;; Set title to an invisible character instead of leaving it
 	 ;; empty, which is invalid.
 	 (title (if (org-string-nw-p title) title "&lrm;"))
-	 (charset (or (and +jg-org-html-coding-system
+	 (charset (or (and org-html-jg-coding-system
 			   (symbol-name
-			    (coding-system-get +jg-org-html-coding-system
+			    (coding-system-get org-html-jg-coding-system
 					       'mime-charset)))
 		      "iso-8859-1")))
     (concat
@@ -164,27 +164,24 @@ INFO is a plist used as a communication channel."
 
      (mapconcat
       (lambda (args) (apply #'org-html--build-meta-entry args))
-      (delq nil (if (functionp +jg-org-html-meta-tags)
-		    (funcall +jg-org-html-meta-tags info)
-		  +jg-org-html-meta-tags))
+      (delq nil (if (functionp org-html-jg-meta-tags)
+		    (funcall org-html-jg-meta-tags info)
+		  org-html-jg-meta-tags))
       ""))))
 
-(defun +jg-org-html--build-head (info)
+(defun org-html-jg--build-head (info)
   "Return information for the <head>..</head> of the HTML output.
 INFO is a plist used as a communication channel."
   (org-element-normalize-string
    (concat
     (org-element-normalize-string (plist-get info :html-head))
     (org-element-normalize-string (plist-get info :html-head-extra))
-    (when (and (plist-get info :html-htmlized-css-url)
-	       (eq +jg-org-html-htmlize-output-type 'css))
-      (org-html-close-tag "link"
-			  (format "rel=\"stylesheet\" href=\"%s\" type=\"text/css\""
-				  (plist-get info :html-htmlized-css-url))
-			  info))
-    )))
+    (org-html-close-tag "link"
+			"rel=\"stylesheet\" href=\"style.css\" type=\"text/css\""
+			info))
+   ))
 
-(defun +jg-org-html-format-spec (info)
+(defun org-html-jg-format-spec (info)
   "Return format specification for preamble and postamble.
 INFO is a plist used as a communication channel."
   (let ((timestamp-format (plist-get info :html-metadata-timestamp-format)))
@@ -205,12 +202,12 @@ INFO is a plist used as a communication channel."
 					      (file-attributes file))))))
       (?v . ,(or (plist-get info :html-validation-link) "")))))
 
-(defun +jg-org-html--build-pre/postamble (type info)
+(defun org-html-jg--build-pre/postamble (type info)
   "Return document preamble or postamble as a string, or nil.
 TYPE is either `preamble' or `postamble', INFO is a plist used as a
 communication channel."
   (let ((section (plist-get info (intern (format ":html-%s" type))))
-	(spec (+jg-org-html-format-spec info)))
+	(spec (org-html-jg-format-spec info)))
     (when section
       (let ((section-contents
 	     (if (functionp section) (funcall section info)
@@ -265,24 +262,24 @@ communication channel."
 	     (format "<%s id=\"%s\" class=\"%s\">\n"
 		     (nth 1 div)
 		     (nth 2 div)
-		     +jg-org-html--pre/postamble-class)
+		     org-html-jg--pre/postamble-class)
 	     (org-element-normalize-string section-contents)
 	     (format "</%s>\n" (nth 1 div)))))))))
 
-(defun +jg-org-html-inner-template (contents info)
+(defun org-html-jg-inner-template (contents info)
   "Return body of document string after HTML conversion.
 CONTENTS is the transcoded contents string.  INFO is a plist
 holding export options."
   (concat
    ;; Table of contents.
    (let ((depth (plist-get info :with-toc)))
-     (when depth (+jg-org-html-toc depth info)))
+     (when depth (org-html-jg-toc depth info)))
    ;; Document contents.
    contents
    ;; Footnotes section.
-   (+jg-org-html-footnote-section info)))
+   (org-html-jg-footnote-section info)))
 
-(defun +jg-org-html-template (contents info)
+(defun org-html-jg-template (contents info)
   "Return complete document string after HTML conversion.
 CONTENTS is the transcoded contents string.  INFO is a plist
 holding export options."
@@ -297,9 +294,9 @@ holding export options."
        (when (not (or (not decl) (string= "" decl)))
 	 (format "%s\n"
 		 (format decl
-			 (or (and +jg-org-html-coding-system
+			 (or (and org-html-jg-coding-system
                                   ;; FIXME: Use Emacs 22 style here, see `coding-system-get'.
-				  (coding-system-get +jg-org-html-coding-system 'mime-charset))
+				  (coding-system-get org-html-jg-coding-system 'mime-charset))
 			     "iso-8859-1"))))))
    (org-html-doctype info)
    "\n"
@@ -312,8 +309,8 @@ holding export options."
 		  (format " lang=\"%s\"" (plist-get info :language))))
 	   ">\n")
    "<head>\n"
-   (+jg-org-html--build-meta-info info)
-   (+jg-org-html--build-head info)
+   (org-html-jg--build-meta-info info)
+   (org-html-jg--build-head info)
    "</head>\n"
    "<body>\n"
    (let ((link-up (org-trim (plist-get info :html-link-up)))
@@ -323,7 +320,7 @@ holding export options."
 	       (or link-up link-home)
 	       (or link-home link-up))))
    ;; Preamble.
-   (+jg-org-html--build-pre/postamble 'preamble info)
+   (org-html-jg--build-pre/postamble 'preamble info)
    ;; Document contents.
    (let ((div (assq 'content (plist-get info :html-divs))))
      (format "<%s id=\"%s\" class=\"%s\">\n"
@@ -353,7 +350,7 @@ holding export options."
    contents
    (format "</%s>\n" (nth 1 (assq 'content (plist-get info :html-divs))))
    ;; Postamble.
-   (+jg-org-html--build-pre/postamble 'postamble info)
+   (org-html-jg--build-pre/postamble 'postamble info)
    ;; Possibly use the Klipse library live code blocks.
    (when (plist-get info :html-klipsify-src)
      (concat "<script>" (plist-get info :html-klipse-selection-script)
@@ -367,7 +364,7 @@ holding export options."
 ;;-- end template building
 
 ;;-- misc
-(defun +jg-org-html--anchor (id desc attributes info)
+(defun org-html-jg--anchor (id desc attributes info)
   "Format a HTML anchor."
   (let* ((name (and (plist-get info :html-allow-name-attribute-in-anchors) id))
 	 (attributes (concat (and id (format " id=\"%s\"" id))
@@ -375,7 +372,7 @@ holding export options."
 			     attributes)))
     (format "<a%s>%s</a>" attributes (or desc ""))))
 
-(defun +jg-org-html--todo (todo info)
+(defun org-html-jg--todo (todo info)
   "Format TODO keywords into HTML."
   (when todo
     (format "<span class=\"%s %s%s\">%s</span>"
@@ -384,13 +381,13 @@ holding export options."
 	    (org-html-fix-class-name todo)
 	    todo)))
 
-(defun +jg-org-html--priority (priority _info)
+(defun org-html-jg--priority (priority _info)
   "Format a priority into HTML.
 PRIORITY is the character code of the priority or nil.  INFO is
 a plist containing export options."
   (and priority (format "<span class=\"priority\">[%c]</span>" priority)))
 
-(defun +jg-org-html--tags (tags info)
+(defun org-html-jg--tags (tags info)
   "Format TAGS into HTML.
 INFO is a plist containing export options."
   (when tags
@@ -405,4 +402,4 @@ INFO is a plist containing export options."
 
 ;;-- end misc
 
-(provide '+ox-html-jg-utils)
+(provide 'ox-html-jg-utils)

@@ -34,8 +34,8 @@
 
 ;;; Dependencies
 
-(require 'org-macs)
-(org-assert-version)
+;; (require 'org-macs)
+;; (org-assert-version)
 
 (require 'cl-lib)
 (require 'format-spec)
@@ -61,9 +61,9 @@
 
 
 ;;-- internal variables
-(defvar +jg-org-html-format-table-no-css)
+(defvar org-html-jg-format-table-no-css)
 
-(defvar +jg-org-html--pre/postamble-class "status"
+(defvar org-html-jg--pre/postamble-class "status"
   "CSS class used for pre/postamble.")
 
 ;;-- end internal variables
@@ -74,7 +74,7 @@
   :group 'org-export)
 
 ;;-- text-formatting
-(defcustom +jg-org-html-text-markup-alist
+(defcustom org-html-jg-text-markup-alist
   '((bold           . "<b>%s</b>")
     (code           . "<code>%s</code>")
     (italic         . "<i>%s</i>")
@@ -96,18 +96,18 @@ returned as-is."
 		:value-type (string :tag "Format string"))
   :options '(bold code italic strike-through underline verbatim))
 
-(defvar +jg-org-html-protect-char-alist
+(defvar org-html-jg-protect-char-alist
   '(("&" . "&amp;")
     ("<" . "&lt;")
     (">" . "&gt;"))
-  "Alist of characters to be converted by `+jg-org-html-encode-plain-text'.")
+  "Alist of characters to be converted by `org-html-jg-encode-plain-text'.")
 
-(defcustom +jg-org-html-htmlize-font-prefix "org-"
+(defcustom org-html-jg-htmlize-font-prefix "org-"
   "The prefix for CSS class names for htmlize font specifications."
   :group 'jg-org-export-html
   :type 'string)
 
-(defcustom +jg-org-html-htmlize-output-type 'css
+(defcustom org-html-jg-htmlize-output-type 'css
   "Output type to be used by htmlize when formatting code snippets.
 Choices are `css' to export the CSS selectors only,`inline-css'
 to export the CSS attribute values inline in the HTML or nil to
@@ -123,14 +123,14 @@ a style file to define the look of these classes.
 To get a start for your css file, start Emacs session and make sure that
 all the faces you are interested in are defined, for example by loading files
 in all modes you want.  Then, use the command
-`\\[+jg-org-html-htmlize-generate-css]' to extract class definitions."
+`\\[org-html-jg-htmlize-generate-css]' to extract class definitions."
   :group 'jg-org-export-html
   :type '(choice (const css) (const inline-css) (const nil)))
 
 ;;-- end text-formatting
 
 ;;-- indentation
-(defcustom +jg-org-html-indent nil
+(defcustom org-html-jg-indent nil
   "Non-nil means to indent the generated HTML.
 Warning: non-nil may break indentation of source code blocks."
   :group 'jg-org-export-html
@@ -140,7 +140,7 @@ Warning: non-nil may break indentation of source code blocks."
 ;;-- end indentation
 
 ;;-- drawers
-(defcustom +jg-org-html-format-drawer-function (lambda (_name contents) contents)
+(defcustom org-html-jg-format-drawer-function (lambda (_name contents) contents)
   "Function called to format a drawer in HTML code.
 
 The function must accept two parameters:
@@ -157,7 +157,7 @@ The default value simply returns the value of CONTENTS."
 ;;-- end drawers
 
 ;;-- footnotes
-(defcustom +jg-org-html-footnotes-section "<div id=\"footnotes\">
+(defcustom org-html-jg-footnotes-section "<div id=\"footnotes\">
 <h2 class=\"footnotes\">%s: </h2>
 <div id=\"text-footnotes\">
 %s
@@ -170,13 +170,13 @@ by the footnotes themselves."
   :group 'jg-org-export-html
   :type 'string)
 
-(defcustom +jg-org-html-footnote-format "<sup>%s</sup>"
+(defcustom org-html-jg-footnote-format "<sup>%s</sup>"
   "The format for the footnote reference.
 %s will be replaced by the footnote reference itself."
   :group 'jg-org-export-html
   :type 'string)
 
-(defcustom +jg-org-html-footnote-separator "<sup>, </sup>"
+(defcustom org-html-jg-footnote-separator "<sup>, </sup>"
   "Text used to separate footnotes."
   :group 'jg-org-export-html
   :type 'string)
@@ -184,7 +184,7 @@ by the footnotes themselves."
 ;;-- end footnotes
 
 ;;-- headlines
-(defcustom +jg-org-html-toplevel-hlevel 2
+(defcustom org-html-jg-toplevel-hlevel 2
   "The <H> level for level 1 headings in HTML export.
 This is also important for the classes that will be wrapped around headlines
 and outline structure.  If this variable is 1, the top-level headlines will
@@ -195,8 +195,8 @@ document title."
   :group 'jg-org-export-html
   :type 'integer)
 
-(defcustom +jg-org-html-format-headline-function
-  '+jg-org-html-format-headline-default-function
+(defcustom org-html-jg-format-headline-function
+  'org-html-jg-format-headline-default-function
   "Function to format headline text.
 
 This function will be called with six arguments:
@@ -216,7 +216,7 @@ The function result will be used in the section format string."
 ;;-- end headlines
 
 ;;-- html specific
-(defcustom +jg-org-html-allow-name-attribute-in-anchors nil
+(defcustom org-html-jg-allow-name-attribute-in-anchors nil
   "When nil, do not set \"name\" attribute in anchors.
 By default, when appropriate, anchors are formatted with \"id\"
 but without \"name\" attribute."
@@ -225,14 +225,14 @@ but without \"name\" attribute."
   :package-version '(Org . "8.0")
   :type 'boolean)
 
-(defcustom +jg-org-html-self-link-headlines nil
+(defcustom org-html-jg-self-link-headlines nil
   "When non-nil, the headlines contain a hyperlink to themselves."
   :group 'jg-org-export-html
   :package-version '(Org . "9.3")
   :type 'boolean
   :safe #'booleanp)
 
-(defcustom +jg-org-html-prefer-user-labels nil
+(defcustom org-html-jg-prefer-user-labels nil
   "When non-nil use user-defined names and ID over internal ones.
 
 By default, Org generates its own internal ID values during HTML
@@ -253,8 +253,8 @@ used as a reference."
 ;;-- end html specific
 
 ;;-- inline tasks
-(defcustom +jg-org-html-format-inlinetask-function
-  '+jg-org-html-format-inlinetask-default-function
+(defcustom org-html-jg-format-inlinetask-function
+  'org-html-jg-format-inlinetask-default-function
   "Function called to format an inlinetask in HTML code.
 
 The function must accept seven parameters:
@@ -276,7 +276,7 @@ The function should return the string to be exported."
 
 ;;-- latex
 
-(defcustom +jg-org-html-with-latex org-export-with-latex
+(defcustom org-html-jg-with-latex org-export-with-latex
   "Non-nil means process LaTeX math snippets.
 
 When set, the exporter will process LaTeX environments and
@@ -303,7 +303,7 @@ e.g. \"tex:mathjax\".  Allowed values are:
 ;;-- end latex
 
 ;;-- links
-(defcustom +jg-org-html-link-org-files-as-html t
+(defcustom org-html-jg-link-org-files-as-html t
   "Non-nil means make file links to \"file.org\" point to \"file.html\".
 
 When Org mode is exporting an Org file to HTML, links to non-HTML files
@@ -317,7 +317,7 @@ When nil, the links still point to the plain \".org\" file."
 ;;-- end links
 
 ;;-- images
-(defcustom +jg-org-html-inline-images t
+(defcustom org-html-jg-inline-images t
   "Non-nil means inline images into exported HTML pages.
 This is done using an <img> tag.  When nil, an anchor with href is used to
 link to the image."
@@ -326,7 +326,7 @@ link to the image."
   :package-version '(Org . "8.1")
   :type 'boolean)
 
-(defcustom +jg-org-html-inline-image-rules
+(defcustom org-html-jg-inline-image-rules
   `(("file" . ,(regexp-opt '(".jpeg" ".jpg" ".png" ".gif" ".svg" ".webp")))
     ("http" . ,(regexp-opt '(".jpeg" ".jpg" ".png" ".gif" ".svg" ".webp")))
     ("https" . ,(regexp-opt '(".jpeg" ".jpg" ".png" ".gif" ".svg" ".webp"))))
@@ -341,7 +341,7 @@ link's path."
 ;;-- end images
 
 ;;-- src block
-(defcustom +jg-org-html-wrap-src-lines nil
+(defcustom org-html-jg-wrap-src-lines nil
   "If non-nil, wrap individual lines of source blocks in \"code\" elements.
 In this case, add line number in attribute \"data-ox-html-linenr\" when line
 numbers are enabled."
@@ -352,7 +352,7 @@ numbers are enabled."
 ;;-- end src block
 
 ;;-- tables
-(defcustom +jg-org-html-table-default-attributes
+(defcustom org-html-jg-table-default-attributes
   '(:border "2" :cellspacing "0" :cellpadding "6" :rules "groups" :frame "hsides")
   "Default attributes and values which will be used in table tags.
 This is a plist where attributes are symbols, starting with
@@ -365,26 +365,26 @@ When exporting to HTML5, these values will be disregarded."
   :type '(plist :key-type (symbol :tag "Property")
 		:value-type (string :tag "Value")))
 
-(defcustom +jg-org-html-table-header-tags '("<th scope=\"%s\"%s>" . "</th>")
+(defcustom org-html-jg-table-header-tags '("<th scope=\"%s\"%s>" . "</th>")
   "The opening and ending tags for table header fields.
 This is customizable so that alignment options can be specified.
 The first %s will be filled with the scope of the field, either row or col.
 The second %s will be replaced by a style entry to align the field.
-See also the variable `+jg-org-html-table-use-header-tags-for-first-column'.
-See also the variable `+jg-org-html-table-align-individual-fields'."
+See also the variable `org-html-jg-table-use-header-tags-for-first-column'.
+See also the variable `org-html-jg-table-align-individual-fields'."
   :group 'jg-org-export-html
   :type '(cons (string :tag "Opening tag") (string :tag "Closing tag")))
 
-(defcustom +jg-org-html-table-data-tags '("<td%s>" . "</td>")
+(defcustom org-html-jg-table-data-tags '("<td%s>" . "</td>")
   "The opening and ending tags for table data fields.
 This is customizable so that alignment options can be specified.
 The first %s will be filled with the scope of the field, either row or col.
 The second %s will be replaced by a style entry to align the field.
-See also the variable `+jg-org-html-table-align-individual-fields'."
+See also the variable `org-html-jg-table-align-individual-fields'."
   :group 'jg-org-export-html
   :type '(cons (string :tag "Opening tag") (string :tag "Closing tag")))
 
-(defcustom +jg-org-html-table-row-open-tag "<tr>"
+(defcustom org-html-jg-table-row-open-tag "<tr>"
   "The opening tag for table rows.
 This is customizable so that alignment options can be specified.
 Instead of strings, these can be a Lisp function that will be
@@ -401,7 +401,7 @@ The function will be called with these arguments:
 
 For example:
 
-  (setq +jg-org-html-table-row-open-tag
+  (setq org-html-jg-table-row-open-tag
         (lambda (number group-number start-group? end-group-p top? bottom?)
            (cond (top? \"<tr class=\\\"tr-top\\\">\")
                  (bottom? \"<tr class=\\\"tr-bottom\\\">\")
@@ -417,19 +417,19 @@ and the bottom row, and otherwise alternate between \"tr-odd\" and
 		 (string :tag "Specify")
 		 (function)))
 
-(defcustom +jg-org-html-table-row-close-tag "</tr>"
+(defcustom org-html-jg-table-row-close-tag "</tr>"
   "The closing tag for table rows.
 This is customizable so that alignment options can be specified.
 Instead of strings, this can be a Lisp function that will be
 evaluated for each row in order to construct the table row tags.
 
-See documentation of `+jg-org-html-table-row-open-tag'."
+See documentation of `org-html-jg-table-row-open-tag'."
   :group 'jg-org-export-html
   :type '(choice :tag "Closing tag"
 		 (string :tag "Specify")
 		 (function)))
 
-(defcustom +jg-org-html-table-align-individual-fields t
+(defcustom org-html-jg-table-align-individual-fields t
   "Non-nil means attach style attributes for alignment to each table field.
 When nil, alignment will only be specified in the column tags, but this
 is ignored by some browsers (like Firefox, Safari).  Opera does it right
@@ -437,13 +437,13 @@ though."
   :group 'jg-org-export-html
   :type 'boolean)
 
-(defcustom +jg-org-html-table-use-header-tags-for-first-column nil
+(defcustom org-html-jg-table-use-header-tags-for-first-column nil
   "Non-nil means format column one in tables with header tags.
 When nil, also column one will use data tags."
   :group 'jg-org-export-html
   :type 'boolean)
 
-(defcustom +jg-org-html-table-caption-above t
+(defcustom org-html-jg-table-caption-above t
   "When non-nil, place caption string at the beginning of the table.
 Otherwise, place it near the end."
   :group 'jg-org-export-html
@@ -451,7 +451,7 @@ Otherwise, place it near the end."
 ;;-- end tables
 
 ;;-- tags
-(defcustom +jg-org-html-tag-class-prefix ""
+(defcustom org-html-jg-tag-class-prefix ""
   "Prefix to class names for TODO keywords.
 Each tag gets a class given by the tag itself, with this prefix.
 The default prefix is empty because it is nice to just use the keyword
@@ -462,12 +462,12 @@ CSS classes, then this prefix can be very useful."
 ;;-- end tags
 
 ;;-- html file settings
-(defcustom +jg-org-html-extension "html"
+(defcustom org-html-jg-extension "html"
   "The extension for exported HTML files."
   :group 'jg-org-export-html
   :type 'string)
 
-(defcustom +jg-org-html-xml-declaration
+(defcustom org-html-jg-xml-declaration
   '(("html" . "<?xml version=\"1.0\" encoding=\"%s\"?>"))
   "The extension for exported HTML files.
 %s will be replaced with the charset of the exported file.
@@ -482,7 +482,7 @@ This declaration only applies when exporting to XHTML."
 		  (cons (string :tag "Extension")
 			(string :tag "Declaration")))))
 
-(defcustom +jg-org-html-coding-system 'utf-8
+(defcustom org-html-jg-coding-system 'utf-8
   "Coding system for HTML export.
 Use utf-8 as the default value."
   :group 'jg-org-export-html
@@ -490,7 +490,7 @@ Use utf-8 as the default value."
   :package-version '(Org . "8.0")
   :type 'coding-system)
 
-(defcustom +jg-org-html-doctype "xhtml-strict"
+(defcustom org-html-jg-doctype "xhtml-strict"
   "Document type definition to use for exported HTML files.
 Can be set with the in-buffer HTML_DOCTYPE property or for
 publishing, with :html-doctype."
@@ -502,7 +502,7 @@ publishing, with :html-doctype."
 	 (mapcar (lambda (x) `(const ,(car x))) org-html-doctype-alist)
 	 '((string :tag "Custom doctype" ))))
 
-(defcustom +jg-org-html-html5-fancy nil
+(defcustom org-html-jg-html5-fancy nil
   "Non-nil means using new HTML5 elements.
 This variable is ignored for anything other than HTML5 export."
   :group 'jg-org-export-html
@@ -510,7 +510,7 @@ This variable is ignored for anything other than HTML5 export."
   :package-version '(Org . "8.0")
   :type 'boolean)
 
-(defcustom +jg-org-html-viewport '((width "device-width")
+(defcustom org-html-jg-viewport '((width "device-width")
 			       (initial-scale "1")
 			       (minimum-scale "")
 			       (maximum-scale "")
@@ -559,11 +559,11 @@ https://developer.mozilla.org/en-US/docs/Mozilla/Mobile/Viewport_meta_tag"
 ;;-- end html file settings
 
 ;;-- metadata
-(defcustom +jg-org-html-meta-tags #'org-html-meta-tags-default
+(defcustom org-html-jg-meta-tags #'org-html-meta-tags-default
   "Form that is used to produce meta tags in the HTML head.
 
 Can be a list where each item is a list of arguments to be passed
-to `+jg-org-html--build-meta-entry'.  Any nil items are ignored.
+to `org-html-jg--build-meta-entry'.  Any nil items are ignored.
 
 Also accept a function which gives such a list when called with a
 single argument (INFO, a communication plist)."
@@ -579,7 +579,7 @@ single argument (INFO, a communication plist)."
 ;;-- end metadata
 
 ;;-- content settings
-(defcustom +jg-org-html-container-element "div"
+(defcustom org-html-jg-container-element "div"
   "HTML element to use for wrapping top level sections.
 Can be set with the in-buffer HTML_CONTAINER property or for
 publishing, with :html-container.
@@ -591,7 +591,7 @@ org-info.js for your website."
   :package-version '(Org . "8.0")
   :type 'string)
 
-(defcustom +jg-org-html-content-class "content"
+(defcustom org-html-jg-content-class "content"
   "CSS class name to use for the top level content wrapper.
 Can be set with the in-buffer HTML_CONTENT_CLASS property or for
 publishing, with :html-content-class."
@@ -600,7 +600,7 @@ publishing, with :html-content-class."
   :package-version '(Org . "9.5")
   :type 'string)
 
-(defcustom +jg-org-html-divs
+(defcustom org-html-jg-divs
   '((preamble  "div" "preamble")
     (content   "div" "content")
     (postamble "div" "postamble"))
@@ -624,7 +624,7 @@ org-info.js for your website."
 	       (list :tag "Postamble" (const :format "" postamble)
 		     (string :tag "     id") (string :tag "element"))))
 
-(defconst +jg-org-html-checkbox-types
+(defconst org-html-jg-checkbox-types
   '((unicode .
              ((on . "&#x2611;") (off . "&#x2610;") (trans . "&#x2610;")))
     (ascii .
@@ -647,9 +647,9 @@ The choices are:
 Note that only the ascii characters implement tri-state
 checkboxes.  The other two use the `off' checkbox for `trans'.")
 
-(defcustom +jg-org-html-checkbox-type 'ascii
+(defcustom org-html-jg-checkbox-type 'ascii
   "The type of checkboxes to use for HTML export.
-See `+jg-org-html-checkbox-types' for the values used for each
+See `org-html-jg-checkbox-types' for the values used for each
 option."
   :group 'jg-org-export-html
   :version "24.4"
@@ -659,7 +659,7 @@ option."
 	  (const :tag "Unicode characters" unicode)
 	  (const :tag "HTML checkboxes" html)))
 
-(defcustom +jg-org-html-metadata-timestamp-format "%Y-%m-%d %a %H:%M"
+(defcustom org-html-jg-metadata-timestamp-format "%Y-%m-%d %a %H:%M"
   "Format used for timestamps in preamble, postamble and metadata.
 See `format-time-string' for more information on its components."
   :group 'jg-org-export-html
@@ -669,14 +669,14 @@ See `format-time-string' for more information on its components."
 ;;-- end content settings
 
 ;;-- postamble
-(defcustom +jg-org-html-postamble 'auto
+(defcustom org-html-jg-postamble 'auto
   "Non-nil means insert a postamble in HTML export.
 
 When set to `auto', check against the
 `org-export-with-author/email/creator/date' variables to set the
 content of the postamble.  When set to a string, use this string
 as the postamble.  When t, insert a string as defined by the
-formatting string in `+jg-org-html-postamble-format'.
+formatting string in `org-html-jg-postamble-format'.
 
 When set to a function, apply this function and insert the
 returned string.  The function takes the property list of export
@@ -691,7 +691,7 @@ precedence over this variable."
 		 (string :tag "Custom formatting string")
 		 (function :tag "Function (must return a string)")))
 
-(defcustom +jg-org-html-postamble-format
+(defcustom org-html-jg-postamble-format
   '(("en" "<p class=\"author\">Author: %a (%e)</p>
 <p class=\"date\">Date: %d</p>
 <p class=\"creator\">%c</p>
@@ -709,8 +709,8 @@ postamble itself.  This format string can contain these elements:
   %a stands for the author's name.
   %e stands for the author's email.
   %d stands for the date.
-  %c will be replaced by `+jg-org-html-creator-string'.
-  %v will be replaced by `+jg-org-html-validation-link'.
+  %c will be replaced by `org-html-jg-creator-string'.
+  %v will be replaced by `org-html-jg-validation-link'.
   %T will be replaced by the export time.
   %C will be replaced by the last modification time.
 
@@ -721,14 +721,14 @@ like that: \"%%\"."
 	  (list (string :tag "Language")
 		(string :tag "Format string"))))
 
-(defcustom +jg-org-html-validation-link
+(defcustom org-html-jg-validation-link
   "<a href=\"https://validator.w3.org/check?uri=referer\">Validate</a>"
   "Link to HTML validation service."
   :group 'jg-org-export-html
   :package-version '(Org . "9.4")
   :type 'string)
 
-(defcustom +jg-org-html-creator-string
+(defcustom org-html-jg-creator-string
   (format "<a href=\"https://www.gnu.org/software/emacs/\">Emacs</a> %s (<a href=\"https://orgmode.org\">Org</a> mode %s)"
 	  emacs-version
 	  (if (fboundp 'org-version) (org-version) "unknown version"))
@@ -742,12 +742,12 @@ This option can also be set on with the CREATOR keyword."
 ;;-- end postamble
 
 ;;-- preamble
-(defcustom +jg-org-html-preamble t
+(defcustom org-html-jg-preamble t
   "Non-nil means insert a preamble in HTML export.
 
 When t, insert a string as defined by the formatting string in
-`+jg-org-html-preamble-format'.  When set to a string, use this
-formatting string instead (see `+jg-org-html-postamble-format' for an
+`org-html-jg-preamble-format'.  When set to a string, use this
+formatting string instead (see `org-html-jg-postamble-format' for an
 example of such a formatting string).
 
 When set to a function, apply this function and insert the
@@ -762,7 +762,7 @@ precedence over this variable."
 		 (string :tag "Custom formatting string")
 		 (function :tag "Function (must return a string)")))
 
-(defcustom +jg-org-html-preamble-format '(("en" ""))
+(defcustom org-html-jg-preamble-format '(("en" ""))
   "Alist of languages and format strings for the HTML preamble.
 
 The first element of each list is the language code, as used for
@@ -776,39 +776,39 @@ preamble itself.  This format string can contain these elements:
   %a stands for the author's name.
   %e stands for the author's email.
   %d stands for the date.
-  %c will be replaced by `+jg-org-html-creator-string'.
-  %v will be replaced by `+jg-org-html-validation-link'.
+  %c will be replaced by `org-html-jg-creator-string'.
+  %v will be replaced by `org-html-jg-validation-link'.
   %T will be replaced by the export time.
   %C will be replaced by the last modification time.
 
 If you need to use a \"%\" character, you need to escape it
 like that: \"%%\".
 
-See the default value of `+jg-org-html-postamble-format' for an
+See the default value of `org-html-jg-postamble-format' for an
 example."
   :group 'jg-org-export-html
   :type '(repeat
 	  (list (string :tag "Language")
 		(string :tag "Format string"))))
 
-(defcustom +jg-org-html-link-up ""
+(defcustom org-html-jg-link-up ""
   "Where should the \"UP\" link of exported HTML pages lead?"
   :group 'jg-org-export-html
   :type '(string :tag "File or URL"))
 
-(defcustom +jg-org-html-link-home ""
+(defcustom org-html-jg-link-home ""
   "Where should the \"HOME\" link of exported HTML pages lead?"
   :group 'jg-org-export-html
   :type '(string :tag "File or URL"))
 
-(defcustom +jg-org-html-link-use-abs-url nil
+(defcustom org-html-jg-link-use-abs-url nil
   "Should we prepend relative links with HTML_LINK_HOME?"
   :group 'jg-org-export-html
   :version "24.4"
   :package-version '(Org . "8.1")
   :type 'boolean)
 
-(defcustom +jg-org-html-home/up-format
+(defcustom org-html-jg-home/up-format
   "<div id=\"org-div-home-and-up\">
  <a accesskey=\"h\" href=\"%s\"> UP </a>
  |
@@ -816,8 +816,8 @@ example."
 </div>"
   "Snippet used to insert the HOME and UP links.
 This is a format string, the first %s will receive the UP link,
-the second the HOME link.  If both `+jg-org-html-link-up' and
-`+jg-org-html-link-home' are empty, the entire snippet will be
+the second the HOME link.  If both `org-html-jg-link-up' and
+`org-html-jg-link-home' are empty, the entire snippet will be
 ignored."
   :group 'jg-org-export-html
   :type 'string)
@@ -826,7 +826,7 @@ ignored."
 
 ;;;; Todos
 
-(defcustom +jg-org-html-todo-kwd-class-prefix ""
+(defcustom org-html-jg-todo-kwd-class-prefix ""
   "Prefix to class names for TODO keywords.
 Each TODO keyword gets a class given by the keyword itself, with this prefix.
 The default prefix is empty because it is nice to just use the keyword
@@ -835,4 +835,4 @@ CSS classes, then this prefix can be very useful."
   :group 'jg-org-export-html
   :type 'string)
 
-(provide '+ox-html-jg-vars)
+(provide 'ox-html-jg-vars)

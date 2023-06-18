@@ -538,8 +538,8 @@ return the next older index"
                 (wr-max        (persp-parameter 'window-ring-max))
                 (wr-scratch    (persp-parameter 'window-ring-scratch))
                 (new-focus (if (< 1 arg)
-                               (window-ring-older (ring-length wr-actual) curr-focus wr-loop)
-                             (window-ring-newer (ring-length wr-actual) curr-focus wr-loop)))
+                               (window-ring-older (ring-length wr-actual) wr-focus wr-loop)
+                             (window-ring-newer (ring-length wr-actual) wr-focus wr-loop)))
                 )
            (when new-focus
              (modify-persp-parameters `((window-ring-focus . ,new-focus)))

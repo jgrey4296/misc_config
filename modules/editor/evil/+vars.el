@@ -28,7 +28,6 @@
                              ((modulep! :emacs undo) 'undo-fu)
                              ((> emacs-major-version 27) 'undo-redo))
 
-      evil-embrace-show-help-p nil
 
       evil-snipe-smart-case t
       evil-snipe-scope 'line
@@ -53,29 +52,31 @@
 
 ;;-- end evil-escape
 
-;;-- evil-surround
+;;-- evil-surround and embrace
 ;; later modified by evil-embrace
-(setq-default evil-surround-pairs-alist
-  '((?\( . ("( " . " )"))
-    (?\[ . ("[ " . " ]"))
-    (?\{ . ("{ " . " }"))
+(setq-default evil-embrace-show-help-p t
+              embrace-show-help-p t
+              evil-surround-pairs-alist
+              '((?\( . ("( " . " )"))
+                (?\[ . ("[ " . " ]"))
+                (?\{ . ("{ " . " }"))
 
-    (?\) . ("(" . ")"))
-    (?\] . ("[" . "]"))
-    (?\} . ("{" . "}"))
+                (?\) . ("(" . ")"))
+                (?\] . ("[" . "]"))
+                (?\} . ("{" . "}"))
 
-    (?# . ("#{" . "}"))
-    (?b . ("(" . ")"))
-    (?p . ("(" . ")"))
-    (?B . ("{" . "}"))
-    (?> . ("<" . ">"))
-    (?t . evil-surround-read-tag)
-    (?< . evil-surround-read-tag)
-    (?f . evil-surround-function)
-    (?F . evil-surround-prefix-function)
-    )
-)
-;;-- end evil-surround
+                (?# . ("#{" . "}"))
+                (?b . ("(" . ")"))
+                (?p . ("(" . ")"))
+                (?B . ("{" . "}"))
+                (?> . ("<" . ">"))
+                (?t . evil-surround-read-tag)
+                (?< . evil-surround-read-tag)
+                (?f . evil-surround-function)
+                (?F . evil-surround-prefix-function)
+                )
+              )
+;;-- end evil-surround and embrace
 
 ;;-- specs
 

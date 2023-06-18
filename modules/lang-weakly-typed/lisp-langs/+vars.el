@@ -165,6 +165,8 @@ See `+emacs-lisp-non-package-mode' for details.")
                       ("Melpa" . "https://melpa.org/#/")
                       ("Doom"  . "https://github.com/doomemacs/doomemacs")
                       ("Yasnippet Manual" . "https://joaotavora.github.io/yasnippet/snippet-development.html")
+                      ("Evil docs" . "https://evil.readthedocs.io/en/latest/settings.html")
+                      ("Evil Guide" . "https://github.com/noctuid/evil-guide")
                       )
                     '(racket-mode
                       ("Racket Docs" . "https://docs.racket-lang.org/")

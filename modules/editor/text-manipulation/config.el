@@ -164,3 +164,5 @@
 (use-package! writegood-mode
   :hook (org-mode markdown-mode rst-mode asciidoc-mode latex-mode LaTeX-mode)
   )
+
+(use-package! embrace :defer t)

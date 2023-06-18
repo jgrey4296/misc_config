@@ -88,47 +88,56 @@
       )
 
 (map! :map jg-binding-change-map
+      :prefix ("S" . "Surround")
+      "d" #'evil-surround-delete
+      "c" #'evil-surround-change
+      "l" #'+jg-surround-list
+      )
+
+(map! :map jg-binding-change-map
       :desc "split line"                  "RET" #'electric-newline-and-maybe-indent
       :desc "set buffer coding"           "0"   #'set-buffer-file-coding-system
       :desc "indent"                      "TAB" #'indent-region
 
-      :desc "Align"                       "a" #'align-regexp
-      :desc "Comment"                     "c" #'evilnc-comment-operator
-      :desc "Surround"                    "s" #'evil-surround-region
+      :desc "Ensure commas" ","                 #'+jg-surround-ensure-commas
 
-      :desc "downcase"                    "j" #'evil-downcase
-      :desc "UpperCase"                   "k" #'evil-upcase
-      :desc "Decr"                        "J" #'+jg-text-dec-num
-      :desc "Incr"                        "K" #'+jg-text-inc-num
-      :desc "Shift Left"                  "h" #'+jg-text-shift-left
-      :desc "Shift Right"                 "l" #'+jg-text-shift-right
-      :desc "Title Case"                  "t" #'+jg-text-title-case-op
+      :desc "Align"                       "a"   #'align-regexp
+      :desc "Comment"                     "c"   #'evilnc-comment-operator
+      :desc "Surround"                    "s"   #'evil-surround-region
+
+      :desc "downcase"                    "j"   #'evil-downcase
+      :desc "UpperCase"                   "k"   #'evil-upcase
+      :desc "Decr"                        "J"   #'+jg-text-dec-num
+      :desc "Incr"                        "K"   #'+jg-text-inc-num
+      :desc "Shift Left"                  "h"   #'+jg-text-shift-left
+      :desc "Shift Right"                 "l"   #'+jg-text-shift-right
+      :desc "Title Case"                  "t"   #'+jg-text-title-case-op
 
       (:prefix ("w" . "Words")
-       :desc "inflection"                "i" #'evil-operator-string-inflection
-       :desc "Rotate"                    "r" #'Rotate-Text
+       :desc "inflection"                "i"    #'evil-operator-string-inflection
+       :desc "Rotate"                    "r"    #'Rotate-Text
        )
 
       (:prefix ("e" . "encode")
-       :desc "Rot13"                       "r" #'evil-rot13
-       :desc "Encode url"                  "u" #'+evil:url-encode
-       :desc "Decode url"                  "U" #'+evil:url-decode
-       :desc "ENCRYPT"                     "e" #'+jg-text-encrypt-region
-       :desc "DECRYPT"                     "E" #'+jg-text-decrypt-region
+       :desc "Rot13"                       "r"  #'evil-rot13
+       :desc "Encode url"                  "u"  #'+evil:url-encode
+       :desc "Decode url"                  "U"  #'+evil:url-decode
+       :desc "ENCRYPT"                     "e"  #'+jg-text-encrypt-region
+       :desc "DECRYPT"                     "E"  #'+jg-text-decrypt-region
        )
 
       (:prefix ("i" . "lines")
-       :desc "Wrap Line"                  "w" #'evil-fill
-       :desc "Fill"                       "W" #'evil-fill-and-move
-       :desc "Combine lines"              "c" #'evil-join-whitespace
-       :desc "Justify"                    "j" #'justify-current-line
+       :desc "Wrap Line"                  "w"   #'evil-fill
+       :desc "Fill"                       "W"   #'evil-fill-and-move
+       :desc "Combine lines"              "c"   #'evil-join-whitespace
+       :desc "Justify"                    "j"   #'justify-current-line
        )
 
       (:prefix ("o" . "text")
-       :desc "Cycle Spacing"               "." #'cycle-spacing
-       :desc "Exchange"                    "x" #'evil-exchange
-       :desc "Split on distance"           "s" #'+jg-text-split-on-leading-char
-       :desc "Title Case"                  "t" #'+jg-text-title-case-op
+       :desc "Cycle Spacing"               "."  #'cycle-spacing
+       :desc "Exchange"                    "x"  #'evil-exchange
+       :desc "Split on distance"           "s"  #'+jg-text-split-on-leading-char
+       :desc "Title Case"                  "t"  #'+jg-text-title-case-op
        )
 
       )

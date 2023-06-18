@@ -10,5 +10,6 @@
 (package! shell-pop)
 (package! timeline-mode :recipe `(:local-repo ,(expand-file-name "packages/major-modes/timeline-mode" doom-user-dir)))
 (package! writegood-mode)
+(package! embrace)
 
 ;; (package! objed)

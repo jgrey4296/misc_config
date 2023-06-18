@@ -1,6 +1,7 @@
 ;;; +nav.el -*- lexical-binding: t; -*-
 ;; Customisations of Conda navigation
 
+;;;###autoload
 (defun +jg-conda-pop-to-xref (result)
   (if (stringp result)
       (message result)

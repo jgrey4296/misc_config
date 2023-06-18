@@ -39,7 +39,7 @@
       :desc "Refile to Unsourced" "U"     #'+jg-bibtex-refile-to-unsourced
       :desc "Scholar Search"      "s"     #'+jg-bibtex-google-scholar
       :desc "Toggle Watchers"     "W"     #'+jg-bibtex-suppress-watchers
-      :desc "Update from DOI"     "u"     (cmd! (doi-utils-update-bibtex-entry-from-doi (org-ref-bibtex-entry-doi)))
+      :desc "Update from DOI"     "u"     #'+jg-bibtex-update-entry
       )
 (map! :map bibtex-mode-map ;; copy
       :after bibtex

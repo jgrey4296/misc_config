@@ -1,66 +1,4 @@
-;;; +nav.el -*- lexical-binding: t; -*-
-;; Customisations of Conda navigation
-
-;;;###autoload
-(defun +jg-conda-pop-to-xref (result)
-  (if (stringp result)
-      (message result)
-    (let* ((window-ring-suppress-adding t)
-           (xrefs (anaconda-mode-make-xrefs result))
-           (marker (save-excursion (xref-location-marker (xref-item-location (cl-first xrefs)))))
-           (buf (marker-buffer marker))
-           )
-      (+popup-buffer buf)
-      (with-current-buffer buf
-        (xref--goto-char marker))
-      )
-    )
-  )
-
-;;;###autoload
-(defun +jg-conda-find-defs ()
-  (interactive)
-  (anaconda-mode-call "infer" #'+jg-conda-pop-to-xref)
-  )
-
-;;;###autoload
-(defun +jg-conda-show-doc ()
-  (interactive)
-  (anaconda-mode-call "show_doc" #'+jg-conda-show-doc-callback)
-  )
-
-;;;###autoload
-(defun +jg-conda-show-doc-callback (result)
-  (if (> (length result) 0)
-      (+popup-buffer (anaconda-mode-documentation-view result))
-    (message "No documentation available"))
-  )
-
-;;;###autoload
-(defun +jg-conda-find-assignments ()
-  (interactive)
-  (anaconda-mode-call
-   "goto"
-   #'(lambda (result)
-     (anaconda-mode-show-xrefs result nil "No assignments found")))
-  )
-
-;;;###autoload
-(defun +jg-conda-find-references ()
-  (interactive)
-  (anaconda-mode-call
-   "get_references"
-   #'(lambda (result)
-     (anaconda-mode-show-xrefs result nil "No references found")))
-)
-
-;;;###autoload
-(defun +jg-conda-eldoc ()
-  (interactive)
-  (anaconda-mode-call
-   "eldoc"
-   #'anaconda-mode-eldoc-callback)
-  )
+;;; navigation.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
 (defun +jg-python-select-defun ()
@@ -194,52 +132,26 @@
     )
   )
 
-;;;###autoload
-(defun +jg-python-related-files-fn (path)
-  " Provide projectile with various :kinds of related file "
-  (let* ((root (projectile-project-root))
-         (fbase   (f-base path))
-         (fname   (f-filename path))
-         (fparent (f-parent path))
+;;;###autoload (autoload 'related-files:jg-python-project "lang-weakly-typed/python/autoload/navigation.el" nil t)
+(make-related! jg-python-project
+               :files ((:impl (f-join root fparent2 (s-replace "test_" "" fname)) :when is-test)
+                       (:test (f-join fparent "__tests" (concat "test_" fname))   :when (not is-test))
 
-         (doot-toml  (f-join root "doot.toml"))
-         (tasks-file (f-join root "doot_tasks.toml"))
-         (tasks-dir  (f-join root "doot_tasks"))
-         (project    (f-join root "pyproject.toml"))
-         (log-file   (f-join root (concat "log." fbase)))
-
-         (impl-file  (f-join root (f-parent fparent) (s-replace "test_" "" fname)))
-         (test-file  (f-join root fparent "__tests" (concat "test_" fname)))
-         (init-file  (f-join root fparent "__init__.py"))
-         (error-file (f-join root (car (f-split path)) "errors" (concat fbase "_errors.py")))
-
-         (is-test      (s-matches? "^test_" fname))
-         (is-dooter    (s-matches? "dooter.py" fname))
-         (is-doot-toml (s-matches? "doot.toml" fname))
-         )
-    (append (when (and is-test (f-exists? impl-file))
-              (list :impl impl-file))
-            (when (and (not is-test) (f-exists? test-file))
-              (list :test test-file))
-
-            (when (f-exists? doot-toml)
-              (list :config doot-toml))
-            (when (f-exists? tasks-file)
-              (list :tasks tasks-file))
-            (when (f-exists? tasks-dir)
-              (list :tasks tasks-dir))
-
-            (when (f-exists? project)
-              (list :pyproject project))
-            (when (f-exists? init-file)
-              (list :init-py init-file))
-            (when (f-exists? log-file)
-              (list :log log-file))
-            (when (f-exists? error-file)
-              (list :errors error-file))
-            )
-    )
-  )
+                       (:initpy (f-join fparent "__init__.py"))
+                       (:doot "doot.toml")
+                       (:errors (f-join src "errors")    :when (f-exists? (f-join root src "errors")))
+                       (:errors (f-join src "errors.py") :when (f-exists? (f-join root src "errors.py")))
+                       ;; TODO (:docs)
+                       (:log log-file                    :when (f-exists? log-file))
+                       )
+               :tests ((is-test (s-matches? "^test_" fname))
+                       (is-dooter    (s-matches? "dooter.py" fname))
+                       (is-doot-toml (s-matches? "doot.toml" fname))
+                       )
+               :binds ((src (f-filename root))
+                       (log-file (f-join root (concat "log." fname)))
+                       )
+               )
 
 ;;;###autoload
 (defun +jg-python-outline-level ()

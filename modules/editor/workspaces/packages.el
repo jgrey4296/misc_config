@@ -7,3 +7,4 @@
 (package! counsel-projectile)
 (package! projectile)
 (package! neotree)
+(package! related-files :recipe `(:local-repo ,(expand-file-name "packages/misc/related-files" doom-user-dir)))

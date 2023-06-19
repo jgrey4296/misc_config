@@ -10,8 +10,12 @@
   )
 
 (defun +jg-projects-find-related-directory ()
-  (when (eq (projectile-project-type) 'jg-toml-project)
-    (message "Finding Related Directories")
+  (message "Finding Related Directories")
+  (let ((root (projectile-project-root))
+        (proj-type (projectile-project-type))
+        (proj (alist-get (projectile-project-type) projectile-project-types))
+        )
 
     )
   )
+)

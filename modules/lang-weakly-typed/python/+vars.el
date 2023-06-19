@@ -349,6 +349,7 @@
                       ("xsdata-plantuml"   . "https://github.com/tefra/xsdata-plantuml")
                       ("z3"                . "https://github.com/Z3Prover/z3")
                       ("zlib"              . "https://docs.python.org/3/library/zlib.html")
+                      ("Martin Heinz"      . "https://martinheinz.dev/")
                      )
                     '(conf-mode
                      ("Setuptools" . "https://setuptools.readthedocs.io/en/latest/userguide/index.html")

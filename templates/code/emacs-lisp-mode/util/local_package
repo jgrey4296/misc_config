@@ -4,4 +4,4 @@
 # key:  local_package
 # group :
 # --
-(package! $1 :recipe `(:local-repo "$2"))$0
+(package! $1 :recipe `(:local-repo ,(expand-file-name "packages/$0" doom-user-dir)))

@@ -22,6 +22,10 @@
 (defvar-local palette-mode-map
   (make-sparse-keymap))
 
+;; https://gka.github.io/palettes/
+;; https://www.whocanuse.com/
+
+
 ;; List of '(regex (groupnum "face")+)
 (defconst palette-font-lock-keywords
   (list)

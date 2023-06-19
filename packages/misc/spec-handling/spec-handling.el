@@ -19,6 +19,8 @@
 
 (defconst spec-handling-symbol-separator "-")
 
+(defconst spec-handling-doc-str "Macro-Generated spec application fn for: %s\n from: %s\nArgs: (Sorted %s) (loop kw: %s)")
+
 (defun unquote! (val)
   (if (and (consp val) (memq (car val) '(quote function)))
       (cadr val)
@@ -139,7 +141,7 @@ return the generated feature name of this spec type
         (defvar ,table-name (make-hash-table :test 'equal),(format "Macro generated hash-table to store specs for %s" type ))
         (fset (function ,reapply-name)
               (lambda (&optional dry)
-                ,(format "Macro-Generated spec application fn for: %s\n from: %s\nArgs: (Sorted %s) (loop kw: %s)" type fname sorted loop)
+                ,(format spec-handling-doc-str type fname sorted loop)
                 (interactive)
                 (let ((,vals (cl-loop for key being the hash-keys of ,table-name
                                       using (hash-values val)

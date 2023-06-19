@@ -14,7 +14,9 @@
   (cl-loop for file in files
            do
            (dlog! "Deferred Loading: %s : %s" dir file)
-           (load (file-name-concat dir file) nil t)
+           (let ((fname (file-name-concat dir file)))
+             (load fname nil (file-exists-p (concat fname ".el")))
+             )
            )
   )
 

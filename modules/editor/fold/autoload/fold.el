@@ -54,7 +54,6 @@
      (end-of-line)
      ,@body))
 
-
 ;;
 ;;; Commands
 
@@ -106,8 +105,6 @@ Targets `vimmish-fold', `hideshow' and `outline' folds."
       (hs-life-goes-on (hs-show-all))
       (outline-show-all))))
 
-
-
 ;;;###autoload
 (defun +fold/close-all (&optional level)
   "Close folds at LEVEL (or all folds if LEVEL is nil)."
@@ -151,3 +148,15 @@ Targets `vimmish-fold', `hideshow' and `outline' folds."
   "Jump to the previous vimish fold, outline heading or folded region."
   (interactive "p")
   (+fold/next (- count)))
+
+
+;;;###autoload
+(defun +jg-fold/debug ()
+  (interactive)
+  (message "Using Fold Spec: %s" (cl-loop for spec in evil-fold-list
+                                          if (evil--mode-p (ensure-list (caar spec)))
+                                          return spec
+                                          else do '(nil)
+                                          )
+           )
+  )

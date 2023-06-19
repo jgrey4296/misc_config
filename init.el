@@ -8,6 +8,9 @@
  :config bindings disabled help search ui
  :completion company ivy helm
 
+ ;; :experimentation
+
+
  :editor format
  :editor char-insert fold navigation tagging text-manipulation
  :editor fold snippets lookup workspaces diff undo

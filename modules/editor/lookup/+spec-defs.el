@@ -20,7 +20,7 @@
 
 (spec-handling-new! lookup-regular nil :loop 'hook
                     ;; Val : alist of (name . url)
-                    (setq-local lookup-regular-targets val)
+                    (setq-local lookup-regular-targets (append lookup-regular-targets val))
                     )
 
 (spec-handling-new! docsets nil :loop 'hook

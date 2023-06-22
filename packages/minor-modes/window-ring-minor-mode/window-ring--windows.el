@@ -1,5 +1,8 @@
 ;;; window-ring--windows.el -*- lexical-binding: t; -*-
 
+(eval-when-compile
+  (require 'window-ring--macros))
+
 (defun window-ring-reset-columns (&optional arg)
   (interactive "p")
   (window-ring-setup-columns arg t)
@@ -10,7 +13,7 @@
     if SOFT then don't clear the window ring "
   (interactive "pi")
   (persp-delete-other-windows)
-  (mapcar (-rpartial #'window-ring-claim-window t) (funcall window-ring-column-fn arg soft))
+  (mapc (-rpartial #'window-ring-claim-window t) (funcall window-ring-column-fn arg soft))
 
   (unless soft
     ;; clear ring

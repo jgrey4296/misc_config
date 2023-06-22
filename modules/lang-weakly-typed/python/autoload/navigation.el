@@ -1,5 +1,7 @@
 ;;; navigation.el -*- lexical-binding: t; -*-
 
+(require 'related-files)
+
 ;;;###autoload
 (defun +jg-python-select-defun ()
   (interactive)

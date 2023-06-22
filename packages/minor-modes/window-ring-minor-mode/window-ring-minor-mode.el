@@ -15,12 +15,7 @@
 
 ;; Add-to-list most-recent/oldest
 
-(when load-file-name
-  (add-to-list 'load-path (file-name-directory load-file-name)))
-
-(require 'evil)
 (require 'persp-mode)
-(require 'cl-lib)
 (require 'window-ring--macros)
 (require 'window-ring--util)
 (require 'window-ring--edit)
@@ -29,8 +24,6 @@
 (require 'window-ring--control)
 (require 'window-ring--windows)
 
-(defalias 'window-ring--get (symbol-function 'ring-ref))
-(defalias 'window-ring--length (symbol-function 'ring-length))
 
 ;;-- vars
 
@@ -52,10 +45,12 @@
 
 ;;-- mode
 
+;;;###autoload
 (define-minor-mode window-ring-minor-mode
   "A Minor Mode for easy control of a 3-ple view of a ring of buffers"
   :lighter "Window-Ring"
   :global t
+  :group 'window-ring
   (add-to-list 'persp-created-functions #'window-ring-create-persp-fn)
   (add-to-list 'persp-activated-functions #'window-ring-activate-persp-fn)
   (add-to-list 'persp-before-deactivate-functions #'window-ring-deactivate-persp-fn)

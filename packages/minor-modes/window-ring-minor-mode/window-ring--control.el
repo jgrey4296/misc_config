@@ -1,4 +1,6 @@
 ;;; window-ring--control.el -*- lexical-binding: t; -*-
+(eval-when-compile
+  (require 'window-ring--macros))
 
 (defun window-ring-clear-ring (&optional arg)
   (interactive "p")
@@ -92,7 +94,7 @@
   (interactive "b\np")
   (with-window-ring
       (-when-let (buff (get-buffer buffer))
-        (ring-insert-at-beginning window-ring buffer))
+        (ring-insert-at-beginning wr-actual buffer))
     )
   (when arg (window-ring-redisplay))
   )

@@ -1,5 +1,7 @@
 ;;; window-ring--movement.el -*- lexical-binding: t; -*-
 
+(eval-when-compile
+  (require 'window-ring--macros))
 
 (defun window-ring-toggle-loop ()
   (interactive)
@@ -23,8 +25,8 @@
                 (wr-max        (persp-parameter 'window-ring-max))
                 (wr-scratch    (persp-parameter 'window-ring-scratch))
                 (new-focus (if (< 1 arg)
-                               (window-ring-older (ring-length wr-actual) wr-focus wr-loop)
-                             (window-ring-newer (ring-length wr-actual) wr-focus wr-loop)))
+                               (window-ring--older (ring-length wr-actual) wr-focus wr-loop)
+                            (window-ring--newer (ring-length wr-actual) wr-focus wr-loop)))
                 )
            (when new-focus
              (modify-persp-parameters `((window-ring-focus . ,new-focus)))
@@ -66,7 +68,7 @@
   (with-window-ring
       (let* ((curr-focus (ring-member wr-actual (current-buffer)))
              (curr (window-ring--get wr-actual curr-focus))
-             (next (window-ring--get wr-actual (window-ring-newer (ring-length wr-actual) curr-focus wr-loop)))
+             (next (window-ring--get wr-actual (window-ring--newer (ring-length wr-actual) curr-focus wr-loop)))
              (as-seq (ring-elements wr-actual))
              new-ring
             )
@@ -91,7 +93,7 @@
   (with-window-ring
       (let* ((curr-focus (ring-member wr-actual (current-buffer)))
              (curr (window-ring--get wr-actual curr-focus))
-             (next (window-ring--get wr-actual (window-ring-older (ring-length wr-actual) curr-focus wr-loop)))
+             (next (window-ring--get wr-actual (window-ring--older (ring-length wr-actual) curr-focus wr-loop)))
              (as-seq (ring-elements wr-actual))
              new-ring
             )

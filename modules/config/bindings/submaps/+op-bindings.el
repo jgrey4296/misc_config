@@ -35,5 +35,4 @@
       :desc "Char"                "?"   #'what-cursor-position
 
       :desc "IEdit"              "e" #'iedit-mode
-
       )

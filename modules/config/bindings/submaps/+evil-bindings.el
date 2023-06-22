@@ -3,7 +3,7 @@
 
 (doom-log "Setting up Evil Bindings: %s" (current-time-string))
 ;;-- setup
-(defvar jg-binding-insert-state-map             (copy-keymap evil-insert-state-map)) ;; copied in +evil-bindings
+(defvar jg-binding-insert-state-map             (copy-keymap evil-insert-state-map))
 (defvar jg-binding-motion-state-map             (make-sparse-keymap "JG map replacing evil-motion-state-map"))
 (defvar jg-binding-normal-state-map             (make-sparse-keymap "JG map replacing evil-normal-state-map"))
 (defvar jg-binding-operator-state-map           (make-sparse-keymap "JG map replacing evil-operator-state-map"))

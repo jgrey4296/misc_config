@@ -1,5 +1,15 @@
 ;;; window-ring--macros.el -*- lexical-binding: t; -*-
 
+(eval-when-compile
+  (require 'ring)
+  (require 'persp-mode)
+  (require 'cl-lib)
+  (require 'evil)
+  (require 'dash))
+
+(defalias 'window-ring--get (symbol-function 'ring-ref))
+(defalias 'window-ring--length (symbol-function 'ring-length))
+
 (defmacro with-window-ring (&rest body)
   (declare (indent 1))
   `(when (persp-parameter 'window-ring)
@@ -45,6 +55,5 @@
      ,@body
      )
   )
-
 
 (provide 'window-ring--macros)

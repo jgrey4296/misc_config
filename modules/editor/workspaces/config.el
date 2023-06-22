@@ -223,7 +223,6 @@
 
 (use-package! window-ring-minor-mode
   :hook (doom-init-ui . window-ring-minor-mode)
-  :commands window-ring-new
   :config
   (after! ivy
     (ivy-add-actions '+jg-workspaces-ivy
@@ -244,4 +243,8 @@
   (after! winner
     (add-to-list 'winner-boring-buffers neo-buffer-name))
   (add-hook! 'neo-enter-hook #'+neotree-fix-cursor-h)
+  )
+
+(use-package! related-files
+  :autoload make-related!
   )

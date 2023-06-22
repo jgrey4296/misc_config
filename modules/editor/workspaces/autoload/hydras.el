@@ -66,7 +66,7 @@
 ;;;###autoload (autoload 'hydra-window-ring/body "editor/workspaces/autoload/hydras" nil t)
 (defhydra hydra-window-ring ()
   (format "%s\n" (hydra-utils-format-columns
-                  '("|Window-Ring"
+                  '("|Window-Ring %-10(persp-parameter 'window-ring)"
                     new
                     convert
                     deconvert
@@ -75,17 +75,17 @@
                     print
                     Edit
                     )
-                  '("%-10(persp-parameter 'window-ring)"
-                    loop
+                  '("|Window Claimed: %-10(window-parameter (selected-window) 'window-ring-claimed)"
+                    "_l_oop %-5(persp-parameter 'window-ring-loop)"
                     expand
                     add
                     Remove
                     "c_h_oose"
+                    )
+                  '("|"
                     "_[_ move left"
                     "_]_ move right"
-                    )
-                  '(blank
-                    "%-4(persp-parameter 'window-ring-loop)"
+                    "claim _w_indow"
                     )
                   ))
   ;; Window Ring
@@ -102,5 +102,6 @@
   ("R" window-ring-remove-buffer      :exit t)
   ("[" window-ring-move-buffer-left   :exit nil)
   ("]" window-ring-move-buffer-right  :exit nil)
+  ("w" window-ring-claim-window       :exit nil)
   ("h" nil)
   )

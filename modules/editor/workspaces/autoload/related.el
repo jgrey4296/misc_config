@@ -3,6 +3,7 @@
 ;;;###autoload
 (defun +jg-projects-find-related ()
   (interactive)
+  (select-window (split-window-below))
   (if (eq major-mode 'dired-mode)
       (+jg-projects-find-related-directory)
     (projectile-find-related-file)
@@ -18,4 +19,3 @@
 
     )
   )
-)

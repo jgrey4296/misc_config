@@ -1,5 +1,8 @@
 ;;; window-ring--persp.el -*- lexical-binding: t; -*-
 
+(eval-when-compile
+  (require 'window-ring--macros))
+
 (defun window-ring-new ()
   " create a new perspective and ring "
   (interactive)
@@ -42,7 +45,7 @@
      (remove-hook 'find-file-hook              #'window-ring-add-current-buffer)
      (remove-hook 'kill-buffer-hook            #'window-ring-remove-buffer)
      (remove-hook 'kill-buffer-query-functions #'window-ring-protect-scratch-p -50)
-     (mapcar #'delete-persp-parameter
+     (mapc #'delete-persp-parameter
              '(window-ring window-ring-actual window-ring-grow window-ring-loop window-ring-duplicates
                window-ring-focus window-ring-max window-ring-backgrounds window-ring-scratch))
      (persp-delete-other-windows)

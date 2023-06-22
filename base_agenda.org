@@ -4,6 +4,7 @@
 [[/Users/johngrey/dooter.py][dooter.py]]
 [[file:/Volumes/documents/github/jgrey4296.github.io][homepage]]
 https://stackoverflow.com/questions/22072773/batch-export-of-org-mode-files-from-the-command-line
+
 * Base Agenda
 Death by Institution and the Harms of Abstraction.
 

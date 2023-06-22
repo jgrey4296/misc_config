@@ -1,6 +1,7 @@
 ;;; related-files.el -*- lexical-binding: t; -*-
 
 ;; Macros for easily building related-files functions for projectile
+;; TODO make separate related-dired fn
 
 (defconst related-files--symbol-separator ":")
 
@@ -29,7 +30,6 @@ separated by 'related-files--symbol-separator' "
      (plist-get proj ,key))
   )
 
-;; TODO make separate related-dired fn
 (cl-defmacro make-related! (proj-type &rest body
                                       &key (files nil) (tests nil) (binds nil)
                                       &allow-other-keys
@@ -84,3 +84,5 @@ files can be relative to project root, will be expanded later
       )
     )
   )
+
+(provide 'related-files)

@@ -8,7 +8,6 @@
 ;;-- end epa/gpg
 
 ;;-- dired
-
   (setq-default dired-args '("-ahlD" "-v" "--group-directories-first")
                 insert-directory-program "gls"
 
@@ -25,6 +24,9 @@
 
                 +jg-dired-recursive-switches "-aBhlR --group-directories-first"
                 )
+
+(defvar jg-dired-du-cmd "du")
+(defvar jg-dired-du-args '("-hsc"))
 ;;-- end dired
 
 ;;-- omit-patterns

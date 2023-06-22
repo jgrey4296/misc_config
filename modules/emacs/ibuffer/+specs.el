@@ -97,6 +97,7 @@
 
 (spec-handling-add! ibuffer-filters
                     '(doot ())
+                    '(ring-buffers ())
                     )
 
 ;; Groups:

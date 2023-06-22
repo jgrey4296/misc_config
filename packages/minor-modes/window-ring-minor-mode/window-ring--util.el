@@ -1,5 +1,7 @@
 ;;; window-ring--util.el -*- lexical-binding: t; -*-
 
+(eval-when-compile
+  (require 'window-ring--macros))
 
 (defun window-ring--newer (len index loop)
   " given the ring length, current index, and loop param
@@ -34,8 +36,6 @@ return the next older index"
      (format "%s" buff))
     )
   )
-
-
 
 (defun window-ring-print-order ()
   (interactive)

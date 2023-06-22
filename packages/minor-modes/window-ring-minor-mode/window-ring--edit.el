@@ -1,5 +1,7 @@
 ;;; window-ring--edit.el -*- lexical-binding: t; -*-
 
+(eval-when-compile
+  (require 'window-ring--macros))
 
 (defun window-ring-edit-order ()
   (interactive)

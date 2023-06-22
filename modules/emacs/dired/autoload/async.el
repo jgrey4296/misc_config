@@ -72,7 +72,7 @@
     (with-current-buffer buffer (erase-buffer))
     (make-process :name "du-async"
                   :buffer buffer
-                  :command (append '("du" "-hs") marked)
+                  :command (append (list jg-dired-du-cmd) jg-dired-du-args marked)
                   :sentinel (-partial '+jg-dired-du-sentinel buffer)
                   )
     )

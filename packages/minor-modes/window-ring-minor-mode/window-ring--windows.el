@@ -147,13 +147,13 @@
   )
 
 (defun window-ring-set-window (window index)
-  (if (window-parameter window 'window-ring-claimed)
-      (with-window-ring
-          (unless (window-live-p window) (select-window window))
-        (set-window-buffer window (if index (window-ring--get wr-actual index) wr-scratch))
-        t)
-    (message "Unclaimed Window: %s" window)
-    nil
+  (with-window-ring
+      (unless (window-live-p window) (select-window window))
+    (set-window-buffer window (if index (window-ring--get wr-actual index) wr-scratch))
+    (if (window-parameter window 'window-ring-claimed)
+        (message "Unclaimed Window: %s" window)
+      t
+      )
     )
   )
 

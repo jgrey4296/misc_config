@@ -230,7 +230,7 @@ https://github.com/sciunto-org/python-bibtexparser
 
 ** exceptions
 better-exceptions                                                                               : 0.3.3
-pretty-errors                                                                                   : 1.2.25
+https://github.com/onelivesleft/PrettyErrors/
 https://rich.readthedocs.io/en/stable/introduction.html
 https://github.com/grappa-py/grappa                                                             : assert : grappa : unit_testing
 

@@ -1,26 +1,35 @@
+
+(require 'evil)
+(require 'parsec)
+
+(require 'test-execution)
+(require 'test-parsing)
+(require 'test-reporting)
+(require 'test-retrieval)
+
 ;;
 ;; Functions to enable unit testing an org file
 ;; TODO: put parse-tests and run-tests in variables,
 ;; and use a macro to expand them, allowing the two to be defined together
 ;; simplifying the addition of new tests
 ;;
-(cl-defstruct jg-org-test-extracts start end heading link text)
-(cl-defstruct jg-org-test-group name tests link bound start)
-(cl-defstruct jg-org-test type locator value)
+(cl-defstruct org-unit-test-extracts start end heading link text)
+(cl-defstruct org-unit-test-group name tests link bound start)
+(cl-defstruct org-unit-test type locator value)
 ;; Current test types:
 '(:section-check :length-check :order-check :citation-check :mention-check :codeblock-check :tag-check)
-(cl-defstruct jg-org-test-results name results link)
+(cl-defstruct org-unit-test-results name results link)
 
-(defvar jg-org-test-heading-regexp "^*+ %s$"
+(defvar org-unit-test-heading-regexp "^*+ %s$"
   "Regexp to format when searching for a location")
 
-(defvar jg-org-test-src-block-regexp "^ +#\\+begin_src"
+(defvar org-unit-test-src-block-regexp "^ +#\\+begin_src"
   "Regexp to find src blocks")
 
-(defun +jg-org-test-to-string (test)
-  (let ((tt (jg-org-test-type test))
-        (loc (jg-org-test-locator test))
-        (val (jg-org-test-value test))
+(defun org-unit-test-to-string (test)
+  (let ((tt (org-unit-test-type test))
+        (loc (org-unit-test-locator test))
+        (val (org-unit-test-value test))
         )
     (cond
      ((eq tt :section-check ) (format "%s should have section %s." loc val))
@@ -36,16 +45,28 @@
   )
 
 ;; Main Access
-(defun +jg-org-test-org-file ()
+
+(defun org-unit-test-org-file ()
   (interactive)
   ;; check file is in org mode
   (cl-assert (eq major-mode 'org-mode))
   ;; get tests
-  (let* ((test-texts (seq-filter 'identity (jg-org-test-find-tests)))
-         (parsed-tests (seq-filter 'identity (-flatten (mapcar 'jg-org-test-parse-tests test-texts))))
-         (test-results (jg-org-test-run-tests parsed-tests))
+  (let* ((test-texts (seq-filter 'identity (org-unit-test-find-tests)))
+         (parsed-tests (seq-filter 'identity (-flatten (mapcar 'org-unit-test-parse-tests test-texts))))
+         (test-results (org-unit-test-run-tests parsed-tests))
          )
     ;; print test results
-    (jg-org-test-print-results test-results)
+    (org-unit-test-print-results test-results)
     )
   )
+
+(defvar org-unit-test-map (make-sparse-keymap))
+
+;;;###autoload
+(define-minor-mode org-unit-test-minor-mode
+  "  "
+  :lighter "org-unit-test"
+  :keymap org-unit-test-map
+  )
+
+;; TODO piggyback on org-export's tree walking

@@ -1,13 +1,15 @@
 
 ;; Test retrieval
-(defun +jg-org-test-find-tests ()
+
+(defun org-unit-test-find-tests ()
   "Iterate through current org file, extracting any __org-unit-test-layer__ drawers contents."
   (save-excursion
     (goto-char (point-min))
-    (org-map-entries '+jg-org-test-extract-tests-from-entry)
+    (org-map-entries 'org-unit-test-extract-tests-from-entry)
     )
   )
-(defun +jg-org-test-extract-tests-from-entry ()
+
+(defun org-unit-test-extract-tests-from-entry ()
   (let ((start (point)) end text heading element link)
     (setq heading (substring-no-properties (org-get-heading t t t t))
           link (org-store-link nil)

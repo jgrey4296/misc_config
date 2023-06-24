@@ -1,5 +1,5 @@
 * Top Level Document                                                            :blah:
-  :__doctest__:
+:__doctest__:
   Group 1:
   Document should have section "first".
   "first" should have section "introduction".
@@ -18,7 +18,7 @@
 
 ** 1: First
 *** introduction
-    :__doctest__:
+:__doctest__:
     Group 2:
     "background" should cite:Bach,Chronicle1865,James1902,Hohfeld1913.
     "background" should mention "the importance of a history of debt".
@@ -27,14 +27,14 @@
     "methods" should have codeblock in "python".
     :END:
 
-    aihweg
-    aowiegh
+aihweg
+aowiegh
 ** 2: Second
 *** blah
 **** bloo
      awegage
 ** 3: Third
 **** awefgh
-     awegh haoweg
-     awoiegh
-     awoeghaw
+awegh haoweg
+awoiegh
+awoeghaw

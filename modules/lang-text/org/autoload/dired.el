@@ -44,3 +44,21 @@ remove empty threads "
     )
    "matching org")
   )
+
+;;;###autoload
+(defun +jg-org-dired-html-export ()
+  (interactive)
+  (let ((files (dired-get-marked-files))
+        (backend (intern (ivy-read "Backend: " org-export-backends)))
+        )
+    (cl-loop for file in files
+             if (f-ext? file "org")
+             do
+             (with-temp-buffer
+               (insert-file file)
+               (org-export-to-file backend
+                   (f-join (f-parent file) (format "%s.html" (f-base file))))
+               )
+             )
+    )
+  )

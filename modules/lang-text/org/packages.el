@@ -34,6 +34,8 @@
  )
 (package! org-contrib :recipe (:host github :repo "emacsmirror/org-contrib"))
 
+(package! org-unit-test :recipe `(:local-repo ,(expand-file-name "packages/misc/org-unit-test" doom-user-dir)))
+
 
 (package! org-drill)
 (package! org-pomodoro)
@@ -106,3 +108,4 @@
 (when (modulep! +pandoc) (package! ox-pandoc))
 (when (modulep! +hugo) (package! ox-hugo :recipe (:host github :repo "kaushalmodi/ox-hugo" :nonrecursive t)))
 (when (modulep! :lang rst) (package! ox-rst))
+(package! ox-html-epub :recipe `(:local-repo ,(expand-file-name "packages/ox-html-epub" doom-user-dir)))

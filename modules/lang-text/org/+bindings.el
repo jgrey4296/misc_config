@@ -46,6 +46,7 @@
       :localleader
       :desc "Refile"                 "R" #'+jg-org-refile-subtree
       :desc "Todo"                   "TAB" #'org-todo
+      :desc "Lint"                   "L" #'org-lint
 
       (:prefix ("f". "Format")
        :desc "Clean Org"             "c" #'+jg-org-clean-master
@@ -70,28 +71,10 @@
       (:prefix ("i" . "Insert")
        :desc "Insert Heading Trio" "t" #'+jg-org-insert-heading-trio
        :desc "Insert Subheading"   "h" #'org-insert-subheading
-       :desc "Insert Drawer"       "d" #'org-insert-drawer)
+       :desc "Insert Drawer"       "d" #'org-insert-drawer
+       :desc "Insert Structure"    "s" #'org-insert-structure-template
       )
-
-;;-- dired
-(map! :map dired-mode-map
-      :after jg-dired-bindings
-      (:prefix "%"
-       :desc "Mark Orgs" :n "o"     #'+jg-org-dired-select-org
-       )
-      :localleader
-      (:prefix ("m" . "Mark")
-       :desc "Mark Orgs" "o" #'+jg-org-dired-select-org
-       )
-      (:prefix ("f" . "Find")
-       :desc "Display Selection" "s" #'+jg-org-display-selection
-       )
-      (:prefix ("K" . "Destructive")
-       :desc "Clean Marked" "c"     #'+jg-org-dired-clean
-       :desc "Mark as Twitter"  "T" #'+jg-org-dired-add-twitter-prop
-       )
       )
-;;-- end dired
 
 (map! :after org-agenda
       :map org-agenda-mode-map
@@ -136,6 +119,11 @@
       "n" #'org-journal-search-next
       "p" #'org-journal-search-prev
       )
+(map! :map org-unit-test-map
+      :localleader
+      :prefix "."
+      :desc "Run Org Test" "T" #'+jg-org-test-org-file
+      )
 
 (after! (evil-org org)
   (setq org-mode-map jg-org-mode-map
@@ -145,3 +133,21 @@
   (push (cons 'evil-org-mode jg-org-mode-map) minor-mode-map-alist)
 
   )
+
+;;-- dired
+(map! :map dired-mode-map
+      :after jg-dired-bindings
+      :desc "Mark Orgs" "Mo" #'+jg-org-dired-select-org
+      :desc "Display Selection" "os" #'+jg-org-display-selection
+
+      (:prefix (">o" . "Org")
+        "e" #'+jg-org-dired-html-export
+        )
+
+      :localleader
+      (:prefix ("K" . "Destructive")
+       :desc "Clean Marked" "c"     #'+jg-org-dired-clean
+       )
+      )
+
+;;-- end dired

@@ -20,16 +20,11 @@
 ;; Dired bindings
 (map! :map dired-mode-map
       :after jg-dired-bindings
-      :localleader
-      (:prefix ("d" . "Describe")
-       :desc "Count Untagged Orgs" "u"   #'+jg-tag-dired-directory-count-untagged
-       :desc "Describe Marked Tags" "t"  #'+jg-tag-dired-describe-marked-tags
-       )
-      (:prefix ("m" . "Mark")
-       :desc "Mark Untagged Orgs" "u"    #'+jg-tag-dired-mark-untagged-orgs
-       )
-      (:prefix ("f" . "Find"))
-      (:prefix ("i" . "Index")
+       :desc "Mark Untagged Orgs" "Mu"    #'+jg-tag-dired-mark-untagged-orgs
+       :desc "Count Untagged Orgs" "du"   #'+jg-tag-dired-directory-count-untagged
+       :desc "Describe Marked Tags" "dt"  #'+jg-tag-dired-describe-marked-tags
+
+      (:prefix (">i" . "Index")
        :desc "Index People" "p"          #'+jg-tag-index-people
        :desc "Index Tags" "t"            #'+jg-tag-index-tags
        )

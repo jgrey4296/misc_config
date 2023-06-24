@@ -124,6 +124,13 @@
   (push '("dot" . graphviz-dot) org-src-lang-modes)
   )
 
+(use-package! org-unit-test
+  :commands org-unit-test-minor-mode
+  )
+
+(use-package! ox-html-epub
+  :after org)
+
 (use-package! org
   :defer-incrementally
   calendar find-func format-spec org-macs org-compat org-faces org-entities

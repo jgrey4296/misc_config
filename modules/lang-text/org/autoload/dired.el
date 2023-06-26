@@ -46,10 +46,13 @@ remove empty threads "
   )
 
 ;;;###autoload
-(defun +jg-org-dired-html-export ()
+(defun +jg-org-dired-export ()
   (interactive)
   (let ((files (dired-get-marked-files))
-        (backend (intern (ivy-read "Backend: " org-export-backends)))
+        (backend (intern (ivy-read "Backend: "
+                                   (mapcar #'org-export-backend-name org-export-registered-backends)
+                                   :require-match t
+                                   )))
         )
     (cl-loop for file in files
              if (f-ext? file "org")

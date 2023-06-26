@@ -15,7 +15,7 @@
 
 (add-to-list 'org-export-backends 'html-epub)
 
-(defun org-html-epub-export-to-html (&optional async subtreep visible-only body-only ext-plist)
+(defun org-epub-export-to-html (&optional async subtreep visible-only body-only ext-plist)
   (interactive)
   (let* ((extension (concat
 		     (when (> (length org-html-extension) 0) ".")
@@ -30,4 +30,4 @@
 
 ;; (message "Load Path: %s" (string-join load-path "\n"))
 
-;; emacs --batch example.org  --script /path/to/batch-run.el -f org-html-epub-export-to-html
+;; emacs --batch example.org  --script /path/to/batch-run.el -f org-epub-export-to-html

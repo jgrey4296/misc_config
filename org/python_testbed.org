@@ -39,6 +39,7 @@ https://github.com/vinta/awesome-python
 - pyparsing
 - pyqtree
 - pytest
+- pytest-mock
 - readline
 - regex
 - rich
@@ -110,6 +111,7 @@ https://github.com/praw-dev/praw                                                
 https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference
 https://github.com/sixohsix/twitter                                                             : libraries : twitter
 https://akamhy.github.io/waybackpy/ - wayback machine
+https://amoffat.github.io/sh/
 
 ** architecture
 https://github.com/twisted/twisted

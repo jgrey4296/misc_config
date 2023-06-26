@@ -12,9 +12,134 @@
 ;; known types:
 ;; bold center-block clock code drawer dynamic-block entity example-block export-block export-snippet fixed-width footnote-reference  horizontal-rule inline-src-block inlinetask  italic item keyword latex-environment latex-fragment line-break node-property plain-list  planning property-drawer quote-block radio-target  special-block src-block statistics-cookie strike-through subscript superscript table table-cell table-row target template timestamp underline verbatim verse-block
 ;;
+
+(defun org-epub-template (contents info)
+  "Return complete document string after HTML conversion.
+CONTENTS is the transcoded contents string.  INFO is a plist
+holding export options."
+
+  (concat
+   (let* ((xml-declaration (plist-get info :html-xml-declaration))
+	  (decl (or (and (stringp xml-declaration) xml-declaration)
+		    (cdr (assoc (plist-get info :html-extension) xml-declaration))
+		    (cdr (assoc "html" xml-declaration))
+		    nil))
+          )
+     (when decl
+       (format decl (coding-system-get org-html-coding-system 'mime-charset))))
+   "\n"
+
+   (org-html-doctype info) "\n"
+
+   "<html"
+   (cond ((org-html-xhtml-p info)
+	  (format " xmlns=\"http://www.w3.org/1999/xhtml\" lang=\"%s\" xml:lang=\"%s\">"
+	          (plist-get info :language) (plist-get info :language)))
+	 ((org-html-html5-p info)
+	  (format " lang=\"%s\">" (plist-get info :language))))
+   "\n"
+
+   "<head>\n"
+   (org-epub--build-head info)
+   "</head>\n"
+
+   "<body>\n"
+   (let ((link-up (org-trim (plist-get info :html-link-up)))
+	 (link-home (org-trim (plist-get info :html-link-home))))
+     (unless (and (string= link-up "") (string= link-home ""))
+       (format (plist-get info :html-home/up-format)
+	       (or link-up link-home)
+	       (or link-home link-up))))
+
+   ;; Preamble.
+   (org-html--build-pre/postamble 'preamble info)
+
+   ;; Document contents.
+   (let ((div (assq 'content (plist-get info :html-divs))))
+     (format "<%s id=\"%s\" class=\"%s\">\n"
+             (nth 1 div)
+             (nth 2 div)
+             (plist-get info :html-content-class)))
+
+   ;; Document title.
+   (-if-let* ((title (and (plist-get info :with-title) (plist-get info :title)))
+	       (subtitle (or (plist-get info :subtitle) ""))
+               )
+       (format "<h1 class=\"title\">%s</h1>\n"
+               (org-export-data title info)
+	       (format (concat "\n" (org-html-close-tag "br" nil info) "\n"
+			       "<span class=\"subtitle\">%s</span>\n")
+	               (org-export-data subtitle info))
+               ))
+
+   contents
+
+   (format "</%s>\n" (nth 1 (assq 'content (plist-get info :html-divs))))
+
+   ;; Postamble.
+   (org-html--build-pre/postamble 'postamble info)
+
+   ;; Closing document.
+   "</body>"
+   "\n"
+   "</html>"
+   ))
+
+(defun org-epub--build-head (info)
+  "Return information for the <head>..</head> of the HTML output.
+INFO is a plist used as a communication channel."
+  (let* ((title (org-html-plain-text
+		 (org-element-interpret-data (plist-get info :title)) info))
+	 ;; Set title to an invisible character instead of leaving it
+	 ;; empty, which is invalid.
+	 (title (if (org-string-nw-p title) title "Untitled Thread"))
+	 (charset (or (and org-html-coding-system
+                           (symbol-name (coding-system-get org-html-coding-system 'mime-charset)))
+		      "iso-8859-1")))
+    (org-element-normalize-string
+     (concat
+      (when (plist-get info :time-stamp-file)
+        (format-time-string (concat "<!-- " (plist-get info :html-metadata-timestamp-format) " -->\n")))
+
+      (org-html--build-meta-entry "http-equiv" "Content-Type" (concat "text/html;charset=" charset))
+
+      (-if-let ((viewport-options
+	         (cl-remove-if-not (lambda (cell) (org-string-nw-p (cadr cell))) (plist-get info :html-viewport))))
+	  (org-html--build-meta-entry "name" "viewport"
+				      (mapconcat (lambda (elm)
+                                                   (format "%s=%s" (car elm) (cadr elm)))
+				                 viewport-options ", ")))
+
+      (format "<title>%s</title>\n" title)
+
+      (-if-let (tags (cl-remove-duplicates (plist-get info :thread-tags) :test 'equal))
+          (org-html--build-meta-entry "name" "keywords" (string-join tags ","))
+        )
+
+      (mapconcat (lambda (args) (apply #'org-html--build-meta-entry args))
+                 (delq nil (if (functionp org-html-meta-tags)
+		               (funcall org-html-meta-tags info)
+		             org-html-meta-tags))
+                 "")
+
+      (plist-get info :html-head)
+      (plist-get info :html-head-extra)
+      (when (and (plist-get info :html-htmlized-css-url)
+	         (eq org-html-htmlize-output-type 'css))
+        (org-html-close-tag "link"
+			    (format "rel=\"stylesheet\" href=\"%s\" type=\"text/css\""
+				    (plist-get info :html-htmlized-css-url)) info))
+
+      (when (plist-get info :html-head-include-scripts)
+        org-html-scripts)
+      )
+     )
+    )
+  )
+
 ;;-- headlines
 
-(defun org-html-epub-headline (headline contents info)
+(defun org-epub-headline (headline contents info)
   "Transcode a HEADLINE element from Org to HTML.
 CONTENTS holds the contents of the headline.  INFO is a plist
 holding contextual information."
@@ -30,19 +155,19 @@ holding contextual information."
            (priority (and (plist-get info :with-priority)
                           (org-element-property :priority headline)))
            (text (org-export-data (org-element-property :title headline) info))
-           (tags (when (plist-get info :with-tags)
-                   (org-html-epub--tags (org-export-get-tags headline info) info)))
+           (tags (ensure-list (org-export-get-tags headline info)))
            (permalink (-if-let* ((perma (org-element-property :PERMALINK headline))
-                                 (matches (string-match org-link-bracket-re perma)))
+                                 (matches (string-match org-link-bracket-re perma))
+                                 )
                           (match-string 1 perma)))
            (time      (or (org-element-property :TIME headline)
                           (org-element-property :DATE headline)))
            (full-text (funcall (plist-get info :html-format-headline-function)
                                todo todo-type priority text tags info))
            (contents (or contents ""))
-	   (id (org-html-epub--reference headline info))
+	   (id (org-html--reference headline info))
 	   (formatted-link (cond (permalink
-                                  (org-html-epub--anchor id full-text (s-concat "href=\"" permalink "\"") info))
+                                  (org-html--anchor id full-text (s-concat "href=\"" permalink "\"") info))
                                  ((plist-get info :html-self-link-headlines)
 		                  (format "<a href=\"#%s\">%s</a>" id full-text))
                                  (t
@@ -50,9 +175,14 @@ holding contextual information."
            (formatted-text (concat formatted-link
                                    "   "
                                    time
-                                   tags
+                                   ;; tags
                                    ))
            )
+
+      (when tags
+        (message "Adding tags to info: %s + %s" tags (plist-get info :thread-tags))
+        (plist-put info :thread-tags (append (plist-get info :thread-tags) tags)))
+
       (if (org-export-low-level-p headline info)
           ;; This is a deep sub-tree: export it as a list item.
           (let* ((html-type (if numberedp "ol" "ul")))
@@ -60,10 +190,10 @@ holding contextual information."
 	     (and (org-export-first-sibling-p headline info)
 		  (apply #'format "<%s class=\"org-%s\">\n"
 			 (make-list 2 html-type)))
-	     (org-html-epub-format-list-item
+	     (org-html-format-list-item
 	      contents (if numberedp 'ordered 'unordered)
 	      nil info nil
-	      (concat (org-html-epub--anchor id nil nil info) formatted-text)) "\n"
+	      (concat (org-html--anchor id nil nil info) formatted-text)) "\n"
 	     (and (org-export-last-sibling-p headline info)
 		  (format "</%s>\n" html-type))))
 	;; Standard headline.  Export it as a section.
@@ -73,7 +203,7 @@ holding contextual information."
 	       (org-element-property :HTML_HEADLINE_CLASS headline))
               (first-content (car (org-element-contents headline))))
           (format "<%s id=\"%s\" class=\"%s\">%s%s</%s>\n"
-                  (org-html-epub--container headline info)
+                  (org-html--container headline info)
                   (format "outline-container-%s" id)
                   (concat (format "outline-%d" level)
                           (and extra-class " ")
@@ -96,10 +226,11 @@ holding contextual information."
                   ;; class="outline-...> which is needed by
                   ;; `org-info.js'.
                   (if (eq (org-element-type first-content) 'section) contents
-                    (concat (org-html-epub-section first-content "" info) contents))
-                  (org-html-epub--container headline info)))))))
+                    (concat (org-epub-section first-content "" info) contents))
+                  (org-html--container headline info))))))
+  )
 
-(defun org-html-epub-section (section contents info)
+(defun org-epub-section (section contents info)
   "Transcode a SECTION element from Org to HTML.
 CONTENTS holds the contents of the section.  INFO is a plist
 holding contextual information."
@@ -122,7 +253,7 @@ holding contextual information."
 		    (org-export-get-reference parent info))
 		(or contents ""))))))
 
-(defun org-html-epub-paragraph (paragraph contents info)
+(defun org-epub-paragraph (paragraph contents info)
   "Transcode a PARAGRAPH element from Org to HTML.
 CONTENTS is the contents of the paragraph, as a string.  INFO is
 the plist used as a communication channel."
@@ -142,12 +273,12 @@ the plist used as a communication channel."
       ;; First paragraph in an item has no tag if it is alone or
       ;; followed, at most, by a sub-list.
       contents)
-     ((org-html-epub-standalone-image-p paragraph info)
+     ((org-epub-standalone-image-p paragraph info)
       ;; Standalone image.
       (let ((caption
 	     (let ((raw (org-export-data
 			 (org-export-get-caption paragraph) info))
-		   (org-html-epub-standalone-image-predicate
+		   (org-epub-standalone-image-predicate
 		    #'org-html--has-caption-p))
 	       (if (not (org-string-nw-p raw)) raw
 		 (concat "<span class=\"figure-number\">"
@@ -155,11 +286,11 @@ the plist used as a communication channel."
 				 (org-export-get-ordinal
 				  (org-element-map paragraph 'link
 				    #'identity info t)
-				  info nil #'org-html-epub-standalone-image-p))
+				  info nil #'org-epub-standalone-image-p))
 			 " </span>"
 			 raw))))
-	    (label (org-html-epub--reference paragraph info)))
-	(org-html-epub--wrap-image contents info caption label)))
+	    (label (org-html--reference paragraph info)))
+	(org-epub--wrap-image contents info caption label)))
      ;; Regular paragraph.
      (t (format "<p%s%s class=\"twit-text\">\n%s</p>"
 		(if (org-string-nw-p attributes)
@@ -170,7 +301,7 @@ the plist used as a communication channel."
 
 ;;-- links
 
-(defun org-html-epub-link (link desc info)
+(defun org-epub-link (link desc info)
   "Transcode a LINK object from Org to HTML.
 DESC is the description part of the link, or the empty string.
 INFO is a plist holding contextual information.  See
@@ -180,7 +311,7 @@ INFO is a plist holding contextual information.  See
 	 (link-org-files-as-html-maybe
 	  (lambda (raw-path info)
 	    ;; Treat links to `file.org' as links to `file.html', if
-	    ;; needed.  See `org-html-epub-link-org-files-as-html'.
+	    ;; needed.  See `org-epub-link-org-files-as-html'.
 	    (cond
 	     ((and (plist-get info :html-link-org-files-as-html)
 		   (string= ".org"
@@ -231,13 +362,13 @@ INFO is a plist holding contextual information.  See
 	   (let* ((parent (org-export-get-parent-element link))
 		  (link (let ((container (org-export-get-parent link)))
 			  (if (and (eq 'link (org-element-type container))
-				   (org-html-epub-inline-image-p link info))
+				   (org-epub-inline-image-p link info))
 			      container
 			    link))))
 	     (and (eq link (org-element-map parent 'link #'identity info t))
 		  (org-export-read-attribute :attr_html parent)))
 	   ;; Also add attributes from link itself.  Currently, those
-	   ;; need to be added programmatically before `org-html-epub-link'
+	   ;; need to be added programmatically before `org-epub-link'
 	   ;; is invoked, for example, by backends building upon HTML
 	   ;; export.
 	   (org-export-read-attribute :attr_html link)))
@@ -251,7 +382,7 @@ INFO is a plist holding contextual information.  See
      ((and (plist-get info :html-inline-images)
 	   (org-export-inline-image-p
 	    link (plist-get info :html-inline-image-rules)))
-      (org-html-epub--format-image path attributes-plist info))
+      (org-epub--format-image path attributes-plist info))
      ;; Radio target: Transcode target's contents and use them as
      ;; link's description.
      ((string= type "radio")
@@ -284,7 +415,7 @@ INFO is a plist holding contextual information.  See
 			(org-element-property :raw-link link) info))))
 	  ;; Link points to a headline.
 	  (`headline
-	   (let ((href (org-html-epub--reference destination info))
+	   (let ((href (org-html--reference destination info))
 		 ;; What description to use?
 		 (desc
 		  ;; Case 1: Headline is numbered and LINK has no
@@ -311,21 +442,21 @@ INFO is a plist holding contextual information.  See
 	       ;; environment.  Use "ref" or "eqref" macro, depending on user
                ;; preference to refer to those in the document.
                (format (plist-get info :html-equation-reference-format)
-                       (org-html-epub--reference destination info))
-             (let* ((ref (org-html-epub--reference destination info))
-                    (org-html-epub-standalone-image-predicate
+                       (org-html--reference destination info))
+             (let* ((ref (org-html--reference destination info))
+                    (org-epub-standalone-image-predicate
                      #'org-html--has-caption-p)
                     (counter-predicate
                      (if (eq 'latex-environment (org-element-type destination))
-                         #'org-html-epub--math-environment-p
+                         #'org-epub--math-environment-p
                        #'org-html--has-caption-p))
                     (number
 		     (cond
 		      (desc nil)
-		      ((org-html-epub-standalone-image-p destination info)
+		      ((org-epub-standalone-image-p destination info)
 		       (org-export-get-ordinal
 			(org-element-map destination 'link #'identity info t)
-			info 'link 'org-html-epub-standalone-image-p))
+			info 'link 'org-epub-standalone-image-p))
 		      (t (org-export-get-ordinal
 			  destination info nil counter-predicate))))
                     (desc
@@ -337,7 +468,7 @@ INFO is a plist holding contextual information.  See
      ;; Coderef: replace link with the reference name or the
      ;; equivalent line number.
      ((string= type "coderef")
-      (let ((fragment (concat "coderef-" (org-html-epub-encode-plain-text path))))
+      (let ((fragment (concat "coderef-" (org-html-encode-plain-text path))))
 	(format "<a href=\"#%s\" %s%s>%s</a>"
 		fragment
 		(format "class=\"coderef\" onmouseover=\"CodeHighlightOn(this, \
@@ -349,12 +480,12 @@ INFO is a plist holding contextual information.  See
      ;; External link with a description part.
      ((and path desc)
       (format "<a href=\"%s\"%s>%s</a>"
-	      (org-html-epub-encode-plain-text path)
+	      (org-html-encode-plain-text path)
 	      attributes
 	      desc))
      ;; External link without a description part.
      (path
-      (let ((path (org-html-epub-encode-plain-text path)))
+      (let ((path (org-html-encode-plain-text path)))
 	(format "<a href=\"%s\"%s>%s</a>" path attributes path)))
      ;; No path, only description.  Try to do something useful.
      (t

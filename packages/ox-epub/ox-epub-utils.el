@@ -1,6 +1,6 @@
 ;;; +ox-html-epub-utils.el -*- lexical-binding: t; -*-
 
-(defun org-html-epub--wrap-image (contents info &optional caption label)
+(defun org-epub--wrap-image (contents info &optional caption label)
   "Wrap CONTENTS string within an appropriate environment for images.
 INFO is a plist used as a communication channel.  When optional
 arguments CAPTION and LABEL are given, use them for caption and
@@ -18,7 +18,7 @@ arguments CAPTION and LABEL are given, use them for caption and
 			"\n<p>%s</p>")
 		      caption)))))
 
-(defun org-html-epub--format-image (source attributes info)
+(defun org-epub--format-image (source attributes info)
   "Return \"img\" tag with given SOURCE and ATTRIBUTES.
 SOURCE is a string specifying the location of the image.
 ATTRIBUTES is a plist, as returned by
@@ -31,7 +31,7 @@ a communication channel."
      (list :src source
            :alt (if (string-match-p
                      (concat "^" org-preview-latex-image-directory) source)
-                    (org-html-epub-encode-plain-text
+                    (org-html-encode-plain-text
                      (org-find-text-property-in-string 'org-latex-src source))
                   (file-name-nondirectory source)))
      (if (string= "svg" (file-name-extension source))
@@ -39,7 +39,7 @@ a communication channel."
        attributes)))
    info))
 
-(defun org-html-epub-footnote-section (info)
+(defun org-epub-footnote-section (info)
   "Format the footnote section.
 INFO is a plist used as a communication channel."
   (pcase (org-export-collect-footnote-definitions info)
@@ -61,7 +61,7 @@ INFO is a plist used as a communication channel."
 	      ;; a "footpara" class paragraph.
 	      (let ((inline? (not (org-element-map def org-element-all-elements
 				    #'identity nil t)))
-		    (anchor (org-html-epub--anchor
+		    (anchor (org-html--anchor
 			     (format "fn.%d" n)
 			     n
 			     (format " class=\"footnum\" href=\"#fnr.%d\" role=\"doc-backlink\"" n)
@@ -76,7 +76,7 @@ INFO is a plist used as a communication channel."
 	 definitions
 	 "\n"))))))
 
-(defun org-html-epub--build-head (info)
+(defun org-epub--build-head (info)
   "Return information for the <head>..</head> of the HTML output.
 INFO is a plist used as a communication channel."
   (org-element-normalize-string
@@ -88,7 +88,7 @@ INFO is a plist used as a communication channel."
 			info))
    ))
 
-(defun org-html-epub-template (contents info)
+(defun org-epub-template (contents info)
   "Return complete document string after HTML conversion.
 CONTENTS is the transcoded contents string.  INFO is a plist
 holding export options."
@@ -119,7 +119,7 @@ holding export options."
 	   ">\n")
    "<head>\n"
    (org-html--build-meta-info info)
-   (org-html-epub--build-head info)
+   (org-epub--build-head info)
    "</head>\n"
    "<body>\n"
    (let ((link-up (org-trim (plist-get info :html-link-up)))
@@ -170,7 +170,7 @@ holding export options."
    ;; Closing document.
    "</body>\n</html>"))
 
-(defun org-html-epub--tags (tags info)
+(defun org-epub--tags (tags info)
   "Format TAGS into HTML.
 INFO is a plist containing export options."
   (when tags
@@ -183,23 +183,23 @@ INFO is a plist containing export options."
 		       tag))
 	     tags "&#xa0;"))))
 
-(defun org-html-epub-format-headline-default-function (todo _todo-type priority text tags info)
+(defun org-epub-format-headline-default-function (todo _todo-type priority text tags info)
   "Default format function for a headline.
-See `org-html-epub-format-headline-function' for details."
-  (let ((todo (org-html-epub--todo todo info))
-	(priority (org-html-epub--priority priority info)))
+See `org-epub-format-headline-function' for details."
+  (let ((todo (org-html--todo todo info))
+	(priority (org-html--priority priority info)))
     (concat todo (and todo " ")
 	    priority (and priority " ")
 	    text)))
 
-(defun org-html-epub-image-link-filter (data _backend info)
-  (org-export-insert-image-links data info org-html-epub-inline-image-rules))
+(defun org-epub-image-link-filter (data _backend info)
+  (org-export-insert-image-links data info org-epub-inline-image-rules))
 
-(defun org-html-epub-inline-image-p (link info)
+(defun org-epub-inline-image-p (link info)
   "Non-nil when LINK is meant to appear as an image.
 INFO is a plist used as a communication channel.  LINK is an
 inline image when it has no description and targets an image
-file (see `org-html-epub-inline-image-rules' for more information), or
+file (see `org-epub-inline-image-rules' for more information), or
 if its description is a single link targeting an image file."
   (if (not (org-element-contents link))
       (org-export-inline-image-p
@@ -218,7 +218,7 @@ if its description is a single link targeting an image file."
 	     (_ t)))
          info t)))))
 
-(defun org-html-epub-standalone-image-p (element info)
+(defun org-epub-standalone-image-p (element info)
   "Non-nil if ELEMENT is a standalone image.
 
 INFO is a plist holding contextual information.
@@ -231,7 +231,7 @@ An element or object is a standalone image when
   - its type is `link' and its containing paragraph has no other
     content save white spaces.
 
-Bind `org-html-epub-standalone-image-predicate' to constrain paragraph
+Bind `org-epub-standalone-image-predicate' to constrain paragraph
 further.  For example, to check for only captioned standalone
 images, set it to:
 
@@ -240,9 +240,9 @@ images, set it to:
 		     (`paragraph element)
 		     (`link (org-export-get-parent element)))))
     (and (eq (org-element-type paragraph) 'paragraph)
-	 (or (not (and (boundp 'org-html-epub-standalone-image-predicate)
-                       (fboundp org-html-epub-standalone-image-predicate)))
-	     (funcall org-html-epub-standalone-image-predicate paragraph))
+	 (or (not (and (boundp 'org-epub-standalone-image-predicate)
+                       (fboundp org-epub-standalone-image-predicate)))
+	     (funcall org-epub-standalone-image-predicate paragraph))
 	 (catch 'exit
 	   (let ((link-count 0))
 	     (org-element-map (org-element-contents paragraph)
@@ -251,13 +251,13 @@ images, set it to:
 		 (when (pcase (org-element-type obj)
 			 (`plain-text (org-string-nw-p obj))
 			 (`link (or (> (cl-incf link-count) 1)
-				    (not (org-html-epub-inline-image-p obj info))))
+				    (not (org-epub-inline-image-p obj info))))
 			 (_ t))
 		   (throw 'exit nil)))
 	       info nil 'link)
 	     (= link-count 1))))))
 
-(defun org-html-epub-toc (depth info &optional scope)
+(defun org-epub-toc (depth info &optional scope)
   "Build a table of contents.
 DEPTH is an integer specifying the depth of the table.  INFO is
 a plist used as a communication channel.  Optional argument SCOPE
@@ -265,12 +265,12 @@ is an element defining the scope of the table.  Return the table
 of contents as a string, or nil if it is empty."
   (let ((toc-entries
 	 (mapcar (lambda (headline)
-		   (cons (org-html-epub--format-toc-headline headline info)
+		   (cons (org-epub--format-toc-headline headline info)
 			 (org-export-get-relative-level headline info)))
 		 (org-export-collect-headlines info depth scope))))
     (when toc-entries
       (let ((toc (concat "<div id=\"text-table-of-contents\" role=\"doc-toc\">"
-			 (org-html-epub--toc-text toc-entries)
+			 (org-epub--toc-text toc-entries)
 			 "</div>\n")))
 	(if scope toc
 	  (let ((outer-tag (if (org-html--html5-fancy-p info)
@@ -285,7 +285,7 @@ of contents as a string, or nil if it is empty."
 		    toc
 		    (format "</%s>\n" outer-tag))))))))
 
-(defun org-html-epub--toc-text (toc-entries)
+(defun org-epub--toc-text (toc-entries)
   "Return innards of a table of contents, as a string.
 TOC-ENTRIES is an alist where key is an entry title, as a string,
 and value is its relative level, as an integer."
@@ -309,7 +309,7 @@ and value is its relative level, as an integer."
       toc-entries "")
      (org-html--make-string (- prev-level start-level) "</li>\n</ul>\n"))))
 
-(defun org-html-epub--format-toc-headline (headline info)
+(defun org-epub--format-toc-headline (headline info)
   "Return an appropriate table of contents entry for HEADLINE.
 INFO is a plist used as a communication channel."
   (let* ((headline-number (org-export-get-headline-number headline info))
@@ -327,7 +327,7 @@ INFO is a plist used as a communication channel."
 		    (org-export-get-tags headline info))))
     (format "<a href=\"#%s\">%s</a>"
 	    ;; Label.
-	    (org-html-epub--reference headline info)
+	    (org-html--reference headline info)
 	    ;; Body.
 	    (concat
 	     (and (not (org-export-low-level-p headline info))

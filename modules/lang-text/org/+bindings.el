@@ -141,7 +141,7 @@
       :desc "Display Selection" "os" #'+jg-org-display-selection
 
       (:prefix (">o" . "Org")
-        "e" #'+jg-org-dired-html-export
+        "e" #'+jg-org-dired-export
         )
 
       :localleader

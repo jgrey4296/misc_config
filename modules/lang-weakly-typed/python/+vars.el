@@ -259,6 +259,7 @@
 
 (spec-handling-add! lookup-regular
                     '(python-mode
+                      ("sh" . "https://amoffat.github.io/sh/")
                       ("Awesome Libs"      . "https://github.com/vinta/awesome-python")
                       ("datetime"          . "https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior")
                       ("PyGObject"         . "https://pygobject.readthedocs.io/en/latest/")

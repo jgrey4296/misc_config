@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name  : pytest.fixtures
+# uuid  : pytest.fixtures
+# key   : pytest.fixtures
+# group :
+# --
+
+# caplog, recwarn, capfd, capfdbinary, capsys, pytestconfig
+# tmp_path, testdir, tmpdir
+# monkeypatch, mocker

@@ -11,21 +11,24 @@
       )
 
 (map! :map python-mode-map
+      :after python-mode
       :desc "Insert Exception"       :n "I e" #'+jg-python-exception-ivy
       :desc "Insert Datetime format" :n "I d" #'+jg-python-datetime-ivy
       :desc "Insert lib" :n "I \\" #'+jg-python-libs-ivy
-      )
 
-(map! :map python-mode-map
-      :after python-mode
       :n "z d" nil ;; #'+jg-python-toggle-all-defs
       :n "z D" nil ;; #'+jg-python-close-class-defs
       :v "i f" nil ;; #'+jg-python-select-defun
       :v "i F" nil ;; #'+jg-python-select-class
       ;; :n "] ]" #'+jg-python-forward-defun
       :n "s j" '+jg-python-swipe-to-def
+
+      )
+
+(map! :map python-mode-map
+      :after python-mode
       :localleader
-      ;; :desc "Sort defs" "S" #'+jg-python-sort-class-methods
+      :desc "Start Pydoc" "p" #'+jg-python-start-pydoc
       :desc "Summarize" "s" #'+jg-python-summarize
       :desc "REPL"      "r" #'+python/open-ipython-repl
       :desc "debug"     "d" (cmd! (setq jg-python-dev-mode (not jg-python-dev-mode))

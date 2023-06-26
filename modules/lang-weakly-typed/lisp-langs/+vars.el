@@ -172,6 +172,7 @@ See `+emacs-lisp-non-package-mode' for details.")
                       ("s" . "https://github.com/magnars/s.el")
                       ("evil-mc" . "https://github.com/gabesoft/evil-mc")
                       ("multiple-cursors" . "https://github.com/magnars/multiple-cursors.el")
+                      ("transient" . "https://magit.vc/manual/transient/")
                       )
                     '(racket-mode
                       ("Racket Docs" . "https://docs.racket-lang.org/")

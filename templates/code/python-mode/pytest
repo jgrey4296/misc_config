@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name  : pytest
+# uuid  : pytest
+# key   : pytest
+# group :
+# --
+
+try:
+    import pytest
+    import functools as ftz
+    pytest_fixture = ftz.partial(pytest.fixture, autouse=True)
+
+    # @pytest_fixture
+    # def inject_fixtures(self, caplog):
+    #     self.caplog = caplog
+except ImportError:
+    def pytest_fixture(fn):
+        return fn
+    pytest = None

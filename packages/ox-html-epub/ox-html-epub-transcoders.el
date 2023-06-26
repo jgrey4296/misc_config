@@ -402,4 +402,4 @@ holding export options."
 
 ;;-- end overridden for custom toc
 
-(provide 'ox-html-epub-templates)
+(provide 'ox-html-epub-transcoders)

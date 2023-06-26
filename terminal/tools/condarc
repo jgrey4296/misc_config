@@ -24,6 +24,7 @@ create_default_packages:
   - pyparsing
   - pyqtree
   - pytest
+  - pytest-mock
   - python=3.11
   - readline
   - regex
@@ -46,6 +47,7 @@ create_default_packages:
   - validators
   - stackprinter
   - tqdm
+  - pretty-errors
   # - railroad-diagrams
   # - spacy
   # - pomegranate

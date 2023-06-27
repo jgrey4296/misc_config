@@ -44,3 +44,12 @@ Modified to pre-sort bookmarks, caselessly
             :action 'insert
             )
   )
+
+;;;###autoload
+(defun +jg-ivy-toggle-mark ()
+  (interactive)
+  (if (ivy--marked-p)
+      (ivy--unmark (ivy-state-current ivy-last))
+    (ivy--mark (ivy-state-current ivy-last)))
+  (ivy-next-line)
+  )

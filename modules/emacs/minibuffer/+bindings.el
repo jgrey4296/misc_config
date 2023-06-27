@@ -29,6 +29,8 @@
 
       :n "/"          #'+ivy/woccur
 
+      :n "m"          #'+jg-ivy-toggle-mark
+      :n "t"          #'ivy-toggle-marks
       :n  "q"         #'abort-recursive-edit
       :n  "a"         #'ivy-dispatching-done
       :n  "o"         #'jg-ivy-hydra/body

@@ -1,5 +1,7 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
+(defalias 'number-list (symbol-function 'number-sequence))
+
 (defvar +default-want-RET-continue-comments t
   "If non-nil, RET will continue commented lines.")
 

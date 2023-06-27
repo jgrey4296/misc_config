@@ -1,20 +1,42 @@
 ;;; +metadata.el -*- lexical-binding: t; -*-
 
+(defconst jg-bibtex-meta-buffer "*Metadata*")
+(defconst jg-bibtex-meta-program "ebook-meta")
+(defconst jg-bibtex-meta-opts '(("title     " . "-t")
+                                ("author    " . "-a")
+                                ("comments  " . "-c")
+                                ("publisher " . "-p")
+                                ("series    " . "-s")
+                                ("number    " . "-i")
+                                ("rating    " . "-r")
+                                ("date      " . "-d")
+                                ("isbn      " . "--isbn")
+                                ("ident     " . "--identifier=")
+                                ("tags      " . "--tags=")
+                                ("category  " . "--category=")
+                                ("*Apply*")))
+
 ;;;###autoload
 (defun +jg-bibtex-meta-retrieval ()
+  " Use 'jg-bibtex-meta-program to retrieve metadata about files in current bibtex entry "
   (interactive)
   (save-excursion
     (bibtex-beginning-of-entry)
     (let* ((entry (bibtex-parse-entry))
            (files (-filter #'identity (mapcar #'+jg-bibtex-get-files-fn entry)))
-           (result (cl-loop for file in files
+           (procs (cl-loop for file in files
                             collect
-                            (shell-command-to-string (format "ebook-meta %s" (shell-quote-argument (expand-file-name (if (f-relative? file) (f-join jg-bibtex-pdf-loc file) file)))))
-                            ))
+                            (start-process
+                             (format "bib:meta:%s" (f-base file))
+                             (format "*bib:meta:%s*" (f-base file))
+                             "ebook-meta"
+                             (expand-file-name
+                              (if (f-relative? file) (f-join jg-bibtex-pdf-loc file) file))
+                             )
+                            )
+                   )
            )
-      (with-temp-buffer-window "*Metadata*" 'display-buffer-pop-up-window nil
-        (princ (s-join "\n" result))
-        )
+      (with-process-wrap! jg-bibtex-meta-buffer procs)
       )
     )
   )
@@ -27,25 +49,15 @@
     (bibtex-beginning-of-entry)
     (let* ((arg-pairs nil)
            (entry (bibtex-parse-entry))
-           (target (shell-quote-argument (bibtex-autokey-get-field "file")))
+           (targets (-filter #'identity (mapcar #'+jg-bibtex-get-files-fn entry)))
            (keys (mapcar #'car entry))
-           (meta-opts '(("title     " . "-t")
-                        ("author    " . "-a")
-                        ("comments  " . "-c")
-                        ("publisher " . "-p")
-                        ("series    " . "-s")
-                        ("number    " . "-i")
-                        ("rating    " . "-r")
-                        ("date      " . "-d")
-                        ("isbn      " . "--isbn")
-                        ("ident     " . "--identifier=")
-                        ("tags      " . "--tags=")
-                        ("category  " . "--category=")
-                        ("*Apply*")
-                        ))
+           (meta-opts jg-bibtex-meta-opts)
           current
+          options
           )
-      ;; read fields and wrap
+      (unless targets
+        (error "No files to apply to"))
+      ;; select fields and wrap
       (while (not (s-equals? "*Apply*" (setq current (ivy-read "Assign to option: " meta-opts))))
         (when (alist-get current meta-opts nil nil #'equal)
           (push (cons  (alist-get current meta-opts nil nil #'equal)
@@ -56,17 +68,45 @@
           )
         )
       (unless arg-pairs
-        (error "Nothing to do"))
-      ;; build and call
-      (let* ((options (s-join " " (cl-loop for pair in arg-pairs
-                                          collect
-                                          (format (if (s-matches? "=$" (car pair)) "%s\"%s\"" "%s \"%s\"") (car pair) (cdr pair)))))
-             (command (format "ebook-meta %s %s" target options))
-             )
-        (message "Command: %s" command)
-        (shell-command command)
-        )
+        (error "Nothing selected to apply"))
+
+      ;; Convert ready for use as args
+      (setq options (cl-loop for pair in arg-pairs
+                             append (list (car pair) (cdr pair))))
+                             ;; (format (if (s-matches? "=$" (car pair))
+                             ;;             "%s\"%s\"" "%s \"%s\"")
+                             ;;         (car pair) (cdr pair))
+                             ;; )
+
+      (ivy-read "Apply Metadata to: "
+                (mapcar #'(lambda (x) (cons (f-base x) x)) targets)
+                :multi-action (-partial #'+jg-bibtex-apply-meta-fn options)
+                :action (-partial #'+jg-bibtex-apply-meta-solo-fn options)
+                )
+
       )
+    )
+  )
+
+(defun +jg-bibtex-apply-meta-solo-fn (args file)
+  (+jg-bibtex-apply-meta-fn args (list file))
+  )
+
+(defun +jg-bibtex-apply-meta-fn (args files)
+  (with-process-wrap! jg-bibtex-meta-buffer
+                      (cl-loop for file in files
+                               collect
+                               (apply #'start-process
+                                      (format "meta:apply:%s" (f-base (cdr file)))
+                                      (format "*meta:apply:%s*" (f-base (cdr file)))
+                                      jg-bibtex-meta-program
+                                      (cdr file)
+                                      args
+                                      )
+                               )
+                      )
+  (with-current-buffer jg-bibtex-meta-buffer
+    (insert (format "Process Args: %s\n" args))
     )
   )
 
@@ -78,7 +118,12 @@
     (bibtex-beginning-of-entry)
     (let* ((arg-pairs nil)
            (entry (bibtex-parse-entry))
-           (target (shell-quote-argument (bibtex-autokey-get-field "file")))
+           (ebook nil)
+           (cover nil)
+           (target (start-process
+                    ("meta:cover:%s"
+                    jg-bibtex-meta-program
+                    (bibtex-autokey-get-field "file"))))
 
            )
       )

@@ -11,9 +11,7 @@
          (add-to-list 'load-path file)
          )
 
-(require 'ox-html-epub)
-
-(add-to-list 'org-export-backends 'html-epub)
+(require 'ox-epub)
 
 (defun org-epub-export-to-html (&optional async subtreep visible-only body-only ext-plist)
   (interactive)
@@ -23,7 +21,7 @@
 			 org-html-extension "html")))
 	 (file (org-export-output-file-name extension))
 	 (org-export-coding-system org-html-coding-system))
-    (org-export-to-file 'html-epub file
+    (org-export-to-file 'epub file
       async subtreep visible-only body-only ext-plist)))
 
 

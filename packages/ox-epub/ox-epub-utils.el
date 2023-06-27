@@ -1,4 +1,4 @@
-;;; +ox-html-epub-utils.el -*- lexical-binding: t; -*-
+;;; +ox-epub-utils.el -*- lexical-binding: t; -*-
 
 (defun org-epub--wrap-image (contents info &optional caption label)
   "Wrap CONTENTS string within an appropriate environment for images.
@@ -321,7 +321,7 @@ INFO is a plist used as a communication channel."
 			(org-element-property :priority headline)))
 	 (text (org-export-data-with-backend
 		(org-export-get-alt-title headline info)
-		(org-export-toc-entry-backend 'html-epub)
+		(org-export-toc-entry-backend 'epub)
 		info))
 	 (tags (and (eq (plist-get info :with-tags) t)
 		    (org-export-get-tags headline info))))
@@ -337,4 +337,4 @@ INFO is a plist used as a communication channel."
 	     (apply (plist-get info :html-format-headline-function)
 		    todo todo-type priority text tags :section-number nil)))))
 
-(provide 'ox-html-epub-utils)
+(provide 'ox-epub-utils)

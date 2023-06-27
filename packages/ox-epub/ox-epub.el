@@ -7,10 +7,9 @@
 
 (require 'org)
 (require 'ox)
-(require 'ox-html)
-(require 'ox-html-epub-vars)
-(require 'ox-html-epub-utils)
-(require 'ox-html-epub-transcoders)
+(require 'ox-epub-vars)
+(require 'ox-epub-utils)
+(require 'ox-epub-transcoders)
 
 ;;-- backend definition
 
@@ -65,7 +64,7 @@
 "
   )
 
-(org-export-define-derived-backend 'html-epub 'html
+(org-export-define-derived-backend 'epub 'html
   :translate-alist org-epub-translate-alist
   ;; :menu-entry org-epub-menu
   :filters-alist org-epub-filters
@@ -110,7 +109,7 @@ produce code that uses these same face definitions."
   (when (looking-at " +") (replace-match ""))
   (goto-char (point-min)))
 
-(provide 'ox-html-epub)
+(provide 'ox-epub)
 
 ;; Local variables:
 ;; generated-autoload-file: "org-loaddefs.el"

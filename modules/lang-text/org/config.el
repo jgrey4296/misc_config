@@ -128,7 +128,7 @@
   :commands org-unit-test-minor-mode
   )
 
-(use-package! ox-html-epub
+(use-package! ox-epub
   :after org)
 
 (use-package! org

@@ -46,7 +46,6 @@
 
 ;;-- ivy
 
-
 (map! :map swiper-map
       :after swiper
       :localleader

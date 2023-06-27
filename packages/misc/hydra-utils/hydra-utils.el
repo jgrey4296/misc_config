@@ -1,6 +1,10 @@
 ;;; hydra-utils.el -*- lexical-binding: t; -*-
-(require 's)
-(require 'dash)
+
+(eval-when-compile
+  (require 'cl)
+  (require 's)
+  (require 'dash)
+  )
 
 (defvar hydra-utils-format-min-column 8)
 

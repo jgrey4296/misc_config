@@ -1,4 +1,4 @@
-;;; +ox-html-epub-templates.el -*- lexical-binding: t; -*-
+;;; +ox-epub-templates.el -*- lexical-binding: t; -*-
 
 ;; Transcoders return a string without trailing spaces or nil
 ;; args are (object contents communication-channel)
@@ -377,7 +377,7 @@ INFO is a plist holding contextual information.  See
 	    (if (org-string-nw-p attr) (concat " " attr) ""))))
     (cond
      ;; Link type is handled by a special function.
-     ((org-export-custom-protocol-maybe link desc 'html-epub info))
+     ((org-export-custom-protocol-maybe link desc 'epub info))
      ;; Image file.
      ((and (plist-get info :html-inline-images)
 	   (org-export-inline-image-p
@@ -533,4 +533,4 @@ holding export options."
 
 ;;-- end overridden for custom toc
 
-(provide 'ox-html-epub-transcoders)
+(provide 'ox-epub-transcoders)

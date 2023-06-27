@@ -108,4 +108,4 @@
 (when (modulep! +pandoc) (package! ox-pandoc))
 (when (modulep! +hugo) (package! ox-hugo :recipe (:host github :repo "kaushalmodi/ox-hugo" :nonrecursive t)))
 (when (modulep! :lang rst) (package! ox-rst))
-(package! ox-html-epub :recipe `(:local-repo ,(expand-file-name "packages/ox-html-epub" doom-user-dir)))
+(package! ox-epub :recipe `(:local-repo ,(expand-file-name "packages/ox-epub" doom-user-dir)))

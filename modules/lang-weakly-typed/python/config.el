@@ -81,3 +81,11 @@
 (use-package! company-anaconda
   :commands 'company-anaconda
   )
+
+(use-package! python-pytest
+  :after python-mode
+  :config
+  (transient-append-suffix 'python-pytest-dispatch "-c" '("-f" "Logfile" +jg-python-test-logfile))
+  (transient-append-suffix 'python-pytest-dispatch "D" '("q" "Quit" transient-quit-one))
+  (transient-append-suffix 'python-pytest-dispatch "-x" '("--tc" "Trace Config" "--trace-config"))
+  )

@@ -133,8 +133,9 @@
                  )
 (spec-handling-add! lookup-regular
                     '(org-mode
-                      ("Org Manual" . "https://orgmode.org/manual/")
+                      ("Org Manual"   . "https://orgmode.org/manual/")
                       ("Babel Manual" . "https://orgmode.org/worg/org-contrib/babel/intro.html")
+                      ("Wiki Quote"   . "https://en.m.wikiquote.org/wiki/Main_Page")
                       )
                     '(graphviz-dot-mode
                      ("Graphviz docs" . "https://graphviz.org/doc/info/lang.html")

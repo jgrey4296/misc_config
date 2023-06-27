@@ -1,6 +1,6 @@
-;;; +ox-html-epub-vars.el -*- lexical-binding: t; -*-
+;;; +ox-epub-vars.el -*- lexical-binding: t; -*-
 
-(defgroup org-export-html-epub nil
+(defgroup org-export-epub nil
   "Options for exporting Org mode files to HTML."
   :tag "Org Export HTML"
   :group 'org-export)
@@ -22,13 +22,13 @@ To get a start for your css file, start Emacs session and make sure that
 all the faces you are interested in are defined, for example by loading files
 in all modes you want.  Then, use the command
 `\\[org-epub-htmlize-generate-css]' to extract class definitions."
-  :group 'org-export-html-epub
+  :group 'org-export-epub
   :type '(choice (const css) (const inline-css) (const nil)))
 
 (defcustom org-epub-head
   "<link rel=\"stylesheet\" type=\"text/css\" href=\"./style.css\">"
   "What to add to the head of the html"
-  :group 'org-export-html-epub
+  :group 'org-export--epub
   :type 'string)
 
 ;;-- footnotes
@@ -43,7 +43,7 @@ in all modes you want.  Then, use the command
 Should contain a two instances of %s.  The first will be replaced with the
 language-specific word for \"Footnotes\", the second one will be replaced
 by the footnotes themselves."
-  :group 'org-export-html-epub
+  :group 'org-export-epub
   :type 'string)
 
 ;;-- end footnotes
@@ -63,7 +63,7 @@ TAGS      the tags (string or nil).
 INFO      the export options (plist).
 
 The function result will be used in the section format string."
-  :group 'org-export-html-epub
+  :group 'org-export-epub
   :version "26.1"
   :package-version '(Org . "8.3")
   :type 'function)
@@ -80,7 +80,7 @@ The function result will be used in the section format string."
 A rule consists in an association whose key is the type of link
 to consider, and value is a regexp that will be matched against
 link's path."
-  :group 'org-export-html-epub
+  :group 'org-export-epub
   :package-version '(Org . "9.5")
   :type '(alist :key-type (string :tag "Type")
 		:value-type (regexp :tag "Path")))
@@ -97,7 +97,7 @@ This may be a string, or an alist with export extensions
 and corresponding declarations.
 
 This declaration only applies when exporting to XHTML."
-  :group 'org-export-html-epub
+  :group 'org-export-epub
   :type '(choice
 	  (string :tag "Single declaration")
 	  (repeat :tag "Dependent on extension"
@@ -133,7 +133,7 @@ postamble itself.  This format string can contain these elements:
 
 If you need to use a \"%\" character, you need to escape it
 like that: \"%%\"."
-  :group 'org-export-html-epub
+  :group 'org-export-epub
   :type '(repeat
 	  (list (string :tag "Language")
 		(string :tag "Format string"))))
@@ -144,12 +144,12 @@ like that: \"%%\"."
 
 (defcustom org-epub-link-up ""
   "Where should the \"UP\" link of exported HTML pages lead?"
-  :group 'org-export-html-epub
+  :group 'org-export-epub
   :type '(string :tag "File or URL"))
 
 (defcustom org-epub-link-use-abs-url nil
   "Should we prepend relative links with HTML_LINK_HOME?"
-  :group 'org-export-html-epub
+  :group 'org-export-epub
   :version "24.4"
   :package-version '(Org . "8.1")
   :type 'boolean)
@@ -161,11 +161,11 @@ This is a format string, the first %s will receive the UP link,
 the second the HOME link.  If both `org-epub-link-up' and
 `org-epub-link-home' are empty, the entire snippet will be
 ignored."
-  :group 'org-export-html-epub
+  :group 'org-export-epub
   :type 'string)
 
 ;;-- end preamble
 
 ;;;; Todos
 
-(provide 'ox-html-epub-vars)
+(provide 'ox-epub-vars)

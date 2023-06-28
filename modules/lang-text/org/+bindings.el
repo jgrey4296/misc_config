@@ -83,10 +83,6 @@
       (:prefix ("c" . "Clock"))
       (:prefix ("p" . "Priority")))
 
-(map! :after graphviz-dot-mode
-      :map graphviz-dot-mode-map
-      :localleader
-      )
 
 (map! :map org-journal-mode-map
        :n "]f"  #'org-journal-next-entry

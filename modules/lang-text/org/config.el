@@ -117,13 +117,6 @@
   (push 'org-link link-hint-types)
   )
 
-(use-package! graphviz-dot-mode
-  :defer t
-  :after org
-  :init
-  (push '("dot" . graphviz-dot) org-src-lang-modes)
-  )
-
 (use-package! org-unit-test
   :commands org-unit-test-minor-mode
   )

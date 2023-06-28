@@ -28,9 +28,9 @@
   )
 
 ;;;###autoload
-(defun +jg-dired-async-trash ()
+(defun +jg-dired-async-trash (&optional file)
   (interactive)
-  (let* ((marked (dired-get-marked-files))
+  (let* ((marked (ensure-list (or file (dired-get-marked-files))))
          (t-files  (-filter #'f-file? marked))
          (t-dirs   (-filter #'f-directory? marked))
          (buffer (current-buffer))

@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name  : strict
+# uuid  : strict
+# key   : strict
+# group :
+# --
+strict graph {
+    $0
+
+}

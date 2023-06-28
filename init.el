@@ -19,7 +19,7 @@
  :emacs autosave calendar minibuffer
  :emacs dired hydra ibuffer popup version-control
 
- :lang-data csv graphql
+ :lang-data csv graphql dot
  :lang-data xml toml json yaml logs
 
  ;; :lang-dsl cobol fortran solidity

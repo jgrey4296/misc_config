@@ -47,3 +47,8 @@
 (map! :map jg-binding-backward-operator-motion-map
       :desc "Fold Block"               "1" #'autohide-minor-mode-backward-block
 )
+
+(map! :map jg-help-map
+      :after jg-help-binding
+      "d f" #'+jg-fold/debug
+      )

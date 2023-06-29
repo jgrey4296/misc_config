@@ -25,6 +25,7 @@
 
 (map! :leader
       :prefix ("p" . "project")
+      "?" #'+jg-projects-detect-type
       :desc "run cmd in project root"      "!"  #'projectile-run-shell-command-in-root
       :desc "project root"                 "`"  (cmd! (find-file (doom-project-root)))
       :desc "root shell"                   "'"  #'projectile-run-shell
@@ -162,3 +163,8 @@
       :desc "workspace"    "w"    #'+workspace/switch-right
 )
 ;;-- end window-ring
+
+(map! :map jg-help-map
+      :after jg-help-bindings
+      "d p" #'+jg-projects-detect-type
+  )

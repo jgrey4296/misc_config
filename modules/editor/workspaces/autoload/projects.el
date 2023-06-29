@@ -91,23 +91,28 @@
   )
 
 ;;;###autoload
-(defun +jg-projects-doot-tasks (&optional dir act-fn int-fn)
+(defun +jg-projects-doot-tasks (&optional act-fn int-fn)
   ;; check for cache, if cache is newer than dodo file, use that, else run doit list
-  (let ((default-directory (or dir (projectile-project-root) default-directory))
+  (let ((default-directory (or (projectile-project-root) default-directory))
         (act-fn (or act-fn (lambda (x) (concat jg-projects-doot-cmd " " (car (split-string x" " t " "))))))
         )
-    (unless (and (f-exists? ".tasks_cache")
-                 (time-less-p (f-modification-time "dooter.py") (f-modification-time ".tasks_cache")))
-        ;; No cache/out of date, so make it
-      (message "Creating Cache")
-      (+jg-projects-cache-tasks jg-projects-doot-cmd "list")
-      )
+    (cond ((and (executable-find "doot")
+                (f-exists? "doot.toml"))
+           (message "No Doot Available"))
+          ((and (f-exists? ".tasks_cache")
+                (time-less-p (f-modification-time "doot.toml") (f-modification-time ".tasks_cache")))
+           ;; No cache/out of date, so make it
+           (message "Creating Cache")
+           (+jg-projects-cache-tasks jg-projects-doot-cmd "list"))
+          )
 
-    (with-temp-buffer
-      (insert-file-contents ".tasks_cache")
-      (+jg-projects-annotate-cmds (split-string (buffer-string) "\n" t " \n")
-                                 act-fn int-fn
-                                 )
+    (when (f-exists? ".tasks_cache")
+      (with-temp-buffer
+        (insert-file-contents ".tasks_cache")
+        (+jg-projects-annotate-cmds (split-string (buffer-string) "\n" t " \n")
+                                    act-fn int-fn
+                                    )
+        )
       )
     )
   )
@@ -129,13 +134,20 @@
 ;;;###autoload
 (defun +jg-projects-cache-tasks (cmd &rest args)
   " run doit list, cache to .tasks_cache"
-  (let (result-code result-text results)
-    (with-temp-buffer
-      (setq result-code (apply 'call-process cmd nil (current-buffer) nil args)
-            result-text (buffer-string)
-            )
-      (write-region (point-min) (point-max) ".tasks_cache")
-      )
+  (let ((proc (apply #'start-process "proc:doot:list" "*proc:doot:list*" cmd args))
+        (sentinel (lambda (proc status)
+                    (when (not (process-live-p proc))
+                      (unless (f-exists? ".tasks_cache")
+                        (f-touch ".tasks_cache"))
+
+                      (with-current-buffer (process-buffer proc)
+                        (write-region (point-min) (point-max) ".tasks_cache")
+                        )
+                      )
+                    )
+                  )
+        )
+    (set-process-sentinel proc sentinel)
     )
   )
 

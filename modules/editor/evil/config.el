@@ -207,7 +207,10 @@
   :commands evil-operator-string-inflection
   )
 
-(use-package! evil-visual-mark-mode :defer t)
+(use-package! evil-visual-mark-mode
+  :defer t
+  :hook (prog-mode . evil-visual-mark-mode)
+  )
 
 (use-package! evil-anzu
   :when (modulep! :editor evil)

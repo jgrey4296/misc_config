@@ -1,8 +1,9 @@
 ;;; config/default/config.el -*- lexical-binding: t; -*-
 
 (load! "+vars")
+(defer-load! jg-bindings-total "+bindings")
 
-(use-package spec-handling
+(use-package! spec-handling
   :commands (run-spec-handlers spec-handling-new! spec-handling-add! spec-handling-setq)
   :init
   (after! jg-bindings-total

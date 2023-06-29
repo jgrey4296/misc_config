@@ -19,8 +19,9 @@
 ;;
 ;;; Code:
 
-(map! :after rustic
-      :map rustic-mode-map
+(map! :map rustic-mode-map
+      :after rustic
+      :n "RET" #'rustic-cargo-run
       :localleader
       (:prefix ("b" . "build")
        :desc "cargo audit"      "a" #'+rust/cargo-audit
@@ -43,6 +44,12 @@
       :desc "Dependency ivy" :n  "?" #'+jg-rust-dependency-ivy
       :localleader
       )
+
+(map! :map rust-test-minor-mode-map
+      :n "RET" #'rustic-cargo-current-test
+      :i "RET" #'evil-ret
+      )
+
 
 (after! rustic
   (+jg-bindings-undefine-metas rust-mode-map)

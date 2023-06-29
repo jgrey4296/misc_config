@@ -57,3 +57,25 @@
     (+jg-vcs-run-gradle prefix)
     )
   )
+
+;;;###autoload
+(defun +jg-jvm-get-gradle-commands (&optional dir)
+  ;; TODO cache results
+  (interactive)
+  (-when-let* ((root (projectile-project-root dir))
+               (gradle (f-join root "build.gradle"))
+               )
+    (with-temp-buffer
+      (setq result-code (call-process "gradle" nil (current-buffer) nil "tasks"))
+      (goto-char (point-min))
+      (keep-lines "^\\w+ -")
+      (align-regexp (point-min) (point-max) "\\(\\s-*\\)-")
+      (setq result-text (buffer-string))
+      )
+    (if (eq 0 result-code)
+        (+jg-projects-annotate-cmds (split-string result-text "\n" t " \n")
+                                    (lambda (x) (concat "gradle " (car (split-string x "-" t " ")))))
+      '()
+      )
+    )
+  )

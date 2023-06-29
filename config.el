@@ -1,9 +1,9 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
 ;;-- Me
-(setq user-full-name "John Grey"
-      user-mail-address "johngrey4296 at gmail.com"
-      user-url "https://jgrey4296.github.io/")
+(defvar user-full-name "John Grey")
+(defvar user-mail-address "johngrey4296 at gmail.com")
+(defvar user-url "https://jgrey4296.github.io/")
 ;;-- end Me
 
 ;;-- Text Encoding

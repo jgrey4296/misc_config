@@ -24,7 +24,11 @@
 
   (add-to-list 'flycheck-checkers 'rustic-clippy)
 
-  (add-hook 'rustic-mode-hook #'rainbow-delimiters-mode)
+  (add-hook! 'rustic-mode-hook
+             #'rainbow-delimiters-mode
+             #'maybe-rust-test-minor-mode
+             )
+
   (add-hook 'rustic-mode-local-vars-hook #'rustic-setup-lsp 'append)
   (add-hook 'rustic-mode-local-vars-hook #'tree-sitter! 'append)
 )

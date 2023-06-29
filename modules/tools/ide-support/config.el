@@ -193,8 +193,6 @@
   :commands flycheck-list-errors flycheck-buffer
   ;; :hook (doom-first-buffer . global-flycheck-mode)
   :init
-  (defvar flycheck-checkers)
-  (defvar flycheck-disabled-checkers)
 
   (spec-handling-add! python-env
                       '(flycheck

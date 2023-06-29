@@ -1,3 +1,9 @@
+$1            = { git = "https://github.com/$2/$1.git"} # github
+$1            = { git = "https://github.com/$2/$1.git", branch="main"} # github
+$1            = { git = "https://github.com/$2/$1.git", version="1.0"} # github
+
+$1 = { path = "../$2" } # local
+
 fern          = "0.6"     # logging
 log           = "0.4"     # logging
 simple_logger = "4.0"     # logging
@@ -69,14 +75,14 @@ plotters      = "0.3"     # graphical
 sdl2          = "0.35"    # graphical
 cargo-rs      = "0.16"    # graphical
 
-cc            = "1.0"     # other languages
-cpython       = "0.7"     # other languages
-gdnative      = "0.11"    # other languages
-libc          = "0.2"     # other languages
-libloading    = "0.7"     # other languages
-numpy         = "0.17"    # other languages
-pyo3          = "0.17"    # other languages
-rustler       = "0.26"    # other languages
+cc            = "1.0"     # ffi
+cpython       = "0.7"     # ffi
+gdnative      = "0.11"    # ffi
+libc          = "0.2"     # ffi
+libloading    = "0.7"     # ffi
+numpy         = "0.17"    # ffi
+pyo3          = "0.17"    # ffi
+rustler       = "0.26"    # ffi
 
 clippy        = "0.0.302" # dev
 rustfix       = "0.6"     # dev

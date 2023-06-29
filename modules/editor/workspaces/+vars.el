@@ -38,15 +38,15 @@ stored in `persp-save-dir'.")
 
 (defvar jg-projects-doot-cmd "doot")
 
-(setq counsel-compile-local-builds '(
-                                     +jg-workspaces-get-doot-commands
-                                     +jg-workspaces-get-gradle-commands
-                                     ;; counsel-compile-get-filtered-history
-                                     ;; counsel-compile-get-build-directories
-                                     counsel-compile-get-make-invocation
-                                     counsel-compile-get-make-help-invocations
-                                     )
-      )
+(spec-handling-add! compile-commands
+                    '(default
+                       +jg-workspaces-get-doot-commands
+                       counsel-compile-get-filtered-history
+                       counsel-compile-get-build-directories
+                       counsel-compile-get-make-invocation
+                       counsel-compile-get-make-help-invocations
+                       )
+                    )
 
 ;;-- neotree
 (setq neo-create-file-auto-open nil

@@ -17,6 +17,8 @@
 (map! :map (emacs-lisp-mode-map lisp-interaction-mode-map)
       :localleader
       :desc "Expand macro" "m" #'macrostep-expand
+      :desc "EIEIO Browse" "b" #'eieio-browse
+      "x" #'doom/sandbox
       (:prefix ("d" . "debug")
                "f" #'+emacs-lisp/edebug-instrument-defun-on
                "F" #'+emacs-lisp/edebug-instrument-defun-off)

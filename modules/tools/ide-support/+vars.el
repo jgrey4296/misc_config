@@ -78,6 +78,8 @@ If nil, it is disabled in all modes")
 ;;-- end ignore dirs
 
 ;;-- flycheck
+(defvar flycheck-checkers)
+(defvar flycheck-disabled-checkers)
 (setq-default flycheck-display-errors-delay 1
               flycheck-display-errors-function nil
               flycheck-help-echo-function nil
@@ -112,7 +114,7 @@ If nil, it is disabled in all modes")
                     )
 
 (spec-handling-add! fold
-                    '(lsp-browser
+                    `(lsp-browser
                      :modes (lsp-browser-mode)
                      :priority 30
                      :triggers (:open-all   ,#'+jg-lsp-toggle-widget-on-line

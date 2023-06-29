@@ -64,6 +64,7 @@
   (interactive)
   (-when-let* ((root (projectile-project-root dir))
                (gradle (f-join root "build.gradle"))
+               (gradle-exists (f-exists? gradle))
                )
     (with-temp-buffer
       (setq result-code (call-process "gradle" nil (current-buffer) nil "tasks"))

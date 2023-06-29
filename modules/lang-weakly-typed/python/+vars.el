@@ -113,13 +113,13 @@
 ;;-- end lsp
 
 ;;-- jg-company
-(setq jg-python-company-activation (rx (| "error" "lib"))
-      jg-python-company-kws (let ((ht (make-hash-table :test 'equal)))
+(defvar jg-python-company-activation (rx (| "error" "lib")))
+(defvar jg-python-company-kws (let ((ht (make-hash-table :test 'equal)))
                               (puthash "error" +jg-python-ivy-exceptions ht)
                               (puthash "lib" '() ht)
                               ht
                               )
-      )
+  )
 ;;-- end jg-company
 
 ;;-- specs

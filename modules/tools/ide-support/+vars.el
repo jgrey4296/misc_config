@@ -131,8 +131,8 @@ If nil, it is disabled in all modes")
                     `(lsp-mode
                      :definition ,#'+lsp-lookup-definition-handler
                      :references ,#'+lsp-lookup-references-handler
-                     :documentation ,#'(lambda () (lsp-describe-thing-at-point :async t))
-                     :implementations ,#'(lambda () (lsp-find-implementation :async t))
+                     :documentation ,#'lsp-describe-thing-at-point
+                     :implementations ,#'lsp-find-implementation
                      :type-definition ,#'lsp-find-type-definition
                      )
                     `(eglot--managed-mode

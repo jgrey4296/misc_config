@@ -256,7 +256,7 @@ return (:marker path-of-dotvenv? :env env-name? :path dir-of-venv? )
           )
       )
 
-    (let* ((parts (split-string text ":" t " +"))
+    (-if-let* ((parts (split-string text ":" t " +"))
            (head (car-safe parts))
            )
 

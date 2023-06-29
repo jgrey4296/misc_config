@@ -103,13 +103,12 @@
   (evilem-make-motion evilem-motion-backward-WORD-end #'evil-backward-WORD-end :scope 'visible))
 
 (use-package! evil-embrace
-  :commands embrace-add-pair embrace-add-pair-regexp
+  :defer t
   :hook (LaTeX-mode      . embrace-LaTeX-mode-hook)
   :hook (LaTeX-mode      . +evil-embrace-latex-mode-hook-h)
   :hook (org-mode        . embrace-org-mode-hook)
   :hook (ruby-mode       . embrace-ruby-mode-hook)
   :hook (emacs-lisp-mode . embrace-emacs-lisp-mode-hook)
-  :hook ((c++-mode rustic-mode csharp-mode java-mode swift-mode typescript-mode) . +evil-embrace-angle-bracket-modes-hook-h)
   :init
   (after! evil-surround (evil-embrace-enable-evil-surround-integration))
   :config

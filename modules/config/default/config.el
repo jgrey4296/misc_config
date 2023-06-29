@@ -1,5 +1,6 @@
 ;;; config/default/config.el -*- lexical-binding: t; -*-
 
+(load! "+spec-defs")
 (load! "+vars")
 (defer-load! jg-bindings-total "+bindings")
 

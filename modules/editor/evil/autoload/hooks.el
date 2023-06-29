@@ -38,11 +38,13 @@
 
 ;;;###autoload
 (defun +evil-embrace-angle-bracket-modes-hook-h ()
+  (when (boundp 'evil-embrace-evil-surround-keys)
     (let ((var (make-local-variable 'evil-embrace-evil-surround-keys)))
       (set var (delq ?< evil-embrace-evil-surround-keys))
       (set var (delq ?> evil-embrace-evil-surround-keys)))
     (embrace-add-pair-regexp ?< "\\_<[a-z0-9-_]+<" ">" #'+evil--embrace-angle-brackets)
-    (embrace-add-pair ?> "<" ">"))
+    (embrace-add-pair ?> "<" ">")
+    ))
 
 ;;;###autoload
 (defun +evil--escape-exchange-h ()

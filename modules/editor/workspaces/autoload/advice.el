@@ -61,3 +61,25 @@
 
 ;;;###autoload
 (advice-add 'projectile--run-project-cmd :around #'+jg-projects-projectile-cmd-list)
+
+
+;;;###autoload
+(defun +jg-workspaces-time-compile-cmd-retrieval (&optional dir)
+
+  (let (cands times)
+    (dolist (cmds counsel-compile-local-builds)
+      (when (functionp cmds)
+        (push (list (symbol-name cmds)
+                    (benchmark-elapse
+                      (setq cmds (funcall cmds dir)))) times))
+      (when cmds
+        (push (if (listp cmds) cmds (list cmds)) cands)))
+    (cl-loop for pair in times
+             do
+             (message "%-10s : %s" (cadr pair) (car pair))
+             )
+    (apply #'append (nreverse cands)))
+  )
+
+;;;###autoload
+(advice-add 'counsel--get-compile-candidates :override #'+jg-workspaces-time-compile-cmd-retrieval)

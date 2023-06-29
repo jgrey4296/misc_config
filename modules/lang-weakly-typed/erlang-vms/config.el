@@ -16,11 +16,10 @@
         exec-path (cons "/usr/local/opt/erlang/bin" exec-path)
         )
 
-  (when (modulep! +lsp)
-    (add-hook 'erlang-mode-local-vars-hook #'lsp! 'append))
+  ;; (when (modulep! +lsp)
+  ;;   (add-hook 'erlang-mode-local-vars-hook #'lsp! 'append))
 
-  (when (modulep! +tree-sitter)
-    (add-hook 'erlang-mode-local-vars-hook #'tree-sitter! 'append))
+  (add-hook 'erlang-mode-hook #'tree-sitter!)
   )
 
 (use-package! elixir-mode
@@ -52,13 +51,12 @@
     (sp-local-pair "do " " end" :unless '(sp-in-comment-p sp-in-string-p))
     (sp-local-pair "fn " " end" :unless '(sp-in-comment-p sp-in-string-p)))
 
-  (when (modulep! +lsp)
-    (add-hook 'elixir-mode-local-vars-hook #'lsp! 'append)
-    (after! lsp-mode
-      (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]_build\\'")))
+  ;; (when (modulep! +lsp)
+  ;;   (add-hook 'elixir-mode-local-vars-hook #'lsp! 'append)
+  ;;   (after! lsp-mode
+  ;;     (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]_build\\'")))
 
-  (when (modulep! +tree-sitter)
-    (add-hook 'elixir-mode-local-vars-hook #'tree-sitter! 'append))
+  (add-hook 'elixir-mode-hook #'tree-sitter!)
 
   (after! highlight-numbers
     (puthash 'elixir-mode

@@ -72,20 +72,10 @@
       :desc "Recompile"                             "C"   #'recompile
       :desc "Evaluate & replace region"             "E"   #'+eval:replace-region
       :desc "Evaluate buffer/region"                "e"   #'+eval/buffer-or-region
-      :desc "Find implementations"                  "i"   #'+lookup/implementations
-      :desc "Find type definition"                  "t"   #'+lookup/type-definition
       :desc "List errors"                           "x"   #'flymake-show-diagnostics-buffer
       :desc "Recompile"                             "C"   #'recompile
       :desc "Send to repl"                          "s"   #'+jg-send-region-to-repl
-       ;;:desc "Flycheck"                           "!"   flycheck-command-map
       :desc "List errors"                           "x"   #'flycheck-list-errors
-      ;; :desc "LSP Code actions"                      "a"   #'lsp-execute-code-action
-      ;; :desc "LSP Organize imports"                  "o"   #'lsp-organize-imports
-      ;; :desc "LSP Rename"                            "R"   #'lsp-rename
-      ;; :desc "LSP"                                   "l"   lsp-command-map
-      :desc "Jump to symbol in current workspace"   "j"   #'lsp-ivy-workspace-symbol
-      :desc "Jump to symbol in any workspace"       "J"   #'lsp-ivy-global-workspace-symbol
-      :desc "Macro Expand"                          "m"   #'pp-macroexpand-last-sexp
       (:prefix ("r" . "Repl"))
       )
 ;;-- end <leader> c --- code

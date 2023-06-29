@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name  : time.it
+# uuid  : time.it
+# key   : time.it
+# group :
+# --
+(require 'benchmark)
+
+(message "Took: %s" (benchmark-elapse $1))

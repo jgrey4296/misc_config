@@ -86,7 +86,11 @@
                     '(rust-cargo ("Cargo.toml") :project-file "Cargo.toml" :compilation-dir nil :configure nil :compile "cargo build" :test "cargo test" :install nil :package nil :run "cargo run")
                     )
 
-(spec-handling-add! docsets '(rustic-mode "Rust"))
+(spec-handling-add! docsets '(rust-mode "Rust"))
+
+(spec-handling-add! tree-sit-lang
+                    '(rust-mode . rust)
+                    )
 ;;-- end specs
 
 ;;-- LSP
@@ -94,15 +98,11 @@
       rustic-analyzer-command '("rustup" "run" "nightly" "rust-analyzer")
       lsp-rust-server 'rust-analyzer
  )
-(spec-handling-add! tree-sit-lang
-                    '(rust-mode       . rust)
-                    '(rustic-mode     . rust)
-                    )
 
 ;;-- end LSP
 
 (spec-handling-add! lookup-regular
-                    '((rust-mode rustic-mode)
+                    '((rust-mode)
                       ("Stable Documentation"    . "https://doc.rust-lang.org/stable/")
                       ("Md Book"                 . "https://rust-lang.github.io/mdBook/")
                       ("Rust Error Codes"        . "https://doc.rust-lang.org/error_codes/error-index.html")

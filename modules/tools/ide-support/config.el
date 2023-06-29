@@ -21,14 +21,12 @@
 ;;; Code:
 
 (load! "+vars")
-(after! jg-bindings-total
-  (load! "+bindings")
-  )
+(defer-load! jg-bindings-total "+bindings")
 
 ;;-- lsp
 
 (use-package! lsp-mode
-  :commands lsp-install-server
+  :commands (lsp-install-server lsp-deferred)
   :init
   ;; Don't touch ~/.emacs.d, which could be purged without warning
   (setq lsp-session-file (concat doom-cache-dir "lsp-session")
@@ -127,7 +125,7 @@
 
   (spec-handling-new! tree-sit-lang
                       tree-sitter-major-mode-language-alist
-                      :loop collect
+                      :loop 'collect
                       `(,key . ,val)
                       )
   :config

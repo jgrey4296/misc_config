@@ -1,6 +1,6 @@
 ;;; tools/tree-sitter/autoload.el -*- lexical-binding: t; -*-
 
-;;;###autodef (fset 'tree-sitter! #'ignore)
+;;;###autoload
 (defun tree-sitter! ()
   "Dispatch to turn on tree sitter.
 

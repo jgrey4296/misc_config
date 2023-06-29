@@ -21,15 +21,17 @@
     (defalias 'org-babel-execute:rust #'org-babel-execute:rustic)
     (add-to-list 'org-src-lang-modes '("rust" . rustic)))
   :config
-
-  (add-to-list 'flycheck-checkers 'rustic-clippy)
+  (after! flycheck
+    (add-to-list 'flycheck-checkers 'rustic-clippy)
+    )
 
   (add-hook! 'rustic-mode-hook
              #'rainbow-delimiters-mode
              #'maybe-rust-test-minor-mode
              #'hs-minor-mode
+             #'tree-sitter!
              )
 
-  (add-hook 'rustic-mode-local-vars-hook #'rustic-setup-lsp 'append)
-  (add-hook 'rustic-mode-local-vars-hook #'tree-sitter! 'append)
+  ;; (add-hook 'rustic-mode-local-vars-hook #'rustic-setup-lsp 'append)
+  ;; (add-hook 'rustic-mode-local-vars-hook #'tree-sitter! 'append)
 )

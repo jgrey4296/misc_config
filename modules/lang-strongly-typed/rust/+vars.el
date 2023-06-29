@@ -35,6 +35,20 @@
                    '(rust +jg-rust-get-cargo-commands)
                    )
 
+(spec-handling-add! fold
+                    `(rust
+                      :modes (rust-mode)
+                      :priority 25
+                      :triggers (:open-all   ,#'hs-show-all
+                                :close-all  ,#'hs-hide-all
+                                :toggle     ,#'hs-toggle-hiding
+                                :open       ,#'hs-show-block
+                                :open-rec   nil
+                                :close      ,#'hs-hide-block
+                                )
+                      )
+                    )
+
 (spec-handling-add! popup
                     '(rust
                      ("^\\*rustic-compilation" :vslot -1)

@@ -27,6 +27,7 @@
   (add-hook! 'rustic-mode-hook
              #'rainbow-delimiters-mode
              #'maybe-rust-test-minor-mode
+             #'hs-minor-mode
              )
 
   (add-hook 'rustic-mode-local-vars-hook #'rustic-setup-lsp 'append)

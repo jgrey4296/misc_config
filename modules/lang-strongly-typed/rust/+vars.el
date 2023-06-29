@@ -31,6 +31,10 @@
   )
 
 ;;-- specs
+(spec-handling-add! compile-commands
+                   '(rust +jg-rust-get-cargo-commands)
+                   )
+
 (spec-handling-add! popup
                     '(rust
                      ("^\\*rustic-compilation" :vslot -1)

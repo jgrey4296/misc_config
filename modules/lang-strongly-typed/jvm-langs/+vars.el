@@ -4,6 +4,11 @@
 (defvar kotlin-repl-buffer "*kotlin*")
 (defvar kotlin-command "kotlinc")
 
+(spec-handling-add! compile-commands
+                    '(jvm +jg-jvm-get-gradle-commands)
+                    )
+
+
 (setq scala-indent:align-parameters t
       ;; indent block comments to first asterix, not second
       scala-indent:use-javadoc-style t)

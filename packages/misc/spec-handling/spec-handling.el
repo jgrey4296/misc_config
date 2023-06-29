@@ -2,12 +2,14 @@
 (require 'dash)
 (require 'cl-lib)
 (require 'benchmark)
+(require 'helpful)
 
 (defvar spec-handling-hook nil)
 
 (defvar spec-handling-feature-set nil)
 
-(defvar spec-handling-types (make-hash-table :test 'equal))
+(defvar spec-handling-types (make-hash-table :test 'equal) "Records where handlers are defined and used")
+(defvar spec-handling-docs (make-hash-table :test 'equal) "Contains plists of handler documentation")
 
 (defconst spec-handling-gensym-plist '(:table "spec-table"
                                        :apply "reapply-specs-fn"
@@ -28,13 +30,15 @@
     )
   )
 
-(defun spec-handling--add-type (type file &optional form)
+(defun spec-handling--add-type (type file &optional form doc structure target optional)
   "register a type of spec handler and where it is used"
   (unless (or (null file)
               (--some (and (eq (car it) (or form :source)) (eq (cadr it) file))
                       (gethash type spec-handling-types nil)))
     (push (list (or form :use) file) (gethash type spec-handling-types))
     )
+  (when (or doc structure target optional)
+    (puthash type `(:doc ,doc :structure ,structure :target ,target :optional ,optional) spec-handling-docs))
   (gethash type spec-handling-types nil)
 )
 
@@ -100,7 +104,9 @@ this stops them being re-run repeatedly
   )
 
 ;;;###autoload
-(cl-defmacro spec-handling-new! (type target &rest body &key (sorted nil) (rmdups nil) (loop 'do) &allow-other-keys)
+(cl-defmacro spec-handling-new! (type target &rest body
+                                      &key (sorted nil) (rmdups nil) (loop 'do)
+                                      (doc nil) (struct nil) (optional nil) &allow-other-keys)
   " Simplifies Spec application and definition
 body is run for each (key . (vals)) of the spec-table and sets the value of target
 
@@ -132,12 +138,13 @@ return the generated feature name of this spec type
     (cl-assert (or target (memq loop-kw '(do hook))) t "Must have a target if loop isnt a 'do or 'hook")
     (cl-assert (not (and target (memq loop-kw '(do hook)))) t "Can't have a target if loop is a 'do or 'hook")
     (cl-assert (not (and sorted (memq loop-kw '(do hook)))) t "Sorting a 'do or 'hook loop doesn't make sense")
-    (spec-handling--add-type type fname (pcase loop-kw
-                                          ('hook :hooks-definition)
-                                          (_ :definition)
-                                          ))
     ;; The macro's returned code:
      `(unless ,@unless-check
+        (spec-handling--add-type (quote ,type) ,fname (pcase ,loop
+                                                        ('hook :hooks-definition)
+                                                        (_ :definition)
+                                                        )
+                                 ,doc ,struct (quote ,target) ,optional)
         (defvar ,table-name (make-hash-table :test 'equal),(format "Macro generated hash-table to store specs for %s" type ))
         (fset (function ,reapply-name)
               (lambda (&optional dry)
@@ -273,6 +280,40 @@ return the generated feature name of this spec type
       (princ "* File List:\n")
       (dolist (file (sort (hash-table-keys unique-files) #'string-lessp))
         (princ (format "%s\n" file)))
+      )
+    )
+  )
+
+;;;###autoload
+(defun spec-handling-describe ()
+  (interactive)
+  (let* ((chosen (completing-read "Which Handler? " (hash-table-keys spec-handling-docs)))
+        (details-plist (gethash (intern chosen) spec-handling-docs))
+        )
+    ;; TODO build a h
+    (with-help-window (help-buffer)
+      (with-current-buffer standard-output
+        (insert (format "Spec Handler: %s\n" chosen))
+
+        (insert "\n ---- Spec Target Variable: \n")
+        (if-let (target (plist-get details-plist :target))
+            (princ target)
+          (insert "None")
+          )
+
+        (insert "\n\n\n ---- Spec Documentation: \n")
+        (-if-let (doc (plist-get details-plist :doc))
+            (princ doc)
+          (insert "No Defined Documentation\n")
+          )
+
+        (insert "\n\n\n ---- Spec Structure: \n")
+        (-if-let (struct (plist-get details-plist :structure))
+            (princ (helpful--pretty-print struct))
+          (insert "No Defined Structure\n")
+
+          )
+        )
       )
     )
   )

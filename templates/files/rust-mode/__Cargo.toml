@@ -38,97 +38,6 @@ rustflags        = ['--emit=obj,link']
 
 ##-- dependencies
 [dependencies]
-### Logging
-# fern          = "0.6"
-log           = "0.4"
-simple_logger = "4.0"
-# slog          = "2.7"
-# tracing       = "0.1"
-
-### Documentation
-# cargo-sphinx = "1.3"
-# flamegraph   = "0.6"
-# cargo-graph  = "0.3"
-
-### utils
-# anyhow      = "1.0"
-# cassowary   = "0.3"
-# fp-core     = "0.1"
-# itertools   = "0.10"
-# proptest    = "1.0"
-# parry2d     = "0.11"
-# bracket-lib = "0.8"
-# cargo-rr    = "0.2"
-# cargo-make    = "0.36"
-tomlq         = "0.1"
-tomato-toml   = "0.3"
-
-### data
-# bitflags     = "1.3"
-# csv          = "1.1"
-# diesel       = "2.0"
-# graph        = "0.3"
-# humantime    = "2.1"
-# json         = "0.12"
-# jsonrpc      = "0.14"
-# nom-bibtex   = "0.3"
-# prettyplease = "0.1" # syn pretty printer
-# quick-xml    = "0.26"
-# rand         = "0.8"
-# rusqlite     = "0.28"
-# semver       = "1.0"
-# serde        = "1.0"
-# serde-json   = "1.0"
-# tempfile     = "3.3"
-# time         = "0.3"
-# uuid         = "1.2"
-# xml-rs       = "0.8"
-# euclid       = "0.22"
-# cgmath-rs    = "0.18"
-# cty          = "0.2.2"
-
-### Parsing
-# nom           = "7.1"
-# pest          = "2.5"
-# regex         = "1.7"
-# syn           = "1.0"
-# textwrap      = "0.16"
-
-### CLI parsing:
-# clap          = "4.0"
-
-### http
-# actix         = "0.13"
-# hyper         = "0.14"
-# lspower       = "1.5"
-# reqwest       = "0.11"
-# tokio         = "1.22"
-# crossbeam     = "0.8"
-# scopeguard    = "1.1"
-
-### sync
-# futures       = "0.3"
-# parking_lot   = "0.12"
-
-### graphics
-# egui          = "0.19"
-# gtk           = "0.16"
-# iced          = "0.5"
-# image         = "0.24"
-# plotters      = "0.3"
-# sdl2          = "0.35"
-# cargo-rs      = "0.16"
-
-### other languages
-# cc            = "1.0"
-# cpython       = "0.7"
-# gdnative      = "0.11"
-# libc          = "0.2"
-# libloading    = "0.7"
-# numpy         = "0.17"
-# pyo3          = "0.17"
-# rustler       = "0.26"
-# emacs         = "0.18.0"
 
 [dev-dependencies]
 clippy        = "0.0.302"
@@ -139,6 +48,9 @@ rustfmt       = "0.10"
 
 [target.'cfg(unix)'.dependencies]
 
+[target.'cfg(windows)'.dependencies]
+[target.'cfg(target_arch = "x86")'.dependencies]
+[target.'cfg(target_arch = "x86_64")'.dependencies]
 ##-- end dependencies
 
 ##-- features

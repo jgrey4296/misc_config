@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name  : test.solo
+# uuid  : test.solo
+# key   : test.solo
+# group : jg
+# --
+#[cfg(test)]
+#[test]
+fn ${1:test_name}() {
+    $0
+}

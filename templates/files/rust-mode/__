@@ -1,6 +1,6 @@
 ////-- imports
 use std::io;
-use log::{info, trace, warn}
+use log::{info, trace, warn};
 use $1;
 ////-- end imports
 

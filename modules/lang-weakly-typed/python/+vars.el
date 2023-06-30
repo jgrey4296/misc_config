@@ -113,10 +113,12 @@
 ;;-- end lsp
 
 ;;-- jg-company
-(defvar jg-python-company-activation (rx (| "error" "lib")))
+(defvar jg-python-company-activation (rx (| "error" "lib" "date" "argparse")))
 (defvar jg-python-company-kws (let ((ht (make-hash-table :test 'equal)))
-                              (puthash "error" +jg-python-ivy-exceptions ht)
-                              (puthash "lib" '() ht)
+                              (puthash "error" jg-python-ivy-exceptions ht)
+                              (puthash "lib" jg-python-ivy-libs ht)
+                              (puthash "date" jg-python-ivy-datetimes ht)
+                              (puthash "argparse" jg-python-ivy-argparse ht)
                               ht
                               )
   )

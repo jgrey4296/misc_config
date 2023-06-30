@@ -97,14 +97,14 @@
   :defer t
   :after yasnippet
   :config
-  (push yasnippet-snippets-dir jg-snippet-dirs)
+  ;; (push yasnippet-snippets-dir jg-snippet-dirs)
   )
 
 (use-package! doom-snippets
   :defer t
   :after yasnippet
   :config
-  (push doom-snippets-dir jg-snippet-dirs)
+  ;; (push doom-snippets-dir jg-snippet-dirs)
   )
 
 (use-package! auto-yasnippet

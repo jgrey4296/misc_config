@@ -12,9 +12,7 @@
 
 (map! :map python-mode-map
       :after python-mode
-      :desc "Insert Exception"       :n "I e" #'+jg-python-exception-ivy
-      :desc "Insert Datetime format" :n "I d" #'+jg-python-datetime-ivy
-      :desc "Insert lib" :n "I \\" #'+jg-python-libs-ivy
+      :desc "General Insert"         :n "|" #'+jg-python-general-ivy
 
       :n "z d" nil ;; #'+jg-python-toggle-all-defs
       :n "z D" nil ;; #'+jg-python-close-class-defs

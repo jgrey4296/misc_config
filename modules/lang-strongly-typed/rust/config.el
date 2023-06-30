@@ -25,12 +25,17 @@
     (add-to-list 'flycheck-checkers 'rustic-clippy)
     )
 
-  (add-hook! 'rustic-mode-hook
+  (add-hook! 'rust-mode-hook
              #'rainbow-delimiters-mode
              #'maybe-rust-test-minor-mode
              #'hs-minor-mode
              #'tree-sitter!
              )
+
+  (setq-hook! 'rust-mode-hook
+    jg-company-activation-re    jg-rust-company-activation
+    jg-company-kws              jg-rust-company-kws
+    )
 
   ;; (add-hook 'rustic-mode-local-vars-hook #'rustic-setup-lsp 'append)
   ;; (add-hook 'rustic-mode-local-vars-hook #'tree-sitter! 'append)

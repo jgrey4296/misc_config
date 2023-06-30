@@ -18,10 +18,14 @@
 ;;
 ;;
 ;;; Code:
+(defvar jg-rust-mode-map (make-sparse-keymap))
 
-(map! :map rustic-mode-map
+
+(map! :map jg-rust-mode-map
       :after rustic
       :n "RET" #'rustic-cargo-run
+      :desc "General Insert" :n "|" #'+jg-rust-main-ivy
+      :desc "Racer Describe" :n "?" #'rustic-racer-describe
       :localleader
       (:prefix ("b" . "build")
        :desc "cargo audit"      "a" #'+rust/cargo-audit
@@ -52,8 +56,7 @@
 
 
 (after! rustic
-  (+jg-bindings-undefine-metas rust-mode-map)
-  (+jg-bindings-undefine-metas rustic-mode-map)
+  (setq rustic-mode-map jg-rust-mode-map)
   )
 
 ;;; +bindings.el ends here

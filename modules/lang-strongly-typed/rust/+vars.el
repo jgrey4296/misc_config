@@ -30,6 +30,21 @@
   (add-to-list 'projectile-project-root-files "Cargo.toml")
   )
 
+;;-- jg-company
+(defvar jg-rust-company-activation (rx (| "stack" "heap" "derive" "cols" "trait" "val")))
+(defvar jg-rust-company-kws (let ((ht (make-hash-table :test 'equal)))
+                              (puthash "stack"  jg-rust-ivy-stack-types ht)
+                              (puthash "heap"   jg-rust-ivy-heap-types ht)
+                              (puthash "derive" jg-rust-ivy-derives ht)
+                              (puthash "trait"  jg-rust-ivy-traits ht)
+                              (puthash "val"    jg-rust-ivy-val ht)
+                              ht
+                              )
+  )
+
+
+;;-- end jg-company
+
 ;;-- specs
 (spec-handling-add! compile-commands
                    '(rust +jg-rust-get-cargo-commands)
@@ -91,6 +106,10 @@
 (spec-handling-add! tree-sit-lang
                     '(rust-mode . rust)
                     )
+
+(spec-handling-add! company
+                    '(rust-mode (:front . jg-company/backend) (:front . company-gtags))
+                    )
 ;;-- end specs
 
 ;;-- LSP
@@ -103,28 +122,30 @@
 
 (spec-handling-add! lookup-regular
                     '((rust-mode)
-                      ("Stable Documentation"    . "https://doc.rust-lang.org/stable/")
-                      ("Md Book"                 . "https://rust-lang.github.io/mdBook/")
-                      ("Rust Error Codes"        . "https://doc.rust-lang.org/error_codes/error-index.html")
-                      ("Rust Decompiler"         . "https://rust.godbolt.org/")
-                      ("Rustc"                   . "https://doc.rust-lang.org/rustc/index.html")
-                      ("Rust Command Line"       . "https://rust-cli.github.io/book/index.html")
-                      ("Rust Design Patterns"    . "https://rust-unofficial.github.io/patterns/additional_resources/design-principles.html")
-                      ("Rust By Example"         . "https://doc.rust-lang.org/rust-by-example/index.html")
-                      ("rust book"               . "https://doc.rust-lang.org/stable/book/title-page.html")
-                      ("cargo book"              . "https://doc.rust-lang.org/cargo/")
-                      ("rust stdlib"             . "https://doc.rust-lang.org/std/index.html")
-                      ("rust editions"           . "https://doc.rust-lang.org/edition-guide/index.html")
-                      ("rust doc manual"         . "https://doc.rust-lang.org/rustdoc/index.html")
-                      ("rust cypthon"            . "https://dgrunwald.github.io/rust-cpython/doc/cpython/")
-                      ("rust py03"               . "https://pyo3.rs/v0.16.4/")
-                      ("rust manifest reference" . "https://doc.rust-lang.org/cargo/reference/manifest.html")
-                      ("rust crates"             . "https://crates.io/")
-                      ("Embedded Rust"           . "https://docs.rust-embedded.org/book/")
-                      ("Rust Collections"        . "https://doc.rust-lang.org/std/collections/index.html")
-                      ("Rust Lists"              . "https://rust-unofficial.github.io/too-many-lists/")
-                      ("Unsafe Rust"             . "https://doc.rust-lang.org/nightly/nomicon/")
-                      ("bindgen"                 . "https://rust-lang.github.io/rust-bindgen/introduction.html")
-                      ("porting" . "https://www.jelmer.uk/port-py-to-rust.html")
+                      ("error codes" . "https://doc.rust-lang.org/stable/error_codes/index.html")
+                      ("language reference"   . "https://doc.rust-lang.org/stable/reference/index.html")
+                      ("Stable Documentation" . "https://doc.rust-lang.org/stable/")
+                      ("Md Book"              . "https://rust-lang.github.io/mdBook/")
+                      ("Error Codes"          . "https://doc.rust-lang.org/error_codes/error-index.html")
+                      ("Decompiler"           . "https://rust.godbolt.org/")
+                      ("Rustc"                . "https://doc.rust-lang.org/rustc/index.html")
+                      ("Command Line"         . "https://rust-cli.github.io/book/index.html")
+                      ("Design Patterns"      . "https://rust-unofficial.github.io/patterns/additional_resources/design-principles.html")
+                      ("By Example"           . "https://doc.rust-lang.org/rust-by-example/index.html")
+                      ("book"                 . "https://doc.rust-lang.org/stable/book/title-page.html")
+                      ("cargo book"           . "https://doc.rust-lang.org/cargo/")
+                      ("stdlib"               . "https://doc.rust-lang.org/std/index.html")
+                      ("editions"             . "https://doc.rust-lang.org/edition-guide/index.html")
+                      ("doc manual"           . "https://doc.rust-lang.org/rustdoc/index.html")
+                      ("cypthon"              . "https://dgrunwald.github.io/rust-cpython/doc/cpython/")
+                      ("py03"                 . "https://pyo3.rs/v0.16.4/")
+                      ("manifest reference"   . "https://doc.rust-lang.org/cargo/reference/manifest.html")
+                      ("crates"               . "https://crates.io/")
+                      ("Embedded Rust"        . "https://docs.rust-embedded.org/book/")
+                      ("Collections"          . "https://doc.rust-lang.org/std/collections/index.html")
+                      ("Lists"                . "https://rust-unofficial.github.io/too-many-lists/")
+                      ("Unsafe Rust"          . "https://doc.rust-lang.org/nightly/nomicon/")
+                      ("bindgen"              . "https://rust-lang.github.io/rust-bindgen/introduction.html")
+                      ("porting"              . "https://www.jelmer.uk/port-py-to-rust.html")
                       )
                     )

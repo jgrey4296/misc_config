@@ -4,7 +4,7 @@
   :config
   (setq solidity-comment-style 'slash)
   (spec-handling-add docsets '(solidity-mode "Solidity"))
-  (spec-handling-add! company nil
+  (spec-handling-add! company
                       '(solidity-mode (:mode . #'company-solidity))
                       )
   )

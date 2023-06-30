@@ -5,7 +5,6 @@
 
 (use-package! rustic
   :defer t
-  :mode ("\\.rs$" . rustic-mode)
   :preface
   (after! rustic-lsp
     (remove-hook 'rustic-mode-hook 'rustic-setup-lsp))

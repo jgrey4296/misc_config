@@ -36,7 +36,6 @@
 
 (use-package! tex-mode
   :defer t
-  :mode ("\\.tex\\'" . LaTeX-mode)
   :config
   (defvar LaTeX-indent-environment-list nil)
   (load! "+fontification")

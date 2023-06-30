@@ -3,7 +3,6 @@
 (defer-load! (jg-bindings-total json-mode) "+bindings")
 
 (use-package! json-mode
-  :mode "\\.js\\(?:on\\|[hl]int\\(?:rc\\)?\\)\\'"
   :init
   (when (modulep! +lsp)
     (add-hook 'json-mode-local-vars-hook #'lsp! 'append))
@@ -20,23 +19,3 @@
   :when (modulep! :completion ivy)
   :defer t
 )
-
-(spec-handling-add! hideshow
-                    `(json
-                      (json-mode ,(rx (| "[" "{") line-end) ,(rx (| "]" "}") (opt ",") line-end))
-                     )
-                    )
-
-(spec-handling-add! fold
-                    '(json
-                     :modes (json-mode)
-                     :priority 25
-                     :triggers (:open-all   hs-show-all
-                                :close-all  hs-hide-all
-                                :toggle     hs-toggle-hiding
-                                :open       hs-show-block
-                                :open-rec   nil
-                                :close      hs-hide-block
-                                )
-                     )
-                    )

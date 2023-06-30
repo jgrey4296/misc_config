@@ -4,16 +4,8 @@
 
 (use-package! sh-script ; built-in
   :defer t
-  :mode ("\\.bats\\'" . sh-mode)
-  :mode ("\\.\\(?:zunit\\|env\\)\\'" . sh-mode)
-  :mode ("/bspwmrc\\'" . sh-mode)
   :config
-
-  (when (modulep! +lsp)
-    (add-hook 'sh-mode-local-vars-hook #'lsp! 'append))
-
-  (when (modulep! +tree-sitter)
-    (add-hook 'sh-mode-local-vars-hook #'tree-sitter! 'append))
+  (add-hook 'sh-mode-local-vars-hook #'tree-sitter!)
 
   (setq sh-indent-after-continuation 'always)
 
@@ -51,12 +43,8 @@
 (use-package! company-shell
   :defer t
   :when (modulep! :completion company)
-  :unless (modulep! +lsp)
   :after sh-script
   :config
-  (spec-handling-add! company
-                      '(sh-mode (:mode . #'company-shell) (:mode .  #'company-files))
-                      )
   (setq company-shell-delete-duplicates t
         ;; whatis lookups are exceptionally slow on macOS (#5860)
         company-shell-dont-fetch-meta IS-MAC)

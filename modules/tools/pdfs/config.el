@@ -28,7 +28,6 @@
 
 (use-package! pdf-meta-mode
   :commands (pdf-meta-mode pdf-meta-extract-info pdf-meta-split pdf-meta-join pdf-meta-attach pdf-meta-detach)
-  :mode ("\\.pdf.info\\'" . pdf-meta-mode)
   )
 
 ;;; config.el ends here

@@ -80,7 +80,7 @@
 
 ;;-- origami
 (when (modulep! +origami)
-  (spec-handling-add! fold nil
+  (spec-handling-add! fold
                       '(origami
                        :modes (origami-mode)
                        :priority -100

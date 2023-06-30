@@ -37,3 +37,9 @@
                       ("Separation Logic (6)" . "https://softwarefoundations.cis.upenn.edu/slf-current/toc.html")
                       )
                     )
+
+(spec-handling-add! auto-modes
+                    '(coq
+                      ("\\.v\\'" . coq-mode)
+                      )
+                    )

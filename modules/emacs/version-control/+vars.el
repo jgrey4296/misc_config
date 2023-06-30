@@ -97,3 +97,12 @@ Only has an effect in GUI Emacs.")
                                  )
                       )
                     )
+
+(spec-handling-add! auto-modes
+                    '(version-control
+                      ("/\\.dockerignore\\'"  . gitignore-mode)
+                      ("/\\.gitignore\\'"     . gitignore-mode)
+                      ("/\\.gitconfig\\'"     . gitconfig.mode)
+                      ("/git-rebase-todo\\'"  . git-rebase-mode)
+                      )
+                    )

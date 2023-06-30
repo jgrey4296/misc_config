@@ -4,3 +4,10 @@
 
 (use-package! csv-mode
   :defer t)
+
+(spec-handling-add! auto-modes
+                    '(csv
+                      ("\\.[Cc][Ss][Vv]\\'" . csv-mode)
+                      ("\\.tsv\\'" . tsv-mode)
+                      )
+                    )

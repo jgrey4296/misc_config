@@ -17,3 +17,11 @@
                      ("Godot Shaders" . "https://godotshaders.com/")
                      )
                     )
+
+(spec-handling-add! auto-modes
+                    '(godot
+                      ("\\.gd\\'" . gdscript-mode)
+                      ("\\.tscn\\'" . conf-toml-mode)
+                      ("\\.tres\\'" . conf-toml-mode)
+                      )
+                    )

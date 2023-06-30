@@ -9,7 +9,6 @@
 (use-package! nix-mode
   :defer t
   :interpreter ("\\(?:cached-\\)?nix-shell" . +nix-shell-init-mode)
-  :mode "\\.nix\\'"
   :init
   ;; Treat flake.lock files as json. Fall back to js-mode because it's faster
   ;; than js2-mode, and its extra features aren't needed there.
@@ -24,10 +23,7 @@
   ;; dreadfully slow. It can still be invoked manually..
   (setq-hook! 'nix-mode-hook company-idle-delay nil)
 
-  (when (modulep! +lsp)
-    (add-hook 'nix-mode-local-vars-hook #'lsp! 'append))
-  (when (modulep! +tree-sitter)
-    (add-hook 'nix-mode-local-vars-hook #'tree-sitter! 'append))
+  (add-hook 'nix-mode-hook #'tree-sitter!)
 
   )
 

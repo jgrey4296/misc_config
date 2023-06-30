@@ -30,6 +30,20 @@
 (spec-handling-add! tree-sit-lang
                     '(haskell-mode . haskell)
                     )
+(spec-handling-add! auto-modes
+                    '(haskell
+                      ("\\.[gh]s\\'" . haskell-mode)
+                      ("\\.hsig\\'" . haskell-mode)
+                      ("\\.l[gh]s\\'" . haskell-literate-mode)
+                      ("\\.hsc\\'" . haskell-mode)
+                      ("runghc" . haskell-mode)
+                      ("runhaskell" . haskell-mode)
+                      ("\\.cabal\\'\\|/cabal\\.project\\|/\\.cabal/config\\'" . haskell-cabal-mode)
+                      ("\\.ghci\\'" . ghci-script-mode)
+                      ("\\.hcr\\'" . ghc-core-mode)
+                      ("\\.dump-simpl\\'" . ghc-core-mode)
+                      )
+                    )
 (set-repl-handler!
     '(haskell-mode haskell-cabal-mode literate-haskell-mode)
     #'+haskell/open-repl :persist t)

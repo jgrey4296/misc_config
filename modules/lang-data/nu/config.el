@@ -30,6 +30,4 @@
   (outline-minor-mode)
   )
 
-(add-to-list 'auto-mode-alist '("\\.nu\\'" . nushell-mode))
-
 ;;; config.el ends here

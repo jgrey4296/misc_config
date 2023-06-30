@@ -8,3 +8,11 @@
                      ("Sphinx" .  "https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html")
                      )
                     )
+
+(spec-handling-add! auto-modes
+                    '(rst
+                      ("\\.txt\\'" . rst-mode)
+                      ("\\.rst\\'" . rst-mode)
+                      ("\\.rest\\'" . rst-mode)
+                      )
+                    )

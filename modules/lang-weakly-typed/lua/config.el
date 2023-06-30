@@ -12,40 +12,32 @@
   ;; lua-indent-level defaults to 3 otherwise. Madness.
   (setq lua-indent-level 2)
   :config
-  (spec-handling-add! lookup-handler (lua-mode :documentation 'lua-search-documentation))
   (set-electric! 'lua-mode :words '("else" "end"))
   (set-repl-handler! 'lua-mode #'+lua/open-repl)
-  (spec-handling-add! company
-                      '(lua-mode (:mode . #'company-lua))
-                      )
 
-  (when (modulep! +lsp)
-    (add-hook 'lua-mode-local-vars-hook #'lsp! 'append)
-
-    (when (modulep! :tools lsp +eglot)
-      (defvar +lua-lsp-dir (concat doom-data-dir "lsp/lua-language-server/")
-        "Absolute path to the directory of sumneko's lua-language-server.
+  (when (modulep! :tools lsp +eglot)
+    (defvar +lua-lsp-dir (concat doom-data-dir "lsp/lua-language-server/")
+      "Absolute path to the directory of sumneko's lua-language-server.
 
 This directory MUST contain the 'main.lua' file and be the in-source build of
 lua-language-server.")
 
-      (defun +lua-generate-lsp-server-command ()
-        ;; The absolute path to lua-language-server binary is necessary because
-        ;; the bundled dependencies aren't found otherwise. The only reason this
-        ;; is a function is to dynamically change when/if `+lua-lsp-dir' does
-        (list (or (executable-find "lua-language-server")
-                  (doom-path +lua-lsp-dir
-                             (cond (IS-MAC     "bin/macOS")
-                                   (IS-LINUX   "bin/Linux")
-                                   (IS-WINDOWS "bin/Windows"))
-                             "lua-language-server"))
-              "-E" "-e" "LANG=en"
-              (doom-path +lua-lsp-dir "main.lua")))
+    (defun +lua-generate-lsp-server-command ()
+      ;; The absolute path to lua-language-server binary is necessary because
+      ;; the bundled dependencies aren't found otherwise. The only reason this
+      ;; is a function is to dynamically change when/if `+lua-lsp-dir' does
+      (list (or (executable-find "lua-language-server")
+                (doom-path +lua-lsp-dir
+                           (cond (IS-MAC     "bin/macOS")
+                                 (IS-LINUX   "bin/Linux")
+                                 (IS-WINDOWS "bin/Windows"))
+                           "lua-language-server"))
+            "-E" "-e" "LANG=en"
+            (doom-path +lua-lsp-dir "main.lua")))
 
-      (set-eglot-client! 'lua-mode (+lua-generate-lsp-server-command)))
+    (set-eglot-client! 'lua-mode (+lua-generate-lsp-server-command)))
 
-    (when (modulep! +tree-sitter)
-      (add-hook 'lua-mode-local-vars-hook #'tree-sitter! 'append)))
+  (add-hook 'lua-mode-local-vars-hook #'tree-sitter! 'append)
 
   )
 
@@ -65,11 +57,6 @@ lua-language-server.")
   :when (modulep! +fennel)
   :defer t
   :config
-  (spec-handling-add! lookup-handler
-                      `(fennel-mode
-                       :definition ,#'fennel-find-definition
-                       :documentation ,#'fennel-show-documentation)
-                      )
   (set-repl-handler! 'fennel-mode #'fennel-repl)
 
   (setq-hook! 'fennel-mode-hook
@@ -79,8 +66,7 @@ lua-language-server.")
     ;; hideshow for that.
     outline-regexp "[ \t]*;;;;* [^ \t\n]")
 
-  (when (modulep! +tree-sitter)
-    (add-hook! 'fennel-mode-local-vars-hook 'tree-sitter! 'append))
+  (add-hook! 'fennel-mode-local-vars-hook 'tree-sitter! 'append)
 
   )
 
@@ -95,9 +81,3 @@ lua-language-server.")
     (map! :localleader
           :map +lua-love-mode-map
           "b" #'+lua/run-love-game)))
-
-(spec-handling-add! lookup-regular
-                    '(lua-mode
-                     ("Lua Manual" . "https://www.lua.org/manual/5.4/")
-                     )
-                    )

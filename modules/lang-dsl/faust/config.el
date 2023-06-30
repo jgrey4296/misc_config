@@ -1,14 +1,10 @@
 ;;; lang/faust/config.el -*- lexical-binding: t; -*-
 
+(load! "+vars")
+
 (use-package! faustine
   :defer t
-  :mode ("\\.dsp\\'" . faustine-mode)
   :config
-  (spec-handling-add! company nil
-                      '((faust-mode faustine-mode)
-                        (:mode . #'+faust-company-backend))
-                      )
-
   ;; HACK Both `faust-mode' and `faustine-mode' are hardcoded to use
   ;; auto-complete. This silences the obnoxious 'You really should install and
   ;; use auto-complete' warnings when starting them.

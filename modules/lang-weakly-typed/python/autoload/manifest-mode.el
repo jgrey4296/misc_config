@@ -71,7 +71,4 @@
 
   )
 
-;;;###autoload
-(add-to-list 'auto-mode-alist '("MANIFEST.in" . manifest-mode))
-
 ;;; +manifest-mode.el ends here

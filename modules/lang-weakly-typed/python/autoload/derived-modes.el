@@ -10,10 +10,6 @@
   (run-mode-hooks)
   )
 
-;;;###autoload
-(add-to-list 'auto-mode-alist '("SConscript" . scons-mode))
-;;;###autoload
-(add-to-list 'auto-mode-alist '("SConstruct" . scons-mode))
 ;;-- end scons
 
 ;;-- doit/doot
@@ -36,7 +32,5 @@
       (find-file (f-join default-directory "doot.toml")))
     ))
 
-;;;###autoload
-(add-to-list 'auto-mode-alist '("dooter\\.py" . doit-mode))
 
 ;;-- end doit/doot

@@ -37,19 +37,14 @@ or terminating simple string."
   (when (executable-find "dotnet")
     (setq inferior-fsharp-program "dotnet fsi --readline-"))
 
-  (if (modulep! +lsp)
-      (progn
-        (setq fsharp-ac-intellisense-enabled nil)
-        (add-hook 'fsharp-mode-local-vars-hook #'lsp! 'append))
-
-    (setq fsharp-ac-use-popup nil) ; Use a buffer for docs rather than a pop-up
+  (setq fsharp-ac-intellisense-enabled nil
+        fsharp-ac-use-popup nil ; Use a buffer for docs rather than a pop-up
     )
   )
 
 ;; Unity shaders
 (use-package! shader-mode
   :when (modulep! +unity)
-  :mode "\\.shader\\'"
   :config
   (def-project-mode! +csharp-unity-mode
     :modes '(csharp-mode shader-mode)
@@ -69,6 +64,7 @@ or terminating simple string."
          :nv "RET" #'sharper-transient-project-packages
          :nv "gr" #'sharper--project-packages-refresh)
         (:map sharper--nuget-results-mode-map
-         :nv "RET" #'sharper--nuget-search-install)))
+         :nv "RET" #'sharper--nuget-search-install))
+  )
 
-(use-package! sln-mode :mode "\\.sln\\'")
+(use-package! sln-mode :defer t)

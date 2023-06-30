@@ -110,6 +110,15 @@
 (spec-handling-add! company
                     '(rust-mode (:front . jg-company/backend) (:front . company-gtags))
                     )
+
+(spec-handling-add! auto-modes
+                    '(rust
+                      ("\\.rs$" . rustic-mode)
+                      ("Cargo\\.toml\\'" . conf-toml-mode)
+                      ("config\\.toml\\'" .conf-toml-mode)
+                      ("\\.h\\'" . c-mode)
+                      )
+                    )
 ;;-- end specs
 
 ;;-- LSP

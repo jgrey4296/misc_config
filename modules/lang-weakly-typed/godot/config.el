@@ -32,9 +32,5 @@
   :config
   (set-lookup-handlers! 'gdscript-mode
     :documentation #'gdscript-docs-browse-symbol-at-point)
-
-  (when (modulep! +lsp)
-    (add-hook 'gdscript-mode-local-vars-hook #'lsp! 'append))
-
   )
 ;;; config.el ends here

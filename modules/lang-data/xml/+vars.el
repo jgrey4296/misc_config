@@ -31,6 +31,13 @@
                     '(nxml-mode (:mode . #'company-nxml))
                     )
 
+(spec-handling-add! auto-modes
+                    '(xml
+                      ("\\.p\\(?:list\\|om\\)\\'" . nxml-mode)
+                      ("\\.xs\\(?:d\\|lt\\)\\'"   . nxml-mode)
+                      ( "\\.rss\\'" . nxml-mode)
+                      )
+                    )
 (set-repl-handler! 'nxml-mode #'+xml/open-repl)
 (set-repl-handler! 'mhtml-mode #'+xml/open-repl)
 ;;-- end specs

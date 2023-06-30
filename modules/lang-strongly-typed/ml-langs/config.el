@@ -4,11 +4,18 @@
 ;;; Packages
 (defer-load! "+vars")
 
-(when (modulep! +lsp)
-  (add-hook! '(tuareg-mode-local-vars-hook
-               reason-mode-local-vars-hook)
-             :append #'lsp!))
-
+(use-package! utop
+    :when (modulep! :tools eval)
+    :after tuareg
+    :hook (tuareg-mode-local-vars . +ocaml-init-utop-h)
+    :init
+    (set-repl-handler! 'tuareg-mode #'utop)
+    (set-eval-handler! 'tuareg-mode #'utop-eval-region)
+    (defun +ocaml-init-utop-h ()
+      (when (executable-find "utop")
+        (utop-minor-mode)))
+    :config
+    )
 
 (after! tuareg
   ;; tuareg-mode has the prettify symbols itself
@@ -29,21 +36,11 @@
         :map tuareg-mode-map
         "a" #'tuareg-find-alternate-file)
 
-  (use-package! utop
-    :when (modulep! :tools eval)
-    :hook (tuareg-mode-local-vars . +ocaml-init-utop-h)
-    :init
-    (set-repl-handler! 'tuareg-mode #'utop)
-    (set-eval-handler! 'tuareg-mode #'utop-eval-region)
-    (defun +ocaml-init-utop-h ()
-      (when (executable-find "utop")
-        (utop-minor-mode)))
-    :config
-    (set-popup-rule! "^\\*utop\\*" :quit nil)))
-
+  (add-hook! 'tuareg-mode-hook #'tree-sitter!)
+  )
 
 (use-package! merlin
-  :unless (modulep! +lsp)
+  :defer t
   :hook (tuareg-mode-local-vars . +ocaml-init-merlin-h)
   :init
   (defun +ocaml-init-merlin-h ()
@@ -57,34 +54,42 @@
   (map! :localleader
         :map tuareg-mode-map
         "t" #'merlin-type-enclosing)
+  )
 
-  (use-package! flycheck-ocaml
-    :when (modulep! :checkers syntax)
-    :hook (merlin-mode . +ocaml-init-flycheck-h)
-    :config
-    (defun +ocaml-init-flycheck-h ()
-      "Activate `flycheck-ocaml`"
-      ;; Disable Merlin's own error checking
-      (setq merlin-error-after-save nil)
-      ;; Enable Flycheck checker
-      (flycheck-ocaml-setup)))
+(use-package! flycheck-ocaml
+  :when (modulep! :checkers syntax)
+  :after merlin
+  :hook (merlin-mode . +ocaml-init-flycheck-h)
+  :config
+  (defun +ocaml-init-flycheck-h ()
+    "Activate `flycheck-ocaml`"
+    ;; Disable Merlin's own error checking
+    (setq merlin-error-after-save nil)
+    ;; Enable Flycheck checker
+    (flycheck-ocaml-setup)))
 
-  (use-package! merlin-eldoc
-    :hook (merlin-mode . merlin-eldoc-setup))
+(use-package! merlin-eldoc
+  :after merlin
+  :hook (merlin-mode . merlin-eldoc-setup)
+  )
 
-  (use-package! merlin-iedit
-    :when (modulep! :editor multiple-cursors)
-    :defer t
-    :init
-    (map! :map tuareg-mode-map
-          :v "R" #'merlin-iedit-occurrences))
+(use-package! merlin-iedit
+  :after merlin
+  :when (modulep! :editor multiple-cursors)
+  :defer t
+  :init
+  (map! :map tuareg-mode-map
+        :v "R" #'merlin-iedit-occurrences)
+  )
 
-  (use-package! merlin-imenu
-    :when (modulep! :emacs imenu)
-    :hook (merlin-mode . merlin-use-merlin-imenu)))
-
+(use-package! merlin-imenu
+  :when (modulep! :emacs imenu)
+  :after merlin
+  :hook (merlin-mode . merlin-use-merlin-imenu)
+  )
 
 (use-package! ocp-indent
+  :defer t
   ;; must be careful to always defer this, it has autoloads that adds hooks
   ;; which we do not want if the executable can't be found
   :hook (tuareg-mode-local-vars . +ocaml-init-ocp-indent-h)
@@ -93,7 +98,6 @@
     "Run `ocp-setup-indent', so long as the ocp-indent binary exists."
     (when (executable-find "ocp-indent")
       (ocp-setup-indent))))
-
 
 (use-package! ocamlformat
   :when (modulep! :editor format)
@@ -113,15 +117,12 @@
                  (setq-local ocamlformat-file-kind 'implementation))
                 ((equal ext ".eliomi")
                  (setq-local ocamlformat-file-kind 'interface)))))
-      (setq +format-with 'ocamlformat))))
+      (setq +format-with 'ocamlformat)))
+  )
 
-;; Tree sitter
-(eval-when! (modulep! +tree-sitter)
-  (add-hook! 'tuareg-mode-local-vars-hook #'tree-sitter!))
 
 (use-package! sml-mode
   :defer t
-  :mode "\\.s\\(?:ml\\|ig\\)\\'"
   :config
   (set-repl-handler! 'sml-mode #'run-sml)
 
@@ -139,8 +140,8 @@
         :prefix ("e" . "eval")
         :desc "Run buffer"                  "b" #'sml-prog-proc-send-buffer
         :desc "Run the paragraph"           "f" #'sml-send-function
-        :desc "Run region"                  "r" #'sml-prog-proc-send-region))
-
+        :desc "Run region"                  "r" #'sml-prog-proc-send-region)
+  )
 
 (use-package! company-mlton
   :defer t

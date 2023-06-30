@@ -1,7 +1,7 @@
 ;;; timeline-tags.el -*- lexical-binding: t; -*-
 ;; Handlers for jg-tags
 
-(spec-handling-add! tagging nil
+(spec-handling-add! tagging
                     (timeline-mode
                      :set +timeline-set-tags
                      :new +timeline-set-new-tag

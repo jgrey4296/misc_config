@@ -18,8 +18,7 @@
         ((modulep! :tools lsp +eglot))
         ((modulep! +lsp)       (load! "+lsp")))
 
-  (when (modulep! +tree-sitter)
-    (add-hook 'java-mode-local-vars-hook #'tree-sitter! 'append))
+  (add-hook 'java-mode-local-vars-hook #'tree-sitter! 'append)
   )
 
 (use-package! android-mode
@@ -31,9 +30,7 @@
   (set-yas-minor-mode! 'android-mode))
 
 (use-package! groovy-mode
-  :mode "\\.g\\(?:radle\\|roovy\\)$"
   :config
-  (spec-handling-add! docsets '(groovy-mode "Groovy" "Groovy_JDK" "Gradle_DSL", "Gradle_Groovy_API", "Gradle_User_Guide"))
   (set-eval-handler! 'groovy-mode "groovy")
   (set-repl-handler! 'groovy-mode #'+java/open-groovy-repl)
   )
@@ -41,11 +38,7 @@
 (use-package! kotlin-mode
   :commands kotlin-mode
   :config
-  (when (modulep! +lsp)
-    (add-hook 'kotlin-mode-local-vars-hook #'lsp! 'append))
-  (spec-handling-add! docsets '(kotlin-mode "Kotlin"))
   (set-repl-handler! 'kotlin-mode #'kotlin-repl)
-
 )
 
 (use-package! flycheck-kotlin
@@ -57,14 +50,10 @@
   :config
 
   (setq-hook! 'scala-mode-hook
-    comment-line-break-function #'+scala-comment-indent-new-line-fn)
+    comment-line-break-function #'+scala-comment-indent-new-line-fn
+    lsp-enable-indentation nil)
 
-  (when (modulep! +lsp)
-    (setq-hook! 'scala-mode-hook lsp-enable-indentation nil)
-    (add-hook 'scala-mode-local-vars-hook #'lsp! 'append))
-
-  (when (modulep! +tree-sitter)
-    (add-hook 'scala-mode-local-vars-hook #'tree-sitter! 'append))
+  (add-hook 'scala-mode-local-vars-hook #'tree-sitter!)
 
   (set-ligatures! 'scala-mode
     ;; Functional

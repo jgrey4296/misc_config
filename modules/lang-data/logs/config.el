@@ -26,8 +26,6 @@
 
 (use-package! jg-log-mode
   :commands jg-log-mode
-  :init
-  (add-to-list 'auto-mode-alist '("log\\..+\\'" . jg-log-mode))
 
   )
 

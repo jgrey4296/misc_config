@@ -5,33 +5,7 @@
 (defer-load! jg-bindings-total "+bindings")
 
 (use-package! web-mode
-  :mode "\\.[px]?html?\\'"
-  :mode "\\.erb\\'"
-  :mode "\\.[lh]?eex\\'"
-  :mode "\\.jsp\\'"
-  :mode "\\.as[cp]x\\'"
-  :mode "\\.ejs\\'"
-  :mode "\\.hbs\\'"
-  :mode "\\.mustache\\'"
-  :mode "\\.svelte\\'"
-  :mode "\\.twig\\'"
-  :mode "\\.jinja2?\\'"
-  :mode "\\.eco\\'"
-  :mode "wp-content/themes/.+/.+\\.php\\'"
-  :mode "templates/.+\\.php\\'"
-  :init
-  ;; If the user has installed `vue-mode' then, by appending this to
-  ;; `auto-mode-alist' rather than prepending it, its autoload will have
-  ;; priority over this one.
-  (add-to-list 'auto-mode-alist '("\\.vue\\'" . web-mode) 'append)
-  :mode "\\.vue\\'"
   :config
-  (spec-handling-add! docsets
-                      '(web-mode
-                        "HTML" "CSS" "Twig" "WordPress"
-                        )
-                      )
-
   ;; tidy is already defined by the format-all package. We redefine it to add
   ;; more sensible arguments to the tidy command.
   (set-formatter! 'html-tidy
@@ -147,10 +121,6 @@
     (web-mode-set-engine "django"))
   )
 
-(when (modulep! +lsp)
-  (add-hook! '(css-mode-hook scss-mode-hook sass-mode-hook less-css-mode-hook web-mode-hook)
-             :append #'lsp!)
-  )
 
 (when (modulep! +tree-sitter)
   (add-hook! 'css-mode-local-vars-hook :append #'tree-sitter!)

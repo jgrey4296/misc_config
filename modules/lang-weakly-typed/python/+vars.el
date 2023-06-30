@@ -243,6 +243,18 @@
                       "Python 3" "NumPy" "SciPy" "Pandas"
                       )
                     )
+(spec-handling-add! auto-modes
+                    '(python
+                      ("SConscript"               . scons-mode)
+                      ("SConstruct"               . scons-mode)
+                      ("dooter\\.py"              . doit-mode)
+                      ("[./]flake8\\'"            . conf-mode)
+                      ("/Pipfile\\'"              . conf-mode)
+                      ("MANIFEST.in"              . manifest-mode)
+                      ("\\.p\\(yx\\|x[di]\\)\\'"  . cython-mode)
+                      ("pyproject\\.toml\\'"      . conf-toml-mode)
+                    )
+                    )
 (set-repl-handler! 'python-mode #'+jg-python/open-repl
   :persist t
   :send-region #'python-shell-send-region

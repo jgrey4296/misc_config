@@ -62,6 +62,33 @@ If set to `nil', disable all the above behaviors.")
                     '(js3-mode        . javascript)
                     '(typescript-mode . typescript)
                     )
+(spec-handling-add! auto-modes
+                    '(web
+                      ("\\.[px]?html?\\'"                  . web-mode)
+                      ("\\.erb\\'"                         . web-mode)
+                      ("\\.[lh]?eex\\'"                    . web-mode)
+                      ("\\.jsp\\'"                         . web-mode)
+                      ("\\.as[cp]x\\'"                     . web-mode)
+                      ("\\.ejs\\'"                         . web-mode)
+                      ("\\.hbs\\'"                         . web-mode)
+                      ("\\.mustache\\'"                    . web-mode)
+                      ("\\.svelte\\'"                      . web-mode)
+                      ("\\.twig\\'"                        . web-mode)
+                      ("\\.jinja2?\\'"                     . web-mode)
+                      ("\\.eco\\'"                         . web-mode)
+                      ("wp-content/themes/.+/.+\\.php\\'"  . web-mode)
+                      ("templates/.+\\.php\\'"             . web-mode)
+                      ("\\.vue\\'"                         . web-mode)
+                      ("\\.scss\\'" . scss-mode)
+                      ("\\.css\\'" . css-mode)
+                      )
+                    )
+
+  (spec-handling-add! docsets
+                      '(web-mode
+                        "HTML" "CSS" "Twig" "WordPress"
+                        )
+                      )
 ;;-- end specs
 
 (spec-handling-add! lookup-regular

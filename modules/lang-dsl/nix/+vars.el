@@ -23,5 +23,10 @@
 (spec-handling-add! tree-sit-lang
                     '(nix-mode . nix)
                     )
+(spec-handling-add! auto-modes
+                    '(nix
+                      ("\\.nix\\'" . nix-mode)
+                      )
+                    )
 
 (set-repl-handler! 'nix-mode #'+nix/open-repl)

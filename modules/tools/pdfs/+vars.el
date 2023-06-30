@@ -5,3 +5,9 @@
      ("^\*Pdf-Meta\*"  :side bottom :ttl nil :quit t :select nil :priority 50)
     )
    )
+
+(spec-handling-add! auto-modes
+                    '(pdf-meta
+                      ("\\.pdf.info\\'" . pdf-meta-mode)
+                      )
+                    )

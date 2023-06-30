@@ -8,17 +8,10 @@
 
 (use-package! erlang
   :defer t
-  :mode ("\\.erlang\\'" . erlang-mode)
-  :mode ("/rebar\\.config\\(?:\\.script\\)?\\'" . erlang-mode)
-  :mode ("/\\(?:app\\|sys\\)\\.config\\'" . erlang-mode)
   :config
   (setq erlang-root-dir "/usr/local/opt/erlang"
         exec-path (cons "/usr/local/opt/erlang/bin" exec-path)
         )
-
-  ;; (when (modulep! +lsp)
-  ;;   (add-hook 'erlang-mode-local-vars-hook #'lsp! 'append))
-
   (add-hook 'erlang-mode-hook #'tree-sitter!)
   )
 

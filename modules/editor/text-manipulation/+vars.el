@@ -97,5 +97,9 @@
 (spec-handling-setq! evil-shift
                      evil-shift-width 4
                      )
-
+(spec-handling-add! auto-modes
+                    '(text-manip
+                      ("LICENSE" . license-mode)
+                      )
+                    )
 ;;-- end specs

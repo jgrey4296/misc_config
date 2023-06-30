@@ -2,10 +2,8 @@
 
 (after! flycheck-plantuml-executable
   (setq flycheck-plantuml-executable (executable-find "plantuml"))
-  (add-to-list 'auto-mode-alist '("\\.pu" . plantuml-mode))
   )
 
-(add-to-list 'auto-mode-alist '("\\.plantuml" . plantuml-mode))
 
 (spec-handling-add! lookup-regular
                     '(plantuml-mode
@@ -16,5 +14,12 @@
 (spec-handling-add! popup
                     '(plantuml
                       ("^\\*PLANTUML" :size 0.4 :select nil :ttl 0)
+                      )
+                    )
+
+(spec-handling-add! auto-modes
+                    '(plantuml
+                      ("\\.plantuml" . plantuml-mode)
+                      ("\\.pu" . plantuml-mode)
                       )
                     )

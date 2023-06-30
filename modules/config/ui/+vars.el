@@ -83,3 +83,9 @@
 ;;-- so long
 (setq so-long-threshold 5000)
 ;;-- end so long
+
+(spec-handling-add! auto-modes
+                    '(ui
+                      ("\\.palette" . palette-mode)
+                      )
+                    )

@@ -101,7 +101,6 @@
 ;;-- colours
 
 (use-package! palette-mode
-  :mode ("\\.palette" . palette-mode)
   :commands palette-mode
   )
 

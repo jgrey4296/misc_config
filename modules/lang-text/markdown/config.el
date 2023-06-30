@@ -5,7 +5,6 @@
 
 (use-package! markdown-mode
   :defer t
-  :mode ("/README\\(?:\\.md\\)?\\'" . gfm-mode)
   :init
 
   ;; A shorter alias for org src blocks than "markdown"

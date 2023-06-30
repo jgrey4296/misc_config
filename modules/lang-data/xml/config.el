@@ -28,9 +28,6 @@
 
 (use-package! nxml-mode
   :defer t
-  :mode "\\.p\\(?:list\\|om\\)\\'" ; plist, pom
-  :mode "\\.xs\\(?:d\\|lt\\)\\'"   ; xslt, xsd
-  :mode "\\.rss\\'"
   :config
   (setq nxml-slash-auto-complete-flag t
         nxml-auto-insert-xml-declaration-flag t)

@@ -8,6 +8,3 @@
   (setq-local mode-name  "license")
   (run-mode-hooks)
   )
-
-;;;###autoload
-(add-to-list 'auto-mode-alist '("LICENSE" . license-mode))

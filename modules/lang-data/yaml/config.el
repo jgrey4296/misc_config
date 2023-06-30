@@ -2,14 +2,18 @@
 
 (use-package! yaml-mode
   :defer t
-  :mode "Procfile\\'"
+  :mode
   :init
   :config
   (setq-hook! 'yaml-mode-hook tab-width yaml-indent-offset)
-
+  (add-hook 'yaml-mode-hook #'tree-sitter!)
   )
 
-(when (modulep! +lsp)
-  (add-hook 'yaml-mode-local-vars-hook #'lsp! 'append))
-(when (modulep! +tree-sitter)
-  (add-hook 'yaml-mode-local-vars-hook #'tree-sitter! 'append))
+
+(spec-handling-add! auto-modes
+                    '(yaml
+                       ("Procfile\\'" . yaml-mode)
+                       ("\\.yml\\'" . yaml-mode)
+                       ("\\.yaml\\'" . yaml-mode)
+                      )
+                    )

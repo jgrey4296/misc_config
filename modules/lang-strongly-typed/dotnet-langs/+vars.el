@@ -32,6 +32,15 @@
 (spec-handling-add! company
                     '(fsharp-mode (:mode . #'fsharp-ac/company-backend))
                     )
+(spec-handling-add! auto-modes
+                    '(dotnet
+                      ("\\.shader\\'"     . shader-mode)
+                      ( "\\.sln\\'"       . sln-mode)
+                      ("\\.cs\\'"         . csharp-mode)
+                      ("\\.fs[iylx]?\\'"  . fsharp-mode)
+                      ("\\.[^.]*proj\\'"  . csproj-mode)
+                      )
+                    )
 (set-electric! 'csharp-mode :chars '(?\n ?\}))
 (set-repl-handler! 'fsharp-mode #'run-fsharp)
 ;;-- end specs

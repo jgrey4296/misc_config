@@ -7,7 +7,6 @@
 (defer-feature! elisp-mode emacs-lisp-mode)
 
 (use-package! elisp-mode
-  :mode ("\\.Cask\\'" . emacs-lisp-mode)
   :interpreter ("doomscript" . emacs-lisp-mode)
   :config
   ;; variable-width indentation is superior in elisp. Otherwise, `dtrt-indent'
@@ -80,14 +79,10 @@
   )
 
 (use-package! racket-mode
-  :mode "\\.rkt\\'"  ; give it precedence over :lang scheme
   :config
   (add-hook! 'racket-mode-hook
              #'rainbow-delimiters-mode
              #'highlight-quoted-mode)
-
-  (when (modulep! +lsp)
-    (add-hook 'racket-mode-local-vars-hook #'lsp! 'append))
 
   (when (modulep! +xp)
     (add-hook 'racket-mode-local-vars-hook #'racket-xp-mode)

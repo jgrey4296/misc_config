@@ -33,7 +33,17 @@
 (spec-handling-add! tree-sit-lang
                     '(elixir-mode     . elixir)
                     )
-
+(spec-handling-add! auto-modes
+                    '(erlang
+                      ("\\.erlang\\'"                          . erlang-mode)
+                      ("/rebar\\.config\\(?:\\.script\\)?\\'"  . erlang-mode)
+                      ("/\\(?:app\\|sys\\)\\.config\\'"        . erlang-mode)
+                      ("\\.elixir\\'"                          . elixir-mode)
+                      ("\\.ex\\'"                              . elixir-mode)
+                      ("\\.exs\\'"                             . elixir-mode)
+                      ("mix\\.lock"                            . elixir-mode)
+                      )
+                    )
 (spec-handling-add! lookup-handler
                     `(elixir-mode
                      :definition    ,#'alchemist-goto-definition-at-point

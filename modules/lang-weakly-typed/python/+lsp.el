@@ -28,7 +28,7 @@
     (lsp-disconnect)
     )
 
-  (spec-handling-add! python-env nil
+  (spec-handling-add! python-env
                       `(pyright
                         (:support pyright
                                   ,#'+jg-python-pyright-activate

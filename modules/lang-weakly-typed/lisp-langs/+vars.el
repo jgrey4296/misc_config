@@ -1,6 +1,7 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
 ;;-- definitions
+
 (defvar +emacs-lisp-enable-extra-fontification t
   "If non-nil, highlight special forms, and defined functions and variables.")
 
@@ -21,8 +22,6 @@ package-lint, and checkdoc) can be more overwhelming than helpful.
 See `+emacs-lisp-non-package-mode' for details.")
 
 ;;-- end definitions
-
-(add-to-list 'auto-mode-alist '("\\.el\\.gz" . emacs-lisp-mode))
 
 (after! projectile
   (pushnew! projectile-project-root-files "config.el")
@@ -101,14 +100,12 @@ See `+emacs-lisp-non-package-mode' for details.")
                      :symbols (("#true" "#false"))
                      )
                     )
-
 (spec-handling-add! whitespace-cleanup
                     `(emacs-lisp-mode
                       ,#'delete-trailing-whitespace
                       ,#'+jg-lisp-cleanup-ensure-newline
                       ,#'+jg-text-cleanup-whitespace)
     )
-
 (spec-handling-add! lookup-url
                     '(lisp
                      ("elisp melpa" "https://melpa.org/#/?q=%s")
@@ -129,23 +126,15 @@ See `+emacs-lisp-non-package-mode' for details.")
                       :documentation ,#'+emacs-lisp-lookup-documentation
                       )
                     )
-
-(set-repl-handler! '(emacs-lisp-mode lisp-interaction-mode) #'+emacs-lisp/open-repl)
-(set-repl-handler! 'racket-mode #'+racket/open-repl)
-(set-eval-handler! '(emacs-lisp-mode lisp-interaction-mode) #'+emacs-lisp-eval)
-(set-eval-handler! '(emacs-lisp-mode lisp-interaction-mode) #'+jg-lisp-eval)
-
 (spec-handling-add! ligatures
                     '(emacs-lisp-mode
                       "lambda" ?λ
                       )
                     )
-
 (spec-handling-add! docsets
                     '(racket-mode "Racket")
                     '((emacs-lisp-mode lisp-interaction-mode) "Emacs Lisp")
                     )
-
 (spec-handling-add! evil-embrace
                     `((lisp-mode emacs-lisp-mode clojure-mode racket-mode hy-mode)
                       (?f . ,(make-embrace-pair-struct
@@ -155,6 +144,19 @@ See `+emacs-lisp-non-package-mode' for details.")
                               :right-regexp ")"))
                       )
                     )
+(spec-handling-add! auto-modes
+                    '(lisp
+                      ("\\.Cask\\'"     . emacs-lisp-mode)
+                      ("\\.rkt\\'"      . racket-mode)
+                      ("\\.el\\.gz\\'"  . emacs-lisp-mode)
+                      ("\\.el\\'"       . emacs-lisp-mode)
+                      )
+                    )
+
+(set-repl-handler! '(emacs-lisp-mode lisp-interaction-mode) #'+emacs-lisp/open-repl)
+(set-repl-handler! 'racket-mode #'+racket/open-repl)
+(set-eval-handler! '(emacs-lisp-mode lisp-interaction-mode) #'+emacs-lisp-eval)
+(set-eval-handler! '(emacs-lisp-mode lisp-interaction-mode) #'+jg-lisp-eval)
 
 ;;-- end specs
 

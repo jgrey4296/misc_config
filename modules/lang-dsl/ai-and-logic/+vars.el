@@ -38,6 +38,18 @@
                      ("\\.soar$" :trigger "__" :mode soar-mode)
                      )
                     )
+(spec-handling-add! auto-modes
+                    '(ai-and-logic
+                      ("\\.pl\\'" . prolog-mode)
+                      ("\\.lp\\'" . pasp-mode)
+                      ("\\.lp4\\'" . pasp-mode)
+                      ("\\.lp\\'" . pasp-mode)
+                      ("\\.soar\\'" . soar-mode)
+                      ("\\.\\(jcm\\|mas2j\\)\\'" . jacamo-mode)
+                      ("\\.asl\\'" . agentspeak-mode)
+                      ("\\.clp$" . clips-mode)
+                      )
+                    )
 ;;-- end specs
 
 (spec-handling-add! lookup-regular

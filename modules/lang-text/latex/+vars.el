@@ -149,4 +149,9 @@ If no viewer is found, `latex-preview-pane-mode' is used.")
                               ))
                       )
                     )
+(spec-handling-add! auto-modes
+                    '(latex
+                      ("\\.tex\\'" . LaTeX-mode)
+                      )
+                    )
 ;;-- end specs

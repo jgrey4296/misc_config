@@ -5,3 +5,10 @@
                      ("Inform Manual" . "https://ganelson.github.io/inform/index.html")
                      )
                     )
+
+(spec-handling-add! auto-modes
+                    '(inform
+                      ("\\.h\\'"   . inform-maybe-mode)
+                      ("\\.inf\\'" . inform-mode)
+                      )
+                    )

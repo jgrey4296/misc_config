@@ -13,8 +13,6 @@
   )
 
 (use-package! python-mode
-  :mode ("[./]flake8\\'" . conf-mode)
-  :mode ("/Pipfile\\'"   . conf-mode)
   :init
   (when (executable-find "Microsoft.Python.LanguageServer")
     (set-eglot-client! 'python-mode '("Microsoft.Python.LanguageServer")))

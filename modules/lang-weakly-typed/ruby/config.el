@@ -1,8 +1,8 @@
 ;;; lang/ruby/config.el -*- lexical-binding: t; -*-
 
+(load! "+vars")
 (after! projectile
   (add-to-list 'projectile-project-root-files "Gemfile"))
-
 
 ;;
 ;;; Packages
@@ -10,8 +10,6 @@
 (use-package! ruby-mode  ; built-in
   :defer t
   ;; Other extensions are already registered in `auto-mode-alist' by `ruby-mode'
-  :mode "\\.\\(?:a?rb\\|aslsx\\)\\'"
-  :mode "/\\(?:Brew\\|Fast\\)file\\'"
   :interpreter "j?ruby\\(?:[0-9.]+\\)"
   :config
   (setq ruby-insert-encoding-magic-comment nil)
@@ -19,11 +17,7 @@
   (set-electric! 'ruby-mode :words '("else" "end" "elsif"))
   (set-repl-handler! 'ruby-mode #'inf-ruby)
 
-  (when (modulep! +lsp)
-    (add-hook 'ruby-mode-local-vars-hook #'lsp! 'append))
-
-  (when (modulep! +tree-sitter)
-    (add-hook 'ruby-mode-local-vars-hook #'tree-sitter! 'append))
+  (add-hook 'ruby-mode-local-vars-hook #'tree-sitter!)
 
   (after! inf-ruby
     (add-hook 'inf-ruby-mode-hook #'doom-mark-buffer-as-real-h)
@@ -37,7 +31,6 @@
         :map ruby-mode-map
         "[" #'ruby-toggle-block
         "{" #'ruby-toggle-block))
-
 
 (use-package! robe
   :defer t
@@ -77,24 +70,21 @@
         "R"  #'ruby-send-region-and-go
         "i"  #'ruby-switch-to-inf))
 
-
 ;; NOTE Must be loaded before `robe-mode'
+
 (use-package! yard-mode
   :hook ruby-mode)
-
 
 (use-package! rubocop
   :defer t
   :hook (ruby-mode . rubocop-mode)
   :config
-  (spec-handling-add! popup (ruby ("^\\*RuboCop" :select t)))
   (map! :localleader
         :map rubocop-mode-map
         "f" #'rubocop-check-current-file
         "F" #'rubocop-autocorrect-current-file
         "p" #'rubocop-check-project
         "P" #'rubocop-autocorrect-project))
-
 
 ;;
 ;;; Package & Ruby version management
@@ -139,21 +129,16 @@
   (setq rspec-use-rvm nil)
   (add-to-list 'exec-path (expand-file-name "shims" rbenv-installation-dir)))
 
-
 ;;
 ;;; Testing frameworks
 
 (use-package! rspec-mode
   :defer t
-  :mode ("/\\.rspec\\'" . text-mode)
   :init
   (setq rspec-use-spring-when-possible nil)
   (when (modulep! :editor evil)
     (add-hook 'rspec-mode-hook #'evil-normalize-keymaps))
   :config
-  (spec-handling-add! popup
-                      '(rspec ("^\\*\\(rspec-\\)?compilation" :size 0.3 :ttl nil :select t))
-                      )
   (setq rspec-use-rvm (executable-find "rvm"))
   (map! :localleader
         :after jg-dired-bindings
@@ -177,7 +162,6 @@
         "v" #'rspec-dired-verify
         "s" #'rspec-dired-verify-single))
 
-
 (use-package! minitest
   :defer t
   :config
@@ -191,7 +175,6 @@
         "s" #'minitest-verify-single
         "v" #'minitest-verify))
 
-
 (use-package! projectile-rails
   :defer t
   :when (modulep! +rails)
@@ -204,7 +187,6 @@
   (when (modulep! :lang web)
     (add-hook 'web-mode-hook #'projectile-rails-mode))
   :config
-  (spec-handling-add! popup ('rails ("^\\*\\(projectile-\\)?rails" :ttl nil)))
   (when (modulep! :editor evil)
     (add-hook 'projectile-rails-mode-hook #'evil-normalize-keymaps))
   (map! :localleader

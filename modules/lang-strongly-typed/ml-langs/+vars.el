@@ -32,3 +32,14 @@
                       ("SML Docs" . "https://smlfamily.github.io/")
                       )
                     )
+
+(spec-handling-add! popup
+                    '(ml-langs
+                      ("^\\*utop\\*" :quit nil)
+                      )
+                    )
+(spec-handling-add! auto-modes
+                    '(ml-langs
+                      ( "\\.s\\(?:ml\\|ig\\)\\'" . sml-mode)
+                      )
+                    )

@@ -4,18 +4,18 @@
 # key   : browse-spec
 # group :
 # --
-(spec-handling-add! lookup-url nil
+(spec-handling-add! lookup-url
                     ('$1
                      ("${1:name}" "${2:url}")
                      $0
                      )
                     )
-(spec-handling-add! file-templates nil
+(spec-handling-add! file-templates
                     ('${1:mode}
                      ("$1.$2$"           :trigger "__" :mode $1-mode)
                      )
                     )
-(spec-handling-add! fold nil
+(spec-handling-add! fold
                     ('$1
                      :modes ($1-mode)
                      :triggers (:open-all   hs-show-all
@@ -27,7 +27,7 @@
                                 )
                      )
                     )
-(spec-handling-add! hideshow nil
+(spec-handling-add! hideshow
                     ('$1
                      ;;MODE START END COMMENT-START FORWARD-SEXP-FUNC ADJUST-BEG-FUNC
                      ($1-mode " " " ")
@@ -42,7 +42,7 @@
                             $0
                             )
 
-(spec-handling-add! popup nil
+(spec-handling-add! popup
                     ('$1
                      ("^\\*$1\\*"  :side right  :ttl nil :width  0.5 :quit nil :select t :priority 50)
                      )
@@ -80,7 +80,7 @@
 
 (set-repl-handler! '$1-mode '+$1-mode/open-repl)
 
-(spec-handling-add! rotate-text nil
+(spec-handling-add! rotate-text
                     ('$1-mode
                      :symbols '(("t" "nil"))
                      :words '()

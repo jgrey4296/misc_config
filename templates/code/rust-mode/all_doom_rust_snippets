@@ -1,0 +1,650 @@
+#
+-*- mode: snippet -*-
+# name: File::open(...)
+# key: fo
+# uuid: fo
+# --
+File::open(${1:`%`})`(if (eolp) ";" "")`#
+-*- mode: snippet -*-
+# name: None
+# key: no
+# uuid: no
+# --
+None#
+-*- mode: snippet -*-
+# name: Result<T, E>
+# key: res
+# uuid: res
+# --
+Result<${1:T}, ${2:()}>#
+-*- mode: snippet -*-
+# name: Some(...)
+# key: so
+# uuid: so
+# --
+Some(${1:`%`})#
+-*- mode: snippet -*-
+# name: String::from(...)
+# key: sf
+# uuid: sf
+# --
+String::from("$0")#
+-*- mode: snippet -*-
+# name: Vec::with_capacity(...)
+# key: vwc
+# uuid: vwc
+# --
+Vec::with_capacity(${1:n})#
+-*- mode: snippet -*-
+# name: #[allow(lint)]
+# key: allow
+# --
+#[allow(${1:lint})]#
+-*- mode: snippet -*-
+# name: #![allow(lint)]
+# key: allow!
+# --
+#![allow(${1:lint})]#
+-*- mode: snippet -*-
+# name: x => y
+# key: =>
+# uuid: =>
+# --
+${1:_} => ${0:...}#
+-*- mode: snippet -*-
+# name: impl AsRef<Type> for Type
+# key: asref
+# uuid: asref
+# --
+impl std::convert::AsRef<${1:Type}> for ${2:Type} {
+    fn as_ref(&self) -> &$2 {
+        $0
+    }
+}
+#
+-*- mode: snippet -*-
+# name: assert!(...)
+# key: ass
+# uuid: ass
+# --
+assert!(`%`$0);#
+-*- mode: snippet -*-
+# name: assert_eq!(..., ...)
+# key: asse
+# uuid: asse
+# --
+assert_eq!(${1:`%`}, $2);#
+-*- mode: snippet -*-
+# name: assert_ne!(..., ...)
+# key: assn
+# uuid: assn
+# --
+assert_ne!(${1:`%`}, $2);#
+-*- mode: snippet -*-
+# name: assignment
+# key: =
+# uuid: =
+# --
+${1:x} = ${2:value}`(if (eolp) ";" "")`$0#
+-*- mode: snippet -*-
+# name: async function
+# key: afn
+# uuid: afn
+# condition: (doom-snippets-bolp)
+# --
+async fn ${1:function_name}($2) ${3:-> ${4:i32} }{
+   `%`$0
+}
+#
+-*- mode: snippet -*-
+# name: block
+# key: b
+# uuid: b
+# --
+${1:Label} { `(doom-snippets-format "%n%s%n")`$1 }$0#
+-*- mode: snippet -*-
+# name: pattern => expression,
+# key: case
+# --
+${1:pattern} => ${2:expression},#
+-*- mode: snippet -*-
+# name: #[cfg(...)]
+# --
+#[cfg($0)]#
+-*- mode: snippet -*-
+# name: #[cfg(option = "value")]
+# --
+#[cfg(${1:option} = "${2:value}")]#
+-*- mode: snippet -*-
+# name: const VAR = ...
+# key: const
+# uuid: const
+# --
+const ${1:VARNAME}${2: ${3:i32}} = ${4:value};#
+-*- mode: snippet -*-
+# name: debug_assert!(...)
+# key: dass
+# uuid: dass
+# --
+debug_assert!(`%`$0);#
+-*- mode: snippet -*-
+# name: impl Deref for Type
+# key: deref
+# uuid: deref
+# --
+impl std::ops::Deref for ${1:Type} {
+    type Target = ${2:Type};
+    fn deref(&self) -> &Self::Target {
+        &self.$0
+    }
+}
+#
+-*- mode: snippet -*-
+# name: impl DerefMut for Type
+# key: deref_mut
+# uuid: deref_mut
+# --
+impl std::ops::DerefMut for ${1:Type} {
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.$0
+    }
+}
+#
+-*- mode: snippet -*-
+# name: #[derive(...)]
+# key: der
+# uuid: der
+# condition: (doom-snippets-bolp)
+# --
+#[derive($1)]#
+-*- mode: snippet -*-
+# name: Display and Error Traits
+# key: disperror
+# uuid: disperror
+# --
+impl Display for $1 {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "{}", $0)
+    }
+}
+
+impl std::error::Error for ${1:Type} {
+    fn source(&self) -> Option<&(dyn std::error::Error + 'static)> {
+        None
+    }
+}
+#
+-*- mode: snippet -*-
+# name: impl Display for Type { fn fmt (...) }
+# key: display
+# --
+impl Display for ${1:Type} {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "`%`$0")
+    }
+}
+#
+-*- mode: snippet -*-
+# name: else { ... }
+# key: else
+# uuid: else
+# --
+else {
+   `%`$0
+}#
+-*- mode: snippet -*-
+# name: else if ... { ... }
+# key: elif
+# uuid: elif
+# --
+else if ${1:true} {
+   `%`$0
+}#
+-*- mode: snippet -*-
+# name: enum
+# key: enum
+# uuid: enum
+# --
+enum ${1:EnumName} {
+    `%`$0
+}#
+-*- mode: snippet -*-
+# name: env::args()
+# key: argv
+# uuid: argv
+# --
+env::args()#
+-*- mode: snippet -*-
+# name: env::var(...)
+# key: envv
+# uuid: envv
+# --
+env::var("$1")#
+-*- mode: snippet -*-
+# name: eprintln!(...)
+# key: ep
+# uuid: ep
+# --
+eprintln!("$1", ${2:`%`});$0#
+-*- mode: snippet -*-
+# name: impl Error for Type { fn source(...) }
+# key: error
+# uuid: error
+# --
+impl std::error::Error for ${1:Type} {
+    fn source(&self) -> Option<&(dyn std::error::Error + 'static)> {
+        $0
+        None
+    }
+}
+#
+-*- mode: snippet -*-
+# name: extern "C" { ... }
+# key: extc
+# uuid: extc
+# condition: (doom-snippets-bolp)
+# --
+extern "C" {
+    `%`$0
+}#
+-*- mode: snippet -*-
+# name: extern crate ...
+# key: ec
+# uuid: ec
+# condition: (doom-snippets-bolp)
+# --
+extern crate ${1:name};#
+-*- mode: snippet -*-
+# name: function
+# key: fn
+# uuid: fn
+# condition: (doom-snippets-bolp)
+# --
+fn ${1:function_name}($2) ${3:-> ${4:i32} }{
+   `%`$0
+}
+#
+-*- mode: snippet -*-
+# name: for in
+# key: for
+# uuid: for
+# --
+for ${1:x} in ${2:items} {
+    `%`$0
+}#
+-*- mode: snippet -*-
+# name: format!(..., ...)
+# key: f
+# uuid: f
+# --
+format!("$1", ${2:`%`})#
+-*- mode: snippet -*-
+# name: impl From<From> for Type { fn from(...) }
+# key: from
+# --
+impl From<${1:From}> for ${2:Type} {
+    fn from(source: $1) -> Self {
+       `%`$0
+       Self { }
+    }
+}
+#
+-*- mode: snippet -*-
+# name: impl FromStr for Type { fn from_str(...) }
+# key: fromstr
+# --
+impl FromStr for ${1:Type} {
+    type Err = ${2:Error};
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        `%`
+        Ok(Self{})
+    }
+}
+#
+-*- mode: snippet -*-
+# name: if ... { ... }
+# key: if
+# uuid: if
+# --
+if ${1:x} {
+   `%`$0
+}#
+-*- mode: snippet -*-
+# name: if let ...
+# key: ifl
+# uuid: ifl
+# --
+if let ${1:Some(${2:x})} = ${3:var} {
+   `%`$0
+}#
+-*- mode: snippet -*-
+# name: #[ignore]
+# key: ign
+# uuid: ign
+# --
+#[ignore]#
+-*- mode: snippet -*-
+# name: impl
+# --
+impl ${1:name}${2: for ${3:Type}} {
+   `%`$0
+}#
+-*- mode: snippet -*-
+# name: inline if-else
+# key: ife
+# uuid: ife
+# --
+if ${1:x} {${2:`%`}}${3: else {$4}}$0#
+-*- mode: snippet -*-
+# name: impl Iterator for Type
+# key: iterator
+# uuid: iterator
+# --
+impl Iterator for ${1:Type} {
+    type Item = ${2:Type};
+    fn next(&mut self) -> Option<Self::Item> {
+        $0
+    }
+}
+#
+-*- mode: snippet -*-
+# name: anonymous function
+# key: fn
+# uuid: fn
+# condition: (not (doom-snippets-bolp))
+# --
+|${1:x}|${2: -> i32} `(if (> (doom-snippets-count-lines %) 1) "{ " "")``(doom-snippets-format "%n%s%n")`$0`(if (> (doom-snippets-count-lines %) 1) " }" "")`#
+-*- mode: snippet -*-
+# name: let
+# key: let
+# uuid: let
+# --
+let ${1:var} = $0`(if (eolp) ";" "")`#
+-*- mode: snippet -*-
+# name: let mut
+# key: letm
+# uuid: letm
+# --
+let mut ${1:var} = $0`(if (eolp) ";" "")`#
+-*- mode: snippet -*-
+# name: 'static
+# key: 's
+# uuid: 's
+# --
+'static#
+-*- mode: snippet -*-
+# name: loop { ... }
+# key: loop
+# uuid: loop
+# --
+loop { `(doom-snippets-format "%n%s%n")`$0 }#
+-*- mode: snippet -*-
+# name: macro_rules! name { (..) => (..); }
+# key: macro
+# uuid: macro
+# --
+macro_rules! ${1:name} {
+     ($2) => ($3);
+}
+#
+-*- mode: snippet -*-
+# name: main
+# key: main
+# uuid: main
+# --
+fn main() {
+   `%`$0
+}#
+-*- mode: snippet -*-
+# name: match
+# uuid: match
+# key: match
+# --
+match ${1:x} {
+    `%`$0
+}#
+-*- mode: snippet -*-
+# name: match n { Ok(x), Err(y) }
+# key: match?
+# uuid: match?
+# --
+match ${1:x} {
+    Ok(${2:var}) => $3,
+    Err(${4:error}) => $5
+}#
+-*- mode: snippet -*-
+# name: match
+# uuid: match_alias
+# key: ma
+# type: command
+# --
+(doom-snippets-expand :uuid "match")#
+-*- mode: snippet -*-
+# name: mod
+# key: mod
+# uuid: mod
+# --
+mod ${1:name} {
+    `%`$0
+}#
+-*- mode: snippet -*-
+# name: Type::new(...)
+# key: new
+# uuid: new
+# --
+${1:Vec}::new(${2:`%`})`(if (eolp) ";" "")`#
+-*- mode: snippet -*-
+# name: panic!(...)
+# key: pa
+# uuid: pa
+# --
+panic!("$1", ${2:`%`});$0#
+-*- mode: snippet -*-
+# name: impl PartialEq for Type
+# key: partial
+# uuid: partial
+# --
+impl PartialEq for ${1:Type} {
+    fn eq(&self, other: &Self) -> bool {
+        $0
+    }
+}
+#
+-*- mode: snippet -*-
+# name: println!(...)
+# key: p
+# uuid: p
+# --
+println!("$1", ${2:`%`});$0#
+-*- mode: snippet -*-
+# name: public async function
+# key: pafn
+# uuid: pafn
+# condition: (doom-snippets-bolp)
+# --
+pub async fn ${1:function_name}($2) ${3:-> ${4:i32} }{
+   `%`$0
+}
+#
+-*- mode: snippet -*-
+# name: public function
+# key: pfn
+# uuid: pfn
+# --
+pub fn ${1:function_name}($2) ${3:-> ${4:i32} }{
+   `%`$0
+}#
+-*- mode: snippet -*-
+# name: pub mod
+# key: pmod
+# uuid: pmod
+# --
+pub mod ${1:name} {
+    `%`$0
+}#
+-*- mode: snippet -*-
+# name: return
+# key: ret
+# uuid: ret
+# --
+return ${1:`%`};$0#
+-*- mode: snippet -*-
+# name: static VAR = ...
+# key: static
+# uuid: static
+# --
+static ${1:VARNAME}${2:: ${3:i32}} = ${4:value};#
+-*- mode: snippet -*-
+# name: struct
+# uuid: struct
+# key: struct
+# condition: (doom-snippets-bolp)
+# --
+struct ${1:Name} {
+    `%`$0
+}#
+-*- mode: snippet -*-
+# name: struct
+# uuid: struct_alias
+# key: st
+# type: command
+# condition: (doom-snippets-bolp)
+# --
+(doom-snippets-expand :uuid "struct")#
+-*- mode: snippet -*-
+# name: test function
+# key: test
+# uuid: test
+# condition: (doom-snippets-bolp)
+# --
+#[test]
+fn ${1:test_name}() {
+   `%`$0
+}#
+-*- mode: snippet -*-
+# name: test module
+# key: testmod
+# --
+#[cfg(test)]
+mod ${1:tests} {
+    use super::*;
+
+    #[test]
+    fn ${2:test_name}() {
+       $0
+    }
+}#
+-*- mode: snippet -*-
+# name: trait ... { ... }
+# uuid: trait
+# key: trait
+# --
+trait ${1:Name} {
+    `%`$0
+}#
+-*- mode: snippet -*-
+# name: trait ... { ... }
+# uuid: trait_alias
+# key: tr
+# type: command
+# --
+(doom-snippets-expand :uuid "trait")#
+-*- mode: snippet -*-
+# name: type Name = ...;
+# key: type
+# uuid: type
+# --
+type ${1:TypeName} = ${2:i32};#
+-*- mode: snippet -*-
+# name: union Type { ... }
+# key: union
+# --
+union ${1:Type} {
+     $0
+}#
+-*- mode: snippet -*-
+# name: unsafe { ... }
+# key: un
+# uuid: un
+# --
+unsafe { `(doom-snippets-format "%n%s%n")`$0 }#
+-*- mode: snippet -*-
+# name: use ...
+# key: use
+# uuid: use
+# condition: (doom-snippets-bolp)
+# --
+use ${1:std::${2:io}};$0#
+-*- mode: snippet -*-
+# name: use std::fs::File
+# key: ufile
+# uuid: ufile
+# condition: (doom-snippets-bolp)
+# --
+use std::fs::File;#
+-*- mode: snippet -*-
+# name: use std::collections::HashMap
+# key: uhashmap
+# uuid: uhashmap
+# condition: (doom-snippets-bolp)
+# --
+use std::collections::HashMap;#
+-*- mode: snippet -*-
+# name: vec![...]
+# key: v
+# uuid: v
+# --
+vec![${1:`%`}]#
+-*- mode: snippet -*-
+# name: #[warn(lint)]
+# key: warn
+# --
+#[warn(${1:lint})]#
+-*- mode: snippet -*-
+# name: #![warn(lint)]
+# key: warn!
+# --
+#![warn(${1:lint})]#
+-*- mode: snippet -*-
+# name: while ... { ... }
+# key: while
+# uuid: while
+# --
+while ${1:true} { `(doom-snippets-format "%n%s%n")`$0 }#
+-*- mode: snippet -*-
+# name: while let PATTERN = EXPR { ... }
+# key: whilel
+# uuid: whilel
+# --
+while let ${1:pattern} = ${2:expression} {
+      $0
+}#
+-*- mode: snippet -*-
+# name: .filter_map(...)
+# key: fm
+# uuid: fm
+# condition: (doom-snippets-without-trigger (eq (char-before) ?.))
+# --
+filter_map(${1:`%`})#
+-*- mode: snippet -*-
+# name: .into_iter()
+# key: ii
+# uuid: ii
+# condition: (doom-snippets-without-trigger (eq (char-before) ?.))
+# --
+into_iter()#
+-*- mode: snippet -*-
+# name: .iter()
+# key: i
+# uuid: i
+# condition: (doom-snippets-without-trigger (eq (char-before) ?.))
+# --
+iter()#
+-*- mode: snippet -*-
+# name: .to_string()
+# key: ts
+# uuid: ts
+# condition: (doom-snippets-without-trigger (eq (char-before) ?.))
+# --
+to_string()

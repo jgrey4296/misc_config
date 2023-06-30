@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : print
+# uuid  : print
+# key   : print
+# group :
+# --
+println!("$0");

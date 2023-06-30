@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : opt
+# uuid  : opt
+# key   : opt
+# group :
+# --
+${1:$$(yas-choose-value '("some" "none"))}

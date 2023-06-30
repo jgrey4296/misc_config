@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : let
+# uuid  : let
+# key   : let
+# group :
+# --
+let ${1:mut} ${2:var} ${3::type} = ${3:expression};

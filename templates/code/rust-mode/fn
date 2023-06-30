@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name  : fn
+# uuid  : fn
+# key   : fn
+# group :
+# --
+fn ${1:name} (${2:args}) -> ${3:returnType} {
+   $0
+}

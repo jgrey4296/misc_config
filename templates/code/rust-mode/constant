@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : constant
+# uuid  : constant
+# key   : constant
+# group :
+# --
+static ${1:ident} : ${2:type} = ${3:value};

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : err
+# uuid  : err
+# key   : err
+# group :
+# --
+Err("$1")

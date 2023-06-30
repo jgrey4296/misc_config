@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : extern
+# uuid  : extern
+# key   : extern
+# group :
+# --
+extern crate ${1:name};

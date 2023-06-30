@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : use
+# uuid  : use
+# key   : use
+# group :
+# --
+${1:pub} use ${2:package} as ${3:ident};

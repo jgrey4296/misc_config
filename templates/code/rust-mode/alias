@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : alias
+# uuid  : alias
+# key   : alias
+# group :
+# --
+type ${1:ident} = ${2:type};

@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name  : drop
+# uuid  : drop
+# key   : drop
+# group :
+# --
+impl Drop for ${1:type} {
+     fn drop(&mut self) {
+        $0
+    }
+}

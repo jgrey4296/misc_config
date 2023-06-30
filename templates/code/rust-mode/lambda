@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name  : lambda
+# uuid  : lambda
+# key   : lambda
+# group :
+# --
+|${1:args}| {
+            $0
+}

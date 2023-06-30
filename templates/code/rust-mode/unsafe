@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name  : unsafe
+# uuid  : unsafe
+# key   : unsafe
+# group :
+# --
+unsafe {
+       $0
+}

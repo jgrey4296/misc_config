@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name  : unsafeTrait
+# uuid  : unsafeTrait
+# key   : unsafeTrait
+# group :
+# --
+unsafe Trait ${1:ident} {
+       $0
+}

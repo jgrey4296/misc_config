@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name  : unsafefunc
+# uuid  : unsafefunc
+# key   : unsafefunc
+# group :
+# --
+unsafe fn ${1:ident} (${2:args}) -> ${3:type} {
+       $0
+}

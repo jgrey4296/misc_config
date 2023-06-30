@@ -1,0 +1,401 @@
+
+# -*- mode: snippet -*-
+# name: #[allow(lint)]
+# key: allow
+# --
+#[allow(${1:lint})]
+# -*- mode: snippet -*-
+# name: #![allow(lint)]
+# key: allow!
+# --
+#![allow(${1:lint})]
+# -*- mode: snippet -*-
+# name: assert!(predicate);
+# key: ass
+# --
+assert!(${1:predicate});
+# -*- mode: snippet -*-
+# name: assert_eq!(expected, actual);
+# key: asseq
+# --
+assert_eq!(${1:expected}, ${2:actual});
+# -*- mode: snippet -*-
+# name: pattern => expression,
+# key: case
+# --
+${1:pattern} => ${2:expression},
+# -*- mode: snippet -*-
+# name: #[cfg(option)]
+# key: cfg
+# --
+#[cfg(${1:option})]
+# -*- mode: snippet -*-
+# name: #[cfg(option = "value")]
+# key: cfg=
+# --
+#[cfg(${1:option} = "${2:value}")]
+# -*- mode: snippet -*-
+# name: closure
+# key: ||
+# --
+|${1:arguments}| {
+    $0
+}
+
+# -*- mode: snippet -*-
+# name: extern crate
+# key: ec
+# --
+extern crate ${1:name};
+
+# -*- mode: snippet -*-
+# name: #[deny(lint)]
+# key: deny
+# --
+#[deny(${1:lint})]
+# -*- mode: snippet -*-
+# name: #![deny(lint)]
+# key: deny!
+# --
+#![deny(${1:lint})]
+# -*- mode: snippet -*-
+# name: #[derive(Trait)]
+# key: derive
+# --
+#[derive(${1:Trait})]
+# -*- mode: snippet -*-
+# name: impl Display for Type { fn fmt (...) }
+# key: display
+# --
+impl Display for ${1:Type} {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "$0")
+    }
+}
+
+# -*- mode: snippet -*-
+# name: impl Drop for Type { fn drop(...) }
+# key: drop
+# --
+impl Drop for ${1:Type} {
+    fn drop(&mut self) {
+        $0
+    }
+}
+
+# -*- mode: snippet -*-
+# name: enum Type { ... }
+# key: enum
+# --
+enum ${1:Type} {
+    $0
+}
+
+# -*- mode: snippet -*-
+# name: eprint!("{}", value);
+# key: eprint
+# --
+eprint!("${1:{\}}", $2);
+
+# -*- mode: snippet -*-
+# name: eprintln!("{}", value);
+# key: eprintln
+# --
+eprintln!("${1:{\}}", $2);
+
+# -*- mode: snippet -*-
+# name: fn name() { ... }
+# key: fn
+# --
+fn ${1:name}($2) {
+    $0
+}
+# -*- mode: snippet -*-
+# name: fn name() -> Type { ... }
+# key: fnr
+# --
+fn ${1:name}($2) -> ${3:Type} {
+    $0
+}
+
+# -*- mode: snippet -*-
+# name: fn name(&self) -> Type  { ... }
+# key: fns
+# --
+fn ${1:name}(${2:&self}) -> ${3:Type}  {
+    $0
+}
+# -*- mode: snippet -*-
+# name: fn name<T>(x: T) where T: Clone { ... }
+# key: fnw
+# --
+fn ${1:name}<${2:T}>(${3:x: T}) where ${4:T: Clone} {
+    $0
+}
+
+# -*- mode: snippet -*-
+# name: for var in iterable { ... }
+# key: for
+# --
+for ${1:var} in ${2:iterable} {
+    $0
+}
+# -*- mode: snippet -*-
+# name: impl From<From> for Type { fn from(...) }
+# key: from
+# --
+impl From<${1:From}> for ${2:Type} {
+    fn from(source: $1) -> Self {
+        $0
+        Self { }
+    }
+}
+
+# -*- mode: snippet -*-
+# name: impl FromStr for Type { fn from_str(...) }
+# key: fromstr
+# --
+impl FromStr for ${1:Type} {
+    type Err = ${2:Error};
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        Ok(Self{})
+    }
+}
+
+# -*- mode: snippet -*-
+# name: if expr { ... }
+# key: if
+# --
+if ${1:expression} {
+    $0
+}
+# -*- mode: snippet -*-
+# name: if expression { ... } else { .. }
+# key: ife
+# --
+if ${1:expression} {
+    $0
+} else {
+
+}
+
+# -*- mode: snippet -*-
+# name: if let pattern = expression { ... };
+# key: ifl
+# --
+if let ${1:pattern} = ${2:expression} {
+    $0
+};
+
+# -*- mode: snippet -*-
+# name: impl Type { ... }
+# key: impl
+# --
+impl ${1:Type} {
+    $0
+}
+
+# -*- mode: snippet -*-
+# name: impl Trait for Type { ... }
+# key: implt
+# --
+impl ${1:Trait} for ${2:Type} {
+    $0
+}
+
+# -*- mode: snippet -*-
+# name: let pattern = expression;
+# key: let
+# --
+let ${1:pattern} = ${2:expression};
+# -*- mode: snippet -*-
+# name: let mut pattern = expression;
+# key: letm
+# --
+let mut ${1:pattern} = ${2:expression};
+# -*- mode: snippet -*-
+# name: let pattern: type = expression;
+# key: lett
+# --
+let ${1:pattern}: ${2:type} = ${3:expression};
+# -*- mode: snippet -*-
+# name: let mut pattern: type = expression;
+# key: lettm
+# --
+let mut ${1:pattern}: ${2:type} = ${3:expression};
+# -*- mode: snippet -*-
+# name: loop { ... }
+# key: loop
+# --
+loop {
+    $0
+}
+
+# -*- mode: snippet -*-
+# name: macro_rules! name { (..) => (..); }
+# key: macro
+# --
+macro_rules! ${1:name} {
+    ($2) => ($3);
+}
+
+# -*- mode: snippet -*-
+# name: fn main() { ... }
+# key: main
+# --
+fn main() {
+    $0
+}
+
+# -*- mode: snippet -*-
+# name: match expression { ... }
+# key: match
+# --
+match ${1:expression} {
+    $0
+}
+
+# -*- mode: snippet -*-
+# name: pub fn new() { ... }
+# key: new
+# --
+pub fn new($1) -> ${2:Name} {
+    $2 { ${3} }
+}
+
+# -*- mode: snippet -*-
+# name: pub fn name() { ... }
+# key: pfn
+# --
+pub fn ${1:name}($2) {
+    $0
+}
+# -*- mode: snippet -*-
+# name: pub fn name() -> Type { ... }
+# key: pfnr
+# --
+pub fn ${1:name}($2) -> ${3:Type} {
+    $0
+}
+
+# -*- mode: snippet -*-
+# name: pub fn name(&self) -> Type  { ... }
+# key: pfns
+# --
+pub fn ${1:name}(${2:&self}) -> ${3:Type} {
+    $0
+}
+# -*- mode: snippet -*-
+# name: pub fn name<T>(x: T) where T: Clone { ... }
+# key: pfnw
+# --
+pub fn ${1:name}<${2:T}>(${3:x: T}) where ${4:T: Clone} {
+    $0
+}
+
+# -*- mode: snippet -*-
+# name: print!("{}", value);
+# key: print
+# --
+print!("${1:{\}}", $2);
+# -*- mode: snippet -*-
+# name: println!("{}", value);
+# key: println
+# --
+println!("${1:{\}}", $2);
+# -*- mode: snippet -*-
+# name: Result<Type, failure::Error>
+# key: result
+# --
+Result<${1:Type}, ${2:failure::Error}>
+# -*- mode: snippet -*-
+# name: spawn(proc() { ... });
+# key: spawn
+# --
+spawn(proc() {
+    $0
+});
+
+# -*- mode: snippet -*-
+# name: CONSTANT: Type = value;
+# key: static
+# --
+static ${1:CONSTANT}: ${2:Type} = ${3:value};
+# -*- mode: snippet -*-
+# name: struct TypeName { .. }
+# key: struct
+# --
+struct ${1:TypeName} {
+    $0
+}
+
+# -*- mode: snippet -*-
+# name: #[test] fn test_name() { .. }
+# key: test
+# --
+#[test]
+fn ${1:test_name}() {
+    $0
+}
+
+# -*- mode: snippet -*-
+# name: test module
+# key: testmod
+# --
+#[cfg(test)]
+mod ${1:tests} {
+    use super::*;
+
+    #[test]
+    fn ${2:test_name}() {
+        $0
+    }
+}
+
+# -*- mode: snippet -*-
+# name: trait Type { ... }
+# key: trait
+# --
+trait ${1:Type} {
+    $0
+}
+
+# -*- mode: snippet -*-
+# name: type TypeName = TypeName;
+# key: type
+# --
+type ${1:TypeName} = ${2:TypeName};
+# -*- mode: snippet -*-
+# name: union Type { ... }
+# key: union
+# --
+union ${1:Type} {
+    $0
+}
+
+# -*- mode: snippet -*-
+# name: #[warn(lint)]
+# key: warn
+# --
+#[warn(${1:lint})]
+# -*- mode: snippet -*-
+# name: #![warn(lint)]
+# key: warn!
+# --
+#![warn(${1:lint})]
+# -*- mode: snippet -*-
+# name: while expression { ... }
+# key: while
+# --
+while ${1:expression} {
+    $0
+}
+
+# -*- mode: snippet -*-
+# name: while let pattern = expression { ... }
+# key: whilel
+# --
+while let ${1:pattern} = ${2:expression} {
+    $0
+}

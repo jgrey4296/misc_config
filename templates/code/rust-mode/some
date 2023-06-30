@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : some
+# uuid  : some
+# key   : some
+# group :
+# --
+Some($1)

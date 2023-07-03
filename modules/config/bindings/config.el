@@ -7,6 +7,7 @@
   (load! "submaps/+evil-bindings")
   (load! "+misc-bindings")
   (provide 'jg-bindings-total)
+  (message "Core JG Bindings Set")
   )
 
 (use-package! faster-whichkey

@@ -10,6 +10,7 @@
       )
 
 (map! :map jg-binding-vision-map
+      "?" #'+jg-fold/debug
       :desc "Insert Fold block" "1" #'autohide-minor-mode-wrap-block
 
       :desc "open-fold-rec" "A"   #'evil-open-fold-rec

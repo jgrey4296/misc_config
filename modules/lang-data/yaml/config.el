@@ -2,7 +2,6 @@
 
 (use-package! yaml-mode
   :defer t
-  :mode
   :init
   :config
   (setq-hook! 'yaml-mode-hook tab-width yaml-indent-offset)

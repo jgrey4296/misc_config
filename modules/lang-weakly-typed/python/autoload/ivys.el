@@ -1,6 +1,10 @@
 ;;; +exception_ivy.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
+(defvar jg-python-insert-ivys (make-hash-table :test 'equal))
+
+
+;;;###autoload
 (defvar jg-python-ivy-exceptions '("BaseException" "SystemExit" "KeyboardInterrupt" "GeneratorExit" "Exception" "StopIteration" "StopAsyncIteration" "ArithmeticError" "FloatingPointError" "OverflowError" "ZeroDivisionError" "AssertionError" "AttributeError" "BufferError" "EOFError" "ImportError" "ModuleNotFoundError" "LookupError" "IndexError" "KeyError" "MemoryError" "NameError" "UnboundLocalError" "OSError" "BlockingIOError" "ChildProcessError" "ConnectionError" "BrokenPipeError" "ConnectionAbortedError" "ConnectionRefusedError" "ConnectionResetError" "FileExistsError" "FileNotFoundError" "InterruptedError" "IsADirectoryError" "NotADirectoryError" "PermissionError" "ProcessLookupError" "TimeoutError" "ReferenceError" "RuntimeError" "NotImplementedError" "RecursionError" "SyntaxError" "IndentationError" "TabError" "SystemError" "TypeError" "ValueError" "UnicodeError" "UnicodeDecodeError" "UnicodeEncodeError" "UnicodeTranslateError" "Warning" "DeprecationWarning" "PendingDeprecationWarning" "RuntimeWarning" "SyntaxWarning" "UserWarning" "FutureWarning" "ImportWarning" "UnicodeWarning" "BytesWarning" "ResourceWarning"))
 ;;;###autoload
 (defvar jg-python-ivy-datetimes '(
@@ -44,20 +48,23 @@
 ;;;###autoload
 (defvar jg-python-ivy-libs nil)
 
+
 ;;;###autoload
 (defun +jg-python-exception-ivy ()
   (interactive)
-  (insert (ivy-read "Exception Class: " jg-python-ivy-exceptions :require-match t))
+  (insert "raise" (ivy-read "Exception Class: " jg-python-ivy-exceptions :require-match t))
   )
+(puthash "raise" #'+jg-python-exception-ivy jg-python-insert-ivys)
 
 ;;;###autoload
 (defun +jg-python-datetime-ivy ()
   (interactive)
   (insert (car (s-split " " (ivy-read "Datetime strptime: " jg-python-ivy-datetimes :require-match t) t)))
   )
+(puthash "datetime" #'+jg-python-datetime-ivy jg-python-insert-ivys)
 
 ;;;###autoload
-(defun +jg-python-libs-ivy ()
+(defun +jg-python-imports-ivy ()
   (interactive)
   (unless jg-python-ivy-libs
     (with-temp-buffer
@@ -65,16 +72,6 @@
       (setq jg-python-ivy-libs (s-split "\n" (buffer-string) t))
       )
     )
-  (insert (car (s-split " " (ivy-read "Datetime strptime: " jg-python-ivy-libs :require-match t) t)))
+  (insert "import " (car (s-split " " (ivy-read "Import Library: " jg-python-ivy-libs :require-match t) t)))
   )
-
-;;;###autoload
-(defun +jg-python-general-ivy ()
-  (interactive)
-  (ivy-read "Insert: " (hash-table-keys jg-python-company-kws) :require-match t
-            :action #'(lambda (x)
-                        (ivy-read (format "%s: " x)
-                                  (gethash x jg-python-company-kws)
-                                  :require-match t
-                                  :action #'insert)))
-  )
+(puthash "import" #'+jg-python-imports-ivy jg-python-insert-ivys)

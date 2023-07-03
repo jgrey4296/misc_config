@@ -22,6 +22,7 @@
 
 
 (load! "+vars")
+(defer-load! "+spec-defs")
 (after! jg-bindings-total
   (load! "+bindings")
   )

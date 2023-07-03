@@ -47,6 +47,7 @@
     indent-region-function      #'py-indent-region
     jg-company-activation-re    jg-python-company-activation
     jg-company-kws              jg-python-company-kws
+    jg-ivy-general-insert-sub-ivys jg-python-insert-ivys
     )
   ;;-- end hooks
 

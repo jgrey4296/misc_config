@@ -113,7 +113,7 @@
 
 (spec-handling-add! auto-modes
                     '(rust
-                      ("\\.rs$" . rustic-mode)
+                      ("\\.rs\\'" . rustic-mode)
                       ("Cargo\\.toml\\'" . conf-toml-mode)
                       ("config\\.toml\\'" .conf-toml-mode)
                       ("\\.h\\'" . c-mode)
@@ -131,6 +131,7 @@
 
 (spec-handling-add! lookup-regular
                     '((rust-mode)
+                      ("rustup" . "https://rust-lang.github.io/rustup/index.html")
                       ("error codes" . "https://doc.rust-lang.org/stable/error_codes/index.html")
                       ("language reference"   . "https://doc.rust-lang.org/stable/reference/index.html")
                       ("Stable Documentation" . "https://doc.rust-lang.org/stable/")
@@ -156,5 +157,6 @@
                       ("Unsafe Rust"          . "https://doc.rust-lang.org/nightly/nomicon/")
                       ("bindgen"              . "https://rust-lang.github.io/rust-bindgen/introduction.html")
                       ("porting"              . "https://www.jelmer.uk/port-py-to-rust.html")
+                      ("rustup install" . "https://dev.to/xs/setting-up-rust-on-macos-in-a-clean-way-13d1")
                       )
                     )

@@ -69,7 +69,6 @@
       :desc "symlink"             :n "S" #'dired-do-symlink
       :desc "Relative Symlink"    :n "~" #'dired-do-relsymlink
 
-      :desc "byte compile"        :n "b" #'dired-do-byte-compile
       :desc "compress to"         :n "Z" #'dired-do-compress-to
       :desc "compress"            :n "z" #'dired-do-compress
       :desc "copy"                :n "c" #'dired-do-copy

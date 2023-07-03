@@ -149,7 +149,7 @@
                       ("^\\*Capture\\*$\\|CAPTURE-.*$" :size 0.42 :quit nil :select t :autosave ignore)
                       )
                     )
-(spechandling-add! auto-modes
+(spec-handling-add! auto-modes
                    '(org
                      ("\\.org\\'" . org-mode)
                      )

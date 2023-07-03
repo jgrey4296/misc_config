@@ -2,7 +2,22 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("pictures"
+(("brew"
+ (filename . "/usr/local/")
+ (front-context-string . "Cellar\n  drwxrwx")
+ (rear-context-string . "1K Jul  1 22:29 ")
+ (position . 227))
+("taps"
+ (filename . "/usr/local/Homebrew/Library/Taps/")
+ (front-context-string . "jgrey426\n  drwxr")
+ (rear-context-string . "96 Jul  1 23:14 ")
+ (position . 295))
+("homebrew_cache"
+ (filename . "~/Library/Caches/Homebrew/")
+ (front-context-string . "Backup\n  drwxr-x")
+ (rear-context-string . "24 Aug 28  2022 ")
+ (position . 252))
+("pictures"
  (filename . "/Volumes/documents/Pictures/")
  (front-context-string . "misc\n  drwxr-xr-")
  (rear-context-string . "74 Jun 19 21:49 ")
@@ -222,11 +237,6 @@
  (front-context-string . "group_a\n  drwxrw")
  (rear-context-string . "6K Mar 30 07:56 ")
  (position . 152))
-("Cellar"
- (filename . "/usr/local/Cellar/")
- (front-context-string . "emacs\n  drwxr-xr")
- (rear-context-string . "96 Apr 16 16:08 ")
- (position . 1209))
 ("pdflib"
  (filename . "/volumes/documents/pdf_library/")
  (front-context-string . "1320\n  drwxr-xr-")

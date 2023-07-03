@@ -83,7 +83,7 @@
   (interactive "b\np")
   (with-window-ring
       (-when-let (buff (get-buffer buffer))
-        (message "Adding buffer to window ring: %s" buffer)
+        (message "Adding buffer to window ring: %s" buff)
         (ring-insert+extend wr-actual buff t)
         )
     )
@@ -94,7 +94,7 @@
   (interactive "b\np")
   (with-window-ring
       (-when-let (buff (get-buffer buffer))
-        (ring-insert-at-beginning wr-actual buffer))
+        (ring-insert-at-beginning wr-actual buff))
     )
   (when arg (window-ring-redisplay))
   )

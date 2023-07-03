@@ -115,12 +115,12 @@
 ;;-- jg-company
 (defvar jg-python-company-activation (rx (| "error" "lib" "date" "argparse")))
 (defvar jg-python-company-kws (let ((ht (make-hash-table :test 'equal)))
-                              (puthash "error" jg-python-ivy-exceptions ht)
-                              (puthash "lib" jg-python-ivy-libs ht)
-                              (puthash "date" jg-python-ivy-datetimes ht)
-                              (puthash "argparse" jg-python-ivy-argparse ht)
-                              ht
-                              )
+                                (puthash "error" jg-python-ivy-exceptions ht)
+                                (puthash "lib" jg-python-ivy-libs ht)
+                                (puthash "date" jg-python-ivy-datetimes ht)
+                                (puthash "argparse" jg-python-ivy-argparse ht)
+                                ht
+                                )
   )
 ;;-- end jg-company
 
@@ -150,19 +150,19 @@
                     )
 (spec-handling-add! file-templates
                     '(python
-                     ("LICENSE$"        :trigger "__license-acab"   :mode text-mode :priority 100)
-                     ("pyproject.toml$" :trigger "__pyproject"      :mode conf-toml-mode)
-                     ("setup\\.cfg$"    :trigger "__setup_cfg"      :mode python-mode)
-                     ("__init__\\.py$"  :trigger "__init"           :mode python-mode)
-                     ("test_.+\\.py$"   :trigger "__pytest"         :mode python-mode)
-                     ("cli_.+\\.py$"    :trigger "__cli"            :mode python-mode)
-                     ("conf\\.py$"      :trigger "__conf"           :mode python-mode)
-                     ("setup\\.py$"     :trigger "__setup"          :mode python-mode)
-                     ("SConstruct"      :trigger "__sconstruct"     :mode python-mode)
-                     ("SConscript"      :trigger "__sconscript"     :mode python-mode)
-                     ("\\.py$"          :trigger "__"               :mode python-mode :priority -99)
-                     (python-mode       :trigger "__" :priority -100)
-                     )
+                      ("LICENSE\\'"        :trigger "__license-acab"   :mode text-mode :priority 100)
+                      ("pyproject.toml\\'" :trigger "__pyproject"      :mode conf-toml-mode)
+                      ("setup\\.cfg\\'"    :trigger "__setup_cfg"      :mode python-mode)
+                      ("__init__\\.py\\'"  :trigger "__init"           :mode python-mode)
+                      ("test_.+\\.py\\'"   :trigger "__pytest"         :mode python-mode)
+                      ("cli_.+\\.py\\'"    :trigger "__cli"            :mode python-mode)
+                      ("conf\\.py\\'"      :trigger "__conf"           :mode python-mode)
+                      ("setup\\.py\\'"     :trigger "__setup"          :mode python-mode)
+                      ("SConstruct"        :trigger "__sconstruct"     :mode python-mode)
+                      ("SConscript"        :trigger "__sconscript"     :mode python-mode)
+                      ("\\.py\\'"          :trigger "__"               :mode python-mode :priority -99)
+                      (python-mode         :trigger "__" :priority -100)
+                      )
                     )
 (spec-handling-add! fold
                     `(python
@@ -245,6 +245,7 @@
                     )
 (spec-handling-add! auto-modes
                     '(python
+                      ("\\.py\\'"                 . python-mode)
                       ("SConscript"               . scons-mode)
                       ("SConstruct"               . scons-mode)
                       ("dooter\\.py"              . doit-mode)
@@ -254,6 +255,9 @@
                       ("\\.p\\(yx\\|x[di]\\)\\'"  . cython-mode)
                       ("pyproject\\.toml\\'"      . conf-toml-mode)
                     )
+                    )
+(spec-handling-add! compile-commands
+                    '(python +jg-python-get-commands)
                     )
 (set-repl-handler! 'python-mode #'+jg-python/open-repl
   :persist t
@@ -368,7 +372,10 @@
                       ("Pytest Mock" . "https://pytest-mock.readthedocs.io/en/latest/")
                      )
                     '(conf-mode
-                     ("Setuptools" . "https://setuptools.readthedocs.io/en/latest/userguide/index.html")
+                     ("setuptools-rust"   . "https://setuptools-rust.readthedocs.io/en/latest/")
+                     ("pypi"              . "https://pypi.org/")
+                     ("setuptools toml" . "https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html")
+                     ("pip toml" . "https://pip.pypa.io/en/stable/reference/build-system/pyproject-toml/")
                      )
                     '(manifest-mode
                      ("Manifest format" . "https://docs.python.org/3/distutils/sourcedist.html?highlight=manifest")

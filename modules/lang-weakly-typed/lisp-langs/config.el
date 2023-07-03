@@ -25,28 +25,6 @@
            (when +emacs-lisp-enable-extra-fontification
              `((+emacs-lisp-highlight-vars-and-faces . +emacs-lisp--face)))))
 
-  ;; Fixed indenter that intends plists sensibly.
-  (advice-add #'calculate-lisp-indent :override #'+emacs-lisp--calculate-lisp-indent-a)
-
-  ;; Recenter window after following definition
-  (advice-add #'elisp-def :after #'doom-recenter-a)
-
-  (defadvice! +emacs-lisp-append-value-to-eldoc-a (fn sym)
-    "Display variable value next to documentation in eldoc."
-    :around #'elisp-get-var-docstring
-    (when-let (ret (funcall fn sym))
-      (if (boundp sym)
-          (concat ret " "
-                  (let* ((truncated " [...]")
-                         (print-escape-newlines t)
-                         (str (symbol-value sym))
-                         (str (prin1-to-string str))
-                         (limit (- (frame-width) (length ret) (length truncated) 1)))
-                    (format (format "%%0.%ds%%s" (max limit 0))
-                            (propertize str 'face 'warning)
-                            (if (< (length str) limit) "" truncated))))
-        ret)))
-
   ;; UX: Flycheck's two emacs-lisp checkers produce a *lot* of false positives
   ;;   in non-packages (like Emacs configs or elisp scripts), so I disable
   ;;   `emacs-lisp-checkdoc' and set `byte-compile-warnings' to a subset of the
@@ -60,8 +38,6 @@
              #'rainbow-delimiters-mode
              ;; Make quoted symbols easier to distinguish from free variables
              #'highlight-quoted-mode
-             ;; Extend imenu support to Doom constructs
-             #'+emacs-lisp-extend-imenu-h
              ;; Ensure straight sees modifications to installed packages
              #'+emacs-lisp-init-straight-maybe-h)
 
@@ -74,7 +50,10 @@
     ;; Don't treat autoloads or sexp openers as outline headers, we have
     ;; hideshow for that.
     outline-regexp +emacs-lisp-outline-regexp
-    outline-level #'+emacs-lisp-outline-level)
+    outline-level #'+emacs-lisp-outline-level
+
+    jg-ivy-general-insert-sub-ivys jg-lisp-insert-ivys
+    )
 
   )
 
@@ -144,12 +123,13 @@
   :config (flycheck-package-setup))
 
 (use-package! elisp-demos
+  ;; adds example code in help buffers
   :defer t
   :init
   (advice-add #'describe-function-1 :after #'elisp-demos-advice-describe-function-1)
   (advice-add #'helpful-update :after #'elisp-demos-advice-helpful-update)
   :config
-  (advice-add #'elisp-demos--search :around #'+emacs-lisp--add-doom-elisp-demos-a))
+  (advice-add #'elisp-demos--search :around #'+jg-lisp-add-elisp-demos))
 
 (use-package! buttercup
   :defer t

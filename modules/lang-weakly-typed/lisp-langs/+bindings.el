@@ -5,7 +5,8 @@
 (evil-make-intercept-map edebug-eval-mode-map)
 
 (map! :map emacs-lisp-mode-map
-      :n "?"                   #'eros-eval-last-sexp
+      :n "SPC e" #'eros-eval-last-sexp
+      :n "|" #'+jg-ivy-general-insert
       :localleader
       :desc "Sort Defuns" "S"  #'+jg-lisp-sort-defuns
       :desc "Pretty Print" "P" #'pp-buffer
@@ -107,4 +108,11 @@
       "t" #'+emacs-lisp/buttercup-run-file
       "a" #'+emacs-lisp/buttercup-run-project
       "s" #'buttercup-run-at-point
+      )
+
+
+(map! :map dired-mode-map
+      :after jg-dired-bindings
+      :prefix ("> l" . "lisp")
+      :desc "byte compile"        "c" #'dired-do-byte-compile
       )

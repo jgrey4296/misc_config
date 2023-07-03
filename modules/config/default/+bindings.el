@@ -7,3 +7,9 @@
       "d S" #'spec-handling-report
       "d s" #'spec-handling-describe
       )
+
+
+(map! :leader
+      :prefix "b"
+      :n "?" #'+jg-default-debug-auto-mode
+      )

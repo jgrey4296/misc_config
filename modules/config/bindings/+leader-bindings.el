@@ -14,8 +14,6 @@
       :desc "Split Window"          "/"   #'split-window-right
       :desc "Toggle last popup"     "`"   #'+popup/toggle
 
-      :desc "Evaluate line/region"  "e"   #'eval-last-sexp
-
       :desc "Eval expression"       "\""   #'pp-eval-expression
       :desc "M-x"                   ";"   #'execute-extended-command
 

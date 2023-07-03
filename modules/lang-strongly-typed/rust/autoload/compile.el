@@ -6,7 +6,7 @@
   (interactive)
   (-when-let*  ((root (projectile-project-root dir))
                 (cargo (f-join root "Cargo.toml"))
-
+                (cargo-exists (f-exists? cargo))
                 )
     (+jg-projects-annotate-cmds
      '("build       Compile the current package"

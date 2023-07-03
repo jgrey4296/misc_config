@@ -62,9 +62,11 @@ Used by `+lookup/online'.")
                       ("Google images"      "https://www.google.com/images?q=%s")
                       ("Palettes"           "https://www.palettelist.com/")
                       ("Raw"                "%s")
-                       )
+                      ("brew cask"                "https://formulae.brew.sh/cask/%s")
+                      ("brew formula"  "https://formulae.brew.sh/formula/%s")
                      )
-(spec-handling-add! lookup-url :form 'override
+                    )
+(spec-handling-add! lookup-url
                     '(plus
                      ("Google"            +lookup--online-backend-google "https://google.com/search?q=%s")
                      ("Google images"     "https://www.google.com/images?q=%s")

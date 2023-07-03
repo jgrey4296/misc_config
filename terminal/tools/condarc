@@ -48,7 +48,7 @@ create_default_packages:
   - validators
   - stackprinter
   - tqdm
-  - pretty-errors
+  # - pretty-errors
   # - railroad-diagrams
   # - spacy
   # - pomegranate

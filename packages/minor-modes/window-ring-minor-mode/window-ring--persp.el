@@ -27,6 +27,7 @@
   " Convert a perspective to a window ring"
   (interactive)
   (unless (persp-parameter 'window-ring (get-current-persp))
+    (message "Converting to window ring")
     (with-window-ring-adding
      (window-ring-create-persp-fn (get-current-persp) nil)
      (add-hook 'find-file-hook              #'window-ring-add-current-buffer)

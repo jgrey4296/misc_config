@@ -12,7 +12,7 @@
 
 (map! :map python-mode-map
       :after python-mode
-      :desc "General Insert"         :n "|" #'+jg-python-general-ivy
+      :desc "General Insert"         :n "|" #'+jg-ivy-general-insert
 
       :n "z d" nil ;; #'+jg-python-toggle-all-defs
       :n "z D" nil ;; #'+jg-python-close-class-defs

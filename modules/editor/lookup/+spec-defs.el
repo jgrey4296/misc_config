@@ -9,6 +9,7 @@
                     )
 
 (spec-handling-new! lookup-handler nil :loop 'hook
+                    :struct '(:definition fn :implementation fn :type-definition nf :references fn :documentation fn :file fn)
                     (setq-local +lookup-definition-functions      (plist-get val :definition)
                                 +lookup-implementations-functions (plist-get val :implementations)
                                 +lookup-type-definition-functions (plist-get val :type-definition)

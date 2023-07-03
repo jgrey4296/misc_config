@@ -56,6 +56,7 @@ alias q="exit"
 
 # conda environments
 alias cenv="mamba activate"
+alias cexp="conda env export"
 alias clist="mamba env list"
 alias cexport="mamba env export --from-history"
 

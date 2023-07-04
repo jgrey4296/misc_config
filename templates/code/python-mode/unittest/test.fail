@@ -2,6 +2,6 @@
 # name: test.fail
 # uuid: test.fail
 # key:  test.fail
-# group :
+# group : pytest
 # --
-self.assertFalse(True)
+assert(True is False)

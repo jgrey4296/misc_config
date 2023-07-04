@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: test.setUpClass
-# uuid: test.setUpClass
-# --
-@classmethod
-def setUpClass(cls):
-    return

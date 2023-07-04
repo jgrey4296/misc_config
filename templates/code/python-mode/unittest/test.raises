@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: test.raises
+# uuid: test.raises
+# key:  test.raises
+# group : pytest
+# --
+with pytest.raises($1) as exc_info:
+     $2
+
+$0

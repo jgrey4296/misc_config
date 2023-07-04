@@ -3,7 +3,6 @@
 ;;;###autoload
 (defvar jg-python-insert-ivys (make-hash-table :test 'equal))
 
-
 ;;;###autoload
 (defvar jg-python-ivy-exceptions '("BaseException" "SystemExit" "KeyboardInterrupt" "GeneratorExit" "Exception" "StopIteration" "StopAsyncIteration" "ArithmeticError" "FloatingPointError" "OverflowError" "ZeroDivisionError" "AssertionError" "AttributeError" "BufferError" "EOFError" "ImportError" "ModuleNotFoundError" "LookupError" "IndexError" "KeyError" "MemoryError" "NameError" "UnboundLocalError" "OSError" "BlockingIOError" "ChildProcessError" "ConnectionError" "BrokenPipeError" "ConnectionAbortedError" "ConnectionRefusedError" "ConnectionResetError" "FileExistsError" "FileNotFoundError" "InterruptedError" "IsADirectoryError" "NotADirectoryError" "PermissionError" "ProcessLookupError" "TimeoutError" "ReferenceError" "RuntimeError" "NotImplementedError" "RecursionError" "SyntaxError" "IndentationError" "TabError" "SystemError" "TypeError" "ValueError" "UnicodeError" "UnicodeDecodeError" "UnicodeEncodeError" "UnicodeTranslateError" "Warning" "DeprecationWarning" "PendingDeprecationWarning" "RuntimeWarning" "SyntaxWarning" "UserWarning" "FutureWarning" "ImportWarning" "UnicodeWarning" "BytesWarning" "ResourceWarning"))
 ;;;###autoload
@@ -45,14 +44,69 @@
   )
 ;;;###autoload
 (defvar jg-python-ivy-libs-file (expand-file-name "~/.temp/pylibs"))
+(defvar jg-python-ivy-libs-loaded nil)
 ;;;###autoload
-(defvar jg-python-ivy-libs nil)
+(defvar jg-python-ivy-libs '("boltons.cacheutils       # caching            https://boltons.readthedocs.io/en/latest/cacheutils.html"
+                             "boltons.debugutils       # debugging          https://boltons.readthedocs.io/en/latest/debugutils.html"
+                             "boltons.dictutils        # mapping            https://boltons.readthedocs.io/en/latest/dictutils.html"
+                             "boltons.ecoutils         # system analytics   https://boltons.readthedocs.io/en/latest/ecoutils.html"
+                             "boltons.excutils         # exceptions         https://boltons.readthedocs.io/en/latest/excutils.html"
+                             "boltons.fileutils        # filesystem         https://boltons.readthedocs.io/en/latest/fileutils.html"
+                             "boltons.formatutils      # string formatting  https://boltons.readthedocs.io/en/latest/formatutils.html"
+                             "boltons.funcutils        # functional         https://boltons.readthedocs.io/en/latest/funcutils.html"
+                             "boltons.gcutils          # garbage collection https://boltons.readthedocs.io/en/latest/gcutils.html"
+                             "boltons.ioutils          # files              https://boltons.readthedocs.io/en/latest/ioutils.html"
+                             "boltons.iterutils        # iterators          https://boltons.readthedocs.io/en/latest/iterutils.html"
+                             "boltons.jsonutils        # json               https://boltons.readthedocs.io/en/latest/jsonutils.html"
+                             "boltons.listutils        # lists              https://boltons.readthedocs.io/en/latest/listutils.html"
+                             "boltons.mathutils        # math               https://boltons.readthedocs.io/en/latest/mathutils.html"
+                             "boltons.mboxutils        # mail               https://boltons.readthedocs.io/en/latest/mboxutils.html"
+                             "boltons.namedutils       # tuples             https://boltons.readthedocs.io/en/latest/namedutils.html"
+                             "boltons.pathutils        # path expansion     https://boltons.readthedocs.io/en/latest/pathutils.html"
+                             "boltons.queueutils       # priority queues    https://boltons.readthedocs.io/en/latest/queueutils.html"
+                             "boltons.setutils         # ordered sets       https://boltons.readthedocs.io/en/latest/setutils.html"
+                             "boltons.socketutils      # sockets            https://boltons.readthedocs.io/en/latest/socketutils.html"
+                             "boltons.statsutils       # statistics         https://boltons.readthedocs.io/en/latest/statsutils.html"
+                             "boltons.strutils         # string formatting  https://boltons.readthedocs.io/en/latest/strutils.html"
+                             "boltons.tableutils       # 2d data            https://boltons.readthedocs.io/en/latest/tableutils.html"
+                             "boltons.tbutils          # tracebacks         https://boltons.readthedocs.io/en/latest/tbutils.html"
+                             "boltons.timeutils        # datetimes          https://boltons.readthedocs.io/en/latest/timeutils.html"
+                             "boltons.typeutils        # typing             https://boltons.readthedocs.io/en/latest/typeutils.html"
+                             "boltons.urlutils         # urls               https://boltons.readthedocs.io/en/latest/urlutils.html"
+                             "pyparsing as pp          # https://pyparsing-docs.readthedocs.io/en/latest/"
+                             "bs4                      # https://beautiful-soup-4.readthedocs.io/en/latest/"
+                             "matplotlib.pyplot as plt # https://matplotlib.org/stable/api/index.html"
+                             "more_itertools as mitz   # https://more-itertools.readthedocs.io/en/stable/"
+                             "networkx as nx           # https://networkx.org/"
+                             "numpy as np              # https://numpy.org/doc/stable/"
+                             "seaborn as sns           # https://seaborn.pydata.org/api.html"
+                             "stackprinter             # https://github.com/cknd/stackprinter"
+                             "toolz                    # https://toolz.readthedocs.io/en/latest/index.html"
+                             "pytest                   # https://docs.pytest.org/en/7.3.x/reference/reference.html#std-fixture-pytestconfig"
+                             ))
+
+;;;###autoload
+(defvar jg-python-ivy-pytest-fixtures '("caplog          # capture logging "
+                                        "recwarn         # capture warnings"
+                                        "capfd           # capture file descriptors 1 and 2"
+                                        "capfdbinary     # capture file descriptors 1 and 2 binary"
+                                        "capsys          # capture stdout, stderr "
+                                        "pytestconfig    # access pytest config "
+                                        "record_property # add key:value pairs to reports"
+                                        "cache           # store values between runs"
+                                        "tmp_path        # unique temp directory"
+                                        "pytester        # for black box testing of plugins"
+                                        "monkeypatch     # modify test context"
+                                        "mocker          # create mock objects"
+                                        "                # https://docs.pytest.org/en/7.3.x/reference/fixtures.html"
+                                        "                # https://pytest-mock.readthedocs.io/en/latest/"
+                                        ))
 
 
 ;;;###autoload
 (defun +jg-python-exception-ivy ()
   (interactive)
-  (insert "raise" (ivy-read "Exception Class: " jg-python-ivy-exceptions :require-match t))
+  (insert "raise " (ivy-read "Exception Class: " jg-python-ivy-exceptions :require-match t))
   )
 (puthash "raise" #'+jg-python-exception-ivy jg-python-insert-ivys)
 
@@ -66,12 +120,22 @@
 ;;;###autoload
 (defun +jg-python-imports-ivy ()
   (interactive)
-  (unless jg-python-ivy-libs
+  (unless jg-python-ivy-libs-loaded
     (with-temp-buffer
       (insert-file-contents jg-python-ivy-libs-file)
-      (setq jg-python-ivy-libs (s-split "\n" (buffer-string) t))
+      (setq jg-python-ivy-libs (sort (append jg-python-ivy-libs
+                                             (s-split "\n" (buffer-string) t)
+                                             )
+                                     #'string-lessp)
+            jg-python-ivy-libs-loaded t)
       )
     )
   (insert "import " (car (s-split " " (ivy-read "Import Library: " jg-python-ivy-libs :require-match t) t)))
   )
 (puthash "import" #'+jg-python-imports-ivy jg-python-insert-ivys)
+
+;;;###autoload
+(defun +jg-python-pytest-fixtures-ivy ()
+  (insert (car (s-split " " (ivy-read "Datetime strptime: " jg-python-ivy-pytest-fixtures :require-match t) t)))
+  )
+(puthash "fixtures" #'+jg-python-pytest-fixtures-ivy jg-python-insert-ivys)

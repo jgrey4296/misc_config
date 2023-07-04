@@ -6,5 +6,5 @@
 # --
 
 # caplog, recwarn, capfd, capfdbinary, capsys, pytestconfig
-# tmp_path, testdir, tmpdir
+# tmp_path, pytester
 # monkeypatch, mocker

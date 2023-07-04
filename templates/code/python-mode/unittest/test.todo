@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: test.todo
-# uuid: test.todo
-# --
-@unittest.skip("TODO")
-def test_$1(self):
-    pass
-
-$0

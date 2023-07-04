@@ -1,8 +1,8 @@
 # -*- mode: snippet -*-
-# name  : testfn
-# uuid  : testfn
-# key   : testfn
-# group : testing
+# name  : test.fn
+# uuid  : test.fn
+# key   : test.fn
+# group : pytest
 # --
 def test_${1:function}(self):
 	# Setup:
@@ -13,4 +13,4 @@ def test_${1:function}(self):
 
     # Post-check:
 
-    self.assertFalse(True)
+    assert(True is False)

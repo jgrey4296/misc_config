@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : test.skipif
+# uuid  : test.skipif
+# key   : test.skipif
+# group : pytest
+# --
+@pytest.mark.skipif(${1:test}, reason="$0")

@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name  : meta_singleton
+# uuid  : meta_singleton
+# key   : meta_singleton
+# group :
+# --
+class SingletonMeta(type(Protocol)):
+    """
+    Create an instance field to hold the singleton
+    For Each Class Hierarchy
+    """
+    def __init__(cls, name:str, bases:tuple[type, ...], data:dict[str,Any]):
+        super(SingletonMeta, cls).__init__(name, bases, data)
+        if not hasattr(cls, "_instance"):
+            cls._instance = None
+
+    def __call__(cls, *args: Any) -> type:
+        if cls._instance is None:
+            logging.debug("Constructing Singleton: {}", cls.__name__)
+            cls._instance = super().__call__(*args)
+
+        return cls._instance

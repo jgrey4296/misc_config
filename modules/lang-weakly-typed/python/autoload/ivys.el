@@ -4,7 +4,73 @@
 (defvar jg-python-insert-ivys (make-hash-table :test 'equal))
 
 ;;;###autoload
-(defvar jg-python-ivy-exceptions '("BaseException" "SystemExit" "KeyboardInterrupt" "GeneratorExit" "Exception" "StopIteration" "StopAsyncIteration" "ArithmeticError" "FloatingPointError" "OverflowError" "ZeroDivisionError" "AssertionError" "AttributeError" "BufferError" "EOFError" "ImportError" "ModuleNotFoundError" "LookupError" "IndexError" "KeyError" "MemoryError" "NameError" "UnboundLocalError" "OSError" "BlockingIOError" "ChildProcessError" "ConnectionError" "BrokenPipeError" "ConnectionAbortedError" "ConnectionRefusedError" "ConnectionResetError" "FileExistsError" "FileNotFoundError" "InterruptedError" "IsADirectoryError" "NotADirectoryError" "PermissionError" "ProcessLookupError" "TimeoutError" "ReferenceError" "RuntimeError" "NotImplementedError" "RecursionError" "SyntaxError" "IndentationError" "TabError" "SystemError" "TypeError" "ValueError" "UnicodeError" "UnicodeDecodeError" "UnicodeEncodeError" "UnicodeTranslateError" "Warning" "DeprecationWarning" "PendingDeprecationWarning" "RuntimeWarning" "SyntaxWarning" "UserWarning" "FutureWarning" "ImportWarning" "UnicodeWarning" "BytesWarning" "ResourceWarning"))
+(defvar jg-python-ivy-exceptions '(
+"BaseException"
+" +-- SystemExit"
+" +-- KeyboardInterrupt"
+" +-- GeneratorExit"
+" +-- Exception"
+"      +-- StopIteration"
+"      +-- StopAsyncIteration"
+"      +-- ArithmeticError"
+"      |    +-- FloatingPointError"
+"      |    +-- OverflowError"
+"      |    +-- ZeroDivisionError"
+"      +-- AssertionError"
+"      +-- AttributeError"
+"      +-- BufferError"
+"      +-- EOFError"
+"      +-- ImportError"
+"      |    +-- ModuleNotFoundError"
+"      +-- LookupError"
+"      |    +-- IndexError"
+"      |    +-- KeyError"
+"      +-- MemoryError"
+"      +-- NameError"
+"      |    +-- UnboundLocalError"
+"      +-- OSError"
+"      |    +-- BlockingIOError"
+"      |    +-- ChildProcessError"
+"      |    +-- ConnectionError"
+"      |    |    +-- BrokenPipeError"
+"      |    |    +-- ConnectionAbortedError"
+"      |    |    +-- ConnectionRefusedError"
+"      |    |    +-- ConnectionResetError"
+"      |    +-- FileExistsError"
+"      |    +-- FileNotFoundError"
+"      |    +-- InterruptedError"
+"      |    +-- IsADirectoryError"
+"      |    +-- NotADirectoryError"
+"      |    +-- PermissionError"
+"      |    +-- ProcessLookupError"
+"      |    +-- TimeoutError"
+"      +-- ReferenceError"
+"      +-- RuntimeError"
+"      |    +-- NotImplementedError"
+"      |    +-- RecursionError"
+"      +-- SyntaxError"
+"      |    +-- IndentationError"
+"      |         +-- TabError"
+"      +-- SystemError"
+"      +-- TypeError"
+"      +-- ValueError"
+"      |    +-- UnicodeError"
+"      |         +-- UnicodeDecodeError"
+"      |         +-- UnicodeEncodeError"
+"      |         +-- UnicodeTranslateError"
+"      +-- Warning"
+"           +-- DeprecationWarning"
+"           +-- PendingDeprecationWarning"
+"           +-- RuntimeWarning"
+"           +-- SyntaxWarning"
+"           +-- UserWarning"
+"           +-- FutureWarning"
+"           +-- ImportWarning"
+"           +-- UnicodeWarning"
+"           +-- BytesWarning"
+"           +-- ResourceWarning"
+                                   )
+  )
 ;;;###autoload
 (defvar jg-python-ivy-datetimes '(
                                    "%a   # Weekday as locale’s abbreviated name. Sun, Mon, …, Sat (en_US);"
@@ -83,6 +149,7 @@
                              "stackprinter             # https://github.com/cknd/stackprinter"
                              "toolz                    # https://toolz.readthedocs.io/en/latest/index.html"
                              "pytest                   # https://docs.pytest.org/en/7.3.x/reference/reference.html#std-fixture-pytestconfig"
+                             "timeit                   # https://docs.python.org/3/library/timeit.html"
                              ))
 
 ;;;###autoload
@@ -106,16 +173,18 @@
 ;;;###autoload
 (defun +jg-python-exception-ivy ()
   (interactive)
-  (insert "raise " (ivy-read "Exception Class: " jg-python-ivy-exceptions :require-match t))
+  (let* ((selected  (ivy-read "Exception Class: " jg-python-ivy-exceptions :require-match t))
+         (value (s-replace-regexp "^[^A-Z]+" "" selected))
+        )
+    (insert "raise " value)
+    )
   )
-(puthash "raise" #'+jg-python-exception-ivy jg-python-insert-ivys)
 
 ;;;###autoload
 (defun +jg-python-datetime-ivy ()
   (interactive)
   (insert (car (s-split " " (ivy-read "Datetime strptime: " jg-python-ivy-datetimes :require-match t) t)))
   )
-(puthash "datetime" #'+jg-python-datetime-ivy jg-python-insert-ivys)
 
 ;;;###autoload
 (defun +jg-python-imports-ivy ()
@@ -132,10 +201,8 @@
     )
   (insert "import " (car (s-split " " (ivy-read "Import Library: " jg-python-ivy-libs :require-match t) t)))
   )
-(puthash "import" #'+jg-python-imports-ivy jg-python-insert-ivys)
 
 ;;;###autoload
 (defun +jg-python-pytest-fixtures-ivy ()
   (insert (car (s-split " " (ivy-read "Datetime strptime: " jg-python-ivy-pytest-fixtures :require-match t) t)))
   )
-(puthash "fixtures" #'+jg-python-pytest-fixtures-ivy jg-python-insert-ivys)

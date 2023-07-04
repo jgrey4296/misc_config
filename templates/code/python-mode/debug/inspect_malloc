@@ -1,0 +1,139 @@
+# -*- mode: snippet -*-
+# name  : inspect_malloc
+# uuid  : inspect_malloc
+# key   : inspect_malloc
+# group :
+# --
+import tracemalloc
+import linecache
+import fnmatch
+
+class DebugMalloc:
+    """ see https://docs.python.org/3/library/tracemalloc.html
+
+    example:
+    with DebugMalloc(2) as dm:
+        dm.whitelist(__file__)
+        dm.blacklist("*tracemalloc.py", all_frames=False)
+        val = 2
+        dm.snapshot("simple")
+        vals = [random.random() for x in range(1000)]
+        dm.current()
+        dm.snapshot("list")
+        vals = None
+        dm.current()
+        dm.snapshot("cleared")
+
+    dm.compare("simple", "list")
+    dm.compare("list", "cleared")
+    dm.compare("list", "simple")
+    dm.inspect("list")
+    """
+
+    def __init__(self, num_frames=5):
+        self.num_frames      = num_frames
+        self.started         = False
+        self.snapshots       = []
+        self.named_snapshots = {}
+        self.filters         = []
+        self.human = lambda num, sign=False: tracemalloc._format_size(num, sign)
+
+    def __enter__(self):
+        tracemalloc.start(self.num_frames)
+        self.started = True
+        self.snapshot(name="init")
+        return self
+
+    def __exit__(self, exc_type, exc_value, exc_traceback):
+        self.snapshot(name="final")
+        self.started = False
+        print(f"Recorded {len(self.snapshots)} snapshots")
+        return
+
+    def whitelist(self, file_pat:str, lineno:int=None, all_frames=True):
+        self.filters.append(
+            tracemalloc.Filter(True,
+                               filename_pattern=file_pat,
+                               lineno=lineno,
+                               all_frames=all_frames)
+            )
+
+    def blacklist(self, file_pat:str, lineno:int=None, all_frames=True):
+        self.filters.append(
+            tracemalloc.Filter(False,
+                               filename_pattern=file_pat,
+                               lineno=lineno,
+                               all_frames=all_frames)
+            )
+
+    def check_file_pat(self, file_pat, file_name) -> bool:
+        return fnmatch.fnmatch(file_name, file_name)
+
+    def snapshot(self, name=None):
+        if not self.started:
+            raise RuntimeError("DebugMalloc needs to have been entered")
+
+        snap = tracemalloc.take_snapshot()
+        self.snapshots.append(snap)
+        if name and name not in self.named_snapshots:
+            self.named_snapshots[name] = snap
+
+        tracemalloc.clear_traces()
+
+    def get_snapshot(self, val):
+        match val:
+            case int() if 0 <= val < len(self.snapshots):
+                snap = self.snapshots[val]
+            case int() if val < 0:
+                snap = self.snapshots[val]
+            case str() if val in self.named_snapshots:
+                snap = self.named_snapshots[val]
+            case _:
+                raise TypeError(val)
+
+        return snap.filter_traces(self.filters)
+
+
+    def current(self, val=None):
+        traced = tracemalloc.get_traced_memory()
+        print("-- Current Memory: {:<15}, Peak: {:<15}".format( self.human(traced[0]), self.human(traced[1])))
+        if val:
+            print("Value allocated at: ", tracemalloc.get_object_traceback(val))
+
+    def inspect(self, val, type="traceback"):
+        print(f"\n-- Inspecting {val}")
+        snap = self.get_snapshot(val)
+        for stat in snap.statistics(type):
+            self._print_stat(stat)
+
+    def compare(self, val1, val2, type="traceback"):
+        print(f"\n-- Comparing {val1} to {val2}")
+        snap1 = self.get_snapshot(val1)
+        snap2 = self.get_snapshot(val2)
+
+        differences = snap2.compare_to(snap1, type)
+        diff_count  = len(differences)
+        for i, stat in enumerate(differences):
+            print(f"- {val1} -> {val2} diff {i}/{diff_count}:")
+            self._print_diff(stat)
+
+    def _print_diff(self, stat):
+        """ Print a Trace memory comparison """
+        assert(isinstance(stat, tracemalloc.StatisticDiff))
+        print(f"+-: {self.human(stat.size_diff, True)}, {stat.count_diff} blocks")
+        self._print_stat(stat)
+
+    def _print_stat(self, stat):
+        """ Print a Traced memory snapshot """
+        assert(isinstance(stat, (tracemalloc.Statistic, tracemalloc.StatisticDiff)))
+        tb = stat.traceback
+        print(f"Frame/Count/Size: {len(stat.traceback):}, {stat.count:}, {self.human(stat.size)}")
+        for x in range(len(tb) -1):
+            frame = tb[x]
+            path = pl.Path(frame.filename)
+            print(f"  {path.name:<15}", "line:", f"{frame.lineno:<7}: {linecache.getline(frame.filename, frame.lineno).strip()}")
+
+        frame = tb[-1]
+        path = pl.Path(frame.filename)
+        print(f"* {path.name:<15}", "line:", f"{frame.lineno:<7}: {linecache.getline(frame.filename, frame.lineno).strip()}")
+        print()

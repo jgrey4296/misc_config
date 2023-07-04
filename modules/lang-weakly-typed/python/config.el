@@ -22,6 +22,12 @@
         py-company-pycomplete-p nil
         py-fast-process-p nil)
   :config
+
+  (puthash "raise" #'+jg-python-exception-ivy jg-python-insert-ivys)
+  (puthash "datetime" #'+jg-python-datetime-ivy jg-python-insert-ivys)
+  (puthash "import" #'+jg-python-imports-ivy jg-python-insert-ivys)
+  (puthash "fixtures" #'+jg-python-pytest-fixtures-ivy jg-python-insert-ivys)
+
   ;;-- hooks
   (add-hook! 'python-mode-hook
              #'+python-use-correct-flycheck-executables-h

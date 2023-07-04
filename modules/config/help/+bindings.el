@@ -121,6 +121,7 @@
 (map! :map helpful-mode-map
       :n "q" #'+jg-help-switch-to-prev-helpful-or-close-window
       :n "=" #'helpful-update
+      :n "SPC e" #'eval-last-sexp
       )
 
 (map! :leader

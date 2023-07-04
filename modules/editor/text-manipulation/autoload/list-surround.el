@@ -19,7 +19,7 @@
     )
   )
 
-;;;###autoload (autoload '+jg-surround-ensure-commas  "editor/text-manipulation/autoload/list-surround.el"" nil t)
+;;;###autoload (autoload '+jg-surround-ensure-commas  "editor/text-manipulation/autoload/list-surround.el" nil t)
 (evil-define-operator +jg-surround-ensure-commas (beg end args)
   :type inclusive
   :keep-visual t

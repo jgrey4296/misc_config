@@ -36,6 +36,7 @@
      (persp-rename (format "%s%s" (persp-name (get-current-persp)) window-ring-name-suffix))
      (window-ring-add-to-head (current-buffer))
      (window-ring-reset-columns t)
+     (message "Converted")
      )
     )
   )

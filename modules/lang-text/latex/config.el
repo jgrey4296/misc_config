@@ -13,12 +13,6 @@
     fill-nobreak-predicate (cons #'texmathp fill-nobreak-predicate))
   ;; Enable `rainbow-mode' after applying styles to the buffer.
   (add-hook 'TeX-update-style-hook #'rainbow-delimiters-mode)
-
-  ;; Hook LSP, if enabled.
-  (when (modulep! +lsp)
-    (add-hook! '(tex-mode-local-vars-hook
-                 latex-mode-local-vars-hook)
-               :append #'lsp!))
   )
 (after! latex
   ;; Add the TOC entry to the sectioning hooks.
@@ -61,25 +55,9 @@
   (advice-add #'cdlatex-math-symbol :after #'+latex-fold-last-macro-a)
   (advice-add #'cdlatex-math-modify :after #'+latex-fold-last-macro-a)
   ;; Fold after snippets.
-  (when (modulep! :editor snippets)
-    (add-hook! 'TeX-fold-mode-hook
-      (defun +latex-fold-snippet-contents-h ()
-        (add-hook! 'yas-after-exit-snippet-hook :local
-          (when (and yas-snippet-beg yas-snippet-end)
-            (TeX-fold-region yas-snippet-beg yas-snippet-end))))))
+  (add-hook! 'TeX-fold-mode-hook #'+latex-fold-snippet-contents-h)
+  (add-hook! 'mixed-pitch-mode-hook #'+latex-fold-set-variable-pitch-h)
 
-  (add-hook! 'mixed-pitch-mode-hook
-    (defun +latex-fold-set-variable-pitch-h ()
-      "Fix folded things invariably getting fixed pitch when using mixed-pitch.
-Math faces should stay fixed by the mixed-pitch blacklist, this is mostly for
-\\section etc."
-      (when mixed-pitch-mode
-        ;; Adding to this list makes mixed-pitch clean the face remaps after us
-        (add-to-list 'mixed-pitch-fixed-cookie
-                     (face-remap-add-relative
-                      'TeX-fold-folded-face
-                      :family (face-attribute 'variable-pitch :family)
-                      :height (face-attribute 'variable-pitch :height))))))
   )
 
 (use-package! preview
@@ -87,8 +65,8 @@ Math faces should stay fixed by the mixed-pitch blacklist, this is mostly for
   :hook (LaTeX-mode . LaTeX-preview-setup)
   :config
   (setq-default preview-scale 1.4
-                preview-scale-function
-                (lambda () (* (/ 10.0 (preview-document-pt)) preview-scale)))
+                preview-scale-function #'+latex-preview-scale-fn
+                )
   ;; Don't cache preamble, it creates issues with SyncTeX. Let users enable
   ;; caching if they have compilation times that long.
   (setq preview-auto-cache-preamble nil)
@@ -107,7 +85,8 @@ Math faces should stay fixed by the mixed-pitch blacklist, this is mostly for
 (use-package! adaptive-wrap
   :defer t
   :hook (LaTeX-mode . adaptive-wrap-prefix-mode)
-  :init (setq-default adaptive-wrap-extra-indent 0)
+  :init
+  (setq-default adaptive-wrap-extra-indent 0)
   ;; Nicely indent lines that have wrapped when visual line mode is activated.
   )
 
@@ -127,7 +106,6 @@ Math faces should stay fixed by the mixed-pitch blacklist, this is mostly for
 
 (use-package! evil-tex
   :defer t
-  :when (modulep! :editor evil +everywhere)
   :hook (LaTeX-mode . evil-tex-mode))
 
 (use-package! company-auctex

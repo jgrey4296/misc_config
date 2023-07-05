@@ -100,14 +100,13 @@ If no viewer is found, `latex-preview-pane-mode' is used.")
 ;;-- specs
 (spec-handling-add! company
                     '(reftex-mode (:mode . company-reftex-labels) (:mode . company-reftex-citations))
-                    '(latex-mode (:mode . company-auctex-environments) (:mode . company-auctex-macros) (:mode . +latex-symbols-company-backend))
+                    '(LaTeX-mode (:mode . company-auctex-environments) (:mode . company-auctex-macros) (:mode . +latex-symbols-company-backend))
                     )
 (spec-handling-add! lookup-url
                     '(latex
                       ("Latex Packages" "https://www.ctan.org/search?phrase=%s")
                       )
                     )
-
 (spec-handling-add! popup
                     '(latex
                       (" output\\*$" :size 15)
@@ -116,7 +115,7 @@ If no viewer is found, `latex-preview-pane-mode' is used.")
                       )
                     )
 (spec-handling-add! lookup-regular
-                    '(latex-mode
+                    '(LaTeX-mode
                      ("Latex Wikibook" . "https://en.m.wikibooks.org/wiki/LaTeX")
                      ("CTAN packages" . "https://www.ctan.org/pkg/latex")
                      ("Overleaf docs" . "https://www.overleaf.com/learn")
@@ -126,7 +125,7 @@ If no viewer is found, `latex-preview-pane-mode' is used.")
                      )
                     )
 (spec-handling-add! evil-embrace
-                    '(latex-mode
+                    '(LaTeX-mode
                       (?\' . ,(make-embrace-pair-struct
                                :key ?\'
                                :left "`"

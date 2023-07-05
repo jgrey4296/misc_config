@@ -41,10 +41,10 @@ stored in `persp-save-dir'.")
 (spec-handling-add! compile-commands
                     '(default
                        +jg-workspaces-get-doot-commands
-                       counsel-compile-get-filtered-history
-                       counsel-compile-get-build-directories
-                       counsel-compile-get-make-invocation
-                       counsel-compile-get-make-help-invocations
+                       ;; counsel-compile-get-filtered-history
+                       ;; counsel-compile-get-build-directories
+                       ;; counsel-compile-get-make-invocation
+                       ;; counsel-compile-get-make-help-invocations
                        )
                     )
 

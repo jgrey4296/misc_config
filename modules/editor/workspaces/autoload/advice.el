@@ -22,7 +22,11 @@
         (add-hook 'compilation-start-hook #'counsel-compile--update-history)
         (unwind-protect
              (compile cmd-str interactive)
-          (remove-hook 'compilation-start-hook #'counsel-compile--update-history))))))
+          (remove-hook 'compilation-start-hook #'counsel-compile--update-history))
+        )
+      )
+    )
+  )
 
 ;;;###autoload
 (defun +jg-projects-command-expander (val)

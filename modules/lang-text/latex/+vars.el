@@ -153,4 +153,8 @@ If no viewer is found, `latex-preview-pane-mode' is used.")
                       ("\\.tex\\'" . LaTeX-mode)
                       )
                     )
+
+(spec-handling-add! compile-commands
+                    '(latex +jg-latex-get-commands)
+                    )
 ;;-- end specs

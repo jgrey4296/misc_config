@@ -1,18 +1,25 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
-(map! :map latex-mode-map
-      :localleader
-      :desc "View"          "v" #'TeX-view
-      :desc "Compile"       "c" #'TeX-command-run-all
-      :desc "Run a command" "m" #'TeX-command-master)
+(defvar jg-latex-mode-map (make-sparse-keymap))
 
 (map! :map LaTeX-mode-map
+      :i "\"" #'TeX-insert-quote
+      :i "$"  #'TeX-insert-dollar
+
       :localleader
       :desc "Preview"       "p" #'preview-at-point
       :desc "Unpreview"     "P" #'preview-clearout-at-point
       :desc "View"          "v" #'TeX-view
       :desc "Compile"       "c" #'TeX-command-run-all
-      :desc "Run a command" "m" #'TeX-command-master)
+      :desc "Run a command" "m" #'TeX-command-master
+      :desc "TexDoc"        "?" #'TeX-documentation-texdoc
+      :desc "environment"   "e" #'LaTeX-environment
+      :desc "close environment" "E" #'LaTeX-close-environment
+      :desc "section"        "s" #'LaTeX-section
+      :desc "item"          "i" #'LaTeX-insert-item
+      :desc "Font Change"   "f" #'TeX-font
+
+      )
 
 (map! :map TeX-fold-mode-map
       :localleader
@@ -37,3 +44,7 @@
       "^" nil "_" nil
       ;; AUCTeX already provides this with `LaTeX-insert-item'.
         [(control return)] nil)
+
+(after! latex
+  (setq LaTeX-mode-map jg-latex-mode-map)
+  )

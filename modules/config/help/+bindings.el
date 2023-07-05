@@ -6,7 +6,7 @@
       "v"    #'describe-variable
       "l"    #'view-lossage
       "t"    #'list-timers
-
+      "m"    (cmd! (message "Major Mode: %s" major-mode))
       "!"   #'doom-debug-mode
       "DEL" #'free-keys
       )

@@ -3,18 +3,10 @@
 (defer-load! "+vars")
 (defer-load! jg-bindings-total "+bindings")
 
-(after! tex
-  ;; Set-up chktex.
-  (setcar (cdr (assoc "Check" TeX-command-list)) "chktex -v6 -H %s")
-  (setq-hook! 'TeX-mode-hook
-    ;; Tell Emacs how to parse TeX files.
-    ispell-parser 'tex
-    ;; Don't auto-fill in math blocks.
-    fill-nobreak-predicate (cons #'texmathp fill-nobreak-predicate))
-  ;; Enable `rainbow-mode' after applying styles to the buffer.
-  (add-hook 'TeX-update-style-hook #'rainbow-delimiters-mode)
-  )
-(after! latex
+
+(use-package! latex
+  :after tex
+  :config
   ;; Add the TOC entry to the sectioning hooks.
   (setq LaTeX-section-hook '(LaTeX-section-heading
                              LaTeX-section-title
@@ -28,7 +20,7 @@
   ;; (load! "+viewers")
   )
 
-(use-package! tex-mode
+(use-package! tex
   :defer t
   :config
   (defvar LaTeX-indent-environment-list nil)
@@ -39,6 +31,16 @@
   ;; Set `+latex-indent-item-continuation-offset' to 0 to disable this.
   (dolist (env '("itemize" "enumerate" "description"))
     (add-to-list 'LaTeX-indent-environment-list `(,env +latex-indent-item-fn)))
+
+  ;; Set-up chktex.
+  (setcar (cdr (assoc "Check" TeX-command-list)) "chktex -v6 -H %s")
+  (setq-hook! 'TeX-mode-hook
+    ;; Tell Emacs how to parse TeX files.
+    ispell-parser 'tex
+    ;; Don't auto-fill in math blocks.
+    fill-nobreak-predicate (cons #'texmathp fill-nobreak-predicate))
+  ;; Enable `rainbow-mode' after applying styles to the buffer.
+  (add-hook 'TeX-update-style-hook #'rainbow-delimiters-mode)
   )
 
 (use-package! tex-fold

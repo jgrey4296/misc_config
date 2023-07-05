@@ -2,7 +2,6 @@
 
 (map! :leader
       :desc "Open Url"              "?"   #'browse-select-goto-url
-      :desc "Lookup Regular"        "m 1" #'lookup-regular-go
 
       (:prefix "g"
        :desc "Docs: Git Manual"      "1" (cmd! (browse-url jg-browse-github-url))
@@ -11,6 +10,7 @@
 
 (map! :map jg-binding-jump-map
       :desc "Browse URL"           "u" #'browse-select-goto-url
+      :desc "Lookup Regular"        "1" #'lookup-regular-go
 
       (:prefix ("k" . "Docs")
        :desc "Type definition"       "t" #'+lookup/type-definition

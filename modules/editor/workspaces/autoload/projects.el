@@ -7,7 +7,6 @@
 
 ;;;###autoload
 (defun +jg-projects-generic-command (_)
-
   ;; If fd exists, use it for git and generic projects. fd is a rust
   ;; program that is significantly faster than git ls-files or find, and
   ;; it respects .gitignore. This is recommended in the projectile docs.
@@ -79,26 +78,34 @@
 ;;;###autoload
 (defun +jg-projects-clean(arg)
   (interactive "P")
-  (let ((default-directory (projectile-project-root))
-        ivy-opts
-        )
-    (setq ivy-opts (+jg-projects-doot-tasks nil (lambda (x) (concat jg-projects-doot-cmd " clean " (when arg "-c ") (car (split-string x" " t " ")))))
-          counsel-compile--current-build-dir (or (counsel--compile-root) default-directory))
-    (ivy-read "Clean Task: " ivy-opts
-              :action #'counsel-compile--action
-              :caller 'jg-projects-clean)
+  (-when-let* ((root (projectile-project-root))
+               (doot-toml (f-join root "doot.toml"))
+               (dt-exists (f-exists? doot-toml))
+               (default-directory root)
+               )
+    (let ((targets (+jg-projects-doot-tasks nil (lambda (x) (concat jg-projects-doot-cmd " clean " (when arg "-c ") (car (split-string x" " t " "))))))
+          (counsel-compile--current-build-dir (or (counsel--compile-root) default-directory))
+          )
+      (ivy-read "Clean Task: " ivy-opts
+                :action #'counsel-compile--action
+                :caller 'jg-projects-clean)
+      )
     )
   )
 
 ;;;###autoload
 (defun +jg-projects-doot-tasks (&optional act-fn int-fn)
-  ;; check for cache, if cache is newer than dodo file, use that, else run doit list
+  " check for cache, if cache is newer than dodo file, use that, else run doit list "
   (let ((default-directory (or (projectile-project-root) default-directory))
         (act-fn (or act-fn (lambda (x) (concat jg-projects-doot-cmd " " (car (split-string x" " t " "))))))
+        skip
         )
-    (cond ((and (executable-find "doot")
-                (f-exists? "doot.toml"))
-           (message "No Doot Available"))
+    (cond ((not (executable-find "doot"))
+           (message "No Doot Command in Path")
+           (setq skip t))
+          ((not (f-exists? "doot.toml"))
+           (message "No doot.toml Available")
+           (setq skip t))
           ((and (f-exists? ".tasks_cache")
                 (time-less-p (f-modification-time "doot.toml") (f-modification-time ".tasks_cache")))
            ;; No cache/out of date, so make it
@@ -106,7 +113,7 @@
            (+jg-projects-cache-tasks jg-projects-doot-cmd "list"))
           )
 
-    (when (f-exists? ".tasks_cache")
+    (when (and (not skip) (f-exists? ".tasks_cache"))
       (with-temp-buffer
         (insert-file-contents ".tasks_cache")
         (+jg-projects-annotate-cmds (split-string (buffer-string) "\n" t " \n")
@@ -119,6 +126,7 @@
 
 ;;;###autoload
 (defun +jg-projects-annotate-cmds (cmds act-fn &optional int-fn)
+  " set the `cmd` text property for each string to the result of (act-fn str) "
   (cl-loop for cmd in cmds
            collect (let ((cmd-str cmd)
                          (cmd-act (funcall act-fn cmd))
@@ -129,6 +137,20 @@
                                                                interactive ,interactive
                                                                ) cmd-str)
                      cmd-str))
+  )
+
+;;;###autoload
+(defun +jg-projects-pair-cmds (cmds)
+  " for each pair, set the `cmd` text-property of car to cdr "
+  (cl-loop for (usr . cmd) in cmds
+           collect
+           (let ((usr-str usr))
+             (set-text-properties 0 (length usr) `(cmd ,cmd
+                                                   interactive ,nil
+                                                   ) usr-str)
+             usr-str
+             )
+           )
   )
 
 ;;;###autoload

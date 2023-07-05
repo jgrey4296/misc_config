@@ -1,3 +1,9 @@
+# -*- mode: snippet -*-
+# name  : event.subchain
+# uuid  : event.subchain
+# key   : event.subchain
+# group : instal:event
+# --
 {[continue chain=event${num} going \SubChainRightOrAbove]
   \node [on chain=event${num}, \SubChainRightOrAbove=of i${num}mid,
   rectangle,draw,inner frame sep=0pt]

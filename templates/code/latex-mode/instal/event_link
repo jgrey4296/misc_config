@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : event.link
+# uuid  : event.link
+# key   : event.link
+# group : instal:event
+# --
+\draw (i${num}mid) -- (e${num}a);

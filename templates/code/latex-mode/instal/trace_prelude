@@ -1,5 +1,11 @@
+# -*- mode: snippet -*-
+# name  : trace.prelude
+# uuid  : trace.prelude
+# key   : trace.prelude
+# group : instal:trace
+# --
 %% --------------------------------------------------
-% Pdf Tex prelude
+% event trace prelude
 %% --------------------------------------------------
 \documentclass{article}
 \usepackage{todonotes}

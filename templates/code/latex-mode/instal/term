@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : term
+# uuid  : term
+# key   : term
+# group : instal:term
+# --
+${head}${body}

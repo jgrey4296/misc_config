@@ -1,0 +1,22 @@
+\documentclass[12pt]{article}
+\usepackage[T1,T2A]{fontenc}
+\usepackage[russian,english]{babel}
+\usepackage{listings}
+\usepackage[version=3]{mhchem}
+\usepackage{url}
+\usepackage[numbers]{natbib}
+\usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue, pdfstartview=FitH]{hyperref}
+\usepackage{doi}
+
+\title{}
+\author{John Grey}
+
+\begin{document}
+\maketitle
+
+
+
+\nocite{*}
+\bibliographystyle{/Volumes/documents/github/__configs/modules/lang-text/bibtex/_data/jg_custom.bst}
+\bibliography{}
+\end{document}

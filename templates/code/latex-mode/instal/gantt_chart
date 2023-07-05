@@ -1,3 +1,9 @@
+# -*- mode: snippet -*-
+# name  : gantt.chart
+# uuid  : gantt.chart
+# key   : gantt.chart
+# group : instal:gantt
+# --
 \begin{figure}
   \begin{longtable}{@{}r@{}}
     \begin{ganttchart} [hgrid,vgrid,canvas/.style={draw=none},bar/.append style={fill=gray}, x unit=0.5cm,y unit chart=0.5cm]{0}{${num}}

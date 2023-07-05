@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name  : subchain
+# uuid  : subchain
+# key   : subchain
+# group : instal:chain
+# --
+start chain=fluent${num} going \SubChainLeftOrBelow,
+start chain=event${num} going \SubChainRightOrAbove,

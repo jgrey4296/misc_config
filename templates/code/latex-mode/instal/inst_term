@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : inst.term
+# uuid  : inst.term
+# key   : inst.term
+# group : instal:term
+# --
+${head}${body} : ${inst}\\

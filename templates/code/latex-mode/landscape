@@ -2,7 +2,7 @@
 # name: landscape
 # uuid: landscape
 # key:  landscape
-# group :
+# group : orientation
 # --
 \usepackage{lscape}
 

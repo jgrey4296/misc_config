@@ -7,6 +7,9 @@
 (use-package! latex
   :after tex
   :config
+
+  (puthash "dropcap" #'+jg-latex-dropcap-opt-ivy jg-latex-insert-ivys)
+
   ;; Add the TOC entry to the sectioning hooks.
   (setq LaTeX-section-hook '(LaTeX-section-heading
                              LaTeX-section-title
@@ -14,14 +17,19 @@
                              LaTeX-section-section
                              LaTeX-section-label)
         LaTeX-fill-break-at-separators nil
-        LaTeX-item-indent 0)
+        LaTeX-item-indent 0
+        )
+
+  (setq-hook! 'LaTeX-mode-hook
+    jg-ivy-general-insert-sub-ivys jg-latex-insert-ivys
+    )
   ;; (defvar TeX-view-program-selection nil)
   ;; (defvar TeX-view-program-list nil)
   ;; (load! "+viewers")
   )
 
 (use-package! tex
-  :defer t
+  :after auctex
   :config
   (defvar LaTeX-indent-environment-list nil)
   (load! "+fontification")

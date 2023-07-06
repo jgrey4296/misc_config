@@ -166,6 +166,9 @@ stored in `persp-save-dir'.")
                     '(neotree
                       ("\\*NeoTree\\*"   :side left :ttl nil :height 0.4 :quit nil :select nil :priority -100)
                       )
+                    '(compilation
+                      ("\\*compilation\\*" :quit t :select nil :height 0.2 :priority 20)
+                      )
                     )
 
 (spec-handling-add! fold

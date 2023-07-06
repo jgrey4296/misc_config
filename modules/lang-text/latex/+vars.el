@@ -112,6 +112,7 @@ If no viewer is found, `latex-preview-pane-mode' is used.")
                       (" output\\*$" :size 15)
                       ("^\\*TeX \\(?:Help\\|errors\\)"  :size 0.3 :select t :ttl nil)
                       ("^\*latex\*" :side right  :ttl nil :width  0.5 :quit nil :select t :priority 50)
+                      ("\\*latex-check\\*\\'"  :ttl nil :height 0.2 :quit t :select nil :priority 60)
                       )
                     )
 (spec-handling-add! lookup-regular
@@ -122,6 +123,9 @@ If no viewer is found, `latex-preview-pane-mode' is used.")
                      ("Latex Tutorial" . "https://latex-tutorial.com/")
                      ("Fonts" . "https://tug.org/FontCatalogue/")
                      ("Font Installation" . "https://tug.org/fonts/fontinstall.html")
+                     ("kpathsea" . "https://www.overleaf.com/learn/latex/Articles/An_introduction_to_Kpathsea_and_how_TeX_engines_search_for_files")
+                     ("What the font?" . "https://www.myfonts.com/pages/whatthefont")
+                     ("font space" . "https://www.fontspace.com/")
                      )
                     )
 (spec-handling-add! evil-embrace
@@ -151,6 +155,13 @@ If no viewer is found, `latex-preview-pane-mode' is used.")
 (spec-handling-add! auto-modes
                     '(latex
                       ("\\.tex\\'" . LaTeX-mode)
+                      )
+                    )
+(spec-handling-add! file-templates
+                    '(latex
+                      ("\\.tex\\'" :trigger "__"               :mode latex-mode :priority -99)
+                      (LaTeX-mode :trigger "__" :priority -100)
+                      (latex-mode :trigger "__" :priority -100)
                       )
                     )
 

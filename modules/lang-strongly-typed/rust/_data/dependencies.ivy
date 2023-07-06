@@ -87,3 +87,9 @@ rustler       = "0.26"    # ffi
 clippy        = "0.0.302" # dev
 rustfix       = "0.6"     # dev
 rustfmt       = "0.10"    # dev
+
+
+tree-sitter-elisp = "1.3.0"  # emacs
+emacs             = "0.18.0" # emacs https://github.com/ubolonton/emacs-module-rs
+emacs-rs-module   = "0.18.0" # emacs
+emacs_module      = "0.18.0" # emacs

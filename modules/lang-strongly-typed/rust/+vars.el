@@ -105,6 +105,7 @@
 
 (spec-handling-add! tree-sit-lang
                     '(rust-mode . rust)
+                    '(rustic-mode . rust)
                     )
 
 (spec-handling-add! company
@@ -130,7 +131,7 @@
 ;;-- end LSP
 
 (spec-handling-add! lookup-regular
-                    '((rust-mode)
+                    '(rust-mode
                       ("rustup" . "https://rust-lang.github.io/rustup/index.html")
                       ("error codes" . "https://doc.rust-lang.org/stable/error_codes/index.html")
                       ("language reference"   . "https://doc.rust-lang.org/stable/reference/index.html")

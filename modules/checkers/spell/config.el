@@ -94,7 +94,6 @@
   :commands flyspell-correct-previous
   :config
   (require 'flyspell-correct-ivy nil t)
-  (define-key popup-menu-keymap [escape] #'keyboard-quit)
   )
 
 (use-package! flyspell-lazy

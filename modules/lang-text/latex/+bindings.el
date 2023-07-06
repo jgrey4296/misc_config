@@ -5,6 +5,8 @@
 (map! :map LaTeX-mode-map
       :i "\"" #'TeX-insert-quote
       :i "$"  #'TeX-insert-dollar
+      :n "|"  #'+jg-ivy-general-insert
+      :n "RET" #'+jg-latex-compile-file-quick
 
       :localleader
       :desc "Preview"       "p" #'preview-at-point

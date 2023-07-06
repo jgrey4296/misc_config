@@ -18,3 +18,23 @@
       (funcall sub-ivy)
     )
 )
+
+;;;###autoload
+(defmacro +jg-ivy-general-insert-macro (name contents prompty insertor)
+  " easily make a new general inserter ivy "
+  (let ((insert-fn (lambda (x) insertor)))
+    '(progn
+       (defvar general-insert-{name}-values {contents})
+       (defun general-insert-{name}-ivy ()
+         (interactive)
+         (let ((val (ivy-read prompt
+                              general-insert-{name}-values
+                              :require-match t)))
+           (insert (funcall ,insert-fn val))
+           )
+
+         )
+       )
+
+    )
+  )

@@ -62,6 +62,8 @@
   (browse-select-load-variants)
   )
 
-(use-package! lookup-regular)
+(use-package! lookup-regular
+  :hook (doom-first-file . global-lookup-regular-minor-mode)
+  )
 
 (use-package! helm-wordnet :defer t)

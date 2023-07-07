@@ -42,6 +42,7 @@ Used by `+lookup/online'.")
 (setq browse-select-default-prog "firefox"
       browse-url-browser-function 'browse-select-default
       browse-url-default-handlers nil
+      lookup-regular-location (expand-file-name "templates/lookup-regular" doom-user-dir)
       )
 
 (setq xref-show-definitions-function #'ivy-xref-show-defs

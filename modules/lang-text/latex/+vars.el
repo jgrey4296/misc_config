@@ -1,44 +1,7 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
-;;-- module defvars
-(defconst +latex-indent-item-continuation-offset 'align
-  "Level to indent continuation of enumeration-type environments.
-
-I.e., this affects \\item, \\enumerate, and \\description.
-
-Set this to `align' for:
-
-  \\item lines aligned
-         like this.
-
-Set to `auto' for continuation lines to be offset by `LaTeX-indent-line':
-
-  \\item lines aligned
-    like this, assuming `LaTeX-indent-line' == 2
-
-Any other fixed integer will be added to `LaTeX-item-indent' and the current
-indentation level.
-
-Set this to `nil' to disable all this behavior.
-
-You'll need to adjust `LaTeX-item-indent' to control indentation of \\item
-itself.")
-
-(defvar +latex-enable-unicode-math nil
-  "If non-nil, use `company-math-symbols-unicode' backend in `LaTeX-mode',
-enabling unicode symbols in math regions. This requires the unicode-math LaTeX
-package to be installed.")
-
-(defvar +latex-viewers '(skim evince sumatrapdf zathura okular pdf-tools)
-  "A list of enabled LaTeX viewers to use, in this order. If they don't exist,
-they will be ignored. Recognized viewers are skim, evince, sumatrapdf, zathura,
-okular and pdf-tools.
-
-If no viewer is found, `latex-preview-pane-mode' is used.")
-
-;;-- end module defvars
-
 (setq-default TeX-master t)
+
 (setq TeX-parse-self t ; parse on load
       TeX-auto-save t  ; parse on save
       ;; Use hidden directories for AUCTeX files.
@@ -114,19 +77,6 @@ If no viewer is found, `latex-preview-pane-mode' is used.")
                       ("^\*latex\*" :side right  :ttl nil :width  0.5 :quit nil :select t :priority 50)
                       ("\\*latex-check\\*\\'"  :ttl nil :height 0.2 :quit t :select nil :priority 60)
                       )
-                    )
-(spec-handling-add! lookup-regular
-                    '(LaTeX-mode
-                     ("Latex Wikibook" . "https://en.m.wikibooks.org/wiki/LaTeX")
-                     ("CTAN packages" . "https://www.ctan.org/pkg/latex")
-                     ("Overleaf docs" . "https://www.overleaf.com/learn")
-                     ("Latex Tutorial" . "https://latex-tutorial.com/")
-                     ("Fonts" . "https://tug.org/FontCatalogue/")
-                     ("Font Installation" . "https://tug.org/fonts/fontinstall.html")
-                     ("kpathsea" . "https://www.overleaf.com/learn/latex/Articles/An_introduction_to_Kpathsea_and_how_TeX_engines_search_for_files")
-                     ("What the font?" . "https://www.myfonts.com/pages/whatthefont")
-                     ("font space" . "https://www.fontspace.com/")
-                     )
                     )
 (spec-handling-add! evil-embrace
                     '(LaTeX-mode

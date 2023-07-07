@@ -1,11 +1,5 @@
 ;;; completion/company/autoload.el -*- lexical-binding: t; -*-
 
-;;; Commands
-;;;###autodef
-(defun set-company-backend! (&rest args)
-  nil
-  )
-
 ;;;###autoload
 (defun +company-has-completion-p ()
   "Return non-nil if a completion candidate exists at point."

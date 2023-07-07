@@ -39,7 +39,8 @@
              ;; Make quoted symbols easier to distinguish from free variables
              #'highlight-quoted-mode
              ;; Ensure straight sees modifications to installed packages
-             #'+emacs-lisp-init-straight-maybe-h)
+             #'+emacs-lisp-init-straight-maybe-h
+             )
 
   (setq-hook! 'emacs-lisp-mode-hook
     ;; Emacs' built-in elisp files use a hybrid tab->space indentation scheme

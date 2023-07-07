@@ -125,35 +125,6 @@
   )
 
 ;;;###autoload
-(defun +jg-projects-annotate-cmds (cmds act-fn &optional int-fn)
-  " set the `cmd` text property for each string to the result of (act-fn str) "
-  (cl-loop for cmd in cmds
-           collect (let ((cmd-str cmd)
-                         (cmd-act (funcall act-fn cmd))
-                         (interactive (when int-fn (funcall int-fn cmd)))
-                         )
-                     ;; The cmd text prop is what is actually run, the text itself is what is shown
-                     (set-text-properties 0 (length cmd-str) `(cmd ,cmd-act
-                                                               interactive ,interactive
-                                                               ) cmd-str)
-                     cmd-str))
-  )
-
-;;;###autoload
-(defun +jg-projects-pair-cmds (cmds)
-  " for each pair, set the `cmd` text-property of car to cdr "
-  (cl-loop for (usr . cmd) in cmds
-           collect
-           (let ((usr-str usr))
-             (set-text-properties 0 (length usr) `(cmd ,cmd
-                                                   interactive ,nil
-                                                   ) usr-str)
-             usr-str
-             )
-           )
-  )
-
-;;;###autoload
 (defun +jg-projects-cache-tasks (cmd &rest args)
   " run doit list, cache to .tasks_cache"
   (let ((proc (apply #'start-process "proc:doot:list" "*proc:doot:list*" cmd args))

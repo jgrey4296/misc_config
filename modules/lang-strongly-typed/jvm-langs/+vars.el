@@ -121,28 +121,3 @@
                     '(kotlin-mode "Kotlin")
                       )
 ;;-- end specs
-(spec-handling-add! lookup-regular
-                    '(kotlin-mode
-                     ("Android docs" . "https://developer.android.com/guide")
-                     ("Kotlin reference" . "https://kotlinlang.org/docs/home.html")
-                     ("Gradle Reference" . "https://docs.gradle.org/current/userguide/userguide.html")
-                     ("Kotlin Quick Reference" . "https://kotlin-quick-reference.com/025-R-kotlin-repl.html")
-                     ("JDK Reference" . "https://docs.oracle.com/en/java/javase/20/")
-                     )
-                    '(java-mode
-                     ("JDK Reference" . "https://docs.oracle.com/en/java/javase/20/")
-                     )
-                    '(groovy-mode
-                     ("Gradle Refernce" . "https://docs.gradle.org/current/dsl/index.html")
-                     ("Groovy Reference" . "https://groovy-lang.org/documentation.html")
-                     )
-                    '(scala-mode
-                     ("Scala Documentation" . "https://docs.scala-lang.org/")
-                     ("Scala API" . "https://docs.scala-lang.org/api/all.html")
-                     ("Scala Cheatsheet" . "https://docs.scala-lang.org/cheatsheets/index.html")
-                     ("Scala Language Reference" . "https://docs.scala-lang.org/scala3/reference/")
-                     ("Scala Language Spec" . "https://scala-lang.org/files/archive/spec/2.13/")
-                     ("SBT Reference" . "https://www.scala-sbt.org/1.x/docs/index.html")
-                     ("Scala LSP" . "https://scalameta.org/metals/docs/")
-                     )
-)

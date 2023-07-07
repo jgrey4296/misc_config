@@ -26,30 +26,60 @@
 ;;-- imports
 (require 'ivy)
 (require 'browse-url)
+(require 'f)
+(require 'cl-lib)
 ;;-- end imports
 
 ;;-- vars
-(defvar lookup-regular-targets '())
+(defvar-local lookup-regular-targets nil)
 (defvar lookup-regular-minor-mode-map (make-sparse-keymap))
+(defvar lookup-regular-location nil)
+(defvar lookup-regular--cache (make-hash-table))
+(defconst lookup-regular-splitter "#")
 ;;-- end vars
 
 ;;-- mode definition
 
 ;;;###autoload
 (define-minor-mode lookup-regular-minor-mode
-  "  "
+  " for all modes in (parent-mode-list major-mode) load any
+files of urls in lookup-regular-location "
   :init-value nil
   :lighter "lookup-regular"
   ;; :global t
   :keymap lookup-regular-minor-mode-map
+  (cl-loop for mode in (parent-mode-list major-mode)
+           when (f-exists? (f-join lookup-regular-location (symbol-name mode)))
+           do
+           (unless (gethash mode lookup-regular--cache)
+             (puthash mode (lookup-regular--load-file (f-join lookup-regular-location (symbol-name mode)))
+                      lookup-regular--cache)
+             )
+           (setq-local lookup-regular-targets (append (buffer-local-value 'lookup-regular-targets (current-buffer))
+                                                      (gethash mode lookup-regular--cache)))
+           )
+  )
+
+(defun lookup-regular--load-file (file)
+  "read a list of (name . url) from the given file"
+  (let (targets)
+    (with-temp-buffer
+      (insert-file-contents file)
+      (mapc #'(lambda (x)
+                (-when-let (vals (split-string x lookup-regular-splitter t " +"))
+                  (push (cons (car vals) (cadr vals)) targets)
+                  ))
+            (s-lines (buffer-substring-no-properties (point-min) (point-max)))
+            )
+      )
+    targets
+    )
   )
 
 ;;;###autoload
 (defun lookup-regular-minor-mode/turn-on ()
   (unless (minibufferp)
-    (if (eq major-mode 'prog-mode)
-        (lookup-regular-minor-mode 1))
-    )
+    (lookup-regular-minor-mode 1))
   )
 
 ;;;###autoload

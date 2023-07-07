@@ -75,7 +75,7 @@
   )
 
 (use-package! hilit-chg
-  :hook (doom-first-buffer . global-highlight-changes-mode)
+  ;; :hook (doom-first-buffer . global-highlight-changes-mode)
   )
 
 ;;-- end highlight

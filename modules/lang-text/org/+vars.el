@@ -131,13 +131,6 @@
                       ,#'+jg-text-cleanup-whitespace
                      )
                  )
-(spec-handling-add! lookup-regular
-                    '(org-mode
-                      ("Org Manual"   . "https://orgmode.org/manual/")
-                      ("Babel Manual" . "https://orgmode.org/worg/org-contrib/babel/intro.html")
-                      ("Wiki Quote"   . "https://en.m.wikiquote.org/wiki/Main_Page")
-                      )
-                    )
 (spec-handling-add! popup
                     '(org-mode
                       ("^\\*Org Links" :slot -1 :vslot -1 :size 2 :ttl 0)

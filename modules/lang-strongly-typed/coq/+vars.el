@@ -22,22 +22,6 @@
                       :documentation ,#'company-coq-doc
                       )
                     )
-(spec-handling-add! lookup-regular
-                    '((coq-mode proof-general)
-                      ("Proof general github" . "https://github.com/ProofGeneral/PG/")
-                      ("Proof General Manual" . "https://proofgeneral.github.io/doc/master/userman/")
-                      ("Coq Github" . "https://github.com/coq/coq")
-                      ("Coq Manual" . "https://coq.inria.fr/distrib/current/refman/")
-                      ("Coq Standard Lib" . "https://coq.inria.fr/distrib/current/stdlib/")
-                      ("Logical Foundations (1)" . "https://softwarefoundations.cis.upenn.edu/lf-current/toc.html")
-                      ("Prog Lang Foundations (2)" . "https://softwarefoundations.cis.upenn.edu/plf-current/toc.html")
-                      ("Verified Functional Algorithms (3)". "https://softwarefoundations.cis.upenn.edu/vfa-current/toc.html")
-                      ("Quickchik (4)". "https://softwarefoundations.cis.upenn.edu/qc-current/toc.html")
-                      ("Verified C (5)" . "https://softwarefoundations.cis.upenn.edu/vc-current/toc.html")
-                      ("Separation Logic (6)" . "https://softwarefoundations.cis.upenn.edu/slf-current/toc.html")
-                      )
-                    )
-
 (spec-handling-add! auto-modes
                     '(coq
                       ("\\.v\\'" . coq-mode)

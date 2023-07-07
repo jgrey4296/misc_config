@@ -32,6 +32,12 @@ stored in `persp-save-dir'.")
 
 ;;-- end defs
 
+;;-- compilation
+(setq counsel-compile-root-functions (append counsel-compile-root-functions
+                                             `(,#'+jg-workspaces-compile-root-fallback)))
+
+;;-- end compilation
+
 (defvar jg-projects-switch-hook nil)
 
 (defvar jg-projects-cmd-cache-name ".projectile-cmds")

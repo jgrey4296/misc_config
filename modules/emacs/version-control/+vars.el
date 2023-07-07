@@ -76,13 +76,6 @@ Only has an effect in GUI Emacs.")
                      )
                     )
 
-(spec-handling-add! lookup-regular
-                    '((magit-mode magit-status-mode magit-commit-mode)
-                      ("Git" . "https://git-scm.com/doc")
-                      ("Github" . "https://docs.github.com/en")
-                      )
-                    )
-
 (spec-handling-add! fold :form 'override
                     `(magit
                       :modes (magit-status-mode)

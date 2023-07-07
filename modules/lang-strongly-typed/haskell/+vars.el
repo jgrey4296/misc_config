@@ -56,10 +56,3 @@
     (sp-local-pair "{-" "-")
     (sp-local-pair "{-#" "#-")
     (sp-local-pair "{-@" "@-")))
-
-(spec-handling-add! lookup-regular
-                    '(haskell-mode
-                     ("GHC reference" . "https://downloads.haskell.org/ghc/latest/docs/users_guide/index.html")
-                     ("Typeclassopedia" . "https://wiki.haskell.org/Typeclassopedia")
-                     )
-                    )

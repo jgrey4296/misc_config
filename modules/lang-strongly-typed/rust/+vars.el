@@ -30,21 +30,6 @@
   (add-to-list 'projectile-project-root-files "Cargo.toml")
   )
 
-;;-- jg-company
-(defvar jg-rust-company-activation (rx (| "stack" "heap" "derive" "cols" "trait" "val")))
-(defvar jg-rust-company-kws (let ((ht (make-hash-table :test 'equal)))
-                              (puthash "stack"  jg-rust-ivy-stack-types ht)
-                              (puthash "heap"   jg-rust-ivy-heap-types ht)
-                              (puthash "derive" jg-rust-ivy-derives ht)
-                              (puthash "trait"  jg-rust-ivy-traits ht)
-                              (puthash "val"    jg-rust-ivy-val ht)
-                              ht
-                              )
-  )
-
-
-;;-- end jg-company
-
 ;;-- specs
 (spec-handling-add! compile-commands
                    '(rust +jg-rust-get-cargo-commands)

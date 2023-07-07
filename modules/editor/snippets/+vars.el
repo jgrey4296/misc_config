@@ -58,12 +58,6 @@
                      yas-prompt-functions '(+jg-snippets-yas-prompt-fn)
                      )
 
-(spec-handling-add! lookup-regular
-                    '(snippet-mode-map
-                     ("Yasnippet Manual" . "https://joaotavora.github.io/yasnippet/snippet-development.html")
-                     )
-                    )
-
 (spec-handling-add! company
                     '(yas-minor-mode (:back . company-yasnippet))
                     )

@@ -184,25 +184,3 @@ See `+emacs-lisp-non-package-mode' for details.")
 (set-eval-handler! '(emacs-lisp-mode lisp-interaction-mode) #'+jg-lisp-eval)
 
 ;;-- end specs
-
-(spec-handling-add! lookup-regular
-                    '(emacs-lisp-mode
-                      ("Common Lisp"      . "https://www.gnu.org/software/emacs/manual/html_node/cl/index.html")
-                      ("Doom"             . "https://github.com/doomemacs/doomemacs")
-                      ("Evil Guide"       . "https://github.com/noctuid/evil-guide")
-                      ("Evil docs"        . "https://evil.readthedocs.io/en/latest/settings.html")
-                      ("Flycheck"         . "https://www.flycheck.org/en/latest/")
-                      ("GNU Lisp"         . "https://www.gnu.org/software/emacs/manual/html_node/elisp/index.html")
-                      ("Melpa"            . "https://melpa.org/#/")
-                      ("Origami"          . "https://github.com/gregsexton/origami.el")
-                      ("Yasnippet Manual" . "https://joaotavora.github.io/yasnippet/snippet-development.html")
-                      ("dash"             . "https://github.com/magnars/dash.el")
-                      ("evil-mc"          . "https://github.com/gabesoft/evil-mc")
-                      ("multiple-cursors" . "https://github.com/magnars/multiple-cursors.el")
-                      ("s"                . "https://github.com/magnars/s.el")
-                      ("transient"        . "https://magit.vc/manual/transient/")
-                      )
-                    '(racket-mode
-                      ("Racket Docs" . "https://docs.racket-lang.org/")
-                      )
-                    )

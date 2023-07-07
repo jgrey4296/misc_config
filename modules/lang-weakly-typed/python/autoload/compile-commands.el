@@ -8,17 +8,21 @@
                (project-exists (f-exists? project))
                )
     (append
+     ;; python
+     (+jg-projects-pair-cmds
+      '("version" "python -version")
+      )
      ;; pip
-     (+jg-projects-annotate-cmds
-      '(
-
-        )
-      #'(lambda (x) (concat "pip" " " (car (split-string x" " t " "))))
+     (+jg-projects-pair-cmds
+      '("version" "python -version")
+      )
+     ;; conda
+     (+jg-projects-pair-cmds
+      '("version" "python -version")
       )
      ;; pytest
-     (+jg-projects-annotate-cmds
-      '()
-      #'(lambda (x) (concat "pytest" " " (car (split-string x" " t " "))))
+     (+jg-projects-pair-cmds
+      '("test" "pytest")
       )
      )
     )

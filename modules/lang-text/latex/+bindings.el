@@ -5,21 +5,19 @@
 (map! :map LaTeX-mode-map
       :i "\"" #'TeX-insert-quote
       :i "$"  #'TeX-insert-dollar
-      :n "|"  #'+jg-ivy-general-insert
+      :n "|"  #'general-insert-call
       :n "RET" #'+jg-latex-compile-file-quick
 
       :localleader
       :desc "Preview"       "p" #'preview-at-point
       :desc "Unpreview"     "P" #'preview-clearout-at-point
-      :desc "View"          "v" #'TeX-view
-      :desc "Compile"       "c" #'TeX-command-run-all
-      :desc "Run a command" "m" #'TeX-command-master
       :desc "TexDoc"        "?" #'TeX-documentation-texdoc
       :desc "environment"   "e" #'LaTeX-environment
       :desc "close environment" "E" #'LaTeX-close-environment
       :desc "section"        "s" #'LaTeX-section
       :desc "item"          "i" #'LaTeX-insert-item
       :desc "Font Change"   "f" #'TeX-font
+      :desc "Package"       "p" #'+jg-latex-insert-package
 
       )
 

@@ -1,0 +1,8 @@
+Select Packages to Use:
+[T1, T2A]{fontenc}        # fonts
+[russian, english]{babel} # fonts
+{listings}                # code listings
+url                       # urls highlight
+[numbers]{natbib}         # bibliography
+{doi}                     # doi highlighting
+[colorlinks=true,urlcolor=blue,pdfstartview=FitH]{hyperref} # hyperlinks

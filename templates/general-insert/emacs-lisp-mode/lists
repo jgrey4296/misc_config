@@ -1,0 +1,4 @@
+;; alist : https://www.gnu.org/software/emacs/manual/html_node/elisp/Association-Lists.html
+'((:pine  . "cones") (:oak   . "acorns") (:maple . "seeds")) # alist
+;; plist : https://www.gnu.org/software/emacs/manual/html_node/elisp/Property-Lists.html
+'(:pine "cones" :oak  "acorns" :maple "seeds") # plist

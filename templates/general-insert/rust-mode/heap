@@ -1,0 +1,17 @@
+Add Heap Type:
+Box<dyn Fn(u8) -> u8> #
+String                #
+Vec<u8>               #
+VecDeque<T>           #
+LinkedList<T>         #
+HashMap<K, V>         #
+BTreeMap<K, V>        #
+HashSet<T>            #
+BTreeSet<T>           #
+BinaryHeap<T>         #
+Option<T>             #
+Result<T, Err>        #
+Rc<T>                 #
+Weak<T>               #
+Cell<T>               #
+RefCell<T>            #

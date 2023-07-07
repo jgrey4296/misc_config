@@ -1,0 +1,10 @@
+Add data derivation:
+Debug      #
+PartialEq  #
+Eq         #
+PartialOrd #
+Ord        #
+Clone      #
+Copy       #
+Hash       #
+Default    #

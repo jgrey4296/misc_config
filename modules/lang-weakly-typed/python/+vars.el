@@ -383,3 +383,17 @@
                      ("Manifest format" . "https://docs.python.org/3/distutils/sourcedist.html?highlight=manifest")
                      )
                     )
+;;-- general insert
+(general-insert-register-processor 'python-mode "raise"
+                                   #'(lambda (x)
+                                       (insert "raise "
+                                               (s-replace-regexp "^[^A-Z]+" "" x))))
+
+(general-insert-register-processor 'python-mode "datetime"
+                                   #'(lambda (x) (insert (car (split-string x " " t " +")))))
+(general-insert-register-processor 'python-mode "fixtures"
+                                   #'(lambda (x) (insert (car (split-string x " " t " "+)))))
+(general-insert-register-processor 'python-mode "import"
+                                   #'(lambda (x) (insert "import " (car (split-string x t " +")))))
+
+;;-- end general insert

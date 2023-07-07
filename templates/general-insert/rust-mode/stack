@@ -1,0 +1,19 @@
+Add Stack Type:
+bool     #
+u8       # unsigned
+u16      # unsigned
+u32      # unsigned
+u64      # unsigned
+u128     # unsigned
+i8       # int
+i16      # int
+i32      # int
+i64      # int
+i128     # int
+f32      # float
+f64      # float
+char     #
+str      #
+!        # no return
+(u8, u8) # Tuple
+[u8; 5]  # list

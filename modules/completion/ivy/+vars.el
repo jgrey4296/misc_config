@@ -17,6 +17,11 @@ results buffer.")
 
 ;;-- end definitions
 
+;;-- general-insert
+(setq general-insert-location (expand-file-name "templates/general-insert" doom-user-dir))
+
+;;-- end general-insert
+
 ;;-- ivy
 (setq ivy-height 17
       ivy-wrap t

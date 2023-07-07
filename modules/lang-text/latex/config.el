@@ -20,6 +20,10 @@
         LaTeX-item-indent 0
         )
 
+  (add-hook! 'latex-mode-hook
+             #'general-insert-minor-mode
+             )
+
   (setq-hook! 'LaTeX-mode-hook
     jg-ivy-general-insert-sub-ivys jg-latex-insert-ivys
     )

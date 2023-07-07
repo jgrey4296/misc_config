@@ -36,6 +36,7 @@
              #'doom--setq-tab-width-for-python-mode-h
              #'tree-sitter!
              #'maybe-py-test-minor-mode
+             #'general-insert-minor-mode
              )
 
   ;; Always add auto-hide as the last thing
@@ -51,9 +52,6 @@
 
     indent-line-function        #'py-indent-line
     indent-region-function      #'py-indent-region
-    jg-company-activation-re    jg-python-company-activation
-    jg-company-kws              jg-python-company-kws
-    jg-ivy-general-insert-sub-ivys jg-python-insert-ivys
     )
   ;;-- end hooks
 

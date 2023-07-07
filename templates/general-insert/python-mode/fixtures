@@ -1,0 +1,15 @@
+Add Test Fixture:
+caplog          # capture logging
+recwarn         # capture warnings
+capfd           # capture file descriptors 1 and 2
+capfdbinary     # capture file descriptors 1 and 2 binary
+capsys          # capture stdout, stderr
+pytestconfig    # access pytest config
+record_property # add key:value pairs to reports
+cache           # store values between runs
+tmp_path        # unique temp directory
+pytester        # for black box testing of plugins
+monkeypatch     # modify test context
+mocker          # create mock objects
+                # https://docs.pytest.org/en/7.3.x/reference/fixtures.html
+                # https://pytest-mock.readthedocs.io/en/latest/

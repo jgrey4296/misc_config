@@ -130,34 +130,7 @@
 
 ;;-- end LSP
 
-(spec-handling-add! lookup-regular
-                    '(rust-mode
-                      ("rustup" . "https://rust-lang.github.io/rustup/index.html")
-                      ("error codes" . "https://doc.rust-lang.org/stable/error_codes/index.html")
-                      ("language reference"   . "https://doc.rust-lang.org/stable/reference/index.html")
-                      ("Stable Documentation" . "https://doc.rust-lang.org/stable/")
-                      ("Md Book"              . "https://rust-lang.github.io/mdBook/")
-                      ("Error Codes"          . "https://doc.rust-lang.org/error_codes/error-index.html")
-                      ("Decompiler"           . "https://rust.godbolt.org/")
-                      ("Rustc"                . "https://doc.rust-lang.org/rustc/index.html")
-                      ("Command Line"         . "https://rust-cli.github.io/book/index.html")
-                      ("Design Patterns"      . "https://rust-unofficial.github.io/patterns/additional_resources/design-principles.html")
-                      ("By Example"           . "https://doc.rust-lang.org/rust-by-example/index.html")
-                      ("book"                 . "https://doc.rust-lang.org/stable/book/title-page.html")
-                      ("cargo book"           . "https://doc.rust-lang.org/cargo/")
-                      ("stdlib"               . "https://doc.rust-lang.org/std/index.html")
-                      ("editions"             . "https://doc.rust-lang.org/edition-guide/index.html")
-                      ("doc manual"           . "https://doc.rust-lang.org/rustdoc/index.html")
-                      ("cypthon"              . "https://dgrunwald.github.io/rust-cpython/doc/cpython/")
-                      ("py03"                 . "https://pyo3.rs/v0.16.4/")
-                      ("manifest reference"   . "https://doc.rust-lang.org/cargo/reference/manifest.html")
-                      ("crates"               . "https://crates.io/")
-                      ("Embedded Rust"        . "https://docs.rust-embedded.org/book/")
-                      ("Collections"          . "https://doc.rust-lang.org/std/collections/index.html")
-                      ("Lists"                . "https://rust-unofficial.github.io/too-many-lists/")
-                      ("Unsafe Rust"          . "https://doc.rust-lang.org/nightly/nomicon/")
-                      ("bindgen"              . "https://rust-lang.github.io/rust-bindgen/introduction.html")
-                      ("porting"              . "https://www.jelmer.uk/port-py-to-rust.html")
-                      ("rustup install" . "https://dev.to/xs/setting-up-rust-on-macos-in-a-clean-way-13d1")
-                      )
-                    )
+;;-- general-insert
+(general-insert-register-processor 'conf-toml-mode "rust-dependencies" #'insert)
+
+;;-- end general-insert

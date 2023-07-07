@@ -316,3 +316,5 @@
   ; used by `counsel-M-x'
   (setq amx-save-file (concat doom-cache-dir "amx-items"))
   )
+
+(use-package! general-insert :defer t)

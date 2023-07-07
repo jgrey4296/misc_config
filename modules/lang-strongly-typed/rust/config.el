@@ -29,12 +29,10 @@
              #'maybe-rust-test-minor-mode
              #'hs-minor-mode
              #'tree-sitter!
+             #'general-insert-minor-mode
              )
 
-  (setq-hook! 'rust-mode-hook
-    jg-company-activation-re    jg-rust-company-activation
-    jg-company-kws              jg-rust-company-kws
-    )
+  ;; (setq-hook! 'rust-mode-hook)
 
   ;; (add-hook 'rustic-mode-local-vars-hook #'rustic-setup-lsp 'append)
   ;; (add-hook 'rustic-mode-local-vars-hook #'tree-sitter! 'append)

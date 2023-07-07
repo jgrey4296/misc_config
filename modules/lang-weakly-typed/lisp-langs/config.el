@@ -51,8 +51,6 @@
     ;; hideshow for that.
     outline-regexp +emacs-lisp-outline-regexp
     outline-level #'+emacs-lisp-outline-level
-
-    jg-ivy-general-insert-sub-ivys jg-lisp-insert-ivys
     )
 
   )

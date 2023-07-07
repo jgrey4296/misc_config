@@ -16,3 +16,5 @@
 (package! flx)
 
 (package! ivy-posframe)
+
+(package! general-insert :recipe `(:local-repo ,(expand-file-name "packages/misc/general-insert" doom-user-dir)))

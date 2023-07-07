@@ -1,0 +1,21 @@
+Select Bibliography Style:
+\nocite{*}
+\bibliographystyle{plain}       # ID by author
+\bibliographystyle{unsrt}       # ID by reference order
+\bibliographystyle{abbrv}       # ID by author
+\bibliographystyle{alpha}       # AutYear
+\bibliographystyle{abstract}    # Aut-Year
+\bibliographystyle{acm}         # ID
+\bibliographystyle{authordate1} # Author, Year
+\bibliographystyle{apacite}     # AuthorYear
+\bibliographystyle{named}       # Author Year
+\bibliographystyle{plainnat}    # natbib
+\bibliographystyle{abbrvnat}    # natbib
+\bibliographystyle{unsrtbat}    # natbib
+\bibliographystyle{apsrev}      # natbib
+\bibliographystyle{rmpaps}      # natbib
+\Bibliographystyle{IEEEtranN}   # natbib
+\bibliographystyle{achemso}     # natbib
+\bibliographystyle{rsc}         # natbib
+
+\bibliographystyle{/Volumes/documents/github/__configs/modules/lang-text/bibtex/_data/jg_custom.bst} # Custom

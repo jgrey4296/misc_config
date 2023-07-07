@@ -1,0 +1,96 @@
+Add Rust Dependency:
+$1            = { git = "https://github.com/$2/$1.git"} # github
+$1            = { git = "https://github.com/$2/$1.git", branch="main"} # github
+$1            = { git = "https://github.com/$2/$1.git", version="1.0"} # github
+
+$1 = { path = "../$2" } # local
+
+fern          = "0.6"     # logging
+log           = "0.4"     # logging
+simple_logger = "4.0"     # logging
+slog          = "2.7"     # logging
+tracing       = "0.1"     # logging
+
+cargo-sphinx  = "1.3"     # documentation
+flamegraph    = "0.6"     # documentation
+cargo-graph   = "0.3"     # documentation
+
+anyhow        = "1.0"     # utils
+cassowary     = "0.3"     # utils
+fp-core       = "0.1"     # utils
+itertools     = "0.10"    # utils
+proptest      = "1.0"     # utils
+parry2d       = "0.11"    # utils
+bracket-lib   = "0.8"     # utils
+cargo-rr      = "0.2"     # utils
+cargo-make    = "0.36"    # utils
+tomlq         = "0.1"     # utils
+tomato-toml   = "0.3"     # utils
+
+bitflags      = "1.3"     # data
+csv           = "1.1"     # data
+diesel        = "2.0"     # data
+graph         = "0.3"     # data
+humantime     = "2.1"     # data
+json          = "0.12"    # data
+jsonrpc       = "0.14"    # data
+nom-bibtex    = "0.3"     # data
+prettyplease  = "0.1"     # data # syn pretty printer
+quick-xml     = "0.26"    # data
+rand          = "0.8"     # data
+rusqlite      = "0.28"    # data
+semver        = "1.0"     # data
+serde         = "1.0"     # data
+serde-json    = "1.0"     # data
+tempfile      = "3.3"     # data
+time          = "0.3"     # data
+uuid          = "1.2"     # data
+xml-rs        = "0.8"     # data
+euclid        = "0.22"    # data
+cgmath-rs     = "0.18"    # data
+
+nom           = "7.1"     # parsing
+pest          = "2.5"     # parsing
+regex         = "1.7"     # parsing
+syn           = "1.0"     # parsing
+textwrap      = "0.16"    # parsing
+
+clap          = "4.0"     # CLI
+
+actix         = "0.13"    # http
+hyper         = "0.14"    # http
+lspower       = "1.5"     # http
+reqwest       = "0.11"    # http
+tokio         = "1.22"    # http
+crossbeam     = "0.8"     # http
+scopeguard    = "1.1"     # http
+
+futures       = "0.3"     # sync
+parking_lot   = "0.12"    # sync
+
+egui          = "0.19"    # graphical
+gtk           = "0.16"    # graphical
+iced          = "0.5"     # graphical
+image         = "0.24"    # graphical
+plotters      = "0.3"     # graphical
+sdl2          = "0.35"    # graphical
+cargo-rs      = "0.16"    # graphical
+
+cc            = "1.0"     # ffi
+cpython       = "0.7"     # ffi
+gdnative      = "0.11"    # ffi
+libc          = "0.2"     # ffi
+libloading    = "0.7"     # ffi
+numpy         = "0.17"    # ffi
+pyo3          = "0.17"    # ffi
+rustler       = "0.26"    # ffi
+
+clippy        = "0.0.302" # dev
+rustfix       = "0.6"     # dev
+rustfmt       = "0.10"    # dev
+
+
+tree-sitter-elisp = "1.3.0"  # emacs
+emacs             = "0.18.0" # emacs https://github.com/ubolonton/emacs-module-rs
+emacs-rs-module   = "0.18.0" # emacs
+emacs_module      = "0.18.0" # emacs

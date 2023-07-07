@@ -51,7 +51,7 @@
  :app   (rss +org)
  :email (mu4e +gmail)
  :emacs electric vc
- :lang ledger
+ ;; :lang ledger
  ;; :lang agda ess
  ;; :lang julia
  :ui deft doom

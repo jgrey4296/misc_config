@@ -26,4 +26,7 @@
                     '(toml
                       ("\\.toml\\'" . conf-toml-mode)
                       )
+                    '(conf
+                      ("\\.conf\\'" . conf-mode)
+                      )
                     )

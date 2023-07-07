@@ -1,0 +1,15 @@
+emacs loads, in order:
+1) site-startup file. disabled with --no-site-file
+site-start.el  in standard search path.
+
+2) early-init. can customize package system.
+~/.config/early-init.el
+~/.emacs.d/early-init.el
+
+2) an init file. diabled with -q or --user:
+~/.emacs.el
+~/.emacs.d/init.el
+~/.config/emacs/init.el
+
+3) default init file. disabled with -q
+default.el  in standard search path. ignored if init file sets `inhibit-default-init` to t.

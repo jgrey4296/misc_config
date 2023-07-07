@@ -7,7 +7,8 @@ if [[ -z "${ANACONDA_HOME}" ]]; then
 fi
 
 if [[ -n "${CONDA_DEFAULT_ENV}" ]]; then
-    echo "Conda defaulting to: ${CONDA_DEFAULT_ENV}"
+    # echo "Conda defaulting to: ${CONDA_DEFAULT_ENV}"
+    :
 elif [[ -f ".venv" ]]; then
     ENV=$(tail -n 1 .venv)
     echo "Env Conda : ${ENV}"

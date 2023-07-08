@@ -10,7 +10,7 @@
     (+jg-bibtex-build-list)
     (bibtex-completion-clear-cache)
     (bibtex-completion-init)
-    (mapcar #'+jg-bibtex-process-candidates (bibtex-completion-candidates))
+    ;; (mapcar #'+jg-bibtex-process-candidates (bibtex-completion-candidates))
     )
   )
 

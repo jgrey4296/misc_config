@@ -10,7 +10,7 @@ PATH="/Library/TeX/texbin:$PATH"
 #TEXINPUTS=/Volumes/DOCUMENTS/Dropbox/Scripts/tex/:$TEXINPUTS
 
 
-TEXMFCNF="$HOME/.doom.d/terminal/tool_configs:"
+# TEXMFCNF="$HOME/.doom.d/terminal/tex-config/"
 
 # MANAPATH="/Library/TeX/Distributions/.DefaultTeX/Contents/Man:$MANPATH"
 MANPATH="/Library/TeX/Distributions/.DefaultTeX/Contents/Man:$MANPATH"

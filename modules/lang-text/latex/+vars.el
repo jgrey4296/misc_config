@@ -114,7 +114,6 @@
                       (latex-mode :trigger "__" :priority -100)
                       )
                     )
-
 (spec-handling-add! compile-commands
                     '(latex +jg-latex-get-commands)
                     )

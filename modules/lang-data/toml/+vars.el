@@ -28,5 +28,6 @@
                       )
                     '(conf
                       ("\\.conf\\'" . conf-mode)
+                      ("\\.cnf\\'" . conf-mode)
                       )
                     )

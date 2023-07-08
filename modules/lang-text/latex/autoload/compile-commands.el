@@ -10,17 +10,33 @@
                (is-tex (f-ext? curr-file "tex"))
                )
     (+jg-projects-pair-cmds
-       `("compile"  ,(string-join (append (list jg-latex-compile-program)
+       `("compile pdflatex"  ,(string-join (append (list "pdflatex")
                                           jg-latex-compile-args
                                           (list curr-file)) " "))
-       '("clean"    "echo todo")
-       '("install"  "tlmgr --usermode install" :read)
-       '("l3"       "fmtutil-user --all")
+       `("compile lualatex"  ,(string-join (append (list "lualatex")
+                                          jg-latex-compile-args
+                                          (list curr-file)) " "))
+       `("compile xelatex"  ,(string-join (append (list "xelatex")
+                                          jg-latex-compile-args
+                                          (list curr-file)) " "))
+
+       `("clean"    ,(format "cd %s; ls" (f-parent curr-file)))
+       '("install"  "tlmgr --usermode install --with-doc" :read)
        `("check"    ,(string-join (append (list jg-latex-compile-program)
                                           jg-latex-compile-args
                                           (list "-draftmode" curr-file)) " "))
+       `("bibtex"      ,(format "bibtex --terse %s" (f-base curr-file)))
+       ;; configs
+       '("texdoc"   "texdoc -I" :read)
+       '("package info" "tlmgr info" :read)
        '("version" "pdflatex --version")
-       `("bib"      ,(format "bibtex %s" curr-file))
+       '("settings" "tlmgr conf")
+       '("texdoc settings" "texdoc -f")
+       '("update"  "tlmgr --usermode update --all")
+       '("l3"       "fmtutil-user --all")
+       '("find"     "kpsewhich -all" :read)
+       '("fonts"   "updmap-user --listmaps")
+
        (when (f-exists? (f-swap-ext curr-file "pdf"))
          `("open"     ,(format "open -a Preview -nF %s" (f-swap-ext curr-file "pdf"))
            )

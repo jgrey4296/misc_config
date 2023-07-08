@@ -6,6 +6,8 @@
 
 (use-package! latex
   :after tex
+  :init
+
   :config
 
   (puthash "dropcap" #'+jg-latex-dropcap-opt-ivy jg-latex-insert-ivys)
@@ -20,7 +22,7 @@
         LaTeX-item-indent 0
         )
 
-  (add-hook! 'latex-mode-hook
+  (add-hook! 'LaTeX-mode-hook
              #'general-insert-minor-mode
              )
 

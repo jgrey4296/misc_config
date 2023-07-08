@@ -3,7 +3,6 @@
 jgdebug "Setting Exports"
 export PATH
 export EDITOR
-export TEXMFCNF
 export PROMPT_NUM
 export JDK_HOME
 export JAVA_HOME

@@ -94,3 +94,5 @@ Martin Heinz        # https://martinheinz.dev/
 Pytest              # https://docs.pytest.org/en/7.3.x/how-to/fixtures.html
 Pytest Mock         # https://pytest-mock.readthedocs.io/en/latest/
 Maturin             # https://www.maturin.rs/index.html
+milksnake           # https://github.com/getsentry/milksnake
+twine               # https://github.com/pypa/twine

@@ -105,7 +105,6 @@
 (use-package! evil-embrace
   :defer t
   :hook (LaTeX-mode      . embrace-LaTeX-mode-hook)
-  :hook (LaTeX-mode      . +evil-embrace-latex-mode-hook-h)
   :hook (org-mode        . embrace-org-mode-hook)
   :hook (ruby-mode       . embrace-ruby-mode-hook)
   :hook (emacs-lisp-mode . embrace-emacs-lisp-mode-hook)

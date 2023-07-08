@@ -105,7 +105,7 @@ after `browse-url-handlers` have processed the url
         )
 
   (sleep-for 2)
-  (browse-select-regain-focus)
+  ;; (browse-select-regain-focus)
   )
 
 ;;;###autoload

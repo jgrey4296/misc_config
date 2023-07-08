@@ -7,3 +7,6 @@ Font Installation # https://tug.org/fonts/fontinstall.html
 kpathsea          # https://www.overleaf.com/learn/latex/Articles/An_introduction_to_Kpathsea_and_how_TeX_engines_search_for_files
 What the font?    # https://www.myfonts.com/pages/whatthefont
 font space        # https://www.fontspace.com/
+fonts             # https://web.archive.org/web/20180721043841/https://www.cl.cam.ac.uk/~rf10/pstex/latexcommands.htm
+xetex             # https://www.tug.org/xetex/
+luatex            # http://www.luatex.org/

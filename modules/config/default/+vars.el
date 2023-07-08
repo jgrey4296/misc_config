@@ -57,6 +57,9 @@
 
 ;;-- end tramp
 
+;; Ftp
+(setq ftp-program "git-ftp")
+
 (setq-default diary-file (expand-file-name "~/github/jgrey4296.github.io/orgfiles/main.diary")
               major-mode #'emacs-lisp-mode
               )

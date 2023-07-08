@@ -57,7 +57,7 @@
                )
       (ivy-read (format "%s " (car vals))
                 (cdr vals)
-                :action processor
+                :action (symbol-function processor)
                 :require-match t
                 )
     )

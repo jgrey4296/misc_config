@@ -30,7 +30,7 @@
 
 (defvar jg-bibtex-loc-completions     (expand-file-name "~/github/jgrey4296.github.io/resources/completions/"))
 
-(defvar jg-bibtex-loc-export-bib-file (doom-module-expand-path :lang-text 'bibtex "_data/export_template.tex"))
+(defvar jg-bibtex-loc-export-bib-file (expand-file-name "templates/export_template.tex" "~/.doom.d/terminal/tex-config/"))
 
 (defvar jg-bibtex-loc-temp-dir        (expand-file-name "~/.tex/"))
 
@@ -167,6 +167,7 @@
 (spec-handling-add! auto-modes
                     '(bibtex
                       ("\\.bib\\'" . bibtex-mode)
+                      ("\\.bst\\'" . bibtex-style-mode)
                       )
                     )
 ;;-- end specs

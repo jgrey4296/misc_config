@@ -1,0 +1,46 @@
+% (Public domain.)
+% symlink into /usr/local/texlive/YYYY/texmf.cnf
+%
+% TEXMFDIST       holds all of the ﬁles in the original distribution
+% TEXMFSYSVAR     used by texconfig-sys, updmap-sys and fmtutil-sys
+% TEXMFSYSCONFIG  tree used by the utilities texconfig-sys, updmap-sys, and fmtutil-sys to store modiﬁed conﬁguration data.
+% TEXMFLOCAL      administrators can use for system-wide installation
+% TEXMFHOME       for user individual installations of additional or updated macros, fonts, etc.
+% TEXMFVAR        stores cached used data
+% TEXMFCONFIG     user tree for texconfig, updmap-sys, and fmtutil-sys
+% TEXMFCACHE      ConTeXt MkIV and LuaLaTeX to store (cached) runtime data
+% tlmgr usertree is a TEXMFHOME/web2c and TEXMFHOME/tlpkg/tlpobj
+% note: tlmgr option docfiles 1
+
+TEXMFHOME   = $HOME/Library/texmf
+TEXMFVAR    = $HOME/.tex
+TEXMFOUT    = $TEXMFDOTDIR
+TEXMFCONFIG = $HOME/.doom.d/terminal/tex-config
+
+JG_FONTS =$HOME/github/godot/__assets/fonts/
+JG_BIB   = $HOME/github/jgrey4296.github.io/resources/bibliography/
+
+BIBINPUTS=$TEXMFDOTDIR:$JG_BIB:$TEXMFCONFIG/bibtex//:$TEXMFHOME/bibtex//
+BSTINPUTS=$TEXMFDOTDIR:$TEXMFCONFIG/bibtex//:$TEXMFHOME/bibtex//
+
+TTFONTS=$TEXMFDOTDIR:$JG_FONTS:$TEXMFCONFIG/fonts//:$HOME/Library/Fonts:/System/Library/Fonts//
+OPENTYPEFONTS=$TEXMFDOTDIR:$JG_FONTS:$TEXMFCONFIG/fonts//:$HOME/Library/Fonts:/System/Library/Fonts//
+
+TEXINPUTS   = $TEXMFDOTDIR:$TEXMFCONFIG/tex//
+
+% tlmgr reads TEXMFCONFIG/tlmgr/config
+
+% TEXMFOUTPUT = $HOME/.tex/
+
+% output files TEXMFOUTPUT
+% input files TEXINPUTS
+% images format files TEXFORMATS
+% TEX pool files TEXPOOL
+% encoding files ENCFONTS
+% font map files TEXFONTMAPS
+% tfm files TFMFONTS
+% virtual fonts VFFONTS
+% Type 1 fonts T1FONTS
+% TrueType fonts TTFONTS
+% OpenType fonts OPENTYPEFONTS
+% bitmap fonts PKFONTS

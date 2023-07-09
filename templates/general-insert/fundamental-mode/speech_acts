@@ -1,0 +1,48 @@
+3rd-party-talk               # switchboard
+Abandoned or Turn-Exit       # switchboard
+Acknowledge (Backchannel)    # switchboard
+Action-directive             # switchboard
+Affirmative non-yes answers  # switchboard
+Agree/Accept                 # switchboard
+Apology                      # switchboard
+Appreciation                 # switchboard
+Backchannel in question form # switchboard
+Collaborative Completion     # switchboard
+Conventional-closing         # switchboard
+Conventional-opening         # switchboard
+Declarative Wh-Question      # switchboard
+Declarative Yes-No-Question  # switchboard
+Dispreferred answers         # switchboard
+Downplayer                   # switchboard
+Hedge                        # switchboard
+Hold before answer/agreement # switchboard
+Maybe/Accept-part            # switchboard
+Negative Non-no answers      # switchboard
+No Answers                   # switchboard
+Non-verbal                   # switchboard
+Offers Options Commits       # switchboard
+Open-Question                # switchboard
+Or-Clause                    # switchboard
+Other                        # switchboard
+Other answers                # switchboard
+Quotation                    # switchboard
+Reject                       # switchboard
+Repeat-phrase                # switchboard
+Response Acknowledgement     # switchboard
+Rhetorical Questions         # switchboard
+Self-talk                    # switchboard
+Statement-non-opinion        # switchboard
+Statement-opinion            # switchboard
+Summarize/reformulate        # switchboard
+Tag-question                 # switchboard
+Thanking                     # switchboard
+Uninterpretable              # switchboard
+Wh-Question                  # switchboard
+Yes answers                  # switchboard
+Yes-No-Question              # switchboard
+signal-non-understanding     # switchboard
+assertive                    # searle
+directive                    # searle
+commissive                   # searle
+expressive                   # searle
+declarative                  # searle

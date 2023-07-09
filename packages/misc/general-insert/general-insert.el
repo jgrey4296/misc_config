@@ -16,7 +16,7 @@
   :init-value nil
   :lighter "general-insert"
   (setq-local general-insert-keys
-              (cl-loop for mode in (parent-mode-list major-mode)
+              (cl-loop for mode in (cons 'fundamental-mode (parent-mode-list major-mode))
                        when (f-exists? (f-join general-insert-location (symbol-name mode)))
                        do
                        (unless (gethash mode general-insert--key-cache)

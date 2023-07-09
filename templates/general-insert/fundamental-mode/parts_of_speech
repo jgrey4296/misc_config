@@ -1,0 +1,9 @@
+Noun         # names
+Pronoun      # references to nouns
+Verb         # action, occurrence, or state
+Adverb       # describe / add precision to verb
+Adjective    # describe / add precision to noun
+Article      # definite or indefinite marker
+Preposition  # relate words to each other
+Conjunction  # combine clauses
+Interjection # expression of feeling or emotion

@@ -268,9 +268,7 @@
 
 ;;-- general insert
 (general-insert-register-processor 'python-mode "raise"
-                                   #'(lambda (x)
-                                       (insert "raise "
-                                               (s-replace-regexp "^[^A-Z]+" "" x))))
+                                   #'(lambda (x) (insert "raise " (s-replace-regexp "^[^A-Z]+" "" x))))
 (general-insert-register-processor 'python-mode "datetime"
                                    #'(lambda (x) (insert (car (split-string x " " t " +")))))
 (general-insert-register-processor 'python-mode "fixtures"

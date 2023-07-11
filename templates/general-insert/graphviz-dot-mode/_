@@ -1,0 +1,11 @@
+Non-Specific Inserts:
+strict graph   {  } # toplevel graphs
+strict digraph { }  # toplevel graphs
+graph          { }  # toplevel graphs
+digraph        {  } # toplevel graphs
+-> # edge
+-> { }; # subgraph edge
+
+graph [ = ];  # graph attribute
+node  [ = ];  # graph-wide node attributes
+edge  [ = ];  # graph-wide edge attributes

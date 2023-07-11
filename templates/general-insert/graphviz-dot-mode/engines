@@ -1,0 +1,11 @@
+Choose Dot Engine:
+dot       # hierarchical layered
+neato     # spring model
+fdp       # force directed placement
+sfdp      # scalable force directed placement
+circo     # circular layout
+twopi     # radial layout
+nop       # pretty print
+nop2      # pretty print
+osage     # clustered
+patchwork # squarified treemap

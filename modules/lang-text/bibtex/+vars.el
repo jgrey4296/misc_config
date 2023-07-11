@@ -30,7 +30,7 @@
 
 (defvar jg-bibtex-loc-completions     (expand-file-name "~/github/jgrey4296.github.io/resources/completions/"))
 
-(defvar jg-bibtex-loc-export-bib-file (expand-file-name "templates/export_template.tex" "~/.doom.d/terminal/tex-config/"))
+(defvar jg-bibtex-loc-export-bib-file (expand-file-name "tex/export_template.tex" "~/.doom.d/terminal/tex-config/"))
 
 (defvar jg-bibtex-loc-temp-dir        (expand-file-name "~/.tex/"))
 

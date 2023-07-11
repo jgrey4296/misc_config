@@ -1,0 +1,32 @@
+Add Attributes for Cluster:
+area          #  Indicates the preferred area for a node or empty cluster. For patchwork only.
+bgcolor       #  Canvas background color.
+class         #  Classnames to attach to the node, edge, graph, or cluster's SVG element. For svg only.
+cluster       #  Whether the subgraph is a cluster.
+color         #  Basic drawing color for graphics, not text.
+colorscheme   #  A color scheme namespace: the context for interpreting color names.
+fillcolor     #  Color used to fill the background of a node or cluster.
+fontcolor     #  Color used for text.
+fontname      #  Font used for text.
+fontsize      #  Font size, in points, used for text.
+gradientangle #  If a gradient fill is being used, this determines the angle of the fill.
+href          #  Synonym for URL. For map, postscript, svg only.
+id            #  Identifier for graph objects. For map, postscript, svg only.
+K             #  Spring constant used in virtual physical model. For fdp, sfdp only.
+label         #  Text label attached to objects.
+labeljust     #  Justification for graph & cluster labels.
+labelloc      #  Vertical placement of labels for nodes, root graphs and clusters.
+layer         #  Specifies layers in which the node, edge or cluster is present.
+lheight       #  Height of graph or cluster label, in inches. For write only.
+lp            #  Label center position. For write only.
+lwidth        #  Width of graph or cluster label, in inches. For write only.
+margin        #  For graphs, this sets x and y margins of canvas, in inches.
+nojustify     #  Whether to justify multiline text vs the previous text line (rather than the side of the container).
+pencolor      #  Color used to draw the bounding box around a cluster.
+penwidth      #  Specifies the width of the pen, in points, used to draw lines and curves.
+peripheries   #  Set number of peripheries used in polygonal shapes and cluster boundaries.
+sortv         #  Sort order of graph components for ordering packmode packing.
+style         #  Set style information for components of the graph.
+target        #  If the object has a URL, this attribute determines which window of the browser is used for the URL. For map, svg only.
+tooltip       #  Tooltip (mouse hover text) attached to the node, edge, cluster, or graph. For cmap, svg only.
+URL           #  Hyperlinks incorporated into device-dependent output. For map, postscript, svg only.

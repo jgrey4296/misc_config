@@ -40,7 +40,6 @@ https://github.com/vinta/awesome-python
 - pyqtree
 - pytest
 - pytest-mock
-- readline
 - regex
 - rich
 - scipy
@@ -158,6 +157,7 @@ pip-chill
 pip-reqs
 
 ** datastructures
+https://www.attrs.org/en/stable/
 https://github.com/pytransitions/transitions
 PyYAML                                                                                          : 6.0
 Pyqtree                                                                                         : 1.0.0
@@ -388,7 +388,6 @@ https://github.com/facebookresearch/ParlAI
 https://github.com/fluhus/wordnet-to-json                                                       : NLP : json : word_net
 https://github.com/mewo2/pronouncingpy                                                          : libraries : pronunciation
 https://spacy.io/                                                                               : NLP : libraries : python
-inflect                                                                                         : 6.0.0
 https://github.com/jaraco/inflect
 snowballstemmer                                                                                 : 2.2.0
 

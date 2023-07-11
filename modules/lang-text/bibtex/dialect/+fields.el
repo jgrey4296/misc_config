@@ -76,8 +76,8 @@
 
 ;;-- reviews
 (pushnew! bibtex-jg-field-alist
-          '(:bookpublisher)
+;;           '(:bookpublisher)
           '(:review_crossref)
-          '(:bookauthor)
+;;           '(:bookauthor)
           )
 ;;-- end reviews

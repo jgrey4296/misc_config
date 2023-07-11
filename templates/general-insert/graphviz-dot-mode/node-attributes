@@ -1,0 +1,50 @@
+Node Attributes:
+area          #  Indicates the preferred area for a node or empty cluster. For patchwork only.
+class         #  Classnames to attach to the node, edge, graph, or cluster's SVG element. For svg only.
+color         #  Basic drawing color for graphics, not text.
+colorscheme   #  A color scheme namespace: the context for interpreting color names.
+comment       #  Comments are inserted into output.
+distortion    #  Distortion factor for shape=polygon.
+fillcolor     #  Color used to fill the background of a node or cluster.
+fixedsize     #  Whether to use the specified width and height attributes to choose node size (rather than sizing to fit the node contents).
+fontcolor     #  Color used for text.
+fontname      #  Font used for text.
+fontsize      #  Font size, in points, used for text.
+gradientangle #  If a gradient fill is being used, this determines the angle of the fill.
+group         #  Name for a group of nodes, for bundling edges avoiding crossings. For dot only.
+height        #  Height of node, in inches.
+href          #  Synonym for URL. For map, postscript, svg only.
+id            #  Identifier for graph objects. For map, postscript, svg only.
+image         #  Gives the name of a file containing an image to be displayed inside a node.
+imagepos      #  Controls how an image is positioned within its containing node.
+imagescale    #  Controls how an image fills its containing node.
+label         #  Text label attached to objects.
+labelloc      #  Vertical placement of labels for nodes, root graphs and clusters.
+layer         #  Specifies layers in which the node, edge or cluster is present.
+margin        #  For graphs, this sets x and y margins of canvas, in inches.
+nojustify     #  Whether to justify multiline text vs the previous text line (rather than the side of the container).
+ordering      #  Constrains the left-to-right ordering of node edges. For dot only.
+orientation   #  node shape rotation angle, or graph orientation.
+penwidth      #  Specifies the width of the pen, in points, used to draw lines and curves.
+peripheries   #  Set number of peripheries used in polygonal shapes and cluster boundaries.
+pin           #  Keeps the node at the node's given input position. For neato, fdp only.
+pos           #  Position of node, or spline control points. For neato, fdp only.
+rects         #  Rectangles for fields of records, in points. For write only.
+regular       #  If true, force polygon to be regular.
+root          #  Specifies nodes to be used as the center of the layout. For twopi, circo only.
+samplepoints  #  Gives the number of points used for a circle/ellipse node.
+shape         #  Sets the shape of a node.
+shapefile     #  A file containing user-supplied node content.
+showboxes     #  Print guide boxes for debugging. For dot only.
+sides         #  Number of sides when shape=polygon.
+skew          #  Skew factor for shape=polygon.
+sortv         #  Sort order of graph components for ordering packmode packing.
+style         #  Set style information for components of the graph.
+target        #  If the object has a URL, this attribute determines which window of the browser is used for the URL. For map, svg only.
+tooltip       #  Tooltip (mouse hover text) attached to the node, edge, cluster, or graph. For cmap, svg only.
+URL           #  Hyperlinks incorporated into device-dependent output. For map, postscript, svg only.
+vertices      #  Sets the coordinates of the vertices of the node's polygon, in inches. For write only.
+width         #  Width of node, in inches.
+xlabel        #  External label for a node or edge.
+xlp           #  Position of an exterior label, in points. For write only.
+z             #  Z-coordinate value for 3D layouts and displays.

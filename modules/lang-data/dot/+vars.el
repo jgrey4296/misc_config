@@ -6,3 +6,7 @@
                       ("\\.gv\\'" . graphviz-dot-mode)
                       )
                     )
+
+(spec-handling-add! compile-commands
+                    '(graphiz-dot-mode +jg-dot-get-commands)
+                    )

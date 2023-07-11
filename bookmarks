@@ -2,11 +2,21 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("user_tex"
- (filename . "~/Library/texlive/")
- (front-context-string)
- (rear-context-string . "96 Jun 16 12:39 ")
- (position . 186))
+(("base_library"
+ (filename . "/System/Library/")
+ (front-context-string . "Fonts\n  drwxr-xr")
+ (rear-context-string . "9K Jan 23  2020 ")
+ (position . 2585))
+("sys_library"
+ (filename . "/Library/")
+ (front-context-string . "Fonts\n  drwxr-xr")
+ (rear-context-string . "28 Jul 30  2022 ")
+ (position . 1398))
+("user_lib"
+ (filename . "~/Library/")
+ (front-context-string . "texmf\n  -rw-r--r")
+ (rear-context-string . "80 Jul  5 23:53 ")
+ (position . 4392))
 ("brew"
  (filename . "/usr/local/")
  (front-context-string . "Cellar\n  drwxrwx")

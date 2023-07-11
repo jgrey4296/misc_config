@@ -5,23 +5,39 @@
 
 (defvar general-insert--cache     (make-hash-table :test 'equal))
 
-(defvar general-insert--key-cache (make-hash-table))
+(defvar general-insert--key-cache (make-hash-table :test 'equal))
 
 (defvar general-insert-processors (make-hash-table :test 'equal))
 
 (defvar-local general-insert-keys nil)
 
+(defun general-insert--propertize (mode file)
+  (let ((base (format "%-20s # %s" (f-base file) mode)))
+    (set-text-properties 0 (length base) `(path ,file) base)
+    base
+    )
+  )
+
+(defun general-insert-clear-caches ()
+  (interactive)
+  (setq general-insert--cache (make-hash-table :test 'equal)
+        general-insert--key-cache (make-hash-table :test 'equal)
+        )
+  (setq-local general-insert-keys nil)
+  )
+
+;;;###autoload
 (define-minor-mode general-insert-minor-mode
   " "
   :init-value nil
   :lighter "general-insert"
   (setq-local general-insert-keys
-              (cl-loop for mode in (cons 'fundamental-mode (parent-mode-list major-mode))
+              (cl-loop for mode in (append (parent-mode-list major-mode) '(fundamental-mode))
                        when (f-exists? (f-join general-insert-location (symbol-name mode)))
                        do
                        (unless (gethash mode general-insert--key-cache)
                          (puthash mode
-                                  (mapcar #'f-base (f-files (f-join general-insert-location (symbol-name mode))))
+                                  (mapcar (-partial #'general-insert--propertize (symbol-name mode)) (f-files (f-join general-insert-location (symbol-name mode))))
                                   general-insert--key-cache))
                        and
                        append
@@ -50,14 +66,15 @@
   (unless (gethash selected general-insert--cache)
     (puthash selected
              (general-insert--load-file
-              (f-join general-insert-location (symbol-name major-mode) selected))
+              (get-text-property 0 'path selected))
              general-insert--cache))
+
   (-when-let* ((vals (gethash selected general-insert--cache))
-               (processor (gethash `(,major-mode ,selected) general-insert-processors #'general-insert-default))
+               (processor (or (gethash `(,major-mode ,selected) general-insert-processors) #'general-insert-default))
                )
       (ivy-read (format "%s " (car vals))
                 (cdr vals)
-                :action (symbol-function processor)
+                :action processor
                 :require-match t
                 )
     )

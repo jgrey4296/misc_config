@@ -3,10 +3,13 @@
 ;;;###autoload
 (defun +jg-projects-find-related ()
   (interactive)
-  (select-window (split-window-below))
-  (if (eq major-mode 'dired-mode)
-      (+jg-projects-find-related-directory)
-    (projectile-find-related-file)
+  (-when-let* ((buff (if (eq major-mode 'dired-mode)
+                       (+jg-projects-find-related-directory)
+                       (projectile--find-related-file (buffer-file-name))))
+               (buff-exists (f-exists? buff))
+               )
+    (select-window (split-window-below))
+    (find-file buff)
     )
   )
 

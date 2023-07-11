@@ -1,6 +1,19 @@
 ;;; commands.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
+(defun +jg-dot-get-commands (&optional dir)
+  (interactive)
+  (-when-let (is-dot (f-ext? (buffer-file-name) "dot"))
+    (+jg-projects-pair-cmds
+     `("compile" ,(graphviz-compile-command (buffer-file-name)))
+     (when (f-exists? (graphviz-output-file-name (buffer-file-name)))
+       `("open" ,(format "open %s" (graphviz-output-file-name (buffer-file-name))))
+       )
+     )
+    )
+  )
+
+;;;###autoload
 (defun +jg-dot-compile-and-view ()
   (interactive)
   (when (f-exists? (graphviz-output-file-name (buffer-file-name)))

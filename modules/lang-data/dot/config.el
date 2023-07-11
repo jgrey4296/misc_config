@@ -31,7 +31,8 @@
   :config
   (after! org
     (push '("dot" . graphviz-dot) org-src-lang-modes))
-
+  (add-hook! 'graphviz-dot-mode-hook
+             #'general-insert-minor-mode)
 
   )
 

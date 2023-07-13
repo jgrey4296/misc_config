@@ -1,5 +1,6 @@
-;; -*- mode: emacs-lisp; lexical-binding: t; -*-
+;;; funcs.el -*- lexical-binding: t; -*-
 
+;;;###autoload
 (defun +jg-snippets-complete-or-snippet (&optional arg)
   (interactive "p")
   (cond ((company-complete-common-or-cycle) nil)
@@ -8,6 +9,7 @@
       )
     )
 
+;;;###autoload
 (defun +jg-snippets-new-snippet()
   "Create a new snippet in `+snippets-dir'."
   (interactive)
@@ -22,12 +24,14 @@
       (when (bound-and-true-p evil-local-mode)
         (evil-insert-state)))))
 
+;;;###autoload
 (defun +jg-snippets--ensure-dir (dir)
   (unless (file-directory-p dir)
     (if (y-or-n-p (format "%S doesn't exist. Create it?" (abbreviate-file-name dir)))
         (make-directory dir t)
       (error "%S doesn't exist" (abbreviate-file-name dir)))))
 
+;;;###autoload
 (defun +jg-snippets--completing-read-uuid (prompt all-snippets &rest args)
   "Custom formatter for yasnippet, to display groups of snippets "
   (let* ((snippet-data (cl-loop for (_ . tpl) in (mapcan #'yas--table-templates (if all-snippets
@@ -44,6 +48,7 @@
         (selected-value (apply #'completing-read prompt snippet-data args)))
   (alist-get selected-value snippet-data nil nil 'equal)))
 
+;;;###autoload
 (defun +jg-snippets-yas-prompt-fn (prompt choices &optional display-fn)
   " Yasnippet ivy which shows groups "
   (let* ((max-name 0)
@@ -76,3 +81,7 @@
     (nth (or chosen 0) choices)
     )
   )
+
+
+;;;###autoload
+(advice-add '+snippet--completing-read-uuid :override #'+jg-snippets--completing-read-uuid)

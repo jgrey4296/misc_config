@@ -1,0 +1,11 @@
+Insert Math:
+numbers.Complex    #
+math.{fn}          #
+cmath.{fn}         #
+decimal.Decimal    #
+fractions.Fraction #
+random.{fn}        #
+statistics.{fn}    #
+
+numpy.{fn} #
+scipy.{fn} #

@@ -6,6 +6,6 @@
   (let* ((name (file-name-sans-versions (or (buffer-file-name) (buffer-name))))
          (result (assoc-default name auto-mode-alist 'string-match))
         )
-    (message "Buffer Matches: %s" result)
+    (message "Buffer %s (%s) Matches: %s" (buffer-name) major-mode result)
     )
   )

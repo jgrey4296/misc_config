@@ -18,7 +18,7 @@
       )
      ;; conda
      (+jg-projects-pair-cmds
-      '("version" "python -version")
+      '("version" "python --version")
       )
      ;; pytest
      (+jg-projects-pair-cmds
@@ -27,3 +27,17 @@
      )
     )
   )
+
+;;;###autoload
+(defun +jg-python-solo-file-run (&optional dir)
+  (interactive)
+  (-when-let (is-py (f-ext? (buffer-file-name) "py"))
+    (+jg-projects-pair-cmds
+     `("run-py" ,(format "python -X dev %s" (buffer-file-name)) :interactive)
+     `("run-py-verbose" ,(format "python -X dev -i -v %s" (buffer-file-name)) :interactive)
+     `("run-ipy" ,(format "ipython -X %s" (buffer-file-name)))
+      '("which-py" "which python")
+      `("pytest-file" ,(format "pytest --pdb %s" (buffer-file-name)) :interactive)
+      )
+  )
+)

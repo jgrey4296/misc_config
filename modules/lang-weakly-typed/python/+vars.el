@@ -29,7 +29,7 @@
 
 (defvaralias 'python-pdbtrack-activate 'py-pdbtrack-do-tracking-p)
 
-(defvaralias 'python-shell-interpreter 'py-python-command)
+(defvaralias 'python-shell--interpreter 'py-python-command)
 
 (defvaralias 'python-shell-virtualenv-root 'py-shell-virtualenv-root)
 
@@ -43,7 +43,7 @@
 
       py-python-command "python3"
       py-python-command-args '("-i")
-      python-shell-interpreter-args "-i"
+      python-shell--interpreter-args "-i"
 
       py-use-font-lock-doc-face-p t
       py-fontify-shell-buffer-p t
@@ -248,7 +248,7 @@
                     )
                     )
 (spec-handling-add! compile-commands
-                    '(python +jg-python-get-commands)
+                    '(python +jg-python-get-commands +jg-python-solo-file-run)
                     )
 (set-repl-handler! 'python-mode #'+jg-python/open-repl
   :persist t

@@ -37,3 +37,11 @@ stackprinter             # https://github.com/cknd/stackprinter
 toolz                    # https://toolz.readthedocs.io/en/latest/index.html
 pytest                   # https://docs.pytest.org/en/7.3.x/reference/reference.html#std-fixture-pytestconfig
 timeit                   # https://docs.python.org/3/library/timeit.html
+difflib                  # https://docs.python.org/3/library/difflib.html
+numbers                  # https://docs.python.org/3/library/numbers.html
+math                     # https://docs.python.org/3/library/math.html
+cmath                    # https://docs.python.org/3/library/cmath.html
+decimal                  # https://docs.python.org/3/library/decimal.html
+fractions                # https://docs.python.org/3/library/fractions.html
+random                   # https://docs.python.org/3/library/random.html
+statistics               # https://docs.python.org/3/library/statistics.html

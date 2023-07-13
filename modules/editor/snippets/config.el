@@ -1,19 +1,13 @@
 ;;; editor/snippets/config.el -*- lexical-binding: t; -*-
 
 (load! "+vars")
-(load! "+yasnippet")
 (load! "+spec-defs")
-(after! (yasnippet jg-bindings-total)
-  (load! "+bindings")
-  )
+(defer-load! (yasnippet jg-bindings-total) "+bindings")
 (after! (doom-snippets yasnippet-snippets)
   (when (functionp 'snippets-spec-set)
     (snippets-spec-set)
     ))
 
-(define-advice doom-snippets-initialize (:override () +jg-snippets-fix)
-  nil
-  )
 (add-hook 'doom-switch-buffer-hook #'+file-templates-maybe-expand-h)
 
 (use-package! yasnippet
@@ -54,40 +48,12 @@
   ;; Enable `read-only-mode' for built-in snippets (in `doom-local-dir')
   (add-hook 'snippet-mode-hook #'+snippets-read-only-maybe-h)
 
-  ;; REVIEW Fix #2639: For some reason `yas--all-templates' returns duplicates
-  ;;        of some templates. Until I figure out the real cause this fixes it.
-  (defadvice! +snippets--remove-duplicates-a (templates)
-    :filter-return #'yas--all-templates
-    (cl-delete-duplicates templates :test #'equal))
-
   ;; HACK Smartparens will interfere with snippets expanded by `hippie-expand`, so temporarily disable smartparens during snippet expansion.
   (after! hippie-exp
     ;; Is called for all snippet expansions,
-    (add-hook! 'yas-before-expand-snippet-hook
-      (defun +snippets--disable-smartparens-before-expand-h ()
-        ;; Remember the initial smartparens state only once, when expanding a
-        ;; top-level snippet.
-        (unless +snippets--expanding-p
-          (setq +snippets--expanding-p t
-                +snippets--smartparens-enabled-p smartparens-mode))
-        (when smartparens-mode
-          (smartparens-mode -1))))
-
-    ;; Is called only for the top level snippet, but not for the nested ones.
-    ;; Hence `+snippets--expanding-p'.
-    (add-hook! 'yas-after-exit-snippet-hook
-      (defun +snippets--restore-smartparens-after-expand-h ()
-        (setq +snippets--expanding-p nil)
-        (when +snippets--smartparens-enabled-p
-          (smartparens-mode 1)))))
-
-  (define-advice yas--read-table (:override () +jg-snippets)
-    (let ((tables (hash-table-keys yas--tables)))
-      (intern-soft (ivy-read "Snippet Table: " tables))
-      )
+    (add-hook! 'yas-before-expand-snippet-hook #'+snippets--disable-smartparens-befre-expand-h)
     )
-
-  (advice-add '+snippet--completing-read-uuid :override #'+jg-snippets--completing-read-uuid)
+    (add-hook! 'yas-after-exit-snippet-hook #'+snippets--restore-smartparens-after-expand-h)
 
   ;; If in a daemon session, front-load this expensive work:
   (yas-global-mode +1)
@@ -107,19 +73,7 @@
   ;; (push doom-snippets-dir jg-snippet-dirs)
   )
 
-(use-package! auto-yasnippet
-  :defer t
-  :config
-  (defadvice! +snippets--inhibit-yas-global-mode-a (fn &rest args)
-    "auto-yasnippet enables `yas-global-mode'. This is obnoxious for folks like
-us who use yas-minor-mode and enable yasnippet more selectively. This advice
-swaps `yas-global-mode' with `yas-minor-mode'."
-    :around '(aya-expand aya-open-line)
-    (letf! ((#'yas-global-mode #'yas-minor-mode)
-            (yas-global-mode yas-minor-mode))
-      (apply fn args)))
-
-  )
+(use-package! auto-yasnippet :defer t)
 
 (use-package! academic-phrases :defer t)
 

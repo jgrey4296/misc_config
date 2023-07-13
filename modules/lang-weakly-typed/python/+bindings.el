@@ -104,8 +104,10 @@
 (map! :map dired-mode-map
       :after jg-dired-bindings
       :localleader
+      :desc "Try Python site-packages" "p" #'+jg-python-try-site-packages
+
       )
-(map! :map shell-mode-map
+(map! :map comint-mode-map
       :localleader
       :desc "PdbTrack" ";" #'py-pdbtrack-toggle-stack-tracking
       )

@@ -35,12 +35,16 @@ can also add key'd additional properties
   )
 
 ;;;###autoload
-(defun +jg-projects-compile-adjust (cmd)
+(defun +jg-projects-run-compile (cmd)
   "call cmd, but if it's got the text propery 'cmd use that instead "
-  (let ((blddir (get-text-property 0 'blddir cmd))
+  (let* ((blddir (get-text-property 0 'blddir cmd))
         (bldenv (get-text-property 0 'bldenv cmd))
         (extras (get-text-property 0 'extra cmd))
         (cmd-str (or (get-text-property 0 'cmd cmd) cmd))
+        (interactive? (memq :interactive extras))
+        (interactive-mode (if (functionp (car-safe (cdr-safe interactive?)))
+                              (cadr interactive?)
+                            t))
         )
     (if (or (get-text-property 0 'recursive cmd) (memq :recursive extras))
         (counsel-compile blddir)
@@ -52,12 +56,13 @@ can also add key'd additional properties
             (compile (concat cmd-str " "
                              (when (memq :read extras)
                                (read-string (format "%s _: " cmd-str))))
-                     (when (memq :interative extras) t))
+                     (when interactive? interactive-mode))
           (remove-hook 'compilation-start-hook #'counsel-compile--update-history))
         )
       )
     )
   )
+
 
 ;;;###autoload
 (defun +jg-projects-projectile-cmd-list  (fn &rest rst)
@@ -97,7 +102,7 @@ can also add key'd additional properties
   )
 
 ;;;###autoload
-(advice-add 'counsel-compile--action :override #'+jg-projects-compile-adjust)
+(advice-add 'counsel-compile--action :override #'+jg-projects-run-compile)
 
 ;;;###autoload
 (advice-add 'projectile--run-project-cmd :around #'+jg-projects-projectile-cmd-list)

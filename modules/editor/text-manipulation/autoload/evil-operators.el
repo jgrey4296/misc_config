@@ -179,7 +179,10 @@ with either a numeric or alphabetical escalation "
 (evil-define-operator +jg-text-title-case-op (beg end)
   :move-point t
   (while (< (point) end)
-    (capitalize-word 1)
+    (if (looking-at " \\<and\\>")
+        (forward-word 1)
+      (capitalize-word 1)
+      )
     )
   )
 

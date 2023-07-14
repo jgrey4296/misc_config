@@ -1,7 +1,7 @@
 ;; trie config.el
 ;; loaded fourth
 
-(defer-load! "+vars" "+repl")
+(defer-load! "+vars")
 (defer-load! jg-bindings-total "+bindings")
 (after! org
   ;; TODO upgrade to org-superstar?

@@ -136,14 +136,21 @@ modified from the original bibtex-completion-show-entry
 
 (defun +jg-bibtex-edit-finish (cand)
   (let ((marked-cands (helm-marked-candidates)))
-    (if marked-cands
-        marked-cands
-      (list cand)
-      )))
+    (cond (marked-cands
+           marked-cands)
+          (cand
+           (list cand))
+          (t nil)
+          )
+      ))
 
-(defun +jg-bibtex-dummy-edit-action (potential-completions x)
-  (write-region (format "%s\n" (string-trim x)) nil potential-completions t)
-  x
+(defun +jg-bibtex-store-new-completion-action (potential-completions xs)
+  (when xs
+    (message "Inserting new completions: %s" xs)
+    (write-region (format "%s\n" (string-join
+                                  (mapcar #'+jg-bibtex-title-case xs)
+                                  "\n")) nil potential-completions t)
+    )
   )
 
 ;;-- end actions
@@ -222,6 +229,11 @@ governed by the variable `bibtex-completion-display-formats'."
 
 ;;-- end transformers
 
+(defun +jg-bibtex-title-case (x)
+  (string-join (mapcar 's-capitalized-words (s-split-words x)) " ")
+  )
+
+
 ;;;###autoload
 (defun +jg-bibtex-helm-bibtex (&optional arg local-bib)
   " Custom implementation of helm-bibtex"
@@ -263,29 +275,57 @@ using org-bibtex-fields for completion options "
   (interactive)
   (save-excursion
     (bibtex-beginning-of-entry)
-    (let* ((chosen (completing-read "Field: " (+jg-bibtex-sort-fields)))
-           (curr-value (bibtex-autokey-get-field chosen))
-           (potential-completions (f-join jg-bibtex-loc-completions chosen))
-           (source (when (f-exists? potential-completions)
+    (letrec ((chosen (completing-read "Field: " (+jg-bibtex-sort-fields)))
+             (curr-value (bibtex-autokey-get-field chosen))
+             (potential-completions (f-join jg-bibtex-loc-completions chosen))
+             (source (when (f-exists? potential-completions)
                        (helm-build-in-file-source "Edit Field Helm"
                            potential-completions
                          :action (helm-make-actions "Accumulate" #'+jg-bibtex-edit-finish)
                          )))
-           (dummy-action (-partial #'+jg-bibtex-dummy-edit-action potential-completions))
-           (dummy-source (helm-build-dummy-source "Completion Helm Dummy"
-                           :action (helm-make-actions "Insert into file" dummy-action)))
-           new-values
-           )
-      (if source
-          (setq new-values (helm :sources (list source dummy-source)
-                                 :buffer "*helm bibtex completions*"
-                                 :full-frame nil
-                                 :input curr-value
-                                 ))
-        (setq new-values (read-string (format "(%s) New Value: " chosen))))
+             (store-action (-partial #'+jg-bibtex-store-new-completion-action potential-completions))
+             (dummy-source (helm-build-dummy-source "Completion Helm Dummy"
+                             :action (helm-make-actions "Insert new completion"
+                                                        #'(lambda (x) (push x new-completions) (ensure-list x)))))
+             (new-values nil)
+             (new-completions nil)
+             )
+      (cond ((and source (-contains? '("author" "editor") chosen))
+             (let ((next-val (helm :sources (list source dummy-source)
+                                   :buffer "*helm bibtex completions*"
+                                   :full-frame nil
+                                   :prompt (format "%s: " curr-value)
+                                   )))
+               (while next-val
+                 (message "next-val: %s\nnew-completions: %s" next-val new-completions)
+                 (setq new-values (append new-values next-val nil)
+                       next-val (helm :sources (list source dummy-source)
+                                      :buffer "*helm bibtex completions*"
+                                      :full-frame nil
+                                      :prompt (format "%s: " (string-join new-values " and "))
+                                      )
+                       )
+                 )
+               (setq new-values (mapcar #'+jg-bibtex-title-case new-values))
+               )
+             )
+            (source
+             (setq new-values (helm :sources (list source dummy-source)
+                                    :buffer "*helm bibtex completions*"
+                                    :full-frame nil
+                                    :input curr-value
+                                    ))
+             )
+            (t
+             (setq new-values (read-string (format "(%s) New Value: " chosen)))
+             )
+            )
       (when new-values
-        (bibtex-set-field chosen (string-join (mapcar 'string-trim (ensure-list new-values)) " and "))
+        (bibtex-set-field chosen
+                          (string-join (mapcar 'string-trim (ensure-list new-values)) " and "))
         )
+      (when (and (f-exists? potential-completions) new-completions)
+        (funcall store-action new-completions))
       )
     )
   )

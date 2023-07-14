@@ -1,5 +1,6 @@
 ;;; +repl.el -*- lexical-binding: t; -*-
 
+;;;###autoload
 (defun +acab-mode/open-repl (&optional arg)
   (interactive "P")
   (require 'acab-ide)
@@ -7,5 +8,3 @@
       (acab-comint/init-repl))
   (get-buffer-create acab-comint/buffer-name)
   )
-
-(set-repl-handler! 'acab-rule-mode 'acab-mode/open-repl)

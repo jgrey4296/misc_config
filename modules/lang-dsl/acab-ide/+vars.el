@@ -8,3 +8,8 @@
 (defvar acab-ide/type-helm-source nil
   "Main Helm Source for type loading / finding ")
 (defvar acab-ide/type-helm-dummy-source)
+
+
+(spec-handling-add! eval
+                    `(acab-rule-mode ,#'acab-mode/open-repl)
+                    )

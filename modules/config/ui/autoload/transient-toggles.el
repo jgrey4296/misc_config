@@ -95,7 +95,7 @@
 
 ;; Nav
 (progn
-  (transient-make-toggle! global-autohide-minor-mode "a" "Autohide")
+  (transient-make-toggle! global-code-shy-minor-mode "s" "Code Shy")
   (transient-make-toggle! centered-cursor-mode "c" "Center Cursor")
   (transient-make-toggle! minimap-mode "m" "minimap")
   (transient-make-toggle! evil-visual-mark-mode "v" "visual mark")
@@ -116,7 +116,7 @@
 (transient-define-prefix jg-toggle-nav ()
   "For controlling ui nav settings"
   [[
-    (jg-transient-toggle-global-autohide-minor-mode)
+    (jg-transient-toggle-global-code-shy-minor-mode)
     (jg-transient-toggle-centered-cursor-mode)
     (jg-transient-toggle-minimap-mode)
    ]
@@ -136,7 +136,7 @@
 (progn
   (transient-make-toggle! hide-mode-line-mode "m" "Modeline")
   (transient-make-toggle! global-hl-line-mode "h" "Hi-line")
-  (transient-make-toggle! global-autohide-minor-mode "a" "Autohide")
+  (transient-make-toggle! global-code-shy-minor-mode "s" "Code Shy")
   (transient-make-toggle! global-centered-cursor-mode "c" "Cursor")
   (transient-make-toggle! global-highlight-changes-mode "l" "Changes")
 
@@ -156,7 +156,7 @@
    [
    (jg-transient-toggle-hide-mode-line-mode)
    (jg-transient-toggle-global-hl-line-mode)
-   (jg-transient-toggle-global-autohide-minor-mode)
+   (jg-transient-toggle-global-code-shy-minor-mode)
    ]
    [
     (jg-transient-toggle-global-centered-cursor-mode)

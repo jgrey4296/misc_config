@@ -1,7 +1,7 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
 (map! :map jg-binding-jump-map
-      :desc "Jump to Auto-hide-heading" :n "h" #'autohide-minor-mode-fold-jump-to-heading
+      :desc "Jump to Auto-hide-heading" :n "h" #'code-shy-fold-jump-to-heading
       )
 
 (map! :map jg-binding-normal-state-map
@@ -11,14 +11,14 @@
 
 (map! :map jg-binding-vision-map
       "?" #'+jg-fold/debug
-      :desc "Insert Fold block" "1" #'autohide-minor-mode-wrap-block
+      :desc "Insert Fold block" "1" #'code-shy-wrap-block
 
       :desc "open-fold-rec" "A"   #'evil-open-fold-rec
       :desc "toggle-fold"   "a"   #'evil-toggle-fold
       :desc "open-folds"    "o"   #'evil-open-folds
       :desc "Close Folds"   "m"   #'evil-close-folds
 
-      :desc "Refold"        "r"   #'autohide-minor-mode-run-folds
+      :desc "Refold"        "r"   #'code-shy-run-folds
       :desc "Next Fold"     "j"   #'+fold/next
       :desc "Prev Fold"     "k"   #'+fold/previous
 
@@ -42,11 +42,11 @@
       )
 
 (map! :map jg-binding-forward-operator-motion-map
-      :desc "Fold Block"               "1" #'autohide-minor-mode-forward-block
+      :desc "Fold Block"               "1" #'code-shy-forward-block
       )
 
 (map! :map jg-binding-backward-operator-motion-map
-      :desc "Fold Block"               "1" #'autohide-minor-mode-backward-block
+      :desc "Fold Block"               "1" #'code-shy-backward-block
 )
 
 (map! :map jg-help-map

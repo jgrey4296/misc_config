@@ -50,7 +50,7 @@
                     )
 
 (spec-handling-add! ibuffer-filters
-                    '(window-ring (name . "->"))
+                    '(carousel (name . "->"))
                     '(stars       (name . "^*"))
                     '(music       (or (name . "*\\(tidal\\|SCLang\\)")
                                       (used-mode . sclang-mode)

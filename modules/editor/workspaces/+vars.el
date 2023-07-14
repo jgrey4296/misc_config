@@ -163,11 +163,11 @@ stored in `persp-save-dir'.")
 
 ;;-- specs
 (spec-handling-add! popup
-                    '(window-ring
-                      ("^\\*WR Buffers: "         :side left :ttl nil :width  0.2 :quit nil :select nil :priority 50)
+                    '(carousel
+                      ("^\\*Carousel Buffers: "         :side left :ttl nil :width  0.2 :quit nil :select nil :priority 50)
                       )
                     '(proj-walk
-                     ("^\\*Project-Walk\\*" :side left :ttl nil :quit t :select nil :priority -50)
+                     ("^\\*Project Zimmerframe\\*" :side left :ttl nil :quit t :select nil :priority -50)
                      )
                     '(neotree
                       ("\\*NeoTree\\*"   :side left :ttl nil :height 0.4 :quit nil :select nil :priority -100)

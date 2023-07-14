@@ -108,9 +108,8 @@
   :hook (org-mode        . embrace-org-mode-hook)
   :hook (ruby-mode       . embrace-ruby-mode-hook)
   :hook (emacs-lisp-mode . embrace-emacs-lisp-mode-hook)
-  :init
-  (after! evil-surround (evil-embrace-enable-evil-surround-integration))
   :config
+  (after! evil-surround (evil-embrace-enable-evil-surround-integration))
   (spec-handling-new! evil-embrace nil :loop 'hook
                       ;; TODO
                       (setq embrace--pairs-list (append val embrace--pairs-list))

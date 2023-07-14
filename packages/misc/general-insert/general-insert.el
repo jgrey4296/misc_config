@@ -94,3 +94,5 @@
     targets
     )
   )
+
+(provide 'general-insert)

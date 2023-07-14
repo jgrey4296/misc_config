@@ -41,6 +41,37 @@
                       ("\\.[^.]*proj\\'"  . csproj-mode)
                       )
                     )
-(set-electric! 'csharp-mode :chars '(?\n ?\}))
-(set-repl-handler! 'fsharp-mode #'run-fsharp)
+(spec-handling-add! electric
+                    '(csharp-mode
+                      :chars (?\n ?\})
+                      )
+                    )
+(spec-handling-add! eval
+                    `(fsharp-mode
+                      :start ,#'run-fsharp
+                      )
+                    )
+(spec-handling-add! ligatures
+                    '(csharp-mode
+                      ;; Functional
+                      :lambda        "() =>"
+                      ;; Types
+                      :null          "null"
+                      :true          "true"
+                      :false         "false"
+                      :int           "int"
+                      :float         "float"
+                      :str           "string"
+                      :bool          "bool"
+                      :list          "List"
+                      ;; Flow
+                      :not           "!"
+                      :in            "in"
+                      :and           "&&"
+                      :or            "||"
+                      :for           "for"
+                      :return        "return"
+                      :yield         "yield"
+                      )
+                    )
 ;;-- end specs

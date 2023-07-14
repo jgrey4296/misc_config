@@ -1,6 +1,6 @@
 ;;; +hydra.el -*- lexical-binding: t; -*-
 ;;
-;; TODO hydra for control of workspaces, windows, window-ring settings
+;; TODO hydra for control of workspaces, windows, carousel settings
 (require 'hydra)
 
 ;;;###autoload (autoload 'hydra-workspace/body "editor/workspaces/autoload/hydras" nil t)
@@ -40,8 +40,8 @@
                   ))
   ;; Projects
   ("`" (progn (find-file (doom-project-root))) nil                           :exit t)
-  ("w" project-walk-next                                                     :exit nil)
-  ("W" project-walk-next                                                     :exit t)
+  ("w" zimmerframe-next                                                     :exit nil)
+  ("W" zimmerframe-next                                                     :exit t)
   ("s" +neotree/find-this-file                                               :exit t)
   ("t" magit-todos-list                                                      :exit t)
   ("?" +jg-projects-detect-type                                              :exit t)
@@ -63,10 +63,10 @@
   ("d" +jg-ui-toggle-window-dedication                                       :exit nil)
   )
 
-;;;###autoload (autoload 'hydra-window-ring/body "editor/workspaces/autoload/hydras" nil t)
-(defhydra hydra-window-ring ()
+;;;###autoload (autoload 'hydra-carousel/body "editor/workspaces/autoload/hydras" nil t)
+(defhydra hydra-carousel()
   (format "%s\n" (hydra-utils-format-columns
-                  '("|Window-Ring %-10(persp-parameter 'window-ring)"
+                  '("|Carousel%-10(persp-parameter 'carousel)"
                     new
                     convert
                     deconvert
@@ -75,8 +75,8 @@
                     print
                     Edit
                     )
-                  '("|Window Claimed: %-10(window-parameter (selected-window) 'window-ring-claimed)"
-                    "_l_oop %-5(persp-parameter 'window-ring-loop)"
+                  '("|Window Claimed: %-10(window-parameter (selected-window) 'carousel-claimed)"
+                    "_l_oop %-5(persp-parameter 'carousel-loop)"
                     expand
                     add
                     Remove
@@ -89,19 +89,19 @@
                     )
                   ))
   ;; Window Ring
-  ("p" window-ring-print-order        :exit t)
-  ("E" window-ring-edit-order         :exit t)
-  ("l" window-ring-toggle-loop        :exit nil)
-  ("n" window-ring-new                :exit t)
-  ("c" window-ring-convert            :exit t)
-  ("d" window-ring-deconvert          :exit t)
-  ("e" window-ring-shrink-sides       :exit t)
-  ("r" window-ring-reset-columns      :exit t)
-  ("K" window-ring-clear-ring         :exit t)
-  ("a" window-ring-add-current-buffer :exit t)
-  ("R" window-ring-remove-buffer      :exit t)
-  ("[" window-ring-move-buffer-left   :exit nil)
-  ("]" window-ring-move-buffer-right  :exit nil)
-  ("w" window-ring-claim-window       :exit nil)
+  ("p" carousel-print-order        :exit t)
+  ("E" carousel-edit-order         :exit t)
+  ("l" carousel-toggle-loop        :exit nil)
+  ("n" carousel-new                :exit t)
+  ("c" carousel-convert            :exit t)
+  ("d" carousel-deconvert          :exit t)
+  ("e" carousel-shrink-sides       :exit t)
+  ("r" carousel-reset-columns      :exit t)
+  ("K" carousel-clear-ring         :exit t)
+  ("a" carousel-add-current-buffer :exit t)
+  ("R" carousel-remove-buffer      :exit t)
+  ("[" carousel-move-buffer-left   :exit nil)
+  ("]" carousel-move-buffer-right  :exit nil)
+  ("w" carousel-claim-window       :exit nil)
   ("h" nil)
   )

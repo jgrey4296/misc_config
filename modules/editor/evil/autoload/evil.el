@@ -1,19 +1,5 @@
 ;; editor/evil/autoload/evil.el -*- lexical-binding: t; -*-
 
-;;;###autodef
-(defun set-evil-initial-state! (modes state)
-  "Set the initialize STATE of MODES using `evil-set-initial-state'."
-  (declare (indent defun))
-  (after! evil
-    (if (listp modes)
-        (dolist (mode (ensure-list modes))
-          (evil-set-initial-state mode state))
-      (evil-set-initial-state modes state))))
-
-
-;;
-;;; Interactive commands
-
 ;;;###autoload
 (defun +evil/shift-right ()
   "vnoremap < <gv"
@@ -76,14 +62,17 @@ the only window, use evil-window-move-* (e.g. `evil-window-move-far-left')."
 (defun +evil/window-move-left ()
   "Swap windows to the left."
   (interactive) (+evil--window-swap 'left))
+
 ;;;###autoload
 (defun +evil/window-move-right ()
   "Swap windows to the right"
   (interactive) (+evil--window-swap 'right))
+
 ;;;###autoload
 (defun +evil/window-move-up ()
   "Swap windows upward."
   (interactive) (+evil--window-swap 'up))
+
 ;;;###autoload
 (defun +evil/window-move-down ()
   "Swap windows downward."
@@ -165,7 +154,6 @@ Widens narrowed buffers first. If BANG, use indirect buffer clones instead."
       (insert text)
       (indent-rigidly (point-min) (point-max) (- indent))
       (evil-yank (point-min) (point-max)))))
-
 
 ;;
 ;;; wgrep

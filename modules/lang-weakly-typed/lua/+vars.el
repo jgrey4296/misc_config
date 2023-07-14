@@ -27,3 +27,23 @@
                       ("\\.lua\\'" . lua-mode)
                       )
                     )
+
+(spec-handling-add! electric
+                      '(lua-mode
+                        :words ("else" "end")
+                        )
+                      )
+
+(spec-handling-add! eval
+                      `(lua-mode
+                        :start ,#'+lua/open-repl
+                        )
+                      )
+
+(spec-handling-add! eglot
+                    `(lua-mode ,(+lua-generate-lsp-server-command))
+                    )
+
+;; (spec-handling-add! projects
+;;                     `(love2d ,#'+lua-love-project-root :run ,#'+lua-love-build-command)
+;;                     )

@@ -5,5 +5,5 @@
 (package! iedit)
 (package! link-hint )
 (package! expand-region)
-(package! faster-whichkey :recipe `(:local-repo ,(expand-file-name "packages/misc/faster-whichkey" doom-user-dir)))
+(package! faster-whichkey :recipe (:host github :repo "jgrey4296/faster-whichkey"))
 (package! which-key)

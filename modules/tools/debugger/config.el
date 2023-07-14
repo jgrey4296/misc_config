@@ -24,10 +24,14 @@
       nil t))
 
   :config
-  (set-popup-rule! "^\\*\\(?:trepanjs:\\(?:g\\|zsh\\|bash\\)db\\|pdb \\)"
-    :size 20 :select nil :quit nil)
+  (spec-handling-add! popup
+                      '(realgud
+                        ("^\\*\\(?:trepanjs:\\(?:g\\|zsh\\|bash\\)db\\|pdb \\)" :size 20 :select nil :quit nil)
+                        )
+                      )
 
-(defadvice! +debugger--cleanup-after-realgud-a (&optional buf)
+
+  (defadvice! +debugger--cleanup-after-realgud-a (&optional buf)
     "Kill command buffer when debugging session ends (which closes its popup)."
     :after #'realgud:terminate
     (when (stringp buf)
@@ -40,7 +44,7 @@
   ;; TODO Find a more elegant solution
   ;; FIXME Causes realgud:cmd-* to focus popup on every invocation
 
-(defadvice! +debugger--realgud-open-in-other-window-a
+  (defadvice! +debugger--realgud-open-in-other-window-a
     (debugger-name script-filename cmd-args minibuffer-history-var &optional no-reset)
     :override #'realgud:run-process
     (let* ((cmd-buf (apply #'realgud-exec-shell debugger-name script-filename
@@ -50,7 +54,7 @@
              (pop-to-buffer cmd-buf)
              (when (boundp 'evil-emacs-state-local-map)
 
-(define-key evil-emacs-state-local-map (kbd "ESC ESC") #'+debugger/quit))
+               (define-key evil-emacs-state-local-map (kbd "ESC ESC") #'+debugger/quit))
              (realgud:track-set-debugger debugger-name)
              (realgud-cmdbuf-info-in-debugger?= 't)
              (realgud-cmdbuf-info-cmd-args= cmd-args)
@@ -71,11 +75,11 @@
       cmd-buf)))
 
 (use-package! realgud-trepan-ni
-    :defer t
-    :init (add-to-list '+debugger--realgud-alist
-                       '(realgud:trepan-ni :modes (javascript-mode js2-mode js3-mode)
-                         :package realgud-trepan-ni))
-    )
+  :defer t
+  :init (add-to-list '+debugger--realgud-alist
+                     '(realgud:trepan-ni :modes (javascript-mode js2-mode js3-mode)
+                       :package realgud-trepan-ni))
+  )
 
 (use-package! dap-mode
   :when (and (modulep! +lsp) (not (modulep! :tools lsp +eglot)))

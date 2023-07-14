@@ -12,9 +12,6 @@
     (add-to-list 'org-src-lang-modes '("md" . markdown)))
 
   :config
-  (set-flyspell-predicate! '(markdown-mode gfm-mode)
-    #'+markdown-flyspell-word-p)
-
   (sp-local-pair '(markdown-mode gfm-mode) "`" "`"
                  :unless '(:add sp-point-before-word-p sp-point-before-same-p))
 

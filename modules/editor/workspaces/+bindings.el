@@ -10,7 +10,7 @@
 
 (map! :leader
       :desc "Window Hydra"       "W" #'hydra-workspace/body
-      :desc "Ring Hydra"         "R" #'hydra-window-ring/body
+      :desc "Ring Hydra"         "R" #'hydra-carousel/body
       :desc "Workspace Counsel"  "w RET" #'+jg-workspaces-ivy
       :n "p RET" #'+neotree/find-this-file
       )
@@ -19,8 +19,8 @@
       :prefix ("w" . "Windows")
       :desc "Neotree Sidebar"              "s" #'+neotree/open
       :desc "Delete workspace"             "DEL" #'+workspace/delete
-      :desc "Most Recent"                  "L" #'window-ring-goto-most-recent
-      :desc "Oldest"                       "H" #'window-ring-goto-oldest
+      :desc "Most Recent"                  "L" #'carousel-goto-most-recent
+      :desc "Oldest"                       "H" #'carousel-goto-oldest
       )
 
 (map! :leader
@@ -89,31 +89,31 @@
       )
 ;;-- end find files
 
-;;-- project walk
+;;-- zimmerframe
 (map! :leader
-      :prefix ("p b w" . "Project Walk..")
-       :desc "Activate Project Walk"            "RET" #'project-walk-minor-mode
-       :desc "Filter Defaults"                  "SPC" #'project-walk-filter-defaults
-       :desc "Remaining Num"                    "r"   #'project-walk-num
-       :desc "Remaining"                        "R"   #'project-walk-remaining
-       :desc "Directory Walk"                   "d"   #'project-walk-directory-init
-       :desc "Filter"                           "f"   #'project-walk-filter
-       :desc "Keep"                             "k"   #'project-walk-filter-keep
+      :prefix ("p z" . "Zimmerframe ..")
+       :desc "Activate Zimmerframe"            "RET" #'project-zimmerframe-minor-mode
+       :desc "Filter Defaults"                  "SPC" #'zimmerframe-filter-defaults
+       :desc "Remaining Num"                    "r"   #'zimmerframe-num
+       :desc "Remaining"                        "R"   #'zimmerframe-remaining
+       :desc "Directory Walk"                   "d"   #'zimmerframe-directory-init
+       :desc "Filter"                           "f"   #'zimmerframe-filter
+       :desc "Keep"                             "k"   #'zimmerframe-filter-keep
       )
 
 (map! :map jg-binding-forward-general-motion-map
-      :desc "Walk Next" "n" #'project-walk-next
+      :desc "Walk Next" "n" #'zimmerframe-next
       :map jg-binding-backward-general-motion-map
-      :desc "Walk Back" "n" #'project-walk-prev
+      :desc "Walk Back" "n" #'zimmerframe-prev
       )
 
-;;-- end project walk
+;;-- end zimmerframe
 
 ;;-- ibuffer
 (map! :map jg-ibuffer-filter-map
       (:prefix "b"
        :desc "filter-by-workspace"   "w" #'ibuffer-filter-by-workspace-buffers
-       :desc "filter-by-window-ring" "R" #'ibuffer-filter-by-window-ring-buffers
+       :desc "filter-by-carousel" "R" #'ibuffer-filter-by-carousel-buffers
       )
       (:prefix "g"
        :desc "Group by Workspace"   "w" (ibuffer-generate! (+jg-ibuffer-generate-workspace-groups))
@@ -147,22 +147,22 @@
 (setq neotree-mode-map jg-neotree-mode-map)
 ;;-- end neotree
 
-;;-- window-ring
-(map! :map window-ring-edit-map
-      "C-c C-c" #'window-ring-edit-commit)
+;;-- carousel
+(map! :map carousel-edit-map
+      "C-c C-c" #'carousel-edit-commit)
 
 (map! :map jg-binding-backward-general-motion-map
-      :desc "ring window"  "r"    #'window-ring-move-focus-alt
-      :desc "ring oldest"  "R"    #'window-ring-goto-oldest
+      :desc "ring window"  "r"    #'carousel-move-focus-alt
+      :desc "ring oldest"  "R"    #'carousel-goto-oldest
       :desc "workspace"    "w"    #'+workspace/switch-left
       )
 
 (map! :map jg-binding-forward-general-motion-map
-      :desc "ring window"  "r"    #'window-ring-move-focus
-      :desc "ring newest"  "R"    #'window-ring-goto-newest
+      :desc "ring window"  "r"    #'carousel-move-focus
+      :desc "ring newest"  "R"    #'carousel-goto-newest
       :desc "workspace"    "w"    #'+workspace/switch-right
 )
-;;-- end window-ring
+;;-- end carousel
 
 (map! :map jg-help-map
       :after jg-help-bindings

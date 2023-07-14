@@ -22,7 +22,7 @@
 
 ;;;###autoload
 (defun +jg-workspaces-new-ring (x)
-  (window-ring-new)
+  (carousel-new)
   )
 
 (defun +jg-workspaces-switch (x)

@@ -52,10 +52,10 @@
       python-shell-completion-native-enable nil
       python-shell-completion-native-disabled-interpreters '("pypy")
 
-      jg-python-repl-start-file (doom-module-expand-path :lang-weakly-typed 'python "repl/repl_startup.py ")
-      python-shell-interpreter-path-args (doom-module-expand-path :lang-weakly-typed 'python "repl/repl_startup.py ")
-        )
-        (modify-syntax-entry ?_ "_" python-mode-syntax-table)
+      jg-python-repl-start-file (expand-file-name "~/.doom.d/terminal/python/repl_startup.py ")
+      python-shell-interpreter-path-args (expand-file-name "~/.doom.d/terminal/python/repl_startup.py ")
+      )
+(modify-syntax-entry ?_ "_" python-mode-syntax-table)
 ;;-- end general python
 
 ;;-- outline
@@ -116,10 +116,6 @@
 ;;-- end jg-company
 
 ;;-- specs
-(after! projectile
-  (pushnew! projectile-project-root-files "pyproject.toml" "requirements.txt" "setup.py")
-  (pushnew! projectile-project-root-files "setup.py" "requirements.txt")
-  )
 (spec-handling-add! projects
                    `(jg-python-project ("pyproject.toml") :project-file "pyproject.toml" :configure "pip install -e %s" :test "python -m unittest discover -v -p test_*.py" :test-dir (lambda (x) (f-join x "__tests")) :test-prefix "test_" :related-files-fn ,#'related-files:jg-python-project)
                    '(python-poetry ("poetry.lock") :project-file "poetry.lock" :compilation-dir nil :configure nil :compile "poetry build" :test "poetry run python -m unittest discover" :install nil :package nil :run nil :test-suffix "_test" :test-prefix "test_")
@@ -127,6 +123,7 @@
                    '(python-tox ("tox.ini") :project-file "tox.ini" :compilation-dir nil :configure nil :compile "tox -r --notest" :test "tox" :install nil :package nil :run nil :test-suffix "_test" :test-prefix "test_")
                    '(python-pkg ("setup.py") :project-file "setup.py" :compilation-dir nil :configure nil :compile "python setup.py build" :test "python -m unittest discover" :install nil :package nil :run nil :test-suffix "_test" :test-prefix "test_")
                    '(python-pip ("requirements.txt") :project-file "requirements.txt" :compilation-dir nil :configure nil :compile "python setup.py build" :test "python -m unittest discover" :install nil :package nil :run nil :test-suffix "_test" :test-prefix "test_")
+                   '(python-basic ("setup.py") :project-file "setup.py")
                    '(django ("manage.py") :project-file "manage.py" :compilation-dir nil :configure nil :compile "python manage.py runserver" :test "python manage.py test" :install nil :package nil :run nil :test-suffix "_test" :test-prefix "test_")
                     )
 (spec-handling-add! popup
@@ -250,20 +247,16 @@
 (spec-handling-add! compile-commands
                     '(python +jg-python-get-commands +jg-python-solo-file-run)
                     )
-(set-repl-handler! 'python-mode #'+jg-python/open-repl
-  :persist t
-  :send-region #'python-shell-send-region
-  :send-buffer #'python-shell-send-buffer
-  )
-(set-eval-handler! 'python-mode
-    '((:command . (lambda () python-shell-interpreter))
-      (:exec (lambda ()
-               (if-let* ((bin (executable-find "pipenv" t))
-                         (_ (pipenv-project-p)))
-                   (format "PIPENV_MAX_DEPTH=9999 %s run %%c %%o %%s %%a" bin)
-                 "%c %o %s %a")))
-      (:description . "Run Python script"))
-    )
+(spec-handling-add! eval :form 'override
+                    `(python-mode
+                      :start ,#'+jg-python/open-repl
+                      :send ,#'python-shell-send-region
+                      )
+
+                    )
+(spec-handling-add! yas-extra
+                    '(node-mode node-mode)
+                    )
 ;;-- end specs
 
 ;;-- general insert

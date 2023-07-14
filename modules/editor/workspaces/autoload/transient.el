@@ -17,7 +17,7 @@
    ]
   )
 
-(transient-define-prefix jg-transient-window-ring ()
+(transient-define-prefix jg-transient-carousel ()
   ""
   []
   [""

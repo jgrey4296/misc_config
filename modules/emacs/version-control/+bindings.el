@@ -82,6 +82,9 @@
       :after git-timemachine
       :n "[ g" #'git-timemachine-show-previous-revision
       :n "] g" #'git-timemachine-show-next-revision
+
+      :n "gb"  #'git-timemachine-blame
+      :n "gtc" #'git-timemachine-show-commit
       )
 
 (map! :map evil-conflict-merge-state-map

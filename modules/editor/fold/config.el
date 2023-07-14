@@ -26,9 +26,9 @@
 
 (use-package! origami :defer t)
 
-(use-package! autohide-minor-mode
+(use-package! code-shy-minor-mode
   :init
   (add-hook! doom-first-buffer
-             #'global-autohide-minor-mode
+             #'global-code-shy-minor-mode
              )
   )

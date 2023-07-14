@@ -50,7 +50,7 @@
  ;; Doom Standard modules
  :app   (rss +org)
  :email (mu4e +gmail)
- :emacs electric vc
+ :emacs electric
  ;; :lang ledger
  ;; :lang agda ess
  ;; :lang julia

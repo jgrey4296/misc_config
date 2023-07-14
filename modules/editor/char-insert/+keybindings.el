@@ -95,7 +95,7 @@
       :desc "σ"  "s"  "σ"
       :desc "τ"  "t"  "τ"
       :desc "υ"  "u"  "υ"
-      :desc "φ"  "p"  "φ"
+      :desc "φ"  "v"  "φ"
       :desc "χ"  "x"  "χ"
       :desc "ψ"  "y"  "ψ"
       :desc "ω"  "z"  "ω"
@@ -151,6 +151,7 @@
       ;; Math MisC
       :desc "√"  "q" "√"
       :desc "∞"  "8" "∞"
+      :desc "π"  "p"  "π"
       ;; Fractions
       )
 ;;-- end math

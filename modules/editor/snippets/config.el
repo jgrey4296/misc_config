@@ -51,7 +51,7 @@
   ;; HACK Smartparens will interfere with snippets expanded by `hippie-expand`, so temporarily disable smartparens during snippet expansion.
   (after! hippie-exp
     ;; Is called for all snippet expansions,
-    (add-hook! 'yas-before-expand-snippet-hook #'+snippets--disable-smartparens-befre-expand-h)
+    (add-hook! 'yas-before-expand-snippet-hook #'+snippets--disable-smartparens-before-expand-h)
     )
     (add-hook! 'yas-after-exit-snippet-hook #'+snippets--restore-smartparens-after-expand-h)
 

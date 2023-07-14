@@ -30,7 +30,10 @@
 (use-package! gdscript-mode
   :defer t
   :config
-  (set-lookup-handlers! 'gdscript-mode
-    :documentation #'gdscript-docs-browse-symbol-at-point)
+  (spec-handling-add! lookup-handler
+                      `(gdscript-mode
+                        :documentation ,#'gdscript-docs-browse-symbol-at-point
+                        )
+                      )
   )
 ;;; config.el ends here

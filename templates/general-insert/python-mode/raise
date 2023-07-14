@@ -48,6 +48,7 @@ BaseException
       +-- SystemError
       +-- TypeError
       +-- ValueError
+      |    +-- StatisticsError
       |    +-- UnicodeError
       |         +-- UnicodeDecodeError
       |         +-- UnicodeEncodeError

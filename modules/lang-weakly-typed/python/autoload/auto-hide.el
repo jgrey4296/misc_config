@@ -6,7 +6,7 @@
 Hides imports in a vimish fold,
 Add any sections commented with jg-python-fold-block-[start|end]-re
 and closes classes and functions, re-opening only the first class "
-  (when autohide-minor-mode
+  (when code-shy-minor-mode
     (message "Running Python Auto Hide")
     (save-excursion
       (beginning-of-buffer)

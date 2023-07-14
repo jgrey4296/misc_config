@@ -1,15 +1,15 @@
 ;;; editor/fold/+vars.el -*- lexical-binding: t; -*-
 
-(setq autohide-minor-mode-exclusions '(helm-major-mode
-                                       ivy-mode
-                                       minibuffer-mode
-                                       dired-mode
-                                       fundamental-mode
-                                       rst-mode
-                                       magit-status-mode
-                                       helpful-mode
-                                       shell-mode
-                                       ))
+(setq code-shy-exclusions '(helm-major-mode
+                            ivy-mode
+                            minibuffer-mode
+                            dired-mode
+                            fundamental-mode
+                            rst-mode
+                            magit-status-mode
+                            helpful-mode
+                            shell-mode
+                            ))
 
 ;;-- vimish-fold
 (setq-default vimish-fold-dir (concat doom-cache-dir "vimish-fold/")

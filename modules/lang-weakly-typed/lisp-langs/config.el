@@ -42,6 +42,12 @@
              #'+emacs-lisp-init-straight-maybe-h
              )
 
+  (after! general-insert
+    (add-hook! 'emacs-lisp-mode-hook
+               #'general-insert-minor-mode
+               )
+    )
+
   (setq-hook! 'emacs-lisp-mode-hook
     ;; Emacs' built-in elisp files use a hybrid tab->space indentation scheme
     ;; with a tab width of 8. Any smaller and the indentation will be
@@ -139,7 +145,6 @@
   ;; it will associate it with the mode.
   (defvar buttercup-minor-mode-map (make-sparse-keymap))
   :config
-  (set-yas-minor-mode! 'buttercup-minor-mode)
   (when (featurep 'evil)
     (add-hook 'buttercup-minor-mode-hook #'evil-normalize-keymaps))
   )

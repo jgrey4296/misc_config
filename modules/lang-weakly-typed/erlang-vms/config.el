@@ -1,6 +1,6 @@
 ;;; lang/erlang/config.el -*- lexical-binding: t; -*-
 
-(defer-load! "+vars" "+repl")
+(defer-load! "+vars")
 
 (defer-load! jg-bindings-total "+bindings")
 (after! projectile

@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
-jgdebug "Python Aliases"
+jgdebug "Python setup"
+
+PYTHONSTARTUP="$HOME/.doom.d/terminal/python/repl_startup.py"
+IPYTHONDIR="$HOME/.doom.d/terminal/python/"
 
 #Caffe Stuff:
 #DYLD_FALLBACK_LIBRARY_PATH=/usr/local/cuda/lib:$HOME/.pyenv/versions/anaconda-2.2.0/lib:/usr/local/lib/:/usr/lib

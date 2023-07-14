@@ -25,7 +25,7 @@ falling back on searching your PATH."
   "Open the Python REPL."
   (interactive)
   (require 'python)
-  (unless python-shell-interpreter
+  (unless python-shell--interpreter
     (user-error "`python-shell-interpreter' isn't set"))
 
   (unless env-handling-state
@@ -46,7 +46,6 @@ falling back on searching your PATH."
   )
 
 
-
 ;;;###autoload
 (defun +python/open-ipython-repl ()
   "Open an IPython REPL."
@@ -65,11 +64,9 @@ falling back on searching your PATH."
   (cl-assert (eq (with-current-buffer (current-buffer) major-mode) 'python-mode))
   (unless python-shell-interpreter
 
-(user-error "`python-shell-interpreter' isn't set"))
+    (user-error "`python-shell-interpreter' isn't set"))
 
-  (let* (
-
-(default-directory (doom-project-root))
+  (let* ((default-directory (doom-project-root))
          (cmd (python-shell-calculate-command (buffer-file-name)))
          (new-buffer (process-buffer
                       (run-python cmd nil t))))

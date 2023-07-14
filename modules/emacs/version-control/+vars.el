@@ -61,6 +61,8 @@ Only has an effect in GUI Emacs.")
       magit-bury-buffer-function    #'magit-mode-quit-window
       )
 
+(setq-default vc-handled-backends '(SVN Git Hg))
+
 (setq code-review-db-database-file (concat doom-data-dir "code-review/code-review-db-file.sqlite")
       code-review-log-file (concat doom-data-dir "code-review/code-review-error.log")
       code-review-download-dir (concat doom-data-dir "code-review/")
@@ -74,6 +76,10 @@ Only has an effect in GUI Emacs.")
                      ( "^\\*?[0-9]+:\\(?:new-\\|[0-9]+$\\)" :size 0.45 :modeline t :ttl 0 :quit nil)
                      ("^\\*\\(?:[^/]+/[^ ]+ #[0-9]+\\*$\\|Issues\\|Pull-Requests\\|forge\\)" :ignore t)
                      )
+                    '(vc
+                      ("^\\*vc-diff" :select nil)   ; *vc-diff*
+                      ("^\\*vc-change" :select t)   ; *vc-change-log*
+                      )
                     )
 
 (spec-handling-add! fold :form 'override
@@ -98,4 +104,8 @@ Only has an effect in GUI Emacs.")
                       ("/\\.gitconfig\\'"     . gitconfig.mode)
                       ("/git-rebase-todo\\'"  . git-rebase-mode)
                       )
+                    )
+
+(spec-handling-add! yas-extra
+                    '(git-commit-mode git-commit-mode)
                     )

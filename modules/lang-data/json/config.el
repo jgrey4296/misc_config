@@ -11,7 +11,9 @@
                  jsonc-mode-local-vars-hook)
                :append #'tree-sitter!))
   :config
-  (set-electric! 'json-mode :chars '(?\n ?: ?{ ?}))
+  (spec-handling-add! electric
+                      '(json-mode :chars (?\n ?: ?{ ?}))
+                      )
   (add-hook! 'json-mode-hook 'hs-minor-mode)
   )
 

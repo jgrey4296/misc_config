@@ -38,6 +38,11 @@
                       ( "\\.rss\\'" . nxml-mode)
                       )
                     )
-(set-repl-handler! 'nxml-mode #'+xml/open-repl)
-(set-repl-handler! 'mhtml-mode #'+xml/open-repl)
+(spec-handling-add! eval
+                    `(nxml-mode
+                      :start ,#'+xml/open-repl
+                      )
+                    `(mhtml-mode
+                      :start ,#'+xml/open-repl)
+                    )
 ;;-- end specs

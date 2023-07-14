@@ -44,9 +44,12 @@
                       ("\\.dump-simpl\\'" . ghc-core-mode)
                       )
                     )
-(set-repl-handler!
-    '(haskell-mode haskell-cabal-mode literate-haskell-mode)
-    #'+haskell/open-repl :persist t)
+(spec-handling-add! eval
+                    `(haskell-mode :start ,#'+haskell/open-repl :persist t)
+                    `(haskell-cabal-mode :start ,#'+haskell/open-repl :persist t)
+                    `(literate-haskell-mode :start ,#'+haskell/open-repl :persist t)
+                    )
+
 
 (after! smartparens-haskell
   (sp-with-modes '(haskell-mode haskell-interactive-mode)

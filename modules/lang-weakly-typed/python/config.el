@@ -15,7 +15,10 @@
 (use-package! python-mode
   :init
   (when (executable-find "Microsoft.Python.LanguageServer")
-    (set-eglot-client! 'python-mode '("Microsoft.Python.LanguageServer")))
+    (spec-handling-add! eglot
+                        '(python-mode "Microsoft.Python.LanguageServer")
+                        )
+    )
 
   (setq py-complete-function #'(lambda () nil)
         py-do-completion-p nil ;; nil

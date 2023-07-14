@@ -3,6 +3,8 @@
 ;; sp's default rules are obnoxious, so disable them
 (provide 'smartparens-lua)
 
+(load! "+vars")
+
 ;;
 ;;; Major modes
 
@@ -12,30 +14,11 @@
   ;; lua-indent-level defaults to 3 otherwise. Madness.
   (setq lua-indent-level 2)
   :config
-  (set-electric! 'lua-mode :words '("else" "end"))
-  (set-repl-handler! 'lua-mode #'+lua/open-repl)
 
-  (when (modulep! :tools lsp +eglot)
-    (defvar +lua-lsp-dir (concat doom-data-dir "lsp/lua-language-server/")
-      "Absolute path to the directory of sumneko's lua-language-server.
-
+  (defvar +lua-lsp-dir (concat doom-data-dir "lsp/lua-language-server/")
+    "Absolute path to the directory of sumneko's lua-language-server.
 This directory MUST contain the 'main.lua' file and be the in-source build of
 lua-language-server.")
-
-    (defun +lua-generate-lsp-server-command ()
-      ;; The absolute path to lua-language-server binary is necessary because
-      ;; the bundled dependencies aren't found otherwise. The only reason this
-      ;; is a function is to dynamically change when/if `+lua-lsp-dir' does
-      (list (or (executable-find "lua-language-server")
-                (doom-path +lua-lsp-dir
-                           (cond (IS-MAC     "bin/macOS")
-                                 (IS-LINUX   "bin/Linux")
-                                 (IS-WINDOWS "bin/Windows"))
-                           "lua-language-server"))
-            "-E" "-e" "LANG=en"
-            (doom-path +lua-lsp-dir "main.lua")))
-
-    (set-eglot-client! 'lua-mode (+lua-generate-lsp-server-command)))
 
   (add-hook 'lua-mode-local-vars-hook #'tree-sitter! 'append)
 
@@ -57,7 +40,9 @@ lua-language-server.")
   :when (modulep! +fennel)
   :defer t
   :config
-  (set-repl-handler! 'fennel-mode #'fennel-repl)
+  (spec-handling-add! eval
+                      `(fennel-mode :start ,#'fennel-repl)
+                      )
 
   (setq-hook! 'fennel-mode-hook
     ;; To match the `tab-width' default for other lisp modes
@@ -75,9 +60,7 @@ lua-language-server.")
   :when (+lua-love-project-root)
   :on-load
   (progn
-    (set-project-type! 'love2d
-      :predicate #'+lua-love-project-root
-      :run #'+lua-love-build-command)
     (map! :localleader
           :map +lua-love-mode-map
-          "b" #'+lua/run-love-game)))
+          "b" #'+lua/run-love-game))
+  )

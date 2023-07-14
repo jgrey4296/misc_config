@@ -14,8 +14,8 @@
   :config
   (setq ruby-insert-encoding-magic-comment nil)
 
-  (set-electric! 'ruby-mode :words '("else" "end" "elsif"))
-  (set-repl-handler! 'ruby-mode #'inf-ruby)
+  (spec-handling-add! electric '(ruby-mode :words '("else" "end" "elsif")))
+  (spec-handling-add! eval `(ruby-mode :start ,#'inf-ruby))
 
   (add-hook 'ruby-mode-local-vars-hook #'tree-sitter!)
 
@@ -42,7 +42,7 @@
           (bound-and-true-p lsp--buffer-deferred)
           (robe-mode +1))))
   :config
-  (set-repl-handler! 'ruby-mode #'robe-start)
+  (spec-handling-add! eval `(ruby-mode :start ,#'robe-start))
   (spec-handling-add! company
                       '(ruby-mode (:mode . company-robe))
                       )

@@ -1,13 +1,5 @@
 ;;; tools/lsp/autoload/lsp-mode.el -*- lexical-binding: t; -*-
 
-;;;###autodef
-(defun set-lsp-priority! (client priority)
-  "Change the PRIORITY of lsp CLIENT."
-  (require 'lsp-mode)
-  (if-let (client (gethash client lsp-clients))
-      (setf (lsp--client-priority client)
-            priority)
-    (error "No LSP client named %S" client)))
 
 ;;;###autoload
 (defun +lsp/uninstall-server (dir)

@@ -16,3 +16,14 @@ sec(-x) = sec(x)
 tan(-x) = -tan(x)
 cot(-x) = -cot(x)
 sin(2x) = 2sin(x)cos(x)
+
+erf = (2 / (√π)) . integral(e^(-t^2) dt)
+erc = 1 - erf()
+
+phi = (1 - erf(x / √2)) / 2 #  cumulative standard normal distribution:
+
+harmonic_mean = mean(xs) / sum(x^-1 for xs)
+linear_regression = slope * x + intercept + noise
+
+β = Const . (x^(α-1)) . (1-x)^(β-1)
+Γ(j) = (j-1)!  -> integral( (t^z-1) (e^-t)dt) # complex factorial

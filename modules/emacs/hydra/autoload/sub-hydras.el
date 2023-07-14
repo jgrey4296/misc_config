@@ -106,14 +106,14 @@
   (format "%s\n"
           (hydra-utils-format-columns
            '(Navigation
-             "_a_  Auto-hide"
+             "_s_  Code-Shy"
              "_b_  Auto-Balance"
              "_c_  Center Cursor"
              "_o_  Org-links"
              "_v_  Evil Visual Marks"
              )
            '(blank
-             "%-10(hydra-utils-doc global-autohide-minor-mode)"
+             "%-10(hydra-utils-doc global-code-shy-minor-mode)"
              "%-10(hydra-utils-doc evil-auto-balance-windows)"
              "%-10(hydra-utils-doc centered-cursor-mode)"
              "%-10(hydra-utils-doc org-link-descriptive)"
@@ -126,7 +126,7 @@
              )
            ))
   ("N" t)
-  ("a" #'global-autohide-minor-mode  nil :exit nil)
+  ("s" #'global-code-shy-minor-mode  nil :exit nil)
   ("b" (setq evil-auto-balance-windows (not evil-auto-balance-windows))  nil :exit nil)
   ("c" #'centered-cursor-mode        nil :exit nil)
   ("M" #'minimap-mode                nil :exit nil)

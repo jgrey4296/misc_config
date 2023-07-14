@@ -147,5 +147,7 @@
                      ("\\.org\\'" . org-mode)
                      )
                    )
-(set-eval-handler! 'org-mode #'+org-eval-handler)
+(spec-handling-add! eval
+                    `(org-mode :eval ,#'+org-eval-handler)
+                    )
 ;;-- end specs

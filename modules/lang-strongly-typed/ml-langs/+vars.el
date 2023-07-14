@@ -43,3 +43,7 @@
                       ( "\\.s\\(?:ml\\|ig\\)\\'" . sml-mode)
                       )
                     )
+
+(spec-handling-add! eval
+                    '(sml-mode :start ,#'run-sml)
+                    )

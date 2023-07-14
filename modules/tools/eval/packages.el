@@ -2,5 +2,4 @@
 ;;; tools/eval/packages.el
 
 (package! quickrun)
-(when (modulep! +overlay)
-  (package! eros))
+(package! eros)

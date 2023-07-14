@@ -23,7 +23,6 @@
 
   :minor ("/test_.+\\.py$" . nose-mode)
   :config
-  (set-yas-minor-mode! 'nose-mode)
   (when (featurep 'evil)
     (add-hook 'nose-mode-hook #'evil-normalize-keymaps))
   )

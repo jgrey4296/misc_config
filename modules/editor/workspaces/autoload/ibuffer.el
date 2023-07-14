@@ -41,11 +41,11 @@
   (memq buf (+workspace-buffer-list (+workspace-get qualifier)))
   )
 
-;;;###autoload (autoload 'ibuffer-filter-by-window-ring-buffers "editor/workspaces/autoload/ibuffer" nil t)
-(define-ibuffer-filter window-ring
+;;;###autoload (autoload 'ibuffer-filter-by-carousel-buffers "editor/workspaces/autoload/ibuffer" nil t)
+(define-ibuffer-filter carousel
     "Filter by current window ring"
-  (:description "Window-Ring")
-  (window-ring-buffer-p nil buf)
+  (:description "Carousel")
+  (carousel-buffer-p nil buf)
 )
 
 

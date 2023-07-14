@@ -1,7 +1,8 @@
 ;;; emacs/jg-vc/config.el -*- lexical-binding: t; -*-
 
 (load! "+vars")
-(after! jg-bindings-total (load! "+bindings"))
+(defer-load! jg-bindings-total "+bindings")
+
 (add-hook! '(prog-mode-hook text-mode-hook conf-mode-hook)
            #'vi-tilde-fringe-mode)
 
@@ -218,7 +219,11 @@ is deferred until the file is saved. Respects `git-gutter:disabled-modes'."
   ;;   why this is the case, but adding `fundamental-mode' here fixes the issue.
   (setq git-gutter:disabled-modes '(fundamental-mode image-mode pdf-view-mode))
   :config
-  (set-popup-rule! "^\\*git-gutter" :select nil :size '+popup-shrink-to-fit)
+  (spec-handling-add! popup
+                      '(version-control
+                       ("^\\*git-gutter" :select nil :size '+popup-shrink-to-fit)
+                       )
+                      )
 
   ;; PERF: Only enable the backends that are available, so it doesn't have to
   ;;   check when opening each buffer.
@@ -255,4 +260,47 @@ is deferred until the file is saved. Respects `git-gutter:disabled-modes'."
 
 (when (modulep! +pretty)
   (load! "+fringe")
+  )
+
+(use-package! git-timemachine
+  :config
+  ;; Sometimes I forget `git-timemachine' is enabled in a buffer, so instead of
+  ;; showing revision details in the minibuffer, show them in
+  ;; `header-line-format', which has better visibility.
+  (setq git-timemachine-show-minibuffer-details t)
+
+  (after! evil
+    ;; Rehash evil keybindings so they are recognized
+    (add-hook 'git-timemachine-mode-hook #'evil-normalize-keymaps))
+
+  (when (modulep! :tools magit)
+    (add-transient-hook! #'git-timemachine-blame (require 'magit-blame)))
+)
+
+(use-package! git-commit
+  :hook (doom-first-file . global-git-commit-mode)
+  :config
+  ;; Enforce git commit conventions.
+  ;; See https://chris.beams.io/posts/git-commit/
+  (setq git-commit-summary-max-length 50
+        git-commit-style-convention-checks '(overlong-summary-line non-empty-second-line))
+  (setq-hook! 'git-commit-mode-hook fill-column 72)
+
+  (add-hook! 'git-commit-setup-hook #'+vc-start-in-insert-state-maybe-h)
+)
+
+(use-package! browse-at-remote
+  :defer t
+  :config
+  ;; It's more sensible that the user have more options. If they want line
+  ;; numbers, users can request them by making a selection first. Otherwise
+  ;; omitting them.
+  (setq browse-at-remote-add-line-number-if-no-region-selected nil)
+  ;; Opt to produce permanent links with `browse-at-remote' by default,
+  ;; using commit hashes rather than branch names.
+  (setq browse-at-remote-prefer-symbolic nil)
+
+  ;; Add codeberg.org support
+  ;; TODO: PR this upstream?
+  (add-to-list 'browse-at-remote-remote-type-regexps '(:host "^codeberg\\.org$" :type "codeberg"))
   )

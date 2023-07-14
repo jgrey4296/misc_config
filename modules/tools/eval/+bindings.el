@@ -1,6 +1,7 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
 (map! :leader
-      :desc "Clear" "crc" #'+jg-repl-clear
-      :desc "Send to Repl" "rr" #'+jg-repl-send-register-to-repl
+      :desc "Clear"        "c r c" #'+jg-repl-clear
+      :desc "Open Repl"    "c r o" #'+jg-eval-open-repl
+      :desc "Send to Repl" "r r"   #'+jg-repl-send-register-to-repl
 )

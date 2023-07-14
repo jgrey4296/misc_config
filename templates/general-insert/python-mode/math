@@ -1,11 +1,150 @@
 Insert Math:
-numbers.Complex    #
-math.{fn}          #
-cmath.{fn}         #
-decimal.Decimal    #
-fractions.Fraction #
-random.{fn}        #
-statistics.{fn}    #
+numbers.Complex           # Type
+decimal.Decimal           # Type
+fractions.Fraction        # Type
+statistics.{fn}           #
 
-numpy.{fn} #
-scipy.{fn} #
+statistics.NormalDist        # Type
+statistics.correlation(x,y)  # Pearson's correlation coefficient of two lists (normalized variance to -1 <= c <= 1)
+statistics.covariance(x,y)   # Sample covariance of two lists
+statistics.fmean             # Fast floating point mean
+statistics.geometric_mean    # n√prod(xs) = exp(mean(xs)
+statistics.harmonic_mean     # mean(xs) / sum(x^-1 for xs)
+statistics.linear_regression # Solves y = slope * x + intercept + noise. -> slove, intercept
+statistics.mean              # Arithmetic mean
+statistics.median            # Middle value
+statistics.median_grouped    #
+statistics.median_high       #
+statistics.median_low        #
+statistics.mode              # Most Common
+statistics.multimode         # List of most common
+statistics.pstdev            # Population stddev
+statistics.pvariance         # Population variance
+statistics.quantiles         # Intervals of equal probability
+statistics.stdev             # Sample Stddev
+statistics.variance          # Sample variance
+
+random.seed                  #
+random.getstate              #
+random.setstate              #
+random.randbytes             #
+random.betavariate(α, β)     # Beta Distribution. = Const . (x^(α-1)) . (1-x)^(β-1)
+random.choice                #
+random.choices               #
+random.expovariate(λ)        # Exponential distribution. λ is 1.0 / (desired mean)
+random.gammavariate(α, β)    # Gamma distribution. 0 < α,β.  pdf(x) = (x^(α-1) . exp(-x / β)) / ((gamma(α) * β)^α)
+random.gauss(μ, σ)           # Normal distribution. mean and std deviation.
+random.getrandbits           #
+random.getstate              #
+random.lognormvariate(μ, σ)  # Log normal distribution.
+random.normalvariate(μ, σ)   #
+random.paretovariate(α)      # Pareto distribution. Power Law. 1 <= α is tightness of shape
+random.randbytes             #
+random.randint               #
+random.random                # 0.0 <= x < 1.0
+random.randrange             #
+random.sample                #
+random.seed                  #
+random.setstate              #
+random.shuffle               #
+random.triangular            # low <= N <= high, with a given mode
+random.uniform               # N such that a <= N <= b for a <= b and b <= N <= a for b < a.
+random.vonmisesvariate(μ, κ) #  0 <= μ <= 2*pi. 0 <= κ is concentration.
+random.weibullvariate(α, β)  # Weibull distribution. α is scale, β is shape.
+
+
+math.acosh                   # inverse Hyperbolic Trig
+math.asinh                   # inverse Hyperbolic Trig
+math.atanh                   # inverse Hyperbolic Trig
+math.cosh                    # Hyperbolic trig
+math.sinh                    # Hyperbolic Trig
+math.tanh                    # Hyperbolic Trig
+
+math.acos                    # Arc Trig
+math.asin                    # Arc Trig
+math.atan                    # Arc Trig
+math.atan2                   # Arc Trig
+
+math.cos                     # Trig
+math.sin                     # Trig.
+math.tan                     # Trig
+math.hypot                   # Trig. Hypotenuse. Euclidean norm.
+
+
+math.cbrt                    # Cube root
+math.ceil                    #
+math.comb                    #
+math.copysign                #
+math.degrees                 # convert radians to degrees
+math.dist                    # euclidean distance of arbitrary dimensional points
+math.e                       # const. 2.718...
+math.erf                     # Error function. (2 / (√π)) . integral(e^(-t^2) dt)
+math.erfc                    #
+math.exp                     # e^x
+math.exp2                    # 2^x
+math.expm1                   # (e^x)-1 with full precision
+math.fabs                    #
+math.factorial               # n!
+math.floor                   #
+math.fmod                    #
+math.frexp                   # (mantissa, exponent) of floating point num.
+math.fsum                    #
+math.gamma                   # complex factorial. Γ(j) = (j-1)!  -> integral( (t^z-1) (e^-t)dt)
+math.lgamma                  # log(gamma, e)
+math.gcd                     # greatest common divisor
+math.inf                     #
+math.isclose                 # floating point equality
+math.isfinite                #
+math.isinf                   #
+math.isnan                   #
+
+math.isqrt                   # integer square root
+math.lcm                     # least common multiple
+math.ldexp(x,i)                   # x(2^i) : inverse of frexp
+math.log(x, base=e)          # logarithm
+math.log10                   # log(x, 10)
+math.log1p                   # log(1 + x) accurate near zero.
+math.log2                    # log(x, 2), more accurate that log
+math.modf                    #
+math.nan                     #
+math.nextafter               # next floating point number
+math.perm                    # Permutation. n! / (n-k)!
+math.pi                      # const. 3.141...
+math.pow                     # x^y. always converts to floating point, unlike (**)
+math.prod                    # product
+math.radians                 # convert degrees to radians
+math.remainder               # floating point remainder of division
+math.sqrt                    # square root
+math.tau                     # const. 2*π
+math.trunc                   # x truncated to only integer part.
+math.ulp                     # least significat bit of floating point num.
+
+cmath.acosh                  # inverse Hyperbolic Trig
+cmath.asinh                  # inverse Hyperbolic Trig
+cmath.atanh                  # inverse Hyperbolic Trig
+cmath.cosh                   # Hyperbolic Trig
+cmath.sinh                   # Hyperbolic Trig
+cmath.tanh                   # Hyperbolic Trig
+
+cmath.acos                   # Arc Trig
+cmath.asin                   # Arc Trig
+cmath.atan                   # Arc Trig
+cmath.cos                    # Trig
+cmath.sin                    # Trig
+cmath.tan                    # Trig
+
+cmath.exp                    # e^j
+cmath.inf                    #
+cmath.infj                   #
+cmath.isclose                #
+cmath.isfinite               #
+cmath.isinf                  #
+cmath.isnan                  #
+cmath.log                    # log(j, e)
+cmath.log10                  # log(j, 10)
+cmath.nan                    #
+cmath.nanj                   #
+cmath.phase                  #  -π <= atan2(x.imag, x.real) <= π
+cmath.polar                  # convert cartesian (real, imag) to polar of (modulus, phase)
+cmath.rect                   #
+cmath.sqrt                   # square root

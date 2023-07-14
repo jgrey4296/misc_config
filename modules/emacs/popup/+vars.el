@@ -36,7 +36,7 @@ adjustment.")
 
 (defvar +popup-defaults
   (list :side   'bottom :height 0.16 :width  40 :quit   t :select #'ignore :ttl    5)
-  "Default properties for popup rules defined with `set-popup-rule!'.")
+  "Default properties for popup rules")
 
 (setq window-control-popup-persist-default '(:side bottom
                                              :height 0.3

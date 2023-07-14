@@ -1,13 +1,14 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
 (defvar +java-project-package-roots (list "java/" "test/" "main/" "src/" 1))
+
 (defvar kotlin-repl-buffer "*kotlin*")
+
 (defvar kotlin-command "kotlinc")
 
 (spec-handling-add! compile-commands
                     '(jvm +jg-jvm-get-gradle-commands)
                     )
-
 
 (setq scala-indent:align-parameters t
       ;; indent block comments to first asterix, not second
@@ -120,4 +121,42 @@
                     '(groovy-mode "Groovy" "Groovy_JDK" "Gradle_DSL", "Gradle_Groovy_API", "Gradle_User_Guide")
                     '(kotlin-mode "Kotlin")
                       )
+(spec-handling-add! eval
+                    `(kotlin-mode :start ,#'+kotlin-mode/open-repl)
+                    `(kotlin-mode :start ,#'kotlin-repl :name kotlin-alt)
+                    `(groovy-mode :start ,#'+java/open-groovy-repl)
+                    `(scala-mode :start ,#'+scala/open-repl :persist t)
+                    )
+(spec-handling-add! ligatures
+                    '(scala-mode
+                      ;; Functional
+                      :def "def"
+                      :composition  "compose"
+                      ;; HKT
+                      :lambda       "Lambda"
+                      ;; Types
+                      :null         "none"
+                      :null         "None"
+                      :true         "true"
+                      :false        "false"
+                      :int          "Int"
+                      :str          "String"
+                      :float        "Float"
+                      :bool         "Boolean"
+                      :list         "List"
+                      ;; Flow
+                      :for          "for"
+                      :not          "!"
+                      :and          "&&"
+                      :or           "||"
+                      :yield        "yield"
+                      ;; Other
+                      :union        "union"
+                      :intersect    "intersect"
+                      :diff         "diff"
+                      )
+                    )
+(spec-handling-add! yas-extra
+                    '(android-mode android-mode)
+                    )
 ;;-- end specs

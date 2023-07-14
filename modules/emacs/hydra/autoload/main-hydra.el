@@ -29,8 +29,8 @@
   ("h" #'global-hl-line-mode          nil  :exit nil)
   ("t" #'toggle-truncate-lines        nil  :exit nil)
   ("w" #'whitespace-mode              nil  :exit nil)
-  ("a" (message "Autohide start hidden %s"
-                (setq autohide-minor-mode-start-hidden (not autohide-minor-mode-start-hidden))
+  ("a" (message "Code-Syh start hidden %s"
+                (setq code-shy-start-hidden (not code-shy-mode-start-hidden))
                 nil  :exit nil))
   ("c" #'global-centered-cursor-mode   nil  :exit nil)
   ("e" #'browse-select-toggle-browsing nil  :exit nil)

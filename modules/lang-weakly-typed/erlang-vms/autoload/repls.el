@@ -1,6 +1,6 @@
-;;; +repl.el -*- lexical-binding: t; -*-
+;;; repls.el -*- lexical-binding: t; -*-
 
-
+;;;###autoload
 (defun +erlang/open-repl (&optional arg)
   (interactive "P")
   (require 'erlang)
@@ -9,9 +9,7 @@
   (get-buffer-create inferior-erlang-buffer-name)
   )
 
-(set-repl-handler! 'erlang-mode '+erlang/open-repl)
-
-
+;;;###autoload
 (defun +elixir/open-repl (&optional arg)
   (interactive "P")
   (require 'alchemist-iex)
@@ -19,5 +17,3 @@
       (alchemist-iex-run))
   (get-buffer-create elixir-shell-buffer-name)
   )
-
-(set-repl-handler! 'elixir-mode '+elixir/open-repl)

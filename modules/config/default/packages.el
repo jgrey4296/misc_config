@@ -7,4 +7,4 @@
 (unless (modulep! :editor evil)
   (package! expand-region))
 
-(package! spec-handling :recipe `(:local-repo ,(expand-file-name "packages/misc/spec-handling" doom-user-dir)))
+(package! spec-handling :recipe (:host github :repo "jgrey4296/spec-handling"))

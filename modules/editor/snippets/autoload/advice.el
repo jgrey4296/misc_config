@@ -47,15 +47,17 @@ Also strips whitespace out of selection. Also switches to insert mode. If
   )
 
 ;;;###autoload
-(advice-add 'doom-snippets-initialize #'+jg-snippets-doom-nullify)
+(advice-add 'doom-snippets-initialize :override #'+jg-snippets-doom-nullify)
 
+;;;###autoload
 (defun +jg-snippets--remove-duplicates-a (templates)
   ;; REVIEW Fix #2639: For some reason `yas--all-templates' returns duplicates
   ;;        of some templates. Until I figure out the real cause this fixes it.
     (cl-delete-duplicates templates :test #'equal))
 
 ;;;###autoload
-(advice-add 'yas--all-templates :filter-return #'+jg-snippets-remove-duplicates-a)
+(advice-add 'yas--all-templates :filter-return #'+jg-snippets--remove-duplicates-a)
+
 
 ;;;###autoload
 (defun +snippets--inhibit-yas-global-mode-a (fn &rest args)

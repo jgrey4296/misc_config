@@ -50,6 +50,11 @@
                      :documentation ,#'alchemist-help-search-at-point
                      )
                     )
-(set-eval-handler! 'elixir-mode #'alchemist-eval-region)
-(set-repl-handler! 'elixir-mode #'alchemist-iex-project-run)
+(spec-handling-add! eval
+                    `(elixir-mode
+                      :start ,#'alchemist-iex-project-run
+                      :send ,#'alchemist-eval-region
+                      )
+                    `(erlang-mode :start ,#'+erlang/open-repl)
+                    )
 ;;-- end specs

@@ -5,7 +5,7 @@
 (defun +jg-conda-pop-to-xref (result)
   (if (stringp result)
       (message result)
-    (let* ((window-ring-suppress-adding t)
+    (let* ((carousel-suppress-adding t)
            (xrefs (anaconda-mode-make-xrefs result))
            (marker (save-excursion (xref-location-marker (xref-item-location (cl-first xrefs)))))
            (buf (marker-buffer marker))

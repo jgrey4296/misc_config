@@ -221,8 +221,8 @@
 
   )
 
-(use-package! window-ring-minor-mode
-  :hook (doom-init-ui . window-ring-minor-mode)
+(use-package! carousel-minor-mode
+  :hook (doom-init-ui . carousel-minor-mode)
   :config
   (after! ivy
     (ivy-add-actions '+jg-workspaces-ivy
@@ -233,8 +233,8 @@
     )
   )
 
-(use-package! project-walk
-  :commands (project-walk-minor-mode project-walk-next)
+(use-package! project-zimmerframe
+  :commands (project-zimmerframe-minor-mode zimmerframe-next)
   )
 
 (use-package! neotree

@@ -29,4 +29,6 @@
                       )
                     )
 
-(set-repl-handler! 'nix-mode #'+nix/open-repl)
+(spec-handling-add! eval
+                    `(nix-mode :start ,#'+nix/open-repl)
+                    )

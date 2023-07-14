@@ -154,7 +154,6 @@ See `+emacs-lisp-non-package-mode' for details.")
                       ("\\.el\\'"       . emacs-lisp-mode)
                       )
                     )
-
 (spec-handling-add! imenu
                     '(emacs-lisp-mode
                       ("spec-def" "^(spec-handling-new! \\(.+\\) " 1)
@@ -176,11 +175,12 @@ See `+emacs-lisp-non-package-mode' for details.")
                       ("Types" "^\\s-*(\\(cl-def\\(?:struct\\|type\\)\\|def\\(?:class\\|face\\|group\\|ine-\\(?:condition\\|error\\|widget\\)\\|package\\|struct\\|t\\(?:\\(?:hem\\|yp\\)e\\)\\)\\)\\s-+'?\\(\\(?:\\sw\\|\\s_\\|\\\\.\\)+\\)" 2)
                       )
                     )
-
-
-(set-repl-handler! '(emacs-lisp-mode lisp-interaction-mode) #'+emacs-lisp/open-repl)
-(set-repl-handler! 'racket-mode #'+racket/open-repl)
-(set-eval-handler! '(emacs-lisp-mode lisp-interaction-mode) #'+emacs-lisp-eval)
-(set-eval-handler! '(emacs-lisp-mode lisp-interaction-mode) #'+jg-lisp-eval)
-
+(spec-handling-add! eval :form 'override
+                    `(emacs-lisp-mode :start ,#'+emacs-lisp/open-repl)
+                    `(lisp-interaction-mode :start ,#'+emacs-lisp/open-repl)
+                    `(racket-mode :start ,#'+racket/open-repl)
+                    )
+(spec-handling-add! yas-extra
+                    '(buttercup-minor-mode buttercup-minor-mode)
+                    )
 ;;-- end specs

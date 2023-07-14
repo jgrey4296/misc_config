@@ -20,7 +20,7 @@
 ;;
 ;;; Code:
 
-(package! paren-state :recipe `(:local-repo ,(expand-file-name "packages/states/paren-state" doom-user-dir)))
+(package! paren-state :recipe (:host github :repo "jgrey4296/paren-state"))
 (package! avy)
 
 (if (modulep! +switch-window)

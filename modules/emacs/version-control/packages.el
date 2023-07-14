@@ -13,3 +13,12 @@
 (if (modulep! +diff-hl)
     (package! diff-hl)
   (package! git-gutter-fringe))
+
+(package! vc :built-in t)
+(package! vc-annotate :built-in t)
+(package! smerge-mode :built-in t)
+
+(package! browse-at-remote)
+(package! git-commit)
+(package! git-timemachine :recipe (:host github :repo "emacsmirror/git-timemachine"))
+(package! git-modes)

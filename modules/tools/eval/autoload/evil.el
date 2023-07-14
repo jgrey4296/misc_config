@@ -1,5 +1,4 @@
 ;; tools/eval/autoload/evil.el -*- lexical-binding: t; -*-
-;;;###if (modulep! :editor evil)
 
 ;;;###autoload (autoload '+eval:region "tools/eval/autoload/evil.el" nil t)
 (evil-define-operator +eval:region (beg end)

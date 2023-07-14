@@ -53,9 +53,3 @@ on."
       (when hl-todo-mode
         (hl-todo-mode -1)
         (hl-todo-mode +1)))
-
-;;;###autodef
-(cl-defun set-rotate-patterns! (modes &key symbols words patterns)
-  "Declare :symbols, :words or :patterns (all lists of strings) that
-`rotate-text' will cycle through."
-  (signal 'deprecated modes))

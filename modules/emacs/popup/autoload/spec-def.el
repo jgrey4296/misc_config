@@ -149,13 +149,3 @@
         (window-parameters ,@params)))
     )
   )
-
-;;;###autodef
-(defun set-popup-rule! (predicate &rest plist)
-  (signal 'deprecated predicate plist)
-  )
-
-;;;###autodef
-(defun set-popup-rules! (&rest rulesets)
-  (signal 'deprecated rulesets)
-  )

@@ -1,6 +1,6 @@
 ;;; editor/window-control/+funcs.el -*- lexical-binding: t; -*-
 
-
+;;;###autoload
 (defun +jg-ui-open-scratch-buffer (&optional arg)
   "Customised doom/open-project-scratch-buffer because it doesn't use pop-to-buffer "
   (interactive "P")
@@ -21,6 +21,7 @@
       (doom-project-name))))
   )
 
+;;;###autoload
 (defun +jg-misc-modify-line-end-display-table ()
   (interactive)
   " from https://stackoverflow.com/questions/8370778/ "

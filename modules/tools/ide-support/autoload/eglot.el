@@ -1,13 +1,5 @@
 ;;; tools/lsp/autoload/eglot.el -*- lexical-binding: t; -*-
 
-;;;###autodef
-(defun set-eglot-client! (mode server-call)
-  "Add SERVER-CALL list as a possible lsp server for given major MODE.
-
-Example : (set-eglot-client! 'python-mode `(,(concat doom-data-dir \"lsp/mspyls/Microsoft.Python.LanguageServer\")))"
-  (after! eglot
-    (add-to-list 'eglot-server-programs `(,mode . ,server-call))))
-
 ;; HACK Eglot removed `eglot-help-at-point' in joaotavora/eglot@a044dec for a
 ;;      more problematic approach of deferred to eldoc. Here, I've restored it.
 ;;      Doom's lookup handlers try to open documentation in a separate window

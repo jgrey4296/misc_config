@@ -73,10 +73,6 @@
 
   (add-hook! 'flyspell-mode-hook #'+spell-inhibit-duplicate-detection-maybe-h)
 
-  ;; Ensure mode-local predicates declared with `set-flyspell-predicate!' are
-  ;; used in their respective major modes.
-  (add-hook 'flyspell-mode-hook #'+spell-init-flyspell-predicate-h)
-
   (let ((flyspell-correct
          (cmds! (and (not mark-active)
                      (not (and (bound-and-true-p evil-local-mode)

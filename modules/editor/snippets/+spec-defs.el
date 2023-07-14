@@ -10,3 +10,11 @@
                              collect (cons priority clean)
                              )
                     )
+
+(spec-handling-new! yas-extra nil :loop 'hook
+                    :doc "activate minor modes for yasnippet"
+                    :struct '(extras)
+                    (dolist (mode (ensure-list val))
+                      (yas-activate-extra-mode mode)
+                      )
+                    )

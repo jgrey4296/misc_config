@@ -26,4 +26,15 @@
                                   alist
                                   )
                                 )
+                    (prettify-symbols-mode)
+                    )
+
+(spec-handling-new! electric nil :loop 'hook
+                    :struct '(:chars list :words list)
+                    (setq-local electric-indent-inhibit nil)
+                    (electric-indent-local-mode +1)
+                    (-when-let (chars (plist-get val :chars))
+                      (setq-local electric-indent-chars chars))
+                    (-when-let (words (plist-get val :words))
+                      (setq +electric-indent-words words))
                     )

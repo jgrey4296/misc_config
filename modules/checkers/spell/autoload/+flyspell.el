@@ -1,24 +1,7 @@
 ;;; checkers/spell/autoload/+flyspell.el -*- lexical-binding: t; -*-
 ;;;###if (modulep! +flyspell)
 
-;;;###autodef
-(defalias 'flyspell-mode! #'flyspell-mode)
 
-(defvar +spell--flyspell-predicate-alist nil
-  "TODO")
-
-;;;###autodef
-(defun set-flyspell-predicate! (modes predicate)
-  "TODO"
-  (declare (indent defun))
-  (dolist (mode (ensure-list modes) +spell--flyspell-predicate-alist)
-    (add-to-list '+spell--flyspell-predicate-alist (cons mode predicate))))
-
-;;;###autoload
-(defun +spell-init-flyspell-predicate-h ()
-  "TODO"
-  (when-let (pred (assq major-mode +spell--flyspell-predicate-alist))
-    (setq-local flyspell-generic-check-word-predicate (cdr pred))))
 
 ;;;###autoload
 (defun +spell-correction-at-point-p (&optional point)

@@ -79,5 +79,39 @@ immediately after."
         (call-interactively #'evil-append-line)))
     ))
 
+;;;###autoload
+(defun +jg-eval-open-repl (&optional arg)
+  (interactive "P")
+  ;; get or choose repl
+  (let* ((repl-by-mode (alist-get major-mode +eval-repls))
+         (repl-by-use (if (or arg (not repl-by-mode))
+                          (alist-get (intern (ivy-read "Select Repl: " +eval-repls :require-match t)) +eval-repls)))
+         (repl-entry (or repl-by-use repl-by-mode))
+         (buff (get-buffer +eval-repl-buffer-name))
+         )
+
+    (unless repl-entry
+      (error "No Repl Found"))
+    (message "Found Repl: %s" repl-entry)
+
+    (when (and buff (not (buffer-live-p buff)))
+      (kill-buffer buff))
+    (when (and buff (not (or (eq major-mode (buffer-local-value 'repl-base buff))
+                             (eq (plist-get repl-entry :name) (buffer-local-value 'repl-base buff)))))
+      (kill-buffer buff))
+
+    (if (and buff (buffer-live-p buff))
+        (pop-to-buffer buff)
+      ;; if repl exists already, jump to it
+      (setq buff (funcall (plist-get repl-entry :start))))
+
+    (if (not (bufferp buff))
+        (error (format "Repl call needs to return a buffer: %s" (plist-get repl-entry :start)))
+      (with-current-buffer (rename-buffer +eval-repl-buffer-name)
+        (setq-local repl-base (or (plist-get repl-entry :name)
+                                  major-mode)))
+      )
+    )
+  )
 
 ;;; +repl-commands.el ends here

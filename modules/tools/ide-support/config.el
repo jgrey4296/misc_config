@@ -123,11 +123,6 @@
                         )
                       )
 
-  (spec-handling-new! tree-sit-lang
-                      tree-sitter-major-mode-language-alist
-                      :loop 'collect
-                      `(,key . ,val)
-                      )
   :config
   (require 'tree-sitter-langs)
   )
@@ -208,14 +203,6 @@
                         )
                       )
   (setq flycheck-global-modes nil)
-
-  ;; (spec-handling-new! flycheck nil :loop 'do
-
-
-  ;;                     )
-  ;; (spec-handling-new! flycheck-disabled nil :loop 'do
-
-  ;;                     )
 
   :config
   (add-hook! 'doom-escape-hook :append #'+syntax-check-buffer-h)

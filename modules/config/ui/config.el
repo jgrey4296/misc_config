@@ -1,11 +1,8 @@
 ;;; config.el -*- lexical-binding: t; -*-
 
 (load! "+vars")
-(load! "+funcs")
 (load! "+spec-defs")
-(after! jg-bindings-total
-  (load! "+bindings")
-  )
+(defer-load! jg-bindings-total "+bindings")
 
 ;;-- highlight
 

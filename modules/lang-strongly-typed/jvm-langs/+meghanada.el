@@ -11,9 +11,12 @@
         meghanada-use-auto-start t)
 
   :config
-  (set-lookup-handlers! 'java-mode
-    :definition #'meghanada-jump-declaration
-    :references #'meghanada-reference)
+  (spec-handling-add! lookup-handler
+                      `(java-mode
+                        :definition ,#'meghanada-jump-declaration
+                        :references ,#'meghanada-reference
+                        )
+                      )
 
   (defadvice! +java-meghanada-fail-gracefully-a (fn &rest args)
     "Toggle `meghanada-mode'. Fail gracefully if java is unavailable."

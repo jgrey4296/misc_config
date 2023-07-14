@@ -2,11 +2,6 @@
 ;;
 ;;; Main commands
 
-;;;###autodef
-(defun set-lookup-handlers! (modes &rest plist)
-  (signal 'deprecated modes)
-  )
-
 ;;;###autoload
 (defun +lookup/definition (identifier &optional arg)
   "Jump to the definition of IDENTIFIER (defaults to the symbol at point).

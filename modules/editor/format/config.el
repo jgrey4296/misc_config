@@ -1,6 +1,7 @@
 ;;; editor/format/config.el -*- lexical-binding: t; -*-
 
 (load! "+vars")
+(load! "+spec-defs")
 (defer-load! jg-bindings-total "+bindings")
 
 (add-to-list 'doom-debug-variables 'format-all-debug)

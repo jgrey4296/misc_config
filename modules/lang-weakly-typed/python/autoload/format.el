@@ -14,7 +14,7 @@ TODO
     ;; Go from bottom of buffer to top
     (with-current-buffer source
       (goto-char (point-max))
-      (while (re-search-backward (autohide-minor-mode-fold-block-gen :re t) nil t)
+      (while (re-search-backward (code-shy-fold-block-gen :re t) nil t)
         (setq groupname (match-string 1))
         (cond ((and (s-matches? "^imports" groupname)
                     end
@@ -59,9 +59,9 @@ TODO
       (re-search-forward "^\"\"\"" nil t)
       (end-of-line)
       (insert "\n")
-      (insert (autohide-minor-mode-fold-block-gen :name "imports" :newlines t))
+      (insert (code-shy-fold-block-gen :name "imports" :newlines t))
       (insert cleaned)
-      (insert (autohide-minor-mode-fold-block-gen :name "imports" :newlines t :end t))
+      (insert (code-shy-fold-block-gen :name "imports" :newlines t :end t))
       )
     )
   )

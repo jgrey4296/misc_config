@@ -242,7 +242,6 @@
       :desc "Calc"                         "C"    #'calc
       :desc "Dired"                        "d"    #'dired-jump
       ;; :desc "Compose Email"                "e" #'mu4e~compose-mail
-      :desc "REPL"                         "r"    #'+eval/open-repl-other-window
       :desc "Regexp Builder"               "R"    #'regexp-builder
       :desc "Repo Homepage"                "g"    #'+vc/browse-at-remote-homepage
       :desc "Github Homepage"              "G"    (cmd! (browse-url user-url))

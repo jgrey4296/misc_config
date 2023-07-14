@@ -67,7 +67,11 @@
   :defer t
   :init
   (global-set-key [remap find-dired] #'fd-dired)
-  (set-popup-rule! "^\\*F\\(?:d\\|ind\\)\\*$" :ignore t)
+  (spec-handling-add! popup
+                      '(fd-dired
+                        ("^\\*F\\(?:d\\|ind\\)\\*$" :ignore t)
+                        )
+                      )
   )
 
 (use-package! dired-aux

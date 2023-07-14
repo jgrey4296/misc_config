@@ -1,7 +1,5 @@
 ;;; tools/eval/autoload/repl.el -*- lexical-binding: t; -*-
 
-(defvar +eval-repl-buffers (make-hash-table :test 'equal)
-  "The buffer of the last open repl.")
 
 (defvar-local +eval-repl-plist nil)
 
@@ -47,95 +45,6 @@
                          (cdr comint-last-prompt)
                        (point-max)))))
       buffer)))
-
-(defun +eval-repl-known-repls ()
-  "Yield the available repl functions as a list of symbols."
-  (seq-uniq (mapcar (pcase-lambda (`(,mode ,fn . _)) (list mode fn)) +eval-repls)))
-
-(defun +doom-pretty-mode-name (mode)
-  "Convert a mode name into a variant nicer for human eyes."
-  (let ((mode (if (symbolp mode) (symbol-name mode) mode)))
-    (if (not (string-match "^\\([a-z-]+\\)-mode$" mode))
-        (error "Given string/symbol is not a major mode: %s" mode)
-      (string-join (split-string (capitalize (match-string-no-properties 1 mode))
-                                 "-")
-                   " "))))
-
-(defun +eval-repl-found-repls ()
-  "Search the interned symbol list for functions that looks like
-repl openers."
-  (cl-loop for sym being the symbols
-           for sym-name = (symbol-name sym)
-           if (string-match "^\\(?:\\+\\)?\\([^/]+\\)/open-\\(?:\\(.+\\)-\\)?repl$" sym-name)
-           collect
-           sym))
-
-(defun +eval-pretty-mode-name-from-fn (fn)
-  "Given a symbol name of a repl-opening function, extract a
-human-readable variant of its associated major mode name."
-  (let ((name (symbol-name fn)))
-    (if (not (string-match "^\\(?:\\+\\)?\\([^/]+\\)/open-\\(?:\\(.+\\)-\\)?repl$" name))
-        (error "Given symbol is not a repl function: %s" name)
-      (string-join (split-string (capitalize (match-string-no-properties 1 name))
-                                 "-")
-                   " "))))
-
-(defun +eval-repl-prompt ()
-  "Prompt the user for the choice of a repl to open."
-  (let* ((knowns (mapcar (pcase-lambda (`(,mode ,fn)) (list (+doom-pretty-mode-name mode) fn))
-                         (+eval-repl-known-repls)))
-         (founds (mapcar (lambda (fn) (list (+eval-pretty-mode-name-from-fn fn) fn))
-                         (+eval-repl-found-repls)))
-         (repls (seq-uniq (append knowns founds)))
-         (names (mapcar #'cl-first repls))
-         (choice (or (completing-read "Open a REPL for: " names)
-                     (user-error "Aborting"))))
-    (cl-second (assoc choice repls))))
-
-(defun +eval-repl-from-major-mode ()
-  "Fetch the repl associated with the current major mode, if there
-is one."
-  (pcase-let ((`(_ ,fn . ,plist) (assq major-mode +eval-repls)))
-    (list fn plist)))
-
-(defun +eval-open-repl (prompt-p &optional displayfn)
-  "Open a repl via the given DISPLAYFN. If PROMPT-P, the user will be
-prompted for a repl choice, even if the major mode they're in
-already has a known one."
-  (pcase-let* ((`(,fn ,plist) (+eval-repl-from-major-mode))
-               (fn (cond ((or prompt-p (not fn)) (+eval-repl-prompt))
-                         (t fn)))
-               (region (when (use-region-p)
-                         (buffer-substring-no-properties (region-beginning)
-                                                         (region-end)))))
-    (unless (commandp fn)
-      (error "Couldn't find a valid REPL for %s" major-mode))
-    (with-current-buffer (+eval--ensure-in-repl-buffer fn plist displayfn)
-      (when (bound-and-true-p evil-mode)
-        (call-interactively #'evil-append-line))
-      (when region
-        (insert region))
-      t)))
-
-;;
-;;; Commands
-
-;;;###autoload
-(defun +eval/open-repl-same-window (&optional arg)
-  "Opens (or reopens) the REPL associated with the current major-mode and place
-the cursor at the prompt.
-
-If ARG (universal argument), prompt for a specific REPL to open."
-  (interactive "P")
-  (+eval-open-repl arg #'switch-to-buffer))
-
-;;;###autoload
-(defun +eval/open-repl-other-window (&optional arg)
-  "Does `+eval/open-repl', but in a popup window.
-
-If ARG (universal argument), prompt for a specific REPL to open."
-  (interactive "P")
-  (+eval-open-repl arg #'pop-to-buffer))
 
 ;;;###autoload
 (defun +eval/send-region-to-repl (beg end &optional inhibit-auto-execute-p)

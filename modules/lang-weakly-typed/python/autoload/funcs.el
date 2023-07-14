@@ -12,7 +12,7 @@
     (save-excursion
       (setq defun-pos (py-down-def-or-class)))
     (save-excursion
-      (setq fold-block-pos (re-search-forward (autohide-minor-mode-fold-block-gen :re t) defun-pos t)))
+      (setq fold-block-pos (re-search-forward (code-shy-fold-block-gen :re t) defun-pos t)))
     (goto-char (apply 'min (mapcar #'(lambda (x) (if x x (point-max))) (list fold-block-pos defun-pos))))
     )
 )

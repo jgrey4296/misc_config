@@ -8,7 +8,7 @@ of a python file "
   (save-excursion
     (goto-char (point-min))
     (let ((arg (if (not arg) (read-string "Import Statement: " "import ") arg)))
-      (re-search-forward (autohide-minor-mode-fold-block-gen :name "imports" :re t))
+      (re-search-forward (code-shy-fold-block-gen :name "imports" :re t))
       (re-search-forward "^$")
       (insert "\n")
       (insert arg)

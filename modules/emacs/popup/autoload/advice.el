@@ -11,7 +11,6 @@
   (let ((ignore-window-parameters t))
     (split-window window size side)))
 
-
 ;;;###autoload
 (defun +popup-close-a (&rest _)
   "TODO"

@@ -16,6 +16,7 @@
       :desc "Narrow"        "RET" #'+jg-ui-narrow-around-point
       )
 
+
 ;;-- highlight
 (map! :map jg-binding-vision-map
       :desc "Delete Change Highlight"      "c" #'highlight-changes-remove-highlight

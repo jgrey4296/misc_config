@@ -1,0 +1,112 @@
+__new__(cls)                                    #
+__init__(self)                                  #
+__del__(self)                                   #
+__repr__(self)                                  # string
+__str__(self)                                   # string
+__bytes__(self)                                 # binary
+__format__(self, format_spec)                   # string
+
+__lt__(self, other)                             # comparison
+__le__(self, other)                             # comparison
+__eq__(self, other)                             # comparison
+__ne__(self, other)                             # comparison
+__gt__(self, other)                             # comparison
+__ge__(self, other)                             # comparison
+
+__hash__(self)                                  #
+__bool__(self)                                  #
+
+__getattr__(self, name)                         # attributes
+__getattribute__(self, name)                    # attributes
+__setattr__(self, name, value)                  # attributes
+__delattr__(self, name)                         # attributes
+__dir__(self)                                   # attributes
+__get__(self, instance, owner=None)             # attributes
+__set__(self, instance, value)                  # attributes
+__delete__(self, instance)                      # attributes
+__slots__                                       # attributes
+
+__init_subclass__(cls)                          # subclasses
+__set_name__(self, owner, name)                 # subclasses
+__mro_entries__(self, bases)                    # subclasses
+__instancecheck__(self, instance)               # subclasses
+__subclasscheck__(self, subclass)               # subclasses
+__class_getitem__(cls, key)                     # subclasses
+
+__len__(self)                                   # lists and dicts
+__length_hint__(self)                           # lists and dicts
+__getitem__(self, key)                          # lists and dicts
+__setitem__(self, key, value)                   # lists and dicts
+__delitem__(self, key)                          # lists and dicts
+__missing__(self, key)                          # lists and dicts
+__reversed__(self)                              # lists and dicts
+__contains__(self, item)                        # lists and dicts
+
+__iter__(self)                                  # iterators
+
+__add__(self, other)                            # math ops
+__sub__(self, other)                            # math ops
+__mul__(self, other)                            # math ops
+__matmul__(self, other)                         # math ops
+__truediv__(self, other)                        # math ops
+__floordiv__(self, other)                       # math ops
+__mod__(self, other)                            # math ops
+__divmod__(self, other)                         # math ops
+__pow__(self, other[, modulo])                  # math ops
+__lshift__(self, other)                         # math ops
+__rshift__(self, other)                         # math ops
+__and__(self, other)                            # math ops
+__xor__(self, other)                            # math ops
+__or__(self, other)                             # math ops
+__radd__(self, other)                           # math ops
+__rsub__(self, other)                           # math ops
+__rmul__(self, other)                           # math ops
+__rmatmul__(self, other)                        # math ops
+__rtruediv__(self, other)                       # math ops
+__rfloordiv__(self, other)                      # math ops
+__rmod__(self, other)                           # math ops
+__rdivmod__(self, other)                        # math ops
+__rpow__(self, other[, modulo])                 # math ops
+__rlshift__(self, other)                        # math ops
+__rrshift__(self, other)                        # math ops
+__rand__(self, other)                           # math ops
+__rxor__(self, other)                           # math ops
+__ror__(self, other)                            # math ops
+__ior__(self, other)                            # math ops
+
+__neg__(self)                                   # math
+__pos__(self)                                   # math
+__abs__(self)                                   # math
+__invert__(self)                                # math
+__complex__(self)                               # math
+__int__(self)                                   # math
+__float__(self)                                 # math
+__index__(self)                                 # math
+__round__(self[, ndigits])                      # math
+__trunc__(self)                                 # math
+__floor__(self)                                 # math
+__ceil__(self)                                  # math
+
+__enter__(self)                                 # context manager
+__exit__(self, exc_type, exc_value, traceback)  # context manager
+__match_args__                                  # match statement
+__await__(self)                                 # async
+__aiter__(self)                                 # async
+__anext__(self)                                 # async
+__aenter__(self)                                # async
+__aexit__(self, exc_type, exc_value, traceback) # async
+
+__doc__                                         # special properties
+__name__                                        # special properties
+__qualname__                                    # special properties
+__module__                                      # special properties
+__defaults__                                    # special properties
+__code__                                        # special properties
+__globals__                                     # special properties
+__dict__                                        # special properties
+__closure__                                     # special properties
+__annotations__                                 # special properties
+__kwdefaults__                                  # special properties
+__self__                                        # special properties
+__func__                                        # special properties
+__bases__                                       # special properties

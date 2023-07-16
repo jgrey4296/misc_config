@@ -11,14 +11,13 @@
   (transient-make-toggle! highlight-changes-visible-mode "l" "highlight-changes")
 
   (transient-make-call!   quickscope
-                          (format "%s/%s : quickscope"
-                                  (fmt-as-bool evil-quickscope-always-mode)
-                                  (fmt-as-bool evil-quickscope-mode))
+                          (format "%s : quickscope always"
+                                  (fmt-as-bool evil-quickscope-always-mode))
                           (evil-quickscope-always-mode 'toggle)
                           (evil-quickscope-mode (if evil-quickscope-always-mode -1 1))
                           )
   (transient-make-call!   invisible
-                          (format "%s : invisible" (fmt-as-bool line-move-ignore-invisible))
+                          (format "%s :  invisible" (fmt-as-bool line-move-ignore-invisible))
                           (setq line-move-ignore-invisible (not line-move-ignore-invisible))
                           )
   )
@@ -139,7 +138,7 @@
   (transient-make-toggle! global-code-shy-minor-mode "s" "Code Shy")
   (transient-make-toggle! global-centered-cursor-mode "c" "Cursor")
   (transient-make-toggle! global-highlight-changes-mode "l" "Changes")
-
+  (transient-make-toggle! prettify-symbols-mode "p" "Pretty Symbols")
   )
 ;;TODO apply choice
 (transient-define-argument browse-selector ()
@@ -157,6 +156,7 @@
    (jg-transient-toggle-hide-mode-line-mode)
    (jg-transient-toggle-global-hl-line-mode)
    (jg-transient-toggle-global-code-shy-minor-mode)
+   (jg-transient-toggle-prettify-symbols-mode)
    ]
    [
     (jg-transient-toggle-global-centered-cursor-mode)

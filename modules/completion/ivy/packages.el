@@ -17,4 +17,4 @@
 
 (package! ivy-posframe)
 
-(package! general-insert :recipe `(:local-repo ,(expand-file-name "packages/misc/general-insert" doom-user-dir)))
+(package! general-insert :recipe `(:local-repo ,(expand-file-name "packages/minor-modes/general-insert" doom-user-dir)))

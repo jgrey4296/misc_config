@@ -34,7 +34,7 @@
  )
 (package! org-contrib :recipe (:host github :repo "emacsmirror/org-contrib"))
 
-(package! org-unit-test :recipe `(:local-repo ,(expand-file-name "packages/misc/org-unit-test" doom-user-dir)))
+(package! org-unit-test :recipe `(:local-repo ,(expand-file-name "packages/minor-modes/org-unit-test" doom-user-dir)))
 
 
 (package! org-drill)

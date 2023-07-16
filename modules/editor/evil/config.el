@@ -144,17 +144,7 @@
              evilnc-outer-commenter)
   :general ([remap comment-line] #'evilnc-comment-or-uncomment-lines))
 
-(use-package! evil-snipe
-  :commands evil-snipe-local-mode evil-snipe-override-local-mode
-  :hook (doom-first-input . evil-snipe-override-mode)
-  :hook (doom-first-input . evil-snipe-mode)
-  :init
-  (map! :after evil-snipe
-        :map evil-snipe-mode-map
-        :nm "S" nil
-        :nm "s" nil
-        )
-)
+(use-package! evil-snipe :defer t)
 
 (use-package! evil-surround
   :commands (global-evil-surround-mode
@@ -184,6 +174,10 @@
 
 (use-package! evil-quickscope
   :hook (doom-first-file . global-evil-quickscope-mode)
+  (map! :map evil-quickscope-mode-map
+        :nm "t" nil
+        :nm "T" nil
+        )
   )
 
 (use-package! evil-escape

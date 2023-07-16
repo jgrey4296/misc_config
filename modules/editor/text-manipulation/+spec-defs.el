@@ -26,7 +26,6 @@
                                   alist
                                   )
                                 )
-                    (prettify-symbols-mode)
                     )
 
 (spec-handling-new! electric nil :loop 'hook

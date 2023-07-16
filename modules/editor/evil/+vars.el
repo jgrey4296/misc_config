@@ -2,7 +2,6 @@
 
 (setq evil-move-beyond-eol t
       evil-move-cursor-back nil
-      evil-snipe-repeat-scope nil
 
       save-silently (not noninteractive)
 
@@ -31,7 +30,7 @@
 
       evil-snipe-smart-case t
       evil-snipe-scope 'line
-      evil-snipe-repeat-scope 'visible
+      evil-snipe-repeat-scope 'line
       evil-snipe-char-fold t
 
       evil-textobj-anyblock-blocks '(("(" . ")")

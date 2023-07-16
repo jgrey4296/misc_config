@@ -69,14 +69,16 @@
               (get-text-property 0 'path selected))
              general-insert--cache))
 
-  (-when-let* ((vals (gethash selected general-insert--cache))
-               (processor (or (gethash `(,major-mode ,selected) general-insert-processors) #'general-insert-default))
-               )
+  (let* ((vals (gethash selected general-insert--cache))
+         (processor (or (gethash `(,major-mode ,selected) general-insert-processors) #'general-insert-default))
+         )
+    (when (and vals processor)
       (ivy-read (format "%s " (car vals))
                 (cdr vals)
                 :action processor
                 :require-match t
                 )
+      )
     )
 )
 

@@ -290,7 +290,7 @@ using org-bibtex-fields for completion options "
              (new-values nil)
              (new-completions nil)
              )
-      (cond ((and source (-contains? '("author" "editor") chosen))
+      (cond ((-contains? '("author" "editor") chosen)
              (let ((next-val (helm :sources (list source dummy-source)
                                    :buffer "*helm bibtex completions*"
                                    :full-frame nil

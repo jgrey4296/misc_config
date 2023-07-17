@@ -331,33 +331,6 @@
 ;;-- end <leader> s --- search
 
 ;;-- <leader> t --- toggle
-(map! :leader
-      :prefix ("t" . "toggle")
-      (:prefix ("i" . "Input")
-       :desc "Global Company" "C" #'global-company-mode
-       :desc "Input Language" "i" #'toggle-input-method
-       :desc "SmartParens"    "s" #'smartparens-global-mode
-       :desc "Read-only mode" "r" #'read-only-mode
-       :desc "Indent style"   "I" #'doom/toggle-indent-style
-       )
-      ;; v - visual toggles set as hydra in jg-ui
-      (:prefix ("d" . "Debug")
-       :desc "Debug on Error"            "e" #'toggle-debug-on-error
-       :desc "Debug on Var"              "v" #'debug-on-variable-change
-       :desc "Cancel Debug on Var"       "V" #'cancel-debug-on-variable-change
-       :desc "Debug on Function"         "f" #'debug-on-entry
-       :desc "Cancel Debug on Function"  "F" #'cancel-debug-on-entry
-       :desc "Flymake"                   "C" #'flymake-mode
-       :desc "Flycheck"                  "c" #'global-flycheck-mode
-       :desc "Spell checker"            "s" #'flyspell-mode
-       )
-
-      (:when (modulep! :lang org +pomodoro)
-       :desc "Pomodoro timer"             "t"   #'org-pomodoro)
-      ;; highlight long lines
-      ;; camel-case-motion
-      )
-;;-- end <leader> t --- toggle
 
 ;;-- <leader> w --- Windows
 (map! :leader

@@ -1,0 +1,53 @@
+Regexp Syntax:
+. (Period) #
+*          #
++          #
+?          #
+*?, +?, ?? #
+[ ... ]    #
+[^ ... ]   #
+^          #
+$          #
+\          #
+
+[:ascii:]     # char classes
+[:alnum:]     # char classes
+[:alpha:]     # char classes
+[:blank:]     # char classes
+[:cntrl:]     # char classes
+[:digit:]     # char classes
+[:graph:]     # char classes
+[:lower:]     # char classes
+[:multibyte:] # char classes
+[:nonascii:]  # char classes
+[:print:]     # char classes
+[:punct:]     # char classes
+[:space:]     # char classes
+[:unibyte:]   # char classes
+[:upper:]     # char classes
+[:word:]      # char classes
+[:xdigit:]    # char classes
+
+
+\|             #
+\{M\}          #
+\{M,N\}        #
+\( ... \)      #
+\(?: ... \)    #
+\(?NUM: ... \) #
+\DIGIT         #
+\w             #
+\W             #
+\sCODE         #
+\SCODE         #
+\cC            #
+\CC            #
+\`             #
+\'             #
+\=             #
+\b             #
+\B             #
+\<             #
+\>             #
+\_<            #
+\_>            #

@@ -8,7 +8,6 @@
 
 (map! :leader
       :desc "Insert Timestamp"  "i t"   #'org-time-stamp
-      :desc "Toggle Links"      "t l"   #'org-toggle-link-display
       :prefix ("o" . "Org")
       (:prefix ("a" . "Org Agenda")
        :desc "Agenda"                "a"          #'org-agenda

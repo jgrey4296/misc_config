@@ -4,6 +4,9 @@
 (load! "+spec-defs")
 (defer-load! jg-bindings-total "+bindings")
 
+(add-hook! 'doom-first-file-hook
+           #'transient-toggles-minor-mode)
+
 ;;-- highlight
 
 (use-package! hl-line
@@ -147,18 +150,9 @@
 ;;-- end search results
 
 ;;-- transient
-;; (use-package! transient
-;;   :config
+(use-package! transient)
 
-;;   (transient-define-prefix jg-toggle-main ()
-;;     "for accessing toggle settings"
-;;     [
+(use-package! transient-macros)
 
-;;      ]
-;;     [""
-;;      ("q" "quit" transient-quit-one)
-;;      ]
-;;     )
-;;   )
 
 ;;-- end transient

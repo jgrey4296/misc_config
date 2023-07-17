@@ -328,11 +328,23 @@ Adapted from https://github.com/emacs-evil/evil/issues/606"
 
 
 ;;;###autoload
-(defun +jg-misc-iedit-show-all ()
+(defun +jg-evil-iedit-show-all ()
     " Override iedit's show all so it doesn't mess with invisible line movement"
     (remove-from-invisibility-spec '(iedit-invisible-overlay-name . t))
     (remove-overlays nil nil iedit-invisible-overlay-name t)
   )
 
 ;;;###autoload
-(advice-add 'iedit-show-all :override #'+jg-misc-iedit-show-all)
+(advice-add 'iedit-show-all :override #'+jg-evil-iedit-show-all)
+
+
+;;;###autoload
+(defun +jg-evil-marks-cleanup (marks)
+  (list (-filter #'(lambda (x) (and x
+                                    (marker-position x)
+                                    (marker-buffer x)))
+                 (car marks))))
+
+
+;;;###autoload
+(advice-add 'counsel-mark--get-candidates :filter-args #'+jg-evil-marks-cleanup)

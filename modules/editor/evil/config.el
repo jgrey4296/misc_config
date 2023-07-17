@@ -174,6 +174,7 @@
 
 (use-package! evil-quickscope
   :hook (doom-first-file . global-evil-quickscope-mode)
+  :config
   (map! :map evil-quickscope-mode-map
         :nm "t" nil
         :nm "T" nil

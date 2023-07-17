@@ -60,7 +60,7 @@
 )
 (map! :map jg-dired-mode-map ;; change
       :desc "Delete"              :n "D" #'+jg-dired-async-trash
-      :desc "Touch"               :n "T" #'+jg-dired-touch
+      :desc "Touch"               :n "=" #'+jg-dired-touch
 
       :prefix ("c" . "Change")
       :desc "Replace grep"        :n "G" #'dired-do-find-regexp-and-replace

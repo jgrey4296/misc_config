@@ -1,0 +1,13 @@
+Emacs Lisp Keymap Hierarchy:
+Overriding /overlay keymaps # Top
+Emulation mode              #      (emulation-mode-map-alists)
+Intercept                   # Evil (emulation-mode-map-alists -> evil-mode-map-alist)
+Local state                 # Evil (emulation-mode-map-alists -> evil-mode-map-alist -> evil-local-keymaps-alist)
+Minor-mode                  # Evil (emulation-mode-map-alists -> evil-mode-map-alist)
+Auxiliary                   # Evil (emulation-mode-map-alists -> evil-mode-map-alist)
+Overriding                  # Evil (emulation-mode-map-alists -> evil-mode-map-alist)
+Global state                # Evil (emulation-mode-map-alists -> evil-mode-map-alist)
+Other states                # Evil (emulation-mode-map-alists -> evil-mode-map-alist -> evil-global-keymaps-alist)
+Minor mode                  #
+Local (`local-set-key')     #
+Global (`global-set-key')   # Bottoms

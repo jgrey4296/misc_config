@@ -6,7 +6,8 @@
       "v"    #'describe-variable
       "l"    #'view-lossage
       "t"    #'list-timers
-      "m"    (cmd! (message "Major Mode: %s" major-mode))
+      :desc "Major Mode match" "m"    (cmd! (message "Major Mode: %s" major-mode))
+      :desc "Memory Report"    "M"    #'memory-report
       "!"   #'doom-debug-mode
       "DEL" #'free-keys
       )
@@ -21,11 +22,9 @@
 ;;-- docs
 (map! :map jg-help-map
       :prefix ("d" . "docs")
-      :desc "Interactive Code Reminder"   "i" #'+jg-help-evil-interactive-reminder
-      :desc "Regexp Syntax"               "r" (cmd! (info "(elisp) Syntax of Regexps"))
-      :desc "Man"                         "m"   #'+jg-help-man ;; #'man  ;; #'+man-or-woman
+      :desc "Man"                         "m" #'+jg-help-man ;; #'man  ;; #'+man-or-woman
       :desc "Emacs Manual"                "e" #'info-emacs-manual
-      :desc "Emacs Manual Other Window"   "o"   #'info-other-window
+      :desc "Emacs Manual Other Window"   "o" #'info-other-window
                                           "a" #'doom/help-autodefs
                                           "t" #'doom/toggle-profiler
                                           "V" #'doom/help-custom-variable
@@ -53,7 +52,7 @@
       "f" #'describe-face
       "L" #'describe-language-environment
       "l" #'load-theme
-      "M" #'doom/describe-active-minor-mode
+      :desc "Active Minor Modes" "M" #'doom/describe-active-minor-mode
       "r" #'+jg-help-reset-major-mode
       )
 ;;-- end ui

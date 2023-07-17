@@ -16,3 +16,4 @@
 (package! transient)
 (package! visual-fill-column)
 (package! whitespace)
+(package! transient-macros :recipe `(:local-repo ,(expand-file-name "packages/misc/transient-macros" doom-user-dir)))

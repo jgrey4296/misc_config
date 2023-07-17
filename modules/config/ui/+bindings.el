@@ -17,6 +17,7 @@
       )
 
 
+
 ;;-- highlight
 (map! :map jg-binding-vision-map
       :desc "Delete Change Highlight"      "c" #'highlight-changes-remove-highlight
@@ -70,7 +71,9 @@
 
 ;;-- transient
 ;; transient-map transient-base-map transient-edit-map
+(map! :map transient-toggles-minor-mode-map
+      :n "T" #'jg-toggle-main
+      )
 
-
-
+(evil-make-overriding-map transient-toggles-minor-mode-map)
 ;;-- end transient

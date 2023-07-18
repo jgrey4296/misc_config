@@ -39,7 +39,7 @@ grows larger."
     (apply fn args)))
 
 ;; Don't try to resize popup windows
-(advice-add #'balance-windows :around #'+popup-save-a)
+(advice-add 'balance-windows :around #'+popup-save-a)
 
 (defun +popup/quit-window ()
   "The regular `quit-window' sometimes kills the popup buffer and switches to a
@@ -143,11 +143,11 @@ the command buffer."
       (setq evil-command-window-current-buffer nil)))
 
   ;; Don't mess with popups
-  (advice-add #'+evil--window-swap           :around #'+popup-save-a)
-  (advice-add #'evil-window-move-very-bottom :around #'+popup-save-a)
-  (advice-add #'evil-window-move-very-top    :around #'+popup-save-a)
-  (advice-add #'evil-window-move-far-left    :around #'+popup-save-a)
-  (advice-add #'evil-window-move-far-right   :around #'+popup-save-a))
+  (advice-add '+evil--window-swap           :around #'+popup-save-a)
+  (advice-add 'evil-window-move-very-bottom :around #'+popup-save-a)
+  (advice-add 'evil-window-move-very-top    :around #'+popup-save-a)
+  (advice-add 'evil-window-move-far-left    :around #'+popup-save-a)
+  (advice-add 'evil-window-move-far-right   :around #'+popup-save-a))
 
 
 ;;;###package help-mode
@@ -380,8 +380,8 @@ Ugh, such an ugly hack."
 ;;;###package wgrep
 (progn
   ;; close the popup after you're done with a wgrep buffer
-  (advice-add #'wgrep-abort-changes :after #'+popup-close-a)
-  (advice-add #'wgrep-finish-edit :after #'+popup-close-a))
+  (advice-add 'wgrep-abort-changes :after #'+popup-close-a)
+  (advice-add 'wgrep-finish-edit :after #'+popup-close-a))
 
 
 ;;;###package which-key

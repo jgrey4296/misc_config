@@ -5,7 +5,7 @@
 
 
 (use-package! idris-mode
-  :defer t
+  :commands idris-mode
   :config
   (add-hook 'idris-mode-hook #'turn-on-idris-simple-indent)
   )

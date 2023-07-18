@@ -3,7 +3,7 @@
 (doom-log "Loading Python Envs")
 
 (use-package! pythonic
-  :defer t
+  :commands (pythonic-activate pythonic-deactivate)
   :init
   (spec-handling-add! python-env
                       `(pythonic
@@ -14,12 +14,12 @@
                                 )
                         )
                       )
-  (advice-add #'pythonic-activate :after-while #'+modeline-update-env-in-all-windows-h)
-  (advice-add #'pythonic-deactivate :after #'+modeline-clear-env-in-all-windows-h)
+  (advice-add 'pythonic-activate :after-while #'+modeline-update-env-in-all-windows-h)
+  (advice-add 'pythonic-deactivate :after #'+modeline-clear-env-in-all-windows-h)
   )
 
 (use-package! pipenv
-  :commands pipenv-project-p
+  :commands (pipenv-project-p pipenv-activate pipenv-deactivate)
   :init
   (setq pipenv-with-projectile nil)
   (spec-handling-add! python-env
@@ -53,11 +53,10 @@
   )
 
 (use-package! pyvenv
-  :after python
+  :commands (pyvenv-activate pyvenv-deactivate)
   :init
-  (when (modulep! :ui modeline)
-    (add-hook 'pyvenv-post-activate-hooks #'+modeline-update-env-in-all-windows-h)
-    (add-hook 'pyvenv-pre-deactivate-hooks #'+modeline-clear-env-in-all-windows-h))
+  (add-hook 'pyvenv-post-activate-hooks #'+modeline-update-env-in-all-windows-h)
+  (add-hook 'pyvenv-pre-deactivate-hooks #'+modeline-clear-env-in-all-windows-h)
   (spec-handling-add! python-env
                       `(venv
                         (:setup venv
@@ -73,8 +72,7 @@
   )
 
 (use-package! conda
-  :when (modulep! +conda)
-  :after python
+  :commands (conda-env-activate conda-env-deactivate conda-env-read-name)
   :init
   (spec-handling-add! python-env
                       `(conda_el
@@ -116,7 +114,7 @@
 )
 
 (use-package! poetry
-  :after python
+  :commands (poetry-venv-workon poetry-venv-deactivate poetry-update poetry-add)
   :init
   (spec-handling-add! python-env
                       `(poetry
@@ -131,20 +129,12 @@
   )
 
 (use-package! pip-requirements
-  :defer t
+  :commands pip-requirements-mode
   :config
   ;; HACK `pip-requirements-mode' performs a sudden HTTP request to
   ;;   https://pypi.org/simple, which causes unexpected hangs (see #5998). This
   ;;   advice defers this behavior until the first time completion is invoked.
   ;; REVIEW More sensible behavior should be PRed upstream.
-
-(defadvice! +python--init-completion-a (&rest args)
-    "Call `pip-requirements-fetch-packages' first time completion is invoked."
-    :before #'pip-requirements-complete-at-point
-    (unless pip-packages (pip-requirements-fetch-packages)))
-
-(defadvice! +python--inhibit-pip-requirements-fetch-packages-a (fn &rest args)
-    "No-op `pip-requirements-fetch-packages', which can be expensive."
-    :around #'pip-requirements-mode
-    (letf! ((#'pip-requirements-fetch-packages #'ignore))
-      (apply fn args))))
+  (advice-add 'pip-requirements-complete-at-point :before #'+python--init-completion-a)
+  (advice-add 'pip-requirements-mode              :around #'+python--inhibit-pip-requirements-fetch-packages-a)
+)

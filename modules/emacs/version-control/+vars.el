@@ -71,6 +71,7 @@ Only has an effect in GUI Emacs.")
 (spec-handling-add! popup
                     '(magit
                      ("^\\(?:\\*magit\\|magit:\\| \\*transient\\*\\)" :ignore t :priority 200)
+                     ("^\\*git-gutter" :select nil :size '+popup-shrink-to-fit)
                      )
                     '(forge
                      ( "^\\*?[0-9]+:\\(?:new-\\|[0-9]+$\\)" :size 0.45 :modeline t :ttl 0 :quit nil)

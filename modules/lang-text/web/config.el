@@ -1,12 +1,12 @@
 ;;; lang/web/config.el -*- lexical-binding: t; -*-
 
-(defer-load! "+vars")
+(load! "+vars")
 
 (defer-load! jg-bindings-total "+bindings")
 
 (use-package! web-mode
+  :commands web-mode
   :config
-
   (setq web-mode-enable-html-entities-fontification t
         web-mode-auto-close-style 1)
 
@@ -46,6 +46,7 @@
 
 (use-package! emmet-mode
   :preface (defvar emmet-mode-keymap (make-sparse-keymap))
+  :commands emmet-mode
   :hook (css-mode web-mode html-mode haml-mode nxml-mode rjsx-mode reason-mode)
   :config
   (when (require 'yasnippet nil t)
@@ -59,8 +60,11 @@
   )
 
 (use-package! css-mode
+  :commands (css-mode stylus-mode)
   :config
-  (add-hook! 'css-mode-hook #'hs-minor-mode #'smartparens-mode)
+  (add-hook! 'css-mode-hook
+             #'hs-minor-mode
+             #'smartparens-mode)
   (setq-hook! 'css-mode-hook
     ;; Correctly continue /* and // comments on newline-and-indent
     comment-line-break-function #'+css/comment-indent-new-line
@@ -70,23 +74,23 @@
     adaptive-fill-first-line-regexp "\\'[ \t]*\\(?:\\* *\\)?\\'"
     )
 
-  (add-hook! '(css-mode-hook sass-mode-hook stylus-mode-hook)
-             #'rainbow-mode)
+  (add-hook! '(css-mode-hook  stylus-mode-hook)
+             #'rainbow-mode
+             #'tree-sitter!
+             )
   )
 
 (use-package! counsel-css
   :after css-mode
-  :when (modulep! :completion ivy)
   :hook (css-mode . counsel-css-imenu-setup)
   )
 
-(use-package! helm-css-scss
-  :when (modulep! :completion helm)
-  :defer t
-  )
-
 (use-package! sass-mode
-  :defer t
+  :commands sass-mode
+  :config
+  (add-hook! 'sass-mode-hook
+             #'rainbow-mode
+             )
   )
 
 (def-project-mode! +web-pelican-mode
@@ -96,9 +100,4 @@
   (when (derived-mode-p 'web-mode)
     ;; use web-mode-engines
     (web-mode-set-engine "django"))
-  )
-
-
-(when (modulep! +tree-sitter)
-  (add-hook! 'css-mode-local-vars-hook :append #'tree-sitter!)
   )

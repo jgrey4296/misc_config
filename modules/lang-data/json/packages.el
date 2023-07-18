@@ -3,4 +3,5 @@
 
 (package! json-mode)
 (package! json-snatcher)
-(when (modulep! :completion ivy) (package! counsel-jq))
+(package! counsel-jq)
+(package! jq-mode)

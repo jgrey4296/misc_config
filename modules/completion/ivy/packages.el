@@ -12,7 +12,6 @@
 (package! counsel-projectile)
 (package! wgrep)
 
-(package! ivy-prescient)
 (package! flx)
 
 (package! ivy-posframe)

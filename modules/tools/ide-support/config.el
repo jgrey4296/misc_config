@@ -81,7 +81,7 @@
 ;;-- eglot
 
 (use-package! eglot
-  :commands eglot eglot-ensure
+  :commands (eglot eglot-ensure)
   :hook (eglot-managed-mode . +lsp-optimization-mode)
   :init
   (spec-handling-add! python-env
@@ -143,10 +143,10 @@
 
 ;;-- semantic
 
-(use-package! cedet)
+;; (use-package! cedet)
 
 (use-package! semantic
-  :defer t
+  :commands semantic-mode
   :init
   (spec-handling-add! python-env
                       `(semantic

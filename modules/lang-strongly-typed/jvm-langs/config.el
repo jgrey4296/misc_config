@@ -28,19 +28,21 @@
              #'+java-android-mode-maybe-h)
   )
 
-(use-package! groovy-mode :defer t)
+(use-package! groovy-mode
+  :commands groovy-mode
+  )
 
 (use-package! kotlin-mode
   :commands kotlin-mode
 )
 
 (use-package! flycheck-kotlin
-  :when (modulep! :checkers syntax)
+  :after kotlin-mode
   :hook (kotlin-mode . flycheck-kotlin-setup)
   )
 
 (use-package! scala-mode
-  :defer t
+  :commands scala-mode
   :config
   (setq-hook! 'scala-mode-hook
     comment-line-break-function #'+scala-comment-indent-new-line-fn

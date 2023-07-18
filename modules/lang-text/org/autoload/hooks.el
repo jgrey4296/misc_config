@@ -295,7 +295,7 @@ Also adds support for a `:sync' parameter to override `:async'."
                  (assq :async (nth 2 info))))
       t))
 
-  (advice-add #'org-babel-do-load-languages :override #'ignore))
+  (advice-add 'org-babel-do-load-languages :override #'ignore))
 
 ;;;###autoload
 (defun +org-init-capture-defaults-h ()
@@ -671,7 +671,7 @@ mutating hooks on exported output, like formatters."
   (add-to-list 'org-file-apps '(remote . emacs))
 
   ;; Open help:* links with helpful-* instead of describe-*
-  (advice-add #'org-link--open-help :around #'doom-use-helpful-a)
+  (advice-add 'org-link--open-help :around #'doom-use-helpful-a)
 
   ;; Unlike the stock showNlevels options, these will also show the parents of
   ;; the target level, recursively.
@@ -838,3 +838,11 @@ between the two."
 (defun +org-init-smartparens-h ()
   ;; Disable the slow defaults
   (provide 'smartparens-org))
+
+;;;###autoload
+(defun +org-init-gifs-h ()
+      (remove-hook 'post-command-hook #'+org-play-gif-at-point-h t)
+      (remove-hook 'post-command-hook #'+org-play-all-gifs-h t)
+      (pcase +org-startup-with-animated-gifs
+        (`at-point (add-hook 'post-command-hook #'+org-play-gif-at-point-h nil t))
+        (`t (add-hook 'post-command-hook #'+org-play-all-gifs-h nil t))))

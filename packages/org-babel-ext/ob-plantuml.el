@@ -1,5 +1,6 @@
 ;;; ob-plantuml.el -*- lexical-binding: t; -*-
 
+;;;###autoload
 (defun jg-ob-plantuml-execute (body params)
   "Execute a block of plantuml code with org-babel.
 This function is called by `org-babel-execute-src-block'."
@@ -84,3 +85,5 @@ This function is called by `org-babel-execute-src-block'."
     (insert-file-contents (jg-ob-plantuml-render body params in-file out-file))
     (buffer-string))
   )
+
+(provide 'ob-plantuml)

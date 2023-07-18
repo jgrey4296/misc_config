@@ -20,14 +20,20 @@
 ;;
 ;;; Code:
 
-(defer-load! "+vars")
+(load! "+vars")
 
 (defer-load! (jg-bindings-total jg-dired nxml-mode) "+bindings")
 
-(use-package! mhtml-mode :defer t)
+(use-package! mhtml-mode
+  :commands mhtml-mode
+  :config
+  (add-hook! (mhtml-mode-hook html-mode-hook)
+             #'tree-sitter!
+             )
+  )
 
 (use-package! nxml-mode
-  :defer t
+  :commands nxml-mode
   :config
   (setq nxml-slash-auto-complete-flag t
         nxml-auto-insert-xml-declaration-flag t)
@@ -35,11 +41,4 @@
   (add-hook! 'nxml-mode-hook 'hs-minor-mode)
   )
 
-(when (modulep! +lsp)
-  (add-hook! '(nxml-mode-local-vars-hook html-mode-local-vars-hook) :append #'lsp!))
-
-(when (modulep! +tree-sitter)
-  (add-hook! '(html-mode-local-vars-hook
-               mhtml-mode-local-vars-hook)
-               :append #'tree-sitter!))
 ;;; config.el ends here

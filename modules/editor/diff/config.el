@@ -32,7 +32,7 @@
   :hook (find-file    . diff-hl-mode)
   :hook (vc-dir-mode  . diff-hl-dir-mode)
   :hook (dired-mode   . diff-hl-dired-mode)
-  :hook (diff-hl-mode . diff-hl-flydiff-mode)
+  ;; :hook (diff-hl-mode . diff-hl-flydiff-mode)
   :commands diff-hl-stage-current-hunk diff-hl-revert-hunk diff-hl-next-hunk diff-hl-previous-hunk
   :config
   ;; PERF: reduce load on remote

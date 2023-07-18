@@ -1,4 +1,4 @@
-;;; editor/word-wrap/autoload.el -*- lexical-binding: t; -*-
+;; editor/word-wrap/autoload.el -*- lexical-binding: t; -*-
 
 (defvar +word-wrap--major-mode-is-visual nil)
 (defvar +word-wrap--major-mode-is-text nil)
@@ -68,7 +68,7 @@ wrapped at `fill-column' by configuring `+word-wrap-fill-style'."
           (setq-local +word-wrap--major-mode-indent-var
                       (caddr (dtrt-indent--search-hook-mapping major-mode)))
 
-          (advice-add #'adaptive-wrap-fill-context-prefix :around #'+word-wrap--adjust-extra-indent-a))
+          (advice-add 'adaptive-wrap-fill-context-prefix :around #'+word-wrap--adjust-extra-indent-a))
 
         (when +word-wrap--enable-adaptive-wrap-mode
           (adaptive-wrap-prefix-mode +1))
@@ -81,7 +81,7 @@ wrapped at `fill-column' by configuring `+word-wrap-fill-style'."
 
     ;; disable +word-wrap-mode
     (unless +word-wrap--major-mode-is-visual
-      (advice-remove #'adaptive-wrap-fill-context-prefix #'+word-wrap--adjust-extra-indent-a))
+      (advice-remove 'adaptive-wrap-fill-context-prefix #'+word-wrap--adjust-extra-indent-a))
 
     (when +word-wrap--enable-adaptive-wrap-mode
       (adaptive-wrap-prefix-mode -1))

@@ -57,4 +57,20 @@
                       )
                     `(erlang-mode :start ,#'+erlang/open-repl)
                     )
+(spec-handling-add! ligatures
+                    '(elixir-mode
+                      ;; Functional
+                      :def "def"
+                      :lambda "fn"
+                      ;; :src_block "do"
+                      ;; :src_block_end "end"
+                      ;; Flow
+                      :not "!"
+                      :in "in" :not-in "not in"
+                      :and "and" :or "or"
+                      :for "for"
+                      :return "return" :yield "use"
+                      )
+                    )
+
 ;;-- end specs

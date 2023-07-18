@@ -4,7 +4,7 @@
 (defer-load! jg-bindings-total "+bindings")
 
 (use-package! csharp-mode
-  :defer t
+  :commands csharp-mode
   :hook (csharp-mode . rainbow-delimiters-mode)
   :config
 
@@ -24,15 +24,14 @@ or terminating simple string."
       (apply fn args))))
 
 (use-package! csharp-tree-sitter
-  :when (modulep! +tree-sitter)
-  :defer t
+  :after csharp-mode
   :init
   (add-hook 'csharp-mode-local-vars-hook #'tree-sitter! 'append)
   (if (fboundp #'csharp-tree-sitter-mode)
       (add-to-list 'auto-mode-alist '("\\.cs\\'" . csharp-tree-sitter-mode))))
 
 (use-package! fsharp-mode
-  :defer t
+  :commands fsharp-mode
   :config
   (when (executable-find "dotnet")
     (setq inferior-fsharp-program "dotnet fsi --readline-"))
@@ -44,14 +43,14 @@ or terminating simple string."
 
 ;; Unity shaders
 (use-package! shader-mode
-  :when (modulep! +unity)
+  :after csharp-mode
   :config
   (def-project-mode! +csharp-unity-mode
     :modes '(csharp-mode shader-mode)
     :files (and "Assets" "Library/MonoManager.asset" "Library/ScriptMapper")))
 
 (use-package! sharper
-  :when (modulep! +dotnet)
+  :after chsarp-mode
   :general ("C-c d" #'sharper-main-transient)
   :config
   (map! (:map sharper--solution-management-mode-map
@@ -67,4 +66,6 @@ or terminating simple string."
          :nv "RET" #'sharper--nuget-search-install))
   )
 
-(use-package! sln-mode :defer t)
+(use-package! sln-mode
+  :after csharp-mode
+  )

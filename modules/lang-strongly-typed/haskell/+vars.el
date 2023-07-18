@@ -4,6 +4,16 @@
       haskell-process-auto-import-loaded-modules t
       haskell-process-show-overlays (not (modulep! :checkers syntax))) ; redundant with flycheck
 
+(after! smartparens-haskell
+  (sp-with-modes '(haskell-mode haskell-interactive-mode)
+    (sp-local-pair "{-" "-}" :actions :rem)
+    (sp-local-pair "{-#" "#-}" :actions :rem)
+    (sp-local-pair "{-@" "@-}" :actions :rem)
+    (sp-local-pair "{-" "-")
+    (sp-local-pair "{-#" "#-")
+    (sp-local-pair "{-@" "@-")))
+
+
 (spec-handling-add! projects
                     '(haskell-stack ("stack.yaml") :project-file "stack.yaml" :compilation-dir nil :configure nil :compile "stack build" :test "stack build --test" :install nil :package nil :run nil :test-suffix "Spec")
                     '(haskell-cabal projectile-cabal-project-p :project-file nil :compilation-dir nil :configure nil :compile "cabal build" :test "cabal test" :install nil :package nil :run "cabal run" :test-suffix "Spec")
@@ -49,13 +59,3 @@
                     `(haskell-cabal-mode :start ,#'+haskell/open-repl :persist t)
                     `(literate-haskell-mode :start ,#'+haskell/open-repl :persist t)
                     )
-
-
-(after! smartparens-haskell
-  (sp-with-modes '(haskell-mode haskell-interactive-mode)
-    (sp-local-pair "{-" "-}" :actions :rem)
-    (sp-local-pair "{-#" "#-}" :actions :rem)
-    (sp-local-pair "{-@" "@-}" :actions :rem)
-    (sp-local-pair "{-" "-")
-    (sp-local-pair "{-#" "#-")
-    (sp-local-pair "{-@" "@-")))

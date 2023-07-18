@@ -7,7 +7,7 @@
   (add-to-list 'tramp-remote-path "/run/current-system/sw/bin"))
 
 (use-package! nix-mode
-  :defer t
+  :commands nix-mode
   :interpreter ("\\(?:cached-\\)?nix-shell" . +nix-shell-init-mode)
   :init
   ;; Treat flake.lock files as json. Fall back to js-mode because it's faster

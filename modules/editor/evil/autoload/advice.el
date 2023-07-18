@@ -234,8 +234,7 @@ Adapted from https://github.com/emacs-evil/evil/issues/606"
 
 ;; Start help-with-tutorial in emacs state
 ;;;###autoload
-(advice-add #'help-with-tutorial :after (lambda (&rest _) (evil-emacs-state +1)))
-
+(advice-add 'help-with-tutorial :after (lambda (&rest _) (evil-emacs-state +1)))
 
 ;;;###autoload
 (defun +evil--dont-move-cursor-a (fn &rest args)
@@ -279,7 +278,6 @@ Adapted from https://github.com/emacs-evil/evil/issues/606"
 ;;;###autoload
 (advice-add 'helpful-key :before #'+evil--fix-helpful-key-in-evil-ex-a)
 
-
 ;; Make J (evil-join) remove comment delimiters when joining lines.
 ;;;###autoload
 (advice-add #'evil-join :around #'+evil-join-a)
@@ -299,16 +297,15 @@ Adapted from https://github.com/emacs-evil/evil/issues/606"
 ;;;###autoload
 (advice-add 'evil-fill-and-move :around #'+evil--no-squeeze-on-fill-a)
 
-
 ;; Make ESC (from normal mode) the universal escaper. See `doom-escape-hook'.
 ;;;###autoload
-(advice-add #'evil-force-normal-state :after #'+evil-escape-a)
+(advice-add 'evil-force-normal-state :after #'+evil-escape-a)
 
 ;; monkey patch `evil-ex-replace-special-filenames' to improve support for
 ;; file modifiers like %:p:h. This adds support for most of vim's modifiers,
 ;; and one custom one: %:P (expand to the project root).
 ;;;###autoload
-(advice-add #'evil-ex-replace-special-filenames :override #'+evil-replace-filename-modifiers-a)
+(advice-add 'evil-ex-replace-special-filenames :override #'+evil-replace-filename-modifiers-a)
 
 ;; make `try-expand-dabbrev' (from `hippie-expand') work in minibuffer
 ;;;###autoload
@@ -316,16 +313,15 @@ Adapted from https://github.com/emacs-evil/evil/issues/606"
 
 ;; Focus and recenter new splits
 ;;;###autoload
-(advice-add #'evil-window-split  :override #'+evil-window-split-a)
+(advice-add 'evil-window-split  :override #'+evil-window-split-a)
 ;;;###autoload
-(advice-add #'evil-window-vsplit :override #'+evil-window-vsplit-a)
+(advice-add 'evil-window-vsplit :override #'+evil-window-vsplit-a)
 
 ;; Make o/O continue comments (see `+evil-want-o/O-to-continue-comments' to disable)
 ;;;###autoload
-(advice-add #'evil-open-above :around #'+evil--insert-newline-above-and-respect-comments-a)
+(advice-add 'evil-open-above :around #'+evil--insert-newline-above-and-respect-comments-a)
 ;;;###autoload
-(advice-add #'evil-open-below :around #'+evil--insert-newline-below-and-respect-comments-a)
-
+(advice-add 'evil-open-below :around #'+evil--insert-newline-below-and-respect-comments-a)
 
 ;;;###autoload
 (defun +jg-evil-iedit-show-all ()
@@ -337,14 +333,12 @@ Adapted from https://github.com/emacs-evil/evil/issues/606"
 ;;;###autoload
 (advice-add 'iedit-show-all :override #'+jg-evil-iedit-show-all)
 
-
 ;;;###autoload
 (defun +jg-evil-marks-cleanup (marks)
   (list (-filter #'(lambda (x) (and x
                                     (marker-position x)
                                     (marker-buffer x)))
                  (car marks))))
-
 
 ;;;###autoload
 (advice-add 'counsel-mark--get-candidates :filter-args #'+jg-evil-marks-cleanup)

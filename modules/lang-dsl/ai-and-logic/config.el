@@ -20,9 +20,10 @@
   )
 
 (use-package! pasp-mode
+  :commands pasp-mode
   :after evil
   :init
-  (add-hook 'pasp-mode-hook (lambda ()
-                              (setq-local indent-line-function '+jg-logic-pasp-indent)))
-
+  (setq-hook! 'pasp-mode-hook
+    indent-line-function '+jg-logic-pasp-indent
+    )
   )

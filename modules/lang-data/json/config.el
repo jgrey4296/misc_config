@@ -3,17 +3,13 @@
 (defer-load! (jg-bindings-total json-mode) "+bindings")
 
 (use-package! json-mode
+  :commands json-mode
   :init
-  (when (modulep! +lsp)
-    (add-hook 'json-mode-local-vars-hook #'lsp! 'append))
-  (when (modulep! +tree-sitter)
-    (add-hook! '(json-mode-local-vars-hook
-                 jsonc-mode-local-vars-hook)
-               :append #'tree-sitter!))
+  (add-hook! '(json-mode-local-vars-hook
+               jsonc-mode-local-vars-hook)
+             :append #'tree-sitter!)
+
   :config
-  (spec-handling-add! electric
-                      '(json-mode :chars (?\n ?: ?{ ?}))
-                      )
   (add-hook! 'json-mode-hook 'hs-minor-mode)
   )
 
@@ -21,3 +17,7 @@
   :when (modulep! :completion ivy)
   :defer t
 )
+
+(use-package! jq-mode
+  :after json-mode
+  )

@@ -4,7 +4,7 @@
 (defer-load! jg-bindings-total "+bindings")
 
 (use-package! restclient
-  :defer t
+  :commands restclient-mode
   ;; line numbers aren't enabled by default in fundamental-mode-derived modes
   :hook (restclient-mode . display-line-numbers-mode)
   :config
@@ -23,15 +23,9 @@ certs, rather than reject them silently."
  )
 
 (use-package! company-restclient
-  :defer t
   :after restclient
-  :config
   )
 
 (use-package! restclient-jq
-  :defer t
-  :after restclient)
-
-(use-package! jq-mode
-  :defer t
-  :after restclient-jq)
+  :after restclient
+  )

@@ -225,11 +225,11 @@ Adapted from URL `https://www.reddit.com/r/emacs/comments/d7x7x8/finally_fixing_
 
 ;; Fixed indenter that intends plists sensibly.
 ;;;###autoload
-(advice-add #'calculate-lisp-indent :override #'+emacs-lisp--calculate-lisp-indent-a)
+(advice-add 'calculate-lisp-indent :override #'+emacs-lisp--calculate-lisp-indent-a)
 
 ;; Recenter window after following definition
 ;;;###autoload
-(advice-add #'elisp-def :after #'doom-recenter-a)
+(advice-add 'elisp-def :after #'doom-recenter-a)
 
 ;;;###autoload
 (defun +jg-lisp-add-elisp-demos (fn symbol)

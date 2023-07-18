@@ -258,6 +258,11 @@
 (spec-handling-add! yas-extra
                     '(node-mode node-mode)
                     )
+(when (executable-find "Microsoft.Python.LanguageServer")
+  (spec-handling-add! eglot
+                      '(python-mode "Microsoft.Python.LanguageServer")
+                      )
+  )
 ;;-- end specs
 
 ;;-- general insert

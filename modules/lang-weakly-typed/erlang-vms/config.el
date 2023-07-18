@@ -1,13 +1,12 @@
 ;;; lang/erlang/config.el -*- lexical-binding: t; -*-
 
-(defer-load! "+vars")
-
+(load! "+vars")
 (defer-load! jg-bindings-total "+bindings")
 (after! projectile
   (add-to-list 'projectile-project-root-files "mix.exs"))
 
 (use-package! erlang
-  :defer t
+  :commands erlang-mode
   :config
   (setq erlang-root-dir "/usr/local/opt/erlang"
         exec-path (cons "/usr/local/opt/erlang/bin" exec-path)
@@ -16,25 +15,12 @@
   )
 
 (use-package! elixir-mode
-  :defer t
+  :commands elixir-mode
   :init
   ;; Disable default smartparens config. There are too many pairs; we only want
   ;; a subset of them (defined below).
   (provide 'smartparens-elixir)
   :config
-  (set-ligatures! 'elixir-mode
-    ;; Functional
-    :def "def"
-    :lambda "fn"
-    ;; :src_block "do"
-    ;; :src_block_end "end"
-    ;; Flow
-    :not "!"
-    :in "in" :not-in "not in"
-    :and "and" :or "or"
-    :for "for"
-    :return "return" :yield "use")
-
   ;; ...and only complete the basics
   (sp-with-modes 'elixir-mode
     (sp-local-pair "do" "end"
@@ -54,19 +40,22 @@
   (after! highlight-numbers
     (puthash 'elixir-mode
              "\\_<-?[[:digit:]]+\\(?:_[[:digit:]]\\{3\\}\\)*\\_>"
-             highlight-numbers-modelist)))
+             highlight-numbers-modelist))
+  )
 
 (use-package! flycheck-credo
-  :when (modulep! :checkers syntax)
   :after elixir-mode
-  :config (flycheck-credo-setup))
+  :config
+  (flycheck-credo-setup)
+  )
 
 (use-package! alchemist
+  :after elixir-mode
   :hook (elixir-mode . alchemist-mode)
   )
 
 (use-package! alchemist-company
-  :when (modulep! :completion company)
+  :after elixir-mode
   :commands alchemist-company
   :config
   ;; Alchemist doesn't use hook symbols to add these backends, so we have to use
@@ -76,5 +65,6 @@
     (remove-hook 'alchemist-iex-mode-hook fn)))
 
 (use-package! exunit
+  :after elixir-mode
   :hook (elixir-mode . exunit-mode)
   )

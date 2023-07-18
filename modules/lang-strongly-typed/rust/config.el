@@ -3,8 +3,12 @@
 (defer-load! "+vars")
 (defer-load! jg-bindings-total "+bindings")
 
+(use-package! rust-mode
+  :commands rust-mode
+  )
+
 (use-package! rustic
-  :defer t
+  :commands rustic-mode
   :preface
   (after! rustic-lsp
     (remove-hook 'rustic-mode-hook 'rustic-setup-lsp))
@@ -35,5 +39,4 @@
   ;; (setq-hook! 'rust-mode-hook)
 
   ;; (add-hook 'rustic-mode-local-vars-hook #'rustic-setup-lsp 'append)
-  ;; (add-hook 'rustic-mode-local-vars-hook #'tree-sitter! 'append)
 )

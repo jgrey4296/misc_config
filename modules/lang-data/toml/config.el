@@ -24,7 +24,7 @@
 (defer-load! jg-bindings-total "+bindings")
 
 (use-package! conf-mode
-  :defer t
+  :commands conf-mode conf-toml-mode
   :config
 
   (add-hook! 'conf-toml-mode-hook :depth 100

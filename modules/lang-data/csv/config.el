@@ -3,7 +3,8 @@
 (defer-load! (jg-bindings-total csv-mode) "+bindings")
 
 (use-package! csv-mode
-  :defer t)
+  :commands csv-mode
+)
 
 (spec-handling-add! auto-modes
                     '(csv

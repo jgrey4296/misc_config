@@ -3,8 +3,7 @@
 (doom-log "Loading Python LSP")
 
 (use-package! lsp-pyright
-  :after lsp-mode
-  :when (modulep! +lsp)
+  :after (python-mode lsp-mode)
   :preface
   (defun +jg-python-pyright-activate (state)
     (when (plist-get state :name)
@@ -41,8 +40,7 @@
 
 (use-package! lsp-python-ms
   :disabled
-  :unless (modulep! +pyright)
-  :after (python lsp-mode)
+  :after (python-mode lsp-mode)
   :init
   (add-to-list 'lsp-disabled-clients 'python-ms)
   :config
@@ -51,8 +49,7 @@
 
 (use-package! lsp-jedi
   :disabled
-  :ensure t
-  :after lsp-mode
+  :after (python-mode lsp-mode)
   :init
   (add-to-list 'lsp-disabled-clients 'jedi)
   )

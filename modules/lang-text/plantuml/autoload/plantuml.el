@@ -61,3 +61,6 @@ This function is called by `org-babel-execute-src-block'."
         (org-babel-eval cmd "")))
     (unless (cdr (assq :file params))
       out-file)))
+
+;;;###autoload
+(advice-add #'org-babel-execute:plantuml :override #'jg-ob-plantuml-execute '((depth . -100)))

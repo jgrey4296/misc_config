@@ -1,21 +1,16 @@
 ;;; lang/ruby/config.el -*- lexical-binding: t; -*-
 
 (load! "+vars")
+(defer-load! jg-bindings-total "+bindings")
 (after! projectile
   (add-to-list 'projectile-project-root-files "Gemfile"))
 
-;;
-;;; Packages
-
 (use-package! ruby-mode  ; built-in
-  :defer t
+  :commands ruby-mode
   ;; Other extensions are already registered in `auto-mode-alist' by `ruby-mode'
   :interpreter "j?ruby\\(?:[0-9.]+\\)"
   :config
   (setq ruby-insert-encoding-magic-comment nil)
-
-  (spec-handling-add! electric '(ruby-mode :words '("else" "end" "elsif")))
-  (spec-handling-add! eval `(ruby-mode :start ,#'inf-ruby))
 
   (add-hook 'ruby-mode-local-vars-hook #'tree-sitter!)
 
@@ -26,158 +21,74 @@
 
   ;; so class and module pairs work
   (setq-hook! 'ruby-mode-hook sp-max-pair-length 6)
+  )
 
-  (map! :localleader
-        :map ruby-mode-map
-        "[" #'ruby-toggle-block
-        "{" #'ruby-toggle-block))
+(use-package! yard-mode
+  :commands yard-mode
+  :hook ruby-mode
+  )
 
 (use-package! robe
-  :defer t
+  :commands robe-mode
+  :after yard-mode
   :init
-  (add-hook! 'ruby-mode-hook
-    (defun +ruby-init-robe-mode-maybe-h ()
-      "Start `robe-mode' if `lsp-mode' isn't active."
-      (or (bound-and-true-p lsp-mode)
-          (bound-and-true-p lsp--buffer-deferred)
-          (robe-mode +1))))
+  (add-hook! 'ruby-mode-hook #'robe-mode)
   :config
-  (spec-handling-add! eval `(ruby-mode :start ,#'robe-start))
-  (spec-handling-add! company
-                      '(ruby-mode (:mode . company-robe))
-                      )
-  (spec-handling-add! lookup-handler
-                      `(ruby-mode
-                        :definition ,#'robe-jump
-                        :documentation ,#'robe-doc)
-                      )
   (when (boundp 'read-process-output-max)
     ;; Robe can over saturate IPC, making interacting with it slow/clobbering
     ;; the GC, so increase the amount of data Emacs reads from it at a time.
     (setq-hook! '(robe-mode-hook inf-ruby-mode-hook)
-      read-process-output-max (* 1024 1024)))
-  (when (modulep! :editor evil)
-    (add-hook 'robe-mode-hook #'evil-normalize-keymaps))
-  (map! :localleader
-        :map robe-mode-map
-        "'"  #'robe-start
-        "h"  #'robe-doc
-        "R"  #'robe-rails-refresh
-        :prefix "s"
-        "d"  #'ruby-send-definition
-        "D"  #'ruby-send-definition-and-go
-        "r"  #'ruby-send-region
-        "R"  #'ruby-send-region-and-go
-        "i"  #'ruby-switch-to-inf))
-
-;; NOTE Must be loaded before `robe-mode'
-
-(use-package! yard-mode
-  :hook ruby-mode)
+      read-process-output-max (* 1024 1024))
+    )
+  (add-hook 'robe-mode-hook #'evil-normalize-keymaps)
+  )
 
 (use-package! rubocop
-  :defer t
+  :commands rubocop-mode
   :hook (ruby-mode . rubocop-mode)
-  :config
-  (map! :localleader
-        :map rubocop-mode-map
-        "f" #'rubocop-check-current-file
-        "F" #'rubocop-autocorrect-current-file
-        "p" #'rubocop-check-project
-        "P" #'rubocop-autocorrect-project))
+  )
 
-;;
 ;;; Package & Ruby version management
 
 (use-package! rake
-  :defer t
+  :after ruby-mode
   :init
   (setq rake-cache-file (concat doom-cache-dir "rake.cache"))
   (setq rake-completion-system 'default)
-  (map! :after ruby-mode
-        :localleader
-        :map ruby-mode-map
-        :prefix ("k" . "rake")
-        "k" #'rake
-        "r" #'rake-rerun
-        "R" #'rake-regenerate-cache
-        "f" #'rake-find-task))
+  )
 
 (use-package! bundler
-  :defer t
-  :init
-  (map! :after ruby-mode
-        :localleader
-        :map ruby-mode-map
-        :prefix ("b" . "bundle")
-        "c" #'bundle-check
-        "C" #'bundle-console
-        "i" #'bundle-install
-        "u" #'bundle-update
-        "e" #'bundle-exec
-        "o" #'bundle-open))
+  :after ruby-mode
+  )
 
 (use-package! chruby
-  :defer t
-  :when (modulep! +chruby)
+  :after ruby-mode
   :hook (ruby-mode . chruby-use-corresponding)
   :config
   (setq rspec-use-rvm nil
-        rspec-use-chruby t))
+        rspec-use-chruby t)
+  )
 
-(after! rbenv
-  (setq rspec-use-rvm nil)
-  (add-to-list 'exec-path (expand-file-name "shims" rbenv-installation-dir)))
-
-;;
 ;;; Testing frameworks
 
 (use-package! rspec-mode
-  :defer t
+  :commands rspec-mode
   :init
   (setq rspec-use-spring-when-possible nil)
   (when (modulep! :editor evil)
     (add-hook 'rspec-mode-hook #'evil-normalize-keymaps))
   :config
   (setq rspec-use-rvm (executable-find "rvm"))
-  (map! :localleader
-        :after jg-dired-bindings
-        :prefix "t"
-        :map (rspec-verifiable-mode-map rspec-dired-mode-map rspec-mode-map)
-        "a" #'rspec-verify-all
-        "r" #'rspec-rerun
-        :map (rspec-verifiable-mode-map rspec-mode-map)
-        "v" #'rspec-verify
-        "c" #'rspec-verify-continue
-        "l" #'rspec-run-last-failed
-        "T" #'rspec-toggle-spec-and-target
-        "t" #'rspec-toggle-spec-and-target-find-example
-        :map rspec-verifiable-mode-map
-        "f" #'rspec-verify-method
-        "m" #'rspec-verify-matching
-        :map rspec-mode-map
-        "s" #'rspec-verify-single
-        "e" #'rspec-toggle-example-pendingness
-        :map rspec-dired-mode-map
-        "v" #'rspec-dired-verify
-        "s" #'rspec-dired-verify-single))
+  )
 
 (use-package! minitest
-  :defer t
+  :commands minitest-mode
   :config
-  (when (modulep! :editor evil)
-    (add-hook 'minitest-mode-hook #'evil-normalize-keymaps))
-  (map! :localleader
-        :map minitest-mode-map
-        :prefix "t"
-        "r" #'minitest-rerun
-        "a" #'minitest-verify-all
-        "s" #'minitest-verify-single
-        "v" #'minitest-verify))
+  (add-hook 'minitest-mode-hook #'evil-normalize-keymaps)
+  )
 
 (use-package! projectile-rails
-  :defer t
-  :when (modulep! +rails)
+  :after ruby-mode
   :hook ((ruby-mode inf-ruby-mode projectile-rails-server-mode) . projectile-rails-mode)
   :hook (projectile-rails-server-mode . doom-mark-buffer-as-real-h)
   :hook (projectile-rails-mode . auto-insert-mode)
@@ -187,8 +98,5 @@
   (when (modulep! :lang web)
     (add-hook 'web-mode-hook #'projectile-rails-mode))
   :config
-  (when (modulep! :editor evil)
-    (add-hook 'projectile-rails-mode-hook #'evil-normalize-keymaps))
-  (map! :localleader
-        :map projectile-rails-mode-map
-        "r" #'projectile-rails-command-map))
+  (add-hook 'projectile-rails-mode-hook #'evil-normalize-keymaps)
+  )

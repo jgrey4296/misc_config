@@ -1,11 +1,11 @@
 ;;; lang/plantuml/config.el -*- lexical-binding: t; -*-
 
-(defer-load! "+vars")
+(load! "+vars")
 
 (defer-load! jg-bindings-total "+bindings")
 
 (use-package! plantuml-mode
-  :commands plantuml-download-jar
+  :commands (plantuml-mode plantuml-download-jar)
   :init
   (setq plantuml-jar-path (concat doom-data-dir "plantuml.jar")
         org-plantuml-jar-path plantuml-jar-path)
@@ -17,17 +17,13 @@
   )
 
 (use-package! flycheck-plantuml
-  :when (modulep! :checkers syntax)
   :after plantuml-mode
-  :config (flycheck-plantuml-setup))
+  :config
+  (flycheck-plantuml-setup)
+  )
 
-(after! ob-plantuml
-  ;; HACK Force ob-plantuml to use `plantuml-mode''s building mechanism, which
-  ;;      is more sophisticated.
-  ;; (advice-add #'org-babel-execute:plantuml
-  ;;             :override #'+plantuml-org-babel-execute:plantuml-a)
-  (advice-add #'org-babel-execute:plantuml
-              :override #'jg-ob-plantuml-execute
-              '((depth . -100)))
-  (add-to-list 'org-babel-default-header-args:plantuml
-               '(:cmdline . "-charset utf-8")))
+(use-package! ob-plantuml
+  :after ob
+  :config
+  (add-to-list 'org-babel-default-header-args:plantuml '(:cmdline . "-charset utf-8"))
+  )

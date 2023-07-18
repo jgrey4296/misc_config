@@ -2,9 +2,9 @@
 
 (doom-log "Config JG Python")
 
+(load! "+spec-defs")
 (defer-load! python-mode "+vars")
-(defer-load! "+spec-defs")
-(defer-load! "+envs" "+lsp"  "+testing"  "+cython")
+(defer-load! "+envs" "+lsp" "+cython")
 (defer-load! jg-bindings-total "+bindings")
 
 (use-package! python
@@ -13,13 +13,8 @@
   )
 
 (use-package! python-mode
+  :after python
   :init
-  (when (executable-find "Microsoft.Python.LanguageServer")
-    (spec-handling-add! eglot
-                        '(python-mode "Microsoft.Python.LanguageServer")
-                        )
-    )
-
   (setq py-complete-function #'(lambda () nil)
         py-do-completion-p nil ;; nil
         py-company-pycomplete-p nil
@@ -80,13 +75,33 @@
 )
 
 (use-package! company-anaconda
+  :after anaconda-mode
   :commands 'company-anaconda
   )
 
 (use-package! python-pytest
+  :commands python-pytest-dispatch
   :after python-mode
   :config
   (transient-append-suffix 'python-pytest-dispatch "-c" '("-f" "Logfile" +jg-python-test-logfile))
   (transient-append-suffix 'python-pytest-dispatch "D" '("q" "Quit" transient-quit-one))
   (transient-append-suffix 'python-pytest-dispatch "-x" '("--tc" "Trace Config" "--trace-config"))
   )
+
+;;-- import management
+(use-package! py-isort
+  :commands py-isort-buffer
+  :init
+  (map! :after python
+        :map python-mode-map
+        :localleader
+        (:prefix ("i" . "imports")
+          :desc "Sort imports"      "s" #'py-isort-buffer
+          :desc "Sort region"       "r" #'py-isort-region))
+  )
+
+(use-package! pyimport
+  :after python-mode
+  )
+
+;;-- end import management

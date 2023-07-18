@@ -60,7 +60,6 @@
 (when (modulep! +passwords) (package! org-passwords :recipe (:host github :repo "alfaromurillo/org-passwords.el")))
 
 (when (modulep! :editor evil +everywhere) (package! evil-org :recipe (:host github :repo "hlissner/evil-org-mode")))
-(when (modulep! :tools pdf) (package! org-pdftools))
 (when (modulep! :tools magit) (package! orgit))
 (when (modulep! :tools magit +forge) (package! orgit-forge))
 (when (modulep! +brain) (package! org-brain))

@@ -51,7 +51,7 @@
   ;;      byte-compiling this file (`use-package' blocks eagerly loads packages
   ;;      when compiled).
   (when noninteractive
-    (advice-add #'vterm-module-compile :override #'ignore)
+    (advice-add 'vterm-module-compile :override #'ignore)
     (provide 'vterm-module))
 
   :config

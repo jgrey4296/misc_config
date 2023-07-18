@@ -70,8 +70,7 @@
       :desc "Recompile"                             "C"   #'recompile
       :desc "Evaluate & replace region"             "E"   #'+eval:replace-region
       :desc "Evaluate buffer/region"                "e"   #'+eval/buffer-or-region
-      :desc "List errors"                           "x"   #'flymake-show-diagnostics-buffer
-      :desc "Recompile"                             "C"   #'recompile
+      :desc "recompile"                             "c"   #'recompile
       :desc "Send to repl"                          "s"   #'+jg-send-region-to-repl
       :desc "List errors"                           "x"   #'flycheck-list-errors
       (:prefix ("r" . "Repl"))

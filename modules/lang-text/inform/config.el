@@ -21,11 +21,11 @@
 ;;; Code:
 
 
-(defer-load! "+vars")
+(load! "+vars")
 (defer-load! jg-bindings-total "+bindings")
 
 (use-package! inform-mode
-  :defer t
+  :commands inform-mode
   )
 
 ;;; config.el ends here

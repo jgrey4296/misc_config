@@ -27,23 +27,6 @@ See `+emacs-lisp-non-package-mode' for details.")
   (pushnew! projectile-project-root-files "config.el")
   )
 
-;;-- emacs source paths
-(after! (ffap find-func)
-  (let ((paths-to-add (append
-                       (ffap-all-subdirs "/Volumes/documents/github/_libs/lisp/emacs-src/lisp/" 1)
-                       (ffap-all-subdirs (expand-file-name "straight/repos" doom-local-dir) 1)
-                       (ffap-all-subdirs (expand-file-name "modules" doom-user-dir))
-                       (ffap-all-subdirs (expand-file-name "packages" doom-user-dir))
-                       )))
-  (mapc (lambda (x)
-          (add-to-list 'find-library-source-path x))
-        paths-to-add)
-  )
-  (setq find-function-C-source-directory "/Volumes/documents/github/_libs/lisp/emacs-src/src")
-
-)
-;;-- end emacs source paths
-
 ;;-- specs
 (spec-handling-add! tree-sit-lang
                     '(emacs-lisp . elisp)
@@ -175,7 +158,7 @@ See `+emacs-lisp-non-package-mode' for details.")
                       ("Types" "^\\s-*(\\(cl-def\\(?:struct\\|type\\)\\|def\\(?:class\\|face\\|group\\|ine-\\(?:condition\\|error\\|widget\\)\\|package\\|struct\\|t\\(?:\\(?:hem\\|yp\\)e\\)\\)\\)\\s-+'?\\(\\(?:\\sw\\|\\s_\\|\\\\.\\)+\\)" 2)
                       )
                     )
-(spec-handling-add! eval :form 'override
+(spec-handling-add! eval
                     `(emacs-lisp-mode :start ,#'+emacs-lisp/open-repl)
                     `(lisp-interaction-mode :start ,#'+emacs-lisp/open-repl)
                     `(racket-mode :start ,#'+racket/open-repl)

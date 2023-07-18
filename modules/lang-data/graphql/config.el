@@ -3,6 +3,7 @@
 (load! "+vars")
 
 (use-package! graphql-mode
+  :commands graphql-mode
   :init
   (add-hook 'graphql-mode-hook #'rainbow-delimiters-mode)
   )

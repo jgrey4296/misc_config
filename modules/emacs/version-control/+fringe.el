@@ -30,8 +30,8 @@
     (if (eq type 'delete)
         'diff-hl-bmp-delete
       'diff-hl-bmp-middle))
-  (advice-add #'diff-hl-fringe-bmp-from-pos  :override #'+vc-gutter-type-at-pos-fn)
-  (advice-add #'diff-hl-fringe-bmp-from-type :override #'+vc-gutter-type-at-pos-fn)
+  (advice-add 'diff-hl-fringe-bmp-from-pos  :override #'+vc-gutter-type-at-pos-fn)
+  (advice-add 'diff-hl-fringe-bmp-from-type :override #'+vc-gutter-type-at-pos-fn)
   (setq diff-hl-draw-borders nil)
   (add-hook! 'diff-hl-mode-hook
     (defun +vc-gutter-fix-diff-hl-faces-h ()

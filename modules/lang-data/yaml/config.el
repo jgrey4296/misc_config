@@ -1,7 +1,7 @@
 ;;; lang/yaml/config.el -*- lexical-binding: t; -*-
 
 (use-package! yaml-mode
-  :defer t
+  :commands yaml-mode
   :init
   :config
   (setq-hook! 'yaml-mode-hook tab-width yaml-indent-offset)

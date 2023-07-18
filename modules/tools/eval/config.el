@@ -15,5 +15,6 @@
   )
 
 (use-package! eros
-  :when (modulep! +overlay)
-  :hook (emacs-lisp-mode . eros-mode))
+  :commands eros-mode
+  :hook (emacs-lisp-mode . eros-mode)
+  )

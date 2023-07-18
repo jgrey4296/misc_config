@@ -12,3 +12,7 @@ evil-mc           # https://github.com/gabesoft/evil-mc
 multiple-cursors  # https://github.com/magnars/multiple-cursors.el
 s                 # https://github.com/magnars/s.el
 transient         # https://magit.vc/manual/transient/
+Straight          # https://github.com/radian-software/straight.el
+Use-package       # https://github.com/jwiegley/use-package
+General           # https://github.com/noctuid/general.el
+Which-key         # https://github.com/justbur/emacs-which-key

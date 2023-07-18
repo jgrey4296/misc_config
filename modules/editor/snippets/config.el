@@ -21,7 +21,7 @@
   (add-to-list 'doom-debug-variables '(yas-verbosity . 3))
 
   ;; HACK In case `+snippets-dir' and `doom-snippets-dir' are the same, or duplicates exist in `yas-snippet-dirs'.
-  (advice-add #'yas-snippet-dirs :filter-return #'delete-dups)
+  (advice-add 'yas-snippet-dirs :filter-return #'delete-dups)
 
   ;; Remove GUI dropdown prompt (prefer ivy/helm)
   (delq! 'yas-dropdown-prompt yas-prompt-functions)
@@ -37,11 +37,11 @@
   (add-hook 'doom-escape-hook #'yas-abort-snippet)
 
   (after! smartparens ;; tell smartparens overlays not to interfere with yasnippet keybinds
-    (advice-add #'yas-expand :before #'sp-remove-active-pair-overlay))
+    (advice-add 'yas-expand :before #'sp-remove-active-pair-overlay))
 
   ;; (Evil only) fix off-by-one issue with line-wise visual selections in
   ;; `yas-insert-snippet', and switches to insert mode afterwards.
-  (advice-add #'yas-insert-snippet :around #'+snippets-expand-on-region-a)
+  (advice-add 'yas-insert-snippet :around #'+snippets-expand-on-region-a)
 
   ;; Show keybind hints in snippet header-line
   (add-hook 'snippet-mode-hook #'+snippets-show-hints-in-header-line-h)
@@ -60,20 +60,22 @@
   )
 
 (use-package! yasnippet-snippets
-  :defer t
+  :disabled t
   :after yasnippet
   :config
   ;; (push yasnippet-snippets-dir jg-snippet-dirs)
   )
 
 (use-package! doom-snippets
-  :defer t
+  :disabled t
   :after yasnippet
   :config
   ;; (push doom-snippets-dir jg-snippet-dirs)
   )
 
-(use-package! auto-yasnippet :defer t)
+(use-package! auto-yasnippet
+  :after yasnippet
+  )
 
 (use-package! academic-phrases :defer t)
 

@@ -21,6 +21,6 @@
 ;;; Code:
 
 (package! pdf-meta-mode :type 'local :recipe `(:local-repo ,(expand-file-name "packages/major-modes/pdf-meta-mode" doom-user-dir)))
-
+(package! org-pdftools)
 
 ;;; packages.el ends here

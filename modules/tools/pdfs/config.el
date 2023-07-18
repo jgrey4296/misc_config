@@ -30,4 +30,18 @@
   :commands (pdf-meta-mode pdf-meta-extract-info pdf-meta-split pdf-meta-join pdf-meta-attach pdf-meta-detach)
   )
 
+(use-package! org-pdftools
+  :commands org-pdftools-export
+  :after org
+  :init
+    (org-link-set-parameters (or (bound-and-true-p org-pdftools-link-prefix) "pdf")
+                             :follow   (+org--pdftools-link-handler #'org-pdftools-open)
+                             :complete (+org--pdftools-link-handler #'org-pdftools-complete-link)
+                             :store    (+org--pdftools-link-handler #'org-pdftools-store-link)
+                             :export   (+org--pdftools-link-handler #'org-pdftools-export))
+    (add-hook! 'org-open-link-functions #'+org-open-legacy-pdf-links-fn)
+
+    )
+
+
 ;;; config.el ends here

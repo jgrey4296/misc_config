@@ -35,9 +35,8 @@
                       )
 
 (spec-handling-add! eval
-                      `(lua-mode
-                        :start ,#'+lua/open-repl
-                        )
+                      `(lua-mode :start ,#'+lua/open-repl)
+                      `(fennel-mode :start ,#'fennel-repl)
                       )
 
 (spec-handling-add! eglot

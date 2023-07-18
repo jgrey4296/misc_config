@@ -22,15 +22,6 @@
       )
 (map! :map jg-binding-jump-map ;; gtags
       :prefix ("g" . "gtags")
-      :desc "Create Tags"           "c" #'helm-gtags-create-tags
-      :desc "Find Symbol"           "y" #'helm-gtags-find-symbol
-      :desc "Find Tag Other Window" "o" #'helm-gtags-find-tag-other-window
-      :desc "Find Tag"              "d" #'helm-gtags-find-tag
-      :desc "Find rtag"             "r" #'helm-gtags-find-rtag
-      :desc "Gtags Select"          "s" #'helm-gtags-select
-      :desc "Parse File"            "p" #'helm-gtags-parse-file
-      :desc "Tags in func"          "i" #'helm-gtags-tags-in-this-function
-      :desc "Update Tags"           "u" #'helm-gtags-update-tags
       )
 (map! :map jg-binding-jump-map ;; search
       :prefix ("/" . "Search")

@@ -1,10 +1,10 @@
 ;;; lang/markdown/config.el -*- lexical-binding: t; -*-
 
-(defer-load! "+vars")
+(load! "+vars")
 (defer-load! jg-bindings-total "+bindings")
 
 (use-package! markdown-mode
-  :defer t
+  :commands markdown-ode
   :init
 
   ;; A shorter alias for org src blocks than "markdown"
@@ -33,7 +33,7 @@
 )
 
 (use-package! evil-markdown
-  :when (modulep! :editor evil +everywhere)
+  :after markdown-mode
   :hook (markdown-mode . evil-markdown-mode)
   :config
   (add-hook 'evil-markdown-mode-hook #'evil-normalize-keymaps)

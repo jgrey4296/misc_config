@@ -1,4 +1,3 @@
 ;; -*- mode: emacs-lisp; lexical-binding: t; -*-
 
-(after! jg-bindings-total
-  (load! "+keybindings"))
+(defer-load! jg-bindings-total "+bindings")

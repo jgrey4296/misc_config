@@ -49,3 +49,14 @@ It's platform specific in that it uses the platform's native path separator."
 
 ;;;###autoload
 (advice-add 'conda--get-path-prefix :override #'+jg-python-conda-get-path-prefix)
+
+;;;###autoload
+(defun +python--init-completion-a (&rest args)
+    "Call `pip-requirements-fetch-packages' first time completion is invoked."
+    (unless pip-packages (pip-requirements-fetch-packages)))
+
+;;;###autoload
+(defun +python--inhibit-pip-requirements-fetch-packages-a (fn &rest args)
+    "No-op `pip-requirements-fetch-packages', which can be expensive."
+    (letf! ((#'pip-requirements-fetch-packages #'ignore))
+      (apply fn args))))

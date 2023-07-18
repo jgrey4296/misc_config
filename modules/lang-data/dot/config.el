@@ -27,7 +27,7 @@
 
 
 (use-package! graphviz-dot-mode
-  :defer t
+  :commands graphviz-dot-mode
   :config
   (after! org
     (push '("dot" . graphviz-dot) org-src-lang-modes))

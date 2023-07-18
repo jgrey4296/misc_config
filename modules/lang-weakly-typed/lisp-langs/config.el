@@ -2,9 +2,12 @@
 
 (load! "+vars")
 (defer-load! jg-bindings-total "+bindings")
+(add-hook! 'doom-first-file-hook #'+jg-lisp-setup-library-source)
+
 
 ;; `elisp-mode' is loaded at startup. In order to lazy load its config we need to pretend it isn't loaded
 (defer-feature! elisp-mode emacs-lisp-mode)
+
 
 (use-package! elisp-mode
   :interpreter ("doomscript" . emacs-lisp-mode)
@@ -63,6 +66,7 @@
   )
 
 (use-package! racket-mode
+  :commands (racket-mode)
   :config
   (add-hook! 'racket-mode-hook
              #'rainbow-delimiters-mode
@@ -114,7 +118,6 @@
   )
 
 (use-package! flycheck-cask
-  :when (modulep! :checkers syntax)
   :defer t
   :init
   (add-hook! 'emacs-lisp-mode-hook
@@ -123,7 +126,6 @@
   )
 
 (use-package! flycheck-package
-  :when (modulep! :checkers syntax)
   :after flycheck
   :config (flycheck-package-setup))
 
@@ -131,10 +133,10 @@
   ;; adds example code in help buffers
   :defer t
   :init
-  (advice-add #'describe-function-1 :after #'elisp-demos-advice-describe-function-1)
-  (advice-add #'helpful-update :after #'elisp-demos-advice-helpful-update)
+  (advice-add 'describe-function-1 :after #'elisp-demos-advice-describe-function-1)
+  (advice-add 'helpful-update      :after #'elisp-demos-advice-helpful-update)
   :config
-  (advice-add #'elisp-demos--search :around #'+jg-lisp-add-elisp-demos))
+  (advice-add 'elisp-demos--search :around #'+jg-lisp-add-elisp-demos))
 
 (use-package! buttercup
   :defer t
@@ -148,8 +150,6 @@
   (when (featurep 'evil)
     (add-hook 'buttercup-minor-mode-hook #'evil-normalize-keymaps))
   )
-
-(use-package! ffap)
 
 (use-package! find-func)
 

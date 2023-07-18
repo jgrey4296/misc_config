@@ -2,20 +2,20 @@
 
 (defer-load! "+vars")
 (defer-load! jg-bindings-total "+bindings")
-(defer! 240 ;; when idle for 4 minutes
-  (unless jg-bibtex-helm-candidates
-    (require 'helm)
-    (require 'helm-source)
-    (require 'helm-bibtex)
-    (+jg-bibtex-build-list)
-    (bibtex-completion-clear-cache)
-    (bibtex-completion-init)
-    ;; (mapcar #'+jg-bibtex-process-candidates (bibtex-completion-candidates))
-    )
-  )
+;; (defer! 240 ;; when idle for 4 minutes
+;;   (unless jg-bibtex-helm-candidates
+;;     (require 'helm)
+;;     (require 'helm-source)
+;;     (require 'helm-bibtex)
+;;     (+jg-bibtex-build-list)
+;;     (bibtex-completion-clear-cache)
+;;     (bibtex-completion-init)
+;;     ;; (mapcar #'+jg-bibtex-process-candidates (bibtex-completion-candidates))
+;;     )
+;;   )
 
 (use-package! bibtex
-  :defer t
+  :commands bibtex-mode
   :config
   (load! "dialect/+entries")
   (load! "dialect/+fields")
@@ -41,19 +41,17 @@
 
 (use-package! helm-bibtex
   :defer t
+  :after bibtex
 )
 
 (use-package! ivy-bibtex
-  :when (modulep! :completion ivy)
-  :defer t
+  :after bibtex
   :config
   (add-to-list 'ivy-re-builders-alist '(ivy-bibtex . ivy--regex-plus))
   )
 
 (use-package! bibtex-completion
-  :when (or (modulep! :completion ivy)
-            (modulep! :completion helm))
-  :defer t
+  :after bibtex
   )
 
 (use-package! org-ref
@@ -66,7 +64,7 @@
   )
 
 (use-package! oc
-  :defer t
+  :commands org-cite-insert
   :config
   (setq org-cite-global-bibliography
         (ensure-list

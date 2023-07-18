@@ -20,20 +20,13 @@
 ;;
 ;;; Code:
 
-(defer-load! "+vars")
-
+(load! "+vars")
 (defer-load! jg-bindings-total "+bindings")
 
 (after! projectile
   (add-to-list 'projectile-project-root-files "project.godot"))
 
 (use-package! gdscript-mode
-  :defer t
-  :config
-  (spec-handling-add! lookup-handler
-                      `(gdscript-mode
-                        :documentation ,#'gdscript-docs-browse-symbol-at-point
-                        )
-                      )
+  :commands gdscript-mode
   )
 ;;; config.el ends here

@@ -23,7 +23,7 @@
   )
 
 (use-package! ob-plantuml
-  :after ob
+  :after plantuml-mode
   :config
   (add-to-list 'org-babel-default-header-args:plantuml '(:cmdline . "-charset utf-8"))
   )

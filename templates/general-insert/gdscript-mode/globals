@@ -1,0 +1,142 @@
+Godot Global Scope:
+AudioServer
+CameraServer
+ClassDB
+DisplayServer
+Engine
+EngineDebugger
+GDExtensionManager
+Geometry2D
+Geometry3D
+GodotSharp
+IP
+Input
+InputMap
+Marshalls
+NavigationMeshGenerator
+NavigationServer2D
+NavigationServer3D
+OS
+Performance
+PhysicsServer2D
+PhysicsServer2DManager
+PhysicsServer3D
+PhysicsServer3DManager
+ProjectSettings
+RenderingServer
+ResourceLoader
+ResourceSaver
+ResourceUID
+TextServerManager
+ThemeDB
+Time
+TranslationServer
+WorkerThreadPool
+
+Variant abs                               ( Variant x )
+float absf                                ( float x )
+int absi                                  ( int x )
+float acos                                ( float x )
+float asin                                ( float x )
+float atan                                ( float x )
+float atan2                               ( float y, float x )
+float bezier_derivative                   ( float start, float control_1, float control_2, float end, float t )
+float bezier_interpolate                  ( float start, float control_1, float control_2, float end, float t )
+Variant bytes_to_var                      ( PackedByteArray bytes )
+Variant bytes_to_var_with_objects         ( PackedByteArray bytes )
+Variant ceil                              ( Variant x )
+float ceilf                               ( float x )
+int ceili                                 ( float x )
+Variant clamp                             ( Variant value, Variant min, Variant max )
+float clampf                              ( float value, float min, float max )
+int clampi                                ( int value, int min, int max )
+float cos                                 ( float angle_rad )
+float cosh                                ( float x )
+float cubic_interpolate                   ( float from, float to, float pre, float post, float weight )
+float cubic_interpolate_angle             ( float from, float to, float pre, float post, float weight )
+float cubic_interpolate_angle_in_time     ( float from, float to, float pre, float post, float weight, float to_t, float pre_t, float post_t )
+float cubic_interpolate_in_time           ( float from, float to, float pre, float post, float weight, float to_t, float pre_t, float post_t )
+float db_to_linear                        ( float db )
+float deg_to_rad                          ( float deg )
+float ease                                ( float x, float curve )
+String error_string                       ( int error )
+float exp                                 ( float x )
+Variant floor                             ( Variant x )
+float floorf                              ( float x )
+int floori                                ( float x )
+float fmod                                ( float x, float y )
+float fposmod                             ( float x, float y )
+int hash                                  ( Variant variable )
+Object instance_from_id                   ( int instance_id )
+float inverse_lerp                        ( float from, float to, float weight )
+bool is_equal_approx                      ( float a, float b )
+bool is_finite                            ( float x )
+bool is_inf                               ( float x )
+bool is_instance_id_valid                 ( int id )
+bool is_instance_valid                    ( Variant instance )
+bool is_nan                               ( float x )
+bool is_same                              ( Variant a, Variant b )
+bool is_zero_approx                       ( float x )
+Variant lerp                              ( Variant from, Variant to, Variant weight )
+float lerp_angle                          ( float from, float to, float weight )
+float lerpf                               ( float from, float to, float weight )
+float linear_to_db                        ( float lin )
+float log                                 ( float x )
+Variant max                               ( ... ) vararg
+float maxf                                ( float a, float b )
+int maxi                                  ( int a, int b )
+Variant min                               ( ... ) vararg
+float minf                                ( float a, float b )
+int mini                                  ( int a, int b )
+float move_toward                         ( float from, float to, float delta )
+int nearest_po2                           ( int value )
+float pingpong                            ( float value, float length )
+int posmod                                ( int x, int y )
+float pow                                 ( float base, float exp )
+void print                                ( ... ) vararg
+void print_rich                           ( ... ) vararg
+void print_verbose                        ( ... ) vararg
+void printerr                             ( ... ) vararg
+void printraw                             ( ... ) vararg
+void prints                               ( ... ) vararg
+void printt                               ( ... ) vararg
+void push_error                           ( ... ) vararg
+void push_warning                         ( ... ) vararg
+float rad_to_deg                          ( float rad )
+PackedInt64Array rand_from_seed           ( int seed )
+float randf                               ( )
+float randf_range                         ( float from, float to )
+float randfn                              ( float mean, float deviation )
+int randi                                 ( )
+int randi_range                           ( int from, int to )
+void randomize                            ( )
+float remap                               ( float value, float istart, float istop, float ostart, float ostop )
+int rid_allocate_id                       ( )
+RID rid_from_int64                        ( int base )
+Variant round                             ( Variant x )
+float roundf                              ( float x )
+int roundi                                ( float x )
+void seed                                 ( int base )
+Variant sign                              ( Variant x )
+float signf                               ( float x )
+int signi                                 ( int x )
+float sin                                 ( float angle_rad )
+float sinh                                ( float x )
+float smoothstep                          ( float from, float to, float x )
+Variant snapped                           ( Variant x, Variant step )
+float snappedf                            ( float x, float step )
+int snappedi                              ( float x, int step )
+float sqrt                                ( float x )
+int step_decimals                         ( float x )
+String str                                ( ... ) vararg
+Variant str_to_var                        ( String string )
+float tan                                 ( float angle_rad )
+float tanh                                ( float x )
+int typeof                                ( Variant variable )
+PackedByteArray var_to_bytes              ( Variant variable )
+PackedByteArray var_to_bytes_with_objects ( Variant variable )
+String var_to_str                         ( Variant variable )
+Variant weakref                           ( Variant obj )
+Variant wrap                              ( Variant value, Variant min, Variant max )
+float wrapf                               ( float value, float min, float max )
+int wrapi                                 ( int value, int min, int max )

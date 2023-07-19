@@ -1,0 +1,66 @@
+Plantuml Syntax:
+@startuml
+@enduml
+
+[*]                                                    # State diagram start and end
+-->                                                    # state diagram edge
+
+{} -> {} : {text}                                      # Links
+return {text}                                          # link return
+[<-                                                    # outgoing on left
+->]                                                    # outgoing on right
+[->                                                    # incoming on left
+<-]                                                    # incoming on right
+-[                                                     #{colour}]> # arrow
+->x                                                    # arrow
+->                                                     # arrow
+->>                                                    # arrow
+-\                                                     # arrow
+\\-                                                    # arrow
+//--                                                   # arrow
+->o                                                    # Arrow
+o\\--                                                  # Arrow
+<-> Arrow
+<->o                                                   # Arrow
+
+== {text} ==                                           # Separator
+...                                                    # delay no message
+... {text} ...                                         # delay message
+|||                                                    # space
+
+create {participant}                                   #
+participant {name} as {alias}                          #
+participant {} order {int}                             # order control
+actor                                                  # participants
+boundary                                               # participants
+control                                                # participants
+entity                                                 # participants
+databse                                                # participants
+collections                                            # participants
+queue                                                  # participants
+
+
+skinparam sequenceMessageAlign {left | right | center} # Text alignment
+skimparam responseMessageBelowArrow true               # Text
+skimparam ParticipantPAdding {int}                     #
+skinparam BoxPadding {int}                             #
+
+autonumber {num}                                       # message sequencing
+
+header {text}                                          #
+footer {text}                                          #
+title {text}                                           #
+newpage                                                #
+hide footbox                                           #
+
+alt                                                    # message grouping
+else                                                   # message grouping
+opt                                                    # message grouping
+loop                                                   # message grouping
+par                                                    # message grouping
+break                                                  # message grouping
+critical                                               # message grouping
+group {text}                                           # message grouping
+
+activate {name}                                        # lifeline
+destroy {name}                                         # lifeline

@@ -1,0 +1,33 @@
+Syntax Extion and Notation scopes in Coq:
+Notation              #
+only parsing          #
+only printing         #
+Infix                 #
+Reserved Notation     #
+Reserved Infix        #
+Enable Notation       #
+Disable Notation      #
+                      #
+Printing Notations    #
+Printing Raw Literals #
+Printing Parentheses  #
+                      #
+Print Notation        #
+Print Keywords        #
+Print Grammar         #
+Locate                #
+                      #
+Declare Custom Entry  #
+Declare Scope         #
+Open Scope            #
+Close Scope           #
+Delimit Scope         #
+Undelimit Scope       #
+Bind Scope            #
+                      #
+Print Visibility      #
+Print Scopes          #
+Print Scope           #
+                      #
+                      #
+Tactic Notation       #

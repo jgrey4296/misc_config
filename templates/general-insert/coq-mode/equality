@@ -1,0 +1,4 @@
+Coq Forms of Equality:
+Leibniz      # Inductive eq {A : Type} (x : A) : A -> Prop := eq_refl : eq x x.
+Setoid       # By Equivalence relation
+Definitional # By reduction rules

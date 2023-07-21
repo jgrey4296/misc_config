@@ -4,6 +4,8 @@ jgdebug "Setting Exports"
 export PATH
 export EDITOR
 export PROMPT_NUM
+export ANDROID_HOME
+export ANDROID_USER_HOME
 export JDK_HOME
 export JAVA_HOME
 export TERM
@@ -17,9 +19,6 @@ export JACAMO_HOME
 export MANPATH
 export BASH_ENV
 export GTAGSLABEL
-export EMACS
-export EMACSDIR
-export DOOMDIR
 export ANACONDA_HOME
 export BASH_SILENCE_DEPRECATION_WARNING=1
 export HOMEBREW_MAKE_JOBS=1

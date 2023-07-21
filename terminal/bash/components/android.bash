@@ -1,21 +1,42 @@
 #!/usr/bin/env bash
+# https://developer.android.com/tools/variables
+# Required sdkmanager packages:
+# Android SDK Build Tools
+# Android SDK Platform Tools
+# Android SDK Command-Line Tools
+# Android SDK Platform
+# Google USB Driver
+
 
 jgdebug "Setting Android"
-JG_AP="$HOME/Library/Android/sdk"
+
+STUDIO_HOME="/Applications/Android\ Studio.app/contents"
+ANDROID_HOME="$HOME/Library/Android/sdk"
+ANDROID_USER_HOME="$HOME/.android"
+
 # Android tools paths
-JG_FP="$JG_AP/tools/bin"
-JG_FP="$JG_AP/platform-tools:$JG_FP"
-JG_FP="$JG_AP/build-tools/30.0.3:$JG_FP"
+ANDROID_TOOL_PATHS="$ANDROID_HOME/cmdline-tools/latest/bin"
+ANDROID_TOOL_PATHS="$ANDROID_HOME/platform-tools:$ANDROID_TOOL_PATHS"
+ANDROID_TOOL_PATHS="$ANDROID_HOME/build-tools/33.0.0:$ANDROID_TOOL_PATHS"
+# ANDROID_TOOL_PATHS="$ANDROID_HOME/cmdline-tools/{version}/bin:$ANDROID_TOOL_PATHS"
 
 # Android java paths
-ANDROID_JDK="/Applications/Android\ Studio.app/Contents/jre/Contents/Home/bin"
-# Android jar libs
-ANDROID_LIB="/Applications/Android\ Studio.app/Contents/lib/"
-ANDROID_JARS="/Applications/Android\ Studio.app/Contents/plugins/android/lib/"
-ANDROID_SDK="/Users/johngrey/Library/Android/sdk/platforms/android-32/"
+ANDROID_LIB="$studio_home/lib/"
+ANDROID_JARS="$studio_home/plugins/android/lib/"
+ANDROID_SDKS="$HOME/Library/Android/sdk/platforms/"
+STUDIO_JDK="$STUDIO_HOME/jbr/Contents/Home/"
+# STUDIO_GRADLE_JDK
 
 jgdebug "Setting Kotlin"
-JG_FP="/Applications/Android\ Studio.app/Contents/plugins/Kotlin/kotlinc/bin:$JG_FP"
 
 
-PATH="$JG_FP:$PATH"
+jgdebug "Setting Java"
+# JDK_HOME="${HOME}/.gradle/jdks/adoptium-19-x64-hotspot-mac/Contents/Home"
+JDK_HOME="$HOME/Library/Java/JavaVirtualMachines/openjdk-20.0.2/Contents/Home/"
+JAVA_HOME="$JDK_HOME"
+
+jgdebug "Setting Gradle"
+# alias gradle="/usr/local/Cellar/gradle/7.5.1_1/libexec/bin/gradle"
+# alias gra="./gradlew -q"
+
+PATH="$ANDROID_TOOL_PATHS:$PATH"

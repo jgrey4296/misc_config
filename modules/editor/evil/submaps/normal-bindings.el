@@ -2,8 +2,7 @@
 
 (map! :map jg-binding-normal-state-map ;; State Changes
       :desc "Emacs State"         "C-z"      #'evil-emacs-state
-      :desc "Record Macro"        "q"        #'evil-record-macro
-      :desc "Macro"               "@"        #'evil-execute-macro
+      :desc "Run Macro"           "@"        #'evil-execute-macro
       :desc "Force Normal State"  "<escape>" #'evil-force-normal-state
       :desc "Eval expression"     "\""       #'pp-eval-expression
       )

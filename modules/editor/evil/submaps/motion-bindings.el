@@ -1,6 +1,5 @@
 ;;; +evil-motion-bindings.el -*- lexical-binding: t; -*-
 
-(suppress-keymap jg-binding-motion-state-map)
 
 (map! :map jg-binding-backward-general-motion-map
       :desc "Buffer"                      "b" #'previous-buffer
@@ -97,7 +96,7 @@
 
       )
 
-;; TODO make a hydra for this
+;; TODO make a transient for this
 ;; "H"       #'+evil/window-move-left
 ;; "J"       #'+evil/window-move-down
 ;; "K"       #'+evil/window-move-up

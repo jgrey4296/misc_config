@@ -6,10 +6,10 @@
       ;; "," "<" "!" "?"
       :desc "Ibuffer"               "DEL" #'ibuffer
       :desc "Jump to bookmark"      "RET" #'bookmark-jump
+      :desc "Record Macro"          "SPC" #'evil-record-macro
 
       :desc "Find file"             "."   #'find-file
 
-      :desc "Pop Shell"             "'"   #'shell
       :desc "Switch to last buffer" "TAB" #'evil-switch-to-windows-last-buffer
       :desc "Split Window"          "/"   #'split-window-right
       :desc "Toggle last popup"     "`"   #'+popup/toggle
@@ -29,7 +29,7 @@
 (map! :leader
       (:prefix ("y" . "snippets"))
       (:prefix ("B" . "Bookmarks"))
-      (:prefix ("p". "Project"))
+      (:prefix ("p". "Projects/Workspaces"))
       (:prefix ("m" . "Local Mode"))
       )
 ;;-- end leader
@@ -329,7 +329,7 @@
       )
 ;;-- end <leader> s --- search
 
-;;-- <leader> t --- toggle
+;; -- <leader> t --- toggle
 
 ;;-- <leader> w --- Windows
 (map! :leader
@@ -359,4 +359,4 @@
       )
 ;;-- end <leader> x -- Text
 
-(provide 'jg-leader-bindings-loaded)
+(provide 'jg-bindings-core)

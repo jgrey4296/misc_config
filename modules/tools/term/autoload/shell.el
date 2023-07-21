@@ -100,6 +100,11 @@ If already in a shell buffer, clear it and cd into the current directory."
         (+shell--send-input buffer command)))
     buffer))
 
-
-;; TODO +shell/frame -- dedicate current frame to shell buffers
-;; TODO +shell/frame-quite -- revert frame to before +term/frame
+;;;###autoload
+(defun +jg-shell-new (&optional arg)
+  (interactive "p")
+  (pcase arg
+    (1 (shell))
+    (4 (shell (generate-new-buffer-name "*shell*")))
+    )
+  )

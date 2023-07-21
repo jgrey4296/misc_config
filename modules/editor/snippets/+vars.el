@@ -59,5 +59,5 @@
                      )
 
 (spec-handling-add! company
-                    '(yas-minor-mode (:back . company-yasnippet))
+                    '(yas-minor-mode (:favour . company-yasnippet))
                     )

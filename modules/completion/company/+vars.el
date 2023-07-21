@@ -34,6 +34,17 @@
 
   )
 
+;; company-keywords
+;; company-math-symbols-unicode
+;; company-dict
+;; company-show-doc-buffer
+;; company-shell-env
+;; company-ispell
+;; company-math-symbols-latex
+;; company-yasnippet
+;; company-dabbrev-code
+;; company-capf
+;; company-files
 (spec-handling-add! company
                     '(prog-mode (:disfavour . (:separate company-dabbrev-code company-capf)) (:back . company-files))
                     '(text-mode (:disfavour . (:separate company-dabbrev company-ispell)))

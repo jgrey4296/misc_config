@@ -83,6 +83,7 @@
       :prefix (">" . "File Type Specific")
       (:prefix ("p" . "pdf"))
       (:prefix ("d" . "pandoc"))
+      (:prefix ("b" . "bibtex"))
       )
 (map! :map jg-dired-mode-map ;; describe
       :prefix ("d" . "describe")

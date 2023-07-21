@@ -3,37 +3,57 @@
 
 (doom-log "Setting up Evil Bindings: %s" (current-time-string))
 ;;-- setup
+
 (defvar jg-binding-insert-state-map             (copy-keymap evil-insert-state-map))
+
 (defvar jg-binding-motion-state-map             (make-sparse-keymap "JG map replacing evil-motion-state-map"))
+
 (defvar jg-binding-normal-state-map             (make-sparse-keymap "JG map replacing evil-normal-state-map"))
+
 (defvar jg-binding-operator-state-map           (make-sparse-keymap "JG map replacing evil-operator-state-map"))
+
 (defvar jg-binding-visual-state-map             (make-sparse-keymap "JG map replacing evil-visual-state-map"))
 
 (define-prefix-command 'jg-binding-backward-operator-motion-map nil "jgb-backward-op")
+
 (define-prefix-command 'jg-binding-forward-operator-motion-map  nil "jgb-forward-op")
+
 (define-prefix-command 'jg-binding-backward-general-motion-map  nil "jgb-backward-motion")
+
 (define-prefix-command 'jg-binding-forward-general-motion-map   nil "jgb-forward-motion")
+
 (define-prefix-command 'jg-binding-inner-text-objects-map       nil "jgb-inner")
+
 (define-prefix-command 'jg-binding-outer-text-objects-map       nil "jgb-outer")
+
 (define-prefix-command 'jg-binding-jump-map                     nil "jgb-jump")
+
 (define-prefix-command 'jg-binding-helm-map                     nil "jgb-helm")
+
 (define-prefix-command 'jg-binding-operator-map                 nil "jgb-ops")
+
 (define-prefix-command 'jg-binding-vision-map                   nil "jgb-vision")
+
 (define-prefix-command 'jg-binding-change-map                   nil "jgb-change")
 
 (suppress-keymap jg-binding-motion-state-map)
 ;;-- end setup
 
-(load! "+evil-change-bindings.el")
-(load! "+evil-insert-bindings.el")
-(load! "+evil-motion-bindings.el")
-(load! "+evil-normal-bindings.el")
-(load! "+evil-text-obj-bindings.el")
-(load! "+evil-visual-bindings.el")
-(load! "+jump-bindings.el")
-(load! "+op-bindings.el")
-(load! "+vision-bindings.el")
+(map! :map jg-binding-change-map
+      (:prefix ("w" . "words"))
+      (:prefix ("e" . "encode"))
+      (:prefix ("i" . "lines"))
+      (:prefix ("o" . "text"))
+      )
 
+(load! "submaps/insert-bindings.el")
+(load! "submaps/jump-bindings.el")
+(load! "submaps/motion-bindings.el")
+(load! "submaps/normal-bindings.el")
+(load! "submaps/operator-bindings.el")
+(load! "submaps/text-obj-bindings.el")
+(load! "submaps/vision-bindings.el")
+(load! "submaps/visual-bindings.el")
 
 ;;-- stitching together
 (map! :map jg-binding-normal-state-map
@@ -90,7 +110,7 @@
 
 (global-set-key (kbd "<backtab>")       #'evil-normal-state)
 
-(doom-log "Evil Bindings Complete: %s" (current-time-string))
-
-(provide 'jg-evil-bindings)
 ;;-- end stitching together
+
+(doom-log "Evil Bindings Complete: %s" (current-time-string))
+(provide 'jg-evil-bindings)

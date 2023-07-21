@@ -2,7 +2,12 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("base_library"
+(("android_sdk"
+ (filename . "~/Library/Android/sdk/")
+ (front-context-string . "fonts\n  drwxr-xr")
+ (rear-context-string . "96 Jun  5  2021 ")
+ (position . 491))
+("base_library"
  (filename . "/System/Library/")
  (front-context-string . "Fonts\n  drwxr-xr")
  (rear-context-string . "9K Jan 23  2020 ")

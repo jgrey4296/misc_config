@@ -3,6 +3,12 @@
 (evil-make-intercept-map shell-mode-map)
 (evil-make-intercept-map comint-mode-map)
 
+(map! :leader
+      :desc "Pop Shell"             "'"   #'+jg-shell-new
+
+      )
+
+
 (map! :map shell-mode-map
       "C-d" #'comint-send-eof
       :localleader

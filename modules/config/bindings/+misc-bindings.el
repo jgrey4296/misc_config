@@ -35,34 +35,3 @@
 (evil-make-intercept-map read-expression-map)
 
 ;;-- end evil overrides/intercept
-
-;;-- Mouse Deactivation
-
-(define-key evil-motion-state-map [down-mouse-1] #'ignore)
-
-(define-key evil-motion-state-map [mouse-1] #'ignore)
-
-(define-key evil-motion-state-map [drag-mouse-1] #'ignore)
-
-(define-key evil-motion-state-map [down-mouse-2] #'ignore)
-
-(define-key evil-motion-state-map [mouse-2] #'ignore)
-
-(define-key evil-motion-state-map [drag-mouse-2] #'ignore)
-
-(define-key evil-motion-state-map [down-mouse-3] #'ignore)
-
-(define-key evil-motion-state-map [mouse-3] #'ignore)
-
-(define-key evil-motion-state-map [drag-mouse-3] #'ignore)
-
-(define-key evil-motion-state-map [mouse-4] #'ignore)
-
-(define-key evil-motion-state-map [mouse-5] #'ignore)
-;;-- end Mouse Deactivation
-
-(after! which-key
-  (let ((prefix-re (regexp-opt (list doom-leader-key doom-leader-alt-key))))
-    (cl-pushnew `((,(format "\\`\\(?:C-w\\|%s w\\) m\\'" prefix-re))
-                  nil . "maximize")
-                which-key-replacement-alist)))

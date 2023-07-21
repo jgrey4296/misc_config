@@ -2,30 +2,24 @@
 
 (load! "+vars")
 
-(after! (evil faster-whichkey)
-  (load! "+leader-bindings")
-  (load! "submaps/+evil-bindings")
-  (load! "+misc-bindings")
+(defer-load! (evil faster-whichkey) "+leader-bindings" "+misc-bindings") ;; -> jg-bindings-core
+(after! jg-evil-bindings
   (provide 'jg-bindings-total)
-  (message "Core JG Bindings Set")
   )
 
 (use-package! faster-whichkey
   :after (which-key general)
   :config
   (faster-whichkey-toggle)
-  )
+  (let ((prefix-re (regexp-opt (list doom-leader-key doom-leader-alt-key))))
+    (cl-pushnew `((,(format "\\`\\(?:C-w\\|%s w\\) m\\'" prefix-re))
+                  nil . "maximize")
+                which-key-replacement-alist))
+)
 
 
 ;; (use-package! which-key
 ;;   :hook (doom-first-input . which-key-mode)
-;;   :init
-;;   (setq which-key-sort-order #'which-key-key-order-alpha
-;;         which-key-sort-uppercase-first nil
-;;         which-key-add-column-padding 1
-;;         which-key-max-display-columns nil
-;;         which-key-min-display-lines 6
-;;         which-key-side-window-slot -10)
 ;;   :config
 ;;   (put 'which-key-replacement-alist 'initial-value which-key-replacement-alist)
 ;;   (add-hook! 'doom-before-reload-hook

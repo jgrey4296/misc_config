@@ -1,9 +1,9 @@
 ;;; completion/ivy/config.el -*- lexical-binding: t; -*-
 
 (load! "+vars")
-(after! jg-bindings-total
-  (load! "+bindings")
-  )
+(defer-load! jg-bindings-total "+bindings")
+(defer-load! jg-evil-ex-bindings "+evil-ex")
+
 
 (use-package! ivy
   :hook (doom-first-input . ivy-mode)

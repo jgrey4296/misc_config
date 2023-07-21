@@ -3,6 +3,7 @@
 (load! "+vars")
 (load! "+spec-defs")
 (defer-load! jg-bindings-total "+bindings")
+(defer-load! jg-evil-ex-bindings "+evil-ex")
 
 (use-package! quickrun
   :config

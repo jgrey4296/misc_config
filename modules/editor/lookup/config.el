@@ -3,9 +3,8 @@
 (load! "+vars")
 (load! "+backends")
 (load! "+spec-defs")
-(after! jg-bindings-total
-  (load! "+bindings")
-  )
+(defer-load! jg-bindings-total "+bindings")
+(defer-load! jg-evil-ex-bindings "+evil-ex")
 
 (use-package! xref
   :config

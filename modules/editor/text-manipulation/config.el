@@ -3,7 +3,9 @@
 (load! "+vars")
 
 (defer-load! "+spec-defs")
-(after! jg-bindings-total (load! "+bindings"))
+(defer-load! jg-bindings-total "+bindings")
+(defer-load! jg-evil-ex-bindings "+evil-ex")
+
 
 (after! evil
   (remove-hook! 'after-change-major-mode-hook #'doom--setq-evil-shift-width-for-after-change-major-mode-h)

@@ -3,6 +3,7 @@
 
 (defer-load! "+vars")
 (defer-load! jg-bindings-total "+bindings")
+
 (after! org
   ;; TODO upgrade to org-superstar?
   (add-hook 'trie-explore-mode-hook 'org-bullets-mode)

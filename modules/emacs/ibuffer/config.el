@@ -3,9 +3,8 @@
 (load! "+vars")
 (load! "+specs")
 (load! "+spec-defs")
-(after! (jg-bindings-total ibuffer)
-  (load! "+bindings")
- )
+(defer-load! (jg-bindings-total ibuffer) "+bindings")
+(defer-load! jg-evil-ex-bindings "+evil-ex")
 
 (use-package! ibuffer
   :config

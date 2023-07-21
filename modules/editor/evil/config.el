@@ -3,7 +3,8 @@
 (load! "+defs")
 (load! "+vars")
 (load! "+spec-defs")
-(defer-load! (evil-collection evil-ex) "+commands" "+evil-ex-setup")
+(defer-load! (evil-collection evil-ex) "+evil-ex-setup")
+(defer-load! jg-bindings-core "+bindings") ;; -> jg-evil-bindings
 
 (use-package! evil
   :hook (doom-after-modules-config . evil-mode)

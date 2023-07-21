@@ -3,7 +3,9 @@
 (load! "+vars")
 
 (defer-load! "+spec-defs")
-(after! jg-bindings-total (load! "+bindings"))
+(defer-load! jg-bindings-total "+bindings")
+(defer-load! jg-evil-ex-bindings "+evil-ex")
+
 
 (use-package! persp-mode
   :unless noninteractive
@@ -14,118 +16,46 @@
   (add-to-list 'window-persistent-parameters '(winner-ring . t))
 
   ;;-- hooks
-  ;;;; Create main workspace
-  ;; The default perspective persp-mode creates is special and doesn't represent
-  ;; a real persp object, so buffers can't really be assigned to it, among other
-  ;; quirks, so I replace it with a "main" perspective.
   (add-hook! '(persp-mode-hook persp-after-load-state-functions)
-             (defun +workspaces-ensure-no-nil-workspaces-h (&rest _)
-               (when persp-mode
-                 (dolist (frame (frame-list))
-                   (when (string= (safe-persp-name (get-current-persp frame)) persp-nil-name)
-                     ;; Take extra steps to ensure no frame ends up in the nil perspective
-                     (persp-frame-switch (or (cadr (hash-table-keys *persp-hash*))
-                                             +workspaces-main)
-                                         frame))))))
+             #'+workspaces-ensure-no-nil-workspaces-h
+             )
 
   (add-hook! 'persp-mode-hook
-             (defun +workspaces-init-first-workspace-h (&rest _)
-               "Ensure a main workspace exists."
-               (when persp-mode
-                 (let (persp-before-switch-functions)
-                   ;; Try our best to hide the nil perspective.
-                   (when (equal (car persp-names-cache) persp-nil-name)
-                     (pop persp-names-cache))
-                   ;; ...and create a *real* main workspace to fill this role.
-                   (unless (or (persp-get-by-name +workspaces-main)
-                               ;; Start from 2 b/c persp-mode counts the nil workspace
-                               (> (hash-table-count *persp-hash*) 2))
-                     (persp-add-new +workspaces-main))
-                   ;; HACK Fix #319: the warnings buffer gets swallowed when creating
-                   ;;      `+workspaces-main', so display it ourselves, if it exists.
-                   (when-let (warnings (get-buffer "*Warnings*"))
-                     (save-excursion
-                       (display-buffer-in-side-window
-                        warnings '((window-height . shrink-window-if-larger-than-buffer))))))))
-
-             (defun +workspaces-init-persp-mode-h ()
-               (cond (persp-mode
-                      ;; `uniquify' breaks persp-mode. It renames old buffers, which causes
-                      ;; errors when switching between perspective (their buffers are
-                      ;; serialized by name and persp-mode expects them to have the same
-                      ;; name when restored).
-                      (when uniquify-buffer-name-style
-                        (setq +workspace--old-uniquify-style uniquify-buffer-name-style))
-                      (setq uniquify-buffer-name-style nil)
-                      ;; Ensure `persp-kill-buffer-query-function' is last
-                      (remove-hook 'kill-buffer-query-functions #'persp-kill-buffer-query-function)
-                      (add-hook 'kill-buffer-query-functions #'persp-kill-buffer-query-function t)
-                      ;; Restrict buffer list to workspace
-                      (advice-add #'doom-buffer-list :override #'+workspace-buffer-list))
-                     (t
-                      (when +workspace--old-uniquify-style
-                        (setq uniquify-buffer-name-style +workspace--old-uniquify-style))
-                      (advice-remove #'doom-buffer-list #'+workspace-buffer-list)))))
+             #'+workspaces-init-first-workspace-h
+             #'+workspaces-init-persp-mode-h
+             )
 
   (add-hook! 'persp-before-deactivate-functions
-             (defun +workspaces-save-winner-data-h (_)
-               (when (and (bound-and-true-p winner-mode)
-                          (get-current-persp))
-                 (set-persp-parameter
-                  'winner-ring (list winner-currents
-                                     winner-ring-alist
-                                     winner-pending-undo-ring)))))
+             #'+workspaces-save-winner-data-h
+             )
 
   (add-hook! 'persp-activated-functions
-    (defun +workspaces-load-winner-data-h (_)
-      (when (bound-and-true-p winner-mode)
-        (cl-destructuring-bind
-            (currents alist pending-undo-ring)
-            (or (persp-parameter 'winner-ring) (list nil nil nil))
-          (setq winner-undo-frame nil
-                winner-currents currents
-                winner-ring-alist alist
-                winner-pending-undo-ring pending-undo-ring)))))
+             #'+workspaces-load-winner-data-h
+    )
 
   ;; Fix #1973: visual selection surviving workspace changes
   (add-hook 'persp-before-deactivate-functions #'deactivate-mark)
   (add-hook 'persp-add-buffer-on-after-change-major-mode-filter-functions #'doom-unreal-buffer-p)
   ;; Don't try to persist dead/remote buffers. They cause errors.
   (add-hook! 'persp-filter-save-buffers-functions
-             (defun +workspaces-dead-buffer-p (buf)
-               ;; Fix #1525: Ignore dead buffers in PERSP's buffer list
-               (not (buffer-live-p buf)))
+             #'+workspaces-dead-buffer-p
+             #'+workspaces-remote-buffer-p
+             )
 
-             (defun +workspaces-remote-buffer-p (buf)
-               ;; And don't save TRAMP buffers; they're super slow to restore
-               (let ((dir (buffer-local-value 'default-directory buf)))
-                 (ignore-errors (file-remote-p dir)))))
   (add-hook! 'persp-after-load-state-functions
-    (defun +workspaces-reload-indirect-buffers-h (&rest _)
-      (dolist (ibc +workspaces--indirect-buffers-to-restore)
-        (cl-destructuring-bind (buffer-name . base-buffer-name) ibc
-          (let ((base-buffer (get-buffer base-buffer-name)))
-            (when (buffer-live-p base-buffer)
-              (when (get-buffer buffer-name)
-                (setq buffer-name (generate-new-buffer-name buffer-name)))
-              (make-indirect-buffer base-buffer buffer-name t)))))
-      (setq +workspaces--indirect-buffers-to-restore nil)))
+             #'+workspaces-reload-indirect-buffers-h
+             )
+
   (after! posframe
     ;; Fix #1017: stop session persistence from restoring a broken posframe
     (add-hook! 'persp-after-load-state-functions
-               (defun +workspaces-delete-all-posframes-h (&rest _)
-                 (posframe-delete-all))))
+               #'+workspaces-delete-all-posframes-h
+               ))
 
   ;;;; Registering buffers to perspectives
   (add-hook! 'doom-switch-buffer-hook
-    (defun +workspaces-add-current-buffer-h ()
-      "Add current buffer to focused perspective."
-      (or (not persp-mode)
-          (persp-buffer-filtered-out-p
-           (or (buffer-base-buffer (current-buffer))
-               (current-buffer))
-           persp-add-buffer-on-after-change-major-mode-filter-functions)
-          (persp-add-buffer (current-buffer) (get-current-persp) nil nil))))
+             #'+workspaces-add-current-buffer-h
+    )
 
   (add-hook 'delete-frame-functions #'+workspaces-delete-associated-workspace-h)
   (add-hook 'server-done-hook #'+workspaces-delete-associated-workspace-h)
@@ -141,12 +71,8 @@
 
   ;; tab-bar
   (add-hook! 'tab-bar-mode-hook
-             (defun +workspaces-set-up-tab-bar-integration-h ()
-               (add-hook 'persp-before-deactivate-functions #'+workspaces-save-tab-bar-data-h)
-               (add-hook 'persp-activated-functions #'+workspaces-load-tab-bar-data-h)
-               ;; Load and save configurations for tab-bar.
-               (add-hook 'persp-before-save-state-to-file-functions #'+workspaces-save-tab-bar-data-to-file-h)
-               (+workspaces-load-tab-bar-data-from-file-h)))
+             #'+workspaces-set-up-tab-bar-integration-h
+             )
   ;;-- end hooks
 
   ;;-- advice

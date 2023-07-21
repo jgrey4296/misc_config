@@ -1,0 +1,18 @@
+Elixir Modules:
+String  #
+Math    #
+Enum    #
+Stream  #
+File    #
+Process #
+Task    #
+IO      #
+Path    #
+Binary  #
+Digraph #
+ets     # in memory data structure
+dets    # on disk memory structure
+Queue   #
+Rand    #
+Zip     #
+Zlib    #

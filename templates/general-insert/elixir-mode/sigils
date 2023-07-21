@@ -1,0 +1,9 @@
+Elixir Sigils:
+~c"{}" # char list
+~r/{}/ # regex
+~s({}) # str
+~w({}) # word list
+~D[{}] # date
+~T[{}] # time
+~N[{}] # Native Date Time
+~U[{}] # UTC

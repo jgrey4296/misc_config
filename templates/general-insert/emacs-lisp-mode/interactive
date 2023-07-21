@@ -1,33 +1,33 @@
 Interactive Codes:
-a      #  Function name: symbol with a function definition.
-b      #  Name of existing buffer.
-B      #  Name of buffer, possibly nonexistent.
-c      #  Character (no input method is used).
-C      #  Command name: symbol with interactive function definition.
+a      #  Function name: symbol with a function definition. READ.
+b      #  Name of existing buffer. READ.
+B      #  Name of buffer, possibly nonexistent. READ.
+c      #  Character (no input method is used). READ.
+C      #  Command name: symbol with interactive function definition. READ.
 d      #  Value of point as number.  Does not do I/O.
-D      #  Directory name.
+D      #  Directory name. READ.
 e      #  Parameterized event (i.e., one that's a list) that invoked this command.
-f      #  Existing file name.
-F      #  Possibly nonexistent file name.
-G      #  Possibly nonexistent file name, defaulting to just directory name.
+f      #  Existing file name. READ.
+F      #  Possibly nonexistent file name. READ.
+G      #  Possibly nonexistent file name, defaulting to just directory name. READ.
 i      #  Ignored, i.e. always nil.  Does not do I/O.
-k      #  Key sequence (downcase the last event if needed to get a definition).
-K      #  Key sequence to be redefined (do not downcase the last event).
+k      #  Key sequence (downcase the last event if needed to get a definition). READ.
+K      #  Key sequence to be redefined (do not downcase the last event). READ.
 m      #  Value of mark as number.  Does not do I/O.
-M      #  Any string.  Inherits the current input method.
-n      #  Number read using minibuffer.
-N      #  Numeric prefix arg, or if none, do like code n.
-p      #  Prefix arg converted to number.  Does not do I/O.
-P      #  Prefix arg in raw form.  Does not do I/O.
+M      #  Any string.  Inherits the current input method. READ.
+n      #  Number read using minibuffer. READ.
+N      #  Numeric prefix arg, or if none, do like code n. READ.
+p      #  Prefix arg converted to number.  Does not do I/O. int. 1 -> 4 -> 16 -> 64 -> ...
+P      #  Prefix arg in raw form.  Does not do I/O. nil | cons. nil -> (4) -> (16) -> (64) -> ...
 r      #  Region: point and mark as 2 numeric args, smallest first.  Does no I/O.
-s      #  Any string.  Does not inherit the current input method.
-S      #  Any symbol.
+s      #  Any string.  Does not inherit the current input method. READ.
+S      #  Any symbol. READ.
 U      #  Mouse up event discarded by a previous k or K argument.
-v      #  Variable name: symbol that is custom-variable-p.
-x      #  Lisp expression read but not evaluated.
-X      #  Lisp expression read and evaluated.
-z      #  Coding system.
-Z      #  Coding system, nil if no prefix arg.
+v      #  Variable name: symbol that is custom-variable-p. READ.
+x      #  Lisp expression read but not evaluated. READ.
+X      #  Lisp expression read and evaluated. READ.
+z      #  Coding system. READ.
+Z      #  Coding system, nil if no prefix arg. READ.
 *      # Evil.   Signal error if the buffer is read-only.
 b      # Evil.  (prompt) Name of existing buffer.
 c      # Evil.   Read character.

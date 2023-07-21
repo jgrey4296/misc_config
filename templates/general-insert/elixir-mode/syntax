@@ -1,0 +1,66 @@
+Elixir Syntax:
+spawn({fn})                            # process creation. returns pid
+spawn_link({fn})                       # process creation. or Process.link/1
+Task.start({fn})                       # process creation
+Task.start_link({fn})                  # process creation
+exit({val})                            # process killing
+Process.register({pid}, {atom})        # process naming
+send({pid}, {msg})                     # process messaging
+recieve do { {pattern} -> {expr} } end # process messaging
+
+
+
+|>                                     # pipe operator
+++                                     # list concat
+--                                     # list subtract
+<>                                     # string concat
+and                                    # logic &&
+or                                     # logic ||
+!{}                                    # logic
+?{char}                                # codepoint
+
+is_atom({})                            # test
+is_binary({})                          # test
+is_bitstring({})                       # test
+
+
+==                                     #
+===                                    # strict comparison
+!=                                     #
+<, <=                                  #
+>, >=                                  #
+
+{} = {}                                # assignment
+^{} = {}                               # pin, pattern match
+
+try do {} rescue {} after {} end       # error handling
+raise {text}                           # runtime error
+raise {ErrorType}, {args}              # error
+reraise {}                             # error
+
+case {} do {pattern -> {expr} } end    # pattern match
+cond do {cmp -> {expr} } end           # condition checking
+if {} do {} else {} end                # if else
+unless {} do {} end                    #
+
+defmodule {} do {} end                 # module definition
+def {}({args}) do {} end               # function definition.
+defp                                   # private function definition
+@spec def {}..                         # function typespec. typing with:  :: {type}
+defstruct {attr}: {val}, {}: {} end    # structs. create with %modname{}
+defprotocol {} do {} end               # protocol definition
+def sigil_{char} do: {}                # sigil defintion
+@type {name} :: {spec}                 # type definition
+
+&{function}                            # function capture
+
+IO.inspect/3                           # debugging
+IO.dbg/2                               # debugging. breakpoint when run in iex.
+Observer.start()                       # debugging
+IO.puts({target}, {msg})               # debugging / io. target can be :stderr, :stdout
+IO.gets({})                            # io
+
+alias {} as: {}                        # imports
+import {}                              # imports
+require {}                             # imports for macros
+use {}                                 # import for extension

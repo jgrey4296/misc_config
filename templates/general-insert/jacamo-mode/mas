@@ -1,0 +1,18 @@
+JaCaMo MAS syntax (JCM Files):
+mas {name} {  }                              # Simulation Spec
+
+agent {name}: {source.asl} { [content] }     # agent spec
+goals: {term}                                # agent goal spec
+focus: {workspace}.{artifact}                # agent focus spec
+beliefs: {terms}                             # agent initial belief specs
+roles: {roleNames}                           # agent initial roles
+
+workspace {name} { [content] }               # workspace spec
+artifact {name}: {class}                     # workspace artifact spec
+
+organisation {name} : {source.xml} { }       # organisation spec
+
+group {name} : {org groupspec id} {   }      # organisation group spec. (from org source.xml)
+responsible-for: {scheme}                    # organisation group -> scheme connection
+
+scheme {name} : {org scheme spec id }        # organisation scheme definition (from org source.xml)

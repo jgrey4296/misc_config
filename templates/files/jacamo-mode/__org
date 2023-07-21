@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="http://moise.sourceforge.net/xml/os.xsl" type="text/xsl" ?>
+
+<organisational-specification
+    id="orgName"
+    os-version="0.8"
+
+    xmlns='http://moise.sourceforge.net/os'
+    xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xsi:schemaLocation='http://moise.sourceforge.net/os
+                        http://moise.sourceforge.net/xml/os.xsd' >
+
+<structural-specification>
+<role-definitions>
+ <!-- <role id="roleName" /> -->
+</role-definitions>
+
+<group-specification id="groupName">
+ <roles>
+  <!-- <role id="roleName"  min="1" max="1"/> -->
+ </roles>
+</group-specification>
+
+<!-- ... further groups -->
+</structural-specification>
+
+<functional-specification>
+ <scheme id="schemeName">
+   <goal id="goalName">
+     <argument id="Id" />
+     <plan operator="sequence">
+       <goal id="start" />
+     </plan>
+   </goal>
+
+   <mission id="missionName" min="1" max="1">
+     <goal id="start" />
+   </mission>
+
+ </scheme>
+</functional-specification>
+
+<normative-specification>
+  <norm id="normName"  type="obligation"   role="roleName"   mission="missionName" />
+</normative-specification>
+
+</organisational-specification>

@@ -4,3 +4,4 @@ Gradle Reference       # https://docs.gradle.org/current/userguide/userguide.htm
 Kotlin Quick Reference # https://kotlin-quick-reference.com/025-R-kotlin-repl.html
 JDK Reference          # https://docs.oracle.com/en/java/javase/20/
 API Reference          # https://kotlinlang.org/api/latest/jvm/stdlib/
+SDK CLI Tools          # https://developer.android.com/tools

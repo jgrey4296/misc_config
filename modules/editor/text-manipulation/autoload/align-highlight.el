@@ -1,118 +1,18 @@
 ;;; align-highlight.el -*- lexical-binding: t; -*-
 
-(defvar jg-evil-ex-align-interactive-highlight t)
 
 (evil-define-interactive-code "<al/>"
   "Ex Align argument"
   :ex-arg align
   (when (evil-ex-p)
-    (evil-ex-get-align-info evil-ex-argument t))
+    (+jg-text-manipulation-get-pattern-info evil-ex-argument t "\\(\\s-*\\)"))
 )
 
 (evil-ex-define-argument-type align
   " Like the highlighter for evil-ex-substitute, but for alignment "
-  :runner
-  (lambda (flag &optional arg)
-    (with-selected-window (minibuffer-selected-window)
-      (with-current-buffer evil-ex-current-buffer
-        (cond
-         ((eq flag 'start)
-          (evil-ex-make-hl 'evil-ex-align
-                           :face 'evil-ex-substitute-matches
-                           :update-hook #'evil-ex-pattern-update-ex-info
-                           ;; :match-hook (and jg-evil-ex-align-interactive-highlight #'evil-ex-pattern-update-replacement))
-                           )
-          (setq flag 'update))
-
-         ((eq flag 'stop)
-          (evil-ex-delete-hl 'evil-ex-align)))
-        )
-
-      (when (and (eq flag 'update)
-                 (not (zerop (length arg))))
-        (condition-case lossage
-            (let* ((result (evil-ex-get-align-info arg t))
-                   (pattern (pop result))
-                   (range (or (evil-copy-range evil-ex-range)
-                              (evil-range (line-beginning-position)
-                                          (line-end-position)
-                                          'line
-                                          :expanded t)))
-                   )
-              ;; (setq evil-ex-substitute-current-replacement replacement)
-              (evil-expand-range range)
-              (evil-ex-hl-set-region 'evil-ex-align
-                                     (evil-range-beginning range)
-                                     (evil-range-end range))
-              (evil-ex-hl-change 'evil-ex-align pattern))
-          (end-of-file
-           (evil-ex-pattern-update-ex-info nil "incomplete alignment spec"))
-          (user-error
-           (evil-ex-pattern-update-ex-info nil (format "%s" lossage))))))
-    )
-  )
-
-(defun evil-ex-get-align-info (string &optional implicit-r)
-  "Return the align pattern info of command line STRING.
-Returns an ex-pattern (see `evil-ex-make-pattern')
-If IMPLICIT-R is non-nil, then
-the flag 'r' is assumed, i.e. in the case of an empty pattern the
-last search pattern is used. "
-  (let (pattern flags)
-    (cond
-     ((or (null string) (string-match-p "^[a-zA-Z]" string))
-      ;; flags are everything that is not a white space
-      (when (and string (string-match "[^[:space:]]+" string))
-        (setq flags (match-string 0 string))))
-     (t
-      (let ((args (evil-delimited-arguments string 3)))
-        (setq pattern (pop args)
-              flags (pop args))
-        ;; append implicit "r" flag if required
-        (when (and implicit-r (not (memq ?r (append flags nil))))
-          (setq flags (concat flags "r"))))))
-
-    ;; if flags equals "&" add previous flags
-    (if (and (not (zerop (length flags)))
-             (= (aref flags 0) ?&))
-        (setq flags (append (substring flags 1)
-                            evil-ex-substitute-flags))
-      (setq flags (append flags nil)))
-
-    ;; if no pattern, use previous pattern, either search or
-    ;; substitute pattern depending on `evil-ex-last-was-search' and
-    ;; the r flag
-    (when (zerop (length pattern))
-      (setq pattern
-            (if (eq evil-search-module 'evil-search)
-                (if (and evil-ex-last-was-search (memq ?r flags))
-                    (and evil-ex-search-pattern
-                         (evil-ex-pattern-regex evil-ex-search-pattern))
-                  )
-              (if (eq case-fold-search t)
-                  isearch-string
-                (concat isearch-string "\\C")))
-            flags (remq ?r flags)))
-    ;; generate pattern
-    (when pattern
-      (setq pattern (evil-ex-make-align-pattern pattern flags)))
-    (list pattern flags)))
-
-(defun evil-ex-make-align-pattern (regexp flags)
-  "Create a PATTERN for alignment with FLAGS."
-  (evil-ex-make-pattern (concat "\\(\\s-*\\)" regexp)
-                        ;; case
-                        (cond
-                         ((memq ?i flags) 'insensitive)
-                         ((memq ?I flags) 'sensitive)
-                         ((not evil-ex-substitute-case)
-                          evil-ex-search-case)
-                         (t evil-ex-substitute-case))
-                        ;; global
-                        (or (and evil-ex-substitute-global
-                                 (not (memq ?g flags)))
-                            (and (not evil-ex-substitute-global)
-                                 (memq ?g flags))))
+  :runner (lambda (flag &optional arg)
+            (+jg-text-manipulation-highlight-handler
+             "\\(\\s-*\\)" flag arg))
   )
 
 ;;;###autoload (autoload '+jg-text-manipulation-ex-align-highlight "editor/text-manipulation/autoload/align-highlight" nil t)
@@ -124,5 +24,10 @@ Supports the following flags:
 
 g   Repeat alignment on all matches in each line"
   (interactive "<r><al/>")
-  (align-regexp beg end (car pattern) 1 1 nil)
+  (let ((full-pattern (apply #'evil-ex-make-pattern (concat "\\(\\s-*\\)"
+                                                            (car pattern))
+                             (cdr pattern)))
+        )
+    (align-regexp beg end (car full-pattern) 1 1 nil)
+    )
   )

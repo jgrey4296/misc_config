@@ -83,6 +83,7 @@
                     '(evil
                       ("^\\*evil-registers" :size 0.3)
                       ("^\\*Command Line"   :size 8)
+                      ("^\\*Ex-Commands\\*" :quit t :select nil :ttl 5)
                       )
                     )
 

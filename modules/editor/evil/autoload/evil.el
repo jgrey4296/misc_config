@@ -120,13 +120,6 @@ If `evil-vsplit-window-right' is non-nil, the new window isn't focused."
         (apply-macro-to-region-lines beg end macro)
         (message "Applied macro in %c register %d times...DONE" register lines)))))
 
-;;;###autoload (autoload '+evil:retab "editor/evil/autoload/evil" nil t)
-(evil-define-operator +evil:retab (&optional beg end)
-  "Wrapper around `doom/retab'."
-  :motion nil :move-point nil :type line
-  (interactive "<r>")
-  (doom/retab nil beg end))
-
 ;;;###autoload (autoload '+evil:narrow-buffer "editor/evil/autoload/evil" nil t)
 (evil-define-operator +evil:narrow-buffer (beg end &optional bang)
   "Narrow the buffer to region between BEG and END.

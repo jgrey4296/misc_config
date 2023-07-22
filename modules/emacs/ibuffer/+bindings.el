@@ -77,23 +77,23 @@
        )
 
       (:prefix ("b" . "by")
-       :desc "filter-by-basename"            "n"   #'ibuffer-filter-by-basename
-       :desc "filter-by-content"             "C"   #'ibuffer-filter-by-content
-       :desc "filter-by-derived-mode"        "M"   #'ibuffer-filter-by-derived-mode
-       :desc "filter-by-directory"           "d"   #'ibuffer-filter-by-directory
-       :desc "filter-by-filename"            "f"   #'ibuffer-filter-by-filename
-       :desc "filter-by-mode"                "m"   #'ibuffer-filter-by-mode
-       :desc "filter-by-modified"            "c"   #'ibuffer-filter-by-modified
-       :desc "filter-by-name"                "N"   #'ibuffer-filter-by-name
-       :desc "filter-by-process"             "p"   #'ibuffer-filter-by-process
-       :desc "filter-by-used-mode"           "m"   #'ibuffer-filter-by-used-mode
-       :desc "filter-by-visiting-file"       "v"   #'ibuffer-filter-by-visiting-file
+       :desc "basename"                      "n"   #'ibuffer-filter-by-basename
+       :desc "content"                       "C"   #'ibuffer-filter-by-content
+       :desc "derived-mode"                  "M"   #'ibuffer-filter-by-derived-mode
+       :desc "directory"                     "d"   #'ibuffer-filter-by-directory
+       :desc "filename"                      "f"   #'ibuffer-filter-by-filename
+       :desc "mode"                          "m"   #'ibuffer-filter-by-mode
+       :desc "modified"                      "c"   #'ibuffer-filter-by-modified
+       :desc "name"                          "N"   #'ibuffer-filter-by-name
+       :desc "process"                       "p"   #'ibuffer-filter-by-process
+       :desc "used-mode"                     "m"   #'ibuffer-filter-by-used-mode
+       :desc "visiting-file"                 "v"   #'ibuffer-filter-by-visiting-file
        :desc "by ext"                        "e"   #'ibuffer-filter-by-file-extension
        :desc "by-size-lt"                    "<"   #'ibuffer-filter-by-size-lt
        :desc "by-size-gt"                    ">"   #'ibuffer-filter-by-size-gt
        :desc "filter"                        "'"   #'ibuffer-filter-chosen-by-completion
+       :desc "unsaved"                       "u"   #'ibuffer-filter-by-unsaved-buffers
        )
-
       )
 
 (map! :map jg-ibuffer-filter-map ;; groups

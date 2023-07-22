@@ -1,15 +1,14 @@
 ;;; ui/popup/config.el -*- lexical-binding: t; -*-
 
+(load! "+defs")
 (load! "+vars")
 (load! "+modes")
 (load! "+macros")
 (load! "+hacks")
-(load! "ivy/+ivy")
 (load! "+spec-defs")
 (load! "+specs")
-(after! jg-bindings-total
-  (load! "+bindings")
-  )
+(defer-load! ivy "ivy/+ivy")
+(defer-load! jg-bindings-total "+bindings")
 
 (add-hook! 'doom-init-ui-hook :append #'+popup-mode)
 

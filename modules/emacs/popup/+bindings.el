@@ -5,8 +5,7 @@
       :desc "Popup Buffer"          "<"     #'+jg-popup-ivy-buffer
       )
 
-(map! :map messages-buffer-mode-map
-      :after message
+(map! :map +popup-buffer-mode-map
       :n "q" #'+popup/close
       )
 

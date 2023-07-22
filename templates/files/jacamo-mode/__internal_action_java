@@ -1,0 +1,14 @@
+pacakge $1;
+
+import jason.*;
+import jason.asSemantics.*;
+import jason.asSyntax.*;
+
+public class $1 extends DefaultInternalAction {
+    public Objec execute(TransitionSystem ts,
+                         Unifier un,
+                         Term[] args) throws Exception {
+
+        }
+
+}

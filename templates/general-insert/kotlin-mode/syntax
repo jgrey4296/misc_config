@@ -1,81 +1,73 @@
 Kotlin Syntax:
-as          #
-as?         #
-break       #
-class       #
-continue    #
-do          #
-else        #
-false       #
-for         #
-fun         #
-if          #
-in          #
-!in         #
-interface   #
-is          #
-!is         #
-null        #
-object      #
-package     #
-return      #
-super       #
-this        #
-throw       #
-true        #
-try         #
-typealias   #
-typeof      #
-val         #
-var         #
-when        #
-while       #
-by          #
-catch       #
-constructor #
-delegate    #
-dynamic     #
-field       #
-file        #
-finally     #
-get         #
-import      #
-init        #
-param       #
-property    #
-receiver    #
-set         #
-setparam    #
-value       #
-where       #
-abstract    #
-actual      #
-annotation  #
-companion   #
-const       #
-crossinline #
-data        #
-enum        #
-expect      #
-external    #
-final       #
-infix       #
-inline      #
-inner       #
-internal    #
-lateinit    #
-noinline    #
-open        #
-operator    #
-out         #
-override    #
-private     #
-protected   #
-public      #
-reified     #
-sealed      #
-suspend     #
-tailrec     #
-vararg      #
-field       #
-it          #
+//                                                          # comments
+package {name}                                              # package delcaration
+import {package}                                            # import statement
+import {package} as {name}                                  # import alias
+
+fun {name}({args}) : {returnType} { [exprs] }               # function statement. args can have default values.
+abstract fun {name}({args})                                 # function. abstract.
+override fun {name}({args}) { [exprs] }                     # function. abstract implementation.
+{arg} -> {expr}                                             # lambda
+return {val}                                                # function return
+::{name}                                                    # callable function reference
+
+const {name} : {type} = {val}                               # compile time const. only top level property or in singleton
+val {name}: {type}                                          # immutable values and type declaration.
+var {name}: {type}                                          # mutable variable.
+val {name} : {type} by lazy { [closure] }                   # only compute once
+{var1} = {var2}.also { {var2} = {var1} }                    # swap
+
+typealias {name} = {type}                                   # type alias
+{val} is {type}                                             # type test
+var {name} : {type}? = {var} as? {type}                     # type casting, returns null on failure
+{val}?.{method} ?: {else}                                   # null test
+
+print({msg})                                                # stdio
+println({msg})                                              # stdio
+
+class {name}({properties}) : {super} { [exprs]  }           # class declaration. 'this' refers to current instance in methods.
+open class {name}                                           # inheritable class
+data class {name}( [props] )                                # dataclasses. getters/setters/equals/hashCode/toString/copy
+object Resource { [vals] }                                  # singleton class
+enum class {name} { [variants] }                            # enum class
+annotation class {name}                                     # annotation class declaration. annotate with @{name}
+abstract class {name} { [{abstract function} ] }            # interfaces
+interface {name} { {funcs} }                                # interfaces
+
+if ({cond}) { [exprs] } else { [exprs] }                    # conditional
+if ({cond}) {expr} else {expr}                              # conditional expression
+
+for ({item} in {iter}) { [exprs] }                          # looping. can destructure (k,v) from maps.
+while ({cond}) { [expr] }                                   # looping
+break                                                       # looping
+continue                                                    # looping
+{val}?.let { [exprs] }                                      # conditional block
+
+when ({var}) { [{pattern} -> [expr]] {else -> [expr] } }    # pattern match
+is {type} -> {expr}                                         # pattern match instance check
+
+listOf({vals})                                              # list creation
+mapOf({x} to {y}, {w} to {z})                               # map creation
+
+{val} in {list}                                             # contain check
+{val} !in {list}                                            # missing check
+{list}.firstOrNull()                                        # list ops.
+{list}.filter   {lambda}                                    # list ops.
+{list}.sortedBy {lambda}                                    # list ops.
+{list}.map      {lambda}                                    # list ops.
+{list}.forEach   {lambda}                                   # list ops.
+{list}.length                                               # list ops.
+
+var[key] = val                                              # map access
+
+
+1..10 step 2                                                # range
+9 downTo 0 step 3                                           # range, down
+
+try { [exprs] } catch ({var} : {exceptionType}) { [exprs] } # exception handling
+throw {exceptionType}({args})                               # exception handling
+TODO({msg})                                                 # exception handling / NotImplementedError
+
+with({var}) { [exprs] }                                     # implicit context manager
+
+buildString { [exprs] }                                     # stringbuilder, with 'append' and 'appendLine' calls.

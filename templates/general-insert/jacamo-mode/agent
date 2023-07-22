@@ -3,6 +3,7 @@ JaCaMo Agent syntax (ASL Files):
                                                      # end statements with "."
 { include("$file") }                                 # import
 @{name}                                              # plan name (annotate line above head). Disambiguates plans with same head.
+@{name}[atomic]                                      # atomic plan, wont be interleaved with other intentions.
 {goal} : {conditions} <- {terms | subgoals}.         # plan. actions separated by ";", finished by "."
 {term} :- {terms}.                                   # inference rule.
 
@@ -41,8 +42,7 @@ linkWorkspaces("{workspace}", "{workspace}", {name}) # workspace -> workspace co
 joinWorkspace("{/workspace/path}", {id})             # agent -> workspace connection
 quitWorkspace({id})                                  # agent -> workspace disconnection
 
-
-
 artifact_name("{name}")                              # annotation. artifact action
 artifact_id({id})                                    # annotation. artifact action
 workspace({id})                                      # annotation. workspace action
+source({agent})                                      # annotation. agent information came from

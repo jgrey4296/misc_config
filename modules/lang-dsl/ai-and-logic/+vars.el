@@ -38,13 +38,18 @@
                     )
 (spec-handling-add! file-templates
                     '(logic
-                     ("\\.lp4?"  :trigger "__" :mode pasp-mode)
-                     ("\\.pl$"   :trigger "__" :mode prolog-mode)
-                     ("\\.clp$"  :trigger "__" :mode clips-mode)
-                     ("\\.asl$"  :trigger "__" :mode agentspeak-mode)
-                     ("\\.cep$"  :trigger "__" :mode ceptre-mode)
-                     ("\\.soar$" :trigger "__" :mode soar-mode)
+                     ("\\.lp4?"              :trigger "__"                :mode pasp-mode)
+                     ("\\.pl$"               :trigger "__"                :mode prolog-mode)
+                     ("\\.clp$"              :trigger "__"                :mode clips-mode)
+                     ("\\.cep$"              :trigger "__"                :mode ceptre-mode)
+                     ("\\.soar$"             :trigger "__"                :mode soar-mode)
                      )
+                    '(jacamo
+                     ("\\.asl$"              :trigger "__"                :mode agentspeak-mode)
+                     ("Artifact\\.java$"     :trigger "__artifact_java"   :mode jacamo-mode)
+                     ("Artifact\\.kts$"      :trigger "__artifact_kotlin" :mode jacamo-ode)
+                     ("-organisation\\.xml$" :trigger "__org"             :mode jacamo-mode)
+                      )
                     )
 (spec-handling-add! auto-modes
                     '(ai-and-logic
@@ -53,9 +58,11 @@
                       ("\\.lp4\\'" . pasp-mode)
                       ("\\.lp\\'" . pasp-mode)
                       ("\\.soar\\'" . soar-mode)
+                      ("\\.clp$" . clips-mode)
+                      )
+                    '(jacamo
                       ("\\.\\(jcm\\|mas2j\\)\\'" . jacamo-mode)
                       ("\\.asl\\'" . agentspeak-mode)
-                      ("\\.clp$" . clips-mode)
                       )
                     )
 ;;-- end specs

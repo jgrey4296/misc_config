@@ -3,7 +3,7 @@ BREW_PREFIX="/usr/local"
 
 # PATHS:
 PATH="/bin:/sbin"                           # Core
-PATH="/usr/bin:/usr/sbin:$PATH"             # Secondary
+PATH="/usr/bin:/usr/sbin:/usr/libexec:$PATH"             # Secondary
 PATH="/usr/local/bin:/usr/local/sbin:$PATH" # Tertiary
 
 PATH="$HOME/.local/bin:$PATH" # local binaries

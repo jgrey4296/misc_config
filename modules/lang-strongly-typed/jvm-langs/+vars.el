@@ -114,7 +114,10 @@
 (spec-handling-add! auto-modes
                     '(jvm
                       ("\\.g\\(?:radle\\|roovy\\)$" . groovy-mode)
-                      ("\\.kts?\\'" . kotlin-mode)
+                      ("\\.kts?\\'"                 . kotlin-mode)
+                      ("\\.java\\'"                 . java-mode)
+                      ("\\.scala\\'"                . scala-mode)
+                      ("\\.sc\\'"                   . scala-mode)
                       )
                     )
 (spec-handling-add! docsets

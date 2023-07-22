@@ -8,7 +8,7 @@
 # Google USB Driver
 
 
-jgdebug "Setting Android"
+jgdebug "Setting JVM"
 
 STUDIO_HOME="/Applications/Android\ Studio.app/contents"
 ANDROID_HOME="$HOME/Library/Android/sdk"
@@ -32,11 +32,17 @@ jgdebug "Setting Kotlin"
 
 jgdebug "Setting Java"
 # JDK_HOME="${HOME}/.gradle/jdks/adoptium-19-x64-hotspot-mac/Contents/Home"
-JDK_HOME="$HOME/Library/Java/JavaVirtualMachines/openjdk-20.0.2/Contents/Home/"
+JDK_HOME="/usr/local/opt/openjdk/libexec/openjdk.jdk/Contents/Home"
 JAVA_HOME="$JDK_HOME"
 
 jgdebug "Setting Gradle"
-# alias gradle="/usr/local/Cellar/gradle/7.5.1_1/libexec/bin/gradle"
-# alias gra="./gradlew -q"
 
-PATH="$ANDROID_TOOL_PATHS:$PATH"
+jgdebug "Setting Jason"
+JASON_HOME="$HOME/github/jvm/__jason/build"
+
+jgdebug "Setting JACAMO"
+JACAMO_HOME="$HOME/github/jvm/__jacamo/build"
+
+JG_JACAMO_PATHS="$JASON_HOME/scripts:$JACAMO_HOME/scripts"
+
+PATH="$ANDROID_TOOL_PATHS:$JG_JACAMO_PATHS:$JDK_HOME/bin:$PATH"

@@ -2,7 +2,17 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("android_sdk"
+(("jvm_instances"
+ (filename . "~/Library/Java/JavaVirtualMachines/")
+ (front-context-string . "openjdk-20.0.2\n ")
+ (rear-context-string . "96 Jul 20 21:18 ")
+ (position . 481))
+("jvm"
+ (filename . "/Volumes/documents/github/jvm/")
+ (front-context-string . "android\n  drwxr-")
+ (rear-context-string . "70 Jul 20 21:16 ")
+ (position . 180))
+("android_sdk"
  (filename . "~/Library/Android/sdk/")
  (front-context-string . "fonts\n  drwxr-xr")
  (rear-context-string . "96 Jun  5  2021 ")
@@ -212,11 +222,6 @@
  (front-context-string . "python\n  drwxr-x")
  (rear-context-string . "50 Mar 15 17:07 ")
  (position . 878))
-("android"
- (filename . "~/github/android/")
- (front-context-string . "BibtexViewer\n  d")
- (rear-context-string . "44 Dec 26 01:39 ")
- (position . 151))
 ("cookie_templates"
  (filename . "~/.doom.d/templates/projects/")
  (front-context-string . "jg_py\n  -rw-r--r")

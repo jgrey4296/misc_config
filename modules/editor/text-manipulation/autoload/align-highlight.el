@@ -24,10 +24,6 @@ Supports the following flags:
 
 g   Repeat alignment on all matches in each line"
   (interactive "<r><al/>")
-  (let ((full-pattern (apply #'evil-ex-make-pattern (concat "\\(\\s-*\\)"
-                                                            (car pattern))
-                             (cdr pattern)))
-        )
-    (align-regexp beg end (car full-pattern) 1 1 nil)
-    )
+  (message "Full Pattern: %s" (car pattern))
+  (align-regexp beg end (car pattern) 1 1 nil)
   )

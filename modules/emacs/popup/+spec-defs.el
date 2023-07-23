@@ -12,7 +12,7 @@
                     :sorted t
                     :loop 'append
                     :doc "Specify popup buffer rules. Each plist is of :struct"
-                    :struct (regexp :size :side :width :height :slot :vslot :ttl :quit :select :modeline :autosave)
+                    :struct '(regexp :size :side :width :height :slot :vslot :ttl :quit :select :modeline :autosave)
                     (cl-loop for rule in val
                              collect
                              (let* ((regexp (car rule))

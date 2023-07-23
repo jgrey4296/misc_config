@@ -7,14 +7,12 @@
 (load! "helm/+helm")
 (load! "+spec-defs")
 
-(after! jg-bindings-total
-  (load! "+bindings")
-  )
-(after! evil-ex
-  (evil-define-operator +jg-tag-helm-start (beg end rest)
+(defer-load! jg-bindings-total "+bindings")
+(after! jg-evil-ex-bindings
+  (evil-define-operator +jg-tag-helm-start (beg end &rest rest)
     (interactive "<R>")
-    (+jg-tag-helm-tagger beg end)
-    )
+    (+jg-tag-helm-tagger beg end))
+  (evil-ex-define-cmd "t[ag]"  #'tagging-minor-mode-tagger)
   )
 (add-hook! 'doom-first-file-hook #'global-tagging-minor-mode)
 

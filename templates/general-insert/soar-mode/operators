@@ -1,0 +1,34 @@
+Soar Operators:
++, -, *, /                                     # usual math. lisp notation.
+div, mod                                       # math
+abs, atan2, sqrt, sin, cos                     # math
+min, max                                       # math. n-ary.
+int                                            # type cast symbol to int
+float                                          # type cast symbol to float
+(ifeq <v1> <v2> [true] [false])                # if test
+
+(capitalize-symbol [symbol])                   # returns new symbol
+(compute-heading <x1> <y1> <x2> <y2>)          # direction
+(compute-range <x1> <y1> <x2> <y2>)            # distance
+(concat [symbols])                             # returns symbol
+(deep-copy <v>)                                # copy wme subtree
+(dc)                                           # decision cycle count, int.
+(@ <v>)                                        # get LTI for id
+(link-stm-to-ltm <v1> [int])                   # link v1 to LTI
+(make-constant-symbol)                         # new unique symbol
+
+(rand-float [max])                             #
+(rand-int [max])                               #
+
+(round-off [val] [step])                       #
+(round-off-heading [dir] [step])               # rounds within -360 <= dir <= 360
+(size [wme])                                   # number of augmentations of wme
+(strlen [text])                                #
+(timestamp)                                    #
+(trim [text])                                  # whitespace removal
+
+(exec [external func] [args]+) # registered function call
+(cmd [builtin] [args]+) # call builtin functions
+
+(dont-learn <s>) # turn off chunking
+(force-learn <s>) # turn on chunking

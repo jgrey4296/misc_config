@@ -1,0 +1,33 @@
+Trace Levels:
+0 # trace nothing
+1 # decisions
+2 # phases, GDS, decisions
+3 # productions, phases, decisions
+4 # wmes, productions, phases, decisions
+5 # preferences, wmes, productions, phases, decisions
+
+-a # working memory activation and forgetting
+-A # assertions
+-b # chunk dependency analysis / backtracing
+-c # chunks
+-d # decisions
+-D # default rules
+-e # episodic memory
+-g # GDS violations
+-G # goal dependency set changes
+-i # numeric preference calculations
+-j # justifications
+-L [0 | 1 | 2] # learning level
+-p # phases
+-P # productions
+-r # preferences
+-R # reinforcement learning
+-s # semantic memory
+-T # templates
+-u # user rules
+-W # inhibited firings
+-w # wme additions/removals
+
+-n # wme detail
+-t # wme detail, timetags
+-f # wme detail, full

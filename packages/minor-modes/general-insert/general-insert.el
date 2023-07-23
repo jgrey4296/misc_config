@@ -70,8 +70,10 @@
              general-insert--cache))
 
   (let* ((vals (gethash selected general-insert--cache))
-         (processor (or (gethash `(,major-mode ,selected) general-insert-processors) #'general-insert-default))
+         (selected-core (car (split-string selected "#" t " +")))
+         (processor (or (gethash `(,major-mode ,selected-core) general-insert-processors) #'general-insert-default))
          )
+    (message "Retrieved: %s : %s : %s" major-mode selected-core processor)
     (when (and vals processor)
       (ivy-read (format "%s " (car vals))
                 (cdr vals)

@@ -1,0 +1,10 @@
+Soar Actions:
+([wme])                     # assert
+([wme] -)                   # retract
+
+(write |[text]| (crlf) )    # action. print, with a newline
+(log [channel] |[message]|) # log to [channel:int]
+
+(halt)                      # action. stop agent.
+(interrupt)                 # pause and return to prompt
+(wait [int])                # wait for int milliseconds

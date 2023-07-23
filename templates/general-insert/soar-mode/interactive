@@ -1,0 +1,131 @@
+Interactive Soar Commands:
+wmes                                      # print working memory
+matches                                   # print rules about to fire
+preferences [state] [operator]            # print preferences for operator.
+preferences [...] --names                 # rules that made the preference
+preferences [...] --wmes                  # working memory that created preference
+
+chunk [always | never | only | except]    #
+chunk interrupt on                        # pause after successful learning
+chunk warning-interrupt on                # pause after learning issues
+chunk explain-interrupt on                # pause after learning a rule
+chunk stats                               # print statistics about chunking
+
+explain                                   # print info on rules explainer is watching
+explain all                               # record all rules learned
+explain chunk [id | name]                 # inspect a chunk
+explain formation                         # print initial rule that created a result
+explain instantiation <id>                # print specific instance from trace
+explain [explaination-trace | wme-trace]  #
+explain constraints                       #
+explain identity                          #
+explain stats                             #
+
+visualize wm                              # visualize working memory
+visualize ebc analysis                    #
+visualize identity graph                  #
+
+print [--interactive]                     # print top level state
+print --chunks                            #
+print --justifications                    #
+print --stack                             #  print state and operator stack
+
+trace                                     #
+trace --learning 1                        # print when new rule names as they are learned
+trace --learning 2                        # print full rules when they are learned
+trace --backtracing                       # print conditions during backtracing
+trace --chunk-warnings                    # print warnings during chunking
+trace --backtracing                       # print learned chunk matches and firings
+
+smem                                      # control semantic/long term memory
+epmem                                     # control episodic memory
+rl                                        # control reinforcement learning
+svs                                       # 3d spatial reasoning control
+
+soar ?                                    # summarise soar commands
+soar init                                 # restart soar
+soar stop                                 # interrupt program
+soar max-chunks                           # limit chunks
+soar keep-all-top-oprefs                  # don't optimize away internal preferences, for debugging
+soar max-dc-time                          # limit reasoning time
+soar max-elaborations                     # limit elaboration cycles
+soar max-goal-depth                       # limit sub state stack depth
+soar max-memory-usage                     # limit bytes available for an agent
+soar max-nil-output-cycles                # limit empty decision cycles
+soar max-gp                               # limit productions created by 'gp' command
+soar stop-phase                           #
+soar tcl                                  # control tcl mode
+soar times                                # toggle internal timers
+soar version                              # get version number
+soar wait-snc                             # generate wait state rather than state-no-change impasse
+
+run                                       # begin execution cycle
+exit                                      # quit soar
+help                                      # info about commands
+decide indifferent-selection              # control preference arbitration
+decide numeric-indifferent-mode           # select numeric combination mode
+decide predict                            # predict next operator
+decide select                             # force next operator
+decide set-random-seed                    # control random number generator
+
+alias                                     #
+
+sp                                        # create a production rule
+gp                                        # create a rule template pattern
+
+production                                # print summary
+
+production break                          # set breakpoint on a specific rule.
+production break --clear                  # remove a breakpoint
+
+production excise                         # remove a rule. [--all, --chunks, --default, --never-fired, --rl, --task, --templates, --user]
+production find                           # get rules that match a pattern
+production firing-counts                  # print number of times each rule has fired
+production matches                        # information about match and partial match sets
+production memory-usage                   # memory usage for rules
+
+production watch                          # list rules being watched
+production watch [rule]                   # watch a rule
+production watch --off                    # stop watching a rule, or all rules
+
+wm activation                             # get/set wme parameters
+wm add                                    # add a wme
+wm remove                                 # remove a wme
+wm watch                                  # watch for patterns
+
+preferences                               # print preference memory
+
+
+output log --append [file]                # log to file
+
+
+stats                                     #
+stats --memory                            #
+stats --learning                          #
+stats --rete                              #
+stats --system                            #
+stats --max                               #
+stats --reset                             #
+stats --track                             #
+stats --stop-track                        #
+stats --cycle                             #
+stats --cycle-csv                         #
+stats --sort                              #
+
+debug # internal information
+debug allocate #
+debug port #
+debug time [command] [args] #
+
+cd                # file system
+dirs              # file system
+ls                # file system
+popd              #
+pushd             #
+save agent        #
+save chunks       #
+save percepts     #
+save rete-network #
+load file         #
+load library      #
+load rete-network #

@@ -5,6 +5,7 @@
 
 (evil-ex-define-cmd "rev[erse]"               #'+evil:reverse-lines)
 (evil-ex-define-cmd "l[ine]diff"              #'evil-quick-diff)
+(evil-ex-define-cmd "ld"                      #'evil-quick-diff)
 
 (evil-ex-define-cmd "c[opy]"                  #'evil-copy)
 (evil-ex-define-cmd "m[ove]"                  #'evil-move)

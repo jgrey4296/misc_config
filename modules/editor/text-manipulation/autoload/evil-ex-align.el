@@ -15,7 +15,7 @@
              "\\(\\s-*\\)" flag arg))
   )
 
-;;;###autoload (autoload '+jg-text-manipulation-ex-align-highlight "editor/text-manipulation/autoload/align-highlight" nil t)
+;;;###autoload (autoload '+jg-text-manipulation-ex-align-highlight "editor/text-manipulation/autoload/evil-ex-align" nil t)
 (evil-define-command +jg-text-manipulation-ex-align-highlight (beg end pattern &optional flags)
   "Ex interface to `align-regexp'.
 

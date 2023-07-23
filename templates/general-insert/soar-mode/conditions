@@ -1,0 +1,26 @@
+Soar Condition Tests:
+<>                          # not equal
+<=>                         # type match
+<                           # numerical less
+<=                          # numerical less or equal
+>=                          # numerical greater or equal
+>                           # numerical greaater
+
+@                           # Same LTI. (Long Term Identifier)
+!@                          # Different LTI
+@+                          # Linked LTI
+@-                          # No Linked LTI
+
+<< [values] >>              # Disjunction
+{ [comparisons] }           # Conjunction
+{ <> <c1> <c2>... }         # multi variable binding
+
+-([test])                   # negation
+-^[attribute]               # negated attribute test. eqv to: -{([wme] ^[attr] val1) ([wme] ^[attr] val2)...}
+-{ [tests] }                # negated conjunction
+
+(state ^operator <o> +)     # acceptable operator test
+
+^[test] [name] [val]        # test for an attr that passes test, with its value=val
+^<< [attr]+ >>              # disjuction of attributes
+^{<[bind]> [test] [attr]+ } # conjunctive attr test

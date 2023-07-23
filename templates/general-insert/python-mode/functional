@@ -1,0 +1,13 @@
+Python Functional:
+map        # builtin
+filter     # builtin
+sum        # builtin
+len        # builtin
+any        # builtin
+all        # builtin
+min        # builtin
+max        # builtin
+
+reduce     # functools. λ(fn, list, initializer=None)
+accumulate # itertools
+partial    # functools.

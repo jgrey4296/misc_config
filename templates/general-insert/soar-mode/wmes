@@ -1,0 +1,3 @@
+Soar WME Syntax:
+([identifier] ^[attribute] [value])             # General Syntax
+([identifier] ^operator [value] [preference])   # operator preference wmes

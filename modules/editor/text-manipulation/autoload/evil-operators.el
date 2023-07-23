@@ -145,8 +145,8 @@
       ;; compare
       (if (s-equals? current (+jg-text-get-line))
           (kill-line)
-        (progn (setq current (+jg-text-get-line))
-               (forward-line 1))
+        (setq current (+jg-text-get-line))
+        (forward-line 1)
         )
       )
     )

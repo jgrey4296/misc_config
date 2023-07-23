@@ -33,3 +33,5 @@
 
 (setq gdb-show-main t
       gdb-many-windows t)
+
+(evil-ex-define-cmd "debug"       #'+debugger/start)

@@ -45,7 +45,6 @@ falling back on searching your PATH."
    )
   )
 
-
 ;;;###autoload
 (defun +python/open-ipython-repl ()
   "Open an IPython REPL."
@@ -74,7 +73,6 @@ falling back on searching your PATH."
     (puthash (cons 'python-mode default-directory) new-buffer +eval-repl-buffers)
     new-buffer
     )
-
   )
 
 ;;;###autoload

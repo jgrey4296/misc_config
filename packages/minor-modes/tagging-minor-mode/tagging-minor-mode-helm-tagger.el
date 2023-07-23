@@ -1,6 +1,5 @@
 ;;; tagging-helm.el -*- lexical-binding: t; -*-
 
-(require 'evil)
 (require 'helm-source)
 (require 'helm-grep)
 (require 'helm-utils)
@@ -170,7 +169,13 @@
   (unless tagging-minor-mode
     (error "Tagging Minor Mode not active")
     )
-  (set-marker tagging-minor-mode-marker (if (eq evil-state 'visual) evil-visual-end (line-end-position)))
+  (set-marker tagging-minor-mode-marker
+              (cond ((and (boundp 'evil-state)
+                          (eq evil-state 'visual))
+                     evil-visual-end)
+                    (t
+                     (line-end-position))))
+
   (get-buffer-create tagging-minor-mode--helm-buffer-name)
 
   (let* ((current-tags (tagging-minor-mode-get-tags))
@@ -184,5 +189,4 @@
     )
   )
 
-(evil-ex-define-cmd "t[ag]"  #'tagging-minor-mode-tagger)
 (provide 'tagging-minor-mode-helm-tagger)

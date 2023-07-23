@@ -1,0 +1,11 @@
+Soar Types:
+int        #
+float      #
+symbol     # [a-zA-Z0-9$%&*+-/:<=>?_]
+
+:default   # default production rule type
+:chunk     # chunking production rule type
+:o-support # production rule
+:i-support # production rule
+:template  # production rule, reinformcement learning.
+:interrupt # production rule, pause when rule matches.

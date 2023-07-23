@@ -167,5 +167,6 @@
         )
   )
 
+(evil-ex-define-cmd "t[ag]"  #'tagging-minor-mode-tagger)
 (provide 'tagging-minor-mode)
 ;;; tagging-minor-mode.el ends here

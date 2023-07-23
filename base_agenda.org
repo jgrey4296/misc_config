@@ -7,6 +7,7 @@ https://stackoverflow.com/questions/22072773/batch-export-of-org-mode-files-from
 https://en.m.wikipedia.org/wiki/Wikipedia:Ignore_all_rules
 https://www.commonwl.org/user_guide/index.html
 https://boringml.com/
+https://caselaw.nationalarchives.gov.uk/
 
 * Base Agenda
 Death by Institution and the Harms of Abstraction.

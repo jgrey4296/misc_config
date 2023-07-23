@@ -1,0 +1,11 @@
+Soar Preference Operators:
++       # acceptable / assert
+-       # reject / retract
+>       # best
+<       # worst
+=       # indifferent
+!       # require
+~       # prohibit
+v1 > v2 # better
+v1 < v2 # worse
+v1 = v2 # binary indifferent

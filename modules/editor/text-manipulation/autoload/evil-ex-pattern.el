@@ -2,6 +2,7 @@
 
 (defvar jg-evil-ex-interactive-highlight t)
 
+;;;###autoload
 (defun +jg-text-manipulation-highlight-handler (prefix flag &optional arg)
   (with-selected-window (minibuffer-selected-window)
     (with-current-buffer evil-ex-current-buffer
@@ -41,6 +42,7 @@
          (evil-ex-pattern-update-ex-info nil (format "%s" lossage))))))
   )
 
+;;;###autoload
 (defun +jg-text-manipulation-get-pattern-info (string &optional implicit-r prefix)
   "return the pattern pattern info of command line string.
 returns an ex-pattern (see `evil-ex-make-pattern')
@@ -87,7 +89,7 @@ last search pattern is used. "
       (setq pattern (+jg-text-manipulation-make-pattern pattern flags prefix)))
     (list pattern flags)))
 
-(defun +jg-text-manipulation-make-pattern (regexp flags prefix)
+(defun +jg-text-manipulation-make-pattern (regexp flags &optional prefix)
   "Create a PATTERN for patternment with FLAGS."
   (evil-ex-make-pattern (concat (or prefix "") regexp)
                         ;; case
@@ -118,8 +120,8 @@ last search pattern is used. "
   )
 
 
-;;;###autoload (autoload '+jg-text-manipulation-ex-match-highlight "editor/text-manipulation/autoload/align-highlight" nil t)
-(evil-define-command +jg-text-manipulation-ex-match-highlight (pattern &rest args) ;; beg end pattern &optional bang &rest args)
+;;;###autoload (autoload '+jg-text-manipulation-ex-match-highlight "editor/text-manipulation/autoload/evil-ex-pattern" nil t)
+(evil-define-command +jg-text-manipulation-ex-match-highlight (pattern &rest args)
   "evil ex match, but with active highlighting"
   (interactive "<p/><!>")
   (evil-ex-match (format " |%s|" (car pattern)))

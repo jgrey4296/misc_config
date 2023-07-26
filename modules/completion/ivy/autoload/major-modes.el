@@ -1,0 +1,48 @@
+;;; major-modes.el -*- lexical-binding: t; -*-
+
+(defvar jg-ivy-all-major-modes nil "List of all major modes")
+(defvar jg-ivy-all-minor-modes nil "List of all minor modes")
+
+;;;###autoload
+(defun +jg-ivy-change-major-mode (&optional arg)
+  (interactive "P")
+  (when (or arg (not jg-ivy-all-major-modes))
+    (message "Building Major Mode List")
+    (setq jg-ivy-all-major-modes nil)
+    (cl-do-all-symbols (sym)
+      (when (and (functionp sym)
+                 (get sym 'derived-mode-parent))
+        (push (symbol-name sym) jg-ivy-all-major-modes)
+        )
+      )
+    (setq jg-ivy-all-major-modes (sort jg-ivy-all-major-modes #'string-lessp))
+    )
+
+  (let ((selected (ivy-read "Select Major Mode: " jg-ivy-all-major-modes)))
+    (when (functionp (intern selected))
+      (funcall (intern selected))
+      )
+    )
+  )
+
+;;;###autoload
+(defun +jg-ivy-change-minor-mode (&optional arg)
+  (interactive "P")
+  (when (or arg (not jg-ivy-all-minor-modes))
+    (message "Building Minor Mode List")
+    (setq jg-ivy-all-minor-modes nil)
+    (cl-do-all-symbols (sym)
+      (when (and (functionp sym)
+                 (s-suffix? "-minor-mode" (symbol-name sym)))
+        (push (symbol-name sym) jg-ivy-all-minor-modes)
+        )
+      )
+    (setq jg-ivy-all-minor-modes (sort jg-ivy-all-minor-modes #'string-lessp))
+    )
+
+  (let ((selected (ivy-read "Select Minor Mode: " jg-ivy-all-minor-modes)))
+    (when (functionp (intern selected))
+      (funcall (intern selected) 'toggle)
+      )
+    )
+  )

@@ -14,5 +14,5 @@
 
 
 (spec-handling-add! company
-                    '(restclient-mode (:mode . #'company-restclient))
+                    '(restclient-mode (:mode company-restclient))
                     )

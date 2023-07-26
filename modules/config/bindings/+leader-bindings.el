@@ -307,25 +307,18 @@
 (map! :leader
       :prefix ("s" . "search")
       :desc "Search Clear"                 "c" #'evil-ex-nohighlight
-      :desc "Dictionary"                   "t" #'+lookup/dictionary-definition
       :desc "Jump list"                    "j" #'evil-show-jumps
       :desc "Jump to link"                 "L" #'ffap-menu
       :desc "Jump to mark"                 "m" #'evil-show-marks
       :desc "Jump to symbol"               "i" #'imenu
       :desc "Jump to visible link"         "l" #'link-hint-open-link
       :desc "Google"                       "g" #'browse-url
-      :desc "Look up in all docsets"       "K" #'+lookup/in-all-docsets
-      :desc "Look up in local docsets"     "k" #'+lookup/in-docsets
-      :desc "Look up online (w/ prompt)"   "O" #'+lookup/online-select
-      :desc "Look up online"               "o" #'+lookup/online
       :desc "Search buffer"                "S" #'+default/search-buffer
       :desc "Search current directory"     "d" #'+default/search-cwd
       :desc "Search other directory"       "D" #'+default/search-other-cwd
       :desc "Search project"               "p" #'+default/search-project
       :desc "Search other project"         "P" #'+default/search-other-project
       :desc "Search project for symbol"    "." #'+default/search-project-for-symbol-at-point
-      :desc "Dictionary"                   "t" #'+lookup/dictionary-definition
-      :desc "Thesaurus"                    "T" #'+lookup/synonyms
       )
 ;;-- end <leader> s --- search
 

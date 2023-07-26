@@ -16,8 +16,6 @@
       :desc "Narrow"        "RET" #'+jg-ui-narrow-around-point
       )
 
-
-
 ;;-- highlight
 (map! :map jg-binding-vision-map
       :desc "Delete Change Highlight"      "c" #'highlight-changes-remove-highlight
@@ -77,3 +75,58 @@
 
 (evil-make-overriding-map transient-toggles-minor-mode-map)
 ;;-- end transient
+
+;;-- tree-sitter
+
+(defvar tree-sitter-mode-map (make-sparse-keymap))
+
+(defvar +tree-sitter-inner-text-objects-map (make-sparse-keymap))
+
+(defvar +tree-sitter-outer-text-objects-map (make-sparse-keymap))
+
+(defvar +tree-sitter-goto-previous-map (make-sparse-keymap))
+
+(defvar +tree-sitter-goto-next-map (make-sparse-keymap))
+
+(evil-define-key 'normal 'tree-sitter-mode
+  "[g" +tree-sitter-goto-previous-map
+  "]g" +tree-sitter-goto-next-map
+  )
+(map! :map tree-sitter-mode-map
+      (:prefix "i"
+               :vo "A" (+tree-sitter-get-textobj '("parameter.inner" "call.inner"))
+               :vo "f" (+tree-sitter-get-textobj "function.inner")
+               :vo "F" (+tree-sitter-get-textobj "call.inner")
+               :vo "C" (+tree-sitter-get-textobj "class.inner")
+               :vo "v" (+tree-sitter-get-textobj "conditional.inner")
+               :vo "l" (+tree-sitter-get-textobj "loop.inner")
+        )
+      (:prefix "o"
+               :vo "A" (+tree-sitter-get-textobj '("parameter.outer" "call.outer"))
+               :vo "f" (+tree-sitter-get-textobj "function.outer")
+               :vo "F" (+tree-sitter-get-textobj "call.outer")
+               :vo "C" (+tree-sitter-get-textobj "class.outer")
+               :vo "c" (+tree-sitter-get-textobj "comment.outer")
+               :vo "v" (+tree-sitter-get-textobj "conditional.outer")
+               :vo "l" (+tree-sitter-get-textobj "loop.outer")
+               )
+      (:prefix "[g"
+            :n "a" (+tree-sitter-goto-textobj "parameter.outer" t)
+            :n "f" (+tree-sitter-goto-textobj "function.outer" t)
+            :n "F" (+tree-sitter-goto-textobj "call.outer" t)
+            :n "C" (+tree-sitter-goto-textobj "class.outer" t)
+            :n "c" (+tree-sitter-goto-textobj "comment.outer" t)
+            :n "v" (+tree-sitter-goto-textobj "conditional.outer" t)
+            :n "l" (+tree-sitter-goto-textobj "loop.outer" t)
+            )
+      (:prefix "]g"
+            :n "a" (+tree-sitter-goto-textobj "parameter.outer")
+            :n "f" (+tree-sitter-goto-textobj "function.outer")
+            :n "F" (+tree-sitter-goto-textobj "call.outer")
+            :n "C" (+tree-sitter-goto-textobj "class.outer")
+            :n "c" (+tree-sitter-goto-textobj "comment.outer")
+            :n "v" (+tree-sitter-goto-textobj "conditional.outer")
+            :n "l" (+tree-sitter-goto-textobj "loop.outer")
+      )
+)
+;;-- end tree-sitter

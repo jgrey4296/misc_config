@@ -17,7 +17,7 @@
                       )
                     )
 (spec-handling-add! company
-                    '(ruby-mode (:mode . company-robe))
+                    '(ruby-mode (:mode company-robe))
                     )
 (spec-handling-add! lookup-handler
                     `(ruby-mode

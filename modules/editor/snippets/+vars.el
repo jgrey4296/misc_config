@@ -59,7 +59,7 @@
                      )
 
 (spec-handling-add! company
-                    '(yas-minor-mode (:favour . company-yasnippet))
+                    '(yas-minor-mode (:back company-yasnippet))
                     )
 
 (spec-handling-add! auto-modes :form 'override

@@ -1,7 +1,7 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
 (spec-handling-add! company
-                    '(graphql-mode (:mode . #'company-graphql))
+                    '(graphql-mode (:mode company-graphql))
                     )
 
 (spec-handling-add! docsets

@@ -46,11 +46,11 @@
 ;; company-capf
 ;; company-files
 (spec-handling-add! company
-                    '(prog-mode (:disfavour . (:separate company-dabbrev-code company-capf)) (:back . company-files))
-                    '(text-mode (:disfavour . (:separate company-dabbrev company-ispell)))
-                    '(conf-mode (:disfavour . company-dabbrev-code ))
-                    '(minibuffer-inactive-mode (:disfavour . (:separate company-dabbrev-code company-capf)) (:back . company-files))
-                    '(minibuffer-mode (:disfavour . (:separate company-dabbrev-code company-capf)) (:back . company-files))
+                    '(prog-mode (:mode company-dabbrev-code company-capf) (:back company-files))
+                    '(text-mode (:mode company-dabbrev company-ispell))
+                    '(conf-mode (:mode company-dabbrev-code ))
+                    '(minibuffer-inactive-mode (:mode company-dabbrev-code company-capf) (:back company-files))
+                    '(minibuffer-mode (:mode company-dabbrev-code company-capf) (:back company-files))
                     )
 
 (spec-handling-setq! company

@@ -4,8 +4,27 @@
   (list :side   'bottom :height 0.16 :width  40 :quit   t :select #'ignore :ttl    5)
   "Default properties for popup rules")
 
-(defvar window-control-popup-persist-default
-  '(:side bottom :height 0.3 :quit t :select nil :modeline t :ttl nil)
+(defvar +popup-defaults-alist
+  '(+popup-buffer
+    (side . bottom)
+    (window-height . 0.16)
+    (window-width . 40)
+    (window-parameters
+     (quit . t)
+     (select . ignore)
+     (ttl . 5)
+     )))
+
+(defvar window-control-popup-persist-default-alist
+  '(+popup-buffer
+    (side . bottom)
+    (window-height . 0.3)
+
+    (window-parameters
+     (quit . t)
+     (select . nil)
+     (modeline . t)
+     (ttl . nil)))
   "Popup rule for a persistent buffer")
 
 (spec-handling-new! popup display-buffer-alist

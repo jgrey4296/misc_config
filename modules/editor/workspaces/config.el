@@ -148,8 +148,9 @@
   )
 
 (use-package! carousel-minor-mode
-  :hook (doom-init-ui . carousel-minor-mode)
+  :after persp-mode
   :config
+  (carousel-minor-mode 1)
   (after! ivy
     (ivy-add-actions '+jg-workspaces-ivy
                      '(("r" +jg-workspaces-rename "Rename")

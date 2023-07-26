@@ -69,7 +69,7 @@
       :desc "Do Ops"       "g"  'jg-binding-operator-map
       :desc "Visual Ops"   "z"  'jg-binding-vision-map
       :desc "Inner Select" "i"  'jg-binding-inner-text-objects-map
-      :desc "Outer Select" "a"  'jg-binding-outer-text-objects-map
+      :desc "Outer Select" "o"  'jg-binding-outer-text-objects-map
       :desc "Jumping"      "s"  'jg-binding-jump-map
       :desc "Change"       "c"  'jg-binding-change-map
       )
@@ -83,7 +83,7 @@
       :desc "Backward Motion Op"  "["  'jg-binding-backward-operator-motion-map
       :desc "Forward Motion Op"   "]"  'jg-binding-forward-operator-motion-map
       :desc "Inner Select"        "i"  'jg-binding-inner-text-objects-map
-      :desc "Outer Select"        "a"  'jg-binding-outer-text-objects-map
+      :desc "Outer Select"        "o"  'jg-binding-outer-text-objects-map
       )
 
 ;; Override default evil maps

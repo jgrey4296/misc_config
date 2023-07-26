@@ -19,20 +19,21 @@
   )
 
 (defun general-insert-clear-caches ()
+  "Clear and Rebuild the cache"
   (interactive)
+  (message "Clearing General Insert Cache")
   (setq general-insert--cache (make-hash-table :test 'equal)
         general-insert--key-cache (make-hash-table :test 'equal)
         )
   (setq-local general-insert-keys nil)
+  (general-insert-build-cache)
   )
 
-;;;###autoload
-(define-minor-mode general-insert-minor-mode
-  " "
-  :init-value nil
-  :lighter "general-insert"
+(defun general-insert-build-cache ()
+  " Build the buffer local general insert cache "
+  (interactive)
   (setq-local general-insert-keys
-              (cl-loop for mode in (append (parent-mode-list major-mode) '(fundamental-mode))
+              (cl-loop for mode in (append (parent-mode-list major-mode) '(fundamental-mode) local-minor-modes global-minor-modes)
                        when (f-exists? (f-join general-insert-location (symbol-name mode)))
                        do
                        (unless (gethash mode general-insert--key-cache)
@@ -44,8 +45,17 @@
                        (gethash mode general-insert--key-cache)
                        )
 
-            )
+              )
+
   )
+
+;;;###autoload
+(define-minor-mode general-insert-minor-mode
+  " "
+  :init-value nil
+  :lighter "general-insert"
+  (general-insert-build-cache)
+)
 
 (defun general-insert-default (x)
   (insert (car (split-string x "#" t " +")))

@@ -1,5 +1,6 @@
 ;;; lang/json/config.el -*- lexical-binding: t; -*-
 
+(load! "+vars")
 (defer-load! (jg-bindings-total json-mode) "+bindings")
 
 (use-package! json-mode

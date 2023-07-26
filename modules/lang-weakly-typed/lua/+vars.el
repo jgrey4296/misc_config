@@ -9,7 +9,7 @@
                     )
 
 (spec-handling-add! company
-                    '(lua-mode (:mode . #'company-lua))
+                    '(lua-mode (:mode company-lua))
                     )
 
 (spec-handling-add! lookup-handler

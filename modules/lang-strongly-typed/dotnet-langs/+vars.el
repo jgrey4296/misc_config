@@ -30,7 +30,7 @@
                     '(fsharp-mode :async t :definition fsharp-ac/gotodefn-at-point)
                     )
 (spec-handling-add! company
-                    '(fsharp-mode (:mode . #'fsharp-ac/company-backend))
+                    '(fsharp-mode (:mode fsharp-ac/company-backend))
                     )
 (spec-handling-add! auto-modes
                     '(dotnet

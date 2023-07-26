@@ -37,7 +37,6 @@
       conda-anaconda-home (or (getenv "ANACONDA_HOME") "/usr/local/anaconda3")
       conda-env-home-directory (or (getenv "ANACONDA_ENVS") (f-join conda-anaconda-home "envs"))
       py-shell-virtualenv-root conda-env-home-directory
-      lsp-pyright-venv-path conda-env-home-directory
 
       py-pdbtrack-do-tracking-p t
 
@@ -108,12 +107,9 @@
 (add-to-list 'lsp-disabled-clients 'mspyls)
 
 (setq lsp-pyright-extra-paths #'[]
-      lsp-pyright-venv-path   (list conda-env-home-directory)
+      lsp-pyright-venv-path conda-env-home-directory
       )
 ;;-- end lsp
-
-;;-- jg-company
-;;-- end jg-company
 
 ;;-- specs
 (spec-handling-add! projects
@@ -172,10 +168,6 @@
                                 )
                       )
                     )
-(spec-handling-add! company
-                    '(python-mode (:front . jg-company/backend ) (:front . company-gtags))
-                    '(anaconda-mode (:favour . company-anaconda))
-                    )
 (spec-handling-add! whitespace-cleanup
                     `(python-mode
                       ,#'+jg-python-cleanup-ensure-newline-before-def
@@ -222,9 +214,15 @@
                     )
 (spec-handling-add! lookup-handler
                     `(anaconda-mode
-                      :definition ,#'+jg-conda-find-defs
-                      :references ,#'+jg-conda-find-references
-                      :documentation ,#'+jg-conda-show-doc)
+                      :definition    +jg-conda-find-defs
+                      :references    +jg-conda-find-references
+                      :documentation +jg-conda-show-doc
+                      :assignments   +jg-conda-find-assignments
+                      )
+                    )
+(spec-handling-add! company
+                    '(python-mode (:mode company-gtags))
+                    '(anaconda-mode (:mode company-anaconda))
                     )
 (spec-handling-add! docsets
                     '((python-mode inferior-python-mode)

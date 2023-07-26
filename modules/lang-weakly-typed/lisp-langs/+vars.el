@@ -28,9 +28,6 @@ See `+emacs-lisp-non-package-mode' for details.")
   )
 
 ;;-- specs
-(spec-handling-add! tree-sit-lang
-                    '(emacs-lisp . elisp)
-                    )
 (spec-handling-add! popup
                     '(lisp
                      ("^\\*Buttercup\\*$" :size 0.45 :select nil :ttl 0)

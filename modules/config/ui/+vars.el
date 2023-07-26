@@ -1,7 +1,5 @@
 ;;; editor/window-control/+vars.el -*- lexical-binding: t; -*-
 
-(defvar mouse-wheel-down-event nil)
-(defvar mouse-wheel-up-event nil)
 (defvar jg-ui-default-face-gen-palette-dir "/Volumes/documents/github/jgrey4296.github.io/resources/palettes/")
 
 (setq-default highlight-parentheses-delay      0.3
@@ -84,8 +82,27 @@
 (setq so-long-threshold 5000)
 ;;-- end so long
 
+;;-- tree-sitter
+(setq tree-sitter-debug-jump-buttons t ;; This makes every node a link to a section of code
+      tree-sitter-debug-highlight-jump-region t ;; and this highlights the entire sub tree in your code
+      )
+;;-- end tree-sitter
+
 (spec-handling-add! auto-modes
                     '(ui
                       ("\\.palette" . palette-mode)
                       )
                     )
+
+
+(spec-handling-add! tree-sit-lang
+                '(agda-mode       . agda)
+                '(c-mode          . c)
+                '(c++-mode        . cpp)
+
+                '(elm-mode        . elm)
+
+                '(julia-mode      . julia)
+                '(ruby-mode       . ruby)
+                '(tuareg-mode     . ocaml)
+                )

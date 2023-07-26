@@ -14,9 +14,10 @@
 
 (map! :map jg-help-map
       :prefix ("e" . "Edit")
-      :desc "bindings" "b" #'+jg-help-edit-bindings
+      :desc "Bindings" "b" #'+jg-help-edit-bindings
       :desc "Vars"     "v" #'+jg-help-edit-vars
       :desc "Config"   "c" #'+jg-help-edit-config
+      :desc "Spec-Defs" "s" #'+jg-help-edit-spec-defs
       )
 
 ;;-- docs

@@ -18,10 +18,10 @@
       :desc "Same Indent Block"    "i"   #'evil-indent-plus-i-indent
       :desc "+Same Indent Block+"  "j"   #'evil-indent-plus-i-indent-up-down
       :desc "+Same Indent Block"   "k"   #'evil-indent-plus-i-indent-up
-      :desc "Symbol"               "o"   #'evil-inner-symbol
       :desc "Paragraph"            "p"   #'evil-inner-paragraph
       :desc "Any-Quote"            "q"   #'+evil:inner-any-quote
-      :desc "Sentence"             "s"   #'evil-inner-sentence
+      :desc "Symbol"               "s"   #'evil-inner-symbol
+      :desc "Sentence"             "S"   #'evil-inner-sentence
       :desc "XML Tag"              "t"   #'evil-inner-tag
       :desc "URL"                  "u"   #'+evil:inner-url-txtobj
       :desc "WORD"                 "W"   #'evil-inner-WORD
@@ -46,10 +46,10 @@
       :desc  "Same Indent Block"    "i"  #'evil-indent-plus-a-indent
       :desc  "+Same Indent Block+"  "j"  #'evil-indent-plus-a-indent-up-down
       :desc  "+Same Indent Block"   "k"  #'evil-indent-plus-a-indent-up
-      :desc  "Symbol"               "o"  #'evil-a-symbol
       :desc  "Paragraph"            "p"  #'evil-a-paragraph
       :desc  "Any-Quote"            "q"  #'+evil:outer-any-quote
-      :desc  "Sentence"             "s"  #'evil-a-sentence
+      :desc  "Symbol"               "s"  #'evil-a-symbol
+      :desc  "Sentence"             "S"  #'evil-a-sentence
       :desc  "XML Tag"              "t"  #'evil-a-tag
       :desc  "URL"                  "u"  #'+evil:outer-url-txtobj
       :desc  "WORD"                 "W"  #'evil-a-WORD

@@ -23,7 +23,13 @@
                         str)
                       (run-spec-handlers)
                       )
-
+(transient-make-call!   general-insert-rebuild-cache
+                        (let ((str  "Clear General-Insert Cache"))
+                          (put-text-property 0 (length str) 'face 'transient-heading str)
+                          str)
+                        (general-insert-clear-caches)
+                        (message "Cache Rebuilt")
+                        )
 ;; Visual
 (progn
   (transient-make-toggle! hl-line-mode "h" "Highlight-line")
@@ -213,8 +219,8 @@
      jg-toggle-nav
      jg-toggle-visuals
      jg-toggle-wrap
-     ("!" jg-transient-call-run-spec-handlers)
-     ] [
+     ]
+      [
      (jg-transient-toggle-global-hl-line-mode)
      (jg-transient-toggle-hide-mode-line-mode)
      (jg-transient-toggle-global-prettify-symbols-mode)
@@ -229,6 +235,10 @@
      ("E" jg-transient-call-evil-embrace)
      ("e" jg-transient-call-debug-on-error)
      ] ]
+  [
+   ("!" jg-transient-call-run-spec-handlers)
+   ("@" jg-transient-call-general-insert-rebuild-cache)
+   ]
   transient-quit!
   )
 

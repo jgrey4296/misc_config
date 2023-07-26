@@ -3,6 +3,12 @@
 (map! :leader
       :desc "Open Url"              "?"   #'browse-select-goto-url
 
+      (:prefix "s"
+      :desc "Look up in all docsets"       "K" #'+lookup/in-all-docsets
+      :desc "Look up in local docsets"     "k" #'+lookup/in-docsets
+      :desc "Look up online (w/ prompt)"   "O" #'+lookup/online-select
+      :desc "Look up online"               "o" #'+lookup/online
+      )
       (:prefix "g"
        :desc "Docs: Git Manual"      "1" (cmd! (browse-url jg-browse-github-url))
        )
@@ -13,16 +19,27 @@
       :desc "Lookup Regular"        "1" #'lookup-regular-go
 
       (:prefix ("k" . "Docs")
-       :desc "Type definition"       "t" #'+lookup/type-definition
-       :desc "References"            "r" #'+lookup/references
-       :desc "Definition"            "d" #'+lookup/definition
-       :desc "Implementations"       "i" #'+lookup/implementations
-       :desc "Find other file"       "o" #'projectile-toggle-between-implementation-and-test
-       :desc "Documentation"         "k" #'+lookup/documentation
-       :desc "Word(net)"                 "w" #'helm-wordnet-suggest
-       :desc "Word(nut)"                 "W" #'wordnut-search
+       :desc "Assignments"                  "a" #'+lookup/assignments
+       :desc "Type definition"              "t" #'+lookup/type-definition
+       :desc "References"                   "r" #'+lookup/references
+       :desc "Definition"                   "d" #'+lookup/definition
+       :desc "Implementations"              "i" #'+lookup/implementations
+       :desc "Documentation"                "k" #'+lookup/documentation
+       :desc "Look up in local docsets"     "K" #'+lookup/in-docsets
+
+       :desc "Word(net)"                    "w" #'helm-wordnet-suggest
+       :desc "Word(nut)"                    "W" #'wordnut-search
+
+       :desc "Look up online (w/ prompt)"   "1" #'+lookup/online-select
+       :desc "Look up online"               "2" #'+lookup/online
+       :desc "All Docsets"                  "3" #'+lookup/in-all-docsets
+
+       :desc "Dictionary"                   "q" #'+lookup/dictionary-definition
+       :desc "Thesaurus"                    "Q" #'+lookup/synonyms
+
+       :desc "Debug"   "?" #'+jg-lookup-debug-settings
        )
-)
+      )
 
 (map! :map eww-mode-map
       :n "=" 'eww-copy-page-url

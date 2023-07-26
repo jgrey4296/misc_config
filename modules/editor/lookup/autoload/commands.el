@@ -1,6 +1,16 @@
 ;; -*- mode:emacs-lisp; -*- lexical-bindings: t; -*-
 ;;
 ;;; Main commands
+(defvar +jg-lookup-valid-keywords '(
+                                    :definition
+                                    :implementations
+                                    :type-definition
+                                    :references
+                                    :documentation
+                                    :assignments
+                                    )
+  "Valid Types of Lookup commands that can be registered")
+
 
 ;;;###autoload
 (defun +lookup/definition (identifier &optional arg)
@@ -60,10 +70,16 @@ search otherwise."
 First attempts the :documentation handler specified with `set-lookup-handlers!'
 for the current mode/buffer (if any), then falls back to the backends in
 `+lookup-documentation-functions'."
-  (interactive (list (doom-thing-at-point-or-region)
-                     current-prefix-arg))
+  (interactive (list (doom-thing-at-point-or-region) current-prefix-arg))
   (cond ((+lookup--jump-to :documentation identifier #'pop-to-buffer arg))
         ((user-error "Couldn't find documentation for %S" (substring-no-properties identifier)))))
+
+;;;###autoload
+(defun +lookup/assignments (identifier &optional arg)
+  (interactive (list (doom-thing-at-point-or-region) current-prefix-arg))
+  (cond ((+lookup--jump-to :assignments identifier #'pop-to-buffer arg))
+        ((user-error "Couldn't find assignments for %S" (substring-no-properties identifier)))))
+
 
 ;;;###autoload
 (defun +lookup/file (&optional path)
@@ -113,27 +129,33 @@ Otherwise, falls back on `find-file-at-point'."
 
 (defun +lookup--jump-to (prop identifier &optional display-fn arg)
   (let* ((origin (point-marker))
-         (handlers
-          (plist-get (list :definition      '+lookup-definition-functions
-                           :implementations '+lookup-implementations-functions
-                           :type-definition '+lookup-type-definition-functions
-                           :references      '+lookup-references-functions
-                           :documentation   '+lookup-documentation-functions
-                           :file            '+lookup-file-functions)
-                     prop))
-         (result
-          (if arg
-              (if-let
-                  (handler
-                   (intern-soft
-                    (completing-read "Select lookup handler: "
-                                     (delete-dups
-                                      (remq t (append (symbol-value handlers)
-                                                      (default-value handlers))))
-                                     nil t)))
-                  (+lookup--run-handlers handler identifier origin)
-                (user-error "No lookup handler selected"))
-            (run-hook-wrapped handlers #'+lookup--run-handlers identifier origin))))
+         (handlers (pcase prop
+                     (:definition      +lookup-definition-functions)
+                     (:implementations +lookup-implementations-functions)
+                     (:type-definition +lookup-type-definition-functions)
+                     (:references      +lookup-references-functions)
+                     (:documentation   +lookup-documentation-functions)
+                     (:file            +lookup-file-functions)
+                     (:assignments     +lookup-assignments-functions)
+                     (_ (user-error "Unrecognized lookup prop" prop))
+                     ))
+         selected-handler
+         result
+         )
+    ;; Select just one handler:
+    (pcase handlers
+      ((guard arg)
+       (user-error "TODO: handle arg"))
+      ('nil (user-error "No Handler Found for: %s" prop))
+      ((and (pred listp) (pred (lambda (x) (< 1 (length x)))))
+       (setq selected-handler (intern-soft (ivy-read "Select a handler: " handlers :require-match t))))
+      ((pred listp)
+       (setq selected-handler (car handlers)))
+      (_ (setq selected-handler handlers))
+      )
+    ;; Run the Handler:
+    (setq result (+lookup--run-handler selected-handler identifier))
+    ;; Deal with result
     (unwind-protect
         (when (cond ((null result)
                      (message "No lookup handler could find %S" identifier)
@@ -148,3 +170,23 @@ Otherwise, falls back on `find-file-at-point'."
             (better-jumper-set-jump (marker-position origin)))
           result)
       (set-marker origin nil))))
+
+;;;###autoload
+(defun +jg-lookup-debug-settings ()
+  (interactive)
+  (let ((handlers (list (cons :definition      +lookup-definition-functions)
+                        (cons :implementations +lookup-implementations-functions)
+                        (cons :type-definition +lookup-type-definition-functions)
+                        (cons :references      +lookup-references-functions)
+                        (cons :documentation   +lookup-documentation-functions)
+                        (cons :file            +lookup-file-functions)
+                        (cons :assignments     +lookup-assignments-functions)
+                        ))
+        )
+    (message "Lookup Handlers Are:\n%s"
+             (string-join (mapcar #'(lambda (x)
+                                      (format "%-25s : %s" (car x) (cdr x)))
+                                  handlers) "\n")
+             )
+    )
+  )

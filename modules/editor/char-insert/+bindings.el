@@ -188,6 +188,7 @@
       :desc "⁸" "8" "⁸"
       :desc "⁹" "9" "⁹"
       :desc "ⁱ" "i" "ⁱ"
+      :desc "ⁿ" "n" "ⁿ"
       )
 ;;-- end superscript
 
@@ -217,6 +218,7 @@
       :desc "Superscript"  "\\"              char-insert-superscript-map
       :desc "Tilde"        "~"               'char-insert-tilde-map
       :desc "Counsel Insert" "RET" #'insert-char
+      :desc "General Insert" "DEL" #'general-insert-call
       )
 
 (map! :map evil-insert-state-map

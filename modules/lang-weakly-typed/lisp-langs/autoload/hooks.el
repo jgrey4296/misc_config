@@ -18,3 +18,13 @@
   (setq find-function-C-source-directory "/Volumes/documents/github/_libs/lisp/emacs-src/src")
 
   )
+
+
+(autoload 'straight-register-file-modification "straight")
+
+;;;###autoload
+(defun +emacs-lisp-init-straight-maybe-h ()
+  "Make sure straight sees modifications to installed packages."
+  (when (file-in-directory-p (or buffer-file-name default-directory) doom-local-dir)
+    (add-hook 'after-save-hook #'straight-register-file-modification
+              nil 'local)))

@@ -12,8 +12,8 @@
                     '(ocaml-mode      . ocaml)
                     )
 (spec-handling-add! company
-                    '(tuareg-mode #'merlin-company-backend)
-                    '(sml-mode #'company-mlton-grouped-backend)
+                    '(tuareg-mode merlin-company-backend)
+                    '(sml-mode company-mlton-grouped-backend)
                     )
 (spec-handling-add! lookup-handler
                     '(tuareg-mode :async t

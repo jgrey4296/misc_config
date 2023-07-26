@@ -28,7 +28,7 @@
                      )
                     )
 (spec-handling-add! company
-                    '(nxml-mode (:mode . #'company-nxml))
+                    '(nxml-mode (:mode company-nxml))
                     )
 
 (spec-handling-add! auto-modes

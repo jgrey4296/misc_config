@@ -1,5 +1,4 @@
 ;;; tools/lookup/autoload/evil.el -*- lexical-binding: t; -*-
-;;;###if (modulep! :editor evil)
 
 ;;;###autoload (autoload '+lookup:online "tools/lookup/autoload/evil" nil t)
 (evil-define-command +lookup:online (query &optional bang)

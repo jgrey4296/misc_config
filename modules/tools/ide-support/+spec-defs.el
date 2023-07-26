@@ -12,12 +12,6 @@
                       )
                     )
 
-(spec-handling-new! egolot eglot-server-programs :loop 'collect
+(spec-handling-new! eglot eglot-server-programs :loop 'collect
                     (cons key val)
-                    )
-
-(spec-handling-new! tree-sit-lang
-                    tree-sitter-major-mode-language-alist
-                    :loop 'collect
-                    `(,key . ,val)
                     )

@@ -12,20 +12,6 @@
 
 (defvar +lsp--deferred-shutdown-timer nil)
 
-(defvar +tree-sitter-hl-enabled-modes '(not web-mode typescript-tsx-mode)
-  "A list of major modes which should be highlighted by tree-sitter.
-
-If this list begins with `not', then it negates the list.
-If it is t, it is enabled in all modes.
-If nil, it is disabled in all modes")
-
-(defvar +tree-sitter-inner-text-objects-map (make-sparse-keymap))
-
-(defvar +tree-sitter-outer-text-objects-map (make-sparse-keymap))
-
-(defvar +tree-sitter-goto-previous-map (make-sparse-keymap))
-
-(defvar +tree-sitter-goto-next-map (make-sparse-keymap))
 ;;-- end definitions
 
 ;;-- lsp
@@ -58,13 +44,6 @@ If nil, it is disabled in all modes")
         eglot-stay-out-of '(flymake)
         )
 ;;-- end eglot
-
-;;-- tree-sitter
-(setq tree-sitter-debug-jump-buttons t ;; This makes every node a link to a section of code
-      tree-sitter-debug-highlight-jump-region t ;; and this highlights the entire sub tree in your code
-      )
-
-;;-- end tree-sitter
 
 ;;-- ignore dirs
 (setq lsp-file-watch-ignored-directories (rx "\/" (|
@@ -129,41 +108,25 @@ If nil, it is disabled in all modes")
 
 (spec-handling-add! lookup-handler
                     `(lsp-mode
-                     :definition ,#'+lsp-lookup-definition-handler
-                     :references ,#'+lsp-lookup-references-handler
-                     :documentation ,#'lsp-describe-thing-at-point
-                     :implementations ,#'lsp-find-implementation
-                     :type-definition ,#'lsp-find-type-definition
+                     :definition          +lsp-lookup-definition-handler
+                     :references          +lsp-lookup-references-handler
+                     :documentation       lsp-describe-thing-at-point
+                     :implementations     lsp-find-implementation
+                     :type-definition     lsp-find-type-definition
                      )
                     `(eglot--managed-mode
-                     :definition      ,#'xref-find-definitions
-                     :references      ,#'xref-find-references
-                     :implementations ,#'eglot-find-implementation
-                     :type-definition ,#'eglot-find-typeDefinition
-                     :documentation   ,#'+eglot-lookup-documentation
+                     :definition          xref-find-definitions
+                     :references          xref-find-references
+                     :implementations     eglot-find-implementation
+                     :type-definition     eglot-find-typeDefinition
+                     :documentation       +eglot-lookup-documentation
                      )
+                    `(lsp-ui-mode
+                      :definition         lsp-ui-peek-find-definitions
+                      :implementations    lsp-ui-peek-find-implementation
+                      :references         lsp-ui-peek-find-references
+                      :async t
+                      )
                     )
 
-(when (modulep! +peek)
-  (spec-handling-add! lookup-handler
-                      `(lsp-ui-mode
-                       :definition         ,#'lsp-ui-peek-find-definitions
-                       :implementations    ,#'lsp-ui-peek-find-implementation
-                       :references         ,#'lsp-ui-peek-find-references
-                       :async t
-                       )
-                      )
-  )
-
-(spec-handling-add! tree-sit-lang
-                '(agda-mode       . agda)
-                '(c-mode          . c)
-                '(c++-mode        . cpp)
-
-                '(elm-mode        . elm)
-
-                '(julia-mode      . julia)
-                '(ruby-mode       . ruby)
-                '(tuareg-mode     . ocaml)
-                )
 ;;-- end specs

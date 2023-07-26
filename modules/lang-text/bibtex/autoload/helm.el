@@ -230,7 +230,7 @@ governed by the variable `bibtex-completion-display-formats'."
 ;;-- end transformers
 
 (defun +jg-bibtex-title-case (x)
-  (string-join (mapcar 's-capitalized-words (s-split-words x)) " ")
+  (string-join (mapcar #'capitalize (split-string x " +" t " +")) " ")
   )
 
 

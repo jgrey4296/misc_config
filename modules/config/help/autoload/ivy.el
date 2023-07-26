@@ -8,6 +8,8 @@
 
 (defvar jg-help-var-file-name "+vars.el")
 
+(defvar jg-help-specdef-file-name "+spec-defs.el")
+
 (defun +jg-help-cache-modules ()
   (let* ((root doom-user-dir)
          (groups (f-directories (f-join doom-user-dir "modules")))
@@ -56,6 +58,22 @@
   (let* ((config (-select #'(lambda (x) (f-exists? (f-join doom-user-dir "modules" x jg-help-config-file-name))) jg-help-modules-cache))
          (chosen (ivy-read "Select Module Config: " jg-help-modules-cache :require-match t))
          (binding (f-join doom-user-dir "modules" chosen jg-help-config-file-name))
+        )
+    (if (f-exists? binding)
+      (find-file binding)
+      (message "Doesnt Exist: %s" binding)
+      )
+    )
+  )
+
+
+;;;###autoload
+(defun +jg-help-edit-spec-defs ()
+  (interactive)
+  (unless jg-help-modules-cache (+jg-help-cache-modules))
+  (let* ((config (-select #'(lambda (x) (f-exists? (f-join doom-user-dir "modules" x jg-help-config-file-name))) jg-help-modules-cache))
+         (chosen (ivy-read "Select Module Config: " jg-help-modules-cache :require-match t))
+         (binding (f-join doom-user-dir "modules" chosen jg-help-specdef-file-name))
         )
     (if (f-exists? binding)
       (find-file binding)

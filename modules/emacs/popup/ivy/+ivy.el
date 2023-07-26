@@ -13,7 +13,7 @@
     ;; Add rule if necessary:
     (if (not curr-rule)
         (progn (message "Adding temp rule")
-               (setq curr-rule (+popup-make-rule buff window-control-popup-persist-default))
+               (setq curr-rule (cons buff window-control-popup-persist-default-alist))
                (push curr-rule display-buffer-alist))
       )
     (bury-buffer buff)

@@ -53,6 +53,13 @@
 ;; from https://github.com/kiwanami/emacs-epc/issues/35
 (setq byte-compile-warnings '(not cl-functions)
       native-comp-async-jobs-number 1
+      native-comp-jit-compilation-deny-list '("/with-editor\\.el\\'"
+                                              "/vterm\\.el\\'"
+                                              "/evil-collection-vterm\\.el\\'"
+                                              "/emacs-jupyter.*\\.el\\'"
+                                              "/carousel-.*\\.el\\'"
+                                              "/lsp-.*\\.el\\'"
+                                              )
       )
 ;;-- end byte / native compilation
 

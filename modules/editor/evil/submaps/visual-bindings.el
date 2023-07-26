@@ -11,8 +11,8 @@
       )
 (map! :map jg-binding-visual-state-map
       :desc "Replace Selection"       "R"   #'evil-change
-      :desc "Exchange Corners"        "O"   #'evil-visual-exchange-corners
-      :desc "Exchange Point and Mark" "o"   #'exchange-point-and-mark
+      :desc "Exchange Corners"        "A"   #'evil-visual-exchange-corners
+      :desc "Exchange Point and Mark" "a"   #'exchange-point-and-mark
 
       :desc "exit"    "V"                   #'evil-exit-visual-state
 

@@ -2,7 +2,7 @@
 
 (load! "+vars")
 (defer-load! jg-bindings-total "+bindings")
-(defer-load! jg-evil-ex-bindings "+evil-ex")
+(defer-load! (magit jg-evil-ex-bindings) "+evil-ex")
 
 
 (add-hook! '(prog-mode-hook text-mode-hook conf-mode-hook)

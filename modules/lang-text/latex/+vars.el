@@ -62,8 +62,8 @@
 
 ;;-- specs
 (spec-handling-add! company
-                    '(reftex-mode (:mode . company-reftex-labels) (:mode . company-reftex-citations))
-                    '(LaTeX-mode (:mode . company-auctex-environments) (:mode . company-auctex-macros) (:mode . +latex-symbols-company-backend))
+                    '(reftex-mode (:mode company-reftex-label company-reftex-citations))
+                    '(LaTeX-mode (:mode company-auctex-environments company-auctex-macros +latex-symbols-company-backend))
                     )
 (spec-handling-add! lookup-url
                     '(latex

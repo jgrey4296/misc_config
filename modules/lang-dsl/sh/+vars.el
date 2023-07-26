@@ -19,7 +19,7 @@
                       )
                     )
 (spec-handling-add! company
-                      '(sh-mode (:mode . #'company-shell) (:mode .  #'company-files))
+                      `(sh-mode (:mode company-shell) (:mode company-files))
                       )
 (spec-handling-add! electric
                     '(sh-mode

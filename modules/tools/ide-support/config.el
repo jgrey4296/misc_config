@@ -91,7 +91,7 @@
                         (:support eglot
                                   ,#'(lambda (state) (add-hook 'python-mode-hook #'eglot-ensure))
                                   ,#'(lambda (state)
-                                       (signal 'eglot-todo (current-buffer))
+                                       ;; (signal 'eglot-todo (current-buffer))
                                        (remove-hook 'python-mode-hook #'eglot-ensure)
                                        )
                                   )
@@ -104,44 +104,11 @@
   )
 
 (use-package! flycheck-eglot
-  :when (modulep! :checkers syntax)
+  :after eglot
   :hook (eglot-managed-mode . flycheck-eglot-mode)
   )
 
 ;;-- end eglot
-
-;;-- tree sitter
-
-(use-package! tree-sitter
-  :defer t
-  :init
-  (spec-handling-add! python-env
-                      `(tree-sitter!
-                        (:support tree-sitter
-                                  ,#'(lambda (state) (add-hook 'python-mode-hook #'tree-sitter!))
-                                  ,#'(lambda (state)
-                                       (remove-hook 'python-mode-hook #'tree-sitter!))
-                                  )
-                        )
-                      )
-
-  :config
-  (require 'tree-sitter-langs)
-  )
-
-(use-package! evil-textobj-tree-sitter
-  :when (modulep! :editor evil +everywhere)
-  :defer t
-  :init (after! tree-sitter (require 'evil-textobj-tree-sitter))
-  :config
-  (after! which-key
-    (setq which-key-allow-multiple-replacements t)
-    (pushnew!
-     which-key-replacement-alist
-     '(("" . "\\`+?evil-textobj-tree-sitter-function--\\(.*\\)\\(?:.inner\\|.outer\\)") . (nil . "\\1"))))
-  )
-
-;;-- end tree sitter
 
 ;;-- semantic
 
@@ -185,7 +152,7 @@
 ;;-- flycheck
 
 (use-package! flycheck
-  :commands flycheck-list-errors flycheck-buffer
+  :commands (flycheck-list-errors flycheck-buffer flycheck-mode global-flycheck-mode)
   ;; :hook (doom-first-buffer . global-flycheck-mode)
   :init
 

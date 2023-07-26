@@ -47,7 +47,8 @@
 
 ;;-- insert state
 (map! :map jg-binding-insert-state-map
-      "TAB" #'+jg-snippets-complete-or-snippet
+      ;; "TAB" #'+jg-snippets-complete-or-snippet
+      "TAB" #'company-complete
       ;; "TAB" #'indent-for-tab-command
       )
 

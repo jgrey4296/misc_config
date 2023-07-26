@@ -48,16 +48,18 @@ files of urls in lookup-regular-location "
   :lighter "lookup-regular"
   ;; :global t
   :keymap lookup-regular-minor-mode-map
-  (cl-loop for mode in (parent-mode-list major-mode)
-           when (f-exists? (f-join lookup-regular-location (symbol-name mode)))
-           do
-           (unless (gethash mode lookup-regular--cache)
-             (puthash mode (lookup-regular--load-file (f-join lookup-regular-location (symbol-name mode)))
-                      lookup-regular--cache)
-             )
-           (setq-local lookup-regular-targets (append (buffer-local-value 'lookup-regular-targets (current-buffer))
-                                                      (gethash mode lookup-regular--cache)))
-           )
+  (setq-local lookup-regular-targets
+              (cl-loop for mode in (append (parent-mode-list major-mode) '(fundamental-mode) local-minor-modes global-minor-modes)
+                       when (f-exists? (f-join lookup-regular-location (symbol-name mode)))
+                       do
+                       (unless (gethash mode lookup-regular--cache)
+                         (puthash mode (lookup-regular--load-file (f-join lookup-regular-location (symbol-name mode)))
+                                  lookup-regular--cache)
+                         )
+                       append
+                       (gethash mode lookup-regular--cache)
+                       )
+              )
   )
 
 (defun lookup-regular--load-file (file)

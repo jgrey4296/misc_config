@@ -94,7 +94,7 @@
                     )
 
 (spec-handling-add! company
-                    '(rust-mode (:front . jg-company/backend) (:front . company-gtags))
+                    '(rust-mode (:front jg-company/backend) (:front company-gtags))
                     )
 
 (spec-handling-add! auto-modes

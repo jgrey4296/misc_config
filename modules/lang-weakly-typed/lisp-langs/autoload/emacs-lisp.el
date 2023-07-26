@@ -2,31 +2,9 @@
 
 ;;
 ;;; Library
-
-;;;###autoload
-(defun +emacs-lisp-eval (beg end)
-  "Evaluate a region and print it to the echo area (if one line long), otherwise
-to a pop up buffer."
-  (+eval-display-results
-   (string-trim-right
-    (let ((buffer (generate-new-buffer " *+eval-output*"))
-          (debug-on-error t))
-      (unwind-protect
-          (condition-case-unless-debug e
-              (doom-module-context-with
-                  (doom-module-from-path
-                   (or (buffer-file-name (buffer-base-buffer))
-                       default-directory))
-                (doom-context-with 'eval
-                  (eval-region beg end buffer load-read-function))
-                (with-current-buffer buffer
-                  (let ((pp-max-width nil))
-                    (require 'pp)
-                    (pp-buffer)
-                    (replace-regexp-in-string "\\\\n" "\n" (string-trim-left (buffer-string))))))
-            (error (format "ERROR: %s" e)))
-        (kill-buffer buffer))))
-   (current-buffer)))
+;; DEPRECATED Remove when 28 support is dropped.
+(unless (fboundp 'lisp--local-defform-body-p)
+  (fset 'lisp--local-defform-body-p #'ignore))
 
 ;;;###autoload
 (defun +emacs-lisp-outline-level ()
@@ -34,9 +12,7 @@ to a pop up buffer."
 Intended to replace `lisp-outline-level'."
   (- (match-end 1) (match-beginning 1)))
 
-;;
-;;; Handlers
-
+;;;###autoload
 (defun +emacs-lisp--module-at-point ()
   "Return (CATEGORY MODULE FLAG) at point inside a `doom!' block."
   (let ((origin (point))
@@ -88,38 +64,6 @@ Intended to replace `lisp-outline-level'."
                   (list category module flag))))))))))
 
 ;;;###autoload
-(defun +emacs-lisp-lookup-definition (_thing)
-  "Lookup definition of THING."
-  (if-let (module (+emacs-lisp--module-at-point))
-      (doom/help-modules (car module) (cadr module) 'visit-dir)
-    (call-interactively #'elisp-def)))
-
-;;;###autoload
-(defun +emacs-lisp-lookup-documentation (thing)
-  "Lookup THING with `helpful-variable' if it's a variable, `helpful-callable'
-if it's callable, `apropos' otherwise."
-  (cond ((when-let (module (+emacs-lisp--module-at-point))
-           (doom/help-modules (car module) (cadr module))
-           (when (eq major-mode 'org-mode)
-             (with-demoted-errors "%s"
-               (re-search-forward
-                (if (caddr module)
-                    "\\* Module flags$"
-                  "\\* Description$"))
-               (when (caddr module)
-                 (re-search-forward (format "=\\%s=" (caddr module))
-                                    nil t))
-               (when (invisible-p (point))
-                 (org-show-hidden-entry))))
-           'deferred))
-        (thing (helpful-symbol (intern thing)))
-        ((call-interactively #'helpful-at-point))))
-
-;; DEPRECATED Remove when 28 support is dropped.
-(unless (fboundp 'lisp--local-defform-body-p)
-  (fset 'lisp--local-defform-body-p #'ignore))
-
-;;;###autoload
 (defun +emacs-lisp-indent-function (indent-point state)
   "A replacement for `lisp-indent-function'.
 
@@ -168,20 +112,6 @@ https://emacs.stackexchange.com/questions/10230/how-to-indent-keywords-aligned"
                    (method
                     (funcall method indent-point state))))))))
 
-;;
-;;; Commands
-
-;;;###autoload
-(defun +emacs-lisp/open-repl ()
-  "Open the Emacs Lisp REPL (`ielm')."
-  (interactive)
-  (pop-to-buffer
-   (or (get-buffer "*ielm*")
-       (progn (ielm)
-              (let ((buf (get-buffer "*ielm*")))
-                (bury-buffer buf)
-                buf)))))
-
 ;;;###autoload
 (defun +emacs-lisp/buttercup-run-file ()
   "Run all buttercup tests in the focused buffer."
@@ -219,147 +149,5 @@ https://emacs.stackexchange.com/questions/10230/how-to-indent-keywords-aligned"
   "Toggle off instrumentalisation for the function under `defun'."
   (interactive)
   (eval-defun nil))
-
-;;
-;;; Hooks
-
-(autoload 'straight-register-file-modification "straight")
-
-;;;###autoload
-(defun +emacs-lisp-init-straight-maybe-h ()
-  "Make sure straight sees modifications to installed packages."
-  (when (file-in-directory-p (or buffer-file-name default-directory) doom-local-dir)
-    (add-hook 'after-save-hook #'straight-register-file-modification
-              nil 'local)))
-
-(defun +emacs-lisp--in-package-buffer-p ()
-  (let* ((file-path (buffer-file-name (buffer-base-buffer)))
-         (file-base (if file-path (file-name-base file-path))))
-    (and (derived-mode-p 'emacs-lisp-mode)
-         (or (null file-base)
-             (locate-file file-base (custom-theme--load-path) '(".elc" ".el"))
-             (save-excursion
-               (save-restriction
-                 (widen)
-                 (goto-char (point-max))
-                 (when (re-search-backward "^ *\\((provide\\)\\(?:-theme\\)? +'"
-                                           (max (point-min) (- (point-max) 512))
-                                           t)
-                   (goto-char (match-beginning 1))
-                   (ignore-errors
-                     (and (stringp file-base)
-                          (equal (symbol-name (doom-unquote (nth 1 (read (current-buffer)))))
-                                 file-base)))))))
-         (not (locate-dominating-file default-directory ".doommodule")))))
-
-;;;###autoload
-(define-minor-mode +emacs-lisp-non-package-mode
-  "Reduce flycheck verbosity where it is appropriate.
-
-Essentially, this means in any elisp file that either:
-- Is not a theme in `custom-theme-load-path',
-- Lacks a `provide' statement,
-- Lives in a project with a .doommodule file,
-- Is a dotfile (like .dir-locals.el or .doomrc).
-
-This generally applies to your private config (`doom-user-dir') or Doom's source
-\(`doom-emacs-dir')."
-  :since "3.0.0"
-  (unless (and (bound-and-true-p flycheck-mode)
-               (not (+emacs-lisp--in-package-buffer-p)))
-    (setq +emacs-lisp-non-package-mode nil))
-  (when (derived-mode-p 'emacs-lisp-mode)
-    (add-hook 'after-save-hook #'+emacs-lisp-non-package-mode nil t))
-  (if (not +emacs-lisp-non-package-mode)
-      (when (get 'flycheck-disabled-checkers 'initial-value)
-        (setq-local flycheck-disabled-checkers (get 'flycheck-disabled-checkers 'initial-value))
-        (kill-local-variable 'flycheck-emacs-lisp-check-form))
-    (with-memoization (get 'flycheck-disabled-checkers 'initial-value)
-      flycheck-disabled-checkers)
-    (setq-local flycheck-emacs-lisp-check-form
-                (prin1-to-string
-                 `(progn
-                    (setq doom-modules ',doom-modules
-                          doom-disabled-packages ',doom-disabled-packages
-                          byte-compile-warnings ',+emacs-lisp-linter-warnings)
-                    (condition-case e
-                        (progn
-                          (require 'doom)
-                          (require 'doom-cli)
-                          (require 'doom-start))
-                      (error
-                       (princ
-                        (format "%s:%d:%d:Error:Failed to load Doom: %s\n"
-                                (or ,(ignore-errors
-                                       (file-name-nondirectory
-                                        (buffer-file-name (buffer-base-buffer))))
-                                    (car command-line-args-left))
-                                0 0 (error-message-string e)))))
-                    ,(read (default-toplevel-value 'flycheck-emacs-lisp-check-form))))
-                flycheck-disabled-checkers (cons 'emacs-lisp-checkdoc
-                                                 flycheck-disabled-checkers))))
-
-;;
-;;; Fontification
-
-;;;###autoload
-(defun +emacs-lisp-truncate-pin ()
-  "Truncates long SHA1 hashes in `package!' :pin's."
-  (save-excursion
-    (goto-char (match-beginning 0))
-    (and (stringp (plist-get (sexp-at-point) :pin))
-         (search-forward ":pin" nil t)
-         (let ((start (re-search-forward "\"[^\"\n]\\{12\\}" nil t))
-               (finish (and (re-search-forward "\"" (line-end-position) t)
-                            (match-beginning 0))))
-           (when (and start finish)
-             (put-text-property start finish 'display "...")))))
-  nil)
-
-(defvar +emacs-lisp--face nil)
-
-;;;###autoload
-(defun +emacs-lisp-highlight-vars-and-faces (end)
-  "Match defined variables and functions.
-
-Functions are differentiated into special forms, built-in functions and
-library/userland functions"
-  (catch 'matcher
-    (while (re-search-forward "\\(?:\\sw\\|\\s_\\)+" end t)
-      (let ((ppss (save-excursion (syntax-ppss))))
-        (cond ((nth 3 ppss)  ; strings
-               (search-forward "\"" end t))
-              ((nth 4 ppss)  ; comments
-               (forward-line +1))
-              ((let ((symbol (intern-soft (match-string-no-properties 0))))
-                 (and (cond ((null symbol) nil)
-                            ((eq symbol t) nil)
-                            ((keywordp symbol) nil)
-                            ((special-variable-p symbol)
-                             (setq +emacs-lisp--face 'font-lock-variable-name-face))
-                            ((and (fboundp symbol)
-                                  (eq (char-before (match-beginning 0)) ?\()
-                                  (not (memq (char-before (1- (match-beginning 0)))
-                                             (list ?\' ?\`))))
-                             (let ((unaliased (indirect-function symbol)))
-                               (unless (or (macrop unaliased)
-                                           (special-form-p unaliased))
-                                 (let (unadvised)
-                                   (while (not (eq (setq unadvised (ad-get-orig-definition unaliased))
-                                                   (setq unaliased (indirect-function unadvised)))))
-                                   unaliased)
-                                 (setq +emacs-lisp--face
-                                       (if (subrp unaliased)
-                                           'font-lock-constant-face
-                                         'font-lock-function-name-face))))))
-                      (throw 'matcher t)))))))
-    nil))
-
-;; HACK: Quite a few functions here are called often, and so are especially
-;;   performance sensitive, so we compile this file on-demand, at least, until
-;;   Doom adds a formal compile step to 'doom sync'.
-(doom-compile-functions #'+emacs-lisp-highlight-vars-and-faces
-                        #'+emacs-lisp-truncate-pin
-                        #'+emacs-lisp--calculate-lisp-indent-a)
 
 ;;; autoload.el ends here

@@ -19,7 +19,7 @@
          '(+popup-display-buffer-stacked-side-window-fn))
         (display-buffer-alist +popup--display-buffer-alist)
         (buffer (current-buffer)))
-    (push (+popup-make-rule "." +popup-defaults) display-buffer-alist)
+    (push (cons "." +popup-defaults-alist) display-buffer-alist)
     (bury-buffer)
     (pop-to-buffer buffer)))
 

@@ -23,6 +23,7 @@
       )
 
 (map! :map jg-org-mode-map
+      :n "|" #'general-insert-call
       ;; :n "I" nil
       ;; :n "] h" nil
       ;; :n "[ h" nil
@@ -75,13 +76,12 @@
       )
       )
 
-(map! :after org-agenda
-      :map org-agenda-mode-map
+(map! :map org-agenda-mode-map
+      :after org-agenda
       :localleader
       (:prefix ("d" . "Date/time"))
       (:prefix ("c" . "Clock"))
       (:prefix ("p" . "Priority")))
-
 
 (map! :map org-journal-mode-map
        :n "]f"  #'org-journal-next-entry
@@ -120,16 +120,6 @@
       :desc "Run Org Test" "T" #'+jg-org-test-org-file
       )
 
-(after! (evil-org org)
-  (setq org-mode-map jg-org-mode-map
-        evil-org-mode-map jg-org-mode-map
-        minor-mode-map-alist (assq-delete-all 'evil-org-mode minor-mode-map-alist)
-        )
-  (push (cons 'evil-org-mode jg-org-mode-map) minor-mode-map-alist)
-
-  )
-
-;;-- dired
 (map! :map dired-mode-map
       :after jg-dired-bindings
       :desc "Mark Orgs" "Mo" #'+jg-org-dired-select-org
@@ -145,4 +135,11 @@
        )
       )
 
-;;-- end dired
+(after! (evil-org org)
+  (setq org-mode-map jg-org-mode-map
+        evil-org-mode-map jg-org-mode-map
+        minor-mode-map-alist (assq-delete-all 'evil-org-mode minor-mode-map-alist)
+        )
+  (push (cons 'evil-org-mode jg-org-mode-map) minor-mode-map-alist)
+
+  )

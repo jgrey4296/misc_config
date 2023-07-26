@@ -20,6 +20,7 @@
 (advice-add 'elisp-get-var-docstring :around #'+emacs-lisp-append-value-to-eldoc-a)
 
 ;;;###autoload (put 'map! 'indent-plists-as-data t)
+
 ;;;###autoload
 (defun +emacs-lisp--calculate-lisp-indent-a (&optional parse-start)
   "Add better indentation for quoted and backquoted lists.

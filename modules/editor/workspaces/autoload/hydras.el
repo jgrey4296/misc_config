@@ -66,7 +66,7 @@
 ;;;###autoload (autoload 'hydra-carousel/body "editor/workspaces/autoload/hydras" nil t)
 (defhydra hydra-carousel()
   (format "%s\n" (hydra-utils-format-columns
-                  '("|Carousel%-10(persp-parameter 'carousel)"
+                  '("|Carousel: %-10(persp-parameter 'carousel)"
                     new
                     convert
                     deconvert

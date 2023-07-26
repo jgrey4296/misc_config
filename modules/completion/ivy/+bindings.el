@@ -129,3 +129,8 @@
       :desc "Messages"                     "0" (cmd! (+jg-popup-ivy-open "*Messages*") (when current-prefix-arg (with-current-buffer "*Messages*" (+jg-text-clear-buffer))))
       )
 ;;-- end leader helms/ivys
+
+(map! :map jg-binding-change-map
+      :desc "Change Mode" "m"       #'+jg-ivy-change-major-mode
+      :desc "Change Minor Mode" "M" #'+jg-ivy-change-minor-mode
+      )

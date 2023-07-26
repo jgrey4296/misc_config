@@ -32,6 +32,8 @@
        :desc "From Minibuffer history"  "m"          #'counsel-minibuffer-history
        :desc "Unicode"                  "u"          #'insert-char
        :desc "From Kill Ring"           "y"          #'+default/yank-pop
+
+       :desc "General Insert"           "|"          #'general-insert-call
        )
 (map! :map jg-binding-normal-state-map ;; Visual
       :desc "Visual"             "V"        #'evil-visual-line

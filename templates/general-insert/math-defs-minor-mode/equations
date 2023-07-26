@@ -1,0 +1,62 @@
+Common Equations:
+tan(x)              = sin(x)/cos(x)                                               # Trigonometry
+cot(x)              = cos(x)/sin(x)                                               # Trigonometry
+csc(x)              = 1/sin(x)                                                    # Trigonometry
+sin(x)              = 1/csc(x)                                                    # Trigonometry
+sec(x)              = 1/cos(x)                                                    # Trigonometry
+cos(x)              = 1/sec(x)                                                    # Trigonometry
+cot(x)              = 1/tan(x)                                                    # Trigonometry
+tan(x)              = 1/cot(x)                                                    # Trigonometry
+sin^2(x) + cos^2(x) = 1                                                           # Trigonometry
+tan^2(x) + 1        = sec^2(x)                                                    # Trigonometry
+1 + cot^2(x)        = csc^2(x)                                                    # Trigonometry
+sin(-x)             = -sin(x)                                                     # Trigonometry
+csc(-x)             = -csc(x)                                                     # Trigonometry
+cos(-x)             = cos(x)                                                      # Trigonometry
+sec(-x)             = sec(x)                                                      # Trigonometry
+tan(-x)             = -tan(x)                                                     # Trigonometry
+cot(-x)             = -cot(x)                                                     # Trigonometry
+sin(2x)             = 2sin(x)cos(x)                                               # Trigonometry
+
+erf                 = (2 / (√π)) . integral(e^(-t^2) dt)                          # Error Function
+erc                 = 1 - erf()                                                   # Error Function
+
+phi                 = (1 - erf(x / √2)) / 2                                       # Stats. cumulative standard normal distribution:
+
+H(xs)               = mean(xs) / sum(x^-1 for xs)                                 # Stats.
+y                   = α * βx + ε                                                  # Linear Line
+slope * x + intercept + noise                                                     # Linear Regressoin
+min(Σ(y_i - y'_i)²) = min(Σ(y_i - α - βx_i)²)                                     # Least Squares minimization for Linear Regression
+β                   = R(YX) = σ(XY) / σ²(X)                                       # Least Squares minimization for Linear Regression
+α                   = E(Y) - β*E(X)                                               # Least Squares minimization for Linear Regression
+
+y                   = α + (β₁*X₁) + (β₂*X₂)... + ε                                # Multiple Variable Linear Line.
+R(X₁Y.X₂)                                                                         # Partial Regression Coefficient for Multiple Regression
+Min(Cov(ε, Xᵢ))                                                                   # Minimization for Multiple Regression.
+Denominator         = Var(X₁)Var(X₂) - Cov(X₁X₂)²                                 # Multiple Regression Denominator
+β₁                  = R(YX₁.X₂) = ( Var(X₂)Cov(YX₁) - Cov(YX₂)Cov(X₂X₁) ) / denom # Multiple Regression variables
+β₂                  = R(YX₂.X₁) = ( σ²(X₂)σ(YX₂)σ(YX₂) - σ(YX₁)σ(YX₂) ) / denom   # Multiple Regression variables
+α                   = E(Y)                                                        # Multiple Regression variables
+
+
+μ                   = 1/n * Σx                                                    # Stats. Mean (where x is uniform)
+
+β                   = Const . (x^(α-1)) . (1-x)^(β-1)                             # Stats.
+Γ(j)                = (j-1)!  -> integral( (t^z-1) (e^-t)dt)                      # complex factorial
+
+
+TODO                                                                              # Determinant
+TODO                                                                              # Matrix multiplication
+
+a . b               = Σ (aᵢ * bᵢ) = ||a|| * ||b|| * cos θ                         # Dot Product. Scalar. Commutative, Distributive over vector addition, Bilinear.
+(c₁ * a) . (c₂ * b) = c₁*c₂*(a.b)                                                 # Scalar multiplication of dot products
+0 = a.b                                                                           # Orthagonality / Perpendicular.
+c₂ = a₂ + b₂ - 2ab cos θ                                                          # Law of Cosines
+a x b = ||a|| * ||b|| * sin(θ) * n                                                # Cross Product. Vector, perpendicular to both input vectors.
+
+TODO                                                                              # Eigenvalue
+TODO                                                                              # Eigenvector
+
+TODO                                                                              # cancellation law
+
+P(X₁, X₂, ... X_n) = ∏ P(x_i | parent(x_i))                                       # Rule of Product Decomposition in DAGS. eg: P(X, Y, Z) = P(X) P(Y|X) P(Z|Y)

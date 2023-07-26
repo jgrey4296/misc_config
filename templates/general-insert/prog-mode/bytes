@@ -1,0 +1,10 @@
+Byte and Binary Sizes:
+Bit                   #  0 or 1
+Byte                  #  8 bits
+Word                  #  2 Bytes
+DWord                 #  2 words
+
+
+lowest address <-------------> highest address # Endianness. X-end-first.
+least sig      <little endian>        most sig # Endianness
+most  sig      <big    endian>       least sig # Endianness

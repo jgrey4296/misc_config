@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name  : mock.dict
+# uuid  : mock.dict
+# key   : mock.dict
+# group :
+# --
+# https://stackoverflow.com/questions/28361564
+# Mock Objects have a keys() method which interferes, so:
+mock_obj = mocker.Mock()
+del mock_obj.keys
+mock_obj.__iter__.return_value = [("key", "val"), ("key2", "val2")]
+
+dict(mock_obj)

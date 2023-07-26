@@ -1,0 +1,51 @@
+Logic Operators:
+⟘     #  bottom / false
+⟙     #  Top / true
+
+∧     #  and. Classical Conjunction.
+∨     #  or.  Classical Disjunction.
+
+∴     #  therefore, qed.
+⊢     #  syntactic consequence, sequent, (typing) judgement. Turnstile.
+⊨     #  semantic consequence. Turnstile.
+
+⨂     #  (linear logic) Multiplicative Conjunction
+⅋     #  (linear logic) Multiplicative Disjunction
+&     #  (linear logic) Additive Conjunction
+⨁     #  (linear logic) Additive Disjunction
+
+⊂     #  Subset. Set Operators.
+⊃     #  Superset. Set Operators.
+∪     #  union. Set Operators.
+∩     #  intersection. Set Operators.
+
+⋀     #  lattice join
+⋁     #  lattice meet
+
+□     #  Box. Modal Logic.
+◇     #  Diamond. Modal Logic.
+
+⨯     #  cartesian product
+
+∫     #  Integral
+Δ     #  Delta
+Σ     #  Sum
+Π     #  Product
+μ     #  The Mean
+σ     #  Standard Deviation
+ρ     #  Correlation Coefficient
+
+n!    #  factorial(n)
+
+∀     # for all. First Order Logic. FOL.
+∃     # there exists. FOL
+∄     # there does not exist. FOL
+∈     # element of. FOL
+¬     # Negation.
+⇒     # Implication.
+⇔     # Bi-Implication
+
+√     # Square Root
+
+.     # Dot Product
+||a|| # magnitude of vector

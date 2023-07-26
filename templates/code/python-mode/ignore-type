@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : ignore-type
+# uuid  : ignore-type
+# key   : igty
+# group :
+# --
+# type: ignore

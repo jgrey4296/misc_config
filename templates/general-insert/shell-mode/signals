@@ -1,0 +1,33 @@
+Shell/OS Signals:
+
+SIGHUP    # Hangup.                    1.
+SIGINT    # Keyboard Interrupt.        2.
+SIGQUIT   # Quit from KEyboard.        3.
+SIGILL    # Terminate Process.         4.
+SIGTRAP   #
+SIGABRT   # Abort Process.             6.
+SIGEMT    #
+SIGFPE    # Floating Point Exception.  8.
+SIGKILL   # Kill Signal.               9.
+SIGBUS    #
+SIGSEGV   #
+SIGSYS    #
+SIGPIPE   #
+SIGALRM   #
+SIGTERM   # Termination Signal.        15.
+SIGURG    #
+SIGSTOP   #
+SIGTSTP   # Stop typed at tty / Ctl-z. 20.
+SIGCONT   #
+SIGCHLD   #
+SIGTTIN   #
+SIGTTOU   #
+SIGIO     #
+SIGXCPU   #
+SIGXFSZ   #
+SIGVTALRM #
+SIGPROF   #
+SIGWINCH  #
+SIGINFO   #
+SIGUSR1   #
+SIGUSR2   #

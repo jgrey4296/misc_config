@@ -1,0 +1,14 @@
+Number Sets:
+N      # Natural Numbers.             0?, 1, 2, 3...
+Z      # Integers.        ... -2, -1, 0,  1, 2...
+Q      # Rational Numbers. Fractions of two integers. ∀x,y ∈ Z : x/y.
+
+R      # Real Numbers. Decimals.
+C      # Complex Numbers. x + y·i, where i = √-1
+H      # Quaternions. Extension of Complex numbers. a + b·i + c·j + d·k
+
+π      # pi
+τ      # 2*pi
+∞      # Infinity
+
+Peano  # 0 and succ({})

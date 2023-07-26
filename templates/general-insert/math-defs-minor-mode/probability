@@ -1,0 +1,33 @@
+Probability:
+∀x, P(X)    >= 0                                                         # Axioms
+P(Certainty) = 1                                                         # Axioms
+P(Union(X)) = ΣP(x ∈ X)                                                  # Axioms
+
+P(A) = P(A | B₁)P(B₁) + P(A | B₂)P(B₂) ... + P(A | B_n)P(B_n)            # Law of Total Probability.
+P(A | B) = (P(B | A) * P(A)) / P(B)                                      # Bayes
+
+
+P(A | B) = P(A ∩ B) / P(B)                                               # Conditional Probability
+P(A)     = P(A|B) = P(A ∩ B) = P(A)P(B)                                  # Independence
+P(A|B,C) = P(A|C)                                                        # Conditional Independence
+
+μ = E(X) = Σ x * P(X=x)                                                  # Discrete Population Mean
+E(X) = ∫ x P(X) dx                                                       # Continuous Population Mean
+E(Y|x) = Σ y P(Y=y|x)                                                    # Conditional Expectation
+
+E((X-μ)ⁿ)                                                                # Nth Moment. Odd moments are 0 for symmetric distributions
+
+σ² = Var(X) = E((X - E(X))²) = E(X) - E(X)²                              # Variance
+
+σ = (Var(X)) = √Var(X) = √Cov(X, X)                                      # Standard Deviation. Same units as X, unlike variance.
+
+σ(XY) = E( (X-E(X)) * (Y - E(Y)) ) = E(XY) - (E(X) * E(Y))               # Covariance between two variables.
+
+Cov(aX, bY)   = a * b * Cov(X, Y)                                        # Covariance properties
+Cov(X + c, Y) = Cov(X, Y)                                                # Covariance properties
+Cov(X + Y, Z) = Cov(X, Z) + Cov(Y, Z)                                    # Covariance properties
+Cov(X, X)     = Var(X)                                                   # Covariance properties
+Cov(X,Y)      = E(XY) - E(X)E(Y)                                         # Covariance properties
+Cov(Y, X₁) = Cov(β₀ + β₁ * X₁ + β₂ * X₂, X₁) = β₁Var(X₁) + β₂Cov(X₂, X₁) # Covariance properties
+
+ρ(XY) = σ(XY) / (σ(X)σ(Y))                                               # Correlation coefficient

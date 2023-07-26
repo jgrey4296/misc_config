@@ -1,0 +1,5 @@
+Python Exiting:
+quit(code=None) # Added to site at startup. Interactive only.
+exit(code=None) # Added to site at startup. Interactive only.
+
+sys.exit([arg]) # Non-interactive use. Raises SystemExit.

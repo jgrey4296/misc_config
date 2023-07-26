@@ -1,0 +1,6 @@
+JG Conventions:
+Protocol  # Functional Spec.             {}_p.
+Data      # Structural Spec.             {}_d.
+Interface # Functional+Structural Spec.  {}_i.
+
+Mixins    # Separate Implementations.    {}_m.

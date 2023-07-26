@@ -1,0 +1,18 @@
+Causal Logic:
+P(X₁, X₂, ... X_n) = ∏ P(x_i | parent(x_i))                                       # Rule of Product Decomposition in DAGS. eg: P(X, Y, Z) = P(X) P(Y|X) P(Z|Y)
+
+X -> Y -> Z                                                                       # Chain.    Dependent(Z, Y), Dependent(Y, X). Likely-Dependent(Z,X). Independent(Z,X | Y).
+Y <- X -> Z                                                                       # Fork.     Dependent(X, Y), Dependent(X, Z). Likely Dependent(Y,Z). Independent(Y,Z | X).
+X -> Z <- Y                                                                       # Collider. Dependent(X,Z),  Depdnent(Y, Z),  Independent(X,Y), Dependent(X,Y | Z).
+
+Conditional Independence in Chains                                                # TODO
+Conditional Independent in Forks                                                  # TODO
+Conditional Independence in Colliders                                             # TODO
+D-Separation                                                                      # TODO
+Adjustment Formula                                                                # TODO
+The Causal Effect Rule                                                            # TODO
+The Truncated Product Rule                                                        # TODO
+The Backdoor Criterion                                                            # TODO
+The Frontdoor Criterion                                                           # TODO
+Mediation                                                                         # TODO
+Counterfactuals                                                                   # TODO

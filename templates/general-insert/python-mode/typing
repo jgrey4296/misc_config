@@ -1,0 +1,174 @@
+Python Typing:
+
+dict[K,V]                               # builtin
+list[T]                                 # builtin
+set[T]                                  # builtin
+frozenset[T]                            # builtin
+tuple[T]                                # builtin
+str                                     # builtin
+
+defaultdict[K,V]                        # collections
+OrderedDict[K,V]                        # collections
+ChainMap[K,V]                           # collections
+Counter                                 # collections
+Deque                                   # collections
+UserDict                                # collections
+UserList                                # collections
+UserString                              # collections
+
+Pattern                                 # re
+Match                                   # re
+
+abc.Set                                 # collections
+abc.Collection                          # collections
+abc.Container                           # collections
+abc.ItemsView                           # collections
+abc.KeysView                            #  collections
+abc.ValuesView                          #  collections
+abc.Mapping                             # collections
+abc.MutableMapping                      # collections
+abc.MutableSequence                     # collections
+abc.MutableSet                          # collections
+abc.Sequence                            # collections
+
+abc.Coroutine                           # collections
+abc.AsyncGenerator                      # collections
+abc.AsyncIterable                       # collections
+abc.ASyncIterator                       # collections
+abc.Awaitable                           # collections
+abc.Iterable                            # collections
+abc.Iterator                            # collections
+abc.Callable                            # collections
+abc.Generator                           # collections
+abc.Hashable                            # collections
+abc.Reversible                          # collections
+abc.Sized                               # collections
+
+ContextManager                          # contextlib
+AsyncContextManager                     # contextlib
+
+ABCMeta                                 # abc. main metaclass superclass.
+ABC                                     # abc. utility. subclass to set ABCMeta as metaclass.
+
+@abc.abstractmethod
+
+
+
+Annotated[type, meta]                   # typing. Add Metadata to a type.
+Any                                     # typing
+AnyStr                                  # typing. Mutually Exclusive str or bytes.
+BinaryIO                                # typing. For IO Streams.
+CT_co                                   # typing
+Callable[[in-vars], out]                # typing
+ClassVar[T]                             # typing. for class variable typing.
+Concatenate                             # typing. For Callable[Concatenate[Var, Var, Paramspec], Ret]
+ContextManager                          # typing
+EXCLUDED_ATTRIBUTES                     # typing
+Final                                   # typing. Constant declarations.
+ForwardRef['type']                      # typing. Declare types that are coming. Should be implicit, not user defined.
+Generic                                 # typing
+GenericAlias                            # typing
+IO                                      # typing. For IO Streams
+KT                                      # typing
+Literal                                 # typing. eg: Literal['r', 'rb',' w', 'wb']
+LiteralString                           # typing. ie: Not runtime read string.
+MethodDescriptorType                    # typing
+MethodWrapperType                       # typing
+NamedTuple                              # typing
+NamedTupleMeta                          # typing
+Never                                   # typing. Bottom Type.
+NewType                                 # typing
+NoReturn                                # typing
+NotRequired                             # typing. For TypedDicts
+Optional[X]                             # typing. Eqv to X|None
+ParamSpec                               # typing. TypeVars, for functions and decorators.
+ParamSpecArgs                           # typing
+ParamSpecKwargs                         # typing
+Protocol                                # typing. Interface declaration. Subclass it. add @runtime_checkable
+Required                                # typing. For TypedDicts.
+Self                                    # typing. Current Enclosed class.
+SupportsAbs                             # typing. Protocol. has __abs__
+SupportsBytes                           # typing. Protocol. has __bytes__
+SupportsComplex                         # typing. Protocol. has __complex__
+SupportsFloat                           # typing. Protocol. has __float__
+SupportsIndex                           # typing. Protocol. has __index__
+SupportsInt                             # typing. Protocol. has __int__
+SupportsRound                           # typing. Protocol. has __round__
+T                                       # typing
+TYPE_CHECKING                           # typing. declaration, bool. only True when type checking, not during runtime.
+type_check_only                         # typing. mark fn as unavailable at runtime.
+T_co                                    # typing
+T_contra                                # typing
+TextIO                                  # typing. For IO streams from open().
+type[class]                             # typing. Class type rather than instance.
+TypeAlias                               # typing
+TypeGuard                               # typing. For functions to narrow types. fn(x) -> TypeGuard[narrowedTo]
+TypeVar('name')                         # typing. For Generics.
+TypeVarTuple                            # typing
+TypedDict                               # typing. Subclass it for annotating types -> keys in a dict.
+Union                                   # typing
+Unpack                                  # typing. For unpacking tuples.
+VT                                      # typing
+VT_co                                   # typing
+V_co                                    # typing
+WrapperDescriptorType                   # typing
+abstractmethod                          # typing
+assert_never                            # typing. Request Type Checker to confirm this position is unreachable.
+assert_type(val, type)                  # typing. Request Type Checker to check type here.
+cast                                    # typing
+clear_overloads                         # typing. Requeset clear of overload variations.
+collections                             # typing
+contextlib                              # typing
+dataclass_transform                     # typing. Decorator. Mark decorated as being transformed at runtime similar to dataclass.
+final                                   # typing. Decorator. Mark fn as unable to be overriden.
+functools                               # typing
+get_args                                # typing. Get type args with substitutions performed.
+get_origin                              # typing. for X[T,T..], get_origin(X[T,T..]) -> X
+get_overloads                           # typing. Request debug print of overload variations.
+get_type_hints                          # typing. For introspection. return dict of annotations.
+io                                      # typing
+is_typeddict                            # typing
+no_type_check                           # typing. Decorator. mark class or function that annotations are not type hints.
+no_type_check_decorator                 # typing. Decorator. mark another decorator with no_type_check effect.
+operator                                # typing
+overload                                # typing. Decorator. mark abstract function overloads.
+re                                      # typing
+reveal_type                             # typing. Request Type Checker print debug type.
+runtime_checkable                       # typing. For using isintance(x, APRotocol)
+stdlib_re                               # typing
+sys                                     # typing
+types                                   # typing
+warnings                                # typing
+
+AsyncGeneratorType                      # types. standard interpreter. Usable in match statements
+BuiltinFunctionType                     # types. standard interpreter. Usable in match statements
+BuiltinMethodType                       # types. standard interpreter. Usable in match statements
+CellType                                # types. standard interpreter. Usable in match statements
+ClassMethodDescriptorType               # types. standard interpreter. Usable in match statements
+CodeType                                # types. standard interpreter. Usable in match statements
+CoroutineType                           # types. standard interpreter. Usable in match statements
+DynamicClassAttribute                   # types. utility.
+EllipsisType                            # types. standard interpreter. Usable in match statements
+FrameType                               # types. standard interpreter. Usable in match statements
+FunctionType                            # types. standard interpreter. Usable in match statements
+GeneratorType                           # types. standard interpreter. Usable in match statements
+GenericAlias                            # types. standard interpreter. Usable in match statements
+GetSetDescriptorType                    # types. standard interpreter. Usable in match statements
+LambdaType                              # types. standard interpreter. Usable in match statements
+MappingProxyType                        # types. standard interpreter. Usable in match statements
+MemberDescriptorType                    # types. standard interpreter. Usable in match statements
+MethodDescriptorType                    # types. standard interpreter. Usable in match statements
+MethodType                              # types. standard interpreter. Usable in match statements
+MethodWrapperType                       # types. standard interpreter. Usable in match statements
+ModuleType                              # types. standard interpreter. Usable in match statements
+NoneType                                # types. standard interpreter. Usable in match statements
+NotImplementedType                      # types. standard interpreter. Usable in match statements
+SimpleNamespace                         # types. utility.
+TracebackType                           # types. standard interpreter. Usable in match statements
+UnionType                               # types. standard interpreter. Usable in match statements
+WrapperDescriptorType                   # types. standard interpreter. Usable in match statements
+coroutine                               # types. utility. (generator) -> coroutine.
+resolve_bases(bases)                    # types. unpacks __mro_entries__
+
+__source__                              # https://docs.python.org/3/library/types.html
+__source__                              # https://docs.python.org/3/library/typing.html

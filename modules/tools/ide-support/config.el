@@ -155,7 +155,6 @@
   :commands (flycheck-list-errors flycheck-buffer flycheck-mode global-flycheck-mode)
   ;; :hook (doom-first-buffer . global-flycheck-mode)
   :init
-
   (spec-handling-add! python-env
                       '(flycheck
                         (:support flycheck #'(lambda (path name)
@@ -174,8 +173,6 @@
   (setq flycheck-global-modes nil)
 
   :config
-  (add-hook! 'doom-escape-hook :append #'+syntax-check-buffer-h)
-
   (remove-hook! 'after-change-major-mode-hook
     #'global-flycheck-mode-enable-in-buffers
     )
@@ -183,7 +180,7 @@
 
 (use-package! flycheck-popup-tip
   :commands flycheck-popup-tip-show-popup flycheck-popup-tip-delete-popup
-  :hook (flycheck-mode . +syntax-init-popups-h)
+  :hook (flycheck-mode . flycheck-popup-tip-mode)
   :config
   (after! evil
     ;; Don't display popups while in insert or replace mode, as it can affect

@@ -1,4 +1,0 @@
-setuptools-rust # https://setuptools-rust.readthedocs.io/en/latest/
-pypi            # https://pypi.org/
-setuptools toml # https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html
-pip toml        # https://pip.pypa.io/en/stable/reference/build-system/pyproject-toml/

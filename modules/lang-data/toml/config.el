@@ -29,6 +29,7 @@
 
   (add-hook! 'conf-toml-mode-hook :depth 100
              #'outline-minor-mode
+             #'general-insert-minor-mode
              )
   )
 ;;

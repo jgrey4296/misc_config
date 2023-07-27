@@ -1,23 +1,26 @@
-sh                  # https://amoffat.github.io/sh/
-% str formatting    # https://docs.python.org/3/library/stdtypes.html#printf-style-string-formatting
-{} str formatting   # https://docs.python.org/3/library/string.html#formatspec
 Awesome Libs        # https://github.com/vinta/awesome-python
-datetime            # https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior
-PyGObject           # https://pygobject.readthedocs.io/en/latest/
-Pyright             # https://microsoft.github.io/pyright/#/configuration
-Logging             # https://docs.python.org/3/library/logging.html
-Match Statement     # https://docs.python.org/3/reference/compound_stmts.html#the-match-statement
-Match Spec PEP      # https://peps.python.org/pep-0634/
-Mocks               # https://docs.python.org/3/library/unittest.mock.html
-Unittest            # https://docs.python.org/3/library/unittest.html
-Twisted             # https://docs.twisted.org/en/stable/
-Mamba               # https://mamba.readthedocs.io/
-SnakeMake           # https://snakemake.readthedocs.io/
-Luigi               # https://luigi.readthedocs.io/en/stable/index.html
 Dagster             # https://docs.dagster.io/
+Logging             # https://docs.python.org/3/library/logging.html
+Luigi               # https://luigi.readthedocs.io/en/stable/index.html
+Mamba               # https://mamba.readthedocs.io/
+Martin Heinz        # https://martinheinz.dev/
+Match Spec PEP      # https://peps.python.org/pep-0634/
+Match Statement     # https://docs.python.org/3/reference/compound_stmts.html#the-match-statement
+Maturin             # https://www.maturin.rs/index.html
+Mocks               # https://docs.python.org/3/library/unittest.mock.html
+Nose                # https://github.com/nose-devs/nose2
+PEPs                # https://peps.python.org/pep-0000/
 Petl                # https://petl.readthedocs.io/en/stable/index.html
-python-twitter      # https://python-twitter.readthedocs.io/en/latest/
-pyproject.toml spec # https://packaging.python.org/en/latest/specifications/declaring-project-metadata/#declaring-project-metadata
+Pluggy              # https://pluggy.readthedocs.io/en/stable/
+PyGObject           # https://pygobject.readthedocs.io/en/latest/
+Pyright             # https://microsoft.github.io/pyright/
+Pytest              # https://docs.pytest.org/en/7.3.x/how-to/fixtures.html
+Pytest Mock         # https://pytest-mock.readthedocs.io/en/latest/
+Pytest Plugins      # https://docs.pytest.org/en/latest/reference/plugin_list.html
+SnakeMake           # https://snakemake.readthedocs.io/
+Tox                 # https://tox.wiki/en/4.6.4/
+Twisted             # https://docs.twisted.org/en/stable/
+Unittest            # https://docs.python.org/3/library/unittest.html
 argparse            # https://docs.python.org/3/howto/argparse.html
 astroid             # https://pylint.pycqa.org/projects/astroid/en/latest/index.html
 beautiful Soup      # https://beautiful-soup-4.readthedocs.io/en/latest/
@@ -29,6 +32,7 @@ cairo               # https://pycairo.readthedocs.io/en/latest/reference/context
 cleo                # https://cleo.readthedocs.io/en/latest/
 conda               # https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html
 construct           # https://construct.readthedocs.io/en/latest/
+datetime            # https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior
 dirty-equals        # https://dirty-equals.helpmanual.io/latest/
 doit                # https://pydoit.org/contents.html
 floweaver           # https://floweaver.readthedocs.io/en/latest/
@@ -40,6 +44,7 @@ jinja               # https://palletsprojects.com/p/jinja/
 llvmlite            # https://llvmlite.readthedocs.io/en/latest/index.html
 marshmallow         # https://marshmallow.readthedocs.io/en/stable/
 matplotlib          # https://matplotlib.org/stable/api/index.html
+milksnake           # https://github.com/getsentry/milksnake
 more-itertools      # https://more-itertools.readthedocs.io/en/stable/
 networkx            # https://networkx.github.io/
 numpy               # https://numpy.org/doc/stable/
@@ -55,24 +60,26 @@ pomegranate         # https://pomegranate.readthedocs.io/en/latest/
 pony                # https://docs.ponyorm.org/
 pre-commit          # https://pre-commit.com/
 pronouncingpy       # https://pronouncing.readthedocs.io/en/latest/
-pyRight             # https://github.com/Microsoft/pyright
 pycycle             # https://github.com/bndr/pycycle
 pyexcel             # https://github.com/pyexcel/pyexcel
 pygments            # https://pygments.org/docs/
 pylightxl           # https://github.com/PydPiper/pylightxl
 pyparsing           # https://pyparsing-docs.readthedocs.io/en/latest/
 pypi                # https://pypi.org/
+pyproject.toml spec # https://packaging.python.org/en/latest/specifications/declaring-project-metadata/#declaring-project-metadata
 python stdlib       # https://docs.python.org/3/library/index.html
+python-twitter      # https://python-twitter.readthedocs.io/en/latest/
 python/C api        # https://docs.python.org/3/c-api/index.html
 railroad-diagrams   # https://github.com/tabatkins/railroad-diagrams
 re                  # https://docs.python.org/3/library/re.html
 rich                # https://rich.readthedocs.io/en/stable/introduction.html
 scikit-learn        # https://scikit-learn.org/stable/user_guide.html
-scrapy              # https://docs.scrapy.org/en/latest/
 scons               # https://scons.org/documentation.html
+scrapy              # https://docs.scrapy.org/en/latest/
 seaborn             # https://seaborn.pydata.org/api.html
 setuptools          # https://setuptools.readthedocs.io/en/latest/userguide/index.html
 setuptools-rust     # https://setuptools-rust.readthedocs.io/en/latest/
+sh                  # https://amoffat.github.io/sh/
 sorobn              # https://github.com/MaxHalford/sorobn
 spacy               # https://spacy.io/usage
 sphinx              # https://www.sphinx-doc.org/en/master/contents.html
@@ -84,20 +91,14 @@ thefuzz             # https://github.com/seatgeek/thefuzz
 tomllib             # https://docs.python.org/3/library/tomllib.html
 toolz               # https://toolz.readthedocs.io/en/latest/
 tqdm                # https://tqdm.github.io/
+twine               # https://github.com/pypa/twine
 validators          # https://python-validators.github.io/validators/
 venv                # https://docs.python.org/3/library/venv.html
 xsdata              # https://xsdata.readthedocs.io/en/latest/
 xsdata-plantuml     # https://github.com/tefra/xsdata-plantuml
 z3                  # https://github.com/Z3Prover/z3
 zlib                # https://docs.python.org/3/library/zlib.html
-Martin Heinz        # https://martinheinz.dev/
-Pytest              # https://docs.pytest.org/en/7.3.x/how-to/fixtures.html
-Pytest Mock         # https://pytest-mock.readthedocs.io/en/latest/
-Pytest Plugins      # https://docs.pytest.org/en/latest/reference/plugin_list.html
-Maturin             # https://www.maturin.rs/index.html
-milksnake           # https://github.com/getsentry/milksnake
-twine               # https://github.com/pypa/twine
-Nose                # https://github.com/nose-devs/nose2
-Tox                 # https://tox.wiki/en/4.6.4/
-Pluggy              # https://pluggy.readthedocs.io/en/stable/
-Pyright             # https://microsoft.github.io/pyright/#/command-line
+{} str formatting   # https://docs.python.org/3/library/string.html#formatspec
+% str formatting    # https://docs.python.org/3/library/stdtypes.html#printf-style-string-formatting
+
+PEP 635: Match statement # https://peps.python.org/pep-0635

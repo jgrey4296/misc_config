@@ -1,1 +1,8 @@
-Toml Spec # https://toml.io/en/v1.0.0
+Toml Spec                    # https://toml.io/en/v1.0.0
+setuptools-rust              # https://setuptools-rust.readthedocs.io/en/latest/
+pypi                         # https://pypi.org/
+setuptools toml              # https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html
+pip toml                     # https://pip.pypa.io/en/stable/reference/build-system/pyproject-toml/
+
+PEP 440: Python Version Spec # https://peps.python.org/pep-0440/
+PEP 508: Python Dep Spec     # https://peps.python.org/pep-0508/

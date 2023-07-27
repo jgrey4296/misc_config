@@ -263,6 +263,8 @@ if python complains, try:
 pip install pygobject
 
 ** Linting
+https://github.com/microsoft/lsprotocol
+https://github.com/openlawlibrary/pygls
 https://github.com/ORCID/python-orcid
 https://github.com/xlcnd/isbntools
 https://github.com/xlcnd/isbnlib

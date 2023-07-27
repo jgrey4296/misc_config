@@ -1,0 +1,364 @@
+Pylint Checker Names:
+
+abstract-class-instantiated                  (E0110) #  Used when an abstract class with `abc.ABCMeta` as metaclass has abstract methods and is instantiated.
+abstract-method                              (W0223) #  Used when an abstract method (i.e. raise NotImplementedError) is not overridden in concrete class.
+access-member-before-definition              (E0203) #  Used when an instance member is accessed before it's actually assigned.
+anomalous-backslash-in-string                (W1401) #  Used when a backslash is in a literal string but not as an escape.
+anomalous-unicode-escape-in-string           (W1402) #  Used when an escape like \u is encountered in a byte string where it has no effect.
+arguments-differ                             (W0221) #  Used when a method has a different number of arguments than in the implemented interface or in an overridden method. Extra arguments with default values are ignored.
+arguments-out-of-order                       (W1114) #  Emitted when the caller's argument names fully match the parameter names in the function signature but do not have the same order.
+arguments-renamed                            (W0237) #  Used when a method parameter has a different name than in the implemented interface or in an overridden method.
+assert-on-string-literal                     (W0129) #  Used when an assert statement has a string literal as its first argument, which will cause the assert to always pass.
+assert-on-tuple                              (W0199) #  A call of assert on a tuple will always evaluate to true if the tuple is not empty, and will always evaluate to false if it is.
+assigning-non-slot                           (E0237) #  Used when assigning to an attribute not defined in the class slots.
+assignment-from-no-return                    (E1111) #  Used when an assignment is done on a function call but the inferred function doesn't return anything.
+assignment-from-none                         (E1128) #  Used when an assignment is done on a function call but the inferred function returns nothing but None.
+astroid-error                                (F0002) #  Used when an unexpected error occurred while building the Astroid representation. This is usually accompanied by a traceback. Please report such errors !
+attribute-defined-outside-init               (W0201) #  Used when an instance attribute is defined outside the __init__ method.
+await-outside-async                          (E1142) #  Emitted when await is used outside an async function.
+bad-classmethod-argument                     (C0202) #  Used when a class method has a first argument named differently than the value specified in valid-classmethod-first-arg option (default to "cls"), recommended to easily differentiate them from regular instance methods.
+bad-configuration-section                    (E0014) #  Used when we detect a setting in the top level of a toml configuration that shouldn't be there.
+bad-except-order                             (E0701) #  Used when except clauses are not in the correct order (from the more specific to the more generic). If you don't fix the order, some exceptions may not be caught by the most specific handler.
+bad-exception-cause                          (E0705) #  Used when using the syntax "raise ... from ...", where the exception cause is not an exception, nor None.
+bad-file-encoding                            (C2503) #  PEP8 recommends UTF-8 default encoding for Python files. See https://peps.python.org/pep-0008/#source-file-encoding
+bad-format-character                         (E1300) #  Used when an unsupported format character is used in a format string.
+bad-format-string                            (W1302) #  Used when a PEP 3101 format string is invalid.
+bad-format-string-key                        (W1300) #  Used when a format string that uses named conversion specifiers is used with a dictionary whose keys are not all strings.
+bad-indentation                              (W0311) #  Used when an unexpected number of indentation's tabulations or spaces has been found.
+bad-inline-option                            (I0010) #  Used when an inline option is either badly formatted or can't be used inside modules.
+bad-mcs-classmethod-argument                 (C0204) #  Used when a metaclass class method has a first argument named differently than the value specified in valid-metaclass-classmethod-first-arg option (default to "mcs"), recommended to easily differentiate them from regular instance methods.
+bad-mcs-method-argument                      (C0203) #  Used when a metaclass method has a first argument named differently than the value specified in valid-classmethod-first-arg option (default to "cls"), recommended to easily differentiate them from regular instance methods.
+bad-open-mode                                (W1501) #  Python supports: r, w, a[, x] modes with b, +, and U (only with r) options. See https://docs.python.org/3/library/functions.html#open
+bad-plugin-value                             (E0013) #  Used when a bad value is used in 'load-plugins'.
+bad-reversed-sequence                        (E0111) #  Used when the first argument to reversed() builtin isn't a sequence (does not implement __reversed__, nor __getitem__ and __len__
+bad-staticmethod-argument                    (W0211) #  Used when a static method has "self" or a value specified in valid- classmethod-first-arg option or valid-metaclass-classmethod-first-arg option as first argument.
+bad-str-strip-call                           (E1310) #  The argument to a str.{l,r,}strip call contains a duplicate character,
+bad-string-format-type                       (E1307) #  Used when a type required by format string is not suitable for actual argument type
+bad-super-call                               (E1003) #  Used when another argument than the current class is given as first argument of the super builtin.
+bad-thread-instantiation                     (W1506) #  The warning is emitted when a threading.Thread class is instantiated without the target function being passed as a kwarg or as a second argument. By default, the first parameter is the group param, not the target param.
+bare-except                                  (W0702) #  A bare ``except:`` clause will catch ``SystemExit`` and ``KeyboardInterrupt`` exceptions, making it harder to interrupt a program with ``Control-C``, and can disguise other problems. If you want to catch all exceptions that signal program errors, use ``except Exception:`` (bare except is equivalent to ``except BaseException:``).
+bidirectional-unicode                        (E2502) #  bidirectional unicode are typically not displayed characters required to display right-to-left (RTL) script (i.e. Chinese, Japanese, Arabic, Hebrew, ...) correctly. So can you trust this code? Are you sure it displayed correctly in all editors? If you did not write it or your language is not RTL, remove the special characters, as they could be used to trick you into executing code, that does something else than what it looks like. More Information: https://en.wikipedia.org/wiki/Bidirectional_text https://trojansource.codes/
+binary-op-exception                          (W0711) #  Used when the exception to catch is of the form "except A or B:". If intending to catch multiple, rewrite as "except (A, B) #
+broad-exception-caught                       (W0718) #  If you use a naked ``except Exception:`` clause, you might end up catching exceptions other than the ones you expect to catch. This can hide bugs or make it harder to debug programs when unrelated errors are hidden.
+broad-exception-raised                       (W0719) #  Raising exceptions that are too generic force you to catch exceptions generically too. It will force you to use a naked ``except Exception:`` clause. You might then end up catching exceptions other than the ones you expect to catch. This can hide bugs or make it harder to debug programs when unrelated errors are hidden.
+c-extension-no-member                        (I1101) #  Used when a variable is accessed for non-existent member of C extension. Due to unavailability of source static analysis is impossible, but it may be performed by introspecting living objects in run-time.
+catching-non-exception                       (E0712) #  Used when a class which doesn't inherit from Exception is used as an exception in an except clause.
+cell-var-from-loop                           (W0640) #  A variable used in a closure is defined in a loop. This will result in all closures using the same value for the closed-over variable.
+chained-comparison                           (R1716) #  This message is emitted when pylint encounters boolean operation like "a < b and b < c", suggesting instead to refactor it to "a < b < c"
+class-variable-slots-conflict                (E0242) #  Used when a value in __slots__ conflicts with a class variable, property or method.
+comparison-of-constants                      (R0133) #  When two literals are compared with each other the result is a constant. Using the constant directly is both easier to read and more performant. Initializing 'True' and 'False' this way is not required since Python 2.3.
+comparison-with-callable                     (W0143) #  This message is emitted when pylint detects that a comparison with a callable was made, which might suggest that some parenthesis were omitted, resulting in potential unwanted behaviour.
+comparison-with-itself                       (R0124) #  Used when something is compared against itself.
+condition-evals-to-constant                  (R1727) #  Emitted when a boolean condition can be simplified to a constant value.
+config-parse-error                           (F0011) #  Used when an exception occurred while parsing a pylint configuration file.
+confusing-with-statement                     (W0124) #  Emitted when a `with` statement component returns multiple values and uses name binding with `as` only for a part of those values, as in with ctx() as a, b. This can be misleading, since it's not clear if the context manager returns a tuple or if the node without a name binding is another context manager.
+consider-iterating-dictionary                (C0201) #  Emitted when the keys of a dictionary are iterated through the ``.keys()`` method or when ``.keys()`` is used for a membership check. It is enough to iterate through the dictionary itself, ``for key in dictionary``. For membership checks, ``if key in dictionary`` is faster.
+consider-merging-isinstance                  (R1701) #  Used when multiple consecutive isinstance calls can be merged into one.
+consider-swap-variables                      (R1712) #  You do not have to use a temporary variable in order to swap variables. Using "tuple unpacking" to directly swap variables makes the intention more clear.
+consider-using-dict-comprehension            (R1717) #  Emitted when we detect the creation of a dictionary using the dict() callable and a transient list. Although there is nothing syntactically wrong with this code, it is hard to read and can be simplified to a dict comprehension. Also it is faster since you don't need to create another transient list
+consider-using-dict-items                    (C0206) #  Emitted when iterating over the keys of a dictionary and accessing the value by index lookup. Both the key and value can be accessed by iterating using the .items() method of the dictionary instead.
+consider-using-enumerate                     (C0200) #  Emitted when code that iterates with range and len is encountered. Such code can be simplified by using the enumerate builtin.
+consider-using-f-string                      (C0209) #  Used when we detect a string that is being formatted with format() or % which could potentially be a f-string. The use of f-strings is preferred. Requires Python 3.6 and ``py-version >= 3.6``.
+consider-using-from-import                   (R0402) #  Emitted when a submodule of a package is imported and aliased with the same name, e.g., instead of ``import concurrent.futures as futures`` use ``from concurrent import futures``.
+consider-using-generator                     (R1728) #  If your container can be large using a generator will bring better performance.
+consider-using-get                           (R1715) #  Using the builtin dict.get for getting a value from a dictionary if a key is present or a default if not, is simpler and considered more idiomatic, although sometimes a bit slower
+consider-using-in                            (R1714) #  To check if a variable is equal to one of many values, combine the values into a set or tuple and check if the variable is contained "in" it instead of checking for equality against each of the values. This is faster and less verbose.
+consider-using-join                          (R1713) #  Using str.join(sequence) is faster, uses less memory and increases readability compared to for-loop iteration.
+consider-using-max-builtin                   (R1731) #  Using the max builtin instead of a conditional improves readability and conciseness.
+consider-using-min-builtin                   (R1730) #  Using the min builtin instead of a conditional improves readability and conciseness.
+consider-using-set-comprehension             (R1718) #  Although there is nothing syntactically wrong with this code, it is hard to read and can be simplified to a set comprehension. Also it is faster since you don't need to create another transient list
+consider-using-sys-exit                      (R1722) #  Contrary to 'exit()' or 'quit()', 'sys.exit' does not rely on the site module being available (as the 'sys' module is always available).
+consider-using-ternary                       (R1706) #  Used when one of known pre-python 2.5 ternary syntax is used.
+consider-using-with                          (R1732) #  Emitted if a resource-allocating assignment or call may be replaced by a 'with' block. By using 'with' the release of the allocated resources is ensured even in the case of an exception.
+continue-in-finally                          (E0116) #  Emitted when the `continue` keyword is found inside a finally clause, which is a SyntaxError.
+cyclic-import                                (R0401) #  Used when a cyclic import between two or more modules is detected.
+dangerous-default-value                      (W0102) #  Used when a mutable value as list or dictionary is detected in a default value for an argument.
+deprecated-argument                          (W4903) #  The argument is marked as deprecated and will be removed in the future.
+deprecated-class                             (W4904) #  The class is marked as deprecated and will be removed in the future.
+deprecated-decorator                         (W4905) #  The decorator is marked as deprecated and will be removed in the future.
+deprecated-method                            (W4902) #  The method is marked as deprecated and will be removed in the future.
+deprecated-module                            (W4901) #  A module marked as deprecated is imported.
+deprecated-pragma                            (I0022) #  Some inline pylint options have been renamed or reworked, only the most recent form should be used. NOTE:skip-all is only available with pylint >= 0.26
+dict-iter-missing-items                      (E1141) #  Emitted when trying to iterate through a dict without calling .items()
+disallowed-name                              (C0104) #  Used when the name matches bad-names or bad-names-rgxs- (unauthorized names).
+duplicate-argument-name                      (E0108) #  Duplicate argument names in function definitions are syntax errors.
+duplicate-bases                              (E0241) #  Duplicate use of base classes in derived classes raise TypeErrors.
+duplicate-code                               (R0801) #  Indicates that a set of similar lines has been detected among multiple file. This usually means that the code should be refactored to avoid this duplication.
+duplicate-except                             (W0705) #  Used when an except catches a type that was already caught by a previous handler.
+duplicate-key                                (W0109) #  Used when a dictionary expression binds the same key multiple times.
+duplicate-string-formatting-argument         (W1308) #  Used when we detect that a string formatting is repeating an argument instead of using named string arguments
+duplicate-value                              (W0130) #  This message is emitted when a set contains the same value two or more times.
+empty-docstring                              (C0112) #  Used when a module, function, class or method has an empty docstring (it would be too easy ;).
+eval-used                                    (W0123) #  Used when you use the "eval" function, to discourage its usage. Consider using `ast.literal_eval` for safely evaluating strings containing Python expressions from untrusted sources.
+exec-used                                    (W0122) #  Raised when the 'exec' statement is used. It's dangerous to use this function for a user input, and it's also slower than actual code in general. This doesn't mean you should never use it, but you should consider alternatives first and restrict the functions available.
+expression-not-assigned                      (W0106) #  Used when an expression that is not a function call is assigned to nothing. Probably something else was intended.
+f-string-without-interpolation               (W1309) #  Used when we detect an f-string that does not use any interpolation variables, in which case it can be either a normal string or a bug in the code.
+fatal                                        (F0001): Used when an error occurred preventing the analysis of a module (unable to find it for instance).
+file-ignored                                 (I0013) #  Used to inform that the file will not be checked
+fixme                                        (W0511): Used when a warning note as FIXME or XXX is detected.
+forgotten-debug-statement                    (W1515) #  Calls to breakpoint(), sys.breakpointhook() and pdb.set_trace() should be removed from code that is not actively being debugged.
+format-combined-specification                (W1305) #  Used when a PEP 3101 format string contains both automatic field numbering (e.g. '{}') and manual field specification (e.g. '{0}').
+format-needs-mapping                         (E1303) #  Used when a format string that uses named conversion specifiers is used with an argument that is not a mapping.
+format-string-without-interpolation          (W1310) #  Used when we detect a string that does not have any interpolation variables, in which case it can be either a normal string without formatting or a bug in the code.
+function-redefined                           (E0102) #  Used when a function / class / method is redefined.
+global-at-module-level                       (W0604) #  Used when you use the "global" statement at the module level since it has no effect
+global-statement                             (W0603) #  Used when you use the "global" statement to update a global variable. Pylint just try to discourage this usage. That doesn't mean you cannot use it !
+global-variable-not-assigned                 (W0602) #  Used when a variable is defined through the "global" statement but no assignment to this variable is done.
+global-variable-undefined                    (W0601) #  Used when a variable is defined through the "global" statement but the variable is not defined in the module scope.
+implicit-str-concat                          (W1404) #  String literals are implicitly concatenated in a literal iterable definition : maybe a comma is missing ?
+import-error                                 (E0401) #  Used when pylint has been unable to import a module.
+import-outside-toplevel                      (C0415) #  Used when an import statement is used anywhere other than the module toplevel. Move this import to the top of the file.
+import-self                                  (W0406) #  Used when a module is importing itself.
+inconsistent-mro                             (E0240) #  Used when a class has an inconsistent method resolution order.
+inconsistent-quotes                          (W1405) #  Quote delimiters are not used consistently throughout a module (with allowances made for avoiding unnecessary escaping).
+inconsistent-return-statements               (R1710) #  According to PEP8, if any return statement returns an expression, any return statements where no value is returned should explicitly state this as return None, and an explicit return statement should be present at the end of the function (if reachable)
+inherit-non-class                            (E0239) #  Used when a class inherits from something which is not a class.
+init-is-generator                            (E0100) #  Used when the special class method __init__ is turned into a generator by a yield in its body.
+invalid-all-format                           (E0605) #  Used when __all__ has an invalid format.
+invalid-all-object                           (E0604) #  Used when an invalid (non-string) object occurs in __all__.
+invalid-bool-returned                        (E0304) #  Used when a __bool__ method returns something which is not a bool
+invalid-bytes-returned                       (E0308) #  Used when a __bytes__ method returns something which is not bytes
+invalid-character-backspace                  (E2510) #  Moves the cursor back, so the character after it will overwrite the character before.
+invalid-character-carriage-return            (E2511) #  Moves the cursor to the start of line, subsequent characters overwrite the start of the line.
+invalid-character-esc                        (E2513) #  Commonly initiates escape codes which allow arbitrary control of the terminal.
+invalid-character-nul                        (E2514) #  Mostly end of input for python.
+invalid-character-sub                        (E2512) #  Ctrl+Z "End of text" on Windows. Some programs (such as type) ignore the rest of the file after it.
+invalid-character-zero-width-space           (E2515) #  Invisible space character could hide real code execution.
+invalid-characters-in-docstring              (C0403) #  Used when a word in docstring cannot be checked by enchant.
+invalid-class-object                         (E0243) #  Used when an invalid object is assigned to a __class__ property. Only a class is permitted.
+invalid-enum-extension                       (E0244) #  Used when a class tries to extend an inherited Enum class. Doing so will raise a TypeError at runtime.
+invalid-envvar-default                       (W1508) #  Env manipulation functions return None or str values. Supplying anything different as a default may cause bugs. See https://docs.python.org/3/library/os.html#os.getenv.
+invalid-envvar-value                         (E1507) #  Env manipulation functions support only string type arguments. See https://docs.python.org/3/library/os.html#os.getenv.
+invalid-format-index                         (W1307) #  Used when a PEP 3101 format string uses a lookup specifier ({a[1]}), but the argument passed for formatting doesn't contain or doesn't have that key as an attribute.
+invalid-format-returned                      (E0311) #  Used when a __format__ method returns something which is not a string
+invalid-getnewargs-ex-returned               (E0313) #  Used when a __getnewargs_ex__ method returns something which is not of the form tuple(tuple, dict)
+invalid-getnewargs-returned                  (E0312) #  Used when a __getnewargs__ method returns something which is not a tuple
+invalid-hash-returned                        (E0309) #  Used when a __hash__ method returns something which is not an integer
+invalid-index-returned                       (E0305) #  Used when an __index__ method returns something which is not an integer
+invalid-length-hint-returned                 (E0310) #  Used when a __length_hint__ method returns something which is not a non- negative integer
+invalid-length-returned                      (E0303) #  Used when a __len__ method returns something which is not a non-negative integer
+invalid-metaclass                            (E1139) #  Emitted whenever we can detect that a class is using, as a metaclass, something which might be invalid for using as a metaclass.
+invalid-name                                 (C0103) #  Used when the name doesn't conform to naming rules associated to its type (constant, variable, class...).
+invalid-overridden-method                    (W0236) #  Used when we detect that a method was overridden in a way that does not match its base class which could result in potential bugs at runtime.
+invalid-repr-returned                        (E0306) #  Used when a __repr__ method returns something which is not a string
+invalid-sequence-index                       (E1126) #  Used when a sequence type is indexed with an invalid type. Valid types are ints, slices, and objects with an __index__ method.
+invalid-slice-index                          (E1127) #  Used when a slice index is not an integer, None, or an object with an __index__ method.
+invalid-slice-step                           (E1144) #  Used when a slice step is 0 and the object doesn't implement a custom __getitem__ method.
+invalid-slots                                (E0238) #  Used when an invalid __slots__ is found in class. Only a string, an iterable or a sequence is permitted.
+invalid-slots-object                         (E0236) #  Used when an invalid (non-string) object occurs in __slots__.
+invalid-star-assignment-target               (E0113) #  Emitted when a star expression is used as a starred assignment target.
+invalid-str-returned                         (E0307) #  Used when a __str__ method returns something which is not a string
+invalid-unary-operand-type                   (E1130): Emitted when a unary operand is used on an object which does not support this type of operation.
+invalid-unicode-codec                        (E2501) #  For compatibility use UTF-8 instead of UTF-16/UTF-32. See also https://bugs.python.org/issue1503789 for a history of this issue. And https://softwareengineering.stackexchange.com/questions/102205/should- utf-16-be-considered-harmful for some possible problems when using UTF-16 for instance.
+isinstance-second-argument-not-valid-type    (W1116) #  Emitted when the second argument of an isinstance call is not a type.
+keyword-arg-before-vararg                    (W1113) #  When defining a keyword argument before variable positional arguments, one can end up in having multiple values passed for the aforementioned parameter in case the method is called with keyword arguments.
+line-too-long                                (C0301) #  Used when a line is longer than a given number of characters.
+literal-comparison                           (R0123) #  Used when comparing an object to a literal, which is usually what you do not want to do, since you can compare to a different literal than what was expected altogether.
+locally-disabled                             (I0011) #  Used when an inline option disables a message or a messages category.
+logging-format-interpolation                 (W1202) #  Used when a logging statement has a call form of "logging.<logging method>(format_string.format(format_args...))". Use another type of string formatting instead. You can use % formatting but leave interpolation to the logging function by passing the parameters as arguments. If logging-fstring- interpolation is disabled then you can use fstring formatting. If logging- not-lazy is disabled then you can use % formatting as normal.
+logging-format-truncated                     (E1201) #  Used when a logging statement format string terminates before the end of a conversion specifier.
+logging-fstring-interpolation                (W1203) #  Used when a logging statement has a call form of "logging.<logging method>(f"...")".Use another type of string formatting instead. You can use % formatting but leave interpolation to the logging function by passing the parameters as arguments. If logging-format-interpolation is disabled then you can use str.format. If logging-not-lazy is disabled then you can use % formatting as normal.
+logging-not-lazy                             (W1201) #  Used when a logging statement has a call form of "logging.<logging method>(format_string % (format_args...))". Use another type of string formatting instead. You can use % formatting but leave interpolation to the logging function by passing the parameters as arguments. If logging-fstring- interpolation is disabled then you can use fstring formatting. If logging- format-interpolation is disabled then you can use str.format.
+logging-too-few-args                         (E1206) #  Used when a logging format string is given too few arguments.
+logging-too-many-args                        (E1205) #  Used when a logging format string is given too many arguments.
+logging-unsupported-format                   (E1200) #  Used when an unsupported format character is used in a logging statement format string.
+lost-exception                               (W0150) #  Used when a break or a return statement is found inside the finally clause of a try...finally block: the exceptions raised in the try clause will be silently swallowed instead of being re-raised.
+method-cache-max-size-none                   (W1518) #  By decorating a method with lru_cache or cache the 'self' argument will be linked to the function and therefore never garbage collected. Unless your instance will never need to be garbage collected (singleton) it is recommended to refactor code to avoid this pattern or add a maxsize to the cache. The default value for maxsize is 128.
+method-check-failed                          (F0202) #  Used when Pylint has been unable to check methods signature compatibility for an unexpected reason. Please report this kind if you don't make sense of it.
+method-hidden                                (E0202) #  Used when a class defines a method which is hidden by an instance attribute from an ancestor class or set by some client code.
+misplaced-bare-raise                         (E0704) #  Used when a bare raise is not used inside an except clause. This generates an error, since there are no active exceptions to be reraised. An exception to this rule is represented by a bare raise inside a finally clause, which might work, as long as an exception is raised inside the try block, but it is nevertheless a code smell that must not be relied upon.
+misplaced-format-function                    (E0119) #  Emitted when format function is not called on str object. e.g doing print("value: {}").format(123) instead of print("value: {}".format(123)). This might not be what the user intended to do.
+misplaced-future                             (W0410) #  Python 2.5 and greater require __future__ import to be the first non docstring statement in the module.
+missing-class-docstring                      (C0115) #  Used when a class has no docstring. Even an empty class must have a docstring.
+missing-final-newline                        (C0304) #  Used when the last line in a file is missing a newline.
+missing-format-argument-key                  (W1303) #  Used when a PEP 3101 format string that uses named fields doesn't receive one or more required keywords.
+missing-format-attribute                     (W1306) #  Used when a PEP 3101 format string uses an attribute specifier ({0.length}), but the argument passed for formatting doesn't have that attribute.
+missing-format-string-key                    (E1304) #  Used when a format string that uses named conversion specifiers is used with a dictionary that doesn't contain all the keys required by the format string.
+missing-function-docstring                   (C0116) #  Used when a function or method has no docstring. Some special methods like __init__ do not require a docstring.
+missing-kwoa                                 (E1125) #  Used when a function call does not pass a mandatory keyword-only argument.
+missing-module-docstring                     (C0114) #  Used when a module has no docstring. Empty modules do not require a docstring.
+missing-parentheses-for-call-in-test         (W0126) #  Emitted when a conditional statement (If or ternary if) seems to wrongly call a function due to missing parentheses
+missing-timeout                              (W3101) #  Used when a method needs a 'timeout' parameter in order to avoid waiting for a long time. If no timeout is specified explicitly the default value is used. For example for 'requests' the program will never time out (i.e. hang indefinitely).
+mixed-format-string                          (E1302) #  Used when a format string contains both named (e.g. '%(foo)d') and unnamed (e.g. '%d') conversion specifiers. This is also used when a named conversion specifier contains * for the minimum field width and/or precision.
+mixed-line-endings                           (C0327) #  Used when there are mixed (LF and CRLF) newline signs in a file.
+modified-iterating-dict                      (E4702) #  Emitted when items are added or removed to a dict being iterated through. Doing so raises a RuntimeError.
+modified-iterating-list                      (W4701) #  Emitted when items are added or removed to a list being iterated through. Doing so can result in unexpected behaviour, that is why it is preferred to use a copy of the list.
+modified-iterating-set                       (E4703) #  Emitted when items are added or removed to a set being iterated through. Doing so raises a RuntimeError.
+multiple-imports                             (C0410) #  Used when import statement importing multiple modules is detected.
+multiple-statements                          (C0321) #  Used when more than on statement are found on the same line.
+named-expr-without-context                   (W0131) #  Emitted if named expression is used to do a regular assignment outside a context like if, for, while, or a comprehension.
+nan-comparison                               (W0177) #  Used when an expression is compared to NaN values like numpy.NaN and float('nan').
+nested-min-max                               (W3301) #  Nested calls ``min(1, min(2, 3))`` can be rewritten as ``min(1, 2, 3)``.
+no-classmethod-decorator                     (R0202) #  Used when a class method is defined without using the decorator syntax.
+no-else-break                                (R1723) #  Used in order to highlight an unnecessary block of code following an if containing a break statement. As such, it will warn when it encounters an else following a chain of ifs, all of them containing a break statement.
+no-else-continue                             (R1724) #  Used in order to highlight an unnecessary block of code following an if containing a continue statement. As such, it will warn when it encounters an else following a chain of ifs, all of them containing a continue statement.
+no-else-raise                                (R1720) #  Used in order to highlight an unnecessary block of code following an if containing a raise statement. As such, it will warn when it encounters an else following a chain of ifs, all of them containing a raise statement.
+no-else-return                               (R1705) #  Used in order to highlight an unnecessary block of code following an if containing a return statement. As such, it will warn when it encounters an else following a chain of ifs, all of them containing a return statement.
+no-member                                    (E1101) #  Used when a variable is accessed for a nonexistent member.
+no-method-argument                           (E0211) #  Used when a method which should have the bound instance as first argument has no argument defined.
+no-name-in-module                            (E0611) #  Used when a name cannot be found in a module.
+no-self-argument                             (E0213) #  Used when a method has an attribute different the "self" as first argument. This is considered as an error since this is a so common convention that you shouldn't break it!
+no-staticmethod-decorator                    (R0203) #  Used when a static method is defined without using the decorator syntax.
+no-value-for-parameter                       (E1120) #  Used when a function call passes too few arguments.
+non-ascii-file-name                          (W2402) #  Some editors don't support non-ASCII file names properly. Even though Python supports UTF-8 files since Python 3.5 this isn't recommended for interoperability. Further reading: - https://peps.python.org/pep-0489/#export-hook-name - https://peps.python.org/pep-0672/#confusing-features - https://bugs.python.org/issue20485
+non-ascii-module-import                      (C2403) #  Used when the name contains at least one non-ASCII unicode character. See https://peps.python.org/pep-0672/#confusing-features for a background why this could be bad. If your programming guideline defines that you are programming in English, then there should be no need for non ASCII characters in Python Names. If not you can simply disable this check.
+non-ascii-name                               (C2401) #  Used when the name contains at least one non-ASCII unicode character. See https://peps.python.org/pep-0672/#confusing-features for a background why this could be bad. If your programming guideline defines that you are programming in English, then there should be no need for non ASCII characters in Python Names. If not you can simply disable this check.
+non-iterator-returned                        (E0301) #  Used when an __iter__ method returns something which is not an iterable (i.e. has no `__next__` method)
+non-parent-init-called                       (W0233) #  Used when an __init__ method is called on a class which is not in the direct ancestors for the analysed class.
+non-str-assignment-to-dunder-name            (W1115) #  Emitted when a non-string value is assigned to __name__
+nonexistent-operator                         (E0107) #  Used when you attempt to use the C-style pre-increment or pre-decrement operator -- and ++, which doesn't exist in Python.
+nonlocal-and-global                          (E0115) #  Emitted when a name is both nonlocal and global.
+nonlocal-without-binding                     (E0117) #  Emitted when a nonlocal variable does not have an attached name somewhere in the parent scopes
+not-a-mapping                                (E1134) #  Used when a non-mapping value is used in place where mapping is expected
+not-an-iterable                              (E1133) #  Used when a non-iterable value is used in place where iterable is expected
+not-async-context-manager                    (E1701) #  Used when an async context manager is used with an object that does not implement the async context management protocol. This message can't be emitted when using Python < 3.5.
+not-callable                                 (E1102) #  Used when an object being called has been inferred to a non callable object.
+not-context-manager                          (E1129) #  Used when an instance in a with statement doesn't implement the context manager protocol(__enter__/__exit__).
+not-in-loop                                  (E0103) #  Used when break or continue keywords are used outside a loop.
+notimplemented-raised                        (E0711) #  Used when NotImplemented is raised instead of NotImplementedError
+overridden-final-method                      (W0239) #  Used when a method decorated with typing.final has been overridden.
+parse-error                                  (F0010) #  Used when an exception occurred while building the Astroid representation which could be handled by astroid.
+pointless-exception-statement                (W0133) #  Used when an exception is created without being assigned, raised or returned for subsequent use elsewhere.
+pointless-statement                          (W0104) #  Used when a statement doesn't have (or at least seems to) any effect.
+pointless-string-statement                   (W0105) #  Used when a string is used as a statement (which of course has no effect). This is a particular case of W0104 with its own message so you can easily disable it if you're using those strings as documentation, instead of comments.
+positional-only-arguments-expected           (E3102) #  Emitted when positional-only arguments have been passed as keyword arguments. Remove the keywords for the affected arguments in the function call. This message can't be emitted when using Python < 3.8.
+possibly-unused-variable                     (W0641) #  Used when a variable is defined but might not be used. The possibility comes from the fact that locals() might be used, which could consume or not the said variable
+potential-index-error                        (E0643) #  Emitted when an index used on an iterable goes beyond the length of that iterable.
+preferred-module                             (W0407) #  Used when a module imported has a preferred replacement module.
+property-with-parameters                     (R0206) #  Used when we detect that a property also has parameters, which are useless, given that properties cannot be called with additional arguments.
+protected-access                             (W0212) #  Used when a protected member (i.e. class member with a name beginning with an underscore) is access outside the class or a descendant of the class where it's defined.
+raise-missing-from                           (W0707) #  Python's exception chaining shows the traceback of the current exception, but also of the original exception. When you raise a new exception after another exception was caught it's likely that the second exception is a friendly re- wrapping of the first exception. In such cases `raise from` provides a better link between the two tracebacks in the final error.
+raising-bad-type                             (E0702) #  Used when something which is neither a class nor an instance is raised (i.e. a `TypeError` will be raised).
+raising-format-tuple                         (W0715) #  Used when passing multiple arguments to an exception constructor, the first of them a string literal containing what appears to be placeholders intended for formatting
+raising-non-exception                        (E0710) #  Used when a new style class which doesn't inherit from BaseException is raised.
+raw-checker-failed                           (I0001) #  Used to inform that a built-in module has not been checked using the raw checkers.
+redeclared-assigned-name                     (W0128) #  Emitted when we detect that a variable was redeclared in the same assignment.
+redefined-argument-from-local                (R1704) #  Used when a local name is redefining an argument, which might suggest a potential error. This is taken in account only for a handful of name binding operations, such as for iteration, with statement assignment and exception handler assignment.
+redefined-builtin                            (W0622) #  Used when a variable or function override a built-in.
+redefined-outer-name                         (W0621) #  Used when a variable's name hides a name defined in an outer scope or except handler.
+redefined-slots-in-subclass                  (W0244) #  Used when a slot is re-defined in a subclass.
+redundant-keyword-arg                        (E1124) #  Used when a function call would result in assigning multiple values to a function parameter, one value from a positional argument and one from a keyword argument.
+redundant-u-string-prefix                    (W1406) #  Used when we detect a string with a u prefix. These prefixes were necessary in Python 2 to indicate a string was Unicode, but since Python 3.0 strings are Unicode by default.
+redundant-unittest-assert                    (W1503) #  The first argument of assertTrue and assertFalse is a condition. If a constant is passed as parameter, that condition will be always true. In this case a warning should be emitted.
+reimported                                   (W0404) #  Used when a module is imported more than once.
+relative-beyond-top-level                    (E0402) #  Used when a relative import tries to access too many levels in the current package.
+repeated-keyword                             (E1132) #  Emitted when a function call got multiple values for a keyword.
+return-in-init                               (E0101) #  Used when the special class method __init__ has an explicit return value.
+return-outside-function                      (E0104) #  Used when a "return" statement is found outside a function or method.
+self-assigning-variable                      (W0127) #  Emitted when we detect that a variable is assigned to itself
+self-cls-assignment                          (W0642) #  Invalid assignment to self or cls in instance or class method respectively.
+shadowed-import                              (W0416) #  Used when a module is aliased with a name that shadows another import.
+shallow-copy-environ                         (W1507) #  os.environ is not a dict object but proxy object, so shallow copy has still effects on original object. See https://bugs.python.org/issue15373 for reference.
+signature-differs                            (W0222) #  Used when a method signature is different than in the implemented interface or in an overridden method.
+simplifiable-condition                       (R1726) #  Emitted when a boolean condition is able to be simplified.
+simplifiable-if-expression                   (R1719) #  Used when an if expression can be replaced with 'bool(test)' or simply 'test' if the boolean cast is implicit.
+simplifiable-if-statement                    (R1703) #  Used when an if statement can be replaced with 'bool(test)'.
+simplify-boolean-expression                  (R1709) #  Emitted when redundant pre-python 2.5 ternary syntax is used.
+single-string-used-for-slots                 (C0205) #  Used when a class __slots__ is a simple string, rather than an iterable.
+singledispatch-method                        (E1519) #  singledispatch should decorate functions and not class/instance methods. Use singledispatchmethod for those cases.
+singledispatchmethod-function                (E1520) #  singledispatchmethod should decorate class/instance methods and not functions. Use singledispatch for those cases.
+singleton-comparison                         (C0121) #  Used when an expression is compared to singleton values like True, False or None.
+star-needs-assignment-target                 (e0114) #  emitted when a star expression is not used in an assignment target.
+stop-iteration-return                        (R1708) #  According to PEP479, the raise of StopIteration to end the loop of a generator may lead to hard to find bugs. This PEP specify that raise StopIteration has to be replaced by a simple return statement
+subclassed-final-class                       (W0240) #  Used when a class decorated with typing.final has been subclassed.
+subprocess-popen-preexec-fn                  (W1509) #  The preexec_fn parameter is not safe to use in the presence of threads in your application. The child process could deadlock before exec is called. If you must use it, keep it trivial! Minimize the number of libraries you call into. See https://docs.python.org/3/library/subprocess.html#popen-constructor
+subprocess-run-check                         (W1510) #  The ``check`` keyword is set to False by default. It means the process launched by ``subprocess.run`` can exit with a non-zero exit code and fail silently. It's better to set it explicitly to make clear what the error- handling behavior is.
+super-init-not-called                        (W0231) #  Used when an ancestor class method has an __init__ method which is not called by a derived class.
+super-with-arguments                         (R1725) #  Emitted when calling the super() builtin with the current class and instance. On Python 3 these arguments are the default and they can be omitted.
+super-without-brackets                       (W0245) #  Used when a call to super does not have brackets and thus is not an actual call and does not work as expected.
+superfluous-parens                           (C0325) #  Used when a single item in parentheses follows an if, for, or other keyword.
+suppressed-message                           (I0020) #  A message was triggered on a line, but suppressed explicitly by a disable= comment in the file. This message is not generated for messages that are ignored due to configuration settings.
+syntax-error                                 (E0001): Used when a syntax error is raised for a module.
+too-few-format-args                          (E1306) #  Used when a format string that uses unnamed conversion specifiers is given too few arguments
+too-few-public-methods                       (R0903) #  Used when class has too few public methods, so be sure it's really worth it.
+too-many-ancestors                           (R0901) #  Used when class has too many parent classes, try to reduce this to get a simpler (and so easier to use) class.
+too-many-arguments                           (R0913) #  Used when a function or method takes too many arguments.
+too-many-boolean-expressions                 (R0916) #  Used when an if statement contains too many boolean expressions.
+too-many-branches                            (R0912) #  Used when a function or method has too many branches, making it hard to follow.
+too-many-format-args                         (E1305) #  Used when a format string that uses unnamed conversion specifiers is given too many arguments.
+too-many-function-args                       (E1121) #  Used when a function call passes too many positional arguments.
+too-many-instance-attributes                 (R0902) #  Used when class has too many instance attributes, try to reduce this to get a simpler (and so easier to use) class.
+too-many-lines                               (C0302) #  Used when a module has too many lines, reducing its readability.
+too-many-locals                              (R0914) #  Used when a function or method has too many local variables.
+too-many-nested-blocks                       (R1702) #  Used when a function or a method has too many nested blocks. This makes the code less understandable and maintainable.
+too-many-public-methods                      (R0904) #  Used when class has too many public methods, try to reduce this to get a simpler (and so easier to use) class.
+too-many-return-statements                   (R0911) #  Used when a function or method has too many return statement, making it hard to follow.
+too-many-star-expressions                    (E0112) #  Emitted when there are more than one starred expressions (`*x`) in an assignment. This is a SyntaxError.
+too-many-statements                          (R0915) #  Used when a function or method has too many statements. You should then split it in smaller functions / methods.
+trailing-comma-tuple                         (R1707) #  In Python, a tuple is actually created by the comma symbol, not by the parentheses. Unfortunately, one can actually create a tuple by misplacing a trailing comma, which can lead to potential weird bugs in your code. You should always use parentheses explicitly for creating a tuple.
+trailing-newlines                            (C0305) #  Used when there are trailing blank lines in a file.
+trailing-whitespace                          (C0303) #  Used when there is whitespace between the end of a line and the newline.
+truncated-format-string                      (E1301) #  Used when a format string terminates before the end of a conversion specifier.
+try-except-raise                             (W0706) #  Used when an except handler uses raise as its first or only operator. This is useless because it raises back the exception immediately. Remove the raise operator or the entire try-except-raise block!
+typevar-double-variance                      (C0131) #  Emitted when both the "covariant" and "contravariant" keyword arguments are set to "True" in a TypeVar.
+typevar-name-incorrect-variance              (C0105) #  Emitted when a TypeVar name doesn't reflect its type variance. According to PEP8, it is recommended to add suffixes '_co' and '_contra' to the variables used to declare covariant or contravariant behaviour respectively. Invariant (default) variables do not require a suffix. The message is also emitted when invariant variables do have a suffix.
+typevar-name-mismatch                        (C0132) #  Emitted when a TypeVar is assigned to a variable that does not match its name argument.
+unbalanced-dict-unpacking                    (W0644) #  Used when there is an unbalanced dict unpacking in assignment or for loop
+unbalanced-tuple-unpacking                   (W0632) #  Used when there is an unbalanced tuple unpacking in assignment
+undefined-all-variable                       (E0603) #  Used when an undefined variable name is referenced in __all__.
+undefined-loop-variable                      (W0631) #  Used when a loop variable (i.e. defined by a for loop or a list comprehension or a generator expression) is used outside the loop.
+undefined-variable                           (E0602) #  Used when an undefined variable is accessed.
+unexpected-keyword-arg                       (E1123) #  Used when a function call passes a keyword argument that doesn't correspond to one of the function's parameter names.
+unexpected-line-ending-format                (C0328) #  Used when there is different newline than expected.
+unexpected-special-method-signature          (E0302) #  Emitted when a special method was defined with an invalid number of parameters. If it has too few or too many, it might not work at all.
+ungrouped-imports                            (C0412) #  Used when imports are not grouped by packages.
+unhashable-member                            (E1143) #  Emitted when a dict key or set member is not hashable (i.e. doesn't define __hash__ method).
+unidiomatic-typecheck                        (C0123) #  The idiomatic way to perform an explicit typecheck in Python is to use isinstance(x, Y) rather than type(x) == Y, type(x) is Y. Though there are unusual situations where these give different results.
+unknown-option-value                         (W0012) #  Used when an unknown value is encountered for an option.
+unnecessary-comprehension                    (R1721) #  Instead of using an identity comprehension, consider using the list, dict or set constructor. It is faster and simpler.
+unnecessary-dict-index-lookup                (R1733) #  Emitted when iterating over the dictionary items (key-item pairs) and accessing the value by index lookup. The value can be accessed directly instead.
+unnecessary-direct-lambda-call               (C3002) #  Used when a lambda expression is directly called rather than executing its contents inline.
+unnecessary-dunder-call                      (C2801) #  Used when a dunder method is manually called instead of using the corresponding function/method/operator.
+unnecessary-ellipsis                         (W2301) #  Used when the ellipsis constant is encountered and can be avoided. A line of code consisting of an ellipsis is unnecessary if there is a docstring on the preceding line or if there is a statement in the same scope.
+unnecessary-lambda                           (W0108) #  Used when the body of a lambda expression is a function call on the same argument list as the lambda itself; such lambda expressions are in all but a few cases replaceable with the function being called in the body of the lambda.
+unnecessary-lambda-assignment                (C3001) #  Used when a lambda expression is assigned to variable rather than defining a standard function with the "def" keyword.
+unnecessary-list-index-lookup                (R1736) #  Emitted when iterating over an enumeration and accessing the value by index lookup. The value can be accessed directly instead.
+unnecessary-pass                             (W0107) #  Used when a "pass" statement that can be avoided is encountered.
+unnecessary-semicolon                        (W0301) #  Used when a statement is ended by a semi-colon (";"), which isn't necessary (that's python, not C ;).
+unneeded-not                                 (C0113) #  Used when a boolean expression contains an unneeded negation.
+unpacking-non-sequence                       (E0633) #  Used when something which is not a sequence is used in an unpack assignment
+unreachable                                  (W0101) #  Used when there is some code behind a "return" or "raise" statement, which will never be accessed.
+unrecognized-inline-option                   (E0011) #  Used when an unknown inline option is encountered.
+unrecognized-option                          (E0015) #  Used when we detect an option that we do not recognize.
+unspecified-encoding                         (W1514) #  It is better to specify an encoding when opening documents. Using the system default implicitly can create problems on other operating systems. See https://peps.python.org/pep-0597/
+unsubscriptable-object                       (E1136) #  Emitted when a subscripted value doesn't support subscription (i.e. doesn't define __getitem__ method or __class_getitem__ for a class).
+unsupported-assignment-operation             (E1137) #  Emitted when an object does not support item assignment (i.e. doesn't define __setitem__ method).
+unsupported-binary-operation                 (E1131): Emitted when a binary arithmetic operation between two operands is not supported.
+unsupported-delete-operation                 (E1138) #  Emitted when an object does not support item deletion (i.e. doesn't define __delitem__ method).
+unsupported-membership-test                  (E1135) #  Emitted when an instance in membership test expression doesn't implement membership protocol (__contains__/__iter__/__getitem__).
+unused-argument                              (W0613) #  Used when a function or method argument is not used.
+unused-format-string-argument                (W1304) #  Used when a PEP 3101 format string that uses named fields is used with an argument that is not required by the format string.
+unused-format-string-key                     (W1301) #  Used when a format string that uses named conversion specifiers is used with a dictionary that contains keys not required by the format string.
+unused-import                                (W0611) #  Used when an imported module or variable is not used.
+unused-private-member                        (W0238) #  Emitted when a private member of a class is defined but not used.
+unused-variable                              (W0612) #  Used when a variable is defined but not used.
+unused-wildcard-import                       (W0614) #  Used when an imported module or variable is not used from a `'from X import *'` style import.
+use-a-generator                              (R1729) #  Comprehension inside of 'any', 'all', 'max', 'min' or 'sum' is unnecessary. A generator would be sufficient and faster.
+use-dict-literal                             (R1735) #  Emitted when using dict() to create a dictionary instead of a literal '{ ...}'. The literal is faster as it avoids an additional function call.
+use-implicit-booleaness-not-comparison       (C1803) #  Used when Pylint detects that collection literal comparison is being used to check for emptiness; Use implicit booleaness instead of a collection classes; empty collections are considered as false
+use-implicit-booleaness-not-len              (C1802) #  Used when Pylint detects that len(sequence) is being used without explicit comparison inside a condition to determine if a sequence is empty. Instead of coercing the length to a boolean, either rely on the fact that empty sequences are false or compare the length against a scalar.
+use-list-literal                             (R1734) #  Emitted when using list() to create an empty list instead of the literal []. The literal is faster as it avoids an additional function call.
+use-maxsplit-arg                             (C0207) #  Emitted when accessing only the first or last element of str.split(). The first and last element can be accessed by using str.split(sep, maxsplit=1)[0] or str.rsplit(sep, maxsplit=1)[-1] instead.
+use-sequence-for-iteration                   (C0208) #  When iterating over values, sequence types (e.g., ``lists``, ``tuples``, ``ranges``) are more efficient than ``sets``.
+use-symbolic-message-instead                 (I0023): Used when a message is enabled or disabled by id.
+used-before-assignment                       (E0601) #  Emitted when a local variable is accessed before its assignment took place. Assignments in try blocks are assumed not to have occurred when evaluating associated except/finally blocks. Assignments in except blocks are assumed not to have occurred when evaluating statements outside the block, except when the associated try block contains a return statement.
+used-prior-global-declaration                (E0118) #  Emitted when a name is used prior a global declaration, which results in an error since Python 3.6. This message can't be emitted when using Python < 3.6.
+useless-else-on-loop                         (W0120) #  Loops should only have an else clause if they can exit early with a break statement, otherwise the statements under else should be on the same scope as the loop itself.
+useless-import-alias                         (C0414) #  Used when an import alias is same as original package, e.g., using import numpy as numpy instead of import numpy as np.
+useless-object-inheritance                   (R0205) #  Used when a class inherit from object, which under python3 is implicit, hence can be safely removed from bases.
+useless-option-value                         (R0022) #  Used when a value for an option that is now deleted from pylint is encountered.
+useless-parent-delegation                    (W0246) #  Used whenever we can detect that an overridden method is useless, relying on parent or super() delegation to do the same thing as another method from the MRO.
+useless-return                               (R1711) #  Emitted when a single "return" or "return None" statement is found at the end of function or method definition. This statement can safely be removed because Python will implicitly return None
+useless-suppression                          (I0021) #  Reported when a message is explicitly disabled for a line or a block of code, but never triggered.
+useless-with-lock                            (W2101) #  Used when a new lock instance is created by using with statement which has no effect. Instead, an existing instance should be used to acquire lock.
+using-constant-test                          (W0125) #  Emitted when a conditional statement (If or ternary if) uses a constant value for its test. This might not be what the user intended to do.
+using-f-string-in-unsupported-version        (W2601) #  Used when the py-version set by the user is lower than 3.6 and pylint encounters a f-string.
+using-final-decorator-in-unsupported-version (W2602) #  Used when the py-version set by the user is lower than 3.8 and pylint encounters a ``typing.final`` decorator.
+wildcard-import                              (W0401) #  Used when `from module import *` is detected.
+wrong-exception-operation                    (W0716) #  Used when an operation is done against an exception, but the operation is not valid for the exception in question. Usually emitted when having binary operations between exceptions in except handlers.
+wrong-import-order                           (C0411) #  Used when PEP8 import order is not respected (standard imports first, then third-party libraries, then local imports).
+wrong-import-position                        (C0413) #  Used when code and imports are mixed.
+wrong-spelling-in-comment                    (C0401) #  Used when a word in comment is not spelled correctly.
+wrong-spelling-in-docstring                  (C0402) #  Used when a word in docstring is not spelled correctly.
+yield-inside-async-function                  (E1700) #  Used when an `yield` or `yield from` statement is found inside an async function. This message can't be emitted when using Python < 3.5.
+yield-outside-function                       (E0105) #  Used when a "yield" statement is found outside a function or method.

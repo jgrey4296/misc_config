@@ -58,7 +58,6 @@ Also strips whitespace out of selection. Also switches to insert mode. If
 ;;;###autoload
 (advice-add 'yas--all-templates :filter-return #'+jg-snippets--remove-duplicates-a)
 
-
 ;;;###autoload
 (defun +snippets--inhibit-yas-global-mode-a (fn &rest args)
     "auto-yasnippet enables `yas-global-mode'. This is obnoxious for folks like
@@ -74,3 +73,23 @@ swaps `yas-global-mode' with `yas-minor-mode'."
 
 ;;;###autoload
 (advice-add 'aya-open-line :around #'+snippets--inhibit-yas-global-mode-a)
+
+;;;###autoload
+(defun +jg-snippets--completing-read-uuid (prompt all-snippets &rest args)
+  "Custom formatter for yasnippet, to display groups of snippets "
+  (let* ((snippet-data (cl-loop for (_ . tpl) in (mapcan #'yas--table-templates (if all-snippets
+                                                                                    (hash-table-values yas--tables)
+                                                                                  (yas--get-snippet-tables)))
+
+                                unless (null (yas--template-load-file tpl))
+                                for txt = (format "%-25s%-30s%s"
+                                                  (yas--template-key tpl)
+                                                  (yas--template-name tpl)
+                                                  (abbreviate-file-name (yas--template-load-file tpl)))
+                                collect
+                                `(,txt . ,(yas--template-uuid tpl))))
+        (selected-value (apply #'completing-read prompt snippet-data args)))
+  (alist-get selected-value snippet-data nil nil 'equal)))
+
+;;;###autoload
+(advice-add '+snippet--completing-read-uuid :override #'+jg-snippets--completing-read-uuid)

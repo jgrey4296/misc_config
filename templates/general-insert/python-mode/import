@@ -45,3 +45,7 @@ decimal                  # https://docs.python.org/3/library/decimal.html
 fractions                # https://docs.python.org/3/library/fractions.html
 random                   # https://docs.python.org/3/library/random.html
 statistics               # https://docs.python.org/3/library/statistics.html
+
+LSP Protocol             # https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/
+pygls language server    # https://pygls.readthedocs.io/en/latest/
+lsprotol                 # https://github.com/microsoft/lsprotocol

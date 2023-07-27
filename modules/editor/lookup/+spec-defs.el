@@ -20,7 +20,6 @@
 
 (spec-handling-new! lookup-handler nil :loop 'hook
                     :struct '(:definition fn :implementation fn :type-definition nf :references fn :documentation fn :file fn :assignments fn)
-                    (message "Add Definitions: %s : %s" (plist-get val :definition) +lookup-definition-functions)
                     (setq-local +lookup-definition-functions      (cl-remove-duplicates (append (ensure-list (plist-get val :definition))         +lookup-definition-functions))
                                 +lookup-implementations-functions (cl-remove-duplicates (append (ensure-list (plist-get val :implementations))    +lookup-implementations-functions))
                                 +lookup-type-definition-functions (cl-remove-duplicates (append (ensure-list (plist-get val :type-definition))    +lookup-type-definition-functions))

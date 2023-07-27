@@ -1,5 +1,6 @@
 ;;; tools/lookup/config.el -*- lexical-binding: t; -*-
 
+(load! "+defs")
 (load! "+vars")
 (load! "+backends")
 (load! "+spec-defs")

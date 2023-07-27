@@ -1,5 +1,13 @@
 #!/usr/bin/env python3
 """
+A Utility class to easily set up stdout, stderr, and file logging,
+and a 'printer' logger that prints to stdout for user info, which is included into the log file
+
+Configs are tomlers, which place logging setup information in:
+
+[logging]
+file = {level, format, filters}
+stream = {level, format, filters}
 
 """
 ##-- builtin imports
@@ -34,7 +42,13 @@ import tomler
 from sys import stdout, stderr
 
 class LogConfig:
-    """ Utility class to setup [stdout, stderr, file] logging. """
+    """ Utility class to setup [stdout, stderr, file] logging.
+    Configs are tomlers, which place logging setup information in:
+
+    [logging]
+    file = {level, format, filters}
+    stream = {level, format, filters}
+    """
 
     class SimpleFilter:
         """ A Simple log filter. whitelist loggers by name in `names` and  blacklist `reject` """
@@ -49,56 +63,76 @@ class LogConfig:
                                                              or not bool(self.names)
                                                             or self.name_re.match(record.name))
 
-    def __init__(self, config:None|pl.Path=None, logfile="log.doot"):
-        self.root    = logmod.root
-        self.printer = logmod.getLogger(doot.constants.printer_name)
+    def __init__(self, config:None|pl.Path=None, logfile="log.doot", printer="custom.printer"):
+        self.root            = logmod.root
+        self.printer_name    = printer
+        self.printer         = logmod.getLogger(self.printer_name)
 
-        self.file_handler   = logmod.FileHandler(pl.Path(logfile), mode='w')
-        self.stream_handler = logmod.StreamHandler(stdout)
-        self.print_handler  = logmod.StreamHandler(stdout)
+        self.file_handler    = logmod.FileHandler(pl.Path(logfile), mode='w')
+        self.stream_handler  = logmod.StreamHandler(stdout)
+        self.print_handler   = logmod.StreamHandler(stdout)
 
+        self.default_printer_format         = "{message}"
+        self.default_pre_init_file_format   = "{levelname} : PRE-INIT : {message}"
+        self.default_pre_init_stream_format = "{levelname}  : PRE-INIT : {message}"
+        self.default_file_format            = "{levelname} : {pathname} : {lineno} : {funcName} : {message}"
+        self.default_stream_format          = "{levelname} : {pathname} : {lineno} : {funcName} : {message}"
+        self.default_log_style              = "{"
+
+        self._config = None
+        self._set_config(config)
 
         self._setup()
+
+        if self._config is not None:
+            self.setup()
+
+    def _set_config(self, config):
         match config:
             case None:
-                self._config = None
+                pass
             case pl.Path() if config.exists():
                 self._config = tomler.Tomler(config)
-                self.setup()
+            case tomler.Tomler():
+                self._config = config
 
     def _setup(self):
         """ a basic, config-less setup """
         self.root.setLevel(logmod.NOTSET)
-        self.file_handler.setFormatter(logmod.Formatter("{levelname} : INIT : {message}", style="{"))
+        self.file_handler.setFormatter(logmod.Formatter(self.default_pre_init_file_format, style=self.default_log_style))
 
         self.stream_handler.setLevel(logmod.WARNING)
-        self.stream_handler.setFormatter(logmod.Formatter("{levelname}  : INIT : {message}", style="{"))
+        self.stream_handler.setFormatter(logmod.Formatter(self.default_pre_init_stream_format, style=self.default_log_style))
 
         self.root.addHandler(self.file_handler)
         self.root.addHandler(self.stream_handler)
 
         self.printer.propagate = False
-        self.print_handler.setFormatter(logmod.Formatter("{message}", style="{"))
+        self.print_handler.setFormatter(logmod.Formatter(self.default_printer_format, style=self.default_log_style))
         self.printer.setLevel(logmod.NOTSET)
         self.printer.addHandler(self.print_handler)
         self.printer.addHandler(self.file_handler)
 
-    def setup(self):
-        """ a setup that uses config values """
+    def setup(self, config:None|pl.Path|tomler.Tomler=None):
+        """ a setup that uses config values
+        can be passed a config if the LogConfig was build without one
+        """
+        self._set_config(config)
+
         file_log_level    = self._config.on_fail("DEBUG", str|int).logging.file.level(wrapper=lambda x: logmod._nameToLevel.get(x, 0))
-        file_log_format   = self._config.on_fail("{levelname} : {pathname} : {lineno} : {funcName} : {message}", str).logging.file.format()
+        file_log_format   = self._config.on_fail(self.default_file_format, str).logging.file.format()
         file_filter_names = self._config.on_fail([], list).logging.file.filters()
 
         self.file_handler.setLevel(file_log_level)
-        self.file_handler.setFormatter(logmod.Formatter(file_log_format, style="{"))
+        self.file_handler.setFormatter(logmod.Formatter(file_log_format, style=self.default_log_style))
         if bool(file_filter_names):
             self.file_handler.addFilter(SimpleFilter(file_filter_names))
 
         stream_log_level    = self._config.on_fail("DEBUG", str|int).logging.stream.level(wrapper=lambda x: logmod._nameToLevel.get(x, 0))
-        stream_log_format   = self._config.on_fail("{levelname} : {pathname} : {lineno} : {funcName} : {message}", str).logging.stream.format()
+        stream_log_format   = self._config.on_fail(self.default_stream_format, str).logging.stream.format()
         stream_filter_names = self._config.on_fail([], list).logging.stream.filters()
 
         self.stream_handler.setLevel(stream_log_level)
-        self.stream_handler.setFormatter(logmod.Formatter(stream_log_format, style="{"))
+        self.stream_handler.setFormatter(logmod.Formatter(stream_log_format, style=self.default_log_style))
         if bool(stream_filter_names):
             self.stream_handler.addFilter(SimpleFilter(stream_filter_names))

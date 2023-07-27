@@ -108,6 +108,7 @@
 
 (setq lsp-pyright-extra-paths #'[]
       lsp-pyright-venv-path conda-env-home-directory
+      lsp-pyright-log-level "warning"
       )
 ;;-- end lsp
 
@@ -136,6 +137,7 @@
                     '(python
                       ("LICENSE\\'"        :trigger "__license-acab"   :mode text-mode :priority 100)
                       ("pyproject.toml\\'" :trigger "__pyproject"      :mode conf-toml-mode)
+                      ("pyrightconfig.json\\'" :trigger "__pyright_config" :mode python-mode)
                       ("setup\\.cfg\\'"    :trigger "__setup_cfg"      :mode python-mode)
                       ("__init__\\.py\\'"  :trigger "__init"           :mode python-mode)
                       ("test_.+\\.py\\'"   :trigger "__pytest"         :mode python-mode)

@@ -32,23 +32,6 @@
       (error "%S doesn't exist" (abbreviate-file-name dir)))))
 
 ;;;###autoload
-(defun +jg-snippets--completing-read-uuid (prompt all-snippets &rest args)
-  "Custom formatter for yasnippet, to display groups of snippets "
-  (let* ((snippet-data (cl-loop for (_ . tpl) in (mapcan #'yas--table-templates (if all-snippets
-                                                                                    (hash-table-values yas--tables)
-                                                                                  (yas--get-snippet-tables)))
-
-                                unless (null (yas--template-load-file tpl))
-                                for txt = (format "%-25s%-30s%s"
-                                                  (yas--template-key tpl)
-                                                  (yas--template-name tpl)
-                                                  (abbreviate-file-name (yas--template-load-file tpl)))
-                                collect
-                                `(,txt . ,(yas--template-uuid tpl))))
-        (selected-value (apply #'completing-read prompt snippet-data args)))
-  (alist-get selected-value snippet-data nil nil 'equal)))
-
-;;;###autoload
 (defun +jg-snippets-yas-prompt-fn (prompt choices &optional display-fn)
   " Yasnippet ivy which shows groups "
   (let* ((max-name 0)
@@ -84,4 +67,7 @@
 
 
 ;;;###autoload
-(advice-add '+snippet--completing-read-uuid :override #'+jg-snippets--completing-read-uuid)
+(defun +jg-snippets-debug-dirs ()
+  (interactive)
+  (message (string-join yas-snippet-dirs "\n"))
+  )

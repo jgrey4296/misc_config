@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name  : iftype
+# uuid  : iftype
+# key   : iftc
+# group :
+# --
+##-- type checking
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+	$0
+##-- end type checking

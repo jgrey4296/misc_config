@@ -61,8 +61,8 @@
 ;;-- end smartparens
 
 ;;-- specs
-(spec-handling-add! company
-                    '(reftex-mode (:mode company-reftex-label company-reftex-citations))
+(spec-handling-add! company :form 'override
+                    '(reftex-mode (:mode company-reftex-labels company-reftex-citations))
                     '(LaTeX-mode (:mode company-auctex-environments company-auctex-macros +latex-symbols-company-backend))
                     )
 (spec-handling-add! lookup-url

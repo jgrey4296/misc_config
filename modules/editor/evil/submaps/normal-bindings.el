@@ -45,7 +45,7 @@
       :desc "Restore selection"  "h"   #'evil-visual-restore
 
       :desc "Inner Select"       "i" (cmd! (evil-visual-char) (set-transient-map jg-binding-inner-text-objects-map))
-      :desc "Outer Select"       "a" (cmd! (evil-visual-char) (set-transient-map jg-binding-outer-text-objects-map))
+      :desc "Outer Select"       "o" (cmd! (evil-visual-char) (set-transient-map jg-binding-outer-text-objects-map))
       )
 (map! :map jg-binding-normal-state-map ;; paste
       :desc "Paste After"        "p"   #'evil-paste-after

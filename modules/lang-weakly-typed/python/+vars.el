@@ -147,19 +147,22 @@
                     )
 (spec-handling-add! file-templates
                     '(python
-                      ("LICENSE\\'"        :trigger "__license-acab"   :mode text-mode :priority 100)
-                      ("pyproject.toml\\'" :trigger "__pyproject"      :mode conf-toml-mode)
+                      ("LICENSE\\'"            :trigger "__license-acab"   :mode text-mode   :priority 100)
+                      ;;Configs:
+                      ("pyproject.toml\\'"     :trigger "__pyproject"      :mode python-mode)
                       ("pyrightconfig.json\\'" :trigger "__pyright_config" :mode python-mode)
-                      ("setup\\.cfg\\'"    :trigger "__setup_cfg"      :mode python-mode)
-                      ("__init__\\.py\\'"  :trigger "__init"           :mode python-mode)
-                      ("test_.+\\.py\\'"   :trigger "__pytest"         :mode python-mode)
-                      ("cli_.+\\.py\\'"    :trigger "__cli"            :mode python-mode)
-                      ("conf\\.py\\'"      :trigger "__conf"           :mode python-mode)
-                      ("setup\\.py\\'"     :trigger "__setup"          :mode python-mode)
-                      ("SConstruct"        :trigger "__sconstruct"     :mode python-mode)
-                      ("SConscript"        :trigger "__sconscript"     :mode python-mode)
-                      ("\\.py\\'"          :trigger "__"               :mode python-mode :priority -99)
-                      (python-mode         :trigger "__" :priority -100)
+                      ("pylint.toml"           :trigger "__pylint"         :mode python-mode)
+                      ("jekyl.toml"            :trigger "__jekyll"         :mode python-mode)
+                      ("ruff.toml"  trigger "__ruff_config"                :mode python-mode)
+
+                      ;; Python:
+                      ("__init__\\.py\\'"      :trigger "__init"           :mode python-mode)
+                      ("conf.py"               :trigger "__sphinx_conf"    :mode python-mode)
+                      ("log_config.py"         :trigger "__log_config"     :mode python-mode)
+                      ("test_.+\\.py\\'"       :trigger "__pytest"         :mode python-mode)
+                      ("cli_.+\\.py\\'"        :trigger "__cli"            :mode python-mode)
+                      ("\\.py\\'"              :trigger "__"               :mode python-mode :priority -99)
+                      (python-mode             :trigger "__"                                 :priority -100)
                       )
                     )
 (spec-handling-add! fold

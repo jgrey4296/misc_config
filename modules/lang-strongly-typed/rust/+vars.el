@@ -53,14 +53,13 @@
                     '(rust
                      ("config\\.toml$"   :trigger "__config.toml" :mode rust-mode)
                      ("Cargo\\.toml$"    :trigger "__Cargo.toml"  :mode rust-mode)
-                     ("Makefile\\.toml$" :trigger "__"            :mode cargo-makefile-mode)
                      ("mod\\.rs$"        :trigger "__mod.rs"      :mode rust-mode)
                      ("main\\.rs$"       :trigger "__main.rs"     :mode rust-mode)
                      ("lib\\.rs$"        :trigger "__lib.rs"      :mode rust-mode)
                      ("tests\\.rs"       :trigger "__tests.rs"    :mode rust-mode)
                      ("build\\.rs"       :trigger "__build.rs"    :mode rust-mode)
-                     (rustic-mode        :trigger "__"            )
-                     (rust-mode          :trigger "__"            )
+                     (rustic-mode        :trigger "__"            :priority -98)
+                     (rust-mode          :trigger "__"            :priority -99)
                      )
                     )
 

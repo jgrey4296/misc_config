@@ -73,4 +73,11 @@
                       )
                     )
 
+(spec-handling-add! file-templates
+                    '(elixir
+                      '("\\.ex\\'"     :trigger "__" :mode elixir-mode :priority -99)
+                      '("\\.exs\\'"    :trigger "__" :mode elixir-mode :priority -99)
+                      '("\\.elixir\\'" :trigger "__" :mode elixir-mode :priority -99)
+                      )
+                    )
 ;;-- end specs

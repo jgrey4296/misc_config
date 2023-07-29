@@ -194,7 +194,6 @@ stored in `persp-save-dir'.")
 (spec-handling-add! file-templates
                     '(project
                      ("/doot\\.toml$" :trigger "__doot_toml" :mode conf-toml-mode)
-                     ("/Makefile$"             :mode makefile-gmake-mode)
                      )
                     )
 

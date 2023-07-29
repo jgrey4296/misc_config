@@ -9,10 +9,10 @@
 
 (map! :leader
       :prefix "c"
+      :desc "LSP"                                   "l"   lsp-command-map
       :desc "LSP Code actions"                      "a"   #'lsp-avy-lens
       :desc "LSP Rename"                            "R"   #'lsp-rename
-      :desc "LSP"                                   "l"   lsp-command-map
-
+      :desc "List errors"                           "x"   #'flycheck-list-errors
       ;; :desc "Jump to symbol in current workspace"   "j"   #'lsp-ivy-workspace-symbol
       ;; :desc "Jump to symbol in any workspace"       "J"   #'lsp-ivy-global-workspace-symbol
       )
@@ -43,6 +43,8 @@
       :desc "shutdown server"  "q" #'lsp-workspace-shutdown
       :desc "restart server"   "r" #'lsp-workspace-restart
       :desc "start server"     "s" #'lsp
+      :desc "Select Server"    "/" #'+lsp/switch-client
+      :desc "Debug" "?" #'+jg-ide-debug-lsp
 )
 
 (map! :map lsp-command-map ;; Formatting
@@ -125,10 +127,6 @@
 
 ;;-- end lsp
 
-;;-- eglot
-
-;;-- end eglot
-
 ;;-- semantic
 (map! :map semantic-mode-map
       :after semantic
@@ -146,13 +144,9 @@
 ;;-- flycheck
 (map! :map flycheck-error-list-mode-map
       "?" #'+jg-checkers-column-format
-      :n "C-n"    #'flycheck-error-list-next-error
-      :n "C-p"    #'flycheck-error-list-previous-error
       :n "j"      #'flycheck-error-list-next-error
       :n "k"      #'flycheck-error-list-previous-error
       :n "RET"    #'flycheck-error-list-goto-error
-      :n [return] #'flycheck-error-list-goto-error
-      :n "," nil
       :n "," #'tabulated-list-sort
       :n "{" #'tabulated-list-narrow-current-column
       :n "}" #'tabulated-list-widen-current-column

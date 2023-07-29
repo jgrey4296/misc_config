@@ -25,11 +25,13 @@
       )
 (map! :map jg-binding-jump-map ;; search
       :prefix ("/" . "Search")
-      :desc "Find File at point"   "F" #'evil-find-file-at-point-with-line
-      :desc "Goto Definition"      "d" #'evil-goto-definition
-      :desc "Lookup File"          "f" #'+lookup/file
-      :desc "Lookup"               "D" #'+lookup/references
-      :desc "Next Visual"          "j" #'evil-next-visual-line
-      :desc "Previous Visual"      "k" #'evil-previous-visual-line
-      :desc "Search Word Forward"  "*" #'evil-ex-search-unbounded-word-forward
+      :desc "Search Clear"                 "c" #'evil-ex-nohighlight
+      :desc "Find File at point"   "F"         #'evil-find-file-at-point-with-line
+      :desc "Goto Definition"      "d"         #'evil-goto-definition
+      :desc "Lookup File"          "f"         #'+lookup/file
+      :desc "Search current directory"     "d" #'+default/search-cwd
+      :desc "Lookup"               "D"         #'+lookup/references
+      :desc "Next Visual"          "j"         #'evil-next-visual-line
+      :desc "Previous Visual"      "k"         #'evil-previous-visual-line
+      :desc "Search Word Forward"  "*"         #'evil-ex-search-unbounded-word-forward
       )

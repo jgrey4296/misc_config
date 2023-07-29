@@ -27,10 +27,17 @@
       )
 
 (map! :leader
-      (:prefix ("y" . "snippets"))
       (:prefix ("B" . "Bookmarks"))
-      (:prefix ("p". "Projects/Workspaces"))
+      (:prefix ("c" . "code")
+       :prefix ("r" . "Repl")
+       )
       (:prefix ("m" . "Local Mode"))
+      (:prefix ("p". "Projects/Workspaces"))
+      (:prefix ("y" . "snippets"))
+
+      (:prefix ("x" . "Text"))
+
+      :desc "Jump"    "j" #'jg-binding-jump-map
       )
 ;;-- end leader
 
@@ -63,19 +70,7 @@
       )
 ;;-- end <leader> b --- buffer
 
-;;-- <leader> c --- code
-(map! :leader
-      :prefix ("c" . "code")
-      :desc "Compile"                               "c"   #'compile
-      :desc "Recompile"                             "C"   #'recompile
-      :desc "Evaluate & replace region"             "E"   #'+eval:replace-region
-      :desc "Evaluate buffer/region"                "e"   #'+eval/buffer-or-region
-      :desc "recompile"                             "c"   #'recompile
-      :desc "Send to repl"                          "s"   #'+jg-send-region-to-repl
-      :desc "List errors"                           "x"   #'flycheck-list-errors
-      (:prefix ("r" . "Repl"))
-      )
-;;-- end <leader> c --- code
+;;--- <leader> c --- code
 
 ;;-- <leader> f --- file
 (map! :leader
@@ -172,10 +167,7 @@
       )
 ;;-- end <leader> i --- insert
 
-;;-- <leader> j -- Jumping
-(map! :leader
-      :desc "Jump"    "j" #'jg-binding-jump-map)
-;;-- end <leader> j -- Jumping
+;;--- <leader> j -- Jumping
 
 ;;-- <leader> M -- Macros
 (map! :leader
@@ -306,19 +298,11 @@
 ;;-- <leader> s --- search
 (map! :leader
       :prefix ("s" . "search")
-      :desc "Search Clear"                 "c" #'evil-ex-nohighlight
-      :desc "Jump list"                    "j" #'evil-show-jumps
       :desc "Jump to link"                 "L" #'ffap-menu
-      :desc "Jump to mark"                 "m" #'evil-show-marks
-      :desc "Jump to symbol"               "i" #'imenu
       :desc "Jump to visible link"         "l" #'link-hint-open-link
-      :desc "Google"                       "g" #'browse-url
-      :desc "Search buffer"                "S" #'+default/search-buffer
-      :desc "Search current directory"     "d" #'+default/search-cwd
-      :desc "Search other directory"       "D" #'+default/search-other-cwd
       :desc "Search project"               "p" #'+default/search-project
-      :desc "Search other project"         "P" #'+default/search-other-project
       :desc "Search project for symbol"    "." #'+default/search-project-for-symbol-at-point
+      :desc "Search current directory"     "d" #'+default/search-cwd
       )
 ;;-- end <leader> s --- search
 
@@ -346,10 +330,6 @@
       )
 ;;-- end <leader> w --- Windows
 
-;;-- <leader> x -- Text
-(map! :leader
-      :prefix ("x" . "Text")
-      )
-;;-- end <leader> x -- Text
+;;--- <leader> x -- Text
 
 (provide 'jg-bindings-core)

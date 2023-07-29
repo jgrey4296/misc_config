@@ -24,6 +24,11 @@
       )
 
 (map! :leader
+      :prefix "c"
+      :desc "compile in project"           "c"  #'projectile-compile-project
+      )
+
+(map! :leader
       :prefix ("p" . "project")
       "?" #'+jg-projects-detect-type
       :desc "run cmd in project root"      "!"  #'projectile-run-shell-command-in-root

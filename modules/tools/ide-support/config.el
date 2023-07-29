@@ -28,7 +28,7 @@
 ;;-- lsp
 
 (use-package! lsp-mode
-  :commands (lsp-install-server lsp-deferred)
+  :commands (lsp-install-server lsp-deferred lsp-update-servers)
   :init
   ;; Don't touch ~/.emacs.d, which could be purged without warning
   (setq lsp-session-file (concat doom-cache-dir "lsp-session")
@@ -51,19 +51,20 @@
                         )
                       )
 
+  ;; override what is auto loaded
+  (setq lsp-client-package nil)
+
+
   :config
   (add-to-list 'doom-debug-variables 'lsp-log-io)
 
-  (setq lsp-intelephense-storage-path (concat doom-data-dir "lsp-intelephense/")
-        lsp-vetur-global-snippets-dir
-        (expand-file-name
-         "vetur" (or (bound-and-true-p +snippets-dir)
-                     (concat doom-user-dir "snippets/")))
+  (setq
         lsp-xml-jar-file (expand-file-name "org.eclipse.lsp4xml-0.3.0-uber.jar" lsp-server-install-dir)
         lsp-groovy-server-file (expand-file-name "groovy-language-server-all.jar" lsp-server-install-dir))
 
   ;; REVIEW Remove this once this is fixed upstream.
-  (add-to-list 'lsp-client-packages 'lsp-racket)
+
+
 
   (add-hook! 'doom-escape-hook #'+lsp-signature-stop-maybe-h)
   (add-hook! 'lsp-mode-hook #'+lsp-optimization-mode)

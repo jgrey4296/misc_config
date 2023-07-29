@@ -53,6 +53,8 @@ https://github.com/vinta/awesome-python
 - wheel
 
 ** To Make Core
+- https://github.com/astral-sh/ruff
+- https://github.com/astral-sh/ruff-lsp
 - https://github.com/openlawlibrary/pygls
 - llvmlite
 - cachetools
@@ -263,6 +265,8 @@ if python complains, try:
 pip install pygobject
 
 ** Linting
+https://github.com/astral-sh/ruff
+https://github.com/astral-sh/ruff-lsp
 https://github.com/microsoft/lsprotocol
 https://github.com/openlawlibrary/pygls
 https://github.com/ORCID/python-orcid

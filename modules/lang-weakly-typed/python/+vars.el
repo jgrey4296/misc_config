@@ -100,16 +100,28 @@
 ;;-- end smartparens
 
 ;;-- lsp
-
-(defvar lsp-disabled-clients nil)
-(add-to-list 'lsp-disabled-clients 'pyls)
-(add-to-list 'lsp-disabled-clients 'pylsp)
-(add-to-list 'lsp-disabled-clients 'mspyls)
-
 (setq lsp-pyright-extra-paths #'[]
       lsp-pyright-venv-path conda-env-home-directory
       lsp-pyright-log-level "warning"
+
+      lsp-ruff-lsp-advertize-fix-all            t
+      lsp-ruff-lsp-advertize-organize-imports   t
+      lsp-ruff-lsp-show-notifications           "always"
+      lsp-ruff-lsp-log-level                    "info"
+      lsp-ruff-lsp-server-command               '("ruff-lsp")
+      lsp-ruff-lsp-python-path                  "python3"
+      lsp-ruff-lsp-import-strategy              "fromEnvironment"
+      lsp-ruff-lsp-ruff-args                    [ ]
+      lsp-ruff-lsp-ruff-path                    ["ruff"]
+
+      lsp-pylsp-configuration-sources []
+      lsp-pylsp-server-command '("pylsp")
+      lsp-pylsp-plugins-flake8-enabled nil
+
       )
+
+
+
 ;;-- end lsp
 
 ;;-- specs

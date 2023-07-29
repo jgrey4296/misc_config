@@ -136,9 +136,13 @@ and call the currently used lsp/conda client entrypoint"
 ;;;###autoload
 (defun env-handling-state-line ()
   (if (plist-get env-handling-state :env)
-      (format "Python (%s:%s): %s"
+      (format "Python (%s:%s:%s): %s"
               (car-safe (plist-get env-handling-state :setup))
               (car-safe (plist-get env-handling-state :support))
+              (if (eq 'lsp (car-safe (plist-get env-handling-state :support)))
+                  (mapcar #'lsp--workspace-server-id (lsp-workspaces))
+                ""
+                  )
               (if (plist-get env-handling-state :locked)
                   (concat "[" (plist-get env-handling-state :env) "]")
                 (plist-get env-handling-state :env))

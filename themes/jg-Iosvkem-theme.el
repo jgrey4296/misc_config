@@ -5,6 +5,7 @@
 (require 'doom-themes)
 
 (defface font-lock-operator-face '((t :background  "darkseagreen2")) "Missing face used in python mode" :group 'font-lock)
+(defface lsp-flycheck-info-unnecessary '((t :background "gray21")) "missing lsp face" :group 'lsp-mode)
 (defface highlight-numbers-number '() "missing face" :group 'highlight)
 
 ;;-- variables

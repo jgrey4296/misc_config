@@ -36,7 +36,4 @@
              #'general-insert-minor-mode
              )
 
-  ;; (setq-hook! 'rust-mode-hook)
-
-  ;; (add-hook 'rustic-mode-local-vars-hook #'rustic-setup-lsp 'append)
 )

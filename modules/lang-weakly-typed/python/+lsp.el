@@ -2,54 +2,76 @@
 
 (doom-log "Loading Python LSP")
 
-(use-package! lsp-pyright
+(use-package! lsp-jedi
   :after (python-mode lsp-mode)
-  :preface
-  (defun +jg-python-pyright-activate (state)
-    (when (plist-get state :name)
-      (setq lsp-pyright-extra-paths (vector python-shell-extra-pythonpaths
-                                            (f-join (plist-get state :path)
-                                                    (plist-get state :name))))
-      (add-hook 'python-mode-hook #'lsp-deferred)
+  )
+
+(after! lsp-mode
+  (load! "lsp/custom-pylsp")
+  (load! "lsp/custom-pyright-lsp")
+  (load! "lsp/custom-ruff-lsp")
+
+
+  (lsp-register-client ;; pyright
+   (make-lsp-client
+    :new-connection (lsp-stdio-connection (lambda ()
+                                            (cons (lsp-package-path 'pyright)
+                                                  lsp-pyright-langserver-command-args)))
+    :major-modes '(python-mode python-ts-mode)
+    :server-id 'jg-pyright
+    :multi-root lsp-pyright-multi-root
+    :priority 2
+    :initialized-fn (lambda (workspace)
+                      (with-lsp-workspace workspace
+                        ;; we send empty settings initially, LSP server will ask for the
+                        ;; configuration of each workspace folder later separately
+                        (lsp--set-configuration (make-hash-table :test 'equal))))
+    :download-server-fn (lambda (_client callback error-callback _update?)
+                          (lsp-package-ensure 'pyright callback error-callback))
+    :notification-handlers (lsp-ht ("pyright/beginProgress"  'lsp-pyright--begin-progress-callback)
+                                   ("pyright/reportProgress" 'lsp-pyright--report-progress-callback)
+                                   ("pyright/endProgress"    'lsp-pyright--end-progress-callback)
+                                   )
+    )
+   )
+
+  (lsp-register-client ;; pylsp
+   (make-lsp-client :new-connection (lsp-stdio-connection (lambda () lsp-pylsp-server-command))
+                    :activation-fn (lsp-activate-on "python")
+                    :priority -1
+                    :server-id 'jg-pylsp
+                    :library-folders-fn (lambda (_workspace) lsp-clients-pylsp-library-directories)
+                    :initialized-fn (lambda (workspace)
+                                      (with-lsp-workspace workspace
+                                        (lsp--set-configuration (lsp-configuration-section "pylsp"))))
+                    )
+   )
+
+  (lsp-register-client ;; ruff
+   (make-lsp-client
+    :new-connection (lsp-stdio-connection
+                     (lambda () lsp-ruff-lsp-server-command))
+    :activation-fn (lsp-activate-on "python")
+    :server-id 'jg-ruff
+    :priority 3
+    :add-on? t
+    :initialization-options
+    (lambda ()
+      (list :settings
+            (list :args                           lsp-ruff-lsp-ruff-args
+                  :logLevel                       lsp-ruff-lsp-log-level
+                  :path                           lsp-ruff-lsp-ruff-path
+                  :interpreter                    (vector lsp-ruff-lsp-python-path)
+                  :showNotifications              lsp-ruff-lsp-show-notifications
+                  :organizeImports                (lsp-json-bool lsp-ruff-lsp-advertize-organize-imports)
+                  :fixAll                         (lsp-json-bool lsp-ruff-lsp-advertize-fix-all)
+                  :importStrategy                 lsp-ruff-lsp-import-strategy
+                  )
+            )
       )
     )
+   )
 
-  (defun +jg-python-pyright-deactivate (state)
-    (when (and (boundp 'lsp-mode) lsp-mode)
-      (lsp-mode -1))
-    (when (fboundp 'lsp--last-active-workspaces)
-      (lsp-workspace-shutdown (car lsp--last-active-workspaces)))
-    (remove-hook 'python-mode-hook #'lsp-deferred)
-    (setq lsp-pyright-extra-paths #'[])
-    )
 
-  (defun +jg-python-pyright-teardown (state)
-    (lsp-disconnect)
-    )
 
-  (spec-handling-add! python-env
-                      `(pyright
-                        (:support pyright
-                                  ,#'+jg-python-pyright-activate
-                                  ,#'+jg-python-pyright-deactivate
-                                  )
-                        (:teardown pyright ,#'+jg-python-pyright-teardown)
-                      )
-  )
-  )
-
-(use-package! lsp-python-ms
-  :disabled
-  :after (python-mode lsp-mode)
-  :init
-  (add-to-list 'lsp-disabled-clients 'python-ms)
-  :config
-  (setq lsp-python-ms-python-executable-cmd python-shell-interpreter)
-  )
-
-(use-package! lsp-jedi
-  :disabled
-  :after (python-mode lsp-mode)
-  :init
-  (add-to-list 'lsp-disabled-clients 'jedi)
   )

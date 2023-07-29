@@ -19,12 +19,6 @@
 ;;
 ;;; Code:
 
-(setq rustic-lsp-client (if (modulep! :tools lsp +eglot) 'eglot 'lsp-mode) ;; HACK `rustic' sets up some things too early. I'd rather disable it and let our respective modules standardize how they're initialized.
-      rustic-indent-method-chain t
-      rust-prettify-symbols-alist nil ;; Conflicts with (and is redundant with) :ui ligatures
-      rustic-babel-format-src-block nil ;; Leave automatic reformatting to the :editor format module.
-      rustic-format-trigger nil
-      )
 
 (after! projectile
   (add-to-list 'projectile-project-root-files "Cargo.toml")
@@ -113,6 +107,12 @@
       lsp-rust-server 'rust-analyzer
  )
 
+(setq rustic-lsp-client 'lsp-mode
+      rustic-indent-method-chain t
+      rust-prettify-symbols-alist nil ;; Conflicts with (and is redundant with) :ui ligatures
+      rustic-babel-format-src-block nil ;; Leave automatic reformatting to the :editor format module.
+      rustic-format-trigger nil
+      )
 ;;-- end LSP
 
 ;;-- general-insert

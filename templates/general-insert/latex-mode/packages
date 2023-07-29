@@ -1,8 +1,29 @@
 Select Packages to Use:
-[T1, T2A]{fontenc}        # fonts
-[russian, english]{babel} # fonts
-{listings}                # code listings
-url                       # urls highlight
-[numbers]{natbib}         # bibliography
-{doi}                     # doi highlighting
+[T1, T2A]{fontenc}                                          # fonts
+[russian, english]{babel}                                   # fonts
+{listings}                                                  # code listings
+url                                                         # urls highlight
+[numbers]{natbib}                                           # bibliography
+{doi}                                                       # doi highlighting
 [colorlinks=true,urlcolor=blue,pdfstartview=FitH]{hyperref} # hyperlinks
+
+multicol                                                    # columns for when \documentclass{\twocolumn} isnt enough
+
+minted                                                      # code highlighting
+pygments                                                    # also has code highlighting output
+
+graphicx                                                    # for images with \includegraphics{img} and \graphicspath{path}
+
+dirtytalk                                                   # provides \say{[text]}
+csquotes                                                    # provides \begin{displayquote} for non-inline
+
+titlesec                                                    # customize chapter/section styles
+
+imakeidx                                                    # index creation
+glossaries                                                  # glossary creation. uses makeindex
+makeindex                                                   #
+nomencl                                                     # nomenclature
+
+marginpar                                                   # margin notes
+mparhack                                                    # for fixing margin notes
+marginnote                                                  # alternative margin notes.

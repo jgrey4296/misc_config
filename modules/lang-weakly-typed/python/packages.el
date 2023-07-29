@@ -10,11 +10,10 @@
 
 (package! cython-mode)
 (package! flycheck-cython)
+(package! flymake-ruff)
 
 ;; LSP
-(package! lsp-pyright)
-(package! lsp-jedi      :disable t)
-(package! lsp-python-ms :disable t)
+(package! lsp-jedi)
 
 ;; Programming environment
 (package! anaconda-mode)

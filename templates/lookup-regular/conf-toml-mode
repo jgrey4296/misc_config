@@ -6,3 +6,5 @@ pip toml                     # https://pip.pypa.io/en/stable/reference/build-sys
 
 PEP 440: Python Version Spec # https://peps.python.org/pep-0440/
 PEP 508: Python Dep Spec     # https://peps.python.org/pep-0508/
+
+Ruff Rules                   # https://beta.ruff.rs/docs/rules/

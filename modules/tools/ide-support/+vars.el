@@ -15,20 +15,36 @@
 ;;-- end definitions
 
 ;;-- lsp
-(setq lsp-ui-peek-enable nil
+(setq lsp-keep-workspace-alive nil
+
+      lsp-ui-peek-enable      t
+      lsp-ui-peek-always-show t
+      lsp-ui-peek-peek-height 20
+      lsp-ui-peek-show-directory t
+
+
       lsp-ui-doc-max-height 8
       lsp-ui-doc-max-width 72         ; 150 (default) is too wide
       lsp-ui-doc-delay 1              ; 0.2 (default) is too naggy
       lsp-ui-doc-show-with-mouse nil  ; don't disappear on mouseover
       lsp-ui-doc-position 'at-point
+      lsp-ui-doc-include-signature t
+
+
       lsp-ui-sideline-ignore-duplicate t
-      lsp-ui-sideline-show-hover nil
-      lsp-ui-sideline-actions-icon nil
-      lsp-keep-workspace-alive nil
-      lsp-enable-folding nil             ;; can be slow
-      lsp-enable-text-document-color nil ;; ditto
-      lsp-enable-on-type-formatting nil
+      lsp-ui-sideline-delay 1
+      lsp-ui-sideline-diagnostic-max-line-length 50
+      lsp-ui-sideline-show-hover       t
+      lsp-ui-sideline-actions-icon     nil
+
+      lsp-enable-folding               nil             ;; can be slow
+      lsp-enable-text-document-color   nil             ;; ditto
+
+      lsp-enable-on-type-formatting    nil
       lsp-headerline-breadcrumb-enable nil
+      lsp-enable-semantic-highlighting t
+
+      lsp-disabled-clients             nil
       )
 
 ;;-- end lsp

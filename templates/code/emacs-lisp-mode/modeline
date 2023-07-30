@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : modeline
+# uuid  : modeline
+# key   : modeline
+# group :
+# --
+`comment-start``comment-start` `(buffer-name)` -*- lexical-binding: t; -*-

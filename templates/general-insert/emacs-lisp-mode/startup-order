@@ -1,0 +1,7 @@
+Emacs Startup Routine:
+site-start.el     # std search path, disabled with --no-site-file
+.early-init.el      # in ~/.config or ~/.emacs.d
+.emacs.el | init.el # in ~/.emacs.d or ~/.config/emacs/
+default.el          # std search path. disabled with inihibit-default-init in init.el
+
+__source__ # https://www.gnu.org/software/emacs/manual/html_node/elisp/Startup-Summary.html

@@ -37,9 +37,12 @@
 
 (map! :map jg-binding-vision-map
       :prefix ("i" . "Invisible")
-      :desc "Add"            "a" #'+jg-text-make-invisible
-      :desc "Delete "        "d" #'+jg-text-delete-invisible
-      :desc "Invisible-spec" "i" #'+jg-text-toggle-invisible-spec
+      :desc "Add"                       "a" #'+jg-text-make-invisible
+      :desc "Delete"                    "d" #'+jg-text-delete-invisible
+      :desc "Make Comments Invisible"   "c" #'+jg-text-manipulation-make-comments-invisible
+      :desc "Invisibilty Ivy"         "i" #'+jg-text-manipulate-invis-spec
+      :desc "Invisibilty Ivy"         "RET" #'+jg-text-manipulate-invis-spec
+      :desc "Named Invisibilty"        "n"  #'+jg-text-name-invisible
       )
 
 (map! :map jg-binding-visual-state-map
@@ -88,6 +91,7 @@
       )
 
 (map! :map jg-binding-change-map
+      :desc "Invis" "z" #'+jg-text-toggle-invisible
       :prefix ("S" . "Surround")
       "d" #'evil-surround-delete
       "c" #'evil-surround-change

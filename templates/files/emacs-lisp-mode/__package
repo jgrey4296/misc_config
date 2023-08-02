@@ -22,7 +22,7 @@
 ;;; Code:
 ;;-- end header
 
-`%`$0
+$0
 
 
 (provide '`(file-name-base buffer-file-name)`)

@@ -166,3 +166,8 @@
 (autoload 'overseer-test "overseer" nil t)
 ;; Properly lazy load overseer by not loading it so early:
 (remove-hook 'emacs-lisp-mode-hook #'overseer-enable-mode)
+
+(use-package! cl-lib)
+(use-package! a)
+(use-package! f)
+(use-package! s)

@@ -20,3 +20,4 @@
 
 ;; Libraries
 (package! buttercup)
+(package! a)

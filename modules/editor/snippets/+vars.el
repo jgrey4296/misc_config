@@ -62,12 +62,12 @@
                     '(yas-minor-mode (:back company-yasnippet))
                     )
 
-(spec-handling-add! auto-modes :form 'override
+(spec-handling-add! auto-modes
                     '(snippets
                       ("templates/code/.+\\'"           . snippet-mode)
                       ("templates/general-insert/.+\\'" . fundamental-mode)
                       ("templates/lookup-regular/.+\\'" . fundamental-mode)
                       ("templates/company-dicts/.+\\'"  . fundamental-mode)
-                      ("templates/files/.+\\'"          . snippet-omde)
+                      ("templates/files/.+\\'"          . snippet-mode)
                       )
                     )

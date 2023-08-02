@@ -31,6 +31,8 @@
   (add-hook! 'dired-mode-hook #'fd-dired-minor-mode)
   )
 
-
+(after! (evil-escape evil-search)
+  (add-hook 'evil-escape-hook #'evil-ex-nohighlight)
+  )
 
 ;;; config.el ends here

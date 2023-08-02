@@ -1,6 +1,5 @@
 ;;; jg-tag/+bindings.el --- summary -*- lexical-binding: t -*-
 ;;
-;;-- helm
 (map! :map jg-binding-helm-map
       :desc "Twitter Tag Helm"          "t" #'+jg-tag-helm-tag-twitter
       :desc "Twitter Account Helm"      "T" #'+jg-tag-helm-account-twitter
@@ -8,14 +7,12 @@
       :desc "Twitter Grep Helm"         "g" #'+jg-tag-helm-twitter-grep
       )
 
-(map! :after helm
-      :map helm-map
+(map! :map helm-map
+      :after helm
       "M-SPC" #'helm-next-page
       :localleader
       :desc "Save Results" "s" #'+jg-tag-save-helm-buffer
       )
-
-;;-- end helm
 
 ;; Dired bindings
 (map! :map dired-mode-map
@@ -29,8 +26,16 @@
        :desc "Index Tags" "t"            #'+jg-tag-index-tags
        )
       )
-(evil-ex-define-cmd "tv"     #'org-tags-view)
-(evil-ex-define-cmd "ts"     #'org-set-tags)
+
+
+(after! jg-evil-ex-bindings
+  (evil-define-operator +jg-tag-helm-start (beg end &rest rest)
+    (interactive "<R>")
+    (+jg-tag-helm-tagger beg end))
+  (evil-ex-define-cmd "t[ag]"  #'tagging-minor-mode-tagger)
+  (evil-ex-define-cmd "tv"     #'org-tags-view)
+  (evil-ex-define-cmd "ts"     #'org-set-tags)
+  )
 
 (map! :leader
       :desc "Open Random Untagged Twitter" "o u" #'+jg-tag-open-random-untagged-twitter

@@ -23,28 +23,6 @@
     )
   )
 
-(defun +jg-tag-tweet-link-action (candidate)
-  "Helm action to open a tweet buffer with the link inserted"
-  (evil-window-new (get-buffer-window helm-current-buffer)
-                   "*Link Tweeting*")
-  (set (make-local-variable 'backup-inhibited) t)
-  (auto-save-mode -1)
-  (evil-window-set-height 10)
-  (evil-initialize-local-keymaps)
-  (evil-local-set-key 'normal
-                      (kbd "C-c C-C") '+jg-tag-tweet-link-finish)
-  (insert "\n")
-  (insert (plist-get candidate :url))
-  (redraw-display)
-  )
-
-(defun +jg-tag-tweet-link-finish ()
-  "Action to finish and tweet a link"
-  (interactive)
-  (let* ((text (buffer-substring-no-properties (point-min) (point-max))))
-    (+jg-twitter-twitter-tweet-text text nil '(+jg-twitter-tweet_sentinel))
-    ))
-
 (defun +jg-tag-insert-bookmarks (x)
  (let ((candidates (helm-marked-candidates)))
     (with-helm-current-buffer
@@ -72,3 +50,19 @@
       (cl-loop for entry in candidates
             do (let ((name (substring entry 1)))
                  (insert (format "[[https://twitter.com/%s][%s]]\n" name entry)))))))
+
+(defun +jg-tag-file-select-helm (candidates)
+    " Given a list of Files, provide a helm to open them "
+    (interactive)
+    ;;(message "File Select Helm Candidates: %s" (helm-marked-candidates))
+    ;;process candidates?
+    (let*(;;(candidate-names (mapcar 'car (helm-marked-candidates)))
+          (candidate-values (helm-marked-candidates))
+          (all-candidates (-flatten (mapcar (lambda (x) (plist-get x :files)) candidate-values)))
+          (source (cons `(candidates . ,all-candidates) jg-tag-file-select-source)))
+      (helm :sources source
+            :full-frame t
+            :buffer "*helm file select*"
+            )
+      )
+    )

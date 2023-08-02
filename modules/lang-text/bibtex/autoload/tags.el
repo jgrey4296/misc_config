@@ -5,67 +5,59 @@
   (split-string x "," t "+")
   )
 
+(defun +jg-bibtex--mod-tags-fn (current candidate)
+  (cond ((-contains? current candidate)
+         (puthash candidate (- (gethash candidate tagging-minor-mode-global-tags) 1) tagging-minor-mode-global-tags)
+         (delete candidate current)
+         )
+        (t
+         (puthash candidate 1 tagging-minor-mode-global-tags)
+         (cons candidate current)
+         )
+        )
+  )
+
+
 ;;;###autoload
 (defun +jg-bibtex-set-tags (x)
   " Set tags in bibtex entries "
-  (let* ((actual-candidates (mapcar 'car (helm-marked-candidates)))
-         (prior-point 1)
-         (end-pos (max tagging-minor-mode-marker (save-excursion
-                                                   (bibtex-end-of-entry)
-                                                   (point))))
-         (current-tags '())
-         (has-real-tags-field nil)
-         (add-func (lambda (candidate)
-                     (if (not (-contains? current-tags candidate))
-                         (progn
-                           (push candidate current-tags)
-                           (puthash candidate 1 tagging-minor-mode-global-tags))
-                       (progn
-                         (setq current-tags (remove candidate current-tags))
-                         (puthash candidate (- (gethash candidate tagging-minor-mode-global-tags) 1) tagging-minor-mode-global-tags))
-                       )))
-         )
-    (save-excursion
-      (setq prior-point (- (point) 1))
-      (while (and (/= prior-point (point)) (< (point) end-pos))
-        (progn
-          (setq has-real-tags-field (not (string-empty-p (bibtex-autokey-get-field "tags"))))
-          (setq current-tags (+jg-bibtex-split-tags (bibtex-autokey-get-field
-                                                     (if has-real-tags-field "tags"
-                                                       "OPTtags")))
-                prior-point (point))
-          (mapc add-func actual-candidates)
-          (bibtex-set-field "tags" (string-join current-tags ","))
-          ;;(org-ref-bibtex-next-entry)
-          (evil-forward-section-begin)
-          )))
+  (save-excursion
+    (bibtex-beginning-of-entry)
+    (let* ((actual-candidates (mapcar 'car (helm-marked-candidates)))
+           (start-pos (point))
+           )
+      (goto-char tagging-minor-mode-marker)
+      (evil-forward-section-end)
+      (while (>= (point) start-pos)
+        (bibtex-set-field "tags"
+                          (string-join
+                           (cl-reduce #'+jg-bibtex--mod-tags-fn actual-candidates
+                                      :initial-value
+                                      (+jg-bibtex-split-tags (bibtex-autokey-get-field '("tags" "OPTtags"))))
+                           ","))
+        (evil-backward-section-begin 2) ;; count 2. first to return to entry beginning, then to go beyond
+        ))
     )
-)
+  )
 
 ;;;###autoload
 (defun +jg-bibtex-set-new-tag (x)
   "A Fallback function to set tags of bibtex entries "
   (save-excursion
-    (let ((prior-point (- (point) 1))
-          (end-pos (max tagging-minor-mode-marker (save-excursion
-                                                    (bibtex-end-of-entry)
-                                                    (point))))
+    (bibtex-beginning-of-entry)
+    (let ((start-pos (point))
           (stripped_tags (+jg-bibtex-split-tags (tagging-minor-mode--trim-input x)))
           )
-      (save-excursion
-        (while (and (/= prior-point (point)) (< (point) end-pos))
-          (setq prior-point (point))
-          (let* ((has-real-tags-field (not (string-empty-p (bibtex-autokey-get-field "tags"))))
-                 (current-tags (+jg-bibtex-split-tags (bibtex-autokey-get-field (if has-real-tags-field "tags" "OPTtags"))))
-                 (filtered-tags (-filter (lambda (x) (not (-contains? current-tags x))) stripped_tags))
-                 (total-tags (-concat current-tags filtered-tags))
-                 )
-            (bibtex-set-field "tags" (string-join total-tags ","))
-            (mapc (lambda (x) (puthash x 1 tagging-minor-mode-global-tags)) filtered-tags)
-            ;;(org-ref-bibtex-next-entry)
-            (evil-forward-section-begin)
-            )))))
-  )
+      (goto-char tagging-minor-mode-marker)
+      (evil-forward-section-end)
+      (while (>= (point) start-pos)
+        (let* ((current-tags (+jg-bibtex-split-tags (bibtex-autokey-get-field '("tags" "OPTtags"))))
+               (filtered-tags (-filter (lambda (x) (not (-contains? current-tags x))) stripped_tags))
+               )
+          (bibtex-set-field "tags" (string-join (append current-tags filtered-tags) ","))
+          (mapc (lambda (x) (puthash x 1 tagging-minor-mode-global-tags)) filtered-tags)
+          (evil-backward-section-begin 2) ;; count 2. first to return to entry beginning, then to go beyond
+          )))))
 
 ;;;###autoload
 (defun +jg-bibtex-get-tags ()

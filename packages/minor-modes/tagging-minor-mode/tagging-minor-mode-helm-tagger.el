@@ -1,5 +1,6 @@
 ;;; tagging-helm.el -*- lexical-binding: t; -*-
 
+(require 'evil)
 (require 'helm-source)
 (require 'helm-grep)
 (require 'helm-utils)
@@ -163,29 +164,24 @@
         :filtered-candidate-transformer (lambda (_c _s) (list helm-pattern)))
       )
 
-(defun tagging-minor-mode-tagger (&optional beg end)
+(evil-define-command tagging-minor-mode-tagger (&optional beg end type)
   " Opens the Tagging Helm "
-  (interactive)
-  (unless tagging-minor-mode
-    (error "Tagging Minor Mode not active")
-    )
-  (set-marker tagging-minor-mode-marker
-              (cond ((and (boundp 'evil-state)
-                          (eq evil-state 'visual))
-                     evil-visual-end)
-                    (t
-                     (line-end-position))))
-
+  (interactive "<R>")
+  (unless tagging-minor-mode (user-error "Tagging Minor Mode not active"))
+  (set-marker tagging-minor-mode-marker end)
   (get-buffer-create tagging-minor-mode--helm-buffer-name)
 
-  (let* ((current-tags (tagging-minor-mode-get-tags))
-         (candidates   (tagging-minor-mode-candidates current-tags))
-         (main-source (cons `(candidates . ,candidates) tagging-minor-mode--helm-source))
-         )
-    (helm :sources (list main-source tagging-minor-mode--fallback-source)
-          :input ""
-          :buffer tagging-minor-mode--helm-buffer-name
-          )
+  (save-excursion
+    (goto-char beg)
+    (let* ((current-tags (tagging-minor-mode-get-tags))
+           (candidates   (tagging-minor-mode-candidates current-tags))
+           (main-source (cons `(candidates . ,candidates) tagging-minor-mode--helm-source))
+           )
+      (helm :sources (list main-source tagging-minor-mode--fallback-source)
+            :input ""
+            :buffer tagging-minor-mode--helm-buffer-name
+            )
+      )
     )
   )
 

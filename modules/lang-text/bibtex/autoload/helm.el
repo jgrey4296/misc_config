@@ -321,6 +321,7 @@ using org-bibtex-fields for completion options "
              )
             )
       (when new-values
+        (bibtex-beginning-of-entry)
         (bibtex-set-field chosen
                           (string-join (mapcar 'string-trim (ensure-list new-values)) " and "))
         )

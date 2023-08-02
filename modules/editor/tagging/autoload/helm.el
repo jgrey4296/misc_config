@@ -1,48 +1,8 @@
 ;; -*- mode: emacs-lisp; lexical-binding: t; -*-
 
-;;-- utils
-(defun +jg-tag-save-helm-buffer ()
-  (interactive)
-  (let ((results (with-helm-buffer (buffer-string))))
-    (helm-exit-and-execute-action
-     #'(lambda (x)
-         (with-temp-buffer-window "TestBuffer" 'display-buffer-pop-up-frame nil
-           (princ results)
-           )
-         )
-     )
-    )
-  )
-;;-- end utils
+(load! "sources")
 
-;;-- dual helm/action
-(defun +jg-tag-file-select-helm (candidates)
-    " Given a list of Files, provide a helm to open them "
-    (interactive)
-    ;;(message "File Select Helm Candidates: %s" (helm-marked-candidates))
-    ;;process candidates?
-    (let*(;;(candidate-names (mapcar 'car (helm-marked-candidates)))
-          (candidate-values (helm-marked-candidates))
-          (all-candidates (-flatten (mapcar (lambda (x) (plist-get x :files)) candidate-values)))
-          (source (cons `(candidates . ,all-candidates) jg-tag-file-select-source)))
-      (helm :sources source
-            :full-frame t
-            :buffer "*helm file select*"
-            )
-      )
-    )
-(defun +jg-tag-file-display (candidates)
-  (interactive)
-  (let*((candidates (plist-get (car (helm-marked-candidates)) :files)))
-    (with-temp-buffer-window "Helm Twitter Grep Results"
-        'display-buffer-pop-up-window nil
-      (mapcar (lambda (x) (princ x) (princ "\n")) candidates)
-      )
-    )
-  )
-;;-- end dual helm/action
-
-;;-- helms
+;;;###autoload
 (defun +jg-tag-helm-tag-twitter ()
     "Run a Helm for searching twitter tags"
     (interactive)
@@ -52,6 +12,8 @@
           :truncate-lines t
           )
     )
+
+;;;###autoload
 (defun +jg-tag-helm-twitter-grep (arg)
   (interactive "p")
     (helm-set-local-variable
@@ -67,6 +29,8 @@
           :truncate-lines t
           )
     )
+
+;;;###autoload
 (defun +jg-tag-helm-account-twitter ()
     "Run a Helm for searching twitter users"
     (interactive)
@@ -76,6 +40,8 @@
           :truncate-lines t
           )
     )
+
+;;;###autoload
 (defun +jg-tag-helm-unified ()
     (interactive)
     ;;Load headings if necessary
@@ -125,4 +91,3 @@
             )
       )
     )
-;;-- end helms

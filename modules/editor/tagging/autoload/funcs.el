@@ -1,5 +1,6 @@
 ;;; emacs/jg-tag/+funcs.el -*- lexical-binding: t; -*-
 
+;;;###autoload
 (defun +jg-tag-open-random-untagged-twitter ()
   (interactive)
   (let* ((av-dirs (f-entries jg-tag-loc-twitter
@@ -12,6 +13,8 @@
     (find-file chosen-org)
     )
   )
+
+;;;###autoload
 (defun +jg-tag-split-tags()
   (interactive)
   (goto-char (point-min))
@@ -33,6 +36,31 @@
     (setq subs (buffer-substring (- (point) 1) (point-max)))
     (with-output-to-temp-buffer "z.tags"
       (princ subs)
+      )
+    )
+  )
+
+;;;###autoload
+(defun +jg-tag-save-helm-buffer ()
+  (interactive)
+  (let ((results (with-helm-buffer (buffer-string))))
+    (helm-exit-and-execute-action
+     #'(lambda (x)
+         (with-temp-buffer-window "TestBuffer" 'display-buffer-pop-up-frame nil
+           (princ results)
+           )
+         )
+     )
+    )
+  )
+
+;;;###autoload
+(defun +jg-tag-file-display (candidates)
+  (interactive)
+  (let*((candidates (plist-get (car (helm-marked-candidates)) :files)))
+    (with-temp-buffer-window "Helm Twitter Grep Results"
+        'display-buffer-pop-up-window nil
+      (mapcar (lambda (x) (princ x) (princ "\n")) candidates)
       )
     )
   )

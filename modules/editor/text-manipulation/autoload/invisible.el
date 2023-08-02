@@ -10,12 +10,14 @@
  "
   (interactive)
   (save-excursion
-    (goto-char (point-max))
-    (while (and (not (bobp)) (evilnc-get-comment-bounds))
+    (save-restriction
+      (goto-char (point-max))
       (+evil/previous-comment 1)
-      (let ((comment (evilnc-get-comment-bounds)))
-        (add-text-properties (car comment) (cdr comment)
-                             '(invisible jg-comment-invis))
+      (while (and (not (bobp)) (evil-in-comment-p (point)))
+        (-when-let (comment (evilnc-get-comment-bounds))
+          (add-text-properties (car comment) (cdr comment) '(invisible jg-comment-invis))
+          )
+        (+evil/previous-comment 1)
         )
       )
     )

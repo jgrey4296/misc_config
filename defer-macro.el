@@ -50,3 +50,17 @@
       )
     )
   )
+
+(defun debug-func--print-return (fn x)
+  (message "Fn: %s : %s" fn x)
+  )
+
+(defun debug-func! (fn)
+  (advice-add fn :filter-return (-partial #'debug-func--print-return fn))
+  )
+
+(defun undebug-func! (fn)
+  (advice-mapc (lambda (func props) (advice-remove fn func))
+               fn
+               )
+  )

@@ -44,6 +44,9 @@ index xkcd using explainxkcd
 fictional syllabi - both of actual papers, and lem-like
 
 ** Links
+https://dev.to/
+https://brkeogh.com/
+https://en.m.wikipedia.org/wiki/SARL_(programming_language)
 https://surnames.behindthename.com/
 https://idb.ub.uni-tuebingen.de/opendigi/El54_qt#p=3
 https://publicdomainreview.org/

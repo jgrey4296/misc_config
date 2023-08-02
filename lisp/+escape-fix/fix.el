@@ -10,6 +10,7 @@
     (goto-char (point-min))
     (forward-line (1- count)))
   (evil-first-non-blank))
+
 (defmacro jg-evil-ensure-column (&rest body)
   "Execute BODY so that column after execution is correct.
 If `evil-start-of-line' is nil, treat BODY as if it were a `next-line' command.
@@ -36,6 +37,7 @@ so it is more compatible with Evil's notion of EOL tracking."
                 (max 0 (+ (truncate (car temporary-goal-column))
                           (cdr temporary-goal-column)))
               temporary-goal-column))))))
+
 (defun jg-evil-escape-fix (fn &rest args)
   (let ((cmd this-command))
     (apply fn args)

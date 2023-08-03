@@ -105,6 +105,7 @@
 (spec-handling-add! auto-modes
                     '(latex
                       ("\\.tex\\'" . LaTeX-mode)
+                      ("\\.sty\\'" . LaTeX-mode)
                       )
                     )
 (spec-handling-add! file-templates

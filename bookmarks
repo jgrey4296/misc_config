@@ -2,7 +2,12 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("ruff-lsp"
+(("lisp"
+ (filename . "/Volumes/documents/github/lisp/")
+ (front-context-string . "spec-handling\n  ")
+ (rear-context-string . "38 Jul 14 18:17 ")
+ (position . 688))
+("ruff-lsp"
  (filename . "/usr/local/Caskroom/mambaforge/base/envs/doot-dev/lib/python3.11/site-packages/ruff_lsp/")
  (front-context-string . "server.py\n  -rw-")
  (rear-context-string . "8K Jul 29 03:35 ")

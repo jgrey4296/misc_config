@@ -1,76 +1,27 @@
 Latex Syntax:
-$ [text] $                                                        # inline math
-\[ [text] \]                                                      # inline equation
-\displaystyle                                                     # full sized math inline
-\text{[text]}                                                     # text in math expression
-
-\textit{[text]}                                                   # italics
-\textbf{[text]}                                                   # bold
-\underline{[text]}                                                # underline
-\mathbb{[text]}                                                   # math blackboard bold
+$ [text] $                                                                        # inline math
+\[ [text] \]                                                                      # inline equation
+\displaystyle                                                                     # full sized math inline
+\text{[text]}                                                                     # text in math expression
 
 
-Paragraphs                                                        # full empty line inbetween text.
-[EOL]\\                                                           # Newline
-\noindent                                                         # prevent indenting
-
-\left [ ({\[ ]                                                    # sized delimiter
-\right [ )}\] ]                                                   # sized delimiter
-
-\begin{itemize} \item [text] \end{itemize}                        # unordered list
-\begin{enumerate} \item [text] \end{enumerate}                    # ordered list
-
-\left[ \begin{array}{ccc} [arr] \end{array}\right]                # matrix
+\caption{[text]}                                                                  # numbered caption. just plain text for unnumbered.
 
 
-\triangle                                                         # geometry
-\angle                                                            # geometry
-[int]^{\circ}                                                     # degrees
-\overline{[text]}                                                 # geometry segment
+\left [ ({\[ ]                                                                    # sized delimiter
+\right [ )}\] ]                                                                   # sized delimiter
 
-\begin{tabular} \end{tabular}                                     # for tables
-
-\newcommand{\name}[2]{expansion}                                  # defining commands
-\renewcommand                                                     # for overriding defined commands
+\left[ \begin{array}{ccc} [arr] \end{array}\right]                                # matrix
 
 
-\newenvironment{name}[numarg][optarg_default]{begin_def}{end_def} # environment definition
+\triangle                                                                         # geometry
+\angle                                                                            # geometry
+[int]^{\circ}                                                                     # degrees
+\overline{[text]}                                                                 # geometry segment
 
-\footnote[number]{[text]}                                         # footnotes
-\footnotemark[number]                                             # just the superscript footnote
-\footnotetext[number]{[text]}                                     # the footnote text
+\newcommand{\name}[2]{expansion}                                                  # defining commands
+\renewcommand                                                                     # for overriding defined commands
 
-\say{[text]}                                                      # dirtytalk inline quote
-\begin{displayquote} [text] \end{displayquote}                    # cstalk non-line quote
+\newenvironment{name}[numarg][optarg_default]{begin_def}{end_def}                 # environment definition
 
-\title{[text]}                                                    # titles
-\maketitle                                                        # titles
-
-\part{[text]}                                                     # document sections. Add * for numbered.
-\chapter{[text]}                                                  # document sections. Add * for numbered.
-\section{[text]}                                                  # document sections. Add * for numbered.
-\subsection{[text]}                                               # document sections. Add * for numbered.
-\subsubsection{[text]}                                            # document sections. Add * for numbered.
-\paragraph{[text]}                                                # document sections. Add * for numbered.
-\subparagraph{[text]}                                             # document sections. Add * for numbered.
-
-\addcontentsline{toc}{section}{Title of the section}              # Add unnumbered section to table of contents
-\tableofcontents                                                  # make a table of contents
-
-\label{[text]}                                                    # references
-\ref{[text]}                                                      # references
-\pageref{[text]}                                                  # references
-
-\makeglossaries                                                   # glossary
-\newglossaryentry{[name]}{[text]}                                 # glossary
-\newacryonym{[name]}{[text]}                                      # glossary
-\printglossaries                                                  # glossary
-
-\makenomenclaure                                                  # nomenclature
-\nomenclature{[name]}{[def]}                                      # nomenclature
-\printnomenclature                                                # nomenclature
-
-\marginpar[left]{right}                                           # margin notes
-\reversemarginpar                                                 # margin notes. swap sides.
-\normalmarginpar                                                  # margin notes. reset
-\marginnote{[text]}[dist]                                         # alt margin notes
+\say{[text]}                                                                      # dirtytalk inline quote

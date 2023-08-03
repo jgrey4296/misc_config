@@ -7,6 +7,10 @@ Text display changes:
 \texttt{}             # teletype
 \textsc{}             # small caps
 \uppercase{}          # large caps
+\mathfrak{}           # Fraktur / fancy. Uses amsfonts or amssymb.
+\mathcal{}            # Caligraphy.
+\mathbb{}             # Blackboard Bold. amsfonts or amssymb
+\mathbf{}             # Bold.
 
 \tiny                 #
 \footnotesize         #

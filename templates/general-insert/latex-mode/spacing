@@ -1,0 +1,13 @@
+Spacing:
+
+\break                                                                            # breaks
+\linebreak                                                                        # breaks
+\pagebreak                                                                        # breaks
+\par                                                                              # breaks
+
+
+\centering                                                                        # make text centered inside figure
+
+Paragraphs                                                                        # full empty line inbetween text.
+[EOL]\\                                                                           # Newline
+\noindent                                                                         # prevent indenting

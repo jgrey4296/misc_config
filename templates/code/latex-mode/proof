@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name  : proof
+# uuid  : proof
+# key   : proof
+# group :
+# --
+\usepackage{ND}
+
+\begin{ND}[$1][${2:label}][][][] % Widths
+  \ndl{}{}{} \label{1} % Assumptions, Formula, Rule
+\end{ND}

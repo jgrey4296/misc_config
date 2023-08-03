@@ -1,0 +1,31 @@
+Document Structures:
+\documentclass[]{} #
+\pagestyle{} #
+\thispagestyle{} #
+\title{[text]}                                                                    # titles
+\maketitle                                                                        # titles
+\author{[text]}
+
+\part{[text]}                                                                     # document sections. Add * for numbered.
+\chapter{[text]}                                                                  # document sections. Add * for numbered.
+\section{[text]}                                                                  # document sections. Add * for numbered.
+\subsection{[text]}                                                               # document sections. Add * for numbered.
+\subsubsection{[text]}                                                            # document sections. Add * for numbered.
+\paragraph{[text]}                                                                # document sections. Add * for numbered.
+\subparagraph{[text]}                                                             # document sections. Add * for numbered.
+
+\addcontentsline{toc}{section}{Title of the section}                              # Add unnumbered section to table of contents
+\tableofcontents                                                                  # make a table of contents
+
+\label{[text]}                                                                    # references
+\ref{[text]}                                                                      # references (after \caption in figures)
+\pageref{[text]}                                                                  # references
+
+\makeglossaries                                                                   # glossary
+\newglossaryentry{[name]}{[text]}                                                 # glossary
+\newacryonym{[name]}{[text]}                                                      # glossary
+\printglossaries                                                                  # glossary
+
+\makenomenclaure                                                                  # nomenclature
+\nomenclature{[name]}{[def]}                                                      # nomenclature
+\printnomenclature                                                                # nomenclature

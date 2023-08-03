@@ -1,0 +1,27 @@
+Natural Deduction, using fitch.sty and nd3:
+\begin{fitch} \end{fitch}                  # Environment.                          | Fitch
+\fa                                        # Continue. Vertical Line               | Fitch
+\fh                                        # Branch / Hypothesis                   | Fitch
+\fj                                        # Branch / Multi Hypothesis             | Fitch
+
+\fb                                        # Subproof. Shorter Vertical Line       | Fitch
+\fn                                        # Box Subproof                          | Fitch
+\fp                                        # Diamond Subproof                      | Fitch
+\fitchmodalh{[text]}                       # Modal Subproof with Hypothesis        | Fitch
+\fitchmodal{[text]}                        # Modal Subproof.                       | Fitch
+
+\fr                                        # Formula Introduction with line. >|    | Fitch
+\fs                                        # Formula Introduction without line. >  | Fitch
+\fw{[text]}                                # New variable                          | Fitch
+\\                                         # new line                              | Fitch
+& [text] \\                                # Label line                            | Fitch
+
+\begin{ND}[title, label][w][w][w] \end{ND} # Environment. w=width | ND3
+                                           # Widths : assumption column, rule column, total
+\ndl{assumptions}{formula}{rule}           # a proof line  | Fitch
+\label                                     #   | ND3
+\ref                                       #   | ND3
+\ndref                                     # refer to a line outside the nd env  | ND3
+
+\awidth{label}                             # Aligning assumptions with another proof    | ND3
+\rwidth{label}                             # Aligning proofs with another proof         | ND3

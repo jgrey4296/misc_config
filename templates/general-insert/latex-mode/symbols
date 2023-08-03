@@ -1,0 +1,81 @@
+Math mode Latex Symbols:
+\bot                              # bottom,  ⟘
+\top                              # top, ⟙
+\parallel                         #
+\nparallel                        #
+
+\oplus                            # ⨁  Additive disjunction
+\otimes                           # ⨂  Multiplicative Conjunction
+\with                             # &  Additive Conjunction. use cmll
+\parr                             # ⅋ Multiplicative Disjunction. use cmll
+\multimapinv                      # lolli.
+
+\square                           # box. use amssymb
+\diamond                          # diamond.
+\vee    \lor                      # ⋀ And / Conjunction / Lattice meet
+\wedge  \and                      # ⋁ Or / Disjunction / Lattice Join
+\lnot                             # negation
+
+\equiv                            # equivalent
+\approx                           # approximate
+\cong                             # congruent
+\neq                              # not equal
+\vdash                            # entailment  ⊢
+\models                           # entailment  ⊨
+\triangleleft                     #
+\triangleright                    #
+\to                               # ->
+\gets                             # <-
+\mapto                            # |->
+\uparrow \Uparrow                 #
+\downarrow \Downarrow             #
+
+(x) [x] \{x\} |x| \|x\|           # delimiters
+\langle x \rangle                 # angle brackets.
+
+x'                                # prime
+x''                               # double prime
+\hat{x}                           # hat on var
+\bar{x}                           # bar on var
+\dot{x}                           #
+\overrightarrow{[text]}           # big arrow over top
+
+\cap                              # ∩
+\cup                              # ∪
+\sqcap                            # square
+\sqcup                            # square
+
+
+
+
+\in                               # in set
+\notin                            # not in set
+
+\subset                           # ⊂
+\subseteq                         #
+\nsubseteq                        #
+
+\supset                           # ⊃
+\supseteq                         #
+\nsupseteq                        #
+
+\sqsubset                         # square subset
+\sqsupset                         # square superset
+
+\quad                             # space
+\qquad                            # double space
+
+\therefore                        # ∴
+
+
+_{}^{}                            # limits
+\substack{ [line] \\ [line] }     # multiple lines in limits
+\int_{lower}^{upper}              # integral. with \,\mathrm{d} for upright d.
+\iint_{}^{}                       # second integral. add i's for more.
+\sum_{lower}^{upper}              # summation
+\coprod_{}^{}                     # product
+\bigoplus_{}^{}                   #
+\bigcup_{}^{}                     #
+\bigsqcup_{}^{}                   #
+\bigcap_{}^{}                     #
+\bigsqcap_{}^{}                   #

@@ -1,29 +1,50 @@
 Select Packages to Use:
+Bussproofs                                                  # Proof Trees. https://mathweb.ucsd.edu/~sbuss/ResearchWeb/bussproofs/
 [T1, T2A]{fontenc}                                          # fonts
-[russian, english]{babel}                                   # fonts
-{listings}                                                  # code listings
-url                                                         # urls highlight
-[numbers]{natbib}                                           # bibliography
-{doi}                                                       # doi highlighting
 [colorlinks=true,urlcolor=blue,pdfstartview=FitH]{hyperref} # hyperlinks
-
-multicol                                                    # columns for when \documentclass{\twocolumn} isnt enough
-
-minted                                                      # code highlighting
-pygments                                                    # also has code highlighting output
-
-graphicx                                                    # for images with \includegraphics{img} and \graphicspath{path}
-
-dirtytalk                                                   # provides \say{[text]}
+[russian, english]{babel}                                   # fonts
 csquotes                                                    # provides \begin{displayquote} for non-inline
-
-titlesec                                                    # customize chapter/section styles
-
-imakeidx                                                    # index creation
+dirtytalk                                                   # provides \say{[text]}
+doi
+ebproof                                                     # Proof trees
+fancyhdr                                                    # headers and footers
+fitch                                                       # Natural Deduction
+footmisc                                                    # footnotes at bottom of page
+geometry                                                    # Page control
 glossaries                                                  # glossary creation. uses makeindex
+graphicx                                                    # for images with \includegraphics{img} and \graphicspath{path}
+hyperref
+imakeidx                                                    # index creation
+info/symbols/comprehensive                                  # Comprehensive Symbol List
+layout                                                      # layout control
+lipsum
+longtable                                                   #
+lscape                                                      # landscape
 makeindex                                                   #
-nomencl                                                     # nomenclature
-
-marginpar                                                   # margin notes
-mparhack                                                    # for fixing margin notes
+marginal                                                    # margin notes
 marginnote                                                  # alternative margin notes.
+marginpar                                                   # margin notes
+mhchem
+microtype                                                   # typewriting
+minted                                                      # code highlighting
+mparhack                                                    # for fixing margin notes
+multicol                                                    # columns for when \documentclass{\twocolumn} isnt enough
+natbib
+nd3                                                         # Natural Deduction
+newspaper                                                   # newspaper layout
+nomencl                                                     # nomenclature
+pgfgantt                                                    # gant charts
+picinpar                                                    #
+prftree                                                     # Proof trees
+prooftrees                                                  # actual branching trees with angles
+pygments                                                    # also has code highlighting output
+semantics                                                   # programming language semantics
+sidecap                                                     # side captions for figures.
+tikz                                                        # advanced graphics
+titlesec                                                    # customize chapter/section styles
+url                                                         # urls highlight
+doi                                                         # doi highlighting
+listings                                                    # code listings
+amsmath                                                     #
+amssymb                                                     #
+cmll                                                        #

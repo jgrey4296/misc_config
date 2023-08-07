@@ -38,4 +38,31 @@
       )
   )
 
+(defun py-test-copy-current-test ()
+  (interactive)
+  (let ((start (progn (python-nav-beginning-of-defun)
+                      (point)))
+        (end (progn (python-nav-end-of-defun)
+                    (point)))
+        )
+    (copy-region-as-kill start end)
+    (insert "\n\n")
+    (yank)
+    (python-nav-backward-defun)
+    (let ((start-name (re-search-forward "def " (line-end-position)))
+          (end-name (re-search-forward "(" (line-end-position))))
+      (kill-region start-name end-name))
+    (insert "test_(")
+    (backward-char 1)
+    (evil-insert-state)
+    )
+  )
+
+(defun py-test-minor-function-dwim ()
+  "Auto save the file then test the function point is in"
+  (interactive)
+  (basic-save-buffer)
+  (call-interactively #'python-pytest-function-dwim)
+  )
+
 ;;; test_mode.el ends here

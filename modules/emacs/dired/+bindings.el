@@ -46,10 +46,13 @@
       :n "-"                          #'dired-up-directory
       :n "j"                          #'dired-next-line
       :n "k"                          #'dired-previous-line
+
       :n "J"                          #'dired-next-dirline
       :n "K"                          #'dired-prev-dirline
-      "h" #'ignore
-      "l" #'ignore
+
+      :n "h" #'dired-up-directory
+      :n "l" #'dired-next-marked-file
+      :n "L" #'dired-prev-marked-file
 
       (:prefix "]"
        :desc "Next Marked" :n "m"  #'dired-next-marked-file

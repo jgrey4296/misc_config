@@ -107,12 +107,14 @@
       :desc "Try Python site-packages" "p" #'+jg-python-try-site-packages
 
       )
+
 (map! :map comint-mode-map
       :localleader
       :desc "PdbTrack" ";" #'py-pdbtrack-toggle-stack-tracking
       )
 
 (map! :map py-test-minor-mode-map
-      :n "RET" #'python-pytest-function-dwim
+      :n "RET" #'py-test-minor-function-dwim
       :i "RET" #'evil-ret
+      :n "DEL" #'py-test-copy-current-test
       )

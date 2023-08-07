@@ -4,7 +4,7 @@
 
 (map! :leader
       :desc "SCRATCH"                      "6" (cmd! (+jg-popup-ivy-open "*scratch*"))
-      :desc "Messages"                     "0" (cmd! (+jg-popup-ivy-open "*Messages*") (when current-prefix-arg (with-current-buffer "*Messages*" (+jg-text-clear-buffer))))
+      :desc "Messages"                     "0" #'+jg-ivy-popup-messages
       :desc "General Insert"               "i g" #'+jg-ivy-general-insert
       :desc "Dir: General Insert"          "y 5" (cmd! (find-file general-insert-location))
 

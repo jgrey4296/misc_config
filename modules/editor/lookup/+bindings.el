@@ -19,10 +19,12 @@
       :desc "Lookup Regular"        "1" #'lookup-regular-go
 
       (:prefix ("k" . "Docs")
+       :desc "Choose Handler"               ";" #'+lookup/choose
        :desc "Assignments"                  "a" #'+lookup/assignments
        :desc "Type definition"              "t" #'+lookup/type-definition
        :desc "References"                   "r" #'+lookup/references
        :desc "Definition"                   "d" #'+lookup/definition
+       :desc "Declaration"                  "D" #'+lookup/declaration
        :desc "Implementations"              "i" #'+lookup/implementations
        :desc "Documentation"                "k" #'+lookup/documentation
        :desc "Look up in local docsets"     "K" #'+lookup/in-docsets

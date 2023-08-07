@@ -21,6 +21,8 @@ Used by `+lookup/online'.")
     +lookup-evil-goto-definition-backend-fn)
 )
 
+(defvar +lookup-declaration-defaults nil)
+
 (defvar +lookup-implementations-defaults ())
 
 (defvar +lookup-type-definition-defaults ())

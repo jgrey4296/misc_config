@@ -24,6 +24,9 @@
       )
 
 ;;-- lsp
+(map! :map lsp-mode-map
+      :n "g r" #'lsp-rename
+      )
 (map! :map lsp-command-map
       (:prefix ("w" . "Workspaces"))
       (:prefix ("=" . "Formatting"))

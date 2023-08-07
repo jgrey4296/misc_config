@@ -46,16 +46,28 @@ falling back on searching your PATH."
   )
 
 ;;;###autoload
-(defun +python/open-ipython-repl ()
-  "Open an IPython REPL."
+(defun +jg-python/open-ipython-repl ()
+  "Open the iPython REPL."
   (interactive)
   (require 'python)
-  (let ((python-shell-interpreter
-         (or (+python-executable-find (car +python-ipython-command))
-             "ipython"))
-        (python-shell-interpreter-args
-         (string-join (cdr +python-ipython-command) " ")))
-    (+python/open-repl)))
+  (unless python-shell--interpreter
+    (user-error "`python-shell-interpreter' isn't set"))
+
+  (unless env-handling-state
+    (env-handling-go!))
+
+  (let ((python-shell-interpreter (or (executable-find (car +python-ipython-command)) "ipython"))
+        (python-shell-interpreter-args (string-join (cdr +python-ipython-command) " "))
+        (dedicated (bound-and-true-p python-shell-dedicated))
+        (default-directory (projectile-project-root))
+        )
+    (pop-to-buffer
+     (process-buffer
+      (run-python nil dedicated t)
+      )
+     )
+    )
+)
 
 ;;;###autoload
 (defun +python/open-file-repl ()

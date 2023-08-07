@@ -125,6 +125,7 @@
 (spec-handling-add! lookup-handler
                     `(lsp-mode
                      :definition          +lsp-lookup-definition-handler
+                     :declaration         lsp-find-declaration
                      :references          +lsp-lookup-references-handler
                      :documentation       lsp-describe-thing-at-point
                      :implementations     lsp-find-implementation

@@ -47,15 +47,15 @@
                     )
 (spec-handling-add! lookup-regular
                     '(shell-mode
-                     ("Brew" . "https://brew.sh/")
-                     ("Awk" . "https://www.gnu.org/software/gawk/manual/gawk.html")
-                     ("Bash reference" . "https://www.gnu.org/software/bash/manual/bash.html")
-                     ("Sed Reference" . "https://www.gnu.org/software/sed/manual/sed.html")
-                     ("Ripgrep manual" . "https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md")
-                     ("Nushell cmds" . "https://www.nushell.sh/commands/")
-                     ("Nushell" . "https://www.nushell.sh/book/")
+                     ("Brew"             . "https://brew.sh/")
+                     ("Awk"              . "https://www.gnu.org/software/gawk/manual/gawk.html")
+                     ("Bash reference"   . "https://www.gnu.org/software/bash/manual/bash.html")
+                     ("Sed Reference"    . "https://www.gnu.org/software/sed/manual/sed.html")
+                     ("Ripgrep manual"   . "https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md")
+                     ("Nushell cmds"     . "https://www.nushell.sh/commands/")
+                     ("Nushell"          . "https://www.nushell.sh/book/")
                      ("Nushell cookbook" . "https://www.nushell.sh/cookbook/")
-                     ("Nushell github" . "https://github.com/nushell/nushell")
+                     ("Nushell github"   . "https://github.com/nushell/nushell")
                      )
                     )
 (spec-handling-add! popup

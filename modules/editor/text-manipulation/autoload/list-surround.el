@@ -26,7 +26,8 @@
   (interactive "<R>")
   (save-excursion
     (goto-char (max beg end))
-    (while (re-search-backward (rx word-end (opt (| ?\" ?')) (group (| blank "\n"))) (min beg end) t)
+    ;; look for blanks and new lines, add commas in between
+    (while (re-search-backward (rx word-end (opt (| ?\" ?')) (group (| "\n" blank))) (min beg end) t)
       (goto-char (match-beginning 1))
       (unless (nth 3 (syntax-ppss)) ;; if in string
         (insert ","))

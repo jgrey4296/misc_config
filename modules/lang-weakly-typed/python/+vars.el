@@ -262,13 +262,17 @@
 (spec-handling-add! compile-commands
                     '(python +jg-python-get-commands +jg-python-solo-file-run)
                     )
-(spec-handling-add! eval
+(spec-handling-add! eval :form 'override
                     `(python-mode
                       :start ,#'+jg-python/open-repl
                       :send ,#'python-shell-send-region
                       :eval nil
                       )
-
+                    `(ipython
+                      :start ,#'+jg-python/open-ipython-repl
+                      :send ,#'python-shell-send-region
+                      :eval nil
+                      )
                     )
 (spec-handling-add! yas-extra
                     '(node-mode node-mode)

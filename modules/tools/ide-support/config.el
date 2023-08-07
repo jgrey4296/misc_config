@@ -72,7 +72,7 @@
 )
 
 (use-package! lsp-ui
-  :hook (lsp-mode . lsp-ui-mode)
+  :defer t
   )
 
 (use-package! lsp-ivy

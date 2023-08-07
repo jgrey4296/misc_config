@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name  : test.divs
+# uuid  : test.divs
+# key   : test.divs
+# group :
+# --
+##-- setup
+
+##-- end setup
+
+##-- pre-check
+
+##-- end pre-check
+
+# Run:
+
+##-- check
+
+##-- end check
+pass

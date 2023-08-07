@@ -1,5 +1,5 @@
 Add Test Fixture:
-caplog          # capture logging
+caplog          # capture logging. [messages,text,records,record_tuples,clear]
 recwarn         # capture warnings
 capfd           # capture file descriptors 1 and 2
 capfdbinary     # capture file descriptors 1 and 2 binary

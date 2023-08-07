@@ -1,0 +1,9 @@
+Python @decorators:
+@typing.runtime_checkable         # for Protocols
+@abc.abstractmethod               #
+
+@property                         # @property -> @other -> def
+@classmethod                      #
+@staticmethod                     #
+
+@pytest.fixture(scope="function") #

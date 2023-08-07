@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : noimp
+# uuid  : noimp
+# key   : noimp
+# group :
+# --
+raise NotImplementedError(self.__class__, "$1")

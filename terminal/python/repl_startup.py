@@ -2,30 +2,34 @@
 """
 
 """
-##-- imports
 from __future__ import annotations
 
+import inspect
+from os import getcwd
+from re import Pattern
 from types import ModuleType
+from uuid import UUID, uuid1
+from weakref import ref
 import argparse
-import functools
-import itertools
+import datetime
+import enum
+import functools as ftz
+import importlib
+import itertools as itz
 import logging as logmod
 import pathlib as pl
 import re
 import sys
-import importlib
-from os import getcwd
-from re import Pattern
-from uuid import UUID, uuid1
-from weakref import ref
+import time
+import types
+import typing
+import uuid
+import weakref
 
+import more_itertools as mitz
 import pyparsing as pp
 
-##-- end imports
-
-##-- logging
 logging = logmod.getLogger(__name__)
-##-- end logging
 
 ##-- argparse
 #see https://docs.python.org/3/howto/argparse.html
@@ -43,7 +47,6 @@ if args.dir:
 
 def cwd():
     return pl.Path(getcwd())
-
 
 def logattrs():
     logrecord = logmod.makeLogRecord({})
@@ -65,4 +68,44 @@ def reload():
                 print(err)
 
 
+def api(obj, max=40):
+    contents = sorted(dir(obj))
+    dunders = [x for x in contents if x.startswith("__")]
+    private = [x for x in contents if x.startswith("_") and not x.startswith("__")]
+    public  = [x for x in contents if not x.startswith("_")]
+    print("Dunders: ", end="")
+    total = 0
+    for x in dunders:
+        if total > max:
+            print("\n         ", end="")
+            total = 0
+
+        print(x, end=" ")
+        total += len(x)
+
+    print()
+    print("Private: ", end="")
+    total = 0
+    for x in private:
+        if total > max:
+            print("\n         ", end=" ")
+            total = 0
+        print(x, end="")
+        total += len(x)
+
+    print()
+    print("Public: ", end=" ")
+    total = 0
+    for x in public:
+        if total > max:
+            print("\n        ", end=" ")
+            total = 0
+        print(x, end=" ")
+        total += len(x)
+
+    print()
+
 remind()
+
+print(f"The __name__ of this repl is: {__name__}")
+print(f"It is found at: {__file__}")

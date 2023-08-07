@@ -31,8 +31,20 @@ class Test$1:
 
     @pytest.fixture(scope="function")
     def cleanup(self):
-        yield
         pass
 
     def test_initial(self):
+        ##-- setup
+
+        ##-- end setup
+
+        ##-- pre-check
+
+        ##-- end pre-check
+
+        # Run:
+
+        ##-- check
+
+        ##-- end check
         pass

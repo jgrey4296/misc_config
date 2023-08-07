@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name  : signal.handler
+# uuid  : signal.handler
+# key   : signal.handler
+# group :
+# --
+import signal
+
+
+class SigHandler:
+    # TODO make this a context handler
+
+    @staticmethod
+    def handle(signum, frame):
+        breakpoint()
+        pass
+
+    @staticmethod
+    def install(sig=signal.SIGINT):
+        logging.info("Installing Task Loop handler for: %s", signal.strsignal(sig))
+        # Install handler for Interrupt signal
+        signal.signal(sig, SigHandler.handle)
+
+    @staticmethod
+    def uninstall(sig=signal.SIGINT):
+        logging.info("Uninstalling Task Loop handler for: %s", signal.strsignal(sig))
+        signal.signal(sig, signal.SIG_DFL)

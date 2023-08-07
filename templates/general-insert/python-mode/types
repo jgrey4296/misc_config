@@ -39,7 +39,7 @@ abc.Awaitable                           # collections
 abc.Iterable                            # collections
 abc.Iterator                            # collections
 abc.Callable                            # collections
-abc.Generator                           # collections
+abc.Generator                           # collections. [YieldType, SendType, ReturnType]
 abc.Hashable                            # collections
 abc.Reversible                          # collections
 abc.Sized                               # collections

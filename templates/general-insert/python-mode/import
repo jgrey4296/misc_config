@@ -1,4 +1,16 @@
 Import Library:
+bs4                      # https://beautiful-soup-4.readthedocs.io/en/latest/
+construct                # https://construct.readthedocs.io/en/latest/index.html
+matplotlib.pyplot as plt # https://matplotlib.org/stable/api/index.html
+more_itertools as mitz   # https://more-itertools.readthedocs.io/en/stable/
+networkx as nx           # https://networkx.org/
+numpy as np              # https://numpy.org/doc/stable/
+pyparsing as pp          # https://pyparsing-docs.readthedocs.io/en/latest/
+pytest                   # https://docs.pytest.org/en/7.3.x/reference/reference.html#std-fixture-pytestconfig
+seaborn as sns           # https://seaborn.pydata.org/api.html
+stackprinter             # https://github.com/cknd/stackprinter
+toolz                    # https://toolz.readthedocs.io/en/latest/index.html
+
 boltons.cacheutils       # caching            https://boltons.readthedocs.io/en/latest/cacheutils.html
 boltons.debugutils       # debugging          https://boltons.readthedocs.io/en/latest/debugutils.html
 boltons.dictutils        # mapping            https://boltons.readthedocs.io/en/latest/dictutils.html
@@ -26,25 +38,51 @@ boltons.tbutils          # tracebacks         https://boltons.readthedocs.io/en/
 boltons.timeutils        # datetimes          https://boltons.readthedocs.io/en/latest/timeutils.html
 boltons.typeutils        # typing             https://boltons.readthedocs.io/en/latest/typeutils.html
 boltons.urlutils         # urls               https://boltons.readthedocs.io/en/latest/urlutils.html
-pyparsing as pp          # https://pyparsing-docs.readthedocs.io/en/latest/
-bs4                      # https://beautiful-soup-4.readthedocs.io/en/latest/
-matplotlib.pyplot as plt # https://matplotlib.org/stable/api/index.html
-more_itertools as mitz   # https://more-itertools.readthedocs.io/en/stable/
-networkx as nx           # https://networkx.org/
-numpy as np              # https://numpy.org/doc/stable/
-seaborn as sns           # https://seaborn.pydata.org/api.html
-stackprinter             # https://github.com/cknd/stackprinter
-toolz                    # https://toolz.readthedocs.io/en/latest/index.html
-pytest                   # https://docs.pytest.org/en/7.3.x/reference/reference.html#std-fixture-pytestconfig
-timeit                   # https://docs.python.org/3/library/timeit.html
-difflib                  # https://docs.python.org/3/library/difflib.html
-numbers                  # https://docs.python.org/3/library/numbers.html
-math                     # https://docs.python.org/3/library/math.html
-cmath                    # https://docs.python.org/3/library/cmath.html
-decimal                  # https://docs.python.org/3/library/decimal.html
-fractions                # https://docs.python.org/3/library/fractions.html
-random                   # https://docs.python.org/3/library/random.html
-statistics               # https://docs.python.org/3/library/statistics.html
+
+ast                      # stdlib. https://docs.python.org/3/library/ast.html
+asyncio                  # stdlib. https://docs.python.org/3/library/asyncio.html
+atexit                   # stdlib. https://docs.python.org/3/library/atexit.html
+cmath                    # stdlib. https://docs.python.org/3/library/cmath.html
+cmath                    # stdlib. https://docs.python.org/3/library/cmath.html
+concurrent.futures       # stdlib. https://docs.python.org/3/library/concurrent.futures.html
+contextlib               # stdlib. https://docs.python.org/3/library/contextlib.html
+csv                      # stdlib. https://docs.python.org/3/library/csv.html
+dataclasses              # stdlib. https://docs.python.org/3/library/dataclasses.html
+dbm                      # stdlib. https://docs.python.org/3/library/dbm.html
+decimal                  # stdlib. https://docs.python.org/3/library/decimal.html
+decimal                  # stdlib. https://docs.python.org/3/library/decimal.html
+difflib                  # stdlib. https://docs.python.org/3/library/difflib.html
+faulthandler             # stdlib. https://docs.python.org/3/library/faulthandler.html
+fractions                # stdlib. https://docs.python.org/3/library/fractions.html
+fractions                # stdlib. https://docs.python.org/3/library/fractions.html
+functools                # stdlib. https://docs.python.org/3/library/functools.html
+gc                       # stdlib. garbage collector https://docs.python.org/3/library/gc.html
+headq                    # stdlib. https://docs.python.org/3/library/heapq.html
+heapq                    # stdlib. https://docs.python.org/3/library/heapq.html
+importlib                # stdlib. https://docs.python.org/3/library/importlib.html
+inspect                  # stdlib. https://docs.python.org/3/library/inspect.html
+itertools                # stdlib. https://docs.python.org/3/library/itertools.html
+linecache                # stdlib. https://docs.python.org/3/library/linecache.html
+logging                  # stdlib. https://docs.python.org/3/library/logging.html
+math                     # stdlib. https://docs.python.org/3/library/math.html
+math                     # stdlib. https://docs.python.org/3/library/math.html
+multiprocessing          # stdlib. https://docs.python.org/3/library/multiprocessing.html
+numbers                  # stdlib. https://docs.python.org/3/library/numbers.html
+plistlib                 # stdlib. https://docs.python.org/3/library/plistlib.html
+queue                    # stdlib. https://docs.python.org/3/library/queue.html
+random                   # stdlib. https://docs.python.org/3/library/random.html
+random                   # stdlib. https://docs.python.org/3/library/random.html
+sched                    # stdlib. https://docs.python.org/3/library/sched.html
+sqlite3                  # stdlib. https://docs.python.org/3/library/sqlite3.html
+statistics               # stdlib. https://docs.python.org/3/library/statistics.html
+statistics               # stdlib. https://docs.python.org/3/library/statistics.html
+threading                # stdlib. https://docs.python.org/3/library/threading.html
+time                     # stdlib. https://docs.python.org/3/library/time.html
+timeit                   # stdlib. https://docs.python.org/3/library/timeit.html
+trace                    # stdlib. https://docs.python.org/3/library/trace.html
+tracemalloc              # stdlib. https://docs.python.org/3/library/tracemalloc.html
+weakref                  # stdlib. https://docs.python.org/3/library/weakref.html
+zipfile                  # stdlib. https://docs.python.org/3/library/zipfile.html
 
 LSP Protocol             # https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/
 pygls language server    # https://pygls.readthedocs.io/en/latest/

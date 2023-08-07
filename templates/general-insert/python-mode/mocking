@@ -1,0 +1,58 @@
+Pytest Mocking:
+mocker.MagicMock(spec={class})                              # create a mock object
+type(mock_obj).prop = mock.PropertyMock(return_value=val)   # properties
+
+mock_obj.__iter__.return_value = iter([])                   # mocking an iterator
+mock_obj.attach_mock                                        #
+mock_obj.call_args                                          #
+mock_obj.call_args_list                                     #
+mock_obj.call_count                                         #
+mock_obj.called                                             #
+mock_obj.configure_mock                                     #
+mock_obj.assert_called                                      #
+mock_obj.assert_any_call                                    #
+mock_obj.assert_called_once                                 #
+mock_obj.assert_called_once_with                            #
+mock_obj.assert_called_with                                 #
+mock_obj.assert_has_calls                                   #
+
+
+spy = mocker.spy(obj, "func")                               # track object call
+spy.assert_called_once_with(val)                            #
+spy.assert_has_calls                                        #
+spy.assert_not_called                                       #
+spy.call_args                                               #
+spy.call_args_list                                          #
+spy.call_count                                              #
+spy.called                                                  #
+spy.method_calls                                            #
+spy.mock                                                    #
+spy.mock_calls                                              #
+spy.reset_mock                                              #
+spy.return_value                                            #
+spy.side_effect                                             #
+spy.spy_exception                                           #
+spy.spy_return                                              #
+
+mocker.AsyncMock                                            #
+mocker.MagicMock                                            #
+mocker.Mock                                                 #
+mocker.NonCallableMagicMock                                 #
+mocker.NonCallableMock                                      #
+mocker.PropertyMock                                         #
+mocker.patch.object                                         #
+mocker.patch.multiple                                       #
+mocker.path.dict                                            #
+mocker.stopall                                              #
+mocker.stop                                                 #
+mocker.resetall                                             #
+mocker.ANY                                                  #
+mocker.DEFAULT                                              #
+mocker.call                                                 #
+mocker.sentinel                                             #
+mocker.mock_open                                            #
+mocker.seal                                                 #
+mocker.create_autospec                                      #
+mocker.mock_module                                          #
+mocker.mock_open                                            #
+mocker.stub                                                 #

@@ -2,6 +2,7 @@
 
 (defvar jg-neotree-mode-map (make-sparse-keymap))
 
+
 ;; Delete the current workspace if closing the last open window
 
 (define-key! persp-mode-map
@@ -155,6 +156,10 @@
 ;;-- carousel
 (map! :map carousel-edit-map
       "C-c C-c" #'carousel-edit-commit)
+
+(map! :map carousel-minor-mode-map
+      :n "R" #'hydra-carousel/body
+      )
 
 (map! :map jg-binding-backward-general-motion-map
       :desc "ring window"  "r"    #'carousel-move-focus-alt

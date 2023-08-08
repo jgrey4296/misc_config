@@ -1,51 +1,47 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
-;;-- definitions
-
-(defvar +lsp-defer-shutdown 10 "If non-nil, defer shutdown of LSP servers for this many seconds after last workspace buffer is closed.")
-
-(defvar +lsp--default-read-process-output-max nil)
-
-(defvar +lsp--default-gcmh-high-cons-threshold nil)
-
-(defvar +lsp--optimization-init-p nil)
-
-(defvar +lsp--deferred-shutdown-timer nil)
-
-;;-- end definitions
-
 ;;-- lsp
+
+;; General
 (setq lsp-keep-workspace-alive nil
-
-      lsp-ui-peek-enable      t
-      lsp-ui-peek-always-show t
-      lsp-ui-peek-peek-height 20
-      lsp-ui-peek-show-directory t
-
-
-      lsp-ui-doc-max-height 8
-      lsp-ui-doc-max-width 72         ; 150 (default) is too wide
-      lsp-ui-doc-delay 1              ; 0.2 (default) is too naggy
-      lsp-ui-doc-show-with-mouse nil  ; don't disappear on mouseover
-      lsp-ui-doc-position 'at-point
-      lsp-ui-doc-include-signature t
-
-
-      lsp-ui-sideline-ignore-duplicate t
-      lsp-ui-sideline-delay 1
-      lsp-ui-sideline-diagnostic-max-line-length 50
-      lsp-ui-sideline-show-hover       t
-      lsp-ui-sideline-actions-icon     nil
-
       lsp-enable-folding               nil             ;; can be slow
       lsp-enable-text-document-color   nil             ;; ditto
-
       lsp-enable-on-type-formatting    nil
       lsp-headerline-breadcrumb-enable nil
       lsp-enable-semantic-highlighting t
-
       lsp-disabled-clients             nil
-      )
+ )
+
+;; UI Peek
+(setq lsp-ui-peek-enable      t
+      lsp-ui-peek-always-show t
+      lsp-ui-peek-peek-height 30
+      lsp-ui-peek-show-directory nil
+
+)
+
+;; UI Doc
+(setq lsp-ui-doc-max-height 15
+      lsp-ui-doc-max-width 72         ; 150 (default) is too wide
+      lsp-ui-doc-delay 1              ; 0.2 (default) is too naggy
+      lsp-ui-doc-show-with-mouse nil  ; don't disappear on mouseover
+      lsp-ui-doc-show-with-cursor t
+      lsp-ui-doc-position 'bottom
+      lsp-ui-doc-include-signature t
+)
+
+;; UI Sideline
+(setq lsp-ui-sideline-ignore-duplicate t
+      lsp-ui-sideline-delay 1
+      lsp-ui-sideline-diagnostic-max-line-length 50
+      lsp-ui-sideline-diagnostic-max-lines 5
+      lsp-ui-sideline-show-hover       t
+      lsp-ui-sideline-actions-icon     nil
+)
+
+;; UI imenu
+
+
 
 ;;-- end lsp
 

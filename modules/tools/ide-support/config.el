@@ -20,6 +20,7 @@
 ;;
 ;;; Code:
 
+(load! "+defs")
 (load! "+vars")
 (defer-load! jg-bindings-total "+bindings")
 (defer-load! jg-evil-ex-bindings "+evil-ex")
@@ -58,25 +59,24 @@
   :config
   (add-to-list 'doom-debug-variables 'lsp-log-io)
 
-  (setq
-        lsp-xml-jar-file (expand-file-name "org.eclipse.lsp4xml-0.3.0-uber.jar" lsp-server-install-dir)
+  (setq lsp-xml-jar-file (expand-file-name "org.eclipse.lsp4xml-0.3.0-uber.jar" lsp-server-install-dir)
         lsp-groovy-server-file (expand-file-name "groovy-language-server-all.jar" lsp-server-install-dir))
-
-  ;; REVIEW Remove this once this is fixed upstream.
-
-
 
   (add-hook! 'doom-escape-hook #'+lsp-signature-stop-maybe-h)
   (add-hook! 'lsp-mode-hook #'+lsp-optimization-mode)
 
+  (after! transient-toggles
+    (transient-append-suffix 'jg-toggle-main "w" jg-toggle-lsp)
+    ;; (transient-remove-suffix 'jg-toggle-main "l")
+    )
+
 )
 
 (use-package! lsp-ui
-  :defer t
+  :commands lsp-ui-doc-mode
   )
 
 (use-package! lsp-ivy
-  :when (modulep! :completion ivy)
   :commands lsp-ivy-workspace-symbol lsp-ivy-global-workspace-symbol)
 
 ;;-- end lsp

@@ -5,7 +5,7 @@
 ;; :desc "indent style"   "i" #'doom/toggle-indent-style
 
 (transient-make-toggle! global-prettify-symbols-mode "p" "Pretty Symbols")
-(transient-make-toggle! global-company-mode "C" "AutoComplete")
+(transient-make-toggle! global-company-mode          "C" "AutoComplete")
 (transient-make-call!   read-only
                         (format "%s  : Read-only" (fmt-as-bool! buffer-read-only))
                         (read-only-mode 'toggle)
@@ -195,12 +195,12 @@
 
 ;; Top Level Toggle
 (progn
-  (transient-make-toggle! hide-mode-line-mode "m" "Modeline")
-  (transient-make-toggle! global-hl-line-mode "h" "Hi-line")
-  (transient-make-toggle! global-code-shy-minor-mode "H" "Hide Blocks")
-  (transient-make-toggle! global-centered-cursor-mode "c" "Center Cursor")
+  (transient-make-toggle! hide-mode-line-mode           "m" "Modeline")
+  (transient-make-toggle! global-hl-line-mode           "h" "Hi-line")
+  (transient-make-toggle! global-code-shy-minor-mode    "H" "Hide Blocks")
+  (transient-make-toggle! global-centered-cursor-mode   "c" "Center Cursor")
   (transient-make-toggle! global-highlight-changes-mode "x" "Changes")
-  (transient-make-toggle! smartparens-global-mode "s" "SmartParens")
+  (transient-make-toggle! smartparens-global-mode       "s" "SmartParens")
   )
 ;;TODO apply choice
 (transient-define-argument browse-selector ()
@@ -250,3 +250,5 @@
     :global t
     :keymap (make-sparse-keymap)
 )
+
+(provide 'transient-toggles)

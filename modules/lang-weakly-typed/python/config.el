@@ -84,11 +84,13 @@
   :commands python-pytest-dispatch
   :after python-mode
   :config
-  (transient-append-suffix 'python-pytest-dispatch "-c" '("-f" "Logfile" +jg-python-test-logfile))
-  (transient-append-suffix 'python-pytest-dispatch "D" '("q" "Quit" transient-quit-one))
-  (transient-append-suffix 'python-pytest-dispatch "-x" '("--tc" "Trace Config" "--trace-config"))
-  (transient-append-suffix 'python-pytest-dispatch "-v" '("-r" "Report" "-r fEsxXp"))
-  (transient-append-suffix 'python-pytest-dispatch "-r" '("--lc" "Log CLI" "--log-cli-level=INFO"))
+  (after! transient
+    (transient-append-suffix 'python-pytest-dispatch "-c" '("-f" "Logfile" +jg-python-test-logfile))
+    (transient-append-suffix 'python-pytest-dispatch "D" '("q" "Quit" transient-quit-one))
+    (transient-append-suffix 'python-pytest-dispatch "-x" '("--tc" "Trace Config" "--trace-config"))
+    (transient-append-suffix 'python-pytest-dispatch "-v" '("-r" "Report" "-r fEsxXp"))
+    (transient-append-suffix 'python-pytest-dispatch "-r" '("--lc" "Log CLI" "--log-cli-level=INFO"))
+    )
   )
 
 ;;-- import management

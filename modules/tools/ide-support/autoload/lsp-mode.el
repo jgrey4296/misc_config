@@ -64,3 +64,22 @@
                                             ,(lsp-json-bool include-declaration))))))
     (lsp-show-xrefs (lsp--locations-to-xref-items loc) nil t)
     'deferred))
+
+;;;###autoload
+(defun +jg-lsp-imenu-visit ()
+  (interactive)
+  (lsp-ui-imenu--visit)
+  (let ((curr-window (selected-window)))
+    (+jg-lsp-imenu-quit-and-rebalance)
+    (select-window curr-window))
+  )
+
+;;;###autoload
+(defun +jg-lsp-imenu-quit-and-rebalance ()
+  (interactive)
+  (-when-let (imenu-window (get-buffer-window lsp-ui-imenu-buffer-name))
+      (with-selected-window imenu-window
+        (lsp-ui-imenu--kill))
+      (balance-windows)
+    )
+  )

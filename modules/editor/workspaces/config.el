@@ -175,3 +175,10 @@
 (use-package! related-files
   :autoload make-related!
   )
+
+(use-package! compile
+  :defer t
+  :config
+  (add-hook 'compilation-mode-hook #'hl-line-mode)
+
+  )

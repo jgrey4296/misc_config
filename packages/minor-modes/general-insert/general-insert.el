@@ -38,7 +38,9 @@
                        do
                        (unless (gethash mode general-insert--key-cache)
                          (puthash mode
-                                  (mapcar (-partial #'general-insert--propertize (symbol-name mode)) (f-files (f-join general-insert-location (symbol-name mode))))
+                                  (mapcar (-partial #'general-insert--propertize (symbol-name mode))
+                                          (-reject (-partial #'f-ext? "DS_Store")
+                                                   (f-files (f-join general-insert-location (symbol-name mode)))))
                                   general-insert--key-cache))
                        and
                        append
@@ -67,8 +69,9 @@
   (interactive)
   (ivy-read "Insert: " general-insert-keys
             :require-match t
-            :action #'general-insert-call-sub-ivy)
-
+            :sort t
+            :action #'general-insert-call-sub-ivy
+            )
   )
 
 (defun general-insert-call-sub-ivy (selected)

@@ -19,8 +19,7 @@
       :v "i f" nil ;; #'+jg-python-select-defun
       :v "i F" nil ;; #'+jg-python-select-class
       ;; :n "] ]" #'+jg-python-forward-defun
-      :n "s j" '+jg-python-swipe-to-def
-
+      ;; :n "s j" '+jg-python-swipe-to-def
       )
 
 (map! :map python-mode-map
@@ -56,7 +55,8 @@
       :desc "Test Func DWIM"  "t" #'python-pytest-function-dwim
       :desc "Test Func"       "T" #'python-pytest-function
       :desc "Test repeat"     "r" #'python-pytest-repeat
-      :desc "Test Popup"      "p" #'python-pytest-dispatch
+      :desc "Test Popup"      "P" #'python-pytest-dispatch
+      :desc "Test Popup"      "p" #'+jg-python-pytest-dispatch
       :desc "Make Testfile"   "m" #'+jg-python-make-test-file
       )
 

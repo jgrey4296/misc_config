@@ -1,4 +1,6 @@
 ;; lookup.el -*- lexical-binding: t; -*-
+(require 'ivy)
+(require 'lsp-ivy)
 
 ;;;###autoload
 (defun +jg-lsp-describe-workspace-symbol (arg)
@@ -16,6 +18,7 @@
   (unless workspaces
     (user-error "No LSP workspace active"))
 
+  (message "Starting Ivy")
   (with-lsp-workspaces workspaces
     (let* ((non-essential t)
            (prev-query nil)
@@ -38,11 +41,9 @@
                 :dynamic-collection t
                 :require-match t
                 :initial-input initial-input
-                ;; :action (lambda (&rest args) (message "Got: %s" args))
-                ;; :action #'+jg-lsp--symbol-help
-                :action #'+jg-lsp--help
-                ;; :action #'lsp-ivy--workspace-symbol-action
-                :caller 'lsp-ivy-workspace-symbol))
+                :action #'+jg-lsp--symbol-help
+                )
+      )
     )
   )
 
@@ -53,9 +54,9 @@
 
 (lsp-defun +jg-lsp--help ((&SymbolInformation
                            :location (&Location :uri
-                                                :range (&Range :start))))
+                                                :range (&Range :start (&Position :line :character)))))
   (let ((contents (-some->>
-                      (list :textDocument (list :uri uri) :position start)
+                      (list :textDocument (list :uri uri) :position (list :line line :character character))
                     (lsp--make-request "textDocument/hover")
                     (lsp--send-request)
                     (lsp:hover-contents)))
@@ -64,6 +65,7 @@
       (let ((delay-mode-hooks t))
         (lsp-help-mode)
         (with-help-window lsp-help-buf-name
+          (message "Contents were: %s" contents)
           (insert (string-trim-right (lsp--render-on-hover-content contents t)))))
       (run-mode-hooks)))
   )

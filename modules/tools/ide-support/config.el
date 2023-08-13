@@ -65,19 +65,15 @@
   (add-hook! 'doom-escape-hook #'+lsp-signature-stop-maybe-h)
   (add-hook! 'lsp-mode-hook #'+lsp-optimization-mode)
 
-  (after! transient-toggles
-    (transient-append-suffix 'jg-toggle-main "w" jg-toggle-lsp)
-    ;; (transient-remove-suffix 'jg-toggle-main "l")
-    )
-
+  (after! transient-toggles (+jg-ide-extend-toggles))
 )
 
 (use-package! lsp-ui
-  :commands lsp-ui-doc-mode
+  :commands (lsp-ui-doc-mode lsp-ui-imenu lsp-ui-sideline)
   )
 
 (use-package! lsp-ivy
-  :commands lsp-ivy-workspace-symbol lsp-ivy-global-workspace-symbol)
+  :commands lsp-ivy--transform-candidate)
 
 ;;-- end lsp
 

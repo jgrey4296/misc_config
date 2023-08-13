@@ -4,16 +4,29 @@
 
 (progn
   (transient-make-toggle! lsp-modeline-diagnostics-mode      "m" "Modeline Diagnostics")
-  (transient-make-toggle! lsp-toggle-trace-io                "i" "Log Io")
+  (transient-make-call!   lsp-trace-io
+                          (format "%-2s : Log IO" (fmt-as-bool! lsp-log-io))
+                          (with-current-buffer transient--original-buffer
+                            (call-interactively #'lsp-toggle-trace-io)
+                            ))
   (transient-make-toggle! lsp-ui-sideline-mode               "s" "sideline")
   (transient-make-toggle! lsp-modeline-code-actions-mode     "a" "Modeline code actions")
   (transient-make-toggle! lsp-headerline-breadcrumb-mode     "b" "Breadcrumb")
   (transient-make-toggle! lsp-ui-doc-mode                    "d" "Documentation Popup")
   (transient-make-toggle! lsp-lens-mode                      "l" "Lenses")
 
-  (transient-make-toggle! lsp-toggle-on-type-formatting      "F" "On Type Formatting")
-  (transient-make-toggle! lsp-toggle-symbol-highlight        "H" "Highlighting")
-  (transient-make-toggle! lsp-toggle-signature-auto-activate "S" "Auto Signature")
+  (transient-make-call!   lsp-on-type-formatting
+                          (format "%-2s : On Type Formatting" (fmt-as-bool! lsp-enable-on-type-formatting))
+                          (with-current-buffer transient--original-buffer
+                            (call-interactively #'lsp-toggle-on-type-formatting)))
+  (transient-make-call!   lsp-highlighting
+                          (format "%-2s : Highlighting" (fmt-as-bool! lsp-enable-symbol-highlighting))
+                          (with-current-buffer transient--original-buffer
+                            (call-interactively #'lsp-toggle-symbol-highlight)))
+  (transient-make-call!   lsp-auto-signature
+                          (format "%-2s : Auto-Signature" (fmt-as-bool! lsp-signature-auto-activate))
+                          (with-current-buffer transient--original-buffer
+                          (call-interactively #'lsp-toggle-signature-auto-activate)))
   (transient-make-toggle! lsp-treemacs-sync-mode             "T" "treemacs integration")
 
   (transient-make-call! lsp-debug
@@ -74,13 +87,18 @@
                             [ " "
                              (jg-transient-toggle-lsp-lens-mode)
                              (jg-transient-toggle-lsp-modeline-code-actions-mode)
-                             (jg-transient-toggle-lsp-toggle-trace-io)
+                             ("i" jg-transient-call-lsp-trace-io)
                              ]
                             [ " "
-                             (jg-transient-toggle-lsp-toggle-on-type-formatting)
-                             (jg-transient-toggle-lsp-toggle-symbol-highlight)
-                             (jg-transient-toggle-lsp-toggle-signature-auto-activate)
+                             ("F" jg-transient-call-lsp-on-type-formatting)
+                             ("S" jg-transient-call-lsp-auto-signature)
                              (jg-transient-toggle-lsp-treemacs-sync-mode)
+                             ("H" jg-transient-call-lsp-highlighting)
                              ]
                             ]
                           )
+
+;;;###autoload
+(defun +jg-ide-extend-toggles ()
+  (transient-append-suffix 'jg-toggle-main "w" jg-toggle-lsp)
+  )

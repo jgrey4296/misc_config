@@ -1,7 +1,7 @@
 ;;; pytest.el -*- lexical-binding: t; -*-
 (require 'transient)
+(require 'python-pytest)
 
-;;;###autoload (autoload '+jg-python-test-logfile "lang-weakly-typed/python/autoload/pytest.el" nil t)
 (transient-define-argument +jg-python-test-logfile ()
   " add logging to file "
   :class 'transient-option
@@ -12,43 +12,64 @@
               (format "%s.log" (f-join (f-parent (buffer-file-name)) (f-base (buffer-file-name)))))
   )
 
-(transient-define-prefix +jg-python-pytest-dispatch ()
+(transient-define-prefix python-pytest-dispatch ()
   "Show popup for running pytest."
   :incompatible '(("--exitfirst" "--maxfail="))
   :value '("--color")
   ["Output"
-   [("-c" "color" "--color")
-    ("-q" "quiet" "--quiet")
-    ("-s" "no output capture" "--capture=no")
-    (python-pytest:-v)]]
+   [
+     ("-r" "Report" "-r fEsxXp")
+     ("-f" "Logfile" +jg-python-test-logfile)
+     ("-c" "color" "--color")
+     ("-s" "no output capture" "--capture=no")
+     ("-q" "quiet" "--quiet")
+     (python-pytest:-v)
+     ]
+   [ ("--tc" "Trace Config" "--trace-config")    ("--lc" "Log CLI" "--log-cli-level=INFO") ]
+   ]
   ["Selection, filtering, ordering"
-   [(python-pytest:-k)
-    (python-pytest:-m)
-    "                                          "] ;; visual alignment
-   [("--dm" "run doctests" "--doctest-modules")
-    ("--nf" "new first" "--new-first")
-    ("--sw" "stepwise" "--stepwise")
-    ("--co" "collect only" "--collect-only")]]
+   [(python-pytest:-k) (python-pytest:-m)  ]
+   [("--nf" "new first" "--new-first") ("--sw" "stepwise" "--stepwise") ("--co" "collect only" "--collect-only") ("--dm" "run doctests" "--doctest-modules") ]
+   ]
   ["Failures, errors, debugging"
    [("-l" "show locals" "--showlocals")
-    ("-p" "debug on error" "--pdb")
-    ("-x" "exit after first failure" "--exitfirst")]
-   [("--ff" "failed first" "--failed-first")
+    ("-d" "debug on error" "--pdb")
+    ("-x" "exit after first failure" "--exitfirst")
+    ("-f" "failed first" "--failed-first")
+    ]
+   [
     ("--ft" "full tracebacks" "--full-trace")
     ("--mf" "exit after N failures or errors" "--maxfail=")
     ("--rx" "run xfail tests" "--runxfail")
+    ("--f" "loop on failure" "--looponfail")
     (python-pytest:--tb)
     ("--tr" "debug on each test" "--trace")]]
   ["Options for pytest-xdist"
-   [(python-pytest:-n)]
-   [("-f" "loop on failure" "--looponfail")]]
+   [ (python-pytest:-n)   ]
+   [  ]
+   ]
   ["Run tests"
-   [("t" "all" python-pytest)]
-   [("r" "repeat" python-pytest-repeat)
-    ("x" "last failed" python-pytest-last-failed)]
-   [("f" "file (dwim)" python-pytest-file-dwim)
-    ("F" "file (this)" python-pytest-file)]
-   [("m" "files" python-pytest-files)
-    ("M" "directories" python-pytest-directories)]
-   [("d" "def/class (dwim)" python-pytest-function-dwim)
-    ("D" "def/class (this)" python-pytest-function)]])
+   [ ("t" "all"         python-pytest)
+     ("r" "repeat"      python-pytest-repeat)
+     ("x" "last failed" python-pytest-last-failed)
+     ]
+   [
+    ("f" "file (dwim)"      python-pytest-file-dwim)
+    ("d" "def/class (dwim)" python-pytest-function-dwim)
+    ("m" "files"            python-pytest-files)
+    ]
+   [
+    ("F" "file (this)"      python-pytest-file)
+    ("D" "def/class (this)" python-pytest-function)
+    ("M" "directories"      python-pytest-directories)
+    ]
+   [
+    ]
+   ]
+  transient-quit!
+  )
+
+(defun +jg-python-pytest-dispatch ()
+  (interactive)
+  (python-pytest-dispatch)
+  )

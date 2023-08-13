@@ -1,5 +1,6 @@
 ;;; lang/emacs-lisp/config.el -*- lexical-binding: t; -*-
 
+(load! "+defs")
 (load! "+vars")
 (defer-load! jg-bindings-total "+bindings")
 (defer-load! jg-evil-ex-bindings "+evil-ex")
@@ -62,6 +63,8 @@
     ;; hideshow for that.
     outline-regexp +emacs-lisp-outline-regexp
     outline-level #'+emacs-lisp-outline-level
+    evil-surround-pairs-alist (append jg-evil-surround-pairs-base
+                                      jg-lisp-surround-pairs)
     )
 
   )

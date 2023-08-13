@@ -53,8 +53,9 @@
       "f" #'describe-face
       "L" #'describe-language-environment
       "l" #'load-theme
+      "t"   #'doom/reload-theme
       :desc "Active Minor Modes" "M" #'doom/describe-active-minor-mode
-      "r" #'+jg-help-reset-major-mode
+      "m" #'+jg-help-reset-major-mode
       )
 ;;-- end ui
 
@@ -86,13 +87,6 @@
       )
 
 ;;-- end reloading
-
-;;-- doom
-(map! :map jg-help-map
-      :prefix ("D" . "Doom")
-      "s"   #'doom/help-search-headings
-      )
-;;-- end doom
 
 ;;-- packages
 (map! :map jg-help-map

@@ -9,6 +9,17 @@
       manual-program (executable-find "man")
       )
 
+;;-- woman
+(after! woman
+  ;; The woman-manpath default value does not necessarily match man. If we have
+  ;; man available but aren't using it for performance reasons, we can extract
+  ;; it's manpath.
+  (when (executable-find "man")
+    (setq woman-manpath
+          (split-string (cdr (doom-call-process "man" "--path"))
+                        path-separator t))))
+;;-- end woman
+
 (spec-handling-add! fold
                     `(helpful
                       :modes (helpful-mode)

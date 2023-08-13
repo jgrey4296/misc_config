@@ -1,28 +1,32 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
 (defvar jg-ibuffer-never-show-regexps
-      (rx (: "*" (or "Minibuf-"
-                     "scratch"
-                     "Messages"
-                     "DOC"
-                     "which-key"
-                     "server"
-                     "Async-native-compile-log"
-                     "Echo Area"
-                     "eldoc"
-                     "org-src-fontification:"
-                     "code-converting-work"
-                     "code-conversion-work"
-                     "helm candidates"
-                     ;; "Pp Eval"
-                     "RNC Input"
-                     "counsel"
-                     "refs-/"
-                     "Neotree"
-                     )
-             (* any)
-             ))
+  (rx (or
+       (: "*" (or "Minibuf-"
+                  "scratch"
+                  "Messages"
+                  "DOC"
+                  "which-key"
+                  "server"
+                  "Async-native-compile-log"
+                  "Echo Area"
+                  "eldoc"
+                  "org-src-fontification:"
+                  "code-converting-work"
+                  "code-conversion-work"
+                  "helm candidates"
+                  ;; "Pp Eval"
+                  "RNC Input"
+                  "counsel"
+                  "refs-/"
+                  "Neotree"
+                  )
+          (* any)
+          )
+       (: "markdown-code-fontification" (* any))
+       )
       )
+  )
 
 (setq ibuffer-show-empty-filter-groups t
       ibuffer-default-sorting-mode 'alphabetic

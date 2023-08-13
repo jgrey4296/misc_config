@@ -109,10 +109,10 @@
       :desc "Comment"                     "c"   #'evilnc-comment-operator
       :desc "Surround"                    "s"   #'evil-surround-region
 
-      :desc "downcase"                    "j"   #'evil-downcase
-      :desc "UpperCase"                   "k"   #'evil-upcase
-      :desc "Decr"                        "J"   #'+jg-text-dec-num
-      :desc "Incr"                        "K"   #'+jg-text-inc-num
+      :desc "downcase"                    "J"   #'evil-downcase
+      :desc "UpperCase"                   "K"   #'evil-upcase
+      :desc "Decr"                        "j"   #'+jg-text-dec-num
+      :desc "Incr"                        "k"   #'+jg-text-inc-num
       :desc "Shift Left"                  "h"   #'+jg-text-shift-left
       :desc "Shift Right"                 "l"   #'+jg-text-shift-right
       :desc "Title Case"                  "t"   #'+jg-text-title-case-op

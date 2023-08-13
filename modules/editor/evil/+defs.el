@@ -27,3 +27,26 @@ directives. By default, this only recognizes C directives.")
 (defvar evil-want-Y-yank-to-eol t)
 (defvar evil-want-abbrev-expand-on-insert-exit nil)
 (defvar evil-respect-visual-line-mode nil)
+
+
+(defvar jg-evil-surround-pairs-base '((?\( . ("( " . " )"))
+                                      (?\[ . ("[ " . " ]"))
+                                      (?\{ . ("{ " . " }"))
+
+                                      (?\) . ("(" . ")"))
+                                      (?\] . ("[" . "]"))
+                                      (?\} . ("{" . "}"))
+
+                                      (?# . ("#{" . "}"))
+                                      (?b . ("(" . ")"))
+                                      (?p . ("(" . ")"))
+                                      (?B . ("{" . "}"))
+                                      (?> . ("<" . ">"))
+                                      )
+  )
+
+(defvar evil-textobj-anyblock-blocks '(("(" . ")")
+                                       ("{" . "}")
+                                       ("\\[" . "\\]")
+                                       ("<" . ">"))
+  )

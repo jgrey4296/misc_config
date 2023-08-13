@@ -5,6 +5,7 @@
       lsp-signature-mode-map (make-sparse-keymap)
       lsp-ui-imenu-mode-map (make-sparse-keymap)
       )
+(evil-make-overriding-map lsp-mode-map)
 
 (map! :leader
       :prefix "c"
@@ -12,7 +13,7 @@
       :desc "LSP Code actions"                      "a"   #'lsp-avy-lens
       :desc "LSP Rename"                            "R"   #'lsp-rename
       :desc "List errors"                           "x"   #'flycheck-list-errors
-      ;; :desc "Jump to symbol in current workspace"   "j"   #'lsp-ivy-workspace-symbol
+      :desc "jump to symbol in current workspace"   "j"   #'+jg-lsp-describe-workspace-symbol
       ;; :desc "Jump to symbol in any workspace"       "J"   #'lsp-ivy-global-workspace-symbol
       )
 
@@ -24,8 +25,9 @@
 
 (map! :map lsp-mode-map
       :n "g r" #'lsp-rename
-      :n "s '" #'lsp-ui-imenu
+      ;; :n "s '" #'lsp-ui-imenu
       :n "c x" #'flycheck-list-errors
+      :n "s j" #'+jg-lsp-describe-workspace-symbol
       )
 
 (map! :map lsp-ui-imenu-mode-map

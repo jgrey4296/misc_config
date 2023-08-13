@@ -15,6 +15,7 @@
       :nv "q"                       #'+jg-dired-kill-subdir-or-close-buffer
       :n "!"                        #'dired-do-shell-command
       :n "@"                        #'dired-do-async-shell-command
+      :n "#"                        #'+jg-dired-seq-command
       :n "DEL"                      #'dired-kill-subdir
       :n "RET"                      #'dired-find-file
       :n "S"                        #'hydra-dired-quick-sort/body

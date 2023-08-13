@@ -8,7 +8,6 @@
       lsp-enable-text-document-color   nil             ;; ditto
       lsp-enable-on-type-formatting    nil
       lsp-headerline-breadcrumb-enable nil
-      lsp-enable-semantic-highlighting t
       lsp-disabled-clients             nil
  )
 
@@ -33,8 +32,8 @@
 ;; UI Sideline
 (setq lsp-ui-sideline-ignore-duplicate t
       lsp-ui-sideline-delay 1
-      lsp-ui-sideline-diagnostic-max-line-length 50
-      lsp-ui-sideline-diagnostic-max-lines 5
+      lsp-ui-sideline-diagnostic-max-line-length 80
+      lsp-ui-sideline-diagnostic-max-lines 3
       lsp-ui-sideline-show-hover       t
       lsp-ui-sideline-actions-icon     nil
 )

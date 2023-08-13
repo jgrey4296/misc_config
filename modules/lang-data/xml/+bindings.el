@@ -7,11 +7,23 @@
   (evil-make-intercept-map mhtml-mode-map)
 )
 
-(map! :map dired-mode-map
-      :after jg-dired-bindings
+(map! :map jg-dired-mode-map
       :localleader
       :desc "Query Xml" :n "1"   #'+jg-xml-dired-run-xidel
       :desc "Manifest"  :n "i m" #'+jg-xml-epub-manifest-generate
+      )
+(map! :map jg-dired-mode-map
+      :prefix ("> x" . "Xml/Json Utils")
+      :desc "Query"    "?" #'+jg-xml-dired-run-xidel
+
+      :desc "Elements"        "e" #'+jg-xml-dired-elements
+      :desc "Select"          "q" #'+jg-xml-dired-select
+      :desc "Validate"        "v" #'+jg-xml-dired-validate
+      :desc "Format"          "f" #'+jg-xml-dired-format
+      :desc "Schema"          "s" #'+jg-xml-dired-generate-schema
+      :desc "Schema Uml"      "u" #'+jg-xml-dired-schema-uml
+      :desc "Generate Python" "p" #'+jg-xml-dired-gen-python
+      :desc "Visualise Json"  "j" '+jg-xml-dired-visualise-json
       )
 
 (map! :map nxml-mode-map
@@ -48,24 +60,3 @@
       :desc "Load into shell" :n "l" #'+jg-xml-load-into-repl
       :desc "Html Reference"  :n "1" (cmd! (browse-url "https://developer.mozilla.org/en-US/docs/Web/HTML"))
       )
-
-;;-- xml/json data utils
-(map! :map dired-mode-map
-      :n "x" nil
-      :n "X" nil
-      "x" nil
-      "X" nil
-      :prefix ("x" . "Xml/Json Utils")
-      :desc "Query"    "?" #'+jg-xml-dired-run-xidel
-
-      :desc "Elements"        "e" #'+jg-xml-dired-elements
-      :desc "Select"          "q" #'+jg-xml-dired-select
-      :desc "Validate"        "v" #'+jg-xml-dired-validate
-      :desc "Format"          "f" #'+jg-xml-dired-format
-      :desc "Schema"          "s" #'+jg-xml-dired-generate-schema
-      :desc "Schema Uml"      "u" #'+jg-xml-dired-schema-uml
-      :desc "Generate Python" "p" #'+jg-xml-dired-gen-python
-      :desc "Visualise Json"  "j" '+jg-xml-dired-visualise-json
-      )
-
-;;-- end xml/json data utils

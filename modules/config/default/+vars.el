@@ -1,9 +1,13 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
 (defalias 'number-list (symbol-function 'number-sequence))
+(defvar +default-want-RET-continue-comments t "If non-nil, RET will continue commented lines.")
 
-(defvar +default-want-RET-continue-comments t
-  "If non-nil, RET will continue commented lines.")
+;; General
+(setq save-silently (not noninteractive)
+
+ )
+
 
 ;;;###package avy
 (setq avy-all-windows nil
@@ -38,17 +42,6 @@
       (setq-local epa-file-encrypt-to (default-value 'epa-file-encrypt-to)))))
 
 ;;-- end epa
-
-;;-- woman
-(after! woman
-  ;; The woman-manpath default value does not necessarily match man. If we have
-  ;; man available but aren't using it for performance reasons, we can extract
-  ;; it's manpath.
-  (when (executable-find "man")
-    (setq woman-manpath
-          (split-string (cdr (doom-call-process "man" "--path"))
-                        path-separator t))))
-;;-- end woman
 
 ;;-- tramp
 ;;;###package tramp

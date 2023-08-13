@@ -83,7 +83,7 @@ trace                    # stdlib. https://docs.python.org/3/library/trace.html
 tracemalloc              # stdlib. https://docs.python.org/3/library/tracemalloc.html
 weakref                  # stdlib. https://docs.python.org/3/library/weakref.html
 zipfile                  # stdlib. https://docs.python.org/3/library/zipfile.html
+tomli-W                  # https://github.com/hukkin/tomli-w
 
-LSP Protocol             # https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/
 pygls language server    # https://pygls.readthedocs.io/en/latest/
 lsprotol                 # https://github.com/microsoft/lsprotocol

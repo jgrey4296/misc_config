@@ -73,7 +73,7 @@ python-twitter           # https://python-twitter.readthedocs.io/en/latest/
 python/C api             # https://docs.python.org/3/c-api/index.html
 railroad-diagrams        # https://github.com/tabatkins/railroad-diagrams
 re                       # https://docs.python.org/3/library/re.html
-requests # https://requests.readthedocs.io/en/latest/
+requests                 # https://requests.readthedocs.io/en/latest/
 rich                     # https://rich.readthedocs.io/en/stable/introduction.html
 scikit-learn             # https://scikit-learn.org/stable/user_guide.html
 scons                    # https://scons.org/documentation.html
@@ -103,5 +103,8 @@ xsdata                   # https://xsdata.readthedocs.io/en/latest/
 xsdata-plantuml          # https://github.com/tefra/xsdata-plantuml
 z3                       # https://github.com/Z3Prover/z3
 zlib                     # https://docs.python.org/3/library/zlib.html
+tomli-w                  # https://github.com/hukkin/tomli-w
+
+LSP Protocol             # https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/
 
 PEP 635: Match statement # https://peps.python.org/pep-0635

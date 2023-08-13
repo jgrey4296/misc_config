@@ -7,11 +7,18 @@
 \usepackage[numbers]{natbib}
 \usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue, pdfstartview=FitH]{hyperref}
 \usepackage{doi}
+
+% \usepackage[backend=biber,style=jg_custom]{biblatex}
+% \addbibresource{%target}
 \title{%title}
 \author{John Grey}
 \begin{document}
 \maketitle
 \nocite{*}
+% Bibtex:
 \bibliographystyle{jg_custom}
 \bibliography{%target}
+% Biblatex:
+% \printbibliography[type=article,title={Articles only}]
+% \printbibliography[type=book,title={Books only}]
 \end{document}

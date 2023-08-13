@@ -31,5 +31,8 @@ Text display changes:
 \usepackage{xltextra} # for xelatex
 \setmainfont{}        # for xelatex and lualatex
 \setsansfont{}        # for xelatex and lualatex
-\setromanfont{}
-\setmonofont{}
+\setromanfont{}       # for xelatex and lualatex
+\setmonofont{}        # for xelatex and lualatex
+
+\setdefaultlanguage{}  # polyglossia
+\setotherlanguages{}   # polyglossia

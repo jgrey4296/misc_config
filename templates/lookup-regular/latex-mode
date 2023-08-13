@@ -13,3 +13,6 @@ luatex             # http://www.luatex.org/
 Logic Symbols      # https://www.logicmatters.net/latex-for-logicians/symbols/
 Logic Symbols List # https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols
 Detexify           # http://detexify.kirelabs.org/classify.html
+Docs               # https://www.latex-project.org/help/documentation/
+hboxes             # https://www.overleaf.com/learn/how-to/Understanding_underfull_and_overfull_box_warnings#Why_the_Warning_Happens
+biblatex           # https://en.wikibooks.org/wiki/LaTeX/Bibliographies_with_biblatex_and_biber

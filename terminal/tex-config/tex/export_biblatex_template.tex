@@ -1,0 +1,19 @@
+\documentclass[12pt]{article}
+\usepackage[T1,T2A]{fontenc}
+\usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue, pdfstartview=FitH]{hyperref}
+\usepackage[russian,english]{babel}
+\usepackage[version=3]{mhchem}
+\usepackage{doi}
+\usepackage{listings}
+\usepackage{url}
+
+\usepackage[backend=biber,style=jg_custom]{biblatex}
+\addbibresource{%target}
+\title{%title}
+\author{John Grey}
+\begin{document}
+\maketitle
+\nocite{*}
+\printbibliography[type=article,title={Articles only}]
+\printbibliography[type=book,title={Books only}]
+\end{document}

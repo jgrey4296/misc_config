@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name  : biblatex
+# uuid  : biblatex
+# key   : biblatex
+# group :
+# --
+\printbibliography[type=article,title={Articles only},heading=bibintoc]
+\printbibliography[type=book,title={Books only}]

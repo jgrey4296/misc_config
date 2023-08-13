@@ -17,16 +17,16 @@ TEXMFVAR    = $HOME/.tex
 TEXMFOUT    = $TEXMFDOTDIR
 TEXMFCONFIG = $HOME/.doom.d/terminal/tex-config
 
-JG_FONTS =$HOME/github/godot/__assets/fonts/
+JG_FONTS = $HOME/github/godot/__assets/fonts/
 JG_BIB   = $HOME/github/jgrey4296.github.io/resources/bibliography/
 
 BIBINPUTS=$TEXMFDOTDIR:$JG_BIB:$TEXMFCONFIG/bibtex//:$TEXMFHOME/bibtex//
 BSTINPUTS=$TEXMFDOTDIR:$TEXMFCONFIG/bibtex//:$TEXMFHOME/bibtex//
 
-TTFONTS=$TEXMFDOTDIR:$JG_FONTS:$TEXMFCONFIG/fonts//:$HOME/Library/Fonts:/System/Library/Fonts//
-OPENTYPEFONTS=$TEXMFDOTDIR:$JG_FONTS:$TEXMFCONFIG/fonts//:$HOME/Library/Fonts:/System/Library/Fonts//
+TTFONTS=$TEXMFDOTDIR:$JG_FONTS:$TEXMFCONFIG/fonts//:$TEXMFHOME/fonts//:$HOME/Library/Fonts:/System/Library/Fonts//
+OPENTYPEFONTS=$TEXMFDOTDIR:$JG_FONTS:$TEXMFCONFIG/fonts//:$TEXMFHOME/fonts//:$HOME/Library/Fonts:/System/Library/Fonts//
 
-TEXINPUTS   = $TEXMFDOTDIR:$TEXMFCONFIG/tex//
+TEXINPUTS   = $TEXMFDOTDIR:$TEXMFCONFIG/tex//:$TEXMFHOME/tex//
 
 % tlmgr reads TEXMFCONFIG/tlmgr/config
 

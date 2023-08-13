@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : unicode
+# uuid  : unicode
+# key   : unicode
+# group :
+# --
+\DeclareUnicodeCharacter{${1:codepoint}}{${2:command}}

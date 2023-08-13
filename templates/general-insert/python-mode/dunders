@@ -6,15 +6,15 @@ __str__(self)                                   # string
 __bytes__(self)                                 # binary
 __format__(self, format_spec)                   # string
 
-__lt__(self, other)                             # comparison
-__le__(self, other)                             # comparison
-__eq__(self, other)                             # comparison
-__ne__(self, other)                             # comparison
-__gt__(self, other)                             # comparison
-__ge__(self, other)                             # comparison
+__lt__(self, other)                             # comparison. <
+__le__(self, other)                             # comparison. <=
+__eq__(self, other)                             # comparison. =
+__ne__(self, other)                             # comparison. !=
+__gt__(self, other)                             # comparison. >
+__ge__(self, other)                             # comparison. >=
 
-__hash__(self)                                  #
-__bool__(self)                                  #
+__hash__(self)                                  # hash(obj)
+__bool__(self)                                  # bool(obj)
 
 __getattr__(self, name)                         # attributes
 __getattribute__(self, name)                    # attributes
@@ -42,50 +42,66 @@ __missing__(self, key)                          # lists and dicts
 __reversed__(self)                              # lists and dicts
 __contains__(self, item)                        # lists and dicts
 
-__iter__(self)                                  # iterators
+__iter__(self)                                  # iterators. iter(obj)
 
-__add__(self, other)                            # math ops
-__sub__(self, other)                            # math ops
-__mul__(self, other)                            # math ops
-__matmul__(self, other)                         # math ops
-__truediv__(self, other)                        # math ops
-__floordiv__(self, other)                       # math ops
-__mod__(self, other)                            # math ops
-__divmod__(self, other)                         # math ops
-__pow__(self, other[, modulo])                  # math ops
-__lshift__(self, other)                         # math ops
-__rshift__(self, other)                         # math ops
-__and__(self, other)                            # math ops
-__xor__(self, other)                            # math ops
-__or__(self, other)                             # math ops
-__radd__(self, other)                           # math ops
-__rsub__(self, other)                           # math ops
-__rmul__(self, other)                           # math ops
-__rmatmul__(self, other)                        # math ops
-__rtruediv__(self, other)                       # math ops
-__rfloordiv__(self, other)                      # math ops
-__rmod__(self, other)                           # math ops
-__rdivmod__(self, other)                        # math ops
-__rpow__(self, other[, modulo])                 # math ops
-__rlshift__(self, other)                        # math ops
-__rrshift__(self, other)                        # math ops
-__rand__(self, other)                           # math ops
-__rxor__(self, other)                           # math ops
-__ror__(self, other)                            # math ops
-__ior__(self, other)                            # math ops
+__iadd__(a, b)                                  # in-place.  +=
+__iconcat__(a, b)                               # in-place.  += for sequences.
+__iand__(a, b)                                  # in-place.  &=
+__ifloordiv__(a, b)                             # in-place.  //=
+__ilshift__(a, b)                               # in-place.  <<=
+__imod__(a, b)                                  # in-place.  %=
+__imul__(a, b)                                  # in-place.  *=
+__imatmul__(a, b)                               # in-place.  @=
+__ior__(a, b)                                   # in-place.  |=
+__ipow__(a, b)                                  # in-place.  **=
+__irshift__(a, b)                               # in-place.  >>=
+__isub__(a, b)                                  # in-place.  -=
+__itruediv__(a, b)                              # in-place.  /=
+__ixor__(a, b)                                  # in-place.  ^=
 
-__neg__(self)                                   # math
-__pos__(self)                                   # math
-__abs__(self)                                   # math
-__invert__(self)                                # math
-__complex__(self)                               # math
-__int__(self)                                   # math
-__float__(self)                                 # math
-__index__(self)                                 # math
-__round__(self[, ndigits])                      # math
-__trunc__(self)                                 # math
-__floor__(self)                                 # math
-__ceil__(self)                                  # math
+__add__(self, other)                            # math ops. +
+__sub__(self, other)                            # math ops. -
+__mul__(self, other)                            # math ops. *
+__matmul__(self, other)                         # math ops. @
+__truediv__(self, other)                        # math ops. /
+__floordiv__(self, other)                       # math ops. //
+__mod__(self, other)                            # math ops. %
+__divmod__(self, other)                         # math ops. divmod(a, b)
+__pow__(self, other[, modulo])                  # math ops. **
+__lshift__(self, other)                         # math ops. <<
+__rshift__(self, other)                         # math ops. >>
+__and__(self, other)                            # math ops. &
+__xor__(self, other)                            # math ops. ^
+__or__(self, other)                             # math ops. |
+
+__radd__(self, other)                           # math ops. reflected
+__rsub__(self, other)                           # math ops. reflected
+__rmul__(self, other)                           # math ops. reflected
+__rmatmul__(self, other)                        # math ops. reflected
+__rtruediv__(self, other)                       # math ops. reflected
+__rfloordiv__(self, other)                      # math ops. reflected
+__rmod__(self, other)                           # math ops. reflected
+__rdivmod__(self, other)                        # math ops. reflected
+__rpow__(self, other[, modulo])                 # math ops. reflected
+__rlshift__(self, other)                        # math ops. reflected
+__rrshift__(self, other)                        # math ops. reflected
+__rand__(self, other)                           # math ops. reflected
+__rxor__(self, other)                           # math ops. reflected
+__ror__(self, other)                            # math ops. reflected
+__ior__(self, other)                            # math ops. reflected
+
+__neg__(self)                                   # math . -obj
+__pos__(self)                                   # math.  +obj
+__abs__(self)                                   # math.  abs(obj)
+__invert__(self)                                # math.  ~obj
+__complex__(self)                               # math.  complex(obj)
+__int__(self)                                   # math.  int(obj)
+__float__(self)                                 # math.  float(obj)
+__index__(self)                                 # math.  obj.index()
+__round__(self[, ndigits])                      # math.  round(obj)
+__trunc__(self)                                 # math.  truc(obj)
+__floor__(self)                                 # math.  floor(obj)
+__ceil__(self)                                  # math.  ceil(obj)
 
 __enter__(self)                                 # context manager
 __exit__(self, exc_type, exc_value, traceback)  # context manager

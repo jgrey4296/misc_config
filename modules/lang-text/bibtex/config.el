@@ -1,18 +1,8 @@
 ;;; domain-specific/bibtex/config.el -*- lexical-binding: t; -*-
 
-(defer-load! "+vars")
+(load! "+defs")
+(load! "+vars")
 (defer-load! jg-bindings-total "+bindings")
-;; (defer! 240 ;; when idle for 4 minutes
-;;   (unless jg-bibtex-helm-candidates
-;;     (require 'helm)
-;;     (require 'helm-source)
-;;     (require 'helm-bibtex)
-;;     (+jg-bibtex-build-list)
-;;     (bibtex-completion-clear-cache)
-;;     (bibtex-completion-init)
-;;     ;; (mapcar #'+jg-bibtex-process-candidates (bibtex-completion-candidates))
-;;     )
-;;   )
 
 (use-package! bibtex
   :commands bibtex-mode
@@ -26,11 +16,13 @@
     (setq bibtex-jg-entry-alist sorted-entries)
     )
 
+
   (add-hook! 'bibtex-mode-hook
              #'yas-minor-mode
              #'outline-minor-mode
              #'+jg-bibtex-font-lock-mod-hook
-             #'reftex-mode)
+             #'reftex-mode
+             #'general-insert-minor-mode)
 
   (add-hook! 'bibtex-mode-hook :append
     (bibtex-set-dialect 'jg)
@@ -81,3 +73,10 @@
 (use-package! oc-csl :after oc)
 
 (use-package! oc-natbib :after oc)
+
+(use-package! bibtex-style
+  :defer t
+  :config
+  (add-hook 'bibtex-style-mode-hook #'hs-minor-mode)
+  (add-hook 'bibtex-style-mode-hook #'general-insert-minor-mode)
+  )

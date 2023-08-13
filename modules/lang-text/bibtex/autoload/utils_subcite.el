@@ -1,5 +1,5 @@
 ;;; +subcite.el -*- lexical-binding: t; -*-
-
+(require 'bibtex)
 
 ;;;###autoload
 (defun +jg-bibtex-lock-key ()

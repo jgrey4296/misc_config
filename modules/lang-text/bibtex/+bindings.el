@@ -6,8 +6,9 @@
 ;;-- bibtex-mode
 (map! :map bibtex-mode-map ;; main
       :after bibtex
+      :n "|" #'general-insert-call
       :desc "Lock Key"           :n "!"     #'+jg-bibtex-lock-key
-      :desc "Insert from Doi"    :n "Id"    #'+jg-bibtex-insert-entry-from-doit
+      :desc "Insert from Doi"    :n "Id"    #'+jg-bibtex-insert-entry-from-doi
       :desc "Insert from PMID"   :n "Ip"    (cmd! (pubmed-insert-bibtex-from-pmid (read-string "PMID: ")))
       :desc "Clean entry"        :n "TAB"   #'org-ref-clean-bibtex-entry
       :desc "Edit Field"         :n  "\\"   #'+jg-bibtex-edit-field
@@ -28,7 +29,7 @@
 
       :desc "Subcite"             "\\"    #'+jg-bibtex-subcite
       :desc "Build Bibliography"  "B"     #'org-ref-build-full-bibliography
-      :desc "Insert from DOI"     "d"     #'+jg-bibtex-insert-entry-from-doit
+      :desc "Insert from DOI"     "d"     #'+jg-bibtex-insert-entry-from-doi
       :desc "Insert from PMID"    "p"     (cmd! (pubmed-insert-bibtex-from-pmid (read-string "PMID: ")))
       :desc "New Entry"           "n"     #'bibtex-entry
       :desc "Get Meta"            "m"     #'+jg-bibtex-meta-retrieval
@@ -102,8 +103,9 @@
 (map! :map dired-mode-map
       :after jg-dired-bindings
       :prefix ("> b" . "bibtex")
-      :desc "Generate Tex for marked Bibtex" "g" #'+jg-bibtex-dired-compile
+      :desc "Generate Tex for marked Bibtex" "g" #'+jg-bibtex-dired-generate-tex
       :desc "Compile marked tex"             "C" #'+jg-bibtex-dired-compile-run
+      :desc "Check pdf existence"            "?" #'+jg-bibtex-dired-check-pdfs
       )
 
 ;;-- end dired
@@ -113,3 +115,7 @@
 (evil-ex-define-cmd "ci[te]" #'+jg-bibtex-insert-wrapped)
 
 ;;-- end evil-ex
+
+(map! :map bibtex-style-mode-map
+      :n "|" #'general-insert-call
+      )

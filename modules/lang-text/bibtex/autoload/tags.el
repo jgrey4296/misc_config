@@ -1,5 +1,6 @@
 ;;; tags.el -*- lexical-binding: t; -*-
 (require 'doi-utils)
+(require 'bibtex)
 
 (defun +jg-bibtex-split-tags (x)
   (split-string x "," t "+")
@@ -16,7 +17,6 @@
          )
         )
   )
-
 
 ;;;###autoload
 (defun +jg-bibtex-set-tags (x)

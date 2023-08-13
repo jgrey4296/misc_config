@@ -1,5 +1,6 @@
 ;;; +windows.el -*- lexical-binding: t; -*-
-
+(require 'bookmark)
+(require 'bibtex)
 
 ;;;###autoload
 (defun +jg-bibtex-window-set-downloads ()

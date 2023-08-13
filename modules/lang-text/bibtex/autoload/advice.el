@@ -1,23 +1,6 @@
 ;;; +advice.el -*- lexical-binding: t; -*-
-;;
-;; Copyright (C) 2022 John Grey
-;;
-;; Author: John Grey <johngrey4296 at gmail.com>
-;; Maintainer: John Grey <johngrey4296 at gmail.com>
-;; Created: March 22, 2022
-;; Modified: March 22, 2022
-;; Version: 0.0.1
-;; Keywords:
-;; Homepage: https://github.com/johngrey/+advice
-;; Package-Requires: ((emacs "24.3"))
-;;
-;; This file is not part of GNU Emacs.
-;;
-;;; Commentary:
-;;
-;;
-;;
-;;; Code:
+(require 'f)
+(require 's)
 
 ;;;###autoload
 (defun +jg-build-bibliography ()

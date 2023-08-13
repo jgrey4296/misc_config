@@ -1,5 +1,5 @@
 ;;; +keys.el -*- lexical-binding: t; -*-
-
+(require 'bibtex)
 
 ;;;###autoload
 (defun +jg-bibtex-insert-stub-key ()

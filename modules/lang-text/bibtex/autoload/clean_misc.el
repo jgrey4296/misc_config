@@ -1,4 +1,5 @@
 ;;; +clean_funcs.el -*- lexical-binding: t; -*-
+(require 'bibtex)
 
 ;;;###autoload
 (defun +jg-bibtex-clean-doi-hook ()

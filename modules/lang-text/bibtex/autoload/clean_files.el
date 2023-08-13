@@ -1,4 +1,5 @@
 ;;; +files.el -*- lexical-binding: t; -*-
+(require 'bibtex)
 
 ;;;###autoload
 (defun +jg-bibtex--get-file-entries (pair)

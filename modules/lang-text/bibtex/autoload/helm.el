@@ -5,11 +5,6 @@
 
 (defvar jg-bibtex-field-to-string-fn (-compose (-partial #'s-replace ":" "") #'symbol-name #'car))
 
-(defun +jg-bibtex-sort-fields ()
-  (sort (mapcar jg-bibtex-field-to-string-fn bibtex-field-alist) #'string-lessp)
-  )
-
-;;-- sources
 (defvar jg-bibtex-helm-source-bibtex
       (helm-build-sync-source "Bibtex Helm"
         :action (helm-make-actions  "Insert citation"      #'helm-bibtex-insert-citation
@@ -30,7 +25,10 @@
         )
       )
 
-;;-- end sources
+(defun +jg-bibtex-sort-fields ()
+  (sort (mapcar jg-bibtex-field-to-string-fn bibtex-field-alist) #'string-lessp)
+  )
+
 
 ;;-- actions
 

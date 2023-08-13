@@ -106,6 +106,7 @@
                     '(latex
                       ("\\.tex\\'" . LaTeX-mode)
                       ("\\.sty\\'" . LaTeX-mode)
+                      ("\\.bbl\\'" . latex-mode)
                       )
                     )
 (spec-handling-add! file-templates

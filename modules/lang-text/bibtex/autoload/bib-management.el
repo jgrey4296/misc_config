@@ -1,4 +1,5 @@
 ;;; +bib-management.el -*- lexical-binding: t; -*-
+(require 'bibtex-completion)
 
 ;;;###autoload
 (defun +jg-bibtex-build-list ()
@@ -6,6 +7,9 @@
   (setq bibtex-completion-bibliography (directory-files jg-bibtex-loc-bibtex 't "\.bib$")
         jg-bibtex-helm-candidates nil
         )
+  (bibtex-completion-clear-cache)
+  (bibtex-completion-init)
+  (mapcar #'+jg-bibtex-process-candidates (bibtex-completion-candidates))
   )
 
 ;;;###autoload

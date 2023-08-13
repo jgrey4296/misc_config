@@ -1,5 +1,5 @@
 ;;; +editing.el -*- lexical-binding: t; -*-
-
+(require 'bibtex)
 
 ;;;###autoload
 (defun +jg-bibtex-edit-entry-type ()

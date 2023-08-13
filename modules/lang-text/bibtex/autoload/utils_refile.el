@@ -1,4 +1,7 @@
 ;;; +refile.el -*- lexical-binding: t; -*-
+(require 'bibtex)
+(require 's)
+(require 'f)
 
 ;;;###autoload
 (defun +jg-bibtex-refile-pdf (&optional destructive)

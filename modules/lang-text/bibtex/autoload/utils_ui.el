@@ -1,4 +1,5 @@
 ;;; +ui.el -*- lexical-binding: t; -*-
+(require 'bibtex)
 
 ;;;###autoload
 (defun +jg-bibtex-toggle-doi-load ()

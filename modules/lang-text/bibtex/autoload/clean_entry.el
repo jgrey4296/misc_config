@@ -1,4 +1,5 @@
 ;;; +entry.el -*- lexical-binding: t; -*-
+(require 'bibtex)
 
 ;;;###autoload
 (defun +jg-bibtex-smart-replace-nonascii-hook ()

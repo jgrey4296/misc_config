@@ -1,5 +1,5 @@
 ;;; +urls.el -*- lexical-binding: t; -*-
-
+(require 'bibtex)
 
 ;;;###autoload
 (defun +jg-bibtex--url-matcher (x)

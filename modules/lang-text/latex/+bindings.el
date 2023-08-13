@@ -2,7 +2,7 @@
 
 (defvar jg-latex-mode-map (make-sparse-keymap))
 
-(map! :map LaTeX-mode-map
+(map! :map jg-latex-mode-map
       :i "\"" #'TeX-insert-quote
       :i "$"  #'TeX-insert-dollar
       :n "|"  #'general-insert-call

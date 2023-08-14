@@ -78,9 +78,10 @@
 (setq warning-suppress-log-types
       '( ;; Full Suppress
         (defvaralias losing-value woman-topic-history)
-        ;; ((python python-shell-completion-native-turn-on-maybe))
+        ;; (flycheck syntax-checker)
+    ;; ((python python-shell-completion-native-turn-on-maybe))
         ;; (org-element-cache)
-        ;; ((flycheck syntax-checker))
+        ((flycheck syntax-checker))
         )
       warning-suppress-types
       '( ;; Don't Show

@@ -15,6 +15,7 @@
 (evil-ex-define-cmd "j[oin]"                  #'evil-ex-join)
 
 (evil-ex-define-cmd "a[lign]"                 #'+jg-text-manipulation-ex-align-highlight)
+(evil-ex-define-cmd "A"                       #'+jg-text-manipulation-ex-align-highlight)
 (evil-ex-define-cmd "la"                      #'evil-align-left)
 (evil-ex-define-cmd "ra"                      #'evil-align-right)
 (evil-ex-define-cmd "ce[nter]"                #'evil-align-center)

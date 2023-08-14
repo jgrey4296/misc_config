@@ -48,7 +48,6 @@
  ;; --------------------------------------------------
  ;; Doom Standard modules
  :app   (rss +org)
- :email (mu4e +gmail)
  :emacs electric
  :ui deft doom
  :ui minimap ophints

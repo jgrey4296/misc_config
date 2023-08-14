@@ -42,3 +42,33 @@
                 )
         )
 )
+
+
+(setq mu4e-maildir "~/.mail"
+      mu4e-user-mail-address-list nil
+      evil-collection-mu4e-end-region-misc "quit"
+      mail-user-agent                          'mu4e-user-agent
+      message-mail-user-agent                  'mu4e-user-agent
+      mu4e-update-interval        nil
+      mu4e-sent-messages-behavior              'sent
+      mu4e-hide-index-messages    t
+      message-send-mail-function #'smtpmail-send-it       ;; configuration for sending mail
+      smtpmail-stream-type                     'starttls
+      message-kill-buffer-on-exit t                       ;; close after sending
+      mu4e-context-policy                      'pick-first             ;; start with the first (default) context;
+      mu4e-compose-context-policy              'ask-if-none            ;; compose with the current context, or ask
+      mu4e-completing-read-function #'ivy-completing-read
+      mu4e-attachment-dir (concat (expand-file-name "Downloads" "~") "/") ; a trailing / makes it easier to change directory in `read-file-name'
+      mu4e-confirm-quit nil
+      mu4e-headers-thread-single-orphan-prefix '("─>" . "─▶")
+      mu4e-headers-thread-orphan-prefix        '("┬>" . "┬▶ ")
+      mu4e-headers-thread-connection-prefix    '("│ " . "│ ")
+      mu4e-headers-thread-first-child-prefix   '("├>" . "├▶")
+      mu4e-headers-thread-child-prefix         '("├>" . "├▶")
+      mu4e-headers-thread-last-child-prefix    '("└>" . "╰▶")
+      mu4e-headers-fields '((:account-stripe . 1)
+                            (:human-date     . 12)
+                            (:flags          . 6) ;; 3 icon flags
+                            (:from-or-to     . 25)
+                            (:subject))
+      )

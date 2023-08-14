@@ -149,7 +149,6 @@
 (map! :map jg-binding-operator-map
       :desc "Complete/Grow Selection"     "g" (cmds! (eq evil-state 'normal) #'company-manual-begin
                                                      (eq evil-state 'visual) #'+jg-text-grow-selection-op)
-      :desc "Align"                       "a" #'align-regexp
       :desc "Yank"                        "y" #'+evil:yank-unindented
 
       (:prefix ("d" . "Describe")

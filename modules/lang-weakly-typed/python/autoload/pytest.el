@@ -15,7 +15,7 @@
 (transient-define-prefix python-pytest-dispatch ()
   "Show popup for running pytest."
   :incompatible '(("--exitfirst" "--maxfail="))
-  :value '("--color")
+  :value '("--color" "--exitfirst")
   ["Output"
    [
      ("-r" "Report" "-r fEsxXp")
@@ -34,7 +34,7 @@
   ["Failures, errors, debugging"
    [("-l" "show locals" "--showlocals")
     ("-d" "debug on error" "--pdb")
-    ("-x" "exit after first failure" "--exitfirst")
+    ("-x" "exit after first failure" "--exitfirst" )
     ("-f" "failed first" "--failed-first")
     ]
    [
@@ -49,19 +49,19 @@
    [  ]
    ]
   ["Run tests"
-   [ ("t" "all"         python-pytest)
-     ("r" "repeat"      python-pytest-repeat)
-     ("x" "last failed" python-pytest-last-failed)
+   [ ("RET" "All Project Tests"         python-pytest)
+     ("DEL" "last failed"               python-pytest-last-failed)
+     ("r"   "repeat"                    python-pytest-repeat)
      ]
    [
-    ("f" "file (dwim)"      python-pytest-file-dwim)
-    ("d" "def/class (dwim)" python-pytest-function-dwim)
-    ("m" "files"            python-pytest-files)
+    ("f" "file (dwim)"                  python-pytest-file-dwim)
+    ("d" "def/class (dwim)"             python-pytest-function-dwim)
+    ("m" "files"                        python-pytest-files)
     ]
    [
-    ("F" "file (this)"      python-pytest-file)
-    ("D" "def/class (this)" python-pytest-function)
-    ("M" "directories"      python-pytest-directories)
+    ("F" "file (this)"                  python-pytest-file)
+    ("D" "def/class (this)"             python-pytest-function)
+    ("M" "directories"                  python-pytest-directories)
     ]
    [
     ]
@@ -69,6 +69,7 @@
   transient-quit!
   )
 
+;;;###autoload
 (defun +jg-python-pytest-dispatch ()
   (interactive)
   (python-pytest-dispatch)

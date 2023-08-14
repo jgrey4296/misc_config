@@ -1,5 +1,6 @@
 ;;; +related.el -*- lexical-binding: t; -*-
 
+
 ;;;###autoload
 (defun +jg-projects-find-related ()
   (interactive)
@@ -7,9 +8,11 @@
                        (+jg-projects-find-related-directory)
                        (projectile--find-related-file (buffer-file-name))))
                (buff-exists (f-exists? buff))
+               (wind-fn (if (boundp 'jg-workspaces-find-buff-fn)
+                            jg-workspaces-find-buff-fn
+                          #'+jg-workspace-default-new-window))
                )
-    (select-window (split-window-below))
-    (find-file buff)
+    (funcall wind-fn buff)
     )
   )
 
@@ -21,4 +24,9 @@
         )
 
     )
+  )
+
+(defun +jg-workspace-default-new-window (buff)
+  (select-window (split-window-below))
+  (find-file buff)
   )

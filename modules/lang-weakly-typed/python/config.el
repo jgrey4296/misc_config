@@ -46,6 +46,8 @@
     indent-line-function        #'py-indent-line
     indent-region-function      #'py-indent-region
     lsp-diagnostic-filter       #'+jg-python-lsp-flycheck-filter
+
+    jg-workspaces-find-buff-fn #'+jg-python-carousel-window-fn
     )
   ;;-- end hooks
 

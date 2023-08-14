@@ -51,6 +51,7 @@
  :emacs electric
  :ui deft doom
  :ui minimap ophints
- :tools editorconfig rgb
+ ;; :tools editorconfig
+ :tools rgb
  :os (:if IS-MAC macos) tty
  )

@@ -13,14 +13,16 @@
   ""
   []
   [""
-   ("q" "Quit" transient-quit-one)
+
    ]
+  transient-quit!
   )
 
 (transient-define-prefix jg-transient-carousel ()
   ""
   []
   [""
-   ("q" "Quit" transient-quit-one)
+
    ]
+  transient-quit!
   )

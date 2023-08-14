@@ -17,7 +17,7 @@
 (package! rainbow-mode)
 (package! smartparens)
 (package! transient)
-(package! transient-macros :recipe `(:local-repo ,(expand-file-name "packages/misc/transient-macros" doom-user-dir)))
+(package! transient-macros :recipe (:host github :repo "jgrey4296/transient-macros"))
 (package! tree-sitter)
 (package! tree-sitter-indent)
 (package! tree-sitter-langs)

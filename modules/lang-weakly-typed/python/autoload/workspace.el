@@ -1,6 +1,6 @@
 ;; workspace.el -*- lexical-binding: t; -*-
-
 (require 'related-files)
+(require 'carousel-minor-mode)
 
 ;;;###autoload (autoload 'related-files:jg-python-project "lang-weakly-typed/python/autoload/workspace.el" nil t)
 (make-related! jg-python-project
@@ -22,3 +22,9 @@
                        (log-file (f-join root (concat "log." fname)))
                        )
                )
+
+;;;###autoload
+(defun +jg-python-carousel-window-fn (buff)
+  (find-file buff)
+  (carousel-redisplay)
+  )

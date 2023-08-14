@@ -1,5 +1,6 @@
 ;;; general-insert.el -*- lexical-binding: t; -*-
 ;; TODO handle name conflicts between modes
+(require 'cl-lib)
 
 (defvar general-insert-location nil)
 

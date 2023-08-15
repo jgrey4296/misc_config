@@ -119,7 +119,7 @@
 
       (:prefix ("w" . "Words")
        :desc "inflection"                "i"    #'evil-operator-string-inflection
-       :desc "Rotate"                    "r"    #'Rotate-Text
+       :desc "Rotate"                    "r"    #'rotate-text
        )
 
       (:prefix ("e" . "encode")

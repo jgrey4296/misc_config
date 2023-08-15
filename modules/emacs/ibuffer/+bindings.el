@@ -15,13 +15,17 @@
 
 (map! :map jg-ibuffer-mode-map
       :desc "Visit"               :n "RET" #'+ibuffer/visit-workspace-buffer
+
+      :desc "toggle-sorting-mode" :n "," #'ibuffer-toggle-sorting-mode
+      :desc "Formats"             :n "." #'ibuffer-switch-format
+      :desc "Print Help"          :n "?" #'+jg-ibuffer-print-help
+
       :desc "Do Shell Cmd File"   :n "!" #'ibuffer-do-shell-command-file
 
       :desc "add-to-tmp-show"     :n "±" #'ibuffer-add-to-tmp-show
       :desc "add-to-tmp-hide"     :n "§" #'ibuffer-add-to-tmp-hide
       :desc "negative"            :n "_" #'negative-argument
 
-      :desc "toggle-sorting-mode" :n "," #'ibuffer-toggle-sorting-mode
       :desc "Forward Line"        :n "j" #'ibuffer-forward-line
       :desc "Back Line"           :n "k" #'ibuffer-backward-line
       :desc "Mark"                :n "m" #'ibuffer-mark-forward
@@ -29,7 +33,6 @@
       :desc "Unmark All"          :n "U" #'ibuffer-unmark-all-marks
       :desc "Toggle Marks"        :n "t" #'ibuffer-toggle-marks
       :desc "Update"              :n "g" #'ibuffer-update
-      :desc "Formats"             :n "f" #'ibuffer-switch-format
       :desc "Kill Marked"         :n "D" #'ibuffer-do-delete
       :desc "change-marks"        :n "c" #'ibuffer-change-marks
 

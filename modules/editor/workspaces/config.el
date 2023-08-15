@@ -173,7 +173,7 @@
   )
 
 (use-package! related-files
-  :autoload make-related!
+  :commands make-related!
   )
 
 (use-package! compile

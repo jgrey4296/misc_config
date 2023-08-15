@@ -83,6 +83,13 @@
      )
   )
 
+;;;###autoload
+(defun +jg-ibuffer-print-help ()
+  (interactive)
+  (message "Ibuffer: (Sort: ,) (Format: .) (Filter: \) (Jump: s) (Mark: -) (Mark-all: =) (Help: ?)")
+  )
+
+
 ;;-- test
 ;; (define-ibuffer-filter jg-projectile-root
 ;;     "Toggle current view to buffers with projectile root dir QUALIFIER."

@@ -7,4 +7,4 @@
 (package! counsel-projectile)
 (package! projectile)
 (package! neotree)
-(package! related-files :receipe (:host github :repo "jgrey4296/related-files"))
+(package! related-files :recipe (:host github :repo "jgrey4296/related-files"))

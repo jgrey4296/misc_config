@@ -4,23 +4,19 @@
 
 ;;;###autoload
 (defun +jg-text-manipulation-highlight-handler (prefix flag &optional arg)
-  (with-selected-window (minibuffer-selected-window)
-    (with-current-buffer evil-ex-current-buffer
-      (cond
-       ((eq flag 'start)
-        (evil-ex-make-hl 'evil-ex-pattern
-                         :face 'evil-ex-substitute-matches
-                         :update-hook #'evil-ex-pattern-update-ex-info
-                         ;; :match-hook (and jg-evil-ex-pattern-interactive-highlight #'evil-ex-pattern-update-replacement))
-                         )
-        (setq flag 'update))
+  (with-current-buffer evil-ex-original-buffer
+    (cond ((eq flag 'start)
+           (evil-ex-make-hl 'evil-ex-jg-pattern
+                            :face 'evil-ex-substitute-matches
+                            :win (minibuffer-selected-window)
+                            :update-hook #'evil-ex-pattern-update-ex-info
+                            ;; :match-hook (and jg-evil-ex-pattern-interactive-highlight #'evil-ex-pattern-update-replacement))
+                            )
+           (setq flag 'update))
+          ((eq flag 'stop)
+           (evil-ex-delete-hl 'evil-ex-jg-pattern)))
 
-       ((eq flag 'stop)
-        (evil-ex-delete-hl 'evil-ex-pattern)))
-      )
-
-    (when (and (eq flag 'update)
-               (not (zerop (length arg))))
+    (when (and (eq flag 'update) (not (zerop (length arg))))
       (condition-case lossage
           (let* ((result (+jg-text-manipulation-get-pattern-info arg t prefix))
                  (pattern (pop result))
@@ -32,14 +28,15 @@
                  )
             ;; (setq evil-ex-substitute-current-replacement replacement)
             (evil-expand-range range)
-            (evil-ex-hl-set-region 'evil-ex-pattern
+            (evil-ex-hl-set-region 'evil-ex-jg-pattern
                                    (evil-range-beginning range)
                                    (evil-range-end range))
-            (evil-ex-hl-change 'evil-ex-pattern pattern))
+            (evil-ex-hl-change 'evil-ex-jg-pattern pattern))
         (end-of-file
          (evil-ex-pattern-update-ex-info nil "incomplete patternment spec"))
         (user-error
-         (evil-ex-pattern-update-ex-info nil (format "%s" lossage))))))
+         (evil-ex-pattern-update-ex-info nil (format "%s" lossage)))))
+    )
   )
 
 ;;;###autoload
@@ -87,7 +84,7 @@ last search pattern is used. "
     ;; generate pattern
     (when pattern
       (setq pattern (+jg-text-manipulation-make-pattern pattern flags prefix)))
-    (list pattern flags)))
+    (list pattern)))
 
 (defun +jg-text-manipulation-make-pattern (regexp flags &optional prefix)
   "Create a PATTERN for patternment with FLAGS."

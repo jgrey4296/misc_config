@@ -25,6 +25,8 @@
 
 ;;;###autoload
 (defun +jg-python-carousel-window-fn (buff)
+  (unless (and (persp-parameter 'carousel)
+               (not (ring-empty-p (persp-parameter 'carousel-actual))))
+    (select-window (split-window-below)))
   (find-file buff)
-  (carousel-redisplay)
   )

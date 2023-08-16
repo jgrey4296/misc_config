@@ -1,4 +1,5 @@
 ;; cmds.el -*- lexical-binding: t; -*-
+(require 'lsp-mode)
 
 (defun +jg-ide-registered-lsp-clients ()
   (interactive)

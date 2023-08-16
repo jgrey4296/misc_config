@@ -62,28 +62,44 @@
 
 ;;;###autoload
 (defun +lsp-defer-server-shutdown-a (fn &optional restart)
-    "Defer server shutdown for a few seconds.
+  "Defer server shutdown for a few seconds.
 This gives the user a chance to open other project files before the server is
 auto-killed (which is a potentially expensive process). It also prevents the
 server getting expensively restarted when reverting buffers."
-    (if (or lsp-keep-workspace-alive
-            restart
-            (null +lsp-defer-shutdown)
-            (= +lsp-defer-shutdown 0))
-        (prog1 (funcall fn restart)
-          (+lsp-optimization-mode -1))
-      (when (timerp +lsp--deferred-shutdown-timer)
-        (cancel-timer +lsp--deferred-shutdown-timer))
-      (setq +lsp--deferred-shutdown-timer
-            (run-at-time
-             (if (numberp +lsp-defer-shutdown) +lsp-defer-shutdown 3)
-             nil (lambda (workspace)
-                   (with-lsp-workspace workspace
-                     (unless (lsp--workspace-buffers workspace)
-                       (let ((lsp-restart 'ignore))
-                         (funcall fn))
-                       (+lsp-optimization-mode -1))))
-             lsp--cur-workspace))))
+  (when (timerp +lsp--deferred-shutdown-timer)
+    (cancel-timer +lsp--deferred-shutdown-timer)
+    (setq +lsp--deferred-shutdown-timer nil))
+  (cond (restart
+         (prog1 (funcall fn restart)
+           (+lsp-optimization-mode -1)))
+
+        ((and lsp-keep-workspace-alive
+              (numberp +lsp-defer-shutdown)
+              (> +lsp-defer-shutdown 0))
+         (message "Deferring shutdown")
+         (setq +lsp--deferred-shutdown-timer
+               (run-with-timer (or +lsp-defer-shutdown 3) nil
+                            #'+lsp-defer-shutdown-action
+                            lsp--cur-workspace fn)))
+
+        (t (prog1 (funcall fn restart)
+             (+lsp-optimization-mode -1)))
+        )
+  )
+
+(defun +lsp-defer-shutdown-action (workspace fn)
+  (message "Shutting down Delayed LSP Workspace :%s" (lsp--workspace-print workspace))
+  (with-lsp-workspace workspace
+    (message "checking for buffers")
+    (let ((buffers (lsp--workspace-buffers workspace))
+          (lsp-restart 'ignore)
+          )
+      (message "Workspace Buffers: %s" buffers)
+      (unless buffers
+        (message "Calling shutdown")
+        (funcall fn)
+        (+lsp-optimization-mode -1))))
+  )
 
 ;;;###autoload
 (advice-add 'lsp--auto-configure :around #'+lsp--use-hook-instead-a)

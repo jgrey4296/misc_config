@@ -4,6 +4,9 @@
 
 (progn
   (transient-make-toggle! lsp-modeline-diagnostics-mode      "m" "Modeline Diagnostics")
+  (transient-make-call!   lsp-keep-alive
+                          (format "%-2s : Keep Alive" (fmt-as-bool! lsp-keep-workspace-alive))
+                          (setq lsp-keep-workspace-alive (not lsp-keep-workspace-alive)))
   (transient-make-call!   lsp-trace-io
                           (format "%-2s : Log IO" (fmt-as-bool! lsp-log-io))
                           (with-current-buffer transient--original-buffer
@@ -37,13 +40,14 @@
                         (with-current-buffer transient--original-buffer
                           (call-interactively #'+lsp/switch-client)))
   (transient-make-call! lsp-disconnect
-                        "Disconnect Sever"
+                        "Disconnect Server"
                         (with-current-buffer transient--original-buffer
                           (call-interactively #'lsp-disconnect)))
   (transient-make-call! lsp-shutdown
-                        "Shutdown Server"
-                        (with-current-buffer transient--original-buffer
-                        (call-interactively #'lsp-workspace-shutdown)))
+                        "Shutdown Servers"
+                        (dolist (workspace (lsp--session-workspaces lsp--session))
+                          (lsp-workspace-shutdown workspace)))
+
   (transient-make-call! lsp-restart
                         "Restart Server"
                         (with-current-buffer transient--original-buffer
@@ -74,7 +78,7 @@
                           )
 
 ;;;###autoload (autoload #'jg-lsp-toggle "tools/ide-support/autoload/transients" nil t)
-(transient-make-subgroup! jg-toggle-lsp "l"
+(transient-make-subgroup! jg-lsp-toggle "l"
                           "Main controller for ui settings"
                           :desc "|| LSP        ||"
                           [
@@ -87,6 +91,7 @@
                             [ " "
                              (jg-transient-toggle-lsp-lens-mode)
                              (jg-transient-toggle-lsp-modeline-code-actions-mode)
+                             ("k" jg-transient-call-lsp-keep-alive)
                              ("i" jg-transient-call-lsp-trace-io)
                              ]
                             [ " "
@@ -100,5 +105,5 @@
 
 ;;;###autoload
 (defun +jg-ide-extend-toggles ()
-  (transient-append-suffix 'jg-toggle-main "w" jg-toggle-lsp)
+  (transient-append-suffix 'jg-toggle-main "w" jg-lsp-toggle)
   )

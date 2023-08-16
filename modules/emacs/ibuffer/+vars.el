@@ -23,7 +23,10 @@
                   )
           (* any)
           )
-       (: "markdown-code-fontification" (* any))
+       (: (or "markdown-code-fontification"
+              "org-src-fontification"
+              )
+          (* any))
        )
       )
   )

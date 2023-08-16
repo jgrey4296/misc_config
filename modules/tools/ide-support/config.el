@@ -53,7 +53,7 @@
                       )
 
   ;; override what is auto loaded
-  (setq lsp-client-package nil)
+  (setq lsp-client-packages nil)
 
 
   :config

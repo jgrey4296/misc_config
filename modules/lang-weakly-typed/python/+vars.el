@@ -102,9 +102,11 @@
 ;;-- lsp
 (setq lsp-pyright-extra-paths #'[]
       lsp-pyright-venv-path conda-env-home-directory
-      lsp-pyright-log-level "warning"
+      lsp-pyright-log-level "Information" ;; Error Warning Information Trace
+      lsp-pyright-typechecking-mode "basic"
 
-      lsp-ruff-lsp-advertize-fix-all            t
+
+      lsp-ruff-lsp-advertize-fix-all            nil
       lsp-ruff-lsp-advertize-organize-imports   t
       lsp-ruff-lsp-show-notifications           "always"
       lsp-ruff-lsp-log-level                    "info"

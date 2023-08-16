@@ -1,4 +1,5 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
+(require 'rx)
 
 ;;-- lsp
 
@@ -39,12 +40,20 @@
 )
 
 ;; Ignore Directories
-(setq lsp-file-watch-ignored-directories (list (rx "\/" (|
-                                                   "Library" "checkouts" "_FOSSIL_" "_build" "_darcs" "_opam" "autom4te.cache" "bazel-[^/\\]+" "bin/Debug" "build-aux" "dist-newstyle" "dist" "node_modules" "obj" "target" "build" "docs" "data"
-                                                   (: "." (| "temp" "babel_cache" "bloop" "bzr" "ccls-cache" "circleci" "clj-kondo" "cpcache" "deps" "direnv" "elixir_ls" "ensime_cache" "eunit" "fslckout" "git" "github" "gradle" "hg" "idea" "lsp" "m2" "meta" "metals" "mypy_cache" "nox" "reference" "shadow-cljs" "stack-work" "svn" "terraform" "terragrunt-cache" "tox" "venv" "vscode" "yarn"))
-                                                   )
-                                                   eos
-                                                   ))
+(setq lsp-file-watch-ignored-directories
+      (list
+             (rx "\/" (| "Library" "checkouts" "_FOSSIL_" "_build" "_darcs" "_opam"))
+             (rx "\/" (| "autom3te.cache" "bazel-[^/\\]+" "bin/Debug" "build-aux"))
+             (rx "\/" (| "dist-newstyle" "dist" "node_modules" "obj" "target" "build" "docs"))
+             (rx "\/" (| "data"))
+
+             (rx "\/." (| "temp" "babel_cache" "bloop" "bzr" "ccls-cache"))
+             (rx "\/." (| "circleci" "clj-kondo" "cpcache" "deps" "direnv" "elixir_ls"))
+             (rx "\/." (| "ensime_cache" "eunit" "fslckout" "git" "github" "gradle" "hg"))
+             (rx "\/." (| "idea" "lsp" "m2" "meta" "metals" "mypy_cache" "nox" "reference"))
+             (rx "\/." (| "shadow-cljs" "stack-work" "svn" "terraform" "terragrunt-cache"))
+             (rx "\/." (| "tox" "venv" "vscode" "yarn"))
+             )
       )
 
 ;; UI imenu

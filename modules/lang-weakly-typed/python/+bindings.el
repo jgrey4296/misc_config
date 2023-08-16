@@ -103,6 +103,8 @@
 
 (map! :map dired-mode-map
       :after jg-dired-bindings
+      :desc "Make Test dir"  :n "< t" (cmd! (dired-create-directory "__tests"))
+      :desc "Make Docs dir"  :n "< t" (cmd! (dired-create-directory "docs"))
       :localleader
       :desc "Try Python site-packages" "p" #'+jg-python-try-site-packages
 

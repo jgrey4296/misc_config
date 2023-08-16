@@ -91,6 +91,7 @@
 ;;-- packages
 (map! :map jg-help-map
       :prefix ("p" . "Packages")
+      :desc "Sraight Repos"  "1" (cmd! (find-file (expand-file-name "straight/repos" straight-base-dir)))
       "c" #'doom/help-package-config
       "d" #'doom/goto-private-packages-file
       "h" #'doom/help-package-homepage
@@ -99,6 +100,7 @@
       "L" #'doom/help-search-loaded-files
       "m" #'doom/help-modules
       "V" #'doom/version
+      "r" #'straight-rebuild-package
       :desc "Emacs Version Config"               "v"   #'+jg-help-system-config
       )
 ;;-- end packages

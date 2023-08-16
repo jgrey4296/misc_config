@@ -13,7 +13,7 @@
       :desc "LSP Code actions"                      "a"   #'lsp-avy-lens
       :desc "LSP Rename"                            "R"   #'lsp-rename
       :desc "List errors"                           "x"   #'flycheck-list-errors
-      :desc "jump to symbol in current workspace"   "j"   #'+jg-lsp-describe-workspace-symbol
+      ;; :desc "jump to symbol in current workspace"   "j"   #'+jg-lsp-describe-workspace-symbol
       ;; :desc "Jump to symbol in any workspace"       "J"   #'lsp-ivy-global-workspace-symbol
       )
 

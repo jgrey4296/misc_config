@@ -84,10 +84,13 @@
       :desc "Project"             :n "p" #'+jg-dired-cookiecutter
       )
 (map! :map jg-dired-mode-map ;; change, specific
-      :prefix (">" . "File Type Specific")
-      (:prefix ("p" . "pdf"))
-      (:prefix ("d" . "pandoc"))
-      (:prefix ("b" . "bibtex"))
+      (:prefix (">" . "File Type Specific"))
+      (:prefix ("<" . "Make std dirs")
+       :desc "Make Tasks Dir" :n "T" (cmd! (dired-create-directory ".tasks"))
+       )
+      ;; (:prefix ("p" . "pdf"))
+      ;; (:prefix ("d" . "pandoc"))
+      ;; (:prefix ("b" . "bibtex"))
       )
 (map! :map jg-dired-mode-map ;; describe
       :prefix ("d" . "describe")

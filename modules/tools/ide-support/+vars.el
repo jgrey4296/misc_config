@@ -57,12 +57,12 @@
 ;;-- end eglot
 
 ;;-- ignore dirs
-(setq lsp-file-watch-ignored-directories (rx "\/" (|
+(setq lsp-file-watch-ignored-directories (list (rx "\/" (|
                                                    "Library" "checkouts" "_FOSSIL_" "_build" "_darcs" "_opam" "autom4te.cache" "bazel-[^/\\]+" "bin/Debug" "build-aux" "dist-newstyle" "dist" "node_modules" "obj" "target" "build" "docs" "data"
                                                    (: "." (| "temp" "babel_cache" "bloop" "bzr" "ccls-cache" "circleci" "clj-kondo" "cpcache" "deps" "direnv" "elixir_ls" "ensime_cache" "eunit" "fslckout" "git" "github" "gradle" "hg" "idea" "lsp" "m2" "meta" "metals" "mypy_cache" "nox" "reference" "shadow-cljs" "stack-work" "svn" "terraform" "terragrunt-cache" "tox" "venv" "vscode" "yarn"))
                                                    )
-                                             eos
-                                             )
+                                                   eos
+                                                   ))
       )
 
 ;;-- end ignore dirs

@@ -2,15 +2,11 @@
 
 (doom-log "Loading Python LSP")
 
-(use-package! lsp-jedi
-  :after (python-mode lsp-mode)
-  )
-
 (after! lsp-mode
   (load! "lsp/custom-pylsp")
   (load! "lsp/custom-pyright-lsp")
   (load! "lsp/custom-ruff-lsp")
-
+  (load! "lsp/custom-lsp-jedi")
 
   (lsp-register-client ;; pyright
    (make-lsp-client

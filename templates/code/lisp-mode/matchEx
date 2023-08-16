@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: matchEx
-# key: matchEx
-# --
-(list
-    (re-search-forward "\\($1\\)")
-    (match-beginning 0)
-    (match-end 0))

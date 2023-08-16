@@ -12,9 +12,6 @@
 (package! flycheck-cython)
 (package! flymake-ruff)
 
-;; LSP
-(package! lsp-jedi)
-
 ;; Programming environment
 (package! anaconda-mode)
 (package! company-anaconda)

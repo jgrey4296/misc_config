@@ -3,6 +3,7 @@
 (map! :map jg-help-map
       "'"    #'describe-char
       "f"    #'describe-function
+      "c"    #'+jg-help-describe-class
       "v"    #'describe-variable
       "l"    #'view-lossage
       "t"    #'list-timers
@@ -36,13 +37,6 @@
 
       )
 ;;-- end docs
-
-;;-- code
-(map! :map jg-help-map
-      :prefix ("c" . "code")
-      )
-
-;;-- end code
 
 ;;-- ui
 (map! :map jg-help-map

@@ -370,7 +370,8 @@ So it will rename only references it can find."
             python-env))))))
 
 (lsp-register-custom-settings
- '(("pylsp.rope.ropeFolder"                                  lsp-pylsp-rope-rope-folder)
+ '(
+   ("pylsp.rope.ropeFolder"                                  lsp-pylsp-rope-rope-folder)
    ("pylsp.rope.extensionModules"                            lsp-pylsp-rope-extension-modules)
    ("pylsp.plugins.rope_rename.enabled"                      (lambda () (eq lsp-pylsp-rename-backend 'rope)) t)
    ("pylsp.plugins.autopep8.enabled"                         lsp-pylsp-plugins-autopep8-enabled t)
@@ -421,7 +422,8 @@ So it will rename only references it can find."
    ("pylsp.plugins.jedi.environment"                         lsp-pylsp-get-pyenv-environment)
    ("pylsp.plugins.jedi_completion.fuzzy"                    lsp-pylsp-plugins-jedi-completion-fuzzy t)
    ("pylsp.plugins.jedi_rename.enabled"                      (lambda () (eq lsp-pylsp-rename-backend 'jedi)) t)
-   ("pylsp.configurationSources"                             lsp-pylsp-configuration-sources)))
+   ("pylsp.configurationSources"                             lsp-pylsp-configuration-sources))
+ )
 
 
 (lsp-consistency-check lsp-pylsp)

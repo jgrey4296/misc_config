@@ -22,7 +22,7 @@
  :lang-data csv graphql dot
  :lang-data xml toml json yaml logs
 
- :lang-dsl acab-ide ai-and-logic
+ :lang-dsl acab ai-and-logic
  :lang-dsl rest sh nix
  :lang-dsl qt
  ;; :lang-dsl music

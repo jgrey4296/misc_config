@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: defkey
-# key: defkey
-# --
-(define-key map (kbd "C-c $1") '$2)$0

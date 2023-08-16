@@ -56,6 +56,9 @@
 
 ;;-- lsp commands
 (map! :map lsp-command-map
+      "?" #'+jg-ide-registered-lsp-clients
+      "-" #'+jg-ide-disable-lsp-client
+      "=" #'+jg-ide-enable-lsp-client
       (:prefix ("=" . "Formatting"))
       (:prefix ("F" . "Folders"))
       (:prefix ("r" . "Refactoring"))

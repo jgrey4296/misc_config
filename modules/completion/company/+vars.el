@@ -34,6 +34,8 @@
 
   )
 
+(add-to-list 'evil-escape-inhibit-functions #'company--active-p)
+
 ;; company-keywords
 ;; company-math-symbols-unicode
 ;; company-dict

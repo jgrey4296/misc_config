@@ -2,9 +2,7 @@
 
 (load! "+vars")
 (load! "+spec-defs")
-(after! jg-bindings-total
-  (load! "+bindings")
-  )
+(defer-load! jg-bindings-total "+bindings")
 (add-hook! 'minibuffer-inactive-mode-hook :append #'company-mode)
 (add-hook! 'minibuffer-setup-hook :append #'company-mode)
 

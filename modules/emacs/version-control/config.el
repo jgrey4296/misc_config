@@ -124,8 +124,7 @@
     ;; Rehash evil keybindings so they are recognized
     (add-hook 'git-timemachine-mode-hook #'evil-normalize-keymaps))
 
-  (when (modulep! :tools magit)
-    (add-transient-hook! #'git-timemachine-blame (require 'magit-blame)))
+  (require 'magit-blame)
 )
 
 (use-package! git-commit

@@ -13,6 +13,9 @@
       (:prefix ("e" . "eval")
        :desc "Byte Compile" :n "c" (cmd! (byte-compile-file buffer-file-name))
        )
+      (:prefix ("i" . "Insert")
+       :desc "Insert Palette Faces" "c" #'+jg-ui-insert-faces
+       )
       )
 
 (map! :map (emacs-lisp-mode-map lisp-interaction-mode-map)

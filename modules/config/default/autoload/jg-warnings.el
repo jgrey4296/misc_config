@@ -16,14 +16,14 @@
 	   (old (get-buffer (or buffer-name "*Warnings*")))
 	   (buffer (or old (get-buffer-create (or buffer-name "*Warnings*"))))
            )
-      (+jg-default-warning-formatter buffer old level message)
+      (+jg-default-warning-formatter buffer old type level message)
       (+jg-default-warning-display buffer type level)
       t
       )
     )
   )
 
-(defun +jg-default-warning-formatter (buffer old level message)
+(defun +jg-default-warning-formatter (buffer old type level message)
   (with-current-buffer buffer
     (unless old ;; If we created the buffer, disable undo.
       (when (fboundp 'special-mode) (special-mode))  ; Undefined during bootstrap.

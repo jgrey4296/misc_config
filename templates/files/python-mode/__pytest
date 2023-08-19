@@ -12,8 +12,10 @@ from typing import (Any, Callable, ClassVar, Generic, Iterable, Iterator,
 import warnings
 
 import pytest
+
 logging = logmod.root
 
+##-- pytest reminder
 # caplog
 # mocker.patch | patch.object | patch.multiple | patch.dict | stopall | stop | spy | stub
 # pytest.mark.filterwarnings
@@ -22,6 +24,8 @@ logging = logmod.root
 # with pytest.deprecated_call
 # with pytest.raises
 # with pytest.warns(warntype)
+
+##-- end pytest reminder
 
 class Test$1:
 

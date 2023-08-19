@@ -18,11 +18,11 @@
                         )
 (transient-make-toggle! global-flycheck-mode "F" "Flycheck")
 (transient-make-call!   run-spec-handlers
-                      (let ((str  "Run Spec Handlers"))
-                        (put-text-property 0 (length str) 'face 'transient-heading str)
-                        str)
-                      (run-spec-handlers)
-                      )
+                        (let ((str  "Run Spec Handlers"))
+                          (put-text-property 0 (length str) 'face 'transient-heading str)
+                          str)
+                        (run-spec-handlers)
+                        )
 (transient-make-call!   general-insert-rebuild-cache
                         (let ((str  "Clear General-Insert Cache"))
                           (put-text-property 0 (length str) 'face 'transient-heading str)
@@ -53,23 +53,23 @@
 
   )
 (transient-make-subgroup! jg-toggle-visuals "v"
-  "For controlling ui visual settings"
-  :desc "|| Visuals    ||"
-  [[
-   (jg-transient-toggle-evil-goggles-mode)
-   (jg-transient-toggle-hl-line-mode)
-   ("i" jg-transient-call-invisible)
-   (jg-transient-toggle-highlight-changes-visible-mode)
-   ("l" jg-transient-call-link-display)
-   ]
-  [
-   (jg-transient-toggle-rainbow-mode)
-   (jg-transient-toggle-global-prettify-symbols-mode)
-   ("s" jg-transient-call-quickscope)
-   (jg-transient-toggle-highlight-parentheses-mode)
-   ]
-  ]
-  )
+                          "For controlling ui visual settings"
+                          :desc "|| Visuals    ||"
+                          [[
+                            (jg-transient-toggle-evil-goggles-mode)
+                            (jg-transient-toggle-hl-line-mode)
+                            ("i" jg-transient-call-invisible)
+                            (jg-transient-toggle-highlight-changes-visible-mode)
+                            ("l" jg-transient-call-link-display)
+                            ]
+                           [
+                            (jg-transient-toggle-rainbow-mode)
+                            (jg-transient-toggle-global-prettify-symbols-mode)
+                            ("s" jg-transient-call-quickscope)
+                            (jg-transient-toggle-highlight-parentheses-mode)
+                            ]
+                           ]
+                          )
 
 ;; Guides
 (progn
@@ -78,7 +78,7 @@
   (transient-make-toggle! ruler-mode "r" "Ruler")
   (transient-make-toggle! whitespace-mode "w" "Whitespace")
   (transient-make-call!   spelling
-                            (format "%-2s : Spelling" (fmt-as-bool! flyspell-mode))
+                          (format "%-2s : Spelling" (fmt-as-bool! flyspell-mode))
                           (flyspell-mode 'toggle)
                           (writegood-mode (if flypsell-mode 1 -1))
                           )
@@ -86,18 +86,18 @@
 
   )
 (transient-make-subgroup! jg-toggle-guides "g"
-  "For controlling ui guide settings"
-  :desc "|| Guides     ||"
-  [[
-    (jg-transient-toggle-display-fill-column-indicator-mode)
-    (jg-transient-toggle-highlight-indent-guides-mode)
-    (jg-transient-toggle-display-line-numbers-mode)
-    ] [
-    (jg-transient-toggle-ruler-mode)
-    (jg-transient-toggle-whitespace-mode)
-    ("s" jg-transient-call-spelling)
-    ] ]
-  )
+                          "For controlling ui guide settings"
+                          :desc "|| Guides     ||"
+                          [[
+                            (jg-transient-toggle-display-fill-column-indicator-mode)
+                            (jg-transient-toggle-highlight-indent-guides-mode)
+                            (jg-transient-toggle-display-line-numbers-mode)
+                            ] [
+                            (jg-transient-toggle-ruler-mode)
+                            (jg-transient-toggle-whitespace-mode)
+                            ("s" jg-transient-call-spelling)
+                            ] ]
+                          )
 
 ;; Nav
 (progn
@@ -119,19 +119,19 @@
 
   )
 (transient-make-subgroup! jg-toggle-nav "n"
-  "For controlling ui nav settings"
-  :desc "|| Navigation ||"
-  [ [
-    (jg-transient-toggle-centered-cursor-mode)
-    ("b" jg-transient-call-auto-balance)
-    (jg-transient-toggle-minimap-mode)
-    (jg-transient-toggle-evil-visual-mark-mode)
-   ] [
-    ("n" jg-transient-call-neotree)
-    ("f" jg-transient-call-frame-fullscreen)
-    ] [
-    ] ]
-  )
+                          "For controlling ui nav settings"
+                          :desc "|| Navigation ||"
+                          [ [
+                             (jg-transient-toggle-centered-cursor-mode)
+                             ("b" jg-transient-call-auto-balance)
+                             (jg-transient-toggle-minimap-mode)
+                             (jg-transient-toggle-evil-visual-mark-mode)
+                             ] [
+                             ("n" jg-transient-call-neotree)
+                             ("f" jg-transient-call-frame-fullscreen)
+                             ] [
+                             ] ]
+                          )
 
 ;; Wrap
 (progn
@@ -143,21 +143,21 @@
                         )
   (transient-make-call! auto-fill-mode
                         (format "%-2s : Auto-fill" (fmt-as-bool!
-                                                  auto-fill-function))
+                                                    auto-fill-function))
                         (auto-fill-mode 'toggle)
                         )
   )
 (transient-make-subgroup! jg-toggle-wrap "w"
-  "For controlling ui wrap settings"
-  :desc "|| Wrapping   ||"
-  [[
-    ("f" jg-transient-call-auto-fill-mode)
-    (jg-transient-toggle-visual-line-mode)
-    (jg-transient-toggle-+word-wrap-mode)
-    ("t" jg-transient-call-truncate-lines)
-   ]
-  ]
-  )
+                          "For controlling ui wrap settings"
+                          :desc "|| Wrapping   ||"
+                          [[
+                            ("f" jg-transient-call-auto-fill-mode)
+                            (jg-transient-toggle-visual-line-mode)
+                            (jg-transient-toggle-+word-wrap-mode)
+                            ("t" jg-transient-call-truncate-lines)
+                            ]
+                           ]
+                          )
 
 ;; Debug
 (progn
@@ -181,16 +181,16 @@
                           " debug toggles "
                           :desc "|| Debug      ||"
                           [ [
-                           ("e" jg-transient-call-debug-on-error)
-                           ("v" jg-transient-call-debug-on-var)
-                           ("f" jg-transient-call-debug-func)
-                           ]
-                          [
-                           " "
-                           ("V" jg-transient-call-cancel-debug-on-var)
-                           ("F" jg-transient-call-cancel-debug-func)
+                             ("e" jg-transient-call-debug-on-error)
+                             ("v" jg-transient-call-debug-on-var)
+                             ("f" jg-transient-call-debug-func)
+                             ]
+                            [
+                             " "
+                             ("V" jg-transient-call-cancel-debug-on-var)
+                             ("F" jg-transient-call-cancel-debug-func)
 
-                           ] ]
+                             ] ]
                           )
 
 ;; Top Level Toggle
@@ -211,44 +211,44 @@
   )
 
 ;;;###autoload (autoload #'jg-toggle-main "config/ui/autoload/transient-toggles" nil t)
-  (transient-define-prefix jg-toggle-main ()
-    "Main controller for ui settings"
-    [ [
-       jg-toggle-debugs
-       jg-toggle-guides
-       jg-toggle-nav
-       jg-toggle-visuals
-       jg-toggle-wrap
-       ]
-      [
-       (jg-transient-toggle-global-hl-line-mode)
-       (jg-transient-toggle-hide-mode-line-mode)
-       (jg-transient-toggle-global-prettify-symbols-mode)
-       (jg-transient-toggle-global-highlight-changes-mode)
-       ] [
-       (jg-transient-toggle-global-code-shy-minor-mode)
-       (jg-transient-toggle-smartparens-global-mode)
-       (jg-transient-toggle-global-centered-cursor-mode)
-       (jg-transient-toggle-global-company-mode)
-       ] [
-       ("r" jg-transient-call-read-only)
-       ("E" jg-transient-call-evil-embrace)
-       ("e" jg-transient-call-debug-on-error)
-       ] ]
-    [
-     ("!" jg-transient-call-run-spec-handlers)
-     ("@" jg-transient-call-general-insert-rebuild-cache)
+(transient-define-prefix jg-toggle-main ()
+  "Main controller for ui settings"
+  [ [
+     jg-toggle-debugs
+     jg-toggle-guides
+     jg-toggle-nav
+     jg-toggle-visuals
+     jg-toggle-wrap
      ]
-    transient-quit!
-    )
+    [
+     (jg-transient-toggle-global-hl-line-mode)
+     (jg-transient-toggle-hide-mode-line-mode)
+     (jg-transient-toggle-global-prettify-symbols-mode)
+     (jg-transient-toggle-global-highlight-changes-mode)
+     ] [
+     (jg-transient-toggle-global-code-shy-minor-mode)
+     (jg-transient-toggle-smartparens-global-mode)
+     (jg-transient-toggle-global-centered-cursor-mode)
+     (jg-transient-toggle-global-company-mode)
+     ] [
+     ("r" jg-transient-call-read-only)
+     ("E" jg-transient-call-evil-embrace)
+     ("e" jg-transient-call-debug-on-error)
+     ] ]
+  [
+   ("!" jg-transient-call-run-spec-handlers)
+   ("@" jg-transient-call-general-insert-rebuild-cache)
+   ]
+  transient-quit!
+  )
 
 ;;;###autoload
 (define-minor-mode transient-toggles-minor-mode
-    "  "
-    :init-value nil
-    :lighter ""
-    :global t
-    :keymap (make-sparse-keymap)
-)
+  "  "
+  :init-value nil
+  :lighter ""
+  :global t
+  :keymap (make-sparse-keymap)
+  )
 
 (provide 'transient-toggles)

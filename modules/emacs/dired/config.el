@@ -19,7 +19,6 @@
 
   (setq dired-listing-switches (string-join dired-args " "))
 
-  (add-hook! 'dired-mode-hook '+dired-disable-gnu-ls-flags-maybe-h)
 
   (put 'dired-find-alternate-file 'disabled nil)
 
@@ -28,6 +27,10 @@
     :before-while #'dired-buffer-stale-p
     (not (eq revert-buffer-function #'dired-virtual-revert)))
 
+
+  (add-hook! 'dired-mode-hook '+dired-disable-gnu-ls-flags-maybe-h)
+  ;; (add-hook! 'dired-after-readin-hook nil)
+  ;; (add-hook! 'dired-before-readin-ook nil)
   )
 
 (use-package! dired-quick-sort

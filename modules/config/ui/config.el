@@ -156,21 +156,3 @@
 
 
 ;;-- end transient
-
-;;-- tree sitter
-
-(use-package! tree-sitter
-  :defer t
-  :config
-  (require 'tree-sitter-langs)
-  )
-
-(use-package! evil-textobj-tree-sitter
-  :after (evil tree-sitter which-key)
-  :config
-  (setq which-key-allow-multiple-replacements t)
-  (pushnew! which-key-replacement-alist
-            '(("" . "\\`+?evil-textobj-tree-sitter-function--\\(.*\\)\\(?:.inner\\|.outer\\)") . (nil . "\\1")))
-  )
-
-;;-- end tree sitter

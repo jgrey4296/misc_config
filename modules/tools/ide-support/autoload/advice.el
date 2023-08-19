@@ -133,3 +133,11 @@ server getting expensively restarted when reverting buffers."
                           (+lsp-optimization-mode -1))))
                 server)))
       (funcall fn server)))
+
+;;;###autoload
+(defun +lsp--log-diagnostic-build (&rest args)
+  (message "Building Diagnostics: %s" args)
+  )
+
+;;;###autoload
+(advice-add 'lsp-diagnostics--flycheck-level :before #'+lsp--log-diagnostic-build)

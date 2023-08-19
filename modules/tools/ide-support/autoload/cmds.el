@@ -1,6 +1,7 @@
 ;; cmds.el -*- lexical-binding: t; -*-
 (require 'lsp-mode)
 
+;;;###autoload
 (defun +jg-ide-registered-lsp-clients ()
   (interactive)
   (with-temp-buffer-window "*LSP Clients*" #'popup-window nil
@@ -15,6 +16,7 @@
     )
   )
 
+;;;###autoload
 (defun +jg-ide-disable-lsp-client ()
   (interactive)
   (ivy-read "Disable Client: "
@@ -28,6 +30,7 @@
             )
   )
 
+;;;###autoload
 (defun +jg-ide-enable-lsp-client ()
   (interactive)
   (ivy-read "Enable Client: "

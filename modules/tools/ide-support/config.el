@@ -208,4 +208,11 @@
 
 ;;-- end flycheck
 
+(use-package! tree-sitter
+  :defer t
+  :config
+  (require 'tree-sitter-langs)
+  )
+
+
 ;;; config.el ends here

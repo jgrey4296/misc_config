@@ -4,13 +4,32 @@
 ;;-- lsp
 
 ;; General
-(setq lsp-keep-workspace-alive nil
-      lsp-enable-folding               nil             ;; can be slow
-      lsp-enable-text-document-color   nil             ;; ditto
-      lsp-enable-on-type-formatting    nil
-      lsp-headerline-breadcrumb-enable nil
-      lsp-disabled-clients             nil
- )
+(setq lsp-auto-configure                 nil
+      lsp-enable-dap-auto-configure      nil
+
+      lsp-enable-file-watchers           nil
+      lsp-enable-folding                 nil             ;; can be slow
+      lsp-enable-imenu                   nil
+      lsp-enable-indentation             nil
+      lsp-enable-links                   nil
+      lsp-enable-on-type-formatting      nil
+      lsp-enable-relative-indentation    nil
+      lsp-enable-semantic-highlighting   nil
+      lsp-enable-snippet                 nil
+      lsp-enable-suggest-server-download nil
+      lsp-enable-symbol-highlighting     nil
+      lsp-enable-text-document-color     nil             ;; can be slow
+      lsp-enable-xref                    t
+
+      lsp-eldoc-enable-hover t
+      lsp-eldoc-render-all t
+      lsp-completion-enable              nil
+      lsp-headerline-breadcrumb-enable   nil
+
+      lsp-keep-workspace-alive           nil
+      lsp-enabled-clients                nil
+      lsp-disabled-clients               nil
+      )
 
 ;; UI Peek
 (setq lsp-ui-peek-enable      t
@@ -28,6 +47,7 @@
       lsp-ui-doc-show-with-cursor t
       lsp-ui-doc-position 'bottom
       lsp-ui-doc-include-signature t
+      lsp-ui-doc-use-childframe nil
 )
 
 ;; UI Sideline
@@ -97,6 +117,12 @@
 
 ;;-- end flycheck
 
+;;-- tree-sitter
+(setq tree-sitter-debug-jump-buttons t ;; This makes every node a link to a section of code
+      tree-sitter-debug-highlight-jump-region t ;; and this highlights the entire sub tree in your code
+      )
+;;-- end tree-sitter
+
 ;;-- specs
 (spec-handling-add! popup
                     '(lsp
@@ -148,4 +174,15 @@
                       )
                     )
 
+(spec-handling-add! tree-sit-lang
+                '(agda-mode       . agda)
+                '(c-mode          . c)
+                '(c++-mode        . cpp)
+
+                '(elm-mode        . elm)
+
+                '(julia-mode      . julia)
+                '(ruby-mode       . ruby)
+                '(tuareg-mode     . ocaml)
+                )
 ;;-- end specs

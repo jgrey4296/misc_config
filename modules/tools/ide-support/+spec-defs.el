@@ -15,3 +15,11 @@
 (spec-handling-new! eglot eglot-server-programs :loop 'collect
                     (cons key val)
                     )
+
+(spec-handling-new! tree-sit-lang
+                    tree-sitter-major-mode-language-alist
+                    :doc "Match modes to grammars in `tree-sitter-langs-grammar-dir`"
+                    :struct '(key-mode . grammar)
+                    :loop 'collect
+                    `(,key . ,val)
+                    )

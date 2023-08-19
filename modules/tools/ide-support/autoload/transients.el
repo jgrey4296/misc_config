@@ -1,8 +1,12 @@
 ;; transients.el -*- lexical-binding: t; -*-
 (require 'transient)
-
+;; https://emacs-lsp.github.io/lsp-mode/tutorials/how-to-turn-off/
 
 (progn
+  (transient-make-call! lsp-doc-childframe
+                        (format "%-2s : Doc Childframe" (fmt-as-bool! lsp-ui-doc-use-childframe))
+                        (setq lsp-ui-doc-use-childframe (not lsp-ui-doc-use-childframe))
+                        )
   (transient-make-toggle! lsp-modeline-diagnostics-mode      "m" "Modeline Diagnostics")
   (transient-make-call!   lsp-keep-alive
                           (format "%-2s : Keep Alive" (fmt-as-bool! lsp-keep-workspace-alive))
@@ -82,25 +86,28 @@
                           "Main controller for ui settings"
                           :desc "|| LSP        ||"
                           [
-                            [ jg-lsp-session-control
-                             (jg-transient-toggle-lsp-headerline-breadcrumb-mode)
+                           [ "View Control"
+                            (jg-transient-toggle-lsp-headerline-breadcrumb-mode)
+                            (jg-transient-toggle-lsp-lens-mode)
+                            ("S" jg-transient-call-lsp-auto-signature)
+                            (jg-transient-toggle-lsp-ui-sideline-mode)
+                            (jg-transient-toggle-lsp-ui-doc-mode)
+                            ("f" jg-transient-call-lsp-doc-childframe)
+                            ]
+                           [ "Diagnostics"
                              (jg-transient-toggle-lsp-modeline-diagnostics-mode)
-                             (jg-transient-toggle-lsp-ui-doc-mode)
-                             (jg-transient-toggle-lsp-ui-sideline-mode)
-                             ]
-                            [ " "
-                             (jg-transient-toggle-lsp-lens-mode)
                              (jg-transient-toggle-lsp-modeline-code-actions-mode)
+                             ]
+                           [ "Settings"
+                             jg-lsp-session-control
+                             ("F" jg-transient-call-lsp-on-type-formatting)
+                             (jg-transient-toggle-lsp-treemacs-sync-mode)
+                             ("H" jg-transient-call-lsp-highlighting)
+
                              ("k" jg-transient-call-lsp-keep-alive)
                              ("i" jg-transient-call-lsp-trace-io)
                              ]
-                            [ " "
-                             ("F" jg-transient-call-lsp-on-type-formatting)
-                             ("S" jg-transient-call-lsp-auto-signature)
-                             (jg-transient-toggle-lsp-treemacs-sync-mode)
-                             ("H" jg-transient-call-lsp-highlighting)
-                             ]
-                            ]
+                           ]
                           )
 
 ;;;###autoload

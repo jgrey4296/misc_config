@@ -212,6 +212,14 @@
   :config (global-anzu-mode +1)
   )
 
+(use-package! evil-textobj-tree-sitter
+  :after (evil tree-sitter which-key)
+  :config
+  (setq which-key-allow-multiple-replacements t)
+  (pushnew! which-key-replacement-alist
+            '(("" . "\\`+?evil-textobj-tree-sitter-function--\\(.*\\)\\(?:.inner\\|.outer\\)") . (nil . "\\1")))
+  )
+
 (use-package! exato
   :commands evil-outer-xml-attr evil-inner-xml-attr
   )

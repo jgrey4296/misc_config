@@ -9,3 +9,10 @@
 (defvar +lsp--optimization-init-p nil)
 
 (defvar +lsp--deferred-shutdown-timer nil)
+
+(defvar +tree-sitter-hl-enabled-modes '(not web-mode typescript-tsx-mode)
+  "A list of major modes which should be highlighted by tree-sitter.
+
+If this list begins with `not', then it negates the list.
+If it is t, it is enabled in all modes.
+If nil, it is disabled in all modes")

@@ -23,6 +23,7 @@
 (package! evil-visual-mark-mode)
 (package! evil-visualstar)
 
+(package! evil-textobj-tree-sitter)
 (package! exato)
 
 (package! evil-collection)

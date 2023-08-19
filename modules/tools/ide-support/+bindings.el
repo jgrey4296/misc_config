@@ -1,15 +1,34 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
-(setq lsp-mode-map (make-sparse-keymap)
-      lsp-command-map (make-sparse-keymap)
-      lsp-signature-mode-map (make-sparse-keymap)
-      lsp-ui-imenu-mode-map (make-sparse-keymap)
-      )
-(evil-make-overriding-map lsp-mode-map)
+;;-- map defs
+
+(defvar jg-lsp-mode-map           (make-sparse-keymap))
+
+(defvar jg-lsp-command-map        (make-sparse-keymap))
+
+(defvar jg-lsp-signature-mode-map (make-sparse-keymap))
+
+(defvar jg-lsp-ui-imenu-mode-map  (make-sparse-keymap))
+
+(defvar jg-lsp-ui-peek-mode-map   (make-sparse-keymap))
+
+(defvar tree-sitter-mode-map (make-sparse-keymap))
+
+(defvar +tree-sitter-inner-text-objects-map (make-sparse-keymap))
+
+(defvar +tree-sitter-outer-text-objects-map (make-sparse-keymap))
+
+(defvar +tree-sitter-goto-previous-map (make-sparse-keymap))
+
+(defvar +tree-sitter-goto-next-map (make-sparse-keymap))
+
+;;-- end map defs
+
+(evil-make-overriding-map jg-lsp-mode-map)
 
 (map! :leader
       :prefix "c"
-      :desc "LSP"                                   "l"   lsp-command-map
+      :desc "LSP"                                   "l"   jg-lsp-command-map
       :desc "LSP Code actions"                      "a"   #'lsp-avy-lens
       :desc "LSP Rename"                            "R"   #'lsp-rename
       :desc "List errors"                           "x"   #'flycheck-list-errors
@@ -23,14 +42,14 @@
       :desc "Flycheck" "!" flycheck-command-map
       )
 
-(map! :map lsp-mode-map
+(map! :map jg-lsp-mode-map
       :n "g r" #'lsp-rename
       ;; :n "s '" #'lsp-ui-imenu
       :n "c x" #'flycheck-list-errors
       :n "s j" #'+jg-lsp-describe-workspace-symbol
       )
 
-(map! :map lsp-ui-imenu-mode-map
+(map! :map jg-lsp-ui-imenu-mode-map
       :n "a"   #'+jg-lsp-imenu-visit
       :n "s"   #'+jg-lsp-imenu-visit
 
@@ -43,11 +62,11 @@
       :n "r"   #'lsp-ui-imenu--refresh
       )
 
-(map! :map lsp-browser-mode-map
+(map! :map jg-lsp-browser-mode-map
 
       )
 
-(map! :map lsp-ui-peek-mode-map
+(map! :map jg-lsp-ui-peek-mode-map
       "j"   #'lsp-ui-peek--select-next
       "k"   #'lsp-ui-peek--select-prev
       "C-k" #'lsp-ui-peek--select-prev-file
@@ -55,7 +74,7 @@
       )
 
 ;;-- lsp commands
-(map! :map lsp-command-map
+(map! :map jg-lsp-command-map
       "?" #'+jg-ide-registered-lsp-clients
       "-" #'+jg-ide-disable-lsp-client
       "=" #'+jg-ide-enable-lsp-client
@@ -65,26 +84,26 @@
       (:prefix ("a" . "Actions"))
       )
 
-(map! :map lsp-command-map ;; Formatting
+(map! :map jg-lsp-command-map ;; Formatting
       :prefix ("=" . "Formatting")
       :desc "format buffer" "=" #'lsp-format-buffer
       :desc "format region" "r" #'lsp-format-region
 )
 
-(map! :map lsp-command-map ;; Folders
+(map! :map jg-lsp-command-map ;; Folders
       :prefix ("F" . "Folders")
       :desc "add folder"          "a" #'lsp-workspace-folders-add
       :desc "un-blacklist folder" "b" #'lsp-workspace-blacklist-remove
       :desc "remove folder"       "r" #'lsp-workspace-folders-remove
       )
 
-(map! :map lsp-command-map ;; refactoring
+(map! :map jg-lsp-command-map ;; refactoring
       :prefix ("r" . "Refactoring")
       :desc "organize imports"             "o" #'lsp-organize-imports
       :desc "rename"                       "r" #'lsp-rename
       )
 
-(map! :map lsp-command-map ;; actions
+(map! :map jg-lsp-command-map ;; actions
       :prefix ("a" . "Actions")
       :desc "code actions"                 "a" #'lsp-execute-code-action
       :desc "highlight symbol"             "h" #'lsp-document-highlight
@@ -123,3 +142,54 @@
       :n "b" #'tabulated-list-previous-column
       )
 ;;-- end flycheck
+
+;;-- tree-sitter
+
+(evil-define-key 'normal 'tree-sitter-mode
+  "[g" +tree-sitter-goto-previous-map
+  "]g" +tree-sitter-goto-next-map
+  )
+(map! :map tree-sitter-mode-map
+      (:prefix "i"
+               :vo "A" (+tree-sitter-get-textobj '("parameter.inner" "call.inner"))
+               :vo "f" (+tree-sitter-get-textobj "function.inner")
+               :vo "F" (+tree-sitter-get-textobj "call.inner")
+               :vo "C" (+tree-sitter-get-textobj "class.inner")
+               :vo "v" (+tree-sitter-get-textobj "conditional.inner")
+               :vo "l" (+tree-sitter-get-textobj "loop.inner")
+        )
+      (:prefix "o"
+               :vo "A" (+tree-sitter-get-textobj '("parameter.outer" "call.outer"))
+               :vo "f" (+tree-sitter-get-textobj "function.outer")
+               :vo "F" (+tree-sitter-get-textobj "call.outer")
+               :vo "C" (+tree-sitter-get-textobj "class.outer")
+               :vo "c" (+tree-sitter-get-textobj "comment.outer")
+               :vo "v" (+tree-sitter-get-textobj "conditional.outer")
+               :vo "l" (+tree-sitter-get-textobj "loop.outer")
+               )
+      (:prefix "[g"
+            :n "a" (+tree-sitter-goto-textobj "parameter.outer" t)
+            :n "f" (+tree-sitter-goto-textobj "function.outer" t)
+            :n "F" (+tree-sitter-goto-textobj "call.outer" t)
+            :n "C" (+tree-sitter-goto-textobj "class.outer" t)
+            :n "c" (+tree-sitter-goto-textobj "comment.outer" t)
+            :n "v" (+tree-sitter-goto-textobj "conditional.outer" t)
+            :n "l" (+tree-sitter-goto-textobj "loop.outer" t)
+            )
+      (:prefix "]g"
+            :n "a" (+tree-sitter-goto-textobj "parameter.outer")
+            :n "f" (+tree-sitter-goto-textobj "function.outer")
+            :n "F" (+tree-sitter-goto-textobj "call.outer")
+            :n "C" (+tree-sitter-goto-textobj "class.outer")
+            :n "c" (+tree-sitter-goto-textobj "comment.outer")
+            :n "v" (+tree-sitter-goto-textobj "conditional.outer")
+            :n "l" (+tree-sitter-goto-textobj "loop.outer")
+      )
+)
+;;-- end tree-sitter
+
+(setq lsp-mode-map           jg-lsp-mode-map
+      lsp-command-map        jg-lsp-command-map
+      lsp-signature-mode-map jg-lsp-signature-mode-map
+      lsp-ui-imenu-mode-map  jg-lsp-ui-imenu-mode-map
+      )

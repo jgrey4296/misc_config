@@ -14,3 +14,7 @@
 (package! flycheck)
 (package! flycheck-popup-tip)
 (package! flycheck-posframe)
+
+(package! tree-sitter)
+(package! tree-sitter-indent)
+(package! tree-sitter-langs)

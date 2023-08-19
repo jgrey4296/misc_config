@@ -82,27 +82,8 @@
 (setq so-long-threshold 5000)
 ;;-- end so long
 
-;;-- tree-sitter
-(setq tree-sitter-debug-jump-buttons t ;; This makes every node a link to a section of code
-      tree-sitter-debug-highlight-jump-region t ;; and this highlights the entire sub tree in your code
-      )
-;;-- end tree-sitter
-
 (spec-handling-add! auto-modes
                     '(ui
                       ("\\.palette" . palette-mode)
                       )
                     )
-
-
-(spec-handling-add! tree-sit-lang
-                '(agda-mode       . agda)
-                '(c-mode          . c)
-                '(c++-mode        . cpp)
-
-                '(elm-mode        . elm)
-
-                '(julia-mode      . julia)
-                '(ruby-mode       . ruby)
-                '(tuareg-mode     . ocaml)
-                )

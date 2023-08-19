@@ -7,6 +7,8 @@
 
 (add-hook! 'doom-first-file-hook #'transient-toggles-minor-mode)
 
+(use-package! treemacs)
+
 ;;-- highlight
 
 (use-package! hl-line

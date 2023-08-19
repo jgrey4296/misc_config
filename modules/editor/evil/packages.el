@@ -22,7 +22,7 @@
 (package! evil-traces)
 (package! evil-visual-mark-mode)
 (package! evil-visualstar)
-
+(package! treemacs-evil)
 (package! evil-textobj-tree-sitter)
 (package! exato)
 

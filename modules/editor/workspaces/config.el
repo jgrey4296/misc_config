@@ -165,6 +165,7 @@
   )
 
 (use-package! neotree
+  :disabled t
   :commands (neotree-show neotree-hide neotree-toggle neotree-dir neotree-find neo-global--with-buffer neo-global--window-exists-p)
   :config
   (after! winner

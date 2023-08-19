@@ -19,3 +19,4 @@
 (package! transient-macros :recipe (:host github :repo "jgrey4296/transient-macros"))
 (package! visual-fill-column)
 (package! whitespace)
+(package! treemacs)

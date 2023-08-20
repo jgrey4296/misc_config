@@ -72,11 +72,11 @@
 (map! :map jg-help-map
       ;; replacement keybinds
       :prefix ("r" . "Reload")
-      "r"   #'doom/reload
-      "t"   #'doom/reload-theme
-      "p"   #'doom/reload-packages
-      "f"   #'doom/reload-font
-      "e"   #'doom/reload-env
+      :desc "Reload"           "r"   #'doom/reload
+      :desc "Reload Theme"     "t"   #'doom/reload-theme
+      :desc "Reload Packages"  "p"   #'doom/reload-packages
+      :desc "Reload Font"      "f"   #'doom/reload-font
+      :desc "Reload env"       "e"   #'doom/reload-env
       ;; s -> spec-handlers
       )
 
@@ -85,17 +85,17 @@
 ;;-- packages
 (map! :map jg-help-map
       :prefix ("p" . "Packages")
-      :desc "Sraight Repos"  "1" (cmd! (find-file (expand-file-name "straight/repos" straight-base-dir)))
-      "c" #'doom/help-package-config
-      "d" #'doom/goto-private-packages-file
-      "h" #'doom/help-package-homepage
-      "p" #'doom/help-packages
-      "l" #'doom/help-search-load-path
-      "L" #'doom/help-search-loaded-files
-      "m" #'doom/help-modules
-      "V" #'doom/version
-      "r" #'straight-rebuild-package
-      :desc "Emacs Version Config"               "v"   #'+jg-help-system-config
+      :desc "Sraight Repos"                      "1" (cmd! (find-file (expand-file-name "straight/repos" straight-base-dir)))
+      :desc "Package Config"                     "c" #'doom/help-package-config
+      :desc "Goto private packages"              "d" #'doom/goto-private-packages-file
+      :desc "Goto package homepage"              "h" #'doom/help-package-homepage
+      :desc "Open Help for package"              "p" #'doom/help-packages
+      :desc "Search Load Path"                   "l" #'doom/help-search-load-path
+      :desc "Search Loaded Files"                "L" #'doom/help-search-loaded-files
+      :desc "Modules Help"                       "m" #'doom/help-modules
+      :desc "Versions"                           "V" #'doom/version
+      :desc "Rebuild Package"                    "r" #'straight-rebuild-package
+      :desc "Emacs Version Config"               "v" #'+jg-help-system-config
       )
 ;;-- end packages
 

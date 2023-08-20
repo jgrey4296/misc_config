@@ -17,3 +17,6 @@ Use-package       # https://github.com/jwiegley/use-package
 General           # https://github.com/noctuid/general.el
 Which-key         # https://github.com/justbur/emacs-which-key
 Buttercup         # https://github.com/jorgenschaefer/emacs-buttercup
+
+Racket Docs       # https://docs.racket-lang.org/
+Scheme            # https://www.scheme.org/

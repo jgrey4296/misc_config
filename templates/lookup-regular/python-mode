@@ -81,7 +81,7 @@ scrapy                   # https://docs.scrapy.org/en/latest/
 seaborn                  # https://seaborn.pydata.org/api.html
 setuptools               # https://setuptools.readthedocs.io/en/latest/userguide/index.html
 setuptools-rust          # https://setuptools-rust.readthedocs.io/en/latest/
-sh                       # https://amoffat.github.io/sh/
+sh                       # https://sh.readthedocs.io/en/latest/
 sorobn                   # https://github.com/MaxHalford/sorobn
 spacy                    # https://spacy.io/usage
 sphinx                   # https://www.sphinx-doc.org/en/master/contents.html

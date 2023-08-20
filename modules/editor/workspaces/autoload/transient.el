@@ -2,14 +2,14 @@
 (require 'transient)
 
 (progn
-  (transient-make-toggle! hide-mode-line-mode)
+  (transient-make-mode-toggle! hide-mode-line-mode)
   (transient-make-call!   quickscope
                           (format "")
 
                           )
   )
 
-(transient-define-prefix jg-transient-workspace ()
+(transient-define-prefix transient-workspace ()
   ""
   []
   [""
@@ -42,29 +42,29 @@
   )
 
 
-(transient-define-prefix jg-transient-carousel ()
+(transient-define-prefix transient-carousel ()
   ""
   [["|Carousel: %-10(persp-parameter 'carousel)"
-    ("n" jg-transient-call-carousel-new)
-    ("c" jg-transient-call-carousel-convert)
-    ("d" jg-transient-call-carousel-deconvert)
-    ("K" jg-transient-call-carousel-clear)
-    ("r" jg-transient-call-carousel-reset)
-    ("p" jg-transient-call-carousel-print)
-    ("E" jg-transient-call-carousel-edit)
+    ("n" transient-macro-call-carousel-new)
+    ("c" transient-macro-call-carousel-convert)
+    ("d" transient-macro-call-carousel-deconvert)
+    ("K" transient-macro-call-carousel-clear)
+    ("r" transient-macro-call-carousel-reset)
+    ("p" transient-macro-call-carousel-print)
+    ("E" transient-macro-call-carousel-edit)
     ]
    [
     "|Window Claimed: %-10(window-parameter (selected-window) 'carousel-claimed)"
-    ("l" jg-transient-call-carousel-loop)
-    ("e" jg-transient-call-carousel-expand)
-    ("a" jg-transient-call-carousel-add)
-    ("R" jg-transient-call-carousel-remove)
-    ("c" jg-transient-call-carousel-choose)
+    ("l" transient-macro-call-carousel-loop)
+    ("e" transient-macro-call-carousel-expand)
+    ("a" transient-macro-call-carousel-add)
+    ("R" transient-macro-call-carousel-remove)
+    ("c" transient-macro-call-carousel-choose)
     ]
    [
-    ("[" jg-transient-call-carousel-move-left)
-    ("]" jg-transient-call-carousel-move-right)
-    ("w" jg-transient-call-carousel-claim-window)
+    ("[" transient-macro-call-carousel-move-left)
+    ("]" transient-macro-call-carousel-move-right)
+    ("w" transient-macro-call-carousel-claim-window)
    ]
   ]
   transient-quit!

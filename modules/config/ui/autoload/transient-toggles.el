@@ -4,203 +4,195 @@
 ;; :desc "Input Language" "i" #'toggle-input-method
 ;; :desc "indent style"   "i" #'doom/toggle-indent-style
 
-(transient-make-toggle! global-prettify-symbols-mode "p" "Pretty Symbols")
-(transient-make-toggle! global-company-mode          "C" "AutoComplete")
-(transient-make-call!   read-only
-                        (format "%-2s : Read-only" (fmt-as-bool! buffer-read-only))
-                        (read-only-mode 'toggle)
-                        )
-(transient-make-call!   evil-embrace
+(transient-make-mode-toggle! global-prettify-symbols-mode  "Pretty Symbols" "p")
+(transient-make-mode-toggle! global-company-mode           "AutoComplete"   "C")
+(transient-make-mode-toggle! read-only-mode                "Read Only"      "r" nil buffer-read-only)
+(transient-make-mode-toggle! global-flycheck-mode          "Flycheck"       "F")
+
+(transient-make-call!   evil-embrace "E"
                         (format "%-2s : Evil-Embrace" (fmt-as-bool! (advice-member-p #'evil-embrace-evil-surround-region 'evil-surround-region)))
                         (if (advice-member-p #'evil-embrace-evil-surround-region 'evil-surround-region)
                             (evil-embrace-disable-evil-surround-integration)
                           (evil-embrace-enable-evil-surround-integration))
                         )
-(transient-make-toggle! global-flycheck-mode "F" "Flycheck")
-(transient-make-call!   run-spec-handlers
+(transient-make-call!   run-spec-handlers "!"
                         (let ((str  "Run Spec Handlers"))
                           (put-text-property 0 (length str) 'face 'transient-heading str)
                           str)
                         (run-spec-handlers)
                         )
-(transient-make-call!   general-insert-rebuild-cache
+(transient-make-call!   general-insert-rebuild-cache "@"
                         (let ((str  "Clear General-Insert Cache"))
                           (put-text-property 0 (length str) 'face 'transient-heading str)
                           str)
                         (general-insert-clear-caches)
                         (message "Cache Rebuilt")
                         )
+
 ;; Visual
 (progn
-  (transient-make-toggle! hl-line-mode "h" "Highlight-line")
-  (transient-make-toggle! evil-goggles-mode "g" "Evil-goggles")
-  (transient-make-toggle! highlight-parentheses-mode "w" "Higlight-wrappers")
-  (transient-make-toggle! rainbow-mode "r" "Rainbow Colours")
-  (transient-make-toggle! highlight-changes-visible-mode "x" "Highlight-changes")
-  (transient-make-call! link-display
+  (transient-make-mode-toggle! hl-line-mode                   "Highlight-line"    "h")
+  (transient-make-mode-toggle! evil-goggles-mode              "Evil-goggles"      "g")
+  (transient-make-mode-toggle! highlight-parentheses-mode     "Higlight-wrappers" "w")
+  (transient-make-mode-toggle! rainbow-mode                   "Rainbow Colours"   "r")
+  (transient-make-mode-toggle! highlight-changes-visible-mode "Highlight-changes" "x")
+
+  (transient-make-call! link-display "l"
                         (format "%-2s : Link Display" (fmt-as-bool! org-link-descriptive))
                         (org-toggle-link-display))
-  (transient-make-call!   quickscope
-                          (format "%-2s : Quickscope"
-                                  (fmt-as-bool! evil-quickscope-always-mode))
-                          (evil-quickscope-always-mode 'toggle)
-                          (evil-quickscope-mode (if evil-quickscope-always-mode -1 1))
-                          )
-  (transient-make-call!   invisible
-                          (format "%-2s : Invisible Spec" (fmt-as-bool! line-move-ignore-invisible))
-                          (setq line-move-ignore-invisible (not line-move-ignore-invisible))
-                          )
+  (transient-make-call!  quickscope "s"
+                         (format "%-2s : Quickscope"
+                                 (fmt-as-bool! evil-quickscope-always-mode))
+                         (evil-quickscope-always-mode 'toggle)
+                         (evil-quickscope-mode (if evil-quickscope-always-mode -1 1))
+                         )
 
+  (transient-make-var-toggle!   invisible line-move-ignore-invisible "Invisible Spec" "i")
   )
+
 (transient-make-subgroup! jg-toggle-visuals "v"
                           "For controlling ui visual settings"
                           :desc "|| Visuals    ||"
                           [[
-                            (jg-transient-toggle-evil-goggles-mode)
-                            (jg-transient-toggle-hl-line-mode)
-                            ("i" jg-transient-call-invisible)
-                            (jg-transient-toggle-highlight-changes-visible-mode)
-                            ("l" jg-transient-call-link-display)
+                            (transient-macro-toggle-evil-goggles-mode)
+                            (transient-macro-toggle-hl-line-mode)
+                            (transient-macro-toggle-invisible)
+                            (transient-macro-toggle-highlight-changes-visible-mode)
+                            (transient-macro-call-link-display)
                             ]
                            [
-                            (jg-transient-toggle-rainbow-mode)
-                            (jg-transient-toggle-global-prettify-symbols-mode)
-                            ("s" jg-transient-call-quickscope)
-                            (jg-transient-toggle-highlight-parentheses-mode)
+                            (transient-macro-toggle-rainbow-mode)
+                            (transient-macro-toggle-global-prettify-symbols-mode)
+                            (transient-macro-call-quickscope)
+                            (transient-macro-toggle-highlight-parentheses-mode)
                             ]
                            ]
                           )
 
 ;; Guides
 (progn
-  (transient-make-toggle! display-fill-column-indicator-mode "c" "Columns")
-  (transient-make-toggle! highlight-indent-guides-mode "i" "Indents")
-  (transient-make-toggle! ruler-mode "r" "Ruler")
-  (transient-make-toggle! whitespace-mode "w" "Whitespace")
-  (transient-make-call!   spelling
+  (transient-make-mode-toggle! display-fill-column-indicator-mode  "Columns"      "c")
+  (transient-make-mode-toggle! highlight-indent-guides-mode        "Indents"      "i")
+  (transient-make-mode-toggle! ruler-mode                          "Ruler"        "r")
+  (transient-make-mode-toggle! whitespace-mode                     "Whitespace"   "w")
+  (transient-make-mode-toggle! display-line-numbers-mode           "Line Numbers" "n")
+
+  (transient-make-call!   spelling "s"
                           (format "%-2s : Spelling" (fmt-as-bool! flyspell-mode))
                           (flyspell-mode 'toggle)
-                          (writegood-mode (if flypsell-mode 1 -1))
+                          (writegood-mode (if flyspell-mode 1 -1))
                           )
-  (transient-make-toggle! display-line-numbers-mode "n" "Line Numbers")
 
   )
 (transient-make-subgroup! jg-toggle-guides "g"
                           "For controlling ui guide settings"
                           :desc "|| Guides     ||"
                           [[
-                            (jg-transient-toggle-display-fill-column-indicator-mode)
-                            (jg-transient-toggle-highlight-indent-guides-mode)
-                            (jg-transient-toggle-display-line-numbers-mode)
-                            ] [
-                            (jg-transient-toggle-ruler-mode)
-                            (jg-transient-toggle-whitespace-mode)
-                            ("s" jg-transient-call-spelling)
-                            ] ]
+                            (transient-macro-toggle-display-fill-column-indicator-mode)
+                            (transient-macro-toggle-highlight-indent-guides-mode)
+                            (transient-macro-toggle-display-line-numbers-mode)
+                            ]
+                           [
+                            (transient-macro-toggle-ruler-mode)
+                            (transient-macro-toggle-whitespace-mode)
+                            (transient-macro-call-spelling)
+                            ]
+                           ]
                           )
 
 ;; Nav
 (progn
-  (transient-make-toggle! centered-cursor-mode "c" "Center Cursor")
-  (transient-make-toggle! minimap-mode "m" "Minimap")
-  (transient-make-toggle! evil-visual-mark-mode "v" "visual mark")
-  (transient-make-call! neotree
-                        "neotree"
-                        (neotree-toggle)
-                        )
-  (transient-make-call! frame-fullscreen
-                        (format "Fullscreen")
-                        (toggle-frame-fullscreen))
-  (transient-make-call! auto-balance
-                        (format "%-2s : Auto-Balance Windows" (fmt-as-bool! evil-auto-balance-windows))
-                        (setq evil-auto-balance-windows
-                              (not evil-auto-balance-windows))
-                        )
+  (transient-make-mode-toggle! centered-cursor-mode   "Center Cursor" "c")
+  (transient-make-mode-toggle! minimap-mode           "Minimap"       "m")
+  (transient-make-mode-toggle! evil-visual-mark-mode  "visual mark"   "v")
+
+  (transient-make-call! neotree          "n" "neotree"    (neotree-toggle))
+  (transient-make-call! frame-fullscreen "f" "Fullscreen" (toggle-frame-fullscreen))
+
+  (transient-make-var-toggle! auto-balance evil-auto-balance-windows "Auto-Balance Windows" "b")
 
   )
 (transient-make-subgroup! jg-toggle-nav "n"
                           "For controlling ui nav settings"
                           :desc "|| Navigation ||"
                           [ [
-                             (jg-transient-toggle-centered-cursor-mode)
-                             ("b" jg-transient-call-auto-balance)
-                             (jg-transient-toggle-minimap-mode)
-                             (jg-transient-toggle-evil-visual-mark-mode)
+                             (transient-macro-toggle-centered-cursor-mode)
+                             (transient-macro-toggle-auto-balance)
+                             (transient-macro-toggle-minimap-mode)
+                             (transient-macro-toggle-evil-visual-mark-mode)
                              ] [
-                             ("n" jg-transient-call-neotree)
-                             ("f" jg-transient-call-frame-fullscreen)
+                             (transient-macro-call-neotree)
+                             (transient-macro-call-frame-fullscreen)
                              ] [
                              ] ]
                           )
 
 ;; Wrap
 (progn
-  (transient-make-toggle! visual-line-mode "l" "Visual line")
-  (transient-make-toggle! +word-wrap-mode "w" "Word-wrap")
-  (transient-make-call! truncate-lines
+  (transient-make-mode-toggle! visual-line-mode  "Visual line" "l")
+  (transient-make-mode-toggle! +word-wrap-mode   "Word-wrap"   "w")
+  (transient-make-mode-toggle! auto-fill-mode    "Auto-fill"   "f" nil auto-fill-function)
+
+  (transient-make-call! truncate-lines "t"
                         (format "%-2s : Truncate lines" (fmt-as-bool! truncate-lines))
                         (toggle-truncate-lines)
                         )
-  (transient-make-call! auto-fill-mode
-                        (format "%-2s : Auto-fill" (fmt-as-bool!
-                                                    auto-fill-function))
-                        (auto-fill-mode 'toggle)
-                        )
+
   )
 (transient-make-subgroup! jg-toggle-wrap "w"
                           "For controlling ui wrap settings"
                           :desc "|| Wrapping   ||"
                           [[
-                            ("f" jg-transient-call-auto-fill-mode)
-                            (jg-transient-toggle-visual-line-mode)
-                            (jg-transient-toggle-+word-wrap-mode)
-                            ("t" jg-transient-call-truncate-lines)
+                            (transient-macro-toggle-auto-fill-mode)
+                            (transient-macro-toggle-visual-line-mode)
+                            (transient-macro-toggle-+word-wrap-mode)
+                            (transient-macro-call-truncate-lines)
                             ]
                            ]
                           )
 
 ;; Debug
 (progn
-  (transient-make-call! debug-on-error
+  (transient-make-call! debug-on-error "e"
                         (format "%-2s : Debug on Error" (fmt-as-bool! debug-on-error))
                         (toggle-debug-on-error))
-  (transient-make-call! debug-on-var
+  (transient-make-call! debug-on-var "v"
                         (format "%-2s : Debug on Variable" (fmt-as-bool! (debug--variable-list)))
                         (call-interactively #'debug-on-variable-change))
-  (transient-make-call! cancel-debug-on-var
-                        "Cancel Debug on Var"
+  (transient-make-call! cancel-debug-on-var "V"
+                        "Cancel All Var Debugs"
                         (cancel-debug-on-variable-change))
-  (transient-make-call! debug-func
+  (transient-make-call! debug-func "f"
                         (format "%-2s : Debug on Function" (fmt-as-bool! (debug--function-list)))
                         (call-interactively #'debug-on-entry))
-  (transient-make-call! cancel-debug-func
-                        "Cancel Debug on Function"
+  (transient-make-call! cancel-debug-func "F"
+                        "Cancel All Function Debugs"
                         (cancel-debug-on-entry))
   )
 (transient-make-subgroup! jg-toggle-debugs "d"
                           " debug toggles "
                           :desc "|| Debug      ||"
                           [ [
-                             ("e" jg-transient-call-debug-on-error)
-                             ("v" jg-transient-call-debug-on-var)
-                             ("f" jg-transient-call-debug-func)
+                             (transient-macro-call-debug-on-error)
+                             (transient-macro-call-debug-on-var)
+                             (transient-macro-call-debug-func)
                              ]
                             [
                              " "
-                             ("V" jg-transient-call-cancel-debug-on-var)
-                             ("F" jg-transient-call-cancel-debug-func)
+                             (transient-macro-call-cancel-debug-on-var)
+                             (transient-macro-call-cancel-debug-func)
 
                              ] ]
                           )
 
 ;; Top Level Toggle
 (progn
-  (transient-make-toggle! hide-mode-line-mode           "m" "Modeline")
-  (transient-make-toggle! global-hl-line-mode           "h" "Hi-line")
-  (transient-make-toggle! global-code-shy-minor-mode    "H" "Hide Blocks")
-  (transient-make-toggle! global-centered-cursor-mode   "c" "Center Cursor")
-  (transient-make-toggle! global-highlight-changes-mode "x" "Changes")
-  (transient-make-toggle! smartparens-global-mode       "s" "SmartParens")
+  (transient-make-mode-toggle! global-hl-line-mode            "Hi-line"       "h")
+  (transient-make-mode-toggle! hide-mode-line-mode            "Hide Modeline" "m")
+  (transient-make-mode-toggle! global-code-shy-minor-mode     "Shy Code"      "H")
+  (transient-make-mode-toggle! global-centered-cursor-mode    "Center Cursor" "c")
+  (transient-make-mode-toggle! global-highlight-changes-mode  "Show Changes"  "x")
+  (transient-make-mode-toggle! smartparens-global-mode        "SmartParens"   "s")
   )
 ;;TODO apply choice
 (transient-define-argument browse-selector ()
@@ -213,6 +205,10 @@
 ;;;###autoload (autoload #'jg-toggle-main "config/ui/autoload/transient-toggles" nil t)
 (transient-define-prefix jg-toggle-main ()
   "Main controller for ui settings"
+  [
+   (transient-macro-call-run-spec-handlers)
+   (transient-macro-call-general-insert-rebuild-cache)
+   ]
   [ [
      jg-toggle-debugs
      jg-toggle-guides
@@ -221,26 +217,22 @@
      jg-toggle-wrap
      ]
     [
-     (jg-transient-toggle-global-hl-line-mode)
-     (jg-transient-toggle-hide-mode-line-mode)
-     (jg-transient-toggle-global-prettify-symbols-mode)
-     (jg-transient-toggle-global-highlight-changes-mode)
+     (transient-macro-toggle-global-hl-line-mode)
+     (transient-macro-toggle-hide-mode-line-mode)
+     (transient-macro-toggle-global-prettify-symbols-mode)
+     (transient-macro-toggle-global-highlight-changes-mode)
      ] [
-     (jg-transient-toggle-global-code-shy-minor-mode)
-     (jg-transient-toggle-smartparens-global-mode)
-     (jg-transient-toggle-global-centered-cursor-mode)
-     (jg-transient-toggle-global-company-mode)
+     (transient-macro-toggle-global-code-shy-minor-mode)
+     (transient-macro-toggle-smartparens-global-mode)
+     (transient-macro-toggle-global-centered-cursor-mode)
      ] [
-     ("r" jg-transient-call-read-only)
-     ("E" jg-transient-call-evil-embrace)
-     ("e" jg-transient-call-debug-on-error)
+     (transient-macro-toggle-read-only-mode)
+     (transient-macro-call-evil-embrace)
+     (transient-macro-call-debug-on-error)
+     (transient-macro-toggle-global-company-mode)
      ] ]
-  [
-   ("!" jg-transient-call-run-spec-handlers)
-   ("@" jg-transient-call-general-insert-rebuild-cache)
-   ]
   transient-quit!
-  )
+)
 
 ;;;###autoload
 (define-minor-mode transient-toggles-minor-mode

@@ -1,5 +1,8 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
+(defvar jg-help-map (make-keymap))
+(define-prefix-command 'jg-help-map nil "jgb-help")
+
 (map! :map jg-help-map
       "'"    #'describe-char
       "f"    #'describe-function
@@ -114,6 +117,13 @@
       :n "=" #'helpful-update
       :n "SPC e" #'eval-last-sexp
       )
+
+
+(global-set-key [remap describe-function] #'helpful-callable)
+(global-set-key [remap describe-command]  #'helpful-command)
+(global-set-key [remap describe-variable] #'helpful-variable)
+(global-set-key [remap describe-key]      #'helpful-key)
+(global-set-key [remap describe-symbol]   #'helpful-symbol)
 
 (map! :leader
       :desc "help"            "h" jg-help-map

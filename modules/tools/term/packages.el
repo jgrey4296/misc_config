@@ -22,4 +22,5 @@
 (package! shell :built-in t)
 (package! term :built-in t)
 (package! vterm :built-in 'prefer)
+(package! comint-mode)
 ;;; packages.el ends here

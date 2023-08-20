@@ -22,6 +22,8 @@
 
 (package! paren-state :recipe (:host github :repo "jgrey4296/paren-state"))
 (package! avy)
+(package! better-jumper)
+(package! imenu)
 
 (if (modulep! +switch-window)
     (package! switch-window)

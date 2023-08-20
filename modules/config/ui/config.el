@@ -29,6 +29,40 @@
                  evil-iedit-state-entry-hook)
                #'+jg-ui-state-line-change)
     )
+
+  ;; HACK I reimplement `global-hl-line-mode' so we can white/blacklist modes in
+  ;;      `global-hl-line-modes' _and_ so we can use `global-hl-line-mode',
+  ;;      which users expect to control hl-line in Emacs.
+  (define-globalized-minor-mode global-hl-line-mode hl-line-mode
+    (lambda ()
+      (and (cond (hl-line-mode nil)
+                 ((null global-hl-line-modes) nil)
+                 ((eq global-hl-line-modes t))
+                 ((eq (car global-hl-line-modes) 'not)
+                  (not (derived-mode-p global-hl-line-modes)))
+                 ((apply #'derived-mode-p global-hl-line-modes)))
+           (hl-line-mode +1))))
+
+  ;; Temporarily disable `hl-line' when selection is active, since it doesn't
+  ;; serve much purpose when the selection is so much more visible.
+  (defvar doom--hl-line-mode nil)
+
+  (add-hook! 'hl-line-mode-hook
+    (defun doom-truly-disable-hl-line-h ()
+      (unless hl-line-mode
+        (setq-local doom--hl-line-mode nil))))
+
+  (add-hook! '(evil-visual-state-entry-hook activate-mark-hook)
+    (defun doom-disable-hl-line-h ()
+      (when hl-line-mode
+        (hl-line-mode -1)
+        (setq-local doom--hl-line-mode t))))
+
+  (add-hook! '(evil-visual-state-exit-hook deactivate-mark-hook)
+    (defun doom-enable-hl-line-maybe-h ()
+      (when doom--hl-line-mode
+        (hl-line-mode +1))))
+
   )
 
 (use-package! hi-lock
@@ -80,6 +114,23 @@
   ;; :hook (doom-first-buffer . global-highlight-changes-mode)
   )
 
+(use-package! paren
+  ;; highlight matching delimiters
+  :hook (doom-first-buffer . show-paren-mode)
+  :config
+  (setq show-paren-delay 0.1
+        show-paren-highlight-openparen t
+        show-paren-when-point-inside-paren t
+        show-paren-when-point-in-periphery t)
+
+  )
+
+(use-package! highlight-numbers
+  :hook ((prog-mode conf-mode) . highlight-numbers-mode)
+  :config
+  (setq highlight-numbers-generic-regexp "\\_<[[:digit:]]+\\(?:\\.[0-9]*\\)?\\_>")
+  )
+
 ;;-- end highlight
 
 ;;-- whitespace
@@ -87,6 +138,7 @@
   :commands whitespace-mode
   :init
   (defvar whitespace-mode nil)
+
   )
 ;;-- end whitespace
 
@@ -115,6 +167,7 @@
 (use-package! rainbow-delimiters
   :config
   (add-hook! 'doom-init-ui-hook  #'rainbow-delimiters-mode)
+  (setq rainbow-delimiters-max-face-count 4)
   )
 
 ;;-- end colours
@@ -139,6 +192,12 @@
   (add-hook    'after-setting-font-hook #'+modeline-resize-for-font-h)
   (add-hook    'doom-load-theme-hook #'doom-modeline-refresh-bars)
   (add-hook!   'magit-mode-hook #'+modeline-hide-in-non-status-buffer-h)
+  )
+
+(use-package! hide-mode-line-mode
+  :config
+  (add-hook 'completion-list-mode-hook #'hide-mode-line-mode)
+  (add-hook 'Man-mode-hook #'hide-mode-line-mode)
   )
 
 ;;-- end modeline

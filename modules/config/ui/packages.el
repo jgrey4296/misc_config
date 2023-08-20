@@ -20,3 +20,5 @@
 (package! visual-fill-column)
 (package! whitespace)
 (package! treemacs)
+(package! paren)
+(package! hide-mode-line-mode)

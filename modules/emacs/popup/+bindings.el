@@ -10,7 +10,7 @@
       )
 
 (map! :map jg-help-map
-      "u p" #'+popup/diagnose
+      "u ?" #'+popup/diagnose
       )
 
 (global-set-key [remap quit-window] #'+popup/quit-window)

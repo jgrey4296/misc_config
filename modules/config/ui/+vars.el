@@ -2,6 +2,39 @@
 
 (defvar jg-ui-default-face-gen-palette-dir "/Volumes/documents/github/jgrey4296.github.io/resources/palettes/")
 
+(setq confirm-kill-emacs #'doom-quit-p
+      confirm-nonexistent-file-or-buffer nil
+      uniquify-buffer-name-style 'forward
+      ring-bell-function #'ignore
+      visible-bell nil
+      hscroll-margin 2
+      hscroll-step 1
+      scroll-conservatively 101
+      scroll-margin 0
+      scroll-preserve-screen-position t
+      auto-window-vscroll nil
+      blink-cursor-mode -1
+      blink-matching-paren nil
+      x-stretch-cursor nil
+      indicate-buffer-boundaries nil
+      indicate-empty-lines nil
+
+      window-divider-default-places t
+      window-divider-default-bottom-width 1
+      window-divider-default-right-width 1
+
+      split-width-threshold 160
+      split-height-threshold nil
+      use-short-answers t
+      )
+
+
+(setq mouse-yank-at-point nil
+      mouse-wheel-scroll-amount nil
+      mouse-wheel-scroll-amount-horizontal 2
+
+      )
+
 (setq-default highlight-parentheses-delay      0.3
               display-line-numbers             t
               display-line-numbers-major-tick  20
@@ -18,6 +51,10 @@
               avy-all-windows t
 
               whitespace-style '(face tabs spaces trailing lines space-before-tab newline indentation empty space-after-tab space-mark tab-mark newline-mark)
+              whitespace-line-column nil
+              whitespace-display-mappings '((tab-mark ?\t [?› ?\t])
+                                            (newline-mark ?\n [?¬ ?\n])
+                                            (space-mark ?\  [?·] [?.]))
 
               which-key-idle-secondary-delay 0.05
               which-key-sort-order 'which-key-key-order-alpha

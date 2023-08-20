@@ -3,6 +3,7 @@
 
 (package! f)
 (package! link-hint)
+(package! autorevert)
 
 (unless (modulep! :editor evil)
   (package! expand-region))

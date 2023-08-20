@@ -18,6 +18,9 @@
       vc-git-diff-switches '("--histogram")
       )
 
+(setq ediff-diff-options "-w" ; turn off whitespace checking
+      ediff-split-window-function #'split-window-horizontally
+      ediff-window-setup-function #'ediff-setup-windows-plain)
 
 ;;-- vdiff
 

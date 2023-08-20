@@ -2,8 +2,11 @@
 
 (load! "+defs")
 (load! "+vars")
+
 (defer-load! "+spec-defs")
+
 (defer-load! jg-bindings-total "+bindings")
+
 (defer-load! jg-evil-ex-bindings "+evil-ex")
 
 (after! evil
@@ -167,3 +170,45 @@
   )
 
 (use-package! embrace :defer t)
+
+(use-package! dtrt-indent
+  ;; Automatic detection of indent settings
+  :unless noninteractive
+  ;; I'm not using `global-dtrt-indent-mode' because it has hard-coded and rigid
+  ;; major mode checks, so I implement it in `doom-detect-indentation-h'.
+  :hook ((change-major-mode-after-body read-only-mode) . doom-detect-indentation-h)
+  :config
+  (defun doom-detect-indentation-h ()
+    (unless (or (not after-init-time)
+                doom-inhibit-indent-detection
+                doom-large-file-p
+                (memq major-mode doom-detect-indentation-excluded-modes)
+                (member (substring (buffer-name) 0 1) '(" " "*")))
+      ;; Don't display messages in the echo area, but still log them
+      (let ((inhibit-message (not init-file-debug)))
+        (dtrt-indent-mode +1))))
+
+  ;; Enable dtrt-indent even in smie modes so that it can update `tab-width',
+  ;; `standard-indent' and `evil-shift-width' there as well.
+  (setq dtrt-indent-run-after-smie t)
+  ;; Reduced from the default of 5000 for slightly faster analysis
+  (setq dtrt-indent-max-lines 2000)
+
+  ;; always keep tab-width up-to-date
+  (push '(t tab-width) dtrt-indent-hook-generic-mapping-list)
+
+  (defvar dtrt-indent-run-after-smie)
+  (defadvice! doom--fix-broken-smie-modes-a (fn &optional arg)
+    "Some smie modes throw errors when trying to guess their indentation, like
+`nim-mode'. This prevents them from leaving Emacs in a broken state."
+    :around #'dtrt-indent-mode
+    (let ((dtrt-indent-run-after-smie dtrt-indent-run-after-smie))
+      (letf! ((defun symbol-config--guess (beg end)
+                (funcall symbol-config--guess beg (min end 10000)))
+              (defun smie-config-guess ()
+                (condition-case e (funcall smie-config-guess)
+                  (error (setq dtrt-indent-run-after-smie t)
+                         (message "[WARNING] Indent detection: %s"
+                                  (error-message-string e))
+                         (message ""))))) ; warn silently
+        (funcall fn arg)))))

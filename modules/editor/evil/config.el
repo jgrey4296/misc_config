@@ -183,8 +183,6 @@
         )
   )
 
-(use-package! evil-escape
-  :after evil)
 
 (use-package! evil-iedit-state
   :defer t

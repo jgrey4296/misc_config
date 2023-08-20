@@ -42,7 +42,6 @@
 
 (use-package! company-shell
   :defer t
-  :when (modulep! :completion company)
   :after sh-script
   :config
   (setq company-shell-delete-duplicates t

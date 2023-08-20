@@ -3,9 +3,5 @@
 
 (package! f)
 (package! link-hint)
-(package! autorevert)
-
-(unless (modulep! :editor evil)
-  (package! expand-region))
-
+(package! expand-region)
 (package! spec-handling :recipe (:host github :repo "jgrey4296/spec-handling"))

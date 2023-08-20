@@ -27,28 +27,13 @@
        (save-excursion
          (skip-chars-forward "^ ")
          (point))))))
-  (cond ((modulep! :completion helm)
-         (require 'helm-nixos-options)
-         ;; REVIEW We reimplment `helm-nixos-options' so we can supply
-         ;; `initial-input'. Maybe use `helm-attrset' instead?
-         (helm :sources `(,(helm-source-nixos-options-search))
-               :buffer "*helm-nixos-options*"
-               :input initial-input))
-        ((modulep! :completion ivy)
-         (require 'nixos-options)
-         (ivy-read "NixOS options: "
-                   nixos-options
-                   :require-match t
-                   :initial-input initial-input
-                   :action #'+nix--options-action
-                   :caller '+nix/options))
-        ((+nix--options-action (cdr
-                                (assoc
-                                 (completing-read "NixOs options: "
-                                                  nixos-options
-                                                  nil
-                                                  t
-                                                  initial-input) nixos-options)))))
+  (require 'nixos-options)
+  (ivy-read "NixOS options: "
+            nixos-options
+            :require-match t
+            :initial-input initial-input
+            :action #'+nix--options-action
+            :caller '+nix/options)
   ;; Tell lookup module to let us handle things from here
   'deferred)
 

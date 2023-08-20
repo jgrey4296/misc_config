@@ -14,17 +14,13 @@
     (add-to-list 'auto-mode-alist '("\\.jl\\'" . ess-julia-mode)))
   :config
   (setq ess-offset-continued 'straight
-        ess-use-flymake (not (modulep! :checkers syntax))
+        ess-use-flymake nil
         ess-nuke-trailing-whitespace-p t
         ess-style 'DEFAULT
         ess-history-directory (expand-file-name "ess-history/" doom-cache-dir))
 
   (set-docsets! 'ess-r-mode "R")
-  (when (modulep! +lsp)
-    (add-hook 'ess-r-mode-local-vars-hook #'lsp! 'append))
-
-  (when (modulep! +tree-sitter)
-    (add-hook 'ess-r-mode-local-vars-hook #'tree-sitter! 'append))
+  (add-hook 'ess-r-mode-local-vars-hook #'tree-sitter! 'append)
 
   (set-repl-handler! 'ess-r-mode #'+ess/open-r-repl)
   (set-repl-handler! 'ess-julia-mode #'+ess/open-julia-repl)
@@ -100,10 +96,8 @@
   :hook (stan-mode . eldoc-stan-setup)
   :init
   (use-package! company-stan
-    :when (modulep! :completion company)
     :hook (stan-mode . company-stan-setup))
 
   (use-package! flycheck-stan
-    :when (modulep! :checkers syntax)
     :hook (stan-mode . flycheck-stan-stanc2-setup)
     :hook (stan-mode . flycheck-stan-stanc3-setup)))

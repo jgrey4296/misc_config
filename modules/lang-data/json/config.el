@@ -15,7 +15,6 @@
   )
 
 (use-package! counsel-jq
-  :when (modulep! :completion ivy)
   :defer t
 )
 

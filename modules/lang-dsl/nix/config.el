@@ -14,9 +14,7 @@
   ;; than js2-mode, and its extra features aren't needed there.
   (add-to-list 'auto-mode-alist
                (cons "/flake\\.lock\\'"
-                     (if (modulep! :lang json)
-                         'json-mode
-                       'js-mode)))
+                     (if (modulep! :lang json) 'json-mode 'js-mode)))
   :config
 
   ;; Fix #3927: disable idle completion because `company-nixos-options' is

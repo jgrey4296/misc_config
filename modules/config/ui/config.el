@@ -142,16 +142,6 @@
   )
 ;;-- end whitespace
 
-;;-- cursor
-
-(use-package! centered-cursor-mode
-  :commands centered-cursor-mode
-  :init
-  (defvar centered-cursor-mode nil)
-  )
-
-;;-- end cursor
-
 ;;-- colours
 
 (use-package! palette-mode
@@ -194,7 +184,7 @@
   (add-hook    'magit-mode-hook         #'+modeline-hide-in-non-status-buffer-h)
   )
 
-(use-package! hide-mode-line-mode
+(use-package! hide-mode-line
   :config
   (add-hook 'completion-list-mode-hook #'hide-mode-line-mode)
   (add-hook 'Man-mode-hook             #'hide-mode-line-mode)

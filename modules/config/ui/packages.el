@@ -4,7 +4,6 @@
 
 (package! anzu)
 (package! auto-highlight-symbol)
-(package! centered-cursor-mode)
 (package! doom-modeline)
 (package! font-lock+ :recipe (:host github :repo "emacsmirror/font-lock-plus"))
 (package! highlight-indent-guides)
@@ -21,4 +20,4 @@
 (package! whitespace)
 (package! treemacs)
 (package! paren)
-(package! hide-mode-line-mode)
+(package! hide-mode-line)

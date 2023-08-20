@@ -19,8 +19,8 @@
 ;;
 ;;
 ;;; Code:
-(package! shell :built-in t)
-(package! term :built-in t)
-(package! vterm :built-in 'prefer)
-(package! comint-mode)
+(package! shell  :built-in t)
+(package! term   :built-in t)
+(package! vterm  :built-in 'prefer)
+(package! comint :built-in t)
 ;;; packages.el ends here

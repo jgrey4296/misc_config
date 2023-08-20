@@ -12,7 +12,6 @@
 (use-package! solidity-flycheck  ; included with solidity-mode
   :defer t
   :after solidity-mode
-  :when (modulep! :checkers syntax)
   :config
   (setq flycheck-solidity-solc-addstd-contracts t)
   (when (funcall flycheck-executable-find solidity-solc-path)
@@ -24,6 +23,5 @@
 (use-package! company-solidity
   :defer t
   :after solidity-mode
-  :when (modulep! :completion company)
   :config (delq! 'company-solidity company-backends)
   )

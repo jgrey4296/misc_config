@@ -4,20 +4,21 @@
 
 (load! "defer-macro")
 (doom!
- :config default
- :editor (evil +everywhere)
- :config bindings disabled help search ui
- :completion company ivy helm
+ :config     default
+ :editor     (evil +everywhere)
+ :config     bindings disabled help search ui
+
+ :ui         company ivy helm hydra ibuffer minibuffer popup
 
  ;; TODO :experimentation
 
- :editor format
- :editor char-insert fold navigation tagging text-manipulation
- :editor fold snippets lookup workspaces diff undo
+ :editor format text-manipulation
+ :editor char-insert tagging
+ :editor buffer-nav window-nav
+ :editor fold undo
  :editor large-files
+ :editor autosave
 
- :emacs autosave calendar minibuffer
- :emacs dired hydra ibuffer popup version-control
 
  :lang-data csv graphql dot
  :lang-data xml toml json yaml logs
@@ -39,11 +40,14 @@
  :lang-weakly-typed lisp-langs python lua
  :lang-weakly-typed erlang-vms godot ruby
 
- :checkers (spell +flyspell)
 
- :tools ide-support twitter pdfs
+ :ide version-control support lookup snippets workspaces diff
+
+ :tools twitter pdfs
  :tools mail term eval
- :tools  processes
+ :tools processes
+ :tools (spelling +flyspell)
+ :tools calendar dired
 
  ;; --------------------------------------------------
  ;; Doom Standard modules

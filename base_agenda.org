@@ -44,6 +44,7 @@ index xkcd using explainxkcd
 fictional syllabi - both of actual papers, and lem-like
 
 ** Links
+https://marginaleffects.com/
 https://repository.si.edu/
 https://ourworldindata.org/grapher/cumulative-co-emissions
 https://seaice.visuals.earth/

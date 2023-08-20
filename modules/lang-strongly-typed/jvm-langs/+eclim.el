@@ -20,7 +20,6 @@
 
 
 (use-package! company-emacs-eclim
-  :when (modulep! :completion company)
   :after java-mode
   :config
   (spec-handling-add! company

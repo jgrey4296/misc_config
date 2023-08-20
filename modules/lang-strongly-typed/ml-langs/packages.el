@@ -15,4 +15,4 @@
 (when (modulep! :editor format) (package! ocamlformat :recipe (:host github :repo "ocaml-ppx/ocamlformat" :files ("emacs/*.el"))))
 (package! dune :recipe (:host github :repo "ocaml/dune" :files ("editor-integration/emacs/*.el")))
 (package! sml-mode)
-(when (modulep! :completion company) (package! company-mlton :recipe (:host github :repo "MatthewFluet/company-mlton" :files ("*.el" "*.basis"))))
+(package! company-mlton :recipe (:host github :repo "MatthewFluet/company-mlton" :files ("*.el" "*.basis")))

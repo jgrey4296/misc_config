@@ -238,9 +238,9 @@ variable for an explanation of the defaults (in comments). See
            (not (doom-context-p 'reload))
            (modulep! +everywhere))
 
-  (setq evil-collection-company-use-tng (modulep! :completion company +tng)
-        ;; must be set before evil/evil-collection is loaded
-        evil-want-keybinding nil)
+  (setq evil-collection-company-use-tng nil
+        evil-want-keybinding nil        ;; must be set before evil/evil-collection is loaded
+        )
 
   ;; This has to be defined here since evil-collection doesn't autoload its own.
   ;; It must be updated whenever evil-collection updates theirs. Here's an easy

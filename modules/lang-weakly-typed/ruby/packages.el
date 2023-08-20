@@ -7,8 +7,7 @@
 
 ;; REPL
 (package! inf-ruby)
-(when (modulep! :completion company)
-  (package! company-inf-ruby))
+(package! company-inf-ruby)
 
 ;; Programming environment
 (package! rubocop)

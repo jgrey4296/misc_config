@@ -1,5 +1,4 @@
 ;;; lang/org/autoload/contrib-ipython.el -*- lexical-binding: t; -*-
-;;;###if (modulep! +ipython)
 
 ;;;###autoload
 (defun +org-ob-ipython-initiate-session-a (&optional session params)
@@ -114,13 +113,12 @@ This function is called by `org-babel-execute-src-block'."
                        (cdr (assoc :pydir (nth 2 info))))))
   (ob-ipython-mode 1)
   ;; hack on company mode to use company-capf rather than company-anaconda
-  (when (modulep! :completion company)
-    (setq-local company-backends
-                '(company-capf
-                  company-dabbrev
-                  company-files
-                  company-yasnippet))
-    (setq-local company-idle-delay nil))
+  (setq-local company-backends
+              '(company-capf
+                company-dabbrev
+                company-files
+                company-yasnippet))
+  (setq-local company-idle-delay nil)
   (when (featurep 'lpy)
     (setq lispy-python-proc
           (format "Python:ob-ipython-%s"

@@ -13,7 +13,7 @@
       scroll-margin 0
       scroll-preserve-screen-position t
       auto-window-vscroll nil
-      blink-cursor-mode -1
+      ;; blink-cursor-mode -1
       blink-matching-paren nil
       x-stretch-cursor nil
       indicate-buffer-boundaries nil

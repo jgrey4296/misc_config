@@ -295,16 +295,7 @@
       )
 ;;-- end <leader> R --- remote
 
-;;-- <leader> s --- search
-(map! :leader
-      :prefix ("s" . "search")
-      :desc "Jump to link"                 "L" #'ffap-menu
-      :desc "Jump to visible link"         "l" #'link-hint-open-link
-      :desc "Search project"               "p" #'+default/search-project
-      :desc "Search project for symbol"    "." #'+default/search-project-for-symbol-at-point
-      :desc "Search current directory"     "d" #'+default/search-cwd
-      )
-;;-- end <leader> s --- search
+;; -- <leader> s --- search
 
 ;; -- <leader> t --- toggle
 

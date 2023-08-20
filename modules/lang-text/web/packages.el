@@ -6,7 +6,7 @@
 (package! haml-mode)
 (package! pug-mode)
 (package! slim-mode)
-(when (and (package! web-mode) (modulep! :completion company)) (package! company-web))
+(when (package! web-mode) (package! company-web))
 
 ;; +css.el
 (package! css-mode)
@@ -17,4 +17,4 @@
 (package! stylus-mode)
 (package! sws-mode)
 (package! rainbow-mode)
-(when (modulep! :completion ivy) (package! counsel-css))
+(package! counsel-css)

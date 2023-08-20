@@ -190,14 +190,14 @@
   :config
   (add-to-list 'doom-modeline-mode-alist '(+doom-dashboard-mode . dashboard))
   (add-hook    'after-setting-font-hook #'+modeline-resize-for-font-h)
-  (add-hook    'doom-load-theme-hook #'doom-modeline-refresh-bars)
-  (add-hook!   'magit-mode-hook #'+modeline-hide-in-non-status-buffer-h)
+  (add-hook    'doom-load-theme-hook    #'doom-modeline-refresh-bars)
+  (add-hook    'magit-mode-hook         #'+modeline-hide-in-non-status-buffer-h)
   )
 
 (use-package! hide-mode-line-mode
   :config
   (add-hook 'completion-list-mode-hook #'hide-mode-line-mode)
-  (add-hook 'Man-mode-hook #'hide-mode-line-mode)
+  (add-hook 'Man-mode-hook             #'hide-mode-line-mode)
   )
 
 ;;-- end modeline

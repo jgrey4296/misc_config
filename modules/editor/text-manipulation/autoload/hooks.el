@@ -53,3 +53,15 @@ on."
       (when hl-todo-mode
         (hl-todo-mode -1)
         (hl-todo-mode +1)))
+
+;;;###autoload
+(defun doom-detect-indentation-h ()
+  (unless (or (not after-init-time)
+              doom-inhibit-indent-detection
+              doom-large-file-p
+              (memq major-mode doom-detect-indentation-excluded-modes)
+              (member (substring (buffer-name) 0 1) '(" " "*")))
+    ;; Don't display messages in the echo area, but still log them
+    (let ((inhibit-message (not init-file-debug)))
+      (dtrt-indent-mode +1)))
+  )

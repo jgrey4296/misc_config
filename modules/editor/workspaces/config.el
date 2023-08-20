@@ -182,10 +182,11 @@
 (use-package! compile
   :defer t
   :config
-  (add-hook 'compilation-mode-hook #'hl-line-mode)
+  (add-hook 'compilation-mode-hook   #'hl-line-mode)
   (add-hook 'compilation-filter-hook #'ansi-color-compilation-filter)
-  (autoload 'comint-truncate-buffer "comint" nil t)
   (add-hook 'compilation-filter-hook #'comint-truncate-buffer)
+
+  (autoload 'comint-truncate-buffer "comint" nil t)
   )
 
 (use-package! projectile
@@ -262,11 +263,6 @@
   (setq compilation-buffer-name-function #'projectile-compilation-buffer-name
         compilation-save-buffers-predicate #'projectile-current-project-buffer-p)
 
-  ;; Support the more generic .project files as an alternative to .projectile
-  (defadvice! doom--projectile-dirconfig-file-a ()
-    :override #'projectile-dirconfig-file
-    (cond ((file-exists-p! (or ".projectile" ".project") (projectile-project-root)))
-          ((expand-file-name ".project" (projectile-project-root)))))
 
   ;; Disable commands that won't work, as is, and that Doom already provides a
   ;; better alternative for.
@@ -281,54 +277,13 @@
   ;; projectile's cache (into the hundreds of MBs). This purges those entries
   ;; when exiting Emacs to prevent slowdowns/freezing when cache files are
   ;; loaded or written to.
-  (add-hook! 'kill-emacs-hook
-    (defun doom-cleanup-project-cache-h ()
-      "Purge projectile cache entries that:
-
-a) have too many files (see `doom-projectile-cache-limit'),
-b) represent blacklisted directories that are too big, change too often or are
-   private. (see `doom-projectile-cache-blacklist'),
-c) are not valid projectile projects."
-      (when (and (bound-and-true-p projectile-projects-cache)
-                 projectile-enable-caching)
-        (setq projectile-known-projects
-              (cl-remove-if #'projectile-ignored-project-p
-                            projectile-known-projects))
-        (projectile-cleanup-known-projects)
-        (cl-loop with blacklist = (mapcar #'file-truename doom-projectile-cache-blacklist)
-                 for proot in (hash-table-keys projectile-projects-cache)
-                 if (or (not (stringp proot))
-                        (string-empty-p proot)
-                        (>= (length (gethash proot projectile-projects-cache))
-                            doom-projectile-cache-limit)
-                        (member (substring proot 0 -1) blacklist)
-                        (and doom-projectile-cache-purge-non-projects
-                             (not (doom-project-p proot)))
-                        (projectile-ignored-project-p proot))
-                 do (doom-log "Removed %S from projectile cache" proot)
-                 and do (remhash proot projectile-projects-cache)
-                 and do (remhash proot projectile-projects-cache-time)
-                 and do (remhash proot projectile-project-type-cache))
-        (projectile-serialize-cache))))
+  (add-hook 'kill-emacs-hook #'doom-cleanup-project-cache-h)
 
   ;; Some MSYS utilities auto expanded the `/' path separator, so we need to prevent it.
   (when IS-WINDOWS
     (setenv "MSYS_NO_PATHCONV" "1") ; Fix path in Git Bash
     (setenv "MSYS2_ARG_CONV_EXCL" "--path-separator")) ; Fix path in MSYS2
 
-  ;; HACK Don't rely on VCS-specific commands to generate our file lists. That's
-  ;;      7 commands to maintain, versus the more generic, reliable and
-  ;;      performant `fd' or `ripgrep'.
-  (defadvice! doom--only-use-generic-command-a (fn vcs)
-    "Only use `projectile-generic-command' for indexing project files.
-And if it's a function, evaluate it."
-    :around #'projectile-get-ext-command
-    (if (and (functionp projectile-generic-command)
-             (not (file-remote-p default-directory)))
-        (funcall projectile-generic-command vcs)
-      (let ((projectile-git-submodule-command
-             (get 'projectile-git-submodule-command 'initial-value)))
-        (funcall fn vcs))))
 
   ;; `projectile-generic-command' doesn't typically support a function, but my
   ;; `doom--only-use-generic-command-a' advice allows this. I do it this way so
@@ -364,16 +319,7 @@ And if it's a function, evaluate it."
                     (if IS-WINDOWS " --path-separator=/")))
            ("find . -type f -print0"))))
 
-  (defadvice! doom--projectile-default-generic-command-a (fn &rest args)
-    "If projectile can't tell what kind of project you're in, it issues an error
-when using many of projectile's command, e.g. `projectile-compile-command',
-`projectile-run-project', `projectile-test-project', and
-`projectile-configure-project', for instance.
-
-This suppresses the error so these commands will still run, but prompt you for
-the command instead."
-    :around #'projectile-default-generic-command
-    (ignore-errors (apply fn args))))
+  )
 
 (use-package! winner
   ;; undo/redo changes to Emacs' window layout

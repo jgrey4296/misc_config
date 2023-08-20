@@ -1,13 +1,13 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
 (defalias 'number-list (symbol-function 'number-sequence))
+
 (defvar +default-want-RET-continue-comments t "If non-nil, RET will continue commented lines.")
 
 ;; General
 (setq save-silently (not noninteractive)
 
  )
-
 
 ;;;###package avy
 (setq avy-all-windows nil
@@ -49,6 +49,23 @@
   (setq tramp-default-method "ssh")) ; faster than the default scp
 
 ;;-- end tramp
+
+(setq auto-revert-verbose t ; let us know when it happens
+      auto-revert-use-notify nil
+      auto-revert-stop-on-user-input nil
+      ;; Only prompts for confirmation when buffer is unsaved.
+      revert-without-query (list "."))
+
+(setq recentf-auto-cleanup nil     ; Don't. We'll auto-cleanup on shutdown
+      recentf-max-saved-items 200) ; default is 20
+
+(setq savehist-save-minibuffer-history t
+      savehist-autosave-interval nil     ; save on kill only
+      savehist-additional-variables '(kill-ring                        ; persist clipboard
+                                      register-alist                   ; persist macros
+                                      mark-ring global-mark-ring       ; persist marks
+                                      search-ring regexp-search-ring) ; persist searches
+)
 
 ;; Ftp
 (setq ftp-program "git-ftp")

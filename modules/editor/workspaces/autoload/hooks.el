@@ -117,3 +117,33 @@
   ;; Load and save configurations for tab-bar.
   (add-hook 'persp-before-save-state-to-file-functions #'+workspaces-save-tab-bar-data-to-file-h)
   (+workspaces-load-tab-bar-data-from-file-h))
+
+;;;###autoload
+(defun doom-cleanup-project-cache-h ()
+      "Purge projectile cache entries that:
+
+a) have too many files (see `doom-projectile-cache-limit'),
+b) represent blacklisted directories that are too big, change too often or are
+   private. (see `doom-projectile-cache-blacklist'),
+c) are not valid projectile projects."
+      (when (and (bound-and-true-p projectile-projects-cache)
+                 projectile-enable-caching)
+        (setq projectile-known-projects
+              (cl-remove-if #'projectile-ignored-project-p
+                            projectile-known-projects))
+        (projectile-cleanup-known-projects)
+        (cl-loop with blacklist = (mapcar #'file-truename doom-projectile-cache-blacklist)
+                 for proot in (hash-table-keys projectile-projects-cache)
+                 if (or (not (stringp proot))
+                        (string-empty-p proot)
+                        (>= (length (gethash proot projectile-projects-cache))
+                            doom-projectile-cache-limit)
+                        (member (substring proot 0 -1) blacklist)
+                        (and doom-projectile-cache-purge-non-projects
+                             (not (doom-project-p proot)))
+                        (projectile-ignored-project-p proot))
+                 do (doom-log "Removed %S from projectile cache" proot)
+                 and do (remhash proot projectile-projects-cache)
+                 and do (remhash proot projectile-projects-cache-time)
+                 and do (remhash proot projectile-project-type-cache))
+        (projectile-serialize-cache)))

@@ -23,9 +23,7 @@
 (load! "+vars")
 
 (defer-load! "+spec-defs")
-(after! jg-bindings-total
-  (load! "+bindings")
-  )
+(defer-load! jg-bindings-total "+bindings")
 
 (use-package! paren-state
   :commands evil-paren-state
@@ -37,7 +35,8 @@
   :init
   (global-set-key [remap other-window] #'switch-window)
   :config
-  (setq switch-window-shortcut-style 'qwerty))
+  (setq switch-window-shortcut-style 'qwerty)
+  )
 
 (use-package! ace-window
   :unless (modulep! +switch-window)
@@ -48,7 +47,8 @@
   (unless (modulep! +numbers)
     (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
   (setq aw-scope 'frame
-        aw-background t))
+        aw-background t)
+  )
 
 (use-package! winum
   :when (modulep! +numbers)
@@ -84,35 +84,6 @@
   (global-set-key [remap xref-go-back] #'better-jumper-jump-backward)
   (global-set-key [remap xref-go-forward] #'better-jumper-jump-forward)
   :config
-  (defun doom-set-jump-a (fn &rest args)
-    "Set a jump point and ensure fn doesn't set any new jump points."
-    (better-jumper-set-jump (if (markerp (car args)) (car args)))
-    (let ((evil--jumps-jumping t)
-          (better-jumper--jumping t))
-      (apply fn args)))
-
-  (defun doom-set-jump-maybe-a (fn &rest args)
-    "Set a jump point if fn actually moves the point."
-    (let ((origin (point-marker))
-          (result
-           (let* ((evil--jumps-jumping t)
-                  (better-jumper--jumping t))
-             (apply fn args)))
-          (dest (point-marker)))
-      (unless (equal origin dest)
-        (with-current-buffer (marker-buffer origin)
-          (better-jumper-set-jump
-           (if (markerp (car args))
-               (car args)
-             origin))))
-      (set-marker origin nil)
-      (set-marker dest nil)
-      result))
-
-  (defun doom-set-jump-h ()
-    "Run `better-jumper-set-jump' but return nil, for short-circuiting hooks."
-    (better-jumper-set-jump)
-    nil)
 
   ;; Creates a jump point before killing a buffer. This allows you to undo
   ;; killing a buffer easily (only works with file buffers though; it's not

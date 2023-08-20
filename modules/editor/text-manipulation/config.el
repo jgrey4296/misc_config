@@ -49,22 +49,6 @@
   (dolist (key '(:unmatched-expression :no-matching-tag))
     (setf (alist-get key sp-message-alist) nil))
 
-  (progn ;; hooks
-    (add-hook! 'eval-expression-minibuffer-setup-hook #'doom-init-smartparens-in-eval-expression-h)
-    (add-hook! 'minibuffer-setup-hook #'doom-init-smartparens-in-minibuffer-maybe-h)
-
-    ;; Smartparens breaks evil-mode's replace state
-    (defvar doom-buffer-smartparens-mode nil)
-    (add-hook! 'evil-replace-state-exit-hook #'doom-enable-smartparens-mode-maybe-h)
-    (add-hook! 'evil-replace-state-entry-hook #'doom-disable-smartparens-mode-maybe-h)
-
-    ;; Smartparens' navigation feature is neat, but does not justify how
-    ;; expensive it is. It's also less useful for evil users. This may need to
-    ;; be reactivated for non-evil users though. Needs more testing!
-    (setq-hook! 'after-change-major-mode-hook
-      sp-navigate-skip-match nil
-      sp-navigate-consider-sgml-tags nil)
-    )
 
   ;; Autopair quotes more conservatively; if I'm next to a word/before another
   ;; quote, I don't want to open a new pair or it would unbalance them.
@@ -88,6 +72,7 @@
              ;; genuinely want to start a new form in the middle of a word.
              :unless '(sp-point-before-word-p sp-point-before-same-p)))
 
+  (progn ;; Lang specific
   ;; In lisps ( should open a new form if before another parenthesis
   (sp-local-pair sp-lisp-modes "(" ")" :unless '(:rem sp-point-before-same-p))
 
@@ -108,6 +93,7 @@
                  "<!--" "-->"
                  :unless '(sp-point-before-word-p sp-point-before-same-p)
                  :actions '(insert) :post-handlers '(("| " "SPC")))
+
 
   ;; Disable electric keys in C modes because it interferes with smartparens
   ;; and custom bindings. We'll do it ourselves (mostly).
@@ -147,12 +133,6 @@
                    "/*!" "*/"
                    :post-handlers '(("||\n[i]" "RET") ("[d-1]< | " "SPC"))))
 
-  ;; Expand C-style comment blocks.
-  (defun +default-open-doc-comments-block (&rest _ignored)
-    (save-excursion
-      (newline)
-      (indent-according-to-mode))
-    )
   (sp-local-pair
    '(js2-mode typescript-mode rjsx-mode rust-mode c-mode c++-mode objc-mode
      csharp-mode java-mode php-mode css-mode scss-mode less-css-mode
@@ -162,6 +142,25 @@
    :post-handlers '(("| " "SPC")
                     (" | " "*")
                     ("|[i]\n[i]" "RET")))
+
+  )
+
+  (progn ;; hooks
+    (add-hook! 'eval-expression-minibuffer-setup-hook #'doom-init-smartparens-in-eval-expression-h)
+    (add-hook! 'minibuffer-setup-hook #'doom-init-smartparens-in-minibuffer-maybe-h)
+
+    ;; Smartparens breaks evil-mode's replace state
+    (defvar doom-buffer-smartparens-mode nil)
+    (add-hook! 'evil-replace-state-exit-hook #'doom-enable-smartparens-mode-maybe-h)
+    (add-hook! 'evil-replace-state-entry-hook #'doom-disable-smartparens-mode-maybe-h)
+
+    ;; Smartparens' navigation feature is neat, but does not justify how
+    ;; expensive it is. It's also less useful for evil users. This may need to
+    ;; be reactivated for non-evil users though. Needs more testing!
+    (setq-hook! 'after-change-major-mode-hook
+      sp-navigate-skip-match nil
+      sp-navigate-consider-sgml-tags nil)
+    )
 
   )
 
@@ -178,15 +177,6 @@
   ;; major mode checks, so I implement it in `doom-detect-indentation-h'.
   :hook ((change-major-mode-after-body read-only-mode) . doom-detect-indentation-h)
   :config
-  (defun doom-detect-indentation-h ()
-    (unless (or (not after-init-time)
-                doom-inhibit-indent-detection
-                doom-large-file-p
-                (memq major-mode doom-detect-indentation-excluded-modes)
-                (member (substring (buffer-name) 0 1) '(" " "*")))
-      ;; Don't display messages in the echo area, but still log them
-      (let ((inhibit-message (not init-file-debug)))
-        (dtrt-indent-mode +1))))
 
   ;; Enable dtrt-indent even in smie modes so that it can update `tab-width',
   ;; `standard-indent' and `evil-shift-width' there as well.
@@ -198,17 +188,4 @@
   (push '(t tab-width) dtrt-indent-hook-generic-mapping-list)
 
   (defvar dtrt-indent-run-after-smie)
-  (defadvice! doom--fix-broken-smie-modes-a (fn &optional arg)
-    "Some smie modes throw errors when trying to guess their indentation, like
-`nim-mode'. This prevents them from leaving Emacs in a broken state."
-    :around #'dtrt-indent-mode
-    (let ((dtrt-indent-run-after-smie dtrt-indent-run-after-smie))
-      (letf! ((defun symbol-config--guess (beg end)
-                (funcall symbol-config--guess beg (min end 10000)))
-              (defun smie-config-guess ()
-                (condition-case e (funcall smie-config-guess)
-                  (error (setq dtrt-indent-run-after-smie t)
-                         (message "[WARNING] Indent detection: %s"
-                                  (error-message-string e))
-                         (message ""))))) ; warn silently
-        (funcall fn arg)))))
+  )

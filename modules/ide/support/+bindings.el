@@ -75,11 +75,7 @@
 
 ;;-- lsp commands
 (map! :map jg-lsp-command-map
-      "?" #'+jg-ide-registered-lsp-clients
-      "-" #'+jg-ide-disable-lsp-client
-      "=" #'+jg-ide-enable-lsp-client
       (:prefix ("=" . "Formatting"))
-      (:prefix ("F" . "Folders"))
       (:prefix ("r" . "Refactoring"))
       (:prefix ("a" . "Actions"))
       )
@@ -89,13 +85,6 @@
       :desc "format buffer" "=" #'lsp-format-buffer
       :desc "format region" "r" #'lsp-format-region
 )
-
-(map! :map jg-lsp-command-map ;; Folders
-      :prefix ("F" . "Folders")
-      :desc "add folder"          "a" #'lsp-workspace-folders-add
-      :desc "un-blacklist folder" "b" #'lsp-workspace-blacklist-remove
-      :desc "remove folder"       "r" #'lsp-workspace-folders-remove
-      )
 
 (map! :map jg-lsp-command-map ;; refactoring
       :prefix ("r" . "Refactoring")

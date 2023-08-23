@@ -122,7 +122,7 @@
   )
 
 (use-package! flycheck-cask
-  :defer t
+  :commands #'flycheck-cask-setup
   :init
   (add-hook! 'emacs-lisp-mode-hook
     (add-hook 'flycheck-mode-hook #'flycheck-cask-setup nil t))
@@ -131,7 +131,9 @@
 
 (use-package! flycheck-package
   :after flycheck
-  :config (flycheck-package-setup))
+  :config
+  (flycheck-package-setup)
+  )
 
 (use-package! elisp-demos
   ;; adds example code in help buffers

@@ -30,6 +30,7 @@
          link-start-point
          )
     (with-temp-buffer
+      (org-mode)
       (mapc (lambda (x) (insert (format "%s\n" x))) no-props)
       (goto-char (point-min))
       (while (not (equal (point) (point-max)))

@@ -27,7 +27,8 @@
 )
 
 (use-package! lsp-haskell
-  :after lsp-mode
+  :after (haskell-mode lsp-mode)
+  :defer t
   :init
   :config
   ;; Does some strange indentation if it pastes in the snippet

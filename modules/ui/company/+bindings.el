@@ -4,7 +4,8 @@
 (defvar jg-company-search-map (make-sparse-keymap))
 
 (map! :map jg-company-search-map
-      [escape] #'company-search-mode
+      [escape] (cmd! (company-enable-overriding-keymap company-active-map))
+      "|" (cmd! (company-enable-overriding-keymap company-active-map))
       "RET"    #'company-complete-selection
       "DEL"    #'company-search-delete-char
       "Q"      #'company-search-abort

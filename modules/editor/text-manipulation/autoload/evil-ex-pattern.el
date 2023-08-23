@@ -2,6 +2,20 @@
 
 (defvar jg-evil-ex-interactive-highlight t)
 
+(evil-ex-define-argument-type jg-pattern
+  " Like the highlighter for evil-ex-substitute, but for patterns"
+  :runner (lambda (flag &optional arg)
+            (+jg-text-manipulation-highlight-handler nil flag arg))
+  )
+
+(evil-define-interactive-code "<p/>"
+  "Ex Pattern Argument with active highlighting"
+  :ex-arg jg-pattern
+  (when evil-called-from-ex-p
+    (+jg-text-manipulation-get-pattern-info evil-ex-argument t))
+  )
+
+
 ;;;###autoload
 (defun +jg-text-manipulation-highlight-handler (prefix flag &optional arg)
   (with-current-buffer evil-ex-original-buffer
@@ -102,20 +116,6 @@ last search pattern is used. "
                             (and (not evil-ex-substitute-global)
                                  (memq ?g flags))))
   )
-
-(evil-define-interactive-code "<p/>"
-  "Ex Pattern Argument with active highlighting"
-  :ex-arg pattern
-  (when (evil-ex-p)
-    (+jg-text-manipulation-get-pattern-info evil-ex-argument t))
-  )
-
-(evil-ex-define-argument-type pattern
-  " Like the highlighter for evil-ex-substitute, but for patternment "
-  :runner (lambda (flag &optional arg)
-            (+jg-text-manipulation-highlight-handler nil flag arg))
-  )
-
 
 ;;;###autoload (autoload '+jg-text-manipulation-ex-match-highlight "editor/text-manipulation/autoload/evil-ex-pattern" nil t)
 (evil-define-command +jg-text-manipulation-ex-match-highlight (pattern &rest args)

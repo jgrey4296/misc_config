@@ -144,7 +144,7 @@
                      ("^\\*Project Zimmerframe\\*" :side left :ttl nil :quit t :select nil :priority -50)
                      )
                     '(neotree
-                      ("\\*NeoTree\\*"   :side left :ttl nil :height 0.4 :quit nil :select nil :priority -100)
+                      ("\\*NeoTree\\*"   :side left :ttl nil :height 0.4 :quit nil :select nil :priority 100)
                       )
                     '(compilation
                       ("\\*compilation\\*" :quit t :select nil :height 0.2 :priority 20)

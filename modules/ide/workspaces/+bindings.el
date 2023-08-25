@@ -10,18 +10,16 @@
   [remap evil-window-delete] #'+workspace/close-window-or-workspace)
 
 (map! :leader
-      :desc "Window Hydra"       "W" #'hydra-workspace/body
-      :desc "Ring Hydra"         "R" #'hydra-carousel/body
+      :desc "Window Control"           "W"     #'transient-workspace
+      :desc "Carousel Control"         "R"     #'transient-carousel
       :desc "Workspace Counsel"  "w RET" #'+jg-workspaces-ivy
-      :n "p RET" #'+neotree/find-this-file
+      :n "p RET"                         #'+neotree/find-this-file
       )
 
 (map! :leader
       :prefix ("w" . "Windows")
-      :desc "Neotree Sidebar"              "s" #'+neotree/open
+      :desc "Neotree Sidebar"              "s"   #'+neotree/open
       :desc "Delete workspace"             "DEL" #'+workspace/delete
-      :desc "Most Recent"                  "L" #'carousel-goto-most-recent
-      :desc "Oldest"                       "H" #'carousel-goto-oldest
       )
 
 (map! :leader
@@ -108,9 +106,9 @@
       )
 
 (map! :map jg-binding-forward-general-motion-map
-      :desc "Walk Next" "n" #'zimmerframe-next
+      :desc "Walk Next" "z" #'zimmerframe-next
       :map jg-binding-backward-general-motion-map
-      :desc "Walk Back" "n" #'zimmerframe-prev
+      :desc "Walk Back" "z" #'zimmerframe-prev
       )
 
 ;;-- end zimmerframe
@@ -158,7 +156,7 @@
       "C-c C-c" #'carousel-edit-commit)
 
 (map! :map carousel-minor-mode-map
-      :n "R" #'hydra-carousel/body
+      :n "R" #'transient-carousel
       )
 
 (map! :map jg-binding-backward-general-motion-map

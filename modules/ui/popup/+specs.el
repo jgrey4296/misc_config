@@ -46,9 +46,9 @@
                       ("^\\*\\(?:[Cc]ompil\\(?:ation\\|e-Log\\)\\|Messages\\)" :vslot -2 :size 0.3  :autosave t :quit t :ttl nil :priority -100)
                       ("^\\*Local variables\\*\\'"                               :vslot -1 :slot 1 :size +popup-shrink-to-fit :priority -100)
                       ("^\\*Completions" :ignore t :priority -100)
-                      ("^ \\*"                                                 :slot 1 :vslot -1 :size +popup-shrink-to-fit :priority -100)
-                      ("^\\*"                                                  :slot 1 :vslot -1 :select t :priority -100)
-                               )
+                      ("^ \\*"                                                 :slot 1 :vslot -1 :size +popup-shrink-to-fit :priority -200)
+                      ("^\\*"                                                  :slot 1 :vslot -1 :select t :priority -200)
+                      )
                     )
 ;; IGNORE ACTIONS SIDE SIZE WIDTH HEIGHT SLOT
 ;; VSLOT TTL QUIT SELECT MODELINE AUTOSAVE PARAMETERS)

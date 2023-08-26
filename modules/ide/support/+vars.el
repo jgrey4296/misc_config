@@ -21,9 +21,9 @@
       lsp-enable-text-document-color     nil             ;; can be slow
       lsp-enable-xref                    t
 
-      lsp-eldoc-enable-hover t
-      lsp-eldoc-render-all t
-      lsp-completion-enable              nil
+      lsp-eldoc-enable-hover             t
+      lsp-eldoc-render-all               t
+      lsp-completion-enable              t
       lsp-headerline-breadcrumb-enable   nil
 
       lsp-keep-workspace-alive           nil

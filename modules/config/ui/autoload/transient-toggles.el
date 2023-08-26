@@ -36,6 +36,13 @@
   (transient-make-mode-toggle! highlight-parentheses-mode     "Higlight-wrappers" "w")
   (transient-make-mode-toggle! rainbow-mode                   "Rainbow Colours"   "r")
   (transient-make-mode-toggle! highlight-changes-visible-mode "Highlight-changes" "x")
+  (transient-make-mode-toggle! reveal-mode                    "Reveal Invisible" "I")
+
+  ;;
+  (transient-make-call! elide-head "e"
+                        (format "%s : Elide Head" (fmt-as-bool! elide-head-overlay))
+                        (if elide-head-overlay (elide-head-show) (elide-head))
+                        )
 
   (transient-make-call! link-display "l"
                         (format "%-2s : Link Display" (fmt-as-bool! org-link-descriptive))
@@ -65,6 +72,7 @@
                             (transient-macro-toggle-global-prettify-symbols-mode)
                             (transient-macro-call-quickscope)
                             (transient-macro-toggle-highlight-parentheses-mode)
+                            (transient-macro-call-elide-head)
                             ]
                            ]
                           )
@@ -76,7 +84,9 @@
   (transient-make-mode-toggle! ruler-mode                          "Ruler"        "r")
   (transient-make-mode-toggle! whitespace-mode                     "Whitespace"   "w")
   (transient-make-mode-toggle! display-line-numbers-mode           "Line Numbers" "n")
+  (transient-make-mode-toggle! glasses-mode                        "Glasses" "g")
 
+  ;;
   (transient-make-call!   spelling "s"
                           (format "%-2s : Spelling" (fmt-as-bool! flyspell-mode))
                           (flyspell-mode 'toggle)
@@ -96,6 +106,9 @@
                             (transient-macro-toggle-ruler-mode)
                             (transient-macro-toggle-whitespace-mode)
                             (transient-macro-call-spelling)
+                            ]
+                           [
+                            (transient-macro-toggle-glasses-mode)
                             ]
                            ]
                           )

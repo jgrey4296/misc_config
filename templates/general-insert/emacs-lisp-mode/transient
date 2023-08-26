@@ -1,0 +1,35 @@
+Transient Reminders:
+
+Prefixes                                               # display the pop-up UI and bind the keymap.
+Suffixes                                               # commands bound within a prefix
+Infixes                                                # a specialized suffix for storing and setting state
+Suffix                                                 # may be yet another *Prefix*, in which case the transient is nested
+
+Group                                                  # A Vector. [ ...pre/in/suff-ixes ... ]
+:description (str/lambda)                              # First entry of a group, as a string or :description (str/lambda)
+:class sym                                             # manually set class for group
+:pad-keys t                                            # align descriptions
+
+Rows                                                   # Vector for each row
+Columns                                                # Nested Vectors
+
+
+transient-define-argument                              # for defining infixes
+:class 'transient-switches                             # infix class. use with :argument-format and :choices
+
+(transient-args transient-current-command)             # get args manually
+(transient-arg-value "--argument-" (transient-args..)) # parsed retrieval
+(transient-suffixes transient-current-command)         #  retrieve fully hydrated suffix
+
+
+(transient-insert-suffix 'cmd loc new-suffix)          # modifying
+
+
+Vars:
+transient--debug                  # for debugging
+transient-resume-mode-hook        # hooks
+transient-toggles-minor-mode-hook # hooks
+transient-mark-mode-hook          # hooks
+transient-exit-hook               # hooks
+
+__reference__                     # https://magit.vc/manual/transient.html

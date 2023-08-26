@@ -5,7 +5,6 @@
       (:prefix "w"
        :desc "Toggle Layout"               "|"     #'+jg-ui-window-layout-toggle
        :desc "Rotate Windows"              "\\"    #'+jg-ui-window-rotate-forward
-       :desc "Dedicate"                    "."     #'+jg-ui-toggle-window-dedication
        )
       (:prefix "b"
        :desc "Toggle narrowing"            "-"   #'+jg-ui-toggle-narrow-buffer

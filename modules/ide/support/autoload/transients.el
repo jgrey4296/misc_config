@@ -3,18 +3,22 @@
 ;; https://emacs-lsp.github.io/lsp-mode/tutorials/how-to-turn-off/
 
 (progn
-  (transient-make-var-toggle! lsp-doc-hover lsp-eldoc-enable-hover "Docs on Hover" "h")
+  (transient-make-var-toggle! lsp-doc-hover lsp-eldoc-enable-hover         "Docs on Hover" "h")
   (transient-make-var-toggle! lsp-doc-childframe lsp-ui-doc-use-childframe "Doc Childframe" "f")
-  (transient-make-var-toggle! lsp-keep-alive lsp-keep-workspace-alive "Keep Alive" "k")
+  (transient-make-var-toggle! lsp-keep-alive lsp-keep-workspace-alive      "Keep Alive" "k")
 
-  (transient-make-mode-toggle! lsp-modeline-diagnostics-mode      "Modeline Diagnostics" "m")
-  (transient-make-mode-toggle! lsp-ui-sideline-mode               "sideline" "s")
-  (transient-make-mode-toggle! lsp-modeline-code-actions-mode     "Modeline code actions" "a")
-  (transient-make-mode-toggle! lsp-headerline-breadcrumb-mode     "Breadcrumb" "b")
-  (transient-make-mode-toggle! lsp-ui-doc-mode                    "Documentation Popup" "d")
-  (transient-make-mode-toggle! lsp-lens-mode                      "Lenses" "l")
-  (transient-make-mode-toggle! lsp-treemacs-sync-mode             "treemacs integration" "T")
+  (transient-make-mode-toggle! lsp-ui-sideline-mode                        "Sideline" "s")
+  (transient-make-mode-toggle! lsp-modeline-code-actions-mode              "Modeline code actions" "a")
+  (transient-make-mode-toggle! lsp-headerline-breadcrumb-mode              "Breadcrumb" "b")
+  (transient-make-mode-toggle! lsp-ui-doc-mode                             "Documentation Popup" "p")
+  (transient-make-mode-toggle! lsp-lens-mode                               "Lenses" "l")
+  (transient-make-mode-toggle! lsp-treemacs-sync-mode                      "Treemacs integration" "T")
 
+  (transient-make-mode-toggle! lsp-modeline-diagnostics-mode               "Modeline Diagnostics" "m")
+  (transient-make-mode-toggle! lsp-diagnostics-mode                        "Diagnostics" "d")
+  (transient-make-mode-toggle! lsp-completion-mode                         "Completion" "c")
+
+  ;;
   (transient-make-call! lsp-trace-io "i"
                         (format "%-2s : Log IO" (fmt-as-bool! lsp-log-io))
                         (call-interactively #'lsp-toggle-trace-io))
@@ -128,6 +132,8 @@
                            " "
                            "Toggles"
                             (transient-macro-toggle-lsp-doc-hover)
+                            (transient-macro-toggle-lsp-completion-mode)
+                            (transient-macro-toggle-lsp-diagnostics-mode)
                             ]
                            [ "Settings"
                              (transient-macro-call-lsp-on-type-formatting)

@@ -8,7 +8,7 @@
  :editor     (evil +everywhere)
  :config     bindings disabled help search ui
 
- :ui         company ivy helm hydra ibuffer minibuffer popup
+ :ui         ivy helm hydra ibuffer minibuffer popup
 
  ;; TODO :experimentation
 
@@ -41,7 +41,7 @@
  :lang-weakly-typed erlang-vms godot ruby
 
 
- :ide version-control support lookup snippets workspaces diff
+ :ide version-control support lookup snippets workspaces diff company
 
  :tools twitter pdfs
  :tools mail term eval

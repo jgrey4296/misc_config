@@ -31,7 +31,14 @@
                         (format "%-2s : Window Dedicated: %s"
                                 (fmt-as-bool! (window-dedicated-p (selected-window)))
                                 (window-buffer (selected-window)))
-                        (+jg-ui-toggle-window-dedication))
+                        (let ((curr-window (selected-window)))
+                          (set-window-dedicated-p curr-window (not (window-dedicated-p curr-window)))
+                          (if (window-dedicated-p curr-window)
+                              (message "Window is now dedicated to %s" (window-buffer curr-window))
+                            (message "Window is un-dedicated"))
+                          )
+  )
+
   )
 
 ;;;###autoload (autoload 'transient-workspace "ide/workspaces/autoload/transient.el" nil t)

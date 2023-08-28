@@ -5,16 +5,16 @@
 
 (map! :map jg-help-map
       "'"    #'describe-char
-      "f"    #'describe-function
+      "f"    #'counsel-describe-function
       "c"    #'+jg-help-describe-class
-      "v"    #'describe-variable
+      "v"    #'counsel-describe-variable
       "l"    #'view-lossage
       "t"    #'list-timers
       :desc "Major Mode match" "m"    (cmd! (message "Major Mode: %s" major-mode))
       :desc "Memory Report"    "M"    #'memory-report
       "!"   #'doom-debug-mode
       "DEL" #'free-keys
-      )
+    )
 
 (map! :map jg-help-map
       :prefix ("e" . "Edit")
@@ -117,13 +117,6 @@
       :n "=" #'helpful-update
       :n "SPC e" #'eval-last-sexp
       )
-
-
-(global-set-key [remap describe-function] #'helpful-callable)
-(global-set-key [remap describe-command]  #'helpful-command)
-(global-set-key [remap describe-variable] #'helpful-variable)
-(global-set-key [remap describe-key]      #'helpful-key)
-(global-set-key [remap describe-symbol]   #'helpful-symbol)
 
 (map! :leader
       :desc "help"            "h" jg-help-map

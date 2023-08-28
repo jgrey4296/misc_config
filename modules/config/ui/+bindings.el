@@ -69,3 +69,16 @@
 
 (evil-make-overriding-map transient-toggles-minor-mode-map)
 ;;-- end transient
+
+;;-- treemacs
+treemacs-project-map
+treemacs-toggle-map
+treemacs--fringe-indicator-bitmap
+treemacs-workspace-map
+treemacs-copy-map
+treemacs-node-visit-map
+evil-treemacs-state-local-map
+treemacs-mode-map
+evil-treemacs-state-map
+
+;;-- end treemacs

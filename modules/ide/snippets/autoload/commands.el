@@ -104,3 +104,12 @@ shadow the default snippet)."
          (insert ?\" (symbol-name (seq-random-elt +snippets-random-var-names))  ?\"))
         )
   )
+
+
+(defvar jg-snippets-debug-snippet-name "util.debug")
+
+;;;###autoload
+(defun +jg-snippets-insert-debug ()
+  (interactive)
+  (yas-expand-snippet (yas-lookup-snippet jg-snippets-debug-snippet-name) (point))
+  )

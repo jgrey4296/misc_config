@@ -1,4 +1,11 @@
+
 ;;; emacs/jg-vc/autoload/advice.el -*- lexical-binding: t; -*-
+
+;;;###autoload
+(defun +vc-gutter-type-at-pos-fn (type _pos)
+  (if (eq type 'delete)
+      'diff-hl-bmp-delete
+    'diff-hl-bmp-middle))
 
 ;;;###autoload
 (defun +vc-support-git-timemachine-a (fn)
@@ -126,3 +133,17 @@ ensure it is built when we actually use Forge."
 
 ;;;###autoload
 (advice-add 'git-gutter:search-near-diff-index :override #'+vc-gutter--fix-linearity-of-hunks-a)
+
+;;;###autoload
+(defun +vc-gutter-define-thin-bitmaps-a (&rest args)
+  (define-fringe-bitmap 'diff-hl-bmp-middle [224] nil nil '(center repeated))
+  (define-fringe-bitmap 'diff-hl-bmp-delete [240 224 192 128] nil nil 'top))
+
+;;;###autoload
+(advice-add 'diff-hl-define-bitmaps :override #'+vc-gutter-define-thin-bitmaps-a)
+
+;;;###autoload
+(advice-add 'diff-hl-fringe-bmp-from-pos  :override #'+vc-gutter-type-at-pos-fn)
+
+;;;###autoload
+(advice-add 'diff-hl-fringe-bmp-from-type :override #'+vc-gutter-type-at-pos-fn)

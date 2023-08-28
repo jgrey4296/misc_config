@@ -170,13 +170,15 @@
   (setq flycheck-global-modes nil)
 
   :config
-  (setq flycheck-emacs-lisp-load-path 'inherit
-        flycheck-idle-change-delay 1.0  ;; And don't recheck on idle as often
-        flycheck-buffer-switch-check-intermediate-buffers t
-        flycheck-display-errors-delay 0.25
-        )
+  (after! fringe
+    ;; Let diff-hl have left fringe, flycheck can have right fringe
+    ;; A non-descript, left-pointing arrow
+    (define-fringe-bitmap 'flycheck-fringe-bitmap-double-arrow [16 48 112 240 112 48 16] nil nil 'center)
+    )
+
   (delq 'new-line flycheck-check-syntax-automatically)
-  (remove-hook! 'after-change-major-mode-hook #'global-flycheck-mode-enable-in-buffers)
+  (remove-hook 'after-change-major-mode-hook #'global-flycheck-mode-enable-in-buffers)
+
 )
 
 (use-package! flycheck-popup-tip
@@ -218,5 +220,9 @@
   (require 'tree-sitter-langs)
   )
 
+(use-package! lint-result-mode
+  :config
+  (add-hook 'lint-result-mode-hook '+fold/close-all)
+  )
 
 ;;; config.el ends here

@@ -44,7 +44,7 @@
   (add-hook 'magit-pre-refresh-hook  #'diff-hl-magit-pre-refresh)
   (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh)
   (add-hook! 'diff-hl-flydiff-mode-hook #'+vc-gutter-init-flydiff-mode-h)
-
+  (add-hook 'diff-hl-mode-hook #'+vc-gutter-fix-diff-hl-faces-h)
   )
 
 (use-package! diff-mode :defer t)

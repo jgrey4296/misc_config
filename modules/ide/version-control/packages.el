@@ -2,23 +2,26 @@
 ;;; emacs/jg-vc/packages.el
 
 (package! smerge-mode :built-in t)
+(package! evil-states-plus :recipe (:host github :repo "jgrey4296/evil-states-plus" :includes (conflict-merge-state)))
 
-(package! magit)
-(package! forge )
 (package! code-review :recipe (:files ("graphql" "code-review*.el")))
-(package! magit-todos )
-(package! vdiff-magit)
+
+(package! fringe :built-in t)
 (package! vi-tilde-fringe)
 
-(if (modulep! +diff-hl)
-    (package! diff-hl)
-  (package! git-gutter-fringe))
+(package! diff-hl)
+(package! vdiff-magit)
 
 (package! vc :built-in t)
 (package! vc-annotate :built-in t)
 (package! smerge-mode :built-in t)
 
 (package! browse-at-remote)
+
+(package! magit)
+(package! magit-todos )
+(package! forge )
 (package! git-commit)
 (package! git-timemachine :recipe (:host github :repo "emacsmirror/git-timemachine"))
 (package! git-modes)
+(package! git-gutter-fringe)

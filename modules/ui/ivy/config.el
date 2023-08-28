@@ -1,12 +1,21 @@
 ;;; completion/ivy/config.el -*- lexical-binding: t; -*-
 
-(load! "+vars")
+(local-load! "+vars")
+
 (defer-load! jg-bindings-total "+bindings")
+
 (defer-load! jg-evil-ex-bindings "+evil-ex")
 
+(use-package! swiper
+  :config
+  (setq swiper-action-recenter t)
+  )
+
+;;-- ivy
 
 (use-package! ivy
   :hook (doom-first-input . ivy-mode)
+  :after counsel
   :init
   (let ((standard-search-fn (if (modulep! +prescient)
                                 #'+ivy-prescient-non-fuzzy
@@ -37,7 +46,6 @@
   ;; Counsel changes a lot of ivy's state at startup; to control for that, we
   ;; need to load it as early as possible. Some packages (like `ivy-prescient')
   ;; require this.
-  (require 'counsel nil t)
 
   ;; Highlight each ivy candidate including the following newline, so that it
   ;; extends to the right edge of the window
@@ -127,6 +135,10 @@
   (add-hook 'doom-after-reload-hook #'posframe-delete-all)
   )
 
+;;-- end ivy
+
+;;-- counsel
+
 (use-package! counsel
   :defer t
   :init
@@ -136,11 +148,6 @@
     ;;        This backwards compatibility complicates things for Doom. Simpler to
     ;;        just force it to always be a list.
     (setq counsel-rg-base-command (split-string counsel-rg-base-command)))
-
-  ;; Integrate with `helpful'
-  (setq counsel-describe-function-function #'helpful-callable
-        counsel-describe-variable-function #'helpful-variable
-        counsel-descbinds-function         #'helpful-callable)
 
   ;; Make `counsel-compile' projectile-aware (if you prefer it over
   ;; `+ivy/compile' and `+ivy/project-compile')
@@ -189,50 +196,6 @@
 
 ;;-- end ivy
 
-;;-- advice
-
-  (defadvice! +ivy--run-from-ivy-directory-a (fn &rest args)
-    " HACK Fix an issue where `counsel-projectile-find-file-action' would try to
-        open a candidate in an occur buffer relative to the wrong buffer,
-        causing it to fail to find the file we want. "
-    :around #'counsel-projectile-find-file-action
-    (let ((default-directory (ivy-state-directory ivy-last)))
-      (apply fn args)))
-
-  ;; REVIEW Move this somewhere else and perhaps generalize this so both
-  ;;        ivy/helm users can enjoy it.
-  (defadvice! +ivy--counsel-file-jump-use-fd-rg-a (args)
-    "Change `counsel-file-jump' to use fd or ripgrep, if they are available."
-    :override #'counsel--find-return-list
-    (cl-destructuring-bind (find-program . args)
-        (cond ((when-let (fd (executable-find (or doom-projectile-fd-binary "fd") t))
-                 (append (list fd "--hidden" "--type" "file" "--type" "symlink" "--follow" "--color=never")
-                         (cl-loop for dir in projectile-globally-ignored-directories
-                                  collect "--exclude"
-                                  collect dir)
-                         (if IS-WINDOWS '("--path-separator=/")))))
-              ((executable-find "rg" t)
-               (append (list "rg" "--hidden" "--files" "--follow" "--color=never" "--no-messages")
-                       (cl-loop for dir in projectile-globally-ignored-directories
-                                collect "--glob"
-                                collect (concat "!" dir))
-                       (if IS-WINDOWS '("--path-separator=/"))))
-              ((cons find-program args)))
-      (unless (listp args)
-        (user-error "`counsel-file-jump-args' is a list now, please customize accordingly."))
-      (counsel--call
-       (cons find-program args)
-       (lambda ()
-         (goto-char (point-min))
-         (let (files)
-           (while (< (point) (point-max))
-             (push (buffer-substring (line-beginning-position) (line-end-position))
-                   files)
-             (forward-line 1))
-           (nreverse files))))))
-
-;;-- end advice
-
 ;;-- hooks
   ;; Record in jumplist when opening files via counsel-{ag,rg,pt,git-grep}
   (add-hook 'counsel-grep-post-action-hook #'better-jumper-set-jump)
@@ -259,6 +222,8 @@
   (when (modulep! +prescient) (setq counsel-projectile-sort-files t))
   )
 
+;;-- end counsel
+
 (use-package! wgrep
   :commands wgrep-change-to-wgrep-mode
   :config (setq wgrep-auto-save-buffer t)
@@ -273,11 +238,6 @@
     (setq ivy--flx-featurep nil))
   :init
   (setq ivy-flx-limit 10000)
-  )
-
-(use-package! swiper
-  :config
-  (setq swiper-action-recenter t)
   )
 
 (use-package! amx

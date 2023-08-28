@@ -65,4 +65,13 @@
       )
 ;;-- end shell
 
+(map! :leader
+      :prefix "i"
+      :desc "Breakpoint" "b" #'+jg-snippets-insert-debug
+      )
+
+(map! :map jg-binding-normal-state-map
+      :desc "breakpoint"          "I b"   #'+jg-snippets-insert-debug
+      )
+
 (define-key yas-minor-mode-map [menu-bar] nil)

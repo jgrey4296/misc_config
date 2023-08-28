@@ -1,6 +1,7 @@
 ;;; emacs/jg-vc/config.el -*- lexical-binding: t; -*-
 
-(load! "+vars")
+(local-load! "+defs")
+(local-load! "+vars")
 (defer-load! jg-bindings-total "+bindings")
 (defer-load! (magit jg-evil-ex-bindings) "+evil-ex")
 
@@ -108,8 +109,13 @@
 
   )
 
-(when (modulep! +pretty)
-  (load! "+fringe")
+(use-package! git-gutter-fringe
+  :after fringe
+  :config
+;; Redefine fringe bitmaps to take up only half the horizontal space
+  (define-fringe-bitmap 'git-gutter-fr:added [224] nil nil '(center repeated))
+  (define-fringe-bitmap 'git-gutter-fr:modified [224] nil nil '(center repeated))
+  (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240] nil nil 'bottom)
   )
 
 (use-package! git-timemachine
@@ -154,3 +160,5 @@
   ;; TODO: PR this upstream?
   (add-to-list 'browse-at-remote-remote-type-regexps '(:host "^codeberg\\.org$" :type "codeberg"))
   )
+
+(use-package! conflict-merge-state)

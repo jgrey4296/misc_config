@@ -23,4 +23,6 @@
 (package! term   :built-in t)
 (package! vterm  :built-in 'prefer)
 (package! comint :built-in t)
+(package! shell-pop)
+(package! exec-path-from-shell)
 ;;; packages.el ends here

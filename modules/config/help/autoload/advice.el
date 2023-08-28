@@ -15,19 +15,11 @@
   )
 
 ;;;###autoload
-(advice-add 'doom--help-package-configs :before-until #'+jg-help-package-config-advice)
-
-;;;###autoload
 (defun +jg-help-protect-insert-button (label &optional uri line)
   "short circuits `doom--help-insert-button if passed a null value"
   label
   )
 
-;;;###autoload
-(advice-add 'doom--help-insert-button :before-while #'+jg-help-protect-insert-button)
-
-
-;; REVIEW This should be reported upstream to Emacs.
 (defun doom--find-function-search-for-symbol-save-excursion-a (fn &rest args)
   "Suppress cursor movement by `find-function-search-for-symbol'.
 
@@ -46,6 +38,12 @@ current buffer."
           (with-current-buffer buf (goto-char pos))))))
   )
 
+;;;###autoload
+(when (> emacs-major-version 28)
+  (advice-add #'find-function-search-for-symbol :around #'doom--find-function-search-for-symbol-save-excursion-a))
 
 ;;;###autoload
-(when (> emacs-major-version 28) (advice-add #'find-function-search-for-symbol :around #'doom--find-function-search-for-symbol-save-excursion-a))
+(advice-add 'doom--help-package-configs :before-until #'+jg-help-package-config-advice)
+
+;;;###autoload
+(advice-add 'doom--help-insert-button :before-while #'+jg-help-protect-insert-button)

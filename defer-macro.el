@@ -1,5 +1,15 @@
 ;;; defer-macro.el -*- lexical-binding: t; -*-
 
+;; (defmacro file! ()
+;;   "Return the file of the file this macro was called."
+;;   (or (macroexp-file-name) load-file-name buffer-file-name)
+;; )
+
+;; (defmacro dir! ()
+;;   "Return the directory of the file this macro was called.
+;; from doom."
+;;   (file-name-directory (file!)))
+
 (defmacro dlog! (text &rest args)
   " A Simple, doom-less debug message when 'debug-on-error is true"
   `(when debug-on-error
@@ -41,6 +51,10 @@
           (t (list 'progn core-timer))
           )
     )
+  )
+
+(defmacro local-load! (filename &optional noerror)
+  `(load (file-name-concat (dir!) ,filename) ,noerror 'nomessage)
   )
 
 (defmacro defer! (time &rest body)

@@ -16,3 +16,15 @@
       (remove-hook 'evil-insert-state-exit-hook #'diff-hl-flydiff-update)
     (add-hook 'evil-insert-state-exit-hook #'diff-hl-flydiff-update))
   )
+
+;;;###autoload
+(defun +vc-gutter-type-face-fn (type _pos)
+  (intern (format "diff-hl-%s" type)))
+
+;;;###autoload
+(defun +vc-gutter-fix-diff-hl-faces-h ()
+  (mapc (doom-rpartial #'set-face-background nil)
+        '(diff-hl-insert
+          diff-hl-delete
+          diff-hl-change))
+  )

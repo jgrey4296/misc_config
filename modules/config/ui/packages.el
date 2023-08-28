@@ -21,3 +21,4 @@
 (package! treemacs)
 (package! paren)
 (package! hide-mode-line)
+(package! fringe :built-in t)

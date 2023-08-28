@@ -1,5 +1,6 @@
 ;; structs.el -*- lexical-binding: t; -*-
 
+;;;###autoload
 (defun +jg-help-describe-class()
   " use cl-describe-struct  "
   (interactive)

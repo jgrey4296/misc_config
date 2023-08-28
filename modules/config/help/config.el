@@ -28,11 +28,13 @@
             (#'describe-variable #'helpful-variable))
       (apply fn args)))
 
-  (add-hook! 'helpful-mode-hook
-            (defun jg-unset-helpful-dedicated()
-              (set-window-dedicated-p (selected-window) nil))
-            #'outline-minor-mode
-            )
+  (defun jg-unset-helpful-dedicated()
+    (set-window-dedicated-p (selected-window) nil)
+    )
+
+
+  (add-hook 'helpful-mode-hook #'jg-unset-helpful-dedicated)
+  (add-hook 'helpful-mode-hook #'outline-minor-mode)
 
   )
 

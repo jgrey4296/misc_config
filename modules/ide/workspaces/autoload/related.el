@@ -1,6 +1,5 @@
 ;;; +related.el -*- lexical-binding: t; -*-
 
-
 ;;;###autoload
 (defun +jg-projects-find-related ()
   (interactive)

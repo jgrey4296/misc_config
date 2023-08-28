@@ -28,7 +28,6 @@
       use-short-answers t
       )
 
-
 (setq mouse-yank-at-point nil
       mouse-wheel-scroll-amount nil
       mouse-wheel-scroll-amount-horizontal 2
@@ -58,6 +57,8 @@
 
               which-key-idle-secondary-delay 0.05
               which-key-sort-order 'which-key-key-order-alpha
+
+              fringes-outside-margins t
               )
 
 ;;-- hl todo
@@ -119,8 +120,20 @@
 (setq so-long-threshold 5000)
 ;;-- end so long
 
+;;-- treemacs
+(setq treemacs-collapse-dirs 3
+
+ )
+;;-- end treemacs
+
 (spec-handling-add! auto-modes
                     '(ui
                       ("\\.palette" . palette-mode)
                       )
+                    )
+
+(spec-handling-add! popup :form 'override
+                    '(ui
+                     ("^ \\*Treemacs"         :side left :ttl 5   :width 0.2 :quit t :select nil :priority 50)
+                     )
                     )

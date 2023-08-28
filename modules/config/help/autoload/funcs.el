@@ -45,26 +45,6 @@
   )
 
 ;;;###autoload
-(defun +jg-help-evil-interactive-reminder ()
-  (interactive)
-  (let ((evil-text (with-temp-buffer
-                     (insert-file-contents
-                      (expand-file-name "straight/repos/evil/evil-types.el" doom-local-dir))
-                     (buffer-string)
-                     )))
-    (with-temp-buffer-window "*Evil Interactive Reminder*"
-        'display-buffer-pop-up-window
-        nil
-      (princ evil-text)
-      )
-    (with-current-buffer  "*Evil Interactive Reminder*"
-      (emacs-lisp-mode)
-      )
-    nil
-    )
-  )
-
-;;;###autoload
 (defun +jg-help-system-config ()
   (interactive)
   (with-temp-buffer-window "*Emacs Build Configuration*" 'display-buffer-pop-up-window nil

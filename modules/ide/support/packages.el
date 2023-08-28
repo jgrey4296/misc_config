@@ -18,3 +18,5 @@
 (package! tree-sitter)
 (package! tree-sitter-indent)
 (package! tree-sitter-langs)
+
+(package! lint-result-mode :recipe `(:local-repo ,(expand-file-name "packages/major-modes/lint-result-mode" doom-user-dir)))

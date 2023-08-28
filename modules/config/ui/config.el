@@ -7,7 +7,11 @@
 
 (add-hook! 'doom-first-file-hook #'transient-toggles-minor-mode)
 
-(use-package! treemacs)
+(use-package! treemacs
+  :config
+
+  (add-hook 'treemacs-mode-hook #'treemacs-hide-gitignored-files-mode)
+  )
 
 ;;-- highlight
 
@@ -207,3 +211,5 @@
 
 
 ;;-- end transient
+
+(use-package! fringe)

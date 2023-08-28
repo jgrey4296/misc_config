@@ -1,13 +1,15 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
+(setq counsel-describe-function-function #'helpful-callable
+      counsel-describe-variable-function #'helpful-variable
+      counsel-descbinds-function         #'helpful-callable)
 
+;;-- wo/man
 (setq Man-switches (string-join (list "-C"
                                       (expand-file-name "terminal/tool_configs/man.conf" doom-user-dir))
                                 " ")
       manual-program (executable-find "man")
       )
-
-;;-- woman
 (after! woman
   ;; The woman-manpath default value does not necessarily match man. If we have
   ;; man available but aren't using it for performance reasons, we can extract
@@ -16,7 +18,7 @@
     (setq woman-manpath
           (split-string (cdr (doom-call-process "man" "--path"))
                         path-separator t))))
-;;-- end woman
+;;-- end wo/man
 
 (spec-handling-add! fold
                     `(helpful

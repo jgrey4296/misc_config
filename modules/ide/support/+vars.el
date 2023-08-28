@@ -93,10 +93,9 @@
 ;;-- end eglot
 
 ;;-- flycheck
-
 (defvar flycheck-checkers)
-
 (defvar flycheck-disabled-checkers)
+
 (setq-default flycheck-display-errors-delay 1
               flycheck-display-errors-function nil
               flycheck-help-echo-function nil
@@ -113,6 +112,7 @@
       flycheck-posframe-warning-prefix "! "
       flycheck-posframe-info-prefix "··· "
       flycheck-posframe-error-prefix "X "
+      flycheck-indication-mode 'right-fringe
       )
 
 ;;-- end flycheck

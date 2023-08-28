@@ -13,7 +13,7 @@
  ;; TODO :experimentation
 
  :editor format text-manipulation
- :editor char-insert tagging
+ :editor tagging
  :editor buffer-nav window-nav
  :editor fold undo
  :editor large-files
@@ -41,12 +41,11 @@
  :lang-weakly-typed erlang-vms godot ruby
 
 
- :ide version-control support lookup snippets workspaces diff company
+ :ide version-control support lookup snippets workspaces diff company debugger
 
  :tools twitter pdfs
  :tools mail term eval
  :tools processes
- :tools (spelling +flyspell)
  :tools calendar dired
 
  ;; --------------------------------------------------

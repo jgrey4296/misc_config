@@ -22,9 +22,7 @@
 
 
 (load! "+vars")
-(after! jg-bindings-total
-  (load! "+bindings")
-  )
+(defer-load! jg-bindings-total "+bindings")
 
 (use-package! shell
   :config
@@ -72,5 +70,11 @@
                                  (remove-hook 'completion-at-point-functions 'comint-completion-at-point t)
                                  (add-hook 'completion-at-point-functions 'comint-dynamic-complete-filename nil t)
                                  ))
+  )
+
+(use-package! shell-pop)
+
+(use-package! exec-path-from-shell
+  :disabled
   )
 ;;; config.el ends here

@@ -37,3 +37,9 @@
              )
 
 )
+
+(use-package! llvm-mode
+  :defer t
+  :load-path "/usr/local/opt/llvm/share/emacs/site-lisp/lvvm/llvm-mode.el"
+  ;; clang-format.el clang-include-fixer.el clang-rename.el emacs.el llvm-mode.el tablegen-mode.el
+  )

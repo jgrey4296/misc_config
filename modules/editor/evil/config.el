@@ -37,7 +37,7 @@
   (add-hook 'evil-insert-state-exit-hook  #'+default-disable-delete-selection-mode-h)
 
   ;; Ensure `evil-shift-width' always matches `tab-width'; evil does not police this itself, so we must.
-  (setq-hook! 'after-change-major-mode-hook evil-shift-width tab-width)
+  ;; (setq-hook! 'after-change-major-mode-hook evil-shift-width tab-width)
 
   (add-hook! 'doom-escape-hook #'+evil-disable-ex-highlights-h)
 

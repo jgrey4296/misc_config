@@ -37,7 +37,6 @@ filename of each font. It is used as the source and destination filename."
                (if known-dest-p "installed" "downloaded")
                name font-dest))))
 
-;;;###autoload
 (defun +ligatures/install-patched-font (font-id &optional arg)
   "Install the font FONT-ID on your system.
 FONT-ID must be a key from `+ligatures--font-alist'.

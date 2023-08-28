@@ -1,16 +1,6 @@
 ;;; util/text/+funcs.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
-(defun +jg-text-regex-reminder ()
-  (interactive)
-  (with-temp-buffer-window "*Regex Char Class Reminder*" 'display-buffer-pop-up-window
-                           nil
-    (princ (yas--template-content (yas-lookup-snippet "Char Classes" 'fundamental-mode)))
-    )
-  nil
-  )
-
-;;;###autoload
 (defun +jg-text-insert-lparen ()
   " utility to insert a (  "
   (interactive)
@@ -22,12 +12,6 @@
   " utility to insert a ) "
   (interactive)
   (insert ")")
-  )
-
-;;;###autoload
-(defun +jg-text-insert-debug ()
-  (interactive)
-  (yas-expand-snippet (yas-lookup-snippet jg-text-debug-snippet-name) (point))
   )
 
 ;;;###autoload
@@ -67,6 +51,40 @@
 (defun +jg-text-join-line-bol (beg end)
   " When joining lines, don't lose sight of the lhs of the buffer "
   (beginning-of-line)
+  )
+
+;;;###autoload
+(defun +default-open-doc-comments-block (&rest _ignored)
+  ;; Expand C-style comment blocks.
+  (save-excursion
+    (newline)
+    (indent-according-to-mode))
+  )
+
+;;;###autoload
+(defun +jg-text-yank-buffer-name ()
+  (interactive)
+  (message (kill-new (buffer-name)))
+  )
+
+;;;###autoload
+(defun +jg-text-yank-selection-to-new-buffer ()
+  (interactive)
+  (let ((text (buffer-substring evil-visual-beginning evil-visual-end))
+        (new-buf (get-buffer-create (read-string "New Buffer Name: "))))
+    (with-current-buffer new-buf
+      (insert text)
+      (goto-char (point-min))
+      )
+    (display-buffer new-buf)
+    (select-window (get-buffer-window new-buf))
+    )
+  )
+
+;;;###autoload
+(defun +jg-text-get-line ()
+  (buffer-substring-no-properties (line-beginning-position)
+                                  (line-end-position))
   )
 
 ;;;###autoload

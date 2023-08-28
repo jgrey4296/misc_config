@@ -1,7 +1,7 @@
 ;;; util/text/config.el -*- lexical-binding: t; -*-
 
-(load! "+defs")
-(load! "+vars")
+(local-load! "+defs")
+(local-load! "+vars")
 
 (defer-load! "+spec-defs")
 
@@ -9,26 +9,11 @@
 
 (defer-load! jg-evil-ex-bindings "+evil-ex")
 
-(after! evil
-  (remove-hook! 'after-change-major-mode-hook #'doom--setq-evil-shift-width-for-after-change-major-mode-h)
-  )
-
 (add-hook! 'doom-init-ui-hook :append #'+ligature-init-composition-table-h)
+
 (when (memq 'visual-line-mode text-mode-hook)
   (remove-hook 'text-mode-hook #'visual-line-mode)
   (add-hook 'text-mode-hook #'+word-wrap-mode)
-  )
-
-(use-package! lint-result-mode
-  :config
-  (add-hook 'lint-result-mode-hook '+fold/close-all)
-  )
-
-(use-package! timeline-mode :defer t)
-
-(use-package! ws-butler
-  ;; a less intrusive `delete-trailing-whitespaces' on save
-  :hook (doom-first-buffer . ws-butler-global-mode)
   )
 
 (use-package! smartparens
@@ -48,7 +33,6 @@
   ;; Silence some harmless but annoying echo-area spam
   (dolist (key '(:unmatched-expression :no-matching-tag))
     (setf (alist-get key sp-message-alist) nil))
-
 
   ;; Autopair quotes more conservatively; if I'm next to a word/before another
   ;; quote, I don't want to open a new pair or it would unbalance them.
@@ -93,7 +77,6 @@
                  "<!--" "-->"
                  :unless '(sp-point-before-word-p sp-point-before-same-p)
                  :actions '(insert) :post-handlers '(("| " "SPC")))
-
 
   ;; Disable electric keys in C modes because it interferes with smartparens
   ;; and custom bindings. We'll do it ourselves (mostly).
@@ -164,28 +147,11 @@
 
   )
 
-(use-package! writegood-mode
-  :hook (org-mode markdown-mode rst-mode asciidoc-mode LaTeX-mode)
-  )
-
 (use-package! embrace :defer t)
 
-(use-package! dtrt-indent
-  ;; Automatic detection of indent settings
-  :unless noninteractive
-  ;; I'm not using `global-dtrt-indent-mode' because it has hard-coded and rigid
-  ;; major mode checks, so I implement it in `doom-detect-indentation-h'.
-  :hook ((change-major-mode-after-body read-only-mode) . doom-detect-indentation-h)
-  :config
+(use-package! insert-plus-state)
 
-  ;; Enable dtrt-indent even in smie modes so that it can update `tab-width',
-  ;; `standard-indent' and `evil-shift-width' there as well.
-  (setq dtrt-indent-run-after-smie t)
-  ;; Reduced from the default of 5000 for slightly faster analysis
-  (setq dtrt-indent-max-lines 2000)
+(use-package! other-chars-state)
 
-  ;; always keep tab-width up-to-date
-  (push '(t tab-width) dtrt-indent-hook-generic-mapping-list)
-
-  (defvar dtrt-indent-run-after-smie)
-  )
+(local-load! "+spelling")
+(local-load! "+formatting")

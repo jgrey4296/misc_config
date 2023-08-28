@@ -41,15 +41,15 @@ PATTERN is a vim-style regexp. FLAGS is an optional string of characters. "
       (unless (and (eq (line-beginning-position) beg)
                    (eq (line-beginning-position 1) end))
         (evil-visual-make-selection beg end 'line)
-        (add-hook 'post-command-hook #'+jg-text-manipulation-ensure-visual-seleciton-h)
+        (add-hook 'post-command-hook #'+jg-text-manipulation-ensure-visual-selection-h)
         )
       )
     )
   )
 
 
-(defun +jg-text-manipulation-ensure-visual-seleciton-h ()
+(defun +jg-text-manipulation-ensure-visual-selection-h ()
   " Auto-removing post-command hook to ensure visual selection in evil-ex"
   (evil-visual-restore)
-  (remove-hook 'post-command-hook #'+jg-text-manipulation-ensure-visual-seleciton-h)
+  (remove-hook 'post-command-hook #'+jg-text-manipulation-ensure-visual-selection-h)
   )

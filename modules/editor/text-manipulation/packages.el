@@ -1,15 +1,19 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; util/text/packages.el
-(package! adaptive-wrap)
-(package! exec-path-from-shell)
-(package! fsm)
-(package! lint-result-mode :recipe `(:local-repo ,(expand-file-name "packages/major-modes/lint-result-mode" doom-user-dir)))
-(package! origami)
 (package! rotate-text)
-(package! shell-pop)
-(package! timeline-mode :recipe `(:local-repo ,(expand-file-name "packages/major-modes/timeline-mode" doom-user-dir)))
-(package! writegood-mode)
+(package! evil-states-plus :recipe (:host github :repo "jgrey4296/evil-states-plus" :includes (insert-plus-state other-chars-state)))
 (package! embrace)
+
+;; Spelling
+(package! spell-fu)
+(package! flyspell-correct)
+(package! flyspell-correct-ivy)
+(package! flyspell-lazy)
+(package! writegood-mode)
+
+;; Formatting
+(package! format-all)
 (package! dtrt-indent)
+(package! adaptive-wrap)
 
 ;; (package! objed)

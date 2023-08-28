@@ -1,12 +1,5 @@
 ;;; util/text/+vars.el -*- lexical-binding: t; -*-
 
-(defvar-local jg-text-whitespace-clean-hook '(#'delete-trailing-whitespace
-                                              #'+jg-text-cleanup-whitespace)
-  )
-
-(defvar jg-text-last-similarity-arg 1)
-
-(defvar jg-text-debug-snippet-name "util.debug")
 
 (setq-default tab-always-indent t
               indent-tabs-mode nil
@@ -45,6 +38,35 @@
 ;; which causes folks to redundantly install their own.
 (setq ws-butler-keep-whitespace-before-point nil)
 ;;-- end ws butler
+
+;;-- spelling
+(setq ispell-program-name (or (executable-find "aspell")
+                              (executable-find "hunspell")
+                              (executable-find "enchant-2")
+                              (executable-find "ispell")
+                              )
+
+      ispell-extra-args (pcase (f-filename ispell-program-name)
+                          ("aspell"   '("--sug-mode=ultra" "--run-together"))
+                          ("hunspell" '())
+                          ("enchant-2"  '())
+                          ("ispell"   '())
+                          )
+
+      ispell-personal-dictionary (expand-file-name "terminal/tool_configs/ispell_english" doom-user-dir)
+      spell-fu-directory (concat doom-data-dir "spell-fu")
+      flyspell-popup-correct-delay 0.8
+
+      flyspell-lazy-idle-seconds 1
+      flyspell-lazy-window-idle-seconds 3
+
+      flyspell-issue-welcome-flag nil
+      ;; Significantly speeds up flyspell, which would otherwise print
+      ;; messages for every word when checking the entire buffer
+      flyspell-issue-message-flag nil
+      )
+
+;;-- end spelling
 
 ;;-- specs
 (spec-handling-setq! rotate-text
@@ -97,9 +119,15 @@
 (spec-handling-setq! evil-shift
                      evil-shift-width 4
                      )
-(spec-handling-add! auto-modes
+(spec-handling-add! auto-modesj
                     '(text-manip
                       ("LICENSE" . license-mode)
                       )
+                   )
+
+(spec-handling-add! flyspell-predicate
+                    `(markdown-mode ,#'+markdown-flyspell-word-p)
+                    `(gfm-mode ,#'+markdown-flyspell-word-p)
                     )
+
 ;;-- end specs

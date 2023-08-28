@@ -7,11 +7,6 @@
 ;; Get rid of zap to char:
 (map! "M-z" nil)
 
-;; Text bindings
-(map! :map jg-binding-help-map
-      :desc "Regex Reminder" "R" #'+jg-text-regex-reminder
-      )
-
 (map! :leader
       :desc "Clear All"            "rK" #'+jg-text-clear-all
 
@@ -19,20 +14,13 @@
        :desc "Yank Buffer Name" "n"   #'+jg-text-yank-buffer-name
        :desc "Clear Buffer"     "DEL" #'+jg-text-clear-buffer
        )
-
-      (:prefix "i"
-       :desc "Breakpoint" "b" #'+jg-text-insert-debug
-       )
       )
 
-
-;;-- evil bindings
+;;-- state bindings
 (map! :map jg-binding-normal-state-map
-      :desc "breakpoint"          "I b"   #'+jg-text-insert-debug
-
-      :desc "SPC? Insert" "I SPC" #'evil-jg-insert-state
+      :desc "SPC? Insert" "I SPC" #'evil-insert-plus-state
+      :desc "Chars"      "I c"   #'evil-other-chars-state
       :desc "Rotate"         "R"   #'rotate-text
-      ;; :desc "Zap to Char"    "Z"   #'zap-up-to-char
       )
 
 (map! :map jg-binding-vision-map
@@ -74,7 +62,7 @@
 (map! :map jg-binding-outer-text-objects-map
       :desc "Spaces"       "l" #'+jg-text-spaces
       )
-;;-- end evil bindings
+;;-- end state bindings
 
 (map! :map jg-binding-jump-map
       :desc "Force Goto Column" "\\" #'+jg-text-force-column-motion
@@ -91,35 +79,34 @@
       )
 
 (map! :map jg-binding-change-map
-      :desc "Invis" "z" #'+jg-text-toggle-invisible
-      :prefix ("S" . "Surround")
-      "d" #'evil-surround-delete
-      "c" #'evil-surround-change
-      "l" #'+jg-surround-list
-      )
+      :desc "Invis" "z"                                #'+jg-text-toggle-invisible
+      :desc "split line"                  "RET"        #'electric-newline-and-maybe-indent
+      :desc "set buffer coding"           "0"          #'set-buffer-file-coding-system
+      :desc "indent"                      "TAB"        #'indent-region
 
-(map! :map jg-binding-change-map
-      :desc "split line"                  "RET" #'electric-newline-and-maybe-indent
-      :desc "set buffer coding"           "0"   #'set-buffer-file-coding-system
-      :desc "indent"                      "TAB" #'indent-region
+      :desc "Ensure commas" ","                        #'+jg-surround-ensure-commas
 
-      :desc "Ensure commas" ","                 #'+jg-surround-ensure-commas
+      :desc "Align"                       "a"          #'align-regexp
+      :desc "Comment"                     "c"          #'evilnc-comment-operator
+      :desc "Surround"                    "s"          #'evil-surround-region
 
-      :desc "Align"                       "a"   #'align-regexp
-      :desc "Comment"                     "c"   #'evilnc-comment-operator
-      :desc "Surround"                    "s"   #'evil-surround-region
+      :desc "Format buffer/region"        "F"          #'+format/region-or-buffer
 
-      :desc "downcase"                    "J"   #'evil-downcase
-      :desc "UpperCase"                   "K"   #'evil-upcase
-      :desc "Decr"                        "j"   #'+jg-text-dec-num
-      :desc "Incr"                        "k"   #'+jg-text-inc-num
-      :desc "Shift Left"                  "h"   #'+jg-text-shift-left
-      :desc "Shift Right"                 "l"   #'+jg-text-shift-right
-      :desc "Title Case"                  "t"   #'+jg-text-title-case-op
+      :desc "downcase"                    "J"          #'evil-downcase
+      :desc "UpperCase"                   "K"          #'evil-upcase
+      :desc "Decr"                        "j"          #'+jg-text-dec-num
+      :desc "Incr"                        "k"          #'+jg-text-inc-num
+      :desc "Shift Left"                  "h"          #'+jg-text-shift-left
+      :desc "Shift Right"                 "l"          #'+jg-text-shift-right
+      :desc "Title Case"                  "t"          #'+jg-text-title-case-op
 
       (:prefix ("w" . "Words")
        :desc "inflection"                "i"    #'evil-operator-string-inflection
        :desc "Rotate"                    "r"    #'rotate-text
+       :desc "ispell-word"               "s"    #'ispell-word
+       :desc "add word to dict"          "a"    #'+spell/add-word
+       :desc "Word(net)"                 "w"    #'helm-wordnet-suggest
+       :desc "Word(nut)"                 "W"    #'wordnut-search
        )
 
       (:prefix ("e" . "encode")
@@ -143,6 +130,12 @@
        :desc "Split on distance"           "s"  #'+jg-text-split-on-leading-char
        :desc "Title Case"                  "t"  #'+jg-text-title-case-op
        )
+
+      (:prefix ("S" . "Surround")
+               "d" #'evil-surround-delete
+               "c" #'evil-surround-change
+               "l" #'+jg-surround-list
+               )
 
       )
 

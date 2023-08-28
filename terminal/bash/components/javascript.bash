@@ -2,7 +2,7 @@
 
 # jgdebug "Setting Javascript"
 #Node:
-PATH="$HOME/.npm-global/bin:$PATH"
+PATH="$JG_CACHE/npm-global/bin:$PATH"
 
 #JavaScript:
 #removed --harmony_destructuring

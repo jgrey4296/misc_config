@@ -1,0 +1,11 @@
+# from https://stackoverflow.com/questions/10346419
+# NB: `pdb` only accepts single-line statements
+import os
+import pathlib as pl
+exec(((pl.Path.home() / ".pdbrc").readlink().parent / "pdbrc.py").read_text())
+
+histfile = pl.Path.home() / ".logs/.pdbhist"
+import readline
+import atexit
+atexit.register(readline.write_history_file, histfile)
+readline.set_history_length(500)

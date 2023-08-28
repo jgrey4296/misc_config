@@ -2,8 +2,8 @@
 # https://doc.rust-lang.org/cargo/reference/environment-variables.html
 #
 jgdebug Setting up rust
-RUSTUP_HOME="$HOME/.rustup"
-CARGO_HOME="$HOME/.cargo"
+RUSTUP_HOME="$JG_CACHE/rustup"
+CARGO_HOME="$JG_CACHE/cargo"
 
 PATH="$CARGO_HOME/bin:$PATH"
 

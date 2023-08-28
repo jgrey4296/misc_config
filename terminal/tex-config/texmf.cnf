@@ -6,14 +6,14 @@
 % TEXMFSYSCONFIG  tree used by the utilities texconfig-sys, updmap-sys, and fmtutil-sys to store modiﬁed conﬁguration data.
 % TEXMFLOCAL      administrators can use for system-wide installation
 % TEXMFHOME       for user individual installations of additional or updated macros, fonts, etc.
-% TEXMFVAR        stores cached used data
+% TEXMFVAR        stores cached user data
 % TEXMFCONFIG     user tree for texconfig, updmap-sys, and fmtutil-sys
 % TEXMFCACHE      ConTeXt MkIV and LuaLaTeX to store (cached) runtime data
 % tlmgr usertree is a TEXMFHOME/web2c and TEXMFHOME/tlpkg/tlpobj
 % note: tlmgr option docfiles 1
 
 TEXMFHOME   = $HOME/Library/texmf
-TEXMFVAR    = $HOME/.tex
+TEXMFVAR    = $HOME/.cache/tex
 TEXMFOUT    = $TEXMFDOTDIR
 TEXMFCONFIG = $HOME/.doom.d/terminal/tex-config
 

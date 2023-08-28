@@ -25,11 +25,21 @@ import types
 import typing
 import uuid
 import weakref
+import atexit
+import readline
 
 import more_itertools as mitz
 import pyparsing as pp
 
 logging = logmod.getLogger(__name__)
+
+##-- readline history
+## from: https://stackoverflow.com/questions/10346419
+histfile = pl.Path.home() / ".logs/python_history"
+atexit.register(readline.write_history_file, histfile)
+readline.set_history_length(500)
+
+##-- end readline history
 
 ##-- argparse
 #see https://docs.python.org/3/howto/argparse.html

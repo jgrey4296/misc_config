@@ -5,6 +5,7 @@ default_context:
     _github_username : "jgrey4296"
 
 cookiecutters_dir: "~/.doom.d/templates/projects/"
+replay_dir: "~/.cache/cookiecutter/replay/"
 abbreviations:
     pp: https://github.com/audreyr/cookiecutter-pypackage.git
     gh: https://github.com/{0}.git

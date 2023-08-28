@@ -28,3 +28,4 @@ rustup install       # https://dev.to/xs/setting-up-rust-on-macos-in-a-clean-way
 
 setuptools rust      # https://github.com/PyO3/setuptools-rust
 uniffi-rs            # https://mozilla.github.io/uniffi-rs/Overview.html
+lldb                 # https://lldb.llvm.org/

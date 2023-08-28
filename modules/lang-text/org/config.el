@@ -1,7 +1,7 @@
 ;;; lang/org/config.el -*- lexical-binding: t; -*-
 
-(load! "+definitions")
-(load! "+vars")
+(local-load! "+definitions")
+(local-load! "+vars")
 
 (defer-load! jg-bindings-total "+bindings")
 (defer-load! jg-evil-ex-bindings "+evil-ex")
@@ -14,7 +14,7 @@
   :preface
   ;;; Custom org modules
   (dolist (flag (doom-module-context-get 'flags))
-    (load! (concat "contrib/" (substring (symbol-name flag) 1)) nil t))
+    (local-load! (concat "contrib/" (substring (symbol-name flag) 1)) nil t))
 
   ;; Add our general hooks after the submodules, so that any hooks the
   ;; submodules add run after them, and can overwrite any defaults if necessary.

@@ -1,6 +1,6 @@
 ;;; config.el -*- lexical-binding: t; -*-
 
-(load! "+vars")
+(local-load! "+vars")
 (defer-load! (jg-bindings-total jg-dired) "+bindings")
 
 (use-package! mhtml-mode

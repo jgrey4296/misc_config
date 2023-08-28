@@ -3,7 +3,7 @@
 
 (describe "lang/web"
   (describe "+html"
-    (before-all (load! "../autoload/html.el"))
+    (before-all (local-load! "../autoload/html.el"))
 
     (describe "encode entities"
       (it "encodes strings with html entities"
@@ -24,7 +24,7 @@
   (describe "+css"
     :var (css-indent-offset)
     (before-all
-      (load! "../autoload/css.el")
+      (local-load! "../autoload/css.el")
       (require 'smartparens)
       (smartparens-mode +1))
     (after-all

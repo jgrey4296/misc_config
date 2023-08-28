@@ -2,11 +2,9 @@
 
 ;;
 ;; Packages
-(load! "+vars")
-(load! "+spec-defs")
-(after! jg-bindings-total
-  (load! "+bindings")
-  )
+(local-load! "+vars")
+(local-load! "+spec-defs")
+(defer-load! jg-bindings-total "+bindings")
 
 (use-package! hideshow ; built-in
   :commands (hs-toggle-hiding hs-hide-block hs-hide-level hs-show-all hs-hide-all)

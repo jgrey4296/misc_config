@@ -1,6 +1,6 @@
 ;;; lang/java/config.el -*- lexical-binding: t; -*-
 
-(load! "+vars")
+(local-load! "+vars")
 (defer-load! jg-bindings-total "+bindings")
 (after! projectile
   (pushnew! projectile-project-root-files "gradlew" "build.gradle"))
@@ -14,9 +14,9 @@
   :config
   (add-hook 'java-mode-hook #'rainbow-delimiters-mode)
 
-  (cond ((modulep! +meghanada) (load! "+meghanada"))
+  (cond ((modulep! +meghanada) (local-load! "+meghanada"))
         ((modulep! :tools lsp +eglot))
-        ((modulep! +lsp)       (load! "+lsp")))
+        ((modulep! +lsp)       (local-load! "+lsp")))
 
   (add-hook 'java-mode-local-vars-hook #'tree-sitter! 'append)
   )

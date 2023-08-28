@@ -4,7 +4,7 @@
 (defvar jg-org-mode-map (make-sparse-keymap))
 (evil-make-overriding-map jg-org-mode-map)
 
-(load! "util/+org-standard-bindings")
+(local-load! "util/+org-standard-bindings")
 
 (map! :leader
       :desc "Insert Timestamp"  "i t"   #'org-time-stamp

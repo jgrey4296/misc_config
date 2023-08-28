@@ -1,7 +1,7 @@
 ;;; lang/emacs-lisp/config.el -*- lexical-binding: t; -*-
 
-(load! "+defs")
-(load! "+vars")
+(local-load! "+defs")
+(local-load! "+vars")
 (defer-load! jg-bindings-total "+bindings")
 (defer-load! jg-evil-ex-bindings "+evil-ex")
 (add-hook! 'doom-first-file-hook #'+jg-lisp-setup-library-source)

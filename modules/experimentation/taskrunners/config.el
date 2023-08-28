@@ -21,10 +21,8 @@
 ;;; Code:
 
 
-(load! "+vars")
-(after! jg-bindings-total
-  (load! "+bindings")
-  )
+(local-load! "+vars")
+(defer-load! jg-bindings-total "+bindings")
 
 
 (use-package! snakemake-mode)

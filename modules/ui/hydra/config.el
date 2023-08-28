@@ -21,10 +21,8 @@
 ;;; Code:
 
 
-(load! "+vars")
-(after! (jg-bindings-total hydra)
-  (load! "+bindings")
-  )
+(local-load! "+vars")
+(defer-load! (jg-bindings-total hydra) "+bindings")
 
 (use-package! hydra
   :after hydra-utils

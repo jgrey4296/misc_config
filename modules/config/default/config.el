@@ -1,7 +1,7 @@
 ;;; config/default/config.el -*- lexical-binding: t; -*-
 
-(load! "+spec-defs")
-(load! "+vars")
+(local-load! "+spec-defs")
+(local-load! "+vars")
 (defer-load! jg-bindings-total "+bindings")
 
 (add-hook 'doom-first-file-hook

@@ -1,6 +1,6 @@
 
-(load! "+vars")
-(load! "+spec-defs")
+(local-load! "+vars")
+(local-load! "+spec-defs")
 
 (defer-load! jg-bindings-total "+bindings")
 

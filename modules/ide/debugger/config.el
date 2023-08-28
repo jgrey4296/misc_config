@@ -1,7 +1,7 @@
 ;;; tools/debugger/config.el -*- lexical-binding: t; -*-
 
-(load! "+defs")
-(load! "+vars")
+(local-load! "+defs")
+(local-load! "+vars")
 
 (defer-load! jg-total-bindings "+bindings")
 

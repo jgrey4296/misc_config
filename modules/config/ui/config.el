@@ -1,8 +1,8 @@
 ;;; config.el -*- lexical-binding: t; -*-
 
-(load! "+defs")
-(load! "+vars")
-(load! "+spec-defs")
+(local-load! "+defs")
+(local-load! "+vars")
+(local-load! "+spec-defs")
 (defer-load! jg-bindings-total "+bindings")
 
 (add-hook! 'doom-first-file-hook #'transient-toggles-minor-mode)

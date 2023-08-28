@@ -1,6 +1,6 @@
 ;;; lang/graphql/config.el -*- lexical-binding: t; -*-
 
-(load! "+vars")
+(local-load! "+vars")
 
 (use-package! graphql-mode
   :commands graphql-mode

@@ -21,11 +21,8 @@
 ;;; Code:
 
 
-(load! "+vars")
-;; (load! "+spec-defs")
-(after! jg-bindings-total
-  (load! "+bindings")
-  )
+(local-load! "+vars")
+(defer-load! jg-bindings-total "+bindings")
 ;;todo https://github.com/Bitnut/diffgit
 
 (use-package! diff-hl

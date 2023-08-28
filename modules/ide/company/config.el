@@ -1,7 +1,7 @@
 ;;; completion/company/config.el -*- lexical-binding: t; -*-
 
-(load! "+vars")
-(load! "+spec-defs")
+(local-load! "+vars")
+(local-load! "+spec-defs")
 (defer-load! jg-bindings-total "+bindings")
 (add-hook! 'minibuffer-inactive-mode-hook :append #'company-mode)
 (add-hook! 'minibuffer-setup-hook :append #'company-mode)

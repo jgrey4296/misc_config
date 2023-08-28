@@ -46,14 +46,14 @@
       (:prefix ("o" . "text"))
       )
 
-(load! "submaps/insert-bindings.el")
-(load! "submaps/jump-bindings.el")
-(load! "submaps/motion-bindings.el")
-(load! "submaps/normal-bindings.el")
-(load! "submaps/operator-bindings.el")
-(load! "submaps/text-obj-bindings.el")
-(load! "submaps/vision-bindings.el")
-(load! "submaps/visual-bindings.el")
+(local-load! "submaps/insert-bindings.el")
+(local-load! "submaps/jump-bindings.el")
+(local-load! "submaps/motion-bindings.el")
+(local-load! "submaps/normal-bindings.el")
+(local-load! "submaps/operator-bindings.el")
+(local-load! "submaps/text-obj-bindings.el")
+(local-load! "submaps/vision-bindings.el")
+(local-load! "submaps/visual-bindings.el")
 
 ;;-- stitching together
 (map! :map jg-binding-normal-state-map

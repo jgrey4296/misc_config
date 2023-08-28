@@ -1,8 +1,8 @@
 ;;; emacs/ibuffer/config.el -*- lexical-binding: t; -*-
 
-(load! "+vars")
-(load! "+specs")
-(load! "+spec-defs")
+(local-load! "+vars")
+(local-load! "+specs")
+(local-load! "+spec-defs")
 (defer-load! (jg-bindings-total ibuffer) "+bindings")
 (defer-load! jg-evil-ex-bindings "+evil-ex")
 

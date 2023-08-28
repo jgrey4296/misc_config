@@ -1,7 +1,6 @@
 ;; When you get to the right edge, it goes back to how it normally prints
 (setq prettify-symbols-unprettify-at-point 'right-edge)
 
-
 (cond
  ;; The emacs-mac build of Emacs appears to have built-in support for ligatures,
  ;; using the same composition-function-table method
@@ -47,7 +46,7 @@
 
   (defvar +ligatures--font-alist ())
 
-  (load! "+fira"))
+  (local-load! "+fira"))
  )
 
 (defun +ligatures--correct-symbol-bounds (ligature-alist)

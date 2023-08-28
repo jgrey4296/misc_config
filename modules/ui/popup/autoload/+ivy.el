@@ -5,6 +5,7 @@
   (not (string-match jg-popup-ivy-predicate-patterns (car x)))
   )
 
+;;;###autoload
 (defun +jg-popup-ivy-open (buff)
   (interactive)
   (let ((curr-rule (display-buffer-assq-regexp buff display-buffer-alist nil))
@@ -24,11 +25,7 @@
     )
   )
 
-
-(ivy-add-actions 'ivy-switch-buffer
-                 '(("p" +jg-popup-ivy-open "Popup"))
-                 )
-
+;;;###autoload
 (defun +jg-popup-ivy-buffer ()
   (interactive)
   (ivy-read "Popup Buffer: " #'internal-complete-buffer

@@ -29,6 +29,30 @@
 
 ;;; Core functions
 
+(defmacro save-popups! (&rest body)
+  "Sets aside all popups before executing the original function, usually to
+prevent the popup(s) from messing up the UI (or vice versa)."
+  `(let* ((in-popup-p (+popup-buffer-p))
+          (popups (+popup-windows))
+          (+popup--inhibit-transient t)
+          buffer-list-update-hook
+          +popup--last)
+     (dolist (p popups)
+       (+popup/close p 'force))
+     (unwind-protect
+         (progn ,@body)
+       (when popups
+         (let ((origin (selected-window)))
+           (+popup/restore)
+           (unless in-popup-p
+             (select-window origin)))))))
+
+;;;###autoload
+(defun +popup-save-a (fn &rest args)
+  "Sets aside all popups before executing the original function, usually to
+prevent the popup(s) from messing up the UI (or vice versa)."
+  (save-popups! (apply fn args)))
+
 (defadvice! +popup--make-case-sensitive-a (fn &rest args)
   "Make regexps in `display-buffer-alist' case-sensitive.
 

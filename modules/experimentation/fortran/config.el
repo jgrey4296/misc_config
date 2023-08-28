@@ -3,7 +3,7 @@
 ;;
 ;;; Packages
 
-(load! "+vars")
+(local-load! "+vars")
 
 (use-package! f90
   :defer t

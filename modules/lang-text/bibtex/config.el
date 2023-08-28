@@ -1,14 +1,14 @@
 ;;; domain-specific/bibtex/config.el -*- lexical-binding: t; -*-
 
-(load! "+defs")
-(load! "+vars")
+(local-load! "+defs")
+(local-load! "+vars")
 (defer-load! jg-bindings-total "+bindings")
 
 (use-package! bibtex
   :commands bibtex-mode
   :config
-  (load! "dialect/+entries")
-  (load! "dialect/+fields")
+  (local-load! "dialect/+entries")
+  (local-load! "dialect/+fields")
   (pushnew! bibtex-dialect-list 'jg)
 
   (let ((sorted-entries (sort (copy-alist bibtex-jg-entry-alist) (lambda (x y) (string-lessp (car x) (car y)))))

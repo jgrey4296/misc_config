@@ -1,8 +1,8 @@
 ;;; util/jg-mail/config.el -*- lexical-binding: t; -*-
 
-(load! "+defs")
-(load! "+vars")
-(load! "+spec-defs")
+(local-load! "+defs")
+(local-load! "+vars")
+(local-load! "+spec-defs")
 
 (defer-load! jg-bindings-total "+bindings")
 
@@ -68,7 +68,7 @@ This should already be the case yet it does not always seem to be."
   ;; Wrap text in messages
   (setq-hook! 'mu4e-view-mode-hook truncate-lines nil)
 
-  (load! "+gmail")
+  (local-load! "+gmail")
   )
 
 (use-package! rmail

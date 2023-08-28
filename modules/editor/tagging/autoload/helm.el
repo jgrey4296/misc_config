@@ -1,6 +1,6 @@
 ;; -*- mode: emacs-lisp; lexical-binding: t; -*-
 
-(load! "sources")
+(local-load! "sources")
 
 ;;;###autoload
 (defun +jg-tag-helm-tag-twitter ()

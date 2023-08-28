@@ -2,7 +2,7 @@
 
 (doom-log "Config JG Python")
 
-(load! "+spec-defs")
+(local-load! "+spec-defs")
 (defer-load! python-mode "+vars")
 (defer-load! "+envs" "+lsp" "+cython")
 (defer-load! jg-bindings-total "+bindings")

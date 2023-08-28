@@ -6,7 +6,7 @@
   (describe "insert-item"
     (before-all
       (require 'org)
-      (load! "../autoload/org.el"))
+      (local-load! "../autoload/org.el"))
     (after-all
       (unload-feature 'org t))
 

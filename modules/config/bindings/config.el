@@ -1,11 +1,10 @@
 ;;; config/default/config.el -*- lexical-binding: t; -*-
 
-(load! "+vars")
+(local-load! "+vars")
 
 (defer-load! (evil faster-whichkey) "+leader-bindings" "+misc-bindings") ;; -> jg-bindings-core
-(after! jg-evil-bindings
-  (provide 'jg-bindings-total)
-  )
+
+(after! jg-evil-bindings (provide 'jg-bindings-total))
 
 (use-package! faster-whichkey
   :after (which-key general)
@@ -16,7 +15,6 @@
                   nil . "maximize")
                 which-key-replacement-alist))
 )
-
 
 ;; (use-package! which-key
 ;;   :hook (doom-first-input . which-key-mode)
@@ -32,7 +30,6 @@
 ;;   (which-key-add-key-based-replacements doom-leader-key "<leader>")
 ;;   (which-key-add-key-based-replacements doom-localleader-key "<localleader>")
 ;; )
-
 
 (after! which-key
   (let ((prefix-re (regexp-opt (list doom-leader-key doom-leader-alt-key))))

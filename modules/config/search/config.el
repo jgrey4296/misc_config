@@ -23,11 +23,9 @@
 
 (load! "+vars")
 
-(after! jg-bindings-total
-  (load! "+bindings")
-  )
-(after! (jg-bindings-total dired)
-  (load! "+funcs")
+(defer-load! jg-bindings-total "+bindings")
+(defer-load! (jg-bindings-total dired) "+funcs")
+(after! dired
   (add-hook! 'dired-mode-hook #'fd-dired-minor-mode)
   )
 

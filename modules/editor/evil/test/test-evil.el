@@ -6,7 +6,7 @@
 
   (require! :editor evil)
   (require 'evil)
-  (load! "../autoload/evil")
+  (local-load! "../autoload/evil")
 
   (before-each
     (fset 'resv #'+evil-replace-filename-modifiers-a)

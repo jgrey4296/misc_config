@@ -1,6 +1,6 @@
 ;;; lang/markdown/config.el -*- lexical-binding: t; -*-
 
-(load! "+vars")
+(local-load! "+vars")
 (defer-load! jg-bindings-total "+bindings")
 
 (use-package! markdown-mode

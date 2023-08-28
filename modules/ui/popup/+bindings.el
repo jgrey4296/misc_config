@@ -13,4 +13,10 @@
       "u ?" #'+popup/diagnose
       )
 
+(map! :leader
+      :desc "SCRATCH"                      "6" (cmd! (+jg-popup-ivy-open "*scratch*"))
+      :desc "Messages"                     "0" #'+jg-ivy-popup-messages
+      :desc "General Insert"               "i g" #'+jg-ivy-general-insert
+      )
+
 (global-set-key [remap quit-window] #'+popup/quit-window)

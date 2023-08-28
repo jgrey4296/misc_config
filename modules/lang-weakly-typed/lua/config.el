@@ -1,6 +1,6 @@
 ;;; lang/lua/config.el -*- lexical-binding: t; -*-
 
-(load! "+vars")
+(local-load! "+vars")
 ;; sp's default rules are obnoxious, so disable them
 (provide 'smartparens-lua)
 

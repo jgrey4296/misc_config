@@ -21,10 +21,8 @@
 ;;; Code:
 
 
-(load! "+vars")
-(after! (jg-bindings-total jg-dired-bindings)
-  (load! "+bindings")
-  )
+(local-load! "+vars")
+(defer-load! (jg-bindings-total jg-dired-bindings) "+bindings")
 
 (use-package! pdf-meta-mode
   :commands (pdf-meta-mode pdf-meta-extract-info pdf-meta-split pdf-meta-join pdf-meta-attach pdf-meta-detach)

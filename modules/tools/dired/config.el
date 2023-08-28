@@ -1,9 +1,7 @@
 ;;; tools/dired/config.el -*- lexical-binding: t; -*-
 
-(load! "+vars")
-(after! (jg-bindings-total jg-dired)
-  (load! "+bindings")
-  )
+(local-load! "+vars")
+(defer-load! (jg-bindings-total jg-dired) "+bindings")
 
 (use-package! dired
   :commands dired-jump

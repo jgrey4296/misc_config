@@ -1,8 +1,8 @@
 ;;; editor/evil/config.el -*- lexical-binding: t; -*-
 
-(load! "+defs")
-(load! "+vars")
-(load! "+spec-defs")
+(local-load! "+defs")
+(local-load! "+vars")
+(local-load! "+spec-defs")
 (defer-load! (evil-collection evil-ex) "+evil-ex-setup")
 (defer-load! jg-bindings-core "+bindings") ;; -> jg-evil-bindings
 

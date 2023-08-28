@@ -20,7 +20,7 @@
 ;;
 ;;; Code:
 
-(load! "+vars")
+(local-load! "+vars")
 (defer-load! jg-bindings-total "+bindings")
 
 (use-package! helm

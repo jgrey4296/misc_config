@@ -21,7 +21,7 @@
 ;;; Code:
 
 
-(load! "+vars")
+(local-load! "+vars")
 
 ;;;###package auto-save-visited-mode
 ;;;###package auto-save-mode

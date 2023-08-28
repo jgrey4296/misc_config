@@ -3,7 +3,6 @@
 ;;
 ;; Global modes
 
-
 (defvar +popup-mode-map (make-sparse-keymap)
   "Active keymap in a session with the popup system enabled. See
 `+popup-mode'.")

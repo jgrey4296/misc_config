@@ -1,6 +1,6 @@
 ;;; lang/ruby/config.el -*- lexical-binding: t; -*-
 
-(load! "+vars")
+(local-load! "+vars")
 (defer-load! jg-bindings-total "+bindings")
 (after! projectile
   (add-to-list 'projectile-project-root-files "Gemfile"))

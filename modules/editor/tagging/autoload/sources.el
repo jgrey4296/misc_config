@@ -4,8 +4,8 @@
 (require 'helm-utils)
 (require 'helm-files)
 
-(load! "transformers")
-(load! "actions")
+(local-load! "transformers")
+(local-load! "actions")
 
 (defvar jg-tag-twitter-heading-helm-candidates nil)
 (defvar jg-tag-twitter-helm-candidates nil)

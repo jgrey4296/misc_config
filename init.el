@@ -43,7 +43,7 @@
 
  :ide version-control support lookup snippets workspaces diff company debugger
 
- :tools twitter pdfs
+ :tools pdfs
  :tools mail term eval
  :tools processes
  :tools calendar dired

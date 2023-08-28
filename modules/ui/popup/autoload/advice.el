@@ -17,12 +17,6 @@
   (+popup/close nil t))
 
 ;;;###autoload
-(defun +popup-save-a (fn &rest args)
-  "Sets aside all popups before executing the original function, usually to
-prevent the popup(s) from messing up the UI (or vice versa)."
-  (save-popups! (apply fn args)))
-
-;;;###autoload
 (defun +popup-display-buffer-fullframe-fn (buffer alist)
   "Displays the buffer fullscreen."
   (let ((wconf (current-window-configuration)))

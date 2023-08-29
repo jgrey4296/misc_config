@@ -14,7 +14,7 @@
   :preface
   ;;; Custom org modules
   (dolist (flag (doom-module-context-get 'flags))
-    (local-load! (concat "contrib/" (substring (symbol-name flag) 1)) nil t))
+    (load! (concat "contrib/" (substring (symbol-name flag) 1)) nil t))
 
   ;; Add our general hooks after the submodules, so that any hooks the
   ;; submodules add run after them, and can overwrite any defaults if necessary.

@@ -146,6 +146,8 @@ wheel                                                                           
 wrapt                                                                                           : 1.14.1
 
 ** best-practices
+https://github.com/jorisroovers/gitlint
+https://github.com/python-semantic-release/python-semantic-release
 https://github.com/csurfer/pyheatmagic                                                          : heatmap : ipython
 https://github.com/fredcamps/lsp-jedi                                                           : emacs : lisp : lsp
 https://github.com/python-lsp/python-lsp-server
@@ -352,6 +354,7 @@ https://utkuufuk.com/2018/05/04/learning-curves/
 https://www.statsmodels.org/stable/index.html                                                   : library : statistics
 
 ** Text manipulation
+https://github.com/jorisroovers/gitlint
 https://github.com/cgpotts/swda
 ansicolors                                                                                      : 1.1.8
 https://github.com/xolox/python-humanfriendly

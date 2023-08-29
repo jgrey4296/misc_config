@@ -104,6 +104,9 @@ xsdata-plantuml          # https://github.com/tefra/xsdata-plantuml
 z3                       # https://github.com/Z3Prover/z3
 zlib                     # https://docs.python.org/3/library/zlib.html
 tomli-w                  # https://github.com/hukkin/tomli-w
+Semantic Release         # https://python-semantic-release.readthedocs.io/en/latest/
+gitlint                  # https://jorisroovers.com/gitlint/latest/
+conventional commits     # https://www.conventionalcommits.org/en/v1.0.0/#specification
 
 LSP Protocol             # https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/
 

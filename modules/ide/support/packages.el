@@ -19,4 +19,4 @@
 (package! tree-sitter-indent)
 (package! tree-sitter-langs)
 
-(package! lint-result-mode :recipe `(:local-repo ,(expand-file-name "packages/major-modes/lint-result-mode" doom-user-dir)))
+(package! lint-result-mode :recipe (:host github :repo "jgrey4296/misc-modes" :files ("major-modes/lint-result-mode/*.el")))

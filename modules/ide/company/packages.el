@@ -3,4 +3,4 @@
 
 (package! company)
 (package! company-dict)
-(package! jg-company :type 'local :recipe `(:local-repo ,(expand-file-name "packages/misc/jg-company" doom-user-dir)))
+(package! jg-company :recipe (:host github :repo "jgrey4296/misc-modes" :files ("minor-modes/jg-company/*.el")))

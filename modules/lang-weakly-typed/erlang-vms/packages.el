@@ -6,4 +6,4 @@
 (package! alchemist)
 (package! exunit)
 (package! flycheck-credo)
-(package! ob-erlang           :recipe `(:local-repo ,(expand-file-name "packages/org-babel-ext" doom-user-dir) :files ( "ob-erlang.el" )))
+(package! ob-erlang           :recipe (:host github :repo "jgrey4296/misc-modes" :files ("org-babels/ob-erlang.el")))

@@ -28,6 +28,6 @@
   :after hydra-utils
   )
 
-(use-package! hydra-utils :defer t)
+(use-package! hydra-macros :defer t)
 
 ;;; config.el ends here

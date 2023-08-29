@@ -20,7 +20,7 @@
 ;;
 ;;; Code:
 
-(package! jg-log-mode  :type 'local :recipe `(:local-repo ,(expand-file-name "packages/major-modes/jg-log-mode" doom-user-dir) :files ("*.el" "data-struct/*.el" "modes/*.el" "util/*.el")))
+(package! logview-mode  :recipe (:host github :repo "jgrey4296/misc-modes" :files ("major-modes/logview-mode/*.el")))
 
 
 ;;; packages.el ends here

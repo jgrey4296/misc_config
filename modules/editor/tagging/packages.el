@@ -5,5 +5,4 @@
 (package! hydra)
 (package! cl-lib :built-in t)
 (package! ivy)
-(package! rawtag-mode :recipe `(:local-repo ,(expand-file-name "packages/major-modes/rawtag-mode" doom-user-dir)))
-(package! tagging-minor-mode :recipe `(:local-repo ,(expand-file-name "packages/minor-modes/tagging-minor-mode" doom-user-dir)))
+(package! tagging-minor-mode :recipe (:host github :repo "jgrey4296/misc-modes" :files ("minor-modes/tagging-minor-mode/*.el")))

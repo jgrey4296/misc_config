@@ -12,7 +12,8 @@ jgdebug "Setting JVM"
 
 STUDIO_HOME="/Applications/Android\ Studio.app/contents"
 ANDROID_HOME="$HOME/Library/Android/sdk"
-ANDROID_USER_HOME="$JG_CACHE/.android"
+ANDROID_USER_HOME="$HOME/.android"
+ADB_VENDOR_KEYS="$HOME/.android"
 
 # Android tools paths
 ANDROID_TOOL_PATHS="$ANDROID_HOME/cmdline-tools/latest/bin"
@@ -29,8 +30,8 @@ STUDIO_JDK="$STUDIO_HOME/jbr/Contents/Home/"
 
 jgdebug "Setting Java"
 # JDK_HOME="${HOME}/.gradle/jdks/adoptium-19-x64-hotspot-mac/Contents/Home"
-JDK_HOME="/usr/local/opt/openjdk/libexec/openjdk.jdk/Contents/Home"
-JAVA_HOME="$JDK_HOME"
+# JDK_HOME="/usr/local/opt/openjdk/libexec/openjdk.jdk/Contents/Home"
+# JAVA_HOME="$JDK_HOME"
 
 jgdebug "Setting Kotlin"
 
@@ -45,4 +46,30 @@ JACAMO_HOME="$HOME/github/jvm/__jacamo/build"
 
 JG_JACAMO_PATHS="$JASON_HOME/scripts:$JACAMO_HOME/scripts"
 
-PATH="$ANDROID_TOOL_PATHS:$JG_JACAMO_PATHS:$JDK_HOME/bin:$PATH"
+JENV_SHIMS="$HOME/.jenv/shims"
+
+PATH="$JENV_SHIMS:$ANDROID_TOOL_PATHS:$JG_JACAMO_PATHS:$JDK_HOME/bin:$PATH"
+
+JENV_SHELL="bash"
+JENV_LOADED=1
+unset JAVA_HOME
+unset JDK_HOME
+
+# source '/usr/local/Cellar/jenv/0.5.6/libexec/libexec/../completions/jenv.bash'
+
+# jenv rehash 2>/dev/null
+# jenv refresh-plugins
+ # jenv() {
+ #   type typeset &> /dev/null && typeset command
+ #   command="$1"
+ #   if [ "$#" -gt 0 ]; then
+ #     shift
+ #   fi
+ #
+ #   case "$command" in
+ #   enable-plugin|rehash|shell|shell-options)
+ #     eval `jenv "sh-$command" "$@"`;;
+ #   *)
+ #     command jenv "$command" "$@";;
+ #   esac
+ # }

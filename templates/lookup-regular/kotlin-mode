@@ -1,8 +1,10 @@
-Android docs           # https://developer.android.com/guide
-Kotlin reference       # https://kotlinlang.org/docs/home.html
-Gradle Reference       # https://docs.gradle.org/current/userguide/userguide.html
-Kotlin Quick Reference # https://kotlin-quick-reference.com/025-R-kotlin-repl.html
-JDK Reference          # https://docs.oracle.com/en/java/javase/20/
-API Reference          # https://kotlinlang.org/api/latest/jvm/stdlib/
-SDK CLI Tools          # https://developer.android.com/tools
-Java docs              # https://docs.oracle.com/en/java/
+Android docs             # https://developer.android.com/guide
+Kotlin reference         # https://kotlinlang.org/docs/home.html
+Gradle Reference         # https://docs.gradle.org/current/userguide/userguide.html
+Kotlin Quick Reference   # https://kotlin-quick-reference.com/025-R-kotlin-repl.html
+JDK Reference            # https://docs.oracle.com/en/java/javase/20/
+API Reference            # https://kotlinlang.org/api/latest/jvm/stdlib/
+SDK CLI Tools            # https://developer.android.com/tools
+Java docs                # https://docs.oracle.com/en/java/
+
+Gradle JVM Compatibility # https://docs.gradle.org/current/userguide/compatibility.html

@@ -28,3 +28,4 @@ columns      #
 minipage     #
 tikzpicture  #
 ganttchart   #
+samepage     # for blocking page breaks

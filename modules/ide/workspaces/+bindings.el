@@ -12,99 +12,38 @@
 (map! :leader
       :desc "Window Control"           "W"     #'transient-workspace
       :desc "Carousel Control"         "R"     #'transient-carousel
-      :desc "Workspace Counsel"  "w RET" #'+jg-workspaces-ivy
-      :n "p RET"                         #'+neotree/find-this-file
-      )
+      :desc "Workspace Counsel"        "w RET" #'+jg-workspaces-ivy
+      (:prefix ("w" . "Windows")
+       :desc "Neotree Sidebar"              "s"   #'+neotree/open
+       :desc "Delete workspace"             "DEL" #'+workspace/delete
+       )
+      (:prefix "c"
+       :desc "compile in project"           "c"  #'projectile-compile-project
+       )
 
-(map! :leader
-      :prefix ("w" . "Windows")
-      :desc "Neotree Sidebar"              "s"   #'+neotree/open
-      :desc "Delete workspace"             "DEL" #'+workspace/delete
-      )
-
-(map! :leader
-      :prefix "c"
-      :desc "compile in project"           "c"  #'projectile-compile-project
       )
 
 (map! :leader
       :prefix ("p" . "project")
-      "?" #'+jg-projects-detect-type
-      :desc "run cmd in project root"      "!"  #'projectile-run-shell-command-in-root
+      :desc "Debug Project Type"           "?"   #'+jg-projects-detect-type
+      :desc "Project Find File"            "RET" #'+neotree/find-this-file
+      :desc "run cmd in project root"      "!"   #'projectile-run-shell-command-in-root
       :desc "project root"                 "`"  (cmd! (find-file (doom-project-root)))
-      :desc "root shell"                   "'"  #'projectile-run-shell
-      :desc "search project for symbol"    "."  #'+default/search-project-for-symbol-at-point
+      :desc "root shell"                   "'"   #'projectile-run-shell
+      :desc "search project for symbol"    "."   #'+default/search-project-for-symbol-at-point
 
-      :desc "compile in project"           "c"  #'projectile-compile-project
-      :desc "open project scratch buffer"  "x"  #'+jg-ui-open-scratch-buffer
+      :desc "compile in project"           "c"   #'projectile-compile-project
+      :desc "open project scratch buffer"  "x"   #'+jg-ui-open-scratch-buffer
 
-      :desc "find file in project"         "f"  #'projectile-find-file
-      :desc "find other file"              "o"  #'+jg-projects-find-related
+      :desc "find file in project"         "f"   #'projectile-find-file
+      :desc "find other file"              "o"   #'+jg-projects-find-related
 
       ;; later expanded by projectile
       (:prefix ("4" . "in other window"))
       (:prefix ("5" . "in other frame"))
       )
 
-;;-- management
-(map! :leader
-      :prefix ("p m" . "management")
-       :desc "invalidate project cache"     "c"  #'projectile-invalidate-cache
-       :desc "browse other project"         ">"  #'doom/browse-in-other-project
-       :desc "add new project"              "a"  #'projectile-add-known-project
-       :desc "discover projects in folder"  "d"  #'+default/discover-projects
-       :desc "Clear Known Projects"         "D"  #'projectile-clear-known-projects
-       :desc "Switch project"               "p"  #'projectile-switch-project
-      )
-
-;;-- end management
-
-;;-- project wide
-(map! :leader
-      :prefix ("p ;" . "Project Wide")
-       :desc "Replace in Project"        "r" #'projectile-replace
-       :desc "Replace Regexp in Project" "R" #'projectile-replace-regexp
-
-       :desc "Save project files"           "S"  #'projectile-save-project-buffers
-       :desc "Kill project buffers"         "K"  #'projectile-kill-buffers
-       )
-;;-- end project wide
-
-;;-- run commands
-(map! :leader
-      :prefix ("p d" . "Do something")
-      :desc "Clean"                        "c"  #'+jg-projects-clean
-      :desc "Run project"                  "r"  #'projectile-run-project
-      :desc "Test project"                 "t"  #'projectile-test-project
-      )
-;;-- end run commands
-
-;;-- find files
-(map! :leader
-      :prefix ("p b" . "browse")
-      :desc "Open project editorconfig"    "e"    #'editorconfig-find-current-editorconfig
-      :desc "Edit project .dir-locals"     "l"    #'projectile-edit-dir-locals
-      :desc "Configure project"            "c"    #'+jg-projects-open-configs
-      :desc "Find recent project files"    "r"    #'projectile-recentf
-
-      (:when (modulep! :os macos)
-       :desc "Reveal project in Finder"   "f"     #'+macos/reveal-project-in-finder
-       )
-      )
-;;-- end find files
-
 ;;-- zimmerframe
-(map! :leader
-      :prefix ("p z" . "Zimmerframe ..")
-       :desc "Activate Zimmerframe"            "RET" #'project-zimmerframe-minor-mode
-       :desc "Filter Defaults"                  "SPC" #'zimmerframe-filter-defaults
-       :desc "Remaining Num"                    "r"   #'zimmerframe-num
-       :desc "Remaining"                        "R"   #'zimmerframe-remaining
-       :desc "Directory Walk"                   "d"   #'zimmerframe-directory-init
-       :desc "Filter"                           "f"   #'zimmerframe-filter
-       :desc "Keep"                             "k"   #'zimmerframe-filter-keep
-      )
-
 (map! :map jg-binding-forward-general-motion-map
       :desc "Walk Next" "z" #'zimmerframe-next
       :map jg-binding-backward-general-motion-map

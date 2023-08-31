@@ -23,7 +23,7 @@ originally from spacemacs, then @bmag"
     (error "Can't toggle window layout when the number of windows isn't two.")))
 
 ;;;###autoload
-(defun +jg-ui-window-rotate-forward (count)
+(defun +jg-ui-window-rotate-forward (&optional count)
   "Rotate each window forwards.
 A negative prefix argument rotates each window backwards.
 Dedicated (locked) windows are left untouched.
@@ -33,7 +33,7 @@ originally from spacemacs, by magnars and modified by ffevotte
   (let* ((non-dedicated-windows (cl-remove-if 'window-dedicated-p (window-list)))
          (states (mapcar #'window-state-get non-dedicated-windows))
          (num-windows (length non-dedicated-windows))
-         (step (+ num-windows count)))
+         (step (+ num-windows (or count 1))))
     (if (< num-windows 2)
         (error "You can't rotate a single window!")
       (dotimes (i num-windows)

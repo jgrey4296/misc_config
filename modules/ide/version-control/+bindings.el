@@ -2,9 +2,59 @@
 
 ;; Clean up after magit by killing leftover magit buffers and reverting
 ;; affected buffers (or at least marking them as need-to-be-reverted).
-
+;;-- <leader> g --- git
 (map! :leader
-      :desc "Merge Mode"  "g m" #'evil-conflict-merge-state
+      :prefix ("g" . "git")
+      :desc "Merge Mode"  "m" #'evil-conflict-merge-state
+      :desc "Git revert file"             "R"   #'vc-revert
+      :desc "Git Todos"                   "T"   #'magit-todos-list
+      :desc "Git revert hunk"             "r"   #'git-gutter:revert-hunk
+      :desc "Git stage hunk"              "s"   #'git-gutter:stage-hunk
+      :desc "Git time machine"            "t"   #'git-timemachine-toggle
+      :desc "Jump to next hunk"           "n"   #'git-gutter:next-hunk
+      :desc "Jump to previous hunk"       "p"   #'git-gutter:previous-hunk
+      :desc "Forge dispatch"              "'"   #'forge-dispatch
+      :desc "Git stage file"              "S"   #'magit-stage-file
+      :desc "Git unstage file"            "U"   #'magit-unstage-file
+      :desc "Magit blame"                 "B"   #'magit-blame-addition
+      :desc "Magit buffer log"            "L"   #'magit-log
+      :desc "Magit clone"                 "C"   #'magit-clone
+      :desc "Magit dispatch"              "/"   #'magit-dispatch
+      :desc "Magit fetch"                 "F"   #'magit-fetch
+      :desc "Magit file delete"           "D"   #'magit-file-delete
+      :desc "Magit file dispatch"         "."   #'magit-file-dispatch
+      :desc "Magit status here"           "S"   #'magit-status-here
+      :desc "Magit status"                "s"   #'magit-status
+      :desc "Magit switch branch"         "b"   #'magit-branch-checkout
+      (:prefix ("f" . "find")
+       :desc "Find file"                  "f"   #'magit-find-file
+       :desc "Find gitconfig file"        "g"   #'magit-find-git-config-file
+       :desc "Find commit"                "c"   #'magit-show-commit
+       :desc "Find issue"                 "i"   #'forge-visit-issue
+       :desc "Find pull request"          "p"   #'forge-visit-pullreq)
+      (:prefix ("o" . "open in browser")
+       :desc "Browse file or region"      "."   #'browse-at-remote
+       :desc "Browse homepage"            "h"   #'+vc/browse-at-remote-homepage
+       :desc "Browse remote"              "r"   #'forge-browse-remote
+       :desc "Browse commit"              "c"   #'forge-browse-commit
+       :desc "Browse an issue"            "i"   #'forge-browse-issue
+       :desc "Browse a pull request"      "p"   #'forge-browse-pullreq
+       :desc "Browse issues"              "I"   #'forge-browse-issues
+       :desc "Browse pull requests"       "P"   #'forge-browse-pullreqs)
+      (:prefix ("l" . "list")
+       :desc "List repositories"          "r"   #'magit-list-repositories
+       :desc "List submodules"            "s"   #'magit-list-submodules
+       :desc "List issues"                "i"   #'forge-list-issues
+       :desc "List pull requests"         "p"   #'forge-list-pullreqs
+       :desc "List notifications"         "n"   #'forge-list-notifications)
+      (:prefix ("c" . "create")
+       :desc "Branch"                     "b"   #'magit-branch-and-checkout
+       :desc "Initialize repo"            "r"   #'magit-init
+       :desc "Clone repo"                 "R"   #'magit-clone
+       :desc "Commit"                     "c"   #'magit-commit-create
+       :desc "Fixup"                      "f"   #'magit-commit-fixup
+       :desc "Issue"                      "i"   #'forge-create-issue
+       :desc "Pull request"               "p"   #'forge-create-pullreq)
       )
 
 (map! :map magit-mode-map

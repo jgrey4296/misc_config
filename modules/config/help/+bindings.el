@@ -24,6 +24,23 @@
       :desc "Spec-Defs" "s" #'+jg-help-edit-spec-defs
       )
 
+;;-- debug
+(map! :map jg-help-map
+      :prefix ("D" . "Debug")
+      "f" #'+jg-default-debug-auto-mode
+      "s" #'+jg-snippets-insert-debug
+      "l" #'+jg-lookup-debug-settings
+      "f" #'+jg-fold/debug
+      "i" #'+jg-ide-debug-lsp
+      "d" #'+jg-snippets-debug-dirs
+      "t" #'+file-templates/debug
+      "p" #'+popup/diagnose
+      "c" #'flycheck-describe-checker
+      "w" #'+jg-projects-detect-type
+      )
+
+;;-- end debug
+
 ;;-- docs
 (map! :map jg-help-map
       :prefix ("d" . "docs")

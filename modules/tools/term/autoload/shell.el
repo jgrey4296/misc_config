@@ -17,7 +17,7 @@ prompt."
           comint-says-idle
         ;; for local shells, we can potentially do better using pgrep
         (condition-case nil
-            (case (call-process ;; look at the exit code of pgrep -P <pid>
+            (cl-case (call-process ;; look at the exit code of pgrep -P <pid>
                    "pgrep" nil nil nil "-P"
                    (number-to-string (process-id (get-buffer-process buf))))
               (0 nil) ;; child procxesses found, not idle

@@ -34,3 +34,9 @@
 (spec-handling-add! tree-sit-lang
                     '(sh-mode         . bash)
                     )
+
+(spec-handling-add! auto-modes
+                    '(shell
+                      ("\\.bash\\'" . sh-mode)
+                      )
+                    )

@@ -54,7 +54,7 @@
   :extend-selection t
   (let (beg end)
     (save-excursion
-      (setq beg (1+ (re-search-backward (rx (not blank)) (save-excursion (beginning-of-line)) t)))
+      (setq beg (+ 2 (re-search-backward (rx (not blank)) (save-excursion (beginning-of-line)) t)))
       (setq end (1- (re-search-forward (rx blank (| graph eol)) (save-excursion (end-of-line)))))
       )
     (list beg end)

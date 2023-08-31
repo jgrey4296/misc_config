@@ -23,7 +23,8 @@ function jg_maybe_inc_prompt {
 #setting up the prompt:
 # from https://unix.stackexchange.com/questions/216953
 function jg_prompt_update {
-    JGCONDA=""
+    MAYBE_CONDA=""
+    MAYBE_JAVA=""
     MAYBE_TMUX=""
     DEPTH_PROMPT="${PROMPT_NUM-1}"
     if [ "${PROMPT_NUM-}" -lt 2 ]; then
@@ -32,7 +33,11 @@ function jg_prompt_update {
     JGPATH=$(pwd | gsed -r 's/.+?\/(.+?\/.+?)/...\/\1/')
 
     if [[ -n "${CONDA_DEFAULT_ENV-}" ]]; then
-        JGCONDA="py:${CONDA_DEFAULT_ENV-}"
+        MAYBE_CONDA="py:${CONDA_DEFAULT_ENV-}"
+    fi
+
+    if [[ -n "$JENV_LOADED" ]]; then
+        MAYBE_JAVA="java:$(jenv version-name)"
     fi
 
     if [[ -n "$TMUX" ]]; then
@@ -44,14 +49,20 @@ function jg_prompt_update {
 function jg_set_prompt {
     PROMPT_COMMAND='jg_prompt_update'
     # Also modified in .condarc
-    PS1='  ${MAYBE_TMUX} | u:\u | j:\j | $JGCONDA |- $JGPATH[$DEPTH_PROMPT]: '
+    PS1='  ${MAYBE_TMUX} | u:\u | j:\j | $MAYBE_JAVA | $MAYBE_CONDA |- $JGPATH[$DEPTH_PROMPT]: '
 }
 
+ jenv() {
+   type typeset &> /dev/null && typeset command
+   command="$1"
+   if [ "$#" -gt 0 ]; then
+     shift
+   fi
 
-# TEMP locations
-# TMPDIR="~/.temp"
-export JG_CACHE="$HOME/.cache"
-
-export HISTFILE="$JG_CACHE/bash_history"
-export LESSHISTFILE="$JG_CACHE/lesshst"
-export NODE_REPL_HISTORY="$JG_CACHE/node_repl_history"
+   case "$command" in
+   enable-plugin|rehash|shell|shell-options)
+     eval `jenv "sh-$command" "$@"`;;
+   *)
+     command jenv "$command" "$@";;
+   esac
+ }

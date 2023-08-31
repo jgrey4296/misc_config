@@ -2,6 +2,10 @@
 
 jgdebug "Setting Exports"
 
+export JG_CACHE="$HOME/.cache"
+export HISTFILE="$JG_CACHE/bash_history"
+export LESSHISTFILE="$JG_CACHE/lesshst"
+export NODE_REPL_HISTORY="$JG_CACHE/node_repl_history"
 export PATH
 export EDITOR
 export PROMPT_NUM

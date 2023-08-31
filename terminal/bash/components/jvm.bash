@@ -59,17 +59,3 @@ unset JDK_HOME
 
 # jenv rehash 2>/dev/null
 # jenv refresh-plugins
- # jenv() {
- #   type typeset &> /dev/null && typeset command
- #   command="$1"
- #   if [ "$#" -gt 0 ]; then
- #     shift
- #   fi
- #
- #   case "$command" in
- #   enable-plugin|rehash|shell|shell-options)
- #     eval `jenv "sh-$command" "$@"`;;
- #   *)
- #     command jenv "$command" "$@";;
- #   esac
- # }

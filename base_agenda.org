@@ -4,6 +4,7 @@
 [[/Users/johngrey/dooter.py][dooter.py]]
 [[file:/Volumes/documents/github/jgrey4296.github.io][homepage]]
 https://specifications.freedesktop.org/
+https://www.marginalia.nu/
 
 * Base Agenda
 Death by Institution and the Harms of Abstraction.

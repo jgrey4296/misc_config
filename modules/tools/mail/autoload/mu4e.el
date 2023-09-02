@@ -101,4 +101,4 @@ Acts like a singular `mu4e-view-save-attachments', without the saving."
                               (propertize (plist-get pinfo :mimetype) 'face 'font-lock-constant-face))
                       (plist-get pinfo :part))
                 labeledparts))
-        labeledparts))))
+        labeledparts)))

@@ -1,4 +1,6 @@
+#!/usr/bin/env bash
 
+export JG_CACHE="$HOME/.cache"
 
 function jgdebug () {
     if [[ -n "${JGDEBUG-}" ]]; then

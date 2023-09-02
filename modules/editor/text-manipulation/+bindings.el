@@ -16,11 +16,20 @@
        )
       )
 
+(map! :map evil-other-chars-state-map
+      "i" #'evil-insert-state
+      "n" #'evil-normal-state
+      )
+
 ;;-- state bindings
 (map! :map jg-binding-normal-state-map
       :desc "SPC? Insert" "I SPC" #'evil-insert-plus-state
-      :desc "Chars"      "I c"   #'evil-other-chars-state
-      :desc "Rotate"         "R"   #'rotate-text
+      :desc "Chars"       "I c"   #'evil-other-chars-state
+      :desc "Rotate"      "R"     #'rotate-text
+      )
+
+(map! :map jg-binding-insert-state-map
+      "C-x c" #'evil-other-chars-state
       )
 
 (map! :map jg-binding-vision-map

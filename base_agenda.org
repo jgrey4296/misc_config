@@ -46,42 +46,35 @@ index xkcd using explainxkcd
 fictional syllabi - both of actual papers, and lem-like
 
 ** Links
+https://www.awsgeek.com/
+
+https://ainowinstitute.org/research-areas
 https://specifications.freedesktop.org/
-https://climate.nasa.gov/vital-signs/carbon-dioxide/
 https://en.m.wikipedia.org/wiki/International_Phonetic_Alphabet
-retractiondatabase.org
 https://marginaleffects.com/
-https://repository.si.edu/
 https://ourworldindata.org/grapher/cumulative-co-emissions
-https://seaice.visuals.earth/
-https://www.govinfo.gov/app/collection/uscourts/appellate/ca6/%7B%22pageSize%22%3A%22100%22%2C%22offset%22%3A%220%22%7D
-https://osf.io/46sfd/
 https://dev.to/
 https://brkeogh.com/
-https://en.m.wikipedia.org/wiki/SARL_(programming_language)
-https://surnames.behindthename.com/
-https://idb.ub.uni-tuebingen.de/opendigi/El54_qt#p=3
 https://publicdomainreview.org/
 
 https://stackoverflow.com/questions/22072773/batch-export-of-org-mode-files-from-the-command-line
 https://en.m.wikipedia.org/wiki/Wikipedia:Ignore_all_rules
 https://www.commonwl.org/user_guide/index.html
 https://boringml.com/
-https://caselaw.nationalarchives.gov.uk/
+
 https://www.logicmatters.net/categories/
 https://opengameart.org/
-https://gka.github.io/palettes/
-https://www.whocanuse.com/
 
-http://jurix.nl/proceedings/
+https://gka.github.io/palettes/   :ui:
+https://www.whocanuse.com/        :ui:
 
-https://docs.google.com/spreadsheets/u/0/d/11Ps8ILDHH-vojJGyIx7CcaoB5l1mBRHy3OQAgWkm0W4/htmlview#gid=0
 
 https://afutureworththinkingabout.com/?p=5142
 https://annas-archive.org/
+
 https://botwiki.org/learn/#blogs-and-websites-accountable-algorithms
 https://cheapbotsdonequick.com/source/
-https://collections.library.yale.edu/
+
 https://dev.epicgames.com/documentation/en-us/uefn/verse-language-reference
 https://developer.nvidia.com/gpugems/gpugems/contributors
 https://firefox-source-docs.mozilla.org/index.html
@@ -89,30 +82,22 @@ https://github.com/charlax/professional-programming
 https://github.com/libgdx/gdx-ai
 https://github.com/orgs/pelican-plugins/repositories
 https://hyperpolyglot.org/
-https://id.loc.gov/
-https://kidscancode.org/godot_recipes/3.x/recent/
+
 https://llvm.org/docs/LangRef.html
+
 https://shadowrun-series.fandom.com/wiki/Gumbo_Script
 https://sharkbombs.com/games/exnovo
-https://sites.ualberta.ca/~urban/Projects/English/Motif_Index.htm
+
 https://sixages.blogspot.com/
 https://textbooks.math.gatech.edu/ila/
 https://tutorial.math.lamar.edu/
 
-https://www.cs.man.ac.uk/~schmidt/tools/
 https://www.feynmanlectures.caltech.edu/III_toc.html
 https://www.feynmanlectures.caltech.edu/II_toc.html
 https://www.feynmanlectures.caltech.edu/I_toc.html
-https://www.gov.uk/official-documents
-https://www.mcmaster.com/
-https://www.oise.utoronto.ca/collaborativeindigenousresearch
-https://www.openpolicyagent.org/
-https://www.opensecrets.org/
 https://www.patches-scrolls.de/patch
-https://www.rabbitmq.com/getstarted.html
 
 https://en.m.wikipedia.org/wiki/Kahlil_Gibran
-https://en.m.wikipedia.org/wiki/Computational_geometry
 https://en.m.wikipedia.org/wiki/Differential_privacy
 https://en.m.wikipedia.org/wiki/C%2B%2B#Standardization
 https://en.m.wikipedia.org/wiki/Deep_learning
@@ -123,5 +108,4 @@ https://en.m.wikipedia.org/wiki/Grey_literature
 https://en.m.wikipedia.org/wiki/Technological_Forecasting_and_Social_Change
 https://en.m.wikipedia.org/wiki/Operations_research
 
-https://britishculturearchive.co.uk/
 ** [[file:org/python_testbed.org][Testbed Notes]]

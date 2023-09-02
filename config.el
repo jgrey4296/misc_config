@@ -32,6 +32,13 @@
 
 (setq server-log t)
 
+;;-- keybind clear
+(defvar jg-ctl-x-map (make-sparse-keymap))
+
+(setq ctl-x-map jg-ctl-x-map)
+
+;;-- end keybind clear
+
 ;;-- doom settings
 (setq doom-theme 'jg-Iosvkem)
 ;; Override doom's whitespace mode settings:

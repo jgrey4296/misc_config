@@ -1,18 +1,19 @@
 Latex Wikibook     # https://en.m.wikibooks.org/wiki/LaTeX
-CTAN packages      # https://www.ctan.org/pkg/latex
-Overleaf docs      # https://www.overleaf.com/learn
-Latex Tutorial     # https://latex-tutorial.com/
-Fonts              # https://tug.org/FontCatalogue/
-Font Installation  # https://tug.org/fonts/fontinstall.html
-kpathsea           # https://www.overleaf.com/learn/latex/Articles/An_introduction_to_Kpathsea_and_how_TeX_engines_search_for_files
-What the font?     # https://www.myfonts.com/pages/whatthefont
-font space         # https://www.fontspace.com/
-fonts              # https://web.archive.org/web/20180721043841/https://www.cl.cam.ac.uk/~rf10/pstex/latexcommands.htm
-xetex              # https://www.tug.org/xetex/
-luatex             # http://www.luatex.org/
-Logic Symbols      # https://www.logicmatters.net/latex-for-logicians/symbols/
-Logic Symbols List # https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols
-Detexify           # http://detexify.kirelabs.org/classify.html
-Docs               # https://www.latex-project.org/help/documentation/
-hboxes             # https://www.overleaf.com/learn/how-to/Understanding_underfull_and_overfull_box_warnings#Why_the_Warning_Happens
-biblatex           # https://en.wikibooks.org/wiki/LaTeX/Bibliographies_with_biblatex_and_biber
+CTAN packages           # https://www.ctan.org/pkg/latex
+Overleaf docs           # https://www.overleaf.com/learn
+Latex Tutorial          # https://latex-tutorial.com/
+Fonts                   # https://tug.org/FontCatalogue/
+Font Installation       # https://tug.org/fonts/fontinstall.html
+kpathsea                # https://www.overleaf.com/learn/latex/Articles/An_introduction_to_Kpathsea_and_how_TeX_engines_search_for_files
+What the font?          # https://www.myfonts.com/pages/whatthefont
+font space              # https://www.fontspace.com/
+fonts                   # https://web.archive.org/web/20180721043841/https://www.cl.cam.ac.uk/~rf10/pstex/latexcommands.htm
+xetex                   # https://www.tug.org/xetex/
+luatex                  # http://www.luatex.org/
+Logic Symbols           # https://www.logicmatters.net/latex-for-logicians/symbols/
+Logic Symbols List      # https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols
+Detexify                # http://detexify.kirelabs.org/classify.html
+Docs                    # https://www.latex-project.org/help/documentation/
+hboxes                  # https://www.overleaf.com/learn/how-to/Understanding_underfull_and_overfull_box_warnings#Why_the_Warning_Happens
+biblatex                # https://en.wikibooks.org/wiki/LaTeX/Bibliographies_with_biblatex_and_biber
+Tex Directory Structure # berry04:_direc_struc_tex_files_

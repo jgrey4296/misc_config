@@ -1,0 +1,55 @@
+\def\BPmessage{Gantt Trace (gantt-trace) style macros. Version 0.1.}
+% Todo Documentation
+%
+%
+%
+%
+%
+%
+
+% Requirements
+\RequirePackage{graphicx, tikz, pgfgantt, longtable, geometry}
+
+\usetikzlibrary{shadows}
+\usetikzlibrary{decorations}
+\usetikzlibrary{shapes}
+\usetikzlibrary{arrows}
+\usetikzlibrary{calc}
+\usetikzlibrary{fit}
+\usetikzlibrary{backgrounds}
+\usetikzlibrary{positioning}
+\usetikzlibrary{chains}
+\usetikzlibrary{scopes}
+
+% Abbreviations:
+\def\EnableBpAbbreviations{}
+
+% Lengths
+\newlength{\TraceLength}
+\setlength{\TraceLength}{1.5\baselineskip}
+
+% Parameters:
+\def\TraceParameter{4pt}
+
+% Environment Defiition:
+% \newenvironment{gtrace}
+% {}
+% {}
+
+% Horizontal Bar
+\ganttbar{${text}}{${start}}{${end}}\ganttnewline
+
+% Milestone
+\ganttmilestone{${text}}{${num}}\ganttnewline
+
+% Gannt top level environment
+\begin{figure}
+  \begin{longtable}{@{}r@{}}
+    \begin{ganttchart} [hgrid,vgrid,canvas/.style={draw=none},bar/.append style={fill=gray}, x unit=0.5cm,y unit chart=0.5cm]{0}{${num}}
+      \gantttitle{${title}}{${numPlusOne}}\\
+      \gantttitlelist{0, ..., ${num}}{1}\\
+      ${content}
+    \end{ganttchart}
+  \end{longtable}
+  \caption{${caption}}
+\end{figure}

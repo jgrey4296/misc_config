@@ -6,7 +6,7 @@ jgdebug "Setting emacs data"
 EMAIN_DIR="$HOME/github/_libs/lisp/doom_main"
 ENAT_DIR="$HOME/github/_libs/lisp/doom_native"
 E30_DIR="$HOME/github/_libs/lisp/emacs30"
-REDOOM_DIR="$HOME/github/lisp/re-doom"
+BLOOD_DIR="$HOME/github/lisp/blood"
 
 EMAIN_BIN="/usr/local/Cellar/emacs/28.2/bin/emacs"
 ENAT_BIN="/usr/local/Cellar/emacs-plus@28/28.2/bin/emacs"
@@ -62,10 +62,10 @@ function set-emacs () {
             EMACS="$E30_BIN"
             EMACSDIR="$E30_DIR"
         ;;
-        "redoom")
+        "blood")
             EMACS="$ENAT_BIN"
-            EMACSDIR="$REDOOM_DIR"
-            # To become $REDOOMDIR
+            EMACSDIR="$BLOOD_DIR"
+            # To become $BLOODDIR
             DOOMDIR="$EMACSDIR/example"
         ;;
         *)

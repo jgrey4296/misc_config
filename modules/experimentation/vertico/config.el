@@ -21,12 +21,12 @@
 ;;; Code:
 
 
-(defer-load! "+vars")
+;; (local-load! "+vars")
 ;; (defer-load! "+spec-defs")
-(defer-load! jg-bindings-total "+bindings")
+;; (defer-load! jg-bindings-total "+bindings")
 
 (use-package! vertico
-  :after 'jg-vertico
+  :defer t
 )
 
 ;;; config.el ends here

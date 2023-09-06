@@ -71,7 +71,9 @@
 
 (transient-make-subgroup! transient-zimmerframe-control "z"
                           ""
-                          :desc (lambda () (format "+Zimmerframe : %s" (zimmerframe-remaining-count)))
+                          :desc (lambda () (format "+Zimmerframe : %s" (if (fboundp 'zimmerframe-remaining-count)
+                                                                           (zimmerframe-remaining-count)
+                                                                         0)))
                           [
                            [
                             (transient-macro-toggle-project-zimmerframe-minor-mode)
@@ -193,7 +195,7 @@
   (transient-make-call! goto-root                "`" "Goto-Root"                 :transient nil (find-file (doom-project-root)))
   (transient-make-call! zimmerframe-next         "w" "Walk Next"                 (zimmerframe-next))
   (transient-make-call! zimmerframe-prev         "W" "Walk Prev"                 (zimmerframe-prev))
-  (transient-make-call! neotree-this-file        "s" "Open Sidebar"              (progn (transient--delete-window) (neotree-toggle)))
+  (transient-make-call! neotree-this-file        "s" "Open Sidebar"              (progn (neotree-toggle)))
   (transient-make-call! debug-project-type       "?" "Debug Project Type"        (+jg-projects-detect-type))
   (transient-make-call! recent-files             "r" "Project Recent Files"      :transient nil (projectile-recentf))
 
@@ -202,10 +204,10 @@
   ;; Windows
   (transient-make-var-toggle! auto-balance evil-auto-balance-windows "Auto-Balance Windows" "B")
 
-  (transient-make-call! shrink-horizontally "h" "Horizontal Shrink" (progn (transient--delete-window) (shrink-window-horizontally 5)))
-  (transient-make-call! shrink-vertically   "v" "Vertical Shrink"   (progn (transient--delete-window) (shrink-window 5)))
-  (transient-make-call! grow-horizontally   "H" "Horizontal Grow" (progn (transient--delete-window) (shrink-window-horizontally -5)))
-  (transient-make-call! grow-vertically     "V" "Vertical Grow"   (progn (transient--delete-window) (shrink-window -5)))
+  (transient-make-call! shrink-horizontally "h" "Horizontal Shrink" (progn (shrink-window-horizontally 5)))
+  (transient-make-call! shrink-vertically   "v" "Vertical Shrink"   (progn (shrink-window 5)))
+  (transient-make-call! grow-horizontally   "H" "Horizontal Grow" (progn  (shrink-window-horizontally -5)))
+  (transient-make-call! grow-vertically     "V" "Vertical Grow"   (progn  (shrink-window -5)))
 
   (transient-make-call! toggle-layout                                                       "/" "Toggle Layout"            (progn (transient--delete-window) (+jg-ui-window-layout-toggle)))
   (transient-make-call! rotate-layout       "\\" "Rotate Layout"           (progn (transient--delete-window) (+jg-ui-window-rotate-forward)))
@@ -246,7 +248,7 @@
     ]
    ["Project Settings"
     (transient-macro-call-debug-project-type)
-    (transient-macro-call-invalidate-cache)
+    (transient-macro-call-proj-clear-cache)
     ]
    [" "
     transient-project-actions

@@ -4,7 +4,9 @@
 (local-load! "+vars")
 (local-load! "+backends")
 (local-load! "+spec-defs")
+
 (defer-load! jg-bindings-total "+bindings")
+
 (defer-load! jg-evil-ex-bindings "+evil-ex")
 
 (use-package! xref
@@ -33,16 +35,6 @@
 
   )
 
-(use-package! wordnut
-  :defer t
-  :init
-  (add-hook 'wordnut-mode-hook 'outline-minor-mode)
-  )
-
-(use-package! osx-dictionary
-  :when IS-MAC
-  )
-
 (use-package! browse-url)
 
 (use-package! dash-docs
@@ -51,7 +43,16 @@
   (setq dash-docs-enable-debugging init-file-debug
         dash-docs-docsets-path (concat doom-data-dir "docsets/")
         dash-docs-min-length 2
-        dash-docs-browser-func #'eww)
+        dash-docs-browser-func #'browse-url
+        ;; dash-docs-browser-func #'(lambda (name filename anchor)
+        ;;                            (message "Name: %s\nFilename: %s\nAnchor: %s\nFull: %s" name filename anchor
+        ;;                                     (replace-regexp-in-string "%20" " " (dash-docs-result-url name filename)))
+        ;;                            (eww-open-file
+        ;;                             (replace-regexp-in-string "%20" " "
+        ;;                                                       (replace-regexp-in-string "^file:///" "" (dash-docs-result-url name filename)))
+        ;;                             )
+        ;;                            )
+        )
 
   (require 'counsel-dash nil t)
 )
@@ -65,4 +66,22 @@
   :hook (doom-first-file . global-lookup-regular-minor-mode)
   )
 
+;;-- words
+
+(use-package! wordnut
+  :defer t
+  :init
+  (add-hook 'wordnut-mode-hook 'outline-minor-mode)
+  )
+
+(use-package! osx-dictionary :when IS-MAC :defer t)
+
+(use-package! powerthesaurus :defer t)
+
+(use-package! synosaurus :defer t)
+
 (use-package! helm-wordnet :defer t)
+
+(use-package! define-word :defer t)
+
+;;-- end words

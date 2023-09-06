@@ -16,6 +16,7 @@
       :localleader
       :desc "Rehighlight buffer" "h" #'web-mode-reload
       :desc "Indent buffer"      "i" #'web-mode-buffer-indent
+      :desc "Render Buffer"      "r" #'shr-render-buffer
 )
 
 (map! :map web-mode-map ;; attributes
@@ -104,4 +105,9 @@
       :i "{" (cmd! (insert "{%  %}") (backward-char 3))
       :i "}" (cmd! (insert "{{   }}") (backward-char 4))
 
+      )
+
+(map! :map eww-mode-map
+      :localleader
+      :desc "Render Buffer" "r" #'shr-render-buffer
       )

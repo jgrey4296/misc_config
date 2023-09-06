@@ -11,15 +11,11 @@
              (read-string "Look up in dictionary: "))
          current-prefix-arg))
   (message "Looking up dictionary definition for %S" identifier)
-  (cond ((and IS-MAC (require 'osx-dictionary nil t))
+  (cond ((and(eq system-type 'darwin) (fboundp 'osx-dictionary--view-result))
          (osx-dictionary--view-result identifier))
-        ((and +lookup-dictionary-prefer-offline
-              (require 'wordnut nil t))
-         (unless (executable-find wordnut-cmd)
-           (user-error "Couldn't find %S installed on your system"
-                       wordnut-cmd))
+        ((and +lookup-dictionary-prefer-offline (fboundp 'wordnut-search))
          (wordnut-search identifier))
-        ((require 'define-word nil t)
+        ((fboundp 'define-word)
          (define-word identifier nil arg))
         ((user-error "No dictionary backend is available"))))
 
@@ -30,12 +26,8 @@
    (list (doom-thing-at-point-or-region 'word) ; TODO actually use this
          current-prefix-arg))
   (message "Looking up synonyms for %S" identifier)
-  (cond ((and +lookup-dictionary-prefer-offline
-              (require 'synosaurus-wordnet nil t))
-         (unless (executable-find synosaurus-wordnet--command)
-           (user-error "Couldn't find %S installed on your system"
-                       synosaurus-wordnet--command))
-         (synosaurus-choose-and-replace))
-        ((require 'powerthesaurus nil t)
+  (cond ((and +lookup-dictionary-prefer-offline (fboundp 'synosaurus-choose-and-replace))
+              (synosaurus-choose-and-replace))
+        ((fboundp 'powerthesaurus-lookup-word-dwim)
          (powerthesaurus-lookup-word-dwim))
         ((user-error "No thesaurus backend is available"))))

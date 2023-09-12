@@ -56,7 +56,7 @@ bookmarks_total = "~/github/jgrey4296.github.io/resources/bookmarks/total.bookma
 
 [[directories]] # output
 pdf_summary        = "/Volumes/documents/in_progress_pdfs/pdflib_automations/total_bib"
-maintain           = "/Volumes/documents/github/__configs/terminal/maintenance"
+maintain           = "/Volumes/documents/github/__configs/maintenance"
 listings_out       = "doot_build"
 
 [[directories]] # Android

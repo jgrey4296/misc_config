@@ -53,7 +53,7 @@
                           ("ispell"   '())
                           )
 
-      ispell-personal-dictionary (expand-file-name "terminal/tool_configs/ispell_english" doom-user-dir)
+      ispell-personal-dictionary (expand-file-name "templates/tools/ispell_english" doom-user-dir)
       spell-fu-directory (concat doom-data-dir "spell-fu")
       flyspell-popup-correct-delay 0.8
 

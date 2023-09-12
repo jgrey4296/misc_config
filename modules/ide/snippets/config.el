@@ -1,5 +1,6 @@
 ;;; editor/snippets/config.el -*- lexical-binding: t; -*-
 
+(local-load! "+defs")
 (local-load! "+vars")
 (local-load! "+spec-defs")
 (defer-load! (yasnippet jg-bindings-total) "+bindings")

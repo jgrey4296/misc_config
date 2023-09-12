@@ -30,8 +30,8 @@
       python-shell-completion-native-enable nil
       python-shell-completion-native-disabled-interpreters '("pypy")
 
-      jg-python-repl-start-file (expand-file-name "~/.doom.d/terminal/python/repl_startup.py ")
-      python-shell-interpreter-path-args (expand-file-name "~/.doom.d/terminal/python/repl_startup.py ")
+      jg-python-repl-start-file (expand-file-name "~/.doom.d/templates/python/repl_startup.py ")
+      python-shell-interpreter-path-args (expand-file-name "~/.doom.d/templates/python/repl_startup.py ")
       )
 (modify-syntax-entry ?_ "_" python-mode-syntax-table)
 ;;-- end general python

@@ -21,16 +21,16 @@ class SetupSystemTask(tasker.DootTasker, FilerMixin, CommanderMixin):
 
     def __init__(self, name="system::setup", locs=None):
         super().__init__(name, locs)
-        self.locs.ensure("home", "terminal", "github", "doom_d", "emacs_d", )
+        self.locs.ensure("home", "terminal", "github", "doom_d", "emacs_d", "cache" )
 
     def setup_detail(self, task):
         task.update({
             "actions": [
-                (self.mkdirs, [self.locs.home / ".cargo",
-                               self.locs.home / ".secrets",
-                               self.locs.home / ".gradle",
-                               self.locs.home / ".ghc",
-                               self.locs.home / "doot_build"
+                (self.mkdirs, [self.locs.cache / ".cargo",
+                               self.locs.home/ ".secrets",
+                               self.locs.cache / ".gradle",
+                               self.locs.cache / ".ghc",
+                               self.locs.cache / "doot_build"
                                ])
             ]
         })
@@ -48,12 +48,12 @@ class SetupSystemTask(tasker.DootTasker, FilerMixin, CommanderMixin):
             (self.append_to, [self.locs.home / ".bashrc", "source $HOME/.bash_profile"]),
 
             (self.log, ["Appending bash setup to bash_profile", logmod.INFO]),
-            (self.append_to, [self.locs.home / ".bash_profile", "source $HOME/.doom.d/terminal/main.bash"]),
+            (self.append_to, [self.locs.home / ".bash_profile", "source $HOME/.doom.d/bash/main.bash"]),
 
             self.setup_tool_configs,
 
             (self.log, ["Setting up 24-bit emacs", logmod.INFO]),
-            self.cmd("tic", "-x", "-o", "~/.terminfo", self.locs.terminal / "tool_configs/terminfo-24bit.src"),
+            self.cmd("tic", "-x", "-o", "~/.terminfo", self.locs.templates / "tools/terminfo-24bit.src"),
 
             (self.log, ["Completed Setup", logmod.INFO]),
             (self.log, ["Need to setup $HOME/.authinfo", logmod.INFO]),
@@ -62,7 +62,7 @@ class SetupSystemTask(tasker.DootTasker, FilerMixin, CommanderMixin):
 
     def setup_tool_configs(self):
         self.log("Setting up tool config symlinks", logmod.INFO)
-        for fpath in (self.locs.terminal / "tool_configs").iterdir():
+        for fpath in (self.locs.templates / "tools").iterdir():
             if not fpath.is_file() or fpath.name == ".DS_Store":
                 continue
 
@@ -73,7 +73,7 @@ class SetupSystemTask(tasker.DootTasker, FilerMixin, CommanderMixin):
 
     def setup_conda_environments(self):
         self.log("Setting up Conda Envs", logmod.INFO)
-        # for Yaml in $(find $HOME/.doom.d/terminal/conda_envs/ -type f -name "*.yaml")
+        # for Yaml in $(find $HOME/.doom.d/templates/conda_envs/ -type f -name "*.yaml")
         # do
         # echo "Found Yaml: $Yaml"
         # conda env create -f "$Yaml"

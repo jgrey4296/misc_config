@@ -2,6 +2,13 @@
 
 (defvar jg-ui-default-face-gen-palette-dir "/Volumes/documents/github/jgrey4296.github.io/resources/palettes/")
 
+
+;;-- theme settings
+(setq custom-theme-directory (expand-file-name "templates/themes" doom-user-dir))
+
+
+;;-- end theme settings
+
 (setq confirm-kill-emacs #'doom-quit-p
       confirm-nonexistent-file-or-buffer nil
       uniquify-buffer-name-style 'forward

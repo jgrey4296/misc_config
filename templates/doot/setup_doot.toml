@@ -14,12 +14,13 @@ ignores  = ['.git', '.DS_Store', "__pycache__"]
 
 [[directories]]
 home       = "/Users/johngrey"
+cache      = "{home}/.cache"
 github     = ""
 emacs_d    = ""
 doom_d     = ""
 mega       = ""
 pdfs       = ""
-# terminal = ""
+templates  = "templates"
 binaries   = "/usr/local/bin"
 
 [extra.binaries]

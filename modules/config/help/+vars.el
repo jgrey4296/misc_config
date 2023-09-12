@@ -6,7 +6,7 @@
 
 ;;-- wo/man
 (setq Man-switches (string-join (list "-C"
-                                      (expand-file-name "terminal/tool_configs/man.conf" doom-user-dir))
+                                      (expand-file-name "templates/tools/man.conf" doom-user-dir))
                                 " ")
       manual-program (executable-find "man")
       )

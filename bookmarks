@@ -92,11 +92,6 @@
  (front-context-string . "pyproject.toml\n ")
  (rear-context-string . "5K May  2 23:31 ")
  (position . 861))
-("terminal"
- (filename . "/Volumes/documents/github/__configs/terminal/")
- (front-context-string . "bash\n  drwxr-xr-")
- (rear-context-string . "10 Apr 26 17:29 ")
- (position . 199))
 ("conda"
  (filename . "/usr/local/Caskroom/mambaforge/base/")
  (front-context-string . "envs\n  drwxr-xr-")

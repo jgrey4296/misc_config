@@ -1,5 +1,5 @@
 SHELL=/usr/local/bin/bash
-BASH_ENV="$HOME/.doom.d/terminal/bash/cron.bash"
+BASH_ENV="$HOME/.doom.d/bash/cron.bash"
 CONDA_DEFAULT_ENV="default"
 JG_NICENESS=10
 

@@ -18,7 +18,7 @@ PATH="/usr/local/opt/sqlite/bin:$PATH"
 # MAN Paths
 # https://www.howtogeek.com/682871/how-to-create-a-man-page-on-linux/
 MANPATH="/usr/local/man:/usr/local/share/man:/usr/share/man"
-MANPATH="$HOME/.doom.d/terminal/man/main:$MANPATH"
+MANPATH="$HOME/.doom.d/templates/man/main:$MANPATH"
 # MANPATH=/Library/Apple/usr/share/man:$MANPATH
 
 # ANACONDA_HOME=/usr/local/anaconda3

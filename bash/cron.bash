@@ -3,12 +3,12 @@ set -o pipefail
 # # from: https://itecnotes.com/server/cron-how-to-use-the-aliases-in-the-crontab/
 shopt -s expand_aliases
 
-source "$HOME/.doom.d/terminal/bash/_basic_utils.bash"
-source "$HOME/.doom.d/terminal/bash/_base_path.bash"
-source "$HOME/.doom.d/terminal/bash/components/rust.bash"
-source "$HOME/.doom.d/terminal/bash/components/latex.bash"
-source "$HOME/.doom.d/terminal/bash/components/jvm.bash"
-source "$HOME/.doom.d/terminal/bash/conda.bash"
+source "$HOME/.doom.d/bash/_basic_utils.bash"
+source "$HOME/.doom.d/bash/_base_path.bash"
+source "$HOME/.doom.d/bash/components/rust.bash"
+source "$HOME/.doom.d/bash/components/latex.bash"
+source "$HOME/.doom.d/bash/components/jvm.bash"
+source "$HOME/.doom.d/bash/conda.bash"
 
 CPU_MAX="50"
 function cpu_check(){

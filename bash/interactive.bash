@@ -4,11 +4,11 @@
 
 echo "Interactive"
 
-source "$HOME/.doom.d/terminal/bash/_aliases.bash"
-source "$HOME/.doom.d/terminal/bash/emacs.bash"
+source "$HOME/.doom.d/bash/_aliases.bash"
+source "$HOME/.doom.d/bash/emacs.bash"
 
 # Setup Conda
-source "$HOME/.doom.d/terminal/bash/conda.bash"
+source "$HOME/.doom.d/bash/conda.bash"
 
 jg_maybe_inc_prompt
 jg_set_prompt

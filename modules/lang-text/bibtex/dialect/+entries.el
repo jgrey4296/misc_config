@@ -57,7 +57,7 @@
 ;;-- digital
 (pushnew! bibtex-jg-entry-alist
           '("Online" "Online Resource"
-            ( ("author" ) ("editor" ) ("title") ("year" ) ("doi" ) ("url" ) ("tags") )
+            ( ("author" ) ("title") ("year" ) ("url" ) ("tags") )
             ()
             () )
           '("Software" "Computer Software"
@@ -81,6 +81,11 @@
             ( ("author") ("tags") ("year") ("url") ("title") )
             ()
             () )
+          '("Video" ""
+            (("author") ("tags") ("year") ("url") ("channel") ("series"))
+            ()
+            ()
+            )
           )
 ;;-- end digital
 

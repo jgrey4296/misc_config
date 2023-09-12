@@ -36,4 +36,7 @@
 
   )
 
+;; https://github.com/zellerin/dynamic-graphs
+(use-package! dynamic-graphs :defer t)
+
 ;;; config.el ends here

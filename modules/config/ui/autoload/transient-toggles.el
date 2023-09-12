@@ -37,11 +37,14 @@
   (transient-make-mode-toggle! rainbow-mode                   "Rainbow Colours"   "r")
   (transient-make-mode-toggle! highlight-changes-visible-mode "Highlight-changes" "x")
   (transient-make-mode-toggle! reveal-mode                    "Reveal Invisible" "I")
+  (transient-make-mode-toggle! auto-highlight-symbol-mode     "Auto Highlight Symbol" "H")
 
   ;;
   (transient-make-call! elide-head "e"
-                        (format "%s : Elide Head" (fmt-as-bool! elide-head-overlay))
-                        (if elide-head-overlay (elide-head-show) (elide-head))
+                        (format "%-2s : Elide Head" (fmt-as-bool! (if (boundp 'elide-head-overlay)
+                                                                    elide-head-overlay
+                                                                  "-1")))
+                        (if (boundp 'elide-head-overlay) (elide-head-show) (elide-head))
                         )
 
   (transient-make-call! link-display "l"
@@ -73,6 +76,9 @@
                             (transient-macro-call-quickscope)
                             (transient-macro-toggle-highlight-parentheses-mode)
                             (transient-macro-call-elide-head)
+                            ]
+                           [
+                            (transient-macro-toggle-auto-highlight-symbol-mode)
                             ]
                            ]
                           )

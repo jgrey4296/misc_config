@@ -10,7 +10,7 @@
 
  :ui         ivy helm hydra ibuffer minibuffer popup
 
- ;; TODO :experimentation
+ :experimentation vertico
 
  :editor format text-manipulation
  :editor tagging
@@ -41,7 +41,8 @@
  :lang-weakly-typed erlang-vms godot ruby
 
 
- :ide version-control support lookup snippets workspaces diff company debugger
+ :ide version-control support lookup snippets workspaces
+ :ide minimap diff company debugger
 
  :tools pdfs
  :tools mail term eval
@@ -50,11 +51,7 @@
 
  ;; --------------------------------------------------
  ;; Doom Standard modules
- :app   (rss +org)
- :emacs electric
- :ui deft doom
- :ui minimap ophints
- ;; :tools editorconfig
- :tools rgb
+ :ui doom
+ :ui ophints
  :os (:if IS-MAC macos) tty
  )

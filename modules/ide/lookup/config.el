@@ -76,7 +76,7 @@
 
 (use-package! osx-dictionary :when IS-MAC :defer t)
 
-(use-package! powerthesaurus :defer t)
+;; (use-package! powerthesaurus :defer t)
 
 (use-package! synosaurus :defer t)
 

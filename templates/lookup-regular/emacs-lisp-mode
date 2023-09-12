@@ -21,3 +21,5 @@ evil-mc                # https://github.com/gabesoft/evil-mc
 multiple-cursors       # https://github.com/magnars/multiple-cursors.el
 s                      # https://github.com/magnars/s.el
 transient              # https://magit.vc/manual/transient/
+Cask                   # https://github.com/cask/cask.git
+Cask Docs              # https://cask.readthedocs.io/en/latest/guide/installation.html

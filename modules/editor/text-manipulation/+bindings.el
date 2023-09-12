@@ -90,6 +90,7 @@
 (map! :map jg-binding-change-map
       :desc "Invis" "z"                                #'+jg-text-toggle-invisible
       :desc "split line"                  "RET"        #'electric-newline-and-maybe-indent
+      :desc "Substitute Ex Memory"        ":"          #'+jg-text-manipulation-sub-memory
       :desc "set buffer coding"           "0"          #'set-buffer-file-coding-system
       :desc "indent"                      "TAB"        #'indent-region
 

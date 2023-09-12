@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """
 $0
+
+See EOF for license/metadata/notes as applicable
 """
 
 ##-- builtin imports
@@ -59,3 +61,12 @@ import more_itertools as mitz
 logging = logmod.getLogger(__name__)
 ##-- end logging
 $0
+
+
+
+
+
+"""
+
+
+"""

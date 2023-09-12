@@ -53,3 +53,40 @@ PATTERN is a vim-style regexp. FLAGS is an optional string of characters. "
   (evil-visual-restore)
   (remove-hook 'post-command-hook #'+jg-text-manipulation-ensure-visual-selection-h)
   )
+
+
+(defvar jg-text--evil-sub-patterns nil)
+(defconst jg-text--evil-sub-pattern-max 20)
+
+;;;###autoload
+(defun +jg-text-manipulation-sub-memory ()
+  (interactive)
+  (let ((pattern (ivy-read "Reuse Sub: " jg-text--evil-sub-patterns)))
+    (cond ((not pattern)
+           nil)
+          ((eq evil-state 'visual)
+           (evil-ex (format "'<,'>%s" pattern)))
+          (t
+           (evil-ex pattern))
+          )
+    )
+  )
+
+;;;###autoload
+(defun +jg-text-manipulation-add-sub-pattern-a (beg end pattern replacement flags)
+  "Record used replacement patterns for reuse"
+
+  (let ((reuse (substring-no-properties (format "s/%s/%s "(car pattern) (cdr replacement)))))
+    (unless (-contains? jg-text--evil-sub-patterns reuse)
+      (push reuse jg-text--evil-sub-patterns))
+    )
+  (when (> (length jg-text--evil-sub-patterns) jg-text--evil-sub-pattern-max)
+    (let (rev (reverse jg-text--evil-sub-patterns))
+      (pop rev)
+      (setq jg-text--evil-sub-patterns (reverse rev))
+      )
+    )
+  )
+
+;;;###autoload
+(advice-add 'evil-ex-substitute :after #'+jg-text-manipulation-add-sub-pattern-a)

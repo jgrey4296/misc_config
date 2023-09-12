@@ -32,7 +32,7 @@
       :desc "previous-line"         "k"       #'evil-previous-line
       :desc "forward-char"          "l"       #'evil-forward-char
 
-      :desc "Return"                 "RET"     #'evil-ret
+      "RET" #'ignore
       :desc "Search"                 "/"       #'evil-ex-search-forward
       )
 

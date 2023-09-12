@@ -1,29 +1,8 @@
 ;;; lang/jg-python/+vars.el -*- lexical-binding: t; -*-
 
-(defvar +python-ipython-command '("ipython" "-i" "--simple-prompt" "--no-color-info")
-  "Command to initialize the ipython REPL for `+python/open-ipython-repl'.")
-
-(defvar +python-jupyter-command '("jupyter" "console" "--simple-prompt")
-  "Command to initialize the jupyter REPL for `+python/open-jupyter-repl'.")
-
-;;-- personal vars
-
-(defvar jg-python-dev-mode nil)
-
-(defvar jg-python-dev-cmd "-X dev")
-
-(defvar jg-python-docs-url           "https://docs.python.org/3/")
-
-(defvar jg-python-lib-url-suffix     "library/%s.html")
-
-(defvar jg-python-import-block-end-re "^\\(__all__\\|[[:graph:]]+?\\s-+=\\|def\\|class\\|if TYPE_CHECKING:\\)")
-
-(defvar jg-python-summary-buffer      "*Python-Summary*")
+;;-- general python
 
 (setq expand-region-preferred-python-mode 'python-mode)
-;;-- end personal vars
-
-;;-- general python
 
 (defvaralias 'python-indent-offset 'py-indent-offset)
 
@@ -105,7 +84,6 @@
       lsp-pyright-log-level "Information" ;; Error Warning Information Trace
       lsp-pyright-typechecking-mode "basic"
 
-
       lsp-ruff-lsp-advertize-fix-all            nil
       lsp-ruff-lsp-advertize-organize-imports   t
       lsp-ruff-lsp-show-notifications           "always"
@@ -121,8 +99,6 @@
       lsp-pylsp-plugins-flake8-enabled nil
 
       )
-
-
 
 ;;-- end lsp
 

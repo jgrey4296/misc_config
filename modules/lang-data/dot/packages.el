@@ -21,5 +21,5 @@
 ;;; Code:
 
 (package! graphviz-dot-mode)
-
+(package! dynamic-graphs)
 ;;; packages.el ends here

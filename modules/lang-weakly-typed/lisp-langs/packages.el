@@ -21,3 +21,5 @@
 ;; Libraries
 (package! buttercup)
 (package! a)
+
+(package! elisp-depmap)

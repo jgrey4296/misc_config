@@ -34,6 +34,7 @@
        `("on-fly-xelatex" ,(format "texliveonfly --compiler=xelatex %s" curr-file) :interactive)
        `("on-fly-lualatex" ,(format "texliveonfly --compiler=lualatex %s" curr-file) :interactive)
        ;; configs
+       '("def"      "latexdef" :read)
        '("texdoc"   "texdoc -I" :read)
        '("package info" "tlmgr info" :read)
        '("version" "pdflatex --version")

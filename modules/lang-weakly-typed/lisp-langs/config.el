@@ -159,6 +159,9 @@
 
 (use-package! find-func)
 
+;; https://gitlab.com/mtekman/elisp-depmap.el
+(use-package! elisp-depmap)
+
 (def-project-mode! +emacs-lisp-ert-mode
   :modes '(emacs-lisp-mode)
   :match "/test[/-].+\\.el$"

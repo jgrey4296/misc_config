@@ -3,8 +3,6 @@
 [[/Users/johngrey/doot.toml][doot.toml]]
 [[/Users/johngrey/dooter.py][dooter.py]]
 [[file:/Volumes/documents/github/jgrey4296.github.io][homepage]]
-https://specifications.freedesktop.org/
-https://www.marginalia.nu/
 
 * Base Agenda
 Death by Institution and the Harms of Abstraction.
@@ -46,57 +44,32 @@ index xkcd using explainxkcd
 fictional syllabi - both of actual papers, and lem-like
 
 ** Links
-https://www.awsgeek.com/
+https://www.marginalia.nu/
+https://calver.org/
+https://archive.pacificpeoplespartnership.org/
 
-https://ainowinstitute.org/research-areas
-https://specifications.freedesktop.org/
-https://en.m.wikipedia.org/wiki/International_Phonetic_Alphabet
-https://marginaleffects.com/
-https://ourworldindata.org/grapher/cumulative-co-emissions
-https://dev.to/
-https://brkeogh.com/
-https://publicdomainreview.org/
-
-https://stackoverflow.com/questions/22072773/batch-export-of-org-mode-files-from-the-command-line
-https://en.m.wikipedia.org/wiki/Wikipedia:Ignore_all_rules
-https://www.commonwl.org/user_guide/index.html
-https://boringml.com/
-
-https://www.logicmatters.net/categories/
+:drawing:
 https://opengameart.org/
+https://www.pexels.com/
+https://shadingreference.com/
+https://www.practicedrawingthis.com/cgi-bin/index.cgi
+:END:
 
-https://gka.github.io/palettes/   :ui:
-https://www.whocanuse.com/        :ui:
+:journalism:
+https://ourworldindata.org/grapher/cumulative-co-emissions
+https://projects.propublica.org/nonprofits/
+:END:
 
+:specifications:
+https://www.commonwl.org/user_guide/index.html
+https://specifications.freedesktop.org/
+:END:
 
-https://afutureworththinkingabout.com/?p=5142
-https://annas-archive.org/
-
+:wikis:
+https://en.m.wikipedia.org/wiki/International_Phonetic_Alphabet
+https://en.m.wikipedia.org/wiki/Wikipedia:Ignore_all_rules
 https://botwiki.org/learn/#blogs-and-websites-accountable-algorithms
-https://cheapbotsdonequick.com/source/
-
-https://dev.epicgames.com/documentation/en-us/uefn/verse-language-reference
-https://developer.nvidia.com/gpugems/gpugems/contributors
-https://firefox-source-docs.mozilla.org/index.html
-https://github.com/charlax/professional-programming
-https://github.com/libgdx/gdx-ai
-https://github.com/orgs/pelican-plugins/repositories
-https://hyperpolyglot.org/
-
-https://llvm.org/docs/LangRef.html
-
 https://shadowrun-series.fandom.com/wiki/Gumbo_Script
-https://sharkbombs.com/games/exnovo
-
-https://sixages.blogspot.com/
-https://textbooks.math.gatech.edu/ila/
-https://tutorial.math.lamar.edu/
-
-https://www.feynmanlectures.caltech.edu/III_toc.html
-https://www.feynmanlectures.caltech.edu/II_toc.html
-https://www.feynmanlectures.caltech.edu/I_toc.html
-https://www.patches-scrolls.de/patch
-
 https://en.m.wikipedia.org/wiki/Kahlil_Gibran
 https://en.m.wikipedia.org/wiki/Differential_privacy
 https://en.m.wikipedia.org/wiki/C%2B%2B#Standardization
@@ -107,5 +80,59 @@ https://en.m.wikipedia.org/wiki/Derinkuyu_underground_city
 https://en.m.wikipedia.org/wiki/Grey_literature
 https://en.m.wikipedia.org/wiki/Technological_Forecasting_and_Social_Change
 https://en.m.wikipedia.org/wiki/Operations_research
+:END:
 
-** [[file:org/python_testbed.org][Testbed Notes]]
+:math:
+https://textbooks.math.gatech.edu/ila/
+https://tutorial.math.lamar.edu/
+https://www.feynmanlectures.caltech.edu/III_toc.html
+https://www.feynmanlectures.caltech.edu/II_toc.html
+https://www.feynmanlectures.caltech.edu/I_toc.html
+:END:
+
+:blogs:
+https://dev.to/
+https://publicdomainreview.org/
+https://brkeogh.com/
+https://boringml.com/
+https://www.logicmatters.net/categories/
+:END:
+
+:stack-overflow:
+https://stackoverflow.com/questions/22072773/batch-export-of-org-mode-files-from-the-command-line
+:END:
+
+https://www.awsgeek.com/
+
+https://ainowinstitute.org/research-areas
+https://marginaleffects.com/
+
+:ui:
+https://gka.github.io/palettes/
+https://www.whocanuse.com/
+:END:
+
+:github:
+https://github.com/charlax/professional-programming
+https://github.com/libgdx/gdx-ai
+https://github.com/orgs/pelican-plugins/repositories
+:END:
+
+
+https://afutureworththinkingabout.com/?p=5142
+https://annas-archive.org/
+
+https://cheapbotsdonequick.com/source/
+
+https://dev.epicgames.com/documentation/en-us/uefn/verse-language-reference
+https://developer.nvidia.com/gpugems/gpugems/contributors
+https://firefox-source-docs.mozilla.org/index.html
+https://hyperpolyglot.org/
+
+https://llvm.org/docs/LangRef.html
+
+https://sharkbombs.com/games/exnovo
+
+https://sixages.blogspot.com/
+
+https://www.patches-scrolls.de/patch

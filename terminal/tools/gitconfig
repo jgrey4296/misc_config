@@ -15,6 +15,9 @@
 	template = ~/.doom.d/templates/files/git/commit
 [hooks]
 	allownonascii = false
+[merge]
+        branchdesc = true
+	log = 20
 [pretty]
 # reminder: use 'format:', doesnt need to wrap in a string
 # data access with %{char}

@@ -9,3 +9,8 @@
 (map! :map jg-binding-operator-map
       :desc "Vundo"                       "u" #'vundo
       )
+
+
+(map! :map vundo-mode-map
+      :n "RET" #'vundo-confirm
+      )

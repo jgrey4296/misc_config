@@ -205,7 +205,7 @@
       :desc "link-display"                 "l" #'org-toggle-link-display
       (:prefix ("t" . "table")
        :desc "formula-debugger"      "f" #'org-table-toggle-formula-debugger
-       :desc "coordinate-overlays)"  "o" #'org-table-toggle-coordinate-overlays)
+       :desc "coordinate-overlays"  "o" #'org-table-toggle-coordinate-overlays)
       )
 
 (map! :map jg-org-mode-map

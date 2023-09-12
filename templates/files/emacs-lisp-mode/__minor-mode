@@ -1,26 +1,8 @@
- ;;; `(file-name-nondirectory buffer-file-name)` -*- lexical-binding: t; no-byte-compile: t;-*-
+;;; `(file-name-nondirectory buffer-file-name)` -*- lexical-binding: t; no-byte-compile: t;-*-
 ;;-- header
+;; File Commentary:
 ;;
-;; Copyright (C) `(format-time-string "%Y")` `user-full-name`
-;;
-;; Author: `user-full-name` <https://github.com/`(cl-find-if-not #'string-empty-p (list (cdr (doom-call-process "git" "config" "user.github")) user-login-name))`>
-;; Maintainer: `user-full-name` <`user-mail-address`>
-;; Created: `(format-time-string "%B %d, %Y")`
-;; Modified: `(format-time-string "%B %d, %Y")`
-;; Version: 0.0.1
-;; Keywords:
-;; Homepage: https://github.com/`(cl-find-if-not #'string-empty-p (list (cdr (doom-call-process "git" "config" "user.github")) user-login-name))`
-;; Package-Requires: ((emacs "24.3"))
-;; Package written on: ((emacs `emacs-version`))
-;;
-;; This file is not part of GNU Emacs.
-;;
-;;; Commentary:
-;;
-;;  $2
-;;
-;;; Code:
-
+;; See footer for licenses/metadata/notes as applicable
 ;;-- end header
 
 ;;-- imports
@@ -54,4 +36,21 @@
 ;;-- end mode definition
 
 (provide '`(file-name-base buffer-file-name)`)
+
+;;-- footer
+;; Copyright (C) `(format-time-string "%Y")` `user-full-name`
+;;
+;; Author: `user-full-name` <https://github.com/`(cl-find-if-not #'string-empty-p (list (cdr (doom-call-process "git" "config" "user.github")) user-login-name))`>
+;; Maintainer: `user-full-name` <`user-mail-address`>
+;; Created: `(format-time-string "%B %d, %Y")`
+;; Modified: `(format-time-string "%B %d, %Y")`
+;; Version: 0.0.1
+;; Keywords:
+;; Homepage: https://github.com/`(cl-find-if-not #'string-empty-p (list (cdr (doom-call-process "git" "config" "user.github")) user-login-name))`
+;; Package-Requires: ((emacs "24.3"))
+;; Package written on: ((emacs `emacs-version`))
+;;
+;; This file is not part of GNU Emacs.
+;;
+;;-- end footer
 ;;; `(file-name-nondirectory buffer-file-name)` ends here

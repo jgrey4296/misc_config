@@ -10,6 +10,7 @@
 (package! flyspell-correct-ivy)
 (package! flyspell-lazy)
 (package! writegood-mode)
+(package! accent)
 
 ;; Formatting
 (package! format-all)

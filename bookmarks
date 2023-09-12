@@ -2,7 +2,22 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("lisp"
+(("provenance"
+ (filename . "/Volumes/documents/github/python/provenance/")
+ (front-context-string . ".tasks\n  drwxr-x")
+ (rear-context-string . "02 Aug 31 02:50 ")
+ (position . 198))
+("config"
+ (filename . "~/.config/")
+ (front-context-string . "swi-prolog -> /U")
+ (rear-context-string . "44 Aug 26 22:19 ")
+ (position . 521))
+("cache"
+ (filename . "~/.cache/")
+ (front-context-string . "re-doom\n  drwxr-")
+ (rear-context-string . "96 Sep  5 03:35 ")
+ (position . 1474))
+("lisp"
  (filename . "/Volumes/documents/github/lisp/")
  (front-context-string . "spec-handling\n  ")
  (rear-context-string . "38 Jul 14 18:17 ")
@@ -262,11 +277,6 @@
  (front-context-string . "resources\n  -rw-")
  (rear-context-string . "18 Jun  4 09:26 ")
  (position . 313))
-("code analysis"
- (filename . "/Volumes/documents/github/python/code_analysis/")
- (front-context-string . "code_analysis\n  ")
- (rear-context-string . "38 May  8 22:44 ")
- (position . 141))
 ("twitter"
  (filename . "/Volumes/documents/twitter_threads/")
  (front-context-string . "group_a\n  drwxrw")

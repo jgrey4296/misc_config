@@ -58,3 +58,5 @@
 (use-package! writegood-mode
   :hook (text-mode)
   )
+
+(use-package! accent)

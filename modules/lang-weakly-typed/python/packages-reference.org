@@ -1,4 +1,4 @@
-#+TITLE: Python Testbed notes
+#+TITLE: Python Packages Reference
 
 * Overview
 https://github.com/vinta/awesome-python
@@ -201,6 +201,7 @@ https://github.com/pyexcel/pyexcel                                              
 https://github.com/PydPiper/pylightxl                                                           : excel : library : spreadsheets
 
 ** diagrams
+https://github.com/MNoichl/opinionated  : graphs
 https://github.com/cknd/stackprinter
 https://github.com/daleroberts/itermplot                                                        : iterm2 : matplotlib : visualisation
 https://github.com/mingrammer/diagrams#getting-started

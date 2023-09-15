@@ -1,7 +1,8 @@
 ;;; lang/emacs-lisp/+bindings.el -*- lexical-binding: t; -*-
 (doom-log "Setting up lisp bindings")
 
-(setq edebug-eval-mode-map (make-sparse-keymap))
+(setq edebug-eval-mode-map (make-sparse-keymap)
+      )
 (evil-make-intercept-map edebug-eval-mode-map)
 
 (map! :map emacs-lisp-mode-map
@@ -21,6 +22,8 @@
 (map! :map (emacs-lisp-mode-map lisp-interaction-mode-map)
       :localleader
       :desc "Expand macro" "m" #'macrostep-expand
+      :desc "Collapse Macro" "q" #'macrostep-collapse
+      :desc "Collapse All Macros" "Q" #'macrostep-collapse-all
       :desc "EIEIO Browse" "b" #'eieio-browse
       "x" #'doom/sandbox
       (:prefix ("d" . "debug")

@@ -58,3 +58,14 @@
     (cl-destructuring-bind (&optional arg flags)
         (evil-delimited-arguments arg 2)
       (list arg (string-to-list flags)))))
+
+;;;###autoload
+(defun +jg-evil--auto-marks-h ()
+  (if (not (or (derived-mode-p ivy-mode helm-mode)
+               (s-matches? "^*" (buffer-name))
+               ))
+      (progn (evil-set-marker ?a (point-min))
+             (evil-set-marker ?z (point-max) t))
+    nil
+    )
+  )

@@ -1,13 +1,9 @@
 ;;; tools/lookup/config.el -*- lexical-binding: t; -*-
 
-(local-load! "+defs")
 (local-load! "+vars")
-(local-load! "+backends")
 (local-load! "+spec-defs")
 
 (defer-load! jg-bindings-total "+bindings")
-
-(defer-load! jg-evil-ex-bindings "+evil-ex")
 
 (use-package! xref
   :config
@@ -35,8 +31,6 @@
 
   )
 
-(use-package! browse-url)
-
 (use-package! dash-docs
   :defer t
   :config
@@ -44,27 +38,10 @@
         dash-docs-docsets-path (concat doom-data-dir "docsets/")
         dash-docs-min-length 2
         dash-docs-browser-func #'browse-url
-        ;; dash-docs-browser-func #'(lambda (name filename anchor)
-        ;;                            (message "Name: %s\nFilename: %s\nAnchor: %s\nFull: %s" name filename anchor
-        ;;                                     (replace-regexp-in-string "%20" " " (dash-docs-result-url name filename)))
-        ;;                            (eww-open-file
-        ;;                             (replace-regexp-in-string "%20" " "
-        ;;                                                       (replace-regexp-in-string "^file:///" "" (dash-docs-result-url name filename)))
-        ;;                             )
-        ;;                            )
         )
 
   (require 'counsel-dash nil t)
 )
-
-(use-package! browse-select
-  :config
-  (browse-select-load-variants)
-  )
-
-(use-package! lookup-regular
-  :hook (doom-first-file . global-lookup-regular-minor-mode)
-  )
 
 ;;-- words
 
@@ -74,7 +51,7 @@
   (add-hook 'wordnut-mode-hook 'outline-minor-mode)
   )
 
-(use-package! osx-dictionary :when IS-MAC :defer t)
+(use-package! osx-dictionary :when (eq system-type 'darwin) :defer t)
 
 ;; (use-package! powerthesaurus :defer t)
 
@@ -85,3 +62,14 @@
 (use-package! define-word :defer t)
 
 ;;-- end words
+
+(use-package! librarian
+  :commands (librarian-mode librarian-url)
+  :after transient-toggles
+  :init
+  (transient-make-mode-toggle! librarian-mode "Librarian" "b")
+  (transient-append-suffix 'jg-toggle-main "c" '("b" transient-macro-toggle-librarian-mode))
+  :config
+  (+jg-librarian-add-librarian-transient)
+  ;; choose backends?
+  )

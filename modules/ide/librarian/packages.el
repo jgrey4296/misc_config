@@ -14,8 +14,6 @@
 (package! browse-url)
 (package! dash-docs)
 (package! counsel-dash)
-(package! browse-select :recipe (:host github :repo "jgrey4296/misc-modes" :files ("minor-modes/browse-select/*.el")))
-(package! lookup-regular :recipe (:host github :repo "jgrey4296/misc-modes" :files ("minor-modes/lookup-regular/*.el")))
 (package! xref)
 
 (package! wordnut)

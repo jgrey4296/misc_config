@@ -23,5 +23,4 @@
 (package! free-keys)
 (package! helpful)
 (package! eldoc)
-(package! librarian :recipe (:host github :repo "jgrey4296/librarian"))
 ;;; packages.el ends here

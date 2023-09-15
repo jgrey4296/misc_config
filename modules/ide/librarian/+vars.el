@@ -1,19 +1,20 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
 
-(setq browse-select-default-prog "firefox"
-      browse-url-browser-function 'browse-select-default
-      browse-url-default-handlers nil
-      lookup-regular-location (expand-file-name "templates/lookup-regular" doom-user-dir)
+(setq librarian-regular--location                  (expand-file-name "templates/lookup-regular" doom-user-dir)
+      librarian-configs--modules-dir               (expand-file-name "modules" doom-user-dir)
+      librarian-man--path                          (expand-file-name "templates/man/main" doom-user-dir)
+      librarian-man--config                        (expand-file-name "templates/tools/man.conf" doom-user-dir)
+
+      librarian-tagging-mode-substitution-sources  (expand-file-name "~/github/jgrey4296.github.io/resources/tags/substitutions")
+      librarian-tagging-mode-main-loc              (expand-file-name "~/github/jgrey4296.github.io/.temp/tags/totals.tags")
       )
 
-(setq xref-show-definitions-function #'ivy-xref-show-defs
-      xref-show-xrefs-function       #'ivy-xref-show-xrefs)
 
 ;;-- specs
 (spec-handling-add! lookup-url
                     '(defaults
-                      ("DuckDuckGo"         +lookup--online-backend-duckduckgo "https://duckduckgo.com/?q=%s")
+                      ("DuckDuckGo"         librarian-backend--online-duckduckgo "https://duckduckgo.com/?q=%s")
                       ("Github"             "https://github.com/search?ref=simplesearch&q=%s")
                       ("DevDocs.io"         "https://devdocs.io/#q=%s")
                       ("StackOverflow"      "https://stackoverflow.com/search?q=%s")
@@ -31,7 +32,7 @@
                     )
 (spec-handling-add! lookup-url
                     '(plus
-                     ("Google"            +lookup--online-backend-google "https://google.com/search?q=%s")
+                     ("Google"            libraria-backend--online-google "https://google.com/search?q=%s")
                      ("Google images"     "https://www.google.com/images?q=%s")
                      ("Google maps"       "https://maps.google.com/maps?q=%s")
                      ("Project Gutenberg" "http://www.gutenberg.org/ebooks/search/?query=%s")
@@ -41,8 +42,7 @@
                     )
 (spec-handling-add! browse-handler
                     '(default
-                      ("^@" . browse-select-twitter)
-                      ("."  . browse-select-default)
+                      ("."  . librarian-browser--default)
                       )
                     )
 (spec-handling-add! lookup-regular

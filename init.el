@@ -19,6 +19,9 @@
  :editor large-files
  :editor autosave
 
+ :ide version-control support librarian snippets workspaces
+ :ide minimap diff company debugger
+
 
  :lang-data csv graphql dot
  :lang-data xml toml json yaml logs
@@ -40,9 +43,6 @@
  :lang-weakly-typed lisp-langs python lua
  :lang-weakly-typed erlang-vms godot ruby
 
-
- :ide version-control support lookup snippets workspaces
- :ide minimap diff company debugger
 
  :tools pdfs
  :tools mail term eval

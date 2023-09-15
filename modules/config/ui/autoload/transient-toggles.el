@@ -213,13 +213,6 @@
   (transient-make-mode-toggle! global-highlight-changes-mode  "Show Changes"  "x")
   (transient-make-mode-toggle! smartparens-global-mode        "SmartParens"   "s")
   )
-;;TODO apply choice
-(transient-define-argument browse-selector ()
-  :class 'transient-switches
-  :argument-format "-browser=%s"
-  :argument-regexp "-browser=%s"
-  :choices browse-select-variants
-  )
 
 ;;;###autoload (autoload #'jg-toggle-main "config/ui/autoload/transient-toggles" nil t)
 (transient-define-prefix jg-toggle-main ()
@@ -260,6 +253,10 @@
   :lighter ""
   :global t
   :keymap (make-sparse-keymap)
+  (evil-define-key 'normal transient-toggles-minor-mode-map
+    "T" #'jg-toggle-main
+    )
+  (evil-make-overriding-map transient-toggles-minor-mode-map)
   )
 
 (provide 'transient-toggles)

@@ -204,15 +204,15 @@
   ;; Windows
   (transient-make-var-toggle! auto-balance evil-auto-balance-windows "Auto-Balance Windows" "B")
 
-  (transient-make-call! shrink-horizontally "h" "Horizontal Shrink" (progn (shrink-window-horizontally 5)))
-  (transient-make-call! shrink-vertically   "v" "Vertical Shrink"   (progn (shrink-window 5)))
-  (transient-make-call! grow-horizontally   "H" "Horizontal Grow" (progn  (shrink-window-horizontally -5)))
-  (transient-make-call! grow-vertically     "V" "Vertical Grow"   (progn  (shrink-window -5)))
+  (transient-make-call! shrink-horizontally "h" "Horizontal Shrink" (window-resize transient--original-window -5 t t))
+  (transient-make-call! shrink-vertically   "v" "Vertical Shrink"   (window-resize transient--original-window -5 nil t))
+  (transient-make-call! grow-horizontally   "H" "Horizontal Grow"   (window-resize transient--original-window 5 t t))
+  (transient-make-call! grow-vertically     "V" "Vertical Grow"     (window-resize transient--original-window 5 nil t))
 
-  (transient-make-call! toggle-layout                                                       "/" "Toggle Layout"            (progn (transient--delete-window) (+jg-ui-window-layout-toggle)))
-  (transient-make-call! rotate-layout       "\\" "Rotate Layout"           (progn (transient--delete-window) (+jg-ui-window-rotate-forward)))
+  (transient-make-call! toggle-layout       "/" "Toggle Layout"     (+jg-ui-window-layout-toggle))
+  (transient-make-call! rotate-layout       "\\" "Rotate Layout"    (+jg-ui-window-rotate-forward))
 
-  (transient-make-call! toggle-dedication                            "!"
+  (transient-make-call! toggle-dedication   "!"
                         (format "%-2s : Window Dedicated: %s"
                                 (fmt-as-bool! (window-dedicated-p (selected-window)))
                                 (window-buffer (selected-window)))
@@ -227,11 +227,11 @@
   (transient-make-int-call! window-delete      "d" "Delete Window"   #'+workspace/close-window-or-workspace)
 
   (transient-make-int-call! window-split-below "-" "Split Below"     #'split-window-below)
-  (transient-make-int-call! window-split-right "/" "Split Right"     #'split-window-right)
+  (transient-make-int-call! window-split-right "=" "Split Right"     #'split-window-right)
   (transient-make-int-call! window-maximize    "m" "Maximize Window" #'doom/window-maximize-buffer)
   (transient-make-int-call! window-undo        "u" "Window Undo"     #'winner-undo)
   (transient-make-int-call! window-redo        "U" "Window Redo"     #'winner-redo)
-  (transient-make-call! window-balance         "b" "Balance Windows" (progn (transient--delete-window) (balance-windows)))
+  (transient-make-call!     window-balance     "b" "Balance Windows" (balance-windows))
   )
 
 ;;;###autoload (autoload 'transient-workspace "ide/workspaces/autoload/transient.el" nil t)

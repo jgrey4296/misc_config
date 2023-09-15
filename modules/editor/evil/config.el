@@ -3,7 +3,9 @@
 (local-load! "+defs")
 (local-load! "+vars")
 (local-load! "+spec-defs")
+
 (defer-load! (evil-collection evil-ex) "+evil-ex-setup")
+
 (defer-load! jg-bindings-core "+bindings") ;; -> jg-evil-bindings
 
 (use-package! evil
@@ -17,6 +19,15 @@
 
   :config
   (evil-select-search-module 'evil-search-module 'evil-search)
+  ;; Forward declare these so that ex completion works, even if the autoloaded
+  ;; functions aren't loaded yet.
+  (evil-add-command-properties '+evil:align :ex-arg 'regexp-match)
+  (evil-add-command-properties '+evil:align-right :ex-arg 'regexp-match)
+  (evil-add-command-properties '+multiple-cursors:evil-mc :ex-arg 'regexp-global-match)
+
+    ;; Allow eldoc to trigger directly after changing modes
+  (after! eldoc (eldoc-add-command 'evil-normal-state 'evil-insert 'evil-change 'evil-delete 'evil-replace))
+  (unless noninteractive (add-hook! 'after-save-hook #'+evil-display-vimlike-save-message-h))
 
   ;; PERF: Stop copying the selection to the clipboard each time the cursor
   ;; moves in visual mode. Why? Because on most non-X systems (and in terminals
@@ -28,49 +39,12 @@
   ;; UX: It also clobbers clipboard managers (see emacs-evil/evil#336).
   (setq evil-visual-update-x-selection-p nil)
 
-
-  (add-hook! '(doom-load-theme-hook doom-after-modules-config-hook)
-    #'+evil-update-cursor-color-h
-    )
-
-  (add-hook 'evil-insert-state-entry-hook #'delete-selection-mode)
-  (add-hook 'evil-insert-state-exit-hook  #'+default-disable-delete-selection-mode-h)
-
-  ;; Ensure `evil-shift-width' always matches `tab-width'; evil does not police this itself, so we must.
-  ;; (setq-hook! 'after-change-major-mode-hook evil-shift-width tab-width)
-
-  (add-hook! 'doom-escape-hook #'+evil-disable-ex-highlights-h)
-
-  ;; --- evil hacks -------------------------
-  (after! eldoc
-    ;; Allow eldoc to trigger directly after changing modes
-    (eldoc-add-command 'evil-normal-state 'evil-insert 'evil-change 'evil-delete 'evil-replace))
-
-  (unless noninteractive
-    (add-hook! 'after-save-hook #'+evil-display-vimlike-save-message-h)
-    )
-
-  ;; --- custom interactive codes -----------
-  ;; These arg types will highlight matches in the current buffer
-  (evil-ex-define-argument-type regexp-match
-    :runner (lambda (flag &optional arg) (+evil-ex-regexp-match flag arg 'inverted)))
-  (evil-ex-define-argument-type regexp-global-match
-    :runner +evil-ex-regexp-match)
-
-  ;; Other commands can make use of this
-  (evil-define-interactive-code "<//>"
-    :ex-arg regexp-match
-    (+evil--regexp-match-args evil-ex-argument))
-
-  (evil-define-interactive-code "<//!>"
-    :ex-arg regexp-global-match
-    (+evil--regexp-match-args evil-ex-argument))
-
-  ;; Forward declare these so that ex completion works, even if the autoloaded
-  ;; functions aren't loaded yet.
-  (evil-add-command-properties '+evil:align :ex-arg 'regexp-match)
-  (evil-add-command-properties '+evil:align-right :ex-arg 'regexp-match)
-  (evil-add-command-properties '+multiple-cursors:evil-mc :ex-arg 'regexp-global-match)
+  (add-hook 'doom-load-theme-hook           #'+evil-update-cursor-color-h)
+  (add-hook 'doom-after-modules-config-hook #'+evil-update-cursor-color-h)
+  (add-hook 'evil-insert-state-entry-hook   #'delete-selection-mode)
+  (add-hook 'evil-insert-state-exit-hook    #'+default-disable-delete-selection-mode-h)
+  (add-hook 'doom-escape-hook               #'+evil-disable-ex-highlights-h)
+  ;; (add-hook 'evil-local-mode-hook           #'+jg-evil--auto-marks-h)
 
   ;; Lazy load evil ex commands
   (delq! 'evil-ex features)
@@ -101,7 +75,8 @@
   (evilem-make-motion evilem-motion-backward-word-begin #'evil-backward-word-begin :scope 'visible)
   (evilem-make-motion evilem-motion-backward-WORD-begin #'evil-backward-WORD-begin :scope 'visible)
   (evilem-make-motion evilem-motion-backward-word-end #'evil-backward-word-end :scope 'visible)
-  (evilem-make-motion evilem-motion-backward-WORD-end #'evil-backward-WORD-end :scope 'visible))
+  (evilem-make-motion evilem-motion-backward-WORD-end #'evil-backward-WORD-end :scope 'visible)
+  )
 
 (use-package! evil-embrace
   :defer t
@@ -182,7 +157,6 @@
         :nm "T" nil
         )
   )
-
 
 (use-package! evil-iedit-state
   :defer t

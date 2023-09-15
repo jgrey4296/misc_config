@@ -7,20 +7,22 @@
   "Toggle between horizontal and vertical layout of two windows.
 originally from spacemacs, then @bmag"
   (interactive)
-  (if (= (count-windows) 2)
-      (let* ((window-tree (car (window-tree)))
-             (current-split-vertical-p (car window-tree))
-             (first-window (nth 2 window-tree))
-             (second-window (nth 3 window-tree))
-             (second-window-state (window-state-get second-window))
-             (splitter (if current-split-vertical-p
-                           #'split-window-horizontally
-                         #'split-window-vertically)))
-        (delete-other-windows first-window)
-        ;; `window-state-put' also re-selects the window if needed, so we don't
-        ;; need to call `select-window'
-        (window-state-put second-window-state (funcall splitter)))
-    (error "Can't toggle window layout when the number of windows isn't two.")))
+  (let* ((windows (--reject (equal it transient--window) (window-list)))
+         (window-tree (car (window-tree)))
+         (current-split-vertical-p (car window-tree))
+         (first-window (car windows))
+         (second-window-buffer (window-buffer (cadr windows)))
+         (splitter (if current-split-vertical-p
+                       #'split-window-horizontally
+                     #'split-window-vertically)))
+
+    (unless (= (length windows) 2)
+      (error "Can't toggle window layout when the number of windows isn't two."))
+
+    (delete-other-windows first-window)
+    (set-window-buffer (funcall splitter) second-window-buffer)
+    )
+  )
 
 ;;;###autoload
 (defun +jg-ui-window-rotate-forward (&optional count)
@@ -30,13 +32,16 @@ Dedicated (locked) windows are left untouched.
 originally from spacemacs, by magnars and modified by ffevotte
 "
   (interactive "p")
-  (let* ((non-dedicated-windows (cl-remove-if 'window-dedicated-p (window-list)))
-         (states (mapcar #'window-state-get non-dedicated-windows))
-         (num-windows (length non-dedicated-windows))
+  (let* ((windows (--reject (or (window-dedicated-p it) (equal it transient--window)) (window-list)))
+         (states (mapcar #'window-state-get windows))
+         (num-windows (length windows))
          (step (+ num-windows (or count 1))))
-    (if (< num-windows 2)
-        (error "You can't rotate a single window!")
-      (dotimes (i num-windows)
-        (window-state-put
-         (elt states i)
-         (elt non-dedicated-windows (% (+ step i) num-windows)))))))
+    (unless (< 1 num-windows)
+      (error "You can't rotate a single window!"))
+
+    (dotimes (i num-windows)
+      (window-state-put
+       (elt states i)
+       (elt windows (% (+ step i) num-windows))))
+    )
+  )

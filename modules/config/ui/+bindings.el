@@ -61,15 +61,6 @@
 
 ;;-- end misc
 
-;;-- transient
-;; transient-map transient-base-map transient-edit-map
-(map! :map transient-toggles-minor-mode-map
-      :n "T" #'jg-toggle-main
-      )
-
-(evil-make-overriding-map transient-toggles-minor-mode-map)
-;;-- end transient
-
 ;;-- treemacs
 treemacs-project-map
 treemacs-toggle-map

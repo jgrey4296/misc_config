@@ -8,29 +8,6 @@
   )
 
 ;;;###autoload
-(defun +jg-help-list-buffer-locals ()
-  (interactive)
-  (let ((vars (buffer-local-variables))
-        (buf (buffer-name (current-buffer)))
-        )
-    (with-temp-buffer-window (format "*Buffer Locals: %s" buf)
-        'display-buffer-pop-up-window
-        (lambda (wind val) (with-selected-window wind
-                        (emacs-lisp-mode))
-          val)
-      (cl-loop for x in vars do
-               (if (or (string-match jg-help-local-var-skip-regexp
-                                     (symbol-name (car x)))
-                        (< 40 (length (format "%s" (cdr x)))))
-                   (princ (format "(%s : Skipped)" (car x)))
-                 (princ x))
-               (princ "\n")
-               )
-      )
-    )
-  )
-
-;;;###autoload
 (defun +jg-help-load-package-list ()
   (unless doom--help-packages-list
     (setq doom--help-packages-list
@@ -41,20 +18,6 @@
                            (hash-table-keys straight--build-cache))
                    (mapcar #'car (doom-package-list 'all))
                    nil)))
-    )
-  )
-
-;;;###autoload
-(defun +jg-help-system-config ()
-  (interactive)
-  (with-temp-buffer-window "*Emacs Build Configuration*" 'display-buffer-pop-up-window nil
-    (princ "Emacs Built with: \n")
-    (princ system-configuration-features)
-    (cl-loop for line in (s-split " -" system-configuration-options)
-             do
-             (princ "\n-")
-             (princ line)
-             )
     )
   )
 

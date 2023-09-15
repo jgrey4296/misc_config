@@ -10,8 +10,6 @@
 
 (defvar jg-bibtex-rand-log ".emacs_rand_bib_log")
 
-(defvar jg-bibtex-tweet-rand-log ".emacs_tweet_rand_bib_log")
-
 (defvar jg-bibtex-clean-move-entry-on-fail nil)
 
 (defvar jg-bibtex-open-doi-with-pdf        nil)
@@ -53,8 +51,6 @@
 (defvar jg-bibtex-pdf-replace-library-string   "pdf_library")
 
 (defvar jg-bibtex-remove-field-newlines-regexp "^=")
-
-(defvar jg-bibtex-tweet-pattern                "(%s): %s\nby %s\nTags: %s\nRef: %s\n")
 
 (defvar jg-bibtex-curl-cmd      "curl")
 

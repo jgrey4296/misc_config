@@ -38,8 +38,4 @@
 
   )
 
-(use-package! librarian
-  :defer t
-  )
-
 ;;; config.el ends here

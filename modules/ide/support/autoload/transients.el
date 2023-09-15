@@ -81,8 +81,6 @@
 
   )
 
-
-
 (transient-make-subgroup! jg-lsp-session-control "1"
                           "LSP Session Control Options"
                           :desc "||  Session Control ||"

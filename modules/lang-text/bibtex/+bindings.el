@@ -24,8 +24,6 @@
       :localleader
       :desc "Open In progress"    "0"     (cmd! (bookmark-jump "in_progress_pdfs" #'switch-to-buffer-other-window))
 
-      :desc "Tweet Entry" "t" #'+jg-bibtex-tweet-cmd
-
       :desc "Subcite"             "\\"    #'+jg-bibtex-subcite
       :desc "Build Bibliography"  "B"     #'org-ref-build-full-bibliography
       :desc "Insert from DOI"     "d"     #'+jg-bibtex-insert-entry-from-doi

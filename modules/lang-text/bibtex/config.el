@@ -51,7 +51,9 @@
   :init
   (custom-set-variables '(org-ref-insert-cite-key "C-c i"))
   :config
-  (setq-hook! 'bibtex-mode-hook org-ref-clean-bibtex-entry-hook jg-bibtex-clean-hooks)
+  (setq-hook! 'bibtex-mode-hook
+    org-ref-clean-bibtex-entry-hook jg-bibtex-clean-hooks
+    )
   (remove-hook 'bibtex-mode-hook #'org-ref-bibtex-mode-keys)
   )
 

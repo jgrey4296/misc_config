@@ -2,8 +2,24 @@
 
 (doom-log "setting up evil-ex bindings: %s" (current-time-string))
 
-(setq evil-ex-commands nil )
+;; These arg types will highlight matches in the current buffer
+(evil-ex-define-argument-type regexp-match
+  :runner (lambda (flag &optional arg) (+evil-ex-regexp-match flag arg 'inverted)))
 
+(evil-ex-define-argument-type regexp-global-match
+  :runner +evil-ex-regexp-match)
+
+;; Other commands can make use of this
+(evil-define-interactive-code "<//>"
+  :ex-arg regexp-match
+  (+evil--regexp-match-args evil-ex-argument))
+
+(evil-define-interactive-code "<//!>"
+  :ex-arg regexp-global-match
+  (+evil--regexp-match-args evil-ex-argument))
+
+
+(setq evil-ex-commands nil )
 (map! :map (evil-ex-completion-map evil-ex-search-keymap)
       "C-a"                                  #'evil-beginning-of-line
       "C-b"                                  #'evil-backward-char

@@ -6,7 +6,6 @@
 (map! :map jg-help-map
       "'"    #'describe-char
       "f"    #'counsel-describe-function
-      "c"    #'+jg-help-describe-class
       "v"    #'counsel-describe-variable
       "l"    #'view-lossage
       "t"    #'list-timers
@@ -16,13 +15,6 @@
       "DEL" #'free-keys
     )
 
-(map! :map jg-help-map
-      :prefix ("e" . "Edit")
-      :desc "Bindings" "b" #'+jg-help-edit-bindings
-      :desc "Vars"     "v" #'+jg-help-edit-vars
-      :desc "Config"   "c" #'+jg-help-edit-config
-      :desc "Spec-Defs" "s" #'+jg-help-edit-spec-defs
-      )
 
 ;;-- debug
 (map! :map jg-help-map
@@ -44,7 +36,6 @@
 ;;-- docs
 (map! :map jg-help-map
       :prefix ("d" . "docs")
-      :desc "Man"                         "m" #'+jg-help-man ;; #'man  ;; #'+man-or-woman
       :desc "Emacs Manual"                "e" #'info-emacs-manual
       :desc "Emacs Manual Other Window"   "o" #'info-other-window
                                           "a" #'doom/help-autodefs
@@ -77,7 +68,6 @@
 (map! :map jg-help-map
       :prefix ("b" . "Bindings")
       "b" #'describe-bindings
-      "e" #'+jg-help-edit-bindings
       "f" #'which-key-show-full-keymap
       "i" #'which-key-show-minor-mode-keymap
       "k" #'which-key-show-keymap
@@ -115,7 +105,6 @@
       :desc "Modules Help"                       "m" #'doom/help-modules
       :desc "Versions"                           "V" #'doom/version
       :desc "Rebuild Package"                    "r" #'straight-rebuild-package
-      :desc "Emacs Version Config"               "v" #'+jg-help-system-config
       )
 ;;-- end packages
 
@@ -137,7 +126,6 @@
 
 (map! :leader
       :desc "help"            "h" jg-help-map
-      :desc "Local Variables" "b l"   #'+jg-help-list-buffer-locals
       )
 (map! :g "C-x h" jg-help-map)
 

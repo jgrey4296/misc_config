@@ -32,3 +32,5 @@
 (evil-ex-define-cmd "sor[t]"                   #'evil-ex-sort)
 
 (evil-ex-define-cmd "sel"                      #'+jg-text-manipulation-ex-expand-selection)
+
+;; TODO add a move-line/region-to-marker

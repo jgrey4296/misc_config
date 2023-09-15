@@ -106,8 +106,3 @@
       :i "}" (cmd! (insert "{{   }}") (backward-char 4))
 
       )
-
-(map! :map eww-mode-map
-      :localleader
-      :desc "Render Buffer" "r" #'shr-render-buffer
-      )

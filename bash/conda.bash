@@ -14,7 +14,7 @@ elif [[ -f ".venv" ]]; then
     echo "Env Conda : ${ENV}"
 else
     echo "Base Conda"
-    CONDA_DEFAULT_ENV="base"
+    CONDA_DEFAULT_ENV="default"
 fi
 
 # >>> conda initialize >>>

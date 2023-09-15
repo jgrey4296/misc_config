@@ -88,7 +88,7 @@ function set-emacs () {
 
 function read-emacs () {
     local curr_emacs="$(basename $(readlink -f $HOME/.emacs.d))"
-    echo "Currently Set to: $curr_emacs"
+    echo "Emacs: $curr_emacs"
 }
 
 function report-emacs () {

@@ -67,4 +67,8 @@
   :commands evil-paren-state
   )
 
+(use-package! avy
+
+  )
+
 ;;; config.el ends here

@@ -12,6 +12,14 @@
        )
       )
 
+(map! :map jg-help-map
+      :prefix ("e" . "Edit")
+      :desc "Bindings"  "b" #'librarian-configs--edit-bindings
+      :desc "Vars"      "v" #'librarian-configs--edit-vars
+      :desc "Config"    "c" #'librarian-configs--edit-config
+      :desc "Spec-Defs" "s" #'librarian-configs--edit-spec-defs
+      )
+
 (map! :map librarian-mode-map
       :prefix "s"
       :desc "Browse URL"             :n "u" #'librarian-url
@@ -40,15 +48,6 @@
        :desc "Debug"    :n "?" #'librarian-debug
        :desc "Install Docset" :n "0" #'librarian-docset-install
        )
-      )
-
-(map! :map librarian-mode-map
-      :leader
-      :prefix ("he" . "Edit")
-      :desc "Bindings"  "b" #'librarian-configs--edit-bindings
-      :desc "Vars"      "v" #'librarian-configs--edit-vars
-      :desc "Config"    "c" #'librarian-configs--edit-config
-      :desc "Spec-Defs" "s" #'librarian-configs--edit-spec-defs
       )
 
 (map! :map eww-mode-map

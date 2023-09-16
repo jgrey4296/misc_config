@@ -66,6 +66,7 @@
 (use-package! librarian
   :commands (librarian-mode librarian-url)
   :after transient-toggles
+  :hook (doom-first-input . global-librarian-mode)
   :init
   (transient-make-mode-toggle! librarian-mode "Librarian" "b")
   (transient-append-suffix 'jg-toggle-main "c" '("b" transient-macro-toggle-librarian-mode))

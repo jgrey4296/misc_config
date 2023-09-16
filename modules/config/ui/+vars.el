@@ -2,10 +2,8 @@
 
 (defvar jg-ui-default-face-gen-palette-dir "/Volumes/documents/github/jgrey4296.github.io/resources/palettes/")
 
-
 ;;-- theme settings
 (setq custom-theme-directory (expand-file-name "templates/themes" doom-user-dir))
-
 
 ;;-- end theme settings
 
@@ -13,62 +11,25 @@
       confirm-nonexistent-file-or-buffer nil
       uniquify-buffer-name-style 'forward
       ring-bell-function #'ignore
+
       visible-bell nil
-      hscroll-margin 2
-      hscroll-step 1
-      scroll-conservatively 101
-      scroll-margin 0
-      scroll-preserve-screen-position t
-      auto-window-vscroll nil
-      ;; blink-cursor-mode -1
-      blink-matching-paren nil
-      x-stretch-cursor nil
-      indicate-buffer-boundaries nil
-      indicate-empty-lines nil
 
-      window-divider-default-places t
-      window-divider-default-bottom-width 1
-      window-divider-default-right-width 1
 
-      split-width-threshold 160
-      split-height-threshold nil
-      use-short-answers t
-      )
+      ;; Transient
+      ;; Must be set early to prevent ~/.config/emacs/transient from being created
+      transient-levels-file  (concat doom-data-dir "transient/levels")
+      transient-values-file  (concat doom-data-dir "transient/values")
+      transient-history-file (concat doom-data-dir "transient/history")
 
-(setq mouse-yank-at-point nil
-      mouse-wheel-scroll-amount nil
-      mouse-wheel-scroll-amount-horizontal 2
+      whitespace-style '(face tabs spaces trailing lines space-before-tab newline indentation empty space-after-tab space-mark tab-mark newline-mark)
+      whitespace-line-column nil
+      whitespace-display-mappings '((tab-mark ?\t [?› ?\t])
+                                    (newline-mark ?\n [?¬ ?\n])
+                                    (space-mark ?\  [?·] [?.]))
 
       )
 
-(setq-default highlight-parentheses-delay      0.3
-              display-line-numbers             t
-              display-line-numbers-major-tick  20
-              display-line-numbers-width 4
-              display-line-numbers-type t
-
-              overflow-newline-into-fringe t
-
-              highlight-parentheses-colors            '("black")
-              highlight-parentheses-background-colors '("#60aa00" "yellow" "#da8548" "#d02b61")
-              global-hl-line-modes '(bibtex-mode prog-mode text-mode conf-mode special-mode org-agenda-mode comint-mode)
-
-              line-move-ignore-invisible t
-              avy-all-windows t
-
-              whitespace-style '(face tabs spaces trailing lines space-before-tab newline indentation empty space-after-tab space-mark tab-mark newline-mark)
-              whitespace-line-column nil
-              whitespace-display-mappings '((tab-mark ?\t [?› ?\t])
-                                            (newline-mark ?\n [?¬ ?\n])
-                                            (space-mark ?\  [?·] [?.]))
-
-              which-key-idle-secondary-delay 0.05
-              which-key-sort-order 'which-key-key-order-alpha
-
-              fringes-outside-margins t
-              )
-
-;;-- hl todo
+;;-- highlighting
 (setq hl-todo-highlight-punctuation ":"
         hl-todo-keyword-faces
         '(;; For reminders to change or add something at a later date.
@@ -92,13 +53,17 @@
           ("BUG" error bold)
           ("XXX" font-lock-constant-face bold))
         )
-;;-- end hl todo
 
-;;-- highlight indent guides
 (setq highlight-indent-guides-method 'character
       highlight-indent-guides-suppress-auto-error t
+
+      highlight-parentheses-delay      0.3
+      highlight-parentheses-colors            '("black")
+      highlight-parentheses-background-colors '("#60aa00" "yellow" "#da8548" "#d02b61")
+
+      global-hl-line-modes '(bibtex-mode prog-mode text-mode conf-mode special-mode org-agenda-mode comint-mode)
       )
-;;-- end highlight indent guides
+;;-- end highlighting
 
 ;;-- modeline
 ;; We display project info in the modeline ourselves
@@ -123,15 +88,19 @@
 
 ;;-- end modeline
 
-;;-- so long
-(setq so-long-threshold 5000)
-;;-- end so long
-
 ;;-- treemacs
 (setq treemacs-collapse-dirs 3
 
  )
 ;;-- end treemacs
+
+;;-- go away mouse
+(setq mouse-yank-at-point nil
+      mouse-wheel-scroll-amount nil
+      mouse-wheel-scroll-amount-horizontal 2
+      )
+
+;;-- end go away mouse
 
 (spec-handling-add! auto-modes
                     '(ui

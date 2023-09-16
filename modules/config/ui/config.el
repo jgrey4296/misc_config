@@ -13,6 +13,7 @@
   (add-hook 'treemacs-mode-hook #'treemacs-hide-gitignored-files-mode)
   )
 
+
 ;;-- highlight
 
 (use-package! hl-line

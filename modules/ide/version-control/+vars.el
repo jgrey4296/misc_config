@@ -6,11 +6,6 @@
       magit-revision-insert-related-refs nil ;; Don't display parent/related refs in commit buffers
       magit-auto-revert-mode nil
 
-      ;; Must be set early to prevent ~/.config/emacs/transient from being created
-      transient-levels-file  (concat doom-data-dir "transient/levels")
-      transient-values-file  (concat doom-data-dir "transient/values")
-      transient-history-file (concat doom-data-dir "transient/history")
-
       magit-todos-keyword-suffix "\\(?:([^)]+)\\)?:?" ;; make colon optional
       )
 
@@ -37,10 +32,13 @@
       code-review-download-dir (concat doom-data-dir "code-review/")
       )
 
-(spec-handling-add! popup
+(spec-handling-add! popup :form 'override
                     '(magit
-                     ("^\\(?:\\*magit\\|magit:\\| \\*transient\\*\\)" :ignore t :priority 200)
                      ("^\\*git-gutter" :select nil :size '+popup-shrink-to-fit)
+                     ("^magit-todos-list" :select nil :side right :ttl nil :quit t :width 80 :priority 180)
+                     ;; ("^magit:" :select nil :side left :ttl nil :quit t :width 80 :priority 180)
+                     ("^\\(?:\\*magit:\\|magit:\\)" :ignore t :priority 150)
+                     ("^\\(?:magit-diff:\\|COMMIT_EDITMSG\\)" :ignore t :priority 200)
                      )
                     '(forge
                      ( "^\\*?[0-9]+:\\(?:new-\\|[0-9]+$\\)" :size 0.45 :modeline t :ttl 0 :quit nil)
@@ -52,7 +50,7 @@
                       )
                     )
 
-(spec-handling-add! fold :form 'override
+(spec-handling-add! fold
                     `(magit
                       :modes (magit-status-mode)
                       :priority 50

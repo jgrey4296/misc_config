@@ -22,7 +22,6 @@
  :ide version-control support librarian snippets workspaces
  :ide minimap diff company debugger
 
-
  :lang-data csv graphql dot
  :lang-data xml toml json yaml logs
 
@@ -43,15 +42,11 @@
  :lang-weakly-typed lisp-langs python lua
  :lang-weakly-typed erlang-vms godot ruby
 
-
  :tools pdfs
  :tools mail term eval
  :tools processes
  :tools calendar dired
 
- ;; --------------------------------------------------
- ;; Doom Standard modules
- :ui doom
+ :ui doom-ui
  :ui ophints
- :os (:if IS-MAC macos) tty
  )

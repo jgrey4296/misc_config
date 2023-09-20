@@ -1,0 +1,28 @@
+Impredicativity      - Self-referential definition.
+Syntactic Entailment - P ⊢ Q : Q is derivable from P in system S by the transformation rules of S, independent of truth assignments.
+Semantic Entailment  - P ⊨ Q : Q is derivable from P in system S by the transformation rules of S if there *not* a model I where P ∈ I and Q ∉ I.
+Sound                - (⊢) ⇒ (⊨).
+Complete             - (⊨) ⇒ (⊢).
+
+Satisfiability       - there exists a model which is true.
+Validity             - every model is true.
+Consistency          - an expression that does not lead to a contradiction.
+Decidability         - a procedure exists for computing the answer of an expression in finite time.
+
+necessary            - Q only when P.
+sufficient           - P therefore Q.
+
+conditional          - material implication.   (P → Q) ⩭ ¬P ∨ Q.
+biconditional        - material equivalence. P ⇔ Q ⇒ P → Q and Q → P
+
+well formed formulas -
+Term                 -
+Signature            -
+Hoare Triple         -
+model                -
+valuation            -
+Bisimulation         -
+Sequent              -
+compactness property -
+first-order correspondence language -
+skolemization        - using second order logic (relations over quantifiers) replaces existential variables by functions on universal variables

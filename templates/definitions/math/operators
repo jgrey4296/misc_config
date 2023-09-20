@@ -1,0 +1,36 @@
+⟘ - bottom / false. Latex: \bot
+⟙ - Top / true      Latex: \top
+
+∧ - and             Latex:
+∨ - or
+
+∴ - therefore, qed.
+⊢ - syntactic consequence, sequent, (typing) judgement
+⊨ - semantic consequence
+
+⨂ - (linear logic) Multiplicative Conjunction
+⅋ - (linear logic) Multiplicative Disjunction
+& - (linear logic) Additive Conjunction
+⨁ - (linear logic) Additive Disjunction
+
+⊂ - Subset
+⊃ - Superset
+∪ - union
+∩ - intersection
+⋀ - lattice join
+⋁ - lattice meet
+
+□ - (modal logic)
+◇ - (modal logic)
+
+⨯ - cartesian product
+
+∫ - Integral
+Δ - Delta
+Σ - Sum
+Π - Product
+μ - The Mean
+σ - Standard Deviation
+ρ = Correlation Coefficient
+
+n! - factorial(n)

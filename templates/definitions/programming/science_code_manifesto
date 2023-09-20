@@ -1,0 +1,7 @@
+[[https://web.archive.org/web/20160218093215/http://sciencecodemanifesto.org/][wayback link]]
+
+1) Code      : All source code written specifically to process data for a published paper must be available to the reviewers and readers of the paper.
+2) Copyright : The copyright ownership and license of any released source code must be clearly stated.
+3) Citation  : Researchers who use or adapt science source code in their research must credit the code’s creators in resulting publications.
+4) Credit    : Software contributions must be included in systems of scientific assessment, credit, and recognition.
+5) Curation  : Source code must remain available, linked to related materials, for the useful lifetime of the publication.

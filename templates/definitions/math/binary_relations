@@ -1,0 +1,31 @@
+domain                - X in f: X → Y.
+codomain              - Y in f: X → Y.
+
+Injective             - left-unique.               ∀x,z ∈ X, ∀y ∈ Y : xRy ∧ zRy ⇒ x = z
+Surjective            - right-total.               ∀y ∈ Y,   ∃x ∈ X : xRy
+Total                 - left-total.                ∀x ∈ X,   ∃y ∈ Y : f(x) = y
+Partial               - right-unique.              ∀x ∈ X, ∀y,z ∈ Y : xRy ∧ xRz ⇒ y = z
+Bijective             - A Function which is both injective and surjective.
+
+transpose             - X, Y and R ⊆ X ⨯ Y : (R^T) = y(R^T)x ⇔ xRy.
+involution            - f(f(x)) = x.
+
+Reflexive             - ∀x ∈ X : xRx.
+Irreflexive           - ∀x ∈ X : not xRx.
+Symmetric             - ∀x,y ∈ X : xRy ⇒ yRx.
+Asymmetric            - ∀x,y ∈ X : xRy ⇒ not yRx.
+Antisymmetric         - ∀x,y ∈ X : xRy and yRx ⇒ x = y.
+Transitive            - ∀x,y,z ∈ X : xRy and yRz ⇒ xRz.
+Connected             - ∀x,y ∈ X : x ≠ y ⇒ xRy or yRx.
+Strongly Connected    - ∀x,y ∈ X : xRy or yRx.
+
+Associativity         - ∀x,y,z ∈ S: (xRy)Rz = xR(yRz).
+Commutativity         - ∀x,y ∈ S  : xRy = yRx.
+Distributivity        - ∀x,y,z ∈ S : xR(yR'z) = (xRy)R'(xRz).   eg: Multiplication, ∧, ∨.
+Idempotence           - f(x) = f(f(x)) = f(...f(x)). eg: multiplication by 1.
+Absorption            - xR(xR'y) = xR'(xRy) = x.
+Duality               - dual((P, <)) = (P, ⧼), ∀x,y ∈ P : x < y ⇔ y ⧼ x.
+
+Left Residual         - relations A, B : A\B = complement(A^T complement(B))
+Right Residual        - relations A, B: A/B = complement(complement(A) B^T))
+Symmetric Quotient    - relations A, B: syq(A, B) = complement(A^T complement(F)) ∩ complement(complement(E)^T F)

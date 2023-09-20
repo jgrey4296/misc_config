@@ -1,0 +1,12 @@
+https://coq.inria.fr/refman/language/core/conversion.html#conversion
+α - Syntactically equal ignoring bound (internal) variable names
+β - Eliminates application. Reduction with global env of (λx.T)u -> T{x -> u}.
+δ - Replace variables or constants with definition. (only 'transparent' constants)
+ζ - Eliminate 'let' expressions. Removes the declaration entirely, unlike δ.
+η - Expand forall statements into fresh variable lambdas. ∀x:T, U with λx:T.(t x)
+
+match - eliminate match statements with exact path.
+fix   - replace 'fix' with beta-redex, and recursive calls of symbol with the 'fix' term.
+cofix - replace 'cofix' with beta-redex, and recursive calls of symbol with the 'cofix' term.
+
+ι - Applies destructors/match/fix/cofix to inductive objects.

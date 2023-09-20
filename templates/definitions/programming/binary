@@ -1,0 +1,12 @@
+*** Binary Sizes
+Bit: 0 or 1
+Byte: 8 bits
+Word: 2 Bytes
+DWord: 2 words
+
+*** Little v Big Endian
+lowest address <-------------> highest address
+least sig      <little endian>        most sig
+most sig       <big    endian>       least sig
+
+little end first versus big end first

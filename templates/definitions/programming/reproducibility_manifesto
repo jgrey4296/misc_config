@@ -1,0 +1,11 @@
+**** Reproducibility Manifesto
+[[https://lorenabarba.com/gallery/reproducibility-pi-manifesto/][link]]
+
+1) teach my graduate students about reproducibility.
+2) research code (and writing) is under version control.
+3) always carry out verification and validation (V&V reports are posted to figshare)
+4) For main results in a paper, share data, plotting script & figure under CC-BY
+5) upload the preprint to arXiv at the time of submission of a paper.
+6) release code at the time of submission of a paper.
+7) add a "Reproducibility" declaration at the end of each paper.
+8) keep an up-to-date web presence.

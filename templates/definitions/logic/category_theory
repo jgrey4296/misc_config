@@ -1,0 +1,57 @@
+[[https://en.wikipedia.org/wiki/Glossary_of_category_theory][Glossary]]
+Natural Transformation -
+:Morphisms:
+
+mono       -
+epi        -
+bi         -
+iso        -
+endo       -
+auto       -
+
+retraction -
+section    -
+:END:
+
+:Functors:
+
+:END:
+
+Adjoint       -
+
+Class         - A collection of sets S defined by a property P that all members share: ∀s ∈ S, ∀ x ∈ s: P(x)
+Proper Class - a class that is not itself as set.
+Small Class   - a clas that is a set.
+
+hom-functor -
+
+Natural Transform - Nat(F, F'), ability to transform a functor F to F', while respecting the internal structure of the categories involved.
+
+Category - A categorry C is a class of objects ob(C), class of morphisms mor(C), a domain dom: mor(C) -> ob(C), a codomain cod: mor(C) -> ob(C), a composition of morphisms, that is associative and left+right unit laws.
+Composition of morphisms - ∀ a,b,c ∈ ob(C) : hom(a,b) x hom(b,c) -> hom(a, c).
+left unit law - id(x) : x -> x, such that ∀ f ∈ mor(X) : id(x) · f = f.
+right unit law - id(x) : x -> x, such that ∀ g ∈ mor(X) : g · id(x) = g.
+
+small category - where both mor(C) and ob(C) as small classes.
+
+Yoneda's Lemma - allows embedding a small category into a category of functors.
+:yonedas_lemma:
+S : the category of Sets.
+C : a category.
+F : C - > S
+
+if locally_small(C):
+then:
+∀ A ∈ ob(C): h(A) = hom(A,-),  A covariant hom-functor.
+where:
+h(A)(f) = hom(A, f)
+or
+h(A)(f)(g) = f · g
+
+The Lemma States:
+∀ A ∈ C, Nat(h(A), F) = hom(hom(A,-), F) = F(A).
+
+:END:
+
+pre-sheaf -
+sheaf -

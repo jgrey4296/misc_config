@@ -1,0 +1,22 @@
+Admissable                   - (redundancy). The set of theorms does not change when a rule is added to the system.
+
+Open World Assumption        - statements whether be true even if they are not known to be true.
+Closed World Assumption      - only statements known to be true are true.
+
+modus ponens                 - Affirming the antecedent. (P → Q), P ⊢ Q.
+modus tollens                - Denying the Consequent.   (P → Q), ¬Q ⊢ ¬P.
+contraposition               - (modus tollens) Inverting the antecedent and consequent. P → Q becomes ¬Q → ¬P
+inversion                    - P → Q becomes  ¬P → ¬Q
+conversion                   - P → Q becomes   Q →  P
+complement                   - P → Q becomes ¬(P → Q)
+
+Affirming the consequent     - *Fallacy* : (P → Q), Q ⊢ P.
+Denying the antecedent       - *Fallacy* : (P → Q), ¬P ⊢ ¬Q.
+
+import-export                - P → (Q → R) ⩭ (P ∧ Q) → R
+
+law of excluded middle       - P ∨ ¬P
+double negation elimination  - ¬¬P ⇒ P.
+
+De Morgan's Laws 1           - not (A ∨ B) = (not A) ∧ (not B).
+De Morgan's Laws 2           - not (A ∧ B) = (not A) ∨ (not B).

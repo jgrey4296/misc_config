@@ -43,7 +43,7 @@
                     )
 (spec-handling-add! browse-handler
                     '(default
-                      ("."  . librarian-browser--default)
+                      ("."  . librarian-browser--open-url)
                       )
                     )
 (spec-handling-add! lookup-regular

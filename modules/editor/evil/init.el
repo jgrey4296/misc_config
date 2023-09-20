@@ -1,6 +1,45 @@
 ;;; editor/evil/init.el -*- lexical-binding: t; -*-
 
+;;-- notes
+;; We load evil-collection ourselves for these reasons:
+;;
+;; 1. To truly lazy load it. Some of its modules, like
+;;    evil-collection-{elisp-mode,buff-menu} are loaded immediately, because
+;;    Emacs loads their packages immediately, which pulls in all of
+;;    evil-collection (and other packages with it, sometimes).
+;; 2. This ensures a predictable load order, versus lazy loading using :defer or
+;;    :after-call. This means users can use (after! org ...) and be sure that
+;;    their changes will override evil-collection's.
+;; 3. Ideally, we'd do away with evil-collection entirely. It changes too often,
+;;    introduces breaking bugs too frequently, and I don't agree with all their
+;;    design choices. Regardless, it does more good than trouble, so it may be
+;;    here to stay.
+;; 4. Adds `+evil-collection-disabled-list', to make it easier for users to
+;;    disable modules, and to reduce the effort required to maintain our copy of
+;;    `evil-collection-list' (now I can just copy it from time to time).
+
+;; This has to be defined here since evil-collection doesn't autoload its own.
+;; It must be updated whenever evil-collection updates theirs. Here's an easy
+;; way to update it:
+;;
+;; (with-current-buffer
+;;     (url-retrieve-synchronously "https://raw.githubusercontent.com/emacs-evil/evil-collection/master/evil-collection.el" t t)
+;;   (goto-char (point-min))
+;;   (when (re-search-forward "^(defvar evil-collection--supported-modes\n[^(]+")
+;;     (let ((list (sexp-at-point)))
+;;       ;; Fixes
+;;       (when (assq 'pdf list)
+;;         (setf (alist-get 'pdf list) '(pdf-tools)))
+;;       (let ((diff (cl-set-difference evil-collection-mode-list list :test #'equal)))
+;;         (list (- (length list) (length evil-collection-mode-list))
+;;               diff)
+;;         (message "diff: %s" diff)
+;;         (kill-new (prin1-to-string list))))))
+
+;;-- end notes
+
 (defvar evil-collection-key-blacklist)
+
 (defvar evil-collection-mode-list
     `(ag
       alchemist
@@ -185,6 +224,7 @@
       youtube-dl
       zmusic
       (ztree ztree-diff)))
+
 (defvar +evil-collection-disabled-list
   '(anaconda-mode
     minibuffer
@@ -212,72 +252,42 @@
   "A list of `evil-collection' modules to ignore. See the definition of this
 variable for an explanation of the defaults (in comments). See
 `evil-collection-mode-list' for a list of available options.")
+
 (defvar evil-collection-want-unimpaired-p nil)              ;; We do this ourselves, and better.
+
 (defvar evil-collection-want-find-usages-bindings-p nil)    ;; Doom binds goto-reference on gD and goto-assignments on gA ourselves
+
 (defvar evil-collection-outline-enable-in-minor-mode-p nil) ;; Reduces keybind conflicts between outline-mode and org-mode (which is derived from outline-mode).
+
 (defvar evil-collection--supported-modes nil)               ;; We handle loading evil-collection ourselves
 
-;; We load evil-collection ourselves for these reasons:
-;;
-;; 1. To truly lazy load it. Some of its modules, like
-;;    evil-collection-{elisp-mode,buff-menu} are loaded immediately, because
-;;    Emacs loads their packages immediately, which pulls in all of
-;;    evil-collection (and other packages with it, sometimes).
-;; 2. This ensures a predictable load order, versus lazy loading using :defer or
-;;    :after-call. This means users can use (after! org ...) and be sure that
-;;    their changes will override evil-collection's.
-;; 3. Ideally, we'd do away with evil-collection entirely. It changes too often,
-;;    introduces breaking bugs too frequently, and I don't agree with all their
-;;    design choices. Regardless, it does more good than trouble, so it may be
-;;    here to stay.
-;; 4. Adds `+evil-collection-disabled-list', to make it easier for users to
-;;    disable modules, and to reduce the effort required to maintain our copy of
-;;    `evil-collection-list' (now I can just copy it from time to time).
+(defun +evil-collection-init (module &optional disabled-list)
+  "Initialize evil-collection-MODULE.
+
+    Unlike `evil-collection-init', this respects `+evil-collection-disabled-list',
+    and complains if a module is loaded too early (during startup)."
+(unless (memq (or (car-safe module) module) disabled-list)
+    (doom-log "editor:evil: loading evil-collection-%s %s"
+            (or (car-safe module) module)
+            (if after-init-time "" "(too early!)"))
+    (with-demoted-errors "evil-collection error: %s"
+    (evil-collection-init (list module)))))
+
+(defun +evil-collection-disable-blacklist-a (fn)
+  ;; allow binding to ESC
+  (let (evil-collection-key-blacklist)
+    (funcall-interactively fn)))
+
 
 (when (and (not noninteractive)
            (not (doom-context-p 'reload))
-           (modulep! +everywhere))
+           )
 
   (setq evil-collection-company-use-tng nil
         evil-want-keybinding nil        ;; must be set before evil/evil-collection is loaded
         )
 
-  ;; This has to be defined here since evil-collection doesn't autoload its own.
-  ;; It must be updated whenever evil-collection updates theirs. Here's an easy
-  ;; way to update it:
-  ;;
-  ;; (with-current-buffer
-  ;;     (url-retrieve-synchronously "https://raw.githubusercontent.com/emacs-evil/evil-collection/master/evil-collection.el" t t)
-  ;;   (goto-char (point-min))
-  ;;   (when (re-search-forward "^(defvar evil-collection--supported-modes\n[^(]+")
-  ;;     (let ((list (sexp-at-point)))
-  ;;       ;; Fixes
-  ;;       (when (assq 'pdf list)
-  ;;         (setf (alist-get 'pdf list) '(pdf-tools)))
-  ;;       (let ((diff (cl-set-difference evil-collection-mode-list list :test #'equal)))
-  ;;         (list (- (length list) (length evil-collection-mode-list))
-  ;;               diff)
-  ;;         (message "diff: %s" diff)
-  ;;         (kill-new (prin1-to-string list))))))
-
-
-
-  (defun +evil-collection-init (module &optional disabled-list)
-    "Initialize evil-collection-MODULE.
-
-Unlike `evil-collection-init', this respects `+evil-collection-disabled-list',
-and complains if a module is loaded too early (during startup)."
-    (unless (memq (or (car-safe module) module) disabled-list)
-      (doom-log "editor:evil: loading evil-collection-%s %s"
-                (or (car-safe module) module)
-                (if after-init-time "" "(too early!)"))
-      (with-demoted-errors "evil-collection error: %s"
-        (evil-collection-init (list module)))))
-
-  (defadvice! +evil-collection-disable-blacklist-a (fn)
-    :around #'evil-collection-vterm-toggle-send-escape  ; allow binding to ESC
-    (let (evil-collection-key-blacklist)
-      (funcall-interactively fn)))
+  (advice-add #'evil-collection-vterm-toggle-send-escape :around #'+evil-collection-disable-blacklist-a)
 
   ;; These modes belong to packages that Emacs always loads at startup, causing
   ;; evil-collection and it's co-packages to all load immediately. We avoid this
@@ -285,13 +295,8 @@ and complains if a module is loaded too early (during startup)."
   (with-eval-after-load 'evil-collection
     ;; Don't let evil-collection interfere with certain keys
     (setq evil-collection-key-blacklist
-          (append (list doom-leader-key doom-localleader-key
-                        doom-leader-alt-key)
+          (append (list doom-leader-key doom-localleader-key doom-leader-alt-key)
                   evil-collection-key-blacklist
-                  (when (modulep! :tools lookup)
-                    '("gd" "gf" "K"))
-                  (when (modulep! :tools eval)
-                    '("gr" "gR"))
                   '("[" "]" "gz" "<escape>")))
 
     (evil-define-key* 'normal process-menu-mode-map

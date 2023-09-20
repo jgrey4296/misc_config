@@ -11,7 +11,7 @@
               )
 
 
-(spec-handling-new! browse-handler browse-url-handlers :loop 'append
+(spec-handling-new! browse-handler browse-url-default-handlers :loop 'append
                     val
                     )
 

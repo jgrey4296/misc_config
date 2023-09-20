@@ -1,0 +1,26 @@
+Logical Orders:
+Pre-order             - reflexive, transitive relation.
+Equivalence Relation  - reflexive, symmetric, transitive relation.
+
+Partial Order         - reflexive,   antisymmetric, transitive relation. Not every element is comparable.
+Total Order           - reflexive,   antisymmetric, transitive and connected relation. Every element is comparable.
+Poset                 - a set S, relation R : (S, R).
+Interval              - interval I of poset (P, <) : I ⊂ P,  ∀x,y ∈ I, ∀z ∈ P : x < z < y ⇒ z ∈ Y.
+
+Strict Partial Order  - irreflexive, antisymmetric, transitive relation.
+Strict Total Order    - irreflexive, antisymmetric, transitive and connected relation.
+
+Reflexive Closure     - smallest reflexive relation over X containing R.
+Transitive Closure    - smallest transitive relation over X containing R.
+Equivalence Closure   - smallest equivalent relation over X containing R.
+
+order-preserving      - (*monotonic*). For posets (S, <), (T, ⧼), function f(S → T) if ∀x,y ∈ S, x < y ⇒ f(x) ⧼ f(y).
+order-reversing       - (*antitonic*). For posets (S, <), (T, ⧼), functiion f(S → T) if ∀x,y ∈ S, x < y ⇒ f(y) ⧼ f(x).
+order-reflecting      - For posets (S, <), (T, ⧼), function f(S → T) if ∀x, y ∈ S: f(x) ⧼ f(y) ⇒ x < y.
+order-embedding       - both order-preserving and order-reflecting.
+
+infimum               - *meet*, *greatest lower bound*. inf(S) ∈ poset (P, <), S ⊂ P, ∀x ∈ S : inf(S) < x. *Single Element or nothing*.
+supremum              - *join*, *least upper bound*. sup(S) ∈ poset (P, <), S ⊂ P, ∀x ∈ S : x < sup(S). *Single Element or nothing*.
+
+Semi-lattice          - Poset X, ∀Y ⊂ X : inf(Y) != ∅
+Lattice               - Poset with infimum and supremum.

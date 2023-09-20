@@ -1,4 +1,4 @@
-Strengthening                - # TODO
+Strengthening                       - # TODO
 Weakening                           - Addition does not change the truth of the expression. (A ⊢ X) ⇒ (A, B ⊢ X), (A ⊢ X, Y)
 Contraction                         - Idempotence of entailment. (A, A, A ⊢ X) ⩭ (A ⊢ X) and  (A ⊢ X, X, X) ⩭ (A ⊢ X).
 Exchange                            - Permutation. (A, B ⊢ X) ⩭ (B, A ⊢ X) and (A ⊢ X, Y) ⩭ (A ⊢ Y, X)

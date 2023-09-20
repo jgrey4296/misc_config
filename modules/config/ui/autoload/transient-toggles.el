@@ -85,7 +85,7 @@
 
 ;; Guides
 (progn
-  (transient-make-mode-toggle! display-fill-column-indicator-mode  "Columns"      "c")
+  (transient-make-mode-toggle! display-fill-column-indicator-mode  (format "Columns : %-3s" fill-column) "c")
   (transient-make-mode-toggle! highlight-indent-guides-mode        "Indents"      "i")
   (transient-make-mode-toggle! ruler-mode                          "Ruler"        "r")
   (transient-make-mode-toggle! whitespace-mode                     "Whitespace"   "w")
@@ -212,6 +212,7 @@
   (transient-make-mode-toggle! global-centered-cursor-mode    "Center Cursor" "c")
   (transient-make-mode-toggle! global-highlight-changes-mode  "Show Changes"  "x")
   (transient-make-mode-toggle! smartparens-global-mode        "SmartParens"   "s")
+  (transient-make-mode-toggle! abbrev-mode                    "Abbrev"        "a")
   )
 
 ;;;###autoload (autoload #'jg-toggle-main "config/ui/autoload/transient-toggles" nil t)
@@ -233,6 +234,7 @@
      (transient-macro-toggle-hide-mode-line-mode)
      (transient-macro-toggle-global-prettify-symbols-mode)
      (transient-macro-toggle-global-highlight-changes-mode)
+     (transient-macro-toggle-abbrev-mode)
      ] [
      (transient-macro-toggle-global-code-shy-minor-mode)
      (transient-macro-toggle-smartparens-global-mode)

@@ -1,10 +1,8 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
-
 (after! projectile
   (pushnew! projectile-project-root-files "config.el")
   )
-
 
 ;;-- specs
 (spec-handling-add! popup

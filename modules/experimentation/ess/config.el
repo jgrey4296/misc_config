@@ -27,7 +27,7 @@
   (set-lookup-handlers! '(ess-r-mode ess-julia-mode)
     :documentation #'ess-display-help-on-object)
 
-  (set-evil-initial-state! 'ess-r-help-mode 'normal)
+  (evil-set-initial-state 'ess-r-help-mode 'normal)
   (set-eval-handler! 'ess-help-mode #'ess-eval-region-and-go)
   (set-eval-handler! 'ess-r-help-mode #'ess-eval-region-and-go)
 

@@ -62,14 +62,14 @@
 ;;-- end misc
 
 ;;-- treemacs
-treemacs-project-map
-treemacs-toggle-map
-treemacs--fringe-indicator-bitmap
-treemacs-workspace-map
-treemacs-copy-map
-treemacs-node-visit-map
-evil-treemacs-state-local-map
-treemacs-mode-map
-evil-treemacs-state-map
+(after! treemacs
+  treemacs-project-map
+  treemacs-toggle-map
+  treemacs--fringe-indicator-bitmap
+  treemacs-workspace-map
+  treemacs-copy-map
+  treemacs-node-visit-map
+  treemacs-mode-map
+  )
 
 ;;-- end treemacs

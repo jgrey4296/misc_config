@@ -184,7 +184,7 @@
   :config (global-anzu-mode +1)
   )
 
-(use-package! treemacs-evil)
+(use-package! treemacs-evil :defer t)
 
 (use-package! evil-textobj-tree-sitter
   :after (evil tree-sitter which-key)

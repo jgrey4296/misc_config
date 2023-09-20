@@ -94,15 +94,15 @@
       )
 (map! :map jg-dired-mode-map ;; describe
       :prefix ("d" . "describe")
-      :n "m" #'+jg-dired-marked-info
-      :n "d" #'dired-diff
-      ;; :n "d" #'+jg-dired-diff
-      :n "D" #'ediff-directories
-      :n "s" #'+jg-dired-dir-size
-      :n "i" 'dired-hide-details-mode
-      :n "g" #'dired-git-info-mode
-      :n "p" (cmd! (dired-copy-filename-as-kill 0))
-      :n "n" #'dired-copy-filename-as-kill
+      :desc "Marked"           :n "m" #'+jg-dired-marked-info
+      :desc "Diff"             :n "d" #'dired-diff
+      ;;                       :n "d" #'+jg-dired-diff
+      :desc "Diff Directories" :n "D" #'ediff-directories
+      :desc "Marked Size"      :n "s" #'+jg-dired-dir-size
+      :desc "Hide Details"     :n "i" 'dired-hide-details-mode
+      :desc "Git Info"         :n "g" #'dired-git-info-mode
+      :desc "File Path"        :n "p" (cmd! (dired-copy-filename-as-kill 0))
+      :desc "File Name"        :n "n" #'dired-copy-filename-as-kill
       )
 (map! :map jg-dired-mode-map ;; open
       :prefix ("o" . "Open")

@@ -4,10 +4,10 @@
 
 (defer-load! (evil faster-whichkey) "+bindings" "+misc-bindings") ;; -> jg-bindings-core
 
-(after! jg-evil-bindings (provide 'jg-bindings-total))
+(after! (jg-evil-bindings which-key) (provide 'jg-bindings-total))
 
 (use-package! faster-whichkey
-  :after (which-key general)
+  :after (general)
   :config
   (faster-whichkey-toggle)
   (setq which-key-replacement-alist nil)
@@ -18,6 +18,9 @@
     (cl-pushnew `((,(format "\\`\\(?:<\\(?:\\(?:f1\\|help\\)>\\)\\|C-h\\|%s h\\) b\\'" prefix-re)) nil . "bindings") which-key-replacement-alist)
     )
 )
+
+(use-package! which-key)
+(use-package! general)
 
 ;;(use-package! which-key
 ;;  :hook (doom-first-input . which-key-mode)

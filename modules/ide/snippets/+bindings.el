@@ -1,5 +1,6 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
+
 ;;-- browsing
 (map! :leader
       (:prefix "y"
@@ -19,6 +20,7 @@
 ;;-- end browsing
 
 ;;-- snippets
+(define-key yas-minor-mode-map [menu-bar] nil)
 (map! :map snippet-mode-map
       :after yasnippet
       "C-c C-k" #'+snippet--abort
@@ -74,4 +76,4 @@
       :desc "breakpoint"          "I b"   #'+jg-snippets-insert-debug
       )
 
-(define-key yas-minor-mode-map [menu-bar] nil)
+;; TODO abbrev and dabbrev

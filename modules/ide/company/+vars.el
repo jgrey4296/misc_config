@@ -34,7 +34,6 @@
 
   )
 
-(add-to-list 'evil-escape-inhibit-functions #'company--active-p)
 
 ;; company-keywords
 ;; company-math-symbols-unicode
@@ -48,7 +47,7 @@
 ;; company-capf
 ;; company-files
 (spec-handling-add! company
-                    '(prog-mode (:mode company-dabbrev-code company-capf) (:back company-files))
+                    '(prog-mode (:mode company-abbrev company-dabbrev-code company-capf) (:back company-files))
                     '(text-mode (:mode company-dabbrev company-ispell))
                     '(conf-mode (:mode company-dabbrev-code ))
                     '(minibuffer-inactive-mode (:mode company-dabbrev-code company-capf) (:back company-files))

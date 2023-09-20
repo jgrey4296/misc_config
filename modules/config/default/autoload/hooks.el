@@ -1,20 +1,5 @@
 ;; hooks.el -*- lexical-binding: t; -*-
 
-;;;###autoload
-(defun doom-auto-revert-buffer-h ()
-  "Auto revert current buffer, if necessary."
-  (unless (or auto-revert-mode (active-minibuffer-window))
-    (let ((auto-revert-mode t))
-      (auto-revert-handler)))
-  )
-
-;;;###autoload
-(defun doom-auto-revert-buffers-h ()
-  "Auto revert stale buffers in visible windows, if necessary."
-  (dolist (buf (doom-visible-buffers))
-    (with-current-buffer buf
-      (doom-auto-revert-buffer-h)))
-  )
 
 ;;;###autoload
 (defun doom--recentf-touch-buffer-h ()
@@ -53,3 +38,13 @@ the unwritable tidbits."
   (setq-local register-alist
               (cl-remove-if-not #'savehist-printable register-alist))
   )
+
+
+;;;###autoload
+(defun doom-init-clipboard-in-tty-emacs-h ()
+    ".piping clipboard I/O through xclip, xsel, pb{copy,paste},
+     wl-copy, termux-clipboard-get, or getclip (cygwin); depending on what
+     is available."
+    (and (require 'xclip nil t)
+         (with-demoted-errors "%s" (xclip-mode +1)))
+    )

@@ -2,14 +2,15 @@
 
 (local-load! "+defs")
 (local-load! "+vars")
+
 (defer-load! jg-bindings-total "+bindings")
+
 (defer-load! jg-evil-ex-bindings "+evil-ex")
 (add-hook! 'doom-first-file-hook #'+jg-lisp-setup-library-source)
 
-
 ;; `elisp-mode' is loaded at startup. In order to lazy load its config we need to pretend it isn't loaded
-(defer-feature! elisp-mode emacs-lisp-mode)
 
+(defer-feature! elisp-mode emacs-lisp-mode)
 
 (use-package! elisp-mode
   :interpreter ("doomscript" . emacs-lisp-mode)
@@ -159,8 +160,9 @@
 
 (use-package! find-func)
 
-;; https://gitlab.com/mtekman/elisp-depmap.el
-(use-package! elisp-depmap)
+(use-package! elisp-depmap
+  ;; https://gitlab.com/mtekman/elisp-depmap.el
+  )
 
 (def-project-mode! +emacs-lisp-ert-mode
   :modes '(emacs-lisp-mode)
@@ -176,6 +178,9 @@
 (remove-hook 'emacs-lisp-mode-hook #'overseer-enable-mode)
 
 (use-package! cl-lib)
+
 (use-package! a)
+
 (use-package! f)
+
 (use-package! s)

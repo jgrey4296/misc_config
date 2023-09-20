@@ -9,7 +9,6 @@
 
 (use-package! treemacs
   :config
-
   (add-hook 'treemacs-mode-hook #'treemacs-hide-gitignored-files-mode)
   )
 

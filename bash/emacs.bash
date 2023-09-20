@@ -14,6 +14,10 @@ ENAT_BIN="/usr/local/Cellar/emacs-plus@28/28.2/bin/emacs"
 TERM="xterm-24bits"
 EDITOR="vim"
 
+EMACS="$ENAT_BIN"
+EMACSDIR="$ENAT_DIR"
+DOOMDIR="$HOME/.doom.d"
+
 if [[ -n $INSIDE_EMACS ]]
 then
     echo "Inside Emacs"
@@ -82,8 +86,8 @@ function set-emacs () {
         ln -s "$EMACSDIR" "$HOME/.emacs.d"
     fi
     PATH="$EMACSDIR/bin/:$PATH"
-    alias emacs="$EMACS -nw"
-    alias emacsw="$EMACS"
+    # alias emacs="$EMACS -nw"
+    # alias emacsw="$EMACS"
 }
 
 function read-emacs () {

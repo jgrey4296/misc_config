@@ -85,3 +85,8 @@
 (use-package! lorem-ipsum
   :commands (lorem-ipsum-insert-sentences lorem-ipsum-insert-paragraphs lorem-ipsum-insert-list)
 )
+
+(use-package! dabbrev :defer t)
+(use-package! abbrev
+  :defer t
+  )

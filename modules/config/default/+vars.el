@@ -6,8 +6,9 @@
 
 ;; General
 (setq save-silently (not noninteractive)
-
- )
+      xterm-set-window-title t
+      visible-cursor nil
+      )
 
 ;;;###package avy
 (setq avy-all-windows nil
@@ -66,6 +67,13 @@
                                       mark-ring global-mark-ring       ; persist marks
                                       search-ring regexp-search-ring) ; persist searches
 )
+
+;; Use spotlight search backend as a default for M-x locate (and helm/ivy
+;; variants thereof), since it requires no additional setup.
+(setq locate-command "mdfind")
+
+(after! auth-source
+  (pushnew! auth-sources 'macos-keychain-internet 'macos-keychain-generic))
 
 ;; Ftp
 (setq ftp-program "git-ftp")

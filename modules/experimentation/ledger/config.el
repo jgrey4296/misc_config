@@ -46,7 +46,7 @@
   :when (modulep! :editor evil +everywhere)
   :hook (ledger-mode . evil-ledger-mode)
   :config
-  (set-evil-initial-state! 'ledger-report-mode 'normal)
+  (evil-set-initial-state 'ledger-report-mode 'normal)
   (map! (:map ledger-report-mode-map
          :n "q"   #'ledger-report-quit
          :n "RET" #'ledger-report-edit-report

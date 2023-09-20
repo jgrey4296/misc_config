@@ -66,7 +66,8 @@
       "RET" #'company-complete-selection
       )
 
-
-(setq company-active-map jg-company-active-map
-      company-search-map jg-company-search-map
-      )
+(after! company
+  (setq company-active-map jg-company-active-map
+        company-search-map jg-company-search-map
+        )
+ )

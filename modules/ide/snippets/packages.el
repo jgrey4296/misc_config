@@ -8,3 +8,6 @@
 (package! academic-phrases)
 (package! license-templates)
 (package! lorem-ipsum)
+
+;; (package! dabbrev :type 'built-in)
+;; (package! abbrev :type 'built-in)

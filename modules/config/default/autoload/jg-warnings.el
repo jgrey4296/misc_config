@@ -59,3 +59,6 @@
 	   (sit-for 0)))
         )
   )
+
+;;;###autoload
+(advice-add 'display-warning :before-until #'+jg-default-display-warning-ad)

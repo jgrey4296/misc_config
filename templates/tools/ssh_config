@@ -6,3 +6,8 @@ Host github.com
 UseKeychain yes
 AddKeysToAgent yes
 IdentityFile ~/.secrets/github_ssh
+
+# For Unicode over ssh:
+# planetcjd.co.yk/blog/read/fixing-cygwin-unicode-issues
+# use SenEnd LANG LC_*
+# and check `locale` is correct

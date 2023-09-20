@@ -4,6 +4,13 @@
 [[/Users/johngrey/dooter.py][dooter.py]]
 [[file:/Volumes/documents/github/jgrey4296.github.io][homepage]]
 
+https://www.rijksmuseum.nl/en/rijksstudio?ii=0&p=0&from=2023-09-20T16%3A42%3A17.6045022Z
+https://catalog.archives.gov/
+https://www.linuxfromscratch.org/
+https://distrowatch.com/
+https://www.r-project.org/
+https://www.gnu.org/manual/blurbs.html
+https://github.com/AllsafeCyberSecurity/awesome-ghidra
 * Base Agenda
 Death by Institution and the Harms of Abstraction.
 

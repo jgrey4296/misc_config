@@ -3,7 +3,7 @@
 (local-load! "+vars")
 (local-load! "+spec-defs")
 
-(defer-load! jg-bindings-total "+bindings")
+(defer-load! jg-bindings-core "+bindings")
 
 (use-package! xref
   :config
@@ -74,3 +74,9 @@
   (+jg-librarian-add-librarian-transient)
   ;; choose backends?
   )
+
+(use-package! company-gtags)
+
+(use-package! company-ispell)
+
+(use-package! company-keywords)

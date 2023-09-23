@@ -1,6 +1,6 @@
+;; config.el<2> -*- mode: Elisp; lexical-binding: t; -*-
 
 (local-load! "+vars")
-(local-load! "+spec-defs")
 
 (defer-load! jg-bindings-total "+bindings")
 
@@ -8,9 +8,6 @@
   :commands rawtag-mode
   )
 
-(use-package! tagging-minor-mode
+(use-package! librarian-tagging-helm
   :after (evil helm)
-  :config
-  (tagging-minor-mode-rebuild-tag-database)
-  (global-tagging-minor-mode)
   )

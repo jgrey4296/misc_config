@@ -72,6 +72,8 @@
   (transient-append-suffix 'jg-toggle-main "c" '("b" transient-macro-toggle-librarian-mode))
   :config
   (+jg-librarian-add-librarian-transient)
+  (librarian-tagging-mode-rebuild-tag-database)
+  (global-librarian-tagging-mode)
   ;; choose backends?
   )
 

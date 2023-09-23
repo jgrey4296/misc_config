@@ -2,7 +2,7 @@
 (require 'transient)
 
 (transient-make-int-call! magit-todos   "t"   "Todos"             :transient nil #'magit-todos-list)
-(transient-make-call! proj-clear-cache  "C"   "Project Clear Cache" (projectile-invalidate-cache))
+(transient-make-call! proj-clear-cache  "C"   "Project Clear Cache" (projectile-invalidate-cache nil))
 
 ;;-- carousel
 (progn

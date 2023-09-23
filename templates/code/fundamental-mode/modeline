@@ -4,4 +4,4 @@
 # key   : modeline
 # group :
 # --
-`comment-start``comment-start` `(buffer-name)` -*- mode: Lisp; lexical-binding: t; -*-
+`comment-start``comment-start` `(buffer-name)` -*- mode: `mode-name` -*-

@@ -27,14 +27,10 @@
        )
       )
 
-
 (after! jg-evil-ex-bindings
-  (evil-define-operator +jg-tag-helm-start (beg end &rest rest)
-    (interactive "<R>")
-    (+jg-tag-helm-tagger beg end))
-  (evil-ex-define-cmd "t[ag]"  #'tagging-minor-mode-tagger)
-  (evil-ex-define-cmd "tv"     #'org-tags-view)
-  (evil-ex-define-cmd "ts"     #'org-set-tags)
+  (evil-ex-define-cmd "t[ag]"  #'librarian-tagging-mode-tagger)
+  ;; (evil-ex-define-cmd "tv"     #'org-tags-view)
+  ;; (evil-ex-define-cmd "ts"     #'org-set-tags)
   )
 
 (map! :leader

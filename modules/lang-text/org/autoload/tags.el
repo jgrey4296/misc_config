@@ -6,7 +6,7 @@
 Can operate on regions of headings "
   (let* ((actual-candidates (mapcar 'car (helm-marked-candidates)))
          (prior-point 1)
-         (end-pos tagging-minor-mode-marker)
+         (end-pos librarian-tagging-mode-marker)
          (heading-re (if (org-property-values "TWITTER-BUFFER")
                          "^\*\* Thread"
                        "^\*"
@@ -31,7 +31,7 @@ Can operate on regions of headings "
 (defun +jg-org-set-new-tag (x)
   "Utility to set a new tag for an org heading"
   (let ((prior-point (- (point) 1))
-        (end-pos tagging-minor-mode-marker)
+        (end-pos librarian-tagging-mode-marker)
         (stripped-tag (+jg-text-strip-spaces x))
         (heading-re (if (org-property-values "TWITTER-BUFFER")
                         "^\*\* Thread"

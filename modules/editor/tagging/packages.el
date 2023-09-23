@@ -5,4 +5,4 @@
 (package! hydra)
 (package! cl-lib :built-in t)
 (package! ivy)
-(package! tagging-minor-mode :recipe (:host github :repo "jgrey4296/misc-modes" :files ("minor-modes/tagging-minor-mode/*.el")))
+(package! librarian-tagging-helm :recipe (:host github :repo "jgrey4296/misc-modes" :files ("minor-modes/librarian-tagging-helm/*.el") :local-repo "librarian-tagging-helm"))

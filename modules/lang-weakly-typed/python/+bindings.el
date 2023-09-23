@@ -20,6 +20,7 @@
       :v "i F" nil ;; #'+jg-python-select-class
       ;; :n "] ]" #'+jg-python-forward-defun
       ;; :n "s j" '+jg-python-swipe-to-def
+      :n "SPC c t" #'+jg-python-pytest-dispatch
       )
 
 (map! :map python-mode-map

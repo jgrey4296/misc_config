@@ -45,7 +45,7 @@ With arg, searchs the dplp instead.
          (all-terms (s-concat exact-string " " (s-join " " search-texts)))
          (cleaned (s-replace-regexp "{.+?\\(\\w\\)}" "\\1" all-terms))
          )
-    (+lookup/online cleaned "Scholar")
+    (librarian-online cleaned "Scholar")
     )
   )
 
@@ -56,6 +56,6 @@ With arg, searchs the dplp instead.
          (chosen (ivy-read "Search For: " fields))
          (cleaned (s-replace-regexp "[^[:word:]]+" "+" chosen))
          )
-    (+lookup/online cleaned "ORCID")
+    (librarian-online cleaned "ORCID")
     )
   )

@@ -1,4 +1,4 @@
-# -*- mode:doot; -*-
+# -*- mode:python; -*-
 """
 Dooter for image tasks
 

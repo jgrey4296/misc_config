@@ -1,4 +1,4 @@
-# -*- mode:doot; -*-
+# -*- mode:python; -*-
 """
 Stub dooter file for task authoring
 

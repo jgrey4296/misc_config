@@ -4,6 +4,7 @@
 [[/Users/johngrey/dooter.py][dooter.py]]
 [[file:/Volumes/documents/github/jgrey4296.github.io][homepage]]
 
+https://github.com/Unity-Technologies/TermsOfService
 https://www.rijksmuseum.nl/en/rijksstudio?ii=0&p=0&from=2023-09-20T16%3A42%3A17.6045022Z
 https://catalog.archives.gov/
 https://www.linuxfromscratch.org/
@@ -54,25 +55,39 @@ fictional syllabi - both of actual papers, and lem-like
 https://www.marginalia.nu/
 https://calver.org/
 https://archive.pacificpeoplespartnership.org/
+https://afutureworththinkingabout.com/?p=5142
+https://annas-archive.org/
+https://cheapbotsdonequick.com/source/
+https://hyperpolyglot.org/
+https://llvm.org/docs/LangRef.html
+https://sharkbombs.com/games/exnovo
+https://sixages.blogspot.com/
+https://www.patches-scrolls.de/patch
+https://www.awsgeek.com/
+https://ainowinstitute.org/research-areas
+https://marginaleffects.com/
 
-:drawing:
+*** Drawing
 https://opengameart.org/
 https://www.pexels.com/
 https://shadingreference.com/
 https://www.practicedrawingthis.com/cgi-bin/index.cgi
-:END:
 
-:journalism:
+*** Journalism
+https://www.khou.com/video/news/investigations/after-khou-11-investigates-reports-coffee-city-fires-police-chief-deactivates-police-department/285-bd609de5-e44d-442d-890d-6282a203b633
+https://www.losangelesblade.com/2023/09/14/school-board-orders-lgbtq-mural-removed-from-health-clinic/
+https://ohiocapitaljournal.com/2023/09/19/vouchers-awards-public-ohio-tax-dollars-to-discriminatory-private-religious-schools/
 https://ourworldindata.org/grapher/cumulative-co-emissions
 https://projects.propublica.org/nonprofits/
-:END:
 
-:specifications:
+*** Specification
 https://www.commonwl.org/user_guide/index.html
 https://specifications.freedesktop.org/
-:END:
+https://dev.epicgames.com/documentation/en-us/uefn/verse-language-reference
+https://developer.nvidia.com/gpugems/gpugems/contributors
+https://firefox-source-docs.mozilla.org/index.html
 
-:wikis:
+*** Wikis
 https://en.m.wikipedia.org/wiki/International_Phonetic_Alphabet
 https://en.m.wikipedia.org/wiki/Wikipedia:Ignore_all_rules
 https://botwiki.org/learn/#blogs-and-websites-accountable-algorithms
@@ -87,59 +102,35 @@ https://en.m.wikipedia.org/wiki/Derinkuyu_underground_city
 https://en.m.wikipedia.org/wiki/Grey_literature
 https://en.m.wikipedia.org/wiki/Technological_Forecasting_and_Social_Change
 https://en.m.wikipedia.org/wiki/Operations_research
-:END:
 
-:math:
+*** Math
 https://textbooks.math.gatech.edu/ila/
 https://tutorial.math.lamar.edu/
 https://www.feynmanlectures.caltech.edu/III_toc.html
 https://www.feynmanlectures.caltech.edu/II_toc.html
 https://www.feynmanlectures.caltech.edu/I_toc.html
-:END:
 
-:blogs:
+*** blogs
+https://knivesandpaintbrushes.org/younes
 https://dev.to/
 https://publicdomainreview.org/
 https://brkeogh.com/
 https://boringml.com/
 https://www.logicmatters.net/categories/
-:END:
 
-:stack-overflow:
+*** stack overflow
 https://stackoverflow.com/questions/22072773/batch-export-of-org-mode-files-from-the-command-line
-:END:
 
-https://www.awsgeek.com/
-
-https://ainowinstitute.org/research-areas
-https://marginaleffects.com/
-
-:ui:
+*** UI
 https://gka.github.io/palettes/
 https://www.whocanuse.com/
-:END:
 
-:github:
+*** Github
 https://github.com/charlax/professional-programming
 https://github.com/libgdx/gdx-ai
 https://github.com/orgs/pelican-plugins/repositories
-:END:
 
+*** Books
 
-https://afutureworththinkingabout.com/?p=5142
-https://annas-archive.org/
-
-https://cheapbotsdonequick.com/source/
-
-https://dev.epicgames.com/documentation/en-us/uefn/verse-language-reference
-https://developer.nvidia.com/gpugems/gpugems/contributors
-https://firefox-source-docs.mozilla.org/index.html
-https://hyperpolyglot.org/
-
-https://llvm.org/docs/LangRef.html
-
-https://sharkbombs.com/games/exnovo
-
-https://sixages.blogspot.com/
-
-https://www.patches-scrolls.de/patch
+https://www.amazon.com/Effective-Specific-Addison-Wesley-Professional-Computing/dp/0321334876
+https://www.amazon.com/Large-Scale-Software-Design-John-Lakos/dp/0201633620

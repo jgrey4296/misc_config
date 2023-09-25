@@ -1,4 +1,4 @@
-# -*- mode:doot; -*-
+# -*- mode:python -*-
 """
 Dooter for easy access to regular tasks
 https://pydoit.org/

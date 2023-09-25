@@ -365,7 +365,10 @@ fonttools                                                                       
 freetype                                                                                        : 2.11.0
 https://github.com/feluxe/sty                                                                   : color : libraries : sty
 https://github.com/tartley/colorama                                                             : color : colorama : libraries
+blessings : color
+rich : color
 termcolor                                                                                       : 1.1.0
+("python -m termcolor " for a test print)
 MarkupSafe                                                                                      : 2.1.1
 texttable                                                                                       : 1.6.4
 https://github.com/jg-rp/liquid

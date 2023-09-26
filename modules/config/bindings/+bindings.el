@@ -195,10 +195,6 @@
 
       :desc "Todo list"                    "t"    #'org-todo-list
 
-      (:when (modulep! :os macos)
-       :desc "Reveal in Finder"           "f"     #'+macos/reveal-in-finder
-       )
-
       (:prefix ("a" . "org agenda"))
 
       (:prefix ("s" . "Systems"))

@@ -25,10 +25,8 @@
 
 (map! :leader
       :prefix ("p" . "project")
-      :desc "Debug Project Type"           "?"   #'+jg-projects-detect-type
       :desc "Project Find File"            "RET" #'+neotree/find-this-file
       :desc "run cmd in project root"      "!"   #'projectile-run-shell-command-in-root
-      :desc "project root"                 "`"  (cmd! (find-file (doom-project-root)))
       :desc "root shell"                   "'"   #'projectile-run-shell
       :desc "search project for symbol"    "."   #'+default/search-project-for-symbol-at-point
 
@@ -38,9 +36,6 @@
       :desc "find file in project"         "f"   #'projectile-find-file
       :desc "find other file"              "o"   #'+jg-projects-find-related
 
-      ;; later expanded by projectile
-      (:prefix ("4" . "in other window"))
-      (:prefix ("5" . "in other frame"))
       )
 
 ;;-- zimmerframe

@@ -1,4 +1,4 @@
-Syntax Extion and Notation scopes in Coq:
+Syntax Extension and Notation scopes in Coq:
 Notation              #
 only parsing          #
 only printing         #

@@ -22,6 +22,8 @@
   (transient-make-call! carousel-move-left   "[" "Move Left" (carousel-move-buffer-left))
   (transient-make-call! carousel-move-right  "]" "Move Right" (carousel-move-buffer-right))
   (transient-make-call! carousel-claim       "w" "Claim Window" (carousel-claim-window))
+
+  (transient-make-int-call! carousel-goto        "f" "Find-Buffer" :transient nil :interactive t #'carousel-goto-choice)
   )
 
 ;;;###autoload (autoload 'transient-carousel "ide/workspaces/autoload/transient.el" nil t)
@@ -42,6 +44,7 @@
     ["Buffer Control "
      (transient-macro-call-carousel-claim)
      (transient-macro-call-carousel-expand)
+     (transient-macro-call-carousel-goto)
      ]
     [" "
      (transient-macro-call-carousel-add-buffer)

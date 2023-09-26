@@ -5,6 +5,7 @@
       magit-save-repository-buffers nil      ;; Don't autosave repo buffers.
       magit-revision-insert-related-refs nil ;; Don't display parent/related refs in commit buffers
       magit-auto-revert-mode nil
+      magit-clone-always-transient t
 
       magit-todos-keyword-suffix "\\(?:([^)]+)\\)?:?" ;; make colon optional
       )

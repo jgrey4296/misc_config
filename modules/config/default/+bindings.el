@@ -10,8 +10,12 @@
 
 
 (map! :leader
-      :prefix "b"
-      :n "?" #'+jg-default-debug-auto-mode
+      (:prefix "b"
+       :n "?" #'+jg-default-debug-auto-mode
+      )
+      (:prefix "o"
+       :desc "Reveal in Finder"           "f"     #'+macos/reveal-in-finder
+       )
       )
 
 

@@ -43,12 +43,11 @@
            (when newwindow?
              (write-newwindows nil)))))))
 
-;;;###autoload (autoload '+macos/open-in-default-program "os/macos/autoload" nil t)
+;;;###autoload (autoload '+macos/open-in-default-program "config/default/autoload/osx.el" nil t)
 (+macos--open-with open-in-default-program)
 
-;;;###autoload (autoload '+macos/reveal-in-finder "os/macos/autoload" nil t)
+;;;###autoload (autoload '+macos/reveal-in-finder "config/default/autoload/osx.el" nil t)
 (+macos--open-with reveal-in-finder "Finder" default-directory)
 
-;;;###autoload (autoload '+macos/reveal-project-in-finder "os/macos/autoload" nil t)
-(+macos--open-with reveal-project-in-finder "Finder"
-                   (or (doom-project-root) default-directory))
+;;;###autoload (autoload '+macos/reveal-project-in-finder "config/default/autoload/osx.el" nil t)
+(+macos--open-with reveal-project-in-finder "Finder" (or (doom-project-root) default-directory))

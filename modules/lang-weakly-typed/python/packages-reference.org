@@ -1,6 +1,8 @@
 #+TITLE: Python Packages Reference
 
 * Overview
+https://github.com/jjjake/internetarchive
+https://archive.org/developers/internetarchive/installation.html
 https://github.com/vinta/awesome-python
 https://github.com/bytewax/bytewax
 https://github.com/OlafHaag/VectorFields/tree/master

@@ -1,6 +1,5 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
-
 ;;-- compilation
 (setq counsel-compile-root-functions (append counsel-compile-root-functions
                                              `(,#'+jg-workspaces-compile-root-fallback))
@@ -27,27 +26,6 @@
                        ;; counsel-compile-get-make-help-invocations
                        )
                     )
-
-;;-- neotree
-(setq neo-create-file-auto-open nil
-      neo-toggle-window-keep-p t
-      neo-auto-indent-point nil
-      neo-autorefresh nil
-      neo-mode-line-type 'none
-      neo-window-width 30
-      neo-show-updir-line nil
-      neo-theme 'icons
-      neo-banner-message nil
-      neo-confirm-create-file #'off-p
-      neo-confirm-create-directory #'off-p
-      neo-show-hidden-files nil
-      neo-keymap-style 'concise
-      )
-(after! 'dired-omit-files-set
-  (setq neo-hidden-regexp-list (list dired-omit-files))
-  )
-
-;;-- end neotree
 
 ;;-- projectile
 (setq projectile-completion-system 'ivy
@@ -82,7 +60,6 @@
       projectile-indexing-method 'hybrid
       projectile-generic-command #'+jg-projects-generic-command
       )
-
 
 ;;-- end projectile
 
@@ -143,26 +120,9 @@
                     '(proj-walk
                      ("^\\*Project Zimmerframe\\*" :side left :ttl nil :quit t :select nil :priority -50)
                      )
-                    '(neotree
-                      ("\\*NeoTree\\*"   :side left :ttl nil :height 0.4 :quit nil :select nil :priority 100)
-                      )
                     '(compilation
                       ("\\*compilation\\*" :quit t :select nil :height 0.2 :priority 20)
                       )
-                    )
-
-(spec-handling-add! fold
-                    '(neotree
-                     :modes (neotree-mode)
-                     :priority 25
-                     :triggers (:open-all   nil
-                                :close-all  neotree-collapse-all
-                                :toggle     nil
-                                :open       +neotree/expand-or-open
-                                :open-rec   nil
-                                :close      +neotree/collapse
-                                )
-                     )
                     )
 
 (spec-handling-add! file-templates

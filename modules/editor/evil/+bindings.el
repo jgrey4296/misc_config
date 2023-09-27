@@ -112,10 +112,5 @@
 
 ;;-- end stitching together
 
-(after! evil-treemacs
-  evil-treemacs-state-local-map
-  evil-treemacs-state-map
-  )
-
 (doom-log "Evil Bindings Complete: %s" (current-time-string))
 (provide 'jg-evil-bindings)

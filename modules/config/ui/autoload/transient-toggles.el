@@ -125,7 +125,8 @@
   (transient-make-mode-toggle! minimap-mode           "Minimap"       "m")
   (transient-make-mode-toggle! evil-visual-mark-mode  "visual mark"   "v")
 
-  (transient-make-call! neotree          "n" "neotree"    (neotree-toggle))
+  ;; TODO add sidebar selection
+  (transient-make-call! sidebar "s" "Sidebar"    (+jg-ui-tree/open))
   (transient-make-call! frame-fullscreen "f" "Fullscreen" (toggle-frame-fullscreen))
 
   (transient-make-var-toggle! auto-balance evil-auto-balance-windows "Auto-Balance Windows" "b")
@@ -140,7 +141,7 @@
                              (transient-macro-toggle-minimap-mode)
                              (transient-macro-toggle-evil-visual-mark-mode)
                              ] [
-                             (transient-macro-call-neotree)
+                             (transient-macro-call-sidebar)
                              (transient-macro-call-frame-fullscreen)
                              ] [
                              ] ]

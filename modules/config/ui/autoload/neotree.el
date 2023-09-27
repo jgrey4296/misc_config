@@ -5,36 +5,6 @@
 ;; will ensure the neotree pane is always rooted in the project root.
 
 ;;;###autoload
-(defun +neotree/open ()
-  "Open the neotree window in the current project."
-  (interactive)
-  (require 'neotree)
-  (if (neo-global--window-exists-p)
-      (neotree-hide)
-    (neotree-dir (or (doom-project-root)
-                     default-directory))))
-
-;;;###autoload
-(defun +neotree/find-this-file ()
-  "Open the neotree window in the current project, and find the current file."
-  (interactive)
-  (let ((path buffer-file-name)
-        (project-root (or (doom-project-root)
-                          default-directory)))
-    (require 'neotree)
-    (cond ((and (neo-global--window-exists-p)
-                (get-buffer-window neo-buffer-name t))
-           (neotree-find path project-root)
-           (neotree-refresh))
-          ((not (and (neo-global--window-exists-p)
-                     (equal (file-truename (neo-global--with-buffer neo-buffer--start-node))
-                            (file-truename project-root))))
-           (neotree-dir project-root)
-           (neotree-find path project-root))
-          (t
-           (neotree-find path project-root)))))
-
-;;;###autoload
 (defun +neotree/collapse-or-up ()
   "Collapse an expanded directory node or go to the parent node."
   (interactive)

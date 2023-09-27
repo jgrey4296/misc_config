@@ -25,3 +25,4 @@
 (package! git-timemachine :recipe (:host github :repo "emacsmirror/git-timemachine"))
 (package! git-modes)
 (package! git-gutter-fringe)
+(package! treemacs-magit)

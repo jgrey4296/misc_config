@@ -246,27 +246,7 @@
 
 ;; -- <leader> t --- toggle
 
-;;-- <leader> w --- Windows
-(map! :leader
-      :prefix ("w" . "Windows")
-      ;; RET - workspace counsel
-      :desc "Balance"             "b"   #'balance-windows
-      :desc "Delete Window"       "d"   #'delete-window
-      :desc "Maximize"            "m"   #'doom/window-maximize-buffer
-      :desc "Undo window config"  "u"   #'winner-undo
-      :desc "Redo window config"  "U"   #'winner-redo
-      :desc "Window left"         "h"   #'evil-window-left
-      :desc "Window right"        "j"   #'evil-window-down
-      :desc "Window right"        "l"   #'evil-window-right
-      :desc "Window up"           "k"   #'evil-window-up
-
-      :desc "Split Below"         "-"   #'split-window-below
-      :desc "Split To Right"      "/"   #'split-window-right
-      :desc "Shrink Horizontal"   "{"   #'shrink-window-horizontally
-      :desc "Shrink Vertical"     "}"   #'shrink-window
-
-      )
-;;-- end <leader> w --- Windows
+;; -- <leader> w --- Windows
 
 ;;--- <leader> x -- Text
 

@@ -6,7 +6,7 @@
 (package! project-zimmerframe :recipe (:host github :repo "jgrey4296/project-zimmerframe"))
 (package! counsel-projectile)
 (package! projectile)
-(package! neotree)
 (package! treemacs-projectile)
 (package! related-files :recipe (:host github :repo "jgrey4296/related-files"))
 (package! winner)
+(package! treemacs)

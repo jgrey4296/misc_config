@@ -162,3 +162,5 @@
   )
 
 (use-package! conflict-merge-state)
+
+(use-package! treemacs-magit)

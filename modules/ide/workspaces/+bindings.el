@@ -1,8 +1,5 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
-(defvar jg-neotree-mode-map (make-sparse-keymap))
-
-
 ;; Delete the current workspace if closing the last open window
 
 (define-key! persp-mode-map
@@ -10,11 +7,10 @@
   [remap evil-window-delete] #'+workspace/close-window-or-workspace)
 
 (map! :leader
-      :desc "Window Control"           "W"     #'transient-workspace
+      :desc "Workspace Control"        "W"     #'transient-workspace
       :desc "Carousel Control"         "R"     #'transient-carousel
       :desc "Workspace Counsel"        "w RET" #'+jg-workspaces-ivy
       (:prefix ("w" . "Windows")
-       :desc "Neotree Sidebar"              "s"   #'+neotree/open
        :desc "Delete workspace"             "DEL" #'+workspace/delete
        )
       (:prefix "c"
@@ -25,7 +21,6 @@
 
 (map! :leader
       :prefix ("p" . "project")
-      :desc "Project Find File"            "RET" #'+neotree/find-this-file
       :desc "run cmd in project root"      "!"   #'projectile-run-shell-command-in-root
       :desc "root shell"                   "'"   #'projectile-run-shell
       :desc "search project for symbol"    "."   #'+default/search-project-for-symbol-at-point
@@ -58,32 +53,6 @@
        )
       )
 ;;-- end ibuffer
-
-;;-- neotree
-(map! :map jg-neotree-mode-map
-      :after neotree
-      :n "v"   (neotree-make-executor :file-fn 'neo-open-file-vertical-split)
-
-      :n "i"  #'ignore
-      :n "g"  #'neotree-refresh
-      :n "q"  #'neotree-hide
-      :n "Q"  (cmd! (kill-buffer (current-buffer)))
-      :n "."  #'neotree-hidden-file-toggle
-      :n "\\" #'neotree-change-root
-      :n "r"  #'neotree-rename-node
-
-      :n "h"  #'+neotree/collapse-or-up
-      :n "l"  #'+neotree/expand-or-open
-      :n "H"  #'neotree-select-up-node
-      :n "L"  #'neotree-select-down-node
-      :n "n"  #'neotree-select-next-sibling-node
-      :n "N"  #'neotree-select-previous-sibling-node
-
-      :n "RET" (neotree-make-executor :file-fn 'neo-open-file :dir-fn  'neo-open-dir)
-      )
-
-(setq neotree-mode-map jg-neotree-mode-map)
-;;-- end neotree
 
 ;;-- carousel
 (map! :map carousel-edit-map

@@ -4,14 +4,11 @@
 [[/Users/johngrey/dooter.py][dooter.py]]
 [[file:/Volumes/documents/github/jgrey4296.github.io][homepage]]
 
-https://github.com/Unity-Technologies/TermsOfService
-https://www.rijksmuseum.nl/en/rijksstudio?ii=0&p=0&from=2023-09-20T16%3A42%3A17.6045022Z
-https://catalog.archives.gov/
-https://www.linuxfromscratch.org/
-https://distrowatch.com/
-https://www.r-project.org/
-https://www.gnu.org/manual/blurbs.html
-https://github.com/AllsafeCyberSecurity/awesome-ghidra
+:to-deal-with:
+https://stackoverflow.com/questions/1365541/how-to-move-some-files-from-one-git-repo-to-another-not-a-clone-preserving-hi
+:END:
+
+
 * Base Agenda
 Death by Institution and the Harms of Abstraction.
 
@@ -65,7 +62,7 @@ https://sixages.blogspot.com/
 https://www.patches-scrolls.de/patch
 https://www.awsgeek.com/
 https://ainowinstitute.org/research-areas
-https://marginaleffects.com/
+https://ispr.info/2023/06/29/call-decoding-artificial-sociality-technologies-dynamics-implications-issue-of-new-media-and-society/
 
 *** Drawing
 https://opengameart.org/
@@ -81,6 +78,10 @@ https://ourworldindata.org/grapher/cumulative-co-emissions
 https://projects.propublica.org/nonprofits/
 
 *** Specification
+https://www.linuxfromscratch.org/
+https://distrowatch.com/
+https://www.r-project.org/
+https://www.gnu.org/manual/blurbs.html
 https://www.commonwl.org/user_guide/index.html
 https://specifications.freedesktop.org/
 https://dev.epicgames.com/documentation/en-us/uefn/verse-language-reference
@@ -104,6 +105,7 @@ https://en.m.wikipedia.org/wiki/Technological_Forecasting_and_Social_Change
 https://en.m.wikipedia.org/wiki/Operations_research
 
 *** Math
+https://marginaleffects.com/
 https://textbooks.math.gatech.edu/ila/
 https://tutorial.math.lamar.edu/
 https://www.feynmanlectures.caltech.edu/III_toc.html
@@ -126,6 +128,9 @@ https://gka.github.io/palettes/
 https://www.whocanuse.com/
 
 *** Github
+https://archive.org/developers/internetarchive/cli.html
+https://github.com/Unity-Technologies/TermsOfService
+https://github.com/AllsafeCyberSecurity/awesome-ghidra
 https://github.com/charlax/professional-programming
 https://github.com/libgdx/gdx-ai
 https://github.com/orgs/pelican-plugins/repositories

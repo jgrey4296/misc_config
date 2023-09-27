@@ -1,8 +1,9 @@
 ;;; transient.el -*- lexical-binding: t; -*-
 (require 'transient)
 
-(transient-make-int-call! magit-todos   "t"   "Todos"             :transient nil #'magit-todos-list)
-(transient-make-call! proj-clear-cache  "C"   "Project Clear Cache" (projectile-invalidate-cache nil))
+(transient-make-int-call! magit-todos         "t"   "Todos"             :transient nil #'magit-todos-list)
+(transient-make-call!       proj-clear-cache  "C"   "Project Clear Cache" (projectile-invalidate-cache nil))
+(transient-make-int-call!   proj-sidebar      "s"   "Sidebar"            :transient nil #'+jg-ui-tree/open)
 
 ;;-- carousel
 (progn
@@ -118,7 +119,6 @@
   (transient-make-int-call! proj-save        "S"   "Save Project Buffers"      #'projectile-save-project-buffers)
   (transient-make-int-call! proj-scratch     "x"   "Project Scratch"           :transient nil #'+jg-ui-open-scratch-buffer)
   (transient-make-int-call! proj-shell       "'"   "Project Shell"             :transient nil #'projectile-run-shell)
-  (transient-make-int-call! proj-sidebar     "RET" "Sidebar File"              :transient nil #'+neotree/find-this-file)
   (transient-make-int-call! proj-switch      "p"   "Project Switch"            :transient nil #'projectile-switch-project)
   (transient-make-int-call! proj-symbol      "."   "Project Symbol"            :transient nil #'+default/search-project-for-symbol-at-point)
   (transient-make-int-call! proj-test        "t"   "Test Project"              #'projectile-test-project)
@@ -148,7 +148,6 @@
                             ]
                           [
                            ["View"
-                            (transient-macro-call-proj-sidebar)
                             (transient-macro-call-magit-todos)
                             (transient-macro-call-proj-root)
                             (transient-macro-call-proj-symbol)
@@ -198,7 +197,6 @@
   (transient-make-call! goto-root                "`" "Goto-Root"                 :transient nil (find-file (doom-project-root)))
   (transient-make-call! zimmerframe-next         "w" "Walk Next"                 (zimmerframe-next))
   (transient-make-call! zimmerframe-prev         "W" "Walk Prev"                 (zimmerframe-prev))
-  (transient-make-call! neotree-this-file        "s" "Open Sidebar"              (progn (neotree-toggle)))
   (transient-make-call! debug-project-type       "?" "Debug Project Type"        (+jg-projects-detect-type))
   (transient-make-call! recent-files             "r" "Project Recent Files"      :transient nil (projectile-recentf))
 
@@ -243,7 +241,7 @@
   [
    ["Project Locs"
     (transient-macro-call-goto-root)
-    (transient-macro-call-neotree-this-file)
+    (transient-macro-call-proj-sidebar)
     (transient-macro-call-magit-todos)
     (transient-macro-call-recent-files)
     (transient-macro-call-zimmerframe-next)

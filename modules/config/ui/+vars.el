@@ -1,6 +1,7 @@
 ;;; editor/window-control/+vars.el -*- lexical-binding: t; -*-
 
 (defvar jg-ui-default-face-gen-palette-dir "/Volumes/documents/github/jgrey4296.github.io/resources/palettes/")
+(defvar jg-ui-tree-active-tree-package 'neotree)
 
 ;;-- theme settings
 (setq custom-theme-directory (expand-file-name "templates/themes" doom-user-dir))
@@ -94,6 +95,27 @@
  )
 ;;-- end treemacs
 
+;;-- neotree
+(setq neo-create-file-auto-open nil
+      neo-toggle-window-keep-p t
+      neo-auto-indent-point nil
+      neo-autorefresh nil
+      neo-mode-line-type 'none
+      neo-window-width 30
+      neo-show-updir-line nil
+      neo-theme 'icons
+      neo-banner-message nil
+      neo-confirm-create-file #'off-p
+      neo-confirm-create-directory #'off-p
+      neo-show-hidden-files nil
+      neo-keymap-style 'concise
+      )
+(after! 'dired-omit-files-set
+  (setq neo-hidden-regexp-list (list dired-omit-files))
+  )
+
+;;-- end neotree
+
 ;;-- go away mouse
 (setq mouse-yank-at-point nil
       mouse-wheel-scroll-amount nil
@@ -111,5 +133,20 @@
 (spec-handling-add! popup :form 'override
                     '(ui
                      ("^ \\*Treemacs"         :side left :ttl 5   :width 0.2 :quit t :select nil :priority 50)
+                     ("\\*NeoTree\\*"   :side left :ttl nil :height 0.4 :quit nil :select nil :priority 100)
+                     )
+                    )
+
+(spec-handling-add! fold
+                    '(neotree
+                     :modes (neotree-mode)
+                     :priority 25
+                     :triggers (:open-all   nil
+                                :close-all  neotree-collapse-all
+                                :toggle     nil
+                                :open       +neotree/expand-or-open
+                                :open-rec   nil
+                                :close      +neotree/collapse
+                                )
                      )
                     )

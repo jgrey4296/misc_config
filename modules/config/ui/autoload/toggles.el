@@ -1,7 +1,5 @@
 ;;; toggles.el -*- lexical-binding: t; -*-
 
-
-
 ;;;###autoload
 (defun +jg-ui-window-layout-toggle ()
   "Toggle between horizontal and vertical layout of two windows.

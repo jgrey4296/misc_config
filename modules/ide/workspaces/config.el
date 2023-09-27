@@ -4,10 +4,12 @@
 
 (local-load! "+defs")
 (local-load! "+vars")
-(defer-load! "+spec-defs")
-(defer-load! jg-bindings-total "+bindings")
-(defer-load! jg-evil-ex-bindings "+evil-ex")
 
+(defer-load! "+spec-defs")
+
+(defer-load! jg-bindings-total "+bindings")
+
+(defer-load! jg-evil-ex-bindings "+evil-ex")
 
 (use-package! persp-mode
   :unless noninteractive
@@ -77,7 +79,6 @@
              )
   ;;-- end hooks
 
-
   ;; Don't bother auto-saving the session if no real buffers are open.
   (advice-add #'persp-asave-on-exit :around #'+workspaces-autosave-real-buffers-a)
 
@@ -137,15 +138,6 @@
 
 (use-package! project-zimmerframe
   :commands (project-zimmerframe-minor-mode zimmerframe-next)
-  )
-
-(use-package! neotree
-  :disabled t
-  :commands (neotree-show neotree-hide neotree-toggle neotree-dir neotree-find neo-global--with-buffer neo-global--window-exists-p)
-  :config
-  (after! winner
-    (add-to-list 'winner-boring-buffers neo-buffer-name))
-  (add-hook! 'neo-enter-hook #'+neotree-fix-cursor-h)
   )
 
 (use-package! related-files
@@ -236,7 +228,6 @@
   (setq compilation-buffer-name-function #'projectile-compilation-buffer-name
         compilation-save-buffers-predicate #'projectile-current-project-buffer-p)
 
-
   ;; Disable commands that won't work, as is, and that Doom already provides a
   ;; better alternative for.
   (put 'projectile-ag 'disabled "Use +default/search-project instead")
@@ -256,7 +247,6 @@
   (when IS-WINDOWS
     (setenv "MSYS_NO_PATHCONV" "1") ; Fix path in Git Bash
     (setenv "MSYS2_ARG_CONV_EXCL" "--path-separator")) ; Fix path in MSYS2
-
 
   ;; `projectile-generic-command' doesn't typically support a function, but my
   ;; `doom--only-use-generic-command-a' advice allows this. I do it this way so

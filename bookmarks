@@ -203,12 +203,12 @@
  (rear-context-string . "66 Aug  2 23:52 ")
  (position . 166))
 ("bib_todo"
- (filename . "/Volumes/documents/github/jgrey4296.github.io/resources/todo.bib")
+ (filename . "/Volumes/documents/github/bibliography/in_progress/todo.bib")
  (front-context-string . "  author = {},\n ")
  (rear-context-string . "\n\n@misc{stub_0,\n")
  (position . 1336))
 ("bibliography"
- (filename . "/Volumes/documents/github/jgrey4296.github.io/resources/bibliography/")
+ (filename . "/Volumes/documents/github/bibliography/main")
  (front-context-string)
  (rear-context-string . "3K Jul 22 13:24 ")
  (position . 9300))

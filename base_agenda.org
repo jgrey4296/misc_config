@@ -25,7 +25,7 @@ Death by Institution and the Harms of Abstraction.
 *** [[file:/Volumes/documents/github/jgrey4296.github.io/orgfiles/taxonomies][Taxonomies]]
 
 *** [[/Volumes/documents/github/jgrey4296.github.io/orgfiles/taxonomies/DSLs.org][DSLs]]
-*** [[file:~/github/jgrey4296.github.io/resources/bibliography][Bibliography]]
+*** [[file:~/github/bibliography/main][Bibliography]]
 
 *** [[file:/Volumes/documents/twitter_threads][Twitter Threads]]
 
@@ -134,6 +134,12 @@ https://github.com/AllsafeCyberSecurity/awesome-ghidra
 https://github.com/charlax/professional-programming
 https://github.com/libgdx/gdx-ai
 https://github.com/orgs/pelican-plugins/repositories
+https://ganelson.github.io/inform/index.html
+https://github.com/company-mode/company-mode/wiki/Writing-backends
+https://github.com/fgregg/tax_extension/tree/master#code-for-calculation-tax-extensions-in-cook-county
+https://github.com/mvcisback/hasse
+https://github.com/mxgmn/MarkovJunior.git
+https://www.micromacro-game.com/en/extracontent.html
 
 *** Books
 

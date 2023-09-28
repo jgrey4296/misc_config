@@ -16,9 +16,11 @@
 
 (defvar jg-bibtex-open-url-with-pdf        nil)
 
-(defvar jg-bibtex-loc-bibtex          (expand-file-name "~/github/jgrey4296.github.io/resources/bibliography/"))
+(defvar jg-bibtex-loc-bibtex          (expand-file-name "~/github/bibliography/main/"))
 
-(defvar jg-bibtex-todo-loc            (expand-file-name "~/github/jgrey4296.github.io/resources/todo.bib"))
+(defvar jg-bibtex-unsourced-bib-file (expand-file-name "~/github/bibligraphy/in_progress/to_source.bib"))
+
+(defvar jg-bibtex-todo-loc            (expand-file-name "~/github/bibliography/in_progress/todo.bib"))
 
 (defvar jg-bibtex-loc-completions     (expand-file-name "~/github/jgrey4296.github.io/resources/completions/"))
 
@@ -28,7 +30,6 @@
 
 (defvar jg-bibtex-pdf-loc             (expand-file-name "~/pdf_library"))
 
-(defvar jg-bibtex-unsourced-bib-file (expand-file-name "~/github/jgrey4296.github.io/resources/to_source.bib"))
 
 (defvar jg-bibtex-search-fields               '("tags" "year" "publisher"))
 

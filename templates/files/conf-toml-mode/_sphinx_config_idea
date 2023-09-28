@@ -1,0 +1,28 @@
+# As part of a pyproject.toml
+[tool.sphinx]
+author     = "John Grey"
+copyright  = "2023-05-02"
+extensions = ['sphinx.ext.doctest', 'sphinx.ext.autodoc', 'sphinx.ext.autosummary', 'sphinx.ext.napoleon']
+templates  = ['_templates']
+exclude    = ['**/flycheck_*.py']
+
+[tool.sphinx.autosummary]
+generate = true
+
+[tool.sphinx.autodoc]
+add_module_names   = false
+inherit_docstrings = true
+
+[tool.sphinx.autodoc.defaults]
+members           = true
+undoc-members     = true
+private-members   = false
+special-members   = false
+inherited-members = true
+show-inheritance  = true
+
+[tool.sphinx.html]
+theme       = 'alabaster'
+static      = ['_static']
+
+[tool.sphinx.html.options]

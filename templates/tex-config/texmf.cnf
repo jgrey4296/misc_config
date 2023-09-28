@@ -18,7 +18,7 @@ TEXMFOUT    = $TEXMFDOTDIR
 TEXMFCONFIG = $HOME/.doom.d/templates/tex-config
 
 JG_FONTS = $HOME/github/godot/__assets/fonts/
-JG_BIB   = $HOME/github/jgrey4296.github.io/resources/bibliography/
+JG_BIB   = $HOME/github/bibliography/main
 
 BIBINPUTS=$TEXMFDOTDIR:$JG_BIB:$TEXMFCONFIG/bibtex//:$TEXMFHOME/bibtex//
 BSTINPUTS=$TEXMFDOTDIR:$TEXMFCONFIG/bibtex//:$TEXMFHOME/bibtex//

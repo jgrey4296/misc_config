@@ -12,3 +12,6 @@ source "$HOME/.doom.d/bash/conda.bash"
 
 jg_maybe_inc_prompt
 jg_set_prompt
+
+echo "Stopping Sarafi Bookmarks"
+launchctl stop com.apple.SafariBookmarksSyncAgent

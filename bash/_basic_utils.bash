@@ -68,3 +68,20 @@ function jg_set_prompt {
      command jenv "$command" "$@";;
    esac
  }
+
+ jointmux () {
+     if [[ "$TERM_PROGRAM" != "tmux" ]]; then
+         # tmux new-session -d "nu" "--config" "~/config.nu" "--env-config" "~/env.nu"
+         # tmux new-window -d -n "emacs" "emacs -nw"
+         tmux -2 attach
+     fi
+ }
+
+ startmux () {
+     if [[ "$TERM_PROGRAM" != "tmux" ]]; then
+         tmux new-session -d "nu" "--config" "~/config.nu" "--env-config" "~/env.nu"
+         tmux new-window -d -n "emacs" "emacs -nw"
+         tmux -2 attach
+     fi
+
+ }

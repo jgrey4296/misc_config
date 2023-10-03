@@ -16,4 +16,4 @@
 
 (package! ivy-posframe)
 
-(package! general-insert :recipe (:host github :repo "jgrey4296/misc-modes" :files ("minor-modes/general-insert/*.el")))
+(package! general-insert :recipe (:host github :repo "jgrey4296/misc-modes" :files ("minor-modes/general-insert/*.el") :local-repo "misc-modes"))

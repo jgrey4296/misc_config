@@ -20,7 +20,7 @@
 ;;
 ;;; Code:
 
-(package! pdf-meta-mode :recipe (:host github :repo "jgrey4296/misc-modes" :files ("major-modes/pdf-meta-mode/*.el")))
+(package! pdf-meta-mode :recipe (:host github :repo "jgrey4296/misc-modes" :files ("major-modes/pdf-meta-mode/*.el") :local-repo "misc-modes"))
 (package! org-pdftools)
 
 ;;; packages.el ends here

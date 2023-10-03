@@ -102,10 +102,14 @@
 
 ;; Groups:
 
-(spec-handling-add! ibuffer-groups
+(spec-handling-add! ibuffer-groups :form 'override
                     '(default
                        ("*Starred*"   (saved . "stars"))
-                       ;; ("*Project: configs" (projectile-root . "__configs"))
+                       ("Eww Pages"   (name . "\\*eww-"))
+                       ("Tomls"       (mode . conf-toml-mode))
+                       ("Bibtex"      (mode . bibtex-mode))
+                       ("*Project: configs" (projectile-root . "__configs"))
+                       ("Dired"       (mode . dired-mode))
                        ;; ("*Project: writing" (projectile-root . "jgrey4296.github.io"))
                        )
                     '(starred ("*Starred*"   (saved . "stars")))

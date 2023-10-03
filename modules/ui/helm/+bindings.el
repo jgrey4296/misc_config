@@ -1,9 +1,9 @@
 ;;; completion/ivy/+bindings.el -*- lexical-binding: t; -*-
 
 (doom-log "Setting up Completion bindings: %s" (current-time-string))
-(setq helm-map (make-sparse-keymap))
-(set-keymap-parent helm-map minibuffer-local-map)
-;; (evil-make-intercept-map helm-map)
+(defvar jg-helm-map (make-sparse-keymap))
+;; (set-keymap-parent jg-helm-map minibuffer-local-map)
+;; (evil-make-intercept-map jg-helm-map)
 
 (map! :leader
       :desc "Have you Played?"      "o 1"   #'+jg-completion-rps-have-you-playeds
@@ -34,8 +34,7 @@
 ;;-- end gtags
 
 ;; Movement
-(map! :map helm-map
-      :after helm
+(map! :map jg-helm-map
       :desc "quit" :n "|"  #'evil-force-normal-state
 
       :ni "C-u"             #'helm-delete-minibuffer-contents
@@ -60,8 +59,7 @@
       )
 
 ;; Actions
-(map! :map helm-map
-      :after helm
+(map! :map jg-helm-map
       "RET" #'helm-maybe-exit-minibuffer
       :ni "RET" #'helm-maybe-exit-minibuffer
       :ni "TAB" #'helm-select-action
@@ -79,8 +77,11 @@
       )
 
 ;; localleader
-(map! :map helm-map
-      :after helm
+(map! :map jg-helm-map
       :localleader
       :desc "Toggle Full Frame" "f" #'helm-toggle-full-frame
       )
+
+(after! helm
+  (setq helm-map jg-helm-map)
+  )

@@ -85,4 +85,4 @@
 (package! ox-pandoc)
 (package! ox-hugo :recipe (:host github :repo "kaushalmodi/ox-hugo" :nonrecursive t))
 (package! ox-rst)
-(package! ox-epub :recipe (:host github :repo "jgrey4296/misc-modes" :files ("ox-epub/*.el")))
+(package! ox-epub :recipe (:host github :repo "jgrey4296/misc-modes" :files ("ox-epub/*.el") :local-repo "misc-modes"))

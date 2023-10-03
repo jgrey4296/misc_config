@@ -3,4 +3,4 @@
 
 (package! plantuml-mode)
 (package! flycheck-plantuml)
-(package! ob-plantuml   :recipe (:host github :repo "jgrey4926/misc-modes" :files ("org-babels/ob-plantuml.el")))
+(package! ob-plantuml   :recipe (:host github :repo "jgrey4926/misc-modes" :files ("org-babels/ob-plantuml.el") :local-repo "misc-modes"))

@@ -31,7 +31,7 @@
       )
   )
 
-(setq ibuffer-show-empty-filter-groups t
+(setq ibuffer-show-empty-filter-groups nil
       ibuffer-default-sorting-mode 'alphabetic
       ibuffer-filter-group-name-face '(:inherit (success bold))
       ibuffer-old-time 2

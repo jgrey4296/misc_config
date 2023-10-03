@@ -112,3 +112,5 @@ LSP Protocol             # https://microsoft.github.io/language-server-protocol/
 
 PEP 635: Match statement # https://peps.python.org/pep-0635
 marginal effects         # https://marginaleffects.com/index.html
+
+unicode # https://tonsky.me/blog/unicode/

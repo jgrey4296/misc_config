@@ -1,6 +1,14 @@
 
 jgdebug "Setting Up Godot"
-PATH=/Applications/Godot.app/Contents/MacOS:$PATH
+
+case "$OSTYPE" in 
+    darwin*)
+        PATH=/Applications/Godot.app/Contents/MacOS:$PATH
+        ;;
+    linux*)
+
+        ;;
+esac
 
 # alias gscript="godot --headless --script"
 # alias gslint="godot --headless --check-only --script"

@@ -5,6 +5,7 @@ jgdebug "Setting Exports"
 export HISTFILE="$JG_CACHE/bash_history"
 export LESSHISTFILE="$JG_CACHE/lesshst"
 export NODE_REPL_HISTORY="$JG_CACHE/node_repl_history"
+
 export PATH
 export EDITOR
 export PROMPT_NUM
@@ -40,7 +41,15 @@ export JENV_SHELL
 export JENV_LOADED
 
 export BASH_SILENCE_DEPRECATION_WARNING=1
-export HOMEBREW_MAKE_JOBS=1
+
+case "$OSTYPE" in
+    darwin*) 
+        export HOMEBREW_MAKE_JOBS=1
+        ;;
+    linux*)
+
+        ;;
+esac
 
 # export TMPDIR
 

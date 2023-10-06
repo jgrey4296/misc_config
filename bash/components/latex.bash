@@ -3,13 +3,17 @@
 jgdebug "Setting Latex"
 jgdebug "reminder: tlmgr for installing packages, use --usermode after tlmgr init-usertree"
 
-# symlink to /usr/local/texlive/2022basic/bin/universal-darwin
-PATH="/Library/TeX/texbin:$PATH"
+case "$OSTYPE" in
+    darwin*)
+        # symlink to /usr/local/texlive/2022basic/bin/universal-darwin
+        PATH="/Library/TeX/texbin:$PATH"
+        # MANAPATH="/Library/TeX/Distributions/.DefaultTeX/Contents/Man:$MANPATH"
+        MANPATH="/Library/TeX/Distributions/.DefaultTeX/Contents/Man:$MANPATH"
+        ;;
+   linux*)
 
-#TEX:
-#TEXINPUTS=/Volumes/DOCUMENTS/Dropbox/Scripts/tex/:$TEXINPUTS
+       ;;
+esac
 
 # TEXMFCNF="$HOME/.doom.d/templates/tex-config/"
 
-# MANAPATH="/Library/TeX/Distributions/.DefaultTeX/Contents/Man:$MANPATH"
-MANPATH="/Library/TeX/Distributions/.DefaultTeX/Contents/Man:$MANPATH"

@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-export JG_CACHE="$HOME/.cache"
-
 function jgdebug () {
     if [[ -n "${JGDEBUG-}" ]]; then
         echo "%% " $@
@@ -32,15 +30,15 @@ function jg_prompt_update {
     if [ "${PROMPT_NUM-}" -lt 2 ]; then
         DEPTH_PROMPT="⟘"
     fi
-    JGPATH=$(pwd | gsed -r 's/.+?\/(.+?\/.+?)/...\/\1/')
+    JGPATH=$(pwd | sed -r 's/.+?\/(.+?\/.+?)/...\/\1/')
 
     if [[ -n "${CONDA_DEFAULT_ENV-}" ]]; then
         MAYBE_CONDA="py:${CONDA_DEFAULT_ENV-}"
     fi
 
-    if [[ -n "$JENV_LOADED" ]]; then
-        MAYBE_JAVA="java:$(jenv version-name)"
-    fi
+    #if [[ -n "$JENV_LOADED" ]]; then
+    #    MAYBE_JAVA="java:$(jenv version-name)"
+    #fi
 
     if [[ -n "$TMUX" ]]; then
         MAYBE_TMUX="TMUX:$(basename $TMUX)"
@@ -54,34 +52,36 @@ function jg_set_prompt {
     PS1='  ${MAYBE_TMUX} | u:\u | j:\j | $MAYBE_JAVA | $MAYBE_CONDA |- $JGPATH[$DEPTH_PROMPT]: '
 }
 
- jenv() {
-   type typeset &> /dev/null && typeset command
-   command="$1"
-   if [ "$#" -gt 0 ]; then
-     shift
-   fi
+jenv() {
+  type typeset &> /dev/null && typeset command
+  command="$1"
+  if [ "$#" -gt 0 ]; then
+    shift
+  fi
 
-   case "$command" in
-   enable-plugin|rehash|shell|shell-options)
-     eval `jenv "sh-$command" "$@"`;;
-   *)
-     command jenv "$command" "$@";;
+  case "$command" in
+  enable-plugin|rehash|shell|shell-options)
+    eval `jenv "sh-$command" "$@"`;;
+  *)
+    command jenv "$command" "$@";;
+  esac
+}
+
+randname (){
+   cat /usr/share/dict/words | shuf | head -n 1 | sed "s/'//g"
+}
+
+loginmux () {
+   case "$TERM_PROGRAM" in
+   	tmux) return ;;
+   	emacs) return ;;
    esac
- }
 
- jointmux () {
-     if [[ "$TERM_PROGRAM" != "tmux" ]]; then
-         # tmux new-session -d "nu" "--config" "~/config.nu" "--env-config" "~/env.nu"
-         # tmux new-window -d -n "emacs" "emacs -nw"
-         tmux -2 attach
-     fi
- }
-
- startmux () {
-     if [[ "$TERM_PROGRAM" != "tmux" ]]; then
-         tmux new-session -d "nu" "--config" "~/config.nu" "--env-config" "~/env.nu"
-         tmux new-window -d -n "emacs" "emacs -nw"
-         tmux -2 attach
-     fi
-
- }
+   if { tmux has-session; }; then 
+   	echo "Tmux Session Running"
+   	tmux new-session -s `randname` 
+   else
+   	echo "No Tmux Session"
+       tmux new-session -s `randname`
+   fi
+}

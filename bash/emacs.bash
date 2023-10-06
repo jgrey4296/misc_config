@@ -1,22 +1,26 @@
 #!/usr/bin/env bash
 
 jgdebug "Setting emacs data"
-
-# LOCS
-EMAIN_DIR="$HOME/github/_libs/lisp/doom_main"
-ENAT_DIR="$HOME/github/_libs/lisp/doom_native"
-E30_DIR="$HOME/github/_libs/lisp/emacs30"
 BLOOD_DIR="$HOME/github/lisp/blood"
-
-EMAIN_BIN="/usr/local/Cellar/emacs/28.2/bin/emacs"
-ENAT_BIN="/usr/local/Cellar/emacs-plus@28/28.2/bin/emacs"
-
-TERM="xterm-24bits"
 EDITOR="vim"
 
-EMACS="$ENAT_BIN"
-EMACSDIR="$ENAT_DIR"
+EMACS="$(which emacs)"
+EMACSDIR="$HOME/.emacs.d"
 DOOMDIR="$HOME/.doom.d"
+
+# LOCS
+case "$OSTYPE" in
+    darwin*) 
+        ENAT_DIR="$HOME/github/_libs/lisp/doom_native"
+        ENAT_BIN="/usr/local/Cellar/emacs-plus@28/28.2/bin/emacs"
+        ;;
+
+    linux*) 
+        ENAT_DIR="$HOME/github/_libs/lisp/doomemacs"
+        ENAT_BIN="/snap/bin/emacs" 
+        ;;
+esac
+
 
 if [[ -n $INSIDE_EMACS ]]
 then
@@ -44,34 +48,19 @@ function check-emacs-d () {
 function set-emacs () {
     DOOMDIR=""
     case "$1" in
-        "main")
-            echo "Setting Main Emacs"
-            EMACS="$EMAIN_BIN"
-            EMACSDIR="$EMAIN_DIR"
-        ;;
-        "doom_native")
+        *native* | doom*)
             echo "Setting Doom Native Emacs"
             EMACS="$ENAT_BIN"
             EMACSDIR="$ENAT_DIR"
             DOOMDIR="$HOME/.doom.d"
-        ;;
-        "native")
-            echo "Setting Native Emacs"
-            EMACS="$ENAT_BIN"
-            EMACSDIR="$ENAT_DIR"
-            DOOMDIR="$HOME/.doom.d"
-        ;;
-        "30")
-            echo "setting Emacs30"
-            EMACS="$E30_BIN"
-            EMACSDIR="$E30_DIR"
-        ;;
+            ;;
         "blood")
+            echo "BLOOD"
             EMACS="$ENAT_BIN"
             EMACSDIR="$BLOOD_DIR"
             # To become $BLOODDIR
             DOOMDIR="$EMACSDIR/example"
-        ;;
+            ;;
         *)
             echo "Unrecognized emacs type: $1"
             EMACS="$NAT_BIN"

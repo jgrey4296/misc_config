@@ -153,7 +153,7 @@ determine the exact padding."
     (when jg-iosvkem-padded-modeline
       (if (integerp jg-iosvkem-padded-modeline) jg-iosvkem-padded-modeline 4)))
 
-   (modeline-fg     nil)
+   (modeline-fg     'unspecified)
    (modeline-fg-alt base6)
 
    (modeline-bg

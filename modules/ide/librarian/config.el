@@ -51,7 +51,9 @@
   (add-hook 'wordnut-mode-hook 'outline-minor-mode)
   )
 
-(use-package! osx-dictionary :when (eq system-type 'darwin) :defer t)
+(use-package! osx-dictionary 
+              :when (eq system-type 'darwin) 
+              :defer t)
 
 ;; (use-package! powerthesaurus :defer t)
 

@@ -1,5 +1,5 @@
 envs_dirs:
-  - /usr/local/Caskroom/mambaforge/base/envs
+  - $HOME/.cache/mamba/envs
 channels:
   - defaults
   - conda-forge

@@ -1,3 +1,5 @@
+# Symlink to $GH_CONFIG_DIR/config.yml
+
 # What protocol to use when performing git operations. Supported values: ssh, https
 git_protocol: ssh
 # What editor gh should run when creating issues, pull requests, etc. If blank, will refer to environment.

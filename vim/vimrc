@@ -4,7 +4,7 @@
 set nocompatible
 
 " from: https://stackoverflow.com/questions/23012391
-set viminfo=%,<800,'10,/50,:100,h,f0,n~/.cache/.viminfo
+set viminfo=%,<800,'10,/50,:100,h,f0,n~/.cache/logs/viminfo
 "           | |    |   |   |    | |  + viminfo file path
 "           | |    |   |   |    | + file marks 0-9,A-Z 0=NOT stored
 "           | |    |   |   |    + disable 'hlsearch' loading viminfo

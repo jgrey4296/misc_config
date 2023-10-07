@@ -32,7 +32,7 @@
       org-agenda-files                (list initial-buffer-choice)
       org-archive-location            (string-join `(,(expand-file-name "org/archive.org" doom-user-dir) "* Main Archive") "::")
       pyvenv-default-virtual-env-name (expand-file-name "~/.cache/mamba/envs/")
-      server-auth-dir                 (expand-file-name "~/.cache/secrets")
+      server-auth-dir                 (expand-file-name "~/.cache/secrets/emacs")
       native-comp-eln-load-path       (list (expand-file-name "cache/eln" doom-local-dir))
       )
 

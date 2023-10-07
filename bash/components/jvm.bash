@@ -6,56 +6,51 @@
 # Android SDK Command-Line Tools
 # Android SDK Platform
 # Google USB Driver
-# https://github.com/jenv/jenv for environment management
+#
+# https://sdkman.io
+#
+# android sdk home is deprecated, use android_home
 
 jgdebug "Setting JVM"
+BUILD_TOOLS="33.0.1"
 
-STUDIO_HOME="/Applications/Android\ Studio.app/contents"
-ANDROID_HOME="$HOME/Library/Android/sdk"
-ANDROID_USER_HOME="$HOME/.android"
-ADB_VENDOR_KEYS="$HOME/.android"
+case "$OSTYPE" in
+    darwin*)
+        STUDIO_HOME="/Applications/Android\ Studio.app/contents"
+        ANDROID_HOME="$HOME/Library/Android/sdk"
+        ANDROID_USER_HOME="$HOME/.android"
+        ADB_VENDOR_KEYS="$HOME/.android"
+        ANDROID_LIB="$STUDIO_HOME/lib/"
+        ANDROID_JARS="$STUDIO_HOME/plugins/android/lib/"
+        ANDROID_SDKS="$ANDROID_HOME/platforms/"
+        STUDIO_JDK="$STUDIO_HOME/jbr/Contents/Home/"
+        ANDROID_TOOLS="$ANDROID_HOME/bin"
+        ;;
+    linux*)
+        STUDIO_HOME="/snap/android-studio/current"
+        ANDROID_HOME="/usr/lib/android-sdk"
+        ANDROID_USER_HOME="$JG_CACHE/android"
+        ADB_VENDOR_KEYS="$JG_CACHE/secrets/android"
+        ANDROID_TOOLS="$ANDROID_HOME/build-tools/$BUILD_TOOLS/bin"
+        ANDROID_TOOLS="$ANDROID_HOME/platform-tools:$ANDROID_TOOLS"
+        ;;
+esac
 
-# Android tools paths
-ANDROID_TOOL_PATHS="$ANDROID_HOME/cmdline-tools/latest/bin"
-ANDROID_TOOL_PATHS="$ANDROID_HOME/platform-tools:$ANDROID_TOOL_PATHS"
-ANDROID_TOOL_PATHS="$ANDROID_HOME/build-tools/33.0.0:$ANDROID_TOOL_PATHS"
-# ANDROID_TOOL_PATHS="$ANDROID_HOME/cmdline-tools/{version}/bin:$ANDROID_TOOL_PATHS"
 
-# Android java paths
-ANDROID_LIB="$STUDIO_HOME/lib/"
-ANDROID_JARS="$STUDIO_HOME/plugins/android/lib/"
-ANDROID_SDKS="$ANDROID_HOME/platforms/"
-STUDIO_JDK="$STUDIO_HOME/jbr/Contents/Home/"
-# STUDIO_GRADLE_JDK
-
-jgdebug "Setting Java"
-# JDK_HOME="${HOME}/.gradle/jdks/adoptium-19-x64-hotspot-mac/Contents/Home"
-# JDK_HOME="/usr/local/opt/openjdk/libexec/openjdk.jdk/Contents/Home"
-# JAVA_HOME="$JDK_HOME"
-
-jgdebug "Setting Kotlin"
+jgdebug "Setting up SDKMAN"
+SDKMAN_DIR="$JG_CACHE/sdkman"
 
 jgdebug "Setting Gradle"
 GRADLE_USER_HOME="$JG_CACHE/gradle"
 
 jgdebug "Setting Jason"
-JASON_HOME="$HOME/github/jvm/__jason/build"
+JASON_HOME="$HOME/github/_libs/ai/jason/build"
 
 jgdebug "Setting JACAMO"
-JACAMO_HOME="$HOME/github/jvm/__jacamo/build"
+JACAMO_HOME="$HOME/github/_libs/ai/acamo/build"
 
 JG_JACAMO_PATHS="$JASON_HOME/scripts:$JACAMO_HOME/scripts"
 
-JENV_SHIMS="$HOME/.jenv/shims"
+PATH="$ANDROID_TOOLS:$JG_JACAMO_PATHS:$JDK_HOME/bin:$PATH"
 
-PATH="$JENV_SHIMS:$ANDROID_TOOL_PATHS:$JG_JACAMO_PATHS:$JDK_HOME/bin:$PATH"
-
-JENV_SHELL="bash"
-JENV_LOADED=1
-unset JAVA_HOME
-unset JDK_HOME
-
-# source '/usr/local/Cellar/jenv/0.5.6/libexec/libexec/../completions/jenv.bash'
-
-# jenv rehash 2>/dev/null
-# jenv refresh-plugins
+source "$SDKMAN_DIR/bin/sdkman-init.sh"

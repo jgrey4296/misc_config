@@ -36,10 +36,6 @@ function jg_prompt_update {
         MAYBE_CONDA="py:${CONDA_DEFAULT_ENV-}"
     fi
 
-    #if [[ -n "$JENV_LOADED" ]]; then
-    #    MAYBE_JAVA="java:$(jenv version-name)"
-    #fi
-
     if [[ -n "$TMUX" ]]; then
         MAYBE_TMUX="TMUX:$(basename $TMUX)"
     fi
@@ -50,21 +46,6 @@ function jg_set_prompt {
     PROMPT_COMMAND='jg_prompt_update'
     # Also modified in .condarc
     PS1='  ${MAYBE_TMUX} | u:\u | j:\j | $MAYBE_JAVA | $MAYBE_CONDA |- $JGPATH[$DEPTH_PROMPT]: '
-}
-
-jenv() {
-  type typeset &> /dev/null && typeset command
-  command="$1"
-  if [ "$#" -gt 0 ]; then
-    shift
-  fi
-
-  case "$command" in
-  enable-plugin|rehash|shell|shell-options)
-    eval `jenv "sh-$command" "$@"`;;
-  *)
-    command jenv "$command" "$@";;
-  esac
 }
 
 randname (){

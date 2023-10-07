@@ -65,9 +65,13 @@ case "$OSTYPE" in
 
 
        # apt-get install $(grep -vE "^\s*#" filename  | tr "\n" " ")
-        ;;
 
-      # after gh is installed, authenticate
+       # after gh is installed, authenticate
+
+       # Setup SDKMAN!
+       # export SDKMAN_DIR="$HOME/.cache/sdkman"
+       # curl -s "https://get.sdkman.io" | bash
+      ;;
 esac
 
 # create conda envs

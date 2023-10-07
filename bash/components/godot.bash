@@ -15,9 +15,15 @@ esac
 
 
 function gdscript () {
-    godot --headless -s $@
-    osascript -e "tell application \"iTerm\"" -e "activate" -e "end tell"
-
+    case "$OSTYPE" in
+        darwin*)
+            godot --headless -s $@
+            osascript -e "tell application \"iTerm\"" -e "activate" -e "end tell"
+            ;;
+        linux*)
+            godot-4 --headlead -s $@
+            ;;
+    esac
 }
 
 export -f gdscript

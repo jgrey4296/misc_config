@@ -8,16 +8,14 @@ assumes point is in
 the entry of interest in the bibfile.  but does not check that."
   (interactive)
   (save-excursion
-    (let* ((target (if path
-                       path
-                     (bibtex-autokey-get-field '("file" "OPTfile"))))
+    (let* ((target (if path path (bibtex-autokey-get-field '("file" "OPTfile"))))
            )
-      (message "%s" target)
+      (message "Bibtex Open Target: %s" target)
       (cond ((string-empty-p target)
              (message "No File to open"))
             ((not (file-exists-p target))
              (message "File does not exist"))
-            (t (browse-url target 'local))
+            (t (call-process "open" nil nil nil target))
             )
 
       (when jg-bibtex-open-doi-with-pdf

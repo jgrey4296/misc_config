@@ -15,7 +15,7 @@
       :desc "Change Entry Type"  :n "DEL"   #'+jg-bibtex-edit-entry-type
       :desc "Select Entry"       :v "i e"   #'+jg-bibtex-visual-select-entry
       :desc "Open Pdf"           :n "RET"   #'+jg-bibtex-open-pdf
-      :desc "Open Folder"        :n "M-RET" #'+jg-bibtex-find-folder
+      :desc "Open Folder"        :n "M-RET" #'+jg-bibtex-open-folder
       :desc "Open DWIM"          :n ">"     #'+jg-bibtex-window-dwim
       :desc "Open Dropbox"       :n "<"     #'+jg-bibtex-window-set-dropbox
       )

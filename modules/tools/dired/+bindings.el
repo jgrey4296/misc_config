@@ -5,6 +5,11 @@
 ;; (suppress-keymap jg-dired-mode-map)
 ;; (evil-make-intercept-map jg-dired-mode-map)
 
+(map! :leader
+      :prefix "f"
+      "t" #'+jg-list-trash
+      )
+
 (defun +jg-dired-group-helper ()
   (interactive)
   (message "Dired Groups: (M)ark, (c)hange, (d)escribe, (o)pen, (e)ncrypt, (s)ort ")

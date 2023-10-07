@@ -6,5 +6,6 @@ JDK Reference            # https://docs.oracle.com/en/java/javase/20/
 API Reference            # https://kotlinlang.org/api/latest/jvm/stdlib/
 SDK CLI Tools            # https://developer.android.com/tools
 Java docs                # https://docs.oracle.com/en/java/
+Android Release Levels   # https://developer.android.com/tools/releases/platforms
 
 Gradle JVM Compatibility # https://docs.gradle.org/current/userguide/compatibility.html

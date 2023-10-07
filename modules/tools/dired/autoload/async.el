@@ -102,3 +102,9 @@
                   )
     )
   )
+
+;;;###autoload
+(defun +jg-list-trash ()
+  (interactive)
+  (shell-command "trash-list")
+  )

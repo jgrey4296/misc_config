@@ -1,0 +1,237 @@
+;;;; Emacs Bookmark Format Version 1;;;; -*- coding: utf-8; mode: lisp-data -*-
+;;; This format is meant to be slightly human-readable;
+;;; nevertheless, you probably don't want to edit it.
+;;; -*- End Of Bookmark File Format Version Stamp -*-
+(("packages:lisp"
+ (filename . "~/github/__configs/modules/lang-weakly-typed/lisp-langs/packages-reference.org")
+ (front-context-string . "#+TITLE: Lisp Pa")
+ (rear-context-string)
+ (position . 1))
+("packages:python"
+ (filename . "/media/john/data/github/_config/modules/lang-weakly-typed/python/packages-reference.org")
+ (front-context-string . "\n\n* Overview\nhtt")
+ (rear-context-string . "ckages Reference")
+ (position . 35))
+("provenance"
+ (filename . "~/github/python/provenance/")
+ (front-context-string . ".tasks\n  drwxr-x")
+ (rear-context-string . "02 Aug 31 02:50 ")
+ (position . 198))
+("config"
+ (filename . "~/.config/")
+ (front-context-string . "swi-prolog -> /U")
+ (rear-context-string . "44 Aug 26 22:19 ")
+ (position . 521))
+("cache"
+ (filename . "~/.cache/")
+ (front-context-string . "re-doom\n  drwxr-")
+ (rear-context-string . "96 Sep  5 03:35 ")
+ (position . 1474))
+("lisp"
+ (filename . "~/github/lisp/")
+ (front-context-string . "spec-handling\n  ")
+ (rear-context-string . "38 Jul 14 18:17 ")
+ (position . 688))
+("jvm_instances"
+ (filename . "~/.jenv/")
+ )
+("jvm"
+ (filename . "~/github/jvm/")
+ (front-context-string . "android\n  drwxr-")
+ (rear-context-string . "70 Jul 20 21:16 ")
+ (position . 180))
+("pictures"
+ (filename . "/media/john/data/pictures/")
+ (front-context-string . "misc\n  drwxr-xr-")
+ (rear-context-string . "74 Jun 19 21:49 ")
+ (position . 183))
+("tex"
+ (filename . "/usr/local/texlive/")
+ (front-context-string)
+ (rear-context-string . "48 Mar 14 18:20 ")
+ (position . 215))
+("tomler"
+ (filename . "~/github/python/tomler/")
+ (front-context-string)
+ (rear-context-string . "0K May  2 22:49 ")
+ (position . 899))
+("dootle"
+ (filename . "~/github/python/dootle/")
+ (front-context-string . "pyproject.toml\n ")
+ (rear-context-string . "5K May  2 23:31 ")
+ (position . 861))
+("conda"
+ (filename . "~/.cache/mamba/")
+ (front-context-string . "envs\n  drwxr-xr-")
+ (rear-context-string . "28 Apr 24 19:31 ")
+ (position . 484))
+("doot"
+ (filename . "~/github/python/doot/")
+ (front-context-string . "doot\n  drwxr-xr-")
+ (rear-context-string . "46 Feb  8 06:31 ")
+ (position . 303))
+("video"
+ (filename . "/media/john/data/video/")
+ )
+("vols"
+ (filename . "/media/john/")
+ )
+("rust"
+ (filename . "~/github/rust/")
+ (front-context-string . "make_test\n  drwx")
+ (rear-context-string . "74 Dec  3 13:56 ")
+ (position . 246))
+("libs"
+ (filename . "~/github/_libs/")
+ (front-context-string . "python\n  drwxr-x")
+ (rear-context-string . "4K Dec  9 23:19 ")
+ (position . 1265))
+("python"
+ (filename . "~/github/python/")
+ (front-context-string . "acab\n  drwxr-xr-")
+ (rear-context-string . "8K Nov  8 01:30 ")
+ (position . 186))
+("emacsd"
+ (filename . "~/.emacs.d/")
+ (front-context-string . "emacs-src\n  drwx")
+ (rear-context-string . "6K Nov 30 22:03 ")
+ (position . 313))
+("godot"
+ (filename . "~/github/godot/")
+ (front-context-string . "3dTests\n  drwxr-")
+ (rear-context-string . "08 Nov 22 01:40 ")
+ (position . 135))
+("automated"
+ (filename . "/media/john/data/library/automated")
+ (front-context-string . "summary\n  drwxr-")
+ (rear-context-string . "4K Oct 20 03:54 ")
+ (position . 215))
+("script notes"
+ (filename . "~/jgrey4296.github.io/orgfiles/script_notes.org")
+ (front-context-string . "#+TITLE: Script ")
+ (rear-context-string)
+ (position . 1))
+("homepage"
+ (filename . "~/github/jgrey4296.github.io/")
+ (front-context-string . ".jekyll-cache\n  ")
+ (rear-context-string . "02 Nov 28  2020 ")
+ (position . 146))
+("dsls"
+ (filename . "~/github/jgrey4296.github.io/orgfiles/listings/DSLs.org")
+ (front-context-string . "* DSLs and Logic")
+ (rear-context-string)
+ (position . 1))
+("taxonomies"
+ (filename . "~/github/jgrey4296.github.io/orgfiles/taxonomies/")
+ (front-context-string . "*  Taxonomies   ")
+ (rear-context-string)
+ (position . 1))
+("definitions"
+ (filename . "~/github/jgrey4296.github.io/orgfiles/listings/definitions.org")
+ (front-context-string . "* Overview\nhttps")
+ (rear-context-string . "E: Definitions\n\n")
+ (position . 23))
+("quotes"
+ (filename . "~/jgrey4296.github.io/orgfiles/quotes/")
+ (front-context-string . " #+TITLE: Quotes")
+ (rear-context-string)
+ (position . 1))
+("instal"
+ (filename . "~/github/python/instal/")
+ (front-context-string . "dsl\n  drwxr-xr-x")
+ (rear-context-string . "72 Jul 24 17:00 ")
+ (position . 199))
+("snippets"
+ (filename . "~/.config/jg/templates/code/")
+ (front-context-string . "shell-mode\n  drw")
+ (rear-context-string . "02 May  2 02:49 ")
+ (position . 1576))
+("bindings"
+ (filename . "~/github/__configs/modules/config/bindings/")
+ (front-context-string . "config.el\n  -rw-")
+ (rear-context-string . "66 Aug  2 23:52 ")
+ (position . 166))
+("todo_bib"
+ (filename . "~/github/bibliography/in_progress/todo.bib")
+ (front-context-string . "  author = {},\n ")
+ (rear-context-string . "\n\n@misc{stub_0,\n")
+ (position . 1336))
+("bibliography"
+ (filename . "~/github/bibliography/main")
+ (front-context-string)
+ (rear-context-string . "3K Jul 22 13:24 ")
+ (position . 9300))
+("todo_pdfs"
+ (filename . "/media/john/data/todo/pdfs")
+ (front-context-string . "1-s2.0-S15710661")
+ (rear-context-string . "9K Jul 19 06:40 ")
+ (position . 146))
+("acab"
+ (filename . "~/github/python/acab/")
+ (front-context-string . "acab\n  drwxr-xr-")
+ (rear-context-string . "76 Jun 30 03:32 ")
+ (position . 132))
+("resources"
+ (filename . "~/github/jgrey4296.github.io/resources/")
+ (front-context-string . "bibliography\n  d")
+ (rear-context-string . "4K Apr 19 12:16 ")
+ (position . 149))
+("TEST"
+ (filename . "/media/john/data/github/_test/")
+ (front-context-string . "python\n  drwxr-x")
+ (rear-context-string . "50 Mar 15 17:07 ")
+ (position . 878))
+("cookie_templates"
+ (filename . "~/.config/jg/templates/projects/")
+ (front-context-string . "jg_py\n  -rw-r--r")
+ (rear-context-string . "36 Nov  2 01:58 ")
+ (position . 269))
+("jacamo"
+ (filename . "/media/john/data/github/jvm/__jacamo")
+ (front-context-string . ".github\n  drwxr-")
+ (rear-context-string . "02 Jul 25 16:26 ")
+ (position . 135))
+("writing"
+ (filename . "~/github/jgrey4296.github.io/")
+ (front-context-string . "resources\n  -rw-")
+ (rear-context-string . "18 Jun  4 09:26 ")
+ (position . 313))
+("twitter"
+ (filename . "/media/john/data/library/twitter")
+ (front-context-string . "group_a\n  drwxrw")
+ (rear-context-string . "6K Mar 30 07:56 ")
+ (position . 152))
+("pdflib"
+ (filename . "/media/john/data/library/pdfs")
+ (front-context-string . "1320\n  drwxr-xr-")
+ (rear-context-string . "36 Sep  4  2020 ")
+ (position . 145))
+("dropbox"
+ (filename . "~/Dropbox/")
+ (front-context-string . ".dropbox.cache\n ")
+ (rear-context-string . "92 Mar  4  2020 ")
+ (position . 180))
+("downloads"
+ (filename . "~/Downloads/")
+ (front-context-string . "EXPERIENCE_JAPAN")
+ (rear-context-string . "92 Mar  8 00:25 ")
+ (position . 183))
+("~"
+ (filename . "~/")
+ (front-context-string . "Desktop\n  drwx--")
+ (rear-context-string . "68 Jan 28 19:25 ")
+ (position . 2063))
+("desktop"
+ (filename . "~/Desktop/")
+ (front-context-string . "bibtex_tags\n  dr")
+ (rear-context-string . "4K Dec 24 18:28 ")
+ (position . 184))
+("config_emacs"
+ (filename . "~/.config/jg/")
+ )
+("github"
+ (filename . "~/github/")
+ (front-context-string . ".installed_pylib")
+ (rear-context-string . "04 Aug 16  2018 ")
+ (position . 180))
+)

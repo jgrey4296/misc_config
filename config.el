@@ -14,27 +14,35 @@
 ;; (setq default-input-method "greek")
 ;;-- end Text Encoding
 
+;;-- bookmarks
+
+(setq bookmark-default-file (pcase system-type
+                              ('darwin (expand-file-name "templates/bookmarks/bookmarks.mac" doom-user-dir))
+                              ('gnu/linux (expand-file-name "templates/bookmarks/bookmarks.linux" doom-user-dir))
+                              )
+      )
+
+;;-- end bookmarks
+
 ;;-- locations
 (setq backup-directory-alist          `((".*" . ,(expand-file-name ".local/backups" doom-emacs-dir)))
-      bookmark-default-file           (expand-file-name "bookmarks" doom-user-dir)
       doom-fallback-buffer-name       "base_agenda.org"
-      initial-buffer-choice           (expand-file-name "base_agenda.org" doom-user-dir)
-      org-agenda-files               `(,(expand-file-name "base_agenda.org" doom-user-dir))
-      org-archive-location            (string-join `(,(expand-file-name "org/archive.org" doom-user-dir) "* Main Archive") "::")
       org-directory                   (expand-file-name "~/github/jgrey4296.github.io/orgfiles/")
-      pyvenv-default-virtual-env-name (expand-file-name "~/anaconda/envs/")
-      server-auth-dir                 (expand-file-name "~/.secrets")
+      initial-buffer-choice           (expand-file-name "base_agenda.org" org-directory)
+      org-agenda-files                (list initial-buffer-choice)
+      org-archive-location            (string-join `(,(expand-file-name "org/archive.org" doom-user-dir) "* Main Archive") "::")
+      pyvenv-default-virtual-env-name (expand-file-name "~/.cache/mamba/envs/")
+      server-auth-dir                 (expand-file-name "~/.cache/secrets")
       native-comp-eln-load-path       (list (expand-file-name "cache/eln" doom-local-dir))
       )
 
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/.local/modules"))
+(add-to-list 'load-path (expand-file-name "~/.local/modules"))
 ;;-- end locations
 
 (setq server-log t)
 
 ;;-- keybind clear
 (defvar jg-ctl-x-map (make-sparse-keymap))
-
 (setq ctl-x-map jg-ctl-x-map)
 
 ;;-- end keybind clear

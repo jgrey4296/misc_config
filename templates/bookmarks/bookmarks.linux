@@ -104,7 +104,7 @@
  (rear-context-string . "4K Oct 20 03:54 ")
  (position . 215))
 ("script notes"
- (filename . "~/jgrey4296.github.io/orgfiles/script_notes.org")
+ (filename . "~/github/jgrey4296.github.io/orgfiles/script_notes.org")
  (front-context-string . "#+TITLE: Script ")
  (rear-context-string)
  (position . 1))

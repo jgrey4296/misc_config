@@ -7,27 +7,32 @@ else
 fi
 echo "Date  : $(date).  CWD: $(pwd)"
 
-source "$HOME/.doom.d/bash/_basic_utils.bash"
-source "$HOME/.doom.d/bash/_base_path.bash"
+source "$HOME/.config/jg/bash/_basic_utils.bash"
+source "$HOME/.config/jg/bash/_base_path.bash"
 
 case "$OSTYPE" in 
-	darwin*) source "$HOME/.doom.d/bash/_aliases.bash" 
+	darwin*) source "$HOME/.config/jg/bash/_aliases.bash"
 		 jgdebug "Activating components"
-		 for fname in $(find "$HOME/.doom.d/bash/components" -type f -name "*.bash" -not -regex ".+?/_.+?\.bash")
+		 for fname in $(find "$HOME/.config/jg/bash/components" -type f -name "*.bash" -not -regex ".+?/_.+?\.bash")
 		 do
 		     jgdebug "-- Sourcing: $fname"
 		     source "$fname"
 		 done 
 		 jgdebug "Setting up Conda"
-		 source "$HOME/.doom.d/bash/conda.bash" ;;
-	linux*)  
-        source "$JG_CONFIG/bash/conda.bash" 
+		 source "$HOME/.config/jg/bash/conda.bash" ;;
+	linux*)
+		 for fname in $(find "$HOME/.config/jg/bash/components" -type f -name "*.bash" -not -regex ".+?/_.+?\.bash")
+		 do
+		     jgdebug "-- Sourcing: $fname"
+		     source "$fname"
+		 done
+        source "$JG_CONFIG/bash/conda.bash"
         ;;
 esac
 
-BASH_ENV="$HOME/.doom.d/bash/non_interactive.bash"
-source "$HOME/.doom.d/bash/emacs.bash"
-source "$HOME/.doom.d/bash/_exports.bash"
+BASH_ENV="$HOME/.config/jg/bash/non_interactive.bash"
+source "$HOME/.config/jg/bash/emacs.bash"
+source "$HOME/.config/jg/bash/_exports.bash"
 
 jgdebug "Path  : $PATH"
 

@@ -6,7 +6,7 @@ EDITOR="vim"
 
 EMACS="$(which emacs)"
 EMACSDIR="$HOME/.emacs.d"
-DOOMDIR="$HOME/.doom.d"
+DOOMDIR="$HOME/.config/jg/"
 
 # LOCS
 case "$OSTYPE" in
@@ -52,7 +52,7 @@ function set-emacs () {
             echo "Setting Doom Native Emacs"
             EMACS="$ENAT_BIN"
             EMACSDIR="$ENAT_DIR"
-            DOOMDIR="$HOME/.doom.d"
+            DOOMDIR="$HOME/.config/jg/"
             ;;
         "blood")
             echo "BLOOD"

@@ -8,7 +8,7 @@
 # And here is the theme collection
 # https://github.com/nushell/nu_scripts/tree/main/themes
 #
-source ~/.doom.d/nu/themes.nu
+source ~/.config/jg/nu/themes.nu
 
 # Merges TOP LEVEL ONLY dicts, will clobber subdicts with same name
 def cmerge [...recs] {

@@ -48,7 +48,7 @@ class SetupSystemTask(tasker.DootTasker, FilerMixin, CommanderMixin):
             (self.append_to, [self.locs.home / ".bashrc", "source $HOME/.bash_profile"]),
 
             (self.log, ["Appending bash setup to bash_profile", logmod.INFO]),
-            (self.append_to, [self.locs.home / ".bash_profile", "source $HOME/.doom.d/bash/main.bash"]),
+            (self.append_to, [self.locs.home / ".bash_profile", "source $HOME/.config/jg/bash/main.bash"]),
 
             self.setup_tool_configs,
 

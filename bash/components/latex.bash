@@ -15,5 +15,4 @@ case "$OSTYPE" in
        ;;
 esac
 
-# TEXMFCNF="$HOME/.doom.d/templates/tex-config/"
-
+# TEXMFCNF="$HOME/.config/jg/templates/tex-config/"

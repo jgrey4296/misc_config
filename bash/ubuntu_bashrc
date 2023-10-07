@@ -103,4 +103,4 @@ if ! shopt -oq posix; then
   fi
 fi
 
-source "$HOME/.doom.d/bash/interactive.bash"
+source "$HOME/.config/jg/bash/interactive.bash"

@@ -2,8 +2,8 @@
 
 jgdebug "Python setup"
 
-PYTHONSTARTUP="$HOME/.doom.d/templates/python/repl_startup.py"
-IPYTHONDIR="$HOME/.doom.d/templates/python/"
+PYTHONSTARTUP="$HOME/.config/jg/templates/python/repl_startup.py"
+IPYTHONDIR="$HOME/.config/jg/templates/python/"
 
 #Caffe Stuff:
 #DYLD_FALLBACK_LIBRARY_PATH=/usr/local/cuda/lib:$HOME/.pyenv/versions/anaconda-2.2.0/lib:/usr/local/lib/:/usr/lib

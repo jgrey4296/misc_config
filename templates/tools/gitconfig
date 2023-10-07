@@ -10,9 +10,9 @@
 	excludesfile = ~/.gitignore_global
 [init]
 	defaultBranch = main
-	templateDir = ~/.doom.d/templates/git
+	templateDir = ~/.config/jg/templates/git
 [commit]
-	template = ~/.doom.d/templates/files/git/commit
+	template = ~/.config/jg/templates/files/git/commit
 [hooks]
 	allownonascii = false
 [merge]

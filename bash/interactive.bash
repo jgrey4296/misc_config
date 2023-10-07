@@ -10,13 +10,13 @@ source "$HOME/.config/jg/bash/_basic_utils.bash"
 source "$HOME/.config/jg/bash/emacs.bash"
 
 case "$OSTYPE" in
-	darwin*) source "$HOME/.doom.d/bash/_aliases.bash"
+	darwin*) source "$HOME/.config/jg/bash/_aliases.bash"
 		# Setup Conda
-		source "$HOME/.doom.d/bash/conda.bash" 
+		source "$HOME/.config/jg/bash/conda.bash"
 		echo "Stopping Sarafi Bookmarks"; launchctl stop com.apple.SafariBookmarksSyncAgent
 		;;
 	linux*) 
-       source "$HOME/.doom.d/bash/conda.bash" 
+       source "$HOME/.config/jg/bash/conda.bash"
         ;;
 esac
 

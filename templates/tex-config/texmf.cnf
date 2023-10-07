@@ -15,7 +15,7 @@
 TEXMFHOME   = $HOME/Library/texmf
 TEXMFVAR    = $HOME/.cache/tex
 TEXMFOUT    = $TEXMFDOTDIR
-TEXMFCONFIG = $HOME/.doom.d/templates/tex-config
+TEXMFCONFIG = $HOME/.config/jg/templates/tex-config
 
 JG_FONTS = $HOME/github/godot/__assets/fonts/
 JG_BIB   = $HOME/github/bibliography/main

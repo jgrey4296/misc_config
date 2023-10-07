@@ -24,11 +24,13 @@
 
 (defvar jg-bibtex-loc-completions     (expand-file-name "~/github/jgrey4296.github.io/resources/completions/"))
 
-(defvar jg-bibtex-loc-export-bib-file (expand-file-name "tex/export_template.tex" "~/.doom.d/templates/tex-config/"))
+(defvar jg-bibtex-loc-export-bib-file (expand-file-name "tex/export_template.tex" "~/.config/jg/templates/tex-config/"))
 
 (defvar jg-bibtex-loc-temp-dir        (expand-file-name "~/.tex/"))
 
-(defvar jg-bibtex-pdf-loc             (expand-file-name "~/pdf_library"))
+(defvar jg-bibtex-pdf-loc             (pcase system-type
+                                        ('darwin (expand-file-name "~/pdf_library"))
+                                        ('gnu/linux "/media/john/data/library/pdfs")))
 
 
 (defvar jg-bibtex-search-fields               '("tags" "year" "publisher"))
@@ -45,11 +47,17 @@
         )
       )
 
-(defvar jg-bibtex-pdf-loc-regexp               "file[[:digit:]]*\s*=\s*{\\(.+\\)/\\(.+pdf_library\\)?")
+(defvar jg-bibtex-pdf-loc-regexp               (format "file[[:digit:]]*\s*=\s*{\\(.+\\)/\\(.+%s\\)?"
+                                                       (pcase system-type
+                                                         ('darwin "pdf_library")
+                                                         ('gnu/linux "pdfs")
+                                                         )))
 
 (defvar jg-bibtex-pdf-replace-match-string     "~/")
 
-(defvar jg-bibtex-pdf-replace-library-string   "pdf_library")
+(defvar jg-bibtex-pdf-replace-library-string   (pcase system-type
+                                                 ('darwin "pdf_library")
+                                                 ('gnu/linux "pdfs")))
 
 (defvar jg-bibtex-remove-field-newlines-regexp "^=")
 

@@ -44,7 +44,7 @@
        '("l3"       "fmtutil-user --all")
        '("find"     "kpsewhich -all" :read)
        '("fonts"   "updmap-user --listmaps")
-       `("system-fonts" ,(format "system_profiler -json SPFontsDataType > %s" (expand-file-name "~/.doom.d/.temp/fonts.json")))
+       `("system-fonts" ,(format "system_profiler -json SPFontsDataType > %s" (expand-file-name "~/.cache/fonts/fonts.json")))
 
        (when (f-exists? (f-swap-ext curr-file "pdf"))
          `("open"     ,(format "open -a Preview -nF %s" (f-swap-ext curr-file "pdf"))

@@ -1,0 +1,77 @@
+%%
+% Example of Lettrine Dropcap usage
+% IMPORANT: USE XELATEX or LUALATEX
+%%
+\documentclass[12pt]{article}
+% \usepackage[T1,T2A]{fontenc}
+\usepackage{fontspec}
+\usepackage[russian,english]{babel}
+\usepackage{listings}
+\usepackage[version=3]{mhchem}
+\usepackage{url}
+\usepackage[numbers]{natbib}
+\usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue, pdfstartview=FitH]{hyperref}
+\usepackage{doi}
+\usepackage{graphicx}
+\usepackage{lettrine}
+% Fonts that are in the path:
+\setmainfont{forum_regular.ttf}
+% \setmainfont{Monoid-Regular.ttf}
+%
+\title{A Test Title}
+\author{John Grey}
+
+\begin{document}
+\maketitle
+
+% Image, if you've got an image named the letter.
+% \lettrine[image,loversize=0.1, lines=4,depth=1,findent=4pt,nindent=4pt]{R}{orem ipsum} dolor sit amet,
+\lettrine[loversize=0.1, lines=4,depth=1,findent=4pt,nindent=4pt]{R}{orem ipsum} dolor sit amet,
+consectetuer adipiscing elit.  Donec hendrerit tempor tellus.  Donec pretium
+posuere tellus.  Proin quam nisl, tincidunt et, mattis eget, convallis nec,
+purus.  Cum sociis natoque penatibus et magnis dis parturient montes, nascetur
+ridiculus mus.  Nulla posuere.  Donec vitae dolor.  Nullam tristique diam non
+turpis.  Cras placerat accumsan nulla.  Nullam rutrum.  Nam vestibulum accumsan
+nisl. Pellentesque dapibus suscipit ligula.  Donec posuere augue in quam.  Etiam
+vel tortor sodales tellus ultricies commodo.  Suspendisse potenti.  Aenean in
+sem ac leo mollis blandit.  Donec neque quam, dignissim in, mollis nec, sagittis
+eu, wisi.  Phasellus lacus.  Etiam laoreet quam sed arcu.  Phasellus at dui in
+ligula mollis ultricies.  Integer placerat tristique nisl.  Praesent augue.
+Fusce commodo.  Vestibulum convallis, lorem a tempus semper, dui dui euismod
+elit, vitae placerat urna tortor vitae lacus.  Nullam libero mauris, consequat
+quis, varius et, dictum id, arcu.  Mauris mollis tincidunt felis.  Aliquam
+feugiat tellus ut neque.  Nulla facilisis, risus a rhoncus fermentum, tellus
+tellus lacinia purus, et dictum nunc justo sit amet elit.
+
+\medskip
+
+\setmainfont{FiraCode-Medium.otf}
+\lettrine[depth=0,lraise=0.7, findent=0pt,nindent=2pt]{R}{orem ipsum} dolor sit amet,
+consectetuer adipiscing elit.  Donec hendrerit tempor tellus.  Donec pretium
+posuere tellus.  Proin quam nisl, tincidunt et, mattis eget, convallis nec,
+purus.  Cum sociis natoque penatibus et magnis dis parturient montes, nascetur
+ridiculus mus.  Nulla posuere.  Donec vitae dolor.  Nullam tristique diam non
+turpis.  Cras placerat accumsan nulla.  Nullam rutrum.  Nam vestibulum accumsan
+nisl. Pellentesque dapibus suscipit ligula.\\
+
+\pagebreak
+\lettrine{D}{onec posuere} augue in quam.  Etiam
+vel tortor sodales tellus ultricies commodo.  Suspendisse potenti.  Aenean in
+sem ac leo mollis blandit.  Donec neque quam, dignissim in, mollis nec, sagittis
+eu, wisi.  Phasellus lacus.  Etiam laoreet quam sed arcu.  Phasellus at dui in
+ligula mollis ultricies.  Integer placerat tristique nisl.  Praesent augue.
+Fusce commodo.  Vestibulum convallis, lorem a tempus semper, dui dui euismod
+elit, vitae placerat urna tortor vitae lacus.  Nullam libero mauris, consequat
+quis, varius et, dictum id, arcu.  Mauris mollis tincidunt felis.  Aliquam
+feugiat tellus ut neque.  Nulla facilisis, risus a rhoncus fermentum, tellus
+tellus lacinia purus, et dictum nunc justo sit amet elit.
+
+
+
+
+
+
+\nocite{*}
+\bibliographystyle{jg_custom}
+% \bibliography{}
+\end{document}

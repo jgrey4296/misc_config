@@ -1,0 +1,108 @@
+\documentclass[12pt, twoside]{article}
+\usepackage[inner=7cm, marginparwidth=3cm, marginparsep=2cm]{geometry}
+% \usepackage{marginnote}
+\usepackage{bussproofs}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[bottom]{footmisc}
+\usepackage{sidecap}
+\usepackage{graphicx}
+\usepackage{latexsym}
+\usepackage{fitch}
+\usepackage{ND}
+\usepackage{cmll}
+
+% This is the "centered" symbol
+\def\fCenter{{\mbox{\Large$\rightarrow$}}}
+\def\implies{\Large{$\rightarrow$}}
+
+% Optional to turn on the short abbreviations
+\EnableBpAbbreviations
+
+% \alwaysRootAtTop  % makes proofs upside down
+% \alwaysRootAtBottom % -- this is the default setting
+\reversemarginpar
+\begin{document}
+% \thispagestyle{empty}
+
+This Demonstrates the use of proof tree using bussproof's ``prooftree'' environment,
+\marginpar[\footnotesize{with an example of a margin note as well}]{}
+a modal logic proof derivation using the ``fitch'' environment, \footnotemark[1]
+and Natural Deduction proof using the ``ND'' environment.
+
+
+\footnotetext[1]{and footnotes}
+
+\vspace*{0.25in}
+
+\section{bussproofs}
+A Simple longform proof tree, and then one using the shorthand.
+
+\begin{figure*}[h]
+\begin{prooftree}
+                \AxiomC{$\Gamma \Delta \vdash A  blah$}
+            \UnaryInfC{$B \to C$}
+        \RightLabel{Label C}
+        \UnaryInfC{C}
+        \AxiomC{$\diamond Q$}
+    \LeftLabel{Label D}
+    \BinaryInfC{D}
+    \AxiomC{$E \parr B$}
+\BinaryInfC{$\bot$}
+\end{prooftree}
+\centering
+Proof 1
+\end{figure*}
+
+\begin{figure*}[h]
+\[
+  \AxiomC{blah}
+  \LL{A}
+  \UIC{bloo \quad C}
+  \DisplayProof
+  \quad
+  \AxiomC{aweg}
+  \RL{B}
+  \UIC{awegjio}
+  \DP
+\]
+\caption{Proof 2} \label{p2}
+\end{figure*}
+
+\section{fitch}
+Next is a derivation tree.
+
+\begin{equation} \label{eq:f1}
+\begin{fitch}
+  \fa   blah                         &  testval  \\
+  \fh  aweigj                                    \\
+  \fa \fp jiaoweg                                \\
+  \fs \fr  sub
+  % \fa  \fh  bloo                               \\
+  % \fa  \fa  \fitchmodalh{blah}  blee           \\
+  % \fa  \fa  \fa   aweg                         \\
+  % \fa  \fa  \fa   joaiweg                      \\
+  % \fa  \fa  \fa   \bot                         \\
+\end{fitch}
+\end{equation}
+
+\break
+\section{nd3}
+And finally an nd3 ``ND'' environment proof.
+
+Referring back to ~\eqref{eq:f1}, blah blah blah.
+
+
+\begin{ND}[Test Proof][testLabel][][][]
+  \marginpar{A comment on a proof}
+  \ndl{}{test}{obv}\label{1}
+  \ndl{\ref{1}}{second}{A}\label{2}
+  \ndl{\ref{1},\ref{2}}{third}{B}\label{3}
+\end{ND}
+
+
+
+
+
+
+\end{document}

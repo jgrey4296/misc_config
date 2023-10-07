@@ -6,7 +6,8 @@ if [[ $- != *i* ]]; then
 fi
 
 echo "Interactive"
-source "$HOME/.doom.d/bash/emacs.bash"
+source "$HOME/.config/jg/bash/_basic_utils.bash"
+source "$HOME/.config/jg/bash/emacs.bash"
 
 case "$OSTYPE" in
 	darwin*) source "$HOME/.doom.d/bash/_aliases.bash"

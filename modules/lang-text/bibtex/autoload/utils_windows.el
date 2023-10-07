@@ -29,7 +29,7 @@
       (bookmark-jump "dropbox")
       )
     (with-selected-window bot-wind
-      (bookmark-jump "in_progress_pdfs")
+      (bookmark-jump "todo_pdfs")
       )
     )
   )

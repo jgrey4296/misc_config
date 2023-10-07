@@ -33,8 +33,7 @@
  (rear-context-string . "38 Jul 14 18:17 ")
  (position . 688))
 ("jvm_instances"
- (filename . "~/.jenv/")
- )
+ (filename . "~/.jenv/"))
 ("jvm"
  (filename . "~/github/jvm/")
  (front-context-string . "android\n  drwxr-")
@@ -71,11 +70,9 @@
  (rear-context-string . "46 Feb  8 06:31 ")
  (position . 303))
 ("video"
- (filename . "/media/john/data/video/")
- )
+ (filename . "/media/john/data/video/"))
 ("vols"
- (filename . "/media/john/")
- )
+ (filename . "/media/john/"))
 ("rust"
  (filename . "~/github/rust/")
  (front-context-string . "make_test\n  drwx")
@@ -227,8 +224,7 @@
  (rear-context-string . "4K Dec 24 18:28 ")
  (position . 184))
 ("config_emacs"
- (filename . "~/.config/jg/")
- )
+ (filename . "~/.config/jg/"))
 ("github"
  (filename . "~/github/")
  (front-context-string . ".installed_pylib")

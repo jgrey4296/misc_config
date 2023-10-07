@@ -1,0 +1,19 @@
+\documentclass[12pt]{article}
+\usepackage[T1,T2A]{fontenc}
+\usepackage[russian,english]{babel}
+\usepackage{listings}
+\usepackage[version=3]{mhchem}
+\usepackage{url}
+\usepackage[numbers]{natbib}
+\usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue, pdfstartview=FitH]{hyperref}
+\usepackage{doi}
+
+\title{The Bibliography}
+\author{John Grey}
+\begin{document}
+\maketitle
+\nocite{*}
+% Bibtex:
+\bibliographystyle{jg_custom}
+\bibliography{the_bib.bib}
+\end{document}

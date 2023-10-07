@@ -1,0 +1,21 @@
+\documentclass[11pt]{article}
+\usepackage[T1,T2A]{fontenc}
+\usepackage[russian,english]{babel}
+\usepackage{needspace}
+\usepackage{listings}
+\usepackage[version=3]{mhchem}
+\usepackage{url}
+\usepackage[numbers]{natbib}
+\usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue, pdfstartview=FitH]{hyperref}
+\usepackage{doi}
+
+\title{Bibliography Listing}
+\date{\today}
+\author{John Grey}
+\begin{document}
+\maketitle
+\nocite{*}
+% Bibtex:
+\bibliographystyle{jg_custom_name_first}
+\bibliography{the_bib.bib}
+\end{document}

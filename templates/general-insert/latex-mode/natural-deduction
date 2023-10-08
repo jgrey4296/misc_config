@@ -1,27 +1,33 @@
 Natural Deduction, using fitch.sty and nd3:
-\begin{fitch} \end{fitch}                  # Environment.                          | Fitch
-\fa                                        # Continue. Vertical Line               | Fitch
-\fh                                        # Branch / Hypothesis                   | Fitch
-\fj                                        # Branch / Multi Hypothesis             | Fitch
+---------------------------------------- Fitch
+\begin{nd} \end{nd}                                                     # Environment
+\begin{ndresume} \end{ndresume}                                         # Continuation of previous proof
+\hypo {label} {formula}                                                 # Hypothesis
+\have {label} {formula}                                                 # derivation
+\hypo[\vdots] {} {}                                                     # Symbolic line numbers
+\have[\vdots] {} {}                                                     # Symbolic line numbers
+\open \close                                                            # Subderivations.
+\open[]                                                                 # Subderivation with guards
+\by {name} {refs}                                                       # Generic justification
+\r                                                                      # reiteration
+\ii \ie                                                                 # implication intro/elim
+\ai \ae                                                                 # and intro/elim
+\oi \oe                                                                 # or intro/elim
+\ni \ne                                                                 # not intro/elim
+\be                                                                     # bottom elimination
+\nne                                                                    # double negation elimination
+\Ai \Ae                                                                 # forall intro/elim
+\Ei \Ee                                                                 # exists intro/elim
+\\                                                                      # Break formulas across multiple lines
+\nddim{h}{toph}{depth}{labelsep} {indent}{hsep}{justsep}{linethickness} # Dimensions
 
-\fb                                        # Subproof. Shorter Vertical Line       | Fitch
-\fn                                        # Box Subproof                          | Fitch
-\fp                                        # Diamond Subproof                      | Fitch
-\fitchmodalh{[text]}                       # Modal Subproof with Hypothesis        | Fitch
-\fitchmodal{[text]}                        # Modal Subproof.                       | Fitch
+---------------------------------------- ND
+\begin{NatD}[title, label][w][w][w] \end{NatD}             # Environment. w=width | ND
+                                                       # Widths : assumption column, rule column, total
+\ndl {assumptions} {formula} {rule} \label{}           # a proof line                               | ND
+\label                                                 #                                            | ND
+\ref                                                   #                                            | ND
+\ndref                                                 # refer to a line outside the nd env         | ND
 
-\fr                                        # Formula Introduction with line. >|    | Fitch
-\fs                                        # Formula Introduction without line. >  | Fitch
-\fw{[text]}                                # New variable                          | Fitch
-\\                                         # new line                              | Fitch
-& [text] \\                                # Label line                            | Fitch
-
-\begin{ND}[title, label][w][w][w] \end{ND} # Environment. w=width | ND3
-                                           # Widths : assumption column, rule column, total
-\ndl{assumptions}{formula}{rule}           # a proof line  | Fitch
-\label                                     #   | ND3
-\ref                                       #   | ND3
-\ndref                                     # refer to a line outside the nd env  | ND3
-
-\awidth{label}                             # Aligning assumptions with another proof    | ND3
-\rwidth{label}                             # Aligning proofs with another proof         | ND3
+\awidth{label}                                         # Aligning assumptions with another proof    | ND
+\rwidth{label}                                         # Aligning proofs with another proof         | ND

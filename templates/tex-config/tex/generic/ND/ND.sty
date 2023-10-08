@@ -47,7 +47,7 @@
 \newcommand\@NDrules[1]{\hspace{\@NDitemsep}\begin{minipage}[t]{\@NDrulewidth}#1\end{minipage}}
 
 %%%%%Definition of the ND environment and ndl command
-\newenvironmentx{ND}[5][1,2,3,4,5]%
+\newenvironmentx{NatD}[5][1,2,3,4,5]%
 {\refstepcounter{@NDnumber}\setcounter{@NDlines}{0}%
 \newcommand{\ndl}[3]{\settowidth\@NDlwtmp{\NDalist{##1}}\ifdim\@NDlwtmp > \@NDlwf \setlength\@NDlwf{\@NDlwtmp}\fi%
 \settowidth\@NDrwtmp{\widthofpbox{##3}}\ifdim\@NDrwtmp > \@NDrwf \setlength\@NDrwf{\@NDrwtmp}\fi%

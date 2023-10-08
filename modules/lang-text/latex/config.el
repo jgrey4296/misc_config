@@ -106,9 +106,9 @@
   )
 
 (use-package! evil-tex
-  :after auctex
-  :hook (LaTeX-mode . evil-tex-mode)
-  )
+ :after auctex
+ :hook (LaTeX-mode . evil-tex-mode)
+ )
 
 (use-package! company-auctex
   :after auctex

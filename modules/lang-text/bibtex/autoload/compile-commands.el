@@ -33,7 +33,7 @@
        `("clean"        ,(format "cd %s; find . -maxdepth 1 \\( -name '%2$s.log' -o -name '%2$s.aux' -o -name '%2$s.bbl' -o -name '%2$s.blg' -o -name '%2$s.out' -o -name '%2$s.pdf'  \\) -delete" (f-parent curr-file) (f-base curr-file)))
        `("clean-all"    ,(format "cd %s; find . -maxdepth 1 \\( -name '*.log' -o -name '*.aux' -o -name '*.bbl' -o -name '*.blg' -o -name '*.out' -o -name '*.pdf'  \\) -delete" (f-parent curr-file)))
 
-       '("install"  "tlmgr --usermode install --with-doc" :read)
+       '("install"  ,(format "tlmgr %s install --with-doc" (if (eq 'darwin system-type) "--usermode" "")) :read)
        '("on-fly-pdflatex" "texliveonfly --compiler=pdflatex")
        `("on-fly-xelatex" ,(format "texliveonfly --compiler=xelatex %s" curr-file) :interactive)
        `("on-fly-lualatex" ,(format "texliveonfly --compiler=lualatex %s" curr-file) :interactive)
@@ -43,7 +43,7 @@
        '("version" "pdflatex --version")
        '("settings" "tlmgr conf")
        '("texdoc settings" "texdoc -f")
-       '("update"  "tlmgr --usermode update --all")
+       '("update"  ,(format "tlmgr %s update --all" (if (eq 'darwin system-type) "--usermode" "")))
        '("l3"       "fmtutil-user --all")
        '("find"     "kpsewhich -all" :read)
        '("fonts"   "updmap-user --listmaps")

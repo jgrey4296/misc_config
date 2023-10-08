@@ -5,23 +5,41 @@ i amsmath: AMS mathematical facilities for LaTeX
 i anysize: A simple package to set up document margins
 i arabxetex: An ArabTeX-like interface for XeLaTeX
 i atbegshi: Execute stuff at \shipout time
-i attachfile2: Attach files into PDF
 i attachfile2.universal-darwin: universal-darwin files of attachfile2
+i attachfile2: Attach files into PDF
 i atveryend: Hooks at the very end of a document
 i automata: Finite state machines, graphs and trees in MetaPost
 i auxhook: Hooks for auxiliary files
+i avantgar: URW 'Base 35' font pack for LaTeX
 i awesomebox: Draw admonition blocks in your documents, illustrated with FontAwesome icons
-i babel: Multilingual support for LaTeX, LuaLaTeX, XeLaTeX, and Plain TeX
+i babel-basque: Babel contributed support for Basque
+i babel-belarusian: Babel support for Belarusian
+i babel-bulgarian: Babel contributed support for Bulgarian
+i babel-czech: Babel support for Czech
+i babel-danish: Babel contributed support for Danish
+i babel-dutch: Babel contributed support for Dutch
 i babel-english: Babel support for English
+i babel-finnish: Babel support for Finnish
 i babel-french: Babel contributed support for French
 i babel-german: Babel support for documents written in German
+i babel-hungarian: Babel support for Hungarian (Magyar)
 i babel-italian: Babel support for Italian text
+i babel-norsk: Babel support for Norwegian
+i babel-polish: Babel support for Polish
+i babel-portuges: Babel support for Portuges
+i babel-russian: Russian language module for Babel
+i babel-serbian: Babel/Polyglossia support for Serbian
+i babel-serbianc: Babel module to support Serbian Cyrillic
 i babel-spanish: Babel support for Spanish
+i babel-swedish: Babel support for typesetting Swedish
+i babel-ukrainian: Babel support for Ukrainian
+i babel: Multilingual support for LaTeX, LuaLaTeX, XeLaTeX, and Plain TeX
 i babelbib: Multilingual bibliographies
 i bbcard: Bullshit bingo, calendar and baseball-score cards
 i beamer: A LaTeX class for producing presentations and slides
-i bibtex: Process bibliographies (bib files) for LaTeX or other formats
+i biblatex: Sophisticated Bibliographies in LaTeX
 i bibtex.universal-darwin: universal-darwin files of bibtex
+i bibtex: Process bibliographies (bib files) for LaTeX or other formats
 i bidi-atbegshi: Bidi-aware shipout macros
 i bidicontour: Bidi-aware coloured contour around text
 i bidipagegrid: Bidi-aware page grid in background
@@ -30,47 +48,72 @@ i bidishadowtext: Bidi-aware shadow text
 i bigintcalc: Integer calculations on very large numbers
 i bitset: Handle bit-vector datatype
 i blockdraw_mp: Block diagrams and bond graphs, with MetaPost
+i bookman: URW 'Base 35' font pack for LaTeX
 i bookmark: A new bookmark (outline) organization for hyperref
 i booktabs: Publication quality tables in LaTeX
 i bpolynomial: Drawing polynomial functions of up to order 3
 i breqn: Automatic line breaking of displayed equations
 i businesscard-qrcode: Business cards with QR-Code
+i capt-of: Captions on more than floats
 i caption: Customising captions in floating environments
 i carlisle: David Carlisle's small packages
+i cbfonts-fd: LaTeX font description files for the CB Greek fonts
+i cbfonts: Complete set of Greek fonts
+i charter: Charter fonts
+i chemgreek: Upright Greek letters in chemistry
+i churchslavonic: Typeset documents in Church Slavonic language using Unicode
 i cite: Improved citation handling in LaTeX
+i cm-super: CM-Super family of fonts
 i cm: Computer Modern fonts
 i cmap: Make PDF files searchable and copyable
 i cmarrows: MetaPost arrows and braces in the Computer Modern style
+i cmcyr: Computer Modern fonts with cyrillic extensions
+i cmextra: Knuth's local information
+i cmll: Symbols for linear logic
 i collection-basic: Essential programs and files
+i collection-fontsrecommended: Recommended fonts
+i collection-langcyrillic: Cyrillic
 i collection-latex: LaTeX fundamental packages
 i collection-latexrecommended: LaTeX recommended packages
 i collection-metapost: MetaPost and Metafont packages
 i collection-xetex: XeTeX and packages
 i colorprofiles: Collection of free ICC profiles
 i colortbl: Add colour to LaTeX tables
+i courier: URW 'Base 35' font pack for LaTeX
 i cqubeamer: LaTeX Beamer Template for Chongqing University
 i crop: Support for cropmarks
+i csquotes: Context sensitive quotation facilities
 i ctable: Flexible typesetting of table and figure floats using key/value directives
 i ctablestack: Catcode table stable support
+i currfile: Provide file name and path of input files
+i cyrillic: Support for Cyrillic fonts in LaTeX
+i cyrplain: Support for using T2 encoding
 i dehyph: German hyphenation patterns for traditional orthography
+i disser: Class and templates for typesetting dissertations in Russian
+i doi: Create correct hyperlinks for DOI numbers
 i drv: Derivation trees with MetaPost
 i dviincl: Include a DVI page into MetaPost output
-i dvipdfmx: An extended version of dvipdfm
 i dvipdfmx.universal-darwin: universal-darwin files of dvipdfmx
-i dvips: A DVI to PostScript driver
+i dvipdfmx: An extended version of dvipdfm
 i dvips.universal-darwin: universal-darwin files of dvips
+i dvips: A DVI to PostScript driver
 i ec: Computer modern fonts in T1 and TS1 encodings
 i emp: "Encapsulate" MetaPost figures in a document
 i enctex: A TeX extension that translates input on its way into TeX
+i enumitem: Control layout of itemize, enumerate, description
 i epsincl: Include EPS in MetaPost figures
 i epstopdf-pkg: Call epstopdf "on the fly"
+i eskd: Modern Russian typesetting
+i eskdx: Modern Russian typesetting
 i eso-pic: Add picture commands (or backgrounds) to every page
-i etex: An extended version of TeX, from the NTS project
 i etex-pkg: E-TeX support package
+i etex: An extended version of TeX, from the NTS project
 i etexcmds: Avoid name clashes with e-TeX commands
 i etoolbox: e-TeX tools for LaTeX
 i euenc: Unicode font encoding definitions for XeTeX
 i euler: Use AMS Euler fonts for math
+i euro-ce: Euro and CE sign font
+i euro: Provide Euro values for national currency amounts
 i eurosym: Metafont and macros for Euro sign
 i everysel: Provides hooks into \selectfont
 i everyshi: Take action at every \shipout
@@ -92,33 +135,57 @@ i fiziko: A MetaPost library for physics textbook illustrations
 i float: Improved interface for floating objects
 i font-change-xetex: Macros to change text and mathematics fonts in plain XeTeX
 i fontbook: Generate a font book
+i fonts-churchslavonic: Fonts for typesetting in Church Slavonic language
 i fontspec: Advanced font selection in XeLaTeX and LuaLaTeX
 i fontwrap: Bind fonts to specific unicode blocks
 i footmisc: A range of footnote options
 i footnotehyper: hyperref aware footnote.sty
 i fp: Fixed point arithmetic
+i fpl: SC and OsF fonts for URW Palladio L
 i garrigues: MetaPost macros for the reproduction of Garrigues' Easter nomogram
 i geometry: Flexible and complete interface to document dimensions
 i gettitlestring: Clean up title references
 i glyphlist: Adobe Glyph List and TeX extensions
 i gmp: Enable integration between MetaPost pictures and LaTeX
-i graphics: The LaTeX standard graphics bundle
+i gost: BibTeX styles to format according to GOST
+i gothic: A collection of old German-style fonts
 i graphics-cfg: Sample configuration files for LaTeX color and graphics
 i graphics-def: Colour and graphics option files
+i graphics: The LaTeX standard graphics bundle
 i grfext: Manipulate the graphics package's list of extensions
 i grffile: Extended file name support for graphics (legacy package)
 i hatching: MetaPost macros for hatching interior of closed paths
+i helvetic: URW 'Base 35' font pack for LaTeX
+i hershey-mp: MetaPost support for the Hershey font file format
 i hologo: A collection of logos with bookmark support
 i hopatch: Load patches for packages
+i huffman: Drawing binary Huffman trees with MetaPost and METAOBJ
 i hycolor: Implements colour for packages hyperref and bookmark
 i hyperref: Extensive support for hypertext in LaTeX
 i hyph-utf8: Hyphenation patterns expressed in UTF-8
 i hyphen-base: core hyphenation support files
+i hyphen-basque: Basque hyphenation patterns.
+i hyphen-belarusian: Belarusian hyphenation patterns.
+i hyphen-bulgarian: Bulgarian hyphenation patterns.
+i hyphen-churchslavonic: Church Slavonic hyphenation patterns.
+i hyphen-czech: Czech hyphenation patterns.
+i hyphen-danish: Danish hyphenation patterns.
+i hyphen-dutch: Dutch hyphenation patterns.
 i hyphen-english: English hyphenation patterns.
+i hyphen-finnish: Finnish hyphenation patterns.
 i hyphen-french: French hyphenation patterns.
 i hyphen-german: German hyphenation patterns.
+i hyphen-hungarian: Hungarian hyphenation patterns.
 i hyphen-italian: Italian hyphenation patterns.
+i hyphen-mongolian: Mongolian hyphenation patterns in Cyrillic script.
+i hyphen-norwegian: Norwegian Bokmal and Nynorsk hyphenation patterns.
+i hyphen-polish: Polish hyphenation patterns.
+i hyphen-portuguese: Portuguese hyphenation patterns.
+i hyphen-russian: Russian hyphenation patterns.
+i hyphen-serbian: Serbian hyphenation patterns.
 i hyphen-spanish: Spanish hyphenation patterns.
+i hyphen-swedish: Swedish hyphenation patterns.
+i hyphen-ukrainian: Ukrainian hyphenation patterns.
 i hyphenex: US English hyphenation exceptions file
 i ifplatform: Conditionals to test which platform is being used
 i iftex: Am I running under pdfTeX, XeTeX or LuaTeX?
@@ -130,8 +197,8 @@ i jknapltx: Miscellaneous packages by Joerg Knappen
 i knuth-lib: Core TeX and Metafont sources from Knuth
 i knuth-local: Knuth's local information
 i koma-script: A bundle of versatile classes and packages
-i kpathsea: Path searching library for TeX-related files
 i kpathsea.universal-darwin: universal-darwin files of kpathsea
+i kpathsea: Path searching library for TeX-related files
 i kvdefinekeys: Define keys for use in the kvsetkeys package
 i kvoptions: Key value format for package options
 i kvsetkeys: Key value parser with default handler support
@@ -139,87 +206,113 @@ i l3backend: LaTeX3 backend drivers
 i l3experimental: Experimental LaTeX3 concepts
 i l3kernel: LaTeX3 programming conventions
 i l3packages: High-level LaTeX3 concepts
-i latex: A TeX macro package that defines LaTeX
 i latex-base-dev: Development pre-release of the LaTeX kernel
-i latex-bin: LaTeX executables and man pages
 i latex-bin.universal-darwin: universal-darwin files of latex-bin
+i latex-bin: LaTeX executables and man pages
 i latex-firstaid-dev: Development pre-release of the LaTeX firstaid package
 i latex-fonts: A collection of fonts used in LaTeX distributions
 i latex-lab: LaTeX laboratory
+i latex: A TeX macro package that defines LaTeX
 i latexbug: Bug-classification for LaTeX related bugs
 i latexconfig: configuration files for LaTeX-related formats
 i latexmp: Interface for LaTeX-based typesetting in MetaPost
+i lcyw: Make Classic Cyrillic CM fonts accessible in LaTeX
 i letltxmacro: Let assignment for LaTeX macros
+i lettrine: Typeset dropped capitals
+i lh: Cyrillic fonts that support LaTeX standard encodings
+i lhcyr: A non-standard Cyrillic input scheme
 i lineno: Line numbers on paragraphs
 i listings: Typeset source code listings using LaTeX
-i lm: Latin modern fonts in outline formats
 i lm-math: OpenType maths fonts for Latin Modern
+i lm: Latin modern fonts in outline formats
+i logreq: Support for automation of the LaTeX workflow
+i lshort-bulgarian: Bulgarian translation of the "Short Introduction to LaTeX2e"
+i lshort-mongol: Short introduction to LaTeX, in Mongolian
+i lshort-russian: Russian introduction to LaTeX
+i lshort-ukr: Ukrainian version of the LaTeX introduction
 i ltxcmds: Some LaTeX kernel commands for general use
 i ltxmisc: Miscellaneous LaTeX packages, etc
 i lua-alt-getopt: Process application arguments the same way as getopt_long
 i lua-uni-algos: Unicode algorithms for LuaTeX
-i luahbtex: LuaTeX with HarfBuzz library for glyph shaping
 i luahbtex.universal-darwin: universal-darwin files of luahbtex
+i luahbtex: LuaTeX with HarfBuzz library for glyph shaping
 i lualibs: Additional Lua functions for LuaTeX macro programmers
-i luaotfload: OpenType 'loader' for Plain TeX and LaTeX
 i luaotfload.universal-darwin: universal-darwin files of luaotfload
-i luatex: The LuaTeX engine
+i luaotfload: OpenType 'loader' for Plain TeX and LaTeX
 i luatex.universal-darwin: universal-darwin files of luatex
+i luatex: The LuaTeX engine
 i luatexbase: Basic resource management for LuaTeX code
-i lwarp: Converts LaTeX to HTML
 i lwarp.universal-darwin: universal-darwin files of lwarp
+i lwarp: Converts LaTeX to HTML
 i makecmds: The new \makecommand command always (re)defines a command
-i makeindex: Makeindex development sources
 i makeindex.universal-darwin: universal-darwin files of makeindex
+i makeindex: Makeindex development sources
+i manfnt-font: Knuth's "manual" fonts
+i marginfix: Patch \marginpar to avoid overfull margins
+i marginnote: Notes in the margin, even where \marginpar fails
+i marvosym: Martin Vogel's Symbols (marvosym) font
+i mathpazo: Fonts to typeset mathematics to match Palatino
 i mathspec: Specify arbitrary fonts for mathematics in XeTeX
 i mathtools: Mathematical tools to use with amsmath
 i mcf2graph: Draw chemical structure diagrams with MetaPost
 i mdwtools: Miscellaneous tools by Mark Wooding
 i memoir: Typeset fiction, non-fiction and mathematical books
-i metafont: A system for specifying fonts
 i metafont.universal-darwin: universal-darwin files of metafont
+i metafont: A system for specifying fonts
 i metago: MetaPost output of Go positions
 i metalogo: Extended TeX logo macros
 i metaobj: MetaPost package providing high-level objects
 i metaplot: Plot-manipulation macros for use in MetaPost
-i metapost: A development of Metafont for creating graphics
 i metapost-colorbrewer: An implementation of the colorbrewer2.org colours for MetaPost
 i metapost.universal-darwin: universal-darwin files of metapost
+i metapost: A development of Metafont for creating graphics
 i metauml: MetaPost library for typesetting UML diagrams
+i mflogo-font: Metafont logo font
 i mflogo: LaTeX support for Metafont logo fonts
 i mfnfss: Packages to typeset oldgerman and pandora fonts in LaTeX
-i mfpic: Draw Metafont/post pictures from (La)TeX commands
 i mfpic4ode: Macros to draw direction fields and solutions of ODEs
-i mfware: Supporting tools for use with Metafont
+i mfpic: Draw Metafont/post pictures from (La)TeX commands
 i mfware.universal-darwin: universal-darwin files of mfware
+i mfware: Supporting tools for use with Metafont
+i mhchem: Typeset chemical formulae/equations and H and P statements
 i microtype: Subliminal refinements towards typographical perfection
 i minim-hatching: Create tiling patterns with the minim-mp MetaPost processor
 i modes: A collection of Metafont mode_def's
+i mongolian-babel: A language definition file for Mongolian in Babel
+i montex: Mongolian LaTeX
 i mp3d: 3D animations
 i mparrows: MetaPost module with different types of arrow heads
 i mpattern: Patterns in MetaPost
+i mpchess: Drawing chess boards and positions with MetaPost
 i mpcolornames: Extend list of predefined colour names for MetaPost
 i mpgraphics: Process and display MetaPost figures inline
-i mptopdf: mpost to PDF, native MetaPost graphics inclusion
+i mpman-ru: A Russian translation of the MetaPost manual
 i mptopdf.universal-darwin: universal-darwin files of mptopdf
+i mptopdf: mpost to PDF, native MetaPost graphics inclusion
 i mptrees: Probability trees with MetaPost
 i ms: Various LaTeX packages by Martin Schroder
 i na-position: Tables of relative positions of curves and asymptotes or tangents in Arabic documents
 i natbib: Flexible bibliography support
+i ncntrsbk: URW 'Base 35' font pack for LaTeX
+i needspace: Insert pagebreak if not enough space
 i newfloat: Define new floating environments
 i ntgclass: "European" versions of standard classes
+i numnameru: Converts a number to the russian spelled out name
 i oberdiek: A bundle of packages submitted by Heiko Oberdiek
 i pagesel: Select pages of a document for output
+i palatino: URW 'Base 35' font pack for LaTeX
 i parskip: Layout with zero \parindent, non-zero \parskip
+i pdfcolfoot: Separate color stack for footnotes with pdfTeX
 i pdfescape: Implements pdfTeX's escape features using TeX or e-TeX
 i pdflscape: Make landscape pages display as landscape
 i pdfmanagement-testphase: LaTeX PDF management testphase bundle
 i pdfpages: Include PDF documents in LaTeX
-i pdftex: A TeX extension for direct creation of PDF
 i pdftex.universal-darwin: universal-darwin files of pdftex
+i pdftex: A TeX extension for direct creation of PDF
 i pdftexcmds: LuaTeX support for pdfTeX utility functions
 i pgf: Create PostScript and PDF graphics in TeX
 i philokalia: A font to typeset the Philokalia Books
+i picinpar: Insert pictures into paragraphs
 i piechartmp: Draw pie-charts using MetaPost
 i plain: The Plain TeX format
 i polyglossia: An alternative to babel for XeLaTeX and LuaLaTeX
@@ -227,16 +320,23 @@ i psfrag: Replace strings in encapsulated PostScript figures
 i pslatex: Use PostScript fonts by default
 i psnfss: Font support for common PostScript fonts
 i pspicture: PostScript picture support
+i pst-eucl-translation-bg: Bulgarian translation of the pst-eucl documentation
+i pst-vectorian: Printing ornaments
 i ptext: A 'lipsum' for Persian
+i pxfonts: Palatino-like fonts in support of mathematics
 i ragged2e: Alternative versions of "ragged"-type commands
 i rcs: Use RCS (revision control system) tags in LaTeX documents
 i realscripts: Access OpenType subscript and superscript glyphs
 i refcount: Counter operations with label references
 i repere: Diagrams for school mathematics
+i repere: MetaPost macros for secondary school mathematics teachers
 i rerunfilecheck: Checksum based rerun checks on auxiliary files
 i revtex: Styles for various Physics Journals
 i roex: Metafont-PostScript conversions
 i roundrect: MetaPost macros for highly configurable rounded rectangles (optionally with text)
+i rsfs: Ralph Smith's Formal Script font
+i ruhyphen: Russian hyphenation
+i russ: LaTeX in Russian, without babel
 i sansmath: Maths in a sans font
 i scheme-basic: basic scheme (plain and latex)
 i scheme-infraonly: infrastructure-only scheme (no TeX at all)
@@ -245,8 +345,13 @@ i scheme-small: small scheme (basic + xetex, metapost, a few languages)
 i section: Modifying section commands in LaTeX
 i seminar: Make overhead slides
 i sepnum: Print numbers in a "friendly" format
+i serbian-apostrophe: Commands for Serbian words with apostrophes
+i serbian-date-lat: Updated date typesetting for Serbian
+i serbian-def-cyr: Serbian cyrillic localization
+i serbian-lig: Control ligatures in Serbian
 i setspace: Set space between lines
 i shapes: Draw polygons, reentrant stars, and fractions in circles with MetaPost
+i sidecap: Typeset captions sideways
 i simple-resume-cv: Template for a simple resume or curriculum vitae (CV), in XeLaTeX
 i simple-thesis-dissertation: Template for a simple thesis or dissertation (Ph.D. or master's degree) or technical report, in XeLaTeX
 i slideshow: Generate slideshow with MetaPost
@@ -255,61 +360,77 @@ i stringenc: Converting a string between different encodings
 i suanpan: MetaPost macros for drawing Chinese and Japanese abaci
 i subfig: Figures broken into subfigures
 i symbol: URW 'Base 35' font pack for LaTeX
-i synctex: engine-level feature synchronizing output and source
 i synctex.universal-darwin: universal-darwin files of synctex
+i synctex: engine-level feature synchronizing output and source
+i t2: Support for using T2 encoding
 i tetragonos: Four-Corner codes of Chinese characters
-i tex: A sophisticated typesetting engine
+i tex-gyre-math: Maths fonts to match tex-gyre text fonts
+i tex-gyre: TeX Fonts extending freely available URW fonts
 i tex-ini-files: Model TeX format creation files
 i tex.universal-darwin: universal-darwin files of tex
-i texdoc: Documentation access for TeX Live
+i tex: A sophisticated typesetting engine
 i texdoc.universal-darwin: universal-darwin files of texdoc
+i texdoc: Documentation access for TeX Live
 i texlive-common: TeX Live documentation (common elements)
 i texlive-en: TeX Live manual (English)
 i texlive-msg-translations: translations of the TeX Live installer and TeX Live Manager
-i texlive-scripts: TeX Live infrastructure programs
+i texlive-ru: TeX Live manual (Russian)
 i texlive-scripts.universal-darwin: universal-darwin files of texlive-scripts
-i texlive.infra: basic TeX Live infrastructure
+i texlive-scripts: TeX Live infrastructure programs
+i texlive-sr: TeX Live manual (Serbian)
 i texlive.infra.universal-darwin: universal-darwin files of texlive.infra
+i texlive.infra: basic TeX Live infrastructure
 i textcase: Case conversion ignoring mathematics, etc
 i textpath: Setting text along a path with MetaPost
 i threeddice: Create images of dice with one, two, or three faces showing, using MetaPost
-i thumbpdf: Thumbnails for pdfTeX and dvips/ps2pdf
 i thumbpdf.universal-darwin: universal-darwin files of thumbpdf
+i thumbpdf: Thumbnails for pdfTeX and dvips/ps2pdf
 i times: URW 'Base 35' font pack for LaTeX
 i tipa: Fonts and macros for IPA phonetics characters
-i tlshell: GUI frontend (tcl/tk-based) for tlmgr
 i tlshell.universal-darwin: universal-darwin files of tlshell
+i tlshell: GUI frontend (tcl/tk-based) for tlmgr
+i todonotes: Marking things to do in a LaTeX document
 i tools: The LaTeX standard tools bundle
 i translator: Easy translation of strings in LaTeX
+i txfonts: Times-like fonts in support of mathematics
 i typehtml: Typeset HTML directly from LaTeX
 i ucharcat: Implementation of the (new in 2015) XeTeX \Ucharcat command in lua, for LuaTeX
 i ucharclasses: Font actions in XeTeX according to what is being processed
+i ukrhyph: Hyphenation Patterns for Ukrainian
 i ulem: Package for underlining
 i underscore: Control the behaviour of "_" in text
 i unicode-bidi: Experimental unicode bidi package for XeTeX
 i unicode-data: Unicode data and loaders for TeX
 i unicode-math: Unicode mathematics support for XeTeX and LuaTeX
+i unimath-plain-xetex: OpenType math support in (plain) XeTeX
 i uniquecounter: Provides unlimited unique counter
 i unisugar: Define syntactic sugar for Unicode LaTeX
 i upquote: Show "realistic" quotes in verbatim
 i url: Verbatim with URL-sensitive line breaks
+i utopia: Adobe Utopia fonts
+i wasy-type1: Type 1 versions of wasy fonts
+i wasy: The wasy fonts (Waldi symbol fonts)
+i wasysym: LaTeX support for the wasy fonts
+i wrapfig: Produces figures which text can flow around
+i xargs: Define commands with many optional arguments
 i xcolor: Driver-independent color extensions for LaTeX and pdfLaTeX
-i xdvi: A DVI previewer for the X Window System
 i xdvi.universal-darwin: universal-darwin files of xdvi
+i xdvi: A DVI previewer for the X Window System
 i xebaposter: Create beautiful scientific Persian/Latin posters using TikZ
 i xechangebar: An extension of package changebar that can be used with XeLaTeX
 i xecolor: Support for color in XeLaTeX
 i xecyr: Using Cyrillic languages in XeTeX
+i xecyrmongolian: Basic support for the typesetting of Cyrillic Mongolian documents using (Xe|Lua)LaTeX
 i xeindex: Automatic index generation for XeLaTeX
-i xelatex-dev: (shortdesc missing)
 i xelatex-dev.universal-darwin: universal-darwin files of xelatex-dev
+i xelatex-dev: (shortdesc missing)
 i xesearch: A string finder for XeTeX
 i xespotcolor: Spot colours support for XeLaTeX
-i xetex: An extended variant of TeX for use with Unicode sources
 i xetex-itrans: Itrans input maps for use with XeLaTeX
 i xetex-pstricks: Running PSTricks under XeTeX
 i xetex-tibetan: XeTeX input maps for Unicode Tibetan
 i xetex.universal-darwin: universal-darwin files of xetex
+i xetex: An extended variant of TeX for use with Unicode sources
 i xetexconfig: crop.cfg for XeLaTeX
 i xetexfontinfo: Report font features in XeTeX
 i xetexko: Typeset Korean with Xe(La)TeX
@@ -317,5 +438,7 @@ i xevlna: Insert non-breakable spaces using XeTeX
 i xkeyval: Extension of the keyval package
 i xltxtra: "Extras" for LaTeX users of XeTeX
 i xunicode: Generate Unicode characters from accented glyphs
+i yfonts: Support for old German fonts
+i zapfchan: URW 'Base 35' font pack for LaTeX
 i zapfding: URW 'Base 35' font pack for LaTeX
 i zbmath-review-template: Template for a zbMATH Open review

@@ -2,7 +2,13 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("packages:lisp"
+(("android"
+ (filename . "/usr/lib/android-sdk/")
+ (front-context-string . "platform-tools\n ")
+ (rear-context-string . "0K Oct  7 10:32 ")
+ (position . 394)
+ (last-modified 25890 29237 85449 672000))
+("packages:lisp"
  (filename . "~/github/__configs/modules/lang-weakly-typed/lisp-langs/packages-reference.org")
  (front-context-string . "#+TITLE: Lisp Pa")
  (rear-context-string)

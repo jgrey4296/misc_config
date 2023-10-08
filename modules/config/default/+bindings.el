@@ -14,7 +14,9 @@
        :n "?" #'+jg-default-debug-auto-mode
       )
       (:prefix "o"
-       :desc "Reveal in Finder"           "f"     #'+macos/reveal-in-finder
+       (:when (eq 'darwin system-type)
+         :desc "Reveal in Finder"           "f"     #'+macos/reveal-in-finder
+         )
        )
       )
 

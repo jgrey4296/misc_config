@@ -28,10 +28,12 @@ case "$OSTYPE" in
         ;;
     linux*)
         STUDIO_HOME="/snap/android-studio/current"
-        ANDROID_HOME="/usr/lib/android-sdk"
+        # ANDROID_HOME="/usr/lib/android-sdk"
+        ANDROID_HOME="$HOME/android"
         ANDROID_USER_HOME="$JG_CACHE/android"
         ADB_VENDOR_KEYS="$JG_CACHE/secrets/android"
-        ANDROID_TOOLS="$ANDROID_HOME/build-tools/$BUILD_TOOLS/bin"
+        ANDROID_TOOLS="$ANDROID_HOME/cmdline-tools/latest/bin"
+        ANDROID_TOOLS="$ANDROID_HOME/build-tools/$BUILD_TOOLS/bin:$ANDROID_TOOLS"
         ANDROID_TOOLS="$ANDROID_HOME/platform-tools:$ANDROID_TOOLS"
         ;;
 esac

@@ -45,7 +45,7 @@
  (rear-context-string . "74 Jun 19 21:49 ")
  (position . 183))
 ("tex"
- (filename . "/usr/local/texlive/")
+ (filename . "~/.config/jg/templates/tex-config")
  (front-context-string)
  (rear-context-string . "48 Mar 14 18:20 ")
  (position . 215))

@@ -1,4 +1,6 @@
 -- (Public domain.)
+-- Symlink into /usr/local/texlive/YYYY/
+--
 -- This texmfcnf.lua file should contain only your personal changes from the
 -- original texmfcnf.lua (for example, as chosen in the installer).
 --
@@ -7,13 +9,13 @@
 -- the distributed file (.../texlive/YYYY/texmf-dist/web2c/texmfcnf.lua).
 -- And include *only* your changed values, not a copy of the whole thing!
 
-return { 
+return {
   content = {
     variables = {
-      TEXMFSYSVAR = "/home/john/.cache/texlive/2023/sys",
-      TEXMFHOME = "~/.cache/texlive/2023/home",
-      TEXMFVAR = "~/.cache/texlive/2023/var",
-      TEXMFCONFIG = "~/.config/jg/templates/tex-config",
+      TEXMFLOCAL = "selfautoparent:/texmf-local",
+      TEXMFHOME = "~/Library/texmf",
+      TEXMFVAR = "~/Library/texlive/2023basic/texmf-var",
+      TEXMFCONFIG = "~/Library/texlive/2023basic/texmf-config",
     },
   },
 }

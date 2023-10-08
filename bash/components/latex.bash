@@ -11,8 +11,6 @@ case "$OSTYPE" in
         MANPATH="/Library/TeX/Distributions/.DefaultTeX/Contents/Man:$MANPATH"
         ;;
    linux*)
-
+       PATH="$HOME/.local/texlive/2023/bin/x86_64-linux:$PATH"
        ;;
 esac
-
-# TEXMFCNF="$HOME/.config/jg/templates/tex-config/"

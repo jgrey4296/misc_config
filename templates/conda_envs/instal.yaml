@@ -164,4 +164,3 @@ dependencies:
   - zstd=1.5.5=hc035e20_0
   - pip:
       - instal==0.0.1
-prefix: /usr/local/Caskroom/mambaforge/base/envs/instal

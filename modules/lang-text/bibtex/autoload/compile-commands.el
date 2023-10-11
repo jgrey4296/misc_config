@@ -50,7 +50,10 @@
        `("system-fonts" ,(format "system_profiler -json SPFontsDataType > %s" (expand-file-name "~/.cache/fonts/fonts.json")))
 
        (when (f-exists? (f-swap-ext curr-file "pdf"))
-         `("open"     ,(format "open -a Preview -nF %s" (f-swap-ext curr-file "pdf"))
+         `("open"     ,(if (eq system-type 'darwin)
+                           (format "open -a Preview -nF %s" (f-swap-ext curr-file "pdf"))
+                         (format "open %s" (f-swap-ext curr-file "pdf"))
+                         )
            )
          )
      )

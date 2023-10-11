@@ -97,7 +97,7 @@
 
 ;;-- workspace management
 (progn
-  (transient-make-call! proj-root            "`"   "Project Root" (find-file (doom-project-root)))
+  (transient-make-call! proj-root            "`"   "Project Root" (find-file (projectile-project-root)))
 
   (transient-make-int-call! proj-add         "a"   "Add Project"               #'projectile-add-known-project)
   (transient-make-int-call! proj-clean       "c"   "Clean Project"             #'+jg-projects-clean)

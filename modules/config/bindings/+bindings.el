@@ -204,7 +204,8 @@
 ;;-- <leader> q --- quit/restart/session
 (map! :leader
       :prefix ("q" . "quit/restart")
-      :desc "Quit Emacs"                   "q" #'kill-emacs
+      :desc "Quit Emacs"                   "q" #'save-buffers-kill-emacs
+      :desc "Kill Emacs"                   "K" #'kill-emacs
       :desc "Pause Emacs"                  "p" #'suspend-emacs
       :desc "Kill Server"                  "s" (cmd! (server-force-stop))
       :desc "Restart emacs server"         "S" #'+default/restart-server

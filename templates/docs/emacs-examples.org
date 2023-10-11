@@ -1,0 +1,42 @@
+:PROPERTIES:
+:ID:       e103c1bc-be8e-4451-8e43-a93d9e35e692
+:END:
+#+title:    Examples
+#+subtitle: Samples of Emacs dotfiles, concepts, and sub-projects
+#+property: header-args:elisp :results pp
+
+* TODO Emacs
+This section is dedicated to examples of concepts and libraries that can benefit
+all Emacs users, whether or not they use Doom.
+
+** TODO Emacs Lisp :demos:
+**** file-name-with-extension
+:PROPERTIES:
+:added: 28.1
+:END:
+#+begin_src emacs-lisp
+(file-name-with-extension "some/file.cpp" "h")
+#+end_src
+
+#+RESULTS:
+: some/file.h
+
+**** file-name-concat
+:PROPERTIES:
+:added: 28.1
+:END:
+#+begin_src emacs-lisp
+(file-name-concat user-emacs-directory "lisp" "file.el")
+#+end_src
+
+#+begin_src emacs-lisp
+(file-name-concat "foo" "bar" "baz")
+#+end_src
+
+#+RESULTS:
+: foo/bar/baz
+
+** TODO Templates
+*** TODO Emacs package
+*** TODO Dynamic module
+

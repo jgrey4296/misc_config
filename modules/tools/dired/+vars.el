@@ -111,7 +111,9 @@
 
 ;;-- open cmd
 (setq dired-guess-shell-alist-user
-      `(("\\.\\(?:docx\\|pdf\\|djvu\\|eps\\)\\'"               "open -a Preview -nF")
+      `(("\\.\\(?:docx\\|pdf\\|djvu\\|eps\\)\\'"               ,(if (eq system-type 'darwin)
+                                                                    "open -a Preview -nF"
+                                                                  "evince"))
         ("\\.\\(?:jpe?g\\|png\\|gif\\|xpm\\)\\'"               "open")
         ("\\.\\(?:xcf\\)\\'"                                   "open")
         ("\\.csv\\'"                                           "open")
@@ -120,7 +122,8 @@
         ("\\.\\(?:rm\\|rmvb\\|ogv\\)\\(?:\\.part\\)?\\'"       "open")
         ("\\.\\(?:mp3\\|flac\\)\\'"                            "open")
         ("\\.html?\\'"                                         "open")
-        ("\\.md\\'"                                            "open"))
+        ("\\.md\\'"                                            "open")
+        )
       )
 ;;-- end open cmd
 

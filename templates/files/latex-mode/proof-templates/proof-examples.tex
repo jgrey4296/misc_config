@@ -40,7 +40,7 @@ A Simple longform proof tree, and then one using the shorthand.
 
 \begin{figure*}[h]
 \begin{prooftree}
-                \AxiomC{$\Gamma \Delta \vdash A  blah$}
+                \AxiomC{$\Gamma \Delta \vdash A$ blah}
             \UnaryInfC{$B \to C$}
         \RightLabel{Label C}
         \UnaryInfC{C}
@@ -51,7 +51,7 @@ A Simple longform proof tree, and then one using the shorthand.
 \BinaryInfC{$\bot$}
 \end{prooftree}
 \centering
-Proof 1
+\caption{Proof 1}
 \end{figure*}
 
 \begin{figure*}[h]
@@ -73,17 +73,19 @@ Proof 1
 Next is a derivation tree.
 
 \begin{equation} \label{eq:f1}
-\begin{fitch}
-  \fa   blah                         &  testval  \\
-  \fh  aweigj                                    \\
-  \fa \fp jiaoweg                                \\
-  \fs \fr  sub
-  % \fa  \fh  bloo                               \\
-  % \fa  \fa  \fitchmodalh{blah}  blee           \\
-  % \fa  \fa  \fa   aweg                         \\
-  % \fa  \fa  \fa   joaiweg                      \\
-  % \fa  \fa  \fa   \bot                         \\
-\end{fitch}
+\begin{nd}
+  \hypo {top} {A}
+  \hypo {2} {A \multimapinv B}
+  \open[a,b]
+  \hypo {x} {another}
+  \have {y} {y} \by {blah} {}
+  \open
+  \hypo {as} {Q}
+  \have {z} {C} \by {reasons} {top}
+  \have {z} {C} \by {reasons} {top}
+  \close
+  \close
+\end{nd}
 \end{equation}
 
 \break
@@ -93,12 +95,12 @@ And finally an nd3 ``ND'' environment proof.
 Referring back to ~\eqref{eq:f1}, blah blah blah.
 
 
-\begin{ND}[Test Proof][testLabel][][][]
-  \marginpar{A comment on a proof}
+\begin{NatD}[Test Proof][testLabel][][][]
   \ndl{}{test}{obv}\label{1}
+  \marginpar{A comment on a proof}
   \ndl{\ref{1}}{second}{A}\label{2}
   \ndl{\ref{1},\ref{2}}{third}{B}\label{3}
-\end{ND}
+\end{NatD}
 
 
 

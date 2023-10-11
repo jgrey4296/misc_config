@@ -2,7 +2,19 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("android"
+(("fonts"
+ (filename . "/media/john/data/library/assets/fonts/")
+ (front-context-string . "CompassGold.ttf\n")
+ (rear-context-string . "8K Oct  5 02:00 ")
+ (position . 131)
+ (last-modified 25891 31067 404131 526000))
+("assets"
+ (filename . "/media/john/data/library/assets/")
+ (front-context-string . "fonts\n  drwxrwxr")
+ (rear-context-string . "0K Oct  5 02:00 ")
+ (position . 286)
+ (last-modified 25891 31064 804446 11000))
+("android"
  (filename . "/usr/lib/android-sdk/")
  (front-context-string . "platform-tools\n ")
  (rear-context-string . "0K Oct  7 10:32 ")

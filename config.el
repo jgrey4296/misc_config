@@ -34,6 +34,7 @@
       pyvenv-default-virtual-env-name (expand-file-name "~/.cache/mamba/envs/")
       server-auth-dir                 (expand-file-name "~/.cache/secrets/emacs")
       native-comp-eln-load-path       (list (expand-file-name "cache/eln" doom-local-dir))
+      docs-dir                        (expand-file-name "templates/docs" doom-user-dir)
       )
 
 (add-to-list 'load-path (expand-file-name "~/.local/modules"))

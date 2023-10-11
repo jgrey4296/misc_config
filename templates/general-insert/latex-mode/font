@@ -26,7 +26,7 @@ Text display changes:
 \fontsize{12}{15}     # pdflatex
 \selectfont           # pdflatex
 
-\usepackage{fontspec} # for xelatex and lualatex, allos OTF and TTF
+\usepackage{fontspec} # for xelatex and lualatex, allows OTF and TTF
 \usepackage{xunicode} # for xelatex
 \usepackage{xltextra} # for xelatex
 \setmainfont{}        # for xelatex and lualatex

@@ -41,9 +41,9 @@
        '("settings" "tlmgr conf")
        '("texdoc settings" "texdoc -f")
        `("update"  ,(format "tlmgr %s update --all" (if (eq 'darwin system-type) "--usermode" "")))
-       '("l3"       "fmtutil-user --all")
-       '("find"     "kpsewhich -all" :read)
-       '("fonts"   "updmap-user --listmaps")
+       `("l3"       ,(format "fmtutil %s --all" (if (eq 'darwin system-type) "-user" "--sys")))
+       `("find"     "kpsewhich -all" :read)
+       `("fonts"   "updmap-user --listmaps")
        `("system-fonts" ,(format "system_profiler -json SPFontsDataType > %s" (expand-file-name "~/.cache/fonts/fonts.json")))
 
        (when (f-exists? (f-swap-ext curr-file "pdf"))

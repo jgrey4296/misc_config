@@ -238,10 +238,12 @@ Adapted from URL `https://www.reddit.com/r/emacs/comments/d7x7x8/finally_fixing_
 
 Intended as :around advice for `elisp-demos--search'."
   (let ((org-inhibit-startup t)
+        (ex-file (expand-file-name "emacs-examples.org" doom-docs-dir))
         enable-dir-local-variables
         org-mode-hook)
     (or (funcall fn symbol)
-        (with-file-contents! (doom-path doom-docs-dir "examples.org")
+        (when (f-exists? ex-file)
+        (with-file-contents! ex-file
           (save-excursion
             (when (re-search-backward
                    (format "^\\*+[ \t]+\\(?:TODO \\)?%s$"
@@ -255,4 +257,4 @@ Intended as :around advice for `elisp-demos--search'."
                                    (line-beginning-position)
                                  (point-max))))))
                 (unless (string-blank-p demos)
-                  demos))))))))
+                  demos)))))))))

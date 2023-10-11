@@ -202,4 +202,3 @@ dependencies:
       - wordcloud==1.9.1.1
       - xsdata==22.12
       - zope-interface==6.0
-prefix: /usr/local/Caskroom/mambaforge/base/envs/code

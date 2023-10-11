@@ -11,7 +11,9 @@
       :desc "Carousel Control"         "R"     #'transient-carousel
       :desc "Workspace Counsel"        "w RET" #'+jg-workspaces-ivy
       (:prefix ("w" . "Windows")
-       :desc "Delete workspace"             "DEL" #'+workspace/delete
+       :desc "Delete workspace"             "DEL"   #'+workspace/delete
+       :desc "Workspace Control"            "w"     #'transient-workspace
+       :desc "Goto Root"                    "`"     (cmd! (find-file (projectile-project-root)))
        )
       (:prefix "c"
        :desc "compile in project"           "c"  #'projectile-compile-project

@@ -173,4 +173,3 @@ dependencies:
       - sh==2.0.4
       - twisted==22.10.0
       - zope-interface==6.0
-prefix: /usr/local/Caskroom/mambaforge/base/envs/doot-dev

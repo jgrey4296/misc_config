@@ -11,7 +11,7 @@ DOOMDIR="$HOME/.config/jg/"
 # LOCS
 case "$OSTYPE" in
     darwin*) 
-        ENAT_DIR="$HOME/github/_libs/lisp/doom_native"
+        ENAT_DIR="$HOME/github/_libs/lisp/doomemacs"
         ENAT_BIN="/usr/local/Cellar/emacs-plus@28/28.2/bin/emacs"
         ;;
 

@@ -1,8 +1,9 @@
 jgdebug Setting Initial Path
 
-export JG_CACHE="$HOME/.cache"
+export BASE_CACHE="$HOME/.cache"
+export BASE_CONFIG="$HOME/.config"
 export JG_CONFIG="$HOME/.config/jg"
-export GH_CONFIG_DIR="$JG_CONFIG/gh"
+export GH_CONFIG_DIR="$BASE_CONFIG/gh"
 
 PATH="/jg_path"
 
@@ -37,5 +38,4 @@ esac
 # https://www.howtogeek.com/682871/how-to-create-a-man-page-on-linux/
 MANPATH="/usr/local/man:/usr/local/share/man:/usr/share/man"
 MANPATH="$HOME/.config/jg/templates/man/main:$MANPATH"
-
 INFOPATH=""

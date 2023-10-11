@@ -12,5 +12,6 @@ case "$OSTYPE" in
         ;;
    linux*)
        PATH="$HOME/.local/texlive/2023/bin/x86_64-linux:$PATH"
+       MANPATH="$HOME/.local/texlive/2023/texmf-dist/doc/man:$MANPATH"
        ;;
 esac

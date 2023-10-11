@@ -34,7 +34,7 @@ case "$OSTYPE" in
         ;;
     linux*)
         export MAMBA_EXE="${HOME}/.local/bin/micromamba";
-        export MAMBA_ROOT_PREFIX="${JG_CACHE}/mamba";
+        export MAMBA_ROOT_PREFIX="${BASE_CACHE}/mamba";
         __mamba_setup="$($MAMBA_EXE shell hook --shell bash --root-prefix $MAMBA_ROOT_PREFIX 2> /dev/null)"
         if [ $? -eq 0 ]; then
             echo "Running setup"

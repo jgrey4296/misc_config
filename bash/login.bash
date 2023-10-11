@@ -11,7 +11,7 @@ source "$HOME/.config/jg/bash/_basic_utils.bash"
 source "$HOME/.config/jg/bash/_base_path.bash"
 
 case "$OSTYPE" in 
-	darwin*) source "$HOME/.config/jg/bash/_aliases.bash"
+	darwin*) source "$HOME/.config/jg/bash/_aliases.mac.bash"
 		 jgdebug "Activating components"
 		 for fname in $(find "$HOME/.config/jg/bash/components" -type f -name "*.bash" -not -regex ".+?/_.+?\.bash")
 		 do
@@ -20,7 +20,7 @@ case "$OSTYPE" in
 		 done 
 		 jgdebug "Setting up Conda"
 		 source "$HOME/.config/jg/bash/conda.bash" ;;
-	linux*)
+	linux*) source "$HOME/.config/jg/bash/_aliases.linux.bash"
 		 for fname in $(find "$HOME/.config/jg/bash/components" -type f -name "*.bash" -not -regex ".+?/_.+?\.bash")
 		 do
 		     jgdebug "-- Sourcing: $fname"

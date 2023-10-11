@@ -10,10 +10,10 @@
 return { 
   content = {
     variables = {
-      TEXMFSYSVAR = "/home/john/.cache/texlive/2023/sys",
-      TEXMFHOME = "~/.cache/texlive/2023/home",
-      TEXMFVAR = "~/.cache/texlive/2023/var",
-      TEXMFCONFIG = "~/.config/jg/templates/tex-config",
+      TEXMFSYSVAR = "$HOME/.cache/texlive/2023/sys",
+      TEXMFHOME = "$HOME/.cache/texlive/2023/home",
+      TEXMFVAR = "$HOME/.cache/texlive/2023/var",
+      TEXMFCONFIG = "$HOME/.config/jg/templates/tex-config",
     },
   },
 }

@@ -30,8 +30,8 @@ case "$OSTYPE" in
         STUDIO_HOME="/snap/android-studio/current"
         # ANDROID_HOME="/usr/lib/android-sdk"
         ANDROID_HOME="$HOME/android"
-        ANDROID_USER_HOME="$JG_CACHE/android"
-        ADB_VENDOR_KEYS="$JG_CACHE/secrets/android"
+        ANDROID_USER_HOME="$BASE_CACHE/android"
+        ADB_VENDOR_KEYS="$BASE_CACHE/secrets/android"
         ANDROID_TOOLS="$ANDROID_HOME/cmdline-tools/latest/bin"
         ANDROID_TOOLS="$ANDROID_HOME/build-tools/$BUILD_TOOLS/bin:$ANDROID_TOOLS"
         ANDROID_TOOLS="$ANDROID_HOME/platform-tools:$ANDROID_TOOLS"
@@ -40,10 +40,10 @@ esac
 
 
 jgdebug "Setting up SDKMAN"
-SDKMAN_DIR="$JG_CACHE/sdkman"
+SDKMAN_DIR="$BASE_CACHE/sdkman"
 
 jgdebug "Setting Gradle"
-GRADLE_USER_HOME="$JG_CACHE/gradle"
+GRADLE_USER_HOME="$BASE_CACHE/gradle"
 
 jgdebug "Setting Jason"
 JASON_HOME="$HOME/github/_libs/ai/jason/build"

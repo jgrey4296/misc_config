@@ -1,0 +1,227 @@
+## mbsyncrc.linux -*- mode: Conf[Space] -*-
+# mbsyncrc based on
+# http://www.ict4g.net/adolfo/notes/2014/12/27/EmacsIMAP.html
+
+# FOR PASSCMD: escape backslashes
+
+##-- johngrey
+IMAPAccount johngrey
+Host imap.gmail.com
+User johngrey4296@gmail.com
+PassCmd "cat ~/.config/secrets/mail/.authinfo | sed -n -E 's/^machine.*? johngrey4296@gmail.com password (.+)/\\1/p'"
+AuthMechs LOGIN
+SSLType IMAPS
+SSLVersions TLSv1.2
+CertificateFile /home/john/.config/secrets/mail/gmail.crt
+CertificateFile /home/john/.config/secrets/mail/google.crt
+CertificateFile /home/john/.config/secrets/mail/google_root.crt
+
+# REMOTE STORAGE
+IMAPStore johngrey-remote
+Account johngrey
+
+# LOCAL STORAGE
+MaildirStore johngrey-local
+Path ~/.cache/mail/johngrey/
+Inbox  ~/.cache/mail/johngrey/inbox
+
+Channel johngrey-inbox
+Far :johngrey-remote:
+Near :johngrey-local:
+Patterns "INBOX"
+Create Both
+Expunge Both
+SyncState *
+
+Channel johngrey-sent
+Far :johngrey-remote:"[Gmail]/Sent Mail"
+Near :johngrey-local:"sent"
+Create Both
+Expunge Both
+SyncState *
+
+Group johngrey
+Channel johngrey-inbox
+Channel johngrey-sent
+
+##-- end johngrey
+
+##-- jgrey
+IMAPAccount jgrey
+Host imap.gmail.com
+User jgrey4296@gmail.com
+PassCmd "cat ~/.config/secrets/mail/.authinfo | sed -n -E 's/^machine.*? jgrey4296@gmail.com password (.+)/\\1/p'"
+AuthMechs LOGIN
+SSLType IMAPS
+SSLVersions TLSv1.2
+CertificateFile /home/john/.config/secrets/mail/gmail.crt
+CertificateFile /home/john/.config/secrets/mail/google.crt
+CertificateFile /home/john/.config/secrets/mail/google_root.crt
+
+# REMOTE STORAGE
+IMAPStore jgrey-remote
+Account jgrey
+
+# LOCAL STORAGE
+MaildirStore jgrey-local
+Path ~/.cache/mail/jgrey/
+Inbox  ~/.cache/mail/jgrey/inbox
+
+Channel jgrey-inbox
+Far :jgrey-remote:
+Near :jgrey-local:
+Patterns "INBOX"
+Create Both
+Expunge Both
+SyncState *
+
+Channel jgrey-sent
+Far :jgrey-remote:"[Gmail]/Sent Mail"
+Near :jgrey-local:"sent"
+Create Both
+Expunge Both
+SyncState *
+
+Group jgrey
+Channel jgrey-inbox
+Channel jgrey-sent
+
+
+##-- end jgrey
+
+##-- jgnp1
+IMAPAccount jgnp1
+Host imap.gmail.com
+User jgrey.n.plus.one@gmail.com
+PassCmd "cat ~/.config/secrets/mail/.authinfo | sed -n -E 's/^machine.*? jgrey.n.plus.one@gmail.com password (.+)/\\1/p'"
+AuthMechs LOGIN
+SSLType IMAPS
+SSLVersions TLSv1.2
+CertificateFile /home/john/.config/secrets/mail/gmail.crt
+CertificateFile /home/john/.config/secrets/mail/google.crt
+CertificateFile /home/john/.config/secrets/mail/google_root.crt
+
+# REMOTE STORAGE
+IMAPStore jgnp1-remote
+Account jgnp1
+
+# LOCAL STORAGE
+MaildirStore jgnp1-local
+Path ~/.cache/mail/jgnp1/
+Inbox  ~/.cache/mail/jgnp1/inbox
+
+Channel jgnp1-inbox
+Far :jgnp1-remote:
+Near :jgnp1-local:
+Patterns "INBOX"
+Create Both
+Expunge Both
+SyncState *
+
+Channel jgnp1-sent
+Far :jgnp1-remote:"[Gmail]/Sent Mail"
+Near :jgnp1-local:"sent"
+Create Both
+Expunge Both
+SyncState *
+
+Group jgnp1
+Channel jgnp1-inbox
+Channel jgnp1-sent
+##-- end jgnp1
+
+##-- b42
+IMAPAccount b42
+Host imap.gmail.com
+User belial42@gmail.com
+PassCmd "cat ~/.config/secrets/mail/.authinfo | sed -n -E 's/^machine.*? belial42@gmail.com password (.+)/\\1/p'"
+AuthMechs LOGIN
+SSLType IMAPS
+SSLVersions TLSv1.2
+CertificateFile /home/john/.config/secrets/mail/gmail.crt
+CertificateFile /home/john/.config/secrets/mail/google.crt
+CertificateFile /home/john/.config/secrets/mail/google_root.crt
+
+# REMOTE STORAGE
+IMAPStore b42-remote
+Account b42
+
+# LOCAL STORAGE
+MaildirStore b42-local
+Path ~/.cache/mail/b42/
+Inbox  ~/.cache/mail/b42/inbox
+
+Channel b42-inbox
+Far :b42-remote:
+Near :b42-local:
+Patterns "INBOX"
+Create Both
+Expunge Both
+SyncState *
+
+Channel b42-sent
+Far :b42-remote:"[Gmail]/Sent Mail"
+Near :b42-local:"sent"
+Create Both
+Expunge Both
+SyncState *
+
+Group b42
+Channel b42-inbox
+Channel b42-sent
+
+##-- end b42
+
+##-- jgsoe
+IMAPAccount jgsoe
+Host imap.gmail.com
+User jgrey@soe.ucsc.edu
+PassCmd "cat ~/.config/secrets/mail/.authinfo | sed -n -E 's/^machine.*? jgrey@soe.ucsc.edu password (.+)/\\1/p'"
+AuthMechs LOGIN
+SSLType IMAPS
+SSLVersions TLSv1.2
+CertificateFile /home/john/.config/secrets/mail/gmail.crt
+CertificateFile /home/john/.config/secrets/mail/google.crt
+CertificateFile /home/john/.config/secrets/mail/google_root.crt
+
+# REMOTE STORAGE
+IMAPStore jgsoe-remote
+Account jgsoe
+
+# LOCAL STORAGE
+MaildirStore jgsoe-local
+Path ~/.cache/mail/jgsoe/
+Inbox  ~/.cache/mail/jgsoe/inbox
+
+Channel jgsoe-inbox
+Far :jgsoe-remote:
+Near :jgsoe-local:
+Patterns "INBOX"
+Create Both
+Expunge Both
+SyncState *
+
+Channel jgsoe-sent
+Far :jgsoe-remote:"[Gmail]/Sent Mail"
+Near :jgsoe-local:"sent"
+Create Both
+Expunge Both
+SyncState *
+
+Group jgsoe
+Channel jgsoe-inbox
+Channel jgsoe-sent
+
+##-- end jgsoe
+
+Group everything
+Channel johngrey-inbox
+Channel johngrey-sent
+Channel jgrey-inbox
+Channel jgrey-sent
+Channel jgnp1-inbox
+Channel jgnp1-sent
+Channel b42-inbox
+Channel b42-sent
+Channel jgsoe-inbox
+Channel jgsoe-sent

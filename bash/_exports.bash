@@ -2,9 +2,9 @@
 
 jgdebug "Setting Exports"
 
-export HISTFILE="$JG_CACHE/logs/bash_history"
-export LESSHISTFILE="$JG_CACHE/logs/lesshst"
-export NODE_REPL_HISTORY="$JG_CACHE/logs/node_repl_history"
+export HISTFILE="$BASE_CACHE/logs/bash_history"
+export LESSHISTFILE="$BASE_CACHE/logs/lesshst"
+export NODE_REPL_HISTORY="$BASE_CACHE/logs/node_repl_history"
 
 export PATH
 export EDITOR
@@ -38,6 +38,14 @@ export GRADLE_USER_HOME
 export RUSTUP_HOME
 export CARGO_HOME
 export SDKMAN_DIR
+export GNUPGHOME
+export MUHOME
+export MAILDIR
+export SOAR_HOME
+export CLIPS_HOME
+export CEPTRE_HOME
+export make_jobs
+export CMAKE_BUILD_PARALLEL_LEVEL
 
 export BASH_SILENCE_DEPRECATION_WARNING=1
 

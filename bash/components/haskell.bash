@@ -6,4 +6,4 @@ alias whaskell="ghci -Wall -fwarn-name-shadowing"
 alias hs="haskell"
 
 CABAL_CONFIG="$HOME/.cabalrc"
-CABAL_DIR="$JG_CACHE/cabal"
+CABAL_DIR="$BASE_CACHE/cabal"

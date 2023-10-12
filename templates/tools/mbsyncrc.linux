@@ -8,7 +8,7 @@
 IMAPAccount johngrey
 Host imap.gmail.com
 User johngrey4296@gmail.com
-PassCmd "cat ~/.config/secrets/mail/.authinfo | sed -n -E 's/^machine.*? johngrey4296@gmail.com password (.+)/\\1/p'"
+PassCmd "gpg --batch -dq --no-tty ~/.config/secrets/mail/.authinfo | sed -n -E 's/^machine.*? johngrey4296@gmail.com password (.+)/\\1/p'"
 AuthMechs LOGIN
 SSLType IMAPS
 SSLVersions TLSv1.2
@@ -32,6 +32,7 @@ Patterns "INBOX"
 Create Both
 Expunge Both
 SyncState *
+MaxMessages 1000
 
 Channel johngrey-sent
 Far :johngrey-remote:"[Gmail]/Sent Mail"
@@ -39,6 +40,7 @@ Near :johngrey-local:"sent"
 Create Both
 Expunge Both
 SyncState *
+MaxMessages 1000
 
 Group johngrey
 Channel johngrey-inbox
@@ -50,7 +52,7 @@ Channel johngrey-sent
 IMAPAccount jgrey
 Host imap.gmail.com
 User jgrey4296@gmail.com
-PassCmd "cat ~/.config/secrets/mail/.authinfo | sed -n -E 's/^machine.*? jgrey4296@gmail.com password (.+)/\\1/p'"
+PassCmd "gpg --batch -dq --no-tty ~/.config/secrets/mail/.authinfo | sed -n -E 's/^machine.*? jgrey4296@gmail.com password (.+)/\\1/p'"
 AuthMechs LOGIN
 SSLType IMAPS
 SSLVersions TLSv1.2
@@ -74,6 +76,7 @@ Patterns "INBOX"
 Create Both
 Expunge Both
 SyncState *
+MaxMessages 1000
 
 Channel jgrey-sent
 Far :jgrey-remote:"[Gmail]/Sent Mail"
@@ -81,6 +84,7 @@ Near :jgrey-local:"sent"
 Create Both
 Expunge Both
 SyncState *
+MaxMessages 1000
 
 Group jgrey
 Channel jgrey-inbox
@@ -93,7 +97,7 @@ Channel jgrey-sent
 IMAPAccount jgnp1
 Host imap.gmail.com
 User jgrey.n.plus.one@gmail.com
-PassCmd "cat ~/.config/secrets/mail/.authinfo | sed -n -E 's/^machine.*? jgrey.n.plus.one@gmail.com password (.+)/\\1/p'"
+PassCmd "gpg --batch -dq --no-tty ~/.config/secrets/mail/.authinfo | sed -n -E 's/^machine.*? jgrey.n.plus.one@gmail.com password (.+)/\\1/p'"
 AuthMechs LOGIN
 SSLType IMAPS
 SSLVersions TLSv1.2
@@ -117,6 +121,7 @@ Patterns "INBOX"
 Create Both
 Expunge Both
 SyncState *
+MaxMessages 1000
 
 Channel jgnp1-sent
 Far :jgnp1-remote:"[Gmail]/Sent Mail"
@@ -124,6 +129,7 @@ Near :jgnp1-local:"sent"
 Create Both
 Expunge Both
 SyncState *
+MaxMessages 1000
 
 Group jgnp1
 Channel jgnp1-inbox
@@ -134,7 +140,8 @@ Channel jgnp1-sent
 IMAPAccount b42
 Host imap.gmail.com
 User belial42@gmail.com
-PassCmd "cat ~/.config/secrets/mail/.authinfo | sed -n -E 's/^machine.*? belial42@gmail.com password (.+)/\\1/p'"
+PassCmd "gpg --batch -dq --no-tty ~/.config/secrets/mail/.authinfo | sed -n -E 's/^machine.*? belial42@gmail.com password (.+)/\\1/p'"
+
 AuthMechs LOGIN
 SSLType IMAPS
 SSLVersions TLSv1.2
@@ -158,6 +165,7 @@ Patterns "INBOX"
 Create Both
 Expunge Both
 SyncState *
+MaxMessages 1000
 
 Channel b42-sent
 Far :b42-remote:"[Gmail]/Sent Mail"
@@ -165,6 +173,7 @@ Near :b42-local:"sent"
 Create Both
 Expunge Both
 SyncState *
+MaxMessages 1000
 
 Group b42
 Channel b42-inbox
@@ -176,7 +185,7 @@ Channel b42-sent
 IMAPAccount jgsoe
 Host imap.gmail.com
 User jgrey@soe.ucsc.edu
-PassCmd "cat ~/.config/secrets/mail/.authinfo | sed -n -E 's/^machine.*? jgrey@soe.ucsc.edu password (.+)/\\1/p'"
+PassCmd "gpg --batch -dq --no-tty ~/.config/secrets/mail/.authinfo | sed -n -E 's/^machine.*? jgrey@soe.ucsc.edu password (.+)/\\1/p'"
 AuthMechs LOGIN
 SSLType IMAPS
 SSLVersions TLSv1.2
@@ -200,6 +209,7 @@ Patterns "INBOX"
 Create Both
 Expunge Both
 SyncState *
+MaxMessages 1000
 
 Channel jgsoe-sent
 Far :jgsoe-remote:"[Gmail]/Sent Mail"
@@ -207,6 +217,7 @@ Near :jgsoe-local:"sent"
 Create Both
 Expunge Both
 SyncState *
+MaxMessages 1000
 
 Group jgsoe
 Channel jgsoe-inbox

@@ -2,7 +2,19 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("fonts"
+(("mamba"
+ (filename . "~/.cache/mamba/envs/")
+ (front-context-string . "default\n  drwxrw")
+ (rear-context-string . "0K Oct  6 02:49 ")
+ (position . 124)
+ (last-modified 25895 17042 152823 547000))
+("jgc"
+ (filename . "/media/john/data/github/_config/")
+ (front-context-string . "maintenance\n  dr")
+ (rear-context-string . "0K Oct  8 07:31 ")
+ (position . 270)
+ (last-modified 25895 17026 640847 216000))
+("fonts"
  (filename . "/media/john/data/library/assets/fonts/")
  (front-context-string . "CompassGold.ttf\n")
  (rear-context-string . "8K Oct  5 02:00 ")
@@ -241,8 +253,6 @@
  (front-context-string . "bibtex_tags\n  dr")
  (rear-context-string . "4K Dec 24 18:28 ")
  (position . 184))
-("config_emacs"
- (filename . "~/.config/jg/"))
 ("github"
  (filename . "~/github/")
  (front-context-string . ".installed_pylib")

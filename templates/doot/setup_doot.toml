@@ -15,6 +15,7 @@ ignores  = ['.git', '.DS_Store', "__pycache__"]
 [[directories]]
 home       = "/Users/johngrey"
 cache      = "{home}/.cache"
+config     = "{home}/.config"
 github     = ""
 emacs_d    = ""
 doom_d     = ""

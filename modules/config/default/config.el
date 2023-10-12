@@ -13,17 +13,35 @@
   :commands (run-spec-handlers spec-handling-new! spec-handling-add! spec-handling-setq)
   )
 
-(use-package! osx-trash
-  :commands osx-trash-move-file-to-trash
+(use-package! epa
   :init
-  ;; Delete files to trash on macOS, as an extra layer of precaution against
-  ;; accidentally deleting wanted files.
-  (setq delete-by-moving-to-trash t)
+  (setq epa-armor t
+        epa-textmode t
+        epg-pinentry-mode 'loopback ;; Force gpg-agent to use minibuffer
+        )
 
-  ;; Lazy load `osx-trash'
-  (when (not (fboundp 'system-move-file-to-trash))
-    (defun system-move-file-to-trash (file)
-      "Move FILE to trash."
-      (when (and (not IS-LINUX)
-                 (not (file-remote-p default-directory)))
-        (osx-trash-move-file-to-trash file)))))
+  (defun +default--dont-prompt-for-keys-a (&rest _)
+   " And suppress prompts if epa-file-encrypt-to has a default value (without
+    overwriting file-local values). "
+    (unless (local-variable-p 'epa-file-encrypt-to)
+      (setq-local epa-file-encrypt-to (default-value 'epa-file-encrypt-to))))
+
+  (advice-add #'epa-file-write-region :before #'+default--dont-prompt-for-keys-a)
+  )
+
+(use-package! epa-hook
+  :init
+  (setq-default epa-file-name-regexp "\\.\\(gpg\\|asc\\)\\(~\\|\\.~[0-9]+~\\)?\\'"
+                epa-file-encrypt-to (unless (string-empty-p user-full-name)
+                                          (when-let (context (ignore-errors (epg-make-context)))
+                                            (cl-loop for key in (epg-list-keys context user-full-name 'public)
+                                                     for subkey = (car (epg-key-sub-key-list key))
+                                                     if (not (memq 'disabled (epg-sub-key-capability subkey)))
+                                                     if (< (or (epg-sub-key-expiration-time subkey) 0)
+                                                           (time-to-seconds))
+                                                     collect (epg-sub-key-fingerprint subkey)))
+                                        )
+                )
+  :config
+  (epa-file-name-regexp-update)
+  )

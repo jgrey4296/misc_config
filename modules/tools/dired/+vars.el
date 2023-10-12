@@ -1,11 +1,5 @@
 ;;; emacs/dired/+vars.el -*- lexical-binding: t; -*-
 
-;;-- epa/gpg
-(after! epa
-  ;; Ascii output of encryptions:
-  (setq epa-armor t)
-  )
-;;-- end epa/gpg
 
 ;;-- dired
   (setq-default dired-args '("-ahlD" "-v" "--group-directories-first")

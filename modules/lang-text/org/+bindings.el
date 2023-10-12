@@ -70,10 +70,11 @@
       ;; Insertion
       (:prefix ("i" . "Insert")
        :desc "Insert Heading Trio" "t" #'+jg-org-insert-heading-trio
+       :desc "Insert Heading"      "H" #'org-insert-heading
        :desc "Insert Subheading"   "h" #'org-insert-subheading
        :desc "Insert Drawer"       "d" #'org-insert-drawer
        :desc "Insert Structure"    "s" #'org-insert-structure-template
-      )
+       )
       )
 
 (map! :map org-agenda-mode-map

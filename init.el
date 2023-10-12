@@ -49,4 +49,6 @@
 
  :ui doom-ui
  :ui ophints
+
+ :config linux
  )

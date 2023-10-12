@@ -2,7 +2,6 @@
 
 ;;-- Me
 (defvar user-full-name "John Grey")
-(defvar user-mail-address "johngrey4296 at gmail.com")
 (defvar user-url "https://jgrey4296.github.io/")
 ;;-- end Me
 
@@ -32,12 +31,13 @@
       org-agenda-files                (list initial-buffer-choice)
       org-archive-location            (string-join `(,(expand-file-name "org/archive.org" doom-user-dir) "* Main Archive") "::")
       pyvenv-default-virtual-env-name (expand-file-name "~/.cache/mamba/envs/")
-      server-auth-dir                 (expand-file-name "~/.cache/secrets/emacs")
+      server-auth-dir                 (expand-file-name "~/.config/secrets/emacs")
       native-comp-eln-load-path       (list (expand-file-name "cache/eln" doom-local-dir))
       docs-dir                        (expand-file-name "templates/docs" doom-user-dir)
       )
 
 (add-to-list 'load-path (expand-file-name "~/.local/modules"))
+
 ;;-- end locations
 
 (setq server-log t)

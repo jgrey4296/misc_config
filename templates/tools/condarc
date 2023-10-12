@@ -1,5 +1,7 @@
 envs_dirs:
   - $HOME/.cache/mamba/envs
+pkgs_dirs:
+  - $HOME/.cache/mamba/pkgs
 channels:
   - defaults
   - conda-forge

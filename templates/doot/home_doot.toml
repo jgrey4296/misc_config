@@ -75,6 +75,6 @@ image_whitelist = ".bots/dcim_whitelist"
 image_blacklist = ".bots/resolution_blacklist"
 image_temp      = ".bots/conversion_temp"
 bib_stub_file   = "~/github/bibliography/in_progress/todo.bib"
-secrets         = "~/.secrets/bkmkorg.toml"
+secrets         = "~/.config/secrets/bots/bkmkorg.toml"
 
 [group.maintain]

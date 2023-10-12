@@ -8,54 +8,15 @@
 (setq save-silently (not noninteractive)
       xterm-set-window-title t
       visible-cursor nil
-      )
 
-;;;###package avy
-(setq avy-all-windows nil
-      avy-all-windows-alt t
-      avy-background t
-      ;; the unpredictability of this (when enabled) makes it a poor default
-      avy-single-candidate-jump nil)
-
-;;-- epa
-(after! epa
-  ;; With GPG 2.1+, this forces gpg-agent to use the Emacs minibuffer to prompt
-  ;; for the key passphrase.
-  (set 'epg-pinentry-mode 'loopback)
-  ;; Default to the first enabled and non-expired key in your keyring.
-  (setq-default
-   epa-file-encrypt-to
-   (or (default-value 'epa-file-encrypt-to)
-       (unless (string-empty-p user-full-name)
-         (when-let (context (ignore-errors (epg-make-context)))
-           (cl-loop for key in (epg-list-keys context user-full-name 'public)
-                    for subkey = (car (epg-key-sub-key-list key))
-                    if (not (memq 'disabled (epg-sub-key-capability subkey)))
-                    if (< (or (epg-sub-key-expiration-time subkey) 0)
-                          (time-to-seconds))
-                    collect (epg-sub-key-fingerprint subkey))))
-       user-mail-address))
-   ;; And suppress prompts if epa-file-encrypt-to has a default value (without
-   ;; overwriting file-local values).
-  (defadvice! +default--dont-prompt-for-keys-a (&rest _)
-    :before #'epa-file-write-region
-    (unless (local-variable-p 'epa-file-encrypt-to)
-      (setq-local epa-file-encrypt-to (default-value 'epa-file-encrypt-to)))))
-
-;;-- end epa
-
-;;-- tramp
-;;;###package tramp
-(unless IS-WINDOWS
-  (setq tramp-default-method "ssh")) ; faster than the default scp
-
-;;-- end tramp
-
-(setq auto-revert-verbose t ; let us know when it happens
+      auto-revert-verbose t ; let us know when it happens
       auto-revert-use-notify nil
       auto-revert-stop-on-user-input nil
-      ;; Only prompts for confirmation when buffer is unsaved.
-      revert-without-query (list "."))
+      revert-without-query (list ".") ;; Only prompts for confirmation when buffer is unsaved.
+
+      tramp-default-method "ssh" ;; faster than the default scp
+      )
+
 
 (setq recentf-auto-cleanup nil     ; Don't. We'll auto-cleanup on shutdown
       recentf-max-saved-items 200) ; default is 20
@@ -68,12 +29,9 @@
                                       search-ring regexp-search-ring) ; persist searches
 )
 
-;; Use spotlight search backend as a default for M-x locate (and helm/ivy
-;; variants thereof), since it requires no additional setup.
-(setq locate-command "mdfind")
 
-(after! auth-source
-  (pushnew! auth-sources 'macos-keychain-internet 'macos-keychain-generic))
+(setq auth-sources (list (expand-file-name "~/.config/secrets/emacs/authinfo.asc")))
+
 
 ;; Ftp
 (setq ftp-program "git-ftp")

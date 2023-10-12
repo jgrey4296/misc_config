@@ -27,7 +27,7 @@ class SetupSystemTask(tasker.DootTasker, FilerMixin, CommanderMixin):
         task.update({
             "actions": [
                 (self.mkdirs, [self.locs.cache / ".cargo",
-                               self.locs.home/ ".secrets",
+                               self.locs.config / "secrets",
                                self.locs.cache / ".gradle",
                                self.locs.cache / ".ghc",
                                self.locs.cache / "doot_build"

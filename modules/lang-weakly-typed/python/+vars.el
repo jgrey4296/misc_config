@@ -14,7 +14,13 @@
 
 (setq py-indent-offset 4
       conda-anaconda-home (or (getenv "ANACONDA_HOME") "/usr/local/anaconda3")
-      conda-env-home-directory (or (getenv "ANACONDA_ENVS") (f-join conda-anaconda-home "envs"))
+      conda-env-home-directory (cond ((getenv "MAMBA_ROOT_PREFIX")
+                                      (f-join (getenv "MAMBA_ROOT_PREFIX") "envs"))
+                                     ((getenv "ANACONDA_ENVS")
+                                      (getenv "ANACONDA_ENVS"))
+                                     (t
+                                      (f-join conda-anaconda-home "envs"))
+                                     )
       py-shell-virtualenv-root conda-env-home-directory
 
       py-pdbtrack-do-tracking-p t

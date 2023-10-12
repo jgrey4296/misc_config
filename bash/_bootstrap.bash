@@ -61,7 +61,7 @@ case "$OSTYPE" in
        # link inputrc, gradle.properties, ispell_english, lldbinit, mailrc, mbsyncrc, npmrc, pdbrc, 
        # link vimrc 
        
-       # ssh-keygen -t ed25519 -f "$HOME/.cache/secrets/ssh_ed25519"
+       # ssh-keygen -t ed25519 -f "$BASE_CONFIG/secrets/ssh/ssh_ed25519"
 
 
        # apt-get install $(grep -vE "^\s*#" filename  | tr "\n" " ")

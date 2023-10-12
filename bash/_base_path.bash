@@ -1,3 +1,5 @@
+# #  _base_path.bash -*- mode: sh -*-
+
 jgdebug Setting Initial Path
 
 export BASE_CACHE="$HOME/.cache"
@@ -14,8 +16,9 @@ case "$OSTYPE" in
     linux*) 
         PATH="/snap/bin:$PATH"
         PATH="/usr/local/games:$PATH"
-
+        ;;
 esac
+
 PATH="/bin:/sbin:$PATH"                                  # Core
 PATH="/usr/bin:/usr/sbin:/usr/libexec:$PATH"             # Secondary
 PATH="/usr/local/bin:/usr/local/sbin:$PATH"              # Tertiary
@@ -33,6 +36,7 @@ case "$OSTYPE" in
     linux*)
         ;;
 esac
+
 
 # MAN Paths
 # https://www.howtogeek.com/682871/how-to-create-a-man-page-on-linux/

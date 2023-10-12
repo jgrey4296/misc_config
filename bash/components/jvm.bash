@@ -31,7 +31,7 @@ case "$OSTYPE" in
         # ANDROID_HOME="/usr/lib/android-sdk"
         ANDROID_HOME="$HOME/android"
         ANDROID_USER_HOME="$BASE_CACHE/android"
-        ADB_VENDOR_KEYS="$BASE_CACHE/secrets/android"
+        ADB_VENDOR_KEYS="$BASE_CONFIG/secrets/android"
         ANDROID_TOOLS="$ANDROID_HOME/cmdline-tools/latest/bin"
         ANDROID_TOOLS="$ANDROID_HOME/build-tools/$BUILD_TOOLS/bin:$ANDROID_TOOLS"
         ANDROID_TOOLS="$ANDROID_HOME/platform-tools:$ANDROID_TOOLS"

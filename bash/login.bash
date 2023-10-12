@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+ISLOGIN="yes"
 
 if [[ $TMUX ]]; then
 	echo "Login: $OSTYPE : $TERM : TMUX" 

@@ -56,6 +56,7 @@ loginmux () {
    case "$TERM_PROGRAM" in
    	tmux) return ;;
    	emacs) return ;;
+
    esac
 
    if { tmux has-session; }; then 

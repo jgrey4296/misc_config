@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: ngrams
-# uuid: ngrams
-# group: nlp nltk
-# --
-from nltk import ngrams
-sentence = "This is a sentence to test ngrammizing on"
-n = 6
-sixgrams = ngrams(sentence.split(), n)

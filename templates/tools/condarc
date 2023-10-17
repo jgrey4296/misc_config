@@ -1,9 +1,9 @@
 envs_dirs:
-  - $HOME/.cache/mamba/envs
+  - ${HOME}/.cache/mamba/envs
 pkgs_dirs:
-  - $HOME/.cache/mamba/pkgs
+  - ${HOME}/.cache/mamba/pkgs
 channels:
-  - defaults
+  - nodefaults
   - conda-forge
   - bioconda
 ssl_verify: true

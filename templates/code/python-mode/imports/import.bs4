@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: bs4
-# uuid: bs4
-# group: imports
-# --
-from bs4 import BeautifulSoup

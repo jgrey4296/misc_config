@@ -2,6 +2,7 @@
 """
 
 """
+##-- imports
 from __future__ import annotations
 
 import inspect
@@ -31,11 +32,13 @@ import readline
 import more_itertools as mitz
 import pyparsing as pp
 
+##-- end imports
+
 logging = logmod.getLogger(__name__)
 
 ##-- readline history
 ## from: https://stackoverflow.com/questions/10346419
-histfile = pl.Path.home() / ".logs/python_history"
+histfile = pl.Path.home() / ".cache/logs/python_history"
 atexit.register(readline.write_history_file, histfile)
 readline.set_history_length(500)
 

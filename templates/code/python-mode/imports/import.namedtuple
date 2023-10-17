@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: namedtuple
-# uuid: namedtuple
-# group: imports
-# --
-from collections import namedtuple

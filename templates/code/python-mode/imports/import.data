@@ -1,0 +1,43 @@
+# -*- mode: snippet -*-
+# name  : import.data
+# uuid  : import.data
+# key   : import.data
+# group :
+# --
+##-- import data accessors / writers
+import pony.orm as pony         # https://docs.ponyorm.org/
+import pandas                   # https://pandas.pydata.org/docs/
+import marshmallow              # https://marshmallow.readthedocs.io/en/stable/
+import pyYAML                   # https://pyyaml.org/
+import json                     #
+import sqlite3                  #
+import csv                      # stdlib. https://docs.python.org/3/library/csv.html
+import dbm                      # stdlib. https://docs.python.org/3/library/dbm.html
+import plistlib                 # stdlib. https://docs.python.org/3/library/plistlib.html
+import zipfile                  # stdlib. https://docs.python.org/3/library/zipfile.html
+import tomli-W                  # https://github.com/hukkin/tomli-w
+import bs4                      # https://beautiful-soup-4.readthedocs.io/en/latest/
+import construct as C           # https://construct.readthedocs.io/en/latest/index.html
+import boltons.jsonutils        # json               https://boltons.readthedocs.io/en/latest/jsonutils.html
+import boltons.tableutils       # 2d data            https://boltons.readthedocs.io/en/latest/tableutils.html
+import validators               # https://python-validators.github.io/validators/
+import pdfrw                    # https://github.com/pmaupin/pdfrw/
+import borb                     # pdfs https://github.com/jorisschellekens/borb
+import bibtexparser             # https://github.com/sciunto-org/python-bibtexparser
+import xmlschema # https://xmlschema.readthedocs.io/en/latest/usage.html
+# import xsdata # https://xsdata.readthedocs.io/en/latest/
+# import pylightxl # https://github.com/PydPiper/pylightxl
+# import pyexcel # https://github.com/pyexcel/pyexcel
+# import pyexcel-io
+# import openpyxl
+
+# from bs4 import BeautifulSoup # https://beautiful-soup-4.readthedocs.io/en/latest/
+# import tomllib
+
+try:
+    # For py 3.11 onwards:
+    import tomllib as toml
+except ImportError:
+    # Fallback to external package
+    import toml
+##-- end import data accessors

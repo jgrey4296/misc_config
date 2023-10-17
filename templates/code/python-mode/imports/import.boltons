@@ -1,0 +1,35 @@
+# -*- mode: snippet -*-
+# name  : import.boltons
+# uuid  : import.boltons
+# key   : import.boltons
+# group :
+# --
+##-- import boltons
+boltons.cacheutils       # caching            https://boltons.readthedocs.io/en/latest/cacheutils.html
+boltons.debugutils       # debugging          https://boltons.readthedocs.io/en/latest/debugutils.html
+boltons.dictutils        # mapping            https://boltons.readthedocs.io/en/latest/dictutils.html
+boltons.ecoutils         # system analytics   https://boltons.readthedocs.io/en/latest/ecoutils.html
+boltons.excutils         # exceptions         https://boltons.readthedocs.io/en/latest/excutils.html
+boltons.fileutils        # filesystem         https://boltons.readthedocs.io/en/latest/fileutils.html
+boltons.formatutils      # string formatting  https://boltons.readthedocs.io/en/latest/formatutils.html
+boltons.funcutils        # functional         https://boltons.readthedocs.io/en/latest/funcutils.html
+boltons.gcutils          # garbage collection https://boltons.readthedocs.io/en/latest/gcutils.html
+boltons.ioutils          # files              https://boltons.readthedocs.io/en/latest/ioutils.html
+boltons.iterutils        # iterators          https://boltons.readthedocs.io/en/latest/iterutils.html
+boltons.jsonutils        # json               https://boltons.readthedocs.io/en/latest/jsonutils.html
+boltons.listutils        # lists              https://boltons.readthedocs.io/en/latest/listutils.html
+boltons.mathutils        # math               https://boltons.readthedocs.io/en/latest/mathutils.html
+boltons.mboxutils        # mail               https://boltons.readthedocs.io/en/latest/mboxutils.html
+boltons.namedutils       # tuples             https://boltons.readthedocs.io/en/latest/namedutils.html
+boltons.pathutils        # path expansion     https://boltons.readthedocs.io/en/latest/pathutils.html
+boltons.queueutils       # priority queues    https://boltons.readthedocs.io/en/latest/queueutils.html
+boltons.setutils         # ordered sets       https://boltons.readthedocs.io/en/latest/setutils.html
+boltons.socketutils      # sockets            https://boltons.readthedocs.io/en/latest/socketutils.html
+boltons.statsutils       # statistics         https://boltons.readthedocs.io/en/latest/statsutils.html
+boltons.strutils         # string formatting  https://boltons.readthedocs.io/en/latest/strutils.html
+boltons.tableutils       # 2d data            https://boltons.readthedocs.io/en/latest/tableutils.html
+boltons.tbutils          # tracebacks         https://boltons.readthedocs.io/en/latest/tbutils.html
+boltons.timeutils        # datetimes          https://boltons.readthedocs.io/en/latest/timeutils.html
+boltons.typeutils        # typing             https://boltons.readthedocs.io/en/latest/typeutils.html
+boltons.urlutils         # urls               https://boltons.readthedocs.io/en/latest/urlutils.html
+##-- end import boltons

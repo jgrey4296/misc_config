@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: import.pyparsing
+# uuid: ipp
+# key:  ipp
+# group :
+# --
+##-- import text manipulation / parsing
+import pyparsing as pp # https://textblob.readthedocs.io/en/dev/quickstart.html
+# from textblob import TextBlob
+# import spacy # nlp = spacy.load('en_core_web_sm')
+# from nltk import ngrams  #
+# import ply.lex as lex
+# import ply.yacc as yacc
+# import pronouncing
+import ast                      # stdlib. https://docs.python.org/3/library/ast.html
+import boltons.formatutils      # string formatting  https://boltons.readthedocs.io/en/latest/formatutils.html
+import boltons.strutils         # string formatting  https://boltons.readthedocs.io/en/latest/strutils.html
+# import pygments #
+# import llvmlite #
+##-- end import text manipulation / parsing

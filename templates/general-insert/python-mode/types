@@ -66,7 +66,7 @@ ContextManager                          # typing
 EXCLUDED_ATTRIBUTES                     # typing
 Final                                   # typing. Constant declarations.
 ForwardRef['type']                      # typing. Declare types that are coming. Should be implicit, not user defined.
-Generic                                 # typing
+Generic                                 # typing. eg: class Stack(Generic[Typevar('T')])
 GenericAlias                            # typing
 IO                                      # typing. For IO Streams
 KT                                      # typing

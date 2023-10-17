@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: textblob
-# uuid: textblob
-# group: nlp
-# --
-# https://textblob.readthedocs.io/en/dev/quickstart.html
-from textblob import TextBlob

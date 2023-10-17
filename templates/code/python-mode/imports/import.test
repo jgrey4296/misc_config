@@ -2,5 +2,15 @@
 # name: import.test
 # uuid: import.test
 # --
-import unittest
-from unittest import mock
+##-- import pytest
+import pytest      # https://docs.pytest.org/en/7.3.x/reference/reference.html#std-fixture-pytestconfig
+# Reminder:
+# caplog
+# mocker.patch | patch.object | patch.multiple | patch.dict | stopall | stop | spy | stub
+# pytest.mark.filterwarnings
+# pytest.parameterize
+# pytest.skip | skipif | xfail
+# with pytest.deprecated_call
+# with pytest.raises
+# with pytest.warns(warntype)
+##-- end import pytest

@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name  : import.algo
+# uuid  : import.algo
+# key   : import.algo
+# group :
+# --
+##-- import algorithms
+import heapq                    # stdlib. https://docs.python.org/3/library/heapq.html
+import queue                    # stdlib. https://docs.python.org/3/library/queue.html
+import boltons.listutils        # lists              https://boltons.readthedocs.io/en/latest/listutils.html
+import boltons.queueutils       # priority queues    https://boltons.readthedocs.io/en/latest/queueutils.html
+import pyqtree                  # https://karimbahgat.github.io/Pyqtree/
+import cachetools               # https://github.com/tkem/cachetools/
+import toposort                 # https://gitlab.com/ericvsmith/toposort
+import noise                    # https://github.com/caseman/noise
+import editdistance             # https://github.com/roy-ht/editdistance
+##-- end import algorithms

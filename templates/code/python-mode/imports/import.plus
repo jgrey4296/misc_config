@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name  : import.plus
+# uuid  : import.plus
+# key   : import.plus
+# group :
+# --
+##-- import plus
+# import bumpver # https://github.com/mbarkhau/bumpver
+# import dirty-equals as deq
+# import more_itertools as mitz   # https://more-itertools.readthedocs.io/en/stable/
+# import networkx as nx           # https://networkx.org/
+# import rich
+# import stackprinter             # https://github.com/cknd/stackprinter (stackprinter.set_excepthook(style='darkbg2'))
+# import sty
+# import toolz                    # https://toolz.readthedocs.io/en/latest/index.html
+# import tqdm
+# import validators # https://python-validators.github.io/validators/
+# import sh # https://amoffat.github.io/sh/
+##-- end import plus

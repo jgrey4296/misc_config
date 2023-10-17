@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: import.pillow
-# uuid: import.pillow
-# group: I/O
-# --
-import PIL
-from PIL import Image

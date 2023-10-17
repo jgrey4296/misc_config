@@ -126,12 +126,12 @@ https://palletsprojects.com/p/werkzeug/
 https://docs.pylonsproject.org/projects/waitress/en/stable/
 https://www.rabbitmq.com/
 build                                                                                           : 0.8.0
-cachetools                                                                                      : 4.2.2
+https://github.com/tkem/cachetools/
 cachy                                                                                           : 0.3.0
 cleo                                                                                            : 0.8.1
 clikit                                                                                          : 0.6.2
 distlib                                                                                         : 0.3.2
-filelock                                                                                        : 3.6.0
+https://py-filelock.readthedocs.io/en/latest/
 https://github.com/msiedlarek/wiring
 https://github.com/tmontes/python-wires/
 packaging                                                                                       : 20.9
@@ -143,12 +143,14 @@ https://github.com/pytest-dev/pluggy
 https://github.com/pexpect/ptyprocess
 https://github.com/rbarrois/python-semanticversion
 setuptools                                                                                      : 63.4.1
+https://github.com/di/calver
 setuptools-rust                                                                                 : 1.4.1
 virtualenv                                                                                      : 20.16.2
 wheel                                                                                           : 0.37.1
 wrapt                                                                                           : 1.14.1
 
 ** best-practices
+https://github.com/mbarkhau/bumpver
 https://github.com/jorisroovers/gitlint
 https://github.com/python-semantic-release/python-semantic-release
 https://github.com/csurfer/pyheatmagic                                                          : heatmap : ipython
@@ -167,8 +169,9 @@ pip-reqs
 https://github.com/jaraco/path
 https://www.attrs.org/en/stable/
 https://github.com/pytransitions/transitions
-PyYAML                                                                                          : 6.0
-Pyqtree                                                                                         : 1.0.0
+https://pyyaml.org/
+https://pyyaml.org/
+https://karimbahgat.github.io/Pyqtree/
 imagesize                                                                                       : 1.4.1
 jsonschema                                                                                      : 4.16.0
 numpy                                                                                           : 1.21.5

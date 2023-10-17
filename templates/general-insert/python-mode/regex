@@ -1,65 +1,66 @@
 Insert Regex:
-.                                  #
-^                                  #
-$                                  #
-*                                  #
-+                                  #
-?                                  #
-*?                                 #
-+?                                 #
-??                                 #
-*+                                 #
-++                                 #
-?+                                 #
-{m}                                #
-{m,n}                              #
-{m,n}?                             #
-{m,n}+                             #
-[]                                 #
-|                                  #
-(...)                              #
-(?...)                             #
-(?aiLmsux)                         #
-(?:...)                            #
-(?aiLmsux-imsx:...)                #
-(?>...)                            #
-(?P<name>...)                      #
-(?P=name)
-(?#...)
-(?=...)
-(?!...)
-(?<=...)
-(?<!...)
-(?(id/name)yes-pattern|no-pattern) #
-\number                            #
-\A                                 #
-\b                                 #
-\B                                 #
-\d                                 #
-\D                                 #
-\s                                 #
-\S                                 #
-\w                                 #
-\W                                 #
-\Z                                 #
-\u                                 #
+.                                    # anything but newline
+^                                    # start of string
+$                                    # end of string
+*                                    # 0 or more, greedy
++                                    # 1 or more, greedy
+?                                    # 0 or 1, greedy
+*?                                   # 0 or more, non-greedy
++?                                   # 1 or more, non-greedy
+??                                   # 0 or 1, non-greedy
+*+                                   #
+++                                   #
+?+                                   #
+{int}                                # Match certain number of repetitions
+{m,n}                                # Match a range of repetitions, greedy
+{m,n}?                               # range, non-greedy
+{m,n}+                               #
+[a-zA-Z]                             # a set of chars
+[^a-zA-Z]                            # negation of set of chars
+|                                    # alternative
+(...)                                # group
+(?:...)                              # non-capturing group
+(?aiLmsux)                           # set flags for the regex
+(?>...)                              #
+(?#...)                              # comment within regex
+(?=...)                              # match without consuming
+(?!...)                              #
+(?<=...)                             # look back
+(?<!...)                             # look back
 
-re.ASCII                           #
-re.IGNORECASE                      #
-re.LOCALE                          #
-re.MULTILINE                       #
-re.NOFLAG                          #
-re.DOTALL                          #
-re.VERBOSE                         #
+(?P<name>...)                        # named group match definition
+(?P=name)                            # named group rematch
+(?(id/name)yes-pattern|no-pattern)   # named group if/else matching
 
-re.compile                         #
-re.search                          #
-re.match                           #
-re.fullmatch                       #
-re.split                           #
-re.findall                         #
-re.finditer                        #
-re.sub                             #
-re.subn                            #
-re.escape                          #
-re.purge                           #
+\number                              #
+\A                                   # start of string
+\Z                                   # end of string
+\B                                   # word boundary
+\B                                   # empty string not at boundary
+\d                                   # decimal
+\D                                   # non demicals
+\s                                   # whitespace [ \t\n\r\f\v]
+\S                                   # non-whitespace
+\w                                   # alphanumeric. [a-zA-Z0-9_]
+\W                                   # non-alphanumberic
+\u                                   #
+
+re.ASCII                             #
+re.IGNORECASE                        #
+re.LOCALE                            #
+re.MULTILINE                         #
+re.NOFLAG                            #
+re.DOTALL                            #
+re.VERBOSE                           #
+
+re.compile                           # str -> regex
+re.search                            # (pattern, string, flags=0)
+re.match                             # (pattern, string, flags=0)
+re.fullmatch                         # (pattern, string, flags=0)
+re.split                             # (pattern, string, maxsplit=0, flags=0)
+re.findall                           # (pattern, string, flags=0)
+re.finditer                          # (pattern, string, flags=0) -> iterator
+re.sub                               # (pattern, replacement, string, count=0, flags=0)
+re.subn                              # (pattern, replacement, string, count=0, flags=0) -> (new_string, count)
+re.escape                            # (pattern) -> str with escaped metachars
+re.purge                             # clear cache

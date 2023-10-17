@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: dataclass
-# uuid: dataclass
-# group: imports
-# --
-from dataclasses import dataclass, field, InitVar

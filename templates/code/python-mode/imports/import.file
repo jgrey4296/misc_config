@@ -3,4 +3,18 @@
 # uuid: file
 # group: imports
 # --
-import pathlib
+##-- import file manip
+import pathlib as pl
+# import path # https://github.com/jaraco/path
+import tempfile
+import zipfile                  # stdlib. https://docs.python.org/3/library/zipfile.html
+import boltons.fileutils        # filesystem         https://boltons.readthedocs.io/en/latest/fileutils.html
+import boltons.ioutils          # files              https://boltons.readthedocs.io/en/latest/ioutils.html
+import boltons.pathutils        # path expansion     https://boltons.readthedocs.io/en/latest/pathutils.html
+import filelock                 # https://py-filelock.readthedocs.io/en/latest/
+
+# with tempfile.TemporaryDirectory() as temp_dir:
+#      assert(isisntance(temp_dir, str))
+#      # Do Stuff
+# On Exit of context manager, dir is deleted
+##-- end import file manip

@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: import.pyparsing
-# uuid: ipp
-# key:  ipp
-# group :
-# --
-import pyparsing as pp

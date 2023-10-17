@@ -2,7 +2,13 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("mamba"
+(("templates"
+ (filename . "/media/john/data/github/_config/templates/")
+ (front-context-string . "tools\n  -rw-rw-r")
+ (rear-context-string . "0K Oct 15 17:33 ")
+ (position . 1284)
+ (last-modified 25900 6293 887209 617000))
+("mamba"
  (filename . "~/.cache/mamba/envs/")
  (front-context-string . "default\n  drwxrw")
  (rear-context-string . "0K Oct  6 02:49 ")

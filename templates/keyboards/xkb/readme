@@ -1,0 +1,30 @@
+see
+https://wiki.linuxquestions.org/wiki/Altering_or_Creating_Keyboard_Maps
+https://wiki.archlinux.org/title/X_keyboard_extension
+https://www.x.org/wiki/XKB/
+https://unix.stackexchange.com/questions/292868/how-to-customise-keyboard-mappings-with-wayland
+
+
+to install in:
+/usr/share/x11/xkb/rules/base.xml
+expand and add:
+
+<layout>
+  <configItem>
+    <name>{new symbols filename}</name>
+    <shortDescription>{}</shortDescription>
+    <description>{}</description>
+  </configItem>
+</layout>
+
+
+and in:
+/usr/share/x11/xkb/rules/base.lst
+add:
+{new symbols filename} {Description}
+
+
+also:
+add the keyboard in gsettings:
+gsettings set org.gnome.desktop.input-source "[('xkb', '{}' )]"
+gsettings set org.gnome.desktop.show-all-sources true

@@ -19,7 +19,9 @@
            :build t
            :pre-build
            (progn
-             (with-temp-file "org-loaddefs.el")
+             (with-temp-file "org-loaddefs.el"
+               (insert "(provide 'org-loaddefs)")
+               )
              (with-temp-file "org-version.el"
                (let ((version
                       (with-temp-buffer

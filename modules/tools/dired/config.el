@@ -68,6 +68,7 @@
   :defer t
   :init
   (global-set-key [remap find-dired] #'fd-dired)
+  (setq fd-dired-program doom-projectile-fd-binary)
   (spec-handling-add! popup
                       '(fd-dired
                         ("^\\*F\\(?:d\\|ind\\)\\*$" :ignore t)

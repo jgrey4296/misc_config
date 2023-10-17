@@ -16,7 +16,7 @@
       "<f9>" #'ignore
       "<f10>" #'ignore
 
-      "£" "#"
+      "£" #'self-insert-command ;;"#"
       )
 
 

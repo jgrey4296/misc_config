@@ -6,6 +6,9 @@ export HISTFILE="$BASE_CACHE/logs/bash_history"
 export LESSHISTFILE="$BASE_CACHE/logs/lesshst"
 export NODE_REPL_HISTORY="$BASE_CACHE/logs/node_repl_history"
 
+# To get rid of atk-bridge complaints:
+export G_MESSAGES_PREFIXED=""
+
 export PATH
 export EDITOR
 export PROMPT_NUM

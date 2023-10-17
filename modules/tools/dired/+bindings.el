@@ -34,6 +34,7 @@
       :desc "Expand Marked"  :n "I" #'+jg-dired-insert-marked-subdir
       :n "y" #'dired-copy-filename-as-kill
       :n "Y" (cmd! (dired-copy-filename-as-kill 0))
+      :desc "Fd File"        :n  "sf" #'fd-dired
       )
 (map! :map jg-dired-mode-map ;; mark
       :n "t"                                      #'dired-toggle-marks

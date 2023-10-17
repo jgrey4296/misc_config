@@ -479,3 +479,5 @@ yard-mode.el                 # straight. mode.
 yasnippet                    # straight. snippets.
 yasnippet-snippets           # straight. snippets.
 z3-mode                      # straight. mode.
+elog                         # https://github.com/lujun9972/elog
+emacs-lgr                    # https://github.com/Fuco1/emacs-lgr

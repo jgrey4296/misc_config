@@ -67,3 +67,13 @@ loginmux () {
        tmux new-session -s `randname`
    fi
 }
+
+attach () {
+  case "$TERM_PROGRAM" in
+      tmux) return ;;
+      emacs) return ;;
+  esac
+
+  tmux attach
+}
+

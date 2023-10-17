@@ -1,2 +1,2 @@
-deb  https://ppa.launchpadcontent.net/potassco/stable/ubuntu/ jammy main
-deb-src  https://ppa.launchpadcontent.net/potassco/stable/ubuntu/ jammy main
+deb https://ppa.launchpadcontent.net/potassco/stable/ubuntu/ jammy main
+deb-src https://ppa.launchpadcontent.net/potassco/stable/ubuntu/ jammy main

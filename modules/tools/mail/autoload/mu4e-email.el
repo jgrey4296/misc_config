@@ -3,7 +3,7 @@
 (defvar +mu4e-workspace-name "*mu4e*" "Name of the workspace created by `=mu4e', dedicated to mu4e.")
 (defvar +mu4e--old-wconf nil)
 
-;;;###autodef
+;;;###autoload
 (defun set-email-account! (label letvars &optional default-p)
   "Registers an email address for mu4e. The LABEL is a string. LETVARS are a
 list of cons cells (VARIABLE . VALUE) -- you may want to modify:

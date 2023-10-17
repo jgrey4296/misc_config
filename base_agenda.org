@@ -5,9 +5,8 @@
 [[file:/Volumes/documents/github/jgrey4296.github.io][homepage]]
 
 :to-deal-with:
-https://askubuntu.com/questions/818413/how-can-i-toggle-the-fn-function-key
+https://goldenhivemead.com/
 https://measuringstuff.com/
-launchctl stop com.apple.SafariBookmarksSyncAgent
 :END:
 
 * Base Agenda

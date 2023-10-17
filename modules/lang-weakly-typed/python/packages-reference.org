@@ -164,6 +164,7 @@ pip-chill
 pip-reqs
 
 ** datastructures
+https://github.com/jaraco/path
 https://www.attrs.org/en/stable/
 https://github.com/pytransitions/transitions
 PyYAML                                                                                          : 6.0
@@ -358,6 +359,7 @@ https://utkuufuk.com/2018/05/04/learning-curves/
 https://www.statsmodels.org/stable/index.html                                                   : library : statistics
 
 ** Text manipulation
+https://github.com/mherrmann/selenium-python-helium    : firefox : headless
 https://github.com/jorisroovers/gitlint
 https://github.com/cgpotts/swda
 ansicolors                                                                                      : 1.1.8

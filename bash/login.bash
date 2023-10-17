@@ -8,6 +8,8 @@ else
 fi
 echo "Date  : $(date).  CWD: $(pwd)"
 
+export NO_AT_BRIDGE=1
+
 source "$HOME/.config/jg/bash/_basic_utils.bash"
 source "$HOME/.config/jg/bash/_base_path.bash"
 

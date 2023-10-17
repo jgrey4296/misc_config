@@ -16,7 +16,7 @@ case "$OSTYPE" in
         ;;
 
     linux*) 
-        ENAT_DIR="$HOME/github/_libs/lisp/doomemacs"
+        ENAT_DIR="/media/john/data/github/_libs/lisp/doomemacs"
         ENAT_BIN="/snap/bin/emacs" 
         ;;
 esac

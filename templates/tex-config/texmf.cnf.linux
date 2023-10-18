@@ -18,7 +18,7 @@ TEXMFSYSVAR = $HOME/.cache/texlive/2023/sys
 TEXMFOUT    = $TEXMFDOTDIR
 TEXMFCONFIG = $HOME/.config/jg/templates/tex-config
 
-JG_FONTS = /media/data/library/assets/fonts/
+JG_FONTS = /media/john/data/library/assets/fonts/
 JG_BIB   = $HOME/github/bibliography/main
 
 BIBINPUTS=$TEXMFDOTDIR/bib//:$TEXMFDOTDIR:$JG_BIB:$TEXMFCONFIG/bibtex//:$TEXMFHOME/bibtex//

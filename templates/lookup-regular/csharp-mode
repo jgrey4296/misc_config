@@ -1,4 +1,17 @@
-Unity Manual   # https://docs.unity3d.com/Manual/index.html
-Unity C        # Reference# https://docs.unity3d.com/ScriptReference/index.html
-Mono Reference # http://docs.go-mono.com/
-Microsoft C    # reference# https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/
+
+Microsoft C sharp           # https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/
+Microsoft F sharp reference # https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference
+Godot C sharp               # https://docs.godotengine.org/en/stable/tutorials/scripting/c_sharp/index.html
+
+DotNet SDK                  # https://learn.microsoft.com/en-gb/dotnet/core/sdk
+DotNet CLI                  # https://learn.microsoft.com/en-gb/dotnet/core/tools/
+DotNet Project Templates    # https://github.com/dotnet/templating/wiki/Available-templates-for-dotnet-new#c-templates
+Nuget                       # https://learn.microsoft.com/en-gb/nuget/
+NuSpec XML                  # https://learn.microsoft.com/en-gb/nuget/reference/nuspec
+Nuget Config                # https://learn.microsoft.com/en-gb/nuget/reference/nuget-config-file
+Env Vars                    # https://learn.microsoft.com/en-gb/dotnet/core/tools/dotnet-environment-variables
+
+Mono Reference              # http://docs.go-mono.com/
+
+Unity Manual                # https://docs.unity3d.com/Manual/index.html
+Unity C sharp               # https://docs.unity3d.com/ScriptReference/index.html

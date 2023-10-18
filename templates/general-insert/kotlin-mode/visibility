@@ -5,4 +5,4 @@ protected #
 private   #
 
 sealed    # inheritance control
-open      #  inheritance control
+open      # inheritance control

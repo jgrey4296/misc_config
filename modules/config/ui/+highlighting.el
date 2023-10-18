@@ -76,7 +76,7 @@
   :defer t
   :init
   (defvar highlight-indent-guides-mode nil)
-  :hook ((prog-mode text-mode conf-mode) . highlight-indent-guides-mode)
+  ;; :hook ((prog-mode text-mode conf-mode) . highlight-indent-guides-mode)
   :config
   ;; (when (doom-context-p 'init)
   ;; call hligast late enough to be useful

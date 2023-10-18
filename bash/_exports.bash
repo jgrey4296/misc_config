@@ -49,11 +49,14 @@ export CLIPS_HOME
 export CEPTRE_HOME
 export make_jobs
 export CMAKE_BUILD_PARALLEL_LEVEL
+export DOTNET_ROOT
+export NUGET_PACKAGES
+export DOTNET_CLI_HOME
 
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
 case "$OSTYPE" in
-    darwin*) 
+    darwin*)
         export HOMEBREW_MAKE_JOBS=1
         ;;
     linux*)

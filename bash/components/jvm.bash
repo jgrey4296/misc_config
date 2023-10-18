@@ -41,6 +41,7 @@ esac
 
 jgdebug "Setting up SDKMAN"
 SDKMAN_DIR="$BASE_CACHE/sdkman"
+source "$SDKMAN_DIR/bin/sdkman-init.sh"
 
 jgdebug "Setting Gradle"
 GRADLE_USER_HOME="$BASE_CACHE/gradle"
@@ -49,10 +50,8 @@ jgdebug "Setting Jason"
 JASON_HOME="$HOME/github/_libs/ai/jason/build"
 
 jgdebug "Setting JACAMO"
-JACAMO_HOME="$HOME/github/_libs/ai/acamo/build"
+JACAMO_HOME="$HOME/github/_libs/ai/jacamo-1.2.2"
 
-JG_JACAMO_PATHS="$JASON_HOME/scripts:$JACAMO_HOME/scripts"
+JG_JACAMO_PATHS="$JASON_HOME/scripts:$JACAMO_HOME/bin"
 
 PATH="$ANDROID_TOOLS:$JG_JACAMO_PATHS:$JDK_HOME/bin:$PATH"
-
-source "$SDKMAN_DIR/bin/sdkman-init.sh"

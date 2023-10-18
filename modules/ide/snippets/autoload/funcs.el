@@ -65,7 +65,6 @@
     )
   )
 
-
 ;;;###autoload
 (defun +jg-snippets-debug-dirs ()
   (interactive)

@@ -25,17 +25,12 @@
                     )
 (spec-handling-add! file-templates
                     `(lisp
-                     ("/test/.+\\.el$"   :when ,#'+file-templates-in-emacs-dirs-p :trigger "__doom-test"     :mode emacs-lisp-mode)
-                     ("/doctor\\.el$"    :when ,#'+file-templates-in-emacs-dirs-p :trigger "__doom-doctor"   :mode emacs-lisp-mode)
-                     ("config\\.el$"     :when ,#'+file-templates-in-emacs-dirs-p :trigger "__doom_config"   :mode emacs-lisp-mode)
-                     ("packages\\.el$"   :when ,#'+file-templates-in-emacs-dirs-p :trigger "__doom_packages" :mode emacs-lisp-mode)
-                     ("minor-mode\\.el$" :trigger "__minor-mode" :mode emacs-lisp-mode)
-                     ("mode\\.el$"       :trigger "__mode"       :mode emacs-lisp-mode)
-                     ("ob-.+?\\.el$"     :mode emacs-lisp-mode :trigger "__org_babel")
-                     ("/.dir-locals.el$" :mode emacs-lisp-mode :trigger "__dir_locals")
-                     ("-test\\.el$"      :mode emacs-ert-mode)
-                     ("\\.el$"           :when ,#'+file-templates-in-emacs-dirs-p :trigger "__doom-module" :mode emacs-lisp-mode)
-                     (emacs-lisp-mode    :trigger "__package")
+                     ("minor-mode\\.el\\'" :trigger "__minor-mode" :mode emacs-lisp-mode)
+                     ("mode\\.el\\'"       :trigger "__mode"       :mode emacs-lisp-mode)
+                     ("ob-.+?\\.el\\'"     :mode emacs-lisp-mode :trigger "__org_babel")
+                     ("/.dir-locals.el\\'" :mode emacs-lisp-mode :trigger "__dir_locals")
+                     ("-test\\.el\\'"      :mode emacs-lisp-mode  :trigger "__test")
+                     (emacs-lisp-mode      :trigger "__package")
                      )
                     )
 (spec-handling-add! projects
@@ -66,10 +61,10 @@
                       ,#'+jg-text-cleanup-whitespace)
     )
 (spec-handling-add! lookup-url
-                    '(lisp
-                     ("elisp melpa" "https://melpa.org/#/?q=%s")
-                     ("elisp elpa" "https://elpa.gnu.org/packages/")
-                     )
+            '(lisp
+                      ("elisp melpa" "https://melpa.org/#/?q=%s")
+                      ("elisp elpa" "https://elpa.gnu.org/packages/")
+                      )
                     )
 (spec-handling-add! lookup-handler
                     `((emacs-lisp-mode lisp-interaction-mode helpful-mode)

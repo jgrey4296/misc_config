@@ -30,7 +30,7 @@
 
 (defvar jg-bibtex-pdf-loc             (pcase system-type
                                         ('darwin (expand-file-name "~/pdf_library"))
-                                        ('gnu/linux "/media/data/library/pdfs")))
+                                        ('gnu/linux "/media/john/data/library/pdfs")))
 
 
 (defvar jg-bibtex-search-fields               '("tags" "year" "publisher"))

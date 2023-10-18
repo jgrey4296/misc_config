@@ -6,10 +6,6 @@
 
 (defvar kotlin-command "kotlinc")
 
-(spec-handling-add! compile-commands
-                    '(jvm +jg-jvm-get-gradle-commands)
-                    )
-
 (setq scala-indent:align-parameters t
       ;; indent block comments to first asterix, not second
       scala-indent:use-javadoc-style t)
@@ -18,6 +14,7 @@
   (pushnew! projectile-project-root-files "build.gradle")
   (pushnew! projectile-project-root-files "build.gradle.kts")
   )
+
 ;;-- gradle font lock
 (after! groovy-mode
   (setq jg-orig-groovy-font-lock-keywords groovy-font-lock-keywords)
@@ -161,5 +158,8 @@
                     )
 (spec-handling-add! yas-extra
                     '(android-mode android-mode)
+                    )
+(spec-handling-add! compile-commands
+                    '(jvm +jg-jvm-get-gradle-commands)
                     )
 ;;-- end specs

@@ -51,3 +51,26 @@
           )
     )
   )
+
+(defvar jg-jit-lock-debug-time 1)
+
+;;;###autoload
+(define-minor-mode jg-jit-lock-debug-mode
+  "Minor mode to help debug code run from jit-lock.
+
+When this minor mode is enabled, jit-lock runs as little code as possible
+during redisplay and moves the rest to a timer, where things
+like `debug-on-error' and Edebug can be used."
+  :global t
+  (when jit-lock-defer-timer
+    (cancel-timer jit-lock-defer-timer)
+    (setq jit-lock-defer-timer nil))
+  (when jg-jit-lock-debug-mode
+    (setq jit-lock-defer-timer
+          (run-with-idle-timer jg-jit-lock-debug-time t #'jit-lock--debug-fontify))))
+
+(defun jg-jit-lock-debug-announce (&rest args)
+  (message "Jit Locking: %s" jit-lock-defer-buffers)
+  )
+
+(advice-add #'jit-lock--debug-fontify :before #'jg-jit-lock-debug-announce)

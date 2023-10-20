@@ -39,7 +39,7 @@
  (position . 394)
  (last-modified 25890 29237 85449 672000))
 ("packages:lisp"
- (filename . "~/github/__configs/modules/lang-weakly-typed/lisp-langs/packages-reference.org")
+ (filename . "/media/john/data/github/_configs/modules/lang-weakly-typed/lisp-langs/packages-reference.org")
  (front-context-string . "#+TITLE: Lisp Pa")
  (rear-context-string)
  (position . 1))

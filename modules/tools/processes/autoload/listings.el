@@ -34,5 +34,10 @@
 ;;;###autoload
 (defun +jg-processes-kill-preview ()
   (interactive)
-  (shell-command "killall Preview")
+  (pcase system-type
+    ('darwin
+     (shell-command "killall Preview"))
+    ('gnu/linux
+     (shell-command "killall evince"))
+     )
   )

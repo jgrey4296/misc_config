@@ -16,9 +16,7 @@
       "<f9>" #'ignore
       "<f10>" #'ignore
 
-      "£" #'self-insert-command ;;"#"
       )
-
 
 (map! :map universal-argument-map
       :prefix doom-leader-key     "u" #'universal-argument-more

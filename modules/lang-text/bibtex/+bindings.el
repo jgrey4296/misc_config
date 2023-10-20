@@ -57,6 +57,7 @@
       :desc "Update Entry"      "U"      #'bibtex-entry-update
       :desc "Update Field"      "f"      #'+jg-bibtex-edit-field
       :desc "Sort Buffer"       "s"      #'bibtex-sort-buffer
+      :desc "Sort By Year"      "y"      #'+jg-bibtex-sort-buffer-by-year
       :desc "Validate"          "V"      #'bibtex-validate
       :desc "Journal<->BookTitle" "TAB"  #'+jg-bibtex-quickswap
       )

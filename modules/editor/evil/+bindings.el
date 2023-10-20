@@ -112,5 +112,10 @@
 
 ;;-- end stitching together
 
+(map! :map evil-insert-state-map
+      "£" (cmd! (insert "#"))
+      "#" (cmd! (insert "£"))
+      )
+
 (doom-log "Evil Bindings Complete: %s" (current-time-string))
 (provide 'jg-evil-bindings)

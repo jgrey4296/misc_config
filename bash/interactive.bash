@@ -30,11 +30,12 @@ case "$OSTYPE" in
 	darwin*) source "$HOME/.config/jg/bash/_aliases.bash"
 		# Setup Conda
 		source "$HOME/.config/jg/bash/conda.bash"
+        setup_conda
 		echo "Stopping Sarafi Bookmarks"; launchctl stop com.apple.SafariBookmarksSyncAgent
 		;;
-	linux*) 
+	linux*)
        source "$HOME/.config/jg/bash/conda.bash"
-
+       setup_conda
        if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
            debian_chroot=$(cat /etc/debian_chroot)
        fi

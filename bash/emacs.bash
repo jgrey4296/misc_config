@@ -10,25 +10,22 @@ DOOMDIR="$HOME/.config/jg/"
 
 # LOCS
 case "$OSTYPE" in
-    darwin*) 
+    darwin*)
         ENAT_DIR="$HOME/github/_libs/lisp/doomemacs"
         ENAT_BIN="/usr/local/Cellar/emacs-plus@28/28.2/bin/emacs"
         ;;
 
-    linux*) 
+    linux*)
         ENAT_DIR="/media/john/data/github/_libs/lisp/doomemacs"
-        ENAT_BIN="/snap/bin/emacs" 
+        ENAT_BIN="/snap/bin/emacs"
         ;;
 esac
 
-
-if [[ -n $INSIDE_EMACS ]]
-then
+if [[ -n "$INSIDE_EMACS" ]]; then
     echo "Inside Emacs"
     set disable-completion on
     TERM=dumb
 fi
-
 
 function check-emacs-d () {
     if [[ ! -e "$HOME/.emacs.d" ]]; then
@@ -68,15 +65,17 @@ function set-emacs () {
         ;;
         esac
 
-    if [[ (-L "$HOME/.emacs.d")
+    if [[ -d "$HOME/.emacs.d" ]]; then
+        echo "Emacs Dir isn't a symlink"
+    elif [[ ! ( -L "$HOME/.emacs.d" ) ]]; then
+        ln -s "$EMACSDIR" "$HOME/.emacs.d"
+    elif [[ (-L "$HOME/.emacs.d")
             && ($(readlink -f "$HOME/.emacs.d") != $(readlink -f "$EMACSDIR"))
         ]]; then
         rm "$HOME/.emacs.d"
         ln -s "$EMACSDIR" "$HOME/.emacs.d"
     fi
     PATH="$EMACSDIR/bin/:$PATH"
-    # alias emacs="$EMACS -nw"
-    # alias emacsw="$EMACS"
 }
 
 function read-emacs () {

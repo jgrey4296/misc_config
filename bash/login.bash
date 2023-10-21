@@ -2,7 +2,7 @@
 ISLOGIN="yes"
 
 if [[ $TMUX ]]; then
-	echo "Login: $OSTYPE : $TERM : TMUX" 
+	echo "Login: $OSTYPE : $TERM : TMUX"
 else
 	echo "Login: $OSTYPE : $TERM"
 fi
@@ -13,16 +13,17 @@ export NO_AT_BRIDGE=1
 source "$HOME/.config/jg/bash/_basic_utils.bash"
 source "$HOME/.config/jg/bash/_base_path.bash"
 
-case "$OSTYPE" in 
+case "$OSTYPE" in
 	darwin*) source "$HOME/.config/jg/bash/_aliases.mac.bash"
 		 jgdebug "Activating components"
 		 for fname in $(find "$HOME/.config/jg/bash/components" -type f -name "*.bash" -not -regex ".+?/_.+?\.bash")
 		 do
 		     jgdebug "-- Sourcing: $fname"
 		     source "$fname"
-		 done 
-		 jgdebug "Setting up Conda"
-		 source "$HOME/.config/jg/bash/conda.bash" ;;
+		 done
+		 source "$HOME/.config/jg/bash/conda.bash"
+		 setup_conda
+		 ;;
 	linux*) source "$HOME/.config/jg/bash/_aliases.linux.bash"
 		 for fname in $(find "$HOME/.config/jg/bash/components" -type f -name "*.bash" -not -regex ".+?/_.+?\.bash")
 		 do
@@ -30,6 +31,7 @@ case "$OSTYPE" in
 		     source "$fname"
 		 done
         source "$JG_CONFIG/bash/conda.bash"
+		setup_conda
         ;;
 esac
 

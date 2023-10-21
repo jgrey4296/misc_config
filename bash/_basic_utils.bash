@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 function jgdebug () {
+    # a debug message that only prints when JGDEBUG is true
     if [[ -n "${JGDEBUG-}" ]]; then
         echo "%% " $@
     fi
@@ -20,9 +21,9 @@ function jg_maybe_inc_prompt {
     jgdebug Depth Prompt: "${DEPTH_PROMPT-}"
 }
 
-#setting up the prompt:
-# from https://unix.stackexchange.com/questions/216953
 function jg_prompt_update {
+    #setting up the prompt:
+    # from https://unix.stackexchange.com/questions/216953
     MAYBE_CONDA=""
     MAYBE_JAVA=""
     MAYBE_TMUX=""
@@ -43,37 +44,52 @@ function jg_prompt_update {
     }
 
 function jg_set_prompt {
+    # Set the term prompt with useful info
     PROMPT_COMMAND='jg_prompt_update'
     # Also modified in .condarc
     PS1='  ${MAYBE_TMUX} | u:\u | j:\j | $MAYBE_JAVA | $MAYBE_CONDA |- $JGPATH[$DEPTH_PROMPT]: '
 }
 
 randname (){
-   cat /usr/share/dict/words | shuf | head -n 1 | sed "s/'//g"
+    # get a random name, for tmux session names
+    cat /usr/share/dict/words | shuf | head -n 1 | sed "s/'//g"
 }
 
 loginmux () {
-   case "$TERM_PROGRAM" in
-   	tmux) return ;;
-   	emacs) return ;;
+    # tmux aware session creation
+    if [[ -n $TMUX  ]]; then
+        return
+    fi
+    case "$TERM_PROGRAM" in
+   	    tmux) return ;;
+   	    emacs) return ;;
 
-   esac
+    esac
 
-   if { tmux has-session; }; then 
-   	echo "Tmux Session Running"
-   	tmux new-session -s `randname` 
-   else
-   	echo "No Tmux Session"
-       tmux new-session -s `randname`
-   fi
+    if { tmux has-session; }; then
+   	    echo "Tmux Session Running"
+   	    tmux new-session -s `randname`
+    else
+   	 echo "No Tmux Session"
+     tmux new-session -s `randname`
+    fi
 }
 
 attach () {
-  case "$TERM_PROGRAM" in
-      tmux) return ;;
-      emacs) return ;;
-  esac
-
-  tmux attach
+    # a simple tmux attach shortcut
+    case "$TERM_PROGRAM" in
+        tmux) return ;;
+        emacs) return ;;
+        *) tmux attach ;;
+    esac
 }
 
+case "$USER" in
+    john)
+        subu () {
+            # a su cmd that preserves tmux info
+            su -l --whitelist-environment="TMUX,TERM_PROGRAM,PROMPT_NUM" jg
+        }
+    ;;
+    *) ;;
+esac

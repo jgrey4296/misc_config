@@ -1,3 +1,4 @@
+% texmf.cnf.linux -*- mode: Conf[Space] -*-
 % (Public domain.)
 % symlink into $HOME/.local/texlive/YYYY/texmf.cnf
 %
@@ -24,8 +25,8 @@ JG_BIB   = $HOME/github/bibliography/main
 BIBINPUTS=$TEXMFDOTDIR/bib//:$TEXMFDOTDIR:$JG_BIB:$TEXMFCONFIG/bibtex//:$TEXMFHOME/bibtex//
 BSTINPUTS=$TEXMFDOTDIR/bib//:$TEXMFDOTDIR:$TEXMFCONFIG/bibtex//:$TEXMFHOME/bibtex//
 
-TTFONTS=$TEXMFDOTDIR/fonts//:$TEXMFDOTDIR:$JG_FONTS:$TEXMFCONFIG/fonts//:$TEXMFHOME/fonts//:$TEXMFMAIN/fonts//:/usr/share/fonts/truetype//
-OPENTYPEFONTS=$TEXMFDOTDIR/fonts//:$TEXMFDOTDIR:$JG_FONTS:$TEXMFCONFIG/fonts//:$TEXMFHOME/fonts//:$TEXMFMAIN/fonts//:/usr/share/fonts/opentype//
+TTFONTS=$TEXMFDOTDIR/fonts//:$TEXMFDOTDIR:$JG_FONTS/from_tablet:$JG_FONTS:$TEXMFCONFIG/fonts//:$TEXMFHOME/fonts//:$TEXMFMAIN/fonts//:/usr/share/fonts/truetype//
+OPENTYPEFONTS=$TEXMFDOTDIR/fonts//:$TEXMFDOTDIR:$JG_FONTS/from_tablet:$JG_FONTS:$TEXMFCONFIG/fonts//:$TEXMFHOME/fonts//:$TEXMFMAIN/fonts//:/usr/share/fonts/opentype//
 
 TEXINPUTS   = $TEXMFDOTDIR/image//:$TEXMFDOTDIR:$TEXMFCONFIG/tex//:$TEXMFHOME/tex//:$TEXMFMAIN/tex//
 

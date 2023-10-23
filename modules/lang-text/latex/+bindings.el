@@ -48,3 +48,8 @@
 (after! latex
   (setq LaTeX-mode-map jg-latex-mode-map)
   )
+
+(map! :map dired-mode-map
+      :localleader
+      "t" #'+jg-latex-dired-build-font-examples
+      )

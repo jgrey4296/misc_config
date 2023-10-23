@@ -69,6 +69,10 @@
   :after magit
   )
 
+(use-package! forge
+  :after magit
+  )
+
 (use-package! evil-collection-magit
   :defer t
   )

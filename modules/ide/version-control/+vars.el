@@ -8,6 +8,8 @@
       magit-clone-always-transient t
 
       magit-todos-keyword-suffix "\\(?:([^)]+)\\)?:?" ;; make colon optional
+
+      emacsql-sqlite-executable (executable-find "sqlite3")
       )
 
 ;; Magit uses `magit-display-buffer-traditional' to display windows, by

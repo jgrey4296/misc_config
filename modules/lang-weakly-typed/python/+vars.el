@@ -13,7 +13,7 @@
 (defvaralias 'python-shell-virtualenv-root 'py-shell-virtualenv-root)
 
 (setq py-indent-offset 4
-      conda-anaconda-home (or (getenv "ANACONDA_HOME") "/usr/local/anaconda3")
+      conda-anaconda-home (or (getenv "MAMBA_ROOT_PREFIX") (getenv "ANACONDA_HOME") "/usr/local/anaconda3")
       conda-env-home-directory (cond ((getenv "MAMBA_ROOT_PREFIX")
                                       (f-join (getenv "MAMBA_ROOT_PREFIX") "envs"))
                                      ((getenv "ANACONDA_ENVS")

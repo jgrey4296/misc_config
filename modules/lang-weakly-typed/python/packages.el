@@ -22,6 +22,7 @@
 (package! pyvenv)
 (package! conda)
 (package! poetry)
+(package! micromamba)
 
 ;; Testing frameworks
 (package! python-pytest)

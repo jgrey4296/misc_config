@@ -1,4 +1,4 @@
-;; sorting.el -*- mode: elisp; lexical-binding: t; -*-
+;; sorting.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
 (defun +jg-bibtex-sort-buffer-by-year ()

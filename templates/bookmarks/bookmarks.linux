@@ -180,7 +180,7 @@
  (rear-context-string . "02 May  2 02:49 ")
  (position . 1576))
 ("bindings"
- (filename . "~/github/__configs/modules/config/bindings/")
+ (filename . "~/.config/jg/modules/config/bindings/")
  (front-context-string . "config.el\n  -rw-")
  (rear-context-string . "66 Aug  2 23:52 ")
  (position . 166))

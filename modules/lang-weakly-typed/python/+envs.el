@@ -109,9 +109,31 @@
                                  )
                         )
                       )
-  :config
-
 )
+
+(use-package! micromamba
+  :commands (micromamba-activate micromamba-deactivate)
+  :init
+  (spec-handling-add! python-env
+                      `(mamba
+                        (:setup mamba
+                                ,#'(lambda (state local)
+                                     (let ((env-name (or (plist-get local :name)
+                                                         (plist-get state :name)
+                                                         (string-trim (read-string "Select Environment: ")))))
+                                       (micromamba-activate env-name)
+                                       (setenv "CONDA_DEFAULT_ENV" env-name)
+                                       (list :name env-name :path conda-env-home-directory)
+                                       )
+                                     )
+                                ,#'(lambda (state)
+                                     (micromamba-deactivate)
+                                     (setenv "CONDA_DEFAULT_ENV" nil)
+                                     )
+                                )
+                        )
+                      )
+  )
 
 (use-package! poetry
   :commands (poetry-venv-workon poetry-venv-deactivate poetry-update poetry-add)

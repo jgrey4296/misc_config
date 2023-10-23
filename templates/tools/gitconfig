@@ -28,3 +28,5 @@ jgsimple = format:"!!! %h : %aI : %s "
 
 [alias]
 jglog = log --pretty=jgsimple --name-only
+[github]
+	user = jgrey4296

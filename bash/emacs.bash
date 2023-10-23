@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 jgdebug "Setting emacs data"
-BLOOD_DIR="$HOME/github/lisp/blood"
+BLOOD_SRC="$HOME/github/lisp/blood"
 EDITOR="vim"
 
 EMACS="$(which emacs)"
@@ -43,7 +43,6 @@ function check-emacs-d () {
 }
 
 function set-emacs () {
-    DOOMDIR=""
     case "$1" in
         *native* | doom*)
             echo "Setting Doom Native Emacs"
@@ -54,9 +53,9 @@ function set-emacs () {
         "blood")
             echo "BLOOD"
             EMACS="$ENAT_BIN"
-            EMACSDIR="$BLOOD_DIR"
-            # To become $BLOODDIR
-            DOOMDIR="$EMACSDIR/example"
+            EMACSDIR="$BLOOD_SRC"
+            # TODO
+            BLOOD_CONFIG="$EMACSDIR/example"
             ;;
         *)
             echo "Unrecognized emacs type: $1"
@@ -65,7 +64,7 @@ function set-emacs () {
         ;;
         esac
 
-    if [[ -d "$HOME/.emacs.d" ]]; then
+    if [[ -d "$HOME/.emacs.d" ]] && [[ ! ( -L "$HOME/.emacs.d" ) ]]; then
         echo "Emacs Dir isn't a symlink"
     elif [[ ! ( -L "$HOME/.emacs.d" ) ]]; then
         ln -s "$EMACSDIR" "$HOME/.emacs.d"
@@ -85,6 +84,7 @@ function read-emacs () {
 
 function report-emacs () {
     echo "Emacs       : $EMACS"
+    echo "blood       : $BLOOD_SRC : $BLOOD_CONFIG"
     echo ".emacs.d    : $EMACSDIR"
     echo " .doom.d    : $DOOMDIR"
 }

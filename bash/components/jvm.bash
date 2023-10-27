@@ -41,7 +41,7 @@ esac
 
 jgdebug "Setting up SDKMAN"
 SDKMAN_DIR="$BASE_CACHE/sdkman"
-if [[ -e "$SDMAN_DIR/bin/sdkman-init.sh" ]]; then
+if [[ -e "$SDKMAN_DIR/bin/sdkman-init.sh" ]]; then
         source "$SDKMAN_DIR/bin/sdkman-init.sh"
 fi
 

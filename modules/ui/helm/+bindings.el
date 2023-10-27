@@ -61,9 +61,9 @@
 ;; Actions
 (map! :map jg-helm-map
       "RET" #'helm-maybe-exit-minibuffer
+      "C-z"     #'helm-execute-persistent-action
       :ni "RET" #'helm-maybe-exit-minibuffer
       :ni "TAB" #'helm-select-action
-      "C-z"     #'helm-execute-persistent-action
       :n "s"    #'helm-select-action
       :n "1" (cmd! (helm-select-nth-action 0))
       :n "2" (cmd! (helm-select-nth-action 1))

@@ -50,12 +50,12 @@ function jg_set_prompt {
     PS1='  ${MAYBE_TMUX} | u:\u | j:\j | $MAYBE_JAVA | $MAYBE_CONDA |- $JGPATH[$DEPTH_PROMPT]: '
 }
 
-randname (){
+function randname (){
     # get a random name, for tmux session names
     cat /usr/share/dict/words | shuf | head -n 1 | sed "s/'//g"
 }
 
-loginmux () {
+function loginmux () {
     # tmux aware session creation
     if [[ -n $TMUX  ]]; then
         return
@@ -75,7 +75,7 @@ loginmux () {
     fi
 }
 
-attach () {
+function attach () {
     # a simple tmux attach shortcut
     case "$TERM_PROGRAM" in
         tmux) return ;;

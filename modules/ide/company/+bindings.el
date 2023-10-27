@@ -5,7 +5,7 @@
 
 (map! :map jg-company-search-map
       [escape] (cmd! (company-enable-overriding-keymap company-active-map))
-      "|" (cmd! (company-enable-overriding-keymap company-active-map))
+      "|"      (cmd! (company-enable-overriding-keymap company-active-map))
       "RET"    #'company-complete-selection
       "DEL"    #'company-search-delete-char
       "Q"      #'company-search-abort

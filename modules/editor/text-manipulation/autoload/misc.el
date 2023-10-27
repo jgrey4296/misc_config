@@ -88,4 +88,11 @@
   )
 
 ;;;###autoload
+(defun +jg-text-insert-random-word ()
+  (interactive)
+  (insert (shell-command-to-string "randname"))
+  )
+
+
+;;;###autoload
 (advice-add 'evil-join :after #'+jg-text-join-line-bol)

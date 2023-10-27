@@ -14,6 +14,9 @@
        :desc "Yank Buffer Name" "n"   #'+jg-text-yank-buffer-name
        :desc "Clear Buffer"     "DEL" #'+jg-text-clear-buffer
        )
+      (:prefix "i"
+               "w" #'+jg-text-insert-random-word
+               )
       )
 
 (map! :map evil-other-chars-state-map

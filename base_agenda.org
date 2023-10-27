@@ -5,6 +5,21 @@
 [[file:/Volumes/documents/github/jgrey4296.github.io][homepage]]
 
 :to-deal-with:
+https://algorist.com/algorist.html
+https://www.probabilitycourse.com/preface.php
+https://johnbattle.itch.io/dungeonremastered
+https://en.m.wikipedia.org/wiki/Law_of_truly_large_numbers
+https://rmzoo.math.uconn.edu/
+https://stacks.math.columbia.edu/browse
+https://us.metamath.org/
+https://en.m.wikipedia.org/wiki/List_of_theorems
+https://en.m.wikipedia.org/wiki/List_of_mathematical_proofs
+https://www.cut-the-knot.org/
+https://github.com/planetmath
+https://www.proofwiki.org/wiki/Main_Page
+https://en.m.wikipedia.org/wiki/List_of_theorems_called_fundamental
+https://sites.math.washington.edu/~billey/talks/theorem.finder.html
+https://trustandsafety.fun/
 https://goldenhivemead.com/
 https://measuringstuff.com/
 :END:

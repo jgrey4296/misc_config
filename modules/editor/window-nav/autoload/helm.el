@@ -14,7 +14,13 @@
         :filter-one-by-one   #'+jg-nav-grep-filter-one-by-one
         :pattern-transformer #'+jg-nav-bookmark-helm-pattern-transformer
         :nomark nil
-        :backend "ggrep --color=always -a -d skip %e -n%cH -e %p %f"
+        :backend (format "%s --color=always -a -d %s"
+                         (pcase system-type
+                           ('darwin "ggrep")
+                           ('gnu/linux "grep")
+                           )
+                         "skip %e -n%cH -e %p %f"
+                         )
         :pcre nil
         )
       )

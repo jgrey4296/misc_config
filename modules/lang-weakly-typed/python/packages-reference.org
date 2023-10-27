@@ -56,6 +56,7 @@ https://github.com/OlafHaag/VectorFields/tree/master
 - wheel
 
 ** To Make Core
+- dowhy
 - https://github.com/astral-sh/ruff
 - https://github.com/astral-sh/ruff-lsp
 - https://github.com/openlawlibrary/pygls
@@ -307,6 +308,7 @@ https://github.com/python/typeshed
 mypy
 
 ** misc
+https://rmzoo.math.uconn.edu/
 https://mrandri19.github.io/2022/01/12/a-PPL-in-70-lines-of-python.html                         : DAG : __come_back_to : probability : programming
 https://github.com/jarun/Buku                                                                   : bookmark_organisation : cli : libraries
 https://github.com/joeyespo/pytest-watch
@@ -345,6 +347,7 @@ https://potassco.org/
 https://pysathq.github.io/
 
 ** stats
+https://github.com/py-why/dowhy
 https://scikit-learn.org/stable/user_guide.html
 https://github.com/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers  : bayes : hacker : statistics
 https://github.com/MaxHalford/sorobn                                                            : bayesian_network : library

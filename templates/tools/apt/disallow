@@ -1,0 +1,14 @@
+# Symlink into /etc/apt/preferences.d
+# https://askubuntu.com/questions/99081
+
+Package: /texlive/
+Pin: release *
+Pin-Priority: -10
+
+Package: tex-common
+Pin: release *
+Pin-Priority: -10
+
+Package: /latex/
+Pin: release *
+Pin-Priority: -10

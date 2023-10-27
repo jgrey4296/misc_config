@@ -107,10 +107,12 @@ tomli-w                  # https://github.com/hukkin/tomli-w
 Semantic Release         # https://python-semantic-release.readthedocs.io/en/latest/
 gitlint                  # https://jorisroovers.com/gitlint/latest/
 conventional commits     # https://www.conventionalcommits.org/en/v1.0.0/#specification
+DoWhy                    # https://www.pywhy.org/dowhy/v0.10.1/user_guide/foreword.html
 
 LSP Protocol             # https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/
 
 PEP 635: Match statement # https://peps.python.org/pep-0635
 marginal effects         # https://marginaleffects.com/index.html
 
-unicode # https://tonsky.me/blog/unicode/
+unicode                  # https://tonsky.me/blog/unicode/
+Algorithm Library        # https://algorist.com/algorist.html

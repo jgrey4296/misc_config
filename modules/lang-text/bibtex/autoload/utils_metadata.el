@@ -163,16 +163,13 @@
                  )
                )
              )
-           (insert "}")
+           (insert "\n}")
            )
           (t
            (insert bibtex)
            (backward-char)
            ;; set date added for the record
-           (let ((ts (funcall doi-utils-timestamp-format-function)))
-             (when ts
-               (bibtex-set-field doi-utils-timestamp-field
-			         ts)))
+           (when-let (ts (funcall doi-utils-timestamp-format-function)) (bibtex-set-field doi-utils-timestamp-field ts))
            (org-ref-clean-bibtex-entry)
            (save-buffer))
           )

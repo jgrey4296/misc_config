@@ -15,8 +15,6 @@
 (setq bibtex-completion-pdf-field "file")
 ;;-- end bibtex fields
 
-;; bibtex-completion-pdf-open-function #'(lambda (x) (org-open-link-from-string (format "[[file:%s]]" x)))
-
 ;;-- hl line
 (after! hl-line
   (add-to-list 'global-hl-line-modes 'bibtex-mode)

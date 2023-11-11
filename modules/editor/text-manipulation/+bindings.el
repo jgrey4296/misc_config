@@ -144,6 +144,8 @@
        :desc "Title Case"                  "t"  #'+jg-text-title-case-op
        )
 
+      :desc "Quick Change" "\"" #'evil-surround-change
+      :desc "Quick Delete" "'"  #'evil-surround-delete
       (:prefix ("S" . "Surround")
                "d" #'evil-surround-delete
                "c" #'evil-surround-change

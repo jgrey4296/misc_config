@@ -5,6 +5,17 @@
 [[file:/Volumes/documents/github/jgrey4296.github.io][homepage]]
 
 :to-deal-with:
+https://yaml.org/spec/1.2.2/#chapter-1-introduction-to-yaml
+https://docs.openwdl.org/en/latest/
+https://support.terra.bio/hc/en-us/articles/360037117492-Overview-Getting-started-with-WDL
+https://www.commonwl.org/user_guide/
+https://aosabook.org/en/
+https://bibtexparser.readthedocs.io/en/main/index.html
+https://zenodo.org/
+https://gothicpunk.tumblr.com/archive?source=blog_view_login_wall
+https://embrace-autism.com/
+https://javieracordero.notion.site/Job-Application-Manager-fce5406854f0475aa21d5fcd9fa5e668
+https://neverworkintheory.org/
 https://algorist.com/algorist.html
 https://www.probabilitycourse.com/preface.php
 https://johnbattle.itch.io/dungeonremastered

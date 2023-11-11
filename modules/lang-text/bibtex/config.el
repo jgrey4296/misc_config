@@ -18,6 +18,7 @@
 
 
   (add-hook! 'bibtex-mode-hook
+             #'display-line-numbers-mode
              #'yas-minor-mode
              #'outline-minor-mode
              #'+jg-bibtex-font-lock-mod-hook

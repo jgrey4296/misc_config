@@ -35,7 +35,7 @@
   :defer t
   :config
   (setq dash-docs-enable-debugging init-file-debug
-        dash-docs-docsets-path (concat doom-data-dir "docsets/")
+        dash-docs-docsets-path (expand-file-name "~/.cache/docsets")
         dash-docs-min-length 2
         dash-docs-browser-func #'browse-url
         )
@@ -51,8 +51,8 @@
   (add-hook 'wordnut-mode-hook 'outline-minor-mode)
   )
 
-(use-package! osx-dictionary 
-              :when (eq system-type 'darwin) 
+(use-package! osx-dictionary
+              :when (eq system-type 'darwin)
               :defer t)
 
 ;; (use-package! powerthesaurus :defer t)

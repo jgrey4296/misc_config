@@ -18,7 +18,7 @@ https://github.com/OlafHaag/VectorFields/tree/master
 - pycodestyle
 - pycycle
 - pyright
-- semanticversion
+- bumpver
 - sh
 - stackprinter
 - thefuzz
@@ -142,7 +142,6 @@ pkginfo                                                                         
 https://github.com/platformdirs/platformdirs
 https://github.com/pytest-dev/pluggy
 https://github.com/pexpect/ptyprocess
-https://github.com/rbarrois/python-semanticversion
 setuptools                                                                                      : 63.4.1
 https://github.com/di/calver
 setuptools-rust                                                                                 : 1.4.1
@@ -152,6 +151,7 @@ wrapt                                                                           
 
 ** best-practices
 https://github.com/mbarkhau/bumpver
+https://github.com/rbarrois/python-semanticversion
 https://github.com/jorisroovers/gitlint
 https://github.com/python-semantic-release/python-semantic-release
 https://github.com/csurfer/pyheatmagic                                                          : heatmap : ipython
@@ -170,7 +170,6 @@ pip-reqs
 https://github.com/jaraco/path
 https://www.attrs.org/en/stable/
 https://github.com/pytransitions/transitions
-https://pyyaml.org/
 https://pyyaml.org/
 https://karimbahgat.github.io/Pyqtree/
 imagesize                                                                                       : 1.4.1
@@ -328,7 +327,6 @@ https://github.com/PyO3/pyo3                                                    
 https://github.com/PyO3/setuptools-rust                                                         : rust : setuptools
 ** SMT and logic
 https://pomegranate.readthedocs.io/en/latest/index.html                                         : causal_model : library : markov_models : pomegranate : statistics
-https://docs.sympy.org/latest/guides/index.html
 https://github.com/AlexPof/colubridae
 https://github.com/AlexPof/opycleid
 https://github.com/Svalorzen/AI-Toolbox                                                         : ai : c_plusplus : toolbox
@@ -345,6 +343,11 @@ https://github.com/yuce/pyswip
 https://gitlab.com/danielhones/pycategories
 https://potassco.org/
 https://pysathq.github.io/
+*** Sympy
+https://docs.sympy.org/latest/guides/index.html
+
+Comparisons: https://en.wikipedia.org/wiki/List_of_computer_algebra_systems
+Sympy can't do: graphy theory, quantifier elimination, control theory, has no forumla editor
 
 ** stats
 https://github.com/py-why/dowhy
@@ -435,3 +438,5 @@ https://github.com/spotify/luigi
 https://github.com/python-poetry/poetry
 https://github.com/SCons/scons
 https://github.com/celery/celery
+** System
+https://github.com/giampaolo/psutil

@@ -1,13 +1,11 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
-(setq jg-xml-xpath-command-string  "xmllint --pretty 2 --htmlout --xpath %s %s"
-      jg-xml-format-command-string "xmllint --format %s"
-      jg-xml-xidel-command-string  "xidel -s --output-format=xml --xpath \"%s\" %s"
+(defvar jg-xml-xpath-command-string  "xmllint --pretty 2 --htmlout --xpath %s %s")
+(defvar jg-xml-format-command-string "xmllint --format %s")
+(defvar jg-xml-xidel-command-string  "xidel -s --output-format=xml --xpath \"%s\" %s")
 
-      jg-xml-xpath-results-buffer-name "*xpath result*"
-      jg-xml-xmllint-shell-buffer-name "*xmllint*"
-
-      )
+(defvar jg-xml-xpath-results-buffer-name "*xpath result*")
+(defvar jg-xml-xmllint-shell-buffer-name "*xmllint*")
 
 (setq mailcap-mime-extensions nil)
 (pushnew! mailcap-mime-extensions '(".xhtml" . "text/html"))

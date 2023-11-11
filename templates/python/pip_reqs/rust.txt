@@ -1,0 +1,5 @@
+
+setuptools-rust
+pyo3
+cython
+llvmlite

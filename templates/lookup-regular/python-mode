@@ -108,6 +108,10 @@ Semantic Release         # https://python-semantic-release.readthedocs.io/en/lat
 gitlint                  # https://jorisroovers.com/gitlint/latest/
 conventional commits     # https://www.conventionalcommits.org/en/v1.0.0/#specification
 DoWhy                    # https://www.pywhy.org/dowhy/v0.10.1/user_guide/foreword.html
+Selenium                 # https://www.selenium.dev/documentation/
+Selenium-Python          # https://selenium-python.readthedocs.io/
+WebDriver                # https://developer.mozilla.org/en-US/docs/Web/WebDriver
+Helium                   # https://github.com/mherrmann/selenium-python-helium/blob/master/docs/cheatsheet.md
 
 LSP Protocol             # https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/
 

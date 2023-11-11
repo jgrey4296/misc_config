@@ -1,0 +1,11 @@
+
+pelican
+beautifulsoup4
+sphinx
+flask
+helium
+selenium
+requests
+twisted
+jinja
+scrapy

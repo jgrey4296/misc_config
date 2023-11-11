@@ -1,0 +1,10 @@
+
+jedi
+ruff
+ruff-lsp
+pyright
+mypy
+pip-review
+pycodestyle
+pycycle
+bumpver

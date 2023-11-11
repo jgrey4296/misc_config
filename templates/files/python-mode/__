@@ -30,31 +30,7 @@ from uuid import UUID, uuid1
 ##-- end builtin imports
 
 ##-- lib imports
-# from bs4 import BeautifulSoup
-# import construct as C
-# import dirty-equals as deq
-# import graphviz
-# import matplotlib.pyplot as plt
 import more_itertools as mitz
-# import networkx as nx
-# import numpy as np
-# import pandas
-# import pomegranate as pom
-# import pony import orm
-# import pronouncing
-# import pyparsing as pp
-# import rich
-# import seaborn as sns
-# import sklearn
-# import spacy # nlp = spacy.load("en_core_web_sm")
-# import stackprinter # stackprinter.set_excepthook(style='darkbg2')
-# import sty
-# import sympy
-# import tomllib
-# import toolz
-# import tqdm
-# import validators
-# import z3
 ##-- end lib imports
 
 ##-- logging

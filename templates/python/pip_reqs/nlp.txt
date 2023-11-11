@@ -1,0 +1,6 @@
+
+
+textblob
+inflect
+pronouncingpy
+spacy

@@ -1,0 +1,202 @@
+Sympy Reference:
+sympify(a)                                                                       # convert arbitrary expression to sympy form
+Symbol('{}')                                                                     # Construct New Symbolic Variables. or sympy.abc.[a-zA-Z,alpha-zeta]
+Function('{}')(args.. )                                                          # Construct a new Function Variable
+ask                                                                              # Evaluate a Predicate
+N(expr, args)                                                                    # evaluate into a floating point approximation
+cse(expr)                                                                        # common subexpression elimination
+
+diff                                                                             # differentiate
+integrate(f, x)                                                                  # indefinite integral (<-∞, +∞>, f, dx).
+integrate(f, (x, a, b))                                                          # definite integral   (<a, b>, f, dx).
+summation(f, *sym, **kwargs)                                                     # Compute Σ(f).
+product(*args, **kwargs)                                                         # Compute Π(f)
+gosper_normal(f, g, n, polys=True)                                               # f(n)/g(n) -> Z * ((A(n)C(n+1)) / (B(n)C(n)))
+Sum(f, *syms, **assumptions)                                                     # Unevaluated Σ(f). Can have a range as sym=(x, a, b).
+Product(f, *syms, **assumptions)                                                 # Unevaluated Π(f). Can have a range as sym=(x, a, b).
+simplify(expr)                                                                   # Simplify an expression using a variety of strategies.
+nsimplify(expr, *constants)                                                      #
+
+--------------------
+Sub-packages:
+sympy.physics.units    #
+sympy.phyics.mechanics # classical physics
+sympy.geometry         #
+sympy.polys            #
+sympy.categories       # Category Theory
+sympy.stats            # Statistics and probability
+
+
+--------------------
+Matrices:
+Quaternion(a,b,c,d, real_field=True, norm=None)                                  # quaternion operations
+Matrix                                                                           #
+eye                                                                              #
+zeros                                                                            #
+ones                                                                             #
+diag                                                                             #
+
+vector                                                                           #
+
+--------------------
+Solvers:
+solve(f, *syms)                                                                  # General Solver of f() == 0
+solveset(equation, variable=None, domain=S.Complexes)                            # returns a set of solutions
+diophantine(f)                                                                   # Solver for functions of form f(x1, x2, ..., xn) = 0. eg: dio(2*x+3*y-5)
+reduce_inequalities([expr], var)                                                 # inequality solver
+dsolve(eq, func=None)                                                            # Solve an ODE/Ordinary Differential Equation
+pde_separate(eq, fun, seq, strategy='mul')                                       # Solve a Partial Differential Equation
+
+--------------------
+Functions:
+DiracDelta                                                                          # distribution/measure, for definite integrals
+sympy.functions.combinatorial.numbers.nC                                            # N choose K, replacement=bool
+sympy.functions.combinatorial.numbers.nP                                            # Permutations of n taking k, replacement=k
+
+Heaviside                                                                           # Step Function
+gamma                                                                               # Gamma Function, integral(t^x-1*e^-t dt)
+loggamma                                                                            # log(gamma(x))
+digamma                                                                             # derivative of loggamma
+polygamma                                                                           # n+1th derivative of the log of gamma.
+beta(x,y)                                                                           # eulerian integral, integral(t^x-1*(1-t)^y-1 dt).
+
+erf                                                                                 # gauss error function. 2/sqrt(pi) * integral(<0,x>, e^-t**2 dt).
+erfc                                                                                # complementary error function. 2/sqrt(pi) * integral(<x, ∞>, e^-t**2 dt).
+erf2(x,y)                                                                           # 2 value error function. 2/sqrt(pi) * integral(<x, y>, e^-t**2 dt).
+
+fresnel(z)                                                                          # integral(<0,z>, sin(pi/2)*t^2 dt).
+fresnelc(z)                                                                         # integral(<0,z>, cos(pi/2)*t^2).
+Ei(z)                                                                               # expoential integral. sum(<1,∞>, (x^n / (n * n!)) + log(x) + γ). γ = euler-masheroni constant.
+
+chebyshevt(n, x)                                                                    # chebyshev polynomial, Tₙ(x)
+KroneckerDelta(i, j)                                                                # Kronecker delta function
+
+laplace_transform(f, t, s)                                                          # Compute the laplace.
+fft(seq, dps=None)                                                                  #
+ifft(seq, dps=None)                                                                 #
+convolution(a, b, cycle=0, dps=None)                                                #
+_fourier_transform(f, x, k, a, b,name)                                              # Compute the Fourier. a * integral(<-∞, ∞>, e^(b*i*x*k) * f(x) dx).
+inverse_fourier_transform(F, k, x)                                                  #
+
+limit(e, z, z0, dir='+')                                                            # compute the limit of e(z) at z0.
+series(expr, x, z0, n, dir='+')                                                     # compute a series expansion around x=x0.
+sequence(seq, limits=None)                                                          # get a sequence
+RecursiveSeq(rec, yn, n, initial=None, start=0)                                     # Finite degree recursive sequence.
+
+--------------------
+Geometry:
+geometry.Point          #
+geometry.Line           # Infinite Line
+geometry.Segment        # Line Segment of two points
+geometry.Ray            # Semi-line. Source point and direction
+geometry.Curve          #
+geometry.Ellipse        #
+geometry.Circle         #
+geometry.Polygon        #
+geometry.RegularPolygon #
+geometry.Triangle       #
+geometry.Plane          #
+geometry.intersection   #
+geometry.convex_hull    #
+geometry.centroid       #
+
+
+--------------------
+Statistics:
+stats.Die(Name, int)                                                                # Finite Random Discrete Variable
+stats.ContinuousRV(var, pdf, set=Interval)                                          # Random, Continuous variable
+stats.DiscreteRV()                                                                  # Discrete Random Variable
+stats.P(expr)                                                                       # probability
+stats.E(expr)                                                                       # expected value
+stats.media(expr)                                                                   #
+stats.variance(expr)                                                                #
+stats.covariance(X, Y, condition=None)                                              #
+stats.std(X, condition=None)                                                        #
+stats.kurtosis(X)                                                                   #
+stats.skewness(X)                                                                   #
+stats.correlation(X, Y)                                                             #
+stats.moment(X, N, c=0)                                                             # Get the nth moment of the expression
+stats.cmoment(X, N)                                                                 # Nth central moment
+stats.H(expr)                                                                       # Entropy
+stats.density(expr)                                                                 # Probability Density Function
+stats.sample(expr)                                                                  # Sample from a distribution
+stats.where(condition)                                                              #
+
+stats.Coin                                                                          # Finite
+stats.Bernoulli                                                                     # Finite
+stats.Binomial                                                                      # Finite
+stats.BetaBinomial                                                                  # Finite
+stats.Hypergeometric                                                                # Finite
+stats.Rademacher                                                                    # Finite
+
+stats.Geometric                                                                     # Discrete
+stats.Hermite                                                                       # Discrete
+stats.Poisson                                                                       # Discrete
+stats.Logarithmic                                                                   # Discrete
+stats.NegativeBinomial                                                              # Discrete
+stats.Skellam                                                                       # Discrete
+stats.YuleSimon                                                                     # Discrete
+stats.Zeta                                                                          # Discrete
+
+stats.Beta                                                                          # Continuous
+stats.BetaPrime                                                                     # Continuous
+stats.BoundedPareto                                                                 # Continuous
+stats.Cauchy                                                                        # Continuous
+stats.Chi                                                                           # Continuous
+stats.ChiSquared                                                                    # Continuous
+stats.Dagum                                                                         # Continuous
+stats.Erlang                                                                        # Continuous
+stats.Exponential                                                                   # Continuous
+stats.FisherZ                                                                       # Continuous
+stats.Gamma                                                                         # Continuous
+stats.GammaInverse                                                                  # Continuous
+stats.Laplace                                                                       # Continuous
+stats.Logistic                                                                      # Continuous
+stats.LogNormal                                                                     # Continuous
+stats.Normal                                                                        # Continuous
+stats.Preto                                                                         # Continuous
+stats.PowerFunction                                                                 # Continuous
+stats.Reciprocal                                                                    # Continuous
+stats.StudentT                                                                      # Continuous
+stats.Uniform                                                                       # Continuous
+stats.UniformSum                                                                    # Continuous
+
+stats.JointRV                                                                       # Joint
+stats.marginal_distribution                                                         # Joint
+stats.MultivariateNormal                                                            # Joint
+stats.Multinomial                                                                   # Joint
+stats.NormalGamma                                                                   # Joint
+
+
+--------------------
+Predicates:
+commutative          # a * b == b * a
+infinite             # ∞
+finite               # !∞
+hermitian            # Linear Algebra, a sqaure matrix with compelx entries.
+antihermitian        # Square Matrix whose conjugate transpose is the negative of the original
+complex              # z ∈ C.  Complex Number of x+iy. Always finite, includes all real numbers.
+algebraic            # z ∈ Q. Includes all complex numbers. Includes all rational numbers. Might not be real.
+transcendental       # z ∈ C - Q. A Complex number that is *not* algebraic. Can never be rational.
+extended_real        # x ∈ R ∪ {-∞, +∞}. Either real, or ±∞
+real                 # x ∈ R. Includes Finite, complex, rational. either negative, zero, or positive.
+imaginary            # z ∈ I - {0}. Always complex, not real. Not zero.
+rational             # q ∈ Q. Number of the form a/b of integers, b != 0
+irrational           # x ∈ R - Q. !Rational
+integer              # a ∈ Z. Always rational. Includes zero and primes, composite, even, and odd.
+noninteger           # x ∈ R - Z.
+even                 # e ∈ {2k: k ∈ Z}.
+odd                  # e ∈ {2k+1: k ∈ Z}.
+prime                # p ∈ P. Always positive and integer.
+composite            # c ∈ N - (P ∪ {1}). a product of 2 or more primes. Always positive integer, never prime.
+zero                 # an Integer.
+nonzero              # x ∈ R - {0}.
+extended_nonzero     # x ∈ R - {0}.
+positive             # x ∈ R, x > 0.
+nonnegative          # x ∈ R, x >= 0.
+negative             # x ∈ R, x < 0.
+nonpositive          # x ∈ R, x <= 0.
+extended_positive    # x ∈ R, x > 0.
+extended_nonnegative # x ∈ R, x >= 0.
+extended_negative    # x ∈ R, x < 0.
+extended_nonpositive # x ∈ R, x <= 0.

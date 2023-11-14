@@ -14,6 +14,7 @@
   (transient-make-mode-toggle! lsp-lens-mode                               "Lenses" "l")
   (transient-make-mode-toggle! lsp-treemacs-sync-mode                      "Treemacs integration" "T")
 
+  (transient-make-mode-toggle! tree-sitter-hl-mode                         "TreeSitter HL" "e")
   (transient-make-mode-toggle! lsp-modeline-diagnostics-mode               "Modeline Diagnostics" "m")
   (transient-make-mode-toggle! lsp-diagnostics-mode                        "Diagnostics" "d")
   (transient-make-mode-toggle! lsp-completion-mode                         "Completion" "c")
@@ -132,6 +133,7 @@
                             (transient-macro-toggle-lsp-doc-hover)
                             (transient-macro-toggle-lsp-completion-mode)
                             (transient-macro-toggle-lsp-diagnostics-mode)
+                            (transient-macro-toggle-tree-sitter-hl-mode)
                             ]
                            [ "Settings"
                              (transient-macro-call-lsp-on-type-formatting)

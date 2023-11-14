@@ -370,6 +370,7 @@ https://utkuufuk.com/2018/05/04/learning-curves/
 https://www.statsmodels.org/stable/index.html                                                   : library : statistics
 
 ** Text manipulation
+https://pythonhosted.org/watchdog/ : file watching
 https://github.com/mherrmann/selenium-python-helium    : firefox : headless
 https://github.com/jorisroovers/gitlint
 https://github.com/cgpotts/swda

@@ -112,7 +112,13 @@ Selenium                 # https://www.selenium.dev/documentation/
 Selenium-Python          # https://selenium-python.readthedocs.io/
 WebDriver                # https://developer.mozilla.org/en-US/docs/Web/WebDriver
 Helium                   # https://github.com/mherrmann/selenium-python-helium/blob/master/docs/cheatsheet.md
-
+bonobo ETL               # https://docs.bonobo-project.org/en/master/
+Apache Airflow           # https://airflow.apache.org/docs/apache-airflow/stable/index.html
+Apache Airflow Py        # https://github.com/apache/airflow-client-python/blob/main/airflow_client/README.md
+PyCaret                  # https://pycaret.gitbook.io/docs/
+SQLAlchemy               # https://docs.sqlalchemy.org/en/20/
+pygrametl                # https://chrthomsen.github.io/pygrametl/doc/quickstart/beginner.html
+petl                     # https://petl.readthedocs.io/en/stable/
 LSP Protocol             # https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/
 
 PEP 635: Match statement # https://peps.python.org/pep-0635

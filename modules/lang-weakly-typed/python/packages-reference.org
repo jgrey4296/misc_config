@@ -196,6 +196,7 @@ https://github.com/lmcinnes/hypergraph                                          
 https://github.com/mvcisback/hasse                                                              : partial_order : sets
 
 *** databases
+https://docs.sqlalchemy.org/en/20/
 https://github.com/ponyorm/pony/                                                                : SQL : database : databases : library : object_relation_mapper : object_relational_mapper : pony
 https://marshmallow.readthedocs.io/en/stable/                                                   : library : marshmallow : technical
 sqlite                                                                                          : 3.39.3
@@ -438,6 +439,10 @@ https://github.com/Open-Argumentation/ALIAS
 https://github.com/open-argumentation/SADFace
 https://github.com/siwells/DGDL
 ** Task runners
+https://chrthomsen.github.io/pygrametl/doc/quickstart/beginner.html
+https://petl.readthedocs.io/en/stable/
+https://pycaret.gitbook.io/docs/
+https://docs.bonobo-project.org/en/master/
 https://github.com/snakemake/snakemake
 https://github.com/pydoit/doit
 https://github.com/spotify/luigi

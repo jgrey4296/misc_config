@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name  : compiler
+# uuid  : compiler
+# key   : compiler
+# group :
+# --
+%% compiler:pdflatex
+%% available: pdflatex lualatex xelatex

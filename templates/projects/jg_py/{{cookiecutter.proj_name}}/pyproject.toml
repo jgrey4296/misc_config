@@ -7,7 +7,7 @@ requires-python = ">={{cookiecutter.python}}"
 license         = {file = "LICENSE"}
 keywords        = []
 authors         = [
-  {name  = "{{cookiecutter._author}}"}
+  {name  = "{{cookiecutter._author}}"},
   {email = "{{cookiecutter._email}}"},
 ]
 classifiers     = [
@@ -18,8 +18,8 @@ dependencies   = []
 
 [project.optional-dependencies]
 docs = [ "sphinx" ]
-dev  = [ "https://github.com/jgrey4296/doot", "pipreqs" ]
-test = [ "pytest < 5.0.0" ]
+dev  = [ "https://github.com/jgrey4296/doot", "pipreqs"]
+test = [ "pytest > 7.0.0" ]
 
 ##-- urls
 [project.urls]

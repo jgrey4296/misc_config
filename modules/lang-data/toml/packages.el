@@ -22,5 +22,5 @@
 
 ;; (package!  :type 'local :recipe (:local-repo "" :files ("*.el" "data-struct/*.el" "modes/*.el" "util/*.el")))
 (package! conf-mode :built-in t)
-
+(package! toml-mode)
 ;;; packages.el ends here

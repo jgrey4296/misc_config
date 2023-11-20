@@ -32,3 +32,18 @@
                       ("\\.cfg\\'" . conf-mode)
                       )
                     )
+(spec-handling-add! fold
+                    `(toml
+                      :modes (conf-toml-mode)
+                      :priority -50
+                      :triggers (
+                                :delete     nil
+                                :open-all   ,#'origami-open-all-nodes
+                                :close-all  ,#'origami-close-all-nodes
+                                :toggle     ,#'origami-toggle-node
+                                :open       ,#'origami-open-node
+                                :open-rec   ,#'origami-open-node-recursively
+                                :close      ,#'origami-close-node
+                                )
+                      )
+                    )

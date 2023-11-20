@@ -41,7 +41,7 @@
          (default-directory (f-parent fname))
          (comint-buff (apply #'make-comint-in-buffer "xmllint"
                                              jg-xml-xmllint-shell-buffer-name
-                                             "xmllint"
+                                             jg-xml-repl-command
                                              nil
                                              (-filter #'identity
                                                       (list (when is-html "--html")
@@ -150,7 +150,7 @@ uses xidel, outputs as xml
   "Print out the element mapping using xmlstarlet of all marked files combined"
   (interactive)
   (+jg-xml-dired-all-ext (dired-get-marked-files) "xml" "html" "htm")
-  (dired-do-shell-command "xml el -u *" nil (dired-get-marked-files))
+  (dired-do-shell-command jg-xml-elements-command-string nil (dired-get-marked-files))
   )
 
 ;;;###autoload
@@ -160,7 +160,7 @@ uses xidel, outputs as xml
   (+jg-xml-dired-all-ext (dired-get-marked-files) "xml")
   (let ((template (read-string "Query Template: "))
         )
-    (dired-do-shell-command (format "xml sel -t %s -n *" template)
+    (dired-do-shell-command (format jg-xml-select-command-string template)
                             nil
                             (dired-get-marked-files))
     )
@@ -173,7 +173,7 @@ uses xidel, outputs as xml
   (+jg-xml-dired-all-ext (dired-get-marked-files) "xml")
   (let ((schema (read-file-name "Schema File: "))
         (args '("-e"  "--net" "-s" "%s" "?" "2>>" "validation.errors"))
-        (cmd "xml val ")
+        (cmd jg-xml-validate-command-basic)
         )
     (dired-do-shell-command (format (concat cmd (s-join " "args)) schema)
                             nil
@@ -192,7 +192,8 @@ encoding as utf-8"
   (+jg-xml-dired-all-ext (dired-get-marked-files) "xml" "html" "htm")
   (let ((files (dired-get-marked-files t))
         (args '("-s" "4" "-R" "-N" "-e" "utf-8" "?" ">" "fmt-`?`"))
-        (cmd "xml fo "))
+        (cmd jg-xml-format-command-basic)
+        )
     (when (--any? (or (f-ext? it "html") (f-ext? it "htm"))  files)
       (push "--html" args))
     (message "Test Running on: %s : %s" default-directory files)
@@ -207,7 +208,7 @@ encoding as utf-8"
   "Generate a trang .xsd schema file from marked files "
   (interactive)
   (+jg-xml-dired-all-ext (dired-get-marked-files) "xml")
-  (dired-do-shell-command (format "trang * %s.xsd" (read-string "Schema Name: "))
+  (dired-do-shell-command (format jg-xml-schema-command-string (read-string "Schema Name: "))
                           nil (dired-get-marked-files))
   )
 
@@ -216,7 +217,7 @@ encoding as utf-8"
   "Convert an .xsd file into a plantuml .pu file, and create a png and text output for it "
   (interactive)
   (+jg-xml-dired-all-ext (dired-get-marked-files) "xsd")
-  (dired-do-shell-command "xsdata generate -o plantuml -pp * > schema.pu" nil (dired-get-marked-files))
+  (dired-do-shell-command jg-xml-schema-plantuml-command-string nil (dired-get-marked-files))
   (dired-do-shell-command "plantuml -filename schema.png"                 nil '("schema.pu"))
   (dired-do-shell-command "cat ? | plantuml -ttxt -p"                     nil '("schema.pu"))
   )
@@ -227,7 +228,7 @@ encoding as utf-8"
   (interactive)
   (let ((package (read-string "Package Name: "))
         )
-    (dired-do-shell-command (format "xsdata generate -r -p %s --relative-imports --postponed-annotations ?" package)
+    (dired-do-shell-command (format jg-xml-python-generate-command-string package)
                             nil
                             (dired-get-marked-files))
     )
@@ -238,8 +239,7 @@ encoding as utf-8"
   "Use Plantuml to visualise json files"
   (interactive)
   (+jg-xml-dired-all-ext (dired-get-marked-files) "json")
-  (dired-do-shell-command "cat ? | awk 'BEGIN {print \"@startjson\"} END {print \"@endjson\"} {print $0}' | plantuml -p > `?`.png "
-                          nil (dired-get-marked-files))
+  (dired-do-shell-command jg-xml-wrap-json-command-string nil (dired-get-marked-files))
   (dired-do-shell-command "open `?`.png" nil (dired-get-marked-files))
   )
 ;;-- end dired utils

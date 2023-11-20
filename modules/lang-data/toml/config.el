@@ -32,5 +32,14 @@
              #'general-insert-minor-mode
              )
   )
+
+(use-package! toml-mode
+  :commands toml-mode
+  :config
+  (add-hook! 'conf-toml-mode-hook :depth 100
+             #'outline-minor-mode
+             #'general-insert-minor-mode
+             )
+  )
 ;;
 ;;; config.el ends here

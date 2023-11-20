@@ -42,7 +42,7 @@
         (xsd    (read-file-name "XSD Spec: "))
         )
     (save-buffer)
-    (shell-command (format "xml val -e -s %s %s"
+    (shell-command (format jg-xml-validate-command-string
                            (shell-quote-argument xsd)
                            (shell-quote-argument f-name)
                            ))

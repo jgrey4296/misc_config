@@ -26,10 +26,10 @@ test = [
 
 ##-- urls
 [project.urls]
-homepage      = "https://github.com/jgrey4296/$1",
-documentation = "https://readthedocs.org/$1",
-repository    = "https://github.com/jgrey4296/$1",
-changelog     = "https://github.com/jgrey4296/$1/spam/blob/master/CHANGELOG.md",
+homepage      = "https://github.com/jgrey4296/$1"
+documentation = "https://readthedocs.org/$1"
+repository    = "https://github.com/jgrey4296/$1"
+changelog     = "https://github.com/jgrey4296/$1/spam/blob/master/CHANGELOG.md"
 
 ##-- end urls
 

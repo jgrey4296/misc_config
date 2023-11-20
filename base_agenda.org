@@ -33,6 +33,8 @@ https://sites.math.washington.edu/~billey/talks/theorem.finder.html
 https://trustandsafety.fun/
 https://goldenhivemead.com/
 https://measuringstuff.com/
+https://zenodo.org/records/8173267
+https://www.kalzumeus.com/archive/
 :END:
 
 * Base Agenda

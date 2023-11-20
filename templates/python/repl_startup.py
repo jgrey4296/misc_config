@@ -29,12 +29,22 @@ import weakref
 import atexit
 import readline
 
-import more_itertools as mitz
-import pyparsing as pp
-
 ##-- end imports
 
 logging = logmod.getLogger(__name__)
+
+##-- other imports
+try:
+    import more_itertools as mitz
+except ImportError as err:
+    logging.warning("*more_itertools not found*")
+
+try:
+    import pyparsing as pp
+except ImportError as err:
+    logging.warning("*pyparsing not found*")
+
+##-- end other imports
 
 ##-- readline history
 ## from: https://stackoverflow.com/questions/10346419

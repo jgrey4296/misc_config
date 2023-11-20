@@ -8,39 +8,35 @@ https://github.com/bytewax/bytewax
 https://github.com/OlafHaag/VectorFields/tree/master
 * Main
 ** Core
-- construct
+- beautifulsoup4
 - boltons
+- build
+- bumpver
+- construct
+- coverage
 - dirty-equals
 - flask
-- more-itertools
-- mypy
-- pip-review
-- pycodestyle
-- pycycle
-- pyright
-- bumpver
-- sh
-- stackprinter
-- thefuzz
-- tqdm
-- validators
-- beautifulsoup4
-- build
-- coverage
 - humanfriendly
 - isort
 - jedi
 - matplotlib
+- more-itertools
+- mypy
 - networkx
 - numpy
 - pandas
 - pip
+- pip-review
+- pipreqs
 - pony
 - pre-commit
+- pycodestyle
+- pycycle
 - pygments
 - pylint
 - pyparsing
 - pyqtree
+- pyright
 - pytest
 - pytest-mock
 - regex
@@ -48,11 +44,16 @@ https://github.com/OlafHaag/VectorFields/tree/master
 - scipy
 - seaborn
 - setuptools
+- sh
 - sphinx
 - sqlite
+- stackprinter
 - statsmodels
 - sty
 - sympy
+- thefuzz
+- tqdm
+- validators
 - wheel
 
 ** To Make Core
@@ -129,8 +130,6 @@ https://www.rabbitmq.com/
 build                                                                                           : 0.8.0
 https://github.com/tkem/cachetools/
 cachy                                                                                           : 0.3.0
-cleo                                                                                            : 0.8.1
-clikit                                                                                          : 0.6.2
 distlib                                                                                         : 0.3.2
 https://py-filelock.readthedocs.io/en/latest/
 https://github.com/msiedlarek/wiring
@@ -158,13 +157,15 @@ https://github.com/csurfer/pyheatmagic                                          
 https://github.com/fredcamps/lsp-jedi                                                           : emacs : lisp : lsp
 https://github.com/python-lsp/python-lsp-server
 https://github.com/gregmalcolm/python_koans                                                     : education : koan : learning : libraries : practice
+
 https://github.com/jgonggrijp/pip-review
+https://github.com/bndr/pipreqs
+
 https://github.com/norvig/pytudes                                                               : etudes : peter_norvig : practice : programming
 https://github.com/python-rope/rope                                                             : refactoring
 https://github.com/python-rope/ropemacs                                                         : emacs : refactoring : rope
 https://github.com/vinta/awesome-python                                                         : recommendation
-pip-chill
-pip-reqs
+https://github.com/rbanffy/pip-chill
 
 ** datastructures
 https://github.com/jaraco/path
@@ -405,7 +406,11 @@ parso                                                                           
 pycparser                                                                                       : 2.21
 pyparsing                                                                                       : 3.0.9
 https://construct.readthedocs.io/en/latest/intro.html
+https://palletsprojects.com/p/click/
+https://github.com/tiangolo/typer
 https://argh.readthedocs.io/en/latest/
+https://github.com/python-poetry/cleo
+clikit                                                                                          : 0.6.2
 
 *** nlp
 textblob

@@ -14,6 +14,8 @@ networkx
 nodeenv
 packaging
 pip
+pip-review
+pipreqs
 platformdirs
 pluggy
 pygls

@@ -5,6 +5,7 @@
       ;; Scrolling
       hscroll-margin 2
       hscroll-step 1
+      auto-hscroll-mode 'current-line
       scroll-conservatively 101
       scroll-margin 0
       scroll-preserve-screen-position t

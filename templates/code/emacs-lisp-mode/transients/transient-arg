@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name  : transient-arg
+# uuid  : transient-arg
+# key   : transient-arg
+# group : transients
+# --
+(transient-define-argument jg-test-arg ()
+  "test arg"
+  :class 'transient-switches
+  :argument-format "--blah=%s"
+  :argument-regexp "\\(blah\\|bloo\\blee\\)"
+  :choices '("blah" "bloo" "blee")
+  )

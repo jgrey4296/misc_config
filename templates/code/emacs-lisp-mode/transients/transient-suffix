@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name  : transient-suffix
+# uuid  : transient-suffix
+# key   : transient-suffix
+# group : transients
+# --
+(transient-define-suffix jg-test-call (args)
+  "test call"
+  :transient t
+  :description "a blah call"
+  (interactive (list (transient-args (oref transient-current-prefix command))))
+  (message "test call: %s" args)
+ )

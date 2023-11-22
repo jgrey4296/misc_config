@@ -8,7 +8,9 @@
 (defun +jg-latex-get-commands (&optional dir)
   (interactive)
   (-when-let* ((curr-file (buffer-file-name))
-               (rel-file (f-relative (f-no-ext (buffer-file-name)) (projectile-project-root)))
+               ;; (rel-file (f-relative (f-no-ext (buffer-file-name)) (projectile-project-root)))
+               (rel-file (f-no-ext (f-filename (buffer-file-name))))
+               (build-dir (f-parent (buffer-file-name)))
                (is-tex (f-ext? curr-file "tex"))
                (compile-with (save-excursion
                                (goto-char (point-min))
@@ -16,10 +18,14 @@
                                (or (match-string 1) jg-latex-compile-program)
                                ))
                (output-dir (format "-output-directory=%s" default-directory))
+               (compile-cmd (string-join (append (list compile-with output-dir) jg-latex-compile-args (list curr-file)) " "))
+
                )
     (+jg-projects-pair-cmds
-     `("compile" ,(string-join (append (list compile-with output-dir) jg-latex-compile-args (list curr-file)) " "))
-     `("bibtex"      ,(format "bibtex --terse %s" rel-file))
+     `("compile" ,compile-cmd)
+     ;; `("bibtex"      ,(format "bibtex --terse %s" rel-file))
+     `("bibtex"      ,(format "cd %s; bibtex --terse %s" build-dir rel-file))
+     `("full" ,(format "cd %s; %s; bibtex --terse %s; %s; %s" build-dir compile-cmd rel-file compile-cmd compile-cmd ))
      `("biblatex"    ,(format "biber %s" rel-file))
      `("check"    ,(string-join (append (list jg-latex-compile-program)
                                         jg-latex-compile-args

@@ -113,3 +113,22 @@ But not in urls
     (join-line)
     )
   )
+
+;;;###autoload
+(defun +jg-bibtex-reformat-buffer (&optional read-options)
+  "Reformat all BibTeX entries in buffer or region.
+Without prefix argument, reformatting is based on `bibtex-entry-format'.
+With prefix argument, read options for reformatting from minibuffer.
+With \\[universal-argument] \\[universal-argument] prefix argument, reuse previous answers (if any) again.
+If mark is active reformat entries in region, if not in whole buffer."
+  (interactive "*P")
+  (let* ((pnt (point))
+         )
+    (save-restriction
+      (if mark-active (narrow-to-region (region-beginning) (region-end)))
+      (bibtex-progress-message "Formatting" 1)
+      (bibtex-map-entries (lambda (_key _beg _end)
+                            (bibtex-progress-message)
+                            (org-ref-clean-bibtex-entry)))
+      (bibtex-progress-message 'done))
+    (goto-char pnt)))

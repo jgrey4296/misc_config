@@ -19,12 +19,12 @@ https://tecnoysoft.com/en/how-to-obtain-the-real-url-behind-a-shortened-url-usin
          (result-buffer (get-buffer-create "*CurlResponse*"))
          expanded
          )
-    (when urls (message "Expanding urls"))
+    (when urls (message "Expanding %s urls" (length urls)))
     (cl-loop for urlpair in urls
              do
              (with-current-buffer result-buffer
                (erase-buffer))
-             (apply #'call-process jg-bibtex-curl-cmd nil result-buffer nil (append (list jg-bibtex-curl-args) (list (cdr urlpair))))
+             (apply #'call-process jg-bibtex-curl-cmd nil result-buffer nil (append jg-bibtex-curl-args (ensure-list (cdr urlpair))))
              (with-current-buffer result-buffer
                (goto-char (point-min))
                (when (re-search-forward "^location: " nil t)

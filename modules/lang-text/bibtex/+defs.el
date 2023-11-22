@@ -63,7 +63,7 @@
 
 (defvar jg-bibtex-curl-cmd      "curl")
 
-(defvar jg-bibtex-curl-args     "-sLI")
+(defvar jg-bibtex-curl-args     '("-sLI" "--connect-timeout" "3"))
 
 (defvar bibtex-completion-pdf-open-function 'browse-url)
 

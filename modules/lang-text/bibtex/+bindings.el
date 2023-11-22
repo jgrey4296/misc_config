@@ -22,6 +22,7 @@
 (map! :map bibtex-mode-map ;; localleader
       :after bibtex
       :localleader
+      :desc "Reformat Buffer"     "TAB" #'+jg-bibtex-reformat-buffer
       :desc "Open In progress"    "0"     (cmd! (bookmark-jump "in_progress_pdfs" #'switch-to-buffer-other-window))
 
       :desc "Subcite"             "\\"    #'+jg-bibtex-subcite

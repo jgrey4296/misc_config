@@ -1,5 +1,4 @@
 Jacamo API           # https://jacamo.sourceforge.net/doc/api/index.html
-JASON Api            # https://jason.sourceforge.net/api/index.html
 JaCaMo Approach      # https://jacamo.sourceforge.net/?page_id=40
 
 JASON doc            # https://jason-lang.github.io/jason/
@@ -10,3 +9,12 @@ Jacamo Github        # https://github.com/jacamo-lang/jacamo
 JASON Github         # https://github.com/jason-lang/jason
 Cartago Github       # https://github.com/CArtAgO-lang/cartago
 Moise Github         # https://github.com/moise-lang/moise
+
+Jason stdlib         # https://jason-lang.github.io/api/jason/stdlib/package-summary.html
+Jason funcs          # https://jason-lang.github.io/api/jason/functions/package-summary.html
+Jason Api            # https://jason-lang.github.io/api/
+
+Moise api            # https://moise.sourceforge.net/doc/api/index.html
+Jade api             # https://jade.tilab.com/doc/api/index.html
+
+Annotations          # https://jason-lang.github.io/doc/tech/annotations.html

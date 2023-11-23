@@ -56,4 +56,4 @@ JASON_HOME="$HOME/github/.local/jason-3.2.2"
 jgdebug "Setting JACAMO"
 JACAMO_HOME="$HOME/.local/javamo-1.2.2"
 
-PATH="$ANDROID_TOOLS:$JDK_HOME/bin:$PATH"
+PATH="$ANDROID_TOOLS:$PATH"

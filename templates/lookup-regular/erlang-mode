@@ -1,12 +1,1 @@
-Erlang/OPT               # https://www.erlang.org/doc/
-Erlang Reference         # https://www.erlang.org/doc/reference_manual/users_guide.html
-Erlang system principles # https://www.erlang.org/doc/system_principles/system_principles.html
-Erlang design principles # https://www.erlang.org/doc/design_principles/users_guide.html
-Elixir                   # https://hexdocs.pm/elixir/
-Elixir Stdlib            # https://hexdocs.pm/elixir/Kernel.html
-Exlir string templates   # https://hexdocs.pm/eex/EEx.html
-Elixir Unit test         # https://hexdocs.pm/ex_unit/ExUnit.html
-Elixir shell             # https://hexdocs.pm/iex/IEx.html
-Elixir logging           # https://hexdocs.pm/logger/Logger.html
-Elxir mix build tool     # https://hexdocs.pm/mix/Mix.html
-Erlang Nifs              # https://www.erlang.org/doc/tutorial/nif.html
+elixir-mode

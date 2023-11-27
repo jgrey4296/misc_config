@@ -2,7 +2,13 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("templates"
+(("doot examples"
+ (filename . "/media/john/data/github/python/doot-examples/")
+ (front-context-string . "reactor\n  drwxr-")
+ (rear-context-string . "0K Nov 24 01:02 ")
+ (position . 290)
+ (last-modified 25953 9669 416772 135000))
+("templates"
  (filename . "/media/john/data/github/_config/templates/")
  (front-context-string . "tools\n  -rw-rw-r")
  (rear-context-string . "0K Oct 15 17:33 ")

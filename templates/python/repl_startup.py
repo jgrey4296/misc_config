@@ -28,12 +28,11 @@ import uuid
 import weakref
 import atexit
 import readline
-
+import importlib
 ##-- end imports
 
 logging = logmod.getLogger(__name__)
 
-##-- other imports
 try:
     import more_itertools as mitz
 except ImportError as err:
@@ -44,7 +43,6 @@ try:
 except ImportError as err:
     logging.warning("*pyparsing not found*")
 
-##-- end other imports
 
 ##-- readline history
 ## from: https://stackoverflow.com/questions/10346419

@@ -5,6 +5,14 @@
 [[file:/Volumes/documents/github/jgrey4296.github.io][homepage]]
 
 :to-deal-with:
+https://en.m.wikipedia.org/wiki/Academic_journal
+https://en.m.wikipedia.org/wiki/Scholarly_peer_review
+https://en.m.wikipedia.org/wiki/Academy
+https://en.m.wikipedia.org/wiki/Metascience
+https://en.m.wikipedia.org/wiki/Journalology
+https://en.m.wikipedia.org/wiki/Technical_peer_review
+https://en.m.wikipedia.org/wiki/Peer_review
+https://predatoryreports.org/home
 https://yaml.org/spec/1.2.2/#chapter-1-introduction-to-yaml
 https://docs.openwdl.org/en/latest/
 https://support.terra.bio/hc/en-us/articles/360037117492-Overview-Getting-started-with-WDL

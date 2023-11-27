@@ -120,7 +120,7 @@ SQLAlchemy               # https://docs.sqlalchemy.org/en/20/
 pygrametl                # https://chrthomsen.github.io/pygrametl/doc/quickstart/beginner.html
 petl                     # https://petl.readthedocs.io/en/stable/
 LSP Protocol             # https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/
-
+Pydot                    # https://github.com/pydot/pydot
 PEP 635: Match statement # https://peps.python.org/pep-0635
 marginal effects         # https://marginaleffects.com/index.html
 

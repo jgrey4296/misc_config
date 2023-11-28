@@ -1,0 +1,53 @@
+%% compiler:pdflatex
+%% available: pdflatex lualatex xelatex
+\documentclass[12pt]{article}
+\usepackage[T1,T2A]{fontenc}
+\usepackage[russian,english]{babel}
+\usepackage{listings}
+\usepackage[version=3]{mhchem}
+\usepackage{url}
+\usepackage[numbers]{natbib}
+\usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue, pdfstartview=FitH]{hyperref}
+\usepackage{doi}
+
+% \usepackage[backend=biber,style=jg_custom]{biblatex}
+% \addbibresource{/media/john/data/github/bibliography/main/2019.bib}
+\title{2019}
+\author{John Grey}
+\begin{document}
+\maketitle
+\nocite{*}
+% Bibtex:
+\bibliographystyle{jg_custom_name_first}
+\bibliography{article_tests.bib}
+\bibliography{blog_tests.bib}
+\bibliography{booklet_tests.bib}
+\bibliography{book_tests.bib}
+\bibliography{case_tests.bib}
+\bibliography{conference_tests.bib}
+\bibliography{dataset_tests.bib}
+\bibliography{documentation_tests.bib}
+\bibliography{game_tests.bib}
+\bibliography{inbook_tests.bib}
+\bibliography{incollection_tests.bib}
+\bibliography{inproceeding_tests.bib}
+\bibliography{judicial_tests.bib}
+\bibliography{law_tests.bib}
+\bibliography{legal_tests.bib}
+\bibliography{manual_tests.bib}
+\bibliography{musicscore_tests.bib}
+\bibliography{online_tests.bib}
+\bibliography{proceeding_tests.bib}
+\bibliography{repot_tests.bib}
+\bibliography{review_tests.bib}
+\bibliography{software_tests.bib}
+\bibliography{standard_tests.bib}
+\bibliography{techreport_tests.bib}
+\bibliography{thread_tests.bib}
+\bibliography{tweet_tests.bib}
+\bibliography{unpublished_tests.bib}
+\bibliography{crossref_tests.bib}
+% Biblatex:
+% \printbibliography[type=article,title={Articles only}]
+% \printbibliography[type=book,title={Books only}]
+\end{document}

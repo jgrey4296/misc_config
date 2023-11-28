@@ -206,6 +206,10 @@ function { debug_top } % str
   "Debug: Top of stack is " swap$ * top$
 }
 
+function { quick.print }
+{
+  duplicate$ "Quick Print: " swap$ * top$
+}
 
 FUNCTION {not} % {val}
 {   { #0 }
@@ -993,7 +997,7 @@ FUNCTION {get.chapter.pages}
       if$
       chapter "chapter" field.to.warn tie.or.space.prefix
       * *
-      pages "pages" field.to.str empty$
+      pages "pages" field.to.str duplicate$ empty$
         'skip$
         { ", " * get.pages * }
       if$
@@ -1099,7 +1103,7 @@ FUNCTION {format.lab.names}
 
 FUNCTION {get.platform}
 {
-  platform "platform" field.to.str empty$ 'skip$
+  platform "platform" field.to.str duplicate$ empty$ 'skip$
     { new.block
       platform }
   if$
@@ -1108,7 +1112,7 @@ FUNCTION {get.platform}
 
 FUNCTION {get.country}
 {
-  country "country" field.to.str empty$ 'skip$
+  country "country" field.to.str duplicate$ empty$ 'skip$
     { new.block
       country }
   if$
@@ -1116,7 +1120,7 @@ FUNCTION {get.country}
 
 FUNCTION {get.status}
 {
-  status "status" field.to.str empty$ 'skip$
+  status "status" field.to.str duplicate$ empty$ 'skip$
     { new.block
       "Status: " status * }
   if$
@@ -1124,7 +1128,7 @@ FUNCTION {get.status}
 
 FUNCTION {get.arrangement}
 {
-  arrangement "arrangement" field.to.str empty$ 'skip$
+  arrangement "arrangement" field.to.str duplicate$ empty$ 'skip$
     { new.block
       arrangement }
   if$
@@ -1132,7 +1136,7 @@ FUNCTION {get.arrangement}
 
 FUNCTION {get.section}
 {
-  section "section" field.to.str empty$ 'skip$
+  section "section" field.to.str duplicate$ empty$ 'skip$
     { new.block
       section }
   if$
@@ -1144,10 +1148,10 @@ FUNCTION {get.parties}
     { plaintiff "plaintiff" field.to.str empty$
       defendant "defendent" field.to.str empty$ or
         {
-          short_parties "short_parties, plaintiff, defendant" field.to.warn
+          title "title" field.to.warn
         }
         {
-          plaintiff " v " * defendant *
+          plaintiff " v " defendant * *
         }
         if$
     }
@@ -1157,19 +1161,19 @@ FUNCTION {get.parties}
 
 FUNCTION {get.counsel}
 {
-  counsel "counsel" field.to.str empty$ 'skip$
+  counsel "counsel" field.to.str duplicate$ empty$ 'skip$
   { counsel }
   if$
 }
 
 FUNCTION {get.dissent}
 {
-  dissent "dissent" field.to.str empty$ 'skip$
+  dissent "dissent" field.to.str duplicate$ empty$ 'skip$
     { new.block
       "Dissent: " dissent * }
   if$
 
-  concur "concur" field.to.str empty$ 'skip$
+  concur "concur" field.to.str duplicate$ empty$ 'skip$
   { new.block
     "Concurrence: " concur *}
   if$
@@ -1178,7 +1182,7 @@ FUNCTION {get.dissent}
 
 FUNCTION {get.identifier}
 {
-  identifier "id" field.to.str empty$ 'skip$
+  identifier "id" field.to.str duplicate$ empty$ 'skip$
     { new.block
       identifier }
   if$
@@ -1186,7 +1190,7 @@ FUNCTION {get.identifier}
 
 FUNCTION {get.part}
 {
-  part "part" field.to.str empty$ 'skip$
+  part "part" field.to.str duplicate$ empty$ 'skip$
     { new.block
       part }
   if$
@@ -1207,7 +1211,6 @@ FUNCTION {article}
     {
       journal "journal" field.to.warn output
       get.vol.num.pages output
-      % year "year" field.to.warn format.date output
     }
     { get.article.crossref output.nonnull
       get.pages output
@@ -1237,7 +1240,6 @@ FUNCTION {review}
     {
       journal "journal" field.to.warn output
       get.vol.num.pages output
-      % year "year" field.to.warn format.date output
     }
     { get.article.crossref output.nonnull
       get.pages output
@@ -1268,7 +1270,6 @@ FUNCTION {book}
     { new.block get.book.crossref output }
   if$
   get.edition output
-  % year "year" field.to.warn format.date output
   isbn "isbn" field.to.warn format.isbn output
   doi   "doi" field.to.warn format.doi output
   new.block
@@ -1284,7 +1285,6 @@ FUNCTION {booklet}
   new.block
   title "title" field.to.warn format.title output
   new.block
-  % year "year" field.to.warn format.date output
   isbn "isbn" field.to.warn format.isbn output
   doi "doi"   field.to.warn format.doi output
   new.block
@@ -1317,7 +1317,6 @@ FUNCTION {inbook}
     }
   if$
 
-  % year "year" field.to.warn format.date output
   doi "doi" field.to.warn format.doi output
   new.block
   get.note output
@@ -1340,7 +1339,6 @@ FUNCTION {incollection}
       new.sentence
       publisher "publisher" field.to.warn format.org.or.pub output
       get.edition output
-      % year "year" field.to.warn format.date output
       isbn "isbn" field.to.warn format.isbn output
     }
     { get.incoll.inproc.crossref output.nonnull
@@ -1361,32 +1359,31 @@ FUNCTION {inproceedings}
   new.block
   title "title" field.to.warn format.title output
   new.block
-  new.block
   crossref missing$
     { get.in.ed.booktitle output
       get.bvolume output
       get.number.series output
       get.pages output
       new.sentence
-      institution "institution" field.to.warn output
-      publisher "publisher" field.to.warn duplicate$ empty$ 'pop$
-        {
-          format.org.or.pub output
-        }
-      if$
-      % year "year" field.to.warn format.date output
-      isbn "isbn" field.to.warn format.isbn output
+      publisher "publisher" field.to.warn empty$ 'skip$
+      {
+        format.org.or.pub output
+      } if$
+      isbn "isbn" field.to.str format.isbn output
       get.issn output
     }
     { get.incoll.inproc.crossref output.nonnull
       get.pages output
-    }
+    } if$
+  doi "doi" field.to.str empty$
+  { url "url" field.to.warn format.url output }
+  { doi "doi" field.to.warn format.doi output }
   if$
-  doi "doi" field.to.warn format.doi output
   new.block
   get.note output
   get.eprint output
   entry.finish
+  stack$
 }
 
 FUNCTION {conference} { inproceedings }
@@ -1399,7 +1396,6 @@ FUNCTION {manual}
   title "title" field.to.warn format.title  output
   institution "institution" field.to.warn   output
   get.edition output
-  % year "year" field.to.warn format.date output
   doi "doi" field.to.str format.doi output
   new.block
   get.note output
@@ -1413,7 +1409,6 @@ FUNCTION {misc}
   new.block
   title "title" field.to.warn format.title output
   new.block
-  % year "year" field.to.warn format.date output
   doi "doi" field.to.str format.doi output
   new.block
   get.note output
@@ -1443,7 +1438,6 @@ FUNCTION {thesis}
   }
   if$
   institution "institution" field.to.warn output
-  % year "year" field.to.warn format.date output
   doi "doi" field.to.warn format.doi output
   new.block
   get.note output
@@ -1454,10 +1448,8 @@ FUNCTION {thesis}
 FUNCTION {phdthesis}
 { thesis }
 
-
 FUNCTION {mastersthesis}
 { thesis }
-
 
 FUNCTION {proceedings}
 { entry.begin
@@ -1474,7 +1466,6 @@ FUNCTION {proceedings}
       get.country output
     }
   if$
-  % year "year" field.to.warn format.date output
   isbn "isbn" field.to.warn format.isbn output
   get.issn output
   doi "doi" field.to.warn format.doi output
@@ -1493,7 +1484,6 @@ FUNCTION {report}
   new.block
   get.tr.number output.nonnull
   institution "institution" field.to.warn output
-  % year "year" field.to.warn format.date output
   doi "doi" field.to.warn format.doi output
   new.block
   get.note output
@@ -1511,7 +1501,6 @@ FUNCTION {techreport}
   new.block
   get.tr.number output.nonnull
   institution "institution" field.to.warn output
-  % year "year" field.to.warn format.date output
   doi "doi" field.to.warn format.doi output
   new.block
   get.note output
@@ -1526,7 +1515,6 @@ FUNCTION {unpublished}
   get.key output
   new.block
   title "title" field.to.warn format.title output
-  % year "year" field.to.warn format.date output
   new.block
   get.note output
   get.eprint output
@@ -1543,7 +1531,6 @@ FUNCTION {software}
   new.block
   title "title" field.to.warn format.title output
   new.block
-  % year "year" field.to.warn format.date output
   new.block
   get.platform output
   entry.finish
@@ -1560,7 +1547,6 @@ FUNCTION {documentation}
   new.block
   title "title" field.to.warn format.title output
   new.block
-  % year "year" field.to.warn format.date output
   new.block
   get.platform output
   entry.finish
@@ -1575,7 +1561,6 @@ FUNCTION {case}
   title "title" field.to.warn format.title output
   new.block
   get.counsel output.check
-  % year              "year" field.to.warn format.date output
   institution       "institution" field.to.warn output
   get.country    output
   get.identifier output
@@ -1587,7 +1572,6 @@ FUNCTION {case}
 FUNCTION {legal}
 { case }
 
-
 FUNCTION {judicial}
 {
   entry.begin
@@ -1596,7 +1580,6 @@ FUNCTION {judicial}
   get.key output
   new.block
   get.section output
-  % year "year" field.to.warn format.date output
   institution output
   get.country output
   get.status output
@@ -1617,7 +1600,6 @@ FUNCTION {law}
   title "title" field.to.warn format.title output
   new.block
   get.section output
-  % year "year" field.to.warn format.date output
   get.bvolume output
   get.status output.nonnull
   get.identifier output
@@ -1634,7 +1616,6 @@ FUNCTION {standard}
   title "title" field.to.warn format.title output
   new.block
   get.section output
-  % year "year" field.to.warn format.date output
   institution "institution" field.to.warn output
   get.identifier output
   new.block
@@ -1649,7 +1630,6 @@ FUNCTION {online}
   new.block
   title "title" field.to.warn format.title output
   new.block
-  % year "year" field.to.warn format.date output
   doi "doi" field.to.str format.doi output
   new.block
   entry.finish
@@ -1673,7 +1653,6 @@ FUNCTION {musicscore}
   title "title" field.to.warn format.title output
   new.block
   get.part output
-  % year "year" field.to.warn format.date output
   doi "doi" field.to.str format.doi output
   get.arrangement output
   new.block
@@ -1688,13 +1667,10 @@ FUNCTION {dataset}
   new.block
   title "title" field.to.warn format.title output
   new.block
-  % year "year" field.to.warn format.date output
   doi "doi" field.to.str format.doi output
   new.block
   entry.finish
 }
-
-
 
 %%-- end entries
 

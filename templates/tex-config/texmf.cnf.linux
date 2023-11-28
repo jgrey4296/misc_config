@@ -13,6 +13,7 @@
 % tlmgr usertree is a TEXMFHOME/web2c and TEXMFHOME/tlpkg/tlpobj
 % note: tlmgr option docfiles 1
 
+TEXBASE     = $HOME/.local/texlive/2023/texmf-dist
 TEXMFHOME   = $HOME/.cache/texlive/2023/home
 TEXMFVAR    = $HOME/.cache/texlive/2023/var
 TEXMFSYSVAR = $HOME/.cache/texlive/2023/sys
@@ -22,8 +23,8 @@ TEXMFCONFIG = $HOME/.config/jg/templates/tex-config
 JG_FONTS = /media/john/data/library/assets/fonts/
 JG_BIB   = $HOME/github/bibliography/main
 
-BIBINPUTS=$TEXMFDOTDIR/bib//:$TEXMFDOTDIR:$JG_BIB:$TEXMFCONFIG/bibtex//:$TEXMFHOME/bibtex//
-BSTINPUTS=$TEXMFDOTDIR/bib//:$TEXMFDOTDIR:$TEXMFCONFIG/bibtex//:$TEXMFHOME/bibtex//
+BIBINPUTS=$TEXMFDOTDIR/bib//:$TEXMFDOTDIR:$JG_BIB:$TEXMFCONFIG/bibtex//:$TEXMFHOME/bibtex//:$TEXBASE/bibtex/bib//
+BSTINPUTS=$TEXMFDOTDIR/bib//:$TEXMFDOTDIR:$TEXMFCONFIG/bibtex//:$TEXMFHOME/bibtex//:$TEXBASE/bibtex/bst//
 
 TTFONTS=$TEXMFDOTDIR/fonts//:$TEXMFDOTDIR:$JG_FONTS/from_tablet:$JG_FONTS:$TEXMFCONFIG/fonts//:$TEXMFHOME/fonts//:$TEXMFMAIN/fonts//:/usr/share/fonts/truetype//
 OPENTYPEFONTS=$TEXMFDOTDIR/fonts//:$TEXMFDOTDIR:$JG_FONTS/from_tablet:$JG_FONTS:$TEXMFCONFIG/fonts//:$TEXMFHOME/fonts//:$TEXMFMAIN/fonts//:/usr/share/fonts/opentype//

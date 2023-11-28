@@ -51,6 +51,7 @@
 )
 
 (map! :map jg-binding-markdown-map
+      :localleader
       :prefix ("t" . "toggle")
       :desc "Inline LaTeX"     :n "e" #'markdown-toggle-math
       :desc "Code highlights"  :n "f" #'markdown-toggle-fontify-code-blocks-natively
@@ -64,12 +65,12 @@
 (map! :map jg-binding-markdown-map
         :n "TAB" #'markdown-cycle
         :n [backtab] #'markdown-shifttab
-        :i "M-*" #'markdown-insert-list-item
-        :i "M-b" #'markdown-insert-bold
-        :i "M-i" #'markdown-insert-italic
-        :i "M-`" #'+markdown/insert-del
-        :i "M--" #'markdown-insert-hr
-        :n "M-r" #'browse-url-of-file
+        ;; :i "M-*" #'markdown-insert-list-item
+        ;; :i "M-b" #'markdown-insert-bold
+        ;; :i "M-i" #'markdown-insert-italic
+        ;; :i "M-`" #'+markdown/insert-del
+        ;; :i "M--" #'markdown-insert-hr
+        ;; :n "M-r" #'browse-url-of-file
         :m "]h"  #'markdown-next-visible-heading
         :m "[h"  #'markdown-previous-visible-heading
         :m "[p"  #'markdown-promote
@@ -79,6 +80,6 @@
         )
 
 (after! (markdown-mode evil-markdown)
-  (setq markdown-mode-map jg-binding-helm-map
+  (setq markdown-mode-map jg-binding-markdown-map
         evil-markdown-mode-map nil)
   )

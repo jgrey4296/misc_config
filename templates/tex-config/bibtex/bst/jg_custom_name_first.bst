@@ -995,12 +995,12 @@ FUNCTION {get.chapter.pages}
           "type" field.to.warn
         }
       if$
-      chapter "chapter" field.to.warn tie.or.space.prefix
-      * *
-      pages "pages" field.to.str duplicate$ empty$
-        'skip$
-        { ", " * get.pages * }
+      chapter "chapter" field.to.warn tie.or.space.prefix * *
+      pages "pages" field.to.str empty$
+        { "" }
+        { ", " get.pages *  }
       if$
+      *
     }
   if$
 }
@@ -1104,18 +1104,14 @@ FUNCTION {format.lab.names}
 FUNCTION {get.platform}
 {
   platform "platform" field.to.str duplicate$ empty$ 'skip$
-    { new.block
-      platform }
+    { "Platform: " swap$ *}
   if$
 }
 
 
 FUNCTION {get.country}
 {
-  country "country" field.to.str duplicate$ empty$ 'skip$
-    { new.block
-      country }
-  if$
+  country "country" field.to.str
 }
 
 FUNCTION {get.status}
@@ -1182,10 +1178,7 @@ FUNCTION {get.dissent}
 
 FUNCTION {get.identifier}
 {
-  identifier "id" field.to.str duplicate$ empty$ 'skip$
-    { new.block
-      identifier }
-  if$
+  identifier "id" field.to.str
 }
 
 FUNCTION {get.part}
@@ -1203,13 +1196,9 @@ FUNCTION {get.part}
 FUNCTION {article}
 { entry.begin
   get.authors output
-  get.key output
-  new.block
-  title "title" field.to.warn format.title output
-  new.block
+  new.block title "title" field.to.warn format.title output
   crossref missing$
-    {
-      journal "journal" field.to.warn output
+    { new.block journal "journal" field.to.warn output
       get.vol.num.pages output
     }
     { get.article.crossref output.nonnull
@@ -1218,9 +1207,7 @@ FUNCTION {article}
   if$
   get.issn output
   doi "doi" field.to.warn format.doi output
-  new.block
-  get.note output
-  get.eprint output
+  new.block get.eprint output
   entry.finish
 }
 
@@ -1228,28 +1215,22 @@ FUNCTION {article}
 FUNCTION {review}
 { entry.begin
   get.authors output
-  get.key output
-  new.block
-  "Review of: " output
-    title "title" field.to.warn format.title output
-  new.block
-  "By: " output
-  bookauthor output
-  new.block
+  new.block "Review of: " output
+  title "title" field.to.warn format.title output
+  bookauthor "bookauthor" field.to.str empty$ 'skip$
+  { new.block "By: " bookauthor * output }
+  if$
   crossref missing$
-    {
-      journal "journal" field.to.warn output
+    { new.block journal "journal" field.to.warn output
       get.vol.num.pages output
     }
-    { get.article.crossref output.nonnull
+    { get.article.crossref output
       get.pages output
     }
   if$
   get.issn output
   doi "doi" field.to.warn format.doi output
-  new.block
-  get.note output
-  get.eprint output
+  new.block get.eprint output
   entry.finish
 }
 
@@ -1257,14 +1238,10 @@ FUNCTION {book}
 { entry.begin
   get.authors.andor.editors output
   new.block
-  "Title: " title "title" field.to.str * debug
   title "title" field.to.warn emphasize output
-  new.block
   crossref missing$
-    { get.bvolume output
-      new.block
-      get.number.series output
-      new.sentence
+    { new.block get.bvolume output
+      new.block get.number.series output new.sentence
       publisher "publisher" field.to.warn format.org.or.pub output
     }
     { new.block get.book.crossref output }
@@ -1272,95 +1249,71 @@ FUNCTION {book}
   get.edition output
   isbn "isbn" field.to.warn format.isbn output
   doi   "doi" field.to.warn format.doi output
-  new.block
-  get.note output
-  get.eprint output
+  new.block get.eprint output
   entry.finish
 }
 
 FUNCTION {booklet}
 { entry.begin
   get.authors output
-  get.key output
-  new.block
-  title "title" field.to.warn format.title output
-  new.block
-  isbn "isbn" field.to.warn format.isbn output
+  new.block title "title" field.to.warn format.title output
+  new.block isbn "isbn" field.to.warn format.isbn output
   doi "doi"   field.to.warn format.doi output
-  new.block
-  get.note output
-  get.eprint output
+  new.block get.eprint output
   entry.finish
 }
 
 FUNCTION {inbook}
 { entry.begin
   get.authors.andor.editors output
-  get.key output
-  new.block
-  title "title" field.to.warn format.title output
+  new.block title "title" field.to.warn format.title output
   crossref missing$
     {
       get.in.ed.booktitle output
       get.bvolume output
       get.chapter.pages output
-      new.block
-      get.number.series output
-      new.sentence
+      new.block get.number.series output new.sentence
       get.edition output
       isbn "isbn" field.to.warn format.isbn output
     }
     {
       get.chapter.pages output
-      new.block
-      get.book.crossref output.nonnull
+      new.block get.book.crossref output.nonnull
     }
   if$
-
   doi "doi" field.to.warn format.doi output
-  new.block
-  get.note output
-  get.eprint output
+  new.block get.eprint output
   entry.finish
 }
 
 FUNCTION {incollection}
 { entry.begin
   get.authors output
-  get.key output
-  new.block
-  title "title" field.to.warn format.title output
-  new.block
+  new.block title "title" field.to.warn format.title output
   crossref missing$
-    { get.in.ed.booktitle output
+    { new.block get.in.ed.booktitle output
       get.bvolume output
       get.number.series output
-      get.chapter.pages output
-      new.sentence
+      get.chapter.pages output new.sentence
       publisher "publisher" field.to.warn format.org.or.pub output
       get.edition output
       isbn "isbn" field.to.warn format.isbn output
     }
-    { get.incoll.inproc.crossref output.nonnull
+    { new.block get.incoll.inproc.crossref output
       get.chapter.pages output
     }
   if$
   doi "doi" field.to.warn format.doi output
-  new.block
-  get.note output
-  get.eprint output
+  new.block get.eprint output
   entry.finish
 }
 
 FUNCTION {inproceedings}
 { entry.begin
   get.authors output
-  get.key output
-  new.block
-  title "title" field.to.warn format.title output
-  new.block
+  new.block title "title" field.to.warn format.title output
   crossref missing$
-    { get.in.ed.booktitle output
+    { new.block get.in.ed.booktitle output
       get.bvolume output
       get.number.series output
       get.pages output
@@ -1372,16 +1325,13 @@ FUNCTION {inproceedings}
       isbn "isbn" field.to.str format.isbn output
       get.issn output
     }
-    { get.incoll.inproc.crossref output.nonnull
+    { new.block get.incoll.inproc.crossref output.nonnull
       get.pages output
     } if$
-  doi "doi" field.to.str empty$
-  { url "url" field.to.warn format.url output }
+  doi "doi" field.to.str empty$ 'skip$
   { doi "doi" field.to.warn format.doi output }
   if$
-  new.block
-  get.note output
-  get.eprint output
+  new.block get.eprint output
   entry.finish
   stack$
 }
@@ -1391,39 +1341,27 @@ FUNCTION {conference} { inproceedings }
 FUNCTION {manual}
 { entry.begin
   get.authors output
-  get.key output
-  new.block
-  title "title" field.to.warn format.title  output
+  new.block title "title" field.to.warn format.title  output
   institution "institution" field.to.warn   output
   get.edition output
   doi "doi" field.to.str format.doi output
-  new.block
-  get.note output
   entry.finish
 }
 
 FUNCTION {misc}
 { entry.begin
   get.authors output
-  get.key output
-  new.block
-  title "title" field.to.warn format.title output
-  new.block
-  doi "doi" field.to.str format.doi output
-  new.block
-  get.note output
-  get.eprint output
+  new.block title "title" field.to.warn format.title output
+  new.block doi "doi" field.to.str format.doi output
+  new.block get.eprint output
   entry.finish
 }
 
 FUNCTION {thesis}
 { entry.begin
   get.authors output
-  get.key output
+  new.block title "title" field.to.warn format.title output
   new.block
-  title "title" field.to.warn format.title output
-  new.block
-
   % use type$ or fallback to type field
   type$ "phdthesis" =
   { bbl.phdthesis output }
@@ -1439,9 +1377,7 @@ FUNCTION {thesis}
   if$
   institution "institution" field.to.warn output
   doi "doi" field.to.warn format.doi output
-  new.block
-  get.note output
-  get.eprint output
+  new.block get.eprint output
   entry.finish
 }
 
@@ -1454,12 +1390,9 @@ FUNCTION {mastersthesis}
 FUNCTION {proceedings}
 { entry.begin
   get.editors output
-  get.key output
-  new.block
-  title "title" field.to.warn format.title output
-  get.bvolume output
-  get.number.series output
-  new.sentence
+  new.block title "title" field.to.warn format.title output
+  new.block get.bvolume output
+  get.number.series output new.sentence
   publisher empty$
     { institution output }
     { institution "institution" field.to.warn output
@@ -1469,25 +1402,18 @@ FUNCTION {proceedings}
   isbn "isbn" field.to.warn format.isbn output
   get.issn output
   doi "doi" field.to.warn format.doi output
-  new.block
-  get.note output
-  get.eprint output
+  new.block get.eprint output
   entry.finish
 }
 
 FUNCTION {report}
 { entry.begin
   get.authors output
-  get.key output
-  new.block
-  title "title" field.to.warn format.title output
-  new.block
-  get.tr.number output.nonnull
+  new.block title "title" field.to.warn format.title output
+  new.block get.tr.number output.nonnull
   institution "institution" field.to.warn output
   doi "doi" field.to.warn format.doi output
-  new.block
-  get.note output
-  get.eprint output
+  new.block get.eprint output new.sentence
   "report" output
   entry.finish
 }
@@ -1495,16 +1421,11 @@ FUNCTION {report}
 FUNCTION {techreport}
 { entry.begin
   get.authors output
-  get.key output
-  new.block
-  title "title" field.to.warn format.title output
-  new.block
-  get.tr.number output.nonnull
+  new.block title "title" field.to.warn format.title output
+  new.block get.tr.number output
   institution "institution" field.to.warn output
   doi "doi" field.to.warn format.doi output
-  new.block
-  get.note output
-  get.eprint output
+  new.block get.eprint output new.sentence
   "techreport" output
   entry.finish
 }
@@ -1512,12 +1433,9 @@ FUNCTION {techreport}
 FUNCTION {unpublished}
 { entry.begin
   get.authors output
-  get.key output
-  new.block
-  title "title" field.to.warn format.title output
-  new.block
-  get.note output
-  get.eprint output
+  new.block title "title" field.to.warn format.title output
+  "[Unpublished]" output
+  new.block get.eprint output new.sentence
   entry.finish
 }
 
@@ -1527,12 +1445,8 @@ FUNCTION {software}
 {
   entry.begin
   get.authors output
-  get.key output
-  new.block
-  title "title" field.to.warn format.title output
-  new.block
-  new.block
-  get.platform output
+  new.block title "title" field.to.warn format.title output
+  new.block get.platform output
   entry.finish
 }
 
@@ -1543,12 +1457,8 @@ FUNCTION {documentation}
 {
   entry.begin
   get.authors output
-  get.key output
-  new.block
-  title "title" field.to.warn format.title output
-  new.block
-  new.block
-  get.platform output
+  new.block title "title" field.to.warn format.title output
+  new.block "Platform: " get.platform * output
   entry.finish
 }
 
@@ -1556,17 +1466,11 @@ FUNCTION {case}
 {
   entry.begin
   get.parties output
-  get.key output
-  new.block
-  title "title" field.to.warn format.title output
-  new.block
-  get.counsel output.check
-  institution       "institution" field.to.warn output
-  get.country    output
-  get.identifier output
-  new.block
+  new.block get.counsel "counsel" field.to.warn output
+  new.block institution "institution" field.to.warn output
+  new.block get.country output
+  new.block get.identifier "identifier" field.to.warn output
   entry.finish
-
 }
 
 FUNCTION {legal}
@@ -1575,35 +1479,27 @@ FUNCTION {legal}
 FUNCTION {judicial}
 {
   entry.begin
-  get.parties output
   get.authors output
-  get.key output
-  new.block
-  get.section output
-  institution output
-  get.country output
-  get.status output
+  new.block get.parties output
+  new.block get.section output
+  new.block institution "institution" field.to.warn output
+  new.block get.country output
+  "Status: " get.status * output
   get.dissent output
   get.identifier output
-  new.block
   entry.finish
 }
 
 FUNCTION {law}
 {
   entry.begin
-  title "title" field.to.warn format.title output
-  institution "institution" field.to.warn output
-  get.key output
   get.authors output
-  new.block
-  title "title" field.to.warn format.title output
-  new.block
-  get.section output
+  new.block title "title" field.to.warn format.title output
+  institution "institution" field.to.warn output
+  new.block get.section output
   get.bvolume output
-  get.status output.nonnull
+  get.status output
   get.identifier output
-  new.block
   entry.finish
 }
 
@@ -1611,14 +1507,10 @@ FUNCTION {standard}
 {
   entry.begin
   get.authors output
-  get.key output
-  new.block
-  title "title" field.to.warn format.title output
-  new.block
-  get.section output
+  new.block title "title" field.to.warn format.title output
+  new.block get.section output
   institution "institution" field.to.warn output
   get.identifier output
-  new.block
   entry.finish
 }
 
@@ -1626,12 +1518,7 @@ FUNCTION {online}
 {
   entry.begin
   get.authors output
-  get.key output
-  new.block
-  title "title" field.to.warn format.title output
-  new.block
-  doi "doi" field.to.str format.doi output
-  new.block
+  new.block title "title" field.to.warn format.title output
   entry.finish
 }
 
@@ -1648,14 +1535,10 @@ FUNCTION {musicscore}
 {
   entry.begin
   get.authors output
-  get.key output
-  new.block
-  title "title" field.to.warn format.title output
-  new.block
-  get.part output
+  new.block title "title" field.to.warn format.title output
+  new.block get.part output
   doi "doi" field.to.str format.doi output
   get.arrangement output
-  new.block
   entry.finish
 }
 
@@ -1663,12 +1546,8 @@ FUNCTION {dataset}
 {
   entry.begin
   get.authors output
-  get.key output
-  new.block
-  title "title" field.to.warn format.title output
-  new.block
-  doi "doi" field.to.str format.doi output
-  new.block
+  new.block title "title" field.to.warn format.title output
+  new.block doi "doi" field.to.str format.doi output
   entry.finish
 }
 

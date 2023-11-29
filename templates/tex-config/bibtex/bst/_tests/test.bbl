@@ -1,0 +1,2030 @@
+\begin{thebibliography}{154}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\discretionary{}{}{\texttt{#1}}}
+\providecommand{\urlprefix}{\\* URL: }
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{ doi: \discretionary{}{}{#1}}\else
+  \providecommand{\doi}{ doi: \discretionary{}{}{}\begingroup
+  \urlstyle{rm}\Url}\fi
+\providecommand{\bibAnnoteFile}[1]{%
+  \IfFileExists{#1}{\begin{quotation}\noindent\textsc{Key:} #1\\*
+  \textsc{Annotation:}\ \input{#1}\end{quotation}}{}}
+\providecommand{\bibAnnote}[2]{%
+  \begin{quotation}\noindent\textsc{Key:} #1\\*
+  \textsc{Annotation:}\ #2\end{quotation}}
+\providecommand{\eprint}[2][]{\url{#2}}
+
+\begin{minipage}{\textwidth}
+\bibitem[1215]{langton15:_magna_carta}
+ Stephen Langton.\\*
+\emph{Magna Carta}.
+\urlprefix
+  \url{https://web.archive.org/web/20060925221246/http://www.courts.ky.gov/research/history.htm}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: UK, charters, divine_right_of_kings, feudalism, history, monarchy,
+  parliament, royal_charter, royalty, taxation
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1320]{alighieri20:_purgat}
+ Dante Alighieri.\\*
+\emph{Purgatory}.\\*
+Number~2 in The Divine Comedy. Gutenberg.org, %% No Doi.
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: christianity, history, poetry, politics, purgatory
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1730]{bach30:_concer_violin_minor_bwv10}
+ J.~S Bach.\\*
+\emph{Concerto for Violin in A Minor, BWV104}.\\*
+%% No Doi.
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: music
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1797]{kant97:_metap_elemen_ethic}
+ Immanuel Kant.\\*
+\emph{The Metaphysical Elements of Ethics}.\\*
+Arc Manor.\\*
+ isbn: 978-1-60450-178-0, %% No Doi.
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: duty, ethics, metaphysics, philosophy, virtue
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1803]{marshall03}
+ John Marshall.\\*
+Marbury v Madison.\\*
+Status: .
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: SCOTUS, constitution, federalism, judicial_nullification,
+  judicial_opinion, judiciary, jurisdiction
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1863]{warren63:_snowf}
+ Israel~Perkins Warren.\\*
+\emph{Snowflakes}.\\*
+In Book of Nature. American Tract Society, %% No Doi.
+\urlprefix
+  \url{https://archive.org/details/snowflakeschapte00warriala/mode/2up}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: __image, history, snowflake
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1879]{bourgoin79_les_}
+ Jules Bourgoin.\\*
+\emph{Les \'el\'ements de l'art arabe}.\\*
+Firmin-Didot, %% No Doi.
+\urlprefix
+  \url{https://archive.org/details/gri_33125012261786/page/n17/mode/thumb}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: __image, history
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1885]{silber85_illus_}
+ Silber and Fleming Ltd.\\*
+\emph{Illustrated pattern-book of furniture, carpets, rugs, linoleums, floor
+  cloths, curtains, window blinds, table linen, towellings, blankets, etc. Vol.
+  I}.\\*
+J.S Virtue and Co, %% No Doi.
+\urlprefix
+  \url{https://archive.org/details/SilberandFlemingIllustratedPatternBookOfFurnitureCarpets1885/mode/1up}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: __image, design, furniture, history, interior_design
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1902]{james02:_variet_relig_exper}
+ William James.\\*
+\emph{The Varieties of Religious Experience}.\\*
+Brooks Divinity School.\\*
+ isbn: 0674932250, %% No Doi.
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: mysticism, religion, saint_lines
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1913]{innes13_what_is_money_}
+ A.~Mitchell Innes.\\*
+\emph{What Is Money?}\\*
+The Banking Law Journal, (May) page: 288, %% No Doi.
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: __printed, barter, medium_of_exchange, money
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1920]{rogers20_census_united_states_volum_v_}
+ Sam~L. Rogers and W.Mh Steuart.\\*
+\emph{14th Census of the United States, Volume V: Agriculture}.\\*
+Technical report, US Department of Commerce, Bureau of the Census, %% No
+  Doi.\\*
+report.
+\urlprefix
+  \url{http://usda.mannlib.cornell.edu/usda/AgCensusImages/1920/Farm_Statistics_By_Color_and_Tenure.pdf}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: USDA, agriculture, census, farming, history, race, statistics
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1921]{weber21:_types_rule}
+ Max Weber.\\*
+\emph{Types of Rule: A New Translation}, chapter~3.\\*
+2019 edition.\\*
+ isbn: 9780674240834, %% No Doi.
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: __important, rules, taxonomy, sociology
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1925]{kakfa25:_trial}
+ Franz Kakfa.\\*
+\emph{The Trial}.\\*
+Oxford University Press, 2009 edition.\\*
+ isbn: 978-0-19-923829-3, %% No Doi.
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: bureaucracy
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1933]{review33:_birth_contr_review_XVII}
+ Birth~Control Review.\\*
+\emph{Birth Control Review}.\\*
+%% No Doi.
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: birth_control, eugenics
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1939]{trachtenberg39:_jewis_magic_super}
+ Joshua Trachtenberg.\\*
+\emph{Jewish Magic and Superstition: A Study in Folk Religion}.\\*
+Ph.D. thesis, Columbia University, %% No Doi.
+\urlprefix \url{http://hdl.handle.net/10822/801302}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: folklore, history, judaism, magic
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1943]{douglas43_murdoc_penns_}
+ William~O. Douglas.\\*
+Murdock v Pennsylvania.\\*
+Status: .
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: SCOTUS, free_speech, judicial_opinion, judiciary, religious_freedom,
+  taxation
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1948]{de48:_ethic_ambig}
+ Simone De~Beauvoir.\\*
+\emph{The Ethics of Ambiguity}.\\*
+Citadel Press.\\*
+ isbn: 0-8065-0160-X, %% No Doi.
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: action, ambiguity, ethics, existentialism, freedom, philosophy,
+  simone_de_beauvoir
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1953]{asimov53:_secon_found}
+ Isaac Asimov.\\*
+\emph{Second Foundation}.\\*
+In The Foundation Novels. Ballantine.\\*
+ isbn: 9780804180573, %% No Doi.
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: psychohistory, science_fiction
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1954]{parsons54:_essay_sociol_theor}
+ Talcott Parsons.\\*
+\emph{Essays in Sociological Theory}.\\*
+Simon and Schuster, %% No Doi.
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: action, democracy, economics, institution, institutional_change, japan,
+  social_structure, sociology
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1958]{bester58:_starb}
+ Alfred Bester.\\*
+\emph{Starburst}.\\*
+Signet.\\*
+ isbn: 978-1112685965, %% No Doi.
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: fiction, humour, poetry, sci_fi
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1960]{fredkin60:_trie_memor_3}
+ Edward Fredkin.\\*
+\emph{Trie Memory}.\\*
+Communications of the ACM, 3(9) pages: 490--499.\\*
+\doi{10.1145/367390.367400}.
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: computer_science, data_structure, trie
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1960]{mccarthy60:_recur_part_i}
+ J~McCarthy.\\*
+\emph{Recursive functions of symbolic expressions and their computation by
+  machine, Part I}.\\*
+In Communications of the ACM, April, pages: 1--34.
+\urlprefix \url{http://dl.acm.org/citation.cfm?id=367199}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: ai, calculus, computation, lisp, mccarthy, meta, paper, rule, symbolic,
+  theory
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1964]{brennan64_new_york_times_sulliv_}
+ William~J. Brennan.\\*
+New York Times v Sullivan.\\*
+Status: .
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: SCOTUS, free_speech, judicial_opinion, judiciary, libel,
+  malicious_intent, public_figures
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1965]{marschak65:_econom_theor_organ}
+ Thomas~A. MarschakJames~G. March.\\*
+\emph{Economic Theories of Organization}, chapter~10, pages: 423--450.\\*
+Routledge Library Editions: Organizations: Theory \& Behaviour. 2013
+  edition.\\*
+ isbn: 978-0-415-82039-4, %% No Doi.
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: economics, social_organisation, bureaucracy, organization
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1967]{josselson67:_proceed_confer_comput_relat_seman_analy}
+ Harry~H. Josselson,  editor.\\*
+\emph{Proceedings of the Conference on Computer Related Semantic Analysis}.\\*
+%% No Doi.
+\urlprefix \url{https://apps.dtic.mil/sti/citations/AD0655073}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: algorithm, natural_language, semantics
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1969]{hindley69:_princ_type_schem_objec_combin_logic_146}
+ Roger Hindley.\\*
+\emph{The Principal Type-Scheme of an Object in Combinatory Logic}.\\*
+Transactions of the American Mathematical Society, 146page:~29.\\*
+\doi{10.2307/1995158}.
+\urlprefix \url{http://dx.doi.org/10.2307/1995158}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: combinatory_logic, type_inference, hindley_milner
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1970]{feigenbaum70_gener_probl_solvin_}
+ Edward~A. Feigenbaum, Bruce~G. Buchanan, and Joshua Lederberg.\\*
+\emph{On Generality and Problem Solving: A Case Study Using the DENDRAL
+  Program}.\\*
+Technical report, Stanford University, %% No Doi.\\*
+report.
+\urlprefix \url{https://apps.dtic.mil/sti/citations/AD0715128}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: DENDRAL, heuristics, production_systems
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1973]{powell73:_san_anton_rodrig}
+ Lewis~F. Powell.\\*
+San Antonio v Rodriguez.\\*
+Status: .
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: SCOTUS, education, judicial_opinion, judiciary, property_tax,
+  public_education, taxation
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1976]{research76:_introd_cp_m_featur_facil}
+ Digital Research.\\*
+\emph{An Introduction to CP/M Features and Facilities}.\\*
+Technical report, %% No Doi.\\*
+techreport.
+\urlprefix
+  \url{https://computerhistory.org/blog/early-digital-research-cpm-source-code/}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: CP_M, IBM, file_management, history, source_code
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1980]{smith80_frame_based_produc_system_archit_}
+ David~E. Smith and Jan~E. Clayton.\\*
+\emph{A Frame-Based Production System Architecture}.\\*
+In AAAI conference on artificial intelligence.
+\urlprefix \url{https://dl.acm.org/doi/abs/10.5555/2876590.2876635}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: WHEEZE, agenda, frame, production_system
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1981]{chambers81:_chang}
+ Darcy~A. Chambers.\\*
+\emph{Changes in testosterone levels and muscular hypertrophy in women due to a
+  strength-training program}.\\*
+Master's thesis, University of Montana, %% No Doi.
+\urlprefix
+  \url{https://scholarworks.umt.edu/cgi/viewcontent.cgi?article=8316&context=etd}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: biology, testosterone
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1981]{moynihan81_iran_}
+ Neil Moynihan.\\*
+\emph{Iran; Nicaragua; Cuba;: An Analysis of Revolutions}.\\*
+Technical report, Colby University, %% No Doi.\\*
+report.
+\urlprefix \url{https://digitalcommons.colby.edu/honorstheses/610}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: cuba, iran, nicaragua, politics, revolution
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1982]{meehan82:_tale_spin}
+ James~Richard MeehanRoger~C. Schank and Christopher~K. Riesbeck.\\*
+\emph{TALE-SPIN}, chapter~9, pages: 197--226.\\*
+ isbn: 0-89859-071, %% No Doi.
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: simulation, narrative, NLP, ai, history, lisp
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1983]{ostrom83:_overv_rule_config}
+ Elinor Ostrom.\\*
+\emph{An Overview of Rule Configurations}, [Unpublished].
+\urlprefix \url{https://hdl.handle.net/10535/4525}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: __important, rule, taxonomy, working_paper
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1984]{84:_gurt_}
+ Deborah Schiffrin,  editor.\\*
+\emph{GURT '84: Meaning, Form, and Use in Context: Linguistic Applications}.\\*
+ isbn: 0-8740-119-9, %% No Doi.
+\urlprefix
+  \url{https://repository.library.georgetown.edu/bitstream/handle/10822/555477/GURT_1984.pdf}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: linguistics, pragmatics, semantics, taxonomy, textuality
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1987]{adams87:_bureauc}
+ Douglas Adams.\\*
+\emph{Bureaucracy}, Infocom, %% No Doi.
+\urlprefix \url{https://archive.org/details/game_manual_Bureaucracy}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: __important, bureaucracy, interactive_fiction, manual
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1987]{soloway87_asses_maint_xcon_in_rime_}
+ Elliot Soloway, Judy Bachant, and Keith Jensen.\\*
+\emph{Assessing the Maintainability of Xcon-In-RIME: Coping With the Problems
+  of a Very Large Rule-Base}.\\*
+In Sixth National Conference on Artificial Intelligence, pages: 824--829.
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: __printed, expert_system, large_scale, maintainability,
+  production_system, rule
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1988]{asimov88:_prelud_found}
+ Isaac Asimov.\\*
+\emph{Prelude to Foundation}.\\*
+In The Foundation Novels. Ballantine.\\*
+ isbn: 9780804180573, %% No Doi.
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: psychohistory, science_fiction
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1989]{bench-capon89:_deep}
+ T.~J.~M. Bench-Capon.\\*
+\emph{Deep models, normative reasoning and legal expert systems}.\\*
+In Proceedings of the second international conference on Artificial
+  intelligence and law - ICAIL '89.\\*
+\doi{10.1145/74014.74020}.
+\urlprefix \url{http://dx.doi.org/10.1145/74014.74020}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: deep_models, deontic_logic, expert_system, legal
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1989]{brennan89_texas_johns_}
+ William~J. Brennan.\\*
+Texas v Johnson.\\*
+Status: .
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: SCOTUS, desecration_of_flags, flag, free_speech, judicial_opinion,
+  judiciary, symbolic_speech
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1991]{brooks91:_intel_without_reason}
+ Rodney~A Brooks.\\*
+\emph{Intelligence Without Reason}.\\*
+Technical report, Massachusetts Institute of Technology, %% No Doi.\\*
+report.
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: ai, reasoning, review, robotics
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1991]{software91:_simcit}
+ Maxis Software.\\*
+\emph{SimCity: Dr Wright's Urban Planning Guide}, %% No Doi.
+\urlprefix \url{https://archive.org/details/sim-city-usa}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: SNES, game_manuals, sim_city, simulation, urban_design
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1992]{bryson92_subsum_strat_devel_music_model_system_}
+ Joanna~J. Bryson.\\*
+\emph{The Subsumption Strategy Development of a Music Modelling System}.\\*
+Master's thesis, Edinburgh, %% No Doi.
+\urlprefix \url{https://www.dai.ed.ac.uk/papers/documents/mt92109.html}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: ai, dissertation, music, subsumption
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1994]{bunkenburg94}
+ Alexander Bunkenburg.\\*
+\emph{The boom hierarchy}.\\*
+In Functional Programming, Glasgow 1993, pages: 1--8. Springer.\\*
+\doi{10.1007/978-1-4471-3236-3_1}.
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: data_structure, programming, taxonomy
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1994]{microprose94:_sid_meier_colon_manual}
+ MicroProse.\\*
+\emph{Sid Meier's Colonization Manual}, %% No Doi.
+\urlprefix \url{https://archive.org/details/colonization_manual}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: america, colonialism, game_manuals, history, strategy
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1994]{riley94:_third_confer_clips}
+ Gary Riley,  editor.\\*
+\emph{Third Conference on CLIPS}.\\*
+%% No Doi.
+\urlprefix \url{https://ntrs.nasa.gov/citations/19950013209}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: CLIPS, MIRO, RETE, ai, c_plus_plus, expert_system, production_system,
+  robotics, rule, rule_engine
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1994]{stamper94:_organ_dynam_social_norms_infor_system_4}
+ Ronal Stamper and Kecheng Liu.\\*
+\emph{Organisational Dynamics, Social Norms and Information Systems}.\\*
+In 1994 Proceedings of the Twenty-Seventh Hawaii International Conference on
+  System Sciences, Volume~4, pages: 645--654.\\*
+ isbn: 0-8186-5090-7.\\*
+\doi{10.1109/HICSS.1994.323455}.
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: affordances, meta, norm, organisation, prototype, time
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1994]{yates94:_evolv}
+ JoAnne YatesLisa Bud-Frierman.\\*
+\emph{Evolving information use in forms, 1850-1920: Ideology and information
+  techniques and technologies}, chapter~2, pages: 26--51.\\*
+ isbn: 0-415-07788-5, %% No Doi.
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: __untagged
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1996]{jagadish96_manag_}
+ H.~V. Jagadish, Alberto~O. Mendelzon, and Inderpal~Singh Mumick.\\*
+\emph{Managing conflicts between rules (extended abstract)}.\\*
+In Proceedings of the fifteenth ACM SIGACT-SIGMOD-SIGART symposium on
+  Principles of database systems - PODS '96, pages: 192--201.\\*
+\doi{10.1145/237661.237710}.
+\urlprefix \url{http://dx.doi.org/10.1145/237661.237710}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: conflict, inference, logic, meta, production_system, rule
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1998]{harris98:_enter_28}
+ Michael Harris.\\*
+\emph{Entertainment driven collaboration}.\\*
+In Digital Illusion: Entertaining the Future with High Technology, Volume~28,
+  pages: 249--258. ACM.\\*
+\doi{10.1145/178951.178953}.
+\urlprefix \url{http://portal.acm.org/citation.cfm?doid=178951.178953}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: collaboration, entertainment_driven_collaboration, games, technology
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1998]{jambon98:_taxon}
+ Francis Jambon.\\*
+\emph{Taxonomy for human error and system fault recovery from the engineering
+  perspective}.\\*
+In Proceedings of the International Conference on Human--Computer Interaction
+  in Aeronomics, Montreal, Canada, pages: 55--60.
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: HCI, engineering, error, fault, fault_recovery, taxonomy
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[1998]{pottier98:_type_infer_presen_subty}
+ Fran\c{c}ois Pottier.\\*
+\emph{Type Inference in the Presence of Subtyping: From Theory to Practice}.\\*
+Ph.D. thesis, Institut National De Recherche En Informatique Et En Automatique,
+  INRIA, %% No Doi.
+\urlprefix \url{https://inria.hal.science/inria-00073205}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: subtyping, type_inference
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2000]{al-hudaibi00:_princ_polit_in_islam}
+ Muhammad~M. Al-Hudaibi.\\*
+\emph{The Principles of Politics In Islam}.\\*
+Islamic Inc, 2 edition.\\*
+ isbn: 977-265-185-8, %% No Doi.
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: history, human_rights, islam, politics
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2000]{raymond00:_reven_hacker}
+ Eric~S. Raymond.\\*
+\emph{Revenge of the Hackers}.
+\urlprefix \url{http://catb.org/~esr/writings/}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: hacking, history, open_source
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2001]{geschke01_pdf_refer_}
+ Chuck Geschke and John Warnock.\\*
+\emph{PDF Reference}, Adobe Systems Incorporated, 3 edition, %% No Doi.
+\urlprefix
+  \url{https://opensource.adobe.com/dc-acrobat-sdk-docs/pdfstandards/pdfreference1.4.pdf}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: adobe, reference
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2001]{le01:_other_wind}
+ Ursula Le~Guin.\\*
+\emph{The Other Wind}, In The Books of Earthsea: The Complete Illustrated
+  Edition.\\*
+ isbn: 978-1481465588, %% No Doi.
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: fantasy, magic, names
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2001]{lindblom01_social_situat_natur_artif_intel_}
+ Jessica Lindblom.\\*
+\emph{Social Situatedness of Natural and Artificial Intelligence}.\\*
+Master's thesis, University of Sk\"ovde, %% No Doi.
+\urlprefix \url{http://urn.kb.se/resolve?urn=urn:nbn:se:his:diva-626}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: activity_theory, ai, dissertation, lev_vygotsky, situated_intelligence
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2001]{makinson01:_what_input_ouput_logic}
+ David Makinson and Leendert van~der Torre.\\*
+\emph{What is Input-Ouput Logic?}\\*
+Technical report, n.d, %% No Doi.\\*
+report.
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: __printed, calculus, deontic_logic, input_output_logics, logic,
+  reusable, semantics, social_secretary
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2001]{nedelmann01:_contin_relev_georg_simmel}
+ Birgitta Nedelmann.\\*
+\emph{The Continuing Relevance of Georg Simmel: Staking Out Anew the Field of
+  Sociology}, chapter~6, pages: 66--78.\\*
+1 edition.\\*
+ isbn: 9780761958406, %% No Doi.
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: ambivalence, diagram, georg_simmel, institutionalisation, interaction,
+  play, quote, social_theory, sociation, sociology, wechselwirkung
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2002]{haeyoung02:_activ_legac_ibm_black_worker_allian}
+ Ann Haeyoung.\\*
+\emph{The Activist Legacy of the IBM Black Workers Alliance}.
+\urlprefix \url{https://www.wired.com/story/tech-organizing-labor-ibm-history/}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: IBM, history, race, labour, unions
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2002]{larsson02_issue_dialog_manag_}
+ Staffan Larsson.\\*
+\emph{Issue-based Dialogue Management}.\\*
+Ph.D. thesis, G\"oteborg University, %% No Doi.
+\urlprefix \url{http://hdl.handle.net/2077/15612}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: accomodation, communication, dialogue_management, dialogue_modelling,
+  grounding, language, negotiation, negotiative_dialogue, taxonomy
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2002]{rehnquist02_zelman_simmon_harris_}
+ William Rehnquist.\\*
+Zelman v Simmons-Harris.\\*
+Status: .
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: SCOTUS, education, judicial_opinion, judiciary, religious_freedom,
+  school_vouchers
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2002]{richards02_puttin_psych_}
+ Graham Richards.\\*
+\emph{Putting Psychology in its place}.\\*
+In Putting psychology in its place: An introduction from a critical historical
+  overview. Routledge.\\*
+ isbn: 1-82169-223-6, %% No Doi.
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: history, psychology, review
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2003]{lee03_descr_}
+ Joohyung Lee and Vladimir Lifschitz.\\*
+\emph{Describing additive fluents in action language C+}.\\*
+In Proc. of IJCAI 2003.
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: action_language, additive_fluents, c_plus
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2003]{leijen03_abroad_}
+ Johannes Daniel~Pieter Leijen.\\*
+\emph{The $\lambda$ Abroad: A Functional Approach to Software Components}.\\*
+Ph.D. thesis, Institute for Programming Research and Algorithmics.\\*
+\doi{10.1.1.5.5455}.
+\urlprefix
+  \url{https://www.microsoft.com/en-us/research/publication/the-%ce%bb-abroad-a-functional-approach-to-software-components/}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: COM, DSL, FFI, IDL, agents, animation, components, dissertation,
+  haskell, interface, interface_definition_language, lambda_calculus,
+  marshalling, protocol, software_engineering
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2003]{leite04_declar_agent_languag_techn_}
+ Joao Leite, Andrew Omicini, Leon Sterling, and Paolo Torroni,  editors.\\*
+\emph{Declarative Agent Languages and Technologies: First International
+  Workshop, DALT 2003}.\\*
+ isbn: 3540405798.\\*
+\doi{10.1007/b97923}.
+\urlprefix \url{http://dx.doi.org/10.1007/b97923}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: Coo_BDI, MAS, agents, cooperation, deliberation, expectation, framework,
+  ignorance_logic, institution, linear_logic, logic, observation,
+  operational_semantics, reconfiguration, restricted_entailment,
+  social_integrity_constraints, speech_act, text_book
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2003]{monk03_common_}
+ Andrew Monk.\\*
+\emph{Common ground in electronically mediated communication: Clark's theory of
+  language use}.\\*
+In HCI models, theories, and frameworks: Toward a multidisciplinary science of
+  human-computer interaction, pages: 1--22. Morgan Kaufmann, %% No Doi.
+\urlprefix
+  \url{http://books.google.com/books?hl=en&lr=&id=gGyEOjkdpbYC&oi=fnd&pg=PA265&dq=Common+ground+in+electronically+mediated+communication+:+Clark%27s+theory+of+language+use&ots=6xwmApmSj-&sig=pzPv_KcWnJ8zjjiu6CpEyH0QXA8}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: HCI, common_ground, communication, language
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2003]{steinmueller03_}
+ W~Edward Steinmueller.\\*
+\emph{The role of technical standards in coordinating the division of labour in
+  complex system industries}.\\*
+In The business of systems integration, pages: 133--151. Oxford University
+  Press Oxford, UK, %% No Doi.
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: complex_systems, coordination, division_of_labour, industry,
+  institution, technical_standards
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2004]{dignum04_model_organ_inter_}
+ Virginia Dignum.\\*
+\emph{A Model for Organizational Interaction: Based on Agents, Founded in
+  Logic}.\\*
+Ph.D. thesis, Utrecht University, %% No Doi.
+\urlprefix \url{https://dspace.library.uu.nl/handle/1874/890}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: MAS, agents, frank_dignum, institution, organisation, virginia_dignum
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2004]{04:_deont_logic_comput_scien_}
+ Alessio Lomuscio and Donald Nute,  editors.\\*
+\emph{Deontic Logic in Computer Science}.\\*
+Lecture Notes in Computer Science.\\*
+ isbn: 3-540-22111-5.\\*
+\doi{10.1007/b98159}.
+\urlprefix \url{http://dx.doi.org/10.1007/b98159}
+\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2004]{ohare04:_engin_societ_agent_world_iv_3071}
+ Gregory~M.P O'Hare, Alessandro Ricci, Michael~J. O'Grady, and Oguz Dikenelli,
+  editors.\\*
+\emph{Engineering Societies in the Agents World IV}.\\*
+Volume 3071.\\*
+ isbn: 978-3-540-22231-6.\\*
+ISSN 0302-9743.\\*
+\doi{10.1007/b98212}.
+\urlprefix \url{http://dx.doi.org/10.1007/b98212}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: ADELFE, AOP, MAS, OOP, __to_fix, activity, ad_hoc_networks, agents,
+  conflict_resolution, constraints, coordination, linda_tuple_space, norms,
+  ontology, open_systems, organisation_oriented_programming, protocol,
+  regulation, reification, reusability, social_patterns, society,
+  software_engineering, specification, swarm_intelligence, taxonomy, trust
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2004]{shaw04_aspec_inter_story_system_}
+ David Shaw.\\*
+\emph{Aspects of Interactive Storytelling Systems}.\\*
+Master's thesis, University of Melbourne, %% No Doi.
+\urlprefix \url{http://users.cecs.anu.edu.au/~davids/docs/Shaw_Masters.pdf}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: dissertation, narrative, prolog, rule, storytelling
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2005]{barabasi05_from_societ_to_web_}
+ A~Barabasi.\\*
+\emph{From Society To Web}.\\*
+A sense of place. The global and the local in mobile communication, pages:
+  415--429, %% No Doi.
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: complex_networks, history, network, review, web
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2005]{cochrane05_writin_tips_ph_}
+ John~H Cochrane.\\*
+\emph{Writing Tips for Ph.d Students}.\\*
+Technical report, University of Chicago, %% No Doi.\\*
+report.
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: __printed, methods, research, writing
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2005]{gardner05:_compr_work_134}
+ Howard Gardner.\\*
+\emph{Compromised Work}.\\*
+Daedalus, 134(3) pages: 42--51.\\*
+\doi{10.1162/0011526054622097}.
+\urlprefix \url{http://dx.doi.org/10.1162/0011526054622097}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: employment, labour, philosophy, profession, work
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2005]{ostrom05:_zoomin_in_linkin_action_situat}
+ Elinor Ostrom.\\*
+\emph{Zooming In and Linking Action Situations}, chapter~2, pages: 32--68.\\*
+ isbn: 978-0-691-12207-6, %% No Doi.
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: __untagged
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2005]{pincus05:_comput}
+ Jonathan~D. Pincus.\\*
+\emph{Computer science is really a social science}.
+\urlprefix \url{http://www.achangeiscoming.net/docs/cssocsci.html}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: HCI, computer_science, paradigm_shift, social_science,
+  software_engineering
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2005]{young05_integ_}
+ R.~Michael Young and Mark~O. Riedl.\\*
+\emph{Integrating plan-based behavior generation with game environments}.\\*
+In ACM SIGCHI Advances in Computer Entertainment Technology, page: 2005.
+\urlprefix \url{http://liquidnarrative.csc.ncsu.edu/pubs/ace2005-1.pdf}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: ai, games, mimesis, narrative, storytelling
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2006]{castelfranchi06:_delib_normat_agent}
+ Cristiano Castelfranchi, Frank Dignum, Catholijn~M Jonker, and Jan Treur.\\*
+\emph{Deliberative Normative Agents: Principles and Architecture}.\\*
+In Intelligent Agents VI. Agent Theories, Architectures, and Languages. ATAL
+  1999., pages: 364--378. Springer.\\*
+\doi{10.1007/10719619_27}.
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: agents, architecture, behaviour, meta, methods, norms, planning,
+  society, violation
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2006]{czarnecki06:_featur_based_survey_model_trans_approac_45}
+ K.~Czarnecki and S.~Helsen.\\*
+\emph{Feature-Based Survey of Model Transformation Approaches}.\\*
+IBM Systems Journal, 45(3) pages: 621--645.\\*
+ISSN 0018-8670.\\*
+\doi{10.1147/sj.453.0621}.
+\urlprefix \url{http://ieeexplore.ieee.org/document/5386627/}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: __printed, classification, design, domain, framework, meta, modeling,
+  review, rule, transformation
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2006]{leake06_requir_b_}
+ Jason Leake.\\*
+\emph{Requirements specification for the prototype card deck modelling system},
+  [Unpublished].
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: card_game, project, requirements_specification, software_engineering
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2006]{observer06_clash_gener_}
+ The Observer.\\*
+\emph{A Clash of Generations ? Youth Bulges and Political Violence}.\\*
+International Studies Quarterly, pages: 607--629, %% No Doi.
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: civil_war, history, politics, terrorism, violence, youth_bulge
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2006]{recski06_inves_use_modal_academ_spoken_discour_}
+ Leonardo~Juliano Recski et~al.\\*
+\emph{Investigating the Use of Modality in Academic Spoken Discourse: A
+  Functional Account of U.S Dissertation Defenses}.\\*
+Ph.D. thesis, Universidade Federal de Santa Catarina, %% No Doi.
+\urlprefix \url{http://repositorio.ufsc.br/xmlui/handle/123456789/89038}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: NLP, defense, discourse, dissertation, linguistics, modality,
+  systemic_functional_linguistics
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2007]{zackariasson07_world_}
+ Peter Zackariasson.\\*
+\emph{World builders: A study on the development of a Massively Multiplayer
+  Online Role-Playing Game}.\\*
+Ph.D. thesis, Umea University, %% No Doi.
+\urlprefix \url{http://umu.diva-portal.org/smash/record.jsf?pid=diva2:140327}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: MMORPG, anarchy_online, dissertation, ethnography, funcom,
+  game_development, games, semiotics, world_building
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2008]{scalia08:_colum_heller}
+ Antonin Scalia.\\*
+Columbia v Heller.\\*
+Status: .
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: 2nd_amendment, SCOTUS, antonin_scalia, gun_control, judicial_opinion,
+  judiciary
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2009]{landy09_introd_}
+ Joshua Landy and Michael Saler.\\*
+\emph{Introduction: The Varieties of Modern Enchantment}.\\*
+In The Re-Enchantment of the World, October 2018, pages: 1--14. Stanford
+  University Press.\\*
+ isbn: 9780804752992.\\*
+\doi{10.11126/stanford/9780804752992.003.0001}.
+\urlprefix
+  \url{http://stanford.universitypressscholarship.com/view/10.11126/stanford/9780804752992.001.0001/upso-9780804752992-chapter-1}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: enchantment, modernity, religion, secular, text_book
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2009]{spitkovsky09_baby_steps_}
+ Valentin~I Spitkovsky and Dan Jurafsky.\\*
+\emph{Baby Steps: How ``Less is More'' in Unsupervised Dependency Parsing}.\\*
+Technical report, Google, %% No Doi.\\*
+report.
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: NLP, dependency_parsing, machine_learning
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2010]{derbinsky10_soar_rl_manual_}
+ Nate Derbinsky, et~al.\\*
+\emph{Soar-RL Manual}, SOAR, %% No Doi.
+\urlprefix \url{https://soar.eecs.umich.edu/}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: SOAR, manual, reference, technical, text_book
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2010]{doran10_towar_proced_quest_gener_}
+ Jonathon Doran and Ian Parberry.\\*
+\emph{Towards Procedural Quest Generation: A Structural Analysis of Rpg
+  Quests}.\\*
+Technical report, University of North Texas, %% No Doi.\\*
+report.
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: NPC, RPG, action, procedural_content, quest, structure, taxonomy
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2010]{herrera10_do_yours_learn_}
+ Dana~R. Herrera and Andr\'as Margitay-Becht.\\*
+Videogame Cultures and the Future of Interactive EntertainmentDaniel Riha,
+  editor.\\*
+In \emph{Do it Yourself Learning: Case Studies of Gaming as 33 Education in
+  Virtual Worlds}, pages: 43--52. Inter-disciplinary press.\\*
+ isbn: 9781848880405, %% No Doi.
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: case_study, games, virtual_world
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2011]{malone11:_big_idea}
+ Thomas~W. Malone, Robert Laubacher, and Tammy Johns.\\*
+\emph{The Big Idea: The Age of Hyperspecialization}.
+\urlprefix
+  \url{https://hbr.org/2011/07/the-big-idea-the-age-of-hyperspecialization}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: capitalism, specialisation, division_of_labour, economics
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2012]{abel12:_abort_200}
+ Kathryn~M. Abel, Ezra~S. Susser, Peter Brocklehurst, and Roger~T. Webb.\\*
+\emph{Abortion and mental health: guidelines for proper scientific conduct
+  ignored}.\\*
+British Journal of Psychiatry, 200(1) pages: 74--75.\\*
+\doi{10.1192/bjp.200.1.74a}.
+\urlprefix \url{http://dx.doi.org/10.1192/bjp.200.1.74a}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: peer_review, mental_health, abortion
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2012]{daume12_cours_machin_learn_}
+ Hal Daum\'e, III.\\*
+\emph{A Course in Machine Learning}.\\*
+%% No Doi.
+\urlprefix \url{http://ciml.info/}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: bayesian, decision_tree, education, geometry, graphical_models, kernal,
+  machine_learning, nearest_neighbours, neural_network, perceptron,
+  probability, text_book
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2012]{hullett12_}
+ Kenneth~M Hullett.\\*
+\emph{The science of level design: Design patterns and analysis of player
+  behavior in first-person shooter levels}.\\*
+Ph.D. thesis, university of california, santa cruz (ucsc), %% No Doi.
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: FPS, HCI, analysis, behaviour, design, level_design, metrics, patterns
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2012]{silk12:_modal_22}
+ Alex Silk.\\*
+\emph{Modality, weights, and inconsistent premise sets}.\\*
+In Semantics and linguistic theory, Volume~22, pages: 43--64.
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: modality, preference, priorities, semantics, weight
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2013]{evans13_versu_sdk_}
+ Richard Evans and Emily Short.\\*
+\emph{Versu SDK 0.1 Beta}, [Unpublished].
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: __printed, authoring, narrative, praxis, simulation, social_practice,
+  versu
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2013]{wundergeek13:_jim_sterl}
+ Wundergeek.\\*
+\emph{An interview with Jim Sterling about sexism in game culture}.
+\urlprefix
+  \url{https://web.archive.org/web/20141222073519/http://www.gamingaswomen.com/posts/2013/06/an-interview-with-jim-sterling-about-sexism-in-game-culture/}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: sexism, game_culture, stephanie_sterling, feminism
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2014]{bueger14_think_}
+ Christian Bueger.\\*
+\emph{Thinking assemblages methodologically: Some rules of thumb}, In
+  Reassembling International Theory, chapter~7, pages: 58--66.\\*
+\doi{10.1057/9781137383969_7}.
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: gilles_deleuze, guidelines, metaphor, methods, ontology, philosophy,
+  review
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2014]{force14_distan_world_}
+ Code Force.\\*
+\emph{Distant Worlds: Universe Game Manual}, %% No Doi.
+\urlprefix \url{https://www.slitherine.com/game/distant-worlds-universe}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: 4x, game, manual, modding, simulation
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2014]{roberson14_unified_behav_framew_simul_auton_agent_}
+ Daniel Roberson, Douglas Hodson, Gilbert Peterson, and Brian Woolley.\\*
+\emph{The Unified Behavior Framework for the Simulation of Autonomous
+  Agents}.\\*
+Master's thesis, Air Force Institute of Technology, %% No Doi.
+\urlprefix \url{https://apps.dtic.mil/sti/citations/ADA620211}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: UBF, agents, ai, autonomy, behaviour, dissertation, framework, layers,
+  military, simulation
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2014]{roberts14_mccut_feder_elect_commis_}
+ John Roberts.\\*
+McCutcheon v Federal Election Commission.\\*
+Status: .
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: SCOTUS, elections, free_speech, judicial_opinion, judiciary,
+  political_donations
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2015]{nystrom15:_what_color_is_your_funct}
+ Bob Nystrom.\\*
+\emph{What Color Is Your Function?}
+\urlprefix
+  \url{https://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function/}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: moands, software_engineering, programming, javascript, async_await
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2016]{chis16:_moldab_}
+ Andrei Chi\c{s}.\\*
+\emph{Moldable tools}.\\*
+Ph.D. thesis, University of Bern, %% No Doi.
+\urlprefix \url{https://boristheses.unibe.ch/id/eprint/866}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: DSL, HCI, IDE, dissertation, lenses, moldable_tools, programming, tools
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2016]{netlogo16_netlog_}
+ NetLogo.\\*
+\emph{Netlogo User Manual}, %% No Doi.
+\urlprefix \url{http://ccl.northwestern.edu/netlogo/}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: netlogo, programming, reference, technical, text_book
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2016]{serigstad16:_talkin_taboo}
+ Nora~Haaland Serigstad.\\*
+\emph{Talking about a Taboo: Health providers' attitudes towards people with
+  pedophilia}.\\*
+Master's thesis, NTNU, %% No Doi.
+\urlprefix \url{http://hdl.handle.net/11250/2455826}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: health_care, norway, pedophilia, taboo
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2017]{mcgaughy17:_dear_suther_sprin}
+ Lauren McGaughy.\\*
+\emph{Dear Sutherland Springs, you deserve an apology from the news media}.
+\urlprefix
+  \url{https://www.dallasnews.com/opinion/commentary/2017/11/09/dear-sutherland-springs-you-deserve-an-apology-from-the-news-media/}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: sutherland_springs, mass_shooting, gun_violence, texas, journalism
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2018]{chibber18:_catal_2}
+ Vivek Chibber.\\*
+\emph{Catalyst: A Journal of Theory \& Strategy}.\\*
+%% No Doi.
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: africa, cambridge, cambridge_analytica, history, palo_alto,
+  pierre_bourdieu, politics, science, south_africa
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2018]{eric18:_how_would_nasa_balan}
+ Vh~Eric.\\*
+\emph{How Would NASA Balance 40K?}
+\urlprefix
+  \url{https://variancehammer.com/2018/06/04/how-would-nasa-balance-40k/}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: 40k, game_design, game_meta, balance
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2018]{iso18:_common_logic_cl}
+ ISO.\\*
+\emph{Common Logic (CL) - A framework for a family of logic-based
+  languages}.\\*
+The Interntional Organization for Standardization, ISO/IEC 24707:2018(E).
+\urlprefix \url{https://www.iso.org/standard/66249.html}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: XML, common_logic, semantic_web, standardization, syntax
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2018]{lepenies18:_anthr_26}
+ Philipp Lepenies.\\*
+\emph{The Anthroposeen: The Invention of Linear Perspective As a Decisive
+  Moment in the Emergence of a Geological Age of Mankind}.\\*
+European Review, 26(04) pages: 583--599.\\*
+ISSN 1062-7987.\\*
+\doi{10.1017/s106279871800042x}.
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: anthropocene, geology, history
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2018]{meyer18_level_}
+ Bruce Meyer, James Sullivan, et~al.\\*
+\emph{Levels and changes in income poverty, consumption poverty and material
+  well-being: A response to Shaefer and Rivera (2018)}.\\*
+Technical report, American Enterprise Institute, %% No Doi.\\*
+report.
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: criticism, economics, inequality, labour, metrics, poverty
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2019]{autor19:_work_futur}
+ David Autor, David~A. Mindell, and Elisabeth~B. Reynolds.\\*
+\emph{The Work of the Future: Shaping Technology and Institutions}.\\*
+Technical report, MIT, %% No Doi.\\*
+techreport.
+\urlprefix
+  \url{https://workofthefuture.mit.edu/research-post/the-work-of-the-future-shaping-technology-and-institutions/}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: automation, robotics, division_of_labour, employment, ai, capitalism,
+  labour
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2019]{bajiee19:_when_warham_was_radic}
+ Zhu Bajiee.\\*
+\emph{When Warhammer Was Radical: The Egalitarian Origins of the Fantasy Battle
+  Game}.
+\urlprefix
+  \url{https://wearethemutants.com/2019/01/14/when-warhammer-was-radical-the-egalitarian-origins-of-the-fantasy-battle-game/}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: 1980s, UK, history, margaret_thatcher, politics, table_top_game,
+  warhammer
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2019]{fox19_cybor_littl_stalin_}
+ Amos~C. Fox.\\*
+\emph{``Cyborgs at Little Stalingrad'': A Brief History of the Battles of the
+  Donetsk Airport}.\\*
+Technical report, Institute of Land Warfare, %% No Doi.\\*
+report.
+\urlprefix
+  \url{https://www.ausa.org/publications/cyborgs-little-stalingrad-brief-history-battles-donetsk-airport-26-may-2014-21-january}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: donetsk, history, information_warfare, russia, ukraine, warfare
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2019]{hale19_r_miller_appel_prime_minis_}
+ Lady Hale, et~al.\\*
+R (on the application of Miller) (Appellant) v The Prime Minister (Respondent)
+  Cherry and others (Respondents) v Advocate General for Scotland (Appellant)
+  (Scotland).\\*
+Status: .
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: UK, brexit, law, politics
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2019]{jones19:_cruel}
+ Alexi Jones.\\*
+\emph{Cruel and unusual punishment: When states don't provide air conditioning
+  in prison}.
+\urlprefix \url{https://www.prisonpolicy.org/blog/2019/06/18/air-conditioning/}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: mass_incarceration, air_conditioning, cruelty, climate_change, texas,
+  police_violence
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2020]{brown20:_languag_model_few_shot_learn}
+ Tom~B. Brown, et~al.\\*
+\emph{Language Models are Few-Shot Learners}.\\*
+Technical report, OpenAI.\\*
+\doi{10.48550/ARXIV.2005.14165}.\\*
+techreport.
+\urlprefix \url{https://arxiv.org/abs/2005.14165}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: NLP, machine_learning, GPT_3
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2020]{gelfond20:_causal_analy_event_occur_trajec_dynam_domain}
+ Michael Gelfond and Evgenii Balai.\\*
+\emph{Causal Analysis of Events Occuring in Trajectories of Dynamic Domains},
+  [Unpublished].
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: agents, answer_set_programming, causality, consistency_restoring_rules,
+  p_log, probabilistic_reasoning
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2020]{state20_absen_votin_guide_regis_voter_}
+ Georgia~Secretary of~State.\\*
+\emph{Absentee Voting A Guide for Registered Voters}, Georgia Secretary of
+  State, %% No Doi.
+\urlprefix \url{https://georgia.gov/vote-absentee-ballot}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: 2020, absentee_voting, election, georgia, guide, voting
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2020]{play20:_probl_plato}
+ The History Of How~We Play.\\*
+\emph{The Problems with PLATO}.
+\urlprefix
+  \url{https://thehistoryofhowweplay.wordpress.com/2020/10/29/the-problems-with-plato/}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: Role_Playing_Games, interactive_fiction, PLATO, history
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2020]{verdicchio20:_comput_commun_aesth_x_}
+ Mario Verdicchio, Miguel Carvalhais, Lu{\'\i}sa Ribas, and Andr\'e Rangel,
+  editors.\\*
+\emph{Computation, Communication, Aesthetics \& X (xCoAx)}.\\*
+ isbn: 978-989-746-266-5, %% No Doi.
+\urlprefix \url{http://proceedings.xcoax.org/}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: __untagged
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2021]{bernreiter21_choic_logic_their_comput_proper_}
+ Michael Bernreiter, Jan Maly, and Stefan Woltran.\\*
+\emph{Choice Logics and Their Computational Properties}.\\*
+In Proceedings of the Thirtieth International Joint Conference on Artificial
+  Intelligence.\\*
+\doi{10.24963/ijcai.2021/247}.
+\urlprefix \url{http://dx.doi.org/10.24963/ijcai.2021/247}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: CCL, QCL, __important, choice_logic, computation,
+  conjunctive_choice_logic, logic, qualitative_choice_logic, semantics
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2021]{jansen21:_algor_regis_and_their_limit}
+ Fieke Jansen and Corinne CathFrederike Kaltheuner.\\*
+\emph{Algorithmic Registers And Their Limitations As A Governance Practice},
+  pages: 183--192.\\*
+ isbn: 978-1-913824-03-7.\\*
+\doi{10.58704/kcha-1h20}.
+\urlprefix \url{https://meatspacepress.com/go/fake-ai-internet-archive/}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: governance, registration, economics, regulation, politics, technology,
+  ai, algorithmic_registers
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2021]{pellauer21_paul_ricoeur_}
+ David Pellauer and Bernard Dauenhauer.\\*
+The Stanford Encyclopedia of PhilosophyEdward~N. Zalta,  editor.\\*
+In \emph{Paul Ricoeur}. Metaphysics Research Lab, Stanford University, spring
+  2021 edition, %% No Doi.
+\urlprefix \url{https://plato.stanford.edu/archives/spr2021/entries/ricoeur/}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: anthropology, hermeneutics, narrative_identity, paul_ricoeur
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2021]{wagner21_dagst_repor_11_1_}
+ \emph{Dagstuhl Reports}.\\*
+\doi{10.4230/DAGREP.11.1.I}.
+\urlprefix \url{https://drops.dagstuhl.de/opus/volltexte/2021/14532/}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: MAS, __important, agents, algorithm, autonomous_agents, hyperagent,
+  interaction, modal_logic, norms, persuasion, protocol, scalable,
+  semantic_web, sentient_web, stigmergy
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2022]{chacon22:_pro_git}
+ Scott Chacon and Ben Straub.\\*
+\emph{Pro Git}.\\*
+Apress, 2 edition, %% No Doi.
+\urlprefix \url{https://git-scm.com/book/en/v2/}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: git, reference, version_control
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2022]{croshaw22:_will_save_galax_food}
+ Yahtzee Croshaw.\\*
+\emph{Will Save the Galaxy for Food}.\\*
+Dark Horse Books.\\*
+ isbn: 978-1506701653, %% No Doi.
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: fiction, science_fiction
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2022]{greenspan22:_gamin}
+ Brian Greenspan.\\*
+\emph{Gaming}, In The Palgrave Handbook of Utopian and Dystopian Literatures,
+  pages: 255--266.\\*
+Palgrave Handbooks.\\*
+\doi{10.1007/978-3-030-88654-7_20}.
+\urlprefix \url{http://dx.doi.org/10.1007/978-3-030-88654-7_20}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: MMORPG, dystopia, games, gaming_community, utopia
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2022]{kanu22:_polic}
+ Kassan Kanu.\\*
+\emph{Police are not primarily crime fighters, according to the data}.
+\urlprefix
+  \url{https://www.reuters.com/legal/government/police-are-not-primarily-crime-fighters-according-data-2022-11-02/}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: crime, police_violence, journalism, traffic_laws
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2022]{katta22:_hazy_data_days}
+ Srujana Katta, Yung Au, and Mounika Neerukonda.\\*
+\emph{Hazy Data Days: Delivery Dispatches From Hyderabad}.\\*
+chapter~12, pages: 137--155.\\*
+\doi{10.2139/ssrn.4258527}.
+\urlprefix \url{http://dx.doi.org/10.2139/ssrn.4258527}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: __untagged
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2022]{richman22}
+ Priscilla Richman.\\*
+Harness v Watson.\\*
+United States Court of Appeals for the Fifth Circuit.\\*
+Status: , 19-60632.
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: mississippi, institutional_racism, racism
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2022]{stempvoort22:_brief_onion_amicus_curiae_novak_city_parma}
+ Novak V City of Parma.\\*
+Court of Appeals For the Sixth Circuit.\\*
+United States.\\*
+22-293.
+\urlprefix
+  \url{https://www.supremecourt.gov/docket/docketfiles/html/public/22-293.html}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: censorship, free_speech, humour, law, lawsuit, ohio, parody,
+  police_violence
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2022]{team22:_scons_user_guide}
+ The SCons~Development Team.\\*
+\emph{SCons User Guide}, %% No Doi.
+\urlprefix \url{https://scons.org/}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: build_tool, python, scons, software_engineering
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2022]{wagner22:_dagst_repor_11}
+ \emph{Dagstuhl Reports}.\\*
+\doi{10.4230/DAGREP.11.8.I}.
+\urlprefix \url{https://drops.dagstuhl.de/opus/volltexte/2022/15765/}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: ASP, SAT, __important, ai, answer_set_programming, behavioural_types,
+  chatbot, conversational_agent, description_logic, ethics, grey_failure,
+  humour, idris, integrated_deduction, knowledge_graph, monad, session_types,
+  small_talk, type_system
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2022]{zeilinger22:_ai_art_hyper_like_portal_global_warmin}
+ Martin Zeilinger.\\*
+\emph{AI Art as Hyperobject-Like Portal to Global Warming}.\\*
+pages: 104--116.\\*
+ isbn: 978-989-9049-33-8.\\*
+\doi{10.24840/xcoax_2022}.
+\urlprefix \url{http://proceedings.xcoax.org/}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: __important, aesthetics, ai, anthropocene, communication, computation,
+  digital_art, global_warming, hyperobjects, timothy_morton
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2022]{zucconi22:_world_gener_minec}
+ Alan Zucconi.\\*
+\emph{The World Generation of Minecraft}.
+\urlprefix
+  \url{https://www.alanzucconi.com/2022/06/05/minecraft-world-generation/}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: biomes, game_development, minecraft, procedural_content
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2023]{amstutz23:_common_workf_languag_cwl_comman}
+ Peter Amstutz, et~al.\\*
+\emph{Common Workflow Language (CWL) Command Line Tool Description}.\\*
+Software Freedom Conservancy, v1.2.
+\urlprefix \url{https://www.commonwl.org/v1.2/}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: technical_standards, workflow, CWL, common_workflow_language
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2023]{}
+ Anon.\\*
+\emph{Nothing}.\\*
+%% No Doi.
+%% No url
+\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2023]{artifacts23:_slsa_proven}
+ Supply-Chain Levels For~Software Artifacts.\\*
+\emph{SLSA Provenance}.\\*
+Open Source Security Foundation.
+\urlprefix \url{https://slsa.dev/spec/v1.0/provenance}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: cybersecurity, data_provenance, software_engineering, SLSA
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2023]{baekdal23}
+ Thomas Baekdal.\\*
+\emph{The future trend around not having social traffic at scale}.
+\urlprefix
+  \url{https://baekdal.com/strategy/the-future-trend-around-not-having-social-traffic-at-scale/84077F55DCCD4F3C875B8449020AD4F2BA4469560BCD0BE15EE758EC2010D078}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: micro_finance, social_media
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2023]{bonica23:_datab_ideol_money_polit_elect_dime}
+ Adam Bonica.\\*
+\emph{Database on Ideology, Money in Politics, and Elections (DIME): Public
+  version}.\\*
+%% No Doi.
+\urlprefix \url{https://data.stanford.edu/dime}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: elections, ideology, data_sets, database, politics
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2023]{(cisa)23:_types_softw_bill_mater_sbom_docum}
+ Cybersecurity \& Infrastructure Security~Agency (Cisa).\\*
+\emph{Types of Software Bill of Materials (SBOM) Documents}.\\*
+Cybersecurity \& Infrastructure Security Agency (CISA).
+\urlprefix
+  \url{https://www.cisa.gov/resources-tools/resources/types-software-bill-materials-sbom}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: software_engineering, cybersecurity, taxonomy,
+  software_bill_of_material, SBOM
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2023]{dixon23:_treac_turn}
+ Aemilia Dixon, et~al.\\*
+\emph{The Treacherous Turn}.\\*
+Platform: tabletop.
+\urlprefix \url{https://thetreacherousturn.ai/}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: __important, AGI, game_ai, role_playing, game, ai
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2023]{fergusson23:_gener_harms}
+ \emph{Generating Harms: Generative AI's Impact \& Paths Forward}.\\*
+Technical report, Electronic Privacy Information Center, %% No Doi.\\*
+techreport.
+\urlprefix
+  \url{https://epic.org/wp-content/uploads/2023/05/EPIC-Generative-AI-White-Paper-May2023.pdf}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: harm, misinformation, LLMs, generative_ai
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2023]{international23:_kellog_kraft_secur_victor_price}
+ Competition~Policy International.\\*
+\emph{Kellogg, Kraft Secure Victory in Price-Fixing Lawsuit Against Egg
+  Producers}.
+\urlprefix
+  \url{https://www.pymnts.com/cpi_posts/kellogg-kraft-secure-victory-in-price-fixing-lawsuit-against-egg-producers/}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: kellogg, kraft, eggs, capitalism, price_fixing, lawsuit
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2023]{pujol23:_collap_of_freed_of_expres}
+ Jordi Pujol.\\*
+\emph{The Collapse Of Freedom Of Expression: Reconstructing The Ancient Roots
+  Of Modern Liberty}.\\*
+University of Notre Dame Press.\\*
+ isbn: 978-0-268-20398-6, %% No Doi.
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: religion, politics, freedom, charlie_hebdo, freedom_of_expression,
+  censorship, hate_speech, laws
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2023]{qiao23:_was_there_admin_revol}
+ George~Zhijian Qiao.\\*
+Review of: , \emph{Was There an Administrative Revolution?}\\*
+Journal of Chinese History, pages: 1--20.\\*
+\doi{10.1017/jch.2023.19}.
+\urlprefix \url{http://dx.doi.org/10.1017/jch.2023.19}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: history, review, critique, academia, historiography
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2023]{reed23:_reed_dykst_uncer_empir_routin}
+ Bradly Reed.\\*
+Review of: , \emph{Reed on Dykstra, 'Uncertainty in the Empire of Routine: The
+  Administrative Revolution of the Eighteenth-Century Qing State'}.\\*
+H-Asia, %% No Doi.
+\urlprefix
+  \url{https://networks.h-net.org/group/reviews/20007641/reed-dykstra-uncertainty-empire-routine-administrative-revolution-eighteenth}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: historiography, history, critique
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2023]{team23:_latex}
+ LaTeX~Project Team.\\*
+\emph{LaTeX 2e font selection}, %% No Doi.
+%% No url
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: fonts, latex
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2023]{technologies23:_terms_servic_repos}
+ Unity Technologies.\\*
+\emph{Terms of Service Repository}.\\*
+%% No Doi.
+\urlprefix \url{https://github.com/Unity-Technologies/TermsOfService}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: github, terms_of_service, game_development, unity
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2023]{wagner23:_archit_must_refus_profit_from_ruins_pales}
+ Kate Wagner.\\*
+\emph{Architects Must Refuse to Profit From the Ruins of Palestine}.
+\urlprefix
+  \url{https://www.thenation.com/article/world/gaza-rebuilding-urban-ruin-development/}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: zionism, gaza, israel, architecture
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2023]{warner23:_restr_act}
+ Mark Warner.\\*
+\emph{RESTRICT Act}, US Senate.
+\urlprefix \url{https://www.congress.gov/bill/118th-congress/senate-bill/686}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: internet, censorship, technology
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2023]{weill-greenberg23:_new_jersey_state_polic_sued}
+ Elizabeth Weill-Greenberg.\\*
+\emph{New Jersey State Police Sued for Sharing Criminal Records Slated for
+  Expungement}.
+\urlprefix
+  \url{https://theappeal.org/new-jersey-state-police-criminal-record-expungement/}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: privacy, police_violenc, new_jersey
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\begin{minipage}{\textwidth}
+\bibitem[2023]{wilson23:_softw_desig_examp}
+ Greg Wilson.\\*
+\emph{Software Design by Example}.\\*
+Third Bit, %% No Doi.
+\urlprefix \url{https://third-bit.com/sdxpy/}
+\begin{center}
+  \begin{lstlisting}[breaklines=true,breakatwhitespace=true,basicstyle=\small]
+ Tags: technology, python, software_enginering, design
+\end{lstlisting} \end{center}\end{minipage}
+\pagebreak[1]
+
+\end{thebibliography}

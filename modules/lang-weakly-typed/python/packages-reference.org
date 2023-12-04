@@ -260,6 +260,7 @@ jpeg                                                                            
 ncurses                                                                                         : 6.3
 pastel                                                                                          : 0.2.1
 pixman                                                                                          : 0.40.0
+https://github.com/Zulko/moviepy
 *** ui
 https://github.com/Dvlv/Tkinter-By-Example                                                      : GUI : libraries : tkinter : tutorial
 https://www.learnpyqt.com/blog/pyqt6-vs-pyside6/                                                : programming : pyside : python : pytq
@@ -309,6 +310,7 @@ https://github.com/python/typeshed
 mypy
 
 ** misc
+https://github.com/brandon-rhodes/pyephem # astronomy
 https://rmzoo.math.uconn.edu/
 https://mrandri19.github.io/2022/01/12/a-PPL-in-70-lines-of-python.html                         : DAG : __come_back_to : probability : programming
 https://github.com/jarun/Buku                                                                   : bookmark_organisation : cli : libraries

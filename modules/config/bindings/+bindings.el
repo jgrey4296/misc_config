@@ -23,7 +23,7 @@
       :desc "Universal argument"    "u"   #'universal-argument
 
       ;; 0 6 9 8
-      :desc "Agenda"    "7" (cmd! (find-file (expand-file-name "base_agenda.org" doom-user-dir)))
+      :desc "Agenda"    "7" (cmd! (find-file initial-buffer-choice))
       )
 
 (map! :leader

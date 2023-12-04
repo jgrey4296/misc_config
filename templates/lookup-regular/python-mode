@@ -123,6 +123,8 @@ LSP Protocol             # https://microsoft.github.io/language-server-protocol/
 Pydot                    # https://github.com/pydot/pydot
 PEP 635: Match statement # https://peps.python.org/pep-0635
 marginal effects         # https://marginaleffects.com/index.html
+moviepy                  # https://github.com/Zulko/moviepy
+pyephem                  # https://github.com/brandon-rhodes/pyephem
 
 unicode                  # https://tonsky.me/blog/unicode/
 Algorithm Library        # https://algorist.com/algorist.html

@@ -1,0 +1,9 @@
+## threads.toml -*- mode: conf-toml -*-
+[[locations]]
+
+
+# TODO list threads
+# TODO check 1 thread per file
+# TODO hash threads/images
+# TODO convert threads to html
+# TODO build epubs

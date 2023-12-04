@@ -1,80 +1,30 @@
-verbosity                = 1
-default_tasks            = ["locs::report"]
-action_string_formatting = "new"
-notify                   = { sleep = false, say-on-exit = false }
-subtask                  = { sleep = 2 }
-batch                    = { sleep = 0, size = 1000 }
+# -*- mode:conf-toml; -*-
+[settings.general]
+notify                   = { say-on-exit = false }
+loaders                  = { commands="default", task="default", parser="default"}
+location_check           = { make_missing = true }
 
-# [plugins.reporter]
-# custom = "doot.utils.reporter:DootReporter"
-
-# [plugins.command]
-# run    = "doot.utils.custom_run:DootRun"
-
-[globbing]
-ignores = ['.git', '.DS_Store', "__pycache__"]
+[settings.tasks]
+sources = [".config/jg/templates/doot/home_tasks"] # Files or directories where task specs can be loaded from, expanded according to [[locations]] keys
+code    = []                                       # Directories where task specific code can be imported from, expanded according to [[locations]] keys
+sleep   = { tasks=0.2, subtask=1, batch=1 }
 
 [logging]
-stream = { level = "INFO", format  = "-- {message}", filters = ["doot", "doit"] }
-file   = { level = "DEBUG", format = "{levelname:<8} : {message:<20} : ({module}.{lineno}.{funcName})", filters =  ["doot", "doit"] }
+stream  = { level="WARN",  allow=["doot"], format="{levelname:<8} : {message}", colour=true }
+file    = { level="DEBUG", allow=["doot"], format="{levelname:<8} : {message:<20} :|: (module:{module} line:{lineno} fn:{funcName})" }
+printer = { level="INFO", colour=true}
 
-[[directories]] # Core
-temp               = ".temp"
-logs               = ".logs"
-bots               = ".bots"
-build              = "doot_build"
+[plugins]
+# Allows for defining shorthands
+command        = { other-run = "doot.cmds.run_cmd:RunCmd", tasks = "doot.cmds.list_cmd:ListCmd" }
+report-line    = {}
+reporter       = {}
+action         = {}
+tasker         = {}
 
-[[directories]] # Backup
-backup_root        = "/Volumes/BackupSD/"
-images_backup      = "/Volumes/BackupSD/Pictures"
-movies_backup      = "/Volumes/BackupSD/Movies"
-pdf_backup         = "/Volumes/BackupSD/Library/pdf_library"
-pdf_summary_backup = "/Volumes/BackupSD/Library/summary"
-thread_backup      = "/Volumes/BackupSD/Library/twitter_threads"
+[commands]
+run = { tracker = "default", runner = "default", reporter= "default", report-line = [] }
 
-[[directories]] # Watch Directories
-bibtex             = "~/github/bibliography/main"
-downloads          = "~/Downloads"
-desktop            = "~/Desktop"
-dropbox            = "~/Dropbox/docs"
-bibtex_working     = "/Volumes/documents/in_progress_pdfs/Current/"
-firefox            = "~/Library/ApplicationSupport/Firefox"
-
-[[directories]] # libraries
-bookmarks          = "~/github/bibliography/bookmarks"
-tags               = "~/github/jgrey4296.github.io/resources/tags"
-orgs               = "~/github/jgrey4296.github.io/orgfiles"
-thread_library     = "/Volumes/documents/twitter_threads"
-pdfs               = "/Volumes/documents/pdf_library"
-movies             = "/Users/johngrey/Movies"
-images             = "/Volumes/documents/DCIM"
-github             = "~/github"
-git_libs           = "~/github/_libs"
-
-[[files]] # library files
-bookmarks_total = "~/github/bibliography/bookmarks/total.bookmarks"
-
-[[directories]] # output
-pdf_summary        = "/Volumes/documents/in_progress_pdfs/pdflib_automations/total_bib"
-maintain           = "/Volumes/documents/github/__configs/maintenance"
-listings_out       = "doot_build"
-
-[[directories]] # Android
-local_push         = "/Volumes/documents/pdf_library"
-local_pull         = "/Volumes/documents/android_test_pull"
-
-[[files]] # bibtex bot files
-bib_blacklist   = ".bots/bibtex_blacklist"
-bib_compile_tex = ".bots/bib_compile_template.tex"
-bib_success     = ".bots/log.bib_success"
-bib_fail        = ".bots/log.bib_fail"
-bib_style       = ".bots/jg_custom.bst"
-
-[[files]] # image bot files
-image_whitelist = ".bots/dcim_whitelist"
-image_blacklist = ".bots/resolution_blacklist"
-image_temp      = ".bots/conversion_temp"
-bib_stub_file   = "~/github/bibliography/in_progress/todo.bib"
-secrets         = "~/.config/secrets/bots/bkmkorg.toml"
-
-[group.maintain]
+[[locations]]
+temp    = ".cache/doot/temp"
+build   = ".cache/doot/build"

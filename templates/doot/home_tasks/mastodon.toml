@@ -1,0 +1,60 @@
+[[locations]]
+mastodon_secrets = "~/.config/secrets/bots/bkmkorg.toml"
+image_temp       = "{temp}/images/"
+all_bib          = "/media/john/data/github/bibliography/main/"
+
+[[tasks.mast]]
+name                 = "post-image"
+version              = "0.1"                # <str>
+ctor                 = "task" # <type>
+doc                  = [] # <list[str]>
+actions              = []                   # <list[Any]>
+
+
+[[tasks.mast]]
+name                 = "bib-select"
+version              = "0.1"                # <str>
+ctor                 = "doot.task.subselect_walker:DootSubselectWalker" # <type>
+doc                  = [] # <list[str]>
+select_method        = "random"
+select_num           = 1
+sub_task             = "mast::_bib-load"
+head_task            = "mast::_bib-post"
+roots                = ["{all_bib}"]                # <list[str|pl.Path]>  Places the walker will start
+exts                 = [".bib"]                   # <list[str]>
+
+
+[[tasks.mast]]
+name                 = "_bib-load"
+version              = "0.1"                # <str>
+ctor                 = "task"               # <type>
+doc                  = []                   # <list[str]>
+actions              = [
+                     { do="dootle.bibtex.actions:BibtexInitAction",  update_="bib_db"},
+                     { do="dootle.bibtex.actions:BibtexLoadAction",  from_="fpath", update_="bib_db" },
+                     { do="tasks_code.bibtex:select_one_entry", from_="bib_db", update_="entry"},
+                     { do="putPost", args=["entry"] },
+                     ] # <list[Any]>
+
+
+[[tasks.mast]]
+name                 = "_bib-post"
+version              = "0.1"                                           # <str>
+ctor                 = "task"                                          # <type>
+doc                  = [] # <list[str]>
+actions              = [
+                     { do="getPost", update_="entries" },
+                     { do="tasks_code.bibtex:format_for_mastodon", from_="entries", update="text"},
+                     { do="dootle.mastodon.actions:MastodonSetup" },
+                     { do="dootle.mastodon.actions:MastodonPost", from_="text" },
+                     ] # <list[Any]>
+
+# [[tasks.mast]]
+# name                 = "basic"
+# version              = "0.1"                # <str>
+# ctor                 = "task"               # <type>
+# actions              = [
+#                      { do= "dootle.mastodon.actions:MastodonSetup" },
+#                      { do= "addState", text="blah"},
+#                      { do= "dootle.mastodon.actions:MastodonPost", from_="text" },
+# ]                   # <list[Any]>

@@ -1,0 +1,10 @@
+## maintenance.toml -*- mode: conf-toml -*-
+[[locations]]
+
+
+# TODO list installed package versions
+# TODO list python environment versions
+# TODO list tex installed versions
+# TODO rust cron git haskell
+
+# TODO update doom, blood, apt, tlmgr, rust...

@@ -1,0 +1,30 @@
+[[locations]]
+
+
+[[tasks.android]]
+name                 = "head"
+version              = "0.1"                # <str>
+ctor                 = "task"               # <type>
+doc                  = [] # <list[str]>
+android_root         = "/storage/6331-3162"
+actions              = [
+                     { do="dootle.android.actions:AndroidRunning"} ,
+                     # { do="interact", args=["adb", "-t", "{transport}", "shell"], prompt="gts6lwifi:/"},
+                     { do="dootle.android.actions:AndroidRemoteCmd", cmd="find", args=["{android_root}/Library/pdf_library", "-type", "f"] },
+                     { do="write!", from_="adb_result", to="{temp}/adb_files" }
+                     # { do="dootle.android.actions:AndroidPush", local="~/Desktop/dootshadow.pdf", remote="dootshadow.pdf"},
+                     # { do="dootle.android.actions:AndroidPull", local="~/Desktop/dootshadow_adb.pdf", remote="dootshadow.pdf"},
+
+]                   # <list[Any]>
+
+# TODO
+# [[tasks.android]]
+# name = "pull.list"
+
+# TODO
+# [[tasks.android]]
+# name = "push"
+
+# TODO
+# [[tasks.android]]
+# name = "pull.backup"

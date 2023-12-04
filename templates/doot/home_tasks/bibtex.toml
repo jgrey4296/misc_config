@@ -1,3 +1,5 @@
+## bibtex.toml -*- mode: conf-toml -*-
+
 [[locations]]
 bib = "~/github/bibliography/main"
 

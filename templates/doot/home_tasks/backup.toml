@@ -1,3 +1,5 @@
+## backup.toml<2> -*- mode: conf-toml -*-
+
 [[locations]]
 backup       = "{temp}/backup"
 data_drive   = "/media/john/data"

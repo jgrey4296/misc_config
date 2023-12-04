@@ -1,3 +1,5 @@
+## bookmark.toml -*- mode: conf-toml -*-
+
 [[locations]]
 firefox   = "/home/john/snap/firefox/common/.mozilla/firefox"
 bookmarks = "/media/john/data/github/bibliography/bookmarks/total.bookmarks"

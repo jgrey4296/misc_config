@@ -1,7 +1,10 @@
+## mastodon.toml<2> -*- mode: conf-toml -*-
+
 [[locations]]
 mastodon_secrets = "~/.config/secrets/bots/bkmkorg.toml"
 image_temp       = "{temp}/images/"
 all_bib          = "/media/john/data/github/bibliography/main/"
+image_whitelist  = ""
 
 [[tasks.mast]]
 name                 = "post-image"
@@ -9,7 +12,7 @@ version              = "0.1"                # <str>
 ctor                 = "task" # <type>
 doc                  = [] # <list[str]>
 actions              = []                   # <list[Any]>
-
+# TODO : read from image_whitelist, select, post
 
 [[tasks.mast]]
 name                 = "bib-select"
@@ -23,7 +26,6 @@ head_task            = "mast::_bib-post"
 roots                = ["{all_bib}"]                # <list[str|pl.Path]>  Places the walker will start
 exts                 = [".bib"]                   # <list[str]>
 
-
 [[tasks.mast]]
 name                 = "_bib-load"
 version              = "0.1"                # <str>
@@ -35,7 +37,6 @@ actions              = [
                      { do="tasks_code.bibtex:select_one_entry", from_="bib_db", update_="entry"},
                      { do="putPost", args=["entry"] },
                      ] # <list[Any]>
-
 
 [[tasks.mast]]
 name                 = "_bib-post"

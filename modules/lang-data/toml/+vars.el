@@ -32,18 +32,16 @@
                       ("\\.cfg\\'" . conf-mode)
                       )
                     )
-(spec-handling-add! fold
+(spec-handling-add! fold :form 'override
                     `(toml
                       :modes (conf-toml-mode)
                       :priority -50
-                      :triggers (
-                                :delete     nil
-                                :open-all   ,#'origami-open-all-nodes
-                                :close-all  ,#'origami-close-all-nodes
-                                :toggle     ,#'origami-toggle-node
-                                :open       ,#'origami-open-node
-                                :open-rec   ,#'origami-open-node-recursively
-                                :close      ,#'origami-close-node
-                                )
+                      :triggers (:open-all   ,#'outline-show-all
+                                 :close-all  ,(cmd! (with-no-warnings (outline-hide-sublevels 1)))
+                                 :toggle     ,#'outline-toggle-children
+                                 :open       ,(cmd! (with-no-warnings (outline-show-entry) (outline-show-children)))
+                                 :open-rec   ,#'outline-show-subtree
+                                 :close      ,#'outline-hide-subtree
+                                 )
                       )
                     )

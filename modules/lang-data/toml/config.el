@@ -31,15 +31,21 @@
              #'outline-minor-mode
              #'general-insert-minor-mode
              )
+
+  (setq-hook! 'conf-toml-mode-hook
+    outline-regexp "\[\[?[a-zA-Z0-9\.]+\]?\]"
+    outline-heading-end-regexp "\n"
+    )
+
   )
 
-(use-package! toml-mode
-  :commands toml-mode
-  :config
-  (add-hook! 'conf-toml-mode-hook :depth 100
-             #'outline-minor-mode
-             #'general-insert-minor-mode
-             )
-  )
+;; (use-package! toml-mode
+;;   :commands toml-mode
+;;   :config
+;;   (add-hook! 'conf-toml-mode-hook :depth 100
+;;              #'outline-minor-mode
+;;              #'general-insert-minor-mode
+;;              )
+;;   )
 ;;
 ;;; config.el ends here

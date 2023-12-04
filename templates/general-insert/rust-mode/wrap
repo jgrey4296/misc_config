@@ -1,5 +1,0 @@
-Wrapper Value:
-Some(v) # Option
-None    # Option
-Ok(v)   # Result
-Err(E)  # Result

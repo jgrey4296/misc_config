@@ -1,0 +1,18 @@
+Rust Macros
+#[macroName] # General Invocation
+macroName!   # Macro Rule Invocation
+
+#[attribute = "value"]    # Attributes
+#[attrbute(key="value")]  # Attributes
+#[attribute(value)]       # Attributes
+
+#[allow(dead_code)] # Compiler warning control
+#[link(name = "m")] # External library linking. Link to libm
+#[derive(...)] # Auto Trait Derivation
+
+#[cfg(test)] # Mark module as for testing
+#[test] # Mark as a test
+
+
+cfg!(...) # config compile time evaluation
+println!("{}", value)

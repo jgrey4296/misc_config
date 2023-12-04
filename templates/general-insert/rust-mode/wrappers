@@ -1,0 +1,33 @@
+Wrapper Value:
+Some(v)                                  # Option<T>
+None                                     # Option<T>
+Ok(v)                                    # Result<T, E>
+Err(E)                                   # Result<T, E>
+
+                                         # Chaining Option<T>'s:
+val?                                     # -> T | None for Option<T>.
+val.map(fn).map(fn2).map(fn3)            # fn:Some<T> -> Some, None->None
+val.and_then(fn).and_then(fn2)           # fn:T -> Some<T>   , None->None
+val.or(Some(aVal))                       # Option<T> | aVal:T2.  Eager Evaluation. Moves the argument.
+val.or_else(fn)                          # Option<T> | fn::Option<T2>. Lazy Evaluation,
+val.get_or_insert(val2)                  # Eager, modifes in place
+val.get_or_insert_with(fn)               # Lazy, modifes in place
+
+                                         # Chaining Result<T, E>'s:
+val.unwrap()                             # T or panic!
+val.unwrap_or_else(fn)                   #
+val.map(fn).map(fn2)                     #
+val.and_then(fn).and_then(fn2)           #
+return Err(e)                            # Early Return
+val?                                     # Macro for early return err. Old Code uses 'try!(val)'
+
+                                         # For Vec<T>:
+aVar.into_iter()                         # Get an Iterator
+iter.map(fn)                             # Apply fn on each element
+iter.filter_map(fn)                      # Apply fn, ignore None results
+iter.filter_map(|r| r.map_err(|e| ...)   # collect errors in a local mut variable
+iter.collect()                           # Converts Vec<Result<T, T>> -> Result<Vec<T>, E>
+iter.partition(Result::is_ok)            # Convert into a tuple (Vec<T>, Vec<_>)
+
+                                         # For Box<T>
+ *aVar                                   # Convert Box<T> -> T

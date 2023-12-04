@@ -23,8 +23,8 @@
 
 (map! :map jg-rust-mode-map
       :after rustic
-      :n "RET" #'rustic-cargo-run
-      :desc "General Insert" :n "|" #'+jg-rust-main-ivy
+      :n "RET"                      #'rustic-cargo-run
+      :n "|"                        #'general-insert-call
       :desc "Racer Describe" :n "?" #'rustic-racer-describe
       :localleader
       (:prefix ("b" . "build")

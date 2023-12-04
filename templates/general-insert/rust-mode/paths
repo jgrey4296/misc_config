@@ -1,0 +1,18 @@
+Rust Paths and IO:
+use std::path::Path;                                       # Module
+use std::fs::File;                                         # Module
+use std::io;                                               # Module
+
+let path = Path::new(".");                                 #
+let mut new_path:PathBuf = path.join("a").join("b");       # join paths
+new_path.push("c")                                         # Extend PathBuf with &Path
+new_path.set_file_name("blah.bib")                         # update pathbuf
+
+new_path.to_str()                                          # -> Option<str>
+
+File::create(&path)                                        # -> io::Result<File>
+File::open(&path)                                          # -> io::Result<File>
+file.read_to_string(&mut aString)                          # -> io::Result<usize>, modifies s.
+file.write_all(aString.as_bytes())                         # -> io::Result<()>
+
+io::BufReader::new(File::open(&path)?).lines()             # -> io::Lines<io::BufReader<File>>

@@ -1,0 +1,10 @@
+Rust Module Use:
+mod aName; # Module declaration
+pub mod aName; # Public Module declaration
+mod aName { pub fn aFn () {...}, fn aFn2 () {...} } # Public and Private Functions
+use aName as shortName; # Module import with rebind
+
+pub(crate) fn aFn () {...} # Only Public in Current Crate
+
+super::module::fn; # Path Ambiguity control
+self::module::fn;  # Path Ambiguity control

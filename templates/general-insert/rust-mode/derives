@@ -1,10 +1,10 @@
 Add data derivation:
 Debug      #
-PartialEq  #
-Eq         #
-PartialOrd #
-Ord        #
-Clone      #
-Copy       #
-Hash       #
-Default    #
+PartialEq  # Comparison
+Eq         # Comparison
+PartialOrd # Comparison
+Ord        # Comparison
+Clone      # '.clone()'. Create T from &T.
+Copy       # Copy Semantics instead of Move Semantics
+Hash       # Compute Hash from &T
+Default    # to create empty instances

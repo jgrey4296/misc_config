@@ -8,7 +8,7 @@
       librarian-man--cache-dir                     (expand-file-name ".temp" doom-user-dir)
 
       librarian-tagging-mode-substitution-sources  (expand-file-name "~/github/bibliography/tags/substitutions")
-      librarian-tagging-mode-main-loc              (expand-file-name "~/github/.temp/tags/totals.tags")
+      librarian-tagging-mode-main-loc              (expand-file-name "~/github/bibliography/.temp/tags/totals.tags")
       )
 
 

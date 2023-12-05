@@ -1,7 +1,40 @@
 #+TITLE: Godot Package Reference
 
 * Overview
-
+https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html
+https://docs.godotengine.org/en/stable/classes/index.html
 * Main
 
+** Testing
+https://github.com/AlexDarigan/WAT
+https://github.com/bitwes/Gut
+https://developer.android.com/games/engines/godot/godot-configure
+
 * Links
+http://www.shardcore.org/shardpress/2014/06/05/waiting-for-godot/
+https://docs.godotengine.org/en/3.1/classes/index.html
+https://docs.godotengine.org/en/3.1/getting_started/editor/unity_to_godot.html
+https://docs.godotengine.org/en/latest/contributing/development/core_and_modules/internal_rendering_architecture.html
+https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html#doc-gdscript
+https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/index.html
+https://gdscript.com/
+https://github.com/Jamesong7822/Godot-Notes/blob/master/Godot%20Notes.md
+https://github.com/francogarcia/company-godot-gdscript.el
+https://github.com/francogarcia/yasnippet-godot-gdscript
+https://github.com/godot-rust/godot-rust
+https://github.com/godotengine/awesome-godot
+https://github.com/godotengine/emacs-gdscript-mode
+https://github.com/me2beats/godot-tips-and-tricks/issues
+https://godot-rust.github.io/book/getting-started.html
+https://godot-rust.github.io/book/index.html
+https://godotengine.org/article/importing-3d-assets-blender-gamedevtv
+https://godotengine.org/asset-library/asset
+https://godotengine.org/asset-library/asset/1745
+https://godotshaders.com/
+https://godottutorials.com/courses/godot-basics-series
+https://kidscancode.org/godot_recipes/3.x/recent/
+https://medium.com/@JustAnotherRandomGuy/writing-tests-in-godot-a9a5ed279b2c
+https://new.pythonforengineers.com/blog/godot-tips-n-tricks-n-gotchas/
+https://nightblade9.github.io/godot-gamedev/2019/getting-started-with-unit-and-integration-testing-in-godot.html
+https://tomeyro.itch.io/godot-sfxr
+https://www.gdquest.com/tutorial/godot/learning-paths/developer/

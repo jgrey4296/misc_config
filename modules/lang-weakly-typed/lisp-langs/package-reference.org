@@ -3,5 +3,18 @@
 * Overview
 
 * Main
+https://github.com/emacs-tw/awesome-emacs
+
+https://github.com/hayamiz/twittering-mode
+
+https://github.com/jwiegley/use-package
+
+https://github.com/purcell/disable-mouse
+
+http://ergoemacs.org/emacs/elisp_library_system.html
+
+https://github.com/abo-abo/hydra
+
+http://theory.stanford.edu/~amitp/yapps/yapps-doc/node2.html
 
 * Links

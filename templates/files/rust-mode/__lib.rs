@@ -1,3 +1,4 @@
+// __lib.rs -*- mode: rustic -*-
 ////-- module declarations
 pub mod $1;
 ////-- end module declarations

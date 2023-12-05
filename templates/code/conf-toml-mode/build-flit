@@ -2,7 +2,7 @@
 # name  : build-flit
 # uuid  : build-flit
 # key   : build-flit
-# group :
+# group : python
 # --
 ##-- build-system :: flit
 # https://flit.pypa.io/en/stable/pyproject_toml.html

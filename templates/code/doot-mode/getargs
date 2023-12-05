@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name  : getargs
-# uuid  : getargs
-# key   : getargs
-# group : doit
-# --
-{
-    "getargs" : { "${1:var}" : ("${2:task}", "${3:varname}") }
-}

@@ -2,7 +2,7 @@
 [[locations]]
 
 
-# TODO list installed package versions
+# TODO list installed package versions : apt list --installed
 # TODO list python environment versions
 # TODO list tex installed versions
 # TODO rust cron git haskell

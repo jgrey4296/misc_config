@@ -2,7 +2,7 @@
 # name  : build-setuptools
 # uuid  : build-setuptools
 # key   : build-setuptools
-# group :
+# group : python
 # --
 ##-- build-system : setuptools
 # https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html

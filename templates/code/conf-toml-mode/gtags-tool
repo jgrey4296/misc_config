@@ -2,9 +2,8 @@
 # name  : gtags-tool
 # uuid  : gtags-tool
 # key   : gtags-tool
-# group :
+# group : infra
 # --
-
 ##-- gtags
 [tool.gtags]
 verbosity = 0

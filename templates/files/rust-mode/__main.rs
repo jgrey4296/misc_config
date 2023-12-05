@@ -1,3 +1,4 @@
+// __main.rs -*- mode: rustic -*-
 ////-- public module declarations
 pub mod $1;
 

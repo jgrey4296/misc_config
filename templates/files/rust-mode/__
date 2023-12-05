@@ -1,3 +1,4 @@
+// __ -*- mode: rustic -*-
 ////-- imports
 use std::io;
 use log::{info, trace, warn};

@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name  : delay-task
-# uuid  : delay-task
-# key   : delay
-# group :
-# --
-@create_after(executed="$1", creates="", target_regex="$2")
-def task_$3():
-    return {}

@@ -16,3 +16,40 @@ macroName!   # Macro Rule Invocation
 
 cfg!(...) # config compile time evaluation
 println!("{}", value)
+
+assert                  #
+assert_eq               #
+assert_ne               #
+cfg                     #
+column                  #
+compile_error           #
+concat                  #
+dbg                     #
+debug_assert            #
+debug_assert_eq         #
+debug_assert_ne         #
+env                     #
+eprint                  #
+eprintln                #
+file                    #
+format                  #
+format_args             #
+include                 #
+include_bytes           #
+include_str             #
+is_x86_feature_detected #
+line                    #
+matches                 #
+module_path             #
+option_env              #
+panic                   #
+print                   #
+println                 #
+stringify               #
+thread_local            #
+todo                    #
+unimplemented           #
+unreachable             #
+vec                     #
+write                   #
+writeln                 #

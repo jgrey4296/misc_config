@@ -1,3 +1,4 @@
+## __mod.rs -*- mode: rustic -*-
 // Module: $1
 // Author: `user-full-name`
 // Date  : `(format-time-string "%Y-%m-%d")`

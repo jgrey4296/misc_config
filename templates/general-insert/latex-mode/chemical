@@ -1,0 +1,27 @@
+Latex Chemical Figures:
+\chemfig{<atom1><bond>[<angle>,<coeff>,<tikz>]<atom2>}                                            # Chemical Figures
+\chemfig{<atom>*<N>(code)}                                                                        # Rings of N sides.
+
+\chemgfig{A-B}                                                                                    # Bond Type
+\chemgfig{A=B}                                                                                    # Bond Type
+\chemgfig{A~B}                                                                                    # Bond Type
+\chemgfig{A>B}                                                                                    # Bond Type
+\chemgfig{A<B}                                                                                    # Bond Type
+\chemgfig{A>:B}                                                                                   # Bond Type
+\chemgfig{A<:B}                                                                                   # Bond Type
+\chemgfig{A>|B}                                                                                   # Bond Type
+\chemgfig{A<|B}                                                                                   # Bond Type
+
+\chemfig{C(-[:0]H)(-[:90]H)(-[:180]H)(-[:270]H)}                                                  # Example.
+\chemfig{-[:30]-[:-30]-[:30]}                                                                     # Example. Skeletal
+\chemfig{A*6(-B-C-D-E-F-)}                                                                        # Example. Ring.
+\chemfig{*6(=-=-=-)}                                                                              # Example. Ring, with no letters.
+\chemfig{-(-[1]O^{-})=[7]O}                                                                       # Example. Branching Diagram
+
+
+
+
+
+
+
+https://en.wikibooks.org/wiki/LaTeX/Chemical_Graphics                                             # Reference

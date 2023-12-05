@@ -2,7 +2,7 @@
 # name  : bumpver.semantic
 # uuid  : bumpver.semantic
 # key   : bumpver.semantic
-# group :
+# group : infra
 # --
 [bumpver]
 # https://github.com/mbarkhau/bumpver

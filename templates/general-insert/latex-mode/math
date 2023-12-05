@@ -1,0 +1,114 @@
+Latex Math Mode:
+\( ... \) or $ $                                        # Math Environment
+\begin{equation}... \end{equation}                      # Equation environment
+
+( a )                                                   # parens
+[ b ]                                                   # brackets
+\{ c \}                                                 # braces
+| d |                                                   # vbars
+\| e \|                                                 # double vbar
+                                                        #
+\langle f \rangle                                       # angle brackets
+\lfloor g \rfloor                                       # floor
+\lceil h \rceil                                         # ceiling
+
+\left(..\middle|..\right)                               # automatic sized parens/brace etc. eg: \left{, \left[...
+\big( \Big( \bigg( \Bigg(                               # manual sizing
+
+\quad \qquad                                            # manual horizontal space
+\, \: \;                                                # manual horizontal space
+\!                                                      # negative space
+
+\begin{matrix}...\end{matrix}                           # Matrices
+\begin{array}....\end{array}                            # Array
+
+\dots                                                   # ellipsis
+\cdots                                                  # centered dots
+\vdots                                                  # vertical dots
+\ddots                                                  # diagnoal dots
+
+\hline                                                  # horizontal line
+\hdotsfor{n}                                            # n column dots
+
+\forall                                                 #
+\in \ni \notin                                          #
+\exists                                                 #
+\leg                                                    #
+\subset \subset                                         #
+\subseteq                                               #
+\nsubseteq                                              #
+\sqsubset                                               #
+\sqsubseteq                                             #
+\preceq \succeq                                         #
+\therefore \because                                     #
+\bmod                                                   #
+\pmod                                                   #
+\equiv                                                  #
+\approx                                                 #
+\cong                                                   #
+\sim                                                    #
+\measuredangle                                          #
+\parallel                                               #
+\vdash \dashv \models                                   #
+\perp                                                   #
+\mid                                                    #
+\box                                                    #
+
+
+\alpha                                                  #
+\beta                                                   #
+\gamma                                                  #
+\delta                                                  #
+\epsilon                                                #
+\theta                                                  #
+
+\times                                                  #
+
+\sin \arcsin \sinh \sec                                 #
+\cos                                                    #
+\tan                                                    #
+\cot                                                    #
+
+\lim                                                    #
+\limits_{}                                              #
+\to                                                     #
+
+\infinity                                               #
+\sum_{}^{}                                              # sigma summation
+\prod_{}^{}                                             # product
+\int_{}^{}                                              # integrals
+\iint                                                   # repeated integration
+\limits_{}^{}                                           #
+\partial                                                # partial differentiation
+
+
+\bigoplus                                               #
+\bigcup                                                 #
+\bigsqup                                                #
+\bigwedge                                               #  bs sc
+
+a'''                                                    # primes
+x^{}                                                    # superscript
+x_{}                                                    # subscript
+\substack{}                                             # for multiline subscript
+\sqrt[n]{}                                              # roots
+
+\frac{}{}                                               # fraction
+\cfrac{}{}                                              # continued fractions
+\binom{}{}                                              # choose
+
+
+\hat{o}                                                 # circumflex
+\widehat{oo}                                            #
+\check{o}                                               #
+\tilde{o}                                               #
+\widetilde{oo}                                          #
+\acute{o}                                               #
+\grave{o}                                               #
+\dot{o}                                                 #
+\ddot{o}                                                #
+\breve{o}                                               #
+\bar{o}                                                 # macron
+\vec{o}                                                 # vector arrow over letter
+\not{a}                                                 # strike through
+\underline{a}                                           #

@@ -2,7 +2,7 @@
 # name  : build-poetry
 # uuid  : build-poetry
 # key   : build-poetry
-# group :
+# group : python
 # --
 ##-- build-system : poetry
 # https://python-poetry.org/docs/pyproject/

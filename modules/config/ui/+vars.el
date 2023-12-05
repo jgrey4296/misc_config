@@ -1,6 +1,6 @@
 ;;; editor/window-control/+vars.el -*- lexical-binding: t; -*-
 
-(defvar jg-ui-default-face-gen-palette-dir "/Volumes/documents/github/jgrey4296.github.io/resources/palettes/")
+(defvar jg-ui-default-face-gen-palette-dir (expand-file-name "~/.config/jg/templates/palettes/")
 (defvar jg-ui-tree-active-tree-package 'neotree)
 
 ;;-- theme settings

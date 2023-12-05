@@ -22,7 +22,7 @@
 
 (defvar jg-bibtex-todo-loc            (expand-file-name "~/github/bibliography/in_progress/todo.bib"))
 
-(defvar jg-bibtex-loc-completions     (expand-file-name "~/github/jgrey4296.github.io/resources/completions/"))
+(defvar jg-bibtex-loc-completions     (expand-file-name "~/github/bibliography/completions/"))
 
 (defvar jg-bibtex-loc-export-bib-file (expand-file-name "tex/export_template.tex" "~/.config/jg/templates/tex-config/"))
 

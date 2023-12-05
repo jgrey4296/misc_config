@@ -1,9 +1,7 @@
 ;;; completion/ivy/+vars.el -*- lexical-binding: t; -*-
 
 ;;-- personal-vars
-(defvar jg-completion-rps-have-you-played-loc
-  (expand-file-name "~/github/bibliography/plus/urls/have-you-playeds")
-  )
+(defvar jg-completion-rps-have-you-played- (expand-file-name "~/github/bibliography/plus/urls/have-you-playeds"))
 ;;-- end personal-vars
 
 ;;-- helm

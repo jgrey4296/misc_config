@@ -28,7 +28,7 @@
            )
       (goto-char librarian-tagging-mode-marker)
       (evil-forward-section-end)
-      (while (>= (point) start-pos)
+      (while (> (point) start-pos)
         (bibtex-set-field "tags"
                           (string-join
                            (cl-reduce #'+jg-bibtex--mod-tags-fn actual-candidates

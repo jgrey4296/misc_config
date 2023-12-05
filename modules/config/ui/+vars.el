@@ -1,6 +1,6 @@
 ;;; editor/window-control/+vars.el -*- lexical-binding: t; -*-
 
-(defvar jg-ui-default-face-gen-palette-dir (expand-file-name "~/.config/jg/templates/palettes/")
+(defvar jg-ui-default-face-gen-palette-dir (expand-file-name "~/.config/jg/templates/palettes/"))
 (defvar jg-ui-tree-active-tree-package 'neotree)
 
 ;;-- theme settings
@@ -130,7 +130,7 @@
                       )
                     )
 
-(spec-handling-add! popup :form 'override
+(spec-handling-add! popup
                     '(ui
                      ("^ \\*Treemacs"         :side left :ttl 5   :width 0.2 :quit t :select nil :priority 50)
                      ("\\*NeoTree\\*"   :side left :ttl nil :height 0.4 :quit nil :select nil :priority 100)

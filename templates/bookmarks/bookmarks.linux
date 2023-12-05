@@ -2,7 +2,19 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("packages:latex"
+(("latex"
+ (filename . "/media/john/data/github/_config/templates/tex-config/")
+ (front-context-string . "tlmgr\n  -rw-r-xr")
+ (rear-context-string . "0K Oct  4 00:54 ")
+ (position . 247)
+ (last-modified 25967 14916 945917 56000))
+("dotnet"
+ (filename . "/media/john/data/github/dotnet/")
+ (front-context-string . "..\n  drwxrwxr-x ")
+ (rear-context-string . "0K Nov 27 13:34 ")
+ (position . 79)
+ (last-modified 25967 13552 690358 597000))
+("packages:latex"
  (filename . "/media/john/data/github/_config/modules/lang-text/latex/package-reference.org")
  (front-context-string . "\n\n* Overview\n\n* ")
  (rear-context-string . "ackage Reference")

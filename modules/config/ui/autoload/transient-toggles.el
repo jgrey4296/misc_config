@@ -207,7 +207,7 @@
 
 ;; Top Level Toggle
 (progn
-  (transient-make-mode-toggle! global-hl-line-mode            "Hi-line"       "h")
+  (transient-make-mode-toggle! global-hl-line-mode            "Hl-line"       "h")
   (transient-make-mode-toggle! hide-mode-line-mode            "Hide Modeline" "m")
   (transient-make-mode-toggle! global-code-shy-minor-mode     "Shy Code"      "H")
   (transient-make-mode-toggle! global-centered-cursor-mode    "Center Cursor" "c")

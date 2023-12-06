@@ -1,2 +1,3 @@
-SWIPL reference # https://www.swi-prolog.org/pldoc/doc_for?object=manual
-SWIPL CLI       # https://www.swi-prolog.org/pldoc/man?section=cmdline
+SWIPL reference           # https://www.swi-prolog.org/pldoc/doc_for?object=manual
+SWIPL CLI                 # https://www.swi-prolog.org/pldoc/man?section=cmdline
+SWIPL built in predicates # https://www.swi-prolog.org/pldoc/man?section=builtin

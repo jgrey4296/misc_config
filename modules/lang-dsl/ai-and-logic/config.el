@@ -27,3 +27,9 @@
     indent-line-function '+jg-logic-pasp-indent
     )
   )
+
+(use-package! prolog-mode
+  :init
+  (add-hook! 'prolog-mode-hook
+             #'general-insert-minor-mode)
+  )

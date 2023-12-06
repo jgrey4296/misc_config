@@ -84,6 +84,6 @@ get_tree().paused = true               # pause
 get_tree.change_scene_to_file({scene}) # Scene changing
 {scene}.instantiate()                  # create a scene
 
-_iter_init # custom iterator
-_iter_next # custom iterator
-_iter_get # custom iterator
+_iter_init                             # custom iterator
+_iter_next                             # custom iterator
+_iter_get                              # custom iterator

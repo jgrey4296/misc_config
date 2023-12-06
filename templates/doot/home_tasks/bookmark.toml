@@ -9,7 +9,7 @@ bookmarks = "/media/john/data/github/bibliography/bookmarks/total.bookmarks"
 name                 = "update"
 version              = "0.1"                # <str>
 ctor                 = "task" # <type>
-doc                  = ["after bookmarks have been loaded and put in the postbox", "merge them"] # <list[str]>
+doc                  = ["Merge firefox bookmarks into bibliography repo"]
 db_name              = "places.sqlite"
 runs_after           = ["bookmark::_firefox", "bookmark::_archived"]
 actions              = [
@@ -55,7 +55,7 @@ actions              = [
 name                 = "chore"
 version              = "0.1"                # <str>
 ctor                 = "doot.task.base_task:DootTask" # <type>
-doc                  = [] # <list[str]>
+doc                  = ["TODO: cleanup bookmarks"] # <list[str]>
 db_name              = "places.sqlite"
 actions              = [
                      # load {bookmarks}

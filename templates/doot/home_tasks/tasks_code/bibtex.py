@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """
 
-
 See EOF for license/metadata/notes as applicable
 """
 
@@ -43,10 +42,10 @@ from random import choice
 import doot
 import doot.errors
 from doot.utils.string_expand import expand_key
+from doot.utils import expansion
+from dootle.bibtex import middlewares as dmids
+from bibtexparser import middlewares as ms
 
-from dootle.bibtex.field_cleaner_mixin import BibFieldCleanMixin
-
-cleaner = BibFieldCleanMixin()
 MYBIB = "#my_bibtex"
 
 def format_title(entry):
@@ -88,7 +87,7 @@ def format_for_mastodon(spec, state):
     assert(isinstance(data, list))
     entry = choice(data)
     assert(isinstance(entry, dict))
-    cleaner.bc_split_names(entry)
+    # cleaner.bc_split_names(entry)
     text = []
     match entry:
         case {"__split_names" : key, "url": url, "year": year, "tags": tags}:
@@ -139,7 +138,25 @@ def pretend_post(spec, state):
     text = expand_key(spec.kwargs.on_fail("text").from_(), spec, state)
     printer.info("Would Be Posting:\n%s", text)
 
-"""
+def build_parse_stack(spec, state):
+    read_mids = [
+        ms.ResolveStringReferencesMiddleware(True),
+        ms.RemoveEnclosingMiddleware(True),
+        ms.LatexDecodingMiddleware(True, keep_braced_groups=True, keep_math_mode=True),
+        dmids.ParsePathsMiddleware(lib_root=doot.locs["{lib-root}"]),
+        dmids.ParseTagsMiddleware(),
+        ms.SeparateCoAuthors(True),
+        ms.SplitNameParts(True),
+    ]
+    return {spec.kwargs.update_ : read_mids}
 
-
-"""
+def build_write_stack(spec, state):
+    write_mids = [
+        ms.MergeNameParts(True),
+        ms.MergeCoAuthors(True),
+        ms.LatexEncodingMiddleware(keep_math=True, enclose_urls=False),
+        dmids.WriteTagsMiddleware(),
+        dmids.WritePathsMiddleware(lib_root=doot.locs["{lib-root}"]),
+        ms.AddEnclosingMiddleware(allow_inplace_modification=True, default_enclosing="{", reuse_previous_enclosing=False, enclose_integers=True),
+    ]
+    return {spec.kwargs.update_ : write_mids}

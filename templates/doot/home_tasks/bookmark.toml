@@ -11,7 +11,7 @@ version              = "0.1"                # <str>
 ctor                 = "task" # <type>
 doc                  = ["Merge firefox bookmarks into bibliography repo"]
 db_name              = "places.sqlite"
-runs_after           = ["bookmark::_firefox", "bookmark::_archived"]
+depends-on           = ["bookmark::_firefox", "bookmark::_archived"]
 actions              = [
                      { do="getPost", from_task="bookmark::firefox", update_="head_firefox_bkmks" },
                      { do="getPost", from_task="bookmark::archived", update_="head_archived_bkmks" },

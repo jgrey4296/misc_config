@@ -13,8 +13,8 @@ doc                  = ["Merge firefox bookmarks into bibliography repo"]
 db_name              = "places.sqlite"
 depends-on           = ["bookmark::_firefox", "bookmark::_archived"]
 actions              = [
-                     { do="getPost", from_task="bookmark::firefox", update_="head_firefox_bkmks" },
-                     { do="getPost", from_task="bookmark::archived", update_="head_archived_bkmks" },
+                     { do="getPost", from_task="bookmark::_firefox", update_="head_firefox_bkmks" },
+                     { do="getPost", from_task="bookmark::_archived", update_="head_archived_bkmks" },
                      { do="dootle.bookmarks.actions:BookmarksMerge", from_=["{head_archived_bkmks}", "{head_firefox_bkmks}"], update_="total_bkmks" },                                                          # merge into {bookmarks}
                      { do="dootle.bookmarks.actions:BookmarksRemoveDuplicates", from_="{total_bkmks}" },
                      { do="dootle.bookmarks.actions:BookmarksToStr", from_="{total_bkmks}", update_="bkmks_str" },

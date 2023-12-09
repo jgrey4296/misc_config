@@ -28,7 +28,7 @@
     )
   )
 
-(use-package! prolog-mode
+(use-package! prolog
   :init
   (add-hook! 'prolog-mode-hook
              #'general-insert-minor-mode)

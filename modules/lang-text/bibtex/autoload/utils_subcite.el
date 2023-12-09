@@ -31,7 +31,8 @@
     ;; insert stub
     (bibtex-end-of-entry)
     (insert "\n\n")
-    (insert cite-type "{stub-entry,\n")
+    (insert cite-type)
+    (insert (format "{%s%s,\n" jg-bibtex-default-stubkey-base (random 5000)))
     (insert "year = " year ",\n")
     (insert "crossref = {" key "},\n")
     (insert "title = {},\n")

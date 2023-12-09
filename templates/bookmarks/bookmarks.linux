@@ -2,7 +2,19 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("latex"
+(("doot-tasks"
+ (filename . "/media/john/data/github/_config/templates/doot/")
+ (front-context-string . "home_tasks\n  -rw")
+ (rear-context-string . "0K Dec  7 22:57 ")
+ (position . 142)
+ (last-modified 25972 64287 176139 87000))
+("tomlguard"
+ (filename . "/media/john/data/github/python/tomlguard/")
+ (front-context-string . "tomlguard\n  drwx")
+ (rear-context-string . "0K Nov 19 22:42 ")
+ (position . 185)
+ (last-modified 25972 61946 39739 17000))
+("latex"
  (filename . "/media/john/data/github/_config/templates/tex-config/")
  (front-context-string . "tlmgr\n  -rw-r-xr")
  (rear-context-string . "0K Oct  4 00:54 ")
@@ -116,8 +128,6 @@
  (filename . "/media/john/data/pictures/"))
 ("tex"
  (filename . "~/.config/jg/templates/tex-config"))
-("tomler"
- (filename . "~/github/python/tomler/"))
 ("dootle"
  (filename . "~/github/python/dootle/"))
 ("conda"

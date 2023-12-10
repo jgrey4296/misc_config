@@ -3,10 +3,10 @@
 
 
 [[tasks.android]]
-name                 = "head"
+name                 = "device.find"
 version              = "0.1"                # <str>
 ctor                 = "task"               # <type>
-doc                  = [] # <list[str]>
+doc                  = ["Run Find On the Device, write the results locally"] # <list[str]>
 android_root         = "/storage/6331-3162"
 actions              = [
                      { do="dootle.android.actions:AndroidRunning"} ,

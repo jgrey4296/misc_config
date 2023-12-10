@@ -184,6 +184,7 @@ tomli                                                                           
 tomlkit                                                                                         : 0.11.1
 yaml                                                                                            : 0.2.5
 https://github.com/fabiocaccamo/python-benedict.git
+https://github.com/rezoo/movis : movies
 *** graphs
 https://graphviz.readthedocs.io/en/stable/
 https://github.com/pygraphviz/pygraphviz/issues/398

@@ -1,37 +1,37 @@
 Godot Global Scope:
-AudioServer
-CameraServer
-ClassDB
-DisplayServer
-Engine
-EngineDebugger
-GDExtensionManager
-Geometry2D
-Geometry3D
-GodotSharp
-IP
-Input
-InputMap
-Marshalls
-NavigationMeshGenerator
-NavigationServer2D
-NavigationServer3D
-OS
-Performance
-PhysicsServer2D
-PhysicsServer2DManager
-PhysicsServer3D
-PhysicsServer3DManager
-ProjectSettings
-RenderingServer
-ResourceLoader
-ResourceSaver
-ResourceUID
-TextServerManager
-ThemeDB
-Time
-TranslationServer
-WorkerThreadPool
+AudioServer             #
+CameraServer            #
+ClassDB                 #
+DisplayServer           #
+Engine                  #
+EngineDebugger          #
+GDExtensionManager      #
+Geometry2D              #
+Geometry3D              #
+GodotSharp              #
+IP                      #
+Input                   #
+InputMap                #
+Marshalls               #
+NavigationMeshGenerator #
+NavigationServer2D      #
+NavigationServer3D      #
+OS                      #
+Performance             #
+PhysicsServer2D         #
+PhysicsServer2DManager  #
+PhysicsServer3D         #
+PhysicsServer3DManager  #
+ProjectSettings         #
+RenderingServer         #
+ResourceLoader          #
+ResourceSaver           #
+ResourceUID             #
+TextServerManager       #
+ThemeDB                 #
+Time                    #
+TranslationServer       #
+WorkerThreadPool        #
 
 Variant abs                               ( Variant x )
 float absf                                ( float x )

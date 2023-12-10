@@ -10,3 +10,7 @@
 (map! :map jacamo-mode-map
       :localleader
       )
+
+(map! :map prolog-mode-map
+      :n "|" #'general-insert-call
+      )

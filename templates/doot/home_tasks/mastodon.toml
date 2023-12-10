@@ -4,21 +4,21 @@
 mastodon_secrets = "~/.config/secrets/bots/bkmkorg.toml"
 image_temp       = "{temp}/images/"
 all_bib          = "/media/john/data/github/bibliography/main/"
-image_whitelist  = ""
+image_whitelist  = "~/.config/secrets/bots/whitelist"
 
 [[tasks.mast]]
 name                 = "post-image"
 version              = "0.1"                # <str>
 ctor                 = "task" # <type>
-doc                  = [] # <list[str]>
+doc                  = ["TODO: Post a whitelisted image to mastodon"] # <list[str]>
 actions              = []                   # <list[Any]>
 # TODO : read from image_whitelist, select, post
 
 [[tasks.mast]]
-name                 = "bib-select"
+name                 = "bibtex"
 version              = "0.1"                # <str>
 ctor                 = "doot.task.subselect_walker:DootSubselectWalker" # <type>
-doc                  = [] # <list[str]>
+doc                  = ["Maybe Post a formatted bibtex citation to mastodon"] # <list[str]>
 select_method        = "random"
 select_num           = 1
 sub_task             = "mast::_bib-load"
@@ -32,8 +32,9 @@ version              = "0.1"                # <str>
 ctor                 = "task"               # <type>
 doc                  = []                   # <list[str]>
 actions              = [
-                     { do="dootle.bibtex.actions:BibtexInitAction",  update_="bib_db"},
-                     { do="dootle.bibtex.actions:BibtexLoadAction",  from_="fpath", update_="bib_db" },
+                     { do= "tasks_code.bibtex:build_parse_stack",  update_="parse_stack"},
+                     { do="dootle.bibtex.v2:BibtexInitAction",  update_="bib_db"},
+                     { do="dootle.bibtex.v2:BibtexLoadAction",  from_="fpath", update_="bib_db", parse_stack_="parse_stack" },
                      { do="tasks_code.bibtex:select_one_entry", from_="bib_db", update_="entry"},
                      { do="putPost", args=["entry"] },
                      ] # <list[Any]>

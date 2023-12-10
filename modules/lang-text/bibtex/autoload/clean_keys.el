@@ -1,13 +1,15 @@
 ;;; +keys.el -*- lexical-binding: t; -*-
 (require 'bibtex)
 
+(defvar jg-bibtex-default-stubkey-base "stub_key_")
+
 ;;;###autoload
 (defun +jg-bibtex-insert-stub-key ()
   "Insert a stub key if there isnt an actual one"
   (bibtex-beginning-of-entry)
   (search-forward "{" (line-end-position) t)
   (if (looking-at ",")
-      (insert (format "stub_key_%s" (random 5000)))
+      (insert (format "%s%s" jg-bibtex-default-stubkey-base (random 5000)))
     )
   )
 
@@ -23,7 +25,7 @@ Does not modify keys ending in an underscore
   ;; (forward-char -2)
   ;; (unless (looking-at "_")
   (search-forward "{" (line-end-position) t)
-  (when (looking-at "stub_key_")
+  (when (looking-at jg-bibtex-default-stubkey-base)
     (let ((key (bibtex-generate-autokey))
           handle-duplicate
           )

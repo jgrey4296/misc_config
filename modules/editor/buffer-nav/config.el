@@ -63,9 +63,7 @@
   (add-hook 'imenu-after-jump-hook #'recenter)
   )
 
-(use-package! paren-state
-  :commands evil-paren-state
-  )
+(use-package! paren-state)
 
 (use-package! avy
   :init

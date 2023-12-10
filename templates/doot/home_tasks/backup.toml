@@ -10,44 +10,11 @@ pdf_bkup     = "{backup_drive}/library/pdfs"
 # TODO movies
 # TODO images
 
-##-- example
-[[tasks.backup]]
-name                       = "basic"
-version                    = "0.1"                # <str>
-ctor                       = "shadow"            # <type>
-clean_locs                 = ["{backup}"]
-exts                       = [".bib"]                      # <list[str]>
-head_task                  = "backup::_finish"
-recursive                  = true                         # <bool>
-roots                      = ["{data}"]                    # <list[str|pl.Path]>  Places the globber will start
-shadow_root                = "{backup}"
-sub_task                   = "backup::_body"               # <task_iden>
-
-[[tasks.backup]]
-name                 = "_body"
-version              = "0.1"                # <str>
-ctor                 = "task"               # <type>
-print_levels          = { execute="WARN", action="WARN" }
-actions              = [
-                     {do="dir!", args=["{shadow_path}"] },
-                     {do="backup!", from_="fpath", to="{shadow_path}/{fname}"}
-]                   # <list[Any]>
-
-[[tasks.backup]]
-name                 = "_finish"
-version              = "0.1"                # <str>
-ctor                 = "task" # <type>
-actions              = [
-                     # {do="shell", args=["fdfind", "\\.bib", "{backup}"] },
-                     {do="doot.actions.postbox:SummarizePostAction"},
-]                   # <list[Any]>
-
-##-- end example
-
 ##-- pdfs
 [[tasks.backup]]
 name                       = "pdfs"
 version                    = "0.1"                                                       # <str>
+doc                        = ["Backup pdf library"]
 ctor                       = "doot.task.lazy_tree_shadower:DootLazyShadower"             # <type>
 clean_locs                 = ["{pdf_bkup}"]
 exts                       = []                                  # <list[str]>
@@ -67,7 +34,6 @@ actions              = [
                      {do="backup!", from_="fpath", to="{shadow_path}/{fname}"}
 ]                   # <list[Any]>
 
-
 [[tasks.backup]]
 name                 = "_pdf.finish"
 version              = "0.1"                # <str>
@@ -77,3 +43,38 @@ actions              = [
 ]                   # <list[Any]>
 
 ##-- end pdfs
+
+##-- example
+# [[tasks.backup]]
+# name                       = "basic"
+# version                    = "0.1"                # <str>
+# doc                        = ["A Basic example backup task"]
+# ctor                       = "shadow"            # <type>
+# clean_locs                 = ["{backup}"]
+# exts                       = [".bib"]                      # <list[str]>
+# head_task                  = "backup::_finish"
+# recursive                  = true                         # <bool>
+# roots                      = ["{data}"]                    # <list[str|pl.Path]>  Places the globber will start
+# shadow_root                = "{backup}"
+# sub_task                   = "backup::_body"               # <task_iden>
+
+# [[tasks.backup]]
+# name                 = "_body"
+# version              = "0.1"                # <str>
+# ctor                 = "task"               # <type>
+# print_levels          = { execute="WARN", action="WARN" }
+# actions              = [
+#                      {do="dir!", args=["{shadow_path}"] },
+#                      {do="backup!", from_="fpath", to="{shadow_path}/{fname}"}
+# ]                   # <list[Any]>
+
+# [[tasks.backup]]
+# name                 = "_finish"
+# version              = "0.1"                # <str>
+# ctor                 = "task" # <type>
+# actions              = [
+#                      # {do="shell", args=["fdfind", "\\.bib", "{backup}"] },
+#                      {do="doot.actions.postbox:SummarizePostAction"},
+# ]                   # <list[Any]>
+
+##-- end example

@@ -43,6 +43,10 @@ try:
 except ImportError as err:
     logging.warning("*pyparsing not found*")
 
+try:
+    import networkx as nx
+except ImportError as err:
+    logging.warning("*Networkx not found*")
 
 ##-- readline history
 ## from: https://stackoverflow.com/questions/10346419

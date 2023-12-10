@@ -1,7 +1,8 @@
 ## bibtex.toml -*- mode: conf-toml -*-
 
 [[locations]]
-bib = "~/github/bibliography/main"
+lib-root = "/media/john/data/library/pdfs/"
+bib      = "~/github/bibliography/main"
 
 # TODO Stubber
 # TODO cleaner
@@ -12,7 +13,7 @@ bib = "~/github/bibliography/main"
 name                 = "walker"
 version              = "0.1"                                              # <str>
 ctor                 = "walker"                                           # <type>
-doc                  = ["A walker entry point for loading bibtex files"] # <list[str]>
+doc                  = ["Walk the main bibliography, collect into a single file"]  # <list[str]>
 head_task            = "bib::_walk_collect"                               # <task_iden>
 sub_task              = "bib::_walk_bib"                                  # <task_iden>
 exts                 = [".bib"]                                           # <list[str]>
@@ -23,15 +24,17 @@ recursive            = false                                              # <boo
 name                 = "_walk_bib"
 version              = "0.1"                                                                                                        # <str>
 ctor                 = "task"                                                                                                       # <type>
-doc                  = ["An example bibtex load task for the globber", "writes out the loaded file, and merges it with the others"] # <list[str]>
+doc                  = ["writes out the loaded file, and merges it with the others"] # <list[str]>
 sleep                = 0.1
 actions              = [
                      { do="dir!", args=["{temp}/bib"] },
-                     { do= "dootle.bibtex.actions:BibtexInitAction", update="bib_db"},
-                     { do= "dootle.bibtex.actions:BibtexLoadAction",  from_="fpath",    db_key="bib_db" },
-                     { do= "dootle.bibtex.actions:BibtexToStrAction", from_="bib_db",   update_="bib_text" },
+                     { do= "tasks_code.bibtex:build_parse_stack",  update_="parse_stack"},
+                     { do= "tasks_code.bibtex:build_write_stack",  update_="write_stack" },
+                     { do= "dootle.bibtex.v2:BibtexInitAction",  update="bib_db"},
+                     { do= "dootle.bibtex.v2:BibtexLoadAction",  from_="fpath",    db_key="bib_db", update_="bib_db", parse_stack_="parse_stack" },
+                     { do= "dootle.bibtex.v2:BibtexToStrAction", from_="bib_db",   update_="bib_text", write_stack_="write_stack" },
                      { do= "write!",                                  from_="bib_text", to="{temp}/bib/{fstem}_b.bib" },
-                     { do= "dootle.bibtex.actions:BibtexMergeAction", from_="bib_db"},
+                     # { do= "dootle.bibtex.v2:BibtexMergeAction", from_="bib_db"},
                      ]                       # <list[Any]>
 
 [[tasks.bib]]
@@ -40,23 +43,28 @@ version              = "0.1"                                                    
 ctor                 = "task"                                                    # <type>
 doc                  = ["the head of the bibtex globber, writing the merged database to a single file "] # <list[str]>
 actions              = [
-                     { do= "dootle.bibtex.actions:BibtexMergeAction", from_="bib_db",   update_="bib_db" },
-                     { do= "dootle.bibtex.actions:BibtexToStrAction", from_="bib_db",   update_="bib_text" },
-                     { do= "write!",                                  from_="bib_text", to="{temp}/collected.bib" },
+                     # { do= "tasks_code.bibtex:build_write_stack",  update_="write_stack" },
+                     # { do= "dootle.bibtex.v2:BibtexMergeAction", from_="bib_db",   update_="bib_db" },
+                     # { do= "dootle.bibtex.v2:BibtexToStrAction", from_="bib_db",   update_="bib_text", write_stack_="write_stack"},
+                     # { do= "write!",                             from_="bib_text", to="{temp}/collected.bib" },
                      ]                       # <list[Any]>
 
 ##-- end walker
 
-# [[tasks.bib]]
-# name                 = "basic.load"
-# version              = "0.1"                                                     # <str>
-# ctor                 = "task"                                                    # <type>
-# doc                  = ["a basic bibtex load task with explicit file specified"] # <list[str]>
-# bib_files            = ["{bib}/1637.bib", "{bib}/1773.bib"]
-# actions              = [
-#                      # { do= "doot.actions.state:AddStateAction", bib_files=["{bib}/1637.bib"]},
-#                      { do= "dootle.bibtex.actions:BibtexInitAction",  bib_uniq=false,    update_="bib_db"},
-#                      { do= "dootle.bibtex.actions:BibtexLoadAction",  from_="bib_files", update_="bib_db" },
-#                      { do= "dootle.bibtex.actions:BibtexToStrAction", from_="bib_db",    update_="bib_text" },
-#                      { do= "write!", from_="bib_text", to="{temp}/out.bib" },
-#                      ]                       # <list[Any]>
+
+[[tasks.bib]]
+disable              = true
+name                 = "basic.load"
+version              = "0.2"                                                     # <str>
+ctor                 = "task"                                                    # <type>
+doc                  = ["a basic bibtex load task with explicit file specified"] # <list[str]>
+bib_files            = ["{bib}/1637.bib", "{bib}/1773.bib"]
+actions              = [
+                     # { do= "doot.actions.state:AddStateAction", bib_files=["{bib}/1637.bib"]},
+                     { do= "dootle.bibtex.v2:BibtexInitAction",  update_="bib_db"},
+                     { do= "task_code.bibtex:build_parse_stack",  update_="parse_stack"},
+                     { do= "dootle.bibtex.v2:BibtexLoadAction",  from_="bib_files", update_="bib_db", parse_stack_="parse_stack"},
+                     { do= "task_code.bibtex:build_write_stack", update_="write_stack" },
+                     { do= "dootle.bibtex.v2:BibtexToStrAction", from_="bib_db",    update_="bib_text", write_stack_="write_stack" },
+                     { do= "write!", from_="bib_text", to="{temp}/out.bib" },
+                     ]                       # <list[Any]>

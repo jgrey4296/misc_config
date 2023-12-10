@@ -37,89 +37,117 @@ logging = logmod.getLogger(__name__)
 ##-- end logging
 
 printer = logmod.getLogger("doot._printer")
-from random import choice
+from random import choice, choices
 
 import doot
 import doot.errors
 from doot.utils.string_expand import expand_key
 from doot.utils import expansion
 from dootle.bibtex import middlewares as dmids
+import bibtexparser as BTP
 from bibtexparser import middlewares as ms
 
-MYBIB = "#my_bibtex"
+MYBIB    = "#my_bibtex"
+MAX_TAGS = 7
 
 def format_title(entry):
-    result = [entry['title']]
-    subtitle = entry.get("subtitle", None)
-    volume = entry.get("volume", None)
+    fields = entry.fields_dict
+    result = []
 
-    if subtitle:
-        result.append(": ")
-        result.append(subtitle)
-    if volume:
-        result.append(f", Volume {volume}")
+    year = "({})".format(fields['year'].value)
+
+    match fields:
+        case {"title": t, "subtitle": s}:
+            result.append(f"{year} {t.value}: {s.value}")
+        case {"title": t}:
+            result.append(f"{year} {t.value}")
+
+    if entry.entry_type == "book" and "volume" in fields:
+        vol = fields['volume']
+        result.append(f", Volume {vol.value}")
 
     return "".join(result)
 
-def format_names(names):
+def format_names(entry):
+    fields = entry.fields_dict
+    result = []
+    et_al  = False
+    editor = False
+
+    names = []
+    if "author" in fields and bool(fields['author'].value):
+        names += fields['author'].value
+    elif "editor" in fields and bool(fields['editor'].value):
+        names += fields['editor'].value
+        editor = True
+
     if len(names) > 2:
-        as_str = format_names(names[:2])
-        return f"{as_str} et al."
+        names = names[:2]
+        et_al = True
 
-    flattened = []
-    for name in names:
-        von = "von " if bool(name.get('von', None)) else ""
-        jr  = " jr., " if bool(name.get("jr", None)) else ", "
-        last    = name.get("last", [])
-        first   = name.get("first", [])
+    for name in names: # transform the nameparts
+        current = []
+        if bool(name.von):
+            current.append(" ".join(name.von))
 
-        if bool(last):
-            last = " ".join(last)
-        if bool(first):
-            first = " ".join(first)
-        flattened.append(f"{von}{last}{jr}{first}")
+        current.append(" ".join(name.last) + ",")
 
-    return " and ".join(flattened)
+        if bool(name.jr):
+            current.append(","+" ".join(name.jr))
+
+        current.append(" ".join(name.first))
+        result.append(" ".join(current))
+
+    if et_al and editor:
+        return " and ".join(result) + " et al. (ed.)"
+    elif et_al:
+        return " and ".join(result) + " et al."
+    elif editor:
+        return " and ".join(result) + " (ed.)"
+    else:
+        return " and ".join(result)
 
 def format_for_mastodon(spec, state):
     data       = expand_key(spec.kwargs.on_fail("from").from_(), spec, state)
     update_key = spec.kwargs.on_fail("text").update_()
     assert(isinstance(data, list))
     entry = choice(data)
-    assert(isinstance(entry, dict))
-    # cleaner.bc_split_names(entry)
+    assert(isinstance(entry, BTP.model.Entry))
+
+    fields = entry.fields_dict
     text = []
-    match entry:
-        case {"__split_names" : key, "url": url, "year": year, "tags": tags}:
-            text.append(format_title(entry))
-            text.append(f"({year}) " + format_names(entry[f"__{key}"]))
+    text.append(format_title(entry))
+    text.append(format_names(entry))
+    match fields:
+        case {"doi": doi_obj}:
+            doi = doi_obj.value
+            text.append(f"DOI: https://doi.org/{doi}")
+        case {"url": url_obj}:
+            url  = url_obj.value
             text.append(f"Url: {url}")
-            htags = "#" + " #".join(tags.split(","))
-            text.append(f"{MYBIB} {htags}")
-        case {"__split_names" : key, "isbn": isbn, "year": year, "tags": tags}:
-            text.append(format_title(entry))
-            text.append(f"({year}) " + format_names(entry[f"__{key}"]))
-            if "publisher" in entry:
-                text.append(entry['publisher'])
+        case {"isbn": isbn_obj}:
+            isbn = isbn_obj.value
+            if "publisher" in fields:
+                text.append(fields['publisher'].value)
             text.append(f"ISBN: {isbn}")
-            htags = "#" + " #".join(tags.split(","))
-            text.append(f"{MYBIB} {htags}")
-        case { "__split_names" : key, "doi": doi, "year": year, "tags": tags, "journal": journal}:
-            text.append(format_title(entry))
-            text.append(f"({year}) " + format_names(entry[f"__{key}"]))
-            text.append("{journal}")
-            text.append(f"Doi: {doi}")
-            htags = "#" + " #".join(tags.split(","))
-            text.append(f"{MYBIB} {htags}")
+        case {"journal": job, "volume": vol, "number": num}:
+            journal = job.value
+            volume  = vol.value
+            number = num.value
+            text.append("{journal}: {volume}({number})")
+        case _:
+            printer.warning("Failed on: %s", entry)
+            return False
+
+    base_tags = fields['tags'].value
+    if len(base_tags) > MAX_TAGS:
+        base_tags = choices(base_tags, k=MAX_TAGS)
+
+    htags = " ".join(map(lambda x: f"#{x}", sorted(base_tags)))
+    text.append(f"{MYBIB} {htags}")
 
     if not bool(text):
         printer.warning("Failed on: %s", entry)
-        printer.warning("- Title: %s", "title" in entry)
-        printer.warning("- Year: %s", "year" in entry)
-        printer.warning("- isbn: %s", "isbn" in entry)
-        printer.warning("- url: %s", "url" in entry)
-        printer.warning("- doi: %s", "doi" in entry)
-        printer.warning("- journal: %s", "journal" in entry)
         return False
 
     return { update_key : "\n".join(text) }
@@ -133,10 +161,6 @@ def select_one_entry(spec, state):
 
     if bool(entry):
         return {update_key : entry}
-
-def pretend_post(spec, state):
-    text = expand_key(spec.kwargs.on_fail("text").from_(), spec, state)
-    printer.info("Would Be Posting:\n%s", text)
 
 def build_parse_stack(spec, state):
     read_mids = [

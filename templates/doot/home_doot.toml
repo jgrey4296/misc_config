@@ -11,7 +11,7 @@ sleep   = { tasks=0.2, subtask=1, batch=1 }
 
 [logging]
 stream  = { level="WARN",  allow=["doot"], format="{levelname:<8} : {message}", colour=true }
-file    = { level="DEBUG", allow=["doot"], format="{levelname:<8} : {message:<20} :|: (module:{module} line:{lineno} fn:{funcName})" }
+file    = { level="DEBUG", allow=["pony", "doot"], format="{levelname:<8} : {message:<20} :|: (module:{module} line:{lineno} fn:{funcName})" }
 printer = { level="INFO", colour=true}
 
 [plugins]

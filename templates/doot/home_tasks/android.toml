@@ -1,6 +1,8 @@
 ## android.toml<2> -*- mode: conf-toml -*-
 [[locations]]
-
+push_pdfs = "{pdf_source}"
+# data_drive   = "/media/john/data"
+# pdf_source   = "{data_drive}/library/pdfs"
 
 [[tasks.android]]
 name                 = "device.find"
@@ -23,8 +25,26 @@ actions              = [
 # name = "pull.list"
 
 # TODO
-# [[tasks.android]]
-# name = "push"
+[[tasks.android]]
+name                   = "push.pdfs"
+version                = "0.1"
+ctor                   = "walker"
+doc                    = ["Push pdfs to device"]
+sub_task               = "android::_push.pdf.dir"
+filter_fn              = "tasks_code.android:select_dirs"
+roots                  = ["{push_pdfs}"]
+print_level            = { head="INFO", action="DEBUG" }
+
+[[tasks.android]]
+name                   = "_push.pdf.dir"
+version                = "0.1"
+ctor                   = "task"
+android_root           = "/storage/6331-3162"
+actions                = [
+        {do="log", msg="Pushing: {fname} to {android_root}/Library/pdf_library/{lpath}"},
+        { do="dootle.android.actions:AndroidRunning" },
+        { do="dootle.android.actions:AndroidPush", local="{fpath}", remote="{android_root}/Library/pdf_library/" },
+]
 
 # TODO
 # [[tasks.android]]

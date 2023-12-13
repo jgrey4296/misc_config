@@ -452,5 +452,9 @@ https://github.com/spotify/luigi
 https://github.com/python-poetry/poetry
 https://github.com/SCons/scons
 https://github.com/celery/celery
+https://joblib.readthedocs.io/en/stable/
+https://www.vistrails.org/usersguide/v2.2/html/
+https://provenance.readthedocs.io/en/latest/intro-guide.html
+https://cmdline-provenance.readthedocs.io/en/latest/
 ** System
 https://github.com/giampaolo/psutil

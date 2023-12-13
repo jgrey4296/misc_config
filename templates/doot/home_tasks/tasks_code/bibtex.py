@@ -41,8 +41,7 @@ from random import choice, choices
 
 import doot
 import doot.errors
-from doot.utils.string_expand import expand_key
-from doot.utils import expansion
+import doot.utils.expansion as exp
 from dootle.bibtex import middlewares as dmids
 import bibtexparser as BTP
 from bibtexparser import middlewares as ms
@@ -108,8 +107,8 @@ def format_names(entry):
         return " and ".join(result)
 
 def format_for_mastodon(spec, state):
-    data       = expand_key(spec.kwargs.on_fail("from").from_(), spec, state)
-    update_key = spec.kwargs.on_fail("text").update_()
+    data       = exp.to_any(spec.kwargs.on_fail("_from").from_(), spec, state, indirect=True)
+    update_key = exp.to_str(spec.kwargs.on_fail("text").update_(), spec, state, indirect=True)
     assert(isinstance(data, list))
     entry = choice(data)
     assert(isinstance(entry, BTP.model.Entry))
@@ -153,7 +152,7 @@ def format_for_mastodon(spec, state):
     return { update_key : "\n".join(text) }
 
 def select_one_entry(spec, state):
-    bib_db     = expand_key(spec.kwargs.on_fail("from").from_(), spec, state)
+    bib_db     = exp.to_any(spec.kwargs.on_fail("_from").from_(), spec, state, indirect=True)
     update_key = spec.kwargs.on_fail("entry").update_()
     entries    = bib_db.entries
     entry      = choice(entries)
@@ -166,7 +165,7 @@ def build_parse_stack(spec, state):
     read_mids = [
         ms.ResolveStringReferencesMiddleware(True),
         ms.RemoveEnclosingMiddleware(True),
-        ms.LatexDecodingMiddleware(True, keep_braced_groups=True, keep_math_mode=True),
+        dmids.FieldAwareLatexDecodingMiddleware(True, keep_braced_groups=True, keep_math_mode=True),
         dmids.ParsePathsMiddleware(lib_root=doot.locs["{lib-root}"]),
         dmids.ParseTagsMiddleware(),
         ms.SeparateCoAuthors(True),
@@ -176,9 +175,10 @@ def build_parse_stack(spec, state):
 
 def build_write_stack(spec, state):
     write_mids = [
-        ms.MergeNameParts(True),
+        # ms.MergeNameParts(True),
+        dmids.MergeLastNameFirstName(True),
         ms.MergeCoAuthors(True),
-        ms.LatexEncodingMiddleware(keep_math=True, enclose_urls=False),
+        dmids.FieldAwareLatexEncodingMiddleware(keep_math=True, enclose_urls=False),
         dmids.WriteTagsMiddleware(),
         dmids.WritePathsMiddleware(lib_root=doot.locs["{lib-root}"]),
         ms.AddEnclosingMiddleware(allow_inplace_modification=True, default_enclosing="{", reuse_previous_enclosing=False, enclose_integers=True),

@@ -1,0 +1,138 @@
+[sql_stmt] {; [sql_stmt]} *                                                    # sql_stmt_list
+ALTER TABLE [db_name .] tb_name {RENAME TO new_tb_name | ADD [COLUMN] col_def} # alter_t
+ANALYZE [db_name | table_or_index_name | db_name . table_or_index_name]        # analyze_s
+ATTACH [DATABASE] expr AS db_name                                              # attach_s
+BEGIN [DEFERRED | IMMEDIATE | EXCLUSIVE] [TRANSACTION]                         # begin_s
+{COMMIT | END} [TRANSACTION]                                                   # commit_s
+ROLLBACK [TRANSACTION] [TO [ SAVEPOINT] savepoint_name ]                       # rollback_s
+
+--
+[EXPLAIN [ QUERY PLAN] ] sql_stmt
+alter_t      # sql_stmt
+analyze_s    # sql_stmt
+attach_s     # sql_stmt
+begin_s      # sql_stmt
+commit_s     # sql_stmt
+cindex_s     # sql_stmt
+ctable_s     # sql_stmt
+ctrigger_s   # sql_stmt
+cview_s      # sql_stmt
+cvtable_s    # sql_stmt
+delete_s     # sql_stmt
+delete_slim  # sql_stmt
+detach_s     # sql_stmt
+dindex_s     # sql_stmt
+dtable_s     # sql_stmt
+dtrigger_s   # sql_stmt
+dview_s      # sql_stmt
+insert_s     # sql_stmt
+pragma_s     # sql_stmt
+reindex_s    # sql_stmt
+release_s    # sql_stmt
+rollback_s   # sql_stmt
+savepoint_s  # sql_stmt
+select_s     # sql_stmt
+update_s     # sql_stmt
+update_slim  # sql_stmt
+vacuum_s     # sql_stmt
+--
+SAVEPOINT savepoint_name                                                                                                               # savepoint_s
+RELEASE [SAVEPOINT] savepoint_name                                                                                                     # release_s
+CREATE [UNIQUE] INDEX [IF NOT EXISTS] [db_name .] index_name ON tb_name ( id_cols ) [WHERE expr]                                       # cindex_s
+col_name [COLLATE collation_name] [ASC | DESC]                                                                                         # id_column
+id_column {, id_column} *                                                                                                              # id_cols
+CREATE [TEMP | TEMPORARY] TABLE [IF NOT EXISTS] [db_name .] tb_name {( col_defs ( , tb_constraint ) * ) [WITHOUT ROWID] | AS select_s} # ctable_s
+col_name [type_n] {col_constraint} *                                                                                                   # col_def
+col_def {, col_def} *                                                                                                                  # col_defs
+col_name {, col_name} *                                                                                                                # col_names
+--
+name [( signed_number ) | ( signed_number , signed_number )]                                                                                                                                                                            # type_n
+[CONSTRAINT name] {PRIMARY KEY [ASC | DESC] conflict_clause [AUTOINCREMENT] | NOT NULL conflict_clause | UNIQUE conflict_clause | CHECK ( expr ) | DEFAULT { signed_number | lit_v | ( expr )} | COLLATE collation_name | fkey_clause } # col_constraint
+[+ | -] num_lit                                                                                                                                                                                                                         # signed_number
+[CONSTRAINT name] {{ PRIMARY KEY | UNIQUE} ( id_cols ) conflict_clause | CHECK ( expr ) | FOREIGN KEY ( col_names ) fkey_clause }                                                                                                       # tb_constraint
+REFERENCES foreign_table [( col_name {, col_name} * )] [{ON { DELETE | UPDATE} {SET NULL | SET DEFAULT | CASCADE | RESTRICT | NO ACTION} | MATCH name }] [[ NOT] DEFERRABLE [INITIALLY DEFERRED | INITIALLY IMMEDIATE] ]                # fkey_clause
+[ON CONFLICT {ROLLBACK | ABORT | FAIL | IGNORE | REPLACE}]                                                                                                                                                                              # conflict_clause
+--
+CREATE [TEMP | TEMPORARY] TRIGGER [IF NOT EXISTS] [db_name .] trigger_name [BEFORE | AFTER | INSTEAD OF] {DELETE | INSERT | UPDATE [OF col_names]} ON tb_name [FOR EACH ROW] [WHEN expr] BEGIN ( update_s | insert_s | delete_s | select_s ) ; END # ctrigger_s
+CREATE [TEMP | TEMPORARY] VIEW [IF NOT EXISTS] [db_name .] view_name AS select_s                                                                                                                                                                   # cview_s
+CREATE VIRTUAL TABLE [IF NOT EXISTS] [db_name .] tb_name USING module_name [( module_argument {, module_argument} * )]                                                                                                                             # cvtable_s
+WITH [RECURSIVE]                                                                                                                                                                                                                                   # with_rec
+with_rec cte_table_name AS ( select_s ) {, cte_table_name AS ( select_s )} *                                                                                                                                                                       # with_clause
+tb_name [( col_names )]                                                                                                                                                                                                                            # cte_table_name
+cte_table_name AS ( initial_select {UNION | UNION ALL} recursive_select )                                                                                                                                                                          # rec_cte
+--
+tb_name [( col_names )] AS ( select_s )                                                                    # com_tb_expr
+com_tb_expr {, common-table_expression} *                                                                  # com_tb_exprs
+[with_clause] DELETE FROM q_tb_name [WHERE expr]                                                           # delete_s
+[with_clause] DELETE FROM q_tb_name [WHERE expr] [[ ORDER BY ord_terms] LIMIT expr [( OFFSET | , ) expr] ] # delete_slim
+DETACH [DATABASE] db_name                                                                                  # detach_s
+DROP INDEX [IF EXISTS] [db_name .] index_name                                                              # dindex_s
+DROP TABLE [IF EXISTS] [db_name .] tb_name                                                                 # dtable_s
+--
+DROP TRIGGER [IF EXISTS] [db_name .] trigger_name # dtrigger_s
+DROP VIEW [IF EXISTS] [db_name .] view_name       # dview_s
+--
+lit_v                                                                                        # expr
+bind_p                                                                                       # expr
+[[ db_name .] tb_name . ] col_name                                                           # expr
+unary_op expr                                                                                # expr
+expr binary_op expr                                                                          # expr
+func_name ( [[ DISTINCT] expr {, expr} * | * ] )                                             # expr
+( expr )                                                                                     # expr
+CAST ( expr AS type_n )                                                                      # expr
+expr COLLATE collation_name                                                                  # expr
+expr [NOT] {LIKE | GLOB | REGEXP | MATCH} expr [ESCAPE expr]                                 # expr
+expr {ISNULL | NOTNULL | NOT NULL}          | expr IS [NOT] expr                             # expr
+expr [NOT] BETWEEN expr AND expr                                                             # expr
+expr [NOT] IN {( [select_s | expr ( , expr} *] ) | [db_name .] tb_name )                     # expr
+[[ NOT] EXISTS ] ( select_s )                                                                # expr
+CASE [expr] WHEN expr THEN expr [ELSE expr] END                                              # expr
+raise_function                                                                               # expr
+expr {, expr} *                                                                              # exprs
+
+RAISE ( {IGNORE | { ROLLBACK | ABORT | FAIL} , error_message } )                             # raise_function
+--
+num_lit                                                                       # lit_v
+str_lit                                                                       # lit_v
+blob_lit                                                                      # lit_v
+NULL                                                                          # lit_v
+CURRENT_TIME                                                                  # lit_v
+CURRENT_DATE                                                                  # lit_v
+CURRENT_TIMESTAMP                                                             # lit_v
+
+{digit [decimal_point ( digit} *] | decimal_point digit ) [E [ + | -] digit ] # num_lit
+--
+[with_clause] {INSERT | REPLACE | INSERT OR REPLACE | INSERT OR ROLLBACK | INSERT OR ABORT | INSERT OR FAIL | INSERT OR IGNORE} INTO [db_name .] tb_name [( col_names )] {VALUES ( exprs ) * | select_s | DEFAULT VALUES} # insert_s
+
+PRAGMA [db_name .] pragma_name [= pragma_value | ( pragma_value )]                                                                                                                                                        # pragma_s
+--
+{signed_number | name | str_lit}                                # pragma_value
+REINDEX [collation_name | [ db_name .] {tb_name | index_name} ] # reindex_s
+--
+[with_rec com_tb_exprs] {SELECT [DISTINCT | ALL] result_cols [FROM {tb_or_subqs | join_c}] [WHERE expr] [GROUP BY exprs [HAVING expr]] | VALUES (exprs) {, (exprs)}* } {compound_op select_s } * [ORDER BY ord_terms] [LIMIT expr [ {OFFSET | ,} expr] ] # select_s
+--
+tb_or_subq {, tb_or_subq} *                                                                                                                                             # tb_or_subqs
+
+tb_or_subq [join_op tb_or_subq join_constraint]                                                                                                                         # join_c
+{SELECT [DISTINCT | ALL] result_cols } * [FROM ( tb_or_subq ( , tb_or_subq ) * | join_c )] [WHERE expr] [GROUP BY exprs [ HAVING expr] ] | VALUES (exprs) (, exprs) * ) # sel_core
+--
+[with_rec com_tb_exprs] sel_core ( compound_op sel_core ) * [ORDER BY ord_terms] [LIMIT expr [ ( OFFSET | , ) expr] ]                          # factor_sel_s
+[with_rec com_tb_exprs] sel_core [ORDER BY ord_terms] [LIMIT expr [ ( OFFSET | , ) expr] ]                                                     # simple_sel_s
+[with_rec com_tb_exprs] sel_core ( UNION | UNION ALL | INTERSECT | EXCEPT ) sel_core [ORDER BY ord_terms] [LIMIT expr [ ( OFFSET | , ) expr] ] # compound_sel_s
+--
+{ [db_name .] tb_name [[ AS] tb_alias ] [INDEXED BY index_name | NOT INDEXED] | ( {tb_or_subq ( , tb_or_subq} * | join_c ) ) | ( select_s ) [[AS] tb_alias ] } # tb_or_subq
+{* | tb_name . * | expr [[ AS] col_alias ]}                                                                                                                    # result_col
+result_col {, result_col} *                                                                                                                                    # result_cols
+{, | [NATURAL] [LEFT [ OUTER] | INNER | CROSS ] JOIN}                                                                                                          # join_op
+[ON expr | USING ( col_name {, col_name} * )]                                                                                                                  # join_constraint
+expr [COLLATE collation_name] [ASC | DESC]                                                                                                                     # ordering_term
+ordering_term {, ordering_term} *                                                                                                                              # ord_terms
+--
+{UNION | UNION ALL | INTERSECT | EXCEPT}                                                                                                          # compound_op
+[with_clause] UPDATE [OR ROLLBACK | OR ABORT | OR REPLACE | OR FAIL | OR IGNORE] q_tb_name SET col_name = expr {, col_name = expr} * [WHERE expr] # update_s
+--
+[with_clause] UPDATE [OR ROLLBACK | OR ABORT | OR REPLACE | OR FAIL | OR IGNORE] q_tb_name SET col_name = expr {, col_name = expr} * [WHERE expr] [[ ORDER BY ord_terms] LIMIT expr [( OFFSET | , ) expr] ] # update_slim
+[db_name .] tb_name [INDEXED BY index_name | NOT INDEXED]                                                                                                                                                   # q_tb_name
+VACUUM                                                                                                                                                                                                      # vacuum_s
+--
+-- .+\n | /* .+ */ # comment_syntax

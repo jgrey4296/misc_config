@@ -3,6 +3,7 @@
 
 (doom-log "Setting up bibtex bindings: %s" (current-time-string))
 
+
 ;;-- bibtex-mode
 (map! :map bibtex-mode-map ;; main
       :after bibtex
@@ -22,8 +23,10 @@
 (map! :map bibtex-mode-map ;; localleader
       :after bibtex
       :localleader
-      :desc "Reformat Buffer"     "TAB" #'+jg-bibtex-reformat-buffer
-      :desc "Open In progress"    "0"     (cmd! (bookmark-jump "in_progress_pdfs" #'switch-to-buffer-other-window))
+      :desc "Reformat Buffer"     "TAB"   #'+jg-bibtex-reformat-buffer
+      :desc "Author <-> Editor"   "0"     #'+jg-bibtex-swap-editor-author
+      :desc "Journal <-> Booktitle" "9"   #'+jg-bibtex-swap-booktitle-journal
+
 
       :desc "Subcite"             "\\"    #'+jg-bibtex-subcite
       :desc "Build Bibliography"  "B"     #'org-ref-build-full-bibliography

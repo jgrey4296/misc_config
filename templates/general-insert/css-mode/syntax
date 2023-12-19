@@ -1,1 +1,16 @@
 CSS Syntax:
+selectors { properties }              #
+selector:pesudo-class::pseudo-element #
+property : value;                     #
+
+
+*                                     # Universal Selector
+p, li, h1                             # Multiple selector
+h1                                    # element selector: <h1></h1>
+.box                                  # class selector:   <h1 class="box"></h1>
+#unique                               # id selector:      <h1 id="unique"></h1>
+a[title]                              # attribute selector. presence test.
+a[href="..."]                         # attribute selector. equality test.
+a:hover                               # pseudo class selector. hover state.
+p::first-line                         # pseudo element selector.
+article > p                           # child selector. any 'p' child of 'article'.

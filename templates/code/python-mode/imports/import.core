@@ -30,6 +30,6 @@ from typing import (TYPE_CHECKING, Any, Callable, ClassVar, Final, Generic,
                     Protocol, Sequence, Tuple, TypeAlias, TypeGuard, TypeVar,
                     cast, final, overload, runtime_checkable, Generator)
 
-import atext # for @atext.register
+import atexit # for @atexit.register
 import faulthandler             # stdlib. https://docs.python.org/3/library/faulthandler.html
 ##-- end builtin imports

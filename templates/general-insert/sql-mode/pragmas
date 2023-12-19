@@ -1,4 +1,5 @@
 SQLite Pragma commands:
+foreign_keys              # set to on to enforce foreign key constraints. *important*.
 analysis_limit            #
 application_id            #
 auto_vacuum               #
@@ -16,7 +17,6 @@ defer_foreign_keys        #
 encoding                  #
 foreign_key_check         #
 foreign_key_list          #
-foreign_keys              #
 freelist_count            #
 fullfsync                 #
 function_list             #

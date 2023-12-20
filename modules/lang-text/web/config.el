@@ -65,7 +65,9 @@
   :config
   (add-hook! 'css-mode-hook
              #'hs-minor-mode
-             #'smartparens-mode)
+             #'smartparens-mode
+             #'general-insert-minor-mode)
+
   (setq-hook! 'css-mode-hook
     ;; Correctly continue /* and // comments on newline-and-indent
     comment-line-break-function #'+css/comment-indent-new-line
@@ -94,11 +96,11 @@
              )
   )
 
-(def-project-mode! +web-pelican-mode
-  :modes '(web-mode python-mode markdown-mode)
-  :files ("pelican.toml")
-  :on-enter
-  (when (derived-mode-p 'web-mode)
-    ;; use web-mode-engines
-    (web-mode-set-engine "django"))
-  )
+;; (def-project-mode! +web-pelican-mode
+;;   :modes '(web-mode python-mode markdown-mode)
+;;   :files ("pelican.toml")
+;;   :on-enter
+;;   (when (derived-mode-p 'web-mode)
+;;     ;; use web-mode-engines
+;;     (web-mode-set-engine "django"))
+;;   )

@@ -375,6 +375,7 @@ https://utkuufuk.com/2018/05/04/learning-curves/
 https://www.statsmodels.org/stable/index.html                                                   : library : statistics
 
 ** Text manipulation
+https://github.com/phfaist/pylatexenc
 https://pythonhosted.org/watchdog/ : file watching
 https://github.com/mherrmann/selenium-python-helium    : firefox : headless
 https://github.com/jorisroovers/gitlint
@@ -452,5 +453,9 @@ https://github.com/spotify/luigi
 https://github.com/python-poetry/poetry
 https://github.com/SCons/scons
 https://github.com/celery/celery
+https://joblib.readthedocs.io/en/stable/
+https://www.vistrails.org/usersguide/v2.2/html/
+https://provenance.readthedocs.io/en/latest/intro-guide.html
+https://cmdline-provenance.readthedocs.io/en/latest/
 ** System
 https://github.com/giampaolo/psutil

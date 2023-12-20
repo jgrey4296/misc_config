@@ -1,0 +1,36 @@
+CSS Units:
+           # Absolute
+cm         # Centimeters          1cm = 37.8px = 25.2/64in
+mm         # Millimeters          1mm = 1/10th of 1cm
+Q          # Quarter-millimeters  1Q = 1/40th  of 1cm
+in         # Inches               1in = 2.54cm = 96px
+pc         # Picas                1pc = 1/6th of 1in
+pt         # Points               1pt = 1/72nd of 1in
+px         # Pixels               1px = 1/96th of 1in
+#001122    # Hex Colour
+rgb(r g b) # RGB Colour
+hsl(h s l) # Hue Saturation Lightness colour
+
+top        # position
+left       # position
+bottom     # position
+right      # position
+center     # position
+
+           # Relative
+em         # Font size of the parent, in the case of typographical properties like font-size, and font size of the element itself otherwise.
+ex         # x-height of the element's font.
+ch         # The advance measure (width) of the glyph "0" of the element's font.
+rem        # Font size of the root element.
+lh         # Line height of the element.
+rlh        # Line height of the root element.
+vw         #      1% of the viewport's width.
+vh         #      1% of the viewport's height.
+vmin       #      1% of the viewport's smaller dimension.
+vmax       #      1% of the viewport's larger dimension.
+vb         #      1% of the size of the initial containing block in the direction of the root element's block axis.
+vi         #      1% of the size of the initial containing block in the direction of the root element's inline axis.
+svw,       # svh  1% of the small viewport's width and height, respectively.
+lvw        # lvh  1% of the large viewport's width and height, respectively.
+dvw        # dvh  1% of the dynamic viewport's width and height, respectively.
+%          # Percentage

@@ -123,3 +123,57 @@ ensuring they work across machines "
     (write-file name)
     )
   )
+
+;;;###autoload
+(defun +jg-bibtex-swap-editor-author ()
+  (interactive)
+  (save-excursion
+    (bibtex-beginning-of-entry)
+    (let* ((entry (save-excursion (bibtex-parse-entry)))
+           (editor (alist-get "editor" entry nil nil 'equal))
+           (author (alist-get "author" entry nil nil 'equal))
+           )
+      (cond ((and editor author) nil)
+            (editor
+             (bibtex-set-field "author" (substring editor 1 -1))
+             (bibtex-beginning-of-entry)
+             (if (re-search-forward "editor" (save-excursion (bibtex-end-of-entry) (point)) t)
+                 (delete-line))
+             )
+            (author
+             (bibtex-set-field "editor" (substring author 1 -1))
+             (bibtex-beginning-of-entry)
+             (when (re-search-forward "author" (save-excursion (bibtex-end-of-entry) (point)) t)
+                 (delete-line))
+             )
+            )
+      )
+    )
+  )
+
+;;;###autoload
+(defun +jg-bibtex-swap-booktitle-journal ()
+  (interactive)
+    (save-excursion
+    (bibtex-beginning-of-entry)
+    (let* ((entry (save-excursion (bibtex-parse-entry)))
+           (book (alist-get "booktitle" entry nil nil 'equal))
+           (journal (alist-get "journal" entry nil nil 'equal))
+           )
+      (cond ((and book journal) nil)
+            (book
+             (bibtex-set-field "journal" (substring book 1 -1))
+             (bibtex-beginning-of-entry)
+             (if (re-search-forward "booktitle" (save-excursion (bibtex-end-of-entry) (point)) t)
+                 (delete-line))
+             )
+            (journal
+             (bibtex-set-field "booktitle" (substring journal 1 -1))
+             (bibtex-beginning-of-entry)
+             (when (re-search-forward "journal" (save-excursion (bibtex-end-of-entry) (point)) t)
+                 (delete-line))
+             )
+            )
+      )
+    )
+  )

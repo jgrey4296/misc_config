@@ -1,0 +1,28 @@
+SQLite Expressions:
+{literal}                                                                                                                        # Expr
+{bind}                                                                                                                           # Expr
+{OptS-C} {table}                                                                                                                 # Expr
+{OptS-C} {table} . {column}                                                                                                      # Expr
+{Unary-Op} {expr}                                                                                                                # Expr
+{expr} {Binary-Op} {expr}                                                                                                        # Expr
+{func} ({FuncArgs}) {Filter-C}? {Over-C}                                                                                         # Expr
+({expr},+)                                                                                                                       # Expr
+CAST ({expr} AS {type})                                                                                                          # Expr
+{expr} {ColConstraint-C}                                                                                                         # Expr
+{expr} NOT? LIKE {expr} {ESCAPE expr}?                                                                                           # Expr
+{expr} NOT? GLOB {expr}                                                                                                          # Expr
+{expr} NOT? REGEXP {expr}                                                                                                        # Expr
+{expr} NOT? MATCH {expr}                                                                                                         # Expr
+{expr} ISNULL                                                                                                                    # Expr
+{expr} NOTNULL                                                                                                                   # Expr
+{expr} NOT NULL                                                                                                                  # Expr
+{expr} IS NOT? DISTINCT FROM {expr}                                                                                              # Expr
+{expr} IS NOT? {expr}                                                                                                            # Expr
+{expr} NOT? BETWEEN {expr} AND {expr}                                                                                            # Expr
+{expr} NOT? IN ({select})                                                                                                        # Expr
+{expr} NOT? IN ({expr},+)                                                                                                        # Expr
+{expr} NOT? IN {OptS-C} {table}                                                                                                  # Expr
+{expr} NOT? IN {OptS-C} {table-func} ({expr},+)                                                                                  # Expr
+NOT? EXISTS? ({select})                                                                                                          # Expr
+CASE {expr}? WHEN {expr} THEN {expr} {ELSE expr}? END                                                                            # Expr
+{Raise-C}                                                                                                                        # Expr

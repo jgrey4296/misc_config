@@ -1,0 +1,11 @@
+Builtin Aggregate Functions:
+avg(X)            #
+count(*)          #
+count(X)          #
+group_concat(X)   #
+group_concat(X,Y) #
+max(X)            #
+min(X)            #
+string_agg(X,Y)   #
+sum(X)            #
+total(X)          #

@@ -184,7 +184,7 @@
       :desc "Calc"                         "C"    #'calc
       :desc "Dired"                        "d"    #'dired-jump
       ;; :desc "Compose Email"                "e" #'mu4e~compose-mail
-      :desc "Regexp Builder"               "R"    #'regexp-builder
+
       :desc "Repo Homepage"                "g"    #'+vc/browse-at-remote-homepage
       :desc "Github Homepage"              "G"    (cmd! (browse-url user-url))
 
@@ -194,6 +194,7 @@
       :desc "Notes"                        "N"    #'+default/find-in-notes
 
       :desc "Todo list"                    "t"    #'org-todo-list
+
 
       (:prefix ("a" . "org agenda"))
 

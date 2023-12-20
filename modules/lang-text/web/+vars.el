@@ -44,6 +44,17 @@ If set to `nil', disable all the above behaviors.")
                                 :close      nil
                                 )
                      )
+                    '(css
+                      :modes (css-mode)
+                      :priority 25
+                      :triggers  (:open-all   nil
+                                  :close-all  nil
+                                  :toggle     +css/toggle-inline-or-block
+                                  :open       nil
+                                  :open-rec   nil
+                                  :close      nil
+                                  )
+                      )
                     )
 (spec-handling-add! company
                     `(alchemist-mode (:mode alchemist-company))

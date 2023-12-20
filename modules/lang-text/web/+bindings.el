@@ -92,7 +92,7 @@
       )
 
 (map! :map (css-mode-map less-css-mode-map scss-mode-map sass-mode-map)
-      :n "|" #'+css/toggle-inline-or-block
+      :n "|"  #'general-insert-call
       :n "s j" #'counsel-css
 
       :localleader

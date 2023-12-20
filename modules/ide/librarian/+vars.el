@@ -30,6 +30,8 @@
                       ("brew cask"                                               "https://formulae.brew.sh/cask/%s")
                       ("brew formula"                                            "https://formulae.brew.sh/formula/%s")
                       ("Ngrams"                                                  "https://books.google.com/ngrams/graph?content=%s&year_start=1800&year_end=2019&corpus=en-2019&smoothing=3")
+                      ("Localhost"                                               "127.0.0.1:8000")
+                      ("Router"                                                  "192.168.1.1")
                      )
                     )
 (spec-handling-add! lookup-url

@@ -158,6 +158,7 @@
       :desc "Complete/Grow Selection"     "g" (cmds! (eq evil-state 'normal) #'company-manual-begin
                                                      (eq evil-state 'visual) #'+jg-text-grow-selection-op)
       :desc "Yank"                        "y" #'+evil:yank-unindented
+      :desc "Regexp Builder"               "R"    #'regexp-builder
 
       (:prefix ("d" . "Describe")
       "g" #'writegood-grade-level

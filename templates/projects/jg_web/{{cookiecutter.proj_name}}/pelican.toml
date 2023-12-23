@@ -1,56 +1,82 @@
 # -*- mode:conf-toml; -*-
-# /opt/anaconda3/envs/bookmark/lib/python3.10/site-packages/pelican/writers.py
+
 [pelican]
-AUTHOR                 = '{{cookiecutter._author}}'
 DEFAULT_METADATA       = {}
-SITENAME               = '{{cookiecutter.proj_name}}'
-SITEURL                = 'jgrey4296.github.io'
-PATH                   = 'src'
-STATIC_PATHS           = ['images']
-TIMEZONE               = 'Europe/Rome'
 DEFAULT_LANG           = 'en'
-READERS                = {}
-FORMATTED_FIELDS       = ['summary']
 PORT                   =  8000
 BIND                   =  '127.0.0.1'
+# READERS                = { ".md"="MarkdownReader" }
+
+[paths]
+PATH                        = '.'
+OUTPUT_PATH                 = '.site'
+THEME                       = './_theme'
+CACHE_PATH                  = 'cache'
+
+##-- site.settings
+
+[site.settings]
+ARTICLE_PERMALINK_STRUCTURE = ''
+DEFAULT_ORPHANS             = 0
+DEFAULT_PAGINATION          = false
+DOCUTILS_SETTINGS           = {}
+EXTRA_PATH_METADATA         = {}
+FILENAME_METADATA           = '(?P<date>\d{4}-\d{2}-\d{2}).*'
+INDEX_SAVE_AS               = 'index.html'
+LOCALE                      = []  # defaults to user locale
+PAGE_TRANSLATION_ID         = 'slug'
+ARTICLE_TRANSLATION_ID      = 'slug'
+PATH_METADATA               = ''
+
+[site.settings.datetime]
+DATE_FORMATS                = {}
+DEFAULT_DATE_FORMAT         = '%a %d %B %Y'
+TIMEZONE                    = 'Europe/Rome'
+
+[site.setup]
+SITENAME                    = 'Mostly Harmless'
+SITEURL                     = 'jgrey4296.github.io'
+AUTHOR                      = 'john grey'
+INTRASITE_LINK_REGEX        =  '[{|](?P<what>.*?)[|}]'
+LINKS                       = []
+SOCIAL                      = []
+
+[site.static]
+STATIC_PATHS                = ['images', 'bibliography']
+STATIC_EXCLUDES             = []
 
 [site.articles]
 DEFAULT_CATEGORY       =  'misc'
-ARTICLE_PATHS          =  ["content"]
+ARTICLE_PATHS          =  ["_posts", "_resources"]
 ARTICLE_EXCLUDES       =  []
-USE_FOLDER_AS_CATEGORY =  true
-WITH_FUTURE_DATES      =  true
-NEWEST_FIRST_ARCHIVES  =  true
-REVERSE_CATEGORY_ORDER =  false
-
-[site.articles.summary]
+FORMATTED_FIELDS       =  ['summary']
 SUMMARY_END_SUFFIX     =  '…'
 SUMMARY_MAX_LENGTH     =  50
 
 [site.pages]
-PAGE_PATHS             =  []
-PAGE_EXCLUDES          =  ['_theme']
+PAGE_EXCLUDES               =  ['_theme']
+PAGE_PATHS                  =  ['pages']
+
+##-- end site.settings
 
 ##-- text and templates
-[theme]
-THEME                  = 'site/_theme'
+[site.theme]
 THEME_STATIC_DIR       = 'theme'
 THEME_STATIC_PATHS     = ['static']
 CSS_FILE               = 'main.css'
 
-[templates]
+[site.templates]
 TEMPLATE_PAGES            = {}
-TEMPLATE_EXTENSIONS       = ['.html', '.xhtml']
+TEMPLATE_EXTENSIONS       = ['.html']
 THEME_TEMPLATES_OVERRIDES = []
 DIRECT_TEMPLATES          = ['index', 'tags', 'categories', 'archives']
-PAGINATED_TEMPLATES       = {'index' = false, 'tag' = false, 'category' = false,  'author' = false}
-# PAGINATION_PATTERNS       = [[1, '{name}{extension}', '{name}{extension}'], [2, '{name}{number}{extension}', '{name}{number}{extension}']]
+PAGINATED_TEMPLATES       = {'index' = false, 'tag' = false, 'category' = false,  'author' = false, 'resources'= true}
 
 [rst]
 PYGMENTS_RST_OPTIONS           =  {}
 
 [markdown]
-output_format                  =  'html5'
+OUTPUT_FORMAT                  =  'html5'
 
 [markdown.extension_configs]
 markdown.extensions.codehilite = {'css_class' = 'highlight'}
@@ -60,44 +86,40 @@ markdown.extensions.meta       = {}
 ##-- end text and templates
 
 ##-- build.config
-[build]
-PELICAN_CLASS            = 'pelican.Pelican'
-OUTPUT_PATH              = 'build/site'
-content_extensions       = [".md", ".rst"]
-static_extensions        = [".css", ".js"]
-OUTPUT_SOURCES           = false
+[build.core]
 OUTPUT_SOURCES_EXTENSION = '.text'
-LOAD_CONTENT_CACHE       = false
-STATIC_EXCLUDES          = []
-STATIC_EXCLUDE_SOURCES   = true
 DISQUS_SITENAME          = ""
 GOOGLE_ANALYTICS         = ""
-DELETE_OUTPUT_DIRECTORY  =  false
 OUTPUT_RETENTION         =  []
 IGNORE_FILES             =  ['.#*']
 
-[build.config.dev]
-FEED_ALL_ATOM            = false
-CATEGORY_FEED_ATOM       = false
-TRANSLATION_FEED_ATOM    = false
-AUTHOR_FEED_ATOM         = false
-AUTHOR_FEED_RSS          = false
-RELATIVE_URLS            = true
-RSS_FEED_SUMMARY_ONLY    = false
-STATIC_CHECK_IF_MODIFIED = false
-STATIC_CREATE_LINKS      = true
+[build.options]
+OUTPUT_SOURCES                 = false
+DELETE_OUTPUT_DIRECTORY        = false
+STATIC_EXCLUDE_SOURCES         = true
+FEED_ALL_ATOM                  = false
+CATEGORY_FEED_ATOM             = false
+TRANSLATION_FEED_ATOM          = false
+AUTHOR_FEED_ATOM               = false
+AUTHOR_FEED_RSS                = false
+RELATIVE_URLS                  = true
+RSS_FEED_SUMMARY_ONLY          = true
+STATIC_CREATE_LINKS            = true
+USE_FOLDER_AS_CATEGORY         = true
+WITH_FUTURE_DATES              = true
+NEWEST_FIRST_ARCHIVES          = true
+REVERSE_CATEGORY_ORDER         = false
+DISPLAY_PAGES_ON_MENU          = true
+DISPLAY_CATEGORIES_ON_MENU     = true
+STATIC_CHECK_IF_MODIFIED       = false
 
-[build.config.publish]
-RELATIVE_URLS                  = false
+[feeds]
 FEED_ALL_ATOM                  = 'feeds/all.atom.xml'
 CATEGORY_FEED_ATOM             = 'feeds/{slug}.atom.xml'
 AUTHOR_FEED_ATOM               = 'feeds/{slug}.atom.xml'
 AUTHOR_FEED_RSS                = 'feeds/{slug}.rss.xml'
 TRANSLATION_FEED_ATOM          = 'feeds/all-{lang}.atom.xml'
-FEED_MAX_ITEMS                 = ''
-RSS_FEED_SUMMARY_ONLY          = true
-STATIC_CHECK_IF_MODIFIED = false
-STATIC_CREATE_LINKS      = false
+FEED_MAX_ITEMS                 = 100
 
 ##-- end build.config
 
@@ -108,19 +130,15 @@ JINJA_GLOBALS                          =  {}
 JINJA_TESTS                            =  {}
 
 [jinja.JINJA_ENVIRONMENT]
-trim_blocks  = true
+trim_blocks   = true
 lstrip_blocks = true
-extensions   = []
+extensions    = ['jinja2.ext.debug']
 
 ##-- end jinja
 
 ##-- pelican settings
 [logging]
 LOG_FILTER                             =  []
-
-[plugins]
-PLUGIN_PATHS                           =  []
-PLUGINS                                =  []
 
 [typogrify]
 TYPOGRIFY                              =  false
@@ -134,42 +152,19 @@ SLUG_REGEX_SUBSTITUTIONS               =  [
  ["(?u)\\s*\\Z", ''], # strip trailing whitespace
  ["[-\\s]+",    '-'],   # reduce multiple whitespace or '-' to single '-'
 ]
-INTRASITE_LINK_REGEX                   =  '[{|](?P<what>.*?)[|}]'
 SLUGIFY_SOURCE                         =  'title'
 SLUGIFY_USE_UNICODE                    =  false
 SLUGIFY_PRESERVE_CASE                  =  false
 
 [cache]
-CACHE_CONTENT                          =  false
-CONTENT_CACHING_LAYER                  =  'reader'
-CACHE_PATH                             =  'cache'
-GZIP_CACHE                             =  true
-CHECK_MODIFIED_METHOD                  =  'mtime'
-WRITE_SELECTED                         =  []
+CACHE_CONTENT                          = false
+LOAD_CONTENT_CACHE                     = false
+GZIP_CACHE                             = true
+CONTENT_CACHING_LAYER                  = 'reader'
+CHECK_MODIFIED_METHOD                  = 'mtime'
+WRITE_SELECTED                         = []
 
 ##-- end pelican settings
-
-##-- site.settings
-
-[site.settings]
-ARTICLE_PERMALINK_STRUCTURE = ''
-ARTICLE_TRANSLATION_ID      = 'slug'
-DEFAULT_ORPHANS             = 0
-DEFAULT_PAGINATION          = false
-DISPLAY_CATEGORIES_ON_MENU  = false
-DOCUTILS_SETTINGS           = {}
-EXTRA_PATH_METADATA         = {}
-FILENAME_METADATA           = '(?P<date>\d{4}-\d{2}-\d{2}).*'
-INDEX_SAVE_AS               = 'index.html'
-LOCALE                      = []  # defaults to user locale
-PAGE_TRANSLATION_ID         = 'slug'
-PATH_METADATA               = ''
-
-[site.settings.datetime]
-DATE_FORMATS                = {}
-DEFAULT_DATE_FORMAT         = '%a %d %B %Y'
-
-##-- end site.settings
 
 ##-- urls
 [[site.urls]]

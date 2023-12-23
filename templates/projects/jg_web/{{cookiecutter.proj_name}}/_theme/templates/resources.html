@@ -1,0 +1,36 @@
+{% extends "page.html" %}
+
+{% block title %}{{ SITENAME }} - Resources {% endblock %}
+
+{% block style %}
+    {{  super() }}
+{% endblock style %}
+
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+{% block content %}
+    <header class="content-header">
+        <h1>Resources</h1>
+    </header>
+
+    <div id="resources-summary">
+        {{ page.content }}
+    </div>
+
+    <ol id="post-list">
+        {% for article in articles if article.category == "_resources" %}
+            <li class="post">
+                <header>
+                    <h2 class="entry-title"><a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark" title="Permalink to {{ article.title|striptags }}">{{ article.title }}</a></h3>
+                        <time class="published" datetime="{{ article.date.isoformat() }}"> {{ article.locale_date }} </time>
+                </header>
+                <article class="content-summary">
+                    <div> {{ article.summary }} </div>
+                </article>
+            </li>
+        {% endfor %}
+    </ol><!-- /#posts-list -->
+
+{% endblock %}

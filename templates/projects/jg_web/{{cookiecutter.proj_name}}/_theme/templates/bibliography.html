@@ -1,0 +1,30 @@
+{% extends "page.html" %}
+
+{% block title %}{{ SITENAME }} - Resources {% endblock %}
+
+{% block style %}
+    {{  super() }}
+{% endblock style %}
+
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+{% block content %}
+    <header class="content-header">
+        <h1>Bibliography</h1>
+    </header>
+
+    <div id="resources-summary">
+        {{ page.content }}
+    </div>
+
+    <ol id="bib-list">
+        {% for entry in static_content|sort(reverse=True) if "bibliography" in entry and "_bib" not in entry %}
+            <li>
+                <a href="{{ SITEURL }}/{{ entry}}" rel="bookmark">{{entry.split("/")[-1].split(".")[0]}}</a>
+            </li>
+        {% endfor %}
+    </ol><!-- /#posts-list -->
+
+{% endblock %}

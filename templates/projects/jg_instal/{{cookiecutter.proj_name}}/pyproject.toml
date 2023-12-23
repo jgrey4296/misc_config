@@ -14,7 +14,9 @@ classifiers     = [
   "Programming Language :: Python"
 ]
 
-dependencies   = []
+dependencies   = [
+               "tomlguard"
+]
 
 [project.optional-dependencies]
 docs = [ "sphinx" ]
@@ -136,3 +138,25 @@ static      = ['_static']
 [tool.sphinx.html.options]
 
 ##-- end sphinx
+
+##-- bumpver
+[tool.bumpver]
+current_version    = "0.0.1"
+version_pattern    = "MAJOR.MINOR.PATCH"
+commit_message     = "[bump]: version {old_version} -> {new_version}"
+tag_message        = "{new_version}"
+tag_scope          = "default"
+# commit             = true
+# tag                = true
+# pre_commit_hook  = ""
+# post_commit_hook = ""
+# push             = true
+
+[tool.bumpver.file_patterns]
+"pyproject.toml"   = [
+                   '^version\s+=\s+"{version}"',
+                   '^current_version\s+=\s+"{version}"'
+]
+"{{cookiecutter.proj_name}}/__init__.py" = ['^__version__\s+=\s+"{version}"']
+
+##-- end bumpver

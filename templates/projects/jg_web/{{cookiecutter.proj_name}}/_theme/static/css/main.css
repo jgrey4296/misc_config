@@ -1,0 +1,196 @@
+/* Definitions */
+:root {
+    --sidebar-width: 20%;
+    --footer-height: 10%;
+    --heading-color: #000000;
+    --heading-border-color: #d1d0ce;
+    --background-color: #1b2026;
+    --sidebar-color: #242e35;
+    --content-color: #bab7b2;
+    --site-header-color: #686461;
+    --content-header-color: #686460;
+    --text-color: #000000;
+    --link-color: #223567;
+    --hover-color: #6b8b8c;
+    --background-gradient: linear-gradient(var(--background-color), var(--heading-border-color), var(--sidebar-color));
+    --gradient-diagonal: linear-gradient(to right bottom, var(--heading-color), var(--heading-border-color));
+    --gradient-diagonal2: linear-gradient(to left top, var(--heading-color), var(--heading-border-color));
+    --footer-gradient: linear-gradient(var(--background-color), var(--heading-border-color));
+    --margin: 20px;
+    --border: 10px;
+    --dropcap-size: 600%;
+}
+
+html{
+    background: var(--sidebar-color);
+
+}
+
+/* General Definitions */
+body {
+    background : var(--background-gradient);
+    line-height : 1.4;
+    font-size : 18px;
+}
+
+a {
+    color: var(--link-color);
+    margin: 5px;
+    padding: 5px;
+}
+
+a:hover {
+    background: var(--hover-color);
+    color : var(--link-color);
+    border-radius: 0 10px 0 10px;
+}
+
+.footnote-ref {
+    margin: unset;
+    padding: unset;
+}
+
+h1 a { color : black; }
+h2 a { color: var(--link-color); }
+h2, h3, h4 {
+    text-align : center;
+    text-decoration: underline;
+}
+h3 {
+    font-size   : 15pt;
+    padding     : 10px;
+    margin      : 2px;
+    line-height : 1.4;
+}
+
+/* sidebar */
+.sidebar     {
+    position              : fixed;
+    top                   : 0;
+    bottom                : 0;
+    width                 : var(--sidebar-width);
+    overscroll-behavior-y : contain;
+    background            : var(--sidebar-color);
+}
+.sidebar div {
+    overflow-y: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 10px;
+    background: var(--sidebar-color);
+}
+#left-sb     {
+    left: 0;
+    visibility: hidden;
+}
+#right-sb    {
+    right: 0;
+    visibility: hidden;
+}
+
+/* header */
+header h1 {
+    margin        : auto;
+    text-align    : center;
+    margin-bottom : 20px;
+}
+.site-header {
+    background: var(--gradient-diagonal);
+    margin-bottom: 20px;
+    border-radius: 0 0 20px 20px;
+}
+
+
+nav { font-size: 150%; text-align : center; padding : 20px; border-radius : 10px; list-style : none; }
+nav a { margin : 10px 0; height : 30px; padding : 12px 10px; }
+
+/* footer */
+footer {
+    visibility: hidden;
+    background: var(--footer-gradient);
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    height: var(--footer-height);
+    left: 0;
+    right: 0;
+}
+footer div { }
+
+/* main content */
+main { margin-bottom : var(--footer-height); overflow: hidden; padding-top: 10px; }
+main a { color : var(--link-color); }
+main img { width : 80%; height : auto; margin-left : 10%; margin-right : 10%; margin-top :20px; margin-bottom :20px; }
+
+.pic { display : block; font-family : serif; font-size : 1em; line-height : 133%; text-indent : 0; margin : 12pt 0 6pt; padding : 0; }
+
+.content-header {
+    background:   var(--gradient-diagonal);
+    margin-left:  var(--margin);
+    margin-right: var(--margin);
+    border-width: 2px;
+    border-style: solid;
+    border-color: black;
+}
+.content-header h1 {
+    margin-bottom: 0px;
+}
+
+/* homepage post summaries */
+#post-list    { padding-left: 20px; padding-right: 20px; }
+#post-list li::marker { content: ''; }
+
+.content-summary { margin: 10px; }
+.post {
+    margin-bottom: var(--margin);
+    background:    var(--content-color);
+    border-color:  black;
+    border-style:  solid;
+    border-width:  var(--border);
+}
+.post header { padding-top: 10px; text-align: center; margin: 10px; }
+.post header a { color: var(--text-color); }
+
+.entry-title { text-align: center; }
+
+
+/* tags */
+#tag-list {
+    column-count : 1;
+    padding-top: var(--margin);
+    margin-left:   var(--margin);
+    margin-right:  var(--margin);
+    margin-bottom: var(--margin);
+    background:    var(--content-color);
+    border-radius: 0 0 10px 10px;
+}
+#tag-list li {
+    color: var(--link-color);
+}
+
+#tag-list li::marker {
+    color: var(--background-color);
+}
+
+#tag-list li:last-child {
+    padding-bottom: var(--margin);
+}
+
+/* resources */
+#resources-summary {
+    margin-left: var(--margin);
+    margin-right: var(--margin);
+
+}
+
+/* bibliography */
+#bib-list {
+    column-count: 3;
+}
+
+#bib-list li::marker {
+    content: "";
+}

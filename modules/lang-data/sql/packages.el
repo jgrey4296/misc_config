@@ -6,7 +6,7 @@
 ;; See footer for licenses/metadata/notes as applicable
 ;;-- end Header
 
-(package! sql-mode)
+(package! sql-mode :built-in t)
 (package! sqlite-mode)
 ;; (package! esqlite-helm)
 (package! sqlite3)

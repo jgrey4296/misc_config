@@ -148,9 +148,6 @@ Widens narrowed buffers first. If BANG, use indirect buffer clones instead."
       (indent-rigidly (point-min) (point-max) (- indent))
       (evil-yank (point-min) (point-max)))))
 
-;;
-;;; wgrep
-
 ;;;###autoload (autoload '+evil-delete "editor/evil/autoload/evil" nil t)
 (evil-define-operator +evil-delete (beg end type register yank-handler)
   "A wrapper around `evil-delete' for `wgrep' buffers that will invoke
@@ -164,3 +161,11 @@ Widens narrowed buffers first. If BANG, use indirect buffer clones instead."
         (goto-char beg)
         (call-interactively #'wgrep-mark-deletion))
       beg (1- end) nil))))
+
+;;;###autoload
+(defun +jg-evil-delete-markers ()
+  (interactive)
+  (setq evil-markers-alist nil)
+  (evil-visual-mark-mode -1)
+  (evil-visual-mark-mode)
+  )

@@ -2,7 +2,7 @@
 
 (map! :map jg-binding-vision-map
       :desc "Visual Mark Mode"    "0" #'evil-visual-mark-mode
-      :desc "Visual Mark Mode"    "-" #'evil-visual-mark-mode
+      :desc "Visual Mark Mode"    "-" #'+jg-evil-delete-markers
       ;; RET, 1, aAdocrjkIi
       :desc "Widen"         "DEL" #'widen
       :desc "Widen"         "w"   #'widen

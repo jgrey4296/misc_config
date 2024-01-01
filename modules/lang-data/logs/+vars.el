@@ -2,6 +2,7 @@
 
 (spec-handling-add! auto-modes
                     '(logs
-                      ("log\\..+\\'" . jg-log-mode)
+                      ("log\\..+\\'" . fundamental-mode)
+                      ("\\.log$"     . fundamental-mode)
                       )
                     )

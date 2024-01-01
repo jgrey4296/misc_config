@@ -95,9 +95,10 @@
       '( ;; Full Suppress
         (defvaralias losing-value woman-topic-history)
         ;; (flycheck syntax-checker)
-    ;; ((python python-shell-completion-native-turn-on-maybe))
+        ;; ((python python-shell-completion-native-turn-on-maybe))
         ;; (org-element-cache)
         ((flycheck syntax-checker))
+        (error "Invalid search bound (wrong side of point)")
         )
       warning-suppress-types
       '( ;; Don't Show

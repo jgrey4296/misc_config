@@ -115,6 +115,7 @@
                        ("Mail"        (saved . "mail"))
                        ;; ("*Project: writing" (projectile-root . "jgrey4296.github.io"))
                        ("Lisp"        (mode . emacs-lisp-mode))
+                       ("Python"      (mode . python-mode))
                        ("Text"        (saved . "text"))
                        ("Logs"        (or (file-extension . "log")
                                           (basename . "^log\.")))

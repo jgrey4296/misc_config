@@ -135,4 +135,7 @@
 (spec-handling-add! yas-extra
                     '(buttercup-minor-mode buttercup-minor-mode)
                     )
+(spec-handling-add! company
+                    '(emacs-lisp-mode (:mode company-elisp))
+                    )
 ;;-- end specs

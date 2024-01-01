@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : defstruct
+# uuid  : defstruct
+# key   : defstruct
+# group :
+# --
+(cl-defstruct ${1:name} ${2:slotname})

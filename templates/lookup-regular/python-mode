@@ -118,6 +118,7 @@ Apache Airflow Py                                # https://github.com/apache/air
 PyCaret                                          # https://pycaret.gitbook.io/docs/
 SQLAlchemy                                       # https://docs.sqlalchemy.org/en/20/
 SQLAlchemy Tutorial                              # http://pythoncentral.io/introductory-tutorial-python-sqlalchemy/
+Alembic                                          # https://alembic.sqlalchemy.org/en/latest/tutorial.html
 pygrametl                                        # https://chrthomsen.github.io/pygrametl/doc/quickstart/beginner.html
 petl                                             # https://petl.readthedocs.io/en/stable/
 LSP Protocol                                     # https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/
@@ -130,3 +131,4 @@ readthedocs                                      # https://docs.readthedocs.io/e
 unicode                                          # https://tonsky.me/blog/unicode/
 Algorithm Library                                # https://algorist.com/algorist.html
 pylatexenc                                       # https://github.com/phfaist/pylatexenc
+PyPi Status                                      # https://status.python.org/

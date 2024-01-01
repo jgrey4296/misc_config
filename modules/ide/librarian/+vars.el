@@ -8,7 +8,7 @@
       librarian-man--cache-dir                     (expand-file-name ".temp" doom-user-dir)
 
       librarian-tagging-mode-substitution-sources  (expand-file-name "~/github/bibliography/tags/substitutions")
-      librarian-tagging-mode-main-loc              (expand-file-name "~/github/bibliography/.temp/tags/totals.tags")
+      librarian-tagging-mode-main-loc              (expand-file-name "~/github/bibliography/.temp/tags/known.tags")
       )
 
 
@@ -30,6 +30,8 @@
                       ("brew cask"                                               "https://formulae.brew.sh/cask/%s")
                       ("brew formula"                                            "https://formulae.brew.sh/formula/%s")
                       ("Ngrams"                                                  "https://books.google.com/ngrams/graph?content=%s&year_start=1800&year_end=2019&corpus=en-2019&smoothing=3")
+                      ("Maps"                                                    "https://www.davidrumsey.com/luna/servlet/view/search?annotSearch=annotSearch&q=%s")
+
                       ("Localhost"                                               "127.0.0.1:8000")
                       ("Router"                                                  "192.168.1.1")
                      )

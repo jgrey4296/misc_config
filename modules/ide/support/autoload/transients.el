@@ -19,6 +19,8 @@
   (transient-make-mode-toggle! lsp-diagnostics-mode                        "Diagnostics" "d")
   (transient-make-mode-toggle! lsp-completion-mode                         "Completion" "c")
 
+  (transient-make-mode-toggle! tree-sitter-hl-mode "Tree Sitter HL" "t")
+
   ;;
   (transient-make-call! lsp-trace-io "i"
                         (format "%-2s : Log IO" (fmt-as-bool! lsp-log-io))
@@ -146,7 +148,10 @@
                            ]
                           )
 
+
+
 ;;;###autoload
 (defun +jg-ide-extend-toggles ()
   (transient-append-suffix 'jg-toggle-main "w" jg-lsp-toggle)
+  (transient-append-suffix (caddr jg-toggle-visuals) "H" '("t" transient-macro-toggle-tree-sitter-hl-mode))
   )

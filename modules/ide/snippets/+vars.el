@@ -43,3 +43,9 @@
                       ("templates/files/.+\\'"          . snippet-mode)
                       )
                     )
+
+(spec-handling-add! popup
+                    '(snippets
+                     ("^untitled-snippet$" :side bottom :ttl 5 :height 0.4 :quit t :select t :priority 50)
+                     )
+                    )

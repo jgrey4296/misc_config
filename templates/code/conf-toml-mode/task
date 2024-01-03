@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name  : task
+# uuid  : task
+# key   : task
+# group :
+# --
+[[tasks.${1:group}]]
+name                 = "${2:name}"
+version              = "0.1"                                                                # <str>
+ctor                 = "task"                                                               # <type>
+mixins               = []
+doc                  = ["${3:description}"]                                                 # <list[str]>
+print_levels         = {action="WARN", execute="WARN"}                                      # <Dict: {'action', 'execute', 'build', 'sleep', 'head'}>
+actions              = []

@@ -9,7 +9,8 @@ https://docs.godotengine.org/en/stable/classes/index.html
 https://github.com/AlexDarigan/WAT
 https://github.com/bitwes/Gut
 https://developer.android.com/games/engines/godot/godot-configure
-
+** Libraries
+https://github.com/dialogic-godot/dialogic
 * Links
 http://www.shardcore.org/shardpress/2014/06/05/waiting-for-godot/
 https://docs.godotengine.org/en/3.1/classes/index.html

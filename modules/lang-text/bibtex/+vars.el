@@ -66,4 +66,8 @@
                       ("\\.cbx\\'" . latex-mode)
                       )
                     )
+
+(spec-handling-add! compile-commands
+                    '(bibtex +jg-bibtex-get-commands)
+                    )
 ;;-- end specs

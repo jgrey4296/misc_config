@@ -244,7 +244,7 @@
                     )
                     )
 (spec-handling-add! compile-commands
-                    '(python +jg-python-get-commands +jg-python-solo-file-run)
+                    '(python +jg-python-get-commands +jg-python-solo-file-run +jg-python-distribute-commands)
                     )
 (spec-handling-add! eval :form 'override
                     `(python-mode

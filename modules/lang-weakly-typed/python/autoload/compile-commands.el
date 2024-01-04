@@ -7,23 +7,21 @@
                (project (f-join root "pyproject.toml"))
                (project-exists (f-exists? project))
                )
-    (append
+    (+jg-projects-pair-cmds
      ;; python
-     (+jg-projects-pair-cmds
-      '("version" "python -version")
-      )
+     '("shell" "echo 'shell: ' $0")
+     '("versions" "mamba info; python -V -V; pip --version ; pytest --version; echo 'Env ' $CONDA_DEFAULT_ENV; sphinx-build --version")
      ;; pip
-     (+jg-projects-pair-cmds
-      '("version" "python -version")
-      )
-     ;; conda
-     (+jg-projects-pair-cmds
-      '("version" "python --version")
-      )
+     '("pip list" "pip list")
+     ;; conda/mamba
+     '("envs" "mamba env list")
+     '("mamba list" "mamba list")
+     '("mamba info" "mamba info")
      ;; pytest
-     (+jg-projects-pair-cmds
-      '("test" "pytest")
-      )
+     '("test" "pytest")
+     '("pytest version" "pytest --version")
+     ;; Sphinx
+     '("docs" "sphinx-build -b html ./docs ./.temp/docs")
      )
     )
   )
@@ -33,11 +31,23 @@
   (interactive)
   (-when-let (is-py (f-ext? (buffer-file-name) "py"))
     (+jg-projects-pair-cmds
-     `("run-py" ,(format "python -X dev %s" (buffer-file-name)) :interactive)
+     `("run-py"         ,(format "python -X dev -i %s" (buffer-file-name))    :interactive)
      `("run-py-verbose" ,(format "python -X dev -i -v %s" (buffer-file-name)) :interactive)
-     `("run-ipy" ,(format "ipython -X %s" (buffer-file-name)))
-      '("which-py" "which python")
-      `("pytest-file" ,(format "pytest --pdb %s" (buffer-file-name)) :interactive)
+     `("run-ipy"        ,(format "ipython -X %s" (buffer-file-name))          :interactive)
       )
   )
 )
+
+;;;###autoload
+(defun +jg-python-distribute-commands (&optional dir)
+  (interactive)
+  (-when-let (is-py (string-equal (buffer-name) "pyproject.toml"))
+    (+jg-projects-pair-cmds
+     '("build" "python -m build --outdir ./.temp/dist ./")
+     '("upload" "gpg -q -d ~/.config/secrets/pypi/token.asc | sed -n -E 's/^pypi\\s+=\\s+(.+)/\\1/p' | xargs -I {} twine upload -u __token__ -p {} --skip-existing --non-interactive ./.temp/dist/*")
+     '("bump patch" "bumpver update --patch")
+     '("bump minor" "bumpver update --minor")
+     '("bump major" "bumpver update --major")
+     )
+      )
+  )

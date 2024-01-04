@@ -17,7 +17,8 @@ actions              = []                   # <list[Any]>
 [[tasks.mast]]
 name                 = "bibtex"
 version              = "0.1"                # <str>
-ctor                 = "doot.task.subselect_walker:DootSubselectWalker" # <type>
+ctor                 = "tasker" # <type>
+mixins               = ["doot.mixins.tasker.matcher:SubSelectMixin", "terse"]
 doc                  = ["Maybe Post a formatted bibtex citation to mastodon"] # <list[str]>
 select_method        = "random"
 select_num           = 1
@@ -25,28 +26,16 @@ sub_task             = "mast::_bib-load"
 head_task            = "mast::_bib-post"
 roots                = ["{all_bib}"]                # <list[str|pl.Path]>  Places the walker will start
 exts                 = [".bib"]                   # <list[str]>
-
-[[tasks.mast]]
-name                 = "_bib-load"
-version              = "0.1"                # <str>
-ctor                 = "task"               # <type>
-doc                  = []                   # <list[str]>
-actions              = [
+head_actions         = [
+                     { do="getPost", update_="entries" },
+                     { do="tasks_code.soc_media:format_for_mastodon", from_="entries", update="text"},
+                     { do="dootle.mastodon.actions:MastodonSetup" },
+                     { do="dootle.mastodon.actions:MastodonPost", from_="text" },
+                     ] # <list[Any]>
+sub_actions          = [
                      { do="tasks_code.bibtex:build_parse_stack",  update_="parse_stack"},
                      { do="dootle.bibtex.v2:BibtexInitAction",  update_="bib_db"},
                      { do="dootle.bibtex.v2:BibtexLoadAction",  from_="fpath", update_="bib_db", parse_stack_="parse_stack" },
                      { do="tasks_code.bibtex:select_one_entry", from_="bib_db", update_="entry"},
                      { do="putPost", args=["entry"] },
-                     ] # <list[Any]>
-
-[[tasks.mast]]
-name                 = "_bib-post"
-version              = "0.1"                                           # <str>
-ctor                 = "task"                                          # <type>
-doc                  = [] # <list[str]>
-actions              = [
-                     { do="getPost", update_="entries" },
-                     { do="tasks_code.soc_media:format_for_mastodon", from_="entries", update="text"},
-                     { do="dootle.mastodon.actions:MastodonSetup" },
-                     { do="dootle.mastodon.actions:MastodonPost", from_="text" },
                      ] # <list[Any]>

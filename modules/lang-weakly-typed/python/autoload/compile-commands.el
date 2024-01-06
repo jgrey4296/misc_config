@@ -41,13 +41,20 @@
 ;;;###autoload
 (defun +jg-python-distribute-commands (&optional dir)
   (interactive)
-  (-when-let (is-py (string-equal (buffer-name) "pyproject.toml"))
-    (+jg-projects-pair-cmds
-     '("build" "python -m build --outdir ./.temp/dist ./")
-     '("upload" "gpg -q -d ~/.config/secrets/pypi/token.asc | sed -n -E 's/^pypi\\s+=\\s+(.+)/\\1/p' | xargs -I {} twine upload -u __token__ -p {} --skip-existing --non-interactive ./.temp/dist/*")
-     '("bump patch" "bumpver update --patch")
-     '("bump minor" "bumpver update --minor")
-     '("bump major" "bumpver update --major")
-     )
+  (append
+   (-when-let (is-pyproject (string-equal (buffer-name) "pyproject.toml"))
+     (+jg-projects-pair-cmds
+      '("build" "python -m build --outdir ./.temp/dist ./")
+      '("upload" "gpg -q -d ~/.config/secrets/pypi/token.asc | sed -n -E 's/^pypi\\s+=\\s+(.+)/\\1/p' | xargs -I {} twine upload -u __token__ -p {} --skip-existing --non-interactive ./.temp/dist/*")
+      ))
+   (-when-let (is-bumpable (or (string-equal (buffer-name) "pyproject.toml")
+                               (string-equal (buffer-name) "cargo.toml")
+                               (string-equal (buffer-name) "bumpver.toml")))
+     (+jg-projects-pair-cmds
+      '("bump patch" "bumpver update --patch")
+      '("bump minor" "bumpver update --minor")
+      '("bump major" "bumpver update --major")
       )
+     )
+   )
   )

@@ -1,7 +1,0 @@
-;;-*-coding: utf-8;-*-
-(define-abbrev-table 'emacs-lisp-mode-abbrev-table
-  '(
-    ("defun" "(defun  ()
-
-    )" nil :count 2)
-   ))

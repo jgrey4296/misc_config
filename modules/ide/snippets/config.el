@@ -11,6 +11,8 @@
 
 (add-hook 'doom-switch-buffer-hook #'+file-templates-maybe-expand-h)
 
+(defalias 'concatenate (symbol-function 'cl-concatenate))
+
 (use-package! yasnippet
   :defer-incrementally eldoc easymenu help-mode
   :commands (yas-minor-mode yas-minor-mode-on yas-expand yas-expand-snippet yas-lookup-snippet yas-insert-snippet yas-new-snippet yas-visit-snippet-file yas-activate-extra-mode yas-deactivate-extra-mode yas-maybe-expand-abbrev-key-filter)

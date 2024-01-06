@@ -266,6 +266,14 @@
                       '(python-mode "Microsoft.Python.LanguageServer")
                       )
   )
+
+(spec-handling-add! imenu
+                    '(python
+                      ("Field"  "\\s-*\\(.+?\\)\\s-*:\\s-\\(.+?\\)\\s-=\\s-field" 1)
+
+                      )
+                    )
+
 ;;-- end specs
 
 ;;-- general insert

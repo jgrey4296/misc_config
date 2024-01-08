@@ -132,3 +132,5 @@ unicode                                          # https://tonsky.me/blog/unicod
 Algorithm Library                                # https://algorist.com/algorist.html
 pylatexenc                                       # https://github.com/phfaist/pylatexenc
 PyPi Status                                      # https://status.python.org/
+django                                           # https://docs.djangoproject.com/en/5.0/
+flask                                            # https://flask.palletsprojects.com/en/2.2.x/

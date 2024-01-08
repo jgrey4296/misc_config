@@ -1,5 +1,6 @@
 ;;-*-coding: utf-8;-*-
 (define-abbrev-table 'python-mode-abbrev-table
   '(
+    ("dootkey" "DootKey" nil :count 0)
     ("lamdba" "lambda" nil :count 2)
    ))

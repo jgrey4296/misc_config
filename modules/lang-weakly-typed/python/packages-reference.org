@@ -123,9 +123,11 @@ https://akamhy.github.io/waybackpy/ - wayback machine
 https://amoffat.github.io/sh/
 
 ** architecture
+https://docs.djangoproject.com/en/5.0/
+https://flask.palletsprojects.com/en/2.2.x/
+
 https://github.com/twisted/twisted
 https://github.com/mcfletch/pydispatcher
-https://flask.palletsprojects.com/en/2.2.x/
 https://palletsprojects.com/p/jinja/
 https://palletsprojects.com/p/werkzeug/
 https://docs.pylonsproject.org/projects/waitress/en/stable/

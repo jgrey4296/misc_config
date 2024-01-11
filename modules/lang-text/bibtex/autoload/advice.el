@@ -55,7 +55,7 @@ Modified to avoid duplicate comma insertion. "
             (bibtex-kill-field)
             (bibtex-make-field field nil nil nil)
             (backward-char)
-            (insert value)))
+            (insert (format "%s" value))))
       ;; make a new field
       (bibtex-beginning-of-entry)
       (forward-line) (beginning-of-line)
@@ -63,7 +63,8 @@ Modified to avoid duplicate comma insertion. "
       ;; (forward-char)
       (bibtex-make-field field t nil nil)
       (backward-char)
-      (insert value))))
+      (insert (format "%s" value))))
+  )
 
 ;;;###autoload
 (defun +jg-bibtex-autokey-field-expand (fn &rest args)

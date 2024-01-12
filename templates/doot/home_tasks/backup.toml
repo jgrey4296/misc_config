@@ -26,5 +26,5 @@ head_actions               = [{do="doot.actions.postbox:SummarizePostAction", fu
 sub_actions                = [
                      {do="dir!", args=["{shadow_path}"] },
                      {do="backup!", from_="fpath", to="{shadow_path}/{fname}"}
-]                   # <list[Any]>
+]
 ##-- end pdfs

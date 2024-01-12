@@ -5,7 +5,7 @@ loaders                  = { commands="default", task="default", parser="default
 location_check           = { make_missing = true, print_levels={action="WARN", execute="WARN"}}
 
 [settings.tasks]
-sources = [".config/jg/templates/doot/home_tasks"] # Files or directories where task specs can be loaded from, expanded according to [[locations]] keys
+sources = ["~/.config/jg/templates/doot/home_tasks"] # Files or directories where task specs can be loaded from, expanded according to [[locations]] keys
 code    = []                                       # Directories where task specific code can be imported from, expanded according to [[locations]] keys
 sleep   = { tasks=0.2, subtask=1, batch=1 }
 

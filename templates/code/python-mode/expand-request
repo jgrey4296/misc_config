@@ -2,7 +2,7 @@
 # name  : expand-request
 # uuid  : expand-request
 # key   : expand-request
-# group :
+# group : url
 # --
 from time import sleep
 import requests

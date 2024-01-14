@@ -45,6 +45,7 @@ https://github.com/OlafHaag/VectorFields/tree/master
 - scipy
 - seaborn
 - setuptools
+- sqlalchemy
 - sh
 - sphinx
 - sqlite
@@ -191,6 +192,8 @@ tomlkit                                                                         
 yaml                                                                                            : 0.2.5
 https://github.com/fabiocaccamo/python-benedict.git
 https://github.com/rezoo/movis : movies
+https://github.com/JNRowe/pyisbn
+https://github.com/TorKlingberg/isbn_hyphenate
 *** graphs
 https://graphviz.readthedocs.io/en/stable/
 https://github.com/pygraphviz/pygraphviz/issues/398
@@ -466,3 +469,7 @@ https://provenance.readthedocs.io/en/latest/intro-guide.html
 https://cmdline-provenance.readthedocs.io/en/latest/
 ** System
 https://github.com/giampaolo/psutil
+** Testing
+https://pytest-cov.readthedocs.io/en/latest/
+https://pytest-mock.readthedocs.io/en/latest/
+https://docs.pytest.org/en/7.3.x/contents.html

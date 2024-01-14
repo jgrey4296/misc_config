@@ -1,0 +1,38 @@
+# -*- mode: snippet -*-
+# name  : logcontext
+# uuid  : logcontext
+# key   : logcontext
+# group : logging
+# --
+
+class LogContext:
+    """
+      a really simple wrapper to set a logger's level, then roll it back
+    """
+
+    def __init__(self, logger, level=None):
+        self._logger          = logger
+        self._original_level  = self._logger.level
+        self._level_stack     = [self._original_level]
+        self._temp_level      = level or self._original_level
+
+    def __call__(self, level):
+        self._temp_level = level
+        return self
+
+    def __enter__(self):
+        match self._temp_level:
+            case int() | str():
+                self._level_stack.append(self._logger.level)
+                self._logger.setLevel(self._temp_level)
+        return self
+
+    def __exit__(self, exc_type, exc_value, exc_traceback) -> bool:
+        if bool(self._level_stack):
+            self._logger.setLevel(self._level_stack.pop())
+        else:
+            self._logger.setLevel(self._original_level)
+
+
+    def __getattr__(self, key):
+        return getattr(self._logger, key)

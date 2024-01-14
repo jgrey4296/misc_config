@@ -1,0 +1,115 @@
+# -*- mode: snippet -*-
+# name  : log.config.class
+# uuid  : log.config.class
+# key   : log.config.class
+# group : logging
+# --
+from sys import stdout, stderr
+import warnings
+import builtins
+
+class LogConfig:
+    """ Utility class to setup [stdout, stderr, file] logging.
+      TODO make it a singleton
+    """
+
+    class _AnyFilter:
+        """ Utility filter class """
+
+        def __init__(self, names=None, reject=None):
+            self.names      = names or []
+            self.rejections = reject or []
+            self.name_re    = re.compile("^({})".format("|".join(self.names)))
+
+        def __call__(self, record):
+            return (record.name not in self.rejections) and (record.name == "root"
+                                                            or not bool(self.names)
+                                                        or self.name_re.match(record.name))
+
+    def __init__(self):
+        self.root                  = logmod.root                                   # Root Logger for everything
+        self.printer               = logmod.getLogger(doot.constants.PRINTER_NAME) # EXCEPT this, which replaces 'print(x)'
+
+        self.file_handler          = logmod.FileHandler(pl.Path() / "log.doot", mode='w')
+        self.stream_handler        = logmod.StreamHandler(stdout)
+        self.print_stream_handler  = logmod.StreamHandler(stdout)
+        self._oldprint             = builtins.print
+        self._config : None|TomlGuard   = None
+
+        self._setup()
+
+    def _setup(self):
+        """ a basic, config-less setup """
+        self.root.setLevel(logmod.NOTSET)
+        self.file_handler.setFormatter(logmod.Formatter(fmt="{levelname} : INIT : {message}", style="{"))
+
+        self.stream_handler.setLevel(logmod.WARNING)
+        self.stream_handler.setFormatter(logmod.Formatter("{levelname}  : INIT : {message}", style="{"))
+
+        self.root.addHandler(self.file_handler)
+        self.root.addHandler(self.stream_handler)
+
+        self.printer.propagate = False
+        self.print_stream_handler.setFormatter(logmod.Formatter("{message}", style="{"))
+        self.printer.setLevel(logmod.NOTSET)
+        self.printer.addHandler(self.print_stream_handler)
+        self.printer.addHandler(self.file_handler)
+
+    def config(self, config:TomlGuard):
+        """ a setup that uses config values """
+        self._config = config
+        self._config_file()
+        self._config_stream()
+        self._config_print()
+
+    def _config_file(self):
+        file_log_level    = self._config.on_fail("DEBUG", str|int).logging.file.level(wrapper=lambda x: logmod._nameToLevel.get(x, 0))
+        file_log_format   = self._config.on_fail("{levelname} : {pathname} : {lineno} : {funcName} : {message}", str).logging.file.format()
+        file_filter_names = self._config.on_fail([], list).logging.file.allow()
+
+        self.file_handler.setLevel(file_log_level)
+        self.file_handler.setFormatter(logmod.Formatter(fmt=file_log_format, style="{"))
+        if bool(file_filter_names):
+            self.file_handler.addFilter(_DootAnyFilter(file_filter_names))
+
+    def _config_stream(self):
+        stream_log_level    = self._config.on_fail("WARNING", str|int).logging.stream.level(wrapper=lambda x: logmod._nameToLevel.get(x, 0))
+        stream_log_format   = self._config.on_fail("{levelname} : {pathname} : {lineno} : {funcName} : {message}", str).logging.stream.format()
+        stream_filter_names = self._config.on_fail([], list).logging.stream.allow()
+
+        self.stream_handler.setLevel(stream_log_level)
+        self.stream_handler.setFormatter(logmod.Formatter(stream_log_format, style="{"))
+
+        if bool(stream_filter_names):
+            self.stream_handler.addFilter(_DootAnyFilter(stream_filter_names))
+
+    def _config_print(self):
+        printer_log_level    = self._config.on_fail("NOTSET", str|int).logging.printer.level(wrapper=lambda x: logmod._nameToLevel.get(x, 0))
+        printer_log_format   = self._config.on_fail("{message}", str).logging.printer.format()
+
+        self.print_stream_handler.setLevel(printer_log_level)
+        self.print_stream_handler.setFormatter(logmod.Formatter(printer_log_format, style="{"))
+
+        self._capture_print()
+
+    def _capture_print(self, *, disable_warning=False):
+        """ redirect printing into logging the logging system to handle
+          logged at DEBUG level
+        """
+        if not disable_warning:
+            warnings.warn("Modifying builtins.print", RuntimeWarning)
+
+        @wraps(self._oldprint)
+        def intercepted(*args, **kwargs):
+            """ Wraps `print` to also log to a separate file """
+            self._oldprint(*args, **kwargs)
+            if bool(args):
+                self.printer.debug(args[0])
+
+        builtins.print = intercepted
+
+    def restore_print(self):
+        builtins.print = self._oldprint
+
+    def set_level(self, level):
+        self.stream_handler.setLevel(level)

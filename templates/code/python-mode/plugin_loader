@@ -1,0 +1,55 @@
+# -*- mode: snippet -*-
+# name  : plugin-loader
+# uuid  : plugin-loader
+# key   : plugin-loader
+# group : imports
+# --
+
+from collections import defaultdict
+from importlib.metadata import entry_points, EntryPoint
+import tomlguard
+
+
+def _make_ep (name, value, group, *, prefix=None):
+    if prefix is None:
+        raise Exception("No Prefix provided")
+    return EntryPoint(name=name, value=value, group="{}.{}".format(prefix, group))
+
+class PluginLoader:
+    """
+    Load doot plugins from the system, to choose from with doot.toml or cli args
+    """
+    _prefix = "doot"
+
+    def __init__(self, prefix=None, types=None, defaults:dict=None) -> Self:
+        self.defaults     = defaults or {}
+        self.prefix       = prefix or PluginLoader._prefix
+        self.plugin_types = types or []
+        self.plugins      = defaultdict(list)
+
+    def load(self) -> tomlguard.TomlGuard[EntryPoint]:
+        """
+        use entry_points(group="doot")
+        add to the config tomlguard
+        """
+        logging.debug("---- Loading Plugins: %s", self.prefix)
+        self._load_system_plugins()
+        self._append_defaults()
+
+        logging.debug("Found %s plugins", len(self.plugins))
+        return tomlguard.TomlGuard(self.plugins)
+
+    def _load_system_plugins(self):
+        logging.info("Searching environment for plugins, skip with `skip_plugin_search` in config")
+        for plugin_type in self.plugin_types:
+            try:
+                plugin_group = "{}.{}".format(self.prefix, plugin_type)
+                # Load env wide entry points
+                for entry_point in entry_points(group=plugin_group):
+                    self.plugins[plugin_type].append(entry_point)
+            except Exception as err:
+                raise Exception("Plugin Failed to Load: %s : %s : %s", plugin_group, entry_point, err) from err
+
+    def _append_defaults(self):
+        for group, vals in self.defaults:
+            self.plugins[group]  += [_make_ep(x, y, group) for x,y in vals]

@@ -21,8 +21,8 @@ actions              = [
 [[tasks.android]]
 name                   = "push.pdfs"
 version                = "0.1"
-ctor                   = "tasker"
-mixins                 = ["walker", "terse"]
+ctor                   = "job"
+mixins                 = ["job:walker", "job:terse"]
 doc                    = ["Push pdfs to device"]
 filter_fn              = "tasks_code.android:select_dirs"
 roots                  = ["{push_pdfs}"]

@@ -17,8 +17,8 @@ actions              = []                   # <list[Any]>
 [[tasks.mast]]
 name                 = "bibtex"
 version              = "0.1"                # <str>
-ctor                 = "tasker" # <type>
-mixins               = ["doot.mixins.tasker.matcher:SubSelectMixin", "terse"]
+ctor                 = "job" # <type>
+mixins               = ["job:select", "job:terse"]
 doc                  = ["Maybe Post a formatted bibtex citation to mastodon"] # <list[str]>
 select_method        = "random"
 select_num           = 1

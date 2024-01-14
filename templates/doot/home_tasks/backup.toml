@@ -10,14 +10,14 @@ pdf_bkup     = "{backup_drive}/library/pdfs"
 # TODO movies
 # TODO images
 
-##-- pdfs
 [[tasks.backup]]
 name                       = "pdfs"
 version                    = "0.1"                                                       # <str>
 doc                        = ["Backup pdf library"]
-ctor                       = "tasker"             # <type>
-mixins                     = ["walker", "terse"]
+ctor                       = "job"             # <type>
+mixins                     = ["job:shadow", "job:walker", "job:terse"]
 clean_locs                 = ["{pdf_bkup}"]
+print_levels               = {build="WARNING", action="WARNING", execute="INFO"} # <Dict: {'build', 'action', 'sleep', 'head', 'execute'}>
 exts                       = []                                  # <list[str]>
 recursive                  = true                                # <bool>
 roots                      = ["{pdf_source}"]                    # <list[str|pl.Path]>  Places the globber will start
@@ -27,4 +27,3 @@ sub_actions                = [
                      {do="dir!", args=["{shadow_path}"] },
                      {do="backup!", from_="fpath", to="{shadow_path}/{fname}"}
 ]
-##-- end pdfs

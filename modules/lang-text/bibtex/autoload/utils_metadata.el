@@ -220,7 +220,7 @@ Every field will be updated, so previous change will be lost."
           (plist-get-keys results))
 
     (org-ref-clean-bibtex-entry)
-    (with-temp-buffer-window "*Result*" nil nil
+    (with-temp-buffer-window "*DOI Metadata*" nil nil
       (mapc (lambda (key) (princ (format "%s : %s\n" key (plist-get results key))))
             (plist-get-keys results))
       )

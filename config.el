@@ -80,23 +80,22 @@
 ;;-- end byte / native compilation
 
 ;;-- warning suppression
-;; (progn
-;;   (setq jgtest '(1 2 3)
-;;         jgnon  '(blah)
-;;         warning-suppress-log-types '((defvaralias losing-value jgblahtest))
-;;         warning-suppress-types nil ;;'((defvaralias losing-value jgblahtest))
+;;   (let ((jgtest '(1 2 3))
+;;         (jgnon  '(blah))
+;;         (warning-suppress-log-types '((defvaralias losing-value jgblahtest)))
+;;         (warning-suppress-types nil ;;'((defvaralias losing-value jgblahtest)))
 ;;         )
 
 ;;   (defvaralias 'jgblahtest 'jgnon)
 ;;   (defvaralias 'jgblahtest 'jgtest)
 ;; )
-
+;;
 (setq warning-suppress-log-types
       '( ;; Full Suppress
         (defvaralias losing-value woman-topic-history)
         ;; (flycheck syntax-checker)
         ;; ((python python-shell-completion-native-turn-on-maybe))
-        ;; (org-element-cache)
+        ((org-element-cache))
         ((flycheck syntax-checker))
         (error "Invalid search bound (wrong side of point)")
         )
@@ -104,7 +103,7 @@
       '( ;; Don't Show
         (defvaralias losing-value python-shell-interpreter)
         ;; ((python python-shell-completion-native-turn-on-maybe))
-        ;; (org-element-cache)
+        (org-element-cache)
         ;; (flycheck syntax-checker)
         )
       )

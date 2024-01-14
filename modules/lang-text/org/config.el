@@ -26,7 +26,9 @@
              #'doom-disable-show-trailing-whitespace-h
              ;; #'+org-enable-auto-reformat-tables-h
              ;; #'+org-enable-auto-update-cookies-h
-             #'+org-make-last-point-visible-h)
+             #'+org-make-last-point-visible-h
+             #'abbrev-mode
+             )
 
   (add-hook! 'org-load-hook
              #'+org-init-org-directory-h

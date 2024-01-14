@@ -47,6 +47,7 @@
          (dropbox  (| (: ?. "dropbox" )))
          (ruby     (| (: ?. "gem")))
          (vcs      (| (: ?. (| (:"git" (? "ignore")) "svn" ))))
+         (py-confs (| "pelicanconf.py" "conf.py"))
          )
   (setq dired-omit-files (rx line-start (| system
                                            dotfiles
@@ -63,6 +64,7 @@
                                            dropbox
                                            ruby
                                            vcs
+                                           py-confs
                                            )
                              line-end
                              )

@@ -113,6 +113,7 @@ https://goelhardik.github.io/2016/10/04/fishers-lda/                            
 https://anexen.github.io/pyxirr/                                                                : finance : library : programming : rust
 
 ** apis
+https://docs.readthedocs.io/en/stable/
 https://github.com/axcore/tartube
 https://github.com/yt-dlp/yt-dlp
 mastodon-py                                                                                     : 1.5.1

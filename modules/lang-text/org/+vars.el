@@ -129,7 +129,7 @@
 (spec-handling-add! whitespace-cleanup
                     `(org-mode
                       ,#'delete-trailing-whitespace
-                      ,#'+jg-org-clean-heading-spaces
+                      ;; ,#'+jg-org-clean-heading-spaces
                       ,#'+jg-text-cleanup-whitespace
                      )
                  )

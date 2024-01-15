@@ -1,1 +1,248 @@
-Pandas Reminders:
+Pandas/Polars Reminders:
+----                                          # Types
+pd.Series                                     # 1d. heterogenous types.
+pd.DataFrame                                  # nd. heterogenous types.
+pd.Index                                      #
+
+----                                          # Creation
+pd.Series([data], index=[])                   # name=""k
+pd.Series({data:data})                        #
+pd.Series(scalar, index=[])                   #
+
+pd.DataFrame({ "key": series, "key": series}) #
+pd.DataFrame([tuple, tuple.. ])               #
+pd.DataFrame([dict, dict.. ])                 #
+pd.DataFrame(series)                          #
+pd.DataFrame([dataclass..]])
+
+pd.DataFrame.from_dict                        # orient="columns" | "index"
+pd.DataFrame.from_records                     #
+
+
+----                                          # notes
+-                                             # default: copy on write
+
+----                                          # visualisation
+df.plot                                       #
+df.plot(kind=x)                               # bar, barh, hist, box, kde, density, area, scatter, ehxbin, pie.
+df.style.to_html()                            #
+
+----                                          # Inspection
+df.head                                       #
+df.tail                                       #
+df.describe                                   #
+df.info                                       #
+df.shape                                      #
+df.to_string                                  #
+
+
+----                                          # Indexing
+series["index"]                               #
+series.get("index")                           #
+
+df[col]                                       # int -> series
+df.loc[label]                                 # str -> series
+df.iloc[loc]                                  # int -> series
+df[x:y]                                       # -> dataframe
+df[bool_vec]                                  # -> dataframe
+df.T                                          # transpose
+
+df.join(df2.set_index(label), on=label2))     # sql table joins
+df.pivot                                      # project to 2d
+df.unpivote                                   #
+df.pivot_table                                #
+
+
+df.rolling(window=x)                          # rolling window
+df.rolling(win_type=x)                        # triang, gaussian,
+df.rolling(min_periods=x)                     # expanding window
+
+----                                          # grouping
+df.groupby(label, as_index=False)             # grouping by column. -> group
+group.first                                   #
+group.last                                    #
+group.nth                                     #
+group.mean                                    #
+group.count                                   #
+group.sum                                     #
+group.min                                     #
+group.max                                     #
+group.median                                  #
+group.transform                               # Aggregation
+group.apply                                   #
+
+----                                          # Sorting
+df.sort_values(label)                         #
+df.sort_values([label, label])                #
+
+----                                          # Modify
+df.copy                                       #
+df.astype                                     #
+df.to_numpy                                   #
+
+df.concat                                     #
+df.update                                     #
+df.join                                       # keeps original left index
+
+df.merge                                      # joins on non-index columns. discards index of left
+df.merge                                      # how= "left"|"outer"|"right"  on="label"
+df.merge                                      # left_on="label", right_on="label2"
+
+df.filter                                     #
+
+df.stack                                      #
+df.unstack                                    #
+df.melt                                       #
+df.wide_to_long                               #
+df.get_dummies                                #
+df.from_dummies                               #
+df.explode                                    #
+df.crosstab                                   #
+df.cut                                        #
+df.factorize                                  #
+
+df.combine_first                              #
+df.combine                                    #
+
+df.reindex                                    #
+df.reindex_like                               #
+df.align                                      #
+df.drop                                       #
+df.drop_dpulicates                            #
+df.rename                                     #
+
+del df["index"]                               #
+df.pop("index")                               #
+
+df.assign                                     # create new columns from existing
+df[new_label] = f(df.label)                   #
+
+----                                          # Operations
+df.pipe                                       # Table-wise function application.
+df.apply                                      # Row or column-wise function application.
+df.agg                                        # Aggregation
+df.transform                                  # Aggregation
+df.map                                        # element-wise function application.
+
+
+df.add                                        #
+df.sub                                        #
+df.mul                                        #
+df.div                                        #
+df.radd                                       #
+df.rsub                                       #
+
+----                                          # comparison
+df.eq                                         #
+df.ne                                         #
+df.lt                                         #
+df.gt                                         #
+df.le                                         #
+df.ge                                         #
+df.empty                                      #
+df.any                                        #
+df.all                                        #
+df.bool                                       #
+df.equals                                     #
+
+----                                          # Iteration
+df.items                                      #
+df.iterrows                                   #
+df.itertuples                                 #
+
+
+----                                          # Stats
+df.value_counts                               #
+df.duplicated                                 #
+df.nlargest                                   #
+df.nsmallest                                  #
+df.diff                                       # first discrete difference
+df.pct_change                                 #
+df.count                                      # Number of non-NA observations
+df.sum                                        # Sum of values
+df.mean                                       # Mean of values
+df.median                                     # Arithmetic median of values
+df.mode                                       # Mode
+df.is_unique                                  #
+df.nunique                                    #
+
+df.min                                        # Minimum
+df.max                                        # Maximum
+
+df.abs                                        # Absolute Value
+df.prod                                       # Product of values
+
+df.std                                        # Bessel-corrected sample standard deviation
+df.var                                        # Unbiased variance
+df.cov                                        # covariance
+df.corr                                       # correlation
+df.autocorr                                   # autocorrelation
+df.sem                                        # Standard error of the mean
+df.skew                                       # Sample skewness (3rd moment)
+df.kurt                                       # Sample kurtosis (4th moment)
+df.quantile                                   # Sample quantile (value at %)
+df.cumsum                                     # Cumulative sum
+df.cumprod                                    # Cumulative product
+df.cummax                                     # Cumulative maximum
+df.cummin                                     # Cumulative minimum
+
+df.cut                                        #
+df.qcut                                       #
+
+
+----                                          # datetime
+df.dt.hour                                    #
+df.dt.second                                  #
+df.dt.day                                     #
+df.dt.strftime                                #
+
+----                                          # str
+series.str.lower                              #
+series.str.upper                              #
+series.str.replace                            #
+series.str.split                              #
+series.str.join                               #
+series.explode                                #
+series.str.count                              #
+series.str.findall
+series.str.extract
+series.str.replace
+series.str.len
+
+
+----                                          # IO
+df.to_numpy                                   # write
+df.to_csv                                     # write
+df.to_excel                                   # write
+df.to_feather                                 # write
+df.to_hdf                                     # write
+df.to_html                                    # write
+df.to_json                                    # write
+df.to_orc                                     # write
+df.to_parquet                                 # write
+df.to_pickle                                  # write
+df.to_sql                                     # write
+df.to_stata                                   # write
+df.to_xml                                     # write
+df.to_string                                  # write
+pd.read_csv                                   # read
+pd.read_excel                                 # read
+pd.read_feather                               # read
+pd.read_hdf                                   # read
+pd.read_html                                  # read
+pd.read_json                                  # read
+pd.read_orc                                   # read
+pd.read_parquet                               # read
+pd.read_pickle                                # read
+pd.read_sas                                   # read
+pd.read_spss                                  # read
+pd.read_sql                                   # read
+pd.read_stata                                 # read
+pd.read_xml                                   # read
+
+----                                          # Options
+pd.get_option                                 #
+pd.set_option                                 #
+pd.reset_option                               #
+pd.describe_option                            #
+pd.option_context                             #

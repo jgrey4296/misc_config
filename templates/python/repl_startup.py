@@ -48,6 +48,16 @@ try:
 except ImportError as err:
     logging.warning("*Networkx not found*")
 
+try:
+    import numpy as np
+except ImportError:
+    logging.warning("*Numpy not found*")
+
+try:
+    import pandas as pd
+except ImportError:
+    logging.warning("*Pandas not found*")
+
 ##-- readline history
 ## from: https://stackoverflow.com/questions/10346419
 histfile = pl.Path.home() / ".cache/logs/python_history"

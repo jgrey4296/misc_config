@@ -1,6 +1,22 @@
 ;;-*-coding: utf-8;-*-
+(define-abbrev-table 'fundamental-mode-abbrev-table
+  '(
+    ("nd" "ndarray" nil :count 1)
+   ))
+
+(define-abbrev-table 'org-mode-abbrev-table
+  '(
+    ("todo" "TODO" nil :count 59)
+   ))
+
+(define-abbrev-table 'prog-mode-abbrev-table
+  '(
+    ("nd" "ndarray" nil :count 1)
+   ))
+
 (define-abbrev-table 'python-mode-abbrev-table
   '(
-    ("dootkey" "DootKey" nil :count 0)
+    ("dootkey" "DootKey" nil :count 50)
+    ("isins" "isinstance(" nil :count 1)
     ("lamdba" "lambda" nil :count 2)
    ))

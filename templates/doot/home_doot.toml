@@ -20,7 +20,7 @@ command        = { other-run = "doot.cmds.run_cmd:RunCmd", tasks = "doot.cmds.li
 report-line    = {}
 reporter       = {}
 action         = {}
-job            = {}
+task           = {}
 
 [commands]
 run = { tracker = "default", runner = "default", reporter= "default", report-line = [] }

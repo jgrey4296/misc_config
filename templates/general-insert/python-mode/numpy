@@ -1,1 +1,141 @@
 Numpy Reminders:
+---- # Types
+np.ndarray
+
+---- # General
+
+np.array([data])                               # creation. vector. | dtype=
+np.array([[row]])                              # creation. matrix. | dtype=
+np.arange(start, stop, step)                   # creation. range.
+np.linspace(start, stop, num)                  # creation. range. better for floats
+np.mgrid[:r, :c]                               # creation. meshgrid of shape(count(r,c..), r, c)
+np.ogrid                                       # creation.
+np.indices                                     # creation. | sparse=bool
+
+ndarray.astype(dtype)                          # type convert
+ndarray.reshape                                # modify shape
+np.unravel_index                               # convert 1d index to shape. index -> shape -> tuple
+ndarray.asarray
+
+ndarray.T                                      # transpose
+np.flipud                                      # flip matrix up-down.
+
+---- # inspection
+ndarray.shape
+
+----                                           # vector indexing
+ndarray[a]                                     # returns view. *not* copy.
+ndarray[a:b]                                   # view.
+ndarray[a:]                                    # view.
+ndarray[::step]                                # view.
+
+np.clip(ndarray, min, max)                     #
+ndarray[x:y] = z                               # overwrite
+ndarray[ndarray>x]                             # view. comparison. no ternaries
+np.allclose(ndarray, ndarray)                  # float comparison.
+np.all                                         # test
+np.any                                         # test
+
+----                                           # matrix indexing
+ndarray[y, x]                                  # matrix element
+ndarray[y,:]                                   # matrix row.
+ndarray[:,x]                                   # matrix column.
+
+                                               # default: 1d (x,) shape = row    vector shape (1,x)
+                                               # 1d (x,).reshape(-1,1)  = column vector shape (x,1)
+
+----                                           # axis
+colum                                          # 1d
+row,column                                     # 2d
+plane, row, column                             # 3d
+ndarray.sum(index=x)                           # specify dimension to eliminate. so 0 -> sum over rows
+
+np.moveaxis                                    # ndarray -> axis -> axis -> ndarray
+np.swapaxes                                    # ndarray -> axis -> axis -> ndarray
+
+----                                           # operations
+ndarray (+,-,*,/,//,**) ndarray                # elementwise
+np.sqrt                                        # ndarray -> ndarray
+np.exp                                         # e^ndarray. ndarray -> ndarray
+np.log                                         # natural log.
+np.dot                                         # scalar/matrix product.        : ndarray -> ndarrray -> scalar
+@                                              # scalar/matrix product.        : ndarray -> ndarrray -> scalar
+np.cross                                       # cross product.         : ndarray -> ndarray -> ndarray
+np.tensordot                                   #
+np.einsum                                      # str -> ndarray -> ndarray
+np.einsum                                      # matrix mul: "ij,jk->ik"
+np.einsum                                      # tensor mul: "ijk,klm->ijlm"
+
+np.[sin,cos,tan]                               # Trig
+np.arc[sin,cos,tan]                            # Trig
+np.[sin,cos,tan]h                              # Trig
+np.arc[sin,cos,tan]h                           # Trig
+np.arctan2                                     # Trig
+
+np.floor                                       # rounding
+np.ceil                                        # rounding
+np.round                                       # rounding. alias 'around'.
+
+----                                           # stats (with nan[x] versions for nan-resistence)
+np.max                                         # stats.
+np.min                                         # stats.
+np.argmax                                      # stats.
+np.argmin                                      # stats.
+np.sum                                         # stats.
+np.var                                         # stats. ddof=x for bessels correction
+np.std                                         # stats. ddof=x for bessels correction
+np.mean                                        # stats.
+np.median                                      # stats.
+np.percential                                  # stats.
+
+----                                           # broadcasting
+ndarray * scalar                               # ndarray * np.full_like(ndarray, scalar).
+ndarray * vector                               # ndarray * ndarray([vector, vector, vector]). ie: vec is treated as a row.
+ndarray * column                               # (3,3) * (3,1) -> (3,3) * (3,3). ie: column is extended
+vecA * vecB                                    # outer product. ie: (loop row: (loop col: out[row, col] = vecA[col] * vecB[row] ))
+vecB @ vecA                                    # outer product.
+
+
+----                                           # creation plus.
+np.eye(x,y)                                    # creation. identity matrix.
+np.zeros(size, dtype)                          # creation
+np.ones(shape)                                 # creation
+np.full(size, val)                             # creation
+np.empty(size)                                 # creation
+
+np.zeros_like(ndarray)                         # creation, same shape
+np.ones_like(ndarray)                          # creation, same shape
+np.full_like(ndarray, val)                     # creation, same shape
+np.empty_like(ndarray)                         # creation, same shape
+
+----                                           # modify / grow
+np.hstack                                      # Add columns. (ndarray(r,c), ndarray(r, c2)) -> ndarray(r, c+c2)  | cant broadcast
+np.vstack                                      # Add Rows.    (ndarray(r,c), ndarray(r2, c)) -> ndarray(r+r2, c)  | cant broadcast
+np.dstack                                      # add 3d depth planes.
+np.column_stack                                # Add ndarray and 1darray
+np.append                                      # ndarray -> ndarray -> ndarray | axis=x. SLOW.
+np.pad                                         # ndarray, ((upRow, downRow), (leftCol, RightCol)) -> ndarray.     | constant_values=x
+np.meshgrid                                    # ndarray -> ndarray -> tuple[ndarray, ndarray] | sparse=bool
+np.concatenate                                 # (ndarray, ndarray) -> ndarray |  axis=x
+
+np.hsplit                                      # ndarray, [indices] -> tuple[ndarray]
+np.vsplit                                      # ndarray, [indices] -> tuple[ndarray]
+
+np.tile                                        # ndarray(r, c) -> (r2, c2) -> ndarray(r*r2, c*c2)
+ndarray.repeat                                 # scalar -> ndarray. | axis=x specifies axis to repeat on. by default flattens to 1darray.
+
+np.delete                                      # ndarray, [indices] -> ndarray | axis=x
+np.insert                                      # ndarray -> [indices] -> value -> ndarray | axis=x
+
+ndarray.sort                                   # sorting
+np.sort(ndarray)                               # sorting
+np.argsort                                     # sorting, returning indices of original. | kind="stable"
+np.lexsort                                     # sorting.
+
+----                                           # Random
+rng = np.random.default_rng()                  # rng creation.
+rng.integers(min, max, count)                  # min <= x < max.  endpoint=bool for x <= max.
+rng.random(count)                              # 0 <= x < 1
+rng.standard_normal(count)                     # mean=0, stddev=1
+rng.uniform(min, max, count)                   # min <= x < max.
+rng.normal(mean, stddev, count)                #

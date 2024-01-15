@@ -30,3 +30,5 @@
 ;; Import managements
 (package! pyimport)
 (package! py-isort)
+
+(package! pydoc)

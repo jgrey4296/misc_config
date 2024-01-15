@@ -182,13 +182,18 @@ https://pyyaml.org/
 https://karimbahgat.github.io/Pyqtree/
 imagesize                                                                                       : 1.4.1
 jsonschema                                                                                      : 4.16.0
-numpy                                                                                           : 1.21.5
-pandas                                                                                          : 1.4.4
+https://numpy.org/doc/stable/
+https://pandas.pydata.org/docs/
+https://github.com/pydata/bottleneck
+https://github.com/pydata/numexpr
+
+https://docs.pola.rs/py-polars/html/reference/
 https://github.com/tobgu/pyrsistent
 https://github.com/keleshev/schema
 toml                                                                                            : 0.10.2
 tomli                                                                                           : 2.0.1
 tomlkit                                                                                         : 0.11.1
+https://github.com/hukkin/tomli-w
 yaml                                                                                            : 0.2.5
 https://github.com/fabiocaccamo/python-benedict.git
 https://github.com/rezoo/movis : movies

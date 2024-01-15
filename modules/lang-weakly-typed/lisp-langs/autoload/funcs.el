@@ -40,3 +40,20 @@
       )
     )
   )
+
+;;;###autoload
+(defun +jg-lisp-insert-signature ()
+  " Insert the signature of a function according to helpful "
+  (interactive)
+  (ivy-read "Insert Function Signature: " obarray
+            :predicate (lambda (sym)
+                         (or (fboundp sym)
+                             (get sym 'function-documentation)))
+
+            :require-match t
+            :keymap counsel-describe-map
+            :preselect (funcall counsel-describe-function-preselect)
+            :action (lambda (x) (insert (helpful--signature (intern x))))
+            :caller '+jg-lisp-insert-signature
+            )
+  )

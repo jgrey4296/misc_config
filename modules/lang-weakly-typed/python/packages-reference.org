@@ -175,6 +175,7 @@ https://github.com/vinta/awesome-python                                         
 https://github.com/rbanffy/pip-chill
 
 ** datastructures
+https://urllib3.readthedocs.io/en/stable/index.html
 https://github.com/jaraco/path
 https://www.attrs.org/en/stable/
 https://github.com/pytransitions/transitions

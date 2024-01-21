@@ -3,7 +3,7 @@
 (require 's)
 
 ;;;###autoload
-(defun +jg-build-bibliography ()
+(defun +jg-build-bibliography-a ()
   "Build pdf of all bibtex entries, and open it."
   (interactive)
   (let* ((loc default-directory)
@@ -33,14 +33,14 @@
   )
 
 ;;;###autoload
-(defun +jg-org-ref-version-override (f)
+(defun +jg-org-ref-version-override-a (f)
   (let ((kill-ring nil))
     (funcall f)
     )
   )
 
 ;;;###autoload
-(defun +jg-bibtex-set-field (field value &optional nodelim)
+(defun +jg-bibtex-set-field-a (field value &optional nodelim)
   "Set FIELD to VALUE in bibtex file.  create field if it does not exist.
 Optional argument NODELIM ignored to fit `bibtex-make-field` signature
 Modified to avoid duplicate comma insertion. "
@@ -67,7 +67,7 @@ Modified to avoid duplicate comma insertion. "
   )
 
 ;;;###autoload
-(defun +jg-bibtex-autokey-field-expand (fn &rest args)
+(defun +jg-bibtex-autokey-field-expand-a (fn &rest args)
   (if-let* ((first-arg (if (listp (car args)) (car args) (list (car args))))
             (matches (-any? (-partial #'s-matches? "file[[:digit:]]*") first-arg))
             (result (apply fn args))
@@ -79,7 +79,7 @@ Modified to avoid duplicate comma insertion. "
   )
 
 ;;;###autoload
-(defun +jg-bibtex-init-no-file-watchers ()
+(defun +jg-bibtex-init-no-file-watchers-a ()
   "Check that the files and directories specified by the user actually exist.
 Also sets `bibtex-completion-display-formats-internal'."
   (+jg-bibtex-suppress-watchers)
@@ -104,15 +104,24 @@ Also sets `bibtex-completion-display-formats-internal'."
   )
 
 ;;;###autoload
-(advice-add 'org-ref-build-full-bibliography :override #'+jg-build-bibliography)
+(defun +jg-bibtex-clean-dont-move-a (fn &rest args)
+  (bibtex-beginning-of-entry)
+  (save-excursion (apply fn args))
+  )
+
 ;;;###autoload
-(advice-add 'bibtex-autokey-get-field :around #'+jg-bibtex-autokey-field-expand)
+(advice-add 'org-ref-build-full-bibliography :override #'+jg-build-bibliography-a)
 ;;;###autoload
-(advice-add 'bibtex-set-field :override #'+jg-bibtex-set-field)
+(advice-add 'bibtex-autokey-get-field :around #'+jg-bibtex-autokey-field-expand-a)
 ;;;###autoload
-(advice-add 'org-ref-version :around #'+jg-org-ref-version-override)
+(advice-add 'bibtex-set-field :override #'+jg-bibtex-set-field-a)
 ;;;###autoload
-(advice-add 'bibtex-completion-init :override #'+jg-bibtex-init-no-file-watchers)
+(advice-add 'org-ref-version :around #'+jg-org-ref-version-override-a)
+;;;###autoload
+(advice-add 'bibtex-completion-init :override #'+jg-bibtex-init-no-file-watchers-a)
+
+;;;###autoload
+(advice-add 'org-ref-clean-bibtex-entry :around #'+jg-bibtex-clean-dont-move-a)
 
 
 ;;; +advice.el ends here

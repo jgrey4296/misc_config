@@ -1,0 +1,24 @@
+Numpy Modification:
+----                                           # modify / grow
+np.hstack                                      # Add columns. (ndarray(r,c), ndarray(r, c2)) -> ndarray(r, c+c2)  | cant broadcast
+np.vstack                                      # Add Rows.    (ndarray(r,c), ndarray(r2, c)) -> ndarray(r+r2, c)  | cant broadcast
+np.dstack                                      # add 3d depth planes.
+np.column_stack                                # Add ndarray and 1darray
+np.append                                      # ndarray -> ndarray -> ndarray | axis=x. SLOW.
+np.pad                                         # ndarray, ((upRow, downRow), (leftCol, RightCol)) -> ndarray.     | constant_values=x
+np.meshgrid                                    # ndarray -> ndarray -> tuple[ndarray, ndarray] | sparse=bool
+np.concatenate                                 # (ndarray, ndarray) -> ndarray |  axis=x
+
+np.hsplit                                      # ndarray, [indices] -> tuple[ndarray]
+np.vsplit                                      # ndarray, [indices] -> tuple[ndarray]
+
+np.tile                                        # ndarray(r, c) -> (r2, c2) -> ndarray(r*r2, c*c2)
+ndarray.repeat                                 # scalar -> ndarray. | axis=x specifies axis to repeat on. by default flattens to 1darray.
+
+np.delete                                      # ndarray, [indices] -> ndarray | axis=x
+np.insert                                      # ndarray -> [indices] -> value -> ndarray | axis=x
+
+ndarray.sort                                   # sorting
+np.sort(ndarray)                               # sorting
+np.argsort                                     # sorting, returning indices of original. | kind="stable"
+np.lexsort                                     # sorting.

@@ -24,7 +24,7 @@ version                = "0.1"
 ctor                   = "job"
 mixins                 = ["job:walker", "job:terse"]
 doc                    = ["Push pdfs to device"]
-filter_fn              = "tasks_code.android:select_dirs"
+accept_fn              = "tasks_code.android:select_dirs"
 roots                  = ["{push_pdfs}"]
 print_level            = { head="INFO", action="DEBUG" }
 android_root           = "/storage/6331-3162"

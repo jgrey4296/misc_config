@@ -1,0 +1,56 @@
+Pandas Modify:
+df.copy                                       #
+df.astype                                     #
+df.to_numpy                                   #
+
+df.concat                                     #
+df.update                                     #
+df.join                                       # keeps original left index
+
+df.merge                                      # joins on non-index columns. discards index of left
+df.merge                                      # how= "left"|"outer"|"right"  on="label"
+df.merge                                      # left_on="label", right_on="label2"
+
+df.filter                                     #
+
+df.stack                                      #
+df.unstack                                    #
+df.melt                                       #
+df.wide_to_long                               #
+df.get_dummies                                #
+df.from_dummies                               #
+df.explode                                    #
+df.crosstab                                   #
+df.cut                                        #
+df.factorize                                  #
+
+df.combine_first                              #
+df.combine                                    #
+
+df.reindex                                    #
+df.reindex_like                               #
+df.align                                      #
+df.drop                                       #
+df.drop_dpulicates                            #
+df.rename                                     #
+
+del df["index"]                               #
+df.pop("index")                               #
+
+df.assign                                     # create new columns from existing
+df[new_label] = f(df.label)                   #
+
+----                                          # Operations
+df.pipe                                       # Table-wise function application.
+df.apply                                      # Row or column-wise function application.
+df.agg                                        # Aggregation
+df.transform                                  # Aggregation
+df.map                                        # element-wise function application.
+
+
+df.add                                        #
+df.sub                                        #
+df.mul                                        #
+df.div                                        #
+df.radd                                       #
+df.rsub                                       #

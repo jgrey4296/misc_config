@@ -1,0 +1,22 @@
+Numpy Array Creation:
+np.eye(x,y)                                    # creation. identity matrix.
+np.zeros(size, dtype)                          # creation
+np.ones(shape)                                 # creation
+np.full(size, val)                             # creation
+np.empty(size)                                 # creation
+
+np.zeros_like(ndarray)                         # creation, same shape
+np.ones_like(ndarray)                          # creation, same shape
+np.full_like(ndarray, val)                     # creation, same shape
+np.empty_like(ndarray)                         # creation, same shape
+
+np.c_                                          #
+np.r_                                          #
+np.s_                                          #
+np.ix_                                         #
+np.mgrid                                       #
+
+np.meshgrid                                    #
+np.indices                                     #
+np.ogrid                                       # open multi-d meshgrid
+np.diag                                        #

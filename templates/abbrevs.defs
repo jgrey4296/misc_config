@@ -6,12 +6,12 @@
 
 (define-abbrev-table 'org-mode-abbrev-table
   '(
-    ("todo" "TODO" nil :count 59)
+    ("todo" "TODO" nil :count 66)
    ))
 
 (define-abbrev-table 'prog-mode-abbrev-table
   '(
-    ("nd" "ndarray" nil :count 1)
+    ("nd" "ndarray" nil :count 25)
    ))
 
 (define-abbrev-table 'python-mode-abbrev-table

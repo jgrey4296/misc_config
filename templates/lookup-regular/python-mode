@@ -138,3 +138,6 @@ django                                               # https://docs.djangoprojec
 flask                                                # https://flask.palletsprojects.com/en/2.2.x/
 numpy-illustrated                                    # https://github.com/axil/numpy-illustrated
 time complexity                                      # https://wiki.python.org/moin/TimeComplexity
+pep8 style                                           # https://peps.python.org/pep-0008/
+urllib3                                              # https://urllib3.readthedocs.io/en/stable/index.html
+cpython internals                                    # https://devguide.python.org/internals/

@@ -119,7 +119,8 @@
 ("fonts"
  (filename . "/media/john/data/library/assets/fonts/"))
 ("assets"
- (filename . "/media/john/data/library/assets/"))
+ (filename . "/media/john/data/assets/")
+ (last-modified 26028 4205 556367 775000))
 ("android"
  (filename . "/usr/lib/android-sdk/"))
 ("packages:python"

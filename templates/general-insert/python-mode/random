@@ -1,0 +1,8 @@
+Random:
+----                                           # Numpy
+rng = np.random.default_rng()                  # rng creation.
+rng.integers(min, max, count)                  # min <= x < max.  endpoint=bool for x <= max.
+rng.random(count)                              # 0 <= x < 1
+rng.standard_normal(count)                     # mean=0, stddev=1
+rng.uniform(min, max, count)                   # min <= x < max.
+rng.normal(mean, stddev, count)                #

@@ -1,0 +1,21 @@
+Numpy Vector and Matrix Indexing:
+----                                           # vector indexing
+ndarray[a]                                     # returns view. *not* copy.
+ndarray[a:b]                                   # view.
+ndarray[a:]                                    # view.
+ndarray[::step]                                # view.
+
+np.clip(ndarray, min, max)                     #
+ndarray[x:y] = z                               # overwrite
+ndarray[ndarray>x]                             # view. comparison. no ternaries
+np.allclose(ndarray, ndarray)                  # float comparison.
+np.all                                         # test
+np.any                                         # test
+
+----                                           # matrix indexing
+ndarray[y, x]                                  # matrix element
+ndarray[y,:]                                   # matrix row.
+ndarray[:,x]                                   # matrix column.
+
+                                               # default: 1d (x,) shape = row    vector shape (1,x)
+                                               # 1d (x,).reshape(-1,1)  = column vector shape (x,1)

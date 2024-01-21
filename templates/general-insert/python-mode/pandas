@@ -75,63 +75,6 @@ group.apply                                   #
 df.sort_values(label)                         #
 df.sort_values([label, label])                #
 
-----                                          # Modify
-df.copy                                       #
-df.astype                                     #
-df.to_numpy                                   #
-
-df.concat                                     #
-df.update                                     #
-df.join                                       # keeps original left index
-
-df.merge                                      # joins on non-index columns. discards index of left
-df.merge                                      # how= "left"|"outer"|"right"  on="label"
-df.merge                                      # left_on="label", right_on="label2"
-
-df.filter                                     #
-
-df.stack                                      #
-df.unstack                                    #
-df.melt                                       #
-df.wide_to_long                               #
-df.get_dummies                                #
-df.from_dummies                               #
-df.explode                                    #
-df.crosstab                                   #
-df.cut                                        #
-df.factorize                                  #
-
-df.combine_first                              #
-df.combine                                    #
-
-df.reindex                                    #
-df.reindex_like                               #
-df.align                                      #
-df.drop                                       #
-df.drop_dpulicates                            #
-df.rename                                     #
-
-del df["index"]                               #
-df.pop("index")                               #
-
-df.assign                                     # create new columns from existing
-df[new_label] = f(df.label)                   #
-
-----                                          # Operations
-df.pipe                                       # Table-wise function application.
-df.apply                                      # Row or column-wise function application.
-df.agg                                        # Aggregation
-df.transform                                  # Aggregation
-df.map                                        # element-wise function application.
-
-
-df.add                                        #
-df.sub                                        #
-df.mul                                        #
-df.div                                        #
-df.radd                                       #
-df.rsub                                       #
-
 ----                                          # comparison
 df.eq                                         #
 df.ne                                         #
@@ -149,45 +92,6 @@ df.equals                                     #
 df.items                                      #
 df.iterrows                                   #
 df.itertuples                                 #
-
-
-----                                          # Stats
-df.value_counts                               #
-df.duplicated                                 #
-df.nlargest                                   #
-df.nsmallest                                  #
-df.diff                                       # first discrete difference
-df.pct_change                                 #
-df.count                                      # Number of non-NA observations
-df.sum                                        # Sum of values
-df.mean                                       # Mean of values
-df.median                                     # Arithmetic median of values
-df.mode                                       # Mode
-df.is_unique                                  #
-df.nunique                                    #
-
-df.min                                        # Minimum
-df.max                                        # Maximum
-
-df.abs                                        # Absolute Value
-df.prod                                       # Product of values
-
-df.std                                        # Bessel-corrected sample standard deviation
-df.var                                        # Unbiased variance
-df.cov                                        # covariance
-df.corr                                       # correlation
-df.autocorr                                   # autocorrelation
-df.sem                                        # Standard error of the mean
-df.skew                                       # Sample skewness (3rd moment)
-df.kurt                                       # Sample kurtosis (4th moment)
-df.quantile                                   # Sample quantile (value at %)
-df.cumsum                                     # Cumulative sum
-df.cumprod                                    # Cumulative product
-df.cummax                                     # Cumulative maximum
-df.cummin                                     # Cumulative minimum
-
-df.cut                                        #
-df.qcut                                       #
 
 
 ----                                          # datetime
@@ -208,7 +112,6 @@ series.str.findall
 series.str.extract
 series.str.replace
 series.str.len
-
 
 ----                                          # IO
 df.to_numpy                                   # write

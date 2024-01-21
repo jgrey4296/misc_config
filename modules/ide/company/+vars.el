@@ -55,5 +55,5 @@
                     )
 
 (spec-handling-setq! company
-                     company-dict-dir (expand-file-name "templates/company-dicts" doom-user-dir)
+                     company-dict-dir (expand-file-name "company-dicts" templates-loc)
                      )

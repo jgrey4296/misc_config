@@ -1,6 +1,6 @@
 ;; font-examples.el -*- mode: emacs-lisp; lexical-binding: t; -*-
 
-(defvar jg-latex-font-example-template (expand-file-name  "templates/tex-config/tex/font_template.tex" doom-user-dir))
+(defvar jg-latex-font-example-template (expand-file-name  "tex-config/tex/font_template.tex" templates-loc))
 (defvar jg-latex-font-pattern "!!!FONT!!!")
 
 ;;;###autoload

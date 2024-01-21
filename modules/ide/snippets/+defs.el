@@ -14,11 +14,11 @@
 
 (defvar jg-snippet-dirs nil)
 
-(defvar jg-snippets-code-templates-dir    (expand-file-name "templates/code" doom-user-dir))
+(defvar jg-snippets-code-templates-dir    (expand-file-name "code" templates-loc))
 
-(defvar jg-snippets-file-templates-dir    (expand-file-name "templates/files" doom-user-dir))
+(defvar jg-snippets-file-templates-dir    (expand-file-name "files" templates-loc))
 
-(defvar jg-snippets-project-templates-dir (expand-file-name "templates/projects" doom-user-dir))
+(defvar jg-snippets-project-templates-dir (expand-file-name "projects" templates-loc))
 
 (defvar +snippets-dir       jg-snippets-code-templates-dir)
 

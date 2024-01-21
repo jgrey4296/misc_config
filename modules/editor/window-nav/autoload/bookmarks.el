@@ -3,7 +3,7 @@
 ;;;###autoload
 (defun +jg-nav-bookmarks-load()
   (interactive)
-  (bookmark-load (read-file-name "Load bookmarks file: " (expand-file-name "templates/bookmarks/" doom-user-dir)
+  (bookmark-load (read-file-name "Load bookmarks file: " (expand-file-name "bookmarks/" templates-loc)
                                  (pcase system-type
                                    ('darwin "bookmarks.mac")
                                    ('gnu/linux "bookmarks.linux")

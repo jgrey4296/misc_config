@@ -13,17 +13,9 @@
 ;; (setq default-input-method "greek")
 ;;-- end Text Encoding
 
-;;-- bookmarks
-
-(setq bookmark-default-file (pcase system-type
-                              ('darwin (expand-file-name "templates/bookmarks/bookmarks.mac" doom-user-dir))
-                              ('gnu/linux (expand-file-name "templates/bookmarks/bookmarks.linux" doom-user-dir))
-                              )
-      )
-
-;;-- end bookmarks
 
 ;;-- locations
+(defvar templates-loc "~/.config/jg/templates")
 (setq backup-directory-alist          `((".*" . ,(expand-file-name ".local/backups" doom-emacs-dir)))
       doom-fallback-buffer-name       "base_agenda.org"
       org-directory                   (expand-file-name "~/github/jgrey4296.github.io/orgfiles/")
@@ -33,12 +25,21 @@
       pyvenv-default-virtual-env-name (expand-file-name "~/.cache/mamba/envs/")
       server-auth-dir                 (expand-file-name "~/.config/secrets/emacs")
       native-comp-eln-load-path       (list (expand-file-name "cache/eln" doom-local-dir))
-      docs-dir                        (expand-file-name "templates/docs" doom-user-dir)
+      docs-dir                        (expand-file-name "docs" templates-loc)
       )
 
 (add-to-list 'load-path (expand-file-name "~/.local/modules"))
 
 ;;-- end locations
+
+;;-- bookmarks
+(setq bookmark-default-file (pcase system-type
+                              ('darwin (expand-file-name "bookmarks/bookmarks.mac" templates-loc))
+                              ('gnu/linux (expand-file-name "bookmarks/bookmarks.linux" templates-loc))
+                              )
+      )
+
+;;-- end bookmarks
 
 (setq server-log t)
 

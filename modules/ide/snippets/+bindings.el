@@ -7,7 +7,7 @@
       :desc "Dir: File"           "2" (cmd! (find-file jg-snippets-file-templates-dir))
       :desc "Dir: Projects"       "3" (cmd! (find-file jg-snippets-project-templates-dir))
       :desc "Dir: Lookup-regular" "4" (cmd! (find-file librarian-regular--location))
-      :desc "Dir: Git Template"   "7" (cmd! (find-file (expand-file-name "templates/git" doom-user-dir)))
+      :desc "Dir: Git Template"   "7" (cmd! (find-file (expand-file-name "git" templates-loc)))
       :desc "Dir: Doom Snippet"   "8" (cmd! (find-file doom-snippets-dir))
       :desc "Dir: Yas  Snippet"   "9" (cmd! (find-file yasnippet-snippets-dir))
       :desc "Debug Snippet Dirs"  "0" #'+jg-snippets-debug-dirs

@@ -4,7 +4,7 @@
 ;; default snippets library, if available
 (add-to-list 'load-path jg-snippets-code-templates-dir)
 (setq yas-indent-line 'fixed
-      abbrev-file-name  (expand-file-name "templates/abbrevs.defs" doom-user-dir)
+      abbrev-file-name  (expand-file-name "abbrevs.defs" templates-loc)
       )
 
 (spec-handling-add! file-templates

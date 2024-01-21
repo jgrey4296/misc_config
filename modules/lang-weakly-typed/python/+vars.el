@@ -36,8 +36,8 @@
       python-shell-completion-native-enable nil
       python-shell-completion-native-disabled-interpreters '("pypy")
 
-      jg-python-repl-start-file (expand-file-name "~/.config/jg/templates/python/repl_startup.py ")
-      python-shell-interpreter-path-args (expand-file-name "~/.config/jg/templates/python/repl_startup.py ")
+      jg-python-repl-start-file (expand-file-name "python/repl_startup.py " templates-loc)
+      python-shell-interpreter-path-args (expand-file-name "python/repl_startup.py " templates-loc)
       )
 (modify-syntax-entry ?_ "_" python-mode-syntax-table)
 ;;-- end general python

@@ -24,7 +24,7 @@
 
 (defvar jg-bibtex-loc-completions     (expand-file-name "~/github/bibliography/completions/"))
 
-(defvar jg-bibtex-loc-export-bib-file (expand-file-name "tex/export_template.tex" "~/.config/jg/templates/tex-config/"))
+(defvar jg-bibtex-loc-export-bib-file (expand-file-name "tex-config/tex/export_template.tex" templates-loc))
 
 (defvar jg-bibtex-loc-temp-dir        (expand-file-name "~/.tex/"))
 

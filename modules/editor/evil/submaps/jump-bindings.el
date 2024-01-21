@@ -19,6 +19,9 @@
       :desc "Goto First Line"       "f"   #'evil-goto-first-line
       :desc "Goto Last Line"        "F"   #'evil-goto-line
       :desc "Search buffer"         "s"   #'swiper
+
+      :desc "Buffer Start"          "<"   #'beginning-of-buffer
+      :desc "Buffer End"            ">"   #'end-of-buffer
       )
 (map! :map jg-binding-jump-map ;; gtags
       :prefix ("g" . "gtags")

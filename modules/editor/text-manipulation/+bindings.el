@@ -7,6 +7,7 @@
 ;; Get rid of zap to char:
 (map! "M-z" nil)
 
+
 (map! :leader
       :desc "Clear All"            "rK" #'+jg-text-clear-all
 
@@ -153,6 +154,7 @@
                )
 
       )
+
 
 (map! :map jg-binding-operator-map
       :desc "Complete/Grow Selection"     "g" (cmds! (eq evil-state 'normal) #'company-manual-begin

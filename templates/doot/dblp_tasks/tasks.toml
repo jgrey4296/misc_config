@@ -1,0 +1,82 @@
+# doot bib::get.keys --roots="{test}" bib::get.xml --roots="{dblp}/dblp-2023-10-01-02.xml" bib::write.xml.entries
+[[locations]]
+data    = "data"
+results = "results"
+dblp    = "{data}"
+bib     = "~/github/bibliography"
+conf    = "{bib}/plus/conferences"
+test    = "{conf}/primary/iva/"
+journ   = "{bib}/plus/journals"
+
+[[tasks.bib]]
+name                 = "get.keys"
+version              = "0.1"                                                                # <str>
+ctor                 = "job"                                                                # <type>
+mixins               = ["job:walker", "job:terse"]
+doc                  = ["find dblp keys to expand"]                                         # <list[str]>
+print_levels         = {action="WARN", execute="WARN"}                                      # <Dict: {'action', 'execute', 'build', 'sleep', 'head'}>
+inject               = ["fpath", "fstem", "fname", "lpath"]                                 # <('list',)>
+recursive            = true
+roots                = ["{conf}"]                                                            # <list[str|pl.Path]>  Places the job:walker will start
+exts                 = [".bib"]                                                              # <list[str]>
+sub_actions          = [
+                     { do="dootle.bibtex.v2:BibtexInitAction",   update_="bib_db"},
+                     { do="task_code.bibtex:build_parse_stack",  update_="parse_stack"},
+                     # { do="task_code.bibtex:build_write_stack",  update_="write_stack" },
+                     { do="dootle.bibtex.v2:BibtexLoadAction",   from_="fpath",     update_="bib_db",   parse_stack_="parse_stack" },
+                     { do="task_code.bibtex:map_urls", from_="bib_db", update_="mapping" },
+                     { do="putPost", args=["mapping"]},
+]                                                                                                                         # <str>
+
+head_actions = [
+             {do="getPost", mappings="-"},
+             {do="task_code.bibtex:join_mappings", from_="mappings", update_="total_mappings" },
+             {do="putPost", total_mappings="total_mappings"},
+]
+
+
+[[tasks.bib]]
+name                 = "get.xml"
+version              = "0.1"
+ctor                 = "job"
+mixins               = ["job:walker", "job:terse"]
+doc                  = "Stream DBLP xmls and extract entries with matching keys"
+print_levels         = {action="WARN", execute="WARN"}
+depends_on           = ["bib::get.keys.$head$"]
+inject               = ["fpath", "fstem", "fname", "lpath"]                                 # <('list',)>
+recursive            = false
+roots                = ["{dblp}"]                                                            # <list[str|pl.Path]>  Places the job:walker will start
+exts                 = [".xml"]                                                             # <list[str]>
+sub_actions          = [
+            {do="getPost", from="bib::get", mappings="total_mappings"},
+            {do="dootle.actions.xml:stream_xml", handler="task_code.xml:DBLPHandler", from_="fpath", update_="done_handler"},
+            {do="task_code.xml:extract_entries", from_="done_handler", update_="results"},
+            {do="putPost", results="results"},
+]
+head_actions = [
+             {do="getPost", all_mappings="results"},
+             {do="task_code.xml:flatten_results", from_="all_mappings", update_="flattened"},
+             {do="putPost", all_entries="flattened"},
+]
+
+[[tasks.bib]]
+name       = "write.xml.entries"
+version    = "0.1"
+ctor       = "job"
+mixins     = [ "doot.mixins.job.postbox_expander:PostBoxExpanderMixin", "job:terse" ]
+postbox    = {task="bib::get", sub_key="all_entries", inject_key="data", flatten=true}
+doc        = ["Update source bibs with found entries"]
+depends_on = ["bib::get.xml"]
+sub_actions = [
+        # load existing bib if it exists
+        { do="dootle.bibtex.v2:BibtexInitAction",   update_="bib_db"},
+        { do="task_code.bibtex:build_simple_parse_stack",  update_="parse_stack"},
+        { do="task_code.bibtex:build_simple_write_stack",  update_="write_stack" },
+        { do="dootle.bibtex.v2:BibtexLoadAction",   from_="fpath",     update_="bib_db",   parse_stack_="parse_stack" },
+        # insert entries
+        # TODO: fix crossref, authors, editors
+        { do="task_code.bibtex:insert_entries", from_="entries", update_="bib_db" },
+        # write
+        { do="dootle.bibtex.v2:BibtexToStrAction",  from_="bib_db",    update_="bib_text", write_stack_="write_stack" },
+        { do="write!", from_="bib_text", to="results/{fstem}.bib"},
+]

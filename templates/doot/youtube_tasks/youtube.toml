@@ -1,0 +1,41 @@
+[[locations]]
+archive = "dl-archive.txt"
+data    = "data"
+backup  = "/media/john/big_ex/datasets/youtube/data/"
+
+[[tasks.dl]]
+name                 = "yt"
+version              = "0.1"                # <str>
+doc                  = ["Download each channel in a csv using yt-dlp"]                   # <list[str]>
+ctor                 = "job"             # <str>
+mixins               = ["job:terse"]            # <list>               mix in additional capabilities
+print_levels         = {"build"="INFO", "execute"="INFO"}                   # <Dict: {'sleep', 'build', 'head', 'execute', 'action'}>
+queue_behaviour      = "default"            # <str>                default | auto | reactive
+flag_file            = ".complete"
+subs                 = ["subs.main.csv"]
+sub_generator        = "taskcode.youtube:generate_tasks"
+sub_actions          = [
+                     {do="skipIfFile", args=["{target}/{flag_file}", "{target}.tar.gz"]},
+                     {do="dir!",       args=["{target}"]},
+                     {do="log",        msg="Will Be getting: {title} : {channel}"},
+                     {do="taskcode.youtube:get_channel"},
+                     {do="touch", file="{target}/{flag_file}"},
+                     {do="tar!",  file="{target}"},
+                     {do="delete!", args=["{target}"], recursive=true},
+]                   # <list[dict]>
+# head_actions         = []                   # <list[dict]>
+
+[[tasks.dl]]
+name        = "backup"
+version     = "0.1"
+doc         = ["backup tars"]
+ctor        = "job"
+mixins      = ["job:shadow", "job:walker", "job:terse"]
+exts        = []
+recursive   = false
+roots       = ["{data}"]
+accept_fn   = "taskcode.youtube:select_tars"
+shadow_root = "{backup}"
+sub_actions = [
+            {do="backup!", from_="fpath", to="{shadow_path}/{fname}"}
+]

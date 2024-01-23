@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: tex_image
-# uuid: tex_image
-# group: latex
-# --
-#+ATTR_LATEX: :caption \caption{${1:The Image Caption}}
-[[${2:/the/image/path}]]

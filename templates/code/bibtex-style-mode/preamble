@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : preamble
-# uuid  : preamble
-# key   : preamble
-# group : bst.stack
-# --
-preamble$ % add concat of all preamble declarations

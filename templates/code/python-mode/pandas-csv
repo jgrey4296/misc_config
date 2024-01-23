@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : pandas.csv
-# uuid  : pandas.csv
-# key   : pandas.csv
-# group :
-# --
-frame : DataFrame = pandas.read_csv(${1:PATH}, skip_blank_lines=True, sep=",", skiprows=5)

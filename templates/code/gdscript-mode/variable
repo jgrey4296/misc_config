@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : var
-# uuid  : var
-# key   : var
-# group : godot
-# --
-var ${1:aVar} : ${2:int} = ${3}

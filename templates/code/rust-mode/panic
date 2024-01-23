@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : panic
-# uuid  : panic
-# key   : panic
-# group :
-# --
-panic!("$1}", $0);

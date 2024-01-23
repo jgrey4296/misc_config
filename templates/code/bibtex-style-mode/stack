@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : stack
-# uuid  : stack
-# key   : stack
-# group : bst.stack
-# --
-stack$ % clear and log stack

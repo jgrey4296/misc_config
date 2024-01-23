@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: util.introspection
-# uuid: util.introspection
-# group: meta
-# --
-#dirs(a) : returns list
-#getattr(obj,name)(val)

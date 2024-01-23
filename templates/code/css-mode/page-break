@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name:  page-break
-# uuid:  page-break
-# key:   page-break
-# group :
-# --
-.new-page { page-break-before:always; }

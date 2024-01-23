@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: sql.drop
-# uuid: sql.drop
-# group: sql
-# --
-DROP TABLE IF EXISTS $1

@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name  : warning
-# uuid  : warning
-# key   : warning
-# group : sphinx
-# --
-.. warning::
-
-   $0

@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : bold
-# uuid  : bold
-# key   : bold
-# group : sphinx
-# --
-:strong:`${0:text}`

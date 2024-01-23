@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : ignore
-# uuid  : ignore
-# key   : ignore
-# group : rust, cargo-make
-# --
-ignore_errors = true

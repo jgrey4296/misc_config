@@ -1,5 +1,0 @@
-# -*-Yaml-*-
-# https://guides.rubygems.org/command-reference/#gem-environment
-# symlink to ~/.gemrc
-:verbose: false
-# gemhome: "blah"

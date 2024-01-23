@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : emit
-# uuid  : emit
-# key   : emit
-# group : godot
-# --
-emit_signal("${1:sigName}", ${2:args})

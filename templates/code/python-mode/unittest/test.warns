@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name  : test.warns
-# uuid  : test.warns
-# key   : test.warns
-# group : pytest
-# --
-with pytest.warns(${1:Warning}):
-    $0

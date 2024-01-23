@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : fluent
-# uuid  : fluent
-# key   : fluent
-# group : instal
-# --
-\item ${mod}{${term}}\\

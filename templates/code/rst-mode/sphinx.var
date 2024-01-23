@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: var
-# uuid: var
-# key:  var
-# group :
-# --
-{{($0:varname) | escape | underline}}

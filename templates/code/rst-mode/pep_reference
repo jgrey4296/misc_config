@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : pep_reference
-# uuid  : pep_reference
-# key   : pep_reference
-# group :
-# --
-:PEP:`${0:287}` (add ``--pep-references``)

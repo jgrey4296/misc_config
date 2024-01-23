@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: py.vartype
-# uuid: py.vartype
-# --
-:vartype: $0

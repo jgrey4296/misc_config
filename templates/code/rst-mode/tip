@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name  : tip
-# uuid  : tip
-# key   : tip
-# group : sphinx
-# --
-.. tip::
-
-   $0

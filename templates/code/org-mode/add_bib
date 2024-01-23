@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: add_bib
-# key: add_bib
-# group: bibliography
-# --
-#+BIBLIOGRAPHY: ~/github/bibliography/main plain

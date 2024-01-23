@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: func
-# key: func
-# --
-to $1 [ $2 ]
-   let something = 5
-   $0
-end

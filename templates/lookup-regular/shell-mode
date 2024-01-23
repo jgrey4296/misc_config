@@ -1,5 +1,0 @@
-conda               # https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html
-bash reference      # https://www.gnu.org/software/bash/manual/bash.html
-pip                 # https://pip.pypa.io/en/stable/
-mamba               # https://github.com/mamba-org/mamba
-mamba docs          # https://mamba.readthedocs.io/en/latest/

@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: pragma
-# key: pragma
-# --
--- TypeSynonymInstances, OverlappingInstances, FlexibleInstances, GeneralizedNewtypeDeriving, MultiParamTypeClasses
--- OverloadedStrings, OverloadedLists
-{-# LANGUAGE $1 #-}

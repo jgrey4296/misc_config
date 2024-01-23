@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: describe.skip
-# key: describe.skip
-# --
-describe.skip("$1", function(){
-
-});

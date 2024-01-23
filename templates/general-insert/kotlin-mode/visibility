@@ -1,8 +1,0 @@
-Kotlin / Java visibility:
-public    # default
-internal  #
-protected #
-private   #
-
-sealed    # inheritance control
-open      # inheritance control

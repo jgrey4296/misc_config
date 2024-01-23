@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: pragmas
-# key: pragmas
-# --
-{-# LANGUAGE FlexibleContexts #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE ScopedTypeVariables #-}

@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: py.raises
-# uuid: py.raises
-# --
-:raises ${1:ValueError}: $0

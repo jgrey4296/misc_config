@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name  : important
-# uuid  : important
-# key   : important
-# group : sphinx
-# --
-.. important::
-
-   $0

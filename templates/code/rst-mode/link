@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: link
-# uuid: link
-# key:  link
-# group :
-# --
-:doc:`$0`

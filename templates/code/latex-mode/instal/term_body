@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : term.body
-# uuid  : term.body
-# key   : term.body
-# group : instal:term
-# --
-(${body})

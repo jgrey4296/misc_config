@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : label
-# uuid  : label
-# key   : label
-# group : godot
-# --
-@${1:path}

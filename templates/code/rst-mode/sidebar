@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name  : sidebar
-# uuid  : sidebar
-# key   : sidebar
-# group : sphinx
-# --
-.. sidebar:: ${1:Sidebar Title}
-
-   $0

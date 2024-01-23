@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: do
-# key: do
-# --
-do { state <- get; put (state-1); return (val+1) }

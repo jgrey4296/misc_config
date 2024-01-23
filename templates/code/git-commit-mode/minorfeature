@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: git.feature.minor
-# --
-[MINOR]: $0
-
-Description:

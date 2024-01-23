@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: chain_funcs
-# uuid: chain_funcs
-# key:  chain_funcs
-# group :
-# --
-(-compose #'(lambda (x) x) $1 )#0

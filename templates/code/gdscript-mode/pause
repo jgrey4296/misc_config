@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : pause
-# uuid  : pause
-# key   : pause
-# group : godot
-# --
-get_tree().paused = True

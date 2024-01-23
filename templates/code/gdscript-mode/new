@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : new
-# uuid  : new
-# key   : new
-# group : godot
-# --
-${1:ClassName}.new()

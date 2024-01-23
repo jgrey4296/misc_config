@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: remove-advice
-# uuid: remove-advice
-# key:  remove-advice
-# group :
-# --
-(advice-mapc (lambda (func props)
-                      (advice-remove #'$1 func))
-                      #'$1)$0

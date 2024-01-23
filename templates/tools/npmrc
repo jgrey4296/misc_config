@@ -1,9 +1,0 @@
-# -*-Conf-*-
-# https://docs.npmjs.com/cli/v9/configuring-npm/npmrc/
-prefix=${BASE_CACHE}/npm-global
-cache                           = "${BASE_CACHE}/npm"
-globalconfig                    = "${BASE_CACHE}/npm-global/etc/npmrc"
-init-module                     = "${BASE_CONFIG}/npm-init.js"
-editor                          = "vim"
-location                        = "user"
-userconfig                      = "${HOME}/.npmrc"

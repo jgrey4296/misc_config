@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: abc.metaclass
-# uuid: abc.metaclass
-# group: abc
-# --
-import abc
-
-class $1(metaclass=abc.ABCMeta):
-    """ $0 """

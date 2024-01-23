@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : box
-# uuid  : box
-# key   : box
-# group :
-# --
-let ${1:var} : Box<[${2:type}]> = Box::new(${3:val});

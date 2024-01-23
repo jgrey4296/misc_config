@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : element
-# uuid  : schema.element
-# key   : element
-# group : schema
-# --
-<xs:element name="${1:theName}" type="${2:xs:string}" />

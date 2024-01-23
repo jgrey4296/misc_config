@@ -15,7 +15,6 @@
 
 
 ;;-- locations
-(defvar templates-loc "~/.config/jg/templates")
 (setq backup-directory-alist          `((".*" . ,(expand-file-name ".local/backups" doom-emacs-dir)))
       doom-fallback-buffer-name       "base_agenda.org"
       org-directory                   (expand-file-name "~/github/jgrey4296.github.io/orgfiles/")

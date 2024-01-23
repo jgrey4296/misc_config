@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: typevar
-# uuid: typevar
-# --
-$1 = TypeVar('$1')$0

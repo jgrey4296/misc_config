@@ -1,6 +1,0 @@
-
-
-textblob
-inflect
-pronouncingpy
-spacy

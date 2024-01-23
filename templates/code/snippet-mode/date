@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : date
-# uuid  : date
-# key   : date
-# group :
-# --
-`(format-time-string "%Y-%m-%d")`

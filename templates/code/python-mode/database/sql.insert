@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: sql.insert
-# uuid: sql.insert
-# group: sql
-# --
-INSERT INTO $1 VALUES($2)

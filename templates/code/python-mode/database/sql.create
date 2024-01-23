@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: sql.create
-# uuid: sql.create
-# group: sql
-# --
-CREATE TABLE $1($2)

@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: git.fix
-# condition: t
-# --
-[FIX]: $0
-
-Description:

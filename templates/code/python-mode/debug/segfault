@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name  : segfault
-# uuid  : segfault
-# key   : segfault
-# group : debug
-# --
-import faulthandler
-
-faulthandler.enable(file=sys.stderr, all_threads=True)

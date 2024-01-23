@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : gantt.milestone
-# uuid  : gantt.milestone
-# key   : gantt.milestone
-# group : instal:gantt
-# --
-\ganttmilestone{${text}}{${num}}\ganttnewline

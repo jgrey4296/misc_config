@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : download
-# uuid  : download
-# key   : download
-# group : sphinx
-# --
-:download:`${1:title}<${2:url}>`$0

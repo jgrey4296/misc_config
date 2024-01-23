@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name:  caution
-# uuid:  caution
-# key:   caution
-# group : sphinx
-# --
-.. caution::
-
-   $0

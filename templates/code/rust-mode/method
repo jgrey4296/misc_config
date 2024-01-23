@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name  : method
-# uuid  : method
-# key   : method
-# group :
-# --
-fn ${1:name} (self:&self, ${2:args}) -> ${3:retType} {
-   $0
-}

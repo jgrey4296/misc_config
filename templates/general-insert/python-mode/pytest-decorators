@@ -1,9 +1,0 @@
-Pytest Decorators:
-@pytest.mark.skip                # Skip a Test
-@pytest.mark.skipif(fn)          # skip with a condition
-@pytest.mark.xfail               # Expect a Test to Fail
-@pytest.mark.parametrize("", []) # Parameterize a function, argnames in first arg, values in second
-@pytest.mark.filterwarnings("")  # Format is "{action}:{match}")
-
-@pytest.fixture                  # Mark a fuction as a fixture
-@pytest.mark.usefixtures(""...)  # add fixtures without listing in test args

@@ -1,6 +1,0 @@
-## dcim.toml -*- mode: conf-toml -*-
-[[locations]]
-
-# TODO image hashing
-# TODO ocr
-# TODO duplicate detector

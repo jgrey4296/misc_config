@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: gradle.artifacts
-# uuid: gradle.artifacts
-# key:  gradle.artifacts
-# group :
-# --
-artifacts {
-          $0
-}

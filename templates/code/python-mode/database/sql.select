@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: sql.select
-# uuid: sql.select
-# group: sql
-# --
-SELECT * FROM $1

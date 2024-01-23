@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: sql.execute
-# uuid: sql.execute
-# group: sql
-# --
-cur.execute("$1")
-#cur.executemany("statement",list)
-#cur.executescript(""" Statements; """)

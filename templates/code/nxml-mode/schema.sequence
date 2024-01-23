@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name  : schema.sequence
-# uuid  : schema.sequence
-# key   : sequence
-# group :
-# --
-<sequence>
-$0
-</sequence>

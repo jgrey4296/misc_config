@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : result
-# uuid  : result
-# key   : result
-# group :
-# --
-Result<${1:type}, ${2:failure::Error}>

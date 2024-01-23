@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : pytest.expect.fail
-# uuid  : pytest.expect.fail
-# key   : pytest.expect.fail
-# group :
-# --
-@pytest.mark.xfail

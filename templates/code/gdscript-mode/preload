@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : preload
-# uuid  : preload
-# key   : preload
-# group : godot
-# --
-const ${1:varName} = preload("${2:path}")

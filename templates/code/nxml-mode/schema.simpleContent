@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name  : schema.simpleContent
-# uuid  : schema.simpleContent
-# key   : simcon
-# group :
-# --
-<xs:simpleContent>
-$0
-</xs:simpleContent>

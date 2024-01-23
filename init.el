@@ -1,6 +1,7 @@
 ;;; init.el -*- lexical-binding: t; -*-
 
 (setq force-load-messages nil)
+(defvar templates-loc (expand-file-name "~/github/_templates"))
 
 (load! "defer-macro")
 (doom!

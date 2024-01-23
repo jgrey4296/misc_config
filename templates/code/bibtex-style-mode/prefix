@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : prefix
-# uuid  : prefix
-# key   : prefix
-# group : bst.str
-# --
-$1 $2 text.prefix$

@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: cite_drawer
-# key: cite_drawer
-# group: bibliography
-# --
-:citations:
-$0
-:END:

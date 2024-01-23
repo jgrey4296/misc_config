@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: gradle.defaultTasks
-# uuid: defaultTasks
-# key:  defaultTasks
-# group :
-# --
-defaultTasks $1

@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: package-hook
-# uuid: package-hook
-# --
-(use-package-hook! $1 :post-config
-$0
-)

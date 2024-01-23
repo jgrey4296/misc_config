@@ -1,3 +1,0 @@
-∀x, P(X)    >= 0
-P(Certainty) = 1
-P(Union(X)) = ΣP(x ∈ X)

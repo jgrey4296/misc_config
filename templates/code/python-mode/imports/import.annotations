@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: future.annotations
-# uuid: future.annotations
-# key:  future.annotations
-# group : imports
-# --
-##-- imports
-from __future__ import annotations
-##-- end imports

@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name  : pytest.monkeypatch
-# uuid  : pytest.monkeypatch
-# key   : pytest.monkeypatch
-# group :
-# --
-
-# monkeypatch:
-# setattr, delattr, setitem, delitem, setenv, delenv, syspath, chdir, context

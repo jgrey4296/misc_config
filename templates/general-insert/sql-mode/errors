@@ -1,5 +1,0 @@
-SQLite Errors:
-SQLITE_FULL  # database or disk full
-SQLITE_IOERR # disk error
-SQLITE_BUSY  # database in use by other process
-SQLITE_NOMEM # out of memory

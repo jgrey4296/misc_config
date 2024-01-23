@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : liquid.cycle
-# uuid  : liquid.cycle
-# key   : liquid.cycle
-# group :
-# --
-{% cycle ${1:'group': options}  %}

@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : warn
-# uuid  : warn
-# key   : warn
-# group : bst.log
-# --
-$1 warning$

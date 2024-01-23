@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: constraint
-# key: constraint
-# --
-{ a(X, Y) : b(X) } = 1 :- c(Y).

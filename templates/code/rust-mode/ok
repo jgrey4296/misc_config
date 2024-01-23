@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : ok
-# uuid  : ok
-# key   : ok
-# group :
-# --
-Ok($1)

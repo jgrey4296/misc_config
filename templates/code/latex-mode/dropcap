@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : dropcap
-# uuid  : dropcap
-# key   : dropcap
-# group :
-# --
-\lettrine[lines=2, depth=0]{$1}{$2}$0

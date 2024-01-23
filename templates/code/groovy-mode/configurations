@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: gradle.configurations
-# uuid: gradle.configurations
-# key:  gradle.configurations
-# group :
-# --
-configurations {
-               $0
-}

@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : liquid.continue
-# uuid  : liquid.continue
-# key   : liquid.continue
-# group :
-# --
-{% continue %}

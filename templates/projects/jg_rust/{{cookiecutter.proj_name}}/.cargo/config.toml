@@ -1,9 +1,0 @@
-# https://doc.rust-lang.org/cargo/reference/config.html
-# paths = [] # path dependency overrides
-
-[alias]
-gdb = "build --profile gdb"
-cfgs = "-Z unstable-options rustc --print=cfg"
-
-[build]
-target-dir = "build"

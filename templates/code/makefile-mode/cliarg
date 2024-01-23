@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: cliarg
-# key: cliarg
-# --
-ifndef ${$1}
-       $1 := "$2"
-endif
-$0

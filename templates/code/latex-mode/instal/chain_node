@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name  : chain.node
-# uuid  : chain.node
-# key   : chain.node
-# group : instal:chain
-# --
-\node[circle,draw,on chain=trace] (i${num})    {$S_{${num}}$};
-\node[coordinate, on chain=trace] (i${num}mid) {};

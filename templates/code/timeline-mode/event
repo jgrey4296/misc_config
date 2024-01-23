@@ -1,4 +1,0 @@
-# -*- mode: snippet -*-
-# name: event
-# --
-#year       event country person* :desc .... :tags ... :wiki ....

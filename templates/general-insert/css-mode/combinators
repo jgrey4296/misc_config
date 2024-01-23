@@ -1,7 +1,0 @@
-CSS Combinators:
-+   # Next sibling
->   # Child
-||  # Column
-~   # Subsequent sibling
-" " # Descendent (Single space)
-|   # Namesapce

@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : logprinter
-# uuid  : logprinter
-# key   : logprinter
-# group :
-# --
-printer = logmod.getLogger("_printer")

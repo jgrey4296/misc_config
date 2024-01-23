@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : fluent.link
-# uuid  : fluent.link
-# key   : fluent.link
-# group : instal:fluent
-# --
-\draw (i${num}) -- (f${num});

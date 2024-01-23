@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name  : alias
-# uuid  : alias
-# key   : alias
-# group : rust, cargo-make
-# --
-[tasks.${1:target}2]
-alias="$1"

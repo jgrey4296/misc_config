@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : dep
-# uuid  : dep
-# key   : dep
-# group : rust, cargo-make
-# --
-dependencies = [$1]

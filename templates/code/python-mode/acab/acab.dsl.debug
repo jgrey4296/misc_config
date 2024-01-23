@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: acab.dsl.debug
-# uuid: acab.dsl.debug
-# key:  acab.dsl.debug
-# group : acab
-# --
-if '@pytest_ar' in globals():
-    from acab.core.parsing import debug_funcs as DBF
-    DBF.debug_pyparsing(pp.Diagnostics.enable_debug_on_named_expressions)

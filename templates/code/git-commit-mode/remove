@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: git.remove
-# --
-[REMOVE]: $0
-
-Description:

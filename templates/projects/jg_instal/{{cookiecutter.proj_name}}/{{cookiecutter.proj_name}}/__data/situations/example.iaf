@@ -1,4 +1,0 @@
-initially perm(in_red(foo)) in basic
-initially pow(in_red(foo)) in basic
-initially perm(ex_red(foo)) in basic
-initially perm(ex_blue(foo)) in basic

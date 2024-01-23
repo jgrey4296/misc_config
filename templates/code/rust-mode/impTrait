@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name  : imptrait
-# uuid  : imptrait
-# key   : imptrait
-# group :
-# --
-impl ${1:trait} for ${2:type} {
-     $0
-}

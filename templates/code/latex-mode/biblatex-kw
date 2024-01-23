@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : biblatex-kw
-# uuid  : biblatex-kw
-# key   : biblatex-kw
-# group :
-# --
-\printbibliography[keyword={$1},title={$2}}]$0

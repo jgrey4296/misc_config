@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : delete
-# uuid  : delete
-# key   : delete
-# group : godot
-# --
-${1:node}.queue_free()

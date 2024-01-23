@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : get_node
-# uuid  : get_node
-# key   : get_node
-# group : godot
-# --
-$${1:path}

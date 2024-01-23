@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: error
-# uuid: error
-# key:  error
-# group : sphinx
-# --
-.. error::
-
-   $0

@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : doctype
-# uuid  : doctype
-# key   : doctype
-# group : xml
-# --
-<!DOCTYPE ${1:root-name} SYSTEM "${2:filename}">

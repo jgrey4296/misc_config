@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: no-byte-compile
-# uuid: no-byte-compile
-# key:  no-byte-compile
-# group :
-# --
-;; -*- no-byte-compile: t; -*-

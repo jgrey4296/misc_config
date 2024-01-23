@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: rule
-# key: rule
-# --
-head :- body.

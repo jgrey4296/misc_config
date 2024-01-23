@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: lint.disable
-# uuid: lint.disable
-# group: linting
-# --
-# pylint: disable=$0

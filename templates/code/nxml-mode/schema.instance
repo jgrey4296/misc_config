@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : schema.instance
-# uuid  : schema.instance
-# key   : xsi
-# group :
-# --
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"

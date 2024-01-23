@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name  : schema.choice
-# uuid  : schema.choice
-# key   : choice
-# group :
-# --
-<choice>
-$0
-</choice>

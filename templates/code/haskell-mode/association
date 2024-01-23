@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: association
-# key: association
-# --
-let a = [(1, "blah"), (2, "bloo")]
-lookup 2 a

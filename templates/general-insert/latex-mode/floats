@@ -1,7 +1,0 @@
-Float Placement:
-h # Here
-t # Top of page
-b # bottom of page
-p # special page
-! # override
-H # precisely here. uses float package.

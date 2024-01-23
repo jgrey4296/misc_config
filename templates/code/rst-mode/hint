@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: hint
-# uuid: hint
-# key:  hint
-# group : sphinx
-# --
-.. hint::
-
-   $0

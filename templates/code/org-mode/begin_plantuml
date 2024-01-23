@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: begin_plantuml
-# uuid: begin_plantuml
-# group: src
-# --
-#+NAME: $1
-#+begin_src plantuml :results value verbatim :preview t
-$0
-#+end_src

@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: bootstrap.path
-# uuid: bootstrap.path
-# --
-import sys
-sys.path.append("$0")

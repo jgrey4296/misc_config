@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: git.deprecate
-# --
-[DEPRECATE]: $0
-
-Description:

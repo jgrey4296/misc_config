@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : liquid.filter
-# uuid  : liquid.filter
-# key   : liquid.filter
-# group :
-# --
-{{ $1 | ${2:filterName: vars } }

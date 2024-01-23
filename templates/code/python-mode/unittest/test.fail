@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: test.fail
-# uuid: test.fail
-# key:  test.fail
-# group : pytest
-# --
-assert(True is False)

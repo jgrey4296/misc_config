@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name  : export
-# uuid  : export
-# key   : export
-# group : godot
-# --
-# Will be saved with attached resource, viewable in editor
-export($2) var ${1:varName} : ${2:type} = ${3:val}

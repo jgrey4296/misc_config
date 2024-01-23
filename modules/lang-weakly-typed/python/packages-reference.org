@@ -1,4 +1,5 @@
 #+TITLE: Python Packages Reference
+https://status.python.org/
 
 * Overview
 https://github.com/jjjake/internetarchive
@@ -44,6 +45,7 @@ https://github.com/OlafHaag/VectorFields/tree/master
 - scipy
 - seaborn
 - setuptools
+- sqlalchemy
 - sh
 - sphinx
 - sqlite
@@ -112,6 +114,9 @@ https://goelhardik.github.io/2016/10/04/fishers-lda/                            
 https://anexen.github.io/pyxirr/                                                                : finance : library : programming : rust
 
 ** apis
+https://docs.readthedocs.io/en/stable/
+https://github.com/axcore/tartube
+https://github.com/yt-dlp/yt-dlp
 mastodon-py                                                                                     : 1.5.1
 https://github.com/praw-dev/praw                                                                : libraries : reddit
 https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/api-reference
@@ -120,9 +125,11 @@ https://akamhy.github.io/waybackpy/ - wayback machine
 https://amoffat.github.io/sh/
 
 ** architecture
+https://docs.djangoproject.com/en/5.0/
+https://flask.palletsprojects.com/en/2.2.x/
+
 https://github.com/twisted/twisted
 https://github.com/mcfletch/pydispatcher
-https://flask.palletsprojects.com/en/2.2.x/
 https://palletsprojects.com/p/jinja/
 https://palletsprojects.com/p/werkzeug/
 https://docs.pylonsproject.org/projects/waitress/en/stable/
@@ -168,6 +175,7 @@ https://github.com/vinta/awesome-python                                         
 https://github.com/rbanffy/pip-chill
 
 ** datastructures
+https://urllib3.readthedocs.io/en/stable/index.html
 https://github.com/jaraco/path
 https://www.attrs.org/en/stable/
 https://github.com/pytransitions/transitions
@@ -175,16 +183,23 @@ https://pyyaml.org/
 https://karimbahgat.github.io/Pyqtree/
 imagesize                                                                                       : 1.4.1
 jsonschema                                                                                      : 4.16.0
-numpy                                                                                           : 1.21.5
-pandas                                                                                          : 1.4.4
+https://numpy.org/doc/stable/
+https://pandas.pydata.org/docs/
+https://github.com/pydata/bottleneck
+https://github.com/pydata/numexpr
+
+https://docs.pola.rs/py-polars/html/reference/
 https://github.com/tobgu/pyrsistent
 https://github.com/keleshev/schema
 toml                                                                                            : 0.10.2
 tomli                                                                                           : 2.0.1
 tomlkit                                                                                         : 0.11.1
+https://github.com/hukkin/tomli-w
 yaml                                                                                            : 0.2.5
 https://github.com/fabiocaccamo/python-benedict.git
 https://github.com/rezoo/movis : movies
+https://github.com/JNRowe/pyisbn
+https://github.com/TorKlingberg/isbn_hyphenate
 *** graphs
 https://graphviz.readthedocs.io/en/stable/
 https://github.com/pygraphviz/pygraphviz/issues/398
@@ -197,6 +212,7 @@ https://github.com/lmcinnes/hypergraph                                          
 https://github.com/mvcisback/hasse                                                              : partial_order : sets
 
 *** databases
+https://alembic.sqlalchemy.org/en/latest/tutorial.html
 https://docs.sqlalchemy.org/en/20/
 https://github.com/ponyorm/pony/                                                                : SQL : database : databases : library : object_relation_mapper : object_relational_mapper : pony
 https://marshmallow.readthedocs.io/en/stable/                                                   : library : marshmallow : technical
@@ -459,3 +475,7 @@ https://provenance.readthedocs.io/en/latest/intro-guide.html
 https://cmdline-provenance.readthedocs.io/en/latest/
 ** System
 https://github.com/giampaolo/psutil
+** Testing
+https://pytest-cov.readthedocs.io/en/latest/
+https://pytest-mock.readthedocs.io/en/latest/
+https://docs.pytest.org/en/7.3.x/contents.html

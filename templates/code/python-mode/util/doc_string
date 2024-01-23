@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: util.doc.string
-# uuid: util.doc.string
-# group: comments
-# --
-"""
-$0
-"""

@@ -1,7 +1,0 @@
-Normal Form         -
-Free Variable       -
-α conversion        - Renaming bound variables in an expression
-β reduction         - Replacing bound variables in body of expression.
-η (eta) reduction   - Converts between (λx.f x) and (f) whenever x does not appear free in f.
-
-De Bruijin Indexing -

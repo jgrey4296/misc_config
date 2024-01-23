@@ -24,10 +24,6 @@
 
 (map! :map jg-org-mode-map
       :n "|" #'general-insert-call
-      ;; :n "I" nil
-      ;; :n "] h" nil
-      ;; :n "[ h" nil
-      ;; :desc "Cycle"           :n "a"   #'org-cycle
       :desc "Next Link"       :m "] l" #'org-next-link
       :desc "Prev Link"       :m "[ l" #'org-previous-link
       :desc "Forward Heading" :m "] j" #'org-forward-heading-same-level
@@ -44,6 +40,8 @@
 
 (map! :map jg-org-mode-map
       :localleader
+      :desc "New SubHeading"         "RET" #'org-insert-subheading
+      :desc "New Heading"            "DEL" #'org-insert-heading
       :desc "Refile"                 "R" #'+jg-org-refile-subtree
       :desc "Todo"                   "TAB" #'org-todo
       :desc "Lint"                   "L" #'org-lint

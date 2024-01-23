@@ -1,5 +1,0 @@
-rootProject.name = '{{cookiecutter.proj_name}}'
-
-defaultTasks 'run'
-version '1.0'
-group   'org.jacamo'

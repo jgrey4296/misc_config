@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: util.debug
-# uuid: util.debug
-# --
-breakpoint()
-pass$0

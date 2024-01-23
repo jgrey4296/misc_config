@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: attention
-# uuid: attention
-# key:  attention
-# group : sphinx
-# --
-.. attention::
-
-   $0

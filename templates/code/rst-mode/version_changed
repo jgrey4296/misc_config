@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name  : version_changed
-# uuid  : version_changed
-# key   : version_changed
-# group : sphinx
-# --
-.. versionchanged:: v$1
-
-   $0

@@ -113,3 +113,17 @@ shadow the default snippet)."
   (interactive)
   (yas-expand-snippet (yas-lookup-snippet jg-snippets-debug-snippet-name) (point))
   )
+
+
+;;;###autoload
+(defun +jg-snippets-reload-all ()
+  (interactive)
+  (yas-reload-all)
+  (read-abbrev-file)
+  )
+
+;;;###autoload
+(defun +jg-snippets-save-abbrevs ()
+  (interactive)
+  (write-abbrev-file abbrev-file-name)
+  )

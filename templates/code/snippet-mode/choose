@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : choose
-# uuid  : choose
-# key   : choose
-# group :
-# --
-\${2:\$\$(yas-choose-value '($1))}

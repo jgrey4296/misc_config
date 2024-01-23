@@ -35,3 +35,5 @@
 (evil-make-intercept-map read-expression-map)
 
 ;;-- end evil overrides/intercept
+
+(setq esc-map (make-sparse-keymap))

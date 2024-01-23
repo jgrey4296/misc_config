@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: test.skip
-# uuid: test.skip
-# key: test.skip
-# group: pytest
-# --
-@pytest.mark.skip(reason="$0")

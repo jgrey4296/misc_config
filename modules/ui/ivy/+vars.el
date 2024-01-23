@@ -2,7 +2,7 @@
 
 
 ;;-- general-insert
-(setq general-insert-location (expand-file-name "templates/general-insert" doom-user-dir))
+(setq general-insert-location (expand-file-name "general-insert" templates-loc))
 
 ;;-- end general-insert
 

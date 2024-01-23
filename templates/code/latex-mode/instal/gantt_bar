@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : gantt.bar
-# uuid  : gantt.bar
-# key   : gantt.bar
-# group : instal:gantt
-# --
-\ganttbar{${text}}{${start}}{${end}}\ganttnewline

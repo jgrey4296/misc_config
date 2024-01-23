@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name  : union
-# uuid  : union
-# key   : union
-# group :
-# --
-union ${1:ident} {
-      $0
-}

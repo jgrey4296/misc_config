@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : enum
-# uuid  : enum
-# key   : enum
-# group : godot
-# --
-enum {${1:thing} }

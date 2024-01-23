@@ -66,4 +66,13 @@
                       ("\\.cbx\\'" . latex-mode)
                       )
                     )
+(spec-handling-add! popup
+                    '(bibtex
+                     ("^\\*DOI Metadata\\*" :side left :ttl 5 :width 0.3 :quit t :select nil :priority 50)
+                     )
+                    )
+
+(spec-handling-add! compile-commands
+                    '(bibtex +jg-bibtex-get-commands)
+                    )
 ;;-- end specs

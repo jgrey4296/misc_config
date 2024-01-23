@@ -25,6 +25,7 @@
 (defer-load! jg-bindings-total "+bindings")
 (defer-load! jg-evil-ex-bindings "+evil-ex")
 
+(after! transient-toggles (+jg-ide-extend-toggles))
 
 ;;-- lsp
 
@@ -65,7 +66,6 @@
   (add-hook! 'doom-escape-hook #'+lsp-signature-stop-maybe-h)
   (add-hook! 'lsp-mode-hook #'+lsp-optimization-mode)
 
-  (after! transient-toggles (+jg-ide-extend-toggles))
 )
 
 (use-package! lsp-ui

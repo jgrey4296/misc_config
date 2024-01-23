@@ -1,7 +1,9 @@
 ;;; lang/jg-org/+vars.el -*- lexical-binding: t; -*-
 
 ;; (textobjects insert navigation additional shift todo heading calendar)
-(setq evil-org-key-theme '(textobjects insert shift todo))
+(setq evil-org-key-theme '(textobjects insert shift todo)
+      org-cycle-separator-lines 3
+      )
 
 ;;-- personal
 
@@ -127,7 +129,7 @@
 (spec-handling-add! whitespace-cleanup
                     `(org-mode
                       ,#'delete-trailing-whitespace
-                      ,#'+jg-org-clean-heading-spaces
+                      ;; ,#'+jg-org-clean-heading-spaces
                       ,#'+jg-text-cleanup-whitespace
                      )
                  )

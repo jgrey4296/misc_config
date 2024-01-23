@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name  : impl
-# uuid  : impl
-# key   : impl
-# group :
-# --
-impl $1 {
-     $0
-}

@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : signal
-# uuid  : signal
-# key   : signal
-# group : godot
-# --
-signal ${1:sigName}(${2:params})

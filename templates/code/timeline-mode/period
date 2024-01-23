@@ -1,4 +1,0 @@
-# -*- mode: snippet -*-
-# name: period
-# --
-#year -> year event country person_surname* :tags ... :wiki .... :desc ....

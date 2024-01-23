@@ -60,6 +60,7 @@ Finds correctly active snippets from parent modes (based on Yas' logic)."
              args))
    'uuid))
 
+;;;###autoload
 (defun +snippet--abort ()
   (interactive)
   (set-buffer-modified-p nil)

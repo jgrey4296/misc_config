@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : autoload
-# uuid  : autoload
-# key   : autoload
-# group :
-# --
-;;;###autoload$0

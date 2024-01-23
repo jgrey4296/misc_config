@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : emptymatch
-# uuid  : emptymatch
-# key   : emptymatch
-# group :
-# --
-empty_match = re.match("","")

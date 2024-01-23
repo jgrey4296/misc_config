@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : user
-# uuid  : user
-# key   : user
-# group : godot
-# --
-"user://${1:path}"

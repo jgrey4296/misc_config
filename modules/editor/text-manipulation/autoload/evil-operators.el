@@ -127,6 +127,8 @@ with either a numeric or alphabetical escalation "
 ;;;###autoload (autoload '+jg-text-title-case-op "editor/text-manipulation/autoload/evil-operators" nil t)
 (evil-define-operator +jg-text-title-case-op (beg end)
   :move-point t
+  :type exclusive
+  ;; :motion evil-forward-word-end
   (while (< (point) end)
     (if (looking-at " \\<and\\>")
         (forward-word 1)
@@ -134,6 +136,7 @@ with either a numeric or alphabetical escalation "
       )
     )
   )
+
 
 ;;;###autoload (autoload '+jg-text-simple-grep-op "editor/text-manipulation/autoload/evil-operators" nil t)
 (evil-define-operator +jg-text-simple-grep-op (beg end count)
@@ -236,13 +239,13 @@ with either a numeric or alphabetical escalation "
       )
   )
 
-;;;###autoload (autoload '+format:region "editor/format/autoload/evil" nil t)
+;;;###autoload (autoload '+format:region "editor/text-manipulation/autoload/evil-operators " nil t)
 (evil-define-operator +format:region (beg end)
   "Evil ex interface to `+format/region'."
   (interactive "<r>")
   (+format/region beg end))
 
-;;;###autoload (autoload '+jg-surround-list "editor/text-manipulation/autoload/list-surround.el" nil t)
+;;;###autoload (autoload '+jg-surround-list "editor/text-manipulation/autoload/evil-operators" nil t)
 (evil-define-operator +jg-surround-list (beg end args)
   :type inclusive
   :motion nil
@@ -261,7 +264,7 @@ with either a numeric or alphabetical escalation "
     )
   )
 
-;;;###autoload (autoload '+jg-surround-ensure-commas  "editor/text-manipulation/autoload/list-surround.el" nil t)
+;;;###autoload (autoload '+jg-surround-ensure-commas  "editor/text-manipulation/autoload/evil-operators" nil t)
 (evil-define-operator +jg-surround-ensure-commas (beg end args)
   :type inclusive
   :keep-visual t

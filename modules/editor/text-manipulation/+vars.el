@@ -53,7 +53,7 @@
                           ("ispell"   '())
                           )
 
-      ispell-personal-dictionary (expand-file-name "templates/tools/ispell_english" doom-user-dir)
+      ispell-personal-dictionary (expand-file-name "tools/ispell_english" templates-loc)
       spell-fu-directory (concat doom-data-dir "spell-fu")
       flyspell-popup-correct-delay 0.8
 
@@ -107,19 +107,17 @@
                                            ("⊨" "⇒" "⊢")
                                            ("↑" "↓" "↕")
                                            ("==" "!=")
-                                           ("+" "-" "*" "/")
+                                           ("+" "-" "*" "/" "_")
                                            ("⨁" "⨂" "⊸")
                                            ( "₁" "₂" "₃" "₄" "₅" "₆" "₇" "₈" "₉" "₀" "ᵢ" "ⱼ")
                                            ( "¹" "²" "³" "⁴" "⁵" "⁶" "⁷" "⁸" "⁹" "ⁱ")
                                            ("default" "default_factory")
-                                           ("_" "-")
                                  )
-
               )
 (spec-handling-setq! evil-shift
                      evil-shift-width 4
                      )
-(spec-handling-add! auto-modesj
+(spec-handling-add! auto-modes
                     '(text-manip
                       ("LICENSE" . license-mode)
                       )

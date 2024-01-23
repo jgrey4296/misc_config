@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: header
-# key: header
-# group: structure
-# --
-#+HEADER: $0

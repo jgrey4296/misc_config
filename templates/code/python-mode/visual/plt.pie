@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: pie
-# uuid: pie
-# group: plt
-# --
-plt.pie([0.25, 1, 0.25, 0.75],
-        labels=["a", "b", "c", "d"]
-        explode=[0.1, 0.2, 0.1, 0.1])

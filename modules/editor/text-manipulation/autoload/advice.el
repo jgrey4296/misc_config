@@ -47,6 +47,16 @@ directory first)."
   )
 
 ;;;###autoload
+(defun +jg-invert-dashes (orig-fun &rest args)
+  (cond ((not (characterp (car args))) (apply orig-fun args))
+        ((char-equal (car args) ?-) ?_)
+        ((char-equal (car args) ?_) ?-)
+        (t (apply orig-fun args))
+        )
+  )
+
+
+;;;###autoload
 (advice-add 'ispell-word :around #'+spell-init-ispell-extra-args-a)
 
 ;;;###autoload
@@ -60,3 +70,9 @@ directory first)."
 
 ;;;###autoload
 (advice-add 'dtrt-indent-mode :around #'doom--fix-broken-smie-modes-a)
+
+;;;###autoload
+(advice-add 'upcase  :around #'+jg-invert-dashes)
+
+;;;###autoload
+(advice-add 'downcase :around #'+jg-invert-dashes)

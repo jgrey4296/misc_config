@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : assign
-# uuid  : assign
-# key   : :=
-# group : bst.var
-# --
-${1:val} ${2:var} :=

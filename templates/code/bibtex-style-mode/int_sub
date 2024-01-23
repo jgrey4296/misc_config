@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : -
-# uuid  : -
-# key   : -
-# group : bst.int
-# --
-$1 $2 -

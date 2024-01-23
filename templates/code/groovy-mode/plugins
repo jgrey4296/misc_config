@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: gradle.plugins
-# uuid: plugins
-# key:  plugins
-# group :
-# --
-plugins {
-        id '$1' version '$2'
-}$0

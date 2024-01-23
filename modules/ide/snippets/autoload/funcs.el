@@ -13,16 +13,15 @@
 (defun +jg-snippets-new-snippet()
   "Create a new snippet in `+snippets-dir'."
   (interactive)
-  (let ((default-directory
-          (expand-file-name (symbol-name major-mode)
-                            +snippets-dir)))
+  (let ((default-directory (expand-file-name (symbol-name major-mode) +snippets-dir)))
     (+jg-snippets--ensure-dir default-directory)
-    (with-current-buffer (switch-to-buffer "untitled-snippet")
+    (with-current-buffer (pop-to-buffer "untitled-snippet")
       (snippet-mode)
       (erase-buffer)
       (+file-templates--expand t :mode 'snippet-mode)
       (when (bound-and-true-p evil-local-mode)
-        (evil-insert-state)))))
+        (evil-insert-state))))
+  )
 
 ;;;###autoload
 (defun +jg-snippets--ensure-dir (dir)

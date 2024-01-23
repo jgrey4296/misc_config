@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : nl
-# uuid  : nl
-# key   : nl
-# group : bst.print
-# --
-newline$ % flush output, start newline

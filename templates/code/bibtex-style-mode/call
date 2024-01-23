@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : call
-# uuid  : call
-# key   : call
-# group : bst.entries
-# --
-call.type$ % call the current entry type, only within ITERATE and REVERSE

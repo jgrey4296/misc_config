@@ -1,9 +1,0 @@
-Production of a new clause implied by two clauses containing complementary literals.
-So:
-A = a \/ b \/ c
-B = d \/ e\/ ~c
-gives:
-C = a \/ b \/ d \/ e
-by mututally incompatible literals c and ~c
-
-If a set of formulas resolve to the empty clause, it is unsatisfiable.

@@ -36,8 +36,8 @@
       python-shell-completion-native-enable nil
       python-shell-completion-native-disabled-interpreters '("pypy")
 
-      jg-python-repl-start-file (expand-file-name "~/.config/jg/templates/python/repl_startup.py ")
-      python-shell-interpreter-path-args (expand-file-name "~/.config/jg/templates/python/repl_startup.py ")
+      jg-python-repl-start-file (expand-file-name "python/repl_startup.py " templates-loc)
+      python-shell-interpreter-path-args (expand-file-name "python/repl_startup.py " templates-loc)
       )
 (modify-syntax-entry ?_ "_" python-mode-syntax-table)
 ;;-- end general python
@@ -127,6 +127,8 @@
                      ("^\\*anaconda-mode"     :side bottom :ttl 5   :height 0.4 :quit t :select nil :priority 50)
                      ("^\\*Python\\*"         :side right  :ttl nil :width  0.5 :quit nil :select t :priority 50)
                      ("^\\*Python-Summary\\*" :side right  :ttl nil :width  0.2 :quit t  :select nil :priority 50)
+                     ("^\\*PyDoc Search\\*"   :side left   :ttl nil :width  0.3 :quit t  :select nil :priority 50)
+                     ("^\\*pydoc\\*"          :side left   :ttl nil :width  0.3 :quit t  :select nil :priority 50)
                      )
                     )
 (spec-handling-add! file-templates
@@ -244,7 +246,7 @@
                     )
                     )
 (spec-handling-add! compile-commands
-                    '(python +jg-python-get-commands +jg-python-solo-file-run)
+                    '(python +jg-python-get-commands +jg-python-solo-file-run +jg-python-distribute-commands)
                     )
 (spec-handling-add! eval :form 'override
                     `(python-mode
@@ -266,6 +268,14 @@
                       '(python-mode "Microsoft.Python.LanguageServer")
                       )
   )
+
+(spec-handling-add! imenu
+                    '(python
+                      ("Field"  "\\s-*\\(.+?\\)\\s-*:\\s-\\(.+?\\)\\s-=\\s-field" 1)
+
+                      )
+                    )
+
 ;;-- end specs
 
 ;;-- general insert

@@ -1,10 +1,10 @@
 ;;; editor/window-control/+vars.el -*- lexical-binding: t; -*-
 
-(defvar jg-ui-default-face-gen-palette-dir (expand-file-name "~/.config/jg/templates/palettes/"))
+(defvar jg-ui-default-face-gen-palette-dir (expand-file-name "palettes" templates-loc))
 (defvar jg-ui-tree-active-tree-package 'neotree)
 
 ;;-- theme settings
-(setq custom-theme-directory (expand-file-name "templates/themes" doom-user-dir))
+(setq custom-theme-directory (expand-file-name "themes" templates-loc))
 
 ;;-- end theme settings
 

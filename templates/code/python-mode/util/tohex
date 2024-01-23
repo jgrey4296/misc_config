@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: util.tohex
-# uuid: util.tohex
-# group: math
-# --
-format($1,'02x')$0

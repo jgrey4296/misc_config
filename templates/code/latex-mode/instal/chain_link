@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name  : chain.link
-# uuid  : chain.link
-# key   : chain.link
-# group : instal:chain
-# --
-\draw[thin](i${num})    -- (i${num}mid);
-\draw[thin](i${num}mid) -- (i${numPlus});

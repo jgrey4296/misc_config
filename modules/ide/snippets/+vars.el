@@ -4,7 +4,7 @@
 ;; default snippets library, if available
 (add-to-list 'load-path jg-snippets-code-templates-dir)
 (setq yas-indent-line 'fixed
-      abbrev-file-name  (expand-file-name "tempalates/abbrevs_defs" doom-user-dir)
+      abbrev-file-name  (expand-file-name "abbrevs.defs" templates-loc)
       )
 
 (spec-handling-add! file-templates
@@ -42,4 +42,11 @@
                       ("templates/company-dicts/.+\\'"  . fundamental-mode)
                       ("templates/files/.+\\'"          . snippet-mode)
                       )
+                    )
+
+(spec-handling-add! popup :form 'override
+                    '(snippets
+                     ("^untitled-snippet$" :side bottom :ttl 5 :height 0.4 :quit t :select t :priority 50)
+                     ("^\\*Abbrevs\\*"     :side right  :ttl 5 :width 100 :quit t :select nil :priority 50)
+                     )
                     )

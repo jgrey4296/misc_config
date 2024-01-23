@@ -1,5 +1,0 @@
-
-clingo
-z3
-pysmt
-pyswip

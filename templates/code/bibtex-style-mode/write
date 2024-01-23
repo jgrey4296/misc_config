@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : write
-# uuid  : write
-# key   : write
-# group :
-# --
-$1 write$

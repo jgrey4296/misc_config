@@ -31,6 +31,7 @@
              #'tree-sitter!
              #'maybe-py-test-minor-mode
              #'general-insert-minor-mode
+             #'abbrev-mode
              )
 
   ;; Always add auto-hide as the last thing
@@ -87,7 +88,6 @@
   :after python-mode
   )
 
-;;-- import management
 (use-package! py-isort
   :commands py-isort-buffer
   :init
@@ -103,4 +103,7 @@
   :after python-mode
   )
 
-;;-- end import management
+(use-package! pydoc
+  :after python-mode
+  ;; cmds pydoc, pydoc-at-point, pydoc-browse, pydoc-browse-kill
+  )

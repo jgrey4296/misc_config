@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : element
-# uuid  : dtd.element
-# key   : element
-# group : dtd
-# --
-<!ELEMENT ${1:name} (${2:#PCDATA})>

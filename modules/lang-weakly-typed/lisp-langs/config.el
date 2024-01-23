@@ -46,6 +46,7 @@
              #'highlight-quoted-mode
              ;; Ensure straight sees modifications to installed packages
              #'+emacs-lisp-init-straight-maybe-h
+             #'abbrev-mode
              )
 
   (after! general-insert

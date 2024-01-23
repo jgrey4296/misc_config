@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : liquid.text
-# uuid  : liquid.text
-# key   : liquid.text
-# group :
-# --
-{{ $1 }}

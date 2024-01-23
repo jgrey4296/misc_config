@@ -13,15 +13,6 @@
 ;; (setq default-input-method "greek")
 ;;-- end Text Encoding
 
-;;-- bookmarks
-
-(setq bookmark-default-file (pcase system-type
-                              ('darwin (expand-file-name "templates/bookmarks/bookmarks.mac" doom-user-dir))
-                              ('gnu/linux (expand-file-name "templates/bookmarks/bookmarks.linux" doom-user-dir))
-                              )
-      )
-
-;;-- end bookmarks
 
 ;;-- locations
 (setq backup-directory-alist          `((".*" . ,(expand-file-name ".local/backups" doom-emacs-dir)))
@@ -33,12 +24,21 @@
       pyvenv-default-virtual-env-name (expand-file-name "~/.cache/mamba/envs/")
       server-auth-dir                 (expand-file-name "~/.config/secrets/emacs")
       native-comp-eln-load-path       (list (expand-file-name "cache/eln" doom-local-dir))
-      docs-dir                        (expand-file-name "templates/docs" doom-user-dir)
+      docs-dir                        (expand-file-name "docs" templates-loc)
       )
 
 (add-to-list 'load-path (expand-file-name "~/.local/modules"))
 
 ;;-- end locations
+
+;;-- bookmarks
+(setq bookmark-default-file (pcase system-type
+                              ('darwin (expand-file-name "bookmarks/bookmarks.mac" templates-loc))
+                              ('gnu/linux (expand-file-name "bookmarks/bookmarks.linux" templates-loc))
+                              )
+      )
+
+;;-- end bookmarks
 
 (setq server-log t)
 
@@ -80,30 +80,30 @@
 ;;-- end byte / native compilation
 
 ;;-- warning suppression
-;; (progn
-;;   (setq jgtest '(1 2 3)
-;;         jgnon  '(blah)
-;;         warning-suppress-log-types '((defvaralias losing-value jgblahtest))
-;;         warning-suppress-types nil ;;'((defvaralias losing-value jgblahtest))
+;;   (let ((jgtest '(1 2 3))
+;;         (jgnon  '(blah))
+;;         (warning-suppress-log-types '((defvaralias losing-value jgblahtest)))
+;;         (warning-suppress-types nil ;;'((defvaralias losing-value jgblahtest)))
 ;;         )
 
 ;;   (defvaralias 'jgblahtest 'jgnon)
 ;;   (defvaralias 'jgblahtest 'jgtest)
 ;; )
-
+;;
 (setq warning-suppress-log-types
       '( ;; Full Suppress
         (defvaralias losing-value woman-topic-history)
         ;; (flycheck syntax-checker)
-    ;; ((python python-shell-completion-native-turn-on-maybe))
-        ;; (org-element-cache)
+        ;; ((python python-shell-completion-native-turn-on-maybe))
+        ((org-element-cache))
         ((flycheck syntax-checker))
+        (error "Invalid search bound (wrong side of point)")
         )
       warning-suppress-types
       '( ;; Don't Show
         (defvaralias losing-value python-shell-interpreter)
         ;; ((python python-shell-completion-native-turn-on-maybe))
-        ;; (org-element-cache)
+        (org-element-cache)
         ;; (flycheck syntax-checker)
         )
       )

@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: gradle.dependsOn
-# uuid: dependsOn
-# key:  dependsOn
-# group :
-# --
-dependsOn "$0"

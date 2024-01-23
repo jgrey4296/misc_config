@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name  : func
-# uuid  : func
-# key   : func
-# group : godot
-# --
-func ${1:name}(${2:params}) -> ${3:retType}:
-     ${4:pass}

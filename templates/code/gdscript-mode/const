@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : const
-# uuid  : const
-# key   : const
-# group : godot
-# --
-const ${1:name} : ${2:type} = ${3:val}

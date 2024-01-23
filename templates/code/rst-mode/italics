@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : italics
-# uuid  : italics
-# key   : italics
-# group : sphinx
-# --
-:emphasis:`${0:text}`

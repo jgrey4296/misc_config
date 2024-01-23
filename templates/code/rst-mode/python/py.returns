@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: py.returns
-# uuid: py.returns
-# --
-:returns: $0

@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name  : deprecated
-# uuid  : deprecated
-# key   : deprecated
-# group : sphinx
-# --
-.. deprecated:: v$1
-
-   $0

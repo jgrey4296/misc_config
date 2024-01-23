@@ -15,11 +15,15 @@
                   "code-converting-work"
                   "code-conversion-work"
                   "helm candidates"
-                  ;; "Pp Eval"
                   "RNC Input"
                   "counsel"
                   "refs-/"
                   "Neotree"
+                  "http "
+                  "diff-hl"
+                  "temp"
+                  "string-pixel-width"
+                  "helm-bookmarks"
                   )
           (* any)
           )

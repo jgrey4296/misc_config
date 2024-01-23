@@ -1,8 +1,0 @@
-# https://doc.rust-lang.org/cargo/reference/config.html
-
-[alias]
-gdb = "build --profile gdb"
-cfgs = "-Z unstable-options rustc --print=cfg"
-
-[build]
-target-dir = "build"

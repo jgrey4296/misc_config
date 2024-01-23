@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name  : util.debug
-# uuid  : util.debug
-# key   : util.debug
-# group :
-# --
-log::warn!("${1:warning}");$0

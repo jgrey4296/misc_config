@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name  : liquid.raw
-# uuid  : liquid.raw
-# key   : liquid.raw
-# group :
-# --
-{% raw %}
-${1:Text without liquid processing}
-{% endraw %}

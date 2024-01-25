@@ -12,6 +12,17 @@
   )
 
 ;;;###autoload
+(defun +jg-bibtex-sort-buffer-by-type ()
+  (interactive)
+  (let ((bibtex-autokey-year-length 4)
+        (bibtex-maintain-sorted-entries 'entry-class)
+        )
+    (bibtex-sort-buffer)
+    )
+  )
+
+
+;;;###autoload
 (defun +jg-bibtex-autokey-get-year ()
   "Return year field contents as a string obeying `bibtex-autokey-year-length'."
   (let* ((str (bibtex-autokey-get-field '("date" "year"))) ; possibly ""

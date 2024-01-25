@@ -3,6 +3,7 @@
 ;;-- general bibtex settings
 (setq-default bibtex-user-optional-fields          nil
               bibtex-completion-bibliography       nil
+              bibtex-sort-entry-class              '(("String") ("Book" "Proceedings" "book" "proceedings") ("article" "inbook") ("online") (catch-all))
               bibtex-field-indentation             1
               bibtex-text-indentation              15
               bibtex-align-at-equal-sign           t

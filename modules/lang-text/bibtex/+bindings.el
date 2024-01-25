@@ -60,10 +60,14 @@
       :desc "Change Entry Type" "t"      #'+jg-bibtex-edit-entry-type
       :desc "Update Entry"      "U"      #'bibtex-entry-update
       :desc "Update Field"      "f"      #'+jg-bibtex-edit-field
-      :desc "Sort Buffer"       "s"      #'bibtex-sort-buffer
-      :desc "Sort By Year"      "y"      #'+jg-bibtex-sort-buffer-by-year
       :desc "Validate"          "V"      #'bibtex-validate
       :desc "Journal<->BookTitle" "TAB"  #'+jg-bibtex-quickswap
+
+      (:prefix ("s" . "Sort")
+       :desc "Sort Buffer"       "s"      #'bibtex-sort-buffer
+       :desc "Sort By Year"      "y"      #'+jg-bibtex-sort-buffer-by-year
+       :desc "Sort By Type"      "t"      #'+jg-bibtex-sort-buffer-by-type
+       )
       )
 (map! :map bibtex-mode-map ;; jump
       :after bibtex

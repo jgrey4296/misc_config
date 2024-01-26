@@ -24,6 +24,7 @@
       :after bibtex
       :localleader
       :desc "Reformat Buffer"     "TAB"   #'+jg-bibtex-reformat-buffer
+      :desc "Remove Field"        "DEL"   #'+jg-bibtex-remove-field
       :desc "Author <-> Editor"   "0"     #'+jg-bibtex-swap-editor-author
       :desc "Journal <-> Booktitle" "9"   #'+jg-bibtex-swap-booktitle-journal
 

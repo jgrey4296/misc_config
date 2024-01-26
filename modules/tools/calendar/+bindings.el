@@ -12,6 +12,7 @@
       :n "q" #'calendar-exit
 
       ;; Viewing
+      :n "o" #'diary-view-other-diary-entries
       :n "m" #'diary-mark-entries
       :n "u" #'calendar-unmark
       :n "d" #'diary-view-entries

@@ -2,6 +2,8 @@
 
 (defvar jg-bibtex-indent-equals-column 14)
 
+(defvar jg-bibtex-popup-doi-info t)
+
 (defvar jg-bibtex-fill-column 50000)
 
 (defvar jg-bibtex-helm-candidates nil)

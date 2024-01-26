@@ -46,13 +46,14 @@ Optional argument NODELIM ignored to fit `bibtex-make-field` signature
 Modified to avoid duplicate comma insertion. "
   (interactive "sfield: \nsvalue: ")
   (bibtex-beginning-of-entry)
-  (let ((found))
+  (let ((value (string-trim value))
+        found)
     (if (setq found (bibtex-search-forward-field (concat field "\\b") t))
         ;; we found a field
         (progn
           (goto-char (car (cdr found)))
-          (when value
-            (bibtex-kill-field)
+          (bibtex-kill-field)
+          (when (not (string-empty-p value))
             (bibtex-make-field field nil nil nil)
             (backward-char)
             (insert (format "%s" value))))

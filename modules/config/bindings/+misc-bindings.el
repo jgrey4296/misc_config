@@ -16,6 +16,8 @@
       "<f9>" #'ignore
       "<f10>" #'ignore
 
+      "M-c" #'ignore
+      [menu-bar] nil
       )
 
 (map! :map universal-argument-map

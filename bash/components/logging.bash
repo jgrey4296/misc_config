@@ -1,2 +1,0 @@
-
-JGLOGDIR="$HOME/.logs"

@@ -40,20 +40,10 @@
 ;;-- end ws butler
 
 ;;-- spelling
-(setq ispell-program-name (or (executable-find "aspell")
-                              (executable-find "hunspell")
-                              (executable-find "enchant-2")
-                              (executable-find "ispell")
-                              )
-
-      ispell-extra-args (pcase (f-filename ispell-program-name)
-                          ("aspell"   '("--sug-mode=ultra" "--run-together"))
-                          ("hunspell" '())
-                          ("enchant-2"  '())
-                          ("ispell"   '())
-                          )
-
-      ispell-personal-dictionary (expand-file-name "tools/ispell_english" templates-loc)
+(setq ispell-program-name (executable-find "aspell")
+      ispell-extra-args '("--sug-mode=ultra" "--run-together")
+      ispell-personal-dictionary (expand-file-name "spelling/aspell.en.pws" templates-loc)
+      ispell-current-personal-dictionary ispell-personal-dictionary
       spell-fu-directory (concat doom-data-dir "spell-fu")
       flyspell-popup-correct-delay 0.8
 
@@ -98,6 +88,7 @@
                                          ("inclusive" "exclusive")
                                          ("prepend" "append")
                                          ("jg" "john grey")
+                                         ("off", "on")
                                          )
                      rotate-text-symbols '(("∃" "∀" "∄" "∈" )
                                            ("∧" "∨")
@@ -122,10 +113,8 @@
                       ("LICENSE" . license-mode)
                       )
                    )
-
 (spec-handling-add! flyspell-predicate
                     `(markdown-mode ,#'+markdown-flyspell-word-p)
                     `(gfm-mode ,#'+markdown-flyspell-word-p)
                     )
-
 ;;-- end specs

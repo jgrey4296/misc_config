@@ -181,7 +181,7 @@
       :desc "Minibuffer history"           "0"    #'counsel-minibuffer-history
 
       :desc "Default browser"              "b"    #'browse-url-of-file
-      :desc "Calc"                         "C"    #'calc
+      :desc "Calc"                         "C"    #'calc-dispatch
       :desc "Dired"                        "d"    #'dired-jump
       ;; :desc "Compose Email"                "e" #'mu4e~compose-mail
 

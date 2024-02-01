@@ -38,4 +38,4 @@
 
 ;;-- end evil overrides/intercept
 
-(setq esc-map (make-sparse-keymap))
+(setq esc-map (make-keymap))

@@ -46,7 +46,7 @@
  :tools pdfs
  :tools mail term eval
  :tools processes
- :tools calendar dired
+ :tools calendar dired calc
 
  :ui doom-ui
  :ui ophints

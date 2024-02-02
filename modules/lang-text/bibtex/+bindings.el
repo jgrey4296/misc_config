@@ -23,7 +23,9 @@
 (map! :map bibtex-mode-map ;; localleader
       :after bibtex
       :localleader
+      :desc "Open Url"            "RET"   #'bibtex-url
       :desc "Reformat Buffer"     "TAB"   #'+jg-bibtex-reformat-buffer
+      :desc "Remove Field"        "DEL"   #'+jg-bibtex-remove-field
       :desc "Author <-> Editor"   "0"     #'+jg-bibtex-swap-editor-author
       :desc "Journal <-> Booktitle" "9"   #'+jg-bibtex-swap-booktitle-journal
 
@@ -60,10 +62,14 @@
       :desc "Change Entry Type" "t"      #'+jg-bibtex-edit-entry-type
       :desc "Update Entry"      "U"      #'bibtex-entry-update
       :desc "Update Field"      "f"      #'+jg-bibtex-edit-field
-      :desc "Sort Buffer"       "s"      #'bibtex-sort-buffer
-      :desc "Sort By Year"      "y"      #'+jg-bibtex-sort-buffer-by-year
       :desc "Validate"          "V"      #'bibtex-validate
       :desc "Journal<->BookTitle" "TAB"  #'+jg-bibtex-quickswap
+
+      (:prefix ("s" . "Sort")
+       :desc "Sort Buffer"       "s"      #'bibtex-sort-buffer
+       :desc "Sort By Year"      "y"      #'+jg-bibtex-sort-buffer-by-year
+       :desc "Sort By Type"      "t"      #'+jg-bibtex-sort-buffer-by-type
+       )
       )
 (map! :map bibtex-mode-map ;; jump
       :after bibtex

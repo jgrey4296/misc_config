@@ -53,7 +53,7 @@
       bm
       bookmark
       (buff-menu "buff-menu")
-      calc
+      ;; calc
       calendar
       cider
       cmake-mode
@@ -230,7 +230,7 @@
     minibuffer
     neotree
     buff-menu
-    calc
+    ;; calc
     comint
     company
     custom

@@ -16,6 +16,8 @@
       "<f9>" #'ignore
       "<f10>" #'ignore
 
+      "M-c" #'ignore
+      [menu-bar] nil
       )
 
 (map! :map universal-argument-map
@@ -36,4 +38,4 @@
 
 ;;-- end evil overrides/intercept
 
-(setq esc-map (make-sparse-keymap))
+(setq esc-map (make-keymap))

@@ -175,6 +175,12 @@ https://github.com/vinta/awesome-python                                         
 https://github.com/rbanffy/pip-chill
 
 ** datastructures
+https://github.com/zhuyifei1999/guppy3/
+https://zhuyifei1999.github.io/guppy3/
+https://github.com/ariebovenberg/slotscheck
+https://slotscheck.readthedocs.io/en/latest/
+https://github.com/pympler/pympler
+https://arrow.apache.org/docs/python/getstarted.html
 https://urllib3.readthedocs.io/en/stable/index.html
 https://github.com/jaraco/path
 https://www.attrs.org/en/stable/

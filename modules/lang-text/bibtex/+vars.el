@@ -3,6 +3,7 @@
 ;;-- general bibtex settings
 (setq-default bibtex-user-optional-fields          nil
               bibtex-completion-bibliography       nil
+              bibtex-sort-entry-class              '(("String") ("Book" "Proceedings" "book" "proceedings") ("article" "inbook") ("online") (catch-all))
               bibtex-field-indentation             1
               bibtex-text-indentation              15
               bibtex-align-at-equal-sign           t
@@ -28,7 +29,6 @@
                      ("Scholar Archive"   "https://scholar.archive.org/search?q=%s")
                      ("DBLP"              "https://dblp1.uni-trier.de/search?q=%s")
                      ("Doi"               "https://doi.org/%s")
-                     ("Wikipedia"         "https://wikipedia.org/search-redirect.php?language=en&go=Go&search=%s")
                      ("Archive.org"       "https://archive.org/search.php?query=%s")
                      ("Project Gutenberg" "http://www.gutenberg.org/ebooks/search/?query=%s")
                      ("Amazon UK"         "https://www.amazon.co.uk/s?k=%s")

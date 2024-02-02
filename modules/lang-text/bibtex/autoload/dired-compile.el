@@ -63,17 +63,18 @@
                     (bib-base (file-name-sans-extension bibfile))
                     (target bib-base)
                     (texfile (concat target ".tex"))
+                    (args (append jg-latex-compile-args (list target)))
                     )
                (condition-case err
                    (progn
-                     (call-process "pdflatex" nil nil nil target)
+                     (apply 'call-process "pdflatex" nil nil nil args)
                      (unless (f-exists? (format "%s.pdf" target))
                        (user-error target))
-                     (call-process "bibtex"   nil nil nil target)
+                     (call-process "bibtex"   nil nil nil "--terse" target)
                      (unless (f-exists? (format "%s.bbl" target))
                        (user-error target))
-                     (call-process "pdflatex" nil nil nil target)
-                     (call-process "pdflatex" nil nil nil target)
+                     (apply 'call-process "pdflatex" nil nil nil args)
+                     (apply 'call-process "pdflatex" nil nil nil args)
                      (unless (f-exists? (format "%s.pdf" target))
                        (user-error target))
 
@@ -86,10 +87,10 @@
 
     (with-temp-buffer-window "*Bibtex Failures*" #'display-buffer nil
       (princ "* Succeeded:\n")
-      (princ (string-join success "\n"))
+      (princ (string-join (or success (list "none")) "\n"))
       (princ "\n\n")
       (princ "* Failed:\n")
-      (princ (string-join errors "\n"))
+      (princ (string-join (or errors (list "none")) "\n"))
       )
     )
   )

@@ -27,7 +27,7 @@
   (add-hook 'text-mode-hook #'+spell-remove-run-together-switch-for-aspell-h)
 
   (setq ispell-aspell-dict-dir     (ispell-get-aspell-config-value "dict-dir")
-        ispell-aspell-data-dir     (ispell-get-aspell-config-value "data-dir")
+        ispell-aspell-data-dir     (ispell-get-aspell-config-value  "data-dir")
         )
   )
 

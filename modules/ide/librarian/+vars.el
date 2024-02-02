@@ -13,7 +13,7 @@
 
 
 ;;-- specs
-(spec-handling-add! lookup-url
+(spec-handling-add! lookup-url :form 'override
                     '(defaults
                       ("DuckDuckGo"         librarian-backend--online-duckduckgo "https://duckduckgo.com/?q=%s")
                       ("Github"                                                  "https://github.com/search?ref=simplesearch&q=%s")
@@ -24,23 +24,21 @@
                       ("OverAPI"                                                 "https://overapi.com/%s")
                       ("Wolfram alpha"                                           "https://wolframalpha.com/input/?i=%s")
                       ("Doom Emacs issues"                                       "https://github.com/hlissner/doom-emacs/issues?q=is%%3Aissue+%s")
-                      ("Google images"                                           "https://www.google.com/images?q=%s")
                       ("Palettes"                                                "https://www.palettelist.com/")
                       ("Raw"                                                     "%s")
                       ("brew cask"                                               "https://formulae.brew.sh/cask/%s")
                       ("brew formula"                                            "https://formulae.brew.sh/formula/%s")
-                      ("Ngrams"                                                  "https://books.google.com/ngrams/graph?content=%s&year_start=1800&year_end=2019&corpus=en-2019&smoothing=3")
                       ("Maps"                                                    "https://www.davidrumsey.com/luna/servlet/view/search?annotSearch=annotSearch&q=%s")
-
                       ("Localhost"                                               "127.0.0.1:8000")
                       ("Router"                                                  "192.168.1.1")
                      )
                     )
-(spec-handling-add! lookup-url
+(spec-handling-add! lookup-url :form 'override
                     '(plus
                      ("Google"            libraria-backend--online-google "https://google.com/search?q=%s")
                      ("Google images"     "https://www.google.com/images?q=%s")
                      ("Google maps"       "https://maps.google.com/maps?q=%s")
+                     ("Google Ngrams"     "https://books.google.com/ngrams/graph?content=%s&year_start=1800&year_end=2019&corpus=en-2019&smoothing=3")
                      ("Project Gutenberg" "http://www.gutenberg.org/ebooks/search/?query=%s")
                      ("Wikipedia"         "https://wikipedia.org/search-redirect.php?language=en&go=Go&search=%s")
                      ("Wiki Quote"        "https://en.m.wikiquote.org/w/index.php?search=%s")

@@ -221,11 +221,6 @@ governed by the variable `bibtex-completion-display-formats'."
 (defun +jg-bibtex-helm-bibtex (&optional arg local-bib)
   " Custom implementation of helm-bibtex"
   (interactive "P")
-  ;; (when (directory-files default-directory 't "\.bib$")
-  ;;   (setq-local bibtex-completion-bibliography (directory-files default-directory 't "\.bib$")
-  ;;               jg-bibtex-helm-candidates nil
-  ;;               )
-  ;;   )
   (when arg
     (message "Clearing Bibtex File Cache")
     (+jg-bibtex-build-list)
@@ -262,8 +257,7 @@ using org-bibtex-fields for completion options "
              (curr-value (bibtex-autokey-get-field chosen))
              (potential-completions (f-join jg-bibtex-loc-completions chosen))
              (source (when (f-exists? potential-completions)
-                       (helm-build-in-file-source "Edit Field Helm"
-                           potential-completions
+                       (helm-build-in-file-source "Edit Field Helm" potential-completions
                          :action (helm-make-actions "Accumulate" #'+jg-bibtex-edit-finish)
                          )))
              (store-action (-partial #'+jg-bibtex-store-new-completion-action potential-completions))
@@ -303,13 +297,25 @@ using org-bibtex-fields for completion options "
              (setq new-values (read-string (format "(%s) New Value: " chosen)))
              )
             )
-      (when new-values
-        (bibtex-beginning-of-entry)
-        (bibtex-set-field chosen
-                          (string-join (mapcar 'string-trim (ensure-list new-values)) " and "))
-        )
+      (bibtex-beginning-of-entry)
+      (bibtex-set-field chosen (string-join (mapcar 'string-trim (ensure-list new-values)) " and "))
       (when (and (f-exists? potential-completions) new-completions)
         (funcall store-action new-completions))
+      )
+    )
+  )
+
+
+;;;###autoload
+(defun +jg-bibtex-remove-field ()
+  (interactive)
+  (save-excursion
+    (bibtex-beginning-of-entry)
+    (let* ((fields (save-excursion (sort (mapcar 'car (bibtex-parse-entry)) #'string-lessp)))
+           (chosen (completing-read "Field: " fields))
+          )
+      (bibtex-beginning-of-entry)
+      (bibtex-set-field chosen "")
       )
     )
   )

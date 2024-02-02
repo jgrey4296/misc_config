@@ -1,4 +1,4 @@
-;;; config.el -*- lexical-binding: t; no-byte-compile: t; -*-
+;;; +vars.el -*- lexical-binding: t; no-byte-compile: t; -*-
 ;;-- Header
 ;; File Commentary:
 ;;
@@ -6,9 +6,6 @@
 ;; See footer for licenses/metadata/notes as applicable
 ;;-- end Header
 
-(defer-load! jg-bindings-core "+bindings")
-
-(use-package! calc)
 
 
 ;;-- Footer
@@ -16,8 +13,8 @@
 ;;
 ;; Author:     john <https://github.com/jgrey4296>
 ;; Maintainer: john <john@john-UM700>
-;; Created:    February 01, 2024
-;; Modified:   February 01, 2024
+;; Created:    February 02, 2024
+;; Modified:   February 02, 2024
 ;; Version: 0.0.1
 ;; Keywords:
 ;; Homepage: https://github.com/jgrey4296
@@ -27,4 +24,4 @@
 ;; This file is not part of GNU Emacs.
 ;;
 ;;-- end Footer
-;;; config.el ends here
+;;; +vars.el ends here

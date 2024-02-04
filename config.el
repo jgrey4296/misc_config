@@ -19,7 +19,7 @@
       doom-fallback-buffer-name       "base_agenda.org"
       org-directory                   (expand-file-name "~/github/jgrey4296.github.io/orgfiles/")
       initial-buffer-choice           (expand-file-name "base_agenda.org" org-directory)
-      org-agenda-files                (list initial-buffer-choice)
+      org-agenda-files                (list initial-buffer-choice "/media/john/data/github/jgrey4296.github.io/orgfiles/todo.org" )
       org-archive-location            (string-join `(,(expand-file-name "org/archive.org" doom-user-dir) "* Main Archive") "::")
       pyvenv-default-virtual-env-name (expand-file-name "~/.cache/mamba/envs/")
       server-auth-dir                 (expand-file-name "~/.config/secrets/emacs")

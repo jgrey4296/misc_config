@@ -5,6 +5,7 @@
 (package! ffap)
 (package! find-func)
 (package! racket-mode)
+(package! ert :built-in t)
 
 (package! elisp-mode :built-in t)
 

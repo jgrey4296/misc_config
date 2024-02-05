@@ -7,7 +7,8 @@
 ;;-- specs
 (spec-handling-add! popup
                     '(lisp
-                     ("^\\*Buttercup\\*$" :size 0.45 :select nil :ttl 0)
+                     ("^\\*Buttercup\\*'" :size 0.45 :select nil :ttl 0)
+                     ("^*ert*" :width 0.4 :side right :select nil :ttl 0 )
                      )
                     )
 (spec-handling-add! fold

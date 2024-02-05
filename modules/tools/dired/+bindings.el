@@ -47,7 +47,7 @@
       :desc "mark files containing regexp" :n "g" #'dired-mark-files-containing-regexp
       :desc "mark files regexp"            :n "m" #'dired-mark-files-regexp
       :desc "mark symlinks"                :n "s" #'dired-mark-symlinks
-      :desc "mark hash duplicates"         :n "h" #'+jg-dired-hash-files
+      :desc "mark hash duplicates"         :n "h" #'+jg-dired-hash-duplicates
 )
 (map! :map jg-dired-mode-map ;; movement
       :n "-"                          #'dired-up-directory
@@ -104,6 +104,7 @@
       :desc "Diff"             :n "d" #'dired-diff
       ;;                       :n "d" #'+jg-dired-diff
       :desc "Diff Directories" :n "D" #'ediff-directories
+      :desc "Hash"             :n "h" #'+jg-dired-hash-files
       :desc "Marked Size"      :n "s" #'+jg-dired-dir-size
       :desc "Hide Details"     :n "i" 'dired-hide-details-mode
       :desc "Git Info"         :n "g" #'dired-git-info-mode

@@ -147,6 +147,7 @@
                      ("^\\*image-dired" :slot 20 :size 0.8 :select t :quit nil :ttl 0)
                      ("^\\*ranger" :ignore t)
                      ("^*CookieCutter*" :side bottom :select nil :quit t :ttl 0)
+                     ("^*file-hashes*" :side bottom :select nil :quit t :ttl 3)
                      )
                     )
 ;;-- end specs

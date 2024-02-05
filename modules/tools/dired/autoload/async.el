@@ -1,5 +1,7 @@
 ;;; delete.el -*- lexical-binding: t; -*-
 
+
+
 (defun +jg-dired-async-delete-sentinel (buffer out-buffer process event)
   (when (string-equal "finished\n" event)
     (with-current-buffer buffer
@@ -107,4 +109,24 @@
 (defun +jg-list-trash ()
   (interactive)
   (shell-command "trash-list")
+  )
+
+;;;###autoload
+(defun +jg-dired-hash-files ()
+  (interactive)
+  (let* ((marked (ensure-list (dired-get-marked-files)))
+         (target-buffer (get-buffer-create "*file-hashes*"))
+         )
+    (with-current-buffer target-buffer
+      (insert "\n--- File Hashes:\n")
+      )
+    (make-process :name "file-hash"
+                  :buffer target-buffer
+                  :command (append '("md5sum") marked)
+                  :sentinel (-partial '(lambda (targ p e) (when (string-equal "finished\n" e)
+                                                             (display-buffer targ)))
+                                       target-buffer)
+                  :noquery t
+                  )
+    )
   )

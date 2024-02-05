@@ -95,7 +95,7 @@
         (defvaralias losing-value woman-topic-history)
         ;; (flycheck syntax-checker)
         ;; ((python python-shell-completion-native-turn-on-maybe))
-        ((org-element-cache))
+        ((org-element org-element-cache))
         ((flycheck syntax-checker))
         (error "Invalid search bound (wrong side of point)")
         )
@@ -103,7 +103,7 @@
       '( ;; Don't Show
         (defvaralias losing-value python-shell-interpreter)
         ;; ((python python-shell-completion-native-turn-on-maybe))
-        (org-element-cache)
+        (org-element org-element-cache)
         ;; (flycheck syntax-checker)
         )
       )

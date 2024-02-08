@@ -247,13 +247,13 @@ governed by the variable `bibtex-completion-display-formats'."
           )))
 
 ;;;###autoload
-(defun +jg-bibtex-edit-field ()
+(defun +jg-bibtex-edit-field (&optional field)
   " Edit a specified field in the current entry,
 using org-bibtex-fields for completion options "
   (interactive)
   (save-excursion
     (bibtex-beginning-of-entry)
-    (letrec ((chosen (completing-read "Field: " (+jg-bibtex-sort-fields)))
+    (letrec ((chosen (or field (completing-read "Field: " (+jg-bibtex-sort-fields))))
              (curr-value (bibtex-autokey-get-field chosen))
              (potential-completions (f-join jg-bibtex-loc-completions chosen))
              (source (when (f-exists? potential-completions)

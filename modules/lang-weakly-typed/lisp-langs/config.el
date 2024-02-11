@@ -185,3 +185,8 @@
 (use-package! f)
 
 (use-package! s)
+
+(use-package! ert
+  :config
+  (setq ert--selector-history '("t" ":new" ":failed" ":expected"))
+  )

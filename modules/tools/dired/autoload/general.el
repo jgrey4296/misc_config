@@ -24,7 +24,8 @@
   )
 
 ;;;###autoload
-(defun +jg-dired-hash-files ()
+(defun +jg-dired-hash-duplicates()
+  " get the hashes of the marked files, and unmark all that aren't duplicates "
   (interactive)
   (let* ((marked (dired-get-marked-files))
          (quoted (mapcar #'shell-quote-argument marked))

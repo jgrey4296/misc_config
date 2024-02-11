@@ -40,6 +40,7 @@
 
 (map! :map jg-org-mode-map
       :localleader
+      "1" #'org-element-cache-reset
       :desc "New SubHeading"         "RET" #'org-insert-subheading
       :desc "New Heading"            "DEL" #'org-insert-heading
       :desc "Refile"                 "R" #'+jg-org-refile-subtree

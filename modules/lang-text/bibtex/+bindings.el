@@ -35,6 +35,7 @@
       :desc "Insert from DOI"     "d"     #'+jg-bibtex-insert-entry-from-doi
       :desc "Insert from PMID"    "p"     (cmd! (pubmed-insert-bibtex-from-pmid (read-string "PMID: ")))
       :desc "New Entry"           "n"     #'bibtex-entry
+      :desc "New Entry Form"      "N"     #'+jg-bibtex-entry-form
       :desc "Get Meta"            "m"     #'+jg-bibtex-meta-retrieval
       :desc "Lookup ORCID"        "o"     #'+jg-bibtex-lookup-orcid
       :desc "Count Entries"       "C"     #'bibtex-count-entries

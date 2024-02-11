@@ -87,6 +87,20 @@ capture, the end position, and the output buffer.")
 (spec-handling-add! auto-modes
                     '(markdown
                       ("/README\\(?:\\.md\\)?\\'" . gfm-mode)
-                      ("\\.\\(?:md\\|markdown\\|mkd\\|mdown\\|mkdn\\|mdwn\\)\\'" . markdown-mode)
+                      ("\\.\\(?:md\\|markdown\\|mkd\\|mdown\\|mkdn\\|mdwn\\)\\'" . gfm-mode)
+                      )
+                    )
+
+(spec-handling-add! fold
+                    `(markdown
+                      :modes (markdown-mode)
+                      :priority 25
+                      :triggers (:close     ,#'outline-hide-entry
+                                 :close-all ,#'evil-close-folds
+                                 :open      ,#'outline-toggle-children
+                                 :open-all  ,#'outline-show-all
+                                 :open-rec  ,#'outline-show-subtree
+                                 :toggle    ,#'outline-toggle-children
+                                 )
                       )
                     )

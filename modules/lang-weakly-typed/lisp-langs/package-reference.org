@@ -3,7 +3,9 @@
 * Overview
 
 * Main
+https://github.com/skeeto/elfeed
 https://github.com/emacs-tw/awesome-emacs
+https://github.com/pashky/restclient.el
 
 https://github.com/hayamiz/twittering-mode
 
@@ -17,4 +19,5 @@ https://github.com/abo-abo/hydra
 
 http://theory.stanford.edu/~amitp/yapps/yapps-doc/node2.html
 
+https://jblevins.org/projects/deft/
 * Links

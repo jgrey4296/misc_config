@@ -45,9 +45,17 @@
 
 (defvar jg-bibtex-completion-display-formats
       '(
-        (t . ("${author:20} || ${title:*} || ${year:4}" 40))
+        (judicial . "${=has-pdf=:1} ${=type=:10} || ${year:4} || ${author:20} || ${short_parties:80} || ${tags:*}")
+        (review   . "${=has-pdf=:1} REVIEW     || ${year:4} || ${author:20} || REVIEW ${title:73} || ${tags:*}")
+        (online   . "${=has-pdf=:1} ${=type=:10} || ${year:4} || ${author:20} || ${title:80} || ${tags:*}")
+        (t        . "${=has-pdf=:1} ${=type=:10} || ${year:4} || ${author:20} || ${title:80} || ${tags:*}")
+        ;; (t     . ("${author:20} || ${title:*} || ${year:4}" 40))
+        ;; (t     . "${author:35} ${title:*} ${year:4} ${=has-pdf=:1}${=has-note=:1} ${=type=:7}")
         )
+      "Display formats for the ivy bibtex. see bibtex-completion-display-formats"
       )
+
+(setq bibtex-completion-display-formats jg-bibtex-completion-display-formats)
 
 (defvar jg-bibtex-pdf-loc-regexp               (format "file[[:digit:]]*\s*=\s*{\\(.+\\)/\\(.+%s\\)?"
                                                        (pcase system-type

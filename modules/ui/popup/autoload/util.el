@@ -2,6 +2,7 @@
 
 ;;-- utils
 (defvar +popup--internal nil)
+(defvar +popup-create-window-hook nil)
 
 (defun +popup--normalize-alist (alist)
   "Merge `+popup-default-alist' and `+popup-default-parameters' with ALIST."

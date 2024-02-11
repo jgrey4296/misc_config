@@ -12,7 +12,7 @@
     (add-to-list 'org-src-lang-modes '("md" . markdown)))
 
   :config
-  (add-hook! 'gfm-mode  :depth 100
+  (add-hook! 'gfm-mode-hook  :depth 100
              #'outline-minor-mode
              #'general-insert-minor-mode
              )
@@ -20,9 +20,7 @@
   (sp-local-pair '(markdown-mode gfm-mode) "`" "`"
                  :unless '(:add sp-point-before-word-p sp-point-before-same-p))
 
-  ;; Highly rust blocks correctly
-  (when (modulep! :lang rust)
-    (add-to-list 'markdown-code-lang-modes '("rust" . rustic-mode)))
+  (when (modulep! :lang rust) (add-to-list 'markdown-code-lang-modes '("rust" . rustic-mode)))
 
   ;; Don't trigger autofill in code blocks (see `auto-fill-mode')
   (setq-hook! 'markdown-mode-hook

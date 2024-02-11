@@ -28,7 +28,6 @@
   (sort (mapcar jg-bibtex-field-to-string-fn bibtex-field-alist) #'string-lessp)
   )
 
-
 ;;-- actions
 
 (defun +jg-bibtex-show-entry (keys)
@@ -212,11 +211,6 @@ governed by the variable `bibtex-completion-display-formats'."
 
 ;;-- end transformers
 
-(defun +jg-bibtex-title-case (x)
-  (string-join (mapcar #'capitalize (split-string x " +" t " +")) " ")
-  )
-
-
 ;;;###autoload
 (defun +jg-bibtex-helm-bibtex (&optional arg local-bib)
   " Custom implementation of helm-bibtex"
@@ -247,13 +241,13 @@ governed by the variable `bibtex-completion-display-formats'."
           )))
 
 ;;;###autoload
-(defun +jg-bibtex-edit-field ()
+(defun +jg-bibtex-edit-field (&optional field initial)
   " Edit a specified field in the current entry,
 using org-bibtex-fields for completion options "
   (interactive)
   (save-excursion
     (bibtex-beginning-of-entry)
-    (letrec ((chosen (completing-read "Field: " (+jg-bibtex-sort-fields)))
+    (letrec ((chosen (or field (completing-read "Field: " (+jg-bibtex-sort-fields))))
              (curr-value (bibtex-autokey-get-field chosen))
              (potential-completions (f-join jg-bibtex-loc-completions chosen))
              (source (when (f-exists? potential-completions)
@@ -267,8 +261,8 @@ using org-bibtex-fields for completion options "
              (new-values nil)
              (new-completions nil)
              )
-      (cond ((-contains? '("author" "editor") chosen)
-             (let ((next-val (helm :sources (list source dummy-source)
+      (cond ((s-equals? "author" chosen)
+                 (let ((next-val (helm :sources (list source dummy-source)
                                    :buffer "*helm bibtex completions*"
                                    :full-frame nil
                                    :prompt (format "%s: " curr-value)
@@ -285,26 +279,31 @@ using org-bibtex-fields for completion options "
                  )
                (setq new-values (mapcar #'+jg-bibtex-title-case new-values))
                )
+                 )
+            ((-contains? '("title" "subtitle") chosen)
+             (setq new-values (+jg-bibtex-title-case (read-string (format "(%s) New Value: " chosen) initial)))
              )
             (source
              (setq new-values (helm :sources (list source dummy-source)
                                     :buffer "*helm bibtex completions*"
                                     :full-frame nil
-                                    :input curr-value
+                                    :input (or initial curr-value)
                                     ))
              )
             (t
-             (setq new-values (read-string (format "(%s) New Value: " chosen)))
+             (setq new-values (read-string (format "(%s) New Value: " chosen) initial))
              )
             )
-      (bibtex-beginning-of-entry)
-      (bibtex-set-field chosen (string-join (mapcar 'string-trim (ensure-list new-values)) " and "))
       (when (and (f-exists? potential-completions) new-completions)
         (funcall store-action new-completions))
+      (bibtex-beginning-of-entry)
+      (let ((result (string-join (mapcar 'string-trim (ensure-list new-values)) " and ")))
+        (bibtex-set-field chosen result)
+        result
+        )
       )
     )
   )
-
 
 ;;;###autoload
 (defun +jg-bibtex-remove-field ()

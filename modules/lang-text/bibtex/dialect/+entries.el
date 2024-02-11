@@ -13,23 +13,23 @@
           '("Article" "Article in Journal"
             ( ("author") ("title") ("tags") ("doi") )
             ( ("year") ("journal") ("volume") ("number") )
-            ( ("pages") ) )
+            ( ("pages") ("subtitle") ) )
           '("Book" "Single-Volume Book"
             (("author" nil nil 1) ("editor" nil nil -1) ("title")  ("year" ) ("publisher") ("isbn") )
             ()
-            ( ("series")  ("tags")  ) )
+            ( ("series")  ("tags") ("subtitle") ) )
           '("Collection" "Single-Volume Collection"
             ( ("title")  ("tags") ("author" nil nil 1) ("editor" nil nil -1)  ("year")  )
             ()
-            ( ("tags") ) )
+            ( ("tags") ("subtitle") ) )
           '("Proceedings" "Conference Proceedings"
             ( ("title") ("editor") ("year" ) ("country") ("url" nil nil 1) ("isbn" nil nil -1) )
             ()
-            ( ("tags") ("doi") ) )
+            ( ("tags") ("doi") ("subtitle") ) )
           '("Booklet" "Booklet (Bound, but no Publisher)"
             ( ("author" nil nil 1) ("editor" nil nil -1) ("title") ("tags")  ("year") )
             ()
-            () )
+            ( ("subtitle")) )
           )
 ;;-- end standard
 
@@ -48,7 +48,7 @@
             ()
             ( ("arrangement") ("section") ) )
           '("Review" ""
-            ( ("author") ("tags") ("year") ("bookauthor") ("bookpublisher") ("title") )
+            ( ("author") ("tags") ("year") ("book_author") ("book_publisher") ("title") )
             ()
             ( ("journal") ("url") ("volume") ("number") ("pages") ("review_crossref") ("isbn") ) )
           )
@@ -94,15 +94,15 @@
           '("Thesis" "PhD or Master's Thesis"
             ( ("author") ("title")  ("institution" ) ("year") ("type") )
             ()
-            ( ("doi")) )
-          '("phdthesis" "Phd Thesis"
-            ( ("author") ("title")  ("institution" ) ("year") )
-            ()
-            ( ("doi") ) )
-          '("mastersthesis" "Master's Thesis"
-            ( ("author") ("title")  ("institution" ) ("year") )
-            ()
-            ( ("doi") ) )
+            ( ("doi") ("subtitle")) )
+          ;; '("phdthesis" "Phd Thesis"
+          ;;   ( ("author") ("title")  ("institution" ) ("year") )
+          ;;   ()
+          ;;   ( ("doi") ("subtitle")) )
+          ;; '("mastersthesis" "Master's Thesis"
+          ;;   ( ("author") ("title")  ("institution" ) ("year") )
+          ;;   ()
+          ;;   ( ("doi")  ) )
           )
 ;;-- end thesis
 
@@ -111,15 +111,15 @@
           '("InBook" "Chapter or Pages in a Book"
             ( ("title") ("tags") ("doi") )
             ( ("author")  ("year")  ("booktitle") ("isbn") ("publisher") )
-            ())
+            ( ("subtitle") ))
           '("InCollection" "Article in a Collection"
             ( ("author") ("title")  ("tags") ("doi") )
             ( ("booktitle")  ("year")  ("isbn") ("publisher") )
-            () )
+            ( ("subtitle") ) )
           '("InProceedings" "Article in Conference Proceedings"
             ( ("author") ("title") ("year" ) ("tags") ("doi") )
             ( ("booktitle") )
-            () )
+            ( ("subtitle")) )
           )
 ;;-- end part of something
 
@@ -134,15 +134,15 @@
             ()
             () )
           '("Report" "Technical or Research Report"
-            ( ("author") ("title")  ("institution" ) ("year" ) ("tags") )
+            ( ("author") ("title")  ("institution" ) ("year" ) ("tags") ("url") )
             ()
-            () )
+            ( ("country")) )
           '("Standard" "A Technical Standard. eg: by w3, IEEE..."
             ( ("title") ("tags") ("identifier") ("institution") ("year") )
             ()
             ( ("section") ) )
           '("TechReport" ""
-            ( ("author") ("title")  ("year" ) ("tags") ("url") ("identifier") ("institution") )
+            ( ("author") ("title")  ("year" ) ("tags") ("url") ("identifier") ("institution") ("url") )
             ()
             ( ("doi") ) )
           )
@@ -159,7 +159,7 @@
             ( ("identifier") ("country") ("plaintiff") ("defendant") )
             ( ("short_parties") ("dissent") ("concur") ) )
           '("Law" "A Proposed or Enacted Law"
-            ( ("year") ("tags") ("institution") ("status") ("identifier") )
+            ( ("year") ("tags") ("institution") ("status") ("identifier") ("url") ("country"))
             ()
             ( ("author") ("section") ) )
           )

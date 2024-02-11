@@ -39,5 +39,8 @@
     (insert "author = {},\n")
     (insert "}")
     (bibtex-beginning-of-entry)
+    (+jg-bibtex-edit-field "title")
+    (+jg-bibtex-edit-field "author")
+    (+jg-bibtex-edit-field "pages")
     )
   )

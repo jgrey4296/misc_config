@@ -28,6 +28,7 @@
           '(:series        . "The name of a series or set of books.  When citing an entire book, the title field gives its title and an optional series field gives the name of a series or multi-volume set in which the book is published.")
           '(:tags)
           '(:title         . "The work’s title, typed as explained in the LaTeX book.")
+          '(:subtitle      . "The work’s subtitle, the part following the first colon.")
           '(:translator)
           '(:collaboration)
           '(:type          . "The type of a technical report for example, 'Research Note'.")
@@ -76,8 +77,8 @@
 
 ;;-- reviews
 (pushnew! bibtex-jg-field-alist
-;;           '(:bookpublisher)
+;;           '(:book_publisher)
           '(:review_crossref)
-;;           '(:bookauthor)
+;;           '(:book_author)
           )
 ;;-- end reviews

@@ -130,10 +130,17 @@ with either a numeric or alphabetical escalation "
   :type exclusive
   ;; :motion evil-forward-word-end
   (while (< (point) end)
-    (if (looking-at " \\<and\\>")
-        (forward-word 1)
-      (capitalize-word 1)
-      )
+    (cond ((looking-at " \\<and\\>")
+           (forward-word 1))
+          ((looking-at " mcc")
+           (forward-char)
+           (evil-invert-char (point) (1+ (point)))
+           (forward-char 2)
+           (evil-invert-char (point) (1+ (point)))
+           (forward-word)
+           )
+          (t (capitalize-word 1))
+          )
     )
   )
 

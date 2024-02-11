@@ -6,6 +6,9 @@
 ;; See footer for licenses/metadata/notes as applicable
 ;;-- end Header
 
+(defvar jg-bibtex-form-last-crossref "")
+(defvar jg-bibtex-form-last-year     "")
+
 ;;;###autoload
 (defun +jg-bibtex-entry-form ()
   (interactive)
@@ -30,6 +33,12 @@
          (+jg-bibtex-edit-field "author")
          (+jg-bibtex-edit-field "year")
          (+jg-bibtex-edit-field "url")
+         )
+        ("InProceedings"
+         (+jg-bibtex-edit-field "title")
+         (+jg-bibtex-edit-field "author")
+         (setq jg-bibtex-form-last-crossref (+jg-bibtex-edit-field "crossref" jg-bibtex-form-last-crossref))
+         (setq jg-bibtex-form-last-year (+jg-bibtex-edit-field "year" jg-bibtex-form-last-year))
          )
         )
       )

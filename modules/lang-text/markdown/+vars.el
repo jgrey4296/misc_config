@@ -87,7 +87,7 @@ capture, the end position, and the output buffer.")
 (spec-handling-add! auto-modes
                     '(markdown
                       ("/README\\(?:\\.md\\)?\\'" . gfm-mode)
-                      ("\\.\\(?:md\\|markdown\\|mkd\\|mdown\\|mkdn\\|mdwn\\)\\'" . markdown-mode)
+                      ("\\.\\(?:md\\|markdown\\|mkd\\|mdown\\|mkdn\\|mdwn\\)\\'" . gfm-mode)
                       )
                     )
 

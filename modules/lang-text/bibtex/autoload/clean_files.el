@@ -2,13 +2,16 @@
 (require 'bibtex)
 
 ;;;###autoload
-(defun +jg-bibtex--get-file-entries (pair)
-  (if (string-match "file" (car pair))
-      pair
-    nil)
+(defun +jg-bibtex-check-file-hook ()
+  " check any files mentioned actually exist "
+  (bibtex-beginning-of-entry)
+  (let* ((entry (bibtex-parse-entry))
+         (file-likes (-filter 'identity (mapcar #'+jg-bibtex--get-file-entries entry)))
+        )
+    (mapc #'+jg-bibtex--check-file-exists file-likes)
+    )
   )
 
-;;;###autoload
 (defun +jg-bibtex--check-file-exists (pair)
   (let* ((orig (cdr pair))
          (sub (substring
@@ -22,12 +25,8 @@
         (signal 'error `("File Not Found: " ,full-target))))
   )
 
-;;;###autoload
-(defun +jg-bibtex-check-file-hook ()
-  (bibtex-beginning-of-entry)
-  (let* ((entry (bibtex-parse-entry))
-         (file-likes (-filter 'identity (mapcar #'+jg-bibtex--get-file-entries entry)))
-        )
-    (mapc #'+jg-bibtex--check-file-exists file-likes)
-    )
+(defun +jg-bibtex--get-file-entries (pair)
+  (if (string-match "file" (car pair))
+      pair
+    nil)
   )

@@ -81,15 +81,15 @@
                                 ;; Initial formatting
                                 +jg-bibtex-remove-empty-fields
                                 +jg-bibtex-dont-break-lines-hook
-                                +jg-bibtex-smart-replace-nonascii-hook
-                                +jg-bibtex-orcb-&
+                                ;; +jg-bibtex-latex-normalise - shifted to doot
+                                +jg-bibtex-normalise-symbols
 
                                 ;; Specific fields
                                 ;; org-ref-title-case-article
                                 +jg-bibtex-clean-doi-hook
                                 +jg-bibtex-check-file-hook
                                 +jg-bibtex--expand-shortened-url
-                                +jg-bibtex-isbn-clean
+                                ;; +jg-bibtex-isbn-clean - shifted to doot task
                                 ;; generate key
                                 +jg-bibtex-orcb-key-hook
                                 +jg-bibtex-insert-volume-to-key

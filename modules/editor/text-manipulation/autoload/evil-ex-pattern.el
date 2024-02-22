@@ -55,7 +55,7 @@
 
 ;;;###autoload
 (defun +jg-text-manipulation-get-pattern-info (string &optional implicit-r prefix)
-  "return the pattern pattern info of command line string.
+  "return the pattern's  pattern info of command line string.
 returns an ex-pattern (see `evil-ex-make-pattern')
 if implicit-r is non-nil, then
 the flag 'r' is assumed, i.e. in the case of an empty pattern the

@@ -14,7 +14,6 @@
     )
   )
 
-
 ;;;###autoload (autoload '+jg-text-manipulation-ex-align-highlight "editor/text-manipulation/autoload/evil-ex-align" nil t)
 (evil-define-command +jg-text-manipulation-ex-align-highlight (beg end &optional pattern case wholeline)
   "Ex interface to `align-regexp'.
@@ -28,7 +27,6 @@ g   Repeat alignment on all matches in each line"
     (align-regexp beg end (car pattern) 1 1 nil)
     )
   )
-
 
 ;;;###autoload (autoload '+jg-text-manipulation-ex-expand-align-highlight "editor/text-manipulation/autoload/evil-ex-align" nil t)
 (evil-define-command +jg-text-manipulation-ex-expand-align-highlight (&optional pattern case wholeline)
@@ -67,4 +65,12 @@ g   Repeat alignment on all matches in each line"
         )
       )
     )
+  )
+
+(defvar jg-text-manipulation-ex-current-pattern "/=/")
+
+;;;###autoload
+(defun +jg-text-manipulation-ex-partial-align ()
+  (interactive)
+  (apply #'+jg-text-manipulation-ex-expand-align-highlight (+jg-text-manipulation-get-pattern-info jg-text-manipulation-ex-current-pattern t "\\(\\s-*\\)"))
   )

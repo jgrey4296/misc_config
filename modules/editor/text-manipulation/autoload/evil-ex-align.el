@@ -67,10 +67,13 @@ g   Repeat alignment on all matches in each line"
     )
   )
 
-(defvar jg-text-manipulation-ex-current-pattern "/=/")
-
 ;;;###autoload
-(defun +jg-text-manipulation-ex-partial-align ()
+(defun +jg-text-manipulation-ex-auto-align ()
   (interactive)
-  (apply #'+jg-text-manipulation-ex-expand-align-highlight (+jg-text-manipulation-get-pattern-info jg-text-manipulation-ex-current-pattern t "\\(\\s-*\\)"))
+  (save-excursion
+    (apply #'+jg-text-manipulation-ex-expand-align-highlight (+jg-text-manipulation-get-pattern-info "/:/" t "\\(\\s-*\\)"))
+    )
+  (save-excursion
+    (apply #'+jg-text-manipulation-ex-expand-align-highlight (+jg-text-manipulation-get-pattern-info "/=/" t "\\(\\s-*\\)"))
+    )
   )

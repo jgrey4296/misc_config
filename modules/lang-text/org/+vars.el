@@ -107,7 +107,7 @@
                                 :close-all  +org/close-all-folds
                                 :toggle     org-cycle
                                 :open       nil
-                                :open-rec   nil
+                                :open-rec   org-fold-show-subtree
                                 :close      nil
                                 )
                      )

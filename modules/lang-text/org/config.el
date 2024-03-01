@@ -1,4 +1,4 @@
-;;; lang/org/config.el -*- lexical-binding: t; -*-
+;;; lang/org/config.el -*- lexical-binding: t; no-byte-compile: t; -*-
 
 (local-load! "+definitions")
 (local-load! "+vars")
@@ -12,8 +12,8 @@
   org-list org-pcomplete org-src org-footnote org-macro ob org org-agenda
   org-capture
   :preface
-  ;;; Custom org modules
-  (dolist (flag (doom-module-context-get 'flags))
+  ;; Custom org modules
+  (dolist (flag (doom-module-context-get :flags))
     (load! (concat "contrib/" (substring (symbol-name flag) 1)) nil t))
 
   ;; Add our general hooks after the submodules, so that any hooks the

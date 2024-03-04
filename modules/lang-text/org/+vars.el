@@ -5,18 +5,6 @@
       org-cycle-separator-lines 3
       )
 
-;;-- personal
-
-(defvar jg-org-external-file-link-types '("jpg" "jpeg" "png" "mp4" "html"))
-
-(defvar jg-org-clean-marker nil)
-
-(defvar jg-org-preferred-linecount 1500)
-
-(defvar jg-org-link-move-base "/Volumes/Overflow/missing_images/")
-
-(defvar jg-org-twitter-loc "/Volumes/documents/twitter_threads/")
-;;-- end personal
 
 ;;-- pomodoro
 ;; set pomodoro log variable

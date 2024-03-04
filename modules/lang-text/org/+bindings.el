@@ -36,7 +36,7 @@
       :vn "c h" #'org-promote-subtree
       :vn "c K" #'org-move-subtree-up
       :vn "c J" #'org-move-subtree-down
-      :n "TAB" #'org-cycle
+      :n "TAB"  #'org-sort
       )
 
 (map! :map jg-org-mode-map

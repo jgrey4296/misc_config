@@ -85,6 +85,9 @@
   (add-to-list 'org-startup-options '("playgifs"   +org-startup-with-animated-gifs t))
   (add-hook! 'org-mode-local-vars-hook #'+org-init-gifs-h)
 
+  (advice-add #'org-insert-heading :after #'evil-insert)
+  (advice-add #'org-insert-subheading :after #'evil-insert)
+
   )
 
 (use-package! toc-org ; auto-table of contents

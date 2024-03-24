@@ -136,6 +136,8 @@
 
 (map! :map jg-dired-mode-map ;; localleader
       :localleader
+      :desc "Find Marked"  "f" #'dired-do-find-marked-files
+      :desc "Cookiecutter" "c" #'+jg-dired-cookiecutter
       )
 (map! :map dirvish-mode-map
       :n "b" #'dirvish-goto-bookmark

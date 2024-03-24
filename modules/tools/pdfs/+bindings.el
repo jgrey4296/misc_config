@@ -7,6 +7,7 @@
       :desc "Pdf Join"    "j" #'pdf-meta-join
       :desc "Pdf Attach"  "a" #'pdf-meta-attach
       :desc "Pdf Unpack"  "u" #'pdf-meta-detach
+      :desc "PdfToText"   "t" #'+jg-pdf-to-text
       )
 
 (map! :map pdf-meta-mode-map

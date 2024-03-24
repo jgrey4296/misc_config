@@ -21,26 +21,33 @@
     (unless buffer
       (apply 'make-comint-in-buffer my-comint-buffer-name buffer prog my-comint-args)
       (my-comint-mode))))
+
 (defun my-comint--initialize ()
   "Helper function to initialize My-Comint"
   (setq comint-process-echoes t)
   (setq comint-use-prompt-regexp t)
   )
+
 (defun my-comint-input (x)
   (message "Sending: %s" x))
+
 (defun my-comint-input-transform (proc x)
   (comint-simple-send proc (format "%s" x)))
+
 (defun my-comint-preoutput-transform (x)
   (if (string-match my-comint-prompt-regexp x)
       x
     (format "RECEIVED: %s" x)))
+
 (defun my-comint-preoutput-store (x)
   (if (not (string-match my-comint-prompt-regexp x))
       (setq my-comint-last-received x))
  x
   )
+
 (defun my-comint-output-response (x)
  (message "Got: %s" x))
+
 (define-derived-mode my-comint-mode comint-mode "My-Comint"
   "Major mode for `run-my-comint'."
   nil "My-Comint"

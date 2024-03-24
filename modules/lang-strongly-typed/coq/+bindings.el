@@ -7,6 +7,9 @@
 ;; (evil-make-intercept-map jg-coq-proof-mode-map)
 
 (map! :map jg-coq-mode-map
+
+      :desc "General Insert"         :n "|" #'general-insert-call
+
       :n "]"  #'proof-assert-next-command-interactive
       :n "["  #'proof-undo-last-successful-command
       :n "."  #'proof-goto-point

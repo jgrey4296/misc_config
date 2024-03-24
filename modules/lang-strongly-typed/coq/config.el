@@ -13,7 +13,11 @@
                       :inverse-video t
                       :underline nil
                       )
+  (add-hook! 'coq-mode-hook
+             #'general-insert-minor-mode
+             )
   )
+
 
 
 ;; This package provides more than just code completion, so we load it whether

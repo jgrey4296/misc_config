@@ -87,7 +87,7 @@
       )
 
 (map! :map (jg-minibuffer-evil-ex-completion-map jg-minibuffer-evil-ex-search-keymap)
-      :g "RET" #'exit-minibuffer
+      :ng "RET" #'exit-minibuffer
       "C-a" #'evil-beginning-of-line
       "C-b" #'evil-backward-char
       "C-f" #'evil-forward-char

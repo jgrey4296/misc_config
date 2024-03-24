@@ -86,7 +86,7 @@
   (add-hook! 'org-mode-local-vars-hook #'+org-init-gifs-h)
 
   (advice-add #'org-insert-heading :after #'evil-insert)
-  (advice-add #'org-insert-subheading :after #'evil-insert)
+  ;; (advice-add #'org-insert-subheading :after #'evil-insert)
 
   )
 

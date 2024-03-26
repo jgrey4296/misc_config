@@ -26,11 +26,11 @@
              (let* ((pages (pcase (read-string "Pages: ")
                              ((and x (pred (s-contains? "-" x)))
                               (s-split "-" x))
-                             (x (cons x x))
+                             (x (list x x))
                              ))
                     (call (list jg-pdf-to-text-call
                                 "-f" (car pages)
-                                "-l" (cdr pages)
+                                "-l" (cadr pages)
                                 file
                                 (f-swap-ext file "txt")
                                 )

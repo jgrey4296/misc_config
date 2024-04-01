@@ -220,6 +220,11 @@
   (require 'tree-sitter-langs)
   )
 
+(use-package! tree-sitter-langs
+  :defer t
+
+  )
+
 (use-package! lint-result-mode
   :config
   (add-hook 'lint-result-mode-hook '+fold/close-all)

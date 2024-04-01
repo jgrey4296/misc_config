@@ -6,7 +6,6 @@
 (package! find-func)
 (package! racket-mode)
 (package! ert :built-in t)
-
 (package! elisp-mode :built-in t)
 
 ;; Fontification plugins
@@ -17,10 +16,7 @@
 (package! overseer)
 (package! elisp-def)
 (package! elisp-demos)
-(package! flycheck-package)
+(package! elisp-depmap)
 
 ;; Libraries
 (package! buttercup)
-(package! a)
-
-(package! elisp-depmap)

@@ -45,3 +45,12 @@ If prefix ARG, recreate the term buffer."
 
 ;; TODO +term/frame -- dedicate current frame to term buffers
 ;; TODO +term/frame-quite -- revert frame to before +term/frame
+
+;;;###autoload
+(defun +jg-term-switch ()
+  (interactive)
+  (let ((shells (-filter (lambda (x) (s-matches? (rx string-start "*shell" (0+ any) string-end) (buffer-name x))) (buffer-list)))
+        )
+    (switch-to-buffer (ivy-read "Shell: " (mapcar #'buffer-name shells)))
+    )
+  )

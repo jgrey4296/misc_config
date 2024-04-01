@@ -12,23 +12,27 @@
                  :when '(+csharp-sp-point-in-type-p)
                  :post-handlers '(("| " "SPC")))
 
-  (when (modulep! +lsp)
-    (add-hook 'csharp-mode-local-vars-hook #'lsp! 'append))
-
   (defadvice! +csharp-disable-clear-string-fences-a (fn &rest args)
     "This turns off `c-clear-string-fences' for `csharp-mode'. When
 on for `csharp-mode' font lock breaks after an interpolated string
 or terminating simple string."
     :around #'csharp-disable-clear-string-fences
     (unless (eq major-mode 'csharp-mode)
-      (apply fn args))))
+      (apply fn args)))
 
-(use-package! csharp-tree-sitter
-  :after csharp-mode
-  :init
-  (add-hook 'csharp-mode-local-vars-hook #'tree-sitter! 'append)
-  (if (fboundp #'csharp-tree-sitter-mode)
-      (add-to-list 'auto-mode-alist '("\\.cs\\'" . csharp-tree-sitter-mode))))
+  (add-hook! 'csharp-mode-hook
+             #'general-insert-minor-mode
+             )
+  )
+
+;; (use-package! csharp-tree-sitter
+;;   :after csharp-mode
+;;   :init
+;;   (add-hook 'csharp-mode-local-vars-hook #'tree-sitter! 'append)
+;;   (when (fboundp #'csharp-tree-sitter-mode)
+;;     (add-to-list 'auto-mode-alist '("\\.cs\\'" . csharp-tree-sitter-mode))
+;;     )
+;;   )
 
 (use-package! fsharp-mode
   :commands fsharp-mode

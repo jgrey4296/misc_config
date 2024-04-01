@@ -5,12 +5,12 @@
 
 (map! :leader
       :desc "Pop Shell"             "'"   #'+jg-shell-new
-
       )
 
 
 (map! :map shell-mode-map
       "C-d" #'comint-send-eof
+      :n "," #'+jg-term-switch
       :localleader
       "h" #'counsel-shell-history
       )

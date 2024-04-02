@@ -30,8 +30,8 @@
       :desc "Back Heading"    :m "[ j" #'org-backward-heading-same-level
       :desc "Hide Drawers"    :n "z d" (cmd! (org-cycle-hide-drawers 'org-cycle-hide-drawers))
       :desc "DWIM"            :n "RET" #'+org/dwim-at-point
-      :desc "Insert Heading"  :n "M-RET" #'org-insert-heading
-      :desc "Insert Item"     :i "M-RET" #'+org/insert-item-below
+      ;; :desc "Insert Heading"  :n "M-RET" #'org-insert-heading
+      ;; :desc "Insert Item"     :i "M-RET" #'+org/insert-item-below
       :vn "c l" #'org-demote-subtree
       :vn "c h" #'org-promote-subtree
       :vn "c K" #'org-move-subtree-up
@@ -42,8 +42,8 @@
 (map! :map jg-org-mode-map
       :localleader
       "1" #'org-element-cache-reset
-      :desc "New SubHeading"         "RET" #'org-insert-subheading
-      :desc "New Heading"            "DEL" #'org-insert-heading
+      :desc "New SubHeading"         "DEL" #'org-insert-subheading
+      :desc "New Heading"            "RET" #'org-insert-heading
       :desc "Refile"                 "R" #'+jg-org-refile-subtree
       :desc "Todo"                   "TAB" #'org-todo
       :desc "Lint"                   "L" #'org-lint

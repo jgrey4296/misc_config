@@ -11,8 +11,6 @@
 
  :ui         ivy helm hydra ibuffer minibuffer popup
 
- :experimentation vertico
-
  :editor format text-manipulation
  :editor tagging
  :editor buffer-nav window-nav

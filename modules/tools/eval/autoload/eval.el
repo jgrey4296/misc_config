@@ -131,8 +131,7 @@
 (defun +eval/line-or-region ()
   "Evaluate the current line or selected region."
   (interactive)
-  (if
-(use-region-p)
+  (if (use-region-p)
       (call-interactively #'+eval/region)
     (+eval/region (line-beginning-position) (line-end-position))))
 

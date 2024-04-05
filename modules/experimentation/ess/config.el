@@ -28,8 +28,8 @@
     :documentation #'ess-display-help-on-object)
 
   (evil-set-initial-state 'ess-r-help-mode 'normal)
-  (set-eval-handler! 'ess-help-mode #'ess-eval-region-and-go)
-  (set-eval-handler! 'ess-r-help-mode #'ess-eval-region-and-go)
+  ;; (set-eval-handler! 'ess-help-mode #'ess-eval-region-and-go)
+  ;; (set-eval-handler! 'ess-r-help-mode #'ess-eval-region-and-go)
 
   (set-company-backend! 'ess-r-mode
     '(company-R-args company-R-objects company-dabbrev-code :separate))

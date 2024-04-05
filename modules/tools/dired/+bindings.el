@@ -110,6 +110,7 @@
       :desc "Git Info"         :n "g" #'dired-git-info-mode
       :desc "File Path"        :n "p" (cmd! (dired-copy-filename-as-kill 0))
       :desc "File Name"        :n "n" #'dired-copy-filename-as-kill
+      (:prefix ("?" . "Disassembly"))
       )
 (map! :map jg-dired-mode-map ;; open
       :prefix ("o" . "Open")

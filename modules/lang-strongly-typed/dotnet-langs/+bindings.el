@@ -16,3 +16,7 @@
         "q" #'fsharp-ac/stop-process
         "t" #'fsharp-ac/show-tooltip-at-point)
       )
+
+(map! :map jg-dired-mode-map
+      :desc "Disassemble Dotnet"    :n "d ? d" #'+jg-dotnet-dired-ilspy
+      )

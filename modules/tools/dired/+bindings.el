@@ -92,7 +92,7 @@
 (map! :map jg-dired-mode-map ;; change, specific
       (:prefix (">" . "File Type Specific"))
       (:prefix ("<" . "Make std dirs")
-       :desc "Make Tasks Dir" :n "T" (cmd! (dired-create-directory ".tasks"))
+       :desc "Make Tasks Dir" :n "." (cmd! (dired-create-directory ".tasks"))
        )
       ;; (:prefix ("p" . "pdf"))
       ;; (:prefix ("d" . "pandoc"))

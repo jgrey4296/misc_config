@@ -76,4 +76,9 @@
                       :yield         "yield"
                       )
                     )
+(spec-handling-add! popup
+                    '(dotnet
+                      ("^\\*.+-dis\\*" :side right  :ttl nil :width  0.4 :quit t  :select nil :priority 50)
+                      )
+                    )
 ;;-- end specs

@@ -8,5 +8,5 @@
 (package! projectile)
 (package! treemacs-projectile)
 (package! related-files :recipe (:host github :repo "jgrey4296/related-files"))
-(package! winner)
 (package! treemacs)
+(package! winner)

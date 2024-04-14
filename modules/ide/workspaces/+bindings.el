@@ -13,6 +13,8 @@
       (:prefix ("w" . "Windows")
        :desc "Delete workspace"             "DEL"   #'+workspace/delete
        :desc "Workspace Control"            "w"     #'transient-workspace
+       )
+      (:prefix "p"
        :desc "Goto Root"                    "`"     (cmd! (find-file (projectile-project-root)))
        )
       )

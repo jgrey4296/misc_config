@@ -17,3 +17,10 @@
       :prefix "a"
       :desc "Firefox Helm"                "f" #'+jg-nav-helm-bookmarks
       )
+
+
+(map! :leader
+      :prefix "w"
+      :desc "3 Column Centered" "3" #'+jg-windows-3-col-centered
+
+      )

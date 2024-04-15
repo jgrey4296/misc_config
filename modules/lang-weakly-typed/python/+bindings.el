@@ -38,7 +38,8 @@
 
 (map! :map python-mode-map ;; localleader.imports
       :localleader
-      :prefix ("i" . "imports")
+      :desc "Import View"            "i" #'+jg-python--import-view
+      :prefix ("I" . "imports")
       :desc "Insert import"          "i" #'+jg-python-insert-import
       :desc "Insert Import Snippet"  "I" #'+jg-python-import-snippet
       :desc "Sort imports"           "s" #'py-isort-buffer

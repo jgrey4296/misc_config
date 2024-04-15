@@ -6,6 +6,12 @@
   :config
   (setq-hook! 'yaml-mode-hook tab-width yaml-indent-offset)
   (add-hook 'yaml-mode-hook #'tree-sitter!)
+  (add-hook 'yaml-mode-hook #'general-insert-minor-mode)
+
+  (map! :map yaml-mode-map
+        :desc "General Insert"         :n "|" #'general-insert-call
+        )
+
   )
 
 

@@ -5,10 +5,10 @@
 ;; Leaderless
 (map! :map jg-org-mode-map
       ;; textmate-esque newline insertion
-      "S-RET"      #'+org/shift-return
-      "C-RET"      #'+org/insert-item-below
-      "C-S-RET"    #'+org/insert-item-above
-      "C-M-RET"    #'org-insert-subheading
+      ;; "S-RET"      #'+org/shift-return
+      ;; "C-RET"      #'+org/insert-item-below
+      ;; "C-S-RET"    #'+org/insert-item-above
+      ;; "C-M-RET"    #'org-insert-subheading
       [C-return]   #'+org/insert-item-below
       [C-S-return] #'+org/insert-item-above
       [C-M-return] #'org-insert-subheading

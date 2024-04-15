@@ -128,10 +128,10 @@
                       ("Types"                "^\\s-*(\\(cl-def\\(?:struct\\|type\\)\\|def\\(?:class\\|face\\|group\\|ine-\\(?:condition\\|error\\|widget\\)\\|package\\|struct\\|t\\(?:\\(?:hem\\|yp\\)e\\)\\)\\)\\s-+'?\\(\\(?:\\sw\\|\\s_\\|\\\\.\\)+\\)" 2)
                       )
                     )
-(spec-handling-add! eval
-                    `(emacs-lisp-mode :start ,#'+emacs-lisp/open-repl)
-                    `(lisp-interaction-mode :start ,#'+emacs-lisp/open-repl)
-                    `(racket-mode :start ,#'+racket/open-repl)
+(spec-handling-add! repl
+                    `(emacs-lisp-mode       :start ,#'+emacs-lisp/open-repl :send #'+jg-lisp-eval)
+                    `(lisp-interaction-mode :start ,#'+emacs-lisp/open-repl :send #'+jg-lisp-eval)
+                    `(racket-mode           :start ,#'+racket/open-repl)
                     )
 (spec-handling-add! yas-extra
                     '(buttercup-minor-mode buttercup-minor-mode)

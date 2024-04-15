@@ -23,7 +23,7 @@
 
 (transient-make-subgroup! librarian-settings "B"
                           "For controlling librarian"
-                          :desc "|| Librarian ||"
+                          :desc "|| Librarian  ||"
                           [[
                             (transient-macro-call-librarian-browser-select)
 

@@ -1,7 +1,0 @@
-#+TITLE: Lua Package Reference
-
-* Overview
-
-* Main
-
-* Links

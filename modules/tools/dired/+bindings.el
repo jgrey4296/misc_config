@@ -92,7 +92,7 @@
 (map! :map jg-dired-mode-map ;; change, specific
       (:prefix (">" . "File Type Specific"))
       (:prefix ("<" . "Make std dirs")
-       :desc "Make Tasks Dir" :n "T" (cmd! (dired-create-directory ".tasks"))
+       :desc "Make Tasks Dir" :n "." (cmd! (dired-create-directory ".tasks"))
        )
       ;; (:prefix ("p" . "pdf"))
       ;; (:prefix ("d" . "pandoc"))
@@ -110,6 +110,7 @@
       :desc "Git Info"         :n "g" #'dired-git-info-mode
       :desc "File Path"        :n "p" (cmd! (dired-copy-filename-as-kill 0))
       :desc "File Name"        :n "n" #'dired-copy-filename-as-kill
+      (:prefix ("?" . "Disassembly"))
       )
 (map! :map jg-dired-mode-map ;; open
       :prefix ("o" . "Open")
@@ -136,6 +137,8 @@
 
 (map! :map jg-dired-mode-map ;; localleader
       :localleader
+      :desc "Find Marked"  "f" #'dired-do-find-marked-files
+      :desc "Cookiecutter" "c" #'+jg-dired-cookiecutter
       )
 (map! :map dirvish-mode-map
       :n "b" #'dirvish-goto-bookmark

@@ -129,6 +129,8 @@
                      ("^\\*Python-Summary\\*" :side right  :ttl nil :width  0.2 :quit t  :select nil :priority 50)
                      ("^\\*PyDoc Search\\*"   :side left   :ttl nil :width  0.3 :quit t  :select nil :priority 50)
                      ("^\\*pydoc\\*"          :side left   :ttl nil :width  0.3 :quit t  :select nil :priority 50)
+                     ("^\\*python-dis\\*"     :side right  :ttl 5   :width  0.4 :quit t  :select nil :priority 50)
+                     ("^\\*imports\\*"        :side bottom :ttl nil :height 0.3 :quit t  :select nil :priority 50)
                      )
                     )
 (spec-handling-add! file-templates

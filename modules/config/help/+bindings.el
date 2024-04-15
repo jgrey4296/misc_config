@@ -36,8 +36,9 @@
 ;;-- docs
 (map! :map jg-help-map
       :prefix ("d" . "docs")
-      :desc "Emacs Manual"                "e" #'info-emacs-manual
-      :desc "Emacs Manual Other Window"   "o" #'info-other-window
+      :desc "Info Manual"                 "i" #'info-display-manual
+      ;; :desc "Emacs Manual"                "e" #'info-emacs-manual
+      ;; :desc "Emacs Manual Other Window"   "o" #'info-other-window
                                           "a" #'doom/help-autodefs
                                           "t" #'doom/toggle-profiler
                                           "V" #'doom/help-custom-variable

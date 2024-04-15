@@ -45,3 +45,11 @@
   :config
   (epa-file-name-regexp-update)
   )
+
+(use-package! cl-lib)
+
+(use-package! a)
+
+(use-package! f)
+
+(use-package! s)

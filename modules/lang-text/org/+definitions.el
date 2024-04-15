@@ -1,6 +1,5 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
-
 (defvar +org-babel-native-async-langs '(python)
   "Languages that will use `ob-comint' instead of `ob-async' for `:async'.")
 
@@ -70,17 +69,24 @@ Is relative to `org-directory', unless it is absolute. Is used in Doom's default
 
 ;; org-crypt falls back to CRYPTKEY property then `epa-file-encrypt-to', which
 ;; is a better default than the empty string `org-crypt-key' defaults to.
+
 (defvar org-crypt-key nil)
 
 (defvar evil-org-retain-visual-state-on-shift t)
+
 (defvar evil-org-special-o/O '(table-row))
+
 (defvar evil-org-use-additional-insert t)
 
 ;; Set to nil so we can detect user changes to them later (and fall back on
 ;; defaults otherwise).
+
 (defvar org-directory nil)
+
 (defvar org-id-locations-file nil)
+
 (defvar org-attach-id-dir nil)
+
 (defvar org-babel-python-command nil)
 
 (setq org-persist-directory (concat doom-cache-dir "org/persist/")
@@ -91,6 +97,7 @@ Is relative to `org-directory', unless it is absolute. Is used in Doom's default
 
 ;; Make most of the default modules opt-in to lighten its first-time load
 ;; delay. I sincerely doubt most users use them all.
+
 (defvar org-modules
   '(;; ol-w3m
     ;; ol-bbdb
@@ -103,3 +110,13 @@ Is relative to `org-directory', unless it is absolute. Is used in Doom's default
     ;; ol-rmail
     ;; ol-eww
     ))
+
+(defvar jg-org-external-file-link-types '("jpg" "jpeg" "png" "mp4" "html"))
+
+(defvar jg-org-clean-marker nil)
+
+(defvar jg-org-preferred-linecount 1500)
+
+(defvar jg-org-link-move-base "/Volumes/Overflow/missing_images/")
+
+(defvar jg-org-twitter-loc "/Volumes/documents/twitter_threads/")

@@ -17,7 +17,6 @@
       tramp-default-method "ssh" ;; faster than the default scp
       )
 
-
 (setq recentf-auto-cleanup nil     ; Don't. We'll auto-cleanup on shutdown
       recentf-max-saved-items 200) ; default is 20
 
@@ -29,9 +28,7 @@
                                       search-ring regexp-search-ring) ; persist searches
 )
 
-
 (setq auth-sources (list (expand-file-name "~/.config/secrets/emacs/authinfo.asc")))
-
 
 ;; Ftp
 (setq ftp-program "git-ftp")

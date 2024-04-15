@@ -1,7 +1,0 @@
-#+TITLE: Haskell Package Reference
-
-* Overview
-
-* Main
-
-* Links

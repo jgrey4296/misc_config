@@ -5,6 +5,7 @@
 (defconst jg-bibtex-meta-buffer "*Metadata*")
 
 (defconst jg-bibtex-meta-program "ebook-meta")
+(defconst jg-bibtex-full-meta-program "exiftool")
 
 (defconst jg-bibtex-meta-opts '(("title     " . "-t")
                                 ("author    " . "-a")
@@ -33,7 +34,7 @@
                             (start-process
                              (format "bib:meta:%s" (f-base file))
                              (format "*bib:meta:%s*" (f-base file))
-                             "ebook-meta"
+                             jg-bibtex-full-meta-program
                              (expand-file-name
                               (if (f-relative? file) (f-join jg-bibtex-pdf-loc file) file))
                              )
@@ -136,6 +137,7 @@
 
 ;;;###autoload
 (defun +jg-bibtex-update-entry ()
+  "update a bibtex entry by retrieving it's doi information"
   (interactive)
   (when (org-ref-bibtex-entry-doi)
     (+jg-bibtex-doi-update (org-ref-bibtex-entry-doi))
@@ -144,6 +146,7 @@
 
 ;;;###autoload
 (defun +jg-bibtex-insert-entry-from-doi ()
+  "given a doi, create an entry for it"
   (interactive)
   (let* ((doi (read-string "Doi: "))
          (results (funcall doi-utils-metadata-function doi))

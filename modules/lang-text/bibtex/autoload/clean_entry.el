@@ -2,7 +2,7 @@
 (require 'bibtex)
 
 ;;;###autoload
-(defun +jg-bibtex-smart-replace-nonascii-hook ()
+(defun +jg-bibtex-latex-normalise ()
   "Replace non-ascii characters in a bibtex entry.
 but not in file or url entries
 "
@@ -59,21 +59,22 @@ but not in file or url entries
   )
 
 ;;;###autoload
-(defun +jg-bibtex-orcb-& ()
-  "Replace naked & with \& in a bibtex entry.
-Replace &amp; as well
+(defun +jg-bibtex-normalise-symbols()
+  " Replace &amp; with &, and @ with \@
 But not in urls
 "
   (bibtex-beginning-of-entry)
   (let* ((keys (mapcar #'car (bibtex-parse-entry)))
          (focus (-filter #'(lambda (x) (not (string-match "=\\|url\\|doi\\|file" x))) keys))
          (texts (mapcar #'bibtex-autokey-get-field focus))
-         (cleaned (mapcar #'(lambda (x) (replace-regexp-in-string " & " " \\\\& " x)) texts))
+         (amps (mapcar #'(lambda (x) (replace-regexp-in-string " &amp; " " & " x)) texts))
+         (ats (mapcar #'(lambda (x) (replace-regexp-in-string "@" "\\\\@" x)) amps))
          )
     ;; Then update:
-    (mapc #'(lambda (x) (bibtex-set-field (car x) (cdr x))) (-zip-pair focus cleaned))
+    (mapc #'(lambda (x) (bibtex-set-field (car x) (cdr x))) (-zip-pair focus ats))
     )
   )
+
 
 ;;;###autoload
 (defun +jg-bibtex-dont-break-lines-hook()

@@ -24,4 +24,5 @@
 (package! switch-window)
 (package! ace-window)
 (package! winum)
+(package! winner)
 ;;; packages.el ends here

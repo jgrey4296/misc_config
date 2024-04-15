@@ -2,12 +2,14 @@
 
 (map! :leader
       :prefix "c"
-      :desc "Evaluate & replace region"            "E"     #'+eval:replace-region
-      :desc "Evaluate buffer/region"               "e"     #'+eval/buffer-or-region
-      :desc "Send to repl"                         "s"     #'+jg-send-region-to-repl
+      :desc  "compile in project"                   "c"     #'projectile-compile-project
+      :desc  "Evaluate & replace region"            "E"     #'+eval:replace-region
+      :desc  "Evaluate buffer/region"               "e"     #'+jg-eval-run-buffer
+      :desc  "Send to repl"                         "s"     #'+jg-send-region-to-repl
+      :desc  "quickrun"                             "q"     #'quickrun
       (:prefix ("r" . "Repls")
-      :desc "Clear"                                "c"   #'+jg-repl-clear
-      :desc "Open Repl"                            "o"   #'+jg-eval-open-repl
-      :desc "Send to Repl"                         "r"   #'+jg-repl-send-register-to-repl
+       :desc "Clear"                                "c"   #'+jg-repl-clear
+       :desc "Open Repl"                            "o"   #'+jg-eval-open-repl
+       :desc "Send to Repl"                         "r"   #'+jg-repl-send-register-to-repl
+       )
       )
-)

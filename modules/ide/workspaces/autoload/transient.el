@@ -96,6 +96,7 @@
 ;;-- end zimmerframe
 
 ;;-- workspace management
+;; TODO move compile to eval module
 (progn
   (transient-make-call! proj-root            "`"   "Project Root" (find-file (projectile-project-root)))
 
@@ -230,6 +231,7 @@
   (transient-make-int-call! window-split-below "-" "Split Below"     #'split-window-below)
   (transient-make-int-call! window-split-right "=" "Split Right"     #'split-window-right)
   (transient-make-int-call! window-maximize    "m" "Maximize Window" #'doom/window-maximize-buffer)
+  ;; TODO move these to window-nav
   (transient-make-int-call! window-undo        "u" "Window Undo"     #'winner-undo)
   (transient-make-int-call! window-redo        "U" "Window Redo"     #'winner-redo)
   (transient-make-call!     window-balance     "b" "Balance Windows" (balance-windows))

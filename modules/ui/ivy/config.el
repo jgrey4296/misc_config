@@ -1,6 +1,7 @@
 ;;; completion/ivy/config.el -*- lexical-binding: t; -*-
 
 (local-load! "+vars")
+(local-load! "+defs")
 
 (defer-load! jg-bindings-total "+bindings")
 

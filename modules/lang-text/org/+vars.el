@@ -5,18 +5,6 @@
       org-cycle-separator-lines 3
       )
 
-;;-- personal
-
-(defvar jg-org-external-file-link-types '("jpg" "jpeg" "png" "mp4" "html"))
-
-(defvar jg-org-clean-marker nil)
-
-(defvar jg-org-preferred-linecount 1500)
-
-(defvar jg-org-link-move-base "/Volumes/Overflow/missing_images/")
-
-(defvar jg-org-twitter-loc "/Volumes/documents/twitter_threads/")
-;;-- end personal
 
 ;;-- pomodoro
 ;; set pomodoro log variable
@@ -45,6 +33,9 @@
                 org-group-tags nil
                 org-use-fast-tag-selection t
                 org-tags-column 50
+                org-startup-indented nil
+                org-indent--deepest-level 20
+                org-element-use-cache nil
                 )
   ;; Save target buffer after archiving a node.
   (setq org-archive-subtree-save-file-p t)
@@ -107,7 +98,7 @@
                                 :close-all  +org/close-all-folds
                                 :toggle     org-cycle
                                 :open       nil
-                                :open-rec   nil
+                                :open-rec   org-fold-show-subtree
                                 :close      nil
                                 )
                      )

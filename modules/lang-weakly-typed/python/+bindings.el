@@ -23,21 +23,23 @@
       :n "SPC c t" #'+jg-python-pytest-dispatch
       )
 
-(map! :map python-mode-map
+(map! :map python-mode-map ;; localleader
       :after python-mode
       :localleader
       :desc "Start Pydoc" "p" #'+jg-python-start-pydoc
-      :desc "Summarize" "s" #'+jg-python-summarize
-      :desc "REPL"      "r" #'+python/open-ipython-repl
-      :desc "debug"     "d" (cmd! (setq jg-python-dev-mode (not jg-python-dev-mode))
+      :desc "Summarize"   "s" #'+jg-python-summarize
+      :desc "REPL"        "r" #'+python/open-ipython-repl
+      :desc "debug"       "d" (cmd! (setq jg-python-dev-mode (not jg-python-dev-mode))
                                   (message "Python Debug Mode: %s" jg-python-dev-mode))
-      :desc "track"     ";"  #'py-pdbtrack-toggle-stack-tracking
-      :desc "breakpoint" "b" #'+jg-python-breakpoint-line
+      :desc "track"       ";" #'py-pdbtrack-toggle-stack-tracking
+      :desc "breakpoint"  "b" #'+jg-python-breakpoint-line
+      :desc "Disassemble" "D" #'+jg-python-bytecode-dwim
       )
 
-(map! :map python-mode-map ;; imports
+(map! :map python-mode-map ;; localleader.imports
       :localleader
-      :prefix ("i" . "imports")
+      :desc "Import View"            "i" #'+jg-python--import-view
+      :prefix ("I" . "imports")
       :desc "Insert import"          "i" #'+jg-python-insert-import
       :desc "Insert Import Snippet"  "I" #'+jg-python-import-snippet
       :desc "Sort imports"           "s" #'py-isort-buffer
@@ -48,7 +50,7 @@
       :desc "Optimize imports"       "o" #'+python/optimize-imports
        )
 
-(map! :map python-mode-map ;; tests
+(map! :map python-mode-map ;; localleader.tests
       :localleader
       :prefix ("t" . "test")
       :desc "Test DWIM"       "f" #'python-pytest-file-dwim
@@ -61,7 +63,7 @@
       :desc "Make Testfile"   "m" #'+jg-python-make-test-file
       )
 
-(map! :map python-mode-map ;; environment
+(map! :map python-mode-map ;; localleader.environment
       :localleader
       :prefix ("e" . "Environment")
       :desc "Choose Support" "c" #'+jg-python-support
@@ -102,10 +104,10 @@
       :n "s <" #'doot-open-toml
       )
 
-(map! :map dired-mode-map
-      :after jg-dired-bindings
+(map! :map jg-dired-mode-map
       :desc "Make Test dir"  :n "< t" (cmd! (dired-create-directory "__tests"))
-      :desc "Make Docs dir"  :n "< t" (cmd! (dired-create-directory "docs"))
+      :desc "Make Docs dir"  :n "< d" (cmd! (dired-create-directory "docs"))
+      :desc "Disassemble Python" :n "d ? p" #'+jg-python-dired-dis
       :localleader
       :desc "Try Python site-packages" "p" #'+jg-python-try-site-packages
 

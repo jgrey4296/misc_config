@@ -17,6 +17,7 @@
       :desc "toggle-fold"   "a"   #'evil-toggle-fold
       :desc "open-folds"    "o"   #'evil-open-folds
       :desc "Close Folds"   "m"   #'evil-close-folds
+      :desc "Close Single Fold" "M" #'evil-close-fold
 
       :desc "Refold"        "r"   #'code-shy-run-folds
       :desc "Next Fold"     "j"   #'+fold/next

@@ -24,7 +24,7 @@
                      )
                     )
 (spec-handling-add! tree-sit-lang
-                    '(csharp-mode     . c-sharp)
+                    '(csharp-mode . c-sharp)
                     )
 (spec-handling-add! lookup-handler
                     '(fsharp-mode :async t :definition fsharp-ac/gotodefn-at-point)
@@ -39,6 +39,8 @@
                       ("\\.cs\\'"         . csharp-mode)
                       ("\\.fs[iylx]?\\'"  . fsharp-mode)
                       ("\\.[^.]*proj\\'"  . csproj-mode)
+                      ("\\.props\\'"      . csproj-mode)
+                      ("\\.targets\\'"    . csproj-mode)
                       )
                     )
 (spec-handling-add! electric
@@ -72,6 +74,11 @@
                       :for           "for"
                       :return        "return"
                       :yield         "yield"
+                      )
+                    )
+(spec-handling-add! popup
+                    '(dotnet
+                      ("^\\*.+-dis\\*" :side right  :ttl nil :width  0.4 :quit t  :select nil :priority 50)
                       )
                     )
 ;;-- end specs

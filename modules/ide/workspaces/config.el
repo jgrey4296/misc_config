@@ -144,16 +144,6 @@
   :commands make-related!
   )
 
-(use-package! compile
-  :defer t
-  :config
-  (add-hook 'compilation-mode-hook   #'hl-line-mode)
-  (add-hook 'compilation-filter-hook #'ansi-color-compilation-filter)
-  (add-hook 'compilation-filter-hook #'comint-truncate-buffer)
-
-  (autoload 'comint-truncate-buffer "comint" nil t)
-  )
-
 (use-package! projectile
   :commands (projectile-project-root
              projectile-project-name
@@ -281,17 +271,5 @@
             (concat "rg -0 --files --follow --color=never --hidden -g!.git"
                     (if IS-WINDOWS " --path-separator=/")))
            ("find . -type f -print0"))))
-
-  )
-
-(use-package! winner
-  ;; undo/redo changes to Emacs' window layout
-  :preface (defvar winner-dont-bind-my-keys t) ; I'll bind keys myself
-  :hook (doom-first-buffer . winner-mode)
-  :config
-  (appendq! winner-boring-buffers
-            '("*Compile-Log*" "*inferior-lisp*" "*Fuzzy Completions*"
-              "*Apropos*" "*Help*" "*cvs*" "*Buffer List*" "*Ibuffer*"
-              "*esh command on file*"))
 
   )

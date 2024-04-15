@@ -129,17 +129,24 @@ with either a numeric or alphabetical escalation "
   :move-point t
   :type exclusive
   ;; :motion evil-forward-word-end
+  (unless (looking-at "\\w")
+    (evil-forward-word-begin 1))
   (while (< (point) end)
-    (cond ((looking-at " \\<and\\>")
-           (forward-word 1))
-          ((looking-at " mcc")
-           (forward-char)
-           (evil-invert-char (point) (1+ (point)))
+    (cond ((looking-at "\\<and\\>")
+           (evil-forward-word-begin 1))
+          ((let ((case-fold-search nil))
+             (looking-at "\\<[A-Z]+\\>"))
+           (evil-forward-word-begin 1))
+          ((looking-at "[st]\\>")
+           (evil-forward-word-begin 1))
+          ((looking-at "\\<mcc")
+           (save-excursion
+             (capitalize-word 1))
            (forward-char 2)
-           (evil-invert-char (point) (1+ (point)))
-           (forward-word)
            )
-          (t (capitalize-word 1))
+          (t
+           (capitalize-word 1)
+           (evil-forward-word-begin 1))
           )
     )
   )

@@ -32,10 +32,14 @@
     (set-window-dedicated-p (selected-window) nil)
     )
 
-
   (add-hook 'helpful-mode-hook #'jg-unset-helpful-dedicated)
   (add-hook 'helpful-mode-hook #'outline-minor-mode)
 
+  )
+
+(use-package! info
+  :config
+  (push (expand-file-name "~/.config/info") Info-directory-list)
   )
 
 ;;; config.el ends here

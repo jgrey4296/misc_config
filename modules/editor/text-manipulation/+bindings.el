@@ -54,7 +54,7 @@
       )
 
 (map! :map jg-binding-operator-state-map
-      :desc "Select Line"   "L"   #'+jg-text-line-textobj
+      :desc "Select Line"   "g"   #'+jg-text-line-textobj
       :desc "Select Buffer" "RET" #'+jg-text-whole-buffer-textobj
       )
 

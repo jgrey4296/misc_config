@@ -7,7 +7,3 @@
 (spec-handling-new! project-ignored projectile-globally-ignored-directories :loop 'append
                     val
                     )
-
-(spec-handling-new! compile-commands counsel-compile-local-builds :loop 'append
-                    val
-                    )

@@ -12,3 +12,35 @@
         (and (ignore-errors (require 'org-pdftools nil t))
              (file-executable-p pdf-info-epdfinfo-program)
              (apply fn args))))
+
+
+(defvar jg-pdf-to-text-call "pdftotext")
+
+;;;###autoload
+(defun +jg-pdf-to-text ()
+  (interactive)
+  (let ((files (-filter #'f-file? (dired-get-marked-files)))
+        )
+    (cl-loop for file in files
+             do
+             (let* ((pages (pcase (read-string "Pages: ")
+                             ((and x (pred (s-contains? "-" x)))
+                              (s-split "-" x))
+                             (x (list x x))
+                             ))
+                    (call (list jg-pdf-to-text-call
+                                "-f" (car pages)
+                                "-l" (cadr pages)
+                                file
+                                (f-swap-ext file "txt")
+                                )
+                          )
+                    )
+               (make-process :name (format "pdftotext-%s" (f-base file))
+                             :buffer nil
+                             :command call)
+
+               )
+             )
+    )
+  )

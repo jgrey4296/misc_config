@@ -63,7 +63,6 @@ can also add key'd additional properties
     )
   )
 
-
 ;;;###autoload
 (defun +jg-projects-projectile-cmd-list  (fn &rest rst)
   " Use an ivy to get the command "

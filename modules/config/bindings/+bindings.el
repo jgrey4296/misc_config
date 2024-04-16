@@ -64,7 +64,6 @@
       :desc "Revert buffer"               "R"   #'revert-buffer
       :desc "Save all buffers"            "S"   #'evil-write-all
       :desc "Save buffer"                 "s"   #'basic-save-buffer
-      :desc "Pop up scratch buffer"       "x"   #'doom/open-scratch-buffer
       :desc "Bury buffer"                 "z"   #'bury-buffer
 
       )
@@ -198,7 +197,7 @@
 
       (:prefix ("a" . "org agenda"))
 
-      (:prefix ("s" . "Systems"))
+      (:prefix ("s" . "Scratch"))
       )
 ;;-- end <leader> o --- open
 

@@ -24,7 +24,6 @@
       :desc "run cmd in project root"      "!"   #'projectile-run-shell-command-in-root
       :desc "root shell"                   "'"   #'projectile-run-shell
       :desc "search project for symbol"    "."   #'+default/search-project-for-symbol-at-point
-      :desc "open project scratch buffer"  "x"   #'+jg-ui-open-scratch-buffer
       :desc "find file in project"         "f"   #'projectile-find-file
       :desc "find other file"              "o"   #'+jg-projects-find-related
        :desc "compile in project"           "c"   #'projectile-compile-project

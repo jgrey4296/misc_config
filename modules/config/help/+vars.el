@@ -16,3 +16,9 @@
                                  )
                       )
                     )
+
+(spec-handling-add! popup
+                    '(helpful
+                      ("\*helpful.*?\\*"   :side bottom :ttl nil :height 20 :quit t :select t :priority 150)
+                      )
+                    )

@@ -2,26 +2,56 @@
 
 ;;;###autoload
 (defun +jg-projects-find-related ()
+  " Get related files, if it exists, open it "
   (interactive)
   (-when-let* ((buff (if (eq major-mode 'dired-mode)
                          (+jg-projects-find-related-directory)
                        (projectile--find-related-file (buffer-file-name))))
                (buff-exists (f-exists? buff))
-               (wind-fn (f (boundp 'jg-workspaces-find-buff-fn)
-                            jg-workspaces-find-buff-fn
-                          #'+jg-workspace-default-new-window))
+               (wind-fn (cond ((boundp 'jg-workspaces-find-buff-fn)
+                               jg-workspaces-find-buff-fn)
+                              ((eq major-mode 'dired-mode)
+                               #'find-file)
+                              (t
+                               #'+jg-workspace-default-new-window)))
                )
     (funcall wind-fn buff)
     )
   )
 
-(defun +jg-projects-find-related-directory ()
+(defun +jg-projects-find-related-directory () ;; -> buffer
   (message "Finding Related Directories")
-  (let ((root (projectile-project-root))
-        (proj-type (projectile-project-type))
-        (proj (alist-get (projectile-project-type) projectile-project-types))
+  (let* ((current default-directory)
+         (parent (f-parent current))
+         (root (projectile-project-root))
+         (proj-type (projectile-project-type))
+         (proj (alist-get proj-type projectile-project-types))
+         available
+         key
         )
+    ;; populate available
+    (push `(:root . ,root) available)
+    (when (f-exists? (f-join current "__tests"))            (push `(:local-tests . ,(f-join current "__tests")) available))
+    (when (f-exists? (f-join root "docs"))                  (push `(:docs        . ,(f-join root "docs")) available))
+    (when (f-exists? (f-join root ".tasks"))                (push `(:tasks       . ,(f-join root ".tasks")) available))
+    (when (f-exists? (f-join root ".temp"))
+      (push `(:temp        . ,(f-join root ".temp")) available)
+      (push `(:logs        . ,(f-join root ".temp/logs")) available)
+      )
+    (when (f-exists? (f-join root ".wiki"))                 (push `(:wiki        . ,(f-join root ".wiki")) available))
+    (when (f-exists? (f-join root ".github/workflows"))     (push `(:github-workflows . ,(f-join root ".github/workflows")) available))
 
+    (when (f-exists? (f-join parent "_structs"))          (push `(:structs     . ,(f-join parent "_structs")) available))
+    (when (f-exists? (f-join parent "_interfaces"))       (push `(:interfaces  . ,(f-join parent "_interfaces")) available))
+    (when (f-exists? (f-join parent"_abstract"))          (push `(:abstract    . ,(f-join parent "_abstract")) available))
+
+    (when (f-exists? (f-join parent "__data"))             (push `(:data        . ,(f-join parent "__data")) available))
+    (when (f-exists? (f-join parent "__templates"))        (push `(:templates   . ,(f-join parent "__templates")) available))
+
+
+    ;; select one
+    (setq key (ivy-read "Available Directories: " available :require-match t))
+    (alist-get (intern key) available nil nil #'equal)
     )
   )
 

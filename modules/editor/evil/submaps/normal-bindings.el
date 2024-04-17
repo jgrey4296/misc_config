@@ -39,10 +39,10 @@
       :desc "Visual"             "V"        #'evil-visual-line
       :prefix ("v" . "Visual+")
       :desc "buffer"             "RET" (cmd! (evil-visual-state) (mark-whole-buffer))
-      :desc "line"               "j"   #'evil-visual-line
-      :desc "Block"              "k"   #'evil-visual-block
-      :desc "char"               "l"   #'evil-visual-char
-      :desc "Restore selection"  "h"   #'evil-visual-restore
+      :desc "line"               "j"       #'evil-visual-line
+      :desc "Block"              "k"       #'evil-visual-block
+      :desc "char"               "l"       #'evil-visual-char
+      :desc "Restore selection"  "h"       #'evil-visual-restore
 
       :desc "Inner Select"       "i" (cmd! (evil-visual-char) (set-transient-map jg-binding-inner-text-objects-map))
       :desc "Outer Select"       "o" (cmd! (evil-visual-char) (set-transient-map jg-binding-outer-text-objects-map))

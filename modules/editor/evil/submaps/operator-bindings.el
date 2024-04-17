@@ -1,4 +1,4 @@
-;;; +op-bindings.el -*- lexical-binding: t; -*-
+;; +op-bindings.el -*- lexical-binding: t; -*-
 
 (map! :map jg-binding-operator-state-map
       [escape] 'evil-normal-state

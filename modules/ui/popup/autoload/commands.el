@@ -87,7 +87,15 @@ If no popups are available, display the *Messages* buffer in a popup window."
   (let ((+popup--inhibit-transient t))
     (cond ((+popup-windows) (+popup/close-all t))
           ((ignore-errors (+popup/restore)))
-          ((display-buffer (get-buffer "*Messages*"))))))
+          ((display-buffer (get-buffer messages-buffer-name))
+           (with-current-buffer (get-buffer messages-buffer-name)
+             (goto-char (point-max))
+             (recenter -1)
+             )
+           )
+          )
+    )
+  )
 
 ;;;###autoload
 (defun +popup/restore ()

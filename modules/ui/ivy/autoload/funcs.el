@@ -3,10 +3,13 @@
 ;;;###autoload
 (defun +jg-ivy-popup-messages (&optional arg)
   (interactive "P")
-  (with-current-buffer "*Messages*"
+  (+jg-popup-ivy-open messages-buffer-name)
+  (with-current-buffer messages-buffer-name
     (when current-prefix-arg
       (+jg-text-clear-buffer))
-    (goto-char (point-max))
     )
-  (+jg-popup-ivy-open "*Messages*")
+  (with-selected-window (get-buffer-window messages-buffer-name)
+    (goto-char (point-max))
+    (recenter -1)
+    )
   )

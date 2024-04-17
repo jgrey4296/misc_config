@@ -26,9 +26,10 @@
 
 ;;-- state bindings
 (map! :map jg-binding-normal-state-map
-      :desc "SPC? Insert" "I SPC" #'evil-insert-plus-state
-      :desc "Chars"       "I c"   #'evil-other-chars-state
-      :desc "Rotate"      "R"     #'rotate-text
+      :desc "SPC? Insert" "I SPC"            #'evil-insert-plus-state
+      :desc "Chars"       "I c"              #'evil-other-chars-state
+      :desc "Rotate"      "R"                #'rotate-text
+      :desc "Select Whitespace" "v SPC"      #'+jg-text-visual-select-whitespace
       )
 
 (map! :map jg-binding-insert-state-map
@@ -110,6 +111,7 @@
       :desc "Decr"                        "j"          #'+jg-text-dec-num
       :desc "Incr"                        "k"          #'+jg-text-inc-num
       :desc "Shift Left"                  "h"          #'+jg-text-shift-left
+      :desc "Remove Indentation"          "H"          #'+jg-text-remove-indentation
       :desc "Shift Right"                 "l"          #'+jg-text-shift-right
       :desc "Title Case"                  "t"          #'+jg-text-title-case-op
 

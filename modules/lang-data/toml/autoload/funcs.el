@@ -1,15 +1,6 @@
 ;;; +funcs.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
-(defun +jg-toml-open-dooter ()
-  (interactive)
-  (when (and (equal (buffer-name) "doot.toml")
-             (f-exists? (f-join default-directory "dooter.py")))
-    (with-selected-window (split-window-right)
-      (find-file (f-join default-directory "dooter.py")))
-    ))
-
-;;;###autoload
 (defun +jg-toml-related-files-fn (path)
   " Provide projectile with various :kinds of related file "
   (let* ((root (projectile-project-root))

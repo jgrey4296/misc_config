@@ -6,7 +6,7 @@
       :desc "Force Normal State"  "<escape>" #'evil-force-normal-state
       :desc "Eval expression"     "\""       #'pp-eval-expression
       )
-(map! :map jg-binding-normal-state-map ;; Insert+
+(map! :map jg-binding-normal-state-map ;; switch to Insert+
       :desc "Insert Below"  "o"   #'evil-open-below
       :desc "Insert"        "i"   #'evil-insert
       :prefix ("I" . "Insert+")
@@ -35,7 +35,7 @@
 
        :desc "General Insert"           "|"          #'general-insert-call
        )
-(map! :map jg-binding-normal-state-map ;; Visual
+(map! :map jg-binding-normal-state-map ;; switch to Visual
       :desc "Visual"             "V"        #'evil-visual-line
       :prefix ("v" . "Visual+")
       :desc "buffer"             "RET" (cmd! (evil-visual-state) (mark-whole-buffer))
@@ -59,6 +59,7 @@
       :desc "Use Register"       "'"   #'evil-use-register
       :desc "Join"               "J"   #'evil-join
       ;; K
+      :desc "Save"               "RET" #'basic-save-buffer
       :desc "Indent"             "TAB" #'indent-for-tab-command
       :desc "Evil-Ex"            ":"   #'evil-ex
       :desc "Invert Char"        "~"   #'evil-invert-char
@@ -68,6 +69,7 @@
       :desc "Redisplay"          "§"   (cmd! (redisplay t))
       :desc "Set Marker"         "m"   #'evil-set-marker
       :desc "Replace"            "r"   #'evil-replace
+      :desc "Does Nothing"       "q"   (cmd! (error "This does Nothing"))
 
       :desc "Undo"               "u"   #'evil-undo
       :desc "Yank"               "y"   #'evil-yank

@@ -63,9 +63,9 @@
       :desc "Read-only mode"              "r"   #'read-only-mode
       :desc "Revert buffer"               "R"   #'revert-buffer
       :desc "Save all buffers"            "S"   #'evil-write-all
-      :desc "Save buffer"                 "s"   #'basic-save-buffer
+      ;; :desc "Save buffer"                 "s"   #'basic-save-buffer
+      :desc "Stop using this"                 "s"   (cmd! (error "Stop Using This"))
       :desc "Bury buffer"                 "z"   #'bury-buffer
-
       )
 ;;-- end <leader> b --- buffer
 

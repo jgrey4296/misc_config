@@ -44,3 +44,28 @@
              )
     )
   )
+
+;;;###autoload
+(defun +jg-pdf-linearize ()
+  "run qpdf linearization"
+  (interactive)
+  (let ((files (-filter #'f-file? (dired-get-marked-files)))
+        )
+    (cl-loop for file in files
+             do
+             (let* ((call (list "qpdf"
+                                file
+                                "--linearize"
+                                (f-join (f-dirname file)
+                                        (format "%s-linear.pdf" (f-base file))
+                                        )
+                                )
+                          )
+                    )
+               (make-process :name (format "qpdf linearization: %s" (f-base file))
+                             :buffer nil
+                             :command call)
+               )
+             )
+    )
+  )

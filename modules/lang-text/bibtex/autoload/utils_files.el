@@ -7,6 +7,7 @@
 assumes point is in
 the entry of interest in the bibfile.  but does not check that."
   (interactive)
+  (basic-save-buffer)
   (save-excursion
     (let* ((target (if path path (bibtex-autokey-get-field '("file" "OPTfile"))))
            )

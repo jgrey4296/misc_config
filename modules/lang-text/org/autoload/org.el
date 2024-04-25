@@ -168,6 +168,7 @@ If on a:
 - link: follow it
 - otherwise, refresh all inline images in current tree."
   (interactive "P")
+  (basic-save-buffer)
   (if (button-at (point))
       (call-interactively #'push-button)
     (let* ((context (org-element-context))

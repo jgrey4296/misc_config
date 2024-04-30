@@ -31,15 +31,13 @@ falling back on searching your PATH."
   (unless env-handling-state
     (env-handling-go!))
 
-  ;; (puthash (cons 'inferior-python-mode default-directory) new-buffer +eval-repl-buffers)
-  ;; (puthash (cons 'python-mode default-directory) new-buffer +eval-repl-buffers)
-
   (pop-to-buffer
    (process-buffer
     (let ((dedicated (bound-and-true-p python-shell-dedicated))
           (default-directory (projectile-project-root))
           )
       (run-python nil dedicated t)
+      ;; TODO possibly use py-shell
       )
     )
    )
@@ -86,10 +84,3 @@ falling back on searching your PATH."
     new-buffer
     )
   )
-
-;;;###autoload
-(defun +python/optimize-imports ()
-  "organize imports"
-  (interactive)
-  (pyimport-remove-unused)
-  (py-isort-buffer))

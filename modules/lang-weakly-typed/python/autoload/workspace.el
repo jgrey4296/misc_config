@@ -29,3 +29,14 @@
     (select-window (split-window-below)))
   (find-file buff)
   )
+
+;;;###autoload
+(defun +jg-python-popup-related-test ()
+  (interactive)
+  (-when-let* ((testfile (projectile--find-related-file (buffer-file-name) :test))
+               (exists-p (f-exists? testfile))
+               (buff (find-file-noselect testfile nil nil))
+               )
+    (+popup-buffer buff '((:side . right) (:select true)))
+    )
+  )

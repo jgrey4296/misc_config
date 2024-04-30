@@ -1,5 +1,6 @@
 ;;; lang/jg-python/+vars.el -*- lexical-binding: t; -*-
 
+(doom-log "Python Vars")
 ;;-- general python
 
 (setq expand-region-preferred-python-mode 'python-mode)
@@ -12,8 +13,8 @@
 
 (defvaralias 'python-shell-virtualenv-root 'py-shell-virtualenv-root)
 
-(setq py-indent-offset 4
-      conda-anaconda-home (or (getenv "MAMBA_ROOT_PREFIX") (getenv "ANACONDA_HOME") "/usr/local/anaconda3")
+;; Conda/Mamaba
+(setq conda-anaconda-home (or (getenv "MAMBA_ROOT_PREFIX") (getenv "ANACONDA_HOME") "/usr/local/anaconda3")
       conda-env-home-directory (cond ((getenv "MAMBA_ROOT_PREFIX")
                                       (f-join (getenv "MAMBA_ROOT_PREFIX") "envs"))
                                      ((getenv "ANACONDA_ENVS")
@@ -21,23 +22,28 @@
                                      (t
                                       (f-join conda-anaconda-home "envs"))
                                      )
-      py-shell-virtualenv-root conda-env-home-directory
+      )
 
-      py-pdbtrack-do-tracking-p t
+;; Builtin Python-mode vars
+(setq python-shell--interpreter-args                        "-i"
+      python-indent-guess-indent-offset                     nil
+      python-shell-completion-native-enable                 nil
+      python-shell-completion-native-disabled-interpreters  '("pypy")
+      python-shell-interpreter-path-args                    (expand-file-name "python/repl_startup.py "  templates-loc)
+ )
 
-      py-python-command "python3"
-      py-python-command-args '("-i")
-      python-shell--interpreter-args "-i"
-
-      py-use-font-lock-doc-face-p t
-      py-fontify-shell-buffer-p t
-
-      python-indent-guess-indent-offset nil
-      python-shell-completion-native-enable nil
-      python-shell-completion-native-disabled-interpreters '("pypy")
-
-      jg-python-repl-start-file (expand-file-name "python/repl_startup.py " templates-loc)
-      python-shell-interpreter-path-args (expand-file-name "python/repl_startup.py " templates-loc)
+;; Py-vars
+(setq py-indent-offset              4
+      py-shell-virtualenv-root      conda-env-home-directory
+      py-pdbtrack-do-tracking-p     t
+      py-python-command             "python3"
+      py-python-command-args        '("-i")
+      py-use-font-lock-doc-face-p   t
+      py-fontify-shell-buffer-p     t
+      py-split-window-on-execute    t
+      )
+;; Personal
+(setq jg-python-repl-start-file (expand-file-name "python/repl_startup.py " templates-loc)
       )
 (modify-syntax-entry ?_ "_" python-mode-syntax-table)
 ;;-- end general python
@@ -60,8 +66,9 @@
 ;;-- flycheck
 (after! flycheck
   (setq flycheck-pylintrc '("pylint.toml" "pyproject.toml")
-        flycheck--automatically-enabled-checkers (-concat flycheck--automatically-enabled-checkers '(python-pylint))
-        flycheck--automatically-disabled-checkers '(python-compile python-pyright python-mypy)
+        flycheck--automatically-enabled-checkers (-concat flycheck--automatically-enabled-checkers '(python-ruff))
+        flycheck--automatically-disabled-checkers '(python-pylint python-compile python-pyright python-mypy)
+        flycheck-python-ruff-config '("ruff.toml" ".ruff.toml" "pyproject.toml")
         )
   (push 'python-pylint flycheck-checkers)
   (push ".mypy.ini" flycheck-python-mypy-ini)
@@ -250,15 +257,15 @@
 (spec-handling-add! compile-commands
                     '(python +jg-python-get-commands +jg-python-solo-file-run +jg-python-distribute-commands)
                     )
-(spec-handling-add! eval :form 'override
+(spec-handling-add! repl
                     `(python-mode
                       :start ,#'+jg-python/open-repl
-                      :send ,#'python-shell-send-region
+                      :send  ,#'python-shell-send-region
                       :eval nil
                       )
                     `(ipython
                       :start ,#'+jg-python/open-ipython-repl
-                      :send ,#'python-shell-send-region
+                      :send  ,#'python-shell-send-region
                       :eval nil
                       )
                     )

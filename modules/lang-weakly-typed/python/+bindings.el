@@ -13,7 +13,6 @@
 (map! :map python-mode-map
       :after python-mode
       :desc "General Insert"         :n "|" #'general-insert-call
-
       :n "z d" nil ;; #'+jg-python-toggle-all-defs
       :n "z D" nil ;; #'+jg-python-close-class-defs
       :v "i f" nil ;; #'+jg-python-select-defun
@@ -21,14 +20,16 @@
       ;; :n "] ]" #'+jg-python-forward-defun
       ;; :n "s j" '+jg-python-swipe-to-def
       :n "SPC c t" #'+jg-python-pytest-dispatch
+      :n "SPC \\"   #'+jg-python-popup-related-test
       )
 
 (map! :map python-mode-map ;; localleader
       :after python-mode
       :localleader
+      :desc "Ruff Format" "f" #'+jg-python-ruff-format
       :desc "Start Pydoc" "p" #'+jg-python-start-pydoc
-      :desc "Summarize"   "s" #'+jg-python-summarize
-      :desc "REPL"        "r" #'+python/open-ipython-repl
+      :desc "Summarize"   "\\" #'+jg-python-summarize
+      :desc "REPL"        "r" #'+jg-python/open-ipython-repl
       :desc "debug"       "d" (cmd! (setq jg-python-dev-mode (not jg-python-dev-mode))
                                   (message "Python Debug Mode: %s" jg-python-dev-mode))
       :desc "track"       ";" #'py-pdbtrack-toggle-stack-tracking
@@ -39,15 +40,9 @@
 (map! :map python-mode-map ;; localleader.imports
       :localleader
       :desc "Import View"            "i" #'+jg-python--import-view
+      :desc "Sort imports"           "s" #'+jg-python-isort-diff
       :prefix ("I" . "imports")
-      :desc "Insert import"          "i" #'+jg-python-insert-import
       :desc "Insert Import Snippet"  "I" #'+jg-python-import-snippet
-      :desc "Sort imports"           "s" #'py-isort-buffer
-      :desc "Sort region"            "r" #'py-isort-region
-      :desc "Collect import blocks"  "c" #'+jg-python-cleanup-import-blocks
-      :desc "Insert missing imports" "i" #'pyimport-insert-missing
-      :desc "Remove unused imports"  "R" #'pyimport-remove-unused
-      :desc "Optimize imports"       "o" #'+python/optimize-imports
        )
 
 (map! :map python-mode-map ;; localleader.tests

@@ -74,6 +74,7 @@
 (use-package! conda
   :commands (conda-env-activate conda-env-deactivate conda-env-read-name)
   :init
+  (advice-add 'conda--get-path-prefix :override #'+jg-python-conda-get-path-prefix)
   (spec-handling-add! python-env
                       `(conda_el
                         (:setup conda

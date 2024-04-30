@@ -1,20 +1,5 @@
 ;;; snippets.el -*- lexical-binding: t; -*-
 
-;;;###autoload
-(defun +jg-python-insert-import (&optional arg)
-  " insert the literal string provided/read from minibuffer, at the imports section
-of a python file "
-  (interactive)
-  (save-excursion
-    (goto-char (point-min))
-    (let ((arg (if (not arg) (read-string "Import Statement: " "import ") arg)))
-      (re-search-forward (code-shy-fold-block-gen :name "imports" :re t))
-      (re-search-forward "^$")
-      (insert "\n")
-      (insert arg)
-      )
-    )
-  )
 
 ;;;###autoload
 (defun +jg-python-import-snippet (&optional arg)

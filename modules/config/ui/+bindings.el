@@ -3,7 +3,7 @@
 (map! :leader
       :prefix ("w" . "Windows")
       ;; RET - workspace counsel
-
+      :desc "Cleanup Frames"               "c"     #'+jg-ui-cleanup-frames
       :desc "Neotree Sidebar"              "s"     #'+jg-ui-tree/open
       :desc "Balance"                      "b"     #'balance-windows
       :desc "Delete Window"                "d"     #'delete-window

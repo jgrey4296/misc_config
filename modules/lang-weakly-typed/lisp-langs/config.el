@@ -47,6 +47,7 @@
              ;; Ensure straight sees modifications to installed packages
              #'+emacs-lisp-init-straight-maybe-h
              #'abbrev-mode
+             #'maybe-ert-test-minor-mode
              )
 
   (after! general-insert

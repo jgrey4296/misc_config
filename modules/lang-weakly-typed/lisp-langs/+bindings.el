@@ -21,6 +21,7 @@
 
 (map! :map (emacs-lisp-mode-map lisp-interaction-mode-map)
       :localleader
+      :desc "Run Tests"    "t" #'ert-run-tests-interactively
       :desc "Expand macro" "m" #'macrostep-expand
       :desc "Collapse Macro" "q" #'macrostep-collapse
       :desc "Collapse All Macros" "Q" #'macrostep-collapse-all
@@ -116,9 +117,13 @@
       "s" #'buttercup-run-at-point
       )
 
-
 (map! :map dired-mode-map
       :after jg-dired-bindings
       :prefix ("> l" . "lisp")
       :desc "byte compile"        "c" #'dired-do-byte-compile
+      )
+
+(map! :map ert-tests-minor-mode-map
+      :n "RET" #'ert-test-minor-function-dwim
+      :i "RET" #'evil-ret
       )

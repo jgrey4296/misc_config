@@ -66,3 +66,26 @@ This generally applies to your private config (`doom-user-dir') or Doom's source
                     ,(read (default-toplevel-value 'flycheck-emacs-lisp-check-form))))
                 flycheck-disabled-checkers (cons 'emacs-lisp-checkdoc
                                                  flycheck-disabled-checkers))))
+
+;;;###autoload
+(define-minor-mode ert-tests-minor-mode
+  "A Minor mode to eval and run ERT tests in files named *-tests.el"
+  :keymap (make-sparse-keymap)
+  )
+
+;;;###autoload
+(defun maybe-ert-test-minor-mode ()
+  (interactive)
+  (if (and (f-ext? (buffer-name) "el")
+           (s-matches? (rx (+ any) "-tests" string-end) (f-base (buffer-name))))
+      (ert-tests-minor-mode 1)
+      )
+)
+
+(defun ert-test-minor-function-dwim ()
+  "Auto save the file then test the function point is in"
+  (interactive)
+  (basic-save-buffer)
+  (eval-buffer)
+  (call-interactively #'ert-run-tests-interactively)
+  )

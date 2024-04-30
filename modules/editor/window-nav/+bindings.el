@@ -22,9 +22,10 @@
 (map! :leader
       (:prefix "w"
        :desc "3 Column Centered" "3" #'+jg-windows-3-col-centered
+       :desc "Reserve" "r"           #'+jg-windows-toggle-dedicated
        )
       (:prefix "o s"
        :desc "Pop up scratch buffer"        "s"   #'+jg-window-nav--system-scratch
        :desc "open project scratch buffer"  "p"   #'+jg-window-nav--project-scratch
        )
-      )
+)

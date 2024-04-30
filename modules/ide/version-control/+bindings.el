@@ -5,6 +5,7 @@
 ;;-- <leader> g --- git
 (map! :leader
       :prefix ("g" . "git")
+      :desc "Yank Homepage URL"           "h"      #'+jg-vc-yank-homepage
       :desc "Merge Mode"  "m" #'evil-conflict-merge-state
       :desc "Git revert file"             "R"   #'vc-revert
       :desc "Git Todos"                   "T"   #'magit-todos-list

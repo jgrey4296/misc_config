@@ -17,4 +17,5 @@
 (package! dtrt-indent)
 (package! adaptive-wrap)
 
+(package! accent)
 ;; (package! objed)

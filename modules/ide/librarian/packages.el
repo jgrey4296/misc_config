@@ -14,7 +14,6 @@
 (package! browse-url)
 (package! dash-docs)
 (package! counsel-dash)
-(package! xref)
 
 (package! wordnut)
 (package! helm-wordnet)

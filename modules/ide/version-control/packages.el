@@ -1,7 +1,6 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; emacs/jg-vc/packages.el
 
-(package! smerge-mode :built-in t)
 (package! evil-states-plus :recipe (:host github :repo "jgrey4296/evil-states-plus" :includes (conflict-merge-state)))
 
 (package! code-review :recipe (:files ("graphql" "code-review*.el")))

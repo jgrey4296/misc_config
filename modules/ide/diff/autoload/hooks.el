@@ -28,3 +28,15 @@
           diff-hl-delete
           diff-hl-change))
   )
+
+;;;###autoload
+(defun +jg-diff-cleanup-temp-buffers ()
+  (cl-loop for buff in (list ediff-buffer-A ediff-buffer-B ediff-buffer-C)
+           do
+           (when (and (buffer-file-name buff)
+                      (f-descendant-of? (buffer-file-name buff) temporary-file-directory))
+             (message "Is Temp: %s" buff)
+             (kill-buffer buff)
+             )
+           )
+  )

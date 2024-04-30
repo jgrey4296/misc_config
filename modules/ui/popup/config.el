@@ -16,3 +16,13 @@
            ;; #'+popup-set-modeline-on-enable-h
            ;; #'+popup-unset-modeline-on-disable-h
            )
+
+
+(use-package! popup
+  :disabled t
+  )
+(use-package! popwin
+  :disabled t
+  )
+(use-package! popper
+  :disabled t)

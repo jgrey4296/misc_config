@@ -21,5 +21,7 @@
 ;;; Code:
 
 (package! popup)
+(package! popwin)
+(package! popper)
 
 ;;; packages.el ends here

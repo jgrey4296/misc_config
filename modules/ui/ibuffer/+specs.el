@@ -63,6 +63,9 @@
                     '(programming (or (derived-mode . prog-mode)
                                       (mode . ess-mode)
                                       (mode . compilation-mode)))
+                    '(tests        (and (derived-mode . prog-mode)
+                                        (or (name . "test_")
+                                            (name . ".+?[-_]tests?\\."))))
                     '(text        (or (mode . org-mode)
                                       (mode . markdown-mode)
                                       (saved . "TeX")
@@ -117,11 +120,13 @@
                        ;; ("*Project: writing" (projectile-root . "jgrey4296.github.io"))
                        ("Lisp"        (mode . emacs-lisp-mode))
                        ("Python"      (mode . python-mode))
+                       ("Tests"       (saved . "tests"))
                        ("Text"        (saved . "text"))
                        ("Logs"        (or (file-extension . "log")
                                           (basename . "^log\.")))
                        ("Shells"      (or (mode . shell-mode)
-                                          (basename . "^\*repl\*")))
+                                          (mode . comint-mode)
+                                          (name . "^\*repl\*")))
                        ("Data"        (or (saved . "csv")
                                           (saved . "graphql")
                                           (saved . "json")
@@ -163,7 +168,12 @@
                       ("*Project: writing*" (projectile-root . "jgrey4296.github.io"))
                       ("*Project: Dropbox*" (projectile-root . "Dropbox"))
                       )
-                    '(programming ("programming" (saved . "programming")))
+                    '(programming
+                      ("programming" (saved . "programming"))
+                      )
+                    '(tests
+                      ("Tests"       (saved . "tests"))
+                      )
                     )
 
 (spec-handling-add! ibuffer-groups :form 'extend

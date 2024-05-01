@@ -45,7 +45,7 @@
        :desc "Dictionary"                    :n "q" #'librarian-words--definition
        :desc "Thesaurus"                     :n "Q" #'librarian-words--synonyms
 
-       :desc "Debug"    :n "?" #'librarian-debug
+       :desc "Debug"          :n "?" #'librarian-debug
        :desc "Install Docset" :n "0" #'librarian-docset-install
        )
       )

@@ -6,6 +6,7 @@
 ;; See footer for licenses/metadata/notes as applicable
 ;;-- end Header
 
+;;;###autoload
 (defun +jg-python-ruff-format ()
   " Run ruff format on a temp ver of the current buffer
 then run ediff on the result against the original
@@ -30,6 +31,7 @@ then run ediff on the result against the original
     )
   )
 
+;;;###autoload
 (defun +jg-python-isort-diff ()
   " Run isort on a temp ver of the current buffer
 then run ediff on the result against the original

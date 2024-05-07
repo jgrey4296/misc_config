@@ -66,11 +66,11 @@
 ;;-- flycheck
 (after! flycheck
   (setq flycheck-pylintrc '("pylint.toml" "pyproject.toml")
+        flycheck-python-ruff-config '("ruff.toml" ".ruff.toml" "pyproject.toml")
         flycheck--automatically-enabled-checkers (-concat flycheck--automatically-enabled-checkers '(python-ruff))
         flycheck--automatically-disabled-checkers '(python-pylint python-compile python-pyright python-mypy)
-        flycheck-python-ruff-config '("ruff.toml" ".ruff.toml" "pyproject.toml")
         )
-  (push 'python-pylint flycheck-checkers)
+  ;; (push 'python-pylint flycheck-checkers)
   (push ".mypy.ini" flycheck-python-mypy-ini)
   )
 ;;-- end flycheck

@@ -8,6 +8,7 @@
       :desc "Pdf Attach"  "a" #'pdf-meta-attach
       :desc "Pdf Unpack"  "u" #'pdf-meta-detach
       :desc "PdfToText"   "t" #'+jg-pdf-to-text
+      :desc "Linearize"   "l" #'+jg-pdf-linearize
       )
 
 (map! :map pdf-meta-mode-map

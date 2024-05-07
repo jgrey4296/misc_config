@@ -5,7 +5,30 @@
 (defconst jg-bibtex-meta-buffer "*Metadata*")
 
 (defconst jg-bibtex-meta-program "ebook-meta")
+
 (defconst jg-bibtex-full-meta-program "exiftool")
+
+(defconst jg-bibtex-full-meta-args (list
+                                    "-g"                    ;; print group headings
+                                    "-a"                    ;; allow duplicates
+                                    "-u"                    ;; extract unknown tags
+                                    ;; "-s"       ;; short tag names
+                                    ;; "-n"       ;; no print conversion
+                                    ;; "-X"       ;; xml format
+                                    ;; "-j" ;; json format
+                                    "-pdf:all"              ;; all pdf tags
+                                    "-XMP:all"              ;; all xmp tags
+                                    "-XML:all"              ;; all xml (epub) tags
+                                    "-zip:all"
+                                    "-file:filepath"
+                                    "-file:filemodifydate"
+                                    "-file:filetype"
+                                    "-file:filesize"
+
+                                    "--xml:manifest*"       ;; exclude manifest tags
+                                    "--xml:spine*"          ;; exclude spine tags
+                                    "--xml:guidereference*" ;; exclude guideref tags
+                                    ))
 
 (defconst jg-bibtex-meta-opts '(("title     " . "-t")
                                 ("author    " . "-a")
@@ -30,16 +53,21 @@
     (let* ((entry (bibtex-parse-entry))
            (files (-filter #'identity (mapcar #'+jg-bibtex-get-files-fn entry)))
            (procs (cl-loop for file in files
-                            collect
-                            (start-process
-                             (format "bib:meta:%s" (f-base file))
-                             (format "*bib:meta:%s*" (f-base file))
-                             jg-bibtex-full-meta-program
-                             (expand-file-name
-                              (if (f-relative? file) (f-join jg-bibtex-pdf-loc file) file))
-                             )
-                            )
-                   )
+                           collect
+                           (apply #'start-process
+                                  (format "bib:meta:%s" (f-base file))
+                                  (format "*bib:meta:%s*" (f-base file))
+                                  jg-bibtex-full-meta-program
+                                  (-concat jg-bibtex-full-meta-args
+                                           (list (expand-file-name
+                                                  (if (f-relative? file)
+                                                      (f-join jg-bibtex-pdf-loc file)
+                                                    file))
+                                                 )
+                                           )
+                                  )
+                           )
+                  )
            )
       (with-process-wrap! jg-bibtex-meta-buffer procs)
       )

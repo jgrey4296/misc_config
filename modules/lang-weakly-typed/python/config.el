@@ -32,6 +32,7 @@
              #'maybe-py-test-minor-mode
              #'general-insert-minor-mode
              #'abbrev-mode
+             #'flycheck-mode
              )
 
   ;; Always add auto-hide as the last thing

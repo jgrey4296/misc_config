@@ -15,3 +15,11 @@
     (insert (if arg "!: " ": "))
     )
   )
+
+;;;###autoload
+(defun +jg-vc-yank-homepage ()
+  (interactive)
+  (let ((url (+vc--remote-homepage)))
+    (kill-new url)
+    (message "Copied to clipboard: %S" url))
+)

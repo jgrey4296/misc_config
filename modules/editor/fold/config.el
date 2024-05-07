@@ -26,6 +26,8 @@
 
 (use-package! code-shy-minor-mode
   :init
+  (setq code-shy-fold-patterns (list "%s-- %s %s" "%s-- %s %s"))
+
   (add-hook! doom-first-buffer
              #'global-code-shy-minor-mode
              )

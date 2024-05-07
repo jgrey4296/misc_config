@@ -153,14 +153,19 @@ with either a numeric or alphabetical escalation "
 
 
 ;;;###autoload (autoload '+jg-text-simple-grep-op "editor/text-manipulation/autoload/evil-operators" nil t)
-(evil-define-operator +jg-text-simple-grep-op (beg end count)
+(evil-define-operator +jg-text-simple-grep-op (beg end type)
+  " grep through the current buffer, printing matches to a temp buffer "
   :move-point t
-  (interactive)
-  (let ((reg (read-string "Match Regexp: ")))
-    (with-temp-buffer-window "*Text-Results*" 'display-buffer-pop-up-window nil
-      (goto-char (point-min))
-      (while (re-search-forward reg end t)
-        (princ (format "%s : %s\n" (line-number-at-pos) (buffer-substring (line-beginning-position) (line-end-position))))
+  (interactive "<v>")
+  (message "Got Args: %s %s %s" beg end type)
+  (save-excursion
+    (let ((reg (read-string "Match Regexp: ")))
+      (goto-char (or beg (point-min)))
+      (with-temp-buffer-window "*Text-Results*" 'display-buffer-pop-up-window nil
+        (goto-char (point-min))
+        (while (re-search-forward reg (or end (point-max)) t)
+          (princ (format "%s : %s\n" (line-number-at-pos) (buffer-substring (line-beginning-position) (line-end-position))))
+          )
         )
       )
     )
@@ -199,6 +204,25 @@ with either a numeric or alphabetical escalation "
   (interactive "<r><vc>")
   (let ((state evil-state))
     (evil-shift-left beg end count t)
+    (when (eq state 'visual)
+      (evil-normal-state)
+      (evil-visual-restore))
+    )
+  )
+
+;;;###autoload (autoload '+jg-text-remove-indentation "editor/text-manipulation/autoload/evil-operators" nil t)
+(evil-define-operator +jg-text-remove-indentation (beg end count)
+  "Shift text left, preserving state"
+  :type line
+  :motion beginning-of-visual-line
+  :repeat t
+  :keep-visual t
+  (interactive "<r><vc>")
+  (let ((state evil-state))
+    (save-excursion
+      (goto-char beg)
+      (delete-whitespace-rectangle (line-beginning-position) end)
+      )
     (when (eq state 'visual)
       (evil-normal-state)
       (evil-visual-restore))

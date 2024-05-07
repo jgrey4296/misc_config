@@ -2,12 +2,14 @@
 
 ;;;###autoload
 (defun +jg-bindings-wk-filter-fn (binding)
+  "function to reject bindings when using which-key "
   (not (string-match (rx (or "C-"
-                             "C-M"
-                             "M-"
-                             ;; "s-"
-                             ))
-                     (car binding)))
+                                           "C-M"
+                                           "M-"
+                                           ;; "s-"
+                                           (: "<" (+? anychar) ">")
+                                           ))
+                                   (car binding)))
   )
 
 ;;;###autoload

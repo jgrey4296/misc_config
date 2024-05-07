@@ -62,7 +62,7 @@
         ;;(init-file  (f-join (f-parent path) "__init__.py"))
         (log-file   (f-join (projectile-project-root) (concat "log." (f-base path))))
         ;;(error-file (f-join (car (f-split path)) "errors" (concat (f-base path) "_errors.py")))
-        (project    (f-join (projectile-project-root) "dooter.py"))
+        (project    (f-join (projectile-project-root) "doot.toml"))
         (is-test (s-matches? "^test_" (f-filename path)))
         )
     (append (when is-test (list :impl impl-file))

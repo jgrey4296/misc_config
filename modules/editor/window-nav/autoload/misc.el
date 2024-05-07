@@ -31,6 +31,15 @@
     )
   )
 
+;;;###autoload
+(defun +jg-windows-toggle-dedicated ()
+  (interactive)
+  (message "Window Dedication: %s to: %s"
+           (set-window-dedicated-p (selected-window)
+                                   (not (window-dedicated-p (selected-window))))
+           (window-buffer (selected-window))
+           )
+  )
 
 
 ;;-- Footer

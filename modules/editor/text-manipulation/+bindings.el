@@ -7,7 +7,6 @@
 ;; Get rid of zap to char:
 (map! "M-z" nil)
 
-
 (map! :leader
       :desc "Clear All"            "rK" #'+jg-text-clear-all
 
@@ -27,9 +26,10 @@
 
 ;;-- state bindings
 (map! :map jg-binding-normal-state-map
-      :desc "SPC? Insert" "I SPC" #'evil-insert-plus-state
-      :desc "Chars"       "I c"   #'evil-other-chars-state
-      :desc "Rotate"      "R"     #'rotate-text
+      :desc "SPC? Insert" "I SPC"            #'evil-insert-plus-state
+      :desc "Chars"       "I c"              #'evil-other-chars-state
+      :desc "Rotate"      "R"                #'rotate-text
+      :desc "Select Whitespace" "v SPC"      #'+jg-text-visual-select-whitespace
       )
 
 (map! :map jg-binding-insert-state-map
@@ -111,6 +111,7 @@
       :desc "Decr"                        "j"          #'+jg-text-dec-num
       :desc "Incr"                        "k"          #'+jg-text-inc-num
       :desc "Shift Left"                  "h"          #'+jg-text-shift-left
+      :desc "Remove Indentation"          "H"          #'+jg-text-remove-indentation
       :desc "Shift Right"                 "l"          #'+jg-text-shift-right
       :desc "Title Case"                  "t"          #'+jg-text-title-case-op
 
@@ -154,7 +155,6 @@
                )
 
       )
-
 
 (map! :map jg-binding-operator-map
       :desc "Complete/Grow Selection"     "g" (cmds! (eq evil-state 'normal) #'company-manual-begin

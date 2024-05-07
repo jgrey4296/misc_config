@@ -20,8 +20,8 @@
 ;;
 ;;; Code:
 
-
 (local-load! "+vars")
+
 (defer-load! jg-bindings-total "+bindings")
 ;;todo https://github.com/Bitnut/diffgit
 
@@ -45,17 +45,32 @@
   )
 
 (use-package! diff-mode :defer t)
+
 (use-package! ediff
   :defer t
   :config
   (add-hook! 'ediff-before-setup-hook
     (defun doom-ediff-save-wconf-h ()
       (setq doom--ediff-saved-wconf (current-window-configuration))))
+
+  (add-hook! 'ediff-prepare-buffer-hook
+    (defun +jg-diff-unfold-h ()
+      (evil-open-folds)
+      (vimish-fold-unfold-all)
+      )
+    )
   (add-hook! '(ediff-quit-hook ediff-suspend-hook) :append
     (defun doom-ediff-restore-wconf-h ()
       (when (window-configuration-p doom--ediff-saved-wconf)
         (set-window-configuration doom--ediff-saved-wconf))))
+
+  (add-hook! '(ediff-cleanup-hook) :append
+             #'+jg-diff-cleanup-temp-buffers
+             )
+
   )
+
+
 (use-package! vdiff :defer t)
 
 ;;; config.el ends here

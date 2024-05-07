@@ -4,7 +4,7 @@
 
 (map! :leader
       :prefix "o"
-      "s e" 'trie-explore/explore-current-buffer)
+      :desc "Trie Explorer" "1" 'trie-explore/explore-current-buffer)
 
 (map! :map acab-rule-mode-map
       :localleader

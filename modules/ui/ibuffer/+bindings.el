@@ -57,6 +57,7 @@
       :desc "recency"          "v"  #'ibuffer-do-sort-by-recency
       :desc "git status"       "g"  #'ibuffer-do-sort-by-vc-status
       :desc "project"          "p"  #'ibuffer-do-sort-by-project-name
+      :desc "Toggled"          "t"  #'ibuffer-do-sort-by-marked
       )
 
 ;;-- end sorting
@@ -146,8 +147,7 @@
 
 (map! :map jg-ibuffer-mode-map
       "\\" 'jg-ibuffer-filter-map
-      "S"  'jg-ibuffer-sort-map
-      "s"  'jg-ibuffer-sort-map
+      "o"  'jg-ibuffer-sort-map
       )
 (evil-make-overriding-map jg-ibuffer-mode-map 'normal)
 (setq ibuffer-mode-map jg-ibuffer-mode-map)

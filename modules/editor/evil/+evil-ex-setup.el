@@ -32,6 +32,7 @@
 (evil-ex-define-cmd "top"                    #'evil-goto-char)
 (evil-ex-define-cmd "w[rite]"                #'evil-write)
 (evil-ex-define-cmd "wa[ll]"                 #'evil-write-all)
+(evil-ex-define-cmd "W"                      #'evil-write-all)
 (evil-ex-define-cmd "pwd"                    #'+evil:pwd)
 (evil-ex-define-cmd "="                      #'evil-ex-line-number)
 (evil-ex-define-cmd "list"                   #'+jg-evil-list-ex-commands)

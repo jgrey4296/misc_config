@@ -13,10 +13,9 @@
       (goto-char (point-min))
       (widen)
       (re-search-forward "import")
-      (forward-line -1)
       (setq start (line-beginning-position))
-      (re-search-forward "end imports")
-      (re-search-forward "import")
+      (forward-line)
+      (re-search-forward (rx (or "end 1st party imports" "end imports")))
       (forward-line)
       (while (looking-at "^\\($\\|.*import\\)")
         (forward-line)
@@ -24,12 +23,7 @@
       (forward-line -1)
       (setq end (line-end-position))
       (narrow-to-region start end)
+      (goto-char (point-max))
       )
     )
-  )
-
-;;;###autoload
-(defun +jg-python--add-import ()
-  "TODO"
-  (interactive)
   )

@@ -69,41 +69,49 @@
 (defun +jg-latex-compile-file-quick ()
   "  "
   (interactive)
-  (when (and jg-latex-compile-quick-process (process-live-p jg-latex-compile-quick-process))
-    (kill-process jg-latex-compile-quick-process))
+  (when (and jg-latex-compile-quick-process (process-live-p jg-latex-compile-quick-process)))
   (-when-let (buff (get-buffer "*latex-check*"))
     (kill-buffer buff))
 
-  (setq jg-latex-compile-quick-process (make-process
-                                        :name "latex-quick"
-                                        :buffer "*latex-check*"
-                                        :noquery t
-                                        :sentinel #'(lambda (proc stat)
-                                                      (when (not (process-live-p proc))
-                                                        (message "Latex Compile of %s Result: %s"
-                                                                 jg-latex-compile-quick-file
-                                                                 (process-exit-status proc)
-                                                                 )
-                                                        (when  (not (eq 0 (process-exit-status proc)))
-                                                          (display-buffer "*latex-check*")
-                                                          (save-window-excursion
-                                                            (when (get-buffer-window "*latex-check*")
-                                                              (with-selected-window (get-buffer-window "*latex-check*")
-                                                                (goto-char (point-max))
-                                                                (recenter))
-                                                              )
+  (basic-save-buffer)
+  (let* ((curr-file (buffer-file-name))
+         (compile-with (save-excursion
+                         (goto-char (point-min))
+                         (re-search-forward jg-latex-compile-search-re)
+                         (or (match-string 1) jg-latex-compile-program)
+                         ))
+         (output-dir (format "-output-directory=%s" default-directory))
+         (compile-cmd (append (list compile-with output-dir) jg-latex-compile-args))
+         )
+    (setq jg-latex-compile-quick-process (make-process
+                                          :name "latex-quick"
+                                          :buffer "*latex-check*"
+                                          :noquery t
+                                          :sentinel #'(lambda (proc stat)
+                                                        (when (not (process-live-p proc))
+                                                          (message "Latex Compile of %s Result: %s"
+                                                                   jg-latex-compile-quick-file
+                                                                   (process-exit-status proc)
+                                                                   )
+                                                          (when  (not (eq 0 (process-exit-status proc)))
+                                                            (display-buffer "*latex-check*")
+                                                            (save-window-excursion
+                                                                (when (get-buffer-window "*latex-check*")
+                                                                (with-selected-window (get-buffer-window "*latex-check*")
+                                                                  (goto-char (point-max))
+                                                                  (recenter))
+                                                                )
+                                                                )
                                                             )
                                                           )
                                                         )
-                                                      )
-                                        :stderr nil
-                                        :command
-                                        (append
-                                         (list jg-latex-compile-program
-                                               "-interaction=nonstopmode"
-                                               )
-                                         (list "-draftmode"
-                                               (buffer-file-name))))
-        jg-latex-compile-quick-file (f-base (buffer-file-name))
-        )
+                                          :stderr nil
+                                          :command
+                                          (append
+                                           compile-cmd
+                                           (list "-draftmode"
+                                                 (buffer-file-name))))
+          jg-latex-compile-quick-file (f-base (buffer-file-name))
+          )
+    )
   )

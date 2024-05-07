@@ -6,7 +6,6 @@
 (spec-handling-add! popup
                     '(my-rules
                       ("^\\*shell"            :side bottom :ttl nil :height 0.3 :quit t :select t :priority 100)
-                      ("\*.*?scratch.*?\\*"   :side right  :ttl nil :width  50  :quit t :select t)
                       ("\\*Messages"          :side bottom :ttl nil :height 0.4 :quit t :select nil :priority 100)
                       ("\\*compilation"       :side bottom :ttl 5   :height 0.4 :quit t :select nil)
                       ("\\*Pp Eval Output\\*" :side right  :ttl 20  :width 0.4  :quit t :select nil)

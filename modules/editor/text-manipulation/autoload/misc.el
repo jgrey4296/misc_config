@@ -93,6 +93,12 @@
   (insert (shell-command-to-string "randname"))
   )
 
+;;;###autoload
+(defun +jg-text-visual-select-whitespace ()
+    (interactive)
+    (evil-visual-char)
+    (call-interactively #'+jg-text-spaces)
+  )
 
 ;;;###autoload
 (advice-add 'evil-join :after #'+jg-text-join-line-bol)

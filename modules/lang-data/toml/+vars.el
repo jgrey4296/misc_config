@@ -1,7 +1,7 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
 (after! projectile
-  (pushnew! projectile-project-root-files "dooter.py" "doot.toml")
+  (pushnew! projectile-project-root-files "doot.toml")
   )
 
 ;; (spec-handling-add! projects

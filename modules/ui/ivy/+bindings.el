@@ -122,8 +122,7 @@
 
 ;;-- leader helms/ivys
 (map! :leader
-      :desc "SCRATCH"                      "6" (cmd! (+jg-popup-ivy-open "*scratch*"))
-      :desc "Messages"                     "0" (cmd! (+jg-popup-ivy-open "*Messages*") (when current-prefix-arg (with-current-buffer "*Messages*" (+jg-text-clear-buffer))))
+      :desc "Messages"                     "0" #'+jg-ivy-popup-messages
       )
 ;;-- end leader helms/ivys
 

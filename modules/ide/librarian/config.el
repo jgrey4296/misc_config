@@ -69,13 +69,11 @@
   :commands (librarian-mode librarian-url)
   :after transient-toggles
   :hook (doom-first-input . global-librarian-mode)
-  :init
-  (transient-make-mode-toggle! librarian-mode "Librarian" "b")
-  (transient-append-suffix 'jg-toggle-main "c" '("b" transient-macro-toggle-librarian-mode))
   :config
   (+jg-librarian-add-librarian-transient)
   (librarian-tagging-mode-rebuild-tag-database)
   (global-librarian-tagging-mode)
+  (setq librarian-default-browser "firefox")
   ;; choose backends?
   )
 

@@ -22,6 +22,7 @@ or terminating simple string."
 
   (add-hook! 'csharp-mode-hook
              #'general-insert-minor-mode
+             #'origami-mode
              )
   )
 

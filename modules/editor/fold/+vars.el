@@ -79,21 +79,19 @@
 ;;-- end hide show
 
 ;;-- origami
-(when (modulep! +origami)
-  (spec-handling-add! fold
-                      '(origami
-                       :modes (origami-mode)
-                       :priority -100
-                       :triggers (:open-all   origami-open-all-nodes
-                                  :close-all  origami-close-all-nodes
-                                  :toggle     origami-toggle-node
-                                  :open       origami-open-node
-                                  :open-rec   origami-open-node-recursively
-                                  :close      origami-close-node
-                                  )
-                       )
-                     )
-  )
+(spec-handling-add! fold
+                    `(origami
+                      :modes (origami-mode)
+                      :priority -25
+                      :triggers (:open-all   ,#'+jg-origami-open-all-nodes
+                                 :close-all  ,#'+jg-origami-close-all-nodes
+                                 :toggle     ,#'+jg-origami-toggle-node
+                                 :open       ,#'+jg-origami-open-node
+                                 :open-rec   ,#'+jg-origami-open-node-recursively
+                                 :close      ,#'+jg-origami-close-node
+                                 )
+                      )
+                    )
 ;;-- end origami
 
 ;;-- outline

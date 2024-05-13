@@ -120,7 +120,17 @@
 ;;-- tree-sitter
 (setq tree-sitter-debug-jump-buttons t ;; This makes every node a link to a section of code
       tree-sitter-debug-highlight-jump-region t ;; and this highlights the entire sub tree in your code
+      tree-sitter-load-path (list
+                             (expand-file-name (format "straight/%s/tree-sitter-langs/bin/" straight-build-dir) doom-local-dir)
+                             (expand-file-name "~/.local/tree-sitter/")
+                             )
+
+
       )
+
+(setq treesit-extra-load-path tree-sitter-load-path
+      ;; treesit-load-name-override-list '()
+ )
 ;;-- end tree-sitter
 
 ;;-- specs

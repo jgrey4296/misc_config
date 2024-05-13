@@ -214,7 +214,7 @@
 
 ;;-- end flycheck
 
-(use-package! tree-sitter
+(use-package! tree-sitter ;; Melpas
   :defer t
   :config
   (require 'tree-sitter-langs)
@@ -228,6 +228,10 @@
 (use-package! lint-result-mode
   :config
   (add-hook 'lint-result-mode-hook '+fold/close-all)
+  )
+
+(use-package! treesit ;; builtin
+  :defer t
   )
 
 ;;; config.el ends here

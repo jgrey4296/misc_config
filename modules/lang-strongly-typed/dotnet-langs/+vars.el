@@ -1,6 +1,7 @@
 ;; -*- mode:emacs-lisp; lexical-binding: t;-*-
 
 ;;-- csharp
+(push '(c-sharp "c-sharp" "tree_sitter_c_sharp") treesit-load-name-ovveride-list)
 
 ;;-- end csharp
 

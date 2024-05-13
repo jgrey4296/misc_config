@@ -18,11 +18,11 @@
   "Open the the current tree package window in the current project."
   (interactive)
   (pcase jg-ui-tree-active-tree-package
-    (treemacs
+    ('treemacs
      (require 'treemacs)
      (treemacs)
      )
-    (neotree
+    ('neotree
      (require 'neotree)
      (neotree-dir (or (projectile-project-root) default-directory))
      )

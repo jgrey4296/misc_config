@@ -30,7 +30,9 @@
 (setq org-archive-subtree-save-file-p t)
 
 (push 'org-indent-mode minor-mode-list)
-(push '("Scholar" . "https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q=%s") org-link-abbrev-alist)
+(after! 'ol
+  (push '("Scholar" . "https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q=%s") org-link-abbrev-alist)
+  )
 
 ;; (textobjects insert navigation additional shift todo heading calendar)
 (setq evil-org-key-theme '(textobjects insert shift todo)

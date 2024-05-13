@@ -10,20 +10,11 @@
                  :when '(+csharp-sp-point-in-type-p)
                  :post-handlers '(("| " "SPC")))
 
-  (add-hook! 'csharp-mode-hook
+  (add-hook! '(csharp-mode-hook csharp-ts-mode-hook)
              #'rainbow-delimiters-mode
              #'general-insert-minor-mode
              #'origami-mode
              )
-  )
-
-(use-package! csharp-tree-sitter
-  :after csharp-mode
-  :init
-  (add-hook 'csharp-mode-local-vars-hook #'tree-sitter! 'append)
-  (when (fboundp #'csharp-tree-sitter-mode)
-    (add-to-list 'auto-mode-alist '("\\.cs\\'" . csharp-tree-sitter-mode))
-    )
   )
 
 (use-package! fsharp-mode

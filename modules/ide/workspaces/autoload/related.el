@@ -1,5 +1,7 @@
 ;;; +related.el -*- lexical-binding: t; -*-
 
+(defvar-local jg-workspaces-find-buff-fn)
+
 ;;;###autoload
 (defun +jg-projects-find-related ()
   " Get related files, if it exists, open it "

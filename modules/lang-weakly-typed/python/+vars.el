@@ -48,6 +48,11 @@
 (modify-syntax-entry ?_ "_" python-mode-syntax-table)
 ;;-- end general python
 
+;;-- tree-sitter
+(push '(python "python" "tree_sitter_python") treesit-load-name-override-list)
+
+;;-- end tree-sitter
+
 ;;-- outline
 (rx-let ((kwds (regexp (eval (s-join "\\|" py-outline-mode-keywords))))
          )
@@ -162,7 +167,7 @@
                     )
 (spec-handling-add! fold
                     `(python
-                     :modes (python-mode)
+                     :modes (python-mode python-ts-mode)
                      :priority 25
                      :triggers (:close     ,#'+jg-python-close-class-defs
                                 :close-all ,#'+jg-python-close-all-defs

@@ -154,7 +154,7 @@ Targets `vimmish-fold', `hideshow' and `outline' folds."
 (defun +jg-fold/debug ()
   (interactive)
   (message "Using Fold Spec: %s" (cl-loop for spec in evil-fold-list
-                                          if (evil--mode-p (ensure-list (caar spec)))
+                                          if (evil--mode-p (ensure-list (car spec)))
                                           return spec
                                           else do '(nil)
                                           )

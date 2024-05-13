@@ -11,6 +11,29 @@
 (use-package! python
   :config
   (require 'python-mode)
+
+  ;; setup python-ts-mode
+  (add-hook! 'python-ts-mode-hook
+             #'+python-use-correct-flycheck-executables-h
+             #'abbrev-mode
+             #'flycheck-mode
+             #'maybe-py-test-minor-mode
+             #'evil-collection-python-set-evil-shift-width
+             #'general-insert-minor-mode
+             #'+jg-python-auto-hide
+             )
+
+  (setq-hook! 'python-mode-hook
+    tab-width                    py-indent-offset
+    end-of-defun-function       #'python-nav-end-of-defun
+    beginning-of-defun-function #'python-nav-beginning-of-defun
+
+    indent-line-function        #'py-indent-line
+    indent-region-function      #'py-indent-region
+    lsp-diagnostic-filter       #'+jg-python-lsp-flycheck-filter
+
+    jg-workspaces-find-buff-fn #'+jg-python-carousel-window-fn
+    )
   )
 
 (use-package! python-mode

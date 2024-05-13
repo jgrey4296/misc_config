@@ -1,10 +1,42 @@
 ;;; lang/jg-org/+vars.el -*- lexical-binding: t; -*-
 
-;; (textobjects insert navigation additional shift todo heading calendar)
-(setq evil-org-key-theme '(textobjects insert shift todo)
-      org-cycle-separator-lines 3
+
+;;-- org core
+;; locations
+(setq org-id-locations-file (expand-file-name "~/.cache/org/.orgids")
+      org-archive-location  (string-join `(
+                                           ,(expand-file-name "archive.org" org-directory)
+                                           "* Main Archive"
+                                           )
+                                         "::"
+                                         )
+      org-agenda-files      (list initial-buffer-choice
+                                  (expand-file-name "todo.org" org-directory)
+                                  )
       )
 
+;; ORG SETUP
+(setq-default org-fast-tag-selection-single-key nil
+              org-from-is-user-regexp "\\<John Grey\\>"
+              org-group-tags nil
+              org-use-fast-tag-selection t
+              org-tags-column 50
+              org-startup-indented nil
+              org-indent--deepest-level 20
+              org-element-use-cache nil
+            )
+
+;; Save target buffer after archiving a node.
+(setq org-archive-subtree-save-file-p t)
+
+(push 'org-indent-mode minor-mode-list)
+(push '("Scholar" . "https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q=%s") org-link-abbrev-alist)
+
+;; (textobjects insert navigation additional shift todo heading calendar)
+(setq evil-org-key-theme '(textobjects insert shift todo)
+    org-cycle-separator-lines 3
+    )
+;;-- end org core
 
 ;;-- pomodoro
 ;; set pomodoro log variable
@@ -24,26 +56,6 @@
   (add-hook 'org-pomodoro-finished-hook '+jg-org-pomodoro-end-hook)
   )
 ;;-- end pomodoro
-
-;;-- org core
-(after! org
-  ;;ORG SETUP
-  (setq-default org-fast-tag-selection-single-key nil
-                org-from-is-user-regexp "\\<John Grey\\>"
-                org-group-tags nil
-                org-use-fast-tag-selection t
-                org-tags-column 50
-                org-startup-indented nil
-                org-indent--deepest-level 20
-                org-element-use-cache nil
-                )
-  ;; Save target buffer after archiving a node.
-  (setq org-archive-subtree-save-file-p t)
-
-  (push 'org-indent-mode minor-mode-list)
-  (push '("Scholar" . "https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q=%s") org-link-abbrev-alist)
-  )
-;;-- end org core
 
 ;;-- visual
 (after! org-superstar

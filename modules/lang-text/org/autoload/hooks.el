@@ -3,9 +3,18 @@
 ;;;###autoload
 (defun +org-init-org-directory-h ()
   (unless org-directory
-    (setq-default org-directory "~/org"))
+    (error "No Org directory defined")
+    )
   (unless org-id-locations-file
-    (setq org-id-locations-file (expand-file-name ".orgids" org-directory))))
+    (error "No Org ids file")
+    )
+  (unless org-archive-location
+    (error "No org archive location")
+    )
+  (unless org-agenda-files
+    (error "No Org agenda files")
+    )
+  )
 
 ;;;###autoload
 (defun +org-init-agenda-h ()

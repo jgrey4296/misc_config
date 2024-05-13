@@ -1,0 +1,11 @@
+#+TITLE: Elisp Demos
+
+* %
+
+#+BEGIN_SRC elisp
+;; JG Example
+(% 10 4)
+#+END_SRC
+
+#+RESULTS:
+: 2

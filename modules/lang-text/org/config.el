@@ -19,43 +19,44 @@
   ;; Add our general hooks after the submodules, so that any hooks the
   ;; submodules add run after them, and can overwrite any defaults if necessary.
   (add-hook! 'org-mode-hook
-             ;; `show-paren-mode' causes flickering with indent overlays made by
-             ;; `org-indent-mode', so we turn off show-paren-mode altogether
-             #'doom-disable-show-paren-mode-h
-             ;; disable `show-trailing-whitespace'; shows a lot of false positives
-             #'doom-disable-show-trailing-whitespace-h
-             ;; #'+org-enable-auto-reformat-tables-h
-             ;; #'+org-enable-auto-update-cookies-h
-             #'+org-make-last-point-visible-h
-             #'abbrev-mode
-             )
+                 ;; `show-paren-mode' causes flickering with indent overlays made by
+                 ;; `org-indent-mode', so we turn off show-paren-mode altogether
+                 #'doom-disable-show-paren-mode-h
+                 ;; disable `show-trailing-whitespace'; shows a lot of false positives
+                 #'doom-disable-show-trailing-whitespace-h
+                 ;; #'+org-enable-auto-reformat-tables-h
+                 ;; #'+org-enable-auto-update-cookies-h
+                 #'+org-make-last-point-visible-h
+                 #'abbrev-mode
+                 )
 
-  (add-hook! 'org-load-hook
-             #'+org-init-org-directory-h
-             #'+org-init-appearance-h
-             #'+org-init-agenda-h
-             #'+org-init-attachments-h
-             #'+org-init-babel-h
-             #'+org-init-babel-lazy-loader-h
-             #'+org-init-capture-defaults-h
-             #'+org-init-capture-frame-h
-             #'+org-init-custom-links-h
-             #'+org-init-export-h
-             #'+org-init-habit-h
-             #'+org-init-hacks-h
-             #'+org-init-smartparens-h
-             #'+org-init-keybinds-h
-             )
+  (after! 'org
+    #'+org-init-org-directory-h
+    #'+org-init-appearance-h
+    #'+org-init-agenda-h
+    #'+org-init-attachments-h
+    #'+org-init-babel-h
+    #'+org-init-babel-lazy-loader-h
+    #'+org-init-capture-defaults-h
+    #'+org-init-capture-frame-h
+    #'+org-init-custom-links-h
+    #'+org-init-export-h
+    #'+org-init-habit-h
+    #'+org-init-hacks-h
+    #'+org-init-smartparens-h
+    #'+org-init-keybinds-h
+    )
 
   (after! org-protocol
-    (advice-remove 'server-visit-files #'org--protocol-detect-protocol-server))
+    )
 
   ;; In case the user has eagerly loaded org from their configs
   (when (and (featurep 'org)
              (not byte-compile-current-file))
     (unless (doom-context-p 'reload)
       (message "`org' was already loaded by the time lang/org loaded, this may cause issues"))
-    (run-hooks 'org-load-hook))
+    (provide 'org)
+    )
 
   :config
   (add-to-list 'doom-debug-variables 'org-export-async-debug)

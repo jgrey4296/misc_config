@@ -4,9 +4,9 @@
   (pushnew! projectile-project-root-files "config.el")
   )
 
-(setq 'elisp-demos-user-files (list
-                               (doom-module-expand-path :lang-weakly-typed 'lisp-langs "elisp-demos.org")
-                               )
+(setq elisp-demos-user-files (list
+                              (doom-module-expand-path :lang-weakly-typed 'lisp-langs "elisp-demos.org")
+                              )
       )
 
 ;;-- specs

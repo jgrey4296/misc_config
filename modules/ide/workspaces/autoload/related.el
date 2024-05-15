@@ -1,6 +1,5 @@
 ;;; +related.el -*- lexical-binding: t; -*-
 
-(defvar-local jg-workspaces-find-buff-fn)
 
 ;;;###autoload
 (defun +jg-projects-find-related ()
@@ -10,7 +9,7 @@
                          (+jg-projects-find-related-directory)
                        (projectile--find-related-file (buffer-file-name))))
                (buff-exists (f-exists? buff))
-               (wind-fn (cond ((boundp 'jg-workspaces-find-buff-fn)
+               (wind-fn (cond ((fboundp 'jg-workspaces-find-buff-fn)
                                jg-workspaces-find-buff-fn)
                               ((eq major-mode 'dired-mode)
                                #'find-file)

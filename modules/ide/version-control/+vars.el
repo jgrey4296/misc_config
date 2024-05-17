@@ -74,6 +74,7 @@
                       ("/\\.gitignore\\'"     . gitignore-mode)
                       ("/\\.gitconfig\\'"     . gitconfig.mode)
                       ("/git-rebase-todo\\'"  . git-rebase-mode)
+                      ("/\\.gitattributes\\'" . gitattributes-mode)
                       )
                     )
 

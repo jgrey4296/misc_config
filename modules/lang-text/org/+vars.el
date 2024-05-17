@@ -3,7 +3,7 @@
 
 ;;-- org core
 ;; locations
-(setq org-id-locations-file (expand-file-name "~/.cache/org/.orgids")
+(setq org-id-locations-file (expand-file-name "~/_cache_/org/.orgids")
       org-archive-location  (string-join `(
                                            ,(expand-file-name "archive.org" org-directory)
                                            "* Main Archive"

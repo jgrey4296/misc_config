@@ -55,7 +55,7 @@
 
 (setq mail-user-agent 'sendmail-user-agent)
 
-(setq mu4e-maildir (or (getenv "MAILDIR") "~/.cache/mail/")
+(setq mu4e-maildir (or (getenv "MAILDIR") "~/_cache_/mail/")
       mu4e-user-mail-address-list nil
       evil-collection-mu4e-end-region-misc "quit"
       mail-user-agent                          'mu4e-user-agent

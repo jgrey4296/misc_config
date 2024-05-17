@@ -25,7 +25,7 @@
 
 ;;-- omit-patterns
 (rx-let ((filename (*? graph))
-         (system (| "." "TheVolumeSettingsFolder" (: ?. (? filename) "cache")))
+         (system (| "." "TheVolumeSettingsFolder" (: ?. (? filename) "cache") "_cache_"))
          (dotfiles (: ?. (? "_.") (| "CFUserTextEncoding" "DS_Store" "DocumentRevisions-V100" "PKInstallSandboxManager"
                                      "Spotlight-V100" "TemporaryItems" "Trash" "Trashes" "apdisk" "com.apple.timemachine.donotpresent"
                                      "TheVolumeSettingsFolder"

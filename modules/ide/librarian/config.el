@@ -24,7 +24,7 @@
   :defer t
   :config
   (setq dash-docs-enable-debugging init-file-debug
-        dash-docs-docsets-path (expand-file-name "~/.cache/docsets")
+        dash-docs-docsets-path (expand-file-name "~/_cache_/docsets")
         dash-docs-min-length 2
         dash-docs-browser-func #'browse-url
         )

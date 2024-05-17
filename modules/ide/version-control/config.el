@@ -19,12 +19,12 @@
   :init
   :config
   ;; The default location for git-credential-cache is in
-  ;; ~/.cache/git/credential. However, if ~/.git-credential-cache/ exists, then
+  ;; ~/_cache_/git/credential. However, if ~/.git-credential-cache/ exists, then
   ;; it is used instead. Magit seems to be hardcoded to use the latter, so here
   ;; we override it to have more correct behavior.
   (unless (file-exists-p "~/.git-credential-cache/")
     (setq magit-credential-cache-daemon-socket (doom-glob (or (getenv "XDG_CACHE_HOME")
-                                                              "~/.cache/")
+                                                              "~/_cache_/")
                                                           "git/credential/socket")))
 
   (add-to-list 'doom-debug-variables 'magit-refresh-verbose)
@@ -168,3 +168,10 @@
 (use-package! conflict-merge-state)
 
 (use-package! treemacs-magit)
+
+(use-package! git-modes
+  :defer t
+  (add-hook! (gitconfig-mode gitattributes-mode gitignore-mode)
+             #'general-insert-minor-mode
+             )
+  )

@@ -57,7 +57,7 @@
                      "[⇒](s)"   ; Task is in progress
                      "[∃](w)"   ; Task is being held up or paused
                      "|"
-                     "[⟙](D!)"    ; Task was completed
+                     "[⟙](c!)"    ; Task was completed
                      "[⟘](f@!)"   ; Task was failed
                      ))
       (eval-status '(sequence
@@ -76,16 +76,16 @@
 (defvar jg-org-todo-faces
   '(("IDEA"    . +org-todo-project)
 
-    ("[⇒]"     . +org-todo-active)
-    ("ACTIVE"  . +org-todo-active)
+    ("[⇒]"     . org-list-dt)
+    ("ACTIVE"  . org-list-dt)
 
-    ("[∃]"     . +org-todo-onhold)
-    ("BLOCKED" . +org-todo-onhold)
-    ("QUEUED"  . +org-todo-onhold)
+    ("[∃]"     . org-todo)
+    ("BLOCKED" . org-warning)
+    ("QUEUED"  . org-date)
 
     ("NO"      . +org-todo-cancel)
-    ("DEAD"    . +org-todo-cancel)
-    ("[⟘]"     . +org-todo-cancel)
+    ("DEAD"    . org-priority)
+    ("[⟘]"     . org-priority)
     )
   "Faces for my keywords"
   )

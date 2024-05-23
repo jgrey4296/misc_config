@@ -31,7 +31,7 @@
              )
   (setq-hook! 'org-mode-hook
     tab-width 8
-    (setq org-todo-keywords      jg-org-todo-keywords
+    org-todo-keywords      jg-org-todo-keywords
     org-todo-keyword-faces jg-org-todo-faces
     )
 

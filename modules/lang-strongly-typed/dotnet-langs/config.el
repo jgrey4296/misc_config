@@ -56,3 +56,7 @@
 (use-package! sln-mode
   :after csharp-mode
   )
+
+(use-package! csproj-mode
+    :defer t
+)

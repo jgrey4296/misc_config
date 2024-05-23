@@ -14,6 +14,7 @@
 
   ;; setup python-ts-mode
   (add-hook! 'python-ts-mode-hook
+             #'hs-minor-mode
              #'+python-use-correct-flycheck-executables-h
              #'abbrev-mode
              #'flycheck-mode

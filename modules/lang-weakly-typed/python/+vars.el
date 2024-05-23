@@ -147,13 +147,13 @@
                     )
 (spec-handling-add! file-templates
                     '(python
-                      ("LICENSE\\'"            :trigger "__license-acab"   :mode text-mode   :priority 100)
+                      ("LICENSE\\'"               :trigger "__license-acab"   :mode text-mode   :priority 100)
                       ;;Configs:
-                      ("pyproject.toml\\'"     :trigger "__pyproject"      :mode python-mode)
-                      ("pyrightconfig.json\\'" :trigger "__pyright_config" :mode python-mode)
-                      ("pylint.toml"           :trigger "__pylint"         :mode python-mode)
-                      ("jekyl.toml"            :trigger "__jekyll"         :mode python-mode)
-                      ("ruff.toml"  trigger "__ruff_config"                :mode python-mode)
+                      ("pyproject.toml\\'"        :trigger "__pyproject"      :mode conf-toml-mode)
+                      ("pyrightconfig.json\\'"    :trigger "__pyrightconfig"  :mode json-mode)
+                      ("pylint.toml\\'"           :trigger "__pylint"         :mode conf-toml-mode)
+                      ("jekyl.toml\\'"            :trigger "__jekyll"         :mode conf-toml-mode)
+                      ("ruff.toml\\'"             :trigger "__ruff_config"    :mode conf-toml-mode)
 
                       ;; Python:
                       ("__init__\\.py\\'"      :trigger "__init"           :mode python-mode)
@@ -167,7 +167,7 @@
                     )
 (spec-handling-add! fold
                     `(python
-                     :modes (python-mode python-ts-mode)
+                     :modes python-mode
                      :priority 25
                      :triggers (:close     ,#'+jg-python-close-class-defs
                                 :close-all ,#'+jg-python-close-all-defs
@@ -177,6 +177,17 @@
                                 :toggle    ,#'outline-toggle-children
                                 )
                      )
+                    `(python-ts
+                     :modes python-ts-mode
+                     :priority 25
+                     :triggers (:close     ,#'hs-hide-block-at-point
+                                :close-all ,#'hs-hide-all
+                                :open      ,#'hs-show-block
+                                :open-all  ,#'hs-show-all
+                                :open-rec  ,#'hs-show-all
+                                :toggle    ,#'hs-toggle-hiding
+                                )
+                      )
                     )
 (spec-handling-add! rotate-text
                     '(python-mode

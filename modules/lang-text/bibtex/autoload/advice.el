@@ -110,19 +110,4 @@ Also sets `bibtex-completion-display-formats-internal'."
   (save-excursion (apply fn args))
   )
 
-;;;###autoload
-(advice-add 'org-ref-build-full-bibliography :override #'+jg-build-bibliography-a)
-;;;###autoload
-(advice-add 'bibtex-autokey-get-field :around #'+jg-bibtex-autokey-field-expand-a)
-;;;###autoload
-(advice-add 'bibtex-set-field :override #'+jg-bibtex-set-field-a)
-;;;###autoload
-(advice-add 'org-ref-version :around #'+jg-org-ref-version-override-a)
-;;;###autoload
-(advice-add 'bibtex-completion-init :override #'+jg-bibtex-init-no-file-watchers-a)
-
-;;;###autoload
-(advice-add 'org-ref-clean-bibtex-entry :around #'+jg-bibtex-clean-dont-move-a)
-
-
 ;;; +advice.el ends here

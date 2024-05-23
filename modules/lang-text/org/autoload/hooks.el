@@ -847,11 +847,3 @@ between the two."
 (defun +org-init-smartparens-h ()
   ;; Disable the slow defaults
   (provide 'smartparens-org))
-
-;;;###autoload
-(defun +org-init-gifs-h ()
-      (remove-hook 'post-command-hook #'+org-play-gif-at-point-h t)
-      (remove-hook 'post-command-hook #'+org-play-all-gifs-h t)
-      (pcase +org-startup-with-animated-gifs
-        (`at-point (add-hook 'post-command-hook #'+org-play-gif-at-point-h nil t))
-        (`t (add-hook 'post-command-hook #'+org-play-all-gifs-h nil t))))

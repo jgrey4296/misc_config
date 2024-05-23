@@ -19,16 +19,21 @@
   ;; Add our general hooks after the submodules, so that any hooks the
   ;; submodules add run after them, and can overwrite any defaults if necessary.
   (add-hook! 'org-mode-hook
-                 ;; `show-paren-mode' causes flickering with indent overlays made by
-                 ;; `org-indent-mode', so we turn off show-paren-mode altogether
-                 #'doom-disable-show-paren-mode-h
-                 ;; disable `show-trailing-whitespace'; shows a lot of false positives
-                 #'doom-disable-show-trailing-whitespace-h
-                 ;; #'+org-enable-auto-reformat-tables-h
-                 ;; #'+org-enable-auto-update-cookies-h
-                 #'+org-make-last-point-visible-h
-                 #'abbrev-mode
-                 )
+             ;; `show-paren-mode' causes flickering with indent overlays made by
+             ;; `org-indent-mode', so we turn off show-paren-mode altogether
+             #'doom-disable-show-paren-mode-h
+             ;; disable `show-trailing-whitespace'; shows a lot of false positives
+             #'doom-disable-show-trailing-whitespace-h
+             ;; #'+org-enable-auto-reformat-tables-h
+             ;; #'+org-enable-auto-update-cookies-h
+             #'+org-make-last-point-visible-h
+             #'abbrev-mode
+             )
+  (setq-hook! 'org-mode-hook
+    tab-width 8
+    (setq org-todo-keywords      jg-org-todo-keywords
+    org-todo-keyword-faces jg-org-todo-faces
+    )
 
   (after! 'org
     #'+org-init-org-directory-h
@@ -47,8 +52,6 @@
     #'+org-init-keybinds-h
     )
 
-  (after! org-protocol
-    )
 
   ;; In case the user has eagerly loaded org from their configs
   (when (and (featurep 'org)
@@ -78,13 +81,6 @@
   ;; HACK For functions that dodge `org-open-at-point-functions', like
   ;;   `org-id-open', `org-goto', or roam: links.
   (advice-add #'org-mark-ring-push :around #'doom-set-jump-a)
-
-  ;; Add the ability to play gifs, at point or throughout the buffer. However,
-  ;; 'playgifs' is stupid slow and there's not much I can do to fix it; use at
-  ;; your own risk.
-  (add-to-list 'org-startup-options '("inlinegifs" +org-startup-with-animated-gifs at-point))
-  (add-to-list 'org-startup-options '("playgifs"   +org-startup-with-animated-gifs t))
-  (add-hook! 'org-mode-local-vars-hook #'+org-init-gifs-h)
 
   (advice-add #'org-insert-heading :after #'evil-insert)
   ;; (advice-add #'org-insert-subheading :after #'evil-insert)

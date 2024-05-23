@@ -87,6 +87,16 @@
       doom-modeline-icon nil
       )
 
+(setq
+ ;; mode-line-format nil
+ ;; header-line-format nil
+ frame-title-format '("EMACS : %b")
+ ;; transient-mode-line-format nil
+ ;; tab-line-format nil
+ )
+
+
+
 ;;-- end modeline
 
 ;;-- treemacs

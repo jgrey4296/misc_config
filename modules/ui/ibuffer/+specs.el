@@ -20,13 +20,12 @@
                      mark modified read-only locked
                      " " (name 18 18 :left :elide)
                      " " (size 10 10 :right)
-                     " " vc-status
-                     )
+                     " " vc-status)
                     '(project
-                     mark " " (name 18 18 :left :elide)
-                     " " (project-name 10 10 :left)
-                     " " project-relative-file
-                     )
+                      mark
+                      " " (name 18 18 :left :elide)
+                      " " (project-name 10 10 :left)
+                      " " project-relative-file)
                     )
 
 ;; Filters:
@@ -59,7 +58,14 @@
                                       (file-extension . "scd\\|hs\\|tidal")))
 
                     '(org         (derived-mode . org-mode))
-                    '(python      (used-mode . python-mode))
+                    '(python      (or (derived-mode . python-mode) (derived-mode . python-base-mode)))
+                    '(dotnet      (or (derived-mode . csharp-mode)
+                                      (derived-mode . csharp-ts-mode)
+                                      (derived-mode . shader-mode)
+                                      (derived-mode . fsharp-mode)
+                                      (derived-mode . csproj-mode)
+                                      (derived-mode . sln-mode)
+                                      ))
                     '(programming (or (derived-mode . prog-mode)
                                       (mode . ess-mode)
                                       (mode . compilation-mode)))
@@ -119,7 +125,13 @@
                        ("Mail"        (saved . "mail"))
                        ;; ("*Project: writing" (projectile-root . "jgrey4296.github.io"))
                        ("Lisp"        (mode . emacs-lisp-mode))
-                       ("Python"      (mode . python-mode))
+                       ("Python"      (or (mode . python-mode) (derived-mode . python-base-mode)))
+                       ("DotNet"      (or (derived-mode . csharp-mode)
+                                          (derived-mode . csharp-ts-mode)
+                                          (derived-mode . shader-mode)
+                                          (derived-mode . fsharp-mode)
+                                          (derived-mode . csproj-mode)
+                                          (derived-mode . sln-mode)))
                        ("Tests"       (saved . "tests"))
                        ("Text"        (saved . "text"))
                        ("Logs"        (or (file-extension . "log")
@@ -178,7 +190,7 @@
 
 (spec-handling-add! ibuffer-groups :form 'extend
                        '(programming
-                         ("python" (derived-mode . python-mode))
+                         ("python" (or (derived-mode . python-mode) (derived-mode . python-base-mode)))
                          ("lisp"   (derived-mode . emacs-lisp-mode))
                          )
                        )

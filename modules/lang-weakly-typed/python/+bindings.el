@@ -10,7 +10,7 @@
 
       )
 
-(map! :map python-mode-map
+(map! :map (python-mode-map python-ts-mode-map)
       :after python-mode
       :desc "General Insert"         :n "|" #'general-insert-call
       :n "z d" nil ;; #'+jg-python-toggle-all-defs
@@ -23,7 +23,7 @@
       :n "SPC \\"   #'+jg-python-popup-related-test
       )
 
-(map! :map python-mode-map ;; localleader
+(map! :map (python-mode-map python-ts-mode-map) ;; localleader
       :after python-mode
       :localleader
       :desc "Ruff Format" "f" #'+jg-python-ruff-format
@@ -37,7 +37,7 @@
       :desc "Disassemble" "D" #'+jg-python-bytecode-dwim
       )
 
-(map! :map python-mode-map ;; localleader.imports
+(map! :map (python-mode-map python-ts-mode-map) ;; localleader.imports
       :localleader
       :desc "Import View"            "i" #'+jg-python--import-view
       :desc "Sort imports"           "s" #'+jg-python-isort-diff
@@ -45,7 +45,7 @@
       :desc "Insert Import Snippet"  "I" #'+jg-python-import-snippet
        )
 
-(map! :map python-mode-map ;; localleader.tests
+(map! :map (python-mode-map python-ts-mode-map) ;; localleader.tests
       :localleader
       :prefix ("t" . "test")
       :desc "Test DWIM"       "f" #'python-pytest-file-dwim
@@ -58,7 +58,7 @@
       :desc "Make Testfile"   "m" #'+jg-python-make-test-file
       )
 
-(map! :map python-mode-map ;; localleader.environment
+(map! :map (python-mode-map python-ts-mode-map) ;; localleader.environment
       :localleader
       :prefix ("e" . "Environment")
       :desc "Choose Support" "c" #'+jg-python-support

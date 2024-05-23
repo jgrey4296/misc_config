@@ -1,5 +1,12 @@
 ;; -*- mode:emacs-lisp; lexical-binding: t; -*-
 
+;;-- changelog
+(setq change-log-default-name "CHANGELOG.md"
+
+      )
+;;-- end changelog
+
+;;-- magit
 (setq transient-default-level 5
       magit-diff-refine-hunk t               ;; show granular diffs in selected hunk
       magit-save-repository-buffers nil      ;; Don't autosave repo buffers.
@@ -26,15 +33,21 @@
       magit-bury-buffer-function    #'magit-mode-quit-window
       )
 
+;;-- end magit
+
+;;-- misc
 (setq diff-hl-draw-borders nil)
 
 (setq-default vc-handled-backends '(SVN Git Hg))
 
 (setq code-review-db-database-file (concat doom-data-dir "code-review/code-review-db-file.sqlite")
-      code-review-log-file (concat doom-data-dir "code-review/code-review-error.log")
-      code-review-download-dir (concat doom-data-dir "code-review/")
+      code-review-log-file         (concat doom-data-dir "code-review/code-review-error.log")
+      code-review-download-dir     (concat doom-data-dir "code-review/")
       )
 
+;;-- end misc
+
+;;-- specs
 (spec-handling-add! popup :form 'override
                     '(magit
                      ("^\\*git-gutter" :select nil :size '+popup-shrink-to-fit)
@@ -81,3 +94,5 @@
 (spec-handling-add! yas-extra
                     '(git-commit-mode git-commit-mode)
                     )
+
+;;-- end specs

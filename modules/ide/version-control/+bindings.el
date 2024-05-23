@@ -5,28 +5,29 @@
 ;;-- <leader> g --- git
 (map! :leader
       :prefix ("g" . "git")
+      :desc "Add To Changelog"            "a"      #'add-change-log-entry-other-window
       :desc "Yank Homepage URL"           "h"      #'+jg-vc-yank-homepage
-      :desc "Merge Mode"  "m" #'evil-conflict-merge-state
-      :desc "Git revert file"             "R"   #'vc-revert
-      :desc "Git Todos"                   "T"   #'magit-todos-list
-      :desc "Git revert hunk"             "r"   #'git-gutter:revert-hunk
-      :desc "Git stage hunk"              "s"   #'git-gutter:stage-hunk
-      :desc "Git time machine"            "t"   #'git-timemachine-toggle
-      :desc "Jump to next hunk"           "n"   #'git-gutter:next-hunk
-      :desc "Jump to previous hunk"       "p"   #'git-gutter:previous-hunk
-      :desc "Forge dispatch"              "'"   #'forge-dispatch
-      :desc "Git stage file"              "S"   #'magit-stage-file
-      :desc "Git unstage file"            "U"   #'magit-unstage-file
-      :desc "Magit blame"                 "B"   #'magit-blame-addition
-      :desc "Magit buffer log"            "L"   #'magit-log
-      :desc "Magit clone"                 "C"   #'magit-clone
-      :desc "Magit dispatch"              "/"   #'magit-dispatch
-      :desc "Magit fetch"                 "F"   #'magit-fetch
-      :desc "Magit file delete"           "D"   #'magit-file-delete
-      :desc "Magit file dispatch"         "."   #'magit-file-dispatch
-      :desc "Magit status here"           "S"   #'magit-status-here
-      :desc "Magit status"                "s"   #'magit-status
-      :desc "Magit switch branch"         "b"   #'magit-branch-checkout
+      :desc "Merge Mode"                  "m"      #'evil-conflict-merge-state
+      :desc "Git revert file"             "R"      #'vc-revert
+      :desc "Git Todos"                   "T"      #'magit-todos-list
+      :desc "Git revert hunk"             "r"      #'git-gutter:revert-hunk
+      :desc "Git stage hunk"              "s"      #'git-gutter:stage-hunk
+      :desc "Git time machine"            "t"      #'git-timemachine-toggle
+      :desc "Jump to next hunk"           "n"      #'git-gutter:next-hunk
+      :desc "Jump to previous hunk"       "p"      #'git-gutter:previous-hunk
+      :desc "Forge dispatch"              "'"      #'forge-dispatch
+      :desc "Git stage file"              "S"      #'magit-stage-file
+      :desc "Git unstage file"            "U"      #'magit-unstage-file
+      :desc "Magit blame"                 "B"      #'magit-blame-addition
+      :desc "Magit buffer log"            "L"      #'magit-log
+      :desc "Magit clone"                 "C"      #'magit-clone
+      :desc "Magit dispatch"              "/"      #'magit-dispatch
+      :desc "Magit fetch"                 "F"      #'magit-fetch
+      :desc "Magit file delete"           "D"      #'magit-file-delete
+      :desc "Magit file dispatch"         "."      #'magit-file-dispatch
+      :desc "Magit status here"           "S"      #'magit-status-here
+      :desc "Magit status"                "s"      #'magit-status
+      :desc "Magit switch branch"         "b"      #'magit-branch-checkout
       (:prefix ("f" . "find")
        :desc "Find file"                  "f"   #'magit-find-file
        :desc "Find gitconfig file"        "g"   #'magit-find-git-config-file

@@ -2,6 +2,8 @@
 
 
 (map! :map jg-binding-backward-general-motion-map
+      :desc "Section"                     "[" #'evil-backward-section-begin
+      :desc "Section End"                 "]" #'evil-backward-section-end
       :desc "Buffer"                      "b" #'previous-buffer
       :desc "Comment"                     "c" #'+evil/previous-comment
       :desc "Previous File in Dir, alpha" "f" #'+evil/previous-file
@@ -13,13 +15,13 @@
       )
 
 (map! :map jg-binding-forward-general-motion-map
-      :desc "Section"                 "]" #'evil-forward-section-begin
+      :desc "Next Section"            "]" #'evil-forward-section-begin
+      :desc "To Section End"          "[" #'+evil/next-end-of-method
       :desc "Arg"                     "a" #'evil-forward-arg
       :desc "Next File in Dir, alpha" "f" #'+evil/next-file
       :desc "Heading"                 "h" #'outline-next-visible-heading
       :desc "Begin Method"            "m" #'+evil/next-beginning-of-method
       :desc "End Method"              "M" #'+evil/next-end-of-method
-      :desc "Section"                 "s" #'evil-forward-section-begin
       :desc "Todo"                    "t" #'hl-todo-next
       :desc "Buffer"                  "b" #'next-buffer
       :desc "Comment"                 "c" #'+evil/next-comment

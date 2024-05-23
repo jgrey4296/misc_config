@@ -40,6 +40,58 @@
     )
 ;;-- end org core
 
+;;-- todo config
+(let ((project-steps '(sequence
+                       "TODO(j!)"      ; A job that needs doing
+                       "IDEA(i)"       ; An unconfirmed job
+                       "LOOP(l)"       ; A recurring job
+                       "ACTIVE(a)"     ; A job that is in progress
+                       "BLOCKED(b)"    ; Something external is holding up this task
+                       "QUEUED(q)"     ; This task is paused/on hold because of me
+                       "|"
+                       "DONE(d!)"  ; Task successfully completed
+                       "DEAD(k@!)" ; Task was cancelled, aborted or is no longer applicable
+                       ))
+      (task-status '(sequence
+                     "[∅](t)"   ; A task that needs doing
+                     "[⇒](s)"   ; Task is in progress
+                     "[∃](w)"   ; Task is being held up or paused
+                     "|"
+                     "[⟙](D!)"    ; Task was completed
+                     "[⟘](f@!)"   ; Task was failed
+                     ))
+      (eval-status '(sequence
+                    "|"
+                    "OKAY(o)"
+                    "YES(y)"
+                    "NO(n)"
+                    "MAYBE(m)"
+                    ))
+      )
+  (setq jg-org-todo-keywords
+    (list project-steps task-status eval-status)
+    )
+  )
+
+(defvar jg-org-todo-faces
+  '(("IDEA"    . +org-todo-project)
+
+    ("[⇒]"     . +org-todo-active)
+    ("ACTIVE"  . +org-todo-active)
+
+    ("[∃]"     . +org-todo-onhold)
+    ("BLOCKED" . +org-todo-onhold)
+    ("QUEUED"  . +org-todo-onhold)
+
+    ("NO"      . +org-todo-cancel)
+    ("DEAD"    . +org-todo-cancel)
+    ("[⟘]"     . +org-todo-cancel)
+    )
+  "Faces for my keywords"
+  )
+
+;;-- end todo config
+
 ;;-- pomodoro
 ;; set pomodoro log variable
 

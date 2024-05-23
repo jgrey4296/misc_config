@@ -73,6 +73,7 @@
   (let* ((repl (+jg-eval-determine-repl arg))
          (buff (get-buffer +eval-repl-buffer-name))
          )
+    (user-error "TODO")
     ;; check repl is active
     ;; format selection
     ;; insert into repl
@@ -86,8 +87,7 @@
 ;;;###autoload
 (defun +jg-eval-run-region-or-str (beg end &optional str)
   (interactive)
-  ;; TODO
-
+  (user-error "TODO")
   )
 
 ;;;###autoload

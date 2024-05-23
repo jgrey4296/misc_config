@@ -4,6 +4,14 @@
 (local-load! "+vars")
 (defer-load! jg-bindings-total "+bindings")
 
+(advice-add 'org-ref-build-full-bibliography :override #'+jg-build-bibliography-a)
+(advice-add 'bibtex-autokey-get-field        :around   #'+jg-bibtex-autokey-field-expand-a)
+(advice-add 'bibtex-set-field                :override #'+jg-bibtex-set-field-a)
+(advice-add 'org-ref-version                 :around   #'+jg-org-ref-version-override-a)
+(advice-add 'bibtex-completion-init          :override #'+jg-bibtex-init-no-file-watchers-a)
+(advice-add 'org-ref-clean-bibtex-entry      :around   #'+jg-bibtex-clean-dont-move-a)
+
+
 (use-package! bibtex
   :commands bibtex-mode
   :config

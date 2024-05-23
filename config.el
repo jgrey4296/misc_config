@@ -98,10 +98,11 @@
         (error "Invalid search bound (wrong side of point)")
         )
       warning-suppress-types
-      '( ;; Don't Show
+      '( ;; Don't Show, silently added to warnings buffer
         (defvaralias losing-value python-shell-interpreter)
         ;; ((python python-shell-completion-native-turn-on-maybe))
         (org-element org-element-cache)
+        (bytecomp)
         ;; (flycheck syntax-checker)
         )
       )

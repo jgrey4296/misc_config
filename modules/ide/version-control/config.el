@@ -2,16 +2,13 @@
 
 (local-load! "+defs")
 (local-load! "+vars")
-(defer-load! jg-bindings-total "+bindings")
-(defer-load! (magit jg-evil-ex-bindings) "+evil-ex")
 
+(defer-load! jg-bindings-total "+bindings")
+
+(defer-load! (magit jg-evil-ex-bindings) "+evil-ex")
 
 (add-hook! '(prog-mode-hook text-mode-hook conf-mode-hook)
            #'vi-tilde-fringe-mode)
-
-(use-package! smerge-mode
-  :after jg-bindings-total
-  )
 
 (use-package! magit
   :commands (magit-file-delete magit-status)
@@ -65,11 +62,43 @@
 
   )
 
-(use-package! magit-todos
+;;-- modes
+
+(use-package! git-modes
+  :defer t
+  :config
+  (add-hook! (gitconfig-mode gitattributes-mode gitignore-mode)
+             #'general-insert-minor-mode
+             )
+  )
+
+(use-package! git-commit
+  :hook (doom-first-file . global-git-commit-mode)
+  :config
+  ;; Enforce git commit conventions.
+  ;; See https://chris.beams.io/posts/git-commit/
+  (setq git-commit-summary-max-length 50
+        git-commit-style-convention-checks '(overlong-summary-line non-empty-second-line))
+  (setq-hook! 'git-commit-mode-hook fill-column 72)
+
+  (add-hook! 'git-commit-setup-hook #'+vc-start-in-insert-state-maybe-h)
+)
+
+(use-package! smerge-mode
+  :after jg-bindings-total
+  )
+
+(use-package! conflict-merge-state)
+
+;;-- end modes
+
+;;-- git extension
+
+(use-package! forge
   :after magit
   )
 
-(use-package! forge
+(use-package! magit-todos
   :after magit
   )
 
@@ -116,7 +145,7 @@
 (use-package! git-gutter-fringe
   :after fringe
   :config
-;; Redefine fringe bitmaps to take up only half the horizontal space
+  ;; Redefine fringe bitmaps to take up only half the horizontal space
   (define-fringe-bitmap 'git-gutter-fr:added [224] nil nil '(center repeated))
   (define-fringe-bitmap 'git-gutter-fr:modified [224] nil nil '(center repeated))
   (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240] nil nil 'bottom)
@@ -137,18 +166,6 @@
   (require 'magit-blame)
 )
 
-(use-package! git-commit
-  :hook (doom-first-file . global-git-commit-mode)
-  :config
-  ;; Enforce git commit conventions.
-  ;; See https://chris.beams.io/posts/git-commit/
-  (setq git-commit-summary-max-length 50
-        git-commit-style-convention-checks '(overlong-summary-line non-empty-second-line))
-  (setq-hook! 'git-commit-mode-hook fill-column 72)
-
-  (add-hook! 'git-commit-setup-hook #'+vc-start-in-insert-state-maybe-h)
-)
-
 (use-package! browse-at-remote
   :commands browse-at-remote
   :config
@@ -165,13 +182,20 @@
   (add-to-list 'browse-at-remote-remote-type-regexps '(:host "^codeberg\\.org$" :type "codeberg"))
   )
 
-(use-package! conflict-merge-state)
-
 (use-package! treemacs-magit)
+;;-- end git extension
 
-(use-package! git-modes
+;;-- changelog
+
+(use-package! markdown-changelog
   :defer t
-  (add-hook! (gitconfig-mode gitattributes-mode gitignore-mode)
-             #'general-insert-minor-mode
-             )
   )
+
+(use-package! git-cliff
+  :defer t
+  )
+
+(use-package! conventional-changelog
+  :defer t
+  )
+;;-- end changelog

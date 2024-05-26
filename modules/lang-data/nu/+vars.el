@@ -12,3 +12,9 @@
                       ("\\.nu\\'" . nushell-mode)
                       )
                     )
+
+(spec-handling-add! file-templates
+                    `(nu
+                      ("\\.nu\\'" :trigger "__" :mode nushell-mode)
+                      )
+                    )

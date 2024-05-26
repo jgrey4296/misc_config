@@ -40,6 +40,13 @@
     )
 ;;-- end org core
 
+;;-- agenda
+(setq org-agenda-include-diary t
+
+      )
+
+;;-- end agenda
+
 ;;-- todo config
 (let ((project-steps '(sequence
                        "TODO(j!)"      ; A job that needs doing
@@ -48,6 +55,7 @@
                        "ACTIVE(a)"     ; A job that is in progress
                        "BLOCKED(b)"    ; Something external is holding up this task
                        "QUEUED(q)"     ; This task is paused/on hold because of me
+                       "NEXT(n)"       ;
                        "|"
                        "DONE(d!)"  ; Task successfully completed
                        "DEAD(k@!)" ; Task was cancelled, aborted or is no longer applicable

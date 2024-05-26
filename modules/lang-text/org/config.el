@@ -33,6 +33,14 @@
     tab-width 8
     org-todo-keywords      jg-org-todo-keywords
     org-todo-keyword-faces jg-org-todo-faces
+    org-refile-targets '((nil :maxlevel . 3)
+                         (org-agenda-files :maxlevel . 3))
+    ;; Without this, completers like ivy/helm are only given the first level of
+    ;; each outline candidates. i.e. all the candidates under the "Tasks" heading
+    ;; are just "Tasks/". This is unhelpful. We want the full path to each refile
+    ;; target! e.g. FILE/Tasks/heading/subheading
+    org-refile-use-outline-path 'file
+    org-outline-path-complete-in-steps nil
     )
 
   (after! 'org
@@ -137,6 +145,7 @@
              #'+org-cycle-only-current-subtree-h
              ;; Clear babel results if point is inside a src block
              #'+org-clear-babel-results-h)
+  (evil-set-initial-state 'org-agenda-mode 'normal)
 )
 
 (use-package! evil-org-agenda

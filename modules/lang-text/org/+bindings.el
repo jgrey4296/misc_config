@@ -77,12 +77,13 @@
        )
       )
 
-(map! :map org-agenda-mode-map
-      :after org-agenda
-      :localleader
-      (:prefix ("d" . "Date/time"))
-      (:prefix ("c" . "Clock"))
-      (:prefix ("p" . "Priority")))
+;; (map! :map jg-org-agenda-mode-map
+;;       :after org-agenda
+;;       :localleader
+;;       (:prefix ("d" . "Date/time"))
+;;       (:prefix ("c" . "Clock"))
+;;       (:prefix ("p" . "Priority"))
+;;       )
 
 (map! :map org-journal-mode-map
        :n "]f"  #'org-journal-next-entry

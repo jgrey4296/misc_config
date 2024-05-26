@@ -68,16 +68,6 @@
         ;; respects these settings.
         org-startup-folded nil)
 
-  (setq org-refile-targets
-        '((nil :maxlevel . 3)
-          (org-agenda-files :maxlevel . 3))
-        ;; Without this, completers like ivy/helm are only given the first level of
-        ;; each outline candidates. i.e. all the candidates under the "Tasks" heading
-        ;; are just "Tasks/". This is unhelpful. We want the full path to each refile
-        ;; target! e.g. FILE/Tasks/heading/subheading
-        org-refile-use-outline-path 'file
-        org-outline-path-complete-in-steps nil)
-
   (plist-put org-format-latex-options :scale 1.5) ; larger previews
 
   ;; HACK Face specs fed directly to `org-todo-keyword-faces' don't respect
@@ -88,39 +78,6 @@
     (custom-declare-face '+org-todo-project '((t (:inherit (bold font-lock-doc-face org-todo)))) "")
     (custom-declare-face '+org-todo-onhold  '((t (:inherit (bold warning org-todo)))) "")
     (custom-declare-face '+org-todo-cancel  '((t (:inherit (bold error org-todo)))) ""))
-  (setq org-todo-keywords
-        '((sequence
-           "TODO(t)"  ; A task that needs doing & is ready to do
-           "PROJ(p)"  ; A project, which usually contains other tasks
-           "LOOP(r)"  ; A recurring task
-           "STRT(s)"  ; A task that is in progress
-           "WAIT(w)"  ; Something external is holding up this task
-           "HOLD(h)"  ; This task is paused/on hold because of me
-           "IDEA(i)"  ; An unconfirmed and unapproved task or notion
-           "|"
-           "DONE(d)"  ; Task successfully completed
-           "KILL(k)") ; Task was cancelled, aborted or is no longer applicable
-          (sequence
-           "[ ](T)"   ; A task that needs doing
-           "[-](S)"   ; Task is in progress
-           "[?](W)"   ; Task is being held up or paused
-           "|"
-           "[X](D)")  ; Task was completed
-          (sequence
-           "|"
-           "OKAY(o)"
-           "YES(y)"
-           "NO(n)"))
-        org-todo-keyword-faces
-        '(("[-]"  . +org-todo-active)
-          ("STRT" . +org-todo-active)
-          ("[?]"  . +org-todo-onhold)
-          ("WAIT" . +org-todo-onhold)
-          ("HOLD" . +org-todo-onhold)
-          ("PROJ" . +org-todo-project)
-          ("NO"   . +org-todo-cancel)
-          ("KILL" . +org-todo-cancel)))
-
   ;; Automatic indent detection in org files is meaningless
   (add-to-list 'doom-detect-indentation-excluded-modes 'org-mode)
 

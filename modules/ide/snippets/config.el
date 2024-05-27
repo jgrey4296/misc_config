@@ -11,6 +11,13 @@
 
 (add-hook 'doom-switch-buffer-hook #'+file-templates-maybe-expand-h)
 
+(advice-add 'yas--read-table                :override #'+jg-snippets-read-table)
+(advice-add 'doom-snippets-initialize       :override #'+jg-snippets-doom-nullify)
+(advice-add 'yas--all-templates             :filter-return #'+jg-snippets--remove-duplicates-a)
+(advice-add 'aya-expand                     :around #'+snippets--inhibit-yas-global-mode-a)
+(advice-add 'aya-open-line                  :around #'+snippets--inhibit-yas-global-mode-a)
+(advice-add '+snippet--completing-read-uuid :override #'+jg-snippets--completing-read-uuid)
+
 (defalias 'concatenate (symbol-function 'cl-concatenate))
 
 (use-package! yasnippet

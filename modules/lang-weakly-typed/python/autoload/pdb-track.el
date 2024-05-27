@@ -49,9 +49,6 @@
   )
 
 ;;;###autoload
-(advice-add 'py--pdbtrack-get-source-buffer :override #'+jg-python-pdbtrack-silence)
-
-;;;###autoload
 (defun +jg-python-py--pdbtrack-track-stack-file (text)
   "Show the file indicated by the pdb stack entry line, in a separate window.
 
@@ -108,5 +105,3 @@ script, and set to python-mode, and pdbtrack will find it.)"
             (message "pdbtrack: line %s, file %s" target_lineno target_fname)
             (py--pdbtrack-overlay-arrow t)
             (pop-to-buffer origbuf t)))))))
-
-(advice-add 'py--pdbtrack-track-stack-file :override #'+jg-python-py--pdbtrack-track-stack-file)

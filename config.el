@@ -1,7 +1,9 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
 ;;-- Me
+
 (defvar user-full-name "John Grey")
+
 (defvar user-url "https://jgrey4296.github.io/")
 ;;-- end Me
 
@@ -12,7 +14,6 @@
 (prefer-coding-system 'utf-8)
 ;; (setq default-input-method "greek")
 ;;-- end Text Encoding
-
 
 ;;-- locations
 (setq backup-directory-alist          `((".*" . ,(expand-file-name ".local/backups" doom-emacs-dir)))
@@ -41,6 +42,7 @@
 (setq server-log t)
 
 ;;-- keybind clear
+
 (defvar jg-ctl-x-map (make-sparse-keymap))
 (setq ctl-x-map jg-ctl-x-map)
 
@@ -91,6 +93,7 @@
 (setq warning-suppress-log-types
       '( ;; Full Suppress
         (defvaralias losing-value woman-topic-history)
+        (defvaralias losing-value rustic-indent-method-chain)
         ;; (flycheck syntax-checker)
         ;; ((python python-shell-completion-native-turn-on-maybe))
         ((org-element org-element-cache))

@@ -17,15 +17,8 @@
   )
 
 ;;;###autoload
-(advice-add 'ibuffer-find-file :override #'+ibuffer--use-counsel-maybe-a)
-
-;;;###autoload
 (defun  +ibuffer-populate-marked-list-for-sorting (&rest args)
   (with-current-buffer "*Ibuffer*"
     (setq +jg-ibuffer-marked-list (ibuffer-get-marked-buffers))
     )
   )
-
-
-;;;###autoload
-(advice-add 'ibuffer-do-sort-by-marked :before #'+ibuffer-populate-marked-list-for-sorting)

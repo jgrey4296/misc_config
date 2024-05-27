@@ -126,6 +126,7 @@ the message being processed."
     (apply fn rst))
   )
 
+;;;###autoload
 (defun +jg-mail-princ-as-insert (x buf)
   " For locally overriding use of princ
 when mail builds the mail-summary buffer,
@@ -134,17 +135,13 @@ as princ strips out any text properties"
     (insert x)
     ))
 
-(function-put 'princ 'original (symbol-function 'princ))
-(function-put 'princ 'mod (symbol-function '+jg-mail-princ-as-insert))
+;;;###autoload
+(defun +mu4e--refresh-current-view-a (&rest _)
+  (mu4e-search-rerun)
+  )
 
 ;;;###autoload
-(advice-add 'rmail-header-summary :override #'+jg-mail-header-summary)
-
-;;;###autoload
-(advice-add 'rmail-create-summary :override #'+jg-mail-create-summary)
-
-;;;###autoload
-(advice-add 'rmail-new-summary-1 :around #'+jg-mail-new-summary-princ-override)
-
-;;;###autoload
-(advice-add 'rmail-summary-update-line :around #'+jg-mail-summary-update-princ-override)
+(defun +mu4e-ensure-compose-writeable-a (&rest _)
+    "Ensure that compose buffers are writable.
+This should already be the case yet it does not always seem to be."
+    (read-only-mode -1))

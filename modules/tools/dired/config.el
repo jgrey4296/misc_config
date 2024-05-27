@@ -20,11 +20,7 @@
 
   (put 'dired-find-alternate-file 'disabled nil)
 
-  (defadvice! +dired--no-revert-in-virtual-buffers-a (&rest args)
-    "Don't auto-revert in dired-virtual buffers (see `dired-virtual-revert')."
-    :before-while #'dired-buffer-stale-p
-    (not (eq revert-buffer-function #'dired-virtual-revert)))
-
+  (advice-add 'dired-buffer-stale-p :before-while #'+dired--no-revert-in-virtual-buffers-a)
 
   (add-hook! 'dired-mode-hook '+dired-disable-gnu-ls-flags-maybe-h)
   ;; (add-hook! 'dired-after-readin-hook nil)

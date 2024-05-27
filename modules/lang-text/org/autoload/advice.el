@@ -323,3 +323,9 @@ org-auto-align-tags)
     (if (eq org-id-method 'uuid)
         (downcase uuid)
       uuid))
+
+;;;###autoload
+(defun +org--clock-load-a (&rest _)
+    "Lazy load org-clock until its commands are used."
+    (org-clock-load)
+    )

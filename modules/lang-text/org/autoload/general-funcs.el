@@ -199,6 +199,3 @@ Sort, align, split, save "
 				    (org-element-property :path link))))
 	     (or rules org-export-default-inline-image-rule)))
   )
-
-;;;###autoload
-(advice-add 'org-export-inline-image-p :override #'+jg-org-inline-image-override)

@@ -9,8 +9,6 @@
     (let (kill-buffer-hook)
       (kill-buffer buf))))
 
-;;;###autoload
-(advice-add  'realgud:terminate :after #'+debugger--cleanup-after-realgud-a)
 
 ;; Monkey-patch `realgud:run-process' to run in a popup.
 ;; TODO Find a more elegant solution
@@ -45,6 +43,3 @@
            (if cmd-buf (switch-to-buffer cmd-buf))
            (message "Error running command: %s" (mapconcat #'identity cmd-args " "))))
     cmd-buf))
-
-;;;###autoload
-(advice-add 'realgud:run-process :override #'+debugger--realgud-open-in-other-window-a)

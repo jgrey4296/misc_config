@@ -4,9 +4,15 @@
 (local-load! "+vars")
 
 (defer-load! jg-bindings-total "+bindings")
-
 (defer-load! jg-evil-ex-bindings "+evil-ex")
 (add-hook! 'doom-first-file-hook #'+jg-lisp-setup-library-source)
+
+(advice-add 'elisp-get-var-docstring :around #'+emacs-lisp-append-value-to-eldoc-a)
+;; Fixed indenter that intends plists sensibly.
+(advice-add 'calculate-lisp-indent :override #'+emacs-lisp--calculate-lisp-indent-a)
+;; Recenter window after following definition
+(advice-add 'elisp-def :after #'doom-recenter-a)
+
 
 ;; `elisp-mode' is loaded at startup. In order to lazy load its config we need to pretend it isn't loaded
 

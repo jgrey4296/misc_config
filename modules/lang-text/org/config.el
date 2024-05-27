@@ -3,8 +3,7 @@
 (local-load! "+definitions")
 (local-load! "+vars")
 
-(defer-load! jg-bindings-core "+bindings")
-
+(defer-load! jg-bindings-core "+bindings" "+agenda-bindings")
 (defer-load! jg-evil-ex-bindings "+evil-ex")
 
 (use-package! org
@@ -58,12 +57,14 @@
   ;; General
   ;; HACK For functions that dodge `org-open-at-point-functions', like
   ;;   `org-id-open', `org-goto', or roam: links.
-  (advice-add 'org-mark-ring-push                  :around #'doom-set-jump-a)
+  (advice-add 'org-mark-ring-push                   :around #'doom-set-jump-a)
   (advice-add 'org-insert-heading                   :after #'evil-insert)
   (advice-add 'server-visit-files                   :around #'+org--server-visit-files-a)
   (advice-add 'org-id-locations-save                :before-while #'+org--fail-gracefully-a)
   (advice-add 'org-id-locations-load                :before-while #'+org--fail-gracefully-a)
   (advice-add 'org-return                           :after #'+org-fix-newline-and-indent-in-src-blocks-a)
+  (advice-add 'org-eldoc-documentation-function     :before-until #'doom-docs--display-docs-link-in-eldoc-a)
+  (advice-add 'org-export-inline-image-p            :override #'+jg-org-inline-image-override)
   ;; (advice-add #'org-insert-subheading            :after #'evil-insert)
   ;; Open help:* links with helpful-* instead of describe-*
   (advice-add 'org-link--open-help              :around #'doom-use-helpful-a)
@@ -99,7 +100,7 @@
   (advice-add 'org-src--get-lang-mode               :before #'+org--src-lazy-load-library-a)
   (advice-add 'org-babel-confirm-evaluate           :after-while #'+org--babel-lazy-load-library-a)
   (advice-add 'ob-async-org-babel-execute-src-block :around #'+org-babel-disable-async-maybe-a)
-  (advice-add 'org-src--edit-element                :round #'+org-inhibit-mode-hooks-a)
+  (advice-add 'org-src--edit-element                :around #'+org-inhibit-mode-hooks-a)
 
   (advice-add 'org-babel-do-load-languages          :override #'ignore)
 
@@ -170,14 +171,14 @@
   :commands org-clock-save
   :init
   (setq org-clock-persist-file (concat doom-data-dir "org-clock-save.el"))
-  (defadvice! +org--clock-load-a (&rest _)
-    "Lazy load org-clock until its commands are used."
-    :before '(org-clock-in
-              org-clock-out
-              org-clock-in-last
-              org-clock-goto
-              org-clock-cancel)
-    (org-clock-load))
+  :before +org--clock-load-a
+
+  (advice-add 'org-clock-in      :before +org--clock-load-a)
+  (advice-add 'org-clock-out     :before +org--clock-load-a)
+  (advice-add 'org-clock-in-last :before +org--clock-load-a)
+  (advice-add 'org-clock-goto    :before +org--clock-load-a)
+  (advice-add 'org-clock-cancel  :before +org--clock-load-a)
+
   :config
   (setq org-clock-persist 'history
         ;; Resume when clocking into task with open clock

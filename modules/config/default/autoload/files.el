@@ -58,6 +58,3 @@ If prefix ARG is non-nil, prompt for a known project to open in dired."
     (setf (file-notify--watch-callback
            (gethash descriptor file-notify-descriptors)) #'identity))
   )
-
-;;;###autoload
-(advice-add 'file-notify-rm-watch :before #'file-notify-rm-watch-silent-advice)

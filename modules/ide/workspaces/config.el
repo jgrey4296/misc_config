@@ -11,6 +11,15 @@
 
 (defer-load! jg-evil-ex-bindings "+evil-ex")
 
+(advice-add 'counsel-compile--action :override #'+jg-projects-run-compile)
+(advice-add 'projectile--run-project-cmd :around #'+jg-projects-projectile-cmd-list)
+(advice-add 'counsel--get-compile-candidates :override #'+jg-workspaces-time-compile-cmd-retrieval)
+(advice-add 'projectile-get-ext-command :around #'doom--only-use-generic-command-a)
+(advice-add 'projectile-dirconfig-file :override #'doom--projectile-dirconfig-file-a)
+(advice-add 'projectile-default-generic-command :around #'doom--projectile-default-generic-command-a)
+(advice-add 'evil-alternate-buffer :override #'+workspaces--evil-alternate-buffer-a)
+(advice-add 'persp-buffers-to-savelist :before #'+workspaces-remove-dead-buffers-a)
+
 (use-package! persp-mode
   :unless noninteractive
   :commands persp-switch-to-buffer

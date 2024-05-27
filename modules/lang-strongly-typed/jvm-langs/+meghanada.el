@@ -18,13 +18,7 @@
                         )
                       )
 
-  (defadvice! +java-meghanada-fail-gracefully-a (fn &rest args)
-    "Toggle `meghanada-mode'. Fail gracefully if java is unavailable."
-    :around #'meghanada-mode
-    (if (executable-find meghanada-java-path)
-        (apply fn args)
-      (message "Can't find %S binary. Is java installed? Aborting `meghanada-mode'."
-               meghanada-java-path)))
+  (advice-add 'meghanada-mode :around #'+java-meghanada-fail-gracefully-a)
 
   (map! :localleader
         :map java-mode-map
@@ -38,4 +32,5 @@
           "t"  #'meghanada-typeinfo)
         (:prefix ("b" . "build")
           "f"  #'meghanada-compile-file
-          "p"  #'meghanada-compile-project)))
+          "p"  #'meghanada-compile-project))
+  )

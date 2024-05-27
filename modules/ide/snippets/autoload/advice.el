@@ -39,24 +39,15 @@ Also strips whitespace out of selection. Also switches to insert mode. If
   )
 
 ;;;###autoload
-(advice-add 'yas--read-table :override #'+jg-snippets-read-table)
-
-;;;###autoload
 (defun +jg-snippets-doom-nullify ()
   nil
   )
-
-;;;###autoload
-(advice-add 'doom-snippets-initialize :override #'+jg-snippets-doom-nullify)
 
 ;;;###autoload
 (defun +jg-snippets--remove-duplicates-a (templates)
   ;; REVIEW Fix #2639: For some reason `yas--all-templates' returns duplicates
   ;;        of some templates. Until I figure out the real cause this fixes it.
     (cl-delete-duplicates templates :test #'equal))
-
-;;;###autoload
-(advice-add 'yas--all-templates :filter-return #'+jg-snippets--remove-duplicates-a)
 
 ;;;###autoload
 (defun +snippets--inhibit-yas-global-mode-a (fn &rest args)
@@ -67,12 +58,6 @@ swaps `yas-global-mode' with `yas-minor-mode'."
     (letf! ((#'yas-global-mode #'yas-minor-mode)
             (yas-global-mode yas-minor-mode))
       (apply fn args)))
-
-;;;###autoload
-(advice-add 'aya-expand :around #'+snippets--inhibit-yas-global-mode-a)
-
-;;;###autoload
-(advice-add 'aya-open-line :around #'+snippets--inhibit-yas-global-mode-a)
 
 ;;;###autoload
 (defun +jg-snippets--completing-read-uuid (prompt all-snippets &rest args)
@@ -90,6 +75,3 @@ swaps `yas-global-mode' with `yas-minor-mode'."
                                 `(,txt . ,(yas--template-uuid tpl))))
         (selected-value (apply #'completing-read prompt snippet-data args)))
   (alist-get selected-value snippet-data nil nil 'equal)))
-
-;;;###autoload
-(advice-add '+snippet--completing-read-uuid :override #'+jg-snippets--completing-read-uuid)

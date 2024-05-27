@@ -37,13 +37,3 @@ current buffer."
         (when (buffer-live-p buf)
           (with-current-buffer buf (goto-char pos))))))
   )
-
-;;;###autoload
-(when (> emacs-major-version 28)
-  (advice-add #'find-function-search-for-symbol :around #'doom--find-function-search-for-symbol-save-excursion-a))
-
-;;;###autoload
-(advice-add 'doom--help-package-configs :before-until #'+jg-help-package-config-advice)
-
-;;;###autoload
-(advice-add 'doom--help-insert-button :before-while #'+jg-help-protect-insert-button)

@@ -6,6 +6,9 @@
 (defer-load! (jg-bindings-total ibuffer) "+bindings")
 (defer-load! jg-evil-ex-bindings "+evil-ex")
 
+(advice-add 'ibuffer-find-file         :override #'+ibuffer--use-counsel-maybe-a)
+(advice-add 'ibuffer-do-sort-by-marked :before #'+ibuffer-populate-marked-list-for-sorting)
+
 (use-package! ibuffer
   :config
   (evil-set-initial-state 'ibuffer-mode 'normal)

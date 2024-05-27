@@ -26,3 +26,11 @@
                   (not (= last (setq last (point)))))
         (unless (overlays-at (line-end-position))
           (restclient-toggle-body-visibility))))))
+
+;;;###autoload
+(defun +rest--permit-self-signed-ssl-a (fn &rest args)
+    "Forces underlying SSL verification to prompt for self-signed or invalid
+certs, rather than reject them silently."
+    (require 'gnutls)
+    (let (gnutls-verify-error)
+      (apply fn args)))

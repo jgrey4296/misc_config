@@ -1,7 +1,5 @@
 ;;; +advice.el -*- lexical-binding: t; -*-
 
-(advice-remove 'kill-current-buffer #'doom--switch-to-fallback-buffer-maybe-a)
-
 ;;;###autoload
 (defun +jg-ui-kill-buffer-override  (&rest _)
   "Switch to `doom-fallback-buffer' if on last real buffer.
@@ -68,9 +66,6 @@ windows, switch to `doom-fallback-buffer'. Otherwise, delegate to original
   )
 
 ;;;###autoload
-(advice-add 'kill-current-buffer :before-until #'+jg-ui-kill-buffer-override)
-
-;;;###autoload
 (defun +modeline-disable-icon-in-daemon-a (fn &rest args)
   ;; HACK Fix #4102 due to empty all-the-icons return value (caused by
   ;;      `doom--disable-all-the-icons-in-tty-a' advice) in tty daemon frames.
@@ -79,12 +74,6 @@ windows, switch to `doom-fallback-buffer'. Otherwise, delegate to original
   )
 
 ;;;###autoload
-(advice-add 'doom-modeline-propertize-icon :around #'+modeline-disable-icon-in-daemon-a)
-
-;;;###autoload
 (defun +modeline--inhibit-modification-hooks-a (fn &rest args)
   (with-silent-modifications (apply fn args))
   )
-
-;;;###autoload
-(advice-add 'ws-butler-after-save :around #'+modeline--inhibit-modification-hooks-a)

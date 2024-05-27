@@ -51,12 +51,3 @@
       )
     )
   )
-
-;;;###autoload
-(advice-add 'pasp-generate-command :around #'+jg-pasp-generate-args)
-
-;;;###autoload
-(advice-add 'pasp-run-clingo :override #'+jg-pasp-run-clingo)
-
-;;;###autoload
-(advice-add 'pasp-compilation-filter :override #')

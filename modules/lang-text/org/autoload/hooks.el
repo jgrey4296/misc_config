@@ -326,7 +326,6 @@ I like:
                (find-file (doom-path doom-docs-dir "changelog.org"))
                (org-match-sparse-tree nil link))))
 
-
   ;; Add "lookup" links for packages and keystrings; useful for Emacs
   ;; documentation -- especially Doom's!
 
@@ -339,7 +338,6 @@ I like:
 
   ;; Add support for youtube links + previews
   (require 'org-yt nil t)
-
 
   )
 
@@ -368,10 +366,7 @@ I like:
             (mathjax . t)
             (variable . "revealjs-url=https://revealjs.com"))))
 
-
-
   )
-
 
 ;;;###autoload
 (defun +org-init-hacks-h ()
@@ -382,7 +377,6 @@ I like:
   (add-to-list 'org-file-apps '(directory . emacs))
   (add-to-list 'org-file-apps '(remote . emacs))
 
-
   ;; Unlike the stock showNlevels options, these will also show the parents of
   ;; the target level, recursively.
   (pushnew! org-startup-options
@@ -390,13 +384,6 @@ I like:
             '("show3levels*" org-startup-folded show3levels*)
             '("show4levels*" org-startup-folded show4levels*)
             '("show5levels*" org-startup-folded show5levels*))
-
-
-
-
-
-
-
 
   (after! org-eldoc
     ;; HACK Fix #2972: infinite recursion when eldoc kicks in in 'org' or
@@ -413,7 +400,6 @@ I like:
     (remove-hook 'doom-switch-buffer-hook #'+org--restart-mode-h
                  'local)
     (run-hooks 'find-file-hook))
-
 
   )
 

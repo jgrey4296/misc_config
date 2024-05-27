@@ -6,6 +6,7 @@ buffer.")
 
 ;; This must be redefined here because `format-all' only makes it available at
 ;; compile time.
+
 (defconst +format-system-type
   (cl-case system-type
     (windows-nt 'windows)
@@ -89,7 +90,6 @@ buffer.")
          m (cons name (if probe `(lambda () ,probe)))
          format-all--mode-table)))))
 
-
 (defun +format--delete-whole-line (&optional arg)
   "Delete the current line without putting it in the `kill-ring'.
 Derived from function `kill-whole-line'.  ARG is defined as for that
@@ -169,7 +169,6 @@ Stolen shamelessly from go-mode"
     (goto-char (point-min))
     (skip-chars-forward " \t\n")
     (current-indentation)))
-
 
 ;;
 ;; Public library
@@ -304,7 +303,6 @@ See `+format/buffer' for the interactive version of this function, and
                      (:already-formatted "Already formatted")
                      (:reformatted (format "Reformatted with %s" formatter))))))))))
 
-
 ;;
 ;;; Commands
 
@@ -365,7 +363,6 @@ is selected)."
        #'+format/region
      #'+format/buffer)))
 
-
 ;;
 ;; Hooks
 
@@ -374,7 +371,6 @@ is selected)."
   "Format the source code in the current buffer with minimal feedback.
 
 Meant for `before-save-hook'.")
-
 
 ;; Allow a specific formatter to be used by setting `+format-with', either
 ;; buffer-locally or let-bound.
@@ -393,8 +389,8 @@ Meant for `before-save-hook'.")
 
 ;; Don't pop up imposing warnings about missing formatters, but still log it in
 ;; to *Messages*.
-(defadvice! +format--all-buffer-from-hook-a (fn &rest args)
-  :around #'format-all-buffer--from-hook
+
+(defun +format--all-buffer-from-hook-a (fn &rest args)
   (letf! (defun format-all-buffer--with (formatter mode-result)
            (when (or (eq formatter 'lsp)
                      (eq formatter 'eglot)
@@ -406,6 +402,5 @@ Meant for `before-save-hook'.")
                         nil)))
              (funcall format-all-buffer--with formatter mode-result)))
     (apply fn args)))
-
 
 ;;;###autoload (autoload 'format-all--probe "format-all")

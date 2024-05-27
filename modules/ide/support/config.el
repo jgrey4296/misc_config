@@ -22,11 +22,21 @@
 
 (local-load! "+defs")
 (local-load! "+vars")
+
 (defer-load! jg-bindings-total "+bindings")
+
 (defer-load! jg-evil-ex-bindings "+evil-ex")
 
 (after! transient-toggles (+jg-ide-extend-toggles))
 
+(advice-add '+eval--ensure-in-repl-buffer    :filter-return #'+jg-repl-fix)
+(advice-add '+jg-send-region-to-repl         :filter-args #'+jg-advice-send-repl-auto-line)
+(advice-add 'lsp-diagnostics-flycheck-enable :around #'+lsp--respect-user-defined-checkers-a)
+(advice-add 'lsp-describe-session            :around #'+jg-lsp-dont-select-session)
+(advice-add 'lsp--shutdown-workspace         :around #'+lsp-defer-server-shutdown-a)
+(advice-add 'lsp--auto-configure             :around #'+lsp--use-hook-instead-a)
+(advice-add 'eglot--managed-mode             :around #'+lsp--defer-server-shutdown-a)
+(advice-add 'lsp-diagnostics--flycheck-level :before #'+lsp--log-diagnostic-build)
 ;;-- lsp
 
 (use-package! lsp-mode
@@ -55,7 +65,6 @@
 
   ;; override what is auto loaded
   (setq lsp-client-packages nil)
-
 
   :config
   (add-to-list 'doom-debug-variables 'lsp-log-io)
@@ -190,11 +199,8 @@
     ;; the cursor's position or cause disruptive input delays.
     (add-hook! '(evil-insert-state-entry-hook evil-replace-state-entry-hook)
                #'flycheck-popup-tip-delete-popup)
-    (defadvice! +syntax--disable-flycheck-popup-tip-maybe-a (&rest _)
-      :before-while #'flycheck-popup-tip-show-popup
-      (if evil-local-mode
-          (eq evil-state 'normal)
-        (not (bound-and-true-p company-backend)))))
+    (advice-add 'flycheck-popup-tip-show-popup :before-while #'+syntax--disable-flycheck-popup-tip-maybe-a)
+    )
   )
 
 (use-package! flycheck-posframe

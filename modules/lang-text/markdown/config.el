@@ -27,12 +27,7 @@
     fill-nobreak-predicate (cons #'markdown-code-block-at-point-p
                                  fill-nobreak-predicate))
 
-  ;; HACK Prevent mis-fontification of YAML metadata blocks in `markdown-mode'
-  ;;      which occurs when the first line contains a colon in it. See
-  ;;      jrblevin/markdown-mode#328.
-  (defadvice! +markdown-disable-front-matter-fontification-a (&rest _)
-    :override #'markdown-match-generic-metadata
-    (ignore (goto-char (point-max))))
+ (advice-add 'markdown-match-generic-metadata :override #'+markdown-disable-front-matter-fontification-a)
 )
 
 (use-package! evil-markdown

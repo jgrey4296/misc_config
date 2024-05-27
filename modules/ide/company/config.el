@@ -5,6 +5,8 @@
 
 (defer-load! jg-bindings-total "+bindings")
 
+(advice-add 'company-begin-backend :before #'+company--abort-previous-a)
+
 (use-package! company
   :commands (company-complete-common
              company-complete-common-or-cycle

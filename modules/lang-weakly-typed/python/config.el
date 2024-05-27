@@ -8,6 +8,10 @@
 (defer-load! "+envs" "+lsp" "+cython")
 (defer-load! jg-bindings-total "+bindings")
 
+(advice-add 'python-shell-calculate-command :override #'+jg-python-shell-calculate-command)
+(advice-add 'py--pdbtrack-get-source-buffer :override #'+jg-python-pdbtrack-silence)
+(advice-add 'py--pdbtrack-track-stack-file  :override #'+jg-python-py--pdbtrack-track-stack-file)
+
 (use-package! python
   :config
   (require 'python-mode)

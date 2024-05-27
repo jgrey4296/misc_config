@@ -173,6 +173,3 @@ possible, or just one char if that's not possible."
                         ((doom/backward-delete-whitespace-to-column)))))))
         ;; Otherwise, do simple deletion.
         ((delete-char (- n) killflag))))
-
-;;;###autoload
-(advice-add #'delete-backward-char :override #'+default--delete-backward-char-a)

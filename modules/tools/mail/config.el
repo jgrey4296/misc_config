@@ -6,6 +6,13 @@
 
 (defer-load! jg-bindings-total "+bindings")
 
+(function-put 'princ 'original (symbol-function 'princ))
+(function-put 'princ 'mod (symbol-function '+jg-mail-princ-as-insert))
+(advice-add 'rmail-header-summary :override #'+jg-mail-header-summary)
+(advice-add 'rmail-create-summary :override #'+jg-mail-create-summary)
+(advice-add 'rmail-new-summary-1 :around #'+jg-mail-new-summary-princ-override)
+(advice-add 'rmail-summary-update-line :around #'+jg-mail-summary-update-princ-override)
+
 (use-package! mu4e
   :commands mu4e mu4e-compose-new
   :hook     (mu4e-main-mode . +jg-mail-override-mu4e-hook)
@@ -46,21 +53,15 @@
   (setq mu4e-header-info-custom +mu4e-header-info-custom)
 
   ;; Marks usually affect the current view
-  (defadvice! +mu4e--refresh-current-view-a (&rest _)
-    :after #'mu4e-mark-execute-all (mu4e-search-rerun))
-  (defadvice! +mu4e-ensure-compose-writeable-a (&rest _)
-    "Ensure that compose buffers are writable.
-This should already be the case yet it does not always seem to be."
-    :before #'mu4e-compose-new
-    :before #'mu4e-compose-reply
-    :before #'mu4e-compose-forward
-    :before #'mu4e-compose-resend
-    (read-only-mode -1))
-
-  (advice-add #'mu4e--key-val :filter-return #'+mu4e~main-keyval-str-prettier-a)
+  (advice-add 'mu4e-mark-execute-all  :after   #'+mu4e--refresh-current-view-a)
+  (advice-add 'mu4e-compose-new       :before  #'+mu4e-ensure-compose-writeable-a)
+  (advice-add 'mu4e-compose-reply     :before  #'+mu4e-ensure-compose-writeable-a)
+  (advice-add 'mu4e-compose-forward   :before  #'+mu4e-ensure-compose-writeable-a)
+  (advice-add 'mu4e-compose-resend    :before  #'+mu4e-ensure-compose-writeable-a)
+  (advice-add #'mu4e--key-val         :filter-return #'+mu4e~main-keyval-str-prettier-a)
   (advice-add #'mu4e--main-action-str :override #'+mu4e~main-action-str-prettier-a)
-  (advice-add 'mu4e--start :around #'+mu4e-lock-start)
-  (advice-add 'mu4e-quit :after #'+mu4e-lock-file-delete-maybe)
+  (advice-add 'mu4e--start            :around #'+mu4e-lock-start)
+  (advice-add 'mu4e-quit              :after #'+mu4e-lock-file-delete-maybe)
 
   (add-hook 'kill-emacs-hook #'+mu4e-lock-file-delete-maybe)
   (add-hook 'mu4e-compose-pre-hook '+mu4e-set-from-address-h)

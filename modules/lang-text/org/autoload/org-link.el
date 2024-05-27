@@ -272,9 +272,9 @@ exist, and `org-link' otherwise."
 ;;
 ;;; Help-echo / eldoc
 
-(defadvice! doom-docs--display-docs-link-in-eldoc-a (&rest _)
+;;;###autoload
+(defun doom-docs--display-docs-link-in-eldoc-a (&rest _)
   "Display help for doom-*: links in minibuffer when cursor/mouse is over it."
-  :before-until #'org-eldoc-documentation-function
   (and (bound-and-true-p doom-docs-mode)
        (eq (get-text-property (point) 'help-echo)
            #'+org-link-doom--help-echo-from-textprop)
@@ -384,7 +384,6 @@ exist, and `org-link' otherwise."
           (buffer-substring-no-properties (point) (point-max)))
       (message "Download of image \"%s\" failed" link)
       nil)))
-
 
 ;;
 ;;; Commands

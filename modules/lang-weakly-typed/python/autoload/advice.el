@@ -25,9 +25,6 @@ and adding extra pythonpath locations as the pre-args
     )
 
 ;;;###autoload
-(advice-add 'python-shell-calculate-command :override #'+jg-python-shell-calculate-command)
-
-;;;###autoload
 (defun +jg-python-conda-get-path-prefix (env-dir)
   "Get a platform-specific path string to utilize the conda env in ENV-DIR.
 It's platform specific in that it uses the platform's native path separator."

@@ -14,9 +14,6 @@
   )
 
 ;;;###autoload
-(advice-add 'diff-hl-revert-hunk-1 :around #'+vc-gutter--shrink-popup-a)
-
-;;;###autoload
 (defun +vc-gutter--save-excursion-a (fn &rest args)
   "Suppresses unexpected cursor movement by `diff-hl-revert-hunk'.
    FIX: Reverting a hunk causes the cursor to be moved to an unexpected place,
@@ -25,6 +22,3 @@
     (prog1 (apply fn args)
       (goto-char pt)))
   )
-
-;;;###autoload
-(advice-add 'diff-hl-revert-hunk :around #'+vc-gutter--save-excursion-a)

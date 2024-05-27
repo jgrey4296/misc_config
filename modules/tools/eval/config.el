@@ -7,6 +7,15 @@
 
 (defer-load! jg-evil-ex-bindings "+evil-ex")
 
+(advice-add 'quickrun--outputter-replace-region :override #'+eval--quickrun-fix-evil-visual-region-a)
+(advice-add 'quickrun :before #'+eval--quickrun-auto-close-a)
+(advice-add 'quickrun-region :before #'+eval--quickrun-auto-close-a)
+(advice-add 'quickrun--make-sentinel :filter-return #'+eval--show-output-in-overlay-a)
+(advice-add 'quickrun--pop-to-buffer :override #'+eval--inhibit-quickrun-popup-a)
+(advice-add 'quickrun--make-sentinel :filter-return #'+eval--show-output-in-overlay-a)
+(advice-add 'quickrun--pop-to-buffer :override #'+eval--inhibit-quickrun-popup-a)
+(advice-add #'quickrun--recenter :override #'ignore)
+
 (use-package! quickrun
   :config
   (setq quickrun-focus-p nil)

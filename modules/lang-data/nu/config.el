@@ -24,10 +24,19 @@
 (defer-load! "+vars")
 (defer-load! jg-bindings-total "+bindings")
 
-(define-derived-mode nushell-mode conf-colon-mode
-  "Nushell"
-  " Mode for editing nushell scripts "
-  (outline-minor-mode)
+(use-package! nushell-mode
+  :defer t
+  :config
+  (add-hook! '(nushell-mode-hook nushell-ts-mode-hook)
+             #'general-insert-minor-mode
+
+             )
   )
+
+;; (define-derived-mode nushell-mode conf-colon-mode
+;;   "Nushell"
+;;   " Mode for editing nushell scripts "
+;;   (outline-minor-mode)
+;;   )
 
 ;;; config.el ends here

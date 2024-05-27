@@ -4,15 +4,15 @@
 ;;-- org core
 ;; locations
 (setq org-id-locations-file (expand-file-name "~/_cache_/org/.orgids")
-      org-archive-location  (string-join `(
-                                           ,(expand-file-name "archive.org" org-directory)
-                                           "* Main Archive"
-                                           )
-                                         "::"
-                                         )
+      org-archive-location  (format "%s::%s"
+                                    (expand-file-name "archive.org" org-directory)
+                                    "* Main Archive"
+                                    )
       org-agenda-files      (list initial-buffer-choice
                                   (expand-file-name "todo.org" org-directory)
                                   )
+      org-default-notes-file (expand-file-name "notes.org" org-directory)
+      org-attach-id-dir "attachments"
       )
 
 ;; ORG SETUP
@@ -24,6 +24,7 @@
               org-startup-indented nil
               org-indent--deepest-level 20
               org-element-use-cache nil
+              org-insert-heading-respect-content t
             )
 
 ;; Save target buffer after archiving a node.
@@ -98,7 +99,25 @@
   "Faces for my keywords"
   )
 
+(setq org-use-fast-todo-selection 'auto)
+
 ;;-- end todo config
+
+;;-- refiling
+(defvar jg-org-refile-targets '((nil :maxlevel . 3)
+                                      (org-agenda-files :maxlevel . 3))
+  )
+
+;; Without this, completers like ivy/helm are only given the first level of
+;; each outline candidates. i.e. all the candidates under the "Tasks" heading
+;; are just "Tasks/". This is unhelpful. We want the full path to each refile
+;; target! e.g. FILE/Tasks/heading/subheading
+(setq-default org-refile-use-outline-path 'file
+              org-outline-path-complete-in-steps t
+              )
+
+
+;;-- end refiling
 
 ;;-- pomodoro
 ;; set pomodoro log variable

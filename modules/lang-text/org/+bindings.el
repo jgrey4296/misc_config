@@ -77,14 +77,6 @@
        )
       )
 
-;; (map! :map jg-org-agenda-mode-map
-;;       :after org-agenda
-;;       :localleader
-;;       (:prefix ("d" . "Date/time"))
-;;       (:prefix ("c" . "Clock"))
-;;       (:prefix ("p" . "Priority"))
-;;       )
-
 (map! :map org-journal-mode-map
        :n "]f"  #'org-journal-next-entry
        :n "[f"  #'org-journal-previous-entry
@@ -120,6 +112,15 @@
       :localleader
       :prefix "."
       :desc "Run Org Test" "T" #'+jg-org-test-org-file
+      )
+(map! :map org-src-mode-map
+      :n "q" #'evil-edit-src-abort
+      :n "C-c C-c" #'evil-edit-src-save
+      :n "C-c C-k" #'evil-edit-src-abort
+      :localleader
+      "q" #'evil-edit-src-abort
+      "w" #'evil-edit-src-save
+
       )
 
 (map! :map dired-mode-map

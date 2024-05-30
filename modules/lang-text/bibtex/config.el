@@ -17,6 +17,7 @@
   :config
   (local-load! "dialect/+entries")
   (local-load! "dialect/+fields")
+  (local-load! "+tags")
   (pushnew! bibtex-dialect-list 'jg)
 
   (let ((sorted-entries (sort (copy-alist bibtex-jg-entry-alist) (lambda (x y) (string-lessp (car x) (car y)))))

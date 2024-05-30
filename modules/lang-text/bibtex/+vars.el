@@ -38,13 +38,6 @@
                      ("Arxiv"             "https://arxiv.org/abs/%s")
                      )
                     )
-(spec-handling-add! tagging
-                    '(bibtex-mode
-                     :set  +jg-bibtex-set-tags
-                     :new  +jg-bibtex-set-new-tag
-                     :get  +jg-bibtex-get-tags
-                     )
-                    )
 (spec-handling-add! whitespace-cleanup
                     '(bibtex-mode
                      +jg-bibtex-cleanup-ensure-newline-before-def

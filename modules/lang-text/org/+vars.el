@@ -196,13 +196,6 @@
                                 )
                      )
                     )
-(spec-handling-add! tagging
-                    `(org-mode
-                     :set ,#'+jg-org-set-tags
-                     :new ,#'+jg-org-set-new-tag
-                     :get ,#'org-get-tags
-                     )
-                    )
 (spec-handling-add! lookup-handler
                     `(org-mode
                      :definition ,#'+org-lookup-definition-handler

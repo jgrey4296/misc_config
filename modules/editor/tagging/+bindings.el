@@ -28,7 +28,10 @@
       )
 
 (after! jg-evil-ex-bindings
-  (evil-ex-define-cmd "t[ag]"  #'librarian-tagging-mode-tagger)
+  (evil-ex-define-cmd "ht[ag]"  #'librarian-tagging-helm)
+  (evil-ex-define-cmd "t[ag]"  #'librarian-tagging-helm)
+  (evil-ex-define-cmd "T[ag]"  #'librarian-tagging-helm)
+  (evil-ex-define-cmd "it[ag]"  #'librarian-tagging-ivy)
   ;; (evil-ex-define-cmd "tv"     #'org-tags-view)
   ;; (evil-ex-define-cmd "ts"     #'org-set-tags)
   )

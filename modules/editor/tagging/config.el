@@ -11,3 +11,7 @@
 (use-package! librarian-tagging-helm
   :after (evil helm)
   )
+
+(use-package! librarian-tagging-ivy
+  :defer t
+  )

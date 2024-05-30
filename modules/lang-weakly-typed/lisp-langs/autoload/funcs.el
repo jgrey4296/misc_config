@@ -57,3 +57,14 @@
             :caller '+jg-lisp-insert-signature
             )
   )
+
+;;;###autoload
+(defun +jg-lisp-pretty-region ()
+  (interactive)
+  (cond ((eq evil-state 'visual)
+         (with-restriction evil-visual-beginning evil-visual-end
+           (pp-buffer))
+         )
+        (t (pp-buffer))
+        )
+  )

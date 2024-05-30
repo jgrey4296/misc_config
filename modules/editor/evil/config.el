@@ -15,7 +15,7 @@
 (advice-add 'helpful-key :before #'+evil--fix-helpful-key-in-evil-ex-a)
 
 ;; Make J (evil-join) remove comment delimiters when joining lines.
-(advice-add #'evil-join :around #'+evil-join-a)
+(advice-add 'evil-join :around #'+evil-join-a)
 (advice-add 'evil-fill :around #'+evil--no-squeeze-on-fill-a)
 (advice-add 'evil-fill-and-move :around #'+evil--no-squeeze-on-fill-a)
 ;; Make ESC (from normal mode) the universal escaper. See `doom-escape-hook'.

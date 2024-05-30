@@ -2,6 +2,8 @@
 
 (local-load! "+defs")
 (local-load! "+vars")
+(local-load! "+spelling")
+(local-load! "+formatting")
 
 (defer-load! "+spec-defs")
 
@@ -154,6 +156,3 @@
 (use-package! insert-plus-state)
 
 (use-package! other-chars-state)
-
-(local-load! "+spelling")
-(local-load! "+formatting")

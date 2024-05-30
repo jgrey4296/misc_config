@@ -4,6 +4,7 @@
 (defun +jg-tag-dired-describe-marked-tags ()
   "Describe tags in marked files"
   (interactive)
+  (user-error "TODO update")
   (let ((marked (dired-get-marked-files))
         (targetdepth (or current-prefix-arg 2))
         (alltags (make-hash-table :test 'equal))
@@ -23,6 +24,7 @@
 (defun +jg-tag-dired-mark-untagged()
   "Mark org files which are not tagged at heading depth 2"
   (interactive)
+  (user-error "TODO update")
   (dired-map-over-marks
    (progn (if (or (not (f-ext? (dired-get-filename) "org"))
                   (tagging-minor-mode/org-tagged-p (dired-get-filename)))
@@ -35,6 +37,7 @@
 (defun +jg-tag-dired-count-untagged ()
   "Count marked org files that are untagged"
   (interactive)
+  (user-error "TODO update")
   (let ((counts 0)
         (untagged-p (lambda (x) (not (tagging-minor-mode/org-tagged-p x))))
         )

@@ -10,7 +10,6 @@
               librarian-assignments-functions     nil
               )
 
-
 (spec-handling-new! browse-handler browse-url-default-handlers :loop 'append
                     val
                     )
@@ -40,14 +39,4 @@
 
 (spec-handling-new! docsets nil :loop 'hook
                     (setq-local dash-docs-docsets val)
-                    )
-
-(spec-handling-new! tagging nil :loop 'hook
-                    (setq-local librarian-tagging-mode-handlers
-                                (list :new (plist-get val :new)
-                                      :set (plist-get val :set)
-                                      :get (plist-get val :get)
-                                      :buff (plist-get val :buff)
-                                      )
-                                )
                     )

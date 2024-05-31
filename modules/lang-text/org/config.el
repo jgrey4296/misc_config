@@ -28,6 +28,7 @@
     ;; (+org-init-export-h)
     ;; (+org-init-hacks-h)
     ;; (+org-init-smartparens-h)
+    (local-load! "+tags")
     )
 
   ;; In case the user has eagerly loaded org from their configs

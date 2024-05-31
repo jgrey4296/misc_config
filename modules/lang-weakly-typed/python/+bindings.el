@@ -54,7 +54,7 @@
       :desc "Test Func"       "T" #'python-pytest-function
       :desc "Test repeat"     "r" #'python-pytest-repeat
       :desc "Test Popup"      "P" #'python-pytest-dispatch
-      :desc "Test Popup"      "p" #'+jg-python-pytest-dispatch
+      :desc "Test Popup"      "p" #'+jg-python-pytest
       :desc "Make Testfile"   "m" #'+jg-python-make-test-file
       )
 

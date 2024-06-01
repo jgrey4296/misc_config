@@ -22,7 +22,7 @@
                       )
  )
 
-(spec-handling-setq! snippets
+(spec-handling-setq! snippets 50
                      +file-templates-dir jg-snippets-file-templates-dir
                      +snippets-dir       jg-snippets-code-templates-dir
                      yas-snippet-dirs    (-filter #'identity (append (list jg-snippets-code-templates-dir jg-snippets-file-templates-dir) jg-snippet-dirs))

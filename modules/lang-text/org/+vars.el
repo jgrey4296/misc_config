@@ -3,17 +3,18 @@
 
 ;;-- org core
 ;; locations
-(setq org-id-locations-file (expand-file-name "~/_cache_/org/.orgids")
-      org-archive-location  (format "%s::%s"
-                                    (expand-file-name "archive.org" org-directory)
-                                    "* Main Archive"
-                                    )
-      org-agenda-files      (list initial-buffer-choice
-                                  (expand-file-name "todo.org" org-directory)
-                                  )
-      org-default-notes-file (expand-file-name "notes.org" org-directory)
-      org-attach-id-dir "attachments"
-      )
+
+(defvar org-agenda-files (list initial-buffer-choice
+                               (expand-file-name "todo.org" org-directory)
+                               )
+  )
+
+(spec-handling-setq! org 20
+                     org-archive-location  (format "%s::%s" (expand-file-name "archive.org" org-directory) "* Main Archive")
+                     org-id-locations-file (expand-file-name "~/_cache_/org/.orgids")
+                     org-default-notes-file (expand-file-name "notes.org" org-directory)
+                     org-attach-id-dir "attachments"
+                     )
 
 ;; ORG SETUP
 (setq-default org-fast-tag-selection-single-key nil

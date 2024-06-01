@@ -54,6 +54,6 @@
                     '(minibuffer-mode (:mode company-dabbrev-code company-capf) (:back company-files))
                     )
 
-(spec-handling-setq! company
+(spec-handling-setq! company 50
                      company-dict-dir (expand-file-name "company-dicts" templates-loc)
                      )

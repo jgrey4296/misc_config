@@ -16,15 +16,20 @@
 ;;-- end Text Encoding
 
 ;;-- locations
-(setq backup-directory-alist          `((".*" . ,(expand-file-name ".local/backups" doom-emacs-dir)))
-      doom-fallback-buffer-name       "base_agenda.org"
+;;
+(setq doom-fallback-buffer-name       "base_agenda.org"
       org-directory                   (expand-file-name "~/github/jgrey4296.github.io/orgfiles/")
       initial-buffer-choice           (expand-file-name "agenda/base_agenda.org" org-directory)
-      pyvenv-default-virtual-env-name (expand-file-name "~/_cache_/mamba/envs/")
-      server-auth-dir                 (expand-file-name "~/.config/secrets/emacs")
-      native-comp-eln-load-path       (list (expand-file-name "cache/eln" doom-local-dir))
-      docs-dir                        (expand-file-name "docs" templates-loc)
       )
+
+(spec-handling-setq! global 0
+                     backup-directory-alist          (list `(".*" . ,(expand-file-name ".local/backups" doom-emacs-dir)))
+                     org-directory                   (expand-file-name "~/github/jgrey4296.github.io/orgfiles/")
+                     pyvenv-default-virtual-env-name (expand-file-name "~/_cache_/mamba/envs/")
+                     server-auth-dir                 (expand-file-name "~/.config/secrets/emacs")
+                     native-comp-eln-load-path       (list (expand-file-name "cache/eln" doom-local-dir))
+                     docs-dir                        (expand-file-name "docs" templates-loc)
+                     )
 
 (add-to-list 'load-path (expand-file-name "~/.local/modules"))
 

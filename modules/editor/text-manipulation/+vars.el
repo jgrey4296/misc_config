@@ -59,7 +59,7 @@
 ;;-- end spelling
 
 ;;-- specs
-(spec-handling-setq! rotate-text
+(spec-handling-setq! rotate-text 50
                      rotate-text-words '(("enable" "disable")
                                          ("true" "false")
                                          ("width" "height")
@@ -105,7 +105,7 @@
                                            ("default" "default_factory")
                                  )
               )
-(spec-handling-setq! evil-shift
+(spec-handling-setq! evil-shift 50
                      evil-shift-width 4
                      )
 (spec-handling-add! auto-modes

@@ -67,9 +67,6 @@
 (package! gnuplot)
 (package! gnuplot-mode)
 (package! org-journal)
-(package! org-noter)
-(package! org-appear)
-(package! org-fancy-priorities)
 (package! centered-window :recipe (:host github :repo "anler/centered-window-mode"))
 (package! org-tree-slide)
 

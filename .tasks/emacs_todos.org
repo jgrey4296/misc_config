@@ -36,4 +36,11 @@ and that librarian meta retrieval is using exif
 instead of spc y [1-7], do spc-y-ret and dynamically drill into templates repo
 
 
+** Org
+*** diary jump
+*** archive jump
+*** journal jump
+*** notes
+*** projects
+
 * Links

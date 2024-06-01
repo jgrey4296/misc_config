@@ -34,8 +34,7 @@
   ;; it is used instead. Magit seems to be hardcoded to use the latter, so here
   ;; we override it to have more correct behavior.
   (unless (file-exists-p "~/.git-credential-cache/")
-    (setq magit-credential-cache-daemon-socket (doom-glob (or (getenv "XDG_CACHE_HOME")
-                                                              user-cache-dir)
+    (setq magit-credential-cache-daemon-socket (doom-glob (or (getenv "XDG_CACHE_HOME") "~/_cache_")
                                                           "git/credential/socket")))
 
   (add-to-list 'doom-debug-variables 'magit-refresh-verbose)

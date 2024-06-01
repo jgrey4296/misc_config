@@ -1,6 +1,5 @@
 ;;; lang/jg-org/+vars.el -*- lexical-binding: t; -*-
 
-
 ;;-- org core
 ;; locations
 
@@ -10,10 +9,21 @@
   )
 
 (spec-handling-setq! org 20
-                     org-archive-location   (format "%s::%s" (expand-file-name "archive/archive.org" org-directory) "* Main Archive")
+                     org-archive-location   (format           "%s::%s" (expand-file-name "archive/archive.org" org-directory) "* Main Archive")
                      org-id-locations-file  (expand-file-name "org/.orgids" user-cache-dir)
-                     org-default-notes-file (expand-file-name "notes.org" org-directory)
-                     org-attach-id-dir      "attachments"
+                     org-default-notes-file (expand-file-name "notes/misc.org"   org-directory)
+                     org-attach-id-dir                        "attachments"
+                     org-journal-dir                   (expand-file-name "journal/"    org-directory)
+                     org-journal-cache-file            (expand-file-name "org/journal" user-cache-dir)
+                     org-persist-directory             (expand-file-name "org/persist/" user-cache-dir)
+                     org-publish-timestamp-directory   (expand-file-name  "org/timestamps/" user-cache-dir)
+                     org-preview-latex-image-directory (expand-file-name  "org/latex/" user-cache-dir)
+
+                     +org-capture-todo-file                   "agenda/todo_captures.org"
+                     +org-capture-changelog-file              "changelog.org"
+                     +org-capture-notes-file                  "notes/misc.org"
+                     +org-capture-journal-file                "journal/journal.org"
+                     +org-capture-projects-file               "projects/projects.org"
                      )
 
 ;; ORG SETUP
@@ -22,11 +32,13 @@
               org-group-tags nil
               org-use-fast-tag-selection t
               org-tags-column 50
-              org-startup-indented t
+              org-startup-indented nil
               org-indent--deepest-level 10
-              org-element-use-cache nil
+              org-element-use-cache t
               org-insert-heading-respect-content t
-            )
+              ;; Recognize a), A), a., A., etc -- must be set before org is loaded.
+              org-list-allow-alphabetical t
+              )
 
 ;; Save target buffer after archiving a node.
 (setq org-archive-subtree-save-file-p t)
@@ -49,7 +61,13 @@
 
 ;;-- end agenda
 
-;-- todo config
+;;-- journal
+(setq org-journal-find-file #'find-file
+      )
+
+;;-- end journal
+
+;;-- todo config
 (let ((project-steps '(sequence
                        "TODO(j!)"      ; A job that needs doing
                        "IDEA(i)"       ; An unconfirmed job
@@ -105,6 +123,7 @@
 ;;-- end todo config
 
 ;;-- refiling
+
 (defvar jg-org-refile-targets '((nil :maxlevel . 3)
                                       (org-agenda-files :maxlevel . 3))
   )
@@ -116,7 +135,6 @@
 (setq-default org-refile-use-outline-path 'file
               org-outline-path-complete-in-steps t
               )
-
 
 ;;-- end refiling
 

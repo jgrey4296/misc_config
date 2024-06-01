@@ -18,7 +18,7 @@
 
   (after! 'org
     (+org-init-org-directory-h)
-    ;; (+org-init-appearance-h)
+    (+org-init-appearance-h)
     ;; (+org-init-agenda-h)
     ;; (+org-init-attachments-h)
     ;; (+org-init-babel-h)
@@ -177,13 +177,12 @@
   :commands org-clock-save
   :init
   (setq org-clock-persist-file (concat doom-data-dir "org-clock-save.el"))
-  :before +org--clock-load-a
 
-  (advice-add 'org-clock-in      :before +org--clock-load-a)
-  (advice-add 'org-clock-out     :before +org--clock-load-a)
-  (advice-add 'org-clock-in-last :before +org--clock-load-a)
-  (advice-add 'org-clock-goto    :before +org--clock-load-a)
-  (advice-add 'org-clock-cancel  :before +org--clock-load-a)
+  (advice-add 'org-clock-in      :before #'+org--clock-load-a)
+  (advice-add 'org-clock-out     :before #'+org--clock-load-a)
+  (advice-add 'org-clock-in-last :before #'+org--clock-load-a)
+  (advice-add 'org-clock-goto    :before #'+org--clock-load-a)
+  (advice-add 'org-clock-cancel  :before #'+org--clock-load-a)
 
   :config
   (setq org-clock-persist 'history
@@ -240,4 +239,32 @@
 
 (use-package! org-journal
   :defer t
-  )
+  :init
+  ;; HACK `org-journal' adds a `magic-mode-alist' entry for detecting journal
+  ;;      files, but this causes us lazy loaders a big problem: an unacceptable
+  ;;      delay on the first file the user opens, because calling the autoloaded
+  ;;      `org-journal-is-journal' pulls all of `org' with it. So, we replace it
+  ;;      with our own, extra layer of heuristics.
+  (add-to-list 'magic-mode-alist '(+org-journal-p . org-journal-mode))
+
+  (defun +org-journal-p ()
+    "Wrapper around `org-journal-is-journal' to lazy load `org-journal'."
+    (when-let (buffer-file-name (buffer-file-name (buffer-base-buffer)))
+      (if (or (featurep 'org-journal)
+              (and (file-in-directory-p
+                    buffer-file-name org-journal-dir)
+                   (require 'org-journal nil t)))
+          (org-journal-is-journal))))
+
+  :config
+  ;; Remove the orginal journal file detector and rely on `+org-journal-p'
+  ;; instead, to avoid loading org-journal until the last possible moment.
+  (setq magic-mode-alist (assq-delete-all 'org-journal-is-journal magic-mode-alist))
+
+  ;; Setup carryover to include all configured TODO states. We cannot carry over
+  ;; [ ] keywords because `org-journal-carryover-items's syntax cannot correctly
+  ;; interpret it as anything other than a date.
+  (setq org-journal-carryover-items  "TODO=\"TODO\"|TODO=\"PROJ\"|TODO=\"STRT\"|TODO=\"WAIT\"|TODO=\"HOLD\"")
+
+
+)

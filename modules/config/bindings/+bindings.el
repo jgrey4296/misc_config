@@ -17,7 +17,7 @@
       :desc "Eval expression"       "\""   #'pp-eval-expression
       :desc "M-x"                   ";"   #'execute-extended-command
 
-      :desc "Org Capture"           "X"   #'org-capture
+      :desc "Org Capture"           "X"   #'counsel-org-capture
 
       ;; C-u is used by evil
       :desc "Universal argument"    "u"   #'universal-argument
@@ -152,11 +152,9 @@
 ;;-- <leader> n --- notes
 (map! :leader
       :prefix ("n" . "notes")
-      :desc "Org noter"                      "e" #'org-noter
       :desc "Active org-clock"               "o" #'org-clock-goto
       :desc "Cancel current org-clock"       "C" #'org-clock-cancel
       :desc "Goto capture"                   "N" #'org-capture-goto-target
-      :desc "Open deft"                      "d" #'deft
       :desc "Org export to clipboard as RTF" "Y" #'+org/export-to-clipboard-as-rich-text
       :desc "Org export to clipboard"        "y" #'+org/export-to-clipboard
       :desc "Org store link"                 "l" #'org-store-link

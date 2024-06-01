@@ -3,4 +3,4 @@
 
 (package! rmail :built-in t)
 (package! rmailsum :built-in t)
-(package! mu4e)
+;; (package! mu4e)

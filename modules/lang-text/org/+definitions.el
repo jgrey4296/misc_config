@@ -2,19 +2,19 @@
 
 ;;-- locations
 
-(defvar +org-capture-todo-file "agenda/todo_captures.org"
+(defvar +org-capture-todo-file nil
   "Default target for todo entries.
 
 Is relative to `org-directory', unless it is absolute. Is used in Doom's default
 `org-capture-templates'.")
 
-(defvar +org-capture-changelog-file "changelog.org"
+(defvar +org-capture-changelog-file nil
   "Default target for changelog entries.
 
 Is relative to `org-directory' unless it is absolute. Is used in Doom's default
 `org-capture-templates'.")
 
-(defvar +org-capture-notes-file "notes.org"
+(defvar +org-capture-notes-file nil
   "Default target for storing notes.
 
 Used as a fall back file for org-capture.el, for templates that do not specify a
@@ -23,24 +23,18 @@ target file.
 Is relative to `org-directory', unless it is absolute. Is used in Doom's default
 `org-capture-templates'.")
 
-(defvar +org-capture-journal-file "journal/journal.org"
+(defvar +org-capture-journal-file nil
   "Default target for storing timestamped journal entries.
 
 Is relative to `org-directory', unless it is absolute. Is used in Doom's default
 `org-capture-templates'.")
 
-(defvar +org-capture-projects-file "projects/projects.org"
+(defvar +org-capture-projects-file nil
   "Default, centralized target for org-capture templates.")
 
 (defvar jg-org-link-move-base "/Volumes/Overflow/missing_images/")
 
 (defvar jg-org-twitter-loc "/Volumes/documents/twitter_threads/")
-
-(setq org-persist-directory (concat doom-cache-dir "org/persist/")
-      org-publish-timestamp-directory (concat doom-cache-dir "org/timestamps/")
-      org-preview-latex-image-directory (concat doom-cache-dir "org/latex/")
-      ;; Recognize a), A), a., A., etc -- must be set before org is loaded.
-      org-list-allow-alphabetical t)
 
 ;; Set to nil so we can detect user changes to them later (and fall back on
 ;; defaults otherwise).

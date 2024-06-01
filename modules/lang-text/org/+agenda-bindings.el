@@ -33,7 +33,7 @@
                                    :n "q"                    #'org-agenda-exit
                                    :n "a"                    #'org-agenda-append-agenda
      :desc "Metadata"              :n "c"                     'jg-org-agenda-meta-submap
-     :desc "Filter by Agenda File" :n "/"                    #'org-agenda-filter
+     :desc "Filter by Agenda File" :n "\\"                    #'org-agenda-filter
 
                                    :n "b"                    #'org-agenda-dim-blocked-tasks
      ;;                            :n "l"                 #'org-agenda-log-mode

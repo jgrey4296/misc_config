@@ -93,8 +93,6 @@ Acts like a singular `mu4e-view-save-attachments', without the saving."
               sizefmt (format "%%-%ds " maxsizelen))
         (dolist (pinfo partinfo)
           (push (cons (concat (propertize (format "%-2s " (plist-get pinfo :index)) 'face '(bold font-lock-type-face))
-                              (when (featurep 'all-the-icons)
-                                (all-the-icons-icon-for-file (or (plist-get pinfo :filename) "")))
                               (format fnamefmt (or (plist-get pinfo :filename)
                                                    (propertize (plist-get pinfo :type) 'face '(italic font-lock-doc-face))))
                               (format sizefmt (propertize (plist-get pinfo :size) 'face 'font-lock-builtin-face))

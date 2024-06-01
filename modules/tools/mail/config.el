@@ -8,10 +8,6 @@
 
 (function-put 'princ 'original (symbol-function 'princ))
 (function-put 'princ 'mod (symbol-function '+jg-mail-princ-as-insert))
-(advice-add 'rmail-header-summary :override #'+jg-mail-header-summary)
-(advice-add 'rmail-create-summary :override #'+jg-mail-create-summary)
-(advice-add 'rmail-new-summary-1 :around #'+jg-mail-new-summary-princ-override)
-(advice-add 'rmail-summary-update-line :around #'+jg-mail-summary-update-princ-override)
 
 (use-package! mu4e
   :commands mu4e mu4e-compose-new
@@ -25,24 +21,10 @@
     (`offlineimap (setq mu4e-get-mail-command "offlineimap -o -q"))
     )
 
-  ;; Better search symbols
-  (letf! ((defun make-help-button (text help-echo)
-            (with-temp-buffer (insert-text-button text
-                                                  'help-echo help-echo
-                                                  'mouse-face nil)
-                              (buffer-string)))
-          (defun make-help-button-cons (text1 text2 help-echo)
-            (cons (make-help-button text1 help-echo)
-                  (make-help-button text2 help-echo))))
-    (setq mu4e-headers-threaded-label
-          (make-help-button-cons "T" (concat " " (all-the-icons-octicon "git-branch" :v-adjust 0.05))
-                                 "Thread view")
-          mu4e-headers-related-label
-          (make-help-button-cons "R" (concat " " (all-the-icons-material "link" :v-adjust -0.1))
-                                 "Showing related emails")
-          mu4e-headers-full-label
-          (make-help-button-cons "F" (concat " " (all-the-icons-material "disc_full"))
-                                 "Search is full!")))
+  (setq mu4e-headers-threaded-label (cons "Thread view" "Thread View")
+        mu4e-headers-related-label  (cons "Showing related emacs" "Showing related emacs")
+        mu4e-headers-full-label     (cons "Search is Full" "Search is Full")
+        )
 
   (plist-put (cdr (assoc :flags mu4e-header-info)) :shortname " Flags") ; default=Flgs
   (add-to-list 'mu4e-bookmarks '("flag:flagged" "Flagged messages" ?f) t)
@@ -75,6 +57,11 @@
 (use-package! rmail
   :commands rmail
   :after evil
+  :config
+  (advice-add 'rmail-header-summary :override #'+jg-mail-header-summary)
+  (advice-add 'rmail-create-summary :override #'+jg-mail-create-summary)
+  (advice-add 'rmail-new-summary-1 :around #'+jg-mail-new-summary-princ-override)
+  (advice-add 'rmail-summary-update-line :around #'+jg-mail-summary-update-princ-override)
   )
 
 (use-package! rmailsum

@@ -5,6 +5,7 @@
 ;;-- <leader> g --- git
 (map! :leader
       :prefix ("g" . "git")
+      :desc "Clifflog generate"           "1"      #'git-cliff-menu
       :desc "Add To Changelog"            "a"      #'add-change-log-entry-other-window
       :desc "Yank Homepage URL"           "h"      #'+jg-vc-yank-homepage
       :desc "Merge Mode"                  "m"      #'evil-conflict-merge-state

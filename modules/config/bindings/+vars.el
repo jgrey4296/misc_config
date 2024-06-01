@@ -3,6 +3,10 @@
 
 (defvar jg-bindings-wk-filter '+jg-bindings-wk-filter-fn)
 
+(defvar jg-binding-halting-keymap (list 'keymap (make-char-table 'halt #'ignore)))
+
+
+
 (setq-default which-key-show-operator-state-maps t)
 
 

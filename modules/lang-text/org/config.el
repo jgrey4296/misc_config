@@ -106,12 +106,8 @@
   (advice-add 'org-babel-do-load-languages          :override #'ignore)
 
   ;; Disable doom docs org
-  (define-advice +jg-org-doomdocs-override (:override (&rest _) doom-docs-mode)
-    nil
-    )
-  (define-advice +jg-org-doomdocs-org-override (:override (&rest _) doom-docs-org-mode)
-    (org-mdoe)
-    )
+  (advice-add 'doom-docs-mode :override #'ignore)
+  (advice-add 'doom-docs-org-mode :override #'(lambda (&rest _) (org-mode)))
 
 
   ;;-- end advice

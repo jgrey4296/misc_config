@@ -22,8 +22,8 @@
               org-group-tags nil
               org-use-fast-tag-selection t
               org-tags-column 50
-              org-startup-indented nil
-              org-indent--deepest-level 20
+              org-startup-indented t
+              org-indent--deepest-level 10
               org-element-use-cache nil
               org-insert-heading-respect-content t
             )
@@ -38,7 +38,7 @@
 
 ;; (textobjects insert navigation additional shift todo heading calendar)
 (setq evil-org-key-theme '(textobjects insert shift todo)
-    org-cycle-separator-lines 3
+      org-cycle-separator-lines 3
     )
 ;;-- end org core
 
@@ -49,7 +49,7 @@
 
 ;;-- end agenda
 
-;;-- todo config
+;-- todo config
 (let ((project-steps '(sequence
                        "TODO(j!)"      ; A job that needs doing
                        "IDEA(i)"       ; An unconfirmed job

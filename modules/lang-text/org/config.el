@@ -105,6 +105,15 @@
 
   (advice-add 'org-babel-do-load-languages          :override #'ignore)
 
+  ;; Disable doom docs org
+  (define-advice +jg-org-doomdocs-override (:override (&rest _) doom-docs-mode)
+    nil
+    )
+  (define-advice +jg-org-doomdocs-org-override (:override (&rest _) doom-docs-org-mode)
+    (org-mdoe)
+    )
+
+
   ;;-- end advice
 
   ;;-- hooks
@@ -231,4 +240,8 @@
 
 (use-package! ox-epub
   :after org
+  )
+
+(use-package! org-journal
+  :defer t
   )

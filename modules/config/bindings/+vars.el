@@ -5,7 +5,9 @@
 
 (defvar jg-binding-halting-keymap (list 'keymap (make-char-table 'halt #'ignore)))
 
+(defvar jg-ctl-x-map (make-sparse-keymap))
 
+(setq ctl-x-map jg-ctl-x-map)
 
 (setq-default which-key-show-operator-state-maps t)
 

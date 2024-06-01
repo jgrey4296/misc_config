@@ -28,7 +28,6 @@
                                       search-ring regexp-search-ring) ; persist searches
 )
 
-(setq auth-sources (list (expand-file-name "~/.config/secrets/emacs/authinfo.asc")))
 
 ;; Ftp
 (setq ftp-program "git-ftp")

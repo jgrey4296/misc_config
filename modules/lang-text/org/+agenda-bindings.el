@@ -7,7 +7,7 @@
 ;;-- end Header
 
 (defvar-keymap jg-org-agenda-mode-map)
-(defvar-keymap jg-org-agenda-diary-keymap :suppress t)
+(defvar-keymap jg-org-agenda-diary-keymap)
 
 (define-prefix-command 'jg-org-agenda-meta-submap nil "jgoa-meta-map")
 (set-keymap-parent jg-org-agenda-meta-submap jg-binding-halting-keymap)

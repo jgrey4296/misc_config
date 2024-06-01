@@ -34,12 +34,12 @@ See `+mu4e-msg-gmail-p' and `mu4e-sent-messages-behavior'.")
                                    (let ((maildir (replace-regexp-in-string
                                                    "\\`/?\\([^/]+\\)/.*\\'" "\\1"
                                                    (mu4e-message-field msg :maildir))))
-                                     (+mu4e-colorize-str (replace-regexp-in-string
-                                                          "^gmail"
-                                                          (propertize "g" 'face 'bold-italic)
-                                                          maildir)
-                                                         '+mu4e-header--maildir-colors
-                                                         maildir)))))
+                                     (replace-regexp-in-string
+                                      "^gmail"
+                                      (propertize "g" 'face 'bold-italic)
+                                      maildir)
+                                     '+mu4e-header--maildir-colors
+                                     maildir))))
         (:account-stripe . (:name "Account"
                             :shortname "(A)"
                             :help "Which account/maildir this email belongs to"
@@ -48,9 +48,8 @@ See `+mu4e-msg-gmail-p' and `mu4e-sent-messages-behavior'.")
                               (let ((account (replace-regexp-in-string
                                               "\\`/?\\([^/]+\\)/.*\\'" "\\1"
                                               (mu4e-message-field msg :maildir))))
-                                (propertize
-                                 (+mu4e-colorize-str "▌" '+mu4e-header--maildir-colors account)
-                                 'help-echo account)))))
+                                (propertize "▌" '+mu4e-header--maildir-colors account
+                                            'help-echo account)))))
         (:recipnum . (:name "Number of recipients"
                       :shortname " (R)"
                       :help "Number of recipients for this message"

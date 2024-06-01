@@ -35,7 +35,7 @@
   ;; we override it to have more correct behavior.
   (unless (file-exists-p "~/.git-credential-cache/")
     (setq magit-credential-cache-daemon-socket (doom-glob (or (getenv "XDG_CACHE_HOME")
-                                                              "~/_cache_/")
+                                                              user-cache-dir)
                                                           "git/credential/socket")))
 
   (add-to-list 'doom-debug-variables 'magit-refresh-verbose)

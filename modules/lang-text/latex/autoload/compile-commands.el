@@ -50,7 +50,7 @@
      `("l3"       ,(format "fmtutil %s --all" (if (eq 'darwin system-type) "-user" "--sys")))
      `("find"                               "kpsewhich -all" :read)
      `("fonts"                              "updmap-user --listmaps")
-     `("system-fonts" ,(format              "system_profiler -json SPFontsDataType > %s" (expand-file-name "~/.cache/fonts/fonts.json")))
+     `("system-fonts" ,(format              "system_profiler -json SPFontsDataType > %s" (expand-file-name "fonts/fonts.json" user-cache-dir)))
 
      (when (f-exists? (f-swap-ext curr-file "pdf"))
        `("open"     ,(if (eq 'darwin system-type)

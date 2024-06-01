@@ -13,8 +13,8 @@
                       (smtpmail-smtp-server         . "smtp.gmail.com")
                       (smtpmail-stream-type         . starttls)
                       (smtpmail-smtp-service        . 587)
-                      (auth-sources                 . ("~/.authinfo" macos-keychain-generic macos-keychain-internet "~/authinfo.gpg"))
-                      (mu4e-compose-signature . "---\nJohn"))
+                      (auth-sources                 . auth-sources)
+                      (mu4e-compose-signature       . "---\nJohn"))
                     t)
 
 (pcase system-type

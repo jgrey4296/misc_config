@@ -10,10 +10,10 @@
   )
 
 (spec-handling-setq! org 20
-                     org-archive-location  (format "%s::%s" (expand-file-name "archive.org" org-directory) "* Main Archive")
-                     org-id-locations-file (expand-file-name "~/_cache_/org/.orgids")
+                     org-archive-location   (format "%s::%s" (expand-file-name "archive/archive.org" org-directory) "* Main Archive")
+                     org-id-locations-file  (expand-file-name "org/.orgids" user-cache-dir)
                      org-default-notes-file (expand-file-name "notes.org" org-directory)
-                     org-attach-id-dir "attachments"
+                     org-attach-id-dir      "attachments"
                      )
 
 ;; ORG SETUP

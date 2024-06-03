@@ -103,6 +103,7 @@
         (defvaralias losing-value python-shell-interpreter)
         ;; ((python python-shell-completion-native-turn-on-maybe))
         (org-element org-element-cache)
+        (org-element org-element-parser)
         (bytecomp)
         ;; (flycheck syntax-checker)
         )

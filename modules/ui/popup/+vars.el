@@ -1,6 +1,8 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
-(setq jg-popup-ivy-predicate-patterns (rx (or "*helpful" "*helm-" "doom" "*dired-log" "magit" "*Free Keys")))
+(defvar jg-popup-ivy-predicate-patterns
+  (rx (or "*helpful" "*helm-" "doom" "*dired-log" "magit" "*Free Keys"))
+  )
 
 (after! ivy
   (ivy-add-actions 'ivy-switch-buffer

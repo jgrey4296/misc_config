@@ -1,6 +1,5 @@
 ;;; completion/ivy/+vars.el -*- lexical-binding: t; -*-
 
-
 ;;-- general-insert
 (setq general-insert-location (expand-file-name "general-insert" templates-loc))
 
@@ -46,6 +45,21 @@
   )
 
 ;;-- end ivy
+
+;;-- counsel
+(defvar jg-ivy-file-regexp (rx anything))
+(defvar jg-ivy-file-reject-regexp (rx "test_" (+ anything)))
+
+(defun +jg-ivy-file-predicate (x)
+  (and (s-matches? jg-ivy-file-regexp x)
+       (not (s-matches? jg-ivy-file-reject-regexp x)))
+  )
+
+(setq counsel-find-file-extern-extensions '("mp4" "mkv" "xlsx" "pdf" "epub")
+      counsel--find-file-predicate #'+jg-ivy-file-predicate
+      )
+
+;;-- end counsel
 
 ;;-- company
 (setq company-idle-delay 1)

@@ -224,3 +224,7 @@
 (use-package! exato
   :commands evil-outer-xml-attr evil-inner-xml-attr
   )
+
+(use-package! evil-fringe-mark
+  :defer t
+  )

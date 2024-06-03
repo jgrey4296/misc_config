@@ -16,21 +16,6 @@
   (dolist (flag (doom-module-context-get :flags))
     (load! (concat "contrib/" (substring (symbol-name flag) 1)) nil t))
 
-  (after! 'org
-    (+org-init-org-directory-h)
-    (+org-init-appearance-h)
-    ;; (+org-init-agenda-h)
-    ;; (+org-init-attachments-h)
-    ;; (+org-init-babel-h)
-    ;; (+org-init-babel-lazy-loader-h)
-    ;; (+org-init-capture-defaults-h)
-    ;; (+org-init-custom-links-h)
-    ;; (+org-init-export-h)
-    ;; (+org-init-hacks-h)
-    ;; (+org-init-smartparens-h)
-    (local-load! "+tags")
-    )
-
   ;; In case the user has eagerly loaded org from their configs
   (when (and (featurep 'org)
              (not byte-compile-current-file))
@@ -41,6 +26,19 @@
 
   :config
   (add-to-list 'doom-debug-variables 'org-export-async-debug)
+
+  (+org-init-org-directory-h)
+  (+org-init-appearance-h)
+  ;; (+org-init-agenda-h)
+  ;; (+org-init-attachments-h)
+  ;; (+org-init-babel-h)
+  ;; (+org-init-babel-lazy-loader-h)
+  ;; (+org-init-capture-defaults-h)
+  ;; (+org-init-custom-links-h)
+  ;; (+org-init-export-h)
+  ;; (+org-init-hacks-h)
+  ;; (+org-init-smartparens-h)
+  (local-load! "+tags")
 
   ;; Don't number headings with these tags
   (setq org-num-face '(:inherit org-special-keyword :underline nil :weight bold)

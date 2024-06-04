@@ -213,11 +213,11 @@
         :desc "Delete frame"                 "f" #'delete-frame
         )
        (:prefix ("w" . "Sessions")
-        :desc "Save current session"         "s" #'doom/quicksave-session
-        :desc "Load last session"            "l" #'doom/quickload-session
+        :desc "Save current session"         "s" #'ignore
+        :desc "Load last session"            "l" #'ignore
 
-        :desc "Load session from file"       "L" #'doom/load-session
-        :desc "Save session to file"         "S" #'doom/save-session
+        :desc "Load session from file"       "L" #'ignore
+        :desc "Save session to file"         "S" #'ignore
         )
       )
 ;;-- end <leader> q --- quit/restart/session

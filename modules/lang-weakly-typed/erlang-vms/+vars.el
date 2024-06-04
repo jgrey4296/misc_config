@@ -80,4 +80,11 @@
                       '("\\.elixir\\'" :trigger "__" :mode elixir-mode :priority -99)
                       )
                     )
+
+(spec-handling-add! babel
+                    '(erlang
+                      (:name erlang :lib ob-erlang :mode erlang)
+                      (:name elixir :lib ob-elixir :mode elixir)
+                      )
+                    )
 ;;-- end specs

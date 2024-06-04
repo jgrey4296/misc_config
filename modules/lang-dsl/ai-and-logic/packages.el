@@ -1,5 +1,4 @@
 (package! instal-mode     :recipe `(:local-repo ,(expand-file-name "~/github/python/instal/instal-mode")))
-(package! ob-instal       :recipe `(:local-repo ,(expand-file-name "~/github/python/instal/instal-mode")))
 
 (package! agentspeak-mode :recipe (:host github :repo "jgrey4296/misc-modes" :files ("major-modes/agentspeak-mode/*.el")))
 (package! jacamo-mode     :recipe (:host github :repo "jgrey4296/misc-modes" :files ("major-modes/jacamo-mode/*.el")))
@@ -9,6 +8,7 @@
 (package! z3-mode)
 
 (package! ob-prolog)
+(package! ob-instal       :recipe `(:local-repo ,(expand-file-name "~/github/python/instal/instal-mode")))
 (package! ob-ccalc        :recipe (:host github :repo "jgrey4296/misc-modes" :files ("org-babels/ob-ccalc.el")))
 (package! ob-ceptre       :recipe (:host github :repo "jgrey4296/misc-modes" :files ("org-babels/ob-ceptre.el")))
 (package! ob-clingo       :recipe (:host github :repo "jgrey4296/misc-modes" :files ("org-babels/ob-clingo.el")))

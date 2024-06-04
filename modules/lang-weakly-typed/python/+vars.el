@@ -303,6 +303,24 @@
 
 ;;-- end specs
 
+;;-- babel
+(spec-handling-add! babel
+                    '(python
+                      (:name python :lib ob-python :mode python)
+                      )
+                    )
+;; (after! (ob python)
+;;   (setq org-babel-python-command
+;;         (string-trim
+;;          (concat python-shell-interpreter " "
+;;                  (if (string-match-p "\\<i?python[23]?$" python-shell-interpreter)
+;;                      (replace-regexp-in-string
+;;                       "\\(^\\| \\)-i\\( \\|$\\)" " " python-shell-interpreter-args)
+;;                    python-shell-interpreter-args))))
+;;   )
+
+;;-- end babel
+
 ;;-- general insert
 (general-insert-register-processor 'python-mode "raise"
                                    #'(lambda (x) (insert "raise " (s-replace-regexp "^[^A-Z]+" "" x))))

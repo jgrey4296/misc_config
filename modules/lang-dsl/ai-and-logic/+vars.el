@@ -65,4 +65,19 @@
                       ("\\.asl\\'" . agentspeak-mode)
                       )
                     )
+
+(spec-handling-add! babel
+                    '(logic
+                      (:name prolog     :lib ob-prolog :mode prolog)
+                      (:name clingo     :lib ob-prolog :mode pasp)
+                      (:name ccalc      :lib ob-prolog :mode prolog)
+                      (:name instal     :lib ob-instal :mode instal)
+                      (:name z3         :lib ob-z3 :mode z3)
+                      (:name ceptre     :lib ob-ceptre)
+                      )
+                    '(agents
+                      (:name soar :lib ob-soar :mode soar-mode)
+                      (:name clips :lib ob-clips :mode clips-mode)
+                      )
+                    )
 ;;-- end specs

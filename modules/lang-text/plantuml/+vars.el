@@ -23,3 +23,9 @@
                       ("\\.pu" . plantuml-mode)
                       )
                     )
+
+(spec-handling-add! babel
+                    '(plantuml
+                      (:name plantuml :lib ob-plantuml :mode plantuml)
+                      )
+                    )

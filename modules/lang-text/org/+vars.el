@@ -13,14 +13,12 @@
               org-indent--deepest-level 10
               org-element-use-cache t
               org-insert-heading-respect-content t
-              ;; Recognize a), A), a., A., etc -- must be set before org is loaded.
               org-list-allow-alphabetical t
               )
 
 ;; Save target buffer after archiving a node.
 (setq org-archive-subtree-save-file-p t)
 
-(push 'org-indent-mode minor-mode-list)
 (after! 'ol
   (push '("Scholar" . "https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q=%s") org-link-abbrev-alist)
   )
@@ -43,7 +41,7 @@
                      org-publish-timestamp-directory   (expand-file-name  "org/timestamps/" user-cache-dir)
                      org-preview-latex-image-directory (expand-file-name  "org/latex/" user-cache-dir)
 
-                     +org-capture-todo-file                   "agenda/todo_captures.org"
+                     +org-capture-todo-file                   "agenda/triage_todos.org"
                      +org-capture-changelog-file              "changelog.org"
                      +org-capture-notes-file                  "notes/misc.org"
                      +org-capture-journal-file                "journal/journal.org"
@@ -55,6 +53,15 @@
 ;;-- agenda
 (setq org-agenda-include-diary t
       org-agenda-inhibit-startup t
+      org-agenda-deadline-faces '((1.001 . error)
+                                  (1.0 . org-warning)
+                                  (0.5 . org-upcoming-deadline)
+                                  (0.0 . org-upcoming-distant-deadline))
+      org-agenda-window-setup 'other-window
+      org-agenda-skip-unavailable-files t
+      org-agenda-span 10
+      org-agenda-start-on-weekday nil
+      org-agenda-start-day "-3d"
       )
 
 (defvar-local jg-org-startup-agenda nil)
@@ -63,10 +70,12 @@
 
 (defvar jg-org-reference-files nil "Files that are used for reference")
 
-(after! org
-  (add-to-list 'org-startup-options '("agenda"    jg-org-startup-agenda t))
-  (add-to-list 'org-startup-options '("reference" jg-org-reference       t))
-  )
+(spec-handling-add! org-startup
+                    '(plus
+                      ("agenda"    jg-org-startup-agenda t)
+                      ("reference" jg-org-reference      t)
+                      )
+                    )
 
 ;;-- end agenda
 
@@ -75,6 +84,79 @@
       )
 
 ;;-- end journal
+
+;;-- babel
+(setq org-src-preserve-indentation t  ; use native major-mode indentation
+      org-src-tab-acts-natively t     ; we do this ourselves
+      ;; Show src buffer in popup, and don't monopolize the frame
+      org-src-window-setup 'other-window
+      )
+
+(spec-handling-add! babel
+                    '(default
+                      (:name D          :lib ob-C)
+                      (:name amm        :lib ob-ammonite)
+                      (:name awk        :lib ob-awk)
+                      (:name bash       :lib ob-shell)
+                      (:name calc       :lib ob-calc)
+                      (:name clojure    :lib ob-clojure)
+                      (:name comint     :lib ob-comint)
+                      (:name cpp        :lib ob-C)
+                      (:name css        :lib ob-css)
+                      (:name ditaa      :lib ob-ditaa)
+                      (:name dot        :lib ob-dot)
+                      (:name emacs-lisp :lib ob-emacs-lisp)
+                      (:name eshell     :lib ob-eshell)
+                      (:name eval       :lib ob-eval)
+                      (:name exp        :lib ob-exp)
+                      (:name forth      :lib ob-forth)
+                      (:name fortran    :lib ob-fortran)
+                      (:name gnuplot    :lib ob-gnuplot)
+                      (:name groovy     :lib ob-groovy)
+                      (:name haskell    :lib ob-haskell)
+                      (:name java       :lib ob-java)
+                      (:name js         :lib ob-js)
+                      (:name julia      :lib ob-julia)
+                      (:name latex      :lib ob-latex)
+                      (:name lilypond   :lib ob-lilypond)
+                      (:name lisp       :lib ob-lisp)
+                      (:name lob        :lib ob-lob)
+                      (:name lua        :lib ob-lua)
+                      (:name makefile   :lib ob-makefile)
+                      (:name matlab     :lib ob-matlab)
+                      (:name matlab     :lib ob-octave)
+                      (:name maxima     :lib ob-maxima)
+                      (:name ocaml      :lib ob-ocaml)
+                      (:name octave     :lib ob-octave)
+                      (:name org        :lib ob-org)
+                      (:name perl       :lib ob-perl)
+                      (:name plantuml   :lib ob-plantuml)
+                      (:name processing :lib ob-processing)
+                      (:name ruby       :lib ob-ruby)
+                      (:name rust       :lib rustic-babel)
+                      (:name sass       :lib ob-sass)
+                      (:name scheme     :lib ob-scheme)
+                      (:name sed        :lib ob-sed)
+                      (:name sh         :lib ob-shell)
+                      (:name shell      :lib ob-shell)
+                      (:name sql        :lib ob-sql)
+                      (:name sqlite     :lib ob-sqlite)
+                      (:name table      :lib ob-table)
+                      (:name tangle     :lib ob-tangle)
+                      (:name elisp      :lib ob-emacs-lisp)
+                      (:name c          :lib ob-C)
+                      (:name fsharp     :lib ob-fsharp)
+                      )
+                    )
+
+;; Don't process babel results asynchronously when exporting org, as they
+;; won't likely complete in time, and will instead output an ob-async hash
+;; instead of the wanted evaluation results.
+(after! ob
+  (add-to-list 'org-babel-default-lob-header-args '(:sync))
+  )
+
+;;-- end babel
 
 ;;-- todo config
 (let ((project-steps '(sequence
@@ -98,10 +180,11 @@
                      "[⟘](f@!)"   ; Task was failed
                      ))
       (eval-status '(sequence
-                    "|"
-                    "OKAY(o)"
-                    "YES(y)"
-                    "NO(n)"
+                     "TRIAGE"
+                     "|"
+                     "OKAY(o)"
+                     "YES(y)"
+                     "NO(n)"
                     "MAYBE(m)"
                     ))
       )
@@ -180,13 +263,41 @@
   )
 ;;-- end completion
 
-;;-- projectile
-(after! org-projectile
-  ;; from https://emacs.stackexchange.com/questions/18194/
-  (setq org-projectile-capture-template "** TODO [[%F::%(with-current-buffer (org-capture-get :original-buffer) (number-to-string (line-number-at-pos)))][%?]]\n\t%t\n\t
-%(with-current-buffer (org-capture-get :original-buffer) (buffer-substring (line-beginning-position) (line-end-position)))\n")
-  )
-;;-- end projectile
+;;-- capture
+(after! org-capture
+  (org-capture-put :kill-buffer t)
+)
+
+(spec-handling-add! org-capture
+                    `(todo
+                      (:key       "t" :name      "Personal todo"
+                       :file      +org-capture-todo-file :headline  "Triage"
+                       :text      "** TRIAGE %^{PROMPT|Title}\n%a\n\n%{PROMP|Description}\n"
+                       :props (:prepend t :empty-lines 1)
+                       )
+                      (:key "q" :name "Quick Todo"
+                       :file +org-capture-todo-file :headline "Triage"
+                       :text "** TRIAGE Quick note\n%a\n%T\n\n"
+                       :props (:immediate-finish t)
+                       )
+                      )
+                    `(notes
+                      (:key "n" :name "Note"
+                       :file +org-capture-notes-file :headline "Triage"
+                       :text "** %u %?\n%i\n%a"
+                       )
+                      )
+                    `(project
+                      (:key "p" :name "Project Todo"
+                       ;; TODO use  :func to  find the  local project  todo file
+                       :file +org-capture-todo-file :headline  "Triage"
+                       ;; from https://emacs.stackexchange.com/questions/18194/
+                       :text "** TODO [[%F::%(with-current-buffer (org-capture-get :original-buffer) (number-to-string (line-number-at-pos)))][%?]]\n\t%t\n\t
+%(with-current-buffer (org-capture-get :original-buffer) (buffer-substring (line-beginning-position) (line-end-position)))\n"
+                      )
+                      )
+                    )
+;;-- end capture
 
 ;;-- spelling
 ;; Don't spellcheck org blocks

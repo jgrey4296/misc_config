@@ -51,27 +51,12 @@ Is relative to `org-directory', unless it is absolute. Is used in Doom's default
 (defvar +org-babel-native-async-langs '(python)
   "Languages that will use `ob-comint' instead of `ob-async' for `:async'.")
 
-(defvar +org-babel-mode-alist
-  '((c . C)
-    (cpp . C)
-    (C++ . C)
-    (D . C)
-    (elisp . emacs-lisp)
-    (sh . shell)
-    (bash . shell)
-    (matlab . octave)
-    (rust . rustic-babel)
-    (amm . ammonite))
+(defvar +org-babel-mode-alist nil
   "An alist mapping languages to babel libraries. This is necessary for babel
 libraries (ob-*.el) that don't match the name of the language.
 
 For example, (fish . shell) will cause #+begin_src fish blocks to load
 ob-shell.el when executed.")
-
-(defvar +org-babel-load-functions ()
-  "A list of functions executed to load the current executing src block. They
-take one argument (the language specified in the src block, as a string). Stops
-at the first function to return non-nil.")
 
 (defvar org-babel-python-command nil)
 ;;-- end babel
@@ -109,18 +94,7 @@ at the first function to return non-nil.")
 ;; Make most of the default modules opt-in to lighten its first-time load
 ;; delay. I sincerely doubt most users use them all.
 
-(defvar org-modules
-  '(;; ol-w3m
-    ;; ol-bbdb
-    ol-bibtex
-    ;; ol-docview
-    ;; ol-gnus
-    ;; ol-info
-    ;; ol-irc
-    ;; ol-mhe
-    ;; ol-rmail
-    ;; ol-eww
-    ))
+(defvar org-modules '(ol-bibtex))
 
 (defvar jg-org-external-file-link-types '("jpg" "jpeg" "png" "mp4" "html"))
 

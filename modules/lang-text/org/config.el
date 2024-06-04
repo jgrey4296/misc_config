@@ -4,6 +4,7 @@
 (local-load! "+vars")
 
 (defer-load! jg-bindings-core "+bindings" "+agenda-bindings")
+
 (defer-load! jg-evil-ex-bindings "+evil-ex")
 
 (use-package! org
@@ -28,15 +29,6 @@
   (add-to-list 'doom-debug-variables 'org-export-async-debug)
 
   (+org-init-appearance-h)
-  ;; (+org-init-agenda-h)
-  ;; (+org-init-attachments-h)
-  ;; (+org-init-babel-h)
-  ;; (+org-init-babel-lazy-loader-h)
-  ;; (+org-init-capture-defaults-h)
-  ;; (+org-init-custom-links-h)
-  ;; (+org-init-export-h)
-  ;; (+org-init-hacks-h)
-  ;; (+org-init-smartparens-h)
   (local-load! "+tags")
 
   ;; Don't number headings with these tags
@@ -62,18 +54,11 @@
   (advice-add 'org-id-locations-load                :before-while #'+org--fail-gracefully-a)
   (advice-add 'org-return                           :after #'+org-fix-newline-and-indent-in-src-blocks-a)
   (advice-add 'org-eldoc-documentation-function     :before-until #'doom-docs--display-docs-link-in-eldoc-a)
-  (advice-add 'org-export-inline-image-p            :override #'+jg-org-inline-image-override)
   ;; (advice-add #'org-insert-subheading            :after #'evil-insert)
   ;; Open help:* links with helpful-* instead of describe-*
   (advice-add 'org-link--open-help              :around #'doom-use-helpful-a)
   (advice-add 'org-mks                          :around #'+org--remove-customize-option-a)
-  (advice-add 'org-capture-expand-file          :filter-args #'+org--capture-expand-variable-file-a)
-  (advice-add 'org-capture-refile               :after #'+org-capture-refile-cleanup-frame-a)
   (advice-add 'org-id-open                      :around #'+org--follow-search-string-a)
-  (advice-add 'org-export-to-file               :around #'+org--dont-trigger-save-hooks-a)
-  (advice-add 'org-babel-tangle                 :around #'+org--dont-trigger-save-hooks-a)
-  (advice-add 'org-export-to-file               :around #'+org--fix-async-export-a)
-  (advice-add 'org-export-as                    :around #'+org--fix-async-export-a)
   (advice-add 'org-persist-write:index          :before #'+org--recursive-org-persist-mkdir-a)
   (advice-add 'org-cycle-set-startup-visibility :before-until #'+org--more-startup-folded-options-a)
   (advice-add 'org-fix-tags-on-the-fly          :before-while #'+org--respect-org-auto-align-tags-a)
@@ -93,37 +78,19 @@
   (advice-add 'org-indent-line                      :around #'+org-fix-window-excursions-a)
   (advice-add 'toc-org-insert-toc                   :around #'+org-inhibit-scrolling-a)
 
-  ;; babel
-  (advice-add 'org-babel-exp-src-block              :before #'+org--export-lazy-load-library-a)
-  (advice-add 'org-src--get-lang-mode               :before #'+org--src-lazy-load-library-a)
-  (advice-add 'org-babel-confirm-evaluate           :after-while #'+org--babel-lazy-load-library-a)
-  (advice-add 'ob-async-org-babel-execute-src-block :around #'+org-babel-disable-async-maybe-a)
-  (advice-add 'org-src--edit-element                :around #'+org-inhibit-mode-hooks-a)
-
-  (advice-add 'org-babel-do-load-languages          :override #'ignore)
-
   ;; Disable doom docs org
   (fset 'doom-docs-mode #'ignore)
   (fset 'doom-docs-org-mode #'ignore)
-
 
   ;;-- end advice
 
   ;;-- hooks
   (add-hook 'org-open-at-point-functions #'doom-set-jump-h)
-  (add-hook 'org-babel-after-execute-hook #'+org-redisplay-inline-images-in-babel-result-h)
 
   ;; Fix #462: when refiling from org-capture, Emacs prompts to kill the
   ;; underlying, modified buffer. This fixes that.
   (add-hook 'org-after-refile-insert-hook #'save-buffer)
 
-  (add-hook 'org-capture-mode-hook #'+org-show-target-in-capture-header-h)
-  (add-hook 'org-capture-after-finalize-hook #'+org-capture-cleanup-frame-h)
-
-  (add-hook 'org-agenda-mode-hook #'+org-habit-resize-graph-h)
-
-  (add-hook 'org-agenda-finalize-hook #'+org-exclude-agenda-buffers-from-workspace-h)
-  (add-hook 'org-agenda-finalize-hook #'+org-defer-mode-in-agenda-buffers-h)
 
   ;; Add our general hooks after the submodules, so that any hooks the
   ;; submodules add run after them, and can overwrite any defaults if necessary.
@@ -134,7 +101,6 @@
              #'doom-disable-show-trailing-whitespace-h
              #'+org-enable-auto-reformat-tables-h
              ;; #'+org-enable-auto-update-cookies-h
-             #'+org-make-last-point-visible-h
              #'org-indent-mode
              #'abbrev-mode
              #'org-set-regexps-and-options
@@ -154,6 +120,7 @@
                  org-todo-keyword-faces jg-org-todo-faces
                  org-refile-targets jg-org-refile-targets
                  )
+  (org-element-update-syntax)
   )
 
 (use-package! toc-org ; auto-table of contents
@@ -165,7 +132,7 @@
 
 (use-package! org-crypt ; built-in
   :commands org-encrypt-entries org-encrypt-entry org-decrypt-entries org-decrypt-entry
-  :hook (org-reveal-start . org-decrypt-entry)
+  :hook (org-fold-reveal-start-hook . org-decrypt-entry)
   :preface
   (after! org
     (add-to-list 'org-tags-exclude-from-inheritance "crypt")
@@ -175,7 +142,7 @@
 (use-package! org-clock ; built-in
   :commands org-clock-save
   :init
-  (setq org-clock-persist-file (concat doom-data-dir "org-clock-save.el"))
+  (setq org-clock-persist-file (expand-file-name "org-clock-save.el" user-cache-dir))
 
   (advice-add 'org-clock-in      :before #'+org--clock-load-a)
   (advice-add 'org-clock-out     :before #'+org--clock-load-a)
@@ -191,7 +158,32 @@
         org-clock-out-remove-zero-time-clocks t
         ;; The default value (5) is too conservative.
         org-clock-history-length 20)
-  (add-hook 'kill-emacs-hook #'org-clock-save))
+
+  ;; Hooks
+  (add-hook! 'org-clock-cancel-hook
+
+             )
+  (add-hook! 'org-clock-in-hook
+
+             )
+  (add-hook! 'org-clock-in-prepare-hook
+
+             )
+  (add-hook! 'org-clock-before-select-task-hook
+
+             )
+  (add-hook! 'org-clock-out-hook
+
+             )
+  (add-hook! 'org-clock-goto-hook
+
+             )
+
+  (add-hook! 'kill-emacs-hook
+             #'org-clock-save
+             )
+
+  )
 
 (use-package! evil-org
   :hook (org-mode . evil-org-mode)
@@ -205,15 +197,7 @@
              #'+org-cycle-only-current-subtree-h
              ;; Clear babel results if point is inside a src block
              #'+org-clear-babel-results-h)
-  (evil-set-initial-state 'org-agenda-mode 'normal)
 )
-
-(use-package! evil-org-agenda
-  :hook (org-agenda-mode . evil-org-agenda-mode)
-  :config
-  (evil-org-agenda-set-keys)
-  (evil-define-key* 'motion evil-org-agenda-mode-map
-    (kbd doom-leader-key) nil))
 
 (use-package! link-hint
   :config
@@ -265,5 +249,95 @@
   ;; interpret it as anything other than a date.
   (setq org-journal-carryover-items  "TODO=\"TODO\"|TODO=\"PROJ\"|TODO=\"STRT\"|TODO=\"WAIT\"|TODO=\"HOLD\"")
 
-
 )
+
+(use-package! org-capture
+  :defer t
+  :config
+  (advice-add 'org-capture-expand-file          :filter-args #'+org--capture-expand-variable-file-a)
+  (advice-add 'org-capture-refile               :after #'+org-capture-refile-cleanup-frame-a)
+
+  ;; Hooks
+  (add-hook! 'org-capture-prepare-finalize-hook
+
+             )
+  (add-hook! 'org-capture-before-finalize-hook
+
+             )
+  (add-hook! 'org-capture-mode-hook
+             #'+org-show-target-in-capture-header-h
+             )
+
+  (add-hook! 'org-capture-after-finalize-hook
+             #'+org-capture-cleanup-frame-h
+             )
+
+  )
+
+(use-package! org-agenda
+  :defer t
+  :config
+
+  (evil-set-initial-state 'org-agenda-mode 'normal)
+  ;;hooks
+  (add-hook! 'org-agenda-entry-text-cleanup-hook
+
+             )
+  (add-hook! 'org-agenda-mode-hook
+             #'+org-habit-resize-graph-h
+             )
+  (add-hook! 'org-agenda-before-write-hook
+
+             )
+  (add-hook! 'org-agenda-after-show-hook
+
+             )
+  (add-hook! 'org-agenda-cleanup-fancy-diary-hook
+
+             )
+  (add-hook! 'org-agenda-filter-hook
+
+             )
+  (add-hook! 'org-agenda-finalize-hook
+             #'+org-exclude-agenda-buffers-from-workspace-h
+             #'+org-defer-mode-in-agenda-buffers-h
+             )
+
+  )
+
+(use-package! evil-org-agenda
+  :hook (org-agenda-mode . evil-org-agenda-mode)
+  :config
+  (evil-org-agenda-set-keys)
+  (evil-define-key* 'motion evil-org-agenda-mode-map
+    (kbd doom-leader-key) nil)
+
+  )
+
+(use-package! ob
+  :defer t
+  :config
+
+  ;; babel
+  (advice-add 'org-babel-exp-src-block              :before      #'+org--export-lazy-load-library-a)
+  (advice-add 'org-babel-confirm-evaluate           :after-while #'+org--babel-lazy-load-library-a)
+  (advice-add 'ob-async-org-babel-execute-src-block :around      #'+org-babel-disable-async-maybe-a)
+  (advice-add 'org-src--get-lang-mode               :before      #'+org--src-lazy-load-library-a)
+  (advice-add 'org-src--edit-element                :around      #'+org-inhibit-mode-hooks-a)
+  (advice-add 'org-babel-do-load-languages          :override    #'ignore)
+  (advice-add 'org-babel-tangle                     :around      #'+org--dont-trigger-save-hooks-a)
+
+  ;; hooks
+  (add-hook 'org-babel-after-execute-hook #'+org-redisplay-inline-images-in-babel-result-h)
+
+  )
+
+(use-package! ox
+  :defer t
+  :config
+
+  (advice-add 'org-export-inline-image-p            :override #'+jg-org-inline-image-override)
+  (advice-add 'org-export-to-file                   :around #'+org--dont-trigger-save-hooks-a)
+  (advice-add 'org-export-to-file                   :around #'+org--fix-async-export-a)
+  (advice-add 'org-export-as                        :around #'+org--fix-async-export-a)
+  )

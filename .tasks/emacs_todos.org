@@ -1,4 +1,5 @@
 #+TITLE: Emacs Todos
+#+STARTUP: agenda
 
 * Emacs                                          :emacs:
 ** [#A] add comint-truncate-buffer to comint-output-filter-functions
@@ -35,12 +36,15 @@ and that librarian meta retrieval is using exif
 ** template access ivy
 instead of spc y [1-7], do spc-y-ret and dynamically drill into templates repo
 
+** flycheck config refactor
 
-** Org
-*** diary jump
-*** archive jump
-*** journal jump
-*** notes
-*** projects
+** server
+
+* Org
+** diary jump
+** archive jump
+** journal jump
+** notes
+** projects
 
 * Links

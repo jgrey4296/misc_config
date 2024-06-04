@@ -27,7 +27,6 @@
   :config
   (add-to-list 'doom-debug-variables 'org-export-async-debug)
 
-  (+org-init-org-directory-h)
   (+org-init-appearance-h)
   ;; (+org-init-agenda-h)
   ;; (+org-init-attachments-h)
@@ -104,8 +103,8 @@
   (advice-add 'org-babel-do-load-languages          :override #'ignore)
 
   ;; Disable doom docs org
-  (advice-add 'doom-docs-mode :override #'ignore)
-  (advice-add 'doom-docs-org-mode :override #'(lambda (&rest _) (org-mode)))
+  (fset 'doom-docs-mode #'ignore)
+  (fset 'doom-docs-org-mode #'ignore)
 
 
   ;;-- end advice
@@ -139,6 +138,8 @@
              #'org-indent-mode
              #'abbrev-mode
              #'org-set-regexps-and-options
+             #'+jg-org-startup-agenda-h
+             #'+jg-org-startup-reference-h
              )
   (setq-hook! 'org-mode-hook
     tab-width 8

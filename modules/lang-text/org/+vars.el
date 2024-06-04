@@ -3,29 +3,6 @@
 ;;-- org core
 ;; locations
 
-(defvar org-agenda-files (list initial-buffer-choice
-                               (expand-file-name "todo.org" org-directory)
-                               )
-  )
-
-(spec-handling-setq! org 20
-                     org-archive-location   (format           "%s::%s" (expand-file-name "archive/archive.org" org-directory) "* Main Archive")
-                     org-id-locations-file  (expand-file-name "org/.orgids" user-cache-dir)
-                     org-default-notes-file (expand-file-name "notes/misc.org"   org-directory)
-                     org-attach-id-dir                        "attachments"
-                     org-journal-dir                   (expand-file-name "journal/"    org-directory)
-                     org-journal-cache-file            (expand-file-name "org/journal" user-cache-dir)
-                     org-persist-directory             (expand-file-name "org/persist/" user-cache-dir)
-                     org-publish-timestamp-directory   (expand-file-name  "org/timestamps/" user-cache-dir)
-                     org-preview-latex-image-directory (expand-file-name  "org/latex/" user-cache-dir)
-
-                     +org-capture-todo-file                   "agenda/todo_captures.org"
-                     +org-capture-changelog-file              "changelog.org"
-                     +org-capture-notes-file                  "notes/misc.org"
-                     +org-capture-journal-file                "journal/journal.org"
-                     +org-capture-projects-file               "projects/projects.org"
-                     )
-
 ;; ORG SETUP
 (setq-default org-fast-tag-selection-single-key nil
               org-from-is-user-regexp "\\<John Grey\\>"
@@ -54,10 +31,42 @@
     )
 ;;-- end org core
 
+;;-- locations
+(spec-handling-setq! org 20
+                     org-archive-location   (format           "%s::%s" (expand-file-name "archive/archive.org" org-directory) "* Main Archive")
+                     org-id-locations-file  (expand-file-name "org/.orgids" user-cache-dir)
+                     org-default-notes-file (expand-file-name "notes/misc.org"   org-directory)
+                     org-attach-id-dir                        "attachments"
+                     org-journal-dir                   (expand-file-name "journal/"    org-directory)
+                     org-journal-cache-file            (expand-file-name "org/journal" user-cache-dir)
+                     org-persist-directory             (expand-file-name "org/persist/" user-cache-dir)
+                     org-publish-timestamp-directory   (expand-file-name  "org/timestamps/" user-cache-dir)
+                     org-preview-latex-image-directory (expand-file-name  "org/latex/" user-cache-dir)
+
+                     +org-capture-todo-file                   "agenda/todo_captures.org"
+                     +org-capture-changelog-file              "changelog.org"
+                     +org-capture-notes-file                  "notes/misc.org"
+                     +org-capture-journal-file                "journal/journal.org"
+                     +org-capture-projects-file               "projects/projects.org"
+                     )
+
+;;-- end locations
+
 ;;-- agenda
 (setq org-agenda-include-diary t
-
+      org-agenda-inhibit-startup t
       )
+
+(defvar-local jg-org-startup-agenda nil)
+
+(defvar-local jg-org-reference nil)
+
+(defvar jg-org-reference-files nil "Files that are used for reference")
+
+(after! org
+  (add-to-list 'org-startup-options '("agenda"    jg-org-startup-agenda t))
+  (add-to-list 'org-startup-options '("reference" jg-org-reference       t))
+  )
 
 ;;-- end agenda
 
@@ -229,10 +238,11 @@
                       ,#'+jg-text-cleanup-whitespace
                      )
                  )
-(spec-handling-add! popup
+(spec-handling-add! popup :form 'override
                     '(org-mode
                       ("^\\*Org Links" :slot -1 :vslot -1 :size 2 :ttl 0)
                       ("^ ?\\*\\(?:Agenda Com\\|Calendar\\|Org Export Dispatcher\\)" :slot -1 :vslot -1 :size #'+popup-shrink-to-fit :ttl 0)
+                      ("^\\*Agenda Files\\*\\'" :select t :quit t :side right)
                       ("^\\*Org \\(?:Select\\|Attach\\)" :slot -1 :vslot -2 :ttl 0 :size 0.25)
                       ("^\\*Org Agenda"     :ignore t)
                       ("^\\*Org Src"        :size 0.42  :quit nil :select t :autosave t :modeline t :ttl nil)

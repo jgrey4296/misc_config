@@ -478,3 +478,23 @@ can grow up to be fully-fledged org-mode buffers."
             (add-hook 'doom-switch-buffer-hook #'+org--restart-mode-h
                       nil 'local))))
       )
+
+;;;###autoload
+(defun +jg-org-startup-agenda-h ()
+  "If the `jg-org-startup-agenda' variable is true,
+add this org file to the agenda list
+"
+  (when jg-org-startup-agenda
+    (message "Agenda: %s" (buffer-name))
+    (org-agenda-file-to-front)
+    )
+  )
+
+;;;###autoload
+(defun +jg-org-startup-reference-h ()
+  "if the file is marked as a reference file, add it to the global reference list"
+  (when jg-org-reference
+    (message "Reference: %s" (buffer-name))
+    (add-to-list jg-org-reference-files (buffer-file-name))
+    )
+  )

@@ -18,15 +18,14 @@
 ;;-- locations
 ;;
 (setq doom-fallback-buffer-name       "base_agenda.org"
-      org-directory                   (expand-file-name "~/github/jgrey4296.github.io/orgfiles/")
-      initial-buffer-choice           (expand-file-name "agenda/base_agenda.org" org-directory)
+      initial-buffer-choice           (expand-file-name "agenda/base_agenda.org" "~/github/jgrey4296.github.io/orgfiles/")
       )
 
 (defvar user-cache-dir (expand-file-name "~/_cache_"))
 
 (spec-handling-setq! global 0
                      backup-directory-alist          (list `(".*" . ,(expand-file-name ".local/backups" doom-emacs-dir)))
-                     org-directory                   (expand-file-name "~/github/jgrey4296.github.io/orgfiles/")
+                     org-directory                   (f-canonical (expand-file-name "~/github/jgrey4296.github.io/orgfiles/"))
                      pyvenv-default-virtual-env-name (expand-file-name "mamba/envs/" user-cache-dir)
                      server-auth-dir                 (expand-file-name "~/.config/secrets/emacs")
                      native-comp-eln-load-path       (list (expand-file-name "cache/eln" doom-local-dir))

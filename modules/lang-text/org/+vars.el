@@ -40,6 +40,7 @@
                      org-persist-directory             (expand-file-name "org/persist/" user-cache-dir)
                      org-publish-timestamp-directory   (expand-file-name  "org/timestamps/" user-cache-dir)
                      org-preview-latex-image-directory (expand-file-name  "org/latex/" user-cache-dir)
+                     org-clock-persist-file (expand-file-name "org-clock-save.el" user-cache-dir)
 
                      +org-capture-todo-file                   "agenda/triage_todos.org"
                      +org-capture-changelog-file              "changelog.org"
@@ -349,13 +350,13 @@
                       ,#'+jg-text-cleanup-whitespace
                      )
                  )
-(spec-handling-add! popup :form 'override
+(spec-handling-add! popup
                     '(org-mode
                       ("^\\*Org Links" :slot -1 :vslot -1 :size 2 :ttl 0)
                       ("^ ?\\*\\(?:Agenda Com\\|Calendar\\|Org Export Dispatcher\\)" :slot -1 :vslot -1 :size #'+popup-shrink-to-fit :ttl 0)
                       ("^\\*Agenda Files\\*\\'" :select t :quit t :side right)
+                      ("^\\*Org Agenda\\*\\'"   :select t :quit t :side right :priority 100)
                       ("^\\*Org \\(?:Select\\|Attach\\)" :slot -1 :vslot -2 :ttl 0 :size 0.25)
-                      ("^\\*Org Agenda"     :ignore t)
                       ("^\\*Org Src"        :size 0.42  :quit nil :select t :autosave t :modeline t :ttl nil)
                       ("^\\*Org-Babel")
                       ("^\\*Capture\\*$\\|CAPTURE-.*$" :size 0.42 :quit nil :select t :autosave ignore)

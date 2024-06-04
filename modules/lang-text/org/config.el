@@ -142,7 +142,6 @@
 (use-package! org-clock ; built-in
   :commands org-clock-save
   :init
-  (setq org-clock-persist-file (expand-file-name "org-clock-save.el" user-cache-dir))
 
   (advice-add 'org-clock-in      :before #'+org--clock-load-a)
   (advice-add 'org-clock-out     :before #'+org--clock-load-a)

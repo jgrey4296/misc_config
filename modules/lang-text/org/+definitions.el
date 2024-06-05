@@ -101,3 +101,9 @@ ob-shell.el when executed.")
 (defvar jg-org-clean-marker nil)
 
 (defvar jg-org-preferred-linecount 1500)
+
+(defvar-local jg-org-startup-agenda nil)
+(defvar-local jg-org-startup-reference nil)
+(defvar-local jg-org-startup-package nil)
+(defvar jg-org-startup-reference-files nil "Files that are used for reference")
+(defvar jg-org-startup-package-files nil)

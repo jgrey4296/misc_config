@@ -43,6 +43,8 @@ and that librarian meta retrieval is using exif
 ** [∅] template access ivy
 instead of spc y [1-7], do spc-y-ret and dynamically drill into templates repo
 
+** [∅] spc p t : ivy-TODO selector
+
 * Org
 ** [∅] diary jump
 ** [∅] archive jump

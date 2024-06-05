@@ -65,19 +65,6 @@
       org-agenda-start-day "-3d"
       )
 
-(defvar-local jg-org-startup-agenda nil)
-
-(defvar-local jg-org-reference nil)
-
-(defvar jg-org-reference-files nil "Files that are used for reference")
-
-(spec-handling-add! org-startup
-                    '(plus
-                      ("agenda"    jg-org-startup-agenda t)
-                      ("reference" jg-org-reference      t)
-                      )
-                    )
-
 ;;-- end agenda
 
 ;;-- journal
@@ -181,7 +168,7 @@
                      "[⟘](f@!)"   ; Task was failed
                      ))
       (eval-status '(sequence
-                     "TRIAGE"
+                     "TRIAGE(?)"
                      "|"
                      "OKAY(o)"
                      "YES(y)"
@@ -369,5 +356,12 @@
                    )
 (spec-handling-add! eval
                     `(org-mode :eval ,#'+org-eval-handler)
+                    )
+(spec-handling-add! org-startup
+                    '(plus
+                      ("agenda"    jg-org-startup-agenda t)
+                      ("reference" jg-org-startup-reference      t)
+                      ("packages"  jg-org-startup-package        t)
+                      )
                     )
 ;;-- end specs

@@ -63,6 +63,17 @@
              #'flycheck-mode
              )
 
+  (defun jg-python-font-lock-mod-h ()
+    (pushnew! python-font-lock-keywords
+              '("^\s+return " (0 '(:background "mediumpurple4") t))
+              '("^\s+def "    (0 '(:background "mediumpurple4") t))
+              )
+    )
+
+  (add-hook! 'python-mode-hook :depth 100
+             #'jg-python-font-lock-mod-h
+             )
+
   ;; Always add auto-hide as the last thing
   (add-hook! 'python-mode-hook :depth 100
              #'+jg-python-outline-regexp-override-hook

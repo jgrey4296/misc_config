@@ -8,15 +8,15 @@
 
 (defer-load! jg-bindings-core "+bindings") ;; -> jg-evil-bindings
 
-(advice-add 'help-with-tutorial :after (lambda (&rest _) (evil-emacs-state +1)))
-(advice-add 'evil-indent :around #'+evil--dont-move-cursor-a)
+(advice-add 'help-with-tutorial   :after (lambda (&rest _) (evil-emacs-state +1)))
+(advice-add 'evil-indent          :around #'+evil--dont-move-cursor-a)
 (advice-add 'evil-global-marker-p :after-until #'+evil--make-numbered-markers-global-a)
-(advice-add 'turn-on-evil-mode :before #'+evil--fix-local-vars-a)
-(advice-add 'helpful-key :before #'+evil--fix-helpful-key-in-evil-ex-a)
+(advice-add 'turn-on-evil-mode    :before #'+evil--fix-local-vars-a)
+(advice-add 'helpful-key          :before #'+evil--fix-helpful-key-in-evil-ex-a)
 
 ;; Make J (evil-join) remove comment delimiters when joining lines.
-(advice-add 'evil-join :around #'+evil-join-a)
-(advice-add 'evil-fill :around #'+evil--no-squeeze-on-fill-a)
+(advice-add 'evil-join          :around #'+evil-join-a)
+(advice-add 'evil-fill          :around #'+evil--no-squeeze-on-fill-a)
 (advice-add 'evil-fill-and-move :around #'+evil--no-squeeze-on-fill-a)
 ;; Make ESC (from normal mode) the universal escaper. See `doom-escape-hook'.
 (advice-add 'evil-force-normal-state :after #'+evil-escape-a)
@@ -31,11 +31,11 @@
 (advice-add 'evil-window-split  :override #'+evil-window-split-a)
 (advice-add 'evil-window-vsplit :override #'+evil-window-vsplit-a)
 ;; Make o/O continue comments (see `+evil-want-o/O-to-continue-comments' to disable)
-(advice-add 'evil-open-above :around #'+evil--insert-newline-above-and-respect-comments-a)
-(advice-add 'evil-open-below :around #'+evil--insert-newline-below-and-respect-comments-a)
-(advice-add 'iedit-show-all :override #'+jg-evil-iedit-show-all)
+(advice-add 'evil-open-above              :around #'+evil--insert-newline-above-and-respect-comments-a)
+(advice-add 'evil-open-below              :around #'+evil--insert-newline-below-and-respect-comments-a)
+(advice-add 'iedit-show-all               :override #'+jg-evil-iedit-show-all)
 (advice-add 'counsel-mark--get-candidates :filter-args #'+jg-evil-marks-cleanup)
-(advice-add 'evil-find-char :override #'+jg-evil-find-char)
+(advice-add 'evil-find-char               :override #'+jg-evil-find-char)
 
 (use-package! evil
   :hook (doom-after-modules-config . evil-mode)

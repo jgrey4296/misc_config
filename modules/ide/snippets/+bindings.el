@@ -34,10 +34,10 @@
        )
 
       (:prefix "y"
-      :desc "New snippet"           "n" #'+jg-snippets-new-snippet
+      :desc "New snippet"           "n"   #'+jg-snippets-new-snippet
       :desc "Expand Snippet"        "TAB" #'yas-expand-from-trigger-key
-      :desc "Reload All"             "r" #'+jg-snippets-reload-all
-      :desc "New Abbrev"            "N"  #'add-mode-abbrev
+      :desc "Reload All"            "r"   #'+jg-snippets-reload-all
+      :desc "New Abbrev"            "N"   #'add-mode-abbrev
        )
       )
 
@@ -69,8 +69,9 @@
       (:prefix ("a" . "Abbrevs")
        :desc "Save Abbrevs"          "S"  #'+jg-snippets-save-abbrevs
        :desc "List Abbrevs"          "l"  #'list-abbrevs
-       :desc  "List Local Abbrevs"   "L"  (cmd! (list-abbrevs t))
+       :desc "List Local Abbrevs"    "L"  (cmd! (list-abbrevs t))
        :desc "Edit Abbrevs"          "e"  #'edit-abbrevs
+       :desc "New Global Abbrev"     "g"   #'add-global-abbrev
        )
       )
 
@@ -95,3 +96,5 @@
 (map! :map jg-binding-normal-state-map
       :desc "breakpoint"          "I b"   #'+jg-snippets-insert-debug
       )
+
+(setq abbrev-map nil)

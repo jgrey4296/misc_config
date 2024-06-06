@@ -80,19 +80,21 @@
                                                                            (zimmerframe-remaining-count)
                                                                          0)))
                           [
-                           [
+                           ["Mode"
                             (transient-macro-toggle-project-zimmerframe-minor-mode)
-                            (transient-macro-call-zimmerframe-default-filters)
                             ]
-                           [
+                           ]
+                          [
+                           ["Inspect"
                             (transient-macro-call-zimmerframe-remaining)
                             (transient-macro-call-zimmerframe-count)
                             ]
-                           [
+                           ["Filter"
+                            (transient-macro-call-zimmerframe-default-filters)
                             (transient-macro-call-zimmerframe-filter)
                             (transient-macro-call-zimmerframe-keep)
                             ]
-                           [
+                           ["Transform"
                             (transient-macro-call-zimmerframe-replace)
                             ]
                            ]
@@ -246,6 +248,22 @@
 (transient-define-prefix transient-workspace ()
   ""
   [
+   ["Global"
+    (transient-macro-toggle-auto-balance)
+    transient-all-projects
+    ]
+   [""
+    (transient-macro-toggle-project-zimmerframe-minor-mode)
+    transient-zimmerframe-control
+    (transient-macro-call-zimmerframe-replace)
+    ]
+   ]
+  [
+   ["Settings"
+    (transient-macro-call-toggle-dedication)
+    ]
+   ]
+  [
    ["Project Locs"
     (transient-macro-call-goto-root)
     (transient-macro-call-proj-sidebar)
@@ -258,11 +276,9 @@
     (transient-macro-call-debug-project-type)
     (transient-macro-call-proj-clear-cache)
     ]
-   [" "
+   ["Project Subsections "
     transient-project-actions
     transient-project
-    transient-all-projects
-    transient-zimmerframe-control
     ]
    ]
   [
@@ -285,10 +301,6 @@
     (transient-macro-call-window-undo)
     (transient-macro-call-window-redo)
     ]
-   ["Window Settings"
-    (transient-macro-toggle-auto-balance)
-    (transient-macro-call-toggle-dedication)
-    ]
    ]
   ["Workspaces"
    ["New"]
@@ -297,12 +309,13 @@
    ["Select"]
    ["Shell"]
    ]
-  [
-   ["Workspace Settings"
-    ""
-    ]
-   ]
   transient-quit!
   )
+
+;;;###autoload
+(defun +jg-workspaces-add-transients ()
+    (transient-append-suffix 'jg-toggle-main '(1 1 0)  transient-zimmerframe-control)
+    )
+
 
 ;;-- end workspace

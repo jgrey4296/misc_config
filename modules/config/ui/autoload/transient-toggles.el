@@ -7,7 +7,7 @@
 (transient-make-mode-toggle! global-prettify-symbols-mode  "Pretty Symbols" "p")
 (transient-make-mode-toggle! global-company-mode           "AutoComplete"   "C")
 (transient-make-mode-toggle! read-only-mode                "Read Only"      "r" nil buffer-read-only)
-(transient-make-mode-toggle! global-flycheck-mode          "Flycheck"       "F")
+(transient-make-mode-toggle! global-flycheck-mode          "Flycheck"       "f")
 
 (transient-make-call!   evil-embrace "E"
                         (format "%-2s : Evil-Embrace" (fmt-as-bool! (advice-member-p #'evil-embrace-evil-surround-region 'evil-surround-region)))
@@ -16,15 +16,11 @@
                           (evil-embrace-enable-evil-surround-integration))
                         )
 (transient-make-call!   run-spec-handlers "!"
-                        (let ((str  "Run Spec Handlers"))
-                          (put-text-property 0 (length str) 'face 'transient-heading str)
-                          str)
+                        (propertize "Run Spec Handlers" 'face 'transient-heading)
                         (run-spec-handlers)
                         )
 (transient-make-call!   general-insert-rebuild-cache "@"
-                        (let ((str  "Clear General-Insert Cache"))
-                          (put-text-property 0 (length str) 'face 'transient-heading str)
-                          str)
+                        (propertize    "Clear General-Insert Cache" 'face 'transient-heading)
                         (general-insert-clear-caches)
                         (message "Cache Rebuilt")
                         )
@@ -220,34 +216,49 @@
 (transient-define-prefix jg-toggle-main ()
   "Main controller for ui settings"
   [
+   ["Global Triggers"
    (transient-macro-call-run-spec-handlers)
+   ]
+   [""
    (transient-macro-call-general-insert-rebuild-cache)
    ]
-  [ [
-     jg-toggle-debugs
-     jg-toggle-guides
-     jg-toggle-nav
-     jg-toggle-visuals
-     jg-toggle-wrap
-     ]
-    [
-     (transient-macro-toggle-global-hl-line-mode)
-     (transient-macro-toggle-hide-mode-line-mode)
-     (transient-macro-toggle-global-prettify-symbols-mode)
-     (transient-macro-toggle-global-highlight-changes-mode)
-     (transient-macro-toggle-abbrev-mode)
-     ] [
-     (transient-macro-toggle-global-code-shy-minor-mode)
-     (transient-macro-toggle-smartparens-global-mode)
-     (transient-macro-toggle-global-centered-cursor-mode)
-     ] [
-     (transient-macro-toggle-read-only-mode)
-     (transient-macro-call-evil-embrace)
-     (transient-macro-call-debug-on-error)
-     (transient-macro-toggle-global-company-mode)
-     ] ]
+   ]
+  [
+   ["SubSections"
+    jg-toggle-debugs
+    jg-toggle-guides
+    jg-toggle-nav
+    jg-toggle-visuals
+    jg-toggle-wrap
+    ]
+   ["SubSections+"
+    ""
+    ]
+   ]
+  [
+   ["Global Toggles"
+    (transient-macro-toggle-global-flycheck-mode)
+    (transient-macro-toggle-global-prettify-symbols-mode)
+    (transient-macro-toggle-global-highlight-changes-mode)
+    (transient-macro-toggle-smartparens-global-mode)
+    (transient-macro-call-debug-on-error)
+    ]
+   [""
+
+    (transient-macro-toggle-global-hl-line-mode)
+    (transient-macro-toggle-global-code-shy-minor-mode)
+    (transient-macro-toggle-global-centered-cursor-mode)
+    (transient-macro-toggle-global-company-mode)
+    ]
+   ["Local Toggles"
+    (transient-macro-toggle-abbrev-mode)
+    (transient-macro-toggle-hide-mode-line-mode)
+    (transient-macro-toggle-read-only-mode)
+    (transient-macro-call-evil-embrace)
+    ]
+   ]
   transient-quit!
-)
+  )
 
 ;;;###autoload
 (define-minor-mode transient-toggles-minor-mode

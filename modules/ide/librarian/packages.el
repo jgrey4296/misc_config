@@ -20,3 +20,4 @@
 ;; (package! powerthesaurus)
 (package! synosaurus)
 (package! librarian :recipe (:host github :repo "jgrey4296/librarian"))
+(package! env-handling :recipe (:host github :repo "jgrey4296/env-handling"))

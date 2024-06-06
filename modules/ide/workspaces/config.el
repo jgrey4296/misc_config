@@ -145,6 +145,9 @@
 
 (use-package! project-zimmerframe
   :commands (project-zimmerframe-minor-mode zimmerframe-next)
+  :after transient-toggles
+  :config
+  (+jg-workspaces-add-transients)
   )
 
 (use-package! related-files

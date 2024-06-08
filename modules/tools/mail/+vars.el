@@ -1,6 +1,6 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
-(spec-handling-setq! rmail 50
+(spec-handling-setq! mail 50
                      rmail-summary-font-lock-keywords `(;; Deleted
                                                         ("^ *[0-9]+D.*" . font-lock-string-face)
                                                         ;; Unread
@@ -15,6 +15,12 @@
                                                          0 'homoglyph)
                                                         ("Subject: " 0 'hi-green-b)
                                                         )
+                     rmail-file-name (expand-file-name "mail/rmail/rmail" user-cache-dir)
+                     rmail-default-file (expand-file-name "mail/rmail/rmail" user-cache-dir)
+                     rmail-default-body-file (expand-file-name "mail/rmail/out" user-cache-dir)
+                     mail-default-directory (expand-file-name "~")
+                     mail-source-directory (expand-file-name "mail" user-cache-dir)
+                     smtpmail-queue-dir (expand-file-name "smtp/queue" user-cache-dir)
                      )
 
 (setq evil-collection-mu4e-end-region-misc "quit"
@@ -145,26 +151,28 @@
                        :smtp-vars ((smtpmail-smtp-user . "jgrey"))
                        )
                       )
-                    `(local
-                      ,(pcase system-type
-                         (_ nil)
-                         ('darwin `(:name "local"
-                                    :maildir ""
-                                    :vars ((user-mail-address . "johngrey@Johns-Mac-mini.local" )
-                                           (smtpmail-smtp-server . ,(system-name))
-                                           )
-                                    )
-                                  )
-                         ('gnu/linux  `(:name "local"
-                                        :maildir ""
-                                        :vars ((user-mail-address . "john@john-UM700" )
-                                               (smtpmail-smtp-server . ,(system-name))
-                                               )
-                                        )
-                                      )
-                         )
-                      )
                     )
+
+;; (spec-handling-add! mail-accounts
+;;                     `(local
+;;                       ,(pcase system-type
+;;                          ('darwin `(:name "local"
+;;                                     :maildir ""
+;;                                     :vars ((user-mail-address . "johngrey@Johns-Mac-mini.local" )
+;;                                            (smtpmail-smtp-server . ,(system-name))
+;;                                            )
+;;                                     )
+;;                                   )
+;;                          ('gnu/linux  `(:name "local"
+;;                                         :maildir ""
+;;                                         :vars ((user-mail-address . "john@john-UM700" )
+;;                                                (smtpmail-smtp-server . ,(system-name))
+;;                                                )
+;;                                         )
+;;                                       )
+;;                          )
+;;                       )
+;;                     )
 
 (spec-handling-add! mail-accounts
                     `(others

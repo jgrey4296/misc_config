@@ -19,6 +19,7 @@
                     :loop 'append
                     (cl-loop for ctx in val
                              when (not (null ctx))
+                             with loaded = (require 'mu4e-context)
                              collect (make-mu4e-context
                                       :name (plist-get ctx :name)
                                       :vars (append (plist-get ctx :vars)

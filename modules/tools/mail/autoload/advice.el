@@ -1,5 +1,8 @@
 ;;; +advice.el -*- lexical-binding: t; -*-
 
+(function-put 'princ 'original (symbol-function 'princ))
+(function-put 'princ 'mod (symbol-function '+jg-mail-princ-as-insert))
+
 ;;;###autoload
 (defun +jg-mail-header-summary ()
   "Return a message summary based on the message headers.

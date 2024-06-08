@@ -6,9 +6,6 @@
 
 (defer-load! jg-bindings-total "+bindings")
 
-(function-put 'princ 'original (symbol-function 'princ))
-(function-put 'princ 'mod (symbol-function '+jg-mail-princ-as-insert))
-
 (use-package! mu4e
   :commands mu4e mu4e-compose-new
   ;; :hook     (mu4e-main-mode . +jg-mail-override-mu4e-hook)
@@ -26,8 +23,6 @@
   (add-to-list 'mu4e-view-actions '("View in browser" . mu4e-action-view-in-browser))   ;; Html mails might be better rendered in a browser
   (when (fboundp 'make-xwidget) (add-to-list 'mu4e-view-actions '("xwidgets view" . mu4e-action-view-in-xwidget)))
   (when (fboundp 'imagemagick-register-types) (imagemagick-register-types))
-
-  (setq mu4e-header-info-custom +mu4e-header-info-custom)
 
   ;;-- advice
   ;; Marks usually affect the current view

@@ -6,14 +6,6 @@
 ;; See footer for licenses/metadata/notes as applicable
 ;;-- end Header
 
-
-(spec-handling-new! org-startup org-startup-options
-                    :loop 'append
-                    :doc "add org startup options to handle in hooks."
-                    :struct '(key . (list (text var val)))
-                    val
-                    )
-
 (defun +jg-org-capture-get-template (name &optional mode)
   "Expands and returns a yas snippet for org-capture "
   (with-temp-buffer
@@ -22,6 +14,13 @@
     (buffer-string)
     )
   )
+
+(spec-handling-new! org-startup org-startup-options
+                    :loop 'append
+                    :doc "add org startup options to handle in hooks."
+                    :struct '(key . (list (text var val)))
+                    val
+                    )
 
 (spec-handling-new! org-capture org-capture-templates
                     :loop 'append
@@ -58,8 +57,6 @@
                                                      (plist-get data :props)
                                                      )
                                    )
-                             (message "Defining Capture Template: %s" template)
-                             ;; Check target in
                              collect template
                              )
                     )
@@ -72,7 +69,6 @@
                              collect (cons (intern (plist-get data :name))
                                            data))
                     )
-
 
 ;; default org-startup options
 (spec-handling-add! org-startup
@@ -168,7 +164,6 @@
                       ("constSI"             constants-unit-system SI)
                       )
                     )
-
 
 ;;-- Footer
 ;; Copyright (C) 2024 john

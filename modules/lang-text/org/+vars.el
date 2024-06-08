@@ -260,7 +260,7 @@
                     `(todo
                       (:key       "t" :name      "Personal todo"
                        :file      +org-capture-todo-file :headline  "Triage"
-                       :text      "** TRIAGE %^{PROMPT|Title}\n%a\n\n%{PROMP|Description}\n"
+                       :snippet "personal-todo"
                        :props (:prepend t :empty-lines 1)
                        )
                       (:key "q" :name "Quick Todo"
@@ -268,6 +268,11 @@
                        :text "** TRIAGE Quick note\n%a\n%T\n\n"
                        :props (:immediate-finish t)
                        )
+                      (:key  "g" :name "General Todo"
+                       :file +org-capture-todo-file :headline  "Triage"
+                       :snippet "global_todo"
+                       :props (:prepend t :empty-lines 1)
+                      )
                       )
                     `(notes
                       (:key "n" :name "Note"
@@ -277,14 +282,12 @@
                       )
                     `(project
                       (:key "p" :name "Project Todo"
-                       ;; TODO use  :func to  find the  local project  todo file
-                       :file +org-capture-todo-file :headline  "Triage"
-                       ;; from https://emacs.stackexchange.com/questions/18194/
-                       :text "** TODO [[%F::%(with-current-buffer (org-capture-get :original-buffer) (number-to-string (line-number-at-pos)))][%?]]\n\t%t\n\t
-%(with-current-buffer (org-capture-get :original-buffer) (buffer-substring (line-beginning-position) (line-end-position)))\n"
-                      )
+                       :func #'+jg-org-capture-project-todo  :headline  "Triage"
+                       :snippet "project_todo"
+                       )
                       )
                     )
+
 ;;-- end capture
 
 ;;-- spelling

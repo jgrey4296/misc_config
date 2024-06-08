@@ -3,6 +3,7 @@
 (local-load! "+defs")
 (local-load! "+vars")
 (local-load! "+spec-defs")
+
 (defer-load! (yasnippet jg-bindings-total) "+bindings")
 (after! (doom-snippets yasnippet-snippets)
   (when (functionp 'snippets-spec-set)
@@ -30,8 +31,16 @@
   :config
   (add-to-list 'doom-debug-variables '(yas-verbosity . 3))
 
+  ;;-- advice
   ;; HACK In case `+snippets-dir' and `doom-snippets-dir' are the same, or duplicates exist in `yas-snippet-dirs'.
   (advice-add 'yas-snippet-dirs :filter-return #'delete-dups)
+  (after! smartparens ;; tell smartparens overlays not to interfere with yasnippet keybinds
+    (advice-add 'yas-expand :before #'sp-remove-active-pair-overlay))
+  ;; (Evil only) fix off-by-one issue with line-wise visual selections in
+  ;; `yas-insert-snippet', and switches to insert mode afterwards.
+  (advice-add 'yas-insert-snippet :around #'+snippets-expand-on-region-a)
+
+  ;;-- end advice
 
   ;; Remove GUI dropdown prompt (prefer ivy/helm)
   (delq! 'yas-dropdown-prompt yas-prompt-functions)
@@ -39,19 +48,13 @@
   ;; are multiple choices.
   (add-to-list 'yas-prompt-functions #'+snippets-prompt-private)
 
+  ;;-- hooks
   ;; Register `def-project-mode!' modes with yasnippet. This enables project
   ;; specific snippet libraries (e.g. for Laravel, React or Jekyll projects).
   (add-hook 'doom-project-hook #'+snippets-enable-project-modes-h)
 
   ;; Exit snippets on ESC from normal mode
   (add-hook 'doom-escape-hook #'yas-abort-snippet)
-
-  (after! smartparens ;; tell smartparens overlays not to interfere with yasnippet keybinds
-    (advice-add 'yas-expand :before #'sp-remove-active-pair-overlay))
-
-  ;; (Evil only) fix off-by-one issue with line-wise visual selections in
-  ;; `yas-insert-snippet', and switches to insert mode afterwards.
-  (advice-add 'yas-insert-snippet :around #'+snippets-expand-on-region-a)
 
   ;; Show keybind hints in snippet header-line
   (add-hook 'snippet-mode-hook #'+snippets-show-hints-in-header-line-h)
@@ -63,7 +66,11 @@
     ;; Is called for all snippet expansions,
     (add-hook! 'yas-before-expand-snippet-hook #'+snippets--disable-smartparens-before-expand-h)
     )
-    (add-hook! 'yas-after-exit-snippet-hook #'+snippets--restore-smartparens-after-expand-h)
+  (add-hook! 'yas-after-exit-snippet-hook #'+snippets--restore-smartparens-after-expand-h)
+
+  (add-hook 'snippet-mode-hook #'general-insert-minor-mode)
+
+  ;;-- end hooks
 
   ;; If in a daemon session, front-load this expensive work:
   (yas-global-mode +1)
@@ -96,6 +103,7 @@
 )
 
 (use-package! dabbrev :defer t)
+
 (use-package! abbrev
   :defer t
   )

@@ -14,36 +14,51 @@
                     val
                     )
 
+(defun +jg-org-capture-get-template (name &optional mode)
+  "Expands and returns a yas snippet for org-capture "
+  (with-temp-buffer
+    (yas-minor-mode)
+    (yas-expand-snippet (yas-lookup-snippet name (or mode 'org-mode)) (point))
+    (buffer-string)
+    )
+  )
+
 (spec-handling-new! org-capture org-capture-templates
                     :loop 'append
-                    :doc "setup file+headline entry org capture templates"
+                    :doc "Register org-capture templates, with file function finding and snippet expansion"
                     :struct '(key (plist :key :name :file :headline :func :text :snippet :props))
                     (cl-loop for data in val
+                             with target
+                             with text
+                             with template
+                             do
                              ;; Build template:
-                             for target = (cond ((plist-get data :file)
+                             (setq target (cond ((plist-get data :file)
                                                  (list 'file+headline
                                                        (plist-get data :file)
                                                        (plist-get data :headline))
                                                  )
                                                 ((plist-get data :func)
-                                                 (list 'function (plist-get data :func))
+                                                 (plist-get data :func)
                                                  )
                                                 (t (warn "Bad template defined" data))
                                                 )
-                             for text = (cond ((plist-get data :text)
-                                               (plist-get data :text))
-                                              ((plist-get data :snippet)
-                                               (warn "TODO: get snippet text"))
-                                              )
-                             for template = (append (list
-                                                     (plist-get data :key)
-                                                     (plist-get data :name)
-                                                     'entry
-                                                     target
-                                                     text
+                                   text  (cond ((plist-get data :text)
+                                                (plist-get data :text))
+                                               ((plist-get data :snippet)
+                                                (+jg-org-capture-get-template (plist-get data :snippet)))
+                                               )
+                                   template  (append (list
+                                                      (plist-get data :key)
+                                                      (plist-get data :name)
+                                                      'entry
+                                                      target
+                                                      text
+                                                      )
+                                                     (plist-get data :props)
                                                      )
-                                                    (plist-get data :props)
-                                                    )
+                                   )
+                             (message "Defining Capture Template: %s" template)
                              ;; Check target in
                              collect template
                              )

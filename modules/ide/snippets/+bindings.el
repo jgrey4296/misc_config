@@ -97,4 +97,8 @@
       :desc "breakpoint"          "I b"   #'+jg-snippets-insert-debug
       )
 
+(map! :map snippet-mode-map
+      :n "|" #'general-insert-call
+      )
+
 (setq abbrev-map nil)

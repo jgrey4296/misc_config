@@ -134,14 +134,3 @@ as princ strips out any text properties"
   (with-current-buffer buf
     (insert x)
     ))
-
-;;;###autoload
-(defun +mu4e--refresh-current-view-a (&rest _)
-  (mu4e-search-rerun)
-  )
-
-;;;###autoload
-(defun +mu4e-ensure-compose-writeable-a (&rest _)
-    "Ensure that compose buffers are writable.
-This should already be the case yet it does not always seem to be."
-    (read-only-mode -1))

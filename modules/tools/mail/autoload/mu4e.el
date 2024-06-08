@@ -1,7 +1,7 @@
 ;; mu4e.el -*- lexical-binding: t; -*-
 
-
 ;; Detect empty subjects, and give users an opotunity to fill something in
+
 ;;;###autoload
 (defun +mu4e-check-for-subject ()
   "Check that a subject is present, and prompt for a subject if not."
@@ -15,14 +15,11 @@
         (insert (read-string "Subject (optional): "))
         (message "Sending...")))))
 
-;;;###autoload
-(add-hook 'message-send-hook #'+mu4e-check-for-subject)
-
-
 ;; The header view needs a certain amount of horizontal space to
 ;; actually show you all the information you want to see
 ;; so if the header view is entered from a narrow frame,
 ;; it's probably worth trying to expand it
+
 ;;;###autoload
 (defun +mu4e-widen-frame-maybe ()
   "Expand the mu4e-headers containing frame's width to `+mu4e-min-header-frame-width'."
@@ -32,11 +29,8 @@
                (< (frame-width) +mu4e-min-header-frame-width))
       (set-frame-width frame +mu4e-min-header-frame-width))))
 
-;;;###autoload
-(add-hook 'mu4e-headers-mode-hook #'+mu4e-widen-frame-maybe)
-
-
 ;; For mu4e > 1.6:
+
 ;;;###autoload
 (defun +mu4e-view-select-attachment ()
   "Use completing-read to select a single attachment.
@@ -56,7 +50,6 @@ Acts like a singular `mu4e-view-save-attachments', without the saving."
   (interactive)
   (mu4e~view-open-file
    (mu4e~view-mime-part-to-temp-file (cdr (+mu4e-view-select-attachment)))))
-
 
 ;;;###autoload
 (defun +mu4e-view-select-mime-part-action ()

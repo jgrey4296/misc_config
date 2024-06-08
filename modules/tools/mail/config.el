@@ -11,15 +11,10 @@
 
 (use-package! mu4e
   :commands mu4e mu4e-compose-new
-  :hook     (mu4e-main-mode . +jg-mail-override-mu4e-hook)
+  ;; :hook     (mu4e-main-mode . +jg-mail-override-mu4e-hook)
   :init
   (provide 'html2text) ; disable obsolete package
   :config
-  (pcase +mu4e-backend
-    (`mbsync      (setq mu4e-get-mail-command "mbsync -a"
-                        mu4e-change-filenames-when-moving t))
-    (`offlineimap (setq mu4e-get-mail-command "offlineimap -o -q"))
-    )
 
   (setq mu4e-headers-threaded-label (cons "Thread view" "Thread View")
         mu4e-headers-related-label  (cons "Showing related emacs" "Showing related emacs")
@@ -34,6 +29,7 @@
 
   (setq mu4e-header-info-custom +mu4e-header-info-custom)
 
+  ;;-- advice
   ;; Marks usually affect the current view
   (advice-add 'mu4e-mark-execute-all  :after   #'+mu4e--refresh-current-view-a)
   (advice-add 'mu4e-compose-new       :before  #'+mu4e-ensure-compose-writeable-a)
@@ -45,11 +41,16 @@
   (advice-add 'mu4e--start            :around #'+mu4e-lock-start)
   (advice-add 'mu4e-quit              :after #'+mu4e-lock-file-delete-maybe)
 
+  ;;-- end advice
+
+  ;;-- hooks
   (add-hook 'kill-emacs-hook #'+mu4e-lock-file-delete-maybe)
   (add-hook 'mu4e-compose-pre-hook '+mu4e-set-from-address-h)
-
+  (add-hook 'message-send-hook #'+mu4e-check-for-subject)
+  (add-hook 'mu4e-headers-mode-hook #'+mu4e-widen-frame-maybe)
   ;; Wrap text in messages
   (setq-hook! 'mu4e-view-mode-hook truncate-lines nil)
+  ;;-- end hooks
 
   (local-load! "+gmail")
   )
@@ -58,11 +59,14 @@
   :commands rmail
   :after evil
   :config
+
+  ;;-- advice
   (advice-add 'rmail-header-summary :override #'+jg-mail-header-summary)
   (advice-add 'rmail-create-summary :override #'+jg-mail-create-summary)
   (advice-add 'rmail-new-summary-1 :around #'+jg-mail-new-summary-princ-override)
   (advice-add 'rmail-summary-update-line :around #'+jg-mail-summary-update-princ-override)
-  )
+  ;;-- end advice
+)
 
 (use-package! rmailsum
   :after rmail

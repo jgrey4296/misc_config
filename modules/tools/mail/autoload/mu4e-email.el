@@ -93,10 +93,7 @@ When otherwise called, open a dired buffer and enable `dired-mu4e-attach-ctrl-c-
 within a context, set `user-mail-address' to an alias found in the 'To' or
 'From' headers of the parent message if present, or prompt the user for a
 preferred alias"
-  (when-let ((addresses (if (or mu4e-contexts +mu4e-personal-addresses)
-                            (and (> (length +mu4e-personal-addresses) 1)
-                                 +mu4e-personal-addresses)
-                          (mu4e-personal-addresses))))
+  (when-let ((addresses (mu4e-personal-addresses)))
     (setq user-mail-address
           (if mu4e-compose-parent-message
               (if (version<= "1.8" mu4e-mu-version)

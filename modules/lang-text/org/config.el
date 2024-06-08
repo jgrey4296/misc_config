@@ -1,6 +1,6 @@
 ;;; lang/org/config.el -*- lexical-binding: t; no-byte-compile: t; -*-
 
-(local-load! "+definitions")
+(local-load! "+definitions" "+spec-defs")
 (local-load! "+vars")
 
 (defer-load! jg-bindings-core "+bindings" "+agenda-bindings")

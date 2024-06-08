@@ -1,4 +1,5 @@
 #+Title: Todos needing triage
+#+STARTUP: agenda
 
 * Triage
 ** TRIAGE defer-advice-add
@@ -13,3 +14,8 @@
 *** workspace root display
 ** [∅] spec-handle mu4e contexts
 https://www.djcbsoftware.nl/code/mu/mu4e/Contexts-example.html
+** TRIAGE mu4e map customisation
+   [[/media/john/data/github/_config/modules/tools/mail/+bindings.el::9][Location]]
+   :context:
+        <2024-06-08 Sat>   (map! :map mu4e-main-mode-map
+   :END:

@@ -1,0 +1,15 @@
+#+Title: Todos needing triage
+
+* Triage
+** TRIAGE defer-advice-add
+   [[/media/john/data/github/_config/modules/ide/snippets/config.el::36][Location]]
+   :context:
+        <2024-06-08 Sat>   (after! smartparens ;; tell smartparens overlays not to interfere with yasnippet keybinds
+   :END:
+** TODO transients
+*** env-handling
+*** org agenda
+*** librarian-tagging interface
+*** workspace root display
+** [∅] spec-handle mu4e contexts
+https://www.djcbsoftware.nl/code/mu/mu4e/Contexts-example.html

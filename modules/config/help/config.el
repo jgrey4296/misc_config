@@ -26,13 +26,7 @@
   ;; Make `apropos' et co search more extensively. They're more useful this way.
   (setq apropos-do-all t)
 
-  (defun doom-use-helpful-a (fn &rest args)
-    "Force FN to use helpful instead of the old describe-* commands."
-    (letf! ((#'describe-function #'helpful-function)
-            (#'describe-variable #'helpful-variable))
-      (apply fn args)))
-
-  (defun jg-unset-helpful-dedicated()
+  (defun jg-unset-helpful-dedicated ()
     (set-window-dedicated-p (selected-window) nil)
     )
 

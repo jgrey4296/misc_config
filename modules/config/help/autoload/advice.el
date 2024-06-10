@@ -20,6 +20,7 @@
   label
   )
 
+;;;###autoload
 (defun doom--find-function-search-for-symbol-save-excursion-a (fn &rest args)
   "Suppress cursor movement by `find-function-search-for-symbol'.
 
@@ -36,4 +37,13 @@ current buffer."
       (prog1 (apply fn args)
         (when (buffer-live-p buf)
           (with-current-buffer buf (goto-char pos))))))
+  )
+
+;;;###autoload
+(defun doom-use-helpful-a (fn &rest args)
+  "Force FN to use helpful instead of the old describe-* commands."
+  (letf! ((#'describe-function #'helpful-function)
+
+          (#'describe-variable #'helpful-variable))
+    (apply fn args))
   )

@@ -2,7 +2,13 @@
 
 (setq counsel-describe-function-function #'helpful-callable
       counsel-describe-variable-function #'helpful-variable
-      counsel-descbinds-function         #'helpful-callable)
+      counsel-descbinds-function         #'helpful-callable
+
+      )
+
+(setq helpful-max-buffers 5
+
+      )
 
 (spec-handling-add! fold
                     `(helpful

@@ -55,4 +55,6 @@ instead of spc y [1-7], do spc-y-ret and dynamically drill into templates repo
 ** [∅] capture
 *** [∅] reimplement +org-capture-project-[todo|notes|changelog]-file
 to use for templates, to find relevant project file
+** [∅] org-goto-clock popup buffer not as same window
+
 * Links

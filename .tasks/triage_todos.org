@@ -19,3 +19,10 @@ https://www.djcbsoftware.nl/code/mu/mu4e/Contexts-example.html
    :context:
         <2024-06-08 Sat>   (map! :map mu4e-main-mode-map
    :END:
+
+** TRIAGE find-related if test doesnt exist, make it
+** TRIAGE jg-term-switch select only active shells
+   [[/media/john/data/github/_config/modules/tools/term/autoload/term.el::46][Location]]
+   :context:
+        <2024-06-10 Mon> (defun +jg-term-switch ()
+   :END:

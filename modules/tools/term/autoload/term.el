@@ -42,15 +42,22 @@ If prefix ARG, recreate the term buffer."
 ;;;###autoload
 (defalias '+term/here #'multi-term)
 
-
-;; TODO +term/frame -- dedicate current frame to term buffers
-;; TODO +term/frame-quite -- revert frame to before +term/frame
-
 ;;;###autoload
 (defun +jg-term-switch ()
   (interactive)
-  (let ((shells (-filter (lambda (x) (s-matches? (rx string-start "*shell" (0+ any) string-end) (buffer-name x))) (buffer-list)))
+  (let ((shells (-filter
+                 (lambda (x)
+                   (s-matches?
+                    (rx string-start "*shell"
+                        (0+ any)
+                        string-end)
+                    (buffer-name x)))
+                 (buffer-list)))
         )
-    (switch-to-buffer (ivy-read "Shell: " (mapcar #'buffer-name shells)))
+    (ivy-read "Shell: "
+              (mapcar #'buffer-name shells)
+              :action #'switch-to-buffer
+              :caller 'jg-term-ivy-switch-term
+              )
     )
   )

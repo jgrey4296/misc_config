@@ -32,6 +32,11 @@
                      ("k" +jg-ivy-kill-buffer "Kill")
                      )
                    )
+  (ivy-add-actions '+jg-term-switch
+                   '(("k" +jg-ivy-kill-buffer "Kill")
+                     )
+                   )
+
   )
 
 (after! ivy-hydra

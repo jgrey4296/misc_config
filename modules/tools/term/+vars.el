@@ -31,6 +31,7 @@
                       ("^\\*vterm" :size 0.25 :vslot -4 :select t :quit nil :ttl 0)
                       )
                     )
+
 (spec-handling-add! tree-sit-lang
                     '(sh-mode         . bash)
                     )

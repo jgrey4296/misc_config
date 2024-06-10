@@ -1,11 +1,9 @@
 ;;; compile-commands.el -*- lexical-binding: t; -*-
 
-(defvar jg-latex-compile-program "pdflatex")
-(defvar jg-latex-compile-args '("-interaction=nonstopmode"))
-(defvar jg-latex-compile-search-re "^%% compiler:\\(.+\\)$")
 
 ;;;###autoload
 (defun +jg-latex-get-commands (&optional dir)
+  "Builds compile commands for latex"
   (interactive)
   (-when-let* ((curr-file (buffer-file-name))
                ;; (rel-file (f-relative (f-no-ext (buffer-file-name)) (projectile-project-root)))

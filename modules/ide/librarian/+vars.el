@@ -1,7 +1,7 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
 
-(setq librarian-regular--location                  (expand-file-name "lookup-regular" templates-loc)
+(setq librarian-regular--location                  (expand-file-name "librarian-regular" templates-loc)
       librarian-configs--modules-dir               (expand-file-name "modules" doom-user-dir)
       librarian-man--path                          (expand-file-name "man/main" templates-loc)
       librarian-man--config                        (expand-file-name "tools/man.conf" templates-loc)
@@ -49,7 +49,7 @@
                       ("."  . librarian-browser--open-url)
                       )
                     )
-(spec-handling-add! lookup-regular
+(spec-handling-add! librarian-regular
                     '(shell-mode
                      ("Brew"             . "https://brew.sh/")
                      ("Awk"              . "https://www.gnu.org/software/gawk/manual/gawk.html")

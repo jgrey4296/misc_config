@@ -38,7 +38,7 @@
                     '(snippets
                       ("templates/code/.+\\'"           . snippet-mode)
                       ("templates/general-insert/.+\\'" . fundamental-mode)
-                      ("templates/lookup-regular/.+\\'" . fundamental-mode)
+                      ("templates/librarian-regular/.+\\'" . fundamental-mode)
                       ("templates/company-dicts/.+\\'"  . fundamental-mode)
                       ("templates/files/.+\\'"          . snippet-mode)
                       )

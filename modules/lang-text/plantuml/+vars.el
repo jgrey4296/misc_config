@@ -5,7 +5,7 @@
   )
 
 
-(spec-handling-add! lookup-regular
+(spec-handling-add! librarian-regular
                     '(plantuml-mode
                      ("Plantuml Manual" . "https://plantuml.com/")
                      )

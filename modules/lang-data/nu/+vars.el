@@ -1,7 +1,7 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
 
-(spec-handling-add! lookup-regular
+(spec-handling-add! librarian-regular
                     '(nushell-mode
                       ("Reference" . "https://www.nushell.sh/book/")
                       )

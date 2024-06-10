@@ -102,7 +102,7 @@ If set to `nil', disable all the above behaviors.")
                       )
 ;;-- end specs
 
-(spec-handling-add! lookup-regular
+(spec-handling-add! librarian-regular
                     '((css-mode less-css-mode scss-mode sass-mode)
                      ("CSS Reference" . "https://developer.mozilla.org/en-US/docs/Web/CSS")
                      ("LESS Reference" . "https://lesscss.org/features/")

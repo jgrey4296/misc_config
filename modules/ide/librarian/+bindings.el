@@ -23,7 +23,7 @@
 (map! :map librarian-mode-map
       :prefix "s"
       :desc "Browse URL"             :n "u" #'librarian-url
-      :desc "Lookup Regular"         :n "1" #'librarian-regular-go
+      :desc "Librarian Regular"         :n "1" #'librarian-regular-go
 
       (:prefix "k"
        :desc "Choose Handler"                :n ";" #'librarian-choose

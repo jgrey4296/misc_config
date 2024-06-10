@@ -23,7 +23,7 @@
                       )
                     )
 
-(spec-handling-add! lookup-regular
+(spec-handling-add! librarian-regular
                     '(ocaml-mode
                       ("OCaml Reference" . "https://v2.ocaml.org/releases/5.0/htmlman/index.html")
                       ("Ocaml Tutorial" . "https://ocaml.org/docs/up-and-running")

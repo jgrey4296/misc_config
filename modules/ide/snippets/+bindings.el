@@ -102,3 +102,8 @@
       )
 
 (setq abbrev-map nil)
+
+(map! :map edit-abbrevs-mode-map
+      :n "RET" #'edit-abbrevs-redefine
+      :n "Q"   #'kill-current-buffer
+      )

@@ -172,7 +172,7 @@
                      "|"
                      "OKAY(o)"
                      "YES(y)"
-                     "NO(n)"
+                     "NO(N)"
                     "MAYBE(m)"
                     ))
       )
@@ -263,16 +263,16 @@
                        :snippet "personal-todo"
                        :props (:prepend t :empty-lines 1)
                        )
+                      (:key  "g" :name "General Todo"
+                       :file +org-capture-todo-file :headline  "Triage"
+                       :snippet "global_todo"
+                       :props (:prepend t :empty-lines 2)
+                      )
                       (:key "q" :name "Quick Todo"
                        :file +org-capture-todo-file :headline "Triage"
                        :text "** TRIAGE Quick note\n%a\n%T\n\n"
                        :props (:immediate-finish t)
                        )
-                      (:key  "g" :name "General Todo"
-                       :file +org-capture-todo-file :headline  "Triage"
-                       :snippet "global_todo"
-                       :props (:prepend t :empty-lines 1)
-                      )
                       )
                     `(notes
                       (:key "n" :name "Note"

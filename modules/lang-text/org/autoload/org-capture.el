@@ -167,6 +167,7 @@ project."
          (todo (f-join root ".tasks/triage_todos.org"))
          )
     (set-buffer (org-capture-target-buffer todo))
+    (goto-char (point-min))
     (condition-case err
         (re-search-forward "^\* Triage" nil)
       (search-failed (progn

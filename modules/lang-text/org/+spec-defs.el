@@ -66,8 +66,20 @@
                     :struct '(key . (plist :name :lib :func :mode))
                     :loop 'append
                     (cl-loop for data in val
-                             collect (cons (intern (plist-get data :name))
+                             collect (cons (cond ((symbolp (plist-get data :name))
+                                                  (plist-get data :name))
+                                                 ((stringp (plist-get data :name))
+                                                  (intern (plist-get data :name)))
+                                                 (t (warn "Invalid name for org babel specified: %s" data)
+                                                    "invalid")
+                                                 )
                                            data))
+                    )
+
+(spec-handling-new! org-src org-src-lang-modes
+                    :struct '(key . (str . mode))
+                    :loop 'append
+                    val
                     )
 
 ;; default org-startup options

@@ -49,9 +49,9 @@
                       :chars (?\n ?\})
                       )
                     )
-(spec-handling-add! eval
-                    `(fsharp-mode
-                      :start ,#'run-fsharp
+(spec-handling-add! repl
+                    '(fsharp-mode
+                      :start run-fsharp
                       )
                     )
 (spec-handling-add! ligatures

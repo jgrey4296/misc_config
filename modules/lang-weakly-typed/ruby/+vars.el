@@ -5,9 +5,9 @@
   (add-to-list 'exec-path (expand-file-name "shims" rbenv-installation-dir)))
 
 (spec-handling-add! electric '(ruby-mode :words '("else" "end" "elsif")))
-(spec-handling-add! eval
-                    `(ruby-mode :start ,#'inf-ruby)
-                    `(robe-mode :start ,#'robe-start)
+(spec-handling-add! repl
+                    '(ruby-mode :start inf-ruby)
+                    '(robe-mode :start robe-start)
                     )
 (spec-handling-add! auto-modes
                     '(ruby

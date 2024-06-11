@@ -358,7 +358,7 @@
                      )
                    )
 (spec-handling-add! eval
-                    `(org-mode :eval ,#'+org-eval-handler)
+                    '(org-mode :fn +org-eval-handler)
                     )
 (spec-handling-add! org-startup
                     '(plus

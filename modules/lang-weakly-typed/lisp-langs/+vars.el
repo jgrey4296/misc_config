@@ -134,14 +134,19 @@
                       )
                     )
 (spec-handling-add! repl
-                    `(emacs-lisp-mode       :start ,#'+emacs-lisp/open-repl :send #'+jg-lisp-eval)
-                    `(lisp-interaction-mode :start ,#'+emacs-lisp/open-repl :send #'+jg-lisp-eval)
-                    `(racket-mode           :start ,#'+racket/open-repl)
+                    '(emacs-lisp-mode       :start +emacs-lisp/open-repl :send +jg-lisp-eval)
+                    '(lisp-interaction-mode :start +emacs-lisp/open-repl :send +jg-lisp-eval)
                     )
 (spec-handling-add! yas-extra
                     '(buttercup-minor-mode buttercup-minor-mode)
                     )
 (spec-handling-add! company
                     '(emacs-lisp-mode (:mode company-elisp))
+                    )
+
+(spec-handling-add! eval
+                    '(elisp-mode
+                      :send eval-region
+                      )
                     )
 ;;-- end specs

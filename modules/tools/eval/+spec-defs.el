@@ -18,24 +18,32 @@
   (fn    nil :type lambda :doc (lambda buff region))
   )
 
-;; (spec-handling-new! quickrun-files quickrun-file-alist)
-;; (spec-handling-new! quickrun-modes quickrun--major-mode-alist)
-;; (spec-handling-new! quickrun-files quickrun--language-alist)
 
 (spec-handling-new! repl +eval-repls
                     :loop 'collect
                     :doc "Registers repl handlers"
                     :struct '(or repl-handler (:modes list :start fn :send fn :persist bool :run fn))
-                    (cons (or (plist-get val :name) key) val)
+                    (cond ((repl-handler-p val)
+                           (cons key val))
+                          (t (cons key (apply #'make-repl-handler :modes key val)))
+                          )
                     )
 
-;; (spec-handling-new! eval +eval-handlers
-;;                     :loop 'collect
-;;                     :doc "Registers Eval Handlers"
-;;                     :struct '(or eval-handler lambda)
-
-;;                     )
+(spec-handling-new! jg-eval +eval-handlers
+                    :loop 'collect
+                    :doc "Registers Eval Handlers"
+                    :struct '(or eval-handler (mode :region))
+                    (cond ((eval-handler-p val)
+                           (cons key val))
+                          (t (cons key (apply #'make-eval-handler :mode key val)))
+                          )
+                    )
 
 (spec-handling-new! compile-commands counsel-compile-local-builds :loop 'append
                     val
                     )
+
+
+;; (spec-handling-new! quickrun-files quickrun-file-alist)
+;; (spec-handling-new! quickrun-modes quickrun--major-mode-alist)
+;; (spec-handling-new! quickrun-files quickrun--language-alist)

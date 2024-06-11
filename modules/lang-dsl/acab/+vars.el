@@ -10,6 +10,6 @@
 (defvar acab-ide/type-helm-dummy-source)
 
 
-(spec-handling-add! eval
-                    `(acab-rule-mode ,#'acab-mode/open-repl)
+(spec-handling-add! repl
+                    '(acab-rule-mode :start acab-mode/open-repl)
                     )

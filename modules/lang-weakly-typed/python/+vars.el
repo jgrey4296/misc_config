@@ -25,11 +25,11 @@
       )
 
 ;; Builtin Python-mode vars
-(setq python-shell--interpreter-args                        "-i"
-      python-indent-guess-indent-offset                     nil
+(setq python-indent-guess-indent-offset                     nil
       python-shell-completion-native-enable                 nil
       python-shell-completion-native-disabled-interpreters  '("pypy")
-      python-shell-interpreter-path-args                    (expand-file-name "python/repl_startup.py "  templates-loc)
+      python-shell-interpreter-path-args                    (expand-file-name "python/repl_startup.py"  templates-loc)
+      jg-python-current-interpreter                         jg-python-stock-repl
  )
 
 ;; Py-vars
@@ -273,16 +273,14 @@
 (spec-handling-add! compile-commands
                     '(python +jg-python-get-commands +jg-python-solo-file-run +jg-python-distribute-commands)
                     )
-(spec-handling-add! repl
-                    `(python-mode
-                      :start ,#'+jg-python/open-repl
-                      :send  ,#'python-shell-send-region
-                      :eval nil
+(spec-handling-add! repl :form 'override
+                    '(python-mode
+                      :start +jg-python/open-repl
+                      :send  python-shell-send-region
                       )
-                    `(ipython
-                      :start ,#'+jg-python/open-ipython-repl
-                      :send  ,#'python-shell-send-region
-                      :eval nil
+                    '(ipython
+                      :start +jg-python/open-ipython-repl
+                      :send  python-shell-send-region
                       )
                     )
 (spec-handling-add! yas-extra

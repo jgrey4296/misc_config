@@ -21,7 +21,7 @@ falling back on searching your PATH."
             ((executable-find exe))))))
 
 ;;;###autoload
-(defun +jg-python/open-repl ()
+(defun +jg-python/open-repl (name)
   "Open the Python REPL."
   (interactive)
   (require 'python)
@@ -31,48 +31,21 @@ falling back on searching your PATH."
   (unless env-handling-state
     (env-handling-go!))
 
-  (pop-to-buffer
-   (process-buffer
-    (let ((dedicated (bound-and-true-p python-shell-dedicated))
-          (default-directory (projectile-project-root))
-          )
-      (run-python nil dedicated t)
-      ;; TODO possibly use py-shell
-      )
-    )
-   )
-  )
-
-;;;###autoload
-(defun +jg-python/open-ipython-repl ()
-  "Open the iPython REPL."
-  (interactive)
-  (require 'python)
-  (unless python-shell--interpreter
-    (user-error "`python-shell-interpreter' isn't set"))
-
-  (unless env-handling-state
-    (env-handling-go!))
-
-  (let ((python-shell-interpreter (or (executable-find (car +python-ipython-command)) "ipython"))
-        (python-shell-interpreter-args (string-join (cdr +python-ipython-command) " "))
+  (let ((cmd (+jg-python-shell-calculate-command))
         (dedicated (bound-and-true-p python-shell-dedicated))
         (default-directory (projectile-project-root))
         )
-    (pop-to-buffer
-     (process-buffer
-      (run-python nil dedicated t)
-      )
-     )
+    (process-buffer (run-python cmd dedicated t)
+                    )
     )
-)
+  )
 
 ;;;###autoload
 (defun +python/open-file-repl ()
   (interactive)
+  (error "TODO")
   (cl-assert (eq (with-current-buffer (current-buffer) major-mode) 'python-mode))
   (unless python-shell-interpreter
-
     (user-error "`python-shell-interpreter' isn't set"))
 
   (let* ((default-directory (doom-project-root))
@@ -84,3 +57,14 @@ falling back on searching your PATH."
     new-buffer
     )
   )
+
+;;;###autoload
+(defun +jg-python-select-repl ()
+    (interactive)
+    (pcase (ivy-read "Set Python Interpreter: " '(default ipython))
+      ("default"
+       (setq jg-python-current-interpreter jg-python-stock-repl))
+      ("ipython"
+       (setq jg-python-current-interpreter +python-ipython-command))
+      )
+    )

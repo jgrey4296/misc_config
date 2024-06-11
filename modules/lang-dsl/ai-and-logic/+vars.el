@@ -20,12 +20,14 @@
 
 (defvar inferior-clips-program  "CLIPS Console")
 
+(spec-handling-add! repl
+                    '(clips-mode  :start +clips-mode/open-repl)
+                    '(instal-mode :start +instal-mode/open-repl)
+                    '(soar-mode   :start +soar-mode/open-repl)
+                    '(ceptre-mode :start +ceptre-mode/open-repl)
+                    )
 (spec-handling-add! eval
-                    `(clips-mode  :start ,#'+clips-mode/open-repl)
-                    `(instal-mode :start ,#'+instal-mode/open-repl)
-                    `(soar-mode   :start ,#'+soar-mode/open-repl)
-                    `(ceptre-mode :start ,#'+ceptre-mode/open-repl)
-                    `(pasp-mode   :eval ,#'+jg-pasp-eval)
+                    '(pasp-mode   :eval  +jg-pasp-eval)
                     )
 
 ;;-- specs

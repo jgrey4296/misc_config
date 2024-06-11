@@ -1,13 +1,15 @@
 ;;; lang/jg-python/+bindings.el -*- lexical-binding: t; -*-
 
 (map! :leader
-      :prefix ("c v" . "Environments")
+      (:prefix ("c v" . "Python Environments")
       :desc "Activate Env" "a" #'env-handling-go!
       :desc "Clear Env"    "d" #'env-handling-clear-env!
       :desc "Report Env"   "r" #'env-handling-report!
       :desc "Lock Env"     "l" #'env-handling-lock!
       :desc "Create venv"  "c" #'env-handling-create-env!
+      )
 
+      :desc "Select Python Repl" "c r p" #'+jg-python-select-repl
       )
 
 (map! :map (python-mode-map python-ts-mode-map)

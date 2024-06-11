@@ -8,8 +8,8 @@
                       )
                     )
 
-(spec-handling-add! eval
-                    `(idris-mode :start ,#'idris-pop-to-repl)
+(spec-handling-add! repl
+                    '(idris-mode :start idris-pop-to-repl)
                     )
 
 (spec-handling-add! lookup-handler

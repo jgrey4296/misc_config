@@ -1,14 +1,25 @@
 ;; +defs.el -*- lexical-binding: t; -*-
 
-(defvar +python-ipython-command '("ipython" "-i" "--simple-prompt" "--no-color-info")
+(defvar jg-python-current-interpreter nil
+  "The current command to use when starting a repl"
+  )
+
+(defvar jg-python-stock-repl '("python3" "-i")
+  "the default python interpreter")
+
+(defvar +python-ipython-command '("python3" "-m" "IPython" "-i" "--simple-prompt" "--no-color-info")
   "Command to initialize the ipython REPL for `+python/open-ipython-repl'.")
+
+(defvar python-shell-interpreter-path-args nil
+  "arguments to go at the end of the python interpreter call if a file is not provided to run"
+  )
 
 (defvar +python-jupyter-command '("jupyter" "console" "--simple-prompt")
   "Command to initialize the jupyter REPL for `+python/open-jupyter-repl'.")
 
 (defvar jg-python-dev-mode nil)
 
-(defvar jg-python-dev-cmd "-X dev")
+(defvar jg-python-dev-cmd-args '("-X" "dev"))
 
 (defvar jg-python-docs-url           "https://docs.python.org/3/")
 

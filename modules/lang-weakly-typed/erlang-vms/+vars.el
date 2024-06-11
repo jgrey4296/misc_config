@@ -50,12 +50,12 @@
                      :documentation ,#'alchemist-help-search-at-point
                      )
                     )
-(spec-handling-add! eval
-                    `(elixir-mode
-                      :start ,#'alchemist-iex-project-run
-                      :send ,#'alchemist-eval-region
+(spec-handling-add! repl
+                    '(elixir-mode
+                      :start alchemist-iex-project-run
+                      :send  alchemist-eval-region
                       )
-                    `(erlang-mode :start ,#'+erlang/open-repl)
+                    '(erlang-mode :start +erlang/open-repl)
                     )
 (spec-handling-add! ligatures
                     '(elixir-mode

@@ -26,8 +26,8 @@
                       :words ("else" "elif" "fi" "done" "then" "do" "esac" ";;")
                       )
                     )
-(spec-handling-add! eval
-                    `(sh-mode :start ,#'+sh/open-repl)
+(spec-handling-add! repl
+                    '(sh-mode :start +sh/open-repl)
                     )
 (spec-handling-add! ligatures
                     '(sh-mode

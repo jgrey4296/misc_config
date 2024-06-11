@@ -29,6 +29,6 @@
                       )
                     )
 
-(spec-handling-add! eval
-                    `(nix-mode :start ,#'+nix/open-repl)
+(spec-handling-add! repl
+                    '(nix-mode :start +nix/open-repl)
                     )

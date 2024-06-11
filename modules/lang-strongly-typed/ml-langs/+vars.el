@@ -44,10 +44,10 @@
                       )
                     )
 
-(spec-handling-add! eval
-                    `(sml-mode :start ,#'run-sml)
-                    `(tuareg-mode
-                      :start ,#'utop
-                      :send ,#'utop-eval-region
+(spec-handling-add! repl
+                    '(sml-mode :start run-sml)
+                    '(tuareg-mode
+                      :start utop
+                      :send utop-eval-region
                       )
                     )

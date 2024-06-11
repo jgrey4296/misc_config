@@ -362,7 +362,7 @@
                     )
 (spec-handling-add! org-startup
                     '(plus
-                      ("agenda"    jg-org-startup-agenda t)
+                      ("agenda"    jg-org-startup-agenda         t)
                       ("reference" jg-org-startup-reference      t)
                       ("packages"  jg-org-startup-package        t)
                       )

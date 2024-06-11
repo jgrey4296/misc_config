@@ -97,6 +97,7 @@
        :desc "by-size-gt"                    ">"   #'ibuffer-filter-by-size-gt
        :desc "filter"                        "'"   #'ibuffer-filter-chosen-by-completion
        :desc "unsaved"                       "u"   #'ibuffer-filter-by-unsaved-buffers
+       :desc "agendas"                       "a"   #'ibuffer-filter-by-agenda-buffers
        )
       )
 

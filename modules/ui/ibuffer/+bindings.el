@@ -14,6 +14,42 @@
 (define-prefix-command 'jg-ibuffer-mark-map   nil "ibuffer-mark")
 
 (map! :map jg-ibuffer-mode-map
+      :localleader
+      :desc "toggle-sorting-mode"   "," #'ibuffer-toggle-sorting-mode
+      :desc "Formats"               "." #'ibuffer-switch-format
+      :desc "Sorting"               "o"  'jg-ibuffer-sort-map
+
+      (:prefix ("t" . "temp")
+       :desc "add-to-tmp-show"     :n "s" #'ibuffer-add-to-tmp-show
+       :desc "add-to-tmp-hide"     :n "h" #'ibuffer-add-to-tmp-hide
+       )
+
+
+      )
+
+(map! :map jg-ibuffer-mode-map
+      (:prefix ("f" . "filter by")
+       :desc "basename"                   :n "n"   #'ibuffer-filter-by-basename
+       :desc "content"                    :n "C"   #'ibuffer-filter-by-content
+       :desc "derived-mode"               :n "M"   #'ibuffer-filter-by-derived-mode
+       :desc "directory"                  :n "d"   #'ibuffer-filter-by-directory
+       :desc "filename"                   :n "f"   #'ibuffer-filter-by-filename
+       :desc "mode"                       :n "m"   #'ibuffer-filter-by-mode
+       :desc "modified"                   :n "c"   #'ibuffer-filter-by-modified
+       :desc "name"                       :n "N"   #'ibuffer-filter-by-name
+       :desc "process"                    :n "p"   #'ibuffer-filter-by-process
+       :desc "used-mode"                  :n "m"   #'ibuffer-filter-by-used-mode
+       :desc "visiting-file"              :n "v"   #'ibuffer-filter-by-visiting-file
+       :desc "by ext"                     :n "e"   #'ibuffer-filter-by-file-extension
+       :desc "by-size-lt"                 :n "<"   #'ibuffer-filter-by-size-lt
+       :desc "by-size-gt"                 :n ">"   #'ibuffer-filter-by-size-gt
+       :desc "filter"                     :n "'"   #'ibuffer-filter-chosen-by-completion
+       :desc "unsaved"                    :n "u"   #'ibuffer-filter-by-unsaved-buffers
+       :desc "agendas"                    :n "a"   #'ibuffer-filter-by-agenda-buffers
+       )
+      )
+
+(map! :map jg-ibuffer-mode-map
       :desc "Visit"               :n "RET" #'+ibuffer/visit-workspace-buffer
 
       :desc "toggle-sorting-mode" :n "," #'ibuffer-toggle-sorting-mode
@@ -71,7 +107,8 @@
       :desc "negate-filter"                  "!"   #'ibuffer-negate-filter
 
       (:prefix ("f" . "filter ops")
-       :desc "Choose Filter"                  ","  #'ibuffer-filter-chosen-by-completion
+       :desc "negate-filter"                  "!"   #'ibuffer-negate-filter
+       :desc "Choose Filter"                  "f"  #'ibuffer-filter-chosen-by-completion
        :desc "Swap filters"                  "TAB" #'ibuffer-exchange-filters
        :desc "and-filter"                    "&"   #'ibuffer-and-filter
        :desc "or-filter"                     "|"   #'ibuffer-or-filter
@@ -79,27 +116,7 @@
        :desc "disable filter"                "\\"  #'ibuffer-filter-disable
        :desc "decompose-filter"              "d"   #'ibuffer-decompose-filter
        )
-
-      (:prefix ("b" . "by")
-       :desc "basename"                      "n"   #'ibuffer-filter-by-basename
-       :desc "content"                       "C"   #'ibuffer-filter-by-content
-       :desc "derived-mode"                  "M"   #'ibuffer-filter-by-derived-mode
-       :desc "directory"                     "d"   #'ibuffer-filter-by-directory
-       :desc "filename"                      "f"   #'ibuffer-filter-by-filename
-       :desc "mode"                          "m"   #'ibuffer-filter-by-mode
-       :desc "modified"                      "c"   #'ibuffer-filter-by-modified
-       :desc "name"                          "N"   #'ibuffer-filter-by-name
-       :desc "process"                       "p"   #'ibuffer-filter-by-process
-       :desc "used-mode"                     "m"   #'ibuffer-filter-by-used-mode
-       :desc "visiting-file"                 "v"   #'ibuffer-filter-by-visiting-file
-       :desc "by ext"                        "e"   #'ibuffer-filter-by-file-extension
-       :desc "by-size-lt"                    "<"   #'ibuffer-filter-by-size-lt
-       :desc "by-size-gt"                    ">"   #'ibuffer-filter-by-size-gt
-       :desc "filter"                        "'"   #'ibuffer-filter-chosen-by-completion
-       :desc "unsaved"                       "u"   #'ibuffer-filter-by-unsaved-buffers
-       :desc "agendas"                       "a"   #'ibuffer-filter-by-agenda-buffers
-       )
-      )
+)
 
 (map! :map jg-ibuffer-filter-map ;; groups
       :prefix ("g" . "Groups")

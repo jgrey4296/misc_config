@@ -263,7 +263,7 @@
                        :snippet "personal-todo"
                        :props (:prepend t :empty-lines 1)
                        )
-                      (:key  "g" :name "General Todo"
+                      (:key  "g" :name "Global Todo"
                        :file +org-capture-todo-file :headline  "Triage"
                        :snippet "global_todo"
                        :props (:prepend t :empty-lines 2)

@@ -15,7 +15,8 @@
 (cl-defstruct (eval-handler)
   "Specifies how to eval regions/buffers"
   (modes nil :type list)
-  (fn    nil :type lambda :doc (lambda buff region))
+  (fn    nil :type lambda :doc (lambda start end))
+  (indirect nil :Type lambda)
   )
 
 
@@ -29,7 +30,7 @@
                           )
                     )
 
-(spec-handling-new! jg-eval +eval-handlers
+(spec-handling-new! eval +eval-handlers
                     :loop 'collect
                     :doc "Registers Eval Handlers"
                     :struct '(or eval-handler (mode :region))

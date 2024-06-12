@@ -71,13 +71,19 @@
 
     ;; start the repl if neceesary
     (unless (and (repl-handler-p handler) buff (buffer-live-p buff))
-      (apply (repl-handler-start handler) (list +eval-repl-buffer-name))
-      (get-buffer +eval-repl-buffer-name))
+      (setq buff (apply (repl-handler-start handler) (list +eval-repl-buffer-name))))
+
+    (when (processp buff)
+      (setq buff (process-buffer buff)))
+
+    (unless (bufferp (get-buffer (or buff +eval-repl-buffer-name)))
+      (error "Could not get a returned repl buffer: %s" buff))
 
     ;; store some metadata
-    (when (get-buffer +eval-repl-buffer-name)
-      (with-current-buffer +eval-repl-buffer-name
-        (setq-local repl-base (car (ensure-list (repl-handler-modes handler))))))
+    (with-current-buffer (get-buffer (or buff +eval-repl-buffer-name))
+      (rename-buffer +eval-repl-buffer-name)
+      (setq-local repl-base (car (ensure-list (repl-handler-modes handler))))
+      )
 
     ;; Cleanup
     (unless (and handler (+jg-eval-repl-active-p handler))

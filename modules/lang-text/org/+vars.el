@@ -252,38 +252,37 @@
 ;;-- end completion
 
 ;;-- capture
-(after! org-capture
-  (org-capture-put :kill-buffer t)
-)
 
-(spec-handling-add! org-capture
+(spec-handling-add! org-capture :form 'override
                     `(todo
                       (:key       "t" :name      "Personal todo"
                        :file      +org-capture-todo-file :headline  "Triage"
                        :snippet "personal-todo"
-                       :props (:prepend t :empty-lines 1)
+                       :props (:prepend t :empty-lines 1 :kill-buffer t)
                        )
                       (:key  "g" :name "Global Todo"
                        :file +org-capture-todo-file :headline  "Triage"
                        :snippet "global_todo"
-                       :props (:prepend t :empty-lines 2)
+                       :props (:prepend t :empty-lines 2 :kill-buffer t)
                       )
                       (:key "q" :name "Quick Todo"
                        :file +org-capture-todo-file :headline "Triage"
                        :text "** TRIAGE Quick note\n%a\n%T\n\n"
-                       :props (:immediate-finish t)
+                       :props (:immediate-finish t :kill-buffer t)
                        )
                       )
                     `(notes
                       (:key "n" :name "Note"
                        :file +org-capture-notes-file :headline "Triage"
                        :text "** %u %?\n%i\n%a"
+                       :props (:kill-buffer t)
                        )
                       )
                     `(project
                       (:key "p" :name "Project Todo"
                        :func #'+jg-org-capture-project-todo  :headline  "Triage"
                        :snippet "project_todo"
+                       :props (:kill-buffer t)
                        )
                       )
                     )

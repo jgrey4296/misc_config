@@ -26,3 +26,23 @@ https://www.djcbsoftware.nl/code/mu/mu4e/Contexts-example.html
    :context:
         <2024-06-10 Mon> (defun +jg-term-switch ()
    :END:
+** TRIAGE spec handling for quickrun cmd registration
+   [[/media/john/data/github/_config/modules/tools/eval/+spec-defs.el::25][Location]]
+   :context:
+        <2024-06-11 Tue> (spec-handling-new! repl +eval-repls
+   :END:
+** TRIAGE possible use py-shell for python repl
+   [[/media/john/data/github/_config/modules/lang-weakly-typed/python/autoload/repl.el::38][Location]]
+   :context:
+        <2024-06-11 Tue>       (run-python nil dedicated t)
+   :END:
+** TRIAGE ibuffer group for process buffers
+   [[/media/john/data/github/_config/modules/tools/eval/autoload/jg-repl.el::77][Location]]
+   :context:
+        <2024-06-11 Tue>
+   :END:
+** TRIAGE implement python file repl
+   [[/media/john/data/github/_config/modules/lang-weakly-typed/python/autoload/repl.el::44][Location]]
+   :context:
+        <2024-06-12 Wed> (defun +python/open-file-repl ()
+   :END:

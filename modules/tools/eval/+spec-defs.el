@@ -36,7 +36,7 @@
                     :struct '(or eval-handler (mode :region))
                     (cond ((eval-handler-p val)
                            (cons key val))
-                          (t (cons key (apply #'make-eval-handler :mode key val)))
+                          (t (cons key (apply #'make-eval-handler :modes key val)))
                           )
                     )
 

@@ -27,7 +27,7 @@
                     '(ceptre-mode :start +ceptre-mode/open-repl)
                     )
 (spec-handling-add! eval
-                    '(pasp-mode   :eval  +jg-pasp-eval)
+                    '(pasp-mode   :fn +jg-pasp-eval)
                     )
 
 ;;-- specs

@@ -145,8 +145,6 @@
                     )
 
 (spec-handling-add! eval
-                    '(elisp-mode
-                      :send eval-region
-                      )
+                    '(elisp-mode :fn eval-region)
                     )
 ;;-- end specs

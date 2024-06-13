@@ -223,7 +223,7 @@
   )
 
 (use-package! org-journal
-  :defer t
+  :after org
   :init
   ;; HACK `org-journal' adds a `magic-mode-alist' entry for detecting journal
   ;;      files, but this causes us lazy loaders a big problem: an unacceptable

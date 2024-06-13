@@ -278,10 +278,6 @@
                       :start +jg-python/open-repl
                       :send  python-shell-send-region
                       )
-                    '(ipython
-                      :start +jg-python/open-ipython-repl
-                      :send  python-shell-send-region
-                      )
                     )
 (spec-handling-add! yas-extra
                     '(node-mode node-mode)

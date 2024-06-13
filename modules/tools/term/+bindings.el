@@ -48,7 +48,7 @@
       )
 
 
-(after! '(shell comint)
+(after! (shell comint)
   (setq shell-mode-map jg-term-shell-mode-map
         comint-mode-map jg-term-comint-mode-map
         )

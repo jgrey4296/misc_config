@@ -120,7 +120,7 @@
       neo-show-hidden-files nil
       neo-keymap-style 'concise
       )
-(after! 'dired-omit-files-set
+(after! dired-omit-files-set
   (setq neo-hidden-regexp-list (list dired-omit-files))
   )
 

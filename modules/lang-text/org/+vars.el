@@ -19,7 +19,7 @@
 ;; Save target buffer after archiving a node.
 (setq org-archive-subtree-save-file-p t)
 
-(after! 'ol
+(after! ol
   (push '("Scholar" . "https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q=%s") org-link-abbrev-alist)
   )
 

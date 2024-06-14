@@ -13,26 +13,34 @@
   :choices librarian-browser-variants
   )
 
-(transient-make-mode-toggle! librarian-mode "Librarian" "b")
+(transient-make-mode-toggle! librarian-mode (propertize "Librarian" 'face 'transient-heading) "!")
 (progn
     (transient-make-call! librarian-browser-select "b" (format "Browser: %10s" librarian-default-browser)
                         :transient nil
                         (librarian-browser-select)
                         )
+    (transient-make-call! librarian-rebuild-database "r" "Rebuild Database"
+                          :transient nil
+                          (librarian-tagging-mode-rebuild-tag-database)
+                          )
   )
 
-(transient-make-subgroup! librarian-settings "B"
+(transient-make-subgroup! librarian-settings "b"
                           "For controlling librarian"
                           :desc "|| Librarian  ||"
-                          [[
-                            (transient-macro-call-librarian-browser-select)
-
-
-                            ]]
+                          ["Global"
+                           (transient-macro-toggle-librarian-mode)
+                           ]
+                          ["Settings"
+                           (transient-macro-call-librarian-browser-select)
+                           ]
+                          ["Triggers"
+                           (transient-macro-call-librarian-rebuild-database)
+                           ]
                           )
 
 
 ;;;###autoload
 (defun +jg-librarian-add-librarian-transient ()
-  (transient-append-suffix 'jg-toggle-main "w" librarian-settings)
+  (transient-append-suffix 'jg-toggle-main '(1 1 0) librarian-settings)
   )

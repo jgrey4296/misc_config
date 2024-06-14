@@ -8,11 +8,12 @@
 
 ;;;###autoload
 (defun +jg-processes-tree ()
+  "get the process tree for this emac"
   (interactive)
   (with-current-buffer (get-buffer-create "*PSTree*")
     (read-only-mode -1)
     (erase-buffer)
-    (call-process "pstree" nil t nil "-p" (format "%s" (emacs-pid)) "-w")
+    (call-process "pstree" nil t nil "-p" (format "%s" (emacs-pid)))
     (read-only-mode 1)
     )
   (display-buffer (get-buffer "*PSTree*"))
@@ -20,11 +21,12 @@
 
 ;;;###autoload
 (defun +jg-processes-tree-all ()
+  "get the entire system process tree"
   (interactive)
   (with-current-buffer (get-buffer-create "*PSTree*")
     (read-only-mode -1)
     (erase-buffer)
-    (call-process "pstree" nil t nil "-w")
+    (call-process "pstree" nil t nil)
     (read-only-mode 1)
     )
   (display-buffer (get-buffer "*PSTree*"))

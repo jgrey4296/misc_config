@@ -87,6 +87,16 @@
       doom-modeline-icon nil
       )
 
+(setq
+ ;; mode-line-format nil
+ ;; header-line-format nil
+ frame-title-format '("EMACS : %b")
+ ;; transient-mode-line-format nil
+ ;; tab-line-format nil
+ )
+
+
+
 ;;-- end modeline
 
 ;;-- treemacs
@@ -110,7 +120,7 @@
       neo-show-hidden-files nil
       neo-keymap-style 'concise
       )
-(after! 'dired-omit-files-set
+(after! dired-omit-files-set
   (setq neo-hidden-regexp-list (list dired-omit-files))
   )
 

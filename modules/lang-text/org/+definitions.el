@@ -1,43 +1,20 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
-(defvar +org-babel-native-async-langs '(python)
-  "Languages that will use `ob-comint' instead of `ob-async' for `:async'.")
+;;-- locations
 
-(defvar +org-babel-mode-alist
-  '((c . C)
-    (cpp . C)
-    (C++ . C)
-    (D . C)
-    (elisp . emacs-lisp)
-    (sh . shell)
-    (bash . shell)
-    (matlab . octave)
-    (rust . rustic-babel)
-    (amm . ammonite))
-  "An alist mapping languages to babel libraries. This is necessary for babel
-libraries (ob-*.el) that don't match the name of the language.
-
-For example, (fish . shell) will cause #+begin_src fish blocks to load
-ob-shell.el when executed.")
-
-(defvar +org-babel-load-functions ()
-  "A list of functions executed to load the current executing src block. They
-take one argument (the language specified in the src block, as a string). Stops
-at the first function to return non-nil.")
-
-(defvar +org-capture-todo-file "todo.org"
+(defvar +org-capture-todo-file nil
   "Default target for todo entries.
 
 Is relative to `org-directory', unless it is absolute. Is used in Doom's default
 `org-capture-templates'.")
 
-(defvar +org-capture-changelog-file "changelog.org"
+(defvar +org-capture-changelog-file nil
   "Default target for changelog entries.
 
 Is relative to `org-directory' unless it is absolute. Is used in Doom's default
 `org-capture-templates'.")
 
-(defvar +org-capture-notes-file "notes.org"
+(defvar +org-capture-notes-file nil
   "Default target for storing notes.
 
 Used as a fall back file for org-capture.el, for templates that do not specify a
@@ -46,14 +23,45 @@ target file.
 Is relative to `org-directory', unless it is absolute. Is used in Doom's default
 `org-capture-templates'.")
 
-(defvar +org-capture-journal-file "journal.org"
+(defvar +org-capture-journal-file nil
   "Default target for storing timestamped journal entries.
 
 Is relative to `org-directory', unless it is absolute. Is used in Doom's default
 `org-capture-templates'.")
 
-(defvar +org-capture-projects-file "projects.org"
+(defvar +org-capture-projects-file nil
   "Default, centralized target for org-capture templates.")
+
+(defvar jg-org-link-move-base "/Volumes/Overflow/missing_images/")
+
+(defvar jg-org-twitter-loc "/Volumes/documents/twitter_threads/")
+
+;; Set to nil so we can detect user changes to them later (and fall back on
+;; defaults otherwise).
+
+(defvar org-directory nil)
+
+(defvar org-id-locations-file nil)
+
+(defvar org-attach-id-dir nil)
+;;-- end locations
+
+;;-- babel
+
+(defvar +org-babel-native-async-langs '(python)
+  "Languages that will use `ob-comint' instead of `ob-async' for `:async'.")
+
+(defvar +org-babel-mode-alist nil
+  "An alist mapping languages to babel libraries. This is necessary for babel
+libraries (ob-*.el) that don't match the name of the language.
+
+For example, (fish . shell) will cause #+begin_src fish blocks to load
+ob-shell.el when executed.")
+
+(defvar org-babel-python-command nil)
+;;-- end babel
+
+;;-- habit
 
 (defvar +org-habit-graph-padding 2
   "The padding added to the end of the consistency graph")
@@ -64,6 +72,8 @@ Is relative to `org-directory', unless it is absolute. Is used in Doom's default
 (defvar +org-habit-graph-window-ratio 0.3
   "The ratio of the consistency graphs relative to the window width")
 
+;;-- end habit
+
 (defvar +org-startup-with-animated-gifs nil
   "If non-nil, and the cursor is over a gif inline-image preview, animate it!")
 
@@ -72,44 +82,19 @@ Is relative to `org-directory', unless it is absolute. Is used in Doom's default
 
 (defvar org-crypt-key nil)
 
+;;-- evil
 (defvar evil-org-retain-visual-state-on-shift t)
 
 (defvar evil-org-special-o/O '(table-row))
 
 (defvar evil-org-use-additional-insert t)
 
-;; Set to nil so we can detect user changes to them later (and fall back on
-;; defaults otherwise).
-
-(defvar org-directory nil)
-
-(defvar org-id-locations-file nil)
-
-(defvar org-attach-id-dir nil)
-
-(defvar org-babel-python-command nil)
-
-(setq org-persist-directory (concat doom-cache-dir "org/persist/")
-      org-publish-timestamp-directory (concat doom-cache-dir "org/timestamps/")
-      org-preview-latex-image-directory (concat doom-cache-dir "org/latex/")
-      ;; Recognize a), A), a., A., etc -- must be set before org is loaded.
-      org-list-allow-alphabetical t)
+;;-- end evil
 
 ;; Make most of the default modules opt-in to lighten its first-time load
 ;; delay. I sincerely doubt most users use them all.
 
-(defvar org-modules
-  '(;; ol-w3m
-    ;; ol-bbdb
-    ol-bibtex
-    ;; ol-docview
-    ;; ol-gnus
-    ;; ol-info
-    ;; ol-irc
-    ;; ol-mhe
-    ;; ol-rmail
-    ;; ol-eww
-    ))
+(defvar org-modules '(ol-bibtex))
 
 (defvar jg-org-external-file-link-types '("jpg" "jpeg" "png" "mp4" "html"))
 
@@ -117,6 +102,8 @@ Is relative to `org-directory', unless it is absolute. Is used in Doom's default
 
 (defvar jg-org-preferred-linecount 1500)
 
-(defvar jg-org-link-move-base "/Volumes/Overflow/missing_images/")
-
-(defvar jg-org-twitter-loc "/Volumes/documents/twitter_threads/")
+(defvar-local jg-org-startup-agenda nil)
+(defvar-local jg-org-startup-reference nil)
+(defvar-local jg-org-startup-package nil)
+(defvar jg-org-startup-reference-files nil "Files that are used for reference")
+(defvar jg-org-startup-package-files nil)

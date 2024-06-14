@@ -1,6 +1,6 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
-(spec-handling-add! lookup-regular
+(spec-handling-add! librarian-regular
                     '(nix-mode
                       ("Nix Reference" . "https://nixos.org/learn.html")
                       ("Nix Language" . "https://nixos.org/guides/nix-language.html")
@@ -29,6 +29,6 @@
                       )
                     )
 
-(spec-handling-add! eval
-                    `(nix-mode :start ,#'+nix/open-repl)
+(spec-handling-add! repl
+                    '(nix-mode :start +nix/open-repl)
                     )

@@ -23,7 +23,7 @@
                       )
                     )
 
-(spec-handling-add! lookup-regular
+(spec-handling-add! librarian-regular
                     '(ocaml-mode
                       ("OCaml Reference" . "https://v2.ocaml.org/releases/5.0/htmlman/index.html")
                       ("Ocaml Tutorial" . "https://ocaml.org/docs/up-and-running")
@@ -44,10 +44,10 @@
                       )
                     )
 
-(spec-handling-add! eval
-                    `(sml-mode :start ,#'run-sml)
-                    `(tuareg-mode
-                      :start ,#'utop
-                      :send ,#'utop-eval-region
+(spec-handling-add! repl
+                    '(sml-mode :start run-sml)
+                    '(tuareg-mode
+                      :start utop
+                      :send utop-eval-region
                       )
                     )

@@ -58,7 +58,8 @@ Meant for `org-mode-hook'."
   (when (featurep 'evil)
     (add-hook 'evil-insert-state-exit-hook #'+org-realign-table-maybe-h nil t)
     (add-hook 'evil-replace-state-exit-hook #'+org-realign-table-maybe-h nil t)
-    (advice-add 'evil-replace :after #'+org-realign-table-maybe-a)))
+    (advice-add 'evil-replace :after #'+org-realign-table-maybe-a))
+  )
 
 ;;;###autoload
 (defun +org-delete-backward-char-and-realign-table-maybe-h ()

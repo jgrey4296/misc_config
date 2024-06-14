@@ -27,7 +27,8 @@
   :commands conf-mode conf-toml-mode
   :config
 
-  (add-hook! 'conf-toml-mode-hook :depth 100
+  (add-hook! 'conf-toml-mode-hook :depth 99
+             #'abbrev-mode
              #'outline-minor-mode
              #'general-insert-minor-mode
              )

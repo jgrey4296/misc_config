@@ -76,22 +76,6 @@
   )
 
 ;;;###autoload
-(defun +jg-org-list-agenda-files ()
-  " Creates a temporary, Org-mode buffer with links to agenda files "
-  (interactive)
-  (with-output-to-temp-buffer "*Agenda Files*"
-    (set-buffer "*Agenda Files*")
-    (insert "Agenda Files: ")
-    (insert "\n")
-    (mapc (lambda (x)
-            (let ((file_name (last (split-string x "/" t ".org"))))
-              (insert (format "[[%s][%s]]\n" x file_name))
-              )) org-agenda-files)
-    (org-mode)
-    )
-  )
-
-;;;###autoload
 (defun +jg-org-split-on-headings ()
   " Split an org file into multiple smaller buffers non-destructively "
   (interactive)
@@ -199,6 +183,3 @@ Sort, align, split, save "
 				    (org-element-property :path link))))
 	     (or rules org-export-default-inline-image-rule)))
   )
-
-;;;###autoload
-(advice-add 'org-export-inline-image-p :override #'+jg-org-inline-image-override)

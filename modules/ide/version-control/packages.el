@@ -5,6 +5,10 @@
 
 (package! code-review :recipe (:files ("graphql" "code-review*.el")))
 
+(package! conventional-changelog)
+(package! git-cliff)
+(package! markdown-changelog)
+
 (package! fringe :built-in t)
 (package! vi-tilde-fringe)
 

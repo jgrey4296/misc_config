@@ -51,13 +51,13 @@
 
 (spec-handling-add! file-templates
                     '(rust
-                     ("config\\.toml$"   :trigger "__config.toml" :mode rust-mode)
-                     ("Cargo\\.toml$"    :trigger "__Cargo.toml"  :mode rust-mode)
-                     ("mod\\.rs$"        :trigger "__mod.rs"      :mode rust-mode)
-                     ("main\\.rs$"       :trigger "__main.rs"     :mode rust-mode)
-                     ("lib\\.rs$"        :trigger "__lib.rs"      :mode rust-mode)
-                     ("tests\\.rs"       :trigger "__tests.rs"    :mode rust-mode)
-                     ("build\\.rs"       :trigger "__build.rs"    :mode rust-mode)
+                     ("config\\.toml$"   :trigger "__rust_config"      :mode conf-toml-mode)
+                     ("Cargo\\.toml$"    :trigger "__cargo"            :mode conf-toml-mode)
+                     ("mod\\.rs$"        :trigger "__mod.rs"           :mode rust-mode)
+                     ("main\\.rs$"       :trigger "__main.rs"          :mode rust-mode)
+                     ("lib\\.rs$"        :trigger "__lib.rs"           :mode rust-mode)
+                     ("tests\\.rs"       :trigger "__tests.rs"         :mode rust-mode)
+                     ("build\\.rs"       :trigger "__build.rs"         :mode rust-mode)
                      (rustic-mode        :trigger "__"            :priority -98)
                      (rust-mode          :trigger "__"            :priority -99)
                      )

@@ -20,12 +20,14 @@
 
 (defvar inferior-clips-program  "CLIPS Console")
 
+(spec-handling-add! repl
+                    '(clips-mode  :start +clips-mode/open-repl)
+                    '(instal-mode :start +instal-mode/open-repl)
+                    '(soar-mode   :start +soar-mode/open-repl)
+                    '(ceptre-mode :start +ceptre-mode/open-repl)
+                    )
 (spec-handling-add! eval
-                    `(clips-mode  :start ,#'+clips-mode/open-repl)
-                    `(instal-mode :start ,#'+instal-mode/open-repl)
-                    `(soar-mode   :start ,#'+soar-mode/open-repl)
-                    `(ceptre-mode :start ,#'+ceptre-mode/open-repl)
-                    `(pasp-mode   :eval ,#'+jg-pasp-eval)
+                    '(pasp-mode   :fn +jg-pasp-eval)
                     )
 
 ;;-- specs
@@ -63,6 +65,21 @@
                     '(jacamo
                       ("\\.\\(jcm\\|mas2j\\)\\'" . jacamo-mode)
                       ("\\.asl\\'" . agentspeak-mode)
+                      )
+                    )
+
+(spec-handling-add! babel
+                    '(logic
+                      (:name prolog     :lib ob-prolog :mode prolog)
+                      (:name clingo     :lib ob-prolog :mode pasp)
+                      (:name ccalc      :lib ob-prolog :mode prolog)
+                      (:name instal     :lib ob-instal :mode instal)
+                      (:name z3         :lib ob-z3 :mode z3)
+                      (:name ceptre     :lib ob-ceptre)
+                      )
+                    '(agents
+                      (:name soar :lib ob-soar :mode soar-mode)
+                      (:name clips :lib ob-clips :mode clips-mode)
                       )
                     )
 ;;-- end specs

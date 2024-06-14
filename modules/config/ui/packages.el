@@ -21,7 +21,7 @@
 
 (package! font-lock+       :recipe (:host github :repo "emacsmirror/font-lock-plus"))
 (package! palette-mode     :recipe (:host github :repo "jgrey4296/misc-modes" :files ("major-modes/palette-mode/*.el") :local-repo "misc-modes"))
-(package! transient-macros :recipe (:host github :repo "jgrey4296/transient-macros"))
+(package! transient-macros :recipe (:host github :repo "jgrey4296/jg-el-macros" :files ("transient-macros.el") :local-repo "jg-el-macros"))
 
 (package! treemacs)
 (package! treemacs-evil)

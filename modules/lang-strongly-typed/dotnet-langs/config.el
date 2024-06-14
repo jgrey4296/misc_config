@@ -4,35 +4,18 @@
 (defer-load! jg-bindings-total "+bindings")
 
 (use-package! csharp-mode
-  :commands csharp-mode
-  :hook (csharp-mode . rainbow-delimiters-mode)
+  :commands csharp-mode csharp-ts-mode
   :config
-
   (sp-local-pair 'csharp-mode "<" ">"
                  :when '(+csharp-sp-point-in-type-p)
                  :post-handlers '(("| " "SPC")))
 
-  (defadvice! +csharp-disable-clear-string-fences-a (fn &rest args)
-    "This turns off `c-clear-string-fences' for `csharp-mode'. When
-on for `csharp-mode' font lock breaks after an interpolated string
-or terminating simple string."
-    :around #'csharp-disable-clear-string-fences
-    (unless (eq major-mode 'csharp-mode)
-      (apply fn args)))
-
-  (add-hook! 'csharp-mode-hook
+  (add-hook! '(csharp-mode-hook csharp-ts-mode-hook)
+             #'rainbow-delimiters-mode
              #'general-insert-minor-mode
+             #'origami-mode
              )
   )
-
-;; (use-package! csharp-tree-sitter
-;;   :after csharp-mode
-;;   :init
-;;   (add-hook 'csharp-mode-local-vars-hook #'tree-sitter! 'append)
-;;   (when (fboundp #'csharp-tree-sitter-mode)
-;;     (add-to-list 'auto-mode-alist '("\\.cs\\'" . csharp-tree-sitter-mode))
-;;     )
-;;   )
 
 (use-package! fsharp-mode
   :commands fsharp-mode
@@ -73,3 +56,7 @@ or terminating simple string."
 (use-package! sln-mode
   :after csharp-mode
   )
+
+(use-package! csproj-mode
+    :defer t
+)

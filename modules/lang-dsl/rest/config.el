@@ -11,15 +11,7 @@
 
   (setq-hook! 'restclient-mode-hook
     imenu-generic-expression '((nil "^[A-Z]+\s+.+" 0)))
-
-  (defadvice! +rest--permit-self-signed-ssl-a (fn &rest args)
-    "Forces underlying SSL verification to prompt for self-signed or invalid
-certs, rather than reject them silently."
-    :around #'restclient-http-do
-    (require 'gnutls)
-    (let (gnutls-verify-error)
-      (apply fn args)))
-
+  (advice-add 'restclient-http-do :around #'+rest--permit-self-signed-ssl-a)
  )
 
 (use-package! company-restclient

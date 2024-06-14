@@ -7,9 +7,6 @@
         ((expand-file-name ".project" (projectile-project-root))))
   )
 
-;;;###autoload
-(advice-add 'projectile-dirconfig-file :override #'doom--projectile-dirconfig-file-a)
-
 ;; HACK Don't rely on VCS-specific commands to generate our file lists. That's
 ;;      7 commands to maintain, versus the more generic, reliable and
 ;;      performant `fd' or `ripgrep'.
@@ -26,9 +23,6 @@ And if it's a function, evaluate it."
       (funcall fn vcs))))
 
 ;;;###autoload
-(advice-add 'projectile-get-ext-command :around #'doom--only-use-generic-command-a)
-
-;;;###autoload
 (defun doom--projectile-default-generic-command-a (fn &rest args)
   "If projectile can't tell what kind of project you're in, it issues an error
 when using many of projectile's command, e.g. `projectile-compile-command',
@@ -38,9 +32,6 @@ when using many of projectile's command, e.g. `projectile-compile-command',
 This suppresses the error so these commands will still run, but prompt you for
 the command instead."
   (ignore-errors (apply fn args)))
-
-;;;###autoload
-(advice-add 'projectile-default-generic-command :around #'doom--projectile-default-generic-command-a)
 
 ;;;###autoload
 (defun +workspaces--evil-alternate-buffer-a (&optional window)
@@ -64,9 +55,3 @@ the command instead."
     ;;      getter/setter not being defined in time.
     (setf (aref persp 2)
           (cl-delete-if-not #'persp-get-buffer-or-null (persp-buffers persp)))))
-
-;;;###autoload
-(advice-add 'evil-alternate-buffer :override #'+workspaces--evil-alternate-buffer-a)
-
-;;;###autoload
-(advice-add 'persp-buffers-to-savelist :before #'+workspaces-remove-dead-buffers-a)

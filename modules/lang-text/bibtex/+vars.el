@@ -38,13 +38,6 @@
                      ("Arxiv"             "https://arxiv.org/abs/%s")
                      )
                     )
-(spec-handling-add! tagging
-                    '(bibtex-mode
-                     :set  +jg-bibtex-set-tags
-                     :new  +jg-bibtex-set-new-tag
-                     :get  +jg-bibtex-get-tags
-                     )
-                    )
 (spec-handling-add! whitespace-cleanup
                     '(bibtex-mode
                      +jg-bibtex-cleanup-ensure-newline-before-def
@@ -52,7 +45,7 @@
                      +jg-text-cleanup-whitespace
                      )
                     )
-(spec-handling-add! lookup-regular
+(spec-handling-add! librarian-regular
                     '(bibtex-mode
                      ("bibtex reference" . "https://www.bibtex.com/g/bibtex-format/")
                      ("Diacritics" . "https://en.wikibooks.org/wiki/LaTeX/Special_Characters")

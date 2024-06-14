@@ -65,12 +65,13 @@
 ;;-- zimmerframe
 (progn
   (transient-make-mode-toggle! project-zimmerframe-minor-mode "Zimmerframe" "RET")
-  (transient-make-int-call! zimmerframe-default-filters "SPC" "Apply Default Filters" #'zimmerframe-filter-defaults)
+  (transient-make-int-call! zimmerframe-default-filters "SPC" "Apply Default Filters"        #'zimmerframe-filter-defaults)
   (transient-make-int-call! zimmerframe-remaining "b" "Remaining List Buffer" :transient nil #'zimmerframe-remaining)
-  (transient-make-int-call! zimmerframe-count   "r"  "Remaining Count" #'zimmerframe-num)
-  (transient-make-int-call! zimmerframe-dir     "d"  "Set Target Directory" #'zimmerframe-directory-init)
-  (transient-make-int-call! zimmerframe-filter  "f"  "Filter " #'zimmerframe-filter)
-  (transient-make-int-call! zimmerframe-keep    "k"  "Keep"    #'zimmerframe-filter-keep)
+  (transient-make-int-call! zimmerframe-count   "r"  "Remaining Count"                       #'zimmerframe-num)
+  (transient-make-int-call! zimmerframe-dir     "d"  "Set Target Directory"                  #'zimmerframe-directory-init)
+  (transient-make-int-call! zimmerframe-filter  "f"  "Filter "                               #'zimmerframe-filter)
+  (transient-make-int-call! zimmerframe-keep    "k"  "Keep"                                  #'zimmerframe-filter-keep)
+  (transient-make-int-call! zimmerframe-replace "R"  "Replace Regexp"                        #'zimmerframe-replace-regexp)
   )
 
 (transient-make-subgroup! transient-zimmerframe-control "z"
@@ -79,17 +80,22 @@
                                                                            (zimmerframe-remaining-count)
                                                                          0)))
                           [
-                           [
+                           ["Mode"
                             (transient-macro-toggle-project-zimmerframe-minor-mode)
-                            (transient-macro-call-zimmerframe-default-filters)
                             ]
-                           [
+                           ]
+                          [
+                           ["Inspect"
                             (transient-macro-call-zimmerframe-remaining)
                             (transient-macro-call-zimmerframe-count)
                             ]
-                           [
+                           ["Filter"
+                            (transient-macro-call-zimmerframe-default-filters)
                             (transient-macro-call-zimmerframe-filter)
                             (transient-macro-call-zimmerframe-keep)
+                            ]
+                           ["Transform"
+                            (transient-macro-call-zimmerframe-replace)
                             ]
                            ]
                           )
@@ -102,7 +108,8 @@
 
   (transient-make-int-call! proj-add         "a"   "Add Project"               #'projectile-add-known-project)
   (transient-make-int-call! proj-clean       "c"   "Clean Project"             #'+jg-projects-clean)
-  (transient-make-int-call! proj-clear-known "D"   "Clear Project List Cache"  #'projectile-clear-known-projects)
+  (transient-make-call! proj-clear-known     "D"   "Clear Project List Cache"  (projectile-clear-known-projects) (clrhash projectile-project-root-cache))
+
   (transient-make-int-call! proj-cmd         "!"   "Project Cmd"               :transient nil #'projectile-run-shell-command-in-root)
   (transient-make-int-call! proj-compile     "c"   "Compile Project"           :transient nil #'projectile-compile-project)
   (transient-make-int-call! proj-config      "e"   "Project Editor Config"     :transient nil #'editorconfig-find-current-editorconfig)
@@ -113,7 +120,7 @@
   (transient-make-int-call! proj-finder      "F"   "Reveal in Finder"          :transient nil #'+macos/reveal-project-in-finder)
   (transient-make-int-call! proj-kill        "K"   "Kill Project Buffers"      #'projectile-kill-buffers)
   (transient-make-int-call! proj-recent      "-fr"   "Project Recent"                 :transient nil #'projectile-recentf)
-  (transient-make-int-call! proj-regexp      "r"   "Replace Regexp in Project"        :transient nil #'projectile-replace-regexp)
+  (transient-make-int-call! proj-regexp      "r"   "Replace Regexp in Project"        :transient nil #'zimmerframe-replace-regexp)
   (transient-make-int-call! proj-related     "R"   "Project Related"                  :transient nil #'+jg-projects-find-related)
   (transient-make-int-call! proj-replace     "s"   "Replace String in Project"        :transient nil #'projectile-replace)
   (transient-make-int-call! proj-run         "r"   "Run Project"               #'projectile-run-project)
@@ -241,6 +248,22 @@
 (transient-define-prefix transient-workspace ()
   ""
   [
+   ["Global"
+    (transient-macro-toggle-auto-balance)
+    transient-all-projects
+    ]
+   [""
+    (transient-macro-toggle-project-zimmerframe-minor-mode)
+    transient-zimmerframe-control
+    (transient-macro-call-zimmerframe-replace)
+    ]
+   ]
+  [
+   ["Settings"
+    (transient-macro-call-toggle-dedication)
+    ]
+   ]
+  [
    ["Project Locs"
     (transient-macro-call-goto-root)
     (transient-macro-call-proj-sidebar)
@@ -253,11 +276,9 @@
     (transient-macro-call-debug-project-type)
     (transient-macro-call-proj-clear-cache)
     ]
-   [" "
+   ["Project Subsections "
     transient-project-actions
     transient-project
-    transient-all-projects
-    transient-zimmerframe-control
     ]
    ]
   [
@@ -280,10 +301,6 @@
     (transient-macro-call-window-undo)
     (transient-macro-call-window-redo)
     ]
-   ["Window Settings"
-    (transient-macro-toggle-auto-balance)
-    (transient-macro-call-toggle-dedication)
-    ]
    ]
   ["Workspaces"
    ["New"]
@@ -292,12 +309,13 @@
    ["Select"]
    ["Shell"]
    ]
-  [
-   ["Workspace Settings"
-    ""
-    ]
-   ]
   transient-quit!
   )
+
+;;;###autoload
+(defun +jg-workspaces-add-transients ()
+    (transient-append-suffix 'jg-toggle-main '(1 1 0)  transient-zimmerframe-control)
+    )
+
 
 ;;-- end workspace

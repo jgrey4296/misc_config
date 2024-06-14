@@ -17,11 +17,6 @@
         ret)))
 
 ;;;###autoload
-(advice-add 'elisp-get-var-docstring :around #'+emacs-lisp-append-value-to-eldoc-a)
-
-;;;###autoload (put 'map! 'indent-plists-as-data t)
-
-;;;###autoload
 (defun +emacs-lisp--calculate-lisp-indent-a (&optional parse-start)
   "Add better indentation for quoted and backquoted lists.
 
@@ -223,14 +218,6 @@ Adapted from URL `https://www.reddit.com/r/emacs/comments/d7x7x8/finally_fixing_
               ;; in this case calculate-lisp-indent-last-sexp is nil
               (desired-indent)
               (normal-indent))))))
-
-;; Fixed indenter that intends plists sensibly.
-;;;###autoload
-(advice-add 'calculate-lisp-indent :override #'+emacs-lisp--calculate-lisp-indent-a)
-
-;; Recenter window after following definition
-;;;###autoload
-(advice-add 'elisp-def :after #'doom-recenter-a)
 
 ;;;###autoload
 (defun +jg-lisp-add-elisp-demos (fn symbol)

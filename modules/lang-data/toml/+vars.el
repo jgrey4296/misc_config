@@ -15,13 +15,11 @@
                       ,#'+jg-text-cleanup-whitespace
                       )
                     )
-
-(spec-handling-add! lookup-regular
+(spec-handling-add! librarian-regular
                     '(conf-toml-mode
                       ("toml spec" . "https://toml.io/en/v1.0.0")
                       )
                     )
-
 (spec-handling-add! auto-modes
                     '(toml
                       ("\\.toml\\'" . conf-toml-mode)

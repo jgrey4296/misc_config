@@ -27,7 +27,8 @@
 (use-package! shell
   :config
   (add-hook 'shell-mode-hook #'doom-mark-buffer-as-real-h)
-  (add-hook 'shell-mode-hook #'hide-mode-line-mode)
+  (add-hook 'shell-mode-hook #'+jg-term-shell-mode-setup-local-hook-h)
+  ;; (add-hook 'shell-mode-hook #'hide-mode-line-mode)
 
   )
 

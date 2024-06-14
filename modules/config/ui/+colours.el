@@ -12,6 +12,6 @@
 
 (use-package! rainbow-delimiters
   :config
-  (add-hook! 'doom-init-ui-hook  #'rainbow-delimiters-mode)
+  (add-hook! 'prog-mode-hook  #'rainbow-delimiters-mode)
   (setq rainbow-delimiters-max-face-count 4)
   )

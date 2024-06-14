@@ -4,13 +4,21 @@
 
 (defvar +mu4e-lock-file (expand-file-name "mu4e_lock" temporary-file-directory)
   "Location of the lock file which stores the PID of the process currenty running mu4e")
+
 (defvar +mu4e-lock-request-file (expand-file-name "mu4e_lock_request" temporary-file-directory)
   "Location of the lock file for which creating indicated that another process wants the lock to be released")
 
 (defvar +mu4e-lock-greedy nil
   "Whether to 'grab' the `+mu4e-lock-file' if nobody else has it, i.e. start Mu4e")
+
 (defvar +mu4e-lock-relaxed t
   "Whether if someone else wants the lock (signaled via `+mu4e-lock-request-file'), we should stop Mu4e and let go of it")
+
+(defvar +mu4e-lock--file-watcher nil)
+
+(defvar +mu4e-lock--file-just-deleted nil)
+
+(defvar +mu4e-lock--request-watcher nil)
 
 (defun +mu4e-lock-pid-info ()
   "Get info on the PID refered to in `+mu4e-lock-file' in the form (pid . process-attributes)
@@ -61,10 +69,6 @@ Else, write to this process' PID to the lock file"
     (file-notify-add-watch +mu4e-lock-request-file
                            '(change)
                            #'+mu4e-lock--request)))
-
-(defvar +mu4e-lock--file-watcher nil)
-(defvar +mu4e-lock--file-just-deleted nil)
-(defvar +mu4e-lock--request-watcher nil)
 
 (defun +mu4e-lock-add-watcher ()
   (setq +mu4e-lock--file-just-deleted nil)

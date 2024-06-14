@@ -1,10 +1,12 @@
 ;;; main/jg-org/+bindings.el -*- lexical-binding: t; -*-
 (doom-log "Setting up general access org bindings: %s" (current-time-string))
+(local-load! "util/+org-standard-bindings")
 
 (defvar jg-org-mode-map (make-sparse-keymap))
 (evil-make-overriding-map jg-org-mode-map)
+(set-keymap-parent jg-org-mode-map jg-org-base-map)
 
-(local-load! "util/+org-standard-bindings")
+(defvar jg-org-capture-map (make-sparse-keymap))
 
 (map! :leader
       :desc "Insert Timestamp"  "i t"   #'org-time-stamp
@@ -44,7 +46,7 @@
       "1" #'org-element-cache-reset
       :desc "New SubHeading"         "DEL" #'org-insert-subheading
       :desc "New Heading"            "RET" #'org-insert-heading
-      :desc "Refile"                 "R" #'+jg-org-refile-subtree
+      :desc "Refile"                 "r" #'+org/refile-to-visible
       :desc "Todo"                   "TAB" #'org-todo
       :desc "Lint"                   "L" #'org-lint
 
@@ -76,13 +78,6 @@
        :desc "Insert Structure"    "s" #'org-insert-structure-template
        )
       )
-
-(map! :map org-agenda-mode-map
-      :after org-agenda
-      :localleader
-      (:prefix ("d" . "Date/time"))
-      (:prefix ("c" . "Clock"))
-      (:prefix ("p" . "Priority")))
 
 (map! :map org-journal-mode-map
        :n "]f"  #'org-journal-next-entry
@@ -120,6 +115,15 @@
       :prefix "."
       :desc "Run Org Test" "T" #'+jg-org-test-org-file
       )
+(map! :map org-src-mode-map
+      :n "q" #'evil-edit-src-abort
+      :n "C-c C-c" #'evil-edit-src-save
+      :n "C-c C-k" #'evil-edit-src-abort
+      :localleader
+      "q" #'evil-edit-src-abort
+      "w" #'evil-edit-src-save
+
+      )
 
 (map! :map dired-mode-map
       :after jg-dired-bindings
@@ -136,10 +140,17 @@
        )
       )
 
+(map! :map jg-org-capture-map
+      :n "RET" #'org-capture-finalize
+      :n "q"   #'org-capture-kill
+      )
+
+
 (after! (evil-org org)
   (setq org-mode-map jg-org-mode-map
         evil-org-mode-map jg-org-mode-map
         minor-mode-map-alist (assq-delete-all 'evil-org-mode minor-mode-map-alist)
+        org-capture-mode-map jg-org-capture-map
         )
   (push (cons 'evil-org-mode jg-org-mode-map) minor-mode-map-alist)
 

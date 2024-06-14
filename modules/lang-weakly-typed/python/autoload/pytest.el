@@ -12,7 +12,7 @@
               (format "%s.log" (f-join (f-parent (buffer-file-name)) (f-base (buffer-file-name)))))
   )
 
-(transient-define-prefix python-pytest-dispatch ()
+(transient-define-prefix +jg-python-pytest-dispatch ()
   "Show popup for running pytest."
   :incompatible '(("--exitfirst" "--maxfail="))
   :value '("--color" "--exitfirst")
@@ -24,6 +24,7 @@
      ("-s" "no output capture" "--capture=no")
      ("-q" "quiet" "--quiet")
      (python-pytest:-v)
+     (python-pytest:-W)
      ]
    [ ("--tc" "Trace Config" "--trace-config")    ("--lc" "Log CLI" "--log-cli-level=INFO") ]
    ]
@@ -34,18 +35,21 @@
   ["Failures, errors, debugging"
    [("-l" "show locals" "--showlocals")
     ("-d" "debug on error" "--pdb")
-    ("-x" "exit after first failure" "--exitfirst" )
     ("-f" "failed first" "--failed-first")
+    ("-x" "exit after first failure" "--exitfirst" )
     ]
    [
-    ("--ft" "full tracebacks" "--full-trace")
     ("--mf" "exit after N failures or errors" "--maxfail=")
+    ("--tf" "full tracebacks" "--full-trace")
     ("--rx" "run xfail tests" "--runxfail")
-    ("--f" "loop on failure" "--looponfail")
     (python-pytest:--tb)
-    ("--tr" "debug on each test" "--trace")]]
+    ("--tr" "debug on each test" "--trace")
+
+    ]]
   ["Options for pytest-xdist"
-   [ (python-pytest:-n)   ]
+   [ (python-pytest:-n)
+     ("--f" "loop on failure" "--looponfail")
+     ]
    [  ]
    ]
   ["Run tests"
@@ -70,7 +74,7 @@
   )
 
 ;;;###autoload
-(defun +jg-python-pytest-dispatch ()
+(defun +jg-python-pytest ()
   (interactive)
-  (python-pytest-dispatch)
+  (+jg-python-pytest-dispatch)
   )

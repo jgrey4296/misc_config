@@ -7,6 +7,3 @@
    `company-dabbrev-code'. "
     (company-abort)
     )
-
-;;;###autoload
-(advice-add 'company-begin-backend :before #'+company--abort-previous-a)

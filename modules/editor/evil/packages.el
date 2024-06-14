@@ -24,5 +24,6 @@
 (package! evil-visualstar)
 (package! evil-textobj-tree-sitter)
 (package! exato)
+(package! evil-fringe-mark)
 
 (package! evil-collection)

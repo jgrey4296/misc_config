@@ -34,6 +34,7 @@
       :desc "Build Bibliography"  "B"     #'org-ref-build-full-bibliography
       :desc "Insert from DOI"     "d"     #'+jg-bibtex-insert-entry-from-doi
       :desc "Insert from PMID"    "p"     (cmd! (pubmed-insert-bibtex-from-pmid (read-string "PMID: ")))
+      :desc "Use Newest file"     "f"     #'+jg-bibtex-use-newest-file
       :desc "New Entry"           "n"     #'bibtex-entry
       :desc "New Entry Form"      "N"     #'+jg-bibtex-entry-form
       :desc "Get Meta"            "m"     #'+jg-bibtex-meta-retrieval

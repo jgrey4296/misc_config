@@ -5,7 +5,7 @@
   )
 
 
-(spec-handling-add! lookup-regular
+(spec-handling-add! librarian-regular
                     '(plantuml-mode
                      ("Plantuml Manual" . "https://plantuml.com/")
                      )
@@ -21,5 +21,11 @@
                     '(plantuml
                       ("\\.plantuml" . plantuml-mode)
                       ("\\.pu" . plantuml-mode)
+                      )
+                    )
+
+(spec-handling-add! babel
+                    '(plantuml
+                      (:name plantuml :lib ob-plantuml :mode plantuml)
                       )
                     )

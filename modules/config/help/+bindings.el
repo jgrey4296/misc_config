@@ -1,12 +1,14 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
 (defvar jg-help-map (make-keymap))
+
 (define-prefix-command 'jg-help-map nil "jgb-help")
 
 (map! :map jg-help-map
       "'"    #'describe-char
       "f"    #'counsel-describe-function
       "v"    #'counsel-describe-variable
+      "V"    #'+jg-help-describe-env-var
       "l"    #'view-lossage
       "t"    #'list-timers
       :desc "Major Mode match" "m"    (cmd! (message "Major Mode: %s" major-mode))
@@ -14,7 +16,6 @@
       "!"   #'doom-debug-mode
       "DEL" #'free-keys
     )
-
 
 ;;-- debug
 (map! :map jg-help-map

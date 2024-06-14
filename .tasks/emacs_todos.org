@@ -1,0 +1,60 @@
+#+TITLE: Emacs Todos
+#+STARTUP: agenda
+
+* Emacs
+** [∅] [#A] add comint-truncate-buffer to comint-output-filter-functions
+** [∅] add frames ops to workspace transient
+** [∅] bibtex
+*** [∅] map :type -> bibtex types
+*** [∅] remove empty fields
+*** [∅] use spec handler for jg-bibtex-completion-display-formats
+*** [∅] minimal bibtex library
+to remove need for ivy-bibtex, parsebib, citeproc, org-ref
+*** [∅] check bibtex uses librarian for meta retrieval
+and that librarian meta retrieval is using exif
+** [∅] bindings
+*** [∅] wipe global map C- and M-
+** [∅] Dired
+*** [∅] cookiecutter
+*** [∅] pdftotext
+*** [∅] add tesseract binding dired bindings
+** [∅] doot call from toml
+** [∅] flycheck config refactor
+
+** [∅] ibuffer temp group by marked
+** [∅] new eval module
+** [∅] org babel for chuck
+
+** [∅] Proof general
+*** [∅] repl popup instead of override window layout
+** [∅] python
+*** [∅] refine add-import
+*** [∅] add __init__.py to new dired directories if in py project
+*** [∅] bots :bots:
+**** [∅] boards of directors
+** [∅] quick doot
+** [∅] refactor doom specific -> general
+** [∅] refactor workspaces into a package
+
+** [∅] replace def-project-mode!
+
+** [∅] server
+
+** [∅] template access ivy
+instead of spc y [1-7], do spc-y-ret and dynamically drill into templates repo
+
+** [∅] spc p t : ivy-TODO selector
+
+* Org
+** [∅] diary jump
+** [∅] archive jump
+** [∅] journal jump
+** [∅] notes
+** [∅] projects
+
+** [∅] capture
+*** [∅] reimplement +org-capture-project-[todo|notes|changelog]-file
+to use for templates, to find relevant project file
+** [∅] org-goto-clock popup buffer not as same window
+
+* Links

@@ -23,20 +23,14 @@ buffer rather than an overlay on the line at point or the minibuffer.")
 
 
 (spec-handling-add! popup
-                    `(eval
-                      (,#'(lambda (bufname _) (when (boundp '+eval-repl-mode) (buffer-local-value '+eval-repl-mode (get-buffer bufname))))
-                       :ttl ,#'(lambda (buf) (unless (plist-get +eval-repl-plist :persist)
-                                               (when-let (process (get-buffer-process buf))
-                                                 (set-process-query-on-exit-flag process nil)
-                                                 (kill-process process)
-                                                 (kill-buffer buf))))
-                       :size 0.25 :quit nil)
-                      )
                     '(quickrun
                       ("^\\*quickrun" :size 0.3 :ttl 0)
                       )
                     '(compilation
                       ("\\*compilation\\*" :quit t :select nil :height 0.2 :priority 20)
+                      )
+                    `(repl
+                      (,(format "\\%s\\*\\'" +eval-repl-buffer-name) :quit nil :select t :ttl -1 :side right :width 0.3 :priority 50)
                       )
                     )
 

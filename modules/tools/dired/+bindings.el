@@ -41,6 +41,7 @@
       :n "m"                                      #'dired-mark
       :n "u"                                      #'dired-unmark
       :n "U"                                      #'dired-unmark-all-marks
+      :n "C"                                      #'dired-compare-directories
 
       :prefix ("M" . "Mark")
       :desc "flag garbage files"           :n "x" #'dired-flag-garbage-files

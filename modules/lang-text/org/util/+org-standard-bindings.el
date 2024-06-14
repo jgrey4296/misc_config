@@ -2,8 +2,9 @@
 ;; Misc
 (doom-log "Setting up org main bindings: %s" (current-time-string))
 
+(defvar jg-org-base-map (make-keymap))
 ;; Leaderless
-(map! :map jg-org-mode-map
+(map! :map jg-org-base-map
       ;; textmate-esque newline insertion
       ;; "S-RET"      #'+org/shift-return
       ;; "C-RET"      #'+org/insert-item-below
@@ -22,7 +23,7 @@
       [tab]        #'org-cycle
       )
 ;; Local Leader
-(map! :map jg-org-mode-map
+(map! :map jg-org-base-map
       :localleader
       :desc "update-statistics-cookies" "#" #'org-update-statistics-cookies
       :desc "edit-special"              "'" #'org-edit-special
@@ -37,7 +38,7 @@
       :desc "todo-list"                 "T" #'org-todo-list
       )
 ;; <A> Attachments
-(map! :map jg-org-mode-map
+(map! :map jg-org-base-map
       :localleader
       :prefix ("a" . "attachments")
       :desc "attach"                            "a" #'org-attach
@@ -55,7 +56,7 @@
       :desc "attach-sync"                       "S" #'org-attach-sync
       )
 ;; <B> Tables
-(map! :map jg-org-mode-map
+(map! :map jg-org-base-map
       :localleader
       :prefix ("b" . "tables")
       :desc "table-insert-hline"                   "-" #'org-table-insert-hline
@@ -79,7 +80,7 @@
        :desc "plot/gnuplot"                        "p" #'org-plot/gnuplot
       )
 ;; <C> Clock
-(map! :map jg-org-mode-map
+(map! :map jg-org-base-map
       :localleader
       :prefix ("c" . "clock")
       :desc "clock-cancel"                  "c" #'org-clock-cancel
@@ -99,7 +100,7 @@
       :desc "clock-timestamps-down"         "-" #'org-clock-timestamps-down
       )
 ;; <D> Dates
-(map! :map jg-org-mode-map
+(map! :map jg-org-base-map
       :localleader
       :prefix ("d" . "date/deadline")
       :desc "deadline"             "d" #'org-deadline
@@ -108,13 +109,13 @@
       :desc "time-stamp-inactive"  "T" #'org-time-stamp-inactive
       )
 ;; <F> Formatting
-(map! :map jg-org-mode-map
+(map! :map jg-org-base-map
       :localleader
       :prefix ("f" . "Format")
 
       )
 ;; <G> Goto
-(map! :map jg-org-mode-map
+(map! :map jg-org-base-map
       :localleader
       :prefix ("g" . "goto")
       :desc "goto"                              "g" #'org-goto
@@ -128,7 +129,7 @@
       :desc "capture-goto-last-stored"          "x" #'org-capture-goto-last-stored
       )
 ;; <I> Insert
-(map! :map jg-org-mode-map
+(map! :map jg-org-base-map
       :localleader
       :prefix ("i" . "Insert")
       :desc "todo"                     "T" #'org-todo
@@ -139,7 +140,7 @@
       :desc "insert new id"            "I" #'org-id-get-create
       )
 ;; <L> Links
-(map! :map jg-org-mode-map
+(map! :map jg-org-base-map
       :localleader
       :prefix ("l" . "links")
       :desc "cliplink"                 "c" #'org-cliplink
@@ -151,7 +152,7 @@
       :desc "insert-last-stored-link"  "S" #'org-insert-last-stored-link
       )
 ;; <P> Publish
-(map! :map jg-org-mode-map
+(map! :map jg-org-base-map
       :localleader
       :prefix ("P" . "publish")
       :desc "publish-all"              "a" #'org-publish-all
@@ -161,9 +162,9 @@
       :desc "publish-sitemap"          "s" #'org-publish-sitemap
       )
 ;; <R> Refile
-(map! :map jg-org-mode-map
+(map! :map jg-org-base-map
       :localleader
-      :prefix ("r" . "refile")
+      :prefix ("R" . "refile")
       :desc "refile-to-current-file"   "." #'+org/refile-to-current-file
       :desc "refile-to-running-clock"  "c" #'+org/refile-to-running-clock
       :desc "refile-to-last-location"  "l" #'+org/refile-to-last-location
@@ -174,7 +175,7 @@
       :desc "refile"                   "r" #'org-refile ; to all `org-refile-targets'
       )
 ;; <S> Subtree
-(map! :map jg-org-mode-map
+(map! :map jg-org-base-map
       :localleader
       :prefix ("s" . "Tree/Subtree")
       :desc "tree-to-indirect-buffer"             "b" #'org-tree-to-indirect-buffer
@@ -194,7 +195,7 @@
        :desc "priority-up"                        "k" #'org-priority-up)
       )
 ;; <T> Toggle
-(map! :map jg-org-mode-map
+(map! :map jg-org-base-map
       :localleader
       :prefix ("t" . "Toggle")
       :desc "archive-tag"                  "a" #'org-toggle-archive-tag
@@ -208,7 +209,7 @@
        :desc "coordinate-overlays"  "o" #'org-table-toggle-coordinate-overlays)
       )
 
-(map! :map jg-org-mode-map
+(map! :map jg-org-base-map
       :ni [C-return]   #'+org/insert-item-below
       :ni [C-S-return] #'+org/insert-item-above
       ;; more intuitive RET keybinds

@@ -10,22 +10,18 @@ and adding extra pythonpath locations as the pre-args
 "
   ;; `python-shell-make-comint' expects to be able to
   ;; `split-string-and-unquote' the result of this function.
-  (s-join " "
-          (--remove (not it)
-                    (list
-                     (combine-and-quote-strings (list python-shell-interpreter))
-                     python-shell-interpreter-args
-                     (if jg-python-dev-mode jg-python-dev-cmd)
+  (combine-and-quote-strings
+   (--remove (not it)
+             (append jg-python-current-interpreter
+                     (if jg-python-dev-mode jg-python-dev-cmd-args)
                      ;; (format jg-python-pycache-cmd (f-canonical jg-python-pycache-loc))
-                     (or filepath python-shell-interpreter-path-args)
-                     ;; "--dir" (doom-project-root)
+                     (ensure-list (or filepath
+                                      python-shell-interpreter-path-args
+                                      ))
                      )
-                    )
-          )
-    )
-
-;;;###autoload
-(advice-add 'python-shell-calculate-command :override #'+jg-python-shell-calculate-command)
+             )
+   )
+  )
 
 ;;;###autoload
 (defun +jg-python-conda-get-path-prefix (env-dir)

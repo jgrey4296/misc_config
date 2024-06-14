@@ -101,15 +101,6 @@ can also add key'd additional properties
   )
 
 ;;;###autoload
-(advice-add 'counsel-compile--action :override #'+jg-projects-run-compile)
-
-;;;###autoload
-(advice-add 'projectile--run-project-cmd :around #'+jg-projects-projectile-cmd-list)
-
-;;;###autoload
-(advice-add 'counsel--get-compile-candidates :override #'+jg-workspaces-time-compile-cmd-retrieval)
-
-;;;###autoload
 (defun +jg-workspaces-compile-root-fallback ()
   default-directory
   )

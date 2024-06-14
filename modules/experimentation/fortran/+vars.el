@@ -14,7 +14,7 @@
                       )
                     )
 
-(spec-handling-add! lookup-regular
+(spec-handling-add! librarian-regular
                     (fortran-mode
                      ("Fortran Reference" . "https://www.intel.com/content/www/us/en/docs/fortran-compiler/developer-guide-reference/2023-0/language-reference.html")
                      )

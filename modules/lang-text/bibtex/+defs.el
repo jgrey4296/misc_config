@@ -34,6 +34,7 @@
                                         ('darwin (expand-file-name "~/pdf_library"))
                                         ('gnu/linux "/media/john/data/library/pdfs")))
 
+(defvar jg-bibtex-in-progress-files-locs (expand-file-name "/media/john/data/todo/pdfs/"))
 
 (defvar jg-bibtex-search-fields               '("tags" "year" "publisher"))
 

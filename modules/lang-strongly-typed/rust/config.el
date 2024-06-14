@@ -3,6 +3,8 @@
 (defer-load! "+vars")
 (defer-load! jg-bindings-total "+bindings")
 
+(advice-add 'rustic-install-lsp-client-p :override #'+rust--dont-install-packages-a)
+
 (use-package! rust-mode
   :commands rust-mode
   )

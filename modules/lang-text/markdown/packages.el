@@ -5,6 +5,6 @@
 (package! markdown-toc)
 (package! edit-indirect)
 
-(when (modulep! +grip) (package! grip-mode))
+(package! grip-mode)
 
-(when (modulep! :editor evil +everywhere) (package! evil-markdown :recipe (:host github :repo "Somelauw/evil-markdown")))
+(package! evil-markdown :recipe (:host github :repo "Somelauw/evil-markdown"))

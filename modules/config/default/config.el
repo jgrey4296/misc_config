@@ -3,6 +3,14 @@
 (local-load! "+spec-defs")
 (local-load! "+vars")
 
+(advice-add 'newline-and-indent        :before-until #'+default--newline-indent-and-continue-comments-a)
+(advice-add 'save-place-find-file-hook :after-while #'doom--recenter-on-load-saveplace-a)
+(advice-add 'save-place-to-alist       :around #'doom--inhibit-saveplace-in-long-files-a)
+(advice-add 'save-place-alist-to-file  :around #'doom--dont-prettify-saveplace-cache-a)
+(advice-add 'delete-backward-char      :override #'+default--delete-backward-char-a)
+(advice-add 'file-notify-rm-watch      :before #'file-notify-rm-watch-silent-advice)
+(advice-add 'display-warning           :before-until #'+jg-default-display-warning-ad)
+
 (defer-load! jg-bindings-total "+bindings")
 
 ;; (add-hook 'tty-setup-hook nil)

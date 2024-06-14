@@ -1,5 +1,10 @@
 
-(map! :map csharp-mode-map
+(map! :map (csharp-mode-map csharp-ts-mode-map)
+      :desc "General Insert"         :n "|" #'general-insert-call
+
+      )
+
+(map! :map (csharp-mode-map csharp-ts-mode-map)
       :localleader
 )
 

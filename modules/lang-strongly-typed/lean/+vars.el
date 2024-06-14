@@ -19,7 +19,7 @@
                     '(lean-mode company-lean)
                     )
 
-(spec-handling-add! lookup-regular
+(spec-handling-add! librarian-regular
                     '(lean-mode
                      ("Theorem Proving in Lean 4" . "https://leanprover.github.io/theorem_proving_in_lean4/")
                      ("Lean Manual" . "https://leanprover.github.io/lean4/doc/")

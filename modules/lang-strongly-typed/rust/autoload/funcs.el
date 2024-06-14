@@ -2,16 +2,15 @@
 
 ;; TODO (defun +rust/run-cargo () (interactive))
 
+(autoload 'rustic-run-cargo-command "rustic-cargo")
+
 ;;;###autoload
 (defun +rust-cargo-project-p ()
   "Return t if this is a cargo project."
   (locate-dominating-file buffer-file-name "Cargo.toml"))
 
-
 ;;
 ;;; Custom Cargo commands
-
-(autoload 'rustic-run-cargo-command "rustic-cargo")
 
 ;;;###autoload
 (defun +rust/cargo-audit ()
@@ -27,9 +26,6 @@
   ;;   this behavior to avoid package-not-initialized errors.
   (message "No LSP server running")
   )
-
-;;;###autoload
-(advice-add 'rustic-install-lsp-client-p :override #'+rust--dont-install-packages-a)
 
 ;;;###autoload
 (defun +jg-rust-related-files-fn (path)

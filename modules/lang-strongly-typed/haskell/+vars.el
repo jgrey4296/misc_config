@@ -54,8 +54,8 @@
                       ("\\.dump-simpl\\'" . ghc-core-mode)
                       )
                     )
-(spec-handling-add! eval
-                    `(haskell-mode :start ,#'+haskell/open-repl :persist t)
-                    `(haskell-cabal-mode :start ,#'+haskell/open-repl :persist t)
-                    `(literate-haskell-mode :start ,#'+haskell/open-repl :persist t)
+(spec-handling-add! repl
+                    '(haskell-mode          :start +haskell/open-repl :persist t)
+                    '(haskell-cabal-mode    :start +haskell/open-repl :persist t)
+                    '(literate-haskell-mode :start +haskell/open-repl :persist t)
                     )

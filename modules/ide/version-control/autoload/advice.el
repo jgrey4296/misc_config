@@ -31,10 +31,6 @@ file in your browser at the visited revision."
                  (if (and end-line (not (equal start-line end-line))) end-line)))
     (funcall fn)))
 
-
-;;;###autoload
-(advice-add 'browse-at-remote-get-url :around #'+vc-support-git-timemachine-a)
-
 ;;;###autoload
 (defun +vc-update-header-line-a (revision)
   "Show revision details in the header-line, instead of the minibuffer.
@@ -52,19 +48,12 @@ info in the `header-line-format' is a more visible indicator."
                   date-full date-relative))))
 
 ;;;###autoload
-(advice-add 'git-timemachine--show-minibuffer-details :override #'+vc-update-header-line-a)
-
-;;;###autoload
 (defadvice! +vc--fallback-to-master-branch-a ()
   "Return 'master' in detached state."
   ;; HACK `browse-at-remote' produces urls with `nil' in them, when the repo is
   ;;      detached. This creates broken links. I think it is more sensible to
   ;;      fall back to master in those cases.
   "master")
-
-;;;###autoload
-(advice-add 'browse-at-remote--get-local-branch :after-until #'+vc--fallback-to-master-branch-a)
-
 
 ;;;###autoload
 (defun +magit-revert-repo-buffers-deferred-a (&rest _)
@@ -77,25 +66,12 @@ info in the `header-line-format' is a more visible indicator."
   )
 
 ;;;###autoload
-(advice-add 'magit-checkout             :after #'+magit-revert-repo-buffers-deferred-a)
-;;;###autoload
-(advice-add 'magit-branch-and-checkout  :after #'+magit-revert-repo-buffers-deferred-a)
-
-;; Center the target file, because it's poor UX to have it at the bottom of
-;; the window after invoking `magit-status-here'.
-;;;###autoload
-(advice-add #'magit-status-here :after #'doom-recenter-a)
-
-;;;###autoload
 (defun +magit--forge-get-repository-lazily-a (&rest _)
   "Make `forge-get-repository' return nil if the binary isn't built yet.
 This prevents emacsql getting compiled, which appears to come out of the blue
 and blocks Emacs for a short while."
 
   (file-executable-p emacsql-sqlite-executable))
-
-;;;###autoload
-(advice-add 'forge-get-repository :before-while #'+magit--forge-get-repository-lazily-a)
 
 ;;;###autoload
 (defun +magit--forge-build-binary-lazily-a (&rest _)
@@ -119,9 +95,6 @@ ensure it is built when we actually use Forge."
           (add-hook hook #'forge-bug-reference-setup))))))
 
 ;;;###autoload
-(advice-add 'forge-dispatch  :before #'+magit--forge-build-binary-lazily-a)
-
-;;;###autoload
 (defun +vc-gutter--fix-linearity-of-hunks-a (diffinfos is-reverse)
   ;; FIX: stop git-gutter:{next,previous}-hunk from jumping to random hunks.
   (cl-position-if (let ((lineno (line-number-at-pos))
@@ -132,18 +105,6 @@ ensure it is built when we actually use Forge."
                   :from-end is-reverse))
 
 ;;;###autoload
-(advice-add 'git-gutter:search-near-diff-index :override #'+vc-gutter--fix-linearity-of-hunks-a)
-
-;;;###autoload
 (defun +vc-gutter-define-thin-bitmaps-a (&rest args)
   (define-fringe-bitmap 'diff-hl-bmp-middle [224] nil nil '(center repeated))
   (define-fringe-bitmap 'diff-hl-bmp-delete [240 224 192 128] nil nil 'top))
-
-;;;###autoload
-(advice-add 'diff-hl-define-bitmaps :override #'+vc-gutter-define-thin-bitmaps-a)
-
-;;;###autoload
-(advice-add 'diff-hl-fringe-bmp-from-pos  :override #'+vc-gutter-type-at-pos-fn)
-
-;;;###autoload
-(advice-add 'diff-hl-fringe-bmp-from-type :override #'+vc-gutter-type-at-pos-fn)

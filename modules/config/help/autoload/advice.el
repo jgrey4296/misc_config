@@ -20,6 +20,7 @@
   label
   )
 
+;;;###autoload
 (defun doom--find-function-search-for-symbol-save-excursion-a (fn &rest args)
   "Suppress cursor movement by `find-function-search-for-symbol'.
 
@@ -39,11 +40,10 @@ current buffer."
   )
 
 ;;;###autoload
-(when (> emacs-major-version 28)
-  (advice-add #'find-function-search-for-symbol :around #'doom--find-function-search-for-symbol-save-excursion-a))
+(defun doom-use-helpful-a (fn &rest args)
+  "Force FN to use helpful instead of the old describe-* commands."
+  (letf! ((#'describe-function #'helpful-function)
 
-;;;###autoload
-(advice-add 'doom--help-package-configs :before-until #'+jg-help-package-config-advice)
-
-;;;###autoload
-(advice-add 'doom--help-insert-button :before-while #'+jg-help-protect-insert-button)
+          (#'describe-variable #'helpful-variable))
+    (apply fn args))
+  )

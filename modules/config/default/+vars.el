@@ -28,12 +28,11 @@
                                       search-ring regexp-search-ring) ; persist searches
 )
 
-(setq auth-sources (list (expand-file-name "~/.config/secrets/emacs/authinfo.asc")))
 
 ;; Ftp
 (setq ftp-program "git-ftp")
 
-(setq-default diary-file (expand-file-name "~/github/jgrey4296.github.io/orgfiles/main.diary")
+(setq-default diary-file (expand-file-name "~/github/jgrey4296.github.io/orgfiles/journal/main.diary")
               major-mode #'emacs-lisp-mode
               )
 

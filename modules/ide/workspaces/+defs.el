@@ -27,3 +27,5 @@ stored in `persp-save-dir'.")
 (defvar +workspace--old-uniquify-style nil)
 
 (defvar +workspaces--indirect-buffers-to-restore nil)
+
+(defvar-local jg-workspaces-find-buff-fn nil)

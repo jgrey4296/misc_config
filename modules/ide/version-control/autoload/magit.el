@@ -1,11 +1,11 @@
 ;;; tools/magit/autoload.el -*- lexical-binding: t; -*-
 
-;; HACK Magit complains loudly (but harmlessly) when it can't determine its own
-;;      version in a sparse clone. Since I'd rather not compromise on shallow
-;;      clones, I've gimped `magit-version' so it doesn't complain (unless
-;;      called interactively).
 ;;;###autoload
-(defadvice! +magit--ignore-version-a (fn &rest args)
+(defun +magit--ignore-version-a (fn &rest args)
+  " HACK Magit complains loudly (but harmlessly) when it can't determine its own
+     version in a sparse clone. Since I'd rather not compromise on shallow
+     clones, I've gimped `magit-version' so it doesn't complain (unless
+     called interactively). "
   :around #'magit-version
   (let ((inhibit-message (not (called-interactively-p 'any))))
     (apply fn args)))
@@ -77,7 +77,6 @@ window that already exists in that direction. It will split otherwise."
       (switch-to-buffer buffer t t)
       (selected-window))))
 
-
 ;;
 ;;; Auto-revert
 
@@ -111,7 +110,6 @@ modified."
   "Update `vc' and `git-gutter' if out of date."
   (when +magit--stale-p
     (+magit--revert-buffer (current-buffer))))
-
 
 ;;
 ;;; Commands

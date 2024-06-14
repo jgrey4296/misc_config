@@ -84,7 +84,7 @@
       :desc "Repeat Pop Next" "M-."          #'evil-repeat-pop-next
       :desc "Paste Pop"       "M-y"          #'evil-paste-pop
       :desc "Delete"          "<deletechar>" #'evil-delete-char
-      :desc "Back Char"       "DEL"          #'evil-backward-char
+      ;; :desc "Back Char"       "DEL"          #'evil-backward-char
 
       "C-f" #'evil-scroll-page-down
       "C-b" #'evil-scroll-page-up

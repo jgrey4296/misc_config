@@ -21,7 +21,7 @@
  :ide version-control support librarian snippets workspaces
  :ide minimap diff company debugger
 
- :lang-data csv graphql dot sql
+ :lang-data csv graphql dot sql nu
  :lang-data xml toml json yaml logs
 
  :lang-dsl acab ai-and-logic

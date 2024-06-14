@@ -25,6 +25,9 @@
 (defer-load! jg-bindings-total "+bindings")
 ;;todo https://github.com/Bitnut/diffgit
 
+(advice-add 'diff-hl-revert-hunk-1 :around #'+vc-gutter--shrink-popup-a)
+(advice-add 'diff-hl-revert-hunk :around #'+vc-gutter--save-excursion-a)
+
 (use-package! diff-hl
   :hook (find-file    . diff-hl-mode)
   :hook (vc-dir-mode  . diff-hl-dir-mode)
@@ -69,7 +72,6 @@
              )
 
   )
-
 
 (use-package! vdiff :defer t)
 

@@ -82,5 +82,7 @@
 
 (after! (markdown-mode evil-markdown)
   (setq markdown-mode-map jg-binding-markdown-map
-        evil-markdown-mode-map nil)
+        gfm-mode-map      jg-binding-markdown-map
+        evil-markdown-mode-map nil
+        )
   )

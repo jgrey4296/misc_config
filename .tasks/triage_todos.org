@@ -1,0 +1,58 @@
+#+Title: Todos needing triage
+#+STARTUP: agenda
+
+* Triage
+** TRIAGE defer-advice-add
+   [[/media/john/data/github/_config/modules/ide/snippets/config.el::36][Location]]
+   :context:
+        <2024-06-08 Sat>   (after! smartparens ;; tell smartparens overlays not to interfere with yasnippet keybinds
+   :END:
+** TODO transients
+*** env-handling
+*** org agenda
+*** librarian-tagging interface
+*** workspace root display
+** [∅] spec-handle mu4e contexts
+https://www.djcbsoftware.nl/code/mu/mu4e/Contexts-example.html
+** TRIAGE mu4e map customisation
+   [[/media/john/data/github/_config/modules/tools/mail/+bindings.el::9][Location]]
+   :context:
+        <2024-06-08 Sat>   (map! :map mu4e-main-mode-map
+   :END:
+
+** TRIAGE find-related if test doesnt exist, make it
+** TRIAGE jg-term-switch select only active shells
+   [[/media/john/data/github/_config/modules/tools/term/autoload/term.el::46][Location]]
+   :context:
+        <2024-06-10 Mon> (defun +jg-term-switch ()
+   :END:
+** TRIAGE spec handling for quickrun cmd registration
+   [[/media/john/data/github/_config/modules/tools/eval/+spec-defs.el::25][Location]]
+   :context:
+        <2024-06-11 Tue> (spec-handling-new! repl +eval-repls
+   :END:
+** TRIAGE possible use py-shell for python repl
+   [[/media/john/data/github/_config/modules/lang-weakly-typed/python/autoload/repl.el::38][Location]]
+   :context:
+        <2024-06-11 Tue>       (run-python nil dedicated t)
+   :END:
+** TRIAGE ibuffer group for process buffers
+   [[/media/john/data/github/_config/modules/tools/eval/autoload/jg-repl.el::77][Location]]
+   :context:
+        <2024-06-11 Tue>
+   :END:
+** TRIAGE implement python file repl
+   [[/media/john/data/github/_config/modules/lang-weakly-typed/python/autoload/repl.el::44][Location]]
+   :context:
+        <2024-06-12 Wed> (defun +python/open-file-repl ()
+   :END:
+** TRIAGE convert org journal carryover items to spec handling
+   [[/media/john/data/github/_config/modules/lang-text/org/config.el::244][Location]]
+   :context:
+        <2024-06-13 Thu>   (setq org-journal-carryover-items  "TODO=\"TODO\"|TODO=\"PROJ\"|TODO=\"STRT\"|TODO=\"WAIT\"|TODO=\"HOLD\"")
+   :END:
+** TRIAGE refactor find related to be able to make missing files
+   [[/media/john/data/github/_config/modules/ide/workspaces/autoload/related.el::5][Location]]
+   :context:
+        <2024-06-13 Thu> (defun +jg-projects-find-related ()
+   :END:

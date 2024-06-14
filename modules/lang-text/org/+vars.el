@@ -1,10 +1,222 @@
 ;;; lang/jg-org/+vars.el -*- lexical-binding: t; -*-
 
+;;-- org core
+;; locations
+
+;; ORG SETUP
+(setq-default org-fast-tag-selection-single-key nil
+              org-from-is-user-regexp "\\<John Grey\\>"
+              org-group-tags nil
+              org-use-fast-tag-selection t
+              org-tags-column 50
+              org-startup-indented nil
+              org-indent--deepest-level 10
+              org-element-use-cache t
+              org-insert-heading-respect-content t
+              org-list-allow-alphabetical t
+              )
+
+;; Save target buffer after archiving a node.
+(setq org-archive-subtree-save-file-p t)
+
+(after! ol
+  (push '("Scholar" . "https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q=%s") org-link-abbrev-alist)
+  )
+
 ;; (textobjects insert navigation additional shift todo heading calendar)
 (setq evil-org-key-theme '(textobjects insert shift todo)
       org-cycle-separator-lines 3
+    )
+;;-- end org core
+
+;;-- locations
+(spec-handling-setq! org 20
+                     org-archive-location   (format           "%s::%s" (expand-file-name "archive/archive.org" org-directory) "* Main Archive")
+                     org-id-locations-file  (expand-file-name "org/.orgids" user-cache-dir)
+                     org-default-notes-file (expand-file-name "notes/misc.org"   org-directory)
+                     org-attach-id-dir                        "attachments"
+                     org-journal-dir                   (expand-file-name "journal/"    org-directory)
+                     org-journal-cache-file            (expand-file-name "org/journal" user-cache-dir)
+                     org-persist-directory             (expand-file-name "org/persist/" user-cache-dir)
+                     org-publish-timestamp-directory   (expand-file-name  "org/timestamps/" user-cache-dir)
+                     org-preview-latex-image-directory (expand-file-name  "org/latex/" user-cache-dir)
+                     org-clock-persist-file (expand-file-name "org-clock-save.el" user-cache-dir)
+
+                     +org-capture-todo-file                   "agenda/triage_todos.org"
+                     +org-capture-changelog-file              "changelog.org"
+                     +org-capture-notes-file                  "notes/misc.org"
+                     +org-capture-journal-file                "journal/journal.org"
+                     +org-capture-projects-file               "projects/projects.org"
+                     )
+
+;;-- end locations
+
+;;-- agenda
+(setq org-agenda-include-diary t
+      org-agenda-inhibit-startup t
+      org-agenda-deadline-faces '((1.001 . error)
+                                  (1.0 . org-warning)
+                                  (0.5 . org-upcoming-deadline)
+                                  (0.0 . org-upcoming-distant-deadline))
+      org-agenda-window-setup 'other-window
+      org-agenda-skip-unavailable-files t
+      org-agenda-span 10
+      org-agenda-start-on-weekday nil
+      org-agenda-start-day "-3d"
       )
 
+;;-- end agenda
+
+;;-- journal
+(setq org-journal-find-file #'find-file
+      )
+
+;;-- end journal
+
+;;-- babel
+(setq org-src-preserve-indentation t  ; use native major-mode indentation
+      org-src-tab-acts-natively t     ; we do this ourselves
+      ;; Show src buffer in popup, and don't monopolize the frame
+      org-src-window-setup 'other-window
+      )
+
+(spec-handling-add! babel
+                    '(default
+                      (:name D          :lib ob-C)
+                      (:name amm        :lib ob-ammonite)
+                      (:name awk        :lib ob-awk)
+                      (:name bash       :lib ob-shell)
+                      (:name calc       :lib ob-calc)
+                      (:name clojure    :lib ob-clojure)
+                      (:name comint     :lib ob-comint)
+                      (:name cpp        :lib ob-C)
+                      (:name css        :lib ob-css)
+                      (:name ditaa      :lib ob-ditaa)
+                      (:name dot        :lib ob-dot)
+                      (:name emacs-lisp :lib ob-emacs-lisp)
+                      (:name eshell     :lib ob-eshell)
+                      (:name eval       :lib ob-eval)
+                      (:name exp        :lib ob-exp)
+                      (:name forth      :lib ob-forth)
+                      (:name fortran    :lib ob-fortran)
+                      (:name gnuplot    :lib ob-gnuplot)
+                      (:name groovy     :lib ob-groovy)
+                      (:name haskell    :lib ob-haskell)
+                      (:name java       :lib ob-java)
+                      (:name js         :lib ob-js)
+                      (:name julia      :lib ob-julia)
+                      (:name latex      :lib ob-latex)
+                      (:name lilypond   :lib ob-lilypond)
+                      (:name lisp       :lib ob-lisp)
+                      (:name lob        :lib ob-lob)
+                      (:name lua        :lib ob-lua)
+                      (:name makefile   :lib ob-makefile)
+                      (:name matlab     :lib ob-matlab)
+                      (:name matlab     :lib ob-octave)
+                      (:name maxima     :lib ob-maxima)
+                      (:name ocaml      :lib ob-ocaml)
+                      (:name octave     :lib ob-octave)
+                      (:name org        :lib ob-org)
+                      (:name perl       :lib ob-perl)
+                      (:name plantuml   :lib ob-plantuml)
+                      (:name processing :lib ob-processing)
+                      (:name ruby       :lib ob-ruby)
+                      (:name rust       :lib rustic-babel)
+                      (:name sass       :lib ob-sass)
+                      (:name scheme     :lib ob-scheme)
+                      (:name sed        :lib ob-sed)
+                      (:name sh         :lib ob-shell)
+                      (:name shell      :lib ob-shell)
+                      (:name sql        :lib ob-sql)
+                      (:name sqlite     :lib ob-sqlite)
+                      (:name table      :lib ob-table)
+                      (:name tangle     :lib ob-tangle)
+                      (:name elisp      :lib ob-emacs-lisp)
+                      (:name c          :lib ob-C)
+                      (:name fsharp     :lib ob-fsharp)
+                      )
+                    )
+
+;; Don't process babel results asynchronously when exporting org, as they
+;; won't likely complete in time, and will instead output an ob-async hash
+;; instead of the wanted evaluation results.
+(after! ob
+  (add-to-list 'org-babel-default-lob-header-args '(:sync))
+  )
+
+;;-- end babel
+
+;;-- todo config
+(let ((project-steps '(sequence
+                       "TODO(j!)"      ; A job that needs doing
+                       "IDEA(i)"       ; An unconfirmed job
+                       "LOOP(l)"       ; A recurring job
+                       "ACTIVE(a)"     ; A job that is in progress
+                       "BLOCKED(b)"    ; Something external is holding up this task
+                       "QUEUED(q)"     ; This task is paused/on hold because of me
+                       "NEXT(n)"       ;
+                       "|"
+                       "DONE(d!)"  ; Task successfully completed
+                       "DEAD(k@!)" ; Task was cancelled, aborted or is no longer applicable
+                       ))
+      (task-status '(sequence
+                     "[∅](t)"   ; A task that needs doing
+                     "[⇒](s)"   ; Task is in progress
+                     "[∃](w)"   ; Task is being held up or paused
+                     "|"
+                     "[⟙](c!)"    ; Task was completed
+                     "[⟘](f@!)"   ; Task was failed
+                     ))
+      (eval-status '(sequence
+                     "TRIAGE(?)"
+                     "|"
+                     "OKAY(o)"
+                     "YES(y)"
+                     "NO(N)"
+                    "MAYBE(m)"
+                    ))
+      )
+  (setq jg-org-todo-keywords
+    (list project-steps task-status eval-status)
+    )
+  )
+
+(defvar jg-org-todo-faces
+  '(("IDEA"    . +org-todo-project)
+
+    ("[⇒]"     . org-list-dt)
+    ("ACTIVE"  . org-list-dt)
+
+    ("[∃]"     . org-todo)
+    ("BLOCKED" . org-warning)
+    ("QUEUED"  . org-date)
+
+    ("NO"      . +org-todo-cancel)
+    ("DEAD"    . org-priority)
+    ("[⟘]"     . org-priority)
+    )
+  "Faces for my keywords"
+  )
+
+(setq org-use-fast-todo-selection 'auto)
+
+;;-- end todo config
+
+;;-- refiling
+
+(defvar jg-org-refile-targets '((nil :maxlevel . 3)
+                                      (org-agenda-files :maxlevel . 3))
+  )
+
+;; Without this, completers like ivy/helm are only given the first level of
+;; each outline candidates. i.e. all the candidates under the "Tasks" heading
+;; are just "Tasks/". This is unhelpful. We want the full path to each refile
+;; target! e.g. FILE/Tasks/heading/subheading
+(setq-default org-refile-use-outline-path 'file
+              org-outline-path-complete-in-steps t
+              )
+
+;;-- end refiling
 
 ;;-- pomodoro
 ;; set pomodoro log variable
@@ -25,26 +237,6 @@
   )
 ;;-- end pomodoro
 
-;;-- org core
-(after! org
-  ;;ORG SETUP
-  (setq-default org-fast-tag-selection-single-key nil
-                org-from-is-user-regexp "\\<John Grey\\>"
-                org-group-tags nil
-                org-use-fast-tag-selection t
-                org-tags-column 50
-                org-startup-indented nil
-                org-indent--deepest-level 20
-                org-element-use-cache nil
-                )
-  ;; Save target buffer after archiving a node.
-  (setq org-archive-subtree-save-file-p t)
-
-  (push 'org-indent-mode minor-mode-list)
-  (push '("Scholar" . "https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q=%s") org-link-abbrev-alist)
-  )
-;;-- end org core
-
 ;;-- visual
 (after! org-superstar
   (setq org-hide-leading-stars t)
@@ -59,13 +251,43 @@
   )
 ;;-- end completion
 
-;;-- projectile
-(after! org-projectile
-  ;; from https://emacs.stackexchange.com/questions/18194/
-  (setq org-projectile-capture-template "** TODO [[%F::%(with-current-buffer (org-capture-get :original-buffer) (number-to-string (line-number-at-pos)))][%?]]\n\t%t\n\t
-%(with-current-buffer (org-capture-get :original-buffer) (buffer-substring (line-beginning-position) (line-end-position)))\n")
-  )
-;;-- end projectile
+;;-- capture
+
+(spec-handling-add! org-capture :form 'override
+                    `(todo
+                      (:key       "t" :name      "Personal todo"
+                       :file      +org-capture-todo-file :headline  "Triage"
+                       :snippet "personal-todo"
+                       :props (:prepend t :empty-lines 1 :kill-buffer t)
+                       )
+                      (:key  "g" :name "Global Todo"
+                       :file +org-capture-todo-file :headline  "Triage"
+                       :snippet "global_todo"
+                       :props (:prepend t :empty-lines 2 :kill-buffer t)
+                      )
+                      (:key "q" :name "Quick Todo"
+                       :file +org-capture-todo-file :headline "Triage"
+                       :text "** TRIAGE Quick note\n%a\n%T\n\n"
+                       :props (:immediate-finish t :kill-buffer t)
+                       )
+                      )
+                    `(notes
+                      (:key "n" :name "Note"
+                       :file +org-capture-notes-file :headline "Triage"
+                       :text "** %u %?\n%i\n%a"
+                       :props (:kill-buffer t)
+                       )
+                      )
+                    `(project
+                      (:key "p" :name "Project Todo"
+                       :func #'+jg-org-capture-project-todo  :headline  "Triage"
+                       :snippet "project_todo"
+                       :props (:kill-buffer t)
+                       )
+                      )
+                    )
+
+;;-- end capture
 
 ;;-- spelling
 ;; Don't spellcheck org blocks
@@ -103,13 +325,6 @@
                                 )
                      )
                     )
-(spec-handling-add! tagging
-                    `(org-mode
-                     :set ,#'+jg-org-set-tags
-                     :new ,#'+jg-org-set-new-tag
-                     :get ,#'org-get-tags
-                     )
-                    )
 (spec-handling-add! lookup-handler
                     `(org-mode
                      :definition ,#'+org-lookup-definition-handler
@@ -128,8 +343,9 @@
                     '(org-mode
                       ("^\\*Org Links" :slot -1 :vslot -1 :size 2 :ttl 0)
                       ("^ ?\\*\\(?:Agenda Com\\|Calendar\\|Org Export Dispatcher\\)" :slot -1 :vslot -1 :size #'+popup-shrink-to-fit :ttl 0)
+                      ("^\\*Agenda Files\\*\\'" :select t :quit t :side right)
+                      ("^\\*Org Agenda\\*\\'"   :select t :quit t :side right :priority 100)
                       ("^\\*Org \\(?:Select\\|Attach\\)" :slot -1 :vslot -2 :ttl 0 :size 0.25)
-                      ("^\\*Org Agenda"     :ignore t)
                       ("^\\*Org Src"        :size 0.42  :quit nil :select t :autosave t :modeline t :ttl nil)
                       ("^\\*Org-Babel")
                       ("^\\*Capture\\*$\\|CAPTURE-.*$" :size 0.42 :quit nil :select t :autosave ignore)
@@ -141,6 +357,13 @@
                      )
                    )
 (spec-handling-add! eval
-                    `(org-mode :eval ,#'+org-eval-handler)
+                    '(org-mode :fn +org-eval-handler)
+                    )
+(spec-handling-add! org-startup
+                    '(plus
+                      ("agenda"    jg-org-startup-agenda         t)
+                      ("reference" jg-org-startup-reference      t)
+                      ("packages"  jg-org-startup-package        t)
+                      )
                     )
 ;;-- end specs

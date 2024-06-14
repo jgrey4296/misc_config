@@ -73,7 +73,7 @@ capture, the end position, and the output buffer.")
                      )
                     )
 
-(spec-handling-add! lookup-regular
+(spec-handling-add! librarian-regular
                     '(markdown-mode
                      ("mdbook" . "https://rust-lang.github.io/mdBook/")
                      ("markdown cheatsheet" . "https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet")

@@ -3,14 +3,14 @@
 ;;-- browsing
 (map! :leader
       (:prefix "y"
-      :desc "Dir: Code"           "1" (cmd! (find-file jg-snippets-code-templates-dir))
-      :desc "Dir: File"           "2" (cmd! (find-file jg-snippets-file-templates-dir))
-      :desc "Dir: Projects"       "3" (cmd! (find-file jg-snippets-project-templates-dir))
-      :desc "Dir: Lookup-regular" "4" (cmd! (find-file librarian-regular--location))
-      :desc "Dir: Git Template"   "7" (cmd! (find-file (expand-file-name "git" templates-loc)))
-      :desc "Dir: Doom Snippet"   "8" (cmd! (find-file doom-snippets-dir))
-      :desc "Dir: Yas  Snippet"   "9" (cmd! (find-file yasnippet-snippets-dir))
-      :desc "Debug Snippet Dirs"  "0" #'+jg-snippets-debug-dirs
+      :desc "Dir: Code"              "1" (cmd! (find-file jg-snippets-code-templates-dir))
+      :desc "Dir: File"              "2" (cmd! (find-file jg-snippets-file-templates-dir))
+      :desc "Dir: Projects"          "3" (cmd! (find-file jg-snippets-project-templates-dir))
+      :desc "Dir: Librarian-regular" "4" (cmd! (find-file librarian-regular--location))
+      :desc "Dir: Git Template"      "7" (cmd! (find-file (expand-file-name "git" templates-loc)))
+      :desc "Dir: Doom Snippet"      "8" (cmd! (find-file doom-snippets-dir))
+      :desc "Dir: Yas  Snippet"      "9" (cmd! (find-file yasnippet-snippets-dir))
+      :desc "Debug Snippet Dirs"     "0" #'+jg-snippets-debug-dirs
       )
       (:prefix "f"
        :desc "Debug File Template" "?" #'+file-templates/debug
@@ -34,10 +34,10 @@
        )
 
       (:prefix "y"
-      :desc "New snippet"           "n" #'+jg-snippets-new-snippet
+      :desc "New snippet"           "n"   #'+jg-snippets-new-snippet
       :desc "Expand Snippet"        "TAB" #'yas-expand-from-trigger-key
-      :desc "Reload All"             "r" #'+jg-snippets-reload-all
-      :desc "New Abbrev"            "N"  #'add-mode-abbrev
+      :desc "Reload All"            "r"   #'+jg-snippets-reload-all
+      :desc "New Abbrev"            "N"   #'add-mode-abbrev
        )
       )
 
@@ -69,8 +69,9 @@
       (:prefix ("a" . "Abbrevs")
        :desc "Save Abbrevs"          "S"  #'+jg-snippets-save-abbrevs
        :desc "List Abbrevs"          "l"  #'list-abbrevs
-       :desc  "List Local Abbrevs"   "L"  (cmd! (list-abbrevs t))
+       :desc "List Local Abbrevs"    "L"  (cmd! (list-abbrevs t))
        :desc "Edit Abbrevs"          "e"  #'edit-abbrevs
+       :desc "New Global Abbrev"     "g"   #'add-global-abbrev
        )
       )
 
@@ -94,4 +95,15 @@
 
 (map! :map jg-binding-normal-state-map
       :desc "breakpoint"          "I b"   #'+jg-snippets-insert-debug
+      )
+
+(map! :map snippet-mode-map
+      :n "|" #'general-insert-call
+      )
+
+(setq abbrev-map nil)
+
+(map! :map edit-abbrevs-mode-map
+      :n "RET" #'edit-abbrevs-redefine
+      :n "Q"   #'kill-current-buffer
       )

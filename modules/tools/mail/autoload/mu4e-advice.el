@@ -130,3 +130,14 @@ scales the image to account for the value of :scale in `org-format-latex-options
                                      info)
              info caption label)))))
      (t (org-html--wrap-latex-environment latex-frag info caption label)))))
+
+;;;###autoload
+(defun +mu4e--refresh-current-view-a (&rest _)
+  (mu4e-search-rerun)
+  )
+
+;;;###autoload
+(defun +mu4e-ensure-compose-writeable-a (&rest _)
+    "Ensure that compose buffers are writable.
+This should already be the case yet it does not always seem to be."
+    (read-only-mode -1))

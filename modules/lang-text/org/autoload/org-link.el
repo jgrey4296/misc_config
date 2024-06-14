@@ -272,9 +272,9 @@ exist, and `org-link' otherwise."
 ;;
 ;;; Help-echo / eldoc
 
-(defadvice! doom-docs--display-docs-link-in-eldoc-a (&rest _)
+;;;###autoload
+(defun doom-docs--display-docs-link-in-eldoc-a (&rest _)
   "Display help for doom-*: links in minibuffer when cursor/mouse is over it."
-  :before-until #'org-eldoc-documentation-function
   (and (bound-and-true-p doom-docs-mode)
        (eq (get-text-property (point) 'help-echo)
            #'+org-link-doom--help-echo-from-textprop)
@@ -385,50 +385,6 @@ exist, and `org-link' otherwise."
       (message "Download of image \"%s\" failed" link)
       nil)))
 
-(defvar +org--gif-timers nil)
-;;;###autoload
-(defun +org-play-gif-at-point-h ()
-  "Play the gif at point, while the cursor remains there (looping)."
-  (dolist (timer +org--gif-timers (setq +org--gif-timers nil))
-    (when (timerp (cdr timer))
-      (cancel-timer (cdr timer)))
-    (image-animate (car timer) nil 0))
-  (when-let* ((ov (cl-find-if
-                   (lambda (it) (overlay-get it 'org-image-overlay))
-                   (overlays-at (point))))
-              (dov (overlay-get ov 'display))
-              (pt  (point)))
-    (when (image-animated-p dov)
-      (push (cons
-             dov (run-with-idle-timer
-                  0.5 nil
-                  (lambda (dov)
-                    (when (equal
-                           ov (cl-find-if
-                               (lambda (it) (overlay-get it 'org-image-overlay))
-                               (overlays-at (point))))
-                      (message "playing gif")
-                      (image-animate dov nil t)))
-                  dov))
-            +org--gif-timers))))
-
-;;;###autoload
-(defun +org-play-all-gifs-h ()
-  "Continuously play all gifs in the visible buffer."
-  (dolist (ov (overlays-in (point-min) (point-max)))
-    (when-let* (((overlay-get ov 'org-image-overlay))
-                (dov (overlay-get ov 'display))
-                ((image-animated-p dov))
-                (w (selected-window)))
-      (while-no-input
-        (run-with-idle-timer
-         0.3 nil
-         (lambda (dov)
-           (when (pos-visible-in-window-p (overlay-start ov) w nil)
-             (unless (plist-get (cdr dov) :animate-buffer)
-               (image-animate dov))))
-         dov)))))
-
 ;;
 ;;; Commands
 
@@ -444,12 +400,3 @@ exist, and `org-link' otherwise."
                    (org-link-unescape (match-string-no-properties 1)))))
       (delete-region (match-beginning 0) (match-end 0))
       (insert label))))
-
-;;;###autoload
-(defun +org/play-gif-at-point ()
-  "TODO"
-  (interactive)
-  (unless (eq 'org-mode major-mode)
-    (user-error "Not in org-mode"))
-  (or (+org-play-gif-at-point-h)
-      (user-error "No gif at point")))

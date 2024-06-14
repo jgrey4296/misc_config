@@ -40,7 +40,6 @@
         :desc "Compose Email"                "e" #'compose-mail
         )
 
-
   )
 
 (map! :after org-msg
@@ -49,7 +48,6 @@
       "RET" #'message-send-and-exit
       "q"   #'org-msg-edit-kill-buffer
       )
-
 
 (after! rmail
   (setq rmail-summary-mode-map (make-sparse-keymap)

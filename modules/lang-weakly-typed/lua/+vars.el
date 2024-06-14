@@ -1,6 +1,6 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
-(spec-handling-add! lookup-regular
+(spec-handling-add! librarian-regular
                     '(lua-mode
                       ("Lua Docs" . "https://www.lua.org/docs.html")
                       ("Garrys Mod" . "https://wiki.facepunch.com/gmod/Beginner_Tutorial_Intro")
@@ -34,9 +34,9 @@
                         )
                       )
 
-(spec-handling-add! eval
-                      `(lua-mode :start ,#'+lua/open-repl)
-                      `(fennel-mode :start ,#'fennel-repl)
+(spec-handling-add! repl
+                      '(lua-mode    :start +lua/open-repl)
+                      '(fennel-mode :start fennel-repl)
                       )
 
 (spec-handling-add! eglot

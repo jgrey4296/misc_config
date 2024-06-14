@@ -21,6 +21,7 @@
 ;;; Code:
 
 ;; (package!  :type 'local :recipe (:local-repo "" :files ("*.el" "data-struct/*.el" "modes/*.el" "util/*.el")))
-
+(package! nushell-mode)
+(package! nushell-ts-mode)
 
 ;;; packages.el ends here

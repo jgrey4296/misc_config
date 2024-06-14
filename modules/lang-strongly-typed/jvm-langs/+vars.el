@@ -121,11 +121,11 @@
                     '(groovy-mode "Groovy" "Groovy_JDK" "Gradle_DSL", "Gradle_Groovy_API", "Gradle_User_Guide")
                     '(kotlin-mode "Kotlin")
                       )
-(spec-handling-add! eval
-                    `(kotlin-mode :start ,#'+kotlin-mode/open-repl)
-                    `(kotlin-mode :start ,#'kotlin-repl :name kotlin-alt)
-                    `(groovy-mode :start ,#'+java/open-groovy-repl)
-                    `(scala-mode :start ,#'+scala/open-repl :persist t)
+(spec-handling-add! repl
+                    '(kotlin-mode :start kotlin-mode/open-repl)
+                    '(kotlin-mode2 :start kotlin-repl)
+                    '(groovy-mode :start +java/open-groovy-repl)
+                    '(scala-mode  :start +scala/open-repl :persist t)
                     )
 (spec-handling-add! ligatures
                     '(scala-mode

@@ -19,7 +19,7 @@
 
               )
 
-(spec-handling-add! lookup-regular
+(spec-handling-add! librarian-regular
                     (csound-mode
                      ("Csound Manual" . "https://csound.com/docs/manual/PartOverview.html")
                      ("Csound tutorial" . "http://www.csounds.com/toots/index.html")

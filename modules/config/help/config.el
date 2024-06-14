@@ -4,6 +4,10 @@
 
 (defer-load! jg-bindings-total "+bindings")
 
+(advice-add #'find-function-search-for-symbol :around #'doom--find-function-search-for-symbol-save-excursion-a)
+(advice-add 'doom--help-package-configs :before-until #'+jg-help-package-config-advice)
+(advice-add 'doom--help-insert-button :before-while #'+jg-help-protect-insert-button)
+
 (use-package! free-keys
   :commands (free-keys free-keys-set-prefix)
   :config
@@ -22,13 +26,7 @@
   ;; Make `apropos' et co search more extensively. They're more useful this way.
   (setq apropos-do-all t)
 
-  (defun doom-use-helpful-a (fn &rest args)
-    "Force FN to use helpful instead of the old describe-* commands."
-    (letf! ((#'describe-function #'helpful-function)
-            (#'describe-variable #'helpful-variable))
-      (apply fn args)))
-
-  (defun jg-unset-helpful-dedicated()
+  (defun jg-unset-helpful-dedicated ()
     (set-window-dedicated-p (selected-window) nil)
     )
 

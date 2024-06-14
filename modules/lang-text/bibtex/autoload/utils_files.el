@@ -108,3 +108,34 @@ the entry of interest in the bibfile.  but does not check that."
       (message "%s : %s" target (file-exists-p target))
       (browse-url target 'quicklook)
       )))
+
+;;;###autoload
+(defun +jg-bibtex-use-newest-file ()
+  "Get the newest pdf or epub from the downloads dir,
+copy it to the bib todo directory,
+and insert it into the current entry "
+  (interactive)
+  (unless (string-empty-p (bibtex-autokey-get-field "file"))
+    (user-error "Entry already has a file"))
+  (let* ((files (f-files (expand-file-name "~/Downloads")
+                                          #'(lambda (x) (or (f-ext? x "pdf")
+                                                            (f-ext? x "epub")
+                                                            ))))
+         (newest (car-safe (sort files #'(lambda (x y)
+                                 (not (time-less-p (f-modification-time x)
+                                                   (f-modification-time y)))))))
+         )
+    (unless newest
+      (user-error "No Applicable File Found")
+      )
+    (when (f-exists? (f-join jg-bibtex-in-progress-files-locs (f-filename newest)))
+      (use-error "File already exists in todo directory: %s" newest)
+      )
+    (message "Newest: %s" newest)
+    (f-move newest (f-join jg-bibtex-in-progress-files-locs (f-filename newest)))
+    (bibtex-beginning-of-entry)
+    (save-excursion
+      (bibtex-set-field "file" (f-join jg-bibtex-in-progress-files-locs (f-filename newest)))
+      )
+    )
+)

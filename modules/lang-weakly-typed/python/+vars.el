@@ -25,11 +25,11 @@
       )
 
 ;; Builtin Python-mode vars
-(setq python-shell--interpreter-args                        "-i"
-      python-indent-guess-indent-offset                     nil
+(setq python-indent-guess-indent-offset                     nil
       python-shell-completion-native-enable                 nil
       python-shell-completion-native-disabled-interpreters  '("pypy")
-      python-shell-interpreter-path-args                    (expand-file-name "python/repl_startup.py "  templates-loc)
+      python-shell-interpreter-path-args                    (expand-file-name "python/repl_startup.py"  templates-loc)
+      jg-python-current-interpreter                         jg-python-stock-repl
  )
 
 ;; Py-vars
@@ -47,6 +47,11 @@
       )
 (modify-syntax-entry ?_ "_" python-mode-syntax-table)
 ;;-- end general python
+
+;;-- tree-sitter
+(push '(python "python" "tree_sitter_python") treesit-load-name-override-list)
+
+;;-- end tree-sitter
 
 ;;-- outline
 (rx-let ((kwds (regexp (eval (s-join "\\|" py-outline-mode-keywords))))
@@ -142,13 +147,13 @@
                     )
 (spec-handling-add! file-templates
                     '(python
-                      ("LICENSE\\'"            :trigger "__license-acab"   :mode text-mode   :priority 100)
+                      ("LICENSE\\'"               :trigger "__license-acab"   :mode text-mode   :priority 100)
                       ;;Configs:
-                      ("pyproject.toml\\'"     :trigger "__pyproject"      :mode python-mode)
-                      ("pyrightconfig.json\\'" :trigger "__pyright_config" :mode python-mode)
-                      ("pylint.toml"           :trigger "__pylint"         :mode python-mode)
-                      ("jekyl.toml"            :trigger "__jekyll"         :mode python-mode)
-                      ("ruff.toml"  trigger "__ruff_config"                :mode python-mode)
+                      ("pyproject.toml\\'"        :trigger "__pyproject"      :mode conf-toml-mode)
+                      ("pyrightconfig.json\\'"    :trigger "__pyrightconfig"  :mode json-mode)
+                      ("pylint.toml\\'"           :trigger "__pylint"         :mode conf-toml-mode)
+                      ("jekyl.toml\\'"            :trigger "__jekyll"         :mode conf-toml-mode)
+                      ("ruff.toml\\'"             :trigger "__ruff_config"    :mode conf-toml-mode)
 
                       ;; Python:
                       ("__init__\\.py\\'"      :trigger "__init"           :mode python-mode)
@@ -162,7 +167,7 @@
                     )
 (spec-handling-add! fold
                     `(python
-                     :modes (python-mode)
+                     :modes python-mode
                      :priority 25
                      :triggers (:close     ,#'+jg-python-close-class-defs
                                 :close-all ,#'+jg-python-close-all-defs
@@ -172,6 +177,17 @@
                                 :toggle    ,#'outline-toggle-children
                                 )
                      )
+                    `(python-ts
+                     :modes python-ts-mode
+                     :priority 25
+                     :triggers (:close     ,#'hs-hide-block-at-point
+                                :close-all ,#'hs-hide-all
+                                :open      ,#'hs-show-block
+                                :open-all  ,#'hs-show-all
+                                :open-rec  ,#'hs-show-all
+                                :toggle    ,#'hs-toggle-hiding
+                                )
+                      )
                     )
 (spec-handling-add! rotate-text
                     '(python-mode
@@ -257,16 +273,10 @@
 (spec-handling-add! compile-commands
                     '(python +jg-python-get-commands +jg-python-solo-file-run +jg-python-distribute-commands)
                     )
-(spec-handling-add! repl
-                    `(python-mode
-                      :start ,#'+jg-python/open-repl
-                      :send  ,#'python-shell-send-region
-                      :eval nil
-                      )
-                    `(ipython
-                      :start ,#'+jg-python/open-ipython-repl
-                      :send  ,#'python-shell-send-region
-                      :eval nil
+(spec-handling-add! repl :form 'override
+                    '(python-mode
+                      :start +jg-python/open-repl
+                      :send  python-shell-send-region
                       )
                     )
 (spec-handling-add! yas-extra
@@ -286,6 +296,24 @@
                     )
 
 ;;-- end specs
+
+;;-- babel
+(spec-handling-add! babel
+                    '(python
+                      (:name python :lib ob-python :mode python)
+                      )
+                    )
+;; (after! (ob python)
+;;   (setq org-babel-python-command
+;;         (string-trim
+;;          (concat python-shell-interpreter " "
+;;                  (if (string-match-p "\\<i?python[23]?$" python-shell-interpreter)
+;;                      (replace-regexp-in-string
+;;                       "\\(^\\| \\)-i\\( \\|$\\)" " " python-shell-interpreter-args)
+;;                    python-shell-interpreter-args))))
+;;   )
+
+;;-- end babel
 
 ;;-- general insert
 (general-insert-register-processor 'python-mode "raise"

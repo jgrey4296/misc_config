@@ -4,6 +4,11 @@
   (pushnew! projectile-project-root-files "config.el")
   )
 
+(setq elisp-demos-user-files (list
+                              (doom-module-expand-path :lang-weakly-typed 'lisp-langs "elisp-demos.org")
+                              )
+      )
+
 ;;-- specs
 (spec-handling-add! popup
                     '(lisp
@@ -129,14 +134,17 @@
                       )
                     )
 (spec-handling-add! repl
-                    `(emacs-lisp-mode       :start ,#'+emacs-lisp/open-repl :send #'+jg-lisp-eval)
-                    `(lisp-interaction-mode :start ,#'+emacs-lisp/open-repl :send #'+jg-lisp-eval)
-                    `(racket-mode           :start ,#'+racket/open-repl)
+                    '(emacs-lisp-mode       :start +emacs-lisp/open-repl :send +jg-lisp-eval)
+                    '(lisp-interaction-mode :start +emacs-lisp/open-repl :send +jg-lisp-eval)
                     )
 (spec-handling-add! yas-extra
                     '(buttercup-minor-mode buttercup-minor-mode)
                     )
 (spec-handling-add! company
                     '(emacs-lisp-mode (:mode company-elisp))
+                    )
+
+(spec-handling-add! eval
+                    '(elisp-mode :fn eval-region)
                     )
 ;;-- end specs

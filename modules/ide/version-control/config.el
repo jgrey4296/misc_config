@@ -2,16 +2,27 @@
 
 (local-load! "+defs")
 (local-load! "+vars")
+
 (defer-load! jg-bindings-total "+bindings")
+
 (defer-load! (magit jg-evil-ex-bindings) "+evil-ex")
 
+(advice-add 'browse-at-remote-get-url                 :around #'+vc-support-git-timemachine-a)
+(advice-add 'git-timemachine--show-minibuffer-details :override #'+vc-update-header-line-a)
+(advice-add 'browse-at-remote--get-local-branch       :after-until #'+vc--fallback-to-master-branch-a)
+(advice-add 'magit-checkout                           :after #'+magit-revert-repo-buffers-deferred-a)
+(advice-add 'magit-branch-and-checkout                :after #'+magit-revert-repo-buffers-deferred-a)
+(advice-add 'magit-status-here                        :after #'doom-recenter-a)
+(advice-add 'forge-get-repository                     :before-while #'+magit--forge-get-repository-lazily-a)
+(advice-add 'forge-dispatch                           :before #'+magit--forge-build-binary-lazily-a)
+(advice-add 'git-gutter:search-near-diff-index        :override #'+vc-gutter--fix-linearity-of-hunks-a)
+(advice-add 'diff-hl-define-bitmaps                   :override #'+vc-gutter-define-thin-bitmaps-a)
+(advice-add 'diff-hl-fringe-bmp-from-pos              :override #'+vc-gutter-type-at-pos-fn)
+(advice-add 'diff-hl-fringe-bmp-from-type             :override #'+vc-gutter-type-at-pos-fn)
+(advice-add 'magit-version                            :around #'+magit--ignore-version-a)
 
 (add-hook! '(prog-mode-hook text-mode-hook conf-mode-hook)
            #'vi-tilde-fringe-mode)
-
-(use-package! smerge-mode
-  :after jg-bindings-total
-  )
 
 (use-package! magit
   :commands (magit-file-delete magit-status)
@@ -19,12 +30,11 @@
   :init
   :config
   ;; The default location for git-credential-cache is in
-  ;; ~/.cache/git/credential. However, if ~/.git-credential-cache/ exists, then
+  ;; ~/_cache_/git/credential. However, if ~/.git-credential-cache/ exists, then
   ;; it is used instead. Magit seems to be hardcoded to use the latter, so here
   ;; we override it to have more correct behavior.
   (unless (file-exists-p "~/.git-credential-cache/")
-    (setq magit-credential-cache-daemon-socket (doom-glob (or (getenv "XDG_CACHE_HOME")
-                                                              "~/.cache/")
+    (setq magit-credential-cache-daemon-socket (doom-glob (or (getenv "XDG_CACHE_HOME") "~/_cache_")
                                                           "git/credential/socket")))
 
   (add-to-list 'doom-debug-variables 'magit-refresh-verbose)
@@ -65,11 +75,43 @@
 
   )
 
-(use-package! magit-todos
+;;-- modes
+
+(use-package! git-modes
+  :defer t
+  :config
+  (add-hook! (gitconfig-mode gitattributes-mode gitignore-mode)
+             #'general-insert-minor-mode
+             )
+  )
+
+(use-package! git-commit
+  :hook (doom-first-file . global-git-commit-mode)
+  :config
+  ;; Enforce git commit conventions.
+  ;; See https://chris.beams.io/posts/git-commit/
+  (setq git-commit-summary-max-length 50
+        git-commit-style-convention-checks '(overlong-summary-line non-empty-second-line))
+  (setq-hook! 'git-commit-mode-hook fill-column 72)
+
+  (add-hook! 'git-commit-setup-hook #'+vc-start-in-insert-state-maybe-h)
+)
+
+(use-package! smerge-mode
+  :after jg-bindings-total
+  )
+
+(use-package! conflict-merge-state)
+
+;;-- end modes
+
+;;-- git extension
+
+(use-package! forge
   :after magit
   )
 
-(use-package! forge
+(use-package! magit-todos
   :after magit
   )
 
@@ -116,7 +158,7 @@
 (use-package! git-gutter-fringe
   :after fringe
   :config
-;; Redefine fringe bitmaps to take up only half the horizontal space
+  ;; Redefine fringe bitmaps to take up only half the horizontal space
   (define-fringe-bitmap 'git-gutter-fr:added [224] nil nil '(center repeated))
   (define-fringe-bitmap 'git-gutter-fr:modified [224] nil nil '(center repeated))
   (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240] nil nil 'bottom)
@@ -137,18 +179,6 @@
   (require 'magit-blame)
 )
 
-(use-package! git-commit
-  :hook (doom-first-file . global-git-commit-mode)
-  :config
-  ;; Enforce git commit conventions.
-  ;; See https://chris.beams.io/posts/git-commit/
-  (setq git-commit-summary-max-length 50
-        git-commit-style-convention-checks '(overlong-summary-line non-empty-second-line))
-  (setq-hook! 'git-commit-mode-hook fill-column 72)
-
-  (add-hook! 'git-commit-setup-hook #'+vc-start-in-insert-state-maybe-h)
-)
-
 (use-package! browse-at-remote
   :commands browse-at-remote
   :config
@@ -165,6 +195,20 @@
   (add-to-list 'browse-at-remote-remote-type-regexps '(:host "^codeberg\\.org$" :type "codeberg"))
   )
 
-(use-package! conflict-merge-state)
-
 (use-package! treemacs-magit)
+;;-- end git extension
+
+;;-- changelog
+
+(use-package! markdown-changelog
+  :defer t
+  )
+
+(use-package! git-cliff
+  :defer t
+  )
+
+(use-package! conventional-changelog
+  :defer t
+  )
+;;-- end changelog

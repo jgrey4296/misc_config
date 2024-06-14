@@ -1,6 +1,7 @@
 ;; -*- mode:emacs-lisp; lexical-binding: t;-*-
 
 ;;-- csharp
+(push '(c-sharp "c-sharp" "tree_sitter_c_sharp") treesit-load-name-override-list)
 
 ;;-- end csharp
 
@@ -48,9 +49,9 @@
                       :chars (?\n ?\})
                       )
                     )
-(spec-handling-add! eval
-                    `(fsharp-mode
-                      :start ,#'run-fsharp
+(spec-handling-add! repl
+                    '(fsharp-mode
+                      :start run-fsharp
                       )
                     )
 (spec-handling-add! ligatures
@@ -79,6 +80,13 @@
 (spec-handling-add! popup
                     '(dotnet
                       ("^\\*.+-dis\\*" :side right  :ttl nil :width  0.4 :quit t  :select nil :priority 50)
+                      )
+                    )
+(spec-handling-add! file-templates
+                    `(csharp
+                      ("Directory.Build.props\\'" :trigger "__directory_props" :mode dotnet-mode)
+                      (".csproj\\'"               :trigger "__csproj"          :mode dotnet-mode)
+                      (".cs\\'"                   :trigger "__cs"              :mode dotnet-mode)
                       )
                     )
 ;;-- end specs

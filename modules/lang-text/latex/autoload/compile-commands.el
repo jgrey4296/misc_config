@@ -1,11 +1,9 @@
 ;;; compile-commands.el -*- lexical-binding: t; -*-
 
-(defvar jg-latex-compile-program "pdflatex")
-(defvar jg-latex-compile-args '("-interaction=nonstopmode"))
-(defvar jg-latex-compile-search-re "^%% compiler:\\(.+\\)$")
 
 ;;;###autoload
 (defun +jg-latex-get-commands (&optional dir)
+  "Builds compile commands for latex"
   (interactive)
   (-when-let* ((curr-file (buffer-file-name))
                ;; (rel-file (f-relative (f-no-ext (buffer-file-name)) (projectile-project-root)))
@@ -50,7 +48,7 @@
      `("l3"       ,(format "fmtutil %s --all" (if (eq 'darwin system-type) "-user" "--sys")))
      `("find"                               "kpsewhich -all" :read)
      `("fonts"                              "updmap-user --listmaps")
-     `("system-fonts" ,(format              "system_profiler -json SPFontsDataType > %s" (expand-file-name "~/.cache/fonts/fonts.json")))
+     `("system-fonts" ,(format              "system_profiler -json SPFontsDataType > %s" (expand-file-name "~/_cache_/fonts/fonts.json")))
 
      (when (f-exists? (f-swap-ext curr-file "pdf"))
        `("open"     ,(if (eq 'darwin system-type)

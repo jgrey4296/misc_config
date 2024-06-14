@@ -10,7 +10,7 @@
       :n "|" #'general-insert-call
       :localleader
       :desc "Sort Defuns" "S"  #'+jg-lisp-sort-defuns
-      :desc "Pretty Print" "P" #'pp-buffer
+      :desc "Pretty Print" "p" #'+jg-lisp-pretty-region
       (:prefix ("e" . "eval")
        :desc "Byte Compile" :n "c" (cmd! (byte-compile-file buffer-file-name))
        )

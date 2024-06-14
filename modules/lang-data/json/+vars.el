@@ -5,7 +5,7 @@
                     '(jsonc-mode      . json)
                     )
 
-(spec-handling-add! lookup-regular
+(spec-handling-add! librarian-regular
                     '(dired-mode
                       ("Jq Manual" . "https://stedolan.github.io/jq/manual/")
                       )

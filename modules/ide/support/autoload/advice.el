@@ -1,10 +1,8 @@
 ;;; +advice.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
-(advice-add '+eval--ensure-in-repl-buffer :filter-return #'+jg-repl-fix)
-
-;;;###autoload
 (defun +jg-repl-fix (result)
+  ""
   (message "Repl Result: %s" result)
   (if (bufferp result)
       (with-current-buffer result
@@ -23,18 +21,12 @@
   )
 
 ;;;###autoload
-(advice-add '+jg-send-region-to-repl :filter-args #'+jg-advice-send-repl-auto-line)
-
-;;;###autoload
 (defun +jg-advice-send-repl-auto-line (args)
   " Handle visual-mode variance for send-region-to-repl "
   (if (not (eq evil-state 'visual))
       (list (line-beginning-position) (line-end-position) (if (eq (length args) 3)  (last args) nil))
     args)
   )
-
-;;;###autoload
-(advice-add 'lsp-diagnostics-flycheck-enable :around #'+lsp--respect-user-defined-checkers-a)
 
 ;;;###autoload
 (defun +lsp--respect-user-defined-checkers-a (fn &rest args)
@@ -46,9 +38,6 @@
     (apply fn args)))
 
 ;;;###autoload
-(advice-add 'lsp-describe-session :around #'+jg-lsp-dont-select-session)
-
-;;;###autoload
 (defun +jg-lsp-dont-select-session (fn &rest args)
   " Dont auto select lsp session buffer "
   (let ((curr (selected-window)))
@@ -56,9 +45,6 @@
     (select-window curr)
     )
   )
-
-;;;###autoload
-(advice-add 'lsp--shutdown-workspace :around #'+lsp-defer-server-shutdown-a)
 
 ;;;###autoload
 (defun +lsp-defer-server-shutdown-a (fn &optional restart)
@@ -102,17 +88,11 @@ server getting expensively restarted when reverting buffers."
   )
 
 ;;;###autoload
-(advice-add 'lsp--auto-configure :around #'+lsp--use-hook-instead-a)
-
-;;;###autoload
 (defun +lsp--use-hook-instead-a (fn &rest args)
     "Change `lsp--auto-configure' to not force `lsp-ui-mode' on us. Using a hook
 instead is more sensible."
     (letf! ((#'lsp-ui-mode #'ignore))
       (apply fn args)))
-
-;;;###autoload
-(advice-add 'eglot--managed-mode :around #'+lsp--defer-server-shutdown-a)
 
 ;;;###autoload
 (defun +lsp--defer-server-shutdown-a (fn &optional server)
@@ -140,4 +120,7 @@ server getting expensively restarted when reverting buffers."
   )
 
 ;;;###autoload
-(advice-add 'lsp-diagnostics--flycheck-level :before #'+lsp--log-diagnostic-build)
+(defun +syntax--disable-flycheck-popup-tip-maybe-a (&rest _)
+      (if evil-local-mode
+          (eq evil-state 'normal)
+        (not (bound-and-true-p company-backend))))

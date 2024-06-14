@@ -1,5 +1,8 @@
 ;;; +advice.el -*- lexical-binding: t; -*-
 
+(function-put 'princ 'original (symbol-function 'princ))
+(function-put 'princ 'mod (symbol-function '+jg-mail-princ-as-insert))
+
 ;;;###autoload
 (defun +jg-mail-header-summary ()
   "Return a message summary based on the message headers.
@@ -126,6 +129,7 @@ the message being processed."
     (apply fn rst))
   )
 
+;;;###autoload
 (defun +jg-mail-princ-as-insert (x buf)
   " For locally overriding use of princ
 when mail builds the mail-summary buffer,
@@ -133,18 +137,3 @@ as princ strips out any text properties"
   (with-current-buffer buf
     (insert x)
     ))
-
-(function-put 'princ 'original (symbol-function 'princ))
-(function-put 'princ 'mod (symbol-function '+jg-mail-princ-as-insert))
-
-;;;###autoload
-(advice-add 'rmail-header-summary :override #'+jg-mail-header-summary)
-
-;;;###autoload
-(advice-add 'rmail-create-summary :override #'+jg-mail-create-summary)
-
-;;;###autoload
-(advice-add 'rmail-new-summary-1 :around #'+jg-mail-new-summary-princ-override)
-
-;;;###autoload
-(advice-add 'rmail-summary-update-line :around #'+jg-mail-summary-update-princ-override)

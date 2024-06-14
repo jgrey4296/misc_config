@@ -1,8 +1,12 @@
 ;;; lang/latex/config.el -*- lexical-binding: t; -*-
 
 (local-load! "+vars")
-
+(local-load! "+defs")
 (defer-load! jg-bindings-total "+bindings")
+
+
+(advice-add 'Latex-fill-region-as-paragraph :around #'+latex-dont-indent-itemize-and-enumerate-a)
+(advice-add 'Latex-fill-region-as-para-do   :around #'+latex-re-indent-itemize-and-enumerate-a)
 
 (use-package! auctex
   :commands (LaTeX-mode latex-mode TeX-mode)

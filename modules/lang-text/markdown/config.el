@@ -34,8 +34,9 @@
 )
 
 (use-package! evil-markdown
+  :disabled t
   :after markdown-mode
-  :hook (markdown-mode . evil-markdown-mode)
+  ;; :hook (markdown-mode . evil-markdown-mode)
   :config
   (add-hook 'evil-markdown-mode-hook #'evil-normalize-keymaps)
   )

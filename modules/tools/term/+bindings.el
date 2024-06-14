@@ -13,7 +13,7 @@
 (map! :map jg-term-shell-mode-map
       :n "C-d" #'comint-send-eof
       :n "DEL" #'counsel-shell-history
-      :n "RET" #'comint-send-input
+      :ni "RET" #'comint-send-input
       :i "TAB" #'completion-at-point
 
       :n "," #'+jg-term-switch
@@ -37,7 +37,7 @@
 
       :n "H" #'comint-show-output
       :n "L" #'comint-show-maximum-output
-      :n "RET" #'comint-send-input
+      :ni "RET" #'comint-send-input
 
       :localleader
       "q"   #'comint-quit-subjob

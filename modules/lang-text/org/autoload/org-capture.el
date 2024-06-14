@@ -163,7 +163,9 @@ project."
 ;;;###autoload
 (defun +jg-org-capture-project-todo ()
   "Find the project's triage todos and use that."
-  (let* ((root (locate-dominating-file default-directory "doot.toml"))
+  (let* ((root (or (locate-dominating-file default-directory "doot.toml")
+                   (projectile-project-root)
+                   ))
          (todo (f-join root ".tasks/triage_todos.org"))
          )
     (set-buffer (org-capture-target-buffer todo))

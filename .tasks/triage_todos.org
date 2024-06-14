@@ -46,3 +46,13 @@ https://www.djcbsoftware.nl/code/mu/mu4e/Contexts-example.html
    :context:
         <2024-06-12 Wed> (defun +python/open-file-repl ()
    :END:
+** TRIAGE convert org journal carryover items to spec handling
+   [[/media/john/data/github/_config/modules/lang-text/org/config.el::244][Location]]
+   :context:
+        <2024-06-13 Thu>   (setq org-journal-carryover-items  "TODO=\"TODO\"|TODO=\"PROJ\"|TODO=\"STRT\"|TODO=\"WAIT\"|TODO=\"HOLD\"")
+   :END:
+** TRIAGE refactor find related to be able to make missing files
+   [[/media/john/data/github/_config/modules/ide/workspaces/autoload/related.el::5][Location]]
+   :context:
+        <2024-06-13 Thu> (defun +jg-projects-find-related ()
+   :END:

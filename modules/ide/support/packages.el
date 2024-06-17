@@ -21,3 +21,4 @@
 (package! tree-sitter-langs)
 
 (package! lint-result-mode :recipe (:host github :repo "jgrey4296/misc-modes" :files ("major-modes/lint-result-mode/*.el")))
+(package! env-handling :recipe (:host github :repo "jgrey4296/env-handling"))

@@ -111,6 +111,7 @@
       )
 
 (map! :map comint-mode-map
+      :after (shell comint)
       :localleader
       :desc "PdbTrack" ";" #'py-pdbtrack-toggle-stack-tracking
       )

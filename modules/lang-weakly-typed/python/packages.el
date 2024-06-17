@@ -4,7 +4,6 @@
 ;; (package! python :disable t :recipe (:local-repo "/usr/local/Cellar/emacs-plus@28/28.2/share/emacs/28.2/lisp/progmodes/"))
 ;; (package! python :type 'built-in :disable t)
 (package! python-mode :recipe (:host gitlab :repo "python-mode-devs/python-mode" :branch "master"))
-(package! env-handling :recipe (:host github :repo "jgrey4296/env-handling"))
 (package! toml)
 (package! pythonic)
 

@@ -105,7 +105,7 @@
       finder
       flycheck
       flymake
-      forge
+      ;; forge
       free-keys
       geiser
       ggtags

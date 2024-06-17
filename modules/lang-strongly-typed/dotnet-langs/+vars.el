@@ -1,7 +1,9 @@
 ;; -*- mode:emacs-lisp; lexical-binding: t;-*-
 
 ;;-- csharp
-(push '(c-sharp "c-sharp" "tree_sitter_c_sharp") treesit-load-name-override-list)
+(spec-handling-add! treesit-lang
+                    '(c-sharp :lib-base "c-sharp" :entry-func "tree_sitter_c_sharp")
+                    )
 
 ;;-- end csharp
 

@@ -6,6 +6,11 @@
 ;; See footer for licenses/metadata/notes as applicable
 ;;-- end Header
 
+;;;###autoload
+(defun +jg-remove-comint-capf ()
+  (remove-hook 'completion-at-point-functions 'comint-completion-at-point t)
+  (add-hook 'completion-at-point-functions 'comint-dynamic-complete-filename nil t)
+  )
 
 
 ;;;###autoload

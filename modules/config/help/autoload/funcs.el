@@ -58,3 +58,23 @@
   (set-auto-mode)
   (font-lock-debug-fontify)
   )
+
+;;;###autoload
+(defun +jg-help-report-after-loads ()
+  (interactive)
+  (when (get-buffer "*After-Loads*") (kill-buffer (get-buffer "*After-Loads*")))
+  (with-temp-buffer-window "*After-Loads*"
+      'display-buffer-use-some-window
+      nil
+      (princ (format "There are %s after-loads\nAnd %s after-load functions\n****\n\n" (length after-load-alist) (length after-load-functions)))
+    (cl-loop for queued in (sort (mapcar #'(lambda (x)
+                                             (cond ((symbolp x) (symbol-name x))
+                                                   ((stringp x) x)
+                                                   (t (format "%s" x))))
+                                         (mapcar #'car after-load-alist)) #'string-lessp)
+             do
+             (princ (format "- %s\n" queued))
+             )
+    (princ (format "\n\n****\nThere are %s after-loads\nAnd %s after-load functions" (length after-load-alist) (length after-load-functions)))
+    )
+  )

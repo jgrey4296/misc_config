@@ -142,7 +142,7 @@ c) are not valid projectile projects."
                         (and doom-projectile-cache-purge-non-projects
                              (not (doom-project-p proot)))
                         (projectile-ignored-project-p proot))
-                 do (doom-log "Removed %S from projectile cache" proot)
+                 do (dlog! "Removed %S from projectile cache" proot)
                  and do (remhash proot projectile-projects-cache)
                  and do (remhash proot projectile-projects-cache-time)
                  and do (remhash proot projectile-project-type-cache))

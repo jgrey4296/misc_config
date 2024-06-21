@@ -1,6 +1,6 @@
 ;;; +bindings.el -*- lexical-binding: t; no-byte-compile: t; -*-
 
-(doom-log "Setting up Ibuffer bindings: %s" (current-time-string))
+(dlog! "Setting up Ibuffer bindings: %s" (current-time-string))
 
 (map! :leader
       :desc "Ibuffer"               "DEL"   #'+jg-ibuffer-default

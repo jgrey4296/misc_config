@@ -6,7 +6,7 @@
 ;; See footer for licenses/metadata/notes as applicable
 ;;-- end Header
 
-(doom-log "Config SQL")
+(dlog! "Config SQL")
 
 (local-load! "+bindings")
 

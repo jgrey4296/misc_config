@@ -1,6 +1,6 @@
 ;;; +envs.el -*- lexical-binding: t; -*-
 
-(doom-log "Loading Python Envs")
+(dlog! "Loading Python Envs")
 
 (use-package! pythonic
   :commands (pythonic-activate pythonic-deactivate)

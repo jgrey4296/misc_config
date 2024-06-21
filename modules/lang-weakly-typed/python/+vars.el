@@ -1,6 +1,6 @@
 ;;; lang/jg-python/+vars.el -*- lexical-binding: t; -*-
 
-(doom-log "Python Vars")
+(dlog! "Python Vars")
 ;;-- general python
 
 (setq expand-region-preferred-python-mode 'python-mode)

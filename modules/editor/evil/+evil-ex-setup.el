@@ -1,6 +1,6 @@
 ;;; main/personal/+evil-setup.el -*- lexical-binding: t; -*-
 
-(doom-log "setting up evil-ex bindings: %s" (current-time-string))
+(dlog! "setting up evil-ex bindings: %s" (current-time-string))
 
 ;; These arg types will highlight matches in the current buffer
 (evil-ex-define-argument-type regexp-match

@@ -1,7 +1,7 @@
 ;;; emacs/bindings/+evil-maps.el -*- lexical-binding: t; -*-
 ;; Reminder: evil-mode-map-alist
 
-(doom-log "Setting up Evil Bindings: %s" (current-time-string))
+(dlog! "Setting up Evil Bindings: %s" (current-time-string))
 ;;-- setup
 
 (defvar jg-binding-insert-state-map             (copy-keymap evil-insert-state-map))
@@ -87,7 +87,7 @@
       )
 
 ;; Override default evil maps
-(doom-log "Finalising Evil bindings: %s" (current-time-string))
+(dlog! "Finalising Evil bindings: %s" (current-time-string))
 ;; Override
 (setq evil-normal-state-map       jg-binding-normal-state-map
       evil-insert-state-map       jg-binding-insert-state-map
@@ -117,5 +117,5 @@
       "#" (cmd! (insert "£"))
       )
 
-(doom-log "Evil Bindings Complete: %s" (current-time-string))
+(dlog! "Evil Bindings Complete: %s" (current-time-string))
 (provide 'jg-evil-bindings)

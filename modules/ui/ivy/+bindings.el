@@ -1,6 +1,6 @@
 ;;; completion/ivy/+bindings.el -*- lexical-binding: t; -*-
 
-(doom-log "Setting up Completion bindings: %s" (current-time-string))
+(dlog! "Setting up Completion bindings: %s" (current-time-string))
 
 (map! :leader
       :desc "Dir: General Insert"          "y 5" (cmd! (find-file general-insert-location))

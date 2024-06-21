@@ -1,5 +1,5 @@
 ;; util/base_bindings/+bindings.el -*- lexical-binding: t; -*-
-(doom-log "Setting up Misc Bindings")
+(dlog! "Setting up Misc Bindings")
 (global-set-key (kbd "C-c u") #'universal-argument)
 
 (define-key! read-expression-map

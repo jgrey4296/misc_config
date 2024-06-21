@@ -1,7 +1,7 @@
 ;;; domain-specific/bibtex/+bindings.el -*- lexical-binding: t; -*-
 ;; Bibtex bindings
 
-(doom-log "Setting up bibtex bindings: %s" (current-time-string))
+(dlog! "Setting up bibtex bindings: %s" (current-time-string))
 
 
 ;;-- bibtex-mode
@@ -121,7 +121,7 @@
 ;;-- end dired
 
 ;;-- evil-ex
-(doom-log "Setting up bibtex evil ex: %s" (current-time-string))
+(dlog! "Setting up bibtex evil ex: %s" (current-time-string))
 (evil-ex-define-cmd "ci[te]" #'+jg-bibtex-insert-wrapped)
 
 ;;-- end evil-ex

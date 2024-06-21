@@ -1,6 +1,6 @@
 ;;; completion/ivy/+bindings.el -*- lexical-binding: t; -*-
 
-(doom-log "Setting up Completion bindings: %s" (current-time-string))
+(dlog! "Setting up Completion bindings: %s" (current-time-string))
 (defvar jg-helm-map (make-sparse-keymap))
 ;; (set-keymap-parent jg-helm-map minibuffer-local-map)
 ;; (evil-make-intercept-map jg-helm-map)

@@ -1,6 +1,6 @@
 ;;; lang/jg-python/config.el -*- lexical-binding: t; -*-
 
-(doom-log "Config JG Python")
+(dlog! "Config JG Python")
 
 (local-load! "+spec-defs")
 (local-load! "+defs")

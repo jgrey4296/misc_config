@@ -1,5 +1,5 @@
 ;;; main/jg-org/+bindings.el -*- lexical-binding: t; -*-
-(doom-log "Setting up general access org bindings: %s" (current-time-string))
+(dlog! "Setting up general access org bindings: %s" (current-time-string))
 (local-load! "util/+org-standard-bindings")
 
 (defvar jg-org-mode-map (make-sparse-keymap))

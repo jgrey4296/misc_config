@@ -97,7 +97,7 @@
 (defun +jg-text-visual-select-whitespace ()
     (interactive)
     (evil-visual-char)
-    (call-interactively #'+jg-text-spaces)
+    (call-interactively #'+jg-evil-whitespace)
   )
 
 ;;;###autoload

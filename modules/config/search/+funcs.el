@@ -19,3 +19,5 @@
   )
 
 ;; (fd-dired-minor-mode 0)
+
+(add-hook! 'dired-mode-hook #'fd-dired-minor-mode)

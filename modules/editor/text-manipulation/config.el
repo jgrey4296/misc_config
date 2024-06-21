@@ -4,8 +4,7 @@
 (local-load! "+vars")
 (local-load! "+spelling")
 (local-load! "+formatting")
-
-(defer-load! "+spec-defs")
+(local-load! "+spec-defs")
 
 (defer-load! jg-bindings-total "+bindings")
 

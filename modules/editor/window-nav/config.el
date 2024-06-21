@@ -21,8 +21,7 @@
 ;;; Code:
 
 (local-load! "+vars")
-
-(defer-load! "+spec-defs")
+(local-load! "+spec-defs")
 
 (defer-load! jg-bindings-total "+bindings")
 

@@ -219,7 +219,7 @@
                     '(tuareg-mode     . ocaml)
                     )
 
-(spec-handling-add! python-env
+(spec-handling-add! env-handling
                     '(flycheck
                       (:support flycheck #'(lambda (path name)
                                              (when (featurep 'flycheck)
@@ -237,7 +237,7 @@
                       )
                       )
 
-(spec-handling-add! python-env
+(spec-handling-add! env-handling
                     '(lsp
                       (:support lsp
                                 #'(lambda (state) (when (featurep 'lsp) (add-hook 'python-mode-hook #'lsp-deferred)))
@@ -254,7 +254,7 @@
                       )
                     )
 
-(spec-handling-add! python-env
+(spec-handling-add! env-handling
                     '(eglot
                       (:support eglot
                                 #'(lambda (state) (when (featurep 'eglot) (add-hook 'python-mode-hook #'eglot-ensure)))
@@ -264,7 +264,7 @@
                       )
                     )
 
-(spec-handling-add! python-env
+(spec-handling-add! env-handling
                     '(semantic
                       (:support semantic
                                 #'(lambda (state) (when (featurep 'semantic) (add-hook 'python-mode-hook #'semantic-mode)))

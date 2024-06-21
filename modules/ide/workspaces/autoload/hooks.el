@@ -82,7 +82,7 @@
 ;;;###autoload
 (defun +workspaces-remote-buffer-p (buf)
   ;; And don't save TRAMP buffers; they're super slow to restore
-  (let ((dir (buffer-local-value 'default-directory buf)))
+  (let ((dir (with-current-buffer buff  default-directory)))
     (ignore-errors (file-remote-p dir))))
 
 ;;;###autoload

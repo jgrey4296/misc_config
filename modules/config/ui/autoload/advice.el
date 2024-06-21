@@ -10,7 +10,7 @@ windows, switch to `doom-fallback-buffer'. Otherwise, delegate to original
 `kill-current-buffer'.
 "
   (let* ((buf (current-buffer))
-         (buf-mode (buffer-local-value 'major-mode buf))
+         (buf-mode (with-current-buffer buf major-mode))
          (other-windows (delq (selected-window) (get-buffer-window-list buf nil t)))
          (inhibit-redisplay t)
          (doom-inhibit-switch-buffer-hooks t)

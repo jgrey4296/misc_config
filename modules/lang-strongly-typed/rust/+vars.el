@@ -98,6 +98,18 @@
                       ("\\.h\\'" . c-mode)
                       )
                     )
+
+(spec-handling-add! babel
+                    '(rust
+                      (:name rust       :lib rustic-babel)
+                      )
+                    )
+
+(spec-handling-add! org-src
+                    '(rust
+                      ("rust" . rustic)
+                      )
+                    )
 ;;-- end specs
 
 ;;-- LSP

@@ -43,6 +43,17 @@
                     `(lua-mode ,(+lua-generate-lsp-server-command))
                     )
 
+(spec-handling-add! babel
+                    '(lua
+                      (:name lua        :lib ob-lua)
+                      )
+                    )
+(spec-handling-add! org-src
+                    '(lua
+                      ("lua" . lua)
+                      )
+                   )
+
 ;; (spec-handling-add! projects
 ;;                     `(love2d ,#'+lua-love-project-root :run ,#'+lua-love-build-command)
 ;;                     )

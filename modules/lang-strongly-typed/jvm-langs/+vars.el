@@ -162,4 +162,18 @@
 (spec-handling-add! compile-commands
                     '(jvm +jg-jvm-get-gradle-commands)
                     )
+(spec-handling-add! babel
+                    '(jvm
+                      (:name groovy     :lib ob-groovy)
+                      (:name java       :lib ob-java)
+                      )
+                    )
+
+(spec-handling-add! org-src
+                    '(jvm
+                      ("java" . java)
+                      ("groovy" . groovy)
+                      ("kotlin" . kotlin)
+                      )
+                    )
 ;;-- end specs

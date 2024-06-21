@@ -41,3 +41,21 @@
                       ("\\.bash\\'" . sh-mode)
                       )
                     )
+
+(spec-handling-add! babel
+                    '(term
+                     (:name bash       :lib ob-shell)
+                     (:name eshell     :lib ob-eshell)
+                     (:name sh         :lib ob-shell)
+                     (:name shell      :lib ob-shell)
+                      )
+                    )
+
+(spec-handling-add! org-src
+                    '(term
+                      ("bash" . sh)
+                      ("shell" . sh)
+                      ("sh" . sh)
+                      ("bash2" . sh)
+                      )
+                    )

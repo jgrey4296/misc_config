@@ -91,4 +91,19 @@
                       (".cs\\'"                   :trigger "__cs"              :mode dotnet-mode)
                       )
                     )
+(spec-handling-add! babel
+                    '(dotnet
+                      (:name c          :lib ob-C)
+                      (:name fsharp     :lib ob-fsharp)
+                      )
+                    )
+(spec-handling-add! org-src
+                    '(dotnet
+                      ("csharp" . csharp)
+                      ("fsharp" . fsharp)
+                      ("c#" . csharp)
+                      ("f#" . fsharp)
+                      )
+                    )
+
 ;;-- end specs

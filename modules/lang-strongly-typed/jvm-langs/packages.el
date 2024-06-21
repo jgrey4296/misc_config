@@ -11,3 +11,4 @@
 (package! sbt-mode)
 (package! scala-mode)
 (when (modulep! +lsp) (package! lsp-metals))
+(package! ob-kotlin)

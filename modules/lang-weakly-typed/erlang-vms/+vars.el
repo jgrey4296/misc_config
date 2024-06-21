@@ -87,4 +87,12 @@
                       (:name elixir :lib ob-elixir :mode elixir)
                       )
                     )
+
+(spec-handling-add! org-src
+                    '(erlang
+                      ("erlang" . erlang)
+                      ("elixir" . elixir)
+                      )
+                    )
+
 ;;-- end specs

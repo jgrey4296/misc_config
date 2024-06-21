@@ -119,4 +119,10 @@
 (spec-handling-add! compile-commands
                     '(latex +jg-latex-get-commands)
                     )
+(spec-handling-add! babel
+                    '(latex
+                      (:name latex      :lib ob-latex)
+                      (:name lilypond   :lib ob-lilypond)
+                      )
+                    )
 ;;-- end specs

@@ -70,10 +70,9 @@
                                                   (plist-get data :name))
                                                  ((stringp (plist-get data :name))
                                                   (intern (plist-get data :name)))
-                                                 (t (warn "Invalid name for org babel specified: %s" data)
-                                                    "invalid")
                                                  )
-                                           data))
+                                           data
+                                           ))
                     )
 
 (spec-handling-new! org-src org-src-lang-modes

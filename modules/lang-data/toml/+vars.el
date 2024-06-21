@@ -43,3 +43,8 @@
                                  )
                       )
                     )
+(spec-handling-add! org-src
+                    '(toml
+                      ("toml" . toml)
+                      )
+                    )

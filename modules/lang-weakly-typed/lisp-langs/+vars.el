@@ -143,8 +143,21 @@
 (spec-handling-add! company
                     '(emacs-lisp-mode (:mode company-elisp))
                     )
-
 (spec-handling-add! eval
                     '(elisp-mode :fn eval-region)
+                    )
+(spec-handling-add! org-src
+                    '(lisp
+                      ("elisp" . emacs-lisp)
+                      )
+                    )
+(spec-handling-add! babel
+                    '(lisp
+                      (:name lisp       :lib ob-lisp)
+                      (:name elisp      :lib ob-emacs-lisp)
+                      (:name clojure    :lib ob-clojure)
+                      (:name scheme     :lib ob-scheme)
+                      (:name emacs-lisp :lib ob-emacs-lisp)
+                      )
                     )
 ;;-- end specs

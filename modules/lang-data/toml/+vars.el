@@ -30,7 +30,7 @@
                       ("\\.cfg\\'" . conf-mode)
                       )
                     )
-(spec-handling-add! fold :form 'override
+(spec-handling-add! fold
                     `(toml
                       :modes (conf-toml-mode)
                       :priority -50

@@ -76,6 +76,8 @@
 (map! :map inferior-python-mode-map
       :after python-mode
       "TAB" #'+jg-snippets-complete-or-snippet
+      :localleader
+      "q" #'comint-send-eof
       )
 
 (map! :map cython-mode-map

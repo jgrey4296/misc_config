@@ -19,7 +19,6 @@
 ;;
 ;;; Code:
 
-
 (after! projectile
   (add-to-list 'projectile-project-root-files "Cargo.toml")
   )

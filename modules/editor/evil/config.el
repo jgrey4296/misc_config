@@ -227,7 +227,7 @@
             '(("" . "\\`+?evil-textobj-tree-sitter-function--\\(.*\\)\\(?:.inner\\|.outer\\)") . (nil . "\\1")))
   )
 
-(use-package! exato
+(use-package! exato ;; xml attributes text objects
   :commands evil-outer-xml-attr evil-inner-xml-attr
   )
 

@@ -9,5 +9,5 @@
 (define-ibuffer-filter agenda-buffers
     "Filter for agendas"
   (:description "agenda buffers")
-  (buffer-local-value 'jg-org-startup-agenda buf)
+  (with-current-buffer buf jg-org-startup-agenda)
   )

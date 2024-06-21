@@ -7,7 +7,9 @@
     minibuffer-local-must-match-map
     minibuffer-local-isearch-map
     evil-ex-completion-map
-    read-expression-map)
+    read-expression-map
+    read--expression-map
+    )
   "A list of all the keymaps used for the minibuffer."
   )
 
@@ -21,7 +23,7 @@
 
 (defvar jg-minibuffer-evil-ex-search-keymap (make-sparse-keymap))
 
-(map! :map jg-minibuffer-ivy-map
+(map! :map jg-minibuffer-ivy-map ;; general
       ;; :g [escape]  #'+jg-minibuffer-normal-or-exit
       :ni "TAB"       #'ivy-alt-done
       :i  "<backtab>" #'ivy-dispatching-call
@@ -51,7 +53,7 @@
       :n  ">"         #'end-of-line
       :n  "v"         #'ignore
 )
-(map! :map jg-minibuffer-ivy-map
+(map! :map jg-minibuffer-ivy-map ;; C-{}
       "C-g"     #'+jg-minibuffer-normal-or-exit
       "C-SPC"   #'ivy-call-and-recenter  ;; preview file
       "C-l"     #'ivy-alt-done
@@ -64,12 +66,12 @@
       "<down>"  #'ivy-scroll-down-command
       "<up>"    #'ivy-scroll-up-command
       )
-(map! :map jg-minibuffer-ivy-map
+(map! :map jg-minibuffer-ivy-map ;; local
       :localleader
       :desc "Results as Buffer"        :n "b" #'+ivy/woccur
       )
 
-(map! :map jg-minibuffer-local-map
+(map! :map minibuffer-local-map
       [escape] #'abort-recursive-edit
       :g "RET" #'exit-minibuffer
       :ni "RET" #'exit-minibuffer
@@ -77,7 +79,7 @@
       :n "|"   #'minibuffer-keyboard-quit
       :g "RET" #'exit-minibuffer
       )
-(map! :map jg-minibuffer-local-map
+(map! :map jg-minibuffer-local-map ;; C-{}
       "C-j"    #'next-line
       "C-k"    #'previous-line
       "C-S-j"  #'scroll-up-command
@@ -88,21 +90,23 @@
 
 (map! :map (jg-minibuffer-evil-ex-completion-map jg-minibuffer-evil-ex-search-keymap)
       :ng "RET" #'exit-minibuffer
-      "C-a" #'evil-beginning-of-line
-      "C-b" #'evil-backward-char
-      "C-f" #'evil-forward-char
       :gi "C-j" #'next-complete-history-element
       :gi "C-k" #'previous-complete-history-element
       :n "k" #'previous-history-element
       :n "j" #'next-history-element
+
+      "C-a" #'evil-beginning-of-line
+      "C-b" #'evil-backward-char
+      "C-f" #'evil-forward-char
       )
 
-(map! :map jg-read-expression-map
-  "C-j" #'next-line-or-history-element
-  "C-k" #'previous-line-or-history-element
-  :n "k" #'previous-history-element
-  :n "j" #'next-history-element
-  )
+(map! :map (jg-minibuffer-read-expression-map read--expression-map)
+      "C-j" #'next-line-or-history-element
+      "C-k" #'previous-line-or-history-element
+      :n "k" #'previous-history-element
+      :n "j" #'next-history-element
+      :n "q" #'minibuffer-keyboard-quit
+      )
 
 (map! :map ctl-x-map
       "[" "("
@@ -114,7 +118,8 @@
         )
   )
 
-(setq minibuffer-local-map jg-minibuffer-local-map
+(setq minibuffer-local-map   jg-minibuffer-local-map
       evil-ex-completion-map jg-minibuffer-evil-ex-completion-map
-      evil-ex-search-keymap jg-minibuffer-evil-ex-search-keymap
+      evil-ex-search-keymap  jg-minibuffer-evil-ex-search-keymap
+      read-expression-map    jg-minibuffer-read-expression-map
       )

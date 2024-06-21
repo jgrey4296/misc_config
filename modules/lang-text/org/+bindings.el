@@ -116,12 +116,13 @@
       :desc "Run Org Test" "T" #'+jg-org-test-org-file
       )
 (map! :map org-src-mode-map
-      :n "q" #'evil-edit-src-abort
-      :n "C-c C-c" #'evil-edit-src-save
-      :n "C-c C-k" #'evil-edit-src-abort
+      :n "Q" #'org-edit-src-abort
+      :n "q" #'org-edit-src-save
+      :n "C-c C-c" #'org-edit-src-save
+      :n "C-c C-k" #'org-edit-src-abort
       :localleader
-      "q" #'evil-edit-src-abort
-      "w" #'evil-edit-src-save
+      "q" #'org-edit-src-abort
+      "w" #'org-edit-src-save
 
       )
 
@@ -153,5 +154,5 @@
         org-capture-mode-map jg-org-capture-map
         )
   (push (cons 'evil-org-mode jg-org-mode-map) minor-mode-map-alist)
-
+  (evil-make-overriding-map org-src-mode-map)
   )

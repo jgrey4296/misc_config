@@ -76,6 +76,7 @@
 (map! :map inferior-python-mode-map
       :after python-mode
       "TAB" #'+jg-snippets-complete-or-snippet
+      :n "DEL" #'counsel-shell-history
       :localleader
       "q" #'comint-send-eof
       )
@@ -122,4 +123,9 @@
       :n "RET" #'py-test-minor-function-dwim
       :i "RET" #'evil-ret
       :n "DEL" #'py-test-copy-current-test
+      )
+
+(map! :map python-pytest-mode-map
+      :n "DEL" #'counsel-shell-history
+
       )

@@ -40,4 +40,9 @@
                     '(vim
                       ("\\.vimrc\\'" . vimrc-mode)
                       )
+                    '(c
+                      ("\\.c\\'" . c-mode)
+                      ("\\.cpp\\'" . c-mode)
+                      ("\\.h\\'" . c-mode)
+                      )
                     )

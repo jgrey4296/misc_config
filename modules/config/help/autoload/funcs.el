@@ -78,3 +78,20 @@
     (princ (format "\n\n****\nThere are %s after-loads\nAnd %s after-load functions" (length after-load-alist) (length after-load-functions)))
     )
   )
+
+;;;###autoload
+(defun +jg-help-describe-active-maps ()
+  (interactive)
+  (let ((maps (current-active-maps)))
+    (with-temp-buffer-window "*Maps*" 'display-buffer-use-some-window nil
+       (cl-loop for map in maps
+                do
+                (princ map)
+                (princ "\n\n")
+                )
+       )
+    )
+  (with-current-buffer "*Maps*"
+    (emacs-lisp-mode)
+    )
+  )

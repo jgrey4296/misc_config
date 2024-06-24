@@ -29,7 +29,7 @@
        :desc "Current file name"        "f"          #'+default/insert-file-path
        :desc "Current file path"        "F"   (cmd!! #'+default/insert-file-path t)
        :desc "Snippet"                  "S"          #'yas-insert-snippet
-       :desc "From Minibuffer history"  "m"          #'counsel-minibuffer-history
+       ;; :desc "From Minibuffer history"  "m"          #'counsel-minibuffer-history
        :desc "Unicode"                  "u"          #'insert-char
        :desc "From Kill Ring"           "y"          #'+default/yank-pop
 

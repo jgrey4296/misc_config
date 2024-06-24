@@ -69,6 +69,7 @@
 ;;-- bindings
 (map! :map jg-help-map
       :prefix ("b" . "Bindings")
+      "a" #'+jg-help-describe-active-maps
       "b" #'describe-bindings
       "f" #'which-key-show-full-keymap
       "i" #'which-key-show-minor-mode-keymap

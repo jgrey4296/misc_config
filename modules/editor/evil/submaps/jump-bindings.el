@@ -3,7 +3,7 @@
 (map! :map jg-binding-jump-map ;; avy
       ;; 1 2 3 "u" "h"
       :desc "Ivy resume"            "`"   #'ivy-resume
-      :desc "helms"                 "a" 'jg-binding-helm-map
+      :desc "helms"                 "a"   'jg-binding-helm-map
       :desc "Ibuffer"               "DEL" #'ibuffer
       :desc "Jump to bookmark"      "RET" #'bookmark-jump
       :desc "Last Change"           ";"   #'goto-last-change

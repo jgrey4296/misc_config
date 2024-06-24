@@ -11,3 +11,12 @@
   (when company-candidates
     (company-abort))
   )
+
+;;;###autoload
+(defun +company-enable-project-dicts-h (mode &rest _)
+  "Enable per-project dictionaries."
+  (if (symbol-value mode)
+      (add-to-list 'company-dict-minor-mode-list mode nil #'eq)
+    (setq company-dict-minor-mode-list (delq mode company-dict-minor-mode-list)))
+  )
+)

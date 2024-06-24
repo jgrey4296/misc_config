@@ -1,5 +1,8 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
+(map! jg-binding-normal-state-map
+      :desc "From Minibuffer history"  "I m"          #'counsel-minibuffer-history
+      )
 
 ;;-- ivy
 (map! :map jg-minibuffer-ivy-map ;; general
@@ -53,16 +56,21 @@
 
 ;;-- end ivy
 
+;;-- minibuffer-completion
 (map! :map jg-minibuffer-local-map
-      [escape]    #'abort-recursive-edit
-      :g "RET"    #'exit-minibuffer
-      :n "DEL"    #'counsel-minibuffer-history
-      :n "j"      #'next-line-or-history-element
-      :n "k"      #'previous-line-or-history-element
-      :n "|"      #'minibuffer-keyboard-quit
-      :i "j"      #'self-insert-command
-      :i "C-j"    #'next-line-or-history-element
-      :i "C-k"    #'previous-line-or-history-element
+      [escape]       #'abort-recursive-edit
+      :g "RET"       #'exit-minibuffer
+      :n "DEL"       #'counsel-minibuffer-history
+      :n "j" nil
+      :n "k" nil
+      ;; :n "j"      #'next-line-or-history-element
+      ;; :n "k"      #'previous-line-or-history-element
+      ;; :n "j"         #'next-line
+      ;; :n "k"         #'previous-line
+      :n "|"         #'minibuffer-keyboard-quit
+      :i "j"         #'self-insert-command
+      :i "C-j"       #'next-line-or-history-element
+      :i "C-k"       #'previous-line-or-history-element
       )
 
 (map! :map (jg-minibuffer-evil-ex-completion-map jg-minibuffer-evil-ex-search-keymap)
@@ -87,6 +95,8 @@
       :n "j"    #'next-history-element
       :n "q"    #'minibuffer-keyboard-quit
       )
+
+;;-- end minibuffer-completion
 
 (after! ivy
   (setq ivy-minibuffer-map jg-minibuffer-ivy-map)

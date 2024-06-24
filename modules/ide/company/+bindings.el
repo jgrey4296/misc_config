@@ -1,8 +1,5 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
-(defvar jg-company-active-map (make-sparse-keymap))
-(defvar jg-company-search-map (make-sparse-keymap))
-
 (map! :map jg-company-search-map
       [escape] (cmd! (company-enable-overriding-keymap company-active-map))
       "|"      (cmd! (company-enable-overriding-keymap company-active-map))
@@ -55,6 +52,16 @@
 
       )
 
+(map! :map jg-company-search-map  ; applies to `company-filter-map' too
+      :after company
+      "C-n"     #'company-select-next-or-abort
+      "C-p"     #'company-select-previous-or-abort
+      "C-j"     #'company-select-next-or-abort
+      "C-k"     #'company-select-previous-or-abort
+      "C-s"     #'company-filter-candidates
+      [escape]  #'company-search-abort
+      )
+
 (map! :map jg-company-active-map
       [escape] #'company-abort
       "j" #'company-select-next
@@ -66,8 +73,42 @@
       "RET" #'company-complete-selection
       )
 
+(map! :map jg-company-active-map
+      ;; :i "C-@"    (cmds! (not (minibufferp)) #'company-complete-common)
+      ;; :i "C-SPC"  (cmds! (not (minibufferp)) #'company-complete-common)
+
+      "C-w"     nil  ; don't interfere with `evil-delete-backward-word'
+      "C-n"     #'company-select-next
+      "C-p"     #'company-select-previous
+      "C-j"     #'company-select-next
+      "C-k"     #'company-select-previous
+      "C-h"     #'company-show-doc-buffer
+      "C-u"     #'company-previous-page
+      "C-d"     #'company-next-page
+      "C-s"     #'company-filter-candidates
+      "C-S-s"   #'counsel-company
+      "C-SPC"   #'company-complete-common
+      "TAB"     (cmd! (company-cancel) (indent-for-tab-command))
+      [tab]     (cmd! (company-cancel) (indent-for-tab-command))
+      ;; "TAB"     #'company-complete-common-or-cycle
+      ;; [tab]     #'company-complete-common-or-cycle
+      [backtab] #'company-select-previous
+      [f1]      nil
+         )
+
 (after! company
   (setq company-active-map jg-company-active-map
         company-search-map jg-company-search-map
         )
  )
+
+;; ;; TODO Omni-completion
+;; :i "C-l"    #'+company/whole-lines
+;; :i "C-k"    #'+company/dict-or-keywords
+;; :i "C-f"    #'company-files
+;; :i "C-]"    #'company-etags
+;; :i "s"      #'company-ispell
+;; :i "C-s"    #'company-yasnippet
+;; :i "C-o"    #'company-capf
+;; :i "C-n"    #'+company/dabbrev
+;; :i "C-p"    #'+company/dabbrev-code-previous

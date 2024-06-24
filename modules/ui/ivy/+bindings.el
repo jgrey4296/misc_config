@@ -4,6 +4,7 @@
 
 (map! :leader
       :desc "Dir: General Insert"          "y 5" (cmd! (find-file general-insert-location))
+      :desc "Messages"                     "0" #'+jg-ivy-popup-messages
       )
 
 ;;-- remaps
@@ -65,53 +66,6 @@
       )
 ;;-- end ivy
 
-;;-- company
-(map! :map company-active-map
-      :after company
-      ;; :i "C-@"    (cmds! (not (minibufferp)) #'company-complete-common)
-      ;; :i "C-SPC"  (cmds! (not (minibufferp)) #'company-complete-common)
-
-      "C-w"     nil  ; don't interfere with `evil-delete-backward-word'
-      "C-n"     #'company-select-next
-      "C-p"     #'company-select-previous
-      "C-j"     #'company-select-next
-      "C-k"     #'company-select-previous
-      "C-h"     #'company-show-doc-buffer
-      "C-u"     #'company-previous-page
-      "C-d"     #'company-next-page
-      "C-s"     #'company-filter-candidates
-      "C-S-s"   #'counsel-company
-      "C-SPC"   #'company-complete-common
-      "TAB"     (cmd! (company-cancel) (indent-for-tab-command))
-      [tab]     (cmd! (company-cancel) (indent-for-tab-command))
-      ;; "TAB"     #'company-complete-common-or-cycle
-      ;; [tab]     #'company-complete-common-or-cycle
-      [backtab] #'company-select-previous
-      [f1]      nil
-         )
-
-(map! :map company-search-map  ; applies to `company-filter-map' too
-      :after company
-      "C-n"     #'company-select-next-or-abort
-      "C-p"     #'company-select-previous-or-abort
-      "C-j"     #'company-select-next-or-abort
-      "C-k"     #'company-select-previous-or-abort
-      "C-s"     #'company-filter-candidates
-      [escape]  #'company-search-abort
-      )
-
-;; ;; TODO Omni-completion
-;; :i "C-l"    #'+company/whole-lines
-;; :i "C-k"    #'+company/dict-or-keywords
-;; :i "C-f"    #'company-files
-;; :i "C-]"    #'company-etags
-;; :i "s"      #'company-ispell
-;; :i "C-s"    #'company-yasnippet
-;; :i "C-o"    #'company-capf
-;; :i "C-n"    #'+company/dabbrev
-;; :i "C-p"    #'+company/dabbrev-code-previous
-;;-- end company
-
 ;;-- lisp
 (map! :map emacs-lisp-mode-map
       :localleader
@@ -119,12 +73,6 @@
       )
 
 ;;-- end lisp
-
-;;-- leader helms/ivys
-(map! :leader
-      :desc "Messages"                     "0" #'+jg-ivy-popup-messages
-      )
-;;-- end leader helms/ivys
 
 (map! :map jg-binding-change-map
       :desc "Change Mode" "m"       #'+jg-ivy-change-major-mode

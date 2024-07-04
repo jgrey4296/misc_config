@@ -17,6 +17,6 @@
   "Enable per-project dictionaries."
   (if (symbol-value mode)
       (add-to-list 'company-dict-minor-mode-list mode nil #'eq)
-    (setq company-dict-minor-mode-list (delq mode company-dict-minor-mode-list)))
+    (setq company-dict-minor-mode-list (delq mode company-dict-minor-mode-list))
   )
 )

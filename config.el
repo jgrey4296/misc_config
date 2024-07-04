@@ -87,24 +87,25 @@
 ;;   (defvaralias 'jgblahtest 'jgtest)
 ;; )
 ;;
-(setq warning-suppress-log-types
-      '( ;; Full Suppress
-        (defvaralias losing-value woman-topic-history)
-        (defvaralias losing-value rustic-indent-method-chain)
-        ;; (flycheck syntax-checker)
-        ;; ((python python-shell-completion-native-turn-on-maybe))
-        ((org-element org-element-cache))
-        ((flycheck syntax-checker))
-        (error "Invalid search bound (wrong side of point)")
-        )
-      warning-suppress-types
-      '( ;; Don't Show, silently added to warnings buffer
-        (defvaralias losing-value python-shell-interpreter)
-        ;; ((python python-shell-completion-native-turn-on-maybe))
-        (org-element org-element-cache)
-        (org-element org-element-parser)
-        (bytecomp)
-        ;; (flycheck syntax-checker)
-        )
-      )
+(setq warning-suppress-types '((bytecomp)))
+
+(spec-handling-setq! warnings 50
+                     warning-suppress-log-types ;; Full Suppress
+                     '((defvaralias losing-value woman-topic-history)
+                       (defvaralias losing-value rustic-indent-method-chain)
+                       (losing-value rustic-indent-method-chain)
+                       ;; ((python python-shell-completion-native-turn-on-maybe))
+                       ((org-element org-element-cache))
+                       ((flycheck syntax-checker))
+                       (error "Invalid search bound (wrong side of point)")
+                       )
+                     warning-suppress-types ;; Don't Show, silently added to warnings buffer
+                     '((defvaralias losing-value python-shell-interpreter)
+                       (org-element org-element-cache)
+                       (org-element org-element-parser)
+                       (bytecomp)
+                       (flycheck syntax-checker)
+                       ;; ((python python-shell-completion-native-turn-on-maybe))
+                       )
+                     )
 ;;-- end warning suppression

@@ -11,11 +11,6 @@
   (setq lua-indent-level 2)
   :config
 
-  (defvar +lua-lsp-dir (concat doom-data-dir "lsp/lua-language-server/")
-    "Absolute path to the directory of sumneko's lua-language-server.
-This directory MUST contain the 'main.lua' file and be the in-source build of
-lua-language-server.")
-
   (add-hook 'lua-mode-local-vars-hook #'tree-sitter! 'append)
 
   )

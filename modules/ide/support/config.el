@@ -195,6 +195,4 @@
   (add-hook 'lint-result-mode-hook '+fold/close-all)
   )
 
-(use-package! env-handling)
-
 ;;; config.el ends here

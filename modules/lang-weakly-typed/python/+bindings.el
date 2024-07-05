@@ -1,14 +1,6 @@
 ;;; lang/jg-python/+bindings.el -*- lexical-binding: t; -*-
 
 (map! :leader
-      (:prefix ("c v" . "Python Environments")
-      :desc "Activate Env" "a" #'env-handling-go!
-      :desc "Clear Env"    "d" #'env-handling-clear-env!
-      :desc "Report Env"   "r" #'env-handling-report!
-      :desc "Lock Env"     "l" #'env-handling-lock!
-      :desc "Create venv"  "c" #'env-handling-create-env!
-      )
-
       :desc "Select Python Repl" "c r p" #'+jg-python-select-repl
       )
 
@@ -65,12 +57,13 @@
       :prefix ("e" . "Environment")
       :desc "Choose Support" "c" #'+jg-python-support
       :desc "Current Support" "C" (cmd! (message "Current Python Support: %s" jg-python-last-chosen-support))
-      :desc "install"     "i" #'pipenv-install
-      :desc "pipenv lock" "l" #'pipenv-lock
-      :desc "open module" "o" #'pipenv-open
-      :desc "run"         "r" #'pipenv-run
-      :desc "shell"       "s" #'pipenv-shell
-      :desc "uninstall"   "u" #'pipenv-uninstall
+      :desc "install"     "i"    #'pipenv-install
+      :desc "pipenv lock" "l"    #'pipenv-lock
+      :desc "open module" "o"    #'pipenv-open
+      :desc "run"         "r"    #'pipenv-run
+      :desc "shell"       "s"    #'pipenv-shell
+      :desc "uninstall"   "u"    #'pipenv-uninstall
+      :desc "mamba activate" "m" #'micromamba-activate
       )
 
 (map! :map inferior-python-mode-map

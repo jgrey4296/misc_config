@@ -31,9 +31,3 @@
                     :loop 'collect
                     `(,key ,(plist-get val :lib-base) ,(plist-get val :entry-func))
                     )
-
-(spec-handling-new! env-handling env-handling-registered
-                    :loop 'append
-                    val
-                    ;; todo (apply #'make-env-handler val)
-                    )

@@ -1,6 +1,6 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
-(map! jg-binding-normal-state-map
+(map! :map jg-binding-normal-state-map
       :desc "From Minibuffer history"  "I m"          #'counsel-minibuffer-history
       )
 
@@ -59,7 +59,7 @@
 ;;-- minibuffer-completion
 (map! :map jg-minibuffer-local-map
       [escape]       #'abort-recursive-edit
-      :g "RET"       #'exit-minibuffer
+      :n "RET"       #'exit-minibuffer
       :n "DEL"       #'counsel-minibuffer-history
       :n "j" nil
       :n "k" nil
@@ -86,7 +86,7 @@
       "C-f"     #'evil-forward-char
       )
 
-(map! :map (jg-minibuffer-read-expression-map read--expression-map)
+(map! :map jg-minibuffer-read-expression-map
       :n "DEL"  #'counsel-minibuffer-history
       :i "DEL"  #'backward-delete-char
       "C-j"     #'next-line-or-history-element
@@ -106,4 +106,5 @@
 (setq evil-ex-completion-map jg-minibuffer-evil-ex-completion-map
       evil-ex-search-keymap  jg-minibuffer-evil-ex-search-keymap
       read-expression-map    jg-minibuffer-read-expression-map
+      read--expression-map   jg-minibuffer-read-expression-map
       )

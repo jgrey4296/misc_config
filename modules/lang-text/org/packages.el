@@ -38,11 +38,8 @@
 
 (package! org-unit-test :recipe (:host github :repo "jgrey4296/misc-modes" :files ("minor-mode/org-unit-test/*.el")))
 
-(package! org-drill)
-(package! org-pomodoro)
-(package! org-projectile)
 (package! org-superstar)
-(package! outline-toc)
+
 (package! link-hint)
 (package! graphviz-dot-mode)
 
@@ -84,3 +81,19 @@
 (package! ox-hugo :recipe (:host github :repo "kaushalmodi/ox-hugo" :nonrecursive t))
 (package! ox-rst)
 (package! ox-epub :recipe (:host github :repo "jgrey4296/misc-modes" :files ("ox-epub/*.el") :local-repo "misc-modes"))
+
+;;; Disabled
+(package! org-drill       :disable t)
+(package! org-pomodoro    :disable t)
+(package! org-projectile  :disable t)
+(package! outline-toc     :disable t)
+(package! org-contacts    :disable t)
+(package! org-contrib     :disable t)
+(package! org-crypt       :disable t)
+(package! org-passwords   :disable t)
+(package! org-tree-slide  :disable t)
+(package! org-unit-test   :disable t)
+(package! orgit-forge     :disable t)
+(package! toc-org         :disable t)
+(package! org-brain       :disable t)
+(package! org-cliplink    :disable t)

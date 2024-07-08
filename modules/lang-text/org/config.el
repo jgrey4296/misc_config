@@ -92,7 +92,6 @@
   ;; underlying, modified buffer. This fixes that.
   (add-hook 'org-after-refile-insert-hook #'save-buffer)
 
-
   ;; Add our general hooks after the submodules, so that any hooks the
   ;; submodules add run after them, and can overwrite any defaults if necessary.
   (add-hook! 'org-mode-hook
@@ -232,7 +231,6 @@
   ;;      with our own, extra layer of heuristics.
   (add-to-list 'magic-mode-alist '(+org-journal-p . org-journal-mode))
 
-
   :config
   ;; Remove the orginal journal file detector and rely on `+org-journal-p'
   ;; instead, to avoid loading org-journal until the last possible moment.
@@ -300,6 +298,7 @@
   )
 
 (use-package! evil-org-agenda
+  :disabled t
   :hook (org-agenda-mode . evil-org-agenda-mode)
   :config
   (evil-org-agenda-set-keys)
@@ -307,6 +306,10 @@
     (kbd doom-leader-key) nil)
 
   )
+
+(use-package! org-yt)
+
+(use-package! orgit)
 
 (use-package! ob
   :defer t

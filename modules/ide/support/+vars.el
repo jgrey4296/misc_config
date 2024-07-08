@@ -141,6 +141,7 @@
       treesit-language-source-alist '(
                                       ;; expects (lang . (url revision source-dir CC C++))
                                       (elisp "https://github.com/wilfred/tree-sitter-elisp")
+                                      (python "https://github.com/tree-sitter/tree-sitter-python")
                                       )
  )
 

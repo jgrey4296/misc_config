@@ -143,7 +143,6 @@
 (map! :map jg-org-base-map
       :localleader
       :prefix ("l" . "links")
-      :desc "cliplink"                 "c" #'org-cliplink
       :desc "+org/remove-link"         "d" #'+org/remove-link
       :desc "id-store-link"            "i" #'org-id-store-link
       :desc "insert-link"              "l" #'org-insert-link

@@ -59,7 +59,7 @@
 ;;-- minibuffer-completion
 (map! :map jg-minibuffer-local-map
       [escape]       #'abort-recursive-edit
-      :n "RET"       #'exit-minibuffer
+      :ni "RET"       #'exit-minibuffer
       :n "DEL"       #'counsel-minibuffer-history
       :n "j" nil
       :n "k" nil
@@ -74,7 +74,7 @@
       )
 
 (map! :map (jg-minibuffer-evil-ex-completion-map jg-minibuffer-evil-ex-search-keymap)
-      :ng "RET" #'exit-minibuffer
+      :ni "RET" #'exit-minibuffer
       :n  "DEL" #'counsel-minibuffer-history
       :gi "C-j" #'next-complete-history-element
       :gi "C-k" #'previous-complete-history-element
@@ -89,6 +89,7 @@
 (map! :map jg-minibuffer-read-expression-map
       :n "DEL"  #'counsel-minibuffer-history
       :i "DEL"  #'backward-delete-char
+      :ni "RET"  #'read--expression-try-read
       "C-j"     #'next-line-or-history-element
       "C-k"     #'previous-line-or-history-element
       :n "k"    #'previous-history-element

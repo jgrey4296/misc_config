@@ -238,9 +238,9 @@
                         )
                       )
 (spec-handling-add! env-handling ;; mamba
-                      '(mamba
+                      `(mamba
                         (:setup mamba
-                                #'(lambda (state local)
+                                ,#'(lambda (state local)
                                      (let ((env-name (or (plist-get local :name)
                                                          (plist-get state :name)
                                                          (string-trim (read-string "Select Environment: ")))))
@@ -249,7 +249,7 @@
                                        (list :name env-name :path conda-env-home-directory)
                                        )
                                      )
-                                #'(lambda (state)
+                                ,#'(lambda (state)
                                     (micromamba-deactivate)
                                      (setenv "CONDA_DEFAULT_ENV" nil)
                                      )

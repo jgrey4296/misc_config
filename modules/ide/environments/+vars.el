@@ -6,9 +6,6 @@
 ;; See footer for licenses/metadata/notes as applicable
 ;;-- end Header
 
-
-
-
 ;;-- Footer
 ;; Copyright (C) 2024 john
 ;;

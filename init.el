@@ -19,7 +19,7 @@
  :editor autosave
 
  :ide version-control support librarian snippets workspaces
- :ide minimap diff company debugger
+ :ide minimap diff company debugger environments
 
  :lang-data csv graphql dot sql nu
  :lang-data xml toml json yaml logs

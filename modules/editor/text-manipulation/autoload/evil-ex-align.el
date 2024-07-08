@@ -74,6 +74,6 @@ g   Repeat alignment on all matches in each line"
     (apply #'+jg-text-manipulation-ex-expand-align-highlight (+jg-text-manipulation-get-pattern-info "/:/" t "\\(\\s-*\\)"))
     )
   (save-excursion
-    (apply #'+jg-text-manipulation-ex-expand-align-highlight (+jg-text-manipulation-get-pattern-info "/=/" t "\\(\\s-*\\)"))
+    (apply #'+jg-text-manipulation-ex-expand-align-highlight (+jg-text-manipulation-get-pattern-info "/.=/" t "\\(\\s-*\\)"))
     )
   )

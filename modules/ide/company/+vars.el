@@ -32,6 +32,8 @@
                      ;; domain-specific words with particular casing.
                      company-dabbrev-ignore-case   nil
                      company-dabbrev-downcase      nil
+
+                     company-dict-dir (expand-file-name "company-dicts" templates-loc)
                      )
 
 (after! company-files
@@ -48,9 +50,6 @@
                     '(minibuffer-mode (:mode company-dabbrev-code company-capf) (:back company-files))
                     )
 
-(spec-handling-setq! company 50
-                     company-dict-dir (expand-file-name "company-dicts" templates-loc)
-                     )
 
 ;; company-keywords
 ;; company-math-symbols-unicode

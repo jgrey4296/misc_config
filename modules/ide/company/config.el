@@ -13,14 +13,13 @@
   :hook (doom-first-input . global-company-mode)
 
   :init
-  (when (modulep! +tng)
-    (add-hook 'global-company-mode-hook #'company-tng-mode))
+  (add-hook 'global-company-mode-hook #'company-tng-mode)
 
   :config
   (advice-add 'company-begin-backend :before #'+company--abort-previous-a)
   (after! evil
-    (add-hook 'company-mode-hook #'evil-normalize-keymaps)
-    (add-hook 'evil-normal-state-entry-hook #'+company-abort-h)
+    (add-hook 'company-mode-hook                #'evil-normalize-keymaps)
+    (add-hook 'evil-normal-state-entry-hook     #'+company-abort-h)
     (add-to-list 'evil-escape-inhibit-functions #'company--active-p)
     )
 

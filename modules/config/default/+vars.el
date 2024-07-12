@@ -28,12 +28,12 @@
                                       search-ring regexp-search-ring) ; persist searches
 )
 
-
 ;; Ftp
 (setq ftp-program "git-ftp")
 
 (setq-default diary-file (expand-file-name "~/github/jgrey4296.github.io/orgfiles/journal/main.diary")
               major-mode #'emacs-lisp-mode
+              truncate-lines t
               )
 
 (spec-handling-add! auto-modes

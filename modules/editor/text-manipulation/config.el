@@ -12,8 +12,6 @@
 
 (add-hook! 'doom-init-ui-hook :append #'+ligature-init-composition-table-h)
 
-(advice-add 'format-all-buffer--from-hook :around #'+format--all-buffer-from-hook-a)
-
 (when (memq 'visual-line-mode text-mode-hook)
   (remove-hook 'text-mode-hook #'visual-line-mode)
   (add-hook 'text-mode-hook #'+word-wrap-mode)

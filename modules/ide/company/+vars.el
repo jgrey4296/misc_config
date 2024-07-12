@@ -50,7 +50,6 @@
                     '(minibuffer-mode (:mode company-dabbrev-code company-capf) (:back company-files))
                     )
 
-
 ;; company-keywords
 ;; company-math-symbols-unicode
 ;; company-dict

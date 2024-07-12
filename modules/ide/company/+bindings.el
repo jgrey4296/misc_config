@@ -1,5 +1,7 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
+(evil-make-overriding-map jg-company-search-map 'insert)
+
 (map! :map jg-company-search-map
       [escape] (cmd! (company-enable-overriding-keymap company-active-map))
       "|"      (cmd! (company-enable-overriding-keymap company-active-map))
@@ -70,7 +72,8 @@
       "J" #'company-next-page
       "K" #'company-previous-page
       "q" #'company-abort
-      "RET" #'company-complete-selection
+      :g "RET" #'company-complete-selection
+      :g "TAB" #'company-show-doc-buffer
       )
 
 (map! :map jg-company-active-map
@@ -88,13 +91,22 @@
       "C-s"     #'company-filter-candidates
       "C-S-s"   #'counsel-company
       "C-SPC"   #'company-complete-common
-      "TAB"     (cmd! (company-cancel) (indent-for-tab-command))
-      [tab]     (cmd! (company-cancel) (indent-for-tab-command))
+      ;; "TAB"     (cmd! (company-cancel) (indent-for-tab-command))
+      ;; [tab]     (cmd! (company-cancel) (indent-for-tab-command))
       ;; "TAB"     #'company-complete-common-or-cycle
       ;; [tab]     #'company-complete-common-or-cycle
       [backtab] #'company-select-previous
       [f1]      nil
          )
+
+;;-- insert state
+(map! :map jg-binding-insert-state-map
+      ;; "TAB" #'+jg-snippets-complete-or-snippet
+      "TAB" #'company-complete
+      ;; "TAB" #'indent-for-tab-command
+      )
+
+;;-- end insert state
 
 (after! company
   (setq company-active-map jg-company-active-map

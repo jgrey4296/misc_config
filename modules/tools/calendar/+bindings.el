@@ -1,6 +1,5 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
-(defvar jg-calendar-mode-map (make-sparse-keymap))
 (evil-make-overriding-map jg-calendar-mode-map)
 
 (map! :leader
@@ -9,6 +8,7 @@
 
 (map! :map jg-calendar-mode-map
       :n "RET" #'+jg-calendar-insert-date
+      :n "TAB" #'diary-view-entries
       :n "q" #'calendar-exit
 
       ;; Viewing

@@ -56,3 +56,33 @@ https://www.djcbsoftware.nl/code/mu/mu4e/Contexts-example.html
    :context:
         <2024-06-13 Thu> (defun +jg-projects-find-related ()
    :END:
+** TRIAGE adapt spec handling to be able to target multiple variables
+   [[/media/john/data/github/_config/modules/lang-text/org/+spec-defs.el::64][Location]]
+   :context:
+        <2024-06-18 Tue> (spec-handling-new! babel  +org-babel-mode-alist
+   :END:
+** TRIAGE check this
+   [[/media/john/data/github/_config/modules/tools/processes/autoload/macros.el::8][Location]]
+   :context:
+        <2024-06-20 Thu>        (with-current-buffer target 'display-buffer-pop-up-window nil
+   :END:
+** TRIAGE finish reworking calc bindings
+   [[/media/john/data/github/_config/modules/tools/calc/+bindings.el::10][Location]]
+   :context:
+        <2024-06-21 Fri> (map! :map jg-calc-mode-map ;; prefixs
+   :END:
+** TRIAGE spec-handling manual call hook
+   [[/media/john/data/github/_config/modules/ui/helm/+vars.el::21][Location]]
+   :context:
+        <2024-06-24 Mon>                      helm-imenu-execute-action-at-once-if-one nil
+   :END:
+** TRIAGE refactor gtags bindings and setup
+   [[/media/john/data/github/_config/modules/ui/helm/+bindings.el::11][Location]]
+   :context:
+        <2024-06-24 Mon> (map! :map jg-binding-jump-map
+   :END:
+** TRIAGE omni-completion?
+   [[/media/john/data/github/_config/modules/ui/ivy/+bindings.el::103][Location]]
+   :context:
+        <2024-06-24 Mon> ;; ;; TODO Omni-completion
+   :END:

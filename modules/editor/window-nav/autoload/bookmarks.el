@@ -3,12 +3,12 @@
 ;;;###autoload
 (defun +jg-nav-bookmarks-load()
   (interactive)
-  (bookmark-load (read-file-name "Load bookmarks file: " (expand-file-name "bookmarks/" templates-loc)
+  (bookmark-load (read-file-name "Load bookmarks file: " (f-parent bookmark-default-file)
                                  (pcase system-type
                                    ('darwin "bookmarks.mac")
                                    ('gnu/linux "bookmarks.linux")
                                    )
-                                 t "bookmarks") t)
+                                 t "/bookmarks") t)
   )
 
 ;;;###autoload

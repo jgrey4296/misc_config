@@ -10,6 +10,7 @@
                      company-tooltip-limit 14
                      company-tooltip-align-annotations t
                      company-require-match 'never
+                     company-selection-wrap-around t
                      company-global-modes '(not erc-mode circe-mode message-mode help-mode gud-mode vterm-mode)
                      company-frontends
                      '(company-pseudo-tooltip-frontend  ; always show candidates in overlay tooltip
@@ -42,22 +43,12 @@
 
   )
 
+
+
 (spec-handling-add! company
-                    '(prog-mode (:mode company-abbrev company-dabbrev-code company-capf) (:back company-files))
+                    '(prog-mode (:mode company-dabbrev-code company-capf) (:disfavour company-keywords company-abbrev) (:back company-files))
                     '(text-mode (:mode company-dabbrev company-ispell))
-                    '(conf-mode (:mode company-dabbrev-code ))
+                    '(conf-mode (:mode company-dabbrev-code company-shell-env))
                     '(minibuffer-inactive-mode (:mode company-dabbrev-code company-capf) (:back company-files))
                     '(minibuffer-mode (:mode company-dabbrev-code company-capf) (:back company-files))
                     )
-
-;; company-keywords
-;; company-math-symbols-unicode
-;; company-dict
-;; company-show-doc-buffer
-;; company-shell-env
-;; company-ispell
-;; company-math-symbols-latex
-;; company-yasnippet
-;; company-dabbrev-code
-;; company-capf
-;; company-files

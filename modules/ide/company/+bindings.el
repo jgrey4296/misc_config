@@ -74,6 +74,7 @@
       "q" #'company-abort
       :g "RET" #'company-complete-selection
       :g "TAB" #'company-show-doc-buffer
+      "|" #'company-other-backend
       )
 
 (map! :map jg-company-active-map
@@ -113,14 +114,3 @@
         company-search-map jg-company-search-map
         )
  )
-
-;; ;; TODO Omni-completion
-;; :i "C-l"    #'+company/whole-lines
-;; :i "C-k"    #'+company/dict-or-keywords
-;; :i "C-f"    #'company-files
-;; :i "C-]"    #'company-etags
-;; :i "s"      #'company-ispell
-;; :i "C-s"    #'company-yasnippet
-;; :i "C-o"    #'company-capf
-;; :i "C-n"    #'+company/dabbrev
-;; :i "C-p"    #'+company/dabbrev-code-previous

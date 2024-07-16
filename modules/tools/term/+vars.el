@@ -68,3 +68,7 @@
                      comint-prompt-read-only t
                      comint-buffer-maximum-size 2048 ; double the default
                      )
+
+(spec-handling-add! company
+                    '(shell-mode (:mode company-shell company-shell-env company-files))
+                    )

@@ -16,6 +16,7 @@
 (package! format-all)
 (package! dtrt-indent)
 (package! adaptive-wrap)
+(package! indent-tools)
 
 (package! accent)
 ;; (package! objed)

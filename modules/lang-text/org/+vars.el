@@ -4,17 +4,19 @@
 ;; locations
 
 ;; ORG SETUP
-(setq-default org-fast-tag-selection-single-key nil
-              org-from-is-user-regexp "\\<John Grey\\>"
-              org-group-tags nil
-              org-use-fast-tag-selection t
-              org-tags-column 50
-              org-startup-indented nil
-              org-indent--deepest-level 10
-              org-element-use-cache t
-              org-insert-heading-respect-content t
-              org-list-allow-alphabetical t
-              )
+(spec-handling-setq! org 50
+                     org-link-from-user-regexp "\\<John Grey\\>"
+                     org-fast-tag-selection-single-key nil
+                     org-group-tags nil
+                     org-use-fast-tag-selection t
+                     org-tags-column 50
+                     org-startup-indented nil
+                     org-indent--deepest-level 10
+                     org-element-use-cache t
+                     org-insert-heading-respect-content t
+                     org-list-allow-alphabetical t
+                     )
+
 
 ;; Save target buffer after archiving a node.
 (setq org-archive-subtree-save-file-p t)
@@ -30,7 +32,7 @@
 ;;-- end org core
 
 ;;-- locations
-(spec-handling-setq! org 20
+(spec-handling-setq! org-locs 20
                      org-archive-location   (format           "%s::%s" (expand-file-name "archive/archive.org" org-directory) "* Main Archive")
                      org-id-locations-file  (expand-file-name "org/.orgids" user-cache-dir)
                      org-default-notes-file (expand-file-name "notes/misc.org"   org-directory)

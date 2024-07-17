@@ -14,3 +14,7 @@
   (setq-hook! 'rst-mode-hook
     yas-indent-line nil)
   )
+
+(use-package! sphinx-doc
+  :defer t
+  )

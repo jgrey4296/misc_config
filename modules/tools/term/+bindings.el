@@ -14,8 +14,8 @@
       :i "TAB" #'completion-at-point
 
       :n "," #'+jg-term-switch
-      :n "h" #'shell-backward-command
-      :n "l" #'shell-forward-command
+      :n "b" #'shell-backward-command
+      :n "w" #'shell-forward-command
       :n "H" #'comint-show-output
       :n "L" #'comint-show-maximum-output
 

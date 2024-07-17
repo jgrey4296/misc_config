@@ -38,3 +38,5 @@
 (use-package! adaptive-wrap
   :disabled
   )
+
+(use-package! indent-tools)

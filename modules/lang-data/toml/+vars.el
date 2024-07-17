@@ -32,7 +32,7 @@
                     )
 (spec-handling-add! fold
                     `(toml
-                      :modes (conf-toml-mode)
+                      :modes (conf-toml-mode toml-mode toml-ts-mode)
                       :priority -50
                       :triggers (:open-all   ,#'outline-show-all
                                  :close-all  ,(cmd! (with-no-warnings (outline-hide-sublevels 1)))

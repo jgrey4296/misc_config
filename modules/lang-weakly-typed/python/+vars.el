@@ -302,11 +302,12 @@
                       ("pylint.toml\\'"           :trigger "__pylint"         :mode conf-toml-mode)
                       ("jekyl.toml\\'"            :trigger "__jekyll"         :mode conf-toml-mode)
                       ("ruff.toml\\'"             :trigger "__ruff_config"    :mode conf-toml-mode)
+                      ("\\.mypyrc\\'"               :trigger "__mypy"    :mode conf-toml-mode)
+                      ("conf.py"               :trigger "__sphinx_conf"    :mode python-mode)
+                      ("log_config.py"         :trigger "__log_config"     :mode python-mode)
 
                       ;; Python:
                       ("__init__\\.py\\'"      :trigger "__init"           :mode python-mode)
-                      ("conf.py"               :trigger "__sphinx_conf"    :mode python-mode)
-                      ("log_config.py"         :trigger "__log_config"     :mode python-mode)
                       ("test_.+\\.py\\'"       :trigger "__pytest"         :mode python-mode)
                       ("cli_.+\\.py\\'"        :trigger "__cli"            :mode python-mode)
                       ("\\.py\\'"              :trigger "__"               :mode python-mode :priority -99)

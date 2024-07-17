@@ -124,8 +124,20 @@
   :commands 'company-anaconda
   )
 
+(use-package! company-jedi
+  :defer t
+  )
+
 (use-package! python-pytest
   :after python-mode
+  )
+
+(use-package! tox
+  :defer t
+  )
+
+(use-package! python-coverage
+  :defer t
   )
 
 (use-package! py-isort

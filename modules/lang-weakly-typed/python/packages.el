@@ -14,6 +14,8 @@
 ;; Programming environment
 (package! anaconda-mode)
 (package! company-anaconda)
+(package! company-jedi)
+(package! pdb-capf)
 
 ;; Environment management
 (package! pipenv)
@@ -25,9 +27,14 @@
 
 ;; Testing frameworks
 (package! python-pytest)
+(package! tox)
+(package! python-coverage)
 
 ;; Import managements
 (package! pyimport)
 (package! py-isort)
 
 (package! pydoc)
+
+;; babel
+;; (package! ob-ipython)

@@ -26,3 +26,12 @@
               outline-level #'+jg-python-outline-level
               )
   )
+
+
+;;;###autoload
+(defun jg-python-font-lock-mod-h ()
+  (pushnew! python-font-lock-keywords
+            '("^\s+return " (0 '(:background "mediumpurple4") t))
+            '("^\s+def "    (0 '(:background "mediumpurple4") t))
+            )
+  )

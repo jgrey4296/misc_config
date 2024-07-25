@@ -31,6 +31,7 @@
     )
 
   (add-hook! 'rust-mode-hook
+             #'flycheck-mode
              #'rainbow-delimiters-mode
              #'maybe-rust-test-minor-mode
              #'hs-minor-mode
@@ -38,6 +39,10 @@
              #'general-insert-minor-mode
              )
 
+  (setq-hook! 'rustic-mode-hook
+    flycheck--automatically-enabled-checkers '(rustic-clippy)
+    flycheck--automatically-disabled-checkers '()
+    )
 )
 
 (use-package! llvm-mode

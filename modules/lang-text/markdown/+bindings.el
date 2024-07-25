@@ -80,9 +80,11 @@
         :m "]l"  #'markdown-next-link
         )
 
-(after! (markdown-mode evil-markdown)
+(after! markdown-mode
   (setq markdown-mode-map jg-binding-markdown-map
         gfm-mode-map      jg-binding-markdown-map
-        evil-markdown-mode-map nil
         )
   )
+(after! evil-markdown
+  (setq evil-markdown-mode-map nil)
+)

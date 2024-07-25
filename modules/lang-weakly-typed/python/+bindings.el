@@ -23,6 +23,7 @@
       :desc "Ruff Format" "f" #'+jg-python-ruff-format
       :desc "Start Pydoc" "p" #'+jg-python-start-pydoc
       :desc "Summarize"   "\\" #'+jg-python-summarize
+      :desc "Coverage Refresh" "c" #'python-coverage-overlay-refresh
       :desc "REPL"        "r" #'+jg-python/open-ipython-repl
       :desc "debug"       "d" (cmd! (setq jg-python-dev-mode (not jg-python-dev-mode))
                                   (message "Python Debug Mode: %s" jg-python-dev-mode))
@@ -64,6 +65,14 @@
       :desc "shell"       "s"    #'pipenv-shell
       :desc "uninstall"   "u"    #'pipenv-uninstall
       :desc "mamba activate" "m" #'micromamba-activate
+      )
+
+(map! :map (python-mode-map python-ts-mode-map) ;; localleader.coverage
+      :localleader
+      :prefix ("C" . "Coverage")
+      "o" #'python-coverage-overlay-mode
+      "r" #'python-coverage-overlay-remove-all
+      "RET" #'+jg-python-open-coverage-report
       )
 
 (map! :map inferior-python-mode-map

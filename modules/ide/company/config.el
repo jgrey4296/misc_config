@@ -6,12 +6,7 @@
 (defer-load! jg-bindings-total "+bindings")
 
 (use-package! company
-  :commands (company-complete-common
-             company-complete-common-or-cycle
-             company-manual-begin
-             company-grab-line)
   :hook (doom-first-input . global-company-mode)
-
   :init
   (add-hook 'global-company-mode-hook #'company-tng-mode)
 

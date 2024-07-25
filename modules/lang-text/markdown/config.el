@@ -39,3 +39,9 @@
 (use-package! grip-mode
   :defer t
   )
+
+(use-package! ox-gfm)
+
+(use-package! auto-org-md
+  :defer t
+  )

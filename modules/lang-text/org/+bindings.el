@@ -76,6 +76,7 @@
        :desc "Insert Subheading"   "h" #'org-insert-subheading
        :desc "Insert Drawer"       "d" #'org-insert-drawer
        :desc "Insert Structure"    "s" #'org-insert-structure-template
+       :desc "Insert Item"         "i" #'org-insert-item
        )
       )
 

@@ -160,4 +160,7 @@
                       (:name emacs-lisp :lib ob-emacs-lisp)
                       )
                     )
+(spec-handling-setq! flycheck-lisp 50
+                     flycheck-emacs-lisp-load-path 'inherit
+                     )
 ;;-- end specs

@@ -121,7 +121,7 @@
       neo-keymap-style 'concise
       )
 (after! dired-omit-files-set
-  (setq neo-hidden-regexp-list (list dired-omit-files))
+  (setq neo-hidden-regexp-list (list jg-dired-omit-files))
   )
 
 ;;-- end neotree

@@ -55,7 +55,6 @@
       )
 
 (map! :map jg-company-search-map  ; applies to `company-filter-map' too
-      :after company
       "C-n"     #'company-select-next-or-abort
       "C-p"     #'company-select-previous-or-abort
       "C-j"     #'company-select-next-or-abort
@@ -72,6 +71,7 @@
       "J" #'company-next-page
       "K" #'company-previous-page
       "q" #'company-abort
+      "<return>" #'company-complete-selection
       :g "RET" #'company-complete-selection
       :g "TAB" #'company-show-doc-buffer
       "|" #'company-other-backend
@@ -100,14 +100,11 @@
       [f1]      nil
          )
 
-;;-- insert state
 (map! :map jg-binding-insert-state-map
       ;; "TAB" #'+jg-snippets-complete-or-snippet
       "TAB" #'company-complete
       ;; "TAB" #'indent-for-tab-command
       )
-
-;;-- end insert state
 
 (after! company
   (setq company-active-map jg-company-active-map

@@ -96,24 +96,21 @@
 (defvar flycheck-checkers)
 (defvar flycheck-disabled-checkers)
 
-(setq-default flycheck-display-errors-delay 1
-              flycheck-display-errors-function nil
-              flycheck-help-echo-function nil
-              flycheck-process-error-functions nil
-
-              )
-
-(setq flycheck-emacs-lisp-load-path 'inherit
-      flycheck-check-syntax-automatically '(save idle-change mode-enabled)
-      flycheck-idle-change-delay 1.0
-      flycheck-buffer-switch-check-intermediate-buffers t
-      flycheck-display-errors-delay 0.25
-      flycheck-popup-tip-error-prefix "X "
-      flycheck-posframe-warning-prefix "! "
-      flycheck-posframe-info-prefix "··· "
-      flycheck-posframe-error-prefix "X "
-      flycheck-indication-mode 'right-fringe
-      )
+(spec-handling-setq! flycheck 50
+                     flycheck-display-errors-delay 1
+                     flycheck-display-errors-function nil
+                     flycheck-help-echo-function nil
+                     flycheck-process-error-functions nil
+                     flycheck-check-syntax-automatically '(save idle-change mode-enabled)
+                     flycheck-idle-change-delay 1.0
+                     flycheck-buffer-switch-check-intermediate-buffers t
+                     flycheck-display-errors-delay 0.25
+                     flycheck-popup-tip-error-prefix "X "
+                     flycheck-posframe-warning-prefix "! "
+                     flycheck-posframe-info-prefix "··· "
+                     flycheck-posframe-error-prefix "X "
+                     flycheck-indication-mode 'right-fringe
+                     )
 
 ;;-- end flycheck
 

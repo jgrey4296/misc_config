@@ -44,13 +44,9 @@
   (add-hook 'flycheck-mode-hook #'+emacs-lisp-non-package-mode)
 
   (add-hook! 'emacs-lisp-mode-hook
-             ;; Allow folding of outlines in comments
-             ;; #'outline-minor-mode
-             ;; Make parenthesis depth easier to distinguish at a glance
+             #'flycheck-mode
              #'rainbow-delimiters-mode
-             ;; Make quoted symbols easier to distinguish from free variables
              #'highlight-quoted-mode
-             ;; Ensure straight sees modifications to installed packages
              #'+emacs-lisp-init-straight-maybe-h
              #'abbrev-mode
              #'maybe-ert-test-minor-mode
@@ -63,17 +59,13 @@
     )
 
   (setq-hook! 'emacs-lisp-mode-hook
-    ;; Emacs' built-in elisp files use a hybrid tab->space indentation scheme
-    ;; with a tab width of 8. Any smaller and the indentation will be
-    ;; unreadable. Since Emacs' lisp indenter doesn't respect this variable it's
-    ;; safe to ignore this setting otherwise.
     tab-width 8
-    ;; Don't treat autoloads or sexp openers as outline headers, we have
-    ;; hideshow for that.
     outline-regexp +emacs-lisp-outline-regexp
     outline-level #'+emacs-lisp-outline-level
     evil-surround-pairs-alist (append jg-evil-surround-pairs-base
                                       jg-lisp-surround-pairs)
+    flycheck--automatically-enabled-checkers '(emacs-lisp emacs-lisp-checkdoc)
+    flycheck--automatically-disabled-checkers '()
     )
 
   )

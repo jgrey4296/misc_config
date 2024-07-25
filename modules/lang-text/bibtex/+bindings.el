@@ -2,96 +2,123 @@
 ;; Bibtex bindings
 
 (dlog! "Setting up bibtex bindings: %s" (current-time-string))
+;; (evil-make-overriding-map jg-bibtex-mode-map)
 
 
 ;;-- bibtex-mode
-(map! :map bibtex-mode-map ;; main
-      :after bibtex
+(map! :map jg-bibtex-mode-map ;; main
       :n "|" #'general-insert-call
       :desc "Lock Key"           :n "!"     #'+jg-bibtex-lock-key
-      :desc "Insert from Doi"    :n "Id"    #'+jg-bibtex-insert-entry-from-doi
-      :desc "Insert from PMID"   :n "Ip"    (cmd! (pubmed-insert-bibtex-from-pmid (read-string "PMID: ")))
-      :desc "Clean entry"        :n "TAB"   #'org-ref-clean-bibtex-entry
+      :desc "Insert from Doi"    :n "I d"    #'+jg-bibtex-insert-entry-from-doi
+      :desc "Auto Form"          :n "I F"     #'+jg-bibtex-entry-form
       :desc "Edit Field"         :n  "\\"   #'+jg-bibtex-edit-field
+      :desc "Clean entry"        :n "TAB"   #'org-ref-clean-bibtex-entry
       :desc "Change Entry Type"  :n "DEL"   #'+jg-bibtex-edit-entry-type
-      :desc "Select Entry"       :v "i e"   #'+jg-bibtex-visual-select-entry
-      :desc "Open Pdf"           :n "RET"   #'+jg-bibtex-open-pdf
-      :desc "Open Folder"        :n "M-RET" #'+jg-bibtex-open-folder
       :desc "Open DWIM"          :n ">"     #'+jg-bibtex-window-dwim
       :desc "Open Dropbox"       :n "<"     #'+jg-bibtex-window-set-dropbox
-      )
-(map! :map bibtex-mode-map ;; localleader
-      :after bibtex
-      :localleader
-      :desc "Open Url"            "RET"   #'bibtex-url
-      :desc "Reformat Buffer"     "TAB"   #'+jg-bibtex-reformat-buffer
-      :desc "Remove Field"        "DEL"   #'+jg-bibtex-remove-field
-      :desc "Author <-> Editor"   "0"     #'+jg-bibtex-swap-editor-author
-      :desc "Journal <-> Booktitle" "9"   #'+jg-bibtex-swap-booktitle-journal
 
 
-      :desc "Subcite"             "\\"    #'+jg-bibtex-subcite
-      :desc "Build Bibliography"  "B"     #'org-ref-build-full-bibliography
-      :desc "Insert from DOI"     "d"     #'+jg-bibtex-insert-entry-from-doi
-      :desc "Insert from PMID"    "p"     (cmd! (pubmed-insert-bibtex-from-pmid (read-string "PMID: ")))
-      :desc "Use Newest file"     "f"     #'+jg-bibtex-use-newest-file
-      :desc "New Entry"           "n"     #'bibtex-entry
-      :desc "New Entry Form"      "N"     #'+jg-bibtex-entry-form
-      :desc "Get Meta"            "m"     #'+jg-bibtex-meta-retrieval
-      :desc "Lookup ORCID"        "o"     #'+jg-bibtex-lookup-orcid
-      :desc "Count Entries"       "C"     #'bibtex-count-entries
-      :desc "Refile"              "r"     #'+jg-bibtex-refile-by-year
-      :desc "Rename file"         "R"     #'+jg-bibtex-rename-file
-      :desc "Refile to Unsourced" "U"     #'+jg-bibtex-refile-to-unsourced
-      :desc "Scholar Search"      "s"     #'+jg-bibtex-google-scholar
-      :desc "Toggle Watchers"     "W"     #'+jg-bibtex-suppress-watchers
-      :desc "Update from DOI"     "u"     #'+jg-bibtex-update-entry
+      :desc "Select Entry"       :v "i e"   #'+jg-bibtex-visual-select-entry
+
+      (:prefix ("s j" . "bibtex")
+      :desc "to Random entry"     :n "r"   #'+jg-bibtex-load-random
+      :desc "to Pdf"              :n "p"   #'+jg-bibtex-open-pdf
+      :desc "to Folder"           :n "f"   #'+jg-bibtex-open-folder
+      :desc "to url"              :n "u"   #'+jg-bibtex-open-url
+      :desc "to doi"              :n "d"   #'+jg-bibtex-open-doi
+      :desc "to Crossref"         :n "c"   #'+jg-bibtex-goto-crossref-entry
+      :desc "to Quicklook"        :n "l"   #'+jg-bibtex-quicklook-pdf
+      :desc "to ORCID"            :n "o"   #'+jg-bibtex-lookup-orcid
+      :desc "to scholar"          :n "s"   #'+jg-bibtex-google-scholar
+
       )
-(map! :map bibtex-mode-map ;; copy
-      :after bibtex
+      ;; (:prefix ("y b" . "bibtex")
+      ;; :desc "Copy Entry"         :n "e"      #'+jg-bibtex-copy-entry
+      ;; :desc "Copy Key"           :n "k"      #'+jg-bibtex-copy-key
+      ;; :desc "Copy Title"         :n "t"      #'+jg-bibtex-copy-title
+      ;; :desc "Copy Field"         :n "f"      #'+jg-bibtex-copy-field
+      ;; :desc "Copy into metadata" :n "m"      #'+jg-bibtex-apply-meta
+      ;; )
+)
+
+(map! :map jg-bibtex-mode-map ;; localleader
       :localleader
-      :prefix ("c" . "Copy")
+      (:prefix ("c" . "Copy"))
+      (:prefix ("f" . "Format"))
+      (:prefix ("i" . "Insert"))
+      (:prefix ("r" . "Refile"))
+      (:prefix ("s" . "Sort"))
+      (:prefix ("u" . "Update"))
+      (:prefix ("v" . "Vars"))
+
+      ;; :desc "Open Url"            "RET"     #'bibtex-url
+      ;; :desc "Reformat Buffer"     "TAB"     #'+jg-bibtex-reformat-buffer
+      :desc "Remove Field"        "DEL"     #'+jg-bibtex-remove-field
+      ;; :desc "Author <-> Editor"     "0"     #'+jg-bibtex-swap-editor-author
+      ;; :desc "Journal <-> Booktitle" "9"     #'+jg-bibtex-swap-booktitle-journal
+
+      ;; :desc "Scholar Search"      "?"       #'+jg-bibtex-google-scholar
+      :desc "Subcite"             "\\"      #'+jg-bibtex-subcite
+      :desc "Build Bibliography"  "B"       #'org-ref-build-full-bibliography
+      :desc "Get Meta"            "m"       #'+jg-bibtex-meta-retrieval
+      :desc "Count Entries"       "C"       #'bibtex-count-entries
+
+      ;; :desc "Update from DOI"     "u"     #'+jg-bibtex-update-entry
+
+      (:prefix ("r" . "Refile")
+       :desc "Refile to Unsourced" "U"     #'+jg-bibtex-refile-to-unsourced
+       :desc "Refile"              "r"       #'+jg-bibtex-refile-by-year
+      )
+      )
+(map! :map jg-bibtex-mode-map ;; insert/copy/edit/update/format
+      :localleader
+      (:prefix ("i" . "Insert")
+      :desc "New Entry"           "e"     #'bibtex-entry
+      :desc "Auto Form"           "a"     #'+jg-bibtex-entry-form
+      :desc "from DOI"            "d"     #'+jg-bibtex-insert-entry-from-doi
+      :desc "from PMID"           "p"     (cmd! (pubmed-insert-bibtex-from-pmid (read-string "PMID: ")))
+      :desc "Subcite"             "s"     #'+jg-bibtex-subcite
+      )
+      (:prefix ("c" . "Copy")
       :desc "Copy Entry"         "e"      #'+jg-bibtex-copy-entry
       :desc "Copy Key"           "k"      #'+jg-bibtex-copy-key
       :desc "Copy Title"         "t"      #'+jg-bibtex-copy-title
       :desc "Copy Field"         "f"      #'+jg-bibtex-copy-field
       :desc "Copy into metadata" "m"      #'+jg-bibtex-apply-meta
       )
-(map! :map bibtex-mode-map ;; edit
-      :after bibtex
+      (:prefix ("u" . "Update")
+       :desc "Update Field"        "f"      #'+jg-bibtex-edit-field
+       :desc "Remove Field"        "F"      #'+jg-bibtex-remove-field
+       :desc "from DOI"            "u"      #'+jg-bibtex-update-entry
+       :desc "filename"            "n"      #'+jg-bibtex-rename-file
+       :desc "Lock Key"            "k"      #'+jg-bibtex-lock-key
+       :desc "Entry Type"          "t"      #'+jg-bibtex-edit-entry-type
+       :desc "Missing fields "     "m"     #'bibtex-entry-update
+       :desc "With Newest download"  "d"     #'+jg-bibtex-use-newest-file
+       )
+      (:prefix ("f" . "Format")
+       :desc "Reformat Buffer"       "b"      #'+jg-bibtex-reformat-buffer
+       :desc "Format Entry"          "e"      #'org-ref-clean-bibtex-entry
+       :desc "Author <-> Editor"     "a"      #'+jg-bibtex-swap-editor-author
+       :desc "Journal <-> Booktitle" "j"      #'+jg-bibtex-swap-booktitle-journal
+       :desc "Validate"              "v"      #'bibtex-validate
+       )
+      )
+(map! :map jg-bibtex-mode-map ;; sort
       :localleader
-      :prefix ("e" . "Edit")
-      :desc "Change Entry Type" "t"      #'+jg-bibtex-edit-entry-type
-      :desc "Update Entry"      "U"      #'bibtex-entry-update
-      :desc "Update Field"      "f"      #'+jg-bibtex-edit-field
-      :desc "Validate"          "V"      #'bibtex-validate
-      :desc "Journal<->BookTitle" "TAB"  #'+jg-bibtex-quickswap
-
-      (:prefix ("s" . "Sort")
+      :prefix ("s" . "Sort")
        :desc "Sort Buffer"       "s"      #'bibtex-sort-buffer
        :desc "Sort By Year"      "y"      #'+jg-bibtex-sort-buffer-by-year
        :desc "Sort By Type"      "t"      #'+jg-bibtex-sort-buffer-by-type
-       )
       )
-(map! :map bibtex-mode-map ;; jump
-      :after bibtex
-      :i "s" #'self-insert-command
-      :prefix ("s j" . "bibtex")
-      :desc "Load Random Bibtex entry" :n "r"   #'+jg-bibtex-load-random
-      :desc "Jump to Pdf"              :n "p"   #'+jg-bibtex-open-pdf
-      :desc "Jump to url"              :n "u"   #'+jg-bibtex-open-url
-      :desc "Jump to doi"              :n "d"   #'+jg-bibtex-open-doi
-      :desc "Jump to Crossref"         :n "c"   #'+jg-bibtex-goto-crossref-entry
-      :desc "Jump to Quicklook"        :n "l"   #'+jg-bibtex-quicklook-pdf
-      )
-(map! :map bibtex-mode-map ;; vars
-      :after bibtex
+(map! :map jg-bibtex-mode-map ;; vars
       :localleader
       ;; TODO search in crossref
       :prefix ("v" . "Vars")
-      :desc "Clean Error Move"       "m" #'+jg-bibtex-clean-error-move-toggle
-      :desc "Toggle PDF+Doi Open"    "d" #'+jg-bibtex-toggle-doi-load
-      :desc "Toggle PDF+Url Open"    "u" #'+jg-bibtex-toggle-url-load
+      :desc "Clean Error Move"       "m"     #'+jg-bibtex-clean-error-move-toggle
+      :desc "Toggle PDF+Doi Open"    "d"     #'+jg-bibtex-toggle-doi-load
+      :desc "Toggle PDF+Url Open"    "u"     #'+jg-bibtex-toggle-url-load
+      :desc "Toggle Watchers"        "W"     #'+jg-bibtex-suppress-watchers
       )
 
 ;;-- end bibtex-mode
@@ -129,3 +156,7 @@
 (map! :map bibtex-style-mode-map
       :n "|" #'general-insert-call
       )
+
+(after! bibtex
+  (setq bibtex-mode-map jg-bibtex-mode-map)
+  )

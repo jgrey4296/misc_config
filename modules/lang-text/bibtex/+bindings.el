@@ -19,7 +19,10 @@
 
 
       :desc "Select Entry"       :v "i e"   #'+jg-bibtex-visual-select-entry
+      )
 
+(map! :map jg-bibtex-mode-map ;; jump bindings
+      ;; :n "s j" nil
       (:prefix ("s j" . "bibtex")
       :desc "to Random entry"     :n "r"   #'+jg-bibtex-load-random
       :desc "to Pdf"              :n "p"   #'+jg-bibtex-open-pdf
@@ -30,18 +33,22 @@
       :desc "to Quicklook"        :n "l"   #'+jg-bibtex-quicklook-pdf
       :desc "to ORCID"            :n "o"   #'+jg-bibtex-lookup-orcid
       :desc "to scholar"          :n "s"   #'+jg-bibtex-google-scholar
-
       )
-      ;; (:prefix ("y b" . "bibtex")
-      ;; :desc "Copy Entry"         :n "e"      #'+jg-bibtex-copy-entry
-      ;; :desc "Copy Key"           :n "k"      #'+jg-bibtex-copy-key
-      ;; :desc "Copy Title"         :n "t"      #'+jg-bibtex-copy-title
-      ;; :desc "Copy Field"         :n "f"      #'+jg-bibtex-copy-field
-      ;; :desc "Copy into metadata" :n "m"      #'+jg-bibtex-apply-meta
-      ;; )
-)
+      :i "s j" nil
+      :i "s" nil
+      :i "s" #'self-insert-command
+      )
 
-(map! :map jg-bibtex-mode-map ;; localleader
+;; (:prefix ("y b" . "bibtex")
+;; :desc "Copy Entry"         :n "e"      #'+jg-bibtex-copy-entry
+;; :desc "Copy Key"           :n "k"      #'+jg-bibtex-copy-key
+;; :desc "Copy Title"         :n "t"      #'+jg-bibtex-copy-title
+;; :desc "Copy Field"         :n "f"      #'+jg-bibtex-copy-field
+;; :desc "Copy into metadata" :n "m"      #'+jg-bibtex-apply-meta
+;; )
+
+
+(map! :map jg-bibtex-mode-map ;; groups
       :localleader
       (:prefix ("c" . "Copy"))
       (:prefix ("f" . "Format"))
@@ -50,7 +57,10 @@
       (:prefix ("s" . "Sort"))
       (:prefix ("u" . "Update"))
       (:prefix ("v" . "Vars"))
+      )
 
+(map! :map jg-bibtex-mode-map ;; localleader
+      :localleader
       ;; :desc "Open Url"            "RET"     #'bibtex-url
       ;; :desc "Reformat Buffer"     "TAB"     #'+jg-bibtex-reformat-buffer
       :desc "Remove Field"        "DEL"     #'+jg-bibtex-remove-field

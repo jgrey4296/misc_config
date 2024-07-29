@@ -12,7 +12,7 @@
       confirm-nonexistent-file-or-buffer nil
       uniquify-buffer-name-style 'forward
       ring-bell-function #'ignore
-
+      switch-window-multiple-frames t
       visible-bell nil
 
 

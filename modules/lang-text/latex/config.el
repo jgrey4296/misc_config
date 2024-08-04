@@ -64,8 +64,6 @@
 
 (use-package! tex-fold ;; part of auctex
   :after auctex
-  :hook (TeX-mode . +latex-TeX-fold-buffer-h)
-  :hook (TeX-mode . TeX-fold-mode)
   :config
   (defun +latex-TeX-fold-buffer-h ()
     (run-with-idle-timer 0 nil 'TeX-fold-buffer))
@@ -77,7 +75,8 @@
   ;; Fold after snippets.
   (add-hook! 'TeX-fold-mode-hook #'+latex-fold-snippet-contents-h)
   (add-hook! 'mixed-pitch-mode-hook #'+latex-fold-set-variable-pitch-h)
-
+  (add-hook 'LaTeX-mode-hook #'TeX-fold-mode)
+  (add-hook 'LaTex-mode-hook #'+latex-TeX-fold-buffer-h)
   )
 
 (use-package! preview ;; part of auctex

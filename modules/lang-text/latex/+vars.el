@@ -1,12 +1,13 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
+(defvar jg-latex-mode-map (make-sparse-keymap))
 (setq-default TeX-master t)
 
 (setq TeX-parse-self t ; parse on load
       TeX-auto-save t  ; parse on save
       ;; Use hidden directories for AUCTeX files.
-      TeX-auto-local ".auctex-auto"
-      TeX-style-local ".auctex-style"
+      TeX-auto-local (expand-file-name "auctex/auto" user-cache-dir)
+      TeX-style-local(expand-file-name "auctex/style" user-cache-dir)
       TeX-source-correlate-mode t
       TeX-source-correlate-method 'synctex
       ;; Don't start the Emacs server when correlating sources.
@@ -60,8 +61,20 @@
 
 ;;-- end smartparens
 
+;;-- fold settings
+;; TeX-fold-macro-spec-list
+;; TeX-fold-math-spec-list
+(setq TeX-fold-env-spec-list '(("[comment]" ("comment"))
+                               ("[figure]"  ("figure" "figure*"))
+                               ("[Proof]"   ("prooftree" "NatD"))
+                               ("[Equation]" ("equation"))
+                               ))
+
+
+;;-- end fold settings
+
 ;;-- specs
-(spec-handling-add! company :form 'override
+(spec-handling-add! company
                     '(reftex-mode (:mode company-reftex-labels company-reftex-citations))
                     '(LaTeX-mode (:mode company-auctex-environments company-auctex-macros +latex-symbols-company-backend))
                     )
@@ -111,6 +124,7 @@
                     )
 (spec-handling-add! file-templates
                     '(latex
+                      ("\\.sty\\'" :trigger "__sty" :mode latex-mode :priority -95)
                       ("\\.tex\\'" :trigger "__"               :mode latex-mode :priority -99)
                       (LaTeX-mode :trigger "__" :priority -100)
                       (latex-mode :trigger "__" :priority -100)
@@ -123,6 +137,19 @@
                     '(latex
                       (:name latex      :lib ob-latex)
                       (:name lilypond   :lib ob-lilypond)
+                      )
+                    )
+(spec-handling-add! fold
+                    `(latex
+                      :modes (latex-mode LaTeX-mode TeX-fold-mode)
+                      :priority 25
+                      :triggers (:open-all   ,#'TeX-fold-clearout-buffer
+                                 :close-all  ,#'TeX-fold-buffer
+                                 :toggle     ,#'TeX-fold-dwim
+                                 :open       nil
+                                 :open-rec   nil
+                                 :close      nil
+                                 )
                       )
                     )
 ;;-- end specs

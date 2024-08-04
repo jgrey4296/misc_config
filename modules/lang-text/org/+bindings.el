@@ -2,11 +2,9 @@
 (dlog! "Setting up general access org bindings: %s" (current-time-string))
 (local-load! "util/+org-standard-bindings")
 
-(defvar jg-org-mode-map (make-sparse-keymap))
 (evil-make-overriding-map jg-org-mode-map)
 (set-keymap-parent jg-org-mode-map jg-org-base-map)
 
-(defvar jg-org-capture-map (make-sparse-keymap))
 
 (map! :leader
       :desc "Insert Timestamp"  "i t"   #'org-time-stamp
@@ -147,9 +145,15 @@
       :n "q"   #'org-capture-kill
       )
 
+(map! :map jg-org-src-mode-map
+      :n "q" #'evil-org-edit-src-exit
+      :n "Q" #'evil-org-src-abort
+      :n "RET" #'org-edit-src-save
+      )
 
 (after! (evil-org org)
   (setq org-mode-map jg-org-mode-map
+        org-src-mode-map jg-org-src-mode-map
         evil-org-mode-map jg-org-mode-map
         minor-mode-map-alist (assq-delete-all 'evil-org-mode minor-mode-map-alist)
         org-capture-mode-map jg-org-capture-map

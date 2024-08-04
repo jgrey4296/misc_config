@@ -1,5 +1,10 @@
 ;;; lang/jg-org/+vars.el -*- lexical-binding: t; -*-
 
+(defvar jg-org-mode-map     (make-sparse-keymap))
+(defvar jg-org-capture-map  (make-sparse-keymap))
+(defvar jg-org-src-mode-map (make-sparse-keymap))
+
+
 ;;-- org core
 ;; locations
 

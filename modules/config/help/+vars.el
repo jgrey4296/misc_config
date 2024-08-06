@@ -1,5 +1,8 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
+(defvar jg-help-map (make-sparse-keymap))
+(defvar jg-info-map (make-sparse-keymap))
+
 (setq counsel-describe-function-function #'helpful-callable
       counsel-describe-variable-function #'helpful-variable
       counsel-descbinds-function         #'helpful-callable

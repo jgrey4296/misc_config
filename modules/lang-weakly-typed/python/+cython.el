@@ -1,6 +1,6 @@
 ;;; +cython.el -*- lexical-binding: t; -*-
 
-(doom-log "Loading Cython")
+(dlog! "Loading Cython")
 
 (use-package! cython-mode
   :commands cython-mode

@@ -1,5 +1,10 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
+(defvar +lua-lsp-dir (concat doom-data-dir "lsp/lua-language-server/")
+  "Absolute path to the directory of sumneko's lua-language-server.
+This directory MUST contain the 'main.lua' file and be the in-source build of
+lua-language-server.")
+
 (spec-handling-add! librarian-regular
                     '(lua-mode
                       ("Lua Docs" . "https://www.lua.org/docs.html")
@@ -42,6 +47,17 @@
 (spec-handling-add! eglot
                     `(lua-mode ,(+lua-generate-lsp-server-command))
                     )
+
+(spec-handling-add! babel
+                    '(lua
+                      (:name lua        :lib ob-lua)
+                      )
+                    )
+(spec-handling-add! org-src
+                    '(lua
+                      ("lua" . lua)
+                      )
+                   )
 
 ;; (spec-handling-add! projects
 ;;                     `(love2d ,#'+lua-love-project-root :run ,#'+lua-love-build-command)

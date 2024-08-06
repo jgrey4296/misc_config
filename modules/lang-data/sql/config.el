@@ -6,7 +6,7 @@
 ;; See footer for licenses/metadata/notes as applicable
 ;;-- end Header
 
-(doom-log "Config SQL")
+(dlog! "Config SQL")
 
 (local-load! "+bindings")
 
@@ -15,6 +15,18 @@
 ;; (use-package! esqlite-helm :defer t)
 
 
+(spec-handling-add! org-src
+                    '(sql
+                      ("sqlite" . sql)
+                      ("sql" . sql)
+                      )
+                    )
+(spec-handling-add! babel
+                    '(sql
+                      (:name sql        :lib ob-sql)
+                      (:name sqlite     :lib ob-sqlite)
+                      )
+                    )
 
 ;;-- Footer
 ;; Copyright (C) 2023 john

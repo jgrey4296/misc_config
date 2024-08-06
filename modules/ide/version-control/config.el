@@ -7,18 +7,16 @@
 
 (defer-load! (magit jg-evil-ex-bindings) "+evil-ex")
 
-(advice-add 'browse-at-remote-get-url                 :around #'+vc-support-git-timemachine-a)
-(advice-add 'git-timemachine--show-minibuffer-details :override #'+vc-update-header-line-a)
 (advice-add 'browse-at-remote--get-local-branch       :after-until #'+vc--fallback-to-master-branch-a)
-(advice-add 'magit-checkout                           :after #'+magit-revert-repo-buffers-deferred-a)
-(advice-add 'magit-branch-and-checkout                :after #'+magit-revert-repo-buffers-deferred-a)
-(advice-add 'magit-status-here                        :after #'doom-recenter-a)
-(advice-add 'forge-get-repository                     :before-while #'+magit--forge-get-repository-lazily-a)
-(advice-add 'forge-dispatch                           :before #'+magit--forge-build-binary-lazily-a)
-(advice-add 'git-gutter:search-near-diff-index        :override #'+vc-gutter--fix-linearity-of-hunks-a)
+(advice-add 'browse-at-remote-get-url                 :around #'+vc-support-git-timemachine-a)
 (advice-add 'diff-hl-define-bitmaps                   :override #'+vc-gutter-define-thin-bitmaps-a)
 (advice-add 'diff-hl-fringe-bmp-from-pos              :override #'+vc-gutter-type-at-pos-fn)
 (advice-add 'diff-hl-fringe-bmp-from-type             :override #'+vc-gutter-type-at-pos-fn)
+(advice-add 'git-gutter:search-near-diff-index        :override #'+vc-gutter--fix-linearity-of-hunks-a)
+(advice-add 'git-timemachine--show-minibuffer-details :override #'+vc-update-header-line-a)
+(advice-add 'magit-branch-and-checkout                :after #'+magit-revert-repo-buffers-deferred-a)
+(advice-add 'magit-checkout                           :after #'+magit-revert-repo-buffers-deferred-a)
+(advice-add 'magit-status-here                        :after #'doom-recenter-a)
 (advice-add 'magit-version                            :around #'+magit--ignore-version-a)
 
 (add-hook! '(prog-mode-hook text-mode-hook conf-mode-hook)
@@ -108,7 +106,11 @@
 ;;-- git extension
 
 (use-package! forge
+  :disabled t
   :after magit
+  :config
+  (advice-add 'forge-dispatch                           :before #'+magit--forge-build-binary-lazily-a)
+  (advice-add 'forge-get-repository                     :before-while #'+magit--forge-get-repository-lazily-a)
   )
 
 (use-package! magit-todos

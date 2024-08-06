@@ -1,5 +1,7 @@
 ;;; domain-specific/bibtex/+vars.el -*- lexical-binding: t; -*-
 
+(defvar jg-bibtex-mode-map (make-sparse-keymap))
+
 ;;-- general bibtex settings
 (setq-default bibtex-user-optional-fields          nil
               bibtex-completion-bibliography       nil

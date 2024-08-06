@@ -40,7 +40,7 @@
   (setq dirvish-cache-dir (concat doom-cache-dir "dirvish/")
         dirvish-hide-details nil
         dirvish-attributes '(git-msg)
-        dired-omit-files (concat dired-omit-files "\\|^\\..*$"))
+        )
   )
 
 (use-package! dired-rsync

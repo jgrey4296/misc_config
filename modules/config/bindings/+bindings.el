@@ -1,6 +1,6 @@
 ;; Leader no prefix
 ;;
-(doom-log "Setting up leader bindings: %s" (current-time-string))
+(dlog! "Setting up leader bindings: %s" (current-time-string))
 ;;-- leader
 (map! :leader
       ;; "," "<" "!" "?"

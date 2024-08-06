@@ -1,21 +1,11 @@
 ;;; completion/ivy/+bindings.el -*- lexical-binding: t; -*-
 
-(doom-log "Setting up Completion bindings: %s" (current-time-string))
-(defvar jg-helm-map (make-sparse-keymap))
-;; (set-keymap-parent jg-helm-map minibuffer-local-map)
-;; (evil-make-intercept-map jg-helm-map)
+(dlog! "Setting up Completion bindings: %s" (current-time-string))
 
 (map! :leader
       :desc "Have you Played?"      "o 1"   #'+jg-completion-rps-have-you-playeds
       :desc "Throwaway Email"       "o 2"   (cmd! (browse-url "https://www.throwawaymail.com/"))
       )
-
-(map! :map jg-binding-helm-map
-      :desc "Minibuffer History"           "m"   #'counsel-minibuffer-history
-      :desc "Shell History"                "s"   #'counsel-shell-history
-      :desc "Helm Processes"               "h"   #'helm-list-emacs-process
-      )
-
 
 ;;-- gtags
 (map! :map jg-binding-jump-map
@@ -84,4 +74,5 @@
 
 (after! helm
   (setq helm-map jg-helm-map)
+  (set-keymap-parent helm-map minibuffer-local-map)
   )

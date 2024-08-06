@@ -6,7 +6,21 @@
 ;; See footer for licenses/metadata/notes as applicable
 ;;-- end Header
 
+;;-- keymaps
+(defvar jg-calc-mode-map (make-sparse-keymap))
 
+(defvar jg-calc-trail-mode-map (make-sparse-keymap))
+
+(defvar jg-calc-dispatch-map (make-sparse-keymap))
+
+;;-- end keymaps
+
+
+(spec-handling-add! popup
+                    '(calc
+                      ("^\\*Calc"                                              :vslot -7 :side bottom :size 0.4 :select t :quit nil :ttl 0 :priority -100)
+                      )
+                    )
 
 ;;-- Footer
 ;; Copyright (C) 2024 john

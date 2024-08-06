@@ -77,7 +77,7 @@ and enables `+popup-buffer-mode'."
     (let ((buffer (or buffer (current-buffer))))
       (and (bufferp buffer)
            (buffer-live-p buffer)
-           (buffer-local-value '+popup-buffer-mode buffer)
+           (with-current-buffer buffer +popup-buffer-mode)
            buffer))))
 
 ;;;###autoload

@@ -64,15 +64,6 @@ current function \(or class) or which defines the function \(or
 class).  This is to provide for remote scripts, eg, Zope's ‘Script
 \(Python)’ - put a _copy_ of the script in a buffer named for the
 script, and set to python-mode, and pdbtrack will find it.)"
-  ;; Instead of trying to piece things together from partial text
-  ;; (which can be almost useless depending on Emacs version), we
-  ;; monitor to the point where we have the next pdb prompt, and then
-  ;; check all text from comint-last-input-end to process-mark.
-  ;;
-  ;; Also, we're very conservative about clearing the overlay arrow,
-  ;; to minimize residue.  This means, for instance, that executing
-  ;; other pdb commands wipe out the highlight.  You can always do a
-  ;; ‘where’ (aka ‘w’) command to reveal the overlay arrow.
   (let* ((origbuf (current-buffer))
          (currproc (get-buffer-process origbuf)))
 
@@ -104,4 +95,8 @@ script, and set to python-mode, and pdbtrack will find it.)"
             (forward-line (1- target_lineno))
             (message "pdbtrack: line %s, file %s" target_lineno target_fname)
             (py--pdbtrack-overlay-arrow t)
-            (pop-to-buffer origbuf t)))))))
+            (recenter)
+            (pop-to-buffer origbuf t))))
+      )
+    )
+  )

@@ -151,26 +151,26 @@ Also adds support for a `:sync' parameter to override `:async'."
   (let ((transformed (or (cdr (assq lang +org-babel-mode-alist)) lang))
         )
     (cond ((cdr (assq lang org-babel-load-languages))
-           t)
+             t)
+          ((null transformed)
+             (warn "Could not retrieve babel langauge information: %s : %s" lang transformed))
           (async
-           ;; ob-async has its own agenda for lazy loading packages
-           t)
-          ((plist-get transformed :func)
-           (apply (plist-get transformed :func))
-           (add-to-list 'org-babel-load-languages (cons lang t))
-           t)
-          ((plist-get transformed :lib)
+             ;; ob-async has its own agenda for lazy loading packages
+             t)
+          ((plist-get transformed :func) ;; Custom load function
+             (apply (plist-get transformed :func))
+             (add-to-list 'org-babel-load-languages (cons lang t))
+             t)
+          ((plist-get transformed :lib)  ;; named lib symbol
            (require (plist-get transformed :lib) nil t)
            (add-to-list 'org-babel-load-languages (cons lang t))
            t)
-          ((plist-get transformed :name)
+          ((plist-get transformed :name) ;; just name provided, tranform into ob-name
            (require (intern "ob-%s" (plist-get transformed :name)) nil t)
            (add-to-list 'org-babel-load-languages (cons lang t))
            t)
-          (require (intern "ob-%s" (plist-get transformed :name)) nil t)
-          (add-to-list 'org-babel-load-languages (cons lang t))
-          t)
-    (t (warn "Unrecognized babel language" lang))
+          (t (warn "Unrecognized babel language" lang))
+          )
     )
   )
 

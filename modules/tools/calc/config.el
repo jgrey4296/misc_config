@@ -6,6 +6,7 @@
 ;; See footer for licenses/metadata/notes as applicable
 ;;-- end Header
 
+(local-load! "+vars")
 (defer-load! jg-bindings-core "+bindings")
 
 (use-package! calc)

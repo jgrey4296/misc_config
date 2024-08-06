@@ -9,4 +9,4 @@
 (package! dired-rsync)
 (package! diredfl)
 (package! fd-dired)
-(when (modulep! +dirvish) (package! dirvish))
+(package! dirvish)

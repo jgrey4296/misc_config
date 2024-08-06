@@ -2,22 +2,22 @@
 
 
 ;;-- dired
-  (setq-default dired-args '("-ahlD" "-v" "--group-directories-first")
-                insert-directory-program "gls"
+(setq-default dired-args '("-ahlD" "-v" "--group-directories-first")
+              insert-directory-program "gls"
 
-                dired-auto-revert-buffer #'dired-buffer-stale-p
-                dired-clean-confirm-killing-deleted-buffers nil
-                dired-create-destination-dirs 'ask
-                dired-dwim-target t
-                dired-hide-details-hide-symlink-targets nil
-                dired-omit-verbose nil
-                dired-recursive-copies  'always
-                dired-recursive-deletes 'top
-                dired-vc-rename-file t
-                dired-quick-sort-group-directories-last ?y
+              dired-auto-revert-buffer #'dired-buffer-stale-p
+              dired-clean-confirm-killing-deleted-buffers nil
+              dired-create-destination-dirs 'ask
+              dired-dwim-target t
+              dired-hide-details-hide-symlink-targets nil
+              dired-omit-verbose nil
+              dired-recursive-copies  'always
+              dired-recursive-deletes 'top
+              dired-vc-rename-file t
+              dired-quick-sort-group-directories-last ?y
 
-                +jg-dired-recursive-switches "-aBhlR --group-directories-first"
-                )
+              +jg-dired-recursive-switches "-aBhlR --group-directories-first"
+              )
 
 (defvar jg-dired-du-cmd "du")
 (defvar jg-dired-du-args '("-hsc"))
@@ -34,10 +34,12 @@
                                      (: "js" (? ".meta"))
                                      "doot_defaults.toml"
                                      )))
+         (parent "^\\..*$")
          (icons    (| "Icon\015"  (: ?. "thumbnails") ))
          (gtags    (| "GPATH" "GRTAGS" "GTAGS"))
          (build-tools (| "gradlew" "gradlew.bat" (: ?. (| "gradle" "rustup" "doit.db.db" "mono" (: "node" (? "_modules")) (: "npm" (? "-global)"))))))
-         (python   (| "__pycache__" (: filename ".egg-info") (: "flycheck" filename ".py") (: ?. (| "ipython" "jupyter" "matplotlib" "mypy.ini" ))))
+         (python   (| "__pycache__" (: filename ".egg-info") (: ?. (| "ipython" "jupyter" "matplotlib" "mypy.ini" ))))
+         (flycheck "flycheck_")
          (compiled (| (: filename (: ?. "o" "elc" "pyo"))))
          (prolog   (| (: ?. (| "swipl-dir-history" "swp" "swt" ))))
          (java     (| (: filename ".class")))
@@ -49,28 +51,35 @@
          (vcs      (| (: ?. (| (:"git" (? "ignore")) "svn" ))))
          (py-confs (| "pelicanconf.py" "conf.py"))
          )
-  (setq dired-omit-files (rx line-start (| system
-                                           dotfiles
-                                           icons
-                                           gtags
-                                           build-tools
-                                           python
-                                           compiled
-                                           prolog
-                                           java
-                                           logs
-                                           configs
-                                           latex
-                                           dropbox
-                                           ruby
-                                           vcs
-                                           py-confs
-                                           )
-                             line-end
-                             )
-        )
+  (defvar jg-dired-omit-files (rx line-start (| system
+                                                dotfiles
+                                                icons
+                                                gtags
+                                                build-tools
+                                                python
+                                                flycheck
+                                                compiled
+                                                prolog
+                                                java
+                                                logs
+                                                configs
+                                                latex
+                                                dropbox
+                                                ruby
+                                                vcs
+                                                py-confs
+                                                parent
+                                                )
+                                  line-end
+                                  )
+                       )
+  (setq dired-omit-files jg-dired-omit-files)
   (provide 'dired-omit-files-set)
   )
+
+(spec-handling-setq! dired-omit 50
+                     dired-omit-files jg-dired-omit-files
+                     )
 
 ;;-- end omit-patterns
 

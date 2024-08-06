@@ -1,14 +1,6 @@
 ;;; lang/jg-python/+bindings.el -*- lexical-binding: t; -*-
 
 (map! :leader
-      (:prefix ("c v" . "Python Environments")
-      :desc "Activate Env" "a" #'env-handling-go!
-      :desc "Clear Env"    "d" #'env-handling-clear-env!
-      :desc "Report Env"   "r" #'env-handling-report!
-      :desc "Lock Env"     "l" #'env-handling-lock!
-      :desc "Create venv"  "c" #'env-handling-create-env!
-      )
-
       :desc "Select Python Repl" "c r p" #'+jg-python-select-repl
       )
 
@@ -31,6 +23,7 @@
       :desc "Ruff Format" "f" #'+jg-python-ruff-format
       :desc "Start Pydoc" "p" #'+jg-python-start-pydoc
       :desc "Summarize"   "\\" #'+jg-python-summarize
+      :desc "Coverage Refresh" "c" #'python-coverage-overlay-refresh
       :desc "REPL"        "r" #'+jg-python/open-ipython-repl
       :desc "debug"       "d" (cmd! (setq jg-python-dev-mode (not jg-python-dev-mode))
                                   (message "Python Debug Mode: %s" jg-python-dev-mode))
@@ -65,17 +58,29 @@
       :prefix ("e" . "Environment")
       :desc "Choose Support" "c" #'+jg-python-support
       :desc "Current Support" "C" (cmd! (message "Current Python Support: %s" jg-python-last-chosen-support))
-      :desc "install"     "i" #'pipenv-install
-      :desc "pipenv lock" "l" #'pipenv-lock
-      :desc "open module" "o" #'pipenv-open
-      :desc "run"         "r" #'pipenv-run
-      :desc "shell"       "s" #'pipenv-shell
-      :desc "uninstall"   "u" #'pipenv-uninstall
+      :desc "install"     "i"    #'pipenv-install
+      :desc "pipenv lock" "l"    #'pipenv-lock
+      :desc "open module" "o"    #'pipenv-open
+      :desc "run"         "r"    #'pipenv-run
+      :desc "shell"       "s"    #'pipenv-shell
+      :desc "uninstall"   "u"    #'pipenv-uninstall
+      :desc "mamba activate" "m" #'micromamba-activate
+      )
+
+(map! :map (python-mode-map python-ts-mode-map) ;; localleader.coverage
+      :localleader
+      :prefix ("C" . "Coverage")
+      "o" #'python-coverage-overlay-mode
+      "r" #'python-coverage-overlay-remove-all
+      "RET" #'+jg-python-open-coverage-report
       )
 
 (map! :map inferior-python-mode-map
       :after python-mode
       "TAB" #'+jg-snippets-complete-or-snippet
+      :n "DEL" #'counsel-shell-history
+      :localleader
+      "q" #'comint-send-eof
       )
 
 (map! :map cython-mode-map
@@ -111,6 +116,7 @@
       )
 
 (map! :map comint-mode-map
+      :after (shell comint)
       :localleader
       :desc "PdbTrack" ";" #'py-pdbtrack-toggle-stack-tracking
       )
@@ -119,4 +125,9 @@
       :n "RET" #'py-test-minor-function-dwim
       :i "RET" #'evil-ret
       :n "DEL" #'py-test-copy-current-test
+      )
+
+(map! :map python-pytest-mode-map
+      :n "DEL" #'counsel-shell-history
+
       )

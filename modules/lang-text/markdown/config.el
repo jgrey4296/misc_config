@@ -6,11 +6,6 @@
 (use-package! markdown-mode
   :commands markdown-ode
   :init
-  (spec-handling-add! org-src
-                      '(markdown
-                        ("md" . markdown)
-                        )
-                      )
 
   :config
   (add-hook! 'gfm-mode-hook  :depth 100
@@ -42,5 +37,11 @@
   )
 
 (use-package! grip-mode
+  :defer t
+  )
+
+(use-package! ox-gfm)
+
+(use-package! auto-org-md
   :defer t
   )

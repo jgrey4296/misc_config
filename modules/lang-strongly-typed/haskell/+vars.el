@@ -59,3 +59,16 @@
                     '(haskell-cabal-mode    :start +haskell/open-repl :persist t)
                     '(literate-haskell-mode :start +haskell/open-repl :persist t)
                     )
+(spec-handling-add! babel
+                    '(haskell
+                      (:name haskell    :lib ob-haskell)
+                      )
+                    )
+
+(spec-handling-add! org-src
+                    '(haskell
+                      ("haskell" . haskell)
+                      ("ghc" . haskell)
+                      ("ghci" . haskell)
+                      )
+                    )

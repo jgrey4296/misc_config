@@ -1,14 +1,11 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
-(defvar jg-term-shell-mode-map (make-sparse-keymap))
-(defvar jg-term-comint-mode-map (make-sparse-keymap))
 (evil-make-intercept-map jg-term-shell-mode-map)
 (evil-make-intercept-map jg-term-comint-mode-map)
 
 (map! :leader
       :desc "Pop Shell"             "'"   #'+jg-shell-new
       )
-
 
 (map! :map jg-term-shell-mode-map
       :n "C-d" #'comint-send-eof
@@ -17,8 +14,8 @@
       :i "TAB" #'completion-at-point
 
       :n "," #'+jg-term-switch
-      :n "h" #'shell-backward-command
-      :n "l" #'shell-forward-command
+      :n "b" #'shell-backward-command
+      :n "w" #'shell-forward-command
       :n "H" #'comint-show-output
       :n "L" #'comint-show-maximum-output
 
@@ -46,7 +43,6 @@
       "w"   #'comint-write-output
       "e"   #'comint-send-eof
       )
-
 
 (after! (shell comint)
   (setq shell-mode-map jg-term-shell-mode-map

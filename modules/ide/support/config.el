@@ -22,6 +22,7 @@
 
 (local-load! "+defs")
 (local-load! "+vars")
+(local-load! "+spec-defs")
 
 (defer-load! jg-bindings-total "+bindings")
 
@@ -47,21 +48,6 @@
         lsp-server-install-dir (concat doom-data-dir "lsp")
         lsp-keymap-prefix nil)
 
-  (spec-handling-add! python-env
-                      `(lsp
-                        (:support lsp
-                                  ,#'(lambda (state) (add-hook 'python-mode-hook #'lsp-deferred))
-                                  ,#'(lambda (state)
-                                       (when lsp-mode
-                                         (lsp-mode -1))
-                                       (when lsp--last-active-workspaces
-                                         (lsp-workspace-shutdown (car lsp--last-active-workspaces)))
-                                       (remove-hook 'python-mode-hook #'lsp-deferred)
-                                       )
-                                  )
-                        (:teardown lsp ,#'(lambda (state) (lsp-disconnect)))
-                        )
-                      )
 
   ;; override what is auto loaded
   (setq lsp-client-packages nil)
@@ -91,19 +77,6 @@
 (use-package! eglot
   :commands (eglot eglot-ensure)
   :hook (eglot-managed-mode . +lsp-optimization-mode)
-  :init
-  (spec-handling-add! python-env
-                      `(eglot
-                        (:support eglot
-                                  ,#'(lambda (state) (add-hook 'python-mode-hook #'eglot-ensure))
-                                  ,#'(lambda (state)
-                                       ;; (signal 'eglot-todo (current-buffer))
-                                       (remove-hook 'python-mode-hook #'eglot-ensure)
-                                       )
-                                  )
-                        )
-                      )
-
   :config
   (add-to-list 'doom-debug-variables '(eglot-events-buffer-size . 0))
 
@@ -123,14 +96,6 @@
 (use-package! semantic
   :commands semantic-mode
   :init
-  (spec-handling-add! python-env
-                      `(semantic
-                        (:support semantic
-                                  ,#'(lambda (state) (add-hook 'python-mode-hook #'semantic-mode))
-                                  ,#'(lambda (state) (remove-hook 'python-mode-hook #'semantic-mode))
-                                  )
-                        )
-                      )
   :config
   ;;  global-semanticdb-minor-mode        - Maintain tag database.
   ;;  global-semantic-idle-scheduler-mode - Reparse buffer when idle.
@@ -161,21 +126,6 @@
   :commands (flycheck-list-errors flycheck-buffer flycheck-mode global-flycheck-mode)
   ;; :hook (doom-first-buffer . global-flycheck-mode)
   :init
-  (spec-handling-add! python-env
-                      '(flycheck
-                        (:support flycheck #'(lambda (path name)
-                                               (unless flycheck-enabled-checkers
-                                                 (let ((chosen (intern (ivy-read "Flychecker: " flycheck-disabled-checkers :require-match t))))
-                                                   (delete chosen flycheck-disabled-checkers)
-                                                   (add-to-list flycheck-enabled-checkers chosen)
-                                                   ))
-                                               (add-hook 'python-mode-hook #'flycheck-mode)
-                                               )
-                                  (-partial #'flycheck-mode -1)
-                                  )
-                        (:teardown flycheck (-partial flycheck-mode -1))
-                        )
-                      )
   (setq flycheck-global-modes nil)
 
   :config
@@ -221,23 +171,28 @@
 ;;-- end flycheck
 
 (use-package! tree-sitter ;; Melpas
+  ;; :disabled t
   :defer t
   :config
   (require 'tree-sitter-langs)
   )
 
+(use-package! treesit ;; builtin
+  :disabled t
+  :defer t
+  :config
+  ;; https://www.masteringemacs.org/article/how-to-get-started-tree-sitter
+  )
+
 (use-package! tree-sitter-langs
   :defer t
-
+  :config
+  ;; possibly: (cl-pushnew (tree-sitter-lands--bin-dir) tree-sitter-load-path :test #'string-equal)
   )
 
 (use-package! lint-result-mode
   :config
   (add-hook 'lint-result-mode-hook '+fold/close-all)
-  )
-
-(use-package! treesit ;; builtin
-  :defer t
   )
 
 ;;; config.el ends here

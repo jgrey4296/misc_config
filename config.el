@@ -5,6 +5,9 @@
 (defvar user-full-name "John Grey")
 
 (defvar user-url "https://jgrey4296.github.io/")
+
+(defvar user-config-dir (expand-file-name "~/.config"))
+(defvar user-cache-dir (expand-file-name "~/_cache_"))
 ;;-- end Me
 
 ;;-- Text Encoding
@@ -21,21 +24,21 @@
       initial-buffer-choice           (expand-file-name "agenda/base_agenda.org" "~/github/jgrey4296.github.io/orgfiles/")
       )
 
-(defvar user-cache-dir (expand-file-name "~/_cache_"))
 
 (spec-handling-setq! global 0
+                     custom-file                     (expand-file-name "emacs/custom.el" user-cache-dir)
                      backup-directory-alist          (list `(".*" . ,(expand-file-name ".local/backups" doom-emacs-dir)))
                      org-directory                   (f-canonical (expand-file-name "~/github/jgrey4296.github.io/orgfiles/"))
                      pyvenv-default-virtual-env-name (expand-file-name "mamba/envs/" user-cache-dir)
-                     server-auth-dir                 (expand-file-name "~/.config/secrets/emacs")
+                     server-auth-dir                 (expand-file-name "secrets/emacs" user-config-dir)
                      native-comp-eln-load-path       (list (expand-file-name "cache/eln" doom-local-dir))
                      docs-dir                        (expand-file-name "docs" templates-loc)
                      bookmark-default-file (pcase system-type
-                                             ('darwin (expand-file-name "bookmarks/bookmarks.mac" templates-loc))
-                                             ('gnu/linux (expand-file-name "bookmarks/bookmarks.linux" templates-loc))
+                                             ('darwin (expand-file-name "emacs/bookmarks/bookmarks.mac" user-cache-dir))
+                                             ('gnu/linux (expand-file-name "emacs/bookmarks/bookmarks.linux" user-cache-dir))
                                              )
                      mu4e-maildir (or (getenv "MAILDIR") "mail/" user-cache-dir)
-                     auth-sources (list (expand-file-name "~/.config/secrets/emacs/authinfo.asc"))
+                     auth-sources (list (expand-file-name "secrets/emacs/authinfo.asc" user-config-dir))
                      ;; OSX: auth-sources ("~/.authinfo" macos-keychain-generic macos-keychain-internet "~/authinfo.gpg")
                      )
 
@@ -87,24 +90,26 @@
 ;;   (defvaralias 'jgblahtest 'jgtest)
 ;; )
 ;;
-(setq warning-suppress-log-types
-      '( ;; Full Suppress
-        (defvaralias losing-value woman-topic-history)
-        (defvaralias losing-value rustic-indent-method-chain)
-        ;; (flycheck syntax-checker)
-        ;; ((python python-shell-completion-native-turn-on-maybe))
-        ((org-element org-element-cache))
-        ((flycheck syntax-checker))
-        (error "Invalid search bound (wrong side of point)")
-        )
-      warning-suppress-types
-      '( ;; Don't Show, silently added to warnings buffer
-        (defvaralias losing-value python-shell-interpreter)
-        ;; ((python python-shell-completion-native-turn-on-maybe))
-        (org-element org-element-cache)
-        (org-element org-element-parser)
-        (bytecomp)
-        ;; (flycheck syntax-checker)
-        )
-      )
+(setq warning-suppress-types '((bytecomp)))
+
+(spec-handling-setq! warnings 50
+                     warning-suppress-log-types ;; Full Suppress
+                     '((defvaralias losing-value woman-topic-history)
+                       (defvaralias losing-value rustic-indent-method-chain)
+                       (losing-value rustic-indent-method-chain)
+                       ;; ((python python-shell-completion-native-turn-on-maybe))
+                       ((org-element org-element-cache))
+                       ((flycheck syntax-checker))
+                       (error "Invalid search bound (wrong side of point)")
+                       )
+                     warning-suppress-types ;; Don't Show, silently added to warnings buffer
+                     '((defvaralias losing-value python-shell-interpreter)
+                       (defvaralias losing-value rustic-indent-method-chain)
+                       (org-element org-element-cache)
+                       (org-element org-element-parser)
+                       (bytecomp)
+                       (flycheck syntax-checker)
+                       ;; ((python python-shell-completion-native-turn-on-maybe))
+                       )
+                     )
 ;;-- end warning suppression

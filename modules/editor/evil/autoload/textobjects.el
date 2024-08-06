@@ -66,3 +66,44 @@ This excludes the protocol and querystring."
            ("‘" . "’")
            ("“" . "”"))))
     (evil-textobj-anyblock--make-textobj beg end type count t)))
+
+;;;###autoload (autoload '+jg-evil-whitespace "editor/evil/autoload/textobjects" nil t)
+(evil-define-text-object +jg-evil-whitespace (count &optional beg end type)
+  "select spaces on the same line"
+  :type exclusive
+  :extend-selection nil
+  (let* ((start (save-excursion (re-search-backward (rx (not space)) nil t)))
+         (end   (save-excursion (re-search-forward  (rx (not space)) nil t)))
+         (result (list
+                  (if start (+ 1 start) (point))
+                  (if end   (- end 2)   (point))
+                  )
+                 )
+         )
+    (message "whitespace Result: %s  | %s %s" result start end)
+    result
+    )
+  )
+
+;;;###autoload (autoload '+jg-evil-gap "editor/evil/autoload/textobjects" nil nil)
+(evil-define-text-object +jg-evil-gap (count &optional beg end type)
+  "an evil textobject for selecting contiguous whitespace"
+  :type exclusive
+  :extend-selection nil
+  (let* ((start (save-excursion (re-search-backward (rx (not blank) blank) nil t)))
+         (end (save-excursion   (re-search-forward  (rx blank (not blank)) nil t)))
+         (result (list
+                  (if (and start
+                           (<= (line-beginning-position) start))
+                      (+ 1 start)
+                    (point))
+                  (if (and end
+                           (<= end (line-end-position)))
+                      (- end 2)
+                    (point))
+                  )
+                 )
+         )
+    result
+    )
+  )

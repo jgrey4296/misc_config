@@ -1,6 +1,8 @@
 ;;; +evil-text-obj-bindings.el -*- lexical-binding: t; -*-
 
 (map! :map jg-binding-inner-text-objects-map
+      :desc "Whitespace"           "\\"   #'+jg-evil-gap
+      ;; :desc "Whitespace"           "\\"   #'+jg-evil-whitespace
       :desc "\""                   "\""  #'evil-inner-double-quote
       :desc "'"                    "'"   #'evil-inner-single-quote
       :desc "`'"                   "`"   #'evil-inner-back-quote

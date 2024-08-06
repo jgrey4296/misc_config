@@ -3,3 +3,4 @@
 
 (package! rst)
 (package! sphinx-mode)
+(package! sphinx-doc)

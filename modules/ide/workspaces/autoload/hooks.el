@@ -82,7 +82,7 @@
 ;;;###autoload
 (defun +workspaces-remote-buffer-p (buf)
   ;; And don't save TRAMP buffers; they're super slow to restore
-  (let ((dir (buffer-local-value 'default-directory buf)))
+  (let ((dir (with-current-buffer buff  default-directory)))
     (ignore-errors (file-remote-p dir))))
 
 ;;;###autoload
@@ -142,7 +142,7 @@ c) are not valid projectile projects."
                         (and doom-projectile-cache-purge-non-projects
                              (not (doom-project-p proot)))
                         (projectile-ignored-project-p proot))
-                 do (doom-log "Removed %S from projectile cache" proot)
+                 do (dlog! "Removed %S from projectile cache" proot)
                  and do (remhash proot projectile-projects-cache)
                  and do (remhash proot projectile-projects-cache-time)
                  and do (remhash proot projectile-project-type-cache))

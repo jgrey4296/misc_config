@@ -94,14 +94,26 @@ If set to `nil', disable all the above behaviors.")
                       ("\\.css\\'" . css-mode)
                       )
                     )
-
-  (spec-handling-add! docsets
+(spec-handling-add! docsets
                       '(web-mode
                         "HTML" "CSS" "Twig" "WordPress"
                         )
                       )
-;;-- end specs
-
+(spec-handling-add! babel
+                    '(web
+                      (:name css        :lib ob-css)
+                      (:name js         :lib ob-js)
+                      (:name sass       :lib ob-sass)
+                      )
+                    )
+(spec-handling-add! org-src
+                    '(web
+                      ("html" . web)
+                      ("css" . css)
+                      ("sass" . sass)
+                      ("js" . js)
+                      )
+                    )
 (spec-handling-add! librarian-regular
                     '((css-mode less-css-mode scss-mode sass-mode)
                      ("CSS Reference" . "https://developer.mozilla.org/en-US/docs/Web/CSS")
@@ -114,3 +126,5 @@ If set to `nil', disable all the above behaviors.")
                      ("Cheatsheet" . "https://htmlcheatsheet.com/")
                      )
                     )
+
+;;-- end specs

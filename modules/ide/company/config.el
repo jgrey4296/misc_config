@@ -5,23 +5,16 @@
 
 (defer-load! jg-bindings-total "+bindings")
 
-(advice-add 'company-begin-backend :before #'+company--abort-previous-a)
-
 (use-package! company
-  :commands (company-complete-common
-             company-complete-common-or-cycle
-             company-manual-begin
-             company-grab-line)
   :hook (doom-first-input . global-company-mode)
-
   :init
-  (when (modulep! +tng)
-    (add-hook 'global-company-mode-hook #'company-tng-mode))
+  (add-hook 'global-company-mode-hook #'company-tng-mode)
 
   :config
+  (advice-add 'company-begin-backend :before #'+company--abort-previous-a)
   (after! evil
-    (add-hook 'company-mode-hook #'evil-normalize-keymaps)
-    (add-hook 'evil-normal-state-entry-hook #'+company-abort-h)
+    (add-hook 'company-mode-hook                #'evil-normalize-keymaps)
+    (add-hook 'evil-normal-state-entry-hook     #'+company-abort-h)
     (add-to-list 'evil-escape-inhibit-functions #'company--active-p)
     )
 
@@ -55,12 +48,8 @@
   :defer t
   :config
   (add-hook! 'doom-project-hook
-    (defun +company-enable-project-dicts-h (mode &rest _)
-      "Enable per-project dictionaries."
-      (if (symbol-value mode)
-          (add-to-list 'company-dict-minor-mode-list mode nil #'eq)
-        (setq company-dict-minor-mode-list (delq mode company-dict-minor-mode-list)))))
-
+             #'+company-enable-project-dicts-h
+             )
   )
 
 (use-package! jg-company

@@ -25,9 +25,10 @@
 (defer-load! jg-bindings-total "+bindings")
 
 (after! evil
-  (add-hook! 'minibuffer-setup-hook :append #'evil-insert-state)
+  (add-hook! 'minibuffer-setup-hook
+             :append
+             #'evil-insert-state
+             #'cursor-intangible-mode)
   )
-
-(add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
 
 ;;; config.el ends here

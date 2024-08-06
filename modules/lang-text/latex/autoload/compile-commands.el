@@ -1,5 +1,8 @@
 ;;; compile-commands.el -*- lexical-binding: t; -*-
 
+(defvar jg-latex-compile-quick-process nil)
+(defvar jg-latex-compile-quick-file nil)
+
 
 ;;;###autoload
 (defun +jg-latex-get-commands (&optional dir)
@@ -15,7 +18,11 @@
                                (re-search-forward jg-latex-compile-search-re)
                                (or (match-string 1) jg-latex-compile-program)
                                ))
-               (output-dir (format "-output-directory=%s" default-directory))
+               (root (if (projectile-project-root)
+                         (f-join (projectile-project-root) ".temp/tex/")
+                       default-directory))
+               (output-file (f-join root (f-swap-ext (f-filename curr-file) "pdf")))
+               (output-dir (format "-output-directory=%s" root))
                (compile-cmd (string-join (append (list compile-with output-dir) jg-latex-compile-args (list curr-file)) " "))
 
                )
@@ -29,8 +36,8 @@
                                         jg-latex-compile-args
                                         (list "-draftmode" curr-file)) " "))
 
-     `("clean"        ,(format "cd %s; find . -maxdepth 1 \\( -name '%2$s.log' -o -name '%2$s.aux' -o -name '%2$s.bbl' -o -name '%2$s.blg' -o -name '%2$s.out' -o -name '%2$s.pdf'  \\) -delete" (f-parent curr-file) (f-base curr-file)))
-     `("clean-all"    ,(format "cd %s; find . -maxdepth 1 \\( -name '*.log' -o -name '*.aux' -o -name '*.bbl' -o -name '*.blg' -o -name '*.out' -o -name '*.pdf'  \\) -delete" (f-parent curr-file)))
+     `("clean"        ,(format "cd %s; find . -maxdepth 1 \\( -name '%2$s.log' -o -name '%2$s.aux' -o -name '%2$s.bbl' -o -name '%2$s.blg' -o -name '%2$s.out' -o -name '%2$s.pdf'  \\) -delete" root (f-base curr-file)))
+     `("clean-all"    ,(format "cd %s; find . -maxdepth 1 \\( -name '*.log' -o -name '*.aux' -o -name '*.bbl' -o -name '*.blg' -o -name '*.out' -o -name '*.pdf'  \\) -delete" root))
 
      `("install"      ,(format "tlmgr %s install --with-doc" (if (eq 'darwin system-type) "--usermode" "")) :read)
      `("info"         ,(format "tlmgr %s info --list " (if (eq 'darwin system-type) "--usermode" "")) :read)
@@ -50,18 +57,14 @@
      `("fonts"                              "updmap-user --listmaps")
      `("system-fonts" ,(format              "system_profiler -json SPFontsDataType > %s" (expand-file-name "~/_cache_/fonts/fonts.json")))
 
-     (when (f-exists? (f-swap-ext curr-file "pdf"))
+     (when (f-exists? output-file)
        `("open"     ,(if (eq 'darwin system-type)
-                         (format "open -a Preview -nF %s" (f-swap-ext curr-file "pdf"))
-                       (format "evince %s" (f-swap-ext curr-file "pdf")))
-         )
+                         (format "open -a Preview -nF %s" output-file)
+                       (format "evince %s" output-file)))
        )
      )
     )
   )
-
-(defvar jg-latex-compile-quick-process nil)
-(defvar jg-latex-compile-quick-file nil)
 
 ;;;###autoload
 (defun +jg-latex-compile-file-quick ()
@@ -78,7 +81,10 @@
                          (re-search-forward jg-latex-compile-search-re)
                          (or (match-string 1) jg-latex-compile-program)
                          ))
-         (output-dir (format "-output-directory=%s" default-directory))
+         (root (if (projectile-project-root)
+                   (f-join (projectile-project-root) ".temp/tex/")
+                 default-directory))
+         (output-dir (format "-output-directory=%s" root))
          (compile-cmd (append (list compile-with output-dir) jg-latex-compile-args))
          )
     (setq jg-latex-compile-quick-process (make-process

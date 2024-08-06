@@ -1,7 +1,9 @@
 ;; -*- mode:emacs-lisp; lexical-binding: t;-*-
 
 ;;-- csharp
-(push '(c-sharp "c-sharp" "tree_sitter_c_sharp") treesit-load-name-override-list)
+(spec-handling-add! treesit-lang
+                    '(c-sharp :lib-base "c-sharp" :entry-func "tree_sitter_c_sharp")
+                    )
 
 ;;-- end csharp
 
@@ -89,4 +91,19 @@
                       (".cs\\'"                   :trigger "__cs"              :mode dotnet-mode)
                       )
                     )
+(spec-handling-add! babel
+                    '(dotnet
+                      (:name c          :lib ob-C)
+                      (:name fsharp     :lib ob-fsharp)
+                      )
+                    )
+(spec-handling-add! org-src
+                    '(dotnet
+                      ("csharp" . csharp)
+                      ("fsharp" . fsharp)
+                      ("c#" . csharp)
+                      ("f#" . fsharp)
+                      )
+                    )
+
 ;;-- end specs

@@ -12,7 +12,7 @@
       confirm-nonexistent-file-or-buffer nil
       uniquify-buffer-name-style 'forward
       ring-bell-function #'ignore
-
+      switch-window-multiple-frames t
       visible-bell nil
 
 
@@ -121,7 +121,7 @@
       neo-keymap-style 'concise
       )
 (after! dired-omit-files-set
-  (setq neo-hidden-regexp-list (list dired-omit-files))
+  (setq neo-hidden-regexp-list (list jg-dired-omit-files))
   )
 
 ;;-- end neotree

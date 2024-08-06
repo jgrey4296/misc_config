@@ -19,7 +19,6 @@
 ;;
 ;;; Code:
 
-
 (after! projectile
   (add-to-list 'projectile-project-root-files "Cargo.toml")
   )
@@ -96,6 +95,18 @@
                       ("Cargo\\.toml\\'" . conf-toml-mode)
                       ("config\\.toml\\'" .conf-toml-mode)
                       ("\\.h\\'" . c-mode)
+                      )
+                    )
+
+(spec-handling-add! babel
+                    '(rust
+                      (:name rust       :lib rustic-babel)
+                      )
+                    )
+
+(spec-handling-add! org-src
+                    '(rust
+                      ("rust" . rustic)
                       )
                     )
 ;;-- end specs

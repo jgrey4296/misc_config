@@ -31,7 +31,7 @@
                      )
 
 (spec-handling-add! company
-                    '(yas-minor-mode (:back company-yasnippet))
+                    '(yas-minor-mode (:last company-yasnippet))
                     )
 
 (spec-handling-add! auto-modes

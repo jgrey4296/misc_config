@@ -58,3 +58,7 @@
   (after! projectile
     (add-to-list 'projectile-project-root-files "build.sbt"))
   )
+
+(use-package! ob-kotlin
+  :defer t
+  )

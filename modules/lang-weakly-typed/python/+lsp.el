@@ -1,6 +1,6 @@
 ;;; +lsp.el -*- lexical-binding: t; -*-
 
-(doom-log "Loading Python LSP")
+(dlog! "Loading Python LSP")
 
 (after! lsp-mode
   (local-load! "lsp/custom-pylsp")

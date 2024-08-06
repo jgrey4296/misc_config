@@ -1,6 +1,6 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
-(defvar jg-latex-mode-map (make-sparse-keymap))
+
 
 (map! :map jg-latex-mode-map
       :i "\"" #'TeX-insert-quote
@@ -21,11 +21,11 @@
 
       )
 
-(map! :map TeX-fold-mode-map
-      :localleader
-      :desc "Fold paragraph"   "f"   #'TeX-fold-paragraph
-      :desc "Unfold paragraph" "F"   #'TeX-fold-clearout-paragraph
-      :desc "Unfold buffer"    "C-f" #'TeX-fold-clearout-buffer)
+;; (map! :map TeX-fold-mode-map
+;;       :localleader
+;;       :desc "Fold paragraph"   "f"   #'TeX-fold-paragraph
+;;       :desc "Unfold paragraph" "F"   #'TeX-fold-clearout-paragraph
+;;       :desc "Unfold buffer"    "C-f" #'TeX-fold-clearout-buffer)
 
 (map! :map reftex-mode-map
       :localleader
@@ -45,11 +45,17 @@
       ;; AUCTeX already provides this with `LaTeX-insert-item'.
         [(control return)] nil)
 
-(after! latex
-  (setq LaTeX-mode-map jg-latex-mode-map)
-  )
 
 (map! :map dired-mode-map
       :localleader
       "t" #'+jg-latex-dired-build-font-examples
       )
+
+(after! latex
+  (setq LaTeX-mode-map jg-latex-mode-map)
+  )
+(after! tex-fold
+  (setq TeX-fold-mode-map (make-sparse-keymap)
+        TeX-fold-keymap   (make-sparse-keymap)
+        )
+  )

@@ -71,5 +71,3 @@
 (use-package! company-ispell)
 
 (use-package! company-keywords)
-
-(use-package! env-handling)

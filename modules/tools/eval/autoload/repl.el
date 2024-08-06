@@ -14,7 +14,7 @@
            (and (local-variable-p 'repl-base (get-buffer +eval-repl-buffer-name))
                 (repl-handler-p handler)
                 (-contains? (ensure-list (repl-handler-modes handler))
-                            (buffer-local-value 'repl-base (get-buffer +eval-repl-buffer-name))))
+                            (with-current-buffer (get-buffer +eval-repl-buffer-name) repl-base)))
            )
        )
   )

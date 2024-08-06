@@ -67,10 +67,9 @@
 
 (use-package! comint
   :config
-  (add-hook! 'comint-mode-hook (defun jg-remove-comint-capf ()
-                                 (remove-hook 'completion-at-point-functions 'comint-completion-at-point t)
-                                 (add-hook 'completion-at-point-functions 'comint-dynamic-complete-filename nil t)
-                                 ))
+  (add-hook! 'comint-mode-hook
+             #'+jg-remove-comint-capf
+             )
   )
 
 (use-package! shell-pop)

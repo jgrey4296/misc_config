@@ -1,20 +1,27 @@
 ;;; lang/jg-org/+vars.el -*- lexical-binding: t; -*-
 
+(defvar jg-org-mode-map     (make-sparse-keymap))
+(defvar jg-org-capture-map  (make-sparse-keymap))
+(defvar jg-org-src-mode-map (make-sparse-keymap))
+
+
 ;;-- org core
 ;; locations
 
 ;; ORG SETUP
-(setq-default org-fast-tag-selection-single-key nil
-              org-from-is-user-regexp "\\<John Grey\\>"
-              org-group-tags nil
-              org-use-fast-tag-selection t
-              org-tags-column 50
-              org-startup-indented nil
-              org-indent--deepest-level 10
-              org-element-use-cache t
-              org-insert-heading-respect-content t
-              org-list-allow-alphabetical t
-              )
+(spec-handling-setq! org 50
+                     org-link-from-user-regexp "\\<John Grey\\>"
+                     org-fast-tag-selection-single-key nil
+                     org-group-tags nil
+                     org-use-fast-tag-selection t
+                     org-tags-column 50
+                     org-startup-indented nil
+                     org-indent--deepest-level 10
+                     org-element-use-cache t
+                     org-insert-heading-respect-content t
+                     org-list-allow-alphabetical t
+                     )
+
 
 ;; Save target buffer after archiving a node.
 (setq org-archive-subtree-save-file-p t)
@@ -30,7 +37,7 @@
 ;;-- end org core
 
 ;;-- locations
-(spec-handling-setq! org 20
+(spec-handling-setq! org-locs 20
                      org-archive-location   (format           "%s::%s" (expand-file-name "archive/archive.org" org-directory) "* Main Archive")
                      org-id-locations-file  (expand-file-name "org/.orgids" user-cache-dir)
                      org-default-notes-file (expand-file-name "notes/misc.org"   org-directory)
@@ -80,62 +87,6 @@
       org-src-window-setup 'other-window
       )
 
-(spec-handling-add! babel
-                    '(default
-                      (:name D          :lib ob-C)
-                      (:name amm        :lib ob-ammonite)
-                      (:name awk        :lib ob-awk)
-                      (:name bash       :lib ob-shell)
-                      (:name calc       :lib ob-calc)
-                      (:name clojure    :lib ob-clojure)
-                      (:name comint     :lib ob-comint)
-                      (:name cpp        :lib ob-C)
-                      (:name css        :lib ob-css)
-                      (:name ditaa      :lib ob-ditaa)
-                      (:name dot        :lib ob-dot)
-                      (:name emacs-lisp :lib ob-emacs-lisp)
-                      (:name eshell     :lib ob-eshell)
-                      (:name eval       :lib ob-eval)
-                      (:name exp        :lib ob-exp)
-                      (:name forth      :lib ob-forth)
-                      (:name fortran    :lib ob-fortran)
-                      (:name gnuplot    :lib ob-gnuplot)
-                      (:name groovy     :lib ob-groovy)
-                      (:name haskell    :lib ob-haskell)
-                      (:name java       :lib ob-java)
-                      (:name js         :lib ob-js)
-                      (:name julia      :lib ob-julia)
-                      (:name latex      :lib ob-latex)
-                      (:name lilypond   :lib ob-lilypond)
-                      (:name lisp       :lib ob-lisp)
-                      (:name lob        :lib ob-lob)
-                      (:name lua        :lib ob-lua)
-                      (:name makefile   :lib ob-makefile)
-                      (:name matlab     :lib ob-matlab)
-                      (:name matlab     :lib ob-octave)
-                      (:name maxima     :lib ob-maxima)
-                      (:name ocaml      :lib ob-ocaml)
-                      (:name octave     :lib ob-octave)
-                      (:name org        :lib ob-org)
-                      (:name perl       :lib ob-perl)
-                      (:name plantuml   :lib ob-plantuml)
-                      (:name processing :lib ob-processing)
-                      (:name ruby       :lib ob-ruby)
-                      (:name rust       :lib rustic-babel)
-                      (:name sass       :lib ob-sass)
-                      (:name scheme     :lib ob-scheme)
-                      (:name sed        :lib ob-sed)
-                      (:name sh         :lib ob-shell)
-                      (:name shell      :lib ob-shell)
-                      (:name sql        :lib ob-sql)
-                      (:name sqlite     :lib ob-sqlite)
-                      (:name table      :lib ob-table)
-                      (:name tangle     :lib ob-tangle)
-                      (:name elisp      :lib ob-emacs-lisp)
-                      (:name c          :lib ob-C)
-                      (:name fsharp     :lib ob-fsharp)
-                      )
-                    )
 
 ;; Don't process babel results asynchronously when exporting org, as they
 ;; won't likely complete in time, and will instead output an ob-async hash
@@ -364,6 +315,43 @@
                       ("agenda"    jg-org-startup-agenda         t)
                       ("reference" jg-org-startup-reference      t)
                       ("packages"  jg-org-startup-package        t)
+                      )
+                    )
+(spec-handling-add! babel
+                    '(default
+                      (:name D          :lib ob-C)
+                      (:name amm        :lib ob-ammonite)
+                      (:name awk        :lib ob-awk)
+                      (:name calc       :lib ob-calc)
+                      (:name comint     :lib ob-comint)
+                      (:name cpp        :lib ob-C)
+                      (:name ditaa      :lib ob-ditaa)
+                      (:name dot        :lib ob-dot)
+                      (:name eval       :lib ob-eval)
+                      (:name exp        :lib ob-exp)
+                      (:name forth      :lib ob-forth)
+                      (:name fortran    :lib ob-fortran)
+                      (:name gnuplot    :lib ob-gnuplot)
+                      (:name julia      :lib ob-julia)
+                      (:name lob        :lib ob-lob)
+                      (:name makefile   :lib ob-makefile)
+                      (:name matlab     :lib ob-matlab)
+                      (:name matlab     :lib ob-octave)
+                      (:name maxima     :lib ob-maxima)
+                      (:name ocaml      :lib ob-ocaml)
+                      (:name octave     :lib ob-octave)
+                      (:name org        :lib ob-org)
+                      (:name perl       :lib ob-perl)
+                      (:name processing :lib ob-processing)
+                      (:name ruby       :lib ob-ruby)
+                      (:name sed        :lib ob-sed)
+                      (:name table      :lib ob-table)
+                      (:name tangle     :lib ob-tangle)
+                      )
+                    )
+(spec-handling-add! org-src
+                    '(default
+
                       )
                     )
 ;;-- end specs

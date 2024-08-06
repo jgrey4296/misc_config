@@ -6,11 +6,6 @@
 ;; See footer for licenses/metadata/notes as applicable
 ;;-- end Header
 
-(defvar jg-calc-mode-map (make-sparse-keymap))
-
-(defvar jg-calc-trail-mode-map (make-sparse-keymap))
-
-(defvar jg-calc-dispatch-map (make-sparse-keymap))
 
 (map! :map jg-calc-mode-map ;; prefixs
       (:prefix ("a" . "algebra"))
@@ -20,6 +15,7 @@
       (:prefix ("v" . "select"))
       (:prefix ("V". "Vectors"))
       )
+
 (map! :map jg-calc-mode-map ;; basic
 
       :n "'"        'calc-algebraic-entry

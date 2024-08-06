@@ -1,6 +1,6 @@
 ;; lang/org/+bindings_2.el -*- lexical-binding: t; -*-
 ;; Misc
-(doom-log "Setting up org main bindings: %s" (current-time-string))
+(dlog! "Setting up org main bindings: %s" (current-time-string))
 
 (defvar jg-org-base-map (make-keymap))
 ;; Leaderless
@@ -143,7 +143,6 @@
 (map! :map jg-org-base-map
       :localleader
       :prefix ("l" . "links")
-      :desc "cliplink"                 "c" #'org-cliplink
       :desc "+org/remove-link"         "d" #'+org/remove-link
       :desc "id-store-link"            "i" #'org-id-store-link
       :desc "insert-link"              "l" #'org-insert-link

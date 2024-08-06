@@ -6,6 +6,8 @@
 
 (use-package! format-all
  :disabled t
+ :init
+  (advice-add 'format-all-buffer--from-hook :around #'+format--all-buffer-from-hook-a)
   )
 
 (use-package! dtrt-indent
@@ -36,3 +38,5 @@
 (use-package! adaptive-wrap
   :disabled
   )
+
+(use-package! indent-tools)

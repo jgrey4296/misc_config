@@ -96,30 +96,28 @@
 (defvar flycheck-checkers)
 (defvar flycheck-disabled-checkers)
 
-(setq-default flycheck-display-errors-delay 1
-              flycheck-display-errors-function nil
-              flycheck-help-echo-function nil
-              flycheck-process-error-functions nil
-
-              )
-
-(setq flycheck-emacs-lisp-load-path 'inherit
-      flycheck-check-syntax-automatically '(save idle-change mode-enabled)
-      flycheck-idle-change-delay 1.0
-      flycheck-buffer-switch-check-intermediate-buffers t
-      flycheck-display-errors-delay 0.25
-      flycheck-popup-tip-error-prefix "X "
-      flycheck-posframe-warning-prefix "! "
-      flycheck-posframe-info-prefix "··· "
-      flycheck-posframe-error-prefix "X "
-      flycheck-indication-mode 'right-fringe
-      )
+(spec-handling-setq! flycheck 50
+                     flycheck-display-errors-delay 1
+                     flycheck-display-errors-function nil
+                     flycheck-help-echo-function nil
+                     flycheck-process-error-functions nil
+                     flycheck-check-syntax-automatically '(save idle-change mode-enabled)
+                     flycheck-idle-change-delay 1.0
+                     flycheck-buffer-switch-check-intermediate-buffers t
+                     flycheck-display-errors-delay 0.25
+                     flycheck-popup-tip-error-prefix "X "
+                     flycheck-posframe-warning-prefix "! "
+                     flycheck-posframe-info-prefix "··· "
+                     flycheck-posframe-error-prefix "X "
+                     flycheck-indication-mode 'right-fringe
+                     )
 
 ;;-- end flycheck
 
 ;;-- tree-sitter
 (setq tree-sitter-debug-jump-buttons t ;; This makes every node a link to a section of code
       tree-sitter-debug-highlight-jump-region t ;; and this highlights the entire sub tree in your code
+      ;; MAYBE make this a spec-handler:
       tree-sitter-load-path (list
                              (expand-file-name (format "straight/%s/tree-sitter-langs/bin/" straight-build-dir) doom-local-dir)
                              (expand-file-name "~/.local/tree-sitter/")
@@ -129,8 +127,31 @@
       )
 
 (setq treesit-extra-load-path tree-sitter-load-path
-      ;; treesit-load-name-override-list '()
+      ;; treesit-simple-indent-rules
+      ;; treesit-defun-type-regexp
+      ;; treesit-defun-name-function
+      ;; treesit-simple-imenu-settings
+      ;; treesit-max-buffer-size
+      ;;
+
+      ;; TODO make this a spec handler
+      treesit-language-source-alist '(
+                                      ;; expects (lang . (url revision source-dir CC C++))
+                                      (elisp "https://github.com/wilfred/tree-sitter-elisp")
+                                      (python "https://github.com/tree-sitter/tree-sitter-python")
+                                      )
  )
+
+
+(spec-handling-setq! treesit 50
+                     tree-sitter-load-path (list
+                                            (expand-file-name (format "straight/%s/tree-sitter-langs/bin/" straight-build-dir) doom-local-dir)
+                                            (expand-file-name "~/.local/tree-sitter/")
+                                            )
+                     treesit-extra-load-path tree-sitter-load-path
+                     )
+
+;;todo: use treesit-font-lock-rules
 ;;-- end tree-sitter
 
 ;;-- specs
@@ -185,14 +206,68 @@
                     )
 
 (spec-handling-add! tree-sit-lang
-                '(agda-mode       . agda)
-                '(c-mode          . c)
-                '(c++-mode        . cpp)
+                    '(agda-mode       . agda)
+                    '(c-mode          . c)
+                    '(c++-mode        . cpp)
 
-                '(elm-mode        . elm)
+                    '(elm-mode        . elm)
 
-                '(julia-mode      . julia)
-                '(ruby-mode       . ruby)
-                '(tuareg-mode     . ocaml)
-                )
+                    '(julia-mode      . julia)
+                    '(ruby-mode       . ruby)
+                    '(tuareg-mode     . ocaml)
+                    )
+
+(spec-handling-add! env-handling
+                    '(flycheck
+                      (:support flycheck #'(lambda (path name)
+                                             (when (featurep 'flycheck)
+                                               (unless flycheck-enabled-checkers
+                                                 (let ((chosen (intern (ivy-read "Flychecker: " flycheck-disabled-checkers :require-match t))))
+                                                   (delete chosen flycheck-disabled-checkers)
+                                                   (add-to-list flycheck-enabled-checkers chosen)
+                                                   ))
+                                               (add-hook 'python-mode-hook #'flycheck-mode)
+                                               )
+                                             )
+                                (-partial #'flycheck-mode -1)
+                                )
+                      (:teardown flycheck (-partial flycheck-mode -1))
+                      )
+                      )
+
+(spec-handling-add! env-handling
+                    '(lsp
+                      (:support lsp
+                                #'(lambda (state) (when (featurep 'lsp) (add-hook 'python-mode-hook #'lsp-deferred)))
+                                #'(lambda (state)
+                                    (when (featurep 'lsp)
+                                      (when lsp-mode (lsp-mode -1))
+                                      (when lsp--last-active-workspaces
+                                        (lsp-workspace-shutdown (car lsp--last-active-workspaces)))
+                                      (remove-hook 'python-mode-hook #'lsp-deferred)
+                                      )
+                                     )
+                                )
+                      (:teardown lsp #'(lambda (state) (when (featurep 'lsp) (lsp-disconnect))))
+                      )
+                    )
+
+(spec-handling-add! env-handling
+                    '(eglot
+                      (:support eglot
+                                #'(lambda (state) (when (featurep 'eglot) (add-hook 'python-mode-hook #'eglot-ensure)))
+                                #'(lambda (state)
+                                    (when (featurep 'eglot) (remove-hook 'python-mode-hook #'eglot-ensure)))
+                                )
+                      )
+                    )
+
+(spec-handling-add! env-handling
+                    '(semantic
+                      (:support semantic
+                                #'(lambda (state) (when (featurep 'semantic) (add-hook 'python-mode-hook #'semantic-mode)))
+                                #'(lambda (state) (when (featurep 'semantic) (remove-hook 'python-mode-hook #'semantic-mode)))
+                                )
+                      )
+                    )
 ;;-- end specs

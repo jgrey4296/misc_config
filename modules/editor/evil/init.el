@@ -105,7 +105,7 @@
       finder
       flycheck
       flymake
-      forge
+      ;; forge
       free-keys
       geiser
       ggtags
@@ -267,7 +267,7 @@ variable for an explanation of the defaults (in comments). See
     Unlike `evil-collection-init', this respects `+evil-collection-disabled-list',
     and complains if a module is loaded too early (during startup)."
 (unless (memq (or (car-safe module) module) disabled-list)
-    (doom-log "editor:evil: loading evil-collection-%s %s"
+    (dlog! "editor:evil: loading evil-collection-%s %s"
             (or (car-safe module) module)
             (if after-init-time "" "(too early!)"))
     (with-demoted-errors "evil-collection error: %s"

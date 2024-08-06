@@ -30,7 +30,7 @@ Returns the vterm buffer."
        (if-let (win (get-buffer-window buffer-name))
            (delete-window win)
          (let ((buffer (or (cl-loop for buf in (doom-buffers-in-mode 'vterm-mode)
-                                    if (equal (buffer-local-value '+vterm--id buf)
+                                    if (equal (with-current-buffer buf +vterm--id)
                                               buffer-name)
                                     return buf)
                            (get-buffer-create buffer-name))))

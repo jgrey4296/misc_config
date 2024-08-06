@@ -1,6 +1,6 @@
 ;;; lang/jg-python/config.el -*- lexical-binding: t; -*-
 
-(doom-log "Config JG Python")
+(dlog! "Config JG Python")
 
 (local-load! "+spec-defs")
 (local-load! "+defs")
@@ -16,29 +16,6 @@
   :config
   (require 'python-mode)
 
-  ;; setup python-ts-mode
-  (add-hook! 'python-ts-mode-hook
-             #'hs-minor-mode
-             #'+python-use-correct-flycheck-executables-h
-             #'abbrev-mode
-             #'flycheck-mode
-             #'maybe-py-test-minor-mode
-             #'evil-collection-python-set-evil-shift-width
-             #'general-insert-minor-mode
-             #'+jg-python-auto-hide
-             )
-
-  (setq-hook! 'python-mode-hook
-    tab-width                    py-indent-offset
-    end-of-defun-function       #'python-nav-end-of-defun
-    beginning-of-defun-function #'python-nav-beginning-of-defun
-
-    indent-line-function        #'py-indent-line
-    indent-region-function      #'py-indent-region
-    lsp-diagnostic-filter       #'+jg-python-lsp-flycheck-filter
-
-    jg-workspaces-find-buff-fn #'+jg-python-carousel-window-fn
-    )
   )
 
 (use-package! python-mode
@@ -48,48 +25,66 @@
         py-do-completion-p nil ;; nil
         py-company-pycomplete-p nil
         py-fast-process-p nil)
+
+  (defvaralias 'python-indent-offset 'py-indent-offset)
+  (defvaralias 'python-pdbtrack-activate 'py-pdbtrack-do-tracking-p)
+  (defvaralias 'python-shell--interpreter 'py-python-command)
+  (defvaralias 'python-shell-virtualenv-root 'py-shell-virtualenv-root)
+
   :config
 
-  ;;-- hooks
-  (add-hook! 'python-mode-hook
+  ;; setup python-ts-mode
+  (add-hook! 'python-ts-mode-hook
              #'+python-use-correct-flycheck-executables-h
-             #'er/add-python-mode-expansions
-             #'evil-collection-python-set-evil-shift-width
-             #'doom--setq-tab-width-for-python-mode-h
-             #'tree-sitter!
-             #'maybe-py-test-minor-mode
-             #'general-insert-minor-mode
              #'abbrev-mode
+             #'evil-collection-python-set-evil-shift-width
+             #'flycheck-mode
+             #'general-insert-minor-mode
+             #'hs-minor-mode
+             #'maybe-py-test-minor-mode
+             #'+jg-python-auto-hide
+             )
+
+  ;;-- hooks
+  (add-hook! 'python-mode-hook ;; flycheck
+             #'+python-use-correct-flycheck-executables-h
              #'flycheck-mode
              )
 
-  (defun jg-python-font-lock-mod-h ()
-    (pushnew! python-font-lock-keywords
-              '("^\s+return " (0 '(:background "mediumpurple4") t))
-              '("^\s+def "    (0 '(:background "mediumpurple4") t))
-              )
-    )
-
-  (add-hook! 'python-mode-hook :depth 100
-             #'jg-python-font-lock-mod-h
+  (add-hook! 'python-mode-hook
+             #'abbrev-mode
+             #'doom--setq-tab-width-for-python-mode-h
+             #'er/add-python-mode-expansions
+             #'evil-collection-python-set-evil-shift-width
+             #'general-insert-minor-mode
+             #'maybe-py-test-minor-mode
+             #'tree-sitter!
              )
+
 
   ;; Always add auto-hide as the last thing
   (add-hook! 'python-mode-hook :depth 100
+             #'jg-python-font-lock-mod-h
              #'+jg-python-outline-regexp-override-hook
              #'+jg-python-auto-hide
              )
 
-  (setq-hook! 'python-mode-hook
-    tab-width                    py-indent-offset
-    end-of-defun-function       #'python-nav-end-of-defun
-    beginning-of-defun-function #'python-nav-beginning-of-defun
+  (setq-hook! 'python-mode-hook ;; flycheck
+    lsp-diagnostic-filter       #'+jg-python-lsp-flycheck-filter
+    flycheck-pylintrc           '("pylint.toml" "pyproject.toml")
+    flycheck-python-ruff-config '("ruff.toml" ".ruff.toml" "pyproject.toml")
+    flycheck--automatically-enabled-checkers '(python-ruff python-coverage)
+    flycheck--automatically-disabled-checkers '(python-pylint python-flake8 python-pycompile python-compile python-pyright python-mypy)
+    flycheck-python-mypy-config '(".mypy.ini" "mypy.ini" "pyproject.toml")
+    )
 
+  (setq-hook! 'python-mode-hook
+    beginning-of-defun-function #'python-nav-beginning-of-defun
+    end-of-defun-function       #'python-nav-end-of-defun
     indent-line-function        #'py-indent-line
     indent-region-function      #'py-indent-region
-    lsp-diagnostic-filter       #'+jg-python-lsp-flycheck-filter
-
     jg-workspaces-find-buff-fn #'+jg-python-carousel-window-fn
+    tab-width                    py-indent-offset
     )
   ;;-- end hooks
 
@@ -124,8 +119,30 @@
   :commands 'company-anaconda
   )
 
+(use-package! company-jedi
+  :defer t
+  )
+
 (use-package! python-pytest
   :after python-mode
+  )
+
+(use-package! tox
+  :defer t
+  )
+
+(use-package! python-coverage
+  :defer t
+  :config
+
+  (add-hook! 'python-mode-hook :depth 50
+             #'python-coverage-overlay-mode
+             )
+
+  (setq-hook! 'python-mode-hook
+    python-coverage-default-file-name ".temp/coverage/coverage.xml"
+    )
+
   )
 
 (use-package! py-isort

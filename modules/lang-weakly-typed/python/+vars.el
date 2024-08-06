@@ -1,55 +1,49 @@
 ;;; lang/jg-python/+vars.el -*- lexical-binding: t; -*-
 
-(doom-log "Python Vars")
+(dlog! "Python Vars")
 ;;-- general python
 
-(setq expand-region-preferred-python-mode 'python-mode)
-
-(defvaralias 'python-indent-offset 'py-indent-offset)
-
-(defvaralias 'python-pdbtrack-activate 'py-pdbtrack-do-tracking-p)
-
-(defvaralias 'python-shell--interpreter 'py-python-command)
-
-(defvaralias 'python-shell-virtualenv-root 'py-shell-virtualenv-root)
-
 ;; Conda/Mamaba
-(setq conda-anaconda-home (or (getenv "MAMBA_ROOT_PREFIX") (getenv "ANACONDA_HOME") "/usr/local/anaconda3")
-      conda-env-home-directory (cond ((getenv "MAMBA_ROOT_PREFIX")
-                                      (f-join (getenv "MAMBA_ROOT_PREFIX") "envs"))
-                                     ((getenv "ANACONDA_ENVS")
-                                      (getenv "ANACONDA_ENVS"))
-                                     (t
-                                      (f-join conda-anaconda-home "envs"))
-                                     )
-      )
-
-;; Builtin Python-mode vars
-(setq python-indent-guess-indent-offset                     nil
-      python-shell-completion-native-enable                 nil
-      python-shell-completion-native-disabled-interpreters  '("pypy")
-      python-shell-interpreter-path-args                    (expand-file-name "python/repl_startup.py"  templates-loc)
-      jg-python-current-interpreter                         jg-python-stock-repl
- )
+(spec-handling-setq! conda 50
+                     conda-anaconda-home (or (getenv "MAMBA_ROOT_PREFIX") (getenv "ANACONDA_HOME") "/usr/local/anaconda3")
+                     conda-env-home-directory (cond ((getenv "MAMBA_ROOT_PREFIX")
+                                                     (f-join (getenv "MAMBA_ROOT_PREFIX") "envs"))
+                                                    ((getenv "ANACONDA_ENVS")
+                                                     (getenv "ANACONDA_ENVS"))
+                                                    (t
+                                                     (f-join conda-anaconda-home "envs"))
+                                                    )
+                     )
 
 ;; Py-vars
-(setq py-indent-offset              4
-      py-shell-virtualenv-root      conda-env-home-directory
-      py-pdbtrack-do-tracking-p     t
-      py-python-command             "python3"
-      py-python-command-args        '("-i")
-      py-use-font-lock-doc-face-p   t
-      py-fontify-shell-buffer-p     t
-      py-split-window-on-execute    t
-      )
-;; Personal
-(setq jg-python-repl-start-file (expand-file-name "python/repl_startup.py " templates-loc)
-      )
+(spec-handling-setq! python 50
+                     ;; Python settings
+                     python-indent-guess-indent-offset                     nil
+                     python-shell-completion-native-enable                 nil
+                     python-shell-completion-native-disabled-interpreters  '("pypy")
+                     python-shell-interpreter-path-args                    (expand-file-name "python/repl_startup.py"  templates-loc)
+                     expand-region-preferred-python-mode 'python-mode
+                     ;; py settings
+                     py-indent-offset              4
+                     py-shell-virtualenv-root      conda-env-home-directory
+                     py-pdbtrack-do-tracking-p     t
+                     py-python-command             "python3"
+                     py-python-command-args        '("-i")
+                     py-use-font-lock-doc-face-p   t
+                     py-fontify-shell-buffer-p     t
+                     py-split-window-on-execute    t
+                     ;; my settings
+                     jg-python-current-interpreter                         jg-python-stock-repl
+                     jg-python-repl-start-file (expand-file-name "python/repl_startup.py " templates-loc)
+                     jg-python-coverage-file-loc ".temp/coverage"
+                     )
 (modify-syntax-entry ?_ "_" python-mode-syntax-table)
 ;;-- end general python
 
 ;;-- tree-sitter
-(push '(python "python" "tree_sitter_python") treesit-load-name-override-list)
+(spec-handling-add! treesit-lang
+                    '(python :lib-base "python" :entry-func "tree_sitter_python")
+                    )
 
 ;;-- end tree-sitter
 
@@ -68,18 +62,6 @@
   )
 ;;-- end outline
 
-;;-- flycheck
-(after! flycheck
-  (setq flycheck-pylintrc '("pylint.toml" "pyproject.toml")
-        flycheck-python-ruff-config '("ruff.toml" ".ruff.toml" "pyproject.toml")
-        flycheck--automatically-enabled-checkers (-concat flycheck--automatically-enabled-checkers '(python-ruff))
-        flycheck--automatically-disabled-checkers '(python-pylint python-compile python-pyright python-mypy)
-        )
-  ;; (push 'python-pylint flycheck-checkers)
-  (push ".mypy.ini" flycheck-python-mypy-ini)
-  )
-;;-- end flycheck
-
 ;;-- smartparens
 (after! smartparens-python
   (sp-with-modes 'python-mode
@@ -97,28 +79,175 @@
 ;;-- end smartparens
 
 ;;-- lsp
-(setq lsp-pyright-extra-paths #'[]
-      lsp-pyright-venv-path conda-env-home-directory
-      lsp-pyright-log-level "Information" ;; Error Warning Information Trace
-      lsp-pyright-typechecking-mode "basic"
-
-      lsp-ruff-lsp-advertize-fix-all            nil
-      lsp-ruff-lsp-advertize-organize-imports   t
-      lsp-ruff-lsp-show-notifications           "always"
-      lsp-ruff-lsp-log-level                    "info"
-      lsp-ruff-lsp-server-command               '("ruff-lsp")
-      lsp-ruff-lsp-python-path                  "python3"
-      lsp-ruff-lsp-import-strategy              "fromEnvironment"
-      lsp-ruff-lsp-ruff-args                    [ ]
-      lsp-ruff-lsp-ruff-path                    ["ruff"]
-
-      lsp-pylsp-configuration-sources []
-      lsp-pylsp-server-command '("pylsp")
-      lsp-pylsp-plugins-flake8-enabled nil
-
-      )
+(spec-handling-setq! lsp-py 50
+                     ;; Pyright
+                     lsp-pyright-extra-paths #'[]
+                     lsp-pyright-venv-path conda-env-home-directory
+                     lsp-pyright-log-level "Information" ;; Error Warning Information Trace
+                     lsp-pyright-typechecking-mode "basic"
+                     ;; Ruff
+                     lsp-ruff-lsp-advertize-fix-all            nil
+                     lsp-ruff-lsp-advertize-organize-imports   t
+                     lsp-ruff-lsp-show-notifications           "always"
+                     lsp-ruff-lsp-log-level                    "info"
+                     lsp-ruff-lsp-server-command               '("ruff-lsp")
+                     lsp-ruff-lsp-python-path                  "python3"
+                     lsp-ruff-lsp-import-strategy              "fromEnvironment"
+                     lsp-ruff-lsp-ruff-args                    [ ]
+                     lsp-ruff-lsp-ruff-path                    ["ruff"]
+                     ;; pylsp
+                     lsp-pylsp-configuration-sources []
+                     lsp-pylsp-server-command '("pylsp")
+                     lsp-pylsp-plugins-flake8-enabled nil
+                     )
 
 ;;-- end lsp
+
+;;-- babel
+(spec-handling-add! babel
+                    '(python
+                      (:name python :lib ob-python :mode python)
+                      )
+                    )
+;; (after! (ob python)
+;;   (setq org-babel-python-command
+;;         (string-trim
+;;          (concat python-shell-interpreter " "
+;;                  (if (string-match-p "\\<i?python[23]?$" python-shell-interpreter)
+;;                      (replace-regexp-in-string
+;;                       "\\(^\\| \\)-i\\( \\|$\\)" " " python-shell-interpreter-args)
+;;                    python-shell-interpreter-args))))
+;;   )
+
+;;-- end babel
+
+;;-- general insert
+(general-insert-register-processor 'python-mode "raise"
+                                   #'(lambda (x) (insert "raise " (s-replace-regexp "^[^A-Z]+" "" x))))
+(general-insert-register-processor 'python-mode "datetime"
+                                   #'(lambda (x) (insert (car (split-string x " " t " +")))))
+(general-insert-register-processor 'python-mode "fixtures"
+                                   #'(lambda (x) (insert (car (split-string x " " t " "+)))))
+(general-insert-register-processor 'python-mode "import"
+                                   #'(lambda (x) (insert "import " (car (split-string x t " +")))))
+
+;;-- end general insert
+
+;;-- env handling
+(spec-handling-add! env-handling ;; pythonic
+                    `(pythonic
+                      (:setup pythonic
+                              ,#'(lambda (state local) (pythonic-activate (f-join (plist-get state :path) (plist-get state :name)))
+                                   nil)
+                              ,#'(lambda (state) (pythonic-deactivate))
+                              )
+                      )
+                    )
+(spec-handling-add! env-handling ;; pipenv / pip
+                    `(pipenv
+                      (:setup pipenv
+                              ,#'(lambda (state local) (pipenv-activate) nil)
+                              ,#'(lambda (state) (pipenv-deactivate))
+                              )
+                      (:install pipenv
+                                ,#'(lambda (state)
+                                     (apply 'start-process env-handling-process-name env-handling-buffer-name "pipenv" "--non-interactive" "install"
+                                            (split-string (read-string "Packages: ") " " t t)))
+                                )
+                      (:update pipenv
+                               ,#'(lambda (state)
+                                    (apply 'start-process env-handling-process-name env-handling-buffer-name "pipenv" "--non-interactive" "upgrade" ))
+                               )
+                      )
+                    `(pip
+                      (:install pip
+                                ,#'(lambda (state)
+                                     (apply 'start-process env-handling-process-name env-handling-buffer-name "pip" "--no-input" "install"
+                                            (split-string (read-string "Packages: ") " " t t)))
+                                )
+                      (:update pip
+                               ,#'(lambda (state)
+                                    (apply 'start-process env-handling-process-name env-handling-buffer-name "pip" "--no-input" "install" "--upgrade" ))
+                               )
+                      )
+                    )
+(spec-handling-add! env-handling ;; venv
+                      `(venv
+                        (:setup venv
+                                ,#'(lambda (state local) (pyvenv-activate (f-join
+                                                                           (plist-get state :path)
+                                                                           (plist-get state :name)))
+                                     nil)
+                                ,#'(lambda (state) (pyvenv-deactivate))
+                                )
+                        (:create venv ,#'(lambda (state) (pyvenv-create)))
+                        )
+                      )
+(spec-handling-add! env-handling ;; conda
+                      `(conda_el
+                        (:setup conda
+                                ,#'(lambda (state local)
+                                     (let ((env-name (or (plist-get local :name)
+                                                         (plist-get state :name)
+                                                         (string-trim (conda-env-read-name "Select Conda Environment: ")))))
+                                       (conda-env-activate env-name)
+                                       (setenv "CONDA_DEFAULT_ENV" env-name)
+                                       (list :name env-name :path conda-env-home-directory)
+                                       )
+                                   )
+                                ,#'(lambda (state)
+                                    (conda-env-deactivate)
+                                    (setenv "CONDA_DEFAULT_ENV" nil)
+                                    )
+                                )
+                        (:create conda
+                                 ,#'(lambda (state)
+                                      (let ((name (read-string "Env name to create: "))
+                                            (ver  (format "python=%s" (read-string "Python Version: " "3.11")))
+                                            (packages (split-string (read-string "Packages: ") " " t " +"))
+                                            )
+                                        (apply 'start-process env-handling-process-name env-handling-buffer-name "conda" "create" "--yes" "-n" name ver packages)))
+                                 )
+                        (:install conda
+                                  ,#'(lambda (state)
+                                      (apply 'start-process env-handling-process-name env-handling-buffer-name "conda" "install" "--yes"
+                                             (split-string (read-string "Packages: ") " " t t)))
+                                  )
+                        (:update conda
+                                 ,#'(lambda (state) (apply 'start-process env-handling-process-name env-handling-buffer-name "conda" "update" "--all" "--yes"))
+                                 )
+                        )
+                      )
+(spec-handling-add! env-handling ;; mamba
+                      `(mamba
+                        (:setup mamba
+                                ,#'(lambda (state local)
+                                     (let ((env-name (or (plist-get local :name)
+                                                         (plist-get state :name)
+                                                         (string-trim (read-string "Select Environment: ")))))
+                                       (micromamba-activate env-name)
+                                       (setenv "CONDA_DEFAULT_ENV" env-name)
+                                       (list :name env-name :path conda-env-home-directory)
+                                       )
+                                     )
+                                ,#'(lambda (state)
+                                    (micromamba-deactivate)
+                                     (setenv "CONDA_DEFAULT_ENV" nil)
+                                     )
+                                )
+                        )
+                      )
+(spec-handling-add! env-handling ;; poetry
+                      `(poetry
+                        (:setup poetry
+                                ,#'(lambda (state) (poetry-venv-workon) nil)
+                                ,#'(lambda (state) (poetry-venv-deactivate))
+                                )
+                        (:update poetry ,#'(lambda (state) (poetry-update)))
+                        (:install poetry ,#'(lambda (state) (poetry-add)))
+                        )
+                      )
+;;-- end env handling
 
 ;;-- specs
 (spec-handling-add! projects
@@ -154,11 +283,12 @@
                       ("pylint.toml\\'"           :trigger "__pylint"         :mode conf-toml-mode)
                       ("jekyl.toml\\'"            :trigger "__jekyll"         :mode conf-toml-mode)
                       ("ruff.toml\\'"             :trigger "__ruff_config"    :mode conf-toml-mode)
+                      ("\\.mypyrc\\'"               :trigger "__mypy"    :mode conf-toml-mode)
+                      ("conf.py"               :trigger "__sphinx_conf"    :mode python-mode)
+                      ("log_config.py"         :trigger "__log_config"     :mode python-mode)
 
                       ;; Python:
                       ("__init__\\.py\\'"      :trigger "__init"           :mode python-mode)
-                      ("conf.py"               :trigger "__sphinx_conf"    :mode python-mode)
-                      ("log_config.py"         :trigger "__log_config"     :mode python-mode)
                       ("test_.+\\.py\\'"       :trigger "__pytest"         :mode python-mode)
                       ("cli_.+\\.py\\'"        :trigger "__cli"            :mode python-mode)
                       ("\\.py\\'"              :trigger "__"               :mode python-mode :priority -99)
@@ -208,7 +338,7 @@
                       (env-handling-state (:eval (env-handling-state-line)))
                       )
                     )
-(spec-handling-add! python-env
+(spec-handling-add! env-handling
                     '(default (:setup  none) (:support none))
                     )
 (spec-handling-add! ligatures
@@ -287,42 +417,21 @@
                       '(python-mode "Microsoft.Python.LanguageServer")
                       )
   )
-
 (spec-handling-add! imenu
-                    '(python
+                    '(python-mode
                       ("Field"  "\\s-*\\(.+?\\)\\s-*:\\s-\\(.+?\\)\\s-=\\s-field" 1)
 
                       )
                     )
 
-;;-- end specs
-
-;;-- babel
-(spec-handling-add! babel
+(spec-handling-add! org-src
                     '(python
-                      (:name python :lib ob-python :mode python)
+                      ("python" . python)
                       )
                     )
-;; (after! (ob python)
-;;   (setq org-babel-python-command
-;;         (string-trim
-;;          (concat python-shell-interpreter " "
-;;                  (if (string-match-p "\\<i?python[23]?$" python-shell-interpreter)
-;;                      (replace-regexp-in-string
-;;                       "\\(^\\| \\)-i\\( \\|$\\)" " " python-shell-interpreter-args)
-;;                    python-shell-interpreter-args))))
-;;   )
-
-;;-- end babel
-
-;;-- general insert
-(general-insert-register-processor 'python-mode "raise"
-                                   #'(lambda (x) (insert "raise " (s-replace-regexp "^[^A-Z]+" "" x))))
-(general-insert-register-processor 'python-mode "datetime"
-                                   #'(lambda (x) (insert (car (split-string x " " t " +")))))
-(general-insert-register-processor 'python-mode "fixtures"
-                                   #'(lambda (x) (insert (car (split-string x " " t " "+)))))
-(general-insert-register-processor 'python-mode "import"
-                                   #'(lambda (x) (insert "import " (car (split-string x t " +")))))
-
-;;-- end general insert
+(spec-handling-add! babel
+                    '(python
+                      (:name python :lib ob-python)
+                      )
+                    )
+;;-- end specs

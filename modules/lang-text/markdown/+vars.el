@@ -104,3 +104,9 @@ capture, the end position, and the output buffer.")
                                  )
                       )
                     )
+
+(spec-handling-add! org-src
+                    '(markdown
+                      ("md" . markdown)
+                      )
+                    )

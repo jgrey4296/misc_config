@@ -13,3 +13,9 @@
     (recenter -1)
     )
   )
+
+;;;###autoload
+(defun +jg-ivy-file-predicate (x)
+  (and (s-matches? jg-ivy-file-regexp x)
+       (not (s-matches? jg-ivy-file-reject-regexp x)))
+  )

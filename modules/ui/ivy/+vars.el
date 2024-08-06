@@ -6,22 +6,23 @@
 ;;-- end general-insert
 
 ;;-- ivy
-(setq ivy-height 17
-      ivy-wrap t
-      ivy-fixed-height-minibuffer t
-      ivy-sort-max-size 7500
-      ivy-magic-slash-non-match-action nil ;; disable magic slash on non-match
-      ivy-use-virtual-buffers nil ;; don't show recent files in switch-buffer
-      ivy-virtual-abbreviate 'full ;; ...but if that ever changes, show their full path
-      ivy-on-del-error-function #'ignore ;; don't quit minibuffer on delete-error
-      ivy-use-selectable-prompt t ;; enable ability to select prompt (alternative to `ivy-immediate-done')
-      ivy-rich-parse-remote-buffer nil
-      ivy-read-action-function #'ivy-hydra-read-action
-      ivy-read-action-format-function #'ivy-read-action-format-columns
-      ivy-switch-buffer-faces-alist nil ;; Remove built-in coloring of buffer list; we do our own
-      ivy-initial-inputs-alist nil   ;; Don't use ^ as initial input. Set this here because `counsel' defines more of its own, on top of the defaults.
-      swiper-action-recenter t
-      avy-all-windows t
+(spec-handling-setq! ivy 50
+                     ivy-height 17
+                     ivy-wrap t
+                     ivy-fixed-height-minibuffer t
+                     ivy-sort-max-size 7500
+                     ivy-magic-slash-non-match-action nil ;; disable magic slash on non-match
+                     ivy-use-virtual-buffers nil ;; don't show recent files in switch-buffer
+                     ivy-virtual-abbreviate 'full ;; ...but if that ever changes, show their full path
+                     ivy-on-del-error-function #'ignore ;; don't quit minibuffer on delete-error
+                     ivy-use-selectable-prompt t ;; enable ability to select prompt (alternative to `ivy-immediate-done')
+                     ivy-rich-parse-remote-buffer nil
+                     ivy-read-action-function #'ivy-hydra-read-action
+                     ivy-read-action-format-function #'ivy-read-action-format-columns
+                     ivy-switch-buffer-faces-alist nil ;; Remove built-in coloring of buffer list; we do our own
+                     ivy-initial-inputs-alist nil   ;; Don't use ^ as initial input. Set this here because `counsel' defines more of its own, on top of the defaults.
+                     swiper-action-recenter t
+                     avy-all-windows t
       )
 
 (after! ivy
@@ -55,20 +56,12 @@
 (defvar jg-ivy-file-regexp (rx anything))
 (defvar jg-ivy-file-reject-regexp (rx "test_" (+ anything)))
 
-(defun +jg-ivy-file-predicate (x)
-  (and (s-matches? jg-ivy-file-regexp x)
-       (not (s-matches? jg-ivy-file-reject-regexp x)))
-  )
-
-(setq counsel-find-file-extern-extensions '("mp4" "mkv" "xlsx" "pdf" "epub")
-      counsel--find-file-predicate #'+jg-ivy-file-predicate
-      )
+(spec-handling-setq! counsel 50
+                     counsel-find-file-extern-extensions '("mp4" "mkv" "xlsx" "pdf" "epub")
+                     counsel--find-file-predicate #'+jg-ivy-file-predicate
+                     )
 
 ;;-- end counsel
-
-;;-- company
-(setq company-idle-delay 1)
-;;-- end company
 
 ;;-- specs
 (spec-handling-add! popup

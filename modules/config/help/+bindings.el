@@ -1,8 +1,13 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
-(defvar jg-help-map (make-keymap))
-
 (define-prefix-command 'jg-help-map nil "jgb-help")
+
+(map! :leader
+      :desc "help"            "h" jg-help-map
+
+      )
+
+(map! :g "C-x h" jg-help-map)
 
 (map! :map jg-help-map
       "'"    #'describe-char
@@ -15,7 +20,8 @@
       :desc "Memory Report"    "M"    #'memory-report
       "!"   #'doom-debug-mode
       "DEL" #'free-keys
-    )
+
+      )
 
 ;;-- debug
 (map! :map jg-help-map
@@ -40,15 +46,33 @@
       :desc "Info Manual"                 "i" #'info-display-manual
       ;; :desc "Emacs Manual"                "e" #'info-emacs-manual
       ;; :desc "Emacs Manual Other Window"   "o" #'info-other-window
-                                          "a" #'doom/help-autodefs
-                                          "t" #'doom/toggle-profiler
-                                          "V" #'doom/help-custom-variable
-                                          ;; f -> fold debug
-                                          ;; p -> project type
-                                          ;; s -> spec handler
-                                          ;; S -> spec handler
+      "a" #'doom/help-autodefs
+      "t" #'doom/toggle-profiler
+      ;; p -> project type
+      "1"   #'view-hello-file
 
-      )
+      (:prefix ("h" . "Character sets")
+               "l" #'list-character-sets
+               "d" #'describe-character-set
+               )
+
+      (:prefix ("l" . "Language Environment")
+               "s"   #'set-language-environment
+               "d"   #'describe-language-environment
+               )
+      (:prefix ("c" . "Coding System")
+               "d"   #'describe-coding-system
+               "s"   #'set-terminal-coding-system
+               "l"   #'list-coding-systems
+               )
+
+      (:prefix ("g" . "Input Method")
+               "l"   #'list-input-methods
+               "d"   #'describe-input-method
+               "s"   #'set-input-method
+               )
+    )
+
 ;;-- end docs
 
 ;;-- ui
@@ -69,6 +93,7 @@
 ;;-- bindings
 (map! :map jg-help-map
       :prefix ("b" . "Bindings")
+      "a" #'+jg-help-describe-active-maps
       "b" #'describe-bindings
       "f" #'which-key-show-full-keymap
       "i" #'which-key-show-minor-mode-keymap
@@ -110,6 +135,7 @@
       )
 ;;-- end packages
 
+;;-- free-keys
 (map! :map free-keys-mode-map
       :after free-keys
       :desc "Change Buffer" :n "b" #'free-keys-change-buffer
@@ -119,6 +145,9 @@
       :desc "Quit"          :n "q" #'quit-window
       )
 
+;;-- end free-keys
+
+;;-- helpful
 (map! :map helpful-mode-map
       :n "q" #'+jg-help-switch-to-prev-helpful-or-close-window
       :n "Q" #'quit-window
@@ -126,9 +155,29 @@
       :n "SPC e" #'eval-last-sexp
       )
 
-(map! :leader
-      :desc "help"            "h" jg-help-map
+;;-- end helpful
+
+;;-- info
+(map! :map jg-info-map
+    :n "]" #'Info-forward-node
+    :n "[" #'Info-backward-node
+    :n "h" #'Info-up
+    :n "H" #'Info-top-node
+    :n "l" #'Info-next
+
+    :n "s n" #'Info-goto-node
+    :n "s N" #'Info-goto-node-web
+
+    :n "q" #'quit-window
+    :n "DEL" #'Info-toc
+    :n "RET" #'Info-follow-nearest-node
+
+    )
+
+;;-- end info
+
+(setq help-mode-map (make-sparse-keymap)
+      Info-mode-map jg-info-map
       )
-(map! :g "C-x h" jg-help-map)
 
 (provide 'jg-help-bindings)

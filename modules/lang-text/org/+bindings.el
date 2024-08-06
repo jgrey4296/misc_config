@@ -1,12 +1,10 @@
 ;;; main/jg-org/+bindings.el -*- lexical-binding: t; -*-
-(doom-log "Setting up general access org bindings: %s" (current-time-string))
+(dlog! "Setting up general access org bindings: %s" (current-time-string))
 (local-load! "util/+org-standard-bindings")
 
-(defvar jg-org-mode-map (make-sparse-keymap))
 (evil-make-overriding-map jg-org-mode-map)
 (set-keymap-parent jg-org-mode-map jg-org-base-map)
 
-(defvar jg-org-capture-map (make-sparse-keymap))
 
 (map! :leader
       :desc "Insert Timestamp"  "i t"   #'org-time-stamp
@@ -76,6 +74,7 @@
        :desc "Insert Subheading"   "h" #'org-insert-subheading
        :desc "Insert Drawer"       "d" #'org-insert-drawer
        :desc "Insert Structure"    "s" #'org-insert-structure-template
+       :desc "Insert Item"         "i" #'org-insert-item
        )
       )
 
@@ -116,12 +115,13 @@
       :desc "Run Org Test" "T" #'+jg-org-test-org-file
       )
 (map! :map org-src-mode-map
-      :n "q" #'evil-edit-src-abort
-      :n "C-c C-c" #'evil-edit-src-save
-      :n "C-c C-k" #'evil-edit-src-abort
+      :n "Q" #'org-edit-src-abort
+      :n "q" #'org-edit-src-save
+      :n "C-c C-c" #'org-edit-src-save
+      :n "C-c C-k" #'org-edit-src-abort
       :localleader
-      "q" #'evil-edit-src-abort
-      "w" #'evil-edit-src-save
+      "q" #'org-edit-src-abort
+      "w" #'org-edit-src-save
 
       )
 
@@ -145,13 +145,19 @@
       :n "q"   #'org-capture-kill
       )
 
+(map! :map jg-org-src-mode-map
+      :n "q" #'evil-org-edit-src-exit
+      :n "Q" #'evil-org-src-abort
+      :n "RET" #'org-edit-src-save
+      )
 
 (after! (evil-org org)
   (setq org-mode-map jg-org-mode-map
+        org-src-mode-map jg-org-src-mode-map
         evil-org-mode-map jg-org-mode-map
         minor-mode-map-alist (assq-delete-all 'evil-org-mode minor-mode-map-alist)
         org-capture-mode-map jg-org-capture-map
         )
   (push (cons 'evil-org-mode jg-org-mode-map) minor-mode-map-alist)
-
+  (evil-make-overriding-map org-src-mode-map)
   )

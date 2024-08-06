@@ -17,7 +17,7 @@
 - If opened from a commit window, it will open below it.
 - Magit process windows are always opened in small windows below the current.
 - Everything else will reuse the same window."
-  (let ((buffer-mode (buffer-local-value 'major-mode buffer)))
+  (let ((buffer-mode (with-current-buffer buffer major-mode)))
     (display-buffer
      buffer (cond
              ((and (eq buffer-mode 'magit-status-mode)

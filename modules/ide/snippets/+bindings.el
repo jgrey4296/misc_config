@@ -77,15 +77,6 @@
 
 ;;-- end snippet management
 
-;;-- insert state
-(map! :map jg-binding-insert-state-map
-      ;; "TAB" #'+jg-snippets-complete-or-snippet
-      "TAB" #'company-complete
-      ;; "TAB" #'indent-for-tab-command
-      )
-
-;;-- end insert state
-
 ;;-- shell
 (map! :map shell-mode-map
       :i "TAB" #'+jg-snippets-complete-or-snippet

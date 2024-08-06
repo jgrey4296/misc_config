@@ -119,7 +119,6 @@
 
 (map! :leader
       "a" #'+jg-evil-state-ivy
-
       )
 
 (dlog! "Evil Bindings Complete: %s" (current-time-string))

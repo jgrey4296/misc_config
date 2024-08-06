@@ -17,24 +17,24 @@
 
       :n "m"           #'+jg-ivy-toggle-mark
       :n "t"           #'ivy-toggle-marks
-      :n  "q"          #'abort-recursive-edit
-      :n  "a"          #'ivy-dispatching-done
-      :n  "o"          #'jg-ivy-hydra/body
-      :n  "."          #'jg-ivy-hydra/body
+      :n "q"          #'abort-recursive-edit
+      :n "a"          #'ivy-dispatching-done
+      :n "o"          #'jg-ivy-hydra/body
+      :n "."          #'jg-ivy-hydra/body
 
-      :n  "|"          #'abort-recursive-edit
-      :i  "|"          #'self-insert-command
+      :n "|"          #'abort-recursive-edit
+      :i "|"          #'self-insert-command
 
-      :nv "j"          #'ivy-next-line
-      :i  "j"          #'self-insert-command
-      :n  "k"          #'ivy-previous-line
+      :nv"j"          #'ivy-next-line
+      :i "j"          #'self-insert-command
+      :n "k"          #'ivy-previous-line
 
-      :n  "K"          #'previous-history-element
-      :n  "J"          #'next-history-element
+      :n "K"          #'previous-history-element
+      :n "J"          #'next-history-element
 
-      :n  "<"          #'beginning-of-line
-      :n  ">"          #'end-of-line
-      :n  "v"          #'ignore
+      :n "<"          #'beginning-of-line
+      :n ">"          #'end-of-line
+      :n "v"          #'ignore
 )
 (map! :map jg-minibuffer-ivy-map ;; C-{}
       "C-g"     #'+jg-minibuffer-normal-or-exit

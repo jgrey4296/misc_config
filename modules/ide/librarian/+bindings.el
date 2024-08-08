@@ -13,7 +13,7 @@
       )
 
 (map! :map jg-help-map
-      :after 'jg-help-bindings
+      :after jg-help-bindings
       :prefix ("e" . "Edit")
       :desc "Bindings"  "b" #'librarian-configs--edit-bindings
       :desc "Vars"      "v" #'librarian-configs--edit-vars

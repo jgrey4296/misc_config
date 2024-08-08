@@ -1,7 +1,7 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; util/text/packages.el
 (package! rotate-text)
-(package! evil-states-plus :recipe (:host github :repo "jgrey4296/evil-states-plus" :includes (insert-plus-state other-chars-state)))
+(package! evil-states-plus :recipe (:host github :repo "jgrey4296/evil-states-plus" :includes (insert-plus-state other-chars-state move-states) :branch "move-states"))
 (package! embrace)
 
 ;; Spelling

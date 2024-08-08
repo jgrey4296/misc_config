@@ -15,7 +15,6 @@
 (set-keyboard-coding-system 'utf-8)
 (set-language-environment "UTF-8")
 (prefer-coding-system 'utf-8)
-;; (setq default-input-method "greek")
 ;;-- end Text Encoding
 
 ;;-- locations

@@ -43,8 +43,6 @@
 
   )
 
-
-
 (spec-handling-add! company
                     '(prog-mode (:mode company-dabbrev-code company-capf) (:disfavour company-keywords company-abbrev) (:back company-files))
                     '(text-mode (:mode company-dabbrev company-ispell))

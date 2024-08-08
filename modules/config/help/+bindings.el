@@ -4,7 +4,6 @@
 
 (map! :leader
       :desc "help"            "h" jg-help-map
-
       )
 
 (map! :g "C-x h" jg-help-map)
@@ -178,6 +177,7 @@
 
 (setq help-mode-map (make-sparse-keymap)
       Info-mode-map jg-info-map
+      help-map jg-help-map
       )
 
 (provide 'jg-help-bindings)

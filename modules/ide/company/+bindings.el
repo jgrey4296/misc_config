@@ -67,13 +67,16 @@
       [escape] #'company-abort
       "j" #'company-select-next
       "k" #'company-select-previous
+      "l" #'company-complete-selection
+      "h" #'company-show-doc-buffer
       "f" #'company-filter-candidates
       "J" #'company-next-page
       "K" #'company-previous-page
       "q" #'company-abort
-      "<return>" #'company-complete-selection
+      ;; "<return>" #'company-complete-selection
       :g "RET" #'company-complete-selection
       :g "TAB" #'company-show-doc-buffer
+      :g "TAB" #'company-complete-selection
       "|" #'company-other-backend
       )
 

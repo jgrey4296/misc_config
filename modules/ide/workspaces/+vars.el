@@ -6,6 +6,8 @@
 
 (defvar jg-projects-doot-cmd "doot")
 
+(defvar jg-projects-related-dir-file ".related")
+
 
 ;;-- projectile
 (setq projectile-completion-system 'ivy
@@ -104,7 +106,8 @@
 
 (spec-handling-add! file-templates
                     '(project
-                     ("/doot\\.toml$" :trigger "__doot_toml" :mode conf-toml-mode)
+                     ("/doot\\.toml\\'" :trigger "__doot_toml" :mode conf-toml-mode)
+                     ("\\.related\\'"    :trigger "dot.related" :mode fundamental-mode)
                      )
                     )
 

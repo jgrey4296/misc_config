@@ -5,18 +5,22 @@
       (:prefix "f"
        :desc "Fd File" "l" #'fd-name-dired
        )
-      )
-
-(map! :leader
-      :prefix ("s" . "search")
-      :desc "Jump to link"                 "L" #'ffap-menu
-      :desc "Open visible link"            "l" #'link-hint-open-link
-      :desc "Search project"               "p" #'+default/search-project
-      :desc "Search project for symbol"    "." #'+default/search-project-for-symbol-at-point
-      :desc "Search current directory"     "d" #'+default/search-cwd
-      :desc "Fd File"                      "f" #'fd-dired
+      (:prefix ("n" . "notes")
+       :desc "Search notes for symbol"        "." #'+default/search-notes-for-symbol-at-point
+       :desc "Search notes"                   "s" #'+default/org-notes-search
+       :desc "Search org agenda headlines"    "S" #'+default/org-notes-headlines
+        )
       )
 
 (map! :map jg-binding-jump-map
       :desc "Open to visible link"         "L" #'link-hint-open-link
+      (:prefix ("o" . "Org")
+       :desc "Search Notes Headlines" "h" #'+default/org-notes-headlines
+       )
+      (:prefix "/"
+       :desc "Jump to link"                 "L" #'ffap-menu
+       :desc "Search current directory"    "d"  #'fd-dired
+       :desc "Search Notes"                "n"  #'+default/search-notes-for-symbol-at-point
+       :desc "Search Org Dir"              "o"  #'+default/org-notes-search
+      )
       )

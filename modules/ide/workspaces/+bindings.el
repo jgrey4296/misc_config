@@ -23,11 +23,18 @@
       :prefix ("p" . "project")
       :desc "run cmd in project root"      "!"    #'projectile-run-shell-command-in-root
       :desc "root shell"                   "'"    #'projectile-run-shell
-      :desc "search project for symbol"    "."    #'+default/search-project-for-symbol-at-point
+      :desc "search project for symbol"    "."    #'+jg-workspaces-search-project-for-symbol-at-point
       :desc "find file in project"         "f"    #'projectile-find-file
       :desc "find other file"              "o"    #'+jg-projects-find-related
-       :desc "compile in project"           "c"   #'projectile-compile-project
+      :desc "compile in project"           "c"    #'projectile-compile-project
+      :desc "Search project"               "p"    #'+default/search-project
       )
+
+(map! :map jg-binding-jump-map
+      :desc "Search project"               "/ p" #'+jg-workspaces-search-project
+      :desc "Search project for symbol"    "/ ." #'+jg-workspaces-search-project-for-symbol-at-point
+      )
+
 
 ;;-- zimmerframe
 (map! :map jg-binding-forward-general-motion-map

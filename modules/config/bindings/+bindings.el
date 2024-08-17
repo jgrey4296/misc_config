@@ -37,7 +37,6 @@
 
       (:prefix ("x" . "Text"))
 
-      :desc "Jump"    "j" #'jg-binding-jump-map
       )
 ;;-- end leader
 
@@ -117,7 +116,7 @@
       )
 ;;-- end <leader> i --- insert
 
-;;--- <leader> j -- Jumping
+;; -- <leader> j --- journal
 
 ;;-- <leader> M -- Macros
 (map! :leader
@@ -149,27 +148,7 @@
       )
 ;;-- end <leader> M -- Macros
 
-;;-- <leader> n --- notes
-(map! :leader
-      :prefix ("n" . "notes")
-      :desc "Active org-clock"               "o" #'org-clock-goto
-      :desc "Cancel current org-clock"       "C" #'org-clock-cancel
-      :desc "Goto capture"                   "N" #'org-capture-goto-target
-      :desc "Org export to clipboard as RTF" "Y" #'+org/export-to-clipboard-as-rich-text
-      :desc "Org export to clipboard"        "y" #'+org/export-to-clipboard
-      :desc "Org store link"                 "l" #'org-store-link
-      :desc "Search notes for symbol"        "." #'+default/search-notes-for-symbol-at-point
-      :desc "Search notes"                   "s" #'+default/org-notes-search
-      :desc "Search org agenda headlines"    "S" #'+default/org-notes-headlines
-      :desc "Tags search"                    "m" #'org-tags-view
-      :desc "Toggle last org-clock"          "c" #'+org/toggle-last-clock
-      :desc "View search"                    "v" #'org-search-view
-      (:prefix ("j" . "journal")
-       :desc "New Entry"      "j" #'org-journal-new-entry
-       :desc "New Scheduled Entry" "J" #'org-journal-new-scheduled-entry
-       :desc "Search Forever" "s" #'org-journal-search-forever)
-      )
-;;-- end <leader> n --- notes
+;; -- <leader> n --- notes
 
 ;;-- <leader> o --- open
 (map! :leader
@@ -192,8 +171,7 @@
 
       :desc "Todo list"                    "t"    #'org-todo-list
 
-
-      (:prefix ("a" . "org agenda"))
+      ;; (:prefix ("a" . "org agenda"))
 
       (:prefix ("s" . "Scratch"))
       )
@@ -241,7 +219,7 @@
       )
 ;;-- end <leader> R --- remote
 
-;; -- <leader> s --- search
+;; -- <leader> s --- jump/search
 
 ;; -- <leader> t --- toggle
 

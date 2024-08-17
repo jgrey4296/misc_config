@@ -5,11 +5,27 @@
 (evil-make-overriding-map jg-org-mode-map)
 (set-keymap-parent jg-org-mode-map jg-org-base-map)
 
-
 (map! :leader
       :desc "Insert Timestamp"  "i t"   #'org-time-stamp
-      :prefix ("o" . "Org")
-      (:prefix ("a" . "Org Agenda")
+      (:prefix ("j" . "journal")
+      :desc "New Entry"           "n"      #'org-journal-new-entry
+      :desc "New Scheduled Entry" "N"      #'org-journal-new-scheduled-entry
+      :desc "Search Forever"      "s"      #'org-journal-search-forever
+      )
+
+      (:prefix ("n" . "notes")
+      :desc "Active org-clock"               "o" #'org-clock-goto
+      :desc "Cancel current org-clock"       "C" #'org-clock-cancel
+      :desc "Goto capture"                   "N" #'org-capture-goto-target
+      :desc "Org export to clipboard as RTF" "Y" #'+org/export-to-clipboard-as-rich-text
+      :desc "Org export to clipboard"        "y" #'+org/export-to-clipboard
+      :desc "Org store link"                 "l" #'org-store-link
+      :desc "Tags search"                    "m" #'org-tags-view
+      :desc "Toggle last org-clock"          "c" #'+org/toggle-last-clock
+      :desc "View search"                    "v" #'org-search-view
+      )
+
+      (:prefix ("o a" . "Org Agenda")
        :desc "Agenda"                "a"          #'org-agenda
        :desc "Todo list"             "t"          #'org-todo-list
        :desc "Tags search"           "m"          #'org-tags-view

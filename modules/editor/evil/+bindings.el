@@ -118,7 +118,8 @@
       )
 
 (map! :leader
-      "a" #'+jg-evil-state-ivy
+      :desc "Search/Jump" "s" 'jg-binding-jump-map
+      :desc "Evil States" "a" #'+jg-evil-state-ivy
       )
 
 (dlog! "Evil Bindings Complete: %s" (current-time-string))

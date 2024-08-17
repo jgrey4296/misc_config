@@ -12,6 +12,7 @@
       :desc "Pdf Linearize"   "l" #'+jg-pdf-linearize
       :desc "Pdf Validate"    "v" #'+jg-pdf-validate
       :desc "Pdf metadata"    "m" #'+jg-pdf-metadata
+      :desc "Pdf decrypt"     "d" #'+jg-pdf-decrypt
       )
 
 (map! :map pdf-meta-mode-map

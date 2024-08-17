@@ -135,3 +135,23 @@
              )
     )
   )
+
+;;;###autoload
+(defun +jg-pdf-decrypt ()
+  "remove owner restrictions on pdfs"
+  (interactive)
+  (let ((files (-filter #'f-file? (dired-get-marked-files)))
+        )
+    (cl-loop for file in files
+             if (f-ext? file "pdf")
+             do
+             (message "Creating: %s" (f-join (f-parent file) (format "%s-unlocked.pdf" (f-base file))))
+             (make-process :name (format "pdf-decrypt-%s" (f-base file))
+                           :buffer nil
+                           :command (list "qpdf" "--decrypt" file (f-join (f-parent file)
+                                                                          (format "%s-unlocked.pdf" (f-base file))))
+                           )
+             )
+    )
+
+  )

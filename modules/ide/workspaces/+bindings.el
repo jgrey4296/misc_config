@@ -33,8 +33,8 @@
 (map! :map jg-binding-jump-map
       :desc "Search project"               "/ p" #'+jg-workspaces-search-project
       :desc "Search project for symbol"    "/ ." #'+jg-workspaces-search-project-for-symbol-at-point
+      :desc "Jump to related"              "r"   #'+jg-projects-find-related
       )
-
 
 ;;-- zimmerframe
 (map! :map jg-binding-forward-general-motion-map

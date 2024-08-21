@@ -1,7 +1,5 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
-
-
 (map! :map jg-latex-mode-map
       :i "\"" #'TeX-insert-quote
       :i "$"  #'TeX-insert-dollar
@@ -21,12 +19,6 @@
 
       )
 
-;; (map! :map TeX-fold-mode-map
-;;       :localleader
-;;       :desc "Fold paragraph"   "f"   #'TeX-fold-paragraph
-;;       :desc "Unfold paragraph" "F"   #'TeX-fold-clearout-paragraph
-;;       :desc "Unfold buffer"    "C-f" #'TeX-fold-clearout-buffer)
-
 (map! :map reftex-mode-map
       :localleader
       ";" 'reftex-toc)
@@ -44,7 +36,6 @@
       "^" nil "_" nil
       ;; AUCTeX already provides this with `LaTeX-insert-item'.
         [(control return)] nil)
-
 
 (map! :map dired-mode-map
       :localleader

@@ -1,7 +1,7 @@
 ;; trie config.el
 ;; loaded fourth
 
-(defer-load! "+vars")
+(local-load! "+vars")
 (defer-load! jg-bindings-total "+bindings")
 
 (after! org

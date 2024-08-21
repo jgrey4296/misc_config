@@ -1,6 +1,6 @@
 ;;; lang/rust/config.el -*- lexical-binding: t; -*-
 
-(defer-load! "+vars")
+(local-load! "+vars")
 (defer-load! jg-bindings-total "+bindings")
 
 (advice-add 'rustic-install-lsp-client-p :override #'+rust--dont-install-packages-a)

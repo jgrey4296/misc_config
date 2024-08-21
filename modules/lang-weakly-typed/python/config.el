@@ -4,7 +4,7 @@
 
 (local-load! "+spec-defs")
 (local-load! "+defs")
-(defer-load! python-mode "+vars")
+(local-load! "+vars")
 (defer-load! "+envs" "+lsp" "+cython")
 (defer-load! jg-bindings-total "+bindings")
 

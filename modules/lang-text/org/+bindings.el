@@ -7,11 +7,6 @@
 
 (map! :leader
       :desc "Insert Timestamp"  "i t"   #'org-time-stamp
-      (:prefix ("j" . "journal")
-      :desc "New Entry"           "n"      #'org-journal-new-entry
-      :desc "New Scheduled Entry" "N"      #'org-journal-new-scheduled-entry
-      :desc "Search Forever"      "s"      #'org-journal-search-forever
-      )
 
       (:prefix ("n" . "notes")
       :desc "Active org-clock"               "o" #'org-clock-goto
@@ -23,6 +18,12 @@
       :desc "Tags search"                    "m" #'org-tags-view
       :desc "Toggle last org-clock"          "c" #'+org/toggle-last-clock
       :desc "View search"                    "v" #'org-search-view
+
+      (:prefix ("j" . "journal")
+      :desc "New Entry"           "n"      #'org-journal-new-entry
+      :desc "New Scheduled Entry" "N"      #'org-journal-new-scheduled-entry
+      :desc "Search Forever"      "s"      #'org-journal-search-forever
+      )
       )
 
       (:prefix ("o a" . "Org Agenda")

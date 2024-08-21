@@ -3,9 +3,7 @@
 
 ;;;###autoload
 (defun +jg-projects-find-related ()
-  " Get related files or directories, if it exists, open it
-
- "
+  " Get related files or directories, if it exists, open it "
   (interactive)
   (-when-let* ((buff (if (eq major-mode 'dired-mode) (+jg-projects-find-related-directory) (projectile--find-related-file (buffer-file-name))))
                (buff-exists (f-exists? buff))
@@ -47,6 +45,7 @@
 
         (when (f-exists? (f-join parent "__data"))             (push `(:data        . ,(f-join parent "__data")) available))
         (when (f-exists? (f-join parent "__templates"))        (push `(:templates   . ,(f-join parent "__templates")) available))
+        (push `(:default . root) available)
         )
 
     ;; select one

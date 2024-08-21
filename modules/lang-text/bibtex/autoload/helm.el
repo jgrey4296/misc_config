@@ -263,10 +263,10 @@ using org-bibtex-fields for completion options "
              )
       (cond ((s-equals? "author" chosen)
                  (let ((next-val (helm :sources (list source dummy-source)
-                                   :buffer "*helm bibtex completions*"
-                                   :full-frame nil
-                                   :prompt (format "%s: " curr-value)
-                                   )))
+                                       :buffer "*helm bibtex completions*"
+                                       :full-frame nil
+                                       :prompt (format "%s: " curr-value)
+                                       )))
                (while next-val
                  (message "next-val: %s\nnew-completions: %s" next-val new-completions)
                  (setq new-values (append new-values next-val nil)

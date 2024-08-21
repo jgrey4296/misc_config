@@ -19,7 +19,8 @@
        )
       (:prefix "/"
        :desc "Jump to link"                 "L" #'ffap-menu
-       :desc "Search current directory"    "d"  #'fd-dired
+       ;; :desc "Search current directory"    "d"  #'fd-dired
+       :desc "Search current directory"    "d"  #'+default/search-cwd
        :desc "Search Notes"                "n"  #'+default/search-notes-for-symbol-at-point
        :desc "Search Org Dir"              "o"  #'+default/org-notes-search
       )

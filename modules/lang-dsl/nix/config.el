@@ -1,6 +1,6 @@
 ;;; lang/nix/config.el -*- lexical-binding: t; -*-
 
-(defer-load! "+vars")
+(local-load! "+vars")
 (defer-load! jg-bindings-total "+bindings")
 
 (after! tramp

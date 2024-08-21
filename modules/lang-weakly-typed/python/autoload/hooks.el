@@ -33,5 +33,6 @@
   (pushnew! python-font-lock-keywords
             '("^\s+return " (0 '(:background "mediumpurple4") t))
             '("^\s+def "    (0 '(:background "mediumpurple4") t))
+            '("breakpoint()" (0 '(:background "Mediumvioletred") t))
             )
   )

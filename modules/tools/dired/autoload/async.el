@@ -130,3 +130,38 @@
                   )
     )
   )
+
+;;;###autoload
+(defun +jg-dired-scan-files ()
+  (interactive)
+  (let* ((marked (ensure-list (dired-get-marked-files)))
+         (target-buffer (get-buffer-create "*File Scans*"))
+         )
+    (with-current-buffer target-buffer
+      (insert "\n--- File Scans:\n")
+      )
+    (make-process :name "filescan"
+                  :buffer target-buffer
+                  :command (append (list "clamscan" "--stdout" "-l" (expand-file-name "logs/clamscan.log" user-cache-dir)) marked)
+                  :sentinel (-partial '(lambda (targ p e) (when (not (process-live-p p))
+                                                            (display-buffer targ)))
+                                       target-buffer)
+                  :noquery t
+                  )
+    )
+  )
+
+;;;###autoload
+(defun +jg-dired-update-clamscan ()
+  (interactive)
+  (let ((target (get-buffer-create "*Clamscan Update*")))
+    (make-process :name "update-clamscan"
+                  :buffer target
+                  :command (list "freshclam" "-l" (expand-file-name "logs/freshclam.log" user-cache-dir))
+                  :sentinel (-partial '(lambda (targ p e) (when (not (process-live-p p))
+                                                            (display-buffer targ)))
+                                      target)
+                  :noquery t
+                  )
+    )
+  )

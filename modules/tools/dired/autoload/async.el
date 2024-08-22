@@ -1,7 +1,5 @@
 ;;; delete.el -*- lexical-binding: t; -*-
 
-
-
 (defun +jg-dired-async-delete-sentinel (buffer out-buffer process event)
   (when (string-equal "finished\n" event)
     (with-current-buffer buffer
@@ -138,6 +136,7 @@
          (target-buffer (get-buffer-create "*File Scans*"))
          )
     (with-current-buffer target-buffer
+      (erase-buffer)
       (insert "\n--- File Scans:\n")
       )
     (make-process :name "filescan"
@@ -164,4 +163,32 @@
                   :noquery t
                   )
     )
+  )
+
+(defconst jg-dired-full-meta-args (list
+                                    "-g"                    ;; print group headings
+                                    "-a"                    ;; allow duplicates
+                                    "-u"                    ;; extract unknown tags
+                                    ))
+
+;;;###autoload
+(defun +jg-dired-exiftool-files ()
+  (interactive)
+  (let ((marked (ensure-list (dired-get-marked-files)))
+        (target (get-buffer-create "*File Metadata*")))
+    (with-current-buffer target
+      (erase-buffer)
+      )
+    (make-process :name "get-metadata"
+                  :buffer target
+                  :command (append (list "exiftool") jg-dired-full-meta-args marked)
+                  :sentinel (-partial '(lambda (targ p e) (when (not (process-live-p p))
+                                                            (display-buffer targ)
+                                                            (with-selected-window (get-buffer-window targ)
+                                                              (recenter -1))))
+                                      target)
+                  :noquery t
+                  )
+    )
+
   )

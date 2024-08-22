@@ -1,14 +1,13 @@
 ;; -*- mode:emacs-lisp; lexical-binding: t; -*-
 
 ;;-- changelog
-(setq change-log-default-name "CHANGELOG.md"
-
-      )
+(spec-handling-setq! changelog
+                     change-log-default-name "CHANGELOG.md"
+                     )
 ;;-- end changelog
 
 ;;-- magit
-(setq transient-default-level 5
-      magit-diff-refine-hunk t               ;; show granular diffs in selected hunk
+(setq magit-diff-refine-hunk t               ;; show granular diffs in selected hunk
       magit-save-repository-buffers nil      ;; Don't autosave repo buffers.
       magit-revision-insert-related-refs nil ;; Don't display parent/related refs in commit buffers
       magit-auto-revert-mode nil
@@ -28,10 +27,10 @@
 ;;    screen are opened as popups.
 ;; 2. The status screen isn't buried when viewing diffs or logs from the
 ;;    status screen.
-(setq transient-display-buffer-action '(display-buffer-below-selected)
-      magit-display-buffer-function #'+magit-display-buffer-fn
-      magit-bury-buffer-function    #'magit-mode-quit-window
-      )
+(spec-handling-setq! magit
+                     magit-display-buffer-function #'+magit-display-buffer-fn
+                     magit-bury-buffer-function    #'magit-mode-quit-window
+                     )
 
 ;;-- end magit
 

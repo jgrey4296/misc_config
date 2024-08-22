@@ -48,18 +48,20 @@
 ;;-- end tree-sitter
 
 ;;-- outline
-(rx-let ((kwds (regexp (eval (s-join "\\|" py-outline-mode-keywords))))
-         )
-  (setq jg-python-outline-regexp
-        (rx (* blank)
-            (or "##--"
-                (| "@" (+ word))
-                kwds
-                )
+(after! python-mode
+    (rx-let ((kwds (regexp (eval (s-join "\\|" py-outline-mode-keywords))))
             )
-        jg-python-outline-end-regexp ":[^\n]*\n"
-        )
-  )
+    (setq jg-python-outline-regexp
+            (rx (* blank)
+                (or "##--"
+                    (| "@" (+ word))
+                    kwds
+                    )
+                )
+            jg-python-outline-end-regexp ":[^\n]*\n"
+            )
+    )
+)
 ;;-- end outline
 
 ;;-- smartparens
@@ -271,7 +273,7 @@
                      ("^\\*PyDoc Search\\*"   :side left   :ttl nil :width  0.3 :quit t  :select nil :priority 50)
                      ("^\\*pydoc\\*"          :side left   :ttl nil :width  0.3 :quit t  :select nil :priority 50)
                      ("^\\*python-dis\\*"     :side right  :ttl 5   :width  0.4 :quit t  :select nil :priority 50)
-                     ("^\\*imports\\*"        :side bottom :ttl nil :height 0.3 :quit t  :select nil :priority 50)
+                     ("^\\*imports\\*"        :side bottom :ttl nil :height -1.3 :quit t  :select nil :priority 50)
                      )
                     )
 (spec-handling-add! file-templates

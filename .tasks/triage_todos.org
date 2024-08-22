@@ -86,3 +86,8 @@ https://www.djcbsoftware.nl/code/mu/mu4e/Contexts-example.html
    :context:
         <2024-06-24 Mon> ;; ;; TODO Omni-completion
    :END:
+** TRIAGE refactor carousel-transient into the lib
+   [[/media/john/data/github/_config/modules/ide/workspaces/autoload/carousel-transient.el::39][Location]]
+   :context:
+        <2024-08-22 Thu>   )
+   :END:

@@ -12,6 +12,6 @@
 
 (spec-handling-add! popup
                     '(defaults
-                       ("*jg-customised*" :priority -200)
+                       ("\\*jg-customised\\*\\'" :priority -200)
                        )
                     )

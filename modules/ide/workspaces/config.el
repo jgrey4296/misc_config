@@ -282,3 +282,14 @@
            ("find . -type f -print0"))))
 
   )
+
+(use-package! transient
+  :config
+  ;; Define
+  (jg-workspace-define-workspace-control)
+  (jg-workspace-define-carousel-transient)
+  ;; Extend
+  (+jg-workspace-add-zimmerframe-transient)
+  (+jg-workspace-add-project-transient)
+  (provide 'jg-workspaces-core-transient)
+  )

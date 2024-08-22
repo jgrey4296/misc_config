@@ -89,13 +89,18 @@
 (spec-handling-setq! projectile 50
                      counsel-projectile-switch-project-action jg-counsel-projectile-switch-project-action
                      )
+
 (spec-handling-add! popup
                     '(carousel
                       ("^\\*Carousel Buffers: "         :side left :ttl nil :width  0.2 :quit nil :select nil :priority 50)
+                      ("^\\*Carousel-Transient\\*\\'"   :side left :width 60)
                       )
                     '(proj-walk
                      ("^\\*Project Zimmerframe\\*" :side left :ttl nil :quit t :select nil :priority -50)
                      )
+                    '(workspace ;; see jg-workspaces-transient-buffer-name
+                      ("^\\*workspace-transient\\*\\'" :side left :width 60)
+                      )
                     )
 
 (spec-handling-add! file-templates

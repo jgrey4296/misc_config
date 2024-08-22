@@ -7,12 +7,12 @@
   [remap evil-window-delete] #'+workspace/close-window-or-workspace)
 
 (map! :leader
-      :desc "Workspace Control"        "W"     #'transient-workspace
-      :desc "Carousel Control"         "R"     #'transient-carousel
+      :desc "Workspace Control"        "W"     #'+jg-workspace-run-transient
+      :desc "Carousel Control"         "R"     #'jg-workspace-run-carousel-transient
       :desc "Workspace Counsel"        "w RET" #'+jg-workspaces-ivy
       (:prefix ("w" . "Windows")
        :desc "Delete workspace"             "DEL"   #'+workspace/delete
-       :desc "Workspace Control"            "w"     #'transient-workspace
+       :desc "Workspace Control"            "w"     #'+jg-workspace-run-transient
        )
       (:prefix "p"
        :desc "Goto Root"                    "`"     (cmd! (find-file (projectile-project-root)))

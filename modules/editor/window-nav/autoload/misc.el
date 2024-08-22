@@ -41,6 +41,14 @@
            )
   )
 
+;;;###autoload
+(defun +jg-windows-expand-window (amt)
+  " Shrink windows other than the current by amt horizontally"
+  (interactive "NExpand By: ")
+  (let ((curr (selected-window)))
+    (walk-windows #'(lambda (wind)
+                      (when (not (eq wind curr))
+                        (with-selected-window wind (shrink-window-horizontally amt)))))))
 
 ;;-- Footer
 ;; Copyright (C) 2024 john

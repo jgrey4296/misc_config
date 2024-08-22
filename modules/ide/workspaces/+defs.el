@@ -37,3 +37,5 @@ stored in `persp-save-dir'.")
 (defvar jg-projects-doot-cmd "doot")
 
 (defvar jg-projects-related-dir-file ".related")
+
+(defvar jg-workspaces-transient-buffer-name "*workspace-transient*")

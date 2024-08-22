@@ -12,3 +12,4 @@
 :logs         : .temp/logs
 :git          : .git
 :git-workflow : .github/workflows
+:hooks        : .git/hooks

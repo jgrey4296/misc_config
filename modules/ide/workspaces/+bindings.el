@@ -62,7 +62,7 @@
       "C-c C-c" #'carousel-edit-commit)
 
 (map! :map carousel-minor-mode-map
-      :n "R" #'transient-carousel
+      :n "R" #'jg-workspace-run-carousel-transient
       )
 
 (map! :map jg-binding-backward-general-motion-map

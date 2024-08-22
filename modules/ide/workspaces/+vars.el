@@ -99,7 +99,7 @@
                      ("^\\*Project Zimmerframe\\*" :side left :ttl nil :quit t :select nil :priority -50)
                      )
                     '(workspace ;; see jg-workspaces-transient-buffer-name
-                      ("^\\*workspace-transient\\*\\'" :side left :width 60)
+                      ("^\\*workspace-transient\\*\\'" :side bottom)
                       )
                     )
 

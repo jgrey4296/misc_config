@@ -47,8 +47,9 @@
 ;;;###autoload
 (defun +jg-windows-add-transients ()
   " Add window control to the workspace transient "
-  (transient-append-suffix 'workspace-control-transient "RET" '(transient-macro-call-toggle-dedication))
-  (transient-append-suffix 'workspace-control-transient "RET" '(transient-macro-toggle-auto-balance))
+  (transient-append-suffix 'workspace-control-transient '(0 -1 -1) '(transient-macro-call-toggle-dedication))
+  (transient-append-suffix 'workspace-control-transient '(0 -1 -1) '(transient-macro-toggle-auto-balance))
+  (transient-remove-suffix 'workspace-control-transient "1")
 
   (transient-append-suffix 'workspace-control-transient '(-2)
     [ ;; row

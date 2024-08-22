@@ -24,19 +24,14 @@
     (transient-macro-call-goto-root)
     (transient-macro-call-magit-todos)
     ]
+   ["" ("1" "empty" "empty")]
    ]
-  ["|| Specific  ||"  []]
+  ["|| Specific  ||"  [("2" "empty" "empty")]]
   ["|| SubGroups ||" []]
-  ["|| Project   ||"   []]
+  ["|| Project   ||" []]
   transient-quit!
   )
 )
-
-;;;###autoload
-(defun +jg-workspaces-add-transients ()
-  " Add zimmerframe control to the main transient "
-    (transient-append-suffix 'jg-toggle-main '(1 1 0)  transient-zimmerframe-control)
-    )
 
 
 ;;;###autoload

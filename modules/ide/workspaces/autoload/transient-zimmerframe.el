@@ -10,6 +10,7 @@
 (defun +jg-workspace-zimmerframe-active-title ()
   (format "Zimmer (%s) Control" (fmt-as-bool! project-zimmerframe-minor-mode))
   )
+
 (defun +jg-workspace-zimmerframe-group-title ()
   (format "+Zimmerframe : %s" (if (fboundp 'zimmerframe-remaining-count)
                                   (zimmerframe-remaining-count)
@@ -53,11 +54,8 @@
 
 ;;;###autoload
 (defun +jg-workspace-add-zimmerframe-transient ()
-  (transient-append-suffix 'workspace-control-transient '(0 0)
-    [""
-     (transient-macro-toggle-project-zimmerframe-minor-mode)
-     ]
-    )
+  (transient-append-suffix 'workspace-control-transient '(0 -1 -1) '(transient-macro-toggle-project-zimmerframe-minor-mode))
+  (transient-remove-suffix 'workspace-control-transient "1")
 
   (transient-append-suffix 'workspace-control-transient
     '(1 0 0)

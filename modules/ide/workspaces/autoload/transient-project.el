@@ -108,7 +108,7 @@
 
 (defun +jg-workspace-add-project-transient ()
   (transient-append-suffix 'workspace-control-transient '(2 0)
-     ["| Project |"
+     ["Project"
       transient-all-projects
       transient-project
       transient-project-actions
@@ -116,7 +116,7 @@
     )
 
   (transient-append-suffix 'workspace-control-transient '(3 0)
-     ["| Locs |" ;; column
+     ["Locs" ;; column
       (transient-macro-call-proj-sidebar)
       (transient-macro-call-recent-files)
       (transient-macro-call-zimmerframe-next)
@@ -124,7 +124,7 @@
       ]
      )
   (transient-append-suffix 'workspace-control-transient '(3 -1)
-     ["| Settings |" ;; column
+     ["Settings" ;; column
       (transient-macro-call-debug-project-type)
       (transient-macro-call-proj-clear-cache)
       ]

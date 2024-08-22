@@ -1,7 +1,7 @@
 ;; -*- mode:emacs-lisp; lexical-binding: t; -*-
 
 ;;-- changelog
-(spec-handling-setq! changelog
+(spec-handling-setq! changelog 50
                      change-log-default-name "CHANGELOG.md"
                      )
 ;;-- end changelog
@@ -27,7 +27,7 @@
 ;;    screen are opened as popups.
 ;; 2. The status screen isn't buried when viewing diffs or logs from the
 ;;    status screen.
-(spec-handling-setq! magit
+(spec-handling-setq! magit 50
                      magit-display-buffer-function #'+magit-display-buffer-fn
                      magit-bury-buffer-function    #'magit-mode-quit-window
                      )

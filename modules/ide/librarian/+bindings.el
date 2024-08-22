@@ -13,6 +13,10 @@
       )
 
 (map! :map jg-help-map
+      :after jg-help-bindings
+      :desc "Man"                         "d m"  #'librarian-man--call
+      :desc "Emacs Version Config"        "p v"  #'librarian-system-config
+      :desc "Describe Class"              "c"    #'librarian-describe-class
       :prefix ("e" . "Edit")
       :desc "Bindings"  "b" #'librarian-configs--edit-bindings
       :desc "Vars"      "v" #'librarian-configs--edit-vars
@@ -60,10 +64,4 @@
 
 (map! :map jg-binding-normal-state-map
       :desc "Lookup" "K" #'librarian-documentation
-      )
-
-(map! :map jg-help-map
-      :desc "Man"                         "d m"  #'librarian-man--call
-      :desc "Emacs Version Config"        "p v"  #'librarian-system-config
-      :desc "Describe Class"              "c"    #'librarian-describe-class
       )

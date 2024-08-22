@@ -23,5 +23,6 @@
       )
 
 (map! :map jg-dired-mode-map
+      :after jg-dired-bindings
       :desc "Disassemble Dotnet"    :n "d ? d" #'+jg-dotnet-dired-ilspy
       )

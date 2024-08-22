@@ -1,6 +1,6 @@
 ;; Misc AI Languages:
 
-(defer-load! "+vars")
+(local-load! "+vars")
 
 (defer-load! jg-bindings-total "+bindings")
 

@@ -2,6 +2,9 @@
 
 (defalias 'number-list (symbol-function 'number-sequence))
 
+(defvar user-config-dir (expand-file-name "~/.config"))
+(defvar user-cache-dir (expand-file-name "~/_cache_"))
+
 (defvar +default-want-RET-continue-comments t "If non-nil, RET will continue commented lines.")
 
 ;; General

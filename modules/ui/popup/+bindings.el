@@ -10,6 +10,7 @@
       )
 
 (map! :map jg-help-map
+      :after jg-help-bindings
       "u ?" #'+popup/diagnose
       )
 

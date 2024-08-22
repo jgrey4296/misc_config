@@ -92,6 +92,8 @@ If set to `nil', disable all the above behaviors.")
                       ("\\.vue\\'"                         . web-mode)
                       ("\\.scss\\'" . scss-mode)
                       ("\\.css\\'" . css-mode)
+                      ("\\.js" . javascript-mode)
+                      ("\\.ts" . javascript-mode)
                       )
                     )
 (spec-handling-add! docsets

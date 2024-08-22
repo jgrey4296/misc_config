@@ -6,8 +6,6 @@
 
 (defvar user-url "https://jgrey4296.github.io/")
 
-(defvar user-config-dir (expand-file-name "~/.config"))
-(defvar user-cache-dir (expand-file-name "~/_cache_"))
 ;;-- end Me
 
 ;;-- Text Encoding
@@ -15,7 +13,6 @@
 (set-keyboard-coding-system 'utf-8)
 (set-language-environment "UTF-8")
 (prefer-coding-system 'utf-8)
-;; (setq default-input-method "greek")
 ;;-- end Text Encoding
 
 ;;-- locations

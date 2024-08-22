@@ -8,15 +8,35 @@
 
 ;;;###autoload
 (defun +jg-bibtex-title-case (x)
-  (let ((case-fold-search nil))
-    (string-join (cl-loop for x in (split-string x " +" t " +")
-                          collect
-                          (cond ((s-matches-p (rx word-start (or "and" (+ upper-case)) word-end ) x)
-                                 x)
-                                (t (capitalize x))
+  "Split a string into separated words, and capitalise the first letter of each
+before rejoining "
+  (let* ((case-fold-search nil)
+         (orig-syntax-table (syntax-table))
+         (mod-syn (copy-syntax-table orig-syntax-table))
+        )
+
+    (condition-case err
+        (progn
+          ;; https://stackoverflow.com/questions/1314670
+          (modify-syntax-entry ?’ "w" mod-syn)
+          (modify-syntax-entry ?' "w" mod-syn)
+          (set-syntax-table mod-syn)
+          (string-join (cl-loop for x in (split-string x " +" t " +")
+                                collect
+                                (cond (t (capitalize x))
+                                      ((s-matches-p (rx word-start (or "and" (+ upper-case)) word-end ) x)
+                                       x)
+                                      (t (capitalize x))
+                                      )
                                 )
-                          )
-                 " ")
+                       " ")
+          )
+      (t (set-syntax-table orig-syntax-table)
+         (signal (car err) (cdr err)))
+      (t (set-syntax-table orig-syntax-table)
+         err
+         )
+      )
     )
   )
 
@@ -38,3 +58,12 @@
 ;;
 ;;-- end Footer
 ;;; utils_text.el ends here
+
+(ert-deftest jg-bibtex-test-title-case ()
+  "Tests the title case cleaning "
+  (should (string-equal "This Is A Test" (+jg-bibtex-title-case "this is a test")))
+  (should (string-equal "This Is A Test" (+jg-bibtex-title-case "This Is A Test")))
+  (should (string-equal "Why Aren’t We Talking About Trump’s Fascism?" (+jg-bibtex-title-case "Why Aren’t We Talking About Trump’s Fascism?")))
+  (should (string-equal "Why Aren't We Talking About Trump’s Fascism?" (+jg-bibtex-title-case "Why Aren't We Talking About Trump’s Fascism?")))
+  (should (string-equal "Why Aren't 'we Blah' Talking About Trump’s Fascism?" (+jg-bibtex-title-case "Why Aren't 'We blah' Talking About Trump’s Fascism?")))
+)

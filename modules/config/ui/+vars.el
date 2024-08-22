@@ -16,11 +16,6 @@
       visible-bell nil
 
 
-      ;; Transient
-      ;; Must be set early to prevent ~/.config/emacs/transient from being created
-      transient-levels-file  (concat doom-data-dir "transient/levels")
-      transient-values-file  (concat doom-data-dir "transient/values")
-      transient-history-file (concat doom-data-dir "transient/history")
 
       whitespace-style '(face tabs spaces trailing lines space-before-tab newline indentation empty space-after-tab space-mark tab-mark newline-mark)
       whitespace-line-column nil
@@ -29,6 +24,19 @@
                                     (space-mark ?\  [?·] [?.]))
 
       )
+
+;;-- transient
+ ;; Must be set early to prevent ~/.config/emacs/transient from being created
+(cl-assert (boundp 'user-cache-dir))
+(setq transient-levels-file  (expand-file-name "transient/levels"  user-cache-dir)
+      transient-values-file  (expand-file-name "transient/values"  user-cache-dir)
+      transient-history-file (expand-file-name  "transient/history" user-cache-dir)
+      transient-default-level 5
+      transient-display-buffer-action '(display-buffer-below-selected)
+      transient--buffer-name "*transient*"
+      )
+;;-- end transient
+
 
 ;;-- highlighting
 (setq hl-todo-highlight-punctuation ":"
@@ -143,7 +151,8 @@
 (spec-handling-add! popup
                     '(ui
                      ("^ \\*Treemacs"         :side left :ttl 5   :width 0.2 :quit t :select nil :priority 50)
-                     ("\\*NeoTree\\*"   :side left :ttl nil :height 0.4 :quit nil :select nil :priority 100)
+                     ("\\*NeoTree\\*"         :side left :ttl nil :height 0.4 :quit nil :select nil :priority 100)
+                     ("\\*transient\\*"       :side bottom )
                      )
                     )
 

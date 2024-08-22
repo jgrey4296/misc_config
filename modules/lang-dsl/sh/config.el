@@ -1,6 +1,6 @@
 ;;; lang/sh/config.el -*- lexical-binding: t; -*-
 
-(defer-load! "+vars")
+(local-load! "+vars")
 
 (use-package! sh-script ; built-in
   :defer t

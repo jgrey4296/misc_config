@@ -40,7 +40,28 @@
 
 (use-package! transient)
 
-(use-package! transient-macros)
+(use-package! transient-macros
+  :after transient
+  :config
+  (+jg-ui-build-main-toggle-transient)
+  ;; Assemble from the parts
+  (transient-append-suffix 'jg-toggle-main
+    '(1 0)
+    [;; subgroups
+     jg-toggle-debugs-transient
+     jg-toggle-guides-transient
+     jg-toggle-nav-transient
+     jg-toggle-visuals-transient
+     jg-toggle-wrap-transient
+
+     ]
+    )
+  (transient-append-suffix 'jg-toggle-main
+    '(2 0 -1)
+    '(transient-macro-call-debug-on-error)
+    )
+  (provide 'transient-toggles)
+  )
 
 ;;-- end transient
 

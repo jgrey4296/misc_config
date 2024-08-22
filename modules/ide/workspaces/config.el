@@ -144,9 +144,8 @@
 
 (use-package! project-zimmerframe
   :commands (project-zimmerframe-minor-mode zimmerframe-next)
-  :after transient-toggles
   :config
-  (+jg-workspaces-add-transients)
+  (after! jg-workspaces-core-transient (+jg-workspace-add-zimmerframe-transient))
   )
 
 (use-package! related-files
@@ -281,4 +280,14 @@
                     (if IS-WINDOWS " --path-separator=/")))
            ("find . -type f -print0"))))
 
+  )
+
+(use-package! transient
+  :config
+  ;; Define
+  (jg-workspace-define-workspace-control)
+  (jg-workspace-define-carousel-transient)
+  ;; Extend
+  (+jg-workspace-add-project-transient)
+  (provide 'jg-workspaces-core-transient)
   )

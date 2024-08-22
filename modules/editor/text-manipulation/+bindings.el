@@ -188,6 +188,7 @@
       )
 
 (map! :map jg-dired-mode-map
+      :after jg-dired-bindings
       (:prefix ("> d" . "Pandoc")
        :desc "Make Style File" "s" #'+jg-text-pandoc-gen-style
        :desc "Compile"          "c" #'+jg-text-pandoc-compile

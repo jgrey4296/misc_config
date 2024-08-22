@@ -3,21 +3,19 @@
 (defvar jg-latex-mode-map (make-sparse-keymap))
 (setq-default TeX-master t)
 
-(setq TeX-parse-self t ; parse on load
-      TeX-auto-save t  ; parse on save
-      ;; Use hidden directories for AUCTeX files.
-      TeX-auto-local (expand-file-name "auctex/auto" user-cache-dir)
-      TeX-style-local(expand-file-name "auctex/style" user-cache-dir)
-      TeX-source-correlate-mode t
-      TeX-source-correlate-method 'synctex
-      ;; Don't start the Emacs server when correlating sources.
-      TeX-source-correlate-start-server nil
-      ;; Automatically insert braces after sub/superscript in `LaTeX-math-mode'.
-      TeX-electric-sub-and-superscript t
-      ;; Just save, don't ask before each compilation.
-      TeX-save-query nil
-      LaTeX-enable-toolbar nil
-      )
+(spec-handling-setq! latex 50
+                     ;; Use hidden directories for AUCTeX files.
+                     TeX-auto-local (expand-file-name "auctex/auto" user-cache-dir)
+                     TeX-style-local(expand-file-name "auctex/style" user-cache-dir)
+                     TeX-parse-self t ; parse on load
+                     TeX-auto-save t  ; parse on save
+                     TeX-source-correlate-mode t
+                     TeX-source-correlate-method 'synctex
+                     TeX-source-correlate-start-server nil ;; Don't start the Emacs server when correlating sources.
+                     TeX-electric-sub-and-superscript t    ;; Automatically insert braces after sub/superscript in `LaTeX-math-mode'.
+                     TeX-save-query nil                    ;; Just save, don't ask before each compilation.
+                     LaTeX-enable-toolbar nil
+                     )
 
 ;;-- reftex
 ;; Get RefTeX working with BibLaTeX, see

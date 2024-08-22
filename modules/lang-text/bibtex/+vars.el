@@ -63,7 +63,8 @@
                     )
 (spec-handling-add! popup
                     '(bibtex
-                     ("^\\*DOI Metadata\\*" :side left :ttl 5 :width 0.3 :quit t :select nil :priority 50)
+                     ("^\\*DOI Metadata\\*\\'" :side left :ttl 5 :width 0.3 :quit t :select nil :priority 50)
+                     ("^\\*Metadata\\*\\'"     :side left :ttl 5 :width 0.3 :quit t :select nil :priority 50)
                      )
                     )
 

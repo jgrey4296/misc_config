@@ -1,7 +1,5 @@
 ;;; delete.el -*- lexical-binding: t; -*-
 
-
-
 (defun +jg-dired-async-delete-sentinel (buffer out-buffer process event)
   (when (string-equal "finished\n" event)
     (with-current-buffer buffer
@@ -129,4 +127,68 @@
                   :noquery t
                   )
     )
+  )
+
+;;;###autoload
+(defun +jg-dired-scan-files ()
+  (interactive)
+  (let* ((marked (ensure-list (dired-get-marked-files)))
+         (target-buffer (get-buffer-create "*File Scans*"))
+         )
+    (with-current-buffer target-buffer
+      (erase-buffer)
+      (insert "\n--- File Scans:\n")
+      )
+    (make-process :name "filescan"
+                  :buffer target-buffer
+                  :command (append (list "clamscan" "--stdout" "-l" (expand-file-name "logs/clamscan.log" user-cache-dir)) marked)
+                  :sentinel (-partial '(lambda (targ p e) (when (not (process-live-p p))
+                                                            (display-buffer targ)))
+                                       target-buffer)
+                  :noquery t
+                  )
+    )
+  )
+
+;;;###autoload
+(defun +jg-dired-update-clamscan ()
+  (interactive)
+  (let ((target (get-buffer-create "*Clamscan Update*")))
+    (make-process :name "update-clamscan"
+                  :buffer target
+                  :command (list "freshclam" "-l" (expand-file-name "logs/freshclam.log" user-cache-dir))
+                  :sentinel (-partial '(lambda (targ p e) (when (not (process-live-p p))
+                                                            (display-buffer targ)))
+                                      target)
+                  :noquery t
+                  )
+    )
+  )
+
+(defconst jg-dired-full-meta-args (list
+                                    "-g"                    ;; print group headings
+                                    "-a"                    ;; allow duplicates
+                                    "-u"                    ;; extract unknown tags
+                                    ))
+
+;;;###autoload
+(defun +jg-dired-exiftool-files ()
+  (interactive)
+  (let ((marked (ensure-list (dired-get-marked-files)))
+        (target (get-buffer-create "*File Metadata*")))
+    (with-current-buffer target
+      (erase-buffer)
+      )
+    (make-process :name "get-metadata"
+                  :buffer target
+                  :command (append (list "exiftool") jg-dired-full-meta-args marked)
+                  :sentinel (-partial '(lambda (targ p e) (when (not (process-live-p p))
+                                                            (display-buffer targ)
+                                                            (with-selected-window (get-buffer-window targ)
+                                                              (recenter -1))))
+                                      target)
+                  :noquery t
+                  )
+    )
+
   )

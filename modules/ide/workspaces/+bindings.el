@@ -7,12 +7,12 @@
   [remap evil-window-delete] #'+workspace/close-window-or-workspace)
 
 (map! :leader
-      :desc "Workspace Control"        "W"     #'transient-workspace
-      :desc "Carousel Control"         "R"     #'transient-carousel
+      :desc "Workspace Control"        "W"     #'+jg-workspace-run-transient
+      :desc "Carousel Control"         "R"     #'jg-workspace-run-carousel-transient
       :desc "Workspace Counsel"        "w RET" #'+jg-workspaces-ivy
       (:prefix ("w" . "Windows")
        :desc "Delete workspace"             "DEL"   #'+workspace/delete
-       :desc "Workspace Control"            "w"     #'transient-workspace
+       :desc "Workspace Control"            "w"     #'+jg-workspace-run-transient
        )
       (:prefix "p"
        :desc "Goto Root"                    "`"     (cmd! (find-file (projectile-project-root)))
@@ -23,10 +23,17 @@
       :prefix ("p" . "project")
       :desc "run cmd in project root"      "!"    #'projectile-run-shell-command-in-root
       :desc "root shell"                   "'"    #'projectile-run-shell
-      :desc "search project for symbol"    "."    #'+default/search-project-for-symbol-at-point
+      :desc "search project for symbol"    "."    #'+jg-workspaces-search-project-for-symbol-at-point
       :desc "find file in project"         "f"    #'projectile-find-file
       :desc "find other file"              "o"    #'+jg-projects-find-related
-       :desc "compile in project"           "c"   #'projectile-compile-project
+      :desc "compile in project"           "c"    #'projectile-compile-project
+      :desc "Search project"               "p"    #'+default/search-project
+      )
+
+(map! :map jg-binding-jump-map
+      :desc "Search project"               "/ p" #'+jg-workspaces-search-project
+      :desc "Search project for symbol"    "/ ." #'+jg-workspaces-search-project-for-symbol-at-point
+      :desc "Jump to related"              "r"   #'+jg-projects-find-related
       )
 
 ;;-- zimmerframe
@@ -55,7 +62,7 @@
       "C-c C-c" #'carousel-edit-commit)
 
 (map! :map carousel-minor-mode-map
-      :n "R" #'transient-carousel
+      :n "R" #'jg-workspace-run-carousel-transient
       )
 
 (map! :map jg-binding-backward-general-motion-map

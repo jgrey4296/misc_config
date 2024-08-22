@@ -13,9 +13,9 @@
 (spec-handling-add! docsets '(sh-mode "Bash"))
 (spec-handling-add! auto-modes
                     '(sh
-("\\.bats\\'" . sh-mode)
-("\\.\\(?:zunit\\|env\\)\\'" . sh-mode)
-("/bspwmrc\\'" . sh-mode)
+                      ("\\.bats\\'" . sh-mode)
+                      ("\\.\\(?:zunit\\|env\\)\\'" . sh-mode)
+                      ("/bspwmrc\\'" . sh-mode)
                       )
                     )
 (spec-handling-add! company

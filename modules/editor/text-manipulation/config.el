@@ -153,3 +153,5 @@
 (use-package! insert-plus-state)
 
 (use-package! other-chars-state)
+
+(use-package! move-states)

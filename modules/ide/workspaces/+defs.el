@@ -29,3 +29,13 @@ stored in `persp-save-dir'.")
 (defvar +workspaces--indirect-buffers-to-restore nil)
 
 (defvar-local jg-workspaces-find-buff-fn nil)
+
+(defvar jg-projects-switch-hook nil)
+
+(defvar jg-projects-cmd-cache-name ".projectile-cmds")
+
+(defvar jg-projects-doot-cmd "doot")
+
+(defvar jg-projects-related-dir-file ".related")
+
+(defvar jg-workspaces-transient-buffer-name "*workspace-transient*")

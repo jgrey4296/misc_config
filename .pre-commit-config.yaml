@@ -8,3 +8,11 @@ repos:
     -   id: end-of-file-fixer
     -   id: check-yaml
     -   id: check-added-large-files
+- repo: local
+  hooks:
+    - id: validateMsg
+      name: validate
+      description: checks the commit msg has a tag at the start
+      language: system
+      entry: mamba run "-n" "default" doot "precommit::validate"
+      stages: [commit-msg]

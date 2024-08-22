@@ -91,17 +91,17 @@
       :desc "Project"             :n "p" #'+jg-dired-cookiecutter
       )
 (map! :map jg-dired-mode-map ;; change, specific
-      (:prefix (">" . "File Type Specific"))
+      (:prefix (">" . "File Type Specific")
+       )
       (:prefix ("<" . "Make std dirs")
        :desc "Make Tasks Dir" :n "." (cmd! (dired-create-directory ".tasks"))
        )
-      ;; (:prefix ("p" . "pdf"))
-      ;; (:prefix ("d" . "pandoc"))
-      ;; (:prefix ("b" . "bibtex"))
       )
 (map! :map jg-dired-mode-map ;; describe
       :prefix ("d" . "describe")
-      :desc "Marked"           :n "m" #'+jg-dired-marked-info
+      :desc "Marked Count"     :n "c" #'+jg-dired-marked-info
+      :desc "Metadata"         :n "m" #'+jg-dired-exiftool-files
+      :desc "Viruses"          :n "v" #'+jg-dired-scan-files
       :desc "Diff"             :n "d" #'dired-diff
       ;;                       :n "d" #'+jg-dired-diff
       :desc "Diff Directories" :n "D" #'ediff-directories

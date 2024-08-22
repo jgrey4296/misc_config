@@ -1,0 +1,15 @@
+;; .related -*- mode: elisp; lexical-binding: t; -*-
+;; A Related dirs file
+;; ';;' are comment lines
+;; Others are :{name} : {path} pairs
+;; paths are relative
+
+:modules      : modules
+:org          : org
+:wiki         : wiki_
+:tasks        : .tasks
+:temp         : .temp
+:logs         : .temp/logs
+:git          : .git
+:git-workflow : .github/workflows
+:hooks        : .git/hooks

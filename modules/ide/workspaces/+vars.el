@@ -1,12 +1,5 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
-(defvar jg-projects-switch-hook nil)
-
-(defvar jg-projects-cmd-cache-name ".projectile-cmds")
-
-(defvar jg-projects-doot-cmd "doot")
-
-
 ;;-- projectile
 (setq projectile-completion-system 'ivy
       projectile-cache-file (concat doom-cache-dir "projectile.cache")
@@ -23,15 +16,15 @@
 
 ;; In the interest of performance, we reduce the number of project root marker
 ;; files/directories projectile searches for when resolving the project root.
-(setq projectile-project-root-files-bottom-up '(".projectile"  ; projectile's root marker
-                                                ".project"     ; doom project marker
-                                                ".git"        ; Git VCS root dir
-                                                )
+(setq projectile-project-root-files-bottom-up (list ".projectile"  ; projectile's root marker
+                                                    ".project"     ; doom project marker
+                                                    ".git"        ; Git VCS root dir
+                                                    )
       ;; This will be filled by other modules. We build this list manually so
       ;; projectile doesn't perform so many file checks every time it resolves
       ;; a project's root -- particularly when a file has no project.
-      projectile-project-root-files '()
-      projectile-project-root-files-top-down-recurring '("Makefile" "doot.toml" "Cargo.toml")
+      projectile-project-root-files nil
+      projectile-project-root-files-top-down-recurring (list "Makefile" "doot.toml" "Cargo.toml")
 
       compilation-buffer-name-function #'projectile-compilation-buffer-name
       compilation-save-buffers-predicate #'projectile-current-project-buffer-p
@@ -66,7 +59,7 @@
 
 (setq projectile-switch-project-action #'+jg-projects-switch)
 
-(setq counsel-projectile-switch-project-action
+(defvar jg-counsel-projectile-switch-project-action
       '(1 ("o" +workspaces-switch-to-project-h                              "open project in new workspace")
         ("O" counsel-projectile-switch-project-action                       "jump to a project buffer or file")
         ("f" counsel-projectile-switch-project-action-find-file             "jump to a project file")
@@ -93,18 +86,27 @@
 ;;-- end persp
 
 ;;-- specs
+(spec-handling-setq! projectile 50
+                     counsel-projectile-switch-project-action jg-counsel-projectile-switch-project-action
+                     )
+
 (spec-handling-add! popup
                     '(carousel
                       ("^\\*Carousel Buffers: "         :side left :ttl nil :width  0.2 :quit nil :select nil :priority 50)
+                      ("^\\*Carousel-Transient\\*\\'"   :side left :width 60)
                       )
                     '(proj-walk
                      ("^\\*Project Zimmerframe\\*" :side left :ttl nil :quit t :select nil :priority -50)
                      )
+                    '(workspace ;; see jg-workspaces-transient-buffer-name
+                      ("^\\*workspace-transient\\*\\'" :side bottom)
+                      )
                     )
 
 (spec-handling-add! file-templates
                     '(project
-                     ("/doot\\.toml$" :trigger "__doot_toml" :mode conf-toml-mode)
+                     ("/doot\\.toml\\'" :trigger "__doot_toml" :mode conf-toml-mode)
+                     ("\\.related\\'"    :trigger "dot.related" :mode fundamental-mode)
                      )
                     )
 

@@ -28,6 +28,7 @@
 ;; mode-line-format
 
 (map! :map jg-help-map
+      :after jg-help-bindings
       :prefix "u"
       "1" #'+jg-ui-modeline-choose
       )

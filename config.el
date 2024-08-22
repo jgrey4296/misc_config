@@ -6,8 +6,6 @@
 
 (defvar user-url "https://jgrey4296.github.io/")
 
-(defvar user-config-dir (expand-file-name "~/.config"))
-(defvar user-cache-dir (expand-file-name "~/_cache_"))
 ;;-- end Me
 
 ;;-- Text Encoding

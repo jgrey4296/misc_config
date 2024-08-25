@@ -147,6 +147,7 @@
       :desc "Choose Upper"   "U"   #'smerge-keep-upper
       :desc "Choose Lower"   "L"   #'smerge-keep-lower
       :desc "Choose"         "RET" #'smerge-keep-current
+      :desc "Quit"           "q"   #'evil-normal-state
       doom-leader-key doom-leader-map
       )
 

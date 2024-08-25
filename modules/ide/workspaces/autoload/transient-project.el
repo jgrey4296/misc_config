@@ -105,7 +105,7 @@
    ]
   )
 
-
+;;;###autoload
 (defun +jg-workspace-add-project-transient ()
   (transient-append-suffix 'workspace-control-transient '(2 0)
      ["Project"
@@ -130,9 +130,6 @@
       ]
     )
   )
-
-
-
 
 ;;-- Footer
 ;; Copyright (C) 2024 john

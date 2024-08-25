@@ -35,8 +35,9 @@
   (transient-make-var-toggle!   invisible line-move-ignore-invisible "Invisible Spec" "i")
   )
 
-;;;###autoload (autoload #'jg-toggle-visuals-transient "config/ui/autoload/transient-visuals" nil t)
-(transient-make-subgroup! jg-toggle-visuals-transient "v"
+;;;###autoload
+(defun +jg-ui-build-visuals-transient ()
+  (transient-make-subgroup! jg-toggle-visuals-transient "v"
                           "For controlling ui visual settings"
                           :desc "|| Visuals    ||"
                           [:description "|| Visuals    ||"
@@ -59,6 +60,7 @@
                             ]
                            ]
                           )
+  )
 
 ;;-- Footer
 ;; Copyright (C) 2024 john

@@ -6,7 +6,6 @@
   )
 (transient-make-int-call! magit-todos         "t"   "Todos"             :transient nil #'magit-todos-list)
 
-;;-- workspace
 (progn
   ;; Projects
   (transient-make-call! goto-root                "`" "Goto-Root"                 :transient nil (find-file (doom-project-root)))
@@ -33,7 +32,6 @@
   )
 )
 
-
 ;;;###autoload
 (defun +jg-workspace-run-transient ()
   (interactive)
@@ -41,5 +39,3 @@
     (workspace-control-transient)
     )
   )
-
-;;-- end workspace

@@ -38,6 +38,7 @@
 
   )
 
+;;;###autoload
 (defun jg-workspace-define-carousel-transient ()
   (transient-define-prefix transient-carousel ()
     ""

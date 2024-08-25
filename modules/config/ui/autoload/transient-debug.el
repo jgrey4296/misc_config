@@ -25,23 +25,25 @@
                         (cancel-debug-on-entry))
   )
 
-;;;###autoload (autoload #'jg-toggle-debugs-transient "config/ui/autoload/transient-debug" nil t)
-(transient-make-subgroup! jg-toggle-debugs-transient "d"
-                          " debug toggles "
-                          :desc  "|| Debug      ||"
-                          [:description "|| Debug      ||"
-                           [
-                             (transient-macro-call-debug-on-error)
-                             (transient-macro-call-debug-on-var)
-                             (transient-macro-call-debug-func)
-                             ]
-                            [
-                             " "
-                             (transient-macro-call-cancel-debug-on-var)
-                             (transient-macro-call-cancel-debug-func)
+;;;###autoload
+(defun +jg-ui-build-debugs-transient ()
+  (transient-make-subgroup! jg-toggle-debugs-transient "d"
+                            " debug toggles "
+                            :desc  "|| Debug      ||"
+                            [:description "|| Debug      ||"
+                                          [
+                                           (transient-macro-call-debug-on-error)
+                                           (transient-macro-call-debug-on-var)
+                                           (transient-macro-call-debug-func)
+                                           ]
+                                          [
+                                           " "
+                                           (transient-macro-call-cancel-debug-on-var)
+                                           (transient-macro-call-cancel-debug-func)
 
-                             ] ]
-                          )
+                                           ] ]
+                            )
+  )
 
 ;;-- Footer
 ;; Copyright (C) 2024 john

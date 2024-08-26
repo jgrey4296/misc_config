@@ -9,7 +9,7 @@
   )
 
 (use-package! librarian-tagging-helm
-  :after (evil helm)
+  :commands librarian-tagging-helm
   )
 
 (use-package! librarian-tagging-ivy

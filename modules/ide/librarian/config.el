@@ -55,7 +55,7 @@
 ;;-- end words
 
 (use-package! librarian
-  :commands (librarian-mode librarian-url)
+  :commands (librarian-mode librarian-url global-librarian-mode)
   :after transient-toggles
   :hook (doom-first-input . global-librarian-mode)
   :config

@@ -141,7 +141,7 @@
       )
     (make-process :name "filescan"
                   :buffer target-buffer
-                  :command (append (list "clamscan" "--stdout" "-l" (expand-file-name "logs/clamscan.log" user-cache-dir)) marked)
+                  :command (append (list "clamscan" "--recursive" "--stdout" "-l" (expand-file-name "logs/clamscan.log" user-cache-dir)) marked)
                   :sentinel (-partial '(lambda (targ p e) (when (not (process-live-p p))
                                                             (display-buffer targ)))
                                        target-buffer)

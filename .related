@@ -4,6 +4,8 @@
 ;; Others are :{name} : {path} pairs
 ;; paths are relative
 
+:doot         : doot.toml
+:related      : .related
 :modules      : modules
 :org          : org
 :wiki         : wiki_

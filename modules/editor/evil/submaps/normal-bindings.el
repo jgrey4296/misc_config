@@ -1,6 +1,7 @@
 ;;; +evil-normal-bindings.el -*- lexical-binding: t; -*-
 
 (map! :map jg-binding-normal-state-map ;; State Changes
+      "DEL" #'ignore
       :desc "Emacs State"         "C-z"      #'evil-emacs-state
       :desc "Run Macro"           "@"        #'evil-execute-macro
       :desc "Force Normal State"  "<escape>" #'evil-force-normal-state

@@ -33,12 +33,13 @@
 )
 
 ;;-- evil-escape
-(setq evil-escape-inhibit-functions nil ;; '(evil-ex-p)
-      evil-escape-excluded-states '(normal multiedit emacs motion)
-      evil-escape-excluded-major-modes '(neotree-mode treemacs-mode vterm-mode)
-      evil-escape-key-sequence "jk"
-      evil-escape-delay 0.15
-      )
+(setq evil-escape-key-sequence "jk")
+(spec-handling-setq! evil-escape 50
+                     evil-escape-state-blacklist '(multiedit emacs motion)
+                     evil-escape-major-mode-blacklist '(neotree-mode treemacs-mode vterm-mode ibuffer-mode image-mode)
+                     evil-escape-key-sequence "jk"
+                     evil-escape-delay 0.15
+                     )
 
 ;;-- end evil-escape
 

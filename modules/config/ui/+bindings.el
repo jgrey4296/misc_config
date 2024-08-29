@@ -218,7 +218,6 @@
       :n "RET" (neotree-make-executor :file-fn 'neo-open-file :dir-fn  'neo-open-dir)
       )
 
-(setq neotree-mode-map jg-neotree-mode-map)
 (after! neotree
   (setq neotree-mode-map jg-neotree-mode-map)
   )

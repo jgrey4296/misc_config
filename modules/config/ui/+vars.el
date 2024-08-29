@@ -131,10 +131,11 @@
 ;;-- end neotree
 
 ;;-- go away mouse
-(setq mouse-yank-at-point nil
-      mouse-wheel-scroll-amount nil
-      mouse-wheel-scroll-amount-horizontal 2
-      )
+(spec-handling-setq! mouse 50
+                    mouse-yank-at-point nil
+                    mouse-wheel-scroll-amount nil
+                    mouse-wheel-scroll-amount-horizontal 2
+                    )
 
 ;;-- end go away mouse
 

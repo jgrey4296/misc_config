@@ -136,8 +136,9 @@
   )
 
 (use-package! evil-escape
-  :commands evil-escape
   :hook (doom-first-input . evil-escape-mode)
+  :config
+  (evil-escape-add-default-inhibitors)
   )
 
 (use-package! evil-exchange

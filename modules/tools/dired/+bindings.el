@@ -1,6 +1,7 @@
 ;;; emacs/dired/+bindings.el -*- lexical-binding: t; -*-
 
 (dlog! "Setting up Dired bindings")
+
 (defvar jg-dired-mode-map (make-keymap))
 ;; (suppress-keymap jg-dired-mode-map)
 ;; (evil-make-intercept-map jg-dired-mode-map)

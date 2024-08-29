@@ -12,6 +12,14 @@
   (not (eq revert-buffer-function #'dired-virtual-revert))
   )
 
+;;;###autoload
+(defun +jg-dired-find-file-with-insert-plus-a (fn &rest args)
+  " A Custom read file name function to start in insert-plus state"
+  (minibuffer-with-setup-hook (:append #'evil-insert-plus-state)
+    (apply fn args)
+    )
+  )
+
 
 ;;-- Footer
 ;; Copyright (C) 2024 john

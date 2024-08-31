@@ -58,7 +58,6 @@
   (setq lsp-xml-jar-file (expand-file-name "org.eclipse.lsp4xml-0.3.0-uber.jar" lsp-server-install-dir)
         lsp-groovy-server-file (expand-file-name "groovy-language-server-all.jar" lsp-server-install-dir))
 
-  (add-hook! 'doom-escape-hook #'+lsp-signature-stop-maybe-h)
   (add-hook! 'lsp-mode-hook #'+lsp-optimization-mode)
 
 )

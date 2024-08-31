@@ -143,7 +143,7 @@
   )
 
 (use-package! project-zimmerframe
-  :commands (project-zimmerframe-minor-mode zimmerframe-next)
+  :after transient
   :config
   (after! jg-workspaces-core-transient (+jg-workspace-add-zimmerframe-transient))
   )

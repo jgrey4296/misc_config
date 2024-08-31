@@ -147,10 +147,7 @@
   ;; UX: update git-gutter on focus (in case I was using git externally)
   (add-hook 'focus-in-hook #'git-gutter:update-all-windows)
 
-  (add-hook! '(doom-escape-hook doom-switch-window-hook)
-             :append
-             #'+vc-gutter-update-h
-             )
+  (add-hook! '(doom-switch-window-hook) :append #'+vc-gutter-update-h)
   ;; UX: update git-gutter when using magit commands
   (advice-add #'magit-stage-file   :after #'+vc-gutter-update-h)
   (advice-add #'magit-unstage-file :after #'+vc-gutter-update-h)

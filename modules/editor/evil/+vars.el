@@ -41,6 +41,12 @@
                      evil-escape-delay 0.15
                      )
 
+;; TODO handle evil-exchange
+;; TODO handle +lsp-signature-stop-maybe-h
+;; TODO handle +vc-gutter-update-h
+;; TODO handle closing popups/poppy windows
+;; TODO handle yas-abort-snippet
+
 ;;-- end evil-escape
 
 ;;-- evil-surround and embrace

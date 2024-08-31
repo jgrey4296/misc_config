@@ -42,11 +42,6 @@
                (insert (if use-hard-newlines hard-newline "\n"))
                (back-to-indentation)))))))
 
-;;;###autoload
-(defun +evil-escape-a (&rest _)
-  "Call `doom/escape' if `evil-force-normal-state' is called interactively."
-  (when (called-interactively-p 'any)
-    (call-interactively #'doom/escape)))
 
 ;;;###autoload
 (defun +evil-replace-filename-modifiers-a (file-name)

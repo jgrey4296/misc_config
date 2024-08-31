@@ -20,13 +20,6 @@
   (evil-set-cursor-color (get 'cursor 'evil-emacs-color)))
 
 ;;;###autoload
-(defun +evil-disable-ex-highlights-h ()
-      "Disable ex search buffer highlights."
-      (when (evil-ex-hl-active-p 'evil-ex-search)
-        (evil-ex-nohighlight)
-        t))
-
-;;;###autoload
 (defun +evil-display-vimlike-save-message-h ()
         "Shorter, vim-esque save messages."
         (message "\"%s\" %dL, %dC written"

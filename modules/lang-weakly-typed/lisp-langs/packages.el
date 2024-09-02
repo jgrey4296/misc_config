@@ -7,6 +7,7 @@
 (package! racket-mode)
 (package! ert :built-in t)
 (package! elisp-mode :built-in t)
+(package! flycheck-cask)
 
 ;; Fontification plugins
 (package! highlight-quoted)

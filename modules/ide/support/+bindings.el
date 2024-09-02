@@ -1,7 +1,6 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
 ;;-- map defs
-
 (defvar jg-lsp-mode-map           (make-sparse-keymap))
 
 (defvar jg-lsp-command-map        (make-sparse-keymap))
@@ -34,6 +33,9 @@
       :desc "List errors"                           "x"   #'flycheck-list-errors
       ;; :desc "jump to symbol in current workspace"   "j"   #'+jg-lsp-describe-workspace-symbol
       ;; :desc "Jump to symbol in any workspace"       "J"   #'lsp-ivy-global-workspace-symbol
+      (:after flycheck
+       :desc "Flycheck" "!" flycheck-command-map
+       )
       )
 
 (map! :leader
@@ -137,6 +139,7 @@
 (evil-define-key 'normal 'tree-sitter-mode
   "[g" +tree-sitter-goto-previous-map
   "]g" +tree-sitter-goto-next-map
+  "?"  #'treesit-inspect-node-at-point
   )
 (map! :map tree-sitter-mode-map
       (:prefix "i"
@@ -175,6 +178,18 @@
             :n "l" (+tree-sitter-goto-textobj "loop.outer")
       )
 )
+
+;; TODO
+(map! :leader
+      :prefix ("h u 1" . "Treesit")
+      "k" #'jg-treesit-fontlock-level-up
+      "j" #'jg-treesit-fontlock-level-down
+      "r" #'jg-treesit-fontlock-recompute
+
+
+      )
+
+
 ;;-- end tree-sitter
 
 (setq lsp-mode-map           jg-lsp-mode-map

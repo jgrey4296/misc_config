@@ -170,16 +170,15 @@
 ;;-- end flycheck
 
 (use-package! tree-sitter ;; Melpas
-  ;; :disabled t
-  :defer t
+  :disabled t
   :config
   (require 'tree-sitter-langs)
   )
 
 (use-package! treesit ;; builtin
-  :disabled t
   :defer t
   :config
+  (require 'tree-sitter-langs)
   ;; https://www.masteringemacs.org/article/how-to-get-started-tree-sitter
   )
 

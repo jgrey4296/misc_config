@@ -25,7 +25,8 @@
 
 ;; Movement
 (map! :map jg-helm-map
-      :desc "quit" :n "|"  #'evil-force-normal-state
+      :desc "Normal State" :i "|"  #'evil-force-normal-state
+      :desc "quit"         :n "|"  #'keyboard-quit
 
       :ni "C-u"             #'helm-delete-minibuffer-contents
       :i  "C-s"             #'helm-minibuffer-history

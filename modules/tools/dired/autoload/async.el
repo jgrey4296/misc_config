@@ -192,3 +192,18 @@
     )
 
   )
+
+;;;###autoload
+(defun +jg-dired-async-server ()
+  (interactive)
+  (let ((buffer (get-buffer-create "*PyServer*")))
+    (make-process :name "py-server"
+                  :buffer buffer
+                  :command (list "python" "-m" "http.server"
+                                 "--directory" default-directory
+                                 "--bind" "127.0.0.1"
+                                 "8000")
+                  :noquery t
+                  )
+    )
+  )

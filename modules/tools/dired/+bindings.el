@@ -141,6 +141,7 @@
       :localleader
       :desc "Find Marked"  "f" #'dired-do-find-marked-files
       :desc "Cookiecutter" "c" #'+jg-dired-cookiecutter
+      :desc "Start Server" "S" #'+jg-dired-async-server
       )
 (map! :map dirvish-mode-map
       :n "b" #'dirvish-goto-bookmark

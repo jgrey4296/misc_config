@@ -18,13 +18,13 @@
 ;; Py-vars
 (spec-handling-setq! python 50
                      ;; Python settings
+                     python-indent-offset 4
                      python-indent-guess-indent-offset                     nil
                      python-shell-completion-native-enable                 nil
                      python-shell-completion-native-disabled-interpreters  '("pypy")
                      python-shell-interpreter-path-args                    (expand-file-name "python/repl_startup.py"  templates-loc)
                      expand-region-preferred-python-mode 'python-mode
                      ;; py settings
-                     py-indent-offset              4
                      py-shell-virtualenv-root      conda-env-home-directory
                      py-pdbtrack-do-tracking-p     t
                      py-python-command             "python3"
@@ -124,15 +124,14 @@
 ;;-- end babel
 
 ;;-- general insert
-(general-insert-register-processor 'python-mode "raise"
-                                   #'(lambda (x) (insert "raise " (s-replace-regexp "^[^A-Z]+" "" x))))
-(general-insert-register-processor 'python-mode "datetime"
-                                   #'(lambda (x) (insert (car (split-string x " " t " +")))))
-(general-insert-register-processor 'python-mode "fixtures"
-                                   #'(lambda (x) (insert (car (split-string x " " t " "+)))))
-(general-insert-register-processor 'python-mode "import"
-                                   #'(lambda (x) (insert "import " (car (split-string x t " +")))))
-
+(general-insert-register-processor 'python-mode "raise" #'(lambda (x) (insert "raise " (s-replace-regexp "^[^A-Z]+" "" x))))
+(general-insert-register-processor 'python-mode "datetime" #'(lambda (x) (insert (car (split-string x " " t " +")))))
+(general-insert-register-processor 'python-mode "fixtures" #'(lambda (x) (insert (car (split-string x " " t " "+)))))
+(general-insert-register-processor 'python-mode "import" #'(lambda (x) (insert "import " (car (split-string x t " +")))))
+(general-insert-register-processor 'python-ts-mode "raise" #'(lambda (x) (insert "raise " (s-replace-regexp "^[^A-Z]+" "" x))))
+(general-insert-register-processor 'python-ts-mode "datetime" #'(lambda (x) (insert (car (split-string x " " t " +")))))
+(general-insert-register-processor 'python-ts-mode "fixtures" #'(lambda (x) (insert (car (split-string x " " t " "+)))))
+(general-insert-register-processor 'python-ts-mode "import" #'(lambda (x) (insert "import " (car (split-string x t " +")))))
 ;;-- end general insert
 
 ;;-- env handling
@@ -329,7 +328,7 @@
                       )
                     )
 (spec-handling-add! whitespace-cleanup
-                    `(python-mode
+                    `((python-mode python-ts-mode)
                       ,#'+jg-python-cleanup-ensure-newline-before-def
                       ,#'delete-trailing-whitespace
                       ,#'+jg-text-cleanup-whitespace

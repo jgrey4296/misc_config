@@ -81,8 +81,8 @@
   (setq-hook! 'python-mode-hook
     beginning-of-defun-function #'python-nav-beginning-of-defun
     end-of-defun-function       #'python-nav-end-of-defun
-    indent-line-function        #'py-indent-line
-    indent-region-function      #'py-indent-region
+    indent-line-function        #'python-indent-line
+    indent-region-function      #'python-indent-region
     jg-workspaces-find-buff-fn #'+jg-python-carousel-window-fn
     tab-width                    py-indent-offset
     )

@@ -23,6 +23,7 @@
 
 (package! magit)
 (package! magit-todos )
+(package! ghub :recipe (:host github :repo "magit/ghub"))
 (package! forge )
 (package! git-commit)
 (package! git-timemachine :recipe (:host github :repo "emacsmirror/git-timemachine"))

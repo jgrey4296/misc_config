@@ -205,5 +205,6 @@
                                  "8000")
                   :noquery t
                   )
+    (librarian-browser--open-url "http://127.0.0.1:8000")
     )
   )

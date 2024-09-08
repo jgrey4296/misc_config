@@ -35,8 +35,7 @@ that window has been changed or closed."
   :keymap +popup-buffer-mode-map
   (if (not +popup-buffer-mode)
       (remove-hook 'after-change-major-mode-hook #'+popup-set-modeline-on-enable-h t)
-    (add-hook 'after-change-major-mode-hook #'+popup-set-modeline-on-enable-h
-              nil 'local)
+    (add-hook 'after-change-major-mode-hook #'+popup-set-modeline-on-enable-h nil 'local)
     (when (timerp +popup--timer)
       (remove-hook 'kill-buffer-hook #'+popup-kill-buffer-hook-h t)
       (cancel-timer +popup--timer)

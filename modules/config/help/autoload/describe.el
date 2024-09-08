@@ -9,7 +9,7 @@
 ;;;###autoload
 (defun +jg-help-describe-env-var ()
   (interactive)
-  (let* ((var (read-envvar-name "test"))
+  (let* ((var (read-envvar-name "Describe Env Var: "))
          (val (getenv var))
          )
     (with-temp-buffer-window "*helpful Environment Variable*" #'pop-to-buffer nil

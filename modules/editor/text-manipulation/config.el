@@ -150,8 +150,6 @@
 
 (use-package! embrace :defer t)
 
-(use-package! insert-plus-state)
+(use-package! mapspace-state)
 
-(use-package! other-chars-state)
-
-(use-package! move-states)
+(use-package! spechar-state)

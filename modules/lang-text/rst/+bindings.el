@@ -2,6 +2,8 @@
 
 (map! :map jg-rst-mode-map
       :desc "General Insert"         :n "|" #'general-insert-call
+      :desc "Forward Section"        :n "] ]" #'rst-forward-section
+      :desc "Backward Section"        :n "[ [" #'rst-backward-section
       )
 
 (map! :map jg-rst-mode-map

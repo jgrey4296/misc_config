@@ -1,19 +1,18 @@
 ;; util/base_bindings/+bindings.el -*- lexical-binding: t; -*-
 (dlog! "Setting up Misc Bindings")
-(keymap-global-set "C-c u" #'universal-argument)
 
 ;; Add in self-insert-command
-(let* ((self-insert-vec (make-vector 1 nil))
-       (make-vec-f (lambda (from to)
-            (while (< from to)
-              (aset self-insert-vec 0 from)
-              (define-key jg-global-map self-insert-vec #'self-insert-command)
-              (setq from (1+ from))))))
-  (funcall make-vec-f #o040 #o0177)
-  (funcall make-vec-f #o0240 #o0400)
-  )
+;; (let* ((self-insert-vec (make-vector 2 nil))
+;;        (make-vec-f (lambda (from to)
+;;             (while (< from to)
+;;               (aset self-insert-vec 0 from)
+;;               (define-key global-map self-insert-vec #'self-insert-command)
+;;               (setq from (1+ from))))))
+;;   (funcall make-vec-f #o040 #o0177)
+;;   (funcall make-vec-f #o0240 #o0400)
+;;   )
 
-(map! :map jg-global-map
+(map! :map global-map
       "M-c" #'ignore
       [menu-bar] nil
       "RET" #'ignore
@@ -21,7 +20,7 @@
       "DEL" #'ignore
       )
 
-(map! :map jg-global-map ;; Fn Disable
+(map! :map global-map ;; Fn Disable
       "<f1>" #'ignore
       "<f2>" #'ignore
       "<f3>" #'ignore
@@ -34,7 +33,7 @@
       "<f12>" #'ignore
       )
 
-(map! :map jg-global-map ;; Mouse Disable
+(map! :map global-map ;; Mouse Disable
       "<pinch>" nil
       "<touch-end>" nil
       "<mouse-movement>"   nil
@@ -83,5 +82,7 @@
 (setq esc-map (make-keymap)
       lisp-mode-shared-map (make-sparse-keymap)
       )
-(use-global-map jg-global-map)
+;; (use-global-map global-map)
+
+(keymap-global-set "C-c u" #'universal-argument)
 (provide 'jg-global-bindings)

@@ -42,7 +42,7 @@
   )
 
 (use-package! ox-gfm
-  :when (module! :lang-tex org)
+  :when (modulep! :lang-tex org)
   )
 
 (use-package! auto-org-md

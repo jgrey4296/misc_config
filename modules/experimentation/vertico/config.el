@@ -22,8 +22,8 @@
 
 
 
-(use-package! vertico
-  :defer t
-)
+;; (use-package! vertico
+;;   :defer t
+;; )
 
 ;;; config.el ends here

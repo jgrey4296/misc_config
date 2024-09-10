@@ -29,6 +29,7 @@
 )
 
 (use-package! evil-markdown
+  :when (modulep! :editor evil)
   :disabled t
   :after markdown-mode
   ;; :hook (markdown-mode . evil-markdown-mode)
@@ -40,7 +41,9 @@
   :defer t
   )
 
-(use-package! ox-gfm)
+(use-package! ox-gfm
+  :when (module! :lang-tex org)
+  )
 
 (use-package! auto-org-md
   :defer t

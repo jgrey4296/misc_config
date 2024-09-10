@@ -16,6 +16,7 @@
   )
 
 (use-package! moonscript
+  :when (modulep! +moonscript)
   :commands moonscript
   :config
   (setq-hook! 'moonscript-mode-hook

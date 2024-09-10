@@ -66,10 +66,8 @@
 ;;-- dap
 
 (use-package! dap-mode
-  :when (and (modulep! +lsp) (not (modulep! :tools lsp +eglot)))
   :hook (dap-mode . dap-tooltip-mode)
   :init
-
   (setq dap-breakpoints-file (concat doom-data-dir "dap-breakpoints")
         dap-utils-extension-path (concat doom-data-dir "dap-extension/"))
 

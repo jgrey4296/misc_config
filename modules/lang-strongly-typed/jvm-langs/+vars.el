@@ -13,8 +13,8 @@
 (after! projectile
   (pushnew! projectile-project-root-files "build.gradle")
   (pushnew! projectile-project-root-files "build.gradle.kts")
+  (pushnew! projectile-project-root-files "gradlew" "build.gradle")
   )
-
 ;;-- gradle font lock
 (after! groovy-mode
   (setq jg-orig-groovy-font-lock-keywords groovy-font-lock-keywords)

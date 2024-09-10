@@ -15,6 +15,8 @@
  )
 
 (use-package! company-restclient
+  :when (modulep! :ide company)
+  :when (modulep! :ide company)
   :after restclient
   )
 

@@ -3,7 +3,9 @@
 (local-load! "+definitions")
 (local-load! "+spec-defs")
 (local-load! "+vars")
-
+(local-load! "+extra-configs")
+(local-load! "+export")
+(local-load! "+babel")
 (defer-load! jg-bindings-core "+bindings" "+agenda-bindings")
 
 (defer-load! jg-evil-ex-bindings "+evil-ex")
@@ -122,24 +124,10 @@
                  org-todo-keyword-faces jg-org-todo-faces
                  org-refile-targets jg-org-refile-targets
                  )
+
+  (when (modulep! :lang markdown) (add-to-list 'org-export-backends 'md))
   (org-element-update-syntax)
   )
-
-(use-package! toc-org ; auto-table of contents
-  :commands toc-org-enable
-  :hook (org-mode . toc-org-enable)
-  :config
-  (setq toc-org-hrefify-default "gh")
-  )
-
-(use-package! org-crypt ; built-in
-  :commands org-encrypt-entries org-encrypt-entry org-decrypt-entries org-decrypt-entry
-  :hook (org-fold-reveal-start-hook . org-decrypt-entry)
-  :preface
-  (after! org
-    (add-to-list 'org-tags-exclude-from-inheritance "crypt")
-    (add-hook! 'org-mode-hook
-      (add-hook 'before-save-hook 'org-encrypt-entries nil t))))
 
 (use-package! org-clock ; built-in
   :commands org-clock-save
@@ -187,6 +175,7 @@
   )
 
 (use-package! evil-org
+  :when (modulep! :editor evil)
   :hook (org-mode . evil-org-mode)
   :hook (org-capture-mode . evil-insert-state)
   :hook (doom-docs-org-mode . evil-org-mode)
@@ -211,14 +200,6 @@
     :open-multiple t
     :copy #'kill-new)
   (push 'org-link link-hint-types)
-  )
-
-(use-package! org-unit-test
-  :commands org-unit-test-minor-mode
-  )
-
-(use-package! ox-epub
-  :after org
   )
 
 (use-package! org-journal
@@ -295,46 +276,4 @@
              #'+org-defer-mode-in-agenda-buffers-h
              )
 
-  )
-
-(use-package! evil-org-agenda
-  :disabled t
-  :hook (org-agenda-mode . evil-org-agenda-mode)
-  :config
-  (evil-org-agenda-set-keys)
-  (evil-define-key* 'motion evil-org-agenda-mode-map
-    (kbd doom-leader-key) nil)
-
-  )
-
-(use-package! org-yt)
-
-(use-package! orgit)
-
-(use-package! ob
-  :defer t
-  :config
-
-  ;; babel
-  (advice-add 'org-babel-exp-src-block              :before      #'+org--export-lazy-load-library-a)
-  (advice-add 'org-babel-confirm-evaluate           :after-while #'+org--babel-lazy-load-library-a)
-  (advice-add 'ob-async-org-babel-execute-src-block :around      #'+org-babel-disable-async-maybe-a)
-  (advice-add 'org-src--get-lang-mode               :before      #'+org--src-lazy-load-library-a)
-  (advice-add 'org-src--edit-element                :around      #'+org-inhibit-mode-hooks-a)
-  (advice-add 'org-babel-do-load-languages          :override    #'ignore)
-  (advice-add 'org-babel-tangle                     :around      #'+org--dont-trigger-save-hooks-a)
-
-  ;; hooks
-  (add-hook 'org-babel-after-execute-hook #'+org-redisplay-inline-images-in-babel-result-h)
-
-  )
-
-(use-package! ox
-  :defer t
-  :config
-
-  (advice-add 'org-export-inline-image-p            :override #'+jg-org-inline-image-override)
-  (advice-add 'org-export-to-file                   :around #'+org--dont-trigger-save-hooks-a)
-  (advice-add 'org-export-to-file                   :around #'+org--fix-async-export-a)
-  (advice-add 'org-export-as                        :around #'+org--fix-async-export-a)
   )

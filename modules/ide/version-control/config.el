@@ -2,6 +2,8 @@
 
 (local-load! "+defs")
 (local-load! "+vars")
+(local-load! "+extra-config")
+(when (modulep! +forge) (local-load! "+forge"))
 
 (defer-load! jg-bindings-total "+bindings")
 
@@ -38,10 +40,8 @@
   (add-to-list 'doom-debug-variables 'magit-refresh-verbose)
 
   ;; Add additional switches that seem common enough
-  (transient-append-suffix 'magit-fetch "-p"
-    '("-t" "Fetch all tags" ("-t" "--tags")))
-  (transient-append-suffix 'magit-pull "-r"
-    '("-a" "Autostash" "--autostash"))
+  (transient-append-suffix 'magit-fetch "-p" '("-t" "Fetch all tags" ("-t" "--tags")))
+  (transient-append-suffix 'magit-pull "-r" '("-a" "Autostash" "--autostash"))
 
   ;; An optimization that particularly affects macOS and Windows users: by
   ;; resolving `magit-git-executable' Emacs does less work to find the
@@ -73,8 +73,6 @@
 
   )
 
-;;-- modes
-
 (use-package! git-modes
   :defer t
   :config
@@ -95,88 +93,7 @@
   (add-hook! 'git-commit-setup-hook #'+vc-start-in-insert-state-maybe-h)
 )
 
-(use-package! smerge-mode
-  :after jg-bindings-total
-  )
-
 (use-package! conflict-merge-state)
-
-;;-- end modes
-
-;;-- git extension
-
-(use-package! forge
-  :disabled t
-  :after magit
-  :config
-  (advice-add 'forge-dispatch                           :before #'+magit--forge-build-binary-lazily-a)
-  (advice-add 'forge-get-repository                     :before-while #'+magit--forge-get-repository-lazily-a)
-  )
-
-(use-package! magit-todos
-  :after magit
-  )
-
-(use-package! evil-collection-magit
-  :defer t
-  )
-
-(use-package! evil-collection-magit-section
-  :defer t
-)
-
-(use-package! git-gutter
-  :commands git-gutter:revert-hunk git-gutter:stage-hunk git-gutter:previous-hunk git-gutter:next-hunk
-  :init
-  (add-hook! 'find-file-hook #'+vc-gutter-init-maybe-h)
-
-  ;; UX: Disable in Org mode, as per syl20bnr/spacemacs#10555 and
-  ;;   syohex/emacs-git-gutter#24. Apparently, the mode-enabling function for
-  ;;   global minor modes gets called for new buffers while they are still in
-  ;;   `fundamental-mode', before a major mode has been assigned. I don't know
-  ;;   why this is the case, but adding `fundamental-mode' here fixes the issue.
-  (setq git-gutter:disabled-modes '(fundamental-mode image-mode pdf-view-mode))
-  :config
-
-  ;; PERF: Only enable the backends that are available, so it doesn't have to
-  ;;   check when opening each buffer.
-  (setq git-gutter:handled-backends
-        (cons 'git (cl-remove-if-not #'executable-find (list 'hg 'svn 'bzr)
-                                     :key #'symbol-name)))
-
-  ;; UX: update git-gutter on focus (in case I was using git externally)
-  (add-hook 'focus-in-hook #'git-gutter:update-all-windows)
-
-  (add-hook! '(doom-switch-window-hook) :append #'+vc-gutter-update-h)
-  ;; UX: update git-gutter when using magit commands
-  (advice-add #'magit-stage-file   :after #'+vc-gutter-update-h)
-  (advice-add #'magit-unstage-file :after #'+vc-gutter-update-h)
-
-  )
-
-(use-package! git-gutter-fringe
-  :after fringe
-  :config
-  ;; Redefine fringe bitmaps to take up only half the horizontal space
-  (define-fringe-bitmap 'git-gutter-fr:added [224] nil nil '(center repeated))
-  (define-fringe-bitmap 'git-gutter-fr:modified [224] nil nil '(center repeated))
-  (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240] nil nil 'bottom)
-  )
-
-(use-package! git-timemachine
-  :commands (git-timemachine-toggle)
-  :config
-  ;; Sometimes I forget `git-timemachine' is enabled in a buffer, so instead of
-  ;; showing revision details in the minibuffer, show them in
-  ;; `header-line-format', which has better visibility.
-  (setq git-timemachine-show-minibuffer-details t)
-
-  (after! evil
-    ;; Rehash evil keybindings so they are recognized
-    (add-hook 'git-timemachine-mode-hook #'evil-normalize-keymaps))
-
-  (require 'magit-blame)
-)
 
 (use-package! browse-at-remote
   :commands browse-at-remote
@@ -193,21 +110,3 @@
   ;; TODO: PR this upstream?
   (add-to-list 'browse-at-remote-remote-type-regexps '(:host "^codeberg\\.org$" :type "codeberg"))
   )
-
-(use-package! treemacs-magit)
-;;-- end git extension
-
-;;-- changelog
-
-(use-package! markdown-changelog
-  :defer t
-  )
-
-(use-package! git-cliff
-  :defer t
-  )
-
-(use-package! conventional-changelog
-  :defer t
-  )
-;;-- end changelog

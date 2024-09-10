@@ -58,7 +58,6 @@
 
 (use-package! dired-x
   :unless (modulep! +dirvish)
-  :unless (modulep! +ranger)
   :hook (dired-mode . dired-omit-mode)
 )
 

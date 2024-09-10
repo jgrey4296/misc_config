@@ -2,6 +2,7 @@
 
 (local-load! "+vars")
 (local-load! "+defs")
+(local-load! "+extra-config")
 
 (defer-load! jg-bindings-total "+bindings")
 
@@ -114,26 +115,24 @@
 
 (use-package! ivy-avy :after ivy)
 
-(use-package! ivy-posframe
-  :when (modulep! +childframe)
-  :hook (ivy-mode . ivy-posframe-mode)
+(use-package! ivy-prescient
+  :when (modulep! +prescient)
+  :hook (ivy-mode . ivy-prescient-mode)
+  :hook (ivy-prescient-mode . prescient-persist-mode)
   :config
-  (setq ivy-fixed-height-minibuffer nil
-        ivy-posframe-border-width 10
-        ivy-posframe-parameters `((min-width . 90) (min-height . ,ivy-height)))
+  ;; REVIEW Remove when radian-software/prescient.el#102 is resolved
+  (add-to-list 'ivy-sort-functions-alist '(ivy-resume))
 
-  ;; default to posframe display function
-  (setf (alist-get t ivy-posframe-display-functions-alist)
-        #'+ivy-display-at-frame-center-near-bottom-fn)
+  (setq ivy-prescient-sort-commands
+        '(:not swiper swiper-isearch ivy-switch-buffer lsp-ivy-workspace-symbol
+          ivy-resume ivy--restore-session counsel-grep counsel-git-grep
+          counsel-rg counsel-ag counsel-ack counsel-fzf counsel-pt counsel-imenu
+          counsel-yank-pop counsel-recentf counsel-buffer-or-recentf
+          counsel-outline counsel-org-goto counsel-jq)
+        ivy-prescient-retain-classic-highlighting t)
 
-  ;; posframe doesn't work well with async sources (the posframe will
-  ;; occasionally stop responding/redrawing), and causes violent resizing of the
-  ;; posframe.
-  (dolist (fn '(swiper counsel-rg counsel-grep counsel-git-grep))
-    (setf (alist-get fn ivy-posframe-display-functions-alist)
-          #'ivy-display-function-fallback))
-
-  (add-hook 'doom-after-reload-hook #'posframe-delete-all)
+  ;; NOTE prescient config duplicated with `company'
+  (setq prescient-save-file (concat doom-cache-dir "prescient-save.el"))
   )
 
 ;;-- end ivy
@@ -224,27 +223,3 @@
   )
 
 ;;-- end counsel
-
-(use-package! wgrep
-  :commands wgrep-change-to-wgrep-mode
-  :config (setq wgrep-auto-save-buffer t)
-  )
-
-(use-package! flx
-  :when (modulep! +fuzzy)
-  :after ivy
-  :preface
-  (when (or (not (modulep! +fuzzy))
-            (modulep! +prescient))
-    (setq ivy--flx-featurep nil))
-  :init
-  (setq ivy-flx-limit 10000)
-  )
-
-(use-package! amx
-  :config
-  ; used by `counsel-M-x'
-  (setq amx-save-file (concat doom-cache-dir "amx-items"))
-  )
-
-(use-package! general-insert :defer t)

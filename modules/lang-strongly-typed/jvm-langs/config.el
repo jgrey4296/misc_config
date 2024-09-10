@@ -1,9 +1,8 @@
 ;;; lang/java/config.el -*- lexical-binding: t; -*-
 
 (local-load! "+vars")
+(local-load! "+extra-config")
 (defer-load! jg-bindings-total "+bindings")
-(after! projectile
-  (pushnew! projectile-project-root-files "gradlew" "build.gradle"))
 (after! ivy
   (ivy-configure 'jg-vcs-gradle-ivy
     :format-fn #'jg-vcs-format-gradle)
@@ -13,11 +12,6 @@
   :commands java-mode
   :config
   (add-hook 'java-mode-hook #'rainbow-delimiters-mode)
-
-  (cond ((modulep! +meghanada) (local-load! "+meghanada"))
-        ((modulep! :tools lsp +eglot))
-        ((modulep! +lsp)       (local-load! "+lsp")))
-
   (add-hook 'java-mode-local-vars-hook #'tree-sitter! 'append)
   )
 
@@ -36,11 +30,6 @@
   :commands kotlin-mode
 )
 
-(use-package! flycheck-kotlin
-  :after kotlin-mode
-  :hook (kotlin-mode . flycheck-kotlin-setup)
-  )
-
 (use-package! scala-mode
   :commands scala-mode
   :config
@@ -57,8 +46,4 @@
   :config
   (after! projectile
     (add-to-list 'projectile-project-root-files "build.sbt"))
-  )
-
-(use-package! ob-kotlin
-  :defer t
   )

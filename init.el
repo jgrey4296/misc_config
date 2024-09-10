@@ -5,23 +5,32 @@
 
 (load! "defer-macro")
 (doom!
- :config     default
+ :config     default ;; +smartparens
  :editor     (evil +everywhere)
- :config     bindings disabled help search ui
+ :config     bindings disabled help search
+ :config     ui ;; +light
 
- :ui         ivy helm hydra ibuffer minibuffer popup
+ :experimentation vertico
+ :ui (ivy) ;; +prescient +fuzzy
+ :ui helm hydra ibuffer minibuffer
+ :ui popup ;; +poppy
 
- :editor format text-manipulation
+ :editor format
+ :editor text-manipulation ;; +onsave
  :editor tagging
- :editor buffer-nav window-nav
+ :editor buffer-nav
+ :editor window-nav ;; +numbers +ace
  :editor fold undo
  :editor large-files
  :editor autosave
 
- :ide version-control support librarian snippets workspaces
+ :ide version-control ;; +forge +diff-hl
+ :ide librarian snippets workspaces
+ :ide (support +lsp +flycheck +tree-sitter) ;; +eglot  +semantic
  :ide minimap diff company debugger environments
 
- :lang-data csv graphql dot sql nu
+ :lang-data csv dot sql nu
+ :lang-data graphql
  :lang-data xml toml json yaml logs
 
  :lang-dsl acab ai-and-logic
@@ -29,22 +38,26 @@
  :lang-dsl qt
  ;; :lang-dsl music
 
- :lang-strongly-typed fstar haskell
- :lang-strongly-typed idris lean
- :lang-strongly-typed coq rust
+ :lang-strongly-typed haskell
+ :lang-strongly-typed (proofs) ;; coq, idris, agda, fstar, lean)
+ :lang-strongly-typed rust lean
  :lang-strongly-typed jvm-langs dotnet-langs ml-langs
 
  :lang-text inform web
- :lang-text (org +gnuplot +pomodoro +journal +noter)
+ :lang-text org ;; +unittest
  :lang-text bibtex latex markdown plantuml rst
 
- :lang-weakly-typed lisp-langs python lua
- :lang-weakly-typed erlang-vms godot ruby
+ :lang-weakly-typed lisp-langs
+ :lang-weakly-typed lua ;; +moonscript
+ :lang-weakly-typed (python +isort) ;; +tox
+ :lang-weakly-typed erlang-vms godot
+ :lang-weakly-typed ruby ;; +rbenv +rvm +chruby
 
  :tools pdfs
  :tools mail term eval
  :tools processes
- :tools calendar dired calc
+ :tools calendar calc
+ :tools dired ;; +dirvish
 
  :ui doom-ui
  :ui ophints

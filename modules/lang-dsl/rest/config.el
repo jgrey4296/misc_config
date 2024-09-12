@@ -23,3 +23,7 @@
 (use-package! restclient-jq
   :after restclient
   )
+
+(use-package! jq-ts-mode
+  :defer t
+  )

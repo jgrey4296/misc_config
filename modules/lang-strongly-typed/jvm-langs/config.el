@@ -30,6 +30,10 @@
   :commands kotlin-mode
 )
 
+(use-package! kotlin-ts-mode
+  :defer t
+  )
+
 (use-package! scala-mode
   :commands scala-mode
   :config

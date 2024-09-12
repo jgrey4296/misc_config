@@ -28,6 +28,10 @@
  (advice-add 'markdown-match-generic-metadata :override #'+markdown-disable-front-matter-fontification-a)
 )
 
+(use-package! markdown-ts-mode
+  :defer t
+  )
+
 (use-package! evil-markdown
   :when (modulep! :editor evil)
   :disabled t

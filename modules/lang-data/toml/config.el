@@ -40,13 +40,35 @@
 
   )
 
-;; (use-package! toml-mode
-;;   :commands toml-mode
-;;   :config
-;;   (add-hook! 'conf-toml-mode-hook :depth 100
-;;              #'outline-minor-mode
-;;              #'general-insert-minor-mode
-;;              )
-;;   )
+(use-package! toml-mode
+  :commands toml-mode
+  :config
+  (add-hook! 'toml-mode-hook :depth 99
+             #'abbrev-mode
+             #'outline-minor-mode
+             #'general-insert-minor-mode
+             )
+
+  (setq-hook! 'toml-mode-hook
+    outline-regexp "\[\[?[a-zA-Z0-9\.]+\]?\]"
+    outline-heading-end-regexp "\n"
+    )
+  )
+
+(use-package! toml-ts-mode
+  :commands toml-ts-mode
+  :config
+  (add-hook! 'toml-ts-mode-hook :depth 99
+             #'abbrev-mode
+             #'outline-minor-mode
+             #'general-insert-minor-mode
+             )
+
+  (setq-hook! 'toml-ts-mode-hook
+    outline-regexp "\[\[?[a-zA-Z0-9\.]+\]?\]"
+    outline-heading-end-regexp "\n"
+    )
+  )
+
 ;;
 ;;; config.el ends here

@@ -1,11 +1,12 @@
 ;;; util/text/+bindings.el -*- lexical-binding: t; -*-
 
 (dlog! "Setting up text binding: %s" (current-time-string))
-(global-set-key (kbd "C-c [") #'+jg-text-insert-lparen)
-(global-set-key (kbd "C-c ]") #'+jg-text-insert-rparen)
+(after! 'jg-global-bindings
+  (keymap-global-set "C-c [" #'+jg-text-insert-lparen)
+  (keymap-global-set "C-c ]" #'+jg-text-insert-rparen)
+  )
 (evil-make-intercept-map messages-buffer-mode-map)
 ;; Get rid of zap to char:
-(map! "M-z" nil)
 
 (map! :leader
       :desc "Clear All"            "rK" #'+jg-text-clear-all
@@ -19,21 +20,18 @@
                )
       )
 
-(map! :map evil-other-chars-state-map
-      "i" #'evil-insert-state
-      "n" #'evil-normal-state
-      )
-
 ;;-- state bindings
 (map! :map jg-binding-normal-state-map
-      :desc "SPC? Insert" "I SPC"            #'evil-insert-plus-state
-      :desc "Chars"       "I c"              #'evil-other-chars-state
+      :desc "SPC? Insert" "I SPC"            #'evil-mapspace-state
+      :desc "Chars"       "I c"              #'evil-spechar-state
       :desc "Rotate"      "R"                #'rotate-text
       :desc "Select Whitespace" "v SPC"      #'+jg-text-visual-select-whitespace
       )
 
 (map! :map jg-binding-insert-state-map
-      "C-x c" #'evil-other-chars-state
+      "C-x c" #'counsel-unicode-char
+      "C-c c" #'counsel-unicode-char
+      "C-c SPC" #'counsel-unicode-char
       )
 
 (map! :map jg-binding-vision-map

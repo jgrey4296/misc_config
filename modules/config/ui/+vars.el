@@ -1,6 +1,7 @@
 ;;; editor/window-control/+vars.el -*- lexical-binding: t; -*-
 
 (defvar jg-ui-default-face-gen-palette-dir (expand-file-name "palettes" templates-loc))
+
 (defvar jg-ui-tree-active-tree-package 'neotree)
 
 ;;-- theme settings
@@ -14,8 +15,6 @@
       ring-bell-function #'ignore
       switch-window-multiple-frames t
       visible-bell nil
-
-
 
       whitespace-style '(face tabs spaces trailing lines space-before-tab newline indentation empty space-after-tab space-mark tab-mark newline-mark)
       whitespace-line-column nil
@@ -36,7 +35,6 @@
       transient--buffer-name "*transient*"
       )
 ;;-- end transient
-
 
 ;;-- highlighting
 (setq hl-todo-highlight-punctuation ":"
@@ -103,8 +101,6 @@
  ;; tab-line-format nil
  )
 
-
-
 ;;-- end modeline
 
 ;;-- treemacs
@@ -135,10 +131,11 @@
 ;;-- end neotree
 
 ;;-- go away mouse
-(setq mouse-yank-at-point nil
-      mouse-wheel-scroll-amount nil
-      mouse-wheel-scroll-amount-horizontal 2
-      )
+(spec-handling-setq! mouse 50
+                    mouse-yank-at-point nil
+                    mouse-wheel-scroll-amount nil
+                    mouse-wheel-scroll-amount-horizontal 2
+                    )
 
 ;;-- end go away mouse
 

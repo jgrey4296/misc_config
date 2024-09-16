@@ -12,3 +12,6 @@
 (package! org-ref)
 (package! parsebib)
 (package! citeproc)
+(package! company-bibtex)
+(package! bibtex-capf)
+(package! bibtex-completion)

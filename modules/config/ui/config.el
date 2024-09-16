@@ -44,6 +44,11 @@
   :after transient
   :config
   (+jg-ui-build-main-toggle-transient)
+  (+jg-ui-build-debugs-transient)
+  (+jg-ui-build-guides-transient)
+  (+jg-ui-build-nav-transient)
+  (+jg-ui-build-visuals-transient)
+  (+jg-ui-build-wrap-transient)
   ;; Assemble from the parts
   (transient-append-suffix 'jg-toggle-main
     '(1 0)

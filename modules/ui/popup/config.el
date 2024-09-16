@@ -6,6 +6,7 @@
 (local-load! "+hacks")
 (local-load! "+spec-defs")
 (local-load! "+specs")
+
 (defer-load! jg-bindings-total "+bindings")
 
 (add-hook! 'doom-init-ui-hook :append #'+popup-mode)
@@ -17,12 +18,13 @@
            ;; #'+popup-unset-modeline-on-disable-h
            )
 
-
 (use-package! popup
   :disabled t
   )
+
 (use-package! popwin
   :disabled t
   )
+
 (use-package! popper
   :disabled t)

@@ -1,6 +1,12 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
 (map! :map jg-rst-mode-map
+      :desc "General Insert"         :n "|" #'general-insert-call
+      :desc "Forward Section"        :n "] ]" #'rst-forward-section
+      :desc "Backward Section"        :n "[ [" #'rst-backward-section
+      )
+
+(map! :map jg-rst-mode-map
       :localleader
       :desc "Header Hierarchy" "h" #'rst-display-hdr-hierarchy
       (:prefix ("a" . "adjust")

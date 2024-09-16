@@ -14,12 +14,6 @@ If prefix ARG is set, prompt for a directory to search from."
   )
 
 ;;;###autoload
-(defun +default/search-other-cwd ()
-  "Conduct a text search in another directory."
-  (interactive)
-  (+default/search-cwd 'other))
-
-;;;###autoload
 (defun +default/search-emacsd ()
   "Conduct a text search in files under `doom-emacs-dir'."
   (interactive)

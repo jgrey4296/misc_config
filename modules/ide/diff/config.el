@@ -39,7 +39,7 @@
   (defvaralias 'diff-hl-disable-on-remote '+vc-gutter-in-remote-files)
 
   ;; UX: Refresh git-gutter on ESC or refocusing the Emacs frame.
-  (add-hook! '(doom-escape-hook doom-switch-window-hook) :append #'+vc-gutter-update-h)
+  (add-hook! '(doom-switch-window-hook) :append #'+vc-gutter-update-h)
   ;; UX: Update diff-hl when magit alters git state.
   (add-hook 'magit-pre-refresh-hook  #'diff-hl-magit-pre-refresh)
   (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh)

@@ -9,4 +9,5 @@
   )
 
 (use-package! graphql-doc
-  :after graphql-mode)
+  :after graphql-mode
+  )

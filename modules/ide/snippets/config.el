@@ -53,9 +53,6 @@
   ;; specific snippet libraries (e.g. for Laravel, React or Jekyll projects).
   (add-hook 'doom-project-hook #'+snippets-enable-project-modes-h)
 
-  ;; Exit snippets on ESC from normal mode
-  (add-hook 'doom-escape-hook #'yas-abort-snippet)
-
   ;; Show keybind hints in snippet header-line
   (add-hook 'snippet-mode-hook #'+snippets-show-hints-in-header-line-h)
   ;; Enable `read-only-mode' for built-in snippets (in `doom-local-dir')

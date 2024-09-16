@@ -94,6 +94,8 @@
                     '(carousel
                       ("^\\*Carousel Buffers: "         :side left :ttl nil :width  0.2 :quit nil :select nil :priority 50)
                       ("^\\*Carousel-Transient\\*\\'"   :side left :width 60)
+                      ("^\\*.+?-Carousel Start\\*\\'" :ttl nil :quit nil :priority 90)
+                      ("^\\*.+?-Carousel End\\*\\'"   :ttl nil :quit nil :priority 90)
                       )
                     '(proj-walk
                      ("^\\*Project Zimmerframe\\*" :side left :ttl nil :quit t :select nil :priority -50)

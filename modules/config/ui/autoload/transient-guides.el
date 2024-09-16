@@ -26,8 +26,9 @@
 
   )
 
-;;;###autoload (autoload #'jg-toggle-guides-transient "config/ui/autoload/transient-guides" nil t)
-(transient-make-subgroup! jg-toggle-guides-transient "g"
+;;;###autoload
+(defun +jg-ui-build-guides-transient ()
+  (transient-make-subgroup! jg-toggle-guides-transient "g"
                           "For controlling ui guide settings"
                           :desc "|| Guides     ||"
                           [:description "|| Guides     ||"
@@ -46,6 +47,7 @@
                             ]
                            ]
                           )
+  )
 
 ;;-
 ;; Footer

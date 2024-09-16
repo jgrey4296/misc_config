@@ -72,7 +72,7 @@
       )
 
 (map! :map jg-binding-motion-state-map
-      :desc "Escape"                 "Q"       #'doom/escape
+      :desc "Escape"                 "Q"       #'evil-escape
       :desc "Goto Mark"              "`"       #'evil-goto-mark
       :desc "Jump Item"              "%"       #'evil-jump-item
       :desc "Repeat B-Find Char"     ","       #'evil-repeat-find-char-reverse

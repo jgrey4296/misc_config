@@ -62,7 +62,7 @@
   (add-hook 'imenu-after-jump-hook #'recenter)
   )
 
-(use-package! paren-state)
+(use-package! move-states)
 
 (use-package! avy
   :init

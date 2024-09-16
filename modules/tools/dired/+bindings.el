@@ -1,6 +1,7 @@
 ;;; emacs/dired/+bindings.el -*- lexical-binding: t; -*-
 
 (dlog! "Setting up Dired bindings")
+
 (defvar jg-dired-mode-map (make-keymap))
 ;; (suppress-keymap jg-dired-mode-map)
 ;; (evil-make-intercept-map jg-dired-mode-map)
@@ -140,6 +141,7 @@
       :localleader
       :desc "Find Marked"  "f" #'dired-do-find-marked-files
       :desc "Cookiecutter" "c" #'+jg-dired-cookiecutter
+      :desc "Start Server" "S" #'+jg-dired-async-server
       )
 (map! :map dirvish-mode-map
       :n "b" #'dirvish-goto-bookmark

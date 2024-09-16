@@ -1,6 +1,7 @@
 ;;; lang/erlang/config.el -*- lexical-binding: t; -*-
 
 (local-load! "+vars")
+(local-load! "+extra-config")
 (defer-load! jg-bindings-total "+bindings")
 (after! projectile
   (add-to-list 'projectile-project-root-files "mix.exs"))
@@ -42,27 +43,6 @@
              "\\_<-?[[:digit:]]+\\(?:_[[:digit:]]\\{3\\}\\)*\\_>"
              highlight-numbers-modelist))
   )
-
-(use-package! flycheck-credo
-  :after elixir-mode
-  :config
-  (flycheck-credo-setup)
-  )
-
-(use-package! alchemist
-  :after elixir-mode
-  :hook (elixir-mode . alchemist-mode)
-  )
-
-(use-package! alchemist-company
-  :after elixir-mode
-  :commands alchemist-company
-  :config
-  ;; Alchemist doesn't use hook symbols to add these backends, so we have to use
-  ;; the entire closure to get rid of it.
-  (let ((fn (byte-compile (lambda () (add-to-list (make-local-variable 'company-backends) 'alchemist-company)))))
-    (remove-hook 'alchemist-mode-hook fn)
-    (remove-hook 'alchemist-iex-mode-hook fn)))
 
 (use-package! exunit
   :after elixir-mode

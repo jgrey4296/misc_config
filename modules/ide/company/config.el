@@ -15,7 +15,7 @@
   (after! evil
     (add-hook 'company-mode-hook                #'evil-normalize-keymaps)
     (add-hook 'evil-normal-state-entry-hook     #'+company-abort-h)
-    (add-to-list 'evil-escape-inhibit-functions #'company--active-p)
+    (add-hook 'evil-escape-inhibitor-hook       #'company--active-p)
     )
 
   ;; NOTE Fix #1335: ensure `company-emulation-alist' is the first item of

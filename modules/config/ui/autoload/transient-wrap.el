@@ -19,8 +19,9 @@
 
   )
 
-;;;###autoload (autoload #'jg-toggle-wrap-transient "config/ui/autoload/transient-wrap" nil t)
-(transient-make-subgroup! jg-toggle-wrap-transient "w"
+;;;###autoload
+(defun +jg-ui-build-wrap-transient ()
+  (transient-make-subgroup! jg-toggle-wrap-transient "w"
                           "For controlling ui wrap settings"
                           :desc "|| Wrapping   ||"
                           [[
@@ -31,6 +32,7 @@
                             ]
                            ]
                           )
+  )
 
 
 

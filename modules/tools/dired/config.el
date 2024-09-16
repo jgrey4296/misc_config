@@ -3,6 +3,9 @@
 (local-load! "+vars")
 (defer-load! (jg-bindings-total jg-dired) "+bindings")
 
+(advice-add 'read-file-name-default :around #'+jg-dired-find-file-with-insert-plus-a)
+(advice-add 'counsel-find-file :around #'+jg-dired-find-file-with-insert-plus-a)
+
 (use-package! dired
   :commands dired-jump
   :config
@@ -55,7 +58,6 @@
 
 (use-package! dired-x
   :unless (modulep! +dirvish)
-  :unless (modulep! +ranger)
   :hook (dired-mode . dired-omit-mode)
 )
 

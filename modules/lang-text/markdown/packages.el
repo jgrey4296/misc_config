@@ -2,6 +2,7 @@
 ;;; lang/markdown/packages.el
 
 (package! markdown-mode)
+(package! markdown-ts-mode)
 (package! markdown-toc)
 (package! edit-indirect)
 (package! ox-gfm)

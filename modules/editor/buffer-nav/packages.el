@@ -21,7 +21,7 @@
 ;;; Code:
 
 (package! centered-cursor-mode)
-(package! evil-states-plus :recipe (:host github :repo "jgrey4296/evil-states-plus" :includes (paren-state)))
+(package! evil-states-plus :recipe (:host github :repo "jgrey4296/evil-states-plus" :includes (move-states)))
 (package! better-jumper)
 (package! imenu)
 (package! avy)

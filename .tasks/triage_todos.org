@@ -91,3 +91,30 @@ https://www.djcbsoftware.nl/code/mu/mu4e/Contexts-example.html
    :context:
         <2024-08-22 Thu>   )
    :END:
+** TRIAGE doom hooks
+   [[/media/john/data/github/_config/::12][Location]]
+   :context:
+        <2024-08-31 Sat>   -rw-r-xr--  1 john john   79 Oct 17  2023 README.md
+   :END:
+doom--hook
+doom-after-reload-hook
+doom-before-reload-hook
+doom-project-hook
+doom-init-ui-hook
+doom-load-theme-hook
+doom-switch-buffer-hook
+doom-switch-window-hook
+doom-switch-frame-hook
+doom-before-init-hook
+doom-after-init-hook
+doom-before-modules-init-hook
+doom-after-modules-init-hook
+doom-before-modules-config-hook
+doom-after-modules-config-hook
+doom-inhibit-local-var-hooks
+doom-scratch-buffer-hook
+doom-after-sync-hook
+doom-before-sync-hook
+doom-first-input-hook
+doom-first-file-hook
+doom-first-buffer-hook

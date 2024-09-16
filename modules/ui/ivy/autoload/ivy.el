@@ -97,7 +97,6 @@ In the GUI, this is the same as `ivy-format-function-line'."
      cands
      "")))
 
-
 ;;
 ;; Library
 
@@ -106,6 +105,7 @@ In the GUI, this is the same as `ivy-format-function-line'."
     (counsel--switch-buffer-update-fn)))
 
 (defalias '+ivy--switch-buffer-preview-all #'counsel--switch-buffer-update-fn)
+
 (defalias '+ivy--switch-buffer-unwind      #'counsel--switch-buffer-unwind)
 
 (defun +ivy--switch-buffer (workspace other)
@@ -220,7 +220,6 @@ If ARG (universal argument), open selection in other-window."
 (defun +ivy-confirm-delete-file (x)
   (dired-delete-file x 'confirm-each-subdirectory))
 
-
 ;;
 ;;; File searching
 
@@ -312,8 +311,11 @@ in the search."
 
 If ARG (universal argument), include all files, even hidden or compressed ones."
   (interactive "P")
-  (+ivy/project-search arg initial-query default-directory))
-
+  (+ivy-file-search :query initial-query
+                    :in default-directory
+                    :all-files arg
+                    :prompt (format "Search Directory [%s]: " (f-base default-directory)))
+  )
 
 ;;
 ;;; Wrappers around `counsel-compile'

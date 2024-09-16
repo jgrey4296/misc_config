@@ -5,5 +5,7 @@
       "C-k"                       #'previous-line
       [escape] 'evil-normal-state
       :desc "Escape"        "C-g" #'evil-escape
+      :desc "Delete"        "DEL" #'backward-delete-char
+      "RET" #'newline
       ;; TAB
       )

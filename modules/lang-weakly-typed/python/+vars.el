@@ -18,13 +18,13 @@
 ;; Py-vars
 (spec-handling-setq! python 50
                      ;; Python settings
+                     python-indent-offset 4
                      python-indent-guess-indent-offset                     nil
                      python-shell-completion-native-enable                 nil
                      python-shell-completion-native-disabled-interpreters  '("pypy")
                      python-shell-interpreter-path-args                    (expand-file-name "python/repl_startup.py"  templates-loc)
                      expand-region-preferred-python-mode 'python-mode
                      ;; py settings
-                     py-indent-offset              4
                      py-shell-virtualenv-root      conda-env-home-directory
                      py-pdbtrack-do-tracking-p     t
                      py-python-command             "python3"
@@ -124,15 +124,14 @@
 ;;-- end babel
 
 ;;-- general insert
-(general-insert-register-processor 'python-mode "raise"
-                                   #'(lambda (x) (insert "raise " (s-replace-regexp "^[^A-Z]+" "" x))))
-(general-insert-register-processor 'python-mode "datetime"
-                                   #'(lambda (x) (insert (car (split-string x " " t " +")))))
-(general-insert-register-processor 'python-mode "fixtures"
-                                   #'(lambda (x) (insert (car (split-string x " " t " "+)))))
-(general-insert-register-processor 'python-mode "import"
-                                   #'(lambda (x) (insert "import " (car (split-string x t " +")))))
-
+(general-insert-register-processor 'python-mode "raise" #'(lambda (x) (insert "raise " (s-replace-regexp "^[^A-Z]+" "" x))))
+(general-insert-register-processor 'python-mode "datetime" #'(lambda (x) (insert (car (split-string x " " t " +")))))
+(general-insert-register-processor 'python-mode "fixtures" #'(lambda (x) (insert (car (split-string x " " t " "+)))))
+(general-insert-register-processor 'python-mode "import" #'(lambda (x) (insert "import " (car (split-string x t " +")))))
+(general-insert-register-processor 'python-ts-mode "raise" #'(lambda (x) (insert "raise " (s-replace-regexp "^[^A-Z]+" "" x))))
+(general-insert-register-processor 'python-ts-mode "datetime" #'(lambda (x) (insert (car (split-string x " " t " +")))))
+(general-insert-register-processor 'python-ts-mode "fixtures" #'(lambda (x) (insert (car (split-string x " " t " "+)))))
+(general-insert-register-processor 'python-ts-mode "import" #'(lambda (x) (insert "import " (car (split-string x t " +")))))
 ;;-- end general insert
 
 ;;-- env handling
@@ -280,14 +279,15 @@
                     '(python
                       ("LICENSE\\'"               :trigger "__license-acab"   :mode text-mode   :priority 100)
                       ;;Configs:
-                      ("pyproject.toml\\'"        :trigger "__pyproject"      :mode conf-toml-mode)
-                      ("pyrightconfig.json\\'"    :trigger "__pyrightconfig"  :mode json-mode)
-                      ("pylint.toml\\'"           :trigger "__pylint"         :mode conf-toml-mode)
-                      ("jekyl.toml\\'"            :trigger "__jekyll"         :mode conf-toml-mode)
-                      ("ruff.toml\\'"             :trigger "__ruff_config"    :mode conf-toml-mode)
-                      ("\\.mypyrc\\'"               :trigger "__mypy"    :mode conf-toml-mode)
-                      ("conf.py"               :trigger "__sphinx_conf"    :mode python-mode)
-                      ("log_config.py"         :trigger "__log_config"     :mode python-mode)
+                      ("pyproject.toml\\'"          :trigger "__pyproject"      :mode conf-toml-mode)
+                      ("pyrightconfig.json\\'"      :trigger "__pyrightconfig"  :mode json-mode)
+                      ("pylint.toml\\'"             :trigger "__pylint"         :mode conf-toml-mode)
+                      ("jekyl.toml\\'"              :trigger "__jekyll"         :mode conf-toml-mode)
+                      ("ruff.toml\\'"               :trigger "__ruff_config"    :mode conf-toml-mode)
+                      ("\\.mypyrc\\'"               :trigger "__mypy"           :mode conf-toml-mode)
+                      ("conf.py"                    :trigger "__sphinx_conf"    :mode python-mode)
+                      ("log_config.py"              :trigger "__log_config"     :mode python-mode)
+                      (".readthedocs.yaml"          :trigger "__readthedocs"    :mode yaml-mode)
 
                       ;; Python:
                       ("__init__\\.py\\'"      :trigger "__init"           :mode python-mode)
@@ -329,7 +329,7 @@
                       )
                     )
 (spec-handling-add! whitespace-cleanup
-                    `(python-mode
+                    `((python-mode python-ts-mode)
                       ,#'+jg-python-cleanup-ensure-newline-before-def
                       ,#'delete-trailing-whitespace
                       ,#'+jg-text-cleanup-whitespace

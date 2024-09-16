@@ -1,5 +1,10 @@
 ;;; emacs/dired/+vars.el -*- lexical-binding: t; -*-
 
+(defvar! +jg-dired-recursive-switches "-aBhlR --group-directories-first" nil)
+
+(spec-handling-setq! dired 50
+                    read-file-name-function #'read-file-name-default
+                    )
 
 ;;-- dired
 (setq-default dired-args '("-ahlD" "-v" "--group-directories-first")
@@ -16,7 +21,7 @@
               dired-vc-rename-file t
               dired-quick-sort-group-directories-last ?y
 
-              +jg-dired-recursive-switches "-aBhlR --group-directories-first"
+
               )
 
 (defvar jg-dired-du-cmd "du")

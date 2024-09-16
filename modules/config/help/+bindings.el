@@ -43,8 +43,6 @@
 (map! :map jg-help-map
       :prefix ("d" . "docs")
       :desc "Info Manual"                 "i" #'info-display-manual
-      ;; :desc "Emacs Manual"                "e" #'info-emacs-manual
-      ;; :desc "Emacs Manual Other Window"   "o" #'info-other-window
       "a" #'doom/help-autodefs
       "t" #'doom/toggle-profiler
       ;; p -> project type
@@ -160,12 +158,15 @@
 (map! :map jg-info-map
     :n "]" #'Info-forward-node
     :n "[" #'Info-backward-node
-    :n "h" #'Info-up
-    :n "H" #'Info-top-node
+    :n "H" #'Info-up
+    :n "K" #'Info-top-node
+    :n "h" #'Info-prev
     :n "l" #'Info-next
 
     :n "s n" #'Info-goto-node
     :n "s N" #'Info-goto-node-web
+    :n "s s" #'Info-search
+    :n "n"   #'Info-search-next
 
     :n "q" #'quit-window
     :n "DEL" #'Info-toc

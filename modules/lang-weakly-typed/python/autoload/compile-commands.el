@@ -21,7 +21,7 @@
      '("test" "pytest")
      '("pytest version" "pytest --version")
      ;; Sphinx
-     '("docs" "sphinx-build -b html ./docs ./.temp/docs")
+     '("docs" "doot docs::build")
      )
     )
   )

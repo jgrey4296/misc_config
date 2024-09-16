@@ -13,7 +13,6 @@
 
 (package! flycheck)
 (package! flycheck-popup-tip)
-(package! flycheck-posframe)
 
 (package! treesit :built-in t)
 (package! tree-sitter)

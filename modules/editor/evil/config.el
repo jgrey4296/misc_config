@@ -51,8 +51,6 @@
   (advice-add 'evil-join          :around #'+evil-join-a)
   (advice-add 'evil-fill          :around #'+evil--no-squeeze-on-fill-a)
   (advice-add 'evil-fill-and-move :around #'+evil--no-squeeze-on-fill-a)
-  ;; Make ESC (from normal mode) the universal escaper. See `doom-escape-hook'.
-  (advice-add 'evil-force-normal-state :after #'+evil-escape-a)
   ;; monkey patch `evil-ex-replace-special-filenames' to improve support for
   ;; file modifiers like %:p:h. This adds support for most of vim's modifiers,
   ;; and one custom one: %:P (expand to the project root).
@@ -76,7 +74,6 @@
   (add-hook 'doom-after-modules-config-hook #'+evil-update-cursor-color-h)
   (add-hook 'evil-insert-state-entry-hook   #'delete-selection-mode)
   (add-hook 'evil-insert-state-exit-hook    #'+default-disable-delete-selection-mode-h)
-  (add-hook 'doom-escape-hook               #'+evil-disable-ex-highlights-h)
   ;; (add-hook 'evil-local-mode-hook           #'+jg-evil--auto-marks-h)
 
   ;;-- end hooks
@@ -136,14 +133,13 @@
   )
 
 (use-package! evil-escape
-  :commands evil-escape
   :hook (doom-first-input . evil-escape-mode)
+  :config
+  (evil-escape-add-default-inhibitors)
   )
 
 (use-package! evil-exchange
   :commands evil-exchange
-  :config
-  (add-hook! 'doom-escape-hook #'+evil--escape-exchange-h)
   )
 
 (use-package! evil-quick-diff

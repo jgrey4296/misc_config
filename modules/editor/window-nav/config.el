@@ -29,7 +29,6 @@
 (defer-load! jg-bindings-total "+bindings")
 
 (use-package! switch-window
-  :when (modulep! +switch-window)
   :defer t
   :init
   (global-set-key [remap other-window] #'switch-window)
@@ -38,7 +37,7 @@
   )
 
 (use-package! ace-window
-  :unless (modulep! +switch-window)
+  :when (modulep! +ace)
   :defer t
   :init
   (global-set-key [remap other-window] #'ace-window)

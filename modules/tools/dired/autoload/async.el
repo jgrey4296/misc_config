@@ -21,8 +21,7 @@
   )
 
 (defun +jg-dired-cookiecutter-sentinel (buffer process event)
-  (when (and (string-equal event "finished\n")
-             (not (string-empty-p (with-current-buffer buffer) (s-trim (buffer-string)))))
+  (when (not (process-live-p process))
     (+popup-buffer buffer)
     )
   )
@@ -141,7 +140,7 @@
       )
     (make-process :name "filescan"
                   :buffer target-buffer
-                  :command (append (list "clamscan" "--stdout" "-l" (expand-file-name "logs/clamscan.log" user-cache-dir)) marked)
+                  :command (append (list "clamscan" "--recursive" "--stdout" "-l" (expand-file-name "logs/clamscan.log" user-cache-dir)) marked)
                   :sentinel (-partial '(lambda (targ p e) (when (not (process-live-p p))
                                                             (display-buffer targ)))
                                        target-buffer)
@@ -191,4 +190,20 @@
                   )
     )
 
+  )
+
+;;;###autoload
+(defun +jg-dired-async-server ()
+  (interactive)
+  (let ((buffer (get-buffer-create "*PyServer*")))
+    (make-process :name "py-server"
+                  :buffer buffer
+                  :command (list "python" "-m" "http.server"
+                                 "--directory" default-directory
+                                 "--bind" "127.0.0.1"
+                                 "8000")
+                  :noquery t
+                  )
+    (librarian-browser--open-url "http://127.0.0.1:8000")
+    )
   )

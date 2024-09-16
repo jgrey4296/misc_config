@@ -19,25 +19,26 @@
 
   )
 
-;;;###autoload (autoload #'jg-toggle-nav-transient "config/ui/autoload/transient-nav" nil t)
-(transient-make-subgroup! jg-toggle-nav-transient "n"
-                          "For controlling ui nav settings"
-                          :desc "|| Navigation ||"
-                          [:description "|| Navigation ||"
-                           [
-                             (transient-macro-toggle-centered-cursor-mode)
-                             (transient-macro-toggle-minimap-mode)
-                             (transient-macro-toggle-evil-visual-mark-mode)
-                             ]
-                           [
-                            (transient-macro-call-sidebar)
-                            (transient-macro-call-frame-fullscreen)
-                            ]
-                           []
-                           ]
-                          )
+;;;###autoload
+(defun +jg-ui-build-nav-transient ()
+  (transient-make-subgroup! jg-toggle-nav-transient "n"
+                            "For controlling ui nav settings"
+                            :desc "|| Navigation ||"
+                            [:description "|| Navigation ||"
+                                          [
+                                           (transient-macro-toggle-centered-cursor-mode)
+                                           (transient-macro-toggle-minimap-mode)
+                                           (transient-macro-toggle-evil-visual-mark-mode)
+                                           ]
+                                          [
+                                           (transient-macro-call-sidebar)
+                                           (transient-macro-call-frame-fullscreen)
+                                           ]
+                                          []
+                                          ]
+                            )
 
-
+  )
 
 ;;-- Footer
 ;; Copyright (C) 2024 john

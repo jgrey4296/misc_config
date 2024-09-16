@@ -28,6 +28,7 @@
   )
 
 (use-package! ob-plantuml
+  :when (modulep! :lang-text org)
   :after plantuml-mode
   :config
   (unless (boundp 'org-babel-default-header-args:plantuml)

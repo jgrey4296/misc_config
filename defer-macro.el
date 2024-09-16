@@ -10,6 +10,16 @@
 ;; from doom."
 ;;   (file-name-directory (file!)))
 
+(defmacro defvar! (sym &optional initvalue docstring force)
+  "Define variables, without worrying about overriding them "
+  `(progn (cond (,force (setq ,sym ,initvalue))
+                        ((symbol-file (quote ,sym)) nil)
+                        ((boundp (quote ,sym)) (defvar ,sym (if (boundp (quote ,sym)) ,sym ,initvalue) ,docstring))
+                        (t (defvar ,sym ,initvalue ,docstring))
+                        )
+                ,sym)
+  )
+
 (defmacro dlog! (text &rest args)
   " A Simple, doom-less debug message when 'debug-on-error is true"
   `(when debug-on-error

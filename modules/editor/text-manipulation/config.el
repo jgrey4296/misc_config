@@ -130,9 +130,6 @@
   )
 
   (progn ;; hooks
-    (add-hook! 'eval-expression-minibuffer-setup-hook #'doom-init-smartparens-in-eval-expression-h)
-    (add-hook! 'minibuffer-setup-hook #'doom-init-smartparens-in-minibuffer-maybe-h)
-
     ;; Smartparens breaks evil-mode's replace state
     (defvar doom-buffer-smartparens-mode nil)
     (add-hook! 'evil-replace-state-exit-hook #'doom-enable-smartparens-mode-maybe-h)
@@ -150,6 +147,6 @@
 
 (use-package! embrace :defer t)
 
-(use-package! mapspace-state)
+(use-package! mapspace-state :defer t)
 
-(use-package! spechar-state)
+(use-package! spechar-state :defer t)

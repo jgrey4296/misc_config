@@ -207,33 +207,6 @@
   )
 
 ;;;###autoload
-(defun +org-init-export-h ()
-  "TODO"
-  (setq org-export-with-smart-quotes t
-        org-html-validation-link nil
-        org-latex-prefer-user-labels t)
-
-  (when (modulep! :lang markdown)
-    (add-to-list 'org-export-backends 'md))
-
-  (use-package! ox-hugo
-    :when (modulep! +hugo)
-    :after ox)
-
-  (use-package! ox-pandoc
-    :when (modulep! +pandoc)
-    :when (executable-find "pandoc")
-    :after ox
-    :init
-    (add-to-list 'org-export-backends 'pandoc)
-    (setq org-pandoc-options
-          '((standalone . t)
-            (mathjax . t)
-            (variable . "revealjs-url=https://revealjs.com"))))
-
-  )
-
-;;;###autoload
 (defun +org-init-hacks-h ()
   "Getting org to behave."
   ;; Open file links in current window, rather than new ones

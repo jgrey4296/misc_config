@@ -36,9 +36,14 @@
       :localleader
       :desc "Import View"            "i" #'+jg-python--import-view
       :desc "Sort imports"           "s" #'+jg-python-isort-diff
-      :prefix ("I" . "imports")
-      :desc "Insert Import Snippet"  "I" #'+jg-python-import-snippet
+      (:prefix ("i" . "imports")
+       :desc "Insert Import Snippet"  "I" #'+jg-python-import-snippet
+       (:when (modulep! +isort)
+         :desc "Sort imports"      "s" #'py-isort-buffer
+         :desc "Sort region"       "r" #'py-isort-region
+         )
        )
+      )
 
 (map! :map (python-mode-map python-ts-mode-map) ;; localleader.tests
       :localleader
@@ -74,6 +79,7 @@
       "r" #'python-coverage-overlay-remove-all
       "RET" #'+jg-python-open-coverage-report
       )
+
 
 (map! :map inferior-python-mode-map
       :after python-mode

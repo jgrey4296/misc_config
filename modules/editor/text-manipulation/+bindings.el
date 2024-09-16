@@ -1,8 +1,10 @@
 ;;; util/text/+bindings.el -*- lexical-binding: t; -*-
 
 (dlog! "Setting up text binding: %s" (current-time-string))
-(global-set-key (kbd "C-c [") #'+jg-text-insert-lparen)
-(global-set-key (kbd "C-c ]") #'+jg-text-insert-rparen)
+(after! 'jg-global-bindings
+  (keymap-global-set "C-c [" #'+jg-text-insert-lparen)
+  (keymap-global-set "C-c ]" #'+jg-text-insert-rparen)
+  )
 (evil-make-intercept-map messages-buffer-mode-map)
 ;; Get rid of zap to char:
 

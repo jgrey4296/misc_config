@@ -6,8 +6,6 @@
 
 (defer-load! jg-bindings-total "+bindings")
 
-(defer-load! jg-evil-ex-bindings "+evil-ex")
-
 (advice-add 'counsel-compile--action            :override #'+jg-projects-run-compile)
 (advice-add 'projectile--run-project-cmd        :around   #'+jg-projects-projectile-cmd-list)
 (advice-add 'counsel--get-compile-candidates    :override #'+jg-workspaces-time-compile-cmd-retrieval)

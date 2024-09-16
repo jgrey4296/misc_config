@@ -23,6 +23,8 @@
                      ivy-initial-inputs-alist nil   ;; Don't use ^ as initial input. Set this here because `counsel' defines more of its own, on top of the defaults.
                      swiper-action-recenter t
                      avy-all-windows t
+
+                     prescient-filter-method '(literal regexp initialism fuzzy)
       )
 
 (after! ivy

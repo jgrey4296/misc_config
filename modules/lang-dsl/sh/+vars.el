@@ -13,6 +13,7 @@
 (spec-handling-add! docsets '(sh-mode "Bash"))
 (spec-handling-add! auto-modes
                     '(sh
+                      ("\\.bash" . bash-ts-mode)
                       ("\\.bats\\'" . sh-mode)
                       ("\\.\\(?:zunit\\|env\\)\\'" . sh-mode)
                       ("/bspwmrc\\'" . sh-mode)

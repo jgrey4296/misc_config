@@ -21,8 +21,7 @@
   )
 
 (defun +jg-dired-cookiecutter-sentinel (buffer process event)
-  (when (and (string-equal event "finished\n")
-             (not (string-empty-p (with-current-buffer buffer) (s-trim (buffer-string)))))
+  (when (not (process-live-p process))
     (+popup-buffer buffer)
     )
   )

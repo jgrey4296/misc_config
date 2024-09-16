@@ -34,6 +34,7 @@
                                  version (cdr (doom-call-process "git" "rev-parse" "--short" "HEAD")))
                          "(provide 'org-version)\n")))))
  )
+
 (package! org-contrib :recipe (:host github :repo "emacsmirror/org-contrib"))
 
 (package! org-unit-test :recipe (:host github :repo "jgrey4296/misc-modes" :files ("minor-mode/org-unit-test/*.el")))

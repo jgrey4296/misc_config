@@ -279,14 +279,15 @@
                     '(python
                       ("LICENSE\\'"               :trigger "__license-acab"   :mode text-mode   :priority 100)
                       ;;Configs:
-                      ("pyproject.toml\\'"        :trigger "__pyproject"      :mode conf-toml-mode)
-                      ("pyrightconfig.json\\'"    :trigger "__pyrightconfig"  :mode json-mode)
-                      ("pylint.toml\\'"           :trigger "__pylint"         :mode conf-toml-mode)
-                      ("jekyl.toml\\'"            :trigger "__jekyll"         :mode conf-toml-mode)
-                      ("ruff.toml\\'"             :trigger "__ruff_config"    :mode conf-toml-mode)
-                      ("\\.mypyrc\\'"               :trigger "__mypy"    :mode conf-toml-mode)
-                      ("conf.py"               :trigger "__sphinx_conf"    :mode python-mode)
-                      ("log_config.py"         :trigger "__log_config"     :mode python-mode)
+                      ("pyproject.toml\\'"          :trigger "__pyproject"      :mode conf-toml-mode)
+                      ("pyrightconfig.json\\'"      :trigger "__pyrightconfig"  :mode json-mode)
+                      ("pylint.toml\\'"             :trigger "__pylint"         :mode conf-toml-mode)
+                      ("jekyl.toml\\'"              :trigger "__jekyll"         :mode conf-toml-mode)
+                      ("ruff.toml\\'"               :trigger "__ruff_config"    :mode conf-toml-mode)
+                      ("\\.mypyrc\\'"               :trigger "__mypy"           :mode conf-toml-mode)
+                      ("conf.py"                    :trigger "__sphinx_conf"    :mode python-mode)
+                      ("log_config.py"              :trigger "__log_config"     :mode python-mode)
+                      (".readthedocs.yaml"          :trigger "__readthedocs"    :mode yaml-mode)
 
                       ;; Python:
                       ("__init__\\.py\\'"      :trigger "__init"           :mode python-mode)

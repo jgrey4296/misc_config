@@ -41,6 +41,7 @@
   )
 
 (use-package! company-shell
+  :when (modulep! :ide company)
   :defer t
   :after sh-script
   :config

@@ -5,7 +5,10 @@
 (local-load! "+spec-defs")
 (local-load! "+defs")
 (local-load! "+vars")
+(local-load! "+extra-config")
+
 (defer-load! "+envs" "+lsp" "+cython")
+
 (defer-load! jg-bindings-total "+bindings")
 
 (advice-add 'python-shell-calculate-command :override #'+jg-python-shell-calculate-command)
@@ -61,7 +64,6 @@
              #'tree-sitter!
              )
 
-
   ;; Always add auto-hide as the last thing
   (add-hook! 'python-mode-hook :depth 100
              #'jg-python-font-lock-mod-h
@@ -114,21 +116,8 @@
              )
 )
 
-(use-package! company-anaconda
-  :after anaconda-mode
-  :commands 'company-anaconda
-  )
-
-(use-package! company-jedi
-  :defer t
-  )
-
 (use-package! python-pytest
   :after python-mode
-  )
-
-(use-package! tox
-  :defer t
   )
 
 (use-package! python-coverage
@@ -143,24 +132,4 @@
     python-coverage-default-file-name ".temp/coverage/coverage.xml"
     )
 
-  )
-
-(use-package! py-isort
-  :commands py-isort-buffer
-  :init
-  (map! :after python
-        :map python-mode-map
-        :localleader
-        (:prefix ("i" . "imports")
-          :desc "Sort imports"      "s" #'py-isort-buffer
-          :desc "Sort region"       "r" #'py-isort-region))
-  )
-
-(use-package! pyimport
-  :after python-mode
-  )
-
-(use-package! pydoc
-  :after python-mode
-  ;; cmds pydoc, pydoc-at-point, pydoc-browse, pydoc-browse-kill
   )

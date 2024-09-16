@@ -15,8 +15,7 @@
         "p" #'markdown-preview
         "e" #'markdown-export
         "r" #'markdown-toc-refresh-toc
-        (:when (modulep! +grip)
-         "p" #'grip-mode)
+        "p" #'grip-mode)
 
         )
 

@@ -97,7 +97,14 @@
       :n "q"    #'minibuffer-keyboard-quit
       )
 
+
 ;;-- end minibuffer-completion
+
+(map! :map read-regexp-map
+      :n "RET" #'exit-minibuffer
+      )
+
+
 
 (after! ivy
   (setq ivy-minibuffer-map jg-minibuffer-ivy-map)

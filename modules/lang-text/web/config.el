@@ -3,6 +3,7 @@
 (local-load! "+vars")
 
 (defer-load! jg-bindings-total "+bindings")
+
 (defer-load! jg-evil-ex-bindings "+evil-ex")
 
 (use-package! web-mode
@@ -45,21 +46,6 @@
 
 )
 
-(use-package! emmet-mode
-  :preface (defvar emmet-mode-keymap (make-sparse-keymap))
-  :commands emmet-mode
-  :hook (css-mode web-mode html-mode haml-mode nxml-mode rjsx-mode reason-mode)
-  :config
-  (when (require 'yasnippet nil t)
-    (add-hook 'emmet-mode-hook #'yas-minor-mode-on))
-  (setq emmet-move-cursor-between-quotes t)
-  (setq-hook! 'rjsx-mode-hook emmet-expand-jsx-className? t)
-  (map! :map emmet-mode-keymap
-        :v [tab] #'emmet-wrap-with-markup
-        [tab] #'+web/indent-or-yas-or-emmet-expand
-        "M-E" #'emmet-expand-line)
-  )
-
 (use-package! css-mode
   :commands (css-mode stylus-mode)
   :config
@@ -83,11 +69,6 @@
              )
   )
 
-(use-package! counsel-css
-  :after css-mode
-  :hook (css-mode . counsel-css-imenu-setup)
-  )
-
 (use-package! sass-mode
   :commands sass-mode
   :config
@@ -96,11 +77,23 @@
              )
   )
 
-;; (def-project-mode! +web-pelican-mode
-;;   :modes '(web-mode python-mode markdown-mode)
-;;   :files ("pelican.toml")
-;;   :on-enter
-;;   (when (derived-mode-p 'web-mode)
-;;     ;; use web-mode-engines
-;;     (web-mode-set-engine "django"))
-;;   )
+(use-package! counsel-css
+  :when (modulep! :ui ivy)
+  :after css-mode
+  :hook (css-mode . counsel-css-imenu-setup)
+  )
+
+(use-package! emmet-mode
+  :preface (defvar emmet-mode-keymap (make-sparse-keymap))
+  :commands emmet-mode
+  :hook (css-mode web-mode html-mode haml-mode nxml-mode rjsx-mode reason-mode)
+  :config
+  (when (require 'yasnippet nil t)
+    (add-hook 'emmet-mode-hook #'yas-minor-mode-on))
+  (setq emmet-move-cursor-between-quotes t)
+  (setq-hook! 'rjsx-mode-hook emmet-expand-jsx-className? t)
+  (map! :map emmet-mode-keymap
+        :v [tab] #'emmet-wrap-with-markup
+        [tab] #'+web/indent-or-yas-or-emmet-expand
+        "M-E" #'emmet-expand-line)
+  )

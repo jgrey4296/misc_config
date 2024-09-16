@@ -2,8 +2,9 @@
 
 (local-load! "+vars")
 (local-load! "+defs")
-(defer-load! jg-bindings-total "+bindings")
+(local-load! "+extra-config")
 
+(defer-load! jg-bindings-total "+bindings")
 
 (advice-add 'Latex-fill-region-as-paragraph :around #'+latex-dont-indent-itemize-and-enumerate-a)
 (advice-add 'Latex-fill-region-as-para-do   :around #'+latex-re-indent-itemize-and-enumerate-a)
@@ -89,37 +90,6 @@
   ;; Don't cache preamble, it creates issues with SyncTeX. Let users enable
   ;; caching if they have compilation times that long.
   (setq preview-auto-cache-preamble nil)
-  )
-
-(use-package! cdlatex
-  :after auctex
-  :hook (LaTeX-mode . cdlatex-mode)
-  :hook (org-mode . org-cdlatex-mode)
-  :config
-  ;; Use \( ... \) instead of $ ... $.
-  (setq cdlatex-use-dollar-to-ensure-math nil)
-  )
-
-(use-package! adaptive-wrap
-  :commands adaptive-wrap-prefix-mode
-  :hook (LaTeX-mode . adaptive-wrap-prefix-mode)
-  :init
-  (setq-default adaptive-wrap-extra-indent 0)
-  ;; Nicely indent lines that have wrapped when visual line mode is activated.
-  )
-
-(use-package! evil-tex
- :after auctex
- :hook (LaTeX-mode . evil-tex-mode)
- )
-
-(use-package! company-auctex
-  :after auctex
-
-  )
-
-(use-package! company-math
-  :after auctex
   )
 
 (use-package! reftex

@@ -31,7 +31,6 @@ Returns nil if 'love' executable can't be found."
                    (when-let (root (projectile-locate-dominating-file default-directory "src/main.moon"))
                      (expand-file-name "src" root))))))))
 
-
 ;;
 ;;; Commands
 

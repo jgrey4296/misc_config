@@ -18,12 +18,9 @@
 (package! rake)
 
 ;; Environment management
-(when (modulep! +rbenv)
-  (package! rbenv))
-(when (modulep! +rvm)
-  (package! rvm))
-(when (modulep! +chruby)
-  (package! chruby))
+(when (modulep! +rbenv) (package! rbenv))
+(when (modulep! +rvm) (package! rvm))
+(when (modulep! +chruby) (package! chruby))
 
 ;; Testing frameworks
 (package! rspec-mode)

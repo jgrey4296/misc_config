@@ -1,5 +1,7 @@
 ;;; util/bindings/+vars.el -*- lexical-binding: t; -*-
 
+(defvar jg-global-map (make-keymap))
+
 
 (defvar jg-bindings-wk-filter '+jg-bindings-wk-filter-fn)
 

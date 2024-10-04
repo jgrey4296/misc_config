@@ -106,11 +106,6 @@
 ;;-- end lsp
 
 ;;-- babel
-(spec-handling-add! babel
-                    '(python
-                      (:name python :lib ob-python :mode python)
-                      )
-                    )
 ;; (after! (ob python)
 ;;   (setq org-babel-python-command
 ;;         (string-trim
@@ -433,7 +428,7 @@
                     )
 (spec-handling-add! babel
                     '(python
-                      (:name python :lib ob-python)
+                      (:name python :lib ob-python :mode python)
                       )
                     )
 ;;-- end specs

@@ -15,8 +15,7 @@
         "p" #'markdown-preview
         "e" #'markdown-export
         "r" #'markdown-toc-refresh-toc
-        "p" #'grip-mode)
-
+        "p" #'grip-mode
         )
 
 (map! :map jg-binding-markdown-map

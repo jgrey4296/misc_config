@@ -15,7 +15,7 @@
 ;;;###autoload
 (defun +jg-dired-find-file-with-insert-plus-a (fn &rest args)
   " A Custom read file name function to start in insert-plus state"
-  (minibuffer-with-setup-hook (:append #'evil-insert-plus-state)
+  (minibuffer-with-setup-hook (:append #'evil-mapspace-state)
     (apply fn args)
     )
   )

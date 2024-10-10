@@ -40,6 +40,7 @@
     ('darwin
      (shell-command "killall Preview"))
     ('gnu/linux
-     (shell-command "killall evince"))
+     (shell-command "killall -q -I evince")
      )
+    )
   )

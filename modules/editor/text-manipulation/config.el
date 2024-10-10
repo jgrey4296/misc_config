@@ -147,6 +147,10 @@
 
 (use-package! embrace :defer t)
 
-(use-package! mapspace-state :defer t)
+(use-package! mapspace-state
+  :after evil
+  )
 
-(use-package! spechar-state :defer t)
+(use-package! spechar-state
+  :after evil
+  )

@@ -1,4 +1,5 @@
 ;;; init.el -*- lexical-binding: t; -*-
+;; last working doom commit: 35dc13632b
 
 (setq force-load-messages nil)
 (defvar templates-loc (expand-file-name "~/github/_templates"))
@@ -40,7 +41,7 @@
 
  :lang-strongly-typed haskell
  :lang-strongly-typed (proofs) ;; coq, idris, agda, fstar, lean)
- :lang-strongly-typed rust lean
+ :lang-strongly-typed rust
  :lang-strongly-typed jvm-langs dotnet-langs ml-langs
 
  :lang-text inform web

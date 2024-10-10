@@ -4,7 +4,6 @@
 (dlog! "Setting up bibtex bindings: %s" (current-time-string))
 ;; (evil-make-overriding-map jg-bibtex-mode-map)
 
-
 ;;-- bibtex-mode
 (map! :map jg-bibtex-mode-map ;; main
       :n "|" #'general-insert-call
@@ -16,7 +15,6 @@
       :desc "Change Entry Type"  :n "DEL"   #'+jg-bibtex-edit-entry-type
       :desc "Open DWIM"          :n ">"     #'+jg-bibtex-window-dwim
       :desc "Open Dropbox"       :n "<"     #'+jg-bibtex-window-set-dropbox
-
 
       :desc "Select Entry"       :v "i e"   #'+jg-bibtex-visual-select-entry
       )
@@ -39,15 +37,6 @@
       :i "s" #'self-insert-command
       )
 
-;; (:prefix ("y b" . "bibtex")
-;; :desc "Copy Entry"         :n "e"      #'+jg-bibtex-copy-entry
-;; :desc "Copy Key"           :n "k"      #'+jg-bibtex-copy-key
-;; :desc "Copy Title"         :n "t"      #'+jg-bibtex-copy-title
-;; :desc "Copy Field"         :n "f"      #'+jg-bibtex-copy-field
-;; :desc "Copy into metadata" :n "m"      #'+jg-bibtex-apply-meta
-;; )
-
-
 (map! :map jg-bibtex-mode-map ;; groups
       :localleader
       (:prefix ("c" . "Copy"))
@@ -61,25 +50,21 @@
 
 (map! :map jg-bibtex-mode-map ;; localleader
       :localleader
-      ;; :desc "Open Url"            "RET"     #'bibtex-url
-      ;; :desc "Reformat Buffer"     "TAB"     #'+jg-bibtex-reformat-buffer
       :desc "Remove Field"        "DEL"     #'+jg-bibtex-remove-field
-      ;; :desc "Author <-> Editor"     "0"     #'+jg-bibtex-swap-editor-author
-      ;; :desc "Journal <-> Booktitle" "9"     #'+jg-bibtex-swap-booktitle-journal
-
-      ;; :desc "Scholar Search"      "?"       #'+jg-bibtex-google-scholar
       :desc "Subcite"             "\\"      #'+jg-bibtex-subcite
       :desc "Build Bibliography"  "B"       #'org-ref-build-full-bibliography
       :desc "Get Meta"            "m"       #'+jg-bibtex-meta-retrieval
       :desc "Count Entries"       "C"       #'bibtex-count-entries
+)
 
-      ;; :desc "Update from DOI"     "u"     #'+jg-bibtex-update-entry
-
-      (:prefix ("r" . "Refile")
+(map! :map jg-bibtex-mode-map ;; refile
+      :localleader
+      :prefix ("r" . "Refile")
        :desc "Refile to Unsourced" "U"     #'+jg-bibtex-refile-to-unsourced
-       :desc "Refile"              "r"       #'+jg-bibtex-refile-by-year
-      )
-      )
+       :desc "Refile"              "r"     #'+jg-bibtex-refile-by-year
+       :desc "to Other Window"     "o"     #'+jg-bibtex-refile-to-other-window
+       )
+
 (map! :map jg-bibtex-mode-map ;; insert/copy/edit/update/format
       :localleader
       (:prefix ("i" . "Insert")
@@ -114,6 +99,7 @@
        :desc "Validate"              "v"      #'bibtex-validate
        )
       )
+
 (map! :map jg-bibtex-mode-map ;; sort
       :localleader
       :prefix ("s" . "Sort")
@@ -121,6 +107,7 @@
        :desc "Sort By Year"      "y"      #'+jg-bibtex-sort-buffer-by-year
        :desc "Sort By Type"      "t"      #'+jg-bibtex-sort-buffer-by-type
       )
+
 (map! :map jg-bibtex-mode-map ;; vars
       :localleader
       ;; TODO search in crossref
@@ -139,12 +126,15 @@
 
 ;;-- end reftex
 
+;;-- helm
 (map! :map jg-binding-helm-map
       :desc "Bibtex Ivy"                "b" #'ivy-bibtex
       :desc "Bibtex Helm"               "B" #'+jg-bibtex-helm-bibtex
       :desc "Bibtex Local"              "l" #'ivy-bibtex-with-local-bibliography
       :desc "Bibtex Helm Local"         "L" #'helm-bibtex-with-local-bibliography
       )
+
+;;-- end helm
 
 ;;-- dired
 (map! :map dired-mode-map

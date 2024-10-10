@@ -96,3 +96,22 @@ returns the new location
       )
     )
 )
+
+;;;###autoload
+(defun +jg-bibtex-refile-to-other-window ()
+  "Refile the entry under point to the other window"
+  (interactive)
+  (unless (save-selected-window (other-window 1) (eq major-mode 'bibtex-mode))
+    (user-error "Other Window Is Not a Bibtex Buffer"))
+  (save-excursion (+jg-bibtex-copy-entry))
+  (save-selected-window (other-window 1)
+                        (end-of-buffer)
+                        (newline-and-indent)
+                        (yank)
+                        (recenter)
+  )
+  (evil-visual-state)
+  (let ((sel (+evil:defun-txtobj)))
+    (evil-visual-select (car sel) (cadr sel))
+    )
+  )

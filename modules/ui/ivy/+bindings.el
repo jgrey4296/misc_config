@@ -8,7 +8,7 @@
       )
 
 ;;-- remaps
-(map! :after counsel
+(map! :after (counsel jg-global-bindings)
       [remap bookmark-jump]                 #'+jg-ivy-bookmark
       [remap apropos]                       #'counsel-apropos
       ;; [remap bookmark-jump]              #'counsel-bookmark
@@ -43,6 +43,7 @@
       [remap projectile-ag]                 #'counsel-projectile-ag
       [remap projectile-switch-project]     #'counsel-projectile-switch-project
       )
+
 ;;-- end remaps
 
 ;;-- ivy

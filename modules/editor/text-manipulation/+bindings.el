@@ -1,7 +1,7 @@
 ;;; util/text/+bindings.el -*- lexical-binding: t; -*-
 
 (dlog! "Setting up text binding: %s" (current-time-string))
-(after! 'jg-global-bindings
+(after! jg-global-bindings
   (keymap-global-set "C-c [" #'+jg-text-insert-lparen)
   (keymap-global-set "C-c ]" #'+jg-text-insert-rparen)
   )

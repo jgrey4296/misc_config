@@ -43,11 +43,12 @@
 
 (defun +popup--maybe-select-window (window origin)
   "Select a window based on `+popup--inhibit-select' and this window's `select' parameter."
+  (when (windowp window)
   (unless +popup--inhibit-select
     (let ((select (+popup-parameter 'select window)))
       (if (functionp select)
           (funcall select window origin)
-        (select-window (if select window origin))))))
+        (select-window (if select window origin)))))))
 
 ;;-- end utils
 
@@ -56,6 +57,7 @@
   "Initializes a popup window. Run any time a popup is opened. It sets the
 default window parameters for popup windows, clears leftover transient timers
 and enables `+popup-buffer-mode'."
+  (when (windowp window)
   (with-selected-window window
     (setq alist (delq (assq 'actions alist) alist))
     (set-window-parameter window 'popup t)
@@ -68,7 +70,7 @@ and enables `+popup-buffer-mode'."
                   '(left right))
      t)
     (+popup-buffer-mode +1)
-    (run-hooks '+popup-create-window-hook)))
+    (run-hooks '+popup-create-window-hook))))
 
 ;;;###autoload
 (defun +popup-buffer-p (&optional buffer)

@@ -97,6 +97,8 @@
        :desc "Author <-> Editor"     "a"      #'+jg-bibtex-swap-editor-author
        :desc "Journal <-> Booktitle" "j"      #'+jg-bibtex-swap-booktitle-journal
        :desc "Validate"              "v"      #'bibtex-validate
+       :desc "Sort"                  "s"      #'+jg-bibtex-cleanup-sort-entry
+       :desc "Kill Key"              "k"      #'+jg-bibtex-kill-entry-key
        )
       )
 

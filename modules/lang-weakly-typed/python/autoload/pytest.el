@@ -82,12 +82,12 @@
      ]
    [
     ("f" "file (dwim)"                  python-pytest-file-dwim)
-    ("d" "def/class (dwim)"             python-pytest-function-dwim)
+    ("d" "def/class (dwim)"             python-pytest-run-def-or-class-at-point-dwim)
     ("m" "files"                        python-pytest-files)
     ]
    [
     ("F" "file (this)"                  python-pytest-file)
-    ("D" "def/class (this)"             python-pytest-function)
+    ;; ("D" "def/class (this)"             python-pytest-function)
     ("M" "directories"                  python-pytest-directories)
     ]
    [

@@ -66,7 +66,7 @@
   "Auto save the file then test the function point is in"
   (interactive)
   (basic-save-buffer)
-  (call-interactively #'python-pytest-function-dwim)
+  (call-interactively #'python-pytest-run-def-or-class-at-point-dwim)
   )
 
 ;;; test_mode.el ends here

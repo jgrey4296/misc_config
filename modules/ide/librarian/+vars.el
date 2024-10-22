@@ -13,7 +13,7 @@
 
 
 ;;-- specs
-(spec-handling-add! lookup-url :form 'override
+(spec-handling-add! lookup-url
                     '(defaults
                       ("DuckDuckGo"         librarian-backend--online-duckduckgo "https://duckduckgo.com/?q=%s")
                       ("Github"                                                  "https://github.com/search?ref=simplesearch&q=%s")
@@ -33,15 +33,16 @@
                       ("Router"                                                  "192.168.1.1")
                      )
                     )
-(spec-handling-add! lookup-url :form 'override
+(spec-handling-add! lookup-url
                     '(plus
-                     ("Google"            libraria-backend--online-google "https://google.com/search?q=%s")
+                     ("Google"            librarian-backend--online-google "https://google.com/search?q=%s")
                      ("Google images"     "https://www.google.com/images?q=%s")
                      ("Google maps"       "https://maps.google.com/maps?q=%s")
                      ("Google Ngrams"     "https://books.google.com/ngrams/graph?content=%s&year_start=1800&year_end=2019&corpus=en-2019&smoothing=3")
                      ("Project Gutenberg" "http://www.gutenberg.org/ebooks/search/?query=%s")
                      ("Wikipedia"         "https://wikipedia.org/search-redirect.php?language=en&go=Go&search=%s")
                      ("Wiki Quote"        "https://en.m.wikiquote.org/w/index.php?search=%s")
+                     ("Down For Everyone?" "https://downforeveryoneorjustme.com/%s")
                      )
                     )
 (spec-handling-add! browse-handler

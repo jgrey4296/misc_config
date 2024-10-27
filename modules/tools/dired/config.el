@@ -18,6 +18,7 @@
             insert-directory-program "ls")
     )
 
+
   (setq dired-listing-switches (string-join dired-args " "))
 
 
@@ -25,9 +26,8 @@
 
   (advice-add 'dired-buffer-stale-p :before-while #'+dired--no-revert-in-virtual-buffers-a)
 
-  (add-hook! 'dired-mode-hook '+dired-disable-gnu-ls-flags-maybe-h)
-  ;; (add-hook! 'dired-after-readin-hook nil)
-  ;; (add-hook! 'dired-before-readin-ook nil)
+  ;; https://www.gnu.org/software/emacs/manual/html_node/tramp/Frequently-Asked-Questions.html
+  (add-hook! 'dired-before-readin-hook #'(lambda () (when (file-remote-p default-directory) (setq dired-actual-switches "-al"))))
   )
 
 (use-package! dired-quick-sort

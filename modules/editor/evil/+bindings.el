@@ -118,8 +118,9 @@
       )
 
 (map! :leader
-      :desc "Search/Jump" "s" 'jg-binding-jump-map
-      :desc "Evil States" "a" #'+jg-evil-state-ivy
+      :desc "Search/Jump"  "s"    'jg-binding-jump-map
+      :desc "Evil States"  "a"   #'+jg-evil-state-ivy
+      :desc "Record Macro" "SPC" #'evil-record-macro
       )
 
 (dlog! "Evil Bindings Complete: %s" (current-time-string))

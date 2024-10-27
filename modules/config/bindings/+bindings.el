@@ -6,7 +6,7 @@
       ;; "," "<" "!" "?"
       :desc "Ibuffer"               "DEL" #'ibuffer
       :desc "Jump to bookmark"      "RET" #'bookmark-jump
-      :desc "Record Macro"          "SPC" #'evil-record-macro
+      ;; SPC - record macro (evil)
 
       :desc "Find file"             "."   #'find-file
 

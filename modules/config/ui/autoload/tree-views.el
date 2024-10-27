@@ -39,10 +39,10 @@
   (let ((path buffer-file-name)
         (project-root (or (projectile-project-root) default-directory)))
     (pcase jg-ui-tree-active-tree-package
-      (treemacs
+      ('treemacs
        (treemacs-find-file)
        )
-      (neotree
+      ('neotree
        (require 'neotree)
        (cond ((and (neo-global--window-exists-p)
                    (get-buffer-window neo-buffer-name t))

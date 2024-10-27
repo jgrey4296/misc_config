@@ -10,7 +10,6 @@
 (package! evil-terminal-cursor-changer :pin "12ea9c0438c67e560b3866dc78b5c7d1d93f8cc5")
 (package! epa :built-in t)
 (package! epa-hook :built-in t)
-
 (package! flycheck-package)
 
 (package! s)

@@ -100,11 +100,9 @@
 
 ;;-- end minibuffer-completion
 
-(map! :map read-regexp-map
-      :n "RET" #'exit-minibuffer
+(map! :map (read-regexp-map minibuffer-local-shell-command-map)
+      :ni "RET" #'exit-minibuffer
       )
-
-
 
 (after! ivy
   (setq ivy-minibuffer-map jg-minibuffer-ivy-map)

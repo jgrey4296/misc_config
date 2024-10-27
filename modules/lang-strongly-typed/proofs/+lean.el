@@ -8,13 +8,6 @@
 
 (use-package! lean-mode :defer t)
 
-(use-package! company-lean
-  :when (modulep! :ide company)
-  :after lean-mode
-  :init
-  (advice-add #'company-lean-hook :override #'ignore)
-  )
-
 (sp-with-modes 'lean-mode
   (sp-local-pair "/-" "-/")
   (sp-local-pair "`" "`")
@@ -28,10 +21,6 @@
                     `(lean-mode
                       :definnition ,#'lean-find-definition
                       )
-                    )
-
-(spec-handling-add! company
-                    '(lean-mode company-lean)
                     )
 
 (spec-handling-add! librarian-regular

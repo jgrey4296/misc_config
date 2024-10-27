@@ -6,7 +6,13 @@
 (package! haml-mode)
 (package! pug-mode)
 (package! slim-mode)
-(when (package! web-mode) (package! company-web))
+(package! company-web)
+(package! jinja2-mode)
+(package! web-mode)
+
+(package! poly-ansible)
+(package! polymode)
+(package! poly-rst)
 
 ;; +css.el
 (package! css-mode)

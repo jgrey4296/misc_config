@@ -1,6 +1,8 @@
 ;;; lang-text/web/+bindings.el -*- lexical-binding: t; -*-
 
-(map! :map web-mode-map
+(defvar jg-web-mode-map (make-sparse-keymap))
+
+(map! :map jg-web-mode-map
       ;; :g  "M-/" #'web-mode-comment-or-uncomment
       ;; :i  "SPC" #'self-insert-command
       :nv "]a"  #'web-mode-attribute-next
@@ -19,7 +21,7 @@
       :desc "Render Buffer"      "r" #'shr-render-buffer
 )
 
-(map! :map web-mode-map ;; attributes
+(map! :map jg-web-mode-map ;; attributes
       :localleader
       :prefix ("a" . "attribute")
       :n "b" #'web-mode-attribute-beginning
@@ -32,7 +34,7 @@
       :n "t" #'web-mode-attribute-transpose
 )
 
-(map! :map web-mode-map ;; block
+(map! :map jg-web-mode-map ;; block
       :localleader
       :prefix ("b" . "block")
       :n "b" #'web-mode-block-beginning
@@ -44,7 +46,7 @@
       :n "s" #'web-mode-block-select
 )
 
-(map! :map web-mode-map ;; dom
+(map! :map jg-web-mode-map ;; dom
       :localleader
       :prefix ("d" . "dom")
       :n "a" #'web-mode-dom-apostrophes-replace
@@ -56,7 +58,7 @@
       :n "x" #'web-mode-dom-xpath
       )
 
-(map! :map web-mode-map ;; elements
+(map! :map jg-web-mode-map ;; elements
       :localleader
       :prefix ("e" . "element")
       :n "/" #'web-mode-element-close
@@ -79,7 +81,7 @@
       :n "w" #'web-mode-element-wrap
       )
 
-(map! :map web-mode-map ;; tags
+(map! :map jg-web-mode-map ;; tags
       :localleader
       :prefix ("t" . "tag")
       :n "a" #'web-mode-tag-attributes-sort
@@ -106,3 +108,7 @@
       :i "}" (cmd! (insert "{{   }}") (backward-char 4))
 
       )
+
+(after! web-mode
+  (setq web-mode-map jg-web-mode-map)
+  )

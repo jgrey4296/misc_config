@@ -1,11 +1,5 @@
 ;;; lang-text/web/+vars.el -*- lexical-binding: t; -*-
 
-(setq helm-css-scss-split-direction #'split-window-vertically
-      helm-css-scss-split-with-multiple-windows t
-      web-mode-enable-auto-expanding t
-      web-mode-enable-auto-closing t
-      )
-
 (defvar +web-continue-block-comments t
   "If non-nil, newlines in block comments are continued with a leading *.
 
@@ -14,6 +8,63 @@ be aligned.
 
 If set to `nil', disable all the above behaviors.")
 
+;;-- css
+(setq helm-css-scss-split-direction #'split-window-vertically
+      helm-css-scss-split-with-multiple-windows t
+      )
+
+;;-- end css
+
+;;-- web mode
+(setq web-mode-enable-auto-expanding t
+      web-mode-enable-auto-closing   t
+      web-mode-enable-css-colorization nil
+      web-mode-enable-block-face       nil
+      web-mode-enable-auto-indentation nil
+      web-mode-enable-auto-quoting     nil
+      web-mode-enable-block-face       nil
+      web-mode-enable-control-block-indentation t
+      web-mode-enable-engine-detection t
+      web-mode-enable-html-entities-fontification t
+      web-mode-enable-auto-quoting nil
+      web-mode-enable-auto-pairing t
+
+      web-mode-markup-indent-offset 4
+      web-mode-css-indent-offset    4
+      web-mode-code-indent-offset   4
+      web-mode-style-padding        1
+      web-mode-script-padding       1
+      web-mode-comment-style        1
+      web-mode-auto-close-style     1
+      )
+
+(setq web-mode-indentation-params '(
+                                    ("lineup-args" . t)
+                                    ("lineup-calls" . t)
+                                    ("lineup-concats" . t)
+                                    ("lineup-quotes" . t)
+                                    ("lineup-ternary" . t)
+                                    ("case-extra-offset" . t)
+                                    )
+)
+
+(setq web-mode-engines-alist '(
+                               ("phoenix" . "\\.[lh]eex\\'")
+                               ("elixir" . "\\.eex\\'")
+                               ("php"    . "\\\\.phtml\\\\\\='")
+                               ("blade"  . "\\\\.blade\\\\.")
+                               )
+      )
+
+(setq web-mode-content-types-alist '(
+                                     ;; ("json" . "/some/path/.*\\.api\\\\='")
+                                     ;; ("jsx"  . "/some/react/path/.*\\.js[x]?\\\\='")
+                                     ("jinja" . "_templates/*\\.html'")
+                                     )
+      )
+;;-- end web mode
+
+;;-- projectile
 (after! projectile
   (pushnew! projectile-other-file-alist
             '("css"  "scss" "sass" "less" "styl")
@@ -22,14 +73,7 @@ If set to `nil', disable all the above behaviors.")
             '("less" "css")
             '("styl" "css")))
 
-(after! (:any css-mode sass-mode)
-  (spec-handling-add! docsets
-                      '((css-mode scss-mode sass-mode)
-                        "CSS" "HTML" "Bourbon" "Compass"
-                        "Sass"
-                        )
-                      )
-  )
+;;-- end projectile
 
 ;;-- specs
 (spec-handling-add! fold
@@ -90,10 +134,10 @@ If set to `nil', disable all the above behaviors.")
                       ("wp-content/themes/.+/.+\\.php\\'"  . web-mode)
                       ("templates/.+\\.php\\'"             . web-mode)
                       ("\\.vue\\'"                         . web-mode)
-                      ("\\.scss\\'" . scss-mode)
-                      ("\\.css\\'" . css-mode)
-                      ("\\.js" . javascript-mode)
-                      ("\\.ts" . javascript-mode)
+                      ("\\.scss\\'"                        . scss-mode)
+                      ("\\.css\\'"                         . css-mode)
+                      ("\\.js"                             . javascript-mode)
+                      ("\\.ts"                             . javascript-mode)
                       )
                     )
 (spec-handling-add! docsets
@@ -128,5 +172,10 @@ If set to `nil', disable all the above behaviors.")
                      ("Cheatsheet" . "https://htmlcheatsheet.com/")
                      )
                     )
-
+(spec-handling-add! docsets
+                    '((css-mode scss-mode sass-mode)
+                      "CSS" "HTML" "Bourbon" "Compass"
+                      "Sass"
+                      )
+                    )
 ;;-- end specs

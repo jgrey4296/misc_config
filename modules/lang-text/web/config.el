@@ -9,18 +9,9 @@
 (use-package! web-mode
   :commands web-mode
   :config
-  (setq web-mode-enable-html-entities-fontification t
-        web-mode-auto-close-style 1)
 
   (after! smartparens
-    (defun +web-is-auto-close-style-3 (_id action _context)
-      (and (eq action 'insert)
-           (eq web-mode-auto-close-style 3)))
     (sp-local-pair 'web-mode "<" ">" :unless '(:add +web-is-auto-close-style-3))
-
-    ;; let smartparens handle these
-    (setq web-mode-enable-auto-quoting nil
-          web-mode-enable-auto-pairing t)
 
     ;; 1. Remove web-mode auto pairs whose end pair starts with a latter
     ;;    (truncated autopairs like <?p and hp ?>). Smartparens handles these
@@ -36,14 +27,10 @@
                                                         "\\(?:>\\|]\\|}\\)+\\'")))))
     (delq! nil web-mode-engines-auto-pairs))
 
-  (add-to-list 'web-mode-engines-alist '("elixir" . "\\.eex\\'"))
-  (add-to-list 'web-mode-engines-alist '("phoenix" . "\\.[lh]eex\\'"))
-
   ;; Use // instead of /* as the default comment delimited in JS
   (setf (alist-get "javascript" web-mode-comment-formats nil nil #'equal) "//")
 
   (add-hook! 'web-mode-hook #'+web--fix-js-comments-h)
-
 )
 
 (use-package! css-mode
@@ -96,4 +83,8 @@
         :v [tab] #'emmet-wrap-with-markup
         [tab] #'+web/indent-or-yas-or-emmet-expand
         "M-E" #'emmet-expand-line)
+  )
+
+(use-package! jinja2-mode
+  :defer t
   )

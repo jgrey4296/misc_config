@@ -4,6 +4,9 @@
 (defvar jg-org-capture-map  (make-sparse-keymap))
 (defvar jg-org-src-mode-map (make-sparse-keymap))
 
+(add-to-list 'org-file-apps '("\\.pdf\\'" . "evince %s"))
+(add-to-list 'org-file-apps '("\\.epub\\'" . "ebook-viewer %s"))
+
 
 ;;-- org core
 ;; locations

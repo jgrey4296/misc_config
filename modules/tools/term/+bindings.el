@@ -26,6 +26,8 @@
       "z"   #'comint-stop-subjob
       "w"   #'comint-write-output
       "e"   #'comint-send-eof
+
+      "TAB" #'toggle-truncate-lines
       )
 
 ;; overrides the default normal mode binding of evil-ret

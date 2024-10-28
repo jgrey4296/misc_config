@@ -10,13 +10,18 @@
       :desc "Preview"       "p" #'preview-at-point
       :desc "Unpreview"     "P" #'preview-clearout-at-point
       :desc "TexDoc"        "?" #'TeX-documentation-texdoc
-      :desc "environment"   "e" #'LaTeX-environment
-      :desc "close environment" "E" #'LaTeX-close-environment
       :desc "section"        "s" #'LaTeX-section
-      :desc "item"          "i" #'LaTeX-insert-item
       :desc "Font Change"   "f" #'TeX-font
       :desc "Package"       "p" #'+jg-latex-insert-package
 
+      (:prefix ("i" . "insert")
+       :desc "item"          "i" #'LaTeX-insert-item
+       :desc "macro"         "m" #'TeX-insert-macro
+       :desc "block"         "b" #'latex-insert-block
+       :desc "function"      "f" #'helm-insert-latex-math
+       :desc "environment"   "e" #'LaTeX-environment
+       :desc "close env"     "E" #'LaTeX-close-environment
+       )
       )
 
 (map! :map reftex-mode-map

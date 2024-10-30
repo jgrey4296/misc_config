@@ -13,7 +13,7 @@
   (transient-make-mode-toggle! auto-fill-mode    "Auto-fill"   "f" nil auto-fill-function)
 
   (transient-make-call! truncate-lines "t"
-                        (format "%-2s : Truncate lines" (fmt-as-bool! truncate-lines))
+                        (format "%3s : Truncate lines" (fmt-as-bool! truncate-lines))
                         (toggle-truncate-lines)
                         )
 
@@ -33,7 +33,6 @@
                            ]
                           )
   )
-
 
 
 

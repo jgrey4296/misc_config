@@ -37,8 +37,8 @@
                                         jg-latex-compile-args
                                         (list "-draftmode" curr-file)) " "))
 
-     `("clean"        ,(format "cd %s; find . -maxdepth 1 \\( -name '%2$s.log' -o -name '%2$s.aux' -o -name '%2$s.bbl' -o -name '%2$s.blg' -o -name '%2$s.out' -o -name '%2$s.pdf'  \\) -delete" root (f-base curr-file)))
-     `("clean-all"    ,(format "cd %s; find . -maxdepth 1 \\( -name '*.log' -o -name '*.aux' -o -name '*.bbl' -o -name '*.blg' -o -name '*.out' -o -name '*.pdf'  \\) -delete" root))
+     `("clean"        ,(format "cd %s; find . -maxdepth 1 \\( -name '%2$s.log' -o -name '%2$s.aux' -o -name '%2$s.bbl' -o -name '%2$s.blg' -o -name '%2$s.out' -o -name '%2$s.pdf'  -o -name '%2$s.sta' -o -name '%2$s.toc' \\) -delete" root (f-base curr-file)))
+     `("clean-all"    ,(format "cd %s; find . -maxdepth 1 \\( -name '*.log' -o -name '*.aux' -o -name '*.bbl' -o -name '*.blg' -o -name '*.out' -o -name '*.pdf' -o -name '*.sta' -o -name '*.toc' \\) -delete" root))
 
      `("install"      ,(format "tlmgr %s install --with-doc" (if (eq 'darwin system-type) "--usermode" "")) :read)
      `("info"         ,(format "tlmgr %s info --list " (if (eq 'darwin system-type) "--usermode" "")) :read)

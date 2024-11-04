@@ -3,11 +3,13 @@
 ;;;###autoload
 (defun +jg-dot-get-commands (&optional dir)
   (interactive)
-  (-when-let (is-dot (f-ext? (buffer-file-name) "dot"))
+  (-when-let* ((filename (buffer-file-name))
+               (is-dot (f-ext? filename "dot"))
+               )
     (+jg-projects-pair-cmds
-     `("compile" ,(graphviz-compile-command (buffer-file-name)))
-     (when (f-exists? (graphviz-output-file-name (buffer-file-name)))
-       `("open" ,(format "open %s" (graphviz-output-file-name (buffer-file-name))))
+     `("dot compile" ,(graphviz-compile-command filename))
+     (when (f-exists? (graphviz-output-file-name filename))
+       `("dot open" ,(format "open %s" (graphviz-output-file-name filename)))
        )
      )
     )

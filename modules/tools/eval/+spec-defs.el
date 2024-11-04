@@ -41,6 +41,7 @@
                     )
 
 (spec-handling-new! compile-commands counsel-compile-local-builds :loop 'append
+                    :doc "Register commands for trying to compile projects. Functions return strings of commands"
                     val
                     )
 

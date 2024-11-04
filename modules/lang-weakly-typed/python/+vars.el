@@ -398,9 +398,9 @@
                     )
                     )
 (spec-handling-add! compile-commands
-                    '(python +jg-python-get-commands +jg-python-solo-file-run +jg-python-distribute-commands)
+                    '(python +jg-python-get-commands +jg-python-solo-file-run)
                     )
-(spec-handling-add! repl :form 'override
+(spec-handling-add! repl
                     '(python-mode
                       :start +jg-python/open-repl
                       :send  python-shell-send-region

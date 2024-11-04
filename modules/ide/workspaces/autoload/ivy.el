@@ -49,17 +49,4 @@
               :caller '+jg-workspaces-ivy)
     )
 
-;;;###autoload
-(defun +jg-workspaces-get-doot-commands (&optional dir)
-  " get tasks from doot, cache them, then wrap them for use in ivy "
-  ;; add to counsel-compile-local-builds
-  (interactive)
-  (-when-let* ((root (projectile-project-root dir))
-               (doot-toml (f-join root "doot.toml"))
-               (dt-exists (f-exists? doot-toml))
-               )
-    (+jg-projects-doot-tasks)
-    )
-  )
-
 ;;; ivy.el ends here

@@ -25,3 +25,7 @@
 
                       )
                     )
+
+(spec-handling-add! compile-commands
+                    '(rst +jg-rst-get-commands)
+                    )

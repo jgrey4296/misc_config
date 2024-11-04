@@ -13,7 +13,7 @@
        `("bibtex"      ,(format "bibtex --terse %s" rel-file))
 
        (when (f-exists? (f-swap-ext curr-file "pdf"))
-         `("open"     ,(if (eq system-type 'darwin)
+         `("bibtex open"     ,(if (eq system-type 'darwin)
                            (format "open -a Preview -nF %s" (f-swap-ext curr-file "pdf"))
                          (format "open %s" (f-swap-ext curr-file "pdf"))
                          )

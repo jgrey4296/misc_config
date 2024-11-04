@@ -63,10 +63,13 @@
 
 (setq highlight-indent-guides-method 'character
       highlight-indent-guides-suppress-auto-error t
+      highlight-indent-guides-character ?\x7C
+      highlight-indent-guides-responsive nil
 
-      highlight-parentheses-delay      0.3
+      highlight-parentheses-delay             0.3
       highlight-parentheses-colors            '("black")
       highlight-parentheses-background-colors '("#60aa00" "yellow" "#da8548" "#d02b61")
+
 
       global-hl-line-modes '(bibtex-mode prog-mode text-mode conf-mode special-mode org-agenda-mode comint-mode)
       )

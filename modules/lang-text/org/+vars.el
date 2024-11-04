@@ -4,9 +4,10 @@
 (defvar jg-org-capture-map  (make-sparse-keymap))
 (defvar jg-org-src-mode-map (make-sparse-keymap))
 
-(add-to-list 'org-file-apps '("\\.pdf\\'" . "evince %s"))
-(add-to-list 'org-file-apps '("\\.epub\\'" . "ebook-viewer %s"))
-
+(after! org
+  (add-to-list 'org-file-apps '("\\.pdf\\'" . "evince %s"))
+  (add-to-list 'org-file-apps '("\\.epub\\'" . "ebook-viewer %s"))
+)
 
 ;;-- org core
 ;; locations
@@ -32,6 +33,19 @@
 (after! ol
   (push '("Scholar" . "https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q=%s") org-link-abbrev-alist)
   )
+
+(setq org-structure-template-alist '(("a" . "export ascii")
+                                     ("c" . "center")
+                                     ("C" . "comment")
+                                     ("e" . "example")
+                                     ("E" . "export")
+                                     ("h" . "export html")
+                                     ("l" . "export latex")
+                                     ("q" . "quote")
+                                     ("s" . "src")
+                                     ("v" . "verse")
+                                     )
+      )
 
 ;; (textobjects insert navigation additional shift todo heading calendar)
 (setq evil-org-key-theme '(textobjects insert shift todo)

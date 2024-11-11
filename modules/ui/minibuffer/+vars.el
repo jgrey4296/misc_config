@@ -32,3 +32,10 @@
       echo-keystrokes 0.02
       resize-mini-windows 'grow-only
       )
+
+
+;; (spec-handling-add! popup
+;;                     '(minibuffer
+;;                       ("\\*Minibuf-1\\*\\'" :side 'bottom :height 120 :priority 0)
+;;                       )
+;;                     )

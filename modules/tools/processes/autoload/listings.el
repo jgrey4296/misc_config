@@ -1,12 +1,6 @@
 ;;; listings.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
-(defun +jg-processes-list ()
-  (interactive)
-  (list-processes)
-  )
-
-;;;###autoload
 (defun +jg-processes-tree ()
   "get the process tree for this emac"
   (interactive)

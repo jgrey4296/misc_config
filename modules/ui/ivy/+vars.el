@@ -25,19 +25,24 @@
                      avy-all-windows t
 
                      prescient-filter-method '(literal regexp initialism fuzzy)
+
+
       )
 
 (after! ivy
-  (ivy-add-actions 'counsel-find-file
-                   '(("f" (lambda (x) (find-file-literally x)) "Fundamental")))
   (ivy-add-actions 'ivy-switch-buffer
-                   '(
-                     ("k" +jg-ivy-kill-buffer "Kill")
+                   '(("k" +jg-ivy-kill-buffer "Kill")))
+  (ivy-add-actions '+jg-term-switch
+                   '(("k" +jg-ivy-kill-buffer "Kill")))
+  (ivy-add-actions 'swiper
+                   '(("y" +jg-ivy--action-yank "yank")
+                     ("k" +jg-ivy--action-kill "kill")
                      )
                    )
-  (ivy-add-actions '+jg-term-switch
-                   '(("k" +jg-ivy-kill-buffer "Kill")
-                     )
+  ;; Override default insert action
+  (ivy-set-actions t `(("I" +jg-ivy--action-insert "insert at point")
+                       ("i" ivy--action-insert "insert")
+                       )
                    )
 
   )
@@ -59,8 +64,19 @@
 (defvar jg-ivy-file-reject-regexp (rx "test_" (+ anything)))
 
 (spec-handling-setq! counsel 50
-                     counsel-find-file-extern-extensions '("mp4" "mkv" "xlsx" "pdf" "epub")
                      counsel--find-file-predicate #'+jg-ivy-file-predicate
+                     counsel-find-file-extern-extensions   '("mp4" "mkv" "xlsx" "pdf" "epub")
+                     counsel-rg-base-command               '("rg"
+                                                             "--max-columns" "240"
+                                                             "--with-filename"
+                                                             "--no-heading"
+                                                             "--line-number"
+                                                             "--color" "never"
+                                                             "--sort=path"
+                                                             "%s"
+                                                             )
+                     counsel-grep-base-command             "grep -E -n -e %s %s"
+                     counsel-projectile-grep-base-command  "grep -rnEI %s"
                      )
 
 ;;-- end counsel

@@ -54,7 +54,6 @@
          (dropbox  (| (: ?. "dropbox" )))
          (ruby     (| (: ?. "gem")))
          (vcs      (| (: ?. (| (:"git" (? "ignore")) "svn" ))))
-         (py-confs (| "pelicanconf.py" "conf.py"))
          )
   (defvar jg-dired-omit-files (rx line-start (| system
                                                 dotfiles
@@ -72,7 +71,6 @@
                                                 dropbox
                                                 ruby
                                                 vcs
-                                                py-confs
                                                 parent
                                                 )
                                   line-end

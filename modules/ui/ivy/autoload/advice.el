@@ -39,8 +39,14 @@
            (forward-line 1))
          (nreverse files))))))
 
-;;;###autoload
-(advice-add 'counsel-projectile-find-file-action :around #'+ivy--run-from-ivy-directory-a)
 
 ;;;###autoload
-(advice-add 'counsel--find-return-list :override #'+ivy--counsel-file-jump-use-fd-rg-a)
+(defmacro with-state! (state fn)
+  (declare (doc-string 1) (pure t) (side-effect-free t))
+  `(defun ,(intern (format "%s--with-state-%s" (cadr fn) (cadr state))) (&rest args)
+     (interactive)
+     (minibuffer-with-setup-hook (:append (quote ,(intern (format "evil-%s-state" (cadr state)))))
+       (apply ,fn args)
+       )
+     )
+  )

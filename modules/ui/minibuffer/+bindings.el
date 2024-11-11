@@ -1,15 +1,15 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
 (map! :map jg-binding-normal-state-map
-      :desc "From Minibuffer history"  "I m"          #'counsel-minibuffer-history
+      :desc "From Minibuffer history"  "I m"          #'counsel-minibuffer-history--with-state-normal
       )
 
 ;;-- ivy
 (map! :map jg-minibuffer-ivy-map ;; general
       ;; :g [escape]   #'+jg-minibuffer-normal-or-exit
-      :ni "TAB"        #'ivy-alt-done
+      :n    "DEL"      #'counsel-minibuffer-history--with-state-normal
+      :ni   "TAB"      #'ivy-alt-done
       :ing  "RET"      #'ivy-done
-      :n "DEL"         #'counsel-minibuffer-history
       :i  "<backtab>"  #'ivy-dispatching-call
       :n  ","          #'+ivy/woccur
 

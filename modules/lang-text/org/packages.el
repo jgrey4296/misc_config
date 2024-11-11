@@ -54,7 +54,7 @@
 ;; TODO Adjust when this is added to GNU ELPA
 (package! org-contacts :recipe (:host nil :type git :repo "https://repo.or.cz/org-contacts.git"))
 
-(when (and IS-MAC (modulep! :os macos)) (package! org-mac-link))
+(when (featurep :system 'macos) (package! org-mac-link))
 
 (package! org-passwords :recipe (:host github :repo "alfaromurillo/org-passwords.el"))
 

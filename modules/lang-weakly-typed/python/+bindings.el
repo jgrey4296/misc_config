@@ -84,7 +84,7 @@
 (map! :map inferior-python-mode-map
       :after python-mode
       "TAB" #'+jg-snippets-complete-or-snippet
-      :n "DEL" #'counsel-shell-history
+      :n "DEL" #'counsel-shell-history--with-state-normal
       :localleader
       "q" #'comint-send-eof
       )
@@ -117,8 +117,7 @@
       :desc "Make Docs dir"  :n "< d" (cmd! (dired-create-directory "docs"))
       :desc "Disassemble Python" :n "d ? p" #'+jg-python-dired-dis
       :localleader
-      :desc "Try Python site-packages" "p" #'+jg-python-try-site-packages
-
+      :desc "Python site-packages" "f p" #'+jg-python-try-site-packages
       )
 
 (map! :map comint-mode-map
@@ -134,6 +133,6 @@
       )
 
 (map! :map python-pytest-mode-map
-      :n "DEL" #'counsel-shell-history
+      :n "DEL" #'counsel-shell-history--with-state-normal
 
       )

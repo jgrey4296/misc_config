@@ -60,6 +60,7 @@ PATTERN is a vim-style regexp. FLAGS is an optional string of characters. "
 
 ;;;###autoload
 (defun +jg-text-manipulation-sub-memory ()
+  " Quickly recall and edit recent evil-ex substitution patterns "
   (interactive)
   (let ((pattern (ivy-read "Reuse Sub: " jg-text--evil-sub-patterns)))
     (cond ((not pattern)

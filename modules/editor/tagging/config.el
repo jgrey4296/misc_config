@@ -15,3 +15,7 @@
 (use-package! librarian-tagging-ivy
   :defer t
   )
+
+(use-package! counsel-gtags :defer t)
+
+(use-package! helm-gtags :defer t)

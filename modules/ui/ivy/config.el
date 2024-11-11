@@ -8,31 +8,21 @@
 
 (defer-load! jg-evil-ex-bindings "+evil-ex")
 
-(use-package! swiper
-  :config
-  (setq swiper-action-recenter t)
-  )
-
 ;;-- ivy
 
 (use-package! ivy
   :hook (doom-first-input . ivy-mode)
-  :after counsel
   :init
-  (let ((standard-search-fn (if (modulep! +prescient)
-                                #'+ivy-prescient-non-fuzzy
-                              #'ivy--regex-plus))
-        (alt-search-fn (if (modulep! +fuzzy)
-                           #'ivy--regex-fuzzy
-                         ;; Ignore order for non-fuzzy searches by default
-                         #'ivy--regex-ignore-order)))
+  (let ((standard-search-fn #'ivy--regex-plus)
+        (alt-search-fn #'ivy--regex-ignore-order))
     (setq ivy-re-builders-alist `((counsel-rg     . ,standard-search-fn)
                                   (swiper         . ,standard-search-fn)
                                   (swiper-isearch . ,standard-search-fn)
                                   (t . ,alt-search-fn))
-          ivy-more-chars-alist '((counsel-rg . 1)
-                                 (counsel-search . 2)
-                                 (t . 3)))
+          ivy-more-chars-alist '((counsel-rg . 5)
+                                 (counsel-search . 5)
+                                 (t . 5))
+          )
     )
 
   (define-key!
@@ -70,8 +60,7 @@
     (add-to-list 'ivy-dispatching-done-hydra-exit-keys '("C-o" nil))
     (defhydra+ hydra-ivy () ("M-o" nil)))
 
-  ;; Override default insert action
-  (ivy-set-actions t `(("i" +jg-ivy--action-insert "insert")))
+  ;; set ivy-resume to be in normal-state for scrolling
 
   )
 
@@ -140,7 +129,7 @@
 ;;-- counsel
 
 (use-package! counsel
-  :defer t
+  :after ivy
   :init
   :config
   (when (stringp counsel-rg-base-command)
@@ -174,7 +163,7 @@
   ;; custom ddg themes (if one is set).
   (setf (nth 1 (alist-get 'ddg counsel-search-engines-alist)) "https://duckduckgo.com/?q=")
 
-;;-- ivy
+  ;;-- ivy
   (dolist (fn '(counsel-rg counsel-find-file))
     (ivy-add-actions
      fn '(("p" (lambda (path) (with-ivy-window (insert (file-relative-name path default-directory))))
@@ -194,14 +183,20 @@
    '(("O" +ivy-git-grep-other-window-action "open in other window")))
   (ivy-add-actions 'counsel-file-jump (plist-get ivy--actions-list 'counsel-find-file))
 
-;;-- end ivy
+  ;;-- end ivy
 
-;;-- hooks
+  ;;-- hooks
   ;; Record in jumplist when opening files via counsel-{ag,rg,pt,git-grep}
   (add-hook 'counsel-grep-post-action-hook #'better-jumper-set-jump)
   (add-hook 'counsel-grep-post-action-hook #'recenter)
 
-;;-- end hooks
+  ;;-- end hooks
+
+  ;;-- advice
+
+  (advice-add 'counsel-projectile-find-file-action :around #'+ivy--run-from-ivy-directory-a)
+  (advice-add 'counsel--find-return-list :override #'+ivy--counsel-file-jump-use-fd-rg-a)
+  ;;-- end advice
 
   )
 
@@ -223,3 +218,11 @@
   )
 
 ;;-- end counsel
+
+;;-- swiper
+
+(use-package! swiper
+  :config
+  (setq swiper-action-recenter t)
+  )
+;;-- end swiper

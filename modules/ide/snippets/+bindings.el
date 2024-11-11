@@ -20,6 +20,7 @@
 
 (map! :leader ;; General
       (:prefix "i"
+       :desc "Snippet"                "s" #'yas-insert-snippet
        :desc "Breakpoint"             "b" #'+jg-snippets-insert-debug
        :desc "Random Var"             "v" #'+snippets-random-var
        :desc "Academic"               "A" #'academic-phrases

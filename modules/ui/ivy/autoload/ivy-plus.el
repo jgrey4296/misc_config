@@ -53,3 +53,27 @@ Modified to pre-sort bookmarks, caselessly
     (ivy--mark (ivy-state-current ivy-last)))
   (ivy-next-line)
   )
+
+;;;###autoload
+(defun +jg-ivy--action-insert (x)
+  " Ivy Insert, but with spaces between inserts if adding multipl "
+  (goto-char swiper--opoint)
+  (insert (if (stringp x) (ivy--trim-grep-line-number x) x (car x))
+          (if ivy-marked-candidates "\n" "")
+          )
+  )
+
+;;;###autoload
+(defun +jg-ivy--action-yank (x)
+  " Kill the selected candidate and paste it where you started "
+  (kill-region (line-beginning-position) (line-end-position))
+  (goto-char swiper--opoint)
+  (insert "|^|")
+  (yank)
+  )
+
+;;;###autoload
+(defun +jg-ivy--action-kill (x)
+  "Kill the region of the selected candidate"
+  (kill-region (line-beginning-position) (line-end-position))
+  )

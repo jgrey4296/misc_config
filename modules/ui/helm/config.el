@@ -29,12 +29,5 @@
   (setq helm-completing-read-handlers-alist nil)
   (load! "+helms")
   )
-(use-package! helm-gtags
-  :commands (helm-gtags-mode helm-gtags-create-tags helm-gtags-find-symbol
-                             helm-gtags-find-tag-other-window helm-gtags-find-tag helm-gtags-find-rtag
-                             helm-gtags-select helm-gtags-parse-file helm-gtags-tags-in-this-function5
-                             helm-gtags-update-tags)
-  )
-
 
 ;;; config.el ends here

@@ -35,7 +35,7 @@
                     (cl-loop for rule in val
                              collect
                              (let* ((regexp (car rule))
-                                    (plist (append (cdr rule) +popup-defaults))
+                                    (plist (cdr rule)) ;; (append (cdr rule) +popup-defaults))
                                     (priority (* -1 (or (plist-get (cdr rule) :priority) 0)))
                                     )
                                (if (plist-get plist :ignore)

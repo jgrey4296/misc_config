@@ -178,3 +178,9 @@
   (push (cons 'evil-org-mode jg-org-mode-map) minor-mode-map-alist)
   (evil-make-overriding-map org-src-mode-map)
   )
+
+
+;; (after! jg-evil-ex-bindings
+  ;; (evil-ex-define-cmd "tv"     #'org-tags-view)
+  ;; (evil-ex-define-cmd "ts"     #'org-set-tags)
+  ;; )

@@ -18,19 +18,18 @@
 
 (map! :map jg-dired-mode-map ;; main
       "?"                           #'+jg-dired-group-helper
+      :n "DEL"                      #'dired-kill-subdir
+      :n "RET"                      #'dired-do-find-marked-files
       :nv "q"                       #'+jg-dired-kill-subdir-or-close-buffer
       :n "!"                        #'dired-do-shell-command
       :n "@"                        #'dired-do-async-shell-command
       :n "#"                        #'+jg-dired-seq-command
-      :n "DEL"                      #'dired-kill-subdir
-      :n "RET"                      #'dired-find-file
       :n "S"                        #'hydra-dired-quick-sort/body
       :n "."                        #'dired-omit-mode
       :n "n"                        #'evil-ex-search-next
       :n "v"                        #'evil-visual-state
       :n "g"                        #'revert-buffer
       :n "$"                        #'dired-hide-subdir
-      ;; "$"                        #'dired-hide-all
       :desc "Expand Subdir"  :n "i" #'+jg-dired-insert-subdir-maybe-recursive
       :desc "Expand Marked"  :n "I" #'+jg-dired-insert-marked-subdir
       :n "y" #'dired-copy-filename-as-kill
@@ -116,6 +115,7 @@
       )
 (map! :map jg-dired-mode-map ;; open
       :prefix ("o" . "Open")
+      :desc "Marked Files"        :n "m" #'dired-do-find-marked-files
       :desc "Fundamental"         :n "f" #'+jg-dired-find-literal
       :desc "Other Window"        :n "o" #'dired-find-file-other-window
       :desc "Quicklook"           :n "l" #'+jg-dired-quick-look
@@ -129,19 +129,25 @@
       :desc "Encrypt"     :n "e" #'epa-dired-do-encrypt
       :desc "Sign"        :n "s" #'epa-dired-do-sign
       :desc "Verify"      :n "v" #'epa-dired-do-verify
-      :desc "List Keys"   :n "l" #'+jg-dired-epa-list-keys
-      :desc "Import Keys" :n "i" #'epa-import-keys
 
-      (:prefix ("K" . "EXPORT")
-       :desc "Keys"       :n "k" #'+jg-dired-epa-export-keys
+      (:prefix ("k" . "Keys")
+       :desc "List Keys"   :n "l" #'+jg-dired-epa-list-keys
+       :desc "Import Keys" :n "i" #'epa-import-keys
+       :desc "Export Keys" :n "E" #'+jg-dired-epa-export-keys
        )
+
       )
 
 (map! :map jg-dired-mode-map ;; localleader
       :localleader
-      :desc "Find Marked"  "f" #'dired-do-find-marked-files
-      :desc "Cookiecutter" "c" #'+jg-dired-cookiecutter
       :desc "Start Server" "S" #'+jg-dired-async-server
+      (:prefix ("f" . "Find")
+       :desc "Find Marked Files" "f" #'dired-do-find-marked-files
+       :desc "Literally"         "l" #'+jg-dired-find-literal
+       )
+      (:prefix ("g" . "Generate")
+       :desc "Cookiecutter" "c" #'+jg-dired-cookiecutter
+       )
       )
 (map! :map dirvish-mode-map
       :n "b" #'dirvish-goto-bookmark

@@ -5,23 +5,15 @@
 (map! :leader
       :desc "Have you Played?"      "o 1"   #'+jg-completion-rps-have-you-playeds
       :desc "Throwaway Email"       "o 2"   (cmd! (browse-url "https://www.throwawaymail.com/"))
+      ;; :desc "Helm Processes"        "r p h" #'helm-list-emacs-process
       )
 
-;;-- gtags
-(map! :map jg-binding-jump-map
-      :prefix ("g" . "gtags")
-      :desc "Create Tags"           "c" #'helm-gtags-create-tags
-      :desc "Find Symbol"           "y" #'helm-gtags-find-symbol
-      :desc "Find Tag Other Window" "o" #'helm-gtags-find-tag-other-window
-      :desc "Find Tag"              "d" #'helm-gtags-find-tag
-      :desc "Find rtag"             "r" #'helm-gtags-find-rtag
-      :desc "Gtags Select"          "s" #'helm-gtags-select
-      :desc "Parse File"            "p" #'helm-gtags-parse-file
-      :desc "Tags in func"          "i" #'helm-gtags-tags-in-this-function
-      :desc "Update Tags"           "u" #'helm-gtags-update-tags
+(map! :map jg-helm-map
+      :after helm
+      "M-SPC" #'helm-next-page
+      :localleader
+      :desc "Save Results" "s" #'+jg-helm-save-buffer
       )
-
-;;-- end gtags
 
 ;; Movement
 (map! :map jg-helm-map

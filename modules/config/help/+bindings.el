@@ -9,17 +9,16 @@
 (map! :g "C-x h" jg-help-map)
 
 (map! :map jg-help-map
-      "'"    #'describe-char
-      "f"    #'counsel-describe-function
-      "v"    #'counsel-describe-variable
-      "V"    #'+jg-help-describe-env-var
-      "l"    #'view-lossage
-      "t"    #'list-timers
+      :desc "Describe CHAR" "'"       #'describe-char
+      :desc "Describe FUNC" "f"       #'describe-function
+      :desc "Describe VAR"  "v"       #'describe-variable
+      :desc "Describe ENVVAR" "V"     #'+jg-help-describe-env-var
+      :desc "View Key History" "l"    #'view-lossage
+      :desc "List TIMERS"    "t"      #'list-timers
       :desc "Major Mode match" "m"    (cmd! (message "Major Mode: %s" major-mode))
       :desc "Memory Report"    "M"    #'memory-report
       "!"   #'doom-debug-mode
       "DEL" #'free-keys
-
       )
 
 ;;-- debug

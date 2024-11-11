@@ -21,5 +21,4 @@
 ;;; Code:
 
 (package! helm)
-(package! helm-gtags)
 ;;; packages.el ends here

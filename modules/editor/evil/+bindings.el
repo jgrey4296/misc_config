@@ -119,8 +119,15 @@
 
 (map! :leader
       :desc "Search/Jump"  "s"    'jg-binding-jump-map
-      :desc "Evil States"  "a"   #'+jg-evil-state-ivy
-      :desc "Record Macro" "SPC" #'evil-record-macro
+      :desc "Evil States"  "a"    #'+jg-evil-state-ivy
+      :desc "Record Macro" "SPC"  #'evil-record-macro
+      :desc "Switch to last buffer" "TAB" #'evil-switch-to-windows-last-buffer
+      :desc "Evil ex path" "i :"  (cmd! (evil-ex "R!echo "))
+      :desc "From evil register"           "i r" #'evil-show-registers
+
+      :desc "Create Buffer"               "b c"   #'evil-buffer-new
+      :desc "Save all buffers"            "b S"   #'evil-write-all
+
       )
 
 (dlog! "Evil Bindings Complete: %s" (current-time-string))

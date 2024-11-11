@@ -1,6 +1,7 @@
 ;;; completion/ivy/autoload/hydras.el -*- lexical-binding: t; -*-
 (require 'ivy)
 (require 'hydra)
+(require 'hydra-macros)
 
 
 ;;;###autoload (autoload 'jg-ivy-hydra/body "ui/ivy/autoload/hydras" nil t)

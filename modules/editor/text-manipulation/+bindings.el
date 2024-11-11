@@ -9,15 +9,13 @@
 ;; Get rid of zap to char:
 
 (map! :leader
-      :desc "Clear All"            "rK" #'+jg-text-clear-all
+      :desc "Clear All"            "r K" #'+jg-text-clear-all
+      :desc "Insert Random Word"   "i w" #'+jg-text-insert-random-word
 
       (:prefix "b"
        :desc "Yank Buffer Name" "n"   #'+jg-text-yank-buffer-name
        :desc "Clear Buffer"     "DEL" #'+jg-text-clear-buffer
        )
-      (:prefix "i"
-               "w" #'+jg-text-insert-random-word
-               )
       )
 
 ;;-- state bindings
@@ -26,12 +24,6 @@
       :desc "Chars"       "I c"              #'evil-spechar-state
       :desc "Rotate"      "R"                #'rotate-text
       :desc "Select Whitespace" "v SPC"      #'+jg-text-visual-select-whitespace
-      )
-
-(map! :map jg-binding-insert-state-map
-      "C-x c" #'counsel-unicode-char
-      "C-c c" #'counsel-unicode-char
-      "C-c SPC" #'counsel-unicode-char
       )
 
 (map! :map jg-binding-vision-map
@@ -92,7 +84,7 @@
 (map! :map jg-binding-change-map
       :desc "Invis" "z"                                #'+jg-text-toggle-invisible
       :desc "split line"                  "RET"        #'electric-newline-and-maybe-indent
-      :desc "Substitute Ex Memory"        ":"          #'+jg-text-manipulation-sub-memory
+      :desc "Substitute Ex Memory"        ";"          #'+jg-text-manipulation-sub-memory
       :desc "set buffer coding"           "0"          #'set-buffer-file-coding-system
       :desc "indent"                      "TAB"        #'indent-region
 

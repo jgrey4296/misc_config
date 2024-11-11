@@ -23,16 +23,6 @@
     (newline-and-indent)))
 
 ;;;###autoload
-(defun +default/yank-pop ()
-  "Interactively select what text to insert from the kill ring."
-  (interactive)
-  (call-interactively
-   (cond ((fboundp 'consult-yank-pop)    #'consult-yank-pop) ;HACK see @ymarco's comment on #5013 and TODO.org in the selecturm module.
-         ((fboundp 'counsel-yank-pop)    #'counsel-yank-pop)
-         ((fboundp 'helm-show-kill-ring) #'helm-show-kill-ring)
-         ((error "No kill-ring search backend available. Enable ivy, helm or vertico!")))))
-
-;;;###autoload
 (defun +default/yank-buffer-contents ()
   "Copy entire buffer into kill ring."
   (interactive)

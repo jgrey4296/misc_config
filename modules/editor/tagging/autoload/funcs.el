@@ -41,20 +41,6 @@
   )
 
 ;;;###autoload
-(defun +jg-tag-save-helm-buffer ()
-  (interactive)
-  (let ((results (with-helm-buffer (buffer-string))))
-    (helm-exit-and-execute-action
-     #'(lambda (x)
-         (with-temp-buffer-window "TestBuffer" 'display-buffer-pop-up-frame nil
-           (princ results)
-           )
-         )
-     )
-    )
-  )
-
-;;;###autoload
 (defun +jg-tag-file-display (candidates)
   (interactive)
   (let*((candidates (plist-get (car (helm-marked-candidates)) :files)))

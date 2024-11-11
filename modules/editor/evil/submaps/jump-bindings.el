@@ -2,7 +2,7 @@
 
 (map! :map jg-binding-jump-map ;; avy
       ;; 1 2 3 "u" "h"
-      :desc "Ivy resume"            "`"   #'ivy-resume
+      ;; :desc "Ivy resume"            "`"   #'ivy-resume
       :desc "helms"                 "a"   'jg-binding-helm-map
       :desc "Ibuffer"               "DEL" #'ibuffer
       :desc "Jump to bookmark"      "RET" #'bookmark-jump
@@ -10,7 +10,7 @@
       :desc "Jump to Char"          "."   #'avy-goto-char
       :desc "Line"                  "l"   #'evil-avy-goto-line
       :desc "Middle of Line"        "M"   #'evil-middle-of-visual-line
-      :desc "imenu"                 "'"   #'counsel-imenu
+      :desc "imenu"                 "'"   #'imenu
 
       ;; w for window switching, in window-nav
       ;; :desc "Jump to Window"        "w"   #'ace-window
@@ -19,7 +19,7 @@
       :desc "Push Mark"             "B" (cmd! (avy-push-mark))
       :desc "Goto First Line"       "f"   #'evil-goto-first-line
       :desc "Goto Last Line"        "F"   #'evil-goto-line
-      :desc "Search buffer"         "s"   #'swiper
+      :desc "Search buffer"         "s"   #'isearch-forward
 
       :desc "Buffer Start"          "<"   #'beginning-of-buffer
       :desc "Buffer End"            ">"   #'end-of-buffer

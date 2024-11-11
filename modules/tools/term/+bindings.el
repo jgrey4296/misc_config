@@ -9,7 +9,7 @@
 
 (map! :map jg-term-shell-mode-map
       :n "C-d" #'comint-send-eof
-      :n "DEL" #'counsel-shell-history
+      :n "DEL" (with-state! 'normal #'counsel-shell-history)
       :ni "RET" #'comint-send-input
       :i "TAB" #'completion-at-point
 
@@ -20,7 +20,7 @@
       :n "L" #'comint-show-maximum-output
 
       :localleader
-      "h"   #'counsel-shell-history
+      "h"   #'counsel-shell-history--with-state-normal
       "q"   #'comint-quit-subjob
       "i"   #'comint-interrupt-subjob
       "z"   #'comint-stop-subjob

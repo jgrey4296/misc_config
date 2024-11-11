@@ -13,11 +13,59 @@
 ;;   )
 
 (map! :map global-map
+      "<xterm-paste>" #'xterm-paste
       "M-c" #'ignore
       [menu-bar] nil
-      "RET" #'ignore
-      "<xterm-paste>" #'xterm-paste
-      "DEL" #'ignore
+      "RET"                #'ignore
+      "DEL"                #'ignore
+      "C-w"                #'ignore
+      "C-t"                #'ignore
+      "C-c &"              #'ignore
+      "C-x v"              #'ignore
+      "C-c !"              #'ignore
+      "C-x SPC"            #'ignore
+      "C-c C-x"            #'ignore
+      "C-x w"              #'ignore
+      "C-c p"              #'ignore
+      "C-M-i"              #'ignore
+      "C-M-q"              #'ignore
+      "C-M-x"              #'ignore
+      "C-x C-a"            #'ignore
+      "C-@"                #'ignore
+      "C-a"                #'ignore
+      "C-d"                #'ignore
+      "C-e"                #'ignore
+      "C-g"                #'ignore
+      "C-k"                #'ignore
+      "C-o"                #'ignore
+      "C-l"                #'ignore
+      "C-q"                #'ignore
+      "C-s"                #'ignore
+      "C-v"                #'ignore
+      "C-y"                #'ignore
+      "C-_"                #'ignore
+      "C-SPC"              #'ignore
+      "C-?"                #'ignore
+      "C-M"                #'ignore
+      "C-<backspace>"      #'ignore
+      "C-<delete>"         #'ignore
+      "C-<down>"           #'ignore
+      "C-<end>"            #'ignore
+      "C-<home>"           #'ignore
+      "C-<left>"           #'ignore
+      "C-<next>"           #'ignore
+      "C-h"                #'ignore
+      "C-x"                #'ignore
+      "C-M"                #'ignore
+      "ESC C-<backspace>"  nil
+      "ESC C-<backspace>"  nil
+      "ESC C-<delete>"     nil
+      "ESC C-<down>"       nil
+      "ESC C-<end>"        nil
+      "ESC C-<home>"       nil
+      "ESC C-<left>"       nil
+      "ESC C-<right>"      nil
+      "ESC C-<up>"         nil
       )
 
 (map! :map global-map ;; Fn Disable

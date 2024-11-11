@@ -6,18 +6,16 @@
       ;; "," "<" "!" "?"
       :desc "Ibuffer"               "DEL" #'ibuffer
       :desc "Jump to bookmark"      "RET" #'bookmark-jump
-      ;; SPC - record macro (evil)
-
+      :desc "Record Macro"          "SPC" #'ignore
       :desc "Find file"             "."   #'find-file
-
-      :desc "Switch to last buffer" "TAB" #'evil-switch-to-windows-last-buffer
+      :desc "Switch to last buffer" "TAB" #'ignore
       :desc "Split Window"          "/"   #'split-window-right
       :desc "Toggle last popup"     "`"   #'+popup/toggle
 
       :desc "Eval expression"       "\""   #'pp-eval-expression
       :desc "M-x"                   ";"   #'execute-extended-command
 
-      :desc "Org Capture"           "X"   #'counsel-org-capture
+      :desc "Org Capture"           "X"   #'ignore
 
       ;; C-u is used by evil
       :desc "Universal argument"    "u"   #'universal-argument
@@ -43,27 +41,26 @@
 ;;-- <leader> b --- buffer
 (map! :leader
       :prefix ("b" . "buffer")
-      ;; DEL
-      ;; -
-      ;; n
+      "DEL" #'ignore
+      "-"   #'ignore
+      "n"   #'ignore
+
       :desc "Ediff Buffers"               "TAB" #'ediff-buffers
       :desc "Next buffer"                 "]"   #'next-buffer
       :desc "Previous buffer"             "["   #'previous-buffer
 
       :desc "Switch buffer"               "b"   #'switch-to-buffer
-      :desc "Create Buffer"               "c"   #'evil-buffer-new
+      :desc "Create Buffer"               "c"   #'ignore
       :desc "Kill buffer"                 "d"   #'kill-current-buffer
       :desc "Change Extension"            "e"   #'+jg-binding-change-ext
       :desc "Clone Indirect"              "i"   #'clone-indirect-buffer-other-window
       :desc "Kill all buffers"            "K"   #'doom/kill-all-buffers
-      ;; :desc "Local Variables"             "l"   #'+jg-bindings-list-buffer-locals
+      :desc "Local Variables"             "l"   #'ignore
 
       :desc "Kill other buffers"          "O"   #'doom/kill-other-buffers
       :desc "Read-only mode"              "r"   #'read-only-mode
       :desc "Revert buffer"               "R"   #'revert-buffer
-      :desc "Save all buffers"            "S"   #'evil-write-all
-      ;; :desc "Save buffer"                 "s"   #'basic-save-buffer
-      :desc "Stop using this"                 "s"   (cmd! (error "Stop Using This"))
+      :desc "Save all buffers"            "S"   #'ignore
       :desc "Bury buffer"                 "z"   #'bury-buffer
       )
 ;;-- end <leader> b --- buffer
@@ -105,13 +102,13 @@
 ;;-- <leader> i --- insert
 (map! :leader
       :prefix ("i" . "insert")
-      ;; d
-      :desc "Evil ex path"                  ":"   (cmd! (evil-ex "R!echo "))
-      :desc "From clipboard"                "y"   #'+default/yank-pop
-      :desc "From evil register"            "r"   #'counsel-evil-registers
-      :desc "From Minibuffer history"       "m"   #'counsel-minibuffer-history
+      "d" #'ignore
+      ":" #'ignore
+      :desc "From Kill Ring"                "y"   #'yank-pop
+      :desc "From register"                 "r"   #'ignore
+      :desc "From Minibuffer history"       "m"   #'ignore
       :desc "Unicode"                       "u"   #'insert-char
-      :desc "Snippet"                       "s"   #'yas-insert-snippet
+      :desc "Snippet"                       "s"   #'ignore
 
       )
 ;;-- end <leader> i --- insert
@@ -153,8 +150,8 @@
 ;;-- <leader> o --- open
 (map! :leader
       :prefix ("o" . "open")
-      :desc "Command History"              "DEL"  #'counsel-command-history
-      :desc "Minibuffer history"           "0"    #'counsel-minibuffer-history
+      :desc "Command History"              "DEL"  #'ignore
+      :desc "Minibuffer history"           "0"    #'ignore
 
       :desc "Default browser"              "b"    #'browse-url-of-file
       :desc "Calc"                         "C"    #'calc-dispatch
@@ -208,16 +205,9 @@
       :desc "Windows to Register"  "w" #'window-configuration-to-register
       :desc "Jump to Register"     "j" #'jump-to-register
       :desc "List Registers"       "l" #'list-registers
-      :desc "Killed Text"          "y" #'counsel-yank-pop
+      :desc "Killed Text"          "y" #'yank-pop
       )
 ;;-- end <leader> r -- REGISTERS
-
-;;-- <leader> R --- remote
-(map! :leader
-      :prefix "r"
-
-      )
-;;-- end <leader> R --- remote
 
 ;; -- <leader> s --- jump/search
 

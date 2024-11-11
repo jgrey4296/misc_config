@@ -9,12 +9,14 @@
 (advice-add 'Latex-fill-region-as-paragraph :around #'+latex-dont-indent-itemize-and-enumerate-a)
 (advice-add 'Latex-fill-region-as-para-do   :around #'+latex-re-indent-itemize-and-enumerate-a)
 
+(use-package! tex-mode) ;; built-in
+
 (use-package! auctex
-  :commands (LaTeX-mode latex-mode TeX-mode)
+  :disabled t
   )
 
 (use-package! tex ;; part of auctex
-  :commands (TeX-mode)
+  :after auctex
   :config
   (defvar LaTeX-indent-environment-list nil)
   (load! "+fontification")
@@ -37,7 +39,7 @@
   )
 
 (use-package! latex ;; part of auctex
-  :after tex
+  :after auctex
   :config
   (puthash "dropcap" #'+jg-latex-dropcap-opt-ivy jg-latex-insert-ivys)
 
@@ -81,7 +83,7 @@
   )
 
 (use-package! preview ;; part of auctex
-  :commands LaTeX-preview-setup
+  :after auctex
   :hook (LaTeX-mode . LaTeX-preview-setup)
   :config
   (setq-default preview-scale 1.4
@@ -92,7 +94,7 @@
   (setq preview-auto-cache-preamble nil)
   )
 
-(use-package! reftex
+(use-package! reftex ;; built-in
   :commands reftex-mode
   :hook (LaTeX-mode . reftex-mode)
   :config

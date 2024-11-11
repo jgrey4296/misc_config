@@ -44,7 +44,7 @@
 
 (map! :map dired-mode-map
       :localleader
-      "t" #'+jg-latex-dired-build-font-examples
+      "g t" #'+jg-latex-dired-build-font-examples
       )
 
 (after! latex

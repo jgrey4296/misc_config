@@ -5,11 +5,10 @@
 
 (spec-handling-setq! latex 50
                      ;; Use hidden directories for AUCTeX files.
-                     TeX-auto-local (expand-file-name "auctex/auto" user-cache-dir)
-                     TeX-style-local(expand-file-name "auctex/style" user-cache-dir)
-                     TeX-parse-self t ; parse on load
-                     TeX-auto-save t  ; parse on save
-                     TeX-source-correlate-mode t
+                     TeX-auto-local  nil
+                     TeX-style-local nil
+                     TeX-parse-self  nil ; parse on load
+                     TeX-auto-save   nil  ; parse on save
                      TeX-source-correlate-method 'synctex
                      TeX-source-correlate-start-server nil ;; Don't start the Emacs server when correlating sources.
                      TeX-electric-sub-and-superscript t    ;; Automatically insert braces after sub/superscript in `LaTeX-math-mode'.

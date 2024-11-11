@@ -173,15 +173,11 @@
 ;;-- refiling
 
 (defvar jg-org-refile-targets '((nil :maxlevel . 3)
-                                      (org-agenda-files :maxlevel . 3))
+                                (org-agenda-files :maxlevel . 3))
   )
 
-;; Without this, completers like ivy/helm are only given the first level of
-;; each outline candidates. i.e. all the candidates under the "Tasks" heading
-;; are just "Tasks/". This is unhelpful. We want the full path to each refile
-;; target! e.g. FILE/Tasks/heading/subheading
 (setq-default org-refile-use-outline-path 'file
-              org-outline-path-complete-in-steps t
+              org-outline-path-complete-in-steps nil ;; needss to be nil for ivy
               )
 
 ;;-- end refiling

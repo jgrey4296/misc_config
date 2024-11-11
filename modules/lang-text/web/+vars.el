@@ -178,4 +178,10 @@ If set to `nil', disable all the above behaviors.")
                       "Sass"
                       )
                     )
+
+(spec-handling-add! file-templates
+                    '(javascript
+                      ("\\.js\\'" :trigger "__"   :mode javascript-mode   :priority 100)
+                      )
+                    )
 ;;-- end specs

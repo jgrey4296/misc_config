@@ -1,5 +1,6 @@
 ;;; +funcs.el -*- lexical-binding: t; -*-
 
+;;;###autoload
 (defun +jg-xml-epub-manifest-generate ()
   (interactive)
   (let* ((marked (mapcar 'f-filename (dired-get-marked-files)))
@@ -36,6 +37,7 @@
     )
   )
 
+;;;###autoload
 (defun +jg-xml-validate ()
   (interactive)
   (let ((f-name (buffer-file-name))

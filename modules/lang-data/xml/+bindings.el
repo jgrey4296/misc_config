@@ -9,8 +9,8 @@
 
 (map! :map jg-dired-mode-map
       :localleader
-      :desc "Query Xml" :n "1"   #'+jg-xml-dired-run-xidel
-      :desc "Manifest"  :n "i m" #'+jg-xml-epub-manifest-generate
+      :desc "Query Xml" "f x"   #'+jg-xml-dired-run-xidel
+      :desc "Manifest"  "g m" #'+jg-xml-epub-manifest-generate
       )
 (map! :map jg-dired-mode-map
       :prefix ("> x" . "Xml/Json Utils")

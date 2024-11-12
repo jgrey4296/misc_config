@@ -35,22 +35,22 @@
       )
   )
 
-(setq ibuffer-show-empty-filter-groups nil
-      ibuffer-default-sorting-mode 'alphabetic
-      ibuffer-filter-group-name-face '(:inherit (success bold))
-      ibuffer-old-time 2
+(spec-handling-setq! ibuffer-show-empty-filter-groups nil
+                     ibuffer-default-sorting-mode 'alphabetic
+                     ibuffer-filter-group-name-face '(:inherit (success bold))
+                     ibuffer-old-time 2
 
-      jg-ibuffer-default-filter "-clutter"
-      jg-ibuffer-default-group "default"
-      jg-ibuffer-ivy-predicate-patterns (rx (or "*helpful"
-                                                "*helm-"
-                                                "doom"
-                                                "*dired-log"
-                                                "magit"
-                                                "*Free Keys"
-                                                )
-                                            )
-      )
+                     jg-ibuffer-default-filter "-clutter"
+                     jg-ibuffer-default-group "default"
+                     jg-ibuffer-ivy-predicate-patterns (rx (or "*helpful"
+                                                               "*helm-"
+                                                               "doom"
+                                                               "*dired-log"
+                                                               "magit"
+                                                               "*Free Keys"
+                                                               )
+                                                           )
+                     )
 
 ;;-- spec
 (spec-handling-add! popup

@@ -2,16 +2,15 @@
 
 (dlog! "Setting up Ibuffer bindings: %s" (current-time-string))
 
-(map! :leader
-      :desc "Ibuffer"               "DEL"   #'+jg-ibuffer-default
-      :desc "Switch buffer"         ","     #'+jg-ibuffer-ivy-buffer
-      )
-
-(setq jg-ibuffer-mode-map (make-keymap))
-
+(defvar jg-ibuffer-mode-map (make-keymap))
 (define-prefix-command 'jg-ibuffer-filter-map nil "ibuffer-filter")
 (define-prefix-command 'jg-ibuffer-sort-map   nil "ibuffer-sort")
 (define-prefix-command 'jg-ibuffer-mark-map   nil "ibuffer-mark")
+
+(map! :leader
+      [remap ibuffer]   #'+jg-ibuffer-default
+      :desc "Switch buffer"         ","     #'+jg-ibuffer-ivy-buffer
+      )
 
 (map! :map jg-ibuffer-mode-map
       :localleader

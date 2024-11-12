@@ -3,7 +3,7 @@
 
 (map! :map jg-binding-jump-map
       :desc "Paren State" "p"  #'evil-parenM-state
-      :dsec "Marks" "m" #'ignore
+      :desc "Marks" "m"        #'ignore
       )
 
 (map! :map evil-parenM-state-map

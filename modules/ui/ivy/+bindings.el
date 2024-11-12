@@ -1,6 +1,15 @@
 ;;; completion/ivy/+bindings.el -*- lexical-binding: t; -*-
 
 (dlog! "Setting up Completion bindings: %s" (current-time-string))
+(with-state! 'normal #'ivy-resume)
+(with-state! 'normal #'counsel-minibuffer-history)
+(with-state! 'normal #'counsel-imenu)
+(with-state! 'normal #'counsel-command-history)
+(with-state! 'normal #'counsel-yank-pop)
+(with-state! 'normal #'counsel-evil-registers)
+(with-state! 'normal #'counsel-evil-marks)
+(with-state! 'normal #'counsel-list-processes)
+
 
 (map! :leader
       :desc "Dir: General Insert"          "y 5" (cmd! (find-file general-insert-location))
@@ -15,7 +24,7 @@
 
 ;;-- ivy
 (map! :map jg-binding-jump-map
-      :desc "Ivy resume"            "`"   (with-state! 'normal #'ivy-resume)
+      :desc "Ivy resume"            "`"   #'ivy-resume--with-state-normal
       )
 
 (map! :map ivy-occur-grep-mode-map
@@ -34,8 +43,7 @@
 ;;-- counsel
 (map! :leader
       :desc "Org Capture"                  "X"     #'counsel-org-capture
-      :desc "From Minibuffer history"      "i m"   (with-state! 'normal #'counsel-minibuffer-history)
-      :desc "Yank-Pop"                     "i y"   (with-state! 'normal #'counsel-yank-pop)
+      :desc "From Minibuffer history"      "i m"   #'counsel-minibuffer-history--with-state-normal
       :desc "Killed Text"                  "r y"   #'counsel-yank-pop--with-state-normal
       )
 
@@ -55,19 +63,17 @@
       )
 
 (map! :map jg-binding-jump-map
-      :desc "Marks" "m"
-      "'" (with-state! 'normal #'counsel-imenu)
       )
 
 (map! :map jg-help-map
-      :desc "Command History"              "L"  (with-state! 'normal #'counsel-command-history)
+      :desc "Command History"              "L"  #'counsel-command-history--with-state-normal
       )
 
 (map!
-      [remap yank-pop]                      (with-state! 'normal #'counsel-yank-pop)
-      [remap evil-show-registers]           (with-state! 'normal #'counsel-evil-registers)
-      [remap evil-show-marks]               (with-state! 'normal #'counsel-evil-marks)
-      [remap list-processes]                (with-state! 'normal #'counsel-list-processes)
+      [remap yank-pop]                      #'counsel-yank-pop--with-state-normal
+      [remap evil-show-registers]           #'counsel-evil-registers--with-state-normal
+      [remap evil-show-marks]               #'counsel-evil-marks--with-state-normal
+      [remap list-processes]                #'counsel-list-processes--with-state-normal
       [remap isearch-forward]               #'swiper
       [remap isearch-backward]              #'swiper
       [remap swiper]                        #'counsel-grep-or-swip
@@ -86,7 +92,7 @@
       [remap execute-extended-command]      #'counsel-M-x
       [remap find-file]                     #'counsel-find-file
       [remap find-library]                  #'counsel-find-library
-      [remap imenu]                         #'counsel-imenu
+      [remap imenu]                         #'counsel-imenu--with-state-normal
       [remap info-lookup-symbol]            #'counsel-info-lookup-symbol
       [remap load-theme]                    #'counsel-load-theme
       [remap locate]                        #'counsel-locate

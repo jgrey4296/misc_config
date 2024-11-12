@@ -1,6 +1,7 @@
 ;; -*- lexical-binding: t -*-
 
 (defvar jg-ibuffer-generate-group-hook nil)
+(defvar jg-ibuffer-default-filter nil)
 
 (defun +jg-ibuffer-generate-project-groups ()
   "Create a set of ibuffer filter groups based on the projectile root dirs of buffers."
@@ -13,6 +14,7 @@
   )
 
 (defun +jg-ibuffer-run-generate-hook ()
+  " Run the ibuffer generate hook and return the list of groups to use "
   (append (cl-loop for fn in jg-ibuffer-generate-group-hook
                    append
                    (funcall fn)

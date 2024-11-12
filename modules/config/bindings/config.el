@@ -4,7 +4,7 @@
 
 (defer-load! (evil faster-whichkey) "+bindings" "+misc-bindings") ;; -> jg-bindings-core
 
-(after! (jg-evil-bindings which-key) (provide 'jg-bindings-total))
+(after! (jg-evil-bindings which-key jg-bindings-core) (provide 'jg-bindings-total))
 
 (use-package! faster-whichkey
   :after (general)

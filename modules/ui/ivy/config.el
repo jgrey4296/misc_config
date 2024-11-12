@@ -4,7 +4,7 @@
 (local-load! "+defs")
 (local-load! "+extra-config")
 
-(defer-load! jg-bindings-total "+bindings")
+(defer-load! (jg-evil-bindings jg-bindings-total) "+bindings")
 
 (defer-load! jg-evil-ex-bindings "+evil-ex")
 

@@ -2,22 +2,23 @@
 
 (evil-make-intercept-map jg-term-shell-mode-map)
 (evil-make-intercept-map jg-term-comint-mode-map)
+(with-state! 'normal #'counsel-shell-history)
 
 (map! :leader
       :desc "Pop Shell"             "'"   #'+jg-shell-new
       )
 
 (map! :map jg-term-shell-mode-map
-      :n "C-d" #'comint-send-eof
-      :n "DEL" (with-state! 'normal #'counsel-shell-history)
+      :n "C-d"  #'comint-send-eof
+      :n "DEL"  #'counsel-shell-history--with-state-normal
       :ni "RET" #'comint-send-input
-      :i "TAB" #'completion-at-point
+      :i "TAB"  #'completion-at-point
 
-      :n "," #'+jg-term-switch
-      :n "b" #'shell-backward-command
-      :n "w" #'shell-forward-command
-      :n "H" #'comint-show-output
-      :n "L" #'comint-show-maximum-output
+      :n ","    #'+jg-term-switch
+      :n "b"    #'shell-backward-command
+      :n "w"    #'shell-forward-command
+      :n "H"    #'comint-show-output
+      :n "L"    #'comint-show-maximum-output
 
       :localleader
       "h"   #'counsel-shell-history--with-state-normal

@@ -74,8 +74,8 @@
                     )
 
 (spec-handling-add! projects
-                    '(jg-rust ("Cargo.toml")     :project-file "Cargo.toml" :configure nil :test nil :test-dir nil :test-prefix nil :related-files-fn +jg-rust-related-files-fn)
-                    '(rust-cargo ("Cargo.toml") :project-file "Cargo.toml" :compilation-dir nil :configure nil :compile "cargo build" :test "cargo test" :install nil :package nil :run "cargo run")
+                    '(jg-rust ("Cargo.toml")     :project-file "Cargo.toml" :test nil :test-dir nil :test-prefix nil :related-files-fn +jg-rust-related-files-fn)
+                    '(rust-cargo ("Cargo.toml")  :project-file "Cargo.toml" :compilation-dir nil :configure nil :compile "cargo build" :test "cargo test" :install nil :package nil :run "cargo run")
                     )
 
 (spec-handling-add! docsets '(rust-mode "Rust"))

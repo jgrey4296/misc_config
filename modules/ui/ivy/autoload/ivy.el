@@ -263,8 +263,7 @@ The point of this is to avoid Emacs locking up indexing massive file trees."
 :recursive BOOL
   Whether or not to search files recursively from the base directory."
   (declare (indent defun))
-  (unless (executable-find "rg")
-    (user-error "Couldn't find ripgrep in your PATH"))
+  (unless (executable-find "rg") (user-error "Couldn't find ripgrep in your PATH"))
   (require 'counsel)
   (let* ((this-command 'counsel-rg)
          (project-root (or (doom-project-root) default-directory))

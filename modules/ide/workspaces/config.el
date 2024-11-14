@@ -14,6 +14,7 @@
 (advice-add 'projectile-default-generic-command :around   #'doom--projectile-default-generic-command-a)
 (advice-add 'evil-alternate-buffer              :override #'+workspaces--evil-alternate-buffer-a)
 (advice-add 'persp-buffers-to-savelist          :before   #'+workspaces-remove-dead-buffers-a)
+(advice-add 'projectile-invalidate-cache        :after    #'+jg-projects-invalidate-test-files-cache)
 
 (use-package! persp-mode
   :unless noninteractive

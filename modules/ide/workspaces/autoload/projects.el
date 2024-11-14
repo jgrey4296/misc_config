@@ -147,6 +147,43 @@
 ;;;###autoload
 (defun +jg-projects-detect-type ()
   (interactive)
-  (message "Project Type: %s" (projectile-detect-project-type default-directory))
-
+  (setq projectile-project-type (projectile-detect-project-type))
   )
+
+;;;###autoload
+(defun +jg-projects-test-dir ()
+  (interactive)
+  (or
+   (projectile-test-directory (+jg-projects-detect-type))
+   "__tests"
+   )
+  )
+
+(defvar jg-projects--test-files-cache nil)
+
+;;;###autoload
+(defun +jg-projects-invalidate-test-files-cache (&rest rst)
+  (setq jg-projects--test-files-cache nil)
+  )
+
+;;;###autoload
+(defun +jg-projects-test-files (&optional invalidate-cache)
+  " A Caching version of projectile-find-test-file"
+  (interactive "P")
+  (projectile-maybe-invalidate-cache invalidate-cache)
+  (when projectile-files-cache-expire
+    (let ((cache-time
+           (gethash (projectile-project-root) projectile-projects-cache-time)))
+      (when (or (null cache-time)
+                (< (+ cache-time projectile-files-cache-expire)
+                   (projectile-time-seconds)))
+        (projectile-invalidate-cache))))
+
+  ;; Use the cache, if requested and available.
+  (when projectile-enable-caching (setq files jg-projects--test-files-cache))
+
+  (when (null files) (setq jg-projects--test-files-cache (projectile-current-project-test-files)))
+
+  (let ((file (projectile-completing-read "Find test file: " files)))
+    (find-file (expand-file-name file (projectile-project-root))))
+)

@@ -62,11 +62,12 @@
 ;;-- counsel
 (defvar jg-ivy-file-regexp (rx anything))
 (defvar jg-ivy-file-reject-regexp (rx "test_" (+ anything)))
+(defvar jg-counsel-ignore-file (expand-file-name "tools/ignore/search_ignore" templates-loc))
 
 (spec-handling-setq! counsel 50
                      counsel--find-file-predicate #'+jg-ivy-file-predicate
                      counsel-find-file-extern-extensions   '("mp4" "mkv" "xlsx" "pdf" "epub")
-                     counsel-rg-base-command               '("rg"
+                     counsel-rg-base-command               `("rg"
                                                              "--max-columns" "240"
                                                              "--with-filename"
                                                              "--no-heading"

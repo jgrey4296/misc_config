@@ -8,7 +8,7 @@
                (project-exists (f-exists? project))
                (curr-file (buffer-file-name))
                )
-    (+jg-projects-pair-cmds
+    (-reject #'null (+jg-projects-pair-cmds
      ;; python
      '("shell" "echo 'shell: ' $0")
      '("py versions" "mamba info; python -V -V; pip --version ; pytest --version; echo 'Env ' $CONDA_DEFAULT_ENV; sphinx-build --version")
@@ -25,7 +25,7 @@
      '("sphinx py docs" "doot docs::build")
      (when (f-ext? curr-file "rst")
         `("docfile" ,(format "doot docs::build.file %s" curr-file)))
-     )
+     ))
     )
   )
 

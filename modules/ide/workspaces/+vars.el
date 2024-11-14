@@ -148,4 +148,10 @@
                       " " (mode 16 16 :left :elide)
                       " " workspace)
                       )
+
+(spec-handling-add! projects
+                    '(emacs-cask '("Cask") :project-file "Cask" :compile "cask install" :test-prefix "test-" :test-suffix "-test")
+                    '(emacs-eask '("Eask") :project-file "Eask" :compile "eask install" :test-prefix "test-" :test-suffix "-test")
+                    '(emacs-eldev #'projectile-eldev-project-p :project-file "Eldev" :compile "eldev compile" :test "eldev test" :run "eldev emacs" :package "eldev package")
+                    )
 ;;-- end specs

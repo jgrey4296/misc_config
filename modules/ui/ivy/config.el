@@ -14,14 +14,14 @@
   :hook (doom-first-input . ivy-mode)
   :init
   (let ((standard-search-fn #'ivy--regex-plus)
-        (alt-search-fn #'ivy--regex-ignore-order))
+        (alt-search-fn      #'ivy--regex-ignore-order))
     (setq ivy-re-builders-alist `((counsel-rg     . ,standard-search-fn)
                                   (swiper         . ,standard-search-fn)
                                   (swiper-isearch . ,standard-search-fn)
                                   (t . ,alt-search-fn))
-          ivy-more-chars-alist '((counsel-rg . 5)
-                                 (counsel-search . 5)
-                                 (t . 5))
+          ivy-more-chars-alist '((counsel-rg . 3)
+                                 (counsel-search . 3)
+                                 (t . 3))
           )
     )
 

@@ -63,6 +63,7 @@
       )
 
 (map! :map jg-binding-jump-map
+      :desc "Search current directory"    "/ d"  #'+ivy/project-search-from-cwd
       )
 
 (map! :map jg-help-map

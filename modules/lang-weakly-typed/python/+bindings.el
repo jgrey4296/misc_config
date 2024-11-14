@@ -113,7 +113,6 @@
       )
 
 (map! :map jg-dired-mode-map
-      :desc "Make Test dir"  :n "< t" (cmd! (dired-create-directory "__tests"))
       :desc "Make Docs dir"  :n "< d" (cmd! (dired-create-directory "docs"))
       :desc "Disassemble Python" :n "d ? p" #'+jg-python-dired-dis
       :localleader

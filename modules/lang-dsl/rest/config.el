@@ -9,8 +9,7 @@
   :hook (restclient-mode . display-line-numbers-mode)
   :config
 
-  (setq-hook! 'restclient-mode-hook
-    imenu-generic-expression '((nil "^[A-Z]+\s+.+" 0)))
+  (setq-hook! 'restclient-mode-hook imenu-generic-expression '((nil "^[A-Z]+\s+.+" 0)))
   (advice-add 'restclient-http-do :around #'+rest--permit-self-signed-ssl-a)
  )
 

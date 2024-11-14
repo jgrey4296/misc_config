@@ -24,18 +24,16 @@
 ;;-- debug
 (map! :map jg-help-map
       :prefix ("D" . "Debug")
-      "f" #'+jg-default-debug-auto-mode
-      "s" #'+jg-snippets-insert-debug
-      "l" #'+jg-lookup-debug-settings
-      "f" #'+jg-fold/debug
-      "i" #'+jg-ide-debug-lsp
-      "d" #'+jg-snippets-debug-dirs
-      "t" #'+file-templates/debug
-      "p" #'+popup/diagnose
-      "c" #'flycheck-describe-checker
-      "w" #'+jg-projects-detect-type
+      :desc "Describe Auto Mode"       "a" #'+jg-default-debug-auto-mode
+      :desc "Debug Snippet Insert"     "s" #'+jg-snippets-insert-debug
+      :desc "Describe Fold Settings"   "f" #'+jg-fold/debug
+      :desc "Describe LSP"             "l" #'+jg-ide-debug-lsp
+      :desc "Describe Snippet Dirs"    "S" #'+jg-snippets-debug-dirs
+      :desc "Describe File Template"   "t" #'+file-templates/debug
+      :desc "Describe Popup"           "p" #'+popup/diagnose
+      :desc "Describe Flycheck"        "c" #'flycheck-describe-checker
+      :desc "Detect Project Type"      "P" #'+jg-projects-detect-type
       )
-
 ;;-- end debug
 
 ;;-- docs

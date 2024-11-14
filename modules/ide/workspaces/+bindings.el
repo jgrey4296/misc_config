@@ -23,17 +23,20 @@
       :prefix ("p" . "project")
       :desc "run cmd in project root"      "!"    #'projectile-run-shell-command-in-root
       :desc "root shell"                   "'"    #'projectile-run-shell
-      :desc "search project for symbol"    "."    #'+jg-workspaces-search-project-for-symbol-at-point
-      :desc "find file in project"         "f"    #'projectile-find-file
-      :desc "find other file"              "o"    #'+jg-projects-find-related
+      :desc "search project for symbol"    "."    #'this-does-nothing
+      :desc "find file in project"         "f"    #'this-does-nothing
+      :desc "find other file"              "o"    #'this-does-nothing
       :desc "compile in project"           "c"    #'projectile-compile-project
-      :desc "Search project"               "p"    #'+default/search-project
+      :desc "Search project"               "p"    #'this-does-nothing
       )
 
 (map! :map jg-binding-jump-map
+      :desc "Jump to related"              "r"   #'+jg-projects-find-related
       :desc "Search project"               "/ p" #'+jg-workspaces-search-project
       :desc "Search project for symbol"    "/ ." #'+jg-workspaces-search-project-for-symbol-at-point
-      :desc "Jump to related"              "r"   #'+jg-projects-find-related
+      :desc "Find File in Project"         "/ f" #'projectile-find-file
+      :desc "Find test file"               "/ t" #'+jg-projects-test-files
+      :desc "Find Related"                 "/ r" #'+jg-projects-find-related
       )
 
 ;;-- zimmerframe
@@ -82,3 +85,7 @@
       :after jg-help-bindings
       "d p" #'+jg-projects-detect-type
   )
+
+(map! :map jg-dired-mode-map
+      :desc "Make Test dir"  :n "< t" (cmd! (dired-create-directory (+jg-projects-test-dir)))
+      )

@@ -15,12 +15,10 @@
 (map! :map jg-binding-jump-map
       :desc "Open to visible link"         "," #'link-hint-open-link
       (:prefix ("o" . "Org")
-       :desc "Search Notes Headlines" "h" #'+default/org-notes-headlines
+       :desc "Search Notes Headlines"      "h" #'+default/org-notes-headlines
        )
       (:prefix "/"
        :desc "Jump to link"                 "L" #'ffap-menu
-       ;; :desc "Search current directory"    "d"  #'fd-dired
-       :desc "Search current directory"    "d"  #'+default/search-cwd
        :desc "Search Notes"                "n"  #'+default/search-notes-for-symbol-at-point
        :desc "Search Org Dir"              "o"  #'+default/org-notes-search
       )

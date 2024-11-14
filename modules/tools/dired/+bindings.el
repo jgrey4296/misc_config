@@ -19,7 +19,7 @@
 (map! :map jg-dired-mode-map ;; main
       "?"                           #'+jg-dired-group-helper
       :n "DEL"                      #'dired-kill-subdir
-      :n "RET"                      #'dired-do-find-marked-files
+      :n "RET"                      #'dired-find-file
       :nv "q"                       #'+jg-dired-kill-subdir-or-close-buffer
       :n "!"                        #'dired-do-shell-command
       :n "@"                        #'dired-do-async-shell-command
@@ -43,12 +43,13 @@
       :n "U"                                      #'dired-unmark-all-marks
       :n "C"                                      #'dired-compare-directories
 
-      :prefix ("M" . "Mark")
+      (:prefix ("M" . "Mark")
       :desc "flag garbage files"           :n "x" #'dired-flag-garbage-files
       :desc "mark files containing regexp" :n "g" #'dired-mark-files-containing-regexp
       :desc "mark files regexp"            :n "m" #'dired-mark-files-regexp
       :desc "mark symlinks"                :n "s" #'dired-mark-symlinks
       :desc "mark hash duplicates"         :n "h" #'+jg-dired-hash-duplicates
+      )
 )
 (map! :map jg-dired-mode-map ;; movement
       :n "-"                          #'dired-up-directory
@@ -135,11 +136,11 @@
        :desc "Import Keys" :n "i" #'epa-import-keys
        :desc "Export Keys" :n "E" #'+jg-dired-epa-export-keys
        )
-
       )
 
 (map! :map jg-dired-mode-map ;; localleader
       :localleader
+      :desc "Find Marked Files" "RET" #'dired-do-find-marked-files
       :desc "Start Server" "S" #'+jg-dired-async-server
       (:prefix ("f" . "Find")
        :desc "Find Marked Files" "f" #'dired-do-find-marked-files
@@ -147,6 +148,7 @@
        )
       (:prefix ("g" . "Generate")
        :desc "Cookiecutter" "c" #'+jg-dired-cookiecutter
+       :desc "Export Keys"  "K" #'+jg-dired-epa-export-keys
        )
       )
 (map! :map dirvish-mode-map
@@ -159,6 +161,18 @@
       :localleader
       "h" #'dired-omit-mode)
 
+(map! :map jg-binding-jump-map
+      :prefix "/"
+      :desc "Fd Find" "F"  #'fd-dired
+      )
+
 (setq dired-mode-map jg-dired-mode-map)
+
+(general-define-key :keymaps '(jg-dired-mode-map)
+                    :states 'normal
+                    :prefix
+                    (general--concat t "e" "k")
+                    ""
+                    (list :ignore t :which-key "Keys"))
 
 (provide 'jg-dired-bindings)

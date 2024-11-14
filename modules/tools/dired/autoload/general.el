@@ -210,6 +210,7 @@ Type SPC or `y' to %s one match, DEL or `n' to skip to next,
 
 ;;;###autoload
 (defun +jg-dired-epa-export-keys (prefix)
+  "use prefix key to export secret keys"
   (interactive "P")
   (let* ((context (epg-make-context epa-protocol epa-armor))
          (keys (epa-select-keys context "Select Keys to Export"))

@@ -7,8 +7,9 @@
 (define-prefix-command 'jg-ibuffer-sort-map   nil "ibuffer-sort")
 (define-prefix-command 'jg-ibuffer-mark-map   nil "ibuffer-mark")
 
+(map! [remap ibuffer]   #'+jg-ibuffer-default)
+
 (map! :leader
-      [remap ibuffer]   #'+jg-ibuffer-default
       :desc "Switch buffer"         ","     #'+jg-ibuffer-ivy-buffer
       )
 

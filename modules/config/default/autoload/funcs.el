@@ -6,3 +6,9 @@
           (equal "sudo" (file-remote-p file 'method)))
       (abbreviate-file-name (file-truename (tramp-file-name-localname file)))
     file))
+
+;;;###autoload
+(defun this-does-nothing ()
+  (interactive)
+  (user-error "This Does Nothing")
+  )

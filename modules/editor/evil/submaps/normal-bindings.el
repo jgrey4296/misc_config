@@ -73,7 +73,7 @@
       :desc "Redisplay"          "§"   (cmd! (redisplay t))
       :desc "Set Marker"         "m"   #'evil-set-marker
       :desc "Replace"            "r"   #'evil-replace
-      :desc "Does Nothing"       "q"   (cmd! (error "This does Nothing"))
+      :desc "Does Nothing"       "q"   #'this-does-nothing
 
       :desc "Undo"               "u"   #'evil-undo
       :desc "Yank"               "y"   #'evil-yank

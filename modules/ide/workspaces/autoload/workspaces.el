@@ -1,6 +1,7 @@
 ;;; ui/workspaces/autoload/workspaces.el -*- lexical-binding: t; -*-
 
 (defvar +workspace--last nil)
+
 (defvar +workspace--index 0)
 
 ;;;###autoload
@@ -12,7 +13,6 @@
 (defface +workspace-tab-face '((t (:inherit default)))
   "The face for selected tabs displayed by `+workspace/display'"
   :group 'persp-mode)
-
 
 ;;
 ;;; Library
@@ -27,8 +27,8 @@
                finally return (if max (1+ max)))
       1))
 
-
 ;;; Predicates
+
 ;;;###autoload
 (defalias #'+workspace-p #'perspective-p
   "Return t if OBJ is a perspective hash table.")
@@ -42,8 +42,8 @@
 (defalias #'+workspace-contains-buffer-p #'persp-contain-buffer-p
   "Return non-nil if BUFFER is in WORKSPACE (defaults to current workspace).")
 
-
 ;;; Getters
+
 ;;;###autoload
 (defalias #'+workspace-current #'get-current-persp
   "Return the currently active workspace.")
@@ -93,8 +93,8 @@ PERSP can be a string (name of a workspace) or a workspace (satisfies
   "Return a list of buffers that aren't associated with any perspective."
   (cl-remove-if #'persp--buffer-in-persps (buffer-list)))
 
-
 ;;; Actions
+
 ;;;###autoload
 (defun +workspace-load (name)
   "Loads a single workspace (named NAME) into the current session. Can only
@@ -180,7 +180,6 @@ throws an error."
                 +workspaces-main))
       (persp-frame-switch name))
     (equal (+workspace-current-name) name)))
-
 
 ;;
 ;;; Commands
@@ -343,7 +342,6 @@ end of the workspace list."
             (+workspace/display))))
     ('error (+workspace-error (cadr ex) t))))
 
-
 ;;;###autoload
 (dotimes (i 9)
   (defalias (intern (format "+workspace/switch-to-%d" i))
@@ -434,7 +432,6 @@ the next."
   (interactive "p")
   (funcall-interactively #'+workspace/swap-left (- count)))
 
-
 ;;
 ;;; Tabs display in minibuffer
 
@@ -480,7 +477,6 @@ the next."
   (let (message-log-max)
     (message "%s" (+workspace--tabline))))
 
-
 ;;
 ;;; Hooks
 
@@ -512,6 +508,7 @@ created."
       (run-at-time 0.1 nil #'+workspace/display))))
 
 (defvar +workspaces--project-dir nil)
+
 ;;;###autoload
 (defun +workspaces-set-project-action-fn ()
   "A `projectile-switch-project-action' that sets the project directory for

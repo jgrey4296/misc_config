@@ -9,12 +9,12 @@
                 (cargo-exists (f-exists? cargo))
                 )
     (+jg-projects-annotate-cmds
-     '("build       Compile the current package"
-       "check       Analyze the current package and report errors, but don't build object files"
-       "clean       Remove the target directory"
+     '("build       Compile the current crate"
+       "check       Report crate errors"
+       "clean       Remove the crate build directory"
        "doc         Build this package's and its dependencies' documentation"
-       "new         Create a new cargo package"
-       "init        Create a new cargo package in an existing directory"
+       "new         Create a new cargo crate"
+       "init        Create a new cargo module in an existing directory"
        "add         Add dependencies to a manifest file"
        "remove      Remove dependencies from a manifest file"
        "run         Run a binary or example of the local package"

@@ -3,3 +3,4 @@
 
 (package! quickrun)
 (package! eros)
+(package! compile)

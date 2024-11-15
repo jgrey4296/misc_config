@@ -12,7 +12,7 @@
 ;;;###autoload
 (defun +jg-dired-touch (target)
   (interactive "MTouch File: \n")
-  (call-process "touch" nil nil nil (f-join default-directory target))
+  (call-process "touch" nil nil nil (expand-file-name target default-directory))
   )
 
 ;;;###autoload

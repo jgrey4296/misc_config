@@ -32,32 +32,29 @@
 (defvar jg-dired-omit-file-sources `(,(expand-file-name "~/.gitignore_global")
                                      ,(expand-file-name "tools/ignore/search_ignore" templates-loc)
                                      ))
-(defvar jg-dired-omit-extensions '(
-                                   (
-                                    ".a" ".annot" ".aux"
-                                    ".bbl" ".beam" ".bin" ".blg" ".bzr/"
-                                    ".class" ".cm/" ".cma" ".cmi" ".cmo" ".cmt" ".cmti" ".cmx" ".cmxa" ".cp" ".cps"
-                                    ".d64fsl" ".dfsl" ".dx32fsl" ".dx64fsl" ".dxl"
-                                    ".elc"
-                                    ".fas" ".fasl" ".fmt" ".fn" ".fns" ".fsl" ".fx32fsl" ".fx64fsl"
-                                    ".git/" ".glo" ".glob" ".gmo"
-                                    ".hg/" ".hi"
-                                    ".idx"
-                                    ".jam"
-                                    ".ky" ".kys"
-                                    ".la" ".lbin" ".lib" ".ln" ".lo" ".lof" ".lot" ".lx32fsl" ".lx64fsl"
-                                    ".mem" ".mo"
-                                    ".o"
-                                    ".p64fsl" ".pfsl" ".pg" ".pgs" ".phi" ".pho" ".pyc" ".pyo"
-                                    ".so" ".sparcf" ".svn/" ".sx32fsl" ".sx64fsl"
-                                    ".tfm" ".toc" ".tp" ".tps" ".ufsl"
-                                    ".vee" ".vo" ".vok" ".vos" ".vr" ".vrs"
-                                    ".wx32fsl" ".wx64fsl"
-                                    ".x86f"
-                                    "CVS/" "_MTN/" "_darcs/" "~"
+(defvar jg-dired-omit-extensions '(".a" ".annot" ".aux"
+                                   ".bbl" ".beam" ".bin" ".blg" ".bzr/"
+                                   ".class" ".cm/" ".cma" ".cmi" ".cmo" ".cmt" ".cmti" ".cmx" ".cmxa" ".cp" ".cps"
+                                   ".d64fsl" ".dfsl" ".dx32fsl" ".dx64fsl" ".dxl"
+                                   ".elc"
+                                   ".fas" ".fasl" ".fmt" ".fn" ".fns" ".fsl" ".fx32fsl" ".fx64fsl"
+                                   ".git/" ".glo" ".glob" ".gmo"
+                                   ".hg/" ".hi"
+                                   ".idx"
+                                   ".jam"
+                                   ".ky" ".kys"
+                                   ".la" ".lbin" ".lib" ".ln" ".lo" ".lof" ".lot" ".lx32fsl" ".lx64fsl"
+                                   ".mem" ".mo"
+                                   ".o"
+                                   ".p64fsl" ".pfsl" ".pg" ".pgs" ".phi" ".pho" ".pyc" ".pyo"
+                                   ".so" ".sparcf" ".svn/" ".sx32fsl" ".sx64fsl"
+                                   ".tfm" ".toc" ".tp" ".tps" ".ufsl"
+                                   ".vee" ".vo" ".vok" ".vos" ".vr" ".vrs"
+                                   ".wx32fsl" ".wx64fsl"
+                                   ".x86f"
+                                   "CVS/" "_MTN/" "_darcs/" "~"
                                     )
                                    )
-  )
 (rx-let ((filename (*? graph))
          (system (| "." "TheVolumeSettingsFolder" (: ?. (? filename) "cache") "_cache_"))
          (dotfiles (: ?. (? "_.") (| "CFUserTextEncoding" "DS_Store" "DocumentRevisions-V100" "PKInstallSandboxManager"

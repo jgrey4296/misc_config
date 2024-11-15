@@ -40,7 +40,7 @@ If prefix ARG is set, include ignored/hidden files."
          (directory (or in project-root))
          (args (concat (if all-files
                            " --hidden -g!.git " ;; Hidden, but not in .git
-                           ,(format "--ignore-file=%s" jg-counsel-ignore-file))
+                           (format "--ignore-file=%s" jg-counsel-ignore-file))
                        (unless recursive " --maxdepth 1")
                        (mapconcat #'shell-quote-argument args " ")
                        ))

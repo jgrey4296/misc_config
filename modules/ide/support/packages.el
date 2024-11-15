@@ -17,6 +17,6 @@
 (package! treesit :built-in t)
 (package! tree-sitter)
 (package! tree-sitter-indent)
-(package! tree-sitter-langs)
+(package! tree-sitter-langs :pin "213b1c4db852a97480e029453af869ff1a0764e0")
 
 (package! lint-result-mode :recipe (:host github :repo "jgrey4296/misc-modes" :files ("major-modes/lint-result-mode/*.el")))

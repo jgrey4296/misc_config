@@ -15,3 +15,4 @@
 (package! s)
 (package! a)
 (package! f)
+(package! compat :recipe (:host github :repo "emacs-compat/compat"))

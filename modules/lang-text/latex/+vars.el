@@ -7,8 +7,11 @@
                      ;; Use hidden directories for AUCTeX files.
                      TeX-auto-local  nil
                      TeX-style-local nil
+                     TeX-style-path (list (expand-file-name "auctex/" user-cache-dir))
                      TeX-parse-self  nil ; parse on load
                      TeX-auto-save   nil  ; parse on save
+                     TeX-auto-private (expand-file-name "auctex/" user-cache-dir)
+                     TeX-style-private (expand-file-name "auctex/" user-cache-dir)
                      TeX-source-correlate-method 'synctex
                      TeX-source-correlate-start-server nil ;; Don't start the Emacs server when correlating sources.
                      TeX-electric-sub-and-superscript t    ;; Automatically insert braces after sub/superscript in `LaTeX-math-mode'.

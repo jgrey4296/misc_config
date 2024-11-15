@@ -142,19 +142,17 @@
 
       )
 
-(map! :map dired-mode-map
+(map! :map jg-dired-mode-map
       :after jg-dired-bindings
       :desc "Mark Orgs" "Mo" #'+jg-org-dired-select-org
       :desc "Display Selection" "os" #'+jg-org-display-selection
 
-      (:prefix (">o" . "Org")
+      (:prefix ("c f o" . "Org")
         "e" #'+jg-org-dired-export
         )
 
       :localleader
-      (:prefix ("K" . "Destructive")
-       :desc "Clean Marked" "c"     #'+jg-org-dired-clean
-       )
+      :desc "Clean Marked" "K c"     #'+jg-org-dired-clean
       )
 
 (map! :map jg-org-capture-map

@@ -13,9 +13,9 @@
       :desc "Manifest"  "g m" #'+jg-xml-epub-manifest-generate
       )
 (map! :map jg-dired-mode-map
-      :prefix ("> x" . "Xml/Json Utils")
+      :after jg-dired-bindings
+      :prefix ("c f x" . "Xml/Json Utils")
       :desc "Query"    "?" #'+jg-xml-dired-run-xidel
-
       :desc "Elements"        "e" #'+jg-xml-dired-elements
       :desc "Select"          "q" #'+jg-xml-dired-select
       :desc "Validate"        "v" #'+jg-xml-dired-validate

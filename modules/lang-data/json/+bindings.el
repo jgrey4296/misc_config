@@ -10,11 +10,10 @@
       "s" #'counsel-jq)
 
 (map! :map jg-dired-mode-map
-      (:prefix ("> j" . "jq")
-       :desc "Format" "f" #'+jg-json-jq-format
-       :desc "Manual" "?" (cmd! (+jg-browse-url "https://stedolan.github.io/jq/manual/"))
-       :desc "Expr"   "e" #'+jg-json-jq-expr
+      (:prefix ("c f j" . "Json")
+       :desc "Format"              "f" #'+jg-json-jq-format
+       :desc "Expr"                "e" #'+jg-json-jq-expr
+       :desc "Reformat jsons"      "F" #'+jg-dired-reformat-jsons
+       :desc "Manual"              "?" (cmd! (+jg-browse-url "https://stedolan.github.io/jq/manual/"))
        )
-
-      :desc "Reformat jsons"      :n "cJ" #'+jg-dired-reformat-jsons
       )

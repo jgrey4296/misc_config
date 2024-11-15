@@ -139,9 +139,9 @@
 ;;-- end helm
 
 ;;-- dired
-(map! :map dired-mode-map
+(map! :map jg-dired-mode-map
       :after jg-dired-bindings
-      :prefix ("> b" . "bibtex")
+      :prefix ("c f b" . "bibtex")
       :desc "Generate Tex for marked Bibtex" "g" #'+jg-bibtex-dired-generate-tex
       :desc "Compile marked tex"             "C" #'+jg-bibtex-dired-compile-run
       :desc "Check pdf existence"            "?" #'+jg-bibtex-dired-check-pdfs

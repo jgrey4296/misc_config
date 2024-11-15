@@ -17,6 +17,7 @@
                     )
 
 (map! :map jg-dired-mode-map
-      :prefix ("> n" . "nushell")
-      :desc "Command" "c" #'+jg-nu-command
+      :after jg-dired-bindings
+      :prefix ("c f n" . "nushell")
+      :desc "Nu Command" "c" #'+jg-nu-command
       )

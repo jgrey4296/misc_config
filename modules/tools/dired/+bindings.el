@@ -7,8 +7,7 @@
 ;; (evil-make-intercept-map jg-dired-mode-map)
 
 (map! :leader
-      :prefix "f"
-      "t" #'+jg-list-trash
+      "f t" #'+jg-list-trash
       )
 
 (defun +jg-dired-group-helper ()
@@ -16,8 +15,28 @@
   (message "Dired Groups: (M)ark, (c)hange, (d)escribe, (o)pen, (e)ncrypt, (s)ort ")
   )
 
+(map! :map jg-dired-mode-map ;; group
+      (:prefix ("M" . "Mark"))
+      (:prefix "]")
+      (:prefix "[")
+      (:prefix ("c" . "Change"))
+      (:prefix ("c f" . "File Changes"))
+      (:prefix ("c d" . "Dir Changes"))
+      (:prefix ("d ?" . "Disassembly"))
+      (:prefix ("o" . "Open"))
+      (:prefix ("e" . "Encryption"))
+      (:prefix ("e k" . "Keys"))
+
+      ">" nil
+      :localleader
+      (:prefix ("f" . "Find"))
+      (:prefix ("g" . "Generate"))
+      (:prefix ("K" . "Destructive"))
+
+      )
+
 (map! :map jg-dired-mode-map ;; main
-      "?"                           #'+jg-dired-group-helper
+      :n "?"                        #'+jg-dired-group-helper
       :n "DEL"                      #'dired-kill-subdir
       :n "RET"                      #'dired-find-file
       :nv "q"                       #'+jg-dired-kill-subdir-or-close-buffer
@@ -34,7 +53,7 @@
       :desc "Expand Marked"  :n "I" #'+jg-dired-insert-marked-subdir
       :n "y" #'dired-copy-filename-as-kill
       :n "Y" (cmd! (dired-copy-filename-as-kill 0))
-      :desc "Fd File"        :n  "sf" #'fd-dired
+      :desc "Fd File"        :n  "s f" #'fd-dired
       )
 (map! :map jg-dired-mode-map ;; mark
       :n "t"                                      #'dired-toggle-marks
@@ -73,6 +92,11 @@
 (map! :map jg-dired-mode-map ;; change
       :desc "Delete"              :n "D" #'+jg-dired-async-trash
       :desc "Touch"               :n "=" #'+jg-dired-touch
+      :desc "New Dir"             :n "c d n" #'dired-create-directory
+      :desc "Make Tasks Dir"      :n "c d t" (cmd! (dired-create-directory ".tasks"))
+      :desc "Make Docs Dir"       :n "c d d" (cmd! (dired-create-directory "docs"))
+      :desc "Make Tests Dir"      :n "c d x" (cmd! (dired-create-directory "__tests"))
+      :desc "Project"             :n "c p" #'+jg-dired-cookiecutter
 
       :prefix ("c" . "Change")
       :desc "Replace grep"        :n "G" #'dired-do-find-regexp-and-replace
@@ -84,20 +108,13 @@
       :desc "compress to"         :n "Z" #'dired-do-compress-to
       :desc "compress"            :n "z" #'dired-do-compress
       :desc "copy"                :n "c" #'dired-do-copy
-      :desc "downcase"            :n "d" #'dired-downcase
+      :desc "downcase"            :n "j" #'dired-downcase
+      :desc "upcase"              :n "k" #'dired-upcase
       :desc "move"                :n "m" #'dired-do-rename
       :desc "new dir"             :n "n" #'dired-create-directory
       :desc "rename"              :n "r" #'+jg-dired-rename
-      :desc "upcase"              :n "u" #'dired-upcase
-      :desc "Project"             :n "p" #'+jg-dired-cookiecutter
       )
-(map! :map jg-dired-mode-map ;; change, specific
-      (:prefix (">" . "File Type Specific")
-       )
-      (:prefix ("<" . "Make std dirs")
-       :desc "Make Tasks Dir" :n "." (cmd! (dired-create-directory ".tasks"))
-       )
-      )
+
 (map! :map jg-dired-mode-map ;; describe
       :prefix ("d" . "describe")
       :desc "Marked Count"     :n "c" #'+jg-dired-marked-info
@@ -112,7 +129,6 @@
       :desc "Git Info"         :n "g" #'dired-git-info-mode
       :desc "File Path"        :n "p" (cmd! (dired-copy-filename-as-kill 0))
       :desc "File Name"        :n "n" #'dired-copy-filename-as-kill
-      (:prefix ("?" . "Disassembly"))
       )
 (map! :map jg-dired-mode-map ;; open
       :prefix ("o" . "Open")
@@ -162,17 +178,16 @@
       "h" #'dired-omit-mode)
 
 (map! :map jg-binding-jump-map
-      :prefix "/"
-      :desc "Fd Find" "F"  #'fd-dired
+      :desc "Fd Find" "/ F"  #'fd-dired
       )
 
 (setq dired-mode-map jg-dired-mode-map)
 
-(general-define-key :keymaps '(jg-dired-mode-map)
-                    :states 'normal
-                    :prefix
-                    (general--concat t "e" "k")
-                    ""
-                    (list :ignore t :which-key "Keys"))
+;; (general-define-key :keymaps '(jg-dired-mode-map)
+;;                     :states 'normal
+;;                     :prefix
+;;                     (general--concat t "e" "k")
+;;                     ""
+;;                     (list :ignore t :which-key "Keys"))
 
 (provide 'jg-dired-bindings)

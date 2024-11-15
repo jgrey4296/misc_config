@@ -113,10 +113,10 @@
       )
 
 (map! :map jg-dired-mode-map
-      :desc "Make Docs dir"  :n "< d" (cmd! (dired-create-directory "docs"))
       :desc "Disassemble Python" :n "d ? p" #'+jg-python-dired-dis
       :localleader
       :desc "Python site-packages" "f p" #'+jg-python-try-site-packages
+      :desc "Make __init__.py"     "g i" (cmd! (+jg-dired-touch "__init__.py"))
       )
 
 (map! :map comint-mode-map

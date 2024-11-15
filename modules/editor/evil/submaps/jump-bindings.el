@@ -1,5 +1,12 @@
 ;;; +jump-map.el -*- lexical-binding: t; -*-
 
+(map! :map jg-binding-jump-map ;; groups
+      (:prefix ("d" . "Dirs"))
+      (:prefix ("k" . "Documentation"))
+      (:prefix ("g" . "gtags"))
+      (:prefix ("/" . "Search"))
+      )
+
 (map! :map jg-binding-jump-map ;; avy
       ;; 1 2 3 "u" "h"
       ;; :desc "Ivy resume"            "`"   #'ivy-resume
@@ -16,16 +23,13 @@
       ;; :desc "Jump to Window"        "w"   #'ace-window
       :desc "Jump to mark"          "m"   #'evil-show-marks
       :desc "Pop Mark"              "b"   #'avy-pop-mark
-      :desc "Push Mark"             "B" (cmd! (avy-push-mark))
+      :desc "Push Mark"             "B"   (cmd! (avy-push-mark))
       :desc "Goto First Line"       "f"   #'evil-goto-first-line
       :desc "Goto Last Line"        "F"   #'evil-goto-line
       :desc "Search buffer"         "s"   #'isearch-forward
 
       :desc "Buffer Start"          "<"   #'beginning-of-buffer
       :desc "Buffer End"            ">"   #'end-of-buffer
-      )
-(map! :map jg-binding-jump-map ;; gtags
-      :prefix ("g" . "gtags")
       )
 (map! :map jg-binding-jump-map ;; search
       :prefix ("/" . "Search")

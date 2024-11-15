@@ -119,7 +119,7 @@
 
 (map! :map dired-mode-map
       :after jg-dired-bindings
-      :prefix ("> l" . "lisp")
+      :prefix ("c f l" . "lisp")
       :desc "byte compile"        "c" #'dired-do-byte-compile
       )
 

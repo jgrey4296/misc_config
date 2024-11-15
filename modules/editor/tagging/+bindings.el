@@ -13,9 +13,9 @@
        :desc "Count Untagged Orgs" "du"   #'+jg-tag-dired-directory-count-untagged
        :desc "Describe Marked Tags" "dt"  #'+jg-tag-dired-describe-marked-tags
 
-      (:prefix (">i" . "Index")
+      (:prefix ("c f t" . "Tag Index")
        :desc "Index People" "p"          #'+jg-tag-index-people
-       :desc "Index Tags" "t"            #'+jg-tag-index-tags
+       :desc "Index Tags"   "t"          #'+jg-tag-index-tags
        )
       )
 

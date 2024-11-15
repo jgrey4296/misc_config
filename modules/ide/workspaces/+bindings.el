@@ -7,15 +7,14 @@
   [remap evil-window-delete] #'+workspace/close-window-or-workspace)
 
 (map! :leader
-      :desc "Workspace Control"        "W"     #'+jg-workspace-run-transient
-      :desc "Carousel Control"         "R"     #'jg-workspace-run-carousel-transient
-      :desc "Workspace Counsel"        "w RET" #'+jg-workspaces-ivy
+      :desc "Workspace Control"        "w RET"           #'+jg-workspace-run-transient
+      :desc "Carousel Control"         "r RET"               #'jg-workspace-run-carousel-transient
+      :desc "Carousel Control"         "R"               #'jg-workspace-run-carousel-transient
+      :desc "Workspace Counsel"        "W"               #'+jg-workspaces-ivy
+      :desc "Goto Root"                    "p `"         #'this-does-nothing
       (:prefix ("w" . "Windows")
        :desc "Delete workspace"             "DEL"   #'+workspace/delete
        :desc "Workspace Control"            "w"     #'+jg-workspace-run-transient
-       )
-      (:prefix "p"
-       :desc "Goto Root"                    "`"     (cmd! (find-file (projectile-project-root)))
        )
       )
 
@@ -32,6 +31,7 @@
 
 (map! :map jg-binding-jump-map
       :desc "Jump to related"              "r"   #'+jg-projects-find-related
+       :desc "Goto Root"                   "/ `" (cmd! (find-file (projectile-project-root)))
       :desc "Search project"               "/ p" #'+jg-workspaces-search-project
       :desc "Search project for symbol"    "/ ." #'+jg-workspaces-search-project-for-symbol-at-point
       :desc "Find File in Project"         "/ f" #'projectile-find-file

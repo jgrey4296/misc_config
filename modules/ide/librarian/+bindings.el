@@ -25,11 +25,11 @@
       )
 
 (map! :map librarian-mode-map
-      :prefix "s"
-      :desc "Browse URL"             :n "u" #'librarian-url
+      :prefix ("s" . "Jump")
+      :desc "Browse URL"                :n "u" #'librarian-url
       :desc "Librarian Regular"         :n "1" #'librarian-regular-go
 
-      (:prefix "k"
+      (:prefix ("k" . "Documentation")
        :desc "Choose Handler"                :n ";" #'librarian-choose
        :desc "Assignments"                   :n "a" #'librarian-assignments
        :desc "Type definition"               :n "t" #'librarian-type-definition

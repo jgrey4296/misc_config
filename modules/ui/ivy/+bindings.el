@@ -3,7 +3,7 @@
 (dlog! "Setting up Completion bindings: %s" (current-time-string))
 (with-state! 'normal #'ivy-resume)
 (with-state! 'normal #'counsel-minibuffer-history)
-(with-state! 'normal #'counsel-imenu)
+(with-state! 'insert #'counsel-imenu)
 (with-state! 'normal #'counsel-command-history)
 (with-state! 'normal #'counsel-yank-pop)
 (with-state! 'normal #'counsel-evil-registers)
@@ -93,7 +93,7 @@
       [remap execute-extended-command]      #'counsel-M-x
       [remap find-file]                     #'counsel-find-file
       [remap find-library]                  #'counsel-find-library
-      [remap imenu]                         #'counsel-imenu--with-state-normal
+      [remap imenu]                         #'counsel-imenu--with-state-insert
       [remap info-lookup-symbol]            #'counsel-info-lookup-symbol
       [remap load-theme]                    #'counsel-load-theme
       [remap locate]                        #'counsel-locate

@@ -2,7 +2,7 @@
 
 (map! :map jg-dired-mode-map
       :after jg-dired-bindings
-      :prefix ("> p" . "Pdf calls")
+      :prefix ("c f p" . "PDF ")
       :desc "Pdf Info"        "i" #'pdf-meta-extract-info
       :desc "Pdf Split"       "s" #'pdf-meta-split
       :desc "Pdf Join"        "j" #'pdf-meta-join

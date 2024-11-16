@@ -6,3 +6,5 @@
 
 (package! request :pin "01e338c335c07e4407239619e57361944a82cb8a")
 (package! org :pin "3ff21c713851f1ecbbcdc80363f1449f43cff2fa")
+(unpin! compat)
+(package! compat :recipe (:host github :repo "emacs-compat/compat"))

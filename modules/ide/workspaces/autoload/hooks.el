@@ -96,9 +96,6 @@
           (make-indirect-buffer base-buffer buffer-name t)))))
   (setq +workspaces--indirect-buffers-to-restore nil))
 
-;;;###autoload
-(defun +workspaces-delete-all-posframes-h (&rest _)
-  (posframe-delete-all))
 
 ;;;###autoload
 (defun +workspaces-add-current-buffer-h ()

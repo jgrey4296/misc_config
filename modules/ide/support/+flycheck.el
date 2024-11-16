@@ -63,9 +63,6 @@
                      flycheck-buffer-switch-check-intermediate-buffers t
                      flycheck-display-errors-delay 0.25
                      flycheck-popup-tip-error-prefix "X "
-                     flycheck-posframe-warning-prefix "! "
-                     flycheck-posframe-info-prefix "··· "
-                     flycheck-posframe-error-prefix "X "
                      flycheck-indication-mode 'right-fringe
                      )
 

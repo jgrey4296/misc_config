@@ -55,11 +55,6 @@
              #'+workspaces-reload-indirect-buffers-h
              )
 
-  (after! posframe
-    ;; Fix #1017: stop session persistence from restoring a broken posframe
-    (add-hook! 'persp-after-load-state-functions
-               #'+workspaces-delete-all-posframes-h
-               ))
 
   ;;;; Registering buffers to perspectives
   (add-hook! 'doom-switch-buffer-hook

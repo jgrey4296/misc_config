@@ -31,6 +31,7 @@
       :desc "Buffer Start"          "<"   #'beginning-of-buffer
       :desc "Buffer End"            ">"   #'end-of-buffer
       )
+
 (map! :map jg-binding-jump-map ;; search
       :prefix ("/" . "Search")
       :desc "Search Clear"                "c"         #'evil-ex-nohighlight

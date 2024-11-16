@@ -15,19 +15,17 @@
   (message "Dired Groups: (M)ark, (c)hange, (d)escribe, (o)pen, (e)ncrypt, (s)ort ")
   )
 
-(map! :map jg-dired-mode-map ;; group
+(map! :map jg-dired-mode-map ;; groups
       (:prefix ("M" . "Mark"))
       (:prefix "]")
       (:prefix "[")
       (:prefix ("c" . "Change"))
       (:prefix ("c f" . "File Changes"))
-      (:prefix ("c d" . "Dir Changes"))
       (:prefix ("d ?" . "Disassembly"))
       (:prefix ("o" . "Open"))
-      (:prefix ("e" . "Encryption"))
       (:prefix ("e k" . "Keys"))
+      (:prefix ("e" . "Encryption"))
 
-      ">" nil
       :localleader
       (:prefix ("f" . "Find"))
       (:prefix ("g" . "Generate"))
@@ -92,12 +90,16 @@
 (map! :map jg-dired-mode-map ;; change
       :desc "Delete"              :n "D" #'+jg-dired-async-trash
       :desc "Touch"               :n "=" #'+jg-dired-touch
-      :desc "New Dir"             :n "c d n" #'dired-create-directory
-      :desc "Make Tasks Dir"      :n "c d t" (cmd! (dired-create-directory ".tasks"))
-      :desc "Make Docs Dir"       :n "c d d" (cmd! (dired-create-directory "docs"))
-      :desc "Make Tests Dir"      :n "c d x" (cmd! (dired-create-directory "__tests"))
       :desc "Project"             :n "c p" #'+jg-dired-cookiecutter
+      (:prefix ("c d" . "Dir Changes")
+       :desc "New Dir"             "n" #'dired-create-directory
+       :desc "Make Tasks Dir"      "t" (cmd! (dired-create-directory ".tasks"))
+       :desc "Make Docs Dir"       "d" (cmd! (dired-create-directory "docs"))
+       :desc "Make Tests Dir"      "x" (cmd! (dired-create-directory "__tests"))
+       )
+      )
 
+(map! :map jg-dired-mode-map ;; change
       :prefix ("c" . "Change")
       :desc "Replace grep"        :n "G" #'dired-do-find-regexp-and-replace
       :desc "kill"                :n "K" #'dired-do-delete
@@ -140,17 +142,16 @@
       :desc "Eww"                 :n "e" #'eww-open-file
       )
 (map! :map jg-dired-mode-map ;; encryption
-      :after epa
-      :prefix ("e" . "Encryption")
-      :desc "Decrypt"     :n "d" #'epa-dired-do-decrypt
-      :desc "Encrypt"     :n "e" #'epa-dired-do-encrypt
-      :desc "Sign"        :n "s" #'epa-dired-do-sign
-      :desc "Verify"      :n "v" #'epa-dired-do-verify
-
-      (:prefix ("k" . "Keys")
+     (:prefix ("e k" . "Keys")
        :desc "List Keys"   :n "l" #'+jg-dired-epa-list-keys
        :desc "Import Keys" :n "i" #'epa-import-keys
        :desc "Export Keys" :n "E" #'+jg-dired-epa-export-keys
+       )
+      (:prefix ("e" . "Encryption")
+       :desc "Decrypt"  :n   "d" #'epa-dired-do-decrypt
+       :desc "Encrypt"  :n   "e" #'epa-dired-do-encrypt
+       :desc "Sign"     :n   "s" #'epa-dired-do-sign
+       :desc "Verify"   :n   "v" #'epa-dired-do-verify
        )
       )
 
@@ -182,12 +183,5 @@
       )
 
 (setq dired-mode-map jg-dired-mode-map)
-
-;; (general-define-key :keymaps '(jg-dired-mode-map)
-;;                     :states 'normal
-;;                     :prefix
-;;                     (general--concat t "e" "k")
-;;                     ""
-;;                     (list :ignore t :which-key "Keys"))
 
 (provide 'jg-dired-bindings)

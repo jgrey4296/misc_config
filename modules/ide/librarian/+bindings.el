@@ -25,33 +25,34 @@
       )
 
 (map! :map librarian-mode-map
-      :prefix ("s" . "Jump")
-      :desc "Browse URL"                :n "u" #'librarian-url
-      :desc "Librarian Regular"         :n "1" #'librarian-regular-go
+      (:prefix ("s" . "Jump")
+       :desc "Browse URL"                :n "u" #'librarian-url
+       :desc "Librarian Regular"         :n "1" #'librarian-regular-go
+       (:prefix ("k" . "Documentation")
+        :desc "Choose Handler"             :n    ";" #'librarian-choose
+        :desc "Assignments"                :n    "a" #'librarian-assignments
+        :desc "Type definition"            :n    "t" #'librarian-type-definition
+        :desc "References"                 :n    "r" #'librarian-references
+        :desc "Definition"                 :n    "d" #'librarian-definition
+        :desc "Declaration"                :n    "D" #'librarian-declaration
+        :desc "Implementations"            :n    "i" #'librarian-implementations
+        :desc "Documentation"              :n    "k" #'librarian-documentation
+        :desc "Look up in local docsets"   :n    "K" #'librarian-in-docsets
 
-      (:prefix ("k" . "Documentation")
-       :desc "Choose Handler"                :n ";" #'librarian-choose
-       :desc "Assignments"                   :n "a" #'librarian-assignments
-       :desc "Type definition"               :n "t" #'librarian-type-definition
-       :desc "References"                    :n "r" #'librarian-references
-       :desc "Definition"                    :n "d" #'librarian-definition
-       :desc "Declaration"                   :n "D" #'librarian-declaration
-       :desc "Implementations"               :n "i" #'librarian-implementations
-       :desc "Documentation"                 :n "k" #'librarian-documentation
-       :desc "Look up in local docsets"      :n "K" #'librarian-in-docsets
+        :desc "Word(net)"                  :n    "w" #'helm-wordnet-suggest
+        :desc "Word(nut)"                  :n    "W" #'wordnut-search
 
-       :desc "Word(net)"                     :n "w" #'helm-wordnet-suggest
-       :desc "Word(nut)"                     :n "W" #'wordnut-search
+        :desc "Look up online (w/ prompt)" :n    "1" #'librarian-online-select
+        :desc "Look up online"             :n    "2" #'librarian-online
 
-       :desc "Look up online (w/ prompt)"    :n "1" #'librarian-online-select
-       :desc "Look up online"                :n "2" #'librarian-online
+        :desc "Dictionary"                 :n    "q" #'librarian-words--definition
+        :desc "Thesaurus"                  :n    "Q" #'librarian-words--synonyms
 
-       :desc "Dictionary"                    :n "q" #'librarian-words--definition
-       :desc "Thesaurus"                     :n "Q" #'librarian-words--synonyms
-
-       :desc "Debug"          :n "?" #'librarian-debug
-       :desc "Install Docset" :n "0" #'librarian-docset-install
+        :desc "Debug"                      :n    "?" #'librarian-debug
+        :desc "Install Docset"             :n    "0" #'librarian-docset-install
+        )
        )
+      :i "s" #'self-insert-command
       )
 
 (map! :map eww-mode-map

@@ -1,5 +1,9 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
+(after! librarian
+  (add-to-list 'librarian-active-on-modes 'conf-mode)
+  (add-to-list 'librarian-active-on-modes 'comint-mode)
+  )
 
 (setq librarian-regular--location                  (expand-file-name "librarian-regular" templates-loc)
       librarian-configs--modules-dir               (expand-file-name "modules" doom-user-dir)

@@ -38,4 +38,6 @@
 ;; https://github.com/zellerin/dynamic-graphs
 (use-package! dynamic-graphs :defer t)
 
+;; TODO add ditaa and mscgen
+
 ;;; config.el ends here

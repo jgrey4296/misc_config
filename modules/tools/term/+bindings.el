@@ -3,6 +3,7 @@
 (evil-make-intercept-map jg-term-shell-mode-map)
 (evil-make-intercept-map jg-term-comint-mode-map)
 (with-state! 'normal #'counsel-shell-history)
+(with-state! 'normal #'+jg-term-switch)
 
 (map! :leader
       :desc "Pop Shell"             "'"   #'+jg-shell-new
@@ -15,7 +16,7 @@
       :ni "RET" #'comint-send-input
       :i "TAB"  #'completion-at-point
 
-      :n ","    #'+jg-term-switch
+      :n ","    #'+jg-term-switch--with-state-normal
       :n "H"    #'comint-show-output
       :n "L"    #'comint-show-maximum-output
 

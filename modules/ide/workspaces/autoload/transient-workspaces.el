@@ -5,6 +5,7 @@
   (format "Buffer: %s" (window-buffer (selected-window)))
   )
 (transient-make-int-call! magit-todos         "t"   "Todos"             :transient nil #'magit-todos-list)
+(transient-make-int-call! workspaces-ivy      "RET" "Workspaces"        :transient nil #'+jg-workspaces-ivy)
 
 (progn
   ;; Projects
@@ -22,6 +23,7 @@
    ["|| General ||"
     (transient-macro-call-goto-root)
     (transient-macro-call-magit-todos)
+    (transient-macro-call-workspaces-ivy)
     ]
    ["" ("1" "empty" "empty")]
    ]

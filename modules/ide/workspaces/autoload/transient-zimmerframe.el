@@ -54,7 +54,7 @@
 
 ;;;###autoload
 (defun +jg-workspace-add-zimmerframe-transient ()
-  (transient-append-suffix 'workspace-control-transient '(0 -1 -1) '(transient-macro-toggle-project-zimmerframe-minor-mode))
+  ;; (transient-append-suffix 'workspace-control-transient '(0 -1 -1) '(transient-macro-toggle-project-zimmerframe-minor-mode))
   (transient-remove-suffix 'workspace-control-transient "1")
 
   (transient-append-suffix 'workspace-control-transient

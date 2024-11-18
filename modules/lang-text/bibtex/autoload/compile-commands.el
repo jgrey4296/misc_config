@@ -9,7 +9,7 @@
                (rel-file (f-relative (f-no-ext (buffer-file-name)) (projectile-project-root)))
                (is-tex (f-ext? curr-file "bib"))
                )
-    (+jg-projects-pair-cmds
+    (+jg-eval--pair-cmds
        `("bibtex"      ,(format "bibtex --terse %s" rel-file))
 
        (when (f-exists? (f-swap-ext curr-file "pdf"))

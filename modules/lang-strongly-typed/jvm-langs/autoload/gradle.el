@@ -74,7 +74,7 @@
       (setq result-text (buffer-string))
       )
     (if (eq 0 result-code)
-        (+jg-projects-annotate-cmds (split-string result-text "\n" t " \n")
+        (+jg-eval--annotate-cmds (split-string result-text "\n" t " \n")
                                     (lambda (x) (concat "gradle " (car (split-string x "-" t " ")))))
       '()
       )

@@ -76,55 +76,6 @@
   )
 
 ;;;###autoload
-(defun +jg-projects-clean(arg)
-  (interactive "P")
-  (-when-let* ((root (projectile-project-root))
-               (doot-toml (f-join root "doot.toml"))
-               (dt-exists (f-exists? doot-toml))
-               (default-directory root)
-               )
-    (let ((targets (+jg-projects-doot-tasks nil (lambda (x) (concat jg-projects-doot-cmd " clean " (when arg "-c ") (car (split-string x" " t " "))))))
-          (counsel-compile--current-build-dir (or (counsel--compile-root) default-directory))
-          )
-      (ivy-read "Clean Task: " ivy-opts
-                :action #'counsel-compile--action
-                :caller 'jg-projects-clean)
-      )
-    )
-  )
-
-;;;###autoload
-(defun +jg-projects-doot-tasks (&optional act-fn int-fn)
-  " check for cache, if cache is newer than dodo file, use that, else run doit list "
-  (let ((default-directory (or (projectile-project-root) default-directory))
-        (act-fn (or act-fn (lambda (x) (concat jg-projects-doot-cmd " " (car (split-string x" " t " "))))))
-        skip
-        )
-    (cond ((not (executable-find "doot"))
-           (message "No Doot Command in Path")
-           (setq skip t))
-          ((not (f-exists? "doot.toml"))
-           (message "No doot.toml Available")
-           (setq skip t))
-          ((and (f-exists? ".tasks_cache")
-                (time-less-p (f-modification-time "doot.toml") (f-modification-time ".tasks_cache")))
-           ;; No cache/out of date, so make it
-           (message "Creating Cache")
-           (+jg-projects-cache-tasks jg-projects-doot-cmd "list"))
-          )
-
-    (when (and (not skip) (f-exists? ".tasks_cache"))
-      (with-temp-buffer
-        (insert-file-contents ".tasks_cache")
-        (+jg-projects-annotate-cmds (split-string (buffer-string) "\n" t " \n")
-                                    act-fn int-fn
-                                    )
-        )
-      )
-    )
-  )
-
-;;;###autoload
 (defun +jg-projects-cache-tasks (cmd &rest args)
   " run doit list, cache to .tasks_cache"
   (let ((proc (apply #'start-process "proc:doot:list" "*proc:doot:list*" cmd args))

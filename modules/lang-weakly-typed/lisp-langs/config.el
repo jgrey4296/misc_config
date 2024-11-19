@@ -7,7 +7,6 @@
 (defer-load! jg-bindings-total "+bindings")
 
 (defer-load! jg-evil-ex-bindings "+evil-ex")
-(add-hook! 'doom-first-file-hook #'+jg-lisp-setup-library-source)
 
 (advice-add 'elisp-get-var-docstring :around #'+emacs-lisp-append-value-to-eldoc-a)
 ;; Fixed indenter that intends plists sensibly.

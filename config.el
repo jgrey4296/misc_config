@@ -37,6 +37,16 @@
                      mu4e-maildir (or (getenv "MAILDIR") "mail/" user-cache-dir)
                      auth-sources (list (expand-file-name "secrets/emacs/authinfo.asc" user-config-dir))
                      ;; OSX: auth-sources ("~/.authinfo" macos-keychain-generic macos-keychain-internet "~/authinfo.gpg")
+                     emacs-lisp-c-src-dir (pcase system-type
+                                            ('darwin  "/Volumes/documents/github/_libs/lisp/emacs-src/src")
+                                            ('gnu/linux "/media/john/data/github/_libs/lisp/emacs/src")
+                                            )
+                     emacs-lisp-src-dir (pcase system-type
+                                          ('darwin "/Volumes/documents/github/_libs/lisp/emacs-src/lisp/")
+                                          ('gnu/linux "/media/john/data/github/_libs/lisp/emacs/lisp")
+                                          )
+                     find-function-C-source-directory emacs-lisp-c-src-dir
+                     find-library-source-path (+jg-lisp-setup-library-source)
                      )
 
 (add-to-list 'load-path (expand-file-name "~/.local/modules"))
@@ -73,6 +83,8 @@
                                               "/carousel-.*\\.el\\'"
                                               "/lsp-.*\\.el\\'"
                                               )
+      ;; native-comp-jit-compilation nil
+      ;; no-byte-compile
       )
 ;;-- end byte / native compilation
 
@@ -110,3 +122,5 @@
                        )
                      )
 ;;-- end warning suppression
+
+;; (read-key-sequence "Test: ")

@@ -2,29 +2,23 @@
 (require 'ffap)
 (require 'find-func)
 
-(defvar emacs-lisp-src-dir (pcase system-type
-                             ('darwin "/Volumes/documents/github/_libs/lisp/emacs-src/lisp/")
-                             ('gnu/linux "/media/john/data/github/_libs/lisp/emacs-src/lisp"
-                             )))
-
-(defvar emacs-lisp-c-src-dir (pcase system-type
-                               ('darwin  "/Volumes/documents/github/_libs/lisp/emacs-src/src")
-                               ('gnu/linux "/media/john/data/github/_libs/lisp/emacs-src/src")
-                               ))
+(defvar emacs-lisp-src-dir nil)
+(defvar emacs-lisp-c-src-dir nil)
 
 ;;;###autoload
 (defun +jg-lisp-setup-library-source ()
   (let ((paths-to-add (append
-                       (ffap-all-subdirs emacs-lisp-src-dir 1)
+                       (when emacs-lisp-src-dir
+                         (ffap-all-subdirs emacs-lisp-src-dir 1))
                        (ffap-all-subdirs (expand-file-name "straight/repos" doom-local-dir) 1)
                        (ffap-all-subdirs (expand-file-name "modules" doom-user-dir))
                        (ffap-all-subdirs (expand-file-name "packages" doom-user-dir))
-                       )))
-  (mapc (lambda (x)
-          (add-to-list 'find-library-source-path x))
-        paths-to-add)
-  )
-  (setq find-function-C-source-directory emacs-lisp-c-src-dir)
+                       ))
+        (result (cl-copy-list find-library-source-path))
+        )
+    (mapcar #'(lambda (x) (add-to-list 'result x)) paths-to-add)
+    result
+    )
   )
 
 

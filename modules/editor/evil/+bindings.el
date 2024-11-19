@@ -14,27 +14,27 @@
 
 (defvar jg-binding-visual-state-map             (make-sparse-keymap "JG map replacing evil-visual-state-map"))
 
-(define-prefix-command 'jg-binding-backward-operator-motion-map nil "jgb-backward-op")
+(defvar jg-binding-jump-map                     (make-sparse-keymap))
 
-(define-prefix-command 'jg-binding-forward-operator-motion-map  nil "jgb-forward-op")
+(defvar jg-binding-backward-operator-motion-map (make-sparse-keymap))
 
-(define-prefix-command 'jg-binding-backward-general-motion-map  nil "jgb-backward-motion")
+(defvar jg-binding-forward-operator-motion-map  (make-sparse-keymap))
 
-(define-prefix-command 'jg-binding-forward-general-motion-map   nil "jgb-forward-motion")
+(defvar jg-binding-backward-general-motion-map  (make-sparse-keymap))
 
-(define-prefix-command 'jg-binding-inner-text-objects-map       nil "jgb-inner")
+(defvar jg-binding-forward-general-motion-map   (make-sparse-keymap))
 
-(define-prefix-command 'jg-binding-outer-text-objects-map       nil "jgb-outer")
+(defvar jg-binding-inner-text-objects-map       (make-sparse-keymap))
 
-(define-prefix-command 'jg-binding-jump-map                     nil "jgb-jump")
+(defvar jg-binding-outer-text-objects-map       (make-sparse-keymap))
 
-(define-prefix-command 'jg-binding-helm-map                     nil "jgb-helm")
+(defvar jg-binding-helm-map                     (make-sparse-keymap))
 
-(define-prefix-command 'jg-binding-operator-map                 nil "jgb-ops")
+(defvar jg-binding-operator-map                 (make-sparse-keymap))
 
-(define-prefix-command 'jg-binding-vision-map                   nil "jgb-vision")
+(defvar jg-binding-vision-map                   (make-sparse-keymap))
 
-(define-prefix-command 'jg-binding-change-map                   nil "jgb-change")
+(defvar jg-binding-change-map                   (make-sparse-keymap))
 
 (suppress-keymap jg-binding-motion-state-map)
 ;;-- end setup
@@ -55,35 +55,36 @@
 (local-load! "submaps/vision-bindings.el")
 (local-load! "submaps/visual-bindings.el")
 
+
 ;;-- stitching together
 (map! :map jg-binding-normal-state-map
-      :desc "Do Ops"        "g"   'jg-binding-operator-map
-      :desc "Visual Ops"    "z"   'jg-binding-vision-map
-      :desc "B Motion"      "["   'jg-binding-backward-general-motion-map
-      :desc "F Motion"      "]"   'jg-binding-forward-general-motion-map
-      :desc "Jumping"       "s"   'jg-binding-jump-map
-      :desc "Change"        "c"   'jg-binding-change-map
+      :desc "Do Ops"        "g"   jg-binding-operator-map
+      :desc "Visual Ops"    "z"   jg-binding-vision-map
+      :desc "B Motion"      "["   jg-binding-backward-general-motion-map
+      :desc "F Motion"      "]"   jg-binding-forward-general-motion-map
+      :desc "Jumping"       "s"   jg-binding-jump-map
+      :desc "Change"        "c"   jg-binding-change-map
       )
 
 (map! :map jg-binding-visual-state-map
-      :desc "Do Ops"       "g"  'jg-binding-operator-map
-      :desc "Visual Ops"   "z"  'jg-binding-vision-map
-      :desc "Inner Select" "i"  'jg-binding-inner-text-objects-map
-      :desc "Outer Select" "o"  'jg-binding-outer-text-objects-map
-      :desc "Jumping"      "s"  'jg-binding-jump-map
-      :desc "Change"       "c"  'jg-binding-change-map
+      :desc "Do Ops"       "g"  jg-binding-operator-map
+      :desc "Visual Ops"   "z"  jg-binding-vision-map
+      :desc "Inner Select" "i"  jg-binding-inner-text-objects-map
+      :desc "Outer Select" "o"  jg-binding-outer-text-objects-map
+      :desc "Jumping"      "s"  jg-binding-jump-map
+      :desc "Change"       "c"  jg-binding-change-map
       )
 
 (map! :map jg-binding-motion-state-map
-      :desc "Backward Motion Op"  "["  'jg-binding-backward-operator-motion-map
-      :desc "Forward Motion Op"   "]"  'jg-binding-forward-operator-motion-map
+      :desc "Backward Motion Op"  "["  jg-binding-backward-operator-motion-map
+      :desc "Forward Motion Op"   "]"  jg-binding-forward-operator-motion-map
       )
 
 (map! :map jg-binding-operator-state-map
-      :desc "Backward Motion Op"  "["  'jg-binding-backward-operator-motion-map
-      :desc "Forward Motion Op"   "]"  'jg-binding-forward-operator-motion-map
-      :desc "Inner Select"        "i"  'jg-binding-inner-text-objects-map
-      :desc "Outer Select"        "o"  'jg-binding-outer-text-objects-map
+      :desc "Backward Motion Op"  "["  jg-binding-backward-operator-motion-map
+      :desc "Forward Motion Op"   "]"  jg-binding-forward-operator-motion-map
+      :desc "Inner Select"        "i"  jg-binding-inner-text-objects-map
+      :desc "Outer Select"        "o"  jg-binding-outer-text-objects-map
       )
 
 ;; Override default evil maps
@@ -118,7 +119,7 @@
       )
 
 (map! :leader
-      :desc "Search/Jump"  "s"    'jg-binding-jump-map
+      :desc "Search/Jump"  "s"    jg-binding-jump-map
       :desc "Evil States"  "a"    #'+jg-evil-state-ivy
       :desc "Record Macro" "SPC"  #'evil-record-macro
       :desc "Switch to last buffer" "TAB" #'evil-switch-to-windows-last-buffer

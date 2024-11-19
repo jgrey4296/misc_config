@@ -77,7 +77,7 @@
       [remap list-processes]                #'counsel-list-processes--with-state-normal
       [remap isearch-forward]               #'swiper
       [remap isearch-backward]              #'swiper
-      [remap swiper]                        #'counsel-grep-or-swip
+      [remap swiper]                        #'counsel-grep-or-swiper
       [remap bookmark-jump]                 #'+jg-ivy-bookmark
 
       [remap compile]                       #'+ivy/compile

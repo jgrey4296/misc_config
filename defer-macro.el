@@ -35,7 +35,10 @@
            do
            (dlog! "Deferred Loading: %s : %s" dir file)
            (let ((fname (file-name-concat dir file)))
-             (load fname nil (file-exists-p (concat fname ".el")))
+             (condition-case err
+                 (load fname nil (file-exists-p (concat fname ".el")))
+               (t (message "Error: %s (%s)" err fname))
+               )
              )
            )
   )

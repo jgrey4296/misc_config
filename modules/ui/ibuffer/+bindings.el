@@ -3,9 +3,9 @@
 (dlog! "Setting up Ibuffer bindings: %s" (current-time-string))
 
 (defvar jg-ibuffer-mode-map (make-keymap))
-(define-prefix-command 'jg-ibuffer-filter-map nil "ibuffer-filter")
-(define-prefix-command 'jg-ibuffer-sort-map   nil "ibuffer-sort")
-(define-prefix-command 'jg-ibuffer-mark-map   nil "ibuffer-mark")
+(defvar jg-ibuffer-filter-map (make-sparse-keymap))
+(defvar jg-ibuffer-sort-map   (make-sparse-keymap))
+(defvar jg-ibuffer-mark-map   (make-sparse-keymap))
 
 (map! [remap ibuffer]   #'+jg-ibuffer-default)
 
@@ -17,7 +17,7 @@
       :localleader
       :desc "toggle-sorting-mode"   "," #'ibuffer-toggle-sorting-mode
       :desc "Formats"               "." #'ibuffer-switch-format
-      :desc "Sorting"               "o"  'jg-ibuffer-sort-map
+      :desc "Sorting"               "o"  jg-ibuffer-sort-map
 
       (:prefix ("t" . "temp")
        :desc "add-to-tmp-show"     :n "s" #'ibuffer-add-to-tmp-show
@@ -163,8 +163,8 @@
 ;;-- end marking
 
 (map! :map jg-ibuffer-mode-map
-      "\\" 'jg-ibuffer-filter-map
-      "o"  'jg-ibuffer-sort-map
+      "\\" jg-ibuffer-filter-map
+      "o"  jg-ibuffer-sort-map
       )
 (evil-make-overriding-map jg-ibuffer-mode-map 'normal)
 (setq ibuffer-mode-map jg-ibuffer-mode-map)

@@ -123,4 +123,18 @@
                      )
 ;;-- end warning suppression
 
-;; (read-key-sequence "Test: ")
+;;-- command en/disabling
+(enable-command #'list-timers)
+
+ (defun print-disabled-commands ()
+   "Enable all commands, reporting on which were disabled."
+   (interactive)
+   (with-output-to-temp-buffer "*Commands that were disabled*"
+     (mapatoms
+      (function
+       (lambda (symbol)
+         (when (get symbol 'disabled)
+           (put symbol 'disabled nil)
+           (prin1 symbol)
+           (princ "\n")))))))
+;;-- end command en/disabling

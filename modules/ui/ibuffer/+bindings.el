@@ -76,7 +76,6 @@
 
       :n "l" #'ignore
       :n "i" #'ignore
-      ;; :n "s" #'ignore
       :n "q" #'kill-current-buffer
       :n "s" #'ibuffer-jump-to-filter-group
       (:prefix ("-" . "Mark Ops"))

@@ -24,7 +24,6 @@
                                     company-dabbrev
                                     company-dabbrev-code
                                     company-dict
-                                    company-elisp
                                     company-etags
                                     company-faces
                                     company-files

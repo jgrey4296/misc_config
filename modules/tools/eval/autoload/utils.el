@@ -1,12 +1,16 @@
-;;; compilation.el -*- lexical-binding: t; -*-
-
-(defvar jg-projects-compile-keys '(:read :recursive :interactive))
+;;; utils.el -*- lexical-binding: t; no-byte-compile: t; -*-
+;;-- Header
+;; File Commentary:
+;;
+;;
+;; See footer for licenses/metadata/notes as applicable
+;;-- end Header
+(defvar jg-eval--compile-keys '(:read :recursive :interactive))
+(defconst jg-eval--compile-text-syms '(blddir bldenv extra cmd))
 
 ;;;###autoload
-(defun +jg-projects-annotate-cmds (cmds act-fn &optional int-fn)
-  " set the `cmd` text property for each string to the result of (act-fn str)
-this works in compination with +jg-projects-compile-adjust to allow shorter descriptions,
-and longer commands"
+(defun +jg-eval--annotate-cmds (cmds act-fn &optional int-fn)
+  " set the `cmd` text property for each string to the result of (act-fn str) "
   (cl-loop for cmd in cmds
            collect (let ((cmd-str cmd)
                          (cmd-act (funcall act-fn cmd))
@@ -18,7 +22,7 @@ and longer commands"
   )
 
 ;;;###autoload
-(defun +jg-projects-pair-cmds (&rest cmds)
+(defun +jg-eval--pair-cmds (&rest cmds)
   " for each pair, set the `cmd` text-property of car to cdr
 can also add key'd additional properties
 "
@@ -35,7 +39,7 @@ can also add key'd additional properties
   )
 
 ;;;###autoload
-(defun +jg-projects-run-compile (cmd)
+(defun +jg-eval--run-compile (cmd)
   "call cmd, but if it's got the text propery 'cmd use that instead "
   (let* ((blddir (get-text-property 0 'blddir cmd))
          (bldenv (get-text-property 0 'bldenv cmd))
@@ -64,7 +68,7 @@ can also add key'd additional properties
   )
 
 ;;;###autoload
-(defun +jg-projects-projectile-cmd-list  (fn &rest rst)
+(defun +jg-eval--projectile-cmd-list  (fn &rest rst)
   " Use an ivy to get the command "
   (let* ((compilation-read-command nil)
         (root (projectile-project-root))
@@ -83,7 +87,7 @@ can also add key'd additional properties
   )
 
 ;;;###autoload
-(defun +jg-workspaces-time-compile-cmd-retrieval (&optional dir)
+(defun +jg-eval--time-compile-cmd-retrieval (&optional dir)
   " For Debugging how different local build cmd constructors perform"
   (let (cands times)
     (dolist (cmds counsel-compile-local-builds)
@@ -101,6 +105,26 @@ can also add key'd additional properties
   )
 
 ;;;###autoload
-(defun +jg-workspaces-compile-root-fallback ()
+(defun +jg-eval--compile-root-fallback ()
   default-directory
   )
+
+
+
+;;-- Footer
+;; Copyright (C) 2024 john
+;;
+;; Author:     john <https://github.com/jgrey4296>
+;; Maintainer: john <john@john-UM700>
+;; Created:    November 15, 2024
+;; Modified:   November 15, 2024
+;; Version: 0.0.1
+;; Keywords:
+;; Homepage: https://github.com/jgrey4296
+;; Package-Requires: ((emacs "24.3"))
+;; Package written on: ((emacs 29.3))
+;;
+;; This file is not part of GNU Emacs.
+;;
+;;-- end Footer
+;;; utils.el ends here

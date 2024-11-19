@@ -37,6 +37,8 @@
   (add-hook 'compilation-mode-hook   #'hl-line-mode)
   (add-hook 'compilation-filter-hook #'ansi-color-compilation-filter)
   (add-hook 'compilation-filter-hook #'comint-truncate-buffer)
-
+  (advice-add 'counsel-compile--action            :override #'+jg-eval--run-compile)
+  (advice-add 'projectile--run-project-cmd        :around   #'+jg-eval--projectile-cmd-list)
+(advice-add 'counsel--get-compile-candidates      :override #'+jg-eval--time-compile-cmd-retrieval)
   (autoload 'comint-truncate-buffer "comint" nil t)
   )

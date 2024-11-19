@@ -69,7 +69,8 @@ error if NAME doesn't exist."
   ;; We don't use `hash-table-values' because it doesn't ensure order in older
   ;; versions of Emacs
   (cl-loop for name in persp-names-cache
-           if (gethash name *persp-hash*)
+           if (and (gethash name *persp-hash*)
+                   (not (string-equal name persp-nil-name)))
            collect it))
 
 ;;;###autoload
@@ -380,10 +381,16 @@ end of the workspace list."
         ('error (+workspace-error ex t))))))
 
 ;;;###autoload
-(defun +workspace/switch-left ()  (interactive) (+workspace/cycle -1))
+(defun +workspace/switch-left ()
+  (interactive)
+  (+workspace/cycle -1)
+  )
 
 ;;;###autoload
-(defun +workspace/switch-right () (interactive) (+workspace/cycle +1))
+(defun +workspace/switch-right ()
+  (interactive)
+  (+workspace/cycle +1)
+  )
 
 ;;;###autoload
 (defun +workspace/close-window-or-workspace ()

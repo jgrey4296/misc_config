@@ -31,7 +31,6 @@
                                 )
                     )
 
-(defvar librarian-regular--targets nil)
 (spec-handling-new! librarian-regular nil :loop 'hook
                     ;; Val : alist of (name . url)
                     (setq-local librarian-regular--targets (append librarian-regular--targets val))

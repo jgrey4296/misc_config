@@ -18,12 +18,6 @@ t           Always create a new workspace for the project
             associated with it.
 nil         Never create a new workspace on project switch.")
 
-;; FIXME actually use this for wconf bookmark system
-
-(defvar +workspaces-data-file "_workspaces"
-  "The basename of the file to store single workspace perspectives. Will be
-stored in `persp-save-dir'.")
-
 (defvar +workspace--old-uniquify-style nil)
 
 (defvar +workspaces--indirect-buffers-to-restore nil)

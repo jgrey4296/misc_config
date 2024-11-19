@@ -6,7 +6,7 @@
   (-when-let* ((filename (buffer-file-name))
                (is-dot (f-ext? filename "dot"))
                )
-    (+jg-projects-pair-cmds
+    (+jg-eval--pair-cmds
      `("dot compile" ,(graphviz-compile-command filename))
      (when (f-exists? (graphviz-output-file-name filename))
        `("dot open" ,(format "open %s" (graphviz-output-file-name filename)))

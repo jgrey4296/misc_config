@@ -7,11 +7,12 @@
   [remap evil-window-delete] #'+workspace/close-window-or-workspace)
 
 (map! :leader
-      :desc "Workspace Control"        "w RET"           #'+jg-workspace-run-transient
+      :desc "Workspace Control"        "w RET"               #'+jg-workspace-run-transient
       :desc "Carousel Control"         "r RET"               #'jg-workspace-run-carousel-transient
-      :desc "Carousel Control"         "R"               #'jg-workspace-run-carousel-transient
-      :desc "Workspace Counsel"        "W"               #'+jg-workspaces-ivy
-      :desc "Goto Root"                    "p `"         #'this-does-nothing
+      :desc "Carousel Control"         "r r"                 #'jg-workspace-run-carousel-transient
+      :desc "Carousel Control"         "R"                   #'jg-workspace-run-carousel-transient
+      :desc "Workspace Counsel"        "W"                   #'+jg-workspaces-ivy
+      :desc "Goto Root"                    "p `"             #'this-does-nothing
       (:prefix ("w" . "Windows")
        :desc "Delete workspace"             "DEL"   #'+workspace/delete
        :desc "Workspace Control"            "w"     #'+jg-workspace-run-transient

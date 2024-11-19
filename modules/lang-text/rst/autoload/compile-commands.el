@@ -14,7 +14,7 @@
                (project-exists (f-exists? project))
                )
     ;; Sphinx
-    (+jg-projects-pair-cmds
+    (+jg-eval--pair-cmds
      '("sphinx docs" "doot docs::build")
      (when (and (buffer-file-name) (f-ext? (buffer-file-name) "rst"))
        `("sphinx docfile" ,(format "doot docs::build.file %s" (buffer-file-name))))

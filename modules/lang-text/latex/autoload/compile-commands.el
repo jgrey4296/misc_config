@@ -27,7 +27,7 @@
                (compile-cmd (string-join (append (list compile-with output-dir) jg-latex-compile-args (list curr-file)) " "))
 
                )
-    (+jg-projects-pair-cmds
+    (+jg-eval--pair-cmds
      `("tex compile"        ,compile-cmd)
      ;; `("bibtex"      ,(format "bibtex --terse %s" rel-file))
      `("tex->bibtex"         ,(format "cd %s; bibtex --terse %s" build-dir rel-file))
@@ -47,7 +47,7 @@
      `("on-fly-lualatex" ,(format "texliveonfly --compiler=lualatex %s" curr-file) :interactive)
      ;; configs
      '("tex def"                                "latexdef" :read)
-     '("texdoc"                             "texdoc -I" :read)
+     '("texdoc"                                 "texdoc -w -I" :read)
      '("tex package info"                       "tlmgr info" :read)
      '("tex version"                            "pdflatex --version")
      '("tex settings"                           "tlmgr conf")

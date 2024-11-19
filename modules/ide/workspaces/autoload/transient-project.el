@@ -13,7 +13,6 @@
 (transient-make-int-call! proj-sidebar        "s"   "Sidebar"            :transient nil #'+jg-ui-tree/open)
 (progn
   (transient-make-call! proj-root            "`"   "Project Root" (find-file (projectile-project-root)))
-
   (transient-make-int-call! proj-add         "a"   "Add Project"               #'projectile-add-known-project)
   (transient-make-int-call! proj-clean       "c"   "Clean Project"             #'+jg-projects-clean)
   (transient-make-call! proj-clear-known     "D"   "Clear Project List Cache"  (projectile-clear-known-projects) (clrhash projectile-project-root-cache))

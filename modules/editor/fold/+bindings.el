@@ -1,7 +1,7 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
 (map! :map jg-binding-jump-map
-      :desc "Jump to Auto-hide-heading" :n "h" #'code-shy-fold-jump-to-heading
+      :desc "Jump to Auto-hide-heading" "h" #'code-shy-fold-jump-to-heading
       )
 
 (map! :map jg-binding-normal-state-map

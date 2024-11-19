@@ -8,7 +8,7 @@
                (project-exists (f-exists? project))
                (curr-file (buffer-file-name))
                )
-    (-reject #'null (+jg-projects-pair-cmds
+    (-reject #'null (+jg-eval--pair-cmds
      ;; python
      '("shell" "echo 'shell: ' $0")
      '("py versions" "mamba info; python -V -V; pip --version ; pytest --version; echo 'Env ' $CONDA_DEFAULT_ENV; sphinx-build --version")
@@ -35,7 +35,7 @@
   (-when-let* ((filename (buffer-file-name))
                (is-py (f-ext? filename "py"))
                )
-    (+jg-projects-pair-cmds
+    (+jg-eval--pair-cmds
      `("run-py"         ,(format "python -X dev -i %s" filename)    :interactive)
      `("run-py-verbose" ,(format "python -X dev -i -v %s" filename) :interactive)
      `("run-ipy"        ,(format "ipython -X %s" filename)          :interactive)

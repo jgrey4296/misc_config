@@ -15,7 +15,7 @@ buffer rather than an overlay on the line at point or the minibuffer.")
       eval-expression-print-level  nil)
 
 (setq counsel-compile-root-functions (append counsel-compile-root-functions
-                                             `(,#'+jg-workspaces-compile-root-fallback))
+                                             `(,#'+jg-eval--compile-root-fallback))
       compilation-always-kill t       ; kill compilation process before starting another
       compilation-ask-about-save nil  ; save all buffers on `compile'
       compilation-scroll-output 'first-error

@@ -8,7 +8,7 @@
                 (cargo (f-join root "Cargo.toml"))
                 (cargo-exists (f-exists? cargo))
                 )
-    (+jg-projects-annotate-cmds
+    (+jg-eval--annotate-cmds
      '("build       Compile the current crate"
        "check       Report crate errors"
        "clean       Remove the crate build directory"

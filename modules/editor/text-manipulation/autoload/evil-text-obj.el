@@ -1,7 +1,7 @@
 ;;; +text-obj.el -*- lexical-binding: t; -*-
 
 ;;;###autoload (autoload '+jg-text-visual-contract "editor/text-manipulation/autoload/evil-text-obj" nil t)
-(evil-define-text-object +jg-text-visual-contract (&rest args)
+(evil-define-text-object +jg-text-visual-contract (count &rest args)
   " Contract the selection to just the point "
   :type inclusive
   (list (point) (1+ (point)))

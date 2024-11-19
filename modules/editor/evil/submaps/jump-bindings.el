@@ -11,10 +11,8 @@
       ;; 1 2 3 "u" "h"
       ;; :desc "Ivy resume"            "`"   #'ivy-resume
       :desc "helms"                 "a"   'jg-binding-helm-map
-      :desc "Ibuffer"               "DEL" #'ibuffer
-      :desc "Jump to bookmark"      "RET" #'bookmark-jump
       :desc "Last Change"           ";"   #'goto-last-change
-      :desc "Jump to Char"          "."   #'avy-goto-char
+      :desc "Jump to Char"          "h"   #'avy-goto-char
       :desc "Line"                  "l"   #'evil-avy-goto-line
       :desc "Middle of Line"        "M"   #'evil-middle-of-visual-line
       :desc "imenu"                 "'"   #'imenu

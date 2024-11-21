@@ -20,6 +20,7 @@
       (:prefix "]")
       (:prefix "[")
       (:prefix ("c" . "Change"))
+      (:prefix ("C" . "Create"))
       (:prefix ("c f" . "File Changes"))
       (:prefix ("d ?" . "Disassembly"))
       (:prefix ("o" . "Open"))
@@ -58,7 +59,6 @@
       :n "m"                                      #'dired-mark
       :n "u"                                      #'dired-unmark
       :n "U"                                      #'dired-unmark-all-marks
-      :n "C"                                      #'dired-compare-directories
 
       (:prefix ("M" . "Mark")
       :desc "flag garbage files"           :n "x" #'dired-flag-garbage-files
@@ -87,16 +87,10 @@
        :desc "Prev Marked" :n "m"  #'dired-prev-marked-file
        )
 )
+
 (map! :map jg-dired-mode-map ;; change
       :desc "Delete"              :n "D" #'+jg-dired-async-trash
       :desc "Touch"               :n "=" #'+jg-dired-touch
-      :desc "Project"             :n "c p" #'+jg-dired-cookiecutter
-      (:prefix ("c d" . "Dir Changes")
-       :desc "New Dir"             "n" #'dired-create-directory
-       :desc "Make Tasks Dir"      "t" (cmd! (dired-create-directory ".tasks"))
-       :desc "Make Docs Dir"       "d" (cmd! (dired-create-directory "docs"))
-       :desc "Make Tests Dir"      "x" (cmd! (dired-create-directory "__tests"))
-       )
       )
 
 (map! :map jg-dired-mode-map ;; change
@@ -104,26 +98,43 @@
       :desc "Replace grep"        :n "G" #'dired-do-find-regexp-and-replace
       :desc "kill"                :n "K" #'dired-do-delete
       :desc "Global Match Rename" :n "R" #'+jg-dired-GLOBAL-do-rename-regexp
-      :desc "symlink"             :n "S" #'dired-do-symlink
-      :desc "Relative Symlink"    :n "~" #'dired-do-relsymlink
 
-      :desc "compress to"         :n "Z" #'dired-do-compress-to
-      :desc "compress"            :n "z" #'dired-do-compress
-      :desc "copy"                :n "c" #'dired-do-copy
+      :desc "copy"                :n "c" #'dired-async-do-copy
       :desc "downcase"            :n "j" #'dired-downcase
       :desc "upcase"              :n "k" #'dired-upcase
-      :desc "move"                :n "m" #'dired-do-rename
-      :desc "new dir"             :n "n" #'dired-create-directory
+      :desc "move"                :n "m" #'dired-async-do-rename
       :desc "rename"              :n "r" #'+jg-dired-rename
+      :desc "Owner"               :n "o" #'dired-do-chown
+      :desc "Permissions"         :n "O" #'dired-do-chmod
+      )
+
+(map! :map jg-dired-mode-map ;; create
+      :prefix ("C" . "Create")
+      :desc "Cookiecutter"    :n "c" #'+jg-dired-cookiecutter
+      :desc "New Dir"         :n   "n" #'dired-create-directory
+      :desc "New Tasks Dir"   :n   "t" (cmd! (dired-create-directory ".tasks"))
+      :desc "New Docs Dir"    :n   "d" (cmd! (dired-create-directory "docs"))
+      :desc "New Tests Dir"   :n   "x" (cmd! (dired-create-directory "__tests"))
+
+      (:prefix ("z" . "Zips")
+       :desc "named compress"         :n "n" #'dired-do-compress-to
+       :desc "compress"               :n "z" #'dired-do-compress
+       )
+
+      (:prefix ("l" . "links")
+       :desc "symlink"             :n "s" #'dired-do-symlink
+       :desc "Relative Symlink"    :n "r" #'dired-do-relsymlink
+       :desc "Hardlink"            :n "h" #'dired-do-hardlink
+       )
       )
 
 (map! :map jg-dired-mode-map ;; describe
       :prefix ("d" . "describe")
+      :desc "Diff Dirs"        :n "TAB" #'dired-compare-directories
       :desc "Marked Count"     :n "c" #'+jg-dired-marked-info
       :desc "Metadata"         :n "m" #'+jg-dired-exiftool-files
       :desc "Viruses"          :n "v" #'+jg-dired-scan-files
       :desc "Diff"             :n "d" #'dired-diff
-      ;;                       :n "d" #'+jg-dired-diff
       :desc "Diff Directories" :n "D" #'ediff-directories
       :desc "Hash"             :n "h" #'+jg-dired-hash-files
       :desc "Marked Size"      :n "s" #'+jg-dired-dir-size
@@ -132,6 +143,7 @@
       :desc "File Path"        :n "p" (cmd! (dired-copy-filename-as-kill 0))
       :desc "File Name"        :n "n" #'dired-copy-filename-as-kill
       )
+
 (map! :map jg-dired-mode-map ;; open
       :prefix ("o" . "Open")
       :desc "Marked Files"        :n "m" #'dired-do-find-marked-files
@@ -141,6 +153,7 @@
       :desc "Find Random Marked"  :n "r" #'+jg-dired-find-random-marked-file
       :desc "Eww"                 :n "e" #'eww-open-file
       )
+
 (map! :map jg-dired-mode-map ;; encryption
      (:prefix ("e k" . "Keys")
        :desc "List Keys"   :n "l" #'+jg-dired-epa-list-keys
@@ -163,11 +176,8 @@
        :desc "Find Marked Files" "f" #'dired-do-find-marked-files
        :desc "Literally"         "l" #'+jg-dired-find-literal
        )
-      (:prefix ("g" . "Generate")
-       :desc "Cookiecutter" "c" #'+jg-dired-cookiecutter
-       :desc "Export Keys"  "K" #'+jg-dired-epa-export-keys
-       )
       )
+
 (map! :map dirvish-mode-map
       :n "b" #'dirvish-goto-bookmark
       :n "z" #'dirvish-show-history

@@ -9,6 +9,10 @@
 
 ;;-- popup
 
+(spec-handling-add! auto-modes
+                    '(subfile
+                      ("\\.sub\\'"                 . subfile-mode)
+                      )
 (spec-handling-add! popup
                     '(tagging
                       ("^\\*Helm-Bookmark-Results\\*"  :side right :ttl nil :width 0.4 :quit t :select nil :priority 50)

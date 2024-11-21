@@ -19,3 +19,5 @@
 (use-package! counsel-gtags :defer t)
 
 (use-package! helm-gtags :defer t)
+
+(use-package! subfile-mode :defer t)

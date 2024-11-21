@@ -8,5 +8,7 @@
 (package! librarian-tagging-helm :recipe (:host github :repo "jgrey4296/misc-modes" :files ("minor-modes/librarian-tagging-helm/*.el") :local-repo "misc-modes"))
 (package! librarian-tagging-ivy  :recipe (:host github :repo "jgrey4296/misc-modes" :files ("minor-modes/librarian-tagging-ivy/*.el") :local-repo "misc-modes"))
 
+(package! subfile-mode           :recipe (:host github :repo "jgrey4296/misc-modes" :files ("major-modes/subfile-mode/*.el") :local-repo "misc-modes"))
+
 (package! counsel-gtags)
 (package! helm-gtags)

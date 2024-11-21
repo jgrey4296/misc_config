@@ -1,12 +1,5 @@
 ;;; funcs.el -*- lexical-binding: t; -*-
 
-(defvar jg-help-local-var-skip-regexp (rx (or "-map"
-                                              "keymap"
-                                              "display-table"
-                                              "imenu-generic-expression"
-                                              "font-lock-keywords"))
-  )
-
 ;;;###autoload
 (defun +jg-help-load-package-list ()
   (unless doom--help-packages-list

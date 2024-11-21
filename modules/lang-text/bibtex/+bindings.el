@@ -6,17 +6,17 @@
 
 ;;-- bibtex-mode
 (map! :map jg-bibtex-mode-map ;; main
-      :n "|" #'general-insert-call
-      :desc "Lock Key"           :n "!"     #'+jg-bibtex-lock-key
-      :desc "Insert from Doi"    :n "I d"    #'+jg-bibtex-insert-entry-from-doi
+      :n "|"                                  #'general-insert-call
+      :desc "Lock Key"           :n "!"       #'+jg-bibtex-lock-key
+      :desc "Insert from Doi"    :n "I d"     #'+jg-bibtex-insert-entry-from-doi
       :desc "Auto Form"          :n "I F"     #'+jg-bibtex-entry-form
-      :desc "Edit Field"         :n  "\\"   #'+jg-bibtex-edit-field
-      :desc "Clean entry"        :n "TAB"   #'org-ref-clean-bibtex-entry
-      :desc "Change Entry Type"  :n "DEL"   #'+jg-bibtex-edit-entry-type
-      :desc "Open DWIM"          :n ">"     #'+jg-bibtex-window-dwim
-      :desc "Open Dropbox"       :n "<"     #'+jg-bibtex-window-set-dropbox
+      :desc "Edit Field"         :n  "\\"     #'+jg-bibtex-edit-field
+      :desc "Clean entry"        :n "TAB"     #'org-ref-clean-bibtex-entry
+      :desc "Change Entry Type"  :n "DEL"     #'+jg-bibtex-edit-entry-type
+      :desc "Open DWIM"          :n ">"       #'+jg-bibtex-window-dwim
+      :desc "Open Dropbox"       :n "<"       #'+jg-bibtex-window-set-dropbox
 
-      :desc "Select Entry"       :v "i e"   #'+jg-bibtex-visual-select-entry
+      :desc "Select Entry"       :v "i e"     #'+jg-bibtex-visual-select-entry
       )
 
 (map! :map jg-bibtex-mode-map ;; jump bindings

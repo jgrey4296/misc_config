@@ -125,6 +125,7 @@
 
 ;;-- command en/disabling
 (enable-command #'list-timers)
+(enable-command #'list-threads)
 
  (defun print-disabled-commands ()
    "Enable all commands, reporting on which were disabled."

@@ -20,4 +20,6 @@
 
 (use-package! helm-gtags :defer t)
 
-(use-package! subfile-mode :defer t)
+(use-package! subfile-mode
+  :commands subfile-mode
+  )

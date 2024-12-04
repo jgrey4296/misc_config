@@ -1,6 +1,7 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
 ;;-- map defs
+
 (defvar jg-lsp-mode-map           (make-sparse-keymap))
 
 (defvar jg-lsp-command-map        (make-sparse-keymap))
@@ -186,14 +187,30 @@
       "j" #'jg-treesit-fontlock-level-down
       "r" #'jg-treesit-fontlock-recompute
 
-
       )
-
 
 ;;-- end tree-sitter
 
-(setq lsp-mode-map           jg-lsp-mode-map
-      lsp-command-map        jg-lsp-command-map
-      lsp-signature-mode-map jg-lsp-signature-mode-map
-      lsp-ui-imenu-mode-map  jg-lsp-ui-imenu-mode-map
+;;-- gtags
+(map! :map jg-binding-jump-map
+      :prefix ("g" . "gtags")
+      :desc "Create Tags"           "c" #'helm-gtags-create-tags
+      :desc "Find Symbol"           "y" #'helm-gtags-find-symbol
+      :desc "Find Tag Other Window" "o" #'helm-gtags-find-tag-other-window
+      :desc "Find Tag"              "d" #'helm-gtags-find-tag
+      :desc "Find rtag"             "r" #'helm-gtags-find-rtag
+      :desc "Gtags Select"          "s" #'helm-gtags-select
+      :desc "Parse File"            "p" #'helm-gtags-parse-file
+      :desc "Tags in func"          "i" #'helm-gtags-tags-in-this-function
+      :desc "Update Tags"           "u" #'helm-gtags-update-tags
       )
+
+;;-- end gtags
+
+(after! lsp-mode
+  (setq lsp-mode-map           jg-lsp-mode-map
+        lsp-command-map        jg-lsp-command-map
+        lsp-signature-mode-map jg-lsp-signature-mode-map
+        lsp-ui-imenu-mode-map  jg-lsp-ui-imenu-mode-map
+        )
+  )

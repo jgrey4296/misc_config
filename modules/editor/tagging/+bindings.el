@@ -23,21 +23,6 @@
       :desc "Open Random Untagged Twitter" "o u" #'+jg-tag-open-random-untagged-twitter
       )
 
-;;-- gtags
-(map! :map jg-binding-jump-map
-      :prefix ("g" . "gtags")
-      :desc "Create Tags"           "c" #'helm-gtags-create-tags
-      :desc "Find Symbol"           "y" #'helm-gtags-find-symbol
-      :desc "Find Tag Other Window" "o" #'helm-gtags-find-tag-other-window
-      :desc "Find Tag"              "d" #'helm-gtags-find-tag
-      :desc "Find rtag"             "r" #'helm-gtags-find-rtag
-      :desc "Gtags Select"          "s" #'helm-gtags-select
-      :desc "Parse File"            "p" #'helm-gtags-parse-file
-      :desc "Tags in func"          "i" #'helm-gtags-tags-in-this-function
-      :desc "Update Tags"           "u" #'helm-gtags-update-tags
-      )
-
-;;-- end gtags
 
 (after! jg-evil-ex-bindings
   (evil-ex-define-cmd "ht[ag]"  #'librarian-tagging-helm)

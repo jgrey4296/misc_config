@@ -103,6 +103,18 @@
                      treesit-extra-load-path tree-sitter-load-path
                      )
 
+(spec-handling-add! tree-sit-lang
+                    '(agda-mode       . agda)
+                    '(c-mode          . c)
+                    '(c++-mode        . cpp)
+
+                    '(elm-mode        . elm)
+
+                    '(julia-mode      . julia)
+                    '(ruby-mode       . ruby)
+                    '(tuareg-mode     . ocaml)
+                    )
+
 ;;todo: use treesit-font-lock-rules
 ;;-- Footer
 ;; Copyright (C) 2024 john

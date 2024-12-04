@@ -28,29 +28,19 @@
 
 (defer-load! jg-evil-ex-bindings "+evil-ex")
 
-(after! transient-toggles (+jg-ide-extend-toggles))
-
 (advice-add '+eval--ensure-in-repl-buffer    :filter-return #'+jg-repl-fix)
-(advice-add '+jg-send-region-to-repl         :filter-args #'+jg-advice-send-repl-auto-line)
+(advice-add '+jg-send-region-to-repl         :filter-args   #'+jg-advice-send-repl-auto-line)
 
-(when (modulep! +lsp)
-  (advice-add 'lsp-diagnostics-flycheck-enable :around #'+lsp--respect-user-defined-checkers-a)
-  (advice-add 'lsp-describe-session            :around #'+jg-lsp-dont-select-session)
-  (advice-add 'lsp--shutdown-workspace         :around #'+lsp-defer-server-shutdown-a)
-  (advice-add 'lsp--auto-configure             :around #'+lsp--use-hook-instead-a)
-  (advice-add 'lsp-diagnostics--flycheck-level :before #'+lsp--log-diagnostic-build)
-  (local-load! "+lsp")
-  )
+(when (modulep! +lsp) (local-load! "+lsp"))
 
-(when (modulep! +eglot)
-  (advice-add 'eglot--managed-mode             :around #'+lsp--defer-server-shutdown-a)
-  (local-load! "+eglot")
-  )
+(when (modulep! +eglot) (local-load! "+eglot"))
 
 (when (modulep! +semantic) (local-load! "+semantic"))
 
 (when (modulep! +flycheck) (local-load! "+flycheck"))
 
 (when (modulep! +treesitter) (local-load! "+treesitter"))
+
+(when (modulep! +gtags) (load-load! "+gtags"))
 
 ;;; config.el ends here

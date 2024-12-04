@@ -5,38 +5,14 @@
 ;;
 ;; See footer for licenses/metadata/notes as applicable
 ;;-- end Header
-(require 'rx)
 
-(use-package! lsp-mode
-  :commands (lsp-install-server lsp-deferred lsp-update-servers)
-  :init
-  ;; Don't touch ~/.emacs.d, which could be purged without warning
-  (setq lsp-session-file (concat doom-cache-dir "lsp-session")
-        lsp-server-install-dir (concat doom-data-dir "lsp")
-        lsp-keymap-prefix nil)
+(advice-add 'lsp-diagnostics-flycheck-enable :around #'+lsp--respect-user-defined-checkers-a)
+(advice-add 'lsp-describe-session            :around #'+jg-lsp-dont-select-session)
+(advice-add 'lsp--shutdown-workspace         :around #'+lsp-defer-server-shutdown-a)
+(advice-add 'lsp--auto-configure             :around #'+lsp--use-hook-instead-a)
+(advice-add 'lsp-diagnostics--flycheck-level :before #'+lsp--log-diagnostic-build)
 
-  ;; override what is auto loaded
-  (setq lsp-client-packages nil)
-
-  :config
-  (add-to-list 'doom-debug-variables 'lsp-log-io)
-
-  (setq lsp-xml-jar-file (expand-file-name "org.eclipse.lsp4xml-0.3.0-uber.jar" lsp-server-install-dir)
-        lsp-groovy-server-file (expand-file-name "groovy-language-server-all.jar" lsp-server-install-dir))
-
-  (add-hook! 'lsp-mode-hook #'+lsp-optimization-mode)
-
-)
-
-(use-package! lsp-ui
-  :commands (lsp-ui-doc-mode lsp-ui-imenu lsp-ui-sideline)
-  )
-
-(use-package! lsp-ivy
-  :when (modulep! :ui ivy)
-  :commands lsp-ivy--transform-candidate
-  )
-
+;;-- vars
 (setq lsp-auto-configure                 nil
       lsp-enable-dap-auto-configure      nil
 
@@ -108,6 +84,95 @@
              (rx "\/." (| "tox" "venv" "vscode" "yarn"))
              )
       )
+
+;;-- end vars
+
+(use-package! lsp-mode
+  :commands (lsp-install-server lsp-deferred lsp-update-servers)
+  :init
+  ;; Don't touch ~/.emacs.d, which could be purged without warning
+  (setq lsp-session-file (concat doom-cache-dir "lsp-session")
+        lsp-server-install-dir (concat doom-data-dir "lsp")
+        lsp-keymap-prefix nil)
+
+  ;; override what is auto loaded
+  (setq lsp-client-packages nil)
+
+  :config
+  (add-to-list 'doom-debug-variables 'lsp-log-io)
+
+  (setq lsp-xml-jar-file (expand-file-name "org.eclipse.lsp4xml-0.3.0-uber.jar" lsp-server-install-dir)
+        lsp-groovy-server-file (expand-file-name "groovy-language-server-all.jar" lsp-server-install-dir))
+
+  (add-hook! 'lsp-mode-hook #'+lsp-optimization-mode)
+  (add-hook 'jg-transient-toggles-hook #'+jg-ide-build-lsp-transient)
+)
+
+(use-package! lsp-ui
+  :commands (lsp-ui-doc-mode lsp-ui-imenu lsp-ui-sideline)
+  )
+
+(use-package! lsp-ivy
+  :when (modulep! :ui ivy)
+  :commands lsp-ivy--transform-candidate
+  )
+
+(spec-handling-add! env-handling
+                    '(lsp
+                      (:support lsp
+                                #'(lambda (state) (when (featurep 'lsp) (add-hook 'python-mode-hook #'lsp-deferred)))
+                                #'(lambda (state)
+                                    (when (featurep 'lsp)
+                                      (when lsp-mode (lsp-mode -1))
+                                      (when lsp--last-active-workspaces
+                                        (lsp-workspace-shutdown (car lsp--last-active-workspaces)))
+                                      (remove-hook 'python-mode-hook #'lsp-deferred)
+                                      )
+                                     )
+                                )
+                      (:teardown lsp #'(lambda (state) (when (featurep 'lsp) (lsp-disconnect))))
+                      )
+                    )
+
+(spec-handling-add! fold
+                    `(lsp-browser
+                     :modes (lsp-browser-mode)
+                     :priority 30
+                     :triggers (:open-all   ,#'+jg-lsp-toggle-widget-on-line
+                                :close-all  ,#'+jg-lsp-toggle-widget-on-line
+                                :toggle     ,#'+jg-lsp-toggle-widget-on-line
+                                :open       ,#'+jg-lsp-toggle-widget-on-line
+                                :open-rec   ,#'+jg-lsp-toggle-widget-on-line
+                                :close      ,#'+jg-lsp-toggle-widget-on-line
+                                )
+                     )
+                    )
+
+(spec-handling-add! lookup-handler
+                    `(lsp-mode
+                     :definition          +lsp-lookup-definition-handler
+                     :declaration         lsp-find-declaration
+                     :references          +lsp-lookup-references-handler
+                     :documentation       lsp-describe-thing-at-point
+                     :implementations     lsp-find-implementation
+                     :type-definition     lsp-find-type-definition
+                     )
+                    `(lsp-ui-mode
+                      :definition         lsp-ui-peek-find-definitions
+                      :implementations    lsp-ui-peek-find-implementation
+                      :references         lsp-ui-peek-find-references
+                      :async t
+                      )
+                    )
+
+(spec-handling-add! popup
+                    '(lsp
+                      ("^\*lsp session\*"  :side right  :ttl nil :width 0.5 :quit t :select nil :priority 50)
+                      ("^\\*lsp-\\(help\\|install\\)" :size 0.35 :quit t :select t)
+                      ("^\\*eglot-help" :size 0.15 :quit t :select t)
+                     )
+                    )
+
 
 ;;-- Footer
 ;; Copyright (C) 2024 john

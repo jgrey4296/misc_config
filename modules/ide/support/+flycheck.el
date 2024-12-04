@@ -6,9 +6,12 @@
 ;; See footer for licenses/metadata/notes as applicable
 ;;-- end Header
 
+(defvar flycheck-checkers)
+
+(defvar flycheck-disabled-checkers)
+
 (use-package! flycheck
   :commands (flycheck-list-errors flycheck-buffer flycheck-mode global-flycheck-mode)
-  ;; :hook (doom-first-buffer . global-flycheck-mode)
   :init
   (setq flycheck-global-modes nil)
 
@@ -19,7 +22,6 @@
     (define-fringe-bitmap 'flycheck-fringe-bitmap-double-arrow [16 48 112 240 112 48 16] nil nil 'center)
     )
 
-  (delq 'new-line flycheck-check-syntax-automatically)
   (remove-hook 'after-change-major-mode-hook #'global-flycheck-mode-enable-in-buffers)
 
 )
@@ -49,10 +51,6 @@
                       )
                     )
 
-(defvar flycheck-checkers)
-
-(defvar flycheck-disabled-checkers)
-
 (spec-handling-setq! flycheck 50
                      flycheck-display-errors-delay 1
                      flycheck-display-errors-function nil
@@ -65,6 +63,31 @@
                      flycheck-popup-tip-error-prefix "X "
                      flycheck-indication-mode 'right-fringe
                      )
+
+(spec-handling-add! env-handling
+                    '(flycheck
+                      (:support flycheck #'(lambda (path name)
+                                             (when (featurep 'flycheck)
+                                               (unless flycheck-enabled-checkers
+                                                 (let ((chosen (intern (ivy-read "Flychecker: " flycheck-disabled-checkers :require-match t))))
+                                                   (delete chosen flycheck-disabled-checkers)
+                                                   (add-to-list flycheck-enabled-checkers chosen)
+                                                   ))
+                                               (add-hook 'python-mode-hook #'flycheck-mode)
+                                               )
+                                             )
+                                (-partial #'flycheck-mode -1)
+                                )
+                      (:teardown flycheck (-partial flycheck-mode -1))
+                      )
+                      )
+
+(spec-handling-add! popup
+                    '(flycheck
+                      ("^\\*Flycheck error messages\\*" :select nil)
+                      ("^\\*Flycheck errors\\*" :size 0.25)
+                      )
+                    )
 
 ;;-- Footer
 ;; Copyright (C) 2024 john

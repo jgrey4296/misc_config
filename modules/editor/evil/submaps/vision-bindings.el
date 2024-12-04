@@ -13,7 +13,6 @@
       :desc "Top"    "t"          #'evil-scroll-line-to-top
       :desc "Bottom" "b"          #'evil-scroll-line-to-bottom
 
-      :desc "Update Syntax Highlighting" "u" #'font-lock-update
       (:prefix ("'" . "Highlight")
        ;; Reserved
        )

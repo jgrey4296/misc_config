@@ -45,8 +45,7 @@
 
   (lsp-register-client ;; ruff
    (make-lsp-client
-    :new-connection (lsp-stdio-connection
-                     (lambda () lsp-ruff-lsp-server-command))
+    :new-connection (lsp-stdio-connection (lambda () lsp-ruff-lsp-server-command))
     :activation-fn (lsp-activate-on "python")
     :server-id 'jg-ruff
     :priority 3
@@ -67,7 +66,5 @@
       )
     )
    )
-
-
 
   )

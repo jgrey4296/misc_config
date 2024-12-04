@@ -77,3 +77,7 @@
 (use-package! dired-aux
   :defer t
   )
+
+(use-package! dired-imenu
+  :after (dired imenu)
+  )

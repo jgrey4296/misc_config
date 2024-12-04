@@ -124,8 +124,8 @@
 ;;-- end warning suppression
 
 ;;-- command en/disabling
-(enable-command #'list-timers)
-(enable-command #'list-threads)
+(put 'list-timers 'disabled nil)
+(put 'list-threads 'disabled nil)
 
  (defun print-disabled-commands ()
    "Enable all commands, reporting on which were disabled."

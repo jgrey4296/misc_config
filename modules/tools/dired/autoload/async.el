@@ -142,6 +142,7 @@
                   :buffer target-buffer
                   :command (append (list "clamscan" "--recursive" "--stdout" "-l" (expand-file-name "logs/clamscan.log" user-cache-dir)) marked)
                   :sentinel (-partial '(lambda (targ p e) (when (not (process-live-p p))
+                                                            (with-current-buffer targ (insert "\n---- Finished ----\n"))
                                                             (display-buffer targ)))
                                        target-buffer)
                   :noquery t
@@ -157,6 +158,7 @@
                   :buffer target
                   :command (list "freshclam" "-l" (expand-file-name "logs/freshclam.log" user-cache-dir))
                   :sentinel (-partial '(lambda (targ p e) (when (not (process-live-p p))
+                                                            (with-current-buffer targ (insert "\n---- Finished ----\n"))
                                                             (display-buffer targ)))
                                       target)
                   :noquery t

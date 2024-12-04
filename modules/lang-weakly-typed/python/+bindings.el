@@ -80,7 +80,6 @@
       "RET" #'+jg-python-open-coverage-report
       )
 
-
 (map! :map inferior-python-mode-map
       :after python-mode
       "TAB" #'+jg-snippets-complete-or-snippet
@@ -122,7 +121,8 @@
 (map! :map comint-mode-map
       :after (shell comint)
       :localleader
-      :desc "PdbTrack" ";" #'py-pdbtrack-toggle-stack-tracking
+      :desc "PdbTrack"     ";" #'py-pdbtrack-toggle-stack-tracking
+      :desc "Fold lines" "TAB" #'toggle-truncate-lines
       )
 
 (map! :map py-test-minor-mode-map

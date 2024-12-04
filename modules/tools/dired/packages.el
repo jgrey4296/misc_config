@@ -10,3 +10,4 @@
 (package! diredfl)
 (package! fd-dired)
 (package! dirvish)
+(package! dired-imenu)

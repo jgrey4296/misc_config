@@ -24,7 +24,7 @@
   (transient-make-int-call! zimmerframe-dir     "d"  "Set Target Directory"                  #'zimmerframe-directory-init)
   (transient-make-int-call! zimmerframe-filter  "f"  "Filter "                               #'zimmerframe-filter)
   (transient-make-int-call! zimmerframe-keep    "k"  "Keep"                                  #'zimmerframe-filter-keep)
-  (transient-make-int-call! zimmerframe-replace "R"  ": Replace Regexp"                        #'zimmerframe-replace-regexp)
+  (transient-make-int-call! zimmerframe-replace "R"  ": Replace Regexp"                      #'zimmerframe-replace-regexp)
   (transient-make-call! zimmerframe-next         "w" ": Walk Next"                 (zimmerframe-next))
   (transient-make-call! zimmerframe-prev         "W" ": Walk Prev"                 (zimmerframe-prev))
   )

@@ -11,8 +11,9 @@
   (transient-make-call! carousel-print       "p" "Print Order" (carousel-print-order))
   (transient-make-call! carousel-edit        "E" "Edit Order" :transient nil (carousel-edit-order))
   (transient-make-call! carousel-toggle-loop "l"
-                        (format              "Looping : %s" (fmt-as-bool! (persp-parameter 'carousel-loop)))
-                        (carousel-toggle-loop))
+                        (transient-title-mode-formatter "Looping" (persp-parameter 'carousel-loop) "l")
+                        (carousel-toggle-loop)
+                        )
   (transient-make-call! carousel-new         "n" "New Carousel"   :transient nil (carousel-new))
   (transient-make-call! carousel-toggle      "t" "Toggle"         (carousel-toggle))
   (transient-make-call! carousel-quit        "T" "Quit"           (carousel-deconvert))

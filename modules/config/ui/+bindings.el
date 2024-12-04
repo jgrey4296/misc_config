@@ -34,7 +34,8 @@
       )
 
 (map! :map jg-binding-vision-map
-      :desc "Narrow"        "RET" #'+jg-ui-narrow-around-point
+      :desc "Narrow"               "RET" #'+jg-ui-narrow-around-point
+      :desc "Refresh Highlighting" "u"   #'+jg-ui-refresh-highlighting
       )
 
 ;;-- highlight

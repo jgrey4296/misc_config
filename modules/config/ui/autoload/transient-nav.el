@@ -38,6 +38,14 @@
                                           ]
                             )
 
+  (pcase (transient-get-suffix 'jg-toggle-main '(1 -1))
+    ((and `[1 transient-columns nil ,x]
+          (guard (< (length x) 4)))
+     (transient-append-suffix 'jg-toggle-main
+       '(1 -1 -1) jg-toggle-nav-transient))
+    (t (transient-append-suffix 'jg-toggle-main
+         '(1 -1) [ jg-toggle-nav-transient ]))
+    )
   )
 
 ;;-- Footer

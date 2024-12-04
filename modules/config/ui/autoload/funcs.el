@@ -32,3 +32,15 @@
                )
            )
   )
+
+;;;###autoload
+(defun +jg-ui-refresh-highlighting ()
+  (interactive)
+  (when font-lock-mode
+    (font-lock-update)
+    )
+  (when tree-sitter-hl-mode
+    (tree-sitter-hl-mode -1)
+    (tree-sitter-hl-mode 1)
+    )
+  )

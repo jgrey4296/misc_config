@@ -4,9 +4,10 @@
 ;; :desc "Input Language" "i" #'toggle-input-method
 ;; :desc "indent style"   "i" #'doom/toggle-indent-style
 
+(defvar jg-transient-toggles-hook nil)
+
 ;; Top Level Toggle
 (progn
-
 
   (transient-make-mode-toggle! global-company-mode           "AutoComplete"   "C")
   (transient-make-mode-toggle! read-only-mode                "Read Only"      "r" nil buffer-read-only)
@@ -82,4 +83,13 @@
     "T" #'jg-toggle-main
     )
   (evil-make-overriding-map transient-toggles-minor-mode-map)
+  )
+
+;;;###autoload
+(defun +jg-ui-rebuild-transient-toggles ()
+  (interactive)
+  ;; Build the main
+  (+jg-ui-build-main-toggle-transient)
+  ;; Each hook builds a suffix and appends it
+  (run-hooks 'jg-transient-toggles-hook)
   )

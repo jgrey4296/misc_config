@@ -72,5 +72,3 @@ like `debug-on-error' and Edebug can be used."
 (defun jg-jit-lock-debug-announce (&rest args)
   (message "Jit Locking: %s" jit-lock-defer-buffers)
   )
-
-(advice-add #'jit-lock--debug-fontify :before #'jg-jit-lock-debug-announce)

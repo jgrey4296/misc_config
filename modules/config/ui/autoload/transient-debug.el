@@ -43,6 +43,20 @@
 
                                            ] ]
                             )
+
+  (transient-append-suffix 'jg-toggle-main
+    '(2 0 -1)
+    '(transient-macro-call-debug-on-error)
+    )
+
+  (pcase (transient-get-suffix 'jg-toggle-main '(1 -1))
+    ((and `[1 transient-columns nil ,x]
+          (guard (< (length x) 4)))
+     (transient-append-suffix 'jg-toggle-main
+       '(1 -1 -1)  jg-toggle-debugs-transient))
+    (t (transient-append-suffix 'jg-toggle-main
+       '(1 -1)  [ jg-toggle-debugs-transient ]))
+    )
   )
 
 ;;-- Footer

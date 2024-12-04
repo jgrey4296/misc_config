@@ -19,6 +19,9 @@
 (package! hide-mode-line)
 (package! fringe :built-in t)
 
+(package! font-lock :built-in t)
+(package! font-lock-ext)
+(package! font-lock-studio)
 (package! font-lock+       :recipe (:host github :repo "emacsmirror/font-lock-plus"))
 (package! palette-mode     :recipe (:host github :repo "jgrey4296/misc-modes" :files ("major-modes/palette-mode/*.el") :local-repo "misc-modes"))
 

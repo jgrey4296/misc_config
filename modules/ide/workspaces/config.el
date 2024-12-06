@@ -131,12 +131,13 @@
                        )
                      )
     )
+  (after! transient (jg-workspace-build-carousel-transient))
   )
 
 (use-package! project-zimmerframe
   :after transient
   :config
-  (after! jg-workspaces-core-transient (+jg-workspace-add-zimmerframe-transient))
+  (add-hook 'jg-workspace-transient-hook #'jg-workspace-build-zimmerframe-transient)
   )
 
 (use-package! related-files
@@ -275,10 +276,11 @@
 
 (use-package! transient
   :config
+  ;; TODO refactor this like ui's transients
   ;; Define
-  (jg-workspace-define-workspace-control)
-  (jg-workspace-define-carousel-transient)
+  (add-hook 'jg-workspace-transient-hook #'jg-workspace-build-project-transient)
+
+  (+jg-workspace-build-workspace-transient)
   ;; Extend
-  (+jg-workspace-add-project-transient)
   (provide 'jg-workspaces-core-transient)
   )

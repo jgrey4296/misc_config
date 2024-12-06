@@ -19,7 +19,7 @@
 
   ;;
   (transient-make-call!   spelling "s"
-                          (format "%3s : Spelling" (fmt-as-bool! flyspell-mode))
+                          (transient-title-mode-formatter "Spelling" flyspell-mode "s")
                           (flyspell-mode 'toggle)
                           (writegood-mode (if flyspell-mode 1 -1))
                           )

@@ -2,16 +2,11 @@
 
 ;;;###autoload
 (defun +jg-python-cleanup-ensure-newline-before-def ()
-  (while (re-search-forward "\\(\n\\)\\(\s*@.+?\n\\)*\s*\\(def\\|class\\)" nil t)
+  (while (re-search-forward "\\(\n\\)\\(\s*@.+?\n\\)*\s*\\(def\\|class\\)\s" nil t)
     (goto-char (match-end 1))
     (insert "\n")
     (goto-char (match-end 0))
     )
-  )
-
-;;;###autoload
-(defun +jg-python-align-dictionaries ()
-  ;; TODO
   )
 
 ;; Simple Functions to feed into sort-subr
@@ -35,7 +30,11 @@
 ;;;###autoload
 (defun +jg-python-sort-class-methods ()
   (interactive)
+  (user-error "TODO")
   (+jg-python-select-class)
+  ;; copy class to temp buffer
+  ;; sort
+  ;; offer diff
   (narrow-to-region evil-visual-beginning evil-visual-end)
   (goto-char (point-min))
   (evil-normal-state)

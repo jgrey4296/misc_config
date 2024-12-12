@@ -163,8 +163,7 @@
 
     :n "s n" #'Info-goto-node
     :n "s N" #'Info-goto-node-web
-    :n "s s" #'Info-search
-    :n "n"   #'Info-search-next
+    :n "s s" nil
 
     :n "q" #'quit-window
     :n "DEL" #'Info-toc

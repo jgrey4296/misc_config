@@ -6,8 +6,10 @@
 ;;
 ;;-- end Header
 
+;;;###autoload
 (defun +jg-workspaces-rebuild-persp-cache ()
   (interactive)
+  (unless *persp-hash* (setq *persp-hash* (make-hash-table)))
   (setq persp-names-cache
         (cl-loop for name in (hash-table-keys *persp-hash*)
                  if (not (string-equal name persp-nil-name))

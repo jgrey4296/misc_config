@@ -2,7 +2,7 @@
 (require 'transient)
 ;; https://emacs-lsp.github.io/lsp-mode/tutorials/how-to-turn-off/
 
-(progn
+(progn ;; toggles
   (transient-make-var-toggle! lsp-doc-hover lsp-eldoc-enable-hover         "Docs on Hover"         "h")
   (transient-make-var-toggle! lsp-doc-childframe lsp-ui-doc-use-childframe "Doc Childframe"        "f")
   (transient-make-var-toggle! lsp-keep-alive lsp-keep-workspace-alive      "Keep Alive"            "k")
@@ -23,8 +23,7 @@
 
   )
 
-(progn
-  ;;
+(progn ;; calls
   (transient-make-int-call! lsp-trace-io "i"
                             (transient-title-var-formatter "Log IO" lsp-log-io "i")
                             #'lsp-toggle-trace-io)
@@ -161,5 +160,7 @@
     )
 
   (transient-append-suffix (caddr jg-toggle-visuals-transient)
-    "H" '("t" transient-macro-toggle-tree-sitter-hl-mode))
+    "H" '("t" transient-macro-toggle-tree-sitter-hl-mode)
+    )
+
   )

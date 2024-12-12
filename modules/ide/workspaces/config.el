@@ -281,6 +281,7 @@
   (add-hook 'jg-workspace-transient-hook #'jg-workspace-build-project-transient)
 
   (+jg-workspace-build-workspace-transient)
+  (add-hook 'spec-handling-hook #'+jg-workspace-build-workspace-transient)
   ;; Extend
   (provide 'jg-workspaces-core-transient)
   )

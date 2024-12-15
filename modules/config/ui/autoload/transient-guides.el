@@ -53,7 +53,7 @@
                (guard (< (length x) 4)))
           (transient-append-suffix 'jg-toggle-main
               '(1 -1 -1) jg-toggle-guides-transient))
-         (t (transient-append-suffix 'jg-toggle-main
+         (_ (transient-append-suffix 'jg-toggle-main
             '(1 -1) [ jg-toggle-guides-transient ]))
       )
   )

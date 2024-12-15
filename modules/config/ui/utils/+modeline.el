@@ -1,9 +1,48 @@
 ;;; +modeline.el -*- lexical-binding: t; -*-
 
+;; defined segments are in doom-modeline-fn-alist
+
+;; format-mode-line
+;; doom-modeline-def-env
+;; doom-modeline-def-segment
+
+(doom-modeline-def-segment vbar
+  "a vertical bar"
+  " | "
+  )
+
+(doom-modeline-def-segment test-segment
+  "Testing"
+  "blah"
+  )
+
 ;; Define your custom doom-modeline
 (doom-modeline-def-modeline 'my-simple-line
-'(bar matches buffer-info remote-host buffer-position parrot selection-info)
-'(misc-info minor-modes input-method buffer-encoding major-mode process vcs checker))
+  '(;;lhs
+    buffer-position
+    matches
+    modals
+    check
+    vbar
+    test-segment
+    vbar
+    ;; buffer-info
+    ;; remote-host
+    ;; selection-info
+    ;; major-mode
+    )
+  '(;;rhs
+    ;; misc-info
+    ;; minor-modes
+    ;; input-method
+    ;; buffer-encoding
+    lsp
+    major-mode
+    vcs
+    ;; process
+    ;; vcs
+    ;; checker
+    ))
 
 ;; Set default mode-line
 ;; (add-hook 'doom-modeline-mode-hook
@@ -16,16 +55,26 @@
 ;; Or disable other mode-lines
 ;; (setq 'doom-modeline-mode-alist nil)
 
-(defun +jg-ui-modeline-choose ()
-  (interactive)
-  (doom-modeline-set-modeline
-   'main
-   ;; (intern-soft (ivy-read "Modeline: " doom-modeline-mode-alist))
-   t)
+(defvar doom-modeline-formatters nil)
+
+(defun doom-modeline--get-formatters ()
+  (cl-do-all-symbols (sym)
+    (when (s-starts-with? "doom-modeline-format--" (symbol-name sym))
+      (add-to-list 'doom-modeline-formatters (s-chop-prefixes '("doom-modeline-format--") (symbol-name sym)))
+      )
+    )
   )
-(doom-modeline 'minimal)
-;; (doom-modeline-set-modeline 'magit-mode)
-;; mode-line-format
+
+
+
+(defun +jg-ui-modeline-choose (arg)
+  (interactive "P")
+  (when (or arg (not doom-modeline-formatters))
+    (doom-modeline--get-formatters))
+  (doom-modeline-set-modeline (intern-soft (ivy-read "Modeline: " doom-modeline-formatters)))
+  )
+
+;; todo mode-line-format
 
 (map! :map jg-help-map
       :after jg-help-bindings

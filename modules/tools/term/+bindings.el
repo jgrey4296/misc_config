@@ -41,6 +41,8 @@
       :n "H" #'comint-show-output
       :n "L" #'comint-show-maximum-output
       :ni "RET" #'comint-send-input
+      :n "[ p" #'comint-previous-prompt
+      :n "] p" #'comint-next-prompt
       )
 
 (map! :map jg-term-comint-mode-map

@@ -6,3 +6,9 @@
                     :struct '(TODO)
                     val
                     )
+
+(spec-handling-new! headerline header-line-format
+                    :loop 'collect
+                    :doc "Add Values to header-line-format"
+
+                    )

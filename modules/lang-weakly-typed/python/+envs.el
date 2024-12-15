@@ -7,12 +7,28 @@
   :init
   (advice-add 'pythonic-activate :after-while #'+modeline-update-env-in-all-windows-h)
   (advice-add 'pythonic-deactivate :after #'+modeline-clear-env-in-all-windows-h)
+  (spec-handling-add! lib-env
+                      `(pythonic
+                        :start ,#'(lambda (&rest rest) (pythonic-activate (car rest)))
+                        :stop ,#'(lambda (&rest rest) (pythonic-deactivate))
+                        )
+                      )
   )
 
 (use-package! pipenv
   :commands (pipenv-project-p pipenv-activate pipenv-deactivate)
   :init
   (setq pipenv-with-projectile nil)
+  (spec-handling-add! lib-env ;; pipenv / pip
+                    `(pipenv
+                      :lang python
+                      :setup ,#'(lambda (&rest rest) (add-hook 'librarian-envs-enter-hook #'jg-py--enter-env-update-paths))
+                      :start ,#'(lambda (&rest rest) (pipenv-activate))
+                      :stop  ,#'(lambda (&rest rest) (pipenv-deactivate))
+                      )
+                    )
+
+
   )
 
 (use-package! pyvenv
@@ -20,23 +36,60 @@
   :init
   (add-hook 'pyvenv-post-activate-hooks #'+modeline-update-env-in-all-windows-h)
   (add-hook 'pyvenv-pre-deactivate-hooks #'+modeline-clear-env-in-all-windows-h)
-
+  (spec-handling-add! lib-env ;; venv
+                      `(venv
+                        :setup ,#'(lambda (&rest rest) (add-hook 'librarian-envs-enter-hook #'jg-py--enter-env-update-paths))
+                        :start ,#'(lambda (state &rest rest) (pyvenv-activate (car rest)))
+                        :stop  ,#'(lambda (state &rest rest) (pyvenv-deactivate))
+                        :teardown #'(lambda (&rest rest)
+                                      (setq python-shell-extra-pythonpaths nil
+                                            py-shell-extra-pythonpaths nil
+                                            )
+                                      )
+                        )
+                      )
   )
 
 (use-package! conda
   :commands (conda-env-activate conda-env-deactivate conda-env-read-name)
   :init
   (advice-add 'conda--get-path-prefix :override #'+jg-python-conda-get-path-prefix)
+  (spec-handling-add! lib-env
+                      `(conda
+                        :start ,#'(lambda (&rest rest)
+                                    (conda-env-activate (car rest))
+                                    (setenv "CONDA_DEFAULT_ENV" (car rest))
+                                    )
+                        :stop ,#'(lambda (&rest rest) (conda-env-deactivate) (setenv "CONDA_DEFAULT_ENV" nil))
+                        )
+                      )
 
-)
+  )
 
 (use-package! micromamba
   :commands (micromamba-activate micromamba-deactivate)
+  :init
+  (spec-handling-add! lib-env
+                      `(mamba
+                        :setup ,#'(lambda (&rest rest) (add-hook 'librarian-envs-enter-hook #'jg-py--enter-env-update-paths))
+                        :start ,#'(lambda (&rest rest)
+                                    (micromamba-activate (car rest))
+                                    (setenv "CONDA_DEFAULT_ENV" (car rest))
+                                    )
+                        :stop ,#'(lambda (&rest rest) (micromamba-deactivate) (setenv "CONDA_DEFAULT_ENV" nil))
+                        )
+                      )
   )
 
 (use-package! poetry
   :commands (poetry-venv-workon poetry-venv-deactivate poetry-update poetry-add)
-
+  :init
+  (spec-handling-add! lib-env
+                      `(poetry
+                        :start ,#'(lambda (&rest rest) (poetry-venv-workon))
+                        :stop  ,#'(lambda (&rest rest) (poetry-venv-deactivate))
+                        )
+                      )
   )
 
 (use-package! pip-requirements
@@ -49,3 +102,11 @@
   (advice-add 'pip-requirements-complete-at-point :before #'+python--init-completion-a)
   (advice-add 'pip-requirements-mode              :around #'+python--inhibit-pip-requirements-fetch-packages-a)
 )
+
+;; Add as a entry hook with late priority
+(defun jg-py--enter-env-update-paths (state)
+  (let ((root (librarian-envs-loc-root (librarian-envs-state-loc state))))
+    (when (boundp 'python-shell-extra-pythonpaths) (add-to-list 'python-shell-extra-pythonpaths root))
+    (when (boundp 'py-shell-extra-pythonpaths)     (add-to-list 'py-shell-extra-pythonpaths root))
+    )
+  )

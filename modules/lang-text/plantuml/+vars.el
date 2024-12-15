@@ -4,13 +4,6 @@
   (setq flycheck-plantuml-executable (executable-find "plantuml"))
   )
 
-
-(spec-handling-add! librarian-regular
-                    '(plantuml-mode
-                     ("Plantuml Manual" . "https://plantuml.com/")
-                     )
-                    )
-
 (spec-handling-add! popup
                     '(plantuml
                       ("^\\*PLANTUML" :size 0.4 :select nil :ttl 0)

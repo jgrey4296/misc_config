@@ -117,20 +117,13 @@
   :commands lsp-ivy--transform-candidate
   )
 
-(spec-handling-add! env-handling
-                    '(lsp
-                      (:support lsp
-                                #'(lambda (state) (when (featurep 'lsp) (add-hook 'python-mode-hook #'lsp-deferred)))
-                                #'(lambda (state)
-                                    (when (featurep 'lsp)
-                                      (when lsp-mode (lsp-mode -1))
-                                      (when lsp--last-active-workspaces
-                                        (lsp-workspace-shutdown (car lsp--last-active-workspaces)))
-                                      (remove-hook 'python-mode-hook #'lsp-deferred)
-                                      )
+(spec-handling-add! lib-env
+                    `(lsp
+                      :setup    ,#'(lambda (&rest args) nil)
+                      :stop     ,#'(lambda () (when lsp--last-active-workspaces
+                                                (lsp-workspace-shutdown (car lsp--last-active-workspaces)))
                                      )
-                                )
-                      (:teardown lsp #'(lambda (state) (when (featurep 'lsp) (lsp-disconnect))))
+                      :teardown ,#'lsp-disconnect
                       )
                     )
 
@@ -172,7 +165,6 @@
                       ("^\\*eglot-help" :size 0.15 :quit t :select t)
                      )
                     )
-
 
 ;;-- Footer
 ;; Copyright (C) 2024 john

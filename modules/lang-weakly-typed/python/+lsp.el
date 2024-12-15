@@ -68,3 +68,11 @@
    )
 
   )
+
+(spec-handling-add! lib-env
+                    `(py-lsp
+                      :lang python
+                      :setup ,#'(lambda () (add-hook 'python-mode-hook #'lsp-deferred))
+                      :teardown ,#'(lambda () (remove-hook 'python-mode-hook #'lsp-deferred))
+                      )
+                    )

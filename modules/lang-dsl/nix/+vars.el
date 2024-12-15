@@ -1,12 +1,5 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
-(spec-handling-add! librarian-regular
-                    '(nix-mode
-                      ("Nix Reference" . "https://nixos.org/learn.html")
-                      ("Nix Language" . "https://nixos.org/guides/nix-language.html")
-                      ("Nix Documentation" . "https://nixos.org/manual/nix/stable/introduction.html")
-                      )
-                    )
 (spec-handling-add! company
                     '(nix-mode (:mode . company-nixos-options))
                     )

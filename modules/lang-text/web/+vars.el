@@ -160,18 +160,6 @@ If set to `nil', disable all the above behaviors.")
                       ("js" . js)
                       )
                     )
-(spec-handling-add! librarian-regular
-                    '((css-mode less-css-mode scss-mode sass-mode)
-                     ("CSS Reference" . "https://developer.mozilla.org/en-US/docs/Web/CSS")
-                     ("LESS Reference" . "https://lesscss.org/features/")
-                     ("Cheatsheet" . "https://htmlcheatsheet.com/css/")
-                     ("Css templates" . "https://markdowncss.github.io/")
-                     )
-                    '(web-mode
-                     ("HTML Reference" . "https://developer.mozilla.org/en-US/docs/Web/HTML")
-                     ("Cheatsheet" . "https://htmlcheatsheet.com/")
-                     )
-                    )
 (spec-handling-add! docsets
                     '((css-mode scss-mode sass-mode)
                       "CSS" "HTML" "Bourbon" "Compass"

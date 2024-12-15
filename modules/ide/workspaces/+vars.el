@@ -108,7 +108,8 @@
 (spec-handling-add! file-templates
                     '(project
                      ("/doot\\.toml\\'" :trigger "__doot_toml" :mode conf-toml-mode)
-                     ("\\.related\\'"    :trigger "dot.related" :mode fundamental-mode)
+                     ("\\.related\\'"   :trigger "dot.related" :mode fundamental-mode)
+                     ("\\.lenvs\\'"     :trigger "lib-envs.spec" :mode fundamental-mode)
                      )
                     )
 

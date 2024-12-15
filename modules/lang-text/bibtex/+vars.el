@@ -47,12 +47,6 @@
                      +jg-text-cleanup-whitespace
                      )
                     )
-(spec-handling-add! librarian-regular
-                    '(bibtex-mode
-                     ("bibtex reference" . "https://www.bibtex.com/g/bibtex-format/")
-                     ("Diacritics" . "https://en.wikibooks.org/wiki/LaTeX/Special_Characters")
-                     )
-                    )
 (spec-handling-add! auto-modes
                     '(bibtex
                       ("\\.bib\\'" . bibtex-mode)

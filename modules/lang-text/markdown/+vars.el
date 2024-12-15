@@ -73,16 +73,6 @@ capture, the end position, and the output buffer.")
                      )
                     )
 
-(spec-handling-add! librarian-regular
-                    '(markdown-mode
-                     ("mdbook" . "https://rust-lang.github.io/mdBook/")
-                     ("markdown cheatsheet" . "https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet")
-                     ("markdown Syntax" . "https://www.markdownguide.org/basic-syntax/")
-                     ("github markdown" . "https://github.github.com/gfm/")
-                     ("markdown refernce" . "https://commonmark.org/help/")
-                     ("Pelican" . "https://docs.getpelican.com/en/latest/")
-                     )
-                    )
 
 (spec-handling-add! auto-modes
                     '(markdown

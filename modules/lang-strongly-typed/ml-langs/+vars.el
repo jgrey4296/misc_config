@@ -1,6 +1,5 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
-
 (after! smartparens-ml
   (sp-with-modes '(tuareg-mode fsharp-mode)
     (sp-local-pair "(*" "*)" :actions nil)
@@ -20,16 +19,6 @@
                       :definition merlin-locate
                       :references merlin-occurrences
                       :documentation merlin-document
-                      )
-                    )
-
-(spec-handling-add! librarian-regular
-                    '(ocaml-mode
-                      ("OCaml Reference" . "https://v2.ocaml.org/releases/5.0/htmlman/index.html")
-                      ("Ocaml Tutorial" . "https://ocaml.org/docs/up-and-running")
-                      )
-                    '(sml-mode
-                      ("SML Docs" . "https://smlfamily.github.io/")
                       )
                     )
 

@@ -5,13 +5,6 @@
 This directory MUST contain the 'main.lua' file and be the in-source build of
 lua-language-server.")
 
-(spec-handling-add! librarian-regular
-                    '(lua-mode
-                      ("Lua Docs" . "https://www.lua.org/docs.html")
-                      ("Garrys Mod" . "https://wiki.facepunch.com/gmod/Beginner_Tutorial_Intro")
-                      ("Lua Manual" . "https://www.lua.org/manual/5.4/")
-                      )
-                    )
 
 (spec-handling-add! company
                     '(lua-mode (:mode company-lua))

@@ -13,9 +13,3 @@
                       ( "^\\*fortran-compilation" :side 'right :size 0.5 :quit t)
                       )
                     )
-
-(spec-handling-add! librarian-regular
-                    (fortran-mode
-                     ("Fortran Reference" . "https://www.intel.com/content/www/us/en/docs/fortran-compiler/developer-guide-reference/2023-0/language-reference.html")
-                     )
-                    )

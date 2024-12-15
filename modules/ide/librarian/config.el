@@ -3,6 +3,7 @@
 (local-load! "+vars")
 (local-load! "+spec-defs")
 (local-load! "+extra-config")
+(local-load! "+envs")
 
 (defer-load! jg-bindings-core "+bindings")
 

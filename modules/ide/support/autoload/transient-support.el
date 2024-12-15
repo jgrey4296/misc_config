@@ -70,7 +70,7 @@
                           (with-temp-buffer-window "*LSP: Blocklisted*" #'popup-window nil
                             (dolist (folder blocklist)
                               (princ (format "-- %s\n" folder))))))
-  (transient-make-int-call! lsp-unblocklist "B"
+  (transient-make-int-call! lsp-unblacklist "B"
                             "Unblocklist folder"
                             #'lsp-workspace-blocklist-remove)
 

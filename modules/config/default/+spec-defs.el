@@ -1,7 +1,9 @@
 ;;; +spec-defs.el -*- lexical-binding: t; -*-
 
-(spec-handling-new! auto-modes auto-mode-alist :loop 'append
-                    :doc "Handler to control automodes"
+(spec-handling-new! auto-modes
+                    "Handler to control automodes"
+                    :target auto-mode-alist
+                    :loop 'append
                     :struct '(key  val:list\[(regex . mode)\])
                     val
                     )

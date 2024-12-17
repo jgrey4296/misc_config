@@ -35,20 +35,13 @@
       ;; :desc "jump to symbol in current workspace"   "j"   #'+jg-lsp-describe-workspace-symbol
       ;; :desc "Jump to symbol in any workspace"       "J"   #'lsp-ivy-global-workspace-symbol
       (:after flycheck
-       :desc "Flycheck" "!" flycheck-command-map
+       :desc "Flycheck" "f" flycheck-command-map
        )
-      )
-
-(map! :leader
-      :after flycheck
-      :prefix "c"
-      :desc "Flycheck" "!" flycheck-command-map
       )
 
 (map! :map jg-lsp-mode-map
       :n "g r" #'lsp-rename
       ;; :n "s '" #'lsp-ui-imenu
-      :n "c x" #'flycheck-list-errors
       :n "s j" #'+jg-lsp-describe-workspace-symbol
       )
 
@@ -133,6 +126,12 @@
       :n "w" #'tabulated-list-next-column
       :n "b" #'tabulated-list-previous-column
       )
+
+(map! :after flycheck
+      :map flycheck-command-map
+      "m" #'flycheck-mode
+      )
+
 ;;-- end flycheck
 
 ;;-- tree-sitter

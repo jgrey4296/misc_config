@@ -9,6 +9,9 @@
 (defvar flycheck-checkers)
 
 (defvar flycheck-disabled-checkers)
+(after! jg-evil-ex-bindings
+  (evil-ex-define-cmd "er[rors]"    #'+default/diagnostics)
+  )
 
 (use-package! flycheck
   :commands (flycheck-list-errors flycheck-buffer flycheck-mode global-flycheck-mode)
@@ -39,10 +42,9 @@
     )
   )
 
-(spec-handling-new! flycheck nil :loop 'hook
+(spec-handling-new-hook! flycheck
+                    "sets up a stack of checkers"
                     :struct '(:head checker :rest rest)
-                    :doc ""
-                    (flycheck-mode)
                     (let ((head (plist-get val :head)))
                       (flycheck-select-checker head)
                       (dolist (next (plist-get val :rest))
@@ -64,23 +66,14 @@
                      flycheck-indication-mode 'right-fringe
                      )
 
-(spec-handling-add! env-handling
-                    '(flycheck
-                      (:support flycheck #'(lambda (path name)
-                                             (when (featurep 'flycheck)
-                                               (unless flycheck-enabled-checkers
-                                                 (let ((chosen (intern (ivy-read "Flychecker: " flycheck-disabled-checkers :require-match t))))
-                                                   (delete chosen flycheck-disabled-checkers)
-                                                   (add-to-list flycheck-enabled-checkers chosen)
-                                                   ))
-                                               (add-hook 'python-mode-hook #'flycheck-mode)
-                                               )
-                                             )
-                                (-partial #'flycheck-mode -1)
-                                )
-                      (:teardown flycheck (-partial flycheck-mode -1))
+(spec-handling-add! lib-env
+                    `(flycheck
+                      :setup    ,#'(lambda (&rest rest) )
+                      :start    ,#'(lambda (&rest rest) )
+                      :stop     ,#'(lambda (&rest rest) )
+                      :teardown ,#'(lambda (&rest rest) )
                       )
-                      )
+                    )
 
 (spec-handling-add! popup
                     '(flycheck

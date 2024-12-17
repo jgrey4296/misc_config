@@ -1,5 +1,6 @@
-;;; flycheck.el -*- lexical-binding: t; -*-
+;;; lsp-filter .el -*- lexical-binding: t; -*-
 
+(defvar jg-lsp-message-filter nil)
 
 ;;;###autoload
 (defun +jg-python-lsp-flycheck-filter (params workspace)
@@ -18,29 +19,26 @@ Available Keys: (range message severity code source data)
         )
     (remhash "diagnostics" params)
     (cl-loop for table in (append diags nil)
+             when jg-lsp-message-filter do
+             (message "Diag: %s : %s : %s : %s"
+                      (gethash "source" table)
+                      (gethash "severity" table)
+                      (s-replace-regexp "\n+" " " (gethash "message" table))
+                      (gethash "tags" table)
+                      )
              do
-             ;; (message "Diag: %s : %s : %s : %s"
-             ;;          (gethash "source" table)
-             ;;          (gethash "severity" table)
-             ;;          (s-replace-regexp "\n+" " " (gethash "message" table))
-             ;;          (gethash "tags" table)
-             ;;          )
              (cond ((and (equal "pyright" (downcase (gethash "source" table)))
                          (gethash "tags" table))
-                    ;; (message "Skipping")
+                    (when jg-lsp-message-filter (message "Skipping"))
                     nil
                     )
-                   ;; ((and (equal "ruff" (downcase (gethash "source" table)))
-                   ;;       (not (eq (gethash "tags" table) [1])))
-                   ;;  nil
-                   ;;  )
                    ((equal "ruff" (downcase (gethash "source" table)))
                     (remhash "tags" table)
                     (puthash "message" (format "Ruff: %s" (gethash "message" table)) table)
                     (push table new-diags)
                     )
                    (t
-                    ;; (message "Default")
+                    (when jg-lsp-message-filter (message "Default"))
                     (puthash "message" (format "%s: %s"
                                                (gethash "source" table)
                                                (s-replace-regexp "\n+" " "

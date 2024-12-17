@@ -28,7 +28,7 @@
       aw--lead-overlay-fn #'aw--lead-overlay
       )
 
-(spec-handling-add! popup :form 'override
+(spec-handling-add! popup
                     '(window-nav
                       ("\*scratch::system\\*"   :side left   :ttl nil :width  50  :quit t :select t :priority 150)
                       ("\*scratch::.*?\\*"      :side right  :ttl nil :width  50  :quit t :select t :priority 150)

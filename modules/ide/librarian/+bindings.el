@@ -6,7 +6,7 @@
 
       (:prefix "s"
        ;; :desc "Look up in all docsets"       "K" #'+lookup/in-all-docsets
-       :desc "Look up in local docsets"     "k" #'librarian-in-docsets
+       :desc "Look up in local docsets"     "k" #'librarian-docset-consult
        :desc "Look up online (w/ prompt)"   "O" #'librarian-online-select
        :desc "Look up online"               "o" #'librarian-online
        )
@@ -14,7 +14,7 @@
 
 (map! :map jg-help-map
       :after jg-help-bindings
-      :desc "Man"                         "d m"  #'librarian-man--call
+      :desc "Man"                         "d m"  #'librarian-man
       :desc "Emacs Version Config"        "p v"  #'librarian-system-config
       :desc "Describe Class"              "c"    #'librarian-describe-class
       :prefix ("e" . "Edit")
@@ -45,8 +45,8 @@
         :desc "Look up online (w/ prompt)" :n    "1" #'librarian-online-select
         :desc "Look up online"             :n    "2" #'librarian-online
 
-        :desc "Dictionary"                 :n    "q" #'librarian-words--definition
-        :desc "Thesaurus"                  :n    "Q" #'librarian-words--synonyms
+        :desc "Dictionary"                 :n    "q" #'librarian-words-definition
+        :desc "Thesaurus"                  :n    "Q" #'librarian-words-synonyms
 
         :desc "Debug"                      :n    "?" #'librarian-debug
         :desc "Install Docset"             :n    "0" #'librarian-docset-install

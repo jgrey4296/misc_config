@@ -47,7 +47,7 @@
 ;;-- end misc
 
 ;;-- specs
-(spec-handling-add! popup :form 'override
+(spec-handling-add! popup
                     '(magit
                      ("^\\*git-gutter" :select nil :size '+popup-shrink-to-fit)
                      ("^magit-todos-list" :select nil :side right :ttl nil :quit t :width 80 :priority 180)

@@ -7,6 +7,5 @@
 (evil-ex-define-cmd "cp[revious]" #'previous-error)
 
 (evil-ex-define-cmd "com[pile]"   #'+evil:compile)
-(evil-ex-define-cmd "er[rors]"    #'+default/diagnostics)
 
 ;; TODO (evil-ex-define-cmd "rx"          'doom:regex)             ; open re-builder

@@ -217,7 +217,7 @@
 
 ;;-- capture
 
-(spec-handling-add! org-capture :form 'override
+(spec-handling-add! org-capture
                     `(todo
                       (:key       "t" :name      "Personal todo"
                        :file      +org-capture-todo-file :headline  "Triage"

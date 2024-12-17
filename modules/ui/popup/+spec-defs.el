@@ -27,10 +27,11 @@
      (ttl . nil)))
   "Popup rule for a persistent buffer")
 
-(spec-handling-new! popup display-buffer-alist
+(spec-handling-new! popup
+                    "Specify popup buffer rules. Each plist is of :struct"
+                    :target display-buffer-alist
                     :sorted t
                     :loop 'append
-                    :doc "Specify popup buffer rules. Each plist is of :struct"
                     :struct '(regexp :size :side :width :height :slot :vslot :ttl :quit :select :modeline :autosave)
                     (cl-loop for rule in val
                              collect

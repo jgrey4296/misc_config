@@ -29,7 +29,7 @@
                     )
 
 ;; Agendas
-(spec-handling-add! ibuffer-filters :form 'override
+(spec-handling-add! ibuffer-filters
                     '(agendas (or  (agenda-buffers)
                                    (name . "base_agenda.org")))
                     )
@@ -202,7 +202,7 @@
                       )
                     )
 
-(spec-handling-add! ibuffer-groups :form 'extend
+(spec-handling-add! ibuffer-groups
                        '(programming
                          ("python" (or (derived-mode . python-mode) (derived-mode . python-base-mode)))
                          ("lisp"   (derived-mode . emacs-lisp-mode))

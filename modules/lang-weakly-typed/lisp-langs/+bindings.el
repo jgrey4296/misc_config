@@ -112,9 +112,9 @@
 (map! :map buttercup-minor-mode-map
       :localleader
       :prefix "t"
-      "t" #'+emacs-lisp/buttercup-run-file
-      "a" #'+emacs-lisp/buttercup-run-project
-      "s" #'buttercup-run-at-point
+      :desc "Run File"    "f" #'+emacs-lisp/buttercup-run-file
+      :desc "Run Project" "p" #'+emacs-lisp/buttercup-run-project
+      :desc "At Point"    "t" #'buttercup-run-at-point
       )
 
 (map! :map dired-mode-map

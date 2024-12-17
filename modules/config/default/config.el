@@ -1,7 +1,5 @@
 ;;; config/default/config.el -*- lexical-binding: t; -*-
 
-(local-load! "+spec-defs")
-(local-load! "+vars")
 
 (advice-add 'newline-and-indent        :before-until #'+default--newline-indent-and-continue-comments-a)
 (advice-add 'save-place-find-file-hook :after-while #'doom--recenter-on-load-saveplace-a)
@@ -18,7 +16,7 @@
 (add-hook 'tty-setup-hook #'doom-init-clipboard-in-tty-emacs-h)
 
 (use-package! spec-handling
-  :commands (run-spec-handlers spec-handling-new! spec-handling-add! spec-handling-setq)
+  :autoload (run-spec-handlers spec-handling-new! spec-handling-new-hook! spec-handling-add! spec-handling-setq!)
   )
 
 (use-package! epa
@@ -61,3 +59,6 @@
 (use-package! f)
 
 (use-package! s)
+
+(local-load! "+spec-defs")
+(local-load! "+vars")

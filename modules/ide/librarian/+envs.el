@@ -6,7 +6,8 @@
 ;;
 ;;-- end Header
 
-(spec-handling-new! lib-env nil
+(spec-handling-new! lib-env
+                    "Registers environment entry/exit handlers. eg: for python"
                     :struct '(or librarian-env-handler plist)
                     :loop 'do
                     (if (librarian-envs-handler-p (car-safe val))

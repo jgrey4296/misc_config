@@ -31,7 +31,7 @@
                       ("^\\*\\(projectile-\\)?rails" :ttl nil)
                       )
                     )
-(spec-handling-add! file-templates :form 'override
+(spec-handling-add! file-templates
                     `(ruby
                       ("\\.rb$"     :when ,#'+jg-ruby-file-in-tap :trigger "__forumula"   :mode ruby-mode)
                       ("/lib/.+\\.rb$"      :trigger "__module"   :mode ruby-mode :project t)

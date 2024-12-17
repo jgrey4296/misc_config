@@ -2,7 +2,7 @@
 
 (local-load! "+defs")
 (local-load! "+vars")
-(local-load! "+extra-configs")
+(local-load! "+extra")
 
 (defer-load! jg-bindings-total "+bindings")
 
@@ -37,11 +37,6 @@
            (when +emacs-lisp-enable-extra-fontification
              `((+emacs-lisp-highlight-vars-and-faces . +emacs-lisp--face)))))
 
-  ;; UX: Flycheck's two emacs-lisp checkers produce a *lot* of false positives
-  ;;   in non-packages (like Emacs configs or elisp scripts), so I disable
-  ;;   `emacs-lisp-checkdoc' and set `byte-compile-warnings' to a subset of the
-  ;;   original in the flycheck instance (see `+emacs-lisp-linter-warnings').
-  (add-hook 'flycheck-mode-hook #'+emacs-lisp-non-package-mode)
 
   (add-hook! 'emacs-lisp-mode-hook
              #'flycheck-mode
@@ -64,7 +59,7 @@
     outline-level #'+emacs-lisp-outline-level
     evil-surround-pairs-alist (append jg-evil-surround-pairs-base
                                       jg-lisp-surround-pairs)
-    flycheck--automatically-enabled-checkers '(emacs-lisp emacs-lisp-checkdoc)
+    flycheck--automatically-enabled-checkers '(emacs-lisp emacs-lisp-checkdoc emacs-lisp-package)
     flycheck--automatically-disabled-checkers '()
     )
 

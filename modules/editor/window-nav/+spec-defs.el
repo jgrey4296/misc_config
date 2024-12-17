@@ -1,7 +1,7 @@
 ;;; +spec-defs.el -*- lexical-binding: t; -*-
 
-(spec-handling-new! imenu nil
+(spec-handling-new-hook! imenu
+                    "Register imenu generic expressions"
                     :struct '(strName regexp)
-                    :loop 'hook
                     (setq-local imenu-generic-expression (append val imenu-generic-expression))
                     )

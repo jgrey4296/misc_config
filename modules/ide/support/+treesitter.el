@@ -26,16 +26,16 @@
   )
 
 (spec-handling-new! tree-sit-lang
-                    ;; for tree-sitter (melpa):
-                    tree-sitter-major-mode-language-alist
-                    :doc "Match modes to grammars in `tree-sitter-langs-grammar-dir`"
+                    "Match modes to grammars in `tree-sitter-langs-grammar-dir`"
+                    :target tree-sitter-major-mode-language-alist
                     :struct '(key-mode . grammar)
                     :loop 'collect
                     `(,key . ,val)
                     )
 
-(spec-handling-new! treesit-lang treesit-load-name-override-list
-                    :doc "for treesit (builtin)"
+(spec-handling-new! treesit-lang
+                    "for treesit (builtin)"
+                    :target treesit-load-name-override-list
                     :struct '(key-mode :lib-base :entry-func)
                     :loop 'collect
                     `(,key ,(plist-get val :lib-base) ,(plist-get val :entry-func))

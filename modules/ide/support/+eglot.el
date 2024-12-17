@@ -31,7 +31,10 @@
       eglot-stay-out-of '(flymake)
       )
 
-(spec-handling-new! eglot eglot-server-programs :loop 'collect
+(spec-handling-new! eglot
+                    "Register eglot servers"
+                    :target eglot-server-programs
+                    :loop 'collect
                     (cons key val)
                     )
 

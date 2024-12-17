@@ -9,15 +9,15 @@
 (use-package! flycheck-cask
   :commands #'flycheck-cask-setup
   :init
-  (add-hook! 'emacs-lisp-mode-hook
-    (add-hook 'flycheck-mode-hook #'flycheck-cask-setup nil t))
+  ;; (add-hook! 'emacs-lisp-mode-hook
+  ;;   (add-hook 'flycheck-mode-hook #'flycheck-cask-setup nil t))
 
   )
 
 (use-package! flycheck-package
   :after flycheck
   :config
-  (flycheck-package-setup)
+  (add-to-list 'flycheck-checkers 'emacs-lisp-package t)
   )
 
 (use-package! ielm

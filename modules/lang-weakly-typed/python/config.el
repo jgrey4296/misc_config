@@ -38,10 +38,8 @@
 
   ;; setup python-ts-mode
   (add-hook! 'python-ts-mode-hook
-             #'+python-use-correct-flycheck-executables-h
              #'abbrev-mode
              #'evil-collection-python-set-evil-shift-width
-             #'flycheck-mode
              #'general-insert-minor-mode
              #'hs-minor-mode
              #'maybe-py-test-minor-mode
@@ -49,10 +47,6 @@
              )
 
   ;;-- hooks
-  (add-hook! 'python-mode-hook ;; flycheck
-             #'+python-use-correct-flycheck-executables-h
-             #'flycheck-mode
-             )
 
   (add-hook! 'python-mode-hook
              #'abbrev-mode
@@ -71,13 +65,13 @@
              #'+jg-python-auto-hide
              )
 
-  (setq-hook! 'python-mode-hook ;; flycheck
+  (setq-hook! 'python-mode-hook ;; flycheck specific
     lsp-diagnostic-filter       #'+jg-python-lsp-flycheck-filter
-    flycheck-pylintrc           '("pylint.toml" "pyproject.toml")
-    flycheck-python-ruff-config '("ruff.toml" ".ruff.toml" "pyproject.toml")
-    flycheck--automatically-enabled-checkers '(python-ruff python-coverage)
+    flycheck-pylintrc                         '("pylint.toml" "pyproject.toml")
+    flycheck-python-ruff-config               '("ruff.toml" ".ruff.toml" "pyproject.toml")
+    flycheck--automatically-enabled-checkers  '(python-ruff python-coverage)
     flycheck--automatically-disabled-checkers '(python-pylint python-flake8 python-pycompile python-compile python-pyright python-mypy)
-    flycheck-python-mypy-config '(".mypy.ini" "mypy.ini" "pyproject.toml")
+    flycheck-python-mypy-config               '(".mypy.ini" "mypy.ini" "pyproject.toml")
     )
 
   (setq-hook! 'python-mode-hook

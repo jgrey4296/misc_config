@@ -15,7 +15,7 @@
 To override the path to the ruff executable, set
 `flycheck-python-ruff-executable'.
 
-See URL `https://beta.ruff.rs/docs/'."
+See URL `https://docs.astral.sh/ruff/"
   :command ("ruff"
             "check"
             (config-file "--config" flycheck-python-ruff-config)
@@ -34,7 +34,6 @@ See URL `https://beta.ruff.rs/docs/'."
             line-end))
   :modes (python-mode python-ts-mode)
   :next-checkers ((warning . python-mypy)))
-
 
 
 ;;-- Footer

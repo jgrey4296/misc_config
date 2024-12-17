@@ -2,7 +2,7 @@
 
 (local-load! "+vars")
 (local-load! "+spec-defs")
-(local-load! "+extra-config")
+(local-load! "+extra")
 (local-load! "+envs")
 
 (defer-load! jg-bindings-core "+bindings")
@@ -13,9 +13,8 @@
   :hook (doom-first-input . global-librarian-mode)
   :config
   (+jg-librarian-add-librarian-transient)
-  (librarian-tagging-mode-rebuild-tag-database)
-  (global-librarian-tagging-mode)
-  (setq librarian-default-browser "firefox")
+  (librarian-tag-mode-rebuild-tag-database)
+  (setq librarian--browse-default "firefox")
   ;; choose backends?
   )
 

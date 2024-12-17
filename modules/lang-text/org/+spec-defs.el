@@ -15,16 +15,18 @@
     )
   )
 
-(spec-handling-new! org-startup org-startup-options
+(spec-handling-new! org-startup
+                    "add org startup options to handle in hooks."
+                    :target org-startup-options
                     :loop 'append
-                    :doc "add org startup options to handle in hooks."
                     :struct '(key . (list (text var val)))
                     val
                     )
 
-(spec-handling-new! org-capture org-capture-templates
+(spec-handling-new! org-capture
+                    "Register org-capture templates, with file function finding and snippet expansion"
+                    :target org-capture-templates
                     :loop 'append
-                    :doc "Register org-capture templates, with file function finding and snippet expansion"
                     :struct '(key (plist :key :name :file :headline :func :text :snippet :props))
                     (cl-loop for data in val
                              with target
@@ -61,8 +63,9 @@
                              )
                     )
 
-(spec-handling-new! babel  +org-babel-mode-alist
-                    :doc "maps a babel language name to the library name of its handlers"
+(spec-handling-new! babel
+                    "maps a babel language name to the library name of its handlers"
+                    :target +org-babel-mode-alist
                     :struct '(key . (plist :name :lib :func :mode))
                     :loop 'append
                     (cl-loop for data in val
@@ -75,7 +78,9 @@
                                            ))
                     )
 
-(spec-handling-new! org-src org-src-lang-modes
+(spec-handling-new! org-src
+                    "register languages for org babel"
+                    :target org-src-lang-modes
                     :struct '(key . (str . mode))
                     :loop 'append
                     val

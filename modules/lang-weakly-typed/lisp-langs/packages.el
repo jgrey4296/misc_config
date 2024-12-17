@@ -8,6 +8,7 @@
 (package! ert :built-in t)
 (package! elisp-mode :built-in t)
 (package! flycheck-cask)
+(package! flycheck-package)
 
 ;; Fontification plugins
 (package! highlight-quoted)

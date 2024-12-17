@@ -1,8 +1,8 @@
 ;; transient.el -*- lexical-binding: t; -*-
 (require 'librarian)
-(require 'librarian-browser)
-(unless (boundp 'librarian-browser-variants) (defvar librarian-browser-variants nil))
-(unless (boundp 'librarian-default-browser) (defvar librarian-default-browser "firefox"))
+(require 'librarian--browse)
+(unless (boundp 'librarian--browse-variants) (defvar librarian--browse-variants nil))
+(unless (boundp 'librarian--browse-default) (defvar librarian--browse-default "firefox"))
 
 ;; TODO librarian-browser-select to transient-toggles
 ;;TODO apply choice
@@ -10,18 +10,18 @@
   :class 'transient-switches
   :argument-format "-browser=%s"
   :argument-regexp "-browser=%s"
-  :choices librarian-browser-variants
+  :choices librarian--browse-variants
   )
 
 (transient-make-mode-toggle! librarian-mode (propertize "Librarian" 'face 'transient-heading) "!")
 (progn
-    (transient-make-call! librarian-browser-select "b" (format "Browser: %10s" librarian-default-browser)
+    (transient-make-call! librarian-browser-select "b" (format "Browser: %10s" librarian--browse-default)
                         :transient nil
                         (librarian-browser-select)
                         )
     (transient-make-call! librarian-rebuild-database "r" "Rebuild Database"
                           :transient nil
-                          (librarian-tagging-mode-rebuild-tag-database)
+                          (librarian-tag-mode-rebuild-tag-database)
                           )
   )
 

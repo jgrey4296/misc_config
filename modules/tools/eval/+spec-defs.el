@@ -20,9 +20,10 @@
   )
 
 
-(spec-handling-new! repl +eval-repls
+(spec-handling-new! repl
+                    "Registers repl handlers"
+                    :target +eval-repls
                     :loop 'collect
-                    :doc "Registers repl handlers"
                     :struct '(or repl-handler (:modes list :start fn :send fn :persist bool :run fn))
                     (cond ((repl-handler-p val)
                            (cons key val))
@@ -30,9 +31,10 @@
                           )
                     )
 
-(spec-handling-new! eval +eval-handlers
+(spec-handling-new! eval
+                    "Registers Eval Handlers"
+                    :target +eval-handlers
                     :loop 'collect
-                    :doc "Registers Eval Handlers"
                     :struct '(or eval-handler (mode :region))
                     (cond ((eval-handler-p val)
                            (cons key val))
@@ -40,8 +42,10 @@
                           )
                     )
 
-(spec-handling-new! compile-commands counsel-compile-local-builds :loop 'append
-                    :doc "Register commands for trying to compile projects. Functions return strings of commands"
+(spec-handling-new! compile-commands
+                    "Register commands for trying to compile projects. Functions return strings of commands"
+                    :target counsel-compile-local-builds
+                    :loop 'append
                     val
                     )
 

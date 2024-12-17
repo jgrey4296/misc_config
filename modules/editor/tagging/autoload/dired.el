@@ -14,7 +14,7 @@
           (maphash (lambda (k v) (cl-incf (gethash k alltags 0) v)) (tagging-minor-mode/org-get-file-tags x targetdepth))
           )
     (if (not (hash-table-empty-p alltags))
-        (librarian-tagging-chart-chart-tag-counts alltags "Dired Marked Files")
+        (librarian--tag-chart-tag-counts alltags "Dired Marked Files")
       (message "No Tags in Files")
       )
     )

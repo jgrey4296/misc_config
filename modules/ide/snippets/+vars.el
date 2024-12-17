@@ -44,7 +44,7 @@
                       )
                     )
 
-(spec-handling-add! popup :form 'override
+(spec-handling-add! popup
                     '(snippets
                      ("^untitled-snippet$" :side bottom :ttl 5 :height 0.4 :quit t :select t :priority 50)
                      ("^\\*Abbrevs\\*"     :side right  :ttl 5 :width 100 :quit t :select nil :priority 50)

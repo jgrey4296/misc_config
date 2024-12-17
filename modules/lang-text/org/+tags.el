@@ -7,7 +7,7 @@
 ;;-- end Header
 
 (require 'cl-lib)
-(require 'librarian-tagging)
+(require 'librarian--tag)
 
 (cl-defmethod librarian-set-tags ((mode (eql 'org-mode)) add sub keep)
   (let ((joined(append add keep))

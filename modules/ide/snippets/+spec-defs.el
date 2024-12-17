@@ -1,6 +1,10 @@
 ;;; +spec-defs.el -*- lexical-binding: t; -*-
 
-(spec-handling-new! file-templates +file-templates-alist :sorted t :loop 'append
+(spec-handling-new! file-templates
+                    "Register File Templates"
+                    :target +file-templates-alist
+                    :sorted t
+                    :loop 'append
                     :struct '(key . (list (pattern :trigger pattern :mode mode)))
                     (cl-loop for rule in val
                              for priority = (* -1 (or (plist-get rule :priority) 0))
@@ -12,8 +16,8 @@
                              )
                     )
 
-(spec-handling-new! yas-extra nil :loop 'hook
-                    :doc "activate minor modes for yasnippet"
+(spec-handling-new-hook! yas-extra
+                    "activate minor modes for yasnippet"
                     :struct '(extras)
                     (dolist (mode (ensure-list val))
                       (yas-activate-extra-mode mode)

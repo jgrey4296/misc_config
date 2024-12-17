@@ -9,3 +9,14 @@
 
 #+RESULTS:
 : 2
+
+* cl-loop
+
+#+begin_src lisp :results output
+(cl-loop for x in '(a b nil d nil e)
+         for valid = (not (null x))
+         when valid do
+         (message "%s" x)
+         when valid collect x
+         )
+#+end_src

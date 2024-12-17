@@ -6,15 +6,17 @@
   )
 
 
-(spec-handling-new! mu4e-header mu4e-header-info-custom
-                    :doc ":function : (lambda (ms) -> str)"
+(spec-handling-new! mu4e-header
+                    ":function : (lambda (ms) -> str)"
+                    :target mu4e-header-info-custom
                     :struct '(:{key} :name :shortname :help :function :sortable)
                     :loop 'append
                     val
                     )
 
-(spec-handling-new! mail-accounts mu4e-contexts :form 'override
-                    :doc "registers mu contexts, see make-mu4e-context"
+(spec-handling-new! mail-accounts
+                    "registers mu contexts, see make-mu4e-context"
+                    :target mu4e-contexts
                     :struct '(:name :maildir :vars :mu-vars :smtp-vars)
                     :loop 'append
                     (cl-loop for ctx in val

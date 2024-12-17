@@ -1,17 +1,20 @@
 ;;; +spec-defs.el -*- lexical-binding: t; -*-
 
-(spec-handling-new! rotate-text nil :loop 'hook
+(spec-handling-new-hook! rotate-text
+                    "Set local rotate text lists "
                     (setq-local rotate-text-local-symbols    (plist-get val :symbols)
                                 rotate-text-local-words      (plist-get val :words)
                                 rotate-text-local-patterns   (plist-get val :patterns)
                                 )
                     )
 
-(spec-handling-new! whitespace-cleanup nil :loop 'hook
+(spec-handling-new-hook! whitespace-cleanup
+                    "Register local whitespace cleanup functions"
                     (setq-local jg-text-whitespace-clean-hook (ensure-list val))
                     )
 
-(spec-handling-new! ligatures nil :loop 'hook
+(spec-handling-new-hook! ligatures
+                    "Register ligatures for prettify-symbols"
                     (setq-local prettify-symbols-alist
                                 (let (head alist)
                                   (while val
@@ -28,7 +31,8 @@
                                 )
                     )
 
-(spec-handling-new! electric nil :loop 'hook
+(spec-handling-new-hook! electric
+                    "Register electric chars"
                     :struct '(:chars list :words list)
                     (setq-local electric-indent-inhibit nil)
                     (electric-indent-local-mode +1)
@@ -38,12 +42,14 @@
                       (setq +electric-indent-words words))
                     )
 
-(spec-handling-new! flyspell-predicate nil :loop 'hook
+(spec-handling-new-hook! flyspell-predicate
+                    "Set local flyspec checkers"
                     (setq-local flyspell-generic-check-word-predicate val)
                     )
 
 ;; (defvar +jg-format-defs nil)
-;; (spec-handling-new! formatting +jg-format-defs
+;; (spec-handling-new! formatting
+;;                     :target +jg-format-defs
 ;;                     :loop 'collect
 ;;                     val
 ;;                     )

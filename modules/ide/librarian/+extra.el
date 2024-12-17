@@ -55,6 +55,8 @@
 
 (use-package! define-word :defer t)
 
+(use-package! browse-url :defer t)
+
 ;;-- Footer
 ;; Copyright (C) 2024 john
 ;;

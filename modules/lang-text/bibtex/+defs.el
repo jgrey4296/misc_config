@@ -2,8 +2,6 @@
 
 (defvar jg-bibtex-indent-equals-column 14)
 
-(defvar jg-bibtex-popup-doi-info t)
-
 (defvar jg-bibtex-fill-column 50000)
 
 (defvar jg-bibtex-helm-candidates nil)
@@ -18,10 +16,6 @@
 
 (defvar jg-bibtex-open-url-with-pdf        nil)
 
-(defvar jg-bibtex-loc-bibtex          (expand-file-name "~/github/bibliography/main/"))
-
-(defvar jg-bibtex-unsourced-bib-file (expand-file-name "~/github/bibligraphy/in_progress/to_source.bib"))
-
 (defvar jg-bibtex-todo-loc            (expand-file-name "~/github/bibliography/in_progress/todo.bib"))
 
 (defvar jg-bibtex-loc-completions     (expand-file-name "~/github/bibliography/completions/"))
@@ -29,10 +23,6 @@
 (defvar jg-bibtex-loc-export-bib-file (expand-file-name "tex-config/tex/export_template.tex" templates-loc))
 
 (defvar jg-bibtex-loc-temp-dir        (expand-file-name "~/.tex/"))
-
-(defvar jg-bibtex-pdf-loc             (pcase system-type
-                                        ('darwin (expand-file-name "~/pdf_library"))
-                                        ('gnu/linux "/media/john/data/library/pdfs")))
 
 (defvar jg-bibtex-in-progress-files-locs (expand-file-name "/media/john/data/todo/pdfs/"))
 

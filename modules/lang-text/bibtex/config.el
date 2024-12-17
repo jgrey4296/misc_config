@@ -2,7 +2,7 @@
 
 (local-load! "+defs")
 (local-load! "+vars")
-(local-load! "+extra-config")
+(local-load! "+extra")
 
 (defer-load! jg-bindings-total "+bindings")
 (local-load! "dialect/+entries")
@@ -32,7 +32,7 @@
              #'display-line-numbers-mode
              #'yas-minor-mode
              #'outline-minor-mode
-             #'+jg-bibtex-font-lock-mod-hook
+             #'librarian--biblio-font-lock-mod-hook
              #'reftex-mode
              #'general-insert-minor-mode)
 

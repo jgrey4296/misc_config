@@ -14,8 +14,8 @@
 ;;-- end general bibtex settings
 
 ;;-- bibtex fields
-(setq bibtex-completion-additional-search-fields jg-bibtex-search-fields)
-(setq bibtex-completion-pdf-field "file")
+(setq bibtex-completion-additional-search-fields jg-bibtex-search-fields
+      bibtex-completion-pdf-field                "file")
 ;;-- end bibtex fields
 
 ;;-- hl line
@@ -24,8 +24,19 @@
   )
 ;;-- end hl line
 
+;;-- librarian
+(setq librarian-biblio-pdf-loc (pcase system-type
+                                     ('darwin (expand-file-name "~/pdf_library"))
+                                     ('gnu/linux "/media/john/data/library/pdfs"))
+      librarian-biblio-library-loc   (expand-file-name "~/github/bibliography/main/")
+      librarian-biblio-unsourced-loc (expand-file-name "~/github/bibligraphy/in_progress/to_source.bib")
+
+      )
+
+;;-- end librarian
+
 ;;-- specs
-(spec-handling-add! lookup-url
+(speckler-add! lookup-url
                     '(bibtex
                      ("Scholar"           "https://scholar.google.com/scholar?hl=en&q=%s")
                      ("Scholar Archive"   "https://scholar.archive.org/search?q=%s")
@@ -40,14 +51,14 @@
                      ("Arxiv"             "https://arxiv.org/abs/%s")
                      )
                     )
-(spec-handling-add! whitespace-cleanup
+(speckler-add! whitespace-cleanup
                     '(bibtex-mode
                      +jg-bibtex-cleanup-ensure-newline-before-def
                      delete-trailing-whitespace
                      +jg-text-cleanup-whitespace
                      )
                     )
-(spec-handling-add! auto-modes
+(speckler-add! auto-modes
                     '(bibtex
                       ("\\.bib\\'" . bibtex-mode)
                       ("\\.bst\\'" . bibtex-style-mode)
@@ -55,14 +66,14 @@
                       ("\\.cbx\\'" . latex-mode)
                       )
                     )
-(spec-handling-add! popup
+(speckler-add! popup
                     '(bibtex
                      ("^\\*DOI Metadata\\*\\'" :side left :ttl 5 :width 0.3 :quit t :select nil :priority 50)
                      ("^\\*Metadata\\*\\'"     :side left :ttl 5 :width 0.3 :quit t :select nil :priority 50)
                      )
                     )
 
-(spec-handling-add! compile-commands
+(speckler-add! compile-commands
                     '(bibtex +jg-bibtex-get-commands)
                     )
 ;;-- end specs

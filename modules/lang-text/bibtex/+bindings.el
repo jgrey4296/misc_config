@@ -8,7 +8,7 @@
 (map! :map jg-bibtex-mode-map ;; main
       :n "|"                                  #'general-insert-call
       :desc "Lock Key"           :n "!"       #'+jg-bibtex-lock-key
-      :desc "Insert from Doi"    :n "I d"     #'+jg-bibtex-insert-entry-from-doi
+      :desc "Insert from Doi"    :n "I d"     #'librarian-biblio-create-from-doi
       :desc "Auto Form"          :n "I F"     #'+jg-bibtex-entry-form
       :desc "Edit Field"         :n  "\\"     #'+jg-bibtex-edit-field
       :desc "Clean entry"        :n "TAB"     #'org-ref-clean-bibtex-entry
@@ -53,17 +53,17 @@
       :desc "Remove Field"        "DEL"     #'+jg-bibtex-remove-field
       :desc "Subcite"             "\\"      #'+jg-bibtex-subcite
       :desc "Build Bibliography"  "B"       #'org-ref-build-full-bibliography
-      :desc "Get Meta"            "m"       #'+jg-bibtex-meta-retrieval
+      :desc "Get Meta"            "m"       #'librarian-biblio-get-meta
       :desc "Count Entries"       "C"       #'bibtex-count-entries
 )
 
 (map! :map jg-bibtex-mode-map ;; refile
       :localleader
       :prefix ("r" . "Refile")
-       :desc "Refile to Unsourced" "U"     #'+jg-bibtex-refile-to-unsourced
-       :desc "Refile"              "r"     #'+jg-bibtex-refile-by-year
-       :desc "to Other Window"     "o"     #'+jg-bibtex-refile-to-other-window
-       )
+      :desc "Refile to Unsourced" "U"     #'librarian-biblio-refile-to-unsourced
+      :desc "Refile"              "r"     #'librarian-biblio-refile-to-canonical
+      :desc "to Other Window"     "o"     #'librarian-biblio-refile-to-other-window
+      )
 
 (map! :map jg-bibtex-mode-map ;; insert/copy/edit/update/format
       :localleader
@@ -79,12 +79,12 @@
       :desc "Copy Key"           "k"      #'+jg-bibtex-copy-key
       :desc "Copy Title"         "t"      #'+jg-bibtex-copy-title
       :desc "Copy Field"         "f"      #'+jg-bibtex-copy-field
-      :desc "Copy into metadata" "m"      #'+jg-bibtex-apply-meta
+      :desc "Copy into metadata" "m"      #'librarian-biblio-apply-meta
       )
       (:prefix ("u" . "Update")
        :desc "Update Field"        "f"      #'+jg-bibtex-edit-field
        :desc "Remove Field"        "F"      #'+jg-bibtex-remove-field
-       :desc "from DOI"            "u"      #'+jg-bibtex-update-entry
+       :desc "from DOI"            "u"      #'librarian-biblio-update-entry-from-doi
        :desc "filename"            "n"      #'+jg-bibtex-rename-file
        :desc "Lock Key"            "k"      #'+jg-bibtex-lock-key
        :desc "Entry Type"          "t"      #'+jg-bibtex-edit-entry-type
@@ -124,7 +124,7 @@
 
 ;;-- reftex
 (map! :map reftex-mode-map
-      "C-c [" nil)
+      )
 
 ;;-- end reftex
 

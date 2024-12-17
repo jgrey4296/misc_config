@@ -1,33 +1,10 @@
 ;;; +bib-management.el -*- lexical-binding: t; -*-
 (require 'bibtex-completion)
 
-;;;###autoload
-(defun +jg-bibtex-build-list ()
-  "Build a list of all bibtex files to use for bibtex-helm "
-  (interactive)
-  (setq bibtex-completion-bibliography (directory-files jg-bibtex-loc-bibtex 't "\.bib$")
-        jg-bibtex-helm-candidates nil
-        )
-  (bibtex-completion-clear-cache)
-  (bibtex-completion-init)
-  (mapcar #'+jg-bibtex-process-candidates (bibtex-completion-candidates))
-  )
-
-;;;###autoload
-(defun +jg-bibtex-get-files-fn (x)
-  " Given a pair, return the cdr if car matches 'file' "
-  (when-let ((isfile (string-match "^file[[:digit:]]*" (car x)))
-             (text (string-trim (cdr x) "{" "}"))
-             )
-    (expand-file-name (if (f-relative? text)
-                          (f-join jg-bibtex-pdf-loc text)
-                        text))
-        )
-    )
 
 ;;;###autoload
 (defun +jg-bibtex-file-expand (x)
-  (+jg-bibtex-get-files-fn (cons "file" x))
+  (librarian--biblio-get-files-fn (cons "file" x))
   )
 
 ;;;###autoload

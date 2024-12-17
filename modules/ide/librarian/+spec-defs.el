@@ -1,20 +1,20 @@
 ;;; +spec-defs.el -*- lexical-binding: t; -*-
 
-(spec-handling-new! browse-handler
+(speckler-new! browse-handler
                     "Register browse-url handlers"
                     :target browse-url-default-handlers
                     :loop 'append
                     val
                     )
 
-(spec-handling-new! lookup-url
+(speckler-new! lookup-url
                     "Register url lookup providers"
                     :target librarian--online--provider-url-alist
                     :loop 'append
                     val
                     )
 
-(spec-handling-new-hook! lookup-handler
+(speckler-new-hook! lookup-handler
                          "Register documentation lookup handlers "
                          :struct '(:definition fn :implementation fn :type-definition nf :references fn :documentation fn :file fn :assignments fn :declaration fn)
                          (setq-local librarian--doc-assignments-functions      (cl-remove-duplicates (append (ensure-list (plist-get val :assignments))        librarian--doc-assignments-functions))
@@ -28,7 +28,7 @@
                                      )
                          )
 
-(spec-handling-new-hook! docsets
+(speckler-new-hook! docsets
                          "Register local dash docsets"
                          (setq-local dash-docs-docsets val)
                          )

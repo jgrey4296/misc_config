@@ -11,7 +11,7 @@
     (package! osx-dictionary)
   )
 
-(package! browse-url)
+(package! browse-url :built-in t)
 (package! dash-docs)
 (package! counsel-dash)
 

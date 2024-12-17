@@ -3,6 +3,7 @@
 (map! :leader
       :desc "Open Url"              "?"         #'librarian-url
       :desc "Local Variables"       "b l"       #'librarian-buffer-locals
+      :desc "Dir: Librarian-regular" "y 4"     (cmd! (find-file librarian-regular-loc))
 
       (:prefix "s"
        ;; :desc "Look up in all docsets"       "K" #'+lookup/in-all-docsets
@@ -27,7 +28,7 @@
 (map! :map librarian-mode-map
       (:prefix ("s" . "Jump")
        :desc "Browse URL"                :n "u" #'librarian-url
-       :desc "Librarian Regular"         :n "1" #'librarian-regular-go
+       :desc "Librarian Regular"         :n "1" #'librarian-regular-go!
        (:prefix ("k" . "Documentation")
         :desc "Choose Handler"             :n    ";" #'librarian-choose
         :desc "Assignments"                :n    "a" #'librarian-assignments

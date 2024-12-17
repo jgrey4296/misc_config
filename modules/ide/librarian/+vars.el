@@ -5,19 +5,20 @@
   (add-to-list 'librarian-active-on-modes 'comint-mode)
   )
 
-(setq librarian--regular-location                  (expand-file-name "librarian-regular" templates-loc)
-      librarian--config-modules-dir                (expand-file-name "modules" doom-user-dir)
-      librarian--man-path                          (expand-file-name "man/main" templates-loc)
-      librarian--man-config                        (expand-file-name "tools/man.conf" templates-loc)
-      librarian--man-cache-dir                     (expand-file-name ".temp" doom-user-dir)
+(speckler-setq! librarian 50
+ librarian-regular-loc                        (expand-file-name "librarian-regular" templates-loc)
+ librarian--config-modules-dir                (expand-file-name "modules" doom-user-dir)
+ librarian--man-path                          (expand-file-name "man/main" templates-loc)
+ librarian--man-config                        (expand-file-name "tools/man.conf" templates-loc)
+ librarian--man-cache-dir                     (expand-file-name ".temp" doom-user-dir)
 
-      librarian-tag-mode-substitution-sources      (expand-file-name "~/github/bibliography/tags/substitutions")
-      librarian--tag-mode-main-loc                 (expand-file-name "~/github/bibliography/.temp/tags/canon.tags")
-      )
+ librarian-tag-mode-substitution-sources      (expand-file-name "~/github/bibliography/tags/substitutions")
+ librarian--tag-mode-main-loc                 (expand-file-name "~/github/bibliography/.temp/tags/canon.tags")
+ )
 
 
 ;;-- specs
-(spec-handling-add! lookup-url
+(speckler-add! lookup-url
                     '(defaults
                       ("DuckDuckGo"         librarian-backend--online-duckduckgo "https://duckduckgo.com/?q=%s")
                       ("Github"                                                  "https://github.com/search?ref=simplesearch&q=%s")
@@ -37,7 +38,7 @@
                       ("Router"                                                  "192.168.1.1")
                      )
                     )
-(spec-handling-add! lookup-url
+(speckler-add! lookup-url
                     '(plus
                      ("Google"            librarian-backend--online-google "https://google.com/search?q=%s")
                      ("Google images"     "https://www.google.com/images?q=%s")
@@ -49,17 +50,18 @@
                      ("Down For Everyone?" "https://downforeveryoneorjustme.com/%s")
                      )
                     )
-(spec-handling-add! browse-handler
+(speckler-add! browse-handler
+                    :override t
                     '(default
-                      ("."  . librarian-browser--open-url)
+                      ("."  . librarian-browse-open)
                       )
                     )
-(spec-handling-add! popup
+(speckler-add! popup
                     '(lookup
                       ("^\\*xref\\*$" :ignore t)
                       )
                     )
-(spec-handling-add! lookup-handler
+(speckler-add! lookup-handler
                     `(text-mode
                      :definition ,#'wordnut-search
                      :implementations ,#'helm-wordnet-suggest

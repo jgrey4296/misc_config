@@ -6,7 +6,7 @@
 ;;
 ;;-- end Header
 
-(spec-handling-new! lib-env
+(speckler-new! lib-env
                     "Registers environment entry/exit handlers. eg: for python"
                     :struct '(or librarian-env-handler plist)
                     :loop 'do
@@ -18,11 +18,10 @@
 
 (map! :leader
       (:prefix ("c v" . "Environments")
-      :desc "Activate Env" "a" #'env-handling-go!
-      :desc "Clear Env"    "d" #'env-handling-clear-env!
-      :desc "Report Env"   "r" #'env-handling-report!
-      :desc "Lock Env"     "l" #'env-handling-lock!
-      :desc "Create venv"  "c" #'env-handling-create-env!
+      :desc "Activate Env" "a" #'librarian-envs-start!
+      :desc "Clear Env"    "d" #'librarian-envs-stop!
+      :desc "Report Env"   "r" #'librarian-envs-report!
+      :desc "Lock Env"     "l" #'librarian-envs-toggle-lock!
       )
 )
 

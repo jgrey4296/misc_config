@@ -34,7 +34,7 @@
   "Show the first entry in KEYS in the relevant BibTeX file.
 modified from the original bibtex-completion-show-entry
 "
-  (let* ((bib-loc jg-bibtex-loc-bibtex)
+  (let* ((bib-loc librarian-biblio-library-loc)
          (entry (bibtex-completion-get-entry keys))
          (year (bibtex-completion-get-value "year" entry))
          (year-file (f-join bib-loc (format "%s.bib" year)))
@@ -57,7 +57,7 @@ modified from the original bibtex-completion-show-entry
   "Show the first entry in KEYS in the relevant BibTeX file.
 modified from the original bibtex-completion-show-entry
 "
-  (let* ((bib-loc jg-bibtex-loc-bibtex)
+  (let* ((bib-loc librarian-biblio-library-loc)
          (entry (bibtex-completion-get-entry keys))
          (year (bibtex-completion-get-value "year" entry))
          (year-file (f-join bib-loc (format "%s.bib" year)))
@@ -217,15 +217,11 @@ governed by the variable `bibtex-completion-display-formats'."
   (interactive "P")
   (when arg
     (message "Clearing Bibtex File Cache")
-    (+jg-bibtex-build-list)
-    (bibtex-completion-clear-cache)
-    (bibtex-completion-init)
+    (librarian-biblio-build-file-list)
     )
   (when (null jg-bibtex-helm-candidates)
     (message "Generating Candidates")
-    (setq jg-bibtex-helm-candidates
-          (mapcar '+jg-bibtex-process-candidates (bibtex-completion-candidates)))
-
+    (setq jg-bibtex-helm-candidates (mapcar '+jg-bibtex-process-candidates (bibtex-completion-candidates)))
     )
   (helm-set-local-variable 'helm-candidate-number-limit 5000)
 

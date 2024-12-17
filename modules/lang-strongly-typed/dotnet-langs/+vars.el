@@ -1,7 +1,7 @@
 ;; -*- mode:emacs-lisp; lexical-binding: t;-*-
 
 ;;-- csharp
-(spec-handling-add! treesit-lang
+(speckler-add! treesit-lang
                     '(c-sharp :lib-base "c-sharp" :entry-func "tree_sitter_c_sharp")
                     )
 
@@ -16,26 +16,26 @@
 ;;-- end unity
 
 ;;-- specs
-(spec-handling-add! projects
+(speckler-add! projects
                     '(dotnet-sln ("src") :project-file "?*.sln" :compilation-dir nil :configure nil :compile "dotnet build" :test "dotnet test" :install nil :package nil :run "dotnet run")
                     '(dotnet projectile-dotnet-project-p :project-file ("?*.csproj" "?*.fsproj") :compilation-dir nil :configure nil :compile "dotnet build" :test "dotnet test" :install nil :package nil :run "dotnet run")
                     )
-(spec-handling-add! rotate-text
+(speckler-add! rotate-text
                     '(csharp-mode
                      :symbols (("public" "protected" "private")
                                ("class" "struct"))
                      )
                     )
-(spec-handling-add! tree-sit-lang
+(speckler-add! tree-sit-lang
                     '(csharp-mode . c-sharp)
                     )
-(spec-handling-add! lookup-handler
+(speckler-add! lookup-handler
                     '(fsharp-mode :async t :definition fsharp-ac/gotodefn-at-point)
                     )
-(spec-handling-add! company
+(speckler-add! company
                     '(fsharp-mode (:mode fsharp-ac/company-backend))
                     )
-(spec-handling-add! auto-modes
+(speckler-add! auto-modes
                     '(dotnet
                       ("\\.shader\\'"     . shader-mode)
                       ( "\\.sln\\'"       . sln-mode)
@@ -46,17 +46,17 @@
                       ("\\.targets\\'"    . csproj-mode)
                       )
                     )
-(spec-handling-add! electric
+(speckler-add! electric
                     '(csharp-mode
                       :chars (?\n ?\})
                       )
                     )
-(spec-handling-add! repl
+(speckler-add! repl
                     '(fsharp-mode
                       :start run-fsharp
                       )
                     )
-(spec-handling-add! ligatures
+(speckler-add! ligatures
                     '(csharp-mode
                       ;; Functional
                       :lambda        "() =>"
@@ -79,25 +79,25 @@
                       :yield         "yield"
                       )
                     )
-(spec-handling-add! popup
+(speckler-add! popup
                     '(dotnet
                       ("^\\*.+-dis\\*" :side right  :ttl nil :width  0.4 :quit t  :select nil :priority 50)
                       )
                     )
-(spec-handling-add! file-templates
+(speckler-add! file-templates
                     `(csharp
                       ("Directory.Build.props\\'" :trigger "__directory_props" :mode dotnet-mode)
                       (".csproj\\'"               :trigger "__csproj"          :mode dotnet-mode)
                       (".cs\\'"                   :trigger "__cs"              :mode dotnet-mode)
                       )
                     )
-(spec-handling-add! babel
+(speckler-add! babel
                     '(dotnet
                       (:name c          :lib ob-C)
                       (:name fsharp     :lib ob-fsharp)
                       )
                     )
-(spec-handling-add! org-src
+(speckler-add! org-src
                     '(dotnet
                       ("csharp" . csharp)
                       ("fsharp" . fsharp)

@@ -1,7 +1,7 @@
 ;; -*- mode:emacs-lisp; lexical-binding: t; -*-
 
 ;;-- changelog
-(spec-handling-setq! changelog 50
+(speckler-setq! changelog 50
                      change-log-default-name "CHANGELOG.md"
                      )
 ;;-- end changelog
@@ -27,7 +27,7 @@
 ;;    screen are opened as popups.
 ;; 2. The status screen isn't buried when viewing diffs or logs from the
 ;;    status screen.
-(spec-handling-setq! magit 50
+(speckler-setq! magit 50
                      magit-display-buffer-function #'+magit-display-buffer-fn
                      magit-bury-buffer-function    #'magit-mode-quit-window
                      )
@@ -47,7 +47,7 @@
 ;;-- end misc
 
 ;;-- specs
-(spec-handling-add! popup
+(speckler-add! popup
                     '(magit
                      ("^\\*git-gutter" :select nil :size '+popup-shrink-to-fit)
                      ("^magit-todos-list" :select nil :side right :ttl nil :quit t :width 80 :priority 180)
@@ -65,7 +65,7 @@
                       )
                     )
 
-(spec-handling-add! fold
+(speckler-add! fold
                     `(magit
                       :modes (magit-status-mode)
                       :priority 50
@@ -80,7 +80,7 @@
                       )
                     )
 
-(spec-handling-add! auto-modes
+(speckler-add! auto-modes
                     '(version-control
                       ("/\\.dockerignore\\'"  . gitignore-mode)
                       ("/\\.gitignore\\'"     . gitignore-mode)
@@ -90,7 +90,7 @@
                       )
                     )
 
-(spec-handling-add! yas-extra
+(speckler-add! yas-extra
                     '(git-commit-mode git-commit-mode)
                     )
 

@@ -25,7 +25,7 @@
   ;; possibly: (cl-pushnew (tree-sitter-lands--bin-dir) tree-sitter-load-path :test #'string-equal)
   )
 
-(spec-handling-new! tree-sit-lang
+(speckler-new! tree-sit-lang
                     "Match modes to grammars in `tree-sitter-langs-grammar-dir`"
                     :target tree-sitter-major-mode-language-alist
                     :struct '(key-mode . grammar)
@@ -33,7 +33,7 @@
                     `(,key . ,val)
                     )
 
-(spec-handling-new! treesit-lang
+(speckler-new! treesit-lang
                     "for treesit (builtin)"
                     :target treesit-load-name-override-list
                     :struct '(key-mode :lib-base :entry-func)
@@ -95,7 +95,7 @@
                                       )
  )
 
-(spec-handling-setq! treesit 50
+(speckler-setq! treesit 50
                      tree-sitter-load-path (list
                                             (expand-file-name (format "straight/%s/tree-sitter-langs/bin/" straight-build-dir) doom-local-dir)
                                             (expand-file-name "~/.local/tree-sitter/")
@@ -103,7 +103,7 @@
                      treesit-extra-load-path tree-sitter-load-path
                      )
 
-(spec-handling-add! tree-sit-lang
+(speckler-add! tree-sit-lang
                     '(agda-mode       . agda)
                     '(c-mode          . c)
                     '(c++-mode        . cpp)

@@ -14,7 +14,7 @@
 
   )
 
-(spec-handling-add! auto-modes
+(speckler-add! auto-modes
                     '(yaml
                        ("Procfile\\'" . yaml-mode)
                        ("\\.yml\\'" . yaml-mode)

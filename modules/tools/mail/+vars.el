@@ -1,6 +1,6 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
-(spec-handling-setq! mail 50
+(speckler-setq! mail 50
                      rmail-summary-font-lock-keywords `(;; Deleted
                                                         ("^ *[0-9]+D.*" . font-lock-string-face)
                                                         ;; Unread
@@ -50,7 +50,7 @@
                             (:subject))
       )
 
-(spec-handling-add! mu4e-header
+(speckler-add! mu4e-header
                     '(general
                       (:account
                        :name "Account"
@@ -89,7 +89,7 @@
                       )
                     )
 
-(spec-handling-setq! mu4e 50
+(speckler-setq! mu4e 50
                      mu4e-get-mail-command "mbsync -a"
                      mu4e-compose-signature "John"
                      mu4e-change-filenames-when-moving t
@@ -107,12 +107,12 @@
                      mu4e-headers-unread-mark    '("u" . "u")
                      )
 
-(spec-handling-setq! auth-source 50
+(speckler-setq! auth-source 50
                      auth-source-backend-parser-functions '(auth-source-backends-parser-secrets
                                                             auth-source-backends-parser-file)
                      )
 
-(spec-handling-setq! send-mail 50
+(speckler-setq! send-mail 50
                      message-send-mail-function #'smtpmail-send-it
                      ;; smtpmail-smtp-service         465
                      ;; smtpmail-smtp-service         587
@@ -121,7 +121,7 @@
                      ;; smtpmail-stream-type          starttls
                      )
 
-(spec-handling-add! mail-accounts
+(speckler-add! mail-accounts
                     `(default
                       (:name "jgrey4296"
                        :maildir "/jgrey4296"
@@ -141,7 +141,7 @@
 
                     )
 
-(spec-handling-add! mail-accounts
+(speckler-add! mail-accounts
                     `(plus
                       (:name "soe"
                        :maildir "/jgsoe"
@@ -153,7 +153,7 @@
                       )
                     )
 
-;; (spec-handling-add! mail-accounts
+;; (speckler-add! mail-accounts
 ;;                     `(local
 ;;                       ,(pcase system-type
 ;;                          ('darwin `(:name "local"
@@ -174,7 +174,7 @@
 ;;                       )
 ;;                     )
 
-(spec-handling-add! mail-accounts
+(speckler-add! mail-accounts
                     `(others
                       (:name "main: johngrey"
                        :maildir "/johngrey"

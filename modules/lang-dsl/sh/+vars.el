@@ -9,9 +9,9 @@
 
 
 ;;-- specs
-(spec-handling-add! lookup-handler '(sh-mode :documentation #'+sh-lookup-documentation-handler))
-(spec-handling-add! docsets '(sh-mode "Bash"))
-(spec-handling-add! auto-modes
+(speckler-add! lookup-handler '(sh-mode :documentation #'+sh-lookup-documentation-handler))
+(speckler-add! docsets '(sh-mode "Bash"))
+(speckler-add! auto-modes
                     '(sh
                       ("\\.bash" . bash-ts-mode)
                       ("\\.bats\\'" . sh-mode)
@@ -19,18 +19,18 @@
                       ("/bspwmrc\\'" . sh-mode)
                       )
                     )
-(spec-handling-add! company
+(speckler-add! company
                       `(sh-mode (:mode company-shell) (:mode company-files))
                       )
-(spec-handling-add! electric
+(speckler-add! electric
                     '(sh-mode
                       :words ("else" "elif" "fi" "done" "then" "do" "esac" ";;")
                       )
                     )
-(spec-handling-add! repl
+(speckler-add! repl
                     '(sh-mode :start +sh/open-repl)
                     )
-(spec-handling-add! ligatures
+(speckler-add! ligatures
                     '(sh-mode
                       ;; Functional
                       :def "function"

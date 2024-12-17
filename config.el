@@ -22,7 +22,7 @@
       )
 
 
-(spec-handling-setq! global 0
+(speckler-setq! global 0
                      custom-file                     (expand-file-name "emacs/custom.el" user-cache-dir)
                      backup-directory-alist          (list `(".*" . ,(expand-file-name ".local/backups" doom-emacs-dir)))
                      org-directory                   (f-canonical (expand-file-name "~/github/jgrey4296.github.io/orgfiles/"))
@@ -101,25 +101,25 @@
 ;;
 (setq warning-suppress-types '((bytecomp)))
 
-(spec-handling-setq! warnings 50
-                     warning-suppress-log-types ;; Full Suppress
-                     '((defvaralias losing-value woman-topic-history)
-                       (defvaralias losing-value rustic-indent-method-chain)
-                       (losing-value rustic-indent-method-chain)
-                       ;; ((python python-shell-completion-native-turn-on-maybe))
-                       ((org-element org-element-cache))
-                       ((flycheck syntax-checker))
-                       (error "Invalid search bound (wrong side of point)")
-                       )
-                     warning-suppress-types ;; Don't Show, silently added to warnings buffer
-                     '((defvaralias losing-value python-shell-interpreter)
-                       (defvaralias losing-value rustic-indent-method-chain)
-                       (org-element org-element-cache)
-                       (org-element org-element-parser)
-                       (bytecomp)
-                       (flycheck syntax-checker)
-                       ;; ((python python-shell-completion-native-turn-on-maybe))
-                       )
+(speckler-setq! warnings 50
+                warning-suppress-log-types ;; Full Suppress
+                '((defvaralias losing-value woman-topic-history)
+                  (defvaralias losing-value rustic-indent-method-chain)
+                  (losing-value rustic-indent-method-chain)
+                  ;; ((python python-shell-completion-native-turn-on-maybe))
+                  ((org-element org-element-cache))
+                  ((flycheck syntax-checker))
+                  (error "Invalid search bound (wrong side of point)")
+                  )
+                warning-suppress-types ;; Don't Show, silently added to warnings buffer
+                '((defvaralias losing-value python-shell-interpreter)
+                  (defvaralias losing-value rustic-indent-method-chain)
+                  (org-element org-element-cache)
+                  (org-element org-element-parser)
+                  (bytecomp)
+                  (flycheck syntax-checker)
+                  ;; ((python python-shell-completion-native-turn-on-maybe))
+                  )
                      )
 ;;-- end warning suppression
 

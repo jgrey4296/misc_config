@@ -13,13 +13,13 @@
       )
 
 ;;-- specs
-(spec-handling-add! popup
+(speckler-add! popup
                     '(lisp
                      ("^\\*Buttercup\\*'" :size 0.45 :select nil :ttl 0)
                      ("^*ert*" :width 0.4 :side right :select nil :ttl 0 )
                      )
                     )
-(spec-handling-add! fold
+(speckler-add! fold
                     `(lisp
                      :modes (emacs-lisp-mode lisp-mode)
                      :priority 25
@@ -32,7 +32,7 @@
                                 )
                      )
                     )
-(spec-handling-add! file-templates
+(speckler-add! file-templates
                     `(lisp
                      ("minor-mode\\.el\\'" :trigger "__minor-mode" :mode emacs-lisp-mode)
                      ("mode\\.el\\'"       :trigger "__mode"       :mode emacs-lisp-mode)
@@ -43,11 +43,11 @@
                      (emacs-lisp-mode      :trigger "__package")
                      )
                     )
-(spec-handling-add! projects
+(speckler-add! projects
                     '(emacs-eldev projectile-eldev-project-p :project-file "eldev" :compilation-dir nil :configure nil :compile "eldev compile" :test "eldev test" :install nil :package "eldev package" :run "eldev emacs")
                     '(emacs-cask ("cask") :project-file "cask" :compilation-dir nil :configure nil :compile "cask install" :test nil :install nil :package nil :run nil :test-suffix "-test" :test-prefix "test-")
                     )
-(spec-handling-add! rotate-text
+(speckler-add! rotate-text
                     '(emacs-lisp-mode
                      :symbols (("t" "nil")
                                ("let" "let*")
@@ -64,19 +64,19 @@
                      :symbols (("#true" "#false"))
                      )
                     )
-(spec-handling-add! whitespace-cleanup
+(speckler-add! whitespace-cleanup
                     `(emacs-lisp-mode
                       ,#'delete-trailing-whitespace
                       ,#'+jg-lisp-cleanup-ensure-newline
                       ,#'+jg-text-cleanup-whitespace)
     )
-(spec-handling-add! lookup-url
+(speckler-add! lookup-url
             '(lisp
                       ("elisp melpa" "https://melpa.org/#/?q=%s")
                       ("elisp elpa" "https://elpa.gnu.org/packages/")
                       )
                     )
-(spec-handling-add! lookup-handler
+(speckler-add! lookup-handler
                     `((emacs-lisp-mode lisp-interaction-mode helpful-mode)
                       :definition    ,#'+emacs-lisp-lookup-definition
                       :documentation ,#'+emacs-lisp-lookup-documentation
@@ -90,16 +90,16 @@
                       :documentation ,#'+emacs-lisp-lookup-documentation
                       )
                     )
-(spec-handling-add! ligatures
+(speckler-add! ligatures
                     '(emacs-lisp-mode
                       "lambda" ?λ
                       )
                     )
-(spec-handling-add! docsets
+(speckler-add! docsets
                     '(racket-mode "Racket")
                     '((emacs-lisp-mode lisp-interaction-mode) "Emacs Lisp")
                     )
-(spec-handling-add! evil-embrace
+(speckler-add! evil-embrace
                     `((lisp-mode emacs-lisp-mode clojure-mode racket-mode hy-mode)
                       (?f . ,(make-embrace-pair-struct
                               :key ?f
@@ -108,7 +108,7 @@
                               :right-regexp ")"))
                       )
                     )
-(spec-handling-add! auto-modes
+(speckler-add! auto-modes
                     '(lisp
                       ("\\.Cask\\'"     . emacs-lisp-mode)
                       ("\\.rkt\\'"      . racket-mode)
@@ -116,10 +116,10 @@
                       ("\\.el\\'"       . emacs-lisp-mode)
                       )
                     )
-(spec-handling-add! imenu
+(speckler-add! imenu
                     '(emacs-lisp-mode
                       ("spec-def"             "^(spec-handling-new! \\(.+\\) " 1)
-                      ("spec-add"             "^(spec-handling-add! \\(.+\\) " 1)
+                      ("spec-add"             "^(speckler-add! \\(.+\\) " 1)
                       ("Section"              "^[ 	]*;;;*\\**[ 	]+\\([^\n]+\\)" 1)
                       ("Evil commands"        "^\\s-*(evil-define-\\(?:command\\|operator\\|motion\\) +\\(\\_<[^ ()\n]+\\_>\\)" 1)
                       ("Unit tests"           "^\\s-*(\\(?:ert-deftest\\|describe\\) +\"\\([^\")]+\\)\"" 1)
@@ -137,22 +137,22 @@
                       ("Types"                "^\\s-*(\\(cl-def\\(?:struct\\|type\\)\\|def\\(?:class\\|face\\|group\\|ine-\\(?:condition\\|error\\|widget\\)\\|package\\|struct\\|t\\(?:\\(?:hem\\|yp\\)e\\)\\)\\)\\s-+'?\\(\\(?:\\sw\\|\\s_\\|\\\\.\\)+\\)" 2)
                       )
                     )
-(spec-handling-add! repl
+(speckler-add! repl
                     '(emacs-lisp-mode       :start +emacs-lisp/open-repl :send +jg-lisp-eval)
                     '(lisp-interaction-mode :start +emacs-lisp/open-repl :send +jg-lisp-eval)
                     )
-(spec-handling-add! yas-extra
+(speckler-add! yas-extra
                     '(buttercup-minor-mode buttercup-minor-mode)
                     )
-(spec-handling-add! eval
+(speckler-add! eval
                     '(elisp-mode :fn eval-region)
                     )
-(spec-handling-add! org-src
+(speckler-add! org-src
                     '(lisp
                       ("elisp" . emacs-lisp)
                       )
                     )
-(spec-handling-add! babel
+(speckler-add! babel
                     '(lisp
                       (:name lisp       :lib ob-lisp)
                       (:name elisp      :lib ob-emacs-lisp)
@@ -161,7 +161,7 @@
                       (:name emacs-lisp :lib ob-emacs-lisp)
                       )
                     )
-(spec-handling-setq! flycheck-lisp 50
+(speckler-setq! flycheck-lisp 50
                      flycheck-emacs-lisp-load-path 'inherit
                      )
 ;;-- end specs

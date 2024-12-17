@@ -17,13 +17,13 @@
   (sp-local-pair "⟪" "⟫")
 )
 
-(spec-handling-add! lookup-handler
+(speckler-add! lookup-handler
                     `(lean-mode
                       :definnition ,#'lean-find-definition
                       )
                     )
 
-(spec-handling-add! librarian-regular
+(speckler-add! librarian-regular
                     '(lean-mode
                      ("Theorem Proving in Lean 4" . "https://leanprover.github.io/theorem_proving_in_lean4/")
                      ("Lean Manual" . "https://leanprover.github.io/lean4/doc/")

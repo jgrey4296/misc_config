@@ -18,7 +18,7 @@
   (add-hook 'jg-transient-toggles-hook #'+jg-ui-build-wrap-transient)
 
   (+jg-ui-rebuild-transient-toggles)
-  (add-hook 'spec-handling-hook #'+jg-ui-rebuild-transient-toggles)
+  (add-hook 'speckler-hook #'+jg-ui-rebuild-transient-toggles)
   (provide 'transient-toggles)
   )
 

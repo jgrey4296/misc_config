@@ -33,7 +33,7 @@
 
   )
 
-(spec-handling-add! env-handling
+(speckler-add! env-handling
                     '(semantic
                       (:support semantic
                                 #'(lambda (state) (when (featurep 'semantic) (add-hook 'python-mode-hook #'semantic-mode)))

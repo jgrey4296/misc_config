@@ -4,25 +4,25 @@
   (setq flycheck-plantuml-executable (executable-find "plantuml"))
   )
 
-(spec-handling-add! popup
+(speckler-add! popup
                     '(plantuml
                       ("^\\*PLANTUML" :size 0.4 :select nil :ttl 0)
                       )
                     )
 
-(spec-handling-add! auto-modes
+(speckler-add! auto-modes
                     '(plantuml
                       ("\\.plantuml" . plantuml-mode)
                       ("\\.pu" . plantuml-mode)
                       )
                     )
 
-(spec-handling-add! babel
+(speckler-add! babel
                     '(plantuml
                       (:name plantuml :lib ob-plantuml :mode plantuml)
                       )
                     )
-(spec-handling-add! org-src
+(speckler-add! org-src
                     '(plantuml
                       ("plantuml" . plantuml)
                       ("puml" . plantuml)

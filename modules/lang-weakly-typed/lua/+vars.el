@@ -6,11 +6,11 @@ This directory MUST contain the 'main.lua' file and be the in-source build of
 lua-language-server.")
 
 
-(spec-handling-add! company
+(speckler-add! company
                     '(lua-mode (:mode company-lua))
                     )
 
-(spec-handling-add! lookup-handler
+(speckler-add! lookup-handler
                     `(lua-mode
                       :documentation ,#'lua-search-documentation
                       )
@@ -20,38 +20,38 @@ lua-language-server.")
                       )
                     )
 
-(spec-handling-add! auto-modes
+(speckler-add! auto-modes
                     '(lua
                       ("\\.lua\\'" . lua-mode)
                       )
                     )
 
-(spec-handling-add! electric
+(speckler-add! electric
                       '(lua-mode
                         :words ("else" "end")
                         )
                       )
 
-(spec-handling-add! repl
+(speckler-add! repl
                       '(lua-mode    :start +lua/open-repl)
                       '(fennel-mode :start fennel-repl)
                       )
 
-(spec-handling-add! eglot
+(speckler-add! eglot
                     `(lua-mode ,(+lua-generate-lsp-server-command))
                     )
 
-(spec-handling-add! babel
+(speckler-add! babel
                     '(lua
                       (:name lua        :lib ob-lua)
                       )
                     )
-(spec-handling-add! org-src
+(speckler-add! org-src
                     '(lua
                       ("lua" . lua)
                       )
                    )
 
-;; (spec-handling-add! projects
+;; (speckler-add! projects
 ;;                     `(love2d ,#'+lua-love-project-root :run ,#'+lua-love-build-command)
 ;;                     )

@@ -31,14 +31,14 @@
       eglot-stay-out-of '(flymake)
       )
 
-(spec-handling-new! eglot
+(speckler-new! eglot
                     "Register eglot servers"
                     :target eglot-server-programs
                     :loop 'collect
                     (cons key val)
                     )
 
-(spec-handling-add! env-handling
+(speckler-add! env-handling
                     '(eglot
                       (:support eglot
                                 #'(lambda (state) (when (featurep 'eglot) (add-hook 'python-mode-hook #'eglot-ensure)))
@@ -48,7 +48,7 @@
                       )
                     )
 
-(spec-handling-add! lookup-handler
+(speckler-add! lookup-handler
                     `(eglot--managed-mode
                      :definition          xref-find-definitions
                      :references          xref-find-references

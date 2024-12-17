@@ -42,7 +42,7 @@
     )
   )
 
-(spec-handling-new-hook! flycheck
+(speckler-new-hook! flycheck
                     "sets up a stack of checkers"
                     :struct '(:head checker :rest rest)
                     (let ((head (plist-get val :head)))
@@ -53,7 +53,7 @@
                       )
                     )
 
-(spec-handling-setq! flycheck 50
+(speckler-setq! flycheck 50
                      flycheck-display-errors-delay 1
                      flycheck-display-errors-function nil
                      flycheck-help-echo-function nil
@@ -66,7 +66,7 @@
                      flycheck-indication-mode 'right-fringe
                      )
 
-(spec-handling-add! lib-env
+(speckler-add! lib-env
                     `(flycheck
                       :setup    ,#'(lambda (&rest rest) )
                       :start    ,#'(lambda (&rest rest) )
@@ -75,7 +75,7 @@
                       )
                     )
 
-(spec-handling-add! popup
+(speckler-add! popup
                     '(flycheck
                       ("^\\*Flycheck error messages\\*" :select nil)
                       ("^\\*Flycheck errors\\*" :size 0.25)

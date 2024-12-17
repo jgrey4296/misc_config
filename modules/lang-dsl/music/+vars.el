@@ -19,7 +19,7 @@
 
               )
 
-(spec-handling-add! librarian-regular
+(speckler-add! librarian-regular
                     (csound-mode
                      ("Csound Manual" . "https://csound.com/docs/manual/PartOverview.html")
                      ("Csound tutorial" . "http://www.csounds.com/toots/index.html")
@@ -35,13 +35,13 @@
                      )
                     )
 
-(spec-handling-add! auto-modes
+(speckler-add! auto-modes
                     '(faust
                       ("\\.dsp\\'" . faustine-mode)
                       )
                     )
 
-(spec-handling-add! company
+(speckler-add! company
                     '((faust-mode faustine-mode)
                       (:mode . #'+faust-company-backend))
                     )

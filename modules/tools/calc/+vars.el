@@ -16,7 +16,7 @@
 ;;-- end keymaps
 
 
-(spec-handling-add! popup
+(speckler-add! popup
                     '(calc
                       ("^\\*Calc"                                              :vslot -7 :side bottom :size 0.4 :select t :quit nil :ttl 0 :priority -100)
                       )

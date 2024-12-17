@@ -6,7 +6,7 @@
       gdb-many-windows t)
 
 
-(spec-handling-add! popup
+(speckler-add! popup
                     '(realgud
                       ("^\\*\\(?:trepanjs:\\(?:g\\|zsh\\|bash\\)db\\|pdb \\)" :size 20 :select nil :quit nil)
                       )

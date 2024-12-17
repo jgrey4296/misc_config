@@ -14,33 +14,33 @@
     (sp-local-pair "{-@" "@-")))
 
 
-(spec-handling-add! projects
+(speckler-add! projects
                     '(haskell-stack ("stack.yaml") :project-file "stack.yaml" :compilation-dir nil :configure nil :compile "stack build" :test "stack build --test" :install nil :package nil :run nil :test-suffix "Spec")
                     '(haskell-cabal projectile-cabal-project-p :project-file nil :compilation-dir nil :configure nil :compile "cabal build" :test "cabal test" :install nil :package nil :run "cabal run" :test-suffix "Spec")
 )
-(spec-handling-add! file-templates
+(speckler-add! file-templates
                     '(haskell
                      (haskell-mode :trigger haskell-auto-insert-module-template :project t)
                      )
                     )
-(spec-handling-add! popup
+(speckler-add! popup
                     '(haskell
                      ("^\\*haskell\\*" :quit nil)
                      )
                     )
-(spec-handling-add! lookup-url
+(speckler-add! lookup-url
                     '(haskell
                      ("Haskell Cabal" "https://hackage.haskell.org/packages/search?terms=%s")
                      ("Haskell Typeclassopedia" "https://wiki.haskell.org/index.php?search=%s&title=Special%3ASearch&fulltext=Search")
                      )
                     )
-(spec-handling-add! lookup-handler
+(speckler-add! lookup-handler
                     '(haskell-mode :definition haskell-mode-jump-to-def-or-tag)
                     )
-(spec-handling-add! tree-sit-lang
+(speckler-add! tree-sit-lang
                     '(haskell-mode . haskell)
                     )
-(spec-handling-add! auto-modes
+(speckler-add! auto-modes
                     '(haskell
                       ("\\.[gh]s\\'" . haskell-mode)
                       ("\\.hsig\\'" . haskell-mode)
@@ -54,18 +54,18 @@
                       ("\\.dump-simpl\\'" . ghc-core-mode)
                       )
                     )
-(spec-handling-add! repl
+(speckler-add! repl
                     '(haskell-mode          :start +haskell/open-repl :persist t)
                     '(haskell-cabal-mode    :start +haskell/open-repl :persist t)
                     '(literate-haskell-mode :start +haskell/open-repl :persist t)
                     )
-(spec-handling-add! babel
+(speckler-add! babel
                     '(haskell
                       (:name haskell    :lib ob-haskell)
                       )
                     )
 
-(spec-handling-add! org-src
+(speckler-add! org-src
                     '(haskell
                       ("haskell" . haskell)
                       ("ghc" . haskell)

@@ -15,13 +15,13 @@
 ;; (use-package! esqlite-helm :defer t)
 
 
-(spec-handling-add! org-src
+(speckler-add! org-src
                     '(sql
                       ("sqlite" . sql)
                       ("sql" . sql)
                       )
                     )
-(spec-handling-add! babel
+(speckler-add! babel
                     '(sql
                       (:name sql        :lib ob-sql)
                       (:name sqlite     :lib ob-sqlite)

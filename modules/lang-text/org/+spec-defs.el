@@ -15,7 +15,7 @@
     )
   )
 
-(spec-handling-new! org-startup
+(speckler-new! org-startup
                     "add org startup options to handle in hooks."
                     :target org-startup-options
                     :loop 'append
@@ -23,7 +23,7 @@
                     val
                     )
 
-(spec-handling-new! org-capture
+(speckler-new! org-capture
                     "Register org-capture templates, with file function finding and snippet expansion"
                     :target org-capture-templates
                     :loop 'append
@@ -63,7 +63,7 @@
                              )
                     )
 
-(spec-handling-new! babel
+(speckler-new! babel
                     "maps a babel language name to the library name of its handlers"
                     :target +org-babel-mode-alist
                     :struct '(key . (plist :name :lib :func :mode))
@@ -78,7 +78,7 @@
                                            ))
                     )
 
-(spec-handling-new! org-src
+(speckler-new! org-src
                     "register languages for org babel"
                     :target org-src-lang-modes
                     :struct '(key . (str . mode))
@@ -87,7 +87,7 @@
                     )
 
 ;; default org-startup options
-(spec-handling-add! org-startup
+(speckler-add! org-startup
                     '(fold
                       ("fold"                org-startup-folded fold)
                       ("overview"            org-startup-folded overview)

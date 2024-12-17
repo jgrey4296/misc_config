@@ -2,7 +2,7 @@
 
 (defvar! +jg-dired-recursive-switches "-aBhlR --group-directories-first" nil)
 
-(spec-handling-setq! dired 50
+(speckler-setq! dired 50
                     read-file-name-function #'read-file-name-default
                     )
 
@@ -102,11 +102,11 @@
                                   line-end
                                   )
                        )
-  (spec-handling-setq! dired-omit-files jg-dired-omit-files)
+  (speckler-setq! dired-omit-files jg-dired-omit-files)
   (provide 'dired-omit-files-set)
   )
 
-(spec-handling-setq! dired-omit 50
+(speckler-setq! dired-omit 50
                      dired-omit-files jg-dired-omit-files
                      dired-omit-extensions jg-dired-omit-extensions
                      )
@@ -167,7 +167,7 @@
   )
 
 ;;-- specs
-(spec-handling-add! fold
+(speckler-add! fold
                     `(dired
                      :modes (dired-mode)
                      :priority 50
@@ -181,7 +181,7 @@
                      )
                     )
 
-(spec-handling-add! popup
+(speckler-add! popup
                     '(dired
                      ("^\\*image-dired" :slot 20 :size 0.8 :select t :quit nil :ttl 0)
                      ("^\\*ranger" :ignore t)

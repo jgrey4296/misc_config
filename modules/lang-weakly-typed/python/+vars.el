@@ -4,7 +4,7 @@
 ;;-- general python
 
 ;; Conda/Mamaba
-(spec-handling-setq! conda 50
+(speckler-setq! conda 50
                      conda-anaconda-home (or (getenv "MAMBA_ROOT_PREFIX") (getenv "ANACONDA_HOME") "/usr/local/anaconda3")
                      conda-env-home-directory (cond ((getenv "MAMBA_ROOT_PREFIX")
                                                      (f-join (getenv "MAMBA_ROOT_PREFIX") "envs"))
@@ -16,7 +16,7 @@
                      )
 
 ;; Py-vars
-(spec-handling-setq! python 50
+(speckler-setq! python 50
                      ;; Python settings
                      python-indent-offset 4
                      python-indent-guess-indent-offset                     nil
@@ -41,7 +41,7 @@
 ;;-- end general python
 
 ;;-- tree-sitter
-(spec-handling-add! treesit-lang
+(speckler-add! treesit-lang
                     '(python :lib-base "python" :entry-func "tree_sitter_python")
                     )
 
@@ -81,7 +81,7 @@
 ;;-- end smartparens
 
 ;;-- lsp
-(spec-handling-setq! lsp-py 50
+(speckler-setq! lsp-py 50
                      ;; Pyright
                      lsp-pyright-extra-paths #'[]
                      lsp-pyright-venv-path conda-env-home-directory
@@ -130,7 +130,7 @@
 ;;-- end general insert
 
 ;;-- specs
-(spec-handling-add! projects
+(speckler-add! projects
                     `(jg-python-project ("pyproject.toml")
                       :project-file "pyproject.toml"
                       :test-dir "__tests"
@@ -145,7 +145,7 @@
                     '(python-basic ("setup.py")            :project-file "setup.py")
                     '(django ("manage.py")                 :project-file "manage.py" :compilation-dir nil :configure nil :compile "python manage.py runserver" :test "python manage.py test" :install nil :package nil :run nil :test-suffix "_test" :test-prefix "test_")
                     )
-(spec-handling-add! popup
+(speckler-add! popup
                     '(python
                      ("^\\*pytest\\*"         :side bottom :ttl 5   :height 0.4 :quit t :select t :priority 50)
                      ("^\\*nosetests"         :size 0.4 :select nil)
@@ -159,7 +159,7 @@
                      ("^\\*imports\\*"        :side bottom :ttl nil :height -1.3 :quit t  :select nil :priority 50)
                      )
                     )
-(spec-handling-add! file-templates
+(speckler-add! file-templates
                     '(python
                       ("LICENSE\\'"               :trigger "__license-acab"   :mode text-mode   :priority 100)
                       ;;Configs:
@@ -181,7 +181,7 @@
                       (python-mode             :trigger "__"                                 :priority -100)
                       )
                     )
-(spec-handling-add! fold
+(speckler-add! fold
                     `(python
                      :modes python-mode
                      :priority 25
@@ -205,21 +205,21 @@
                                 )
                       )
                     )
-(spec-handling-add! rotate-text
+(speckler-add! rotate-text
                     '(python-mode
                       :symbols (("True" "False")
                                 ("dict" "list")
                                 )
                       )
                     )
-(spec-handling-add! whitespace-cleanup
+(speckler-add! whitespace-cleanup
                     `((python-mode python-ts-mode)
                       ,#'+jg-python-cleanup-ensure-newline-before-def
                       ,#'delete-trailing-whitespace
                       ,#'+jg-text-cleanup-whitespace
                      )
                     )
-(spec-handling-add! ligatures
+(speckler-add! ligatures
                     '(python-mode
                       ;; Functional
                       "def"    :def
@@ -238,17 +238,17 @@
                       "yield"  :yield
                       )
                     )
-(spec-handling-add! tree-sit-lang
+(speckler-add! tree-sit-lang
                     '(python-mode . python)
                     '(doot-mode . python)
                     )
-(spec-handling-add! lookup-url
+(speckler-add! lookup-url
                     '(python
                      ("Python" "https://docs.python.org/3/search.html?q=%s&check_keywords=yes&area=default")
                      ("Pypi"   "https://pypi.org/search/?q=%s")
                      )
                     )
-(spec-handling-add! lookup-handler
+(speckler-add! lookup-handler
                     `(anaconda-mode
                       :definition    +jg-conda-find-defs
                       :references    +jg-conda-find-references
@@ -256,16 +256,16 @@
                       :assignments   +jg-conda-find-assignments
                       )
                     )
-(spec-handling-add! company
+(speckler-add! company
                     '(python-mode (:mode company-gtags))
                     '(anaconda-mode (:mode company-anaconda))
                     )
-(spec-handling-add! docsets
+(speckler-add! docsets
                     '((python-mode inferior-python-mode)
                       "Python 3" "NumPy" "SciPy" "Pandas"
                       )
                     )
-(spec-handling-add! auto-modes
+(speckler-add! auto-modes
                     '(python
                       ("\\.py\\'"                 . python-mode)
                       ("SConscript"               . scons-mode)
@@ -278,36 +278,36 @@
                       ("pyproject\\.toml\\'"      . conf-toml-mode)
                     )
                     )
-(spec-handling-add! compile-commands
+(speckler-add! compile-commands
                     '(python +jg-python-get-commands +jg-python-solo-file-run)
                     )
-(spec-handling-add! repl
+(speckler-add! repl
                     '(python-mode
                       :start +jg-python/open-repl
                       :send  python-shell-send-region
                       )
                     )
-(spec-handling-add! yas-extra
+(speckler-add! yas-extra
                     '(node-mode node-mode)
                     )
 (when (executable-find "Microsoft.Python.LanguageServer")
-  (spec-handling-add! eglot
+  (speckler-add! eglot
                       '(python-mode "Microsoft.Python.LanguageServer")
                       )
   )
-(spec-handling-add! imenu
+(speckler-add! imenu
                     '(python-mode
                       ("Field"  "\\s-*\\(.+?\\)\\s-*:\\s-\\(.+?\\)\\s-=\\s-field" 1)
 
                       )
                     )
 
-(spec-handling-add! org-src
+(speckler-add! org-src
                     '(python
                       ("python" . python)
                       )
                     )
-(spec-handling-add! babel
+(speckler-add! babel
                     '(python
                       (:name python :lib ob-python :mode python)
                       )

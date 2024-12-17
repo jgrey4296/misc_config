@@ -69,7 +69,7 @@
 
   )
 
-(spec-handling-add! lib-env
+(speckler-add! lib-env
                     `(py-lsp
                       :lang python
                       :setup ,#'(lambda () (add-hook 'python-mode-hook #'lsp-deferred))

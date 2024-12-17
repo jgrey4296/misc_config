@@ -4,18 +4,18 @@
   (pushnew! projectile-project-root-files "doot.toml")
   )
 
-;; (spec-handling-add! projects
+;; (speckler-add! projects
 ;;                     `(jg-toml-project ("doot.toml") :project-file "doot.toml" :related-files-fn ,#'+jg-toml-related-files-fn)
 ;;                     )
 
-(spec-handling-add! whitespace-cleanup
+(speckler-add! whitespace-cleanup
                     `(conf-toml-mode
                       ,#'+jg-toml-cleanup-ensure-newline-before-table
                       ,#'delete-trailing-whitespace
                       ,#'+jg-text-cleanup-whitespace
                       )
                     )
-(spec-handling-add! auto-modes
+(speckler-add! auto-modes
                     '(toml
                       ("\\.toml\\'" . conf-toml-mode)
                       )
@@ -25,7 +25,7 @@
                       ("\\.cfg\\'" . conf-mode)
                       )
                     )
-(spec-handling-add! fold
+(speckler-add! fold
                     `(toml
                       :modes (conf-toml-mode toml-mode toml-ts-mode)
                       :priority -50
@@ -38,7 +38,7 @@
                                  )
                       )
                     )
-(spec-handling-add! org-src
+(speckler-add! org-src
                     '(toml
                       ("toml" . toml)
                       )

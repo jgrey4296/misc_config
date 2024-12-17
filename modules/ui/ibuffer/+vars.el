@@ -35,7 +35,7 @@
       )
   )
 
-(spec-handling-setq! ibuffer-show-empty-filter-groups nil
+(speckler-setq! ibuffer-show-empty-filter-groups nil
                      ibuffer-default-sorting-mode 'alphabetic
                      ibuffer-filter-group-name-face '(:inherit (success bold))
                      ibuffer-old-time 2
@@ -53,12 +53,12 @@
                      )
 
 ;;-- spec
-(spec-handling-add! popup
+(speckler-add! popup
                     '(ibuffer
                       ("^\*Ibuffer\*$"         :side right  :ttl 5 :width  0.5 :quit nil :select t :priority 50)
                       )
                     )
-(spec-handling-add! fold
+(speckler-add! fold
                     `(ibuffer
                      :modes (ibuffer-mode)
                      :priority 50

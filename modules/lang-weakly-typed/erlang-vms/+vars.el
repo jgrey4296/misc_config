@@ -20,20 +20,20 @@
 ;;-- end links
 
 ;;-- specs
-(spec-handling-add! lookup-url
+(speckler-add! lookup-url
                     '(erlang
                       ("Erlang/OPT" "https://www.erlang.org/doc/search?q=%s")
                       ("Elixir"     "https://hexdocs.pm/elixir/search.html?q=%s")
                       )
                     )
-(spec-handling-add! projects
+(speckler-add! projects
                     '(elixir ("mix.exs") :project-file "mix.exs" :compilation-dir nil :configure nil :compile "mix compile" :test "mix test" :install nil :package nil :run nil :test-suffix "_test" :src-dir "lib/")
                     '(rebar ("rebar.config") :project-file "rebar.config" :compilation-dir nil :configure nil :compile "rebar3 compile" :test "rebar3 do eunit,ct" :install nil :package nil :run nil :test-suffix "_SUITE")
                     )
-(spec-handling-add! tree-sit-lang
+(speckler-add! tree-sit-lang
                     '(elixir-mode     . elixir)
                     )
-(spec-handling-add! auto-modes
+(speckler-add! auto-modes
                     '(erlang
                       ("\\.erlang\\'"                          . erlang-mode)
                       ("/rebar\\.config\\(?:\\.script\\)?\\'"  . erlang-mode)
@@ -44,20 +44,20 @@
                       ("mix\\.lock"                            . elixir-mode)
                       )
                     )
-(spec-handling-add! lookup-handler
+(speckler-add! lookup-handler
                     `(elixir-mode
                      :definition    ,#'alchemist-goto-definition-at-point
                      :documentation ,#'alchemist-help-search-at-point
                      )
                     )
-(spec-handling-add! repl
+(speckler-add! repl
                     '(elixir-mode
                       :start alchemist-iex-project-run
                       :send  alchemist-eval-region
                       )
                     '(erlang-mode :start +erlang/open-repl)
                     )
-(spec-handling-add! ligatures
+(speckler-add! ligatures
                     '(elixir-mode
                       ;; Functional
                       :def "def"
@@ -73,7 +73,7 @@
                       )
                     )
 
-(spec-handling-add! file-templates
+(speckler-add! file-templates
                     '(elixir
                       '("\\.ex\\'"     :trigger "__" :mode elixir-mode :priority -99)
                       '("\\.exs\\'"    :trigger "__" :mode elixir-mode :priority -99)
@@ -81,14 +81,14 @@
                       )
                     )
 
-(spec-handling-add! babel
+(speckler-add! babel
                     '(erlang
                       (:name erlang :lib ob-erlang :mode erlang)
                       (:name elixir :lib ob-elixir :mode elixir)
                       )
                     )
 
-(spec-handling-add! org-src
+(speckler-add! org-src
                     '(erlang
                       ("erlang" . erlang)
                       ("elixir" . elixir)

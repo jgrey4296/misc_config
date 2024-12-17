@@ -118,7 +118,7 @@
   :hook (emacs-lisp-mode . embrace-emacs-lisp-mode-hook)
   :config
   (after! evil-surround (evil-embrace-enable-evil-surround-integration))
-  (spec-handling-new-hook! evil-embrace
+  (speckler-new-hook! evil-embrace
                       "Construct evil embrace pairs lists"
                       (setq embrace--pairs-list (append val embrace--pairs-list))
                       )

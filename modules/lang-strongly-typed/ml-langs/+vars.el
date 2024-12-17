@@ -7,14 +7,14 @@
                    :actions '(insert)
                    :post-handlers '(("| " "SPC") ("|[i]*)[d-2]" "RET")))))
 
-(spec-handling-add! tree-sit-lang
+(speckler-add! tree-sit-lang
                     '(ocaml-mode      . ocaml)
                     )
-(spec-handling-add! company
+(speckler-add! company
                     '(tuareg-mode merlin-company-backend)
                     '(sml-mode company-mlton-grouped-backend)
                     )
-(spec-handling-add! lookup-handler
+(speckler-add! lookup-handler
                     '(tuareg-mode :async t
                       :definition merlin-locate
                       :references merlin-occurrences
@@ -22,18 +22,18 @@
                       )
                     )
 
-(spec-handling-add! popup
+(speckler-add! popup
                     '(ml-langs
                       ("^\\*utop\\*" :quit nil)
                       )
                     )
-(spec-handling-add! auto-modes
+(speckler-add! auto-modes
                     '(ml-langs
                       ( "\\.s\\(?:ml\\|ig\\)\\'" . sml-mode)
                       )
                     )
 
-(spec-handling-add! repl
+(speckler-add! repl
                     '(sml-mode :start run-sml)
                     '(tuareg-mode
                       :start utop

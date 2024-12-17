@@ -22,7 +22,7 @@ buffer rather than an overlay on the line at point or the minibuffer.")
       )
 
 
-(spec-handling-add! popup
+(speckler-add! popup
                     '(quickrun
                       ("^\\*quickrun" :size 0.3 :ttl 0)
                       )
@@ -34,7 +34,7 @@ buffer rather than an overlay on the line at point or the minibuffer.")
                       )
                     )
 
-(spec-handling-add! compile-commands
+(speckler-add! compile-commands
                     '(default
                        +jg-workspaces-get-doot-commands
                        ;; counsel-compile-get-filtered-history

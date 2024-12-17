@@ -10,7 +10,7 @@
 
 (use-package! helm-gtags :defer t)
 
-(spec-handling-add! env-handling
+(speckler-add! env-handling
                     '(gtags
                       (:support gtags
                                 #'(lambda (state) nil)
@@ -20,7 +20,7 @@
                       )
                     )
 
-(spec-handling-add! lookup-handler
+(speckler-add! lookup-handler
                     `(gtags
                      :definition          nil
                      :declaration         nil
@@ -31,7 +31,7 @@
                      )
                     )
 
-(spec-handling-add! popup
+(speckler-add! popup
                     '(popup
                       nil
                       )

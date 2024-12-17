@@ -6,7 +6,7 @@
   :commands csv-mode
 )
 
-(spec-handling-add! auto-modes
+(speckler-add! auto-modes
                     '(csv
                       ("\\.[Cc][Ss][Vv]\\'" . csv-mode)
                       ("\\.tsv\\'" . tsv-mode)

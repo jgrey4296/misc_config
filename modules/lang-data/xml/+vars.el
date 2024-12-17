@@ -23,30 +23,30 @@
 
 ;;-- specs
 
-(spec-handling-add! popup
+(speckler-add! popup
                     `(nxml
                       (,jg-xml-xpath-results-buffer-name :side bottom :ttl nil :height 0.3 :quit t :select nil :priority 100)
                       (,jg-xml-xmllint-shell-buffer-name :side right  :ttl nil :width  0.3 :quit t :select t   :priority 100)
                       )
                     )
 
-(spec-handling-add! lookup-url
+(speckler-add! lookup-url
                     '(xml
                      ("Firefox Dev" "https://developer.mozilla.org/en-US/search?q=%s")
                      )
                     )
-(spec-handling-add! company
+(speckler-add! company
                     '(nxml-mode (:mode company-nxml))
                     )
 
-(spec-handling-add! auto-modes
+(speckler-add! auto-modes
                     '(xml
                       ("\\.p\\(?:list\\|om\\)\\'" . nxml-mode)
                       ("\\.xs\\(?:d\\|lt\\)\\'"   . nxml-mode)
                       ( "\\.rss\\'" . nxml-mode)
                       )
                     )
-(spec-handling-add! repl
+(speckler-add! repl
                     '(nxml-mode
                       :start +xml/open-repl
                       )

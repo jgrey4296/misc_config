@@ -1,6 +1,6 @@
 ;;; +spec-defs.el -*- lexical-binding: t; -*-
 
-(spec-handling-new-hook! rotate-text
+(speckler-new-hook! rotate-text
                     "Set local rotate text lists "
                     (setq-local rotate-text-local-symbols    (plist-get val :symbols)
                                 rotate-text-local-words      (plist-get val :words)
@@ -8,12 +8,12 @@
                                 )
                     )
 
-(spec-handling-new-hook! whitespace-cleanup
+(speckler-new-hook! whitespace-cleanup
                     "Register local whitespace cleanup functions"
                     (setq-local jg-text-whitespace-clean-hook (ensure-list val))
                     )
 
-(spec-handling-new-hook! ligatures
+(speckler-new-hook! ligatures
                     "Register ligatures for prettify-symbols"
                     (setq-local prettify-symbols-alist
                                 (let (head alist)
@@ -31,7 +31,7 @@
                                 )
                     )
 
-(spec-handling-new-hook! electric
+(speckler-new-hook! electric
                     "Register electric chars"
                     :struct '(:chars list :words list)
                     (setq-local electric-indent-inhibit nil)
@@ -42,13 +42,13 @@
                       (setq +electric-indent-words words))
                     )
 
-(spec-handling-new-hook! flyspell-predicate
+(speckler-new-hook! flyspell-predicate
                     "Set local flyspec checkers"
                     (setq-local flyspell-generic-check-word-predicate val)
                     )
 
 ;; (defvar +jg-format-defs nil)
-;; (spec-handling-new! formatting
+;; (speckler-new! formatting
 ;;                     :target +jg-format-defs
 ;;                     :loop 'collect
 ;;                     val
@@ -58,7 +58,7 @@
 ;; TODO
 
 
-;; (spec-handling-add! format
+;; (speckler-add! format
 ;;                     '(sh-mode
 ;;                       '("shfmt" "-ci"
 ;;                         ("-i" "%d" (unless indent-tabs-mode tab-width))
@@ -79,7 +79,7 @@
 ;;     ("-xml" (memq major-mode '(nxml-mode xml-mode))))
 ;;   :ok-statuses '(0 1))
 
-;; (spec-handling-add! format
+;; (speckler-add! format
 ;;                     '(caml-mode #'ocamlformat)
 ;;                     '(tuareg-mode #'ocamlformat)
 ;;                     )

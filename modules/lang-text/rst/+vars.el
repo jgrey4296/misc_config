@@ -2,7 +2,7 @@
 
 (defvar jg-rst-mode-map (make-sparse-keymap))
 
-(spec-handling-add! auto-modes
+(speckler-add! auto-modes
                     '(rst
                       ("\\.txt\\'" . rst-mode)
                       ("\\.rst\\'" . rst-mode)
@@ -10,13 +10,13 @@
                       )
                     )
 
-(spec-handling-add! file-templates
+(speckler-add! file-templates
                     '(rst
                       ("\\.rst\\'" :trigger "__" :mode rst-mode :priority -99)
 
                       )
                     )
 
-(spec-handling-add! compile-commands
+(speckler-add! compile-commands
                     '(rst +jg-rst-get-commands)
                     )

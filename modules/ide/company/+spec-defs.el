@@ -74,7 +74,7 @@
         )
   )
 
-(spec-handling-new-hook! company
+(speckler-new-hook! company
                          "Registers hooks for specific modes which set the company backends"
                          :struct '(list (priority backends*)*)
                          ;; Create val sort if missing

@@ -39,7 +39,7 @@
               truncate-lines t
               )
 
-(spec-handling-add! auto-modes
+(speckler-add! auto-modes
                     '(vim
                       ("\\.vimrc\\'" . vimrc-mode)
                       )

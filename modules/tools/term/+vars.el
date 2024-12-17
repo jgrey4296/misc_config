@@ -14,7 +14,7 @@
 
 ;;-- end vterm
 
-(spec-handling-add! popup
+(speckler-add! popup
                     '(shell
                       ("^\\*shell" :side bottom :ttl nil :height 0.3 :quit t :select t :priority 100)
                       )
@@ -24,17 +24,17 @@
                       )
                     )
 
-(spec-handling-add! tree-sit-lang
+(speckler-add! tree-sit-lang
                     '(sh-mode         . bash)
                     )
 
-(spec-handling-add! auto-modes
+(speckler-add! auto-modes
                     '(shell
                       ("\\.bash\\'" . sh-mode)
                       )
                     )
 
-(spec-handling-add! babel
+(speckler-add! babel
                     '(term
                      (:name bash       :lib ob-shell)
                      (:name eshell     :lib ob-eshell)
@@ -43,7 +43,7 @@
                       )
                     )
 
-(spec-handling-add! org-src
+(speckler-add! org-src
                     '(term
                       ("bash" . sh)
                       ("shell" . sh)
@@ -52,7 +52,7 @@
                       )
                     )
 
-(spec-handling-setq! shell 50
+(speckler-setq! shell 50
                      shell-dynamic-complete-functions '(comint-c-a-p-replace-by-expanded-history
                                                         shell-environment-variable-completion
                                                         shell-command-completion
@@ -69,6 +69,6 @@
                      comint-buffer-maximum-size 2048 ; double the default
                      )
 
-(spec-handling-add! company
+(speckler-add! company
                     '(shell-mode (:mode company-shell company-shell-env company-files))
                     )

@@ -16,7 +16,7 @@
 (add-hook 'tty-setup-hook #'doom-init-clipboard-in-tty-emacs-h)
 
 (use-package! spec-handling
-  :autoload (run-spec-handlers spec-handling-new! spec-handling-new-hook! spec-handling-add! spec-handling-setq!)
+  :autoload (speckler-go! speckler-new! speckler-new-hook! speckler-add! speckler-setq!)
   )
 
 (use-package! epa

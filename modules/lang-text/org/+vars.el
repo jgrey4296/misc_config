@@ -13,7 +13,7 @@
 ;; locations
 
 ;; ORG SETUP
-(spec-handling-setq! org 50
+(speckler-setq! org 50
                      org-link-from-user-regexp "\\<John Grey\\>"
                      org-fast-tag-selection-single-key nil
                      org-group-tags nil
@@ -54,7 +54,7 @@
 ;;-- end org core
 
 ;;-- locations
-(spec-handling-setq! org-locs 20
+(speckler-setq! org-locs 20
                      org-archive-location   (format           "%s::%s" (expand-file-name "archive/archive.org" org-directory) "* Main Archive")
                      org-id-locations-file  (expand-file-name "org/.orgids" user-cache-dir)
                      org-default-notes-file (expand-file-name "notes/misc.org"   org-directory)
@@ -217,7 +217,7 @@
 
 ;;-- capture
 
-(spec-handling-add! org-capture
+(speckler-add! org-capture
                     `(todo
                       (:key       "t" :name      "Personal todo"
                        :file      +org-capture-todo-file :headline  "Triage"
@@ -263,7 +263,7 @@
 ;;-- end spelling
 
 ;;-- specs
-(spec-handling-add! file-templates
+(speckler-add! file-templates
                     '(org
                      ("two_pager\\.org$"     :trigger "__pacheco_vega_two_pager" :mode org-mode)
                      ("lit_review\\.org$"    :trigger "__lit_review"             :mode org-mode)
@@ -277,7 +277,7 @@
                      (org-mode :trigger "__")
                      )
                     )
-(spec-handling-add! fold
+(speckler-add! fold
                     '(org
                      :modes (org-mode doom-docs-org-mode)
                      :triggers (:open-all   +org/open-all-folds
@@ -289,21 +289,21 @@
                                 )
                      )
                     )
-(spec-handling-add! lookup-handler
+(speckler-add! lookup-handler
                     `(org-mode
                      :definition ,#'+org-lookup-definition-handler
                      :references ,#'+org-lookup-references-handler
                      :documentation ,#'+org-lookup-documentation-handler
                      )
                     )
-(spec-handling-add! whitespace-cleanup
+(speckler-add! whitespace-cleanup
                     `(org-mode
                       ,#'delete-trailing-whitespace
                       ;; ,#'+jg-org-clean-heading-spaces
                       ,#'+jg-text-cleanup-whitespace
                      )
                  )
-(spec-handling-add! popup
+(speckler-add! popup
                     '(org-mode
                       ("^\\*Org Links" :slot -1 :vslot -1 :size 2 :ttl 0)
                       ("^ ?\\*\\(?:Agenda Com\\|Calendar\\|Org Export Dispatcher\\)" :slot -1 :vslot -1 :size #'+popup-shrink-to-fit :ttl 0)
@@ -315,22 +315,22 @@
                       ("^\\*Capture\\*$\\|CAPTURE-.*$" :size 0.42 :quit nil :select t :autosave ignore)
                       )
                     )
-(spec-handling-add! auto-modes
+(speckler-add! auto-modes
                    '(org
                      ("\\.org\\'" . org-mode)
                      )
                    )
-(spec-handling-add! eval
+(speckler-add! eval
                     '(org-mode :fn +org-eval-handler)
                     )
-(spec-handling-add! org-startup
+(speckler-add! org-startup
                     '(plus
                       ("agenda"    jg-org-startup-agenda         t)
                       ("reference" jg-org-startup-reference      t)
                       ("packages"  jg-org-startup-package        t)
                       )
                     )
-(spec-handling-add! babel
+(speckler-add! babel
                     '(default
                       (:name D          :lib ob-C)
                       (:name amm        :lib ob-ammonite)
@@ -362,7 +362,7 @@
                       (:name tangle     :lib ob-tangle)
                       )
                     )
-(spec-handling-add! org-src
+(speckler-add! org-src
                     '(default
 
                       )

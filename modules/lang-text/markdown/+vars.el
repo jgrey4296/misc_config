@@ -65,7 +65,7 @@ capture, the end position, and the output buffer.")
                   (looking-at-p "\\*\\* *")
                   (cmd! (forward-char 2)))))
 
-(spec-handling-add! lookup-handler
+(speckler-add! lookup-handler
                     '((markdown-mode gfm-mode)
                      ;; `markdown-follow-thing-at-point' may open an external program or a
                      ;; buffer. No good way to tell, so pretend it's async.
@@ -74,14 +74,14 @@ capture, the end position, and the output buffer.")
                     )
 
 
-(spec-handling-add! auto-modes
+(speckler-add! auto-modes
                     '(markdown
                       ("/README\\(?:\\.md\\)?\\'" . gfm-mode)
                       ("\\.\\(?:md\\|markdown\\|mkd\\|mdown\\|mkdn\\|mdwn\\)\\'" . gfm-mode)
                       )
                     )
 
-(spec-handling-add! fold
+(speckler-add! fold
                     `(markdown
                       :modes (markdown-mode)
                       :priority 25
@@ -95,7 +95,7 @@ capture, the end position, and the output buffer.")
                       )
                     )
 
-(spec-handling-add! org-src
+(speckler-add! org-src
                     '(markdown
                       ("md" . markdown)
                       )

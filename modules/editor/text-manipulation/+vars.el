@@ -59,7 +59,7 @@
 ;;-- end spelling
 
 ;;-- specs
-(spec-handling-setq! rotate-text 50
+(speckler-setq! rotate-text 50
                      rotate-text-words '(("enable" "disable")
                                          ("true" "false")
                                          ("width" "height")
@@ -105,15 +105,15 @@
                                            ("default" "default_factory")
                                  )
               )
-(spec-handling-setq! evil-shift 50
+(speckler-setq! evil-shift 50
                      evil-shift-width 4
                      )
-(spec-handling-add! auto-modes
+(speckler-add! auto-modes
                     '(text-manip
                       ("LICENSE" . license-mode)
                       )
                    )
-(spec-handling-add! flyspell-predicate
+(speckler-add! flyspell-predicate
                     `(markdown-mode ,#'+markdown-flyspell-word-p)
                     `(gfm-mode ,#'+markdown-flyspell-word-p)
                     )

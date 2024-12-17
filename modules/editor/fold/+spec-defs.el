@@ -1,6 +1,6 @@
 ;;; +spec-defs.el -*- lexical-binding: t; -*-
 
-(spec-handling-new! fold
+(speckler-new! fold
                     "Registers fold handlers"
                     :target evil-fold-list
                     :sorted t
@@ -15,7 +15,7 @@
                             )
                     )
 
-(spec-handling-new! hideshow
+(speckler-new! hideshow
                     "Set hide show special modes"
                     :target hs-special-modes-alist
                     :loop 'append

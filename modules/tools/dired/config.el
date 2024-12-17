@@ -10,7 +10,7 @@
   :commands dired-jump
   :config
   (provide 'jg-dired)
-  (spec-handling-add! evil-initial
+  (speckler-add! evil-initial
                       '(image-dired-display-iamge-mode emacs)
                       )
   (if (not (executable-find "gls"))
@@ -67,7 +67,7 @@
   :init
   (global-set-key [remap find-dired] #'fd-dired)
   (setq fd-dired-program doom-projectile-fd-binary)
-  (spec-handling-add! popup
+  (speckler-add! popup
                       '(fd-dired
                         ("^\\*F\\(?:d\\|ind\\)\\*$" :ignore t)
                         )

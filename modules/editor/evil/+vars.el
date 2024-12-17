@@ -34,7 +34,7 @@
 
 ;;-- evil-escape
 (setq evil-escape-key-sequence "jk")
-(spec-handling-setq! evil-escape 50
+(speckler-setq! evil-escape 50
                      evil-escape-state-blacklist '(multiedit emacs motion)
                      evil-escape-major-mode-blacklist '(neotree-mode treemacs-mode vterm-mode ibuffer-mode image-mode)
                      evil-escape-key-sequence "jk"
@@ -67,7 +67,7 @@
 
 ;;-- specs
 
-(spec-handling-add! popup
+(speckler-add! popup
                     '(evil
                       ("^\\*evil-registers" :size 0.3)
                       ("^\\*Command Line"   :size 8)

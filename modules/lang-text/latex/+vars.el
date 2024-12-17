@@ -3,7 +3,7 @@
 (defvar jg-latex-mode-map (make-sparse-keymap))
 (setq-default TeX-master t)
 
-(spec-handling-setq! latex 50
+(speckler-setq! latex 50
                      ;; Use hidden directories for AUCTeX files.
                      TeX-auto-local  nil
                      TeX-style-local nil
@@ -74,16 +74,16 @@
 ;;-- end fold settings
 
 ;;-- specs
-(spec-handling-add! company
+(speckler-add! company
                     '(reftex-mode (:mode company-reftex-labels company-reftex-citations))
                     '(LaTeX-mode (:mode company-auctex-environments company-auctex-macros +latex-symbols-company-backend))
                     )
-(spec-handling-add! lookup-url
+(speckler-add! lookup-url
                     '(latex
                       ("Latex Packages" "https://www.ctan.org/search?phrase=%s")
                       )
                     )
-(spec-handling-add! popup
+(speckler-add! popup
                     '(latex
                       (" output\\*$" :size 15)
                       ("^\\*TeX \\(?:Help\\|errors\\)"  :size 0.3 :select t :ttl nil)
@@ -91,7 +91,7 @@
                       ("\\*latex-check\\*\\'"  :ttl nil :height 0.2 :quit t :select nil :priority 60)
                       )
                     )
-(spec-handling-add! evil-embrace
+(speckler-add! evil-embrace
                     '(LaTeX-mode
                       (?\' . ,(make-embrace-pair-struct
                                :key ?\'
@@ -115,14 +115,14 @@
                               ))
                       )
                     )
-(spec-handling-add! auto-modes
+(speckler-add! auto-modes
                     '(latex
                       ("\\.tex\\'" . LaTeX-mode)
                       ("\\.sty\\'" . LaTeX-mode)
                       ("\\.bbl\\'" . latex-mode)
                       )
                     )
-(spec-handling-add! file-templates
+(speckler-add! file-templates
                     '(latex
                       ("\\.sty\\'" :trigger "__sty" :mode latex-mode :priority -95)
                       ("\\.tex\\'" :trigger "__"               :mode latex-mode :priority -99)
@@ -130,16 +130,16 @@
                       (latex-mode :trigger "__" :priority -100)
                       )
                     )
-(spec-handling-add! compile-commands
+(speckler-add! compile-commands
                     '(latex +jg-latex-get-commands)
                     )
-(spec-handling-add! babel
+(speckler-add! babel
                     '(latex
                       (:name latex      :lib ob-latex)
                       (:name lilypond   :lib ob-lilypond)
                       )
                     )
-(spec-handling-add! fold
+(speckler-add! fold
                     `(latex
                       :modes (latex-mode LaTeX-mode TeX-fold-mode)
                       :priority 25

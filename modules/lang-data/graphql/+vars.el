@@ -1,23 +1,23 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
-(spec-handling-add! company
+(speckler-add! company
                     '(graphql-mode (:mode company-graphql))
                     )
 
-(spec-handling-add! docsets
+(speckler-add! docsets
                     '(graphql-mode
                       "GraphQL Specification"
                       )
                     )
 
-(spec-handling-add! electric
+(speckler-add! electric
                     '(graphql-mode
                       :chars (?\} ?\))
                       :words ("or" "and")
                       )
                     )
 
-(spec-handling-add! ligatures
+(speckler-add! ligatures
                     '(graphql-mode
                       :null "null"
                       :true "true" :false "false"

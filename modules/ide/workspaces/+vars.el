@@ -86,11 +86,11 @@
 ;;-- end persp
 
 ;;-- specs
-(spec-handling-setq! projectile 50
+(speckler-setq! projectile 50
                      counsel-projectile-switch-project-action jg-counsel-projectile-switch-project-action
                      )
 
-(spec-handling-add! popup
+(speckler-add! popup
                     '(carousel
                       ("^\\*Carousel Buffers: "         :side left :ttl nil :width  0.2 :quit nil :select nil :priority 50)
                       ("^\\*Carousel-Transient\\*\\'"   :side left :width 60)
@@ -105,7 +105,7 @@
                       )
                     )
 
-(spec-handling-add! file-templates
+(speckler-add! file-templates
                     '(project
                      ("/doot\\.toml\\'" :trigger "__doot_toml" :mode conf-toml-mode)
                      ("\\.related\\'"   :trigger "dot.related" :mode fundamental-mode)
@@ -113,7 +113,7 @@
                      )
                     )
 
-(spec-handling-add! project-ignored
+(speckler-add! project-ignored
                     `(doom
                       ,(abbreviate-file-name doom-local-dir)
                       )
@@ -141,7 +141,7 @@
                       )
                     )
 
-(spec-handling-add! ibuffer-formats
+(speckler-add! ibuffer-formats
                     '(workspaces
                       mark modified read-only locked
                       " " (name 18 18 :left :elide)
@@ -150,5 +150,5 @@
                       " " workspace)
                       )
 
-;; (spec-handling-add! projects)
+;; (speckler-add! projects)
 ;;-- end specs

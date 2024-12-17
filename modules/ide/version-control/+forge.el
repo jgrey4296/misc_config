@@ -30,7 +30,7 @@
         (dolist (state states)
           (evil-collection-define-key state 'code-review-mode-map evil-binding fn))))
     )
-  (spec-handling-add! evil-initial
+  (speckler-add! evil-initial
                       '(code-review-mode evil-default-state))
   :config
   (transient-append-suffix 'magit-merge "i"

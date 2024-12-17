@@ -4,8 +4,8 @@
 (map! :map jg-help-map
       :after jg-help-bindings
       :prefix ("s" . "Spec Handlers")
-      "r" #'spec-handling-report
-      "d" #'spec-handling-describe
+      "r" #'speckler-report!
+      "d" #'speckler-describe!
       )
 
 

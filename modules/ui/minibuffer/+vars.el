@@ -34,7 +34,7 @@
       )
 
 
-;; (spec-handling-add! popup
+;; (speckler-add! popup
 ;;                     '(minibuffer
 ;;                       ("\\*Minibuf-1\\*\\'" :side 'bottom :height 120 :priority 0)
 ;;                       )

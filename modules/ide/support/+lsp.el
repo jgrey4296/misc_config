@@ -117,7 +117,7 @@
   :commands lsp-ivy--transform-candidate
   )
 
-(spec-handling-add! lib-env
+(speckler-add! lib-env
                     `(lsp
                       :setup    ,#'(lambda (&rest args) nil)
                       :stop     ,#'(lambda () (when lsp--last-active-workspaces
@@ -127,7 +127,7 @@
                       )
                     )
 
-(spec-handling-add! fold
+(speckler-add! fold
                     `(lsp-browser
                      :modes (lsp-browser-mode)
                      :priority 30
@@ -141,7 +141,7 @@
                      )
                     )
 
-(spec-handling-add! lookup-handler
+(speckler-add! lookup-handler
                     `(lsp-mode
                      :definition          +lsp-lookup-definition-handler
                      :declaration         lsp-find-declaration
@@ -158,7 +158,7 @@
                       )
                     )
 
-(spec-handling-add! popup
+(speckler-add! popup
                     '(lsp
                       ("^\*lsp session\*"  :side right  :ttl nil :width 0.5 :quit t :select nil :priority 50)
                       ("^\\*lsp-\\(help\\|install\\)" :size 0.35 :quit t :select t)

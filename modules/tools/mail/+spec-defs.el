@@ -6,7 +6,7 @@
   )
 
 
-(spec-handling-new! mu4e-header
+(speckler-new! mu4e-header
                     ":function : (lambda (ms) -> str)"
                     :target mu4e-header-info-custom
                     :struct '(:{key} :name :shortname :help :function :sortable)
@@ -14,7 +14,7 @@
                     val
                     )
 
-(spec-handling-new! mail-accounts
+(speckler-new! mail-accounts
                     "registers mu contexts, see make-mu4e-context"
                     :target mu4e-contexts
                     :struct '(:name :maildir :vars :mu-vars :smtp-vars)

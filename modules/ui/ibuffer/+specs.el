@@ -9,7 +9,7 @@
                                         )
               )
 
-(spec-handling-add! ibuffer-formats
+(speckler-add! ibuffer-formats
                     '(normal
                      mark modified read-only locked
                      " " (name 18 18 :left :elide)
@@ -29,18 +29,18 @@
                     )
 
 ;; Agendas
-(spec-handling-add! ibuffer-filters
+(speckler-add! ibuffer-filters
                     '(agendas (or  (agenda-buffers)
                                    (name . "base_agenda.org")))
                     )
 
-(spec-handling-add! ibuffer-groups
+(speckler-add! ibuffer-groups
                     '(agendas ("Agendas" (saved . "agendas")))
                     )
 
 ;; Filters:
 
-(spec-handling-add! ibuffer-filters
+(speckler-add! ibuffer-filters
                     '(-clutter (not (or (name . "*http ")
                                         (used-mode . flycheck-error-list-mode)
                                         (used-mode . ivy-mode)
@@ -59,7 +59,7 @@
                     '(dired (used-mode . dired-mode))
                     )
 
-(spec-handling-add! ibuffer-filters
+(speckler-add! ibuffer-filters
                     '(carousel (name . "->"))
                     '(stars       (name . "^*"))
                     '(music       (or (name . "*\\(tidal\\|SCLang\\)")
@@ -101,14 +101,14 @@
                                       (mode . sass-mode)))
                             )
 
-(spec-handling-add! ibuffer-filters
+(speckler-add! ibuffer-filters
                     '(mail (or (mode . message-mode)
                                (mode . mail-mode)
                                (mode . gnus-group-mode)
                                (mode . gnus-summary-mode)
                                (mode . gnus-article-mode))))
 
-(spec-handling-add! ibuffer-filters
+(speckler-add! ibuffer-filters
                    '(csv     (mode . csv-mode))
                    '(graphql (mode . graphql-mode))
                    '(json    (mode . json-mode))
@@ -121,13 +121,13 @@
                    '(bibtex  (used-mode . bibtex-mode))
                     )
 
-(spec-handling-add! ibuffer-filters
+(speckler-add! ibuffer-filters
                     '(ring-buffers ())
                     )
 
 ;; Groups:
 
-(spec-handling-add! ibuffer-groups
+(speckler-add! ibuffer-groups
                     '(default
                       ("Agendas"     (saved . "agendas"))
                       ("*Processes*" (and (not (derived-mode . shell-mode))
@@ -186,7 +186,7 @@
                     '(dired   ("dired"       (saved . "dired")))
                     )
 
-(spec-handling-add! ibuffer-groups
+(speckler-add! ibuffer-groups
                     '(projects
                       ("*Starred*" (starred-name))
                       ("*Project: configs*" (projectile-root . "__configs"))
@@ -202,7 +202,7 @@
                       )
                     )
 
-(spec-handling-add! ibuffer-groups
+(speckler-add! ibuffer-groups
                        '(programming
                          ("python" (or (derived-mode . python-mode) (derived-mode . python-base-mode)))
                          ("lisp"   (derived-mode . emacs-lisp-mode))

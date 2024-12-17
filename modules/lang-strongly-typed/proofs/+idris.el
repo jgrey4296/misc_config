@@ -12,18 +12,18 @@
   (add-hook 'idris-mode-hook #'turn-on-idris-simple-indent)
   )
 
-(spec-handling-add! librarian-regular
+(speckler-add! librarian-regular
                     '(idris-mode
                       ("Idris Documentation" . "https://www.idris-lang.org/pages/documentation.html")
                       ("Idris Manual" . "https://idris2.readthedocs.io/en/latest/index.html")
                       )
                     )
 
-(spec-handling-add! repl
+(speckler-add! repl
                     '(idris-mode :start idris-pop-to-repl)
                     )
 
-(spec-handling-add! lookup-handler
+(speckler-add! lookup-handler
                     `(idris-mode
                       :documentation #'idris-docs-at-point
                       )

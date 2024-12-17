@@ -24,11 +24,11 @@
   )
 
 ;;-- specs
-(spec-handling-add! compile-commands
+(speckler-add! compile-commands
                    '(rust +jg-rust-get-cargo-commands)
                    )
 
-(spec-handling-add! fold
+(speckler-add! fold
                     `(rust
                       :modes (rust-mode)
                       :priority 25
@@ -42,13 +42,13 @@
                       )
                     )
 
-(spec-handling-add! popup
+(speckler-add! popup
                     '(rust
                      ("^\\*rustic-compilation" :vslot -1)
                      )
                     )
 
-(spec-handling-add! file-templates
+(speckler-add! file-templates
                     '(rust
                      ("config\\.toml$"   :trigger "__rust_config"      :mode conf-toml-mode)
                      ("Cargo\\.toml$"    :trigger "__cargo"            :mode conf-toml-mode)
@@ -62,7 +62,7 @@
                      )
                     )
 
-(spec-handling-add! lookup-url
+(speckler-add! lookup-url
                     '(rust
                      ("Rust Stdlib"      "https://doc.rust-lang.org/std/?search=%s")
                      ("Rust Crates.io"   "https://crates.io/search?q=%s")
@@ -73,23 +73,23 @@
                      )
                     )
 
-(spec-handling-add! projects
+(speckler-add! projects
                     '(jg-rust ("Cargo.toml")     :project-file "Cargo.toml" :test nil :test-dir nil :test-prefix nil :related-files-fn +jg-rust-related-files-fn)
                     '(rust-cargo ("Cargo.toml")  :project-file "Cargo.toml" :compilation-dir nil :configure nil :compile "cargo build" :test "cargo test" :install nil :package nil :run "cargo run")
                     )
 
-(spec-handling-add! docsets '(rust-mode "Rust"))
+(speckler-add! docsets '(rust-mode "Rust"))
 
-(spec-handling-add! tree-sit-lang
+(speckler-add! tree-sit-lang
                     '(rust-mode . rust)
                     '(rustic-mode . rust)
                     )
 
-(spec-handling-add! company
+(speckler-add! company
                     '(rust-mode (:front jg-company/backend) (:front company-gtags))
                     )
 
-(spec-handling-add! auto-modes
+(speckler-add! auto-modes
                     '(rust
                       ("\\.rs\\'" . rustic-mode)
                       ("Cargo\\.toml\\'" . conf-toml-mode)
@@ -98,13 +98,13 @@
                       )
                     )
 
-(spec-handling-add! babel
+(speckler-add! babel
                     '(rust
                       (:name rust       :lib rustic-babel)
                       )
                     )
 
-(spec-handling-add! org-src
+(speckler-add! org-src
                     '(rust
                       ("rust" . rustic)
                       )

@@ -1,6 +1,6 @@
 ;;; +spec-defs.el -*- lexical-binding: t; -*-
 
-(spec-handling-new! auto-modes
+(speckler-new! auto-modes
                     "Handler to control automodes"
                     :target auto-mode-alist
                     :loop 'append

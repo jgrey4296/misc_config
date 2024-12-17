@@ -29,7 +29,7 @@
 ;;-- end personal-vars
 
 ;;-- helm
-(spec-handling-setq! helm 50
+(speckler-setq! helm 50
                      helm-candidate-number-limit 50
                      helm-truncate-lines t
                      ;; Remove extraineous helm UI elements

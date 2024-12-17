@@ -1,13 +1,13 @@
 ;;; +spec-defs.el -*- lexical-binding: t; -*-
 
-(spec-handling-new! projects
+(speckler-new! projects
                     "applys a list of descriptions to `projectile--build-project-plist`"
                     :target projectile-project-types
                     :loop 'collect
                     `(,key . ,(apply #'projectile--build-project-plist val))
                     )
 
-(spec-handling-new! project-ignored
+(speckler-new! project-ignored
                     "register projects to ignore"
                     :target projectile-globally-ignored-directories
                     :loop 'append

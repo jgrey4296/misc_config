@@ -134,7 +134,7 @@
 ;;-- end neotree
 
 ;;-- go away mouse
-(spec-handling-setq! mouse 50
+(speckler-setq! mouse 50
                     mouse-yank-at-point nil
                     mouse-wheel-scroll-amount nil
                     mouse-wheel-scroll-amount-horizontal 2
@@ -142,13 +142,13 @@
 
 ;;-- end go away mouse
 
-(spec-handling-add! auto-modes
+(speckler-add! auto-modes
                     '(ui
                       ("\\.palette" . palette-mode)
                       )
                     )
 
-(spec-handling-add! popup
+(speckler-add! popup
                     '(ui
                      ("^ \\*Treemacs"         :side left :ttl 5   :width 0.2 :quit t :select nil :priority 50)
                      ("\\*NeoTree\\*"         :side left :ttl nil :height 0.4 :quit nil :select nil :priority 100)
@@ -156,7 +156,7 @@
                      )
                     )
 
-(spec-handling-add! fold
+(speckler-add! fold
                     '(neotree
                      :modes (neotree-mode)
                      :priority 25

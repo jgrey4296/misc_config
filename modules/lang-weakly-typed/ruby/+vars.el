@@ -4,34 +4,34 @@
   (setq rspec-use-rvm nil)
   (add-to-list 'exec-path (expand-file-name "shims" rbenv-installation-dir)))
 
-(spec-handling-add! electric '(ruby-mode :words '("else" "end" "elsif")))
-(spec-handling-add! repl
+(speckler-add! electric '(ruby-mode :words '("else" "end" "elsif")))
+(speckler-add! repl
                     '(ruby-mode :start inf-ruby)
                     '(robe-mode :start robe-start)
                     )
-(spec-handling-add! auto-modes
+(speckler-add! auto-modes
                     '(ruby
                       ("\\.\\(?:a?rb\\|aslsx\\)\\'" . ruby-mode)
                       ( "/\\(?:Brew\\|Fast\\)file\\'" . ruby-mode)
                       ("/\\.rspec\\'" . text-mode)
                       )
                     )
-(spec-handling-add! company
+(speckler-add! company
                     '(ruby-mode (:mode company-robe))
                     )
-(spec-handling-add! lookup-handler
+(speckler-add! lookup-handler
                     `(ruby-mode
                       :definition ,#'robe-jump
                       :documentation ,#'robe-doc)
                     )
-(spec-handling-add! popup
+(speckler-add! popup
                     '(ruby
                       ("^\\*RuboCop" :select t)
                       ("^\\*\\(rspec-\\)?compilation" :size 0.3 :ttl nil :select t)
                       ("^\\*\\(projectile-\\)?rails" :ttl nil)
                       )
                     )
-(spec-handling-add! file-templates
+(speckler-add! file-templates
                     `(ruby
                       ("\\.rb$"     :when ,#'+jg-ruby-file-in-tap :trigger "__forumula"   :mode ruby-mode)
                       ("/lib/.+\\.rb$"      :trigger "__module"   :mode ruby-mode :project t)

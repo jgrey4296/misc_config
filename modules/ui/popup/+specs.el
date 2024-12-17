@@ -3,7 +3,7 @@
 (dlog! "Setting up initial popup rules: %s" (current-time-string))
 ;; Setup popup vars:
 
-(spec-handling-add! popup
+(speckler-add! popup
                     '(my-rules
                       ("\\*Messages"          :side bottom :ttl nil :height 0.4 :quit t :select nil :priority 100)
                       ("\\*compilation"       :side bottom :ttl 5   :height 0.4 :quit t :select nil)

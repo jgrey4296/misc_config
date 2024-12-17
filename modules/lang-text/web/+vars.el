@@ -76,7 +76,7 @@ If set to `nil', disable all the above behaviors.")
 ;;-- end projectile
 
 ;;-- specs
-(spec-handling-add! fold
+(speckler-add! fold
                     '(web
                      :modes (web-mode)
                      :priority 25
@@ -100,14 +100,14 @@ If set to `nil', disable all the above behaviors.")
                                   )
                       )
                     )
-(spec-handling-add! company
+(speckler-add! company
                     `(alchemist-mode (:mode alchemist-company))
                     `(pug-mode       (:mode company-web-jade))
                     `(web-mode       (:favour company-css)      (:mode company-web-html))
                     `(slim-mode      (:mode company-web-slim))
                     `(sass-mode      (:mode company-css))
                     )
-(spec-handling-add! tree-sit-lang
+(speckler-add! tree-sit-lang
                     '(css-mode        . css)
                     '(html-mode       . html)
                     '(mhtml-mode      . html)
@@ -117,7 +117,7 @@ If set to `nil', disable all the above behaviors.")
                     '(js3-mode        . javascript)
                     '(typescript-mode . typescript)
                     )
-(spec-handling-add! auto-modes
+(speckler-add! auto-modes
                     '(web
                       ("\\.[px]?html?\\'"                  . web-mode)
                       ("\\.erb\\'"                         . web-mode)
@@ -140,19 +140,19 @@ If set to `nil', disable all the above behaviors.")
                       ("\\.ts"                             . javascript-mode)
                       )
                     )
-(spec-handling-add! docsets
+(speckler-add! docsets
                       '(web-mode
                         "HTML" "CSS" "Twig" "WordPress"
                         )
                       )
-(spec-handling-add! babel
+(speckler-add! babel
                     '(web
                       (:name css        :lib ob-css)
                       (:name js         :lib ob-js)
                       (:name sass       :lib ob-sass)
                       )
                     )
-(spec-handling-add! org-src
+(speckler-add! org-src
                     '(web
                       ("html" . web)
                       ("css" . css)
@@ -160,14 +160,14 @@ If set to `nil', disable all the above behaviors.")
                       ("js" . js)
                       )
                     )
-(spec-handling-add! docsets
+(speckler-add! docsets
                     '((css-mode scss-mode sass-mode)
                       "CSS" "HTML" "Bourbon" "Compass"
                       "Sass"
                       )
                     )
 
-(spec-handling-add! file-templates
+(speckler-add! file-templates
                     '(javascript
                       ("\\.js\\'" :trigger "__"   :mode javascript-mode   :priority 100)
                       )

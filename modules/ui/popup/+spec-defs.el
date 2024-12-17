@@ -27,7 +27,7 @@
      (ttl . nil)))
   "Popup rule for a persistent buffer")
 
-(spec-handling-new! popup
+(speckler-new! popup
                     "Specify popup buffer rules. Each plist is of :struct"
                     :target display-buffer-alist
                     :sorted t

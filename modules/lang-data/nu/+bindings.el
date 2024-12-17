@@ -10,7 +10,7 @@
     )
   )
 
-(spec-handling-add! popup
+(speckler-add! popup
                     '(nu
                       ("^\\*nu\\*"         :side bottom :ttl 5   :height 0.4 :quit t :select t :priority 50)
                       )

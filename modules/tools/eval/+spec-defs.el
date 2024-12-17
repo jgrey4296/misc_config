@@ -20,7 +20,7 @@
   )
 
 
-(spec-handling-new! repl
+(speckler-new! repl
                     "Registers repl handlers"
                     :target +eval-repls
                     :loop 'collect
@@ -31,7 +31,7 @@
                           )
                     )
 
-(spec-handling-new! eval
+(speckler-new! eval
                     "Registers Eval Handlers"
                     :target +eval-handlers
                     :loop 'collect
@@ -42,7 +42,7 @@
                           )
                     )
 
-(spec-handling-new! compile-commands
+(speckler-new! compile-commands
                     "Register commands for trying to compile projects. Functions return strings of commands"
                     :target counsel-compile-local-builds
                     :loop 'append
@@ -50,6 +50,6 @@
                     )
 
 
-;; (spec-handling-new! quickrun-files quickrun-file-alist)
-;; (spec-handling-new! quickrun-modes quickrun--major-mode-alist)
-;; (spec-handling-new! quickrun-files quickrun--language-alist)
+;; (speckler-new! quickrun-files quickrun-file-alist)
+;; (speckler-new! quickrun-modes quickrun--major-mode-alist)
+;; (speckler-new! quickrun-files quickrun--language-alist)

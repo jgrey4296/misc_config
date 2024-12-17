@@ -6,7 +6,7 @@
 ;;-- end general-insert
 
 ;;-- ivy
-(spec-handling-setq! ivy 50
+(speckler-setq! ivy 50
                      ivy-height 17
                      ivy-wrap t
                      ivy-fixed-height-minibuffer t
@@ -64,7 +64,7 @@
 (defvar jg-ivy-file-reject-regexp (rx "test_" (+ anything)))
 (defvar jg-counsel-ignore-file (expand-file-name "tools/ignore/search_ignore" templates-loc))
 
-(spec-handling-setq! counsel 50
+(speckler-setq! counsel 50
                      counsel--find-file-predicate #'+jg-ivy-file-predicate
                      counsel-find-file-extern-extensions   '("mp4" "mkv" "xlsx" "pdf" "epub")
                      counsel-rg-base-command               `("rg"
@@ -83,7 +83,7 @@
 ;;-- end counsel
 
 ;;-- specs
-(spec-handling-add! popup
+(speckler-add! popup
                     '(ivy
                       ("^\\*ivy-occur" :size 0.35 :ttl 0 :quit nil)
                       )

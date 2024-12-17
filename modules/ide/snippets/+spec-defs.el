@@ -1,6 +1,6 @@
 ;;; +spec-defs.el -*- lexical-binding: t; -*-
 
-(spec-handling-new! file-templates
+(speckler-new! file-templates
                     "Register File Templates"
                     :target +file-templates-alist
                     :sorted t
@@ -16,7 +16,7 @@
                              )
                     )
 
-(spec-handling-new-hook! yas-extra
+(speckler-new-hook! yas-extra
                     "activate minor modes for yasnippet"
                     :struct '(extras)
                     (dolist (mode (ensure-list val))

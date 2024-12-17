@@ -1,24 +1,24 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
-(spec-handling-add! tree-sit-lang
+(speckler-add! tree-sit-lang
                     '(json-mode       . json)
                     '(jsonc-mode      . json)
                     )
 
 
-(spec-handling-add! auto-modes
+(speckler-add! auto-modes
                     '(json
                       ( "\\.js\\(?:on\\|[hl]int\\(?:rc\\)?\\)\\'" . json-mode)
                       )
                     )
 
-(spec-handling-add! hideshow
+(speckler-add! hideshow
                     `(json
                       (json-mode ,(rx (| "[" "{") line-end) ,(rx (| "]" "}") (opt ",") line-end))
                       )
                     )
 
-(spec-handling-add! fold
+(speckler-add! fold
                     '(json
                       :modes (json-mode)
                       :priority 25
@@ -32,6 +32,6 @@
                       )
                     )
 
-(spec-handling-add! electric
+(speckler-add! electric
                     '(json-mode :chars (?\n ?: ?{ ?}))
                     )

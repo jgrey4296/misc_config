@@ -72,7 +72,7 @@
 ;;-- end gradle font lock
 
 ;;-- specs
-(spec-handling-add! file-templates
+(speckler-add! file-templates
                     '(java
                      ("/main\\.java$"    :trigger "__main" :mode java-mode)
                      ("/src/.+\\.java$"                    :mode java-mode)
@@ -85,22 +85,22 @@
                      ("build\\.gradle\\.kts$"     :trigger "build.gradle.kts" :mode kotlin-mode)
                      )
                     )
-(spec-handling-add! tree-sit-lang
+(speckler-add! tree-sit-lang
                     '(java-mode       . java)
                     '(scala-mode      . scala)
                     )
-(spec-handling-add! lookup-url
+(speckler-add! lookup-url
                     '(java
                      ("Kotlin" "https://kotlinlang.org/docs/home.html?q=%s&s=full")
                      ("Android" "https://developer.android.com/s/results?q=%s")
                      )
                     )
-(spec-handling-add! projects
+(speckler-add! projects
                     '(gradlew ("gradlew") :project-file "gradlew" :compilation-dir nil :configure nil :compile "./gradlew build" :test "./gradlew test" :install nil :package nil :run nil :test-suffix "Spec")
                     '(gradle ("build.gradle") :project-file "build.gradle" :compilation-dir nil :configure nil :compile "gradle build" :test "gradle test" :install nil :package nil :run nil :test-suffix "Spec")
                     '(jg-kotlin-project ("build.gradle" "build.gradle.kts") :project-file "build.grade")
                     )
-(spec-handling-add! evil-embrace
+(speckler-add! evil-embrace
                     '(scala-mode
                       ,(cons ?f (make-embrace-pair-struct
                                  :key ?$
@@ -108,7 +108,7 @@
                                  :right "}"))
                       )
                     )
-(spec-handling-add! auto-modes
+(speckler-add! auto-modes
                     '(jvm
                       ("\\.g\\(?:radle\\|roovy\\)$" . groovy-mode)
                       ("\\.kts?\\'"                 . kotlin-mode)
@@ -117,17 +117,17 @@
                       ("\\.sc\\'"                   . scala-mode)
                       )
                     )
-(spec-handling-add! docsets
+(speckler-add! docsets
                     '(groovy-mode "Groovy" "Groovy_JDK" "Gradle_DSL", "Gradle_Groovy_API", "Gradle_User_Guide")
                     '(kotlin-mode "Kotlin")
                       )
-(spec-handling-add! repl
+(speckler-add! repl
                     '(kotlin-mode :start kotlin-mode/open-repl)
                     '(kotlin-mode2 :start kotlin-repl)
                     '(groovy-mode :start +java/open-groovy-repl)
                     '(scala-mode  :start +scala/open-repl :persist t)
                     )
-(spec-handling-add! ligatures
+(speckler-add! ligatures
                     '(scala-mode
                       ;; Functional
                       :def "def"
@@ -156,20 +156,20 @@
                       :diff         "diff"
                       )
                     )
-(spec-handling-add! yas-extra
+(speckler-add! yas-extra
                     '(android-mode android-mode)
                     )
-(spec-handling-add! compile-commands
+(speckler-add! compile-commands
                     '(jvm +jg-jvm-get-gradle-commands)
                     )
-(spec-handling-add! babel
+(speckler-add! babel
                     '(jvm
                       (:name groovy     :lib ob-groovy)
                       (:name java       :lib ob-java)
                       )
                     )
 
-(spec-handling-add! org-src
+(speckler-add! org-src
                     '(jvm
                       ("java" . java)
                       ("groovy" . groovy)

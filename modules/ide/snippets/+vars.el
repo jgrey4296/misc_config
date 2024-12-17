@@ -7,7 +7,7 @@
       abbrev-file-name  (expand-file-name "abbrevs.defs" templates-loc)
       )
 
-(spec-handling-add! file-templates
+(speckler-add! file-templates
                     '(general
                       ("/docker-compose\\.yml$" :mode yaml-mode)
                       ;; direnv
@@ -22,7 +22,7 @@
                       )
  )
 
-(spec-handling-setq! snippets 50
+(speckler-setq! snippets 50
                      +file-templates-dir jg-snippets-file-templates-dir
                      +snippets-dir       jg-snippets-code-templates-dir
                      yas-snippet-dirs    (-filter #'identity (append (list jg-snippets-code-templates-dir jg-snippets-file-templates-dir) jg-snippet-dirs))
@@ -30,11 +30,11 @@
                      yas-prompt-functions '(+jg-snippets-yas-prompt-fn)
                      )
 
-(spec-handling-add! company
+(speckler-add! company
                     '(yas-minor-mode (:last company-yasnippet))
                     )
 
-(spec-handling-add! auto-modes
+(speckler-add! auto-modes
                     '(snippets
                       ("templates/code/.+\\'"           . snippet-mode)
                       ("templates/general-insert/.+\\'" . fundamental-mode)
@@ -44,7 +44,7 @@
                       )
                     )
 
-(spec-handling-add! popup
+(speckler-add! popup
                     '(snippets
                      ("^untitled-snippet$" :side bottom :ttl 5 :height 0.4 :quit t :select t :priority 50)
                      ("^\\*Abbrevs\\*"     :side right  :ttl 5 :width 100 :quit t :select nil :priority 50)

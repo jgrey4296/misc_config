@@ -9,12 +9,12 @@
 
 ;;-- popup
 
-(spec-handling-add! auto-modes
+(speckler-add! auto-modes
                     '(subfile
                       ("\\.sub\\'"                 . subfile-mode)
                       )
                     )
-(spec-handling-add! popup
+(speckler-add! popup
                     '(tagging
                       ("^\\*Helm-Bookmark-Results\\*"  :side right :ttl nil :width 0.4 :quit t :select nil :priority 50)
                      )

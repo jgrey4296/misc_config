@@ -4,7 +4,7 @@
 
 (defvar jg-company-search-map (make-sparse-keymap))
 
-(spec-handling-setq! company 50
+(speckler-setq! company 50
                      company-minimum-prefix-length 2
                      company-idle-delay 1
                      company-tooltip-limit 14
@@ -43,7 +43,7 @@
 
   )
 
-(spec-handling-add! company
+(speckler-add! company
                     '(prog-mode (:mode company-dabbrev-code company-capf) (:disfavour company-keywords company-abbrev) (:back company-files))
                     '(text-mode (:mode company-dabbrev company-ispell))
                     '(conf-mode (:mode company-dabbrev-code company-shell-env))

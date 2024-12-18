@@ -9,6 +9,7 @@
       :desc "char"         "l"             #'evil-visual-char
       :desc "exit"         "v"             #'evil-normal-state
       )
+
 (map! :map jg-binding-visual-state-map
       :desc "Replace Selection"       "R"   #'evil-change
       :desc "Exchange Corners"        "A"   #'evil-visual-exchange-corners

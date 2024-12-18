@@ -7,13 +7,14 @@
 ;;-- end Header
 
 (speckler-new! lib-env
-                    "Registers environment entry/exit handlers. eg: for python"
-                    :struct '(or librarian-env-handler plist)
-                    :loop 'do
-                    (if (librarian-envs-handler-p (car-safe val))
-                        (librarian-envs-register! (car val))
-                      (apply #'librarian-envs-register! :id key val))
-                    )
+               "Registers environment entry/exit handlers. eg: for python"
+               :struct '(or librarian-env-handler plist)
+               :setup (librarian-envs-clear!)
+               :loop 'do
+               (if (librarian-envs-handler-p (car-safe val))
+                   (librarian-envs-register! (car val))
+                 (apply #'librarian-envs-register! :id key val))
+               )
 
 
 (map! :leader

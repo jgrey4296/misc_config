@@ -1,7 +1,8 @@
 ;;; -*- lexical-binding: t; -*-
 
 ;;;###autoload
-(defun +jg-ui-narrow-around-point ()
+(defun +jg-ui-indirect-narrow-around-point ()
+  "Create a new indirect buffer, narrowed to the active region"
   (interactive)
   (with-current-buffer (clone-indirect-buffer-other-window nil t t)
     (cond (current-prefix-arg

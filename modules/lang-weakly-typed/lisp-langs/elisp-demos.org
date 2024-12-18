@@ -20,3 +20,8 @@
          when valid collect x
          )
 #+end_src
+
+* f-parent
+#+begin_src lisp :
+(f-parent "a/b/c/d.blah")
+#+end_src

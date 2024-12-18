@@ -25,17 +25,16 @@
 
 (map! :leader
       :desc "Transient Toggle"              "T"    #'jg-toggle-main
-      (:prefix "b"
-       :desc "Toggle narrowing"            "-"   #'+jg-ui-toggle-narrow-buffer
-       )
       (:prefix "p"
        :desc "Project Find File"            "RET" #'+jg-ui-tree/find-this-file
        )
       )
 
 (map! :map jg-binding-vision-map
-      :desc "Narrow"               "RET" #'+jg-ui-narrow-around-point
-      :desc "Refresh Highlighting" "u"   #'+jg-ui-refresh-highlighting
+      :desc "Toggle narrowing"            "="   #'+jg-ui-toggle-narrow-buffer
+      :desc "Indirect Narrow"             "RET" #'+jg-ui-indirect-narrow-around-point
+      :desc "Refresh Highlighting"        "u"   #'+jg-ui-refresh-highlighting
+      :desc "Narrow"                      "n"   #'narrow-to-region
       )
 
 ;;-- highlight

@@ -35,3 +35,5 @@
 (evil-ex-define-cmd "sel"                      #'+jg-text-manipulation-ex-expand-selection)
 
 ;; TODO add a move-line/region-to-marker
+
+(provide 'jg-text-manip-evil-ex)

@@ -126,6 +126,7 @@
 ;;-- command en/disabling
 (put 'list-timers 'disabled nil)
 (put 'list-threads 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
 
  (defun print-disabled-commands ()
    "Enable all commands, reporting on which were disabled."

@@ -11,7 +11,7 @@
   )
 
 (speckler-add! popup
-                    '(defaults
-                       ("\\*jg-customised\\*\\'" :priority -200)
-                       )
-                    )
+               '(defaults
+                 ("\\*jg-customised\\*\\'" :priority -200)
+                 )
+               )

@@ -28,9 +28,9 @@
       aw--lead-overlay-fn #'aw--lead-overlay
       )
 
-(speckler-add! popup
-                    '(window-nav
-                      ("\*scratch::system\\*"   :side left   :ttl nil :width  50  :quit t :select t :priority 150)
-                      ("\*scratch::.*?\\*"      :side right  :ttl nil :width  50  :quit t :select t :priority 150)
-                      )
-                    )
+(speckler-add! popup ()
+  '(window-nav
+    ("\*scratch::system\\*"   :side left   :ttl nil :width  50  :quit t :select t :priority 150)
+    ("\*scratch::.*?\\*"      :side right  :ttl nil :width  50  :quit t :select t :priority 150)
+    )
+  )

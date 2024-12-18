@@ -25,55 +25,55 @@
 ;;-- end hl line
 
 ;;-- librarian
-(speckler-setq! bibtex 50
-                librarian-biblio-pdf-loc (pcase system-type
-                                           ('darwin (expand-file-name "~/pdf_library"))
-                                           ('gnu/linux "/media/john/data/library/pdfs"))
-                librarian-biblio-library-loc   (expand-file-name "~/github/bibliography/main/")
-                librarian-biblio-unsourced-loc (expand-file-name "~/github/bibligraphy/in_progress/to_source.bib")
-      )
+(speckler-setq! bibtex ()
+  librarian-biblio-pdf-loc (pcase system-type
+                             ('darwin (expand-file-name "~/pdf_library"))
+                             ('gnu/linux "/media/john/data/library/pdfs"))
+  librarian-biblio-library-loc   (expand-file-name "~/github/bibliography/main/")
+  librarian-biblio-unsourced-loc (expand-file-name "~/github/bibligraphy/in_progress/to_source.bib")
+  )
 
 ;;-- end librarian
 
 ;;-- specs
-(speckler-add! lookup-url
-                    '(bibtex
-                     ("Scholar"           "https://scholar.google.com/scholar?hl=en&q=%s")
-                     ("Scholar Archive"   "https://scholar.archive.org/search?q=%s")
-                     ("DBLP"              "https://dblp1.uni-trier.de/search?q=%s")
-                     ("Doi"               "https://doi.org/%s")
-                     ("Archive.org"       "https://archive.org/search.php?query=%s")
-                     ("Project Gutenberg" "http://www.gutenberg.org/ebooks/search/?query=%s")
-                     ("Amazon UK"         "https://www.amazon.co.uk/s?k=%s")
-                     ("Amazon US"         "https://www.amazon.com/s?k=%s")
-                     ("IMDB"              "https://www.imdb.com/find?s=all&q=%s")
-                     ("ORCID"             "https://orcid.org/orcid-search/search?firstName=%s&otherFields=true")
-                     ("Arxiv"             "https://arxiv.org/abs/%s")
-                     )
-                    )
-(speckler-add! whitespace-cleanup
-                    '(bibtex-mode
-                     +jg-bibtex-cleanup-ensure-newline-before-def
-                     delete-trailing-whitespace
-                     +jg-text-cleanup-whitespace
-                     )
-                    )
-(speckler-add! auto-modes
-                    '(bibtex
-                      ("\\.bib\\'" . bibtex-mode)
-                      ("\\.bst\\'" . bibtex-style-mode)
-                      ("\\.bbx\\'" . latex-mode)
-                      ("\\.cbx\\'" . latex-mode)
-                      )
-                    )
-(speckler-add! popup
-                    '(bibtex
-                     ("^\\*DOI Metadata\\*\\'" :side left :ttl 5 :width 0.3 :quit t :select nil :priority 50)
-                     ("^\\*Metadata\\*\\'"     :side left :ttl 5 :width 0.3 :quit t :select nil :priority 50)
-                     )
-                    )
+(speckler-add! lookup-url ()
+  '(bibtex
+    ("Scholar"           "https://scholar.google.com/scholar?hl=en&q=%s")
+    ("Scholar Archive"   "https://scholar.archive.org/search?q=%s")
+    ("DBLP"              "https://dblp1.uni-trier.de/search?q=%s")
+    ("Doi"               "https://doi.org/%s")
+    ("Archive.org"       "https://archive.org/search.php?query=%s")
+    ("Project Gutenberg" "http://www.gutenberg.org/ebooks/search/?query=%s")
+    ("Amazon UK"         "https://www.amazon.co.uk/s?k=%s")
+    ("Amazon US"         "https://www.amazon.com/s?k=%s")
+    ("IMDB"              "https://www.imdb.com/find?s=all&q=%s")
+    ("ORCID"             "https://orcid.org/orcid-search/search?firstName=%s&otherFields=true")
+    ("Arxiv"             "https://arxiv.org/abs/%s")
+    )
+  )
+(speckler-add! whitespace-cleanup ()
+  '(bibtex-mode
+    +jg-bibtex-cleanup-ensure-newline-before-def
+    delete-trailing-whitespace
+    +jg-text-cleanup-whitespace
+    )
+  )
+(speckler-add! auto-modes ()
+  '(bibtex
+    ("\\.bib\\'" . bibtex-mode)
+    ("\\.bst\\'" . bibtex-style-mode)
+    ("\\.bbx\\'" . latex-mode)
+    ("\\.cbx\\'" . latex-mode)
+    )
+  )
+(speckler-add! popup ()
+  '(bibtex
+    ("^\\*DOI Metadata\\*\\'" :side left :ttl 5 :width 0.3 :quit t :select nil :priority 50)
+    ("^\\*Metadata\\*\\'"     :side left :ttl 5 :width 0.3 :quit t :select nil :priority 50)
+    )
+  )
 
-(speckler-add! compile-commands
-                    '(bibtex +jg-bibtex-get-commands)
-                    )
+(speckler-add! compile-commands ()
+  '(bibtex +jg-bibtex-get-commands)
+  )
 ;;-- end specs

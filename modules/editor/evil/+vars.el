@@ -23,23 +23,23 @@
 (setq evil-ex-search-vim-style-regexp t
       evil-ex-visual-char-range t                           ;; column range for ex commands
       evil-ex-interactive-search-highlight 'selected-window ;; Only do highlighting in selected window so that Emacs has less work to do highlighting them all.
-)
+      )
 
 ;; evil-snipe
 (setq evil-snipe-smart-case t
       evil-snipe-scope        'line
       evil-snipe-repeat-scope 'line
       evil-snipe-char-fold t
-)
+      )
 
 ;;-- evil-escape
 (setq evil-escape-key-sequence "jk")
-(speckler-setq! evil-escape 50
-                     evil-escape-state-blacklist '(multiedit emacs motion)
-                     evil-escape-major-mode-blacklist '(neotree-mode treemacs-mode vterm-mode ibuffer-mode image-mode)
-                     evil-escape-key-sequence "jk"
-                     evil-escape-delay 0.15
-                     )
+(speckler-setq! evil-escape ()
+  evil-escape-state-blacklist '(multiedit emacs motion)
+  evil-escape-major-mode-blacklist '(neotree-mode treemacs-mode vterm-mode ibuffer-mode image-mode)
+  evil-escape-key-sequence "jk"
+  evil-escape-delay 0.15
+  )
 
 ;; TODO handle evil-exchange
 ;; TODO handle +lsp-signature-stop-maybe-h
@@ -67,12 +67,12 @@
 
 ;;-- specs
 
-(speckler-add! popup
-                    '(evil
-                      ("^\\*evil-registers" :size 0.3)
-                      ("^\\*Command Line"   :size 8)
-                      ("^\\*Ex-Commands\\*" :quit t :select nil :ttl 5)
-                      )
-                    )
+(speckler-add! popup ()
+  '(evil
+    ("^\\*evil-registers" :size 0.3)
+    ("^\\*Command Line"   :size 8)
+    ("^\\*Ex-Commands\\*" :quit t :select nil :ttl 5)
+    )
+  )
 
 ;;-- end specs

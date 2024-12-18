@@ -20,79 +20,79 @@
 ;;-- end links
 
 ;;-- specs
-(speckler-add! lookup-url
-                    '(erlang
-                      ("Erlang/OPT" "https://www.erlang.org/doc/search?q=%s")
-                      ("Elixir"     "https://hexdocs.pm/elixir/search.html?q=%s")
-                      )
-                    )
-(speckler-add! projects
-                    '(elixir ("mix.exs") :project-file "mix.exs" :compilation-dir nil :configure nil :compile "mix compile" :test "mix test" :install nil :package nil :run nil :test-suffix "_test" :src-dir "lib/")
-                    '(rebar ("rebar.config") :project-file "rebar.config" :compilation-dir nil :configure nil :compile "rebar3 compile" :test "rebar3 do eunit,ct" :install nil :package nil :run nil :test-suffix "_SUITE")
-                    )
-(speckler-add! tree-sit-lang
-                    '(elixir-mode     . elixir)
-                    )
-(speckler-add! auto-modes
-                    '(erlang
-                      ("\\.erlang\\'"                          . erlang-mode)
-                      ("/rebar\\.config\\(?:\\.script\\)?\\'"  . erlang-mode)
-                      ("/\\(?:app\\|sys\\)\\.config\\'"        . erlang-mode)
-                      ("\\.elixir\\'"                          . elixir-mode)
-                      ("\\.ex\\'"                              . elixir-mode)
-                      ("\\.exs\\'"                             . elixir-mode)
-                      ("mix\\.lock"                            . elixir-mode)
-                      )
-                    )
-(speckler-add! lookup-handler
-                    `(elixir-mode
-                     :definition    ,#'alchemist-goto-definition-at-point
-                     :documentation ,#'alchemist-help-search-at-point
-                     )
-                    )
-(speckler-add! repl
-                    '(elixir-mode
-                      :start alchemist-iex-project-run
-                      :send  alchemist-eval-region
-                      )
-                    '(erlang-mode :start +erlang/open-repl)
-                    )
-(speckler-add! ligatures
-                    '(elixir-mode
-                      ;; Functional
-                      :def "def"
-                      :lambda "fn"
-                      ;; :src_block "do"
-                      ;; :src_block_end "end"
-                      ;; Flow
-                      :not "!"
-                      :in "in" :not-in "not in"
-                      :and "and" :or "or"
-                      :for "for"
-                      :return "return" :yield "use"
-                      )
-                    )
+(speckler-add! lookup-url ()
+  '(erlang
+    ("Erlang/OPT" "https://www.erlang.org/doc/search?q=%s")
+    ("Elixir"     "https://hexdocs.pm/elixir/search.html?q=%s")
+    )
+  )
+(speckler-add! projects ()
+  '(elixir ("mix.exs") :project-file "mix.exs" :compilation-dir nil :configure nil :compile "mix compile" :test "mix test" :install nil :package nil :run nil :test-suffix "_test" :src-dir "lib/")
+  '(rebar ("rebar.config") :project-file "rebar.config" :compilation-dir nil :configure nil :compile "rebar3 compile" :test "rebar3 do eunit,ct" :install nil :package nil :run nil :test-suffix "_SUITE")
+  )
+(speckler-add! tree-sit-lang ()
+  '(elixir-mode     . elixir)
+  )
+(speckler-add! auto-modes ()
+  '(erlang
+    ("\\.erlang\\'"                          . erlang-mode)
+    ("/rebar\\.config\\(?:\\.script\\)?\\'"  . erlang-mode)
+    ("/\\(?:app\\|sys\\)\\.config\\'"        . erlang-mode)
+    ("\\.elixir\\'"                          . elixir-mode)
+    ("\\.ex\\'"                              . elixir-mode)
+    ("\\.exs\\'"                             . elixir-mode)
+    ("mix\\.lock"                            . elixir-mode)
+    )
+  )
+(speckler-add! lookup-handler ()
+  `(elixir-mode
+    :definition    ,#'alchemist-goto-definition-at-point
+    :documentation ,#'alchemist-help-search-at-point
+    )
+  )
+(speckler-add! repl ()
+  '(elixir-mode
+    :start alchemist-iex-project-run
+    :send  alchemist-eval-region
+    )
+  '(erlang-mode :start +erlang/open-repl)
+  )
+(speckler-add! ligatures ()
+  '(elixir-mode
+    ;; Functional
+    :def "def"
+    :lambda "fn"
+    ;; :src_block "do"
+    ;; :src_block_end "end"
+    ;; Flow
+    :not "!"
+    :in "in" :not-in "not in"
+    :and "and" :or "or"
+    :for "for"
+    :return "return" :yield "use"
+    )
+  )
 
-(speckler-add! file-templates
-                    '(elixir
-                      '("\\.ex\\'"     :trigger "__" :mode elixir-mode :priority -99)
-                      '("\\.exs\\'"    :trigger "__" :mode elixir-mode :priority -99)
-                      '("\\.elixir\\'" :trigger "__" :mode elixir-mode :priority -99)
-                      )
-                    )
+(speckler-add! file-templates ()
+  '(elixir
+    '("\\.ex\\'"     :trigger "__" :mode elixir-mode :priority -99)
+    '("\\.exs\\'"    :trigger "__" :mode elixir-mode :priority -99)
+    '("\\.elixir\\'" :trigger "__" :mode elixir-mode :priority -99)
+    )
+  )
 
-(speckler-add! babel
-                    '(erlang
-                      (:name erlang :lib ob-erlang :mode erlang)
-                      (:name elixir :lib ob-elixir :mode elixir)
-                      )
-                    )
+(speckler-add! babel ()
+  '(erlang
+    (:name erlang :lib ob-erlang :mode erlang)
+    (:name elixir :lib ob-elixir :mode elixir)
+    )
+  )
 
-(speckler-add! org-src
-                    '(erlang
-                      ("erlang" . erlang)
-                      ("elixir" . elixir)
-                      )
-                    )
+(speckler-add! org-src ()
+  '(erlang
+    ("erlang" . erlang)
+    ("elixir" . elixir)
+    )
+  )
 
 ;;-- end specs

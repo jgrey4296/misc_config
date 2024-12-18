@@ -21,7 +21,18 @@
          )
 #+end_src
 
+* -reject
+#+begin_src lisp
+(-reject #'null '(1 2 3 nil 4 nil 5 6))
+#+end_src
+
+
 * f-parent
 #+begin_src lisp :
 (f-parent "a/b/c/d.blah")
+#+end_src
+
+* s-suffix?
+#+begin_src emacs-lisp
+(s-suffix? "-hook" "a-test-hook")
 #+end_src

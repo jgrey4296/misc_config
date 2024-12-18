@@ -27,7 +27,7 @@
 
   (remove-hook 'after-change-major-mode-hook #'global-flycheck-mode-enable-in-buffers)
 
-)
+  )
 
 (use-package! flycheck-popup-tip
   :commands flycheck-popup-tip-show-popup flycheck-popup-tip-delete-popup
@@ -42,45 +42,45 @@
     )
   )
 
-(speckler-new-hook! flycheck
-                    "sets up a stack of checkers"
-                    :struct '(:head checker :rest rest)
-                    (let ((head (plist-get val :head)))
-                      (flycheck-select-checker head)
-                      (dolist (next (plist-get val :rest))
-                        (flycheck-add-next-checker head next 'append)
-                        )
-                      )
-                    )
+(speckler-new-hook! flycheck (key val)
+  "sets up a stack of checkers"
+  :struct '(:head checker :rest rest)
+  (let ((head (plist-get val :head)))
+    (flycheck-select-checker head)
+    (dolist (next (plist-get val :rest))
+      (flycheck-add-next-checker head next 'append)
+      )
+    )
+  )
 
-(speckler-setq! flycheck 50
-                     flycheck-display-errors-delay 1
-                     flycheck-display-errors-function nil
-                     flycheck-help-echo-function nil
-                     flycheck-process-error-functions nil
-                     flycheck-check-syntax-automatically '(save idle-change mode-enabled)
-                     flycheck-idle-change-delay 1.0
-                     flycheck-buffer-switch-check-intermediate-buffers t
-                     flycheck-display-errors-delay 0.25
-                     flycheck-popup-tip-error-prefix "X "
-                     flycheck-indication-mode 'right-fringe
-                     )
+(speckler-setq! flycheck ()
+  flycheck-display-errors-delay 1
+  flycheck-display-errors-function nil
+  flycheck-help-echo-function nil
+  flycheck-process-error-functions nil
+  flycheck-check-syntax-automatically '(save idle-change mode-enabled)
+  flycheck-idle-change-delay 1.0
+  flycheck-buffer-switch-check-intermediate-buffers t
+  flycheck-display-errors-delay 0.25
+  flycheck-popup-tip-error-prefix "X "
+  flycheck-indication-mode 'right-fringe
+  )
 
-(speckler-add! lib-env
-                    `(flycheck
-                      :setup    ,#'(lambda (&rest rest) )
-                      :start    ,#'(lambda (&rest rest) )
-                      :stop     ,#'(lambda (&rest rest) )
-                      :teardown ,#'(lambda (&rest rest) )
-                      )
-                    )
+(speckler-add! lib-env ()
+               `(flycheck
+                 :setup    #'(lambda (state &rest rest) nil)
+                 :start    #'(lambda (state &rest rest) nil)
+                 :stop     #'(lambda (state &rest rest) nil)
+                 :teardown #'(lambda (state &rest rest) nil)
+                 )
+               )
 
-(speckler-add! popup
-                    '(flycheck
-                      ("^\\*Flycheck error messages\\*" :select nil)
-                      ("^\\*Flycheck errors\\*" :size 0.25)
-                      )
-                    )
+(speckler-add! popup ()
+  '(flycheck
+    ("^\\*Flycheck error messages\\*" :select nil)
+    ("^\\*Flycheck errors\\*" :size 0.25)
+    )
+  )
 
 ;;-- Footer
 ;; Copyright (C) 2024 john

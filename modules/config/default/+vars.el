@@ -29,7 +29,7 @@
                                       register-alist                   ; persist macros
                                       mark-ring global-mark-ring       ; persist marks
                                       search-ring regexp-search-ring) ; persist searches
-)
+      )
 
 ;; Ftp
 (setq ftp-program "git-ftp")
@@ -39,13 +39,13 @@
               truncate-lines t
               )
 
-(speckler-add! auto-modes
-                    '(vim
-                      ("\\.vimrc\\'" . vimrc-mode)
-                      )
-                    '(c
-                      ("\\.c\\'" . c-mode)
-                      ("\\.cpp\\'" . c-mode)
-                      ("\\.h\\'" . c-mode)
-                      )
-                    )
+(speckler-add! auto-modes ()
+  '(vim
+    ("\\.vimrc\\'" . vimrc-mode)
+    )
+  '(c
+    ("\\.c\\'" . c-mode)
+    ("\\.cpp\\'" . c-mode)
+    ("\\.h\\'" . c-mode)
+    )
+  )

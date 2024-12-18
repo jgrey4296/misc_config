@@ -10,9 +10,9 @@
   :commands dired-jump
   :config
   (provide 'jg-dired)
-  (speckler-add! evil-initial
-                      '(image-dired-display-iamge-mode emacs)
-                      )
+  (speckler-add! evil-initial ()
+    '(image-dired-display-iamge-mode emacs)
+    )
   (if (not (executable-find "gls"))
       (setq dired-listing-switches (car dired-args)
             insert-directory-program "ls")
@@ -54,12 +54,12 @@
   :hook (dired-mode . diredfl-mode)
   :config
   (set-face-attribute 'diredfl-flag-mark-line nil :background "blueviolet")
-)
+  )
 
 (use-package! dired-x
   :unless (modulep! +dirvish)
   :hook (dired-mode . dired-omit-mode)
-)
+  )
 
 (use-package! fd-dired
   :when doom-projectile-fd-binary
@@ -67,11 +67,11 @@
   :init
   (global-set-key [remap find-dired] #'fd-dired)
   (setq fd-dired-program doom-projectile-fd-binary)
-  (speckler-add! popup
-                      '(fd-dired
-                        ("^\\*F\\(?:d\\|ind\\)\\*$" :ignore t)
-                        )
-                      )
+  (speckler-add! popup ()
+    '(fd-dired
+      ("^\\*F\\(?:d\\|ind\\)\\*$" :ignore t)
+      )
+    )
   )
 
 (use-package! dired-aux

@@ -29,26 +29,26 @@
 ;;-- end personal-vars
 
 ;;-- helm
-(speckler-setq! helm 50
-                     helm-candidate-number-limit 50
-                     helm-truncate-lines t
-                     ;; Remove extraineous helm UI elements
-                     helm-display-header-line nil
-                     helm-mode-line-string nil
-                     helm-ff-auto-update-initial-value nil
-                     helm-find-files-doc-header nil
-                     ;; Default helm window sizes
-                     helm-display-buffer-default-width nil
-                     helm-display-buffer-default-height 0.25
-                     ;; disable special behavior for left/right, M-left/right keys.
-                     helm-ff-lynx-style-map nil
-                     helm-boring-file-regexp-list (list (rx "." (|
-                                                                 "projects" "DS_Store"
-                                                                 "cm" "cmti" "cmt" "annot" "cmi" "cmxa" "cma" "cmx" "cmo" "beam" "vee" "jam" "hi" "pho" "phi" "glob" "vo" "o" "~" "bin"
-                                                                 "lbin" "so" "a" "ln" "blg" "bbl" "elc" "lof" "glo" "idx" "lot" "svn" "hg" "git" "bzr" "CVS" "_darcs" "_MTN" "fmt" "tfm" "class" "fas" "lib" "mem"
-                                                                 "x86f" "sparcf" "dfsl" "pfsl" "d64fsl" "p64fsl" "lx64fsl" "lx32fsl" "dx64fsl" "dx32fsl" "fx64fsl" "fx32fsl" "sx64fsl" "sx32fsl" "wx64fsl" "wx32fsl" "fasl" "ufsl" "fsl" "dxl" "lo" "la" "gmo" "mo" "toc" "aux" "cp" "fn" "ky" "pg" "tp" "vr" "cps" "fns"
-                                                                 "kys" "pgs" "tps" "vrs" "pyc" "pyo")
-                                                            eol ))
-                     helm-find-files-actions jg-helm-find-files-actions
-                     )
+(speckler-setq! helm ()
+  helm-candidate-number-limit 50
+  helm-truncate-lines t
+  ;; Remove extraineous helm UI elements
+  helm-display-header-line nil
+  helm-mode-line-string nil
+  helm-ff-auto-update-initial-value nil
+  helm-find-files-doc-header nil
+  ;; Default helm window sizes
+  helm-display-buffer-default-width nil
+  helm-display-buffer-default-height 0.25
+  ;; disable special behavior for left/right, M-left/right keys.
+  helm-ff-lynx-style-map nil
+  helm-boring-file-regexp-list (list (rx "." (|
+                                              "projects" "DS_Store"
+                                              "cm" "cmti" "cmt" "annot" "cmi" "cmxa" "cma" "cmx" "cmo" "beam" "vee" "jam" "hi" "pho" "phi" "glob" "vo" "o" "~" "bin"
+                                              "lbin" "so" "a" "ln" "blg" "bbl" "elc" "lof" "glo" "idx" "lot" "svn" "hg" "git" "bzr" "CVS" "_darcs" "_MTN" "fmt" "tfm" "class" "fas" "lib" "mem"
+                                              "x86f" "sparcf" "dfsl" "pfsl" "d64fsl" "p64fsl" "lx64fsl" "lx32fsl" "dx64fsl" "dx32fsl" "fx64fsl" "fx32fsl" "sx64fsl" "sx32fsl" "wx64fsl" "wx32fsl" "fasl" "ufsl" "fsl" "dxl" "lo" "la" "gmo" "mo" "toc" "aux" "cp" "fn" "ky" "pg" "tp" "vr" "cps" "fns"
+                                              "kys" "pgs" "tps" "vrs" "pyc" "pyo")
+                                         eol ))
+  helm-find-files-actions jg-helm-find-files-actions
+  )
 ;;-- end helm

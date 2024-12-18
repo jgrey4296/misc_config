@@ -31,32 +31,32 @@
       eglot-stay-out-of '(flymake)
       )
 
-(speckler-new! eglot
-                    "Register eglot servers"
-                    :target eglot-server-programs
-                    :loop 'collect
-                    (cons key val)
-                    )
+(speckler-new! eglot (key val)
+  "Register eglot servers"
+  :target eglot-server-programs
+  :loop 'collect
+  (cons key val)
+  )
 
-(speckler-add! env-handling
-                    '(eglot
-                      (:support eglot
-                                #'(lambda (state) (when (featurep 'eglot) (add-hook 'python-mode-hook #'eglot-ensure)))
-                                #'(lambda (state)
-                                    (when (featurep 'eglot) (remove-hook 'python-mode-hook #'eglot-ensure)))
-                                )
-                      )
-                    )
+(speckler-add! env-handling ()
+  '(eglot
+    (:support eglot
+              #'(lambda (state) (when (featurep 'eglot) (add-hook 'python-mode-hook #'eglot-ensure)))
+              #'(lambda (state)
+                  (when (featurep 'eglot) (remove-hook 'python-mode-hook #'eglot-ensure)))
+              )
+    )
+  )
 
-(speckler-add! lookup-handler
-                    `(eglot--managed-mode
-                     :definition          xref-find-definitions
-                     :references          xref-find-references
-                     :implementations     eglot-find-implementation
-                     :type-definition     eglot-find-typeDefinition
-                     :documentation       +eglot-lookup-documentation
-                     )
-                    )
+(speckler-add! lookup-handler ()
+  `(eglot--managed-mode
+    :definition          xref-find-definitions
+    :references          xref-find-references
+    :implementations     eglot-find-implementation
+    :type-definition     eglot-find-typeDefinition
+    :documentation       +eglot-lookup-documentation
+    )
+  )
 ;;-- Footer
 ;; Copyright (C) 2024 john
 ;;

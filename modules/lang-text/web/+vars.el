@@ -46,7 +46,7 @@ If set to `nil', disable all the above behaviors.")
                                     ("lineup-ternary" . t)
                                     ("case-extra-offset" . t)
                                     )
-)
+      )
 
 (setq web-mode-engines-alist '(
                                ("phoenix" . "\\.[lh]eex\\'")
@@ -76,100 +76,100 @@ If set to `nil', disable all the above behaviors.")
 ;;-- end projectile
 
 ;;-- specs
-(speckler-add! fold
-                    '(web
-                     :modes (web-mode)
-                     :priority 25
-                     :triggers (:open-all   nil
-                                :close-all  nil
-                                :toggle     web-mode-fold-or-unfold
-                                :open       nil
-                                :open-rec   nil
-                                :close      nil
-                                )
-                     )
-                    '(css
-                      :modes (css-mode)
-                      :priority 25
-                      :triggers  (:open-all   nil
-                                  :close-all  nil
-                                  :toggle     +css/toggle-inline-or-block
-                                  :open       nil
-                                  :open-rec   nil
-                                  :close      nil
-                                  )
-                      )
-                    )
-(speckler-add! company
-                    `(alchemist-mode (:mode alchemist-company))
-                    `(pug-mode       (:mode company-web-jade))
-                    `(web-mode       (:favour company-css)      (:mode company-web-html))
-                    `(slim-mode      (:mode company-web-slim))
-                    `(sass-mode      (:mode company-css))
-                    )
-(speckler-add! tree-sit-lang
-                    '(css-mode        . css)
-                    '(html-mode       . html)
-                    '(mhtml-mode      . html)
-                    '(javascript-mode . javascript)
-                    '(js-mode         . javascript)
-                    '(js2-mode        . javascript)
-                    '(js3-mode        . javascript)
-                    '(typescript-mode . typescript)
-                    )
-(speckler-add! auto-modes
-                    '(web
-                      ("\\.[px]?html?\\'"                  . web-mode)
-                      ("\\.erb\\'"                         . web-mode)
-                      ("\\.[lh]?eex\\'"                    . web-mode)
-                      ("\\.jsp\\'"                         . web-mode)
-                      ("\\.as[cp]x\\'"                     . web-mode)
-                      ("\\.ejs\\'"                         . web-mode)
-                      ("\\.hbs\\'"                         . web-mode)
-                      ("\\.mustache\\'"                    . web-mode)
-                      ("\\.svelte\\'"                      . web-mode)
-                      ("\\.twig\\'"                        . web-mode)
-                      ("\\.jinja2?\\'"                     . web-mode)
-                      ("\\.eco\\'"                         . web-mode)
-                      ("wp-content/themes/.+/.+\\.php\\'"  . web-mode)
-                      ("templates/.+\\.php\\'"             . web-mode)
-                      ("\\.vue\\'"                         . web-mode)
-                      ("\\.scss\\'"                        . scss-mode)
-                      ("\\.css\\'"                         . css-mode)
-                      ("\\.js"                             . javascript-mode)
-                      ("\\.ts"                             . javascript-mode)
-                      )
-                    )
-(speckler-add! docsets
-                      '(web-mode
-                        "HTML" "CSS" "Twig" "WordPress"
-                        )
-                      )
-(speckler-add! babel
-                    '(web
-                      (:name css        :lib ob-css)
-                      (:name js         :lib ob-js)
-                      (:name sass       :lib ob-sass)
-                      )
-                    )
-(speckler-add! org-src
-                    '(web
-                      ("html" . web)
-                      ("css" . css)
-                      ("sass" . sass)
-                      ("js" . js)
-                      )
-                    )
-(speckler-add! docsets
-                    '((css-mode scss-mode sass-mode)
-                      "CSS" "HTML" "Bourbon" "Compass"
-                      "Sass"
-                      )
-                    )
+(speckler-add! fold ()
+  '(web
+    :modes (web-mode)
+    :priority 25
+    :triggers (:open-all   nil
+               :close-all  nil
+               :toggle     web-mode-fold-or-unfold
+               :open       nil
+               :open-rec   nil
+               :close      nil
+               )
+    )
+  '(css
+    :modes (css-mode)
+    :priority 25
+    :triggers  (:open-all   nil
+                :close-all  nil
+                :toggle     +css/toggle-inline-or-block
+                :open       nil
+                :open-rec   nil
+                :close      nil
+                )
+    )
+  )
+(speckler-add! company ()
+  `(alchemist-mode (:mode alchemist-company))
+  `(pug-mode       (:mode company-web-jade))
+  `(web-mode       (:favour company-css)      (:mode company-web-html))
+  `(slim-mode      (:mode company-web-slim))
+  `(sass-mode      (:mode company-css))
+  )
+(speckler-add! tree-sit-lang ()
+  '(css-mode        . css)
+  '(html-mode       . html)
+  '(mhtml-mode      . html)
+  '(javascript-mode . javascript)
+  '(js-mode         . javascript)
+  '(js2-mode        . javascript)
+  '(js3-mode        . javascript)
+  '(typescript-mode . typescript)
+  )
+(speckler-add! auto-modes ()
+  '(web
+    ("\\.[px]?html?\\'"                  . web-mode)
+    ("\\.erb\\'"                         . web-mode)
+    ("\\.[lh]?eex\\'"                    . web-mode)
+    ("\\.jsp\\'"                         . web-mode)
+    ("\\.as[cp]x\\'"                     . web-mode)
+    ("\\.ejs\\'"                         . web-mode)
+    ("\\.hbs\\'"                         . web-mode)
+    ("\\.mustache\\'"                    . web-mode)
+    ("\\.svelte\\'"                      . web-mode)
+    ("\\.twig\\'"                        . web-mode)
+    ("\\.jinja2?\\'"                     . web-mode)
+    ("\\.eco\\'"                         . web-mode)
+    ("wp-content/themes/.+/.+\\.php\\'"  . web-mode)
+    ("templates/.+\\.php\\'"             . web-mode)
+    ("\\.vue\\'"                         . web-mode)
+    ("\\.scss\\'"                        . scss-mode)
+    ("\\.css\\'"                         . css-mode)
+    ("\\.js"                             . javascript-mode)
+    ("\\.ts"                             . javascript-mode)
+    )
+  )
+(speckler-add! docsets ()
+  '(web-mode
+    "HTML" "CSS" "Twig" "WordPress"
+    )
+  )
+(speckler-add! babel ()
+  '(web
+    (:name css        :lib ob-css)
+    (:name js         :lib ob-js)
+    (:name sass       :lib ob-sass)
+    )
+  )
+(speckler-add! org-src ()
+  '(web
+    ("html" . web)
+    ("css" . css)
+    ("sass" . sass)
+    ("js" . js)
+    )
+  )
+(speckler-add! docsets ()
+  '((css-mode scss-mode sass-mode)
+    "CSS" "HTML" "Bourbon" "Compass"
+    "Sass"
+    )
+  )
 
-(speckler-add! file-templates
-                    '(javascript
-                      ("\\.js\\'" :trigger "__"   :mode javascript-mode   :priority 100)
-                      )
-                    )
+(speckler-add! file-templates ()
+  '(javascript
+    ("\\.js\\'" :trigger "__"   :mode javascript-mode   :priority 100)
+    )
+  )
 ;;-- end specs

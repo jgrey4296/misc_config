@@ -1,6 +1,7 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
 ;;-- keymaps
+
 (defvar jg-minibuffer-maps
   '(minibuffer-local-map
     minibuffer-local-ns-map
@@ -32,10 +33,3 @@
       echo-keystrokes 0.02
       resize-mini-windows 'grow-only
       )
-
-
-;; (speckler-add! popup
-;;                     '(minibuffer
-;;                       ("\\*Minibuf-1\\*\\'" :side 'bottom :height 120 :priority 0)
-;;                       )
-;;                     )

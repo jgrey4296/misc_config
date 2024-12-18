@@ -25,7 +25,7 @@
       )
 
 ;;-- transient
- ;; Must be set early to prevent ~/.config/emacs/transient from being created
+;; Must be set early to prevent ~/.config/emacs/transient from being created
 (cl-assert (boundp 'user-cache-dir))
 (setq transient-levels-file  (expand-file-name "transient/levels"  user-cache-dir)
       transient-values-file  (expand-file-name "transient/values"  user-cache-dir)
@@ -38,28 +38,28 @@
 
 ;;-- highlighting
 (setq hl-todo-highlight-punctuation ":"
-        hl-todo-keyword-faces
-        '(;; For reminders to change or add something at a later date.
-          ("TODO" warning bold)
-          ;; For code (or code paths) that are broken, unimplemented, or slow,
-          ;; and may become bigger problems later.
-          ("FIXME" error bold)
-          ;; For code that needs to be revisited later, either to upstream it,
-          ;; improve it, or address non-critical issues.
-          ("REVIEW" font-lock-keyword-face bold)
-          ;; For code smells where questionable practices are used
-          ;; intentionally, and/or is likely to break in a future update.
-          ("HACK" font-lock-constant-face bold)
-          ;; For sections of code that just gotta go, and will be gone soon.
-          ;; Specifically, this means the code is deprecated, not necessarily
-          ;; the feature it enables.
-          ("DEPRECATED" font-lock-doc-face bold)
-          ;; Extra keywords commonly found in the wild, whose meaning may vary
-          ;; from project to project.
-          ("NOTE" success bold)
-          ("BUG" error bold)
-          ("XXX" font-lock-constant-face bold))
-        )
+      hl-todo-keyword-faces
+      '(;; For reminders to change or add something at a later date.
+        ("TODO" warning bold)
+        ;; For code (or code paths) that are broken, unimplemented, or slow,
+        ;; and may become bigger problems later.
+        ("FIXME" error bold)
+        ;; For code that needs to be revisited later, either to upstream it,
+        ;; improve it, or address non-critical issues.
+        ("REVIEW" font-lock-keyword-face bold)
+        ;; For code smells where questionable practices are used
+        ;; intentionally, and/or is likely to break in a future update.
+        ("HACK" font-lock-constant-face bold)
+        ;; For sections of code that just gotta go, and will be gone soon.
+        ;; Specifically, this means the code is deprecated, not necessarily
+        ;; the feature it enables.
+        ("DEPRECATED" font-lock-doc-face bold)
+        ;; Extra keywords commonly found in the wild, whose meaning may vary
+        ;; from project to project.
+        ("NOTE" success bold)
+        ("BUG" error bold)
+        ("XXX" font-lock-constant-face bold))
+      )
 
 (setq highlight-indent-guides-method 'character
       highlight-indent-guides-suppress-auto-error t
@@ -109,7 +109,7 @@
 ;;-- treemacs
 (setq treemacs-collapse-dirs 3
 
- )
+      )
 ;;-- end treemacs
 
 ;;-- neotree
@@ -134,38 +134,38 @@
 ;;-- end neotree
 
 ;;-- go away mouse
-(speckler-setq! mouse 50
-                    mouse-yank-at-point nil
-                    mouse-wheel-scroll-amount nil
-                    mouse-wheel-scroll-amount-horizontal 2
-                    )
+(speckler-setq! mouse ()
+  mouse-yank-at-point nil
+  mouse-wheel-scroll-amount nil
+  mouse-wheel-scroll-amount-horizontal 2
+  )
 
 ;;-- end go away mouse
 
-(speckler-add! auto-modes
-                    '(ui
-                      ("\\.palette" . palette-mode)
-                      )
-                    )
+(speckler-add! auto-modes ()
+  '(ui
+    ("\\.palette" . palette-mode)
+    )
+  )
 
-(speckler-add! popup
-                    '(ui
-                     ("^ \\*Treemacs"         :side left :ttl 5   :width 0.2 :quit t :select nil :priority 50)
-                     ("\\*NeoTree\\*"         :side left :ttl nil :height 0.4 :quit nil :select nil :priority 100)
-                     ("\\*transient\\*"       :side bottom )
-                     )
-                    )
+(speckler-add! popup ()
+  '(ui
+    ("^ \\*Treemacs"         :side left :ttl 5   :width 0.2 :quit t :select nil :priority 50)
+    ("\\*NeoTree\\*"         :side left :ttl nil :height 0.4 :quit nil :select nil :priority 100)
+    ("\\*transient\\*"       :side bottom )
+    )
+  )
 
-(speckler-add! fold
-                    '(neotree
-                     :modes (neotree-mode)
-                     :priority 25
-                     :triggers (:open-all   nil
-                                :close-all  neotree-collapse-all
-                                :toggle     nil
-                                :open       +neotree/expand-or-open
-                                :open-rec   nil
-                                :close      +neotree/collapse
-                                )
-                     )
-                    )
+(speckler-add! fold ()
+  '(neotree
+    :modes (neotree-mode)
+    :priority 25
+    :triggers (:open-all   nil
+               :close-all  neotree-collapse-all
+               :toggle     nil
+               :open       +neotree/expand-or-open
+               :open-rec   nil
+               :close      +neotree/collapse
+               )
+    )
+  )

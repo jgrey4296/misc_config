@@ -12,22 +12,22 @@
   (add-hook 'idris-mode-hook #'turn-on-idris-simple-indent)
   )
 
-(speckler-add! librarian-regular
-                    '(idris-mode
-                      ("Idris Documentation" . "https://www.idris-lang.org/pages/documentation.html")
-                      ("Idris Manual" . "https://idris2.readthedocs.io/en/latest/index.html")
-                      )
-                    )
+(speckler-add! librarian-regular ()
+  '(idris-mode
+    ("Idris Documentation" . "https://www.idris-lang.org/pages/documentation.html")
+    ("Idris Manual" . "https://idris2.readthedocs.io/en/latest/index.html")
+    )
+  )
 
-(speckler-add! repl
-                    '(idris-mode :start idris-pop-to-repl)
-                    )
+(speckler-add! repl ()
+  '(idris-mode :start idris-pop-to-repl)
+  )
 
-(speckler-add! lookup-handler
-                    `(idris-mode
-                      :documentation #'idris-docs-at-point
-                      )
-                    )
+(speckler-add! lookup-handler ()
+  `(idris-mode
+    :documentation #'idris-docs-at-point
+    )
+  )
 
 ;;-- Footer
 ;; Copyright (C) 2024 john

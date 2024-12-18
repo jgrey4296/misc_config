@@ -46,7 +46,7 @@
       lsp-ui-peek-peek-height 30
       lsp-ui-peek-show-directory nil
 
-)
+      )
 
 ;; UI Doc
 (setq lsp-ui-doc-max-height 15
@@ -57,7 +57,7 @@
       lsp-ui-doc-position 'bottom
       lsp-ui-doc-include-signature t
       lsp-ui-doc-use-childframe nil
-)
+      )
 
 ;; UI Sideline
 (setq lsp-ui-sideline-ignore-duplicate t
@@ -66,23 +66,23 @@
       lsp-ui-sideline-diagnostic-max-lines 3
       lsp-ui-sideline-show-hover       t
       lsp-ui-sideline-actions-icon     nil
-)
+      )
 
 ;; Ignore Directories
 (setq lsp-file-watch-ignored-directories
       (list
-             (rx "\/" (| "Library" "checkouts" "_FOSSIL_" "_build" "_darcs" "_opam"))
-             (rx "\/" (| "autom3te.cache" "bazel-[^/\\]+" "bin/Debug" "build-aux"))
-             (rx "\/" (| "dist-newstyle" "dist" "node_modules" "obj" "target" "build" "docs"))
-             (rx "\/" (| "data"))
+       (rx "\/" (| "Library" "checkouts" "_FOSSIL_" "_build" "_darcs" "_opam"))
+       (rx "\/" (| "autom3te.cache" "bazel-[^/\\]+" "bin/Debug" "build-aux"))
+       (rx "\/" (| "dist-newstyle" "dist" "node_modules" "obj" "target" "build" "docs"))
+       (rx "\/" (| "data"))
 
-             (rx "\/." (| "temp" "babel_cache" "bloop" "bzr" "ccls-cache"))
-             (rx "\/." (| "circleci" "clj-kondo" "cpcache" "deps" "direnv" "elixir_ls"))
-             (rx "\/." (| "ensime_cache" "eunit" "fslckout" "git" "github" "gradle" "hg"))
-             (rx "\/." (| "idea" "lsp" "m2" "meta" "metals" "mypy_cache" "nox" "reference"))
-             (rx "\/." (| "shadow-cljs" "stack-work" "svn" "terraform" "terragrunt-cache"))
-             (rx "\/." (| "tox" "venv" "vscode" "yarn"))
-             )
+       (rx "\/." (| "temp" "babel_cache" "bloop" "bzr" "ccls-cache"))
+       (rx "\/." (| "circleci" "clj-kondo" "cpcache" "deps" "direnv" "elixir_ls"))
+       (rx "\/." (| "ensime_cache" "eunit" "fslckout" "git" "github" "gradle" "hg"))
+       (rx "\/." (| "idea" "lsp" "m2" "meta" "metals" "mypy_cache" "nox" "reference"))
+       (rx "\/." (| "shadow-cljs" "stack-work" "svn" "terraform" "terragrunt-cache"))
+       (rx "\/." (| "tox" "venv" "vscode" "yarn"))
+       )
       )
 
 ;;-- end vars
@@ -106,7 +106,7 @@
 
   (add-hook! 'lsp-mode-hook #'+lsp-optimization-mode)
   (add-hook 'jg-transient-toggles-hook #'+jg-ide-build-lsp-transient 90)
-)
+  )
 
 (use-package! lsp-ui
   :commands (lsp-ui-doc-mode lsp-ui-imenu lsp-ui-sideline)
@@ -117,54 +117,55 @@
   :commands lsp-ivy--transform-candidate
   )
 
-(speckler-add! lib-env
-                    `(lsp
-                      :setup    ,#'(lambda (&rest args) nil)
-                      :stop     ,#'(lambda () (when lsp--last-active-workspaces
-                                                (lsp-workspace-shutdown (car lsp--last-active-workspaces)))
-                                     )
-                      :teardown ,#'lsp-disconnect
-                      )
-                    )
+(speckler-add! lib-env ()
+  `(lsp
+    :setup    #'(lambda (state &rest args) (require 'lisp-mode))
+    :stop     #'(lambda (state &rest args)
+                  (when lsp--last-active-workspaces
+                    (lsp-workspace-shutdown (car lsp--last-active-workspaces))))
+    :teardown #'(lambda (state &rest args)
+                  (lsp-disconnect))
+    )
+  )
 
-(speckler-add! fold
-                    `(lsp-browser
-                     :modes (lsp-browser-mode)
-                     :priority 30
-                     :triggers (:open-all   ,#'+jg-lsp-toggle-widget-on-line
-                                :close-all  ,#'+jg-lsp-toggle-widget-on-line
-                                :toggle     ,#'+jg-lsp-toggle-widget-on-line
-                                :open       ,#'+jg-lsp-toggle-widget-on-line
-                                :open-rec   ,#'+jg-lsp-toggle-widget-on-line
-                                :close      ,#'+jg-lsp-toggle-widget-on-line
-                                )
-                     )
-                    )
+(speckler-add! fold ()
+  `(lsp-browser
+    :modes (lsp-browser-mode)
+    :priority 30
+    :triggers (:open-all   ,#'+jg-lsp-toggle-widget-on-line
+               :close-all  ,#'+jg-lsp-toggle-widget-on-line
+               :toggle     ,#'+jg-lsp-toggle-widget-on-line
+               :open       ,#'+jg-lsp-toggle-widget-on-line
+               :open-rec   ,#'+jg-lsp-toggle-widget-on-line
+               :close      ,#'+jg-lsp-toggle-widget-on-line
+               )
+    )
+  )
 
-(speckler-add! lookup-handler
-                    `(lsp-mode
-                     :definition          +lsp-lookup-definition-handler
-                     :declaration         lsp-find-declaration
-                     :references          +lsp-lookup-references-handler
-                     :documentation       lsp-describe-thing-at-point
-                     :implementations     lsp-find-implementation
-                     :type-definition     lsp-find-type-definition
-                     )
-                    `(lsp-ui-mode
-                      :definition         lsp-ui-peek-find-definitions
-                      :implementations    lsp-ui-peek-find-implementation
-                      :references         lsp-ui-peek-find-references
-                      :async t
-                      )
-                    )
+(speckler-add! lookup-handler ()
+  `(lsp-mode
+    :definition          +lsp-lookup-definition-handler
+    :declaration         lsp-find-declaration
+    :references          +lsp-lookup-references-handler
+    :documentation       lsp-describe-thing-at-point
+    :implementations     lsp-find-implementation
+    :type-definition     lsp-find-type-definition
+    )
+  `(lsp-ui-mode
+    :definition         lsp-ui-peek-find-definitions
+    :implementations    lsp-ui-peek-find-implementation
+    :references         lsp-ui-peek-find-references
+    :async t
+    )
+  )
 
-(speckler-add! popup
-                    '(lsp
-                      ("^\*lsp session\*"  :side right  :ttl nil :width 0.5 :quit t :select nil :priority 50)
-                      ("^\\*lsp-\\(help\\|install\\)" :size 0.35 :quit t :select t)
-                      ("^\\*eglot-help" :size 0.15 :quit t :select t)
-                     )
-                    )
+(speckler-add! popup ()
+  '(lsp
+    ("^\*lsp session\*"  :side right  :ttl nil :width 0.5 :quit t :select nil :priority 50)
+    ("^\\*lsp-\\(help\\|install\\)" :size 0.35 :quit t :select t)
+    ("^\\*eglot-help" :size 0.15 :quit t :select t)
+    )
+  )
 
 ;;-- Footer
 ;; Copyright (C) 2024 john

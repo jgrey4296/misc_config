@@ -10,11 +10,11 @@
     )
   )
 
-(speckler-add! popup
-                    '(nu
-                      ("^\\*nu\\*"         :side bottom :ttl 5   :height 0.4 :quit t :select t :priority 50)
-                      )
-                    )
+(speckler-add! popup ()
+  '(nu
+    ("^\\*nu\\*"         :side bottom :ttl 5   :height 0.4 :quit t :select t :priority 50)
+    )
+  )
 
 (map! :map jg-dired-mode-map
       :after jg-dired-bindings

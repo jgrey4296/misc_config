@@ -91,24 +91,24 @@
   :preface
   (setq anaconda-mode-installation-directory (concat doom-data-dir "anaconda/")
         anaconda-mode-eldoc-as-single-line t)
-  (speckler-add! python-env
-                      `(anaconda
-                        (:support conda
-                                  ,#'(lambda (state) (add-hook 'python-mode-hook #'anaconda-mode))
-                                  ,#'(lambda (state) (anaconda-mode-stop) (remove-hook 'python-mode-hook #'anaconda-mode))
-                                  )
-                        (:teardown conda
-                                   ,#'(lambda (state) (anaconda-mode-stop)
-                                        (anaconda-eldoc-mode -1))
-                                   )
-                        )
-                      )
+  (speckler-add! lib-env ()
+                 `(anaconda
+                   :setup nil
+                   :start #'(lambda (state &rest rest) (add-hook 'python-mode-hook #'anaconda-mode))
+                   :stop  #'(lambda (state &rest rest)
+                              (remove-hook 'python-mode-hook #'anaconda-mode)
+                              (anaconda-mode-stop))
+                   :teardown #'(lambda (state &rest rest)
+                                 (anaconda-mode-stop)
+                                 (anaconda-eldoc-mode -1))
+                   )
+                 )
   :config
   (add-hook! 'anaconda-mode-hook
              #'anaconda-eldoc-mode
              #'evil-normalize-keymaps
              )
-)
+  )
 
 (use-package! python-pytest
   :after python-mode

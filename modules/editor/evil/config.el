@@ -118,10 +118,10 @@
   :hook (emacs-lisp-mode . embrace-emacs-lisp-mode-hook)
   :config
   (after! evil-surround (evil-embrace-enable-evil-surround-integration))
-  (speckler-new-hook! evil-embrace
-                      "Construct evil embrace pairs lists"
-                      (setq embrace--pairs-list (append val embrace--pairs-list))
-                      )
+  (speckler-new-hook! evil-embrace (key val)
+    "Construct evil embrace pairs lists"
+    (setq embrace--pairs-list (append val embrace--pairs-list))
+    )
 
   ;; Add escaped-sequence support to embrace
   (setf (alist-get ?\\ (default-value 'embrace--pairs-list))

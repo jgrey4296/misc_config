@@ -10,6 +10,6 @@
 (defvar acab-ide/type-helm-dummy-source)
 
 
-(speckler-add! repl
-                    '(acab-rule-mode :start acab-mode/open-repl)
-                    )
+(speckler-add! repl ()
+  '(acab-rule-mode :start acab-mode/open-repl)
+  )

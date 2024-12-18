@@ -25,21 +25,21 @@
   ;; possibly: (cl-pushnew (tree-sitter-lands--bin-dir) tree-sitter-load-path :test #'string-equal)
   )
 
-(speckler-new! tree-sit-lang
-                    "Match modes to grammars in `tree-sitter-langs-grammar-dir`"
-                    :target tree-sitter-major-mode-language-alist
-                    :struct '(key-mode . grammar)
-                    :loop 'collect
-                    `(,key . ,val)
-                    )
+(speckler-new! tree-sit-lang (key val)
+  "Match modes to grammars in `tree-sitter-langs-grammar-dir`"
+  :target tree-sitter-major-mode-language-alist
+  :struct '(key-mode . grammar)
+  :loop 'collect
+  `(,key . ,val)
+  )
 
-(speckler-new! treesit-lang
-                    "for treesit (builtin)"
-                    :target treesit-load-name-override-list
-                    :struct '(key-mode :lib-base :entry-func)
-                    :loop 'collect
-                    `(,key ,(plist-get val :lib-base) ,(plist-get val :entry-func))
-                    )
+(speckler-new! treesit-lang (key val)
+  "for treesit (builtin)"
+  :target treesit-load-name-override-list
+  :struct '(key-mode :lib-base :entry-func)
+  :loop 'collect
+  `(,key ,(plist-get val :lib-base) ,(plist-get val :entry-func))
+  )
 
 (setq tree-sitter-debug-jump-buttons t ;; This makes every node a link to a section of code
       tree-sitter-debug-highlight-jump-region t ;; and this highlights the entire sub tree in your code
@@ -93,27 +93,27 @@
                                       (xml           "git@github.com:tree-sitter-grammars/tree-sitter-xml.git")
                                       (yaml          "git@github.com:ikatyang/tree-sitter-yaml.git")
                                       )
- )
+      )
 
-(speckler-setq! treesit 50
-                     tree-sitter-load-path (list
-                                            (expand-file-name (format "straight/%s/tree-sitter-langs/bin/" straight-build-dir) doom-local-dir)
-                                            (expand-file-name "~/.local/tree-sitter/")
-                                            )
-                     treesit-extra-load-path tree-sitter-load-path
-                     )
+(speckler-setq! treesit ()
+  tree-sitter-load-path (list
+                         (expand-file-name (format "straight/%s/tree-sitter-langs/bin/" straight-build-dir) doom-local-dir)
+                         (expand-file-name "~/.local/tree-sitter/")
+                         )
+  treesit-extra-load-path tree-sitter-load-path
+  )
 
-(speckler-add! tree-sit-lang
-                    '(agda-mode       . agda)
-                    '(c-mode          . c)
-                    '(c++-mode        . cpp)
+(speckler-add! tree-sit-lang ()
+  '(agda-mode       . agda)
+  '(c-mode          . c)
+  '(c++-mode        . cpp)
 
-                    '(elm-mode        . elm)
+  '(elm-mode        . elm)
 
-                    '(julia-mode      . julia)
-                    '(ruby-mode       . ruby)
-                    '(tuareg-mode     . ocaml)
-                    )
+  '(julia-mode      . julia)
+  '(ruby-mode       . ruby)
+  '(tuareg-mode     . ocaml)
+  )
 
 ;;todo: use treesit-font-lock-rules
 ;;-- Footer

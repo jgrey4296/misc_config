@@ -20,20 +20,20 @@
   ;;      sane `comment-line-break-function', so...
   comment-line-break-function nil)
 
-(speckler-add! popup
-                    '(coq
-                      ("^\\*\\(?:response\\|goals\\)\\*" :ignore t)
-                      )
-                    )
-(speckler-add! lookup-handler
-                    `(company-coq-mode
-                      :definition ,#'company-coq-jump-to-definition
-                      :references ,#'company-coq-grep-symbol
-                      :documentation ,#'company-coq-doc
-                      )
-                    )
-(speckler-add! auto-modes
-                    '(coq
-                      ("\\.v\\'" . coq-mode)
-                      )
-                    )
+(speckler-add! popup ()
+  '(coq
+    ("^\\*\\(?:response\\|goals\\)\\*" :ignore t)
+    )
+  )
+(speckler-add! lookup-handler ()
+  `(company-coq-mode
+    :definition ,#'company-coq-jump-to-definition
+    :references ,#'company-coq-grep-symbol
+    :documentation ,#'company-coq-doc
+    )
+  )
+(speckler-add! auto-modes ()
+  '(coq
+    ("\\.v\\'" . coq-mode)
+    )
+  )

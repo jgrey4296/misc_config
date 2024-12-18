@@ -27,39 +27,39 @@
      (ttl . nil)))
   "Popup rule for a persistent buffer")
 
-(speckler-new! popup
-                    "Specify popup buffer rules."
-                    :target display-buffer-alist
-                    :sorted t
-                    :loop 'append
-                    :struct '(regexp :size :side :width :height :slot :vslot :ttl :quit :select :modeline :autosave)
-                    (cl-loop for rule in val
-                             collect
-                             (let* ((regexp (car rule))
-                                    (plist (cdr rule)) ;; (append (cdr rule) +popup-defaults))
-                                    (priority (* -1 (or (plist-get (cdr rule) :priority) 0)))
-                                    )
-                               (if (plist-get plist :ignore)
-                                   `(,priority ,regexp ())
-                                 `(,priority ,regexp +popup-buffer
-                                   ;; Buffer params
-                                   (actions       . ,(plist-get plist :actions))
-                                   (side          . ,(plist-get plist :side))
-                                   (size          . ,(plist-get plist :size))
-                                   (window-width  . ,(plist-get plist :width))
-                                   (window-height . ,(plist-get plist :height))
-                                   (slot          . ,(plist-get plist :slot))
-                                   (vslot         . ,(plist-get plist :vslot))
-                                   ;; window-parameters
-                                   (window-parameters
-                                    (ttl      . ,(plist-get plist :ttl))
-                                    (quit     . ,(plist-get plist :quit))
-                                    (select   . ,(plist-get plist :select))
-                                    (modeline . ,(plist-get plist :modeline))
-                                    (autosave . ,(plist-get plist :autosave))
-                                    ,@(plist-get plist :parameters))
-                                   )
-                                 )
-                               )
-                             )
-                    )
+(speckler-new! popup (key val)
+  "Specify popup buffer rules."
+  :target display-buffer-alist
+  :sorted t
+  :loop 'append
+  :struct '(regexp :size :side :width :height :slot :vslot :ttl :quit :select :modeline :autosave)
+  (cl-loop for rule in val
+           collect
+           (let* ((regexp (car rule))
+                  (plist (cdr rule)) ;; (append (cdr rule) +popup-defaults))
+                  (priority (* -1 (or (plist-get (cdr rule) :priority) 0)))
+                  )
+             (if (plist-get plist :ignore)
+                 `(,priority ,regexp ())
+               `(,priority ,regexp +popup-buffer
+                 ;; Buffer params
+                 (actions       . ,(plist-get plist :actions))
+                 (side          . ,(plist-get plist :side))
+                 (size          . ,(plist-get plist :size))
+                 (window-width  . ,(plist-get plist :width))
+                 (window-height . ,(plist-get plist :height))
+                 (slot          . ,(plist-get plist :slot))
+                 (vslot         . ,(plist-get plist :vslot))
+                 ;; window-parameters
+                 (window-parameters
+                  (ttl      . ,(plist-get plist :ttl))
+                  (quit     . ,(plist-get plist :quit))
+                  (select   . ,(plist-get plist :select))
+                  (modeline . ,(plist-get plist :modeline))
+                  (autosave . ,(plist-get plist :autosave))
+                  ,@(plist-get plist :parameters))
+                 )
+               )
+             )
+           )
+  )

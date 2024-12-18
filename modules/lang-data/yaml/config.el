@@ -14,11 +14,11 @@
 
   )
 
-(speckler-add! auto-modes
-                    '(yaml
-                       ("Procfile\\'" . yaml-mode)
-                       ("\\.yml\\'" . yaml-mode)
-                       ("\\.yaml\\'" . yaml-mode)
-                       ("condarc\\'" . yaml-mode)
-                      )
-                    )
+(speckler-add! auto-modes ()
+  '(yaml
+    ("Procfile\\'" . yaml-mode)
+    ("\\.yml\\'" . yaml-mode)
+    ("\\.yaml\\'" . yaml-mode)
+    ("condarc\\'" . yaml-mode)
+    )
+  )

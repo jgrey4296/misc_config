@@ -7,24 +7,24 @@
 (after! org
   (add-to-list 'org-file-apps '("\\.pdf\\'" . "evince %s"))
   (add-to-list 'org-file-apps '("\\.epub\\'" . "ebook-viewer %s"))
-)
+  )
 
 ;;-- org core
 ;; locations
 
 ;; ORG SETUP
-(speckler-setq! org 50
-                     org-link-from-user-regexp "\\<John Grey\\>"
-                     org-fast-tag-selection-single-key nil
-                     org-group-tags nil
-                     org-use-fast-tag-selection t
-                     org-tags-column 50
-                     org-startup-indented nil
-                     org-indent--deepest-level 10
-                     org-element-use-cache t
-                     org-insert-heading-respect-content t
-                     org-list-allow-alphabetical t
-                     )
+(speckler-setq! org ()
+  org-link-from-user-regexp "\\<John Grey\\>"
+  org-fast-tag-selection-single-key nil
+  org-group-tags nil
+  org-use-fast-tag-selection t
+  org-tags-column 50
+  org-startup-indented nil
+  org-indent--deepest-level 10
+  org-element-use-cache t
+  org-insert-heading-respect-content t
+  org-list-allow-alphabetical t
+  )
 
 
 ;; Save target buffer after archiving a node.
@@ -50,28 +50,29 @@
 ;; (textobjects insert navigation additional shift todo heading calendar)
 (setq evil-org-key-theme '(textobjects insert shift todo)
       org-cycle-separator-lines 3
-    )
+      )
 ;;-- end org core
 
 ;;-- locations
-(speckler-setq! org-locs 20
-                     org-archive-location   (format           "%s::%s" (expand-file-name "archive/archive.org" org-directory) "* Main Archive")
-                     org-id-locations-file  (expand-file-name "org/.orgids" user-cache-dir)
-                     org-default-notes-file (expand-file-name "notes/misc.org"   org-directory)
-                     org-attach-id-dir                        "attachments"
-                     org-journal-dir                   (expand-file-name "journal/"    org-directory)
-                     org-journal-cache-file            (expand-file-name "org/journal" user-cache-dir)
-                     org-persist-directory             (expand-file-name "org/persist/" user-cache-dir)
-                     org-publish-timestamp-directory   (expand-file-name  "org/timestamps/" user-cache-dir)
-                     org-preview-latex-image-directory (expand-file-name  "org/latex/" user-cache-dir)
-                     org-clock-persist-file (expand-file-name "org-clock-save.el" user-cache-dir)
+(speckler-setq! org-locs ()
+  :priority 20
+  org-archive-location   (format           "%s::%s" (expand-file-name "archive/archive.org" org-directory) "* Main Archive")
+  org-id-locations-file  (expand-file-name "org/.orgids" user-cache-dir)
+  org-default-notes-file (expand-file-name "notes/misc.org"   org-directory)
+  org-attach-id-dir                        "attachments"
+  org-journal-dir                   (expand-file-name "journal/"    org-directory)
+  org-journal-cache-file            (expand-file-name "org/journal" user-cache-dir)
+  org-persist-directory             (expand-file-name "org/persist/" user-cache-dir)
+  org-publish-timestamp-directory   (expand-file-name  "org/timestamps/" user-cache-dir)
+  org-preview-latex-image-directory (expand-file-name  "org/latex/" user-cache-dir)
+  org-clock-persist-file (expand-file-name "org-clock-save.el" user-cache-dir)
 
-                     +org-capture-todo-file                   "agenda/triage_todos.org"
-                     +org-capture-changelog-file              "changelog.org"
-                     +org-capture-notes-file                  "notes/misc.org"
-                     +org-capture-journal-file                "journal/journal.org"
-                     +org-capture-projects-file               "projects/projects.org"
-                     )
+  +org-capture-todo-file                   "agenda/triage_todos.org"
+  +org-capture-changelog-file              "changelog.org"
+  +org-capture-notes-file                  "notes/misc.org"
+  +org-capture-journal-file                "journal/journal.org"
+  +org-capture-projects-file               "projects/projects.org"
+  )
 
 ;;-- end locations
 
@@ -141,12 +142,12 @@
                      "OKAY(o)"
                      "YES(y)"
                      "NO(N)"
-                    "MAYBE(m)"
-                    ))
+                     "MAYBE(m)"
+                     ))
       )
   (setq jg-org-todo-keywords
-    (list project-steps task-status eval-status)
-    )
+        (list project-steps task-status eval-status)
+        )
   )
 
 (defvar jg-org-todo-faces
@@ -209,47 +210,47 @@
 
 ;;-- completion
 (after! helm-org
-    ;; TODO add a keybind for helm-org-rifle
-    (add-to-list 'helm-completing-read-handlers-alist '(org-capture . helm-org-completing-read-tags))
-    (add-to-list 'helm-completing-read-handlers-alist '(org-set-tags . helm-org-completing-read-tags))
+  ;; TODO add a keybind for helm-org-rifle
+  (add-to-list 'helm-completing-read-handlers-alist '(org-capture . helm-org-completing-read-tags))
+  (add-to-list 'helm-completing-read-handlers-alist '(org-set-tags . helm-org-completing-read-tags))
   )
 ;;-- end completion
 
 ;;-- capture
 
-(speckler-add! org-capture
-                    `(todo
-                      (:key       "t" :name      "Personal todo"
-                       :file      +org-capture-todo-file :headline  "Triage"
-                       :snippet "personal-todo"
-                       :props (:prepend t :empty-lines 1 :kill-buffer t)
-                       )
-                      (:key  "g" :name "Global Todo"
-                       :file +org-capture-todo-file :headline  "Triage"
-                       :snippet "global_todo"
-                       :props (:prepend t :empty-lines 2 :kill-buffer t)
-                      )
-                      (:key "q" :name "Quick Todo"
-                       :file +org-capture-todo-file :headline "Triage"
-                       :text "** TRIAGE Quick note\n%a\n%T\n\n"
-                       :props (:immediate-finish t :kill-buffer t)
-                       )
-                      )
-                    `(notes
-                      (:key "n" :name "Note"
-                       :file +org-capture-notes-file :headline "Triage"
-                       :text "** %u %?\n%i\n%a"
-                       :props (:kill-buffer t)
-                       )
-                      )
-                    `(project
-                      (:key "p" :name "Project Todo"
-                       :func #'+jg-org-capture-project-todo  :headline  "Triage"
-                       :snippet "project_todo"
-                       :props (:kill-buffer t)
-                       )
-                      )
-                    )
+(speckler-add! org-capture ()
+  `(todo
+    (:key       "t" :name      "Personal todo"
+     :file      +org-capture-todo-file :headline  "Triage"
+     :snippet "personal-todo"
+     :props (:prepend t :empty-lines 1 :kill-buffer t)
+     )
+    (:key  "g" :name "Global Todo"
+     :file +org-capture-todo-file :headline  "Triage"
+     :snippet "global_todo"
+     :props (:prepend t :empty-lines 2 :kill-buffer t)
+     )
+    (:key "q" :name "Quick Todo"
+     :file +org-capture-todo-file :headline "Triage"
+     :text "** TRIAGE Quick note\n%a\n%T\n\n"
+     :props (:immediate-finish t :kill-buffer t)
+     )
+    )
+  `(notes
+    (:key "n" :name "Note"
+     :file +org-capture-notes-file :headline "Triage"
+     :text "** %u %?\n%i\n%a"
+     :props (:kill-buffer t)
+     )
+    )
+  `(project
+    (:key "p" :name "Project Todo"
+     :func #'+jg-org-capture-project-todo  :headline  "Triage"
+     :snippet "project_todo"
+     :props (:kill-buffer t)
+     )
+    )
+  )
 
 ;;-- end capture
 
@@ -263,108 +264,108 @@
 ;;-- end spelling
 
 ;;-- specs
-(speckler-add! file-templates
-                    '(org
-                     ("two_pager\\.org$"     :trigger "__pacheco_vega_two_pager" :mode org-mode)
-                     ("lit_review\\.org$"    :trigger "__lit_review"             :mode org-mode)
-                     ("inst_pipeline\\.org$" :trigger "__institution_pipeline"   :mode org-mode)
-                     ("design_doc\\.org$"    :trigger "__designDocNotes"         :mode org-mode)
-                     ("project\\.org$"       :trigger "__project"                :mode org-mode)
-                     ("invoice\\.org$"       :trigger "__invoice"                :mode org-mode)
-                     ("contact\\.org$"       :trigger "__contact"                :mode org-mode)
-                     ("README\\.org$"        :trigger "__doom-readme"            :mode org-mode :when +file-templates-in-emacs-dirs-p )
-                     (org-journal-mode :ignore t)
-                     (org-mode :trigger "__")
-                     )
-                    )
-(speckler-add! fold
-                    '(org
-                     :modes (org-mode doom-docs-org-mode)
-                     :triggers (:open-all   +org/open-all-folds
-                                :close-all  +org/close-all-folds
-                                :toggle     org-cycle
-                                :open       nil
-                                :open-rec   org-fold-show-subtree
-                                :close      nil
-                                )
-                     )
-                    )
-(speckler-add! lookup-handler
-                    `(org-mode
-                     :definition ,#'+org-lookup-definition-handler
-                     :references ,#'+org-lookup-references-handler
-                     :documentation ,#'+org-lookup-documentation-handler
-                     )
-                    )
-(speckler-add! whitespace-cleanup
-                    `(org-mode
-                      ,#'delete-trailing-whitespace
-                      ;; ,#'+jg-org-clean-heading-spaces
-                      ,#'+jg-text-cleanup-whitespace
-                     )
-                 )
-(speckler-add! popup
-                    '(org-mode
-                      ("^\\*Org Links" :slot -1 :vslot -1 :size 2 :ttl 0)
-                      ("^ ?\\*\\(?:Agenda Com\\|Calendar\\|Org Export Dispatcher\\)" :slot -1 :vslot -1 :size #'+popup-shrink-to-fit :ttl 0)
-                      ("^\\*Agenda Files\\*\\'" :select t :quit t :side right)
-                      ("^\\*Org Agenda\\*\\'"   :select t :quit t :side right :priority 100)
-                      ("^\\*Org \\(?:Select\\|Attach\\)" :slot -1 :vslot -2 :ttl 0 :size 0.25)
-                      ("^\\*Org Src"        :size 0.42  :quit nil :select t :autosave t :modeline t :ttl nil)
-                      ("^\\*Org-Babel")
-                      ("^\\*Capture\\*$\\|CAPTURE-.*$" :size 0.42 :quit nil :select t :autosave ignore)
-                      )
-                    )
-(speckler-add! auto-modes
-                   '(org
-                     ("\\.org\\'" . org-mode)
-                     )
-                   )
-(speckler-add! eval
-                    '(org-mode :fn +org-eval-handler)
-                    )
-(speckler-add! org-startup
-                    '(plus
-                      ("agenda"    jg-org-startup-agenda         t)
-                      ("reference" jg-org-startup-reference      t)
-                      ("packages"  jg-org-startup-package        t)
-                      )
-                    )
-(speckler-add! babel
-                    '(default
-                      (:name D          :lib ob-C)
-                      (:name amm        :lib ob-ammonite)
-                      (:name awk        :lib ob-awk)
-                      (:name calc       :lib ob-calc)
-                      (:name comint     :lib ob-comint)
-                      (:name cpp        :lib ob-C)
-                      (:name ditaa      :lib ob-ditaa)
-                      (:name dot        :lib ob-dot)
-                      (:name eval       :lib ob-eval)
-                      (:name exp        :lib ob-exp)
-                      (:name forth      :lib ob-forth)
-                      (:name fortran    :lib ob-fortran)
-                      (:name gnuplot    :lib ob-gnuplot)
-                      (:name julia      :lib ob-julia)
-                      (:name lob        :lib ob-lob)
-                      (:name makefile   :lib ob-makefile)
-                      (:name matlab     :lib ob-matlab)
-                      (:name matlab     :lib ob-octave)
-                      (:name maxima     :lib ob-maxima)
-                      (:name ocaml      :lib ob-ocaml)
-                      (:name octave     :lib ob-octave)
-                      (:name org        :lib ob-org)
-                      (:name perl       :lib ob-perl)
-                      (:name processing :lib ob-processing)
-                      (:name ruby       :lib ob-ruby)
-                      (:name sed        :lib ob-sed)
-                      (:name table      :lib ob-table)
-                      (:name tangle     :lib ob-tangle)
-                      )
-                    )
-(speckler-add! org-src
-                    '(default
+(speckler-add! file-templates ()
+  '(org
+    ("two_pager\\.org$"     :trigger "__pacheco_vega_two_pager" :mode org-mode)
+    ("lit_review\\.org$"    :trigger "__lit_review"             :mode org-mode)
+    ("inst_pipeline\\.org$" :trigger "__institution_pipeline"   :mode org-mode)
+    ("design_doc\\.org$"    :trigger "__designDocNotes"         :mode org-mode)
+    ("project\\.org$"       :trigger "__project"                :mode org-mode)
+    ("invoice\\.org$"       :trigger "__invoice"                :mode org-mode)
+    ("contact\\.org$"       :trigger "__contact"                :mode org-mode)
+    ("README\\.org$"        :trigger "__doom-readme"            :mode org-mode :when +file-templates-in-emacs-dirs-p )
+    (org-journal-mode :ignore t)
+    (org-mode :trigger "__")
+    )
+  )
+(speckler-add! fold ()
+  '(org
+    :modes (org-mode doom-docs-org-mode)
+    :triggers (:open-all   +org/open-all-folds
+               :close-all  +org/close-all-folds
+               :toggle     org-cycle
+               :open       nil
+               :open-rec   org-fold-show-subtree
+               :close      nil
+               )
+    )
+  )
+(speckler-add! lookup-handler ()
+  `(org-mode
+    :definition ,#'+org-lookup-definition-handler
+    :references ,#'+org-lookup-references-handler
+    :documentation ,#'+org-lookup-documentation-handler
+    )
+  )
+(speckler-add! whitespace-cleanup ()
+  `(org-mode
+    ,#'delete-trailing-whitespace
+    ;; ,#'+jg-org-clean-heading-spaces
+    ,#'+jg-text-cleanup-whitespace
+    )
+  )
+(speckler-add! popup ()
+  '(org-mode
+    ("^\\*Org Links" :slot -1 :vslot -1 :size 2 :ttl 0)
+    ("^ ?\\*\\(?:Agenda Com\\|Calendar\\|Org Export Dispatcher\\)" :slot -1 :vslot -1 :size #'+popup-shrink-to-fit :ttl 0)
+    ("^\\*Agenda Files\\*\\'" :select t :quit t :side right)
+    ("^\\*Org Agenda\\*\\'"   :select t :quit t :side right :priority 100)
+    ("^\\*Org \\(?:Select\\|Attach\\)" :slot -1 :vslot -2 :ttl 0 :size 0.25)
+    ("^\\*Org Src"        :size 0.42  :quit nil :select t :autosave t :modeline t :ttl nil)
+    ("^\\*Org-Babel")
+    ("^\\*Capture\\*$\\|CAPTURE-.*$" :size 0.42 :quit nil :select t :autosave ignore)
+    )
+  )
+(speckler-add! auto-modes ()
+  '(org
+    ("\\.org\\'" . org-mode)
+    )
+  )
+(speckler-add! eval ()
+  '(org-mode :fn +org-eval-handler)
+  )
+(speckler-add! org-startup ()
+  '(plus
+    ("agenda"    jg-org-startup-agenda         t)
+    ("reference" jg-org-startup-reference      t)
+    ("packages"  jg-org-startup-package        t)
+    )
+  )
+(speckler-add! babel ()
+  '(default
+    (:name D          :lib ob-C)
+    (:name amm        :lib ob-ammonite)
+    (:name awk        :lib ob-awk)
+    (:name calc       :lib ob-calc)
+    (:name comint     :lib ob-comint)
+    (:name cpp        :lib ob-C)
+    (:name ditaa      :lib ob-ditaa)
+    (:name dot        :lib ob-dot)
+    (:name eval       :lib ob-eval)
+    (:name exp        :lib ob-exp)
+    (:name forth      :lib ob-forth)
+    (:name fortran    :lib ob-fortran)
+    (:name gnuplot    :lib ob-gnuplot)
+    (:name julia      :lib ob-julia)
+    (:name lob        :lib ob-lob)
+    (:name makefile   :lib ob-makefile)
+    (:name matlab     :lib ob-matlab)
+    (:name matlab     :lib ob-octave)
+    (:name maxima     :lib ob-maxima)
+    (:name ocaml      :lib ob-ocaml)
+    (:name octave     :lib ob-octave)
+    (:name org        :lib ob-org)
+    (:name perl       :lib ob-perl)
+    (:name processing :lib ob-processing)
+    (:name ruby       :lib ob-ruby)
+    (:name sed        :lib ob-sed)
+    (:name table      :lib ob-table)
+    (:name tangle     :lib ob-tangle)
+    )
+  )
+(speckler-add! org-src ()
+  '(default
 
-                      )
-                    )
+    )
+  )
 ;;-- end specs

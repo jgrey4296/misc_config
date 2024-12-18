@@ -65,38 +65,38 @@ capture, the end position, and the output buffer.")
                   (looking-at-p "\\*\\* *")
                   (cmd! (forward-char 2)))))
 
-(speckler-add! lookup-handler
-                    '((markdown-mode gfm-mode)
-                     ;; `markdown-follow-thing-at-point' may open an external program or a
-                     ;; buffer. No good way to tell, so pretend it's async.
-                     :file (markdown-follow-thing-at-point :async t)
-                     )
-                    )
+(speckler-add! lookup-handler ()
+  '((markdown-mode gfm-mode)
+    ;; `markdown-follow-thing-at-point' may open an external program or a
+    ;; buffer. No good way to tell, so pretend it's async.
+    :file (markdown-follow-thing-at-point :async t)
+    )
+  )
 
 
-(speckler-add! auto-modes
-                    '(markdown
-                      ("/README\\(?:\\.md\\)?\\'" . gfm-mode)
-                      ("\\.\\(?:md\\|markdown\\|mkd\\|mdown\\|mkdn\\|mdwn\\)\\'" . gfm-mode)
-                      )
-                    )
+(speckler-add! auto-modes ()
+  '(markdown
+    ("/README\\(?:\\.md\\)?\\'" . gfm-mode)
+    ("\\.\\(?:md\\|markdown\\|mkd\\|mdown\\|mkdn\\|mdwn\\)\\'" . gfm-mode)
+    )
+  )
 
-(speckler-add! fold
-                    `(markdown
-                      :modes (markdown-mode)
-                      :priority 25
-                      :triggers (:close     ,#'outline-hide-entry
-                                 :close-all ,#'evil-close-folds
-                                 :open      ,#'outline-toggle-children
-                                 :open-all  ,#'outline-show-all
-                                 :open-rec  ,#'outline-show-subtree
-                                 :toggle    ,#'outline-toggle-children
-                                 )
-                      )
-                    )
+(speckler-add! fold ()
+  `(markdown
+    :modes (markdown-mode)
+    :priority 25
+    :triggers (:close     ,#'outline-hide-entry
+               :close-all ,#'evil-close-folds
+               :open      ,#'outline-toggle-children
+               :open-all  ,#'outline-show-all
+               :open-rec  ,#'outline-show-subtree
+               :toggle    ,#'outline-toggle-children
+               )
+    )
+  )
 
-(speckler-add! org-src
-                    '(markdown
-                      ("md" . markdown)
-                      )
-                    )
+(speckler-add! org-src ()
+  '(markdown
+    ("md" . markdown)
+    )
+  )

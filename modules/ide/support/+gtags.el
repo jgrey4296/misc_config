@@ -10,32 +10,31 @@
 
 (use-package! helm-gtags :defer t)
 
-(speckler-add! env-handling
-                    '(gtags
-                      (:support gtags
-                                #'(lambda (state) nil)
-                                #'(lambda (state) nil)
-                                )
-                      (:teardown gtags #'(lambda (state) nil))
-                      )
-                    )
+(speckler-add! lib-env ()
+  '(gtags
+    :setup    nil
+    :start    nil
+    :stop     nil
+    :teardown nil
+    )
+  )
 
-(speckler-add! lookup-handler
-                    `(gtags
-                     :definition          nil
-                     :declaration         nil
-                     :references          nil
-                     :documentation       nil
-                     :implementations     nil
-                     :type-definition     nil
-                     )
-                    )
+(speckler-add! lookup-handler ()
+  `(gtags
+    :definition          nil
+    :declaration         nil
+    :references          nil
+    :documentation       nil
+    :implementations     nil
+    :type-definition     nil
+    )
+  )
 
-(speckler-add! popup
-                    '(popup
-                      nil
-                      )
-                    )
+(speckler-add! popup ()
+  '(popup
+    nil
+    )
+  )
 
 ;;-- Footer
 ;; Copyright (C) 2024 john

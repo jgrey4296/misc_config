@@ -10,8 +10,8 @@
                    )
   )
 
-(speckler-add! popup
-               '(defaults
-                 ("\\*jg-customised\\*\\'" :priority -200)
-                 )
-               )
+(speckler-add! popup ()
+  '(defaults
+    ("\\*jg-customised\\*\\'" :priority -200)
+    )
+  )

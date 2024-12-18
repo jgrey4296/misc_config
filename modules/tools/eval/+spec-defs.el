@@ -20,36 +20,31 @@
   )
 
 
-(speckler-new! repl
-                    "Registers repl handlers"
-                    :target +eval-repls
-                    :loop 'collect
-                    :struct '(or repl-handler (:modes list :start fn :send fn :persist bool :run fn))
-                    (cond ((repl-handler-p val)
-                           (cons key val))
-                          (t (cons key (apply #'make-repl-handler :modes key val)))
-                          )
-                    )
+(speckler-new! repl (key val)
+  "Registers repl handlers"
+  :target +eval-repls
+  :loop 'collect
+  :struct '(or repl-handler (:modes list :start fn :send fn :persist bool :run fn))
+  (cond ((repl-handler-p val)
+         (cons key val))
+        (t (cons key (apply #'make-repl-handler :modes key val)))
+        )
+  )
 
-(speckler-new! eval
-                    "Registers Eval Handlers"
-                    :target +eval-handlers
-                    :loop 'collect
-                    :struct '(or eval-handler (mode :region))
-                    (cond ((eval-handler-p val)
-                           (cons key val))
-                          (t (cons key (apply #'make-eval-handler :modes key val)))
-                          )
-                    )
+(speckler-new! eval (key val)
+  "Registers Eval Handlers"
+  :target +eval-handlers
+  :loop 'collect
+  :struct '(or eval-handler (mode :region))
+  (cond ((eval-handler-p val)
+         (cons key val))
+        (t (cons key (apply #'make-eval-handler :modes key val)))
+        )
+  )
 
-(speckler-new! compile-commands
-                    "Register commands for trying to compile projects. Functions return strings of commands"
-                    :target counsel-compile-local-builds
-                    :loop 'append
-                    val
-                    )
-
-
-;; (speckler-new! quickrun-files quickrun-file-alist)
-;; (speckler-new! quickrun-modes quickrun--major-mode-alist)
-;; (speckler-new! quickrun-files quickrun--language-alist)
+(speckler-new! compile-commands (key val)
+  "Register commands for trying to compile projects. Functions return strings of commands"
+  :target counsel-compile-local-builds
+  :loop 'append
+  val
+  )

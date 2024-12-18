@@ -1,9 +1,9 @@
 ;; -*- mode:emacs-lisp; lexical-binding: t; -*-
 
 ;;-- changelog
-(speckler-setq! changelog 50
-                     change-log-default-name "CHANGELOG.md"
-                     )
+(speckler-setq! changelog ()
+  change-log-default-name "CHANGELOG.md"
+  )
 ;;-- end changelog
 
 ;;-- magit
@@ -27,10 +27,10 @@
 ;;    screen are opened as popups.
 ;; 2. The status screen isn't buried when viewing diffs or logs from the
 ;;    status screen.
-(speckler-setq! magit 50
-                     magit-display-buffer-function #'+magit-display-buffer-fn
-                     magit-bury-buffer-function    #'magit-mode-quit-window
-                     )
+(speckler-setq! magit ()
+  magit-display-buffer-function #'+magit-display-buffer-fn
+  magit-bury-buffer-function    #'magit-mode-quit-window
+  )
 
 ;;-- end magit
 
@@ -47,51 +47,51 @@
 ;;-- end misc
 
 ;;-- specs
-(speckler-add! popup
-                    '(magit
-                     ("^\\*git-gutter" :select nil :size '+popup-shrink-to-fit)
-                     ("^magit-todos-list" :select nil :side right :ttl nil :quit t :width 80 :priority 180)
-                     ;; ("^magit:" :select nil :side left :ttl nil :quit t :width 80 :priority 180)
-                     ("^\\(?:\\*magit:\\|magit:\\)" :ignore t :priority 150)
-                     ("^\\(?:magit-diff:\\|COMMIT_EDITMSG\\)" :ignore t :priority 200)
-                     )
-                    '(forge
-                     ( "^\\*?[0-9]+:\\(?:new-\\|[0-9]+$\\)" :size 0.45 :modeline t :ttl 0 :quit nil)
-                     ("^\\*\\(?:[^/]+/[^ ]+ #[0-9]+\\*$\\|Issues\\|Pull-Requests\\|forge\\)" :ignore t)
-                     )
-                    '(vc
-                      ("^\\*vc-diff" :select nil)   ; *vc-diff*
-                      ("^\\*vc-change" :select t)   ; *vc-change-log*
-                      )
-                    )
+(speckler-add! popup ()
+  '(magit
+    ("^\\*git-gutter" :select nil :size '+popup-shrink-to-fit)
+    ("^magit-todos-list" :select nil :side right :ttl nil :quit t :width 80 :priority 180)
+    ;; ("^magit:" :select nil :side left :ttl nil :quit t :width 80 :priority 180)
+    ("^\\(?:\\*magit:\\|magit:\\)" :ignore t :priority 150)
+    ("^\\(?:magit-diff:\\|COMMIT_EDITMSG\\)" :ignore t :priority 200)
+    )
+  '(forge
+    ( "^\\*?[0-9]+:\\(?:new-\\|[0-9]+$\\)" :size 0.45 :modeline t :ttl 0 :quit nil)
+    ("^\\*\\(?:[^/]+/[^ ]+ #[0-9]+\\*$\\|Issues\\|Pull-Requests\\|forge\\)" :ignore t)
+    )
+  '(vc
+    ("^\\*vc-diff" :select nil)   ; *vc-diff*
+    ("^\\*vc-change" :select t)   ; *vc-change-log*
+    )
+  )
 
-(speckler-add! fold
-                    `(magit
-                      :modes (magit-status-mode)
-                      :priority 50
-                      :triggers (:delete     nil
-                                 :open-all   nil
-                                 :close-all  nil
-                                 :toggle     ,(cmd! (magit-section-toggle (magit-current-section)))
-                                 :open       nil
-                                 :open-rec   nil
-                                 :close      nil
-                                 )
-                      )
-                    )
+(speckler-add! fold ()
+  `(magit
+    :modes (magit-status-mode)
+    :priority 50
+    :triggers (:delete     nil
+               :open-all   nil
+               :close-all  nil
+               :toggle     ,(cmd! (magit-section-toggle (magit-current-section)))
+               :open       nil
+               :open-rec   nil
+               :close      nil
+               )
+    )
+  )
 
-(speckler-add! auto-modes
-                    '(version-control
-                      ("/\\.dockerignore\\'"  . gitignore-mode)
-                      ("/\\.gitignore\\'"     . gitignore-mode)
-                      ("/\\.gitconfig\\'"     . gitconfig.mode)
-                      ("/git-rebase-todo\\'"  . git-rebase-mode)
-                      ("/\\.gitattributes\\'" . gitattributes-mode)
-                      )
-                    )
+(speckler-add! auto-modes ()
+  '(version-control
+    ("/\\.dockerignore\\'"  . gitignore-mode)
+    ("/\\.gitignore\\'"     . gitignore-mode)
+    ("/\\.gitconfig\\'"     . gitconfig.mode)
+    ("/git-rebase-todo\\'"  . git-rebase-mode)
+    ("/\\.gitattributes\\'" . gitattributes-mode)
+    )
+  )
 
-(speckler-add! yas-extra
-                    '(git-commit-mode git-commit-mode)
-                    )
+(speckler-add! yas-extra ()
+  '(git-commit-mode git-commit-mode)
+  )
 
 ;;-- end specs

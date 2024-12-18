@@ -6,7 +6,7 @@
 ;;
 ;;-- end Header
 
-(speckler-new! lib-env
+(speckler-new! lib-env (key val)
                "Registers environment entry/exit handlers. eg: for python"
                :struct '(or librarian-env-handler plist)
                :setup (librarian-envs-clear!)

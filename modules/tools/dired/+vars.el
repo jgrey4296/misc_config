@@ -2,9 +2,9 @@
 
 (defvar! +jg-dired-recursive-switches "-aBhlR --group-directories-first" nil)
 
-(speckler-setq! dired 50
-                    read-file-name-function #'read-file-name-default
-                    )
+(speckler-setq! dired ()
+  read-file-name-function #'read-file-name-default
+  )
 
 ;;-- dired
 (setq-default dired-args '("-ahlD" "-v" "--group-directories-first")
@@ -53,8 +53,8 @@
                                    ".wx32fsl" ".wx64fsl"
                                    ".x86f"
                                    "CVS/" "_MTN/" "_darcs/" "~"
-                                    )
                                    )
+  )
 (rx-let ((filename (*? graph))
          (system (| "." "TheVolumeSettingsFolder" (: ?. (? filename) "cache") "_cache_"))
          (dotfiles (: ?. (? "_.") (| "CFUserTextEncoding" "DS_Store" "DocumentRevisions-V100" "PKInstallSandboxManager"
@@ -101,15 +101,14 @@
                                                 )
                                   line-end
                                   )
-                       )
-  (speckler-setq! dired-omit-files jg-dired-omit-files)
+    )
   (provide 'dired-omit-files-set)
   )
 
-(speckler-setq! dired-omit 50
-                     dired-omit-files jg-dired-omit-files
-                     dired-omit-extensions jg-dired-omit-extensions
-                     )
+(speckler-setq! dired-omit ()
+  dired-omit-files jg-dired-omit-files
+  dired-omit-extensions jg-dired-omit-extensions
+  )
 
 ;;-- end omit-patterns
 
@@ -167,27 +166,27 @@
   )
 
 ;;-- specs
-(speckler-add! fold
-                    `(dired
-                     :modes (dired-mode)
-                     :priority 50
-                     :triggers (:open-all   nil
-                                :close-all  nil
-                                :toggle     ,(cmd! (dired-hide-subdir 1))
-                                :open       nil
-                                :open-rec   nil
-                                :close      nil
-                                )
-                     )
-                    )
+(speckler-add! fold ()
+  `(dired
+    :modes (dired-mode)
+    :priority 50
+    :triggers (:open-all   nil
+               :close-all  nil
+               :toggle     ,(cmd! (dired-hide-subdir 1))
+               :open       nil
+               :open-rec   nil
+               :close      nil
+               )
+    )
+  )
 
-(speckler-add! popup
-                    '(dired
-                     ("^\\*image-dired" :slot 20 :size 0.8 :select t :quit nil :ttl 0)
-                     ("^\\*ranger" :ignore t)
-                     ("^\\*CookieCutter\\*" :side bottom :select nil :quit t :ttl 0)
-                     ("^\\*file-hashes\\*" :side bottom :select nil :quit t :ttl 3)
-                     ("^\\*File Metadata\\*\\'" :width 80 :side left :select nil :quit t :ttl 3)
-                     )
-                    )
+(speckler-add! popup ()
+  '(dired
+    ("^\\*image-dired" :slot 20 :size 0.8 :select t :quit nil :ttl 0)
+    ("^\\*ranger" :ignore t)
+    ("^\\*CookieCutter\\*" :side bottom :select nil :quit t :ttl 0)
+    ("^\\*file-hashes\\*" :side bottom :select nil :quit t :ttl 3)
+    ("^\\*File Metadata\\*\\'" :width 80 :side left :select nil :quit t :ttl 3)
+    )
+  )
 ;;-- end specs

@@ -15,23 +15,23 @@
   (sp-local-pair "«" "»")
   (sp-local-pair "⟨" "⟩")
   (sp-local-pair "⟪" "⟫")
-)
+  )
 
-(speckler-add! lookup-handler
-                    `(lean-mode
-                      :definnition ,#'lean-find-definition
-                      )
-                    )
+(speckler-add! lookup-handler ()
+  `(lean-mode
+    :definnition ,#'lean-find-definition
+    )
+  )
 
-(speckler-add! librarian-regular
-                    '(lean-mode
-                     ("Theorem Proving in Lean 4" . "https://leanprover.github.io/theorem_proving_in_lean4/")
-                     ("Lean Manual" . "https://leanprover.github.io/lean4/doc/")
-                     ("Functional Programming in Lean" . "https://leanprover.github.io/functional_programming_in_lean/")
-                     ("Lean Github" . "https://github.com/leanprover/lean4")
+(speckler-add! librarian-regular ()
+  '(lean-mode
+    ("Theorem Proving in Lean 4" . "https://leanprover.github.io/theorem_proving_in_lean4/")
+    ("Lean Manual" . "https://leanprover.github.io/lean4/doc/")
+    ("Functional Programming in Lean" . "https://leanprover.github.io/functional_programming_in_lean/")
+    ("Lean Github" . "https://github.com/leanprover/lean4")
 
-                     )
-                    )
+    )
+  )
 
 ;;-- Footer
 ;; Copyright (C) 2024 john

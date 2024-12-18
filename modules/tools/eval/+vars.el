@@ -22,24 +22,24 @@ buffer rather than an overlay on the line at point or the minibuffer.")
       )
 
 
-(speckler-add! popup
-                    '(quickrun
-                      ("^\\*quickrun" :size 0.3 :ttl 0)
-                      )
-                    '(compilation
-                      ("\\*compilation\\*" :quit t :select nil :height 0.2 :priority 20)
-                      )
-                    `(repl
-                      (,(format "\\%s\\*\\'" +eval-repl-buffer-name) :quit nil :select t :ttl -1 :side right :width 0.3 :priority 50)
-                      )
-                    )
+(speckler-add! popup ()
+  '(quickrun
+    ("^\\*quickrun" :size 0.3 :ttl 0)
+    )
+  '(compilation
+    ("\\*compilation\\*" :quit t :select nil :height 0.2 :priority 20)
+    )
+  `(repl
+    (,(format "\\%s\\*\\'" +eval-repl-buffer-name) :quit nil :select t :ttl -1 :side right :width 0.3 :priority 50)
+    )
+  )
 
-(speckler-add! compile-commands
-                    '(default
-                       +jg-workspaces-get-doot-commands
-                       ;; counsel-compile-get-filtered-history
-                       ;; counsel-compile-get-build-directories
-                       ;; counsel-compile-get-make-invocation
-                       ;; counsel-compile-get-make-help-invocations
-                       )
-                    )
+(speckler-add! compile-commands ()
+  '(default
+    +jg-workspaces-get-doot-commands
+    ;; counsel-compile-get-filtered-history
+    ;; counsel-compile-get-build-directories
+    ;; counsel-compile-get-make-invocation
+    ;; counsel-compile-get-make-help-invocations
+    )
+  )

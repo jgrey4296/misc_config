@@ -15,18 +15,18 @@
 ;; (use-package! esqlite-helm :defer t)
 
 
-(speckler-add! org-src
-                    '(sql
-                      ("sqlite" . sql)
-                      ("sql" . sql)
-                      )
-                    )
-(speckler-add! babel
-                    '(sql
-                      (:name sql        :lib ob-sql)
-                      (:name sqlite     :lib ob-sqlite)
-                      )
-                    )
+(speckler-add! org-src ()
+  '(sql
+    ("sqlite" . sql)
+    ("sql" . sql)
+    )
+  )
+(speckler-add! babel ()
+  '(sql
+    (:name sql        :lib ob-sql)
+    (:name sqlite     :lib ob-sqlite)
+    )
+  )
 
 ;;-- Footer
 ;; Copyright (C) 2023 john

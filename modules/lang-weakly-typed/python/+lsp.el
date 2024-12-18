@@ -19,9 +19,9 @@
     :priority 2
     :initialized-fn (lambda (workspace)
                       (with-lsp-workspace workspace
-                        ;; we send empty settings initially, LSP server will ask for the
-                        ;; configuration of each workspace folder later separately
-                        (lsp--set-configuration (make-hash-table :test 'equal))))
+                                          ;; we send empty settings initially, LSP server will ask for the
+                                          ;; configuration of each workspace folder later separately
+                                          (lsp--set-configuration (make-hash-table :test 'equal))))
     :download-server-fn (lambda (_client callback error-callback _update?)
                           (lsp-package-ensure 'pyright callback error-callback))
     :notification-handlers (lsp-ht ("pyright/beginProgress"  'lsp-pyright--begin-progress-callback)
@@ -39,7 +39,7 @@
                     :library-folders-fn (lambda (_workspace) lsp-clients-pylsp-library-directories)
                     :initialized-fn (lambda (workspace)
                                       (with-lsp-workspace workspace
-                                        (lsp--set-configuration (lsp-configuration-section "pylsp"))))
+                                                          (lsp--set-configuration (lsp-configuration-section "pylsp"))))
                     )
    )
 
@@ -69,10 +69,14 @@
 
   )
 
-(speckler-add! lib-env
-                    `(py-lsp
-                      :lang python
-                      :setup ,#'(lambda () (add-hook 'python-mode-hook #'lsp-deferred))
-                      :teardown ,#'(lambda () (remove-hook 'python-mode-hook #'lsp-deferred))
-                      )
-                    )
+(speckler-add! lib-env ()
+  `(py-lsp
+    :lang python
+    :setup #'(lambda (state &rest rest) (require 'lsp-mode))
+    :start #'(lambda (state &rest rest) (add-hook 'python-mode-hook #'lsp-deferred))
+    :stop  #'(lambda (state &rest rest) (remove-hook 'python-mode-hook #'lsp-deferred))
+    :teardown #'(lambda (state &rest rest)
+                  ;; TODO ensure the lsp process is shut down
+                  )
+    )
+  )

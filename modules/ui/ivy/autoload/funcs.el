@@ -2,15 +2,27 @@
 
 ;;;###autoload
 (defun +jg-ivy-popup-messages (&optional arg)
-  (interactive "P")
-  (+jg-popup-ivy-open messages-buffer-name)
-  (with-current-buffer messages-buffer-name
-    (when current-prefix-arg
-      (+jg-text-clear-buffer))
-    )
-  (with-selected-window (get-buffer-window messages-buffer-name)
-    (goto-char (point-max))
-    (recenter -1)
+  "Popup (and maybe clear the messages, or warnings, buffer"
+  (interactive "p")
+  (pcase arg
+    (1  ;; messages
+     (+jg-popup-ivy-open messages-buffer-name)
+     (with-selected-window (get-buffer-window messages-buffer-name)
+       (goto-char (point-max))
+       (recenter -1)))
+    (4  ;; clear messages
+     (+jg-popup-ivy-open messages-buffer-name)
+     (with-selected-window (get-buffer-window messages-buffer-name)
+       (+jg-text-clear-buffer)
+       (goto-char (point-max))
+       (recenter -1)))
+    ((and x (guard (get-buffer "*Warnings*")))  ;; clear warnings
+     (+jg-popup-ivy-open  "*Warnings*")
+     (with-selected-window (get-buffer-window "*Warnings*")
+       (when (cl-evenp x) (+jg-text-clear-buffer))
+       (goto-char (point-max))
+       (recenter -1)))
+    (x (message "No Warnings buffer exists"))
     )
   )
 

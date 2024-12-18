@@ -118,7 +118,8 @@
                     )
 (speckler-add! imenu
                     '(emacs-lisp-mode
-                      ("spec-def"             "^(spec-handling-new! \\(.+\\) " 1)
+                      ("spec-def"             "^(speckler-new! \\(.+\\)" 1)
+                      ("spec-hook"            "^(speckerl-new-hook! \\(.+?\\)" 1)
                       ("spec-add"             "^(speckler-add! \\(.+\\) " 1)
                       ("Section"              "^[ 	]*;;;*\\**[ 	]+\\([^\n]+\\)" 1)
                       ("Evil commands"        "^\\s-*(evil-define-\\(?:command\\|operator\\|motion\\) +\\(\\_<[^ ()\n]+\\_>\\)" 1)

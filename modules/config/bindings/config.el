@@ -2,7 +2,7 @@
 
 (local-load! "+vars")
 
-(defer-load! (evil faster-whichkey) "+bindings" "+misc-bindings") ;; -> jg-bindings-core
+(defer-load! (evil faster-whichkey) "+bindings" "+misc") ;; -> jg-bindings-core
 
 (after! (jg-evil-bindings which-key jg-bindings-core) (provide 'jg-bindings-total))
 

@@ -2,6 +2,7 @@
 
 (speckler-new-hook! rotate-text
                     "Set local rotate text lists "
+                    :struct '(:symbols (list) :words (list) :patterns (list))
                     (setq-local rotate-text-local-symbols    (plist-get val :symbols)
                                 rotate-text-local-words      (plist-get val :words)
                                 rotate-text-local-patterns   (plist-get val :patterns)

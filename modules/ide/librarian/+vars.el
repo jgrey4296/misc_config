@@ -6,15 +6,15 @@
   )
 
 (speckler-setq! librarian 50
- librarian-regular-loc                        (expand-file-name "librarian-regular" templates-loc)
- librarian--config-modules-dir                (expand-file-name "modules" doom-user-dir)
- librarian--man-path                          (expand-file-name "man/main" templates-loc)
- librarian--man-config                        (expand-file-name "tools/man.conf" templates-loc)
- librarian--man-cache-dir                     (expand-file-name ".temp" doom-user-dir)
+                librarian-regular-loc                        (expand-file-name "librarian-regular" templates-loc)
+                librarian--config-modules-dir                (expand-file-name "modules" doom-user-dir)
+                librarian--man-path                          (expand-file-name "man/main" templates-loc)
+                librarian--man-config                        (expand-file-name "tools/man.conf" templates-loc)
+                librarian--man-cache-dir                     (expand-file-name ".temp" doom-user-dir)
 
- librarian-tag-mode-substitution-sources      (expand-file-name "~/github/bibliography/tags/substitutions")
- librarian--tag-mode-main-loc                 (expand-file-name "~/github/bibliography/.temp/tags/canon.tags")
- )
+                librarian-tag-mode-substitution-sources      (expand-file-name "~/github/bibliography/tags/substitutions")
+                librarian--tag-mode-main-loc                 (expand-file-name "~/github/bibliography/.temp/tags/canon.tags")
+                )
 
 
 ;;-- specs

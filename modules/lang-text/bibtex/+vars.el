@@ -25,12 +25,12 @@
 ;;-- end hl line
 
 ;;-- librarian
-(setq librarian-biblio-pdf-loc (pcase system-type
-                                     ('darwin (expand-file-name "~/pdf_library"))
-                                     ('gnu/linux "/media/john/data/library/pdfs"))
-      librarian-biblio-library-loc   (expand-file-name "~/github/bibliography/main/")
-      librarian-biblio-unsourced-loc (expand-file-name "~/github/bibligraphy/in_progress/to_source.bib")
-
+(speckler-setq! bibtex 50
+                librarian-biblio-pdf-loc (pcase system-type
+                                           ('darwin (expand-file-name "~/pdf_library"))
+                                           ('gnu/linux "/media/john/data/library/pdfs"))
+                librarian-biblio-library-loc   (expand-file-name "~/github/bibliography/main/")
+                librarian-biblio-unsourced-loc (expand-file-name "~/github/bibligraphy/in_progress/to_source.bib")
       )
 
 ;;-- end librarian

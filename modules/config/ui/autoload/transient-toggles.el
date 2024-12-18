@@ -21,7 +21,7 @@
                           )
   (transient-make-call!   run-spec-handlers "!"
                           (propertize "Run Spec Handlers" 'face 'transient-heading)
-                          (run-spec-handlers)
+                          (speckler-go!)
                           )
   (transient-make-call!   general-insert-rebuild-cache "@"
                           (propertize    "Clear General-Insert Cache" 'face 'transient-heading)

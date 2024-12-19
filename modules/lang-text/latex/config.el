@@ -54,7 +54,7 @@
         )
 
   (add-hook! 'LaTeX-mode-hook
-             #'general-insert-minor-mode
+             #'librarian-insert-minor-mode
              )
 
   (setq-hook! 'LaTeX-mode-hook

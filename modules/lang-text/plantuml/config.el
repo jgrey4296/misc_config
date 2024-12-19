@@ -17,7 +17,7 @@
               (plantuml-default-exec-mode)))
 
   (add-hook! 'plantuml-mode-hook
-             #'general-insert-minor-mode
+             #'librarian-insert-minor-mode
              )
   )
 

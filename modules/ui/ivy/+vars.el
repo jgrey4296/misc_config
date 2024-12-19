@@ -1,9 +1,5 @@
 ;;; completion/ivy/+vars.el -*- lexical-binding: t; -*-
 
-;;-- general-insert
-(setq general-insert-location (expand-file-name "general-insert" templates-loc))
-
-;;-- end general-insert
 
 ;;-- ivy
 (speckler-setq! ivy ()

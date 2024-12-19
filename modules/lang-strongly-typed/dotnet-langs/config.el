@@ -12,7 +12,7 @@
 
   (add-hook! '(csharp-mode-hook csharp-ts-mode-hook)
              #'rainbow-delimiters-mode
-             #'general-insert-minor-mode
+             #'librarian-insert-minor-mode
              #'origami-mode
              )
   )

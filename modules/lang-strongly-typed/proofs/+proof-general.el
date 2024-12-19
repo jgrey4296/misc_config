@@ -17,7 +17,7 @@
                       :underline nil
                       )
   (add-hook! 'coq-mode-hook
-             #'general-insert-minor-mode
+             #'librarian-insert-minor-mode
              )
   )
 

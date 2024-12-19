@@ -30,7 +30,7 @@
   (add-hook! 'conf-toml-mode-hook :depth 99
              #'abbrev-mode
              #'outline-minor-mode
-             #'general-insert-minor-mode
+             #'librarian-insert-minor-mode
              )
 
   (setq-hook! 'conf-toml-mode-hook
@@ -46,7 +46,7 @@
   (add-hook! 'toml-mode-hook :depth 99
              #'abbrev-mode
              #'outline-minor-mode
-             #'general-insert-minor-mode
+             #'librarian-insert-minor-mode
              )
 
   (setq-hook! 'toml-mode-hook
@@ -61,7 +61,7 @@
   (add-hook! 'toml-ts-mode-hook :depth 99
              #'abbrev-mode
              #'outline-minor-mode
-             #'general-insert-minor-mode
+             #'librarian-insert-minor-mode
              )
 
   (setq-hook! 'toml-ts-mode-hook

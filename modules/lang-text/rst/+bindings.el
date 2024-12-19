@@ -1,7 +1,7 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
 (map! :map jg-rst-mode-map
-      :desc "General Insert"         :n "|" #'general-insert-call
+      :desc "General Insert"         :n "|" #'librarian-insert-trigger
       :desc "Forward Section"        :n "] ]" #'rst-forward-section
       :desc "Backward Section"        :n "[ [" #'rst-backward-section
       )

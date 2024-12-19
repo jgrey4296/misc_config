@@ -25,7 +25,7 @@
                           )
   (transient-make-call!   general-insert-rebuild-cache "@"
                           (propertize    "Clear General-Insert Cache" 'face 'transient-heading)
-                          (general-insert-clear-caches)
+                          (librarian-insert-clear-caches)
                           (message "Cache Rebuilt")
                           )
   (transient-make-mode-toggle! global-hl-line-mode            "Hl-line"       "h")

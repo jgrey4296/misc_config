@@ -7,7 +7,7 @@
 
 (map! :map emacs-lisp-mode-map
       :n "SPC e" #'eros-eval-last-sexp
-      :n "|" #'general-insert-call
+      :n "|" #'librarian-insert-trigger
       :localleader
       :desc "Sort Defuns" "S"  #'+jg-lisp-sort-defuns
       :desc "Pretty Print" "p" #'+jg-lisp-pretty-region

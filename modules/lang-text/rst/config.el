@@ -12,7 +12,7 @@
   :commands rst-mode
   :config
   (add-hook! 'rst-mode-hook
-             #'general-insert-minor-mode
+             #'librarian-insert-minor-mode
              )
   (setq-hook! 'rst-mode-hook
     yas-indent-line nil)

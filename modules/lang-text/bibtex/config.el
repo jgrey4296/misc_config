@@ -34,7 +34,7 @@
              #'outline-minor-mode
              #'librarian--biblio-font-lock-mod-hook
              #'reftex-mode
-             #'general-insert-minor-mode)
+             #'librarian-insert-minor-mode)
 
   (add-hook! 'bibtex-mode-hook :append
     (bibtex-set-dialect 'jg)
@@ -71,5 +71,5 @@
   :defer t
   :config
   (add-hook 'bibtex-style-mode-hook #'hs-minor-mode)
-  (add-hook 'bibtex-style-mode-hook #'general-insert-minor-mode)
+  (add-hook 'bibtex-style-mode-hook #'librarian-insert-minor-mode)
   )

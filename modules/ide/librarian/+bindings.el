@@ -1,9 +1,11 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
 (map! :leader
-      :desc "Open Url"              "?"         #'librarian-url
-      :desc "Local Variables"       "b l"       #'librarian-buffer-locals
+      :desc "Open Url"               "?"       #'librarian-url
+      :desc "Local Variables"        "b l"     #'librarian-buffer-locals
       :desc "Dir: Librarian-regular" "y 4"     (cmd! (find-file librarian-regular-loc))
+      :desc "Dir: General Insert"    "y 5"     (cmd! (find-file librarian-insert-loc))
+      :desc "General Insert"         "i g"     #'librarian-insert-trigger
 
       (:prefix "s"
        ;; :desc "Look up in all docsets"       "K" #'+lookup/in-all-docsets
@@ -65,5 +67,10 @@
       )
 
 (map! :map jg-binding-normal-state-map
-      :desc "Lookup" "K" #'librarian-documentation
+      :desc "Lookup"           "K"   #'librarian-documentation
+      :desc "General Insert"   "I |" #'librarian-insert-trigger
+      )
+
+(map! :map snippet-mode-map
+      :n "|" #'librarian-insert-trigger
       )

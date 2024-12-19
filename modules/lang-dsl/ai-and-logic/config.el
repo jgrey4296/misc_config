@@ -41,5 +41,5 @@
 (use-package! prolog
   :init
   (add-hook! 'prolog-mode-hook
-             #'general-insert-minor-mode)
+             #'librarian-insert-minor-mode)
   )

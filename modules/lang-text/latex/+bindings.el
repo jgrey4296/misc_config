@@ -3,7 +3,7 @@
 (map! :map jg-latex-mode-map
       :i "\"" #'TeX-insert-quote
       :i "$"  #'TeX-insert-dollar
-      :n "|"  #'general-insert-call
+      :n "|"  #'librarian-insert-trigger
       :n "RET" #'+jg-latex-compile-file-quick
 
       :localleader

@@ -39,7 +39,7 @@
   (add-hook! 'css-mode-hook
              #'hs-minor-mode
              #'smartparens-mode
-             #'general-insert-minor-mode)
+             #'librarian-insert-minor-mode)
 
   (setq-hook! 'css-mode-hook
     ;; Correctly continue /* and // comments on newline-and-indent

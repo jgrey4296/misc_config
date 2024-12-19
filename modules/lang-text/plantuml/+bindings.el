@@ -2,7 +2,7 @@
 
 
 (map! :map plantuml-mode-map
-      "|" #'general-insert-call
+      "|" #'librarian-insert-trigger
       )
 
 (map! :map plantuml-mode-map

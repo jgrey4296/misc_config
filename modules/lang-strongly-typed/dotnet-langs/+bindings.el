@@ -1,6 +1,6 @@
 
 (map! :map (csharp-mode-map csharp-ts-mode-map)
-      :desc "General Insert"         :n "|" #'general-insert-call
+      :desc "General Insert"         :n "|" #'librarian-insert-trigger
 
       )
 

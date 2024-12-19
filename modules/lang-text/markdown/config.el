@@ -10,7 +10,7 @@
   :config
   (add-hook! 'gfm-mode-hook  :depth 100
              #'outline-minor-mode
-             #'general-insert-minor-mode
+             #'librarian-insert-minor-mode
              )
 
   (sp-local-pair '(markdown-mode gfm-mode) "`" "`"

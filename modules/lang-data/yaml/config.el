@@ -6,10 +6,10 @@
   :config
   (setq-hook! 'yaml-mode-hook tab-width yaml-indent-offset)
   (add-hook 'yaml-mode-hook #'tree-sitter!)
-  (add-hook 'yaml-mode-hook #'general-insert-minor-mode)
+  (add-hook 'yaml-mode-hook #'librarian-insert-minor-mode)
 
   (map! :map yaml-mode-map
-        :desc "General Insert"         :n "|" #'general-insert-call
+        :desc "General Insert"         :n "|" #'librarian-insert-trigger
         )
 
   )

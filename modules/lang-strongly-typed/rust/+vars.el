@@ -126,6 +126,6 @@
 ;;-- end LSP
 
 ;;-- general-insert
-(general-insert-register-processor 'conf-toml-mode "rust-dependencies" #'insert)
+(librarian-insert-register-processor 'conf-toml-mode "rust-dependencies" #'insert)
 
 ;;-- end general-insert

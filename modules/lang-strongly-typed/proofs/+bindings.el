@@ -6,7 +6,7 @@
 
 (map! :map jg-coq-mode-map
 
-      :desc "General Insert"         :n "|" #'general-insert-call
+      :desc "General Insert"         :n "|" #'librarian-insert-trigger
 
       :n "]"  #'proof-assert-next-command-interactive
       :n "["  #'proof-undo-last-successful-command

@@ -6,7 +6,7 @@
 
 (map! :map (python-mode-map python-ts-mode-map)
       :after python-mode
-      :desc "General Insert"         :n "|" #'general-insert-call
+      :desc "General Insert"         :n "|" #'librarian-insert-trigger
       :n "z d" nil ;; #'+jg-python-toggle-all-defs
       :n "z D" nil ;; #'+jg-python-close-class-defs
       :v "i f" nil ;; #'+jg-python-select-defun

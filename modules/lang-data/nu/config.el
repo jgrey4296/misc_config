@@ -28,8 +28,7 @@
   :defer t
   :config
   (add-hook! '(nushell-mode-hook nushell-ts-mode-hook)
-             #'general-insert-minor-mode
-
+             #'librarian-insert-minor-mode
              )
   )
 

@@ -28,8 +28,6 @@
   (setq amx-save-file (concat doom-cache-dir "amx-items"))
   )
 
-(use-package! general-insert :defer t)
-
 ;;-- Footer
 ;; Copyright (C) 2024 john
 ;;

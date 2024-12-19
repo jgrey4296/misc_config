@@ -109,7 +109,7 @@
              #'+jg-org-startup-agenda-h
              #'+jg-org-startup-reference-h
              #'+jg-org-startup-package-h
-             #'general-insert-minor-mode
+             #'librarian-insert-minor-mode
              )
   (setq-hook! 'org-mode-hook
     tab-width 8

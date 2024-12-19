@@ -119,14 +119,14 @@
 ;;-- end babel
 
 ;;-- general insert
-(general-insert-register-processor 'python-mode "raise" #'(lambda (x) (insert "raise " (s-replace-regexp "^[^A-Z]+" "" x))))
-(general-insert-register-processor 'python-mode "datetime" #'(lambda (x) (insert (car (split-string x " " t " +")))))
-(general-insert-register-processor 'python-mode "fixtures" #'(lambda (x) (insert (car (split-string x " " t " "+)))))
-(general-insert-register-processor 'python-mode "import" #'(lambda (x) (insert "import " (car (split-string x t " +")))))
-(general-insert-register-processor 'python-ts-mode "raise" #'(lambda (x) (insert "raise " (s-replace-regexp "^[^A-Z]+" "" x))))
-(general-insert-register-processor 'python-ts-mode "datetime" #'(lambda (x) (insert (car (split-string x " " t " +")))))
-(general-insert-register-processor 'python-ts-mode "fixtures" #'(lambda (x) (insert (car (split-string x " " t " "+)))))
-(general-insert-register-processor 'python-ts-mode "import" #'(lambda (x) (insert "import " (car (split-string x t " +")))))
+(librarian-insert-register-processor 'python-mode "raise" #'(lambda (x) (insert "raise " (s-replace-regexp "^[^A-Z]+" "" x))))
+(librarian-insert-register-processor 'python-mode "datetime" #'(lambda (x) (insert (car (split-string x " " t " +")))))
+(librarian-insert-register-processor 'python-mode "fixtures" #'(lambda (x) (insert (car (split-string x " " t " "+)))))
+(librarian-insert-register-processor 'python-mode "import" #'(lambda (x) (insert "import " (car (split-string x t " +")))))
+(librarian-insert-register-processor 'python-ts-mode "raise" #'(lambda (x) (insert "raise " (s-replace-regexp "^[^A-Z]+" "" x))))
+(librarian-insert-register-processor 'python-ts-mode "datetime" #'(lambda (x) (insert (car (split-string x " " t " +")))))
+(librarian-insert-register-processor 'python-ts-mode "fixtures" #'(lambda (x) (insert (car (split-string x " " t " "+)))))
+(librarian-insert-register-processor 'python-ts-mode "import" #'(lambda (x) (insert "import " (car (split-string x t " +")))))
 ;;-- end general insert
 
 ;;-- specs

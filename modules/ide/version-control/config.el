@@ -77,7 +77,7 @@
   :defer t
   :config
   (add-hook! (gitconfig-mode gitattributes-mode gitignore-mode)
-             #'general-insert-minor-mode
+             #'librarian-insert-minor-mode
              )
   )
 

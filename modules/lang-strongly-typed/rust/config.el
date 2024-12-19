@@ -36,7 +36,7 @@
              #'maybe-rust-test-minor-mode
              #'hs-minor-mode
              #'tree-sitter!
-             #'general-insert-minor-mode
+             #'librarian-insert-minor-mode
              )
 
   (setq-hook! 'rustic-mode-hook

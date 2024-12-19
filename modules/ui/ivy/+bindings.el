@@ -12,7 +12,6 @@
 
 
 (map! :leader
-      :desc "Dir: General Insert"          "y 5" (cmd! (find-file general-insert-location))
       :desc "Messages"                     "0"    #'+jg-ivy-popup-messages
       )
 
@@ -52,7 +51,6 @@
        :desc "From evil register"       "0"          #'counsel-evil-registers--with-state-normal
        "m" #'counsel-minibuffer-history--with-state-normal
        "y" #'counsel-yank-pop--with-state-normal
-       :desc "General Insert"           "|"          #'general-insert-call
 
       )
 

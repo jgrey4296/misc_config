@@ -190,5 +190,5 @@
       )
 
 (map! :map (gitconfig-mode-map gitattributes-mode-map gitignore-mode-map)
-      :desc "General Insert"         :n "|" #'general-insert-call
+      :desc "General Insert"         :n "|" #'librarian-insert-trigger
       )

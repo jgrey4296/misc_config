@@ -6,7 +6,7 @@
 
 ;;-- bibtex-mode
 (map! :map jg-bibtex-mode-map ;; main
-      :n "|"                                  #'general-insert-call
+      :n "|"                                  #'librarian-insert-trigger
       :desc "Lock Key"           :n "!"       #'+jg-bibtex-lock-key
       :desc "Insert from Doi"    :n "I d"     #'librarian-biblio-create-from-doi
       :desc "Auto Form"          :n "I F"     #'+jg-bibtex-entry-form
@@ -156,7 +156,7 @@
 ;;-- end evil-ex
 
 (map! :map bibtex-style-mode-map
-      :n "|" #'general-insert-call
+      :n "|" #'librarian-insert-trigger
       )
 
 (after! bibtex

@@ -16,5 +16,3 @@
 (package! flx)
 (package! ivy-prescient)
 (package! prescient)
-
-(package! general-insert :recipe (:host github :repo "jgrey4296/misc-modes" :files ("minor-modes/general-insert/*.el") :local-repo "misc-modes"))

@@ -40,7 +40,7 @@
   (add-hook! 'python-ts-mode-hook
              #'abbrev-mode
              #'evil-collection-python-set-evil-shift-width
-             #'general-insert-minor-mode
+             #'librarian-insert-minor-mode
              #'hs-minor-mode
              #'maybe-py-test-minor-mode
              #'+jg-python-auto-hide
@@ -53,7 +53,7 @@
              #'doom--setq-tab-width-for-python-mode-h
              #'er/add-python-mode-expansions
              #'evil-collection-python-set-evil-shift-width
-             #'general-insert-minor-mode
+             #'librarian-insert-minor-mode
              #'maybe-py-test-minor-mode
              #'tree-sitter!
              )

@@ -47,9 +47,9 @@
              #'maybe-ert-test-minor-mode
              )
 
-  (after! general-insert
+  (after! librarian
     (add-hook! 'emacs-lisp-mode-hook
-               #'general-insert-minor-mode
+               #'librarian-insert-minor-mode
                )
     )
 

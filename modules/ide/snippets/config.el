@@ -65,7 +65,7 @@
     )
   (add-hook! 'yas-after-exit-snippet-hook #'+snippets--restore-smartparens-after-expand-h)
 
-  (add-hook 'snippet-mode-hook #'general-insert-minor-mode)
+  (add-hook 'snippet-mode-hook #'librarian-insert-minor-mode)
 
   ;;-- end hooks
 

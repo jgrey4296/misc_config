@@ -94,7 +94,7 @@
       )
 
 (map! :map (css-mode-map less-css-mode-map scss-mode-map sass-mode-map)
-      :n "|"  #'general-insert-call
+      :n "|"  #'librarian-insert-minor-mode
       :n "s j" #'counsel-css
 
       :localleader

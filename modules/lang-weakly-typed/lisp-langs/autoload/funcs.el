@@ -68,3 +68,13 @@
         (t (pp-buffer))
         )
   )
+
+;;;###autoload
+(defun +jg-lisp-dired-generate-autoloads ()
+  (interactive)
+  (let ((outfile (format "%s-autoloads.el"
+                         (f-base default-directory))
+                 ))
+    (loaddefs-generate default-directory outfile)
+    )
+  )

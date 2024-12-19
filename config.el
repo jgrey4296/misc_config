@@ -22,32 +22,32 @@
       )
 
 
-(speckler-setq! global 0
-                     custom-file                     (expand-file-name "emacs/custom.el" user-cache-dir)
-                     backup-directory-alist          (list `(".*" . ,(expand-file-name ".local/backups" doom-emacs-dir)))
-                     org-directory                   (f-canonical (expand-file-name "~/github/jgrey4296.github.io/orgfiles/"))
-                     pyvenv-default-virtual-env-name (expand-file-name "mamba/envs/" user-cache-dir)
-                     server-auth-dir                 (expand-file-name "secrets/emacs" user-config-dir)
-                     native-comp-eln-load-path       (list (expand-file-name "cache/eln" doom-local-dir))
-                     docs-dir                        (expand-file-name "docs" templates-loc)
-                     bookmark-default-file (pcase system-type
-                                             ('darwin (expand-file-name "emacs/bookmarks/bookmarks.mac" user-cache-dir))
-                                             ('gnu/linux (expand-file-name "emacs/bookmarks/bookmarks.linux" user-cache-dir))
-                                             )
-                     mu4e-maildir (or (getenv "MAILDIR") "mail/" user-cache-dir)
-                     auth-sources (list (expand-file-name "secrets/emacs/authinfo.asc" user-config-dir))
-                     ;; OSX: auth-sources ("~/.authinfo" macos-keychain-generic macos-keychain-internet "~/authinfo.gpg")
-                     emacs-lisp-c-src-dir (pcase system-type
-                                            ('darwin  "/Volumes/documents/github/_libs/lisp/emacs-src/src")
-                                            ('gnu/linux "/media/john/data/github/_libs/lisp/emacs/src")
-                                            )
-                     emacs-lisp-src-dir (pcase system-type
-                                          ('darwin "/Volumes/documents/github/_libs/lisp/emacs-src/lisp/")
-                                          ('gnu/linux "/media/john/data/github/_libs/lisp/emacs/lisp")
-                                          )
-                     find-function-C-source-directory emacs-lisp-c-src-dir
-                     find-library-source-path (+jg-lisp-setup-library-source)
-                     )
+(speckler-setq! global ()
+  custom-file                     (expand-file-name "emacs/custom.el" user-cache-dir)
+  backup-directory-alist          (list `(".*" . ,(expand-file-name ".local/backups" doom-emacs-dir)))
+  org-directory                   (f-canonical (expand-file-name "~/github/jgrey4296.github.io/orgfiles/"))
+  pyvenv-default-virtual-env-name (expand-file-name "mamba/envs/" user-cache-dir)
+  server-auth-dir                 (expand-file-name "secrets/emacs" user-config-dir)
+  native-comp-eln-load-path       (list (expand-file-name "cache/eln" doom-local-dir))
+  docs-dir                        (expand-file-name "docs" templates-loc)
+  bookmark-default-file (pcase system-type
+                          ('darwin (expand-file-name "emacs/bookmarks/bookmarks.mac" user-cache-dir))
+                          ('gnu/linux (expand-file-name "emacs/bookmarks/bookmarks.linux" user-cache-dir))
+                          )
+  mu4e-maildir (or (getenv "MAILDIR") "mail/" user-cache-dir)
+  auth-sources (list (expand-file-name "secrets/emacs/authinfo.asc" user-config-dir))
+  ;; OSX: auth-sources ("~/.authinfo" macos-keychain-generic macos-keychain-internet "~/authinfo.gpg")
+  emacs-lisp-c-src-dir (pcase system-type
+                         ('darwin  "/Volumes/documents/github/_libs/lisp/emacs-src/src")
+                         ('gnu/linux "/media/john/data/github/_libs/lisp/emacs/src")
+                         )
+  emacs-lisp-src-dir (pcase system-type
+                       ('darwin "/Volumes/documents/github/_libs/lisp/emacs-src/lisp/")
+                       ('gnu/linux "/media/john/data/github/_libs/lisp/emacs/lisp")
+                       )
+  find-function-C-source-directory emacs-lisp-c-src-dir
+  find-library-source-path (+jg-lisp-setup-library-source)
+  )
 
 (add-to-list 'load-path (expand-file-name "~/.local/modules"))
 
@@ -67,8 +67,8 @@
 (setq initial-major-mode #'emacs-lisp-mode)
 
 (add-hook! doom-first-buffer
-   #'delete-selection-mode
-   )
+           #'delete-selection-mode
+           )
 
 ;;-- end global modes
 
@@ -101,26 +101,26 @@
 ;;
 (setq warning-suppress-types '((bytecomp)))
 
-(speckler-setq! warnings 50
-                warning-suppress-log-types ;; Full Suppress
-                '((defvaralias losing-value woman-topic-history)
-                  (defvaralias losing-value rustic-indent-method-chain)
-                  (losing-value rustic-indent-method-chain)
-                  ;; ((python python-shell-completion-native-turn-on-maybe))
-                  ((org-element org-element-cache))
-                  ((flycheck syntax-checker))
-                  (error "Invalid search bound (wrong side of point)")
-                  )
-                warning-suppress-types ;; Don't Show, silently added to warnings buffer
-                '((defvaralias losing-value python-shell-interpreter)
-                  (defvaralias losing-value rustic-indent-method-chain)
-                  (org-element org-element-cache)
-                  (org-element org-element-parser)
-                  (bytecomp)
-                  (flycheck syntax-checker)
-                  ;; ((python python-shell-completion-native-turn-on-maybe))
-                  )
-                     )
+(speckler-setq! warnings ()
+  warning-suppress-log-types ;; Full Suppress
+  '((defvaralias losing-value woman-topic-history)
+    (defvaralias losing-value rustic-indent-method-chain)
+    (losing-value rustic-indent-method-chain)
+    ;; ((python python-shell-completion-native-turn-on-maybe))
+    ((org-element org-element-cache))
+    ((flycheck syntax-checker))
+    (error "Invalid search bound (wrong side of point)")
+    )
+  warning-suppress-types ;; Don't Show, silently added to warnings buffer
+  '((defvaralias losing-value python-shell-interpreter)
+    (defvaralias losing-value rustic-indent-method-chain)
+    (org-element org-element-cache)
+    (org-element org-element-parser)
+    (bytecomp)
+    (flycheck syntax-checker)
+    ;; ((python python-shell-completion-native-turn-on-maybe))
+    )
+  )
 ;;-- end warning suppression
 
 ;;-- command en/disabling
@@ -128,15 +128,15 @@
 (put 'list-threads 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
 
- (defun print-disabled-commands ()
-   "Enable all commands, reporting on which were disabled."
-   (interactive)
-   (with-output-to-temp-buffer "*Commands that were disabled*"
-     (mapatoms
-      (function
-       (lambda (symbol)
-         (when (get symbol 'disabled)
-           (put symbol 'disabled nil)
-           (prin1 symbol)
-           (princ "\n")))))))
+(defun print-disabled-commands ()
+  "Enable all commands, reporting on which were disabled."
+  (interactive)
+  (with-output-to-temp-buffer "*Commands that were disabled*"
+    (mapatoms
+     (function
+      (lambda (symbol)
+        (when (get symbol 'disabled)
+          (put symbol 'disabled nil)
+          (prin1 symbol)
+          (princ "\n")))))))
 ;;-- end command en/disabling

@@ -34,8 +34,9 @@
 
 ;;-- evil-escape
 (setq evil-escape-key-sequence "jk")
+
 (speckler-setq! evil-escape ()
-  evil-escape-state-blacklist '(multiedit emacs motion)
+  evil-escape-state-blacklist      '(multiedit emacs motion)
   evil-escape-major-mode-blacklist '(neotree-mode treemacs-mode vterm-mode ibuffer-mode image-mode)
   evil-escape-key-sequence "jk"
   evil-escape-delay 0.15

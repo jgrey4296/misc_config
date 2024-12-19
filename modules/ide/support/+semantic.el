@@ -33,14 +33,13 @@
 
   )
 
-(speckler-add! env-handling ()
+(speckler-add! lib-env ()
   '(semantic
-    (:support semantic
-              #'(lambda (state) (when (featurep 'semantic) (add-hook 'python-mode-hook #'semantic-mode)))
-              #'(lambda (state) (when (featurep 'semantic) (remove-hook 'python-mode-hook #'semantic-mode)))
-              )
+    :start #'(lambda (state &rest rest) (add-hook 'python-mode-hook #'semantic-mode))
+    :stop  #'(lambda (state &rest rest) (remove-hook 'python-mode-hook #'semantic-mode))
     )
   )
+)
 ;;-- Footer
 ;; Copyright (C) 2024 john
 ;;

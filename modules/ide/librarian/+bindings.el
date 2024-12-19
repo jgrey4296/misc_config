@@ -9,7 +9,7 @@
 
       (:prefix "s"
        ;; :desc "Look up in all docsets"       "K" #'+lookup/in-all-docsets
-       :desc "Look up in local docsets"     "k" #'librarian-docset-consult
+       :desc "Look up in local docsets"     "k" #'librarian-docsets-consult
        :desc "Look up online (w/ prompt)"   "O" #'librarian-online-select
        :desc "Look up online"               "o" #'librarian-online
        )
@@ -40,7 +40,7 @@
         :desc "Declaration"                :n    "D" #'librarian-declaration
         :desc "Implementations"            :n    "i" #'librarian-implementations
         :desc "Documentation"              :n    "k" #'librarian-documentation
-        :desc "Look up in local docsets"   :n    "K" #'librarian-in-docsets
+        :desc "Look up in local docsets"   :n    "K" #'librarian-docsets-consult
 
         :desc "Word(net)"                  :n    "w" #'helm-wordnet-suggest
         :desc "Word(nut)"                  :n    "W" #'wordnut-search

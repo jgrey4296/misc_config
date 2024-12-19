@@ -78,7 +78,9 @@
   '(rust-cargo ("Cargo.toml")  :project-file "Cargo.toml" :compilation-dir nil :configure nil :compile "cargo build" :test "cargo test" :install nil :package nil :run "cargo run")
   )
 
-(speckler-add! docsets '(rust-mode "Rust")) ()
+(speckler-add! docsets ()
+  '(rust-mode "Rust")
+  )
 
 (speckler-add! tree-sit-lang ()
   '(rust-mode . rust)

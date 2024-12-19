@@ -8,7 +8,7 @@
   val
   )
 
-(speckler-new! lookup-url (head blah)
+(speckler-new! lookup-url (key val)
   "Register url lookup providers"
   :target librarian--online--provider-url-alist
   :struct '(list (or ("name" "url") ("name" fn "url")))

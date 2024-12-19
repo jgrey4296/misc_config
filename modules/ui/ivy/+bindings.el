@@ -75,7 +75,6 @@
       [remap list-processes]                #'counsel-list-processes--with-state-normal
       [remap isearch-forward]               #'swiper
       [remap isearch-backward]              #'swiper
-      [remap evil-ex-search-forward]        #'swiper
       [remap swiper]                        #'counsel-grep-or-swiper
       [remap bookmark-jump]                 #'+jg-ivy-bookmark
 

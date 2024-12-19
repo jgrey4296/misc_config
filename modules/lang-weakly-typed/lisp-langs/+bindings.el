@@ -121,6 +121,10 @@
       :after jg-dired-bindings
       :prefix ("c f l" . "lisp")
       :desc "byte compile"        "c" #'dired-do-byte-compile
+
+      (:localleader
+       :desc "Generate Autoloads" "g a" #'+jg-lisp-dired-generate-autoloads
+       )
       )
 
 (map! :map ert-tests-minor-mode-map

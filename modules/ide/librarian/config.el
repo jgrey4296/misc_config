@@ -8,7 +8,7 @@
 (defer-load! jg-bindings-core "+bindings")
 
 (use-package! librarian
-  :commands (librarian-mode librarian-url global-librarian-mode)
+  :commands (librarian-mode librarian-url global-librarian-mode librarian-insert-minor-mode)
   :after transient-toggles
   :hook (doom-first-input . global-librarian-mode)
   :config

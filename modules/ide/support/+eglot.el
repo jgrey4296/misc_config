@@ -38,13 +38,10 @@
   (cons key val)
   )
 
-(speckler-add! env-handling ()
+(speckler-add! lib-env ()
   '(eglot
-    (:support eglot
-              #'(lambda (state) (when (featurep 'eglot) (add-hook 'python-mode-hook #'eglot-ensure)))
-              #'(lambda (state)
-                  (when (featurep 'eglot) (remove-hook 'python-mode-hook #'eglot-ensure)))
-              )
+    :start #'(lambda (state &rest rest) (add-hook 'python-mode-hook #'eglot-ensure))
+    :stop  #'(lambda (state) (remove-hook 'python-mode-hook #'eglot-ensure))
     )
   )
 

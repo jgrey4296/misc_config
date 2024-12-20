@@ -22,7 +22,7 @@
 
 (local-load! "+defs")
 (local-load! "+vars")
-(local-load! "+extra-configs")
+(local-load! "+extra")
 
 (defer-load! jg-bindings-total "+bindings")
 

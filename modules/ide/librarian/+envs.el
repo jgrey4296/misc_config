@@ -11,9 +11,9 @@
                :struct '(or librarian-env-handler plist)
                :setup (librarian-envs-clear!)
                :loop 'do
-               (if (librarian-envs-handler-p (car-safe val))
-                   (librarian-envs-register! (car val))
-                 (apply #'librarian-envs-register! :id key val))
+               (if (plistp val)
+                   (apply #'librarian-envs-register! key val)
+                 (librarian-envs-register! (car val)))
                )
 
 

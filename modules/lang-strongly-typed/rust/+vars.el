@@ -113,20 +113,6 @@
   )
 ;;-- end specs
 
-;;-- LSP
-(setq lsp-rust-analyzer-server-command '("rustup" "run" "nightly" "rust-analyzer")
-      rustic-analyzer-command '("rustup" "run" "nightly" "rust-analyzer")
-      lsp-rust-server 'rust-analyzer
-      )
-
-(setq rustic-lsp-client 'lsp-mode
-      rustic-indent-method-chain t
-      rust-prettify-symbols-alist nil ;; Conflicts with (and is redundant with) :ui ligatures
-      rustic-babel-format-src-block nil ;; Leave automatic reformatting to the :editor format module.
-      rustic-format-trigger nil
-      )
-;;-- end LSP
-
 ;;-- general-insert
 (librarian-insert-register-processor 'conf-toml-mode "rust-dependencies" #'insert)
 

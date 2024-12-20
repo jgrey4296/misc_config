@@ -67,13 +67,14 @@
   )
 
 (speckler-add! lib-env ()
-               `(flycheck
-                 :setup    #'(lambda (state &rest rest) nil)
-                 :start    #'(lambda (state &rest rest) nil)
-                 :stop     #'(lambda (state &rest rest) nil)
-                 :teardown #'(lambda (state &rest rest) nil)
-                 )
-               )
+  `(flycheck
+    :setup    #'(lambda (state &rest rest) nil)
+    :start    #'(lambda (state &rest rest) (add-hook 'prog-mode-hook #'flycheck-mode))
+    :stop     #'(lambda (state &rest rest) (remove-hook 'prog-mode-hook #'flycheck-mode))
+    :teardown #'(lambda (state &rest rest) nil)
+    :modeline #'(lambda (state &rest rest) "FlyCheck")
+    )
+  )
 
 (speckler-add! popup ()
   '(flycheck

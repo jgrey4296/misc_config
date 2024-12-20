@@ -85,77 +85,77 @@
                             #'+jg-ide-enable-lsp-client)
   )
 
+(transient-make-subgroup! jg-lsp-session-control "1"
+                          "LSP Session Control Options"
+                          :desc "|| Session Control ||"
+                          [
+                           [
+                            ("0" "Describe Session" lsp-describe-session)
+                            (transient-macro-call-lsp-clients)
+                            (transient-macro-call-lsp-list-blacklist)
+                            ]
+                           [(transient-macro-call-lsp-remove)
+                            (transient-macro-call-lsp-disable-client)
+                            (transient-macro-call-lsp-unblacklist)
+                            ]
+                           [(transient-macro-call-lsp-add)
+                            (transient-macro-call-lsp-enable-client)]
+                           ]
+                          [ [
+                             (transient-macro-call-lsp-select)
+                             (transient-macro-call-lsp-debug)
+                             ]
+                            [
+                             (transient-macro-call-lsp-start)
+                             (transient-macro-call-lsp-restart)
+                             ]
+                            [
+                             (transient-macro-call-lsp-disconnect)
+                             (transient-macro-call-lsp-shutdown)
+                             ] ]
+                          )
+
+(transient-make-subgroup! jg-lsp-toggle "l"
+                          "Main controller for ui settings"
+                          :desc "|| LSP        ||"
+                          [[ jg-lsp-session-control ]]
+                          [[ "View Control"
+                             (transient-macro-toggle-lsp-headerline-breadcrumb-mode)
+                             (transient-macro-toggle-lsp-lens-mode)
+                             (transient-macro-call-lsp-auto-signature)
+                             (transient-macro-toggle-lsp-ui-sideline-mode)
+                             (transient-macro-toggle-lsp-ui-doc-mode)
+                             (transient-macro-toggle-lsp-doc-childframe)
+                             ]
+                           [ "Diagnostics"
+                             (transient-macro-toggle-lsp-modeline-diagnostics-mode)
+                             (transient-macro-toggle-lsp-modeline-code-actions-mode)
+                             " "
+                             "Toggles"
+                             (transient-macro-toggle-lsp-doc-hover)
+                             (transient-macro-toggle-lsp-completion-mode)
+                             (transient-macro-toggle-lsp-diagnostics-mode)
+                             (transient-macro-toggle-tree-sitter-hl-mode)
+                             ]
+                           [ "Settings"
+                             (transient-macro-call-lsp-on-type-formatting)
+                             (transient-macro-toggle-lsp-treemacs-sync-mode)
+                             (transient-macro-call-lsp-highlighting)
+
+                             (transient-macro-toggle-lsp-keep-alive)
+                             (transient-macro-call-lsp-trace-io)
+                             ]
+                           ]
+                          )
 ;;;###autoload
 (defun +jg-ide-build-lsp-transient ()
-  (transient-make-subgroup! jg-lsp-session-control "1"
-                            "LSP Session Control Options"
-                            :desc "|| Session Control ||"
-                            [
-                             [
-                              ("0" "Describe Session" lsp-describe-session)
-                              (transient-macro-call-lsp-clients)
-                              (transient-macro-call-lsp-list-blacklist)
-                              ]
-                             [(transient-macro-call-lsp-remove)
-                              (transient-macro-call-lsp-disable-client)
-                              (transient-macro-call-lsp-unblacklist)
-                              ]
-                             [(transient-macro-call-lsp-add)
-                              (transient-macro-call-lsp-enable-client)]
-                             ]
-                            [ [
-                               (transient-macro-call-lsp-select)
-                               (transient-macro-call-lsp-debug)
-                               ]
-                              [
-                               (transient-macro-call-lsp-start)
-                               (transient-macro-call-lsp-restart)
-                               ]
-                              [
-                               (transient-macro-call-lsp-disconnect)
-                               (transient-macro-call-lsp-shutdown)
-                               ] ]
-                            )
-
-  (transient-make-subgroup! jg-lsp-toggle "l"
-                            "Main controller for ui settings"
-                            :desc "|| LSP        ||"
-                            [[ jg-lsp-session-control ]]
-                            [[ "View Control"
-                               (transient-macro-toggle-lsp-headerline-breadcrumb-mode)
-                               (transient-macro-toggle-lsp-lens-mode)
-                               (transient-macro-call-lsp-auto-signature)
-                               (transient-macro-toggle-lsp-ui-sideline-mode)
-                               (transient-macro-toggle-lsp-ui-doc-mode)
-                               (transient-macro-toggle-lsp-doc-childframe)
-                               ]
-                             [ "Diagnostics"
-                               (transient-macro-toggle-lsp-modeline-diagnostics-mode)
-                               (transient-macro-toggle-lsp-modeline-code-actions-mode)
-                               " "
-                               "Toggles"
-                               (transient-macro-toggle-lsp-doc-hover)
-                               (transient-macro-toggle-lsp-completion-mode)
-                               (transient-macro-toggle-lsp-diagnostics-mode)
-                               (transient-macro-toggle-tree-sitter-hl-mode)
-                               ]
-                             [ "Settings"
-                               (transient-macro-call-lsp-on-type-formatting)
-                               (transient-macro-toggle-lsp-treemacs-sync-mode)
-                               (transient-macro-call-lsp-highlighting)
-
-                               (transient-macro-toggle-lsp-keep-alive)
-                               (transient-macro-call-lsp-trace-io)
-                               ]
-                             ]
-                            )
 
   (pcase (transient-get-suffix 'jg-toggle-main '(1 -1))
     ((and `[1 transient-columns nil ,x]
           (guard (< (length x) 4)))
      (transient-append-suffix 'jg-toggle-main
        '(1 -1 -1) jg-lsp-toggle))
-    (t (transient-append-suffix 'jg-toggle-main
+    (_ (transient-append-suffix 'jg-toggle-main
          '(1 -1) [ jg-lsp-toggle ]))
     )
 

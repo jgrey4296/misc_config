@@ -5,7 +5,7 @@
 (local-load! "+spec-defs")
 (local-load! "+defs")
 (local-load! "+vars")
-(local-load! "+extra-config")
+(local-load! "+extra")
 
 (defer-load! "+envs" "+lsp" "+cython")
 
@@ -92,22 +92,33 @@
   (setq anaconda-mode-installation-directory (concat doom-data-dir "anaconda/")
         anaconda-mode-eldoc-as-single-line t)
   (speckler-add! lib-env ()
-                 `(anaconda
-                   :setup nil
-                   :start #'(lambda (state &rest rest) (add-hook 'python-mode-hook #'anaconda-mode))
-                   :stop  #'(lambda (state &rest rest)
-                              (remove-hook 'python-mode-hook #'anaconda-mode)
-                              (anaconda-mode-stop))
-                   :teardown #'(lambda (state &rest rest)
-                                 (anaconda-mode-stop)
-                                 (anaconda-eldoc-mode -1))
-                   )
-                 )
+    `(anaconda
+      :setup nil
+      :start #'(lambda (state &rest rest) (add-hook 'python-mode-hook #'anaconda-mode))
+      :stop  #'(lambda (state &rest rest)
+                 (remove-hook 'python-mode-hook #'anaconda-mode)
+                 (anaconda-mode-stop))
+      :teardown #'(lambda (state &rest rest)
+                    (anaconda-mode-stop)
+                    (anaconda-eldoc-mode -1))
+      :modeline #'(lambda (state &rest rest) "AnaConda")
+      )
+    )
+  (speckler-add! lookup-handler ()
+  `(anaconda-mode
+    :definition    +jg-conda-find-defs
+    :references    +jg-conda-find-references
+    :documentation +jg-conda-show-doc
+    :assignments   +jg-conda-find-assignments
+    )
+  )
+
   :config
   (add-hook! 'anaconda-mode-hook
              #'anaconda-eldoc-mode
              #'evil-normalize-keymaps
              )
+
   )
 
 (use-package! python-pytest

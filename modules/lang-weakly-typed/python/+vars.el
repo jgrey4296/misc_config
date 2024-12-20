@@ -80,31 +80,6 @@
   )
 ;;-- end smartparens
 
-;;-- lsp
-(speckler-setq! lsp-py ()
-  ;; Pyright
-  lsp-pyright-extra-paths #'[]
-  lsp-pyright-venv-path conda-env-home-directory
-  lsp-pyright-log-level "Information" ;; Error Warning Information Trace
-  lsp-pyright-typechecking-mode "basic"
-  ;; Ruff
-  lsp-ruff-lsp-advertize-fix-all            nil
-  lsp-ruff-lsp-advertize-organize-imports   t
-  lsp-ruff-lsp-show-notifications           "always"
-  lsp-ruff-lsp-log-level                    "info"
-  lsp-ruff-lsp-server-command               '("ruff-lsp")
-  lsp-ruff-lsp-python-path                  "python3"
-  lsp-ruff-lsp-import-strategy              "fromEnvironment"
-  lsp-ruff-lsp-ruff-args                    [ ]
-  lsp-ruff-lsp-ruff-path                    ["ruff"]
-  ;; pylsp
-  lsp-pylsp-configuration-sources []
-  lsp-pylsp-server-command '("pylsp")
-  lsp-pylsp-plugins-flake8-enabled nil
-  )
-
-;;-- end lsp
-
 ;;-- babel
 ;; (after! (ob python)
 ;;   (setq org-babel-python-command
@@ -246,14 +221,6 @@
   '(python
     ("Python" "https://docs.python.org/3/search.html?q=%s&check_keywords=yes&area=default")
     ("Pypi"   "https://pypi.org/search/?q=%s")
-    )
-  )
-(speckler-add! lookup-handler ()
-  `(anaconda-mode
-    :definition    +jg-conda-find-defs
-    :references    +jg-conda-find-references
-    :documentation +jg-conda-show-doc
-    :assignments   +jg-conda-find-assignments
     )
   )
 (speckler-add! company ()

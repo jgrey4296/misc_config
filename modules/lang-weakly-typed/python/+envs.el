@@ -71,17 +71,25 @@
 (use-package! micromamba
   :commands (micromamba-activate micromamba-deactivate)
   :init
+  (defun jg-py-mamba-start-env (state &rest rest)
+    (jg-py--enter-env-update-paths
+     (librarian--envs-loc-root (librarian--envs-state-loc state)))
+    (micromamba-activate (car rest))
+    (setenv "CONDA_DEFAULT_ENV" (car rest))
+    )
+  (defun jg-py-mamba-stop-env (state &rest rest)
+    (jg-py--exit-env-update-paths
+     (librarian--envs-loc-root (librarian--envs-state-loc state)))
+    (micromamba-deactivate)
+    (setenv "CONDA_DEFAULT_ENV" nil)
+    )
+
   (speckler-add! lib-env ()
     `(mamba
-      :start #'(lambda (state &rest rest)
-                 (jg-py--enter-env-update-paths (librarian--envs-loc-root (librarian--envs-state-loc state)))
-                 (micromamba-activate (car rest))
-                 (setenv "CONDA_DEFAULT_ENV" (car rest))
-                 )
-      :stop #'(lambda (state &rest rest)
-                (jg-py--exit-env-update-paths (librarian--envs-loc-root (librarian--envs-state-loc state)))
-                (micromamba-deactivate)
-                (setenv "CONDA_DEFAULT_ENV" nil))
+      :lang 'python
+      :start #'jg-py-mamba-start-env
+      :stop  #'jg-py-mamba-stop-env
+      :modeline #'(lambda (state &rest args) (format "Mamba:%s" (car-safe args)))
       )
     )
   )

@@ -31,7 +31,8 @@
           (evil-collection-define-key state 'code-review-mode-map evil-binding fn))))
     )
   (speckler-add! evil-initial ()
-    '(code-review-mode evil-default-state))
+    '(code-review-mode evil-default-state)
+    )
   :config
   (transient-append-suffix 'magit-merge "i"
     '("y" "Review pull request" +magit/start-code-review))

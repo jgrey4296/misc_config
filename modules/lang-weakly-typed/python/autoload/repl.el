@@ -28,15 +28,11 @@ falling back on searching your PATH."
   (unless python-shell--interpreter
     (user-error "`python-shell-interpreter' isn't set"))
 
-  (unless env-handling-state
-    (env-handling-go!))
-
   (let ((cmd (+jg-python-shell-calculate-command))
         (dedicated (bound-and-true-p python-shell-dedicated))
         (default-directory (projectile-project-root))
         )
-    (process-buffer (run-python cmd dedicated t)
-                    )
+    (process-buffer (run-python cmd dedicated t))
     )
   )
 

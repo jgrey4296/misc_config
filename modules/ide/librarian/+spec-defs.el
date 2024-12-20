@@ -20,14 +20,7 @@
   "Register documentation lookup handlers.
 Handlers
  "
-  :struct '(:definition      fn
-            :implementation  fn
-            :type-definition fn
-            :references      fn
-            :documentation   fn
-            :file            fn
-            :assignments     fn
-            :declaration     fn)
+  :struct '(librarian--doc-valid-keywords fn)
   (setq-local librarian--doc-assignments-functions      (cl-remove-duplicates (append (ensure-list (plist-get val :assignments))        librarian--doc-assignments-functions))
               librarian--doc-declaration-functions      (cl-remove-duplicates (append (ensure-list (plist-get val :declaration))        librarian--doc-declaration-functions))
               librarian--doc-definition-functions       (cl-remove-duplicates (append (ensure-list (plist-get val :definition))         librarian--doc-definition-functions))

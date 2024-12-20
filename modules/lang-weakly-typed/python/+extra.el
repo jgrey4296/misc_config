@@ -7,7 +7,6 @@
 ;;-- end Header
 
 (use-package! company-anaconda
-  :when (modulep! :ide company)
   :after anaconda-mode
   :commands 'company-anaconda
   )

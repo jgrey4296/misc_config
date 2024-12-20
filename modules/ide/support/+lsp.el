@@ -109,7 +109,7 @@
   )
 
 (use-package! lsp-ui
-  :commands (lsp-ui-doc-mode lsp-ui-imenu lsp-ui-sideline)
+  :commands (lsp-ui-doc-mode lsp-ui-imenu lsp-ui-sideline-mode)
   )
 
 (use-package! lsp-ivy
@@ -119,12 +119,11 @@
 
 (speckler-add! lib-env ()
   `(lsp
-    :setup    #'(lambda (state &rest args) (require 'lisp-mode))
-    :stop     #'(lambda (state &rest args)
-                  (when lsp--last-active-workspaces
-                    (lsp-workspace-shutdown (car lsp--last-active-workspaces))))
-    :teardown #'(lambda (state &rest args)
-                  (lsp-disconnect))
+    :setup    #'(lambda (state &rest args) (require 'lsp-mode))
+    :stop     #'(lambda (state &rest args) (when lsp--last-active-workspaces
+                                             (lsp-workspace-shutdown (car lsp--last-active-workspaces))))
+    :teardown #'(lambda (state &rest args) (lsp-disconnect))
+    :modeline #'(lambda (state &rest args) "LSP")
     )
   )
 

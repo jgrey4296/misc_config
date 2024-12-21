@@ -7,31 +7,41 @@
 ;;-- end Header
 
 ;; Wrap
-(progn
-  (transient-make-mode-toggle! visual-line-mode  "Visual line" "l")
-  (transient-make-mode-toggle! +word-wrap-mode   "Word-wrap"   "w")
-  (transient-make-mode-toggle! auto-fill-mode    "Auto-fill"   "f" nil auto-fill-function)
+(transient-toggle-mode! visual-line-mode ()
+  "Visual line"
+  :key "l"
+  )
+(transient-toggle-mode! +word-wrap-mode ()
+  "Word-wrap"
+  :key "w"
+  )
+(transient-toggle-mode! auto-fill-mode ()
+  "Auto-fill"
+  :key "f"
+  :mode-var auto-fill-function
+  )
 
-  (transient-make-call! truncate-lines "t"
-                        (format "%3s : Truncate lines" (fmt-as-bool! truncate-lines))
-                        (toggle-truncate-lines)
-                        )
-
+(transient-call! truncate-lines ()
+  "Truncate Lines"
+  :key "t"
+  :desc (format "%3s : Truncate lines" (fmt-as-bool! truncate-lines))
+  (toggle-truncate-lines)
   )
 
 ;;;###autoload
 (defun +jg-ui-build-wrap-transient ()
-  (transient-make-subgroup! jg-toggle-wrap-transient "w"
-                          "For controlling ui wrap settings"
-                          :desc "|| Wrapping   ||"
-                          [[
-                            (transient-macro-toggle-auto-fill-mode)
-                            (transient-macro-toggle-visual-line-mode)
-                            (transient-macro-toggle-+word-wrap-mode)
-                            (transient-macro-call-truncate-lines)
-                            ]
-                           ]
-                          )
+  (transient-subgroup! jg-toggle-wrap-transient ()
+    "For controlling ui wrap settings"
+    :key "w"
+    :desc "|| Wrapping   ||"
+    [[:description "|| Wrapping ||"
+      (transient-macro-toggle-auto-fill-mode)
+      (transient-macro-toggle-visual-line-mode)
+      (transient-macro-toggle-+word-wrap-mode)
+      (transient-macro-call-truncate-lines)
+      ]
+     ]
+    )
 
   (pcase (transient-get-suffix 'jg-toggle-main '(1 -1))
     ((and `[1 transient-columns nil ,x]

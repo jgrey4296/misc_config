@@ -5,57 +5,84 @@
 ;;
 ;; See footer for licenses/metadata/notes as applicable
 ;;-- end Header
+(require 'display-fill-column-indicator)
+(require 'glasses)
 
 ;; Guides
-(progn
-  (transient-make-mode-toggle! global-prettify-symbols-mode  "Pretty Symbols" "p")
-
-  (transient-make-mode-toggle! display-fill-column-indicator-mode  (format "Columns : %-3s" fill-column) "c")
-  (transient-make-mode-toggle! highlight-indent-guides-mode        "Indents"      "i")
-  (transient-make-mode-toggle! ruler-mode                          "Ruler"        "r")
-  (transient-make-mode-toggle! whitespace-mode                     "Whitespace"   "w")
-  (transient-make-mode-toggle! display-line-numbers-mode           "Line Numbers" "n")
-  (transient-make-mode-toggle! glasses-mode                        "Glasses" "g")
-
-  ;;
-  (transient-make-call!   spelling "s"
-                          (transient-title-mode-formatter "Spelling" flyspell-mode "s")
-                          (flyspell-mode 'toggle)
-                          (writegood-mode (if flyspell-mode 1 -1))
-                          )
-
+(transient-toggle-hook! fill-column-indicator ()
+  ""
+  :hook 'prog-mode
+  :fn #'display-fill-column-indicator-mode
+  :desc (format "Columns : %-3s" fill-column)
+  :key "c"
   )
+(transient-toggle-hook! indent-guides ()
+  "Indents"
+  :hook 'prog-mode
+  :fn #'highlight-indent-guides-mode
+  :key "i"
+  )
+(transient-toggle-mode! global-prettify-symbols-mode ()
+  "Pretty Symbols"
+  :key "p"
+  )
+(transient-toggle-mode! ruler-mode ()
+  "Ruler"
+  :key "r"
+  )
+(transient-toggle-mode! whitespace-mode  ()
+  "Whitespace"
+  :key "w"
+  )
+(transient-toggle-mode! display-line-numbers-mode ()
+  "Line Numbers"
+  :key "n"
+  )
+(transient-toggle-mode! glasses-mode ()
+  "Glasses"
+  :key "g"
+  )
+
+(transient-call! spelling ()
+  ""
+  :key "s"
+  :desc (transient-mode-fmt "Spelling" flyspell-mode "s")
+  (flyspell-mode 'toggle)
+  (writegood-mode (if flyspell-mode 1 -1))
+  )
+
 
 ;;;###autoload
 (defun +jg-ui-build-guides-transient ()
-  (transient-make-subgroup! jg-toggle-guides-transient "g"
-                          "For controlling ui guide settings"
-                          :desc "|| Guides     ||"
-                          [:description "|| Guides     ||"
-                           [
-                            (transient-macro-toggle-display-fill-column-indicator-mode)
-                            (transient-macro-toggle-highlight-indent-guides-mode)
-                            (transient-macro-toggle-display-line-numbers-mode)
-                            ]
-                           [
-                            (transient-macro-toggle-ruler-mode)
-                            (transient-macro-toggle-whitespace-mode)
-                            (transient-macro-call-spelling)
-                            ]
-                           [
-                            (transient-macro-toggle-glasses-mode)
-                            ]
-                           ]
-                          )
+  (transient-subgroup! jg-toggle-guides-transient ()
+    "For controlling ui guide settings"
+    :key "g"
+    :desc "|| Guides     ||"
+    [:description "|| Guides     ||"
+                  [
+                   (transient-macro-toggle-hook-fill-column-indicator)
+                   (transient-macro-toggle-hook-indent-guides)
+                   (transient-macro-toggle-display-line-numbers-mode)
+                   ]
+                  [
+                   (transient-macro-toggle-ruler-mode)
+                   (transient-macro-toggle-whitespace-mode)
+                   (transient-macro-call-spelling)
+                   ]
+                  [
+                   (transient-macro-toggle-glasses-mode)
+                   ]
+                  ]
+    )
 
   (pcase (transient-get-suffix 'jg-toggle-main '(1 -1))
-         ((and `[1 transient-columns nil ,x]
-               (guard (< (length x) 4)))
-          (transient-append-suffix 'jg-toggle-main
-              '(1 -1 -1) jg-toggle-guides-transient))
-         (_ (transient-append-suffix 'jg-toggle-main
-            '(1 -1) [ jg-toggle-guides-transient ]))
-      )
+    ((and `[1 transient-columns nil ,x]
+          (guard (< (length x) 4)))
+     (transient-append-suffix 'jg-toggle-main
+       '(1 -1 -1) jg-toggle-guides-transient))
+    (_ (transient-append-suffix 'jg-toggle-main
+         '(1 -1) [ jg-toggle-guides-transient ]))
+    )
   )
 
 ;;-- Footer

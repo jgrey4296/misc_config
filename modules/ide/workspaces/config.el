@@ -140,10 +140,6 @@
   (add-hook 'jg-workspace-transient-hook #'jg-workspace-build-zimmerframe-transient)
   )
 
-(use-package! related-files
-  :commands make-related!
-  )
-
 (use-package! projectile
   :commands (projectile-project-root
              projectile-project-name

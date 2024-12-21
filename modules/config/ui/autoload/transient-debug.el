@@ -7,42 +7,58 @@
 ;;-- end Header
 
 ;; Debug
-(progn
-  (transient-make-call! debug-on-error "e"
-                        (transient-title-mode-formatter "Debug on Error" debug-on-error "e")
-                        (toggle-debug-on-error))
-  (transient-make-call! debug-on-var "v"
-                        (transient-title-mode-formatter "Debug on Var" (debug--variable-list) "v")
-                        (call-interactively #'debug-on-variable-change))
-  (transient-make-call! cancel-debug-on-var "V"
-                        "Cancel All Var Debugs"
-                        (cancel-debug-on-variable-change))
-  (transient-make-call! debug-func "f"
-                        (transient-title-mode-formatter "Debug on Fn" (debug--function-list) "f")
-                        (call-interactively #'debug-on-entry))
-  (transient-make-call! cancel-debug-func "F"
-                        "Cancel All Function Debugs"
-                        (cancel-debug-on-entry))
+(transient-call! debug-on-error ()
+  ""
+  :key "e"
+  :desc (transient-mode-fmt "Debug on Error" debug-on-error "e")
+  (toggle-debug-on-error)
+  )
+(transient-call! debug-on-var ()
+  ""
+  :key "v"
+  :desc (transient-mode-fmt "Debug on Var" (debug--variable-list) "v")
+  :interactive t
+  #'debug-on-variable-change
+  )
+(transient-call! cancel-debug-on-var ()
+  ""
+  :key "V"
+  :desc "Cancel All Var Debugs"
+  (cancel-debug-on-variable-change)
+  )
+(transient-call! debug-func ()
+  ""
+  :key "f"
+  :desc (transient-mode-fmt "Debug on Fn" (debug--function-list) "f")
+  :interactive t
+  #'debug-on-entry
+  )
+(transient-call! cancel-debug-func ()
+  ""
+  :key "F"
+  :desc "Cancel All Function Debugs"
+  (cancel-debug-on-entry)
   )
 
 ;;;###autoload
 (defun +jg-ui-build-debugs-transient ()
-  (transient-make-subgroup! jg-toggle-debugs-transient "d"
-                            " debug toggles "
-                            :desc  "|| Debug      ||"
-                            [:description "|| Debug      ||"
-                                          [
-                                           (transient-macro-call-debug-on-error)
-                                           (transient-macro-call-debug-on-var)
-                                           (transient-macro-call-debug-func)
-                                           ]
-                                          [
-                                           " "
-                                           (transient-macro-call-cancel-debug-on-var)
-                                           (transient-macro-call-cancel-debug-func)
+  (transient-subgroup! jg-toggle-debugs-transient ()
+    " debug toggles "
+    :key "d"
+    :desc  "|| Debug      ||"
+    [:description "|| Debug      ||"
+                  [
+                   (transient-macro-call-debug-on-error)
+                   (transient-macro-call-debug-on-var)
+                   (transient-macro-call-debug-func)
+                   ]
+                  [
+                   " "
+                   (transient-macro-call-cancel-debug-on-var)
+                   (transient-macro-call-cancel-debug-func)
 
-                                           ] ]
-                            )
+                   ] ]
+    )
 
   (transient-append-suffix 'jg-toggle-main
     '(2 0 -1)
@@ -55,7 +71,7 @@
      (transient-append-suffix 'jg-toggle-main
        '(1 -1 -1)  jg-toggle-debugs-transient))
     (_ (transient-append-suffix 'jg-toggle-main
-       '(1 -1)  [ jg-toggle-debugs-transient ]))
+         '(1 -1)  [ jg-toggle-debugs-transient ]))
     )
   )
 

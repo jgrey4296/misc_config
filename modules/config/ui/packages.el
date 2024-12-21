@@ -26,10 +26,12 @@
 (package! palette-mode     :recipe (:host github :repo "jgrey4296/misc-modes" :files ("major-modes/palette-mode/*.el") :local-repo "misc-modes"))
 
 (package! transient :recipe (:host github :repo "magit/transient" :branch "main"))
-(package! transient-macros :recipe (:host github :repo "jgrey4296/jg-el-macros" :files ("transient-macros.el") :local-repo "jg-el-macros"))
 
 (package! treemacs)
 (package! treemacs-evil)
 (package! treemacs-persp)
 (package! treemacs-projectile)
 (package! neotree)
+
+
+(package! elide-head)

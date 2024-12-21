@@ -7,34 +7,72 @@
 (defvar jg-transient-toggles-hook nil)
 
 ;; Top Level Toggle
-(progn
 
-  (transient-make-mode-toggle! global-company-mode           "AutoComplete"   "C")
-  (transient-make-mode-toggle! read-only-mode                "Read Only"      "r" nil buffer-read-only)
-  (transient-make-mode-toggle! global-flycheck-mode          "Flycheck"       "f")
+(transient-toggle-mode! global-company-mode ()
+  "AutoComplete"
+  :key "C"
+  )
+(transient-toggle-mode! read-only-mode ()
+  "Read Only"
+  :key "r"
+  :mode-var buffer-read-only
+  )
+;; TODO remove this, use envs hooks
+(transient-toggle-mode! global-flycheck-mode  ()
+  "Flycheck"
+  :key "f"
+  )
 
-  (transient-make-call!   evil-embrace "E"
-                          (transient-title-mode-formatter "Evil-Embrace" (advice-member-p #'evil-embrace-evil-surround-region 'evil-surround-region) "e")
-                          (if (advice-member-p #'evil-embrace-evil-surround-region 'evil-surround-region)
-                              (evil-embrace-disable-evil-surround-integration)
-                            (evil-embrace-enable-evil-surround-integration))
-                          )
-  (transient-make-call!   run-spec-handlers "!"
-                          (propertize "Run Spec Handlers" 'face 'transient-heading)
-                          (speckler-go!)
-                          )
-  (transient-make-call!   general-insert-rebuild-cache "@"
-                          (propertize    "Clear General-Insert Cache" 'face 'transient-heading)
-                          (librarian-insert-clear-caches)
-                          (message "Cache Rebuilt")
-                          )
-  (transient-make-mode-toggle! global-hl-line-mode            "Hl-line"       "h")
-  (transient-make-mode-toggle! hide-mode-line-mode            "Hide Modeline" "m")
-  (transient-make-mode-toggle! global-code-shy-minor-mode     "Shy Code"      "H")
-  (transient-make-mode-toggle! global-centered-cursor-mode    "Center Cursor" "c")
-  (transient-make-mode-toggle! global-highlight-changes-mode  "Show Changes"  "x")
-  (transient-make-mode-toggle! smartparens-global-mode        "SmartParens"   "s")
-  (transient-make-mode-toggle! abbrev-mode                    "Abbrev"        "a")
+(transient-call! evil-embrace ()
+  "Evil-Embrace"
+  :key "E"
+  :desc (transient-mode-fmt "Evil-Embrace"
+                            (not (null (advice-member-p #'evil-embrace-evil-surround-region 'evil-surround-region)))
+                            "e")
+  (if (advice-member-p #'evil-embrace-evil-surround-region 'evil-surround-region)
+      (evil-embrace-disable-evil-surround-integration)
+    (evil-embrace-enable-evil-surround-integration))
+  )
+(transient-call! run-spec-handlers ()
+  "Run Handlers"
+  :key "!"
+  :desc (propertize "Run Spec Handlers" 'face 'transient-heading)
+  (speckler-go!)
+  )
+(transient-call! general-insert-rebuild-cache ()
+  ""
+  :key "@"
+  :desc (propertize "Clear General-Insert Cache" 'face 'transient-heading)
+  (librarian-insert-clear-caches)
+  (message "Cache Rebuilt")
+  )
+(transient-toggle-mode! global-hl-line-mode ()
+  "Hl-line"
+  :key "h"
+  )
+(transient-toggle-mode! hide-mode-line-mode ()
+  "Hide Modeline"
+  :key "m"
+  )
+(transient-toggle-mode! global-code-shy-minor-mode ()
+  "Shy Code"
+  :key "H"
+  )
+(transient-toggle-mode! global-centered-cursor-mode ()
+  "Center Cursor"
+  :key "c"
+  )
+(transient-toggle-mode! global-highlight-changes-mode ()
+  "Show Changes"
+  :key "x"
+  )
+(transient-toggle-mode! smartparens-global-mode ()
+  "SmartParens"
+  :key "s"
+  )
+(transient-toggle-mode! abbrev-mode ()
+  "Abbrev"
+  :key "a"
   )
 
 ;;;###autoload

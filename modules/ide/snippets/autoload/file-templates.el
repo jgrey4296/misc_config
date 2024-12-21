@@ -49,7 +49,7 @@ evil is loaded and enabled)."
                  (template (cl-find trigger (yas--all-templates (yas--get-snippet-tables mode)) :key #'yas--template-key :test #'equal)))
         (yas-expand-snippet (yas--template-content template)))
       (when (and (featurep 'evil) evil-local-mode)
-        (evil-initialize-state 'insert))))
+        (evil-initialize-state))))
   )
 
 ;;;###autoload

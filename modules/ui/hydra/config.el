@@ -28,6 +28,5 @@
   :after hydra-macros
   )
 
-(use-package! hydra-macros :defer t)
 
 ;;; config.el ends here

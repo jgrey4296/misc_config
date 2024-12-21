@@ -5,61 +5,96 @@
 ;;
 ;; See footer for licenses/metadata/notes as applicable
 ;;-- end Header
+(require 'elide-head)
 
 ;; Visual
-(progn
-  (transient-make-mode-toggle! global-prettify-symbols-mode   "Pretty Symbols" "p")
-  (transient-make-mode-toggle! hl-line-mode                   "Highlight-line"    "h")
-  (transient-make-mode-toggle! evil-goggles-mode              "Evil-goggles"      "g")
-  (transient-make-mode-toggle! highlight-parentheses-mode     "Higlight-wrappers" "w")
-  (transient-make-mode-toggle! rainbow-mode                   "Rainbow Colours"   "r")
-  (transient-make-mode-toggle! highlight-changes-visible-mode "Highlight-changes" "x")
-  (transient-make-mode-toggle! reveal-mode                    "Reveal Invisible" "I")
-  (transient-make-mode-toggle! auto-highlight-symbol-mode     "Auto Highlight Symbol" "H")
+(transient-toggle-mode! global-prettify-symbols-mode ()
+  "Pretty Symbols"
+  :key "p"
+  )
+(transient-toggle-mode! hl-line-mode ()
+  "Highlight-line"
+  :key "h"
+  )
+(transient-toggle-mode! evil-goggles-mode ()
+  "Evil-goggles"
+  :key "g"
+  )
+(transient-toggle-mode! highlight-parentheses-mode ()
+  "Higlight-wrappers"
+  :key "w"
+  )
+(transient-toggle-mode! rainbow-mode ()
+  "Rainbow Colours"
+  :key "r"
+  )
+(transient-toggle-mode! highlight-changes-visible-mode ()
+  "Highlight-changes"
+  :key "x"
+  )
+(transient-toggle-mode! reveal-mode ()
+  "Reveal Invisible"
+  :key "I"
+  )
+(transient-toggle-mode! auto-highlight-symbol-mode ()
+  "Auto Highlight Symbol"
+  :key "H"
+  )
 
-  ;;
-  (transient-make-call! elide-head "e"
-                        (transient-title-mode-formatter "Elide Head" (if (boundp 'elide-head-overlay) elide-head-overlay "-1") "e")
-                        (if (boundp 'elide-head-overlay) (elide-head-show) (elide-head))
-                        )
+;;
+(transient-call! elide-head ()
+  "Elide Head"
+  :key "e"
+  :desc (transient-mode-fmt "Elide Head" elide-head-mode "e")
+  (elide-head-mode 'toggle)
+  )
 
-  (transient-make-call! link-display "l"
-                        (transient-title-mode-formatter "LinkDisplay" org-link-descriptive "l")
-                        (org-toggle-link-display))
-  (transient-make-call!  quickscope "s"
-                         (transient-title-mode-formatter "Quickscope" evil-quickscope-always-mode "s")
-                         (evil-quickscope-always-mode 'toggle)
-                         (evil-quickscope-mode (if evil-quickscope-always-mode -1 1))
-                         )
+(transient-call! link-display ()
+  "Link Display"
+  :key "l"
+  :desc (transient-mode-fmt "LinkDisplay" org-link-descriptive "l")
+  (org-toggle-link-display)
+  )
+(transient-call!  quickscope ()
+  "QuickScope"
+  :key "s"
+  :desc (transient-mode-fmt "QuickScope" evil-quickscope-always-mode "l")
+  (evil-quickscope-always-mode 'toggle)
+  (evil-quickscope-mode (if evil-quickscope-always-mode -1 1))
+  )
 
-  (transient-make-var-toggle!   invisible line-move-ignore-invisible "Invisible Spec" "i")
+(transient-toggle-var! invisible ()
+  "Invisible Spec"
+  :var line-move-ignore-invisible
+  :key "i"
   )
 
 ;;;###autoload
 (defun +jg-ui-build-visuals-transient ()
-  (transient-make-subgroup! jg-toggle-visuals-transient "v"
-                          "For controlling ui visual settings"
-                          :desc "|| Visuals    ||"
-                          [:description "|| Visuals    ||"
-                           [
-                            (transient-macro-toggle-evil-goggles-mode)
-                            (transient-macro-toggle-hl-line-mode)
-                            (transient-macro-toggle-invisible)
-                            (transient-macro-toggle-highlight-changes-visible-mode)
-                            (transient-macro-call-link-display)
-                            ]
-                           [
-                            (transient-macro-toggle-rainbow-mode)
-                            (transient-macro-toggle-global-prettify-symbols-mode)
-                            (transient-macro-call-quickscope)
-                            (transient-macro-toggle-highlight-parentheses-mode)
-                            (transient-macro-call-elide-head)
-                            ]
-                           [
-                            (transient-macro-toggle-auto-highlight-symbol-mode)
-                            ]
-                           ]
-                          )
+  (transient-subgroup! jg-toggle-visuals-transient ()
+    "For controlling ui visual settings"
+    :key "v"
+    :desc "|| Visuals    ||"
+    [:description "|| Visuals    ||"
+                  [
+                   (transient-macro-toggle-evil-goggles-mode)
+                   (transient-macro-toggle-hl-line-mode)
+                   (transient-macro-toggle-invisible)
+                   (transient-macro-toggle-highlight-changes-visible-mode)
+                   (transient-macro-call-link-display)
+                   ]
+                  [
+                   (transient-macro-toggle-rainbow-mode)
+                   (transient-macro-toggle-global-prettify-symbols-mode)
+                   (transient-macro-call-quickscope)
+                   (transient-macro-toggle-highlight-parentheses-mode)
+                   (transient-macro-call-elide-head)
+                   ]
+                  [
+                   (transient-macro-toggle-auto-highlight-symbol-mode)
+                   ]
+                  ]
+    )
 
   (pcase (transient-get-suffix 'jg-toggle-main '(1 -1))
     ((and `[1 transient-columns nil ,x]

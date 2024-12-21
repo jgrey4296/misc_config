@@ -16,76 +16,98 @@
                                 0))
   )
 
-(progn
-  (transient-make-mode-toggle! project-zimmerframe-minor-mode "Zimmerframe" "RET")
-  (transient-make-int-call! zimmerframe-default-filters "SPC"
-                            "Apply Default Filters"
-                            #'zimmerframe-filter-defaults)
-  (transient-make-int-call! zimmerframe-remaining "b"
-                            "Remaining List Buffer"
-                            :transient nil
-                            #'zimmerframe-remaining)
-  (transient-make-int-call! zimmerframe-count   "r"
-                            "Remaining Count"
-                            #'zimmerframe-num)
-  (transient-make-int-call! zimmerframe-dir     "d"
-                            "Set Target Directory"
-                            #'zimmerframe-directory-init)
-  (transient-make-int-call! zimmerframe-filter  "f"
-                            "Filter "
-                            #'zimmerframe-filter)
-  (transient-make-int-call! zimmerframe-keep    "k"
-                            "Keep"
-                            #'zimmerframe-filter-keep)
-  (transient-make-int-call! zimmerframe-replace  "R"
-                            (transient-simple-formatter "Replace Regexp" "R")
-                            #'zimmerframe-replace-regexp)
-  (transient-make-call! zimmerframe-next "l"
-                        (transient-simple-formatter "Walk Next" "l")
-                        (zimmerframe-next))
-  (transient-make-call! zimmerframe-prev "h"
-                        (transient-simple-formatter "Walk Prev" "h")
-                        (zimmerframe-prev))
+(transient-toggle-mode! project-zimmerframe-minor-mode ()
+  "Zimmerframe"
+  :key "RET"
   )
+(transient-call! zimmerframe-default-filters ()
+  "Apply Default Filters"
+  :key "SPC"
+  :interactive t
+  #'zimmerframe-filter-defaults)
+(transient-call! zimmerframe-remaining ()
+  "Remaining List Buffer"
+  :key "b"
+  :transient nil
+  :interactive t
+  #'zimmerframe-remaining)
+(transient-call! zimmerframe-count ()
+  "Remaining Count"
+  :key "r"
+  :interactive t
+  #'zimmerframe-num)
+(transient-call! zimmerframe-dir ()
+  "Set Target Directory"
+  :key "d"
+  :interactive t
+  #'zimmerframe-directory-init)
+(transient-call! zimmerframe-filter ()
+  "Filter "
+  :key "f"
+  :interactive t
+  #'zimmerframe-filter)
+(transient-call! zimmerframe-keep  ()
+  "Keep"
+  :interactive t
+  :key "k"
+  #'zimmerframe-filter-keep)
+(transient-call! zimmerframe-replace ()
+  "Replace Regexp across project"
+  :key "R"
+  :interactive t
+  :desc (transient-simple-formatter "Replace Regexp" "R")
+  #'zimmerframe-replace-regexp)
+(transient-call! zimmerframe-next ()
+  "Next"
+  :key "l"
+  :desc (transient-simple-formatter "Walk Next" "l")
+  (zimmerframe-next))
+(transient-call! zimmerframe-prev ()
+  "Prev"
+  :key "h"
+  :desc (transient-simple-formatter "Walk Prev" "h")
+  (zimmerframe-prev))
 
 (defun jg-workspace-build--zimmerframe-transient-group ()
-  (transient-make-subgroup! transient-zimmerframe "z"
-                            [:description +jg-workspace-zimmerframe-group-title
-                                          [""
-                                           (transient-macro-toggle-project-zimmerframe-minor-mode)
-                                           ]
-                                          ]
-                            [
-                             ["Inspect"
-                              (transient-macro-call-zimmerframe-remaining)
-                              (transient-macro-call-zimmerframe-count)
-                              ]
-                             ["Filter"
-                              (transient-macro-call-zimmerframe-default-filters)
-                              (transient-macro-call-zimmerframe-filter)
-                              (transient-macro-call-zimmerframe-keep)
-                              ]
-                             ["Transform"
-                              (transient-macro-call-zimmerframe-replace)
-                              ]
-                             ]
-                            )
-)
+  (transient-subgroup! transient-zimmerframe ()
+    ""
+    :key "z"
+    [:description +jg-workspace-zimmerframe-group-title
+                  [""
+                   (transient-macro-toggle-project-zimmerframe-minor-mode)
+                   ]
+                  ]
+    [
+     ["Inspect"
+      (transient-macro-call-zimmerframe-remaining)
+      (transient-macro-call-zimmerframe-count)
+      ]
+     ["Filter"
+      (transient-macro-call-zimmerframe-default-filters)
+      (transient-macro-call-zimmerframe-filter)
+      (transient-macro-call-zimmerframe-keep)
+      ]
+     ["Transform"
+      (transient-macro-call-zimmerframe-replace)
+      ]
+     ]
+    )
+  )
 
 ;;;###autoload
 (defun jg-workspace-build-zimmerframe-transient ()
   (jg-workspace-build--zimmerframe-transient-group)
 
   (transient-append-suffix 'workspace-control-transient '(-2)
-     [:description +jg-workspace-zimmerframe-active-title
-                   [
-                    (transient-macro-call-zimmerframe-next)
-                    (transient-macro-call-zimmerframe-prev)
-                    (transient-macro-call-zimmerframe-replace)
-                    ]
-                   [transient-zimmerframe]
+    [:description +jg-workspace-zimmerframe-active-title
+                  [
+                   (transient-macro-call-zimmerframe-next)
+                   (transient-macro-call-zimmerframe-prev)
+                   (transient-macro-call-zimmerframe-replace)
                    ]
-     )
+                  [transient-zimmerframe]
+                  ]
+    )
   )
 
 ;;-- Footer

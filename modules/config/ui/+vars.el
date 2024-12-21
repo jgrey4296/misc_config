@@ -36,6 +36,8 @@
       )
 ;;-- end transient
 
+(setq glasses-face 'font-lock-type-def)
+
 ;;-- highlighting
 (setq hl-todo-highlight-punctuation ":"
       hl-todo-keyword-faces

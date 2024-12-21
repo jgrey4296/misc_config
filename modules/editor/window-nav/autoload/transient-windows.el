@@ -7,42 +7,101 @@
 ;;-- end Header
 
 ;;-- setup
-(progn
-  (transient-make-var-toggle! auto-balance evil-auto-balance-windows "Auto-Balance Windows" "B")
+(transient-toggle-var! auto-balance ()
+  "Auto-Balance Windows"
+  :var evil-auto-balance-windows
+  :key "B"
+  )
 
-  (transient-make-call! shrink-horizontally "h" "Horizontal Shrink" (window-resize transient--original-window -5 t t))
-  (transient-make-call! shrink-vertically   "v" "Vertical Shrink"   (window-resize transient--original-window -5 nil t))
-  (transient-make-call! grow-horizontally   "H" "Horizontal Grow"   (window-resize transient--original-window 5 t t))
-  (transient-make-call! grow-vertically     "V" "Vertical Grow"     (window-resize transient--original-window 5 nil t))
+(transient-call! shrink-horizontally ()
+  "Horizontal Shrink"
+  :key "h"
+  (window-resize transient--original-window -5 t t)
+  )
+(transient-call! shrink-vertically   ()
+  "Vertical Shrink"
+  :key "v"
+  (window-resize transient--original-window -5 nil t)
+  )
+(transient-call! grow-horizontally   ()
+  "Horizontal Grow"
+  :key "H"
+  (window-resize transient--original-window 5 t t)
+  )
+(transient-call! grow-vertically ()
+  "Vertical Grow"
+  :key "V"
+  (window-resize transient--original-window 5 nil t)
+  )
 
-  (transient-make-call! toggle-layout       "/" "Toggle Layout"     (+jg-ui-window-layout-toggle))
-  (transient-make-call! rotate-layout       "\\" "Rotate Layout"    (+jg-ui-window-rotate-forward))
+(transient-call! toggle-layout ()
+  "Toggle Layout"
+  :key "/"
+  (+jg-ui-window-layout-toggle)
+  )
+(transient-call! rotate-layout ()
+  "Rotate Layout"
+  :key "\\"
+  (+jg-ui-window-rotate-forward)
+  )
 
+(transient-call! toggle-dedication ()
+  "Window Dedication"
+  :key "!"
+  :desc (format "  %s : Window Dedicated"
+                (fmt-as-bool! (window-dedicated-p (selected-window))))
+  (let ((curr-window (selected-window)))
+    (set-window-dedicated-p curr-window (not (window-dedicated-p curr-window)))
+    (if (window-dedicated-p curr-window)
+        (message "Window is now dedicated to %s" (window-buffer curr-window))
+      (message "Window is un-dedicated"))
+    )
+  )
+(transient-call! window-balance ()
+  "Balance Windows"
+  :key "b"
+  (balance-windows)
+  )
+(transient-call! window-delete      ()
+  "Delete Window"
+  :key "d"
+  :interactive t
+  #'+workspace/close-window-or-workspace
+  )
+(transient-call! window-split-below ()
+  "Split Below"
+  :key "-"
+  :interactive t
+  #'split-window-below
+  )
+(transient-call! window-split-right ()
+  "Split Right"
+  :key "="
+  :interactive t
+  #'split-window-right
+  )
+(transient-call! window-maximize    ()
+  "Maximize Window"
+  :key "m"
+  :interactive t
+  #'doom/window-maximize-buffer
+  )
 
-  (transient-make-call! toggle-dedication   "!"
-                        (format "  %s : Window Dedicated"
-                                (fmt-as-bool! (window-dedicated-p (selected-window))))
-                        (let ((curr-window (selected-window)))
-                          (set-window-dedicated-p curr-window (not (window-dedicated-p curr-window)))
-                          (if (window-dedicated-p curr-window)
-                              (message "Window is now dedicated to %s" (window-buffer curr-window))
-                            (message "Window is un-dedicated"))
-                          )
-                        )
-
-  (transient-make-int-call! window-delete      "d" "Delete Window"   #'+workspace/close-window-or-workspace)
-
-  (transient-make-int-call! window-split-below "-" "Split Below"     #'split-window-below)
-  (transient-make-int-call! window-split-right "=" "Split Right"     #'split-window-right)
-  (transient-make-int-call! window-maximize    "m" "Maximize Window" #'doom/window-maximize-buffer)
-  ;; TODO move these to window-nav
-  (transient-make-int-call! window-undo        "u" "Window Undo"     #'winner-undo)
-  (transient-make-int-call! window-redo        "U" "Window Redo"     #'winner-redo)
-  (transient-make-call!     window-balance     "b" "Balance Windows" (balance-windows))
+;; TODO move these to window-nav
+(transient-call! window-undo        ()
+  "Window Undo"
+  :key "u"
+  :interactive t
+  #'winner-undo
+  )
+(transient-call! window-redo        ()
+  "Window Redo"
+  :key "U"
+  :interactive t
+  #'winner-redo
   )
 
 ;;-- end setup
-
 
 ;;;###autoload
 (defun +jg-windows-add-transients ()

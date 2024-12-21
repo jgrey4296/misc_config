@@ -7,25 +7,22 @@
 ;;-- end Header
 (require 'transient)
 
-(progn ;; define the calls
-  ;; (transient-make-call! {name} "p" "Desc" (call) )
-  ;; (transient-make-int-call! magit-todos         "t"   "Todos"             :transient nil #'magit-todos-list)
-  ;; (transient-make-var-toggle! auto-balance evil-auto-balance-windows "Auto-Balance Windows" "B")
-  ;; transient-define-infix
-  ;; transient-define-argument
+;; transient-call!
+;; transient-toggle-var!
+;; transient-define-infix
+;; transient-define-argument
 
 
-  ;; -draftmode
-  ;; -no-file-line-error
-  ;; -halt-on-error
-  ;; -interaction= batchmode/nonstopmode/scrollmode/errorstopmode
-  ;; -output-directory=
-  ;; -no-parse-first-line
-  ;; -no-shell-escape
-  ;; -8bit
+;; -draftmode
+;; -no-file-line-error
+;; -halt-on-error
+;; -interaction= batchmode/nonstopmode/scrollmode/errorstopmode
+;; -output-directory=
+;; -no-parse-first-line
+;; -no-shell-escape
+;; -8bit
 
-  ;; -lua={file}
-  )
+;; -lua={file}
 
 (transient-define-infix jg-test-infix ()
   "a test infix"
@@ -56,7 +53,7 @@
   "Animal picker."
   :argument "compiler="
   :allow-empty nil
-  ; :multi-value t ; multi-value can be set to --animals=fox,otter,kitten etc
+                                        ; :multi-value t ; multi-value can be set to --animals=fox,otter,kitten etc
   :class 'transient-option
   :choices '("pdflatex" "lualatex" "xelatex")
   :init-value (lambda (obj) "pdflatex")

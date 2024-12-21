@@ -7,36 +7,51 @@
 ;;-- end Header
 
 ;; Nav
-(progn
-  (transient-make-mode-toggle! centered-cursor-mode   "Center Cursor" "c")
-  (transient-make-mode-toggle! minimap-mode           "Minimap"       "m")
-  (transient-make-mode-toggle! evil-visual-mark-mode  "visual mark"   "v")
-
-  ;; TODO add sidebar selection
-  (transient-make-call! sidebar "s" "Sidebar"    (+jg-ui-tree/open))
-  (transient-make-call! frame-fullscreen "f" "Fullscreen" (toggle-frame-fullscreen))
-
-
+(transient-toggle-mode! centered-cursor-mode ()
+  "Center Cursor"
+  :key "c"
   )
+(transient-toggle-mode! minimap-mode ()
+  "Minimap"
+  :key "m"
+  )
+(transient-toggle-mode! evil-visual-mark-mode ()
+  "visual mark"
+  :key "v"
+  )
+
+(transient-call! sidebar ()
+  "Sidebar"
+  :key "s"
+  :transient nil
+  (+jg-ui-tree/open)
+  )
+(transient-call! frame-fullscreen ()
+  "Fullscree"
+  :key "f"
+  (toggle-frame-fullscreen)
+  )
+
 
 ;;;###autoload
 (defun +jg-ui-build-nav-transient ()
-  (transient-make-subgroup! jg-toggle-nav-transient "n"
-                            "For controlling ui nav settings"
-                            :desc "|| Navigation ||"
-                            [:description "|| Navigation ||"
-                                          [
-                                           (transient-macro-toggle-centered-cursor-mode)
-                                           (transient-macro-toggle-minimap-mode)
-                                           (transient-macro-toggle-evil-visual-mark-mode)
-                                           ]
-                                          [
-                                           (transient-macro-call-sidebar)
-                                           (transient-macro-call-frame-fullscreen)
-                                           ]
-                                          []
-                                          ]
-                            )
+  (transient-subgroup! jg-toggle-nav-transient ()
+    "For controlling ui nav settings"
+    :key "n"
+    :desc "|| Navigation ||"
+    [:description "|| Navigation ||"
+                  [
+                   (transient-macro-toggle-centered-cursor-mode)
+                   (transient-macro-toggle-minimap-mode)
+                   (transient-macro-toggle-evil-visual-mark-mode)
+                   ]
+                  [
+                   (transient-macro-call-sidebar)
+                   (transient-macro-call-frame-fullscreen)
+                   ]
+                  []
+                  ]
+    )
 
   (pcase (transient-get-suffix 'jg-toggle-main '(1 -1))
     ((and `[1 transient-columns nil ,x]

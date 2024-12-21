@@ -21,6 +21,13 @@
 
 (add-hook! 'doom-first-file-hook #'transient-toggles-minor-mode)
 
+(use-package! elide-head
+  :defer t
+  )
+(use-package! display-fill-column-indicator
+  :defer t
+  )
+
 ;;-- whitespace
 
 (use-package! whitespace

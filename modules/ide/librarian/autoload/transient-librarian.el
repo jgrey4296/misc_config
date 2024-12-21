@@ -13,31 +13,39 @@
   :choices librarian--browse-variants
   )
 
-(transient-make-mode-toggle! librarian-mode (propertize "Librarian" 'face 'transient-heading) "!")
-(progn
-    (transient-make-call! librarian-browser-select "b" (format "Browser: %10s" librarian--browse-default)
-                        :transient nil
-                        (librarian-browser-select)
-                        )
-    (transient-make-call! librarian-rebuild-database "r" "Rebuild Database"
-                          :transient nil
-                          (librarian-tag-mode-rebuild-tag-database)
-                          )
+(transient-toggle-mode! librarian-mode ()
+  "Librarian Mode"
+  :desc (propertize "Librarian" 'face 'transient-heading)
+  :key "!"
+  )
+(transient-call! librarian-browser-select ()
+  "Browser Select"
+  :key "b"
+  :desc (format "Browser: %10s" librarian--browse-default)
+  :transient nil
+  (librarian-browser-select)
+  )
+(transient-call! librarian-rebuild-database ()
+  "Rebuild Database"
+  :key "r"
+  :transient nil
+  (librarian-tag-mode-rebuild-tag-database)
   )
 
-(transient-make-subgroup! librarian-settings "b"
-                          "For controlling librarian"
-                          :desc "|| Librarian  ||"
-                          ["Global"
-                           (transient-macro-toggle-librarian-mode)
-                           ]
-                          ["Settings"
-                           (transient-macro-call-librarian-browser-select)
-                           ]
-                          ["Triggers"
-                           (transient-macro-call-librarian-rebuild-database)
-                           ]
-                          )
+(transient-subgroup! librarian-settings ()
+  "For controlling librarian"
+  :key "b"
+  :desc "|| Librarian  ||"
+  ["Global"
+   (transient-macro-toggle-librarian-mode)
+   ]
+  ["Settings"
+   (transient-macro-call-librarian-browser-select)
+   ]
+  ["Triggers"
+   (transient-macro-call-librarian-rebuild-database)
+   ]
+  )
 
 
 ;;;###autoload

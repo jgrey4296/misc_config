@@ -7,60 +7,90 @@
 ;;-- end Header
 (require 'transient)
 
-(progn
-  (transient-make-call! carousel-print       "p"
-                        (transient-simple-formatter "Print Order" "p")
-                        (carousel-print-order))
-  (transient-make-call! carousel-edit        "E"
-                        (transient-simple-formatter "Edit Order" "E")
-                        :transient nil (carousel-edit-order))
-  (transient-make-call! carousel-toggle-loop "l"
-                        (transient-title-var-formatter "Looping" (persp-parameter 'carousel-loop) "l")
-                        (carousel-toggle-loop))
-  (transient-make-call! carousel-new         "n"
-                        (transient-simple-formatter "New Carousel" "n")
-                        :transient nil
-                        (carousel-new))
-  (transient-make-call! carousel-toggle      "t"
-                        (transient-simple-formatter "Toggle" "t")
-                        (carousel-toggle))
-  (transient-make-call! carousel-quit        "T"
-                        (transient-simple-formatter "Quit" "T")
-                        (carousel-deconvert))
-  (transient-make-int-call! carousel-expand      "e"
-                        (transient-simple-formatter "Expand Focus" "e")
-                        :transient nil
-                        #'carousel-expand-focus)
-  (transient-make-call! carousel-reset       "r"
-                        (transient-simple-formatter "Reset" "r")
-                        :transient nil
-                        (carousel-reset-columns))
-  (transient-make-call! carousel-clear       "K"
-                        (transient-simple-formatter "Clear Carousel" "K")
-                        :transient nil
-                        (carousel-clear-ring))
-  (transient-make-call! carousel-add-buffer  "a"
-                        (transient-simple-formatter "Add" "a")
-                        :transient nil
-                        (carousel-add-current-buffer))
-  (transient-make-call! carousel-remove      "x"
-                        (transient-simple-formatter "Remove" "x")
-                        :transient nil
-                        (carousel-remove-buffer))
-  (transient-make-call! carousel-move-left   "["
-                        (transient-simple-formatter "Move Left" "[")
-                        (carousel-move-buffer-left))
-  (transient-make-call! carousel-move-right  "]"
-                        (transient-simple-formatter "Move Right" "]")
-                        (carousel-move-buffer-right))
-  (transient-make-call! carousel-claim       "w"
-                        (transient-simple-formatter "Claim Window" "w")
-                        (carousel-claim-window))
-  (transient-make-int-call! carousel-goto        "f"
-                            (transient-simple-formatter "Find-Buffer" "f")
-                            :transient nil
-                            #'carousel-goto-choice)
-  )
+(transient-call! carousel-print ()
+  ""
+  :key "p"
+  :desc (transient-simple-formatter "Print Order" "p")
+  (carousel-print-order))
+(transient-call! carousel-edit ()
+  ""
+  :key "E"
+  :desc (transient-simple-formatter "Edit Order" "E")
+  :transient nil (carousel-edit-order))
+(transient-call! carousel-toggle-loop ()
+  ""
+  :key "l"
+  :desc (transient-var-fmt "Looping" (persp-parameter 'carousel-loop) "l")
+  (carousel-toggle-loop))
+(transient-call! carousel-new ()
+  ""
+  :key "n"
+  :desc (transient-simple-formatter "New Carousel" "n")
+  :transient nil
+  (carousel-new))
+(transient-call! carousel-toggle ()
+  ""
+  :key "t"
+  :desc (transient-simple-formatter "Toggle" "t")
+  (carousel-toggle))
+(transient-call! carousel-quit ()
+  ""
+  :key "T"
+  :desc (transient-simple-formatter "Quit" "T")
+  (carousel-deconvert))
+(transient-call! carousel-expand ()
+  ""
+  :key "e"
+  :interactive t
+  :desc (transient-simple-formatter "Expand Focus" "e")
+  :transient nil
+  #'carousel-expand-focus)
+(transient-call! carousel-reset ()
+  ""
+  :key "r"
+  :desc (transient-simple-formatter "Reset" "r")
+  :transient nil
+  (carousel-reset-columns))
+(transient-call! carousel-clear ()
+  ""
+  :key "K"
+  :desc (transient-simple-formatter "Clear Carousel" "K")
+  :transient nil
+  (carousel-clear-ring))
+(transient-call! carousel-add-buffer ()
+  ""
+  :key "a"
+  :desc (transient-simple-formatter "Add" "a")
+  :transient nil
+  (carousel-add-current-buffer))
+(transient-call! carousel-remove ()
+  ""
+  :key "x"
+  :desc (transient-simple-formatter "Remove" "x")
+  :transient nil
+  (carousel-remove-buffer))
+(transient-call! carousel-move-left ()
+  ""
+  :key "["
+  :desc (transient-simple-formatter "Move Left" "[")
+  (carousel-move-buffer-left))
+(transient-call! carousel-move-right ()
+  ""
+  :key "]"
+  :desc (transient-simple-formatter "Move Right" "]")
+  (carousel-move-buffer-right))
+(transient-call! carousel-claim ()
+  ""
+  :key "w"
+  :desc (transient-simple-formatter "Claim Window" "w")
+  (carousel-claim-window))
+(transient-call! carousel-goto ()
+  ""
+  :key "f"
+  :interactive t
+  :desc (transient-simple-formatter "Find-Buffer" "f")
+  :transient nil
+  #'carousel-goto-choice)
 
 (defun jg-workspace-carousel-title ()
   (format "Carousel: %s (%s)"
@@ -77,14 +107,14 @@
   (transient-define-prefix transient-carousel ()
     ""
     [:description jg-workspace-carousel-title
-     [(transient-macro-call-carousel-toggle)
-      (transient-macro-call-carousel-quit)
-      (transient-macro-call-carousel-new)
-      (transient-macro-call-carousel-reset)
-      ]
-     ]
-     [(transient-macro-call-carousel-toggle-loop)
-      (transient-macro-call-carousel-clear)
+                  [(transient-macro-call-carousel-toggle)
+                   (transient-macro-call-carousel-quit)
+                   (transient-macro-call-carousel-new)
+                   (transient-macro-call-carousel-reset)
+                   ]
+                  ]
+    [(transient-macro-call-carousel-toggle-loop)
+     (transient-macro-call-carousel-clear)
      ]
     ["Order Change"
      (transient-macro-call-carousel-move-left)
@@ -92,20 +122,20 @@
      ]
     [
      ["Buffer Control "
-     (transient-macro-call-carousel-claim)
-     (transient-macro-call-carousel-expand)
-     (transient-macro-call-carousel-goto)
-     " "
-     (transient-macro-call-carousel-add-buffer)
-     (transient-macro-call-carousel-remove)
-     " "
-     (transient-macro-call-carousel-edit)
-     (transient-macro-call-carousel-print)
-     ]
+      (transient-macro-call-carousel-claim)
+      (transient-macro-call-carousel-expand)
+      (transient-macro-call-carousel-goto)
+      " "
+      (transient-macro-call-carousel-add-buffer)
+      (transient-macro-call-carousel-remove)
+      " "
+      (transient-macro-call-carousel-edit)
+      (transient-macro-call-carousel-print)
+      ]
      ]
     transient-quit!
+    )
   )
-)
 
 (defun jg-workspace-run-carousel-transient ()
   (interactive)

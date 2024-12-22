@@ -143,9 +143,9 @@
   `(latex
     :modes (latex-mode LaTeX-mode TeX-fold-mode)
     :priority 25
-    :triggers (:open-all   ,#'TeX-fold-clearout-buffer
-               :close-all  ,#'TeX-fold-buffer
-               :toggle     ,#'TeX-fold-dwim
+    :triggers (:open-all   #'TeX-fold-clearout-buffer
+               :close-all  #'TeX-fold-buffer
+               :toggle     #'TeX-fold-dwim
                :open       nil
                :open-rec   nil
                :close      nil

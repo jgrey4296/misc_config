@@ -3,6 +3,7 @@
 (speckler-new! fold (key val)
   "Registers fold handlers"
   :target evil-fold-list
+  :override nil
   :sorted t
   :loop 'collect
   :struct '(:modes list :priority int :triggers
@@ -11,7 +12,7 @@
           (list (ensure-list (plist-get val :modes)))
           (cl-loop for (kwd . fn) in (map-pairs (plist-get val :triggers))
                    collect kwd
-                   collect (spec-handling-unquote! fn))
+                   collect (upfun! fn))
           )
   )
 

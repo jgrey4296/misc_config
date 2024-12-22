@@ -131,12 +131,12 @@
   `(lsp-browser
     :modes (lsp-browser-mode)
     :priority 30
-    :triggers (:open-all   ,#'+jg-lsp-toggle-widget-on-line
-               :close-all  ,#'+jg-lsp-toggle-widget-on-line
-               :toggle     ,#'+jg-lsp-toggle-widget-on-line
-               :open       ,#'+jg-lsp-toggle-widget-on-line
-               :open-rec   ,#'+jg-lsp-toggle-widget-on-line
-               :close      ,#'+jg-lsp-toggle-widget-on-line
+    :triggers (:open-all   #'+jg-lsp-toggle-widget-on-line
+               :close-all  #'+jg-lsp-toggle-widget-on-line
+               :toggle     #'+jg-lsp-toggle-widget-on-line
+               :open       #'+jg-lsp-toggle-widget-on-line
+               :open-rec   #'+jg-lsp-toggle-widget-on-line
+               :close      #'+jg-lsp-toggle-widget-on-line
                )
     )
   )

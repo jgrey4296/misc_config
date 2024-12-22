@@ -19,7 +19,7 @@
 
 (speckler-add! lookup-handler ()
   `(lean-mode
-    :definnition ,#'lean-find-definition
+    :definition ,#'lean-find-definition
     )
   )
 

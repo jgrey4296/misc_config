@@ -23,13 +23,13 @@
   `(vimish
     :modes (vimish-fold-mode)
     :priority -50
-    :triggers (:delete     ,#'vimish-fold-delete
-               :open-all   ,#'vimish-fold-unfold-all
-               :close-all  ,#'vimish-fold-refold-all
-               :toggle     ,#'vimish-fold-toggle
-               :open       ,#'vimish-fold-unfold
+    :triggers (:delete     #'vimish-fold-delete
+               :open-all   #'vimish-fold-unfold-all
+               :close-all  #'vimish-fold-refold-all
+               :toggle     #'vimish-fold-toggle
+               :open       #'vimish-fold-unfold
                :open-rec   nil
-               :close      ,#'vimish-fold-refold
+               :close      #'vimish-fold-refold
                )
     )
   )
@@ -66,12 +66,12 @@
   `(hide-show
     :modes (hs-minor-mode)
     :priority -25
-    :triggers (:open-all   ,#'hs-show-all
-               :close-all  ,#'hs-hide-all
-               :toggle     ,#'hs-toggle-hiding
-               :open       ,#'hs-show-block
+    :triggers (:open-all   #'hs-show-all
+               :close-all  #'hs-hide-all
+               :toggle     #'hs-toggle-hiding
+               :open       #'hs-show-block
                :open-rec   nil
-               :close      ,#'hs-hide-block
+               :close      #'hs-hide-block
                )
     )
   )
@@ -83,12 +83,12 @@
   `(origami
     :modes (origami-mode)
     :priority -25
-    :triggers (:open-all   ,#'+jg-origami-open-all-nodes
-               :close-all  ,#'+jg-origami-close-all-nodes
-               :toggle     ,#'+jg-origami-toggle-node
-               :open       ,#'+jg-origami-open-node
-               :open-rec   ,#'+jg-origami-open-node-recursively
-               :close      ,#'+jg-origami-close-node
+    :triggers (:open-all   #'+jg-origami-open-all-nodes
+               :close-all  #'+jg-origami-close-all-nodes
+               :toggle     #'+jg-origami-toggle-node
+               :open       #'+jg-origami-open-node
+               :open-rec   #'+jg-origami-open-node-recursively
+               :close      #'+jg-origami-close-node
                )
     )
   )
@@ -101,12 +101,12 @@
   `(outline
     :modes (outline-mode outline-minor-mode markdown-mode)
     :priority -25
-    :triggers (:open-all   ,#'outline-show-all
-               :close-all  ,(cmd! (with-no-warnings (outline-hide-sublevels 1)))
-               :toggle     ,#'outline-toggle-children
-               :open       ,(cmd! (with-no-warnings (outline-show-entry) (outline-show-children)))
-               :open-rec   ,#'outline-show-subtree
-               :close      ,#'outline-hide-subtree
+    :triggers (:open-all   #'outline-show-all
+               :close-all  (cmd! (with-no-warnings (outline-hide-sublevels 1)))
+               :toggle     #'outline-toggle-children
+               :open       (cmd! (with-no-warnings (outline-show-entry) (outline-show-children)))
+               :open-rec   #'outline-show-subtree
+               :close      #'outline-hide-subtree
                )
     )
   )
@@ -117,12 +117,12 @@
   '(ifdef
     :modes (hide-ifdef-mode)
     :priority -25
-    :triggers (:open-all   ,#'show-ifdefs
-               :close-all  ,#'hide-ifdefs
+    :triggers (:open-all   #'show-ifdefs
+               :close-all  #'hide-ifdefs
                :toggle     nil
-               :open       ,#'show-ifdef-block
+               :open       #'show-ifdef-block
                :open-rec   nil
-               :close      ,#'hide-ifdef-block
+               :close      #'hide-ifdef-block
                )
     )
   )
@@ -133,12 +133,12 @@
   '(vdiff
     :modes (vdiff-mode vdiff-3way-mode)
     :priority 200
-    :triggers (:open-all   ,#'vdiff-open-all-folds
-               :close-all  ,#'vdiff-close-all-folds
-               :toggle     ,#'vdiff-toggle-fold
-               :open       ,#'vdiff-open-fold
-               :open-rec   ,#'vdiff-open-fold
-               :close      ,#'vdiff-close-fold
+    :triggers (:open-all   #'vdiff-open-all-folds
+               :close-all  #'vdiff-close-all-folds
+               :toggle     #'vdiff-toggle-fold
+               :open       #'vdiff-open-fold
+               :open-rec   #'vdiff-open-fold
+               :close      #'vdiff-close-fold
                )
     )
   )

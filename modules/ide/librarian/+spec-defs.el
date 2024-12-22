@@ -20,6 +20,7 @@
   "Register documentation lookup handlers.
 Handlers
  "
+  ;; TODO use upfun! here
   :struct '(librarian--doc-valid-keywords fn)
   (setq-local librarian--doc-assignments-functions      (cl-remove-duplicates (append (ensure-list (plist-get val :assignments))        librarian--doc-assignments-functions))
               librarian--doc-declaration-functions      (cl-remove-duplicates (append (ensure-list (plist-get val :declaration))        librarian--doc-declaration-functions))

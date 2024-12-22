@@ -66,7 +66,7 @@
     :triggers (:delete     nil
                :open-all   nil
                :close-all  nil
-               :toggle     ,#'ibuffer-toggle-filter-group
+               :toggle     #'ibuffer-toggle-filter-group
                :open       nil
                :open-rec   nil
                :close      nil

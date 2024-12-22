@@ -160,23 +160,23 @@
   `(python
     :modes python-mode
     :priority 25
-    :triggers (:close     ,#'+jg-python-close-class-defs
-               :close-all ,#'+jg-python-close-all-defs
-               :open      ,#'outline-toggle-children
-               :open-all  ,#'outline-show-all
-               :open-rec  ,#'outline-show-subtree
-               :toggle    ,#'outline-toggle-children
+    :triggers (:close     #'+jg-python-close-class-defs
+               :close-all #'+jg-python-close-all-defs
+               :open      #'outline-toggle-children
+               :open-all  #'outline-show-all
+               :open-rec  #'outline-show-subtree
+               :toggle    #'outline-toggle-children
                )
     )
   `(python-ts
     :modes python-ts-mode
     :priority 25
-    :triggers (:close     ,#'hs-hide-block-at-point
-               :close-all ,#'hs-hide-all
-               :open      ,#'hs-show-block
-               :open-all  ,#'hs-show-all
-               :open-rec  ,#'hs-show-all
-               :toggle    ,#'hs-toggle-hiding
+    :triggers (:close     #'hs-hide-block-at-point
+               :close-all #'hs-hide-all
+               :open      #'hs-show-block
+               :open-all  #'hs-show-all
+               :open-rec  #'hs-show-all
+               :toggle    #'hs-toggle-hiding
                )
     )
   )

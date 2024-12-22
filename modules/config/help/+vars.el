@@ -16,12 +16,12 @@
 (speckler-add! fold ()
   `(helpful
     :modes (helpful-mode)
-    :triggers (:open-all  ,#'hs-show-all
-               :close-all ,#'hs-hide-all
-               :toggle    ,#'hs-toggle-hiding
-               :open      ,#'hs-show-block
+    :triggers (:open-all  #'hs-show-all
+               :close-all #'hs-hide-all
+               :toggle    #'hs-toggle-hiding
+               :open      #'hs-show-block
                :open-rec  nil
-               :close     ,#'hs-hide-block
+               :close     #'hs-hide-block
                )
     )
   )

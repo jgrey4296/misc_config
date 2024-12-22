@@ -70,7 +70,7 @@
       (:prefix ("i" . "Insert")
       :desc "New Entry"           "e"     #'bibtex-entry
       :desc "Auto Form"           "a"     #'+jg-bibtex-entry-form
-      :desc "from DOI"            "d"     #'+jg-bibtex-insert-entry-from-doi
+      :desc "from DOI"            "d"     #'librarian-biblio-create-from-doi
       :desc "from PMID"           "p"     (cmd! (pubmed-insert-bibtex-from-pmid (read-string "PMID: ")))
       :desc "Subcite"             "s"     #'+jg-bibtex-subcite
       )

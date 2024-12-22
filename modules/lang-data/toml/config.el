@@ -26,11 +26,18 @@
 (use-package! conf-mode
   :commands conf-mode conf-toml-mode
   :config
+  ;; Derived modes: conf-unix, conf-windows, conf-javaprop
+  ;; conf-space, conf-colon, conf-ppd, conf-xdefaults,
+  ;; conf-toml, conf-desktop
+
+
+  (add-hook! 'conf-mode-hook :depth 99
+             #'librarian-insert-minor-mode
+             )
 
   (add-hook! 'conf-toml-mode-hook :depth 99
              #'abbrev-mode
              #'outline-minor-mode
-             #'librarian-insert-minor-mode
              )
 
   (setq-hook! 'conf-toml-mode-hook
@@ -43,10 +50,11 @@
 (use-package! toml-mode
   :commands toml-mode
   :config
+  ;; toml mode is derived from conf-mode
+
   (add-hook! 'toml-mode-hook :depth 99
              #'abbrev-mode
              #'outline-minor-mode
-             #'librarian-insert-minor-mode
              )
 
   (setq-hook! 'toml-mode-hook
@@ -58,6 +66,8 @@
 (use-package! toml-ts-mode
   :commands toml-ts-mode
   :config
+  ;; derived from text mode
+
   (add-hook! 'toml-ts-mode-hook :depth 99
              #'abbrev-mode
              #'outline-minor-mode

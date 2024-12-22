@@ -39,6 +39,16 @@ Finds correctly active snippets from parent modes (based on Yas' logic)."
            return it))
 
 ;;;###autoload
+(defun +snippet-expand (uuid)
+  """ Expand a snippet by uuid """
+  (interactive "M")
+  (if-let ((snippet (+snippet--get-template-by-uuid uuid)))
+      (yas-expand-snippet snippet)
+      )
+  ""
+  )
+
+;;;###autoload
 (defun +snippet--completing-read-uuid (prompt all-snippets &rest args)
   (plist-get
    (text-properties-at

@@ -133,5 +133,6 @@
 
 (map! :map python-pytest-mode-map
       :n "DEL" #'counsel-shell-history--with-state-normal
-
+      :localleader
+      "TAB" #'toggle-truncate-lines
       )

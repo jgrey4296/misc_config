@@ -18,7 +18,6 @@
   )
 
 (use-package! smartparens
-  :hook (doom-first-buffer . smartparens-global-mode)
   :commands (sp-pair sp-local-pair sp-with-modes sp-point-in-comment sp-point-in-string)
   :config
   (add-to-list 'doom-point-in-string-functions 'sp-point-in-string)

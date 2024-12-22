@@ -117,9 +117,26 @@
   :commands lsp-ivy--transform-candidate
   )
 
+(use-package! lsp-treemacs
+  :defer t
+  )
+
+
 (speckler-add! lib-env ()
+  :override nil
   `(lsp
-    :setup    #'(lambda (state &rest args) (require 'lsp-mode))
+    :setup    #'(lambda (state &rest args)
+                  (require 'lsp-mode)
+                  (require 'lsp-lens)
+                  (require 'lsp-completion)
+                  (require 'lsp-diagnostics)
+                  (require 'lsp-headerline)
+                  (require 'lsp-iedit)
+                  (require 'lsp-modeline)
+                  (require 'lsp-ivy)
+                  (require 'lsp-treemacs)
+                  (require 'lsp-ui)
+                  )
     :stop     #'(lambda (state &rest args) (when lsp--last-active-workspaces
                                              (lsp-workspace-shutdown (car lsp--last-active-workspaces))))
     :teardown #'(lambda (state &rest args) (lsp-disconnect))

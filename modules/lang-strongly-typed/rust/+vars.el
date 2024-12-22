@@ -50,7 +50,7 @@
 
 (speckler-add! file-templates ()
   '(rust
-    ("config\\.toml$"   :trigger "__rust_config"      :mode conf-toml-mode)
+    ("config\\.toml$"   :trigger "__cargo_config"     :mode conf-toml-mode)
     ("Cargo\\.toml$"    :trigger "__cargo"            :mode conf-toml-mode)
     ("mod\\.rs$"        :trigger "__mod.rs"           :mode rust-mode)
     ("main\\.rs$"       :trigger "__main.rs"          :mode rust-mode)

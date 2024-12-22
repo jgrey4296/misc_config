@@ -68,7 +68,7 @@
 
 (speckler-add! lib-env ()
   `(flycheck
-    :setup    #'(lambda (state &rest rest) nil)
+    :setup    #'(lambda (state &rest rest) (require 'flycheck))
     :start    #'(lambda (state &rest rest) (add-hook 'prog-mode-hook #'flycheck-mode))
     :stop     #'(lambda (state &rest rest) (remove-hook 'prog-mode-hook #'flycheck-mode))
     :teardown #'(lambda (state &rest rest) nil)

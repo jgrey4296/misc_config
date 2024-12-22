@@ -18,9 +18,11 @@
   :mode-var buffer-read-only
   )
 ;; TODO remove this, use envs hooks
-(transient-toggle-mode! global-flycheck-mode  ()
+(transient-toggle-hook! flycheck  ()
   "Flycheck"
   :key "f"
+  :hook prog-mode-hook
+  :fn #'flycheck-mode
   )
 
 (transient-call! evil-embrace ()
@@ -88,7 +90,7 @@
      ]
     ["Subsections" []]
     [["Global Toggles"
-      (transient-macro-toggle-global-flycheck-mode)
+      (transient-macro-toggle-hook-flycheck)
       (transient-macro-toggle-global-prettify-symbols-mode)
       (transient-macro-toggle-global-highlight-changes-mode)
       (transient-macro-toggle-smartparens-global-mode)

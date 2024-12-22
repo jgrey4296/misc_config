@@ -254,24 +254,24 @@
   [[ "View Control"
      (transient-macro-toggle-hook-lsp-breadcrumb)
      (transient-macro-toggle-hook-lsp-lenses)
-     (transient-macro-call-lsp-auto-signature)
      (transient-macro-toggle-hook-lsp-ui-sideline)
      (transient-macro-toggle-hook-lsp-doc-popup)
      (transient-macro-toggle-lsp-doc-childframe)
+     (transient-macro-call-lsp-auto-signature)
      ]
    [ "Diagnostics"
-     (transient-macro-toggle-lsp-modeline-diagnostics-mode)
+     (transient-macro-toggle-hook-lsp-modeline-diagnostics)
+     (transient-macro-toggle-hook-lsp-diagnostics)
      (transient-macro-toggle-hook-lsp-code-actions)
      " "
      "Toggles"
+     (transient-macro-toggle-hook-lsp-treemacs)
      (transient-macro-toggle-lsp-doc-hover)
-     (transient-macro-toggle-lsp-completion-mode)
-     (transient-macro-toggle-lsp-diagnostics-mode)
+     (transient-macro-toggle-hook-lsp-completion)
      (transient-macro-toggle-hook-tree-sitter-hl)
      ]
    [ "Settings"
      (transient-macro-call-lsp-on-type-formatting)
-     (transient-macro-toggle-hook-lsp-treemacs)
      (transient-macro-call-lsp-highlighting)
 
      (transient-macro-toggle-lsp-keep-alive)

@@ -40,4 +40,6 @@
   (push (expand-file-name "~/.config/info") Info-directory-list)
   )
 
+(use-package! straight)
+
 ;;; config.el ends here

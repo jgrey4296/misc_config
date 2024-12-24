@@ -16,11 +16,7 @@
   (advice-add 'hs-hide-all :before #'+fold--hideshow-ensure-mode-a)
   )
 
-(use-package! evil-vimish-fold
-  :commands (evil-vimish-fold/next-fold evil-vimish-fold/previous-fold evil-vimish-fold/delete evil-vimish-fold/delete-all evil-vimish-fold/create evil-vimish-fold/create-line)
-  :init
-  (global-evil-vimish-fold-mode)
-  )
+(use-package! vimish-fold)
 
 (use-package! origami :defer t)
 

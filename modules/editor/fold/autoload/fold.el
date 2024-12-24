@@ -132,8 +132,8 @@ Targets `vimmish-fold', `hideshow' and `outline' folds."
                     (lambda ()
                       (when (featurep 'vimish-fold)
                         (if (> count 0)
-                            (evil-vimish-fold/next-fold count)
-                          (evil-vimish-fold/previous-fold (- count))))
+                            (vimish-fold-next-fold count)
+                          (vimish-fold-previous-fold (- count))))
                       (if (/= (point) orig-pt) (point))))
            if (save-excursion (funcall fn))
            collect it into points

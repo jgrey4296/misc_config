@@ -19,9 +19,10 @@
     )
   )
 (speckler-add! fold ()
+  :override nil
   `(lisp
     :modes (emacs-lisp-mode lisp-mode)
-    :priority 25
+    :priority 125
     :triggers (:open-all  #'hs-show-all
                :close-all #'hs-hide-all
                :toggle    #'hs-toggle-hiding

@@ -19,7 +19,7 @@
 (advice-add 'ws-butler-after-save          :around #'+modeline--inhibit-modification-hooks-a)
 (advice-add 'jit-lock--debug-fontify       :before #'jg-jit-lock-debug-announce)
 
-(add-hook! 'doom-input-file-hook #'transient-toggles-minor-mode)
+(add-hook! 'doom-first-input-hook #'transient-toggles-minor-mode)
 
 (use-package! elide-head
   :defer t

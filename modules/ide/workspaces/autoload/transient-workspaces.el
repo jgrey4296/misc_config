@@ -39,7 +39,7 @@
                   ["" (transient-macro-call-workspaces-ivy)]
                   ]
     []
-    transient-quit!
+    macro-tools--transient-quit!
     )
 
   (run-hooks 'jg-workspace-transient-hook)
@@ -64,6 +64,6 @@
                   ["" (transient-macro-call-workspaces-ivy)]
                   ]
     []
-    transient-quit!
+    macro-tools--transient-quit!
     )
   )

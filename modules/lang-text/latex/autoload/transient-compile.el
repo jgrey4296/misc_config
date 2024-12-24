@@ -79,7 +79,7 @@
    [("r" jg-test-call)]
    [("RET" jg-test-call)]
    ]
-  transient-quit!
+  macro-tools--transient-quit!
   )
 
 

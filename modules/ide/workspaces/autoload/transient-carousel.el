@@ -133,7 +133,7 @@
       (transient-macro-call-carousel-print)
       ]
      ]
-    transient-quit!
+    macro-tools--transient-quit!
     )
   )
 

@@ -8,9 +8,7 @@
 
 (use-package! transient)
 
-(use-package! transient-macros
-  :after transient
-  :config
+(after! transient
   (add-hook 'jg-transient-toggles-hook #'+jg-ui-build-debugs-transient)
   (add-hook 'jg-transient-toggles-hook #'+jg-ui-build-guides-transient)
   (add-hook 'jg-transient-toggles-hook #'+jg-ui-build-nav-transient)

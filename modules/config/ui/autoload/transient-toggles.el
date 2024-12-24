@@ -108,7 +108,7 @@
       (transient-macro-call-evil-embrace)
       ]
      ]
-    transient-quit!
+    macro-tools--transient-quit!
     )
   )
 

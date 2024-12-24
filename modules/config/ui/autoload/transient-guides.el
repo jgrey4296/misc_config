@@ -6,7 +6,7 @@
 ;; See footer for licenses/metadata/notes as applicable
 ;;-- end Header
 (require 'display-fill-column-indicator)
-(require 'transient-macros)
+(require 'macro-tools--transient)
 (require 'glasses)
 
 ;; Guides

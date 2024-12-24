@@ -5,6 +5,7 @@
 ;;
 ;; See footer for licenses/metadata/notes as applicable
 ;;-- end Header
+(require 'macro-tools--transient)
 
 ;;-- setup
 (transient-toggle-var! auto-balance ()

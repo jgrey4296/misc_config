@@ -5,7 +5,7 @@
 ;;
 ;; See footer for licenses/metadata/notes as applicable
 ;;-- end Header
-(require 'transient)
+(require 'macro-tools--transient)
 
 (defun +jg-workspace-zimmerframe-active-title ()
   (format "Zimmer (%s) Control" (fmt-as-bool! project-zimmerframe-minor-mode))

@@ -1,5 +1,5 @@
 ;;; transient-toggles.el -*- lexical-binding: t; -*-
-(require 'transient-macros)
+(require 'macro-tools--transient)
 
 ;; :desc "Input Language" "i" #'toggle-input-method
 ;; :desc "indent style"   "i" #'doom/toggle-indent-style

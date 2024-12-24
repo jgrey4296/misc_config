@@ -6,7 +6,7 @@
 ;; See footer for licenses/metadata/notes as applicable
 ;;-- end Header
 (require 'elide-head)
-(require 'transient-macros)
+(require 'macro-tools--transient)
 
 ;; Visual
 (transient-toggle-mode! global-prettify-symbols-mode ()

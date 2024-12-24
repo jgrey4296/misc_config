@@ -1,6 +1,5 @@
 ;; transient-lsp.el -*- lexical-binding: t; -*-
-(require 'transient)
-;; https://emacs-lsp.github.io/lsp-mode/tutorials/how-to-turn-off/
+(require 'macro-tools--transient)
 
 (transient-toggle-var! lsp-doc-hover ()
   ""

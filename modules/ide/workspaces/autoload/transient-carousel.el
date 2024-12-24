@@ -5,7 +5,7 @@
 ;;
 ;; See footer for licenses/metadata/notes as applicable
 ;;-- end Header
-(require 'transient-macros)
+(require 'macro-tools--transient)
 
 (transient-call! carousel-print ()
   ""

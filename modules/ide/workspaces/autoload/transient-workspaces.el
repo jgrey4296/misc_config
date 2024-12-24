@@ -1,5 +1,5 @@
 ;;; transient.el -*- lexical-binding: t; -*-
-(require 'transient)
+(require 'macro-tools--transient)
 
 (defvar jg-workspace-transient-hook nil)
 

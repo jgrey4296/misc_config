@@ -1,6 +1,8 @@
 ;; transient.el -*- lexical-binding: t; -*-
 (require 'librarian)
 (require 'librarian--browse)
+(require 'macro-tools--transient)
+
 (unless (boundp 'librarian--browse-variants) (defvar librarian--browse-variants nil))
 (unless (boundp 'librarian--browse-default) (defvar librarian--browse-default "firefox"))
 

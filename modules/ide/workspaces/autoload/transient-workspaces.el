@@ -52,3 +52,18 @@
     (workspace-control-transient)
     )
   )
+
+
+;;;###autoload (autoload 'workspaces-transient-builder "transient-workspaces")
+(transient-setup-hook! workspaces-transient ()
+  (transient-define-prefix workspace-control-transient ()
+    "The main workspace control transient"
+    [:description +jg-workspace-settings-group-title
+                  ["|| General ||" (transient-macro-call-goto-root)]
+                  ["" (transient-macro-call-magit-todos)]
+                  ["" (transient-macro-call-workspaces-ivy)]
+                  ]
+    []
+    transient-quit!
+    )
+  )

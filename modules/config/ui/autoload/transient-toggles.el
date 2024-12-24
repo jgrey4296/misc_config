@@ -1,5 +1,5 @@
 ;;; transient-toggles.el -*- lexical-binding: t; -*-
-(require 'transient)
+(require 'transient-macros)
 
 ;; :desc "Input Language" "i" #'toggle-input-method
 ;; :desc "indent style"   "i" #'doom/toggle-indent-style
@@ -91,7 +91,7 @@
     ["Subsections" []]
     [["Global Toggles"
       (transient-macro-toggle-hook-flycheck)
-      (transient-macro-toggle-global-prettify-symbols-mode)
+      ;; (transient-macro-toggle-global-prettify-symbols-mode)
       (transient-macro-toggle-global-highlight-changes-mode)
       (transient-macro-toggle-smartparens-global-mode)
       ]
@@ -133,3 +133,7 @@
   ;; Each hook builds a suffix and appends it
   (run-hooks 'jg-transient-toggles-hook)
   )
+
+;; (transient-setup-hook! jg-ui-transient-toggles ()
+;;   (+jg-ui-build-main-toggle--transient)
+;;   )

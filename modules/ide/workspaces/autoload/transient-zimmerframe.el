@@ -72,25 +72,22 @@
   (transient-subgroup! transient-zimmerframe ()
     ""
     :key "z"
-    [:description +jg-workspace-zimmerframe-group-title
-                  [""
-                   (transient-macro-toggle-project-zimmerframe-minor-mode)
-                   ]
-                  ]
-    [
-     ["Inspect"
-      (transient-macro-call-zimmerframe-remaining)
-      (transient-macro-call-zimmerframe-count)
+    :desc +jg-workspace-zimmerframe-group-title
+     [""
+      (transient-macro-toggle-project-zimmerframe-minor-mode)
       ]
-     ["Filter"
-      (transient-macro-call-zimmerframe-default-filters)
-      (transient-macro-call-zimmerframe-filter)
-      (transient-macro-call-zimmerframe-keep)
-      ]
-     ["Transform"
-      (transient-macro-call-zimmerframe-replace)
-      ]
-     ]
+      ["Inspect"
+       (transient-macro-call-zimmerframe-remaining)
+       (transient-macro-call-zimmerframe-count)
+       ]
+      ["Filter"
+       (transient-macro-call-zimmerframe-default-filters)
+       (transient-macro-call-zimmerframe-filter)
+       (transient-macro-call-zimmerframe-keep)
+       ]
+      ["Transform"
+       (transient-macro-call-zimmerframe-replace)
+       ]
     )
   )
 
@@ -99,13 +96,15 @@
   (jg-workspace-build--zimmerframe-transient-group)
 
   (transient-append-suffix 'workspace-control-transient '(-2)
-    [:description +jg-workspace-zimmerframe-active-title
+    `[:description +jg-workspace-zimmerframe-active-title
                   [
                    (transient-macro-call-zimmerframe-next)
                    (transient-macro-call-zimmerframe-prev)
                    (transient-macro-call-zimmerframe-replace)
                    ]
-                  [transient-zimmerframe]
+                  [
+                  ,transient-zimmerframe
+                   ]
                   ]
     )
   )

@@ -5,6 +5,7 @@
 ;;
 ;; See footer for licenses/metadata/notes as applicable
 ;;-- end Header
+(require 'transient-macros)
 
 ;; Nav
 (transient-toggle-mode! centered-cursor-mode ()
@@ -39,28 +40,19 @@
     "For controlling ui nav settings"
     :key "n"
     :desc "|| Navigation ||"
-    [:description "|| Navigation ||"
-                  [
-                   (transient-macro-toggle-centered-cursor-mode)
-                   (transient-macro-toggle-minimap-mode)
-                   (transient-macro-toggle-evil-visual-mark-mode)
-                   ]
-                  [
-                   (transient-macro-call-sidebar)
-                   (transient-macro-call-frame-fullscreen)
-                   ]
-                  []
-                  ]
+    [
+     (transient-macro-toggle-centered-cursor-mode)
+     (transient-macro-toggle-minimap-mode)
+     (transient-macro-toggle-evil-visual-mark-mode)
+     ]
+    [
+     (transient-macro-call-sidebar)
+     (transient-macro-call-frame-fullscreen)
+     ]
+    []
     )
 
-  (pcase (transient-get-suffix 'jg-toggle-main '(1 -1))
-    ((and `[1 transient-columns nil ,x]
-          (guard (< (length x) 4)))
-     (transient-append-suffix 'jg-toggle-main
-       '(1 -1 -1) jg-toggle-nav-transient))
-    (_ (transient-append-suffix 'jg-toggle-main
-         '(1 -1) [ jg-toggle-nav-transient ]))
-    )
+  (transient-guarded-insert! 'jg-toggle-main jg-toggle-nav-transient (1 -1))
   )
 
 ;;-- Footer

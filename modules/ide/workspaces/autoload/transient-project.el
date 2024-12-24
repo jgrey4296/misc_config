@@ -5,7 +5,7 @@
 ;;
 ;; See footer for licenses/metadata/notes as applicable
 ;;-- end Header
-(require 'transient)
+(require 'transient-macros)
 
 ;; TODO move compile to eval module
 ;;
@@ -213,14 +213,12 @@
     ""
     :key "a"
     :desc "+Project Actions"
-    ["Project Actions"
-     (transient-macro-call-proj-run)
-     (transient-macro-call-proj-compile)
-     (transient-macro-call-proj-test)
-     (transient-macro-call-proj-clean)
-     (transient-macro-call-proj-finder)
-     (transient-macro-call-proj-clear-cache)
-     ]
+    (transient-macro-call-proj-run)
+    (transient-macro-call-proj-compile)
+    (transient-macro-call-proj-test)
+    (transient-macro-call-proj-clean)
+    (transient-macro-call-proj-finder)
+    (transient-macro-call-proj-clear-cache)
     )
   (transient-subgroup! transient-project ()
     ""
@@ -263,16 +261,14 @@
     ""
     :key "P"
     :desc "+Manage All Projects"
-    [
-     ["Project Lists"
-      (transient-macro-call-proj-browse)
-      (transient-macro-call-proj-switch)
-      ]
-     [" "
-      (transient-macro-call-proj-add)
-      (transient-macro-call-proj-discover)
-      (transient-macro-call-proj-clear-known)
-      ]
+    ["Project Lists"
+     (transient-macro-call-proj-browse)
+     (transient-macro-call-proj-switch)
+     ]
+    [" "
+     (transient-macro-call-proj-add)
+     (transient-macro-call-proj-discover)
+     (transient-macro-call-proj-clear-known)
      ]
     )
   )

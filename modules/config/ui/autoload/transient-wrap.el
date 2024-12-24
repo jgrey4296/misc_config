@@ -5,6 +5,7 @@
 ;;
 ;; See footer for licenses/metadata/notes as applicable
 ;;-- end Header
+(require 'transient-macros)
 
 ;; Wrap
 (transient-toggle-mode! visual-line-mode ()
@@ -34,23 +35,13 @@
     "For controlling ui wrap settings"
     :key "w"
     :desc "|| Wrapping   ||"
-    [[:description "|| Wrapping ||"
-      (transient-macro-toggle-auto-fill-mode)
-      (transient-macro-toggle-visual-line-mode)
-      (transient-macro-toggle-+word-wrap-mode)
-      (transient-macro-call-truncate-lines)
-      ]
-     ]
+    (transient-macro-toggle-auto-fill-mode)
+    (transient-macro-toggle-visual-line-mode)
+    (transient-macro-toggle-+word-wrap-mode)
+    (transient-macro-call-truncate-lines)
     )
 
-  (pcase (transient-get-suffix 'jg-toggle-main '(1 -1))
-    ((and `[1 transient-columns nil ,x]
-          (guard (< (length x) 4)))
-     (transient-append-suffix 'jg-toggle-main
-       '(1 -1 -1)  jg-toggle-wrap-transient))
-    (_ (transient-append-suffix 'jg-toggle-main
-         '(1 -1)  [ jg-toggle-wrap-transient ]))
-    )
+  (transient-guarded-insert! 'jg-toggle-main jg-toggle-wrap-transient (1 -1))
   )
 
 ;;-- Footer

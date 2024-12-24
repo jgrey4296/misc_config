@@ -137,7 +137,7 @@ c) are not valid projectile projects."
                             doom-projectile-cache-limit)
                         (member (substring proot 0 -1) blacklist)
                         (and doom-projectile-cache-purge-non-projects
-                             (not (doom-project-p proot)))
+                             (not (projectile-project-p proot)))
                         (projectile-ignored-project-p proot))
                  do (dlog! "Removed %S from projectile cache" proot)
                  and do (remhash proot projectile-projects-cache)

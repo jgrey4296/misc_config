@@ -198,13 +198,13 @@ exist, and `org-link' otherwise."
         (+org-link--read-module-spec module-path)
       (let ((overall-face
              (cond
-              ((doom-module-p category module flag)
+              ((doom-module-active-p category module flag)
                '((:underline nil) org-link org-block bold))
               ((and category (doom-module-locate-path category module))
                '(shadow org-block bold))
               (t '((:strike-through t) error org-block))))
             (icon-face
-             (if (doom-module-p category module flag) 'success 'error)))
+             (if (doom-module-active-p category module flag) 'success 'error)))
         (add-text-properties
          start end
          (list 'face overall-face
@@ -327,7 +327,7 @@ exist, and `org-link' otherwise."
         (cl-destructuring-bind (&key category module flag)
             (+org-link--read-module-spec (org-element-property :path link))
           (cond
-           ((doom-module-p category module)
+           ((doom-module-active-p category module)
             (propertize "enabled" 'face 'success))
            ((and category (doom-module-locate-path category module))
             (propertize "disabled" 'face 'error))

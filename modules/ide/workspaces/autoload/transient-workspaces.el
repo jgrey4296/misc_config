@@ -54,7 +54,7 @@
   )
 
 
-;;;###autoload (autoload 'workspaces-transient-builder "transient-workspaces")
+;;;###autoload (autoload 'workspaces-transient-builder "ide/workspaces/autoload/transient-workspaces")
 (transient-setup-hook! workspaces-transient ()
   (transient-define-prefix workspace-control-transient ()
     "The main workspace control transient"

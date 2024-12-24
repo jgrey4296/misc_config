@@ -131,13 +131,15 @@
                        )
                      )
     )
-  (after! transient (jg-workspace-build-carousel-transient))
+  (after! transient
+    (jg-workspace-build-carousel-transient)
+    )
   )
 
 (use-package! project-zimmerframe
   :after transient
   :config
-  (add-hook 'jg-workspace-transient-hook #'jg-workspace-build-zimmerframe-transient)
+  ;; (add-hook 'workspaces-transient-hook #'jg-workspace-build-zimmerframe-transient)
   )
 
 (use-package! projectile
@@ -274,10 +276,12 @@
   :config
   ;; TODO refactor this like ui's transients
   ;; Define
-  (add-hook 'jg-workspace-transient-hook #'jg-workspace-build-project-transient)
+  (add-hook 'workspaces-transient-hook #'+jg-windows-build-transient 0)
+  (add-hook 'workspaces-transient-hook #'jg-workspace-build-project-transient 25)
+  (add-hook 'workspaces-transient-hook #'jg-workspace-build-zimmerframe-transient 50)
 
-  (+jg-workspace-build-workspace-transient)
-  (add-hook 'speckler-hook #'+jg-workspace-build-workspace-transient)
+  (workspaces-transient-builder)
+  (add-hook 'speckler-hook #'workspaces-transient-builder)
   ;; Extend
   (provide 'jg-workspaces-core-transient)
   )

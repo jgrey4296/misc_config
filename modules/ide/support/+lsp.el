@@ -121,7 +121,6 @@
   :defer t
   )
 
-
 (speckler-add! lib-env ()
   :override nil
   `(lsp

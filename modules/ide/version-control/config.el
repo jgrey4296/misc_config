@@ -81,7 +81,7 @@
              )
   )
 
-(use-package! git-commit
+(use-package! git-commit ;; part of magit
   :hook (doom-first-file . global-git-commit-mode)
   :config
   ;; Enforce git commit conventions.

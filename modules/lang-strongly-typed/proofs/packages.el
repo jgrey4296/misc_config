@@ -1,7 +1,9 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; lang/coq/packages.el
 
-(package! proof-general)
+(package! proof-general :pin "b30d65de803148bcd3408ac334b5eab01c98a0ae"
+  ;; REVIEW: Remove when ProofGeneral/PG#771 is fixed. Also see #8169.
+  :recipe (:build (:not autoloads)))
 (package! company-coq)
 (package! idris-mode :pin "c96f45d1b8fad193f09fb6139da17092003b5e74")
 

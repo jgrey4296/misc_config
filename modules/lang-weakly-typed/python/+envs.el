@@ -85,6 +85,7 @@
     )
 
   (speckler-add! lib-env ()
+    :override nil
     `(mamba
       :lang 'python
       :start #'jg-py-mamba-start-env
@@ -93,6 +94,8 @@
       )
     )
   )
+
+
 
 (use-package! poetry
   :commands (poetry-venv-workon poetry-venv-deactivate poetry-update poetry-add)

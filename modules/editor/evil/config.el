@@ -5,7 +5,6 @@
 (local-load! "+spec-defs")
 
 (defer-load! (evil-collection evil-ex) "+evil-ex-setup")
-
 (defer-load! jg-bindings-core "+bindings") ;; -> jg-evil-bindings
 
 

@@ -18,6 +18,7 @@
     ("^*ert*" :width 0.4 :side right :select nil :ttl 0 )
     )
   )
+
 (speckler-add! fold ()
   :override nil
   `(lisp

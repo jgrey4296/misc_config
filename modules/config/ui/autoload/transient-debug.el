@@ -11,13 +11,13 @@
 (transient-call! debug-on-error ()
   ""
   :key "e"
-  :desc (transient-mode-fmt "Debug on Error" debug-on-error "e")
+  :desc (transient-var-fmt "Debug on Error" debug-on-error "e")
   (toggle-debug-on-error)
   )
 (transient-call! debug-on-var ()
   ""
   :key "v"
-  :desc (transient-mode-fmt "Debug on Var" (debug--variable-list) "v")
+  :desc (transient-var-fmt "Debug on Var" (debug--variable-list) "v")
   :interactive t
   #'debug-on-variable-change
   )
@@ -30,7 +30,7 @@
 (transient-call! debug-func ()
   ""
   :key "f"
-  :desc (transient-mode-fmt "Debug on Fn" (debug--function-list) "f")
+  :desc (transient-var-fmt "Debug on Fn" (debug--function-list) "f")
   :interactive t
   #'debug-on-entry
   )

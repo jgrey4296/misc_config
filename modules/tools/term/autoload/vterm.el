@@ -67,7 +67,7 @@ If prefix ARG is non-nil, cd into `default-directory' instead of project root.
 Returns the vterm buffer."
   (unless (fboundp 'module-load)
     (user-error "Your build of Emacs lacks dynamic modules support and cannot load vterm"))
-  (let* ((project-root (or (doom-project-root) default-directory))
+  (let* ((project-root (or (projectile-project-root) default-directory))
          (default-directory
            (if arg
                default-directory

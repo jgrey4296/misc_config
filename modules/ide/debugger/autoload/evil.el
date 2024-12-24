@@ -5,7 +5,7 @@
   "Initiate debugger for current major mode"
   (interactive "<f>")
   ;; TODO Add python debugging
-  (let ((default-directory (doom-project-root)))
+  (let ((default-directory (projectile-project-root)))
     (pcase major-mode
       ((or 'c-mode 'c++-mode)
        (realgud:gdb (if path (concat "gdb " path))))

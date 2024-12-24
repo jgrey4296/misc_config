@@ -8,7 +8,7 @@
       (with-current-buffer result
         (let* ((mode (intern-soft (s-replace "inferior-" "" (symbol-name major-mode))))
                (mode2 (intern-soft (format "inferior-%s" mode)))
-               (project-root (doom-project-root))
+               (project-root (projectile-project-root))
                )
           (if (and mode (not (gethash (cons mode project-root) +eval-repl-buffers)))
               (puthash (cons mode project-root) result +eval-repl-buffers))

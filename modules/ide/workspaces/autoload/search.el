@@ -27,7 +27,7 @@ If prefix ARG is set, prompt for a known project to search from."
                (if-let (projects (projectile-relevant-known-projects))
                    (completing-read "Search project: " projects nil t)
                  (user-error "There are no known projects"))
-             (doom-project-root default-directory)))))
+             (projectile-project-root default-directory)))))
   (+ivy/project-search nil symbol dir))
 
 ;;;###autoload

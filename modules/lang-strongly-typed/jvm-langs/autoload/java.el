@@ -46,7 +46,7 @@ root)."
          "{PackageName}")
         ((not (eq major-mode 'java-mode))
          (user-error "Not in java-mode"))
-        ((when-let (project-root (doom-project-root))
+        ((when-let (project-root (projectile-project-root))
            (let* ((project-root (file-truename project-root))
                   (file-path
                    (file-name-sans-extension

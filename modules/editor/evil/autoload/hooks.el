@@ -24,7 +24,7 @@
         "Shorter, vim-esque save messages."
         (message "\"%s\" %dL, %dC written"
                  (if buffer-file-name
-                     (file-relative-name (file-truename buffer-file-name) (doom-project-root))
+                     (file-relative-name (file-truename buffer-file-name) (projectile-project-root))
                    (buffer-name))
                  (count-lines (point-min) (point-max))
                  (buffer-size)))

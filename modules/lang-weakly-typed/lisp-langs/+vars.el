@@ -1,16 +1,15 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
 (after! projectile
-  (pushnew! projectile-project-root-files "config.el")
+  (add-to-list 'projectile-project-root-files "config.el")
+  (add-to-list 'projectile-project-root-files "info.rkt")
   )
 
-(after! projectile
-  (add-to-list 'projectile-project-root-files "info.rkt"))
-
-(setq elisp-demos-user-files (list
-                              (doom-module-expand-path :lang-weakly-typed 'lisp-langs "elisp-demos.org")
-                              )
-      )
+(speckler-setq! lisp ()
+  elisp-demos-user-files (list
+                          (expand-file-name "elisp-demos.org" (dir!))
+                          )
+  )
 
 ;;-- specs
 (speckler-add! popup ()

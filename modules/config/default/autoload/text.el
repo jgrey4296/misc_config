@@ -51,8 +51,8 @@ With non-nil prefix INCLUDE-ROOT, also include the project's root."
   (interactive "P")
   (+default/yank-buffer-path
    (if include-root
-       (file-name-directory (directory-file-name (doom-project-root)))
-     (doom-project-root))))
+       (file-name-directory (directory-file-name (projectile-project-root)))
+     (projectile-project-root))))
 
 ;;;###autoload
 (defun +default/insert-file-path (arg)

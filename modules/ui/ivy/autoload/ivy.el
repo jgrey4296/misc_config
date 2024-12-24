@@ -239,7 +239,7 @@ The point of this is to avoid Emacs locking up indexing massive file trees."
     (call-interactively
      (cond ((or (file-equal-p default-directory "~")
                 (file-equal-p default-directory "/")
-                (when-let (proot (doom-project-root))
+                (when-let (proot (projectile-project-root))
                   (file-equal-p proot "~")))
             #'counsel-find-file)
 
@@ -266,7 +266,7 @@ The point of this is to avoid Emacs locking up indexing massive file trees."
   (unless (executable-find "rg") (user-error "Couldn't find ripgrep in your PATH"))
   (require 'counsel)
   (let* ((this-command 'counsel-rg)
-         (project-root (or (doom-project-root) default-directory))
+         (project-root (or (projectile-project-root) default-directory))
          (directory (or in project-root))
          (args (concat (if all-files " -uu")
                        (unless recursive " --maxdepth 1")

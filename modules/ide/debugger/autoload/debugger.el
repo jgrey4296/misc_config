@@ -11,7 +11,7 @@ If in a project, returns the configuration of the last debugging session in the
 project, if any. Else, returns the last debugging configuration of the current
 buffer, if any."
   (if (doom-project-p)
-      (doom-store-get (doom-project-root) "+debugger")
+      (doom-store-get (projectile-project-root) "+debugger")
     +debugger--last-config))
 
 (defun +debugger--set-config (config)
@@ -20,7 +20,7 @@ buffer, if any."
 If in a project, sets the project's debugging session configuration. Else, sets
 the debugging configuration of the current buffer."
   (if (doom-project-p)
-      (doom-store-put (doom-project-root) config
+      (doom-store-put (projectile-project-root) config
                       (lambda (key _cfg) (file-directory-p key))
                       "+debugger")
     (setq +debugger--last-config config)))

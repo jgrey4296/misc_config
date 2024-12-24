@@ -44,7 +44,7 @@ falling back on searching your PATH."
   (unless python-shell-interpreter
     (user-error "`python-shell-interpreter' isn't set"))
 
-  (let* ((default-directory (doom-project-root))
+  (let* ((default-directory (projectile-project-root))
          (cmd (python-shell-calculate-command (buffer-file-name)))
          (new-buffer (process-buffer
                       (run-python cmd nil t))))

@@ -11,7 +11,7 @@
   "Goto-Root"
   :key "`"
   :transient nil
-  (find-file (doom-project-root))
+  (find-file (projectile-project-root))
   )
 (transient-call! magit-todos ()
   "Todos"

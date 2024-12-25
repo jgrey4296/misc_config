@@ -38,9 +38,10 @@
   "For controlling librarian"
   :key "b"
   :desc "|| Librarian  ||"
-   ["Global"
-    (transient-macro-toggle-librarian-mode)
-    ]
+  :rows t
+  ["Global"
+   (transient-macro-toggle-librarian-mode)
+   ]
    ["Settings"
     (transient-macro-call-librarian-browser-select)
     ]
@@ -51,5 +52,5 @@
 
 ;;;###autoload
 (defun +jg-librarian-build-librarian-transient ()
-  (transient-append-suffix 'jg-toggle-main '(1 1 0) librarian-settings)
+  (transient-guarded-insert! 'jg-toggle-main librarian-settings (1 -1))
   )

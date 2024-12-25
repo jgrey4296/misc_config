@@ -106,11 +106,12 @@
 
 ;;-- specs
 (speckler-add! projects ()
+  :override t
   `(jg-python-project ("pyproject.toml")
     :project-file "pyproject.toml"
     :test-dir "__tests"
     :test-prefix "test_"
-    :related-files-fn ,#'related-files:jg-python-project
+    :related-files-fn ,#'related-files-jg-python-project
     )
   '(python-poetry ("poetry.lock")        :project-file "poetry.lock" :compilation-dir nil :configure nil :compile "poetry build" :test "poetry run python -m unittest discover" :install nil :package nil :run nil :test-suffix "_test" :test-prefix "test_")
   '(python-pipenv ("Pipfile")            :project-file "Pipfile" :compilation-dir nil :configure nil :compile "pipenv run build" :test "pipenv run test" :install nil :package nil :run nil :test-suffix "_test" :test-prefix "test_")

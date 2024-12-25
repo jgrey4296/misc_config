@@ -73,21 +73,22 @@
     ""
     :key "z"
     :desc +jg-workspace-zimmerframe-group-title
-     [""
-      (transient-macro-toggle-project-zimmerframe-minor-mode)
-      ]
-      ["Inspect"
-       (transient-macro-call-zimmerframe-remaining)
-       (transient-macro-call-zimmerframe-count)
-       ]
-      ["Filter"
-       (transient-macro-call-zimmerframe-default-filters)
-       (transient-macro-call-zimmerframe-filter)
-       (transient-macro-call-zimmerframe-keep)
-       ]
-      ["Transform"
-       (transient-macro-call-zimmerframe-replace)
-       ]
+    :rows t
+    ["Toggle"
+     (transient-macro-toggle-project-zimmerframe-minor-mode)
+     ]
+    ["Inspect"
+     (transient-macro-call-zimmerframe-remaining)
+     (transient-macro-call-zimmerframe-count)
+     ]
+    ["Filter"
+     (transient-macro-call-zimmerframe-default-filters)
+     (transient-macro-call-zimmerframe-filter)
+     (transient-macro-call-zimmerframe-keep)
+     ]
+    ["Transform"
+     (transient-macro-call-zimmerframe-replace)
+     ]
     )
   )
 
@@ -103,7 +104,7 @@
                    (transient-macro-call-zimmerframe-replace)
                    ]
                   [
-                  ,transient-zimmerframe
+                   ,transient-zimmerframe
                    ]
                   ]
     )

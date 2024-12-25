@@ -218,74 +218,83 @@
   "LSP Session Control Options"
   :key "1"
   :desc "|| Session Control ||"
-  [
-   [
-    ("0" "Describe Session" lsp-describe-session)
-    (transient-macro-call-lsp-clients)
-    (transient-macro-call-lsp-list-blacklist)
-    ]
-   [(transient-macro-call-lsp-remove)
-    (transient-macro-call-lsp-disable-client)
-    (transient-macro-call-lsp-unblacklist)
-    ]
-   [(transient-macro-call-lsp-add)
-    (transient-macro-call-lsp-enable-client)]
+  :rows t
+  ;; Row 1
+  ["|| Session Control ||"
+   [("0" "Describe Session" lsp-describe-session)
+   (transient-macro-call-lsp-clients)
+   (transient-macro-call-lsp-list-blacklist)
    ]
-  [ [
-     (transient-macro-call-lsp-select)
-     (transient-macro-call-lsp-debug)
-     ]
-    [
-     (transient-macro-call-lsp-start)
-     (transient-macro-call-lsp-restart)
-     ]
-    [
-     (transient-macro-call-lsp-disconnect)
-     (transient-macro-call-lsp-shutdown)
-     ] ]
+  [(transient-macro-call-lsp-remove)
+   (transient-macro-call-lsp-disable-client)
+   (transient-macro-call-lsp-unblacklist)
+   ]
+  ]
+  ;; Row 2
+  ["----"
+   [(transient-macro-call-lsp-add)
+    (transient-macro-call-lsp-enable-client)
+    ]
+   [(transient-macro-call-lsp-select)
+    (transient-macro-call-lsp-debug)
+    ]
+   ]
+  ;; Row 3
+  ["----"
+   [
+   (transient-macro-call-lsp-start)
+   (transient-macro-call-lsp-restart)
+   ]
+  [
+   (transient-macro-call-lsp-disconnect)
+   (transient-macro-call-lsp-shutdown)
+   ]
+  ]
   )
 
 (transient-subgroup! jg-lsp-toggle ()
   "Main controller for ui settings"
   :key "l"
   :desc "|| LSP        ||"
-  :nowrap nil
-  `[[ ,jg-lsp-session-control ]]
+  :rows t
+  [:description jg-lsp-toggle-descfn
+                " "
+                jg-lsp-session-control
+                ]
   [[ "View Control"
-     (transient-macro-toggle-hook-lsp-breadcrumb)
-     (transient-macro-toggle-hook-lsp-lenses)
-     (transient-macro-toggle-hook-lsp-ui-sideline)
-     (transient-macro-toggle-hook-lsp-doc-popup)
-     (transient-macro-toggle-lsp-doc-childframe)
-     (transient-macro-call-lsp-auto-signature)
-     ]
-   [ "Diagnostics"
-     (transient-macro-toggle-hook-lsp-modeline-diagnostics)
-     (transient-macro-toggle-hook-lsp-diagnostics)
-     (transient-macro-toggle-hook-lsp-code-actions)
-     " "
-     "Toggles"
-     (transient-macro-toggle-hook-lsp-treemacs)
-     (transient-macro-toggle-lsp-doc-hover)
-     (transient-macro-toggle-hook-lsp-completion)
-     (transient-macro-toggle-hook-tree-sitter-hl)
-     ]
-   [ "Settings"
-     (transient-macro-call-lsp-on-type-formatting)
-     (transient-macro-call-lsp-highlighting)
+    (transient-macro-toggle-hook-lsp-breadcrumb)
+    (transient-macro-toggle-hook-lsp-lenses)
+    (transient-macro-toggle-hook-lsp-ui-sideline)
+    (transient-macro-toggle-hook-lsp-doc-popup)
+    (transient-macro-toggle-lsp-doc-childframe)
+    (transient-macro-call-lsp-auto-signature)
+    ]
+  [ "Diagnostics"
+    (transient-macro-toggle-hook-lsp-modeline-diagnostics)
+    (transient-macro-toggle-hook-lsp-diagnostics)
+    (transient-macro-toggle-hook-lsp-code-actions)
+    " "
+    "Toggles"
+    (transient-macro-toggle-hook-lsp-treemacs)
+    (transient-macro-toggle-lsp-doc-hover)
+    (transient-macro-toggle-hook-lsp-completion)
+    (transient-macro-toggle-hook-tree-sitter-hl)
+    ]
+  [ "Settings"
+    (transient-macro-call-lsp-on-type-formatting)
+    (transient-macro-call-lsp-highlighting)
 
-     (transient-macro-toggle-lsp-keep-alive)
-     (transient-macro-call-lsp-trace-io)
-     ]
-   ]
+    (transient-macro-toggle-lsp-keep-alive)
+    (transient-macro-call-lsp-trace-io)
+    ]]
   )
 
 ;;;###autoload
 (defun +jg-ide-build-lsp-transient ()
   (transient-guarded-insert! 'jg-toggle-main jg-lsp-toggle (1 -1))
 
-  (transient-append-suffix (caddr jg-toggle-visuals-transient)
-    "H" '("t" transient-macro-toggle-tree-sitter-hl-mode)
+  (transient-append-suffix (cadr jg-toggle-visuals-transient)
+    "H" '("t" transient-macro-toggle-hook-tree-sitter-hl)
     )
 
   )

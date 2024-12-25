@@ -108,11 +108,10 @@
   (transient-define-prefix transient-carousel ()
     ""
     [:description jg-workspace-carousel-title
-                  [(transient-macro-call-carousel-toggle)
-                   (transient-macro-call-carousel-quit)
-                   (transient-macro-call-carousel-new)
-                   (transient-macro-call-carousel-reset)
-                   ]
+                  (transient-macro-call-carousel-toggle)
+                  (transient-macro-call-carousel-quit)
+                  (transient-macro-call-carousel-new)
+                  (transient-macro-call-carousel-reset)
                   ]
     [(transient-macro-call-carousel-toggle-loop)
      (transient-macro-call-carousel-clear)

@@ -25,7 +25,7 @@
 (defer-load! (jg-bindings-total hydra) "+bindings")
 
 (use-package! hydra
-  :after hydra-macros
+  :after macro-tools
   )
 
 

@@ -10,13 +10,14 @@
 (transient-call! carousel-print ()
   ""
   :key "p"
-  :desc (transient-simple-formatter "Print Order" "p")
+  :desc (macro-tools--transient-simple-fmt "Print Order" "p")
   (carousel-print-order))
 (transient-call! carousel-edit ()
   ""
   :key "E"
-  :desc (transient-simple-formatter "Edit Order" "E")
-  :transient nil (carousel-edit-order))
+  :desc (macro-tools--transient-simple-fmt "Edit Order" "E")
+  :transient nil
+  (carousel-edit-order))
 (transient-call! carousel-toggle-loop ()
   ""
   :key "l"
@@ -25,70 +26,70 @@
 (transient-call! carousel-new ()
   ""
   :key "n"
-  :desc (transient-simple-formatter "New Carousel" "n")
+  :desc (macro-tools--transient-simple-fmt "New Carousel" "n")
   :transient nil
   (carousel-new))
 (transient-call! carousel-toggle ()
   ""
   :key "t"
-  :desc (transient-simple-formatter "Toggle" "t")
+  :desc (macro-tools--transient-simple-fmt "Toggle" "t")
   (carousel-toggle))
 (transient-call! carousel-quit ()
   ""
   :key "T"
-  :desc (transient-simple-formatter "Quit" "T")
+  :desc (macro-tools--transient-simple-fmt "Quit" "T")
   (carousel-deconvert))
 (transient-call! carousel-expand ()
   ""
   :key "e"
   :interactive t
-  :desc (transient-simple-formatter "Expand Focus" "e")
+  :desc (macro-tools--transient-simple-fmt "Expand Focus" "e")
   :transient nil
   #'carousel-expand-focus)
 (transient-call! carousel-reset ()
   ""
   :key "r"
-  :desc (transient-simple-formatter "Reset" "r")
+  :desc (macro-tools--transient-simple-fmt "Reset" "r")
   :transient nil
   (carousel-reset-columns))
 (transient-call! carousel-clear ()
   ""
   :key "K"
-  :desc (transient-simple-formatter "Clear Carousel" "K")
+  :desc (macro-tools--transient-simple-fmt "Clear Carousel" "K")
   :transient nil
   (carousel-clear-ring))
 (transient-call! carousel-add-buffer ()
   ""
   :key "a"
-  :desc (transient-simple-formatter "Add" "a")
+  :desc (macro-tools--transient-simple-fmt "Add" "a")
   :transient nil
   (carousel-add-current-buffer))
 (transient-call! carousel-remove ()
   ""
   :key "x"
-  :desc (transient-simple-formatter "Remove" "x")
+  :desc (macro-tools--transient-simple-fmt "Remove" "x")
   :transient nil
   (carousel-remove-buffer))
 (transient-call! carousel-move-left ()
   ""
   :key "["
-  :desc (transient-simple-formatter "Move Left" "[")
+  :desc (macro-tools--transient-simple-fmt "Move Left" "[")
   (carousel-move-buffer-left))
 (transient-call! carousel-move-right ()
   ""
   :key "]"
-  :desc (transient-simple-formatter "Move Right" "]")
+  :desc (macro-tools--transient-simple-fmt "Move Right" "]")
   (carousel-move-buffer-right))
 (transient-call! carousel-claim ()
   ""
   :key "w"
-  :desc (transient-simple-formatter "Claim Window" "w")
+  :desc (macro-tools--transient-simple-fmt "Claim Window" "w")
   (carousel-claim-window))
 (transient-call! carousel-goto ()
   ""
   :key "f"
   :interactive t
-  :desc (transient-simple-formatter "Find-Buffer" "f")
+  :desc (macro-tools--transient-simple-fmt "Find-Buffer" "f")
   :transient nil
   #'carousel-goto-choice)
 

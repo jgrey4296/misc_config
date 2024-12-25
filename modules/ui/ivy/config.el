@@ -124,6 +124,10 @@
   (setq prescient-save-file (concat doom-cache-dir "prescient-save.el"))
   )
 
+(use-package! ivy-hydra
+  :defer t
+  )
+
 ;;-- end ivy
 
 ;;-- counsel

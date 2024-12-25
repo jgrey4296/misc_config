@@ -55,17 +55,17 @@
   "Replace Regexp across project"
   :key "R"
   :interactive t
-  :desc (transient-simple-formatter "Replace Regexp" "R")
+  :desc (macro-tools--transient-simple-fmt "Replace Regexp" "R")
   #'zimmerframe-replace-regexp)
 (transient-call! zimmerframe-next ()
   "Next"
   :key "l"
-  :desc (transient-simple-formatter "Walk Next" "l")
+  :desc (macro-tools--transient-simple-fmt "Walk Next" "l")
   (zimmerframe-next))
 (transient-call! zimmerframe-prev ()
   "Prev"
   :key "h"
-  :desc (transient-simple-formatter "Walk Prev" "h")
+  :desc (macro-tools--transient-simple-fmt "Walk Prev" "h")
   (zimmerframe-prev))
 
 (defun jg-workspace-build--zimmerframe-transient-group ()

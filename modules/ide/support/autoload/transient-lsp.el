@@ -249,7 +249,8 @@
   "Main controller for ui settings"
   :key "l"
   :desc "|| LSP        ||"
-  [[ jg-lsp-session-control ]]
+  :nowrap nil
+  `[[ ,jg-lsp-session-control ]]
   [[ "View Control"
      (transient-macro-toggle-hook-lsp-breadcrumb)
      (transient-macro-toggle-hook-lsp-lenses)
@@ -281,15 +282,7 @@
 
 ;;;###autoload
 (defun +jg-ide-build-lsp-transient ()
-
-  (pcase (transient-get-suffix 'jg-toggle-main '(1 -1))
-    ((and `[1 transient-columns nil ,x]
-          (guard (< (length x) 4)))
-     (transient-append-suffix 'jg-toggle-main
-       '(1 -1 -1) jg-lsp-toggle))
-    (_ (transient-append-suffix 'jg-toggle-main
-         '(1 -1) [ jg-lsp-toggle ]))
-    )
+  (transient-guarded-insert! 'jg-toggle-main jg-lsp-toggle (1 -1))
 
   (transient-append-suffix (caddr jg-toggle-visuals-transient)
     "H" '("t" transient-macro-toggle-tree-sitter-hl-mode)

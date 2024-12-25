@@ -4,8 +4,6 @@
 ;; :desc "Input Language" "i" #'toggle-input-method
 ;; :desc "indent style"   "i" #'doom/toggle-indent-style
 
-(defvar jg-transient-toggles-hook nil)
-
 ;; Top Level Toggle
 
 (transient-toggle-mode! global-company-mode ()
@@ -134,6 +132,7 @@
   (run-hooks 'jg-transient-toggles-hook)
   )
 
-;; (transient-setup-hook! jg-ui-transient-toggles ()
-;;   (+jg-ui-build-main-toggle--transient)
-;;   )
+;;;###autoload (autoload 'jg-ui-transient-toggles-builder "config/ui/autoload/transient-toggles" nil t)
+(transient-setup-hook! jg-ui-transient-toggles ()
+  (+jg-ui-build-main-toggle-transient)
+  )

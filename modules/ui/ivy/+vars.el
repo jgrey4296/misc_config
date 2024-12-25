@@ -27,16 +27,25 @@
 
 (speckler-add! ivy-actions ()
   :override nil
-  '(ivy-switch-buffer (("k" +jg-ivy-kill-buffer "Kill")))
-  '(+jg-term-switch   (("k" +jg-ivy-kill-buffer "Kill")))
-  '(swiper (("y" +jg-ivy--action-yank "yank")
-             ("k" +jg-ivy--action-kill "kill")
-            ))
-  ;; Override default insert action
-  '(t (("I" +jg-ivy--action-insert "insert at point")
-        ("i" ivy--action-insert "insert"))
+  :extend t
+  '(ivy-switch-buffer
+    ("k" +jg-ivy-kill-buffer "Kill")
     )
-  '(counsel-rg '(("O" +ivy-git-grep-other-window-action "open in other window")))
+  '(+jg-term-switch
+    ("k" +jg-ivy-kill-buffer "Kill")
+    )
+  '(swiper
+    ("y" +jg-ivy--action-yank "yank")
+    ("k" +jg-ivy--action-kill "kill")
+    )
+  ;; Override default insert action
+  '(t
+    ("I" +jg-ivy--action-insert "insert at point")
+    ("i" ivy--action-insert "insert")
+    )
+  '(counsel-rg
+    ("O" +ivy-git-grep-other-window-action "open in other window")
+    )
   ;; `(counsel-file-jump ,(plist-get ivy--actions-list 'counsel-find-file))
   )
 

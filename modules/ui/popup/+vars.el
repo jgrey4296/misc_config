@@ -5,9 +5,10 @@
   )
 
 (speckler-add! ivy-actions ()
+  :extend t
   '(ivy-switch-buffer
-   (("p" +jg-popup-ivy-open "Popup"))
-   )
+    ("p" +jg-popup-ivy-open "Popup")
+    )
   )
 
 (speckler-add! popup ()

@@ -10,6 +10,7 @@
 (speckler-new! ivy-actions (key vals)
   "Delayed registration of ivy actions"
   :override nil
+  :struct '(id-sym actiontriple*)
   :loop 'do
   (ivy-add-actions key vals)
   )

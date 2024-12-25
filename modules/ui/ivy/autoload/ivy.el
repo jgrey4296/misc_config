@@ -243,7 +243,7 @@ The point of this is to avoid Emacs locking up indexing massive file trees."
                   (file-equal-p proot "~")))
             #'counsel-find-file)
 
-           ((doom-project-p)
+           ((projectile-project-p)
             (let ((files (projectile-current-project-files)))
               (if (<= (length files) ivy-sort-max-size)
                   #'counsel-projectile-find-file

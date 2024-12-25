@@ -12,6 +12,7 @@
 (advice-add 'evil-alternate-buffer              :override #'+workspaces--evil-alternate-buffer-a)
 (advice-add 'persp-buffers-to-savelist          :before   #'+workspaces-remove-dead-buffers-a)
 (advice-add 'projectile-invalidate-cache        :after    #'+jg-projects-invalidate-test-files-cache)
+(advice-add #'persp-asave-on-exit :around #'+workspaces-autosave-real-buffers-a)
 
 (use-package! persp-mode
   :unless noninteractive
@@ -76,8 +77,6 @@
              )
   ;;-- end hooks
 
-  ;; Don't bother auto-saving the session if no real buffers are open.
-  (advice-add #'persp-asave-on-exit :around #'+workspaces-autosave-real-buffers-a)
 
   (after! ivy-rich
     (cl-callf plist-put ivy-rich-display-transformers-list
@@ -213,7 +212,7 @@
   (push (abbreviate-file-name doom-local-dir) projectile-globally-ignored-directories)
 
   ;; Per-project compilation buffers
-  (setq compilation-buffer-name-function #'projectile-compilation-buffer-name
+  (setq compilation-buffer-name-function   #'projectile-compilation-buffer-name
         compilation-save-buffers-predicate #'projectile-current-project-buffer-p)
 
   ;; Disable commands that won't work, as is, and that Doom already provides a
@@ -231,45 +230,12 @@
   ;; loaded or written to.
   (add-hook 'kill-emacs-hook #'doom-cleanup-project-cache-h)
 
-  ;; Some MSYS utilities auto expanded the `/' path separator, so we need to prevent it.
-  (when IS-WINDOWS
-    (setenv "MSYS_NO_PATHCONV" "1") ; Fix path in Git Bash
-    (setenv "MSYS2_ARG_CONV_EXCL" "--path-separator")) ; Fix path in MSYS2
 
-  ;; `projectile-generic-command' doesn't typically support a function, but my
-  ;; `doom--only-use-generic-command-a' advice allows this. I do it this way so
-  ;; that projectile can adapt to remote systems (over TRAMP), rather then look
-  ;; for fd/ripgrep on the remote system simply because it exists on the host.
-  ;; It's faster too.
   (put 'projectile-git-submodule-command 'initial-value projectile-git-submodule-command)
   (setq projectile-git-submodule-command nil
         projectile-indexing-method 'hybrid
-        projectile-generic-command
-        (lambda (_)
-          ;; If fd exists, use it for git and generic projects. fd is a rust
-          ;; program that is significantly faster than git ls-files or find, and
-          ;; it respects .gitignore. This is recommended in the projectile docs.
-          (cond
-           ((when-let*
-                ((bin (if (ignore-errors (file-remote-p default-directory nil t))
-                          (cl-find-if (doom-rpartial #'executable-find t)
-                                      (list "fdfind" "fd"))
-                        doom-projectile-fd-binary))
-                 ;; REVIEW Temporary fix for #6618. Improve me later.
-                 (version (with-memoization doom-projects--fd-version
-                            (cadr (split-string (cdr (doom-call-process bin "--version"))
-                                                " " t))))
-                 ((ignore-errors (version-to-list version))))
-                (concat (format "%s . -0 -H --color=never --type file --type symlink --follow --exclude .git %s"
-                                bin (if (version< version "8.3.0")
-                                        "" "--strip-cwd-prefix"))
-                        (if IS-WINDOWS " --path-separator=/"))))
-           ;; Otherwise, resort to ripgrep, which is also faster than find
-           ((executable-find "rg" t)
-            (concat "rg -0 --files --follow --color=never --hidden -g!.git"
-                    (if IS-WINDOWS " --path-separator=/")))
-           ("find . -type f -print0"))))
-
+        projectile-generic-command #'+jg-projectile-generic-indexing-cmd
+        )
   )
 
 (use-package! transient

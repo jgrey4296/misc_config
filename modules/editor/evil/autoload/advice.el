@@ -48,7 +48,7 @@
   "Take a path and resolve any vim-like filename modifiers in it. This adds
 support for most vim file modifiers, as well as:
 
-  %:P   Resolves to `doom-project-root'.
+  %:P   Resolves to `projectile-project-root'.
 
 See http://vimdoc.sourceforge.net/htmldoc/cmdline.html#filename-modifiers for
 more information on modifiers."
@@ -101,7 +101,7 @@ more information on modifiers."
                                       (unless global 1))))
                                path))
                             ("P"
-                             (let ((project-root (doom-project-root (file-name-directory (expand-file-name path)))))
+                             (let ((project-root (projectile-project-root (file-name-directory (expand-file-name path)))))
                                (unless project-root
                                  (user-error "Not in a project"))
                                (abbreviate-file-name project-root)))))

@@ -23,4 +23,5 @@
 (package! free-keys)
 (package! helpful)
 (package! eldoc)
+(package! straight)
 ;;; packages.el ends here

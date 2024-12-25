@@ -16,4 +16,4 @@
 (package! f)
 (package! compat :pin nil :recipe (:host github :repo "emacs-compat/compat"))
 
-(package! jg-el-macros :recipe (:host github :repo "jgrey4296/jg-el-macros"))
+(package! macro-tools :recipe (:host github :repo "jgrey4296/macro-tools"))

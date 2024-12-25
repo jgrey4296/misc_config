@@ -1,6 +1,8 @@
 ;; transient.el -*- lexical-binding: t; -*-
 (require 'librarian)
 (require 'librarian--browse)
+(require 'macro-tools--transient)
+
 (unless (boundp 'librarian--browse-variants) (defvar librarian--browse-variants nil))
 (unless (boundp 'librarian--browse-default) (defvar librarian--browse-default "firefox"))
 
@@ -36,19 +38,18 @@
   "For controlling librarian"
   :key "b"
   :desc "|| Librarian  ||"
-  ["Global"
-   (transient-macro-toggle-librarian-mode)
-   ]
-  ["Settings"
-   (transient-macro-call-librarian-browser-select)
-   ]
-  ["Triggers"
-   (transient-macro-call-librarian-rebuild-database)
-   ]
+   ["Global"
+    (transient-macro-toggle-librarian-mode)
+    ]
+   ["Settings"
+    (transient-macro-call-librarian-browser-select)
+    ]
+   ["Triggers"
+    (transient-macro-call-librarian-rebuild-database)
+    ]
   )
 
-
 ;;;###autoload
-(defun +jg-librarian-add-librarian-transient ()
+(defun +jg-librarian-build-librarian-transient ()
   (transient-append-suffix 'jg-toggle-main '(1 1 0) librarian-settings)
   )

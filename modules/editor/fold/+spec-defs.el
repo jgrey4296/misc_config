@@ -11,8 +11,12 @@
   (append (list (* -1 (or (plist-get val :priority) 0)))
           (list (ensure-list (plist-get val :modes)))
           (cl-loop for (kwd . fn) in (map-pairs (plist-get val :triggers))
+                   for realfn = (upfun! fn)
+                   if (or (null realfn) (functionp realfn))
                    collect kwd
-                   collect (upfun! fn))
+                   and
+                   collect realfn
+                   )
           )
   )
 

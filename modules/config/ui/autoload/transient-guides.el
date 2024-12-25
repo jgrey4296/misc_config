@@ -6,6 +6,7 @@
 ;; See footer for licenses/metadata/notes as applicable
 ;;-- end Header
 (require 'display-fill-column-indicator)
+(require 'macro-tools--transient)
 (require 'glasses)
 
 ;; Guides
@@ -51,38 +52,28 @@
   (writegood-mode (if flyspell-mode 1 -1))
   )
 
-
 ;;;###autoload
 (defun +jg-ui-build-guides-transient ()
   (transient-subgroup! jg-toggle-guides-transient ()
     "For controlling ui guide settings"
     :key "g"
     :desc "|| Guides     ||"
-    [:description "|| Guides     ||"
-                  [
-                   (transient-macro-toggle-hook-fill-column-indicator)
-                   (transient-macro-toggle-hook-indent-guides)
-                   (transient-macro-toggle-display-line-numbers-mode)
-                   ]
-                  [
-                   (transient-macro-toggle-ruler-mode)
-                   (transient-macro-toggle-whitespace-mode)
-                   (transient-macro-call-spelling)
-                   ]
-                  [
-                   (transient-macro-toggle-glasses-mode)
-                   ]
-                  ]
+    [
+     (transient-macro-toggle-hook-fill-column-indicator)
+     (transient-macro-toggle-hook-indent-guides)
+     (transient-macro-toggle-display-line-numbers-mode)
+     ]
+    [
+     (transient-macro-toggle-ruler-mode)
+     (transient-macro-toggle-whitespace-mode)
+     (transient-macro-call-spelling)
+     ]
+    [
+     (transient-macro-toggle-glasses-mode)
+     ]
     )
 
-  (pcase (transient-get-suffix 'jg-toggle-main '(1 -1))
-    ((and `[1 transient-columns nil ,x]
-          (guard (< (length x) 4)))
-     (transient-append-suffix 'jg-toggle-main
-       '(1 -1 -1) jg-toggle-guides-transient))
-    (_ (transient-append-suffix 'jg-toggle-main
-         '(1 -1) [ jg-toggle-guides-transient ]))
-    )
+  (transient-guarded-insert! 'jg-toggle-main jg-toggle-guides-transient (1 -1))
   )
 
 ;;-- Footer

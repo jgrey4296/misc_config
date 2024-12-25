@@ -12,8 +12,8 @@
   :after transient-toggles
   :hook (doom-first-input . global-librarian-mode)
   :config
-  (+jg-librarian-add-librarian-transient)
-  (librarian-tag-mode-rebuild-tag-database)
+  (add-hook 'jg-ui-transient-toggles-hook #'+jg-librarian-build-librarian-transient 90)
+  (add-hook 'speckler-hook #'librarian-tag-mode-rebuild-tag-database)
   (setq librarian--browse-default "firefox")
   ;; choose backends?
   )

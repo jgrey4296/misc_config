@@ -167,12 +167,13 @@
 
 ;;-- specs
 (speckler-add! fold ()
+  :override nil
   `(dired
     :modes (dired-mode)
     :priority 50
     :triggers (:open-all   nil
                :close-all  nil
-               :toggle     ,(cmd! (dired-hide-subdir 1))
+               :toggle     #'(lambda () (dired-hide-subdir 1))
                :open       nil
                :open-rec   nil
                :close      nil

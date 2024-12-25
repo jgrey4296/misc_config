@@ -5,6 +5,7 @@
 ;;
 ;; See footer for licenses/metadata/notes as applicable
 ;;-- end Header
+(require 'macro-tools--transient)
 
 ;;-- setup
 (transient-toggle-var! auto-balance ()
@@ -87,7 +88,6 @@
   #'doom/window-maximize-buffer
   )
 
-;; TODO move these to window-nav
 (transient-call! window-undo        ()
   "Window Undo"
   :key "u"
@@ -104,10 +104,12 @@
 ;;-- end setup
 
 ;;;###autoload
-(defun +jg-windows-add-transients ()
+(defun +jg-windows-build-transient ()
   " Add window control to the workspace transient "
-  (transient-append-suffix 'workspace-control-transient '(0 -1 -1) '(transient-macro-call-toggle-dedication))
-  (transient-append-suffix 'workspace-control-transient '(0 -1 -1) '(transient-macro-toggle-auto-balance))
+  (transient-append-suffix 'workspace-control-transient '(0 -1 -1)
+    '(transient-macro-call-toggle-dedication))
+  (transient-append-suffix 'workspace-control-transient '(0 -1 -1)
+    '(transient-macro-toggle-auto-balance))
   (transient-remove-suffix 'workspace-control-transient "1")
 
   (transient-append-suffix 'workspace-control-transient '(-2)

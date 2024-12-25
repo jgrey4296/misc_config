@@ -2,6 +2,7 @@
 
 (local-load! "+vars")
 (local-load! "+defs")
+(local-load! "+spec-defs")
 (local-load! "+extra-config")
 
 (defer-load! (jg-evil-bindings jg-bindings-total) "+bindings")
@@ -60,7 +61,6 @@
     (add-to-list 'ivy-dispatching-done-hydra-exit-keys '("C-o" nil))
     (defhydra+ hydra-ivy () ("M-o" nil)))
 
-  ;; set ivy-resume to be in normal-state for scrolling
 
   )
 
@@ -124,6 +124,10 @@
   (setq prescient-save-file (concat doom-cache-dir "prescient-save.el"))
   )
 
+(use-package! ivy-hydra
+  :defer t
+  )
+
 ;;-- end ivy
 
 ;;-- counsel
@@ -177,11 +181,6 @@
   ;; Decorate `doom/help-custom-variable' results the same way as
   ;; `counsel-describe-variable' (adds value and docstring columns).
   (ivy-configure 'doom/help-custom-variable :parent 'counsel-describe-variable)
-
-  (ivy-add-actions
-   'counsel-rg ; also applies to `counsel-rg'
-   '(("O" +ivy-git-grep-other-window-action "open in other window")))
-  (ivy-add-actions 'counsel-file-jump (plist-get ivy--actions-list 'counsel-find-file))
 
   ;;-- end ivy
 

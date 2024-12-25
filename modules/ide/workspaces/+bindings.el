@@ -88,5 +88,6 @@
   )
 
 (map! :map jg-dired-mode-map
-      :desc "Make Test dir"  :n "< t" (cmd! (dired-create-directory (+jg-projects-test-dir)))
+      :localleader
+      :desc "Project File" "g p" (cmd! (+jg-dired-touch ".project"))
       )

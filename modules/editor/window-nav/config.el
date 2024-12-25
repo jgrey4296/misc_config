@@ -22,9 +22,7 @@
 
 (local-load! "+vars")
 (local-load! "+spec-defs")
-(after! jg-workspaces-core-transient
-  (+jg-windows-add-transients)
-  )
+(add-hook 'workspaces-transient-hook #'+jg-windows-build-transient 90)
 
 (defer-load! jg-bindings-total "+bindings")
 

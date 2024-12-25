@@ -10,7 +10,7 @@
 (package! jinja2-mode)
 (package! web-mode)
 
-(package! poly-ansible)
+;; (package! poly-ansible)
 (package! polymode)
 (package! poly-rst)
 

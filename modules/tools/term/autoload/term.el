@@ -29,7 +29,7 @@ If prefix ARG, recreate the term buffer."
       (if (and (window-live-p window)
                (buffer-live-p buffer))
           (delete-window window)
-        (setenv "PROOT" (or (doom-project-root) default-directory))
+        (setenv "PROOT" (or (projectile-project-root) default-directory))
         (with-current-buffer buffer
           (doom-mark-buffer-as-real-h)
           (multi-term-internal))

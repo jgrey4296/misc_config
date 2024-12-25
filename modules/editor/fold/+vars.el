@@ -14,12 +14,12 @@
 ;;-- vimish-fold
 (setq-default vimish-fold-dir (concat doom-cache-dir "vimish-fold/")
               vimish-fold-indication-mode 'right-fringe
-              evil-vimish-fold-mode-map nil
               vimish-fold-header-width 50
               vimish-fold-persist-on-saving nil
               )
 
 (speckler-add! fold ()
+  :override nil
   `(vimish
     :modes (vimish-fold-mode)
     :priority -50

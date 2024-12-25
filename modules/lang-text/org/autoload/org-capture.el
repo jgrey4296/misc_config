@@ -91,7 +91,7 @@ If it is an absolute path return `+org-capture-todo-file' verbatim."
      filename
      (or (locate-dominating-file (file-truename default-directory)
                                  filename)
-         (doom-project-root)
+         (projectile-project-root)
          (user-error "Couldn't detect a project")))))
 
 ;;;###autoload

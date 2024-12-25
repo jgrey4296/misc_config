@@ -105,7 +105,7 @@
         lsp-groovy-server-file (expand-file-name "groovy-language-server-all.jar" lsp-server-install-dir))
 
   (add-hook! 'lsp-mode-hook #'+lsp-optimization-mode)
-  (add-hook 'jg-transient-toggles-hook #'+jg-ide-build-lsp-transient 90)
+  (add-hook 'jg-ui-transient-toggles-hook #'+jg-ide-build-lsp-transient 90)
   )
 
 (use-package! lsp-ui
@@ -120,7 +120,6 @@
 (use-package! lsp-treemacs
   :defer t
   )
-
 
 (speckler-add! lib-env ()
   :override nil

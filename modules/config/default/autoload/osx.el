@@ -50,4 +50,4 @@
 (+macos--open-with reveal-in-finder "Finder" default-directory)
 
 ;;;###autoload (autoload '+macos/reveal-project-in-finder "config/default/autoload/osx.el" nil t)
-(+macos--open-with reveal-project-in-finder "Finder" (or (doom-project-root) default-directory))
+(+macos--open-with reveal-project-in-finder "Finder" (or (projectile-project-root) default-directory))

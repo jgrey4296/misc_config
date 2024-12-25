@@ -5,7 +5,7 @@
 ;;
 ;; See footer for licenses/metadata/notes as applicable
 ;;-- end Header
-(require 'transient)
+(require 'macro-tools--transient)
 
 (defun +jg-workspace-zimmerframe-active-title ()
   (format "Zimmer (%s) Control" (fmt-as-bool! project-zimmerframe-minor-mode))
@@ -55,42 +55,39 @@
   "Replace Regexp across project"
   :key "R"
   :interactive t
-  :desc (transient-simple-formatter "Replace Regexp" "R")
+  :desc (macro-tools--transient-simple-fmt "Replace Regexp" "R")
   #'zimmerframe-replace-regexp)
 (transient-call! zimmerframe-next ()
   "Next"
   :key "l"
-  :desc (transient-simple-formatter "Walk Next" "l")
+  :desc (macro-tools--transient-simple-fmt "Walk Next" "l")
   (zimmerframe-next))
 (transient-call! zimmerframe-prev ()
   "Prev"
   :key "h"
-  :desc (transient-simple-formatter "Walk Prev" "h")
+  :desc (macro-tools--transient-simple-fmt "Walk Prev" "h")
   (zimmerframe-prev))
 
 (defun jg-workspace-build--zimmerframe-transient-group ()
   (transient-subgroup! transient-zimmerframe ()
     ""
     :key "z"
-    [:description +jg-workspace-zimmerframe-group-title
-                  [""
-                   (transient-macro-toggle-project-zimmerframe-minor-mode)
-                   ]
-                  ]
-    [
-     ["Inspect"
-      (transient-macro-call-zimmerframe-remaining)
-      (transient-macro-call-zimmerframe-count)
+    :desc +jg-workspace-zimmerframe-group-title
+     [""
+      (transient-macro-toggle-project-zimmerframe-minor-mode)
       ]
-     ["Filter"
-      (transient-macro-call-zimmerframe-default-filters)
-      (transient-macro-call-zimmerframe-filter)
-      (transient-macro-call-zimmerframe-keep)
-      ]
-     ["Transform"
-      (transient-macro-call-zimmerframe-replace)
-      ]
-     ]
+      ["Inspect"
+       (transient-macro-call-zimmerframe-remaining)
+       (transient-macro-call-zimmerframe-count)
+       ]
+      ["Filter"
+       (transient-macro-call-zimmerframe-default-filters)
+       (transient-macro-call-zimmerframe-filter)
+       (transient-macro-call-zimmerframe-keep)
+       ]
+      ["Transform"
+       (transient-macro-call-zimmerframe-replace)
+       ]
     )
   )
 
@@ -99,13 +96,15 @@
   (jg-workspace-build--zimmerframe-transient-group)
 
   (transient-append-suffix 'workspace-control-transient '(-2)
-    [:description +jg-workspace-zimmerframe-active-title
+    `[:description +jg-workspace-zimmerframe-active-title
                   [
                    (transient-macro-call-zimmerframe-next)
                    (transient-macro-call-zimmerframe-prev)
                    (transient-macro-call-zimmerframe-replace)
                    ]
-                  [transient-zimmerframe]
+                  [
+                  ,transient-zimmerframe
+                   ]
                   ]
     )
   )

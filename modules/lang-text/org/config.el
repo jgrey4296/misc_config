@@ -17,8 +17,11 @@
   org-capture
   :preface
   ;; Custom org modules
-  (dolist (flag (doom-module-context-get :flags))
-    (load! (concat "contrib/" (substring (symbol-name flag) 1)) nil t))
+  ;; (dolist (flag (doom-module-context-get :flags))
+  ;;   (load! (concat "contrib/" (substring (symbol-name flag) 1)) nil t))
+
+  ;; (dolist (flag (doom-module :lang 'org :flags))
+  ;;   (load! (concat "contrib/" (substring (symbol-name flag) 1)) nil t))
 
   ;; In case the user has eagerly loaded org from their configs
   (when (and (featurep 'org)

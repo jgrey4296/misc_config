@@ -1,5 +1,5 @@
 ;;; transient.el -*- lexical-binding: t; -*-
-(require 'transient)
+(require 'macro-tools--transient)
 
 (defvar jg-workspace-transient-hook nil)
 
@@ -11,7 +11,7 @@
   "Goto-Root"
   :key "`"
   :transient nil
-  (find-file (doom-project-root))
+  (find-file (projectile-project-root))
   )
 (transient-call! magit-todos ()
   "Todos"
@@ -39,7 +39,7 @@
                   ["" (transient-macro-call-workspaces-ivy)]
                   ]
     []
-    transient-quit!
+    macro-tools--transient-quit!
     )
 
   (run-hooks 'jg-workspace-transient-hook)
@@ -50,5 +50,20 @@
   (interactive)
   (let ((transient--buffer-name jg-workspaces-transient-buffer-name))
     (workspace-control-transient)
+    )
+  )
+
+
+;;;###autoload (autoload 'workspaces-transient-builder "ide/workspaces/autoload/transient-workspaces")
+(transient-setup-hook! workspaces-transient ()
+  (transient-define-prefix workspace-control-transient ()
+    "The main workspace control transient"
+    [:description +jg-workspace-settings-group-title
+                  ["|| General ||" (transient-macro-call-goto-root)]
+                  ["" (transient-macro-call-magit-todos)]
+                  ["" (transient-macro-call-workspaces-ivy)]
+                  ]
+    []
+    macro-tools--transient-quit!
     )
   )

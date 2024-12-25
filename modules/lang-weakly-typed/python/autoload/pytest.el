@@ -93,7 +93,7 @@
    [
     ]
    ]
-  transient-quit!
+  macro-tools--transient-quit!
   )
 
 ;;;###autoload

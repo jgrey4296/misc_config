@@ -20,8 +20,8 @@
 (use-package! smartparens
   :commands (sp-pair sp-local-pair sp-with-modes sp-point-in-comment sp-point-in-string)
   :config
-  (add-to-list 'doom-point-in-string-functions 'sp-point-in-string)
-  (add-to-list 'doom-point-in-comment-functions 'sp-point-in-comment)
+  ;; (add-to-list 'doom-point-in-string-functions 'sp-point-in-string)
+  ;; (add-to-list 'doom-point-in-comment-functions 'sp-point-in-comment)
   (add-to-list 'sp-lisp-modes 'sly-mrepl-mode)
   (require 'smartparens-config);; Load default smartparens rules for various languages
 

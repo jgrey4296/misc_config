@@ -4,10 +4,11 @@
   (rx (or "*helpful" "*helm-" "doom" "*dired-log" "magit" "*Free Keys"))
   )
 
-(after! ivy
-  (ivy-add-actions 'ivy-switch-buffer
-                   '(("p" +jg-popup-ivy-open "Popup"))
-                   )
+(speckler-add! ivy-actions ()
+  :extend t
+  '(ivy-switch-buffer
+    ("p" +jg-popup-ivy-open "Popup")
+    )
   )
 
 (speckler-add! popup ()

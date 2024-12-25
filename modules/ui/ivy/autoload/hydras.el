@@ -1,12 +1,12 @@
 ;;; completion/ivy/autoload/hydras.el -*- lexical-binding: t; -*-
 (require 'ivy)
 (require 'hydra)
-(require 'hydra-macros)
+(require 'macro-tools--hydra)
 
 
 ;;;###autoload (autoload 'jg-ivy-hydra/body "ui/ivy/autoload/hydras" nil t)
 (defhydra jg-ivy-hydra (:hint nil :color pink)
-  (format "%s\n" (hydra-macros-format-columns
+  (format "%s\n" (macro-tools--hydra-format-columns
                   '("|Top-to-bottom" "_g_: Top" "_G_: Bottom" "_u_: scroll up" "_d_: scroll down")
                   '(blank k blank j)
                   '("|Call" forward "_RET_: done" "_TAB_: alt-done" occur)

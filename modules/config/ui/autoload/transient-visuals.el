@@ -6,6 +6,7 @@
 ;; See footer for licenses/metadata/notes as applicable
 ;;-- end Header
 (require 'elide-head)
+(require 'macro-tools--transient)
 
 ;; Visual
 (transient-toggle-mode! global-prettify-symbols-mode ()
@@ -75,35 +76,26 @@
     "For controlling ui visual settings"
     :key "v"
     :desc "|| Visuals    ||"
-    [:description "|| Visuals    ||"
-                  [
-                   (transient-macro-toggle-evil-goggles-mode)
-                   (transient-macro-toggle-hl-line-mode)
-                   (transient-macro-toggle-invisible)
-                   (transient-macro-toggle-highlight-changes-visible-mode)
-                   (transient-macro-call-link-display)
-                   ]
-                  [
-                   (transient-macro-toggle-rainbow-mode)
-                   (transient-macro-toggle-global-prettify-symbols-mode)
-                   (transient-macro-call-quickscope)
-                   (transient-macro-toggle-highlight-parentheses-mode)
-                   (transient-macro-call-elide-head)
-                   ]
-                  [
-                   (transient-macro-toggle-auto-highlight-symbol-mode)
-                   ]
-                  ]
-    )
+    [
+     (transient-macro-toggle-evil-goggles-mode)
+     (transient-macro-toggle-hl-line-mode)
+     (transient-macro-toggle-invisible)
+     (transient-macro-toggle-highlight-changes-visible-mode)
+     (transient-macro-call-link-display)
+     ]
+    [
+     (transient-macro-toggle-rainbow-mode)
+     (transient-macro-toggle-global-prettify-symbols-mode)
+     (transient-macro-call-quickscope)
+     (transient-macro-toggle-highlight-parentheses-mode)
+     (transient-macro-call-elide-head)
+     ]
+    [
+     (transient-macro-toggle-auto-highlight-symbol-mode)
+     ]
+  )
 
-  (pcase (transient-get-suffix 'jg-toggle-main '(1 -1))
-    ((and `[1 transient-columns nil ,x]
-          (guard (< (length x) 4)))
-     (transient-append-suffix 'jg-toggle-main
-       '(1 -1 -1) jg-toggle-visuals-transient))
-    (_ (transient-append-suffix 'jg-toggle-main
-         '(1 -1) [ jg-toggle-visuals-transient ]))
-    )
+  (transient-guarded-insert! 'jg-toggle-main jg-toggle-visuals-transient (1 -1))
   )
 
 ;;-- Footer

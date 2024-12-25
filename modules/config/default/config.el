@@ -60,7 +60,7 @@
 
 (use-package! s)
 
-(use-package! jg-el-macros)
+(use-package! macro-tools)
 
 (local-load! "+spec-defs")
 (local-load! "+vars")

@@ -5,18 +5,19 @@
 ;;
 ;; See footer for licenses/metadata/notes as applicable
 ;;-- end Header
+(require 'macro-tools--transient)
 
 ;; Debug
 (transient-call! debug-on-error ()
   ""
   :key "e"
-  :desc (transient-mode-fmt "Debug on Error" debug-on-error "e")
+  :desc (transient-var-fmt "Debug on Error" debug-on-error "e")
   (toggle-debug-on-error)
   )
 (transient-call! debug-on-var ()
   ""
   :key "v"
-  :desc (transient-mode-fmt "Debug on Var" (debug--variable-list) "v")
+  :desc (transient-var-fmt "Debug on Var" (debug--variable-list) "v")
   :interactive t
   #'debug-on-variable-change
   )
@@ -29,7 +30,7 @@
 (transient-call! debug-func ()
   ""
   :key "f"
-  :desc (transient-mode-fmt "Debug on Fn" (debug--function-list) "f")
+  :desc (transient-var-fmt "Debug on Fn" (debug--function-list) "f")
   :interactive t
   #'debug-on-entry
   )
@@ -43,21 +44,19 @@
 ;;;###autoload
 (defun +jg-ui-build-debugs-transient ()
   (transient-subgroup! jg-toggle-debugs-transient ()
-    " debug toggles "
+    "debug toggles "
     :key "d"
     :desc  "|| Debug      ||"
-    [:description "|| Debug      ||"
-                  [
-                   (transient-macro-call-debug-on-error)
-                   (transient-macro-call-debug-on-var)
-                   (transient-macro-call-debug-func)
-                   ]
-                  [
-                   " "
-                   (transient-macro-call-cancel-debug-on-var)
-                   (transient-macro-call-cancel-debug-func)
-
-                   ] ]
+    [
+     (transient-macro-call-debug-on-error)
+     (transient-macro-call-debug-on-var)
+     (transient-macro-call-debug-func)
+     ]
+    [
+     " "
+     (transient-macro-call-cancel-debug-on-var)
+     (transient-macro-call-cancel-debug-func)
+     ]
     )
 
   (transient-append-suffix 'jg-toggle-main
@@ -65,14 +64,7 @@
     '(transient-macro-call-debug-on-error)
     )
 
-  (pcase (transient-get-suffix 'jg-toggle-main '(1 -1))
-    ((and `[1 transient-columns nil ,x]
-          (guard (< (length x) 4)))
-     (transient-append-suffix 'jg-toggle-main
-       '(1 -1 -1)  jg-toggle-debugs-transient))
-    (_ (transient-append-suffix 'jg-toggle-main
-         '(1 -1)  [ jg-toggle-debugs-transient ]))
-    )
+  (transient-guarded-insert! 'jg-toggle-main jg-toggle-debugs-transient (1 -1))
   )
 
 ;;-- Footer

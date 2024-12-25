@@ -8,17 +8,16 @@
 
 (use-package! transient)
 
-(use-package! transient-macros
-  :after transient
-  :config
-  (add-hook 'jg-transient-toggles-hook #'+jg-ui-build-debugs-transient)
-  (add-hook 'jg-transient-toggles-hook #'+jg-ui-build-guides-transient)
-  (add-hook 'jg-transient-toggles-hook #'+jg-ui-build-nav-transient)
-  (add-hook 'jg-transient-toggles-hook #'+jg-ui-build-visuals-transient)
-  (add-hook 'jg-transient-toggles-hook #'+jg-ui-build-wrap-transient)
+(after! transient
+  (add-hook 'jg-ui-transient-toggles-hook #'+jg-ui-build-debugs-transient)
+  (add-hook 'jg-ui-transient-toggles-hook #'+jg-ui-build-guides-transient)
+  (add-hook 'jg-ui-transient-toggles-hook #'+jg-ui-build-nav-transient)
+  (add-hook 'jg-ui-transient-toggles-hook #'+jg-ui-build-visuals-transient)
+  (add-hook 'jg-ui-transient-toggles-hook #'+jg-ui-build-wrap-transient)
 
-  (+jg-ui-rebuild-transient-toggles)
-  (add-hook 'speckler-hook #'+jg-ui-rebuild-transient-toggles)
+  ;; (+jg-ui-build-main-toggle-transient)
+  (jg-ui-transient-toggles-builder)
+  (add-hook 'speckler-hook #'jg-ui-transient-toggles-builder)
   (provide 'transient-toggles)
   )
 

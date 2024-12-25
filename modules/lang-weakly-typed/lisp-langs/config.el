@@ -19,7 +19,6 @@
 (defer-feature! elisp-mode emacs-lisp-mode)
 
 (use-package! elisp-mode
-  :interpreter ("doomscript" . emacs-lisp-mode)
   :config
   ;; variable-width indentation is superior in elisp. Otherwise, `dtrt-indent'
   ;; and `editorconfig' would force fixed indentation on elisp.

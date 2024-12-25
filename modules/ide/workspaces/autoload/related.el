@@ -1,5 +1,5 @@
 ;;; +related.el -*- lexical-binding: t; -*-
-
+(require 'macro-tools--related)
 
 ;;;###autoload
 (defun +jg-projects-find-related ()

@@ -21,6 +21,12 @@
          )
 #+end_src
 
+* backquote-list*-macro
+#+begin_src lisp
+(backquote-list* 'a 'b 'c) => (a b . c)
+#+end_src
+
+
 * -reject
 #+begin_src lisp
 (-reject #'null '(1 2 3 nil 4 nil 5 6))
@@ -31,6 +37,12 @@
 #+begin_src lisp :
 (f-parent "a/b/c/d.blah")
 #+end_src
+
+* concatenate
+#+begin_src lisp
+(concatenate 'list '(1 2 3 4) [5 6 7] (list 8 9 10))
+#+end_src
+
 
 * s-suffix?
 #+begin_src emacs-lisp

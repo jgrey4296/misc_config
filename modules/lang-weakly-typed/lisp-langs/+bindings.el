@@ -110,6 +110,7 @@
       )
 
 (map! :map buttercup-minor-mode-map
+      :n "RET" #'buttercup-run-at-point
       :localleader
       :prefix "t"
       :desc "Run File"    "f" #'+emacs-lisp/buttercup-run-file

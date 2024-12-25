@@ -1,5 +1,5 @@
 ;; workspace.el -*- lexical-binding: t; -*-
-(require 'related-files)
+(require 'macro-tools--related)
 (require 'carousel-minor-mode)
 
 ;;;###autoload (autoload 'related-files:jg-python-project "lang-weakly-typed/python/autoload/workspace.el" nil t)

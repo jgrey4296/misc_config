@@ -38,7 +38,7 @@
                                                            (cadr (s-split "\\." x t))
                                                          x))) parents)))
 
-        (setq graph (concatenate 'list graph (if (null cleaned-parents)
+        (setq graph (cl-concatenate 'list graph (if (null cleaned-parents)
                                                  `(("object" . ,classname))
                                                (-zip-fill classname cleaned-parents nil))))
         )

@@ -53,22 +53,35 @@
   )
 
 (speckler-setq! shell ()
-  shell-dynamic-complete-functions '(comint-c-a-p-replace-by-expanded-history
+  shell-dynamic-complete-functions '(
+                                     ;; comint-c-a-p-replace-by-expanded-history
+                                     ;; shell-c-a-p-replace-by-expanded-directory
                                      shell-environment-variable-completion
                                      shell-command-completion
-                                     shell-c-a-p-replace-by-expanded-directory
                                      pcomplete-completions-at-point
                                      shell-filename-completion
-                                     comint-filename-completion
+                                     ;; comint-filename-completion
                                      )
+  shell-completion-fignore nil
 
-  comint-dynamic-complete-functions '(comint-c-a-p-replace-by-expanded-history
-                                      comint-filename-completion)
+  ;; comint-dynamic-complete-functions '(comint-c-a-p-replace-by-expanded-history
+  ;;                                     comint-filename-completion)
+  comint-completion-addsuffix t
+  comint-completion-recexact nil
+  comint-completion-autolist nil
+
   ansi-color-for-comint-mode t
+
   comint-prompt-read-only t
   comint-buffer-maximum-size 2048 ; double the default
   )
 
 (speckler-add! company ()
   '(shell-mode (:mode company-shell company-shell-env company-files))
+  )
+
+(speckler-add! ivy-actions ()
+  '(jg-term-ivy-switch-term
+    ("k" +jg-ivy-kill-buffer "Kill")
+    )
   )

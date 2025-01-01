@@ -273,11 +273,11 @@ using org-bibtex-fields for completion options "
                                       )
                        )
                  )
-               (setq new-values (mapcar #'+jg-bibtex-title-case new-values))
+               (setq new-values (mapcar #'librarian--biblio-edit-title-case new-values))
                )
                  )
             ((-contains? '("title" "subtitle") chosen)
-             (setq new-values (+jg-bibtex-title-case (read-string (format "(%s) New Value: " chosen) initial)))
+             (setq new-values (librarian--biblio-edit-title-case (read-string (format "(%s) New Value: " chosen) initial)))
              )
             (source
              (setq new-values (helm :sources (list source dummy-source)

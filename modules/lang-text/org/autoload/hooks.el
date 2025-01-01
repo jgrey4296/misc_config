@@ -94,7 +94,7 @@ add this org file to the agenda list
   "if the file is marked as a reference file, add it to the global reference list"
   (when jg-org-startup-reference
     (message "Reference: %s" (buffer-name))
-    (add-to-list jg-org-startup-reference-files (buffer-file-name))
+    (add-to-list 'jg-org-startup-reference-files (buffer-file-name))
     )
   )
 
@@ -104,7 +104,7 @@ add this org file to the agenda list
   "if the file is marked as a package file, add it to the global reference list"
   (when jg-org-startup-package
     (message "Reference: %s" (buffer-name))
-    (add-to-list jg-org-startup-package-files (buffer-file-name))
+    (add-to-list 'jg-org-startup-package-files (buffer-file-name))
     )
   )
 

@@ -71,3 +71,5 @@
   )
 
 (use-package! librarian--biblio-clean)
+
+(use-package! librarian--biblio-edit)

@@ -47,6 +47,7 @@
   librarian-biblio-unsourced-loc (expand-file-name "~/github/bibligraphy/in_progress/to_source.bib")
   org-ref-clean-bibtex-entry-hook librarian--biblio-clean-hooks
 
+  librarian--biblio-edit-search-fields '("tags" "year" "publisher")
   bibtex-completion-additional-search-fields librarian--biblio-edit-search-fields
   bibtex-completion-pdf-field                "file"
   bibtex-completion-display-formats jg-bibtex-completion-display-formats

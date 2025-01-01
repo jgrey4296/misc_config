@@ -27,12 +27,11 @@
 (use-package! shell
   :config
   (add-hook 'shell-mode-hook #'doom-mark-buffer-as-real-h)
-  ;; (add-hook 'shell-mode-hook #'+jg-term-shell-mode-setup-local-hook-h)
-  ;; (add-hook 'shell-mode-hook #'hide-mode-line-mode)
-
+  (add-hook 'shell-mode-hook #'shell-completion-vars 90)
   )
 
 (use-package! term
+  :defer t
   :config
   (add-hook 'term-mode-hook #'doom-mark-buffer-as-real-h)
   (add-hook 'term-mode-hook #'hide-mode-line-mode)
@@ -41,9 +40,9 @@
 
 (use-package! vterm
   :when (featurep 'dynamic-modules)
-  :commands vterm-mode
+  :defer t
   :hook (vterm-mode . doom-mark-buffer-as-real-h)
-  :hook (vterm-mode . hide-mode-line-mode) ; modeline serves no purpose in vterm
+  :hook (vterm-mode . hide-mode-line-mode)
   :preface
   ;; HACK Because vterm clusmily forces vterm-module.so's compilation on us when
   ;;      the package is loaded, this is necessary to prevent it when
@@ -54,22 +53,14 @@
     (provide 'vterm-module))
 
   :config
-
-  ;; 5000 lines of scrollback, instead of 1000
-
   (setq-hook! 'vterm-mode-hook
-    ;; Don't prompt about dying processes when killing vterm
     confirm-kill-processes nil
-    ;; Prevent premature horizontal scrolling
-    hscroll-margin 0)
-
+    hscroll-margin 0
+    )
   )
 
 (use-package! comint
   :config
-  (add-hook! 'comint-mode-hook
-             #'+jg-remove-comint-capf
-             )
   )
 
 (use-package! shell-pop)

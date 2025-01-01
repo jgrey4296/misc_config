@@ -48,3 +48,12 @@
 #+begin_src emacs-lisp
 (s-suffix? "-hook" "a-test-hook")
 #+end_src
+
+* keymap-lookup
+#+begin_src emacs-lisp
+(let ((keymap (make-sparse-keymap)))
+(keymap-set keymap "a" #'test)
+(keymap-lookup keymap "a") ;; -> #'test
+(keymap-lookup keymap "b") ;; -> nil
+)
+#+end_src

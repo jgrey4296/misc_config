@@ -59,6 +59,7 @@
               ("add-hook!" "remove-hook!")
               ("it" "xit")
               ("describe" "xdescribe")
+              ("car" "cdr" "cadr" "caddr")
               )
     )
   '(racket-mode

@@ -10,3 +10,7 @@
       "<f10>" #'evil-record-macro
       ;; TAB
       )
+
+(map! :map jg-binding-replace-state-map
+      "s" #'self-insert-command
+      )

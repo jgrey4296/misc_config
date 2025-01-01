@@ -6,6 +6,9 @@
 
 (defvar jg-binding-insert-state-map             (copy-keymap evil-insert-state-map))
 
+(defvar jg-binding-replace-state-map            (make-keymap))
+(set-keymap-parent jg-binding-replace-state-map jg-binding-insert-state-map)
+
 (defvar jg-binding-motion-state-map             (make-sparse-keymap "JG map replacing evil-motion-state-map"))
 
 (defvar jg-binding-normal-state-map             (make-sparse-keymap "JG map replacing evil-normal-state-map"))
@@ -92,6 +95,7 @@
 ;; Override
 (setq evil-normal-state-map       jg-binding-normal-state-map
       evil-insert-state-map       jg-binding-insert-state-map
+      evil-replace-state-map      jg-binding-replace-state-map
       evil-visual-state-map       jg-binding-visual-state-map
       evil-operator-state-map     jg-binding-operator-state-map
       evil-motion-state-map       jg-binding-motion-state-map

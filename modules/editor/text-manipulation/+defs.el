@@ -168,7 +168,7 @@ This variable is used only if you built Emacs with Harfbuzz on a version >= 28")
 
 ;;-- spelling
 
-(defvar +spell-excluded-faces-alist '())
+(defvar +spell-excluded-faces-alist nil)
 
 (defvar +spell-correct-interface #'+spell-correct-ivy-fn)
 

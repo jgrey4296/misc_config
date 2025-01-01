@@ -28,7 +28,9 @@
   (add-hook! 'minibuffer-setup-hook
              :append
              #'evil-insert-state
-             #'cursor-intangible-mode)
+             #'cursor-intangible-mode
+             #'abbrev-mode
+             )
   )
 
 ;;; config.el ends here

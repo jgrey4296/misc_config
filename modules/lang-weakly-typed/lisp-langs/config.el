@@ -85,7 +85,7 @@
 
 (use-package! buttercup
   :defer t
-  :minor ("/test[/-].+\\.el$" . buttercup-minor-mode)
+  :minor ("/.+?-test[/-].+\\.el$" . buttercup-minor-mode)
   :preface
   ;; buttercup.el doesn't define a keymap for `buttercup-minor-mode', as we have
   ;; to fool its internal `define-minor-mode' call into thinking one exists, so

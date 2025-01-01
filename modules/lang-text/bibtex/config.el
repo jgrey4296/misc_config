@@ -1,6 +1,5 @@
 ;;; domain-specific/bibtex/config.el -*- lexical-binding: t; -*-
 
-(local-load! "+defs")
 (local-load! "+vars")
 (local-load! "+extra")
 

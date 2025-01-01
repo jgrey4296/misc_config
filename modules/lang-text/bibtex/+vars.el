@@ -2,6 +2,20 @@
 
 (defvar jg-bibtex-mode-map (make-sparse-keymap))
 
+(defvar jg-bibtex-helm-candidates nil)
+
+(defvar jg-bibtex-completion-display-formats
+      '(
+        (judicial . "${=has-pdf=:1} ${=type=:10} || ${year:4} || ${author:20} || ${short_parties:80} || ${tags:*}")
+        (review   . "${=has-pdf=:1} REVIEW     || ${year:4} || ${author:20} || REVIEW ${title:73} || ${tags:*}")
+        (online   . "${=has-pdf=:1} ${=type=:10} || ${year:4} || ${author:20} || ${title:80} || ${tags:*}")
+        (t        . "${=has-pdf=:1} ${=type=:10} || ${year:4} || ${author:20} || ${title:80} || ${tags:*}")
+        ;; (t     . ("${author:20} || ${title:*} || ${year:4}" 40))
+        ;; (t     . "${author:35} ${title:*} ${year:4} ${=has-pdf=:1}${=has-note=:1} ${=type=:7}")
+        )
+      "Display formats for the ivy bibtex. see bibtex-completion-display-formats"
+      )
+
 ;;-- general bibtex settings
 (setq-default bibtex-user-optional-fields          nil
               bibtex-completion-bibliography       nil
@@ -13,11 +27,6 @@
               )
 ;;-- end general bibtex settings
 
-;;-- bibtex fields
-(setq bibtex-completion-additional-search-fields jg-bibtex-search-fields
-      bibtex-completion-pdf-field                "file")
-;;-- end bibtex fields
-
 ;;-- hl line
 (after! hl-line
   (add-to-list 'global-hl-line-modes 'bibtex-mode)
@@ -26,12 +35,22 @@
 
 ;;-- librarian
 (speckler-setq! bibtex ()
+  librarian--biblio-edit-todo-loc        (expand-file-name "~/github/bibliography/in_progress/todo.bib")
+  librarian--biblio-edit-todo-files-loc  (expand-file-name "/media/john/data/todo/pdfs/")
+  librarian--biblio-edit-completions-loc (expand-file-name "~/github/bibliography/completions/")
+  librarian--biblio-edit-export-bib-loc  (expand-file-name "tex-config/tex/export_template.tex" templates-loc)
+  librarian--biblio-edit-temp-tex-loc    (expand-file-name ".tex/" user-cache-dir)
   librarian-biblio-pdf-loc (pcase system-type
                              ('darwin (expand-file-name "~/pdf_library"))
                              ('gnu/linux "/media/john/data/library/pdfs"))
   librarian-biblio-library-loc   (expand-file-name "~/github/bibliography/main/")
   librarian-biblio-unsourced-loc (expand-file-name "~/github/bibligraphy/in_progress/to_source.bib")
   org-ref-clean-bibtex-entry-hook librarian--biblio-clean-hooks
+
+  bibtex-completion-additional-search-fields librarian--biblio-edit-search-fields
+  bibtex-completion-pdf-field                "file"
+  bibtex-completion-display-formats jg-bibtex-completion-display-formats
+  bibtex-completion-pdf-open-function 'browse-url
   )
 
 ;;-- end librarian

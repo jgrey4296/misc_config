@@ -16,7 +16,7 @@
     (if (not (f-exists? build-loc))
         (f-mkdir build-loc))
     (with-temp-buffer
-      (insert-file-contents (expand-file-name jg-bibtex-loc-export-bib-file))
+      (insert-file-contents (expand-file-name librarian--biblio-edit-export-bib-loc))
       (goto-char (point-min))
       (re-search-forward "%target")
       (replace-match (f-join loc bibfile))

@@ -38,7 +38,7 @@ modified from the original bibtex-completion-show-entry
          (entry (bibtex-completion-get-entry keys))
          (year (bibtex-completion-get-value "year" entry))
          (year-file (f-join bib-loc (format "%s.bib" year)))
-         (todo-file jg-bibtex-todo-loc)
+         (todo-file librarian--biblio-edit-todo-loc)
          )
     (catch 'break
       (dolist (bib-file `(,year-file ,todo-file))
@@ -61,7 +61,7 @@ modified from the original bibtex-completion-show-entry
          (entry (bibtex-completion-get-entry keys))
          (year (bibtex-completion-get-value "year" entry))
          (year-file (f-join bib-loc (format "%s.bib" year)))
-         (todo-file jg-bibtex-todo-loc)
+         (todo-file librarian--biblio-edit-todo-loc)
          )
     (catch 'break
       (dolist (bib-file `(,year-file ,todo-file))
@@ -245,7 +245,7 @@ using org-bibtex-fields for completion options "
     (bibtex-beginning-of-entry)
     (letrec ((chosen (or field (completing-read "Field: " (+jg-bibtex-sort-fields))))
              (curr-value (bibtex-autokey-get-field chosen))
-             (potential-completions (f-join jg-bibtex-loc-completions chosen))
+             (potential-completions (f-join librarian--biblio-edit-completions-loc chosen))
              (source (when (f-exists? potential-completions)
                        (helm-build-in-file-source "Edit Field Helm" potential-completions
                          :action (helm-make-actions "Accumulate" #'+jg-bibtex-edit-finish)

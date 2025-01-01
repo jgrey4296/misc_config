@@ -31,6 +31,7 @@
                              ('gnu/linux "/media/john/data/library/pdfs"))
   librarian-biblio-library-loc   (expand-file-name "~/github/bibliography/main/")
   librarian-biblio-unsourced-loc (expand-file-name "~/github/bibligraphy/in_progress/to_source.bib")
+  org-ref-clean-bibtex-entry-hook librarian--biblio-clean-hooks
   )
 
 ;;-- end librarian
@@ -53,7 +54,7 @@
   )
 (speckler-add! whitespace-cleanup ()
   '(bibtex-mode
-    +jg-bibtex-cleanup-ensure-newline-before-def
+    librarian--biblio-clean-ensure-newline-before-def
     delete-trailing-whitespace
     +jg-text-cleanup-whitespace
     )

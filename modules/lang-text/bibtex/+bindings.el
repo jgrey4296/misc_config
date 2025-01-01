@@ -7,30 +7,30 @@
 ;;-- bibtex-mode
 (map! :map jg-bibtex-mode-map ;; main
       :n "|"                                  #'librarian-insert-trigger
-      :desc "Lock Key"           :n "!"       #'+jg-bibtex-lock-key
+      :desc "Lock Key"           :n "!"       #'librarian--biblio-edit-lock-key
       :desc "Insert from Doi"    :n "I d"     #'librarian-biblio-create-from-doi
       :desc "Auto Form"          :n "I F"     #'+jg-bibtex-entry-form
       :desc "Edit Field"         :n  "\\"     #'+jg-bibtex-edit-field
       :desc "Clean entry"        :n "TAB"     #'org-ref-clean-bibtex-entry
-      :desc "Change Entry Type"  :n "DEL"     #'+jg-bibtex-edit-entry-type
-      :desc "Open DWIM"          :n ">"       #'+jg-bibtex-window-dwim
-      :desc "Open Dropbox"       :n "<"       #'+jg-bibtex-window-set-dropbox
+      :desc "Change Entry Type"  :n "DEL"     #'librarian--biblio-edit-entry-type
+      :desc "Open DWIM"          :n ">"       #'librarian--biblio-edit-window-dwim
+      :desc "Open Dropbox"       :n "<"       #'librarian--biblio-edit-window-set-dropbox
 
-      :desc "Select Entry"       :v "i e"     #'+jg-bibtex-visual-select-entry
+      :desc "Select Entry"       :v "i e"     #'librarian--biblio-edit-visual-select-entry
       )
 
 (map! :map jg-bibtex-mode-map ;; jump bindings
       ;; :n "s j" nil
       (:prefix ("s j" . "bibtex")
-      :desc "to Random entry"     :n "r"   #'+jg-bibtex-load-random
-      :desc "to Pdf"              :n "p"   #'+jg-bibtex-open-pdf
-      :desc "to Folder"           :n "f"   #'+jg-bibtex-open-folder
-      :desc "to url"              :n "u"   #'+jg-bibtex-open-url
-      :desc "to doi"              :n "d"   #'+jg-bibtex-open-doi
-      :desc "to Crossref"         :n "c"   #'+jg-bibtex-goto-crossref-entry
-      :desc "to Quicklook"        :n "l"   #'+jg-bibtex-quicklook-pdf
-      :desc "to ORCID"            :n "o"   #'+jg-bibtex-lookup-orcid
-      :desc "to scholar"          :n "s"   #'+jg-bibtex-google-scholar
+      :desc "to Random entry"     :n "r"   #'librarian--biblio-edit-load-random
+      :desc "to Pdf"              :n "p"   #'librarian--biblio-edit-open-pdf
+      :desc "to Folder"           :n "f"   #'librarian--biblio-edit-open-folder
+      :desc "to url"              :n "u"   #'librarian--biblio-edit-open-url
+      :desc "to doi"              :n "d"   #'librarian--biblio-edit-open-doi
+      :desc "to Crossref"         :n "c"   #'librarian--biblio-edit-goto-crossref-entry
+      :desc "to Quicklook"        :n "l"   #'librarian--biblio-edit-quicklook-pdf
+      :desc "to ORCID"            :n "o"   #'librarian--biblio-edit-lookup-orcid
+      :desc "to scholar"          :n "s"   #'librarian--biblio-edit-google-scholar
       )
       :i "s j" nil
       :i "s" nil
@@ -51,7 +51,7 @@
 (map! :map jg-bibtex-mode-map ;; localleader
       :localleader
       :desc "Remove Field"        "DEL"     #'+jg-bibtex-remove-field
-      :desc "Subcite"             "\\"      #'+jg-bibtex-subcite
+      :desc "Subcite"             "\\"      #'librarian--biblio-edit-subcite
       :desc "Build Bibliography"  "B"       #'org-ref-build-full-bibliography
       :desc "Get Meta"            "m"       #'librarian-biblio-get-meta
       :desc "Count Entries"       "C"       #'bibtex-count-entries
@@ -72,33 +72,33 @@
       :desc "Auto Form"           "a"     #'+jg-bibtex-entry-form
       :desc "from DOI"            "d"     #'librarian-biblio-create-from-doi
       :desc "from PMID"           "p"     (cmd! (pubmed-insert-bibtex-from-pmid (read-string "PMID: ")))
-      :desc "Subcite"             "s"     #'+jg-bibtex-subcite
+      :desc "Subcite"             "s"     #'librarian--biblio-edit-subcite
       )
       (:prefix ("c" . "Copy")
-      :desc "Copy Entry"         "e"      #'+jg-bibtex-copy-entry
-      :desc "Copy Key"           "k"      #'+jg-bibtex-copy-key
-      :desc "Copy Title"         "t"      #'+jg-bibtex-copy-title
-      :desc "Copy Field"         "f"      #'+jg-bibtex-copy-field
+      :desc "Copy Entry"         "e"      #'librarian--biblio-edit-copy-entry
+      :desc "Copy Key"           "k"      #'librarian--biblio-edit-copy-key
+      :desc "Copy Title"         "t"      #'librarian--biblio-edit-copy-title
+      :desc "Copy Field"         "f"      #'librarian--biblio-edit-copy-field
       :desc "Copy into metadata" "m"      #'librarian-biblio-apply-meta
       )
       (:prefix ("u" . "Update")
        :desc "Update Field"        "f"      #'+jg-bibtex-edit-field
        :desc "Remove Field"        "F"      #'+jg-bibtex-remove-field
        :desc "from DOI"            "u"      #'librarian-biblio-update-entry-from-doi
-       :desc "filename"            "n"      #'+jg-bibtex-rename-file
-       :desc "Lock Key"            "k"      #'+jg-bibtex-lock-key
+       :desc "filename"            "n"      #'librarian--biblio-edit-rename-file
+       :desc "Lock Key"            "k"      #'librarian--biblio-edit-lock-key
        :desc "Entry Type"          "t"      #'+jg-bibtex-edit-entry-type
-       :desc "Missing fields "     "m"     #'bibtex-entry-update
-       :desc "With Newest download"  "d"     #'+jg-bibtex-use-newest-file
+       :desc "Missing fields "     "m"      #'bibtex-entry-update
+       :desc "With Newest download"  "d"    #'librarian--biblio-edit-use-newest-file
        )
       (:prefix ("f" . "Format")
-       :desc "Reformat Buffer"       "b"      #'+jg-bibtex-reformat-buffer
+       :desc "Reformat Buffer"       "b"      #'librarian--biblio-clean-reformat-buffer
        :desc "Format Entry"          "e"      #'org-ref-clean-bibtex-entry
-       :desc "Author <-> Editor"     "a"      #'+jg-bibtex-swap-editor-author
-       :desc "Journal <-> Booktitle" "j"      #'+jg-bibtex-swap-booktitle-journal
+       :desc "Author <-> Editor"     "a"      #'librarian--biblio-edit-swap-editor-author
+       :desc "Journal <-> Booktitle" "j"      #'librarian--biblio-edit-swap-booktitle-journal
        :desc "Validate"              "v"      #'bibtex-validate
-       :desc "Sort"                  "s"      #'+jg-bibtex-cleanup-sort-entry
-       :desc "Kill Key"              "k"      #'+jg-bibtex-kill-entry-key
+       :desc "Sort"                  "s"      #'librarian--biblio-clean-sort-entry
+       :desc "Kill Key"              "k"      #'librarian--biblio-edit-kill-entry-key
        )
       )
 
@@ -106,17 +106,17 @@
       :localleader
       :prefix ("s" . "Sort")
        :desc "Sort Buffer"       "s"      #'bibtex-sort-buffer
-       :desc "Sort By Year"      "y"      #'+jg-bibtex-sort-buffer-by-year
-       :desc "Sort By Type"      "t"      #'+jg-bibtex-sort-buffer-by-type
+       :desc "Sort By Year"      "y"      #'librarian--biblio-edit-sort-buffer-by-year
+       :desc "Sort By Type"      "t"      #'librarian--biblio-edit-sort-buffer-by-type
       )
 
 (map! :map jg-bibtex-mode-map ;; vars
       :localleader
       ;; TODO search in crossref
       :prefix ("v" . "Vars")
-      :desc "Clean Error Move"       "m"     #'+jg-bibtex-clean-error-move-toggle
-      :desc "Toggle PDF+Doi Open"    "d"     #'+jg-bibtex-toggle-doi-load
-      :desc "Toggle PDF+Url Open"    "u"     #'+jg-bibtex-toggle-url-load
+      :desc "Clean Error Move"       "m"     #'librarian--biblio-clean-error-move-toggle
+      :desc "Toggle PDF+Doi Open"    "d"     #'librarian--biblio-edit-toggle-doi-load
+      :desc "Toggle PDF+Url Open"    "u"     #'librarian--biblio-edit-toggle-url-load
       :desc "Toggle Watchers"        "W"     #'+jg-bibtex-suppress-watchers
       )
 

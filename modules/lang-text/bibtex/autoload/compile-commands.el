@@ -1,6 +1,6 @@
 ;;; compile-commands.el -*- lexical-binding: t; -*-
 
-(defvar jg-bibtex-compile-args '())
+(defvar jg-bibtex-compile-args nil))
 
 ;;;###autoload
 (defun +jg-bibtex-get-commands (&optional dir)

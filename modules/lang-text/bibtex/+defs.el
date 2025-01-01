@@ -6,7 +6,7 @@
 
 (defvar jg-bibtex-helm-candidates nil)
 
-(defvar jg-bibtex-candidates-names '())
+(defvar jg-bibtex-candidates-names nil)
 
 (defvar jg-bibtex-rand-log ".emacs_rand_bib_log")
 
@@ -67,26 +67,3 @@
 (defvar jg-bibtex-curl-args     '("-sLI" "--connect-timeout" "3"))
 
 (defvar bibtex-completion-pdf-open-function 'browse-url)
-
-(defvar jg-bibtex-clean-hooks '(+jg-bibtex-insert-stub-key ;; Initial key
-                                ;; Initial formatting
-                                +jg-bibtex-remove-empty-fields
-                                +jg-bibtex-dont-break-lines-hook
-                                ;; +jg-bibtex-latex-normalise - shifted to doot
-                                +jg-bibtex-normalise-symbols
-
-                                ;; Specific fields
-                                ;; org-ref-title-case-article
-                                +jg-bibtex-clean-doi-hook
-                                +jg-bibtex-check-file-hook
-                                +jg-bibtex--expand-shortened-url
-                                ;; +jg-bibtex-isbn-clean - shifted to doot task
-                                ;; generate key
-                                +jg-bibtex-orcb-key-hook
-                                +jg-bibtex-insert-volume-to-key
-                                ;; Final alignment and indent
-                                +jg-bibtex-clean-whitespace-hook
-                                +jg-bibtex-align-hook
-                                +jg-bibtex-indent-hook
-                              )
-      )

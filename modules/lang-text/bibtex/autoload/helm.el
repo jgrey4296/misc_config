@@ -130,7 +130,7 @@ modified from the original bibtex-completion-show-entry
   (when xs
     (message "Inserting new completions: %s" xs)
     (write-region (format "%s\n" (string-join
-                                  (mapcar #'+jg-bibtex-title-case xs)
+                                  (mapcar #'librarian--biblio-edit-title-case xs)
                                   "\n")) nil potential-completions t)
     )
   )

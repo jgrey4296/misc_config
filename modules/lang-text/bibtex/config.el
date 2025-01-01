@@ -61,9 +61,6 @@
   :init
   (custom-set-variables '(org-ref-insert-cite-key "C-c i"))
   :config
-  (setq-hook! 'bibtex-mode-hook
-    org-ref-clean-bibtex-entry-hook jg-bibtex-clean-hooks
-    )
   (remove-hook 'bibtex-mode-hook #'org-ref-bibtex-mode-keys)
   )
 
@@ -73,3 +70,5 @@
   (add-hook 'bibtex-style-mode-hook #'hs-minor-mode)
   (add-hook 'bibtex-style-mode-hook #'librarian-insert-minor-mode)
   )
+
+(use-package! librarian--biblio-clean)

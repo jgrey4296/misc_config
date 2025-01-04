@@ -22,10 +22,18 @@
 (use-package! tree-sitter-langs
   :defer t
   :config
-  ;; possibly: (cl-pushnew (tree-sitter-lands--bin-dir) tree-sitter-load-path :test #'string-equal)
+  ;; possibly: (cl-pushnew (tree-sitter-langs--bin-dir) tree-sitter-load-path :test #'string-equal)
   )
 
-(speckler-new! tree-sit-lang (key val)
+(speckler-setq! treesit ()
+  tree-sitter-load-path (list
+                         (expand-file-name (format "straight/%s/tree-sitter-langs/bin/" straight-build-dir) doom-local-dir)
+                         (expand-file-name "~/.local/tree-sitter/")
+                         )
+  treesit-extra-load-path tree-sitter-load-path
+  )
+
+(speckler-new! treesit-lang (key val)
   "Match modes to grammars in `tree-sitter-langs-grammar-dir`"
   :target tree-sitter-major-mode-language-alist
   :struct '(key-mode . grammar)
@@ -33,7 +41,7 @@
   `(,key . ,val)
   )
 
-(speckler-new! treesit-lang (key val)
+(speckler-new! treesit-bin-override (key val)
   "for treesit (builtin)"
   :target treesit-load-name-override-list
   :struct '(key-mode :lib-base :entry-func)
@@ -43,15 +51,9 @@
 
 (setq tree-sitter-debug-jump-buttons t ;; This makes every node a link to a section of code
       tree-sitter-debug-highlight-jump-region t ;; and this highlights the entire sub tree in your code
-      ;; MAYBE make this a spec-handler:
-      tree-sitter-load-path (list
-                             (expand-file-name (format "straight/%s/tree-sitter-langs/bin/" straight-build-dir) doom-local-dir)
-                             (expand-file-name "~/.local/tree-sitter/")
-                             )
-
       )
 
-(setq treesit-extra-load-path tree-sitter-load-path
+(setq
       ;; treesit-simple-indent-rules
       ;; treesit-defun-type-regexp
       ;; treesit-defun-name-function
@@ -95,15 +97,7 @@
                                       )
       )
 
-(speckler-setq! treesit ()
-  tree-sitter-load-path (list
-                         (expand-file-name (format "straight/%s/tree-sitter-langs/bin/" straight-build-dir) doom-local-dir)
-                         (expand-file-name "~/.local/tree-sitter/")
-                         )
-  treesit-extra-load-path tree-sitter-load-path
-  )
-
-(speckler-add! tree-sit-lang ()
+(speckler-add! treesit-lang ()
   '(agda-mode       . agda)
   '(c-mode          . c)
   '(c++-mode        . cpp)

@@ -54,3 +54,15 @@ It's platform specific in that it uses the platform's native path separator."
     (letf! ((#'pip-requirements-fetch-packages #'ignore))
       (apply fn args))
     )
+
+;;;###autoload
+(defun +jg-python-override-python-ts (fn &rest args)
+  "Advice to apply :arround python-ts-mode,
+to stop it interfering with `auto-mode-alist' and `interpreter-mode-alist'
+"
+  (let ((auto-mode-alist nil)
+        (interpreter-mode-alist nil)
+        )
+    (apply fn args)
+    )
+)

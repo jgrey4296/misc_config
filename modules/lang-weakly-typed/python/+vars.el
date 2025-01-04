@@ -41,8 +41,13 @@
 ;;-- end general python
 
 ;;-- tree-sitter
-(speckler-add! treesit-lang ()
+(speckler-add! treesit-bin-override ()
   '(python :lib-base "python" :entry-func "tree_sitter_python")
+  )
+
+(speckler-add! treesit-lang ()
+  '(python-mode    . python)
+  '(python-ts-mode . python)
   )
 
 ;;-- end tree-sitter

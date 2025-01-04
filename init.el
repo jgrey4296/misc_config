@@ -27,7 +27,7 @@
 
  :ide version-control ;; +forge +diff-hl
  :ide librarian snippets workspaces
- :ide (support +lsp +flycheck +tree-sitter) ;; +eglot  +semantic
+ :ide (support +lsp +flycheck +treesitter) ;; +eglot  +semantic
  :ide minimap diff company debugger
 
  :lang-data csv dot sql nu

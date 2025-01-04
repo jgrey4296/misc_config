@@ -22,3 +22,14 @@
       (setq-default gcmh-high-cons-threshold (* 2 +lsp--default-gcmh-high-cons-threshold))
       (gcmh-set-high-threshold)
       (setq +lsp--optimization-init-p t))))
+
+;;;###autoload
+(define-minor-mode lsp-imenu-override
+  "Uses lsp-ui-imenu instead of stock"
+  :global nil
+  :init-value nil
+  :interactive t
+  :map (map! :map (make-sparse-keymap)
+             [remap imenu] #'lsp-ui-imenu
+             )
+)

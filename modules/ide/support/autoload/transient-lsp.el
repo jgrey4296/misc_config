@@ -62,6 +62,13 @@
   :desc "Treemacs integration"
   :key "T"
   )
+(transient-toggle-hook! lsp-imenu ()
+  "Use lsp's imenu instead "
+  :hook 'lsp-mode
+  :fn #'lsp-imenu-override
+  :desc "Pretty LSP Imenu"
+  :key "M"
+  )
 
 (transient-toggle-hook! lsp-modeline-diagnostics ()
   ""
@@ -279,6 +286,7 @@
     (transient-macro-toggle-lsp-doc-hover)
     (transient-macro-toggle-hook-lsp-completion)
     (transient-macro-toggle-hook-tree-sitter-hl)
+    (transient-macro-toggle-hook-lsp-imenu)
     ]
   [ "Settings"
     (transient-macro-call-lsp-on-type-formatting)

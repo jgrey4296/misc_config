@@ -29,7 +29,7 @@
   :global nil
   :init-value nil
   :interactive t
-  :map (map! :map (make-sparse-keymap)
-             [remap imenu] #'lsp-ui-imenu
-             )
-)
+  (if lsp-imenu-override
+      (keymap-local-set "<remap> <imenu>" #'lsp-ui-imenu)
+    (keymap-local-unset "<remap> <imenu>"))
+  )

@@ -120,6 +120,7 @@
   )
 (speckler-add! imenu ()
   '(emacs-lisp-mode
+    :append
     ("spec-def"             "^(speckler-new! \\(.+\\)" 1)
     ("spec-hook"            "^(speckerl-new-hook! \\(.+?\\)" 1)
     ("spec-add"             "^(speckler-add! \\(.+\\) " 1)

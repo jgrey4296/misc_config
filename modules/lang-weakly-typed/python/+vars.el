@@ -265,6 +265,7 @@
   )
 (speckler-add! imenu ()
   '(python-mode
+    :append
     ("Field"  "\\s-*\\(.+?\\)\\s-*:\\s-\\(.+?\\)\\s-=\\s-field" 1)
 
     )

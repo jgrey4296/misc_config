@@ -2,6 +2,11 @@
 
 (speckler-new-hook! imenu (key val)
   "Register imenu generic expressions"
-  :struct '(strName regexp)
-  (setq-local imenu-generic-expression (append val imenu-generic-expression))
+  :struct '(strName :append? regexp)
+  :override t
+  (setq-local imenu-generic-expression
+              (if (eq (car val) :append)
+                  (append (cdr val) imenu-generic-expression)
+                val)
+              )
   )

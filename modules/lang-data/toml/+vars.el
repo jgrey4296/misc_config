@@ -4,7 +4,13 @@
   (pushnew! projectile-project-root-files "doot.toml")
   )
 
-
+(speckler-add! imenu ()
+  :override t
+  '(toml-mode
+    ("Multi-Group" "^\\[\\[\\(.+?\\)\\]\\]$" 1)
+    ("Group" "^\\[\\([^\\[]+?\\)\\]$" 1)
+    )
+  )
 (speckler-add! whitespace-cleanup ()
   `(conf-toml-mode
     #'+jg-toml-cleanup-ensure-newline-before-table

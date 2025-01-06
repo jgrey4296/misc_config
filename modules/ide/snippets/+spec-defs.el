@@ -7,12 +7,13 @@
   :loop 'append
   :struct '(key . (list (pattern :trigger pattern :mode mode)))
   (cl-loop for rule in val
-           for priority = (* -1 (or (plist-get rule :priority) 0))
-           for clean    = (cl-loop for (k v) on rule by #'cddr
+           for pattern = (car rule)
+           for priority = (* -1 (or (plist-get (cdr rule) :priority) 0))
+           for clean    = (cl-loop for (k v) on (cdr rule) by #'cddr
                                    unless (eq k :priority)
                                    if k collect k
                                    if v collect v)
-           collect (cons priority clean)
+           collect (append (list priority pattern) clean)
            )
   )
 

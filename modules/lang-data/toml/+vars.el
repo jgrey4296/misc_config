@@ -20,7 +20,7 @@
   )
 (speckler-add! auto-modes ()
   '(toml
-    ("\\.toml\\'" . conf-toml-mode)
+    ("\\.toml\\'" . toml-mode)
     )
   '(conf
     ("\\.conf\\'" . conf-mode)
@@ -53,4 +53,9 @@
   '(toml-mode . toml)
   '(toml-ts-mode . toml)
   '(toml-conf-mode . toml)
+)
+(speckler-add! file-templates ()
+  '(doot
+    (".+?\\.tsk\\.toml\\'" :mode toml-mode :trigger "__tasks" :priority 100)
+    )
 )

@@ -2,15 +2,16 @@
 
 ;; Reduce default verbosity. 3 is too chatty about initializing yasnippet. 2
 ;; is just right (only shows errors).
+
 (defvar yas-verbosity 2)
+
+(defvar yas-snippet-dirs    (list jg-snippets-code-templates-dir))
 
 (defvar +snippets--smartparens-enabled-p t)
 
 (defvar +snippets--expanding-p nil)
 
-(defvar +file-templates-default-trigger "__")
-
-(defvar +file-templates-inhibit nil)
+(defvar +snippets-dir       jg-snippets-code-templates-dir)
 
 (defvar jg-snippet-dirs nil)
 
@@ -20,8 +21,10 @@
 
 (defvar jg-snippets-project-templates-dir (expand-file-name "projects" templates-loc))
 
-(defvar +snippets-dir       jg-snippets-code-templates-dir)
+(defvar +file-templates-default-trigger "__")
+
+(defvar +file-templates-inhibit nil)
 
 (defvar +file-templates-dir jg-snippets-file-templates-dir)
 
-(defvar yas-snippet-dirs    (list jg-snippets-code-templates-dir))
+(defvar +file-templates-alist nil)

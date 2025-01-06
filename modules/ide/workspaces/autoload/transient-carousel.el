@@ -28,7 +28,9 @@
   :key "n"
   :desc (macro-tools--transient-simple-fmt "New Carousel" "n")
   :transient nil
-  (carousel-new))
+  :interactive t
+  #'carousel-new)
+
 (transient-call! carousel-toggle ()
   ""
   :key "t"

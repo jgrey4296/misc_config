@@ -7,7 +7,6 @@
   :loop 'append
   val
   )
-
 (speckler-new! lookup-url (key val)
   "Register url lookup providers"
   :target librarian--online--provider-url-alist
@@ -32,7 +31,6 @@ Handlers
               librarian--doc-type-definition-functions  (cl-remove-duplicates (append (ensure-list (plist-get val :type-definition))    librarian--doc-type-definition-functions))
               )
   )
-
 (speckler-new-hook! docsets (key val)
   "Register local dash docsets"
   (setq-local dash-docs-docsets val)

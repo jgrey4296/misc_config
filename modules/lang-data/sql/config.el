@@ -27,6 +27,12 @@
     (:name sqlite     :lib ob-sqlite)
     )
   )
+(speckler-add! treesit-lang ()
+  '(sql-mode . sql)
+  )
+(speckler-add! treesit-source ()
+  '(sql           "git@github.com:DerekStride/tree-sitter-sql.git")
+  )
 
 ;;-- Footer
 ;; Copyright (C) 2023 john

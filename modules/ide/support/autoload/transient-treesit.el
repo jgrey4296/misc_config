@@ -1,0 +1,46 @@
+;;; transient-treesit.lsp -*- lexical-binding: t; no-byte-compile: t; -*-
+;;-- Header
+;; File Commentary:
+;;
+;;
+;;
+;;-- end Header
+(require 'macro-tools--transient)
+
+(transient-call! treesit-inspect ()
+  "Turn on treesit syntax tree inspection"
+  :key "t"
+  :desc "Inspect Treesit AST"
+  :interactive t
+  #'treesit-inspect-mode
+  )
+
+;;;###autoload
+(defun +jg-support-build-treesit-transient ()
+  (transient-append-suffix (cadr jg-toggle-guides-transient)
+    "g" '(transient-macro-call-treesit-inspect)
+    )
+  )
+
+;;-- Footer
+;; Copyright (C) 2025 john
+;;
+;; Author:     john <https://github.com/jgrey4296>
+;; Maintainer: john <john@john-UM700>
+;; Created:    January 06, 2025
+;; Modified:   January 06, 2025
+;; Version: 0.0.1
+;; Keywords:
+;; Homepage: https://github.com/jgrey4296
+;; Package-Requires: ((emacs "24.3"))
+;; Package written on: ((emacs 29.3))
+;;
+;; This file is not part of GNU Emacs.
+;;
+;;-- end Footer
+;; Local Variables:
+;; read-symbol-shorthands: (
+;; ("blah-" . "blah-")
+;; )
+;; End:
+;;; transient-treesit.lsp ends here

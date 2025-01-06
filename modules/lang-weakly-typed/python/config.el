@@ -15,16 +15,30 @@
 (advice-add 'py--pdbtrack-get-source-buffer :override #'+jg-python-pdbtrack-silence)
 (advice-add 'py--pdbtrack-track-stack-file  :override #'+jg-python-py--pdbtrack-track-stack-file)
 (advice-add 'python-ts-mode                 :around   #'+jg-python-override-python-ts)
+(advice-add 'python-ts-mode                 :after #'python-ts-extend)
 
 (use-package! python
   :config
+  ;; internal python uses prefix: python-
+  (defalias 'python-stock-mode #'python-mode)
   (require 'python-mode)
 
+  (add-hook! 'python-ts-mode-hook
+             #'abbrev-mode
+             #'evil-collection-python-set-evil-shift-width
+             #'librarian-insert-minor-mode
+             ;; #'hs-minor-mode
+             #'outline-minor-mode
+             #'+jg-python-outline-regexp-override-hook
+             #'maybe-py-test-minor-mode
+             #'+jg-python-auto-hide
+             )
   )
 
 (use-package! python-mode
   :after python
   :init
+  ;; external python uses prefix: py-
   (setq py-complete-function #'(lambda () nil)
         py-do-completion-p nil ;; nil
         py-company-pycomplete-p nil
@@ -36,16 +50,7 @@
   (defvaralias 'python-shell-virtualenv-root 'py-shell-virtualenv-root)
 
   :config
-
-  ;; setup python-ts-mode
-  (add-hook! 'python-ts-mode-hook
-             #'abbrev-mode
-             #'evil-collection-python-set-evil-shift-width
-             #'librarian-insert-minor-mode
-             #'hs-minor-mode
-             #'maybe-py-test-minor-mode
-             #'+jg-python-auto-hide
-             )
+  (defalias 'python-external-mode #'python-mode)
 
   ;;-- hooks
 

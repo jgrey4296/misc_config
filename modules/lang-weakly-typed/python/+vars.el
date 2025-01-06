@@ -2,55 +2,8 @@
 
 (dlog! "Python Vars")
 ;;-- general python
-
-;; Conda/Mamaba
-(speckler-setq! conda ()
-  conda-anaconda-home (or (getenv "MAMBA_ROOT_PREFIX") (getenv "ANACONDA_HOME") "/usr/local/anaconda3")
-  conda-env-home-directory (cond ((getenv "MAMBA_ROOT_PREFIX")
-                                  (f-join (getenv "MAMBA_ROOT_PREFIX") "envs"))
-                                 ((getenv "ANACONDA_ENVS")
-                                  (getenv "ANACONDA_ENVS"))
-                                 (t
-                                  (f-join conda-anaconda-home "envs"))
-                                 )
-  )
-
-;; Py-vars
-(speckler-setq! python ()
-  ;; Python settings
-  python-indent-offset 4
-  python-indent-guess-indent-offset                     nil
-  python-shell-completion-native-enable                 nil
-  python-shell-completion-native-disabled-interpreters  '("pypy")
-  python-shell-interpreter-path-args                    (expand-file-name "python/repl_startup.py"  templates-loc)
-  expand-region-preferred-python-mode 'python-mode
-  ;; py settings
-  py-shell-virtualenv-root      conda-env-home-directory
-  py-pdbtrack-do-tracking-p     t
-  py-python-command             "python3"
-  py-python-command-args        '("-i")
-  py-use-font-lock-doc-face-p   t
-  py-fontify-shell-buffer-p     t
-  py-split-window-on-execute    t
-  ;; my settings
-  jg-python-current-interpreter                         jg-python-stock-repl
-  jg-python-repl-start-file (expand-file-name "python/repl_startup.py " templates-loc)
-  jg-python-coverage-file-loc ".temp/coverage"
-  )
 (modify-syntax-entry ?_ "_" python-mode-syntax-table)
 ;;-- end general python
-
-;;-- tree-sitter
-(speckler-add! treesit-bin-override ()
-  '(python :lib-base "python" :entry-func "tree_sitter_python")
-  )
-
-(speckler-add! treesit-lang ()
-  '(python-mode    . python)
-  '(python-ts-mode . python)
-  )
-
-;;-- end tree-sitter
 
 ;;-- outline
 (after! python-mode
@@ -177,12 +130,12 @@
   `(python-ts
     :modes python-ts-mode
     :priority 25
-    :triggers (:close     #'hs-hide-block-at-point
-               :close-all #'hs-hide-all
-               :open      #'hs-show-block
-               :open-all  #'hs-show-all
-               :open-rec  #'hs-show-all
-               :toggle    #'hs-toggle-hiding
+    :triggers (:close     #'+jg-python-close-class-defs
+               :close-all #'+jg-python-close-all-defs
+               :open      #'outline-toggle-children
+               :open-all  #'outline-show-all
+               :open-rec  #'outline-show-subtree
+               :toggle    #'outline-toggle-children
                )
     )
   )
@@ -194,7 +147,12 @@
     )
   )
 (speckler-add! whitespace-cleanup ()
-  `((python-mode python-ts-mode)
+  `(python-mode
+    ,#'+jg-python-cleanup-ensure-newline-before-def
+    ,#'delete-trailing-whitespace
+    ,#'+jg-text-cleanup-whitespace
+    )
+  `(python-ts-mode
     ,#'+jg-python-cleanup-ensure-newline-before-def
     ,#'delete-trailing-whitespace
     ,#'+jg-text-cleanup-whitespace
@@ -263,11 +221,6 @@
 (speckler-add! yas-extra ()
   '(node-mode node-mode)
   )
-(when (executable-find "Microsoft.Python.LanguageServer")
-  (speckler-add! eglot ()
-    '(python-mode "Microsoft.Python.LanguageServer")
-    )
-  )
 (speckler-add! imenu ()
   '(python-mode
     :append
@@ -275,7 +228,34 @@
 
     )
   )
-
+(speckler-add! treesit-bin-override ()
+  '(python :lib-base "python" :entry-func "tree_sitter_python")
+  )
+(speckler-add! treesit-source ()
+  '(python        "git@github.com:tree-sitter/tree-sitter-python.git")
+  )
+(speckler-add! treesit-lang ()
+  '(python-mode    . python)
+  '(python-ts-mode . python)
+  )
+(speckler-setq! python-ts ()
+  python--treesit-keywords '("as" "assert" "async" "await" "break" "case"
+                             "class" "continue" "def" "del" "elif" "else"
+                             "except" "exec" "finally" "for" "from" "global"
+                             "if" "import" "lambda" "match" "nonlocal" "pass"
+                             "print" "raise" "return" "try" "while" "with"
+                             "yield" "type" "and" "in" "is" "not" "or" "not in"
+                             "is not")
+  ;; python--treesit-builtin-types
+  ;; python--treesit-builtins
+  ;; python--treesit-type-regex
+  ;; python--treesit-constants
+  ;; python--treesit-operators
+  ;; python--treesit-special-attributes
+  ;; python--treesit-exceptions
+  ;; -----
+  ;; python--treesit-settings
+  )
 (speckler-add! org-src ()
   '(python
     ("python" . python)
@@ -284,6 +264,43 @@
 (speckler-add! babel ()
   '(python
     (:name python :lib ob-python :mode python)
+    )
+  )
+(speckler-setq! python ()
+  ;; Python settings
+  python-indent-offset 4
+  python-indent-guess-indent-offset                     nil
+  python-shell-completion-native-enable                 nil
+  python-shell-completion-native-disabled-interpreters  '("pypy")
+  python-shell-interpreter-path-args                    (expand-file-name "python/repl_startup.py"  templates-loc)
+  expand-region-preferred-python-mode 'python-mode
+  ;; py settings
+  py-shell-virtualenv-root      conda-env-home-directory
+  py-pdbtrack-do-tracking-p     t
+  py-python-command             "python3"
+  py-python-command-args        '("-i")
+  py-use-font-lock-doc-face-p   t
+  py-fontify-shell-buffer-p     t
+  py-split-window-on-execute    t
+  ;; my settings
+  jg-python-current-interpreter                         jg-python-stock-repl
+  jg-python-repl-start-file (expand-file-name "python/repl_startup.py " templates-loc)
+  jg-python-coverage-file-loc ".temp/coverage"
+  )
+(speckler-setq! conda ()
+  conda-anaconda-home (or (getenv "MAMBA_ROOT_PREFIX") (getenv "ANACONDA_HOME") "/usr/local/anaconda3")
+  conda-env-home-directory (cond ((getenv "MAMBA_ROOT_PREFIX")
+                                  (f-join (getenv "MAMBA_ROOT_PREFIX") "envs"))
+                                 ((getenv "ANACONDA_ENVS")
+                                  (getenv "ANACONDA_ENVS"))
+                                 (t
+                                  (f-join conda-anaconda-home "envs"))
+                                 )
+  )
+
+(when (executable-find "Microsoft.Python.LanguageServer")
+  (speckler-add! eglot ()
+    '(python-mode "Microsoft.Python.LanguageServer")
     )
   )
 ;;-- end specs

@@ -72,15 +72,12 @@ capture, the end position, and the output buffer.")
     :file (markdown-follow-thing-at-point :async t)
     )
   )
-
-
 (speckler-add! auto-modes ()
   '(markdown
     ("/README\\(?:\\.md\\)?\\'" . gfm-mode)
     ("\\.\\(?:md\\|markdown\\|mkd\\|mdown\\|mkdn\\|mdwn\\)\\'" . gfm-mode)
     )
   )
-
 (speckler-add! fold ()
   `(markdown
     :modes (markdown-mode)
@@ -94,9 +91,15 @@ capture, the end position, and the output buffer.")
                )
     )
   )
-
 (speckler-add! org-src ()
   '(markdown
     ("md" . markdown)
     )
+  )
+(speckler-add! treesit-source()
+  '(markdown      "git@github.com:tree-sitter-grammars/tree-sitter-markdown.git")
+  )
+(speckler-add! treesit-lang ()
+  '(markdown-mode . markdown)
+  '(gfm-mode . markdown)
   )

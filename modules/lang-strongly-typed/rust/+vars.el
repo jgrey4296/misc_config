@@ -27,7 +27,6 @@
 (speckler-add! compile-commands ()
   '(rust +jg-rust-get-cargo-commands)
   )
-
 (speckler-add! fold ()
   `(rust
     :modes (rust-mode)
@@ -41,13 +40,11 @@
                )
     )
   )
-
 (speckler-add! popup ()
   '(rust
     ("^\\*rustic-compilation" :vslot -1)
     )
   )
-
 (speckler-add! file-templates ()
   '(rust
     ("config\\.toml$"   :trigger "__cargo_config"     :mode conf-toml-mode)
@@ -61,7 +58,6 @@
     (rust-mode          :trigger "__"            :priority -99)
     )
   )
-
 (speckler-add! lookup-url ()
   '(rust
     ("Rust Stdlib"      "https://doc.rust-lang.org/std/?search=%s")
@@ -72,25 +68,27 @@
     ("Rust Forums"      "https://users.rust-lang.org/search?q=%s")
     )
   )
-
 (speckler-add! projects ()
   '(jg-rust ("Cargo.toml")     :project-file "Cargo.toml" :test nil :test-dir nil :test-prefix nil :related-files-fn +jg-rust-related-files-fn)
   '(rust-cargo ("Cargo.toml")  :project-file "Cargo.toml" :compilation-dir nil :configure nil :compile "cargo build" :test "cargo test" :install nil :package nil :run "cargo run")
   )
-
 (speckler-add! docsets ()
   '(rust-mode "Rust")
   )
-
-(speckler-add! tree-sit-lang ()
-  '(rust-mode . rust)
-  '(rustic-mode . rust)
+(speckler-add! treesit-lang ()
+  '(rust-mode    . rust)
+  '(rust-ts-mode . rust)
+  '(rustic-mode  . rust)
+  '(llvm-mode . llvm)
   )
-
+(speckler-add! treesit-source ()
+  '(rust          "git@github.com:tree-sitter/tree-sitter-rust.git")
+  '(llvm          "git@github.com:benwilliamgraham/tree-sitter-llvm.git")
+  '(llvm-mir      "git@github.com:Flakebi/tree-sitter-llvm-mir.git")
+  )
 (speckler-add! company ()
   '(rust-mode (:front jg-company/backend) (:front company-gtags))
   )
-
 (speckler-add! auto-modes ()
   '(rust
     ("\\.rs\\'" . rustic-mode)
@@ -99,13 +97,11 @@
     ("\\.h\\'" . c-mode)
     )
   )
-
 (speckler-add! babel ()
   '(rust
     (:name rust       :lib rustic-babel)
     )
   )
-
 (speckler-add! org-src ()
   '(rust
     ("rust" . rustic)

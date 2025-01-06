@@ -9,14 +9,18 @@
     ("\\.rest\\'" . rst-mode)
     )
   )
-
 (speckler-add! file-templates ()
   '(rst
     ("\\.rst\\'" :trigger "__" :mode rst-mode :priority -99)
 
     )
   )
-
 (speckler-add! compile-commands ()
   '(rst +jg-rst-get-commands)
+  )
+(speckler-add! treesit-lang ()
+  '(rst-mode . rst)
+  )
+(speckler-add! treesit-source ()
+  '(rst           "git@github.com:stsewd/tree-sitter-rst.git")
   )

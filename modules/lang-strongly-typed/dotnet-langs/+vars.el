@@ -1,11 +1,6 @@
 ;; -*- mode:emacs-lisp; lexical-binding: t;-*-
 
-;;-- csharp
-(speckler-add! treesit-lang ()
-  '(c-sharp :lib-base "c-sharp" :entry-func "tree_sitter_c_sharp")
-  )
 
-;;-- end csharp
 
 ;;-- fsharp
 
@@ -25,9 +20,6 @@
     :symbols (("public" "protected" "private")
               ("class" "struct"))
     )
-  )
-(speckler-add! tree-sit-lang ()
-  '(csharp-mode . c-sharp)
   )
 (speckler-add! lookup-handler ()
   '(fsharp-mode :async t :definition fsharp-ac/gotodefn-at-point)
@@ -105,5 +97,13 @@
     ("f#" . fsharp)
     )
   )
-
+(speckler-add! treesit-lang ()
+  '(csharp-mode . c-sharp)
+  )
+(speckler-add! treesit-bin-override()
+  '(c-sharp :lib-base "c-sharp" :entry-func "tree_sitter_c_sharp")
+  )
+(speckler-add! treesit-source ()
+  '(csharp        "git@github.com:tree-sitter/tree-sitter-c-sharp.git")
+  )
 ;;-- end specs

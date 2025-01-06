@@ -37,8 +37,11 @@
 (speckler-add! lookup-handler ()
   '(haskell-mode :definition haskell-mode-jump-to-def-or-tag)
   )
-(speckler-add! tree-sit-lang ()
+(speckler-add! treesit-lang ()
   '(haskell-mode . haskell)
+  )
+(speckler-add! treesit-source ()
+  '(haskell       "git@github.com:tree-sitter/tree-sitter-haskell.git")
   )
 (speckler-add! auto-modes ()
   '(haskell
@@ -64,7 +67,6 @@
     (:name haskell    :lib ob-haskell)
     )
   )
-
 (speckler-add! org-src ()
   '(haskell
     ("haskell" . haskell)

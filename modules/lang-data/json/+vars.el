@@ -1,23 +1,23 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
-(speckler-add! tree-sit-lang ()
+(speckler-add! treesit-lang ()
   '(json-mode       . json)
   '(jsonc-mode      . json)
+  '(json-ts-mode    . json)
   )
-
-
+(speckler-add! treesit-source ()
+  '(json          "git@github.com:tree-sitter/tree-sitter-json.git")
+  )
 (speckler-add! auto-modes ()
   '(json
     ( "\\.js\\(?:on\\|[hl]int\\(?:rc\\)?\\)\\'" . json-mode)
     )
   )
-
 (speckler-add! hideshow ()
   `(json
     (json-mode ,(rx (| "[" "{") line-end) ,(rx (| "]" "}") (opt ",") line-end))
     )
   )
-
 (speckler-add! fold ()
   '(json
     :modes (json-mode)
@@ -31,7 +31,6 @@
                )
     )
   )
-
 (speckler-add! electric ()
   '(json-mode :chars (?\n ?: ?{ ?}))
   )

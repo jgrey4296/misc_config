@@ -85,3 +85,7 @@
     ("k" +jg-ivy-kill-buffer "Kill")
     )
   )
+
+(speckler-add! treesit-source ()
+  '(bash          "git@github.com:tree-sitter/tree-sitter-bash.git")
+  )

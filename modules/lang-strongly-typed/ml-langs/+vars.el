@@ -7,8 +7,12 @@
                    :actions '(insert)
                    :post-handlers '(("| " "SPC") ("|[i]*)[d-2]" "RET")))))
 
-(speckler-add! tree-sit-lang ()
-  '(ocaml-mode      . ocaml)
+(speckler-add! treesit-lang ()
+  '(ocaml-mode         . ocaml)
+  '(ocaml-ts-mode      . ocaml)
+  )
+(speckler-add! treesit-source ()
+  '(ocaml         "git@github.com:tree-sitter/tree-sitter-ocaml.git")
   )
 (speckler-add! company ()
   '(tuareg-mode merlin-company-backend)
@@ -21,7 +25,6 @@
     :documentation merlin-document
     )
   )
-
 (speckler-add! popup ()
   '(ml-langs
     ("^\\*utop\\*" :quit nil)
@@ -32,7 +35,6 @@
     ( "\\.s\\(?:ml\\|ig\\)\\'" . sml-mode)
     )
   )
-
 (speckler-add! repl ()
   '(sml-mode :start run-sml)
   '(tuareg-mode

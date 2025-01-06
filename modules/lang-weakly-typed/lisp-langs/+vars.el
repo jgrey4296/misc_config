@@ -168,4 +168,7 @@
 (speckler-setq! flycheck-lisp ()
   flycheck-emacs-lisp-load-path 'inherit
   )
+(speckler-add! treesit-source ()
+  '(elisp         "git@github.com:wilfred/tree-sitter-elisp.git")
+  )
 ;;-- end specs

@@ -368,4 +368,10 @@
 
     )
   )
+(speckler-add! treesit-source ()
+  '(org           "git@github.com:milisims/tree-sitter-org.git")
+  )
+(speckler-add! treesit-lang ()
+  '(org-mode . org)
+  )
 ;;-- end specs

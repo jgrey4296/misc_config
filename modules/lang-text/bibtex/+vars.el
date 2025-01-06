@@ -93,7 +93,9 @@
     ("^\\*Metadata\\*\\'"     :side left :ttl 5 :width 0.3 :quit t :select nil :priority 50)
     )
   )
-
+(speckler-add! treesit-source ()
+  '(bibtex        "git@github.com:latex-lsp/tree-sitter-bibtex.git")
+  )
 (speckler-add! compile-commands ()
   '(bibtex +jg-bibtex-get-commands)
   )

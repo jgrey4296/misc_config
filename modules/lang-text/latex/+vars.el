@@ -3,22 +3,6 @@
 (defvar jg-latex-mode-map (make-sparse-keymap))
 (setq-default TeX-master t)
 
-(speckler-setq! latex ()
-  ;; Use hidden directories for AUCTeX files.
-  TeX-auto-local  nil
-  TeX-style-local nil
-  TeX-style-path (list (expand-file-name "auctex/" user-cache-dir))
-  TeX-parse-self  nil ; parse on load
-  TeX-auto-save   nil  ; parse on save
-  TeX-auto-private (expand-file-name "auctex/" user-cache-dir)
-  TeX-style-private (expand-file-name "auctex/" user-cache-dir)
-  TeX-source-correlate-method 'synctex
-  TeX-source-correlate-start-server nil ;; Don't start the Emacs server when correlating sources.
-  TeX-electric-sub-and-superscript t    ;; Automatically insert braces after sub/superscript in `LaTeX-math-mode'.
-  TeX-save-query nil                    ;; Just save, don't ask before each compilation.
-  LaTeX-enable-toolbar nil
-  )
-
 ;;-- reftex
 ;; Get RefTeX working with BibLaTeX, see
 ;; http://tex.stackexchange.com/questions/31966/setting-up-reftex-with-biblatex-citation-commands/31992#31992.
@@ -74,6 +58,22 @@
 ;;-- end fold settings
 
 ;;-- specs
+(speckler-setq! latex ()
+  ;; Use hidden directories for AUCTeX files.
+  TeX-auto-local  nil
+  TeX-style-local nil
+  TeX-style-path (list (expand-file-name "auctex/" user-cache-dir))
+  TeX-parse-self  nil ; parse on load
+  TeX-auto-save   nil  ; parse on save
+  TeX-auto-private (expand-file-name "auctex/" user-cache-dir)
+  TeX-style-private (expand-file-name "auctex/" user-cache-dir)
+  TeX-source-correlate-method 'synctex
+  TeX-source-correlate-start-server nil ;; Don't start the Emacs server when correlating sources.
+  TeX-electric-sub-and-superscript t    ;; Automatically insert braces after sub/superscript in `LaTeX-math-mode'.
+  TeX-save-query nil                    ;; Just save, don't ask before each compilation.
+  LaTeX-enable-toolbar nil
+  )
+
 (speckler-add! company ()
   '(reftex-mode (:mode company-reftex-labels company-reftex-citations))
   '(LaTeX-mode (:mode company-auctex-environments company-auctex-macros +latex-symbols-company-backend))
@@ -151,5 +151,13 @@
                :close      nil
                )
     )
+  )
+(speckler-add! treesit-lang ()
+  '(latex-mode . latex)
+  '(tex-mode . latex)
+  '(LaTeX-mode . latex)
+  )
+(speckler-add! treesit-source ()
+  '(latex         "git@github.com:latex-lsp/tree-sitter-latex.git")
   )
 ;;-- end specs

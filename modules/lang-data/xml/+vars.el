@@ -29,7 +29,6 @@
     (,jg-xml-xmllint-shell-buffer-name :side right  :ttl nil :width  0.3 :quit t :select t   :priority 100)
     )
   )
-
 (speckler-add! lookup-url ()
   '(xml
     ("Firefox Dev" "https://developer.mozilla.org/en-US/search?q=%s")
@@ -38,7 +37,6 @@
 (speckler-add! company ()
   '(nxml-mode (:mode company-nxml))
   )
-
 (speckler-add! auto-modes ()
   '(xml
     ("\\.p\\(?:list\\|om\\)\\'" . nxml-mode)
@@ -52,5 +50,12 @@
     )
   '(mhtml-mode
     :start +xml/open-repl)
+  )
+(speckler-add! treesit-lang ()
+  '(xml-mode . xml)
+  '(nxml-mode . xml)
+  )
+(speckler-add! treesit-source ()
+  '(xml           "git@github.com:tree-sitter-grammars/tree-sitter-xml.git")
   )
 ;;-- end specs

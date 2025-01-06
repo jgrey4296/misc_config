@@ -64,7 +64,6 @@
     ("^\\*vc-change" :select t)   ; *vc-change-log*
     )
   )
-
 (speckler-add! fold ()
   `(magit
     :modes (magit-status-mode)
@@ -79,7 +78,6 @@
                )
     )
   )
-
 (speckler-add! auto-modes ()
   '(version-control
     ("/\\.dockerignore\\'"  . gitignore-mode)
@@ -89,9 +87,11 @@
     ("/\\.gitattributes\\'" . gitattributes-mode)
     )
   )
-
 (speckler-add! yas-extra ()
   '(git-commit-mode git-commit-mode)
   )
-
+(speckler-add! treesit-source ()
+  '(gitattributes "git@github.com:tree-sitter-grammars/tree-sitter-gitattributes.git")
+  '(gitignore     "git@github.com:shunsambongi/tree-sitter-gitignore.git")
+  )
 ;;-- end specs

@@ -34,13 +34,27 @@
   )
 
 ;;;###autoload
-(defun +jg-ui-refresh-highlighting ()
+(defun +jg-ui-refresh-highlighting (&optional window)
   (interactive)
-  (when font-lock-mode
-    (font-lock-update)
+  (let ((buff (window-buffer window))
+        (vis-min (save-excursion (with-selected-window (or window (selected-window))
+                                   (evil-window-top) (point))))
+        (vis-max (save-excursion (with-selected-window (or window (selected-window))
+                                   (evil-window-bottom) (point))))
+        )
+    (when (and (not (minibufferp)) (equal buff (current-buffer)) )
+      (when font-lock-mode
+        ;; (message "Triggering Font Lock Update")
+        (font-lock-update)
+        )
+      (when (and (boundp 'treesit-font-lock-settings) treesit-font-lock-settings)
+        ;; (message "Triggering Treesit update")
+        (treesit-font-lock-fontify-region vis-min vis-max)
+        )
+      (when tree-sitter-hl-mode
+        ;; (message "Triggering Treesitter hl update")
+        (tree-sitter-hl--highlight-region vis-min vis-max)
+         )
+        )
+      )
     )
-  (when tree-sitter-hl-mode
-    (tree-sitter-hl-mode -1)
-    (tree-sitter-hl-mode 1)
-    )
-  )

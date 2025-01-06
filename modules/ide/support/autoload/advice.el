@@ -124,3 +124,9 @@ server getting expensively restarted when reverting buffers."
       (if evil-local-mode
           (eq evil-state 'normal)
         (not (bound-and-true-p company-backend))))
+
+;;;###autoload
+(defun +jg-support-treesit-update-fontlock-a (&rest args)
+  "Advice to run :after treesit-major-mode-setup"
+  (add-hook 'pre-redisplay-functions #'+jg-ui-refresh-highlighting 80 t)
+  )

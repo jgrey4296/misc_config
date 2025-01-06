@@ -276,24 +276,24 @@
     (transient-macro-toggle-lsp-doc-childframe)
     (transient-macro-call-lsp-auto-signature)
     ]
-  [ "Diagnostics"
-    (transient-macro-toggle-hook-lsp-modeline-diagnostics)
-    (transient-macro-toggle-hook-lsp-diagnostics)
-    (transient-macro-toggle-hook-lsp-code-actions)
-    " "
+   [
     "Toggles"
     (transient-macro-toggle-hook-lsp-treemacs)
-    (transient-macro-toggle-lsp-doc-hover)
     (transient-macro-toggle-hook-lsp-completion)
     (transient-macro-toggle-hook-tree-sitter-hl)
     (transient-macro-toggle-hook-lsp-imenu)
+    (transient-macro-toggle-lsp-doc-hover)
     ]
   [ "Settings"
     (transient-macro-call-lsp-on-type-formatting)
     (transient-macro-call-lsp-highlighting)
-
     (transient-macro-toggle-lsp-keep-alive)
     (transient-macro-call-lsp-trace-io)
+    " "
+    "Diagnostics"
+    (transient-macro-toggle-hook-lsp-modeline-diagnostics)
+    (transient-macro-toggle-hook-lsp-diagnostics)
+    (transient-macro-toggle-hook-lsp-code-actions)
     ]]
   )
 

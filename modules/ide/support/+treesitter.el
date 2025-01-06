@@ -6,6 +6,8 @@
 ;; See footer for licenses/metadata/notes as applicable
 ;;-- end Header
 
+(advice-add 'treesit-major-mode-setup :after #'+jg-support-treesit-update-fontlock-a)
+
 (use-package! tree-sitter ;; Melpas
   :disabled t
   :config

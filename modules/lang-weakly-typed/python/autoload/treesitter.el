@@ -9,8 +9,8 @@
 (defun python-ts-extend (&rest args)
   (setq-local treesit-font-lock-feature-list '(( comment definition)
                                                ( keyword string type)
-                                               ( assignment builtin constant decorator escape-sequence number string-interpolation)
-                                               ( bracket delimiter function operator variable property typealias return dunder internal)
+                                               ( assignment builtin constant decorator escape-sequence number string-interpolation typealias return dunder internal)
+                                               ( bracket delimiter function operator variable property )
                                                )
               treesit-font-lock-settings (append
                                           treesit-font-lock-settings
@@ -19,6 +19,15 @@
                                            :language 'python
                                            :override t
                                            '((type_alias_statement "type" @font-lock-semi-unimportant))
+
+                                           :feature 'public
+                                           :language 'python
+                                           :override t
+                                           '((function_definition
+                                              (identifier) @ediff-fine-diff-Ancestor
+                                              (:match "^[^_]." @ediff-fine-diff-Ancestor)
+                                             ))
+
 
                                            :feature 'internal
                                            :language 'python

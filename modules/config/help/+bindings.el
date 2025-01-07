@@ -150,6 +150,10 @@
       :n "SPC e" #'eval-last-sexp
       )
 
+(map!
+ [remap describe-key] #'helpful-key
+ )
+
 ;;-- end helpful
 
 ;;-- info

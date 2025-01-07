@@ -14,13 +14,43 @@
   :interactive t
   #'treesit-inspect-mode
   )
+(transient-call! treesit-increase-font ()
+  "Increase the fontification level"
+  :key "+"
+  :desc "Increase Font Level"
+  (setq treesit-font-lock-level (min 4 (1+ treesit-font-lock-level)))
+  (treesit-font-lock-recompute-features)
+  )
+(transient-call! treesit-decrease-font ()
+  "Decrease the fontification level"
+  :key "-"
+  :desc "Decrease Font Level"
+  (setq treesit-font-lock-level (max 0 (1- treesit-font-lock-level)))
+  (treesit-font-lock-recompute-features)
+  )
+(transient-call! treesit-set-font ()
+  "Increase the fontification level"
+  :key "="
+  :desc (format "Set Font Level (%s)" treesit-font-lock-level)
+  :interactive t
+  #'treesit-change-fontification-level
+  )
 
 ;;;###autoload
 (defun +jg-support-build-treesit-transient ()
   (transient-append-suffix (cadr jg-toggle-guides-transient)
     "g" '(transient-macro-call-treesit-inspect)
     )
+  (transient-append-suffix 'jg-toggle-main
+    '(0)
+    [["Font Lock Levels"]
+     [(transient-macro-call-treesit-increase-font)]
+      [(transient-macro-call-treesit-decrease-font)]
+      [(transient-macro-call-treesit-set-font)]
+      ]
+    )
   )
+
 
 ;;-- Footer
 ;; Copyright (C) 2025 john

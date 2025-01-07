@@ -39,13 +39,6 @@
   :desc (propertize "Run Spec Handlers" 'face 'transient-heading)
   (speckler-go!)
   )
-(transient-call! general-insert-rebuild-cache ()
-  ""
-  :key "@"
-  :desc (propertize "Clear General-Insert Cache" 'face 'transient-heading)
-  (librarian-insert-clear-caches)
-  (message "Cache Rebuilt")
-  )
 (transient-toggle-mode! global-hl-line-mode ()
   "Hl-line"
   :key "h"
@@ -83,7 +76,6 @@
       (transient-macro-call-run-spec-handlers)
       ]
      [""
-      (transient-macro-call-general-insert-rebuild-cache)
       ]
      ]
     ["Subsections" []]
@@ -132,7 +124,7 @@
   (run-hooks 'jg-transient-toggles-hook)
   )
 
-;;;###autoload (autoload 'jg-ui-transient-toggles-builder "config/ui/autoload/transient-toggles" nil t)
+;;;###autoload (autoload 'jg-ui-transient-toggles-builder "config/ui/autoload/transient-toggle-main" nil t)
 (transient-setup-hook! jg-ui-transient-toggles ()
   (+jg-ui-build-main-toggle-transient)
   )

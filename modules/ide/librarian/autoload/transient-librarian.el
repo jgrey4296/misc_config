@@ -33,6 +33,13 @@
   :transient nil
   (librarian-tag-mode-rebuild-tag-database)
   )
+(transient-call! general-insert-rebuild-cache ()
+  "Clears and rebuilds the general insert cache"
+  :key "@"
+  :desc (propertize "Clear General-Insert Cache" 'face 'transient-heading)
+  (librarian-insert-clear-caches)
+  (message "Cache Rebuilt")
+  )
 
 (transient-subgroup! librarian-settings ()
   "For controlling librarian"
@@ -53,4 +60,5 @@
 ;;;###autoload
 (defun +jg-librarian-build-librarian-transient ()
   (transient-guarded-insert! 'jg-toggle-main librarian-settings (1 -1))
+  (transient-guarded-insert! 'jg-toggle-main (transient-macro-call-general-insert-rebuild-cache) (0 0 -1))
   )

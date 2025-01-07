@@ -16,11 +16,11 @@
 
 (use-package! treesit ;; builtin
   :defer t
+  :init
+  (add-hook 'jg-ui-transient-toggles-hook  #'+jg-support-build-treesit-transient 99)
   :config
   (require 'tree-sitter-langs)
   ;; https://www.masteringemacs.org/article/how-to-get-started-tree-sitter
-
-  (add-hook 'jg-ui-transient-toggles-hook  #'+jg-support-build-treesit-transient 50)
   )
 
 (use-package! tree-sitter-langs

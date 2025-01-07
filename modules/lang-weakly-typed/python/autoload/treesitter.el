@@ -9,8 +9,13 @@
 (defun python-ts-extend (&rest args)
   (setq-local treesit-font-lock-feature-list '(( comment definition)
                                                ( keyword string type)
-                                               ( assignment builtin constant decorator escape-sequence number string-interpolation typealias return dunder internal)
-                                               ( bracket delimiter function operator variable property )
+                                               ( assignment builtin constant
+                                               decorator escape-sequence number
+                                               string-interpolation typealias
+                                               return dunder internal errors
+                                               function
+                                               )
+                                               ( bracket delimiter operator variable property )
                                                )
               treesit-font-lock-settings (append
                                           treesit-font-lock-settings
@@ -41,9 +46,23 @@
                                            :language 'python
                                            :override t
                                            '((function_definition
-                                             (identifier) @jg-motion-line
-                                             (:match "^__.+?__$" @jg-motion-line)
+                                             (identifier) @jg-emacs-line
+                                             (:match "^__.+?__\\'" @jg-emacs-line)
                                              ))
+
+                                           :feature 'errors
+                                           :language 'python
+                                           :override t
+                                           '(((identifier) @jg-motion-line
+                                              (:match "^.*?E\\(xception\\|rror\\)\\'" @jg-motion-line)
+                                              ))
+
+                                           :feature 'conventions
+                                           :language 'python
+                                           :override t
+                                           '(((identifier) @jg-lisp-line
+                                              (:match ".+?_[pdisccefmhl]\\'" @jg-lisp-line)
+                                              ))
 
                                           ;; :feature 'return
                                           ;; :language 'python

@@ -35,6 +35,7 @@
                          (expand-file-name "~/.local/tree-sitter/")
                          )
   treesit-extra-load-path tree-sitter-load-path
+  treesit-font-lock-level 3
 
   ;; treesit-simple-indent-rules
   ;; treesit-defun-type-regexp

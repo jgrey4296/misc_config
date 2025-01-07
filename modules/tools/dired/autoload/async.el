@@ -1,4 +1,4 @@
-;;; delete.el -*- lexical-binding: t; -*-
+;;; async.el -*- lexical-binding: t; -*-
 
 (defun +jg-dired-async-delete-sentinel (buffer out-buffer process event)
   (when (string-equal "finished\n" event)
@@ -211,3 +211,25 @@
     (librarian-browser--open-url "http://127.0.0.1:8000")
     )
   )
+
+(defun +jg-dired-async-list-zip-files ()
+  "List the files contained in a zip file"
+  (interactive)
+  (let* ((marked (ensure-list (dired-get-marked-files)))
+         (target-buffer (get-buffer-create "*Zip Files*"))
+         )
+    (with-current-buffer target-buffer
+      (erase-buffer)
+      (insert "\n--- Files Contained In Zip Archives:\n")
+      )
+    (make-process :name "zipfileslist"
+                  :buffer target-buffer
+                  :command (append (list "zipinfo") marked)
+                  :sentinel (-partial '(lambda (targ p e) (when (not (process-live-p p))
+                                                            (with-current-buffer targ (insert "\n---- Finished ----\n"))
+                                                            (display-buffer targ)))
+                                      target-buffer)
+                  :noquery t
+                  )
+    )
+)

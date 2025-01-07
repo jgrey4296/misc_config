@@ -20,8 +20,8 @@
       (:prefix "]")
       (:prefix "[")
       (:prefix ("c" . "Change"))
-      (:prefix ("C" . "Create"))
-      (:prefix ("c f" . "File Changes"))
+      (:prefix ("c f" . "Change Files"))
+      (:prefix ("c d" . "Change Dir"))
       (:prefix ("d ?" . "Disassembly"))
       (:prefix ("o" . "Open"))
       (:prefix ("e k" . "Keys"))
@@ -54,6 +54,7 @@
       :n "Y" (cmd! (dired-copy-filename-as-kill 0))
       :desc "Fd File"        :n  "s f" #'fd-dired
       )
+
 (map! :map jg-dired-mode-map ;; mark
       :n "t"                                      #'dired-toggle-marks
       :n "m"                                      #'dired-mark
@@ -68,6 +69,7 @@
       :desc "mark hash duplicates"         :n "h" #'+jg-dired-hash-duplicates
       )
 )
+
 (map! :map jg-dired-mode-map ;; movement
       :n "-"                          #'dired-up-directory
       :n "j"                          #'dired-next-line
@@ -91,30 +93,11 @@
 (map! :map jg-dired-mode-map ;; change
       :desc "Delete"              :n "D" #'+jg-dired-async-trash
       :desc "Touch"               :n "=" #'+jg-dired-touch
-      )
 
-(map! :map jg-dired-mode-map ;; change
-      :prefix ("c" . "Change")
-      :desc "Replace grep"        :n "G" #'dired-do-find-regexp-and-replace
-      :desc "kill"                :n "K" #'dired-do-delete
-      :desc "Global Match Rename" :n "R" #'+jg-dired-GLOBAL-do-rename-regexp
-
-      :desc "copy"                :n "c" #'dired-async-do-copy
-      :desc "downcase"            :n "j" #'dired-downcase
-      :desc "upcase"              :n "k" #'dired-upcase
-      :desc "move"                :n "m" #'dired-async-do-rename
-      :desc "rename"              :n "r" #'+jg-dired-rename
-      :desc "Owner"               :n "o" #'dired-do-chown
-      :desc "Permissions"         :n "O" #'dired-do-chmod
-      )
-
-(map! :map jg-dired-mode-map ;; create
-      :prefix ("C" . "Create")
-      :desc "Cookiecutter"    :n "c" #'+jg-dired-cookiecutter
-      :desc "New Dir"         :n   "n" #'dired-create-directory
-      :desc "New Tasks Dir"   :n   "t" (cmd! (dired-create-directory ".tasks"))
-      :desc "New Docs Dir"    :n   "d" (cmd! (dired-create-directory "docs"))
-      :desc "New Tests Dir"   :n   "x" (cmd! (dired-create-directory "__tests"))
+      :desc "copy"                :n "c c" #'dired-async-do-copy
+      :desc "rename"              :n "c r" #'+jg-dired-rename
+      :desc "move"                :n "c m" #'dired-async-do-rename
+      :desc "New Dir"             :n "c n" #'dired-create-directory
 
       (:prefix ("z" . "Zips")
        :desc "named compress"         :n "n" #'dired-do-compress-to
@@ -127,6 +110,30 @@
        :desc "Hardlink"            :n "h" #'dired-do-hardlink
        )
       )
+
+(map! :map jg-dired-mode-map ;; change files
+      :prefix ("c f" . "Change Files")
+      :desc "Replace grep"        :n "G" #'dired-do-find-regexp-and-replace
+      :desc "kill"                :n "K" #'dired-do-delete
+      :desc "Global Match Rename" :n "R" #'+jg-dired-GLOBAL-do-rename-regexp
+
+      :desc "copy"                :n "c" #'dired-async-do-copy
+      :desc "downcase"            :n "j" #'dired-downcase
+      :desc "upcase"              :n "k" #'dired-upcase
+      :desc "move"                :n "m" #'dired-async-do-rename
+      :desc "rename"              :n "r" #'+jg-dired-rename
+      :desc "Owner"               :n "o" #'dired-do-chown
+      :desc "Permissions"         :n "O" #'dired-do-chmod
+)
+
+(map! :map jg-dired-mode-map ;; change dir
+      :prefix ("c d" . "Change Dir")
+      :desc "Cookiecutter"    :n   "c" #'+jg-dired-cookiecutter
+      :desc "New Dir"         :n   "n" #'dired-create-directory
+      :desc "New Tasks Dir"   :n   "t" (cmd! (dired-create-directory ".tasks"))
+      :desc "New Docs Dir"    :n   "d" (cmd! (dired-create-directory "docs"))
+      :desc "New Tests Dir"   :n   "x" (cmd! (dired-create-directory "__tests"))
+)
 
 (map! :map jg-dired-mode-map ;; describe
       :prefix ("d" . "describe")
@@ -142,6 +149,7 @@
       :desc "Git Info"         :n "g" #'dired-git-info-mode
       :desc "File Path"        :n "p" (cmd! (dired-copy-filename-as-kill 0))
       :desc "File Name"        :n "n" #'dired-copy-filename-as-kill
+      :desc "Zip File List"    :n "l" #'+jg-dired-async-list-zip-files
       )
 
 (map! :map jg-dired-mode-map ;; open

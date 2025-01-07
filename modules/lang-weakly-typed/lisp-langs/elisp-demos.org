@@ -2,7 +2,7 @@
 
 * %
 
-#+BEGIN_SRC elisp
+#+BEGIN_SRC emacs-lisp
 ;; JG Example
 (% 10 4)
 #+END_SRC
@@ -12,7 +12,7 @@
 
 * cl-loop
 
-#+begin_src lisp :results output
+#+begin_src emacs-lisp :results output
 (cl-loop for x in '(a b nil d nil e)
          for valid = (not (null x))
          when valid do
@@ -22,24 +22,24 @@
 #+end_src
 
 * backquote-list*-macro
-#+begin_src lisp
+#+begin_src emacs-lisp
 (backquote-list* 'a 'b 'c) => (a b . c)
 #+end_src
 
 
 * -reject
-#+begin_src lisp
+#+begin_src emacs-lisp
 (-reject #'null '(1 2 3 nil 4 nil 5 6))
 #+end_src
 
 
 * f-parent
-#+begin_src lisp :
+#+begin_src emacs-lisp :
 (f-parent "a/b/c/d.blah")
 #+end_src
 
 * concatenate
-#+begin_src lisp
+#+begin_src emacs-lisp
 (concatenate 'list '(1 2 3 4) [5 6 7] (list 8 9 10))
 #+end_src
 
@@ -56,4 +56,9 @@
 (keymap-lookup keymap "a") ;; -> #'test
 (keymap-lookup keymap "b") ;; -> nil
 )
+#+end_src
+
+* transient-guarded-insert!
+#+begin_src emacs-lisp
+(transient-guarded-insert! 'jg-toggle-main librarian-settings (1 -1))
 #+end_src

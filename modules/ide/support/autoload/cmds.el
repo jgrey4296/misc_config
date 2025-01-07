@@ -43,3 +43,12 @@
 
             )
   )
+
+;;;###autoload
+(defun treesit-change-fontification-level (level)
+  "util function to change treesit fontification level"
+  (interactive "n")
+  (setq treesit-font-lock-level level)
+  (setq-default treesit-font-lock-level level)
+  (treesit-font-lock-recompute-features)
+  )

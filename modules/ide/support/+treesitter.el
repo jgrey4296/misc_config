@@ -79,13 +79,6 @@
   '(tuareg-mode     . ocaml)
   )
 
-(defun treesit-change-fontification-level (level)
-  "util function to change treesit fontification level"
-  (interactive "n")
-  (setq treesit-font-lock-level level)
-  (treesit-font-lock-recompute-features)
-  )
-
 ;;todo: use treesit-font-lock-rules
 ;;-- Footer
 ;; Copyright (C) 2024 john

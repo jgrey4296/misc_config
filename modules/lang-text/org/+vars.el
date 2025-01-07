@@ -1,7 +1,9 @@
 ;;; lang/jg-org/+vars.el -*- lexical-binding: t; -*-
 
 (defvar jg-org-mode-map     (make-sparse-keymap))
+
 (defvar jg-org-capture-map  (make-sparse-keymap))
+
 (defvar jg-org-src-mode-map (make-sparse-keymap))
 
 (after! org
@@ -13,19 +15,6 @@
 ;; locations
 
 ;; ORG SETUP
-(speckler-setq! org ()
-  org-link-from-user-regexp "\\<John Grey\\>"
-  org-fast-tag-selection-single-key nil
-  org-group-tags nil
-  org-use-fast-tag-selection t
-  org-tags-column 50
-  org-startup-indented nil
-  org-indent--deepest-level 10
-  org-element-use-cache t
-  org-insert-heading-respect-content t
-  org-list-allow-alphabetical t
-  )
-
 
 ;; Save target buffer after archiving a node.
 (setq org-archive-subtree-save-file-p t)
@@ -54,25 +43,6 @@
 ;;-- end org core
 
 ;;-- locations
-(speckler-setq! org-locs ()
-  :priority 20
-  org-archive-location   (format           "%s::%s" (expand-file-name "archive/archive.org" org-directory) "* Main Archive")
-  org-id-locations-file  (expand-file-name "org/.orgids" user-cache-dir)
-  org-default-notes-file (expand-file-name "notes/misc.org"   org-directory)
-  org-attach-id-dir                        "attachments"
-  org-journal-dir                   (expand-file-name "journal/"    org-directory)
-  org-journal-cache-file            (expand-file-name "org/journal" user-cache-dir)
-  org-persist-directory             (expand-file-name "org/persist/" user-cache-dir)
-  org-publish-timestamp-directory   (expand-file-name  "org/timestamps/" user-cache-dir)
-  org-preview-latex-image-directory (expand-file-name  "org/latex/" user-cache-dir)
-  org-clock-persist-file (expand-file-name "org-clock-save.el" user-cache-dir)
-
-  +org-capture-todo-file                   "agenda/triage_todos.org"
-  +org-capture-changelog-file              "changelog.org"
-  +org-capture-notes-file                  "notes/misc.org"
-  +org-capture-journal-file                "journal/journal.org"
-  +org-capture-projects-file               "projects/projects.org"
-  )
 
 ;;-- end locations
 
@@ -104,7 +74,6 @@
       ;; Show src buffer in popup, and don't monopolize the frame
       org-src-window-setup 'other-window
       )
-
 
 ;; Don't process babel results asynchronously when exporting org, as they
 ;; won't likely complete in time, and will instead output an ob-async hash
@@ -216,8 +185,47 @@
   )
 ;;-- end completion
 
-;;-- capture
+;;-- spelling
+;; Don't spellcheck org blocks
+(pushnew! ispell-skip-region-alist
+          '(":\\(PROPERTIES\\|LOGBOOK\\):" . ":END:")
+          '("#\\+BEGIN_SRC" . "#\\+END_SRC")
+          '("#\\+BEGIN_EXAMPLE" . "#\\+END_EXAMPLE"))
 
+;;-- end spelling
+
+;;-- specs
+(speckler-setq! org ()
+  org-link-from-user-regexp "\\<John Grey\\>"
+  org-fast-tag-selection-single-key nil
+  org-group-tags nil
+  org-use-fast-tag-selection t
+  org-tags-column 50
+  org-startup-indented nil
+  org-indent--deepest-level 10
+  org-element-use-cache t
+  org-insert-heading-respect-content t
+  org-list-allow-alphabetical t
+  )
+(speckler-setq! org-locs ()
+  :priority 20
+  org-archive-location   (format           "%s::%s" (expand-file-name "archive/archive.org" org-directory) "* Main Archive")
+  org-id-locations-file  (expand-file-name "org/.orgids" user-cache-dir)
+  org-default-notes-file (expand-file-name "notes/misc.org"   org-directory)
+  org-attach-id-dir                        "attachments"
+  org-journal-dir                   (expand-file-name "journal/"    org-directory)
+  org-journal-cache-file            (expand-file-name "org/journal" user-cache-dir)
+  org-persist-directory             (expand-file-name "org/persist/" user-cache-dir)
+  org-publish-timestamp-directory   (expand-file-name  "org/timestamps/" user-cache-dir)
+  org-preview-latex-image-directory (expand-file-name  "org/latex/" user-cache-dir)
+  org-clock-persist-file (expand-file-name "org-clock-save.el" user-cache-dir)
+
+  +org-capture-todo-file                   "agenda/triage_todos.org"
+  +org-capture-changelog-file              "changelog.org"
+  +org-capture-notes-file                  "notes/misc.org"
+  +org-capture-journal-file                "journal/journal.org"
+  +org-capture-projects-file               "projects/projects.org"
+  )
 (speckler-add! org-capture ()
   `(todo
     (:key       "t" :name      "Personal todo"
@@ -251,19 +259,6 @@
      )
     )
   )
-
-;;-- end capture
-
-;;-- spelling
-;; Don't spellcheck org blocks
-(pushnew! ispell-skip-region-alist
-          '(":\\(PROPERTIES\\|LOGBOOK\\):" . ":END:")
-          '("#\\+BEGIN_SRC" . "#\\+END_SRC")
-          '("#\\+BEGIN_EXAMPLE" . "#\\+END_EXAMPLE"))
-
-;;-- end spelling
-
-;;-- specs
 (speckler-add! file-templates ()
   '(org
     ("two_pager\\.org$"     :trigger "__pacheco_vega_two_pager" :mode org-mode)

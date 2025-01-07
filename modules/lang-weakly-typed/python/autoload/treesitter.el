@@ -7,16 +7,30 @@
 ;;-- end Header
 
 (defun python-ts-extend (&rest args)
-  (setq-local treesit-font-lock-feature-list '(( comment definition)
-                                               ( keyword string type)
-                                               ( assignment builtin constant
-                                               decorator escape-sequence number
-                                               string-interpolation typealias
-                                               return dunder internal errors
-                                               function
+  (setq-local treesit-font-lock-feature-list '(;; 1
+                                               ( comment definition keyword string type)
+                                               ;; 2
+                                               ( public constant builtin errors typealias
+                                                        assignment operator variable
+                                                        )
+                                               ;; 3
+                                               ( decorator
+                                                 escape-sequence
+                                                 number
+                                                 string-interpolation
+                                                 return
+                                                 internal
+                                                 function
+                                                 wrappers
+                                                 )
+                                               ;; 4
+                                               ( bracket
+                                                 delimiter
+                                                 property
+                                                 conventions
+                                                 )
                                                )
-                                               ( bracket delimiter operator variable property )
-                                               )
+              ;; Rules
               treesit-font-lock-settings (append
                                           treesit-font-lock-settings
                                           (treesit-font-lock-rules
@@ -33,22 +47,16 @@
                                               (:match "^[^_]." @ediff-fine-diff-Ancestor)
                                              ))
 
-
                                            :feature 'internal
                                            :language 'python
                                            :override t
                                            '((function_definition
                                               (identifier) @jg-replace-line
-                                              (:match "^_[^_]." @jg-replace-line)
-                                             ))
-
-                                           :feature 'dunder
-                                           :language 'python
-                                           :override t
-                                           '((function_definition
-                                             (identifier) @jg-emacs-line
-                                             (:match "^__.+?__\\'" @jg-emacs-line)
-                                             ))
+                                              (:match "^_[^_]." @jg-replace-line))
+                                             (function_definition
+                                              (identifier) @jg-emacs-line
+                                              (:match "^__.+?__\\'" @jg-emacs-line))
+                                             )
 
                                            :feature 'errors
                                            :language 'python
@@ -64,14 +72,22 @@
                                               (:match ".+?_[pdisccefmhl]\\'" @jg-lisp-line)
                                               ))
 
-                                          ;; :feature 'return
-                                          ;; :language 'python
-                                          ;; :override t
-                                          ;; '((block)
-                                          ;;   ((return_statement "return" @font-lock-semi-unimportant
-                                          ;;                      (:match "^\s+return" @font-lock-semi-unimportant)
-                                          ;;                      ))
-                                          ;;   )
+                                          :feature 'return
+                                          :language 'python
+                                          :override t
+                                          '((block)
+                                            ((return_statement "return" @font-lock-semi-unimportant
+                                                               (:match "^\s+return" @font-lock-semi-unimportant)
+                                                               ))
+                                            )
+
+                                          :feature 'wrappers
+                                          :language 'python
+                                          :override t
+                                          '((dictionary ["{" "}"] @glyphless-char)
+                                            (list ["[" "]"] @homoglyph)
+                                            (argument_list ["(" ")"] @org-link)
+                                            )
                                           )
               )
   )

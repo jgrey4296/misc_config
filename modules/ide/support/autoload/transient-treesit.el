@@ -38,8 +38,8 @@
 
 ;;;###autoload
 (defun +jg-support-build-treesit-transient ()
-  (transient-append-suffix (cadr jg-toggle-guides-transient)
-    "g" '(transient-macro-call-treesit-inspect)
+  (transient-append-suffix (cadr jg-toggle-debugs-transient)
+    "f" '(transient-macro-call-treesit-inspect)
     )
   (transient-append-suffix 'jg-toggle-main
     '(0)

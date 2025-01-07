@@ -56,8 +56,7 @@
       :n "TAB"  #'org-sort
       )
 
-(map! :map jg-org-mode-map
-      :localleader
+(map! :map jg-org-mode-map :localleader
       "1" #'org-element-cache-reset
       :desc "New SubHeading"         "DEL" #'org-insert-subheading
       :desc "New Heading"            "RET" #'org-insert-heading
@@ -74,9 +73,9 @@
       ;; TODO refine this Codeblocks
       (:prefix ("." . "Code Blocks")
        :desc "Edit Codeblock "     "e" #'org-edit-src-code
-       :desc "Exec Codeblock"      "E" #'org-babel-execute-src-block
        :desc "Clear Result"        "k" #'org-babel-remove-result
        :desc "Clear All Results"   "K" #'+org/remove-result-blocks
+       :desc "Exec Codeblock"      "RET" #'org-babel-execute-src-block
        )
       ;; Links
       (:prefix ("l" . "Links")
@@ -126,17 +125,18 @@
       "n" #'org-journal-search-next
       "p" #'org-journal-search-prev
       )
-(map! :map org-unit-test-map
-      :localleader
+
+(map! :map org-unit-test-map :localleader
       :prefix "."
       :desc "Run Org Test" "T" #'+jg-org-test-org-file
       )
-(map! :map org-src-mode-map
-      :n "Q" #'org-edit-src-abort
-      :n "q" #'org-edit-src-save
-      :n "C-c C-c" #'org-edit-src-save
-      :n "C-c C-k" #'org-edit-src-abort
-      :localleader
+
+(map! :map jg-org-src-mode-map
+      :n "q"       #'evil-org-edit-src-exit
+      :n "Q"       #'evil-org-src-abort
+      :n "RET"     #'org-edit-src-save
+      )
+(map! :map jg-org-src-mode-map :localleader
       "q" #'org-edit-src-abort
       "w" #'org-edit-src-save
 
@@ -150,20 +150,15 @@
       (:prefix ("c f o" . "Org")
         "e" #'+jg-org-dired-export
         )
-
-      :localleader
+      )
+(map! :map jg-dired-mode-map :localleader
+      :after jg-dired-bindings
       :desc "Clean Marked" "K c"     #'+jg-org-dired-clean
       )
 
 (map! :map jg-org-capture-map
       :n "RET" #'org-capture-finalize
       :n "q"   #'org-capture-kill
-      )
-
-(map! :map jg-org-src-mode-map
-      :n "q" #'evil-org-edit-src-exit
-      :n "Q" #'evil-org-src-abort
-      :n "RET" #'org-edit-src-save
       )
 
 (after! (evil-org org)
@@ -176,7 +171,6 @@
   (push (cons 'evil-org-mode jg-org-mode-map) minor-mode-map-alist)
   (evil-make-overriding-map org-src-mode-map)
   )
-
 
 ;; (after! jg-evil-ex-bindings
   ;; (evil-ex-define-cmd "tv"     #'org-tags-view)

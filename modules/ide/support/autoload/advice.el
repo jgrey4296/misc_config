@@ -128,5 +128,5 @@ server getting expensively restarted when reverting buffers."
 ;;;###autoload
 (defun +jg-support-treesit-update-fontlock-a (&rest args)
   "Advice to run :after treesit-major-mode-setup"
-  (add-hook 'pre-redisplay-functions #'+jg-ui-refresh-highlighting 80 t)
+  (setq-local font-lock-fontify-region-function #'treesit-font-lock-fontify-region)
   )

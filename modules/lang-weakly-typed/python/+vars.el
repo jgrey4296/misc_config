@@ -119,7 +119,7 @@
   `(python
     :modes python-mode
     :priority 25
-    :triggers (:close     #'+jg-python-close-class-defs
+    :triggers (:close     #'+jg-python-close-methods
                :close-all #'+jg-python-close-all-defs
                :open      #'outline-toggle-children
                :open-all  #'outline-show-all
@@ -130,7 +130,7 @@
   `(python-ts
     :modes python-ts-mode
     :priority 25
-    :triggers (:close     #'+jg-python-close-class-defs
+    :triggers (:close     #'+jg-python-close-methods
                :close-all #'+jg-python-close-all-defs
                :open      #'outline-toggle-children
                :open-all  #'outline-show-all
@@ -275,7 +275,7 @@
   python-shell-interpreter-path-args                    (expand-file-name "python/repl_startup.py"  templates-loc)
   expand-region-preferred-python-mode 'python-mode
   ;; py settings
-  py-shell-virtualenv-root      conda-env-home-directory
+  py-shell-virtualenv-root      (if (boundp 'conda-env-home-directory) conda-env-home-directory nil)
   py-pdbtrack-do-tracking-p     t
   py-python-command             "python3"
   py-python-command-args        '("-i")

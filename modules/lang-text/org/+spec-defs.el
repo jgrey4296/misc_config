@@ -10,7 +10,8 @@
   "Expands and returns a yas snippet for org-capture "
   (with-temp-buffer
     (yas-minor-mode)
-    (yas-expand-snippet (yas-lookup-snippet name (or mode 'org-mode)) (point))
+    (-if-let (snippet (yas-lookup-snippet name (or mode 'org-mode) t))
+        (yas-expand-snippet snippet (point)))
     (buffer-string)
     )
   )

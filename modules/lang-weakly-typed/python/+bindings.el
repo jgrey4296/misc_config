@@ -7,10 +7,10 @@
 (map! :map (python-mode-map python-ts-mode-map)
       :after python-mode
       :desc "General Insert"         :n "|" #'librarian-insert-trigger
-      :n "z d" nil ;; #'+jg-python-toggle-all-defs
-      :n "z D" nil ;; #'+jg-python-close-class-defs
-      :v "i f" nil ;; #'+jg-python-select-defun
-      :v "i F" nil ;; #'+jg-python-select-class
+      :n "z d" nil
+      :n "z D" nil
+      :v "i f" nil
+      :v "i F" nil
       ;; :n "] ]" #'+jg-python-forward-defun
       ;; :n "s j" '+jg-python-swipe-to-def
       :n "SPC c t" #'+jg-python-pytest-dispatch

@@ -6,7 +6,9 @@
 ;;
 ;;-- end Header
 
+;;;###autoload
 (defun python-ts-extend (&rest args)
+  "TODO use treesit-add-font-lock-rules"
   (setq-local treesit-font-lock-feature-list '(;; 1
                                                ( comment definition keyword string type)
                                                ;; 2
@@ -53,9 +55,9 @@
                                            '((function_definition
                                               (identifier) @jg-replace-line
                                               (:match "^_[^_]." @jg-replace-line))
-                                             (function_definition
-                                              (identifier) @jg-emacs-line
-                                              (:match "^__.+?__\\'" @jg-emacs-line))
+                                             ;; (function_definition
+                                             ;;  (identifier) @jg-emacs-line
+                                             ;;  (:match "^__.+?__\\'" @jg-emacs-line))
                                              )
 
                                            :feature 'errors
@@ -90,8 +92,8 @@
                                             )
                                           )
               )
+              )
   )
-)
 
 
 ;;-- Footer

@@ -1,6 +1,5 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
-
 ;; default snippets library, if available
 (add-to-list 'load-path jg-snippets-code-templates-dir)
 (setq yas-indent-line 'fixed
@@ -25,7 +24,7 @@
   +snippets-dir       jg-snippets-code-templates-dir
   yas-snippet-dirs    (-filter #'identity (append (list jg-snippets-code-templates-dir jg-snippets-file-templates-dir) jg-snippet-dirs))
   yas--default-user-snippets-dir jg-snippets-code-templates-dir
-  yas-prompt-functions '(+jg-snippets-yas-prompt-fn)
+  yas-prompt-functions (list #'+jg-snippets-yas-prompt-fn)
   yas-triggers-in-field t
   )
 
@@ -35,17 +34,17 @@
 
 (speckler-add! auto-modes ()
   '(snippets
-    ("templates/code/.+\\'"           . snippet-mode)
-    ("templates/general-insert/.+\\'" . fundamental-mode)
+    ("templates/code/.+\\'"              . snippet-mode)
+    ("templates/general-insert/.+\\'"    . fundamental-mode)
     ("templates/librarian-regular/.+\\'" . fundamental-mode)
-    ("templates/company-dicts/.+\\'"  . fundamental-mode)
-    ("templates/files/.+\\'"          . snippet-mode)
+    ("templates/company-dicts/.+\\'"     . fundamental-mode)
+    ("templates/files/.+\\'"             . snippet-mode)
     )
   )
 
 (speckler-add! popup ()
   '(snippets
-    ("^untitled-snippet$" :side bottom :ttl 5 :height 0.4 :quit t :select t :priority 50)
-    ("^\\*Abbrevs\\*"     :side right  :ttl 5 :width 100 :quit t :select nil :priority 50)
+    ("^untitled-snippet$" :side bottom :ttl 5 :height 0.4 :quit t :select t   :priority 50)
+    ("^\\*Abbrevs\\*"     :side right  :ttl 5 :width 100  :quit t :select nil :priority 50)
     )
   )

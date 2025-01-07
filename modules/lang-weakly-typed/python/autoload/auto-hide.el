@@ -33,7 +33,8 @@ and closes classes and functions, re-opening only the first class "
     )
 
 ;;;###autoload
-(defun +jg-python-close-class-defs ()
+(defun +jg-python-close-methods ()
+  "Fold all methods, leaving classes open "
     (interactive)
     (save-excursion
       (end-of-line)

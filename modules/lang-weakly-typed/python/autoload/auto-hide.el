@@ -37,7 +37,7 @@ and closes classes and functions, re-opening only the first class "
   "Fold all methods, leaving classes open "
     (interactive)
     (save-excursion
-      (end-of-line)
+      (end-of-buffer)
       (unless (not (re-search-backward "^class " nil t))
         (if (not current-prefix-arg)
             (progn

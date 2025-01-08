@@ -48,11 +48,14 @@
       :n "v"                        #'evil-visual-state
       :n "g"                        #'revert-buffer
       :n "$"                        #'dired-hide-subdir
+      :desc "Delete" :n "D"         #'+jg-dired-async-trash
+      :desc "Touch"  :n "="         #'+jg-dired-touch
       :desc "Expand Subdir"  :n "i" #'+jg-dired-insert-subdir-maybe-recursive
       :desc "Expand Marked"  :n "I" #'+jg-dired-insert-marked-subdir
-      :n "y" #'dired-copy-filename-as-kill
+      :n "y"                        #'dired-copy-filename-as-kill
       :n "Y" (cmd! (dired-copy-filename-as-kill 0))
       :desc "Fd File"        :n  "s f" #'fd-dired
+
       )
 
 (map! :map jg-dired-mode-map ;; mark
@@ -91,13 +94,11 @@
 )
 
 (map! :map jg-dired-mode-map ;; change
-      :desc "Delete"              :n "D" #'+jg-dired-async-trash
-      :desc "Touch"               :n "=" #'+jg-dired-touch
-
-      :desc "copy"                :n "c c" #'dired-async-do-copy
-      :desc "rename"              :n "c r" #'+jg-dired-rename
-      :desc "move"                :n "c m" #'dired-async-do-rename
-      :desc "New Dir"             :n "c n" #'dired-create-directory
+      :prefix ("c" . "Change")
+      :desc "copy"                :n "c" #'dired-async-do-copy
+      :desc "rename"              :n "r" #'+jg-dired-rename
+      :desc "move"                :n "m" #'dired-async-do-rename
+      :desc "New Dir"             :n "n" #'dired-create-directory
 
       (:prefix ("z" . "Zips")
        :desc "named compress"         :n "n" #'dired-do-compress-to

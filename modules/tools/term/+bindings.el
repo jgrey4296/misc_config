@@ -10,7 +10,10 @@
       )
 
 (map! :map jg-term-shell-mode-map
+      :n "|"    #'librarian-insert-trigger
+      :n "<"    #'+jg-shell-cd-prev
       :n "\\"   #'+jg-term-column-motion
+      :n "="    #'setenv
       :n "C-d"  #'comint-send-eof
       :n "DEL"  #'counsel-shell-history--with-state-normal
       :ni "RET" #'comint-send-input

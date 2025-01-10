@@ -124,10 +124,9 @@
   :config
   (carousel-minor-mode 1)
   (speckler-add! ivy-actions ()
-    '(+jg-workspaces-ivy
-      '(("r" +jg-workspaces-rename "Rename")
-        ("l" +jg-workspaces-new-ring "new loop")
-        )
+    `(+jg-workspaces-ivy
+      ("r" ,#'+jg-workspaces-rename "Rename")
+      ("l" ,#'+jg-workspaces-new-ring "new loop")
       )
     )
   (after! transient

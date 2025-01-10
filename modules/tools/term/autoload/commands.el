@@ -14,9 +14,11 @@ If called from dired, will insert a cd to move to the dired buffer location
           )
      (shell)
      (with-current-buffer "*shell*"
-       (comint-next-prompt 1)
-       (unless (equal default-directory dir)
-         (insert (format "cd %s" dir))))
+       (let ((proc (get-buffer-process (current-buffer))))
+         (process-send-string proc (format "cd %s; pwd" dir))
+         (comint-send-input)
+         )
+       )
      )
     (1 (shell))
     (_ (shell (generate-new-buffer-name "*shell*")))
@@ -40,5 +42,15 @@ If called from dired, will insert a cd to move to the dired buffer location
               :action #'switch-to-buffer
               :caller 'jg-term-ivy-switch-term
               )
+    )
+  )
+
+;;;###autoload
+(defun +jg-shell-cd-prev ()
+  "Call `cd -` and go back to where you came from "
+  (interactive)
+  (let ((proc (get-buffer-process (current-buffer))))
+    (process-send-string proc "cd -; pwd")
+    (comint-send-input)
     )
   )

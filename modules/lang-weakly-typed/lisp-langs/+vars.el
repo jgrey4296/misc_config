@@ -12,13 +12,15 @@
   )
 
 ;;-- specs
+(speckler-setq! flycheck-lisp ()
+  flycheck-emacs-lisp-load-path 'inherit
+  )
 (speckler-add! popup ()
   '(lisp
     ("^\\*Buttercup\\*'" :size 0.45 :select nil :ttl 0)
     ("^*ert*" :width 0.4 :side right :select nil :ttl 0 )
     )
   )
-
 (speckler-add! fold ()
   :override nil
   `(lisp
@@ -119,6 +121,7 @@
     )
   )
 (speckler-add! imenu ()
+  :override t
   '(emacs-lisp-mode
     :append
     ("spec-def"             "^(speckler-new! \\(.+\\)" 1)
@@ -164,9 +167,6 @@
     (:name scheme     :lib ob-scheme)
     (:name emacs-lisp :lib ob-emacs-lisp)
     )
-  )
-(speckler-setq! flycheck-lisp ()
-  flycheck-emacs-lisp-load-path 'inherit
   )
 (speckler-add! treesit-source ()
   '(elisp         "git@github.com:wilfred/tree-sitter-elisp.git")

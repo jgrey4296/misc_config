@@ -33,6 +33,6 @@
 
 (speckler-add! ivy-actions ()
   '(counsel-evil-marks
-    '(("m" +jg-navigation-marker-delete-action "Delete Marks"))
+    ("m" +jg-navigation-marker-delete-action "Delete Marks")
     )
   )

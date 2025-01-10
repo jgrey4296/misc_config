@@ -28,6 +28,7 @@
   :config
   (add-hook 'shell-mode-hook #'doom-mark-buffer-as-real-h)
   (add-hook 'shell-mode-hook #'shell-completion-vars 90)
+  (add-hook 'shell-mode-hook #'librarian-insert-minor-mode)
   )
 
 (use-package! term

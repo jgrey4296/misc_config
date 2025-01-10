@@ -63,6 +63,24 @@
 ;;-- end general insert
 
 ;;-- specs
+(speckler-setq! python-ts ()
+  python--treesit-keywords '("as" "assert" "async" "await" "break" "case"
+                             "class" "continue" "def" "del" "elif" "else"
+                             "except" "exec" "finally" "for" "from" "global"
+                             "if" "import" "lambda" "match" "nonlocal" "pass"
+                             "print" "raise" "return" "try" "while" "with"
+                             "yield" "type" "and" "in" "is" "not" "or" "not in"
+                             "is not")
+  ;; python--treesit-builtin-types
+  ;; python--treesit-builtins
+  ;; python--treesit-type-regex
+  ;; python--treesit-constants
+  ;; python--treesit-operators
+  ;; python--treesit-special-attributes
+  ;; python--treesit-exceptions
+  ;; -----
+  ;; python--treesit-settings
+  )
 (speckler-add! projects ()
   :override t
   `(jg-python-project ("pyproject.toml")
@@ -143,6 +161,8 @@
   '(python-mode
     :symbols (("True" "False")
               ("dict" "list")
+              ("error" "user" "trace" "detail" "bootstrap")
+              ("file" "stdout" "stderr" "rotate" "pass")
               )
     )
   )
@@ -237,24 +257,6 @@
 (speckler-add! treesit-lang ()
   '(python-mode    . python)
   '(python-ts-mode . python)
-  )
-(speckler-setq! python-ts ()
-  python--treesit-keywords '("as" "assert" "async" "await" "break" "case"
-                             "class" "continue" "def" "del" "elif" "else"
-                             "except" "exec" "finally" "for" "from" "global"
-                             "if" "import" "lambda" "match" "nonlocal" "pass"
-                             "print" "raise" "return" "try" "while" "with"
-                             "yield" "type" "and" "in" "is" "not" "or" "not in"
-                             "is not")
-  ;; python--treesit-builtin-types
-  ;; python--treesit-builtins
-  ;; python--treesit-type-regex
-  ;; python--treesit-constants
-  ;; python--treesit-operators
-  ;; python--treesit-special-attributes
-  ;; python--treesit-exceptions
-  ;; -----
-  ;; python--treesit-settings
   )
 (speckler-add! org-src ()
   '(python

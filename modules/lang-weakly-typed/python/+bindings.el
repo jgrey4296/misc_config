@@ -20,6 +20,7 @@
 (map! :map (python-mode-map python-ts-mode-map) ;; localleader
       :after python-mode
       :localleader
+      :desc "ts-mode swap" "TAB" #'+jg-python-swap-ts-mode
       :desc "Ruff Format" "f" #'+jg-python-ruff-format
       :desc "Start Pydoc" "p" #'+jg-python-start-pydoc
       :desc "Summarize"   "\\" #'+jg-python-summarize

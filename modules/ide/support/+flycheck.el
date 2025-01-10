@@ -6,9 +6,11 @@
 ;; See footer for licenses/metadata/notes as applicable
 ;;-- end Header
 
-(defvar flycheck-checkers)
+(unless (featurep 'flycheck)
+  (defvar flycheck-checkers)
+  (defvar flycheck-disabled-checkers)
+  )
 
-(defvar flycheck-disabled-checkers)
 (after! jg-evil-ex-bindings
   (evil-ex-define-cmd "er[rors]"    #'+default/diagnostics)
   )

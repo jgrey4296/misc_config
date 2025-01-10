@@ -44,7 +44,7 @@
                              ('darwin (expand-file-name "~/pdf_library"))
                              ('gnu/linux "/media/john/data/library/pdfs"))
   librarian-biblio-library-loc   (expand-file-name "~/github/bibliography/main/")
-  librarian-biblio-unsourced-loc (expand-file-name "~/github/bibligraphy/in_progress/to_source.bib")
+  librarian-biblio-unsourced-loc (expand-file-name "~/github/bibliography/in_progress/to_source_misc.bib")
   org-ref-clean-bibtex-entry-hook librarian--biblio-clean-hooks
 
   librarian--biblio-edit-search-fields '("tags" "year" "publisher")

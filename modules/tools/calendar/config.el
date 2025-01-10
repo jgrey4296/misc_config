@@ -20,9 +20,8 @@
 ;;
 ;;; Code:
 
-
 (local-load! "+vars")
-;; (load! "+spec-defs")
+
 (defer-load! jg-bindings-total "+bindings")
 
 (use-package! calendar
@@ -30,6 +29,14 @@
   :config
   (add-hook! 'calendar-mode-hook #'diary-mark-entries)
 
+  )
+
+(use-package! diary-lib
+  :defer t
+  (speckler-setq! diary (diary-mode)
+    comment-start ";; "
+
+    )
   )
 
 ;;; config.el ends here

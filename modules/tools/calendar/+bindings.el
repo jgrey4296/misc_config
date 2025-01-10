@@ -79,4 +79,9 @@
        )
       )
 
+(map! :map diary-mode-map
+      :leader
+      "e" #'eval-last-sexp
+      )
+
 (setq calendar-mode-map jg-calendar-mode-map)

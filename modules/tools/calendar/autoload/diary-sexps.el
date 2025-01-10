@@ -22,6 +22,17 @@
   )
 
 ;;;###autoload
+(defun jg-diary-count (start)
+  "Get the number of days from start to date"
+  (let ((date1 (calendar-absolute-from-gregorian
+                (apply #'diary-make-date start)))
+        (d (calendar-absolute-from-gregorian date))
+        )
+    (abs (- d date1))
+    )
+  )
+
+;;;###autoload
 (defun jg-diary-range (start end test)
   "Test to add diary entries within a range"
   (let ((date1 (calendar-absolute-from-gregorian
@@ -60,6 +71,17 @@ length is same format as date
     )
   )
 
+;;;###autoload
+(defun jg-diary-tick-tock (n start test)
+  "An entry that only occurs evey n ticks from a start date
+(ticks are in days elapsed)
+"
+  (let ((elapsed (jg-diary-count start)))
+    (and (eq 0 (% elapsed n))
+         test
+         )
+    )
+  )
 
 ;;-- Footer
 ;; Copyright (C) 2025 john

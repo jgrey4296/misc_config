@@ -16,3 +16,7 @@
       "\\" #'+jg-text-column-motion
       "SPC" doom-leader-map
       )
+
+(map! :map jg-binding-vision-map
+      ";" #'+jg-buffer-nav-make-read-only-segment
+      )

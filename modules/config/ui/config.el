@@ -47,3 +47,5 @@
 ;;-- end search results
 
 (use-package! fringe)
+
+(use-package! cursor-sensor)

@@ -20,6 +20,12 @@
   "visual mark"
   :key "v"
   )
+(transient-toggle-hook! cursor-sensor ()
+  "For using code-shy's cursor opening/closing"
+  :key "c"
+  :hook 'code-shy-minor-mode-hook
+  :fn #'cursor-sensor-mode
+  )
 
 (transient-call! sidebar ()
   "Sidebar"
@@ -49,7 +55,9 @@
      (transient-macro-call-sidebar)
      (transient-macro-call-frame-fullscreen)
      ]
-    []
+    [
+     (transient-macro-toggle-hook-cursor-sensor)
+     ]
     )
 
   (transient-guarded-insert! 'jg-toggle-main jg-toggle-nav-transient (1 -1))

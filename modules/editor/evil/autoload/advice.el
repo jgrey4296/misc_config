@@ -281,36 +281,3 @@ Adapted from https://github.com/emacs-evil/evil/issues/606"
                                     (marker-position x)
                                     (marker-buffer x)))
                  (car marks))))
-
-;;;###autoload (autoload '+jg-evil-find-char "editor/evil/autoload/advice.el" nil t)
-(evil-define-motion +jg-evil-find-char (count char)
-  "Move to the next COUNT'th occurrence of CHAR.
-Movement is restricted to the current line unless `evil-cross-lines' is non-nil.
-JG: Modified to respect case-fold-search
-"
-  :type inclusive
-  (interactive "<c><C>")
-  (setq count (or count 1))
-  (let ((fwd (> count 0))
-        (visual (and evil-respect-visual-line-mode
-                     visual-line-mode))
-        )
-    (setq evil-last-find (list #'evil-find-char char fwd))
-    (when fwd (evil-forward-char 1 evil-cross-lines))
-    (unless (prog1
-                (search-forward
-                 (char-to-string char)
-                 (cond (evil-cross-lines nil)
-                       ((and fwd visual)
-                        (save-excursion
-                          (end-of-visual-line)
-                          (point)))
-                       (fwd (line-end-position))
-                       (visual
-                        (save-excursion
-                          (beginning-of-visual-line)
-                          (point)))
-                       (t (line-beginning-position)))
-                 t count)
-              (when fwd (backward-char)))
-      (user-error "Can't find `%c'" char))))

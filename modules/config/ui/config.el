@@ -14,7 +14,7 @@
 (local-load! "+transient")
 
 (advice-remove 'kill-current-buffer        #'doom--switch-to-fallback-buffer-maybe-a)
-(advice-add 'kill-current-buffer           :before-until #'+jg-ui-kill-buffer-override)
+(advice-add 'kill-current-buffer           :before-until #'+jg-ui-kill-buffer-override-a)
 (advice-add 'doom-modeline-propertize-icon :around #'+modeline-disable-icon-in-daemon-a)
 (advice-add 'ws-butler-after-save          :around #'+modeline--inhibit-modification-hooks-a)
 (advice-add 'jit-lock--debug-fontify       :before #'jg-jit-lock-debug-announce)

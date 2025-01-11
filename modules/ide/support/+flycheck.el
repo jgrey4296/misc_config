@@ -12,7 +12,7 @@
   )
 
 (after! jg-evil-ex-bindings
-  (evil-ex-define-cmd "er[rors]"    #'+default/diagnostics)
+  (evil-ex-define-cmd "er[rors]"    #'flycheck-list-errors)
   )
 
 (use-package! flycheck

@@ -25,7 +25,7 @@
 ;;-- debug
 (map! :map jg-help-map
       :prefix ("D" . "Debug")
-      :desc "Describe Auto Mode"       "a" #'+jg-default-debug-auto-mode
+      ;; :desc "Describe Buffer"          "b" #'+jg-default-debug-buffer-state
       :desc "Debug Snippet Insert"     "s" #'+jg-snippets-insert-debug
       :desc "Describe Fold Settings"   "f" #'+jg-fold/debug
       :desc "Describe LSP"             "l" #'+jg-ide-debug-lsp

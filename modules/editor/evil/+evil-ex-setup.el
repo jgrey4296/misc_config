@@ -18,7 +18,6 @@
   :ex-arg regexp-global-match
   (+evil--regexp-match-args evil-ex-argument))
 
-
 (setq evil-ex-commands nil )
 (map! :map (evil-ex-completion-map evil-ex-search-keymap)
       "C-a"                                  #'evil-beginning-of-line

@@ -20,3 +20,8 @@
 
 (package! accent)
 ;; (package! objed)
+(package! evil-textobj-column)
+(package! evil-tree-edit)
+(package! evil-mc)
+(package! evil-multiedit)
+(package! evil-owl)

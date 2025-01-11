@@ -1,5 +1,16 @@
 ;;; funcs.el -*- lexical-binding: t; -*-
 
+(defun jg-help-wk-filter-fn (binding)
+  "function to reject bindings when using which-key "
+  (not (string-match (rx (or "C-"
+                             "C-M"
+                             "M-"
+                             ;; "s-"
+                             (: "<" (+? anychar) ">")
+                             ))
+                     (car binding)))
+  )
+
 ;;;###autoload
 (defun +jg-help-load-package-list ()
   (unless doom--help-packages-list
@@ -19,7 +30,7 @@
   "Show top-level bindings."
   (interactive)
   (which-key--create-buffer-and-show
-   nil nil '+jg-bindings-wk-filter-fn "Top-level bindings")
+   nil nil #'jg-help-wk-filter-fn "Top-level bindings")
   )
 
 ;;;###autoload

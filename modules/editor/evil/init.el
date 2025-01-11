@@ -212,7 +212,6 @@
       view
       vlf
       vterm
-      vundo
       w3m
       wdired
       wgrep

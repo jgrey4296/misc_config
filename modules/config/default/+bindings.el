@@ -10,14 +10,12 @@
 
 
 (map! :leader
-      (:prefix "b"
-       :n "?" #'+jg-default-debug-auto-mode
-      )
-      (:prefix "o"
-       (:when (eq 'darwin system-type)
-         :desc "Reveal in Finder"           "f"     #'+macos/reveal-in-finder
-         )
-       )
+      :desc "Change Extension"  "b e"   #'+jg-default-change-ext
+      :desc "Decribe Buffer"    "b ?" #'+jg-default-debug-buffer-state
+      :desc "Describe Buffer"   "h D b" #'+jg-default-debug-buffer-state
+      (:when (eq 'darwin system-type)
+        :desc "Reveal in Finder"           "o f"     #'+macos/reveal-in-finder
+        )
       )
 
 

@@ -1,10 +1,8 @@
 ;;; +advice.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
-(defun +jg-ui-kill-buffer-override  (&rest _)
-  "Switch to `doom-fallback-buffer' if on last real buffer.
-
-Advice for `kill-current-buffer'. If in a dedicated window, delete it. If there
+(defun +jg-ui-kill-buffer-override-a  (&rest _)
+  "Advice for `kill-current-buffer'. If in a dedicated window, delete it. If there
 are no real buffers left OR if all remaining buffers are visible in other
 windows, switch to `doom-fallback-buffer'. Otherwise, delegate to original
 `kill-current-buffer'.
@@ -59,7 +57,7 @@ windows, switch to `doom-fallback-buffer'. Otherwise, delegate to original
            t
            )
           (t
-           (message "Final condition, deleting as normal")
+           ;; (message "Final condition, deleting as normal")
            nil) ;; signal to kill the buffer as normal
           )
     )

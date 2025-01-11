@@ -58,3 +58,16 @@ If prefix ARG is non-nil, prompt for a known project to open in dired."
     (setf (file-notify--watch-callback
            (gethash descriptor file-notify-descriptors)) #'identity))
   )
+
+;;;###autoload
+(defun +jg-default-change-ext ()
+  "Rename the buffer file to have specified extension"
+  (interactive)
+  (let* ((current (buffer-file-name))
+        (curr-ext (f-ext current))
+        (newext  (read-string (format "Extension %s -> ." curr-ext)))
+        )
+    (message "Converting %s -> %s" current (f-swap-ext current newext))
+    (rename-file current (f-swap-ext current newext))
+    )
+  )

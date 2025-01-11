@@ -26,6 +26,10 @@
 
 (use-package! vundo
   :commands vundo
+  :config
+  ;; (adapted from evil-collection)
+  (add-hook 'vundo-mode-hook #'evil-normalize-keymaps)
+  (add-hook 'vundo-mode-hook #'evil-normal-state)
   )
 
 (use-package! undo-fu :defer t)

@@ -52,7 +52,6 @@
       :desc "Switch buffer"               "b"   #'switch-to-buffer
       :desc "Create Buffer"               "c"   #'ignore
       :desc "Kill buffer"                 "d"   #'kill-current-buffer
-      :desc "Change Extension"            "e"   #'+jg-binding-change-ext
       :desc "Clone Indirect"              "i"   #'clone-indirect-buffer-other-window
       :desc "Kill all buffers"            "K"   #'doom/kill-all-buffers
       :desc "Local Variables"             "l"   #'ignore

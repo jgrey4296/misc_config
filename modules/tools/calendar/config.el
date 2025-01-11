@@ -33,6 +33,7 @@
 
 (use-package! diary-lib
   :defer t
+  :config
   (speckler-setq! diary (diary-mode)
     comment-start ";; "
 

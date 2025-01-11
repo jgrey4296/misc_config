@@ -28,8 +28,8 @@
 
 (defer-load! jg-evil-ex-bindings "+evil-ex")
 
-(advice-add '+eval--ensure-in-repl-buffer    :filter-return #'+jg-repl-fix)
-(advice-add '+jg-send-region-to-repl         :filter-args   #'+jg-advice-send-repl-auto-line)
+(advice-add '+eval--ensure-in-repl-buffer    :filter-return #'+jg-support-repl-fix-a)
+(advice-add '+jg-send-region-to-repl         :filter-args   #'+jg-support-send-repl-auto-line-a)
 
 (when (modulep! +lsp) (local-load! "+lsp"))
 

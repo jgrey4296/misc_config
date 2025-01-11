@@ -1,7 +1,7 @@
 ;;; +advice.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
-(defun +jg-repl-fix (result)
+(defun +jg-support-repl-fix-a (result)
   ""
   (message "Repl Result: %s" result)
   (if (bufferp result)
@@ -21,7 +21,7 @@
   )
 
 ;;;###autoload
-(defun +jg-advice-send-repl-auto-line (args)
+(defun +jg-support-send-repl-auto-line-a (args)
   " Handle visual-mode variance for send-region-to-repl "
   (if (not (eq evil-state 'visual))
       (list (line-beginning-position) (line-end-position) (if (eq (length args) 3)  (last args) nil))

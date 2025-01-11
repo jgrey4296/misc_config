@@ -1,5 +1,6 @@
 ;;; ivys.el -*- lexical-binding: t; -*-
 
+;;;###autoload
 (defun +jg-latex-insert-package ()
   (interactive)
   (let ((insertfn #'(lambda (x) (insert "\\usepackage{" (car x) "}\n"))))

@@ -19,6 +19,7 @@
                (format "(Modified %s) (in-project %s)"
                        (---truthy? (buffer-modified-p (current-buffer)))
                        (and (projectile-project-root)
+                            (buffer-file-name)
                             (f-ancestor-of? (projectile-project-root)
                                             (buffer-file-name)))
                        )

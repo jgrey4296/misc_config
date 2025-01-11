@@ -3,7 +3,7 @@
 (map! :leader
       :prefix "b"
       :desc "Suspend Mode"   ";" (cmd! (major-mode-suspend))
-      :desc "Restore Mopde"  "'" (cmd! (major-mode-restore))
+      :desc "Restore Mode"  "'" (cmd! (major-mode-restore))
       )
 
 (map! :map jg-binding-jump-map

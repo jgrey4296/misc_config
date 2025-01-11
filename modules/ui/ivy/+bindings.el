@@ -12,7 +12,10 @@
 
 
 (map! :leader
-      :desc "Messages"                     "0"    #'+jg-ivy-popup-messages
+      :desc "Messages"          "0"    #'+jg-ivy-popup-messages
+      (:prefix "r p"
+       :desc "Counsel-Process"   "h" #'counsel-list-processes--with-state-normal
+       )
       )
 
 (map! :map swiper-map
@@ -72,7 +75,6 @@
       [remap yank-pop]                      #'counsel-yank-pop--with-state-normal
       [remap evil-show-registers]           #'counsel-evil-registers--with-state-normal
       [remap evil-show-marks]               #'counsel-evil-marks--with-state-normal
-      [remap list-processes]                #'counsel-list-processes--with-state-normal
       [remap isearch-forward]               #'swiper
       [remap isearch-backward]              #'swiper
       [remap swiper]                        #'counsel-grep-or-swiper

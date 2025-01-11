@@ -26,7 +26,6 @@
   (display-buffer (get-buffer "*PSTree*"))
   )
 
-
 ;;;###autoload
 (defun +jg-processes-kill-preview ()
   (interactive)
@@ -37,4 +36,20 @@
      (shell-command "killall -q -I evince")
      )
     )
+  )
+
+(defun jg--process-buffers-p (keyval)
+  (get-buffer-process (cdr keyval))
+  )
+
+;;;###autoload
+(defun +jg-processes-buffer-ivy ()
+  (interactive)
+  (ivy-read "Switch to buffer: " #'internal-complete-buffer
+            :keymap ivy-switch-buffer-map
+            :predicate           #'jg--process-buffers-p
+            :action              #'ivy--switch-buffer-action
+            :matcher             #'ivy--switch-buffer-matcher
+            :sort t
+            :caller 'ivy-switch-buffer)
   )

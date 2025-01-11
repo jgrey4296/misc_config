@@ -16,11 +16,18 @@
   )
 
 (speckler-add! lib-env ()
+  :override nil
   `(py-lsp
     :lang python
     :setup #'(lambda (state &rest rest) (require 'lsp-mode) (require 'lsp-ruff) (require 'lsp-pylsp))
-    :start #'(lambda (state &rest rest) (add-hook 'python-mode-hook #'lsp-deferred))
-    :stop  #'(lambda (state &rest rest) (remove-hook 'python-mode-hook #'lsp-deferred))
+    :start #'(lambda (state &rest rest)
+               (add-hook 'python-mode-hook #'lsp-deferred)
+               (add-hook 'python-ts-mode-hook #'lsp-deferred)
+               )
+    :stop  #'(lambda (state &rest rest)
+               (remove-hook 'python-mode-hook #'lsp-deferred)
+               (remove-hook 'python-ts-mode-hook #'lsp-deferred)
+               )
     )
   )
 

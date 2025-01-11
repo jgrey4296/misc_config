@@ -33,6 +33,15 @@
              #'maybe-py-test-minor-mode
              #'+jg-python-auto-hide
              )
+
+  (setq-hook! 'python-ts-mode-hook ;; flycheck specific
+    lsp-diagnostic-filter       #'+jg-python-lsp-flycheck-filter
+    flycheck-pylintrc                         '("pylint.toml" "pyproject.toml")
+    flycheck-python-ruff-config               '("ruff.toml" ".ruff.toml" "pyproject.toml")
+    flycheck--automatically-enabled-checkers  '(python-ruff python-coverage)
+    flycheck--automatically-disabled-checkers '(python-pylint python-flake8 python-pycompile python-compile python-pyright python-mypy)
+    flycheck-python-mypy-config               '(".mypy.ini" "mypy.ini" "pyproject.toml")
+    )
   )
 
 (use-package! python-mode

@@ -22,6 +22,12 @@
   :hook prog-mode-hook
   :fn #'flycheck-mode
   )
+(transient-toggle-hook! smartparens-mode ()
+  "SmartParens"
+  :key "s"
+  :hook prog-mode-hook
+  :fn #'smartparens-mode
+  )
 
 (transient-call! evil-embrace ()
   "Evil-Embrace"
@@ -59,10 +65,6 @@
   "Show Changes"
   :key "x"
   )
-(transient-toggle-mode! smartparens-global-mode ()
-  "SmartParens"
-  :key "s"
-  )
 (transient-toggle-mode! abbrev-mode ()
   "Abbrev"
   :key "a"
@@ -80,10 +82,10 @@
      ]
     ["Subsections" []]
     [["Global Toggles"
+      (transient-macro-toggle-hook-smartparens-mode)
       (transient-macro-toggle-hook-flycheck)
       ;; (transient-macro-toggle-global-prettify-symbols-mode)
       (transient-macro-toggle-global-highlight-changes-mode)
-      (transient-macro-toggle-smartparens-global-mode)
       ]
      [""
       (transient-macro-toggle-global-hl-line-mode)

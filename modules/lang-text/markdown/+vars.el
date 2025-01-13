@@ -44,6 +44,15 @@ capture, the end position, and the output buffer.")
       )
 
 (after! smartparens-markdown
+  ;; Don't do square-bracket space-expansion where it doesn't make sense to
+  (sp-local-pair '(markdown-mode gfm-mode)
+                 "[" nil :post-handlers '(:rem ("| " "SPC")))
+
+  (sp-local-pair (append sp--html-modes '(markdown-mode gfm-mode))
+                 "<!--" "-->"
+                 :unless '(sp-point-before-word-p sp-point-before-same-p)
+                 :actions '(insert) :post-handlers '(("| " "SPC")))
+
   (sp-with-modes '(markdown-mode gfm-mode)
     (sp-local-pair "```" "```" :post-handlers '(:add ("||\n[i]" "RET")))
 

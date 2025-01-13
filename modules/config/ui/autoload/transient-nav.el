@@ -21,7 +21,7 @@
   :key "v"
   )
 (transient-toggle-hook! cursor-sensor ()
-  "For using code-shy's cursor opening/closing"
+  "code-shy sensor"
   :key "c"
   :hook 'code-shy-minor-mode-hook
   :fn #'cursor-sensor-mode

@@ -11,8 +11,6 @@
 (package! hl-todo)
 (package! rainbow-delimiters)
 (package! rainbow-mode)
-(package! smartparens)
-;; (package! transient :pin "55d5d41" :recipe (:host github :repo "magit/transient" :branch "main"))
 (package! visual-fill-column)
 (package! whitespace)
 (package! paren)

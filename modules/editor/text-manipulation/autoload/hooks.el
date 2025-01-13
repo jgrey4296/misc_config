@@ -10,38 +10,6 @@
   )
 
 ;;;###autoload
-(defun doom-init-smartparens-in-eval-expression-h ()
-      "Enable `smartparens-mode' in the minibuffer for `eval-expression'.
-This includes everything that calls `read--expression', e.g.
-`edebug-eval-expression' Only enable it if
-`smartparens-global-mode' is on."
-      (when smartparens-global-mode (smartparens-mode +1))
-      )
-
-;;;###autoload
-(defun doom-init-smartparens-in-minibuffer-maybe-h ()
-      "Enable `smartparens' for non-`eval-expression' commands.
-Only enable `smartparens-mode' if `smartparens-global-mode' is
-on."
-      (when (and smartparens-global-mode (memq this-command '(evil-ex)))
-        (smartparens-mode +1))
-      )
-
-;;;###autoload
-(defun doom-enable-smartparens-mode-maybe-h ()
-      (when doom-buffer-smartparens-mode
-        (turn-on-smartparens-mode)
-        (kill-local-variable 'doom-buffer-smartparens-mode))
-      )
-
-;;;###autoload
-(defun doom-disable-smartparens-mode-maybe-h ()
-      (when smartparens-mode
-        (setq-local doom-buffer-smartparens-mode t)
-        (turn-off-smartparens-mode))
-      )
-
-;;;###autoload
 (defun +hl-todo--use-face-detection-h ()
       "Use a different, more primitive method of locating todo keywords."
       (set (make-local-variable 'hl-todo-keywords)

@@ -3,6 +3,11 @@
 (after! rbenv
   (setq rspec-use-rvm nil)
   (add-to-list 'exec-path (expand-file-name "shims" rbenv-installation-dir)))
+(after! smartparens
+  (sp-local-pair 'ruby-mode "{" "}"
+                 :pre-handlers '(:rem sp-ruby-pre-handler)
+                 :post-handlers '(:rem sp-ruby-post-handler))
+  )
 
 (speckler-add! electric ()
   '(ruby-mode :words '("else" "end" "elsif"))

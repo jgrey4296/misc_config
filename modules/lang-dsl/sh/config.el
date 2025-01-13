@@ -5,7 +5,6 @@
 (use-package! sh-script ; built-in
   :defer t
   :config
-  (add-hook 'sh-mode-local-vars-hook #'tree-sitter!)
 
   (setq sh-indent-after-continuation 'always)
 

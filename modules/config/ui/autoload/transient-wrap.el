@@ -22,6 +22,7 @@
   :mode-var auto-fill-function
   )
 
+
 (transient-call! truncate-lines ()
   "Truncate Lines"
   :key "t"

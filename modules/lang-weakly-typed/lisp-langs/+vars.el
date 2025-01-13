@@ -11,6 +11,14 @@
                           )
   )
 
+(after! smartparens
+  ;; In lisps ( should open a new form if before another parenthesis
+  (sp-local-pair sp-lisp-modes "(" ")" :unless '(:rem sp-point-before-same-p))
+  ;; Don't do square-bracket space-expansion where it doesn't make sense to
+  (sp-local-pair '(emacs-lisp-mode)
+                 "[" nil :post-handlers '(:rem ("| " "SPC")))
+  )
+
 ;;-- specs
 (speckler-setq! flycheck-lisp ()
   flycheck-emacs-lisp-load-path 'inherit

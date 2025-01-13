@@ -5,15 +5,18 @@
               )
 
 ;;-- smartparens
-(setq sp-highlight-pair-overlay nil
-      sp-highlight-wrap-overlay t
-      sp-highlight-wrap-tag-overlay t
-      sp-show-pair-from-inside t
-      sp-cancel-autoskip-on-backward-movement nil
-      sp-pair-overlay-keymap (make-sparse-keymap)
-      sp-max-prefix-length 25
-      sp-max-pair-length 4
-      )
+(speckler-setq! smartparens ()
+  sp-highlight-pair-overlay nil
+  sp-highlight-wrap-overlay t
+  sp-highlight-wrap-tag-overlay t
+  sp-show-pair-from-inside t
+  sp-navigate-skip-match nil
+  sp-navigate-consider-sgml-tags nil
+  sp-cancel-autoskip-on-backward-movement nil
+  sp-pair-overlay-keymap (make-sparse-keymap)
+  sp-max-prefix-length 25
+  sp-max-pair-length 4
+  )
 
 (setq-default sp-autoinsert-pair t
               sp-autoinsert-quote-if-followed-by-closing-pair nil
@@ -35,6 +38,7 @@
 ;; the written file). While sometimes convenient, this behavior is not
 ;; intuitive. To the average user it looks like whitespace cleanup is failing,
 ;; which causes folks to redundantly install their own.
+
 (setq ws-butler-keep-whitespace-before-point nil)
 ;;-- end ws butler
 

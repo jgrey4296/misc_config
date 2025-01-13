@@ -30,10 +30,7 @@
   (defvar dtrt-indent-run-after-smie)
   )
 
-(use-package! ws-butler
-  ;; a less intrusive `delete-trailing-whitespaces' on save
-  :hook (doom-first-buffer . ws-butler-global-mode)
-  )
+(use-package! ws-butler)
 
 (use-package! adaptive-wrap
   :disabled

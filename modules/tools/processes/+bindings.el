@@ -2,15 +2,16 @@
 
 
 (map! :leader
-      :prefix ("rp" . "Processes")
+      :prefix ("p" . "Processes")
       :desc "Select Process Buffer" ";"  #'+jg-processes-buffer-ivy
-      :desc "List-Processes"        "l"  #'list-processes
       :desc "Kill Preview"          "P"  #'+jg-processes-kill-preview
-      :desc "Process Tree"          "t"  #'+jg-processes-tree
-      :desc "System Process Tree"   "T"  #'+jg-processes-tree-all
-      :desc "List Threads"          "i"  #'list-threads
-      :desc "Emacs PID"             "e"  (cmd! (message "Emacs PID: %s" (emacs-pid)))
-      #'list-timers
+      :desc "Emacs PID"             "e"  #'+jg-print-pid
 
-      (:when (featurep :system 'macos) :desc "Launchctl List" "c" #'+jg-processes-launchctl)
+      (:prefix ("l" . "List")
+       :desc "List-Processes"        "p"  #'list-processes
+       :desc "List Threads"          "h"  #'list-threads
+       :desc "List Timers"           "t"  #'list-timers
+       :desc "Emacs Process"         "e"  #'+jg-processes-tree
+       :desc "System Tree"           "s"  #'+jg-processes-tree-all
+       )
       )

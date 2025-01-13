@@ -69,7 +69,7 @@
   (sp-local-pair 'swift-mode "\\(" ")" :when '(sp-in-string-p))
 
   ;; Don't do square-bracket space-expansion where it doesn't make sense to
-  (sp-local-pair '(emacs-lisp-mode org-mode markdown-mode gfm-mode)
+  (sp-local-pair '(emacs-lisp-mode markdown-mode gfm-mode)
                  "[" nil :post-handlers '(:rem ("| " "SPC")))
 
   ;; Reasonable default pairs for HTML-style comments

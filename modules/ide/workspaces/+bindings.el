@@ -7,28 +7,16 @@
   [remap evil-window-delete] #'+workspace/close-window-or-workspace)
 
 (map! :leader
-      :desc "Workspace Control"        "w RET"               #'+jg-workspace-run-transient
-      :desc "Carousel Control"         "r RET"               #'jg-workspace-run-carousel-transient
-      :desc "Carousel Control"         "r r"                 #'jg-workspace-run-carousel-transient
-      :desc "Carousel Control"         "R"                   #'jg-workspace-run-carousel-transient
-      :desc "Workspace Counsel"        "W"                   #'+jg-workspaces-ivy
-      :desc "Goto Root"                    "p `"             #'this-does-nothing
+      :desc "Carousel Control"         "R"      #'jg-workspace-run-carousel-transient
+      :desc "Workspace Counsel"        "W"      #'+jg-workspaces-ivy
       (:prefix ("w" . "Windows")
-       :desc "Delete workspace"             "DEL"   #'+workspace/delete
-       :desc "Workspace Control"            "w"     #'+jg-workspace-run-transient
+       :desc "Workspace Control"        "RET"   #'+jg-workspace-run-transient
+       :desc "Delete workspace"         "DEL"   #'+workspace/delete
+       :desc "Workspace Control"        "w"     #'+jg-workspace-run-transient
+       :desc "root shell"               "'"     #'projectile-run-shell
        )
       )
 
-(map! :leader
-      :prefix ("p" . "project")
-      :desc "run cmd in project root"      "!"    #'projectile-run-shell-command-in-root
-      :desc "root shell"                   "'"    #'projectile-run-shell
-      :desc "search project for symbol"    "."    #'this-does-nothing
-      :desc "find file in project"         "f"    #'this-does-nothing
-      :desc "find other file"              "o"    #'this-does-nothing
-      :desc "compile in project"           "c"    #'projectile-compile-project
-      :desc "Search project"               "p"    #'this-does-nothing
-      )
 
 (map! :map jg-binding-jump-map
       :desc "Jump to related"              "r"   #'+jg-projects-find-related

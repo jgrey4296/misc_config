@@ -240,8 +240,3 @@
     (run-hooks 'find-file-hook))
 
   )
-
-;;;###autoload
-(defun +org-init-smartparens-h ()
-  ;; Disable the slow defaults
-  (provide 'smartparens-org))

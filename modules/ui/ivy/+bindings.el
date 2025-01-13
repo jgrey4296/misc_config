@@ -13,7 +13,7 @@
 
 (map! :leader
       :desc "Messages"          "0"    #'+jg-ivy-popup-messages
-      (:prefix "r p"
+      (:prefix "p"
        :desc "Counsel-Process"   "h" #'counsel-list-processes--with-state-normal
        )
       )

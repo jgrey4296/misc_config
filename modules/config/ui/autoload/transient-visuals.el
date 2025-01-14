@@ -9,26 +9,6 @@
 (require 'macro-tools--transient)
 
 ;; Visual
-(transient-toggle-mode! global-prettify-symbols-mode ()
-  "Pretty Symbols"
-  :key "p"
-  )
-(transient-toggle-mode! hl-line-mode ()
-  "Highlight-line"
-  :key "h"
-  )
-(transient-toggle-mode! evil-goggles-mode ()
-  "Evil-goggles"
-  :key "g"
-  )
-(transient-toggle-mode! highlight-parentheses-mode ()
-  "Higlight-wrappers"
-  :key "w"
-  )
-(transient-toggle-mode! rainbow-mode ()
-  "Rainbow Colours"
-  :key "r"
-  )
 (transient-toggle-mode! highlight-changes-visible-mode ()
   "Highlight-changes"
   :key "x"
@@ -37,9 +17,55 @@
   "Reveal Invisible"
   :key "I"
   )
-(transient-toggle-mode! auto-highlight-symbol-mode ()
+;; Hooks
+(transient-toggle-hook! pretty-symbols ()
+  "Pretty Symbols"
+  :key "p"
+  :global t
+  :hook 'prog-mode
+  :fn #'prettify-symbols-mode
+  )
+(transient-toggle-hook! rainbow ()
+  "Rainbow Colours"
+  :key "r"
+  :global t
+  :hook '(prog-mode text-mode)
+  :fn #'rainbow-mode
+  )
+(transient-toggle-hook! hl-line ()
+  "Hl-line hook"
+  :key "h"
+  :global t
+  :hook '(prog-mode text-mode)
+  :fn #'hl-line-mode
+  )
+(transient-toggle-hook! quickscope ()
+  "Quickscope"
+  :key "s"
+  :global t
+  :hook '(prog-mode text-mode)
+  :fn #'evil-quickscope-mode
+  )
+(transient-toggle-hook! highlight-symbol ()
   "Auto Highlight Symbol"
   :key "H"
+  :global t
+  :hook 'prog-mode
+  :fn #'auto-highlight-symbol-mode
+  )
+(transient-toggle-hook! evil-goggles ()
+  "Evil-goggles"
+  :key "g"
+  :global t
+  :hook '(prog-mode text-mode)
+  :fn #'evil-goggles-mode
+  )
+(transient-toggle-hook! highlight-parentheses ()
+  "Higlight Parens"
+  :key "w"
+  :global t
+  :hook 'prog-mode
+  :fn #'highlight-parentheses-mode
   )
 
 ;;
@@ -56,14 +82,6 @@
   :desc (transient-mode-fmt "LinkDisplay" org-link-descriptive "l")
   (org-toggle-link-display)
   )
-(transient-call!  quickscope ()
-  "QuickScope"
-  :key "s"
-  :desc (transient-mode-fmt "QuickScope" evil-quickscope-always-mode "l")
-  (evil-quickscope-always-mode 'toggle)
-  (evil-quickscope-mode (if evil-quickscope-always-mode -1 1))
-  )
-
 (transient-toggle-var! invisible ()
   "Invisible Spec"
   :var line-move-ignore-invisible
@@ -77,21 +95,21 @@
     :key "v"
     :desc "|| Visuals    ||"
     [
-     (transient-macro-toggle-evil-goggles-mode)
-     (transient-macro-toggle-hl-line-mode)
+     (transient-macro-toggle-hook-pretty-symbols)
+     (transient-macro-toggle-hook-rainbow)
+     (transient-macro-toggle-hook-hl-line)
+     (transient-macro-toggle-hook-quickscope)
+     ]
+    [
+     (transient-macro-toggle-hook-highlight-symbol)
+     (transient-macro-toggle-hook-evil-goggles)
+     (transient-macro-toggle-hook-highlight-parentheses)
+     ]
+    [
      (transient-macro-toggle-invisible)
-     (transient-macro-toggle-highlight-changes-visible-mode)
      (transient-macro-call-link-display)
-     ]
-    [
-     (transient-macro-toggle-rainbow-mode)
-     (transient-macro-toggle-global-prettify-symbols-mode)
-     (transient-macro-call-quickscope)
-     (transient-macro-toggle-highlight-parentheses-mode)
+     (transient-macro-toggle-highlight-changes-visible-mode)
      (transient-macro-call-elide-head)
-     ]
-    [
-     (transient-macro-toggle-auto-highlight-symbol-mode)
      ]
   )
 

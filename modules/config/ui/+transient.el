@@ -9,13 +9,13 @@
 (use-package! transient)
 
 (after! transient
+  (add-hook 'jg-ui-transient-toggles-hook #'+jg-ui-build-hooks-transient 90)
   (add-hook 'jg-ui-transient-toggles-hook #'+jg-ui-build-debugs-transient)
   (add-hook 'jg-ui-transient-toggles-hook #'+jg-ui-build-guides-transient)
   (add-hook 'jg-ui-transient-toggles-hook #'+jg-ui-build-nav-transient)
   (add-hook 'jg-ui-transient-toggles-hook #'+jg-ui-build-visuals-transient)
   (add-hook 'jg-ui-transient-toggles-hook #'+jg-ui-build-wrap-transient)
 
-  ;; (+jg-ui-build-main-toggle-transient)
   (jg-ui-transient-toggles-builder)
   (add-hook 'speckler-hook #'jg-ui-transient-toggles-builder)
   (provide 'transient-toggles)

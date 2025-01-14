@@ -8,23 +8,32 @@
 (require 'macro-tools--transient)
 
 ;; Nav
-(transient-toggle-mode! centered-cursor-mode ()
-  "Center Cursor"
-  :key "c"
-  )
-(transient-toggle-mode! minimap-mode ()
-  "Minimap"
-  :key "m"
-  )
 (transient-toggle-mode! evil-visual-mark-mode ()
   "visual mark"
   :key "v"
   )
+
+;; Hooks
+(transient-toggle-hook! centered-cursor ()
+  "Center Cursor"
+  :key "c"
+  :global t
+  :hook '(prog-mode text-mode)
+  :fn #'centered-cursor-mode
+  )
 (transient-toggle-hook! cursor-sensor ()
   "code-shy sensor"
   :key "c"
+  :global t
   :hook 'code-shy-minor-mode-hook
   :fn #'cursor-sensor-mode
+  )
+(transient-toggle-hook! minimap ()
+  "Minimap"
+  :key "m"
+  :global t
+  :hook 'prog-mode
+  :fn #'minimap-mode
   )
 
 (transient-call! sidebar ()
@@ -34,11 +43,10 @@
   (+jg-ui-tree/open)
   )
 (transient-call! frame-fullscreen ()
-  "Fullscree"
+  "Fullscreen"
   :key "f"
   (toggle-frame-fullscreen)
   )
-
 
 ;;;###autoload
 (defun +jg-ui-build-nav-transient ()
@@ -47,16 +55,16 @@
     :key "n"
     :desc "|| Navigation ||"
     [
-     (transient-macro-toggle-centered-cursor-mode)
-     (transient-macro-toggle-minimap-mode)
+     (transient-macro-toggle-hook-centered-cursor)
+     (transient-macro-toggle-hook-minimap)
+     (transient-macro-toggle-hook-cursor-sensor)
+     ]
+    [
      (transient-macro-toggle-evil-visual-mark-mode)
      ]
     [
      (transient-macro-call-sidebar)
      (transient-macro-call-frame-fullscreen)
-     ]
-    [
-     (transient-macro-toggle-hook-cursor-sensor)
      ]
     )
 

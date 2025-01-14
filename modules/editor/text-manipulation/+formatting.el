@@ -30,7 +30,10 @@
   (defvar dtrt-indent-run-after-smie)
   )
 
-(use-package! ws-butler)
+(use-package! ws-butler
+  :config
+  (ws-butler-global-mode -1)
+  )
 
 (use-package! adaptive-wrap
   :disabled

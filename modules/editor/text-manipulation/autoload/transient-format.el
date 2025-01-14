@@ -8,19 +8,27 @@
 (require 'macro-tools--transient)
 
 
+(transient-toggle-hook! ws-butler ()
+  "WS-Butler"
+  :key "b"
+  :global t
+  :fn #'ws-butler-mode
+  :hook prog-mode-hook
+  )
+
 ;;;###autoload
 (defun +jg-ui-build-transient-format ()
   (interactive)
   (transient-subgroup! jg-toggle-format-transient ()
     "For toggling text format controls"
-    :key "f"
+    :key "F"
     :desc "|| Format    ||"
     [
      (transient-macro-toggle-hook-ws-butler)
      ]
     )
 
-  (transient-guarded-insert! 'jg-toggle-main jg-toggle-format-transient (2 -1))
+  (transient-guarded-insert! 'jg-toggle-main jg-toggle-format-transient (1 -1))
 
   )
 

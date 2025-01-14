@@ -6,9 +6,12 @@
 
 ;; Top Level Toggle
 
-(transient-toggle-mode! global-company-mode ()
+(transient-toggle-hook! company ()
   "AutoComplete"
   :key "C"
+  :global t
+  :hook '(prog-mode text-mode)
+  :fn #'company-mode
   )
 (transient-toggle-mode! read-only-mode ()
   "Read Only"
@@ -19,12 +22,14 @@
 (transient-toggle-hook! flycheck  ()
   "Flycheck"
   :key "f"
+  :global t
   :hook prog-mode-hook
   :fn #'flycheck-mode
   )
 (transient-toggle-hook! smartparens-mode ()
   "SmartParens"
   :key "s"
+  :global t
   :hook prog-mode-hook
   :fn #'smartparens-mode
   )
@@ -45,23 +50,18 @@
   :desc (propertize "Run Spec Handlers" 'face 'transient-heading)
   (speckler-go!)
   )
-(transient-toggle-mode! global-hl-line-mode ()
-  "Hl-line"
-  :key "h"
+(transient-toggle-hook! code-shy ()
+  "Shy Code"
+  :global t
+  :key "H"
+  :hook 'prog-mode
+  :fn #'code-shy-minor-mode
   )
 (transient-toggle-mode! hide-mode-line-mode ()
   "Hide Modeline"
   :key "m"
   )
-(transient-toggle-mode! global-code-shy-minor-mode ()
-  "Shy Code"
-  :key "H"
-  )
-(transient-toggle-mode! global-centered-cursor-mode ()
-  "Center Cursor"
-  :key "c"
-  )
-(transient-toggle-mode! global-highlight-changes-mode ()
+(transient-toggle-mode! highlight-changes-mode ()
   "Show Changes"
   :key "x"
   )
@@ -81,19 +81,18 @@
       ]
      ]
     ["Subsections" []]
-    [["Global Toggles"
+    [[""
       (transient-macro-toggle-hook-smartparens-mode)
       (transient-macro-toggle-hook-flycheck)
-      ;; (transient-macro-toggle-global-prettify-symbols-mode)
-      (transient-macro-toggle-global-highlight-changes-mode)
+      (transient-macro-toggle-hook-company)
       ]
      [""
-      (transient-macro-toggle-global-hl-line-mode)
-      (transient-macro-toggle-global-code-shy-minor-mode)
-      (transient-macro-toggle-global-centered-cursor-mode)
-      (transient-macro-toggle-global-company-mode)
+      (transient-macro-toggle-hook-hl-line)
+      (transient-macro-toggle-hook-code-shy)
+      (transient-macro-toggle-hook-centered-cursor)
       ]
      ["Local Toggles"
+      (transient-macro-toggle-highlight-changes-mode)
       (transient-macro-toggle-abbrev-mode)
       (transient-macro-toggle-hide-mode-line-mode)
       (transient-macro-toggle-read-only-mode)
@@ -123,7 +122,6 @@
   ;; Build the main
   (+jg-ui-build-main-toggle-transient)
   ;; Each hook builds a suffix and appends it
-  (run-hooks 'jg-transient-toggles-hook)
   )
 
 ;;;###autoload (autoload 'jg-ui-transient-toggles-builder "config/ui/autoload/transient-toggle-main" nil t)

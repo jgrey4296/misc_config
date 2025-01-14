@@ -54,7 +54,8 @@
   (advice-add #'kill-current-buffer :around #'doom-set-jump-a)
 
   ;; Create a jump point before jumping with imenu.
-  (advice-add #'imenu :around #'doom-set-jump-a))
+  (advice-add #'imenu :around #'doom-set-jump-a)
+  )
 
 (use-package! imenu
   :defer t

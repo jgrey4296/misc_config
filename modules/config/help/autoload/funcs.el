@@ -99,3 +99,19 @@
     (emacs-lisp-mode)
     )
   )
+
+;;;###autoload
+(defun +jg-help-list-global-minor-modes ()
+  (interactive)
+  (with-temp-buffer-window "*Global Minor Modes*" #'display-buffer nil
+    (princ "* Global Minor Modes:\n")
+    (cl-loop for mode in global-minor-modes
+             do
+             (princ (format "- `%s'\n" mode)
+                    )
+             )
+    )
+  (with-current-buffer "*Global Minor Modes*"
+    (org-mode)
+    )
+  )

@@ -14,6 +14,7 @@
   ""
   :hook 'prog-mode
   :fn #'display-fill-column-indicator-mode
+  :global t
   :desc (format "Columns : %-3s" fill-column)
   :key "c"
   )
@@ -21,11 +22,22 @@
   "Indents"
   :hook 'prog-mode
   :fn #'highlight-indent-guides-mode
+  :global t
   :key "i"
   )
-(transient-toggle-mode! global-prettify-symbols-mode ()
-  "Pretty Symbols"
-  :key "p"
+(transient-toggle-hook! display-line-numbers ()
+  "Line Numbers"
+  :key "n"
+  :global t
+  :hook '(prog-mode text-mode)
+  :fn #'display-line-numbers-mode
+  )
+(transient-toggle-hook! glasses ()
+  "Glasses"
+  :key "g"
+  :global t
+  :hook '(prog-mode text-mode)
+  :fn #'glasses-mode
   )
 (transient-toggle-mode! ruler-mode ()
   "Ruler"
@@ -34,14 +46,6 @@
 (transient-toggle-mode! whitespace-mode  ()
   "Whitespace"
   :key "w"
-  )
-(transient-toggle-mode! display-line-numbers-mode ()
-  "Line Numbers"
-  :key "n"
-  )
-(transient-toggle-mode! glasses-mode ()
-  "Glasses"
-  :key "g"
   )
 
 (transient-call! spelling ()
@@ -61,19 +65,18 @@
     [
      (transient-macro-toggle-hook-fill-column-indicator)
      (transient-macro-toggle-hook-indent-guides)
-     (transient-macro-toggle-display-line-numbers-mode)
+     (transient-macro-toggle-hook-display-line-numbers)
+     (transient-macro-toggle-hook-glasses)
      ]
     [
      (transient-macro-toggle-ruler-mode)
      (transient-macro-toggle-whitespace-mode)
      (transient-macro-call-spelling)
      ]
-    [
-     (transient-macro-toggle-glasses-mode)
-     ]
     )
 
   (transient-guarded-insert! 'jg-toggle-main jg-toggle-guides-transient (1 -1))
+
   )
 
 ;;-- Footer

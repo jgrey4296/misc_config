@@ -8,6 +8,7 @@
 (require 'macro-tools--transient)
 
 
+;;;###autoload
 (defun +jg-ui-build-transient-format ()
   (interactive)
   (transient-subgroup! jg-toggle-format-transient ()

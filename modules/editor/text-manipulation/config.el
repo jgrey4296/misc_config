@@ -78,4 +78,4 @@
 
 (use-package! spechar-state :after evil)
 
-(add-hook 'jg-ui-transient-toggles-hook #'+jg-ui-build-tranient-format)
+(add-hook 'jg-ui-transient-toggles-hook #'+jg-ui-build-transient-format)

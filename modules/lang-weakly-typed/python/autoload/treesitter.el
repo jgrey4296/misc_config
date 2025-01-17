@@ -38,60 +38,60 @@
                                           (treesit-font-lock-rules
                                            :feature 'typealias
                                            :language 'python
-                                           :override t
-                                           '((type_alias_statement "type" @font-lock-semi-unimportant))
+                                           :override 'append
+                                           '((type_alias_statement "type" @jg-unimportant))
 
                                            :feature 'public
                                            :language 'python
-                                           :override t
+                                           :override 'append
                                            '((function_definition
-                                              (identifier) @ediff-fine-diff-Ancestor
-                                              (:match "^[^_]." @ediff-fine-diff-Ancestor)
-                                             ))
+                                              (identifier) @jg-public
+                                              (:match "^[^_]." @jg-public)
+                                              ))
 
                                            :feature 'internal
                                            :language 'python
                                            :override t
                                            '((function_definition
-                                              (identifier) @jg-replace-line
-                                              (:match "^_[^_]." @jg-replace-line))
-                                             ;; (function_definition
-                                             ;;  (identifier) @jg-emacs-line
-                                             ;;  (:match "^__.+?__\\'" @jg-emacs-line))
+                                              (identifier) @jg-internal
+                                              (:match "^_[^_]." @jg-internal))
+                                             (function_definition
+                                              (identifier) @jg-dunder
+                                              (:match "^__.+?__\\'" @jg-dunder))
                                              )
 
                                            :feature 'errors
                                            :language 'python
-                                           :override t
-                                           '(((identifier) @jg-motion-line
-                                              (:match "^.*?E\\(xception\\|rror\\)\\'" @jg-motion-line)
+                                           :override 'append
+                                           '(((identifier) @jg-error
+                                              (:match "^.*?E\\(xception\\|rror\\)\\'" @jg-error)
                                               ))
 
                                            :feature 'conventions
                                            :language 'python
                                            :override t
-                                           '(((identifier) @jg-lisp-line
-                                              (:match ".+?_[pdisccefmhl]\\'" @jg-lisp-line)
+                                           '(((identifier) @jg-convention
+                                              (:match ".+?_[pdisccefmhl]\\'" @jg-convention)
                                               ))
 
-                                          :feature 'return
-                                          :language 'python
-                                          :override t
-                                          '((block)
-                                            ((return_statement "return" @font-lock-semi-unimportant
-                                                               (:match "^\s+return" @font-lock-semi-unimportant)
-                                                               ))
-                                            )
+                                           :feature 'return
+                                           :language 'python
+                                           :override 'append
+                                           '((block)
+                                             ((return_statement "return" @jg-return
+                                                                (:match "^\s+return" @jg-return)
+                                                                ))
+                                             )
 
-                                          :feature 'wrappers
-                                          :language 'python
-                                          :override t
-                                          '((dictionary ["{" "}"] @glyphless-char)
-                                            (list ["[" "]"] @homoglyph)
-                                            (argument_list ["(" ")"] @org-link)
-                                            )
+                                           :feature 'wrappers
+                                           :language 'python
+                                           :override 'append
+                                           '((dictionary ["{" "}"] @jg-dict)
+                                             (list ["[" "]"] @jg-list)
+                                             (argument_list ["(" ")"] @jg-args)
+                                             )
+                                           )
                                           )
-              )
               )
   )
 

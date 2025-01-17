@@ -98,5 +98,3 @@
 (use-package! pdb-capf)
 
 (use-package! edebug-x)
-
-(use-package! font-lock-studio)

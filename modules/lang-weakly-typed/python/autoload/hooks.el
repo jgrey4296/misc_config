@@ -12,9 +12,12 @@
 
 ;;;###autoload
 (defun jg-python-font-lock-mod-h ()
-  (pushnew! python-font-lock-keywords
-            '("^\s+return " (0 '(:background "mediumpurple4") t))
-            '("^\s+def "    (0 '(:background "mediumpurple4") t))
-            '("breakpoint()" (0 '(:background "Mediumvioletred") t))
-            )
+  (font-lock-add-keywords nil
+                          '(
+                            ("^\s+return "  (0 '(:background "mediumpurple4") t))
+                            ("^\s+def "     (0 '(:background "mediumpurple4") t))
+                            ("breakpoint()" (0 '(:background "Mediumvioletred") t))
+                            ("^type"        (0 '(:background "flycheck-error-list-id") t))
+                            )
+                          )
   )

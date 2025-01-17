@@ -14,6 +14,4 @@
 
 (package! edebug-x)
 
-(package! font-lock-studio)
-
 (package! pdb-capf)

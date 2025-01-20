@@ -113,13 +113,15 @@
 
 ;;-- flycheck
 (map! :map flycheck-error-list-mode-map
-      "?" #'+jg-checkers-column-format
+      :n "?"      #'+jg-flycheck-column-format
+      :n "f"      #'jg-flycheck-error-list-set-filter
       :n "j"      #'flycheck-error-list-next-error
       :n "k"      #'flycheck-error-list-previous-error
       :n "RET"    #'flycheck-error-list-goto-error
-      :n "," #'tabulated-list-sort
-      :n "{" #'tabulated-list-narrow-current-column
-      :n "}" #'tabulated-list-widen-current-column
+      :n ","      #'tabulated-list-sort
+      :n "{"      #'tabulated-list-narrow-current-column
+      :n "}"      #'tabulated-list-widen-current-column
+      :n "x"      #'flycheck-explain-error-at-point
       )
 
 (map! :map tabulated-list-mode-map

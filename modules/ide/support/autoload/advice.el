@@ -65,8 +65,8 @@ server getting expensively restarted when reverting buffers."
          (message "Deferring shutdown")
          (setq +lsp--deferred-shutdown-timer
                (run-with-timer (or +lsp-defer-shutdown 3) nil
-                            #'+lsp-defer-shutdown-action
-                            lsp--cur-workspace fn)))
+                               #'+lsp-defer-shutdown-action
+                               lsp--cur-workspace fn)))
 
         (t (prog1 (funcall fn restart)
              (+lsp-optimization-mode -1)))
@@ -89,30 +89,30 @@ server getting expensively restarted when reverting buffers."
 
 ;;;###autoload
 (defun +lsp--use-hook-instead-a (fn &rest args)
-    "Change `lsp--auto-configure' to not force `lsp-ui-mode' on us. Using a hook
+  "Change `lsp--auto-configure' to not force `lsp-ui-mode' on us. Using a hook
 instead is more sensible."
-    (letf! ((#'lsp-ui-mode #'ignore))
-      (apply fn args)))
+  (letf! ((#'lsp-ui-mode #'ignore))
+    (apply fn args)))
 
 ;;;###autoload
 (defun +lsp--defer-server-shutdown-a (fn &optional server)
-    "Defer server shutdown for a few seconds.
+  "Defer server shutdown for a few seconds.
 This gives the user a chance to open other project files before the server is
 auto-killed (which is a potentially expensive process). It also prevents the
 server getting expensively restarted when reverting buffers."
-    (letf! (defun eglot-shutdown (server)
-             (if (or (null +lsp-defer-shutdown)
-                     (eq +lsp-defer-shutdown 0))
-                 (prog1 (funcall eglot-shutdown server)
-                   (+lsp-optimization-mode -1))
-               (run-at-time
-                (if (numberp +lsp-defer-shutdown) +lsp-defer-shutdown 3)
-                nil (lambda (server)
-                      (unless (eglot--managed-buffers server)
-                        (prog1 (funcall eglot-shutdown server)
-                          (+lsp-optimization-mode -1))))
-                server)))
-      (funcall fn server)))
+  (letf! (defun eglot-shutdown (server)
+           (if (or (null +lsp-defer-shutdown)
+                   (eq +lsp-defer-shutdown 0))
+               (prog1 (funcall eglot-shutdown server)
+                 (+lsp-optimization-mode -1))
+             (run-at-time
+              (if (numberp +lsp-defer-shutdown) +lsp-defer-shutdown 3)
+              nil (lambda (server)
+                    (unless (eglot--managed-buffers server)
+                      (prog1 (funcall eglot-shutdown server)
+                        (+lsp-optimization-mode -1))))
+              server)))
+    (funcall fn server)))
 
 ;;;###autoload
 (defun +lsp--log-diagnostic-build (&rest args)
@@ -121,9 +121,9 @@ server getting expensively restarted when reverting buffers."
 
 ;;;###autoload
 (defun +syntax--disable-flycheck-popup-tip-maybe-a (&rest _)
-      (if evil-local-mode
-          (eq evil-state 'normal)
-        (not (bound-and-true-p company-backend))))
+  (if evil-local-mode
+      (eq evil-state 'normal)
+    (not (bound-and-true-p company-backend))))
 
 ;;;###autoload
 (defun +jg-support-treesit-update-fontlock-a (&rest args)

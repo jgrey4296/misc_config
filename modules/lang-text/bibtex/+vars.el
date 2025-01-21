@@ -73,10 +73,10 @@
     )
   )
 (speckler-add! whitespace-cleanup ()
-  '(bibtex-mode
-    librarian--biblio-clean-ensure-newline-before-def
-    delete-trailing-whitespace
-    +jg-text-cleanup-whitespace
+  `(bibtex-mode
+    ,#'librarian--biblio-clean-ensure-newline-before-def
+    ,#'delete-trailing-whitespace
+    ,#'+jg-text-cleanup-whitespace
     )
   )
 (speckler-add! auto-modes ()

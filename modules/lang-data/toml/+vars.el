@@ -13,9 +13,14 @@
   )
 (speckler-add! whitespace-cleanup ()
   `(conf-toml-mode
-    #'+jg-toml-cleanup-ensure-newline-before-table
-    #'delete-trailing-whitespace
-    #'+jg-text-cleanup-whitespace
+    ,#'+jg-toml-cleanup-ensure-newline-before-table
+    ,#'delete-trailing-whitespace
+    ,#'+jg-text-cleanup-whitespace
+    )
+  `(toml-mode
+    ,#'+jg-toml-cleanup-ensure-newline-before-table
+    ,#'delete-trailing-whitespace
+    ,#'+jg-text-cleanup-whitespace
     )
   )
 (speckler-add! auto-modes ()

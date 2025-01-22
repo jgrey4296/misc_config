@@ -1,6 +1,6 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
-(defvar jg-nav-loc-bookmarks  (expand-file-name "~/github/bibliography/bookmarks/total.bookmarks"))
+(defvar jg-nav-loc-bookmarks  (expand-file-name "~/.config/bibliography/bookmarks/total.bookmarks"))
 
 
 (setq window-divider-default-places t

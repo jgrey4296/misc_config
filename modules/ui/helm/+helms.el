@@ -173,7 +173,7 @@ versus not"
 (defun +jg-completion-xkcd ()
   " TODO transformers "
   (interactive)
-  (let* ((target "/Volumes/documents/github/bibliography/plus/urls/xkcds")
+  (let* ((target (expand-file "~/.config/bibliography/plus/urls/xkcds")))
          (source (helm-build-in-file-source "xkcd helm" target
                    :action (helm-make-actions "Open" #'(lambda (x) (mapcar #'browse-url (helm-marked-candidates))))
                    )))

@@ -35,16 +35,16 @@
 
 ;;-- librarian
 (speckler-setq! bibtex ()
-  librarian--biblio-edit-todo-loc        (expand-file-name "~/github/bibliography/in_progress/todo.bib")
+  librarian--biblio-edit-todo-loc        (expand-file-name "~/.config/bibliography/in_progress/todo.bib")
   librarian--biblio-edit-todo-files-loc  (expand-file-name "/media/john/data/todo/pdfs/")
-  librarian--biblio-edit-completions-loc (expand-file-name "~/github/bibliography/completions/")
+  librarian--biblio-edit-completions-loc (expand-file-name "~/.config/bibliography/completions/")
   librarian--biblio-edit-export-bib-loc  (expand-file-name "tex-config/tex/export_template.tex" templates-loc)
   librarian--biblio-edit-temp-tex-loc    (expand-file-name ".tex/" user-cache-dir)
   librarian-biblio-pdf-loc (pcase system-type
                              ('darwin (expand-file-name "~/pdf_library"))
                              ('gnu/linux "/media/john/data/library/pdfs"))
-  librarian-biblio-library-loc   (expand-file-name "~/github/bibliography/main/")
-  librarian-biblio-unsourced-loc (expand-file-name "~/github/bibliography/in_progress/to_source_misc.bib")
+  librarian-biblio-library-loc   (expand-file-name "~/.config/bibliography/main/")
+  librarian-biblio-unsourced-loc (expand-file-name "~/.config/bibliography/in_progress/to_source_misc.bib")
   org-ref-clean-bibtex-entry-hook librarian--biblio-clean-hooks
 
   librarian--biblio-edit-search-fields '("tags" "year" "publisher")

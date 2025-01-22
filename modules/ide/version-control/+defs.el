@@ -32,4 +32,4 @@ Only has an effect in GUI Emacs.")
 
 (defvar +jg-vcs-gradle-command-args nil)
 
-(defvar jg-vcs-tag-file (expand-file-name "~/github/bibliography/completions/vcs_tags"))
+(defvar jg-vcs-tag-file (expand-file-name "~/.config/bibliography/completions/vcs_tags"))

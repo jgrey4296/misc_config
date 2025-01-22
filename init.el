@@ -2,7 +2,7 @@
 ;; last working doom commit: ba1dca322f9a07bc2b7bec6a98f2c3c55c0bbd77
 
 (setq force-load-messages nil)
-(defvar templates-loc (expand-file-name "~/github/_templates"))
+(defvar templates-loc (expand-file-name "~/.config/.templates"))
 
 (load! "defer-macro")
 (doom!

@@ -4,7 +4,7 @@
 
 ;;-- personal-vars
 
-(defvar jg-completion-rps-have-you-played- (expand-file-name "~/github/bibliography/plus/urls/have-you-playeds"))
+(defvar jg-completion-rps-have-you-played- (expand-file-name "~/.config/bibliography/plus/urls/have-you-playeds"))
 
 (defvar jg-helm-find-files-actions '(
                                      ("Change mode on file(s) `M-M'"                                    . helm-ff-chmod)

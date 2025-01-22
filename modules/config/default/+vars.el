@@ -34,7 +34,7 @@
 ;; Ftp
 (setq ftp-program "git-ftp")
 
-(setq-default diary-file (expand-file-name "~/github/jgrey4296.github.io/orgfiles/journal/main.diary")
+(setq-default diary-file (expand-file-name "~/.config/homepage/submodules_/orgfiles/journal/main.diary")
               major-mode #'emacs-lisp-mode
               truncate-lines t
               )

@@ -26,10 +26,12 @@
   :hook (subfile-mode-hook . +jg-turn-off-smartparens)
   )
 
-(evil-ex-define-cmd "ht[ag]"  #'librarian-tag-helm)
-(evil-ex-define-cmd "t[ag]"   #'librarian-tag-helm)
-(evil-ex-define-cmd "T[ag]"   #'librarian-tag-helm)
-(evil-ex-define-cmd "it[ag]"  #'librarian-tag-ivy)
+(after! evil-ex
+  (evil-ex-define-cmd "ht[ag]"  #'librarian-tag-helm)
+  (evil-ex-define-cmd "t[ag]"   #'librarian-tag-helm)
+  (evil-ex-define-cmd "T[ag]"   #'librarian-tag-helm)
+  (evil-ex-define-cmd "it[ag]"  #'librarian-tag-ivy)
+  )
 
 (defvar jg-tag-loc-twitter-account-index  (expand-file-name "~/.config/bibliography/.temp/index/tw_acct.index"))
 (defvar jg-tag-loc-twitter-grep-index     (expand-file-name "~/.config/bibliography/.temp/index/grep_tags.index"))

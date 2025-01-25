@@ -14,28 +14,28 @@
       :desc "Quoted"        "q"   #'quoted-insert
       :prefix ("I" . "Insert+")
       ;; SPC reserved for jg-insert-state
-       :desc "From evil register"       "0"          #'ignore
-       :desc "Insert Resume"            "RET"        #'evil-insert-resume
+      :desc "From evil register"       "0"          #'ignore
+      :desc "Insert Resume"            "RET"        #'evil-insert-resume
 
-       :desc "Insert"                   "i"          #'evil-insert
-       :desc "Insert after"             "l"          #'evil-append
-       :desc "Replace-State"            "r"          #'evil-replace-state
+      :desc "Insert"                   "i"          #'evil-insert
+      :desc "Insert after"             "l"          #'evil-append
+      :desc "Replace-State"            "r"          #'evil-replace-state
 
-       :desc "Append Line"              "a"          #'evil-append-line
-       :desc "Prepend Line"             "p"          #'evil-insert-line
-       :desc "Sub Line"                 "s"          #'evil-change-whole-line
+      :desc "Append Line"              "a"          #'evil-append-line
+      :desc "Prepend Line"             "p"          #'evil-insert-line
+      :desc "Sub Line"                 "s"          #'evil-change-whole-line
 
-       :desc "Open Below"               "j"          #'evil-open-below
-       :desc "Open Above"               "k"          #'evil-open-above
+      :desc "Open Below"               "j"          #'evil-open-below
+      :desc "Open Above"               "k"          #'evil-open-above
 
-       :desc "Current file name"        "f"          #'+default/insert-file-path
-       :desc "Current file path"        "F"   (cmd!! #'+default/insert-file-path t)
-       :desc "Snippet"                  "S"          #'yas-insert-snippet
-       :desc "From Minibuffer history"  "m"          #'ignore
-       :desc "Unicode"                  "u"          #'insert-char
-       :desc "From Kill Ring"           "y"          #'yank-pop
-       :desc "General Insert"           "|"          #'ignore
-       )
+      :desc "Current file name"        "f"          #'+default/insert-file-path
+      :desc "Current file path"        "F"   (cmd!! #'+default/insert-file-path t)
+      :desc "Snippet"                  "S"          #'yas-insert-snippet
+      :desc "From Minibuffer history"  "m"          #'ignore
+      :desc "Unicode"                  "u"          #'insert-char
+      :desc "From Kill Ring"           "y"          #'yank-pop
+      :desc "General Insert"           "|"          #'ignore
+      )
 
 (map! :map jg-binding-normal-state-map ;; switch to Visual
       :desc "Visual"             "V"        #'evil-visual-line

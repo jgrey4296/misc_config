@@ -176,7 +176,7 @@ versus not"
   (let* ((target (expand-file "~/.config/bibliography/plus/urls/xkcds")))
          (source (helm-build-in-file-source "xkcd helm" target
                    :action (helm-make-actions "Open" #'(lambda (x) (mapcar #'browse-url (helm-marked-candidates))))
-                   )))
+                   ))
     (helm :sources (list source)
           :buffer "*helm xkcd*")
     )

@@ -8,11 +8,11 @@
   :commands rawtag-mode
   )
 
-(use-package! librarian-tagging-helm
-  :commands librarian-tagging-helm
+(use-package! librarian-tag-helm
+  :commands librarian-tag-helm
   )
 
-(use-package! librarian-tagging-ivy
+(use-package! librarian-tag-ivy
   :defer t
   )
 

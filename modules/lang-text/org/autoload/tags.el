@@ -1,5 +1,6 @@
 ;;; lang/jg-org/+tags.el -*- lexical-binding: t; -*-
 
+;;;###autoload
 (defun +jg-org-get-file-tags (filename &optional depth)
   "Get tags from a specified file, at an org specified depth.
 If depth is not specified, default to get all tags from all headings
@@ -20,6 +21,7 @@ Return a hash-table of tags with their instance counts"
     )
   )
 
+;;;###autoload
 (defun +jg-org-tagged-p  (filename)
   "Test an org file. Returns true if the file has tags for all depth 2 headings"
   (with-temp-buffer
@@ -33,6 +35,7 @@ Return a hash-table of tags with their instance counts"
     )
   )
 
+;;;###autoload
 (defun +jg-org-format-temp-buffer (bufname name)
   (user-error "TODO")
   )

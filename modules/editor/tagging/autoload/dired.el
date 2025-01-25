@@ -11,7 +11,7 @@
         )
     ;; (message "Describing marked file tags to depth: %s" targetdepth)
     (cl-loop for x in marked do
-          (maphash (lambda (k v) (cl-incf (gethash k alltags 0) v)) (tagging-minor-mode/org-get-file-tags x targetdepth))
+          (maphash (lambda (k v) (cl-incf (gethash k alltags 0) v)) (+jg-org-get-file-tags x targetdepth))
           )
     (if (not (hash-table-empty-p alltags))
         (librarian--tag-chart-tag-counts alltags "Dired Marked Files")
@@ -27,7 +27,7 @@
   (user-error "TODO update")
   (dired-map-over-marks
    (progn (if (or (not (f-ext? (dired-get-filename) "org"))
-                  (tagging-minor-mode/org-tagged-p (dired-get-filename)))
+                  (+jg-org-tagged-p (dired-get-filename)))
               (dired-unmark 1)))
    nil
    )
@@ -39,7 +39,7 @@
   (interactive)
   (user-error "TODO update")
   (let ((counts 0)
-        (untagged-p (lambda (x) (not (tagging-minor-mode/org-tagged-p x))))
+        (untagged-p (lambda (x) (not (+jg-org-tagged-p x))))
         )
     (dired-map-over-marks
      (if (f-dir? (dired-get-filename))

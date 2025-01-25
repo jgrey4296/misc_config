@@ -25,8 +25,8 @@
 
 
 (after! jg-evil-ex-bindings
-  (evil-ex-define-cmd "ht[ag]"  #'librarian-tagging-helm)
-  (evil-ex-define-cmd "t[ag]"  #'librarian-tagging-helm)
-  (evil-ex-define-cmd "T[ag]"  #'librarian-tagging-helm)
-  (evil-ex-define-cmd "it[ag]"  #'librarian-tagging-ivy)
+  (evil-ex-define-cmd "ht[ag]"  #'librarian-tag-helm)
+  (evil-ex-define-cmd "t[ag]"   #'librarian-tag-helm)
+  (evil-ex-define-cmd "T[ag]"   #'librarian-tag-helm)
+  (evil-ex-define-cmd "it[ag]"  #'librarian-tag-ivy)
   )

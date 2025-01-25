@@ -40,7 +40,7 @@
   librarian--biblio-edit-completions-loc (expand-file-name "~/.config/bibliography/completions/")
   librarian--biblio-edit-export-bib-loc  (expand-file-name "tex-config/tex/export_template.tex" templates-loc)
   librarian--biblio-edit-temp-tex-loc    (expand-file-name ".tex/" user-cache-dir)
-  librarian-biblio-pdf-loc (pcase system-type
+  librarian--biblio-pdf-loc (pcase system-type
                              ('darwin (expand-file-name "~/pdf_library"))
                              ('gnu/linux "/media/john/data/library/pdfs"))
   librarian-biblio-library-loc   (expand-file-name "~/.config/bibliography/main/")

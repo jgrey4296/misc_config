@@ -18,12 +18,13 @@
 
 (use-package! rawtag-mode
   :commands rawtag-mode
+  :hook (rawtag-mode-hook . +jg-turn-off-smartparens)
   )
 
 (use-package! subfile-mode
   :commands subfile-mode
+  :hook (subfile-mode-hook . +jg-turn-off-smartparens)
   )
-
 
 (evil-ex-define-cmd "ht[ag]"  #'librarian-tag-helm)
 (evil-ex-define-cmd "t[ag]"   #'librarian-tag-helm)

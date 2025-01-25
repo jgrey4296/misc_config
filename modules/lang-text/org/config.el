@@ -6,6 +6,7 @@
 (local-load! "+extra-configs")
 (local-load! "+export")
 (local-load! "+babel")
+
 (defer-load! jg-bindings-core "+bindings" "+agenda-bindings")
 
 (defer-load! jg-evil-ex-bindings "+evil-ex")
@@ -98,10 +99,6 @@
   ;; underlying, modified buffer. This fixes that.
   (add-hook 'org-after-refile-insert-hook #'save-buffer)
 
-  (defun jg-turn-off-smartparens-org ()
-    (smartparens-mode -1)
-    )
-
   ;; Add our general hooks after the submodules, so that any hooks the
   ;; submodules add run after them, and can overwrite any defaults if necessary.
   (add-hook! 'org-mode-hook
@@ -118,7 +115,7 @@
              #'+jg-org-startup-reference-h
              #'+jg-org-startup-package-h
              #'librarian-insert-minor-mode
-             #'jg-turn-off-smartparens-org
+             #'+jg-turn-off-smartparens
              )
   (setq-hook! 'org-mode-hook
     tab-width 8

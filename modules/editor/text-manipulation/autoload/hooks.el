@@ -73,3 +73,8 @@ This is controlled by `+format-on-save-enabled-modes'."
                     (not (memq major-mode +format-on-save-enabled-modes)))))
             ((not (require 'format-all nil t))))
       (format-all-mode +1)))
+
+;;;###autoload
+(defun +jg-turn-off-smartparens ()
+  (smartparens-mode -1)
+  )

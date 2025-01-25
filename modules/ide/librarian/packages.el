@@ -18,4 +18,10 @@
 (package! wordnut)
 (package! helm-wordnet)
 (package! synosaurus)
+
 (package! librarian :recipe (:host github :repo "jgrey4296/librarian"))
+
+(package! librarian-tag-helm :recipe (:host github :repo "jgrey4296/misc-modes" :files ("minor-modes/librarian-tag-helm/*.el") :local-repo "misc-modes"))
+(package! librarian-tag-ivy  :recipe (:host github :repo "jgrey4296/misc-modes" :files ("minor-modes/librarian-tag-ivy/*.el") :local-repo "misc-modes"))
+
+(package! subfile-mode           :recipe (:host github :repo "jgrey4296/misc-modes" :files ("major-modes/subfile-mode/*.el") :local-repo "misc-modes"))

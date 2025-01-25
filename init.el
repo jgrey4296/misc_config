@@ -18,7 +18,6 @@
 
  :editor format
  :editor text-manipulation ;; +onsave
- :editor tagging
  :editor buffer-nav
  :editor window-nav ;; +numbers +ace
  :editor fold undo
@@ -26,7 +25,8 @@
  :editor autosave
 
  :ide version-control ;; +forge +diff-hl
- :ide librarian snippets workspaces
+ :ide (librarian +tags)
+ :ide snippets workspaces
  :ide (support +lsp +flycheck +treesitter) ;; +eglot  +semantic
  :ide minimap diff company debugger
 

@@ -39,10 +39,12 @@ Finds correctly active snippets from parent modes (based on Yas' logic)."
            return it))
 
 ;;;###autoload
-(defun +snippet-expand (uuid)
+(defun +snippet-expand (uuid &optional col)
   """ Expand a snippet by uuid """
   (interactive "M")
-  (if-let ((snippet (+snippet--get-template-by-uuid uuid)))
+  (if-let ((snippet (+snippet--get-template-by-uuid uuid))
+           (yas--indent-original-column (or yas--indent-original-column col))
+           )
       (yas-expand-snippet snippet)
       )
   ""

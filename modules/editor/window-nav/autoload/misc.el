@@ -55,6 +55,52 @@
                       (when (not (eq wind curr))
                         (with-selected-window wind (shrink-window-horizontally amt)))))))
 
+
+;;;###autoload
+(defun +jg-windows-identify ()
+  "Raise a temp buffer window of the frame tree"
+  (interactive)
+  (let ((tree (window-tree))
+        (indent 0)
+        (count 0)
+        fn
+        )
+    (setq fn #'(lambda (x)
+                 (pcase x
+                   ((pred windowp)
+                    (princ (format "%s- Window (%s): %s\n"
+                                   (make-string indent ?\ )
+                                   count
+                                   (buffer-name (window-buffer x))))
+                    (cl-incf count)
+                    )
+                   (`(nil ,edges . ,winds)
+                    (princ (format "%s- Horizontal: \n"
+                                   (make-string indent ?\ )))
+                    (setq indent (+ 4 indent))
+                    (mapc fn winds)
+                    (setq indent (- indent 4))
+                    )
+                   (`(t ,edges . ,winds)
+                    'vertical
+                    (princ (format "%s- Vertical: \n"
+                                   (make-string indent ?\ )))
+                    (setq indent (+ 4 indent))
+                    (mapc fn winds)
+                    (setq indent (- indent 4))
+                    )
+                   ((pred listp)
+                    (mapc fn x))
+                   )
+                 )
+         )
+    (with-temp-buffer-window "*Window-Tree*" 'display-buffer nil
+      (funcall fn tree)
+      )
+    )
+  )
+
+
 ;;-- Footer
 ;; Copyright (C) 2024 john
 ;;

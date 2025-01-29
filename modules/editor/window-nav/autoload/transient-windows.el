@@ -101,6 +101,15 @@
   #'winner-redo
   )
 
+(transient-call! window-expand ()
+  "Window Expand"
+  :key "e"
+  :interactive t
+  #'+jg-windows-expand-window
+  )
+
+
+
 ;;-- end setup
 
 ;;;###autoload
@@ -121,6 +130,7 @@
       (transient-macro-call-grow-vertically)
       (transient-macro-call-window-maximize)
       (transient-macro-call-window-balance)
+      (transient-macro-call-window-expand)
       ]
      ["Window Layouts" ;; col
       (transient-macro-call-toggle-layout)

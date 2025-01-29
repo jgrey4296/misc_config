@@ -2,6 +2,7 @@
 
 (local-load! "+vars")
 (local-load! "+lsp")
+
 (defer-load! jg-bindings-total "+bindings")
 
 (advice-add 'rustic-install-lsp-client-p :override #'+rust--dont-install-packages-a)
@@ -44,52 +45,51 @@
 (use-package! rustic-compile
   :after rustic
   )
+
 (use-package! rustic-popup
   :after rustic
   )
+
 (use-package! rustic-cargo
   :after rustic
   )
+
 (use-package! rustic-doc
   :after rustic
   )
+
 (use-package! rustic-clippy
   :after rustic
   )
+
 (use-package! rustic-comint
   :after rustic
   )
+
 (use-package! rustic-babel
   :after (rustic org)
   )
+
 (use-package! rustic-rustfmt
   :after rustic
   )
+
 (use-package! rustic-rustfix
   :after rustic
   )
+
 (use-package! rustic-playground
   :disabled t
   :after rustic
   )
-(use-package! rustic-lsp
-  :after rustic
-  :init
-  (setq rust-lsp-setup-p nil)
-  )
+
 (use-package! rustic-expand
   :after rustic
   )
+
 (use-package! rustic-spellcheck
   :after rustic
   )
-(use-package! rustic-flycheck
-  :after rustic
-  :config
-  (remove-hook 'rustic-mode-hook 'flycheck-mode)
-  (remove-hook 'flycheck-mode-hook #'rustic-flycheck-setup)
-  )
-
 
 (use-package! llvm-mode
   :defer t

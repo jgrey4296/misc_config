@@ -23,7 +23,6 @@
 
 (map! :map jg-rust-mode-map
       :after rustic
-      :n "RET"                      #'rustic-cargo-run
       :n "|"                        #'librarian-insert-trigger
       :desc "Racer Describe" :n "?" #'rustic-racer-describe
       :localleader

@@ -40,3 +40,24 @@
              )
            )
   )
+
+;;;###autoload
+(defun doom-ediff-save-wconf-h ()
+  (setq doom--ediff-saved-wconf (current-window-configuration))
+  )
+
+;;;###autoload
+(defun doom-ediff-restore-wconf-h ()
+  (when (window-configuration-p doom--ediff-saved-wconf)
+    (set-window-configuration doom--ediff-saved-wconf))
+  )
+
+;;;###autoload
+(defun +jg-diff-unfold-h ()
+  (when (-any #'symbol-value
+              (-filter #'boundp
+                       fold-modes))
+    (evil-open-folds)
+    (vimish-fold-unfold-all)
+    )
+  )

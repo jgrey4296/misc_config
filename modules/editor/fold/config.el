@@ -6,6 +6,14 @@
 (local-load! "+spec-defs")
 (defer-load! jg-bindings-total "+bindings")
 
+(defconst fold-modes '(vimish-fold-mode
+                       hs-minor-mode
+                       origami-mode
+                       outline-minor-mode
+                       hide-ifdef-mode
+                       )
+  )
+
 (use-package! hideshow ; built-in
   :commands (hs-toggle-hiding hs-hide-block hs-hide-level hs-show-all hs-hide-all)
   :config
@@ -28,3 +36,5 @@
              #'global-code-shy-minor-mode
              )
   )
+
+(use-package! outline)

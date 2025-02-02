@@ -53,21 +53,17 @@
   :defer t
   :config
   (add-hook! 'ediff-before-setup-hook
-    (defun doom-ediff-save-wconf-h ()
-      (setq doom--ediff-saved-wconf (current-window-configuration))))
+             #'doom-ediff-save-wconf-h)
 
   (add-hook! 'ediff-prepare-buffer-hook
-    (defun +jg-diff-unfold-h ()
-      (evil-open-folds)
-      (vimish-fold-unfold-all)
-      )
-    )
-  (add-hook! '(ediff-quit-hook ediff-suspend-hook) :append
-    (defun doom-ediff-restore-wconf-h ()
-      (when (window-configuration-p doom--ediff-saved-wconf)
-        (set-window-configuration doom--ediff-saved-wconf))))
+             #'+jg-diff-unfold-h)
 
-  (add-hook! '(ediff-cleanup-hook) :append
+  (add-hook! '(ediff-quit-hook ediff-suspend-hook)
+             :append
+             #'doom-ediff-restore-wconf-h)
+
+  (add-hook! '(ediff-cleanup-hook)
+             :append
              #'+jg-diff-cleanup-temp-buffers
              )
 

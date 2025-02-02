@@ -109,6 +109,17 @@
   )
 
 ;;;###autoload
+(defun +jg-dired-tesseract ()
+  (interactive)
+  (let ((files (dired-get-marked-files)))
+    (unless (eq 1 (length files))
+      (user-error "Just run on one file"))
+    (shell-command (format "tesseract %s quote" (shell-quote-argument (car files))))
+    (find-file "quote.txt")
+    )
+  )
+
+;;;###autoload
 (defun +jg-dired-hash-files ()
   (interactive)
   (let* ((marked (ensure-list (dired-get-marked-files)))

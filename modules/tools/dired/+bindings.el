@@ -36,6 +36,7 @@
 
 (map! :map jg-dired-mode-map ;; main
       :n "?"                        #'+jg-dired-group-helper
+      :n ">"                        #'+jg-dired-tesseract
       :n "DEL"                      #'dired-kill-subdir
       :n "RET"                      #'dired-find-file
       :nv "q"                       #'+jg-dired-kill-subdir-or-close-buffer

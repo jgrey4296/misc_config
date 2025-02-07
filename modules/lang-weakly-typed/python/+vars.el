@@ -163,6 +163,11 @@
               ("dict" "list")
               ("error" "user" "trace" "detail" "bootstrap")
               ("file" "stdout" "stderr" "rotate" "pass")
+              ;; jgdv Type aliases:
+              ("Maybe" "M_")
+              ("Result" "R_")
+              ("Either" "E_")
+              ("list" "Stack" "Fifo" "Queue" "Lifo" "Vector")
               )
     )
   )

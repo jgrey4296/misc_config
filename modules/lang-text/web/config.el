@@ -38,7 +38,6 @@
   :config
   (add-hook! 'css-mode-hook
              #'hs-minor-mode
-             #'smartparens-mode
              #'librarian-insert-minor-mode)
 
   (setq-hook! 'css-mode-hook

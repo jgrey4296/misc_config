@@ -20,7 +20,6 @@
 (use-package! smartparens
   :commands (sp-pair sp-local-pair sp-with-modes sp-point-in-comment sp-point-in-string)
   :config
-  (smartparens-global-mode -1)
   ;; Load default smartparens rules for various languages
   (require 'smartparens-config)
 
@@ -71,6 +70,8 @@
                                   (" | " "*")
                                   ("|[i]\n[i]" "RET"))
                  )
+
+  (smartparens-global-mode -1)
   )
 
 (use-package! embrace :defer t)

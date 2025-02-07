@@ -62,3 +62,12 @@
       )
     )
   )
+
+;;;##autoload
+(defun +jg-ui-tree-dired-default-dir ()
+  (interactive)
+  (-when-let (wind (neo-global--get-window))
+    (neotree-find default-directory)
+    (neotree-change-root)
+    )
+)

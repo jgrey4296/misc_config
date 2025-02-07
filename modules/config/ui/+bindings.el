@@ -218,6 +218,11 @@
       :n "RET" (neotree-make-executor :file-fn 'neo-open-file :dir-fn  'neo-open-dir)
       )
 
+(map! :map jg-dired-mode-map
+      :localleader
+      "." #'+jg-ui-tree-dired-default-dir
+      )
+
 (after! neotree
   (setq neotree-mode-map jg-neotree-mode-map)
   )

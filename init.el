@@ -33,6 +33,7 @@
  :lang-data csv dot sql nu
  :lang-data graphql
  :lang-data xml toml json yaml logs
+ :lang-data quotes
 
  :lang-dsl acab ai-and-logic
  :lang-dsl rest sh nix

@@ -86,6 +86,7 @@
       :desc "set buffer coding"           "0"          #'set-buffer-file-coding-system
       :desc "indent"                      "TAB"        #'indent-region
 
+
       :desc "Ensure commas"               "u"          #'+jg-surround-ensure-commas
 
       :desc "Align"                       "a"          #'align-regexp
@@ -111,6 +112,7 @@
        :desc "inflection"                "i"    #'evil-operator-string-inflection
        :desc "Rotate"                    "r"    #'rotate-text
        :desc "ispell-word"               "s"    #'ispell-word
+       :desc "Ivy Spell"                 "S"    #'flyspell-correct-wrapper
        :desc "add word to dict"          "a"    #'+spell/add-word
        :desc "Word(net)"                 "w"    #'helm-wordnet-suggest
        :desc "Word(nut)"                 "W"    #'wordnut-search
@@ -122,6 +124,7 @@
       :desc "Decode url"                  "U"  #'+evil:url-decode
       :desc "ENCRYPT"                     "e"  #'+jg-text-encrypt-region
       :desc "DECRYPT"                     "E"  #'+jg-text-decrypt-region
+      :desc "Accent"                      "a"  #'accent-menu
       )
 
 (map! :map jg-binding-change-map :prefix ("i" . "lines")

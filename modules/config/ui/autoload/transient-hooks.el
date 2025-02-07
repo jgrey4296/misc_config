@@ -13,7 +13,7 @@
   (transient-subgroup! jg-toggle-hooks-transient ()
     "For Controlling hooks"
     :key "k"
-    :desc "|| Hooks     ||"
+    :desc "|| Hooks      ||"
     []
   )
 

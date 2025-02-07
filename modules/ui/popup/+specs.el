@@ -1,5 +1,8 @@
 ;;; config/ui/popup/config.el -*- lexical-binding: t; -*-
 
+;; IGNORE ACTIONS SIDE SIZE WIDTH HEIGHT SLOT
+;; VSLOT TTL QUIT SELECT MODELINE AUTOSAVE PARAMETERS
+
 (dlog! "Setting up initial popup rules: %s" (current-time-string))
 ;; Setup popup vars:
 
@@ -42,5 +45,3 @@
     ("^\\*"                                                  :slot 1 :vslot -1 :select t :priority -200)
     )
   )
-;; IGNORE ACTIONS SIDE SIZE WIDTH HEIGHT SLOT
-;; VSLOT TTL QUIT SELECT MODELINE AUTOSAVE PARAMETERS)

@@ -1,13 +1,6 @@
 ;;; checkers/spell/autoload/+flyspell.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
-(defun +spell-correction-at-point-p (&optional point)
-  "TODO"
-  (cl-loop for ov in (overlays-at (or point (point)))
-           if (overlay-get ov 'flyspell-overlay)
-           return t))
-
-;;;###autoload
 (defun +spell/add-word (word &optional scope)
   "Add WORD to your personal dictionary, within SCOPE.
 

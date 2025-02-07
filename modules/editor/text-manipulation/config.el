@@ -19,6 +19,8 @@
 
 (use-package! smartparens
   :commands (sp-pair sp-local-pair sp-with-modes sp-point-in-comment sp-point-in-string)
+  :preface
+  (remove-hook 'doom-first-buffer-hook #'smartparens-global-mode)
   :config
   ;; Load default smartparens rules for various languages
   (require 'smartparens-config)

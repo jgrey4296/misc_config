@@ -18,13 +18,7 @@
            ;; #'+popup-unset-modeline-on-disable-h
            )
 
-(use-package! popup
-  :disabled t
-  )
+(use-package! popup)
 
-(use-package! popwin
-  :disabled t
-  )
-
-(use-package! popper
-  :disabled t)
+(use-package! popwin :disabled t)
+(use-package! popper :disabled t)

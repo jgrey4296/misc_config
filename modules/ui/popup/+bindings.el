@@ -19,4 +19,17 @@
       :desc "Messages"                     "0"   #'+jg-ivy-popup-messages
       )
 
+(setq popup-menu-keymap (make-keymap))
+(map! :map popup-menu-keymap
+      "j" 'popup-next
+      "k" 'popup-previous
+      "q" #'keyboard-quit
+      "RET" 'popup-select
+      "l" 'popup-select
+
+      "\\" 'popup-isearch
+      "?"  'popup-help
+      )
+
+
 (global-set-key [remap quit-window] #'+popup/quit-window)

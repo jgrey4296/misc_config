@@ -49,11 +49,12 @@
   )
 
 (transient-call! spelling ()
-  ""
+  "Toggle flyspell, writegood, spell-fu"
   :key "s"
   :desc (transient-mode-fmt "Spelling" flyspell-mode "s")
   (flyspell-mode 'toggle)
-  (writegood-mode (if flyspell-mode 1 -1))
+  (writegood-mode (if flyspell-mode 2 -1))
+  (spell-fu-mode (if flyspell-mode 2 -1))
   )
 
 ;;;###autoload
@@ -77,6 +78,7 @@
 
   (transient-guarded-insert! 'jg-toggle-main jg-toggle-guides-transient (1 -1))
 
+  (transient-append-suffix 'jg-toggle-main "E" '("W" transient-macro-call-spelling))
   )
 
 ;;-- Footer

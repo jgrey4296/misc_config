@@ -31,8 +31,16 @@
   )
 
 (use-package! ws-butler
+  :preface
+  (remove-hook 'doom-first-buffer-hook #'ws-butler-global-mode)
   :config
   (ws-butler-global-mode -1)
+  (pushnew! ws-butler-global-exempt-modes
+            'special-mode
+            'comint-mode
+            'term-mode
+            'eshell-mode
+            'diff-mode)
   )
 
 (use-package! adaptive-wrap

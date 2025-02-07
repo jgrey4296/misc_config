@@ -65,10 +65,6 @@
   "Show Changes"
   :key "x"
   )
-(transient-toggle-mode! spell-fu-mode ()
-  "Spellcheck"
-  :key "W"
-  )
 (transient-toggle-mode! abbrev-mode ()
   "Abbrev"
   :key "a"
@@ -101,7 +97,6 @@
       (transient-macro-toggle-hide-mode-line-mode)
       (transient-macro-toggle-read-only-mode)
       (transient-macro-call-evil-embrace)
-      (transient-macro-toggle-spell-fu-mode)
       ]
      ]
     macro-tools--transient-quit!

@@ -23,6 +23,7 @@
       :desc "Next Fold"     "j"   #'+fold/next
       :desc "Prev Fold"     "k"   #'+fold/previous
 
+      :desc "Mark Outline Subtree" "' o" #'outline-mark-subtree
       ;; TODO fold string
 )
 (map! :map jg-binding-vision-map

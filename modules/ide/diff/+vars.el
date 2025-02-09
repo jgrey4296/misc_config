@@ -72,6 +72,19 @@
 
       )
 
+(speckler-add! fold ()
+  '(vdiff
+    :modes (vdiff-mode vdiff-3way-mode)
+    :priority 200
+    :triggers (:open-all   #'vdiff-open-all-folds
+               :close-all  #'vdiff-close-all-folds
+               :toggle     #'vdiff-toggle-fold
+               :open       #'vdiff-open-fold
+               :open-rec   #'vdiff-open-fold
+               :close      #'vdiff-close-fold
+               )
+    )
+  )
 ;;-- end vdiff
 
 ;;-- diff-hl

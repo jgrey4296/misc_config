@@ -27,11 +27,9 @@
              #'abbrev-mode
              #'evil-collection-python-set-evil-shift-width
              #'librarian-insert-minor-mode
-             ;; #'hs-minor-mode
-             #'outline-minor-mode
              #'+jg-python-outline-regexp-override-hook
+             #'outline-minor-mode
              #'maybe-py-test-minor-mode
-             #'+jg-python-auto-hide
              )
 
   (setq-hook! 'python-ts-mode-hook ;; flycheck specific
@@ -49,9 +47,24 @@
   :init
   ;; external python uses prefix: py-
   (setq py-complete-function #'(lambda () nil)
-        py-do-completion-p nil ;; nil
-        py-company-pycomplete-p nil
-        py-fast-process-p nil)
+        py-font-lock-defaults-p           t
+        py-use-font-lock-doc-face-p       t
+        py-do-completion-p                    nil
+        py-company-pycomplete-p               nil
+        py-fast-process-p                     nil
+        py-outline-minor-mode-p               nil
+        py-hide-show-minor-mode-p             nil
+        py-load-skeletons-p                   nil
+        py-guess-py-install-directory-p       nil
+        py-autopair-mode                      nil
+        py--imenu-create-index-p              nil
+        py-defun-use-top-level-p              nil
+        py-sexp-use-expression-p              nil
+        py-trailing-whitespace-smart-delete-p nil
+        py-load-pymacs-p                      nil
+        py-debug-p                            nil
+        py-empty-comment-line-separates-paragraph-p t
+        )
 
   (defvaralias 'python-indent-offset 'py-indent-offset)
   (defvaralias 'python-pdbtrack-activate 'py-pdbtrack-do-tracking-p)
@@ -73,12 +86,13 @@
              #'tree-sitter!
              )
 
-  ;; Always add auto-hide as the last thing
   (add-hook! 'python-mode-hook :depth 100
              #'jg-python-font-lock-mod-h
              #'+jg-python-outline-regexp-override-hook
-             #'+jg-python-auto-hide
+             #'outline-minor-mode
              )
+
+  (add-hook! 'code-shy-minor-mode-hook #'+jg-python-auto-hide)
 
   (setq-hook! 'python-mode-hook ;; flycheck specific
     lsp-diagnostic-filter       #'+jg-python-lsp-flycheck-filter
@@ -97,6 +111,7 @@
     jg-workspaces-find-buff-fn #'+jg-python-carousel-window-fn
     tab-width                    py-indent-offset
     )
+
   ;;-- end hooks
 
 )
@@ -153,3 +168,6 @@
     )
 
   )
+
+
+(add-hook 'python-mode-hook #'to-debug-h -200)

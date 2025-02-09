@@ -79,6 +79,10 @@
   '(tuareg-mode     . ocaml)
   )
 
+(use-package! ts-fold
+  :after tree-sitter
+  )
+
 ;;todo: use treesit-font-lock-rules
 ;;-- Footer
 ;; Copyright (C) 2024 john

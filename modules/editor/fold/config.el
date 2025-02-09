@@ -2,9 +2,6 @@
 
 ;;
 ;; Packages
-(local-load! "+vars")
-(local-load! "+spec-defs")
-(defer-load! jg-bindings-total "+bindings")
 
 (defconst fold-modes '(vimish-fold-mode
                        hs-minor-mode
@@ -14,27 +11,43 @@
                        )
   )
 
-(use-package! hideshow ; built-in
-  :commands (hs-toggle-hiding hs-hide-block hs-hide-level hs-show-all hs-hide-all)
-  :config
-  (advice-add 'hs-toggle-hiding :before #'+fold--hideshow-ensure-mode-a)
-  (advice-add 'hs-hide-block :before #'+fold--hideshow-ensure-mode-a)
-  (advice-add 'hs-hide-level :before #'+fold--hideshow-ensure-mode-a)
-  (advice-add 'hs-show-all :before #'+fold--hideshow-ensure-mode-a)
-  (advice-add 'hs-hide-all :before #'+fold--hideshow-ensure-mode-a)
+(defer-load! jg-bindings-total "+bindings")
+(when (modulep! +hideshow) (local-load! "+hideshow"))
+(when (modulep! +vimish)   (local-load! "+vimish"))
+(when (modulep! +origami)  (local-load! "+origami"))
+(when (modulep! +shy)      (local-load! "+shy"))
+(when (modulep! +outline)  (local-load! "+outline"))
+
+(speckler-new! fold (key val)
+  "Registers fold handlers"
+  :target evil-fold-list
+  :override nil
+  :sorted t
+  :loop 'collect
+  :struct '(:modes list :priority int :triggers
+            (:delete fn :open-all fn :close-all-fn :toggle fn :open fn :open-rec fn :close fn))
+  (append (list (* -1 (or (plist-get val :priority) 0)))
+          (list (ensure-list (plist-get val :modes)))
+          (cl-loop for (kwd . fn) in (map-pairs (plist-get val :triggers))
+                   for realfn = (upfun! fn)
+                   if (or (null realfn) (functionp realfn))
+                   collect kwd
+                   and
+                   collect realfn
+                   )
+          )
   )
 
-(use-package! vimish-fold)
-
-(use-package! origami :defer t)
-
-(use-package! code-shy-minor-mode
-  :init
-  (setq code-shy-fold-patterns (list "%s-- %s %s" "%s-- %s %s"))
-
-  (add-hook! doom-first-buffer
-             #'global-code-shy-minor-mode
-             )
+(speckler-add! fold ()
+  '(ifdef
+    :modes (hide-ifdef-mode)
+    :priority -25
+    :triggers (:open-all   #'show-ifdefs
+               :close-all  #'hide-ifdefs
+               :toggle     nil
+               :open       #'show-ifdef-block
+               :open-rec   nil
+               :close      #'hide-ifdef-block
+               )
+    )
   )
-
-(use-package! outline)

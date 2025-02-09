@@ -20,7 +20,8 @@
  :editor text-manipulation ;; +onsave
  :editor buffer-nav
  :editor window-nav ;; +numbers +ace
- :editor fold undo
+ :editor (fold +hideshow +vimish +shy +outline)
+ :editor undo
  :editor large-files
  :editor autosave
 

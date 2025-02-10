@@ -40,12 +40,15 @@
                        'company-abort))
 )
 
-(use-package! company-abbrev)
+(use-package! company-abbrev
+  :after company
+  )
 
-(use-package! company-dabbrev)
+(use-package! company-dabbrev
+  :after comapny)
 
 (use-package! company-dict
-  :defer t
+  :after company
   :config
   (add-hook! 'doom-project-hook
              #'+company-enable-project-dicts-h

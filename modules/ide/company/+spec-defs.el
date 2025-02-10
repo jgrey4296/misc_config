@@ -3,6 +3,7 @@
 (defvar-local company-backends-sort-vals nil)
 
 (defvar jg-company-known-backends '(
+                                    accent-company
                                     company-abbrev
                                     company-anaconda
                                     company-auctex-bibs

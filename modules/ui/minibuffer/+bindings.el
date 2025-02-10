@@ -114,3 +114,8 @@
       read-expression-map    jg-minibuffer-read-expression-map
       read--expression-map   jg-minibuffer-read-expression-map
       )
+
+(after! magit-base
+  (set-keymap-parent magit-minibuffer-local-ns-map
+                     jg-minibuffer-local-map)
+  )

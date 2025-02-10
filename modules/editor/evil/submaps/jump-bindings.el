@@ -21,8 +21,8 @@
       ;; w for window switching, in window-nav
       ;; :desc "Jump to Window"        "w"   #'ace-window
       :desc "Jump to mark"          "m"   #'evil-show-marks
-      :desc "Pop Mark"              "b"   #'avy-pop-mark
-      :desc "Push Mark"             "B"   (cmd! (avy-push-mark))
+      :desc "Jump Back"             "b"   #'avy-pop-mark
+      :desc "Jump Next"             "n"   (cmd! (avy-push-mark))
       :desc "Goto First Line"       "f"   #'+jg-evil-bob-with-mark
       :desc "Goto Last Line"        "F"   #'evil-goto-line
       :desc "Search buffer"         "s"   #'isearch-forward

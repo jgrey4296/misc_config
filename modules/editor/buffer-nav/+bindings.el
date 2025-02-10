@@ -7,7 +7,9 @@
       )
 
 (map! :map jg-binding-jump-map
-      :desc "Paren State" "p"  #'evil-parenM-state
+      :desc "Paren State"            "p"   #'evil-parenM-state
+      :desc "Pop Jump"               "b"   #'better-jumper-jump-backward
+      :desc "Jump Back"              "n"   #'better-jumper-jump-forward
       )
 
 (map! :map evil-parenM-state-map

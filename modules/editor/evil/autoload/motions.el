@@ -45,9 +45,9 @@ JG: Modified to respect case-fold-search
   :jump t
   :type line
   (push-mark)
-  (evil-goto-line (or count 1))
+  (evil-set-jump)
+  (evil-goto-line (or count 2))
   )
-
 
 
 ;;-- Footer

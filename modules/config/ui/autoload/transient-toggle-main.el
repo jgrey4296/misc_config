@@ -54,7 +54,7 @@
   "Shy Code"
   :global t
   :key "H"
-  :hook 'prog-mode
+  :hook '(conf-mode prog-mode)
   :fn #'code-shy-minor-mode
   )
 (transient-toggle-mode! hide-mode-line-mode ()

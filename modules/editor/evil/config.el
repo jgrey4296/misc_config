@@ -25,7 +25,7 @@
   (evil-add-command-properties '+evil:align-right :ex-arg 'regexp-match)
   (evil-add-command-properties '+multiple-cursors:evil-mc :ex-arg 'regexp-global-match)
 
-    ;; Allow eldoc to trigger directly after changing modes
+    ;; Allow eldoc to trigger directly after changing states
   (after! eldoc (eldoc-add-command 'evil-normal-state 'evil-insert 'evil-change 'evil-delete 'evil-replace))
   (unless noninteractive (add-hook! 'after-save-hook #'+evil-display-vimlike-save-message-h))
 

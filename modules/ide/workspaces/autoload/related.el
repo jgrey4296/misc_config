@@ -55,7 +55,7 @@
   )
 
 (defun +jg-workspace-default-new-window (buff)
-  (select-window (split-window-below))
+  (select-window (split-window-right))
   (find-file buff)
   )
 

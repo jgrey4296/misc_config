@@ -16,6 +16,13 @@
 
 (use-package! eldoc
   :defer t
+  :config
+  (global-eldoc-mode -1)
+  (setq eldoc-idle-delay 0.5
+        eldoc-echo-area-prefer-doc-buffer nil
+        eldoc-display-functions (list #'eldoc-display-in-echo-area)
+        eldoc-echo-area-use-multiline-p nil
+        )
   )
 
 (use-package! helpful
@@ -23,9 +30,6 @@
   :commands helpful--read-symbol
   :hook (helpful-mode . visual-line-mode)
   :init
-  ;; Make `apropos' et co search more extensively. They're more useful this way.
-  (setq apropos-do-all t)
-
   (defun jg-unset-helpful-dedicated ()
     (set-window-dedicated-p (selected-window) nil)
     )
@@ -33,6 +37,13 @@
   (add-hook 'helpful-mode-hook #'jg-unset-helpful-dedicated)
   (add-hook 'helpful-mode-hook #'outline-minor-mode)
 
+  (when (modulep! :ui ivy)
+    (setq counsel-describe-function-function #'helpful-callable
+          counsel-describe-variable-function #'helpful-variable
+          counsel-descbinds-function         #'helpful-callable
+          )
+    )
+  (setq helpful-max-buffers 5)
   )
 
 (use-package! info

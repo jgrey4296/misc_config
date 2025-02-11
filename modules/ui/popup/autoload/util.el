@@ -44,11 +44,19 @@
 (defun +popup--maybe-select-window (window origin)
   "Select a window based on `+popup--inhibit-select' and this window's `select' parameter."
   (when (windowp window)
-  (unless +popup--inhibit-select
-    (let ((select (+popup-parameter 'select window)))
-      (if (functionp select)
-          (funcall select window origin)
-        (select-window (if select window origin)))))))
+    (unless +popup--inhibit-select
+      (pcase (+popup-parameter 'select window)
+        ((pred functionp)  (funcall select window origin))
+        ('nil
+         (select-window origin))
+        ('t
+         (select-window window)
+         )
+        (x (error "Unknown window select arg: %s" x))
+        )
+      )
+    )
+  )
 
 ;;-- end utils
 

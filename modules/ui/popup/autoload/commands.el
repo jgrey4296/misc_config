@@ -17,7 +17,7 @@
   (interactive)
   (let ((+popup-default-display-buffer-actions
          '(+popup-display-buffer-stacked-side-window-fn))
-        (display-buffer-alist +popup--display-buffer-alist)
+        (display-buffer-alist (seq-copy display-buffer-alist))
         (buffer (current-buffer)))
     (push (cons "." +popup-defaults-alist) display-buffer-alist)
     (bury-buffer)

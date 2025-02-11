@@ -9,6 +9,7 @@
 (use-package! transient)
 
 (after! transient
+  ;; Default hooks in config/ui
   (add-hook 'jg-ui-transient-toggles-hook #'+jg-ui-build-hooks-transient 90)
   (add-hook 'jg-ui-transient-toggles-hook #'+jg-ui-build-debugs-transient)
   (add-hook 'jg-ui-transient-toggles-hook #'+jg-ui-build-guides-transient)

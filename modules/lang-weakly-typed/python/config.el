@@ -168,6 +168,3 @@
     )
 
   )
-
-
-(add-hook 'python-mode-hook #'to-debug-h -200)

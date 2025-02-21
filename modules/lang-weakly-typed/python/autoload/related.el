@@ -8,6 +8,8 @@
           (:test (f-join fparent "__tests" (concat "test_" fname))   :when (not is-test))
 
           (:initpy (f-join fparent "__init__.py"))
+          (:interface (f-join fparent "_interface.py") :when (f-exists? (f-join root fparent "_interface.py")))
+          (:interface (f-join fparent2 "_interface.py") :when (f-exists? (f-join root fparent2 "_interface.py")))
           (:doot "doot.toml")
           (:errors (f-join src "errors")    :when (f-exists? (f-join root src "errors")))
           (:errors (f-join src "errors.py") :when (f-exists? (f-join root src "errors.py")))

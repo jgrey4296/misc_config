@@ -39,6 +39,7 @@
   (add-hook 'compilation-filter-hook #'comint-truncate-buffer)
   (advice-add 'counsel-compile--action            :override #'+jg-eval--run-compile)
   (advice-add 'projectile--run-project-cmd        :around   #'+jg-eval--projectile-cmd-list)
-(advice-add 'counsel--get-compile-candidates      :override #'+jg-eval--time-compile-cmd-retrieval)
+  (advice-add 'counsel--get-compile-candidates      :override #'+jg-eval--time-compile-cmd-retrieval)
   (autoload 'comint-truncate-buffer "comint" nil t)
+  (advice-add 'compile-goto-error :after #'evil-open-folds)
   )

@@ -129,6 +129,7 @@
     ("__init__\\.py\\'"      :trigger "__init"           :mode python-mode)
     ("test_.+\\.py\\'"       :trigger "__pytest"         :mode python-mode)
     ("cli_.+\\.py\\'"        :trigger "__cli"            :mode python-mode)
+    ("\\.pyi\\'"             :trigger "__interface"      :mode python-mode)
     ("\\.py\\'"              :trigger "__"               :mode python-mode :priority -99)
     (python-mode             :trigger "__"                                 :priority -100)
     )
@@ -223,7 +224,7 @@
   )
 (speckler-add! auto-modes ()
   '(python
-    ("\\.py\\'"                 . python-mode)
+    ("\\.pyi?\\'"               . python-mode)
     ("SConscript"               . scons-mode)
     ("SConstruct"               . scons-mode)
     ("dooter\\.py"              . doit-mode)

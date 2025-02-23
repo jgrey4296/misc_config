@@ -71,7 +71,7 @@ error if NAME doesn't exist."
   (cl-loop for name in persp-names-cache
            if (and (gethash name *persp-hash*)
                    (not (string-equal name persp-nil-name)))
-           collect it))
+           collect (persp-get-by-name name)))
 
 ;;;###autoload
 (defun +workspace-list-names ()

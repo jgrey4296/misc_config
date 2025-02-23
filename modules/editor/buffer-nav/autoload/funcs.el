@@ -39,6 +39,15 @@
   )
 
 
+;;;###autoload
+(defun +jg-buffer-toggle-mode ()
+  (interactive)
+  (if major-mode--suspended
+      (major-mode-restore)
+    (major-mode-suspend)
+    )
+  )
+
 
 ;;-- Footer
 ;; Copyright (C) 2025 john

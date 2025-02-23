@@ -2,8 +2,9 @@
 
 (map! :leader
       :prefix "b"
-      :desc "Suspend Mode"   ";" (cmd! (major-mode-suspend))
-      :desc "Restore Mode"  "'" (cmd! (major-mode-restore))
+      :desc "Suspend Mode"   ";" #'+jg-buffer-toggle-mode
+      :desc "Scratch"        "'" (cmd! (switch-to-buffer " *temp*"))
+      :desc "Popup Scratch"  "s" #'scratch-buffer
       )
 
 (map! :map jg-binding-jump-map

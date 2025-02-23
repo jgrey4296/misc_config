@@ -119,8 +119,7 @@
       :desc "Make __init__.py"     "g i" (cmd! (+jg-dired-touch "__init__.py"))
       )
 
-(map! :map comint-mode-map
-      :after (shell comint)
+(map! :map jg-comint-mode-map
       :localleader
       :desc "PdbTrack"     ";" #'py-pdbtrack-toggle-stack-tracking
       :desc "Fold lines" "TAB" #'toggle-truncate-lines

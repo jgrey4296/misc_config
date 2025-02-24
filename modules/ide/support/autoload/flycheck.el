@@ -81,6 +81,22 @@
     )
   )
 
+;;;###autoload
+(defun jg-flycheck-set-filter-to-highest-actual-a ()
+  "Advice to set the flycheck error list to the highest level that actually has entries.
+ie: if there errors, set it to error, else warnings, else info
+"
+  (let* ((errors (flycheck-error-list-current-errors))
+         (counts (flycheck-count-errors errors))
+         (lvl (cond ((alist-get 'error counts)
+                     'error)
+                    ((alist-get 'warning counts)
+                     'warning)
+                    (t 'info)))
+         )
+    (flycheck-error-list-set-filter lvl)
+    )
+  )
 
 (defvar jg-flycheck-filter-hook nil)
 (defun +jg-flycheck-filter-by-level (err)

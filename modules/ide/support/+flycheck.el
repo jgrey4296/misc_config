@@ -29,6 +29,8 @@
 
   (remove-hook 'after-change-major-mode-hook #'global-flycheck-mode-enable-in-buffers)
   (advice-add 'flycheck-error-list-apply-filter :filter-return #'jg-flycheck-error-list-apply-filter-a)
+  (advice-add 'flycheck-list-errors :after #'jg-flycheck-set-filter-to-highest-actual-a)
+
   )
 
 (use-package! flycheck-popup-tip

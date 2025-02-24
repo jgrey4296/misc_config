@@ -19,6 +19,14 @@
     )
   )
 
+;;;###autoload
+(defun +jg-python-toggle-coverage-hook ()
+  (interactive)
+  (if (-contains? python-mode-hook #'python-coverage-overlay-mode)
+      (remove-hook 'python-mode-hook #'python-coverage-overlay-mode)
+    (add-hook 'python-mode-hook #'python-coverage-overlay-mode)
+    )
+  )
 
 
 ;;-- Footer

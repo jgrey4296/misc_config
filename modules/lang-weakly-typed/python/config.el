@@ -159,10 +159,6 @@
   :defer t
   :config
 
-  (add-hook! 'python-mode-hook :depth 50
-             #'python-coverage-overlay-mode
-             )
-
   (setq-hook! 'python-mode-hook
     python-coverage-default-file-name ".temp/coverage/coverage.xml"
     )

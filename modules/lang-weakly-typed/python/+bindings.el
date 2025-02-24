@@ -20,17 +20,16 @@
 (map! :map (python-mode-map python-ts-mode-map) ;; localleader
       :after python-mode
       :localleader
-      :desc "ts-mode swap" "TAB" #'+jg-python-swap-ts-mode
-      :desc "Ruff Format" "f" #'+jg-python-ruff-format
-      :desc "Start Pydoc" "p" #'+jg-python-start-pydoc
-      :desc "Summarize"   "\\" #'+jg-python-summarize
-      :desc "Coverage Refresh" "c" #'python-coverage-overlay-refresh
-      :desc "REPL"        "r" #'+jg-python/open-ipython-repl
-      :desc "debug"       "d" (cmd! (setq jg-python-dev-mode (not jg-python-dev-mode))
-                                  (message "Python Debug Mode: %s" jg-python-dev-mode))
-      :desc "track"       ";" #'py-pdbtrack-toggle-stack-tracking
-      :desc "breakpoint"  "b" #'+jg-python-breakpoint-line
-      :desc "Disassemble" "D" #'+jg-python-bytecode-dwim
+      :desc "ts-mode swap"     "TAB" #'+jg-python-swap-ts-mode
+      :desc "Ruff Format"      "f" #'+jg-python-ruff-format
+      :desc "Start Pydoc"      "p" #'+jg-python-start-pydoc
+      :desc "Summarize"        "\\" #'+jg-python-summarize
+      :desc "REPL"             "r" #'+jg-python/open-ipython-repl
+      :desc "track"            ";" #'py-pdbtrack-toggle-stack-tracking
+      :desc "breakpoint"       "b" #'+jg-python-breakpoint-line
+      :desc "Disassemble"      "D" #'+jg-python-bytecode-dwim
+      :desc "debug"            "d" (cmd! (setq jg-python-dev-mode (not jg-python-dev-mode))
+                                          (message "Python Debug Mode: %s" jg-python-dev-mode))
       )
 
 (map! :map (python-mode-map python-ts-mode-map) ;; localleader.imports
@@ -75,10 +74,13 @@
 
 (map! :map (python-mode-map python-ts-mode-map) ;; localleader.coverage
       :localleader
+      :desc "Coverage Refresh" "c" #'python-coverage-overlay-refresh
       :prefix ("C" . "Coverage")
       "o" #'python-coverage-overlay-mode
       "r" #'python-coverage-overlay-remove-all
       "RET" #'+jg-python-open-coverage-report
+      :desc "Coverage Refresh" "R" #'python-coverage-overlay-refresh
+      :desc "Toggle Coverage" "t" #'+jg-python-toggle-coverage-hook
       )
 
 (map! :map inferior-python-mode-map

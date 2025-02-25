@@ -27,6 +27,7 @@
   )
 
 (after! evil-ex
+  (defvar jg-tags-evil-ex-setup t)
   (evil-ex-define-cmd "ht[ag]"  #'librarian-tag-helm)
   (evil-ex-define-cmd "t[ag]"   #'librarian-tag-helm)
   (evil-ex-define-cmd "T[ag]"   #'librarian-tag-helm)

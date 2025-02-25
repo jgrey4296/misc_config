@@ -43,6 +43,11 @@
   (transient-append-suffix 'magit-fetch "-p" '("-t" "Fetch all tags" ("-t" "--tags")))
   (transient-append-suffix 'magit-pull "-r" '("-a" "Autostash" "--autostash"))
 
+  ;; A Depth toggle for custom submodule populate
+  (transient-append-suffix 'magit-submodule "-f" '("-d" "--depth"))
+  (transient-replace-suffix 'magit-submodule "p" '("p" jg-magit-submodule-populate))
+
+
   ;; An optimization that particularly affects macOS and Windows users: by
   ;; resolving `magit-git-executable' Emacs does less work to find the
   ;; executable in your PATH, which is great because it is called so frequently.

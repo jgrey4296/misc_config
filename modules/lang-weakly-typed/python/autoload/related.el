@@ -1,8 +1,10 @@
-;; workspace.el -*- lexical-binding: t; -*-
-(require 'macro-tools--related)
-(require 'carousel-minor-mode)
+;; related.el -*- lexical-binding: t; -*-
+(eval-when-compile
+  (require 'macro-tools--related)
+  (require 'carousel-minor-mode)
+  )
 
-;;;###autoload (autoload 'related-files-jg-python-project "lang-weakly-typed/python/autoload/workspace.el" nil t)
+;;;###autoload (autoload 'related-files-jg-python-project "lang-weakly-typed/python/autoload/related.el" nil t)
 (make-related! jg-python-project
   :files ((:impl (f-join root fparent2 (s-replace "test_" "" fname)) :when is-test)
           (:test (f-join fparent "__tests" (concat "test_" fname))   :when (not is-test))

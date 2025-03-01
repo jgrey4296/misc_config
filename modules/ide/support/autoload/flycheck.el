@@ -88,10 +88,8 @@ ie: if there errors, set it to error, else warnings, else info
 "
   (let* ((errors (flycheck-error-list-current-errors))
          (counts (flycheck-count-errors errors))
-         (lvl (cond ((alist-get 'error counts)
-                     'error)
-                    ((alist-get 'warning counts)
-                     'warning)
+         (lvl (cond ((alist-get 'error counts) 'error)
+                    ((alist-get 'warning counts) 'warning)
                     (t 'info)))
          )
     (flycheck-error-list-set-filter lvl)
@@ -99,12 +97,14 @@ ie: if there errors, set it to error, else warnings, else info
   )
 
 (defvar jg-flycheck-filter-hook nil)
+
 (defun +jg-flycheck-filter-by-level (err)
   (if-let* ((min-level flycheck-error-list-minimum-level)
             (min-severity (flycheck-error-level-severity min-level)))
       (>= (flycheck-error-level-severity (flycheck-error-level err)) min-severity)
     t)
   )
+
 (defun +jg-flycheck-error-list-apply-filters (errors)
   "Alternative `flycheck-error-list-apply-filter',
 to filter by registered filters in `jg-flycheck-filter-hook'.
@@ -122,7 +122,6 @@ returns a list of matching errors
                            ))
               errors)
   )
-
 
 ;;-- Footer
 ;; Copyright (C) 2025 john

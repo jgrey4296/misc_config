@@ -4,7 +4,6 @@
 
 (defer-load! jg-bindings-total "+bindings")
 
-
 (use-package! agentspeak-mode        :defer t)
 
 (use-package! instal-mode            :defer t)
@@ -15,11 +14,14 @@
 
 (use-package! clips-mode             :defer t)
 
-
 (use-package! ob-prolog
   :defer t
   :init
   (setq org-babel-prolog-command "swipl")
+  )
+
+(use-package! ob-clingo
+  :defer t
   )
 
 (use-package! ob-instal

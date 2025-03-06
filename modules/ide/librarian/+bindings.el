@@ -52,7 +52,7 @@
         :desc "Thesaurus"                  :n    "Q" #'librarian-words-synonyms
 
         :desc "Debug"                      :n    "?" #'librarian-debug
-        :desc "Install Docset"             :n    "0" #'librarian-docset-install
+        :desc "Install Docset"             :n    "0" #'librarian-docsets-install
         )
        )
       :i "s" #'self-insert-command

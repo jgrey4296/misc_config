@@ -1,6 +1,7 @@
 ;;; hooks.el -*- lexical-binding: t; -*-
 
 (defvar +modeline--old-bar-height nil)
+(defvar-local jg-dired-marked-count nil)
 
 ;;;###autoload
 (defun +indent-guides-disable-maybe-h ()
@@ -50,3 +51,18 @@ Meant for `doom-change-font-size-hook'."
         (setq doom-modeline-env--version
               (bound-and-true-p doom-modeline-load-string)))))
   (force-mode-line-update t))
+
+;;;###autoload
+(defun jg-ui-modeline-update-marked-count-h (wind)
+  "A hook for post-command-hook to update the count"
+  (when (eq major-mode 'dired-mode)
+    (let* ((marked (dired-get-marked-files nil nil nil t))
+           (len (cond ((eq (car-safe marked) t) 1)
+                      ((eq (length marked) 1) nil)
+                      (t (length marked))))
+           )
+      (setq-local jg-dired-marked-count len)
+      )
+    )
+  t
+  )

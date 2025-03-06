@@ -33,6 +33,13 @@
     )
   )
 
+(doom-modeline-def-segment jg-dired-marked
+  "Notifies how many files are marked in the buffer "
+  (when jg-dired-marked-count
+    (propertize (format " Marked: %d" jg-dired-marked-count) 'face (doom-modeline-face))
+    )
+  )
+
 (doom-modeline-def-modeline 'main-alt
   '(eldoc
     debug
@@ -45,11 +52,33 @@
     word-count ;; for things in doom-modeline-continuous-word-count-modes
     )
   '(
-
     compilation
     ;; indent-info
     ;; buffer-encoding
     major-mode
+    process
+    vbar
+    jg-repl
+    project-name
+    vcs ;; current branch
+    github
+    vbar
+    misc-info ;; global-mode-string contents
+    )
+  )
+
+(doom-modeline-def-modeline 'dired
+  '(eldoc
+    debug
+    modals
+    buffer-info ;; mode,state,name
+    jg-dired-marked
+    )
+  '(
+    compilation
+    ;; indent-info
+    ;; buffer-encoding
+    ;; major-mode
     process
     vbar
     jg-repl

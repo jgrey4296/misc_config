@@ -24,15 +24,36 @@
         doom-modeline-minor-modes t
         doom-modeline-indent-info t
         doom-modeline-buffer-encoding t
+        doom-modeline-env-enable-python nil
+        doom-modeline-mode-alist'(
+                                  (message-mode         . message)
+                                  (git-commit-mode      . message)
+                                  (magit-mode           . vcs)
+                                  (dashboard-mode       . dashboard)
+                                  (Info-mode            . info)
+                                  (image-mode           . media)
+                                  (pdf-view-mode        . pdf)
+                                  (org-src-mode         . org-src)
+                                  (paradox-menu-mode    . package)
+                                  (xwidget-webkit-mode  . minimal)
+                                  (git-timemachine-mode . timemachine)
+                                  (calc-mode            . calculator)
+                                  (calc-trail-mode      . calculator)
+                                  (circe-mode           . special)
+                                  (erc-mode             . special)
+                                  (dired-mode           . dired)
+                                  )
         )
 
+
   (add-to-list 'doom-modeline-mode-alist '(+doom-dashboard-mode . dashboard))
-  (add-hook    'after-setting-font-hook #'+modeline-resize-for-font-h)
-  (add-hook    'doom-load-theme-hook    #'doom-modeline-refresh-bars)
-  (add-hook    'magit-mode-hook         #'+modeline-hide-in-non-status-buffer-h)
+  (add-hook    'after-setting-font-hook          #'+modeline-resize-for-font-h)
+  (add-hook    'doom-load-theme-hook             #'doom-modeline-refresh-bars)
+  (add-hook    'magit-mode-hook                  #'+modeline-hide-in-non-status-buffer-h)
+  (add-hook    'pre-redisplay-functions          #'jg-ui-modeline-update-marked-count-h)
 
   (advice-add 'doom-modeline-set-modeline :after #'+jg-ui-modeline-record-ad)
-  (doom-modeline-set-modeline 'main-alt)
+  (doom-modeline-set-modeline 'main-alt t)
   )
 
 (use-package! hide-mode-line

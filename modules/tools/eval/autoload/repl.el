@@ -212,6 +212,16 @@ immediately after."
         (call-interactively #'evil-append-line)))
     ))
 
+;;;###autoload
+(defun +jg-eval-repl-process-name () ;; maybe[str]
+  (-when-let* ((buff (get-buffer +eval-repl-buffer-name))
+               (proc (get-buffer-process buff))
+               (name (process-name proc))
+               )
+    name
+    )
+  )
+
 ;;-- Footer
 ;; Copyright (C) 2024 john
 ;;

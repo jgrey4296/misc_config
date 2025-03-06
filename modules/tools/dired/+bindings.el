@@ -5,6 +5,7 @@
 (defvar jg-dired-mode-map (make-keymap))
 ;; (suppress-keymap jg-dired-mode-map)
 ;; (evil-make-intercept-map jg-dired-mode-map)
+(with-state! 'normal #'+jg-ivy-similar-buffer)
 
 (map! :leader
       "f t" #'+jg-list-trash
@@ -35,28 +36,29 @@
       )
 
 (map! :map jg-dired-mode-map ;; main
-      :n "?"                        #'+jg-dired-group-helper
-      :n ">"                        #'+jg-dired-tesseract
-      :n "DEL"                      #'dired-kill-subdir
-      :n "RET"                      #'dired-find-file
-      :nv "q"                       #'+jg-dired-kill-subdir-or-close-buffer
-      :n "!"                        #'dired-do-shell-command
-      :n "@"                        #'dired-do-async-shell-command
-      :n "#"                        #'+jg-dired-seq-command
-      :n "S"                        #'hydra-dired-quick-sort/body
-      :n "."                        #'dired-omit-mode
-      :n "n"                        #'evil-ex-search-next
-      :n "v"                        #'evil-visual-state
-      :n "g"                        #'revert-buffer
-      :n "$"                        #'dired-hide-subdir
-      :desc "Delete" :n "D"         #'+jg-dired-async-trash
-      :desc "Touch"  :n "="         #'+jg-dired-touch
-      :desc "Expand Subdir"  :n "i" #'+jg-dired-insert-subdir-maybe-recursive
-      :desc "Expand Marked"  :n "I" #'+jg-dired-insert-marked-subdir
-      :n "y"                        #'dired-copy-filename-as-kill
-      :n "Y" (cmd! (dired-copy-filename-as-kill 0))
-      :desc "Fd File"        :n  "s f" #'fd-dired
-
+                             :n "?"    #'+jg-dired-group-helper
+                             :n ">"    #'+jg-dired-tesseract
+                             :n "DEL"  #'dired-kill-subdir
+                             :n "RET"  #'dired-find-file
+                             :nv "q"   #'+jg-dired-kill-subdir-or-close-buffer
+                             :n "!"    #'dired-do-shell-command
+                             :n "@"    #'dired-do-async-shell-command
+                             :n "#"    #'+jg-dired-seq-command
+                             :n "S"    #'hydra-dired-quick-sort/body
+                             :n "."    #'dired-omit-mode
+                             :n "n"    #'evil-ex-search-next
+                             :n "v"    #'evil-visual-state
+                             :n "g"    #'revert-buffer
+                             :n "$"    #'dired-hide-subdir
+                             :n ","    #'+jg-ivy-similar-buffer--with-state-normal
+      :desc "Delete"         :n "D"    #'+jg-dired-async-trash
+      :desc "Touch"          :n "="    #'+jg-dired-touch
+      :desc "Expand Subdir"  :n "i"    #'+jg-dired-insert-subdir-maybe-recursive
+      :desc "Expand Marked"  :n "I"    #'+jg-dired-insert-marked-subdir
+                             :n "y"    #'dired-copy-filename-as-kill
+                             :n "Y"    (cmd! (dired-copy-filename-as-kill 0))
+      :desc "Fd File"        :n "s f"  #'fd-dired
+      :desc "Related"        :n "s \\" #'+jg-projects-find-related
       )
 
 (map! :map jg-dired-mode-map ;; mark

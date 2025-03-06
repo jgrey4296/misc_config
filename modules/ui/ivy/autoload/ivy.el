@@ -335,7 +335,6 @@ If ARG (universal argument), include all files, even hidden or compressed ones."
   (interactive)
   (counsel-compile (projectile-project-root)))
 
-
 ;;;###autoload
 (defun +ivy/git-grep-other-window-action ()
   "Open the current counsel-{ag,rg,git-grep} candidate in other-window."
@@ -343,3 +342,26 @@ If ARG (universal argument), include all files, even hidden or compressed ones."
   (ivy-set-action #'+ivy-git-grep-other-window-action)
   (setq ivy-exit 'done)
   (exit-minibuffer))
+
+;;;###autoload
+(defun +jg-ivy-similar-buffer ()
+  """ Use Ivy to select buffer of the same mode """
+  (interactive)
+  (let* ((curr-mode major-mode)
+         (proj (projectile-root-local default-directory))
+         (buffs (-keep #'(lambda (x)
+                           (when (equal curr-mode (buffer-local-value 'major-mode (get-buffer x)))
+                             (cons (or (buffer-file-name x)
+                                       (buffer-local-value 'default-directory x))
+                                   x)
+                             ))
+                       (buffer-list)))
+         )
+  (ivy-read (format "%s Buffers: " curr-mode)
+            buffs
+            :action #'(lambda (x) (switch-to-buffer (cdr x)))
+            :sort t
+            :caller 'jg-ivy-similar-buffer
+            )
+  )
+)

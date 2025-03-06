@@ -95,8 +95,6 @@
     )
   )
 
-
-
 (use-package! poetry
   :commands (poetry-venv-workon poetry-venv-deactivate poetry-update poetry-add)
   :init

@@ -29,9 +29,6 @@
 (speckler-add! eval ()
   '(pasp-mode   :fn +jg-pasp-eval)
   )
-
-;;-- specs
-
 (speckler-add! popup ()
   `(clingo
     (,(format "^\\*%s\\*" pasp-results-buffer-name) :side right :ttl 5 :width 0.4 :quit t :select nil :priority 50)
@@ -67,11 +64,10 @@
     ("\\.asl\\'" . agentspeak-mode)
     )
   )
-
 (speckler-add! babel ()
   '(logic
     (:name prolog     :lib ob-prolog :mode prolog)
-    (:name clingo     :lib ob-prolog :mode pasp)
+    (:name clingo     :lib ob-clingo :mode pasp)
     (:name ccalc      :lib ob-prolog :mode prolog)
     (:name instal     :lib ob-instal :mode instal)
     (:name z3         :lib ob-z3 :mode z3)
@@ -82,4 +78,9 @@
     (:name clips :lib ob-clips :mode clips-mode)
     )
   )
-;;-- end specs
+(speckler-add! whitespace-cleanup ()
+  `(prolog-mode
+    ,#'delete-trailing-whitespace
+    ,#'+jg-text-cleanup-whitespace
+    )
+  )

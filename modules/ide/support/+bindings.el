@@ -184,10 +184,9 @@
 ;; TODO
 (map! :leader
       :prefix ("h u 1" . "Treesit")
-      "k" #'jg-treesit-fontlock-level-up
-      "j" #'jg-treesit-fontlock-level-down
-      "r" #'jg-treesit-fontlock-recompute
-
+      :desc "Fontlock+" "k" #'jg-treesit-fontlock-level-up
+      :desc "Fontlock-" "j" #'jg-treesit-fontlock-level-down
+      :desc "Fonlock Recompute" "r" #'jg-treesit-fontlock-recompute
       )
 
 ;;-- end tree-sitter

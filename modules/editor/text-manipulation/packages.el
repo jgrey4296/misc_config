@@ -18,7 +18,7 @@
 (package! dtrt-indent)
 (package! adaptive-wrap)
 (package! indent-tools)
-
+(package! ws-butler)
 (package! accent)
 ;; (package! objed)
 (package! evil-textobj-column)

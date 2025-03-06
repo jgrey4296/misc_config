@@ -32,10 +32,11 @@
 ;;;###autoload
 (defun maybe-py-test-minor-mode ()
   (interactive)
-  (if (and (f-ext? (buffer-name) "py")
-           (s-matches? "test_" (f-base (buffer-name))))
-      (py-test-minor-mode 1)
-      )
+  (when (and (f-ext? (buffer-name) "py")
+             (s-matches? "test_" (f-base (buffer-name))))
+    (py-test-minor-mode 1)
+    (yas-activate-extra-mode 'py-test-minor-mode)
+    )
   )
 
 (defun py-test-copy-current-test ()

@@ -122,7 +122,7 @@
   )
 
 (speckler-add! lib-env ()
-  :override nil
+  :override t
   `(lsp
     :setup    #'(lambda (state &rest args)
                   (require 'lsp-mode)
@@ -139,7 +139,7 @@
     :stop     #'(lambda (state &rest args) (when lsp--last-active-workspaces
                                              (lsp-workspace-shutdown (car lsp--last-active-workspaces))))
     :teardown #'(lambda (state &rest args) (lsp-disconnect))
-    :modeline #'(lambda (state &rest args) "LSP")
+    :modeline #'(lambda (state &rest args) '(:eval lsp))
     )
   )
 

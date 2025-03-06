@@ -1,6 +1,12 @@
 ;;; editor/window-control/+bindings.el -*- lexical-binding: t; -*-
 
 (map! :leader
+      :desc "Transient Toggle"              "T"    #'jg-toggle-main
+      :desc "Project Find File"            "p RET" #'+jg-ui-tree/find-this-file
+      :desc "Choose modeline"              "h u 1" #'+jg-ui-modeline-choose
+      )
+
+(map! :leader
       :prefix ("w" . "Windows")
       ;; RET - workspace counsel
       :desc "Cleanup Frames"               "c"     #'+jg-ui-cleanup-frames
@@ -21,13 +27,6 @@
       :desc "Shrink Vertical"              "}"     #'shrink-window
        :desc "Toggle Layout"               "|"     #'+jg-ui-window-layout-toggle
        :desc "Rotate Windows"              "\\"    #'+jg-ui-window-rotate-forward
-      )
-
-(map! :leader
-      :desc "Transient Toggle"              "T"    #'jg-toggle-main
-      (:prefix "p"
-       :desc "Project Find File"            "RET" #'+jg-ui-tree/find-this-file
-       )
       )
 
 (map! :map jg-binding-vision-map

@@ -72,13 +72,11 @@
       highlight-parentheses-colors            '("black")
       highlight-parentheses-background-colors '("#60aa00" "yellow" "#da8548" "#d02b61")
 
-
       global-hl-line-modes '(bibtex-mode prog-mode text-mode conf-mode special-mode org-agenda-mode comint-mode)
       )
 ;;-- end highlighting
 
 ;;-- modeline
-;; We display project info in the modeline ourselves
 (setq projectile-dynamic-mode-line nil
       ;; Set these early so they don't trigger variable watchers
       doom-modeline-bar-width 3

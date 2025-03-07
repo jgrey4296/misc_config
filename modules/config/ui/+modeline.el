@@ -1,5 +1,6 @@
 ;; +modeline.el -*- mode: eLisp; lexical-binding: t; -*-
 
+
 (use-package! all-the-icons
   :disabled t)
 
@@ -52,8 +53,13 @@
   (add-hook    'magit-mode-hook                  #'+modeline-hide-in-non-status-buffer-h)
   (add-hook    'pre-redisplay-functions          #'jg-ui-modeline-update-marked-count-h)
 
+  (advice-add 'ws-butler-after-save          :around #'+modeline--inhibit-modification-hooks-a)
+  (advice-add 'doom-modeline-propertize-icon :around #'+modeline-disable-icon-in-daemon-a)
   (advice-add 'doom-modeline-set-modeline :after #'+jg-ui-modeline-record-ad)
-  (doom-modeline-set-modeline 'main-alt t)
+
+  (after! jg-modeline
+    (doom-modeline-set-modeline 'main-alt t)
+    )
   )
 
 (use-package! hide-mode-line

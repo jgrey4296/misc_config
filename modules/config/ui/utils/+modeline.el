@@ -94,3 +94,5 @@
   '(minor-modes)
   '()
   )
+
+(provide 'jg-modeline)

@@ -5,7 +5,9 @@
 (defun +jg-projects-find-related ()
   " Get related files or directories, if it exists, open it "
   (interactive)
-  (-when-let* ((buff (if (eq major-mode 'dired-mode) (+jg-projects-find-related-directory) (projectile--find-related-file (buffer-file-name))))
+  (-when-let* ((buff (if (eq major-mode 'dired-mode)
+                         (+jg-projects-find-related-directory)
+                       (projectile--find-related-file (buffer-file-name))))
                (buff-exists (f-exists? buff))
                (wind-fn (cond ((fboundp 'jg-workspaces-find-buff-fn)
                                jg-workspaces-find-buff-fn)
@@ -14,6 +16,7 @@
                               (t
                                #'+jg-workspace-default-new-window)))
                )
+    ;; TODO replace a visiable buffer of same kwd
     (funcall wind-fn buff)
     )
   )
@@ -32,6 +35,7 @@
         )
     ;; populate available
     (push `(:root . ,root) available)
+    ;; Defaults if theres no .related
     (unless read-related
         (when (f-exists? (f-join current "__tests"))            (push `(:local-tests . ,(f-join current "__tests")) available))
         (when (f-exists? (f-join root "docs"))                  (push `(:docs        . ,(f-join root "docs")) available))

@@ -90,7 +90,7 @@
       :lang 'python
       :start #'jg-py-mamba-start-env
       :stop  #'jg-py-mamba-stop-env
-      :modeline #'(lambda (state &rest args) (format "Mamba:%s" (car-safe args)))
+      :modeline #'(lambda (state &rest args) (format "M:%s" (car-safe args)))
       )
     )
   )

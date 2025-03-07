@@ -3,7 +3,9 @@
 (map! :leader
       :desc "Transient Toggle"              "T"    #'jg-toggle-main
       :desc "Project Find File"            "p RET" #'+jg-ui-tree/find-this-file
-      :desc "Choose modeline"              "h u 0" #'+jg-ui-modeline-choose
+      (:prefix "h u"
+       :desc "Choose modeline"              "0" #'+jg-ui-modeline-choose
+       )
       )
 
 (map! :leader

@@ -44,7 +44,7 @@
   (transient-append-suffix 'magit-pull "-r" '("-a" "Autostash" "--autostash"))
 
   ;; A Depth toggle for custom submodule populate
-  (transient-append-suffix 'magit-submodule "-f" '("-d" "--depth"))
+  ;; (transient-append-suffix 'magit-submodule "-f" '("-d" "--depth"))
   (transient-replace-suffix 'magit-submodule "p" '("p" jg-magit-submodule-populate))
 
 

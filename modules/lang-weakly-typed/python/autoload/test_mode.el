@@ -29,13 +29,17 @@
   :keymap (make-sparse-keymap)
   )
 
+(defun py-test-minor-activate-yas ()
+  (yas-activate-extra-mode 'py-test-minor-mode)
+  )
+(add-hook 'py-test-minor-mode-hook #'py-test-minor-activate-yas)
+
 ;;;###autoload
 (defun maybe-py-test-minor-mode ()
   (interactive)
   (when (and (f-ext? (buffer-name) "py")
              (s-matches? "test_" (f-base (buffer-name))))
     (py-test-minor-mode 1)
-    (yas-activate-extra-mode 'py-test-minor-mode)
     )
   )
 

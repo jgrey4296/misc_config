@@ -139,7 +139,7 @@
     :stop     #'(lambda (state &rest args) (when lsp--last-active-workspaces
                                              (lsp-workspace-shutdown (car lsp--last-active-workspaces))))
     :teardown #'(lambda (state &rest args) (lsp-disconnect))
-    :modeline #'(lambda (state &rest args) '(:eval lsp))
+    :modeline #'(lambda (state &rest args) '(:eval (doom-modeline-segment--lsp)))
     )
   )
 

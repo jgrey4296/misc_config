@@ -14,10 +14,14 @@
 (defun jg-python-font-lock-mod-h ()
   (font-lock-add-keywords nil
                           '(
-                            ("^\s+return "  (0 '(:background "mediumpurple4") t))
-                            ("^\s+def "     (0 '(:background "mediumpurple4") t))
-                            ("breakpoint()" (0 '(:background "Mediumvioletred") t))
-                            ("^type"        (0 '(:background "flycheck-error-list-id") t))
+                            ("\\btype\\b"        (0 '(:background "flycheck-error-list-id") t))
+                            ("^\s+def\\b"      (0 '(:background "mediumpurple4"        :foreground "black") t))
+                            ("\\bself\\."      (0 '(:background "slategray" :foregroud "black") t))
+                            ("\\bcase\\b"      (0 '(:background "mediumpurple2"        :foreground "black") t))
+                            ("\\bwith\\b"      (0 '(:background "mediumseagreen"       :foreground "black") t))
+                            ("^\s+raise\\b"    (0 '(:background "mediumvioletred"      :foreground "black") t))
+                            ("\\bbreakpoint()" (0 '(:background "mediumvioletred"      :foreground "black") t))
+                            ("^\s+return\\b"   (0 '(:background "mediumspringgreen"    :foreground "black") t))
                             )
                           )
   )

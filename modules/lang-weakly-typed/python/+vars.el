@@ -112,6 +112,7 @@
     )
   )
 (speckler-add! file-templates ()
+  :override t
   '(python
     ("LICENSE\\'"               :trigger "__license-acab"   :mode text-mode   :priority 100)
     ;;Configs:
@@ -127,7 +128,7 @@
 
     ;; Python:
     ("__init__\\.py\\'"      :trigger "__init"           :mode python-mode)
-    ("test_.+\\.py\\'"       :trigger "__pytest"         :mode python-mode)
+    ("test_.+\\.py\\'"       :trigger "__pytest"         :mode py-test-minor-mode)
     ("cli_.+\\.py\\'"        :trigger "__cli"            :mode python-mode)
     ("\\.pyi\\'"             :trigger "__interface"      :mode python-mode)
     ("\\.py\\'"              :trigger "__"               :mode python-mode :priority -99)

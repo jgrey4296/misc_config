@@ -15,7 +15,6 @@
     :group 'doom-modeline-faces)
 
   :config
-  (local-load! "utils/+modeline")
   (setq doom-modeline-enable-word-count t
         doom-modeline-continuous-word-count-modes '(markdown-mode gfm-mode org-mode text-mode)
         doom-modeline-project-name t
@@ -47,7 +46,7 @@
         )
 
 
-  (add-to-list 'doom-modeline-mode-alist '(+doom-dashboard-mode . dashboard))
+  (add-to-list 'doom-modeline-mode-alist          '(+doom-dashboard-mode . dashboard))
   (add-hook    'after-setting-font-hook          #'+modeline-resize-for-font-h)
   (add-hook    'doom-load-theme-hook             #'doom-modeline-refresh-bars)
   (add-hook    'magit-mode-hook                  #'+modeline-hide-in-non-status-buffer-h)
@@ -55,11 +54,8 @@
 
   (advice-add 'ws-butler-after-save          :around #'+modeline--inhibit-modification-hooks-a)
   (advice-add 'doom-modeline-propertize-icon :around #'+modeline-disable-icon-in-daemon-a)
-  (advice-add 'doom-modeline-set-modeline :after #'+jg-ui-modeline-record-ad)
+  (advice-add 'doom-modeline-set-modeline    :after #'+jg-ui-modeline-record-ad)
 
-  (after! jg-modeline
-    (doom-modeline-set-modeline 'main-alt t)
-    )
   )
 
 (use-package! hide-mode-line
@@ -67,3 +63,8 @@
   (add-hook 'completion-list-mode-hook #'hide-mode-line-mode)
   ;; (add-hook 'Man-mode-hook             #'hide-mode-line-mode)
   )
+
+(after! doom-modeline
+  (local-load! "utils/+modeline")
+  (doom-modeline-set-modeline 'main-alt t)
+)

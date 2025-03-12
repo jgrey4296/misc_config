@@ -120,4 +120,42 @@
   `(markdown-mode ,#'+markdown-flyspell-word-p)
   `(gfm-mode ,#'+markdown-flyspell-word-p)
   )
+(speckler-add! evil-ex ()
+  '(text-manip
+    ("hl"            . #'+jg-text-manipulation-ex-match-highlight)
+    ("hlc"           . #'evil-ex-match)
+
+    ("rev[erse]"     . #'+evil:reverse-lines)
+    ("l[ine]diff"    . #'evil-quick-diff)
+    ("ld"            . #'evil-quick-diff)
+
+    ("c[opy]"        . #'evil-copy)
+    ("m[ove]"        . #'evil-move)
+    ("d[elete]"      . #'evil-ex-delete)
+    ("y[ank]"        . #'evil-ex-yank)
+
+    ("j[oin]"        . #'evil-ex-join)
+
+    ("a[lign]"       . #'+jg-text-manipulation-ex-align-highlight)
+    ("A"             . #'+jg-text-manipulation-ex-expand-align-highlight)
+    (":"             . #'+jg-text-manipulation-ex-expand-align-highlight)
+    ("::"            . #'+jg-text-manipulation-ex-auto-align)
+    ("la"            . #'evil-align-left)
+    ("ra"            . #'evil-align-right)
+    ("ce[nter]"      . #'evil-align-center)
+    ("<"             . #'evil-shift-left)
+    (">"             . #'evil-shift-right)
+
+    ("s[ubstitute]"  . #'evil-ex-substitute)
+    ("S[ubstitute]"  . #'evil-ex-substitute)
+    ("sr"            . #'evil-ex-repeat-substitute)
+    ("srf"           . #'evil-ex-repeat-substitute-with-flags)
+
+    ("show-digraphs" . #'evil-ex-show-digraphs)
+    ("sor[t]"        . #'evil-ex-sort)
+
+    ("sel"           . #'+jg-text-manipulation-ex-expand-selection)
+    )
+  )
+
 ;;-- end specs

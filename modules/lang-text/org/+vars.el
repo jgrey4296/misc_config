@@ -369,4 +369,11 @@
 (speckler-add! treesit-lang ()
   '(org-mode . org)
   )
+(speckler-add! evil-ex ()
+  '(org
+    ("cap[ture]" . #'org-capture)
+    ("os"        . #'org-store-link)
+    ("oi"        . #'org-insert-last-stored-link)
+    )
+  )
 ;;-- end specs

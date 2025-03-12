@@ -94,4 +94,16 @@
   '(gitattributes "git@github.com:tree-sitter-grammars/tree-sitter-gitattributes.git")
   '(gitignore     "git@github.com:shunsambongi/tree-sitter-gitignore.git")
   )
+(speckler-add! evil-ex ()
+  '(git
+    ("gbrowse"     . #'+vc/browse-at-remote) ; show file/region in github/gitlab
+    ("gissues"     . #'forge-browse-issues)  ; show github issues
+    ("git"         . #'magit-status)         ; open magit status window
+    ("gstage"      . #'magit-stage)
+    ("gunstage"    . #'magit-unstage)
+    ("gblame"      . #'magit-blame)
+    ("grevert"     . #'git-gutter:revert-hunk)
+
+    )
+  )
 ;;-- end specs

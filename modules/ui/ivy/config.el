@@ -7,8 +7,6 @@
 
 (defer-load! (jg-evil-bindings jg-bindings-total) "+bindings")
 
-(defer-load! jg-evil-ex-bindings "+evil-ex")
-
 ;;-- ivy
 
 (use-package! ivy

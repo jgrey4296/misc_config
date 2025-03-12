@@ -90,4 +90,10 @@
     ("^\\*ivy-occur" :size 0.35 :ttl 0 :quit nil)
     )
   )
+(speckler-add! evil-ex ()
+  '(ivy
+    ("pg[rep]"   . #'+ivy:project-search)
+    ("pg[grep]d" . #'+ivy:project-search-from-cwd)
+    )
+  )
 ;;-- end specs

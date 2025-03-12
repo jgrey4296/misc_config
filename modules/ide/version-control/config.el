@@ -7,8 +7,6 @@
 
 (defer-load! jg-bindings-total "+bindings")
 
-(defer-load! (magit jg-evil-ex-bindings) "+evil-ex")
-
 (advice-add 'browse-at-remote--get-local-branch       :after-until #'+vc--fallback-to-master-branch-a)
 (advice-add 'browse-at-remote-get-url                 :around #'+vc-support-git-timemachine-a)
 (advice-add 'diff-hl-define-bitmaps                   :override #'+vc-gutter-define-thin-bitmaps-a)

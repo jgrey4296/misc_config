@@ -52,8 +52,6 @@
                                             )
                                         )
   )
-
-;;-- spec
 (speckler-add! popup ()
   '(ibuffer
     ("^\*Ibuffer\*$"         :side right  :ttl 5 :width  0.5 :quit nil :select t :priority 50)
@@ -73,4 +71,8 @@
                )
     )
   )
-;;-- end spec
+(speckler-add! evil-ex ()
+  '(ibuffer
+    ("buffers" . #'ibuffer)
+    )
+  )

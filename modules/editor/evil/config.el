@@ -5,8 +5,8 @@
 (local-load! "+spec-defs")
 
 (defer-load! (evil-collection evil-ex) "+evil-ex-setup")
-(defer-load! jg-bindings-core "+bindings") ;; -> jg-evil-bindings
 
+(defer-load! jg-bindings-core "+bindings") ;; -> jg-evil-bindings
 
 (use-package! evil
   :hook (doom-after-modules-config . evil-mode)
@@ -78,8 +78,8 @@
   ;;-- end hooks
 
   ;; Lazy load evil ex commands
-  (delq! 'evil-ex features)
-  (add-transient-hook! 'evil-ex (provide 'evil-ex))
+  ;; (delq! 'evil-ex features)
+  ;; (add-transient-hook! 'evil-ex (provide 'evil-ex))
   )
 
 (use-package! evil-easymotion

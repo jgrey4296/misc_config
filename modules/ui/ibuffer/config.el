@@ -4,7 +4,6 @@
 (local-load! "+spec-defs")
 (local-load! "+specs")
 (defer-load! (jg-bindings-total ibuffer) "+bindings")
-(defer-load! jg-evil-ex-bindings "+evil-ex")
 
 (advice-add 'ibuffer-find-file         :override #'+ibuffer--use-counsel-maybe-a)
 (advice-add 'ibuffer-do-sort-by-marked :before #'+ibuffer-populate-marked-list-for-sorting)

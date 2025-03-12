@@ -174,4 +174,10 @@ If set to `nil', disable all the above behaviors.")
     ("\\.js\\'" :trigger "__"   :mode javascript-mode   :priority 100)
     )
   )
+(speckler-add! evil-ex ()
+  '(web
+    ("enhtml"       . #'+web:encode-html-entities)
+    ("dehtml"       . #'+web:decode-html-entities)
+    )
+  )
 ;;-- end specs

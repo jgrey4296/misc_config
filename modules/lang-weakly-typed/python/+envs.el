@@ -76,6 +76,14 @@
      (librarian--envs-loc-root (librarian--envs-state-loc state)))
     (micromamba-activate (car rest))
     (setenv "CONDA_DEFAULT_ENV" (car rest))
+    (setenv "MYPYPATH" (string-join (list
+                                     (librarian--envs-loc-root (librarian--envs-state-loc state))
+                                     micromamba-env-current-prefix
+                                     "media/john/data/github/python/jgdv/"
+                                     )
+                                    ":"
+                                    ))
+    ;; TODO add paths of editable modules
     )
   (defun jg-py-mamba-stop-env (state &rest rest)
     (jg-py--exit-env-update-paths

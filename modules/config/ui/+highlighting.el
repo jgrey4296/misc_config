@@ -88,10 +88,6 @@
 
 (use-package! highlight-parentheses
   :defer t
-  :init
-  (add-hook! doom-first-buffer
-             #'global-highlight-parentheses-mode
-             )
   )
 
 (use-package! auto-highlight-symbol

@@ -9,8 +9,6 @@
 
 (defer-load! jg-bindings-core "+bindings" "+agenda-bindings")
 
-(defer-load! jg-evil-ex-bindings "+evil-ex")
-
 (use-package! org
   :defer-incrementally
   calendar find-func format-spec org-macs org-compat org-faces org-entities

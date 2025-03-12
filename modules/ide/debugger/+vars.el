@@ -11,3 +11,9 @@
     ("^\\*\\(?:trepanjs:\\(?:g\\|zsh\\|bash\\)db\\|pdb \\)" :size 20 :select nil :quit nil)
     )
   )
+
+(speckler-add! evil-ex ()
+  '(debugger
+    ("debug" . #'+debugger/start)
+    )
+  )

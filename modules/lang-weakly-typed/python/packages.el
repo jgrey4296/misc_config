@@ -24,6 +24,7 @@
 (package! conda)
 (package! poetry)
 (package! micromamba)
+(package! lsp-jedi)
 
 ;; Testing frameworks
 (package! python-pytest)
@@ -33,7 +34,6 @@
 ;; Import managements
 (package! pyimport)
 (package! py-isort)
-
 (package! pydoc)
 
 ;; babel

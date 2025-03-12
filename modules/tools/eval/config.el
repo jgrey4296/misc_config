@@ -5,9 +5,6 @@
 
 (defer-load! jg-bindings-total "+bindings")
 
-(defer-load! jg-evil-ex-bindings "+evil-ex")
-
-
 (use-package! quickrun
   :config
   (advice-add 'quickrun--outputter-replace-region :override #'+eval--quickrun-fix-evil-visual-region-a)

@@ -6,8 +6,6 @@
 
 (use-package! rainbow-mode
   :defer t
-  :init
-  (add-hook! 'prog-mode-hook 'rainbow-mode)
 )
 
 (use-package! rainbow-delimiters

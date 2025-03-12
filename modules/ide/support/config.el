@@ -26,8 +26,6 @@
 
 (defer-load! jg-bindings-total "+bindings")
 
-(defer-load! jg-evil-ex-bindings "+evil-ex")
-
 (advice-add '+eval--ensure-in-repl-buffer    :filter-return #'+jg-support-repl-fix-a)
 (advice-add '+jg-send-region-to-repl         :filter-args   #'+jg-support-send-repl-auto-line-a)
 

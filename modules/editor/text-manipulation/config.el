@@ -8,8 +8,6 @@
 
 (defer-load! jg-bindings-total "+bindings")
 
-(defer-load! jg-evil-ex-bindings "+evil-ex")
-
 (add-hook! 'doom-init-ui-hook :append #'+ligature-init-composition-table-h)
 
 (when (memq 'visual-line-mode text-mode-hook)

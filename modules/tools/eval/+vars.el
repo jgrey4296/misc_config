@@ -21,7 +21,6 @@ buffer rather than an overlay on the line at point or the minibuffer.")
       compilation-scroll-output 'first-error
       )
 
-
 (speckler-add! popup ()
   '(quickrun
     ("^\\*quickrun" :size 0.3 :ttl 0)
@@ -41,5 +40,12 @@ buffer rather than an overlay on the line at point or the minibuffer.")
     ;; counsel-compile-get-build-directories
     ;; counsel-compile-get-make-invocation
     ;; counsel-compile-get-make-help-invocations
+    )
+  )
+
+(speckler-add! evil-ex ()
+  '(eval
+    ("repl"        . #'+eval:repl)             ; invoke or send to repl
+    ("h[elp]"      . #'+evil:help)
     )
   )

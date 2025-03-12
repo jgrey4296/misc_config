@@ -6,8 +6,6 @@
 
 (defer-load! jg-bindings-total "+bindings")
 
-(defer-load! jg-evil-ex-bindings "+evil-ex")
-
 (advice-add 'elisp-get-var-docstring :around #'+emacs-lisp-append-value-to-eldoc-a)
 ;; Fixed indenter that intends plists sensibly.
 (advice-add 'calculate-lisp-indent :override #'+emacs-lisp--calculate-lisp-indent-a)
@@ -35,7 +33,6 @@
            ;; highlight defined, special variables & functions
            (when +emacs-lisp-enable-extra-fontification
              `((+emacs-lisp-highlight-vars-and-faces . +emacs-lisp--face)))))
-
 
   (add-hook! 'emacs-lisp-mode-hook
              #'flycheck-mode

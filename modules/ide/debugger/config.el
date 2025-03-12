@@ -5,8 +5,6 @@
 
 (defer-load! jg-total-bindings "+bindings")
 
-(defer-load! jg-evil-ex-bindings "+evil-ex")
-
 (advice-add 'realgud:run-process :override #'+debugger--realgud-open-in-other-window-a)
 (advice-add 'realgud:terminate   :after #'+debugger--cleanup-after-realgud-a)
 

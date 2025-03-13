@@ -44,3 +44,19 @@
     (_ (user-error "Unknown Python mode"))
     )
   )
+
+
+;;;###autoload
+(defun +jg-python-get-editable-locs ()
+  "Get the locations of editable packages in the current env,
+to update MYPYPATH with
+essentially:
+uv pip list -e -q --format json | jq .[].editable_project_location
+ "
+  (with-temp-buffer
+    (call-process "uv" nil t nil "pip" "list" "-e" "-q" "--format" "json")
+    (call-process-region nil nil "jq" t t t ".[].editable_project_location")
+    (replace-string "\"" "" nil (point-min) (point-max))
+    (string-lines (buffer-string) t nil)
+    )
+  )

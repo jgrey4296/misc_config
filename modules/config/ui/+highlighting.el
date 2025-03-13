@@ -87,8 +87,9 @@
   )
 
 (use-package! highlight-parentheses
-  :commands highlight-parentheses-mode
   :defer t
+  :init
+  (add-hook 'prog-mode-hook #'highlight-parentheses-mode)
   )
 
 (use-package! auto-highlight-symbol

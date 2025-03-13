@@ -3,7 +3,7 @@
 
 (use-package! hl-line
   :defer t
-  :hook (doom-first-file . global-hl-line-mode)
+  :hook (prog-mode . hl-line-mode)
   :config
   (after! evil
     ;; hooks for evil state entry hooks to change hl-line colour

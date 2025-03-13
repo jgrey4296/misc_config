@@ -31,6 +31,7 @@
   )
 
 (use-package! ws-butler
+  :hook (prog-mode . ws-butler-mode)
   :preface
   (remove-hook 'doom-first-buffer-hook #'ws-butler-global-mode)
   :config

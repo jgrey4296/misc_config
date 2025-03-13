@@ -33,7 +33,7 @@
   :fn #'rainbow-mode
   )
 (transient-toggle-hook! hl-line ()
-  "Hl-line hook"
+  "Hl-line"
   :key "h"
   :global t
   :hook '(prog-mode text-mode)

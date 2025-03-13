@@ -16,6 +16,7 @@
 
 (use-package! eldoc
   :defer t
+  :hook (prog-mode . eldoc-mode)
   :config
   (global-eldoc-mode -1)
   (setq eldoc-idle-delay 0.5

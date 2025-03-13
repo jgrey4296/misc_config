@@ -7,6 +7,7 @@
 ;;-- end Header
 
 (use-package! code-shy-minor-mode
+  :hook (prog-mode . code-shy-minor-mode)
   :init
   (setq code-shy-fold-patterns (list "%s-- %s %s" "%s-- %s %s"))
 )

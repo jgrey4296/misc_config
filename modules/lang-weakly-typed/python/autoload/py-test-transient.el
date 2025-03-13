@@ -105,5 +105,3 @@
 (defun +jg-python-test-extra-args (args)
   (plist-put args :args (transient-args '+jg-python-pytest-dispatch))
   )
-
-(advice-add 'python-pytest--run :filter-args #'+jg-python-test-extra-args)

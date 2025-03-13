@@ -11,11 +11,12 @@
 
 (defer-load! jg-bindings-total "+bindings")
 
-(advice-add 'python-shell-calculate-command :override #'+jg-python-shell-calculate-command)
-(advice-add 'py--pdbtrack-get-source-buffer :override #'+jg-python-pdbtrack-silence)
-(advice-add 'py--pdbtrack-track-stack-file  :override #'+jg-python-py--pdbtrack-track-stack-file)
-(advice-add 'python-ts-mode                 :around   #'+jg-python-override-python-ts)
-(advice-add 'python-ts-mode                 :after #'python-ts-extend)
+(advice-add 'python-shell-calculate-command :override    #'+jg-python-shell-calculate-command)
+(advice-add 'py--pdbtrack-get-source-buffer :override    #'+jg-python-pdbtrack-silence)
+(advice-add 'py--pdbtrack-track-stack-file  :override    #'+jg-python-py--pdbtrack-track-stack-file)
+(advice-add 'python-ts-mode                 :around      #'+jg-python-override-python-ts)
+(advice-add 'python-ts-mode                 :after       #'python-ts-extend)
+(advice-add 'python-pytest--run             :filter-args #'+jg-python-test-extra-args)
 
 (use-package! python
   :config

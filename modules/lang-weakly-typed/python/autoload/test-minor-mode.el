@@ -1,4 +1,4 @@
-;;; test_mode.el -*- lexical-binding: t; no-byte-compile: t; -*-
+;;; test-minor-mode.el -*- lexical-binding: t; no-byte-compile: t; -*-
 ;;-- header
 ;;
 ;; Copyright (C) 2023 John Grey

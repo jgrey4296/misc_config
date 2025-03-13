@@ -1,5 +1,7 @@
 ;;; editor/snippets/autoload/snippets.el -*- lexical-binding: t; -*-
 
+(defvar +snippet--current-snippet-uuid nil)
+
 (defun +snippets--remove-p (x y)
   (and (equal (yas--template-key x) (yas--template-key y))
        (file-in-directory-p (yas--template-get-file x) doom-emacs-dir)))
@@ -29,30 +31,33 @@ ignored. This makes it easy to override built-in snippets with private ones."
                    return it)
         (car choices)))))
 
-(defun +snippet--get-template-by-uuid (uuid &optional mode)
+(defun +snippet--get-template-by-uuid (uuid &rest modes)
   "Look up the template by uuid in child-most to parent-most mode order.
 Finds correctly active snippets from parent modes (based on Yas' logic)."
-  (cl-loop with mode = (or mode major-mode)
-           for active-mode in (yas--modes-to-activate mode)
+  (cl-loop with mode-lst = (or modes (list major-mode))
+           for active-mode in (apply #'-concat (mapcar #'yas--modes-to-activate mode-lst))
            if (gethash active-mode yas--tables)
            if (gethash uuid (yas--table-uuidhash it))
-           return it))
+           return it
+           )
+  )
 
 ;;;###autoload
-(defun +snippet-expand (uuid &optional col)
+(defun +snippet-expand (uuid &optional col &rest modes)
   " Expand a snippet by uuid "
   (interactive "M")
-  (when-let ((snippet (+snippet--get-template-by-uuid uuid))
+  (when-let ((snippet (apply #'+snippet--get-template-by-uuid uuid modes))
              (yas--indent-original-column (or yas--indent-original-column col))
              )
-        (message "Expanding: %s" uuid)
-        (yas-expand-snippet snippet)
+    (yas-expand-snippet snippet)
     )
+  ;; Return empty str because yas tries to insert anything returned
   ""
   )
 
 ;;;###autoload
 (defun +snippet--completing-read-uuid (prompt all-snippets &rest args)
+  "Snippet completion"
   (plist-get
    (text-properties-at
     0 (apply #'completing-read prompt
@@ -79,7 +84,6 @@ Finds correctly active snippets from parent modes (based on Yas' logic)."
   (set-buffer-modified-p nil)
   (kill-current-buffer))
 
-(defvar +snippet--current-snippet-uuid nil)
 
 ;;;###autoload
 (defun +snippet--edit ()

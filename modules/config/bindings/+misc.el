@@ -26,6 +26,7 @@
 
 (setq esc-map (make-keymap)
       lisp-mode-shared-map (make-sparse-keymap)
+      ctl-x-map jg-ctl-x-map
       )
 ;; (use-global-map global-map)
 

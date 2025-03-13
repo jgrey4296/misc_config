@@ -4,7 +4,10 @@
 
 (defer-load! (evil faster-whichkey) "+bindings" "+misc") ;; -> jg-bindings-core
 
-(after! (jg-evil-bindings which-key jg-bindings-core) (provide 'jg-bindings-total))
+(after! (jg-evil-bindings which-key jg-bindings-core)
+  (provide 'jg-bindings-total)
+  (setq mode-line-format "Core Bindings Loaded")
+  )
 
 (use-package! faster-whichkey
   :after (general)

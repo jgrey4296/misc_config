@@ -21,6 +21,15 @@
          )
 #+end_src
 
+* bound-and-true-p
+#+begin_src emacs-lisp :results output
+(bound-and-true-p jg-test)
+(bound-and-true-p evil-mode)
+#+end_src
+
+#+RESULTS:
+
+
 * backquote-list*-macro
 #+begin_src emacs-lisp
 (backquote-list* 'a 'b 'c) => (a b . c)

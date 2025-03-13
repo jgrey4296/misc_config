@@ -87,6 +87,7 @@
   )
 
 (use-package! highlight-parentheses
+  :commands highlight-parentheses-mode
   :defer t
   )
 

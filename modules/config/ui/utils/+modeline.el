@@ -95,4 +95,6 @@
   '()
   )
 
-(provide 'jg-modeline)
+(defun +jg-ui-reset-modeline-default ()
+  (doom-modeline-set-modeline 'main-alt t)
+  )

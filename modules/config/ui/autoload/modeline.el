@@ -16,7 +16,7 @@
       (add-to-list 'doom-modeline--formatters (s-chop-prefixes '("doom-modeline-format--") (symbol-name sym)))
       )
     )
-  (setq doom-modeline--formatters (sort doom-modeline--#'string-lessp))
+  (setq doom-modeline--formatters (sort doom-modeline--formatters #'string-lessp))
   )
 
 ;;;###autoload

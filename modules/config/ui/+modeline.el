@@ -1,6 +1,5 @@
 ;; +modeline.el -*- mode: eLisp; lexical-binding: t; -*-
 
-
 (use-package! all-the-icons
   :disabled t)
 
@@ -18,7 +17,6 @@
   (setq doom-modeline-enable-word-count t
         doom-modeline-continuous-word-count-modes '(markdown-mode gfm-mode org-mode text-mode)
         doom-modeline-project-name t
-        doom-modeline--debug-dap t
         doom-modeline-repl t
         doom-modeline-lsp t
         doom-modeline-minor-modes t
@@ -45,7 +43,6 @@
                                   )
         )
 
-
   (add-to-list 'doom-modeline-mode-alist          '(+doom-dashboard-mode . dashboard))
   (add-hook    'after-setting-font-hook          #'+modeline-resize-for-font-h)
   (add-hook    'doom-load-theme-hook             #'doom-modeline-refresh-bars)
@@ -56,6 +53,9 @@
   (advice-add 'doom-modeline-propertize-icon :around #'+modeline-disable-icon-in-daemon-a)
   (advice-add 'doom-modeline-set-modeline    :after #'+jg-ui-modeline-record-ad)
 
+  (local-load! "utils/+modeline")
+
+  (add-hook 'speckler-hook #'+jg-ui-reset-modeline-default)
   )
 
 (use-package! hide-mode-line
@@ -63,8 +63,3 @@
   (add-hook 'completion-list-mode-hook #'hide-mode-line-mode)
   ;; (add-hook 'Man-mode-hook             #'hide-mode-line-mode)
   )
-
-(after! doom-modeline
-  (local-load! "utils/+modeline")
-  (doom-modeline-set-modeline 'main-alt t)
-)

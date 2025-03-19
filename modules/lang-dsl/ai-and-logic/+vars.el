@@ -79,8 +79,8 @@
     )
   )
 (speckler-add! whitespace-cleanup ()
-  `(prolog-mode
-    ,#'delete-trailing-whitespace
-    ,#'+jg-text-cleanup-whitespace
+  '(prolog-mode
+    #'delete-trailing-whitespace
+    #'+jg-text-cleanup-whitespace
     )
   )

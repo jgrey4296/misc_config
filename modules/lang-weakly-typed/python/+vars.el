@@ -87,15 +87,76 @@
     :project-file "pyproject.toml"
     :test-dir "__tests"
     :test-prefix "test_"
-    :related-files-fn ,#'related-files-jg-python-project
+    :related-files-fn #'related-files-jg-python-project
     )
-  '(python-poetry ("poetry.lock")        :project-file "poetry.lock" :compilation-dir nil :configure nil :compile "poetry build" :test "poetry run python -m unittest discover" :install nil :package nil :run nil :test-suffix "_test" :test-prefix "test_")
-  '(python-pipenv ("Pipfile")            :project-file "Pipfile" :compilation-dir nil :configure nil :compile "pipenv run build" :test "pipenv run test" :install nil :package nil :run nil :test-suffix "_test" :test-prefix "test_")
-  '(python-tox ("tox.ini")               :project-file "tox.ini" :compilation-dir nil :configure nil :compile "tox -r --notest" :test "tox" :install nil :package nil :run nil :test-suffix "_test" :test-prefix "test_")
-  '(python-pkg ("setup.py")              :project-file "setup.py" :compilation-dir nil :configure nil :compile "python setup.py build" :test "python -m unittest discover" :install nil :package nil :run nil :test-suffix "_test" :test-prefix "test_")
-  '(python-pip ("requirements.txt")      :project-file "requirements.txt" :compilation-dir nil :configure nil :compile "python setup.py build" :test "python -m unittest discover" :install nil :package nil :run nil :test-suffix "_test" :test-prefix "test_")
-  '(python-basic ("setup.py")            :project-file "setup.py")
-  '(django ("manage.py")                 :project-file "manage.py" :compilation-dir nil :configure nil :compile "python manage.py runserver" :test "python manage.py test" :install nil :package nil :run nil :test-suffix "_test" :test-prefix "test_")
+  '(python-poetry ("poetry.lock")
+    :project-file "poetry.lock"
+    :compilation-dir nil
+    :configure nil
+    :compile "poetry build"
+    :test "poetry run python -m unittest discover"
+    :install nil
+    :package nil
+    :run nil
+    :test-suffix "_test"
+    :test-prefix "test_")
+  '(python-pipenv ("Pipfile")
+    :project-file "Pipfile"
+    :compilation-dir nil
+    :configure nil
+    :compile "pipenv run build"
+    :test "pipenv run test"
+    :install nil
+    :package nil
+    :run nil
+    :test-suffix "_test"
+    :test-prefix "test_")
+  '(python-tox ("tox.ini")
+    :project-file "tox.ini"
+    :compilation-dir nil
+    :configure nil
+    :compile "tox -r --notest"
+    :test "tox"
+    :install nil
+    :package nil
+    :run nil
+    :test-suffix "_test"
+    :test-prefix "test_")
+  '(python-pkg ("setup.py")
+    :project-file "setup.py"
+    :compilation-dir nil
+    :configure nil
+    :compile "python setup.py build"
+    :test "python -m unittest discover"
+    :install nil
+    :package nil
+    :run nil
+    :test-suffix "_test"
+    :test-prefix "test_")
+  '(python-pip ("requirements.txt")
+    :project-file "requirements.txt"
+    :compilation-dir nil
+    :configure nil
+    :compile "python setup.py build"
+    :test "python -m unittest discover"
+    :install nil
+    :package nil
+    :run nil
+    :test-suffix "_test"
+    :test-prefix "test_")
+  '(python-basic ("setup.py")
+    :project-file "setup.py")
+  '(django ("manage.py")
+    :project-file "manage.py"
+    :compilation-dir nil
+    :configure nil
+    :compile "python manage.py runserver"
+    :test "python manage.py test"
+    :install nil
+    :package nil
+    :run nil
+    :test-suffix "_test"
+    :test-prefix "test_")
   )
 (speckler-add! popup ()
   '(python
@@ -174,15 +235,15 @@
     )
   )
 (speckler-add! whitespace-cleanup ()
-  `(python-mode
-    ,#'+jg-python-cleanup-ensure-newline-before-def
-    ,#'delete-trailing-whitespace
-    ,#'+jg-text-cleanup-whitespace
+  '(python-mode
+    #'+jg-python-cleanup-ensure-newline-before-def
+    #'delete-trailing-whitespace
+    #'+jg-text-cleanup-whitespace
     )
-  `(python-ts-mode
-    ,#'+jg-python-cleanup-ensure-newline-before-def
-    ,#'delete-trailing-whitespace
-    ,#'+jg-text-cleanup-whitespace
+  '(python-ts-mode
+    #'+jg-python-cleanup-ensure-newline-before-def
+    #'delete-trailing-whitespace
+    #'+jg-text-cleanup-whitespace
     )
   )
 (speckler-add! ligatures ()
@@ -237,7 +298,9 @@
     )
   )
 (speckler-add! compile-commands ()
-  '(python +jg-python-get-commands +jg-python-solo-file-run)
+  '(python
+    #'+jg-python-get-commands
+    #'+jg-python-solo-file-run)
   )
 (speckler-add! repl ()
   '(python-mode
@@ -292,7 +355,7 @@
   py-fontify-shell-buffer-p     t
   py-split-window-on-execute    t
   ;; my settings
-  jg-python-current-interpreter                         jg-python-stock-repl
+  jg-python-current-interpreter jg-python-stock-repl
   jg-python-repl-start-file (expand-file-name "python/repl_startup.py " templates-loc)
   jg-python-coverage-file-loc ".temp/coverage"
   )

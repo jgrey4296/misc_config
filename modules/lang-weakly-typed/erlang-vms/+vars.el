@@ -51,8 +51,8 @@
   )
 (speckler-add! lookup-handler ()
   `(elixir-mode
-    :definition    ,#'alchemist-goto-definition-at-point
-    :documentation ,#'alchemist-help-search-at-point
+    :definition    #'alchemist-goto-definition-at-point
+    :documentation #'alchemist-help-search-at-point
     )
   )
 (speckler-add! repl ()

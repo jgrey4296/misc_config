@@ -11,11 +11,11 @@ lua-language-server.")
 
 (speckler-add! lookup-handler ()
   `(lua-mode
-    :documentation ,#'lua-search-documentation
+    :documentation #'lua-search-documentation
     )
   `(fennel-mode
-    :definition ,#'fennel-find-definition
-    :documentation ,#'fennel-show-documentation
+    :definition    #'fennel-find-definition
+    :documentation #'fennel-show-documentation
     )
   )
 

@@ -77,10 +77,10 @@
     )
   )
 (speckler-add! whitespace-cleanup ()
-  `(emacs-lisp-mode
-    ,#'delete-trailing-whitespace
-    ,#'+jg-lisp-cleanup-ensure-newline
-    ,#'+jg-text-cleanup-whitespace)
+  '(emacs-lisp-mode
+    #'delete-trailing-whitespace
+    #'+jg-lisp-cleanup-ensure-newline
+    #'+jg-text-cleanup-whitespace)
   )
 (speckler-add! lookup-url ()
   '(lisp
@@ -90,16 +90,16 @@
   )
 (speckler-add! lookup-handler ()
   `((emacs-lisp-mode lisp-interaction-mode helpful-mode)
-    :definition    ,#'+emacs-lisp-lookup-definition
-    :documentation ,#'+emacs-lisp-lookup-documentation
+    :definition    #'+emacs-lisp-lookup-definition
+    :documentation #'+emacs-lisp-lookup-documentation
     )
   '((racket-mode racket-repl-mode)
-    :definition    ,#'+racket-lookup-definition
-    :documentation ,#'+racket-lookup-documentation
+    :definition    #'+racket-lookup-definition
+    :documentation #'+racket-lookup-documentation
     )
   '(inferior-emacs-lisp-mode
-    :definition    ,#'+emacs-lisp-lookup-definition
-    :documentation ,#'+emacs-lisp-lookup-documentation
+    :definition    #'+emacs-lisp-lookup-definition
+    :documentation #'+emacs-lisp-lookup-documentation
     )
   )
 (speckler-add! ligatures ()

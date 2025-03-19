@@ -117,8 +117,8 @@
     )
   )
 (speckler-add! flyspell-predicate ()
-  `(markdown-mode ,#'+markdown-flyspell-word-p)
-  `(gfm-mode ,#'+markdown-flyspell-word-p)
+  `(markdown-mode #'+markdown-flyspell-word-p)
+  `(gfm-mode      #'+markdown-flyspell-word-p)
   )
 (speckler-add! evil-ex ()
   '(text-manip

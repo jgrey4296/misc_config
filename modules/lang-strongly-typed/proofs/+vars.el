@@ -27,9 +27,9 @@
   )
 (speckler-add! lookup-handler ()
   `(company-coq-mode
-    :definition ,#'company-coq-jump-to-definition
-    :references ,#'company-coq-grep-symbol
-    :documentation ,#'company-coq-doc
+    :definition    #'company-coq-jump-to-definition
+    :references    #'company-coq-grep-symbol
+    :documentation #'company-coq-doc
     )
   )
 (speckler-add! auto-modes ()

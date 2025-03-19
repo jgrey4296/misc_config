@@ -8,5 +8,6 @@
   )
 
 (speckler-add! compile-commands ()
-  '(graphiz-dot-mode +jg-dot-get-commands)
+  '(graphiz-dot-mode
+    #'+jg-dot-get-commands)
   )

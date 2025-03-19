@@ -168,7 +168,7 @@
   '(android-mode android-mode)
   )
 (speckler-add! compile-commands ()
-  '(jvm +jg-jvm-get-gradle-commands)
+  '(jvm #'+jg-jvm-get-gradle-commands)
   )
 (speckler-add! babel ()
   '(jvm

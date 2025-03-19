@@ -97,7 +97,7 @@
 ;;-- specs
 (speckler-add! popup ()
   `(diff
-    ("^\\*diff-hl" :select nil :size ,#'+popup-shrink-to-fit)
+    ("^\\*diff-hl" :select nil :size #'+popup-shrink-to-fit)
     )
   )
 

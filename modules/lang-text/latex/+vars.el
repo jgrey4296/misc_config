@@ -131,7 +131,7 @@
     )
   )
 (speckler-add! compile-commands ()
-  '(latex +jg-latex-get-commands)
+  '(latex #'+jg-latex-get-commands)
   )
 (speckler-add! babel ()
   '(latex

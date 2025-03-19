@@ -14,8 +14,7 @@ buffer rather than an overlay on the line at point or the minibuffer.")
 (setq eval-expression-print-length nil
       eval-expression-print-level  nil)
 
-(setq counsel-compile-root-functions (append counsel-compile-root-functions
-                                             `(,#'+jg-eval--compile-root-fallback))
+(setq counsel-compile-root-functions (append counsel-compile-root-functions (list #'+jg-eval--compile-root-fallback))
       compilation-always-kill t       ; kill compilation process before starting another
       compilation-ask-about-save nil  ; save all buffers on `compile'
       compilation-scroll-output 'first-error
@@ -35,11 +34,11 @@ buffer rather than an overlay on the line at point or the minibuffer.")
 
 (speckler-add! compile-commands ()
   '(default
-    +jg-workspaces-get-doot-commands
-    ;; counsel-compile-get-filtered-history
-    ;; counsel-compile-get-build-directories
-    ;; counsel-compile-get-make-invocation
-    ;; counsel-compile-get-make-help-invocations
+    #'+jg-workspaces-get-doot-commands
+    ;; #'counsel-compile-get-filtered-history
+    ;; #'counsel-compile-get-build-directories
+    ;; #'counsel-compile-get-make-invocation
+    ;; #'counsel-compile-get-make-help-invocations
     )
   )
 

@@ -25,7 +25,7 @@
 
 ;;-- specs
 (speckler-add! compile-commands ()
-  '(rust +jg-rust-get-cargo-commands)
+  '(rust #'+jg-rust-get-cargo-commands)
   )
 (speckler-add! fold ()
   `(rust

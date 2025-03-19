@@ -16,7 +16,7 @@
     )
   )
 (speckler-add! compile-commands ()
-  '(rst +jg-rst-get-commands)
+  '(rst #'+jg-rst-get-commands)
   )
 (speckler-add! treesit-lang ()
   '(rst-mode . rst)

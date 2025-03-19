@@ -287,16 +287,16 @@
   )
 (speckler-add! lookup-handler ()
   `(org-mode
-    :definition ,#'+org-lookup-definition-handler
-    :references ,#'+org-lookup-references-handler
-    :documentation ,#'+org-lookup-documentation-handler
+    :definition    #'+org-lookup-definition-handler
+    :references    #'+org-lookup-references-handler
+    :documentation #'+org-lookup-documentation-handler
     )
   )
 (speckler-add! whitespace-cleanup ()
   `(org-mode
-    ,#'delete-trailing-whitespace
-    ;; ,#'+jg-org-clean-heading-spaces
-    ,#'+jg-text-cleanup-whitespace
+   #'delete-trailing-whitespace
+   ;; #'+jg-org-clean-heading-spaces
+   #'+jg-text-cleanup-whitespace
     )
   )
 (speckler-add! popup ()

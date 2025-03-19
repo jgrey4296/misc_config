@@ -17,7 +17,7 @@
 
 (speckler-add! lookup-handler ()
   `(gdscript-mode
-    :documentation ,#'gdscript-docs-browse-symbol-at-point
+    :documentation #'gdscript-docs-browse-symbol-at-point
     )
   )
 

@@ -50,7 +50,6 @@
 (use-package! toml-mode
   :commands toml-mode
   :config
-  ;; toml mode is derived from conf-mode
 
   (add-hook! 'toml-mode-hook :depth 99
              #'abbrev-mode
@@ -58,8 +57,12 @@
              )
 
   (setq-hook! 'toml-mode-hook
-    outline-regexp "\[\[?[a-zA-Z0-9\.]+\]?\]"
-    outline-heading-end-regexp "\n"
+    outline-regexp (rx (or (: (+ "[") (+? nonl) (+ "]"))
+                           (: (+? nonl) "=" (+ space) "["
+                              (or (: (+? space) (syntax comment-start))
+                                  line-end))))
+    outline-heading-end-regexp (rx (or (: (syntax comment-start)) line-end))
+    outline-level #'jg-toml-outline-level
     )
   )
 

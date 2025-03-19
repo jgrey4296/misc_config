@@ -12,7 +12,8 @@
 (speckler-new-hook! whitespace-cleanup (key val)
   "Register local whitespace cleanup functions"
   :struct '(list fn)
-  (setq-local jg-text-whitespace-clean-hook (ensure-list val))
+  (setq-local jg-text-whitespace-clean-hook
+              (mapcar #'upfun! (ensure-list val)))
   )
 
 (speckler-new-hook! ligatures (key val)
@@ -47,5 +48,5 @@
 
 (speckler-new-hook! flyspell-predicate (key val)
   "Set local flyspec checkers"
-  (setq-local flyspell-generic-check-word-predicate val)
+  (setq-local flyspell-generic-check-word-predicate (upfun! val))
   )

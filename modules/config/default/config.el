@@ -60,7 +60,9 @@
 
 (use-package! s)
 
-(use-package! macro-tools)
+(use-package! macro-tools
+  :autoload upfun!
+  )
 
 (local-load! "+spec-defs")
 (local-load! "+vars")

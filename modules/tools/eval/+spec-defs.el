@@ -1,6 +1,7 @@
 ;;; +spec-defs.el -*- lexical-binding: t; -*-
 
 (defvar +eval-repls nil "Stores handlers to run repls")
+
 (defvar +eval-handlers nil "Stores handlers to eval buffers")
 
 (cl-defstruct (repl-handler)
@@ -18,7 +19,6 @@
   (fn    nil :type lambda :doc (lambda start end))
   (indirect nil :Type lambda)
   )
-
 
 (speckler-new! repl (key val)
   "Registers repl handlers"
@@ -42,9 +42,9 @@
         )
   )
 
-(speckler-new! compile-commands (key val)
+(speckler-new! compile-commands (key fns)
   "Register commands for trying to compile projects. Functions return strings of commands"
   :target counsel-compile-local-builds
   :loop 'append
-  val
+  (mapcar #'upfun! (ensure-list fns))
   )

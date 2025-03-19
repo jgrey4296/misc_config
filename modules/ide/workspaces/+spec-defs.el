@@ -4,7 +4,7 @@
   "applys a list of descriptions to `projectile--build-project-plist`"
   :target projectile-project-types
   :loop 'collect
-  `(,key . ,(apply #'projectile--build-project-plist val))
+  (list key (apply #'projectile--build-project-plist (mapcar #'upfun! val)))
   )
 
 (speckler-new! project-ignored (key val)

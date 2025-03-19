@@ -73,10 +73,10 @@
     )
   )
 (speckler-add! whitespace-cleanup ()
-  `(bibtex-mode
-    ,#'librarian--biblio-clean-ensure-newline-before-def
-    ,#'delete-trailing-whitespace
-    ,#'+jg-text-cleanup-whitespace
+  '(bibtex-mode
+    #'librarian--biblio-clean-ensure-newline-before-def
+    #'delete-trailing-whitespace
+    #'+jg-text-cleanup-whitespace
     )
   )
 (speckler-add! auto-modes ()
@@ -97,6 +97,6 @@
   '(bibtex        "git@github.com:latex-lsp/tree-sitter-bibtex.git")
   )
 (speckler-add! compile-commands ()
-  '(bibtex +jg-bibtex-get-commands)
+  '(bibtex #'+jg-bibtex-get-commands)
   )
 ;;-- end specs

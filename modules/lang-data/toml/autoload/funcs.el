@@ -32,3 +32,17 @@
     (goto-char (match-end 0))
     )
   )
+
+;;;###autoload
+(defun jg-toml-outline-level ()
+  " Toml levels:
+1: ^[?[.+?]]?
+2: ^.+? = [$
+"
+  (cond ((looking-at-p (rx (+? any) "=" (+ space) "[" line-end))
+         2)
+        ((looking-at-p (rx line-start "["))
+         1)
+        (t 3)
+        )
+  )

@@ -12,7 +12,13 @@
   :override nil
   :struct '(id-sym actiontriple*)
   :loop 'do
-  (ivy-add-actions key vals)
+  (ivy-add-actions key
+                   (mapcar (lambda (x)
+                             (cl-destructuring-bind (key fn name) x
+                                 (list key (upfun! fn) name))
+                             )
+                           vals)
+                   )
   )
 
 

@@ -28,8 +28,8 @@
   )
 (speckler-add! lookup-handler ()
   `(ruby-mode
-    :definition ,#'robe-jump
-    :documentation ,#'robe-doc)
+    :definition    #'robe-jump
+    :documentation #'robe-doc)
   )
 (speckler-add! popup ()
   '(ruby
@@ -40,14 +40,14 @@
   )
 (speckler-add! file-templates ()
   `(ruby
-    ("\\.rb$"     :when ,#'+jg-ruby-file-in-tap :trigger "__forumula"   :mode ruby-mode)
-    ("/lib/.+\\.rb$"      :trigger "__module"   :mode ruby-mode :project t)
-    ("\\.gemspec$"        :trigger "__.gemspec" :mode ruby-mode :project t)
-    ("/Gemfile$"          :trigger "__Gemfile"  :mode ruby-mode :project t)
-    ("/Rakefile$"         :trigger "__Rakefile" :mode ruby-mode :project t)
+    ("\\.rb$"             :trigger "__forumula"   :mode ruby-mode :when #'+jg-ruby-file-in-tap )
+    ("/lib/.+\\.rb$"      :trigger "__module"     :mode ruby-mode :project t)
+    ("\\.gemspec$"        :trigger "__.gemspec"   :mode ruby-mode :project t)
+    ("/Gemfile$"          :trigger "__Gemfile"    :mode ruby-mode :project t)
+    ("/Rakefile$"         :trigger "__Rakefile"   :mode ruby-mode :project t)
 
-    ("/spec_helper\\.rb$" :trigger "__helper"   :mode rspec-mode :project t)
-    ("_spec\\.rb$"                              :mode rspec-mode :project t)
-    ("/\\.rspec$"         :trigger "__.rspec"   :mode rspec-mode :project t)
+    ("/spec_helper\\.rb$" :trigger "__helper"     :mode rspec-mode :project t)
+    ("_spec\\.rb$"                                :mode rspec-mode :project t)
+    ("/\\.rspec$"         :trigger "__.rspec"     :mode rspec-mode :project t)
     )
   )

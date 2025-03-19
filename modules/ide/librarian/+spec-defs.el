@@ -16,21 +16,16 @@
   )
 
 (speckler-new-hook! lookup-handler (key val)
-  "Register documentation lookup handlers.
-Handlers
- "
+  "Register documentation lookup handlers. "
   ;; TODO use upfun! here
   :struct '(librarian--doc-valid-keywords fn)
-  (setq-local librarian--doc-assignments-functions      (cl-remove-duplicates (append (ensure-list (plist-get val :assignments))        librarian--doc-assignments-functions))
-              librarian--doc-declaration-functions      (cl-remove-duplicates (append (ensure-list (plist-get val :declaration))        librarian--doc-declaration-functions))
-              librarian--doc-definition-functions       (cl-remove-duplicates (append (ensure-list (plist-get val :definition))         librarian--doc-definition-functions))
-              librarian--doc-documentation-functions    (cl-remove-duplicates (append (ensure-list (plist-get val :documentation))      librarian--doc-documentation-functions))
-              librarian--doc-file-functions             (cl-remove-duplicates (append (ensure-list (plist-get val :file))               librarian--doc-file-functions))
-              librarian--doc-implementations-functions  (cl-remove-duplicates (append (ensure-list (plist-get val :implementations))    librarian--doc-implementations-functions))
-              librarian--doc-references-functions       (cl-remove-duplicates (append (ensure-list (plist-get val :references))         librarian--doc-references-functions))
-              librarian--doc-type-definition-functions  (cl-remove-duplicates (append (ensure-list (plist-get val :type-definition))    librarian--doc-type-definition-functions))
-              )
-  )
+  (cl-loop for prop in librarian--doc-valid-keywords
+           for fns = (plist-get val prop)
+           do
+           (librarian--doc-update-handler prop (mapcar #'upfun! (ensure-list fns)))
+           )
+    )
+
 (speckler-new-hook! docsets (key val)
   "Register local dash docsets"
   (setq-local dash-docs-docsets val)

@@ -51,7 +51,7 @@
   :commands toml-mode
   :config
 
-  (add-hook! 'toml-mode-hook :depth 99
+  (add-hook! 'toml-mode-hook :depth -99
              #'abbrev-mode
              #'outline-minor-mode
              )
@@ -61,7 +61,7 @@
                            (: (+? nonl) "=" (+ space) "["
                               (or (: (+? space) (syntax comment-start))
                                   line-end))))
-    outline-heading-end-regexp (rx (or (: (syntax comment-start)) line-end))
+    outline-heading-end-regexp (rx (or (syntax comment-start) line-end))
     outline-level #'jg-toml-outline-level
     )
   )
@@ -78,8 +78,12 @@
              )
 
   (setq-hook! 'toml-ts-mode-hook
-    outline-regexp "\[\[?[a-zA-Z0-9\.]+\]?\]"
-    outline-heading-end-regexp "\n"
+    outline-regexp (rx (or (: (+ "[") (+? nonl) (+ "]"))
+                           (: (+? nonl) "=" (+ space) "["
+                              (or (: (+? space) (syntax comment-start))
+                                  line-end))))
+    outline-heading-end-regexp (rx (or (: (syntax comment-start)) line-end))
+    outline-level #'jg-toml-outline-level
     )
   )
 

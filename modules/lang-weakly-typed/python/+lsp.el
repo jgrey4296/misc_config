@@ -126,14 +126,14 @@
   lsp-pylsp-plugins-pylint-args nil
 
   ;; rope
-  lsp-pylsp-plugins-rope-autoimport-memory nil
-  lsp-pylsp-plugins-rope-completion-eager nil
+  lsp-pylsp-plugins-rope-autoimport-memory               nil
+  lsp-pylsp-plugins-rope-completion-eager                nil
   lsp-pylsp-plugins-rope-completion-enabled              nil
-  lsp-pylsp-plugins-rope-autoimport-code-actions-enabled t
-  lsp-pylsp-plugins-rope-autoimport-completions-enabled  t
-  lsp-pylsp-plugins-rope-autoimport-enabled              t
-  lsp-pylsp-rope-extension-modules nil
-  lsp-pylsp-rope-rope-folder       ".temp/rope"
+  lsp-pylsp-plugins-rope-autoimport-code-actions-enabled nil
+  lsp-pylsp-plugins-rope-autoimport-completions-enabled  nil
+  lsp-pylsp-plugins-rope-autoimport-enabled              nil
+  lsp-pylsp-rope-extension-modules                       nil
+  lsp-pylsp-rope-rope-folder                             ".temp/rope"
 
   ;; ruff
   lsp-pylsp-plugins-ruff-config           "ruff.toml"
@@ -152,7 +152,6 @@
   lsp-pylsp-plugins-ruff-unsafe-fixes     nil
 
   )
-
 (speckler-setq! lsp-py-jedi ()
   lsp-jedi-enable                            t
   lsp-jedi-startup-message                   t

@@ -1,7 +1,9 @@
 ;;; +pandoc.el -*- lexical-binding: t; -*-
 
 (defvar jg-text-pandoc-cmd "pandoc")
+
 (defvar jg-text-pandoc-args nil)
+
 (defvar jg-text-pandoc-style-fn "pandoc.style")
 
 ;;;###autoload

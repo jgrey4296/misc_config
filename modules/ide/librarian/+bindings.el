@@ -28,9 +28,11 @@
       )
 
 (map! :map librarian-mode-map
+       :i "s" #'self-insert-command
       (:prefix ("s" . "Jump")
        :desc "Browse URL"                :n "u" #'librarian-url
        :desc "Librarian Regular"         :n "1" #'librarian-regular-go!
+
        (:prefix ("k" . "Documentation")
         :desc "Choose Handler"             :n    ";" #'librarian-choose
         :desc "Assignments"                :n    "a" #'librarian-assignments
@@ -42,9 +44,6 @@
         :desc "Documentation"              :n    "k" #'librarian-documentation
         :desc "Look up in local docsets"   :n    "K" #'librarian-docsets-consult
 
-        :desc "Word(net)"                  :n    "w" #'helm-wordnet-suggest
-        :desc "Word(nut)"                  :n    "W" #'wordnut-search
-
         :desc "Look up online (w/ prompt)" :n    "1" #'librarian-online-select
         :desc "Look up online"             :n    "2" #'librarian-online
 
@@ -55,7 +54,14 @@
         :desc "Install Docset"             :n    "0" #'librarian-docsets-install
         )
        )
-      :i "s" #'self-insert-command
+      )
+
+(map! :map librarian-mode-map
+      :i "c" #'self-insert-command
+      :prefix "c w"
+      :desc "ispell-word"               "s"    #'ispell-word
+      :desc "Ivy Spell"                 "S"    #'flyspell-correct-wrapper
+      :desc "add word to dict"          "a"    #'+spell/add-word
       )
 
 (map! :map eww-mode-map

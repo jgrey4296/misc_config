@@ -42,25 +42,6 @@
 (setq ws-butler-keep-whitespace-before-point nil)
 ;;-- end ws butler
 
-;;-- spelling
-(setq ispell-program-name (executable-find "aspell")
-      ispell-extra-args '("--sug-mode=ultra" "--run-together")
-      ispell-personal-dictionary (expand-file-name "spelling/aspell.en.pws" templates-loc)
-      ispell-current-personal-dictionary ispell-personal-dictionary
-      spell-fu-directory (concat doom-data-dir "spell-fu")
-      flyspell-popup-correct-delay 0.8
-
-      flyspell-lazy-idle-seconds 1
-      flyspell-lazy-window-idle-seconds 3
-
-      flyspell-issue-welcome-flag nil
-      ;; Significantly speeds up flyspell, which would otherwise print
-      ;; messages for every word when checking the entire buffer
-      flyspell-issue-message-flag nil
-      )
-
-;;-- end spelling
-
 ;;-- specs
 (speckler-setq! rotate-text ()
   rotate-text-words '(("enable" "disable")
@@ -115,10 +96,6 @@
   '(text-manip
     ("LICENSE" . license-mode)
     )
-  )
-(speckler-add! flyspell-predicate ()
-  `(markdown-mode #'+markdown-flyspell-word-p)
-  `(gfm-mode      #'+markdown-flyspell-word-p)
   )
 (speckler-add! evil-ex ()
   '(text-manip

@@ -7,7 +7,6 @@
 ;;-- end Header
 (require 'macro-tools--transient)
 
-
 (transient-toggle-hook! ws-butler ()
   "WS-Butler"
   :key "b"
@@ -31,7 +30,6 @@
   (transient-guarded-insert! 'jg-toggle-main jg-toggle-format-transient (1 -1))
 
   )
-
 
 ;;-- Footer
 ;; Copyright (C) 2025 john

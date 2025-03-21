@@ -15,7 +15,6 @@
     (+jg-text-manipulation-get-pattern-info evil-ex-argument t))
   )
 
-
 ;;;###autoload
 (defun +jg-text-manipulation-highlight-handler (prefix flag &optional arg)
   (with-current-buffer evil-ex-original-buffer

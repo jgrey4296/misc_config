@@ -6,13 +6,10 @@
 ;; See footer for licenses/metadata/notes as applicable
 ;;-- end Header
 
+
 (use-package! company-gtags
   :when (modulep! :ide company)
   )
-
-(use-package! company-ispell
-  :when (modulep! :ide company)
-)
 
 (use-package! company-keywords
   :when (modulep! :ide company)
@@ -21,7 +18,6 @@
 (use-package! ivy-xref
   :when (modulep! :ui ivy)
   :config
-  (advice-add 'ivy-xref-show-xrefs :around #'+lookup--fix-ivy-xrefs)
   )
 
 (use-package! dash-docs
@@ -36,27 +32,14 @@
   (require 'counsel-dash nil t)
 )
 
-(use-package! wordnut
-  :defer t
-  :init
-  (add-hook 'wordnut-mode-hook 'outline-minor-mode)
-  )
-
-(use-package! osx-dictionary
-              :when (eq system-type 'darwin)
-              :defer t)
-
-(use-package! synosaurus :defer t)
-
-(use-package! helm-wordnet
-  :when (modulep! :ui helm)
-  :defer t
-  )
-
-(use-package! define-word :defer t)
-
 (use-package! browse-url :defer t)
 
+(use-package! dumb-jump
+  :disabled
+  :after xref
+  :config
+  (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
+  )
 ;;-- Footer
 ;; Copyright (C) 2024 john
 ;;

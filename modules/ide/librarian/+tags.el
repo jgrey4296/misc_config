@@ -26,12 +26,14 @@
   :hook (subfile-mode-hook . +jg-turn-off-smartparens)
   )
 
-(after! evil-ex
-  (defvar jg-tags-evil-ex-setup t)
-  (evil-ex-define-cmd "ht[ag]"  #'librarian-tag-helm)
-  (evil-ex-define-cmd "t[ag]"   #'librarian-tag-helm)
-  (evil-ex-define-cmd "T[ag]"   #'librarian-tag-helm)
-  (evil-ex-define-cmd "it[ag]"  #'librarian-tag-ivy)
+(speckler-add! evil-ex ()
+  :override t
+  '(librarian-tags
+    ("ht[ag]" .  #'librarian-tag-helm)
+    ("t[ag]"  .  #'librarian-tag-helm)
+    ("T[ag]"  .  #'librarian-tag-helm)
+    ("it[ag]" .  #'librarian-tag-ivy)
+    )
   )
 
 (defvar jg-tag-loc-twitter-account-index  (expand-file-name "~/.config/bibliography/.temp/index/tw_acct.index"))

@@ -1,14 +1,21 @@
 ;; editor/word-wrap/autoload.el -*- lexical-binding: t; -*-
 
 (defvar +word-wrap--major-mode-is-visual nil)
+
 (defvar +word-wrap--major-mode-is-text nil)
+
 (defvar +word-wrap--enable-adaptive-wrap-mode nil)
+
 (defvar +word-wrap--enable-visual-line-mode nil)
+
 (defvar +word-wrap--enable-visual-fill-mode nil)
+
 (defvar +word-wrap--disable-auto-fill-mode nil)
+
 (defvar +word-wrap--major-mode-indent-var nil)
 
 (defvar adaptive-wrap-extra-indent)
+
 (defun +word-wrap--adjust-extra-indent-a (fn beg end)
   "Contextually adjust extra word-wrap indentation."
   (let ((adaptive-wrap-extra-indent (+word-wrap--calc-extra-indent beg)))
@@ -91,17 +98,3 @@ wrapped at `fill-column' by configuring `+word-wrap-fill-style'."
       (visual-fill-column-mode -1))
     (when +word-wrap--disable-auto-fill-mode
       (auto-fill-mode +1))))
-
-(defun +word-wrap--enable-global-mode ()
-  "Enable `+word-wrap-mode' for `+word-wrap-global-mode'.
-
-Wrapping will be automatically enabled in all modes except special modes, or
-modes explicitly listed in `+word-wrap-disabled-modes'."
-  (unless (or (eq (get major-mode 'mode-class) 'special)
-              (memq major-mode +word-wrap-disabled-modes))
-    (+word-wrap-mode +1)))
-
-;;;###autoload
-(define-globalized-minor-mode +global-word-wrap-mode
-  +word-wrap-mode
-  +word-wrap--enable-global-mode)

@@ -112,14 +112,10 @@
       :desc "Quick Delete" "'"  #'evil-surround-delete
 )
 
-(map! :map jg-binding-change-map :prefix ("w" . "Words")
-       :desc "inflection"                "i"    #'evil-operator-string-inflection
-       :desc "Rotate"                    "r"    #'rotate-text
-       :desc "ispell-word"               "s"    #'ispell-word
-       :desc "Ivy Spell"                 "S"    #'flyspell-correct-wrapper
-       :desc "add word to dict"          "a"    #'+spell/add-word
-       :desc "Word(net)"                 "w"    #'helm-wordnet-suggest
-       :desc "Word(nut)"                 "W"    #'wordnut-search
+(map! :map jg-binding-change-map
+      :prefix ("w" . "Words")
+      :desc "inflection"                "i"    #'evil-operator-string-inflection
+      :desc "Rotate"                    "r"    #'rotate-text
        )
 
 (map! :map jg-binding-change-map :prefix ("e" . "encode")

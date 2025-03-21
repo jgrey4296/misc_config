@@ -5,11 +5,6 @@
 (package! embrace)
 (package! smartparens)
 
-;; Spelling
-(package! spell-fu)
-(package! flyspell-correct)
-(package! flyspell-correct-ivy)
-(package! flyspell-lazy)
 (package! writegood-mode)
 (package! accent)
 

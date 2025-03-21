@@ -7,7 +7,6 @@
 
 ;; Motions
 
-
 ;;;###autoload (autoload '+jg-text-prev-close-paren-motion "editor/text-manipulation/autoload/evil-motions.el" nil t)
 (evil-define-motion +jg-text-prev-close-paren-motion (count)
   "Go to [count] next unmatched ')'."

@@ -99,6 +99,3 @@
     (evil-visual-char)
     (call-interactively #'+jg-evil-whitespace)
   )
-
-;;;###autoload
-(advice-add 'evil-join :after #'+jg-text-join-line-bol)

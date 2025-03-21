@@ -45,8 +45,3 @@
   (-when-let (words (plist-get val :words))
     (setq +electric-indent-words words))
   )
-
-(speckler-new-hook! flyspell-predicate (key val)
-  "Set local flyspec checkers"
-  (setq-local flyspell-generic-check-word-predicate (upfun! val))
-  )

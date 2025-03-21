@@ -3,6 +3,7 @@
 (local-load! "+vars")
 (local-load! "+spec-defs")
 (local-load! "+extra")
+(local-load! "+spelling")
 (local-load! "+envs")
 
 (when (modulep! :ide librarian +tags) (local-load! "+tags"))

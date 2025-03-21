@@ -1,5 +1,6 @@
 ;;; +spec-defs.el -*- lexical-binding: t; -*-
 
+;; TODO rename to browsers
 (speckler-new! browse-handler (key val)
   "Register browse-url handlers"
   :target browse-url-default-handlers
@@ -8,14 +9,18 @@
   val
   )
 
-(speckler-new! lookup-url (key val)
-  "Register url lookup providers"
-  :target librarian--online--provider-url-alist
-  :struct '(list (or ("name" "url") ("name" fn "url")))
-  :loop 'append
-  val
+(speckler-new! online-search (key vals)
+  "Register url search providers"
+  ;; :target librarian--online-provider-url-alist
+  :struct '("name" "url-or-fn")
+  :loop 'do
+  (cl-loop for prov in vals
+           do
+           (librarian--online-register-provider (car prov) (upfun! (cadr prov)))
+           )
   )
 
+;; TODO Rename to doc-lookup
 (speckler-new-hook! lookup-handler (keys vals)
   "Register documentation lookup handlers. "
   :struct '(plistp librarian--doc-valid-keywords handlers)

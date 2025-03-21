@@ -151,7 +151,6 @@ with either a numeric or alphabetical escalation "
     )
   )
 
-
 ;;;###autoload (autoload '+jg-text-simple-grep-op "editor/text-manipulation/autoload/evil-operators" nil t)
 (evil-define-operator +jg-text-simple-grep-op (beg end type)
   " grep through the current buffer, printing matches to a temp buffer "

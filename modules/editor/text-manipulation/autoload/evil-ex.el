@@ -1,12 +1,10 @@
 ;;; evil-ex.el -*- lexical-binding: t; -*-
 
-
 ;;;###autoload (autoload '+evil:reverse-lines "editor/text-manipulation/autoload/evil-ex" nil t)
 (evil-define-command +evil:reverse-lines (beg end)
   "Reverse lines between BEG and END."
   (interactive "<r>")
   (reverse-region beg end))
-
 
 ;;;###autoload (autoload '+jg-text-manipulation-ex-expand-selection "editor/text-manipulation/autoload/evil-ex" nil t)
 (evil-define-command +jg-text-manipulation-ex-expand-selection (&optional pattern case wholeline)
@@ -47,15 +45,14 @@ PATTERN is a vim-style regexp. FLAGS is an optional string of characters. "
     )
   )
 
-
 (defun +jg-text-manipulation-ensure-visual-selection-h ()
   " Auto-removing post-command hook to ensure visual selection in evil-ex"
   (evil-visual-restore)
   (remove-hook 'post-command-hook #'+jg-text-manipulation-ensure-visual-selection-h)
   )
 
-
 (defvar jg-text--evil-sub-patterns nil)
+
 (defconst jg-text--evil-sub-pattern-max 20)
 
 ;;;###autoload

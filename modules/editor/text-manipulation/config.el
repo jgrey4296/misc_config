@@ -2,13 +2,18 @@
 
 (local-load! "+defs")
 (local-load! "+vars")
-(local-load! "+spelling")
 (local-load! "+formatting")
 (local-load! "+spec-defs")
 
 (defer-load! jg-bindings-total "+bindings")
 
+(advice-add 'dtrt-indent-mode :around #'doom--fix-broken-smie-modes-a)
+(advice-add 'upcase  :around #'+jg-invert-dashes)
+(advice-add 'downcase :around #'+jg-invert-dashes)
+(advice-add 'evil-join :after #'+jg-text-join-line-bol)
+
 (add-hook! 'doom-init-ui-hook :append #'+ligature-init-composition-table-h)
+(add-hook 'jg-ui-transient-toggles-hook #'+jg-ui-build-transient-format)
 
 (when (memq 'visual-line-mode text-mode-hook)
   (remove-hook 'text-mode-hook #'visual-line-mode)
@@ -80,4 +85,6 @@
 
 (use-package! spechar-state :after evil)
 
-(add-hook 'jg-ui-transient-toggles-hook #'+jg-ui-build-transient-format)
+(use-package! writegood-mode)
+
+(use-package! accent)

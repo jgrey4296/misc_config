@@ -26,3 +26,10 @@
 
 (package! rawtag-mode  :recipe (:host github :repo "jgrey4296/misc-modes" :files ("major-modes/tag-modes/rawtag-mode.el") :local-repo "misc-modes"))
 (package! subfile-mode :recipe (:host github :repo "jgrey4296/misc-modes" :files ("major-modes/tag-modes/subfile-mode.el") :local-repo "misc-modes"))
+
+(package! dumb-jump)
+
+(package! spell-fu)
+(package! flyspell-correct)
+(package! flyspell-correct-ivy)
+(package! flyspell-lazy)

@@ -89,8 +89,9 @@
   )
 (speckler-add! popup ()
   '(bibtex
-    ("^\\*DOI Metadata\\*\\'" :side left :ttl 5 :width 0.3 :quit t :select nil :priority 50)
-    ("^\\*Metadata\\*\\'"     :side left :ttl 5 :width 0.3 :quit t :select nil :priority 50)
+    ("^\\* DOI Metadata\\*\\'"     :side left :ttl 5 :width 0.3 :quit t :select nil :priority 50)
+    ("^\\* Metadata\\*\\'"         :side left :ttl 5 :width 0.3 :quit t :select nil :priority 50)
+    ("^\\* Url Metadata\\*\\'"     :side bottom :ttl 5 :width 0.2 :quit t :select nil :priority 50)
     )
   )
 (speckler-add! treesit-source ()

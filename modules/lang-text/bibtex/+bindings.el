@@ -54,6 +54,8 @@
       :desc "Subcite"             "\\"      #'librarian--biblio-edit-subcite
       :desc "Build Bibliography"  "B"       #'org-ref-build-full-bibliography
       :desc "Get Meta"            "m"       #'librarian-biblio-get-meta
+      :desc "Get Url Meta"        "n"       #'jg-bibtex-url-meta
+      :desc "Get Url Raw "        "N"       #'jg-bibtex-url-raw
       :desc "Count Entries"       "C"       #'bibtex-count-entries
 )
 

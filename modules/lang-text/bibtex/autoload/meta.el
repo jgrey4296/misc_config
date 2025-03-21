@@ -13,6 +13,7 @@
                                         "date"
                                         "keywords"
                                         "doi"
+                                        "byline"
                                         )
                                     ))
 (defconst jg-bibtex-url-meta--user-agent "Mozilla/4.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36")
@@ -42,11 +43,13 @@
     (with-current-buffer (get-buffer-create jg-bibtex-url-meta--name)
       (erase-buffer)
       (dom-pp selected)
+      (goto-char (point-min))
       )
     (display-buffer jg-bibtex-url-meta--name 'display-buffer-at-bottom)
     )
   )
 
+;;;###autoload
 (defun jg-bibtex-url-meta ()
   (interactive)
   (let ((url-user-agent jg-bibtex-url-meta--user-agent)
@@ -59,6 +62,7 @@
     )
   )
 
+;;;###autoload
 (defun jg-bibtex-url-raw ()
   (interactive)
   (let* ((url-user-agent jg-bibtex-url-meta--user-agent)

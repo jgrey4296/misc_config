@@ -17,6 +17,7 @@
 (package! macrostep)
 (package! overseer)
 (package! elisp-def)
+(package! elisp-refs)
 (package! elisp-demos)
 (package! elisp-depmap)
 

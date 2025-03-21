@@ -137,10 +137,10 @@
     )
   (speckler-add! lookup-handler ()
   `(anaconda-mode
-    :definition    +jg-conda-find-defs
-    :references    +jg-conda-find-references
-    :documentation +jg-conda-show-doc
-    :assignments   +jg-conda-find-assignments
+    :definition    #'+jg-conda-find-defs
+    :references    #'+jg-conda-find-references
+    :documentation #'+jg-conda-show-doc
+    :assignments   #'+jg-conda-find-assignments
     )
   )
 

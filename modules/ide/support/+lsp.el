@@ -159,17 +159,18 @@
 
 (speckler-add! lookup-handler ()
   `(lsp-mode
-    :definition          +lsp-lookup-definition-handler
-    :declaration         lsp-find-declaration
-    :references          +lsp-lookup-references-handler
-    :documentation       lsp-describe-thing-at-point
-    :implementations     lsp-find-implementation
-    :type-definition     lsp-find-type-definition
+    :definition          #'+lsp-lookup-definition-handler
+    :declaration         #'lsp-find-declaration
+    :references          #'+lsp-lookup-references-handler
+    :documentation       #'lsp-describe-thing-at-point
+    :implementations     #'lsp-find-implementation
+    :type-definition     #'lsp-find-type-definition
+    :assignments
     )
   `(lsp-ui-mode
-    :definition         lsp-ui-peek-find-definitions
-    :implementations    lsp-ui-peek-find-implementation
-    :references         lsp-ui-peek-find-references
+    :definition         #'lsp-ui-peek-find-definitions
+    :implementations    #'lsp-ui-peek-find-implementation
+    :references         #'lsp-ui-peek-find-references
     :async t
     )
   )

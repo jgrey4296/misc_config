@@ -89,9 +89,10 @@
     )
   )
 (speckler-add! lookup-handler ()
+  :override nil
   `((emacs-lisp-mode lisp-interaction-mode helpful-mode)
-    :definition    #'+emacs-lisp-lookup-definition
-    :documentation #'+emacs-lisp-lookup-documentation
+    :definition     #'elisp-def
+    :documentation  #'helpful-at-point
     )
   '((racket-mode racket-repl-mode)
     :definition    #'+racket-lookup-definition

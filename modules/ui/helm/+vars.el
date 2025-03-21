@@ -32,6 +32,7 @@
 (speckler-setq! helm ()
   helm-candidate-number-limit 50
   helm-truncate-lines t
+  helm-split-window-inside-p t
   ;; Remove extraineous helm UI elements
   helm-display-header-line nil
   helm-mode-line-string nil

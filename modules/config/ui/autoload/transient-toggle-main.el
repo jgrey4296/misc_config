@@ -34,6 +34,11 @@
   :fn #'smartparens-mode
   )
 
+(transient-call! uptime ()
+  "Emacs Uptime"
+  :key "u"
+  (message "Uptime: %s" (emacs-uptime))
+  )
 (transient-call! evil-embrace ()
   "Evil-Embrace"
   :key "E"
@@ -76,6 +81,7 @@
     "Main controller for ui settings"
     [["Global Triggers"
       (transient-macro-call-run-spec-handlers)
+      (transient-macro-call-uptime)
       ]
      [""
       ]

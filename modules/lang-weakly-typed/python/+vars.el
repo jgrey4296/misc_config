@@ -269,7 +269,7 @@
   '(python-mode . python)
   '(doot-mode . python)
   )
-(speckler-add! lookup-url ()
+(speckler-add! online-search ()
   '(python
     ("Python" "https://docs.python.org/3/search.html?q=%s&check_keywords=yes&area=default")
     ("Pypi"   "https://pypi.org/search/?q=%s")

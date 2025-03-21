@@ -97,7 +97,7 @@
   '(java          "git@github.com:tree-sitter/tree-sitter-java.git")
   '(kotlin        "git@github.com:fwcd/tree-sitter-kotlin.git")
 )
-(speckler-add! lookup-url ()
+(speckler-add! online-search ()
   '(java
     ("Kotlin" "https://kotlinlang.org/docs/home.html?q=%s&s=full")
     ("Android" "https://developer.android.com/s/results?q=%s")

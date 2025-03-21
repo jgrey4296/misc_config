@@ -29,7 +29,7 @@
     (,jg-xml-xmllint-shell-buffer-name :side right  :ttl nil :width  0.3 :quit t :select t   :priority 100)
     )
   )
-(speckler-add! lookup-url ()
+(speckler-add! online-search ()
   '(xml
     ("Firefox Dev" "https://developer.mozilla.org/en-US/search?q=%s")
     )

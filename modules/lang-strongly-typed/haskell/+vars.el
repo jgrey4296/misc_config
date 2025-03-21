@@ -28,7 +28,7 @@
     ("^\\*haskell\\*" :quit nil)
     )
   )
-(speckler-add! lookup-url ()
+(speckler-add! online-search ()
   '(haskell
     ("Haskell Cabal" "https://hackage.haskell.org/packages/search?terms=%s")
     ("Haskell Typeclassopedia" "https://wiki.haskell.org/index.php?search=%s&title=Special%3ASearch&fulltext=Search")

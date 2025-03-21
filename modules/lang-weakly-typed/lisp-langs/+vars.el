@@ -82,7 +82,7 @@
     #'+jg-lisp-cleanup-ensure-newline
     #'+jg-text-cleanup-whitespace)
   )
-(speckler-add! lookup-url ()
+(speckler-add! online-search ()
   '(lisp
     ("elisp melpa" "https://melpa.org/#/?q=%s")
     ("elisp elpa" "https://elpa.gnu.org/packages/")
@@ -130,11 +130,11 @@
     )
   )
 (speckler-add! imenu ()
-  :override t
+  :override nil
   '(emacs-lisp-mode
     :append
     ("spec-def"             "^(speckler-new! \\(.+\\)" 1)
-    ("spec-hook"            "^(speckerl-new-hook! \\(.+?\\)" 1)
+    ("spec-hook"            "^(speckler-new-hook! \\(.+?\\)" 1)
     ("spec-add"             "^(speckler-add! \\(.+\\) " 1)
     ("Section"              "^[ 	]*;;;*\\**[ 	]+\\([^\n]+\\)" 1)
     ("Evil commands"        "^\\s-*(evil-define-\\(?:command\\|operator\\|motion\\) +\\(\\_<[^ ()\n]+\\_>\\)" 1)

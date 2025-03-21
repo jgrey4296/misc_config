@@ -20,7 +20,7 @@
 ;;-- end links
 
 ;;-- specs
-(speckler-add! lookup-url ()
+(speckler-add! online-search ()
   '(erlang
     ("Erlang/OPT" "https://www.erlang.org/doc/search?q=%s")
     ("Elixir"     "https://hexdocs.pm/elixir/search.html?q=%s")

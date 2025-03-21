@@ -57,7 +57,7 @@
 ;;-- end librarian
 
 ;;-- specs
-(speckler-add! lookup-url ()
+(speckler-add! online-search ()
   '(bibtex
     ("Scholar"           "https://scholar.google.com/scholar?hl=en&q=%s")
     ("Scholar Archive"   "https://scholar.archive.org/search?q=%s")

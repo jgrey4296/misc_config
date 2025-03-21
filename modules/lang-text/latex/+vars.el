@@ -78,7 +78,7 @@
   '(reftex-mode (:mode company-reftex-labels company-reftex-citations))
   '(LaTeX-mode (:mode company-auctex-environments company-auctex-macros +latex-symbols-company-backend))
   )
-(speckler-add! lookup-url ()
+(speckler-add! online-search ()
   '(latex
     ("Latex Packages" "https://www.ctan.org/search?phrase=%s")
     )

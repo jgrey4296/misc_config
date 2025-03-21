@@ -58,7 +58,7 @@
     (rust-mode          :trigger "__"            :priority -99)
     )
   )
-(speckler-add! lookup-url ()
+(speckler-add! online-search ()
   '(rust
     ("Rust Stdlib"      "https://doc.rust-lang.org/std/?search=%s")
     ("Rust Crates.io"   "https://crates.io/search?q=%s")

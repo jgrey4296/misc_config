@@ -62,8 +62,8 @@
     :modes (ibuffer-mode)
     :priority 50
     :triggers (:delete     nil
-               :open-all   nil
-               :close-all  nil
+               :open-all   #'+jg-ibuffer-unfold-all-groups
+               :close-all  #'+jg-ibuffer-fold-all-groups
                :toggle     #'ibuffer-toggle-filter-group
                :open       nil
                :open-rec   nil

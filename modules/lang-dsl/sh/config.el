@@ -33,7 +33,10 @@
                                      (0 'font-lock-type-face append)))))
              )
   ;; 4. Fontify delimiters by depth
-  (add-hook 'sh-mode-hook #'rainbow-delimiters-mode)
+  (add-hook! 'sh-mode-hook
+             #'rainbow-delimiters-mode
+             #'hs-minor-mode
+            )
 
   ;; autoclose backticks
   (sp-local-pair 'sh-mode "`" "`" :unless '(sp-point-before-word-p sp-point-before-same-p))

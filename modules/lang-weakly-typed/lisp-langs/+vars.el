@@ -89,7 +89,6 @@
     )
   )
 (speckler-add! doc-lookup ()
-  :override nil
   `((emacs-lisp-mode lisp-interaction-mode helpful-mode)
     :definition     #'elisp-def
     :documentation  #'helpful-at-point

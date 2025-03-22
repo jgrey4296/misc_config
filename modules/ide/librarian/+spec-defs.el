@@ -19,7 +19,6 @@
            )
   )
 
-;; TODO Rename to doc-lookup
 (speckler-new-hook! doc-lookup (keys vals)
   "Register documentation lookup handlers. "
   :struct '(plistp librarian--doc-valid-keywords handlers)

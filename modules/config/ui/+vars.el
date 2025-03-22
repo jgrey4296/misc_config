@@ -3,19 +3,18 @@
 (defvar jg-ui-default-face-gen-palette-dir (expand-file-name "palettes" templates-loc))
 
 (defvar jg-ui-tree-active-tree-package 'neotree)
-
-;;-- theme settings
-(setq custom-theme-directory (expand-file-name "themes" templates-loc))
-
-;;-- end theme settings
+(setq glasses-face 'font-lock-type-def
+      custom-theme-directory (expand-file-name "themes" templates-loc)
+      )
 
 (setq confirm-kill-emacs #'doom-quit-p
       confirm-nonexistent-file-or-buffer nil
       uniquify-buffer-name-style 'forward
       ring-bell-function #'ignore
       switch-window-multiple-frames t
-      visible-bell nil
+      visible-bell t
 
+      ;; Whitespace mode:
       whitespace-style '(face tabs spaces trailing lines space-before-tab newline indentation empty space-after-tab space-mark tab-mark newline-mark)
       whitespace-line-column nil
       whitespace-display-mappings '((tab-mark ?\t [?› ?\t])
@@ -35,8 +34,6 @@
       transient--buffer-name "*transient*"
       )
 ;;-- end transient
-
-(setq glasses-face 'font-lock-type-def)
 
 ;;-- highlighting
 (setq hl-todo-highlight-punctuation ":"

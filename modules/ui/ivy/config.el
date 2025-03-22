@@ -7,6 +7,9 @@
 
 (defer-load! (jg-evil-bindings jg-bindings-total) "+bindings")
 
+(defalias '+ivy--switch-buffer-preview-all #'counsel--switch-buffer-update-fn)
+(defalias '+ivy--switch-buffer-unwind      #'counsel--switch-buffer-unwind)
+
 ;;-- ivy
 
 (use-package! ivy
@@ -59,16 +62,11 @@
     (add-to-list 'ivy-dispatching-done-hydra-exit-keys '("C-o" nil))
     (defhydra+ hydra-ivy () ("M-o" nil)))
 
-
   )
 
 (use-package! ivy-rich
   :after ivy
   :config
-  (defun ivy-rich-bookmark-filename-or-empty (candidate)
-    (let ((filename (ivy-rich-bookmark-filename candidate)))
-      (if (not filename) "" filename)))
-
   ;; Enahnce the appearance of a couple counsel commands
   (plist-put! ivy-rich-display-transformers-list
               'counsel-describe-variable
@@ -86,7 +84,7 @@
               'counsel-bookmark
               '(:columns
                 ((ivy-rich-candidate (:width 0.5))
-                 (ivy-rich-bookmark-filename-or-empty (:width 60)))))
+                 (ivy-rich-bookmark-filename-or-empty-p (:width 60)))))
 
   (ivy-set-display-transformer 'internal-complete-buffer nil)
 

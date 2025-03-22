@@ -9,7 +9,7 @@
     (apply fn args)))
 
 ;;;###autoload
-(defun  +ivy--counsel-file-jump-use-fd-rg-a (args)
+(defun +ivy--counsel-file-jump-use-fd-rg-a (args)
   "Change `counsel-file-jump' to use fd or ripgrep, if they are available."
 
   (cl-destructuring-bind (find-program . args)

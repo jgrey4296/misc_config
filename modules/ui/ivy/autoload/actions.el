@@ -1,4 +1,4 @@
-;;; ivy-plus.el -*- lexical-binding: t; -*-
+;;; actions.el -*- lexical-binding: t; -*-
 (require 'ivy)
 
 ;;;###autoload
@@ -77,3 +77,26 @@ Modified to pre-sort bookmarks, caselessly
   "Kill the region of the selected candidate"
   (kill-region (line-beginning-position) (line-end-position))
   )
+
+;;;###autoload
+(defun +ivy-git-grep-other-window-action (x)
+  "Opens the current candidate in another window."
+  (when (string-match "\\`\\(.*?\\):\\([0-9]+\\):\\(.*\\)\\'" x)
+    (select-window
+     (with-ivy-window
+       (let ((file-name   (match-string-no-properties 1 x))
+             (line-number (match-string-no-properties 2 x)))
+         (find-file-other-window (expand-file-name file-name (ivy-state-directory ivy-last)))
+         (goto-char (point-min))
+         (forward-line (1- (string-to-number line-number)))
+         (re-search-forward (ivy--regex ivy-text t) (line-end-position) t)
+         (run-hooks 'counsel-grep-post-action-hook)
+         (selected-window))))))
+
+;;;###autoload
+(defun +ivy/git-grep-other-window-action ()
+  "Open the current counsel-{ag,rg,git-grep} candidate in other-window."
+  (interactive)
+  (ivy-set-action #'+ivy-git-grep-other-window-action)
+  (setq ivy-exit 'done)
+  (exit-minibuffer))

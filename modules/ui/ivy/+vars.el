@@ -1,6 +1,5 @@
 ;;; completion/ivy/+vars.el -*- lexical-binding: t; -*-
 
-
 ;;-- ivy
 (speckler-setq! ivy ()
   ivy-height 17
@@ -21,7 +20,6 @@
   avy-all-windows t
 
   prescient-filter-method '(literal regexp initialism fuzzy)
-
 
   )
 
@@ -62,12 +60,15 @@
 ;;-- end ivy
 
 ;;-- counsel
+
 (defvar jg-ivy-file-regexp (rx anything))
+
 (defvar jg-ivy-file-reject-regexp (rx "test_" (+ anything)))
+
 (defvar jg-counsel-ignore-file (expand-file-name "tools/ignore/search_ignore" templates-loc))
 
 (speckler-setq! counsel ()
-  counsel--find-file-predicate #'+jg-ivy-file-predicate
+  counsel--find-file-predicate #'+jg-ivy-file-predicate-p
   counsel-find-file-extern-extensions   '("mp4" "mkv" "xlsx" "pdf" "epub")
   counsel-rg-base-command               `("rg"
                                           "--max-columns" "240"

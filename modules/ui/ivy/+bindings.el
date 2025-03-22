@@ -12,8 +12,8 @@
 
 
 (map! :leader
-      :desc "Messages"          "0"    #'+jg-ivy-popup-messages
-      :desc "Counsel-Process"   "p h" #'counsel-list-processes--with-state-normal
+      :desc "Counsel-Process"   "p h"  #'counsel-list-processes--with-state-normal
+      :desc "Switch buffer"     ","    #'+jg-ivy-buffer
       )
 
 (map! :map swiper-map

@@ -40,10 +40,16 @@
     )
   )
 
+(doom-modeline-def-segment buffer-count
+  "Notifies Total Number of buffers"
+  (propertize (format " (TB:%d/%d)" (length (doom-real-buffer-list)) (length (buffer-list))))
+  )
+
 (doom-modeline-def-modeline 'main-alt
   '(eldoc
     debug
     modals
+    buffer-count
     buffer-info-simple ;; mode,state,name
     ;; buffer-info ;; mode,state,name
     buffer-position ;; line:col percentage

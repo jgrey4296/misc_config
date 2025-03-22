@@ -5,8 +5,7 @@
 (local-load! "+extra")
 (local-load! "+spelling")
 (local-load! "+envs")
-
-(when (modulep! :ide librarian +tags) (local-load! "+tags"))
+(local-load! "+tags")
 
 (defer-load! jg-bindings-core "+bindings")
 

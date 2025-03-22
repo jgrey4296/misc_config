@@ -6,6 +6,7 @@
 ;; See footer for licenses/metadata/notes as applicable
 ;;-- end Header
 (require 'macro-tools--transient)
+(defconst jg-backtrace-buff-name "*Backtrace*")
 
 ;; Debug
 (transient-call! debug-on-error ()
@@ -40,6 +41,12 @@
   :desc "Cancel All Function Debugs"
   (cancel-debug-on-entry)
   )
+(transient-call! kill-backtrace ()
+  "Kill Backtrace Buffer"
+  :key ";"
+  :desc (transient-var-fmt "Kill Debugger" (get-buffer jg-backtrace-buff-name) ";")
+  (kill-buffer jg-backtrace-buff-name)
+  )
 
 ;;;###autoload
 (defun +jg-ui-build-debugs-transient ()
@@ -56,6 +63,7 @@
      " "
      (transient-macro-call-cancel-debug-on-var)
      (transient-macro-call-cancel-debug-func)
+     (transient-macro-call-kill-backtrace)
      ]
     )
 
@@ -63,6 +71,7 @@
     '(2 0 -1)
     '(transient-macro-call-debug-on-error)
     )
+  (transient-append-suffix 'jg-toggle-main "c" '(transient-macro-call-kill-backtrace))
 
   (transient-guarded-insert! 'jg-toggle-main jg-toggle-debugs-transient (1 -1))
   )

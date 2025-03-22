@@ -24,3 +24,9 @@
 (map! :map jg-binding-vision-map
       ";" #'+jg-buffer-nav-make-read-only-segment
       )
+
+(map! :map jg-binding-change-map
+      :prefix ("b" . "Buffer")
+      :desc "Lock Buffer"        "l" #'emacs-lock-mode
+      :desc "Change Buffer Name" "n" #'rename-buffer
+      )

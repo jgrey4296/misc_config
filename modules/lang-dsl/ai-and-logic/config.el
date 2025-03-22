@@ -43,5 +43,12 @@
 (use-package! prolog
   :init
   (add-hook! 'prolog-mode-hook
-             #'librarian-insert-minor-mode)
+             #'librarian-insert-minor-mode
+             #'outline-minor-mode)
+
+  (setq-hook! 'prolog-mode-hook
+    outline-regexp (rx (+? nonl) ":-")
+    outline-heading-end-regexp (rx line-end)
+    outline-level #'(lambda () 1)
+    )
   )

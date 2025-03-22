@@ -8,8 +8,7 @@ lua-language-server.")
 (speckler-add! company ()
   '(lua-mode (:mode company-lua))
   )
-
-(speckler-add! lookup-handler ()
+(speckler-add! doc-lookup ()
   `(lua-mode
     :documentation #'lua-search-documentation
     )
@@ -18,28 +17,23 @@ lua-language-server.")
     :documentation #'fennel-show-documentation
     )
   )
-
 (speckler-add! auto-modes ()
   '(lua
     ("\\.lua\\'" . lua-mode)
     )
   )
-
 (speckler-add! electric ()
   '(lua-mode
     :words ("else" "end")
     )
   )
-
 (speckler-add! repl ()
   '(lua-mode    :start +lua/open-repl)
   '(fennel-mode :start fennel-repl)
   )
-
 (speckler-add! eglot ()
   `(lua-mode ,(+lua-generate-lsp-server-command))
   )
-
 (speckler-add! babel ()
   '(lua
     (:name lua        :lib ob-lua)

@@ -26,7 +26,7 @@
 (speckler-add! company ()
   '(ruby-mode (:mode company-robe))
   )
-(speckler-add! lookup-handler ()
+(speckler-add! doc-lookup ()
   `(ruby-mode
     :definition    #'robe-jump
     :documentation #'robe-doc)

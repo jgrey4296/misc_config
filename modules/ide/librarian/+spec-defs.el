@@ -1,6 +1,5 @@
 ;;; +spec-defs.el -*- lexical-binding: t; -*-
 
-;; TODO rename to browsers
 (speckler-new! browse-handler (key val)
   "Register browse-url handlers"
   :target browse-url-default-handlers
@@ -21,7 +20,7 @@
   )
 
 ;; TODO Rename to doc-lookup
-(speckler-new-hook! lookup-handler (keys vals)
+(speckler-new-hook! doc-lookup (keys vals)
   "Register documentation lookup handlers. "
   :struct '(plistp librarian--doc-valid-keywords handlers)
   (cl-loop for prop in librarian--doc-valid-keywords

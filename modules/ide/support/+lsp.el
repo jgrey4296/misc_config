@@ -157,7 +157,7 @@
     )
   )
 
-(speckler-add! lookup-handler ()
+(speckler-add! doc-lookup ()
   `(lsp-mode
     :definition          #'+lsp-lookup-definition-handler
     :declaration         #'lsp-find-declaration

@@ -88,7 +88,7 @@
     ("elisp elpa" "https://elpa.gnu.org/packages/")
     )
   )
-(speckler-add! lookup-handler ()
+(speckler-add! doc-lookup ()
   :override nil
   `((emacs-lisp-mode lisp-interaction-mode helpful-mode)
     :definition     #'elisp-def

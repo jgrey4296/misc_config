@@ -37,7 +37,6 @@
   '(elixir        "git@github.com:elixir-lang/tree-sitter-elixir.git")
   '(erlang        "git@github.com:WhatsApp/tree-sitter-erlang.git")
   )
-
 (speckler-add! auto-modes ()
   '(erlang
     ("\\.erlang\\'"                          . erlang-mode)
@@ -49,7 +48,7 @@
     ("mix\\.lock"                            . elixir-mode)
     )
   )
-(speckler-add! lookup-handler ()
+(speckler-add! doc-lookup ()
   `(elixir-mode
     :definition    #'alchemist-goto-definition-at-point
     :documentation #'alchemist-help-search-at-point

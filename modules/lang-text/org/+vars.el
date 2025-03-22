@@ -285,7 +285,7 @@
                )
     )
   )
-(speckler-add! lookup-handler ()
+(speckler-add! doc-lookup ()
   `(org-mode
     :definition    #'+org-lookup-definition-handler
     :references    #'+org-lookup-references-handler

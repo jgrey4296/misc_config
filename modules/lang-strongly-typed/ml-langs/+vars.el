@@ -18,7 +18,7 @@
   '(tuareg-mode merlin-company-backend)
   '(sml-mode company-mlton-grouped-backend)
   )
-(speckler-add! lookup-handler ()
+(speckler-add! doc-lookup ()
   '(tuareg-mode :async t
     :definition merlin-locate
     :references merlin-occurrences

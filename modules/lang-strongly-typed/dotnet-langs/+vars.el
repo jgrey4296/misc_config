@@ -1,16 +1,5 @@
 ;; -*- mode:emacs-lisp; lexical-binding: t;-*-
 
-
-
-;;-- fsharp
-
-;;-- end fsharp
-
-;;-- unity
-
-;;-- end unity
-
-;;-- specs
 (speckler-add! projects ()
   '(dotnet-sln ("src") :project-file "?*.sln" :compilation-dir nil :configure nil :compile "dotnet build" :test "dotnet test" :install nil :package nil :run "dotnet run")
   '(dotnet projectile-dotnet-project-p :project-file ("?*.csproj" "?*.fsproj") :compilation-dir nil :configure nil :compile "dotnet build" :test "dotnet test" :install nil :package nil :run "dotnet run")
@@ -21,7 +10,7 @@
               ("class" "struct"))
     )
   )
-(speckler-add! lookup-handler ()
+(speckler-add! doc-lookup ()
   '(fsharp-mode :async t :definition fsharp-ac/gotodefn-at-point)
   )
 (speckler-add! company ()
@@ -106,4 +95,3 @@
 (speckler-add! treesit-source ()
   '(csharp        "git@github.com:tree-sitter/tree-sitter-c-sharp.git")
   )
-;;-- end specs

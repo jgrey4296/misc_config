@@ -25,7 +25,7 @@
     ("^\\*\\(?:response\\|goals\\)\\*" :ignore t)
     )
   )
-(speckler-add! lookup-handler ()
+(speckler-add! doc-lookup ()
   `(company-coq-mode
     :definition    #'company-coq-jump-to-definition
     :references    #'company-coq-grep-symbol

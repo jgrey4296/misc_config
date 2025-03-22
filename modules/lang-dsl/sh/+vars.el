@@ -8,8 +8,7 @@
   "A list of common shell commands to be fontified especially in `sh-mode'.")
 
 
-;;-- specs
-(speckler-add! lookup-handler ()
+(speckler-add! doc-lookup ()
   '(sh-mode :documentation #'+sh-lookup-documentation-handler)
   )
 (speckler-add! docsets ()
@@ -50,5 +49,3 @@
     :dot "." :dot "source"
     )
   )
-
-;;-- end specs

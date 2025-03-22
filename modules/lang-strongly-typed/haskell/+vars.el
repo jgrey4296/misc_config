@@ -34,7 +34,7 @@
     ("Haskell Typeclassopedia" "https://wiki.haskell.org/index.php?search=%s&title=Special%3ASearch&fulltext=Search")
     )
   )
-(speckler-add! lookup-handler ()
+(speckler-add! doc-lookup ()
   '(haskell-mode :definition haskell-mode-jump-to-def-or-tag)
   )
 (speckler-add! treesit-lang ()

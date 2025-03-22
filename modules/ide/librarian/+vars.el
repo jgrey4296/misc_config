@@ -16,8 +16,6 @@
   librarian-tag-mode-substitution-sources      (expand-file-name "~/.config/bibliography/tags/substitutions")
   librarian-tag-mode-main-loc                  (expand-file-name "~/.config/bibliography/.temp/tags/canon.tags")
   )
-
-;;-- specs
 (speckler-add! online-search ()
   :override t
   '(defaults
@@ -64,10 +62,9 @@
     ("^\\*xref\\*$" :ignore t)
     )
   )
-(speckler-add! lookup-handler ()
+(speckler-add! doc-lookup ()
   `(text-mode
     :definition #'wordnut-search
     :implementations #'helm-wordnet-suggest
     )
   )
-;;-- end specs

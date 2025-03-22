@@ -1,7 +1,7 @@
 ;;; tools/lookup/config.el -*- lexical-binding: t; -*-
 
-(local-load! "+vars")
 (local-load! "+spec-defs")
+(local-load! "+vars")
 (local-load! "+extra")
 (local-load! "+spelling")
 (local-load! "+envs")

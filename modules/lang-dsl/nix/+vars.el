@@ -3,7 +3,7 @@
 (speckler-add! company ()
   '(nix-mode (:mode . company-nixos-options))
   )
-(speckler-add! lookup-handler ()
+(speckler-add! doc-lookup ()
   '(nix-mode
     :documentation (+nix/lookup-option :async t)
     )

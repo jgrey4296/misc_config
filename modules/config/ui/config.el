@@ -13,15 +13,16 @@
 (local-load! "+modeline")
 (local-load! "+transient")
 
-(advice-remove 'kill-current-buffer        #'doom--switch-to-fallback-buffer-maybe-a)
-(advice-add 'kill-current-buffer           :before-until #'+jg-ui-kill-buffer-override-a)
-(advice-add 'jit-lock--debug-fontify       :before #'jg-jit-lock-debug-announce)
+(advice-remove 'kill-current-buffer #'doom--switch-to-fallback-buffer-maybe-a)
+(advice-add 'kill-current-buffer     :before-until  #'jg-ui-kill-current-buffer-logic-a)
+(advice-add 'jit-lock--debug-fontify :before       #'jg-jit-lock-debug-announce)
 
 (add-hook! 'doom-first-input-hook #'transient-toggles-minor-mode)
 
 (use-package! elide-head
   :defer t
   )
+
 (use-package! display-fill-column-indicator
   :defer t
   )

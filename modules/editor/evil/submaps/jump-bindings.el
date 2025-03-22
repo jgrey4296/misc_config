@@ -23,12 +23,9 @@
       :desc "Jump to mark"          "m"   #'evil-show-marks
       :desc "Jump Back"             "b"   #'avy-pop-mark
       :desc "Jump Next"             "n"   (cmd! (avy-push-mark))
-      :desc "Goto First Line"       "f"   #'+jg-evil-bob-with-mark
-      :desc "Goto Last Line"        "F"   #'evil-goto-line
+      :desc "Goto First Line"       "["   #'+jg-evil-bob-with-mark
+      :desc "Goto Last Line"        "]"   #'evil-goto-line
       :desc "Search buffer"         "s"   #'isearch-forward
-
-      :desc "Buffer Start"          "<"   #'beginning-of-buffer
-      :desc "Buffer End"            ">"   #'end-of-buffer
       )
 
 (map! :map jg-binding-jump-map ;; search

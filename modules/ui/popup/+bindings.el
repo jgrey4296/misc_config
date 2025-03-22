@@ -16,7 +16,7 @@
 
 (map! :leader
       :desc "SCRATCH"                      "6" (cmd! (+jg-popup-ivy-open "*scratch*"))
-      :desc "Messages"                     "0"   #'+jg-ivy-popup-messages
+      :desc "Messages"                     "0" #'+jg-popup-messages
       )
 
 (setq popup-menu-keymap (make-keymap))

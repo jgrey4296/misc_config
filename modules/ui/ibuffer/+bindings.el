@@ -1,17 +1,9 @@
 ;;; +bindings.el -*- lexical-binding: t; no-byte-compile: t; -*-
 
 (dlog! "Setting up Ibuffer bindings: %s" (current-time-string))
-
-(defvar jg-ibuffer-mode-map (make-keymap))
-(defvar jg-ibuffer-filter-map (make-sparse-keymap))
-(defvar jg-ibuffer-sort-map   (make-sparse-keymap))
-(defvar jg-ibuffer-mark-map   (make-sparse-keymap))
+(evil-make-overriding-map jg-ibuffer-mode-map 'normal)
 
 (map! [remap ibuffer]   #'+jg-ibuffer-default)
-
-(map! :leader
-      :desc "Switch buffer"         ","     #'+jg-ibuffer-ivy-buffer
-      )
 
 (map! :map jg-ibuffer-mode-map
       :localleader
@@ -23,7 +15,6 @@
        :desc "add-to-tmp-show"     :n "s" #'ibuffer-add-to-tmp-show
        :desc "add-to-tmp-hide"     :n "h" #'ibuffer-add-to-tmp-hide
        )
-
 
       )
 
@@ -46,6 +37,7 @@
        :desc "filter"                     :n "'"   #'ibuffer-filter-chosen-by-completion
        :desc "unsaved"                    :n "u"   #'ibuffer-filter-by-unsaved-buffers
        :desc "agendas"                    :n "a"   #'ibuffer-filter-by-agenda-buffers
+       :desc "stars"                      :n "s"   #'ibuffer-filter-by-starred-name
        )
       )
 
@@ -104,6 +96,7 @@
       :desc "clear-filter-groups"            "\\"  #'ibuffer-clear-filter-groups
       :desc "pop-filter"                     "p"   #'ibuffer-pop-filter
       :desc "negate-filter"                  "!"   #'ibuffer-negate-filter
+      :desc "Clear tmp filters"              "0"   #'+jg-ibuffer-clear-tmp-regexps
 
       (:prefix ("f" . "filter ops")
        :desc "negate-filter"                  "!"   #'ibuffer-negate-filter
@@ -166,5 +159,4 @@
       "\\" jg-ibuffer-filter-map
       "o"  jg-ibuffer-sort-map
       )
-(evil-make-overriding-map jg-ibuffer-mode-map 'normal)
 (setq ibuffer-mode-map jg-ibuffer-mode-map)

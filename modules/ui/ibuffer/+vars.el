@@ -76,3 +76,13 @@
     ("buffers" . #'ibuffer)
     )
   )
+
+;;-- maps
+(defvar jg-ibuffer-mode-map   (make-keymap))
+
+(defvar jg-ibuffer-filter-map (make-sparse-keymap))
+
+(defvar jg-ibuffer-sort-map   (make-sparse-keymap))
+
+(defvar jg-ibuffer-mark-map   (make-sparse-keymap))
+;;-- end maps

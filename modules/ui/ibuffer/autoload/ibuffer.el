@@ -1,8 +1,10 @@
 ;; -*- lexical-binding: t -*-
 
 (defvar jg-ibuffer-generate-group-hook nil)
+
 (defvar jg-ibuffer-default-filter nil)
 
+;;;###autoload
 (defun +jg-ibuffer-generate-project-groups ()
   "Create a set of ibuffer filter groups based on the projectile root dirs of buffers."
   (let ((roots (ibuffer-remove-duplicates
@@ -13,7 +15,7 @@
             roots))
   )
 
-(defun +jg-ibuffer-run-generate-hook ()
+(defun jg-ibuffer--run-generate-hook ()
   " Run the ibuffer generate hook and return the list of groups to use "
   (append (cl-loop for fn in jg-ibuffer-generate-group-hook
                    append
@@ -26,6 +28,14 @@
 
 ;;;###autoload
 (defun +jg-ibuffer-default()
+  "Start ibuffer, with:
+- dynamic groups generated
+- the default filter applied
+- temp hide regexps applied
+- groups sorted
+
+Just switches to ibuffer if an ibuffer already exists
+"
   (interactive)
   (if (get-buffer "*Ibuffer*")
       (switch-to-buffer "*Ibuffer*")
@@ -34,7 +44,7 @@
                `((saved . ,jg-ibuffer-default-filter)))
              nil nil
              ;; groups
-             (+jg-ibuffer-run-generate-hook)
+             (jg-ibuffer--run-generate-hook)
              )
     (push jg-ibuffer-never-show-regexps ibuffer-tmp-hide-regexps)
     (+jg-ibuffer-sort-groups)
@@ -91,6 +101,13 @@
   (message "Ibuffer: (Sort: ,) (Format: .) (Filter: \) (Jump: s) (Mark: -) (Mark-all: =) (Help: ?)")
   )
 
+;;;###autoload
+(defun +jg-ibuffer-clear-tmp-regexps ()
+  (interactive)
+  (setq ibuffer-tmp-hide-regexps nil
+        ibuffer-tmp-show-regexps nil)
+  (ibuffer-update nil)
+  )
 
 ;;-- test
 ;; (define-ibuffer-filter jg-projectile-root

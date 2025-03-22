@@ -1,14 +1,5 @@
 ;;; +filters.el -*- lexical-binding: t; -*-
 
-(setq-default jg-ibuffer-heuristics (rx (or "backtab"
-                                            (regexp "\\.\\.")
-                                            (regexp "^[[:alpha:]]\\{2,\\}")
-                                            (regexp "which-key")
-                                            (regexp "/ S")
-                                            )
-                                        )
-              )
-
 (speckler-add! ibuffer-formats ()
   '(normal
     mark modified read-only locked
@@ -28,7 +19,7 @@
     " " project-relative-file)
   )
 
-;; Agendas
+;;-- agenda
 (speckler-add! ibuffer-filters ()
   '(agendas (or  (agenda-buffers)
                  (name . "base_agenda.org")))
@@ -38,38 +29,45 @@
   '(agendas ("Agendas" (saved . "agendas")))
   )
 
+;;-- end agenda
+
 ;; Filters:
 
-(speckler-add! ibuffer-filters ()
-  '(-clutter (not (or (name . "*http ")
-                      (used-mode . flycheck-error-list-mode)
-                      (used-mode . ivy-mode)
-                      (used-mode . helm-major-mode)
-                      (used-mode . helpful-mode)
-                      (used-mode . special-mode)
-                      (derived-mode . helm-major-mode)
-                      (derived-mode . helpful-mode)
-                      (derived-mode . magit-mode)
-                      (name . "*vc*")
-                      (name . "*shasum*")
-                      (name . "[[:space:]]+\\*.+")
-                      (name . "*trash-async*")
-                      ))
-    )
-  '(dired (used-mode . dired-mode))
-  )
 
-(speckler-add! ibuffer-filters ()
-  '(carousel (name . "->"))
-  '(stars       (name . "^*"))
+(speckler-add! ibuffer-filters () ;; special
+  :override t
+  '(stars       (and (name . "\\`\\*\\w")
+                     (not (saved . "eww"))))
+  '(space-star  (or (name . "\\`\\*\\W")
+                    (name . "\\`\s\\*")))
+  '(eww         (name . "\\*eww-"))
+  '(addfiles    (name . "^\+"))
+  '(carousel    (name . "->"))
   '(music       (or (name . "*\\(tidal\\|SCLang\\)")
                     (used-mode . sclang-mode)
                     (used-mode . tidal-mode)
                     (file-extension . "scd\\|hs\\|tidal")))
+  '(dired       (used-mode . dired-mode))
 
-  '(org         (and (derived-mode . org-mode)
-                     (not (agenda-buffers))))
-  '(python      (or (derived-mode . python-mode) (derived-mode . python-base-mode)))
+  '(-clutter (not (or
+                   (used-mode . flycheck-error-list-mode)
+                   (used-mode . ivy-mode)
+                   (used-mode . helm-major-mode)
+                   (used-mode . helpful-mode)
+                   (used-mode . special-mode)
+                   (derived-mode . helm-major-mode)
+                   (derived-mode . helpful-mode)
+                   (derived-mode . magit-mode)
+                   ))
+    )
+  )
+
+(speckler-add! ibuffer-filters () ;; programming
+  :override t
+  '(python      (or (derived-mode . python-mode)
+                    (derived-mode . python-base-mode)
+                    (file-extension . "\\.py")
+                    ))
   '(dotnet      (or (derived-mode . csharp-mode)
                     (derived-mode . csharp-ts-mode)
                     (derived-mode . shader-mode)
@@ -77,21 +75,16 @@
                     (derived-mode . csproj-mode)
                     (derived-mode . sln-mode)
                     ))
+  '(lisp        (and (or (derived-mode . emacs-lisp-mode)
+                         (file-extension . "\\.el"))
+                     (not (saved . "stars"))))
   '(programming (or (derived-mode . prog-mode)
                     (mode . ess-mode)
                     (mode . compilation-mode)))
   '(tests        (and (derived-mode . prog-mode)
                       (or (name . "test_")
                           (name . ".+?[-_]tests?\\."))))
-  '(text        (or (saved . "org")
-                    (mode . markdown-mode)
-                    (saved . "TeX")
-                    (and (derived-mode . text-mode)
-                         (not (starred-name)))))
-  '(TeX         (or (derived-mode . tex-mode)
-                    (mode . latex-mode)
-                    (mode . context-mode)
-                    (mode . ams-tex-mode)))
+
   '(web         (or (derived-mode . sgml-mode)
                     (derived-mode . css-mode)
                     (mode . javascript-mode)
@@ -101,14 +94,29 @@
                     (mode . sass-mode)))
   )
 
-(speckler-add! ibuffer-filters ()
+(speckler-add! ibuffer-filters () ;; text
+  :override t
+  '(text        (or (saved . "org")
+                    (mode . markdown-mode)
+                    (saved . "TeX")
+                    (and (derived-mode . text-mode)
+                         (not (starred-name)))))
+  '(org         (and (derived-mode . org-mode)
+                     (not (agenda-buffers))))
+  '(TeX         (or (derived-mode . tex-mode)
+                    (mode . latex-mode)
+                    (mode . context-mode)
+                    (mode . ams-tex-mode)))
+  )
+
+(speckler-add! ibuffer-filters () ;; mail
   '(mail (or (mode . message-mode)
              (mode . mail-mode)
              (mode . gnus-group-mode)
              (mode . gnus-summary-mode)
              (mode . gnus-article-mode))))
 
-(speckler-add! ibuffer-filters ()
+(speckler-add! ibuffer-filters () ;; data
   '(csv     (mode . csv-mode))
   '(graphql (mode . graphql-mode))
   '(json    (mode . json-mode))
@@ -121,27 +129,30 @@
   '(bibtex  (used-mode . bibtex-mode))
   )
 
-(speckler-add! ibuffer-filters ()
-  '(ring-buffers ())
-  )
-
 ;; Groups:
 
-(speckler-add! ibuffer-groups ()
+(speckler-add! ibuffer-groups () ;; default
+  :override t
   '(default
-    ("Agendas"     (saved . "agendas"))
     ("*Processes*" (and (not (derived-mode . shell-mode))
                         (process)))
     ("*Shells*"      (or (mode . shell-mode)
                          (mode . comint-mode)
                          (name . "^\*repl\*")))
-    ("*Starred*"   (saved . "stars"))
-    ("*Eww Pages*" (name . "\\*eww-"))
-    ("*Project: configs*" (projectile-root . "__configs"))
-    ("Dired"       (mode . dired-mode))
+    ("*Starred*"   (and (saved . "stars")
+                        (not (derived-mode . shell-mode))
+                        (not (saved . "space-star"))
+                        ))
+    ("*Special*"   (and (saved . "space-star")
+                        (not (saved . "stars"))))
+    ("*Eww*"       (saved . "eww"))
+    ("*Dired*"     (mode . dired-mode))
+    ("*Configs*"   (or (projectile-root . "__config")
+                       (saved . "addfiles")))
+    ("Agendas"     (saved . "agendas"))
     ("Mail"        (saved . "mail"))
     ;; ("*Project: writing" (projectile-root . "jgrey4296.github.io"))
-    ("Lisp"        (mode . emacs-lisp-mode))
+    ("Lisp"        (saved . "lisp"))
     ("Python"      (or (mode . python-mode) (derived-mode . python-base-mode)))
     ("DotNet"      (or (derived-mode . csharp-mode)
                        (derived-mode . csharp-ts-mode)
@@ -169,13 +180,25 @@
                        (file-extension . "bookmarks")
                        ))
     )
-  '(starred ("*Starred*"   (saved . "stars")))
+  )
+
+(speckler-add! ibuffer-groups () ;; starred, general
+  :override t
+  '(starred
+    ("*Starred*"   (saved . "stars"))
+    ("*Special*"   (saved . "special"))
+    )
   '(general
-    ("*Starred*"     (saved . "stars"))
+    ("*Starred*"   (saved . "stars"))
     ("Org"         (saved . "org"))
     ("Programming" (saved . "programming"))
     ("Dired"       (saved . "dired"))
     )
+  '(dired   ("dired"       (saved . "dired")))
+  )
+
+(speckler-add! ibuffer-groups () ;; text
+  :override t
   '(text
     ("Org"         (saved . "org"))
     ("Markdown"    (mode  . markdown-mode))
@@ -183,13 +206,13 @@
     ("Tex"         (mode  . tex-mode))
     ("Bibtex"      (mode  . bibtex-mode))
     )
-  '(dired   ("dired"       (saved . "dired")))
   )
 
-(speckler-add! ibuffer-groups ()
+(speckler-add! ibuffer-groups () ;; projects, programming, tests
+  :override t
   '(projects
-    ("*Starred*" (starred-name))
-    ("*Project: configs*" (projectile-root . "__configs"))
+    ;; ("*Starred*" (starred-name))
+    ("*Project: configs*" (projectile-root . "__config"))
     ("*Project: modules*" (projectile-root . "modules"))
     ("*Project: writing*" (projectile-root . "jgrey4296.github.io"))
     ("*Project: Dropbox*" (projectile-root . "Dropbox"))
@@ -202,7 +225,7 @@
     )
   )
 
-(speckler-add! ibuffer-groups ()
+(speckler-add! ibuffer-groups () ;; programing extension
   :extend t
   '(programming
     ("python" (or (derived-mode . python-mode) (derived-mode . python-base-mode)))

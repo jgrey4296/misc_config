@@ -26,12 +26,14 @@
            for fns = (plist-get vals prop)
            do
            (librarian--doc-update-handler prop
-                                          (pcase fns
-                                            ((and x (pred functionp)) (list x))
-                                            ((and x `(function . ,_)) (list (upfun! x)))
-                                            ((and x (pred listp))     (mapcar #'upfun! x))
-                                            (x (ensure-list x))
-                                            )
+                                          (cond ((functionp fns)
+                                                 (list fns))
+                                                ((eq (car-safe fns) 'function)
+                                                 (list (upfun! fns)))
+                                                ((listp fns)
+                                                 (mapcar #'upfun! fns))
+                                                (t (ensure-list fns))
+                                                )
                                           )
            )
   )

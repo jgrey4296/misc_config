@@ -2,17 +2,9 @@
 
 (map! :leader
       :desc "Open Url"               "?"       #'librarian-url
-      :desc "Local Variables"        "b l"     #'librarian-buffer-locals
       :desc "Dir: Librarian-regular" "y 4"     (cmd! (find-file librarian-regular-loc))
       :desc "Dir: General Insert"    "y 5"     (cmd! (find-file librarian-insert-loc))
       :desc "General Insert"         "i g"     #'librarian-insert-trigger
-
-      (:prefix "s"
-       ;; :desc "Look up in all docsets"       "K" #'+lookup/in-all-docsets
-       :desc "Look up in local docsets"     "k" #'librarian-docsets-consult
-       :desc "Look up online (w/ prompt)"   "O" #'librarian-online-select
-       :desc "Look up online"               "o" #'librarian-online
-       )
       )
 
 (map! :map jg-help-map
@@ -31,9 +23,10 @@
        :i "s" #'self-insert-command
       (:prefix ("s" . "Jump")
        :desc "Browse URL"                :n "u" #'librarian-url
+       :desc "Select Link"               :n "," #'link-hint-open-link
        :desc "Librarian Regular"         :n "1" #'librarian-regular-go!
 
-       (:prefix ("k" . "Documentation")
+       (:prefix ("k" . "Lookup")
         :desc "Choose Handler"             :n    ";" #'librarian-choose
         :desc "Assignments"                :n    "a" #'librarian-assignments
         :desc "Type definition"            :n    "t" #'librarian-type-definition
@@ -47,11 +40,12 @@
         :desc "Look up online (w/ prompt)" :n    "1" #'librarian-online-select
         :desc "Look up online"             :n    "2" #'librarian-online
 
-        :desc "Dictionary"                 :n    "q" #'librarian-words-definition
-        :desc "Thesaurus"                  :n    "Q" #'librarian-words-synonyms
+        :desc "Dictionary"                 :n    "w" #'librarian-words-definition
+        :desc "Thesaurus"                  :n    "W" #'librarian-words-synonyms
 
         :desc "Debug"                      :n    "?" #'librarian-debug
         :desc "Install Docset"             :n    "0" #'librarian-docsets-install
+        :desc "Local Variables"            :n    "L" #'librarian-buffer-locals
         )
        )
       )

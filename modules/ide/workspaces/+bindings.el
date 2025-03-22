@@ -39,7 +39,7 @@
 
 ;;-- ibuffer
 (map! :map jg-ibuffer-filter-map
-      (:prefix "b"
+      (:prefix ("b" . "by")
        :desc "filter-by-workspace"   "w" #'ibuffer-filter-by-workspace-buffers
        :desc "filter-by-carousel" "R" #'ibuffer-filter-by-carousel-buffers
       )

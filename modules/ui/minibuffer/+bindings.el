@@ -97,8 +97,11 @@
       :n "q"    #'minibuffer-keyboard-quit
       )
 
-
 ;;-- end minibuffer-completion
+
+(map! :map (crm-local-must-match-map crm-local-completion-map)
+      :ni "RET" #'exit-minibuffer
+      )
 
 (map! :map (read-regexp-map minibuffer-local-shell-command-map)
       :ni "RET" #'exit-minibuffer

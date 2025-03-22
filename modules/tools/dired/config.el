@@ -18,9 +18,7 @@
             insert-directory-program "ls")
     )
 
-
   (setq dired-listing-switches (string-join dired-args " "))
-
 
   (put 'dired-find-alternate-file 'disabled nil)
 
@@ -28,6 +26,10 @@
 
   ;; https://www.gnu.org/software/emacs/manual/html_node/tramp/Frequently-Asked-Questions.html
   (add-hook! 'dired-before-readin-hook #'(lambda () (when (file-remote-p default-directory) (setq dired-actual-switches "-al"))))
+
+  (setq-hook! 'dired-mode-hook
+    evil-disable-insert-state-bindings t
+    )
   )
 
 (use-package! dired-quick-sort

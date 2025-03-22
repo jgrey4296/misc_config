@@ -34,7 +34,7 @@
   )
 (transient-toggle-hook! hl-line ()
   "Hl-line"
-  :key "h"
+  :key "H"
   :global t
   :hook '(prog-mode text-mode)
   :fn #'hl-line-mode
@@ -48,7 +48,7 @@
   )
 (transient-toggle-hook! highlight-symbol ()
   "Auto Highlight Symbol"
-  :key "H"
+  :key "h"
   :global t
   :hook 'prog-mode
   :fn #'auto-highlight-symbol-mode

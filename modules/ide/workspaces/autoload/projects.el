@@ -101,6 +101,7 @@
 (defun +jg-projects-detect-type ()
   (interactive)
   (setq projectile-project-type (projectile-detect-project-type))
+  (message "Project Type: %s" projectile-project-type)
   )
 
 ;;;###autoload

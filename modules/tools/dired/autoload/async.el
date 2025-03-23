@@ -223,6 +223,7 @@
     )
   )
 
+;;;###autoload
 (defun +jg-dired-async-list-zip-files ()
   "List the files contained in a zip file"
   (interactive)

@@ -56,7 +56,8 @@
              #'doom-ediff-save-wconf-h)
 
   (add-hook! 'ediff-prepare-buffer-hook
-             #'+jg-diff-unfold-h)
+             #'+jg-diff-unfold-h
+             )
 
   (add-hook! '(ediff-quit-hook ediff-suspend-hook)
              :append

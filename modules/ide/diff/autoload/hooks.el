@@ -57,7 +57,6 @@
   (when (-any #'symbol-value
               (-filter #'boundp
                        fold-modes))
-    (evil-open-folds)
-    (vimish-fold-unfold-all)
-    )
+    (evil-open-folds))
+  (vimish-fold-unfold-all)
   )

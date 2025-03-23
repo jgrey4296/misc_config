@@ -265,10 +265,6 @@
     "yield"  :yield
     )
   )
-(speckler-add! tree-sit-lang ()
-  '(python-mode . python)
-  '(doot-mode . python)
-  )
 (speckler-add! online-search ()
   '(python
     ("Python" "https://docs.python.org/3/search.html?q=%s&check_keywords=yes&area=default")

@@ -2,7 +2,6 @@
 
 (dlog! "Config JG Python")
 
-(local-load! "+spec-defs")
 (local-load! "+defs")
 (local-load! "+vars")
 (local-load! "+extra")

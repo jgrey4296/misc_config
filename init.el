@@ -41,7 +41,7 @@
  :lang-data quotes
 
  :lang-dsl acab ai-and-logic
- :lang-dsl rest sh nix
+ :lang-dsl rest nix
  :lang-dsl qt
  ;; :lang-dsl music
 

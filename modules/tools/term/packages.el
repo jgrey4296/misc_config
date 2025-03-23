@@ -25,4 +25,5 @@
 (package! comint :built-in t)
 (package! shell-pop)
 (package! exec-path-from-shell)
+(package! company-shell)
 ;;; packages.el ends here

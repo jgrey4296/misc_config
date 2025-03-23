@@ -38,6 +38,7 @@
       :desc "Sort imports"           "s" #'+jg-python-isort-diff
       (:prefix ("i" . "imports")
        :desc "Insert Import Snippet"  "I" #'+jg-python-import-snippet
+       :desc "Autogen Exports"        "e" #'+jg-python-gen-exports
        (:when (modulep! +isort)
          :desc "Sort imports"      "s" #'py-isort-buffer
          :desc "Sort region"       "r" #'py-isort-region

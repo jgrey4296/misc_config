@@ -68,3 +68,8 @@
     :implementations #'helm-wordnet-suggest
     )
   )
+(speckler-add! auto-modes ()
+  '(librarian
+    ("\\.lenvs\\'"               . conf-mode)
+    )
+  )

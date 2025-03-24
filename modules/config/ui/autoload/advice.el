@@ -31,7 +31,8 @@ windows, switch to `doom-fallback-buffer'. Otherwise, delegate to original
            (message "Burying buffer as its in other windows")
            (bury-buffer)
            keep)
-          ((and (buffer-modified-p buf) ;; check for modified buffers
+          ((and (doom-real-buffer-p buf)
+                (buffer-modified-p buf) ;; check for modified buffers
                 (not (y-or-n-p (format "Buffer %s is modified; kill anyway?" buf))))
            keep)
           ((not (cl-set-difference (doom-real-buffer-list)

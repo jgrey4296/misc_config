@@ -122,6 +122,7 @@
 (use-package! carousel-minor-mode
   :after persp-mode
   :config
+  (add-to-list 'carousel-buffer-exclusions "*Carousel-Transient*")
   (carousel-minor-mode 1)
   (speckler-add! ivy-actions ()
     `(+jg-workspaces-ivy

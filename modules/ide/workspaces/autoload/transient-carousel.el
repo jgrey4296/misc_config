@@ -94,6 +94,22 @@
   :desc (macro-tools--transient-simple-fmt "Find-Buffer" "f")
   :transient nil
   #'carousel-goto-choice)
+(transient-call! carousel-pin-left ()
+  "Pin Left"
+  :key "{"
+  :interactive t
+  :desc "Pin Buffer Left"
+  :transient t
+  #'carousel-pin-left
+  )
+(transient-call! carousel-pin-right ()
+  "Pin Right"
+  :key "}"
+  :interactive t
+  :desc "Pin Buffer Right"
+  :transient t
+  #'carousel-pin-right
+  )
 
 (defun jg-workspace-carousel-title ()
   (format "Carousel: %s (%s)"
@@ -121,6 +137,10 @@
     ["Order Change"
      (transient-macro-call-carousel-move-left)
      (transient-macro-call-carousel-move-right)
+     ]
+    ["Pin"
+     (transient-macro-call-carousel-pin-left)
+     (transient-macro-call-carousel-pin-right)
      ]
     [
      ["Buffer Control "
@@ -163,3 +183,5 @@
 ;;
 ;;-- end Footer
 ;;; carousel-transient.el ends here
+
+(jg-workspace-build-carousel-transient)

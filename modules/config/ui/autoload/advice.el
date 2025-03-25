@@ -31,6 +31,8 @@ windows, switch to `doom-fallback-buffer'. Otherwise, delegate to original
            (message "Burying buffer as its in other windows")
            (bury-buffer)
            keep)
+          ((eq buf-mode 'dired-mode)
+           kill)
           ((and (doom-real-buffer-p buf)
                 (buffer-modified-p buf) ;; check for modified buffers
                 (not (y-or-n-p (format "Buffer %s is modified; kill anyway?" buf))))

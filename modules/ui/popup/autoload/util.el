@@ -46,7 +46,7 @@
   (when (windowp window)
     (unless +popup--inhibit-select
       (pcase (+popup-parameter 'select window)
-        ((pred functionp)  (funcall select window origin))
+        ((and select (pred functionp))  (funcall select window origin))
         ('nil
          (select-window origin))
         ('t

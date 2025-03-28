@@ -28,7 +28,9 @@
   "Popup rule for a persistent buffer")
 
 (speckler-new! popup (key val)
-  "Specify popup buffer rules."
+  "Specify popup buffer rules.
+Modifies the display-buffer-alist rules
+"
   :target display-buffer-alist
   :sorted t
   :loop 'append

@@ -7,6 +7,7 @@
 
 ;;;###autoload
 (defun +jg-popup-ivy-open (buff)
+  ""
   (interactive)
   (let ((curr-rule (display-buffer-assq-regexp buff display-buffer-alist nil))
         (curr-window (selected-window))

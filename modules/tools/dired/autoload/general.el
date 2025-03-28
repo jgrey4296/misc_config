@@ -232,3 +232,16 @@ Type SPC or `y' to %s one match, DEL or `n' to skip to next,
       )
     )
 )
+
+
+;;;###autoload
+(defun +jg-dired-popup ()
+  (interactive)
+  (message "Dir: %s" default-directory )
+  (let ((dirbuff (save-window-excursion (dired default-directory))))
+    (with-current-buffer dirbuff
+      (setq-local display-buffer-alist display-buffer-alist)
+      (+popup/buffer)
+      )
+    )
+  )

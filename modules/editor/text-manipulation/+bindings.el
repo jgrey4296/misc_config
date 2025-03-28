@@ -21,7 +21,6 @@
 (map! :map jg-binding-normal-state-map
       :desc "SPC? Insert" "I SPC"            #'evil-mapspace-state
       :desc "Chars"       "I c"              #'evil-spechar-state
-      :desc "Rotate"      "R"                #'rotate-text
       :desc "Select Whitespace" "v SPC"      #'+jg-text-visual-select-whitespace
       )
 

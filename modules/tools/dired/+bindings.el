@@ -9,6 +9,7 @@
 
 (map! :leader
       "f t" #'+jg-list-trash
+      "d"   #'+jg-dired-popup
       )
 
 (defun +jg-dired-group-helper ()

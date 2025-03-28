@@ -6,7 +6,15 @@
 ;;
 ;;-- end Header
 
-(use-package! vimish-fold)
+(use-package! vimish-fold
+  :config
+  (defun jg-fold-vimish-open-on-move (&rest rest)
+    (when vimish-fold-mode
+      (vimish-fold-unfold))
+    )
+  (advice-add #'evil-goto-line :after #'jg-fold-vimish-open-on-move)
+
+  )
 
 (setq-default vimish-fold-dir (concat doom-cache-dir "vimish-fold/")
               vimish-fold-indication-mode 'right-fringe

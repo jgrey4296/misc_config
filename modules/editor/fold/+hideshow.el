@@ -17,11 +17,18 @@
 (use-package! hideshow ; built-in
   :commands (hs-toggle-hiding hs-hide-block hs-hide-level hs-show-all hs-hide-all)
   :config
-  (advice-add 'hs-toggle-hiding :before #'+fold--hideshow-ensure-mode-a)
-  (advice-add 'hs-hide-block :before #'+fold--hideshow-ensure-mode-a)
-  (advice-add 'hs-hide-level :before #'+fold--hideshow-ensure-mode-a)
-  (advice-add 'hs-show-all :before #'+fold--hideshow-ensure-mode-a)
-  (advice-add 'hs-hide-all :before #'+fold--hideshow-ensure-mode-a)
+  ;; (advice-add 'hs-toggle-hiding :before #'+fold--hideshow-ensure-mode-a)
+  ;; (advice-add 'hs-hide-block :before #'+fold--hideshow-ensure-mode-a)
+  ;; (advice-add 'hs-hide-level :before #'+fold--hideshow-ensure-mode-a)
+  ;; (advice-add 'hs-show-all :before #'+fold--hideshow-ensure-mode-a)
+  ;; (advice-add 'hs-hide-all :before #'+fold--hideshow-ensure-mode-a)
+
+  (defun jg-fold-hs-open-on-move (&rest rest)
+    (when (and hs-minor-mode (hs-already-hidden-p))
+      (hs-show-block)
+      )
+    )
+  (advice-add 'evil-goto-line :after #'jg-fold-hs-open-on-move)
   )
 
 (setq-default hs-hide-comments-when-hiding-all nil

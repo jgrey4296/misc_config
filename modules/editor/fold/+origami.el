@@ -6,7 +6,16 @@
 ;;
 ;;-- end Header
 
-(use-package! origami :defer t)
+(use-package! origami
+  :defer t
+  :config
+  (defun jg-fold-origami-open-on-move (&rest rest)
+    (when origami-mode
+      (origami-open-node (point) (current-buffer))
+      )
+    )
+  (advice-add #'evil-goto-line :after #'jg-fold-origami-open-on-move)
+  )
 
 (speckler-add! fold ()
   `(origami

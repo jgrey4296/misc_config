@@ -26,7 +26,6 @@ windows, switch to `doom-fallback-buffer'. Otherwise, delegate to original
          (kill nil)
          buffer-list-update-hook
          )
-    ;; (message "Trying to kill: %s" buf)
     (cond (in-other-windows ;; ignore if other windows have the buffer
            (message "Burying buffer as its in other windows")
            (bury-buffer)

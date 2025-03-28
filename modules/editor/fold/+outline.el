@@ -6,10 +6,18 @@
 ;;
 ;;-- end Header
 
-
 ;built-in
-(use-package! outline)
 
+(use-package! outline
+  :config
+  (defun jg-fold-outline-open-on-move (&rest rest)
+    (when (and outline-minor-mode (outline-invisible-p))
+      (outline-show-entry)
+      )
+    )
+  (advice-add #'evil-goto-line :after #'jg-fold-outline-open-on-move)
+
+  )
 
 (setq outline-blank-line nil)
 

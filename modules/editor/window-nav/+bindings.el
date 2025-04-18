@@ -15,7 +15,10 @@
 
 (map! :map jg-binding-jump-map
       :desc "Jump to Window"  "w" #'switch-window
-      :desc "Firefox Helm"                "a f" #'+jg-nav-helm-bookmarks
+      )
+
+(map! :map jg-binding-helm-map
+      :desc "Firefox Helm"    "f" #'+jg-nav-helm-bookmarks
       )
 
 (map! :leader

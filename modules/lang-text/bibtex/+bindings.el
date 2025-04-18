@@ -6,6 +6,7 @@
 
 ;;-- bibtex-mode
 (map! :map jg-bibtex-mode-map ;; main
+      :n "=" (cmd! (org-bibtex-read-buffer (current-buffer)))
       :n "|"                                  #'librarian-insert-trigger
       :desc "Lock Key"           :n "!"       #'librarian--biblio-edit-lock-key
       :desc "Insert from Doi"    :n "I d"     #'librarian-biblio-create-from-doi
@@ -136,6 +137,7 @@
       :desc "Bibtex Helm"               "B" #'+jg-bibtex-helm-bibtex
       :desc "Bibtex Local"              "l" #'ivy-bibtex-with-local-bibliography
       :desc "Bibtex Helm Local"         "L" #'helm-bibtex-with-local-bibliography
+      :desc "Rebuild Bib Library"       "1" #'librarian--biblio-build-list
       )
 
 ;;-- end helm

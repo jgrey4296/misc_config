@@ -11,7 +11,7 @@
       ;; 1 2 3 "u" "h"
       ;; :desc "Ivy resume"            "`"   #'ivy-resume
       "c" #'ignore
-      :desc "helms"                 "a"   'jg-binding-helm-map
+      :desc "helms"                 "a"   jg-binding-helm-map
       :desc "Last Change"           ";"   #'goto-last-change
       :desc "Jump to Char"          "."   #'avy-goto-char
       :desc "Line"                  "l"   #'evil-avy-goto-line

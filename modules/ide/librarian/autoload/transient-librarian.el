@@ -28,7 +28,7 @@
   (librarian-browser-select)
   )
 (transient-call! librarian-rebuild-database ()
-  "Rebuild Database"
+  "Rebuild Tag Database"
   :key "r"
   :transient nil
   (librarian-tag-mode-rebuild-tag-database)

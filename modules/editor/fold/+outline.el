@@ -19,6 +19,16 @@
 
   )
 
+(defun jg-fold-outline-hide-sublevels ()
+  (interactive)
+  (with-no-warnings (outline-hide-sublevels 1))
+  )
+
+(defun jg-fold-outline-show-children ()
+  (interactive)
+  (with-no-warnings (outline-show-entry) (outline-show-children))
+  )
+
 (setq outline-blank-line nil)
 
 (speckler-add! fold ()
@@ -26,9 +36,9 @@
     :modes (outline-mode outline-minor-mode markdown-mode)
     :priority -25
     :triggers (:open-all   #'outline-show-all
-               :close-all  ,(cmd! (with-no-warnings (outline-hide-sublevels 1)))
+               :close-all  #'jg-fold-outline-hide-sublevels
                :toggle     #'outline-toggle-children
-               :open       ,(cmd! (with-no-warnings (outline-show-entry) (outline-show-children)))
+               :open       #'jg-fold-outline-show-children
                :open-rec   #'outline-show-subtree
                :close      #'outline-hide-subtree
                )

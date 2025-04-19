@@ -8,12 +8,12 @@
 (speckler-add! fold ()
   `(helpful
     :modes (helpful-mode)
-    :triggers (:open-all  #'hs-show-all
-               :close-all #'hs-hide-all
-               :toggle    #'hs-toggle-hiding
-               :open      #'hs-show-block
-               :open-rec  nil
-               :close     #'hs-hide-block
+    :triggers (:open-all   #'outline-show-all
+               :close-all  #'jg-fold-outline-hide-sublevels
+               :toggle     #'outline-toggle-children
+               :open       #'jg-fold-outline-show-children
+               :open-rec   #'outline-show-subtree
+               :close      #'outline-hide-subtree
                )
     )
   )

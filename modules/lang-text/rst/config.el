@@ -21,3 +21,9 @@
 (use-package! sphinx-doc
   :defer t
   )
+
+(use-package! jinja2-mode
+  :config
+
+  (add-hook 'jinja2-mode-hook #'abbrev-mode)
+  )

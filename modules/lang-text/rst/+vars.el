@@ -4,9 +4,10 @@
 
 (speckler-add! auto-modes ()
   '(rst
-    ("\\.txt\\'" . rst-mode)
-    ("\\.rst\\'" . rst-mode)
-    ("\\.rest\\'" . rst-mode)
+    ("\\.txt\\'"   . rst-mode)
+    ("\\.rst\\'"   . rst-mode)
+    ("\\.rest\\'"  . rst-mode)
+    ("\\.jinja\\'" . jinja2-mode)
     )
   )
 (speckler-add! file-templates ()

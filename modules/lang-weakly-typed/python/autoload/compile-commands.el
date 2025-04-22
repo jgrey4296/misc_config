@@ -18,6 +18,9 @@
      '("mamba envs" "mamba env list")
      '("mamba list" "mamba list")
      '("mamba info" "mamba info")
+     ;; uv
+     '("uv sync" "uv sync")
+     '("uv deps" "uv tree")
      ;; pytest
      '("pytest" "pytest")
      '("pytest version" "pytest --version")

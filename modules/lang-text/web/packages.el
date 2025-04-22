@@ -9,6 +9,7 @@
 (package! company-web)
 (package! jinja2-mode)
 (package! web-mode)
+(package! sgml-mode :built-in t)
 
 ;; (package! poly-ansible)
 (package! polymode)

@@ -1,6 +1,10 @@
 ;;; lang-text/web/+bindings.el -*- lexical-binding: t; -*-
 
 (defvar jg-web-mode-map (make-sparse-keymap))
+(defvar sgml-mode-map (make-sparse-keymap))
+(defvar jinja2-mode-map (make-sparse-keymap))
+(defvar web-mode-map (make-sparse-keymap))
+(defvar html-mode-map (make-sparse-keymap))
 
 (map! :map jg-web-mode-map
       ;; :g  "M-/" #'web-mode-comment-or-uncomment
@@ -94,7 +98,7 @@
       )
 
 (map! :map (css-mode-map less-css-mode-map scss-mode-map sass-mode-map)
-      :n "|"  #'librarian-insert-minor-mode
+      :n "|"  #'librarian-insert-trigger
       :n "s j" #'counsel-css
 
       :localleader

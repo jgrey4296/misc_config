@@ -10,23 +10,23 @@
 
 ;;-- standard
 (pushnew! bibtex-jg-entry-alist
-          '("Article" "Article in Journal"
+          '("article" "Article in Journal"
             ( ("author") ("title") ("tags") ("doi") )
             ( ("year") ("journal") ("volume") ("number") )
             ( ("pages") ("subtitle") ) )
-          '("Book" "Single-Volume Book"
+          '("book" "Single-Volume Book"
             (("author" nil nil 1) ("editor" nil nil -1) ("title")  ("year" ) ("publisher") ("isbn") )
             ()
             ( ("series")  ("tags") ("subtitle") ) )
-          '("Collection" "Single-Volume Collection"
+          '("collection" "Single-Volume Collection"
             ( ("title")  ("tags") ("author" nil nil 1) ("editor" nil nil -1)  ("year")  )
             ()
             ( ("tags") ("subtitle") ) )
-          '("Proceedings" "Conference Proceedings"
+          '("proceedings" "Conference Proceedings"
             ( ("title") ("editor") ("year" ) ("country") ("url" nil nil 1) ("isbn" nil nil -1) )
             ()
             ( ("tags") ("doi") ("subtitle") ) )
-          '("Booklet" "Booklet (Bound, but no Publisher)"
+          '("booklet" "Booklet (Bound, but no Publisher)"
             ( ("author" nil nil 1) ("editor" nil nil -1) ("title") ("tags")  ("year") )
             ()
             ( ("subtitle")) )
@@ -35,19 +35,19 @@
 
 ;;-- misc
 (pushnew! bibtex-jg-entry-alist
-          '("Misc" "Miscellaneous"
+          '("misc" "Miscellaneous"
             ( ("author") ("title") ("year" ) ("tags") ("url") )
             ()
             () )
-          '("Unpublished" "Unpublished"
+          '("unpublished" "Unpublished"
             ( ("author") ("title")  ("year" ) ("tags") ("url") )
             ()
             () )
-          '("MusicScore" ""
+          '("musicScore" ""
             ( ("author") ("tags") ("year") ("idenfitied") ("title") )
             ()
             ( ("arrangement") ("section") ) )
-          '("Review" ""
+          '("review" ""
             ( ("author") ("tags") ("year") ("book_author") ("book_publisher") ("title") )
             ()
             ( ("journal") ("url") ("volume") ("number") ("pages") ("review_crossref") ("isbn") ) )
@@ -56,32 +56,32 @@
 
 ;;-- digital
 (pushnew! bibtex-jg-entry-alist
-          '("Online" "Online Resource"
+          '("online" "Online Resource"
             ( ("author" ) ("title") ("year" ) ("url" ) ("tags") )
             ()
             () )
-          '("Software" "Computer Software"
+          '("software" "Computer Software"
             ( ("author" ) ("title")  ("year" ) ("platform") ("tags") ("number") )
             ()
             () )
-          '("Game" ""
+          '("game" ""
             ( ("author") ("tags") ("year") ("platform") ("title") ("url") )
             ()
             ( ("publisher") ("series") ("edition") ("number") )
             )
-          '("Blog" ""
+          '("blog" ""
             ( ("author") ("tags") ("year") ("url") ("title") )
             ()
             () )
-          '("Tweet" ""
+          '("tweet" ""
             ( ("author") ("tags") ("year") ("url") )
             ()
             ( ("title") ) )
-          '("Thread" ""
+          '("thread" ""
             ( ("author") ("tags") ("year") ("url") ("title") )
             ()
             () )
-          '("Video" ""
+          '("video" ""
             (("author") ("tags") ("year") ("url") ("channel") ("series"))
             ()
             ()
@@ -91,7 +91,7 @@
 
 ;;-- thesis
 (pushnew! bibtex-jg-entry-alist
-          '("Thesis" "PhD or Master's Thesis"
+          '("thesis" "PhD or Master's Thesis"
             ( ("author") ("title")  ("institution" ) ("year") ("type") )
             ()
             ( ("doi") ("subtitle")) )
@@ -108,15 +108,15 @@
 
 ;;-- part of something
 (pushnew! bibtex-jg-entry-alist
-          '("InBook" "Chapter or Pages in a Book"
+          '("inbook" "Chapter or Pages in a Book"
             ( ("title") ("tags") ("doi") )
             ( ("author")  ("year")  ("booktitle") ("isbn") ("publisher") )
             ( ("subtitle") ))
-          '("InCollection" "Article in a Collection"
+          '("incollection" "Article in a Collection"
             ( ("author") ("title")  ("tags") ("doi") )
             ( ("booktitle")  ("year")  ("isbn") ("publisher") )
             ( ("subtitle") ) )
-          '("InProceedings" "Article in Conference Proceedings"
+          '("inproceedings" "Article in Conference Proceedings"
             ( ("author") ("title") ("year" ) ("tags") ("doi") )
             ( ("booktitle") )
             ( ("subtitle")) )
@@ -125,23 +125,23 @@
 
 ;;-- technical
 (pushnew! bibtex-jg-entry-alist
-          '("Dataset" "Data Set"
+          '("dataset" "Data Set"
             ( ("author" ) ("editor" ) ("title") ("tags")  ("year") ("institution") )
             ()
             () )
-          '("Manual" "Technical Manual"
+          '("manual" "Technical Manual"
             ( ("author" nil nil 1) ("editor" nil nil -1) ("title") ("year") ("tags") ("url") )
             ()
             () )
-          '("Report" "Technical or Research Report"
+          '("report" "Technical or Research Report"
             ( ("author") ("title")  ("institution" ) ("year" ) ("tags") ("url") )
             ()
             ( ("country")) )
-          '("Standard" "A Technical Standard. eg: by w3, IEEE..."
+          '("standard" "A Technical Standard. eg: by w3, IEEE..."
             ( ("title") ("tags") ("identifier") ("institution") ("year") )
             ()
             ( ("section") ) )
-          '("TechReport" ""
+          '("techreport" ""
             ( ("author") ("title")  ("year" ) ("tags") ("url") ("identifier") ("institution") ("url") )
             ()
             ( ("doi") ) )
@@ -150,15 +150,15 @@
 
 ;;-- legal
 (pushnew! bibtex-jg-entry-alist
-          '("Case" "A Legal Case"
+          '("case" "A Legal Case"
             ( ("plaintiff") ("defendant") ("year") ("identifier") ("country") ("tags") )
             ()
             ( ("short_parties") ) )
-          '("Judicial" "A Judicial Opinion"
+          '("judicial" "A Judicial Opinion"
             ( ("author" ) ("year") ("tags") ("institution") )
             ( ("identifier") ("country") ("plaintiff") ("defendant") )
             ( ("short_parties") ("dissent") ("concur") ) )
-          '("Law" "A Proposed or Enacted Law"
+          '("law" "A Proposed or Enacted Law"
             ( ("year") ("tags") ("institution") ("status") ("identifier") ("url") ("country"))
             ()
             ( ("author") ("section") ) )

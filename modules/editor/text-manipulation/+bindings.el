@@ -65,7 +65,7 @@
       )
 
 (map! :map jg-binding-outer-text-objects-map
-      :desc "Spaces"       "l" #'+jg-text-spaces
+      :desc "Spaces"       "l" #'+jg-evil-whitespace
       )
 
 (map! :map jg-binding-jump-map

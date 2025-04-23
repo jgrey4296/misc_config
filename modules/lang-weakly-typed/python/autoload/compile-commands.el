@@ -19,7 +19,7 @@
      '("mamba list" "mamba list")
      '("mamba info" "mamba info")
      ;; uv
-     '("uv sync" "uv sync")
+     '("uv sync" "uv sync --all-extras")
      '("uv deps" "uv tree")
      ;; pytest
      '("pytest" "pytest")

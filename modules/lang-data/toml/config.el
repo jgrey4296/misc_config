@@ -41,7 +41,10 @@
              )
 
   (setq-hook! 'conf-toml-mode-hook
-    outline-regexp "\[\[?[a-zA-Z0-9\.]+\]?\]"
+    ;; outline-regexp "\[\[?[a-zA-Z0-9\.]+\]?\]"
+    outline-regexp (rx (| (: (1+ "[") (1+ (any "a-zA-Z0-9\.")) (1+ "]"))
+                          (: "# " (1+ "-") line-end)
+                          ))
     outline-heading-end-regexp "\n"
     )
 
@@ -57,10 +60,11 @@
              )
 
   (setq-hook! 'toml-mode-hook
-    outline-regexp (rx (or (: (+ "[") (+? nonl) (+ "]"))
-                           (: (+? nonl) "=" (+ space) "["
-                              (or (: (+? space) (syntax comment-start))
-                                  line-end))))
+    outline-regexp (rx (| (: (+ "[") (+? nonl) (+ "]"))
+                          (: "# " (1+ "-") line-end)
+                          (: (+? nonl) "=" (+ space) "["
+                             (or (: (+? space) (syntax comment-start))
+                                 line-end))))
     outline-heading-end-regexp (rx (or (syntax comment-start) line-end))
     outline-level #'jg-toml-outline-level
     )

@@ -37,12 +37,15 @@
 (defun jg-toml-outline-level ()
   " Toml levels:
 1: ^[?[.+?]]?
+1: ^# ----
 2: ^.+? = [$
 "
   (cond ((looking-at-p (rx (+? any) "=" (+ space) "[" line-end))
          2)
         ((looking-at-p (rx line-start "["))
          1)
+        ((looking-at-p (rx line-start "# " (1+ "-") line-end))
+         0)
         (t 3)
         )
   )

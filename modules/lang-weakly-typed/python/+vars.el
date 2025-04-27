@@ -351,10 +351,10 @@
   py-fontify-shell-buffer-p     t
   py-split-window-on-execute    t
   ;; my settings
-  jg-python-current-interpreter jg-python-stock-repl
+  jg-python-current-interpreter `("ipython" ,(format "--config=%s" (expand-file-name "python/ipython_config.py" templates-loc)) "-i")
   jg-python-repl-start-file (expand-file-name "python/repl_startup.py " templates-loc)
   jg-python-coverage-file-loc ".temp/coverage"
-  )
+)
 (speckler-setq! conda ()
   conda-anaconda-home (or (getenv "MAMBA_ROOT_PREFIX") (getenv "ANACONDA_HOME") "/usr/local/anaconda3")
   conda-env-home-directory (cond ((getenv "MAMBA_ROOT_PREFIX")

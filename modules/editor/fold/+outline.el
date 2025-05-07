@@ -7,6 +7,7 @@
 ;;-- end Header
 
 ;built-in
+(defvar jg-outline-ellipsis "|...")
 
 (use-package! outline
   :config
@@ -16,6 +17,8 @@
       )
     )
   (advice-add #'evil-goto-line :after #'jg-fold-outline-open-on-move)
+
+  (add-hook! 'outline-minor-mode-hook #'outline-set-buffer-local-ellipsis)
 
   )
 

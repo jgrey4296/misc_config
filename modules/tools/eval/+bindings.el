@@ -1,6 +1,9 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
 (map! :leader
+      :desc "Eval expression"       "\""   #'pp-eval-expression
+      :desc "M-x"                   ";"   #'execute-extended-command
+
       :prefix "c"
       :desc  "compile in project"                   "c"     #'projectile-compile-project
       :desc  "Evaluate & replace region"            "E"     #'+eval:replace-region

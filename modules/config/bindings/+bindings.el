@@ -10,11 +10,10 @@
       :desc "Find file"             "."   #'find-file
       :desc "Switch to last buffer" "TAB" #'ignore
       :desc "Split Window"          "/"   #'split-window-right
-      :desc "Toggle last popup"     "`"   #'+popup/toggle
+      :desc "Toggle last popup"     "`"   #'ignore
 
-      :desc "Eval expression"       "\""   #'pp-eval-expression
-      :desc "M-x"                   ";"   #'execute-extended-command
-
+      :desc "Eval expression"       "\""   #'ignore
+      :desc "M-x"                   ";"   #'ignore
       :desc "Org Capture"           "X"   #'ignore
 
       ;; C-u is used by evil
@@ -103,12 +102,11 @@
       :prefix ("i" . "insert")
       "d" #'ignore
       ":" #'ignore
-      :desc "From Kill Ring"                "y"   #'yank-pop
+      :desc "From Kill Ring"                "y"   #'ignore
       :desc "From register"                 "r"   #'ignore
       :desc "From Minibuffer history"       "m"   #'ignore
-      :desc "Unicode"                       "u"   #'insert-char
+      :desc "Unicode"                       "u"   #'ignore
       :desc "Snippet"                       "s"   #'ignore
-
       )
 ;;-- end <leader> i --- insert
 
@@ -196,17 +194,7 @@
       )
 ;;-- end <leader> q --- quit/restart/session
 
-;;-- <leader> r -- REGISTERS
-(map! :leader
-      :prefix ("r" . "Registers")
-      :desc "Insert Register"      "i" #'insert-register
-      :desc "Save to Register"     "x" #'copy-to-register
-      :desc "Windows to Register"  "w" #'window-configuration-to-register
-      :desc "Jump to Register"     "j" #'jump-to-register
-      :desc "List Registers"       "l" #'list-registers
-      :desc "Killed Text"          "y" #'yank-pop
-      )
-;;-- end <leader> r -- REGISTERS
+;; -- <leader> r -- REGISTERS (see text manip)
 
 ;; -- <leader> s --- jump/search
 

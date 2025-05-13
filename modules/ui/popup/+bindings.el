@@ -3,6 +3,8 @@
 
 (map! :leader
       :desc "Popup Buffer"          "<"     #'+jg-popup-ivy-buffer
+      :desc "Toggle last popup"     "`"   #'+popup/toggle
+      :desc "Toggle last popup"     "z"   #'+popup/toggle
       )
 
 (map! :map +popup-buffer-mode-map

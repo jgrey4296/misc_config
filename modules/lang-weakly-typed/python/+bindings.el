@@ -15,6 +15,9 @@
       ;; :n "s j" '+jg-python-swipe-to-def
       :n "SPC c t" #'+jg-python-pytest-dispatch
       :n "SPC \\"   #'+jg-python-popup-related-test
+
+      :desc "Statement" :n "[ s" #'python-nav-backward-statement
+      :desc "Statement" :n "] s" #'python-nav-forward-statement
       )
 
 (map! :map (python-mode-map python-ts-mode-map) ;; localleader

@@ -17,7 +17,7 @@
       :desc "Arg"          "a"   #'evil-backward-arg
       :desc "Begin Method" "m"   #'+evil/previous-beginning-of-method
       :desc "End Method"   "M"   #'+evil/previous-end-of-method
-      :desc "Section"      "s"   #'evil-backward-section-begin
+      :desc "Sentence"     "s"   #'evil-backward-sentence-begin
       )
 
 (map! :map jg-binding-forward-operator-motion-map
@@ -27,7 +27,7 @@
       :desc "Heading"      "h" #'outline-next-visible-heading
       :desc "Begin Method" "m" #'+evil/next-beginning-of-method
       :desc "End Method"   "M" #'+evil/next-end-of-method
-      :desc "Section"      "s" #'evil-forward-section-begin
+      :desc "Sentence"     "s" #'evil-forward-sentence-begin
       )
 
 (map! :map jg-binding-operator-map

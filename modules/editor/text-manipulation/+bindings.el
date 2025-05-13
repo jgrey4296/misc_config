@@ -16,6 +16,21 @@
        :desc "Yank Buffer Name" "n"   #'+jg-text-yank-buffer-name
        :desc "Clear Buffer"     "DEL" #'+jg-text-clear-buffer
        )
+
+      (:prefix ("r" . "Registers")
+       :desc "Insert Register"      "i" #'insert-register
+       :desc "Save to Register"     "x" #'copy-to-register
+       :desc "Windows to Register"  "w" #'window-configuration-to-register
+       :desc "Jump to Register"     "j" #'jump-to-register
+       :desc "List Registers"       "l" #'list-registers
+       )
+
+      (:prefix ("i" . "insert")
+       :desc "From Kill Ring"                "y"   #'yank-pop
+       :desc "From register"                 "r"   #'insert-register
+       :desc "Unicode"                       "u"   #'insert-char
+       )
+
       )
 
 (map! :map jg-binding-normal-state-map
@@ -42,6 +57,7 @@
       :desc "Grow Selection " "v g"        #'+jg-text-grow-selection-op
       :desc "Select Buffer"   "v RET"      #'+jg-text-whole-buffer-textobj
       :desc "contract"        "v SPC"      #'+jg-text-visual-contract
+      :desc "Copy to Register" "v r"       #'copy-to-register
       :desc "Clone selection" "|"          #'+jg-text-yank-selection-to-new-buffer
       )
 
@@ -88,7 +104,6 @@
       :desc "Substitute Ex Memory"        ";"          #'+jg-text-manipulation-sub-memory
       :desc "set buffer coding"           "0"          #'set-buffer-file-coding-system
       :desc "indent"                      "TAB"        #'indent-region
-
 
       :desc "Ensure commas"               "u"          #'+jg-surround-ensure-commas
 
@@ -152,6 +167,7 @@
       :desc "Yank"                        "y" #'+evil:yank-unindented
       :desc "Regexp Builder"               "R"    #'regexp-builder
 )
+
 (map! :map jg-binding-operator-map :prefix ("d" . "Describe")
       "g" #'writegood-grade-level
       "r" #'writegood-reading-ease

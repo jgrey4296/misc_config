@@ -9,6 +9,7 @@
 (with-state! 'normal #'counsel-evil-registers)
 (with-state! 'normal #'counsel-evil-marks)
 (with-state! 'normal #'counsel-list-processes)
+(with-state! 'normal #'counsel-register)
 
 
 (map! :leader
@@ -44,7 +45,6 @@
 (map! :leader
       :desc "Org Capture"                  "X"     #'counsel-org-capture
       :desc "From Minibuffer history"      "i m"   #'counsel-minibuffer-history--with-state-normal
-      :desc "Killed Text"                  "r y"   #'counsel-yank-pop--with-state-normal
       )
 
 (map! :map jg-binding-normal-state-map
@@ -77,6 +77,7 @@
       [remap isearch-backward]              #'swiper
       [remap swiper]                        #'counsel-grep-or-swiper
       [remap bookmark-jump]                 #'+jg-ivy-bookmark
+      [remap insert-register]               #'counsel-register--with-state-normal
 
       [remap compile]                       #'+ivy/compile
       [remap projectile-compile-project]    #'+ivy/project-compile

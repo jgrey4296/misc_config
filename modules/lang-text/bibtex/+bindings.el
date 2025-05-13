@@ -18,6 +18,9 @@
       :desc "Open Dropbox"       :n "<"       #'librarian--biblio-edit-window-set-dropbox
 
       :desc "Select Entry"       :v "i e"     #'librarian--biblio-edit-visual-select-entry
+
+      :n "[" #'evil-backward-section-begin
+      :n "]" #'evil-forward-section-begin
       )
 
 (map! :map jg-bibtex-mode-map ;; jump bindings

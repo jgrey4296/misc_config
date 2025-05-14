@@ -15,6 +15,9 @@
        :desc "Workspace Control"        "w"     #'+jg-workspace-run-transient
        :desc "root shell"               "'"     #'projectile-run-shell
        )
+      (:prefix ("h" . "Help")
+       :desc "Reload Persp" "r P" #'+jg-workspaces-rebuild-persp-cache
+       )
       )
 
 

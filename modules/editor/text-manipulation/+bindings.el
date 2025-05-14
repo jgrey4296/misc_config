@@ -39,10 +39,6 @@
       :desc "Select Whitespace" "v SPC"      #'+jg-text-visual-select-whitespace
       )
 
-(map! :map evil-mapspace-state-map
-      "s" #'self-insert-command
-      )
-
 (map! :map jg-binding-vision-map
       :prefix ("i" . "Invisible")
       :desc "Add"                       "a"   #'+jg-text-make-invisible

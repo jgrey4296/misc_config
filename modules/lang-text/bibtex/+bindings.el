@@ -77,6 +77,7 @@
       :desc "New Entry"           "e"     #'bibtex-entry
       :desc "Auto Form"           "a"     #'+jg-bibtex-entry-form
       :desc "from DOI"            "d"     #'librarian-biblio-create-from-doi
+      :desc "from url"            "u"     #'+jg-bibtex-create-from-url
       :desc "from PMID"           "p"     (cmd! (pubmed-insert-bibtex-from-pmid (read-string "PMID: ")))
       :desc "Subcite"             "s"     #'librarian--biblio-edit-subcite
       )

@@ -51,12 +51,9 @@
       )
 
 (map! :map librarian-mode-map
-      ;; (:i "c" #'self-insert-command)
-      (:prefix "c w"
-       :desc "ispell-word"               "s"    #'ispell-word
-       :desc "Ivy Spell"                 "S"    #'flyspell-correct-wrapper
-       :desc "add word to dict"          "a"    #'+spell/add-word
-       )
+      :desc "ispell-word"               :n "c w s"    #'ispell-word
+      :desc "Ivy Spell"                 :n "c w S"    #'flyspell-correct-wrapper
+      :desc "add word to dict"          :n "c w a"    #'+spell/add-word
       )
 
 (map! :map eww-mode-map

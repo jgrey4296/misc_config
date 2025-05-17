@@ -45,6 +45,21 @@
     )
   )
 
+;;;###autoload
+(defun +jg-bibtex-create-from-url ()
+  (interactive)
+  (let* ((url (read-string "Url: "))
+         (ts (funcall doi-utils-timestamp-format-function))
+         )
+    (goto-char (point-max))
+    (insert "\n@online{,\n")
+    (insert  (format "    url = {%s},\n" url))
+    (insert  (format "    year = {%s},\n" (calendar-extract-year (calendar-current-date))))
+    (insert "}")
+    )
+  )
+
+
 ;;-- Footer
 ;; Copyright (C) 2024 john
 ;;

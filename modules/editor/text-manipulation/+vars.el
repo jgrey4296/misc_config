@@ -1,6 +1,6 @@
 ;;; util/text/+vars.el -*- lexical-binding: t; -*-
 
-(setq-default tab-alwa y s-indent t
+(setq-default tab-always-indent t
               indent-tabs-mode nil
               )
 
@@ -136,7 +136,7 @@
   )
 (speckler-setq! evil-ex-auto-align ()
   ;; Sequence of regexps to auto align by
-  jg-text-manip-auto-align-groups '("/:/" "/=/")
+  jg-text-manip-auto-align-groups '("/:/" "/=/" "/#")
   )
 
 ;;-- end specs

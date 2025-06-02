@@ -1,19 +1,5 @@
 ;;; +evil-motion-bindings.el -*- lexical-binding: t; -*-
 
-
-(map! :map jg-binding-backward-general-motion-map
-      :desc "Section"                     "[" #'evil-backward-section-begin
-      :desc "Section End"                 "]" #'evil-backward-section-end
-      :desc "Buffer"                      "b" #'previous-buffer
-      :desc "Comment"                     "c" #'+evil/previous-comment
-      :desc "Previous File in Dir, alpha" "f" #'+evil/previous-file
-      :desc "Error"                       "e" #'previous-error
-      :desc "Heading"                     "h" #'outline-previous-visible-heading
-      :desc "Begin Method"                "m" #'+evil/previous-beginning-of-method
-      :desc "End Method"                  "M" #'+evil/previous-end-of-method
-      :desc "Todo"                        "t" #'hl-todo-previous
-      )
-
 (map! :map jg-binding-forward-general-motion-map
       :desc "Next Section"            "]" #'evil-forward-section-begin
       :desc "To Section End"          "[" #'+evil/next-end-of-method
@@ -26,6 +12,21 @@
       :desc "Buffer"                  "b" #'next-buffer
       :desc "Comment"                 "c" #'+evil/next-comment
       :desc "Error"                   "e" #'next-error
+      :desc "Paragraph"               "p" #'forward-paragraph
+      )
+
+(map! :map jg-binding-backward-general-motion-map
+      :desc "Section"                     "[" #'evil-backward-section-begin
+      :desc "Section End"                 "]" #'evil-backward-section-end
+      :desc "Buffer"                      "b" #'previous-buffer
+      :desc "Comment"                     "c" #'+evil/previous-comment
+      :desc "Previous File in Dir, alpha" "f" #'+evil/previous-file
+      :desc "Error"                       "e" #'previous-error
+      :desc "Heading"                     "h" #'outline-previous-visible-heading
+      :desc "Begin Method"                "m" #'+evil/previous-beginning-of-method
+      :desc "End Method"                  "M" #'+evil/previous-end-of-method
+      :desc "Todo"                        "t" #'hl-todo-previous
+      :desc "Paragraph"                   "p" #'backward-paragraph
       )
 
 (map! :map jg-binding-motion-state-map ;; basic

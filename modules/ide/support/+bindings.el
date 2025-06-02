@@ -74,6 +74,7 @@
       (:prefix ("=" . "Formatting"))
       (:prefix ("r" . "Refactoring"))
       (:prefix ("a" . "Actions"))
+      :desc "Signature" "s" #'lsp-signature-activate
       )
 
 (map! :map jg-lsp-command-map ;; Formatting

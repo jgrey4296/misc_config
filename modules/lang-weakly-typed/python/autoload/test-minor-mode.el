@@ -71,6 +71,7 @@
   "Auto save the file then test the function point is in"
   (interactive)
   (basic-save-buffer)
+  (better-jumper-set-jump (point))
   (call-interactively #'python-pytest-run-def-or-class-at-point-dwim)
   )
 

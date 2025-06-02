@@ -188,17 +188,18 @@
     (".readthedocs.yaml"          :trigger "__readthedocs"    :mode yaml-mode)
 
     ;; Python:
-    ("__init__\\.py\\'"      :trigger "__init"           :mode python-mode)
-    ("test_.+\\.py\\'"       :trigger "__pytest"         :mode py-test-minor-mode)
-    ("cli_.+\\.py\\'"        :trigger "__cli"            :mode python-mode)
-    ("\\.pyi\\'"             :trigger "__interface"      :mode python-mode)
-    ("\\.py\\'"              :trigger "__"               :mode python-mode :priority -99)
-    (python-mode             :trigger "__"                                 :priority -100)
+    ("__init__\\.py\\'"  :trigger "__init"           :mode python-mode)
+    ("errors\\.py\\'"    :trigger "__errors"         :mode python-mode)
+    ("test_.+\\.py\\'"   :trigger "__pytest"         :mode py-test-minor-mode)
+    ("cli_.+\\.py\\'"    :trigger "__cli"            :mode python-mode)
+    ("\\.pyi\\'"         :trigger "__interface"      :mode python-mode)
+    ("\\.py\\'"          :trigger "__"               :mode python-mode :priority -99)
+    (python-mode         :trigger "__"                                 :priority -100)
     )
   )
 (speckler-add! fold ()
   `(python
-    :modes python-mode
+                         :modes python-mode
     :priority 25
     :triggers (:close     #'+jg-python-close-methods
                :close-all #'+jg-python-close-all-defs

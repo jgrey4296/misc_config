@@ -27,3 +27,28 @@
   '(gdscript-ts-mode . gdscript)
   '(glsl-mode . glsl)
   )
+(speckler-add! fold ()
+  :override t
+  `(gdscript
+    :modes gdscript-mode
+    :priority 25
+    :triggers (:close     #'+jg-python-close-methods
+               :close-all #'outline-hide-sublevels
+               :open      #'outline-toggle-children
+               :open-all  #'outline-show-all
+               :open-rec  #'outline-show-subtree
+               :toggle    #'outline-toggle-children
+               )
+    )
+  `(gdscript-ts
+    :modes gdscript-ts-mode
+    :priority 25
+    :triggers (:close     #'+jg-python-close-methods
+               :close-all #'outline-hide-sublevels
+               :open      #'outline-toggle-children
+               :open-all  #'outline-show-all
+               :open-rec  #'outline-show-subtree
+               :toggle    #'outline-toggle-children
+               )
+    )
+  )

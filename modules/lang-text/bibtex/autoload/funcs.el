@@ -48,7 +48,7 @@
 ;;;###autoload
 (defun +jg-bibtex-create-from-url ()
   (interactive)
-  (let* ((url (read-string "Url: "))
+  (let* ((url (with-temp-buffer (clipboard-yank) (buffer-string)))
          (ts (funcall doi-utils-timestamp-format-function))
          )
     (goto-char (point-max))

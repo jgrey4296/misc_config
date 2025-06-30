@@ -144,21 +144,20 @@
 ;;-- end ranger
 
 ;;-- open cmd
-(setq dired-guess-shell-alist-user
-      `(("\\.\\(?:docx\\|pdf\\|djvu\\|eps\\)\\'"               ,(if (eq system-type 'darwin)
-                                                                    "open -a Preview -nF"
-                                                                  "evince"))
-        ("\\.\\(?:jpe?g\\|png\\|gif\\|xpm\\)\\'"               "open")
-        ("\\.\\(?:xcf\\)\\'"                                   "open")
-        ("\\.csv\\'"                                           "open")
-        ("\\.tex\\'"                                           "open")
-        ("\\.\\(?:mp4\\|mkv\\|avi\\|flv\\)\\(?:\\.part\\)?\\'" "open")
-        ("\\.\\(?:rm\\|rmvb\\|ogv\\)\\(?:\\.part\\)?\\'"       "open")
-        ("\\.\\(?:mp3\\|flac\\)\\'"                            "open")
-        ("\\.html?\\'"                                         "open")
-        ("\\.md\\'"                                            "open")
-        )
-      )
+(speckler-setq! filetypes ()
+  dired-guess-shell-alist-user `(("\\.\\(?:docx\\|pdf\\|djvu\\|eps\\)\\'"               ,(if (eq system-type 'darwin) "open -a Preview -nF" "evince"))
+                                 ("\\.\\(?:jpe?g\\|png\\|gif\\|xpm\\)\\'"               "eog")
+                                 ("\\.\\(?:mp3\\|flac\\)\\'"                            "xdg-open")
+                                 ("\\.\\(?:mp4\\|mkv\\|avi\\|flv\\)\\(?:\\.part\\)?\\'" "xdg-open")
+                                 ("\\.\\(?:rm\\|rmvb\\|ogv\\)\\(?:\\.part\\)?\\'"       "xdg-open")
+                                 ("\\.\\(?:xcf\\)\\'"                                   "xdg-open")
+                                 ("\\.csv\\'"                                           "xdg-open")
+                                 ("\\.html?\\'"                                         "xdg-open")
+                                 ("\\.md\\'"                                            "xdg-open")
+                                 ("\\.svg\\'"                                           "eog")
+                                 ("\\.tex\\'"                                           "xdg-open")
+                                 )
+  )
 ;;-- end open cmd
 
 (after! (evil evil-snipe)

@@ -39,6 +39,7 @@
     flycheck--automatically-enabled-checkers  '(python-ruff python-coverage)
     flycheck--automatically-disabled-checkers '(python-pylint python-flake8 python-pycompile python-compile python-pyright python-mypy)
     flycheck-python-mypy-config               '("pyproject.toml")
+    comment-start "# "
     )
   )
 
@@ -101,6 +102,7 @@
     flycheck--automatically-enabled-checkers  '(python-ruff python-coverage)
     flycheck--automatically-disabled-checkers '(python-pylint python-flake8 python-pycompile python-compile python-pyright)
     flycheck-python-mypy-config               '("pyproject.toml")
+    comment-start "# "
     )
 
   (setq-hook! 'python-mode-hook

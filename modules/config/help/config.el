@@ -36,7 +36,7 @@
     )
 
   (add-hook 'helpful-mode-hook #'jg-unset-helpful-dedicated)
-  (add-hook 'helpful-mode-hook #'outline-minor-mode)
+  (add-hook 'helpful-mode-hook #'hs-minor-mode)
 
   (when (modulep! :ui ivy)
     (setq counsel-describe-function-function #'helpful-callable

@@ -39,9 +39,9 @@
                (is-py (f-ext? filename "py"))
                )
     (+jg-eval--pair-cmds
-     `("run-py"         ,(format "python -X dev -i %s" filename)    :interactive)
+     `("run-py"         ,(format "python -X dev %s" filename)    :interactive)
      `("run-py-verbose" ,(format "python -X dev -i -v %s" filename) :interactive)
-     `("run-ipy"        ,(format "ipython -X %s" filename)          :interactive)
+     `("run-ipy"        ,(format "ipython -i %s" filename)          :interactive)
       )
   )
 )

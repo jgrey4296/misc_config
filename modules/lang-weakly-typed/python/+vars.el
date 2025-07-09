@@ -341,7 +341,7 @@
   python-indent-guess-indent-offset                     nil
   python-shell-completion-native-enable                 nil
   python-shell-completion-native-disabled-interpreters  '("pypy")
-  python-shell-interpreter-path-args                    (expand-file-name "python/repl_startup.py"  templates-loc)
+  ;; python-shell-interpreter-path-args                    (expand-file-name "python/repl_startup.py"  templates-loc)
   expand-region-preferred-python-mode 'python-mode
   ;; py settings
   py-shell-virtualenv-root      (if (boundp 'conda-env-home-directory) conda-env-home-directory nil)
@@ -352,7 +352,7 @@
   py-fontify-shell-buffer-p     t
   py-split-window-on-execute    t
   ;; my settings
-  jg-python-current-interpreter `("ipython" ,(format "--config=%s" (expand-file-name "python/ipython_config.py" templates-loc)) "-i")
+  jg-python-current-interpreter +python-ipython-command
   jg-python-repl-start-file (expand-file-name "python/repl_startup.py " templates-loc)
   jg-python-coverage-file-loc ".temp/coverage"
 )

@@ -9,8 +9,10 @@
 ;;;###autoload
 (defun jg-py-venv-start (state &rest rest)
   (let ((root (librarian--envs-loc-root (librarian--envs-state-loc state))))
+    (pyvenv-activate (f-join root ".venv"))
     (jg-py--enter-env-update-paths state)
-    (pyvenv-activate (f-join root ".venv"))))
+    )
+  )
 
 ;;;###autoload
 (defun jg-py-venv-stop (state &rest rest)

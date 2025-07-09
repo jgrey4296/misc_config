@@ -59,9 +59,9 @@
 
 (speckler-setq! flycheck ()
   flycheck-display-errors-delay 1
-  flycheck-display-errors-function nil
+  flycheck-display-errors-function 'flycheck-display-error-messages
   flycheck-help-echo-function nil
-  flycheck-process-error-functions nil
+  flycheck-process-error-functions '(flycheck-add-overlay)
   flycheck-check-syntax-automatically '(save idle-change mode-enabled)
   flycheck-idle-change-delay 1.0
   flycheck-buffer-switch-check-intermediate-buffers t

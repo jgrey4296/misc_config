@@ -14,7 +14,6 @@ and adding extra pythonpath locations as the pre-args
    (--remove (not it)
              (append jg-python-current-interpreter
                      (if jg-python-dev-mode jg-python-dev-cmd-args)
-                     ;; (format jg-python-pycache-cmd (f-canonical jg-python-pycache-loc))
                      (ensure-list (or filepath
                                       python-shell-interpreter-path-args
                                       ))

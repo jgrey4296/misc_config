@@ -7,7 +7,7 @@
 (defvar jg-python-stock-repl '("python3" "-i")
   "the default python interpreter")
 
-(defvar +python-ipython-command '("python3" "-m" "IPython" "-i" "--simple-prompt" "--no-color-info")
+(defvar +python-ipython-command '("python3" "-m" "IPython" "-i" "--simple-prompt")
   "Command to initialize the ipython REPL for `+python/open-ipython-repl'.")
 
 (defvar python-shell-interpreter-path-args nil

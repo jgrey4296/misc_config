@@ -225,7 +225,6 @@
   #'doom/browse-in-other-project
   )
 
-
 (defun jg-workspace--build-project-transient-groups  ()
   (transient-subgroup! transient-project-actions ()
     ""
@@ -239,41 +238,40 @@
     (transient-macro-call-proj-clear-cache)
     )
   (transient-subgroup! transient-project ()
-    ""
+    "Manage Project"
     :key "p"
+    :rows t
     :desc "+Manage Project"
-    [
-     ["Change Project-Wide"
-      (transient-macro-call-proj-replace)
-      (transient-macro-call-proj-regexp)
+     [
+     ["Project Shell and Cmds"
+      (transient-macro-call-proj-cmd)
+      (transient-macro-call-proj-shell)
       ]
-     ]
-    [
      ["View"
       (transient-macro-call-magit-todos)
       (transient-macro-call-proj-root)
       (transient-macro-call-proj-symbol)
       ]
-     ["Project Shell and Cmds"
-      (transient-macro-call-proj-cmd)
-      (transient-macro-call-proj-shell)
-      ]
      ]
-    [
-     ["Specific Files"
-      (transient-macro-call-proj-scratch)
-      (transient-macro-call-proj-config)
-      (transient-macro-call-proj-dir-locals)
-      (transient-macro-call-proj-configure)
+     ["Change Project-Wide"
+      (transient-macro-call-proj-replace)
+      (transient-macro-call-proj-regexp)
       ]
-     ["Files"
-      (transient-macro-call-proj-file)
-      (transient-macro-call-proj-related)
-      (transient-macro-call-proj-recent)
-      (transient-macro-call-proj-kill)
-      (transient-macro-call-proj-save)
+     [
+      ["Files"
+       (transient-macro-call-proj-file)
+       (transient-macro-call-proj-recent)
+       (transient-macro-call-proj-related)
+       (transient-macro-call-proj-kill)
+       (transient-macro-call-proj-save)
+       ]
+      ["Specific Files"
+       (transient-macro-call-proj-scratch)
+       (transient-macro-call-proj-config)
+       (transient-macro-call-proj-dir-locals)
+       (transient-macro-call-proj-configure)
+       ]
       ]
-     ]
     )
   (transient-subgroup! transient-all-projects ()
     ""

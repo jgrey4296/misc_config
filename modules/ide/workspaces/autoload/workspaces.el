@@ -604,6 +604,12 @@ This be hooked to `projectile-after-switch-project-hook'."
   (tab-bar-tabs-set (persp-parameter 'tab-bar-tabs))
   (tab-bar--update-tab-bar-lines t))
 
+;;;###autoload
+(defun +workspaces-open-project-root (loc)
+  (find-file (or loc (projectile-project-root)))
+  (+jg-windows-3-col-centered)
+  )
+
 ;;
 ;;; Advice
 

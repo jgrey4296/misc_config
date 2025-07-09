@@ -7,26 +7,14 @@
 ;;-- end Header
 (require 'macro-tools--transient)
 
-;; TODO move compile to eval module
-;;
-(transient-call! recent-files  ()
-  "Recent Files"
-  :key "r"
-  :desc (macro-tools--transient-simple-fmt "Project Recent Files" "r")
-  :transient nil
-  (projectile-recentf)
-  )
-(transient-call! debug-project-type ()
+;; -- General
+
+;; -- Locations
+(transient-call! proj-root ()
   ""
-  :key "?"
-  :desc (macro-tools--transient-simple-fmt "Debug Project Type" "?")
-  (+jg-projects-detect-type)
-  )
-(transient-call! proj-clear-cache ()
-  ""
-  :key "C"
-  :desc (macro-tools--transient-simple-fmt "Project Clear Cache" "C")
-  (projectile-invalidate-cache nil)
+  :key "`"
+  :desc (macro-tools--transient-simple-fmt "Project Root" "`")
+  (find-file (projectile-project-root))
   )
 (transient-call! proj-sidebar ()
   ""
@@ -36,33 +24,56 @@
   :transient nil
   #'+jg-ui-tree/open
   )
-(transient-call! proj-root ()
+(transient-call! recent-files  ()
+  "Recent Files"
+  :key "r"
+  :desc (macro-tools--transient-simple-fmt "Project Recent Files" "r")
+  :transient nil
+  (projectile-recentf)
+  )
+
+;; -- Projects
+(transient-call! proj-browse ()
   ""
-  :key "`"
-  :desc (macro-tools--transient-simple-fmt "Project Root" "`")
-  (find-file (projectile-project-root))
+  :key ">"
+  :interactive t
+  :desc (macro-tools--transient-simple-fmt "Projects" ">")
+  :transient t
+  #'+jg-projects-switch-to
+  )
+
+(transient-call! proj-switch ()
+  ""
+  :key "="
+  :interactive t
+  :desc (macro-tools--transient-simple-fmt "Project Switch" "=")
+  :transient t
+  #'projectile-switch-project
   )
 (transient-call! proj-add ()
   ""
-  :key "a"
+  :key "+"
   :interactive t
-  :desc (macro-tools--transient-simple-fmt "Add Project" "a")
+  :desc (macro-tools--transient-simple-fmt "Add Project" "+")
   #'projectile-add-known-project
   )
-(transient-call! proj-clean ()
+(transient-call! proj-clear-cache ()
   ""
-  :key "c"
-  :desc (macro-tools--transient-simple-fmt "Clean Project" "c")
-  :interactive t
-  #'+jg-projects-clean
-  )
-(transient-call! proj-clear-known ()
-  ""
-  :key "D"
-  :desc (macro-tools--transient-simple-fmt "Clear Project List Cache" "D")
+  :key "-"
+  :desc (macro-tools--transient-simple-fmt "Project Clear Cache" "-")
+  (projectile-invalidate-cache nil)
   (projectile-clear-known-projects)
-  (clrhash projectile-project-root-cache)
   )
+
+;; -- Project Management
+(transient-call! debug-project-type ()
+  ""
+  :key "?"
+  :desc (macro-tools--transient-simple-fmt "Debug Project Type" "?")
+  (+jg-projects-detect-type)
+  )
+
+;; -- Project Actions
 (transient-call! proj-cmd ()
   ""
   :key "!"
@@ -70,13 +81,6 @@
   :interactive t
   :transient nil
   #'projectile-run-shell-command-in-root
-  )
-(transient-call! proj-compile ()
-  ""
-  :key "c"
-  :desc (macro-tools--transient-simple-fmt "Compile Project" "c")
-  :transient nil
-  #'projectile-compile-project
   )
 (transient-call! proj-config ()
   ""
@@ -102,13 +106,6 @@
   :transient nil
   #'projectile-edit-dir-locals
   )
-(transient-call! proj-discover ()
-  ""
-  :key "d"
-  :interactive t
-  :desc (macro-tools--transient-simple-fmt "Discover Projects" "d")
-  #'+default/discover-projects
-  )
 (transient-call! proj-file  ()
   ""
   :key "-ff"
@@ -116,14 +113,6 @@
   :desc (macro-tools--transient-simple-fmt "Project File" "-ff")
   :transient nil
   #'projectile-find-file
-  )
-(transient-call! proj-finder ()
-  ""
-  :key "F"
-  :interactive t
-  :desc (macro-tools--transient-simple-fmt "Reveal in Finder" "F")
-  :transient nil
-  #'+macos/reveal-project-in-finder
   )
 (transient-call! proj-kill ()
   ""
@@ -164,13 +153,6 @@
   :transient nil
   #'projectile-replace
   )
-(transient-call! proj-run ()
-  ""
-  :key "r"
-  :interactive t
-  :desc (macro-tools--transient-simple-fmt "Run Project" "r")
-  #'projectile-run-project
-  )
 (transient-call! proj-save ()
   ""
   :key "S"
@@ -194,49 +176,17 @@
   :transient nil
   #'projectile-run-shell
   )
-(transient-call! proj-switch ()
-  ""
-  :key "p"
-  :interactive t
-  :desc (macro-tools--transient-simple-fmt "Project Switch" "p")
-  :transient nil
-  #'projectile-switch-project
-  )
 (transient-call! proj-symbol ()
   ""
   :key "."
   :interactive t
   :desc (macro-tools--transient-simple-fmt "Project Symbol" ".")
   :transient nil
-  #'+default/search-project-for-symbol-at-point
-  )
-(transient-call! proj-test ()
-  ""
-  :key "t"
-  :interactive t
-  :desc (macro-tools--transient-simple-fmt "Test Project" "t")
-  #'projectile-test-project
-  )
-(transient-call! proj-browse ()
-  ""
-  :key ">"
-  :interactive t
-  :desc (macro-tools--transient-simple-fmt "Browse Projects" ">")
-  #'doom/browse-in-other-project
+  #'+jg-workspaces-search-project-for-symbol-at-point
   )
 
+;; --
 (defun jg-workspace--build-project-transient-groups  ()
-  (transient-subgroup! transient-project-actions ()
-    ""
-    :key "a"
-    :desc "+Project Actions"
-    (transient-macro-call-proj-run)
-    (transient-macro-call-proj-compile)
-    (transient-macro-call-proj-test)
-    (transient-macro-call-proj-clean)
-    (transient-macro-call-proj-finder)
-    (transient-macro-call-proj-clear-cache)
-    )
   (transient-subgroup! transient-project ()
     "Manage Project"
     :key "p"
@@ -273,21 +223,7 @@
        ]
       ]
     )
-  (transient-subgroup! transient-all-projects ()
-    ""
-    :key "P"
-    :desc "+Manage All Projects"
-    ["Project Lists"
-     (transient-macro-call-proj-browse)
-     (transient-macro-call-proj-switch)
-     ]
-    [" "
-     (transient-macro-call-proj-add)
-     (transient-macro-call-proj-discover)
-     (transient-macro-call-proj-clear-known)
-     ]
-    )
-  )
+)
 
 ;;;###autoload
 (defun jg-workspace-build-project-transient  ()
@@ -296,20 +232,25 @@
   (transient-append-suffix 'workspace-control-transient '(-2)
     [""
      ["|| Projects ||"
-      transient-all-projects
       transient-project
-      transient-project-actions
-      ]
-     [" | Locations |"
-      (transient-macro-call-proj-sidebar)
-      (transient-macro-call-recent-files)
-      (transient-macro-call-zimmerframe-next)
-      (transient-macro-call-zimmerframe-prev)
       ]
      [" | Settings |"
       (transient-macro-call-debug-project-type)
       (transient-macro-call-proj-clear-cache)
+      (transient-macro-call-proj-add)
+      (transient-macro-call-proj-switch)
       ]
+     ]
+    )
+
+  (transient-append-suffix 'workspace-control-transient "t"   '(transient-macro-call-proj-sidebar))
+
+  (transient-append-suffix 'workspace-control-transient '(0 1)
+    [""
+     (transient-macro-call-proj-root)
+     (transient-macro-call-proj-browse)
+     (transient-macro-call-recent-files)
+     (transient-macro-call-proj-configure)
      ]
     )
   )

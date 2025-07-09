@@ -173,3 +173,14 @@ on projectile-get-ext-command
    ("find . -type f -print0")
    )
   )
+
+;;;###autoload
+(defun +jg-projects-switch-to ()
+  (interactive)
+  (let ((relevant (projectile-relevant-known-projects)))
+    (ivy-read "Switch to Project: "
+               relevant
+               :action #'find-file
+              )
+    )
+  )

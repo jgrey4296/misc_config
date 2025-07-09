@@ -65,19 +65,19 @@
   )
 (transient-call! window-delete      ()
   "Delete Window"
-  :key "d"
+  :key "w d"
   :interactive t
   #'+workspace/close-window-or-workspace
   )
 (transient-call! window-split-below ()
   "Split Below"
-  :key "-"
+  :key "w j"
   :interactive t
   #'split-window-below
   )
 (transient-call! window-split-right ()
   "Split Right"
-  :key "="
+  :key "w l"
   :interactive t
   #'split-window-right
   )
@@ -115,9 +115,9 @@
 ;;;###autoload
 (defun +jg-windows-build-transient ()
   " Add window control to the workspace transient "
-  (transient-append-suffix 'workspace-control-transient '(0 -1 -1)
+  (transient-append-suffix 'workspace-control-transient '(0 0 -1)
     '(transient-macro-call-toggle-dedication))
-  (transient-append-suffix 'workspace-control-transient '(0 -1 -1)
+  (transient-append-suffix 'workspace-control-transient '(0 0 -1)
     '(transient-macro-toggle-auto-balance))
   (transient-remove-suffix 'workspace-control-transient "1")
 

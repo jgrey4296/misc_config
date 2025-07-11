@@ -6,8 +6,8 @@
 
 ;;--  builtin
 
-(map! :map (python-mode-map python-ts-mode-map)
-      :after python-mode
+(map! :map (jg-python-mode-map jg-python-ts-mode-map)
+      :after python
       :desc "General Insert"         :n "|" #'librarian-insert-trigger
       :n "z d" nil
       :n "z D" nil
@@ -22,8 +22,8 @@
       :desc "Statement" :n "] s" #'python-nav-forward-statement
       )
 
-(map! :map (python-mode-map python-ts-mode-map) ;; localleader
-      :after python-mode
+(map! :map (jg-python-mode-map jg-python-ts-mode-map) ;; localleader
+      :after python
       :localleader
       :desc "ts-mode swap"     "TAB" #'+jg-python-swap-ts-mode
       :desc "Ruff Format"      "f" #'+jg-python-ruff-format
@@ -37,7 +37,8 @@
                                           (message "Python Debug Mode: %s" jg-python-dev-mode))
       )
 
-(map! :map (python-mode-map python-ts-mode-map) ;; localleader.imports
+(map! :map (jg-python-mode-map jg-python-ts-mode-map) ;; localleader.imports
+      :after python
       :localleader
       :desc "Import View"            "i" #'+jg-python--import-view
       :desc "Sort imports"           "s" #'+jg-python-isort-diff
@@ -51,7 +52,8 @@
        )
       )
 
-(map! :map (python-mode-map python-ts-mode-map) ;; localleader.tests
+(map! :map (jg-python-mode-map jg-python-ts-mode-map) ;; localleader.tests
+      :after python
       :localleader
       :prefix ("t" . "test")
       :desc "Test DWIM"       "f" #'python-pytest-file-dwim
@@ -64,7 +66,8 @@
       :desc "Make Testfile"   "m" #'+jg-python-make-test-file
       )
 
-(map! :map (python-mode-map python-ts-mode-map) ;; localleader.environment
+(map! :map (jg-python-mode-map jg-python-ts-mode-map) ;; localleader.environment
+      :after python
       :localleader
       :prefix ("e" . "Environment")
       :desc "Choose Support" "c" #'+jg-python-support
@@ -78,7 +81,8 @@
       :desc "mamba activate" "m" #'micromamba-activate
       )
 
-(map! :map (python-mode-map python-ts-mode-map) ;; localleader.coverage
+(map! :map (jg-python-mode-map jg-python-ts-mode-map) ;; localleader.coverage
+      :after python
       :localleader
       :desc "Coverage Refresh" "c" #'python-coverage-overlay-refresh
       :prefix ("C" . "Coverage")
@@ -90,7 +94,7 @@
       )
 
 (map! :map inferior-python-mode-map
-      :after python-mode
+      :after python
       "TAB" #'+jg-snippets-complete-or-snippet
       :n "DEL" #'counsel-shell-history--with-state-normal
       :localleader
@@ -145,4 +149,8 @@
       :n "DEL" #'counsel-shell-history--with-state-normal
       :localleader
       "TAB" #'toggle-truncate-lines
+      )
+
+(setq python-mode-map jg-python-mode-map
+      python-ts-mode-map jg-python-ts-mode-map
       )

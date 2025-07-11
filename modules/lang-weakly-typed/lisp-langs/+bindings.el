@@ -9,24 +9,24 @@
       :n "SPC e" #'eros-eval-last-sexp
       :n "|" #'librarian-insert-trigger
       :localleader
-      :desc "Sort Defuns" "S"  #'+jg-lisp-sort-defuns
-      :desc "Pretty Print" "p" #'+jg-lisp-pretty-region
+      )
+
+(map! :map (emacs-lisp-mode-map lisp-interaction-mode-map)
+      :localleader
+      :desc "Run Tests"           "t" #'ert-run-tests-interactively
+      :desc "Expand macro"        "m" #'macrostep-expand
+      :desc "Collapse Macro"      "q" #'macrostep-collapse
+      :desc "Collapse All Macros" "Q" #'macrostep-collapse-all
+      :desc "EIEIO Browse"        "b" #'eieio-browse
+      :desc "Sandbox"             "x" #'doom/sandbox
+      :desc "Sort Defuns"         "S"  #'+jg-lisp-sort-defuns
+      :desc "Pretty Print"        "p" #'+jg-lisp-pretty-region
       (:prefix ("e" . "eval")
        :desc "Byte Compile" :n "c" (cmd! (byte-compile-file buffer-file-name))
        )
       (:prefix ("i" . "Insert")
        :desc "Insert Palette Faces" "c" #'+jg-ui-insert-faces
        )
-      )
-
-(map! :map (emacs-lisp-mode-map lisp-interaction-mode-map)
-      :localleader
-      :desc "Run Tests"    "t" #'ert-run-tests-interactively
-      :desc "Expand macro" "m" #'macrostep-expand
-      :desc "Collapse Macro" "q" #'macrostep-collapse
-      :desc "Collapse All Macros" "Q" #'macrostep-collapse-all
-      :desc "EIEIO Browse" "b" #'eieio-browse
-      "x" #'doom/sandbox
       (:prefix ("d" . "debug")
                "f" #'+emacs-lisp/edebug-instrument-defun-on
                "F" #'+emacs-lisp/edebug-instrument-defun-off)

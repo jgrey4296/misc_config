@@ -6,20 +6,6 @@
 ;; See footer for licenses/metadata/notes as applicable
 ;;-- end Header
 
-(use-package! flycheck-cask
-  :commands #'flycheck-cask-setup
-  :init
-  ;; (add-hook! 'emacs-lisp-mode-hook
-  ;;   (add-hook 'flycheck-mode-hook #'flycheck-cask-setup nil t))
-
-  )
-
-(use-package! flycheck-package
-  :after flycheck
-  :config
-  (add-to-list 'flycheck-checkers 'emacs-lisp-package t)
-  )
-
 (use-package! ielm
   :defer t
   :config
@@ -73,6 +59,14 @@
     :match "/test[/-].+\\.el$"
     :add-hooks '(overseer-enable-mode)
     )
+  )
+
+;; --------------------------------------------------
+
+(speckler-setq! lisp ()
+  elisp-demos-user-files (list
+                          (expand-file-name "elisp-demos.org" (dir!))
+                          )
   )
 
 ;;-- Footer

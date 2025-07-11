@@ -3,8 +3,8 @@
 (local-load! "+defs")
 (local-load! "+vars")
 (local-load! "+extra")
-
-(defer-load! 'jg-bindings-total "+bindings")
+(local-load! "+flycheck")
+(defer-load! jg-bindings-total "+bindings")
 
 (advice-add 'elisp-get-var-docstring :around #'+emacs-lisp-append-value-to-eldoc-a)
 ;; Fixed indenter that intends plists sensibly.

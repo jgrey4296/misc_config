@@ -28,3 +28,6 @@
 (defvar jg-python-import-block-end-re "^\\(__all__\\|[[:graph:]]+?\\s-+=\\|def\\|class\\|if TYPE_CHECKING:\\)")
 
 (defvar jg-python-summary-buffer      "*Python-Summary*")
+
+(defvar jg-python-mode-map (make-sparse-keymap))
+(defvar jg-python-ts-mode-map (make-sparse-keymap))

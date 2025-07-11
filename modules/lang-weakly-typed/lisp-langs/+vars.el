@@ -5,12 +5,6 @@
   (add-to-list 'projectile-project-root-files "info.rkt")
   )
 
-(speckler-setq! lisp ()
-  elisp-demos-user-files (list
-                          (expand-file-name "elisp-demos.org" (dir!))
-                          )
-  )
-
 (after! smartparens
   ;; In lisps ( should open a new form if before another parenthesis
   (sp-local-pair sp-lisp-modes "(" ")" :unless '(:rem sp-point-before-same-p))
@@ -20,9 +14,6 @@
   )
 
 ;;-- specs
-(speckler-setq! flycheck-lisp ()
-  flycheck-emacs-lisp-load-path 'inherit
-  )
 (speckler-add! popup ()
   '(lisp
     ("^\\*Buttercup\\*'" :size 0.45 :select nil :ttl 0)

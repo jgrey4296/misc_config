@@ -1,9 +1,6 @@
 ;;; lang/jg-python/+vars.el -*- lexical-binding: t; -*-
 
 (dlog! "Python Vars")
-;;-- general python
-(modify-syntax-entry ?_ "_" python-mode-syntax-table)
-;;-- end general python
 
 ;;-- outline
 (after! python-mode
@@ -52,35 +49,17 @@
 ;;-- end babel
 
 ;;-- general insert
-(librarian-insert-register-processor 'python-mode "raise" #'(lambda (x) (insert "raise " (s-replace-regexp "^[^A-Z]+" "" x))))
-(librarian-insert-register-processor 'python-mode "datetime" #'(lambda (x) (insert (car (split-string x " " t " +")))))
-(librarian-insert-register-processor 'python-mode "fixtures" #'(lambda (x) (insert (car (split-string x " " t " "+)))))
-(librarian-insert-register-processor 'python-mode "import" #'(lambda (x) (insert "import " (car (split-string x t " +")))))
-(librarian-insert-register-processor 'python-ts-mode "raise" #'(lambda (x) (insert "raise " (s-replace-regexp "^[^A-Z]+" "" x))))
+(librarian-insert-register-processor 'python-mode "raise"       #'(lambda (x) (insert "raise " (s-replace-regexp "^[^A-Z]+" "" x))))
+(librarian-insert-register-processor 'python-mode "datetime"    #'(lambda (x) (insert (car (split-string x " " t " +")))))
+(librarian-insert-register-processor 'python-mode "fixtures"    #'(lambda (x) (insert (car (split-string x " " t " "+)))))
+(librarian-insert-register-processor 'python-mode "import"      #'(lambda (x) (insert "import " (car (split-string x t " +")))))
+(librarian-insert-register-processor 'python-ts-mode "raise"    #'(lambda (x) (insert "raise " (s-replace-regexp "^[^A-Z]+" "" x))))
 (librarian-insert-register-processor 'python-ts-mode "datetime" #'(lambda (x) (insert (car (split-string x " " t " +")))))
 (librarian-insert-register-processor 'python-ts-mode "fixtures" #'(lambda (x) (insert (car (split-string x " " t " "+)))))
-(librarian-insert-register-processor 'python-ts-mode "import" #'(lambda (x) (insert "import " (car (split-string x t " +")))))
+(librarian-insert-register-processor 'python-ts-mode "import"   #'(lambda (x) (insert "import " (car (split-string x t " +")))))
 ;;-- end general insert
 
 ;;-- specs
-(speckler-setq! python-ts ()
-  python--treesit-keywords '("as" "assert" "async" "await" "break" "case"
-                             "class" "continue" "def" "del" "elif" "else"
-                             "except" "exec" "finally" "for" "from" "global"
-                             "if" "import" "lambda" "match" "nonlocal" "pass"
-                             "print" "raise" "return" "try" "while" "with"
-                             "yield" "type" "and" "in" "is" "not" "or" "not in"
-                             "is not")
-  ;; python--treesit-builtin-types
-  ;; python--treesit-builtins
-  ;; python--treesit-type-regex
-  ;; python--treesit-constants
-  ;; python--treesit-operators
-  ;; python--treesit-special-attributes
-  ;; python--treesit-exceptions
-  ;; -----
-  ;; python--treesit-settings
-  )
 (speckler-add! projects ()
   :override t
   `(jg-python-project ("pyproject.toml")
@@ -197,30 +176,6 @@
     (python-mode         :trigger "__"                                 :priority -100)
     )
   )
-(speckler-add! fold ()
-  `(python
-                         :modes python-mode
-    :priority 25
-    :triggers (:close     #'+jg-python-close-methods
-               :close-all #'+jg-python-close-all-defs
-               :open      #'outline-toggle-children
-               :open-all  #'outline-show-all
-               :open-rec  #'outline-show-subtree
-               :toggle    #'outline-toggle-children
-               )
-    )
-  `(python-ts
-    :modes python-ts-mode
-    :priority 25
-    :triggers (:close     #'+jg-python-close-methods
-               :close-all #'+jg-python-close-all-defs
-               :open      #'outline-toggle-children
-               :open-all  #'outline-show-all
-               :open-rec  #'outline-show-subtree
-               :toggle    #'outline-toggle-children
-               )
-    )
-  )
 (speckler-add! rotate-text ()
   '(python-mode
     :symbols (("True" "False")
@@ -272,15 +227,6 @@
     ("Pypi"   "https://pypi.org/search/?q=%s")
     )
   )
-(speckler-add! company ()
-  '(python-mode (:mode company-gtags))
-  '(anaconda-mode (:mode company-anaconda))
-  )
-(speckler-add! docsets ()
-  '((python-mode inferior-python-mode)
-    "Python 3" "NumPy" "SciPy" "Pandas"
-    )
-  )
 (speckler-add! auto-modes ()
   '(python
     ("\\.pyi?\\'"               . python-mode)
@@ -294,17 +240,6 @@
     ("pyproject\\.toml\\'"      . conf-toml-mode)
     )
   )
-(speckler-add! compile-commands ()
-  '(python
-    #'+jg-python-get-commands
-    #'+jg-python-solo-file-run)
-  )
-(speckler-add! repl ()
-  '(python-mode
-    :start +jg-python/open-repl
-    :send  python-shell-send-region
-    )
-  )
 (speckler-add! yas-extra ()
   '(node-mode node-mode)
   )
@@ -314,16 +249,6 @@
     ("Field"  "\\s-*\\(.+?\\)\\s-*:\\s-\\(.+?\\)\\s-=\\s-field" 1)
 
     )
-  )
-(speckler-add! treesit-bin-override ()
-  '(python :lib-base "python" :entry-func "tree_sitter_python")
-  )
-(speckler-add! treesit-source ()
-  '(python        "git@github.com:tree-sitter/tree-sitter-python.git")
-  )
-(speckler-add! tree-sitter-lang ()
-  '(python-mode    . python)
-  '(python-ts-mode . python)
   )
 (speckler-add! org-src ()
   '(python
@@ -336,22 +261,6 @@
     )
   )
 (speckler-setq! python ()
-  ;; Python settings
-  python-indent-offset 4
-  python-indent-guess-indent-offset                     nil
-  python-shell-completion-native-enable                 nil
-  python-shell-completion-native-disabled-interpreters  '("pypy")
-  ;; python-shell-interpreter-path-args                    (expand-file-name "python/repl_startup.py"  templates-loc)
-  expand-region-preferred-python-mode 'python-mode
-  ;; py settings
-  py-shell-virtualenv-root      (if (boundp 'conda-env-home-directory) conda-env-home-directory nil)
-  py-pdbtrack-do-tracking-p     t
-  py-python-command             "python3"
-  py-python-command-args        '("-i")
-  py-use-font-lock-doc-face-p   t
-  py-fontify-shell-buffer-p     t
-  py-split-window-on-execute    t
-  ;; my settings
   jg-python-current-interpreter +python-ipython-command
   jg-python-repl-start-file (expand-file-name "python/repl_startup.py " templates-loc)
   jg-python-coverage-file-loc ".temp/coverage"

@@ -6,18 +6,20 @@
 ;; See footer for licenses/metadata/notes as applicable
 ;;-- end Header
 
+(advice-add 'pip-requirements-complete-at-point :before #'+python--init-completion-a)
+(advice-add 'pip-requirements-mode              :around #'+python--inhibit-pip-requirements-fetch-packages-a)
+
 (use-package! company-anaconda
   :after anaconda-mode
   :commands 'company-anaconda
+  :config
+  (speckler-add! company ()
+    '(anaconda-mode (:mode company-anaconda))
+    )
   )
 
 (use-package! company-jedi
   :when (modulep! :ide company)
-  :defer t
-  )
-
-(use-package! tox
-  :when (modulep! +tox)
   :defer t
   )
 
@@ -32,6 +34,10 @@
 (use-package! pydoc
   :after python-mode
   ;; cmds pydoc, pydoc-at-point, pydoc-browse, pydoc-browse-kill
+  )
+
+(use-package! pip-requirements
+  :commands pip-requirements-mode
   )
 
 ;;-- Footer

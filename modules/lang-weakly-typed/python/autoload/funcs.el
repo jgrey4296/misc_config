@@ -1,6 +1,5 @@
 ;;; +funcs.el -*- lexical-binding: t; -*-
 
-
 ;;;###autoload (autoload #'+jg-python-forward-defun "lang-weakly-typed/python/autoload/funcs.el" nil t)
 (evil-define-motion +jg-python-forward-defun (count)
   " Custom Python movement, taking fold-blocks into account "
@@ -44,7 +43,6 @@
     (_ (user-error "Unknown Python mode"))
     )
   )
-
 
 ;;;###autoload
 (defun +jg-python-get-editable-locs ()

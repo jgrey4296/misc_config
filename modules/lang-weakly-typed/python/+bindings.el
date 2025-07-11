@@ -4,6 +4,8 @@
       :desc "Select Python Repl" "c r p" #'+jg-python-select-repl
       )
 
+;;--  builtin
+
 (map! :map (python-mode-map python-ts-mode-map)
       :after python-mode
       :desc "General Insert"         :n "|" #'librarian-insert-trigger
@@ -94,6 +96,8 @@
       :localleader
       "q" #'comint-send-eof
       )
+
+;;-- end  builtin
 
 (map! :map cython-mode-map
       :after cython-mode

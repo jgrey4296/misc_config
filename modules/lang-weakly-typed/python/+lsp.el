@@ -9,6 +9,8 @@
 (use-package! lsp-jedi :defer t)
 (use-package! lsp-pylsp :defer t)
 
+;; --------------------------------------------------
+
 (speckler-add! lib-env ()
   :override nil
   `(py-lsp

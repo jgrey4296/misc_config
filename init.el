@@ -24,7 +24,7 @@
  :editor text-manipulation ;; +onsave
  :editor buffer-nav
  :editor window-nav ;; +numbers +ace
- :editor (fold +hideshow +vimish +shy +outline)
+ :editor (fold +hideshow +vimish +shy +outline +treesit)
  :editor undo
  :editor large-files
  :editor autosave
@@ -32,7 +32,7 @@
  :ide version-control ;; +forge +diff-hl
  :ide (librarian +tags)
  :ide snippets workspaces
- :ide (support +lsp +flycheck +treesitter) ;; +eglot  +semantic
+ :ide (support +lsp +flycheck +treesit) ;; +eglot  +semantic +tree-sitter
  :ide minimap diff company debugger
 
  :lang-data csv dot sql nu
@@ -56,7 +56,7 @@
 
  :lang-weakly-typed lisp-langs
  :lang-weakly-typed lua ;; +moonscript
- :lang-weakly-typed (python +isort) ;; +tox
+ :lang-weakly-typed (python +isort) ;; +tox +builtin +external
  :lang-weakly-typed erlang-vms godot
  :lang-weakly-typed ruby ;; +rbenv +rvm +chruby
 

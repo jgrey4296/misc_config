@@ -16,7 +16,6 @@
   )
 
 (use-package! flycheck
-  :commands (flycheck-list-errors flycheck-buffer flycheck-mode global-flycheck-mode)
   :init
   (setq flycheck-global-modes nil)
 

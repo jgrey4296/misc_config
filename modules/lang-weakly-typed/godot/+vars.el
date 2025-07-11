@@ -22,7 +22,7 @@
   '(gdscript      "git@github.com:PrestonKnopp/tree-sitter-gdscript.git")
   '(glsl          "git@github.com:tree-sitter-grammars/tree-sitter-glsl.git")
   )
-(speckler-add! treesit-lang ()
+(speckler-add! tree-sitter-lang ()
   '(gdscript-mode . gdscript)
   '(gdscript-ts-mode . gdscript)
   '(glsl-mode . glsl)

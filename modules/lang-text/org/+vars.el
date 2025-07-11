@@ -366,7 +366,7 @@
 (speckler-add! treesit-source ()
   '(org           "git@github.com:milisims/tree-sitter-org.git")
   )
-(speckler-add! treesit-lang ()
+(speckler-add! tree-sitter-lang ()
   '(org-mode . org)
   )
 (speckler-add! evil-ex ()

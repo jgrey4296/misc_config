@@ -12,7 +12,7 @@
     ("\\.tsv\\'" . tsv-mode)
     )
   )
-(speckler-add! treesit-lang ()
+(speckler-add! tree-sitter-lang ()
   '(csv-mode . csv)
   )
 (speckler-add! treesit-source ()

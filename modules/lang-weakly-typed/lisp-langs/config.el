@@ -4,7 +4,7 @@
 (local-load! "+vars")
 (local-load! "+extra")
 
-(defer-load! jg-bindings-total "+bindings")
+(defer-load! 'jg-bindings-total "+bindings")
 
 (advice-add 'elisp-get-var-docstring :around #'+emacs-lisp-append-value-to-eldoc-a)
 ;; Fixed indenter that intends plists sensibly.
@@ -36,7 +36,7 @@
 
   (add-hook! 'emacs-lisp-mode-hook
              #'hs-minor-mode
-             #'flycheck-mode
+             ;; #'flycheck-mode
              #'rainbow-delimiters-mode
              #'highlight-quoted-mode
              #'+emacs-lisp-init-straight-maybe-h

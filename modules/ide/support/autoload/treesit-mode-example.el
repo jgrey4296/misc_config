@@ -19,7 +19,7 @@
 
 ;;;###autoload
 (define-derived-mode python-ts-mode python-base-mode "Python"
-  "Major mode for editing Python files, using tree-sitter library.
+  "Major mode for editing Python files, using built in treesit library.
 
 \\{python-ts-mode-map}"
   :syntax-table python-mode-syntax-table

@@ -55,7 +55,7 @@
 (speckler-add! doc-lookup ()
   '(haskell-mode :definition haskell-mode-jump-to-def-or-tag)
   )
-(speckler-add! treesit-lang ()
+(speckler-add! tree-sitter-lang ()
   '(haskell-mode . haskell)
   )
 (speckler-add! treesit-source ()

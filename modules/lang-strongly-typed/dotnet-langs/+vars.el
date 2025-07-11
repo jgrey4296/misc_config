@@ -86,7 +86,7 @@
     ("f#" . fsharp)
     )
   )
-(speckler-add! treesit-lang ()
+(speckler-add! tree-sitter-lang ()
   '(csharp-mode . c-sharp)
   )
 (speckler-add! treesit-bin-override()

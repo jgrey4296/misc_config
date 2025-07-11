@@ -27,7 +27,7 @@
     (:name sqlite     :lib ob-sqlite)
     )
   )
-(speckler-add! treesit-lang ()
+(speckler-add! tree-sitter-lang ()
   '(sql-mode . sql)
   )
 (speckler-add! treesit-source ()

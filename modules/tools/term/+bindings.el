@@ -39,6 +39,7 @@
 
 ;; overrides the default normal mode binding of evil-ret
 (map! :map jg-term-comint-mode-map
+      :n "DEL"  #'counsel-shell-history--with-state-normal
       :n "C-d" #'comint-send-eof
 
       :n "H" #'comint-show-output

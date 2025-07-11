@@ -54,7 +54,7 @@
 (speckler-add! treesit-source ()
   '(toml          "git@github.com:ikatyang/tree-sitter-toml.git")
   )
-(speckler-add! treesit-lang ()
+(speckler-add! tree-sitter-lang ()
   '(toml-mode . toml)
   '(toml-ts-mode . toml)
   '(toml-conf-mode . toml)

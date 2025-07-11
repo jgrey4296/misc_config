@@ -7,7 +7,7 @@
                    :actions '(insert)
                    :post-handlers '(("| " "SPC") ("|[i]*)[d-2]" "RET")))))
 
-(speckler-add! treesit-lang ()
+(speckler-add! tree-sitter-lang ()
   '(ocaml-mode         . ocaml)
   '(ocaml-ts-mode      . ocaml)
   )

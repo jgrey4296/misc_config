@@ -37,7 +37,9 @@
 
 (when (modulep! +flycheck) (local-load! "+flycheck"))
 
-(when (modulep! +treesitter) (local-load! "+treesitter"))
+(when (modulep! +tree-sitter) (local-load! "+tree-sitter"))
+
+(when (modulep! +treesit) (local-load! "+treesit"))
 
 (when (modulep! +gtags) (load-load! "+gtags"))
 

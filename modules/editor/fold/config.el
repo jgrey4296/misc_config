@@ -17,6 +17,7 @@
 (when (modulep! +origami)  (local-load! "+origami"))
 (when (modulep! +shy)      (local-load! "+shy"))
 (when (modulep! +outline)  (local-load! "+outline"))
+(when (modulep! +treesit)  (local-load! "+treesit"))
 
 (speckler-new! fold (key val)
   "Registers fold handlers"

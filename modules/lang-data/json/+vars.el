@@ -1,6 +1,6 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
-(speckler-add! treesit-lang ()
+(speckler-add! tree-sitter-lang ()
   '(json-mode       . json)
   '(jsonc-mode      . json)
   '(json-ts-mode    . json)

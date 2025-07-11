@@ -152,7 +152,7 @@
                )
     )
   )
-(speckler-add! treesit-lang ()
+(speckler-add! tree-sitter-lang ()
   '(latex-mode . latex)
   '(tex-mode . latex)
   '(LaTeX-mode . latex)

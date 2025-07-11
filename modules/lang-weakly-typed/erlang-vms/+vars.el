@@ -30,7 +30,7 @@
   '(elixir ("mix.exs") :project-file "mix.exs" :compilation-dir nil :configure nil :compile "mix compile" :test "mix test" :install nil :package nil :run nil :test-suffix "_test" :src-dir "lib/")
   '(rebar ("rebar.config") :project-file "rebar.config" :compilation-dir nil :configure nil :compile "rebar3 compile" :test "rebar3 do eunit,ct" :install nil :package nil :run nil :test-suffix "_SUITE")
   )
-(speckler-add! treesit-lang ()
+(speckler-add! tree-sitter-lang ()
   '(elixir-mode     . elixir)
   )
 (speckler-add! treesit-source ()

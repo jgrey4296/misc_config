@@ -15,6 +15,8 @@
 (package! flycheck-popup-tip)
 
 (package! treesit :built-in t)
+(package! treesit-fold)
+
 (package! tree-sitter)
 (package! tree-sitter-indent)
 (package! tree-sitter-langs :pin "213b1c4db852a97480e029453af869ff1a0764e0")

@@ -22,7 +22,7 @@
     ("condarc\\'" . yaml-mode)
     )
   )
-(speckler-add! treesit-lang ()
+(speckler-add! tree-sitter-lang ()
   '(yaml-mode . yaml)
   '(yaml-ts-mode . yaml)
   )

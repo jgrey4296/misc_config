@@ -85,7 +85,7 @@
     ("build\\.gradle\\.kts$"     :trigger "build.gradle.kts" :mode kotlin-mode)
     )
   )
-(speckler-add! treesit-lang ()
+(speckler-add! tree-sitter-lang ()
   '(java-mode          . java)
   '(scala-mode         . scala)
   '(groovy-mode        . groovy)

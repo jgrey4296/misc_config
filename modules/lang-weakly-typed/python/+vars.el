@@ -321,7 +321,7 @@
 (speckler-add! treesit-source ()
   '(python        "git@github.com:tree-sitter/tree-sitter-python.git")
   )
-(speckler-add! treesit-lang ()
+(speckler-add! tree-sitter-lang ()
   '(python-mode    . python)
   '(python-ts-mode . python)
   )

@@ -51,7 +51,7 @@
   '(mhtml-mode
     :start +xml/open-repl)
   )
-(speckler-add! treesit-lang ()
+(speckler-add! tree-sitter-lang ()
   '(xml-mode . xml)
   '(nxml-mode . xml)
   )

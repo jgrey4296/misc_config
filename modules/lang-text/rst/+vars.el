@@ -19,7 +19,7 @@
 (speckler-add! compile-commands ()
   '(rst #'+jg-rst-get-commands)
   )
-(speckler-add! treesit-lang ()
+(speckler-add! tree-sitter-lang ()
   '(rst-mode . rst)
   )
 (speckler-add! treesit-source ()

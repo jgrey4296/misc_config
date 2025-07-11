@@ -75,7 +75,7 @@
 (speckler-add! docsets ()
   '(rust-mode "Rust")
   )
-(speckler-add! treesit-lang ()
+(speckler-add! tree-sitter-lang ()
   '(rust-mode    . rust)
   '(rust-ts-mode . rust)
   '(rustic-mode  . rust)

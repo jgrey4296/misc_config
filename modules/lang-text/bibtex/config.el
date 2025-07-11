@@ -31,8 +31,9 @@
              #'display-line-numbers-mode
              #'yas-minor-mode
              #'outline-minor-mode
-             #'librarian--biblio-font-lock-mod-hook
              #'reftex-mode
+             #'librarian-mode
+             #'librarian--biblio-font-lock-mod-hook
              #'librarian-insert-minor-mode)
 
   (add-hook! 'bibtex-mode-hook :append

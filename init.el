@@ -56,7 +56,7 @@
 
  :lang-weakly-typed lisp-langs
  :lang-weakly-typed lua ;; +moonscript
- :lang-weakly-typed (python +isort) ;; +tox +builtin +external
+ :lang-weakly-typed (python +isort +builtin) ;; +tox +external
  :lang-weakly-typed erlang-vms godot
  :lang-weakly-typed ruby ;; +rbenv +rvm +chruby
 

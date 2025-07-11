@@ -2,23 +2,6 @@
 
 (dlog! "Python Vars")
 
-;;-- outline
-(after! python-mode
-  (rx-let ((kwds (regexp (eval (s-join "\\|" py-outline-mode-keywords))))
-           )
-    (setq jg-python-outline-regexp
-          (rx (* blank)
-              (or "##--"
-                  (| "@" (+ word))
-                  kwds
-                  )
-              )
-          jg-python-outline-end-regexp ":[^\n]*\n"
-          )
-    )
-  )
-;;-- end outline
-
 ;;-- smartparens
 (after! smartparens-python
   (sp-with-modes 'python-mode

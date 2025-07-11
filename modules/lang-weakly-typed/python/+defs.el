@@ -30,4 +30,15 @@
 (defvar jg-python-summary-buffer      "*Python-Summary*")
 
 (defvar jg-python-mode-map (make-sparse-keymap))
+
 (defvar jg-python-ts-mode-map (make-sparse-keymap))
+
+(defvar jg-python-outline-keywords '(
+                                     "class"    "def"    "elif"    "else"    "except"
+                                     "for"      "if"     "while"   "finally" "try"
+                                     "with"     "match"  "case"
+                                     )
+  "Keywords for folding"
+  )
+(defvar jg-python-outline-regexp "##")
+(defvar jg-python-outline-end-regexp "\n")

@@ -24,24 +24,43 @@
 
   (modify-syntax-entry ?_ "_" python-mode-syntax-table)
 
-  (add-hook! 'python-ts-mode-hook
+  (add-hook! 'python-base-mode-hook
              #'abbrev-mode
              #'evil-collection-python-set-evil-shift-width
+             ;; --
              #'librarian-insert-minor-mode
-             #'+jg-python-outline-regexp-override-hook
-             #'outline-minor-mode
              #'maybe-py-test-minor-mode
              )
 
-  (setq-hook! 'python-ts-mode-hook ;; flycheck specific
-    lsp-diagnostic-filter       #'+jg-python-lsp-flycheck-filter
+  (add-hook! 'python-mode-hook
+             #'er/add-python-mode-expansions
+             #'tree-sitter!
+             )
+
+  (add-hook! 'python-mode-hook :depth 100
+             #'jg-python-font-lock-mod-h
+             #'+jg-python-outline-regexp-override-hook
+             #'outline-minor-mode
+             )
+
+  (add-hook! 'python-ts-mode-hook :depth 100
+             #'treesit-fold-mode
+             )
+
+
+  (setq-hook! 'python-base-mode-hook
+    lsp-diagnostic-filter                     #'+jg-python-lsp-flycheck-filter
     flycheck-pylintrc                         '("pylint.toml" "pyproject.toml")
     flycheck-python-ruff-config               '("ruff.toml" ".ruff.toml" "pyproject.toml")
     flycheck--automatically-enabled-checkers  '(python-ruff python-coverage)
-    flycheck--automatically-disabled-checkers '(python-pylint python-flake8 python-pycompile python-compile python-pyright python-mypy)
+    flycheck--automatically-disabled-checkers '(python-pylint python-flake8 python-pycompile python-compile python-pyright)
     flycheck-python-mypy-config               '("pyproject.toml")
     comment-start "# "
+    jg-workspaces-find-buff-fn #'+jg-python-carousel-window-fn
+    tab-width                    python-indent-offset
     )
+
+  (add-hook! 'code-shy-minor-mode-hook #'+jg-python-auto-hide)
   )
 
 (use-package! pythonic
@@ -103,12 +122,12 @@
   `(python-ts
     :modes python-ts-mode
     :priority 25
-    :triggers (:close     #'+jg-python-close-methods
-               :close-all #'+jg-python-close-all-defs
-               :open      #'outline-toggle-children
-               :open-all  #'outline-show-all
-               :open-rec  #'outline-show-subtree
-               :toggle    #'outline-toggle-children
+    :triggers (:close     #'treesit-fold-close
+               :close-all #'treesit-fold-close-all
+               :open      #'treesit-fold-open
+               :open-all  #'treesit-fold-open-all
+               :open-rec  #'treesit-fold-open-recursively
+               :toggle    #'treesit-fold-toggle
                )
     )
   )
@@ -142,7 +161,6 @@
   '(python-mode    . python)
   '(python-ts-mode . python)
   )
-
 (speckler-setq! python-builtin ()
   ;; Python settings
   python-indent-offset               4
@@ -156,6 +174,18 @@
   python-shell-completion-native-disabled-interpreters  '("pypy")
   expand-region-preferred-python-mode 'python-mode
 )
+
+(rx-let ((kwds (regexp (eval (s-join "\\|" jg-python-outline-keywords)))))
+  (setq jg-python-outline-regexp
+        (rx (* blank)
+            (or "##--"
+                (| "@" (+ word))
+                kwds
+                )
+            )
+        jg-python-outline-end-regexp ":[^\n]*\n"
+        )
+  )
 
 ;;-- Footer
 ;; Copyright (C) 2025 john

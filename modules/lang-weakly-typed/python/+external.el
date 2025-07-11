@@ -20,13 +20,11 @@
   (modify-syntax-entry ?_ "_" python-mode-syntax-table)
   (defalias 'python-external-mode #'python-mode)
 
-  ;;-- hooks
-
   (add-hook! 'python-mode-hook
              #'abbrev-mode
-             #'doom--setq-tab-width-for-python-mode-h
              #'er/add-python-mode-expansions
              #'evil-collection-python-set-evil-shift-width
+             ;; --
              #'librarian-insert-minor-mode
              #'maybe-py-test-minor-mode
              #'tree-sitter!
@@ -38,26 +36,32 @@
              #'outline-minor-mode
              )
 
-  (add-hook! 'code-shy-minor-mode-hook #'+jg-python-auto-hide)
-
-  (setq-hook! 'python-mode-hook ;; flycheck specific
-    lsp-diagnostic-filter       #'+jg-python-lsp-flycheck-filter
+  (setq-hook! 'python-mode-hook
+    lsp-diagnostic-filter                     #'+jg-python-lsp-flycheck-filter
     flycheck-pylintrc                         '("pylint.toml" "pyproject.toml")
     flycheck-python-ruff-config               '("ruff.toml" ".ruff.toml" "pyproject.toml")
     flycheck--automatically-enabled-checkers  '(python-ruff python-coverage)
     flycheck--automatically-disabled-checkers '(python-pylint python-flake8 python-pycompile python-compile python-pyright)
     flycheck-python-mypy-config               '("pyproject.toml")
     comment-start "# "
-    )
-
-  (setq-hook! 'python-mode-hook
     jg-workspaces-find-buff-fn #'+jg-python-carousel-window-fn
     tab-width                    py-indent-offset
     )
 
-  ;;-- end hooks
+  (rx-let ((kwds (regexp (eval (s-join "\\|" py-outline-mode-keywords)))))
+    (setq jg-python-outline-regexp
+          (rx (* blank)
+              (or "##--"
+                  (| "@" (+ word))
+                  kwds
+                  )
+              )
+          jg-python-outline-end-regexp ":[^\n]*\n"
+          )
+    )
+  )
 
-)
+;; --------------------------------------------------
 
 (speckler-add! fold ()
   `(python
@@ -103,6 +107,8 @@
   ;; Python settings
   expand-region-preferred-python-mode 'python-mode
 )
+
+
 
 ;;-- Footer
 ;; Copyright (C) 2025 john

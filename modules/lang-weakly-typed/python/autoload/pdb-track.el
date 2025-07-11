@@ -100,3 +100,20 @@ script, and set to python-mode, and pdbtrack will find it.)"
       )
     )
   )
+
+
+;;;###autoload
+(defun +jg-python-toggle-pdbtrack ()
+  (interactive)
+  (cond ((featurep 'python)
+         (setq python-pdbtrack-activate (not python-pdbtrack-activate))
+         (unless python-pdbtrack-activate
+           (python-pdbtrack-unset-tracked-buffer)
+           )
+         (message "PdbTrack: %s" python-pdbtrack-activate)
+         )
+        ((featurep 'python-mode)
+         (py-pdbtrack-toggle-stack-tracking)
+         )
+        )
+  )

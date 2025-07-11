@@ -25,13 +25,13 @@
       :after python
       :localleader
       :desc "ts-mode swap"     "TAB" #'+jg-python-swap-ts-mode
-      :desc "Ruff Format"      "f" #'+jg-python-ruff-format
-      :desc "Start Pydoc"      "p" #'+jg-python-start-pydoc
-      :desc "Summarize"        "\\" #'+jg-python-summarize
-      :desc "REPL"             "r" #'+jg-python/open-ipython-repl
-      :desc "track"            ";" #'py-pdbtrack-toggle-stack-tracking
-      :desc "breakpoint"       "b" #'+jg-python-breakpoint-line
-      :desc "Disassemble"      "D" #'+jg-python-bytecode-dwim
+      :desc "Ruff Format"      "f"   #'+jg-python-ruff-format
+      :desc "Start Pydoc"      "p"   #'+jg-python-start-pydoc
+      :desc "Summarize"        "\\"  #'+jg-python-summarize
+      :desc "REPL"             "r"   #'+jg-python/open-ipython-repl
+      :desc "track"            ";"   #'+jg-python-toggle-pdbtrack
+      :desc "breakpoint"       "b"   #'+jg-python-breakpoint-line
+      :desc "Disaspemble"      "D"   #'+jg-python-bytecode-dwim
       :desc "debug"            "d" (cmd! (setq jg-python-dev-mode (not jg-python-dev-mode))
                                           (message "Python Debug Mode: %s" jg-python-dev-mode))
       )
@@ -98,9 +98,16 @@
       :n "DEL" #'counsel-shell-history--with-state-normal
       :localleader
       "q" #'comint-send-eof
+
       )
 
 ;;-- end  builtin
+
+(map! :map jg-term-comint-mode-map
+      :localleader
+      :desc "PdbTrack"     ";" #'+jg-python-toggle-pdbtrack
+      :desc "Fold lines" "TAB" #'toggle-truncate-lines
+      )
 
 (map! :map cython-mode-map
       :after cython-mode
@@ -130,12 +137,6 @@
       :localleader
       :desc "Python site-packages" "f p" #'+jg-python-try-site-packages
       :desc "Make __init__.py"     "g i" (cmd! (+jg-dired-touch "__init__.py"))
-      )
-
-(map! :map jg-term-comint-mode-map
-      :localleader
-      :desc "PdbTrack"     ";" #'py-pdbtrack-toggle-stack-tracking
-      :desc "Fold lines" "TAB" #'toggle-truncate-lines
       )
 
 (map! :map py-test-minor-mode-map

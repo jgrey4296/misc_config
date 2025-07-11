@@ -24,6 +24,8 @@
 
 (defer-load! jg-bindings-total "+bindings")
 
+(advice-add #'evil-toggle-fold :around #'jg-buffer-nav-fold-check-a)
+
 (use-package! centered-cursor-mode
   :commands centered-cursor-mode
   :init

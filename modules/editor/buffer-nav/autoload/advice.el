@@ -26,3 +26,17 @@
       (set-marker origin nil)
       (set-marker dest nil)
       result))
+
+;;;###autoload
+(defun jg-buffer-nav-fold-check-a (fn &rest args)
+  " if at the end of the line and immediately backward theres an invisible overlay,
+move back and unfold that
+"
+  (when-let ((eol (eolp))
+             (overlay (car-safe (overlays-at (1- (point)))))
+             (invis (plist-get (overlay-properties overlay) 'invisible))
+             )
+    (backward-char)
+    )
+  (apply fn args)
+  )

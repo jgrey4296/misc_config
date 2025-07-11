@@ -12,5 +12,5 @@
       )
 
 (map! :map prolog-mode-map
-      :n "|" #'librarian-insert-trigger
+
       )

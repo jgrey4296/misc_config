@@ -7,20 +7,11 @@
       :desc "General Insert"         "i g"     #'librarian-insert-trigger
       )
 
-(map! :map jg-help-map
-      :after jg-help-bindings
-      :desc "Man"                         "d m"  #'librarian-man
-      :desc "Emacs Version Config"        "p v"  #'librarian-system-config
-      :desc "Describe Class"              "c"    #'librarian-describe-class
-      :prefix ("e" . "Edit")
-      :desc "Bindings"  "b" #'librarian-configs--edit-bindings
-      :desc "Vars"      "v" #'librarian-configs--edit-vars
-      :desc "Config"    "c" #'librarian-configs--edit-config
-      :desc "Spec-Defs" "s" #'librarian-configs--edit-spec-defs
-      )
+;; --------------------------------------------------
 
 (map! :map librarian-mode-map
        :i "s" #'self-insert-command
+       :n "|" #'librarian-insert-trigger
       (:prefix ("s" . "Jump")
        :desc "Browse URL"                :n "u" #'librarian-url
        :desc "Select Link"               :n "," #'link-hint-open-link
@@ -56,6 +47,13 @@
       :desc "add word to dict"          :n "c w a"    #'+spell/add-word
       )
 
+;; --------------------------------------------------
+
+(map! :map jg-binding-normal-state-map
+      :desc "Lookup"           "K"   #'librarian-documentation
+      :desc "General Insert"   "I |" #'librarian-insert-trigger
+      )
+
 (map! :map eww-mode-map
       :n "=" 'eww-copy-page-url
       :n "?" 'eww-browse-with-external-browser
@@ -64,11 +62,18 @@
       :desc "Render Buffer" "r" #'shr-render-buffer
       )
 
-(map! :map jg-binding-normal-state-map
-      :desc "Lookup"           "K"   #'librarian-documentation
-      :desc "General Insert"   "I |" #'librarian-insert-trigger
-      )
-
 (map! :map snippet-mode-map
       :n "|" #'librarian-insert-trigger
+      )
+
+(map! :map jg-help-map
+      :after jg-help-bindings
+      :desc "Man"                         "d m"  #'librarian-man
+      :desc "Emacs Version Config"        "p v"  #'librarian-system-config
+      :desc "Describe Class"              "c"    #'librarian-describe-class
+      :prefix ("e" . "Edit")
+      :desc "Bindings"  "b" #'librarian-configs--edit-bindings
+      :desc "Vars"      "v" #'librarian-configs--edit-vars
+      :desc "Config"    "c" #'librarian-configs--edit-config
+      :desc "Spec-Defs" "s" #'librarian-configs--edit-spec-defs
       )

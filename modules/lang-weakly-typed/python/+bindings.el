@@ -8,7 +8,6 @@
 
 (map! :map (jg-python-mode-map jg-python-ts-mode-map)
       :after python
-      :desc "General Insert"         :n "|" #'librarian-insert-trigger
       :n "z d" nil
       :n "z D" nil
       :v "i f" nil

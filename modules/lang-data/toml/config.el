@@ -21,7 +21,6 @@
 ;;; Code:
 
 (local-load! "+vars")
-(defer-load! jg-bindings-total "+bindings")
 
 (use-package! conf-mode
   :commands conf-mode conf-toml-mode

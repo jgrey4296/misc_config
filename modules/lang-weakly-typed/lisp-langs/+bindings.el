@@ -7,7 +7,6 @@
 
 (map! :map emacs-lisp-mode-map
       :n "SPC e" #'eros-eval-last-sexp
-      :n "|" #'librarian-insert-trigger
       :localleader
       )
 

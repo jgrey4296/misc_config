@@ -7,7 +7,7 @@
 ;;-- bibtex-mode
 (map! :map jg-bibtex-mode-map ;; main
       :n "=" (cmd! (org-bibtex-read-buffer (current-buffer)))
-      :n "|"                                  #'librarian-insert-trigger
+      :n "|" nil
       :desc "Lock Key"           :n "!"       #'librarian--biblio-edit-lock-key
       :desc "Insert from Doi"    :n "I d"     #'librarian-biblio-create-from-doi
       :desc "Auto Form"          :n "I F"     #'+jg-bibtex-entry-form
@@ -162,10 +162,6 @@
 (evil-ex-define-cmd "ci[te]" #'+jg-bibtex-insert-wrapped)
 
 ;;-- end evil-ex
-
-(map! :map bibtex-style-mode-map
-      :n "|" #'librarian-insert-trigger
-      )
 
 (after! bibtex
   (setq bibtex-mode-map jg-bibtex-mode-map)

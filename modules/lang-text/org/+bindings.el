@@ -40,7 +40,6 @@
       )
 
 (map! :map jg-org-mode-map
-      :n "|" #'librarian-insert-trigger
       :desc "Next Link"       :m "] l" #'org-next-link
       :desc "Prev Link"       :m "[ l" #'org-previous-link
       :desc "Forward Heading" :m "] j" #'org-forward-heading-same-level

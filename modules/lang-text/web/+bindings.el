@@ -98,7 +98,6 @@
       )
 
 (map! :map (css-mode-map less-css-mode-map scss-mode-map sass-mode-map)
-      :n "|"  #'librarian-insert-trigger
       :n "s j" #'counsel-css
 
       :localleader

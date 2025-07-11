@@ -188,7 +188,3 @@
       :n "3" nil
       :n "4" nil
       )
-
-(map! :map (gitconfig-mode-map gitattributes-mode-map gitignore-mode-map)
-      :desc "General Insert"         :n "|" #'librarian-insert-trigger
-      )

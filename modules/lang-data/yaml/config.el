@@ -9,7 +9,7 @@
   (add-hook 'yaml-mode-hook #'librarian-insert-minor-mode)
 
   (map! :map yaml-mode-map
-        :desc "General Insert"         :n "|" #'librarian-insert-trigger
+
         )
 
   )

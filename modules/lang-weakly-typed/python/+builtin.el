@@ -16,6 +16,7 @@
 (advice-add 'python-shell-calculate-command :override    #'+jg-python-shell-calculate-command)
 (advice-add 'python-ts-mode                 :around      #'+jg-python-override-python-ts)
 (advice-add 'python-ts-mode                 :after       #'python-ts-extend)
+(advice-add 'python-pdbtrack-unset-tracked-buffer :override #'+jg-python-pdbtrack-unset-fix-a)
 
 (use-package! python
   :config

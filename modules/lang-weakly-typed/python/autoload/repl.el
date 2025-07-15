@@ -25,7 +25,7 @@ falling back on searching your PATH."
   "Open the Python REPL."
   (interactive)
   (require 'python)
-  (unless python-shell--interpreter (user-error "`python-shell-interpreter' isn't set"))
+  (unless python-shell-interpreter (user-error "`python-shell-interpreter' isn't set"))
 
   (let ((cmd (+jg-python-shell-calculate-command))
         (dedicated (bound-and-true-p python-shell-dedicated))

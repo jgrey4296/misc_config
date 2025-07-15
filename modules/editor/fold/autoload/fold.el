@@ -149,7 +149,6 @@ Targets `vimmish-fold', `hideshow' and `outline' folds."
   (interactive "p")
   (+fold/next (- count)))
 
-
 ;;;###autoload
 (defun +jg-fold/debug ()
   (interactive)

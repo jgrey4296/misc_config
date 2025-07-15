@@ -105,15 +105,28 @@ script, and set to python-mode, and pdbtrack will find it.)"
 ;;;###autoload
 (defun +jg-python-toggle-pdbtrack ()
   (interactive)
-  (cond ((featurep 'python)
-         (setq python-pdbtrack-activate (not python-pdbtrack-activate))
-         (unless python-pdbtrack-activate
-           (python-pdbtrack-unset-tracked-buffer)
-           )
+  (cond ((and (featurep 'python) (boundp 'python-pdbtrack-activate) python-pdbtrack-activate)
+         ;; Deactivate
+         (setq python-pdbtrack-activate nil)
+         ;; (python-pdbtrack-unset-tracked-buffer)
+         (message "PdbTrack: %s" python-pdbtrack-activate)
+         )
+        ((featurep 'python)
+         (setq python-pdbtrack-activate t)
+         ;; (python-pdbtrack-setup-tracking)
          (message "PdbTrack: %s" python-pdbtrack-activate)
          )
         ((featurep 'python-mode)
          (py-pdbtrack-toggle-stack-tracking)
          )
         )
+  )
+
+;;;###autoload
+(defun +jg-python-pdbtrack-unset-fix-a ()
+  (when (and (buffer-live-p python-pdbtrack-tracked-buffer)
+             (buffer-local-boundp 'overlay-arrow-positioin python-pdbtrack-tracked-buffer))
+    (with-current-buffer python-pdbtrack-tracked-buffer
+      (set-marker overlay-arrow-position nil)))
+  (setq python-pdbtrack-tracked-buffer nil)
   )

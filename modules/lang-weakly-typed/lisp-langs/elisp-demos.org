@@ -67,7 +67,7 @@
 )
 #+end_src
 
-* transient-guarded-insert!
+* transient-guarded-insert-subgroup!
 #+begin_src emacs-lisp
-(transient-guarded-insert! 'jg-toggle-main librarian-settings (1 -1))
+(transient-guarded-insert-subgroup! 'jg-toggle-main librarian-settings (1 -1))
 #+end_src

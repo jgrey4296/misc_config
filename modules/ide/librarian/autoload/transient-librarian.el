@@ -59,7 +59,7 @@
 
 ;;;###autoload
 (defun +jg-librarian-build-librarian-transient ()
-  (transient-guarded-insert! 'jg-toggle-main librarian-settings (1 -1))
+  (transient-guarded-insert-subgroup! 'jg-toggle-main librarian-settings (1 -1))
   (transient-append-suffix 'jg-toggle-main
     '(0 0 -1)
     '("@" transient-macro-call-general-insert-rebuild-cache)

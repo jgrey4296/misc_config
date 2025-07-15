@@ -183,5 +183,3 @@
 ;;
 ;;-- end Footer
 ;;; carousel-transient.el ends here
-
-(jg-workspace-build-carousel-transient)

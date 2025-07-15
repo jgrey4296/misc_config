@@ -17,6 +17,10 @@
   "Reveal Invisible"
   :key "I"
   )
+(transient-toggle-mode! flycheck-popup-tip-mode ()
+  "flycheck popup"
+  :key "f"
+  )
 ;; Hooks
 (transient-toggle-hook! pretty-symbols ()
   "Pretty Symbols"
@@ -104,6 +108,7 @@
      (transient-macro-toggle-hook-highlight-symbol)
      (transient-macro-toggle-hook-evil-goggles)
      (transient-macro-toggle-hook-highlight-parentheses)
+     (transient-macro-toggle-flycheck-popup-tip-mode)
      ]
     [
      (transient-macro-toggle-invisible)
@@ -113,7 +118,7 @@
      ]
   )
 
-  (transient-guarded-insert! 'jg-toggle-main jg-toggle-visuals-transient (1 -1))
+  (transient-guarded-insert-subgroup! 'jg-toggle-main jg-toggle-visuals-transient (1 -1))
   )
 
 ;;-- Footer

@@ -17,10 +17,22 @@
     []
   )
 
-  (transient-guarded-insert! 'jg-toggle-main jg-toggle-hooks-transient (1 -1))
+  (transient-guarded-insert-subgroup! 'jg-toggle-main jg-toggle-hooks-transient (1 -1))
 
-  (run-hook-with-args 'macro-tools--transient-hooks jg-toggle-hooks-transient 0 -1)
+  (jg-ui-run-hooks)
 
+  )
+
+(defun jg-ui-run-hooks ()
+  (interactive)
+  (cl-loop for x in macro-tools--transient-hooks
+           do
+           (condition-case err
+               (progn (transient-guarded-append! jg-toggle-hooks-transient x (0 -1))
+                      (message "----"))
+             (error (message "Error: %s : %s" err x))
+             )
+           )
   )
 
 ;;-- Footer

@@ -67,14 +67,12 @@
      ]
     )
 
-  (transient-append-suffix 'jg-toggle-main
-    '(2 0 -1)
-    '(transient-macro-call-debug-on-error)
-    )
+  (transient-append-suffix 'jg-toggle-main '(2 0 -1) '(transient-macro-call-debug-on-error))
   (transient-append-suffix 'jg-toggle-main "c" '(transient-macro-call-kill-backtrace))
 
-  (transient-guarded-insert! 'jg-toggle-main jg-toggle-debugs-transient (1 -1))
+  (transient-guarded-insert-subgroup! 'jg-toggle-main jg-toggle-debugs-transient (1 -1))
   )
+
 
 ;;-- Footer
 ;; Copyright (C) 2024 john

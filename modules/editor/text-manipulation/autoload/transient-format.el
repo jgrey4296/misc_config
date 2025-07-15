@@ -27,7 +27,7 @@
      ]
     )
 
-  (transient-guarded-insert! 'jg-toggle-main jg-toggle-format-transient (1 -1))
+  (transient-guarded-insert-subgroup! 'jg-toggle-main jg-toggle-format-transient (1 -1))
 
   )
 

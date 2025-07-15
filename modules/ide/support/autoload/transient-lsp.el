@@ -299,7 +299,7 @@
 
 ;;;###autoload
 (defun +jg-ide-build-lsp-transient ()
-  (transient-guarded-insert! 'jg-toggle-main jg-lsp-toggle (1 -1))
+  (transient-guarded-insert-subgroup! 'jg-toggle-main jg-lsp-toggle (1 -1))
 
   (transient-append-suffix (cadr jg-toggle-visuals-transient)
     "H" '("t" transient-macro-toggle-hook-tree-sitter-hl)

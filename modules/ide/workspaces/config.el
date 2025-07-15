@@ -242,7 +242,6 @@
   :config
   ;; TODO refactor this like ui's transients
   ;; Define
-  (add-hook 'workspaces-transient-hook #'+jg-windows-build-transient 0)
   (add-hook 'workspaces-transient-hook #'jg-workspace-build-project-transient 25)
   (add-hook 'workspaces-transient-hook #'jg-workspace-build-zimmerframe-transient 50)
 

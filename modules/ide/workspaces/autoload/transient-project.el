@@ -245,7 +245,7 @@
 
   (transient-append-suffix 'workspace-control-transient "t"   '(transient-macro-call-proj-sidebar))
 
-  (transient-append-suffix 'workspace-control-transient '(0 1)
+  (transient-append-suffix 'workspace-control-transient '(0 -1)
     [""
      (transient-macro-call-proj-root)
      (transient-macro-call-proj-browse)

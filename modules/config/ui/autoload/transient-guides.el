@@ -76,7 +76,7 @@
      ]
     )
 
-  (transient-guarded-insert! 'jg-toggle-main jg-toggle-guides-transient (1 -1))
+  (transient-guarded-insert-subgroup! 'jg-toggle-main jg-toggle-guides-transient (1 -1))
 
   (transient-append-suffix 'jg-toggle-main "E" '("W" transient-macro-call-spelling))
   )

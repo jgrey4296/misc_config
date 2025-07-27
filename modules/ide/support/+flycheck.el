@@ -33,7 +33,6 @@
   )
 
 (use-package! flycheck-popup-tip
-  :commands flycheck-popup-tip-show-popup flycheck-popup-tip-delete-popup
   :hook (flycheck-mode . flycheck-popup-tip-mode)
   :config
   (after! evil
@@ -42,6 +41,20 @@
     (add-hook! '(evil-insert-state-entry-hook evil-replace-state-entry-hook)
                #'flycheck-popup-tip-delete-popup)
     (advice-add 'flycheck-popup-tip-show-popup :before-while #'+syntax--disable-flycheck-popup-tip-maybe-a)
+    )
+  (after! transient
+    (transient-toggle-hook! flycheck-popup ()
+      "flycheck popup"
+      :key "f"
+      :global t
+      :hook '(flycheck-mode)
+      :fn #'flycheck-popup-tip-mode
+      )
+
+    (defun +jg-support-build-flycheck-popup-transient ()
+      (transient-guarded-append! jg-toggle-visuals-transient 'transient-macro-toggle-hook-flycheck-popup (0 -1))
+      )
+    (add-hook 'jg-ui-transient-toggles-hook #'+jg-support-build-flycheck-popup-transient 90)
     )
   )
 
@@ -58,7 +71,7 @@
 
 (speckler-setq! flycheck ()
   flycheck-display-errors-delay 1
-  flycheck-display-errors-function 'flycheck-display-error-messages
+  flycheck-display-errors-function nil ;;'flycheck-display-error-messages
   flycheck-help-echo-function nil
   flycheck-process-error-functions '(flycheck-add-overlay)
   flycheck-check-syntax-automatically '(save idle-change mode-enabled)
@@ -87,6 +100,8 @@
     ("^\\*Flycheck errors\\*" :size 0.25)
     )
   )
+
+
 
 ;;-- Footer
 ;; Copyright (C) 2024 john

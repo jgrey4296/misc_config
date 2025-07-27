@@ -238,6 +238,13 @@
         )
   )
 
+(use-package! projectile-variable
+  :defer t
+  :commands (projectile-variable-put
+             projectile-variable-get
+             projectile-variable-alist
+             projectile-variable-plist))
+
 (use-package! transient
   :config
   ;; TODO refactor this like ui's transients

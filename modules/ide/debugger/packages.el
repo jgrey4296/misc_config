@@ -9,9 +9,6 @@
 (package! realgud-node-inspect)
 (package! realgud-node-debug)
 
-
 (package! dap-mode)
 
 (package! edebug-x)
-
-(package! pdb-capf)

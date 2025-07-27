@@ -40,3 +40,5 @@
 ;; (package! ob-ipython)
 (package! evil-text-object-python)
 (package! evil-python-movement)
+
+(package! pdb-capf)

@@ -40,6 +40,8 @@
   :commands pip-requirements-mode
   )
 
+(use-package! pdb-capf)
+
 ;;-- Footer
 ;; Copyright (C) 2024 john
 ;;

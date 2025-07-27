@@ -51,16 +51,6 @@
   ;; https://gitlab.com/mtekman/elisp-depmap.el
   )
 
-(use-package! overseer
-  :defer t
-  :init
-  (def-project-mode! +emacs-lisp-ert-mode
-    :modes '(emacs-lisp-mode)
-    :match "/test[/-].+\\.el$"
-    :add-hooks '(overseer-enable-mode)
-    )
-  )
-
 ;; --------------------------------------------------
 
 (speckler-setq! lisp ()

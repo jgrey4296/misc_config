@@ -1,100 +1,186 @@
-;;; lang/emacs-lisp/config.el -*- lexical-binding: t; -*-
+;;; lang/emacs-lisp/config.el -*- lexical-binding: t; no-byte-compile: t -*-
+(declare-function local-load! "defer-macro")
+(declare-function defer-load! "defer-macro")
 
 (local-load! "+defs")
-(local-load! "+vars")
 (local-load! "+extra")
 (local-load! "+flycheck")
+(local-load! "+emacs")
+(local-load! "+testing")
+(when (modulep! +racket) (local-load! "+racket"))
+
 (defer-load! jg-bindings-total "+bindings")
 
-(advice-add 'elisp-get-var-docstring :around #'+emacs-lisp-append-value-to-eldoc-a)
-;; Fixed indenter that intends plists sensibly.
-(advice-add 'calculate-lisp-indent :override #'+emacs-lisp--calculate-lisp-indent-a)
-;; Recenter window after following definition
-(advice-add 'elisp-def :after #'doom-recenter-a)
+;; --------------------------------------------------
 
-;; `elisp-mode' is loaded at startup. In order to lazy load its config we need to pretend it isn't loaded
+(after! projectile
+  (add-to-list 'projectile-project-root-files "config.el")
+  (add-to-list 'projectile-project-root-files "info.rkt")
+  )
 
-(defer-feature! elisp-mode emacs-lisp-mode)
+(after! smartparens
+  ;; In lisps ( should open a new form if before another parenthesis
+  (sp-local-pair sp-lisp-modes "(" ")" :unless '(:rem sp-point-before-same-p))
+  ;; Don't do square-bracket space-expansion where it doesn't make sense to
+  (sp-local-pair '(emacs-lisp-mode)
+                 "[" nil :post-handlers '(:rem ("| " "SPC")))
+  )
 
-(use-package! elisp-mode
-  :config
-  ;; variable-width indentation is superior in elisp. Otherwise, `dtrt-indent'
-  ;; and `editorconfig' would force fixed indentation on elisp.
-  (add-to-list 'doom-detect-indentation-excluded-modes 'emacs-lisp-mode)
+;; --------------------------------------------------
 
-  ;; Enhance elisp syntax highlighting, by highlighting Doom-specific
-  ;; constructs, defined symbols, and truncating :pin's in `package!' calls.
-  (font-lock-add-keywords
-   'emacs-lisp-mode
-   (append `(;; custom Doom cookies
-             ("^;;;###\\(autodef\\|if\\|package\\)[ \n]" (1 font-lock-warning-face t)))
-           ;; Shorten the :pin of `package!' statements to 10 characters
-           `(("(package!\\_>" (0 (+emacs-lisp-truncate-pin))))
-           ;; highlight defined, special variables & functions
-           (when +emacs-lisp-enable-extra-fontification
-             `((+emacs-lisp-highlight-vars-and-faces . +emacs-lisp--face)))))
-
-  (add-hook! 'emacs-lisp-mode-hook
-             #'hs-minor-mode
-             ;; #'flycheck-mode
-             #'rainbow-delimiters-mode
-             #'highlight-quoted-mode
-             #'+emacs-lisp-init-straight-maybe-h
-             #'abbrev-mode
-             #'maybe-ert-test-minor-mode
-             )
-
-  (after! librarian
-    (add-hook! 'emacs-lisp-mode-hook
-               #'librarian-insert-minor-mode
+(speckler-add! popup ()
+  '(lisp
+    ("^\\*Buttercup\\*'" :size 0.45 :select nil :ttl 0)
+    ("^*ert*" :width 0.4 :side right :select nil :ttl 0 )
+    )
+  )
+(speckler-add! fold ()
+  :override nil
+  `(lisp
+    :modes (emacs-lisp-mode lisp-mode)
+    :priority 125
+    :triggers (:open-all  #'hs-show-all
+               :close-all #'hs-hide-all
+               :toggle    #'hs-toggle-hiding
+               :open      #'hs-show-block
+               :open-rec  nil
+               :close     #'hs-hide-block
                )
     )
-
-  (setq-hook! 'emacs-lisp-mode-hook
-    tab-width 8
-    outline-regexp +emacs-lisp-outline-regexp
-    outline-level #'+emacs-lisp-outline-level
-    evil-surround-pairs-alist (append jg-evil-surround-pairs-base
-                                      jg-lisp-surround-pairs)
-    flycheck--automatically-enabled-checkers '(emacs-lisp emacs-lisp-checkdoc emacs-lisp-package)
-    flycheck--automatically-disabled-checkers '()
+  )
+(speckler-add! file-templates ()
+  `(lisp
+    ("minor-mode\\.el\\'" :trigger "__minor-mode" :mode emacs-lisp-mode)
+    ("mode\\.el\\'"       :trigger "__mode"       :mode emacs-lisp-mode)
+    ("ob-.+?\\.el\\'"     :mode emacs-lisp-mode :trigger "__org_babel")
+    ("/.dir-locals.el\\'" :mode emacs-lisp-mode :trigger "__dir_locals")
+    ("-test\\.el\\'"      :mode emacs-lisp-mode :trigger "__test")
+    ("--test-.+?\\.el"    :mode emacs-lisp-mode :trigger "__test")
+    (emacs-lisp-mode      :trigger "__package")
     )
-
   )
-
-(use-package! racket-mode
-  :commands (racket-mode)
-  :config
-  (add-hook! 'racket-mode-hook
-                 #'rainbow-delimiters-mode
-                 #'highlight-quoted-mode)
-
-  (add-hook 'racket-mode-local-vars-hook #'racket-xp-mode)
-  ;; Both flycheck and racket-xp produce error popups, but racket-xp's are
-  ;; higher quality so disable flycheck's:
-  (add-hook! 'racket-xp-mode-hook
-    (defun +racket-disable-flycheck-h ()
-      (cl-pushnew 'racket flycheck-disabled-checkers)
-      )
+(speckler-add! projects ()
+  '(emacs-eldev projectile-eldev-project-p :project-file "eldev" :compilation-dir nil :configure nil :compile "eldev compile" :test "eldev test" :install nil :package "eldev package" :run "eldev emacs")
+  '(emacs-cask ("cask") :project-file "cask" :compilation-dir nil :configure nil :compile "cask install" :test nil :install nil :package nil :run nil :test-suffix "-test" :test-prefix "test-")
+  )
+(speckler-add! rotate-text ()
+  '(emacs-lisp-mode
+    :symbols (("t" "nil")
+              ("let" "let*")
+              ("when" "unless")
+              ("advice-add" "advice-remove")
+              ("defadvice!" "undefadvice!")
+              ("add-hook" "remove-hook")
+              ("add-hook!" "remove-hook!")
+              ("it" "xit")
+              ("describe" "xdescribe")
+              ("car" "cdr" "cadr" "caddr")
+              )
     )
-  (add-hook 'racket-mode-hook #'racket-smart-open-bracket-mode)
-
+  '(racket-mode
+    :symbols (("#true" "#false"))
+    )
   )
-
-(use-package! buttercup
-  :defer t
-  :minor ("/.+?-test[/-].+\\.el$" . buttercup-minor-mode)
-  :preface
-  ;; buttercup.el doesn't define a keymap for `buttercup-minor-mode', as we have
-  ;; to fool its internal `define-minor-mode' call into thinking one exists, so
-  ;; it will associate it with the mode.
-  (defvar buttercup-minor-mode-map (make-sparse-keymap))
-  :config
-  (when (featurep 'evil)
-    (add-hook 'buttercup-minor-mode-hook #'evil-normalize-keymaps))
+(speckler-add! whitespace-cleanup ()
+  '(emacs-lisp-mode
+    #'delete-trailing-whitespace
+    #'+jg-lisp-cleanup-ensure-newline
+    #'+jg-text-cleanup-whitespace)
   )
-
-(use-package! ert
-  :config
-  (setq ert--selector-history '("t" ":new" ":failed" ":expected"))
+(speckler-add! online-search ()
+  '(lisp
+    ("elisp melpa" "https://melpa.org/#/?q=%s")
+    ("elisp elpa" "https://elpa.gnu.org/packages/")
+    )
+  )
+(speckler-add! doc-lookup ()
+  `((emacs-lisp-mode lisp-interaction-mode helpful-mode)
+    :definition     #'elisp-def
+    :documentation  #'helpful-at-point
+    )
+  '((racket-mode racket-repl-mode)
+    :definition    #'+racket-lookup-definition
+    :documentation #'+racket-lookup-documentation
+    )
+  '(inferior-emacs-lisp-mode
+    :definition    #'+emacs-lisp-lookup-definition
+    :documentation #'+emacs-lisp-lookup-documentation
+    )
+  )
+(speckler-add! ligatures ()
+  '(emacs-lisp-mode
+    "lambda" ?λ
+    )
+  )
+(speckler-add! docsets ()
+  '(racket-mode "Racket")
+  '((emacs-lisp-mode lisp-interaction-mode) "Emacs Lisp")
+  )
+(speckler-add! evil-embrace ()
+  `((lisp-mode emacs-lisp-mode clojure-mode racket-mode hy-mode)
+    (?f . ,(make-embrace-pair-struct
+            :key ?f
+            :read-function #'+evil--embrace-elisp-fn
+            :left-regexp "([^ ]+ "
+            :right-regexp ")"))
+    )
+  )
+(speckler-add! auto-modes ()
+  '(lisp
+    ("\\.Cask\\'"     . emacs-lisp-mode)
+    ("\\.rkt\\'"      . racket-mode)
+    ("\\.el\\.gz\\'"  . emacs-lisp-mode)
+    ("\\.el\\'"       . emacs-lisp-mode)
+    )
+  )
+(speckler-add! imenu ()
+  :override nil
+  '(emacs-lisp-mode
+    :append
+    ("spec-def"             "^(speckler-new! \\(.+\\)" 1)
+    ("spec-hook"            "^(speckler-new-hook! \\(.+?\\)" 1)
+    ("spec-add"             "^(speckler-add! \\(.+\\) " 1)
+    ("Section"              "^[ 	]*;;;*\\**[ 	]+\\([^\n]+\\)" 1)
+    ("Evil commands"        "^\\s-*(evil-define-\\(?:command\\|operator\\|motion\\) +\\(\\_<[^ ()\n]+\\_>\\)" 1)
+    ("Unit tests"           "^\\s-*(\\(?:ert-deftest\\|describe\\) +\"\\([^\")]+\\)\"" 1)
+    ("Package"              "^\\s-*\\(?:;;;###package\\|(\\(?:package!\\|use-package!?\\|after!\\)\\) +\\(\\_<[^ ()\n]+\\_>\\)" 1)
+    ("Major modes"          "^\\s-*(define-derived-mode +\\([^ ()\n]+\\)" 1)
+    ("Minor modes"          "^\\s-*(define-\\(?:global\\(?:ized\\)?-minor\\|generic\\|minor\\)-mode +\\([^ ()\n]+\\)" 1)
+    ("Modelines"            "^\\s-*(def-modeline! +\\([^ ()\n]+\\)" 1)
+    ("Modeline segments"    "^\\s-*(def-modeline-segment! +\\([^ ()\n]+\\)" 1)
+    ("Advice"               "^\\s-*(\\(?:def\\(?:\\(?:ine-\\)?advice!?\\)\\) +\\([^ )\n]+\\)" 1)
+    ("Macros"               "^\\s-*(\\(?:cl-\\)?def\\(?:ine-compile-macro\\|macro\\) +\\([^ )\n]+\\)" 1)
+    ("Inline functions"     "\\s-*(\\(?:cl-\\)?defsubst +\\([^ )\n]+\\)" 1)
+    ("CLI Command"          "^\\s-*(\\(def\\(?:cli\\|alias\\|obsolete\\|autoload\\)! +\\([^\n]+\\)\\)" 1)
+    ("Functions"            "^\\s-*(\\(?:cl-\\)?def\\(?:un\\|un\\*\\|method\\|generic\\|-memoized!\\) +\\([^ ,)\n]+\\)" 1)
+    ("Variables"            "^\\s-*(\\(def\\(?:c\\(?:onst\\(?:ant\\)?\\|ustom\\)\\|ine-symbol-macro\\|parameter\\|var\\(?:-local\\)?\\)\\)\\s-+\\(\\(?:\\sw\\|\\s_\\|\\\\.\\)+\\)" 2)
+    ("Types"                "^\\s-*(\\(cl-def\\(?:struct\\|type\\)\\|def\\(?:class\\|face\\|group\\|ine-\\(?:condition\\|error\\|widget\\)\\|package\\|struct\\|t\\(?:\\(?:hem\\|yp\\)e\\)\\)\\)\\s-+'?\\(\\(?:\\sw\\|\\s_\\|\\\\.\\)+\\)" 2)
+    )
+  )
+(speckler-add! repl ()
+  '(emacs-lisp-mode       :start +emacs-lisp/open-repl :send +jg-lisp-eval)
+  '(lisp-interaction-mode :start +emacs-lisp/open-repl :send +jg-lisp-eval)
+  )
+(speckler-add! yas-extra ()
+  '(buttercup-minor-mode buttercup-minor-mode)
+  )
+(speckler-add! eval ()
+  '(elisp-mode :fn eval-region)
+  )
+(speckler-add! org-src ()
+  '(lisp
+    ("elisp" . emacs-lisp)
+    )
+  )
+(speckler-add! babel ()
+  '(lisp
+    (:name lisp       :lib ob-lisp)
+    (:name elisp      :lib ob-emacs-lisp)
+    (:name clojure    :lib ob-clojure)
+    (:name scheme     :lib ob-scheme)
+    (:name emacs-lisp :lib ob-emacs-lisp)
+    )
+  )
+(speckler-add! treesit-source ()
+  '(elisp         "git@github.com:wilfred/tree-sitter-elisp.git")
   )

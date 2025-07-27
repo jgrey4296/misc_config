@@ -56,7 +56,8 @@
            )
           (font-lock-mode
            ;; (message "Triggering Font Lock Update")
-           (font-lock-update)
+           (font-lock-mode 'toggle)
+           (font-lock-mode 'toggle)
            )
           )
       )

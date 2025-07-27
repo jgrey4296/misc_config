@@ -28,7 +28,7 @@
       :desc "Ruff Format"      "f"   #'+jg-python-ruff-format
       :desc "Start Pydoc"      "p"   #'+jg-python-start-pydoc
       :desc "Summarize"        "\\"  #'+jg-python-summarize
-      :desc "REPL"             "r"   #'+jg-python/open-ipython-repl
+      ;; :desc "REPL"             "r"   #'+jg-python/open-ipython-repl
       :desc "track"            ";"   #'+jg-python-toggle-pdbtrack
       :desc "breakpoint"       "b"   #'+jg-python-breakpoint-line
       :desc "Disaspemble"      "D"   #'+jg-python-bytecode-dwim

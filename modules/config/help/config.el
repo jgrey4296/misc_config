@@ -1,4 +1,4 @@
-;;; config.el -*- lexical-binding: t; -*-
+;;; config.el -*- lexical-binding: t; no-byte-compile: t; -*-
 
 (local-load! "+vars")
 

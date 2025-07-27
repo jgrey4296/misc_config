@@ -38,8 +38,14 @@
   "Swap between python-mode and python-ts-mode"
   (interactive)
   (pcase major-mode
-    ('python-mode (python-ts-mode))
-    ('python-ts-mode (python-mode))
+    ('python-mode
+     (evil-open-folds)
+     (python-ts-mode)
+     )
+    ('python-ts-mode
+     (evil-open-folds)
+     (python-mode)
+     )
     (_ (user-error "Unknown Python mode"))
     )
   )

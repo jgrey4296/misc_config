@@ -32,22 +32,20 @@
              #'librarian-insert-minor-mode
              #'maybe-py-test-minor-mode
              )
-
   (add-hook! 'python-mode-hook
              #'er/add-python-mode-expansions
              #'tree-sitter!
              )
-
   (add-hook! 'python-mode-hook :depth 100
              #'jg-python-font-lock-mod-h
              #'+jg-python-outline-regexp-override-hook
              #'outline-minor-mode
              )
-
   (add-hook! 'python-ts-mode-hook :depth 100
              #'treesit-fold-mode
              )
 
+  ;; TODO add a change major mode hook to open all folds
 
   (setq-hook! 'python-base-mode-hook
     lsp-diagnostic-filter                     #'+jg-python-lsp-flycheck-filter
@@ -60,7 +58,6 @@
     jg-workspaces-find-buff-fn #'+jg-python-carousel-window-fn
     tab-width                    python-indent-offset
     )
-
   (add-hook! 'code-shy-minor-mode-hook #'+jg-python-auto-hide)
   )
 
@@ -147,11 +144,11 @@
     #'+jg-python-solo-file-run)
   )
 (speckler-add! repl ()
-  '(python-mode
-    :start +jg-python/open-repl
-    :send  python-shell-send-region
-    )
-  )
+ `(python-mode
+   :start +jg-python/open-repl
+   :send  python-shell-send-region
+   )
+ )
 (speckler-add! treesit-bin-override ()
   '(python :lib-base "python" :entry-func "tree_sitter_python")
   )

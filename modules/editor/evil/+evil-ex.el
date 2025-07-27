@@ -19,6 +19,9 @@
   (+evil--regexp-match-args evil-ex-argument))
 
 (setq evil-ex-commands nil )
+
+;; --------------------------------------------------
+
 (map! :map (evil-ex-completion-map evil-ex-search-keymap)
       "C-a"                                  #'evil-beginning-of-line
       "C-b"                                  #'evil-backward-char
@@ -27,6 +30,23 @@
       :gi "C-k"                              #'previous-complete-history-element
       )
 
+;; --------------------------------------------------
+
+;; evil ex
+(setq evil-ex-search-vim-style-regexp t
+      evil-ex-visual-char-range t                           ;; column range for ex commands
+      evil-ex-interactive-search-highlight 'selected-window ;; Only do highlighting in selected window so that Emacs has less work to do highlighting them all.
+      )
+
+(speckler-new! evil-ex (key val)
+  "Register and re-apply evil-ex cmds"
+  :struct '(cmdstr . cmd)
+  :loop 'do
+  (cl-loop for x in val
+           do
+           (evil-ex-define-cmd (car x) (upfun! (cdr x)))
+           )
+  )
 ;; definition of said commands, adapted from evil-maps
 (speckler-add! evil-ex ()
   '(default

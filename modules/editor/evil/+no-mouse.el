@@ -1,7 +1,6 @@
 ;;; _other.el -*- lexical-binding: t; -*-
 
-
-;;-- Mouse Deactivation
+;; ;;-- Mouse Deactivation
 
 (define-key evil-motion-state-map [down-mouse-1] #'ignore)
 
@@ -24,4 +23,3 @@
 (define-key evil-motion-state-map [mouse-4] #'ignore)
 
 (define-key evil-motion-state-map [mouse-5] #'ignore)
-;;-- end Mouse Deactivation

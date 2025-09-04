@@ -25,7 +25,7 @@
   )
 (speckler-add! auto-modes ()
   '(toml
-    ("\\.toml\\'" . toml-mode)
+    ("\\.toml\\'" . toml-ts-mode)
     )
   '(conf
     ("\\.conf\\'" . conf-mode)
@@ -35,7 +35,7 @@
   )
 (speckler-add! fold ()
   `(toml
-    :modes (conf-toml-mode toml-mode toml-ts-mode)
+    :modes (conf-toml-mode toml-mode)
     :priority -50
     :triggers (:open-all   #'outline-show-all
                :close-all  (cmd! (with-no-warnings (outline-hide-sublevels 1)))

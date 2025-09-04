@@ -36,7 +36,6 @@
 
   (add-hook! 'emacs-lisp-mode-hook
              #'hs-minor-mode
-             ;; #'flycheck-mode
              #'rainbow-delimiters-mode
              #'highlight-quoted-mode
              #'+emacs-lisp-init-straight-maybe-h
@@ -56,8 +55,8 @@
     outline-level #'+emacs-lisp-outline-level
     evil-surround-pairs-alist (append jg-evil-surround-pairs-base
                                       jg-lisp-surround-pairs)
-    flycheck--automatically-enabled-checkers '(emacs-lisp emacs-lisp-checkdoc emacs-lisp-package)
-    flycheck--automatically-disabled-checkers '()
+    flycheck--automatically-enabled-checkers '()
+    flycheck--automatically-disabled-checkers '(emacs-lisp emacs-lisp-checkdoc emacs-lisp-package)
     )
 
   (add-hook 'emacs-lisp-mode-hook

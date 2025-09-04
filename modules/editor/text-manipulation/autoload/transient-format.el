@@ -15,6 +15,12 @@
   :hook prog-mode-hook
   )
 
+(transient-toggle-var! require-newline ()
+  "Toggle final newline requirement "
+  :var require-final-newline
+  :key "e"
+  )
+
 ;;;###autoload
 (defun +jg-ui-build-transient-format ()
   (interactive)
@@ -24,6 +30,7 @@
     :desc "|| Format    ||"
     [
      (transient-macro-toggle-hook-ws-butler)
+     (transient-macro-toggle-require-newline)
      ]
     )
 

@@ -28,5 +28,9 @@
 
 (use-package! gdscript-mode
   :commands gdscript-mode
+  :config
+
+  (add-hook 'gdscript-ts-mode #'treesit-fold-mode)
+
   )
 ;;; config.el ends here

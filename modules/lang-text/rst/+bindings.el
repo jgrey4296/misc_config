@@ -2,7 +2,7 @@
 
 (map! :map jg-rst-mode-map
       :desc "Forward Section"        :n "] ]" #'rst-forward-section
-      :desc "Backward Section"        :n "[ [" #'rst-backward-section
+      :desc "Backward Section"       :n "[ [" #'rst-backward-section
       )
 
 (map! :map jg-rst-mode-map
@@ -20,6 +20,15 @@
        :desc "List" "l" #'rst-insert-list
 
        )
+      )
+
+(map! :map jinja2-mode-map
+      "C-c ]" nil
+      :localleader
+      :desc "Open Tag"  "h"  #'jinja2-insert-tag
+      :desc "Close Tag" "l"  #'jinja2-close-tag
+      :desc "Insert Var" "v" #'jinja2-insert-var
+
       )
 
 

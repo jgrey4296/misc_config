@@ -49,10 +49,12 @@ Finds correctly active snippets from parent modes (based on Yas' logic)."
   (when-let ((snippet (apply #'+snippet--get-template-by-uuid uuid modes))
              (yas--indent-original-column (or yas--indent-original-column col))
              )
-    (yas-expand-snippet snippet)
+    (with-temp-buffer
+      (yas-minor-mode)
+      (yas-expand-snippet snippet)
+      (buffer-string)
+      )
     )
-  ;; Return empty str because yas tries to insert anything returned
-  ""
   )
 
 ;;;###autoload

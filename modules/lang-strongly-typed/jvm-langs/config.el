@@ -2,6 +2,7 @@
 
 (local-load! "+vars")
 (local-load! "+extra-config")
+
 (defer-load! jg-bindings-total "+bindings")
 (after! ivy
   (ivy-configure 'jg-vcs-gradle-ivy
@@ -32,6 +33,9 @@
 
 (use-package! kotlin-ts-mode
   :defer t
+  :config
+  (add-hook 'kotlin-ts-mode #'treesit-fold-mode)
+
   )
 
 (use-package! scala-mode

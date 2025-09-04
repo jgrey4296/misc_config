@@ -27,7 +27,6 @@
   )
 
 (speckler-add! evil-ex ()
-  :override t
   '(librarian-tags
     ("ht[ag]" .  #'librarian-tag-helm)
     ("t[ag]"  .  #'librarian-tag-helm)

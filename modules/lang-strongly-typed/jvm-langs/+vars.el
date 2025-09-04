@@ -93,10 +93,10 @@
   '(kotlin-ts-mode     . kotlin)
   )
 (speckler-add! treesit-source ()
-  '(groovy        "git@github.com:Decodetalkers/tree-sitter-groovy.git")
-  '(java          "git@github.com:tree-sitter/tree-sitter-java.git")
-  '(kotlin        "git@github.com:fwcd/tree-sitter-kotlin.git")
-)
+  '(groovy "git@github.com:Decodetalkers/tree-sitter-groovy.git")
+  '(java   "git@github.com:tree-sitter/tree-sitter-java.git")
+  '(kotlin "git@github.com:tree-sitter/kotlin-tree-sitter")
+  )
 (speckler-add! online-search ()
   '(java
     ("Kotlin" "https://kotlinlang.org/docs/home.html?q=%s&s=full")
@@ -118,11 +118,11 @@
   )
 (speckler-add! auto-modes ()
   '(jvm
-    ("\\.g\\(?:radle\\|roovy\\)$" . groovy-mode)
-    ("\\.kts?\\'"                 . kotlin-mode)
-    ("\\.java\\'"                 . java-mode)
-    ("\\.scala\\'"                . scala-mode)
-    ("\\.sc\\'"                   . scala-mode)
+    ("\\.groovy.+$"                 . groovy-mode)
+    ("\\.kts?\\'"                   . kotlin-ts-mode)
+    ("\\.java\\'"                   . java-mode)
+    ("\\.scala\\'"                  . scala-mode)
+    ("\\.sc\\'"                     . scala-mode)
     )
   )
 (speckler-add! docsets ()
@@ -181,6 +181,20 @@
     ("java" . java)
     ("groovy" . groovy)
     ("kotlin" . kotlin)
+    )
+  )
+
+(speckler-add! fold ()
+  `(kotlin
+    :modes kotlin-ts-mode
+    :priority 25
+    :triggers (:close     #'treesit-fold-close
+               :close-all #'treesit-fold-close-all
+               :open      #'treesit-fold-open
+               :open-all  #'treesit-fold-open-all
+               :open-rec  #'treesit-fold-open-recursively
+               :toggle    #'treesit-fold-toggle
+               )
     )
   )
 ;;-- end specs

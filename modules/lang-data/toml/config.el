@@ -76,7 +76,7 @@
 
   (add-hook! 'toml-ts-mode-hook :depth 99
              #'abbrev-mode
-             #'outline-minor-mode
+             #'treesit-fold-mode
              #'librarian-insert-minor-mode
              )
 

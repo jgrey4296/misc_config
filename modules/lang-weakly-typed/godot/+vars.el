@@ -8,7 +8,7 @@
   )
 (speckler-add! auto-modes ()
   '(godot
-    ("\\.gd\\'" . gdscript-mode)
+    ("\\.gd\\'" . gdscript-ts-mode)
     ("\\.tscn\\'" . conf-toml-mode)
     ("\\.tres\\'" . conf-toml-mode)
     )
@@ -28,20 +28,8 @@
   '(glsl-mode . glsl)
   )
 (speckler-add! fold ()
-  :override t
   `(gdscript
     :modes gdscript-mode
-    :priority 25
-    :triggers (:close     #'+jg-python-close-methods
-               :close-all #'outline-hide-sublevels
-               :open      #'outline-toggle-children
-               :open-all  #'outline-show-all
-               :open-rec  #'outline-show-subtree
-               :toggle    #'outline-toggle-children
-               )
-    )
-  `(gdscript-ts
-    :modes gdscript-ts-mode
     :priority 25
     :triggers (:close     #'+jg-python-close-methods
                :close-all #'outline-hide-sublevels

@@ -26,4 +26,5 @@
   :config
 
   (add-hook 'jinja2-mode-hook #'abbrev-mode)
+  (add-hook 'jinja2-mode-hook #'librarian-insert-minor-mode)
   )

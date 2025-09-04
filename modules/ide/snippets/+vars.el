@@ -8,7 +8,8 @@
 
 (speckler-add! file-templates ()
   '(general
-    ("/docker-compose\\.yml$" :mode yaml-mode)
+    ("checklist.md\\'" :mode markdown-mode :trigger "__checklist")
+    ("/docker-compose\\.yml\\'" :mode yaml-mode)
     ;; direnv
     ("/\\.envrc$" :trigger "__envrc" :mode direnv-envrc-mode)
     (sh-mode :priority -100)

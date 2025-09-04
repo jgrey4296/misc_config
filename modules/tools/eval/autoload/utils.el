@@ -40,7 +40,13 @@ can also add key'd additional properties
 
 ;;;###autoload
 (defun +jg-eval--run-compile (cmd)
-  "call cmd, but if it's got the text propery 'cmd use that instead "
+  "call cmd, but if it's got the text propery 'cmd use that instead,
+
+:interactive -> call the reuslt in a comint.
+:read        -> read a string before formatting the cmd
+:recursive   -> TODO
+
+ "
   (let* ((blddir (get-text-property 0 'blddir cmd))
          (bldenv (get-text-property 0 'bldenv cmd))
          (extras (get-text-property 0 'extra cmd))
@@ -57,11 +63,16 @@ can also add key'd additional properties
         ;; No need to specify `:history' because of this hook.
         (add-hook 'compilation-start-hook #'counsel-compile--update-history)
         (unwind-protect
-            (compile (concat cmd-str " "
-                             (when (memq :read extras)
-                               (read-string (format "%s _: " cmd-str))))
-                     (when interactive? interactive-mode))
-          (remove-hook 'compilation-start-hook #'counsel-compile--update-history))
+            ;; TODO change this to pairs of (:read {prompt})
+            (let ((compile-str (if (memq :read extras)
+                                   (concat cmd-str " " (read-string (format "%s _: " cmd-str)))
+                                 cmd-str))
+                  )
+              (compile compile-str
+                       (when interactive? interactive-mode))
+              (remove-hook 'compilation-start-hook #'counsel-compile--update-history)
+              )
+          )
         )
       )
     )

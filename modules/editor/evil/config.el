@@ -58,8 +58,6 @@ directives. By default, this only recognizes C directives.")
     )
   )
 
-(local-load! "+vars")
-(local-load! "+spec-defs")
 (local-load! "+core")
 (local-load! "+snipe")
 (local-load! "+escape")

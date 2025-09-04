@@ -7,6 +7,10 @@
   (setq-hook! 'yaml-mode-hook tab-width yaml-indent-offset)
   (add-hook 'yaml-mode-hook #'tree-sitter!)
   (add-hook 'yaml-mode-hook #'librarian-insert-minor-mode)
+  (add-hook 'yaml-mode-hook #'outline-indent-minor-mode)
+
+  (add-hook 'yaml-ts-mode-hook #'librarian-insert-minor-mode)
+  (add-hook 'yaml-ts-mode-hook #'outline-indent-minor-mode)
 
   (map! :map yaml-mode-map
 
@@ -16,10 +20,10 @@
 
 (speckler-add! auto-modes ()
   '(yaml
-    ("Procfile\\'" . yaml-mode)
-    ("\\.yml\\'" . yaml-mode)
-    ("\\.yaml\\'" . yaml-mode)
-    ("condarc\\'" . yaml-mode)
+    ("Procfile\\'" . yaml-ts-mode)
+    ("\\.yml\\'" . yaml-ts-mode)
+    ("\\.yaml\\'" . yaml-ts-mode)
+    ("condarc\\'" . yaml-ts-mode)
     )
   )
 (speckler-add! tree-sitter-lang ()
@@ -28,4 +32,28 @@
   )
 (speckler-add! treesit-source ()
   '(yaml "git@github.com:ikatyang/tree-sitter-yaml.git")
+  )
+(speckler-add! fold ()
+  `(yaml
+    :modes yaml-mode
+    :priority 25
+    :triggers (:close     #'outline-indent-close-fold
+               :close-all #'outline-indent-close-folds
+               :open      #'outline-indent-open-fold
+               :open-all  #'outline-indent-open-folds
+               :open-rec  #'outline-indent-open-fold-rec
+               :toggle    #'outline-indent-toggle-fold
+               )
+    )
+  `(yaml-ts
+    :modes yaml-ts-mode
+    :priority 25
+    :triggers (:close     #'outline-indent-close-fold
+               :close-all #'outline-indent-close-folds
+               :open      #'outline-indent-open-fold
+               :open-all  #'outline-indent-open-folds
+               :open-rec  #'outline-indent-open-fold-rec
+               :toggle    #'outline-indent-toggle-fold
+               )
+    )
   )

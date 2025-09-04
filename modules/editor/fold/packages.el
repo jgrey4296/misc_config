@@ -8,3 +8,4 @@
 (package! code-shy-minor-mode :recipe (:host github :repo "jgrey4296/code-shy-minor-mode"))
 
 (package! treesit-fold)
+(package! outline-indent)

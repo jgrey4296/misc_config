@@ -18,6 +18,7 @@
 (when (modulep! +shy)      (local-load! "+shy"))
 (when (modulep! +outline)  (local-load! "+outline"))
 (when (modulep! +treesit)  (local-load! "+treesit"))
+(when (modulep! +outline-indent) (local-load! "+outline-indent"))
 
 (speckler-new! fold (key val)
   "Registers fold handlers"

@@ -26,4 +26,5 @@
 (package! shell-pop)
 (package! exec-path-from-shell)
 (package! company-shell)
+(package! direnv)
 ;;; packages.el ends here

@@ -61,6 +61,7 @@
   (setq-hook! 'toml-mode-hook
     outline-regexp (rx (| (: (+ "[") (+? nonl) (+ "]"))
                           (: "# " (1+ "-") line-end)
+                          (: "##--")
                           (: (+? nonl) "=" (+ space) "["
                              (or (: (+? space) (syntax comment-start))
                                  line-end))))

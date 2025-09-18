@@ -6,12 +6,7 @@
 ;;
 ;;-- end Header
 
-(use-package! rustic-flycheck
-  :after rustic
-  :config
-  (remove-hook 'rustic-mode-hook 'flycheck-mode)
-  (remove-hook 'flycheck-mode-hook #'rustic-flycheck-setup)
-  )
+(advice-add 'rustic-install-lsp-client-p :override #'+rust--dont-install-packages-a)
 
 (use-package! lsp-rust
   :defer t
@@ -20,7 +15,7 @@
 (use-package! rustic-lsp
   :after rustic
   :defer t
-  :init
+  ;; :init
   ;; (setq rustic-lsp-setup-p nil)
   )
 
@@ -38,6 +33,21 @@
   rustic-babel-format-src-block nil ;; Leave automatic reformatting to the :editor format module.
   rustic-format-trigger         nil
   )
+
+(speckler-add! lib-env ()
+  :override t
+  '(rs-lsp
+    :lang rust
+    :setup #'(lambda (state &rest rest) (require 'lsp-mode) (require 'rustic-lsp))
+    :start #'(lambda (state &rest rest)
+               (add-hook 'rustic-mode-hook #'rustic-setup-lsp)
+               )
+    :stop  #'(lambda (state &rest rest)
+               (remove-hook 'rustic-mode-hook #'rustic-setup-lsp)
+               )
+
+    )
+)
 
 ;;-- Footer
 ;; Copyright (C) 2024 john

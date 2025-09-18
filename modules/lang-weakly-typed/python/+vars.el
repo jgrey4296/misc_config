@@ -44,7 +44,6 @@
 
 ;;-- specs
 (speckler-add! projects ()
-  :override t
   `(jg-python-project ("pyproject.toml")
     :project-file "pyproject.toml"
     :test-dir "__tests"
@@ -135,7 +134,6 @@
     )
   )
 (speckler-add! file-templates ()
-  :override t
   '(python
     ("LICENSE\\'"               :trigger "__license-acab"   :mode text-mode   :priority 100)
     ;;Configs:

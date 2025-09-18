@@ -59,10 +59,6 @@
     ("\\.soar\\'" . soar-mode)
     ("\\.clp$" . clips-mode)
     )
-  '(jacamo
-    ("\\.\\(jcm\\|mas2j\\)\\'" . jacamo-mode)
-    ("\\.asl\\'" . agentspeak-mode)
-    )
   )
 (speckler-add! babel ()
   '(logic

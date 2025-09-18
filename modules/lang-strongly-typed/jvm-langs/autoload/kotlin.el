@@ -1,19 +1,5 @@
 ;;; lang/kotlin/autoload.el -*- lexical-binding: t; -*-
 
-;;;autoload
-(defun +kotlin-locate-gradlew-file ()
-  "Gradlew file location for this project."
-  (locate-dominating-file buffer-file-name "gradlew"))
-
-;;;###autoload
-(defun +kotlin/run-gradlew (command)
-  "Run gradlew in this project."
-  (interactive "sCommand: ")
-  (let ((default-directory (+kotlin-locate-gradlew-file))
-        (compilation-read-command nil)
-        (compile-command (format "sh gradlew %s" command)))
-    (call-interactively #'compile)))
-
 ;;;###autoload
 (defun +jg-kotlin-related-files-fn (path)
     " Given a relative path to a file, provide projectile with various :kinds of related file "
@@ -39,7 +25,19 @@
 (defun +kotlin-mode/open-repl (&optional arg)
   (interactive "P")
   (require 'kotlin-mode)
-  (if (not (bufferp kotlin-repl-buffer))
-      (kotlin-repl))
-  (get-buffer-create kotlin-repl-buffer)
+  (unless (comint-check-proc kotlin-repl-buffer)
+    (set-buffer
+     (apply 'make-comint-in-buffer
+            "KotlinREPL"
+            kotlin-repl-buffer
+            kotlin-command
+            nil
+            kotlin-args-repl)
+     )
+    (set (make-local-variable 'comint-preoutput-filter-functions)
+         (list (lambda (string)
+                 (replace-regexp-in-string "\x1b\\[.[GJK]" "" string))))
+    )
+
+  (pop-to-buffer kotlin-repl-buffer)
   )

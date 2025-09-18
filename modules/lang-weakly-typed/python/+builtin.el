@@ -51,14 +51,18 @@
     lsp-diagnostic-filter                     #'+jg-python-lsp-flycheck-filter
     flycheck-pylintrc                         '("pylint.toml" "pyproject.toml")
     flycheck-python-ruff-config               '("ruff.toml" ".ruff.toml" "pyproject.toml")
-    flycheck--automatically-enabled-checkers  '(python-ruff python-coverage)
-    flycheck--automatically-disabled-checkers '(python-pylint python-flake8 python-pycompile python-compile python-pyright)
+    flycheck--automatically-enabled-checkers  '(jg-python-ruff python-coverage)
+    flycheck--automatically-disabled-checkers '(python-pylint python-flake8 python-pycompile python-compile python-pyright python-ruff)
     flycheck-python-mypy-config               '("pyproject.toml")
     comment-start "# "
     jg-workspaces-find-buff-fn #'+jg-python-carousel-window-fn
     tab-width                    python-indent-offset
     )
   (add-hook! 'code-shy-minor-mode-hook #'+jg-python-auto-hide)
+
+  (after! flycheck
+    (jg-define-override-ruff-checker)
+    )
   )
 
 (use-package! pythonic

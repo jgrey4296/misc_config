@@ -23,19 +23,18 @@
              #'+java-android-mode-maybe-h)
   )
 
-(use-package! groovy-mode
-  :commands groovy-mode
-  )
-
 (use-package! kotlin-mode
   :commands kotlin-mode
+  :config
+
+  (add-hook! 'kotlin-mode-hook #'librarian-insert-minor-mode)
 )
 
 (use-package! kotlin-ts-mode
   :defer t
   :config
   (add-hook 'kotlin-ts-mode #'treesit-fold-mode)
-
+  (add-hook! 'kotlin-ts-mode-hook #'librarian-insert-minor-mode)
   )
 
 (use-package! scala-mode

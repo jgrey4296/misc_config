@@ -78,10 +78,3 @@ root)."
         (buffer-file-name
          (file-name-sans-extension (file-name-base (buffer-file-name))))
         ((user-error "Can't deduce the class name"))))
-
-;;;###autoload
-(defun +java/open-groovy-repl ()
-  "Open a Groovy REPL."
-  (interactive)
-  (call-interactively #'run-groovy)
-  (get-buffer groovy-buffer))

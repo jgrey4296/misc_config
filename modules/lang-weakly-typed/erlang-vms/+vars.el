@@ -3,8 +3,7 @@
 (setq inferior-erlang-buffer-name "*erlang*"
       erlang-shell-function 'inferior-erlang
 
-      alchemist-iex-program-name "iex"
-      elixir-shell-buffer-name "*Alchemist-IEx*"
+      elixir-shell-buffer-name "*IEx*"
       )
 
 ;;-- links
@@ -48,17 +47,7 @@
     ("mix\\.lock"                            . elixir-mode)
     )
   )
-(speckler-add! doc-lookup ()
-  `(elixir-mode
-    :definition    #'alchemist-goto-definition-at-point
-    :documentation #'alchemist-help-search-at-point
-    )
-  )
 (speckler-add! repl ()
-  '(elixir-mode
-    :start alchemist-iex-project-run
-    :send  alchemist-eval-region
-    )
   '(erlang-mode :start +erlang/open-repl)
   )
 (speckler-add! ligatures ()

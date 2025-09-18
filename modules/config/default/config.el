@@ -1,5 +1,8 @@
 ;;; config/default/config.el -*- lexical-binding: t; -*-
 
+(local-load! "+spec-defs")
+(local-load! "+vars")
+(defer-load! jg-bindings-total "+bindings")
 
 (advice-add 'newline-and-indent        :before-until #'+default--newline-indent-and-continue-comments-a)
 (advice-add 'save-place-find-file-hook :after-while #'doom--recenter-on-load-saveplace-a)
@@ -8,8 +11,6 @@
 (advice-add 'delete-backward-char      :override #'+default--delete-backward-char-a)
 (advice-add 'file-notify-rm-watch      :before #'file-notify-rm-watch-silent-advice)
 (advice-add 'display-warning           :before-until #'+jg-default-display-warning-ad)
-
-(defer-load! jg-bindings-total "+bindings")
 
 ;; (add-hook 'tty-setup-hook nil)
 (add-hook 'tty-setup-hook #'evil-terminal-cursor-changer-activate)
@@ -63,6 +64,3 @@
 (use-package! macro-tools
   :autoload upfun!
   )
-
-(local-load! "+spec-defs")
-(local-load! "+vars")

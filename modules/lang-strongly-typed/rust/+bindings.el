@@ -18,13 +18,14 @@
 ;;
 ;;
 ;;; Code:
-(defvar jg-rust-mode-map (make-sparse-keymap))
 
+(defvar jg-rust-mode-map (make-sparse-keymap))
 
 (map! :map jg-rust-mode-map
       :after rustic
-      :desc "Racer Describe" :n "?" #'rustic-racer-describe
+      ;; :desc "Racer Describe" :n "?" #'rustic-racer-describe
       :localleader
+      :desc "Popup" "p" #'rustic-popup
       (:prefix ("b" . "build")
        :desc "cargo audit"      "a" #'+rust/cargo-audit
        :desc "cargo build"      "b" #'rustic-cargo-build
@@ -52,6 +53,16 @@
       :i "RET" #'evil-ret
       )
 
+(map! :map c-mode-map
+      :localleader
+      :desc "compile" "c" #'+jg-rust-compile-c
+
+      )
+
+(map! :map toml-mode-map
+      :localleader
+      :desc "Rustic" "r" #'rustic-popup
+      )
 
 (after! rustic
   (setq rustic-mode-map jg-rust-mode-map)

@@ -4,7 +4,6 @@
 (package! android-mode)
 (package! flycheck-kotlin)
 (package! gradle-mode)
-(package! groovy-mode)
 (package! kotlin-mode)
 (package! kotlin-ts-mode)
 (package! sbt-mode)

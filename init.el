@@ -33,7 +33,8 @@
  :ide (librarian +tags)
  :ide snippets workspaces
  :ide (support +lsp +flycheck +treesit) ;; +eglot  +semantic +tree-sitter
- :ide minimap diff company debugger
+ :ide minimap diff company
+ :ide (debugger +realgud +edebug)
 
  :lang-data csv dot sql nu
  :lang-data graphql
@@ -47,7 +48,7 @@
 
  :lang-strongly-typed haskell
  :lang-strongly-typed (proofs) ;; coq, idris, agda, fstar, lean)
- :lang-strongly-typed rust
+ :lang-strongly-typed (rust +llvm)
  :lang-strongly-typed jvm-langs dotnet-langs ml-langs
 
  :lang-text inform web

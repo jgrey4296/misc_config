@@ -42,7 +42,6 @@
 
 (defvar evil-collection-mode-list
     `(ag
-      alchemist
       anaconda-mode
       apropos
       arc-mode

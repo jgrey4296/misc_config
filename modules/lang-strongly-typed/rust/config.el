@@ -2,18 +2,27 @@
 
 (local-load! "+vars")
 (local-load! "+lsp")
+(local-load! "+popup")
+(local-load! "+flycheck")
+(when (modulep! +llvm) (local-load! "+llvm"))
+(local-load! "+c-lang")
 
 (defer-load! jg-bindings-total "+bindings")
-
-(advice-add 'rustic-install-lsp-client-p :override #'+rust--dont-install-packages-a)
 
 (use-package! rust-mode
   :commands rust-mode
   )
 
+(use-package! rust-ts-mode
+  :commands rust-ts-mode
+  :config
+  (add-hook! 'rust-ts-mode #'treesit-fold-mode)
+  )
+
 (use-package! rustic
   :commands rustic-mode
   :preface
+  ;; Disable rustic's loading to control it
   (setq rustic-load-optional-libraries nil)
   :init
   (after! org-src
@@ -21,7 +30,8 @@
     ;;   rustic packages) must be loaded in order for them to take effect. To lazy
     ;;   load it all, we must do it early:
     (defalias 'org-babel-execute:rust #'org-babel-execute:rustic)
-    (add-to-list 'org-src-lang-modes '("rust" . rustic)))
+    (add-to-list 'org-src-lang-modes '("rust" . rustic))
+    )
   :config
   (after! flycheck
     (add-to-list 'flycheck-checkers 'rustic-clippy)
@@ -39,14 +49,12 @@
   (setq-hook! 'rustic-mode-hook
     flycheck--automatically-enabled-checkers '(rustic-clippy)
     flycheck--automatically-disabled-checkers '()
+    code-shy-block-depth 1
+    code-shy-fold-patterns '("%s //--// %s" "%s //--// %s %s")
     )
 )
 
 (use-package! rustic-compile
-  :after rustic
-  )
-
-(use-package! rustic-popup
   :after rustic
   )
 
@@ -89,10 +97,4 @@
 
 (use-package! rustic-spellcheck
   :after rustic
-  )
-
-(use-package! llvm-mode
-  :defer t
-  :load-path "/usr/local/opt/llvm/share/emacs/site-lisp/lvvm/llvm-mode.el"
-  ;; clang-format.el clang-include-fixer.el clang-rename.el emacs.el llvm-mode.el tablegen-mode.el
   )

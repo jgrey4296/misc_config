@@ -56,54 +56,56 @@
                                    )
   )
 (rx-let ((filename (*? graph))
-         (system (| "." "TheVolumeSettingsFolder" (: ?. (? filename) "cache") "_cache_"))
-         (dotfiles (: ?. (? "_.") (| "CFUserTextEncoding" "DS_Store" "DocumentRevisions-V100" "PKInstallSandboxManager"
-                                     "Spotlight-V100" "TemporaryItems" "Trash" "Trashes" "apdisk" "com.apple.timemachine.donotpresent"
-                                     "TheVolumeSettingsFolder"
-                                     "cups" "debris" "fseventsd"
-                                     "offlineimap" "ncftp"
-                                     (: "js" (? ".meta"))
-                                     "doot_defaults.toml"
-                                     )))
-         (parent "^\\..*$")
-         (icons    (| "Icon\015"  (: ?. "thumbnails") ))
-         (gtags    (| "GPATH" "GRTAGS" "GTAGS"))
-         (build-tools (| "gradlew" "gradlew.bat" (: ?. (| "gradle" "rustup" "doit.db.db" "mono" (: "node" (? "_modules")) (: "npm" (? "-global)"))))))
-         (python   (| "__pycache__" (: filename ".egg-info") (: ?. (| "ipython" "jupyter" "matplotlib" "mypy.ini" ))))
-         (flycheck "flycheck_")
+         (build-tools (| "gradlew" "gradlew.bat"
+                         (: ?.
+                            (| "gradle" "rustup" "doit.db.db" "mono"
+                               (: "node" (? "_modules"))
+                               (: "npm" (? "-global)"))))))
          (compiled (| (: filename (: ?. "o" "elc" "pyo"))))
-         (prolog   (| (: ?. (| "swipl-dir-history" "swp" "swt" ))))
+         (configs  (| (: ?. (| (: filename "rc")
+                               (: "project" (? "ile")) "venv" ))))
+         (dotfiles (: ?. filename))
+         (flycheck "flycheck_")
+         (gtags    (| "GPATH" "GRTAGS" "GTAGS"))
          (java     (| (: filename ".class")))
-         (logs     (| (: "log." filename)))
-         (configs  (| (: ?. (| (: filename "rc") (: "project" (? "ile")) "venv" ))))
          (latex    (| (: ?. (| "auctex-auto" ))))
-         (dropbox  (| (: ?. "dropbox" )))
+         (lockfiles (: filename ".lock"))
+         (logs     (| (: "log." filename)))
+         (parent "^\\..*$")
+         (prolog   (| (: ?. (| "swipl-dir-history" "swp" "swt" ))))
+         (python   (| "__pycache__"
+                      (: filename ".egg-info")
+                      (: ?. (| "ipython" "jupyter" "matplotlib" "mypy.ini" ))))
          (ruby     (| (: ?. "gem")))
+         (temp (: ?. "temp"))
          (vcs      (| (: ?. (| (:"git" (? "ignore")) "svn" ))))
+         (workflows (: ?. (| "github" "cargo")))
+         (misc-files (: (| "LICENSE"
+                           "CHANGELOG"
+                           "README"
+                           "repo-layout"
+                           )
+                        (? ?. filename)))
+
          )
-  (defvar jg-dired-omit-files (rx line-start (| system
-                                                dotfiles
-                                                icons
-                                                gtags
-                                                build-tools
-                                                python
-                                                flycheck
-                                                compiled
-                                                prolog
-                                                java
-                                                logs
-                                                configs
-                                                latex
-                                                dropbox
-                                                ruby
-                                                vcs
-                                                parent
-                                                )
+  (defvar jg-dired-omit-files (rx line-start (|
+                                              dotfiles
+                                              gtags
+                                              build-tools
+                                              python
+                                              flycheck
+                                              compiled
+                                              java
+                                              lockfiles
+                                              temp
+                                              misc-files
+                                              )
                                   line-end
                                   )
     )
   (provide 'dired-omit-files-set)
   )
+
 
 (speckler-setq! dired-omit ()
   dired-omit-files jg-dired-omit-files

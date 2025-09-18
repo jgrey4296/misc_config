@@ -152,10 +152,20 @@ Targets `vimmish-fold', `hideshow' and `outline' folds."
 ;;;###autoload
 (defun +jg-fold/debug ()
   (interactive)
-  (message "Using Fold Spec: %s" (cl-loop for spec in evil-fold-list
-                                          if (evil--mode-p (car-safe spec))
-                                          return spec
-                                          else do '(nil)
-                                          )
-           )
+  (let* ((fold-spec (cl-loop for spec in evil-fold-list
+                             if (evil--mode-p (car-safe spec))
+                             return spec
+                             else do '(nil)
+                             ))
+         (modes (pop fold-spec))
+         (formatted (apply #'concat (cl-loop for val in fold-spec
+                                             if (keywordp val)
+                                             collect (format "%s%s: " val
+                                                             (make-string
+                                                              (- 15 (length (symbol-name val)))
+                                                              ? ))
+                                             else collect (format "%s\n" val))))
+         )
+    (message "Using Fold Spec:\nModes  :  %s\n%s" modes formatted)
+    )
   )

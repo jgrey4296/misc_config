@@ -6,35 +6,48 @@
 ;; See footer for licenses/metadata/notes as applicable
 ;;-- end Header
 
+;;;###autoload
+(defun jg-define-override-ruff-checker ()
+  (require #'flycheck)
 
-(flycheck-def-config-file-var flycheck-python-ruff-config python-ruff
-                              '("pyproject.toml" "ruff.toml" ".ruff.toml"))
+  (flycheck-def-config-file-var flycheck-python-ruff-config python-ruff
+                                '("pyproject.toml" "ruff.toml" ".ruff.toml"))
 
-(flycheck-define-checker jg-python-ruff
-  "A Python syntax and style checker using the ruff.
+  (flycheck-define-checker jg-python-ruff
+    "A Python syntax and style checker using the ruff.
 To override the path to the ruff executable, set
 `flycheck-python-ruff-executable'.
 
 See URL `https://docs.astral.sh/ruff/"
-  :command ("ruff"
-            "check"
-            (config-file "--config" flycheck-python-ruff-config)
-            "--output-format=text"
-            "--stdin-filename" source-original
-            "-")
-  :standard-input t
-  :error-filter (lambda (errors)
-                  (let ((errors (flycheck-sanitize-errors errors)))
-                    (seq-map #'flycheck-flake8-fix-error-level errors)))
-  :error-patterns
-  ((warning line-start
-            (file-name) ":" line ":" (optional column ":") " "
-            (id (one-or-more (any alpha)) (one-or-more digit)) " "
+    :command ("ruff"
+              "check"
+              (config-file "--config" flycheck-python-ruff-config)
+              "--output-format=concise"
+              (option "--stdin-filename" buffer-file-name)
+              "-")
+    :standard-input t
+    :error-filter (lambda (errors)
+                    (let* ((errors (flycheck-sanitize-errors errors))
+                           (errors-with-ids (seq-filter #'flycheck-error-id errors)))
+                      (seq-union
+                       (seq-difference errors errors-with-ids)
+                       (seq-map #'flycheck-flake8-fix-error-level errors-with-ids))))
+    :error-patterns
+    ((error line-start
+            (or "-" (file-name)) ":" line ":" (optional column ":") " "
+            "invalid-syntax: "
             (message (one-or-more not-newline))
-            line-end))
-  :modes (python-mode python-ts-mode)
-  :next-checkers ((warning . python-mypy)))
-
+            line-end)
+     (warning line-start
+              (or "-" (file-name)) ":" line ":" (optional column ":") " "
+              (id (one-or-more (any alpha)) (one-or-more digit) " ")
+              (message (one-or-more not-newline))
+              line-end))
+    :modes (python-mode python-ts-mode)
+    :next-checkers ((warning . python-mypy))
+    )
+  (add-to-list 'flycheck-checkers 'jg-python-ruff)
+  )
 
 ;;-- Footer
 ;; Copyright (C) 2024 john

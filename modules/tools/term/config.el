@@ -121,4 +121,11 @@
 
   )
 
+(use-package! direnv
+  :config
+  (setq direnv-always-show-summary t)
+
+  ;; (add-to-list 'warning-suppress-types  '(direnv))
+  )
+
 ;;; config.el ends here

@@ -4,3 +4,4 @@
 (package! quickrun)
 (package! eros)
 (package! compile)
+(package! direnv)

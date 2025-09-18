@@ -4,7 +4,7 @@
 (package! evil-states-plus :recipe (:host github :repo "jgrey4296/evil-states-plus" :includes (mapspace-state spechar-state)))
 (package! embrace)
 (package! smartparens)
-
+(package! editorconfig :built-in t)
 (package! writegood-mode)
 (package! accent)
 

@@ -37,6 +37,7 @@
   ;;     (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]_build\\'")))
 
   (add-hook 'elixir-mode-hook #'tree-sitter!)
+  (add-hook 'elixir-mode-hook #'librarian-insert-minor-mode)
 
   (after! highlight-numbers
     (puthash 'elixir-mode

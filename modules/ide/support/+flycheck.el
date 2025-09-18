@@ -33,7 +33,6 @@
   )
 
 (use-package! flycheck-popup-tip
-  :hook (flycheck-mode . flycheck-popup-tip-mode)
   :config
   (after! evil
     ;; Don't display popups while in insert or replace mode, as it can affect

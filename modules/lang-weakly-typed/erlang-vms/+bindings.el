@@ -26,12 +26,5 @@
 (map! :after elixir-mode
         :localleader
         :map elixir-mode-map
-        "m" #'alchemist-mix
-        "c" #'alchemist-mix-compile
-        "i" #'alchemist-iex-project-run
         "f" #'elixir-format
-        (:prefix ("e" . "eval")
-         "e" #'alchemist-iex-send-last-sexp
-         "r" #'alchemist-iex-send-region
-         "l" #'alchemist-iex-send-current-line
-         "R" #'alchemist-iex-reload-module))
+        )

@@ -12,21 +12,6 @@
   (flycheck-credo-setup)
   )
 
-(use-package! alchemist
-  :after elixir-mode
-  :hook (elixir-mode . alchemist-mode)
-  )
-
-(use-package! alchemist-company
-  :when (modulep! :ide company)
-  :after elixir-mode
-  :commands alchemist-company
-  :config
-  ;; Alchemist doesn't use hook symbols to add these backends, so we have to use
-  ;; the entire closure to get rid of it.
-  (let ((fn (byte-compile (lambda () (add-to-list (make-local-variable 'company-backends) 'alchemist-company)))))
-    (remove-hook 'alchemist-mode-hook fn)
-    (remove-hook 'alchemist-iex-mode-hook fn)))
 
 ;;-- Footer
 ;; Copyright (C) 2024 john

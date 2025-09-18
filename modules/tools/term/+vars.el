@@ -127,3 +127,8 @@
 (speckler-add! tree-sit-lang ()
   '(sh-mode         . bash)
   )
+(speckler-add! file-templates ()
+  '(sh
+    ("\\.envrc\\'" :trigger "__envrc" :mode direnv-envrc-mode)
+    )
+  )

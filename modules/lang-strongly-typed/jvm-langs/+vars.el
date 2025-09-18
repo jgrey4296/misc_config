@@ -2,9 +2,10 @@
 
 (defvar +java-project-package-roots (list "java/" "test/" "main/" "src/" 1))
 
-(defvar kotlin-repl-buffer "*kotlin*")
+(defvar kotlin-repl-buffer "*repl*")
 
-(defvar kotlin-command "kotlinc")
+(defvar kotlin-command "ki")
+(defvar kotlin-args-rep nil)
 
 (setq scala-indent:align-parameters t
       ;; indent block comments to first asterix, not second
@@ -13,73 +14,13 @@
 (after! projectile
   (pushnew! projectile-project-root-files "build.gradle")
   (pushnew! projectile-project-root-files "build.gradle.kts")
-  (pushnew! projectile-project-root-files "gradlew" "build.gradle")
   )
-;;-- gradle font lock
-(after! groovy-mode
-  (setq jg-orig-groovy-font-lock-keywords groovy-font-lock-keywords)
-
-  (setq-default jg-groovy-font-lock-keywords
-                (list
-                 `(,(rx line-start (group (or "plugins"
-                                              "java"
-                                              "repositories"
-                                              "dependencies"
-                                              "sourceSets"
-                                              "clean"
-                                              )))
-                   (1 'font-lock-doc-markup-face t)
-                   )
-                 `(,(rx line-start (group "task") blank (group (* word))
-                        (* blank) "(" (* any) ")" blank "{" line-end)
-                   (1 'font-lock-doc-markup-face t)
-                   (2 'font-lock-function-name-face t)
-                   )
-                 `(,(rx line-start (* blank) (group (or "defaultTasks"
-                                                        "version"
-                                                        "group"
-                                                        "id"
-                                                        "mavenCentral"
-                                                        "maven"
-                                                        "implementation"
-                                                        "main"
-                                                        "java"
-                                                        "resources"
-                                                        "srcDir"
-                                                        "description"
-                                                        "doFirst"
-                                                        "doLast"
-                                                        "mainClass"
-                                                        "args"
-                                                        "classpath"
-                                                        "toolchain"
-                                                        "delete"
-                                                        "mkdir"
-                                                        "languageVersion"
-                                                        "toolchain"
-                                                        )))
-                   (1 'font-lock-keyword-face))
-                 )
-                )
-  (setq groovy-font-lock-keywords (append jg-groovy-font-lock-keywords
-                                          jg-orig-groovy-font-lock-keywords))
-
-  ;; (font-lock-add-keywords 'groovy-mode
-  ;;                         jg-groovy-font-lock-keywords)
-
-  )
-
-;;-- end gradle font lock
 
 ;;-- specs
 (speckler-add! file-templates ()
   '(java
     ("/main\\.java$"    :trigger "__main" :mode java-mode)
     ("/src/.+\\.java$"                    :mode java-mode)
-    )
-  '(gradle
-    ("build\\.gradle$"           :trigger "build.gradle"    :mode groovy-mode)
-    ("settings\\.gradle$"        :trigger "settings.gradle" :mode groovy-mode)
     )
   '(kotlin
     ("build\\.gradle\\.kts$"     :trigger "build.gradle.kts" :mode kotlin-mode)
@@ -88,12 +29,10 @@
 (speckler-add! tree-sitter-lang ()
   '(java-mode          . java)
   '(scala-mode         . scala)
-  '(groovy-mode        . groovy)
   '(kotlin-mode        . kotlin)
   '(kotlin-ts-mode     . kotlin)
   )
 (speckler-add! treesit-source ()
-  '(groovy "git@github.com:Decodetalkers/tree-sitter-groovy.git")
   '(java   "git@github.com:tree-sitter/tree-sitter-java.git")
   '(kotlin "git@github.com:tree-sitter/kotlin-tree-sitter")
   )
@@ -104,8 +43,7 @@
     )
   )
 (speckler-add! projects ()
-  '(gradlew ("gradlew") :project-file "gradlew" :compilation-dir nil :configure nil :compile "./gradlew build" :test "./gradlew test" :install nil :package nil :run nil :test-suffix "Spec")
-  '(gradle ("build.gradle") :project-file "build.gradle" :compilation-dir nil :configure nil :compile "gradle build" :test "gradle test" :install nil :package nil :run nil :test-suffix "Spec")
+  '(gradle ("build.gradle.kts") :project-file "build.gradle..kts" :compilation-dir nil :configure nil :compile "gradle build" :test "gradle test" :install nil :package nil :run nil :test-suffix "Spec")
   '(jg-kotlin-project ("build.gradle" "build.gradle.kts") :project-file "build.grade")
   )
 (speckler-add! evil-embrace ()
@@ -118,7 +56,7 @@
   )
 (speckler-add! auto-modes ()
   '(jvm
-    ("\\.groovy.+$"                 . groovy-mode)
+    ("\\.kt\\'"                     . kotlin-ts-mode)
     ("\\.kts?\\'"                   . kotlin-ts-mode)
     ("\\.java\\'"                   . java-mode)
     ("\\.scala\\'"                  . scala-mode)
@@ -126,13 +64,10 @@
     )
   )
 (speckler-add! docsets ()
-  '(groovy-mode "Groovy" "Groovy_JDK" "Gradle_DSL", "Gradle_Groovy_API", "Gradle_User_Guide")
   '(kotlin-mode "Kotlin")
   )
 (speckler-add! repl ()
-  '(kotlin-mode :start kotlin-mode/open-repl)
-  '(kotlin-mode2 :start kotlin-repl)
-  '(groovy-mode :start +java/open-groovy-repl)
+  '(kotlin-mode :start +kotlin-mode/open-repl)
   '(scala-mode  :start +scala/open-repl :persist t)
   )
 (speckler-add! ligatures ()
@@ -183,10 +118,9 @@
     ("kotlin" . kotlin)
     )
   )
-
 (speckler-add! fold ()
   `(kotlin
-    :modes kotlin-ts-mode
+    :modes (kotlin-ts-mode)
     :priority 25
     :triggers (:close     #'treesit-fold-close
                :close-all #'treesit-fold-close-all

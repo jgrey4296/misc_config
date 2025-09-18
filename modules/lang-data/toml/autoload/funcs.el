@@ -46,6 +46,8 @@
          1)
         ((looking-at-p (rx line-start "# " (1+ "-") line-end))
          0)
+        ((looking-at-p (rx line-start "##--"  line-end))
+         0)
         (t 3)
         )
   )

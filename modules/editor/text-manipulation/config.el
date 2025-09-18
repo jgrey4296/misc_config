@@ -88,3 +88,5 @@
 (use-package! writegood-mode)
 
 (use-package! accent)
+
+(use-package! editorconfig)

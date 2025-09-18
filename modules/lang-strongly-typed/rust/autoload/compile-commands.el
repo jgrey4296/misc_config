@@ -30,3 +30,10 @@
     )
     )
   )
+
+;;;###autoload
+(defun +jg-rust-compile-c ()
+  "Compile a buffer into an object file"
+  (interactive)
+
+)

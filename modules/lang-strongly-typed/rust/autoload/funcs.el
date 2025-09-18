@@ -32,9 +32,9 @@
     " Given a relative path to a file, provide projectile with various :kinds of related file "
     (let ((impl-file  (f-join (f-parent (f-parent path)) (s-replace "test_" "" (f-filename path))))
           (test-file  (f-join (f-parent path) "__tests" (concat "test_" (f-filename path))))
-          ;;(init-file  (f-join (f-parent path) "__init__.py"))
+          (init-file  (f-join (f-parent path) "__init__.py"))
           (log-file   (f-join (projectile-project-root) (concat "log." (f-base path))))
-          ;;(error-file (f-join (car (f-split path)) "errors" (concat (f-base path) "_errors.py")))
+          (error-file (f-join (car (f-split path)) "errors" (concat (f-base path) "_errors.py")))
           (project    (f-join (projectile-project-root) "Cargo.toml"))
           (is-test (s-matches? "^test_" (f-filename path)))
           )

@@ -1,7 +1,8 @@
 ;; -*- mode:emacs-lisp; lexical-binding: t;-*-
 
 (speckler-add! projects ()
-  '(dotnet-sln ("src") :project-file "?*.sln" :compilation-dir nil :configure nil :compile "dotnet build" :test "dotnet test" :install nil :package nil :run "dotnet run")
+  :override t
+  '(dotnet-sln ("?*.sln") :project-file "?*.sln" :compilation-dir nil :configure nil :compile "dotnet build" :test "dotnet test" :install nil :package nil :run "dotnet run")
   '(dotnet projectile-dotnet-project-p :project-file ("?*.csproj" "?*.fsproj") :compilation-dir nil :configure nil :compile "dotnet build" :test "dotnet test" :install nil :package nil :run "dotnet run")
   )
 (speckler-add! rotate-text ()

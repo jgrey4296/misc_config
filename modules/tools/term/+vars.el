@@ -130,5 +130,6 @@
 (speckler-add! file-templates ()
   '(sh
     ("\\.envrc\\'" :trigger "__envrc" :mode direnv-envrc-mode)
+    ("\\.bash\\'" :trigger "__" :mode sh-mode)
     )
   )

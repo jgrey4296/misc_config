@@ -12,7 +12,6 @@
 (use-package! clips-mode       :defer t)
 
 
-j
 ;;-- Footer
 ;; Copyright (C) 2025 john
 ;;

@@ -7,4 +7,6 @@
 
 (map! :map plantuml-mode-map
       :localleader
+      :desc "Preview" "p" #'plantuml-preview
+
       )

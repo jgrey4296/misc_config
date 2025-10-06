@@ -62,7 +62,7 @@
     :modes (hs-minor-mode)
     :priority -25
     :triggers (:open-all   #'hs-show-all
-               :close-all  #'hs-hide-all
+               :close-all  #'(lambda () (hs-hide-level 0))
                :toggle     #'hs-toggle-hiding
                :open       #'hs-show-block
                :open-rec   nil

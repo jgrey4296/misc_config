@@ -38,7 +38,6 @@
 
 (map! :map jg-dired-mode-map ;; main
                              :n "?"    #'+jg-dired-group-helper
-                             :n ">"    #'+jg-dired-tesseract
                              :n "DEL"  #'dired-kill-subdir
                              :n "RET"  #'dired-find-file
                              :nv "q"   #'+jg-dired-kill-subdir-or-close-buffer
@@ -122,6 +121,7 @@
       :desc "kill"                :n "K" #'dired-do-delete
       :desc "Global Match Rename" :n "R" #'+jg-dired-GLOBAL-do-rename-regexp
 
+      :desc "Tesseract"           :n "t" #'+jg-dired-tesseract
       :desc "copy"                :n "c" #'dired-async-do-copy
       :desc "downcase"            :n "j" #'dired-downcase
       :desc "upcase"              :n "k" #'dired-upcase

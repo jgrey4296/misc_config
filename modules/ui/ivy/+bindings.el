@@ -9,7 +9,7 @@
 (with-state! 'normal #'counsel-evil-registers)
 (with-state! 'normal #'counsel-evil-marks)
 (with-state! 'normal #'counsel-list-processes)
-(with-state! 'normal #'counsel-register)
+(with-state! 'normal #'counsel-register :no-args t)
 
 
 (map! :leader
@@ -49,7 +49,7 @@
 
 (map! :map jg-binding-normal-state-map
       :prefix "I"
-       :desc "From evil register"       "0"          #'counsel-evil-registers--with-state-normal
+       :desc "From evil register" "0" #'counsel-evil-registers--with-state-normal
        "m" #'counsel-minibuffer-history--with-state-normal
        "y" #'counsel-yank-pop--with-state-normal
 
@@ -77,7 +77,7 @@
       [remap isearch-backward]              #'swiper
       [remap swiper]                        #'counsel-grep-or-swiper
       [remap bookmark-jump]                 #'+jg-ivy-bookmark
-      [remap insert-register]               #'counsel-register--with-state-normal
+      [remap insert-register]               #'counsel-evil-registers--with-state-normal
 
       [remap compile]                       #'+ivy/compile
       [remap projectile-compile-project]    #'+ivy/project-compile

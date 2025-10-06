@@ -3,10 +3,6 @@
 
 (setq force-load-messages nil)
 (defvar templates-loc (expand-file-name "~/.config/.templates"))
-(unless (and (equal emacs-version "29.3")
-             (eq emacs-major-version 29)
-             (eq emacs-minor-version 3))
-  (error "Unexpected Emacs Version: %s" emacs-version))
 
 (load! "defer-macro")
 (doom!

@@ -6,6 +6,9 @@
 ;;
 ;;-- end Header
 
+(advice-add 'pasp-generate-command   :around #'+jg-pasp-generate-args)
+(advice-add 'pasp-run-clingo         :override #'+jg-pasp-run-clingo)
+(advice-add 'pasp-compilation-filter :override #'+jg-pasp-compilation-filter)
 
 (use-package! instal-mode      :defer t)
 
@@ -18,9 +21,9 @@
   (setq-hook! 'pasp-mode-hook
     indent-line-function '+jg-logic-pasp-indent
     )
-  (advice-add 'pasp-generate-command   :around #'+jg-pasp-generate-args)
-  (advice-add 'pasp-run-clingo         :override #'+jg-pasp-run-clingo)
-  (advice-add 'pasp-compilation-filter :override #'+jg-pasp-compilation-filter)
+  (add-hook 'pasp-mode-hook #'+jg-pasp-start-treesitter)
+  (add-hook 'pasp-mode-hook #'treesit-fold-mode)
+
   )
 
 (use-package! prolog
@@ -34,6 +37,13 @@
     outline-heading-end-regexp (rx line-end)
     outline-level #'(lambda () 1)
     )
+  )
+
+(speckler-add! treesit-source ()
+  '(clingo "git@github.com:potassco/tree-sitter-clingo.git")
+  )
+(speckler-add! treesit-bin-override ()
+  '(pasp :lib-base "libtree-sitter-clingo" :entry-func "tree_sitter_clingo")
   )
 
 ;;-- Footer

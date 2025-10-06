@@ -192,6 +192,16 @@
 
 ;;-- end tree-sitter
 
+;;-- treesit
+(map! :map treesit-minor-mode-map
+      :desc "Inspect" :n "?" #'treesit-inspect-node-at-point
+      :localleader
+      :desc "Explore" "E" #'treesit-minor-enter-explorer
+      :desc "Refresh Explore" "e" (cmd! (treesit--explorer-refresh))
+      )
+
+;;-- end treesit
+
 ;;-- gtags
 (map! :map jg-binding-jump-map
       :prefix ("g" . "gtags")

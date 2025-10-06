@@ -11,6 +11,7 @@
 
   (add-hook 'yaml-ts-mode-hook #'librarian-insert-minor-mode)
   (add-hook 'yaml-ts-mode-hook #'outline-indent-minor-mode)
+  (add-hook 'yaml-ts-mode-hook #'treesit-fold-mode)
 
   (map! :map yaml-mode-map
 

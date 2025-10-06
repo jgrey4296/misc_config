@@ -11,8 +11,8 @@
   (setq lua-indent-level 2)
   :config
 
-  (add-hook 'lua-mode-local-vars-hook #'tree-sitter! 'append)
-
+  ;; (add-hook 'lua-mode-local-vars-hook #'tree-sitter! 'append)
+  (add-hook 'lua-mode-hook #'hs-minor-mode)
   )
 
 (use-package! moonscript

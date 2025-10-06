@@ -83,6 +83,11 @@
   counsel-projectile-grep-base-command  "grep -rnEI %s"
   )
 
+(defun +jg-ivy-register-preview-fn (arg)
+  (format "%s : %s" (car-safe arg) (cdr-safe arg))
+  )
+(setq register-preview-function #'+jg-ivy-register-preview-fn)
+
 ;;-- end counsel
 
 ;;-- specs

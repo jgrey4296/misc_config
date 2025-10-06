@@ -19,6 +19,12 @@
   (add-hook! 'coq-mode-hook
              #'librarian-insert-minor-mode
              )
+
+  (setq-hook! 'coq-mode-hook
+    code-shy-fold-patterns (list "%s-- %s %s" "%s-- %s %s")
+    code-shy-block-depth 1
+    )
+
   )
 
 (use-package! company-coq

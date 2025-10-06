@@ -8,6 +8,8 @@
 
 (use-package! cc-mode
   :defer t
+
+  (add-hook 'c-mode-hook #'hs-minor-mode)
   )
 
 

@@ -14,6 +14,7 @@
   '(plantuml
     ("\\.plantuml" . plantuml-mode)
     ("\\.pu" . plantuml-mode)
+    ("\\.uml" . plantuml-mode)
     )
   )
 

@@ -27,4 +27,4 @@
 (package! counsel-gtags)
 (package! helm-gtags)
 
-;;(package! asdf-vm)
+(package! asdf-vm)

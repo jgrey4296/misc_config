@@ -7,6 +7,7 @@
 (defer-load! jg-bindings-total "+bindings")
 
 (use-package! mu4e
+  :disabled t
   :commands mu4e mu4e-compose-new
   ;; :hook     (mu4e-main-mode . +jg-mail-override-mu4e-hook)
   :init

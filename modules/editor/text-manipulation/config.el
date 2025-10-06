@@ -89,4 +89,7 @@
 
 (use-package! accent)
 
-(use-package! editorconfig)
+(use-package! editorconfig
+  :if (<= 30 emacs-major-version)
+
+  )

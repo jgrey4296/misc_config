@@ -54,6 +54,12 @@
   `(,key ,(plist-get val :lib-base) ,(plist-get val :entry-func))
   )
 
+(speckler-add! popup ()
+  '(treesit
+    ("^\\*treesit explorer\\*" :side right :select nil :priority 0)
+   )
+  )
+
 ;;todo: use treesit-font-lock-rules
 ;;-- Footer
 ;; Copyright (C) 2024 john

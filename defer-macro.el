@@ -92,12 +92,14 @@
                )
   )
 
-(defmacro with-state! (state fn)
+(cl-defmacro with-state! (state fn &key (no-args . nil))
   ;; (declare (doc-string 1) (pure t) (side-effect-free t))
   `(defun ,(intern (format "%s--with-state-%s" (cadr fn) (cadr state))) (&rest args)
      (interactive)
      (minibuffer-with-setup-hook (:append (quote ,(intern (format "evil-%s-state" (cadr state)))))
-       (apply ,fn args)
+       ,(if no-args
+           `(funcall ,fn)
+         `(apply ,fn args))
        )
      )
   )

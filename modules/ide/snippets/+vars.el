@@ -23,7 +23,14 @@
   +snippets-dir       jg-snippets-code-templates-dir
   yas-snippet-dirs    (-filter #'identity (append (list jg-snippets-code-templates-dir jg-snippets-file-templates-dir) jg-snippet-dirs))
   yas--default-user-snippets-dir jg-snippets-code-templates-dir
-  yas-prompt-functions (list #'+jg-snippets-str-prompt-fn #'+jg-snippets-yas-prompt-fn)
+  yas-prompt-functions (list
+                        #'+jg-snippets-str-prompt-fn
+                        #'+jg-snippets-yas-prompt-fn
+                        #'yas-dropdown-prompt
+                        #'yas-completing-prompt
+                        #'yas-maybe-ido-prompt
+                        #'yas-no-prompt
+                        )
   yas-triggers-in-field t
   )
 

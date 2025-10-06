@@ -23,7 +23,10 @@
 
 (use-package! yasnippet
   :defer-incrementally eldoc easymenu help-mode
-  :commands (yas-minor-mode yas-minor-mode-on yas-expand yas-expand-snippet yas-lookup-snippet yas-insert-snippet yas-new-snippet yas-visit-snippet-file yas-activate-extra-mode yas-deactivate-extra-mode yas-maybe-expand-abbrev-key-filter)
+  :commands (yas-minor-mode yas-minor-mode-on yas-expand yas-expand-snippet
+  yas-lookup-snippet yas-insert-snippet yas-new-snippet yas-visit-snippet-file
+  yas-activate-extra-mode yas-deactivate-extra-mode
+  yas-maybe-expand-abbrev-key-filter)
   :init
   ;; Lazy load yasnippet until it is needed
   (add-transient-hook! #'company-yasnippet (require 'yasnippet))

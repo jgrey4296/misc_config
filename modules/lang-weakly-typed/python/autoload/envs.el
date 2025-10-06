@@ -48,9 +48,9 @@
 (defun jg-py--enter-env-update-paths (state)
   (let ((root (librarian--envs-loc-root (librarian--envs-state-loc state))))
     (when (boundp 'python-shell-extra-pythonpaths)
-      (add-to-list python-shell-extra-pythonpaths root))
+      (add-to-list 'python-shell-extra-pythonpaths root))
     (when (boundp 'py-shell-extra-pythonpaths)
-      (add-to-list py-shell-extra-pythonpaths root))
+      (add-to-list 'py-shell-extra-pythonpaths root))
     )
   )
 

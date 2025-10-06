@@ -26,6 +26,8 @@
                (output-dir (format "-output-directory=%s" root))
                (compile-cmd (string-join (append (list compile-with output-dir) jg-latex-compile-args (list curr-file)) " "))
 
+               (clean-suffixes '(".log" ".aux" ".bbl" ".blg" ".out" ".sta" ".toc" ".lof" ".lot"))
+               (clean-strs (string-join (mapcar #'(lambda (x) (format "-name %s%s" (f-base curr-file) x)) clean-suffixes) " -o "))
                )
     (+jg-eval--pair-cmds
      `("tex compile"        ,compile-cmd)
@@ -37,8 +39,10 @@
                                         jg-latex-compile-args
                                         (list "-draftmode" curr-file)) " "))
 
-     `("tex-clean"        ,(format "cd %s; find . -maxdepth 1 \\( -name '%2$s.log' -o -name '%2$s.aux' -o -name '%2$s.bbl' -o -name '%2$s.blg' -o -name '%2$s.out' -o -name '%2$s.pdf'  -o -name '%2$s.sta' -o -name '%2$s.toc' \\) -delete" root (f-base curr-file)))
-     `("tex-clean-all"    ,(format "cd %s; find . -maxdepth 1 \\( -name '*.log' -o -name '*.aux' -o -name '*.bbl' -o -name '*.blg' -o -name '*.out' -o -name '*.pdf' -o -name '*.sta' -o -name '*.toc' \\) -delete" root))
+     `("tex-clean"        ,(format "cd %s; find . -maxdepth 1 \\( %s \\) -delete" root
+                                   (string-join (mapcar #'(lambda (x) (format "-name %s%s" (f-base curr-file) x)) clean-suffixes) " -o ")))
+     `("tex-clean-all"    ,(format "cd %s; find . -maxdepth 1 \\( -name \"*.pdf\" -o %s \\) -delete" root
+                                   (string-join (mapcar #'(lambda (x) (format "-name \"*%s\"" x)) clean-suffixes) " -o ")))
 
      `("tex install"      ,(format "tlmgr %s install --with-doc" (if (eq 'darwin system-type) "--usermode" "")) :read)
      `("tex info"         ,(format "tlmgr %s info --list " (if (eq 'darwin system-type) "--usermode" "")) :read)
@@ -46,17 +50,17 @@
      `("on-fly-xelatex" ,(format "texliveonfly --compiler=xelatex %s" curr-file) :interactive)
      `("on-fly-lualatex" ,(format "texliveonfly --compiler=lualatex %s" curr-file) :interactive)
      ;; configs
-     '("tex def"                                "latexdef" :read)
-     '("texdoc"                                 "texdoc -w -I" :read)
-     '("tex package info"                       "tlmgr info" :read)
+     '("tex def"                                "latexdef"      :read)
+     '("texdoc"                                 "texdoc -w -I"  :read)
+     '("tex package info"                       "tlmgr info"    :read)
      '("tex version"                            "pdflatex --version")
      '("tex settings"                           "tlmgr conf")
-     '("tex doc settings"                    "texdoc -f")
+     '("tex doc settings"                       "texdoc -f")
      `("tex update"  ,(format "tlmgr %s update --all" (if (eq 'darwin system-type) "--usermode" "")))
-     `("tex l3"       ,(format "fmtutil %s --all" (if (eq 'darwin system-type) "-user" "--sys")))
+     `("tex l3"       ,(format "fmtutil %s --all"     (if (eq 'darwin system-type) "-user" "--sys")))
      `("tex find"                               "kpsewhich -all" :read)
      `("tex fonts"                              "updmap-user --listmaps")
-     `("tex font system" ,(format              "system_profiler -json SPFontsDataType > %s" (expand-file-name "~/_cache_/fonts/fonts.json")))
+     `("tex font system" ,(format               "system_profiler -json SPFontsDataType > %s" (expand-file-name "~/_cache_/fonts/fonts.json")))
 
      (when (f-exists? output-file)
        `("tex open"     ,(if (eq 'darwin system-type)

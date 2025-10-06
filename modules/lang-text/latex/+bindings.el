@@ -1,17 +1,16 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
 (map! :map jg-latex-mode-map
-      :i "\"" #'TeX-insert-quote
+      :n "\"" #'TeX-insert-quote
+      :i "\"" (cmd! (insert "\""))
       :i "$"  #'TeX-insert-dollar
       :n "RET" #'+jg-latex-compile-file-quick
 
       :localleader
-      :desc "Preview"       "p" #'preview-at-point
-      :desc "Unpreview"     "P" #'preview-clearout-at-point
+      :desc "Preview"       "p" #'TeX-command-master
       :desc "TexDoc"        "?" #'TeX-documentation-texdoc
       :desc "section"        "s" #'LaTeX-section
       :desc "Font Change"   "f" #'TeX-font
-      :desc "Package"       "p" #'+jg-latex-insert-package
 
       (:prefix ("i" . "insert")
        :desc "item"          "i" #'LaTeX-insert-item
@@ -20,6 +19,7 @@
        :desc "function"      "f" #'helm-insert-latex-math
        :desc "environment"   "e" #'LaTeX-environment
        :desc "close env"     "E" #'LaTeX-close-environment
+       :desc "Package"       "p" #'+jg-latex-insert-package
        )
       )
 

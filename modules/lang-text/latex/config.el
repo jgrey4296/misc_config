@@ -8,6 +8,12 @@
 
 (advice-add 'Latex-fill-region-as-paragraph :around #'+latex-dont-indent-itemize-and-enumerate-a)
 (advice-add 'Latex-fill-region-as-para-do   :around #'+latex-re-indent-itemize-and-enumerate-a)
+;; Fold after all AUCTeX macro insertions.
+(advice-add 'TeX-insert-macro :after #'+latex-fold-last-macro-a)
+;; Fold after CDLaTeX macro insertions.
+(advice-add 'cdlatex-math-symbol :after #'+latex-fold-last-macro-a)
+(advice-add 'cdlatex-math-modify :after #'+latex-fold-last-macro-a)
+
 
 (use-package! tex-mode) ;; built-in
 
@@ -70,11 +76,6 @@
   :config
   (defun +latex-TeX-fold-buffer-h ()
     (run-with-idle-timer 0 nil 'TeX-fold-buffer))
-  ;; Fold after all AUCTeX macro insertions.
-  (advice-add 'TeX-insert-macro :after #'+latex-fold-last-macro-a)
-  ;; Fold after CDLaTeX macro insertions.
-  (advice-add 'cdlatex-math-symbol :after #'+latex-fold-last-macro-a)
-  (advice-add 'cdlatex-math-modify :after #'+latex-fold-last-macro-a)
   ;; Fold after snippets.
   (add-hook! 'TeX-fold-mode-hook #'+latex-fold-snippet-contents-h)
   (add-hook! 'mixed-pitch-mode-hook #'+latex-fold-set-variable-pitch-h)
@@ -96,7 +97,6 @@
 
 (use-package! reftex ;; built-in
   :commands reftex-mode
-  :hook (LaTeX-mode . reftex-mode)
   :config
   ;; Set up completion for citations and references.
   (add-hook 'reftex-mode-hook #'evil-normalize-keymaps)

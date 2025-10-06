@@ -7,9 +7,8 @@
 ;;-- end Header
 
 (use-package! cdlatex
+  :disabled t
   :after auctex
-  :hook (LaTeX-mode . cdlatex-mode)
-  :hook (org-mode . org-cdlatex-mode)
   :config
   ;; Use \( ... \) instead of $ ... $.
   (setq cdlatex-use-dollar-to-ensure-math nil)
@@ -24,9 +23,8 @@
   )
 
 (use-package! evil-tex
-  :when (modulep! :editor evil)
+  :disabled t
   :after auctex
-  :hook (LaTeX-mode . evil-tex-mode)
   )
 
 (use-package! company-auctex

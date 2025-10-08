@@ -1,4 +1,4 @@
-;;; +c-lang.el -*- lexical-binding: t; no-byte-compile: t; -*-
+;;; +asdf.el -*- lexical-binding: t; no-byte-compile: t; -*-
 ;;-- Header
 ;; File Commentary:
 ;;
@@ -6,13 +6,7 @@
 ;;
 ;;-- end Header
 
-(use-package! cc-mode
-  :defer t
-  :config
-  (add-hook 'c-mode-hook #'hs-minor-mode)
-  )
-
-
+;; (use-package! asdf-vm)
 
 
 ;;-- Footer
@@ -20,8 +14,8 @@
 ;;
 ;; Author:     john <https://github.com/jgrey4296>
 ;; Maintainer: john <john@john-UM700>
-;; Created:    September 10, 2025
-;; Modified:   September 10, 2025
+;; Created:    October 08, 2025
+;; Modified:   October 08, 2025
 ;; Version: 0.0.1
 ;; Keywords:
 ;; Homepage: https://github.com/jgrey4296
@@ -36,4 +30,4 @@
 ;; ("blah-" . "blah-")
 ;; )
 ;; End:
-;;; +c-lang.el ends here
+;;; +asdf.el ends here

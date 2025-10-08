@@ -3,9 +3,6 @@
 (local-load! "+vars")
 (defer-load! jg-bindings-total "+bindings")
 
-(after! tramp
-  (add-to-list 'tramp-remote-path "/run/current-system/sw/bin"))
-
 (use-package! nix-mode
   :commands nix-mode
   :interpreter ("\\(?:cached-\\)?nix-shell" . +nix-shell-init-mode)

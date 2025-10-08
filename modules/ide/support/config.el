@@ -39,7 +39,9 @@
 
 (when (modulep! +treesit) (local-load! "+treesit"))
 
-(when (modulep! +gtags) (load-load! "+gtags"))
+(when (modulep! +gtags) (local-load! "+gtags"))
+
+(local-load! "+asdf")
 
 ;; --------------------------------------------------
 

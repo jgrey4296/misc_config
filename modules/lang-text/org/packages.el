@@ -65,7 +65,7 @@
 (package! gnuplot)
 (package! gnuplot-mode)
 (package! org-journal)
-(package! centered-window :recipe (:host github :repo "anler/centered-window-mode"))
+;; (package! centered-window)
 (package! org-tree-slide)
 
 ;;; Babel

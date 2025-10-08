@@ -4,3 +4,5 @@
 (package! nix-mode)
 (package! nix-update)
 (package! company-nixos-options)
+(package! nix-ts-mode)
+(package! nix-modeline)

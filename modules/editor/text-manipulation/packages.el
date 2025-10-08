@@ -7,6 +7,7 @@
 (package! editorconfig :built-in t)
 (package! writegood-mode)
 (package! accent)
+(package! string-inflection :recipe (:branch "main"))
 
 ;; Formatting
 (package! format-all)

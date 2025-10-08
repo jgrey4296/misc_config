@@ -55,7 +55,7 @@
          (advice-remove #'doom-buffer-list #'+workspace-buffer-list))))
 
 ;;;###autoload
-(defun +workspaces-save-winner-data-h (_)
+(defun +workspaces-save-winner-data-h (&rest _)
   (when (and (bound-and-true-p winner-mode)
              (get-current-persp))
     (set-persp-parameter
@@ -64,7 +64,7 @@
                         winner-pending-undo-ring))))
 
 ;;;###autoload
-(defun +workspaces-load-winner-data-h (_)
+(defun +workspaces-load-winner-data-h (&rest _)
   (when (bound-and-true-p winner-mode)
     (cl-destructuring-bind
         (currents alist pending-undo-ring)
@@ -95,7 +95,6 @@
             (setq buffer-name (generate-new-buffer-name buffer-name)))
           (make-indirect-buffer base-buffer buffer-name t)))))
   (setq +workspaces--indirect-buffers-to-restore nil))
-
 
 ;;;###autoload
 (defun +workspaces-add-current-buffer-h ()
@@ -144,3 +143,8 @@ c) are not valid projectile projects."
                  and do (remhash proot projectile-projects-cache-time)
                  and do (remhash proot projectile-project-type-cache))
         (projectile-serialize-cache)))
+
+;;;###autoload
+(defun +workspaces-deactivate-mark-h (&rest _)
+  (deactivate-mark)
+  )

@@ -21,7 +21,6 @@
     ("\\.nix\\'" . nix-mode)
     )
   )
-
 (speckler-add! repl ()
   '(nix-mode :start +nix/open-repl)
   )

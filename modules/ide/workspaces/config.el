@@ -13,6 +13,10 @@
 (advice-add 'persp-buffers-to-savelist          :before   #'+workspaces-remove-dead-buffers-a)
 (advice-add 'projectile-invalidate-cache        :after    #'+jg-projects-invalidate-test-files-cache)
 (advice-add #'persp-asave-on-exit :around #'+workspaces-autosave-real-buffers-a)
+(add-hook! 'jg-projects-switch-hook
+           #'+workspaces-set-project-action-fn
+           #'+workspaces-switch-to-project-h
+           )
 
 (use-package! persp-mode
   :unless noninteractive
@@ -23,58 +27,49 @@
   (add-to-list 'window-persistent-parameters '(winner-ring . t))
 
   ;;-- hooks
-  (add-hook! '(persp-mode-hook persp-after-load-state-functions)
-             #'+workspaces-ensure-no-nil-workspaces-h
-             )
 
   (add-hook! 'persp-mode-hook
+             #'+workspaces-ensure-no-nil-workspaces-h
              #'+workspaces-init-first-workspace-h
              #'+workspaces-init-persp-mode-h
              )
 
+  (add-hook! 'persp-after-load-state-functions
+             #'+workspaces-ensure-no-nil-workspaces-h
+             #'+workspaces-reload-indirect-buffers-h
+             )
+
   (add-hook! 'persp-before-deactivate-functions
              #'+workspaces-save-winner-data-h
+             #'+workspaces-deactivate-mark-h
              )
 
   (add-hook! 'persp-activated-functions
              #'+workspaces-load-winner-data-h
-    )
+             )
 
-  ;; Fix #1973: visual selection surviving workspace changes
-  (add-hook 'persp-before-deactivate-functions #'deactivate-mark)
-  (add-hook 'persp-add-buffer-on-after-change-major-mode-filter-functions #'doom-unreal-buffer-p)
-  ;; Don't try to persist dead/remote buffers. They cause errors.
+  (add-hook! 'persp-add-buffer-on-after-change-major-mode-filter-functions
+             #'doom-unreal-buffer-p
+             )
   (add-hook! 'persp-filter-save-buffers-functions
              #'+workspaces-dead-buffer-p
              #'+workspaces-remote-buffer-p
              )
 
-  (add-hook! 'persp-after-load-state-functions
-             #'+workspaces-reload-indirect-buffers-h
-             )
-
-
   ;;;; Registering buffers to perspectives
   (add-hook! 'doom-switch-buffer-hook
              #'+workspaces-add-current-buffer-h
-    )
-
-  (add-hook 'delete-frame-functions #'+workspaces-delete-associated-workspace-h)
-  (add-hook 'server-done-hook #'+workspaces-delete-associated-workspace-h)
-
-  ;; Otherwise, buffers opened via bookmarks aren't treated as "real" and are
-  ;; excluded from the buffer list.
-  (add-hook 'bookmark-after-jump-hook #'+workspaces-add-current-buffer-h)
-
-  (add-hook! 'jg-projects-switch-hook
-             #'+workspaces-set-project-action-fn
-             #'+workspaces-switch-to-project-h
              )
 
-  ;; tab-bar
-  (add-hook! 'tab-bar-mode-hook
-             #'+workspaces-set-up-tab-bar-integration-h
+  (add-hook! 'delete-frame-functions
+             #'+workspaces-delete-associated-workspace-h
              )
+
+  (add-hook! 'server-done-hook
+             #'+workspaces-delete-associated-workspace-h
+             )
+
+
   ;;-- end hooks
 
 
@@ -256,4 +251,20 @@
   (add-hook 'speckler-hook #'workspaces-transient-builder)
   ;; Extend
   (provide 'jg-workspaces-core-transient)
+  )
+
+(use-package! bookmark
+  :config
+  ;; Otherwise, buffers opened via bookmarks aren't treated as "real" and are
+  ;; excluded from the buffer list.
+  (add-hook! 'bookmark-after-jump-hook
+             #'+workspaces-add-current-buffer-h
+             )
+  )
+
+(use-package! tab-bar
+  :config
+  (add-hook! 'tab-bar-mode-hook
+             #'+workspaces-set-up-tab-bar-integration-h
+             )
   )

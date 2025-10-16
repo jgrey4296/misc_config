@@ -3,6 +3,7 @@
 (local-load! "+defs")
 (local-load! "+vars")
 (local-load! "+extra-config")
+(local-load! "+change")
 (when (modulep! +forge) (local-load! "+forge"))
 
 (defer-load! jg-bindings-total "+bindings")
@@ -18,9 +19,6 @@
 (advice-add 'magit-checkout                           :after #'+magit-revert-repo-buffers-deferred-a)
 (advice-add 'magit-status-here                        :after #'doom-recenter-a)
 (advice-add 'magit-version                            :around #'+magit--ignore-version-a)
-
-(add-hook! '(prog-mode-hook text-mode-hook conf-mode-hook)
-           #'vi-tilde-fringe-mode)
 
 (use-package! magit
   :commands (magit-file-delete magit-status)
@@ -73,7 +71,6 @@
   (add-hook! 'magit-section-mode-hook
     (add-hook! 'window-configuration-change-hook :local
                #'+magit-enlargen-fringe-h))
-
   )
 
 (use-package! git-modes
@@ -95,8 +92,6 @@
 
   (add-hook! 'git-commit-setup-hook #'+vc-start-in-insert-state-maybe-h)
 )
-
-(use-package! conflict-merge-state)
 
 (use-package! browse-at-remote
   :commands browse-at-remote

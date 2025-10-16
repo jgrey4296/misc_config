@@ -1,5 +1,8 @@
 ;;; +forge.el -*- lexical-binding: t; -*-
 
+(advice-add 'forge-dispatch                           :before #'+magit--forge-build-binary-lazily-a)
+(advice-add 'forge-get-repository                     :before-while #'+magit--forge-get-repository-lazily-a)
+
 (use-package! forge
   :disabled t
   :after magit
@@ -15,8 +18,6 @@
   (setq forge-database-file (concat doom-data-dir "forge/forge-database.sqlite"))
   (setq forge-add-default-bindings nil)
   :config
-  (advice-add 'forge-dispatch                           :before #'+magit--forge-build-binary-lazily-a)
-  (advice-add 'forge-get-repository                     :before-while #'+magit--forge-get-repository-lazily-a)
   )
 
 (use-package! code-review
@@ -36,6 +37,11 @@
   :config
   (transient-append-suffix 'magit-merge "i"
     '("y" "Review pull request" +magit/start-code-review))
-  (after! forge
-    (transient-append-suffix 'forge-dispatch "c u"
-      '("c r" "Review pull request" +magit/start-code-review))))
+  (transient-append-suffix 'forge-dispatch "c u"
+    '("c r" "Review pull request" +magit/start-code-review))
+
+  )
+
+;  --------------------------------------------------
+
+(setq emacsql-sqlite-executable (executable-find "sqlite3")

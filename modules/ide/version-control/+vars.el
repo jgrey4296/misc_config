@@ -1,23 +1,7 @@
 ;; -*- mode:emacs-lisp; lexical-binding: t; -*-
 
-;;-- changelog
-(speckler-setq! changelog ()
-  change-log-default-name "CHANGELOG.md"
-  )
-;;-- end changelog
 
 ;;-- magit
-(setq magit-diff-refine-hunk t               ;; show granular diffs in selected hunk
-      magit-save-repository-buffers nil      ;; Don't autosave repo buffers.
-      magit-revision-insert-related-refs nil ;; Don't display parent/related refs in commit buffers
-      magit-auto-revert-mode nil
-      magit-clone-always-transient t
-
-      magit-todos-keyword-suffix "\\(?:([^)]+)\\)?:?" ;; make colon optional
-
-      emacsql-sqlite-executable (executable-find "sqlite3")
-      )
-
 ;; Magit uses `magit-display-buffer-traditional' to display windows, by
 ;; default, which is a little primitive. `+magit-display-buffer' marries
 ;; `magit-display-buffer-fullcolumn-most-v1' with
@@ -30,6 +14,15 @@
 (speckler-setq! magit ()
   magit-display-buffer-function #'+magit-display-buffer-fn
   magit-bury-buffer-function    #'magit-mode-quit-window
+
+  magit-diff-refine-hunk t               ;; show granular diffs in selected hunk
+  magit-save-repository-buffers nil      ;; Don't autosave repo buffers.
+  magit-revision-insert-related-refs nil ;; Don't display parent/related refs in commit buffers
+  magit-auto-revert-mode nil
+  magit-clone-always-transient t
+
+  magit-todos-keyword-suffix "\\(?:([^)]+)\\)?:?" ;; make colon optional
+
   )
 
 ;;-- end magit

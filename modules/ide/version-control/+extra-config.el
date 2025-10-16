@@ -59,6 +59,12 @@
   (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240] nil nil 'bottom)
   )
 
+(use-package! vi-tilde-fringe
+  :config
+  (add-hook! '(prog-mode-hook text-mode-hook conf-mode-hook)
+             #'vi-tilde-fringe-mode)
+  )
+
 (use-package! evil-collection-magit
   :when (modulep! :editor evil)
   :defer t
@@ -79,17 +85,7 @@
   :after jg-bindings-total
   )
 
-(use-package! markdown-changelog
-  :defer t
-  )
-
-(use-package! git-cliff
-  :defer t
-  )
-
-(use-package! conventional-changelog
-  :defer t
-  )
+(use-package! conflict-merge-state)
 
 ;;-- Footer
 ;; Copyright (C) 2024 john

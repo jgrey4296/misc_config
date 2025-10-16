@@ -116,6 +116,7 @@
 
 ;;-- packages
 (map! :map jg-help-map
+      :desc "System Package Locs" "P" #'+jg-help-list-package-locs
       :prefix ("p" . "Packages")
       :desc "Sraight Repos"                      "1" (cmd! (find-file (expand-file-name "straight/repos" straight-base-dir)))
       :desc "Package Config"                     "c" #'doom/help-package-config

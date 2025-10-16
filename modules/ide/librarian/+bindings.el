@@ -9,15 +9,16 @@
 
 ;; --------------------------------------------------
 
+
 (map! :map librarian-mode-map
        :i "s" #'self-insert-command
        :n "|" #'librarian-insert-trigger
-      (:prefix ("s" . "Jump")
+      (:prefix "s"
        :desc "Browse URL"                :n "u" #'librarian-url
        :desc "Select Link"               :n "," #'link-hint-open-link
        :desc "Librarian Regular"         :n "1" #'librarian-regular-go!
 
-       (:prefix ("k" . "Lookup")
+       (:prefix "k"
         :desc "Choose Handler"             :n    ";" #'librarian-choose
         :desc "Assignments"                :n    "a" #'librarian-assignments
         :desc "Type definition"            :n    "t" #'librarian-type-definition
@@ -71,9 +72,10 @@
       :desc "Man"                         "d m"  #'librarian-man
       :desc "Emacs Version Config"        "p v"  #'librarian-system-config
       :desc "Describe Class"              "c"    #'librarian-describe-class
-      :prefix ("e" . "Edit")
-      :desc "Bindings"  "b" #'librarian-configs--edit-bindings
-      :desc "Vars"      "v" #'librarian-configs--edit-vars
-      :desc "Config"    "c" #'librarian-configs--edit-config
-      :desc "Spec-Defs" "s" #'librarian-configs--edit-spec-defs
+      (:prefix ("e" . "Edit")
+       :desc "Bindings"  "b" #'librarian-configs--edit-bindings
+       :desc "Vars"      "v" #'librarian-configs--edit-vars
+       :desc "Config"    "c" #'librarian-configs--edit-config
+       :desc "Spec-Defs" "s" #'librarian-configs--edit-spec-defs
+       )
       )

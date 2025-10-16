@@ -209,7 +209,9 @@
 (defun +jg-dired-async-server ()
   (interactive)
   (let ((buffer (get-buffer-create "*PyServer*"))
-        (location (read-directory-name "Start Server in: " default-directory))
+        (location default-directory)
+        ;; (location (read-directory-name "Start Server in: " default-directory))
+        (index (read-directory-name "Index: " default-directory))
         )
     (make-process :name "py-server"
                   :buffer buffer
@@ -219,7 +221,11 @@
                                  "8000")
                   :noquery t
                   )
-    (librarian-browse-open "http://127.0.0.1:8000")
+    (librarian-browse-open
+     (format "http://127.0.0.1:8000/%s" (if (equal index default-directory)
+                                            ""
+                                          (f-base index)))
+     )
     )
   )
 

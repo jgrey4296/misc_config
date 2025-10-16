@@ -40,7 +40,7 @@
  :lang-dsl acab ai-and-logic
  :lang-dsl rest nix
  :lang-dsl qt
- ;; :lang-dsl music
+ :lang-dsl (music +sclang +csound)
 
  :lang-strongly-typed haskell
  :lang-strongly-typed (proofs) ;; coq, idris, agda, fstar, lean)

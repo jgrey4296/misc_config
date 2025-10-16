@@ -50,6 +50,7 @@
     ("Wikipedia"         "https://wikipedia.org/search-redirect.php?language=en&go=Go&search=%s")
     ("Wiki Quote"        "https://en.m.wikiquote.org/w/index.php?search=%s")
     ("Down For Everyone?" "https://downforeveryoneorjustme.com/%s")
+    ("Bibliothekai"       "https://bibliothekai.ktema.org/search/?query=%s")
     )
   )
 (speckler-add! browse-handler ()

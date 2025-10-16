@@ -98,9 +98,11 @@
 
 (map! :map jg-dired-mode-map ;; change
       :prefix ("c" . "Change")
-      :desc "copy"                :n "c" #'dired-async-do-copy
+      :desc "copy"                :n "c" #'dired-do-copy
+      :desc "copy-async"          :n "C" #'dired-async-do-copy
       :desc "rename"              :n "r" #'+jg-dired-rename
-      :desc "move"                :n "m" #'dired-async-do-rename
+      :desc "move-async"          :n "m" #'dired-do-rename
+      :desc "move-async"          :n "M" #'dired-async-do-rename
       :desc "New Dir"             :n "n" #'dired-create-directory
 
       (:prefix ("z" . "Zips")

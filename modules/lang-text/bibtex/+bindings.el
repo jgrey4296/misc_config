@@ -25,7 +25,7 @@
 
 (map! :map jg-bibtex-mode-map ;; jump bindings
       ;; :n "s j" nil
-      (:prefix ("s j" . "bibtex")
+      (:prefix "s j"
       :desc "to Random entry"     :n "r"   #'librarian--biblio-edit-load-random
       :desc "to Pdf"              :n "p"   #'librarian--biblio-edit-open-pdf
       :desc "to Folder"           :n "f"   #'librarian--biblio-edit-open-folder

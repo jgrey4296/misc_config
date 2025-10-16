@@ -16,3 +16,9 @@
        :desc "Send to Repl"                         "r"   #'+jg-repl-send-register-to-repl
        )
       )
+
+(map! :map jg-dired-mode-map
+      :after dired
+      :localleader
+      :desc "Direnv Allow" "a" #'direnv-allow
+      )

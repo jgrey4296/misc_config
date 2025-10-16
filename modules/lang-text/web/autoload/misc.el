@@ -9,7 +9,21 @@
 ;;;###autoload
 (defun +web-is-auto-close-style-3 (_id action _context)
       (and (eq action 'insert)
-           (eq web-mode-auto-close-style 3)))
+           (eq web-mode-auto-close-style 3)
+           )
+      )
+
+;;;###autoload
+(defun +jg-web-pprint-region ()
+  (interactive)
+  (unless (eq evil-state 'visual)
+    (user-error "Select a region to pprint"))
+
+  (sgml-pretty-print evil-visual-beginning evil-visual-end)
+)
+
+
+
 
 
 ;;-- Footer

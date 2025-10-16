@@ -6,7 +6,10 @@
 ;;
 ;;-- end Header
 
-;; (use-package! asdf-vm)
+(use-package! asdf-vm
+  :config
+
+  )
 
 
 ;;-- Footer

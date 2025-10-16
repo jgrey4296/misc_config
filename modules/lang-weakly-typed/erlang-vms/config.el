@@ -38,6 +38,11 @@
 
   (add-hook 'elixir-mode-hook #'tree-sitter!)
   (add-hook 'elixir-mode-hook #'librarian-insert-minor-mode)
+  (add-hook 'elixir-mode-hook #'treesit-fold-mode)
+
+  (add-hook 'elixir-ts-mode-hook #'tree-sitter!)
+  (add-hook 'elixir-ts-mode-hook #'librarian-insert-minor-mode)
+  (add-hook 'elixir-ts-mode-hook #'treesit-fold-mode)
 
   (after! highlight-numbers
     (puthash 'elixir-mode
@@ -49,3 +54,5 @@
   :after elixir-mode
   :hook (elixir-mode . exunit-mode)
   )
+
+(use-package! heex-ts-mode)

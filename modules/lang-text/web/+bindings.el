@@ -20,9 +20,10 @@
       :m  "cex"  #'+web:decode-html-entities
 
       :localleader
-      :desc "Rehighlight buffer" "h" #'web-mode-reload
-      :desc "Indent buffer"      "i" #'web-mode-buffer-indent
-      :desc "Render Buffer"      "r" #'shr-render-buffer
+      :desc "Rehighlight buffer" "h"   #'web-mode-reload
+      :desc "Indent buffer"      "i"   #'web-mode-buffer-indent
+      :desc "Render Buffer"      "r"   #'shr-render-buffer
+      :desc "Pretty Print"       "TAB" #'+jg-web-pprint-region
 )
 
 (map! :map jg-web-mode-map ;; attributes

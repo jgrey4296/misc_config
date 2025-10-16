@@ -40,3 +40,9 @@
   (autoload 'comint-truncate-buffer "comint" nil t)
   (advice-add 'compile-goto-error :after #'evil-open-folds)
   )
+
+(use-package! direnv
+  :config
+  (add-hook! 'spec-handling-hook #'direnv-mode)
+
+  )

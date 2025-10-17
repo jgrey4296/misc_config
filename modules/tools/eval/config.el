@@ -45,4 +45,5 @@
   :config
   (add-hook! 'spec-handling-hook #'direnv-mode)
 
+  (setq direnv-always-show-summary nil)
   )

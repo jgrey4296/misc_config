@@ -54,13 +54,14 @@
 
 (map! :map jg-bibtex-mode-map ;; localleader
       :localleader
-      :desc "Remove Field"        "DEL"     #'+jg-bibtex-remove-field
-      :desc "Subcite"             "\\"      #'librarian--biblio-edit-subcite
-      :desc "Build Bibliography"  "B"       #'org-ref-build-full-bibliography
-      :desc "Get Meta"            "m"       #'librarian-biblio-get-meta
-      :desc "Get Url Meta"        "n"       #'jg-bibtex-url-meta
-      :desc "Get Url Raw "        "N"       #'jg-bibtex-url-raw
-      :desc "Count Entries"       "C"       #'bibtex-count-entries
+      :desc "Remove Field"          "DEL"     #'+jg-bibtex-remove-field
+      :desc "Subcite"               "\\"      #'librarian--biblio-edit-subcite
+      :desc "Build Bibliography"    "B"       #'org-ref-build-full-bibliography
+      :desc "Get Meta"              "m"       #'librarian-biblio-get-meta
+      :desc "Get Url Meta"          "n"       #'jg-bibtex-url-meta
+      :desc "Get Url Raw "          "N"       #'jg-bibtex-url-raw
+      :desc "Count Entries"         "C"       #'bibtex-count-entries
+      :desc "First Untagged Entry"  "t"       #'+jg-bibtex-first-entry-with-no-tags
 )
 
 (map! :map jg-bibtex-mode-map ;; refile

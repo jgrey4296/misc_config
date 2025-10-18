@@ -8,6 +8,7 @@
       :desc "Pdf Join"        "j" #'pdf-meta-join
       :desc "Pdf Attach"      "a" #'pdf-meta-attach
       :desc "Pdf Unpack"      "u" #'pdf-meta-detach
+      :desc "Pdf select pages" "p" #'pdf-meta-select-pages
       :desc "Pdf ToText"      "t" #'+jg-pdf-to-text
       :desc "Pdf Linearize"   "l" #'+jg-pdf-linearize
       :desc "Pdf Validate"    "v" #'+jg-pdf-validate

@@ -15,6 +15,7 @@
           '(:chapter       . "A chapter (or section or whatever) number.")
           '(:crossref      . "The database key of the entry being cross referenced.")
           '(:edition       . "The edition of a book for example, 'Second'.  This should be an ordinal, and should have the first letter capitalized, as shown here; the standard styles convert to lower case when necessary.")
+          '(:edition-year  . "The year of publication for the edition of a book")
           '(:editor        . "Name(s) of editor(s), typed as indicated in the LaTeX book.  If there is also an author field, then the editor field gives the editor of the book or collection in which the reference appears.")
           '(:file)
           '(:institution   . "The sponsoring institution of a technical report.")

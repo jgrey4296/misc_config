@@ -15,7 +15,7 @@
             ( ("year") ("journal") ("volume") ("number") )
             ( ("pages") ("subtitle") ) )
           '("book" "Single-Volume Book"
-            (("author" nil nil 1) ("editor" nil nil -1) ("title")  ("year" ) ("publisher") ("isbn") )
+            (("author" nil nil 1) ("editor" nil nil -1) ("title")  ("year" ) ("publisher") ("isbn") ("edition_year"))
             ()
             ( ("series")  ("tags") ("subtitle") ) )
           '("collection" "Single-Volume Collection"

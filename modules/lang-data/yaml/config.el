@@ -58,3 +58,14 @@
                )
     )
   )
+
+(speckler-add! file-templates ()
+  '(github
+    ("-wf\\.yml\\'" :trigger "__github.workflow"   :mode yaml-mode :priority 100)
+    )
+  '(gitlab
+    ("^\\.gitlab-cs\\.yml\\'" :trigger "__gitlab.root" :mode yaml-mode :priority 100)
+    (".gitlab-ci\\.yml\\'"    :trigger "__gitlab.job"  :mode yaml-mode :priority 100)
+
+    )
+  )

@@ -71,7 +71,7 @@
   :disabled
   )
 
-(use-package! sh-script ; built-in, sh-mode
+(use-package! sh-script ; built-in, sh-mode, bash-ts-mode
   :defer t
   :config
 
@@ -96,6 +96,10 @@
              #'hs-minor-mode
              #'flycheck-mode
             )
+
+  (add-hook! 'bash-ts-mode-hook
+             #'treesit-fold-mode
+             )
 
   ;; autoclose backticks
   (sp-local-pair 'sh-mode "`" "`" :unless '(sp-point-before-word-p sp-point-before-same-p))

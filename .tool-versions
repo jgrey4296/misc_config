@@ -3,7 +3,7 @@
 # https://mise.jdx.dev/dev-tools/
 cargo-show-asm  0.2.52
 cocq            4.14.1
-direnv          2.32.1
+direnv          2.37.1
 dotnet          9.0.305
 elixir          1.18.4-otp-26
 erlang          28.0.2

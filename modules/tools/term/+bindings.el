@@ -26,6 +26,7 @@
 
 (map! :map jg-term-shell-mode-map
       :localleader
+      "c"   #'+jg-text-clear-buffer
       "h"   #'counsel-shell-history--with-state-normal
       "q"   #'comint-quit-subjob
       "i"   #'comint-interrupt-subjob

@@ -37,7 +37,8 @@
  :lang-data xml toml json yaml logs
  :lang-data quotes
 
- :lang-dsl acab ai-and-logic
+ ;; :lang-dsl acab
+ :lang-dsl ai-and-logic
  :lang-dsl rest nix
  :lang-dsl qt
  :lang-dsl (music +sclang +csound)

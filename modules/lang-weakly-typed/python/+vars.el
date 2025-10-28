@@ -149,6 +149,7 @@
 
     ;; Python:
     ("__init__\\.py\\'"  :trigger "__init"           :mode python-mode)
+    ("__main__\\.py\\'"  :trigger "__main"           :mode python-mode)
     ("errors\\.py\\'"    :trigger "__errors"         :mode python-mode)
     ("test_.+\\.py\\'"   :trigger "__pytest"         :mode py-test-minor-mode)
     ("cli_.+\\.py\\'"    :trigger "__cli"            :mode python-mode)

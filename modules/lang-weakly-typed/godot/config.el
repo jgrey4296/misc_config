@@ -30,7 +30,9 @@
   :commands gdscript-mode
   :config
 
-  (add-hook 'gdscript-ts-mode #'treesit-fold-mode)
+  (add-hook! 'gdscript-mode-hook #'librarian--insert-minor-mode)
+  (add-hook! 'gdscript-ts-mode-hook #'librarian--insert-minor-mode)
+  (add-hook! 'gdscript-ts-mode-hook #'treesit-fold-mode)
 
   )
 ;;; config.el ends here

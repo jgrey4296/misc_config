@@ -26,7 +26,7 @@
 (defer-load! jg-bindings-total "+bindings")
 (defer-load! (jg-bindings-total dired) "+funcs")
 
-(after! (evil-escape evil-search)
+(after! (evil-escape-hook evil-search)
   (add-hook 'evil-escape-hook #'evil-ex-nohighlight)
   )
 

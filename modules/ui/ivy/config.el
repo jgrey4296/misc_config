@@ -59,8 +59,9 @@
   (after! ivy-hydra
     ;; Ensure `ivy-dispatching-done' and `hydra-ivy/body' hydras can be
     ;; exited / toggled by the same key binding they were opened
-    (add-to-list 'ivy-dispatching-done-hydra-exit-keys '("C-o" nil))
-    (defhydra+ hydra-ivy () ("M-o" nil)))
+    ;; (add-to-list 'ivy-dispatching-done-hydra-exit-keys '("C-o" nil))
+    ;; (defhydra+ hydra-ivy () ("M-o" nil))
+    )
 
   )
 

@@ -6,8 +6,7 @@
 ;;
 ;;-- end Header
 
-
-(use-package! evil-escape
+(use-package! evil-escape-hook
   :hook (doom-first-input . evil-escape-mode)
   :config
   (evil-escape-add-default-inhibitors)
@@ -23,8 +22,6 @@
   evil-escape-key-sequence "jk"
   evil-escape-delay 0.15
   )
-
-
 
 ;;-- Footer
 ;; Copyright (C) 2025 john

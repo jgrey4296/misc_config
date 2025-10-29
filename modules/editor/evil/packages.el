@@ -6,7 +6,7 @@
 (package! evil-args)
 (package! evil-easymotion)
 (package! evil-embrace)
-(package! evil-escape :recipe (:host github :repo "jgrey4296/evil-escape-hook"))
+(package! evil-escape-hook :recipe (:host github :repo "jgrey4296/evil-escape-hook"))
 (package! evil-exchange)
 (package! evil-iedit-state)
 (package! evil-indent-plus)

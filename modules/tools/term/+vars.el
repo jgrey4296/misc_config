@@ -128,8 +128,9 @@
   '(sh-mode         . bash)
   )
 (speckler-add! file-templates ()
+  :override t
   '(sh
-    ("\\.envrc\\'" :trigger "__envrc" :mode direnv-envrc-mode)
-    ("\\.bash\\'" :trigger "__" :mode sh-mode)
+    ("\\.bash\\'"  :trigger "__" :mode sh-mode)
+    ("\\.envrc\\'" :trigger "__envrc" :mode sh-mode :priority 200)
     )
   )

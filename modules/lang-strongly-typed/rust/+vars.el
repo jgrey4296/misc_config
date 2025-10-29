@@ -90,8 +90,6 @@
     ("\\.rs\\'" . rustic-mode)
     ("Cargo\\.toml\\'" . conf-toml-mode)
     ("config\\.toml\\'" .conf-toml-mode)
-    ("\\.h\\'" . c-mode)
-    ("\\.c\\'" . c-mode)
     )
   )
 (speckler-add! babel ()

@@ -12,8 +12,17 @@
   (add-hook 'c-mode-hook #'hs-minor-mode)
   )
 
+(use-package! make-mode
+  :defer t
+  )
 
-
+(speckler-add! auto-modes ()
+  '(c-lang
+    ("\\.h\\'" . c-mode)
+    ("\\.c\\'" . c-mode)
+    ("Makefile\\'" . makefile-mode)
+    )
+  )
 
 ;;-- Footer
 ;; Copyright (C) 2025 john

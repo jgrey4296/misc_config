@@ -1,5 +1,8 @@
 ;;; +vars.el -*- lexical-binding: t; -*-
 
+(setq gdscript-use-tab-indents nil
+
+      )
 
 (speckler-add! file-templates ()
   '(gdscript-mode

@@ -53,6 +53,7 @@
                                    ".wx32fsl" ".wx64fsl"
                                    ".x86f"
                                    "CVS/" "_MTN/" "_darcs/" "~"
+                                   ".gd.uid"
                                    )
   )
 (rx-let ((filename (*? graph))

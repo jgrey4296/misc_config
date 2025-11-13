@@ -23,4 +23,5 @@
 ;; (package!  :type 'local :recipe (:local-repo "" :files ("*.el" "data-struct/*.el" "modes/*.el" "util/*.el")))
 (package! conf-mode :built-in t)
 (package! toml-mode)
+;; (package! flycheck-toml :recipe (:host github :repo "jgrey4296/flycheck-toml"))
 ;;; packages.el ends here

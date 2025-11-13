@@ -225,6 +225,23 @@ If ARG (universal argument), open selection in other-window."
       )
     )
   )
+
+;;;###autoload
+(defun +jg-ivy-evil-registers (&optional arg)
+  (interactive)
+  (if (fboundp 'evil-register-list)
+      (ivy-read "JG evil-registers: "
+                (cl-loop for (key . val) in (evil-register-list)
+                   collect (format "[%s]: %s"
+                                   (propertize (char-to-string key)
+                                               'face 'counsel-evil-register-face)
+                                   (if (stringp val) val "")))
+                :require-match t
+                :initial-input "^"
+                :action #'counsel-evil-registers-action
+                :caller 'counsel-evil-registers)
+    (user-error "Required feature `evil' not installed")))
+
 ;;-- Footer
 ;; Copyright (C) 2025 john
 ;;

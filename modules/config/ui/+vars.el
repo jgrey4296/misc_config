@@ -141,7 +141,6 @@
 
 (speckler-add! auto-modes ()
   '(ui
-    ("\\.palette" . palette-mode)
     )
   )
 

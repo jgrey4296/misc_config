@@ -21,7 +21,6 @@
 (package! font-lock-ext)
 (package! font-lock-studio)
 (package! font-lock+       :recipe (:host github :repo "emacsmirror/font-lock-plus"))
-(package! palette-mode     :recipe (:host github :repo "jgrey4296/misc-modes" :files ("major-modes/palette-mode/*.el") :local-repo "misc-modes"))
 
 (package! transient :recipe (:host github :repo "magit/transient" :branch "main"))
 

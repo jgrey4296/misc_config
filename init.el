@@ -32,7 +32,7 @@
  :ide minimap diff company
  :ide (debugger +realgud +edebug)
 
- :lang-data csv dot sql nu
+ :lang-data csv dot sql nu octave
  :lang-data graphql
  :lang-data xml toml json yaml logs
  :lang-data quotes

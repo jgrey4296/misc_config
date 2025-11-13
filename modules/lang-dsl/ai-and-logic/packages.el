@@ -1,8 +1,9 @@
 (package! instal-mode     :recipe `(:local-repo ,(expand-file-name "~/github/python/instal/instal-mode")))
 
-(package! agentspeak-mode :recipe (:host github :repo "jgrey4296/misc-modes" :files ("major-modes/agentspeak-mode/*.el") :local-repo "misc-modes"))
-(package! jacamo-mode     :recipe (:host github :repo "jgrey4296/misc-modes" :files ("major-modes/jacamo-mode/*.el") :local-repo "misc-modes"))
-(package! soar-mode       :recipe (:host github :repo "jgrey4296/misc-modes" :files ("major-modes/soar-mode/*.el") :local-repo "misc-modes"))
+(package! agentspeak-mode :recipe (:host github :repo "jgrey4296/agentspeak-mode"))
+(package! jacamo-mode     :recipe (:host github :repo "jgrey4296/jacamo-mode"))
+(package! soar-mode       :recipe (:host github :repo "jgrey4296/soar-mode"))
+
 (package! clips-mode)
 (package! pasp-mode)
 (package! z3-mode)

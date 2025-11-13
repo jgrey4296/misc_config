@@ -11,3 +11,4 @@
 (package! lsp-metals)
 (package! lsp-java)
 (package! ob-kotlin)
+(package! flycheck-gradle)

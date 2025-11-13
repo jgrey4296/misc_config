@@ -91,5 +91,7 @@
     )
   )
 
+;; (use-package! flycheck-toml)
+
 ;;
 ;;; config.el ends here

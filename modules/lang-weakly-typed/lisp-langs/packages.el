@@ -9,6 +9,7 @@
 (package! elisp-mode :built-in t)
 (package! flycheck-cask)
 (package! flycheck-package)
+(package! flycheck-eask)
 
 ;; Fontification plugins
 (package! highlight-quoted)

@@ -10,7 +10,9 @@
       "Q"      #'company-search-abort
       "J"      #'company-select-next
       "K"      #'company-select-previous
+)
 
+(map! :map jg-company-search-map
       "a" #'company-search-printing-char
       "b" #'company-search-printing-char
       "c" #'company-search-printing-char

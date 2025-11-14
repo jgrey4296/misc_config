@@ -1,6 +1,6 @@
 ;; packages.el -*- mode: elisp; lexical-binding: t; -*-
 
-(package! instal-mode     :recipe (:host github :repop "jgrey4296/instal-stable"))
+(package! instal-mode     :recipe (:host github :repo "jgrey4296/instal-stable"))
 (package! agentspeak-mode :recipe (:host github :repo "jgrey4296/agentspeak-mode"))
 (package! jacamo-mode     :recipe (:host github :repo "jgrey4296/jacamo-mode"))
 (package! soar-mode       :recipe (:host github :repo "jgrey4296/soar-mode"))

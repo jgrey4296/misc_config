@@ -33,7 +33,7 @@
 (use-package! kotlin-ts-mode
   :defer t
   :config
-  (add-hook 'kotlin-ts-mode #'treesit-fold-mode)
+  (add-hook! 'kotlin-ts-mode-hook #'treesit-fold-mode)
   (add-hook! 'kotlin-ts-mode-hook #'librarian-insert-minor-mode)
   )
 

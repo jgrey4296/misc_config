@@ -42,6 +42,7 @@
  :lang-dsl rest nix
  :lang-dsl qt
  :lang-dsl (music +sclang +csound)
+ :lang-dsl make
 
  :lang-strongly-typed haskell
  :lang-strongly-typed (proofs) ;; coq, idris, agda, fstar, lean)

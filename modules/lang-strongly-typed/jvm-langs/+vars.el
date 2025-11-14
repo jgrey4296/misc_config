@@ -120,7 +120,7 @@
   )
 (speckler-add! fold ()
   `(kotlin
-    :modes (kotlin-ts-mode)
+    :modes '(kotlin-ts-mode)
     :priority 25
     :triggers (:close     #'treesit-fold-close
                :close-all #'treesit-fold-close-all

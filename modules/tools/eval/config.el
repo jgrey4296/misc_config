@@ -45,5 +45,15 @@
   :config
   (add-hook! 'spec-handling-hook #'direnv-mode)
 
-  (setq direnv-always-show-summary nil)
+  (setq direnv-always-show-summary nil
+        direnv-non-file-modes '(
+                                python-pytest-mode
+                                comint-mode
+                                compilation-mode
+                                ;; dired-mode
+                                eshell-mode
+                                magit-mode
+                                )
+
+        )
   )

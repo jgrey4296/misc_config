@@ -7,7 +7,15 @@
 ;;-- end Header
 
 
-(use-package! soar-mode        :defer t)
+(use-package! soar-mode
+  :defer t
+  :config
+
+  (add-hook! 'soar-mode-hook
+             #'librarian-insert-minor-mode
+             )
+
+  )
 
 (use-package! clips-mode       :defer t)
 

@@ -14,3 +14,7 @@
 (map! :map prolog-mode-map
 
       )
+
+(map! :map soar-mode-map
+      :n "|" #'librarian-insert-trigger
+      )

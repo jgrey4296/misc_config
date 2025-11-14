@@ -13,13 +13,6 @@
   (setq org-babel-prolog-command "swipl")
   )
 
-(use-package! ob-clingo
-  :defer t
-  )
-
-(use-package! ob-instal
-  :defer t
-  )
 
 
 ;;-- Footer

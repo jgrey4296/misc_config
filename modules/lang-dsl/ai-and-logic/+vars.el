@@ -10,7 +10,7 @@
 
 (defvar inferior-clips-buffer   nil)
 
-(defvar soar-executable         "SoarCLI.sh")
+(defvar soar-executable         "soar")
 
 (defvar clingo-executable       "clingo")
 

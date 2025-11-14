@@ -22,7 +22,6 @@
 (package! tree-sitter-langs :pin "213b1c4db852a97480e029453af869ff1a0764e0")
 (package! ts-fold :pin "01c9ecaaa89966cdcd250ac37c24a9c9f530b725" :recipe (:host github :repo "emacs-tree-sitter/ts-fold"))
 
-(package! lint-result-mode :recipe (:host github :repo "jgrey4296/misc-modes" :files ("major-modes/lint-result-mode/*.el")))
 
 (package! counsel-gtags)
 (package! helm-gtags)

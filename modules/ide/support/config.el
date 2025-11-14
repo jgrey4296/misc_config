@@ -45,18 +45,4 @@
 
 ;; --------------------------------------------------
 
-(use-package! lint-result-mode
-  :config
-  (add-hook 'lint-result-mode-hook '+fold/close-all)
-  )
-(speckler-add! evil-ex ()
-  '(support
-    ("cc"          . #'evil-goto-error)
-    ("cfir[st]"    . #'first-error)
-    ("cr[ewind]"   . #'first-error)
-    ("cn[ext]"     . #'next-error)
-    ("cp[revious]" . #'previous-error)
-    ("com[pile]"   . #'+evil:compile)
-    )
-  )
 ;;; config.el ends here

@@ -4,6 +4,7 @@
 (package! agentspeak-mode :recipe (:host github :repo "jgrey4296/agentspeak-mode"))
 (package! jacamo-mode     :recipe (:host github :repo "jgrey4296/jacamo-mode"))
 (package! soar-mode       :recipe (:host github :repo "jgrey4296/soar-mode"))
+(package! ceptre-mode     :recipe (:host github :repo "jgrey4296/misc-modes" :files ("major-modes/ceptre-mode/ceptre-mode.el") :local-repo "misc-modes"))
 
 (package! clips-mode)
 (package! pasp-mode)

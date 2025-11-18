@@ -28,14 +28,14 @@
  :ide version-control ;; +forge +diff-hl
  :ide (librarian +tags)
  :ide snippets workspaces
- :ide (support +lsp +flycheck +treesit) ;; +eglot  +semantic +tree-sitter
+ :ide (support +lsp +flycheck +treesit) ;; +lsp +eglot  +semantic +tree-sitter
  :ide minimap diff company
  :ide (debugger +realgud +edebug)
 
  :lang-data csv dot sql nu octave
  :lang-data graphql
  :lang-data xml toml json yaml logs
- :lang-data quotes
+ :lang-data quotes_and_time
 
  ;; :lang-dsl acab
  :lang-dsl ai-and-logic

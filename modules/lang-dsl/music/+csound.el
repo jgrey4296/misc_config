@@ -10,6 +10,20 @@
   :commands csound-mode
   )
 
+(speckler-add! auto-modes ()
+  '(csound
+    ("\\.csd\\'" . csound-mode)
+    ("\\.orc\\'" . csound-mode)
+    ("\\.sco\\'" . csound-mode)
+    )
+  )
+(speckler-add! file-templates ()
+  '(csound
+    ("\\.csd\\'" :trigger "__combined"  :mode csound-mode)
+    ("\\.orc\\'" :trigger "__orchestra" :mode csound-mode)
+    ("\\.sco\\'" :trigger "__score"     :mode csound-mode)
+    )
+  )
 (speckler-add! librarian-regular ()
   (csound-mode
    ("Csound Manual" . "https://csound.com/docs/manual/PartOverview.html")

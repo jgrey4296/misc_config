@@ -36,12 +36,14 @@
     )
   )
 (speckler-add! file-templates ()
+  :override t
   '(logic
-    ("\\.lp4?"              :trigger "__"                :mode pasp-mode)
-    ("\\.pl$"               :trigger "__"                :mode prolog-mode)
-    ("\\.clp$"              :trigger "__"                :mode clips-mode)
-    ("\\.cep$"              :trigger "__"                :mode ceptre-mode)
-    ("\\.soar$"             :trigger "__"                :mode soar-mode)
+    ("\\.lp4?\\'"             :trigger "__"                :mode pasp-mode)
+    ("\\.pl\\'"               :trigger "__"                :mode prolog-mode)
+    ("\\.clp\\'"              :trigger "__"                :mode clips-mode)
+    ("\\.cep\\'"              :trigger "__"                :mode ceptre-mode)
+    ("\\.soar\\'"             :trigger "__"                :mode soar-mode)
+    ("\\.z3\\'"               :trigger "__"                :mode z3-mode)
     )
   '(jacamo
     ("\\.asl$"              :trigger "__"                :mode agentspeak-mode)

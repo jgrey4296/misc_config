@@ -135,7 +135,7 @@
   )
 (speckler-add! file-templates ()
   '(python
-    ("LICENSE\\'"               :trigger "__license-acab"   :mode text-mode   :priority 100)
+    ("LICENSE\\'"                 :trigger "__license-acab"   :mode text-mode   :priority 100)
     ;;Configs:
     ("pyproject.toml\\'"          :trigger "__pyproject"      :mode conf-toml-mode)
     ("pyrightconfig.json\\'"      :trigger "__pyrightconfig"  :mode json-mode)
@@ -155,7 +155,7 @@
     ("cli_.+\\.py\\'"    :trigger "__cli"            :mode python-mode)
     ("\\.pyi\\'"         :trigger "__interface"      :mode python-mode)
     ("\\.py\\'"          :trigger "__"               :mode python-mode :priority -99)
-    (python-mode         :trigger "__"                                 :priority -100)
+    (python-mode         :trigger "__"                                 :priority -199)
     )
   )
 (speckler-add! rotate-text ()

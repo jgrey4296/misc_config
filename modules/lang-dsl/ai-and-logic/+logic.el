@@ -39,6 +39,13 @@
     )
   )
 
+(use-package! z3-mode
+  :config
+  (add-hook! 'z3-mode-hook #'librarian-insert-minor-mode)
+  )
+
+(use-package! ceptre-mode)
+
 (speckler-add! treesit-source ()
   '(clingo "git@github.com:potassco/tree-sitter-clingo.git")
   )

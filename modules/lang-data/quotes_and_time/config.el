@@ -6,16 +6,16 @@
 ;;
 ;;-- end Header
 
-(defun new-quote ()
-  (interactive)
-  ;; name file quote
-  ;; add text
-  ;; save
-  )
+
+(use-package! timeline-mode)
+(use-package! quote-mode)
+(use-package! definition-lookup-mode)
 
 (speckler-add! auto-modes ()
   '(quotes
-    ("\\.quote\\'" . fundamental-mode)
+    ("\\.quote\\'"      . quote-mode)
+    ("\\.timeline\\'"   . timeline-mode)
+    ("\\.definition\\'" . definition-mode)
     )
   )
 

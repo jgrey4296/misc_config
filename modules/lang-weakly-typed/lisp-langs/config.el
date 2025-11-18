@@ -49,14 +49,15 @@
     )
   )
 (speckler-add! file-templates ()
+  :override t
   `(lisp
     ("minor-mode\\.el\\'" :trigger "__minor-mode" :mode emacs-lisp-mode)
     ("mode\\.el\\'"       :trigger "__mode"       :mode emacs-lisp-mode)
     ("ob-.+?\\.el\\'"     :mode emacs-lisp-mode :trigger "__org_babel")
     ("/.dir-locals.el\\'" :mode emacs-lisp-mode :trigger "__dir_locals")
     ("-tests?\\.el\\'"    :mode emacs-lisp-mode :trigger "__test")
-    ("--tests?-.+?\\.el"    :mode emacs-lisp-mode :trigger "__test")
-    (emacs-lisp-mode      :trigger "__package")
+    ("--tests?-.+?\\.el"  :mode emacs-lisp-mode :trigger "__test")
+    (emacs-lisp-mode      :trigger "__package" :priority -199)
     )
   )
 (speckler-add! projects ()

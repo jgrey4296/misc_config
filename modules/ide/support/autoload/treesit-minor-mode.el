@@ -31,6 +31,7 @@
     )
   )
 
+;;;###autoload
 (define-minor-mode treesit-minor-mode
     " minor mode for binding treesit commands "
     :init-value nil
@@ -40,6 +41,7 @@
 
 )
 
+;;;###autoload
 (defun treesit-minor-mode/turn-on ()
  (unless (minibufferp)
     (if (eq major-mode 'prog-mode)

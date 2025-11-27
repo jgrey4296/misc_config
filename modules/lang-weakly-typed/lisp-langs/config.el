@@ -49,8 +49,7 @@
     )
   )
 (speckler-add! file-templates ()
-  :override t
-  `(lisp
+  '(lisp
     ("minor-mode\\.el\\'" :trigger "__minor-mode" :mode emacs-lisp-mode)
     ("mode\\.el\\'"       :trigger "__mode"       :mode emacs-lisp-mode)
     ("ob-.+?\\.el\\'"     :mode emacs-lisp-mode :trigger "__org_babel")

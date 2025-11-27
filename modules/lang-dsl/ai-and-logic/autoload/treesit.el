@@ -96,20 +96,20 @@
 
 ;;;###autoload
 (defun +jg-pasp-start-treesitter ()
-  (when (treesit-ready-p 'pasp)
-    (setq font-lock-defaults nil)
-    (treesit-parser-create 'pasp)
-    (setq-local treesit-font-lock-feature-list pasp-ts--font-lock-feature-list
-                treesit-font-lock-settings pasp-ts--font-lock-settings
-                treesit-defun-type-regexp (rx (or "function" "class") "_definition")
-                ;; imenu-create-index-function #'python-imenu-treesit-create-index
-                ;; treesit-defun-name-function #'python--treesit-defun-name
-                ;; syntax-propertize-function #'python--treesit-syntax-propertize
-                )
+  ;; (when (treesit-ready-p 'pasp)
+  ;;   (setq font-lock-defaults nil)
+  ;;   (treesit-parser-create 'pasp)
+  ;;   (setq-local treesit-font-lock-feature-list pasp-ts--font-lock-feature-list
+  ;;               treesit-font-lock-settings pasp-ts--font-lock-settings
+  ;;               treesit-defun-type-regexp (rx (or "function" "class") "_definition")
+  ;;               ;; imenu-create-index-function #'python-imenu-treesit-create-index
+  ;;               ;; treesit-defun-name-function #'python--treesit-defun-name
+  ;;               ;; syntax-propertize-function #'python--treesit-syntax-propertize
+  ;;               )
 
-    (treesit-minor-mode 1)
-    (treesit-major-mode-setup)
-    )
+  ;;   (treesit-minor-mode 1)
+  ;;   (treesit-major-mode-setup)
+  ;;   )
   )
 
 

@@ -19,6 +19,12 @@
 
 (use-package! clips-mode       :defer t)
 
+(speckler-add! auto-modes ()
+  '(rules
+    ("\\.soar\\'" . soar-mode)
+    ("\\.clips\\'" . clips-mode)
+    )
+  )
 
 ;;-- Footer
 ;; Copyright (C) 2025 john

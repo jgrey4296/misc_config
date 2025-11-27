@@ -7,7 +7,17 @@
 ;;-- end Header
 
 (use-package! csound-mode
-  :commands csound-mode
+  :defer t
+  :config
+  (after! librarian
+    (add-to-list 'librarian-active-on-modes 'csound-mode)
+    )
+
+  (add-hook! 'csound-mode-hook
+             #'librarian-insert-minor-mode
+             )
+
+
   )
 
 (speckler-add! auto-modes ()

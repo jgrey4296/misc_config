@@ -34,6 +34,7 @@
 
  :lang-data csv dot sql nu octave
  :lang-data graphql
+ :lang-data opa
  :lang-data xml toml json yaml logs
  :lang-data quotes_and_time
 

@@ -1,4 +1,6 @@
 ;;; async.el -*- lexical-binding: t; -*-
+(defvar jg-dired-du-cmd "du")
+(defvar jg-dired-du-args '("-hsc"))
 
 (defun +jg-dired-async-delete-sentinel (buffer out-buffer process event)
   (when (string-equal "finished\n" event)
@@ -119,25 +121,6 @@
     )
   )
 
-;;;###autoload
-(defun +jg-dired-hash-files ()
-  (interactive)
-  (let* ((marked (ensure-list (dired-get-marked-files)))
-         (target-buffer (get-buffer-create "*file-hashes*"))
-         )
-    (with-current-buffer target-buffer
-      (insert "\n--- File Hashes:\n")
-      )
-    (make-process :name "file-hash"
-                  :buffer target-buffer
-                  :command (append '("md5sum") marked)
-                  :sentinel (-partial '(lambda (targ p e) (when (string-equal "finished\n" e)
-                                                             (display-buffer targ)))
-                                       target-buffer)
-                  :noquery t
-                  )
-    )
-  )
 
 ;;;###autoload
 (defun +jg-dired-scan-files ()

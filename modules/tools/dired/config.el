@@ -1,7 +1,10 @@
 ;;; tools/dired/config.el -*- lexical-binding: t; -*-
 
-(local-load! "+vars")
 (defer-load! (jg-bindings-total jg-dired) "+bindings")
+(defer-load! "+extra")
+(defer-load! "+dirvish")
+(defer-load! "+fontlock")
+(defer-load! "+omit")
 
 (advice-add 'read-file-name-default :around #'+jg-dired-find-file-with-insert-plus-a)
 (advice-add 'counsel-find-file :around #'+jg-dired-find-file-with-insert-plus-a)
@@ -10,16 +13,9 @@
   :commands dired-jump
   :config
   (provide 'jg-dired)
-  (speckler-add! evil-initial ()
-    '(image-dired-display-iamge-mode emacs)
+  (after! (evil evil-snipe)
+    (push 'dired-mode evil-snipe-disabled-modes)
     )
-  (if (not (executable-find "gls"))
-      (setq dired-listing-switches (car dired-args)
-            insert-directory-program "ls")
-    )
-
-  (setq dired-listing-switches (string-join dired-args " "))
-
   (put 'dired-find-alternate-file 'disabled nil)
 
   (advice-add 'dired-buffer-stale-p :before-while #'+dired--no-revert-in-virtual-buffers-a)
@@ -32,54 +28,56 @@
     )
   )
 
-(use-package! dired-quick-sort
-  :commands hydra-dired-quick-sort/body
-  )
+(speckler-setq! dired ()
+  dired-listing-switches '("-ahlD" "-v" "--group-directories-first")
+  insert-directory-program (or (executable-find "gls") "ls")
+  read-file-name-function #'read-file-name-default
 
-(use-package! dirvish
-  :when (modulep! +dirvish)
-  :defer t
-  :init (after! dired (dirvish-override-dired-mode))
-  :hook (dired-mode . dired-omit-mode)
-  :config
-  (setq dirvish-cache-dir (concat doom-cache-dir "dirvish/")
-        dirvish-hide-details nil
-        dirvish-attributes '(git-msg)
-        )
+  dired-auto-revert-buffer #'dired-buffer-stale-p
+  dired-clean-confirm-killing-deleted-buffers nil
+  dired-create-destination-dirs 'ask
+  dired-dwim-target t
+  dired-hide-details-hide-symlink-targets nil
+  dired-omit-verbose nil
+  dired-recursive-copies  'always
+  dired-recursive-deletes 'top
+  dired-vc-rename-file t
+  dired-listing-switches (string-join dired-args " ")
+  dired-quick-sort-group-directories-last ?y
   )
-
-(use-package! dired-rsync
-  :after dired
-  )
-
-(use-package! diredfl
-  :hook (dired-mode . diredfl-mode)
-  :config
-  (set-face-attribute 'diredfl-flag-mark-line nil :background "blueviolet")
-  )
-
-(use-package! dired-x
-  :unless (modulep! +dirvish)
-  :hook (dired-mode . dired-omit-mode)
-  )
-
-(use-package! fd-dired
-  :when doom-projectile-fd-binary
-  :defer t
-  :init
-  (global-set-key [remap find-dired] #'fd-dired)
-  (setq fd-dired-program doom-projectile-fd-binary)
-  (speckler-add! popup ()
-    '(fd-dired
-      ("^\\*F\\(?:d\\|ind\\)\\*$" :ignore t)
-      )
+(speckler-add! fold ()
+  `(dired
+    :modes (dired-mode)
+    :priority 50
+    :triggers (:open-all   nil
+               :close-all  nil
+               :toggle     #'(lambda () (dired-hide-subdir 1))
+               :open       nil
+               :open-rec   nil
+               :close      nil
+               )
     )
   )
-
-(use-package! dired-aux
-  :defer t
+(speckler-add! popup ()
+  '(dired
+    ("^\\*image-dired" :slot 20 :size 0.8 :select t :quit nil :ttl 0)
+    ("^\\*ranger" :ignore t)
+    ("^\\*CookieCutter\\*" :side bottom :select nil :quit t :ttl 0)
+    ("^\\*file-hashes\\*" :side bottom :select nil :quit t :ttl 3)
+    ("^\\*File Metadata\\*\\'" :width 80 :side left :select nil :quit t :ttl 3)
+    )
   )
-
-(use-package! dired-imenu
-  :after (dired imenu)
+(speckler-setq! filetypes ()
+  dired-guess-shell-alist-user `(("\\.\\(?:docx\\|pdf\\|djvu\\|eps\\)\\'"               ,(if (eq system-type 'darwin) "open -a Preview -nF" "evince"))
+                                 ("\\.\\(?:jpe?g\\|png\\|gif\\|xpm\\)\\'"               "eog")
+                                 ("\\.\\(?:mp3\\|flac\\)\\'"                            "xdg-open")
+                                 ("\\.\\(?:mp4\\|mkv\\|avi\\|flv\\)\\(?:\\.part\\)?\\'" "xdg-open")
+                                 ("\\.\\(?:rm\\|rmvb\\|ogv\\)\\(?:\\.part\\)?\\'"       "xdg-open")
+                                 ("\\.\\(?:xcf\\)\\'"                                   "xdg-open")
+                                 ("\\.csv\\'"                                           "xdg-open")
+                                 ("\\.html?\\'"                                         "xdg-open")
+                                 ("\\.md\\'"                                            "xdg-open")
+                                 ("\\.svg\\'"                                           "eog")
+                                 ("\\.tex\\'"                                           "xdg-open")
+                                 )
   )

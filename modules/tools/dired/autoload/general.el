@@ -1,5 +1,7 @@
 ;;; emacs/dired/autoload.el -*- lexical-binding: t; -*-
 
+(defvar! +jg-dired-recursive-switches "-aBhlR --group-directories-first" nil)
+
 (defvar rename-regexp-query nil)
 
 ;;;###autoload
@@ -20,25 +22,6 @@
   (interactive)
   (let ((dired-dwim-target nil))
     (dired-do-rename)
-    )
-  )
-
-;;;###autoload
-(defun +jg-dired-hash-duplicates()
-  " get the hashes of the marked files, and unmark all that aren't duplicates "
-  (interactive)
-  (let* ((marked (dired-get-marked-files))
-         (quoted (mapcar #'shell-quote-argument marked))
-         uniqs
-         dups
-         )
-    (with-current-buffer (get-buffer-create jg-hash-check-buffer) (erase-buffer))
-    (shell-command (format jg-hash-check-command (s-join " " quoted)) jg-hash-check-buffer)
-    (setq uniqs (split-string (with-current-buffer jg-hash-check-buffer (buffer-string)) "\n" " ")
-          dups (-difference marked uniqs))
-    (dired-unmark-all-marks)
-    (dired-mark-if (and (dired-get-filename nil t) (-contains? dups (dired-get-filename nil t))) "Duplicated SHA Checksum")
-    (message "%s Duplicates" (length dups))
     )
   )
 
@@ -232,7 +215,6 @@ Type SPC or `y' to %s one match, DEL or `n' to skip to next,
       )
     )
 )
-
 
 ;;;###autoload
 (defun +jg-dired-popup ()

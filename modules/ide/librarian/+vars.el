@@ -6,7 +6,7 @@
   )
 
 (speckler-setq! librarian ()
-  librarian-regular-loc                        (expand-file-name "librarian-regular" templates-loc)
+  librarian-regular-loc                        (expand-file-name "urls" templates-loc)
   librarian-insert-loc                         (expand-file-name "general-insert" templates-loc)
   librarian--config-modules-dir                (expand-file-name "modules" doom-user-dir)
   librarian--man-path                          (expand-file-name "man/main" templates-loc)

@@ -28,8 +28,9 @@
     )
   )
 
+
 (speckler-setq! dired ()
-  dired-listing-switches '("-ahlD" "-v" "--group-directories-first")
+  dired-listing-switches (string-join '("-ahlD" "-v" "--group-directories-first") " ")
   insert-directory-program (or (executable-find "gls") "ls")
   read-file-name-function #'read-file-name-default
 
@@ -42,7 +43,6 @@
   dired-recursive-copies  'always
   dired-recursive-deletes 'top
   dired-vc-rename-file t
-  dired-listing-switches (string-join dired-args " ")
   dired-quick-sort-group-directories-last ?y
   )
 (speckler-add! fold ()

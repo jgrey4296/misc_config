@@ -1,6 +1,5 @@
 ;;; lang/coq/config.el -*- lexical-binding: t; -*-
 
-(local-load! "+vars")
 (local-load! "+proof-general")
 (when (modulep! +agda) (local-load! "+agda"))
 (when (modulep! +idris) (local-load! "+idris"))

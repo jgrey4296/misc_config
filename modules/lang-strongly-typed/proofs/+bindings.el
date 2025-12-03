@@ -10,7 +10,7 @@
       :n "["  #'proof-undo-last-successful-command
       :n "."  #'proof-goto-point
 
-      :n "RET"    #'proof-goto-point
+      :n "RET"    #'+jg-coq-save-then-goto-point
       :n "DEL"    #'proof-undo-last-successful-command
       :n "<down>" #'proof-assert-next-command-interactive
       :n "<up>"   #'proof-undo-last-successful-command

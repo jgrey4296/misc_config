@@ -9,3 +9,10 @@
   (sclang-eval-document)
   (display-buffer sclang-post-buffer)
   )
+
+;;;###autoload
+(defun +jg-sclang-save-and-run-line ()
+  (interactive)
+  (basic-save-buffer)
+  (sclang-eval-line)
+  )

@@ -16,7 +16,7 @@
 
 (map! :map jg-sclang-mode-map
       :v "RET" #'sclang-eval-region
-      :n "RET" #'sclang-eval-line
+      :n "RET" #'+jg-sclang-save-and-run-line
       :localleader
       "e" #'+jg-sclang-clear-and-run-buffer
       "d" #'sclang-dump-interface

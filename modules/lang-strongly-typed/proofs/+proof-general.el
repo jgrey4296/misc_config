@@ -20,6 +20,10 @@
              #'librarian-insert-minor-mode
              )
 
+  (setq coq-prog-name "rocq"
+        coq-prog-args '("repl" "-emacs")
+        )
+
   (setq-hook! 'coq-mode-hook
     code-shy-fold-patterns (list "%s-- %s %s" "%s-- %s %s")
     code-shy-block-depth 1

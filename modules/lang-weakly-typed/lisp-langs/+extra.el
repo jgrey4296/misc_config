@@ -42,8 +42,7 @@
   :init
   (advice-add 'describe-function-1 :after #'elisp-demos-advice-describe-function-1)
   (advice-add 'helpful-update      :after #'elisp-demos-advice-helpful-update)
-  :config
-  (advice-add 'elisp-demos--search :around #'+jg-lisp-add-elisp-demos))
+  )
 
 (use-package! find-func)
 
@@ -55,7 +54,7 @@
 
 (speckler-setq! lisp ()
   elisp-demos-user-files (list
-                          (expand-file-name "elisp-demos.org" (dir!))
+                          (expand-file-name "code_examples/elisp-demos.org" templates-loc)
                           )
   )
 

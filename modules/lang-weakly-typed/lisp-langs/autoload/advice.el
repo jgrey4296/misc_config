@@ -219,29 +219,3 @@ Adapted from URL `https://www.reddit.com/r/emacs/comments/d7x7x8/finally_fixing_
               (desired-indent)
               (normal-indent))))))
 
-;;;###autoload
-(defun +jg-lisp-add-elisp-demos (fn symbol)
-  "Add custom locations to search for elisp edemos
-
-Intended as :around advice for `elisp-demos--search'."
-  (let ((org-inhibit-startup t)
-        (ex-file (expand-file-name "emacs-examples.org" doom-docs-dir))
-        enable-dir-local-variables
-        org-mode-hook)
-    (or (funcall fn symbol)
-        (when (f-exists? ex-file)
-        (with-file-contents! ex-file
-          (save-excursion
-            (when (re-search-backward
-                   (format "^\\*+[ \t]+\\(?:TODO \\)?%s$"
-                           (regexp-quote (symbol-name symbol)))
-                   nil t)
-              (forward-line 1)
-              (let ((demos
-                     (string-trim
-                      (buffer-substring-no-properties
-                       (point) (if (re-search-forward "^\\*+ " nil t)
-                                   (line-beginning-position)
-                                 (point-max))))))
-                (unless (string-blank-p demos)
-                  demos)))))))))

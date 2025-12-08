@@ -26,10 +26,9 @@
   custom-file                     (expand-file-name "emacs/custom.el" user-cache-dir)
   backup-directory-alist          (list `(".*" . ,(expand-file-name ".local/backups" doom-emacs-dir)))
   org-directory                   (f-canonical (expand-file-name "~/.config/homepage/submodules_/orgfiles/"))
-  pyvenv-default-virtual-env-name (expand-file-name "mamba/envs/" user-cache-dir)
   server-auth-dir                 (expand-file-name "secrets/emacs" user-config-dir)
   native-comp-eln-load-path       (list (expand-file-name "cache/eln" doom-local-dir))
-  docs-dir                        (expand-file-name "docs" templates-loc)
+  doom-docs-dir                   (expand-file-name "code_examples" templates-loc)
   bookmark-default-file (pcase system-type
                           ('darwin (expand-file-name "emacs/bookmarks/bookmarks.mac" user-cache-dir))
                           ('gnu/linux (expand-file-name "emacs/bookmarks/bookmarks.linux" user-cache-dir))
@@ -47,6 +46,7 @@
                        )
   find-function-C-source-directory emacs-lisp-c-src-dir
   find-library-source-path (+jg-lisp-setup-library-source)
+
   )
 
 (add-to-list 'load-path (expand-file-name "~/.local/modules"))

@@ -6,29 +6,21 @@
 ;; See footer for licenses/metadata/notes as applicable
 ;;-- end Header
 
-;;;###package coq
 (use-package! proof-general
-  :commands (proof-mode proofgeneral coq-mode)
   :init
   (setq proof-splash-enable nil)
   :config
-  (set-face-attribute 'proof-locked-face nil
-                      :inverse-video t
-                      :underline nil
-                      )
-  (add-hook! 'coq-mode-hook
-             #'librarian-insert-minor-mode
-             )
-
-  (setq coq-prog-name "rocq"
-        coq-prog-args '("repl" "-emacs")
-        )
-
-  (setq-hook! 'coq-mode-hook
-    code-shy-fold-patterns (list "%s-- %s %s" "%s-- %s %s")
-    code-shy-block-depth 1
+  (after! proof-faces
+    (set-face-attribute 'proof-locked-face nil
+                        :inverse-video nil
+                        :underline t
+                        )
     )
-
+  (setq proof-splash-enable nil
+        proof-three-window-enable nil
+        coq-compile-before-require t
+        coq-accept-proof-using-suggestion 'never
+        )
   )
 
 (use-package! company-coq
@@ -44,25 +36,21 @@
   (add-to-list 'company-coq-disabled-features 'company)
   )
 
-(defvar jg-coq-mode-map (make-sparse-keymap))
-(defvar jg-coq-proof-mode-map (make-sparse-keymap))
-
-(after! proof-general
-  (setq proof-splash-enable nil
-        proof-three-window-enable nil
-        coq-compile-before-require t
-        coq-accept-proof-using-suggestion 'never
-        )
+(setq-hook! 'coq-mode-hook
+  tab-width proof-indent
+  comment-line-break-function nil
+  code-shy-fold-patterns (list "%s-- %s %s" "%s-- %s %s")
+  code-shy-block-depth 1
   )
 
-(setq-hook! 'coq-mode-hook
-  ;; Doom syncs other indent variables with `tab-width'; we trust major modes to
-  ;; set it -- which most of them do -- but coq-mode doesn't, so...
-  tab-width proof-indent
-  ;; HACK Fix #2081: Doom continues comments on RET, but coq-mode doesn't have a
-  ;;      sane `comment-line-break-function', so...
-  comment-line-break-function nil)
+(add-hook! 'coq-mode-hook
+           #'librarian-insert-minor-mode
+           )
 
+(speckler-setq! coq ()
+  coq-prog-name "rocq"
+  coq-prog-args '("repl")
+  )
 (speckler-add! popup ()
   '(coq
     ("^\\*\\(?:response\\|goals\\)\\*" :ignore t)

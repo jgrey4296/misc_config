@@ -1,5 +1,8 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
+(defvar jg-coq-mode-map (make-sparse-keymap))
+(defvar jg-coq-proof-mode-map (make-sparse-keymap))
+
 ;;-- coq
 ;; (evil-make-intercept-map jg-coq-mode-map)
 ;; (evil-make-intercept-map jg-coq-proof-mode-map)

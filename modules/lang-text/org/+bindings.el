@@ -6,7 +6,6 @@
 (set-keymap-parent jg-org-mode-map jg-org-base-map)
 
 (map! :leader
-      :desc "Insert Timestamp"  "i t"   #'org-time-stamp
 
       (:prefix ("n" . "notes")
       :desc "Active org-clock"               "o" #'org-clock-goto

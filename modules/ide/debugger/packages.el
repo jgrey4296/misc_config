@@ -10,5 +10,5 @@
 (package! realgud-node-debug)
 
 (package! dap-mode)
-
+;; (package! dape)
 (package! edebug-x)

@@ -39,7 +39,7 @@
              #'outline-minor-mode
              )
 
-  (setq-hook! 'conf-toml-mode-hook
+  (setq-hook! '(conf-toml-mode-hook toml-mode-hook)
     ;; outline-regexp "\[\[?[a-zA-Z0-9\.]+\]?\]"
     outline-regexp (rx (| (: (1+ "[") (1+ (any "a-zA-Z0-9\.")) (1+ "]"))
                           (: "# " (1+ "-") line-end)

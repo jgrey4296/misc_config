@@ -11,7 +11,7 @@
  :config     bindings disabled help search
  :config     ui ;; +light
 
- :experimentation vertico
+ ;; :experimentation
  :ui (ivy) ;; +prescient +fuzzy
  :ui helm hydra ibuffer minibuffer
  :ui popup ;; +poppy
@@ -60,7 +60,7 @@
  :lang-weakly-typed erlang-vms godot
  :lang-weakly-typed ruby ;; +rbenv +rvm +chruby
 
- :tools pdfs
+ :tools pdfs ledger
  :tools mail term eval
  :tools processes
  :tools calendar calc

@@ -17,7 +17,13 @@
 
   )
 
-(use-package! clips-mode       :defer t)
+(use-package! clips-mode
+  :config
+  (add-hook! 'clips-mode-hook
+             #'font-lock-mode
+             )
+
+  )
 
 (speckler-add! auto-modes ()
   '(rules

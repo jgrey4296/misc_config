@@ -46,7 +46,7 @@
  :lang-dsl make
 
  :lang-strongly-typed haskell
- :lang-strongly-typed (proofs) ;; coq, idris, agda, fstar, lean)
+ :lang-strongly-typed (proofs +coq +fstar) ;; idris, agda, lean)
  :lang-strongly-typed (rust +llvm)
  :lang-strongly-typed jvm-langs dotnet-langs ml-langs
 

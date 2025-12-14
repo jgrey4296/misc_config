@@ -6,19 +6,9 @@
 ;; See footer for licenses/metadata/notes as applicable
 ;;-- end Header
 
-(use-package! proof-general
-  :init
-  (setq proof-splash-enable nil)
+(use-package! coq
   :config
-  (after! proof-faces
-    (set-face-attribute 'proof-locked-face nil
-                        :inverse-video nil
-                        :underline t
-                        )
-    )
-  (setq proof-splash-enable nil
-        proof-three-window-enable nil
-        coq-compile-before-require t
+  (setq coq-compile-before-require t
         coq-accept-proof-using-suggestion 'never
         )
   )

@@ -32,7 +32,6 @@
   (add-transient-hook! #'company-yasnippet (require 'yasnippet))
 
   :config
-  (add-to-list 'doom-debug-variables '(yas-verbosity . 3))
 
   ;;-- advice
   ;; HACK In case `+snippets-dir' and `doom-snippets-dir' are the same, or duplicates exist in `yas-snippet-dirs'.

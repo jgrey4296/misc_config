@@ -33,7 +33,6 @@
     (setq magit-credential-cache-daemon-socket (doom-glob (or (getenv "XDG_CACHE_HOME") "~/_cache_")
                                                           "git/credential/socket")))
 
-  (add-to-list 'doom-debug-variables 'magit-refresh-verbose)
 
   ;; Add additional switches that seem common enough
   (transient-append-suffix 'magit-fetch "-p" '("-t" "Fetch all tags" ("-t" "--tags")))

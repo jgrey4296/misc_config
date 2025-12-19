@@ -1,7 +1,8 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; emacs/jg-vc/packages.el
 
-(package! magit)
+(package! cond-let :pin "288b7d36563223ebaf64cb220a3b270bdffb63f1") ; 0.2.0
+(package! magit :pin "4800ace210d5e...")
 (package! magit-todos )
 (package! git-cliff)
 (package! vdiff-magit)

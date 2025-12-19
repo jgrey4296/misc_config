@@ -39,7 +39,6 @@
     (custom-declare-face '+org-todo-onhold  '((t (:inherit (bold warning org-todo)))) "")
     (custom-declare-face '+org-todo-cancel  '((t (:inherit (bold error org-todo)))) ""))
   ;; Automatic indent detection in org files is meaningless
-  (add-to-list 'doom-detect-indentation-excluded-modes 'org-mode)
 
   )
 

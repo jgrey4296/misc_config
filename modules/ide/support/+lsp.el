@@ -99,7 +99,6 @@
   (setq lsp-client-packages nil)
 
   :config
-  (add-to-list 'doom-debug-variables 'lsp-log-io)
 
   (setq lsp-xml-jar-file (expand-file-name "org.eclipse.lsp4xml-0.3.0-uber.jar" lsp-server-install-dir)
         lsp-groovy-server-file (expand-file-name "groovy-language-server-all.jar" lsp-server-install-dir))

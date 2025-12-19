@@ -20,7 +20,6 @@
   :config
   ;; variable-width indentation is superior in elisp. Otherwise, `dtrt-indent'
   ;; and `editorconfig' would force fixed indentation on elisp.
-  (add-to-list 'doom-detect-indentation-excluded-modes 'emacs-lisp-mode)
 
   ;; Enhance elisp syntax highlighting, by highlighting Doom-specific
   ;; constructs, defined symbols, and truncating :pin's in `package!' calls.

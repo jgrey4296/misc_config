@@ -56,7 +56,7 @@
 
 
 (speckler-add! ibuffer-filters () ;; special
-  :override t
+  :extend t
   '(stars       (and (name . "\\`\\*\\w")
                      (not (saved . "eww"))))
   '(space-star  (or (name . "\\`\\*\\W")
@@ -85,7 +85,7 @@
   )
 
 (speckler-add! ibuffer-filters () ;; programming
-  :override t
+  :extend t
   '(python      (or (derived-mode . python-mode)
                     (derived-mode . python-base-mode)
                     (file-extension . "\\.py'")
@@ -101,20 +101,26 @@
                     (derived-mode . csproj-mode)
                     (derived-mode . sln-mode)
                     ))
+  '(rocq        (or (derived-mode . coq-mode)
+                    (file-extension . "\\.v'")
+                    ))
   '(kotlin      (or (derived-mode . kotlin-mode)
-                    (derived-mode . kotlin-ts-mode)))
+                    (derived-mode . kotlin-ts-mode)
+                    ))
   '(rust        (derived-mode . rustic-mode))
   '(elixir      (derived-mode . elixir-mode))
   '(lisp        (and (or (derived-mode . emacs-lisp-mode)
                          (file-extension . "\\.el"))
-                     (not (saved . "stars"))))
+                     (not (saved . "stars"))
+                     ))
   '(programming (or (derived-mode . prog-mode)
                     (mode . ess-mode)
-                    (mode . compilation-mode)))
+                    (mode . compilation-mode)
+                    ))
   '(tests        (and (derived-mode . prog-mode)
                       (or (name . "test_")
-                          (name . ".+?[-_]tests?\\."))))
-
+                          (name . ".+?[-_]tests?\\."))
+                      ))
   '(web         (or (derived-mode . sgml-mode)
                     (derived-mode . css-mode)
                     (mode . javascript-mode)
@@ -125,7 +131,7 @@
   )
 
 (speckler-add! ibuffer-filters () ;; text
-  :override t
+  :extend t
   '(text        (or (saved . "org")
                     (mode . markdown-mode)
                     (saved . "TeX")
@@ -162,7 +168,7 @@
 ;; Groups:
 
 (speckler-add! ibuffer-groups () ;; default
-  :override t
+  :extend t
   '(default
     ("*Processes*" (and (not (derived-mode . shell-mode))
                         (process)))
@@ -186,6 +192,7 @@
     ;; ("*Project: writing" (projectile-root . "jgrey4296.github.io"))
     ("Lisp"        (saved . "lisp"))
     ("Python"      (saved . "python"))
+    ("Rocq"        (saved . "rocq"))
     ("Rust"        (saved . "rust"))
     ("Elixir"      (saved . "elixir"))
     ("Kotlin"      (saved . "kotlin"))
@@ -214,7 +221,7 @@
   )
 
 (speckler-add! ibuffer-groups () ;; starred, general
-  :override t
+  :extend t
   '(starred
     ("*Starred*"   (saved . "stars"))
     ("*Special*"   (saved . "special"))
@@ -229,7 +236,7 @@
   )
 
 (speckler-add! ibuffer-groups () ;; text
-  :override t
+  :extend t
   '(text
     ("Org"         (saved . "org"))
     ("Markdown"    (mode  . markdown-mode))
@@ -240,7 +247,7 @@
   )
 
 (speckler-add! ibuffer-groups () ;; projects, programming, tests
-  :override t
+  :extend t
   '(projects
     ;; ("*Starred*" (starred-name))
     ("*Project: configs*" (projectile-root . "__config"))

@@ -6,12 +6,13 @@
 ;; See footer for licenses/metadata/notes as applicable
 ;;-- end Header
 
-(use-package! coq
-  :config
-  (setq coq-compile-before-require t
-        coq-accept-proof-using-suggestion 'never
-        )
+(defun coq-init-smie ()
+  (smie-setup coq-smie-grammar #'coq-smie-rules
+              :forward-token #'coq-smie-forward-token
+              :backward-token #'coq-smie-backward-token)
   )
+
+
 
 (use-package! company-coq
   :after coq-mode
@@ -34,12 +35,15 @@
   )
 
 (add-hook! 'coq-mode-hook
+           #'coq-init-smie
            #'librarian-insert-minor-mode
            )
 
 (speckler-setq! coq ()
   coq-prog-name "rocq"
   coq-prog-args '("repl")
+  coq-compile-before-require t
+  coq-accept-proof-using-suggestion 'never
   )
 (speckler-add! popup ()
   '(coq

@@ -7,6 +7,7 @@
 (package! doom-modeline)
 (package! highlight-indent-guides)
 (package! highlight-parentheses)
+(package! highlight-numbers)
 (package! hilit-chg)
 (package! hl-todo)
 (package! rainbow-delimiters)
@@ -22,7 +23,9 @@
 (package! font-lock-studio)
 (package! font-lock+       :recipe (:host github :repo "emacsmirror/font-lock-plus"))
 
-(package! transient :recipe (:host github :repo "magit/transient" :branch "main"))
+(package! transient
+  :recipe (:host github :repo "magit/transient" :branch "main")
+  :pin "453376f2f1...")
 
 (package! treemacs)
 (package! treemacs-evil)

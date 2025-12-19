@@ -10,9 +10,7 @@
 
 (use-package! eglot
   :commands (eglot eglot-ensure)
-  ;; :hook (eglot-managed-mode . +lsp-optimization-mode)
   :config
-  (add-to-list 'doom-debug-variables '(eglot-events-buffer-size . 0))
 
   )
 

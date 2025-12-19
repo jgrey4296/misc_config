@@ -32,7 +32,6 @@
     )
 
   :config
-  (add-to-list 'doom-debug-variables 'org-export-async-debug)
 
   (+org-init-appearance-h)
   (local-load! "+tags")

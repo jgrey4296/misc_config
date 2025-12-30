@@ -16,8 +16,8 @@
   :config
   (add-hook 'jg-ui-transient-toggles-hook #'+jg-librarian-build-librarian-transient 90)
   (add-hook 'speckler-hook #'librarian-tag-mode-rebuild-tag-database)
-  (setq librarian--browse-default "firefox")
   ;; choose backends?
+  (librarian--browse-load-variants)
   )
 
 (use-package! xref

@@ -15,6 +15,7 @@
 
   librarian-tag-mode-substitution-sources      (expand-file-name "~/.config/bibliography/tags/substitutions")
   librarian-tag-mode-main-loc                  (expand-file-name "~/.config/bibliography/.temp/tags/canon.tags")
+  librarian--browse-default "vivaldi.vivaldi-stable"
   )
 (speckler-add! online-search ()
   :override t

@@ -25,7 +25,7 @@
   :key "b"
   :desc (format "Browser: %10s" librarian--browse-default)
   :transient nil
-  (librarian-browser-select)
+  (librarian-browse-select)
   )
 (transient-call! librarian-rebuild-database ()
   "Rebuild Tag Database"

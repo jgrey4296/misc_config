@@ -42,7 +42,7 @@
   librarian--biblio-edit-temp-tex-loc    (expand-file-name ".tex/" user-cache-dir)
   librarian--biblio-pdf-loc (pcase system-type
                              ('darwin (expand-file-name "~/pdf_library"))
-                             ('gnu/linux "/media/john/data/library/pdfs"))
+                             ('gnu/linux "/media/john/data/library/pdfs_structured"))
   librarian-biblio-library-loc   (expand-file-name "~/.config/bibliography/main/")
   librarian-biblio-unsourced-loc (expand-file-name "~/.config/bibliography/in_progress/to_source_misc.bib")
   org-ref-clean-bibtex-entry-hook librarian--biblio-clean-hooks

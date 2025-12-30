@@ -62,6 +62,7 @@
       :desc "Get Url Raw "          "N"       #'jg-bibtex-url-raw
       :desc "Count Entries"         "C"       #'bibtex-count-entries
       :desc "First Untagged Entry"  "t"       #'+jg-bibtex-first-entry-with-no-tags
+      :desc "Extract Pages"         "E"       #'+jg-bibtex-extract-pages
 )
 
 (map! :map jg-bibtex-mode-map ;; refile

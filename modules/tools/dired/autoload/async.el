@@ -198,7 +198,7 @@
         )
     (make-process :name "py-server"
                   :buffer buffer
-                  :command (list "python" "-m" "http.server"
+                  :command (list "python3" "-m" "http.server"
                                  "--directory" location
                                  "--bind" "127.0.0.1"
                                  "8000")

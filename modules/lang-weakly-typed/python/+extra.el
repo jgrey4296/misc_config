@@ -9,14 +9,6 @@
 (advice-add 'pip-requirements-complete-at-point :before #'+python--init-completion-a)
 (advice-add 'pip-requirements-mode              :around #'+python--inhibit-pip-requirements-fetch-packages-a)
 
-(use-package! company-anaconda
-  :after anaconda-mode
-  :commands 'company-anaconda
-  :config
-  (speckler-add! company ()
-    '(anaconda-mode (:mode company-anaconda))
-    )
-  )
 
 (use-package! company-jedi
   :when (modulep! :ide company)

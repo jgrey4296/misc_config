@@ -16,5 +16,13 @@
     )
   )
 
+(use-package! company-anaconda
+  :after anaconda-mode
+  :commands 'company-anaconda
+  :config
+  (speckler-add! company ()
+    '(anaconda-mode (:mode company-anaconda))
+    )
+  )
 
 ;;; +mamba.el ends here

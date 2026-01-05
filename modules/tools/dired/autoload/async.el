@@ -90,7 +90,7 @@
 (defun +jg-dired-cookiecutter ()
   (interactive)
   (let* ((templates (mapcar #'f-base (f-directories jg-snippets-project-templates-dir)))
-         (chosen (ivy-read "Project Template: " templates :require-match t))
+         (chosen (ivy-read "Project Template: " templates :require-match nil))
          (name (format "proj_name=%s" (read-string "Project Name: ")))
          (buffer (get-buffer-create "*cookiecutter-async*"))
         )

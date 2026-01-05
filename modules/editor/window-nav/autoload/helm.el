@@ -95,14 +95,20 @@
             (if (and split (>= (length split) 2))
                 (let* ((lineno (if (nth 1 split) (nth 1 split) "1"))                 ;; Normalize Size of this
                        (norm-ln (s-append (s-repeat (- 6 (string-width lineno)) " ") lineno))
-                       (str    (nth 2 split))                                        ;; The Actual Line:
-                       (sub    str)                                                  ;;(substring str (or (s-index-of "HREF=" str) 0)))
-                       (tag-index (s-index-of " :" sub))                             ;;(s-index-of "TAGS=\"" sub))
-                       (url (substring sub 0 tag-index))                             ;;(string-width "HREF=\"") (- tag_index 2)))
-                       (tags (substring sub (+ tag-index 2) nil))
-                       (chopped_tags (substring tags 0 (min 100 (string-width tags)))) ;; Normalize the lengths of tags so urls are aligned
-                       (norm-tags (s-append (s-repeat (- 100 (string-width chopped_tags)) " ") chopped_tags))
+                       ;; The Actual Line:
+                       (str   (nth 2 split))
+                       (sub    str)
+                       (tag-index (or (s-index-of " :" sub) (length sub)))
+                       (url (substring sub 0 tag-index))
+                       tags
                        )
+                  (when (< tag-index (length sub))
+                    (setq tags (substring sub (+ tag-index 2) nil)
+                          ;; Normalize the lengths of tags so urls are aligned
+                          chopped_tags (substring tags 0 (min 100 (string-width tags)))
+                          norm-tags (s-append (s-repeat (- 100 (string-width chopped_tags)) " ") chopped_tags)
+                       )
+                    )
                   `(,(concat (propertize norm-ln 'face 'helm-grep-lineno)
                              (propertize (concat ": " norm-tags) 'face 'rainbow-delimiters-depth-3-face)
                              (propertize (concat ": " url) 'face 'rainbow-delimiters-depth-1-face))

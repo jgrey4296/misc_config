@@ -7,7 +7,7 @@
 ;; (evil-make-intercept-map jg-dired-mode-map)
 (with-state! 'normal #'+jg-ivy-similar-buffer)
 
-(set-keymap-parent jg-dired-change-map jg-binding-change-map)
+(set-keymap-parent jg-dired-change-map jgb-change--root-map)
 
 (map! :map jg-dired-mode-map ;; groups
       (:prefix ("M" . "Mark"))

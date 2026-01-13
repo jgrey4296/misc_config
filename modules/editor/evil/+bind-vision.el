@@ -1,6 +1,6 @@
 ;;; +evil-vision-bindings.el -*- lexical-binding: t; -*-
 
-(map! :map jge-vision-map
+(map! :map jgb-vision--root-map
       ;; RET, 1, aAdocrjkIi
       :desc "Visual Mark Mode"    "0" #'evil-visual-mark-mode
       :desc "Visual Mark Mode"    "-" #'+jg-evil-delete-markers

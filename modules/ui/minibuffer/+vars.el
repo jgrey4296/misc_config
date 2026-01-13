@@ -15,15 +15,15 @@
   "A list of all core keymaps used for the minibuffer. adapted from evil-collection"
   )
 
-(defvar jg-minibuffer-ivy-map (make-sparse-keymap))
+(def-named-keymap! jg-minibuffer-ivy-map :sparse t)
 
-(defvar jg-minibuffer-local-map (make-sparse-keymap))
+(def-named-keymap! jg-minibuffer-local-map :sparse t)
 
-(defvar jg-minibuffer-read-expression-map (make-sparse-keymap))
+(def-named-keymap! jg-minibuffer-read-expression-map :sparse t)
 
-(defvar jg-minibuffer-evil-ex-completion-map (make-sparse-keymap))
+(def-named-keymap! jg-minibuffer-evil-ex-completion-map :sparse t)
 
-(defvar jg-minibuffer-evil-ex-search-keymap (make-sparse-keymap))
+(def-named-keymap! jg-minibuffer-evil-ex-search-keymap :sparse t)
 
 ;;-- end keymaps
 

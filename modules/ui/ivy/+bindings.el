@@ -32,7 +32,7 @@
 
 (map! :map ivy-occur-grep-mode-map
       :after ivy
-      :desc "Do Ops" "g" jg-binding-operator-map
+      :desc "Do Ops" "g" jge-operator-map
       )
 
 (map! :map counsel-ag-map

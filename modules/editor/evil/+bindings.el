@@ -17,13 +17,13 @@
 ;;-- stitching together
 (map! :map jge-normal-state-map
       :desc "Do Ops"        "g"   jge-operator-map
-      :desc "Visual Ops"    "z"   jge-vision-map
-      :desc "Jumping"       "s"   jge-jump-map
+      :desc "Visual Ops"    "z"   jgb-vision--root-map
+      :desc "Jumping"       "s"   jgb-jump--root-map
       )
 
 (map! :map jge-visual-state-map
       :desc "Do Ops"       "g"  jge-operator-map
-      :desc "Visual Ops"   "z"  jge-vision-map
+      :desc "Visual Ops"   "z"  jgb-vision--root-map
       :desc "Inner Select" "i"  jge-inner-txtobj-map
       :desc "Outer Select" "o"  jge-outer-txtobj-map
       :desc "Jumping"      "s"  jge-jump-map

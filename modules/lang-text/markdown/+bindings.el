@@ -1,14 +1,14 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
 
-(defvar-keymap jg-binding-markdown-map)
+(def-named-keymap! jg-markdown-map)
 
 (map! :map jge-helm-map
       :desc "Post Ivy" "p" #'+jg-markdown-post-ivy
 
       )
 
-(map! :map jg-binding-markdown-map
+(map! :map jg-markdown-map
         :localleader
         "'" #'markdown-edit-code-block
         "o" #'markdown-open
@@ -18,7 +18,7 @@
         "p" #'grip-mode
         )
 
-(map! :map jg-binding-markdown-map
+(map! :map jg-markdown-map
       :localleader
       :prefix ("i" . "insert")
       :desc "Table Of Content"   :n "T" #'markdown-toc-generate-toc
@@ -49,7 +49,7 @@
       :desc "Wiki link"          :n "w" #'markdown-insert-wiki-link
 )
 
-(map! :map jg-binding-markdown-map
+(map! :map jg-markdown-map
       :localleader
       :prefix ("t" . "toggle")
       :desc "Inline LaTeX"     :n "e" #'markdown-toggle-math
@@ -61,7 +61,7 @@
       :desc "GFM checkbox"     :n "x" #'markdown-toggle-gfm-checkbox
 )
 
-(map! :map jg-binding-markdown-map
+(map! :map jg-markdown-map
         :n "TAB" #'markdown-cycle
         :n [backtab] #'markdown-shifttab
         ;; :i "M-*" #'markdown-insert-list-item
@@ -79,8 +79,8 @@
         )
 
 (after! markdown-mode
-  (setq markdown-mode-map jg-binding-markdown-map
-        gfm-mode-map      jg-binding-markdown-map
+  (setq markdown-mode-map jg-markdown-map
+        gfm-mode-map      jg-markdown-map
         )
   )
 (after! evil-markdown

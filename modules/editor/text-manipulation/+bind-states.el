@@ -7,7 +7,7 @@
       :desc "Select Whitespace" "v SPC"      #'+jg-text-visual-select-whitespace
       )
 
-(map! :map jge-vision-map
+(map! :map jgb-vision--root-map
       :prefix ("i" . "Invisible")
       :desc "Add"                       "a"   #'+jg-text-make-invisible
       :desc "Delete"                    "d"   #'+jg-text-delete-invisible

@@ -14,7 +14,6 @@
   (keymap-global-set "C-c ]" #'+jg-text-insert-rparen)
   )
 
-
 (map! :leader
       :desc "Clear All"            "r K" #'+jg-text-clear-all
       :desc "Insert Random Word"   "i w" #'+jg-text-insert-random-word
@@ -58,3 +57,10 @@
       "#" (cmd! (insert "£"))
       )
 
+(map! :map (prog-mode-map text-mode-map)
+      :nv "c" jgb-change--text-map
+      :n  "z" jgb-vision--text-map
+      :n  "s" jgb-jump--text-map
+      :nv "[" jgb-motion--text-b-map
+      :nv "]" jgb-motion--text-f-map
+      )

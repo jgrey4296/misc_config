@@ -9,18 +9,19 @@
     org-agenda-mode dired-mode)
   "What modes to enable `hl-line-mode' in.")
 
-(defvar jg-evil-treemacs-state-map           (make-sparse-keymap "jg-evil-treemacs-state-map"))
 
-(defvar jg-treemacs-project-map              (make-sparse-keymap "jg-treemacs-project-map"))
+(def-named-keymap! jg-evil-treemacs-state-map :sparse t)
 
-(defvar jg-treemacs-toggle-map               (make-sparse-keymap "jg-treemacs-toggle-map"))
+(def-named-keymap! jg-treemacs-project-map    :sparse t)
 
-(defvar jg-treemacs--fringe-indicator-bitmap (make-sparse-keymap "jg-treemacs--fringe-indicator-bitmap"))
+(def-named-keymap! jg-treemacs-toggle-map     :sparse t)
 
-(defvar jg-treemacs-workspace-map            (make-sparse-keymap "jg-treemacs-workspace-map"))
+(def-named-keymap! jg-treemacs--fringe-indicator-bitmap :sparse t)
 
-(defvar jg-treemacs-copy-map                 (make-sparse-keymap "jg-treemacs-copy-map"))
+(def-named-keymap! jg-treemacs-workspace-map  :sparse t)
 
-(defvar jg-treemacs-node-visit-map           (make-sparse-keymap "jg-treemacs-node-visit-map"))
+(def-named-keymap! jg-treemacs-copy-map       :sparse t)
 
-(defvar jg-treemacs-mode-map                 (make-sparse-keymap "jg-treemacs-mode-map"))
+(def-named-keymap! jg-treemacs-node-visit-map  :sparse t)
+
+(def-named-keymap! jg-treemacs-mode-map        :sparse t)

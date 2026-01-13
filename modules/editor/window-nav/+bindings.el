@@ -1,7 +1,7 @@
 ;;; +bindings.el -*- lexical-binding: t; -*-
 
 
-(map! :map jg-help-map
+(map! :map jgb-help-map
       :after jg-help-bindings
       :desc "Load Bookmarks"              "r b" #'+jg-nav-bookmarks-load
 

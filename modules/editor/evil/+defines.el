@@ -51,10 +51,9 @@ directives. By default, this only recognizes C directives.")
 (def-named-keymap! jge-visual-state-map)
 (def-named-keymap! jge-insert-state-map)
 
-(def-named-keymap! jge-b-op-motion-map)
-(def-named-keymap! jge-f-op-motion-map)
-(def-named-keymap! jge-inner-txtobj-map)
-(def-named-keymap! jge-outer-txtobj-map)
+(def-keymap-subtypes! jge-op-motion fw bw)
+(def-keymap-subtypes! jge-txtobj inner outer)
+(def-keymap-subtypes! jge-motion op-fw op-bw)
 
 (def-named-keymap! jge-helm-map)
 (def-named-keymap! jge-operator-map)

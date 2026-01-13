@@ -13,7 +13,7 @@
 (def-keymap-subtypes! jgb-jump text nontext)
 (def-keymap-subtypes! jgb-change text nontext)
 (def-keymap-subtypes! jgb-vision text nontext)
-(def-keymap-subtypes! jgb-motion text nontext)
+(def-keymap-subtypes! jgb-motion text-f text-b non-f non-b)
 
 (def-named-keymap! jgb-help-map)
 (def-named-keymap! jgb-info-map :sparse t)

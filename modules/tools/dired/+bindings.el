@@ -91,7 +91,6 @@
        )
 )
 
-
 (map! :map jg-dired-mode-map ;; describe
       :prefix "d"
       :desc "Diff Dirs"        :n "TAB" #'dired-compare-directories

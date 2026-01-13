@@ -54,12 +54,12 @@
 ;;-- end highlight
 
 ;;-- motion
-(map! :map jge-b-motion-map
+(map! :map jge-motion--op-bw-map
       :desc "Narrow"       "RET"  #'+jg-ui-narrowing-move-focus-backward
       :desc "Todo"          "t"   #'hl-todo-previous
       )
 
-(map! :map jgb-f-motion-map
+(map! :map jge-motion--op-fw-map
       :desc "Narrow"       "RET"  #'+jg-ui-narrowing-move-focus-forward
       :desc "Todo"         "t"   #'hl-todo-next
 )

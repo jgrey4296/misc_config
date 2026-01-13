@@ -1,9 +1,9 @@
 ;;; +bind-extra.el -*- lexical-binding: t; no-byte-compile: t; -*-
 
 ;;-- zimmerframe
-(map! :map jg-f-op-motion-map
+(map! :map jge-motion--op-fw-map
       :desc "Walk Next" "z" #'zimmerframe-next
-      :map jg-b-op-motion-map
+      :map jge-motion--op-bw-map
       :desc "Walk Back" "z" #'zimmerframe-prev
       )
 
@@ -31,13 +31,13 @@
 
 ;;-- end carousel
 
-(map! :map jge-b-op-motion-map
+(map! :map jge-motion--op-bw-map
       :desc "ring window"  "r"    #'carousel-move-focus-alt
       :desc "ring oldest"  "R"    #'carousel-goto-oldest
       :desc "workspace"    "w"    #'+workspace/switch-left
       )
 
-(map! :map jge-f-op-motion-map
+(map! :map jge-motion--op-fw-map
       :desc "ring window"  "r"    #'carousel-move-focus
       :desc "ring newest"  "R"    #'carousel-goto-newest
       :desc "workspace"    "w"    #'+workspace/switch-right

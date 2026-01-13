@@ -10,50 +10,50 @@
       )
 
 (map! :map jg-dired-change-map ;; change
-      :desc "copy"                :n "c" #'dired-do-copy
-      :desc "copy-async"          :n "C" #'dired-async-do-copy
-      :desc "rename"              :n "r" #'+jg-dired-rename
-      :desc "move-async"          :n "m" #'dired-do-rename
-      :desc "move-async"          :n "M" #'dired-async-do-rename
-      :desc "New Dir"             :n "n" #'dired-create-directory
+      :desc "copy"                "c" #'dired-do-copy
+      :desc "copy-async"          "C" #'dired-async-do-copy
+      :desc "rename"              "r" #'+jg-dired-rename
+      :desc "move-async"          "m" #'dired-do-rename
+      :desc "move-async"          "M" #'dired-async-do-rename
+      :desc "New Dir"             "n" #'dired-create-directory
 
       (:prefix "z"
-       :desc "named compress"         :n "n" #'dired-do-compress-to
-       :desc "compress"               :n "z" #'dired-do-compress
-       :desc "Zip File List"          :n "l" #'+jg-dired-async-list-zip-files
-       :desc "Zip Extract File"       :n "e" #'+jg-dired-extract-from-zip-file
+       :desc "named compress"         "n" #'dired-do-compress-to
+       :desc "compress"               "z" #'dired-do-compress
+       :desc "Zip File List"          "l" #'+jg-dired-async-list-zip-files
+       :desc "Zip Extract File"       "e" #'+jg-dired-extract-from-zip-file
        )
 
       (:prefix "l"
-       :desc "symlink"             :n "s" #'dired-do-symlink
-       :desc "Relative Symlink"    :n "r" #'dired-do-relsymlink
-       :desc "Hardlink"            :n "h" #'dired-do-hardlink
+       :desc "symlink"             "s" #'dired-do-symlink
+       :desc "Relative Symlink"    "r" #'dired-do-relsymlink
+       :desc "Hardlink"            "h" #'dired-do-hardlink
        )
       )
 
 (map! :map jg-dired-change-map ;; change files
       :prefix "f"
-      :desc "Replace grep"        :n "G" #'dired-do-find-regexp-and-replace
-      :desc "kill"                :n "K" #'dired-do-delete
-      :desc "Global Match Rename" :n "R" #'+jg-dired-GLOBAL-do-rename-regexp
+      :desc "Replace grep"        "G" #'dired-do-find-regexp-and-replace
+      :desc "kill"                "K" #'dired-do-delete
+      :desc "Global Match Rename" "R" #'+jg-dired-GLOBAL-do-rename-regexp
 
-      :desc "Tesseract"           :n "t" #'+jg-dired-tesseract
-      :desc "copy"                :n "c" #'dired-async-do-copy
-      :desc "downcase"            :n "j" #'dired-downcase
-      :desc "upcase"              :n "k" #'dired-upcase
-      :desc "move"                :n "m" #'dired-async-do-rename
-      :desc "rename"              :n "r" #'+jg-dired-rename
-      :desc "Owner"               :n "o" #'dired-do-chown
-      :desc "Permissions"         :n "O" #'dired-do-chmod
+      :desc "Tesseract"           "t" #'+jg-dired-tesseract
+      :desc "copy"                "c" #'dired-async-do-copy
+      :desc "downcase"            "j" #'dired-downcase
+      :desc "upcase"              "k" #'dired-upcase
+      :desc "move"                "m" #'dired-async-do-rename
+      :desc "rename"              "r" #'+jg-dired-rename
+      :desc "Owner"               "o" #'dired-do-chown
+      :desc "Permissions"         "O" #'dired-do-chmod
 )
 
 (map! :map jg-dired-change-map ;; change dir
       :prefix "d"
-      :desc "Cookiecutter"    :n   "c" #'+jg-dired-cookiecutter
-      :desc "New Dir"         :n   "n" #'dired-create-directory
-      :desc "New Tasks Dir"   :n   "t" (cmd! (dired-create-directory ".tasks"))
-      :desc "New Docs Dir"    :n   "d" (cmd! (dired-create-directory "docs"))
-      :desc "New Tests Dir"   :n   "x" (cmd! (dired-create-directory "__tests"))
+      :desc "Cookiecutter"    "c" #'+jg-dired-cookiecutter
+      :desc "New Dir"         "n" #'dired-create-directory
+      :desc "New Tasks Dir"   "t" (cmd! (dired-create-directory ".tasks"))
+      :desc "New Docs Dir"    "d" (cmd! (dired-create-directory "docs"))
+      :desc "New Tests Dir"   "x" (cmd! (dired-create-directory "__tests"))
 )
 
 ;;; +bind-changes.el ends here

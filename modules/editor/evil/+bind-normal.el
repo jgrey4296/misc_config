@@ -46,8 +46,8 @@
       :desc "char"               "l"       #'evil-visual-char
       :desc "Restore selection"  "h"       #'evil-visual-restore
 
-      :desc "Inner Select"       "i" (cmd! (evil-visual-char) (set-transient-map jge-inner-txtobj-map))
-      :desc "Outer Select"       "o" (cmd! (evil-visual-char) (set-transient-map jge-outer-txtobj-map))
+      :desc "Inner Select"       "i" (cmd! (evil-visual-char) (set-transient-map jge-txtobj--inner-map))
+      :desc "Outer Select"       "o" (cmd! (evil-visual-char) (set-transient-map jge-txtobj--outer-map))
       )
 
 (map! :map jge-normal-state-map ;; paste

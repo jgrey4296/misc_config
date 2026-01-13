@@ -75,8 +75,4 @@
       "l" #'+jg-surround-list
       )
 
-(map! :map (prog-mode-map text-mode-map)
-      :nv "c" jgb-change--text-map
-      )
-
 ;;; change-map.el ends here

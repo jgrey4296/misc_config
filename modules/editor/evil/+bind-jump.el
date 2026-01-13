@@ -1,12 +1,12 @@
 ;;; +jump-map.el -*- lexical-binding: t; -*-
 
-(map! :map jge-jump-map ;; groups
+(map! :map jgb-jump--root-map ;; groups
       (:prefix ("k" . "Documentation"))
       (:prefix ("g" . "gtags"))
       (:prefix ("/" . "Search"))
       )
 
-(map! :map jge-jump-map ;; avy
+(map! :map jgb-jump--root-map ;; avy
       ;; 1 2 3 "u" "h"
       ;; :desc "Ivy resume"            "`"   #'ivy-resume
       "c" #'ignore
@@ -27,7 +27,7 @@
       :desc "Search buffer"         "s"   #'isearch-forward
       )
 
-(map! :map jge-jump-map ;; search
+(map! :map jgb-jump--root-map ;; search
       :prefix ("/" . "Search")
       :desc "Search Clear"                "c"         #'evil-ex-nohighlight
       :desc "Find File at point"          "F"         #'evil-find-file-at-point-with-line

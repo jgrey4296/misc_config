@@ -24,21 +24,21 @@
 (map! :map jge-visual-state-map
       :desc "Do Ops"       "g"  jge-operator-map
       :desc "Visual Ops"   "z"  jgb-vision--root-map
-      :desc "Inner Select" "i"  jge-inner-txtobj-map
-      :desc "Outer Select" "o"  jge-outer-txtobj-map
-      :desc "Jumping"      "s"  jge-jump-map
+      :desc "Inner Select" "i"  jge-txtobj--inner-map
+      :desc "Outer Select" "o"  jge-txtobj--outer-map
+      :desc "Jumping"      "s"  jgb-jump--root-map
       )
 
 (map! :map jge-motion-state-map
-      :desc "Backward Motion Op"  "["  jge-b-op-motion-map
-      :desc "Forward Motion Op"   "]"  jge-f-op-motion-map
+      :desc "Backward Motion Op"  "["  jge-motion--op-bw-map
+      :desc "Forward Motion Op"   "]"  jge-motion--op-fw-map
       )
 
 (map! :map jge-operator-state-map
-      :desc "Backward Motion Op"  "["  jge-b-op-motion-map
-      :desc "Forward Motion Op"   "]"  jge-f-op-motion-map
-      :desc "Inner Select"        "i"  jge-inner-txtobj-map
-      :desc "Outer Select"        "o"  jge-outer-txtobj-map
+      :desc "Backward Motion Op"  "["  jge-motion--op-bw-map
+      :desc "Forward Motion Op"   "]"  jge-motion--op-fw-map
+      :desc "Inner Select"        "i"  jge-txtobj--inner-map
+      :desc "Outer Select"        "o"  jge-txtobj--outer-map
       )
 
 ;; Override default evil maps
@@ -51,8 +51,8 @@
       evil-visual-state-map       jge-visual-state-map
       evil-operator-state-map     jge-operator-state-map
       evil-motion-state-map       jge-motion-state-map
-      evil-inner-text-objects-map jge-inner-txtobj-map
-      evil-outer-text-objects-map jge-outer-txtobj-map
+      evil-inner-text-objects-map jge-txtobj--inner-map
+      evil-outer-text-objects-map jge-txtobj--outer-map
       )
 
 ;; Refresh
@@ -72,7 +72,7 @@
 (global-set-key (kbd "<backtab>")       #'evil-normal-state)
 
 (map! :leader
-      :desc "Search/Jump"  "s"    jgb-jump-non-map
+      :desc "Search/Jump"  "s"    jgb-jump--nontext-map
       :desc "Evil States"  "a"    #'+jg-evil-state-ivy
       :desc "Record Macro" "SPC"  #'evil-record-macro
       :desc "Switch to last buffer" "TAB" #'evil-switch-to-windows-last-buffer

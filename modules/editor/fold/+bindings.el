@@ -43,15 +43,15 @@
        :desc "previous-fold"          "k"  #'vimish-fold-previous-fold
       )
 
-(map! :map jge-f-op-motion-map
+(map! :map jge-motion--op-fw-map
       :desc "Fold Block"               "1" #'code-shy-forward-block
       )
 
-(map! :map jge-b-op-motion-map
+(map! :map jge-motion--op-bw-map
       :desc "Fold Block"               "1" #'code-shy-backward-block
 )
 
-(map! :map jg-help-map
+(map! :map jgb-help-map
       :after jg-help-binding
       "d f" #'+jg-fold/debug
       )

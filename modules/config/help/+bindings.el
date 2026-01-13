@@ -158,7 +158,7 @@
 ;;-- end helpful
 
 ;;-- info
-(map! :map jg-info-map
+(map! :map jgb-info-map
     :n "]" #'Info-forward-node
     :n "[" #'Info-backward-node
     :n "H" #'Info-up
@@ -179,7 +179,7 @@
 ;;-- end info
 
 (setq help-mode-map (make-sparse-keymap)
-      Info-mode-map jg-info-map
+      Info-mode-map jgb-info-map
       help-map jgb-help-map
       )
 

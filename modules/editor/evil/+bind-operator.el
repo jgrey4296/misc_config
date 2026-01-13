@@ -11,7 +11,7 @@
       :desc "Forward Char"           "l"       #'evil-forward-char
       )
 
-(map! :map jge-b-op-motion-map
+(map! :map jge-motion--op-bw-map
       ;; RET ] l r
       :desc "Section"      "["   #'evil-backward-section-begin
       :desc "Arg"          "a"   #'evil-backward-arg
@@ -20,7 +20,7 @@
       :desc "Sentence"     "s"   #'evil-backward-sentence-begin
       )
 
-(map! :map jge-f-op-motion-map
+(map! :map jge-motion--op-fw-map
       ;; r RET l [
       :desc "Section"      "]" #'evil-forward-section-begin
       :desc "Arg"          "a" #'evil-forward-arg

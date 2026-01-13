@@ -1,6 +1,6 @@
 ;;; +evil-text-obj-bindings.el -*- lexical-binding: t; -*-
 
-(map! :map jge-inner-txtobj-map
+(map! :map jge-txtobj--inner-map
       :desc "Whitespace"           "\\"   #'+jg-evil-gap
       ;; :desc "Whitespace"           "\\"   #'+jg-evil-whitespace
       :desc "\""                   "\""  #'evil-inner-double-quote
@@ -30,7 +30,7 @@
       :desc "word"                 "w"   #'evil-inner-word
       :desc "XML Attr"             "x"   #'evil-inner-xml-attr
       )
-(map! :map jge-outer-txtobj-map
+(map! :map jge-txtobj--outer-map
       :desc  "\""                   "\"" #'evil-a-double-quote
       :desc  "'"                    "'"  #'evil-a-single-quote
       :desc  "`'"                   "`"  #'evil-a-back-quote

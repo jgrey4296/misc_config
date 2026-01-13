@@ -5,21 +5,15 @@
       :desc "Random Line "      "?" #'+jg-text-goto-random-line-op
       )
 
-(map! :map jgb-change--text-map
-      :desc "B Motion"    :n "["   jge-b-op-motion-map
-      :desc "F Motion"    :n "]"   jge-f-op-motion-map
-
-      )
-
-(map! :map jge-inner-txtobj-map
+(map! :map jge-txtobj--inner-map
       :desc "Empty lines"  "l" #'+jg-text-blank-block
       )
 
-(map! :map jge-outer-txtobj-map
+(map! :map jge-txtobj--outer-map
       :desc "Spaces"       "l" #'+jg-evil-whitespace
       )
 
-(map! :map jge-f-op-motion-map
+(map! :map jgb-motion--text-f-map
       :desc "Next Section"            "]" #'evil-forward-section-begin
       :desc "To Section End"          "[" #'+evil/next-end-of-method
       :desc "Arg"                     "a" #'evil-forward-arg
@@ -34,12 +28,7 @@
       :desc "Paragraph"               "p" #'forward-paragraph
       )
 
-(map! :map jge-f-op-motion-map
-      :desc "Open Section" "["   #'+jg-text-next-open-paren-motion
-      :desc "Empty Line"   "l"   #'+jg-text-next-empty-line-motion
-      )
-
-(map! :map jge-b-op-motion-map
+(map! :map jgb-motion--text-b-map
       :desc "Section"                     "[" #'evil-backward-section-begin
       :desc "Section End"                 "]" #'evil-backward-section-end
       :desc "Buffer"                      "b" #'previous-buffer
@@ -53,9 +42,14 @@
       :desc "Paragraph"                   "p" #'backward-paragraph
       )
 
-(map! :map jge-b-op-motion-map
+(map! :map jge-motion--op-bw-map
       :desc "Close Paren"  "]"   #'+jg-text-prev-close-paren-motion
       :desc "Empty Line"   "l"   #'+jg-text-prev-empty-line-motion
+      )
+
+(map! :map jge-motion--op-fw-map
+      :desc "Open Section" "["   #'+jg-text-next-open-paren-motion
+      :desc "Empty Line"   "l"   #'+jg-text-next-empty-line-motion
       )
 
 ;;; +bind-motion.el ends here
